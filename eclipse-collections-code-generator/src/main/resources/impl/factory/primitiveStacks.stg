@@ -1,0 +1,39 @@
+import "copyright.stg"
+
+targetPath() ::= "org/eclipse/collections/impl/factory/primitive"
+
+fileName(primitive) ::= "<primitive.name>Stacks"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.factory.primitive;
+
+import org.eclipse.collections.api.factory.stack.primitive.Immutable<name>StackFactory;
+import org.eclipse.collections.api.factory.stack.primitive.Mutable<name>StackFactory;
+import org.eclipse.collections.impl.stack.immutable.primitive.Immutable<name>StackFactoryImpl;
+import org.eclipse.collections.impl.stack.mutable.primitive.Mutable<name>StackFactoryImpl;
+
+/**
+ * <name>Stacks is a static utility for creating {@link Immutable<name>StackFactory}.
+ * This file was automatically generated from template file primitiveStacks.stg.
+ *
+ * @since 4.0.
+ */
+@SuppressWarnings("ConstantNamingConvention")
+public final class <name>Stacks
+{
+    public static final Immutable<name>StackFactory immutable = new Immutable<name>StackFactoryImpl();
+    public static final Mutable<name>StackFactory mutable = new Mutable<name>StackFactoryImpl();
+
+    private <name>Stacks()
+    {
+        throw new AssertionError("Suppress default constructor for noninstantiability");
+    }
+}
+
+>>

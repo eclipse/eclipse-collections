@@ -1,0 +1,57 @@
+import "copyright.stg"
+
+targetPath() ::= "org/eclipse/collections/api/factory/map/primitive"
+
+fileName(primitive) ::= "ImmutableObject<primitive.name>MapFactory"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.api.factory.map.primitive;
+
+import org.eclipse.collections.api.map.primitive.ImmutableObject<name>Map;
+import org.eclipse.collections.api.map.primitive.Object<name>Map;
+
+/**
+ * A factory which creates instances of type {@link ImmutableObject<name>Map}.
+ * This file was automatically generated from template file immutableObjectPrimitiveMapFactory.stg.
+ *
+ * @since 4.0.
+ */
+public interface ImmutableObject<name>MapFactory
+{
+    /**
+     * @since 6.0
+     */
+    \<K> ImmutableObject<name>Map\<K> empty();
+
+    /**
+     * Same as {@link #empty()}.
+     */
+    \<K> ImmutableObject<name>Map\<K> of();
+
+    /**
+     * Same as {@link #empty()}.
+     */
+    \<K> ImmutableObject<name>Map\<K> with();
+
+    /**
+     * Same as {@link #with(Object, <type>)}.
+     */
+    \<K> ImmutableObject<name>Map\<K> of(K key, <type> value);
+
+    \<K> ImmutableObject<name>Map\<K> with(K key, <type> value);
+
+    /**
+     * Same as {@link #withAll(Object<name>Map)}.
+     */
+    \<K> ImmutableObject<name>Map\<K> ofAll(Object<name>Map\<? extends K> map);
+
+    \<K> ImmutableObject<name>Map\<K> withAll(Object<name>Map\<? extends K> map);
+}
+
+>>

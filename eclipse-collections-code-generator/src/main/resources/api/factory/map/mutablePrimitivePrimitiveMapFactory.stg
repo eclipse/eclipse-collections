@@ -1,0 +1,51 @@
+import "copyright.stg"
+
+hasTwoPrimitives() ::= "true"
+
+skipBooleanKeys() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/api/factory/map/primitive"
+
+fileName(primitive1, primitive2, sameTwoPrimitives) ::= "Mutable<primitive1.name><primitive2.name>MapFactory"
+
+class(primitive1, primitive2, sameTwoPrimitives) ::= <<
+<body(primitive1.type, primitive2.type, primitive1.name, primitive2.name)>
+>>
+
+body(type1, type2, name1, name2) ::= <<
+<copyright()>
+
+package org.eclipse.collections.api.factory.map.primitive;
+
+import org.eclipse.collections.api.map.primitive.Mutable<name1><name2>Map;
+import org.eclipse.collections.api.map.primitive.<name1><name2>Map;
+
+/**
+ * A factory which creates instances of type {@link Mutable<name1><name2>Map}.
+ * This file was automatically generated from template file mutablePrimitivePrimitiveMapFactory.stg.
+ *
+ * @since 6.0.
+ */
+public interface Mutable<name1><name2>MapFactory
+{
+    Mutable<name1><name2>Map empty();
+
+    /**
+     * Same as {@link #empty()}.
+     */
+    Mutable<name1><name2>Map of();
+
+    /**
+     * Same as {@link #empty()}.
+     */
+    Mutable<name1><name2>Map with();
+
+    /**
+     * Same as {@link #withAll(<name1><name2>Map)}.
+     */
+    Mutable<name1><name2>Map ofAll(<name1><name2>Map map);
+
+    Mutable<name1><name2>Map withAll(<name1><name2>Map map);
+}
+
+>>

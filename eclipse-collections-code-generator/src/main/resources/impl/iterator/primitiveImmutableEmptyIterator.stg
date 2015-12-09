@@ -1,0 +1,43 @@
+import "copyright.stg"
+import "primitiveLiteral.stg"
+
+targetPath() ::= "org/eclipse/collections/impl/iterator"
+
+fileName(primitive) ::= "ImmutableEmpty<primitive.name>Iterator"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.iterator;
+
+import java.util.NoSuchElementException;
+
+import org.eclipse.collections.api.iterator.<name>Iterator;
+
+/**
+ * This file was automatically generated from template file primitiveImmutableEmptyIterator.stg.
+ */
+public final class ImmutableEmpty<name>Iterator implements <name>Iterator
+{
+    public static final ImmutableEmpty<name>Iterator INSTANCE = new ImmutableEmpty<name>Iterator();
+
+    private ImmutableEmpty<name>Iterator()
+    {
+    }
+
+    public boolean hasNext()
+    {
+        return false;
+    }
+
+    public <type> next()
+    {
+        throw new NoSuchElementException();
+    }
+}
+
+>>

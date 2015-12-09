@@ -1,0 +1,72 @@
+import "copyright.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+import "primitiveEquals.stg"
+
+skipBoolean() ::= "true"
+
+isTest() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/map/mutable/primitive"
+
+fileName(primitive) ::= "Object<primitive.name>HashMapKeySetTest"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name, primitive.wrapperName)>
+>>
+
+body(type, name, wrapperName) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.map.mutable.primitive;
+
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+import java.util.Set;
+
+import org.eclipse.collections.api.map.primitive.MutableObject<name>Map;
+import org.eclipse.collections.impl.bag.mutable.HashBag;
+import org.eclipse.collections.impl.list.mutable.FastList;
+import org.eclipse.collections.impl.set.mutable.UnifiedSet;
+import org.eclipse.collections.impl.test.Verify;
+import org.junit.Assert;
+import org.junit.Test;
+
+/**
+ * JUnit test for {@link Object<name>HashMap#keySet()}.
+ * This file was automatically generated from template file objectPrimitiveHashMapKeySetTest.stg.
+ */
+public class Object<name>HashMapKeySetTest extends Object<name>HashMapKeySetTestCase
+{
+    @Override
+    public Object<name>HashMap\<String> newMapWithKeysValues(String key1, <type> value1)
+    {
+        return Object<name>HashMap.newWithKeysValues(key1, value1);
+    }
+
+    @Override
+    public Object<name>HashMap\<String> newMapWithKeysValues(String key1, <type> value1, String key2, <type> value2)
+    {
+        return Object<name>HashMap.newWithKeysValues(key1, value1, key2, value2);
+    }
+
+    @Override
+    public Object<name>HashMap\<String> newMapWithKeysValues(String key1, <type> value1, String key2, <type> value2, String key3, <type> value3)
+    {
+        return Object<name>HashMap.newWithKeysValues(key1, value1, key2, value2, key3, value3);
+    }
+
+    @Override
+    public Object<name>HashMap\<String> newMapWithKeysValues(String key1, <type> value1, String key2, <type> value2, String key3, <type> value3, String key4, <type> value4)
+    {
+        return Object<name>HashMap.newWithKeysValues(key1, value1, key2, value2, key3, value3, key4, value4);
+    }
+
+    @Override
+    public MutableObject<name>Map\<String> newEmptyMap()
+    {
+        return Object<name>HashMap.newMap();
+    }
+}
+
+>>

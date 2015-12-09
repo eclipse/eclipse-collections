@@ -1,0 +1,106 @@
+import "copyright.stg"
+import "primitiveEquals.stg"
+import "primitiveLiteral.stg"
+
+isTest() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/bag/immutable/primitive"
+
+fileName(primitive) ::= "Immutable<primitive.name>EmptyBagTest"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name, primitive.wrapperName)>
+>>
+
+body(type, name, wrapperName) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.bag.immutable.primitive;
+
+import java.util.NoSuchElementException;
+
+import org.eclipse.collections.api.bag.primitive.Immutable<name>Bag;
+import org.eclipse.collections.impl.factory.primitive.<name>Bags;
+import org.eclipse.collections.impl.math.Mutable<wrapperName>;
+import org.eclipse.collections.impl.test.Verify;
+import org.junit.Assert;
+import org.junit.Test;
+
+/**
+ * JUnit test for {@link Immutable<name>EmptyBag}.
+ * This file was automatically generated from template file immutablePrimitiveEmptyBagTest.stg.
+ */
+public class Immutable<name>EmptyBagTest extends AbstractImmutable<name>BagTestCase
+{
+    @Override
+    protected final Immutable<name>Bag classUnderTest()
+    {
+        return <name>Bags.immutable.of();
+    }
+
+    @Override
+    @Test(expected = ArithmeticException.class)
+    public void average()
+    {
+        this.classUnderTest().average();
+    }
+
+    @Override
+    @Test(expected = NoSuchElementException.class)
+    public void max()
+    {
+        this.classUnderTest().max();
+    }
+
+    @Override
+    @Test(expected = NoSuchElementException.class)
+    public void min()
+    {
+        this.classUnderTest().min();
+    }
+
+    @Override
+    @Test
+    public void notEmpty()
+    {
+        Assert.assertFalse(this.classUnderTest().notEmpty());
+    }
+
+    @Override
+    @Test
+    public void isEmpty()
+    {
+        Verify.assertEmpty(this.newWith());
+    }
+
+    @Override
+    @Test
+    public void forEachWithOccurrences()
+    {
+        StringBuilder stringBuilder = new StringBuilder();
+        this.classUnderTest().forEachWithOccurrences((<type> argument1, int argument2) -> stringBuilder.append(argument1).append(argument2));
+        String string = stringBuilder.toString();
+        Assert.assertEquals("", string);
+    }
+
+    @Test
+    public void occurrencesOf()
+    {
+        Assert.assertEquals(0, this.classUnderTest().occurrencesOf(<(literal.(type))("1")>));
+        Assert.assertEquals(0, this.classUnderTest().occurrencesOf(<(literal.(type))("2")>));
+        Assert.assertEquals(0, this.classUnderTest().occurrencesOf(<(literal.(type))("3")>));
+    }
+
+    @Override
+    @Test
+    public void injectInto()
+    {
+        super.injectInto();
+
+        Immutable<name>EmptyBag iterable = new Immutable<name>EmptyBag();
+        Mutable<wrapperName> result = iterable.injectInto(new Mutable<wrapperName>(<(literal.(type))("0")>), Mutable<wrapperName>::add);
+        Assert.assertEquals(new Mutable<wrapperName>(<(literal.(type))("0")>), result);
+    }
+}
+
+>>

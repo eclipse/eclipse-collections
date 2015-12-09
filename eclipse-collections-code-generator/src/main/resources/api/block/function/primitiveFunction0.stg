@@ -1,0 +1,32 @@
+import "copyright.stg"
+
+targetPath() ::= "org/eclipse/collections/api/block/function/primitive"
+
+fileName(primitive) ::= "<primitive.name>Function0"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name, primitive.wrapperName)>
+>>
+
+body(type, name, wrapperName) ::= <<
+<copyright()>
+
+package org.eclipse.collections.api.block.function.primitive;
+
+import java.io.Serializable;
+
+/**
+ * <name>Function0 is a zero argument lambda.  It can be stored in a variable or passed as a parameter and executed
+ * by calling the value method. It may be used to reduce the overhead
+ * of autoboxing <wrapperName> objects in places where primitive <type>s could be used.
+ * This file was automatically generated from template file primitiveFunction0.stg.
+ *
+ * @since 3.0.
+ */
+public interface <name>Function0
+        extends Serializable
+{
+    <type> value();
+}
+
+>>

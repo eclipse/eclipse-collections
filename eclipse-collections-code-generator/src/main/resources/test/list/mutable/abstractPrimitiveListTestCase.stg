@@ -1,0 +1,433 @@
+import "copyright.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+
+isTest() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/list/mutable/primitive"
+
+fileName(primitive) ::= "Abstract<primitive.name>ListTestCase"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.wrapperName, primitive.name)>
+>>
+
+body(type, wrapperName, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.list.mutable.primitive;
+
+import org.eclipse.collections.api.iterator.<name>Iterator;
+import org.eclipse.collections.api.list.MutableList;
+import org.eclipse.collections.api.list.primitive.Immutable<name>List;
+import org.eclipse.collections.api.list.primitive.Mutable<name>List;
+import org.eclipse.collections.impl.collection.mutable.primitive.AbstractMutable<name>CollectionTestCase;
+import org.eclipse.collections.impl.list.mutable.FastList;
+import org.eclipse.collections.impl.math.Mutable<wrapperName>;
+import org.eclipse.collections.impl.stack.mutable.primitive.<name>ArrayStack;
+import org.junit.Assert;
+import org.junit.Test;
+
+/**
+ * Abstract JUnit test for {@link Mutable<name>List}.
+ * This file was automatically generated from template file abstractPrimitiveListTestCase.stg.
+ */
+public abstract class Abstract<name>ListTestCase extends AbstractMutable<name>CollectionTestCase
+{
+    @Override
+    protected abstract Mutable<name>List classUnderTest();
+
+    @Override
+    protected abstract Mutable<name>List newWith(<type>... elements);
+
+    @Override
+    protected Mutable<name>List newMutableCollectionWith(<type>... elements)
+    {
+        return <name>ArrayList.newListWith(elements);
+    }
+
+    @Override
+    protected MutableList\<<wrapperName>\> newObjectCollectionWith(<wrapperName>... elements)
+    {
+        return FastList.newListWith(elements);
+    }
+
+    @Test
+    public void get()
+    {
+        Mutable<name>List list = this.classUnderTest();
+        Assert.assertEquals(<(wideLiteral.(type))("1")>, list.get(0)<(wideDelta.(type))>);
+        Assert.assertEquals(<(wideLiteral.(type))("2")>, list.get(1)<(wideDelta.(type))>);
+        Assert.assertEquals(<(wideLiteral.(type))("3")>, list.get(2)<(wideDelta.(type))>);
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void get_throws_index_greater_than_size()
+    {
+        this.classUnderTest().get(3);
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void get_throws_index_negative()
+    {
+        this.classUnderTest().get(-1);
+    }
+
+    @Test
+    public void getFirst()
+    {
+        Mutable<name>List singleItemList = this.newWith(<(literal.(type))("1")>);
+        Assert.assertEquals(<(wideLiteral.(type))("1")>, singleItemList.getFirst()<(wideDelta.(type))>);
+        Assert.assertEquals(<(wideLiteral.(type))("1")>, this.classUnderTest().getFirst()<(wideDelta.(type))>);
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void getFirst_emptyList_throws()
+    {
+        this.newWith().getFirst();
+    }
+
+    @Test
+    public void getLast()
+    {
+        Mutable<name>List singleItemList = this.newWith(<(literal.(type))("1")>);
+        Assert.assertEquals(<(wideLiteral.(type))("1")>, singleItemList.getLast()<(wideDelta.(type))>);
+        Assert.assertEquals(<(wideLiteral.(type))("3")>, this.classUnderTest().getLast()<(wideDelta.(type))>);
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void getLast_emptyList_throws()
+    {
+        this.newWith().getLast();
+    }
+
+    @Test
+    public void dotProduct()
+    {
+        Mutable<name>List list1 = this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">);
+        Mutable<name>List list2 = this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">);
+        Assert.assertEquals(<(wideLiteral.(type))("14")>, list1.dotProduct(list2)<(wideDelta.(type))>);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void dotProduct_throwsOnListsOfDifferentSizes()
+    {
+        Mutable<name>List list1 = this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">);
+        Mutable<name>List list2 = this.newWith(<["1", "2"]:(literal.(type))(); separator=", ">);
+        list1.dotProduct(list2);
+    }
+
+    @Test
+    public void indexOf()
+    {
+        Mutable<name>List arrayList = this.newWith(<["1", "2", "1"]:(literal.(type))(); separator=", ">);
+        Assert.assertEquals(0L, arrayList.indexOf(<(literal.(type))("1")>));
+        Assert.assertEquals(1L, arrayList.indexOf(<(literal.(type))("2")>));
+        Assert.assertEquals(-1L, arrayList.indexOf(<(literal.(type))("9")>));
+    }
+
+    @Test
+    public void lastIndexOf()
+    {
+        Mutable<name>List arrayList = this.newWith(<["1", "2", "1"]:(literal.(type))(); separator=", ">);
+        Assert.assertEquals(2L, arrayList.lastIndexOf(<(literal.(type))("1")>));
+        Assert.assertEquals(1L, arrayList.lastIndexOf(<(literal.(type))("2")>));
+        Assert.assertEquals(-1L, arrayList.lastIndexOf(<(literal.(type))("9")>));
+    }
+
+    @Test
+    public void addAtIndex()
+    {
+        Mutable<name>List emptyList = this.newWith();
+        emptyList.addAtIndex(0, <(literal.(type))("1")>);
+        Assert.assertEquals(this.newMutableCollectionWith(<(literal.(type))("1")>), emptyList);
+        Mutable<name>List arrayList = this.classUnderTest();
+        arrayList.addAtIndex(3, <(literal.(type))("4")>);
+        Assert.assertEquals(this.newMutableCollectionWith(<["1", "2", "3", "4"]:(literal.(type))(); separator=", ">), arrayList);
+        arrayList.addAtIndex(2, <(literal.(type))("5")>);
+        Assert.assertEquals(this.newMutableCollectionWith(<["1", "2", "5", "3", "4"]:(literal.(type))(); separator=", ">), arrayList);
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void addAtIndex_throws_index_greater_than_size()
+    {
+        this.newWith().addAtIndex(1, <(literal.(type))("0")>);
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void addAtIndex_throws_index_negative()
+    {
+        this.classUnderTest().addAtIndex(-1, <(literal.(type))("4")>);
+    }
+
+    @Override
+    @Test
+    public void addAllArray()
+    {
+        super.addAllArray();
+        Mutable<name>List list = this.classUnderTest();
+        Assert.assertFalse(list.addAllAtIndex(1));
+        Assert.assertTrue(list.addAll(<["4", "5", "6"]:(literal.(type))(); separator=", ">));
+        Assert.assertEquals(this.newMutableCollectionWith(<["1", "2", "3", "4", "5", "6"]:(literal.(type))(); separator=", ">), list);
+        Assert.assertTrue(list.addAllAtIndex(4, <["5", "6"]:(literal.(type))(); separator=", ">));
+        Assert.assertEquals(this.newMutableCollectionWith(<["1", "2", "3", "4", "5", "6", "5", "6"]:(literal.(type))(); separator=", ">), list);
+    }
+
+    @Override
+    @Test
+    public void addAllIterable()
+    {
+        super.addAllIterable();
+        Mutable<name>List list = this.classUnderTest();
+        Assert.assertFalse(list.addAllAtIndex(1));
+        Assert.assertTrue(list.addAll(<name>ArrayList.newListWith(<["4", "5", "6"]:(literal.(type))(); separator=", ">)));
+        Assert.assertTrue(list.addAll(<name>ArrayStack.newStackWith(<["8", "7"]:(literal.(type))(); separator=", ">)));
+        Assert.assertEquals(this.newMutableCollectionWith(<["1", "2", "3", "4", "5", "6", "7", "8"]:(literal.(type))(); separator=", ">), list);
+        Assert.assertTrue(list.addAllAtIndex(4, <name>ArrayList.newListWith(<["5", "6"]:(literal.(type))(); separator=", ">)));
+        Assert.assertEquals(this.newMutableCollectionWith(<["1", "2", "3", "4", "5", "6", "5", "6", "7", "8"]:(literal.(type))(); separator=", ">), list);
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void addAll_throws_index_negative()
+    {
+        this.classUnderTest().addAllAtIndex(-1, <["5", "6"]:(literal.(type))(); separator=", ">);
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void addAll_throws_index_greater_than_size()
+    {
+        this.classUnderTest().addAllAtIndex(5, <["5", "6"]:(literal.(type))(); separator=", ">);
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void addAllIterable_throws_index_negative()
+    {
+        this.classUnderTest().addAllAtIndex(-1, <name>ArrayList.newListWith(<["1", "2"]:(literal.(type))(); separator=", ">));
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void addAllIterable_throws_index_greater_than_size()
+    {
+        this.classUnderTest().addAllAtIndex(5, <name>ArrayList.newListWith(<["1", "2"]:(literal.(type))(); separator=", ">));
+    }
+
+    @Test
+    public void removeAtIndex()
+    {
+        Mutable<name>List list = this.classUnderTest();
+        list.removeAtIndex(1);
+        Assert.assertEquals(this.newMutableCollectionWith(<["1", "3"]:(literal.(type))(); separator=", ">), list);
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void removeAtIndex_throws_index_greater_than_size()
+    {
+        this.newWith().removeAtIndex(1);
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void removeAtIndex_throws_index_negative()
+    {
+        this.classUnderTest().removeAtIndex(-1);
+    }
+
+    @Test
+    public void set()
+    {
+        Mutable<name>List list = this.classUnderTest();
+        list.set(1, <(literal.(type))("4")>);
+        Assert.assertEquals(this.newMutableCollectionWith(<["1", "4", "3"]:(literal.(type))(); separator=", ">), list);
+    }
+
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void subList()
+    {
+        this.classUnderTest().subList(0, 1);
+    }
+
+    @Override
+    @Test
+    public void <type>Iterator()
+    {
+        <name>Iterator iterator = this.classUnderTest().<type>Iterator();
+        Assert.assertTrue(iterator.hasNext());
+        Assert.assertEquals(<(wideLiteral.(type))("1")>, iterator.next()<(wideDelta.(type))>);
+        Assert.assertTrue(iterator.hasNext());
+        Assert.assertEquals(<(wideLiteral.(type))("2")>, iterator.next()<(wideDelta.(type))>);
+        Assert.assertTrue(iterator.hasNext());
+        Assert.assertEquals(<(wideLiteral.(type))("3")>, iterator.next()<(wideDelta.(type))>);
+        Assert.assertFalse(iterator.hasNext());
+    }
+
+    @Override
+    @Test
+    public void toArray()
+    {
+        super.toArray();
+        Assert.assertArrayEquals(new <type>[]{<["1", "2", "4", "3"]:(literal.(type))(); separator=", ">}, this.newWith(<["1", "2", "4", "3"]:(literal.(type))(); separator=", ">).toArray()<(delta.(type))>);
+    }
+
+    @Test
+    public void reverseThis()
+    {
+        Assert.assertEquals(new <name>ArrayList(), this.newWith().reverseThis());
+        Mutable<name>List emptyList = this.newWith();
+        Assert.assertSame(emptyList, emptyList.reverseThis());
+        Assert.assertEquals(<name>ArrayList.newListWith(<["3"]:(literal.(type))(); separator=", ">), this.newWith(<["3"]:(literal.(type))(); separator=", ">).reverseThis());
+        Assert.assertEquals(<name>ArrayList.newListWith(<["3", "1"]:(literal.(type))(); separator=", ">), this.newWith(<["1", "3"]:(literal.(type))(); separator=", ">).reverseThis());
+        Assert.assertEquals(<name>ArrayList.newListWith(<["3", "1", "9", "7"]:(literal.(type))(); separator=", ">), this.newWith(<["7", "9", "1", "3"]:(literal.(type))(); separator=", ">).reverseThis());
+        Mutable<name>List sameList = this.newWith(<["3", "1", "9", "7"]:(literal.(type))(); separator=", ">);
+        Assert.assertSame(sameList, sameList.reverseThis());
+        Assert.assertEquals(<name>ArrayList.newListWith(<["3", "1", "9", "7", "8"]:(literal.(type))(); separator=", ">), this.newWith(<["8", "7", "9", "1", "3"]:(literal.(type))(); separator=", ">).reverseThis());
+    }
+
+    @Test
+    public void sortThis()
+    {
+        Assert.assertEquals(new <name>ArrayList(), this.newWith().sortThis());
+        Mutable<name>List emptyList = this.newWith();
+        Assert.assertSame(emptyList, emptyList.sortThis());
+        Assert.assertEquals(<name>ArrayList.newListWith(<["3"]:(literal.(type))(); separator=", ">), this.newWith(<["3"]:(literal.(type))(); separator=", ">).sortThis());
+        Assert.assertEquals(<name>ArrayList.newListWith(<["1", "3"]:(literal.(type))(); separator=", ">), this.newWith(<["3", "1"]:(literal.(type))(); separator=", ">).sortThis());
+        Assert.assertEquals(<name>ArrayList.newListWith(<["1", "3", "7", "9"]:(literal.(type))(); separator=", ">), this.newWith(<["3", "1", "9", "7"]:(literal.(type))(); separator=", ">).sortThis());
+        Mutable<name>List sameList = this.newWith(<["3", "1", "9", "7"]:(literal.(type))(); separator=", ">);
+        Assert.assertSame(sameList, sameList.sortThis());
+        Assert.assertEquals(<name>ArrayList.newListWith(<["1", "3", "7", "8", "9"]:(literal.(type))(); separator=", ">), this.newWith(<["8", "1", "7", "3", "9"]:(literal.(type))(); separator=", ">).sortThis());
+        Mutable<name>List list = this.newWith();
+        list.add(<(literal.(type))("2")>);
+        list.add(<(literal.(type))("1")>);
+        list.sortThis();
+        Assert.assertEquals(<(literal.(type))("1")>, list.get(0)<(wideDelta.(type))>);
+    }
+
+    @Test
+    public void binarySearch()
+    {
+        Mutable<name>List list = this.newWith(<["2", "3", "5", "6", "9"]:(literal.(type))(); separator=", ">);
+        Assert.assertEquals(-1, list.binarySearch(<(literal.(type))("1")>));
+        Assert.assertEquals(0, list.binarySearch(<(literal.(type))("2")>));
+        Assert.assertEquals(1, list.binarySearch(<(literal.(type))("3")>));
+        Assert.assertEquals(-3, list.binarySearch(<(literal.(type))("4")>));
+        Assert.assertEquals(2, list.binarySearch(<(literal.(type))("5")>));
+        Assert.assertEquals(3, list.binarySearch(<(literal.(type))("6")>));
+        Assert.assertEquals(-5, list.binarySearch(<(literal.(type))("7")>));
+        Assert.assertEquals(-5, list.binarySearch(<(literal.(type))("8")>));
+        Assert.assertEquals(4, list.binarySearch(<(literal.(type))("9")>));
+        Assert.assertEquals(-6, list.binarySearch(<(literal.(type))("10")>));
+    }
+
+    @Test
+    public void toReversed()
+    {
+        Assert.assertEquals(new <name>ArrayList(), this.newWith().toReversed());
+        Mutable<name>List emptyList = this.newWith();
+        Assert.assertNotSame(emptyList, emptyList.toReversed());
+        Assert.assertEquals(<name>ArrayList.newListWith(<["3", "1", "9", "7"]:(literal.(type))(); separator=", ">), this.newWith(<["7", "9", "1", "3"]:(literal.(type))(); separator=", ">).toReversed());
+        Mutable<name>List evenList = this.newWith(<["3", "1", "9", "7"]:(literal.(type))(); separator=", ">);
+        Assert.assertNotSame(evenList, evenList.toReversed());
+        Assert.assertEquals(<name>ArrayList.newListWith(<["3", "1", "9", "7", "8"]:(literal.(type))(); separator=", ">), this.newWith(<["8", "7", "9", "1", "3"]:(literal.(type))(); separator=", ">).toReversed());
+        Mutable<name>List oddList = this.newWith(<["3", "1", "9", "7", "8"]:(literal.(type))(); separator=", ">);
+        Assert.assertNotSame(oddList, oddList.toReversed());
+    }
+
+    @Test
+    public void forEachWithIndex()
+    {
+        <wideType.(type)>[] sum = new <wideType.(type)>[1];
+        this.classUnderTest().forEachWithIndex((<type> each, int index) -> sum[0] += each + index);
+
+        Assert.assertEquals(<(wideLiteral.(type))("9")>, sum[0]<wideDelta.(type)>);
+    }
+
+    @Override
+    @Test
+    public void testEquals()
+    {
+        super.testEquals();
+        Mutable<name>List list1 = this.newWith(<["1", "2", "3", "4"]:(literal.(type))(); separator=", ">);
+        Mutable<name>List list2 = this.newWith(<["4", "3", "2", "1"]:(literal.(type))(); separator=", ">);
+        Assert.assertNotEquals(list1, list2);
+    }
+
+    @Override
+    @Test
+    public void testToString()
+    {
+        super.testToString();
+        Assert.assertEquals("[<["1", "2", "3"]:(toStringLiteral.(type))(); separator=", ">]", this.classUnderTest().toString());
+    }
+
+    @Test
+    public void distinct()
+    {
+        Mutable<name>List list1 = this.newWith(<["1", "2", "2", "3", "3", "3", "4", "4", "4", "4"]:(literal.(type))(); separator=", ">).distinct();
+        Mutable<name>List list2 = this.newWith(<["1", "2", "3", "4"]:(literal.(type))(); separator=", ">);
+        Assert.assertEquals(list1, list2);
+    }
+
+    @Override
+    @Test
+    public void makeString()
+    {
+        super.makeString();
+        Assert.assertEquals("<["1", "2", "3"]:(toStringLiteral.(type))(); separator=", ">", this.classUnderTest().makeString());
+        Assert.assertEquals("<["1", "2", "3"]:(toStringLiteral.(type))(); separator="/">", this.classUnderTest().makeString("/"));
+        Assert.assertEquals(this.classUnderTest().toString(), this.classUnderTest().makeString("[", ", ", "]"));
+    }
+
+    @Override
+    @Test
+    public void appendString()
+    {
+        super.appendString();
+        StringBuilder appendable2 = new StringBuilder();
+        this.classUnderTest().appendString(appendable2);
+        Assert.assertEquals("<["1", "2", "3"]:(toStringLiteral.(type))(); separator=", ">", appendable2.toString());
+        StringBuilder appendable3 = new StringBuilder();
+        this.classUnderTest().appendString(appendable3, "/");
+        Assert.assertEquals("<["1", "2", "3"]:(toStringLiteral.(type))(); separator="/">", appendable3.toString());
+        StringBuilder appendable4 = new StringBuilder();
+        this.classUnderTest().appendString(appendable4, "[", ", ", "]");
+        Assert.assertEquals(this.classUnderTest().toString(), appendable4.toString());
+    }
+
+    @Override
+    @Test
+    public void toList()
+    {
+        super.toList();
+        Assert.assertEquals(<name>ArrayList.newListWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">), this.classUnderTest().toList());
+    }
+
+    @Test
+    public void toImmutable()
+    {
+        Immutable<name>List immutable = this.classUnderTest().toImmutable();
+        Assert.assertEquals(<name>ArrayList.newListWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">), immutable);
+    }
+
+    @Override
+    @Test
+    public void injectInto()
+    {
+        super.injectInto();
+
+        <name>ArrayList arrayList = <name>ArrayList.newListWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">);
+        Mutable<wrapperName> result = arrayList.injectInto(new Mutable<wrapperName>(<(literal.(type))("0")>), Mutable<wrapperName>::add);
+        Assert.assertEquals(new Mutable<wrapperName>(<(literal.(type))("6")>), result);
+    }
+
+
+    @Test
+    public void injectIntoWithIndex()
+    {
+        Mutable<name>List list1 = this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">);
+        Mutable<name>List list2 = this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">);
+        Mutable<wrapperName> result = list1.injectIntoWithIndex(new Mutable<wrapperName>(<(literal.(type))("0")>),
+            (Mutable<wrapperName> object, <type> value, int index) -> object.add(<(castIntToNarrowTypeWithParens.(type))("value * list2.get(index)")>));
+        Assert.assertEquals(new Mutable<wrapperName>(<(literal.(type))("14")>), result);
+    }
+}
+
+>>

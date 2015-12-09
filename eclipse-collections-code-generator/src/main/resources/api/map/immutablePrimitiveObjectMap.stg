@@ -1,0 +1,89 @@
+import "copyright.stg"
+
+skipBoolean() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/api/map/primitive"
+
+fileName(primitive) ::= "Immutable<primitive.name>ObjectMap"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.api.map.primitive;
+
+import org.eclipse.collections.api.<name>Iterable;
+import org.eclipse.collections.api.block.function.Function;
+import org.eclipse.collections.api.block.function.Function2;
+import org.eclipse.collections.api.block.function.primitive.BooleanFunction;
+import org.eclipse.collections.api.block.function.primitive.ByteFunction;
+import org.eclipse.collections.api.block.function.primitive.CharFunction;
+import org.eclipse.collections.api.block.function.primitive.DoubleFunction;
+import org.eclipse.collections.api.block.function.primitive.FloatFunction;
+import org.eclipse.collections.api.block.function.primitive.IntFunction;
+import org.eclipse.collections.api.block.function.primitive.LongFunction;
+import org.eclipse.collections.api.block.function.primitive.ShortFunction;
+import org.eclipse.collections.api.block.predicate.Predicate;
+import org.eclipse.collections.api.block.predicate.Predicate2;
+import org.eclipse.collections.api.block.procedure.Procedure;
+import org.eclipse.collections.api.block.predicate.primitive.<name>ObjectPredicate;
+import org.eclipse.collections.api.collection.ImmutableCollection;
+import org.eclipse.collections.api.collection.primitive.ImmutableBooleanCollection;
+import org.eclipse.collections.api.collection.primitive.ImmutableByteCollection;
+import org.eclipse.collections.api.collection.primitive.ImmutableCharCollection;
+import org.eclipse.collections.api.collection.primitive.ImmutableDoubleCollection;
+import org.eclipse.collections.api.collection.primitive.ImmutableFloatCollection;
+import org.eclipse.collections.api.collection.primitive.ImmutableIntCollection;
+import org.eclipse.collections.api.collection.primitive.ImmutableLongCollection;
+import org.eclipse.collections.api.collection.primitive.ImmutableShortCollection;
+
+/**
+ * This file was automatically generated from template file immutablePrimitiveObjectMap.stg.
+ *
+ * @since 3.0.
+ */
+public interface Immutable<name>ObjectMap\<V> extends <name>ObjectMap\<V>
+{
+    Immutable<name>ObjectMap\<V> tap(Procedure\<? super V> procedure);
+
+    Immutable<name>ObjectMap\<V> select(<name>ObjectPredicate\<? super V> predicate);
+
+    Immutable<name>ObjectMap\<V> reject(<name>ObjectPredicate\<? super V> predicate);
+
+    ImmutableCollection\<V> select(Predicate\<? super V> predicate);
+
+    \<P> ImmutableCollection\<V> selectWith(Predicate2\<? super V, ? super P> predicate, P parameter);
+
+    ImmutableCollection\<V> reject(Predicate\<? super V> predicate);
+
+    \<VV> ImmutableCollection\<VV> collect(Function\<? super V, ? extends VV> function);
+
+    ImmutableBooleanCollection collectBoolean(BooleanFunction\<? super V> booleanFunction);
+
+    ImmutableByteCollection collectByte(ByteFunction\<? super V> byteFunction);
+
+    ImmutableCharCollection collectChar(CharFunction\<? super V> charFunction);
+
+    ImmutableDoubleCollection collectDouble(DoubleFunction\<? super V> doubleFunction);
+
+    ImmutableFloatCollection collectFloat(FloatFunction\<? super V> floatFunction);
+
+    ImmutableIntCollection collectInt(IntFunction\<? super V> intFunction);
+
+    ImmutableLongCollection collectLong(LongFunction\<? super V> longFunction);
+
+    ImmutableShortCollection collectShort(ShortFunction\<? super V> shortFunction);
+
+    \<P, VV> ImmutableCollection\<VV> collectWith(Function2\<? super V, ? super P, ? extends VV> function, P parameter);
+
+    Immutable<name>ObjectMap\<V> newWithKeyValue(<type> key, V value);
+
+    Immutable<name>ObjectMap\<V> newWithoutKey(<type> key);
+
+    Immutable<name>ObjectMap\<V> newWithoutAllKeys(<name>Iterable keys);
+}
+
+>>

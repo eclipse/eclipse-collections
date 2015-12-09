@@ -1,0 +1,73 @@
+import "copyright.stg"
+import "primitiveEquals.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+
+targetPath() ::= "org/eclipse/collections/impl/tuple/primitive"
+
+fileName(primitive) ::= "Boolean<primitive.name>PairImplTest"
+
+isTest() ::= "true"
+
+skipBoolean() ::= "true"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.tuple.primitive;
+
+import org.eclipse.collections.impl.test.Verify;
+import org.eclipse.collections.impl.tuple.Tuples;
+import org.junit.Assert;
+import org.junit.Test;
+
+/**
+ * JUnit test for {@link Boolean<name>PairImpl}.
+ *
+ * This file was automatically generated from template file booleanPrimitivePairImplTest.stg.
+ */
+public class Boolean<name>PairImplTest
+{
+    @Test
+    public void testEqualsAndHashCode()
+    {
+        Verify.assertEqualsAndHashCode(PrimitiveTuples.pair(true, <(literal.(type))("1")>), PrimitiveTuples.pair(true, <(literal.(type))("1")>));
+        Assert.assertNotEquals(PrimitiveTuples.pair(false, <(literal.(type))("1")>), PrimitiveTuples.pair(true, <(literal.(type))("1")>));
+        Assert.assertEquals(Tuples.pair(true, <(literal.(type))("1")>).hashCode(), PrimitiveTuples.pair(true, <(literal.(type))("1")>).hashCode());
+    }
+
+    @Test
+    public void getOne()
+    {
+        Assert.assertTrue(PrimitiveTuples.pair(true, <(literal.(type))("1")>).getOne());
+        Assert.assertFalse(PrimitiveTuples.pair(false, <(literal.(type))("5")>).getOne());
+    }
+
+    @Test
+    public void getTwo()
+    {
+        Assert.assertEquals(<(literal.(type))("1")>, PrimitiveTuples.pair(true, <(literal.(type))("1")>).getTwo(), <(literal.(type))("0")>);
+        Assert.assertEquals(<(literal.(type))("2")>, PrimitiveTuples.pair(true, <(literal.(type))("2")>).getTwo(), <(literal.(type))("0")>);
+    }
+
+    @Test
+    public void testToString()
+    {
+        Assert.assertEquals("true:<(toStringLiteral.(type))("1")>", PrimitiveTuples.pair(true, <(literal.(type))("1")>).toString());
+        Assert.assertEquals("false:<(toStringLiteral.(type))("2")>", PrimitiveTuples.pair(false, <(literal.(type))("2")>).toString());
+    }
+
+    @Test
+    public void compareTo()
+    {
+        Assert.assertEquals(1, PrimitiveTuples.pair(true, <(literal.(type))("1")>).compareTo(PrimitiveTuples.pair(false, <(literal.(type))("2")>)));
+        Assert.assertEquals(0, PrimitiveTuples.pair(true, <(literal.(type))("1")>).compareTo(PrimitiveTuples.pair(true, <(literal.(type))("1")>)));
+        Assert.assertEquals(-1, PrimitiveTuples.pair(true, <(literal.(type))("1")>).compareTo(PrimitiveTuples.pair(true, <(literal.(type))("2")>)));
+    }
+}
+
+>>

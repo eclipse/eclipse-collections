@@ -1,0 +1,54 @@
+import "copyright.stg"
+
+targetPath() ::= "org/eclipse/collections/api/factory/list/primitive"
+
+fileName(primitive) ::= "Mutable<primitive.name>ListFactory"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.api.factory.list.primitive;
+
+import org.eclipse.collections.api.<name>Iterable;
+import org.eclipse.collections.api.list.primitive.Mutable<name>List;
+
+/**
+ * A factory which creates instances of type {@link Mutable<name>List}.
+ * This file was automatically generated from template file mutablePrimitiveListFactory.stg.
+ *
+ * @since 6.0.
+ */
+public interface Mutable<name>ListFactory
+{
+    Mutable<name>List empty();
+
+    /**
+     * Same as {@link #empty()}.
+     */
+    Mutable<name>List of();
+
+    /**
+     * Same as {@link #empty()}.
+     */
+    Mutable<name>List with();
+
+    /**
+     * Same as {@link #with(<type>[])}.
+     */
+    Mutable<name>List of(<type>... items);
+
+    Mutable<name>List with(<type>... items);
+
+    /**
+     * Same as {@link #withAll(<name>Iterable)}.
+     */
+    Mutable<name>List ofAll(<name>Iterable items);
+
+    Mutable<name>List withAll(<name>Iterable items);
+}
+
+>>

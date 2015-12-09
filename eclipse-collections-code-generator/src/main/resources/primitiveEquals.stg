@@ -1,0 +1,116 @@
+equals ::= [
+    "boolean": "operatorEquals",
+    "byte": "operatorEquals",
+    "short": "operatorEquals",
+    "char": "operatorEquals",
+    "int": "operatorEquals",
+    "long": "operatorEquals",
+    "float": "floatEquals",
+    "double": "doubleEquals",
+    default: "no matching equals"
+]
+
+operatorEquals(left, right) ::= <<
+    <left> == <right>
+>>
+
+doubleEquals(left, right) ::= <<
+    Double.compare(<left>, <right>) == 0
+>>
+
+floatEquals(left, right) ::= <<
+    Float.compare(<left>, <right>) == 0
+>>
+
+notEquals ::= [
+    "boolean": "operatorNotEquals",
+    "byte": "operatorNotEquals",
+    "short": "operatorNotEquals",
+    "char": "operatorNotEquals",
+    "int": "operatorNotEquals",
+    "long": "operatorNotEquals",
+    "float": "floatNotEquals",
+    "double": "doubleNotEquals",
+    default: "no matching not equals"
+]
+
+operatorNotEquals(left, right) ::= <<
+    <left> != <right>
+>>
+
+doubleNotEquals(left, right) ::= <<
+    Double.compare(<left>, <right>) != 0
+>>
+
+floatNotEquals(left, right) ::= <<
+    Float.compare(<left>, <right>) != 0
+>>
+
+lessThan ::= [
+    "byte": "operatorLessThan",
+    "short": "operatorLessThan",
+    "char": "operatorLessThan",
+    "int": "operatorLessThan",
+    "long": "operatorLessThan",
+    "float": "floatLessThan",
+    "double": "doubleLessThan",
+    default: "no matching less than"
+]
+
+operatorLessThan(left, right) ::= <<
+    <left> \< <right>
+>>
+
+doubleLessThan(left, right) ::= <<
+    Double.compare(<left>, <right>) \< 0
+>>
+
+floatLessThan(left, right) ::= <<
+    Float.compare(<left>, <right>) \< 0
+>>
+
+greaterThanOrEquals ::= [
+    "byte": "operatorGreaterThanOrEquals",
+    "short": "operatorGreaterThanOrEquals",
+    "char": "operatorGreaterThanOrEquals",
+    "int": "operatorGreaterThanOrEquals",
+    "long": "operatorGreaterThanOrEquals",
+    "float": "floatGreaterThanOrEquals",
+    "double": "doubleGreaterThanOrEquals",
+    default: "no matching greater than or equals"
+]
+
+operatorGreaterThanOrEquals(left, right) ::= <<
+    <left> >= <right>
+>>
+
+doubleGreaterThanOrEquals(left, right) ::= <<
+    Double.compare(<left>, <right>) >= 0
+>>
+
+floatGreaterThanOrEquals(left, right) ::= <<
+    Float.compare(<left>, <right>) >= 0
+>>
+
+lessThanOrEquals ::= [
+    "byte": "operatorLessThanOrEquals",
+    "short": "operatorLessThanOrEquals",
+    "char": "operatorLessThanOrEquals",
+    "int": "operatorLessThanOrEquals",
+    "long": "operatorLessThanOrEquals",
+    "float": "floatLessThanOrEquals",
+    "double": "doubleLessThanOrEquals",
+    default: "no matching less than or equals"
+]
+
+operatorLessThanOrEquals(left, right) ::= <<
+    <left> \<= <right>
+>>
+
+doubleLessThanOrEquals(left, right) ::= <<
+    Double.compare(<left>, <right>) \<= 0
+>>
+
+floatLessThanOrEquals(left, right) ::= <<
+    Float.compare(<left>, <right>) \<= 0
+>>

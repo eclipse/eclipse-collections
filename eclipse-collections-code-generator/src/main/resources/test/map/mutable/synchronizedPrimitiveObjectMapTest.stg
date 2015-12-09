@@ -1,0 +1,72 @@
+import "copyright.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+
+isTest() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/map/mutable/primitive"
+
+fileName(primitive) ::= "Synchronized<primitive.name>ObjectMapTest"
+
+skipBoolean() ::= "true"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.map.mutable.primitive;
+
+import org.junit.Assert;
+import org.junit.Test;
+
+/**
+ * JUnit test for {@link Synchronized<name>ObjectMap}.
+ * This file was automatically generated from template file synchronizedPrimitiveObjectMapTest.stg.
+ */
+public class Synchronized<name>ObjectMapTest extends AbstractMutable<name>ObjectMapTestCase
+{
+    private final Synchronized<name>ObjectMap\<String> map = this.classUnderTest();
+
+    @Override
+    protected Synchronized<name>ObjectMap\<String> classUnderTest()
+    {
+        return new Synchronized<name>ObjectMap\<>(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("31")>, "thirtyOne", <(literal.(type))("32")>, "thirtyTwo"));
+    }
+
+    @Override
+    protected \<T> Synchronized<name>ObjectMap\<T> newWithKeysValues(<type> key1, T value1)
+    {
+        return new Synchronized<name>ObjectMap\<>(<name>ObjectHashMap.newWithKeysValues(key1, value1));
+    }
+
+    @Override
+    protected \<T> Synchronized<name>ObjectMap\<T> newWithKeysValues(<type> key1, T value1, <type> key2, T value2)
+    {
+        return new Synchronized<name>ObjectMap\<>(<name>ObjectHashMap.newWithKeysValues(key1, value1, key2, value2));
+    }
+
+    @Override
+    protected \<T> Synchronized<name>ObjectMap\<T> newWithKeysValues(<type> key1, T value1, <type> key2, T value2, <type> key3, T value3)
+    {
+        return new Synchronized<name>ObjectMap\<>(<name>ObjectHashMap.newWithKeysValues(key1, value1, key2, value2, key3, value3));
+    }
+
+    @Override
+    protected \<T> Synchronized<name>ObjectMap\<T> getEmptyMap()
+    {
+        return new Synchronized<name>ObjectMap\<>(new <name>ObjectHashMap\<>());
+    }
+
+    @Override
+    @Test
+    public void asSynchronized()
+    {
+        super.asSynchronized();
+        Assert.assertSame(this.map, this.map.asSynchronized());
+    }
+}
+
+>>

@@ -1,0 +1,68 @@
+import "copyright.stg"
+import "primitiveEquals.stg"
+import "primitiveHashCode.stg"
+import "primitiveAPI.stg"
+
+targetPath() ::= "org/eclipse/collections/api/stack/primitive"
+
+fileName(primitive) ::= "<primitive.name>Stack"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.api.stack.primitive;
+
+import org.eclipse.collections.api.<name>Iterable;
+import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
+import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
+import org.eclipse.collections.api.list.primitive.<name>List;
+import org.eclipse.collections.api.stack.StackIterable;
+
+/**
+ * This file was automatically generated from template file primitiveStack.stg.
+ *
+ * @since 3.0.
+ */
+public interface <name>Stack extends <name>Iterable
+{
+    /**
+     * Returns the top of the stack.
+     */
+    <type> peek();
+
+    /**
+     * Returns <name>List of the number of elements specified by the count, beginning with the top of the stack.
+     */
+    <name>List peek(int count);
+
+    /**
+     * Returns the element at the specified index.
+     *
+     * @param index the location to peek into
+     */
+    <type> peekAt(int index);
+
+    <sharedAPI(fileName(primitive), name)>
+
+    \<V> StackIterable\<V> collect(<name>ToObjectFunction\<? extends V> function);
+
+    /**
+     * Follows the same general contract as {@link StackIterable#equals(Object)}.
+     */
+    @Override
+    boolean equals(Object o);
+
+    /**
+     * Follows the same general contract as {@link StackIterable#hashCode()}.
+     */
+    @Override
+    int hashCode();
+
+    Immutable<name>Stack toImmutable();
+}
+
+>>

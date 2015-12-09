@@ -1,0 +1,94 @@
+import "copyright.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+import "primitiveEquals.stg"
+
+skipBoolean() ::= "true"
+
+isTest() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/map/immutable/primitive"
+
+fileName(primitive) ::= "AbstractImmutableObject<primitive.name>MapTestCase"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name, primitive.wrapperName)>
+>>
+
+body(type, name, wrapperName) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.map.immutable.primitive;
+
+import org.eclipse.collections.api.map.primitive.ImmutableObject<name>Map;
+import org.eclipse.collections.impl.map.mutable.primitive.Object<name>HashMap;
+import org.eclipse.collections.impl.map.primitive.AbstractObject<name>MapTestCase;
+import org.eclipse.collections.impl.test.Verify;
+import org.junit.Assert;
+import org.junit.Test;
+
+/**
+ * Abstract JUnit test for {@link ImmutableObject<name>HashMap}.
+ * This file was automatically generated from template file abstractImmutableObjectPrimitiveMapTestCase.stg.
+ */
+public abstract class AbstractImmutableObject<name>MapTestCase extends AbstractObject<name>MapTestCase
+{
+    @Override
+    protected abstract ImmutableObject<name>Map\<String> classUnderTest();
+
+    @Override
+    protected \<T> ImmutableObject<name>Map\<T> newWithKeysValues(T key1, <type> value1)
+    {
+        return Object<name>HashMap.newWithKeysValues(key1, value1).toImmutable();
+    }
+
+    @Override
+    protected \<T> ImmutableObject<name>Map\<T> newWithKeysValues(T key1, <type> value1, T key2, <type> value2)
+    {
+        return Object<name>HashMap.newWithKeysValues(key1, value1, key2, value2).toImmutable();
+    }
+
+    @Override
+    protected \<T> ImmutableObject<name>Map\<T> newWithKeysValues(T key1, <type> value1, T key2, <type> value2, T key3, <type> value3)
+    {
+        return Object<name>HashMap.newWithKeysValues(key1, value1, key2, value2, key3, value3).toImmutable();
+    }
+
+    @Override
+    protected \<T> ImmutableObject<name>Map\<T> newWithKeysValues(T key1, <type> value1, T key2, <type> value2, T key3, <type> value3, T key4, <type> value4)
+    {
+        return Object<name>HashMap.newWithKeysValues(key1, value1, key2, value2, key3, value3, key4, value4).toImmutable();
+    }
+
+    @Override
+    protected \<T> ImmutableObject<name>Map\<T> getEmptyMap()
+    {
+        return new Object<name>HashMap\<T>().toImmutable();
+    }
+
+    @Override
+    @Test
+    public void toImmutable()
+    {
+        super.toImmutable();
+        ImmutableObject<name>Map\<String> map = this.classUnderTest();
+        Assert.assertSame(map, map.toImmutable());
+    }
+
+    @Override
+    @Test
+    public void keySet()
+    {
+        super.keySet();
+        Verify.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().keySet().remove("0"));
+    }
+
+    @Override
+    public void values()
+    {
+        super.values();
+        Verify.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().values().remove(<(literal.(type))("0")>));
+    }
+}
+
+>>

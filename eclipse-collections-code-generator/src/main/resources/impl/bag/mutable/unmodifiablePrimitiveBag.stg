@@ -1,0 +1,153 @@
+import "copyright.stg"
+import "primitiveEquals.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+
+targetPath() ::= "org/eclipse/collections/impl/bag/mutable/primitive"
+
+fileName(primitive) ::= "Unmodifiable<primitive.name>Bag"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.bag.mutable.primitive;
+
+import org.eclipse.collections.api.<name>Iterable;
+import org.eclipse.collections.api.Lazy<name>Iterable;
+import org.eclipse.collections.api.bag.MutableBag;
+import org.eclipse.collections.api.bag.primitive.Immutable<name>Bag;
+import org.eclipse.collections.api.bag.primitive.Mutable<name>Bag;
+import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
+import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
+import org.eclipse.collections.api.block.procedure.primitive.<name>IntProcedure;
+import org.eclipse.collections.impl.collection.mutable.primitive.AbstractUnmodifiable<name>Collection;
+import org.eclipse.collections.impl.factory.primitive.<name>Bags;
+import org.eclipse.collections.impl.lazy.primitive.Lazy<name>IterableAdapter;
+import net.jcip.annotations.NotThreadSafe;
+
+/**
+ * This file was automatically generated from template file unmodifiablePrimitiveBag.stg.
+ *
+ * @since 3.1.
+ */
+@NotThreadSafe
+public final class Unmodifiable<name>Bag
+        extends AbstractUnmodifiable<name>Collection
+        implements Mutable<name>Bag
+{
+    private static final long serialVersionUID = 1L;
+
+    Unmodifiable<name>Bag(Mutable<name>Bag bag)
+    {
+        super(bag);
+    }
+
+    private Mutable<name>Bag getMutable<name>Bag()
+    {
+        return (Mutable<name>Bag) this.get<name>Collection();
+    }
+
+    @Override
+    public Unmodifiable<name>Bag with(<type> element)
+    {
+        throw new UnsupportedOperationException("Cannot call with() on " + this.getClass().getSimpleName());
+    }
+
+    @Override
+    public Unmodifiable<name>Bag without(<type> element)
+    {
+        throw new UnsupportedOperationException("Cannot call without() on " + this.getClass().getSimpleName());
+    }
+
+    @Override
+    public Unmodifiable<name>Bag withAll(<name>Iterable elements)
+    {
+        throw new UnsupportedOperationException("Cannot call withAll() on " + this.getClass().getSimpleName());
+    }
+
+    @Override
+    public Unmodifiable<name>Bag withoutAll(<name>Iterable elements)
+    {
+        throw new UnsupportedOperationException("Cannot call withoutAll() on " + this.getClass().getSimpleName());
+    }
+
+    public void addOccurrences(<type> item, int occurrences)
+    {
+        throw new UnsupportedOperationException("Cannot call addOccurrences() on " + this.getClass().getSimpleName());
+    }
+
+    public boolean removeOccurrences(<type> item, int occurrences)
+    {
+        throw new UnsupportedOperationException("Cannot call removeOccurrences() on " + this.getClass().getSimpleName());
+    }
+
+    public int sizeDistinct()
+    {
+        return this.getMutable<name>Bag().sizeDistinct();
+    }
+
+    public int occurrencesOf(<type> item)
+    {
+        return this.getMutable<name>Bag().occurrencesOf(item);
+    }
+
+    public void forEachWithOccurrences(<name>IntProcedure procedure)
+    {
+        this.getMutable<name>Bag().forEachWithOccurrences(procedure);
+    }
+
+    @Override
+    public Mutable<name>Bag select(<name>Predicate predicate)
+    {
+        return this.getMutable<name>Bag().select(predicate);
+    }
+
+    @Override
+    public Mutable<name>Bag reject(<name>Predicate predicate)
+    {
+        return this.getMutable<name>Bag().reject(predicate);
+    }
+
+    @Override
+    public \<V> MutableBag\<V> collect(<name>ToObjectFunction\<? extends V> function)
+    {
+        return this.getMutable<name>Bag().collect(function);
+    }
+
+    @Override
+    public boolean equals(Object otherBag)
+    {
+        return this.getMutable<name>Bag().equals(otherBag);
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return this.getMutable<name>Bag().hashCode();
+    }
+
+    @Override
+    public Mutable<name>Bag asUnmodifiable()
+    {
+        return this;
+    }
+
+    @Override
+    public Mutable<name>Bag asSynchronized()
+    {
+        return new Synchronized<name>Bag(this);
+    }
+
+    @Override
+    public Immutable<name>Bag toImmutable()
+    {
+        return <name>Bags.immutable.withAll(this);
+    }
+}
+
+>>
+

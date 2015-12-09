@@ -1,0 +1,259 @@
+import "copyright.stg"
+import "primitiveEquals.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+
+targetPath() ::= "org/eclipse/collections/impl/list/mutable/primitive"
+
+fileName(primitive) ::= "Unmodifiable<primitive.name>List"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.list.mutable.primitive;
+
+import org.eclipse.collections.api.<name>Iterable;
+import org.eclipse.collections.api.Lazy<name>Iterable;
+import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
+import org.eclipse.collections.api.block.function.primitive.Object<name>IntToObjectFunction;
+import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
+import org.eclipse.collections.api.block.procedure.primitive.<name>IntProcedure;
+import org.eclipse.collections.api.list.MutableList;
+import org.eclipse.collections.api.list.primitive.<name>List;
+import org.eclipse.collections.api.list.primitive.Immutable<name>List;
+import org.eclipse.collections.api.list.primitive.Mutable<name>List;
+import org.eclipse.collections.impl.collection.mutable.primitive.AbstractUnmodifiable<name>Collection;
+import org.eclipse.collections.impl.factory.primitive.<name>Lists;
+import org.eclipse.collections.impl.lazy.primitive.Lazy<name>IterableAdapter;
+import org.eclipse.collections.impl.lazy.primitive.Reverse<name>Iterable;
+import net.jcip.annotations.NotThreadSafe;
+
+/**
+ * This file was automatically generated from template file unmodifiablePrimitiveList.stg.
+ *
+ * @since 3.1.
+ */
+@NotThreadSafe
+public final class Unmodifiable<name>List
+        extends AbstractUnmodifiable<name>Collection
+        implements Mutable<name>List
+{
+    private static final long serialVersionUID = 1L;
+
+    Unmodifiable<name>List(Mutable<name>List list)
+    {
+        super(list);
+    }
+
+    private Mutable<name>List getMutable<name>List()
+    {
+        return (Mutable<name>List) this.get<name>Collection();
+    }
+
+    public <type> get(int index)
+    {
+        return this.getMutable<name>List().get(index);
+    }
+
+    public <type> getFirst()
+    {
+        return this.getMutable<name>List().getFirst();
+    }
+
+    public <type> getLast()
+    {
+        return this.getMutable<name>List().getLast();
+    }
+
+    public int indexOf(<type> value)
+    {
+        return this.getMutable<name>List().indexOf(value);
+    }
+
+    public int lastIndexOf(<type> value)
+    {
+        return this.getMutable<name>List().lastIndexOf(value);
+    }
+
+    public void addAtIndex(int index, <type> element)
+    {
+        throw new UnsupportedOperationException("Cannot call addAtIndex() on " + this.getClass().getSimpleName());
+    }
+
+    public boolean addAllAtIndex(int index, <type>... source)
+    {
+        throw new UnsupportedOperationException("Cannot call addAllAtIndex() on " + this.getClass().getSimpleName());
+    }
+
+    public boolean addAllAtIndex(int index, <name>Iterable source)
+    {
+        throw new UnsupportedOperationException("Cannot call addAllAtIndex() on " + this.getClass().getSimpleName());
+    }
+
+    public <type> removeAtIndex(int index)
+    {
+        throw new UnsupportedOperationException("Cannot call removeAtIndex() on " + this.getClass().getSimpleName());
+    }
+
+    public <type> set(int index, <type> element)
+    {
+        throw new UnsupportedOperationException("Cannot call set() on " + this.getClass().getSimpleName());
+    }
+
+    @Override
+    public Unmodifiable<name>List with(<type> element)
+    {
+        throw new UnsupportedOperationException("Cannot call with() on " + this.getClass().getSimpleName());
+    }
+
+    @Override
+    public Unmodifiable<name>List without(<type> element)
+    {
+        throw new UnsupportedOperationException("Cannot call without() on " + this.getClass().getSimpleName());
+    }
+
+    @Override
+    public Unmodifiable<name>List withAll(<name>Iterable elements)
+    {
+        throw new UnsupportedOperationException("Cannot call withAll() on " + this.getClass().getSimpleName());
+    }
+
+    @Override
+    public Unmodifiable<name>List withoutAll(<name>Iterable elements)
+    {
+        throw new UnsupportedOperationException("Cannot call withoutAll() on " + this.getClass().getSimpleName());
+    }
+
+    @Override
+    public Mutable<name>List select(<name>Predicate predicate)
+    {
+        return this.getMutable<name>List().select(predicate);
+    }
+
+    @Override
+    public Mutable<name>List reject(<name>Predicate predicate)
+    {
+        return this.getMutable<name>List().reject(predicate);
+    }
+
+    @Override
+    public \<V> MutableList\<V> collect(<name>ToObjectFunction\<? extends V> function)
+    {
+        return this.getMutable<name>List().collect(function);
+    }
+
+    <(arithmeticMethods.(type))(name, type)>
+    @Override
+    public boolean equals(Object otherList)
+    {
+        return this.getMutable<name>List().equals(otherList);
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return this.getMutable<name>List().hashCode();
+    }
+
+    @Override
+    public Mutable<name>List asUnmodifiable()
+    {
+        return this;
+    }
+
+    @Override
+    public Mutable<name>List asSynchronized()
+    {
+        return new Synchronized<name>List(this);
+    }
+
+    @Override
+    public Immutable<name>List toImmutable()
+    {
+        int size = this.size();
+        if (size == 0)
+        {
+            return <name>Lists.immutable.with();
+        }
+        if (size == 1)
+        {
+            return <name>Lists.immutable.with(this.getFirst());
+        }
+        return <name>Lists.immutable.with(this.toArray());
+    }
+
+    public Mutable<name>List reverseThis()
+    {
+        throw new UnsupportedOperationException("Cannot call reverseThis() on " + this.getClass().getSimpleName());
+    }
+
+    public Mutable<name>List toReversed()
+    {
+        return this.getMutable<name>List().toReversed();
+    }
+
+    public void forEachWithIndex(<name>IntProcedure procedure)
+    {
+        this.getMutable<name>List().forEachWithIndex(procedure);
+    }
+
+    public Lazy<name>Iterable asReversed()
+    {
+        return Reverse<name>Iterable.adapt(this);
+    }
+
+    public \<T> T injectIntoWithIndex(T injectedValue, Object<name>IntToObjectFunction\<? super T, ? extends T> function)
+    {
+        return this.getMutable<name>List().injectIntoWithIndex(injectedValue, function);
+    }
+
+    /**
+     * @since 6.0.
+     */
+    public Mutable<name>List distinct()
+    {
+        return this.getMutable<name>List().distinct();
+    }
+
+    public Mutable<name>List subList(int fromIndex, int toIndex)
+    {
+        throw new UnsupportedOperationException("subList not yet implemented!");
+    }
+}
+
+>>
+
+arithmeticMethods ::= [
+    "byte": "allMethods",
+    "short": "allMethods",
+    "char": "allMethods",
+    "int": "allMethods",
+    "long": "allMethods",
+    "float": "allMethods",
+    "double": "allMethods",
+    "boolean": "noMethods"
+    ]
+
+allMethods(name, type) ::=<<
+public Mutable<name>List sortThis()
+{
+    throw new UnsupportedOperationException("Cannot call sortThis() on " + this.getClass().getSimpleName());
+}
+
+public int binarySearch(<type> value)
+{
+    return this.getMutable<name>List().binarySearch(value);
+}
+
+public <wideType.(type)> dotProduct(<name>List list)
+{
+    return this.getMutable<name>List().dotProduct(list);
+}
+
+>>
+
+noMethods(name, type) ::= ""

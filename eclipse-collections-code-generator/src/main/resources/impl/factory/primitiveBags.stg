@@ -1,0 +1,39 @@
+import "copyright.stg"
+
+targetPath() ::= "org/eclipse/collections/impl/factory/primitive"
+
+fileName(primitive) ::= "<primitive.name>Bags"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.factory.primitive;
+
+import org.eclipse.collections.api.factory.bag.primitive.Immutable<name>BagFactory;
+import org.eclipse.collections.api.factory.bag.primitive.Mutable<name>BagFactory;
+import org.eclipse.collections.impl.bag.immutable.primitive.Immutable<name>BagFactoryImpl;
+import org.eclipse.collections.impl.bag.mutable.primitive.Mutable<name>BagFactoryImpl;
+
+/**
+ * <name>Bags is a static utility for creating {@link Immutable<name>BagFactory}.
+ * This file was automatically generated from template file primitiveBags.stg.
+ *
+ * @since 4.0.
+ */
+@SuppressWarnings("ConstantNamingConvention")
+public final class <name>Bags
+{
+    public static final Immutable<name>BagFactory immutable = new Immutable<name>BagFactoryImpl();
+    public static final Mutable<name>BagFactory mutable = new Mutable<name>BagFactoryImpl();
+
+    private <name>Bags()
+    {
+        throw new AssertionError("Suppress default constructor for noninstantiability");
+    }
+}
+
+>>

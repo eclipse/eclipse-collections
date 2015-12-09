@@ -1,0 +1,61 @@
+import "copyright.stg"
+
+skipBoolean() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/map/mutable/primitive"
+
+fileName(primitive) ::= "Mutable<primitive.name>ObjectMapFactoryImpl"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.map.mutable.primitive;
+
+import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
+import org.eclipse.collections.api.factory.map.primitive.Mutable<name>ObjectMapFactory;
+import org.eclipse.collections.api.map.primitive.Mutable<name>ObjectMap;
+import org.eclipse.collections.api.map.primitive.<name>ObjectMap;
+
+/**
+ * Mutable<name>ObjectMapFactoryImpl is a factory implementation which creates instances of type {@link Mutable<name>ObjectMap}.
+ * This file was automatically generated from template file mutablePrimitiveObjectMapFactoryImpl.stg.
+ *
+ * @since 6.0.
+ */
+public class Mutable<name>ObjectMapFactoryImpl implements Mutable<name>ObjectMapFactory
+{
+    public \<V> Mutable<name>ObjectMap\<V> empty()
+    {
+        return new <name>ObjectHashMap(0);
+    }
+
+    public \<V> Mutable<name>ObjectMap\<V> of()
+    {
+        return this.empty();
+    }
+
+    public \<V> Mutable<name>ObjectMap\<V> with()
+    {
+        return this.empty();
+    }
+
+    public \<V> Mutable<name>ObjectMap\<V> ofAll(<name>ObjectMap\<? extends V> map)
+    {
+        return this.withAll(map);
+    }
+
+    public \<V> Mutable<name>ObjectMap\<V> withAll(<name>ObjectMap\<? extends V> map)
+    {
+        if (map.isEmpty())
+        {
+            return this.empty();
+        }
+        return new <name>ObjectHashMap\<V>(map);
+    }
+}
+
+>>

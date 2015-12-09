@@ -1,0 +1,630 @@
+import "copyright.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+import "primitiveEquals.stg"
+
+skipBoolean() ::= "true"
+
+isTest() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/map/primitive"
+
+fileName(primitive) ::= "AbstractObject<primitive.name>MapTestCase"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name, primitive.wrapperName)>
+>>
+
+body(type, name, wrapperName) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.map.primitive;
+
+import java.util.Arrays;
+import java.util.NoSuchElementException;
+
+import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
+import org.eclipse.collections.api.iterator.<name>Iterator;
+import org.eclipse.collections.api.map.primitive.ImmutableObject<name>Map;
+import org.eclipse.collections.api.map.primitive.Object<name>Map;
+import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
+import org.eclipse.collections.impl.bag.mutable.primitive.<name>HashBag;
+import org.eclipse.collections.impl.factory.primitive.Object<name>Maps;
+import org.eclipse.collections.impl.list.mutable.FastList;
+import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
+import org.eclipse.collections.impl.map.mutable.UnifiedMap;
+import org.eclipse.collections.impl.map.mutable.primitive.Object<name>HashMap;
+import org.eclipse.collections.impl.set.mutable.UnifiedSet;
+import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
+import org.eclipse.collections.impl.test.Verify;
+import org.junit.Assert;
+import org.junit.Test;
+
+/**
+ * This file was automatically generated from template file abstractObjectPrimitiveMapTestCase.stg.
+ */
+public abstract class AbstractObject<name>MapTestCase
+{
+    private final Object<name>Map\<String> map = this.classUnderTest();
+
+    protected abstract Object<name>Map\<String> classUnderTest();
+
+    protected abstract \<T> Object<name>Map\<T> newWithKeysValues(T key1, <type> value1);
+
+    protected abstract \<T> Object<name>Map\<T> newWithKeysValues(T key1, <type> value1, T key2, <type> value2);
+
+    protected abstract \<T> Object<name>Map\<T> newWithKeysValues(T key1, <type> value1, T key2, <type> value2, T key3, <type> value3);
+
+    protected abstract \<T> Object<name>Map\<T> newWithKeysValues(T key1, <type> value1, T key2, <type> value2, T key3, <type> value3, T key4, <type> value4);
+
+    protected abstract \<T> Object<name>Map\<T> getEmptyMap();
+
+    @Test
+    public void keySet()
+    {
+        Verify.assertEmpty(this.getEmptyMap().keySet());
+        Assert.assertEquals(UnifiedSet.newSetWith("0"), this.newWithKeysValues("0", <(literal.(type))("0")>).keySet());
+        Assert.assertEquals(UnifiedSet.newSetWith("0", "1", "2"),
+                this.newWithKeysValues("0", <(literal.(type))("0")>, "1", <(literal.(type))("1")>, "2", <(literal.(type))("2")>).keySet());
+    }
+
+    @Test
+    public void values()
+    {
+        Verify.assertEmpty(this.getEmptyMap().values());
+
+        Object<name>Map\<String> map = this.newWithKeysValues("0", <(literal.(type))("0")>);
+        Verify.assertSize(1, map.values());
+        Assert.assertTrue(map.values().contains(<(literal.(type))("0")>));
+
+        Object<name>Map\<String> map1 = this.newWithKeysValues("0", <(literal.(type))("0")>, "1", <(literal.(type))("1")>, "2", <(literal.(type))("2")>);
+        Verify.assertSize(3, map1.values());
+        Assert.assertTrue(map1.values().contains(<(literal.(type))("0")>));
+        Assert.assertTrue(map1.values().contains(<(literal.(type))("1")>));
+        Assert.assertTrue(map1.values().contains(<(literal.(type))("2")>));
+    }
+
+    @Test
+    public void get()
+    {
+        Assert.assertEquals(<(literal.(type))("0")>, this.map.get("0")<delta.(type)>);
+        Assert.assertEquals(<(literal.(type))("1")>, this.map.get("1")<delta.(type)>);
+        Assert.assertEquals(<(literal.(type))("2")>, this.map.get("2")<delta.(type)>);
+    }
+
+    @Test
+    public void getOrThrow()
+    {
+        Assert.assertEquals(<(literal.(type))("0")>, this.map.getOrThrow("0")<delta.(type)>);
+        Assert.assertEquals(<(literal.(type))("1")>, this.map.getOrThrow("1")<delta.(type)>);
+        Assert.assertEquals(<(literal.(type))("2")>, this.map.getOrThrow("2")<delta.(type)>);
+        Verify.assertThrows(IllegalStateException.class, () -> this.map.getOrThrow("5"));
+        Verify.assertThrows(IllegalStateException.class, () -> this.map.getOrThrow(null));
+    }
+
+    @Test
+    public void containsKey()
+    {
+        Assert.assertTrue(this.map.containsKey("0"));
+        Assert.assertTrue(this.map.containsKey("1"));
+        Assert.assertTrue(this.map.containsKey("2"));
+        Assert.assertFalse(this.map.containsKey("3"));
+        Assert.assertFalse(this.map.containsKey(null));
+    }
+
+    @Test
+    public void containsValue()
+    {
+        Assert.assertTrue(this.map.containsValue(<(literal.(type))("0")>));
+        Assert.assertTrue(this.map.containsValue(<(literal.(type))("1")>));
+        Assert.assertTrue(this.map.containsValue(<(literal.(type))("2")>));
+    }
+
+    @Test
+    public void size()
+    {
+        Verify.assertSize(0, this.getEmptyMap());
+        Verify.assertSize(1, this.newWithKeysValues(0, <(literal.(type))("0")>));
+        Verify.assertSize(1, this.newWithKeysValues(1, <(literal.(type))("1")>));
+        Verify.assertSize(1, this.newWithKeysValues(null, <(literal.(type))("2")>));
+        Verify.assertSize(2, this.newWithKeysValues(1, <(literal.(type))("1")>, 5, <(literal.(type))("5")>));
+        Verify.assertSize(2, this.newWithKeysValues(0, <(literal.(type))("0")>, 5, <(literal.(type))("5")>));
+        Verify.assertSize(3, this.newWithKeysValues(1, <(literal.(type))("1")>, 0, <(literal.(type))("0")>, 5, <(literal.(type))("5")>));
+        Verify.assertSize(2, this.newWithKeysValues(6, <(literal.(type))("6")>, 5, <(literal.(type))("5")>));
+    }
+
+    @Test
+    public void isEmpty()
+    {
+        Verify.assertEmpty(this.getEmptyMap());
+        Assert.assertFalse(this.map.isEmpty());
+        Assert.assertFalse(this.newWithKeysValues(null, <(literal.(type))("1")>).isEmpty());
+        Assert.assertFalse(this.newWithKeysValues(1, <(literal.(type))("1")>).isEmpty());
+        Assert.assertFalse(this.newWithKeysValues(0, <(literal.(type))("0")>).isEmpty());
+        Assert.assertFalse(this.newWithKeysValues(50, <(literal.(type))("50")>).isEmpty());
+    }
+
+    @Test
+    public void notEmpty()
+    {
+        Assert.assertFalse(this.getEmptyMap().notEmpty());
+        Assert.assertTrue(this.map.notEmpty());
+        Assert.assertTrue(this.newWithKeysValues(1, <(literal.(type))("1")>).notEmpty());
+        Assert.assertTrue(this.newWithKeysValues(null, <(literal.(type))("1")>).notEmpty());
+        Assert.assertTrue(this.newWithKeysValues(0, <(literal.(type))("0")>).notEmpty());
+        Assert.assertTrue(this.newWithKeysValues(50, <(literal.(type))("50")>).notEmpty());
+    }
+
+    @Test
+    public void asLazy()
+    {
+        Verify.assertSize(this.map.toList().size(), this.map.asLazy().toList());
+        Assert.assertTrue(this.map.asLazy().toList().containsAll(this.map.toList()));
+    }
+
+    @Test
+    public void getIfAbsent()
+    {
+        Assert.assertEquals(<(literal.(type))("0")>, this.map.getIfAbsent("0", <(literal.(type))("1")>)<delta.(type)>);
+        Assert.assertEquals(<(literal.(type))("1")>, this.map.getIfAbsent("1", <(literal.(type))("2")>)<delta.(type)>);
+        Assert.assertEquals(<(literal.(type))("2")>, this.map.getIfAbsent("2", <(literal.(type))("3")>)<delta.(type)>);
+        Assert.assertEquals(<(literal.(type))("1")>, this.map.getIfAbsent("5", <(literal.(type))("1")>)<delta.(type)>);
+        Assert.assertEquals(<(literal.(type))("0")>, this.map.getIfAbsent("5", <(literal.(type))("0")>)<delta.(type)>);
+
+        Assert.assertEquals(<(literal.(type))("1")>, this.map.getIfAbsent(null, <(literal.(type))("1")>)<delta.(type)>);
+        Assert.assertEquals(<(literal.(type))("0")>, this.map.getIfAbsent(null, <(literal.(type))("0")>)<delta.(type)>);
+    }
+
+    @Test
+    public void testEquals()
+    {
+        Object<name>Map\<Integer> map1 = this.newWithKeysValues(0, <(literal.(type))("0")>, 1, <(literal.(type))("1")>, null, <(literal.(type))("2")>);
+        Object<name>Map\<Integer> map2 = this.newWithKeysValues(null, <(literal.(type))("2")>, 0, <(literal.(type))("0")>, 1, <(literal.(type))("1")>);
+        Object<name>Map\<Integer> map3 = this.newWithKeysValues(0, <(literal.(type))("0")>, 1, <(literal.(type))("2")>, null, <(literal.(type))("2")>);
+        Object<name>Map\<Integer> map5 = this.newWithKeysValues(0, <(literal.(type))("0")>, 1, <(literal.(type))("1")>, null, <(literal.(type))("3")>);
+        Object<name>Map\<Integer> map7 = this.newWithKeysValues(null, <(literal.(type))("2")>, 1, <(literal.(type))("1")>);
+
+        Verify.assertEqualsAndHashCode(map1, map2);
+        Verify.assertPostSerializedEqualsAndHashCode(map1);
+        Assert.assertNotEquals(map1, map3);
+        Assert.assertNotEquals(map1, map5);
+        Assert.assertNotEquals(map1, map7);
+
+        Assert.assertEquals(map1, Object<name>Maps.mutable.ofAll(map1));
+        Assert.assertEquals(map1, Object<name>Maps.immutable.ofAll(map1));
+    }
+
+    @Test
+    public void testHashCode()
+    {
+        Assert.assertEquals(
+                UnifiedMap.newWithKeysValues(0, <(literal.(type))("0")>, 1, <(literal.(type))("1")>).hashCode(),
+                this.newWithKeysValues(0, <(literal.(type))("0")>, 1, <(literal.(type))("1")>).hashCode());
+        Assert.assertEquals(
+                UnifiedMap.newWithKeysValues(50, <(literal.(type))("0")>, null, <(literal.(type))("1")>).hashCode(),
+                this.newWithKeysValues(50, <(literal.(type))("0")>, null, <(literal.(type))("1")>).hashCode());
+        Assert.assertEquals(UnifiedMap.newMap().hashCode(), this.getEmptyMap().hashCode());
+    }
+
+    @Test
+    public void testToString()
+    {
+        Assert.assertEquals("{}", this.\<Integer>getEmptyMap().toString());
+        Assert.assertEquals("{0=<(toStringLiteral.(type))("0")>}", this.newWithKeysValues(0, <(literal.(type))("0")>).toString());
+
+        Object<name>Map\<Integer> map1 = this.newWithKeysValues(0, <(literal.(type))("0")>, 1, <(literal.(type))("1")>);
+        Assert.assertTrue(
+                map1.toString(),
+                "{0=<(toStringLiteral.(type))("0")>, 1=<(toStringLiteral.(type))("1")>}".equals(map1.toString())
+                        || "{1=<(toStringLiteral.(type))("1")>, 0=<(toStringLiteral.(type))("0")>}".equals(map1.toString()));
+
+        Object<name>Map\<Integer> map2 = this.newWithKeysValues(1, <(literal.(type))("1")>, null, <(literal.(type))("0")>);
+        Assert.assertTrue(
+                map2.toString(),
+                "{1=<(toStringLiteral.(type))("1")>, null=<(toStringLiteral.(type))("0")>}".equals(map2.toString())
+                        || "{null=<(toStringLiteral.(type))("0")>, 1=<(toStringLiteral.(type))("1")>}".equals(map2.toString()));
+    }
+
+
+    @Test
+    public void <type>Iterator()
+    {
+        Mutable<name>Set expected = <name>HashSet.newSetWith(<(literal.(type))("0")>, <(literal.(type))("1")>, <(literal.(type))("2")>);
+        Mutable<name>Set actual = <name>HashSet.newSetWith();
+
+        <name>Iterator iterator = this.map.<type>Iterator();
+        Assert.assertTrue(iterator.hasNext());
+        actual.add(iterator.next());
+        Assert.assertTrue(iterator.hasNext());
+        actual.add(iterator.next());
+        Assert.assertTrue(iterator.hasNext());
+        actual.add(iterator.next());
+        Assert.assertFalse(iterator.hasNext());
+
+        Assert.assertEquals(expected, actual);
+        Verify.assertThrows(NoSuchElementException.class, iterator::next);
+        Verify.assertThrows(NoSuchElementException.class, () -> { this.getEmptyMap().<type>Iterator().next(); });
+    }
+
+    @Test
+    public void forEach()
+    {
+        Object<name>Map\<Integer> map01 = this.newWithKeysValues(0, <(literal.(type))("1")>, 1, <(literal.(type))("2")>);
+        <type>[] sum01 = new <type>[1];
+        map01.forEach(each -> { sum01[0] += each; });
+        Assert.assertEquals(<(literal.(type))("3")>, sum01[0]<delta.(type)>);
+
+        Object<name>Map\<Integer> map = this.newWithKeysValues(3, <(literal.(type))("4")>, 4, <(literal.(type))("5")>);
+        <type>[] sum = new <type>[1];
+        map.forEach(each -> { sum[0] += each; });
+        Assert.assertEquals(<(literal.(type))("9")>, sum[0]<delta.(type)>);
+
+        Object<name>Map\<Integer> map1 = this.newWithKeysValues(3, <(literal.(type))("4")>, null, <(literal.(type))("5")>);
+        <type>[] sum1 = new <type>[1];
+        map1.forEach(each -> { sum1[0] += each; });
+        Assert.assertEquals(<(literal.(type))("9")>, sum1[0]<delta.(type)>);
+    }
+
+    @Test
+    public void forEachValue()
+    {
+        Object<name>Map\<Integer> map01 = this.newWithKeysValues(0, <(literal.(type))("1")>, 1, <(literal.(type))("2")>);
+        <type>[] sum01 = new <type>[1];
+        map01.forEachValue((<type> each) -> sum01[0] += each);
+        Assert.assertEquals(<(literal.(type))("3")>, sum01[0]<delta.(type)>);
+
+        Object<name>Map\<Integer> map = this.newWithKeysValues(3, <(literal.(type))("4")>, null, <(literal.(type))("5")>);
+        <type>[] sum = new <type>[1];
+        map.forEachValue((<type> each) -> sum[0] += each);
+        Assert.assertEquals(<(literal.(type))("9")>, sum[0]<delta.(type)>);
+    }
+
+    @Test
+    public void forEachKey()
+    {
+        Object<name>Map\<Integer> map01 = this.newWithKeysValues(0, <(literal.(type))("1")>, 1, <(literal.(type))("2")>);
+        int[] sum01 = new int[1];
+        map01.forEachKey((Integer each) -> sum01[0] += each);
+        Assert.assertEquals(1, sum01[0]);
+
+        Object<name>Map\<Integer> map = this.newWithKeysValues(3, <(literal.(type))("4")>, null, <(literal.(type))("5")>);
+        String[] sum = new String[1];
+        sum[0] = "";
+        map.forEachKey(each -> sum[0] += String.valueOf(each));
+        Assert.assertTrue("3null".equals(sum[0]) || "null3".equals(sum[0]));
+    }
+
+    @Test
+    public void forEachKeyValue()
+    {
+        Object<name>Map\<Integer> map01 = this.newWithKeysValues(0, <(literal.(type))("1")>, 1, <(literal.(type))("2")>);
+        int[] sumKey01 = new int[1];
+        <type>[] sumValue01 = new <type>[1];
+        map01.forEachKeyValue((Integer eachKey, <type> eachValue) ->
+            {
+                sumKey01[0] += eachKey;
+                sumValue01[0] += eachValue;
+            });
+        Assert.assertEquals(1, sumKey01[0]);
+        Assert.assertEquals(<(literal.(type))("3")>, sumValue01[0]<delta.(type)>);
+
+        Object<name>Map\<Integer> map = this.newWithKeysValues(3, <(literal.(type))("4")>, null, <(literal.(type))("5")>);
+        String[] sumKey = new String[1];
+        sumKey[0] = "";
+        <type>[] sumValue = new <type>[1];
+        map.forEachKeyValue((Integer eachKey, <type> eachValue) ->
+            {
+                sumKey[0] += String.valueOf(eachKey);
+                sumValue[0] += eachValue;
+            });
+        Assert.assertTrue("3null".equals(sumKey[0]) || "null3".equals(sumKey[0]));
+        Assert.assertEquals(<(literal.(type))("9")>, sumValue[0]<delta.(type)>);
+    }
+
+    @Test
+    public void makeString()
+    {
+        Assert.assertEquals("", this.\<String>getEmptyMap().makeString());
+        Assert.assertEquals("<(toStringLiteral.(type))("0")>", this.newWithKeysValues(0, <(literal.(type))("0")>).makeString());
+        Assert.assertEquals("<(toStringLiteral.(type))("1")>", this.newWithKeysValues(1, <(literal.(type))("1")>).makeString());
+        Assert.assertEquals("<(toStringLiteral.(type))("5")>", this.newWithKeysValues(null, <(literal.(type))("5")>).makeString());
+
+        Object<name>Map\<Integer> map2 = this.newWithKeysValues(1, <(literal.(type))("1")>, 32, <(literal.(type))("32")>);
+        Assert.assertTrue(
+                map2.makeString("[", "/", "]"),
+                "[<(toStringLiteral.(type))("1")>/<(toStringLiteral.(type))("32")>]".equals(map2.makeString("[", "/", "]"))
+                        || "[<(toStringLiteral.(type))("32")>/<(toStringLiteral.(type))("1")>]".equals(map2.makeString("[", "/", "]")));
+
+        Assert.assertTrue(
+                map2.makeString("/"),
+                "<(toStringLiteral.(type))("1")>/<(toStringLiteral.(type))("32")>".equals(map2.makeString("/"))
+                        || "<(toStringLiteral.(type))("32")>/<(toStringLiteral.(type))("1")>".equals(map2.makeString("/")));
+    }
+
+    @Test
+    public void appendString()
+    {
+        Appendable appendable = new StringBuilder();
+        this.getEmptyMap().appendString(appendable);
+        Assert.assertEquals("", appendable.toString());
+
+        Appendable appendable0 = new StringBuilder();
+        this.newWithKeysValues(0, <(literal.(type))("0")>).appendString(appendable0);
+        Assert.assertEquals("<(toStringLiteral.(type))("0")>", appendable0.toString());
+
+        Appendable appendable1 = new StringBuilder();
+        this.newWithKeysValues(1, <(literal.(type))("1")>).appendString(appendable1);
+        Assert.assertEquals("<(toStringLiteral.(type))("1")>", appendable1.toString());
+
+        Appendable appendable2 = new StringBuilder();
+        this.newWithKeysValues(null, <(literal.(type))("5")>).appendString(appendable2);
+        Assert.assertEquals("<(toStringLiteral.(type))("5")>", appendable2.toString());
+
+        Appendable appendable3 = new StringBuilder();
+        Object<name>Map\<Integer> map1 = this.newWithKeysValues(0, <(literal.(type))("0")>, 1, <(literal.(type))("1")>);
+        map1.appendString(appendable3);
+        Assert.assertTrue(
+                appendable3.toString(),
+                "<(toStringLiteral.(type))("0")>, <(toStringLiteral.(type))("1")>".equals(appendable3.toString())
+                        || "<(toStringLiteral.(type))("1")>, <(toStringLiteral.(type))("0")>".equals(appendable3.toString()));
+
+        Appendable appendable4 = new StringBuilder();
+        map1.appendString(appendable4, "/");
+        Assert.assertTrue(
+                appendable4.toString(),
+                "<(toStringLiteral.(type))("0")>/<(toStringLiteral.(type))("1")>".equals(appendable4.toString())
+                        || "<(toStringLiteral.(type))("1")>/<(toStringLiteral.(type))("0")>".equals(appendable4.toString()));
+
+        Appendable appendable5 = new StringBuilder();
+        map1.appendString(appendable5, "[", "/", "]");
+        Assert.assertTrue(
+                appendable5.toString(),
+                "[<(toStringLiteral.(type))("0")>/<(toStringLiteral.(type))("1")>]".equals(appendable5.toString())
+                        || "[<(toStringLiteral.(type))("1")>/<(toStringLiteral.(type))("0")>]".equals(appendable5.toString()));
+    }
+
+    @Test
+    public void select()
+    {
+        Assert.assertEquals(this.map, this.map.select((String object, <type> value) -> ((Integer.parseInt(object) + value) % 2) == 0));
+
+        Assert.assertEquals(Object<name>HashMap.newWithKeysValues("0", <(literal.(type))("0")>, "1", <(literal.(type))("1")>),
+            this.map.select((String object, <type> value) -> <(lessThan.(type))("Integer.parseInt(object) + value", {<(literal.(type))("4")>})>));
+
+        Assert.assertEquals(this.getEmptyMap(), this.map.select((String object, <type> value) -> ((Integer.parseInt(object) + value) % 2) != 0));
+
+        Assert.assertEquals(<name>HashBag.newBagWith(<(literal.(type))("0")>, <(literal.(type))("1")>, <(literal.(type))("2")>),
+            this.map.select(value -> <(lessThan.(type))("value", {<(literal.(type))("3")>})>).toBag());
+
+        Assert.assertEquals(<name>HashBag.newBagWith(<(literal.(type))("0")>, <(literal.(type))("1")>), this.map.select(value -> <(lessThan.(type))("value", {<(literal.(type))("2")>})>).toBag());
+
+        Assert.assertEquals(new <name>HashBag(), this.map.select(value -> value > <(literal.(type))("2")>).toBag());
+    }
+
+    @Test
+    public void reject()
+    {
+        Assert.assertEquals(this.getEmptyMap(), this.map.reject((String object, <type> value) -> ((Integer.parseInt(object) + value) % 2) == 0));
+
+        Assert.assertEquals(Object<name>HashMap.newWithKeysValues("2", <(literal.(type))("2")>),
+            this.map.reject((String object, <type> value)-> <(lessThan.(type))("Integer.parseInt(object) + value", {<(literal.(type))("4")>})>));
+
+        Assert.assertEquals(this.map, this.map.reject((String object, <type> value) -> ((Integer.parseInt(object) + value) % 2) != 0));
+
+        Assert.assertEquals(new <name>HashBag(), this.map.reject(value -> <(lessThan.(type))("value", {<(literal.(type))("3")>})>).toBag());
+
+        Assert.assertEquals(<name>HashBag.newBagWith(<(literal.(type))("2")>), this.map.reject(value -> <(lessThan.(type))("value", {<(literal.(type))("2")>})>).toBag());
+
+        Assert.assertEquals(<name>HashBag.newBagWith(<(literal.(type))("0")>, <(literal.(type))("1")>, <(literal.(type))("2")>),
+            this.map.reject(value -> value > <(literal.(type))("2")>).toBag());
+    }
+
+    @Test
+    public void count()
+    {
+        Assert.assertEquals(3L, this.map.count(value -> <(lessThan.(type))("value", {<(literal.(type))("3")>})>));
+
+        Assert.assertEquals(2L, this.map.count(value -> <(lessThan.(type))("value", {<(literal.(type))("2")>})>));
+
+        Assert.assertEquals(0L, this.map.count(value -> value > <(literal.(type))("2")>));
+    }
+
+    @Test
+    public void anySatisfy()
+    {
+        Assert.assertTrue(this.map.anySatisfy(value -> <(lessThan.(type))("value", {<(literal.(type))("3")>})>));
+
+        Assert.assertTrue(this.map.anySatisfy(value -> <(lessThan.(type))("value", {<(literal.(type))("2")>})>));
+
+        Assert.assertFalse(this.map.anySatisfy(value -> value > <(literal.(type))("2")>));
+    }
+
+    @Test
+    public void allSatisfy()
+    {
+        Assert.assertTrue(this.map.allSatisfy(value -> <(lessThan.(type))("value", {<(literal.(type))("3")>})>));
+
+        Assert.assertFalse(this.map.allSatisfy(value -> <(lessThan.(type))("value", {<(literal.(type))("2")>})>));
+
+        Assert.assertFalse(this.map.allSatisfy(value -> value > <(literal.(type))("2")>));
+    }
+
+    @Test
+    public void noneSatisfy()
+    {
+        Assert.assertTrue(this.map.noneSatisfy(value -> <(lessThan.(type))("value", {<(literal.(type))("0")>})>));
+
+        Assert.assertFalse(this.map.noneSatisfy(value -> <(lessThan.(type))("value", {<(literal.(type))("2")>})>));
+    }
+
+    @Test
+    public void detectIfNone()
+    {
+        <type> detect = this.map.detectIfNone(value -> <(lessThan.(type))("value", {<(literal.(type))("3")>})>, <(literal.(type))("5")>);
+        Assert.assertTrue(<(equals.(type))("detect", "0")> || <(equals.(type))("detect", "1")> || <(equals.(type))("detect", "2")>);
+
+        <type> detect1 = this.map.detectIfNone(value -> <(lessThan.(type))("value", {<(literal.(type))("2")>})>, <(literal.(type))("5")>);
+        Assert.assertTrue(<(equals.(type))("detect1", "0")> || <(equals.(type))("detect1", "1")>);
+
+        Assert.assertEquals(<(literal.(type))("5")>, this.map.detectIfNone(value -> value > <(literal.(type))("2")>, <(literal.(type))("5")>)<delta.(type)>);
+    }
+
+    @Test
+    public void collect()
+    {
+        <name>ToObjectFunction\<String> toString = String::valueOf;
+        Object<name>Map\<Integer> map1 = this.newWithKeysValues(0, <(literal.(type))("0")>, 1, <(literal.(type))("1")>);
+        Assert.assertTrue(map1.collect(toString).toString(), FastList.newListWith("<(toStringLiteral.(type))("1")>", "<(toStringLiteral.(type))("0")>").equals(map1.collect(toString))
+                || FastList.newListWith("<(toStringLiteral.(type))("0")>", "<(toStringLiteral.(type))("1")>").equals(map1.collect(toString)));
+    }
+
+    @Test
+    public void sum()
+    {
+        Assert.assertEquals(<(wideLiteral.(type))("3")>, this.map.sum()<wideDelta.(type)>);
+    }
+
+    @Test
+    public void max()
+    {
+        Assert.assertEquals(<(literal.(type))("2")>, this.map.max()<delta.(type)>);
+        Assert.assertEquals(<(literal.(type))("3")>, this.newWithKeysValues(null, <(literal.(type))("3")>, 0, <(literal.(type))("0")>, 2, <(literal.(type))("2")>).max()<delta.(type)>);
+    }
+
+    @Test(expected = NoSuchElementException.class)
+    public void max_throws_emptyList()
+    {
+        this.\<Integer>getEmptyMap().max();
+    }
+
+    @Test
+    public void min()
+    {
+        Assert.assertEquals(<(literal.(type))("0")>, this.map.min()<delta.(type)>);
+        Assert.assertEquals(<(literal.(type))("0")>, this.newWithKeysValues(null, <(literal.(type))("0")>, 5, <(literal.(type))("5")>, 1, <(literal.(type))("1")>).min()<delta.(type)>);
+    }
+
+    @Test(expected = NoSuchElementException.class)
+    public void min_throws_emptyList()
+    {
+        this.\<Integer>getEmptyMap().min();
+    }
+
+    @Test
+    public void maxIfEmpty()
+    {
+        Assert.assertEquals(<(literal.(type))("2")>, this.map.maxIfEmpty(<(literal.(type))("5")>)<delta.(type)>);
+        Assert.assertEquals(<(literal.(type))("3")>, this.newWithKeysValues(null, <(literal.(type))("3")>, 0, <(literal.(type))("0")>, 2, <(literal.(type))("2")>).maxIfEmpty(<(literal.(type))("5")>)<delta.(type)>);
+        Assert.assertEquals(<(literal.(type))("9")>, this.getEmptyMap().maxIfEmpty(<(literal.(type))("9")>)<delta.(type)>);
+    }
+
+    @Test
+    public void minIfEmpty()
+    {
+        Assert.assertEquals(<(literal.(type))("0")>, this.map.minIfEmpty(<(literal.(type))("6")>)<delta.(type)>);
+        Assert.assertEquals(<(literal.(type))("0")>, this.newWithKeysValues(null, <(literal.(type))("0")>, 5, <(literal.(type))("5")>, 1, <(literal.(type))("1")>).minIfEmpty(<(literal.(type))("6")>)<delta.(type)>);
+        Assert.assertEquals(<(literal.(type))("5")>, this.getEmptyMap().minIfEmpty(<(literal.(type))("5")>)<delta.(type)>);
+    }
+
+    @Test
+    public void average()
+    {
+        Assert.assertEquals(1.0, this.map.average(), 0.0);
+    }
+
+    @Test(expected = ArithmeticException.class)
+    public void averageThrowsOnEmpty()
+    {
+        this.getEmptyMap().average();
+    }
+
+    @Test
+    public void median()
+    {
+        Assert.assertEquals(1.0, this.map.median(), 0.0);
+        Assert.assertEquals(1.5, this.newWithKeysValues("0", <(literal.(type))("0")>, "1", <(literal.(type))("1")>, "2", <(literal.(type))("2")>, "3", <(literal.(type))("3")>).median(), 0.0);
+    }
+
+    @Test(expected = ArithmeticException.class)
+    public void medianThrowsOnEmpty()
+    {
+        this.getEmptyMap().median();
+    }
+
+    @Test
+    public void toArray()
+    {
+        Assert.assertTrue(Arrays.equals(new <type>[]{<(literal.(type))("0")>, <(literal.(type))("1")>}, this.newWithKeysValues("0", <(literal.(type))("0")>, "1", <(literal.(type))("1")>).toArray())
+                || Arrays.equals(new <type>[]{<(literal.(type))("1")>, <(literal.(type))("0")>}, this.newWithKeysValues("0", <(literal.(type))("0")>, "1", <(literal.(type))("1")>).toArray()));
+        Assert.assertArrayEquals(new <type>[]{}, this.getEmptyMap().toArray()<delta.(type)>);
+    }
+
+    @Test
+    public void toSortedArray()
+    {
+        Assert.assertArrayEquals(new <type>[]{<(literal.(type))("0")>, <(literal.(type))("2")>, <(literal.(type))("9")>}, this.newWithKeysValues("9", <(literal.(type))("9")>, "0", <(literal.(type))("0")>, "2", <(literal.(type))("2")>).toSortedArray()<delta.(type)>);
+        Assert.assertArrayEquals(new <type>[]{}, this.getEmptyMap().toSortedArray()<delta.(type)>);
+    }
+
+    @Test
+    public void contains()
+    {
+        Assert.assertTrue(this.map.contains(<(literal.(type))("0")>));
+        Assert.assertTrue(this.map.contains(<(literal.(type))("1")>));
+        Assert.assertTrue(this.map.contains(<(literal.(type))("2")>));
+    }
+
+    @Test
+    public void containsAll()
+    {
+        Assert.assertTrue(this.map.containsAll(<(literal.(type))("0")>, <(literal.(type))("1")>, <(literal.(type))("2")>));
+        Assert.assertFalse(this.map.containsAll(<(literal.(type))("0")>, <(literal.(type))("1")>, <(literal.(type))("5")>));
+        Assert.assertTrue(this.map.containsAll());
+    }
+
+    @Test
+    public void containsAll_Iterable()
+    {
+        Assert.assertTrue(this.map.containsAll(<name>ArrayList.newListWith(<(literal.(type))("0")>, <(literal.(type))("1")>, <(literal.(type))("2")>)));
+        Assert.assertFalse(this.map.containsAll(<name>ArrayList.newListWith(<(literal.(type))("0")>, <(literal.(type))("1")>, <(literal.(type))("5")>)));
+        Assert.assertTrue(this.map.containsAll(new <name>ArrayList()));
+    }
+
+    @Test
+    public void toList()
+    {
+        Assert.assertTrue(<name>ArrayList.newListWith(<(literal.(type))("0")>, <(literal.(type))("1")>).equals(this.newWithKeysValues("0", <(literal.(type))("0")>, "1", <(literal.(type))("1")>).toList())
+                || <name>ArrayList.newListWith(<(literal.(type))("1")>, <(literal.(type))("0")>).equals(this.newWithKeysValues("0", <(literal.(type))("0")>, "1", <(literal.(type))("1")>).toList()));
+        Assert.assertEquals(<name>ArrayList.newListWith(), this.getEmptyMap().toList());
+    }
+
+    @Test
+    public void toSortedList()
+    {
+        Assert.assertEquals(<name>ArrayList.newListWith(<(literal.(type))("0")>, <(literal.(type))("2")>, <(literal.(type))("9")>), this.newWithKeysValues("9", <(literal.(type))("9")>, "0", <(literal.(type))("0")>, "2", <(literal.(type))("2")>).toSortedList());
+        Assert.assertEquals(<name>ArrayList.newListWith(), this.getEmptyMap().toSortedList());
+    }
+
+    @Test
+    public void toSet()
+    {
+        Assert.assertEquals(<name>HashSet.newSetWith(<(literal.(type))("0")>, <(literal.(type))("1")>, <(literal.(type))("2")>), this.map.toSet());
+        Assert.assertEquals(<name>HashSet.newSetWith(), this.getEmptyMap().toSet());
+    }
+
+    @Test
+    public void toBag()
+    {
+        Assert.assertEquals(<name>HashBag.newBagWith(<(literal.(type))("0")>, <(literal.(type))("1")>, <(literal.(type))("2")>), this.map.toBag());
+        Assert.assertEquals(<name>HashBag.newBagWith(), this.getEmptyMap().toBag());
+    }
+
+    @Test
+    public void toImmutable()
+    {
+        Assert.assertEquals(this.classUnderTest(), this.classUnderTest().toImmutable());
+        Verify.assertInstanceOf(ImmutableObject<name>Map.class, this.classUnderTest().toImmutable());
+    }
+}
+
+>>

@@ -1,0 +1,446 @@
+import "copyright.stg"
+import "primitiveLiteral.stg"
+import "primitiveEquals.stg"
+
+targetPath() ::= "org/eclipse/collections/impl/lazy/primitive"
+
+fileName(primitive) ::= "AbstractLazy<primitive.name>Iterable"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+collectPrimitive(fromName, fromType, toName, toType) ::= <<
+
+/**
+ * @since 7.0
+ */
+public Lazy<toName>Iterable collect<toName>(<fromName>To<toName>Function function)
+{
+    return new Collect<fromName>To<toName>Iterable(this, function);
+}
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.lazy.primitive;
+
+import org.eclipse.collections.api.<name>Iterable;
+import org.eclipse.collections.api.LazyBooleanIterable;
+import org.eclipse.collections.api.LazyByteIterable;
+import org.eclipse.collections.api.LazyCharIterable;
+import org.eclipse.collections.api.LazyDoubleIterable;
+import org.eclipse.collections.api.LazyFloatIterable;
+import org.eclipse.collections.api.LazyIntIterable;
+import org.eclipse.collections.api.LazyIterable;
+import org.eclipse.collections.api.LazyLongIterable;
+import org.eclipse.collections.api.LazyShortIterable;
+import org.eclipse.collections.api.LazyIterable;
+import org.eclipse.collections.api.bag.primitive.Mutable<name>Bag;
+import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
+import org.eclipse.collections.api.block.function.primitive.<name>ToBooleanFunction;
+import org.eclipse.collections.api.block.function.primitive.<name>ToByteFunction;
+import org.eclipse.collections.api.block.function.primitive.<name>ToCharFunction;
+import org.eclipse.collections.api.block.function.primitive.<name>ToDoubleFunction;
+import org.eclipse.collections.api.block.function.primitive.<name>ToFloatFunction;
+import org.eclipse.collections.api.block.function.primitive.<name>ToIntFunction;
+import org.eclipse.collections.api.block.function.primitive.<name>ToLongFunction;
+import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
+import org.eclipse.collections.api.block.function.primitive.<name>ToShortFunction;
+import org.eclipse.collections.api.block.function.primitive.Object<name>ToObjectFunction;
+import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
+import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
+import org.eclipse.collections.api.list.primitive.Mutable<name>List;
+import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
+import org.eclipse.collections.impl.bag.mutable.primitive.<name>HashBag;
+import org.eclipse.collections.impl.block.factory.primitive.<name>Predicates;
+import org.eclipse.collections.impl.factory.primitive.<name>Sets;
+import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
+import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
+import org.eclipse.collections.impl.utility.internal.primitive.<name>IterableIterate;
+import org.eclipse.collections.impl.utility.primitive.Lazy<name>Iterate;
+
+import java.util.NoSuchElementException;
+
+/**
+ * This file was automatically generated from template file abstractLazyPrimitiveIterable.stg.
+ *
+ * @since 5.0
+ */
+public abstract class AbstractLazy<name>Iterable implements Lazy<name>Iterable
+{
+    public void forEach(<name>Procedure procedure)
+    {
+        this.each(procedure);
+    }
+
+    public int size()
+    {
+        return this.count(<name>Predicates.alwaysTrue());
+    }
+
+    @Override
+    public String toString()
+    {
+        return this.makeString("[", ", ", "]");
+    }
+
+    public boolean isEmpty()
+    {
+        return <name>IterableIterate.isEmpty(this);
+    }
+
+    public boolean notEmpty()
+    {
+        return <name>IterableIterate.notEmpty(this);
+    }
+
+    public String makeString()
+    {
+        return this.makeString(", ");
+    }
+
+    public String makeString(String separator)
+    {
+        return this.makeString("", separator, "");
+    }
+
+    public String makeString(String start, String separator, String end)
+    {
+        Appendable stringBuilder = new StringBuilder();
+        this.appendString(stringBuilder, start, separator, end);
+        return stringBuilder.toString();
+    }
+
+    public void appendString(Appendable appendable)
+    {
+        this.appendString(appendable, ", ");
+    }
+
+    public void appendString(Appendable appendable, String separator)
+    {
+        this.appendString(appendable, "", separator, "");
+    }
+
+    public void appendString(Appendable appendable, String start, String separator, String end)
+    {
+        <name>IterableIterate.appendString(this, appendable, start, separator, end);
+    }
+
+    public boolean contains(<type> value)
+    {
+        return this.anySatisfy(<name>Predicates.equal(value));
+    }
+
+    public boolean containsAll(<type>... source)
+    {
+        return this.containsAll(<name>Sets.immutable.of(source));
+    }
+
+    public boolean containsAll(<name>Iterable source)
+    {
+        return source.allSatisfy(new <name>Predicate()
+        {
+            public boolean accept(<type> value)
+            {
+                return AbstractLazy<name>Iterable.this.contains(value);
+            }
+        });
+    }
+
+    public Lazy<name>Iterable select(<name>Predicate predicate)
+    {
+        return Lazy<name>Iterate.select(this, predicate);
+    }
+
+    public Lazy<name>Iterable reject(<name>Predicate predicate)
+    {
+        return Lazy<name>Iterate.select(this, <name>Predicates.not(predicate));
+    }
+
+    public \<V> LazyIterable\<V> collect(<name>ToObjectFunction\<? extends V> function)
+    {
+        return Lazy<name>Iterate.collect(this, function);
+    }
+
+    <collectPrimitive(name, type, "Boolean", "boolean")>
+
+    <collectPrimitive(name, type, "Byte", "byte")>
+
+    <collectPrimitive(name, type, "Char", "char")>
+
+    <collectPrimitive(name, type, "Short", "short")>
+
+    <collectPrimitive(name, type, "Int", "int")>
+
+    <collectPrimitive(name, type, "Float", "float")>
+
+    <collectPrimitive(name, type, "Long", "long")>
+
+    <collectPrimitive(name, type, "Double", "double")>
+
+    public <type> detectIfNone(<name>Predicate predicate, <type> ifNone)
+    {
+        return <name>IterableIterate.detectIfNone(this, predicate, ifNone);
+    }
+
+    public int count(<name>Predicate predicate)
+    {
+        return <name>IterableIterate.count(this, predicate);
+    }
+
+    public boolean anySatisfy(<name>Predicate predicate)
+    {
+        return <name>IterableIterate.anySatisfy(this, predicate);
+    }
+
+    public boolean allSatisfy(<name>Predicate predicate)
+    {
+        return <name>IterableIterate.allSatisfy(this, predicate);
+    }
+
+    public boolean noneSatisfy(<name>Predicate predicate)
+    {
+        return <name>IterableIterate.noneSatisfy(this, predicate);
+    }
+
+    public \<T> T injectInto(T injectedValue, Object<name>ToObjectFunction\<? super T, ? extends T> function)
+    {
+        return <name>IterableIterate.injectInto(this, injectedValue, function);
+    }
+
+    public <type>[] toArray()
+    {
+        return this.toList().toArray();
+    }
+
+    public Mutable<name>List toList()
+    {
+        final Mutable<name>List list = new <name>ArrayList();
+        this.forEach(new <name>Procedure()
+        {
+            public void value(<type> each)
+            {
+                list.add(each);
+            }
+        });
+        return list;
+    }
+
+    public Mutable<name>Set toSet()
+    {
+        final Mutable<name>Set set = new <name>HashSet();
+        this.forEach(new <name>Procedure()
+        {
+            public void value(<type> each)
+            {
+                set.add(each);
+            }
+        });
+        return set;
+    }
+
+    public Mutable<name>Bag toBag()
+    {
+        final Mutable<name>Bag bag = new <name>HashBag();
+        this.forEach(new <name>Procedure()
+        {
+            public void value(<type> each)
+            {
+                bag.add(each);
+            }
+        });
+        return bag;
+    }
+
+    <(arithmeticMethods.(type))()>
+    public Lazy<name>Iterable asLazy()
+    {
+        return this;
+    }
+}
+
+>>
+
+arithmeticMethods ::= [
+    "boolean": "noMethods",
+    "default": "allMethods"
+    ]
+
+allMethods() ::= <<
+public <wideType.(type)> sum()
+{
+    <name>SumProcedure procedure = new <name>SumProcedure();
+    this.forEach(procedure);
+    return procedure.getValue();
+}
+
+public <type> max()
+{
+    if (this.isEmpty())
+    {
+        throw new NoSuchElementException();
+    }
+    <name>MaxProcedure procedure = new <name>MaxProcedure();
+    this.forEach(procedure);
+    return procedure.getValue();
+}
+
+public <type> maxIfEmpty(<type> ifEmpty)
+{
+    if (this.isEmpty())
+    {
+        return ifEmpty;
+    }
+    return this.max();
+}
+
+public <type> min()
+{
+    if (this.isEmpty())
+    {
+        throw new NoSuchElementException();
+    }
+    <name>MinProcedure procedure = new <name>MinProcedure();
+    this.forEach(procedure);
+    return procedure.getValue();
+}
+
+public <type> minIfEmpty(<type> ifEmpty)
+{
+    if (this.isEmpty())
+    {
+        return ifEmpty;
+    }
+    return this.min();
+}
+
+public double average()
+{
+    if (this.isEmpty())
+    {
+        throw new ArithmeticException();
+    }
+    return (double) this.sum() / (double) this.size();
+}
+
+public double median()
+{
+    if (this.isEmpty())
+    {
+        throw new ArithmeticException();
+    }
+    <type>[] sortedArray = this.toSortedArray();
+    int middleIndex = sortedArray.length >\> 1;
+    if (sortedArray.length > 1 && (sortedArray.length & 1) == 0)
+    {
+        <type> first = sortedArray[middleIndex];
+        <type> second = sortedArray[middleIndex - 1];
+        return ((double) first + (double) second) / 2.0;
+    }
+    return (double) sortedArray[middleIndex];
+}
+
+public <type>[] toSortedArray()
+{
+    return this.toSortedList().toArray();
+}
+
+public Mutable<name>List toSortedList()
+{
+    return <name>ArrayList.newList(this).sortThis();
+}
+
+private static final class <name>MaxProcedure implements <name>Procedure
+{
+    private boolean visitedOnce;
+    private <type> max;
+
+    public void value(<type> each)
+    {
+        if (this.visitedOnce)
+        {
+            if (<(lessThan.(type))("this.max", "each")>)
+            {
+                this.max = each;
+            }
+        }
+        else
+        {
+            this.max = each;
+            this.visitedOnce = true;
+        }
+    }
+
+    public <type> getValue()
+    {
+        return this.max;
+    }
+}
+
+private static final class <name>MinProcedure implements <name>Procedure
+{
+    private boolean visitedOnce;
+    private <type> min;
+
+    public void value(<type> each)
+    {
+        if (this.visitedOnce)
+        {
+            if (<(lessThan.(type))("each", "this.min")>)
+            {
+                this.min = each;
+            }
+        }
+        else
+        {
+            this.min = each;
+            this.visitedOnce = true;
+        }
+    }
+
+    public <type> getValue()
+    {
+        return this.min;
+    }
+}
+
+<if(primitive.floatingPoint)>private static final class <name>SumProcedure implements <name>Procedure
+{
+    private <wideType.(type)> sum = <wideZero.(type)>;
+    private <wideType.(type)> compensation = <wideZero.(type)>;
+
+    public void value(<type> each)
+    {
+        <wideType.(type)> adjustedValue = each - this.compensation;
+        <wideType.(type)> nextSum = this.sum + adjustedValue;
+        this.compensation = nextSum - this.sum - adjustedValue;
+        this.sum = nextSum;
+    }
+
+    public <wideType.(type)> getValue()
+    {
+        return this.sum;
+    }
+}
+
+<elseif(!primitive.booleanPrimitive)>private static final class <name>SumProcedure implements <name>Procedure
+{
+    private <type> sum = 0;
+
+    public void value(<type> each)
+    {
+        this.sum += each;
+    }
+
+    public <type> getValue()
+    {
+        return this.sum;
+    }
+}
+
+<endif>
+>>
+
+noMethods() ::= ""

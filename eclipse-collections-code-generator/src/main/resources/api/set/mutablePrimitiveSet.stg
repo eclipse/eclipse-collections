@@ -1,0 +1,51 @@
+import "copyright.stg"
+import "primitiveAPI.stg"
+
+targetPath() ::= "org/eclipse/collections/api/set/primitive"
+
+fileName(primitive) ::= "Mutable<primitive.name>Set"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.api.set.primitive;
+
+import org.eclipse.collections.api.<name>Iterable;
+import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
+import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
+import org.eclipse.collections.api.collection.primitive.Mutable<name>Collection;
+import org.eclipse.collections.api.set.MutableSet;
+
+/**
+ * This file was automatically generated from template file mutablePrimitiveSet.stg.
+ *
+ * @since 3.0.
+ */
+public interface Mutable<name>Set extends Mutable<name>Collection, <name>Set
+{
+    <sharedAPI(fileName(primitive), name)>
+
+    \<V> MutableSet\<V> collect(<name>ToObjectFunction\<? extends V> function);
+
+    <mutableAPI(fileName(primitive), type, name)>
+
+    Mutable<name>Set asUnmodifiable();
+
+    Mutable<name>Set asSynchronized();
+
+    /**
+     * Returns a frozen copy of this set. A frozen copy is the same thing as an immutable copy without safe-publish guarantees.
+     */
+    <name>Set freeze();
+
+    /**
+     * Returns an immutable copy of this set.
+     */
+    Immutable<name>Set toImmutable();
+}
+
+>>

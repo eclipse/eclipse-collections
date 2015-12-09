@@ -1,0 +1,153 @@
+import "copyright.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+import "primitiveEquals.stg"
+
+skipBoolean() ::= "true"
+
+isTest() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/map/mutable/primitive"
+
+fileName(primitive) ::= "Object<primitive.name>HashMapWithHashingStrategyKeySetTest"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name, primitive.wrapperName)>
+>>
+
+body(type, name, wrapperName) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.map.mutable.primitive;
+
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+import java.util.Set;
+
+import org.eclipse.collections.api.block.HashingStrategy;
+import org.eclipse.collections.api.map.primitive.MutableObject<name>Map;
+import org.eclipse.collections.impl.bag.mutable.HashBag;
+import org.eclipse.collections.impl.block.factory.HashingStrategies;
+import org.eclipse.collections.impl.list.mutable.FastList;
+import org.eclipse.collections.impl.set.mutable.UnifiedSet;
+import org.eclipse.collections.impl.test.Verify;
+import org.eclipse.collections.impl.test.domain.Person;
+import org.junit.Assert;
+import org.junit.Test;
+
+/**
+ * JUnit test for {@link Object<name>HashMapWithHashingStrategy#keySet()}.
+ * This file was automatically generated from template file objectPrimitiveHashMapKeySetTest.stg.
+ */
+public class Object<name>HashMapWithHashingStrategyKeySetTest extends Object<name>HashMapKeySetTestCase
+{
+    private static final HashingStrategy\<String> STRING_HASHING_STRATEGY = HashingStrategies.nullSafeHashingStrategy(new HashingStrategy\<String>()
+        {
+            public int computeHashCode(String object)
+            {
+                return object.hashCode();
+            }
+
+            public boolean equals(String object1, String object2)
+            {
+                return object1.equals(object2);
+            }
+        });
+
+    private static final HashingStrategy\<Person> FIRST_NAME_HASHING_STRATEGY = HashingStrategies.fromFunction(Person.TO_FIRST);
+    private static final HashingStrategy\<Person> LAST_NAME_HASHING_STRATEGY = HashingStrategies.fromFunction(Person.TO_LAST);
+
+    private static final Person JOHNSMITH = new Person("John", "Smith");
+    private static final Person JANESMITH = new Person("Jane", "Smith");
+    private static final Person JOHNDOE = new Person("John", "Doe");
+    private static final Person JANEDOE = new Person("Jane", "Doe");
+
+    @Override
+    public MutableObject<name>Map\<String> newMapWithKeysValues(String key1, <type> value1)
+    {
+        return Object<name>HashMapWithHashingStrategy.newWithKeysValues(STRING_HASHING_STRATEGY, key1, value1);
+    }
+
+    @Override
+    public MutableObject<name>Map\<String> newMapWithKeysValues(String key1, <type> value1, String key2, <type> value2)
+    {
+        return Object<name>HashMapWithHashingStrategy.newWithKeysValues(STRING_HASHING_STRATEGY, key1, value1, key2, value2);
+    }
+
+    @Override
+    public MutableObject<name>Map\<String> newMapWithKeysValues(String key1, <type> value1, String key2, <type> value2, String key3, <type> value3)
+    {
+        return Object<name>HashMapWithHashingStrategy.newWithKeysValues(STRING_HASHING_STRATEGY, key1, value1, key2, value2, key3, value3);
+    }
+
+    @Override
+    public MutableObject<name>Map\<String> newMapWithKeysValues(String key1, <type> value1, String key2, <type> value2, String key3, <type> value3, String key4, <type> value4)
+    {
+        return Object<name>HashMapWithHashingStrategy.newWithKeysValues(STRING_HASHING_STRATEGY, key1, value1, key2, value2, key3, value3, key4, value4);
+    }
+
+    @Override
+    public MutableObject<name>Map\<String> newEmptyMap()
+    {
+        return Object<name>HashMapWithHashingStrategy.newMap(STRING_HASHING_STRATEGY);
+    }
+
+    @Override
+    @Test
+    public void contains()
+    {
+        super.contains();
+
+        Set\<Person> people = Object<name>HashMapWithHashingStrategy.newWithKeysValues(LAST_NAME_HASHING_STRATEGY, <allPeople()>).keySet();
+
+        Verify.assertSize(2, people);
+
+        Verify.assertContains(JANEDOE, people);
+        Verify.assertContains(JOHNDOE, people);
+        Verify.assertContains(JANESMITH, people);
+        Verify.assertContains(JOHNSMITH, people);
+    }
+
+    @Override
+    @Test
+    public void removeFromKeySet()
+    {
+        super.removeFromKeySet();
+
+        MutableObject<name>Map\<Person> map = Object<name>HashMapWithHashingStrategy.newWithKeysValues(LAST_NAME_HASHING_STRATEGY, <allPeople()>);
+        Set\<Person> people = map.keySet();
+        people.remove(JOHNDOE);
+        Assert.assertEquals(map, Object<name>HashMapWithHashingStrategy.newWithKeysValues(LAST_NAME_HASHING_STRATEGY, JOHNSMITH, <(literal.(type))("4")>));
+    }
+
+    @Override
+    @Test
+    public void keySetEqualsAndHashCode()
+    {
+        super.keySetEqualsAndHashCode();
+
+        Set\<Person> people1 = Object<name>HashMapWithHashingStrategy.newWithKeysValues(LAST_NAME_HASHING_STRATEGY, JOHNDOE, <(literal.(type))("1")>, JOHNSMITH, <(literal.(type))("3")>).keySet();
+        Set\<Person> people2 = Object<name>HashMapWithHashingStrategy.newWithKeysValues(LAST_NAME_HASHING_STRATEGY, JANEDOE, <(literal.(type))("2")>, JANESMITH, <(literal.(type))("4")>).keySet();
+
+        Assert.assertTrue(people1.hashCode() == people2.hashCode());
+    }
+
+    @Override
+    @Test
+    public void keySetToArray()
+    {
+        super.keySetToArray();
+
+        Set\<Person> people = Object<name>HashMapWithHashingStrategy.newWithKeysValues(LAST_NAME_HASHING_STRATEGY, <allPeople()>).keySet();
+        Object[] keys1 = {JOHNDOE, JOHNSMITH};
+        Assert.assertArrayEquals(people.toArray(), keys1);
+        Person[] keys2 = new Person[2];
+        Assert.assertArrayEquals(people.toArray(keys2), keys1);
+    }
+}
+
+>>
+
+allPeople() ::= <<
+JOHNDOE, <(literal.(type))("1")>, JANEDOE, <(literal.(type))("2")>, JOHNSMITH, <(literal.(type))("3")>, JANESMITH, <(literal.(type))("4")>
+>>

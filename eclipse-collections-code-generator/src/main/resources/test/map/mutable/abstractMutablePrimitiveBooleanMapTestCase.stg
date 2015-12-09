@@ -1,0 +1,655 @@
+import "copyright.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+import "primitiveEquals.stg"
+
+skipBoolean() ::= "true"
+
+isTest() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/map/mutable/primitive"
+
+fileName(primitive) ::= "AbstractMutable<primitive.name>BooleanMapTestCase"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.map.mutable.primitive;
+
+import java.util.NoSuchElementException;
+
+import org.eclipse.collections.api.block.function.primitive.BooleanFunction;
+import org.eclipse.collections.api.block.function.primitive.BooleanFunction0;
+import org.eclipse.collections.api.block.function.primitive.BooleanToBooleanFunction;
+import org.eclipse.collections.api.block.function.primitive.<name>ToBooleanFunction;
+import org.eclipse.collections.api.iterator.MutableBooleanIterator;
+import org.eclipse.collections.api.map.primitive.Mutable<name>BooleanMap;
+import org.eclipse.collections.impl.list.mutable.primitive.BooleanArrayList;
+import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
+import org.eclipse.collections.impl.map.primitive.Abstract<name>BooleanMapTestCase;
+import org.eclipse.collections.impl.test.Verify;
+import org.junit.Assert;
+import org.junit.Test;
+
+/**
+ * This file was automatically generated from template file abstractMutablePrimitiveBooleanMapTestCase.stg.
+ */
+public abstract class AbstractMutable<name>BooleanMapTestCase extends Abstract<name>BooleanMapTestCase
+{
+    protected final Mutable<name>BooleanMap map = this.classUnderTest();
+
+    protected static <name>ArrayList generateCollisions()
+    {
+        <name>ArrayList collisions = new <name>ArrayList();
+        <name>BooleanHashMap hashMap = new <name>BooleanHashMap();
+        for (<type> each = <(literal.(type))("2")>; collisions.size() \<= 10; each++)
+        {
+            if (hashMap.spreadAndMask(each) == hashMap.spreadAndMask(<(literal.(type))("2")>))
+            {
+                collisions.add(each);
+            }
+        }
+        return collisions;
+    }
+
+    @Override
+    protected abstract Mutable<name>BooleanMap classUnderTest();
+
+    @Override
+    protected abstract Mutable<name>BooleanMap newWithKeysValues(<type> key1, boolean value1);
+
+    @Override
+    protected abstract Mutable<name>BooleanMap newWithKeysValues(<type> key1, boolean value1, <type> key2, boolean value2);
+
+    @Override
+    protected abstract Mutable<name>BooleanMap newWithKeysValues(<type> key1, boolean value1, <type> key2, boolean value2, <type> key3, boolean value3);
+
+    @Override
+    protected abstract Mutable<name>BooleanMap newWithKeysValues(<type> key1, boolean value1, <type> key2, boolean value2, <type> key3, boolean value3, <type> key4, boolean value4);
+
+    @Override
+    protected abstract Mutable<name>BooleanMap getEmptyMap();
+
+    @Test
+    public void clear()
+    {
+        this.map.clear();
+        Assert.assertEquals(new <name>BooleanHashMap(), this.map);
+
+        this.map.put(<(literal.(type))("1")>, false);
+        Assert.assertEquals(<name>BooleanHashMap.newWithKeysValues(<(literal.(type))("1")>, false), this.map);
+        this.map.clear();
+        Assert.assertEquals(new <name>BooleanHashMap(), this.map);
+
+        this.map.put(<(literal.(type))("33")>, false);
+        Assert.assertEquals(<name>BooleanHashMap.newWithKeysValues(<(literal.(type))("33")>, false), this.map);
+        this.map.clear();
+        Assert.assertEquals(new <name>BooleanHashMap(), this.map);
+    }
+
+    @Test
+    public void removeKey()
+    {
+        this.map.removeKey(<(literal.(type))("5")>);
+        this.map.removeKey(<(literal.(type))("50")>);
+        Assert.assertEquals(<name>BooleanHashMap.newWithKeysValues(<(literal.(type))("0")>, true, <(literal.(type))("31")>, false, <(literal.(type))("32")>, true), this.map);
+        this.map.removeKey(<(literal.(type))("0")>);
+        Assert.assertEquals(<name>BooleanHashMap.newWithKeysValues(<(literal.(type))("31")>, false, <(literal.(type))("32")>, true), this.map);
+        this.map.removeKey(<(literal.(type))("31")>);
+        Assert.assertEquals(<name>BooleanHashMap.newWithKeysValues(<(literal.(type))("32")>, true), this.map);
+        this.map.removeKey(<(literal.(type))("32")>);
+        Assert.assertEquals(new <name>BooleanHashMap(), this.map);
+        this.map.removeKey(<(literal.(type))("0")>);
+        this.map.removeKey(<(literal.(type))("31")>);
+        this.map.removeKey(<(literal.(type))("32")>);
+        Assert.assertEquals(new <name>BooleanHashMap(), this.map);
+        Verify.assertEmpty(this.map);
+
+        this.map.put(AbstractMutable<name>BooleanMapTestCase.generateCollisions().get(0), true);
+        this.map.put(AbstractMutable<name>BooleanMapTestCase.generateCollisions().get(1), false);
+
+        Assert.assertTrue(this.map.get(AbstractMutable<name>BooleanMapTestCase.generateCollisions().get(0)));
+        this.map.removeKey(AbstractMutable<name>BooleanMapTestCase.generateCollisions().get(0));
+        Assert.assertFalse(this.map.get(AbstractMutable<name>BooleanMapTestCase.generateCollisions().get(0)));
+
+        Assert.assertFalse(this.map.get(AbstractMutable<name>BooleanMapTestCase.generateCollisions().get(1)));
+        this.map.removeKey(AbstractMutable<name>BooleanMapTestCase.generateCollisions().get(1));
+        Assert.assertFalse(this.map.get(AbstractMutable<name>BooleanMapTestCase.generateCollisions().get(1)));
+
+        Mutable<name>BooleanMap map1 = this.newWithKeysValues(<(literal.(type))("1")>, true);
+        map1.removeKey(<(literal.(type))("1")>);
+        Assert.assertEquals(new <name>BooleanHashMap(), map1);
+    }
+
+    @Test
+    public void removeKeyIfAbsent()
+    {
+        Assert.assertTrue(this.map.removeKeyIfAbsent(<(literal.(type))("5")>, true));
+        Assert.assertFalse(this.map.removeKeyIfAbsent(<(literal.(type))("50")>, false));
+        Assert.assertEquals(<name>BooleanHashMap.newWithKeysValues(<(literal.(type))("0")>, true, <(literal.(type))("31")>, false, <(literal.(type))("32")>, true), this.map);
+        Assert.assertTrue(this.map.removeKeyIfAbsent(<(literal.(type))("0")>, false));
+        Assert.assertEquals(<name>BooleanHashMap.newWithKeysValues(<(literal.(type))("31")>, false, <(literal.(type))("32")>, true), this.map);
+        Assert.assertFalse(this.map.removeKeyIfAbsent(<(literal.(type))("31")>, true));
+        Assert.assertEquals(<name>BooleanHashMap.newWithKeysValues(<(literal.(type))("32")>, true), this.map);
+        Assert.assertTrue(this.map.removeKeyIfAbsent(<(literal.(type))("32")>, false));
+        Assert.assertEquals(new <name>BooleanHashMap(), this.map);
+        Assert.assertTrue(this.map.removeKeyIfAbsent(<(literal.(type))("0")>, true));
+        Assert.assertFalse(this.map.removeKeyIfAbsent(<(literal.(type))("31")>, false));
+        Assert.assertFalse(this.map.removeKeyIfAbsent(<(literal.(type))("32")>, false));
+        Assert.assertEquals(new <name>BooleanHashMap(), this.map);
+        Verify.assertEmpty(this.map);
+
+        this.map.put(AbstractMutable<name>BooleanMapTestCase.generateCollisions().get(0), true);
+        this.map.put(AbstractMutable<name>BooleanMapTestCase.generateCollisions().get(1), false);
+
+        Assert.assertTrue(this.map.get(AbstractMutable<name>BooleanMapTestCase.generateCollisions().get(0)));
+        Assert.assertTrue(this.map.removeKeyIfAbsent(AbstractMutable<name>BooleanMapTestCase.generateCollisions().get(0), false));
+        Assert.assertFalse(this.map.get(AbstractMutable<name>BooleanMapTestCase.generateCollisions().get(0)));
+
+        Assert.assertFalse(this.map.get(AbstractMutable<name>BooleanMapTestCase.generateCollisions().get(1)));
+        Assert.assertFalse(this.map.removeKeyIfAbsent(AbstractMutable<name>BooleanMapTestCase.generateCollisions().get(1), true));
+        Assert.assertFalse(this.map.get(AbstractMutable<name>BooleanMapTestCase.generateCollisions().get(1)));
+
+        Assert.assertTrue(this.classUnderTest().withKeyValue(<(literal.(type))("1")>, true).removeKeyIfAbsent(<(literal.(type))("0")>, false));
+
+        Mutable<name>BooleanMap map1 = this.classUnderTest().withKeyValue(<(literal.(type))("1")>, true);
+        Assert.assertTrue(map1.removeKeyIfAbsent(<(literal.(type))("1")>, false));
+        Assert.assertTrue(map1.removeKeyIfAbsent(<(literal.(type))("0")>, false));
+        Assert.assertFalse(map1.removeKeyIfAbsent(<(literal.(type))("1")>, false));
+
+        Mutable<name>BooleanMap map2 = this.newWithKeysValues(<(literal.(type))("1")>, true);
+        Assert.assertTrue(map2.removeKeyIfAbsent(<(literal.(type))("1")>, false));
+    }
+
+    @Test
+    public void put()
+    {
+        this.map.put(<(literal.(type))("0")>, false);
+        this.map.put(<(literal.(type))("31")>, true);
+        this.map.put(<(literal.(type))("32")>, false);
+        Mutable<name>BooleanMap expected = this.newWithKeysValues(<(literal.(type))("0")>, false, <(literal.(type))("31")>, true, <(literal.(type))("32")>, false);
+        Assert.assertEquals(expected, this.map);
+
+        this.map.put(<(literal.(type))("1")>, true);
+        expected.put(<(literal.(type))("1")>, true);
+        Assert.assertEquals(expected, this.map);
+
+        this.map.put(<(literal.(type))("33")>, false);
+        expected.put(<(literal.(type))("33")>, false);
+        Assert.assertEquals(expected, this.map);
+
+        this.map.put(<(literal.(type))("30")>, true);
+        expected.put(<(literal.(type))("30")>, true);
+        Assert.assertEquals(expected, this.map);
+    }
+
+    @Test
+    public void putDuplicateWithRemovedSlot()
+    {
+        <type> collision1 = AbstractMutable<name>BooleanMapTestCase.generateCollisions().getFirst();
+        <type> collision2 = AbstractMutable<name>BooleanMapTestCase.generateCollisions().get(1);
+        <type> collision3 = AbstractMutable<name>BooleanMapTestCase.generateCollisions().get(2);
+        <type> collision4 = AbstractMutable<name>BooleanMapTestCase.generateCollisions().get(3);
+
+        Mutable<name>BooleanMap hashMap = this.getEmptyMap();
+        hashMap.put(collision1, true);
+        hashMap.put(collision2, false);
+        hashMap.put(collision3, true);
+        Assert.assertFalse(hashMap.get(collision2));
+        hashMap.removeKey(collision2);
+        hashMap.put(collision4, false);
+        Assert.assertEquals(<name>BooleanHashMap.newWithKeysValues(collision1, true, collision3, true, collision4, false), hashMap);
+
+        Mutable<name>BooleanMap hashMap1 = this.getEmptyMap();
+        hashMap1.put(collision1, false);
+        hashMap1.put(collision2, true);
+        hashMap1.put(collision3, false);
+        Assert.assertFalse(hashMap1.get(collision1));
+        hashMap1.removeKey(collision1);
+        hashMap1.put(collision4, true);
+        Assert.assertEquals(<name>BooleanHashMap.newWithKeysValues(collision2, true, collision3, false, collision4, true), hashMap1);
+
+        Mutable<name>BooleanMap hashMap2 = this.getEmptyMap();
+        hashMap2.put(collision1, true);
+        hashMap2.put(collision2, false);
+        hashMap2.put(collision3, true);
+        Assert.assertTrue(hashMap2.get(collision3));
+        hashMap2.removeKey(collision3);
+        hashMap2.put(collision4, false);
+        Assert.assertEquals(<name>BooleanHashMap.newWithKeysValues(collision1, true, collision2, false, collision4, false), hashMap2);
+    }
+
+    @Override
+    @Test
+    public void get()
+    {
+        super.get();
+
+        this.map.put(<(literal.(type))("0")>, false);
+        Assert.assertFalse(this.map.get(<(literal.(type))("0")>));
+
+        this.map.put(<(literal.(type))("1")>, true);
+        Assert.assertTrue(this.map.get(<(literal.(type))("1")>));
+
+        this.map.put(<(literal.(type))("5")>, true);
+        Assert.assertTrue(this.map.get(<(literal.(type))("5")>));
+
+        this.map.put(<(literal.(type))("35")>, false);
+        Assert.assertFalse(this.map.get(<(literal.(type))("35")>));
+    }
+
+    @Override
+    @Test
+    public void getIfAbsent()
+    {
+        super.getIfAbsent();
+
+        this.map.removeKey(<(literal.(type))("0")>);
+        Assert.assertFalse(this.map.getIfAbsent(<(literal.(type))("0")>, false));
+        Assert.assertTrue(this.map.getIfAbsent(<(literal.(type))("0")>, true));
+
+        Assert.assertFalse(this.map.getIfAbsent(<(literal.(type))("1")>, false));
+        Assert.assertTrue(this.map.getIfAbsent(<(literal.(type))("1")>, true));
+
+        Assert.assertFalse(this.map.getIfAbsent(<(literal.(type))("33")>, false));
+        Assert.assertTrue(this.map.getIfAbsent(<(literal.(type))("33")>, true));
+
+        this.map.put(<(literal.(type))("0")>, false);
+        Assert.assertFalse(this.map.getIfAbsent(<(literal.(type))("0")>, true));
+
+        this.map.put(<(literal.(type))("1")>, true);
+        Assert.assertTrue(this.map.getIfAbsent(<(literal.(type))("1")>, false));
+
+        this.map.put(<(literal.(type))("5")>, false);
+        Assert.assertFalse(this.map.getIfAbsent(<(literal.(type))("5")>, true));
+
+        this.map.put(<(literal.(type))("35")>, true);
+        Assert.assertTrue(this.map.getIfAbsent(<(literal.(type))("35")>, false));
+    }
+
+    @Override
+    @Test
+    public void getOrThrow()
+    {
+        super.getOrThrow();
+
+        this.map.removeKey(<(literal.(type))("0")>);
+        Verify.assertThrows(IllegalStateException.class, () -> this.map.getOrThrow(<(literal.(type))("0")>));
+
+        this.map.put(<(literal.(type))("0")>, false);
+        Assert.assertFalse(this.map.getOrThrow(<(literal.(type))("0")>));
+
+        this.map.put(<(literal.(type))("1")>, true);
+        Assert.assertTrue(this.map.getOrThrow(<(literal.(type))("1")>));
+
+        this.map.put(<(literal.(type))("5")>, false);
+        Assert.assertFalse(this.map.getOrThrow(<(literal.(type))("5")>));
+
+        this.map.put(<(literal.(type))("35")>, true);
+        Assert.assertTrue(this.map.getOrThrow(<(literal.(type))("35")>));
+    }
+
+    @Test
+    public void getIfAbsentPut()
+    {
+        Mutable<name>BooleanMap map1 = this.getEmptyMap();
+        Assert.assertTrue(map1.getIfAbsentPut(<(literal.(type))("0")>, true));
+        Assert.assertTrue(map1.getIfAbsentPut(<(literal.(type))("0")>, false));
+        Assert.assertEquals(<name>BooleanHashMap.newWithKeysValues(<(literal.(type))("0")>, true), map1);
+        Assert.assertFalse(map1.getIfAbsentPut(<(literal.(type))("1")>, false));
+        Assert.assertFalse(map1.getIfAbsentPut(<(literal.(type))("1")>, true));
+        Assert.assertEquals(<name>BooleanHashMap.newWithKeysValues(<(literal.(type))("0")>, true, <(literal.(type))("1")>, false), map1);
+
+        Mutable<name>BooleanMap map2 = this.getEmptyMap();
+        Assert.assertTrue(map2.getIfAbsentPut(<(literal.(type))("1")>, true));
+        Assert.assertTrue(map2.getIfAbsentPut(<(literal.(type))("1")>, false));
+        Assert.assertEquals(<name>BooleanHashMap.newWithKeysValues(<(literal.(type))("1")>, true), map2);
+        Assert.assertFalse(map2.getIfAbsentPut(<(literal.(type))("0")>, false));
+        Assert.assertFalse(map2.getIfAbsentPut(<(literal.(type))("0")>, true));
+        Assert.assertEquals(<name>BooleanHashMap.newWithKeysValues(<(literal.(type))("0")>, false, <(literal.(type))("1")>, true), map2);
+
+        Mutable<name>BooleanMap map3 = this.getEmptyMap();
+        Assert.assertTrue(map3.getIfAbsentPut(<(literal.(type))("32")>, true));
+        Assert.assertTrue(map3.getIfAbsentPut(<(literal.(type))("32")>, false));
+        Assert.assertEquals(<name>BooleanHashMap.newWithKeysValues(<(literal.(type))("32")>, true), map3);
+
+        Mutable<name>BooleanMap map4 = this.getEmptyMap();
+        Assert.assertFalse(map4.getIfAbsentPut(<(literal.(type))("33")>, false));
+        Assert.assertFalse(map4.getIfAbsentPut(<(literal.(type))("33")>, true));
+        Assert.assertEquals(<name>BooleanHashMap.newWithKeysValues(<(literal.(type))("33")>, false), map4);
+    }
+
+    @Test
+    public void getIfAbsentPut_Function()
+    {
+        BooleanFunction0 factory = () -> true;
+        BooleanFunction0 factoryThrows = () -> { throw new AssertionError(); };
+
+        Mutable<name>BooleanMap map1 = this.getEmptyMap();
+        Assert.assertTrue(map1.getIfAbsentPut(<(literal.(type))("0")>, factory));
+        Assert.assertTrue(map1.getIfAbsentPut(<(literal.(type))("0")>, factoryThrows));
+        Assert.assertEquals(<name>BooleanHashMap.newWithKeysValues(<(literal.(type))("0")>, true), map1);
+        Assert.assertTrue(map1.getIfAbsentPut(<(literal.(type))("1")>, factory));
+        Assert.assertTrue(map1.getIfAbsentPut(<(literal.(type))("1")>, factoryThrows));
+        Assert.assertEquals(<name>BooleanHashMap.newWithKeysValues(<(literal.(type))("0")>, true, <(literal.(type))("1")>, true), map1);
+
+        Mutable<name>BooleanMap map2 = this.getEmptyMap();
+        Assert.assertTrue(map2.getIfAbsentPut(<(literal.(type))("1")>, factory));
+        Assert.assertTrue(map2.getIfAbsentPut(<(literal.(type))("1")>, factoryThrows));
+        Assert.assertEquals(<name>BooleanHashMap.newWithKeysValues(<(literal.(type))("1")>, true), map2);
+        Assert.assertTrue(map2.getIfAbsentPut(<(literal.(type))("0")>, factory));
+        Assert.assertTrue(map2.getIfAbsentPut(<(literal.(type))("0")>, factoryThrows));
+        Assert.assertEquals(<name>BooleanHashMap.newWithKeysValues(<(literal.(type))("0")>, true, <(literal.(type))("1")>, true), map2);
+
+        Mutable<name>BooleanMap map3 = this.getEmptyMap();
+        Assert.assertTrue(map3.getIfAbsentPut(<(literal.(type))("32")>, factory));
+        Assert.assertTrue(map3.getIfAbsentPut(<(literal.(type))("32")>, factoryThrows));
+        Assert.assertEquals(<name>BooleanHashMap.newWithKeysValues(<(literal.(type))("32")>, true), map3);
+
+        Mutable<name>BooleanMap map4 = this.getEmptyMap();
+        Assert.assertTrue(map4.getIfAbsentPut(<(literal.(type))("33")>, factory));
+        Assert.assertTrue(map4.getIfAbsentPut(<(literal.(type))("33")>, factoryThrows));
+        Assert.assertEquals(<name>BooleanHashMap.newWithKeysValues(<(literal.(type))("33")>, true), map4);
+    }
+
+    @Test
+    public void getIfAbsentPutWith()
+    {
+        BooleanFunction\<String> functionLengthEven = (String string) -> (string.length() & 1) == <(literal.(type))("0")>;
+        BooleanFunction\<String> functionThrows = (String string) -> { throw new AssertionError(); };
+
+        Mutable<name>BooleanMap map1 = this.getEmptyMap();
+        Assert.assertTrue(map1.getIfAbsentPutWith(<(literal.(type))("0")>, functionLengthEven, "12345678"));
+        Assert.assertTrue(map1.getIfAbsentPutWith(<(literal.(type))("0")>, functionThrows, "unused"));
+        Assert.assertEquals(<name>BooleanHashMap.newWithKeysValues(<(literal.(type))("0")>, true), map1);
+        Assert.assertFalse(map1.getIfAbsentPutWith(<(literal.(type))("1")>, functionLengthEven, "123456789"));
+        Assert.assertFalse(map1.getIfAbsentPutWith(<(literal.(type))("1")>, functionThrows, "unused"));
+        Assert.assertEquals(<name>BooleanHashMap.newWithKeysValues(<(literal.(type))("0")>, true, <(literal.(type))("1")>, false), map1);
+
+        Mutable<name>BooleanMap map2 = this.getEmptyMap();
+        Assert.assertTrue(map2.getIfAbsentPutWith(<(literal.(type))("1")>, functionLengthEven, "12345678"));
+        Assert.assertTrue(map2.getIfAbsentPutWith(<(literal.(type))("1")>, functionThrows, "unused"));
+        Assert.assertEquals(<name>BooleanHashMap.newWithKeysValues(<(literal.(type))("1")>, true), map2);
+        Assert.assertFalse(map2.getIfAbsentPutWith(<(literal.(type))("0")>, functionLengthEven, "123456789"));
+        Assert.assertFalse(map2.getIfAbsentPutWith(<(literal.(type))("0")>, functionThrows, "unused"));
+        Assert.assertEquals(<name>BooleanHashMap.newWithKeysValues(<(literal.(type))("0")>, false, <(literal.(type))("1")>, true), map2);
+
+        Mutable<name>BooleanMap map3 = this.getEmptyMap();
+        Assert.assertTrue(map3.getIfAbsentPutWith(<(literal.(type))("32")>, functionLengthEven, "12345678"));
+        Assert.assertTrue(map3.getIfAbsentPutWith(<(literal.(type))("32")>, functionThrows, "unused"));
+        Assert.assertEquals(<name>BooleanHashMap.newWithKeysValues(<(literal.(type))("32")>, true), map3);
+
+        Mutable<name>BooleanMap map4 = this.getEmptyMap();
+        Assert.assertTrue(map4.getIfAbsentPutWith(<(literal.(type))("33")>, functionLengthEven, "12345678"));
+        Assert.assertTrue(map4.getIfAbsentPutWith(<(literal.(type))("33")>, functionThrows, "unused"));
+        Assert.assertEquals(<name>BooleanHashMap.newWithKeysValues(<(literal.(type))("33")>, true), map4);
+    }
+
+    @Test
+    public void getIfAbsentPutWithKey()
+    {
+        <name>ToBooleanFunction keyIsEven = (<type> parameter) -> (<(castRealTypeToInt.(type))("parameter")> & 1) == <(literal.(type))("0")>;
+        <name>ToBooleanFunction functionThrows = (<type> <type>Parameter) -> { throw new AssertionError(); };
+
+        Mutable<name>BooleanMap map1 = this.getEmptyMap();
+        Assert.assertTrue(map1.getIfAbsentPutWithKey(<(literal.(type))("0")>, keyIsEven));
+        Assert.assertTrue(map1.getIfAbsentPutWithKey(<(literal.(type))("0")>, functionThrows));
+        Assert.assertEquals(<name>BooleanHashMap.newWithKeysValues(<(literal.(type))("0")>, true), map1);
+        Assert.assertFalse(map1.getIfAbsentPutWithKey(<(literal.(type))("1")>, keyIsEven));
+        Assert.assertFalse(map1.getIfAbsentPutWithKey(<(literal.(type))("1")>, functionThrows));
+        Assert.assertEquals(<name>BooleanHashMap.newWithKeysValues(<(literal.(type))("0")>, true, <(literal.(type))("1")>, false), map1);
+
+        Mutable<name>BooleanMap map2 = this.getEmptyMap();
+        Assert.assertFalse(map2.getIfAbsentPutWithKey(<(literal.(type))("1")>, keyIsEven));
+        Assert.assertFalse(map2.getIfAbsentPutWithKey(<(literal.(type))("1")>, functionThrows));
+        Assert.assertEquals(<name>BooleanHashMap.newWithKeysValues(<(literal.(type))("1")>, false), map2);
+        Assert.assertTrue(map2.getIfAbsentPutWithKey(<(literal.(type))("0")>, keyIsEven));
+        Assert.assertTrue(map2.getIfAbsentPutWithKey(<(literal.(type))("0")>, functionThrows));
+        Assert.assertEquals(<name>BooleanHashMap.newWithKeysValues(<(literal.(type))("0")>, true, <(literal.(type))("1")>, false), map2);
+
+        Mutable<name>BooleanMap map3 = this.getEmptyMap();
+        Assert.assertTrue(map3.getIfAbsentPutWithKey(<(literal.(type))("32")>, keyIsEven));
+        Assert.assertTrue(map3.getIfAbsentPutWithKey(<(literal.(type))("32")>, functionThrows));
+        Assert.assertEquals(<name>BooleanHashMap.newWithKeysValues(<(literal.(type))("32")>, true), map3);
+
+        Mutable<name>BooleanMap map4 = this.getEmptyMap();
+        Assert.assertFalse(map4.getIfAbsentPutWithKey(<(literal.(type))("33")>, keyIsEven));
+        Assert.assertFalse(map4.getIfAbsentPutWithKey(<(literal.(type))("33")>, functionThrows));
+        Assert.assertEquals(<name>BooleanHashMap.newWithKeysValues(<(literal.(type))("33")>, false), map4);
+    }
+
+    @Test
+    public void updateValue()
+    {
+        BooleanToBooleanFunction flip = (boolean value) -> !value;
+
+        Mutable<name>BooleanMap map1 = this.getEmptyMap();
+        Assert.assertTrue(map1.updateValue(<(literal.(type))("0")>, false, flip));
+        Assert.assertEquals(<name>BooleanHashMap.newWithKeysValues(<(literal.(type))("0")>, true), map1);
+        Assert.assertFalse(map1.updateValue(<(literal.(type))("0")>, false, flip));
+        Assert.assertEquals(<name>BooleanHashMap.newWithKeysValues(<(literal.(type))("0")>, false), map1);
+        Assert.assertFalse(map1.updateValue(<(literal.(type))("1")>, true, flip));
+        Assert.assertEquals(<name>BooleanHashMap.newWithKeysValues(<(literal.(type))("0")>, false, <(literal.(type))("1")>, false), map1);
+        Assert.assertTrue(map1.updateValue(<(literal.(type))("1")>, true, flip));
+        Assert.assertEquals(<name>BooleanHashMap.newWithKeysValues(<(literal.(type))("0")>, false, <(literal.(type))("1")>, true), map1);
+
+        Mutable<name>BooleanMap map2 = this.getEmptyMap();
+        Assert.assertTrue(map2.updateValue(<(literal.(type))("1")>, false, flip));
+        Assert.assertEquals(<name>BooleanHashMap.newWithKeysValues(<(literal.(type))("1")>, true), map2);
+        Assert.assertFalse(map2.updateValue(<(literal.(type))("1")>, false, flip));
+        Assert.assertEquals(<name>BooleanHashMap.newWithKeysValues(<(literal.(type))("1")>, false), map2);
+        Assert.assertFalse(map2.updateValue(<(literal.(type))("0")>, true, flip));
+        Assert.assertEquals(<name>BooleanHashMap.newWithKeysValues(<(literal.(type))("0")>, false, <(literal.(type))("1")>, false), map2);
+        Assert.assertTrue(map2.updateValue(<(literal.(type))("0")>, true, flip));
+        Assert.assertEquals(<name>BooleanHashMap.newWithKeysValues(<(literal.(type))("0")>, true, <(literal.(type))("1")>, false), map2);
+
+        Mutable<name>BooleanMap map3 = this.getEmptyMap();
+        Assert.assertTrue(map3.updateValue(<(literal.(type))("33")>, false, flip));
+        Assert.assertEquals(<name>BooleanHashMap.newWithKeysValues(<(literal.(type))("33")>, true), map3);
+        Assert.assertFalse(map3.updateValue(<(literal.(type))("33")>, false, flip));
+        Assert.assertEquals(<name>BooleanHashMap.newWithKeysValues(<(literal.(type))("33")>, false), map3);
+    }
+
+    @Override
+    @Test
+    public void containsKey()
+    {
+        super.containsKey();
+
+        this.map.removeKey(<(literal.(type))("0")>);
+        Assert.assertFalse(this.map.containsKey(<(literal.(type))("0")>));
+        Assert.assertFalse(this.map.get(<(literal.(type))("0")>));
+        this.map.removeKey(<(literal.(type))("0")>);
+        Assert.assertFalse(this.map.containsKey(<(literal.(type))("0")>));
+        Assert.assertFalse(this.map.get(<(literal.(type))("0")>));
+
+        this.map.removeKey(<(literal.(type))("1")>);
+        Assert.assertFalse(this.map.containsKey(<(literal.(type))("1")>));
+        Assert.assertFalse(this.map.get(<(literal.(type))("1")>));
+
+        this.map.removeKey(<(literal.(type))("31")>);
+        Assert.assertFalse(this.map.containsKey(<(literal.(type))("31")>));
+        Assert.assertFalse(this.map.get(<(literal.(type))("31")>));
+
+        this.map.removeKey(<(literal.(type))("32")>);
+        Assert.assertFalse(this.map.containsKey(<(literal.(type))("32")>));
+        Assert.assertFalse(this.map.get(<(literal.(type))("32")>));
+    }
+
+    @Override
+    @Test
+    public void containsValue()
+    {
+        super.containsValue();
+
+        this.map.clear();
+        this.map.put(<(literal.(type))("35")>, true);
+        Assert.assertTrue(this.map.containsValue(true));
+
+        this.map.removeKey(<(literal.(type))("35")>);
+        Assert.assertFalse(this.map.containsValue(false));
+        Assert.assertFalse(this.map.containsValue(true));
+    }
+
+    @Override
+    @Test
+    public void contains()
+    {
+        super.contains();
+
+        this.map.clear();
+        this.map.put(<(literal.(type))("35")>, true);
+        Assert.assertTrue(this.map.contains(true));
+
+        this.map.removeKey(<(literal.(type))("35")>);
+        Assert.assertFalse(this.map.contains(false));
+        Assert.assertFalse(this.map.contains(true));
+    }
+
+    @Override
+    @Test
+    public void containsAll()
+    {
+        super.containsAll();
+        this.map.clear();
+
+        this.map.put(<(literal.(type))("5")>, true);
+        Assert.assertTrue(this.map.containsAll(true));
+        Assert.assertFalse(this.map.containsAll(true, false));
+        Assert.assertFalse(this.map.containsAll(false, false));
+
+        this.map.put(<(literal.(type))("0")>, false);
+        Assert.assertTrue(this.map.containsAll(false));
+        Assert.assertTrue(this.map.containsAll(true, false));
+
+        this.map.removeKey(<(literal.(type))("5")>);
+        Assert.assertFalse(this.map.containsAll(true));
+        Assert.assertFalse(this.map.containsAll(true, false));
+        Assert.assertTrue(this.map.containsAll(false, false));
+
+        this.map.removeKey(<(literal.(type))("0")>);
+        Assert.assertFalse(this.map.containsAll(false, true));
+    }
+
+    @Override
+    @Test
+    public void containsAllIterable()
+    {
+        super.containsAllIterable();
+        this.map.clear();
+
+        this.map.put(<(literal.(type))("5")>, true);
+        Assert.assertTrue(this.map.containsAll(BooleanArrayList.newListWith(true)));
+        Assert.assertFalse(this.map.containsAll(BooleanArrayList.newListWith(true, false)));
+        Assert.assertFalse(this.map.containsAll(BooleanArrayList.newListWith(false, false)));
+
+        this.map.put(<(literal.(type))("0")>, false);
+        Assert.assertTrue(this.map.containsAll(BooleanArrayList.newListWith(false)));
+        Assert.assertTrue(this.map.containsAll(BooleanArrayList.newListWith(true, false)));
+
+        this.map.removeKey(<(literal.(type))("5")>);
+        Assert.assertFalse(this.map.containsAll(BooleanArrayList.newListWith(true)));
+        Assert.assertFalse(this.map.containsAll(BooleanArrayList.newListWith(true, false)));
+        Assert.assertTrue(this.map.containsAll(BooleanArrayList.newListWith(false, false)));
+
+        this.map.removeKey(<(literal.(type))("0")>);
+        Assert.assertFalse(this.map.containsAll(BooleanArrayList.newListWith(false, true)));
+    }
+
+    @Override
+    @Test
+    public void size()
+    {
+        super.size();
+
+        Mutable<name>BooleanMap hashMap1 = this.newWithKeysValues(<(literal.(type))("1")>, true, <(literal.(type))("0")>, false);
+        Verify.assertSize(2, hashMap1);
+        hashMap1.removeKey(<(literal.(type))("1")>);
+        Verify.assertSize(1, hashMap1);
+        hashMap1.removeKey(<(literal.(type))("0")>);
+        Verify.assertSize(0, hashMap1);
+
+        Mutable<name>BooleanMap hashMap = this.newWithKeysValues(<(literal.(type))("6")>, false, <(literal.(type))("5")>, true);
+        hashMap.removeKey(<(literal.(type))("5")>);
+        Verify.assertSize(1, hashMap);
+    }
+
+    @Test
+    public void withoutKey()
+    {
+        Mutable<name>BooleanMap map = this.newWithKeysValues(<(literal.(type))("0")>, false, <(literal.(type))("1")>, true, <(literal.(type))("31")>, false, <(literal.(type))("32")>, true);
+        Mutable<name>BooleanMap mapWithout = map.withoutKey(<(literal.(type))("32")>);
+        Assert.assertSame(map, mapWithout);
+        Assert.assertEquals(<name>BooleanHashMap.newWithKeysValues(<(literal.(type))("0")>, false, <(literal.(type))("1")>, true, <(literal.(type))("31")>, false), mapWithout);
+    }
+
+    @Test
+    public void withoutAllKeys()
+    {
+        Mutable<name>BooleanMap map = this.newWithKeysValues(<(literal.(type))("0")>, true, <(literal.(type))("1")>, false, <(literal.(type))("31")>, true, <(literal.(type))("32")>, false);
+        Mutable<name>BooleanMap mapWithout = map.withoutAllKeys(<name>ArrayList.newListWith(<(literal.(type))("0")>, <(literal.(type))("32")>));
+        Assert.assertSame(map, mapWithout);
+        Assert.assertEquals(<name>BooleanHashMap.newWithKeysValues(<(literal.(type))("1")>, false, <(literal.(type))("31")>, true), mapWithout);
+    }
+
+    @Test
+    public void withKeysValues()
+    {
+        Mutable<name>BooleanMap hashMap = this.getEmptyMap();
+        Assert.assertSame(hashMap.withKeyValue(<(literal.(type))("1")>, false), hashMap);
+        Assert.assertEquals(<name>BooleanHashMap.newWithKeysValues(<(literal.(type))("1")>, false), hashMap);
+    }
+
+    @Test
+    public void asSynchronized()
+    {
+        Verify.assertInstanceOf(Synchronized<name>BooleanMap.class, this.map.asSynchronized());
+        Assert.assertEquals(new Synchronized<name>BooleanMap(this.map), this.map.asSynchronized());
+    }
+
+    @Test
+    public void asUnmodifiable()
+    {
+        Verify.assertInstanceOf(Unmodifiable<name>BooleanMap.class, this.map.asUnmodifiable());
+        Assert.assertEquals(new Unmodifiable<name>BooleanMap(this.map), this.map.asUnmodifiable());
+    }
+
+    @Test
+    public void booleanIterator_with_remove()
+    {
+        Mutable<name>BooleanMap map = this.classUnderTest();
+        MutableBooleanIterator iterator = map.booleanIterator();
+        while (iterator.hasNext())
+        {
+            iterator.next();
+            iterator.remove();
+        }
+        Assert.assertFalse(iterator.hasNext());
+        Verify.assertEmpty(map);
+        Verify.assertThrows(NoSuchElementException.class, iterator::next);
+    }
+
+    @Test
+    public void iterator_throws_on_invocation_of_remove_before_next()
+    {
+        MutableBooleanIterator iterator = this.classUnderTest().booleanIterator();
+        Assert.assertTrue(iterator.hasNext());
+        Verify.assertThrows(IllegalStateException.class, iterator::remove);
+    }
+
+    @Test
+    public void iterator_throws_on_consecutive_invocation_of_remove()
+    {
+        MutableBooleanIterator iterator = this.classUnderTest().booleanIterator();
+        Assert.assertTrue(iterator.hasNext());
+        iterator.next();
+        iterator.remove();
+        Verify.assertThrows(IllegalStateException.class, iterator::remove);
+    }
+}
+
+>>

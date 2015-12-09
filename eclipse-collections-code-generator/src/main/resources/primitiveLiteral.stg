@@ -1,0 +1,318 @@
+literal ::= [
+    "byte": "byteLiteral",
+    "short": "shortLiteral",
+    "char": "charLiteral",
+    "int": "intLiteral",
+    "long": "longLiteral",
+    "float": "floatLiteral",
+    "double": "doubleLiteral",
+    default: "no matching literal"
+]
+
+intLiteral(item) ::= <<
+<item>
+>>
+
+shortLiteral(item) ::= <<
+(short) <item>
+>>
+
+byteLiteral(item) ::= <<
+(byte) <item>
+>>
+
+charLiteral(item) ::= <<
+(char) <item>
+>>
+
+longLiteral(item) ::= <<
+<item>L
+>>
+
+floatLiteral(item) ::= <<
+<item>.0f
+>>
+
+doubleLiteral(item) ::= <<
+<item>.0
+>>
+
+decimalLiteral ::= [
+    "float": "floatDecimalLiteral",
+    "double": "doubleDecimalLiteral"
+]
+
+floatDecimalLiteral(item) ::= <<
+<item>f
+>>
+
+doubleDecimalLiteral(item) ::= <<
+<item>
+>>
+
+wideLiteral ::= [
+    "byte": "longLiteral",
+    "short": "longLiteral",
+    "char": "longLiteral",
+    "int": "longLiteral",
+    "long": "longLiteral",
+    "float": "doubleLiteral",
+    "double": "doubleLiteral",
+    default: "no matching wide literal"
+]
+
+toStringLiteral ::= [
+    "byte": "intLiteral",
+    "short": "intLiteral",
+    "char": "charStringLiteral",
+    "int": "intLiteral",
+    "long": "intLiteral",
+    "float": "doubleLiteral",
+    "double": "doubleLiteral",
+    default: "no matching toString literal"
+]
+
+charStringLiteral(item) ::= <<
+\u<item; format="%04x">
+>>
+
+zero ::= [
+    "boolean": "false",
+    "byte": "(byte) 0",
+    "short": "(short) 0",
+    "char": "'\0'",
+    "int": "0",
+    "long": "0L",
+    "float": "0.0f",
+    "double": "0.0",
+    default: "no matching zero"
+]
+
+wideZero ::= [
+    "byte": "0L",
+    "short": "0L",
+    "char": "0L",
+    "int": "0L",
+    "long": "0L",
+    "float": "0.0",
+    "double": "0.0",
+    default: "no matching wide zero"
+]
+
+delta ::= [
+    "byte": "",
+    "short": "",
+    "char": "",
+    "int": "",
+    "long": "",
+    "float": ", 0.0f",
+    "double": ", 0.0",
+    default: "no matching delta"
+]
+
+wideDelta ::= [
+    "boolean": "",
+    "byte": "",
+    "short": "",
+    "char": "",
+    "int": "",
+    "long": "",
+    "float": ", 0.0",
+    "double": ", 0.0",
+    default: "no matching wide delta"
+]
+
+wideType ::= [
+    "byte": "long",
+    "short": "long",
+    "char": "long",
+    "int": "long",
+    "long": "long",
+    "float": "double",
+    "double": "double",
+    default: "no matching wide type"
+]
+
+bitsType ::= [
+    "float": "int",
+    "double": "long",
+    "default": "no matching type"
+]
+
+castWideType ::= [
+    "byte": "(long) ",
+    "short": "(long) ",
+    "char": "(long) ",
+    "int": "(long) ",
+    "long": "",
+    "float": "(double) ",
+    "double": "",
+    default: "no matching wide type"
+]
+
+castDouble ::= [
+    "byte": "(double) ",
+    "short": "(double) ",
+    "char": "(double) ",
+    "int": "(double) ",
+    "long": "(double) ",
+    "float": "(double) ",
+    "double": "",
+    default: "no matching double cast"
+]
+
+castSum ::= [
+    "byte": "(double) ",
+    "short": "(double) ",
+    "char": "(double) ",
+    "int": "(double) ",
+    "long": "(double) ",
+    "float": "",
+    "double": "",
+    default: "no matching sum cast"
+]
+
+castIntToNarrowTypeWithParens ::= [
+    "byte": "byteCastWithParens",
+    "short": "shortCastWithParens",
+    "char": "charCastWithParens",
+    "int": "noCast",
+    "long": "noCast",
+    "float": "noCast",
+    "double": "noCast",
+    default: "no matching narrow cast"
+]
+
+castIntToNarrowType ::= [
+    "byte": "byteCast",
+    "short": "shortCast",
+    "char": "charCast",
+    "int": "noCast",
+    "long": "noCast",
+    "float": "noCast",
+    "double": "noCast"
+]
+
+noCast(item) ::= <<
+<item>
+>>
+
+castRealTypeToInt ::= [
+    "byte": "noCast",
+    "short": "noCast",
+    "char": "noCast",
+    "int": "noCast",
+    "long": "noCast",
+    "float": "intCast",
+    "double": "intCast",
+    default: "no matching real cast"
+]
+
+intCast(item) ::= <<
+(int) <item>
+>>
+
+shortCast(item) ::= <<
+(short) <item>
+>>
+
+byteCast(item) ::= <<
+(byte) <item>
+>>
+
+charCast(item) ::= <<
+(char) <item>
+>>
+
+longCast(item) ::= <<
+(long) <item>
+>>
+
+floatCast(item) ::= <<
+(float) <item>
+>>
+
+doubleCast(item) ::= <<
+(double) <item>
+>>
+
+intCastWithParens(item) ::= <<
+(int) (<item>)
+>>
+
+shortCastWithParens(item) ::= <<
+(short) (<item>)
+>>
+
+byteCastWithParens(item) ::= <<
+(byte) (<item>)
+>>
+
+charCastWithParens(item) ::= <<
+(char) (<item>)
+>>
+
+longCastWithParens(item) ::= <<
+(long) (<item>)
+>>
+
+floatCastWithParens(item) ::= <<
+(float) (<item>)
+>>
+
+doubleCastWithParens(item) ::= <<
+(double) (<item>)
+>>
+
+castFromInt ::= [
+    "byte": "byteCast",
+    "short": "shortCast",
+    "char": "charCast",
+    "int": "noCast",
+    "long": "longCast",
+    "float": "floatCast",
+    "double": "doubleCast",
+    default: "no matching int cast"
+]
+
+castFromIntWithParens ::= [
+    "byte": "byteCastWithParens",
+    "short": "shortCastWithParens",
+    "char": "charCastWithParens",
+    "int": "noCast",
+    "long": "longCastWithParens",
+    "float": "floatCastWithParens",
+    "double": "doubleCastWithParens",
+    default: "no matching int cast"
+]
+
+castExactly(type, item, skip) ::= <<
+    <if(!skip)><(cast.(type))(item)><else><item><endif>
+>>
+
+cast ::= [
+    "byte": "byteCast",
+    "short": "shortCast",
+    "char": "charCast",
+    "int": "intCast",
+    "long": "longCast",
+    "float": "floatCast",
+    "double": "doubleCast",
+    default: "no matching cast"
+]
+
+article ::= [
+    "int": "an",
+    default: "a"
+]
+
+keySize ::= [
+    "byte": "1",
+    "short": "2",
+    "char": "2",
+    "int": "4",
+    "long": "8",
+    "float": "4",
+    "double": "8",
+    default: "no matching key type"
+]

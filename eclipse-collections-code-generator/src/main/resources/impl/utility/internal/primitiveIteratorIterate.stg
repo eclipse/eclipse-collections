@@ -1,0 +1,215 @@
+import "copyright.stg"
+import "primitiveLiteral.stg"
+import "primitiveEquals.stg"
+
+targetPath() ::= "org/eclipse/collections/impl/utility/internal/primitive"
+
+fileName(primitive) ::= "<primitive.name>IteratorIterate"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.utility.internal.primitive;
+
+import java.util.Collection;
+
+import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
+import org.eclipse.collections.api.block.function.primitive.Object<name>ToObjectFunction;
+import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
+import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
+import org.eclipse.collections.api.collection.primitive.Mutable<name>Collection;
+import org.eclipse.collections.api.iterator.<name>Iterator;
+
+/**
+ * The <name>IteratorIterate class provides implementations of the various iteration patterns for use with the {@link <name>Iterator}.
+ * This file was automatically generated from template file primitiveIteratorIterate.stg.
+ *
+ * @since 5.0
+ */
+public final class <name>IteratorIterate
+{
+    private <name>IteratorIterate()
+    {
+        throw new AssertionError("Suppress default constructor for noninstantiability");
+    }
+
+    public static void forEach(<name>Iterator iterator, <name>Procedure procedure)
+    {
+        while (iterator.hasNext())
+        {
+            procedure.value(iterator.next());
+        }
+    }
+
+    public static \<R extends Mutable<name>Collection> R select(
+            <name>Iterator iterator,
+            <name>Predicate predicate,
+            R targetCollection)
+    {
+        while (iterator.hasNext())
+        {
+            <type> item = iterator.next();
+            if (predicate.accept(item))
+            {
+                targetCollection.add(item);
+            }
+        }
+        return targetCollection;
+    }
+
+    public static \<R extends Mutable<name>Collection> R reject(
+            <name>Iterator iterator,
+            <name>Predicate predicate,
+            R targetCollection)
+    {
+        while (iterator.hasNext())
+        {
+            <type> item = iterator.next();
+            if (!predicate.accept(item))
+            {
+                targetCollection.add(item);
+            }
+        }
+        return targetCollection;
+    }
+
+    public static \<V, R extends Collection\<V>\> R collect(
+            <name>Iterator iterator,
+            <name>ToObjectFunction\<? extends V> function,
+            R targetCollection)
+    {
+        while (iterator.hasNext())
+        {
+            <type> item = iterator.next();
+            targetCollection.add(function.valueOf(item));
+        }
+        return targetCollection;
+    }
+
+    public static <type> detectIfNone(<name>Iterator iterator, <name>Predicate predicate, <type> ifNone)
+    {
+        while (iterator.hasNext())
+        {
+            <type> item = iterator.next();
+            if (predicate.accept(item))
+            {
+                return item;
+            }
+        }
+        return ifNone;
+    }
+
+    public static int count(<name>Iterator iterator, <name>Predicate predicate)
+    {
+        int count = 0;
+        while (iterator.hasNext())
+        {
+            if (predicate.accept(iterator.next()))
+            {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public static boolean anySatisfy(<name>Iterator iterator, <name>Predicate predicate)
+    {
+        while (iterator.hasNext())
+        {
+            if (predicate.accept(iterator.next()))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean allSatisfy(<name>Iterator iterator, <name>Predicate predicate)
+    {
+        while (iterator.hasNext())
+        {
+            if (!predicate.accept(iterator.next()))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static boolean noneSatisfy(<name>Iterator iterator, <name>Predicate predicate)
+    {
+        while (iterator.hasNext())
+        {
+            if (predicate.accept(iterator.next()))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static \<T> T injectInto(<name>Iterator iterator, T injectedValue, Object<name>ToObjectFunction\<? super T, ? extends T> function)
+    {
+        T result = injectedValue;
+        while (iterator.hasNext())
+        {
+            result = function.valueOf(result, iterator.next());
+        }
+        return result;
+    }
+    <(arithmeticMethods.(type))()>
+}
+
+>>
+
+arithmeticMethods ::= [
+    "boolean": "noMethods",
+    "default": "allMethods"
+    ]
+
+allMethods() ::= <<
+<\n>
+public static <wideType.(type)> sum(<name>Iterator iterator)
+{
+    <wideType.(type)> sum = <wideZero.(type)>;
+    while (iterator.hasNext())
+    {
+        sum += iterator.next();
+    }
+    return sum;
+}
+
+public static <type> max(<name>Iterator iterator)
+{
+    <type> max = iterator.next();
+    while (iterator.hasNext())
+    {
+        <type> next = iterator.next();
+        if (<(lessThan.(type))("max", "next")>)
+        {
+            max = next;
+        }
+    }
+    return max;
+}
+
+public static <type> min(<name>Iterator iterator)
+{
+    <type> min = iterator.next();
+    while (iterator.hasNext())
+    {
+        <type> next = iterator.next();
+        if (<(lessThan.(type))("next", "min")>)
+        {
+            min = next;
+        }
+    }
+    return min;
+}
+>>
+
+noMethods() ::= ""

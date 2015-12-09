@@ -1,0 +1,399 @@
+import "copyright.stg"
+import "primitiveLiteral.stg"
+
+targetPath() ::= "org/eclipse/collections/impl/list/immutable/primitive"
+
+fileName(primitive) ::= "Immutable<primitive.name>EmptyList"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.list.immutable.primitive;
+
+import java.io.IOException;
+import java.io.Serializable;
+import java.util.NoSuchElementException;
+
+import org.eclipse.collections.api.<name>Iterable;
+import org.eclipse.collections.api.Lazy<name>Iterable;
+import org.eclipse.collections.api.bag.primitive.Mutable<name>Bag;
+import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
+import org.eclipse.collections.api.block.function.primitive.Object<name>ToObjectFunction;
+import org.eclipse.collections.api.block.function.primitive.Object<name>IntToObjectFunction;
+import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
+import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
+import org.eclipse.collections.api.block.procedure.primitive.<name>IntProcedure;
+import org.eclipse.collections.api.iterator.<name>Iterator;
+import org.eclipse.collections.api.list.ImmutableList;
+import org.eclipse.collections.api.list.primitive.Immutable<name>List;
+import org.eclipse.collections.api.list.primitive.<name>List;
+import org.eclipse.collections.api.list.primitive.Mutable<name>List;
+import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
+import org.eclipse.collections.impl.bag.mutable.primitive.<name>HashBag;
+import org.eclipse.collections.impl.factory.Lists;
+import org.eclipse.collections.impl.factory.primitive.<name>Lists;
+import org.eclipse.collections.impl.iterator.ImmutableEmpty<name>Iterator;
+import org.eclipse.collections.impl.lazy.primitive.Lazy<name>IterableAdapter;
+import org.eclipse.collections.impl.lazy.primitive.Reverse<name>Iterable;
+import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
+import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
+import net.jcip.annotations.Immutable;
+
+/**
+ * Immutable<name>EmptyList is an optimization for {@link Immutable<name>List} of size 0.
+ * This file was automatically generated from template file immutablePrimitiveEmptyList.stg.
+ */
+@Immutable
+final class Immutable<name>EmptyList implements Immutable<name>List, Serializable
+{
+    static final Immutable<name>List INSTANCE = new Immutable<name>EmptyList();
+    private static final long serialVersionUID = 1L;
+
+    private Object readResolve()
+    {
+        return INSTANCE;
+    }
+
+    public <type> get(int index)
+    {
+        throw new IndexOutOfBoundsException("Index: " + index + ", Size: 0");
+    }
+
+    public <type> getFirst()
+    {
+        throw new IndexOutOfBoundsException("Index: 0, Size: 0");
+    }
+
+    public <type> getLast()
+    {
+        throw new IndexOutOfBoundsException("Index: 0, Size: 0");
+    }
+
+    public int indexOf(<type> value)
+    {
+        return -1;
+    }
+
+    public int lastIndexOf(<type> value)
+    {
+        return -1;
+    }
+
+    public <name>Iterator <type>Iterator()
+    {
+        return ImmutableEmpty<name>Iterator.INSTANCE;
+    }
+
+    public void forEach(<name>Procedure procedure)
+    {
+    }
+
+    /**
+     * @since 7.0.
+     */
+    public void each(<name>Procedure procedure)
+    {
+    }
+
+    public void forEachWithIndex(<name>IntProcedure procedure)
+    {
+    }
+
+    public int count(<name>Predicate predicate)
+    {
+        return 0;
+    }
+
+    public boolean anySatisfy(<name>Predicate predicate)
+    {
+        return false;
+    }
+
+    public boolean allSatisfy(<name>Predicate predicate)
+    {
+        return true;
+    }
+
+    public boolean noneSatisfy(<name>Predicate predicate)
+    {
+        return true;
+    }
+
+    public Immutable<name>List select(<name>Predicate predicate)
+    {
+        return this;
+    }
+
+    public Immutable<name>List reject(<name>Predicate predicate)
+    {
+        return this;
+    }
+
+    public <type> detectIfNone(<name>Predicate predicate, <type> ifNone)
+    {
+        return ifNone;
+    }
+
+    public \<V> ImmutableList\<V> collect(<name>ToObjectFunction\<? extends V> function)
+    {
+        return Lists.immutable.of();
+    }
+
+    <(arithmeticMethods.(type))(name, type)>
+    public <type>[] toArray()
+    {
+        return new <type>[0];
+    }
+
+    public boolean contains(<type> value)
+    {
+        return false;
+    }
+
+    public boolean containsAll(<type>... source)
+    {
+        return source.length == 0;
+    }
+
+    public boolean containsAll(<name>Iterable source)
+    {
+        return source.isEmpty();
+    }
+
+    public Lazy<name>Iterable asReversed()
+    {
+        return Reverse<name>Iterable.adapt(this);
+    }
+
+    public Mutable<name>List toList()
+    {
+        return new <name>ArrayList();
+    }
+
+    public Mutable<name>Set toSet()
+    {
+        return new <name>HashSet();
+    }
+
+    public Mutable<name>Bag toBag()
+    {
+        return new <name>HashBag();
+    }
+
+    public Lazy<name>Iterable asLazy()
+    {
+        return new Lazy<name>IterableAdapter(this);
+    }
+
+    public Immutable<name>List toImmutable()
+    {
+        return this;
+    }
+
+    public Immutable<name>EmptyList toReversed()
+    {
+        return this;
+    }
+
+    public Immutable<name>List newWith(<type> element)
+    {
+        return <name>Lists.immutable.with(element);
+    }
+
+    public Immutable<name>List newWithout(<type> element)
+    {
+        return this;
+    }
+
+    public Immutable<name>List newWithAll(<name>Iterable elements)
+    {
+        return <name>Lists.immutable.withAll(elements);
+    }
+
+    public Immutable<name>List newWithoutAll(<name>Iterable elements)
+    {
+        return this;
+    }
+
+    public int size()
+    {
+        return 0;
+    }
+
+    public boolean isEmpty()
+    {
+        return true;
+    }
+
+    public boolean notEmpty()
+    {
+        return false;
+    }
+
+    public \<T> T injectInto(T injectedValue, Object<name>ToObjectFunction\<? super T, ? extends T> function)
+    {
+        return injectedValue;
+    }
+
+    public \<T> T injectIntoWithIndex(T injectedValue, Object<name>IntToObjectFunction\<? super T, ? extends T> function)
+    {
+        return injectedValue;
+    }
+
+    @Override
+    public boolean equals(Object otherList)
+    {
+        if (otherList == this)
+        {
+            return true;
+        }
+        if (!(otherList instanceof <name>List))
+        {
+            return false;
+        }
+        <name>List list = (<name>List) otherList;
+        return list.isEmpty();
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return 1;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "[]";
+    }
+
+    public String makeString()
+    {
+        return "";
+    }
+
+    public String makeString(String separator)
+    {
+        return "";
+    }
+
+    public String makeString(String start, String separator, String end)
+    {
+        return start + end;
+    }
+
+    public void appendString(Appendable appendable)
+    {
+    }
+
+    public void appendString(Appendable appendable, String separator)
+    {
+    }
+
+    public void appendString(Appendable appendable, String start, String separator, String end)
+    {
+        try
+        {
+            appendable.append(start);
+            appendable.append(end);
+        }
+        catch (IOException e)
+        {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * @since 6.0.
+     */
+    public Immutable<name>List distinct()
+    {
+        return INSTANCE;
+    }
+
+    public Immutable<name>List subList(int fromIndex, int toIndex)
+    {
+        throw new UnsupportedOperationException("subList not yet implemented!");
+    }
+}
+
+>>
+
+arithmeticMethods ::= [
+    "byte": "allMethods",
+    "short": "allMethods",
+    "char": "allMethods",
+    "int": "allMethods",
+    "long": "allMethods",
+    "float": "allMethods",
+    "double": "allMethods",
+    "boolean": "noMethods"
+    ]
+
+allMethods(name, type) ::=<<
+public <wideType.(type)> sum()
+{
+    return 0;
+}
+
+public <type> max()
+{
+    throw new NoSuchElementException();
+}
+
+public <type> maxIfEmpty(<type> defaultValue)
+{
+    return defaultValue;
+}
+
+public <type> min()
+{
+    throw new NoSuchElementException();
+}
+
+public <type> minIfEmpty(<type> defaultValue)
+{
+    return defaultValue;
+}
+
+public double average()
+{
+    throw new ArithmeticException();
+}
+
+public double median()
+{
+    throw new ArithmeticException();
+}
+
+public <type>[] toSortedArray()
+{
+    return new <type>[0];
+}
+
+public Mutable<name>List toSortedList()
+{
+    return new <name>ArrayList();
+}
+
+public int binarySearch(<type> value)
+{
+    return -1;
+}
+
+public <wideType.(type)> dotProduct(<name>List list)
+{
+    if (!list.isEmpty())
+    {
+        throw new IllegalArgumentException("Lists used in dotProduct must be the same size");
+    }
+    return 0;
+}
+
+>>
+
+noMethods(name, type) ::= ""

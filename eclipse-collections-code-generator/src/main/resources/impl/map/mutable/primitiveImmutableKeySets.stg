@@ -1,0 +1,592 @@
+import "copyright.stg"
+import "primitiveEquals.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+
+primitiveKeySetBody(className, type, name, keyArray, increment, sameTwoPrimitiveMapKeySet, calledFrom) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.map.mutable.primitive;
+
+import java.io.IOException;
+import java.io.Serializable;
+import java.util.NoSuchElementException;
+import org.eclipse.collections.impl.SpreadFunctions;
+import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
+import org.eclipse.collections.api.block.function.primitive.Object<name>ToObjectFunction;
+import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
+import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
+import org.eclipse.collections.api.iterator.<name>Iterator;
+import org.eclipse.collections.api.set.ImmutableSet;
+import org.eclipse.collections.api.set.MutableSet;
+import org.eclipse.collections.api.set.primitive.Immutable<name>Set;
+import org.eclipse.collections.impl.set.immutable.primitive.Immutable<name>SetSerializationProxy;
+import org.eclipse.collections.impl.set.immutable.primitive.AbstractImmutable<name>Set;
+import org.eclipse.collections.impl.set.mutable.UnifiedSet;
+import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
+
+
+/**
+ * This file was automatically generated from template file <calledFrom>
+ *
+ * @since 6.0.
+ */
+class <className> extends AbstractImmutable<name>Set implements Serializable
+{
+    private static final long serialVersionUID = 1L;
+    private static final <type> EMPTY_KEY = <(literal.(type))("0")>;
+    private static final <type> REMOVED_KEY = <(literal.(type))("1")>;
+    private static final int CACHE_LINE_SIZE = 64;
+    private static final int KEY_SIZE = <keySize.(type)>;
+    private static final int INITIAL_LINEAR_PROBE = CACHE_LINE_SIZE / KEY_SIZE / 2; /* half a cache line */
+
+    private final <type>[] <keyArray>;
+    private final int occupiedWithData;
+    private final boolean containsZeroKey;
+    private final boolean containsOneKey;
+
+    <className>(<type>[] <keyArray>, int occupiedWithData, boolean containsZeroKey, boolean containsOneKey)
+    {
+        this.<keyArray> = <keyArray>;
+        this.occupiedWithData = occupiedWithData;
+        this.containsZeroKey = containsZeroKey;
+        this.containsOneKey = containsOneKey;
+    }
+
+    private static boolean isEmptyKey(<type> key)
+    {
+        return <(equals.(type))("key", "EMPTY_KEY")>;
+    }
+
+    private static boolean isRemovedKey(<type> key)
+    {
+        return <(equals.(type))("key", "REMOVED_KEY")>;
+    }
+
+    private static boolean isNonSentinel(<type> key)
+    {
+        return !isEmptyKey(key) && !isRemovedKey(key);
+    }
+
+    @Override
+    public int hashCode()
+    {
+        int result = 0;
+        <forEachKey("hashCode")>
+        return result;
+    }
+
+    public int size()
+    {
+        return this.occupiedWithData + (this.containsOneKey ? 1 : 0) + (this.containsZeroKey ? 1 : 0);
+    }
+
+    public void appendString(Appendable appendable, String start, String separator, String end)
+    {
+        try
+        {
+            appendable.append(start);
+            int count = 0;
+            if (this.containsZeroKey)
+            {
+                appendable.append(String.valueOf(EMPTY_KEY));
+                count++;
+            }
+            if (this.containsOneKey)
+            {
+                if (count > 0)
+                {
+                    appendable.append(separator);
+                }
+                count++;
+                appendable.append(String.valueOf(REMOVED_KEY));
+            }
+            for (int i = 0; i \< this.<keyArray>.length; <increment>)
+            {
+                if (isNonSentinel(this.<keyArray>[i]))
+                {
+                    if (count > 0)
+                    {
+                        appendable.append(separator);
+                    }
+                    count++;
+                    appendable.append(String.valueOf(this.<keyArray>[i]));
+                }
+            }
+            appendable.append(end);
+        }
+        catch (IOException e)
+        {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public <name>Iterator <type>Iterator()
+    {
+        return new Internal<name>Iterator();
+    }
+
+    public <type>[] toArray()
+    {
+        <type>[] array = new <type>[this.size()];
+        int index = 0;
+        <forEachKey("toArray")>
+        return array;
+    }
+
+    public boolean contains(<type> value)
+    {
+        if (<(equals.(type))("value", "EMPTY_KEY")>)
+        {
+            return this.containsZeroKey;
+        }
+        if (<(equals.(type))("value", "REMOVED_KEY")>)
+        {
+            return this.containsOneKey;
+        }
+        return <(equals.(type))({this.<keyArray>[this.probe(value)]}, "value")>;
+    }
+
+    public void forEach(<name>Procedure procedure)
+    {
+        this.each(procedure);
+    }
+
+    /**
+     * @since 7.0.
+     */
+    public void each(<name>Procedure procedure)
+    {
+        <forEachKey("executeProcedure")>
+    }
+
+    public Immutable<name>Set select(<name>Predicate predicate)
+    {
+        <name>HashSet result = new <name>HashSet();
+        <forEachKeySatisfying("predicate", "select")>
+        return result.toImmutable();
+    }
+
+    public Immutable<name>Set reject(<name>Predicate predicate)
+    {
+        <name>HashSet result = new <name>HashSet();
+        <forEachKeySatisfying("!predicate", "select")>
+        return result.toImmutable();
+    }
+
+    public \<V> ImmutableSet\<V> collect(<name>ToObjectFunction\<? extends V> function)
+    {
+        MutableSet\<V> target = UnifiedSet.newSet(this.size());
+        <forEachKey("collect")>
+        return target.toImmutable();
+    }
+
+    public <type> detectIfNone(<name>Predicate predicate, <type> ifNone)
+    {
+        <forEachKeySatisfying("predicate", "detectIfNone")>
+        return ifNone;
+    }
+
+    public int count(<name>Predicate predicate)
+    {
+        int count = 0;
+        <forEachKeySatisfying("predicate", "count")>
+        return count;
+    }
+
+    public boolean anySatisfy(<name>Predicate predicate)
+    {
+        <forEachKeySatisfying("predicate", "returnTrue")>
+        return false;
+    }
+
+    public boolean allSatisfy(<name>Predicate predicate)
+    {
+        <forEachKeySatisfying("!predicate", "returnFalse")>
+        return true;
+    }
+
+    public boolean noneSatisfy(<name>Predicate predicate)
+    {
+        <forEachKeySatisfying("predicate", "returnFalse")>
+        return true;
+    }
+
+    public <wideType.(type)> sum()
+    {
+        <wideType.(type)> result = <wideZero.(type)>;
+        <wideType.(type)> compensation = <wideZero.(type)>;
+        <forEachKey("sum")>
+        return result;
+    }
+
+    public <type> max()
+    {
+        if (this.isEmpty())
+        {
+            throw new NoSuchElementException();
+        }
+
+        <type> max = 0;
+        boolean isMaxSet = false;
+
+        if (this.containsZeroKey)
+        {
+            max = EMPTY_KEY;
+            isMaxSet = true;
+        }
+        if (this.containsOneKey && (!isMaxSet || <(lessThan.(type))("max", "REMOVED_KEY")>))
+        {
+            max = REMOVED_KEY;
+            isMaxSet = true;
+        }
+        for (int i = 0; i \< this.<keyArray>.length; <increment>)
+        {
+            if (isNonSentinel(this.<keyArray>[i]) && (!isMaxSet || <(lessThan.(type))({max}, {this.<keyArray>[i]})>))
+            {
+                max = this.<keyArray>[i];
+                isMaxSet = true;
+            }
+        }
+        return max;
+    }
+
+    public <type> min()
+    {
+        if (this.isEmpty())
+        {
+            throw new NoSuchElementException();
+        }
+
+        <type> min = 0;
+        boolean isMinSet = false;
+
+        if (this.containsZeroKey)
+        {
+            min = EMPTY_KEY;
+            isMinSet = true;
+        }
+        if (this.containsOneKey && (!isMinSet || REMOVED_KEY \< min))
+        {
+            min = REMOVED_KEY;
+            isMinSet = true;
+        }
+
+        for (int i = 0; i \< this.<keyArray>.length; <increment>)
+        {
+            if (isNonSentinel(this.<keyArray>[i]) && (!isMinSet || <(lessThan.(type))({this.<keyArray>[i]}, {min})>))
+            {
+                min = this.<keyArray>[i];
+                isMinSet = true;
+            }
+        }
+        return min;
+    }
+
+    public \<T> T injectInto(T injectedValue, Object<name>ToObjectFunction\<? super T, ? extends T> function)
+    {
+        T result = injectedValue;
+        <forEachKey("injectInto")>
+        return result;
+    }
+
+    private Object writeReplace()
+    {
+        return new Immutable<name>SetSerializationProxy(this);
+    }
+
+    <(probe.(type))()>
+
+    // exposed for testing
+    <(spread.(type))(type)>
+
+    <(spread2.(type))(type)>
+
+    private int mask(int spread)
+    {
+        <if(!sameTwoPrimitiveMapKeySet)>
+        return spread & (this.<keyArray>.length - 1);
+        <else>
+        return spread & ((this.<keyArray>.length >\> 1) - 1);
+        <endif>
+    }
+
+    private class Internal<name>Iterator implements <name>Iterator
+    {
+        private int count;
+        private int position;
+        private boolean handledZero;
+        private boolean handledOne;
+
+        public boolean hasNext()
+        {
+            return this.count \< <className>.this.size();
+        }
+
+        public <type> next()
+        {
+            if (!this.hasNext())
+            {
+                throw new NoSuchElementException("next() called, but the iterator is exhausted");
+            }
+            this.count++;
+
+            if (!this.handledZero)
+            {
+                this.handledZero = true;
+                if (<className>.this.containsZeroKey)
+                {
+                    return <className>.EMPTY_KEY;
+                }
+            }
+            if (!this.handledOne)
+            {
+                this.handledOne = true;
+                if (<className>.this.containsOneKey)
+                {
+                    return <className>.REMOVED_KEY;
+                }
+            }
+
+            <type>[] <keyArray> = <className>.this.<keyArray>;
+            while (!<className>.isNonSentinel(<keyArray>[this.position]))
+            {
+                <if(!sameTwoPrimitiveMapKeySet)>
+                this.position++;
+                <else>
+                this.position += 2;
+                <endif>
+            }
+            <type> result = <className>.this.<keyArray>[this.position];
+            <if(!sameTwoPrimitiveMapKeySet)>
+            this.position++;
+            <else>
+            this.position += 2;
+            <endif>
+            return result;
+        }
+    }
+}
+
+>>
+
+forEachKey(procedure) ::= <<
+if (this.containsZeroKey)
+{
+    <(procedure)("EMPTY_KEY")>
+}
+if (this.containsOneKey)
+{
+    <(procedure)("REMOVED_KEY")>
+}
+if (this.<keyArray> != null)
+{
+    for (int i = 0; i \< this.<keyArray>.length; <increment>)
+    {
+        if (isNonSentinel(this.<keyArray>[i]))
+        {
+            <(procedure)({this.<keyArray>[i]})>
+        }
+    }
+}
+>>
+
+forEachKeySatisfying(predicate, procedure) ::= <<
+if (this.containsZeroKey && <predicate>.accept(EMPTY_KEY))
+{
+    <(procedure)("EMPTY_KEY")>
+}
+if (this.containsOneKey && <predicate>.accept(REMOVED_KEY))
+{
+    <(procedure)("REMOVED_KEY")>
+}
+for (int i = 0; i \< this.<keyArray>.length; <increment>)
+{
+    if (isNonSentinel(this.<keyArray>[i]) && <predicate>.accept(this.<keyArray>[i]))
+    {
+        <(procedure)({this.<keyArray>[i]})>
+    }
+}
+>>
+
+hashCode(key) ::= <<
+result += <(hashCode.(type))({<key>})>;
+>>
+
+injectInto(key) ::= <<
+result = function.valueOf(result, <key>);
+>>
+
+sum(key) ::= <<
+<wideType.(type)> adjustedValue = <key> - compensation;
+<wideType.(type)> nextSum = result + adjustedValue;
+compensation = nextSum - result - adjustedValue;
+result = nextSum;
+>>
+
+collect(key) ::= <<
+target.add(function.valueOf(<key>));
+>>
+
+executeProcedure(key) ::= <<
+procedure.value(<key>);
+>>
+
+select(key) ::= <<
+result.add(<key>);
+>>
+
+toArray(key) ::= <<
+array[index] = <key>;
+index++;
+>>
+
+detectIfNone(key) ::= <<
+return <key>;
+>>
+
+returnTrue(key) ::= <<
+return true;
+>>
+
+returnFalse(key) ::= <<
+return false;
+>>
+
+count(key) ::= <<
+count++;
+>>
+
+probe8() ::= <<
+// exposed for testing
+int probe(<type> element)
+{
+    <if(!sameTwoPrimitiveMapKeySet)>
+    int index = this.spreadAndMask(element);
+    <else>
+    int index = this.spreadAndMask(element) \<\< 1;
+    <endif>
+    <type> keyAtIndex = this.<keyArray>[index];
+
+    if (<(equals.(type))("keyAtIndex", "element")> || <(equals.(type))("keyAtIndex", "EMPTY_KEY")>)
+    {
+        return index;
+    }
+
+    int removedIndex = <(equals.(type))("keyAtIndex", "REMOVED_KEY")> ? index : -1;
+    int nextIndex = index;
+    <if(!sameTwoPrimitiveMapKeySet)>
+    int probe = 17;
+    <else>
+    int probe = 34;
+    <endif>
+    // loop until an empty slot is reached
+    while (true)
+    {
+        // Probe algorithm: 17*n*(n+1)/2 where n = number of collisions
+        nextIndex += probe;
+        <if(!sameTwoPrimitiveMapKeySet)>
+        probe += 17;
+        <else>
+        probe += 34;
+        <endif>
+        nextIndex &= this.<keyArray>.length - 1;
+        if (<(equals.(type))({this.<keyArray>[nextIndex]}, "element")>)
+        {
+            return nextIndex;
+        }
+        if (<(equals.(type))({this.<keyArray>[nextIndex]}, "REMOVED_KEY")>)
+        {
+            if (removedIndex == -1)
+            {
+                removedIndex = nextIndex;
+            }
+        }
+        else if (<(equals.(type))({this.<keyArray>[nextIndex]}, "EMPTY_KEY")>)
+        {
+            return removedIndex == -1 ? nextIndex : removedIndex;
+        }
+    }
+}
+>>
+
+probe3264() ::= <<
+// exposed for testing
+int probe(<type> element)
+{
+    int index = this.mask((int) element)<if(sameTwoPrimitiveMapKeySet)> \<\< 1<endif>;
+    <type> keyAtIndex = this.<keyArray>[index];
+
+    if (<(equals.(type))("keyAtIndex", "element")> || <(equals.(type))("keyAtIndex", "EMPTY_KEY")>)
+    {
+        return index;
+    }
+
+    int removedIndex = <(equals.(type))("keyAtIndex", "REMOVED_KEY")> ? index : -1;
+    for (int i = <if(sameTwoPrimitiveMapKeySet)>2<else>1<endif>; i \< INITIAL_LINEAR_PROBE; <increment>)
+    {
+        int nextIndex = (index + i) & (this.<keyArray>.length - 1);
+        keyAtIndex = this.<keyArray>[nextIndex];
+        if (<(equals.(type))("keyAtIndex", "element")>)
+        {
+            return nextIndex;
+        }
+        if (<(equals.(type))("keyAtIndex", "EMPTY_KEY")>)
+        {
+            return removedIndex == -1 ? nextIndex : removedIndex;
+        }
+        if (<(equals.(type))("keyAtIndex", "REMOVED_KEY")> && removedIndex == -1)
+        {
+            removedIndex = nextIndex;
+        }
+    }
+    return this.probeTwo(element, removedIndex);
+}
+
+int probeTwo(<type> element, int removedIndex)
+{
+    int index = this.spreadTwoAndMask(element)<if(sameTwoPrimitiveMapKeySet)> \<\< 1<endif>;
+    for (int i = 0; i \< INITIAL_LINEAR_PROBE; <increment>)
+    {
+        int nextIndex = (index + i) & (this.<keyArray>.length - 1);
+        <type> keyAtIndex = this.<keyArray>[nextIndex];
+        if (<(equals.(type))("keyAtIndex", "element")>)
+        {
+            return nextIndex;
+        }
+        if (<(equals.(type))("keyAtIndex", "EMPTY_KEY")>)
+        {
+            return removedIndex == -1 ? nextIndex : removedIndex;
+        }
+        if (<(equals.(type))("keyAtIndex", "REMOVED_KEY")> && removedIndex == -1)
+        {
+            removedIndex = nextIndex;
+        }
+    }
+    return this.probeThree(element, removedIndex);
+}
+
+int probeThree(<type> element, int removedIndex)
+{
+    int nextIndex = (int) SpreadFunctions.<type>SpreadOne(element)<if(sameTwoPrimitiveMapKeySet)> \<\< 1<endif>;
+    int spreadTwo = <(reverseSpread.(type))()>(SpreadFunctions.<type>SpreadTwo(element)) | 1;
+
+    while(true)
+    {
+        nextIndex = this.mask(<if(sameTwoPrimitiveMapKeySet)>(<endif>nextIndex<if(sameTwoPrimitiveMapKeySet)> \>> 1)<endif> + spreadTwo)<if(sameTwoPrimitiveMapKeySet)> \<\< 1<endif>;
+        <type> keyAtIndex = this.<keyArray>[nextIndex];
+        if (<(equals.(type))("keyAtIndex", "element")>)
+        {
+            return nextIndex;
+        }
+        if (<(equals.(type))("keyAtIndex", "EMPTY_KEY")>)
+        {
+            return removedIndex == -1 ? nextIndex : removedIndex;
+        }
+        if (<(equals.(type))("keyAtIndex", "REMOVED_KEY")> && removedIndex == -1)
+        {
+            removedIndex = nextIndex;
+        }
+    }
+}
+>>

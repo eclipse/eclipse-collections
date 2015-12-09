@@ -1,0 +1,691 @@
+import "copyright.stg"
+import "primitiveEquals.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+
+hasTwoPrimitives() ::= "true"
+
+skipBooleanKeys() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/map/mutable/primitive"
+
+fileName(primitive1, primitive2, sameTwoPrimitives) ::= "Synchronized<primitive1.name><primitive2.name>Map"
+
+class(primitive1, primitive2, sameTwoPrimitives) ::= <<
+<body(primitive1.type, primitive2.type, primitive1.name, primitive2.name)>
+>>
+
+body(type1, type2, name1, name2) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.map.mutable.primitive;
+
+import java.io.Serializable;
+import java.util.Collection;
+import java.util.Collections;
+
+import org.eclipse.collections.api.<name2>Iterable;
+<if(!sameTwoPrimitives)>import org.eclipse.collections.api.<name1>Iterable;<endif>
+<if(!sameTwoPrimitives)>import org.eclipse.collections.api.Lazy<name2>Iterable;<endif>
+import org.eclipse.collections.api.Lazy<name1>Iterable;
+import org.eclipse.collections.api.RichIterable;
+import org.eclipse.collections.api.bag.primitive.Mutable<name2>Bag;
+import org.eclipse.collections.api.block.function.primitive.<name2>Function;
+import org.eclipse.collections.api.block.function.primitive.<name2>Function0;
+import org.eclipse.collections.api.block.function.primitive.<name2>To<name2>Function;
+import org.eclipse.collections.api.block.function.primitive.<name2>ToObjectFunction;
+import org.eclipse.collections.api.block.function.primitive.Object<name2>ToObjectFunction;
+<if(!sameTwoPrimitives)>import org.eclipse.collections.api.block.function.primitive.<name1>To<name2>Function;<endif>
+import org.eclipse.collections.api.block.predicate.primitive.<name2>Predicate;
+import org.eclipse.collections.api.block.predicate.primitive.<name1><name2>Predicate;
+<if(!sameTwoPrimitives)>import org.eclipse.collections.api.block.procedure.primitive.<name2>Procedure;<endif>
+import org.eclipse.collections.api.block.procedure.primitive.<name1><name2>Procedure;
+import org.eclipse.collections.api.block.procedure.primitive.<name1>Procedure;
+import org.eclipse.collections.api.collection.MutableCollection;
+import org.eclipse.collections.api.collection.primitive.Mutable<name2>Collection;
+import org.eclipse.collections.api.iterator.Mutable<name2>Iterator;
+import org.eclipse.collections.api.list.primitive.Mutable<name2>List;
+import org.eclipse.collections.api.map.MutableMap;
+import org.eclipse.collections.api.map.primitive.Immutable<name1><name2>Map;
+import org.eclipse.collections.api.map.primitive.<name1><name2>Map;
+import org.eclipse.collections.api.map.primitive.Mutable<name1><name2>Map;
+<if(!sameTwoPrimitives)>import org.eclipse.collections.api.set.primitive.Mutable<name1>Set;<endif>
+import org.eclipse.collections.api.set.primitive.Mutable<name2>Set;
+import org.eclipse.collections.api.tuple.primitive.<name1><name2>Pair;
+import org.eclipse.collections.impl.SynchronizedRichIterable;
+import org.eclipse.collections.impl.factory.primitive.<name1><name2>Maps;
+import org.eclipse.collections.impl.set.mutable.primitive.Synchronized<name1>Set;
+import org.eclipse.collections.impl.collection.mutable.primitive.Synchronized<name2>Collection;
+import net.jcip.annotations.GuardedBy;
+
+/**
+ * A synchronized view of a {@link Mutable<name1><name2>Map}. It is imperative that the user manually synchronize on the collection when iterating over it using the
+ * {@link Mutable<name2>Iterator} as per {@link Collections#synchronizedCollection(Collection)}.
+ * \<p>
+ * This file was automatically generated from template file synchronizedPrimitivePrimitiveMap.stg.
+ *
+ * @see Mutable<name1><name2>Map#asSynchronized()
+ * @see MutableMap#asSynchronized()
+ * @since 3.1.
+ */
+public final class Synchronized<name1><name2>Map
+        implements Mutable<name1><name2>Map, Serializable
+{
+    private static final long serialVersionUID = 1L;
+    private final Object lock;
+    @GuardedBy("this.lock")
+    private final Mutable<name1><name2>Map map;
+
+    Synchronized<name1><name2>Map(Mutable<name1><name2>Map map)
+    {
+        this(map, null);
+    }
+
+    Synchronized<name1><name2>Map(Mutable<name1><name2>Map map, Object newLock)
+    {
+        this.map = map;
+        this.lock = newLock == null ? this : newLock;
+    }
+
+    public void clear()
+    {
+        synchronized (this.lock)
+        {
+            this.map.clear();
+        }
+    }
+
+    public void put(<type1> key, <type2> value)
+    {
+        synchronized (this.lock)
+        {
+            this.map.put(key, value);
+        }
+    }
+
+    public void putAll(<name1><name2>Map map)
+    {
+        synchronized (this.lock)
+        {
+            this.map.putAll(map);
+        }
+    }
+
+    public void removeKey(<type1> key)
+    {
+        synchronized (this.lock)
+        {
+            this.map.removeKey(key);
+        }
+    }
+
+    public void remove(<type1> key)
+    {
+        synchronized (this.lock)
+        {
+            this.map.remove(key);
+        }
+    }
+
+    public <type2> removeKeyIfAbsent(<type1> key, <type2> value)
+    {
+        synchronized (this.lock)
+        {
+            return this.map.removeKeyIfAbsent(key, value);
+        }
+    }
+
+    public <type2> getIfAbsentPut(<type1> key, <type2> value)
+    {
+        synchronized (this.lock)
+        {
+            return this.map.getIfAbsentPut(key, value);
+        }
+    }
+
+    public <type2> getIfAbsentPut(<type1> key, <name2>Function0 function)
+    {
+        synchronized (this.lock)
+        {
+            return this.map.getIfAbsentPut(key, function);
+        }
+    }
+
+    public <type2> getIfAbsentPutWithKey(<type1> key, <name1>To<name2>Function function)
+    {
+        synchronized (this.lock)
+        {
+            return this.map.getIfAbsentPutWithKey(key, function);
+        }
+    }
+
+    public \<P> <type2> getIfAbsentPutWith(<type1> key, <name2>Function\<? super P> function, P parameter)
+    {
+        synchronized (this.lock)
+        {
+            return this.map.getIfAbsentPutWith(key, function, parameter);
+        }
+    }
+
+    public <type2> updateValue(<type1> key, <type2> initialValueIfAbsent, <name2>To<name2>Function function)
+    {
+        synchronized (this.lock)
+        {
+            return this.map.updateValue(key, initialValueIfAbsent, function);
+        }
+    }
+
+    public <type2> get(<type1> key)
+    {
+        synchronized (this.lock)
+        {
+            return this.map.get(key);
+        }
+    }
+
+    public <type2> getIfAbsent(<type1> key, <type2> ifAbsent)
+    {
+        synchronized (this.lock)
+        {
+            return this.map.getIfAbsent(key, ifAbsent);
+        }
+    }
+
+    public <type2> getOrThrow(<type1> key)
+    {
+        synchronized (this.lock)
+        {
+            return this.map.getOrThrow(key);
+        }
+    }
+
+    public boolean containsKey(<type1> key)
+    {
+        synchronized (this.lock)
+        {
+            return this.map.containsKey(key);
+        }
+    }
+
+    public boolean containsValue(<type2> value)
+    {
+        synchronized (this.lock)
+        {
+            return this.map.containsValue(value);
+        }
+    }
+
+    public void forEachValue(<name2>Procedure procedure)
+    {
+        synchronized (this.lock)
+        {
+            this.map.forEachValue(procedure);
+        }
+    }
+
+    public void forEachKey(<name1>Procedure procedure)
+    {
+        synchronized (this.lock)
+        {
+            this.map.forEachKey(procedure);
+        }
+    }
+
+    public void forEachKeyValue(<name1><name2>Procedure procedure)
+    {
+        synchronized (this.lock)
+        {
+            this.map.forEachKeyValue(procedure);
+        }
+    }
+
+    public Lazy<name1>Iterable keysView()
+    {
+        synchronized (this.lock)
+        {
+            return this.map.keysView();
+        }
+    }
+
+    public RichIterable\<<name1><name2>Pair> keyValuesView()
+    {
+        synchronized (this.lock)
+        {
+            return SynchronizedRichIterable.of(this.map.keyValuesView(), this.lock).asLazy();
+        }
+    }
+
+    public Mutable<name1><name2>Map select(<name1><name2>Predicate predicate)
+    {
+        synchronized (this.lock)
+        {
+            return this.map.select(predicate);
+        }
+    }
+
+    public Mutable<name1><name2>Map reject(<name1><name2>Predicate predicate)
+    {
+        synchronized (this.lock)
+        {
+            return this.map.reject(predicate);
+        }
+    }
+
+    /**
+     * This must be manually synchronized by the developer.
+     */
+    public Mutable<name2>Iterator <type2>Iterator()
+    {
+        return this.map.<type2>Iterator();
+    }
+
+    public void forEach(<name2>Procedure procedure)
+    {
+        this.each(procedure);
+    }
+
+    /**
+     * @since 7.0.
+     */
+    public void each(<name2>Procedure procedure)
+    {
+        synchronized (this.lock)
+        {
+            this.map.forEach(procedure);
+        }
+    }
+
+    public int count(<name2>Predicate predicate)
+    {
+        synchronized (this.lock)
+        {
+            return this.map.count(predicate);
+        }
+    }
+
+    public boolean anySatisfy(<name2>Predicate predicate)
+    {
+        synchronized (this.lock)
+        {
+            return this.map.anySatisfy(predicate);
+        }
+    }
+
+    public boolean allSatisfy(<name2>Predicate predicate)
+    {
+        synchronized (this.lock)
+        {
+            return this.map.allSatisfy(predicate);
+        }
+    }
+
+    public boolean noneSatisfy(<name2>Predicate predicate)
+    {
+        synchronized (this.lock)
+        {
+            return this.map.noneSatisfy(predicate);
+        }
+    }
+
+    public Mutable<name2>Collection select(<name2>Predicate predicate)
+    {
+        synchronized (this.lock)
+        {
+            return this.map.select(predicate);
+        }
+    }
+
+    public Mutable<name2>Collection reject(<name2>Predicate predicate)
+    {
+        synchronized (this.lock)
+        {
+            return this.map.reject(predicate);
+        }
+    }
+
+    public <type2> detectIfNone(<name2>Predicate predicate, <type2> ifNone)
+    {
+        synchronized (this.lock)
+        {
+            return this.map.detectIfNone(predicate, ifNone);
+        }
+    }
+
+    public \<V> MutableCollection\<V> collect(<name2>ToObjectFunction\<? extends V> function)
+    {
+        synchronized (this.lock)
+        {
+            return this.map.collect(function);
+        }
+    }
+
+    <(arithmeticMethods.(type2))(name2, type2)>
+    public <type2>[] toArray()
+    {
+        synchronized (this.lock)
+        {
+            return this.map.toArray();
+        }
+    }
+
+    public boolean contains(<type2> value)
+    {
+        synchronized (this.lock)
+        {
+            return this.map.contains(value);
+        }
+    }
+
+    public boolean containsAll(<type2>... source)
+    {
+        synchronized (this.lock)
+        {
+            return this.map.containsAll(source);
+        }
+    }
+
+    public boolean containsAll(<name2>Iterable source)
+    {
+        synchronized (this.lock)
+        {
+            return this.map.containsAll(source);
+        }
+    }
+
+    public Mutable<name2>List toList()
+    {
+        synchronized (this.lock)
+        {
+            return this.map.toList();
+        }
+    }
+
+    public Mutable<name2>Set toSet()
+    {
+        synchronized (this.lock)
+        {
+            return this.map.toSet();
+        }
+    }
+
+    public Mutable<name2>Bag toBag()
+    {
+        synchronized (this.lock)
+        {
+            return this.map.toBag();
+        }
+    }
+
+    public Lazy<name2>Iterable asLazy()
+    {
+        synchronized (this.lock)
+        {
+            return this.map.asLazy();
+        }
+    }
+
+    public Mutable<name1><name2>Map withKeyValue(<type1> key, <type2> value)
+    {
+        synchronized (this.lock)
+        {
+            this.map.withKeyValue(key, value);
+        }
+        return this;
+    }
+
+    public Mutable<name1><name2>Map withoutKey(<type1> key)
+    {
+        synchronized (this.lock)
+        {
+            this.map.withoutKey(key);
+        }
+        return this;
+    }
+
+    public Mutable<name1><name2>Map withoutAllKeys(<name1>Iterable keys)
+    {
+        synchronized (this.lock)
+        {
+            this.map.withoutAllKeys(keys);
+        }
+        return this;
+    }
+
+    public Mutable<name1><name2>Map asUnmodifiable()
+    {
+        return new Unmodifiable<name1><name2>Map(this);
+    }
+
+    public Mutable<name1><name2>Map asSynchronized()
+    {
+        return this;
+    }
+
+    public Immutable<name1><name2>Map toImmutable()
+    {
+        return <name1><name2>Maps.immutable.withAll(this);
+    }
+
+    public int size()
+    {
+        synchronized (this.lock)
+        {
+            return this.map.size();
+        }
+    }
+
+    public boolean isEmpty()
+    {
+        synchronized (this.lock)
+        {
+            return this.map.isEmpty();
+        }
+    }
+
+    public boolean notEmpty()
+    {
+        synchronized (this.lock)
+        {
+            return this.map.notEmpty();
+        }
+    }
+
+    public Mutable<name1>Set keySet()
+    {
+        synchronized (this.lock)
+        {
+            return Synchronized<name1>Set.of(this.map.keySet(), this.lock);
+        }
+    }
+
+    public Mutable<name2>Collection values()
+    {
+        synchronized (this.lock)
+        {
+            return Synchronized<name2>Collection.of(this.map.values(), this.lock);
+        }
+    }
+
+    @Override
+    public boolean equals(Object otherMap)
+    {
+        synchronized (this.lock)
+        {
+            return this.map.equals(otherMap);
+        }
+    }
+
+    @Override
+    public int hashCode()
+    {
+        synchronized (this.lock)
+        {
+            return this.map.hashCode();
+        }
+    }
+
+    @Override
+    public String toString()
+    {
+        synchronized (this.lock)
+        {
+            return this.map.toString();
+        }
+    }
+
+    public String makeString()
+    {
+        synchronized (this.lock)
+        {
+            return this.map.makeString();
+        }
+    }
+
+    public String makeString(String separator)
+    {
+        synchronized (this.lock)
+        {
+            return this.map.makeString(separator);
+        }
+    }
+
+    public String makeString(String start, String separator, String end)
+    {
+        synchronized (this.lock)
+        {
+            return this.map.makeString(start, separator, end);
+        }
+    }
+
+    public void appendString(Appendable appendable)
+    {
+        synchronized (this.lock)
+        {
+            this.map.appendString(appendable);
+        }
+    }
+
+    public void appendString(Appendable appendable, String separator)
+    {
+        synchronized (this.lock)
+        {
+            this.map.appendString(appendable, separator);
+        }
+    }
+
+    public void appendString(Appendable appendable, String start, String separator, String end)
+    {
+        synchronized (this.lock)
+        {
+            this.map.appendString(appendable, start, separator, end);
+        }
+    }
+
+    public \<T> T injectInto(T injectedValue, Object<name2>ToObjectFunction\<? super T, ? extends T> function)
+    {
+        synchronized (this.lock)
+        {
+            return this.map.injectInto(injectedValue, function);
+        }
+    }
+}
+
+>>
+
+arithmeticMethods ::= [
+    "byte": "allMethods",
+    "short": "allMethods",
+    "char": "allMethods",
+    "int": "allMethods",
+    "long": "allMethods",
+    "float": "allMethods",
+    "double": "allMethods",
+    "boolean": "noMethods"
+    ]
+
+allMethods(name, type) ::=<<
+public <wideType.(type2)> sum()
+{
+    synchronized (this.lock)
+    {
+        return this.map.sum();
+    }
+}
+
+public <type2> max()
+{
+    synchronized (this.lock)
+    {
+        return this.map.max();
+    }
+}
+
+public <type2> maxIfEmpty(<type2> defaultValue)
+{
+    synchronized (this.lock)
+    {
+        return this.map.maxIfEmpty(defaultValue);
+    }
+}
+
+public <type2> min()
+{
+    synchronized (this.lock)
+    {
+        return this.map.min();
+    }
+}
+
+public <type2> minIfEmpty(<type2> defaultValue)
+{
+    synchronized (this.lock)
+    {
+        return this.map.minIfEmpty(defaultValue);
+    }
+}
+
+public double average()
+{
+    synchronized (this.lock)
+    {
+        return this.map.average();
+    }
+}
+
+public double median()
+{
+    synchronized (this.lock)
+    {
+        return this.map.median();
+    }
+}
+
+
+public <type2> addToValue(<type1> key, <type2> toBeAdded)
+{
+    synchronized (this.lock)
+    {
+        return this.map.addToValue(key, toBeAdded);
+    }
+}
+
+public <type2>[] toSortedArray()
+{
+    synchronized (this.lock)
+    {
+        return this.map.toSortedArray();
+    }
+}
+
+public Mutable<name2>List toSortedList()
+{
+    synchronized (this.lock)
+    {
+        return this.map.toSortedList();
+    }
+}
+
+>>
+
+noMethods(name, type) ::= ""
+

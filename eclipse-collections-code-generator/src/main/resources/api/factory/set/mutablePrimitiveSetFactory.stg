@@ -1,0 +1,54 @@
+import "copyright.stg"
+
+targetPath() ::= "org/eclipse/collections/api/factory/set/primitive"
+
+fileName(primitive) ::= "Mutable<primitive.name>SetFactory"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.api.factory.set.primitive;
+
+import org.eclipse.collections.api.<name>Iterable;
+import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
+
+/**
+ * A factory which creates instances of type {@link Mutable<name>Set}.
+ * This file was automatically generated from template file mutablePrimitiveSetFactory.stg.
+ *
+ * @since 6.0.
+ */
+public interface Mutable<name>SetFactory
+{
+    Mutable<name>Set empty();
+
+    /**
+     * Same as {@link #empty()}.
+     */
+    Mutable<name>Set of();
+
+    /**
+     * Same as {@link #empty()}.
+     */
+    Mutable<name>Set with();
+
+    /**
+     * Same as {@link #with(<type>[])}.
+     */
+    Mutable<name>Set of(<type>... items);
+
+    Mutable<name>Set with(<type>... items);
+
+    /**
+     * Same as {@link #withAll(<name>Iterable)}.
+     */
+    Mutable<name>Set ofAll(<name>Iterable items);
+
+    Mutable<name>Set withAll(<name>Iterable items);
+}
+
+>>

@@ -1,0 +1,39 @@
+import "copyright.stg"
+import "primitiveAPI.stg"
+
+targetPath() ::= "org/eclipse/collections/api/stack/primitive"
+
+fileName(primitive) ::= "Immutable<primitive.name>Stack"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.api.stack.primitive;
+
+import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
+import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
+import org.eclipse.collections.api.stack.ImmutableStack;
+
+/**
+ * This file was automatically generated from template file immutablePrimitiveStack.stg.
+ *
+ * @since 3.0.
+ */
+public interface Immutable<name>Stack extends <name>Stack
+{
+    Immutable<name>Stack push(<type> item);
+
+    Immutable<name>Stack pop();
+
+    Immutable<name>Stack pop(int count);
+
+    <sharedAPI(fileName(primitive), name)>
+
+    \<V> ImmutableStack\<V> collect(<name>ToObjectFunction\<? extends V> function);
+}
+
+>>

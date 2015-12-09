@@ -1,0 +1,187 @@
+import "copyright.stg"
+import "primitiveEquals.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+
+skipBoolean() ::= "true"
+
+isTest() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/map/mutable/primitive"
+
+fileName(primitive) ::= "Synchronized<primitive.name>BooleanMapKeySetTest"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name, primitive.wrapperName)>
+>>
+
+body(type, name, wrapperName) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.map.mutable.primitive;
+
+import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
+import org.eclipse.collections.impl.block.factory.primitive.<name>Predicates;
+import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
+import org.eclipse.collections.impl.set.mutable.primitive.Abstract<name>SetTestCase;
+import org.eclipse.collections.impl.test.Verify;
+import org.junit.Assert;
+import org.junit.Test;
+
+/**
+ * JUnit test for {@link Synchronized<name>BooleanMap#keySet()}.
+ *
+ * This file was automatically generated from template file synchronizedPrimitiveBooleanMapKeySetTest.stg.
+ */
+public class Synchronized<name>BooleanMapKeySetTest extends Abstract<name>SetTestCase
+{
+    @Override
+    protected Mutable<name>Set classUnderTest()
+    {
+        return new Synchronized<name>BooleanMap(<name>BooleanHashMap.newWithKeysValues(<(literal.(type))("1")>, true, <(literal.(type))("2")>, false, <(literal.(type))("3")>, true)).keySet();
+    }
+
+    @Override
+    protected Mutable<name>Set newWith(<type>... elements)
+    {
+        <name>BooleanHashMap map = new <name>BooleanHashMap();
+        for (int i = 0; i \< elements.length; i++)
+        {
+            map.put(elements[i], (i & 1) == 0);
+        }
+        return map.asSynchronized().keySet();
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void addAllIterable()
+    {
+        this.classUnderTest().addAll(new <name>ArrayList());
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void add()
+    {
+        this.classUnderTest().add(<(literal.(type))("0")>);
+    }
+
+    <if(primitive.floatingPoint)><NaNTests()><endif>
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void addAllArray()
+    {
+        this.classUnderTest().addAll(<["0", "1"]:(literal.(type))(); separator=", ">);
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void with()
+    {
+        this.classUnderTest().with(<(literal.(type))("0")>);
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void withAll()
+    {
+        this.classUnderTest().withAll(new <name>ArrayList());
+    }
+
+    @Override
+    @Test
+    public void without()
+    {
+        Mutable<name>Set set = this.newWith(<(literal.(type))("1")>, <(literal.(type))("2")>, <(literal.(type))("3")>);
+        Mutable<name>Set setWithout = set.without(<(literal.(type))("2")>);
+        Assert.assertSame(set, setWithout);
+        Mutable<name>Set expectedSet = this.newWith(<(literal.(type))("1")>, <(literal.(type))("3")>);
+        Assert.assertEquals(expectedSet.toList(), setWithout.toList());
+        Assert.assertEquals(expectedSet.toList(), setWithout.without(<(literal.(type))("4")>).toList());
+    }
+
+    @Override
+    @Test
+    public void withoutAll()
+    {
+        Mutable<name>Set set = this.newWith(<(literal.(type))("1")>, <(literal.(type))("2")>, <(literal.(type))("3")>);
+        Mutable<name>Set setWithout = set.withoutAll(new <name>ArrayList(<(literal.(type))("2")>, <(literal.(type))("4")>));
+        Assert.assertSame(set, setWithout);
+        Mutable<name>Set expectedSet = this.newWith(<(literal.(type))("1")>, <(literal.(type))("3")>);
+        Assert.assertEquals(expectedSet.toList(), setWithout.toList());
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void freeze()
+    {
+        this.classUnderTest().freeze();
+    }
+
+    @Override
+    public void testEquals()
+    {
+        Mutable<name>Set set1 = this.newWith(<["1", "31", "32"]:(literal.(type))(); separator=", ">);
+        Mutable<name>Set set2 = this.newWith(<["32", "31", "1"]:(literal.(type))(); separator=", ">);
+        Mutable<name>Set set3 = this.newWith(<["32", "32", "31", "1"]:(literal.(type))(); separator=", ">);
+        Mutable<name>Set set4 = this.newWith(<["32", "32", "31", "1", "1"]:(literal.(type))(); separator=", ">);
+        Mutable<name>Set set5 = this.newWith(<["32", "1"]:(literal.(type))(); separator=", ">);
+        Verify.assertEqualsAndHashCode(set1, set2);
+        Verify.assertEqualsAndHashCode(set1, set3);
+        Verify.assertEqualsAndHashCode(set1, set4);
+        Verify.assertEqualsAndHashCode(set2, set3);
+        Verify.assertEqualsAndHashCode(set2, set4);
+        Assert.assertNotEquals(set1, set5);
+    }
+
+    @Override
+    @Test
+    public void noneSatisfy()
+    {
+        super.noneSatisfy();
+        Assert.assertFalse(this.newWith(<["0", "1", "2"]:(literal.(type))(); separator=", ">).noneSatisfy(<name>Predicates.equal(<(literal.(type))("0")>)));
+    }
+
+    @Override
+    @Test
+    public void sum()
+    {
+        super.sum();
+        Assert.assertEquals(<(wideLiteral.(type))("3")>, this.newWith(<["0", "1", "2"]:(literal.(type))(); separator=", ">).sum()<wideDelta.(type)>);
+    }
+
+    @Override
+    @Test
+    public void testHashCode()
+    {
+        Mutable<name>Set set1 = this.newWith(<["0", "1", "31", "32"]:(literal.(type))(); separator=", ">);
+        Mutable<name>Set set2 = this.newWith(<["32", "31", "1", "0"]:(literal.(type))(); separator=", ">);
+        Assert.assertEquals(set1.hashCode(), set2.hashCode());
+        Assert.assertEquals(this.newObjectCollectionWith(<["0", "1", "31", "32"]:(literal.(type))(); separator=", ">).hashCode(), set1.hashCode());
+    }
+}
+
+>>
+
+NaNTests() ::= <<
+@Override
+@Test(expected = UnsupportedOperationException.class)
+public void add_NaN()
+{
+    this.newWith(<wrapperName>.NaN).add(<wrapperName>.NaN);
+}
+
+@Override
+@Test(expected = UnsupportedOperationException.class)
+public void add_POSITIVE_INFINITY()
+{
+    this.newWith(<wrapperName>.POSITIVE_INFINITY).add(<wrapperName>.POSITIVE_INFINITY);
+}
+
+@Override
+@Test(expected = UnsupportedOperationException.class)
+public void add_NEGATIVE_INFINITY()
+{
+    this.newWith(<wrapperName>.NEGATIVE_INFINITY).add(<wrapperName>.NEGATIVE_INFINITY);
+}
+>>

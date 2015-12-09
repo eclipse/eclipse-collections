@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~ Copyright (c) 2015 Goldman Sachs.
+  ~ All rights reserved. This program and the accompanying materials
+  ~ are made available under the terms of the Eclipse Public License v1.0
+  ~ and Eclipse Distribution License v. 1.0 which accompany this distribution.
+  ~ The Eclipse Public License is available at http://www.eclipse.org/legal/epl-v10.html
+  ~ and the Eclipse Distribution License is available at
+  ~ http://www.eclipse.org/org/documents/edl-v10.php.
+  -->
+
+<project name="scala-unit-tests" default="test" basedir="." xmlns:ivy="antlib:org.apache.ivy.ant">
+    <property name="src.dir" location="src/main/scala" />
+    <property name="testsrc.dir" location="src/test/scala" />
+
+    <import file="../common-build.xml" />
+
+    <target name="-scala-init" depends="-ivy-init">
+        <ivy:cachepath pathid="scala.classpath" conf="scala" />
+        <taskdef resource="scala/tools/ant/antlib.xml" classpathref="scala.classpath" />
+    </target>
+
+    <target name="-compile-init">
+        <uptodate property="compile.uptodate" targetfile="target/compile.uptodate">
+            <srcfiles dir="${src.dir}" includes="**/*.scala" />
+        </uptodate>
+    </target>
+
+    <target
+        name="compile"
+        depends="-compile-init, -ivy-init, -scala-init"
+        unless="compile.uptodate"
+        description="Compile the code">
+
+        <ivy:cachepath pathid="compile.classpath" conf="compile" />
+
+        <mkdir dir="${src.dir}" />
+        <mkdir dir="target/classes" />
+        <scalac
+            destdir="target/classes"
+            fork="false">
+            <src>
+                <pathelement location="${src.dir}" />
+            </src>
+            <classpath refid="compile.classpath" />
+        </scalac>
+
+        <copy todir="target/classes" failonerror="false">
+            <fileset dir="src/main/resources" />
+        </copy>
+
+        <touch file="target/compile.uptodate" />
+    </target>
+
+
+    <target name="-compile-tests-init">
+        <uptodate property="compile-tests.uptodate" targetfile="target/compile-tests.uptodate">
+            <srcfiles dir="${testsrc.dir}" includes="**/*.scala" />
+        </uptodate>
+    </target>
+
+    <target
+        name="compile-tests"
+        depends="jar, -compile-tests-init, -ivy-init, -scala-init"
+        unless="compile-tests.uptodate"
+        description="Compile the test code">
+
+        <ivy:cachepath pathid="compile-test.classpath" conf="compile-test" />
+
+        <mkdir dir="target/test-classes" />
+        <scalac
+            destdir="target/test-classes"
+            target="jvm-1.5">
+            <src>
+                <pathelement location="${testsrc.dir}" />
+            </src>
+            <classpath>
+                <path refid="compile-test.classpath" />
+                <pathelement location="${jar.name}" />
+            </classpath>
+        </scalac>
+
+        <copy todir="target/test-classes" failonerror="false">
+            <fileset dir="src/test/resources" />
+        </copy>
+
+        <touch file="target/compile-tests.uptodate" />
+    </target>
+
+    <target
+        name="test"
+        depends="-test-skip-test, compile-tests, install"
+        unless="skip.test"
+        description="Run the test cases">
+
+        <ivy:cachepath pathid="test.classpath" conf="test" />
+        <mkdir dir="target/test-reports" />
+        <junit haltonerror="true" haltonfailure="true" fork="true" forkmode="once" dir="target/test-reports">
+            <formatter type="xml" />
+            <formatter type="plain" usefile="false" />
+            <classpath>
+                <path refid="test.classpath" />
+                <pathelement location="${jar.name}" />
+                <pathelement location="target/test-classes" />
+            </classpath>
+            <batchtest todir="target/test-reports">
+                <fileset dir="target/test-classes">
+                    <include name="**/Test*.class" />
+                    <include name="**/*Test.class" />
+                    <include name="**/*TestSuite.class" />
+                    <exclude name="**/Abstract*.class" />
+                    <exclude name="**/*TestCase.class" />
+                    <exclude name="**/*$*" />
+                </fileset>
+            </batchtest>
+        </junit>
+
+        <touch file="target/tests.uptodate" />
+    </target>
+
+    <target name="install" depends="-ivy-init, jar, source-jar, ivy-make-pom"
+        description="installs the module to the local ivy cache">
+        <ivy:resolve />
+        <ivy:publish resolver="local" overwrite="true" pubrevision="${build.version.full}">
+            <artifacts pattern="target/[artifact]-${build.version.full}(-[classifier]).[ext]" />
+        </ivy:publish>
+    </target>
+
+</project>

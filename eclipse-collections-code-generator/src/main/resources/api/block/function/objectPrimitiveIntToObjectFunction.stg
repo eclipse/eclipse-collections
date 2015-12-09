@@ -1,0 +1,29 @@
+import "copyright.stg"
+
+targetPath() ::= "org/eclipse/collections/api/block/function/primitive"
+
+fileName(primitive) ::= "Object<primitive.name>IntToObjectFunction"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name, primitive.wrapperName)>
+>>
+
+body(type, name, wrapperName) ::= <<
+<copyright()>
+
+package org.eclipse.collections.api.block.function.primitive;
+
+import java.io.Serializable;
+
+/**
+ * This file was automatically generated from template file objectPrimitiveIntToObjectFunction.stg.
+ *
+ * @since 3.2.
+ */
+public interface Object<name>IntToObjectFunction\<T, R>
+        extends Serializable
+{
+    R valueOf(T object, <type> value, int index);
+}
+
+>>

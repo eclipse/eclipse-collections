@@ -1,0 +1,32 @@
+import "copyright.stg"
+
+hasTwoPrimitives() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/api/tuple/primitive"
+
+fileName(primitive1, primitive2, sameTwoPrimitives) ::= "<primitive1.name><primitive2.name>Pair"
+
+class(primitive1, primitive2, sameTwoPrimitives) ::= <<
+<body(primitive1.type, primitive2.type, primitive1.name, primitive2.name)>
+>>
+
+body(type1, type2, name1, name2) ::= <<
+<copyright()>
+
+package org.eclipse.collections.api.tuple.primitive;
+
+import java.io.Serializable;
+
+/**
+ * This file was automatically generated from template file primitivePrimitivePair.stg
+ *
+ * @since 5.0
+ */
+public interface <name1><name2>Pair extends Serializable, Comparable\<<name1><name2>Pair>
+{
+    <type1> getOne();
+
+    <type2> getTwo();
+}
+
+>>

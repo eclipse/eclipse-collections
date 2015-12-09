@@ -1,0 +1,68 @@
+import "copyright.stg"
+
+targetPath() ::= "org/eclipse/collections/impl/bag/mutable/primitive"
+
+fileName(primitive) ::= "Mutable<primitive.name>BagFactoryImpl"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.bag.mutable.primitive;
+
+import org.eclipse.collections.api.<name>Iterable;
+import org.eclipse.collections.api.factory.bag.primitive.Mutable<name>BagFactory;
+import org.eclipse.collections.api.bag.primitive.Mutable<name>Bag;
+
+/**
+ * Mutable<name>BagFactoryImpl is a factory implementation which creates instances of type {@link Mutable<name>Bag}.
+ * This file was automatically generated from template file mutablePrimitiveBagFactoryImpl.stg.
+ *
+ * @since 6.0.
+ */
+public class Mutable<name>BagFactoryImpl implements Mutable<name>BagFactory
+{
+    public Mutable<name>Bag empty()
+    {
+        return new <name>HashBag();
+    }
+
+    public Mutable<name>Bag of()
+    {
+        return this.empty();
+    }
+
+    public Mutable<name>Bag with()
+    {
+        return this.empty();
+    }
+
+    public Mutable<name>Bag of(<type>... items)
+    {
+        return this.with(items);
+    }
+
+    public Mutable<name>Bag with(<type>... items)
+    {
+        if (items == null || items.length == 0)
+        {
+            return this.with();
+        }
+        return <name>HashBag.newBagWith(items);
+    }
+
+    public Mutable<name>Bag ofAll(<name>Iterable items)
+    {
+        return this.withAll(items);
+    }
+
+    public Mutable<name>Bag withAll(<name>Iterable items)
+    {
+        return <name>HashBag.newBag(items);
+    }
+}
+
+>>

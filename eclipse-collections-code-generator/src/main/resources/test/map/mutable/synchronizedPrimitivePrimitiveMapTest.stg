@@ -1,0 +1,85 @@
+import "copyright.stg"
+import "primitiveEquals.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+
+isTest() ::= "true"
+
+hasTwoPrimitives() ::= "true"
+
+skipBoolean() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/map/mutable/primitive"
+
+fileName(primitive1, primitive2, sameTwoPrimitives) ::= "Synchronized<primitive1.name><primitive2.name>MapTest"
+
+class(primitive1, primitive2, sameTwoPrimitives) ::= <<
+<body(primitive1.type, primitive2.type, primitive1.name, primitive2.name)>
+>>
+
+body(type1, type2, name1, name2) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.map.mutable.primitive;
+
+import org.junit.Assert;
+import org.junit.Test;
+
+/**
+ * JUnit test for {@link Synchronized<name1><name2>Map}.
+ * This file was automatically generated from template file synchronizedPrimitivePrimitiveMapTest.stg.
+ */
+public class Synchronized<name1><name2>MapTest extends AbstractMutable<name1><name2>MapTestCase
+{
+    private final Synchronized<name1><name2>Map map = this.classUnderTest();
+
+    @Override
+    protected Synchronized<name1><name2>Map classUnderTest()
+    {
+        return new Synchronized<name1><name2>Map(<name1><name2>HashMap.newWithKeysValues(<["0", "31", "32"]:keyValue(); separator=", ">));
+    }
+
+    @Override
+    protected Synchronized<name1><name2>Map newWithKeysValues(<type1> key1, <type2> value1)
+    {
+        return new Synchronized<name1><name2>Map(new <name1><name2>HashMap(1).withKeyValue(key1, value1));
+    }
+
+    @Override
+    protected Synchronized<name1><name2>Map newWithKeysValues(<type1> key1, <type2> value1, <type1> key2, <type2> value2)
+    {
+        return new Synchronized<name1><name2>Map(new <name1><name2>HashMap(2).withKeysValues(key1, value1, key2, value2));
+    }
+
+    @Override
+    protected Synchronized<name1><name2>Map newWithKeysValues(<type1> key1, <type2> value1, <type1> key2, <type2> value2, <type1> key3, <type2> value3)
+    {
+        return new Synchronized<name1><name2>Map(new <name1><name2>HashMap(3).withKeysValues(key1, value1, key2, value2, key3, value3));
+    }
+
+    @Override
+    protected Synchronized<name1><name2>Map newWithKeysValues(<type1> key1, <type2> value1, <type1> key2, <type2> value2, <type1> key3, <type2> value3, <type1> key4, <type2> value4)
+    {
+        return new Synchronized<name1><name2>Map(new <name1><name2>HashMap(4).withKeysValues(key1, value1, key2, value2, key3, value3, key4, value4));
+    }
+
+    @Override
+    protected Synchronized<name1><name2>Map getEmptyMap()
+    {
+        return new Synchronized<name1><name2>Map(new <name1><name2>HashMap());
+    }
+
+    @Override
+    @Test
+    public void asSynchronized()
+    {
+        super.asSynchronized();
+        Assert.assertSame(this.map, this.map.asSynchronized());
+    }
+}
+
+>>
+
+keyValue(value) ::= <<
+<(literal.(type1))(value)>, <(literal.(type2))(value)>
+>>

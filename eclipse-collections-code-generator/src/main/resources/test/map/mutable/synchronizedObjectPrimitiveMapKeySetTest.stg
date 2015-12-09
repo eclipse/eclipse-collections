@@ -1,0 +1,244 @@
+import "copyright.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+import "primitiveEquals.stg"
+
+skipBoolean() ::= "true"
+
+isTest() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/map/mutable/primitive"
+
+fileName(primitive) ::= "SynchronizedObject<primitive.name>MapKeySetTest"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name, primitive.wrapperName)>
+>>
+
+body(type, name, wrapperName) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.map.mutable.primitive;
+
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+import java.util.Set;
+
+import org.eclipse.collections.impl.bag.mutable.HashBag;
+import org.eclipse.collections.impl.list.mutable.FastList;
+import org.eclipse.collections.impl.set.mutable.UnifiedSet;
+import org.eclipse.collections.impl.test.Verify;
+import org.junit.Assert;
+import org.junit.Test;
+
+/**
+ * JUnit test for {@link SynchronizedObject<name>Map#keySet()}.
+ * This file was automatically generated from template file synchronizedObjectPrimitiveMapKeySetTest.stg.
+ */
+public class SynchronizedObject<name>MapKeySetTest
+{
+    private SynchronizedObject<name>Map\<String> newMapWithKeysValues(String key1, <type> value1, String key2, <type> value2, String key3, <type> value3)
+    {
+        return new SynchronizedObject<name>Map\<>(Object<name>HashMap.newWithKeysValues(key1, value1, key2, value2, key3, value3));
+    }
+
+    private SynchronizedObject<name>Map\<String> newMapWithKeysValues(String key1, <type> value1, String key2, <type> value2, String key3, <type> value3, String key4, <type> value4)
+    {
+        return new SynchronizedObject<name>Map\<>(Object<name>HashMap.newWithKeysValues(key1, value1, key2, value2, key3, value3, key4, value4));
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void add()
+    {
+        this.newMapWithKeysValues("One", <(literal.(type))("1")>, "Two", <(literal.(type))("2")>, "Three", <(literal.(type))("3")>).keySet().add("Four");
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void addAll()
+    {
+        this.newMapWithKeysValues("One", <(literal.(type))("1")>, "Two", <(literal.(type))("2")>, "Three", <(literal.(type))("3")>).keySet().addAll(FastList.newListWith("Four"));
+    }
+
+    @Test
+    public void contains()
+    {
+        SynchronizedObject<name>Map\<String> map = this.newMapWithKeysValues("One", <(literal.(type))("1")>, "Two", <(literal.(type))("2")>, "Three", <(literal.(type))("3")>, null, <(literal.(type))("4")>);
+        Set\<String> keySet = map.keySet();
+        Assert.assertTrue(keySet.contains("One"));
+        Assert.assertTrue(keySet.contains("Two"));
+        Assert.assertTrue(keySet.contains("Three"));
+        Assert.assertFalse(keySet.contains("Four"));
+        Assert.assertTrue(keySet.contains(null));
+        keySet.remove(null);
+        Assert.assertFalse(keySet.contains(null));
+        map.removeKey("One");
+        Assert.assertFalse(keySet.contains("One"));
+    }
+
+    @Test
+    public void containsAll()
+    {
+        SynchronizedObject<name>Map\<String> map = this.newMapWithKeysValues("One", <(literal.(type))("1")>, "Two", <(literal.(type))("2")>, "Three", <(literal.(type))("3")>, null, <(literal.(type))("4")>);
+        Set\<String> keySet = map.keySet();
+        Assert.assertTrue(keySet.containsAll(FastList.newListWith("One", "Two")));
+        Assert.assertTrue(keySet.containsAll(FastList.newListWith("One", "Two", "Three", null)));
+        Assert.assertTrue(keySet.containsAll(FastList.newListWith(null, null)));
+        Assert.assertFalse(keySet.containsAll(FastList.newListWith("One", "Four")));
+        Assert.assertFalse(keySet.containsAll(FastList.newListWith("Five", "Four")));
+        keySet.remove(null);
+        Assert.assertFalse(keySet.containsAll(FastList.newListWith("One", "Two", "Three", null)));
+        Assert.assertTrue(keySet.containsAll(FastList.newListWith("One", "Two", "Three")));
+        map.removeKey("One");
+        Assert.assertFalse(keySet.containsAll(FastList.newListWith("One", "Two")));
+        Assert.assertTrue(keySet.containsAll(FastList.newListWith("Three", "Two")));
+    }
+
+    @Test
+    public void isEmpty()
+    {
+        SynchronizedObject<name>Map\<String> map = this.newMapWithKeysValues("One", <(literal.(type))("1")>, "Two", <(literal.(type))("2")>, "Three", <(literal.(type))("3")>, null, <(literal.(type))("4")>);
+        Set\<String> keySet = map.keySet();
+        Assert.assertFalse(keySet.isEmpty());
+        Object<name>HashMap\<String> map1 = Object<name>HashMap.newMap();
+        Set\<String> keySet1 = map1.keySet();
+        Assert.assertTrue(keySet1.isEmpty());
+        map1.put("One", <(literal.(type))("1")>);
+        Assert.assertFalse(keySet1.isEmpty());
+    }
+
+    @Test
+    public void size()
+    {
+        SynchronizedObject<name>Map\<String> map = this.newMapWithKeysValues("One", <(literal.(type))("1")>, "Two", <(literal.(type))("2")>, "Three", <(literal.(type))("3")>, null, <(literal.(type))("4")>);
+        Set\<String> keySet = map.keySet();
+        Verify.assertSize(4, keySet);
+        map.remove("One");
+        Verify.assertSize(3, keySet);
+        map.put("Five", <(literal.(type))("5")>);
+        Verify.assertSize(4, keySet);
+
+        Object<name>HashMap\<String> map1 = Object<name>HashMap.newMap();
+        Set\<String> keySet1 = map1.keySet();
+        Verify.assertSize(0, keySet1);
+        map1.put(null, <(literal.(type))("1")>);
+        Verify.assertSize(1, keySet1);
+    }
+
+    @Test
+    public void iterator()
+    {
+        SynchronizedObject<name>Map\<String> map = this.newMapWithKeysValues("One", <(literal.(type))("1")>, "Two", <(literal.(type))("2")>, "Three", <(literal.(type))("3")>, null, <(literal.(type))("4")>);
+        Set\<String> keySet = map.keySet();
+        Iterator\<String> iterator = keySet.iterator();
+
+        HashBag\<String> expected = HashBag.newBagWith("One", "Two", "Three", null);
+        HashBag\<String> actual = HashBag.newBag();
+        Verify.assertThrows(IllegalStateException.class, iterator::remove);
+        for (int i = 0; i \< 4; i++)
+        {
+            Assert.assertTrue(iterator.hasNext());
+            actual.add(iterator.next());
+        }
+        Assert.assertFalse(iterator.hasNext());
+        Verify.assertThrows(NoSuchElementException.class, (Runnable) iterator::next);
+        Assert.assertEquals(expected, actual);
+
+        Iterator\<String> iterator1 = keySet.iterator();
+        for (int i = 4; i > 0; i--)
+        {
+            Assert.assertTrue(iterator1.hasNext());
+            iterator1.next();
+            iterator1.remove();
+            Verify.assertThrows(IllegalStateException.class, iterator1::remove);
+            Verify.assertSize(i - 1, keySet);
+            Verify.assertSize(i - 1, map);
+        }
+
+        Assert.assertFalse(iterator1.hasNext());
+        Verify.assertEmpty(map);
+        Verify.assertEmpty(keySet);
+    }
+
+    @Test
+    public void removeFromKeySet()
+    {
+        SynchronizedObject<name>Map\<String> map = this.newMapWithKeysValues("One", <(literal.(type))("1")>, "Two", <(literal.(type))("2")>, "Three", <(literal.(type))("3")>);
+        Assert.assertFalse(map.keySet().remove("Four"));
+
+        Assert.assertTrue(map.keySet().remove("Two"));
+        Assert.assertEquals(Object<name>HashMap.newWithKeysValues("One", <(literal.(type))("1")>,  "Three", <(literal.(type))("3")>), map);
+        Assert.assertEquals(UnifiedSet.newSetWith("One", "Three"), map.keySet());
+    }
+
+    @Test
+    public void removeNullFromKeySet()
+    {
+        SynchronizedObject<name>Map\<String> map = this.newMapWithKeysValues("One", <(literal.(type))("1")>, "Two", <(literal.(type))("2")>, "Three", <(literal.(type))("3")>);
+        Assert.assertFalse(map.keySet().remove(null));
+        Assert.assertEquals(Object<name>HashMap.newWithKeysValues("One", <(literal.(type))("1")>, "Two", <(literal.(type))("2")>, "Three", <(literal.(type))("3")>), map);
+        Assert.assertEquals(UnifiedSet.newSetWith("One", "Two", "Three"), map.keySet());
+
+        map.put(null, <(literal.(type))("4")>);
+        Assert.assertEquals(UnifiedSet.newSetWith("One", "Two", "Three", null), map.keySet());
+        Assert.assertTrue(map.keySet().remove(null));
+        Assert.assertEquals(Object<name>HashMap.newWithKeysValues("One", <(literal.(type))("1")>, "Two", <(literal.(type))("2")>, "Three", <(literal.(type))("3")>), map);
+        Assert.assertEquals(UnifiedSet.newSetWith("One", "Two", "Three"), map.keySet());
+    }
+
+    @Test
+    public void removeAllFromKeySet()
+    {
+        SynchronizedObject<name>Map\<String> map = this.newMapWithKeysValues("One", <(literal.(type))("1")>, "Two", <(literal.(type))("2")>, "Three", <(literal.(type))("3")>);
+        Assert.assertFalse(map.keySet().removeAll(FastList.newListWith("Four")));
+        Assert.assertEquals(UnifiedSet.newSetWith("One", "Two", "Three"), map.keySet());
+
+        Assert.assertTrue(map.keySet().removeAll(FastList.newListWith("Two", "Four")));
+        Assert.assertEquals(Object<name>HashMap.newWithKeysValues("One", <(literal.(type))("1")>,  "Three", <(literal.(type))("3")>), map);
+        Assert.assertEquals(UnifiedSet.newSetWith("One", "Three"), map.keySet());
+    }
+
+    @Test
+    public void retainAllFromKeySet()
+    {
+        SynchronizedObject<name>Map\<String> map = this.newMapWithKeysValues("One", <(literal.(type))("1")>, "Two", <(literal.(type))("2")>, "Three", <(literal.(type))("3")>);
+        Assert.assertFalse(map.keySet().retainAll(FastList.newListWith("One", "Two", "Three", "Four")));
+        Assert.assertEquals(UnifiedSet.newSetWith("One", "Two", "Three"), map.keySet());
+
+        Assert.assertTrue(map.keySet().retainAll(FastList.newListWith("One", "Three")));
+        Assert.assertEquals(Object<name>HashMap.newWithKeysValues("One", <(literal.(type))("1")>,  "Three", <(literal.(type))("3")>), map);
+        Assert.assertEquals(UnifiedSet.newSetWith("One", "Three"), map.keySet());
+    }
+
+    @Test
+    public void clearKeySet()
+    {
+        SynchronizedObject<name>Map\<String> map = this.newMapWithKeysValues("One", <(literal.(type))("1")>, "Two", <(literal.(type))("2")>, "Three", <(literal.(type))("3")>);
+        map.keySet().clear();
+        Verify.assertEmpty(map);
+        Verify.assertEmpty(map.keySet());
+    }
+
+    @Test
+    public void keySetEqualsAndHashCode()
+    {
+        SynchronizedObject<name>Map\<String> map = this.newMapWithKeysValues("One", <(literal.(type))("1")>, "Two", <(literal.(type))("2")>, "Three", <(literal.(type))("3")>, null, <(literal.(type))("0")>);
+        Verify.assertEqualsAndHashCode(UnifiedSet.newSetWith("One", "Two", "Three", null), map.keySet());
+        Assert.assertNotEquals(UnifiedSet.newSetWith("One", "Two", "Three"), map.keySet());
+        Assert.assertNotEquals(FastList.newListWith("One", "Two", "Three", null), map.keySet());
+    }
+
+    @Test
+    public void keySetToArray()
+    {
+        SynchronizedObject<name>Map\<String> map = this.newMapWithKeysValues("One", <(literal.(type))("1")>, "Two", <(literal.(type))("2")>, "Three", <(literal.(type))("3")>);
+        HashBag\<String> expected = HashBag.newBagWith("One", "Two", "Three");
+        Set\<String> keySet = map.keySet();
+        Assert.assertEquals(expected, HashBag.newBagWith(keySet.toArray()));
+        Assert.assertEquals(expected, HashBag.newBagWith(keySet.toArray(new String[keySet.size()])));
+        Assert.assertEquals(expected, HashBag.newBagWith(keySet.toArray(new String[0])));
+        expected.add(null);
+        Assert.assertEquals(expected, HashBag.newBagWith(keySet.toArray(new String[keySet.size() + 1])));
+    }
+}
+
+>>

@@ -1,0 +1,27 @@
+# Auto detect text files and perform LF normalization
+* text=auto
+
+*.md text
+*.java text
+*.scala text
+*.properties text
+*.xml text
+*.txt text
+*.sh text
+*.iml text
+*.classpath text
+*.project text
+*.yml text
+*.header text
+*.properties text
+*.prefs text
+*.stg text
+*.sh text
+*.sed text
+*.bat text
+
+# These files are binary and should be left untouched
+# (binary is a macro for -text -diff)
+*.class         binary
+*.jar           binary
+*.zip           binary

@@ -1,0 +1,29 @@
+import "copyright.stg"
+
+targetPath() ::= "org/eclipse/collections/api/block/function/primitive"
+
+fileName(primitive) ::= "<primitive.name>ObjectTo<primitive.name>Function"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.api.block.function.primitive;
+
+import java.io.Serializable;
+
+/**
+ * This file was automatically generated from template file primitiveObjectToPrimitiveFunction.stg.
+ *
+ * @since 3.0.
+ */
+public interface <name>ObjectTo<name>Function\<T>
+        extends Serializable
+{
+    <type> <type>ValueOf(<type> <type>Parameter, T objectParameter);
+}
+
+>>

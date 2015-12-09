@@ -1,0 +1,327 @@
+import "copyright.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+import "primitiveEquals.stg"
+
+skipBoolean() ::= "true"
+
+isTest() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/map/immutable/primitive"
+
+fileName(primitive) ::= "ImmutableObject<primitive.name>EmptyMapTest"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name, primitive.wrapperName)>
+>>
+
+body(type, name, wrapperName) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.map.immutable.primitive;
+
+import java.util.NoSuchElementException;
+
+import org.eclipse.collections.api.iterator.<name>Iterator;
+import org.eclipse.collections.api.map.primitive.ImmutableObject<name>Map;
+import org.eclipse.collections.api.map.primitive.Object<name>Map;
+import org.eclipse.collections.impl.bag.mutable.primitive.<name>HashBag;
+import org.eclipse.collections.impl.list.mutable.FastList;
+import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
+import org.eclipse.collections.impl.map.mutable.primitive.Object<name>HashMap;
+import org.eclipse.collections.impl.math.Mutable<wrapperName>;
+import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
+import org.eclipse.collections.impl.test.Verify;
+import org.junit.Assert;
+import org.junit.Test;
+
+/**
+ * JUnit test for {@link ImmutableObject<name>EmptyMap}.
+ * This file was automatically generated from template file immutableObjectPrimitiveEmptyMapTest.stg.
+ */
+public class ImmutableObject<name>EmptyMapTest extends AbstractImmutableObject<name>MapTestCase
+{
+    @Override
+    protected ImmutableObject<name>Map\<String> classUnderTest()
+    {
+        return (ImmutableObject<name>Map\<String>) ImmutableObject<name>EmptyMap.INSTANCE;
+    }
+
+    @Test
+    public void newWithKeyValue()
+    {
+        ImmutableObject<name>Map\<String> map1 = this.classUnderTest();
+        ImmutableObject<name>Map\<String> expected = Object<name>HashMap.newWithKeysValues("3", <(literal.(type))("3")>).toImmutable();
+        Assert.assertEquals(expected, map1.newWithKeyValue("3", <(literal.(type))("3")>));
+        Assert.assertNotSame(map1, map1.newWithKeyValue("3", <(literal.(type))("3")>));
+        Assert.assertEquals(this.classUnderTest(), map1);
+    }
+
+    @Test
+    public void newWithoutKeyValue()
+    {
+        ImmutableObject<name>Map\<String> map1 = this.classUnderTest();
+        ImmutableObject<name>Map\<String> expected1 = this.getEmptyMap();
+        Assert.assertEquals(expected1, map1.newWithoutKey("2"));
+        Assert.assertSame(map1, map1.newWithoutKey("2"));
+        Assert.assertEquals(this.classUnderTest(), map1);
+    }
+
+    @Test
+    public void newWithoutAllKeys()
+    {
+        ImmutableObject<name>Map\<String> map1 = this.classUnderTest();
+        ImmutableObject<name>Map\<String> expected1 = this.getEmptyMap();
+        Assert.assertEquals(expected1, map1.newWithoutAllKeys(FastList.newListWith("2", "3")));
+        Assert.assertSame(map1, map1.newWithoutAllKeys(FastList.newListWith("2", "3")));
+        Assert.assertEquals(this.classUnderTest(), map1);
+    }
+
+    @Override
+    @Test
+    public void containsKey()
+    {
+        Assert.assertFalse(this.classUnderTest().containsKey("0"));
+        Assert.assertFalse(this.classUnderTest().containsKey("1"));
+        Assert.assertFalse(this.classUnderTest().containsKey("2"));
+        Assert.assertFalse(this.classUnderTest().containsKey("3"));
+        Assert.assertFalse(this.classUnderTest().containsKey(null));
+    }
+
+    @Override
+    @Test
+    public void containsValue()
+    {
+        Assert.assertFalse(this.classUnderTest().containsValue(<(literal.(type))("0")>));
+        Assert.assertFalse(this.classUnderTest().containsValue(<(literal.(type))("1")>));
+        Assert.assertFalse(this.classUnderTest().containsValue(<(literal.(type))("2")>));
+    }
+
+    @Override
+    @Test
+    public void detectIfNone()
+    {
+        <type> detect = this.classUnderTest().detectIfNone((<type> value) -> true, <(literal.(type))("5")>);
+        Assert.assertEquals(<(literal.(type))("5")>, detect<delta.(type)>);
+    }
+
+    @Override
+    @Test
+    public void getIfAbsent()
+    {
+        Assert.assertEquals(<(literal.(type))("1")>, this.classUnderTest().getIfAbsent("0", <(literal.(type))("1")>)<delta.(type)>);
+        Assert.assertEquals(<(literal.(type))("2")>, this.classUnderTest().getIfAbsent("1", <(literal.(type))("2")>)<delta.(type)>);
+        Assert.assertEquals(<(literal.(type))("3")>, this.classUnderTest().getIfAbsent("2", <(literal.(type))("3")>)<delta.(type)>);
+        Assert.assertEquals(<(literal.(type))("1")>, this.classUnderTest().getIfAbsent("5", <(literal.(type))("1")>)<delta.(type)>);
+        Assert.assertEquals(<(literal.(type))("0")>, this.classUnderTest().getIfAbsent("5", <(literal.(type))("0")>)<delta.(type)>);
+
+        Assert.assertEquals(<(literal.(type))("1")>, this.classUnderTest().getIfAbsent(null, <(literal.(type))("1")>)<delta.(type)>);
+        Assert.assertEquals(<(literal.(type))("0")>, this.classUnderTest().getIfAbsent(null, <(literal.(type))("0")>)<delta.(type)>);
+    }
+
+    @Override
+    @Test
+    public void maxIfEmpty()
+    {
+        Assert.assertEquals(<(literal.(type))("9")>, this.getEmptyMap().maxIfEmpty(<(literal.(type))("9")>)<delta.(type)>);
+    }
+
+    @Override
+    @Test(expected = ArithmeticException.class)
+    public void median()
+    {
+        this.classUnderTest().median();
+    }
+
+    @Override
+    @Test
+    public void allSatisfy()
+    {
+        Assert.assertTrue(this.classUnderTest().allSatisfy((<type> value) -> false));
+    }
+
+    @Override
+    @Test
+    public void anySatisfy()
+    {
+        Assert.assertFalse(this.classUnderTest().anySatisfy((<type> value) -> true));
+    }
+
+    @Override
+    @Test
+    public void reject()
+    {
+        Assert.assertEquals(this.classUnderTest(), this.classUnderTest().reject((String object, <type> value) -> false));
+
+        Assert.assertEquals(new <name>HashBag(), this.classUnderTest().reject((<type> value) -> false).toBag());
+    }
+
+    @Override
+    @Test
+    public void select()
+    {
+        Assert.assertEquals(this.classUnderTest(), this.classUnderTest().select((String object, <type> value) -> true));
+
+        Assert.assertEquals(new <name>HashBag(), this.classUnderTest().select((<type> value) -> true).toBag());
+    }
+
+    @Test
+    public void keysView()
+    {
+        Verify.assertIterableEmpty(this.classUnderTest().keysView());
+    }
+
+    @Override
+    @Test
+    public void <type>Iterator()
+    {
+        <name>Iterator iterator = this.classUnderTest().<type>Iterator();
+        Assert.assertFalse(iterator.hasNext());
+        Verify.assertThrows(NoSuchElementException.class, iterator::next);
+    }
+
+    @Override
+    @Test(expected = ArithmeticException.class)
+    public void average()
+    {
+        this.classUnderTest().average();
+    }
+
+    @Override
+    @Test
+    public void contains()
+    {
+        Assert.assertFalse(this.classUnderTest().contains(<(literal.(type))("0")>));
+        Assert.assertFalse(this.classUnderTest().contains(<(literal.(type))("1")>));
+        Assert.assertFalse(this.classUnderTest().contains(<(literal.(type))("2")>));
+    }
+
+    @Override
+    @Test
+    public void getOrThrow()
+    {
+        Verify.assertThrows(IllegalStateException.class, () -> this.classUnderTest().getOrThrow("5"));
+        Verify.assertThrows(IllegalStateException.class, () -> this.classUnderTest().getOrThrow("0"));
+        Verify.assertThrows(IllegalStateException.class, () -> this.classUnderTest().getOrThrow(null));
+    }
+
+    @Override
+    @Test
+    public void get()
+    {
+        Assert.assertEquals(<(literal.(type))("0")>, this.classUnderTest().get("0")<delta.(type)>);
+        Assert.assertEquals(<(literal.(type))("0")>, this.classUnderTest().get("1")<delta.(type)>);
+        Assert.assertEquals(<(literal.(type))("0")>, this.classUnderTest().get(null)<delta.(type)>);
+    }
+
+    @Override
+    @Test(expected = NoSuchElementException.class)
+    public void max()
+    {
+        this.classUnderTest().max();
+    }
+
+    @Override
+    @Test(expected = NoSuchElementException.class)
+    public void min()
+    {
+        this.classUnderTest().min();
+    }
+
+    @Override
+    @Test
+    public void sum()
+    {
+        Assert.assertEquals(<(wideLiteral.(type))("0")>, this.classUnderTest().sum()<wideDelta.(type)>);
+    }
+
+    @Override
+    @Test
+    public void count()
+    {
+        Assert.assertEquals(0L, this.classUnderTest().count((<type> value) -> true));
+    }
+
+    @Override
+    @Test
+    public void toBag()
+    {
+        Assert.assertEquals(<name>HashBag.newBagWith(), this.classUnderTest().toBag());
+    }
+
+    @Override
+    @Test
+    public void toSet()
+    {
+        Assert.assertEquals(<name>HashSet.newSetWith(), this.classUnderTest().toSet());
+    }
+
+    @Override
+    @Test
+    public void containsAll()
+    {
+        Assert.assertFalse(this.classUnderTest().containsAll(<(literal.(type))("0")>, <(literal.(type))("1")>, <(literal.(type))("2")>));
+        Assert.assertFalse(this.classUnderTest().containsAll(<(literal.(type))("0")>, <(literal.(type))("1")>, <(literal.(type))("5")>));
+        Assert.assertTrue(this.classUnderTest().containsAll());
+    }
+
+    @Override
+    @Test
+    public void containsAll_Iterable()
+    {
+        Assert.assertFalse(this.classUnderTest().containsAll(<name>ArrayList.newListWith(<(literal.(type))("0")>, <(literal.(type))("1")>, <(literal.(type))("2")>)));
+        Assert.assertFalse(this.classUnderTest().containsAll(<name>ArrayList.newListWith(<(literal.(type))("0")>, <(literal.(type))("1")>, <(literal.(type))("5")>)));
+        Assert.assertTrue(this.classUnderTest().containsAll(new <name>ArrayList()));
+    }
+
+    @Override
+    @Test
+    public void minIfEmpty()
+    {
+        Assert.assertEquals(<(literal.(type))("5")>, this.getEmptyMap().minIfEmpty(<(literal.(type))("5")>)<delta.(type)>);
+        Assert.assertEquals(<(literal.(type))("6")>, this.getEmptyMap().minIfEmpty(<(literal.(type))("6")>)<delta.(type)>);
+    }
+
+    @Override
+    @Test
+    public void testEquals()
+    {
+        Object<name>Map\<String> map1 = this.newWithKeysValues("0", <(literal.(type))("0")>, "1", <(literal.(type))("1")>, null, <(literal.(type))("2")>);
+        Object<name>Map\<String> map2 = this.getEmptyMap();
+
+        Assert.assertNotEquals(this.classUnderTest(), map1);
+        Verify.assertEqualsAndHashCode(this.classUnderTest(), map2);
+        Verify.assertPostSerializedIdentity(this.classUnderTest());
+    }
+
+    @Override
+    @Test
+    public void isEmpty()
+    {
+        Verify.assertEmpty(this.classUnderTest());
+    }
+
+    @Override
+    @Test
+    public void notEmpty()
+    {
+        Assert.assertFalse(this.classUnderTest().notEmpty());
+    }
+
+    @Override
+    @Test
+    public void noneSatisfy()
+    {
+        Assert.assertTrue(this.classUnderTest().noneSatisfy((<type> value) -> true));
+    }
+
+    @Test
+    public void injectInto()
+    {
+        ImmutableObject<name>EmptyMap\<Object> iterable = new ImmutableObject<name>EmptyMap\<>();
+        Mutable<wrapperName> result = iterable.injectInto(new Mutable<wrapperName>(<(literal.(type))("0")>), (Mutable<wrapperName> object, <type> value) -> object.add(value));
+        Assert.assertEquals(new Mutable<wrapperName>(<(literal.(type))("0")>), result);
+    }
+}
+
+>>

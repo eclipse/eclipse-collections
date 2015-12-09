@@ -1,0 +1,157 @@
+import "copyright.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+
+isTest() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/list/mutable/primitive"
+
+fileName(primitive) ::= "<primitive.name>ArrayListTest"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.wrapperName, primitive.name)>
+>>
+
+body(type, wrapperName, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.list.mutable.primitive;
+
+import java.lang.reflect.Field;
+
+import org.eclipse.collections.api.list.primitive.Immutable<name>List;
+import org.eclipse.collections.impl.factory.primitive.<name>Lists;
+import org.eclipse.collections.impl.test.Verify;
+import org.eclipse.collections.impl.utility.internal.primitive.<name>IterableIterate;
+import org.eclipse.collections.impl.utility.internal.primitive.<name>IteratorIterate;
+import org.junit.Assert;
+import org.junit.Test;
+
+/**
+ * JUnit test for {@link <name>ArrayList}.
+ * This file was automatically generated from template file primitiveArrayListTest.stg.
+ */
+public class <name>ArrayListTest extends Abstract<name>ListTestCase
+{
+    private final <name>ArrayList list = this.classUnderTest();
+
+    @Override
+    protected final <name>ArrayList classUnderTest()
+    {
+        return <name>ArrayList.newListWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">);
+    }
+
+    @Override
+    protected <name>ArrayList newWith(<type>... elements)
+    {
+        return <name>ArrayList.newListWith(elements);
+    }
+
+    @Test
+    public void test<name>ArrayListWithInitialCapacity() throws Exception
+    {
+        <name>ArrayList arrayList = new <name>ArrayList(7);
+        Verify.assertEmpty(arrayList);
+        Field items = <name>ArrayList.class.getDeclaredField("items");
+        items.setAccessible(true);
+        Assert.assertEquals(7L, ((<type>[]) items.get(arrayList)).length);
+    }
+
+    @Test
+    public void newWithNValues()
+    {
+        <name>ArrayList newList = <name>ArrayList.newWithNValues(5, <(literal.(type))("42")>);
+        Verify.assertSize(5, newList);
+        Assert.assertEquals(<name>ArrayList.newListWith(<["42", "42", "42", "42", "42"]:(literal.(type))(); separator=", ">), newList);
+    }
+
+    @Test
+    public void addAtIndexAtCapacity() throws Exception
+    {
+        <name>ArrayList listWithCapacity = new <name>ArrayList(4).with(<["1", "2", "3", "4"]:(literal.(type))(); separator=", ">);
+        listWithCapacity.addAtIndex(3, <(literal.(type))("5")>);
+        Field items = <name>ArrayList.class.getDeclaredField("items");
+        items.setAccessible(true);
+        Assert.assertEquals(7L, ((<type>[]) items.get(listWithCapacity)).length);
+    }
+
+    @Test
+    public void trimToSize() throws Exception
+    {
+        Field items = <name>ArrayList.class.getDeclaredField("items");
+        items.setAccessible(true);
+        <name>ArrayList arrayList = new <name>ArrayList().with(<["1", "2", "3"]:(literal.(type))(); separator=", ">);
+        Assert.assertEquals(10L, ((<type>[]) items.get(arrayList)).length);
+        Assert.assertArrayEquals(new <type>[]{<["1", "2", "3", "0", "0", "0", "0", "0", "0", "0"]:(literal.(type))(); separator=", ">}, (<type>[]) items.get(arrayList)<(delta.(type))>);
+        arrayList.trimToSize();
+        Assert.assertArrayEquals(new <type>[]{<["1", "2", "3"]:(literal.(type))(); separator=", ">}, (<type>[]) items.get(arrayList)<(delta.(type))>);
+    }
+
+    @Override
+    @Test
+    public void size()
+    {
+        super.size();
+        Verify.assertSize(0, new <name>ArrayList());
+        Verify.assertSize(3, <name>Lists.mutable.ofAll(this.list));
+        Verify.assertSize(3, this.list);
+    }
+
+    @Override
+    @Test
+    public void dotProduct()
+    {
+        <name>ArrayList list1 = <name>ArrayList.newListWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">);
+        <name>ArrayList list2 = <name>ArrayList.newListWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">);
+        Assert.assertEquals(<(wideLiteral.(type))("14")>, list1.dotProduct(list2)<(wideDelta.(type))>);
+    }
+
+    @Override
+    @Test(expected = IllegalArgumentException.class)
+    public void dotProduct_throwsOnListsOfDifferentSizes()
+    {
+        <name>ArrayList list1 = <name>ArrayList.newListWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">);
+        <name>ArrayList list2 = <name>ArrayList.newListWith(<["1", "2"]:(literal.(type))(); separator=", ">);
+        list1.dotProduct(list2);
+    }
+
+    @Override
+    @Test
+    public void with()
+    {
+        super.with();
+        <name>ArrayList emptyList = new <name>ArrayList();
+        <name>ArrayList arrayList = emptyList.with(<["1"]:(literal.(type))(); separator=", ">);
+        <name>ArrayList arrayList0 = new <name>ArrayList().with(<["1", "2"]:(literal.(type))(); separator=", ">);
+        <name>ArrayList arrayList1 = new <name>ArrayList().with(<["1", "2", "3"]:(literal.(type))(); separator=", ">);
+        <name>ArrayList arrayList2 = new <name>ArrayList().with(<["1", "2", "3", "4"]:(literal.(type))(); separator=", ">);
+        <name>ArrayList arrayList3 = new <name>ArrayList().with(<["1", "2", "3", "4", "5"]:(literal.(type))(); separator=", ">);
+        Assert.assertSame(emptyList, arrayList);
+        Assert.assertEquals(<name>ArrayList.newListWith(<(literal.(type))("1")>), arrayList);
+        Assert.assertEquals(<name>ArrayList.newListWith(<["1", "2"]:(literal.(type))(); separator=", ">), arrayList0);
+        Assert.assertEquals(this.list, arrayList1);
+        Assert.assertEquals(<name>ArrayList.newListWith(<["1", "2", "3", "4"]:(literal.(type))(); separator=", ">), arrayList2);
+        Assert.assertEquals(<name>ArrayList.newListWith(<["1", "2", "3", "4", "5"]:(literal.(type))(); separator=", ">), arrayList3);
+    }
+
+    @Test
+    public void classIsNonInstantiable()
+    {
+        Verify.assertClassNonInstantiable(<name>IterableIterate.class);
+        Verify.assertClassNonInstantiable(<name>IteratorIterate.class);
+    }
+
+    @Override
+    @Test
+    public void toImmutable()
+    {
+        super.toImmutable();
+        <name>ArrayList list = new <name>ArrayList(1);
+        Assert.assertEquals(list, list.toImmutable());
+        list.add(<(literal.(type))("5")>);
+        list.removeAtIndex(0);
+        Assert.assertEquals(list, list.toImmutable());
+    }
+}
+
+>>

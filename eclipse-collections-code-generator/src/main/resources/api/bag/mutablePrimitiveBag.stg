@@ -1,0 +1,50 @@
+import "copyright.stg"
+import "primitiveAPI.stg"
+
+targetPath() ::= "org/eclipse/collections/api/bag/primitive"
+
+fileName(primitive) ::= "Mutable<primitive.name>Bag"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.api.bag.primitive;
+
+import org.eclipse.collections.api.<name>Iterable;
+import org.eclipse.collections.api.bag.MutableBag;
+import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
+import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
+import org.eclipse.collections.api.collection.primitive.Mutable<name>Collection;
+
+/**
+ * This file was automatically generated from template file mutablePrimitiveBag.stg.
+ *
+ * @since 3.0.
+ */
+public interface Mutable<name>Bag extends Mutable<name>Collection, <name>Bag
+{
+    void addOccurrences(<type> item, int occurrences);
+
+    boolean removeOccurrences(<type> item, int occurrences);
+
+    <sharedAPI(fileName(primitive), name)>
+
+    \<V> MutableBag\<V> collect(<name>ToObjectFunction\<? extends V> function);
+
+    <mutableAPI(fileName(primitive), type, name)>
+
+    Mutable<name>Bag asUnmodifiable();
+
+    Mutable<name>Bag asSynchronized();
+
+    /**
+     * Returns an immutable copy of this bag.
+     */
+    Immutable<name>Bag toImmutable();
+}
+
+>>

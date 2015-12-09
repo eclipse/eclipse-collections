@@ -1,0 +1,80 @@
+import "copyright.stg"
+import "primitiveLiteral.stg"
+
+isTest() ::= "true"
+
+hasTwoPrimitives() ::= "true"
+
+skipBooleanKeys() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/block/procedure/checked/primitive"
+
+fileName(primitive1, primitive2, sameTwoPrimitives) ::= "Checked<primitive1.name><primitive2.name>ProcedureTest"
+
+class(primitive1, primitive2, sameTwoPrimitives) ::= <<
+<body(primitive1.type, primitive2.type, primitive1.name, primitive2.name)>
+>>
+
+body(type1, type2, name1, name2) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.block.procedure.checked.primitive;
+
+import java.io.IOException;
+
+import org.junit.Assert;
+import org.junit.Test;
+
+import org.eclipse.collections.impl.test.Verify;
+
+/**
+ * Provides a set of common tests of checked procedures for <type1> and <type2> values.
+ * This file was automatically generated from template file checkedPrimitivePrimitiveProcedureTest.stg.
+ *
+ * @since 5.0.
+ */
+public final class Checked<name1><name2>ProcedureTest
+{
+    @Test
+    public void regular()
+    {
+        final boolean[] result = new boolean[1];
+        new Checked<name1><name2>Procedure()
+        {
+            @Override
+            public void safeValue(<type1> item1, <type2> item2) throws Exception
+            {
+                result[0] = true;
+            }
+        }.value(<(zero.(type1))>, <(zero.(type2))>);
+        Assert.assertTrue(result[0]);
+    }
+
+    @Test
+    public void runtimeException()
+    {
+        Verify.assertThrows(RuntimeException.class, () -> new Checked<name1><name2>Procedure()
+        {
+            @Override
+            public void safeValue(<type1> item1, <type2> item2) throws Exception
+            {
+                throw new RuntimeException();
+            }
+        }.value(<(zero.(type1))>, <(zero.(type2))>));
+    }
+
+    @Test
+    public void checkedException()
+    {
+        Verify.assertThrows(RuntimeException.class, () -> new Checked<name1><name2>Procedure()
+        {
+            @Override
+            public void safeValue(<type1> item1, <type2> item2) throws Exception
+            {
+                throw new IOException();
+            }
+        }.value(<(zero.(type1))>, <(zero.(type2))>));
+    }
+}
+
+>>

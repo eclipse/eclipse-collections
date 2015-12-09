@@ -1,0 +1,39 @@
+import "copyright.stg"
+
+targetPath() ::= "org/eclipse/collections/impl/factory/primitive"
+
+fileName(primitive) ::= "<primitive.name>Sets"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.factory.primitive;
+
+import org.eclipse.collections.api.factory.set.primitive.Immutable<name>SetFactory;
+import org.eclipse.collections.api.factory.set.primitive.Mutable<name>SetFactory;
+import org.eclipse.collections.impl.set.immutable.primitive.Immutable<name>SetFactoryImpl;
+import org.eclipse.collections.impl.set.mutable.primitive.Mutable<name>SetFactoryImpl;
+
+/**
+ * <name>Sets is a static utility for creating {@link Immutable<name>SetFactory}.
+ * This file was automatically generated from template file primitiveSets.stg.
+ *
+ * @since 3.2.
+ */
+@SuppressWarnings("ConstantNamingConvention")
+public final class <name>Sets
+{
+    public static final Immutable<name>SetFactory immutable = new Immutable<name>SetFactoryImpl();
+    public static final Mutable<name>SetFactory mutable = new Mutable<name>SetFactoryImpl();
+
+    private <name>Sets()
+    {
+        throw new AssertionError("Suppress default constructor for noninstantiability");
+    }
+}
+
+>>

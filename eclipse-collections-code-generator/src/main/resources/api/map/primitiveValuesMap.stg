@@ -1,0 +1,37 @@
+import "copyright.stg"
+import "primitiveEquals.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+
+targetPath() ::= "org/eclipse/collections/api/map/primitive"
+
+fileName(primitive) ::= "<primitive.name>ValuesMap"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.api.map.primitive;
+
+import org.eclipse.collections.api.<name>Iterable;
+import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
+import org.eclipse.collections.api.collection.primitive.Mutable<name>Collection;
+
+/**
+ * This file was automatically generated from template file primitiveValuesMap.stg.
+ *
+ * @since 6.0.
+ */
+public interface <name>ValuesMap extends <name>Iterable
+{
+    boolean containsValue(<type> value);
+
+    void forEachValue(<name>Procedure procedure);
+
+    Mutable<name>Collection values();
+}
+
+>>

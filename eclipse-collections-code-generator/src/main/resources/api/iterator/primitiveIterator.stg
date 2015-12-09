@@ -1,0 +1,29 @@
+import "copyright.stg"
+
+targetPath() ::= "org/eclipse/collections/api/iterator"
+
+fileName(primitive) ::= "<primitive.name>Iterator"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.api.iterator;
+
+/**
+ * <name>Iterator is an iterator over a <name>Iterable.
+ * This file was automatically generated from template file primitiveIterator.stg.
+ *
+ * @since 3.0.
+ */
+public interface <name>Iterator
+{
+    <type> next();
+
+    boolean hasNext();
+}
+
+>>

@@ -1,0 +1,51 @@
+import "copyright.stg"
+import "primitiveEquals.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+
+isTest() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/bag/immutable/primitive"
+
+fileName(primitive) ::= "Immutable<primitive.name>HashBagTest"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name, primitive.wrapperName)>
+>>
+
+body(type, name, wrapperName) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.bag.immutable.primitive;
+
+import org.eclipse.collections.api.bag.primitive.Immutable<name>Bag;
+import org.eclipse.collections.impl.factory.primitive.<name>Bags;
+import org.eclipse.collections.impl.math.Mutable<wrapperName>;
+import org.junit.Assert;
+import org.junit.Test;
+
+/**
+ * JUnit test for {@link Immutable<name>HashBag}.
+ * This file was automatically generated from template file immutablePrimitiveHashBagTest.stg.
+ */
+public class Immutable<name>HashBagTest extends AbstractImmutable<name>BagTestCase
+{
+    @Override
+    protected final Immutable<name>Bag classUnderTest()
+    {
+        return <name>Bags.immutable.of(<["1", "2", "3"]:(literal.(type))(); separator=", ">);
+    }
+
+    @Override
+    @Test
+    public void injectInto()
+    {
+        super.injectInto();
+
+        Immutable<name>HashBag iterable = Immutable<name>HashBag.newBagWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">);
+        Mutable<wrapperName> result = iterable.injectInto(new Mutable<wrapperName>(<(literal.(type))("0")>), Mutable<wrapperName>::add);
+        Assert.assertEquals(new Mutable<wrapperName>(<(literal.(type))("6")>), result);
+    }
+}
+
+>>

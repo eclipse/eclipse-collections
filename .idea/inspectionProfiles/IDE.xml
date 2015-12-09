@@ -1,0 +1,1683 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0" is_locked="false">
+    <option name="myName" value="IDE" />
+    <option name="myLocal" value="false" />
+    <inspection_tool class="AbstractBeanReferencesInspection" enabled="false" level="INSPECTION" enabled_by_default="false" />
+    <inspection_tool class="AbstractClassExtendsConcreteClass" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="AbstractClassNeverImplemented" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="AbstractClassWithoutAbstractMethods" enabled="true" level="INFO" enabled_by_default="true" />
+    <inspection_tool class="AbstractMethodCallInConstructor" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="AbstractMethodOverridesAbstractMethod" enabled="true" level="INSPECTION" enabled_by_default="true">
+      <option name="ignoreJavaDoc" value="true" />
+    </inspection_tool>
+    <inspection_tool class="AbstractMethodOverridesConcreteMethod" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="AbstractMethodWithMissingImplementations" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="AbstractValueInTrait" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="AccessStaticViaInstance" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="AccessToNonThreadSafeStaticFieldFromInstance" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="nonThreadSafeClasses">
+        <value />
+      </option>
+      <option name="nonThreadSafeTypes" value="java.text.DateFormat,java.util.Calendar" />
+    </inspection_tool>
+    <inspection_tool class="AccessToStaticFieldLockedOnInstance" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="Add Shebang line" enabled="false" level="INFO" enabled_by_default="false" />
+    <inspection_tool class="AndroidDomInspection" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="Annotator" enabled="false" level="INSPECTION" enabled_by_default="false" />
+    <inspection_tool class="AnonymousClassVariableHidesContainingMethodVariable" enabled="true" level="INFO" enabled_by_default="true" />
+    <inspection_tool class="AnonymousInnerClassMayBeStatic" enabled="true" level="INFO" enabled_by_default="true" />
+    <inspection_tool class="AntDuplicateTargetsInspection" enabled="false" level="INSPECTION" enabled_by_default="false" />
+    <inspection_tool class="AntMissingPropertiesFileInspection" enabled="false" level="INSPECTION" enabled_by_default="false" />
+    <inspection_tool class="AntResolveInspection" enabled="false" level="INSPECTION" enabled_by_default="false" />
+    <inspection_tool class="ArchaicSystemPropertyAccess" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="ArgNamesErrorsInspection" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="ArgNamesWarningsInspection" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="ArithmeticOnVolatileField" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="ArrayEquality" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="ArraySizeCall" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="AssertEqualsBetweenInconvertibleTypes" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="AssertWithSideEffects" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="AssignmentToForLoopParameter" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="m_checkForeachParameters" value="false" />
+    </inspection_tool>
+    <inspection_tool class="AssignmentToLambdaParameter" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="AssignmentToMethodParameter" enabled="true" level="INSPECTION" enabled_by_default="true">
+      <option name="ignoreTransformationOfOriginalParameter" value="false" />
+    </inspection_tool>
+    <inspection_tool class="AssignmentToNull" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="AssignmentToStaticFieldFromInstanceMethod" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="AssignmentUsedAsCondition" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="AutoBoxing" enabled="true" level="INFO" enabled_by_default="true">
+      <option name="ignoreAddedToCollection" value="false" />
+    </inspection_tool>
+    <inspection_tool class="AutoUnboxing" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
+    <inspection_tool class="AutowiredDependenciesInspection" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="AwaitNotInLoop" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="AwaitWithoutCorrespondingSignal" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="BadExceptionCaught" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="exceptionsString" value="java.lang.NullPointerException,java.lang.IllegalMonitorStateException,java.lang.ArrayIndexOutOfBoundsException" />
+      <option name="exceptions">
+        <value />
+      </option>
+    </inspection_tool>
+    <inspection_tool class="BadExceptionDeclared" enabled="true" level="INFO" enabled_by_default="true">
+      <option name="exceptionsString" value="java.lang.Throwable,java.lang.Exception,java.lang.Error,java.lang.RuntimeException,java.lang.NullPointerException,java.lang.ClassCastException,java.lang.ArrayIndexOutOfBoundsException" />
+      <option name="exceptions">
+        <value />
+      </option>
+      <option name="ignoreTestCases" value="false" />
+      <option name="ignoreLibraryOverrides" value="false" />
+    </inspection_tool>
+    <inspection_tool class="BadExpressionStatementJS" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="BadOddness" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="BeforeClassOrAfterClassIsPublicStaticVoidNoArg" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="BeforeOrAfterIsPublicVoidNoArg" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="BigDecimalEquals" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="BigDecimalLegacyMethod" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="BooleanConstructor" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="BooleanMethodIsAlwaysInverted" enabled="true" level="INFO" enabled_by_default="true" />
+    <inspection_tool class="BoundFieldAssignment" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="BreakStatement" enabled="true" level="INFO" enabled_by_default="true" />
+    <inspection_tool class="BreakStatementWithLabel" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="BusyWait" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="CStyleArrayDeclaration" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="CachedNumberConstructorCall" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="CallToNativeMethodWhileLocked" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="CallToSimpleGetterInClass" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoreGetterCallsOnOtherObjects" value="false" />
+      <option name="onlyReportPrivateGetter" value="false" />
+    </inspection_tool>
+    <inspection_tool class="CallToSimpleSetterInClass" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoreSetterCallsOnOtherObjects" value="false" />
+      <option name="onlyReportPrivateSetter" value="false" />
+    </inspection_tool>
+    <inspection_tool class="CallToStringConcatCanBeReplacedByOperator" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="CanBeFinal" enabled="true" level="INSPECTION" enabled_by_default="true">
+      <option name="REPORT_CLASSES" value="false" />
+      <option name="REPORT_METHODS" value="false" />
+      <option name="REPORT_FIELDS" value="true" />
+    </inspection_tool>
+    <inspection_tool class="CastConflictsWithInstanceof" enabled="true" level="INFO" enabled_by_default="true" />
+    <inspection_tool class="CastThatLosesPrecision" enabled="true" level="INFO" enabled_by_default="true">
+      <option name="ignoreIntegerCharCasts" value="false" />
+    </inspection_tool>
+    <inspection_tool class="CastToIncompatibleInterface" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="CatchGenericClass" enabled="true" level="INFO" enabled_by_default="true" />
+    <inspection_tool class="ChainedEquality" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="ChannelResource" enabled="true" level="INFO" enabled_by_default="true">
+      <option name="insideTryAllowed" value="false" />
+    </inspection_tool>
+    <inspection_tool class="CheckEmptyScriptTag" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="CheckImageSize" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="CheckTagEmptyBody" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="CheckValidXmlInScriptTagBody" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="ClassEscapesItsScope" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="ClassInTopLevelPackage" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="ClassInitializer" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="ClassLoaderInstantiation" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="ClassMayBeInterface" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="ClassNameDiffersFromFileName" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="ClassNamePrefixedWithPackageName" enabled="true" level="INFO" enabled_by_default="true" />
+    <inspection_tool class="ClassNameSameAsAncestorName" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="ClassReferencesSubclass" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="ClassUnconnectedToPackage" enabled="false" level="INFO" enabled_by_default="false" />
+    <inspection_tool class="ClassWithMultipleLoggers" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="loggerNamesString" value="java.util.logging.Logger,org.slf4j.Logger,org.apache.commons.logging.Log,org.apache.log4j.Logger" />
+    </inspection_tool>
+    <inspection_tool class="ClassWithOnlyPrivateConstructors" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="ClassWithoutToString" level="INFO" enabled="false" />
+    <inspection_tool class="CloneCallsConstructors" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="CloneDeclaresCloneNotSupported" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="CloneInNonCloneableClass" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="CloneableImplementsClone" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="m_ignoreCloneableDueToInheritance" value="false" />
+    </inspection_tool>
+    <inspection_tool class="CodeBlock2Expr" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="CollectionAddedToSelf" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="CollectionContainsUrl" enabled="true" level="INFO" enabled_by_default="true" />
+    <inspection_tool class="ComparableImplementedButEqualsNotOverridden" enabled="true" level="INFO" enabled_by_default="true" />
+    <inspection_tool class="ComparatorMethodParameterNotUsed" enabled="true" level="INFO" enabled_by_default="true" />
+    <inspection_tool class="ComparatorNotSerializable" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="CompareToUsesNonFinalVariable" enabled="true" level="INFO" enabled_by_default="true" />
+    <inspection_tool class="ComparisonOfShortAndChar" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="ComparisonToNaN" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="ConditionSignal" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="ConditionalExpressionWithIdenticalBranches" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="ConfusingElse" enabled="true" level="INSPECTION" enabled_by_default="true">
+      <option name="reportWhenNoStatementFollow" value="true" />
+    </inspection_tool>
+    <inspection_tool class="ConfusingFloatingPointLiteral" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="ConfusingMainMethod" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="ConfusingOctalEscape" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="ConstantConditionalExpressionJS" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="ConstantConditions" enabled="true" level="INSPECTION" enabled_by_default="true">
+      <option name="SUGGEST_NULLABLE_ANNOTATIONS" value="false" />
+      <option name="DONT_REPORT_TRUE_ASSERT_STATEMENTS" value="false" />
+    </inspection_tool>
+    <inspection_tool class="ConstantDeclaredInInterface" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="ConstantIfStatementJS" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="ConstantJUnitAssertArgument" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="ConstantMathCall" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="ConstantNamingConvention" enabled="true" level="INSPECTION" enabled_by_default="true">
+      <option name="onlyCheckImmutables" value="false" />
+      <option name="m_regex" value="[A-Z_\d]*" />
+      <option name="m_minLength" value="2" />
+      <option name="m_maxLength" value="99" />
+    </inspection_tool>
+    <inspection_tool class="ConstantOnLHSOfComparison" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="ConstantStringIntern" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="ConstantValueVariableUse" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="ConstraintValidatorCreator" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="ContinueOrBreakFromFinallyBlockJS" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="Convert to string" enabled="false" level="INFO" enabled_by_default="false" />
+    <inspection_tool class="Convert2Diamond" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="Convert2Lambda" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="Convert2MethodRef" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="ConvertAnnotations" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="ConvertJavadoc" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="ConvertOldAnnotations" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="CovariantCompareTo" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="CovariantEquals" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="CssInvalidElementInspection" enabled="false" level="INSPECTION" enabled_by_default="false" />
+    <inspection_tool class="CssInvalidHtmlTagReferenceInspection" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="CssInvalidImportInspection" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="CssInvalidShorthandPropertyValue" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="CssNegativeValueInspection" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="CssNoGenericFontName" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="CssOptimizeSimilarPropertiesInspection" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
+    <inspection_tool class="CssOverwrittenProperties" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="CssRgbFunctionInspection" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="CssUnitlessNumber" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="CssUnknownProperty" enabled="false" level="WARNING" enabled_by_default="false">
+      <option name="myCustomPropertiesEnabled" value="false" />
+      <option name="myIgnoreVendorSpecificProperties" value="false" />
+      <option name="myCustomPropertiesList">
+        <value>
+          <list size="0" />
+        </value>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="CssUnusedSymbolInspection" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="CustomClassloader" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="CustomSecurityManager" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="DeclarationHasNoExplicitType" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="DeclareCollectionAsInterface" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoreLocalVariables" value="false" />
+      <option name="ignorePrivateMethodsAndFields" value="false" />
+    </inspection_tool>
+    <inspection_tool class="DeclareParentsInspection" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="DefaultFileTemplate" enabled="true" level="INSPECTION" enabled_by_default="true">
+      <option name="CHECK_FILE_HEADER" value="true" />
+      <option name="CHECK_TRY_CATCH_SECTION" value="true" />
+      <option name="CHECK_METHOD_BODY" value="true" />
+    </inspection_tool>
+    <inspection_tool class="DefaultNotLastCaseInSwitch" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="Dependency" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="DeprecatedClassUsageInspection" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="Deprecation" enabled="true" level="INFO" enabled_by_default="true" />
+    <inspection_tool class="DisjointPackage" enabled="true" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="DollarSignInName" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="DoubleBraceInitialization" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="DoubleCheckedLocking" enabled="true" level="INSPECTION" enabled_by_default="true">
+      <option name="ignoreOnVolatileVariables" value="false" />
+    </inspection_tool>
+    <inspection_tool class="DoubleLiteralMayBeFloatLiteral" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="DriverManagerGetConnection" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="DuplicateBooleanBranch" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="DuplicateCaseLabelJS" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="DuplicateCondition" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoreMethodCalls" value="false" />
+    </inspection_tool>
+    <inspection_tool class="DuplicateMnemonic" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="DuplicatePropertyOnObjectJS" level="WARNING" enabled="false" />
+    <inspection_tool class="DuplicatedBeanNamesInspection" enabled="false" level="INSPECTION" enabled_by_default="false" />
+    <inspection_tool class="DynamicRegexReplaceableByCompiledPattern" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="EjbDomInspection" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="EjbErrorInspection" level="INSPECTION" enabled="false" />
+    <inspection_tool class="EjbQlInspection" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="EjbWarningInspection" level="WARNING" enabled="false" />
+    <inspection_tool class="EmptyClass" enabled="true" level="INFO" enabled_by_default="true">
+      <option name="ignorableAnnotations">
+        <value />
+      </option>
+      <option name="ignoreClassWithParameterization" value="false" />
+      <option name="ignoreThrowables" value="true" />
+    </inspection_tool>
+    <inspection_tool class="EmptyInitializer" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="EmptyMethod" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="EmptyStatementBodyJS" enabled="false" level="WARNING" enabled_by_default="false">
+      <option name="m_reportEmptyBlocks" value="false" />
+    </inspection_tool>
+    <inspection_tool class="EmptySynchronizedStatement" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="EmptyWebServiceClass" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="EnumSwitchStatementWhichMissesCases" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoreSwitchStatementsWithDefault" value="false" />
+    </inspection_tool>
+    <inspection_tool class="EnumeratedConstantNamingConvention" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="m_regex" value="[A-Z_\d]*" />
+      <option name="m_minLength" value="2" />
+      <option name="m_maxLength" value="99" />
+    </inspection_tool>
+    <inspection_tool class="EnumerationCanBeIteration" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="EqualsAndHashcode" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="EqualsBetweenInconvertibleTypes" enabled="true" level="INFO" enabled_by_default="true" />
+    <inspection_tool class="EqualsHashCodeCalledOnUrl" enabled="true" level="INFO" enabled_by_default="true" />
+    <inspection_tool class="EqualsUsesNonFinalVariable" enabled="true" level="INFO" enabled_by_default="true" />
+    <inspection_tool class="EqualsWhichDoesntCheckParameterClass" enabled="true" level="INFO" enabled_by_default="true" />
+    <inspection_tool class="ExceptionCaughtLocallyJS" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="ExceptionFromCatchWhichDoesntWrap" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoreGetMessage" value="true" />
+      <option name="ignoreCantWrap" value="false" />
+    </inspection_tool>
+    <inspection_tool class="ExceptionNameDoesntEndWithException" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="ExtendsConcreteCollection" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="ExtendsThread" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="ExtendsUtilityClass" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="ExternalizableWithSerializationMethods" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="FacesModelInspection" enabled="false" level="INSPECTION" enabled_by_default="false" />
+    <inspection_tool class="FallthroughInSwitchStatementJS" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="FallthruInSwitchStatement" enabled="true" level="INFO" enabled_by_default="true" />
+    <inspection_tool class="FeatureEnvy" enabled="false" level="WARNING" enabled_by_default="false">
+      <option name="ignoreTestCases" value="true" />
+    </inspection_tool>
+    <inspection_tool class="FieldAccessNotGuarded" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="FieldAccessedSynchronizedAndUnsynchronized" enabled="true" level="INFO" enabled_by_default="true">
+      <option name="countGettersAndSetters" value="false" />
+    </inspection_tool>
+    <inspection_tool class="FieldCanBeLocal" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="FieldHidesSuperclassField" enabled="true" level="INSPECTION" enabled_by_default="true">
+      <option name="m_ignoreInvisibleFields" value="true" />
+    </inspection_tool>
+    <inspection_tool class="FieldMayBeFinal" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="FieldMayBeStatic" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="FinalMethodInFinalClass" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="FinalPrivateMethod" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="FinalStaticMethod" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="Finalize" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoreTrivialFinalizers" value="true" />
+    </inspection_tool>
+    <inspection_tool class="FinalizeNotProtected" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="FloatingPointEquality" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="ForLoopReplaceableByWhile" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="m_ignoreLoopsWithoutConditions" value="false" />
+    </inspection_tool>
+    <inspection_tool class="ForLoopThatDoesntUseLoopVariable" enabled="true" level="INFO" enabled_by_default="true" />
+    <inspection_tool class="ForLoopWithMissingComponent" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoreCollectionLoops" value="false" />
+    </inspection_tool>
+    <inspection_tool class="GWTRemoteServiceAsyncCheck" enabled="false" level="INSPECTION" enabled_by_default="false" />
+    <inspection_tool class="GWTStyleCheck" enabled="false" level="INSPECTION" enabled_by_default="false" />
+    <inspection_tool class="GroovyUnnecessaryContinue" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="GwtInconsistentI18nInterface" enabled="false" level="INSPECTION" enabled_by_default="false" />
+    <inspection_tool class="GwtInconsistentSerializableClass" enabled="false" level="INSPECTION" enabled_by_default="false" />
+    <inspection_tool class="GwtJavaScriptReferences" enabled="false" level="INSPECTION" enabled_by_default="false" />
+    <inspection_tool class="GwtMethodWithParametersInConstantsInterface" enabled="false" level="INSPECTION" enabled_by_default="false" />
+    <inspection_tool class="GwtServiceNotRegistered" enabled="false" level="INSPECTION" enabled_by_default="false" />
+    <inspection_tool class="GwtToHtmlReferences" enabled="false" level="INSPECTION" enabled_by_default="false" />
+    <inspection_tool class="HashCodeUsesNonFinalVariable" enabled="true" level="INFO" enabled_by_default="true" />
+    <inspection_tool class="HibernateConfigDomInspection" enabled="false" level="INSPECTION" enabled_by_default="false" />
+    <inspection_tool class="HibernateMappingDatasourceDomInspection" enabled="false" level="INSPECTION" enabled_by_default="false" />
+    <inspection_tool class="HibernateMappingDomInspection" enabled="false" level="INSPECTION" enabled_by_default="false" />
+    <inspection_tool class="HibernateResource" enabled="true" level="INFO" enabled_by_default="true">
+      <option name="insideTryAllowed" value="false" />
+    </inspection_tool>
+    <inspection_tool class="HtmlExtraClosingTag" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="HtmlTagCanBeJavadocTag" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="HtmlUnknownAttribute" enabled="false" level="WARNING" enabled_by_default="false">
+      <option name="myValues">
+        <value>
+          <list size="5">
+            <item index="0" class="java.lang.String" itemvalue="type" />
+            <item index="1" class="java.lang.String" itemvalue="wmode" />
+            <item index="2" class="java.lang.String" itemvalue="src" />
+            <item index="3" class="java.lang.String" itemvalue="width" />
+            <item index="4" class="java.lang.String" itemvalue="height" />
+          </list>
+        </value>
+      </option>
+      <option name="myCustomValuesEnabled" value="true" />
+    </inspection_tool>
+    <inspection_tool class="HtmlUnknownTag" enabled="false" level="WARNING" enabled_by_default="false">
+      <option name="myValues">
+        <value>
+          <list size="5">
+            <item index="0" class="java.lang.String" itemvalue="embed" />
+            <item index="1" class="java.lang.String" itemvalue="nobr" />
+            <item index="2" class="java.lang.String" itemvalue="noembed" />
+            <item index="3" class="java.lang.String" itemvalue="comment" />
+            <item index="4" class="java.lang.String" itemvalue="script" />
+          </list>
+        </value>
+      </option>
+      <option name="myCustomValuesEnabled" value="true" />
+    </inspection_tool>
+    <inspection_tool class="IOResource" enabled="true" level="INFO" enabled_by_default="true">
+      <option name="ignoredTypesString" value="java.io.ByteArrayOutputStream,java.io.ByteArrayInputStream,java.io.StringBufferInputStream,java.io.CharArrayWriter,java.io.CharArrayReader,java.io.StringWriter,java.io.StringReader" />
+      <option name="insideTryAllowed" value="false" />
+    </inspection_tool>
+    <inspection_tool class="IfMayBeConditional" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="IfStatementWithIdenticalBranches" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="ImplicitArrayToString" enabled="true" level="INFO" enabled_by_default="true" />
+    <inspection_tool class="ImplicitNumericConversion" enabled="true" level="INFO" enabled_by_default="true">
+      <option name="ignoreWideningConversions" value="false" />
+      <option name="ignoreCharConversions" value="false" />
+      <option name="ignoreConstantConversions" value="false" />
+    </inspection_tool>
+    <inspection_tool class="ImplicitlyExposedWebServiceMethods" enabled="false" level="INFO" enabled_by_default="false" />
+    <inspection_tool class="IncompatibleMaskJS" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="InconsistentResourceBundle" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="REPORT_MISSING_TRANSLATIONS" value="true" />
+      <option name="REPORT_INCONSISTENT_PROPERTIES" value="true" />
+      <option name="REPORT_DUPLICATED_PROPERTIES" value="true" />
+    </inspection_tool>
+    <inspection_tool class="IncrementDecrementUsedAsExpression" enabled="true" level="INFO" enabled_by_default="true" />
+    <inspection_tool class="InfiniteLoopJS" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="InfiniteRecursionJS" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="InjectionValueTypeInspection" enabled="false" level="INSPECTION" enabled_by_default="false" />
+    <inspection_tool class="InnerClassMayBeStatic" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="InnerClassOnInterface" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="m_ignoreInnerInterfaces" value="false" />
+    </inspection_tool>
+    <inspection_tool class="InnerClassVariableHidesOuterClassVariable" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="m_ignoreInvisibleFields" value="true" />
+    </inspection_tool>
+    <inspection_tool class="InstanceGuardedByStatic" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="InstanceMethodNamingConvention" enabled="false" level="WARNING" enabled_by_default="false">
+      <option name="m_regex" value="[a-z][A-Za-z\d]*" />
+      <option name="m_minLength" value="4" />
+      <option name="m_maxLength" value="64" />
+    </inspection_tool>
+    <inspection_tool class="InstanceVariableNamingConvention" enabled="false" level="WARNING" enabled_by_default="false">
+      <option name="m_regex" value="[a-z][A-Za-z\d]*" />
+      <option name="m_minLength" value="2" />
+      <option name="m_maxLength" value="32" />
+    </inspection_tool>
+    <inspection_tool class="InstanceofCatchParameter" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="InstanceofIncompatibleInterface" enabled="true" level="INFO" enabled_by_default="true" />
+    <inspection_tool class="InstanceofInterfaces" enabled="true" level="INFO" enabled_by_default="true" />
+    <inspection_tool class="InstanceofThis" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="InstantiationOfUtilityClass" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="IntLiteralMayBeLongLiteral" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="IntegerDivisionInFloatingPointContext" enabled="true" level="INFO" enabled_by_default="true" />
+    <inspection_tool class="IntegerMultiplicationImplicitCastToLong" enabled="true" level="INSPECTION" enabled_by_default="true">
+      <option name="ignoreNonOverflowingCompileTimeConstants" value="true" />
+    </inspection_tool>
+    <inspection_tool class="InterfaceNeverImplemented" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoreInterfacesThatOnlyDeclareConstants" value="false" />
+    </inspection_tool>
+    <inspection_tool class="IteratorHasNextCallsIteratorNext" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="IteratorNextDoesNotThrowNoSuchElementException" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="JDBCResource" enabled="true" level="INFO" enabled_by_default="true">
+      <option name="insideTryAllowed" value="false" />
+    </inspection_tool>
+    <inspection_tool class="JNDIResource" enabled="true" level="INFO" enabled_by_default="true">
+      <option name="insideTryAllowed" value="false" />
+    </inspection_tool>
+    <inspection_tool class="JSBitwiseOperatorUsage" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="JSCheckFunctionSignatures" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
+    <inspection_tool class="JSDeprecatedSymbols" enabled="false" level="INFO" enabled_by_default="false" />
+    <inspection_tool class="JSDuplicatedDeclaration" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="JSFieldCanBeLocal" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="JSImplicitlyInternalDeclaration" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="JSLastCommaInArrayLiteral" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="JSLastCommaInObjectLiteral" enabled="false" level="INSPECTION" enabled_by_default="false" />
+    <inspection_tool class="JSMethodCanBeStatic" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="JSMismatchedCollectionQueryUpdate" enabled="false" level="WARNING" enabled_by_default="false">
+      <option name="queries" value="trace,write" />
+      <option name="updates" value="pop,push,shift,splice,unshift" />
+    </inspection_tool>
+    <inspection_tool class="JSPotentiallyInvalidConstructorUsage" enabled="false" level="WARNING" enabled_by_default="false">
+      <option name="myConsiderUppercaseFunctionsToBeConstructors" value="true" />
+    </inspection_tool>
+    <inspection_tool class="JSPotentiallyInvalidTargetOfIndexedPropertyAccess" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="JSPotentiallyInvalidUsageOfThis" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="JSReferencingMutableVariableFromClosure" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="JSShowOverridingMarkers" level="INFO" enabled="false" />
+    <inspection_tool class="JSUndeclaredVariable" enabled="false" level="INFO" enabled_by_default="false" />
+    <inspection_tool class="JSUnfilteredForInLoop" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="JSUnnecessarySemicolon" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="JSUnresolvedFunction" enabled="false" level="INFO" enabled_by_default="false" />
+    <inspection_tool class="JSUnresolvedLibraryURL" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="JSUnresolvedVariable" enabled="false" level="INFO" enabled_by_default="false" />
+    <inspection_tool class="JSUntypedDeclaration" enabled="false" level="INFO" enabled_by_default="false" />
+    <inspection_tool class="JSUnusedAssignment" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="JSUnusedGlobalSymbols" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="JSUnusedLocalSymbols" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="JSValidateJSDoc" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="JSValidateJSON" enabled="false" level="INSPECTION" enabled_by_default="false" />
+    <inspection_tool class="JSValidateTypes" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
+    <inspection_tool class="JUnit3StyleTestMethodInJUnit4Class" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="JUnit4AnnotatedMethodInJUnit3TestCase" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="JUnit4MethodNamingConvention" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="m_regex" value="(?!test)[a-z][A-Za-z_\d]*" />
+      <option name="m_minLength" value="3" />
+      <option name="m_maxLength" value="99" />
+    </inspection_tool>
+    <inspection_tool class="JUnitAbstractTestClassNamingConvention" enabled="true" level="INSPECTION" enabled_by_default="true">
+      <option name="m_regex" value="[A-Z][A-Za-z\d]*TestCase" />
+      <option name="m_minLength" value="9" />
+      <option name="m_maxLength" value="64" />
+    </inspection_tool>
+    <inspection_tool class="JUnitTestClassNamingConvention" enabled="true" level="INSPECTION" enabled_by_default="true">
+      <option name="m_regex" value="[A-Z][A-Za-z\d]*Test" />
+      <option name="m_minLength" value="5" />
+      <option name="m_maxLength" value="64" />
+    </inspection_tool>
+    <inspection_tool class="JUnitTestNG" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="JavaAccessorMethodCalledAsEmptyParen" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="JavaAccessorMethodOverridenAsEmptyParen" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="JavaDoc" enabled="true" level="INSPECTION" enabled_by_default="true">
+      <option name="TOP_LEVEL_CLASS_OPTIONS">
+        <value>
+          <option name="ACCESS_JAVADOC_REQUIRED_FOR" value="none" />
+          <option name="REQUIRED_TAGS" value="" />
+        </value>
+      </option>
+      <option name="INNER_CLASS_OPTIONS">
+        <value>
+          <option name="ACCESS_JAVADOC_REQUIRED_FOR" value="none" />
+          <option name="REQUIRED_TAGS" value="" />
+        </value>
+      </option>
+      <option name="METHOD_OPTIONS">
+        <value>
+          <option name="ACCESS_JAVADOC_REQUIRED_FOR" value="none" />
+          <option name="REQUIRED_TAGS" value="" />
+        </value>
+      </option>
+      <option name="FIELD_OPTIONS">
+        <value>
+          <option name="ACCESS_JAVADOC_REQUIRED_FOR" value="none" />
+          <option name="REQUIRED_TAGS" value="" />
+        </value>
+      </option>
+      <option name="IGNORE_DEPRECATED" value="false" />
+      <option name="IGNORE_JAVADOC_PERIOD" value="false" />
+      <option name="IGNORE_DUPLICATED_THROWS" value="false" />
+      <option name="IGNORE_POINT_TO_ITSELF" value="true" />
+      <option name="myAdditionalJavadocTags" value="ant.task" />
+    </inspection_tool>
+    <inspection_tool class="JavaLangImport" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="JavaLangReflect" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="JavaeeApplicationDomInspection" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="JpaDataSourceORMDomInspection" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="JpaDataSourceORMInspection" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="JpaDomInspection" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="JpaModelErrorInspection" level="INSPECTION" enabled="false" />
+    <inspection_tool class="JpaModelWarningInspection" level="WARNING" enabled="false" />
+    <inspection_tool class="JpaORMDomInspection" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="JpaQlInspection" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="JpaQueryApiInspection" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="KeySetIterationMayUseEntrySet" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="LabeledStatement" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="LegacyStringFormatting" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="LengthOneStringInIndexOf" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="LengthOneStringsInConcatenation" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="LimitedScopeInnerClass" enabled="true" level="INFO" enabled_by_default="true" />
+    <inspection_tool class="ListIndexOfReplaceableByContains" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="ListenerMayUseAdapter" enabled="true" level="INSPECTION" enabled_by_default="true">
+      <option name="checkForEmptyMethods" value="true" />
+    </inspection_tool>
+    <inspection_tool class="LiteralAsArgToStringEquals" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="LocalCanBeFinal" enabled="false" level="WARNING" enabled_by_default="false">
+      <option name="REPORT_VARIABLES" value="false" />
+      <option name="REPORT_PARAMETERS" value="true" />
+    </inspection_tool>
+    <inspection_tool class="LocalVariableHidingMemberVariable" enabled="true" level="INFO" enabled_by_default="true">
+      <option name="m_ignoreInvisibleFields" value="true" />
+      <option name="m_ignoreStaticMethods" value="true" />
+    </inspection_tool>
+    <inspection_tool class="LocalVariableNamingConvention" enabled="true" level="INSPECTION" enabled_by_default="true">
+      <option name="m_ignoreForLoopParameters" value="false" />
+      <option name="m_ignoreCatchParameters" value="false" />
+      <option name="m_regex" value="[a-z][A-Za-z\d]*" />
+      <option name="m_minLength" value="1" />
+      <option name="m_maxLength" value="99" />
+    </inspection_tool>
+    <inspection_tool class="LoggerInitializedWithForeignClass" enabled="true" level="INSPECTION" enabled_by_default="true">
+      <option name="loggerClassName" value="org.slf4j.LoggerFactory" />
+      <option name="loggerFactoryMethodName" value="getLogger" />
+    </inspection_tool>
+    <inspection_tool class="LoggingConditionDisagreesWithLogStatement" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="LongLiteralsEndingWithLowercaseL" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="LoopConditionNotUpdatedInsideLoop" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoreIterators" value="false" />
+    </inspection_tool>
+    <inspection_tool class="LoopStatementThatDoesntLoopJS" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="LoopWithImplicitTerminationCondition" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="MapReplaceableByEnumMap" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="MarkerInterface" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="MavenModelInspection" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="MethodCanBeVariableArityMethod" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoreByteAndShortArrayParameters" value="true" />
+      <option name="ignoreOverridingMethods" value="true" />
+    </inspection_tool>
+    <inspection_tool class="MethodMayBeStatic" enabled="true" level="INFO" enabled_by_default="true">
+      <option name="m_onlyPrivateOrFinal" value="false" />
+      <option name="m_ignoreEmptyMethods" value="true" />
+    </inspection_tool>
+    <inspection_tool class="MethodNameSameAsParentName" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="MethodNamesDifferOnlyByCase" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="MethodOnlyUsedFromInnerClass" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoreMethodsAccessedFromAnonymousClass" value="true" />
+      <option name="ignoreStaticMethodsFromNonStaticInnerClass" value="false" />
+      <option name="onlyReportStaticMethods" value="false" />
+    </inspection_tool>
+    <inspection_tool class="MethodOverloadsParentMethod" enabled="true" level="INFO" enabled_by_default="true" />
+    <inspection_tool class="MethodOverridesPackageLocalMethod" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="MethodOverridesPrivateMethod" enabled="true" level="INFO" enabled_by_default="true" />
+    <inspection_tool class="MethodOverridesStaticMethod" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="MimeType" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="MismatchedCollectionQueryUpdate" enabled="true" level="INFO" enabled_by_default="true">
+      <option name="queryNames">
+        <value />
+      </option>
+      <option name="updateNames">
+        <value />
+      </option>
+    </inspection_tool>
+    <inspection_tool class="MisorderedAssertEqualsParameters" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="MissingDeprecatedAnnotation" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="MissingMnemonic" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="MissingOverrideAnnotation" enabled="true" level="INSPECTION" enabled_by_default="true">
+      <option name="ignoreObjectMethods" value="false" />
+      <option name="ignoreAnonymousClassMethods" value="true" />
+    </inspection_tool>
+    <inspection_tool class="MissortedModifiers" enabled="true" level="INSPECTION" enabled_by_default="true">
+      <option name="m_requireAnnotationsFirst" value="true" />
+    </inspection_tool>
+    <inspection_tool class="MisspelledCompareTo" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="MisspelledEquals" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="MisspelledHashcode" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="MisspelledSetUp" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="MisspelledTearDown" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="MisspelledToString" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="MultipleDeclaration" enabled="true" level="INSPECTION" enabled_by_default="true">
+      <option name="ignoreForLoopDeclarations" value="false" />
+    </inspection_tool>
+    <inspection_tool class="MultipleTopLevelClassesInFile" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="NakedNotify" enabled="true" level="INFO" enabled_by_default="true" />
+    <inspection_tool class="NativeMethods" enabled="true" level="INFO" enabled_by_default="true" />
+    <inspection_tool class="NegatedConditional" enabled="true" level="INSPECTION" enabled_by_default="true">
+      <option name="m_ignoreNegatedNullComparison" value="false" />
+    </inspection_tool>
+    <inspection_tool class="NegatedEqualityExpression" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="NegatedIfElse" enabled="true" level="INSPECTION" enabled_by_default="true">
+      <option name="m_ignoreNegatedNullComparison" value="false" />
+      <option name="m_ignoreNegatedZeroComparison" value="false" />
+    </inspection_tool>
+    <inspection_tool class="NestedAssignment" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="NestedConditionalExpression" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="NestedSwitchStatement" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="NestedSynchronizedStatement" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="NestedTryStatement" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="NestingDepth" enabled="true" level="INSPECTION" enabled_by_default="true">
+      <option name="m_limit" value="5" />
+    </inspection_tool>
+    <inspection_tool class="NoButtonGroup" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="NoLabelFor" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="NoScrollPane" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="NoTailRecursionAnnotation" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="NonBooleanMethodNameMayNotStartWithQuestion" enabled="true" level="INFO" enabled_by_default="true">
+      <option name="questionString" value="is,can,has,could,will,shall,check,contains,equals,startsWith,endsWith" />
+      <option name="ignoreBooleanMethods" value="false" />
+      <option name="onlyWarnOnBaseMethods" value="true" />
+    </inspection_tool>
+    <inspection_tool class="NonExceptionNameEndsWithException" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="NonFinalFieldInImmutable" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="NonFinalFieldOfException" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="NonFinalGuard" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="NonFinalStaticVariableUsedInClassInitialization" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="NonJREEmulationClassesInClientCode" enabled="false" level="INSPECTION" enabled_by_default="false" />
+    <inspection_tool class="NonJaxWsWebServices" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="NonProtectedConstructorInAbstractClass" enabled="true" level="INSPECTION" enabled_by_default="true">
+      <option name="m_ignoreNonPublicClasses" value="false" />
+    </inspection_tool>
+    <inspection_tool class="NonReproducibleMathCall" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="NonSerializableFieldInSerializableClass" enabled="true" level="INFO" enabled_by_default="true">
+      <option name="ignorableAnnotations">
+        <value />
+      </option>
+      <option name="ignoreAnonymousInnerClasses" value="true" />
+      <option name="superClassString" value="java.awt.Component" />
+    </inspection_tool>
+    <inspection_tool class="NonSerializableObjectBoundToHttpSession" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="NonSerializableServiceParameters" enabled="false" level="INSPECTION" enabled_by_default="false" />
+    <inspection_tool class="NonSerializableWithSerialVersionUIDField" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="NonSerializableWithSerializationMethods" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="NonShortCircuitBoolean" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="NonStaticFinalLogger" enabled="true" level="INSPECTION" enabled_by_default="true">
+      <option name="loggerClassName" value="org.slf4j.Logger" />
+    </inspection_tool>
+    <inspection_tool class="NonSynchronizedMethodOverridesSynchronizedMethod" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="NonThreadSafeLazyInitialization" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="NoopMethodInAbstractClass" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="NotifyCalledOnCondition" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="NotifyNotInSynchronizedContext" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="NotifyWithoutCorrespondingWait" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="ObjectEquality" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="m_ignoreEnums" value="true" />
+      <option name="m_ignoreClassObjects" value="true" />
+      <option name="m_ignorePrivateConstructors" value="true" />
+    </inspection_tool>
+    <inspection_tool class="ObjectEqualsNull" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="ObjectNotify" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="ObsoleteCollection" enabled="true" level="INSPECTION" enabled_by_default="true">
+      <option name="ignoreRequiredObsoleteCollectionTypes" value="true" />
+    </inspection_tool>
+    <inspection_tool class="OctalAndDecimalIntegersMixed" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="OctalLiteral" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="OnDemandImport" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="OneButtonGroup" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="OneWayWebMethod" enabled="false" level="INSPECTION" enabled_by_default="false" />
+    <inspection_tool class="OverloadedMethodsWithSameNumberOfParameters" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoreInconvertibleTypes" value="true" />
+    </inspection_tool>
+    <inspection_tool class="OverloadedVarargsMethod" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="OverlyStrongTypeCast" enabled="true" level="INFO" enabled_by_default="true">
+      <option name="ignoreInMatchingInstanceof" value="false" />
+    </inspection_tool>
+    <inspection_tool class="OverridableMethodCallDuringObjectConstruction" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="OverriddenMethodCallDuringObjectConstruction" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="PackageVisibleField" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="PackageVisibleInnerClass" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoreEnums" value="false" />
+      <option name="ignoreInterfaces" value="false" />
+    </inspection_tool>
+    <inspection_tool class="ParameterHidingMemberVariable" enabled="true" level="INFO" enabled_by_default="true">
+      <option name="m_ignoreInvisibleFields" value="true" />
+      <option name="m_ignoreStaticMethodParametersHidingInstanceFields" value="false" />
+      <option name="m_ignoreForConstructors" value="true" />
+      <option name="m_ignoreForPropertySetters" value="true" />
+      <option name="m_ignoreForAbstractMethods" value="false" />
+    </inspection_tool>
+    <inspection_tool class="ParameterNameDiffersFromOverriddenParameter" enabled="true" level="INFO" enabled_by_default="true">
+      <option name="m_ignoreSingleCharacterNames" value="false" />
+      <option name="m_ignoreOverridesOfLibraryMethods" value="false" />
+    </inspection_tool>
+    <inspection_tool class="ParameterNamingConvention" enabled="false" level="WARNING" enabled_by_default="false">
+      <option name="m_regex" value="[a-z][A-Za-z\d]*" />
+      <option name="m_minLength" value="1" />
+      <option name="m_maxLength" value="64" />
+    </inspection_tool>
+    <inspection_tool class="ParameterTypePreventsOverriding" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="ParameterizedParametersStaticCollection" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="PointlessArithmeticExpressionJS" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="PointlessBitwiseExpressionJS" enabled="false" level="WARNING" enabled_by_default="false">
+      <option name="m_ignoreExpressionsContainingConstants" value="false" />
+    </inspection_tool>
+    <inspection_tool class="PointlessBooleanExpression" enabled="true" level="INSPECTION" enabled_by_default="true">
+      <option name="m_ignoreExpressionsContainingConstants" value="true" />
+    </inspection_tool>
+    <inspection_tool class="PointlessBooleanExpressionJS" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="PointlessIndexOfComparison" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="PointlessNullCheck" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="PropertyValueSetToItself" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="ProtectedMemberInFinalClass" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="PublicConstructorInNonPublicClass" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="PublicField" enabled="true" level="INSPECTION" enabled_by_default="true">
+      <option name="ignoreEnums" value="false" />
+      <option name="ignorableAnnotations">
+        <value>
+          <item value="org.junit.Rule" />
+        </value>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PublicFieldAccessedInSynchronizedContext" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="PublicStaticArrayField" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="QuestionableName" enabled="true" level="INFO" enabled_by_default="true">
+      <option name="nameString" value="aa,abc,bad,bar,bar2,baz,baz1,baz2,baz3,bb,blah,bogus,bool,cc,dd,defau1t,dummy,dummy2,ee,fa1se,ff,foo,foo1,foo2,foo3,foobar,four,fred,fred1,fred2,gg,hh,hello,hello1,hello2,hello3,ii,nu11,one,silly,silly2,string,two,then,three,whi1e,var" />
+    </inspection_tool>
+    <inspection_tool class="RandomDoubleForRandomInteger" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="RawUseOfParameterizedType" enabled="true" level="INSPECTION" enabled_by_default="true">
+      <option name="ignoreObjectConstruction" value="false" />
+      <option name="ignoreUncompilable" value="true" />
+    </inspection_tool>
+    <inspection_tool class="ReadObjectAndWriteObjectPrivate" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="ReadObjectInitialization" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="ReadResolveAndWriteReplaceProtected" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="RedundantArrayCreation" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="RedundantCast" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="RedundantFieldInitialization" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="RedundantImplements" enabled="true" level="INSPECTION" enabled_by_default="true">
+      <option name="ignoreSerializable" value="false" />
+      <option name="ignoreCloneable" value="false" />
+    </inspection_tool>
+    <inspection_tool class="RedundantImport" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="RedundantMethodOverride" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="RedundantStringFormatCall" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="RedundantSuppression" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="RedundantThrowsDeclaration" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="RedundantTypeArguments" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="ReferencesToClassesFromDefaultPackagesInJSPFile" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="ReflectionForUnavailableAnnotation" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="RelativeImport" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="ReplaceAllDot" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="ReplaceAssignmentWithOperatorAssignment" enabled="true" level="INSPECTION" enabled_by_default="true">
+      <option name="ignoreLazyOperators" value="true" />
+      <option name="ignoreObscureOperators" value="false" />
+    </inspection_tool>
+    <inspection_tool class="RequiredAttributes" enabled="false" level="WARNING" enabled_by_default="false">
+      <option name="myAdditionalRequiredHtmlAttributes" value="" />
+    </inspection_tool>
+    <inspection_tool class="ReservedWordUsedAsNameJS" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="ResultOfObjectAllocationIgnored" enabled="true" level="INFO" enabled_by_default="true" />
+    <inspection_tool class="ResultSetIndexZero" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="ReturnFromFinallyBlockJS" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="ReturnOfDateField" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="ReturnThis" enabled="true" level="INFO" enabled_by_default="true" />
+    <inspection_tool class="ReuseOfLocalVariable" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="RuntimeExec" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="RuntimeExecWithNonConstantString" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="SSBasedInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <replaceConfiguration name="new ArrayList() to FastList.newList() (generified)" text="new ArrayList&lt;$type$&gt;($expr$)" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.impl.list.mutable.FastList.&lt;$type$&gt;newList($expr$)">
+        <constraint name="type" within="" contains="" />
+        <constraint name="expr" minCount="0" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="new ArrayList() to FastList.newList()" text="new ArrayList($expr$)" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.impl.list.mutable.FastList.newList($expr$)">
+        <constraint name="expr" minCount="0" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="new HashSet() to UnifiedSet.newSet() (generified)" text="new HashSet&lt;$type$&gt;($expr$)" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.impl.set.mutable.UnifiedSet.&lt;$type$&gt;newSet($expr$)">
+        <constraint name="type" within="" contains="" />
+        <constraint name="expr" minCount="0" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="new HashSet() to UnifiedSet.newSet()" text="new HashSet($expr$)" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.impl.set.mutable.UnifiedSet.newSet($expr$)">
+        <constraint name="expr" minCount="0" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="new HashMap() to UnifiedMap.newMap() (generified)" text="new HashMap&lt;$key$, $value$&gt;($expr$)" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.impl.map.mutable.UnifiedMap.&lt;$key$, $value$&gt;newMap($expr$)">
+        <constraint name="key" within="" contains="" />
+        <constraint name="value" within="" contains="" />
+        <constraint name="expr" minCount="0" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="new HashMap() to UnifiedMap.newMap()" text="new HashMap($expr$)" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.impl.map.mutable.UnifiedMap.newMap($expr$)">
+        <constraint name="expr" minCount="0" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="new FastList() to FastList.newList() (generified)" text="new FastList&lt;$type$&gt;($expr$)" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.impl.list.mutable.FastList.&lt;$type$&gt;newList($expr$)">
+        <constraint name="type" within="" contains="" />
+        <constraint name="expr" minCount="0" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="new FastList() to FastList.newList()" text="new FastList($expr$)" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.impl.list.mutable.FastList.newList($expr$)">
+        <constraint name="expr" minCount="0" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="new UnifiedSet() to UnifiedSet.newSet() (generified)" text="new UnifiedSet&lt;$type$&gt;($expr$)" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.impl.set.mutable.UnifiedSet.&lt;$type$&gt;newSet($expr$)">
+        <constraint name="type" within="" contains="" />
+        <constraint name="expr" minCount="0" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="new UnifiedSet() to UnifiedSet.newSet()" text="new UnifiedSet($expr$)" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.impl.set.mutable.UnifiedSet.newSet($expr$)">
+        <constraint name="expr" minCount="0" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="new UnifiedMap() to UnifiedMap.newMap() (generified)" text="new UnifiedMap&lt;$key$, $value$&gt;($expr$)" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.impl.map.mutable.UnifiedMap.&lt;$key$, $value$&gt;newMap($expr$)">
+        <constraint name="key" within="" contains="" />
+        <constraint name="value" within="" contains="" />
+        <constraint name="expr" minCount="0" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="new UnifiedMap() to UnifiedMap.newMap()" text="new UnifiedMap($expr$)" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.impl.map.mutable.UnifiedMap.newMap($expr$)">
+        <constraint name="expr" minCount="0" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="Collections.singletonList() to Lists.fixedSize.of()" text="Collections.singletonList($expr$)" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.impl.factory.Lists.fixedSize.of($expr$)">
+        <constraint name="expr" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="Collections.singleton() to Sets.fixedSize.of()" text="Collections.singleton($expr$)" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.impl.factory.Setss.fixedSize.of($expr$)">
+        <constraint name="expr" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="Collections.singletonMap() to Maps.fixedSize.of()" text="Collections.singletonMap($key$, $value$)" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.impl.factory.Maps.fixedSize.of($key$, $value$)">
+        <constraint name="key" within="" contains="" />
+        <constraint name="value" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="new FastList 3" text="new FastList&lt;$type$&gt;($expr$)" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.impl.list.mutable.FastList.&lt;$type$&gt;newList($expr$)">
+        <constraint name="type" within="" contains="" />
+        <constraint name="expr" minCount="0" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="new FastList 4" text="new FastList($expr$)" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.impl.list.mutable.FastList.newList($expr$)">
+        <constraint name="expr" minCount="0" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="new UnifiedSet 3" text="new UnifiedSet&lt;$type$&gt;($expr$)" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.impl.set.mutable.UnifiedSet.&lt;$type$&gt;newSet($expr$)">
+        <constraint name="type" within="" contains="" />
+        <constraint name="expr" minCount="0" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="new UnifiedSet 4" text="new UnifiedSet($expr$)" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.impl.set.mutable.UnifiedSet.newSet($expr$)">
+        <constraint name="expr" minCount="0" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="new UnifiedMap 3" text="new UnifiedMap&lt;$key$, $value$&gt;($expr$)" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.impl.map.mutable.UnifiedMap.&lt;$key$, $value$&gt;newMap($expr$)">
+        <constraint name="key" within="" contains="" />
+        <constraint name="value" within="" contains="" />
+        <constraint name="expr" minCount="0" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="new UnifiedMap 4" text="new UnifiedMap($expr$)" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.impl.map.mutable.UnifiedMap.newMap($expr$)">
+        <constraint name="expr" minCount="0" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="List to MutableList" text="java.util.List&lt;$type$&gt; $list$ = $mutableList$;" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.api.list.MutableList&lt;$type$&gt; $list$ = $mutableList$;">
+        <constraint name="type" within="" contains="" />
+        <constraint name="list" within="" contains="" />
+        <constraint name="mutableList" nameOfExprType="MutableList" exprTypeWithinHierarchy="true" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="Set to MutableSet" text="java.util.Set&lt;$type$&gt; $set$ = $mutableSet$;" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.api.set.MutableSet&lt;$type$&gt; $set$ = $mutableSet$;">
+        <constraint name="type" within="" contains="" />
+        <constraint name="set" within="" contains="" />
+        <constraint name="mutableSet" nameOfExprType="MutableSet" exprTypeWithinHierarchy="true" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="Map to MutableMap" text="java.util.Map&lt;$key$, $value$&gt; $map$ = $mutableMap$;" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.api.map.MutableMap&lt;$key$, $value$&gt; $map$ = $mutableMap$;">
+        <constraint name="key" within="" contains="" />
+        <constraint name="value" within="" contains="" />
+        <constraint name="map" within="" contains="" />
+        <constraint name="mutableMap" nameOfExprType="MutableMap" exprTypeWithinHierarchy="true" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="List to MutableList 2" text="java.util.List $list$ = $mutableList$;" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.api.list.MutableList $list$ = $mutableList$;">
+        <constraint name="list" within="" contains="" />
+        <constraint name="mutableList" nameOfExprType="MutableList" exprTypeWithinHierarchy="true" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="Set to MutableSet 2" text="java.util.Set $set$ = $mutableSet$;" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.api.set.MutableSet $set$ = $mutableSet$;">
+        <constraint name="set" within="" contains="" />
+        <constraint name="mutableSet" nameOfExprType="MutableSet" exprTypeWithinHierarchy="true" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="Map to MutableMap 2" text="java.util.Map $map$ = $mutableMap$;" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.api.map.MutableMap $map$ = $mutableMap$;">
+        <constraint name="map" within="" contains="" />
+        <constraint name="mutableMap" nameOfExprType="MutableMap" exprTypeWithinHierarchy="true" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="Iterate.notEmpty()" text="$collection$ != null &amp;&amp; !$collection$.isEmpty()" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.impl.utility.Iterate.notEmpty($collection$)">
+        <constraint name="collection" nameOfExprType="Collection" exprTypeWithinHierarchy="true" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="Iterate.getFirst() 1" text="$collection$.iterator().next()" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.impl.utility.Iterate.getFirst($collection$)">
+        <constraint name="collection" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="Iterate.getFirst() 2" text="$collection$.listIterator().next()" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.impl.utility.Iterate.getFirst($collection$)">
+        <constraint name="collection" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="assertTrue to assertFalse" text="Assert.assertTrue($string$, !$expr$)" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="junit.framework.Assert.assertFalse($string$, $expr$)">
+        <constraint name="string" nameOfExprType="String" minCount="0" within="" contains="" />
+        <constraint name="expr" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="Size of Collection 1" text="Assert.assertTrue($string$, $collection$.size() == $size$)" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.impl.test.Verify.assertSize($string$, $size$, $collection$)">
+        <constraint name="string" nameOfExprType="String" minCount="0" within="" contains="" />
+        <constraint name="collection" within="" contains="" />
+        <constraint name="size" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="Size of Collection 2" text="Assert.assertEquals($string$, $size$, $collection$.size())" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.impl.test.Verify.assertSize($string$, $size$, $collection$)">
+        <constraint name="string" nameOfExprType="String" minCount="0" within="" contains="" />
+        <constraint name="size" within="" contains="" />
+        <constraint name="collection" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="Size of Collection 3" text="Assert.assertTrue($string$, $size$ == $collection$.size())" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.impl.test.Verify.assertSize($string$, $size$, $collection$)">
+        <constraint name="string" nameOfExprType="String" minCount="0" within="" contains="" />
+        <constraint name="size" within="" contains="" />
+        <constraint name="collection" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="assertEmpty 1" text="Assert.assertEquals($string$, new ArrayList(), $collection$)" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.impl.test.Verify.assertEmpty($string$, $collection$)">
+        <constraint name="string" nameOfExprType="String" minCount="0" within="" contains="" />
+        <constraint name="collection" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="assertEmpty 2" text="Assert.assertEquals($string$, $collection$, new ArrayList())" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.impl.test.Verify.assertEmpty($string$, $collection$)">
+        <constraint name="string" nameOfExprType="String" minCount="0" within="" contains="" />
+        <constraint name="collection" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="assertEmpty 3" text="Assert.assertEquals($string$, FastList.newList(), $collection$)" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.impl.test.Verify.assertEmpty($string$, $collection$)">
+        <constraint name="string" nameOfExprType="String" minCount="0" within="" contains="" />
+        <constraint name="collection" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="assertEmpty 4" text="Assert.assertEquals($string$, $collection$, FastList.newList())" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.impl.test.Verify.assertEmpty($string$, $collection$)">
+        <constraint name="string" nameOfExprType="String" minCount="0" within="" contains="" />
+        <constraint name="collection" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="assertEmpty 5" text="Assert.assertEquals($string$, UnifiedSet.newSet(), $collection$)" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.impl.test.Verify.assertEmpty($string$, $collection$)">
+        <constraint name="string" nameOfExprType="String" minCount="0" within="" contains="" />
+        <constraint name="collection" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="assertEmpty 6" text="Assert.assertEquals($string$, $collection$, UnifiedSet.newSet())" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.impl.test.Verify.assertEmpty($string$, $collection$)">
+        <constraint name="string" nameOfExprType="String" minCount="0" within="" contains="" />
+        <constraint name="collection" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="assertEmpty 7" text="Assert.assertEquals($string$, UnifiedMap.newMap(), $collection$)" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.impl.test.Verify.assertEmpty($string$, $collection$)">
+        <constraint name="string" nameOfExprType="String" minCount="0" within="" contains="" />
+        <constraint name="collection" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="assertEmpty 8" text="Assert.assertEquals($string$, $collection$, UnifiedMap.newMap())" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.impl.test.Verify.assertEmpty($string$, $collection$)">
+        <constraint name="string" nameOfExprType="String" minCount="0" within="" contains="" />
+        <constraint name="collection" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="assertEmpty 9" text="Assert.assertTrue($string$, $collection$.isEmpty())" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.impl.test.Verify.assertEmpty($string$, $collection$)">
+        <constraint name="string" nameOfExprType="String" minCount="0" within="" contains="" />
+        <constraint name="collection" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="assertEmpty 10" text="Verify.assertSize($string$, 0, $collection$)" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.impl.test.Verify.assertEmpty($string$, $collection$)">
+        <constraint name="string" nameOfExprType="String" minCount="0" within="" contains="" />
+        <constraint name="collection" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="assertInstanceOf" text="Assert.assertTrue($string$, $expr$ instanceof $class$)" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.impl.test.Verify.assertInstanceOf($string$, $expr$, $class$.class)">
+        <constraint name="string" nameOfExprType="String" minCount="0" within="" contains="" />
+        <constraint name="expr" within="" contains="" />
+        <constraint name="class" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="assertContains" text="Assert.assertTrue($string$, $collection$.contains($obj$))" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.impl.test.Verify.assertContains($string$, $obj$, $collection$)">
+        <constraint name="string" nameOfExprType="String" minCount="0" within="" contains="" />
+        <constraint name="collection" within="" contains="" />
+        <constraint name="obj" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="equals and hashCode 1" text="Assert.assertEquals($string$, $left$.hashCode(), $right$.hashCode())" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.impl.test.Verify.assertEqualsAndHashCode($string$, $left$, $right$)">
+        <constraint name="string" nameOfExprType="String" minCount="0" within="" contains="" />
+        <constraint name="left" within="" contains="" />
+        <constraint name="right" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="equals and hashCode 2" text="Assert.assertTrue($string$, $left$.hashCode() == $right$.hashCode())" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.impl.test.Verify.assertEqualsAndHashCode($string$, $left$, $right$)">
+        <constraint name="string" nameOfExprType="String" minCount="0" within="" contains="" />
+        <constraint name="left" within="" contains="" />
+        <constraint name="right" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="assertNotEquals" text="Assert.assertFalse($string$, $left$.equals($right$))" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.impl.test.Verify.assertNotEquals($string$, $left$, $right$)">
+        <constraint name="string" nameOfExprType="String" minCount="0" within="" contains="" />
+        <constraint name="left" within="" contains="" />
+        <constraint name="right" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="assertNotContains" text="Assert.assertFalse($string$, $collection$.contains($obj$))" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.impl.test.Verify.assertNotContains($string$, $obj$, $collection$)">
+        <constraint name="string" nameOfExprType="String" minCount="0" within="" contains="" />
+        <constraint name="coll" within="" contains="" />
+        <constraint name="collection" within="" contains="" />
+        <constraint name="obj" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="assertItemAtIndex 1" text="Assert.assertEquals($string$, $item$, $list$.get($index$))" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.impl.test.Verify.assertItemAtIndex($string$, $item$, $index$, $list$)">
+        <constraint name="string" nameOfExprType="String" minCount="0" within="" contains="" />
+        <constraint name="item" within="" contains="" />
+        <constraint name="list" nameOfExprType="List" exprTypeWithinHierarchy="true" within="" contains="" />
+        <constraint name="index" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="assertItemAtIndex 2" text="Assert.assertEquals($string$, $list$.get($index$), $item$)" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.impl.test.Verify.assertItemAtIndex($string$, $item$, $index$, $list$)">
+        <constraint name="string" nameOfExprType="String" minCount="0" within="" contains="" />
+        <constraint name="list" nameOfExprType="List" exprTypeWithinHierarchy="true" within="" contains="" />
+        <constraint name="index" within="" contains="" />
+        <constraint name="item" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="assertItemAtIndex 3" text="Assert.assertEquals($string$, $item$, $array$[$index$])" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.impl.test.Verify.assertItemAtIndex($string$, $item$, $index$, $array$)">
+        <constraint name="string" nameOfExprType="String" minCount="0" within="" contains="" />
+        <constraint name="item" within="" contains="" />
+        <constraint name="array" nameOfExprType="Object\[\]" within="" contains="" />
+        <constraint name="index" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="assertItemAtIndex 4" text="Assert.assertEquals($string$, $array$[$index$], $item$)" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.impl.test.Verify.assertItemAtIndex($string$, $item$, $index$, $array$)">
+        <constraint name="string" nameOfExprType="String" minCount="0" within="" contains="" />
+        <constraint name="array" nameOfExprType="Object\[\]" within="" contains="" />
+        <constraint name="index" within="" contains="" />
+        <constraint name="item" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="assertContainsAll 1" text="Assert.assertContains($string$, $expr1$, $coll$);&#10;assertContains($string$, $expr2$, $coll$);" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.impl.test.Verify.assertContainsAll($string$, $coll$, $expr1$, $expr2$);">
+        <constraint name="string" nameOfExprType="String" minCount="0" within="" contains="" />
+        <constraint name="expr1" within="" contains="" />
+        <constraint name="coll" nameOfExprType="Collection" exprTypeWithinHierarchy="true" within="" contains="" />
+        <constraint name="expr2" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="assertContainsAll 2" text="Assert.assertContainsAll($string$, $coll$, $expr$);&#10;assertContains($string$, $expr2$, $coll$);" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.impl.test.Verify.assertContainsAll($string$, $coll$, $expr$, $expr2$);">
+        <constraint name="string" nameOfExprType="String" minCount="0" within="" contains="" />
+        <constraint name="coll" nameOfExprType="Collection" exprTypeWithinHierarchy="true" within="" contains="" />
+        <constraint name="expr" maxCount="2147483647" within="" contains="" />
+        <constraint name="expr2" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="nullSafeEquals 1" text="$left$ == null ? $right$ != null : !$left$.equals($right$)" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="!org.eclipse.collections.impl.block.factory.Comparators.nullSafeEquals($left$, $right$)">
+        <constraint name="left" within="" contains="" />
+        <constraint name="right" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="nullSafeEquals 2" text="$left$ == null ? $right$ == null : $left$.equals($right$)" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.impl.block.factory.Comparators.nullSafeEquals($left$, $right$)">
+        <constraint name="left" within="" contains="" />
+        <constraint name="right" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="nullSafeEquals 3" text="$left$ == null ? $right$ == null : $left$ == $right$ || $left$.equals($right$)" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.impl.block.factory.Comparators.nullSafeEquals($left$, $right$)">
+        <constraint name="left" within="" contains="" />
+        <constraint name="right" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="nullSafeEquals 4" text="$left$ == $right$ || $left$ != null &amp;&amp; $left$.equals($right$)" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.impl.block.factory.Comparators.nullSafeEquals($left$, $right$)">
+        <constraint name="left" within="" contains="" />
+        <constraint name="right" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="nullSafeEquals 5" text="$right$ == $left$ || $left$ != null &amp;&amp; $left$.equals($right$)" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.impl.block.factory.Comparators.nullSafeEquals($left$, $right$)">
+        <constraint name="right" within="" contains="" />
+        <constraint name="left" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="nullSafeEquals 6" text="$left$ == null || $right$ == null ? $left$ == $right$ : $left$.equals($right$)" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.impl.block.factory.Comparators.nullSafeEquals($left$, $right$)">
+        <constraint name="left" within="" contains="" />
+        <constraint name="right" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="newListWith 1" text="$Coll$&lt;$type$&gt; $coll$ = FastList.&lt;$type$&gt;newList();&#10;$coll$.add($expr$);&#10;" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="$Coll$&lt;$type$&gt; $coll$ = FastList.&lt;$type$&gt;newListWith($expr$);">
+        <constraint name="Coll" regexp="Collection" withinHierarchy="true" within="" contains="" />
+        <constraint name="type" within="" contains="" />
+        <constraint name="coll" within="" contains="" />
+        <constraint name="expr" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="newListWith 2" text="$Coll$&lt;$type$&gt; $coll$ = FastList.&lt;$type$&gt;newListWith($expr1$);&#10;$coll$.add($expr2$); &#10;" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="$Coll$&lt;$type$&gt; $coll$ = FastList.&lt;$type$&gt;newListWith($expr1$, $expr2$);">
+        <constraint name="Coll" regexp="Collection" withinHierarchy="true" within="" contains="" />
+        <constraint name="type" within="" contains="" />
+        <constraint name="coll" within="" contains="" />
+        <constraint name="expr1" maxCount="2147483647" within="" contains="" />
+        <constraint name="expr2" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="newListWith 3" text="$Coll$ $coll$ = FastList.newList();&#10;$coll$.add($expr$);" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="$Coll$ $coll$ = FastList.newListWith($expr$);">
+        <constraint name="Coll" regexp="Collection" withinHierarchy="true" within="" contains="" />
+        <constraint name="coll" within="" contains="" />
+        <constraint name="expr" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="newListWith 4" text="$Coll$ $coll$ = FastList.newListWith($expr1$);&#10;$coll$.add($expr2$);" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="$Coll$ $coll$ = FastList.newListWith($expr1$, $expr2$);">
+        <constraint name="Coll" regexp="Collection" withinHierarchy="true" within="" contains="" />
+        <constraint name="coll" within="" contains="" />
+        <constraint name="expr1" maxCount="2147483647" within="" contains="" />
+        <constraint name="expr2" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="newSetWith 1" text="$Coll$&lt;$type$&gt; $coll$ = UnifiedSet.&lt;$type$&gt;newSet();&#10;$coll$.add($expr$);" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="$Coll$&lt;$type$&gt; $coll$ = UnifiedSet.&lt;$type$&gt;newSetWith($expr$);">
+        <constraint name="Coll" regexp="Collection" withinHierarchy="true" within="" contains="" />
+        <constraint name="type" within="" contains="" />
+        <constraint name="coll" within="" contains="" />
+        <constraint name="expr" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="newSetWith 2" text="$Coll$&lt;$type$&gt; $coll$ = UnifiedSet.&lt;$type$&gt;newSetWith($expr1$);&#10;$coll$.add($expr2$);" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="$Coll$&lt;$type$&gt; $coll$ = UnifiedSet.&lt;$type$&gt;newSetWith($expr1$, $expr2$);">
+        <constraint name="Coll" regexp="Collection" withinHierarchy="true" within="" contains="" />
+        <constraint name="type" within="" contains="" />
+        <constraint name="coll" within="" contains="" />
+        <constraint name="expr1" within="" contains="" />
+        <constraint name="expr2" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="newSetWith 3" text="$Coll$ $coll$ = UnifiedSet.newSet();&#10;$coll$.add($expr$);" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="$Coll$ $coll$ = UnifiedSet.newSetWith($expr$);">
+        <constraint name="Coll" regexp="Collection" withinHierarchy="true" within="" contains="" />
+        <constraint name="coll" within="" contains="" />
+        <constraint name="expr" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="newSetWith 4" text="$Coll$ $coll$ = UnifiedSet.newSetWith($expr1$);&#10;$coll$.add($expr2$);" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="$Coll$ $coll$ = UnifiedSet.newSetWith($expr1$, $expr2$);">
+        <constraint name="Coll" regexp="Collection" withinHierarchy="true" within="" contains="" />
+        <constraint name="coll" within="" contains="" />
+        <constraint name="expr1" within="" contains="" />
+        <constraint name="expr2" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="newListWith 6" text="FastList.newList(Arrays.asList($expr$))" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.impl.list.mutable.FastList.newListWith($expr$)">
+        <constraint name="expr" minCount="0" maxCount="2147483647" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="newSetWith 6" text="UnifiedSet.newSet(Arrays.asList($expr$))" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.impl.set.mutable.UnifiedSet.newSetWith($expr$)">
+        <constraint name="expr" minCount="0" maxCount="2147483647" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="ArrayIterate.notEmpty()" text="$array$ != null &amp;&amp; $array$.length &gt; 0" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.impl.utility.ArrayIterate.notEmpty($array$)">
+        <constraint name="array" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="ArrayIterate.asList() to FastList.newListWith()" text="ArrayIterate.asList(new Object[]{$expr$})" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.impl.list.mutable.FastList.newListWith($expr$)">
+        <constraint name="obj" within="" contains="" />
+        <constraint name="expr" minCount="0" maxCount="2147483647" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="Iterate to ArrayIterate" text="Iterate.$method$(Arrays.asList($array$), $expr$)" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.impl.utility.ArrayIterate.$method$($array$, $expr$)">
+        <constraint name="list" within="" contains="" />
+        <constraint name="array" within="" contains="" />
+        <constraint name="expr" minCount="0" maxCount="2147483647" within="" contains="" />
+        <constraint name="method" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="assertNotEquals 2" text="Assert.assertTrue($string$, $left$ != $right$)" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.impl.test.Verify.assertNotEquals($string$, $left$, $right$)">
+        <constraint name="string" nameOfExprType="String" minCount="0" within="" contains="" />
+        <constraint name="left" within="" contains="" />
+        <constraint name="right" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="assertInstanceOf 2" text="Assert.assertTrue($string$, $class$.class.isInstance($expr$))" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.impl.test.Verify.assertInstanceOf($string$, $expr$, $class$.class)">
+        <constraint name="string" nameOfExprType="String" minCount="0" within="" contains="" />
+        <constraint name="expr" within="" contains="" />
+        <constraint name="class" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="newListWith 7" text="$coll$ = FastList.newList();&#10;$coll$.add($expr$);" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="$coll$ = FastList.newListWith($expr$);">
+        <constraint name="coll" within="" contains="" />
+        <constraint name="expr" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="newListWith 8" text="$coll$ = FastList.&lt;$type$&gt;newListWith($expr1$);&#10;$coll$.add($expr2$);&#10;" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="$coll$ = FastList.&lt;$type$&gt;newListWith($expr1$, $expr2$);">
+        <constraint name="coll" within="" contains="" />
+        <constraint name="type" within="" contains="" />
+        <constraint name="expr1" within="" contains="" />
+        <constraint name="expr2" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="newListWith 9" text="$coll$ = FastList.newListWith($expr1$);&#10;$coll$.add($expr2$);" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="true" shortenFQN="true" replacement="$coll$ = FastList.newListWith($expr1$, $expr2$);">
+        <constraint name="coll" within="" contains="" />
+        <constraint name="expr1" within="" contains="" />
+        <constraint name="expr2" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="newSetWith 7" text="$coll$ = UnifiedSet.newSet();&#10;$coll$.add($expr$);" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="$coll$ = UnifiedSet.newSetWith($expr$);">
+        <constraint name="coll" within="" contains="" />
+        <constraint name="type" within="" contains="" />
+        <constraint name="expr1" within="" contains="" />
+        <constraint name="expr2" within="" contains="" />
+        <constraint name="expr" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="newSetWith 8" text="$coll$ = UnifiedSet.&lt;$type$&gt;newSetWith($expr1$);&#10;$coll$.add($expr2$);" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="$coll$ = UnifiedSet.&lt;$type$&gt;newSetWith($expr1$, $expr2$);">
+        <constraint name="coll" within="" contains="" />
+        <constraint name="type" within="" contains="" />
+        <constraint name="expr1" within="" contains="" />
+        <constraint name="expr2" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="newSetWith 9" text="$coll$ = UnifiedSet.newSetWith($expr1$);&#10;$coll$.add($expr2$);" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="$coll$ = UnifiedSet.newSetWith($expr1$, $expr2$);">
+        <constraint name="coll" within="" contains="" />
+        <constraint name="type" within="" contains="" />
+        <constraint name="expr1" within="" contains="" />
+        <constraint name="expr2" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="size of array 1" text="Assert.assertTrue($string$, $array$.length == $size$)" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.impl.test.Verify.assertSize($string$, $size$, $array$)">
+        <constraint name="coll" within="" contains="" />
+        <constraint name="type" within="" contains="" />
+        <constraint name="expr1" within="" contains="" />
+        <constraint name="expr2" within="" contains="" />
+        <constraint name="string" minCount="0" within="" contains="" />
+        <constraint name="array" within="" contains="" />
+        <constraint name="size" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="size of array 2" text="Assert.assertEquals($string$, $size$, $array$.length)" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.impl.test.Verify.assertSize($string$, $size$, $array$)">
+        <constraint name="coll" within="" contains="" />
+        <constraint name="type" within="" contains="" />
+        <constraint name="expr1" within="" contains="" />
+        <constraint name="expr2" within="" contains="" />
+        <constraint name="string" minCount="0" within="" contains="" />
+        <constraint name="array" within="" contains="" />
+        <constraint name="size" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="size of array 3" text="Assert.assertTrue($string$, $size$ == $array$.length)" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.impl.test.Verify.assertSize($string$, $size$, $array$)">
+        <constraint name="coll" within="" contains="" />
+        <constraint name="type" within="" contains="" />
+        <constraint name="expr1" within="" contains="" />
+        <constraint name="expr2" within="" contains="" />
+        <constraint name="string" minCount="0" within="" contains="" />
+        <constraint name="array" within="" contains="" />
+        <constraint name="size" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="passThru selector" text="new Function&lt;$type$, $type$&gt;()&#10;{&#10;    public $type$ valueOf($type$ $object$)&#10;    {&#10;        return $object$;&#10;    }&#10;}" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.impl.block.factory.Functions.&lt;$type$&gt;getPassThru()">
+        <constraint name="type" within="" contains="" />
+        <constraint name="object" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="Iterate.isEmpty()" text="$collection$ == null || $collection$.isEmpty()" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.impl.utility.Iterate.isEmpty($collection$)">
+        <constraint name="collection" nameOfExprType="Collection" exprTypeWithinHierarchy="true" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="Unmodifiable Collection" text="java.util.Collections.unmodifiableCollection($coll$)" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="$coll$.asUnmodifiable()">
+        <constraint name="coll" nameOfExprType="MutableCollection" exprTypeWithinHierarchy="true" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="UnmodifiableList" text="java.util.Collections.unmodifiableList($coll$)" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="$coll$.asUnmodifiable()">
+        <constraint name="coll" nameOfExprType="MutableList" exprTypeWithinHierarchy="true" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="Unmodifiable Set" text="java.util.Collections.unmodifiableSet($coll$)" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="$coll$.asUnmodifiable()">
+        <constraint name="coll" nameOfExprType="MutableSet" exprTypeWithinHierarchy="true" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="Unmodifiable Map" text="java.util.Collections.unmodifiableMap($map$)" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="$map$.asUnmodifiable()">
+        <constraint name="map" nameOfExprType="MutableMap" exprTypeWithinHierarchy="true" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="Verify.assertNotNull" text="Assert.assertTrue($string$, $expr$ != null)" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.impl.test.Verify.assertNotNull($string$, $expr$)">
+        <constraint name="string" nameOfExprType="String" minCount="0" within="" contains="" />
+        <constraint name="left" within="" contains="" />
+        <constraint name="right" within="" contains="" />
+        <constraint name="expr" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="not Iterate.notEmpty()" text="!Iterate.notEmpty($iterable$)" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.impl.utility.Iterate.isEmpty($iterable$)">
+        <constraint name="iterable" nameOfExprType="Iterable" exprTypeWithinHierarchy="true" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="!Iterate.isEmpty() to notEmpty()" text="!Iterate.isEmpty($iterable$)" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.impl.utility.Iterate.notEmpty($iterable$)">
+        <constraint name="iterable" nameOfExprType="Iterable" exprTypeWithinHierarchy="true" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="not MapIterate.notEmpty()" text="!MapIterate.notEmpty($map$)" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.impl.utility.MapIterate.isEmpty($map$)">
+        <constraint name="map" nameOfExprType="Map" exprTypeWithinHierarchy="true" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="!Map.isEmpty() to notEmpty()" text="!MapIterate.isEmpty($map$)" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.impl.utility.MapIterate.notEmpty($map$)">
+        <constraint name="map" nameOfExprType="Map" exprTypeWithinHierarchy="true" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="!isEmpty() to notEmpty()" text="!$richIterable$.isEmpty()" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="$richIterable$.notEmpty()">
+        <constraint name="richIterable" script="&quot;&quot;" nameOfExprType="RichIterable" exprTypeWithinHierarchy="true" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="!notEmpty() to isEmpty()" text="!$richIterable$.notEmpty()" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="$richIterable$.isEmpty()">
+        <constraint name="richIterable" script="&quot;&quot;" nameOfExprType="RichIterable" exprTypeWithinHierarchy="true" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="Verify.assertThrows() 1" text="try&#10;{&#10;    $statements$;&#10;    Assert.fail($string$);&#10;}&#10;catch ($Exception$ e)&#10;{&#10;}" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="Verify.assertThrows($Exception$.class, new Runnable()&#10;{&#10;    public void run()&#10;    {&#10;        $statements$;&#10;    }&#10;});&#10;">
+        <constraint name="statements" maxCount="2147483647" within="" contains="" />
+        <constraint name="Exception" regexp="Exception" withinHierarchy="true" within="" contains="" />
+        <constraint name="string" nameOfExprType="String" minCount="0" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="newBagWith 1" text="$Coll$&lt;$type$&gt; $coll$ = HashBag.&lt;$type$&gt;newBag();&#10;$coll$.add($expr$);&#10;" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="$Coll$&lt;$type$&gt; $coll$ = HashBag.&lt;$type$&gt;newBagWith($expr$);">
+        <constraint name="Coll" script="&quot;&quot;" regexp="Collection" withinHierarchy="true" within="" contains="" />
+        <constraint name="type" within="" contains="" />
+        <constraint name="coll" script="&quot;&quot;" within="" contains="" />
+        <constraint name="expr" script="&quot;&quot;" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="newBagWith 2" text="$Coll$&lt;$type$&gt; $coll$ = HashBag.&lt;$type$&gt;newBagWith($expr1$);&#10;$coll$.add($expr2$); &#10;" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="$Coll$&lt;$type$&gt; $coll$ = HashBag.&lt;$type$&gt;newBagWith($expr1$, $expr2$);">
+        <constraint name="Coll" script="&quot;&quot;" regexp="Collection" withinHierarchy="true" within="" contains="" />
+        <constraint name="type" script="&quot;&quot;" within="" contains="" />
+        <constraint name="coll" script="&quot;&quot;" within="" contains="" />
+        <constraint name="expr1" script="&quot;&quot;" maxCount="2147483647" within="" contains="" />
+        <constraint name="expr2" script="&quot;&quot;" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="newBagWith 3" text="$Coll$ $coll$ = HashBag.newBag();&#10;$coll$.add($expr$);" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="$Coll$ $coll$ = HashBag.newBagWith($expr$);">
+        <constraint name="Coll" script="&quot;&quot;" regexp="Collection" withinHierarchy="true" within="" contains="" />
+        <constraint name="coll" script="&quot;&quot;" within="" contains="" />
+        <constraint name="expr" script="&quot;&quot;" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="newBagWith 4" text="$Coll$ $coll$ = HashBag.newBagWith($expr1$);&#10;$coll$.add($expr2$);" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="$Coll$ $coll$ = HashBag.newBagWith($expr1$, $expr2$);">
+        <constraint name="Coll" regexp="Collection" withinHierarchy="true" within="" contains="" />
+        <constraint name="coll" within="" contains="" />
+        <constraint name="expr1" maxCount="2147483647" within="" contains="" />
+        <constraint name="expr2" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="newBagWith 6" text="HashBag.newBag(Arrays.asList($expr$))" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.impl.bag.mutable.HashBag.newBagWith($expr$)">
+        <constraint name="expr" minCount="0" maxCount="2147483647" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="newBagWith 7" text="$coll$ = HashBag.newBag();&#10;$coll$.add($expr$);" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="$coll$ = HashBag.newBagWith($expr$);">
+        <constraint name="coll" within="" contains="" />
+        <constraint name="expr" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="newBagWith 8" text="$coll$ = HashBag.&lt;$type$&gt;newBagWith($expr1$);&#10;$coll$.add($expr2$);&#10;" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="$coll$ = HashBag.&lt;$type$&gt;newBagWith($expr1$, $expr2$);">
+        <constraint name="coll" script="&quot;&quot;" within="" contains="" />
+        <constraint name="type" script="&quot;&quot;" within="" contains="" />
+        <constraint name="expr1" script="&quot;&quot;" within="" contains="" />
+        <constraint name="expr2" script="&quot;&quot;" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="newBagWith 9" text="$coll$ = HashBag.newBagWith($expr1$);&#10;$coll$.add($expr2$);" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="$coll$ = HashBag.newBagWith($expr1$, $expr2$);">
+        <constraint name="coll" within="" contains="" />
+        <constraint name="expr1" script="&quot;&quot;" within="" contains="" />
+        <constraint name="expr2" script="&quot;&quot;" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="synchronizedList() to asSynchronized()" text="Collections.synchronizedList($list$)" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="$list$.asSynchronized()">
+        <constraint name="set" script="&quot;&quot;" nameOfExprType="MutableSet" exprTypeWithinHierarchy="true" within="" contains="" />
+        <constraint name="list" script="&quot;&quot;" nameOfExprType="MutableList" exprTypeWithinHierarchy="true" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="synchronizedSet() to asSynchronized()" text="Collections.synchronizedSet($set$)" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="$set$.asSynchronized()">
+        <constraint name="set" script="&quot;&quot;" nameOfExprType="MutableSet" exprTypeWithinHierarchy="true" within="" contains="" />
+        <constraint name="list" script="&quot;&quot;" nameOfExprType="MutableList" exprTypeWithinHierarchy="true" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="synchronizedMap() to asSynchronized()" text="Collections.synchronizedMap($map$)" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="$map$.asSynchronized()">
+        <constraint name="set" script="&quot;&quot;" nameOfExprType="MutableSet" exprTypeWithinHierarchy="true" within="" contains="" />
+        <constraint name="list" script="&quot;&quot;" nameOfExprType="MutableList" exprTypeWithinHierarchy="true" within="" contains="" />
+        <constraint name="map" script="&quot;&quot;" nameOfExprType="MutableMap" exprTypeWithinHierarchy="true" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="synchronizedCollection() to asSynchronized()" text="Collections.synchronizedCollection($collection$)" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="$collection$.asSynchronized()">
+        <constraint name="set" script="&quot;&quot;" nameOfExprType="MutableSet" exprTypeWithinHierarchy="true" within="" contains="" />
+        <constraint name="list" script="&quot;&quot;" nameOfExprType="MutableList" exprTypeWithinHierarchy="true" within="" contains="" />
+        <constraint name="map" script="&quot;&quot;" nameOfExprType="MutableMap" exprTypeWithinHierarchy="true" within="" contains="" />
+        <constraint name="collection" script="&quot;&quot;" nameOfExprType="MutableCollection" exprTypeWithinHierarchy="true" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="Verify.assertCount()" text="Assert.assertEquals($expectedCount$, Iterate.count($iterable$, $discriminator$);" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.impl.test.Verify.assertCount($expectedCount$, $iterable$, $discriminator$);">
+        <constraint name="size" within="" contains="" />
+        <constraint name="iterable" within="" contains="" />
+        <constraint name="discriminator" within="" contains="" />
+        <constraint name="expectedCount" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="CollectionRemoveBlock.on()" text="new CollectionRemoveBlock&lt;$type$&gt;($coll$)" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="CollectionRemoveBlock.on($coll$)">
+        <constraint name="type" within="" contains="" />
+        <constraint name="coll" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="CollectionAddBlock.on()" text="new CollectionAddBlock&lt;$type$&gt;($coll$)" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="CollectionAddBlock.on($coll$)">
+        <constraint name="type" within="" contains="" />
+        <constraint name="coll" within="" contains="" />
+      </replaceConfiguration>
+    </inspection_tool>
+    <inspection_tool class="SafeLock" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="SafeVarargsDetector" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="SamePackageImport" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="SameParameterValue" enabled="false" level="INFO" enabled_by_default="false" />
+    <inspection_tool class="SameReturnValue" enabled="true" level="INFO" enabled_by_default="true" />
+    <inspection_tool class="ScalaUnusedSymbol" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="ScalaUselessExpression" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="SelfIncludingJspFiles" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="SerialPersistentFieldsWithWrongSignature" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="SerialVersionUIDNotStaticFinal" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="SerializableHasSerialVersionUIDField" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoreAnonymousInnerClasses" value="true" />
+      <option name="superClassString" value="java.awt.Component" />
+    </inspection_tool>
+    <inspection_tool class="SerializableHasSerializationMethods" enabled="false" level="INFO" enabled_by_default="false">
+      <option name="ignoreAnonymousInnerClasses" value="true" />
+      <option name="superClassString" value="java.awt.Component" />
+    </inspection_tool>
+    <inspection_tool class="SerializableInnerClassHasSerialVersionUIDField" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoreAnonymousInnerClasses" value="true" />
+      <option name="superClassString" value="java.awt.Component" />
+    </inspection_tool>
+    <inspection_tool class="SerializableInnerClassWithNonSerializableOuterClass" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoreAnonymousInnerClasses" value="true" />
+      <option name="superClassString" value="java.awt.Component" />
+    </inspection_tool>
+    <inspection_tool class="SerializableWithUnconstructableAncestor" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="SetReplaceableByEnumSet" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="SetupCallsSuperSetup" enabled="true" level="INFO" enabled_by_default="true" />
+    <inspection_tool class="SetupIsPublicVoidNoArg" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="ShiftOutOfRange" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="ShiftOutOfRangeJS" enabled="false" level="INSPECTION" enabled_by_default="false" />
+    <inspection_tool class="SignalWithoutCorrespondingAwait" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="SillyAssignment" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="SillyAssignmentJS" enabled="false" level="INSPECTION" enabled_by_default="false" />
+    <inspection_tool class="SimplifiableAnnotation" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="SimplifiableConditionalExpression" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="SimplifiableEqualsExpression" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="SimplifiableIfStatement" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="SimplifiableJUnitAssertion" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="Since15" enabled="false" level="WARNING" enabled_by_default="true">
+      <effectiveLL value="JDK_1_6" />
+    </inspection_tool>
+    <inspection_tool class="Singleton" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="SizeReplaceableByIsEmpty" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="SleepWhileHoldingLock" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="SocketResource" enabled="true" level="INSPECTION" enabled_by_default="true">
+      <option name="insideTryAllowed" value="false" />
+    </inspection_tool>
+    <inspection_tool class="SpringAopErrorsInspection" enabled="false" level="INSPECTION" enabled_by_default="false" />
+    <inspection_tool class="SpringAopWarningsInspection" enabled="false" level="INSPECTION" enabled_by_default="false" />
+    <inspection_tool class="SpringBeanAutowiringInspection" enabled="false" level="INSPECTION" enabled_by_default="false" />
+    <inspection_tool class="SpringBeanConstructorArgInspection" enabled="false" level="INSPECTION" enabled_by_default="false" />
+    <inspection_tool class="SpringBeanDepedencyCheckInspection" enabled="false" level="INSPECTION" enabled_by_default="false" />
+    <inspection_tool class="SpringBeanInstantiationInspection" enabled="false" level="INSPECTION" enabled_by_default="false" />
+    <inspection_tool class="SpringBeanLookupMethodInspection" enabled="false" level="INSPECTION" enabled_by_default="false" />
+    <inspection_tool class="SpringBeanNameConventionInspection" enabled="false" level="INSPECTION" enabled_by_default="false" />
+    <inspection_tool class="SpringFactoryMethodInspection" enabled="false" level="INSPECTION" enabled_by_default="false" />
+    <inspection_tool class="SpringInjectionValueConsistencyInspection" enabled="false" level="INSPECTION" enabled_by_default="false" />
+    <inspection_tool class="SpringInjectionValueStyleInspection" enabled="false" level="INSPECTION" enabled_by_default="false" />
+    <inspection_tool class="SpringJamErrorInspection" level="INSPECTION" enabled="false" />
+    <inspection_tool class="SpringModelInspection" enabled="false" level="INSPECTION" enabled_by_default="false" />
+    <inspection_tool class="SpringReplacedMethodsInspection" enabled="false" level="INSPECTION" enabled_by_default="false" />
+    <inspection_tool class="SpringScopesInspection" enabled="false" level="INSPECTION" enabled_by_default="false" />
+    <inspection_tool class="StandardVariableNames" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="StaticCallOnSubclass" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="StaticCollection" enabled="true" level="INSPECTION" enabled_by_default="true">
+      <option name="m_ignoreWeakCollections" value="false" />
+    </inspection_tool>
+    <inspection_tool class="StaticFieldReferenceOnSubclass" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="StaticGuardedByInstance" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="StaticImport" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="allowedClasses">
+        <set>
+          <option value="org.eclipse.collections.impl.test.Verify" />
+          <option value="org.hamcrest.Matchers" />
+          <option value="org.junit.Assert" />
+        </set>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="StaticInheritance" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="StaticMethodNamingConvention" enabled="false" level="WARNING" enabled_by_default="false">
+      <option name="m_regex" value="[a-z][A-Za-z\d]*" />
+      <option name="m_minLength" value="4" />
+      <option name="m_maxLength" value="64" />
+    </inspection_tool>
+    <inspection_tool class="StaticSuite" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="StaticVariableInitialization" enabled="true" level="INSPECTION" enabled_by_default="true">
+      <option name="m_ignorePrimitives" value="false" />
+    </inspection_tool>
+    <inspection_tool class="StaticVariableOfConcreteClass" enabled="false" level="INFO" enabled_by_default="false" />
+    <inspection_tool class="StaticVariableUninitializedUse" enabled="true" level="INSPECTION" enabled_by_default="true">
+      <option name="m_ignorePrimitives" value="false" />
+    </inspection_tool>
+    <inspection_tool class="StringBufferField" enabled="true" level="INFO" enabled_by_default="true" />
+    <inspection_tool class="StringBufferReplaceableByString" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="StringBufferReplaceableByStringBuilder" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="StringBufferToStringInConcatenation" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="StringConcatenationArgumentToLogCall" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="StringConcatenationInLoops" enabled="true" level="INSPECTION" enabled_by_default="true">
+      <option name="m_ignoreUnlessAssigned" value="true" />
+    </inspection_tool>
+    <inspection_tool class="StringConcatenationInsideStringBufferAppend" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="StringConstructor" enabled="false" level="WARNING" enabled_by_default="false">
+      <option name="ignoreSubstringArguments" value="false" />
+    </inspection_tool>
+    <inspection_tool class="StringEquality" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="StringEqualsEmptyString" enabled="false" level="INSPECTION" enabled_by_default="false" />
+    <inspection_tool class="StringReplaceableByStringBuffer" enabled="true" level="INSPECTION" enabled_by_default="true">
+      <option name="onlyWarnOnLoop" value="true" />
+    </inspection_tool>
+    <inspection_tool class="StringToString" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="StrutsInspection" enabled="false" level="INSPECTION" enabled_by_default="false" />
+    <inspection_tool class="StrutsTilesInspection" enabled="false" level="INSPECTION" enabled_by_default="false" />
+    <inspection_tool class="StrutsValidatorFormInspection" enabled="false" level="INSPECTION" enabled_by_default="false" />
+    <inspection_tool class="StrutsValidatorInspection" enabled="false" level="INSPECTION" enabled_by_default="false" />
+    <inspection_tool class="SubstringZero" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="SubtractionInCompareTo" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="SuppressionAnnotation" enabled="false" level="INFO" enabled_by_default="false" />
+    <inspection_tool class="Suspicious Inferred Type" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="Suspicious New Line in Method Call" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="SuspiciousGetterSetter" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="SuspiciousIndentAfterControlStatement" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="SuspiciousInferredType" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="SuspiciousMethodCalls" enabled="true" level="INSPECTION" enabled_by_default="true">
+      <option name="REPORT_CONVERTIBLE_METHOD_CALLS" value="false" />
+    </inspection_tool>
+    <inspection_tool class="SuspiciousNameCombination" enabled="false" level="WARNING" enabled_by_default="false">
+      <group names="x,width,left,right" />
+      <group names="y,height,top,bottom" />
+    </inspection_tool>
+    <inspection_tool class="SuspiciousSystemArraycopy" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="SuspiciousToArrayCall" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="SwitchStatement" enabled="true" level="INFO" enabled_by_default="true" />
+    <inspection_tool class="SwitchStatementDensity" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="m_limit" value="20" />
+    </inspection_tool>
+    <inspection_tool class="SwitchStatementWithConfusingDeclaration" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="SwitchStatementWithTooFewBranches" enabled="true" level="INSPECTION" enabled_by_default="true">
+      <option name="m_limit" value="2" />
+    </inspection_tool>
+    <inspection_tool class="SwitchStatementsWithoutDefault" enabled="true" level="INFO" enabled_by_default="true">
+      <option name="m_ignoreFullyCoveredEnums" value="true" />
+    </inspection_tool>
+    <inspection_tool class="SynchronizeOnLock" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="SynchronizeOnThis" enabled="true" level="INFO" enabled_by_default="true" />
+    <inspection_tool class="SynchronizedMethod" enabled="true" level="INFO" enabled_by_default="true">
+      <option name="m_includeNativeMethods" value="true" />
+      <option name="ignoreSynchronizedSuperMethods" value="true" />
+    </inspection_tool>
+    <inspection_tool class="SynchronizedOnLiteralObject" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="SyntaxError" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="SystemExit" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="SystemGC" enabled="true" level="INFO" enabled_by_default="true" />
+    <inspection_tool class="SystemGetenv" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="SystemOutErr" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="SystemRunFinalizersOnExit" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="SystemSetSecurityManager" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="TailRecursion" enabled="true" level="INFO" enabled_by_default="true" />
+    <inspection_tool class="TeardownCallsSuperTeardown" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="TeardownIsPublicVoidNoArg" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="TestCaseInProductCode" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="TestCaseWithConstructor" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="TestCaseWithNoTestMethods" enabled="true" level="INSPECTION" enabled_by_default="true">
+      <option name="ignoreSupers" value="true" />
+    </inspection_tool>
+    <inspection_tool class="TestMethodInProductCode" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="TestMethodIsPublicVoidNoArg" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="TestOnlyProblems" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="TextLabelInSwitchStatement" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="ThisEscapedInConstructor" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="ThisExpressionReferencesGlobalObjectJS" enabled="false" level="INSPECTION" enabled_by_default="false" />
+    <inspection_tool class="ThreadDeathRethrown" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="ThreadDumpStack" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="ThreadPriority" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="ThreadRun" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="ThreadStartInConstruction" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="ThreadStopSuspendResume" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="ThreadWithDefaultRunMethod" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="ThreadYield" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="ThrowCaughtLocally" enabled="true" level="INSPECTION" enabled_by_default="true">
+      <option name="ignoreRethrownExceptions" value="false" />
+    </inspection_tool>
+    <inspection_tool class="ThrowFromFinallyBlock" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="ThrowFromFinallyBlockJS" enabled="false" level="INSPECTION" enabled_by_default="false" />
+    <inspection_tool class="ThrowableInstanceNeverThrown" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="ThrowablePrintStackTrace" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="ThrowableResultOfMethodCallIgnored" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="ThrownExceptionsPerMethod" enabled="true" level="INSPECTION" enabled_by_default="true">
+      <option name="m_limit" value="3" />
+    </inspection_tool>
+    <inspection_tool class="ThrowsRuntimeException" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="TodoComment" enabled="true" level="INFO" enabled_by_default="true" />
+    <inspection_tool class="TooBroadCatch" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="TooBroadScope" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="m_allowConstructorAsInitializer" value="true" />
+      <option name="m_onlyLookAtBlocks" value="false" />
+    </inspection_tool>
+    <inspection_tool class="TrailingSpacesInProperty" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="TransientFieldInNonSerializableClass" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="TransientFieldNotInitialized" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="TrivialConditionalJS" enabled="false" level="INSPECTION" enabled_by_default="false" />
+    <inspection_tool class="TrivialIfJS" enabled="false" level="INSPECTION" enabled_by_default="false" />
+    <inspection_tool class="TrivialStringConcatenation" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="TryWithIdenticalCatches" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="TypeMayBeWeakened" enabled="true" level="INFO" enabled_by_default="true">
+      <option name="useRighthandTypeAsWeakestTypeInAssignments" value="true" />
+      <option name="useParameterizedTypeForCollectionMethods" value="true" />
+      <option name="doNotWeakenToJavaLangObject" value="true" />
+      <option name="onlyWeakentoInterface" value="true" />
+    </inspection_tool>
+    <inspection_tool class="TypeParameterExtendsFinalClass" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="TypeParameterExtendsObject" enabled="true" level="INSPECTION" enabled_by_default="false" />
+    <inspection_tool class="TypeParameterHidesVisibleType" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="TypeParameterNamingConvention" enabled="true" level="INSPECTION" enabled_by_default="true">
+      <option name="m_regex" value="[A-Za-z\d]+" />
+      <option name="m_minLength" value="1" />
+      <option name="m_maxLength" value="32" />
+    </inspection_tool>
+    <inspection_tool class="UNCHECKED_WARNING" enabled="true" level="INFO" enabled_by_default="true" />
+    <inspection_tool class="UNUSED_IMPORT" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="UNUSED_SYMBOL" enabled="true" level="INSPECTION" enabled_by_default="true">
+      <option name="LOCAL_VARIABLE" value="true" />
+      <option name="FIELD" value="true" />
+      <option name="METHOD" value="true" />
+      <option name="CLASS" value="true" />
+      <option name="PARAMETER" value="true" />
+      <option name="REPORT_PARAMETER_FOR_PUBLIC_METHODS" value="true" />
+    </inspection_tool>
+    <inspection_tool class="UnaryPlus" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="UnconditionalWait" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="UnconstructableTestCase" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="UnitMethodDefinedLikeProcedure" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="UnknownGuard" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="UnnecessarilyQualifiedStaticallyImportedElement" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="UnnecessaryAnnotationParentheses" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="UnnecessaryBlockStatement" enabled="true" level="INSPECTION" enabled_by_default="true">
+      <option name="ignoreSwitchBranches" value="false" />
+    </inspection_tool>
+    <inspection_tool class="UnnecessaryBoxing" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="UnnecessaryCallToStringValueOf" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="UnnecessaryConditionalExpression" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="UnnecessaryConstantArrayCreationExpression" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="UnnecessaryConstructor" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="UnnecessaryContinue" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="UnnecessaryContinueJS" enabled="false" level="INSPECTION" enabled_by_default="false" />
+    <inspection_tool class="UnnecessaryDefault" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="UnnecessaryEnumModifier" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="UnnecessaryFinalOnLocalVariable" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="UnnecessaryFinalOnLocalVariableOrParameter" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="UnnecessaryFinalOnParameter" enabled="true" level="INSPECTION" enabled_by_default="true">
+      <option name="onlyWarnOnAbstractMethods" value="false" />
+    </inspection_tool>
+    <inspection_tool class="UnnecessaryFullyQualifiedName" enabled="true" level="INSPECTION" enabled_by_default="false">
+      <scope name="No package-info.java" level="INSPECTION" enabled="true">
+        <option name="m_ignoreJavadoc" value="false" />
+      </scope>
+      <option name="m_ignoreJavadoc" value="false" />
+    </inspection_tool>
+    <inspection_tool class="UnnecessaryInheritDoc" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="UnnecessaryInterfaceModifier" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="UnnecessaryJavaDocLink" enabled="true" level="INSPECTION" enabled_by_default="true">
+      <option name="ignoreInlineLinkToSuper" value="true" />
+    </inspection_tool>
+    <inspection_tool class="UnnecessaryLabelJS" enabled="false" level="INSPECTION" enabled_by_default="false" />
+    <inspection_tool class="UnnecessaryLabelOnBreakStatement" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="UnnecessaryLabelOnBreakStatementJS" enabled="false" level="INSPECTION" enabled_by_default="false" />
+    <inspection_tool class="UnnecessaryLabelOnContinueStatement" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="UnnecessaryLabelOnContinueStatementJS" enabled="false" level="INSPECTION" enabled_by_default="false" />
+    <inspection_tool class="UnnecessaryLocalVariable" enabled="true" level="INSPECTION" enabled_by_default="true">
+      <option name="m_ignoreImmediatelyReturnedVariables" value="false" />
+      <option name="m_ignoreAnnotatedVariables" value="false" />
+    </inspection_tool>
+    <inspection_tool class="UnnecessaryLocalVariableJS" enabled="false" level="INSPECTION" enabled_by_default="false">
+      <option name="m_ignoreImmediatelyReturnedVariables" value="false" />
+      <option name="m_ignoreAnnotatedVariables" value="false" />
+    </inspection_tool>
+    <inspection_tool class="UnnecessaryModuleDependencyInspection" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="UnnecessaryParentheses" enabled="true" level="INSPECTION" enabled_by_default="true">
+      <option name="ignoreClarifyingParentheses" value="true" />
+      <option name="ignoreParenthesesOnConditionals" value="false" />
+      <option name="ignoreParenthesesOnLambdaParameter" value="false" />
+    </inspection_tool>
+    <inspection_tool class="UnnecessaryQualifierForThis" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="UnnecessaryReturn" enabled="true" level="INSPECTION" enabled_by_default="true">
+      <option name="ignoreInThenBranch" value="true" />
+    </inspection_tool>
+    <inspection_tool class="UnnecessaryReturnJS" enabled="false" level="INSPECTION" enabled_by_default="false" />
+    <inspection_tool class="UnnecessarySemicolon" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="UnnecessarySuperConstructor" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="UnnecessarySuperQualifier" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="UnnecessaryTemporaryOnConversionFromString" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="UnnecessaryTemporaryOnConversionToString" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="UnnecessaryToStringCall" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="UnnecessaryUnaryMinus" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="UnnecessaryUnboxing" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="UnpredictableBigDecimalConstructorCall" enabled="true" level="INSPECTION" enabled_by_default="true">
+      <option name="ignoreReferences" value="true" />
+      <option name="ignoreComplexLiterals" value="false" />
+    </inspection_tool>
+    <inspection_tool class="UnqualifiedFieldAccess" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="UnqualifiedMethodAccess" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="UnqualifiedStaticUsage" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="m_ignoreStaticFieldAccesses" value="true" />
+      <option name="m_ignoreStaticMethodCalls" value="false" />
+      <option name="m_ignoreStaticAccessFromStaticContext" value="false" />
+    </inspection_tool>
+    <inspection_tool class="UnreachableCodeJS" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="UnresolvedPropertyKey" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="UnsecureRandomNumberGeneration" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="UnusedAssignment" enabled="true" level="INSPECTION" enabled_by_default="true">
+      <option name="REPORT_PREFIX_EXPRESSIONS" value="false" />
+      <option name="REPORT_POSTFIX_EXPRESSIONS" value="true" />
+      <option name="REPORT_REDUNDANT_INITIALIZER" value="true" />
+    </inspection_tool>
+    <inspection_tool class="UnusedCatchParameter" enabled="true" level="INSPECTION" enabled_by_default="true">
+      <option name="m_ignoreCatchBlocksWithComments" value="true" />
+      <option name="m_ignoreTestCases" value="true" />
+    </inspection_tool>
+    <inspection_tool class="UnusedDeclaration" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ADD_MAINS_TO_ENTRIES" value="true" />
+      <option name="ADD_APPLET_TO_ENTRIES" value="true" />
+      <option name="ADD_SERVLET_TO_ENTRIES" value="true" />
+      <option name="ADD_NONJAVA_TO_ENTRIES" value="false" />
+    </inspection_tool>
+    <inspection_tool class="UnusedImport" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="UnusedLabel" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="UnusedMessageFormatParameter" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="UnusedParameters" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="UnusedReturnValue" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="UpperCaseFieldNameNotConstant" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="UseOfAWTPeerClass" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="UseOfJDBCDriverClass" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="UseOfObsoleteAssert" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="UseOfObsoleteDateTimeApi" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="UseOfProcessBuilder" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="UseOfPropertiesAsHashtable" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="UseOfSunClasses" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="UtilSchemaInspection" enabled="false" level="INSPECTION" enabled_by_default="false" />
+    <inspection_tool class="UtilityClassWithPublicConstructor" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="UtilityClassWithoutPrivateConstructor" enabled="true" level="INSPECTION" enabled_by_default="true">
+      <option name="ignorableAnnotations">
+        <value />
+      </option>
+      <option name="ignoreClassesWithOnlyMain" value="false" />
+    </inspection_tool>
+    <inspection_tool class="ValidExternallyBoundObject" enabled="false" level="INSPECTION" enabled_by_default="false" />
+    <inspection_tool class="VarCouldBeVal" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="VolatileArrayField" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="VolatileLongOrDoubleField" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="VtlDirectiveArgsInspection" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="VtlFileReferencesInspection" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="VtlInterpolationsInspection" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="VtlReferencesInspection" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="VtlTypesInspection" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="WaitCalledOnCondition" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="WaitNotInLoop" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="WaitNotInSynchronizedContext" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="WaitOrAwaitWithoutTimeout" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="WaitWhileHoldingTwoLocks" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="WaitWithoutCorrespondingNotify" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="WeakerAccess" enabled="false" level="INFO" enabled_by_default="false">
+      <option name="SUGGEST_PACKAGE_LOCAL_FOR_MEMBERS" value="false" />
+      <option name="SUGGEST_PACKAGE_LOCAL_FOR_TOP_CLASSES" value="false" />
+      <option name="SUGGEST_PRIVATE_FOR_INNERS" value="true" />
+    </inspection_tool>
+    <inspection_tool class="WebProperties" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="WebWarnings" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="WhileCanBeForeach" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="WhileLoopSpinsOnField" enabled="true" level="INSPECTION" enabled_by_default="true">
+      <option name="ignoreNonEmtpyLoops" value="false" />
+    </inspection_tool>
+    <inspection_tool class="XmlDuplicatedId" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="XmlHighlighting" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="XmlUnboundNsPrefix" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="ZeroLengthArrayInitialization" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="dependsOnMethodTestNG" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="groupsTestNG" enabled="false" level="WARNING" enabled_by_default="false">
+      <option name="groups">
+        <value>
+          <list size="0" />
+        </value>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>

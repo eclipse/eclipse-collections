@@ -1,0 +1,46 @@
+import "copyright.stg"
+import "primitiveAPI.stg"
+
+targetPath() ::= "org/eclipse/collections/api/list/primitive"
+
+fileName(primitive) ::= "Immutable<primitive.name>List"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.api.list.primitive;
+
+import org.eclipse.collections.api.<name>Iterable;
+import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
+import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
+import org.eclipse.collections.api.collection.primitive.Immutable<name>Collection;
+import org.eclipse.collections.api.list.ImmutableList;
+
+/**
+ * This file was automatically generated from template file immutablePrimitiveList.stg.
+ *
+ * @since 3.0.
+ */
+public interface Immutable<name>List extends Immutable<name>Collection, <name>List
+{
+    <sharedAPI(fileName(primitive), name)>
+
+    \<V> ImmutableList\<V> collect(<name>ToObjectFunction\<? extends V> function);
+
+    <immutableAPI(fileName(primitive), type, name)>
+
+    Immutable<name>List toReversed();
+
+    /**
+     * @since 6.0.
+     */
+    Immutable<name>List distinct();
+
+    Immutable<name>List subList(int fromIndex, int toIndex);
+}
+
+>>

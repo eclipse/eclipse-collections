@@ -1,0 +1,65 @@
+import "copyright.stg"
+import "primitiveLiteral.stg"
+
+targetPath() ::= "org/eclipse/collections/api"
+
+fileName(primitive) ::= "Lazy<primitive.name>Iterable"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+collectPrimitive(fromName, fromType, toName, toType) ::= <<
+
+/**
+ * @since 7.0
+ */
+Lazy<toName>Iterable collect<toName>(<fromName>To<toName>Function function);
+>>
+
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.api;
+
+import org.eclipse.collections.api.block.function.primitive.<name>ToBooleanFunction;
+import org.eclipse.collections.api.block.function.primitive.<name>ToByteFunction;
+import org.eclipse.collections.api.block.function.primitive.<name>ToCharFunction;
+import org.eclipse.collections.api.block.function.primitive.<name>ToDoubleFunction;
+import org.eclipse.collections.api.block.function.primitive.<name>ToFloatFunction;
+import org.eclipse.collections.api.block.function.primitive.<name>ToIntFunction;
+import org.eclipse.collections.api.block.function.primitive.<name>ToLongFunction;
+import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
+import org.eclipse.collections.api.block.function.primitive.<name>ToShortFunction;
+import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
+
+/**
+ * This file was automatically generated from template file lazyPrimitiveIterable.stg.
+ */
+public interface Lazy<name>Iterable extends <name>Iterable
+{
+    Lazy<name>Iterable select(<name>Predicate predicate);
+
+    Lazy<name>Iterable reject(<name>Predicate predicate);
+
+    \<V> LazyIterable\<V> collect(<name>ToObjectFunction\<? extends V> function);
+
+    <collectPrimitive(name, type, "Boolean", "boolean")>
+
+    <collectPrimitive(name, type, "Byte", "byte")>
+
+    <collectPrimitive(name, type, "Char", "char")>
+
+    <collectPrimitive(name, type, "Short", "short")>
+
+    <collectPrimitive(name, type, "Int", "int")>
+
+    <collectPrimitive(name, type, "Float", "float")>
+
+    <collectPrimitive(name, type, "Long", "long")>
+
+    <collectPrimitive(name, type, "Double", "double")>
+}
+
+>>

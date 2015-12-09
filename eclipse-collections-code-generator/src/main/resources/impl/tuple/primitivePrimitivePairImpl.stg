@@ -1,0 +1,90 @@
+import "copyright.stg"
+import "primitiveHashCode.stg"
+import "primitiveEquals.stg"
+import "primitiveCompare.stg"
+
+hasTwoPrimitives() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/tuple/primitive"
+
+fileName(primitive1, primitive2, sameTwoPrimitives) ::= "<primitive1.name><primitive2.name>PairImpl"
+
+class(primitive1, primitive2, sameTwoPrimitives) ::= <<
+<body(primitive1.type, primitive2.type, primitive1.name, primitive2.name, primitive1.wrapperName, primitive2.wrapperName)>
+>>
+
+body(type1, type2, name1, name2, wrapperName1, wrapperName2) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.tuple.primitive;
+
+import org.eclipse.collections.api.tuple.primitive.<name1><name2>Pair;
+
+/**
+ * This file was automatically generated from template file primitivePrimitivePairImpl.stg
+ */
+public class <name1><name2>PairImpl implements <name1><name2>Pair
+{
+    private static final long serialVersionUID = 1L;
+
+    private final <type1> one;
+    private final <type2> two;
+
+    <name1><name2>PairImpl(<type1> newOne, <type2> newTwo)
+    {
+        this.one = newOne;
+        this.two = newTwo;
+    }
+
+    public <type1> getOne()
+    {
+        return this.one;
+    }
+
+    public <type2> getTwo()
+    {
+        return this.two;
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o)
+        {
+            return true;
+        }
+        if (!(o instanceof <name1><name2>Pair))
+        {
+            return false;
+        }
+
+        <name1><name2>Pair that = (<name1><name2>Pair) o;
+
+        return (<(equals.(type1))("this.one", "that.getOne()")>)
+                && (<(equals.(type2))("this.two", "that.getTwo()")>);
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return 29 * <(hashCode.(type1))("this.one")> + <(hashCode.(type2))("this.two")>;
+    }
+
+    @Override
+    public String toString()
+    {
+        return this.one + ":" + this.two;
+    }
+
+    public int compareTo(<name1><name2>Pair that)
+    {
+        int i = <(compare.(type1))("this.one", "that.getOne()", wrapperName1)>;
+        if (i != 0)
+        {
+            return i;
+        }
+        return <(compare.(type2))("this.two", "that.getTwo()", wrapperName2)>;
+    }
+}
+
+>>

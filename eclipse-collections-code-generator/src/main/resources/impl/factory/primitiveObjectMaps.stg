@@ -1,0 +1,41 @@
+import "copyright.stg"
+
+skipBoolean() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/factory/primitive"
+
+fileName(primitive) ::= "<primitive.name>ObjectMaps"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.factory.primitive;
+
+import org.eclipse.collections.api.factory.map.primitive.Immutable<name>ObjectMapFactory;
+import org.eclipse.collections.api.factory.map.primitive.Mutable<name>ObjectMapFactory;
+import org.eclipse.collections.impl.map.immutable.primitive.Immutable<name>ObjectMapFactoryImpl;
+import org.eclipse.collections.impl.map.mutable.primitive.Mutable<name>ObjectMapFactoryImpl;
+
+/**
+ * <name>ObjectMaps is a static utility for creating {@link Immutable<name>ObjectMapFactory}.
+ * This file was automatically generated from template file primitiveObjectMaps.stg.
+ *
+ * @since 4.0.
+ */
+@SuppressWarnings("ConstantNamingConvention")
+public final class <name>ObjectMaps
+{
+    public static final Immutable<name>ObjectMapFactory immutable = new Immutable<name>ObjectMapFactoryImpl();
+    public static final Mutable<name>ObjectMapFactory mutable = new Mutable<name>ObjectMapFactoryImpl();
+
+    private <name>ObjectMaps()
+    {
+        throw new AssertionError("Suppress default constructor for noninstantiability");
+    }
+}
+
+>>

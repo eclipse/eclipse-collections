@@ -1,0 +1,27 @@
+mutableAPI(fileName, type, name) ::= <<
+<fileName> with(<type> element);
+
+<fileName> without(<type> element);
+
+<fileName> withAll(<name>Iterable elements);
+
+<fileName> withoutAll(<name>Iterable elements);
+>>
+
+immutableAPI(fileName, type, name) ::= <<
+<fileName> newWith(<type> element);
+
+<fileName> newWithout(<type> element);
+
+<fileName> newWithAll(<name>Iterable elements);
+
+<fileName> newWithoutAll(<name>Iterable elements);
+>>
+
+sharedAPI(fileName, name) ::= <<
+<fileName> select(<name>Predicate predicate);
+
+<fileName> reject(<name>Predicate predicate);
+>>
+
+

@@ -1,0 +1,70 @@
+import "copyright.stg"
+
+skipBoolean() ::= "true"
+
+isTest() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/map/mutable/primitive"
+
+fileName(primitive) ::= "Object<primitive.name>HashMapWithHashingStrategyKeyValuesViewTest"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.map.mutable.primitive;
+
+import org.eclipse.collections.api.block.HashingStrategy;
+import org.eclipse.collections.api.map.primitive.Object<name>Map;
+import org.eclipse.collections.impl.block.factory.HashingStrategies;
+import org.eclipse.collections.impl.map.primitive.AbstractObject<name>MapKeyValuesViewTestCase;
+
+
+/**
+ * JUnit test for {@link Object<name>HashMapWithHashingStrategy#keyValuesView()}.
+ * This file was automatically generated from template file objectPrimitiveHashMapKeyValuesViewTest.stg.
+ */
+public class Object<name>HashMapWithHashingStrategyKeyValuesViewTest extends AbstractObject<name>MapKeyValuesViewTestCase
+{
+    private static final HashingStrategy\<Integer> INTEGER_HASHING_STRATEGY = HashingStrategies.nullSafeHashingStrategy(new HashingStrategy\<Integer>()
+        {
+            public int computeHashCode(Integer object)
+            {
+                return object.hashCode();
+            }
+
+            public boolean equals(Integer object1, Integer object2)
+            {
+                return object1.equals(object2);
+            }
+        });
+
+    @Override
+    public \<T> Object<name>Map\<T> newWithKeysValues(T key1, <type> value1, T key2, <type> value2, T key3, <type> value3)
+    {
+        return Object<name>HashMapWithHashingStrategy.newWithKeysValues(HashingStrategies.nullSafeHashingStrategy(HashingStrategies.\<T>defaultStrategy()), key1, value1, key2, value2, key3, value3);
+    }
+
+    @Override
+    public \<T> Object<name>Map\<T> newWithKeysValues(T key1, <type> value1, T key2, <type> value2)
+    {
+        return Object<name>HashMapWithHashingStrategy.newWithKeysValues(HashingStrategies.nullSafeHashingStrategy(HashingStrategies.\<T>defaultStrategy()), key1, value1, key2, value2);
+    }
+
+    @Override
+    public \<T> Object<name>Map\<T> newWithKeysValues(T key1, <type> value1)
+    {
+        return Object<name>HashMapWithHashingStrategy.newWithKeysValues(HashingStrategies.nullSafeHashingStrategy(HashingStrategies.\<T>defaultStrategy()), key1, value1);
+    }
+
+    @Override
+    public Object<name>Map\<Integer> newEmpty()
+    {
+        return Object<name>HashMapWithHashingStrategy.newMap(INTEGER_HASHING_STRATEGY);
+    }
+}
+
+>>

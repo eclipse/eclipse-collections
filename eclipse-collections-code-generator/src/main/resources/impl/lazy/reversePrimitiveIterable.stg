@@ -1,0 +1,243 @@
+import "copyright.stg"
+import "primitiveEquals.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+
+targetPath() ::= "org/eclipse/collections/impl/lazy/primitive"
+
+fileName(primitive) ::= "Reverse<primitive.name>Iterable"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.lazy.primitive;
+
+import java.util.NoSuchElementException;
+
+import org.eclipse.collections.api.<name>Iterable;
+import org.eclipse.collections.api.Lazy<name>Iterable;
+import org.eclipse.collections.api.bag.primitive.Mutable<name>Bag;
+import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
+import org.eclipse.collections.api.iterator.<name>Iterator;
+import org.eclipse.collections.api.list.primitive.<name>List;
+import org.eclipse.collections.api.list.primitive.Mutable<name>List;
+import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
+import org.eclipse.collections.impl.bag.mutable.primitive.<name>HashBag;
+import org.eclipse.collections.impl.lazy.ReverseIterable;
+import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
+import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
+
+/**
+ * This file was automatically generated from template file reversePrimitiveIterable.stg.
+ *
+ * @see ReverseIterable
+ * @since 5.0.
+ */
+public class Reverse<name>Iterable extends AbstractLazy<name>Iterable
+{
+    private final <name>List adapted;
+
+    public Reverse<name>Iterable(<name>List newAdapted)
+    {
+        this.adapted = newAdapted;
+    }
+
+    public static Reverse<name>Iterable adapt(<name>List <type>List)
+    {
+        return new Reverse<name>Iterable(<type>List);
+    }
+
+    public <name>Iterator <type>Iterator()
+    {
+        return new Reverse<name>Iterator();
+    }
+
+    /**
+     * @since 7.0.
+     */
+    public void each(<name>Procedure procedure)
+    {
+        <name>Iterator iterator = this.<type>Iterator();
+        while (iterator.hasNext())
+        {
+            procedure.value(iterator.next());
+        }
+    }
+
+    <(arithmeticMethods.(type))(name, type)>
+    @Override
+    public <type>[] toArray()
+    {
+        <type>[] results = new <type>[this.adapted.size()];
+        int index = 0;
+        <name>Iterator iterator = this.<type>Iterator();
+        while (iterator.hasNext())
+        {
+            results[index] = iterator.next();
+            index++;
+        }
+        return results;
+    }
+
+    @Override
+    public boolean contains(<type> value)
+    {
+        return this.adapted.contains(value);
+    }
+
+    @Override
+    public boolean containsAll(<type>... source)
+    {
+        return this.adapted.containsAll(source);
+    }
+
+    @Override
+    public boolean containsAll(<name>Iterable source)
+    {
+        return this.adapted.containsAll(source);
+    }
+
+    @Override
+    public int size()
+    {
+        return this.adapted.size();
+    }
+
+    @Override
+    public boolean isEmpty()
+    {
+        return this.adapted.isEmpty();
+    }
+
+    @Override
+    public boolean notEmpty()
+    {
+        return this.adapted.notEmpty();
+    }
+
+    @Override
+    public Mutable<name>List toList()
+    {
+        return <name>ArrayList.newList(this);
+    }
+
+    @Override
+    public Mutable<name>Set toSet()
+    {
+        return <name>HashSet.newSet(this);
+    }
+
+    @Override
+    public Mutable<name>Bag toBag()
+    {
+        return <name>HashBag.newBag(this);
+    }
+
+    @Override
+    public Lazy<name>Iterable asLazy()
+    {
+        return new Lazy<name>IterableAdapter(this);
+    }
+
+    private class Reverse<name>Iterator implements <name>Iterator
+    {
+        /**
+         * Index of element to be returned by subsequent call to next.
+         */
+        private int currentIndex = Reverse<name>Iterable.this.adapted.size() - 1;
+
+        public boolean hasNext()
+        {
+            return this.currentIndex != -1;
+        }
+
+        public <type> next()
+        {
+            if (!this.hasNext())
+            {
+                throw new NoSuchElementException();
+            }
+            <type> next = Reverse<name>Iterable.this.adapted.get(this.currentIndex);
+            this.currentIndex--;
+            return next;
+        }
+    }
+}
+
+>>
+
+arithmeticMethods ::= [
+"byte": "allMethods",
+"short": "allMethods",
+"char": "allMethods",
+"int": "allMethods",
+"long": "allMethods",
+"float": "allMethods",
+"double": "allMethods",
+"boolean": "noMethods"
+]
+
+allMethods(name, type) ::=<<
+@Override
+public <wideType.(type)> sum()
+{
+    return this.adapted.sum();
+}
+
+@Override
+public <type> max()
+{
+    return this.adapted.max();
+}
+
+@Override
+public <type> min()
+{
+    return this.adapted.min();
+}
+
+@Override
+public <type> minIfEmpty(<type> defaultValue)
+{
+    if (this.adapted.isEmpty())
+    {
+        return defaultValue;
+    }
+    return this.adapted.min();
+}
+
+@Override
+public <type> maxIfEmpty(<type> defaultValue)
+{
+    if (this.adapted.isEmpty())
+    {
+        return defaultValue;
+    }
+    return this.adapted.max();
+}
+
+@Override
+public double average()
+{
+    return this.adapted.average();
+}
+
+@Override
+public double median()
+{
+    return this.adapted.median();
+}
+
+@Override
+public <type>[] toSortedArray()
+{
+    return this.adapted.toSortedArray();
+}
+
+>>
+
+noMethods(name, type) ::= ""

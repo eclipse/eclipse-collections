@@ -1,0 +1,109 @@
+import "copyright.stg"
+import "primitiveEquals.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+
+isTest() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/lazy/primitive"
+
+fileName(primitive) ::= "Lazy<primitive.name>IterableAdapterTest"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.lazy.primitive;
+
+import org.eclipse.collections.api.Lazy<name>Iterable;
+import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
+import org.eclipse.collections.impl.test.Verify;
+import org.eclipse.collections.impl.utility.primitive.Lazy<name>Iterate;
+import org.junit.Assert;
+import org.junit.Test;
+
+/**
+ * JUnit test for {@link Lazy<name>IterableAdapter}.
+ * This file was automatically generated from template file lazyPrimitiveIterableAdapterTest.stg.
+ */
+public class Lazy<name>IterableAdapterTest extends AbstractLazy<name>IterableTestCase
+{
+    @Override
+    protected Lazy<name>Iterable classUnderTest()
+    {
+        return new Lazy<name>IterableAdapter(<name>ArrayList.newListWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">));
+    }
+
+    @Override
+    protected Lazy<name>Iterable getEmptyIterable()
+    {
+        return new Lazy<name>IterableAdapter(new <name>ArrayList());
+    }
+
+    @Override
+    protected Lazy<name>Iterable newWith(<type> element1, <type> element2)
+    {
+        return new Lazy<name>IterableAdapter(<name>ArrayList.newListWith(element1, element2));
+    }
+
+    @Override
+    @Test
+    public void testToString()
+    {
+        super.testToString();
+        Assert.assertEquals("[<["1", "2", "3"]:(toStringLiteral.(type))(); separator=", ">]", this.classUnderTest().toString());
+    }
+
+    @Override
+    @Test
+    public void makeString()
+    {
+        super.makeString();
+        Assert.assertEquals("<["1", "2", "3"]:(toStringLiteral.(type))(); separator=", ">", this.classUnderTest().makeString());
+        Assert.assertEquals("<["1", "2", "3"]:(toStringLiteral.(type))(); separator="/">", this.classUnderTest().makeString("/"));
+        Assert.assertEquals(this.classUnderTest().toString(), this.classUnderTest().makeString("[", ", ", "]"));
+    }
+
+    @Override
+    @Test
+    public void appendString()
+    {
+        super.appendString();
+        StringBuilder appendable2 = new StringBuilder();
+        this.classUnderTest().appendString(appendable2);
+        Assert.assertEquals("<["1", "2", "3"]:(toStringLiteral.(type))(); separator=", ">", appendable2.toString());
+        StringBuilder appendable3 = new StringBuilder();
+        this.classUnderTest().appendString(appendable3, "/");
+        Assert.assertEquals("<["1", "2", "3"]:(toStringLiteral.(type))(); separator="/">", appendable3.toString());
+        StringBuilder appendable4 = new StringBuilder();
+        this.classUnderTest().appendString(appendable4, "[", ", ", "]");
+        Assert.assertEquals(this.classUnderTest().toString(), appendable4.toString());
+    }
+
+    @Override
+    @Test
+    public void toArray()
+    {
+        super.toArray();
+        Assert.assertArrayEquals(new <type>[]{<["1", "2", "3"]:(literal.(type))(); separator=", ">}, this.classUnderTest().toArray()<(delta.(type))>);
+    }
+
+    @Override
+    @Test
+    public void toList()
+    {
+        super.toList();
+        Assert.assertEquals(<name>ArrayList.newListWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">), this.classUnderTest().toList());
+    }
+
+    @Test
+    public void classIsNonInstantiable()
+    {
+        Verify.assertClassNonInstantiable(Lazy<name>Iterate.class);
+    }
+}
+
+>>

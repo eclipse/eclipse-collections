@@ -1,0 +1,49 @@
+import "copyright.stg"
+
+skipBooleanKeys() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/block/procedure/checked/primitive"
+
+fileName(primitive) ::= "CheckedObject<primitive.name>Procedure"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.block.procedure.checked.primitive;
+
+import org.eclipse.collections.api.block.procedure.primitive.Object<name>Procedure;
+
+/**
+ * This file was automatically generated from template file checkedObjectPrimitiveProcedure.stg.
+ *
+ * @since 4.0.
+ */
+public abstract class CheckedObject<name>Procedure\<V> implements Object<name>Procedure\<V>
+{
+    private static final long serialVersionUID = 1L;
+
+    public final void value(V item1, <type> item2)
+    {
+        try
+        {
+            this.safeValue(item1, item2);
+        }
+        catch (RuntimeException e)
+        {
+            throw e;
+        }
+        catch (Exception e)
+        {
+            throw new RuntimeException("Checked exception caught in Object<name>Procedure", e);
+        }
+    }
+
+    @SuppressWarnings("ProhibitedExceptionDeclared")
+    public abstract void safeValue(V item1, <type> item2) throws Exception;
+}
+
+>>

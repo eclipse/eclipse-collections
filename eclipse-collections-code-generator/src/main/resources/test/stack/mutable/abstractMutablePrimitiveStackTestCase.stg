@@ -1,0 +1,208 @@
+import "copyright.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+
+isTest() ::= "true"
+
+skipBoolean() ::="true"
+
+targetPath() ::= "org/eclipse/collections/impl/stack/mutable/primitive"
+
+fileName(primitive) ::= "AbstractMutable<primitive.name>StackTestCase"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.wrapperName, primitive.name)>
+>>
+
+body(type, wrapperName, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.stack.mutable.primitive;
+
+import java.util.EmptyStackException;
+
+import org.eclipse.collections.api.<name>Iterable;
+import org.eclipse.collections.api.stack.primitive.Mutable<name>Stack;
+import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
+import org.eclipse.collections.impl.stack.primitive.Abstract<name>StackTestCase;
+import org.eclipse.collections.impl.test.Verify;
+import org.junit.Assert;
+import org.junit.Test;
+
+/**
+ * Abstract JUnit test for {@link Mutable<name>Stack}.
+ * This file was automatically generated from template file abstractMutablePrimitiveStackTestCase.stg.
+ */
+public abstract class AbstractMutable<name>StackTestCase extends Abstract<name>StackTestCase
+{
+    @Override
+    protected abstract Mutable<name>Stack classUnderTest();
+
+    @Override
+    protected abstract Mutable<name>Stack newWith(<type>... elements);
+
+    @Override
+    protected abstract Mutable<name>Stack newMutableCollectionWith(<type>... elements);
+
+    @Override
+    protected abstract Mutable<name>Stack newWithTopToBottom(<type>... elements);
+
+    protected abstract Mutable<name>Stack newWithIterableTopToBottom(<name>Iterable iterable);
+
+    protected abstract Mutable<name>Stack newWithIterable(<name>Iterable iterable);
+
+
+    @Override
+    public void peekAtIndex()
+    {
+        super.peekAtIndex();
+        Mutable<name>Stack stack = this.classUnderTest();
+        int size = stack.size();
+        stack.pop(2);
+        Assert.assertEquals(size - 2, stack.peekAt(0)<wideDelta.(type)>);
+    }
+
+    @Override
+    @Test
+    public void peek()
+    {
+        super.peek();
+        Mutable<name>Stack stack = this.classUnderTest();
+        int size = this.classUnderTest().size();
+        for (int i = 0; i \< size; i++)
+        {
+            Assert.assertEquals(size - i, stack.peek()<wideDelta.(type)>);
+            stack.pop();
+        }
+    }
+
+    @Test
+    public void peekWithCount()
+    {
+        Mutable<name>Stack stack = this.classUnderTest();
+        int size = stack.size();
+        Assert.assertEquals(<name>ArrayList.newListWith(<(castIntToNarrowType.(type))("size")>, <(castIntToNarrowTypeWithParens.(type))("size - 1")>), stack.peek(2));
+        stack.pop(2);
+        Assert.assertEquals(<name>ArrayList.newListWith(<(castIntToNarrowTypeWithParens.(type))("size - 2")>), stack.peek(1));
+    }
+
+    @Test(expected = EmptyStackException.class)
+    public void peek_empty_stack_throws_exception()
+    {
+        this.newWith().peek();
+    }
+
+    @Test
+    public void testNewStackWithOrder()
+    {
+        Mutable<name>Stack stack = this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">);
+        Assert.assertEquals(<(literal.(type))("3")>, stack.pop()<wideDelta.(type)>);
+        Assert.assertEquals(<(literal.(type))("2")>, stack.pop()<wideDelta.(type)>);
+        Assert.assertEquals(<(literal.(type))("1")>, stack.pop()<wideDelta.(type)>);
+    }
+
+    @Test
+    public void testNewStackIterableOrder()
+    {
+        Mutable<name>Stack stack = this.newWithIterable(<name>ArrayList.newListWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">));
+        Assert.assertEquals(<(literal.(type))("3")>, stack.pop()<wideDelta.(type)>);
+        Assert.assertEquals(<(literal.(type))("2")>, stack.pop()<wideDelta.(type)>);
+        Assert.assertEquals(<(literal.(type))("1")>, stack.pop()<wideDelta.(type)>);
+    }
+
+
+    @Test
+    public void testNewStackFromTopToBottomOrder()
+    {
+        Mutable<name>Stack stack = this.newWithTopToBottom(<["3", "2", "1"]:(literal.(type))(); separator=", ">);
+        Assert.assertEquals(<(literal.(type))("3")>, stack.pop()<wideDelta.(type)>);
+        Assert.assertEquals(<(literal.(type))("2")>, stack.pop()<wideDelta.(type)>);
+        Assert.assertEquals(<(literal.(type))("1")>, stack.pop()<wideDelta.(type)>);
+    }
+
+    @Test
+    public void testNewStackFromTopToBottomIterableOrder()
+    {
+        Mutable<name>Stack stack = this.newWithIterableTopToBottom(<name>ArrayList.newListWith(<["3", "2", "1"]:(literal.(type))(); separator=", ">));
+        Assert.assertEquals(<(literal.(type))("3")>, stack.pop()<wideDelta.(type)>);
+        Assert.assertEquals(<(literal.(type))("2")>, stack.pop()<wideDelta.(type)>);
+        Assert.assertEquals(<(literal.(type))("1")>, stack.pop()<wideDelta.(type)>);
+    }
+
+    @Test
+    public void push()
+    {
+        Mutable<name>Stack stack = this.classUnderTest();
+        int size = stack.size();
+        stack.push(<(literal.(type))("5")>);
+        Verify.assertSize(size + 1, stack);
+        stack.pop();
+        Verify.assertSize(size, stack);
+        Assert.assertEquals(<name>ArrayList.newListWith(<(castIntToNarrowType.(type))("size")>, <(castIntToNarrowTypeWithParens.(type))("size - 1")>), stack.peek(2));
+    }
+
+    @Test
+    public void pop()
+    {
+        Mutable<name>Stack stack = this.classUnderTest();
+        int size = stack.size();
+        for (int i = 0; i \< size; i++)
+        {
+            Assert.assertEquals(<(castIntToNarrowTypeWithParens.(type))("size - i")>, stack.pop()<wideDelta.(type)>);
+            Verify.assertSize(size - i - 1, stack);
+        }
+    }
+
+    @Test
+    public void popWithCount()
+    {
+        int size = this.classUnderTest().size();
+        Assert.assertEquals(<name>ArrayList.newListWith(<(castIntToNarrowType.(type))("size")>, <(castIntToNarrowTypeWithParens.(type))("size - 1")>), this.classUnderTest().pop(2));
+    }
+
+    @Test
+    public void clear()
+    {
+        Mutable<name>Stack stack = this.classUnderTest();
+        stack.clear();
+        Verify.assertSize(0, stack);
+        Mutable<name>Stack stack1 = this.newWith();
+        Verify.assertSize(0, stack1);
+        stack1.clear();
+        Verify.assertSize(0, stack1);
+    }
+
+    @Test(expected = EmptyStackException.class)
+    public void pop_empty_stack_throws_exception()
+    {
+        this.newWith().pop();
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void pop_with_negative_count_throws_exception()
+    {
+        this.newWith(<(literal.(type))("1")>).pop(-1);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void pop_with_count_greater_than_stack_size_throws_exception()
+    {
+        this.newWith(<(literal.(type))("1")>).pop(2);
+    }
+
+    @Test
+    public void asSynchronized()
+    {
+        Verify.assertInstanceOf(Synchronized<name>Stack.class, this.classUnderTest().asSynchronized());
+        Assert.assertEquals(this.classUnderTest(), this.classUnderTest().asSynchronized());
+    }
+
+    @Test
+    public void asUnmodifiable()
+    {
+        Verify.assertInstanceOf(Unmodifiable<name>Stack.class, this.classUnderTest().asUnmodifiable());
+        Assert.assertEquals(this.classUnderTest(), this.classUnderTest().asUnmodifiable());
+    }
+}
+
+>>

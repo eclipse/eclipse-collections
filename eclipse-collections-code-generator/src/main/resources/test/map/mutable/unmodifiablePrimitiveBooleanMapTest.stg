@@ -1,0 +1,344 @@
+import "copyright.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+import "primitiveEquals.stg"
+
+skipBoolean() ::= "true"
+
+isTest() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/map/mutable/primitive"
+
+fileName(primitive) ::= "Unmodifiable<primitive.name>BooleanMapTest"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.map.mutable.primitive;
+
+import org.eclipse.collections.api.block.function.primitive.BooleanFunction;
+import org.eclipse.collections.api.block.function.primitive.BooleanFunction0;
+import org.eclipse.collections.api.block.function.primitive.BooleanToBooleanFunction;
+import org.eclipse.collections.api.block.function.primitive.<name>ToBooleanFunction;
+import org.eclipse.collections.api.iterator.MutableBooleanIterator;
+import org.eclipse.collections.impl.list.mutable.primitive.BooleanArrayList;
+import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
+import org.eclipse.collections.impl.test.Verify;
+import org.junit.Assert;
+import org.junit.Test;
+
+/**
+ * JUnit test for {@link Unmodifiable<name>BooleanMap}.
+ * This file was automatically generated from template file unmodifiablePrimitiveBooleanMapTest.stg.
+ */
+public class Unmodifiable<name>BooleanMapTest extends AbstractMutable<name>BooleanMapTestCase
+{
+    @Override
+    protected Unmodifiable<name>BooleanMap classUnderTest()
+    {
+        return new Unmodifiable<name>BooleanMap(<name>BooleanHashMap.newWithKeysValues(<(literal.(type))("0")>, true, <(literal.(type))("31")>, false, <(literal.(type))("32")>, true));
+    }
+
+    @Override
+    protected Unmodifiable<name>BooleanMap newWithKeysValues(<type> key1, boolean value1)
+    {
+        return new Unmodifiable<name>BooleanMap(new <name>BooleanHashMap(1).withKeyValue(key1, value1));
+    }
+
+    @Override
+    protected Unmodifiable<name>BooleanMap newWithKeysValues(<type> key1, boolean value1, <type> key2, boolean value2)
+    {
+        return new Unmodifiable<name>BooleanMap(new <name>BooleanHashMap(2).withKeysValues(key1, value1, key2, value2));
+    }
+
+    @Override
+    protected Unmodifiable<name>BooleanMap newWithKeysValues(<type> key1, boolean value1, <type> key2, boolean value2, <type> key3, boolean value3)
+    {
+        return new Unmodifiable<name>BooleanMap(new <name>BooleanHashMap(3).withKeysValues(key1, value1, key2, value2, key3, value3));
+    }
+
+    @Override
+    protected Unmodifiable<name>BooleanMap newWithKeysValues(<type> key1, boolean value1, <type> key2, boolean value2, <type> key3, boolean value3, <type> key4, boolean value4)
+    {
+        return new Unmodifiable<name>BooleanMap(new <name>BooleanHashMap(4).withKeysValues(key1, value1, key2, value2, key3, value3, key4, value4));
+    }
+
+    @Override
+    protected Unmodifiable<name>BooleanMap getEmptyMap()
+    {
+        return new Unmodifiable<name>BooleanMap(new <name>BooleanHashMap());
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void clear()
+    {
+        this.classUnderTest().clear();
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void removeKey()
+    {
+        this.classUnderTest().removeKey(<(literal.(type))("5")>);
+    }
+
+    @Override
+    @Test
+    public void removeKeyIfAbsent()
+    {
+        Assert.assertTrue(this.classUnderTest().removeKeyIfAbsent(<(literal.(type))("10")>, true));
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void removeKeyIfAbsentThrowsException()
+    {
+        this.classUnderTest().removeKeyIfAbsent(<(literal.(type))("0")>, true);
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void put()
+    {
+        this.classUnderTest().put(<(literal.(type))("0")>, true);
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void withKeysValues()
+    {
+        this.classUnderTest().withKeyValue(<(literal.(type))("1")>, true);
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void withoutKey()
+    {
+        this.classUnderTest().withoutKey(<(literal.(type))("32")>);
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void withoutAllKeys()
+    {
+        this.classUnderTest().withoutAllKeys(<name>ArrayList.newListWith(<(literal.(type))("0")>, <(literal.(type))("32")>));
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void putDuplicateWithRemovedSlot()
+    {
+        <type> collision1 = AbstractMutable<name>BooleanMapTestCase.generateCollisions().getFirst();
+
+        Unmodifiable<name>BooleanMap hashMap = this.getEmptyMap();
+        hashMap.put(collision1, true);
+    }
+
+    @Override
+    @Test
+    public void get()
+    {
+        Assert.assertTrue(this.classUnderTest().get(<(literal.(type))("0")>));
+        Assert.assertFalse(this.classUnderTest().get(<(literal.(type))("31")>));
+        Assert.assertTrue(this.classUnderTest().get(<(literal.(type))("32")>));
+
+        Assert.assertFalse(this.classUnderTest().get(<(literal.(type))("1")>));
+        Assert.assertFalse(this.classUnderTest().get(<(literal.(type))("33")>));
+    }
+
+    @Override
+    @Test
+    public void getIfAbsent()
+    {
+        Assert.assertTrue(this.classUnderTest().getIfAbsent(<(literal.(type))("0")>, false));
+        Assert.assertFalse(this.classUnderTest().getIfAbsent(<(literal.(type))("31")>, true));
+        Assert.assertTrue(this.classUnderTest().getIfAbsent(<(literal.(type))("32")>, false));
+
+        Assert.assertFalse(this.classUnderTest().getIfAbsent(<(literal.(type))("1")>, false));
+        Assert.assertTrue(this.classUnderTest().getIfAbsent(<(literal.(type))("1")>, true));
+    }
+
+    @Override
+    @Test
+    public void getOrThrow()
+    {
+        Assert.assertTrue(this.classUnderTest().getOrThrow(<(literal.(type))("0")>));
+        Assert.assertFalse(this.classUnderTest().getOrThrow(<(literal.(type))("31")>));
+        Assert.assertTrue(this.classUnderTest().getOrThrow(<(literal.(type))("32")>));
+
+        Verify.assertThrows(IllegalStateException.class, () -> this.classUnderTest().getOrThrow(<(literal.(type))("33")>));
+    }
+
+    @Override
+    @Test
+    public void getIfAbsentPut()
+    {
+        Assert.assertTrue(this.classUnderTest().getIfAbsentPut(<(literal.(type))("0")>, false));
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void getIfAbsentPutThrowsException()
+    {
+        this.classUnderTest().getIfAbsentPut(<(literal.(type))("10")>, true);
+    }
+
+    @Override
+    @Test
+    public void getIfAbsentPut_Function()
+    {
+        BooleanFunction0 factory = () -> true;
+
+        Assert.assertTrue(this.classUnderTest().getIfAbsentPut(<(literal.(type))("0")>, factory));
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void getIfAbsentPut_FunctionThrowsException()
+    {
+        BooleanFunction0 factory = () -> true;
+
+        this.classUnderTest().getIfAbsentPut(<(literal.(type))("10")>, factory);
+    }
+
+    @Override
+    @Test
+    public void getIfAbsentPutWith()
+    {
+        BooleanFunction\<String> functionLengthEven = (String string) -> (string.length() & 1) == <(literal.(type))("0")>;
+
+        Assert.assertTrue(this.classUnderTest().getIfAbsentPutWith(<(literal.(type))("0")>, functionLengthEven, "12345678"));
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void getIfAbsentPutWithThrowsException()
+    {
+        BooleanFunction\<String> functionLengthEven = (String string) -> (string.length() & 1) == <(literal.(type))("0")>;
+
+        this.classUnderTest().getIfAbsentPutWith(<(literal.(type))("10")>, functionLengthEven, "unused");
+    }
+
+    @Override
+    @Test
+    public void getIfAbsentPutWithKey()
+    {
+        <name>ToBooleanFunction keyIsEven = (<type> parameter) -> (<(castRealTypeToInt.(type))("parameter")> & 1) == <(literal.(type))("0")>;
+
+        Assert.assertTrue(this.classUnderTest().getIfAbsentPutWithKey(<(literal.(type))("0")>, keyIsEven));
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void getIfAbsentPutWithKeyThrowsException()
+    {
+        <name>ToBooleanFunction keyIsEven = (<type> parameter) -> (<(castRealTypeToInt.(type))("parameter")> & 1) == <(literal.(type))("0")>;
+
+        this.classUnderTest().getIfAbsentPutWithKey(<(literal.(type))("10")>, keyIsEven);
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void updateValue()
+    {
+        BooleanToBooleanFunction flip = (boolean value) -> !value;
+
+        this.classUnderTest().updateValue(<(literal.(type))("0")>, false, flip);
+    }
+
+    @Override
+    @Test
+    public void contains()
+    {
+        Assert.assertTrue(this.classUnderTest().contains(true));
+        Assert.assertTrue(this.classUnderTest().contains(false));
+        Assert.assertFalse(this.getEmptyMap().contains(false));
+    }
+
+    @Override
+    @Test
+    public void containsKey()
+    {
+        Assert.assertTrue(this.classUnderTest().containsKey(<(literal.(type))("0")>));
+        Assert.assertTrue(this.classUnderTest().containsKey(<(literal.(type))("31")>));
+        Assert.assertTrue(this.classUnderTest().containsKey(<(literal.(type))("32")>));
+        Assert.assertFalse(this.classUnderTest().containsKey(<(literal.(type))("1")>));
+        Assert.assertFalse(this.classUnderTest().containsKey(<(literal.(type))("5")>));
+        Assert.assertFalse(this.classUnderTest().containsKey(<(literal.(type))("35")>));
+    }
+
+    @Override
+    @Test
+    public void containsValue()
+    {
+        Assert.assertTrue(this.classUnderTest().containsValue(true));
+        Assert.assertTrue(this.classUnderTest().containsValue(false));
+        Assert.assertFalse(this.getEmptyMap().containsValue(false));
+    }
+
+    @Override
+    @Test
+    public void containsAll()
+    {
+        Assert.assertTrue(this.classUnderTest().containsAll(true, false));
+        Assert.assertTrue(this.classUnderTest().containsAll(true, true));
+        Assert.assertTrue(this.classUnderTest().containsAll(false, false));
+        Assert.assertFalse(this.getEmptyMap().containsAll(false, true));
+    }
+
+    @Override
+    @Test
+    public void containsAllIterable()
+    {
+        Assert.assertTrue(this.classUnderTest().containsAll(BooleanArrayList.newListWith(true, false)));
+        Assert.assertTrue(this.classUnderTest().containsAll(BooleanArrayList.newListWith(true, true)));
+        Assert.assertTrue(this.classUnderTest().containsAll(BooleanArrayList.newListWith(false, false)));
+        Assert.assertFalse(this.getEmptyMap().containsAll(BooleanArrayList.newListWith(false, false)));
+    }
+
+    @Override
+    @Test
+    public void size()
+    {
+        Verify.assertSize(0, this.getEmptyMap());
+        Verify.assertSize(1, this.newWithKeysValues(<(literal.(type))("0")>, false));
+        Verify.assertSize(1, this.newWithKeysValues(<(literal.(type))("1")>, true));
+        Verify.assertSize(3, this.classUnderTest());
+    }
+
+    @Override
+    @Test
+    public void asUnmodifiable()
+    {
+        super.asUnmodifiable();
+        Unmodifiable<name>BooleanMap map1 = this.classUnderTest();
+        Assert.assertSame(map1, map1.asUnmodifiable());
+    }
+
+    @Override
+    @Test
+    public void booleanIterator_with_remove()
+    {
+        MutableBooleanIterator iterator = this.classUnderTest().booleanIterator();
+        Assert.assertTrue(iterator.hasNext());
+        Verify.assertThrows(UnsupportedOperationException.class, iterator::remove);
+    }
+
+    @Override
+    @Test
+    public void iterator_throws_on_invocation_of_remove_before_next()
+    {
+        MutableBooleanIterator iterator = this.classUnderTest().booleanIterator();
+        Assert.assertTrue(iterator.hasNext());
+        Verify.assertThrows(UnsupportedOperationException.class, iterator::remove);
+    }
+
+    @Override
+    @Test
+    public void iterator_throws_on_consecutive_invocation_of_remove()
+    {
+        // Not applicable for Unmodifiable*
+    }
+}
+
+>>

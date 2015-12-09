@@ -1,0 +1,33 @@
+import "copyright.stg"
+
+hasTwoPrimitives() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/api/block/procedure/primitive"
+
+fileName(primitive1, primitive2, sameTwoPrimitives) ::= "<primitive1.name><primitive2.name>Procedure"
+
+class(primitive1, primitive2, sameTwoPrimitives) ::= <<
+<body(primitive1.type, primitive2.type, primitive1.name, primitive2.name)>
+>>
+
+body(type1, type2, name1, name2) ::= <<
+<copyright()>
+
+package org.eclipse.collections.api.block.procedure.primitive;
+
+import java.io.Serializable;
+
+/**
+ * A <name1><name2>Procedure is a two argument lambda or closure which has no return argument and takes a primitive <type1> as the first and
+ * a primitive <type2> as the second argument.
+ * This file was automatically generated from template file primitivePrimitiveProcedure.stg.
+ *
+ * @since 3.0.
+ */
+public interface <name1><name2>Procedure
+        extends Serializable
+{
+    void value(<type1> argument1, <type2> argument2);
+}
+
+>>

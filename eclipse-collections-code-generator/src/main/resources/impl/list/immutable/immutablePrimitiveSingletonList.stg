@@ -1,0 +1,442 @@
+import "copyright.stg"
+import "primitiveEquals.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+
+targetPath() ::= "org/eclipse/collections/impl/list/immutable/primitive"
+
+fileName(primitive) ::= "Immutable<primitive.name>SingletonList"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.list.immutable.primitive;
+
+import java.io.IOException;
+import java.io.Serializable;
+
+import org.eclipse.collections.api.<name>Iterable;
+import org.eclipse.collections.api.Lazy<name>Iterable;
+import org.eclipse.collections.api.bag.primitive.Mutable<name>Bag;
+import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
+import org.eclipse.collections.api.block.function.primitive.Object<name>ToObjectFunction;
+import org.eclipse.collections.api.block.function.primitive.Object<name>IntToObjectFunction;
+import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
+import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
+import org.eclipse.collections.api.block.procedure.primitive.<name>IntProcedure;
+import org.eclipse.collections.api.iterator.<name>Iterator;
+import org.eclipse.collections.api.list.ImmutableList;
+import org.eclipse.collections.api.list.primitive.Immutable<name>List;
+import org.eclipse.collections.api.list.primitive.<name>List;
+import org.eclipse.collections.api.list.primitive.Mutable<name>List;
+import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
+import org.eclipse.collections.impl.bag.mutable.primitive.<name>HashBag;
+import org.eclipse.collections.impl.factory.primitive.<name>Lists;
+import org.eclipse.collections.impl.iterator.Unmodifiable<name>Iterator;
+import org.eclipse.collections.impl.lazy.primitive.Lazy<name>IterableAdapter;
+import org.eclipse.collections.impl.lazy.primitive.Reverse<name>Iterable;
+import org.eclipse.collections.impl.list.mutable.FastList;
+import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
+import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
+import net.jcip.annotations.Immutable;
+
+/**
+ * Immutable<name>SingletonList is an optimization for {@link Immutable<name>List} of size 1.
+ * This file was automatically generated from template file immutablePrimitiveSingletonList.stg.
+ */
+@Immutable
+final class Immutable<name>SingletonList implements Immutable<name>List, Serializable
+{
+    private static final long serialVersionUID = 1L;
+    private final <type> element1;
+
+    Immutable<name>SingletonList(<type> element)
+    {
+        this.element1 = element;
+    }
+
+    public <type> get(int index)
+    {
+        if (index == 0)
+        {
+            return this.element1;
+        }
+        throw new IndexOutOfBoundsException("Index: " + index + ", Size: 1");
+    }
+
+    public <type> getFirst()
+    {
+        return this.element1;
+    }
+
+    public <type> getLast()
+    {
+        return this.element1;
+    }
+
+    public int indexOf(<type> value)
+    {
+        return <(equals.(type))("this.element1", "value")> ? 0 : -1;
+    }
+
+    public int lastIndexOf(<type> value)
+    {
+        return <(equals.(type))("this.element1", "value")> ? 0 : -1;
+    }
+
+    public <name>Iterator <type>Iterator()
+    {
+        return new Unmodifiable<name>Iterator(<name>ArrayList.newListWith(this.element1).<type>Iterator());
+    }
+
+    public void forEach(<name>Procedure procedure)
+    {
+        this.each(procedure);
+    }
+
+    /**
+     * @since 7.0.
+     */
+    public void each(<name>Procedure procedure)
+    {
+        procedure.value(this.element1);
+    }
+
+    public void forEachWithIndex(<name>IntProcedure procedure)
+    {
+        procedure.value(this.element1, 0);
+    }
+
+    public int count(<name>Predicate predicate)
+    {
+        return predicate.accept(this.element1) ? 1 : 0;
+    }
+
+    public boolean anySatisfy(<name>Predicate predicate)
+    {
+        return predicate.accept(this.element1);
+    }
+
+    public boolean allSatisfy(<name>Predicate predicate)
+    {
+        return predicate.accept(this.element1);
+    }
+
+    public boolean noneSatisfy(<name>Predicate predicate)
+    {
+        return !predicate.accept(this.element1);
+    }
+
+    public Immutable<name>List select(<name>Predicate predicate)
+    {
+        return predicate.accept(this.element1) ? <name>ArrayList.newListWith(this.element1).toImmutable()
+                : new <name>ArrayList().toImmutable();
+    }
+
+    public Immutable<name>List reject(<name>Predicate predicate)
+    {
+        return predicate.accept(this.element1) ? new <name>ArrayList().toImmutable()
+                : <name>ArrayList.newListWith(this.element1).toImmutable();
+    }
+
+    public <type> detectIfNone(<name>Predicate predicate, <type> ifNone)
+    {
+        return predicate.accept(this.element1) ? this.element1 : ifNone;
+    }
+
+    public \<V> ImmutableList\<V> collect(<name>ToObjectFunction\<? extends V> function)
+    {
+        return FastList.newListWith(function.valueOf(this.element1)).toImmutable();
+    }
+
+    <(arithmeticMethods.(type))(name, type)>
+    public <type>[] toArray()
+    {
+        return new <type>[]{this.element1};
+    }
+
+    public boolean contains(<type> value)
+    {
+        return <(equals.(type))("this.element1", "value")>;
+    }
+
+    public boolean containsAll(<type>... source)
+    {
+        for (<type> value : source)
+        {
+            if (<(notEquals.(type))("this.element1", "value")>)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean containsAll(<name>Iterable source)
+    {
+        for (<name>Iterator iterator = source.<type>Iterator(); iterator.hasNext(); )
+        {
+            if (<(notEquals.(type))("this.element1", "iterator.next()")>)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public Lazy<name>Iterable asReversed()
+    {
+        return Reverse<name>Iterable.adapt(this);
+    }
+
+    public Mutable<name>List toList()
+    {
+        return <name>ArrayList.newListWith(this.element1);
+    }
+
+    public Mutable<name>Set toSet()
+    {
+        return <name>HashSet.newSetWith(this.element1);
+    }
+
+    public Mutable<name>Bag toBag()
+    {
+        return <name>HashBag.newBagWith(this.element1);
+    }
+
+    public Lazy<name>Iterable asLazy()
+    {
+        return new Lazy<name>IterableAdapter(this);
+    }
+
+    public Immutable<name>List toImmutable()
+    {
+        return this;
+    }
+
+    public Immutable<name>SingletonList toReversed()
+    {
+        return this;
+    }
+
+    public Immutable<name>List newWith(<type> element)
+    {
+        return <name>Lists.immutable.with(this.element1, element);
+    }
+
+    public Immutable<name>List newWithout(<type> element)
+    {
+        return <(equals.(type))("this.element1", "element")> ? <name>Lists.immutable.with() : this;
+    }
+
+    public Immutable<name>List newWithAll(<name>Iterable elements)
+    {
+        <name>ArrayList arrayList = <name>ArrayList.newListWith(this.element1);
+        arrayList.addAll(elements);
+        return arrayList.toImmutable();
+    }
+
+    public Immutable<name>List newWithoutAll(<name>Iterable elements)
+    {
+        return elements.contains(this.element1) ? <name>Lists.immutable.with() : this;
+    }
+
+    public int size()
+    {
+        return 1;
+    }
+
+    public boolean isEmpty()
+    {
+        return false;
+    }
+
+    public boolean notEmpty()
+    {
+        return true;
+    }
+
+    public \<T> T injectInto(T injectedValue, Object<name>ToObjectFunction\<? super T, ? extends T> function)
+    {
+        return function.valueOf(injectedValue, this.element1);
+    }
+
+    public \<T> T injectIntoWithIndex(T injectedValue, Object<name>IntToObjectFunction\<? super T, ? extends T> function)
+    {
+        return function.valueOf(injectedValue, this.element1, 0);
+    }
+
+    @Override
+    public boolean equals(Object otherList)
+    {
+        if (otherList == this)
+        {
+            return true;
+        }
+        if (!(otherList instanceof <name>List))
+        {
+            return false;
+        }
+        <name>List list = (<name>List) otherList;
+        if (list.size() != 1)
+        {
+            return false;
+        }
+        return <(equals.(type))("this.element1", "list.get(0)")>;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return 31 + <(hashCode.(type))("this.element1")>;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "[" + this.element1 + ']';
+    }
+
+    public String makeString()
+    {
+        return this.makeString(", ");
+    }
+
+    public String makeString(String separator)
+    {
+        return this.makeString("", separator, "");
+    }
+
+    public String makeString(String start, String separator, String end)
+    {
+        Appendable stringBuilder = new StringBuilder();
+        this.appendString(stringBuilder, start, separator, end);
+        return stringBuilder.toString();
+    }
+
+    public void appendString(Appendable appendable)
+    {
+        this.appendString(appendable, ", ");
+    }
+
+    public void appendString(Appendable appendable, String separator)
+    {
+        this.appendString(appendable, "", separator, "");
+    }
+
+    public void appendString(Appendable appendable, String start, String separator, String end)
+    {
+        try
+        {
+            appendable.append(start);
+            appendable.append(String.valueOf(this.element1));
+            appendable.append(end);
+        }
+        catch (IOException e)
+        {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * @since 6.0.
+     */
+    public Immutable<name>List distinct()
+    {
+        return this;
+    }
+
+    public Immutable<name>List subList(int fromIndex, int toIndex)
+    {
+        throw new UnsupportedOperationException("subList not yet implemented!");
+    }
+}
+
+>>
+
+arithmeticMethods ::= [
+    "byte": "allMethods",
+    "short": "allMethods",
+    "char": "allMethods",
+    "int": "allMethods",
+    "long": "allMethods",
+    "float": "allMethods",
+    "double": "allMethods",
+    "boolean": "noMethods"
+    ]
+
+allMethods(name, type) ::=<<
+public <wideType.(type)> sum()
+{
+    return this.element1;
+}
+
+public <type> max()
+{
+    return this.element1;
+}
+
+public <type> maxIfEmpty(<type> defaultValue)
+{
+    return this.element1;
+}
+
+public <type> min()
+{
+    return this.element1;
+}
+
+public <type> minIfEmpty(<type> defaultValue)
+{
+    return this.element1;
+}
+
+public double average()
+{
+    return this.element1;
+}
+
+public double median()
+{
+    return this.element1;
+}
+
+public <type>[] toSortedArray()
+{
+    return new <type>[]{this.element1};
+}
+
+public Mutable<name>List toSortedList()
+{
+    return <name>ArrayList.newListWith(this.element1);
+}
+
+public int binarySearch(<type> value)
+{
+    if (<(equals.(type))("this.element1", "value")>)
+    {
+        return 0;
+    }
+    if (<(lessThan.(type))("this.element1", "value")>)
+    {
+        return -2;
+    }
+    return -1;
+}
+
+public <wideType.(type)> dotProduct(<name>List list)
+{
+    if (list.size() != 1)
+    {
+        throw new IllegalArgumentException("Lists used in dotProduct must be the same size");
+    }
+    return <castWideType.(type)>this.element1 * list.getFirst();
+}
+
+>>
+
+noMethods(name, type) ::= ""

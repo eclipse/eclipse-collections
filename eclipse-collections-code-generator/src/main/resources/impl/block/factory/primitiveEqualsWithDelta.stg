@@ -1,0 +1,50 @@
+equalWithDelta ::= [
+    "byte": "equalWithoutDelta",
+    "short": "equalWithoutDelta",
+    "char": "equalWithoutDelta",
+    "int": "equalWithoutDelta",
+    "long": "equalWithoutDelta",
+    "float": "equalWithDelta",
+    "double": "equalWithDelta"
+]
+
+equalsWithDeltaClass ::= [
+    "byte": "equalWithoutDelta",
+    "short": "equalWithoutDelta",
+    "char": "equalWithoutDelta",
+    "int": "equalWithoutDelta",
+    "long": "equalWithoutDelta",
+    "float": "equalsWithDeltaClass",
+    "double": "equalsWithDeltaClass"
+]
+
+equalWithoutDelta() ::= ""
+
+equalWithDelta() ::= <<
+public static <name>Predicate equal(<type> expected, <type> delta)
+{
+    return new EqualsWithDelta<name>Predicate(expected, delta);
+}
+
+>>
+
+equalsWithDeltaClass() ::= <<
+private static final class EqualsWithDelta<name>Predicate implements <name>Predicate
+{
+    private static final long serialVersionUID = 1L;
+    private final <type> expected;
+    private final <type> delta;
+
+    private EqualsWithDelta<name>Predicate(<type> expected, <type> delta)
+    {
+        this.expected = expected;
+        this.delta = delta;
+    }
+
+    public boolean accept(<type> actual)
+    {
+        return Math.abs(this.expected - actual) \<= this.delta;
+    }
+}
+
+>>

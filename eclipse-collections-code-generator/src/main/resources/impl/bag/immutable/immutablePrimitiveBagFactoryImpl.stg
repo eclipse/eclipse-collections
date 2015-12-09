@@ -1,0 +1,86 @@
+import "copyright.stg"
+
+targetPath() ::= "org/eclipse/collections/impl/bag/immutable/primitive"
+
+fileName(primitive) ::= "Immutable<primitive.name>BagFactoryImpl"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.bag.immutable.primitive;
+
+import org.eclipse.collections.api.<name>Iterable;
+import org.eclipse.collections.api.bag.primitive.Immutable<name>Bag;
+import org.eclipse.collections.api.factory.bag.primitive.Immutable<name>BagFactory;
+
+/**
+ * Immutable<name>BagFactoryImpl is a factory implementation which creates instances of type {@link Immutable<name>Bag}.
+ * This file was automatically generated from template file immutablePrimitiveBagFactoryImpl.stg.
+ *
+ * @since 4.0.
+ */
+public class Immutable<name>BagFactoryImpl implements Immutable<name>BagFactory
+{
+    public Immutable<name>Bag empty()
+    {
+        return Immutable<name>EmptyBag.INSTANCE;
+    }
+
+    public Immutable<name>Bag of()
+    {
+        return this.empty();
+    }
+
+    public Immutable<name>Bag with()
+    {
+        return this.empty();
+    }
+
+    public Immutable<name>Bag of(<type> one)
+    {
+        return this.with(one);
+    }
+
+    public Immutable<name>Bag with(<type> one)
+    {
+        return new Immutable<name>SingletonBag(one);
+    }
+
+    public Immutable<name>Bag of(<type>... items)
+    {
+        return this.with(items);
+    }
+
+    public Immutable<name>Bag with(<type>... items)
+    {
+        if (items == null || items.length == 0)
+        {
+            return this.with();
+        }
+        if (items.length == 1)
+        {
+            return this.with(items[0]);
+        }
+        return Immutable<name>HashBag.newBagWith(items);
+    }
+
+    public Immutable<name>Bag ofAll(<name>Iterable items)
+    {
+        return this.withAll(items);
+    }
+
+    public Immutable<name>Bag withAll(<name>Iterable items)
+    {
+        if (items instanceof Immutable<name>Bag)
+        {
+            return (Immutable<name>Bag) items;
+        }
+        return this.with(items.toArray());
+    }
+}
+
+>>

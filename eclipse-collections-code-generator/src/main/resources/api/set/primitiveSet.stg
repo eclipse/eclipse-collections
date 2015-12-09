@@ -1,0 +1,58 @@
+import "copyright.stg"
+import "primitiveAPI.stg"
+
+targetPath() ::= "org/eclipse/collections/api/set/primitive"
+
+fileName(primitive) ::= "<primitive.name>Set"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.api.set.primitive;
+
+import java.util.Set;
+
+import org.eclipse.collections.api.<name>Iterable;
+import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
+import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
+import org.eclipse.collections.api.set.SetIterable;
+
+/**
+ * This file was automatically generated from template file primitiveSet.stg.
+ *
+ * @since 3.0.
+ */
+public interface <name>Set extends <name>Iterable
+{
+    /**
+     * Follows the same general contract as {@link Set#equals(Object)}.
+     */
+    @Override
+    boolean equals(Object o);
+
+    /**
+     * Follows the same general contract as {@link Set#hashCode()}.
+     */
+    @Override
+    int hashCode();
+
+    <sharedAPI(fileName(primitive), name)>
+
+    \<V> SetIterable\<V> collect(<name>ToObjectFunction\<? extends V> function);
+
+    /**
+     * Returns a frozen copy of this set. If the set is frozen, it returns itself. A frozen copy is the same thing as an immutable copy without safe-publish guarantees.
+     */
+    <name>Set freeze();
+
+    /**
+     * Returns an immutable copy of this set. If the set is immutable, it returns itself.
+     */
+    Immutable<name>Set toImmutable();
+}
+
+>>

@@ -1,0 +1,68 @@
+import "copyright.stg"
+
+targetPath() ::= "org/eclipse/collections/impl/set/mutable/primitive"
+
+fileName(primitive) ::= "Mutable<primitive.name>SetFactoryImpl"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.set.mutable.primitive;
+
+import org.eclipse.collections.api.<name>Iterable;
+import org.eclipse.collections.api.factory.set.primitive.Mutable<name>SetFactory;
+import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
+
+/**
+ * Mutable<name>SetFactoryImpl is a factory implementation which creates instances of type {@link Mutable<name>Set}.
+ * This file was automatically generated from template file mutablePrimitiveSetFactoryImpl.stg.
+ *
+ * @since 6.0.
+ */
+public class Mutable<name>SetFactoryImpl implements Mutable<name>SetFactory
+{
+    public Mutable<name>Set empty()
+    {
+        return new <name>HashSet();
+    }
+
+    public Mutable<name>Set of()
+    {
+        return this.empty();
+    }
+
+    public Mutable<name>Set with()
+    {
+        return this.empty();
+    }
+
+    public Mutable<name>Set of(<type>... items)
+    {
+        return this.with(items);
+    }
+
+    public Mutable<name>Set with(<type>... items)
+    {
+        if (items == null || items.length == 0)
+        {
+            return this.empty();
+        }
+        return <name>HashSet.newSetWith(items);
+    }
+
+    public Mutable<name>Set ofAll(<name>Iterable items)
+    {
+        return this.withAll(items);
+    }
+
+    public Mutable<name>Set withAll(<name>Iterable items)
+    {
+        return <name>HashSet.newSet(items);
+    }
+}
+
+>>

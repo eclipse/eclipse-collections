@@ -1,0 +1,89 @@
+import "copyright.stg"
+import "primitiveAPI.stg"
+
+targetPath() ::= "org/eclipse/collections/api/list/primitive"
+
+fileName(primitive) ::= "Mutable<primitive.name>List"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.api.list.primitive;
+
+import org.eclipse.collections.api.<name>Iterable;
+import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
+import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
+import org.eclipse.collections.api.collection.primitive.Mutable<name>Collection;
+import org.eclipse.collections.api.list.MutableList;
+
+/**
+ * This file was automatically generated from template file mutablePrimitiveList.stg.
+ *
+ * @since 3.0.
+ */
+public interface Mutable<name>List extends Mutable<name>Collection, <name>List
+{
+    void addAtIndex(int index, <type> element);
+
+    boolean addAllAtIndex(int index, <type>... source);
+
+    boolean addAllAtIndex(int index, <name>Iterable source);
+
+    <type> removeAtIndex(int index);
+
+    <type> set(int index, <type> element);
+
+    <sharedAPI(fileName(primitive), name)>
+
+    <mutableAPI(fileName(primitive), type, name)>
+
+    \<V> MutableList\<V> collect(<name>ToObjectFunction\<? extends V> function);
+
+    Mutable<name>List reverseThis();
+
+    Mutable<name>List toReversed();
+
+    /**
+     * @since 6.0.
+     */
+    Mutable<name>List distinct();
+
+    <(arithmeticMethods.(type))(type)>
+    Mutable<name>List asUnmodifiable();
+
+    Mutable<name>List asSynchronized();
+
+    /**
+     * Returns an immutable copy of this list.
+     */
+    Immutable<name>List toImmutable();
+
+    Mutable<name>List subList(int fromIndex, int toIndex);
+}
+
+>>
+
+arithmeticMethods ::= [
+    "byte": "allMethods",
+    "short": "allMethods",
+    "char": "allMethods",
+    "int": "allMethods",
+    "long": "allMethods",
+    "float": "allMethods",
+    "double": "allMethods",
+    "boolean": "noMethods"
+]
+
+allMethods(type) ::= <<
+/**
+ * Sorts this list mutating its contents and returns the same mutable list (this).
+ */
+Mutable<name>List sortThis();
+
+>>
+
+noMethods(type) ::= ""

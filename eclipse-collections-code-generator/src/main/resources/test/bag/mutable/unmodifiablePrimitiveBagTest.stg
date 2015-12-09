@@ -1,0 +1,243 @@
+import "copyright.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+
+isTest() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/bag/mutable/primitive"
+
+fileName(primitive) ::= "Unmodifiable<primitive.name>BagTest"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.wrapperName, primitive.name)>
+>>
+
+body(type, wrapperName, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.bag.mutable.primitive;
+
+import java.util.NoSuchElementException;
+
+import org.eclipse.collections.api.iterator.<name>Iterator;
+import org.eclipse.collections.api.iterator.Mutable<name>Iterator;
+import org.eclipse.collections.impl.test.Verify;
+import org.junit.Assert;
+import org.junit.Test;
+
+/**
+ * JUnit test for {@link Unmodifiable<name>Bag}.
+ * This file was automatically generated from template file unmodifiablePrimitiveBagTest.stg.
+ */
+public class Unmodifiable<name>BagTest extends AbstractMutable<name>BagTestCase
+{
+    private final Unmodifiable<name>Bag bag = this.classUnderTest();
+
+    @Override
+    protected final Unmodifiable<name>Bag classUnderTest()
+    {
+        return new Unmodifiable<name>Bag(<name>HashBag.newBagWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">));
+    }
+
+    @Override
+    protected Unmodifiable<name>Bag newWith(<type>... elements)
+    {
+        return new Unmodifiable<name>Bag(<name>HashBag.newBagWith(elements));
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void addOccurrences()
+    {
+        this.bag.addOccurrences(<(literal.(type))("1")>, 3);
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void addOccurrences_throws()
+    {
+        this.newWith().addOccurrences(<(literal.(type))("1")>, -1);
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void removeOccurrences()
+    {
+        this.bag.removeOccurrences(<(literal.(type))("1")>, 1);
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void removeOccurrences_throws()
+    {
+        this.newWith().removeOccurrences(<(literal.(type))("1")>, -1);
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void clear()
+    {
+        this.bag.clear();
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void add()
+    {
+        this.newWith().add(<(literal.(type))("1")>);
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void addAllArray()
+    {
+        this.classUnderTest().addAll();
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void addAllIterable()
+    {
+        this.classUnderTest().addAll(this.newMutableCollectionWith());
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void remove()
+    {
+        this.classUnderTest().remove(<(literal.(type))("1")>);
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void removeAll()
+    {
+        this.classUnderTest().removeAll();
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void removeAll_iterable()
+    {
+        this.classUnderTest().removeAll(this.newMutableCollectionWith());
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void retainAll()
+    {
+        this.classUnderTest().retainAll();
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void retainAll_iterable()
+    {
+        this.classUnderTest().retainAll(this.newMutableCollectionWith());
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void with()
+    {
+        this.newWith().with(<["1"]:(literal.(type))(); separator=", ">);
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void withAll()
+    {
+        this.newWith().withAll(this.newMutableCollectionWith(<(literal.(type))("1")>));
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void without()
+    {
+        this.newWith(<["1", "2", "3", "4", "5"]:(literal.(type))(); separator=", ">).without(<(literal.(type))("9")>);
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void withoutAll()
+    {
+        this.newWith(<["1", "2", "3", "4", "5"]:(literal.(type))(); separator=", ">).withoutAll(this.newMutableCollectionWith(<["8", "9"]:(literal.(type))(); separator=", ">));
+    }
+
+    @Override
+    @Test
+    public void contains()
+    {
+        Unmodifiable<name>Bag collection = this.newWith(<["14", "2", "30", "31", "32", "35", "0", "1"]:(literal.(type))(); separator=", ">);
+        Assert.assertFalse(collection.contains(<(literal.(type))("29")>));
+        Assert.assertFalse(collection.contains(<(literal.(type))("49")>));
+
+        <type>[] numbers = {<["14", "2", "30", "31", "32", "35", "0", "1"]:(literal.(type))(); separator=", ">};
+        for (<type> number : numbers)
+        {
+            Assert.assertTrue(collection.contains(number));
+        }
+
+        Assert.assertFalse(collection.contains(<(literal.(type))("-1")>));
+        Assert.assertFalse(collection.contains(<(literal.(type))("29")>));
+        Assert.assertFalse(collection.contains(<(literal.(type))("49")>));
+
+        Unmodifiable<name>Bag collection1 = this.newWith(<["0", "1", "1", "2", "2", "2"]:(literal.(type))(); separator=", ">);
+        Assert.assertTrue(collection1.contains(<(literal.(type))("0")>));
+        Assert.assertTrue(collection1.contains(<(literal.(type))("1")>));
+        Assert.assertTrue(collection1.contains(<(literal.(type))("2")>));
+        Assert.assertFalse(collection1.contains(<(literal.(type))("3")>));
+    }
+
+    @Override
+    @Test(expected = NoSuchElementException.class)
+    public void <type>Iterator_throws_non_empty_collection()
+    {
+        Unmodifiable<name>Bag collection = this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">);
+        <name>Iterator iterator = collection.<type>Iterator();
+        while (iterator.hasNext())
+        {
+            iterator.next();
+        }
+        iterator.next();
+    }
+
+    @Override
+    @Test
+    public void asUnmodifiable()
+    {
+        super.asUnmodifiable();
+        Assert.assertSame(this.bag, this.bag.asUnmodifiable());
+        Assert.assertEquals(this.bag, this.bag.asUnmodifiable());
+    }
+
+    @Override
+    @Test
+    public void <type>Iterator_with_remove()
+    {
+        Unmodifiable<name>Bag unmodifiable<name>Bag = this.classUnderTest();
+        Mutable<name>Iterator iterator = unmodifiable<name>Bag.<type>Iterator();
+        Assert.assertTrue(iterator.hasNext());
+        iterator.next();
+        Verify.assertThrows(UnsupportedOperationException.class, iterator::remove);
+    }
+
+    @Override
+    @Test
+    public void <type>Iterator_throws_for_remove_before_next()
+    {
+        Unmodifiable<name>Bag unmodifiable<name>Bag = this.classUnderTest();
+        Mutable<name>Iterator iterator = unmodifiable<name>Bag.<type>Iterator();
+        Assert.assertTrue(iterator.hasNext());
+        Verify.assertThrows(UnsupportedOperationException.class, iterator::remove);
+    }
+
+    @Override
+    @Test
+    public void <type>Iterator_throws_for_consecutive_remove()
+    {
+        // Not applicable for Unmodifiable*
+    }
+}
+
+>>

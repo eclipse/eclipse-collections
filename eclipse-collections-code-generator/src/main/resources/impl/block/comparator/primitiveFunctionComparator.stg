@@ -1,0 +1,44 @@
+import "copyright.stg"
+import "primitiveCompare.stg"
+
+targetPath() ::= "org/eclipse/collections/impl/block/comparator/primitive"
+
+fileName(primitive) ::= "<primitive.name>FunctionComparator"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name, primitive.wrapperName)>
+>>
+
+body(type, name, wrapperName) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.block.comparator.primitive;
+
+import org.eclipse.collections.api.block.SerializableComparator;
+import org.eclipse.collections.api.block.function.primitive.<name>Function;
+
+/**
+ * A Comparator which takes a <name>Function to compare a primitive <type> value retrieved from an object.
+ * This file was automatically generated from template file primitiveFunctionComparator.stg.
+ */
+public class <name>FunctionComparator\<T>
+        implements SerializableComparator\<T>
+{
+    private static final long serialVersionUID = 1L;
+
+    private final <name>Function\<T> function;
+
+    public <name>FunctionComparator(<name>Function\<T> function)
+    {
+        this.function = function;
+    }
+
+    public int compare(T o1, T o2)
+    {
+        <type> one = this.function.<type>ValueOf(o1);
+        <type> two = this.function.<type>ValueOf(o2);
+        return <(compare.(type))("one", "two", wrapperName)>;
+    }
+}
+
+>>

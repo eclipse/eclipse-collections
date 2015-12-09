@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~ Copyright (c) 2015 Goldman Sachs.
+  ~ All rights reserved. This program and the accompanying materials
+  ~ are made available under the terms of the Eclipse Public License v1.0
+  ~ and Eclipse Distribution License v. 1.0 which accompany this distribution.
+  ~ The Eclipse Public License is available at http://www.eclipse.org/legal/epl-v10.html
+  ~ and the Eclipse Distribution License is available at
+  ~ http://www.eclipse.org/org/documents/edl-v10.php.
+  -->
+
+<FindBugsFilter>
+
+    <Match>
+        <Bug pattern="CN_IDIOM_NO_SUPER_CALL" />
+        <Or>
+            <!-- These are probably real bugs -->
+            <Class name="org.eclipse.collections.impl.list.mutable.AbstractMutableList$SubList" />
+            <Class name="org.eclipse.collections.impl.map.mutable.MapAdapter" />
+            <Class name="org.eclipse.collections.impl.map.sorted.mutable.SortedMapAdapter" />
+            <Class name="org.eclipse.collections.impl.list.mutable.SynchronizedMutableList" />
+            <Class name="org.eclipse.collections.impl.map.mutable.SynchronizedMutableMap" />
+            <Class name="org.eclipse.collections.impl.map.sorted.mutable.SynchronizedSortedMap" />
+            <Class name="org.eclipse.collections.impl.set.mutable.SynchronizedMutableSet" />
+            <Class name="org.eclipse.collections.impl.map.mutable.UnifiedMap" />
+            <Class name="org.eclipse.collections.impl.map.mutable.ConcurrentHashMap" />
+            <Class name="org.eclipse.collections.impl.map.mutable.ConcurrentHashMapUnsafe" />
+            <Class name="org.eclipse.collections.impl.set.mutable.UnifiedSet" />
+            <Class name="org.eclipse.collections.impl.set.strategy.mutable.UnifiedSetWithHashingStrategy" />
+            <Class name="org.eclipse.collections.impl.map.strategy.mutable.UnifiedMapWithHashingStrategy" />
+            <Class name="org.eclipse.collections.impl.map.mutable.UnmodifiableMutableMap" />
+            <Class name="org.eclipse.collections.impl.map.sorted.mutable.UnmodifiableTreeMap" />
+            <Class name="org.eclipse.collections.impl.map.sorted.mutable.TreeSortedMap" />
+            <Class name="org.eclipse.collections.impl.list.mutable.UnmodifiableMutableList" />
+            <Class name="org.eclipse.collections.impl.set.mutable.UnmodifiableMutableSet" />
+            <Class name="org.eclipse.collections.impl.set.sorted.mutable.SynchronizedSortedSet" />
+            <Class name="org.eclipse.collections.impl.set.sorted.mutable.UnmodifiableSortedSet" />
+            <Class name="org.eclipse.collections.impl.bag.sorted.mutable.SynchronizedSortedBag" />
+            <Class name="org.eclipse.collections.impl.bag.sorted.mutable.UnmodifiableSortedBag" />
+            <Class name="org.eclipse.collections.impl.bag.sorted.mutable.TreeBag" />
+        </Or>
+    </Match>
+
+    <Match>
+        <Bug pattern="DM_GC" />
+        <Or>
+            <Class name="org.eclipse.collections.impl.PerformanceTest" />
+            <Class name="org.eclipse.collections.impl.ParallelSerialPerformanceTest" />
+        </Or>
+    </Match>
+
+    <Match>
+        <!--BC: Questionable cast to concrete collection (BC_BAD_CAST_TO_CONCRETE_COLLECTION)-->
+
+        <!--This code casts an abstract collection (such as a Collection, List, or Set) to a specific concrete
+            implementation (such as an ArrayList or HashSet). This might not be correct, and it may make your code
+            fragile, since it makes it harder to switch to other concrete implementations at a future point. Unless you
+            have a particular reason to do so, just use the abstract collection class.-->
+
+        <Bug pattern="BC_BAD_CAST_TO_CONCRETE_COLLECTION" />
+        <Class name="org.eclipse.collections.impl.list.mutable.FastList" />
+    </Match>
+
+    <Match>
+        <!--EI2: May expose internal representation by incorporating reference to mutable object (EI_EXPOSE_REP2)-->
+        <!--This code stores a reference to an externally mutable object into the internal representation
+            of the object.  If instances are accessed by untrusted code, and unchecked changes to the
+            mutable object would compromise security or other important properties, you will need to
+            do something different. Storing a copy of the object is better approach in many situations.-->
+        <Bug pattern="EI_EXPOSE_REP2" />
+        <Or>
+            <!-- These are probably real bugs -->
+            <Class name="org.eclipse.collections.impl.math.SplitDoubleSumCombiner" />
+            <Class name="org.eclipse.collections.impl.math.SplitIntegerSumCombiner" />
+            <Class name="org.eclipse.collections.impl.parallel.ArrayProcedureFJTask" />
+        </Or>
+    </Match>
+
+    <Match>
+        <!--Eq: Equals checks for incompatible operand (EQ_CHECK_FOR_OPERAND_NOT_COMPATIBLE_WITH_THIS)-->
+        <Bug pattern="EQ_CHECK_FOR_OPERAND_NOT_COMPATIBLE_WITH_THIS" />
+        <Or>
+            <Class name="org.eclipse.collections.impl.bag.immutable.ImmutableHashBag" />
+            <Class name="org.eclipse.collections.impl.bag.immutable.primitive.ImmutableIntHashBag" />
+            <Class name="org.eclipse.collections.impl.bag.immutable.primitive.ImmutableFloatHashBag" />
+            <Class name="org.eclipse.collections.impl.bag.immutable.primitive.ImmutableLongHashBag" />
+            <Class name="org.eclipse.collections.impl.bag.immutable.primitive.ImmutableDoubleHashBag" />
+            <Class name="org.eclipse.collections.impl.bag.immutable.primitive.ImmutableByteHashBag" />
+            <Class name="org.eclipse.collections.impl.bag.immutable.primitive.ImmutableShortHashBag" />
+            <Class name="org.eclipse.collections.impl.bag.immutable.primitive.ImmutableCharHashBag" />
+            <Class name="org.eclipse.collections.impl.bag.immutable.primitive.ImmutableBooleanHashBag" />
+            <Class name="org.eclipse.collections.impl.map.immutable.primitive.ImmutableIntObjectHashMap" />
+            <Class name="org.eclipse.collections.impl.map.immutable.primitive.ImmutableFloatObjectHashMap" />
+            <Class name="org.eclipse.collections.impl.map.immutable.primitive.ImmutableDoubleObjectHashMap" />
+            <Class name="org.eclipse.collections.impl.map.immutable.primitive.ImmutableLongObjectHashMap" />
+            <Class name="org.eclipse.collections.impl.map.immutable.primitive.ImmutableShortObjectHashMap" />
+            <Class name="org.eclipse.collections.impl.map.immutable.primitive.ImmutableByteObjectHashMap" />
+            <Class name="org.eclipse.collections.impl.map.immutable.primitive.ImmutableCharObjectHashMap" />
+            <Class name="org.eclipse.collections.impl.map.immutable.primitive.ImmutableObjectIntHashMap" />
+            <Class name="org.eclipse.collections.impl.map.immutable.primitive.ImmutableObjectFloatHashMap" />
+            <Class name="org.eclipse.collections.impl.map.immutable.primitive.ImmutableObjectDoubleHashMap" />
+            <Class name="org.eclipse.collections.impl.map.immutable.primitive.ImmutableObjectLongHashMap" />
+            <Class name="org.eclipse.collections.impl.map.immutable.primitive.ImmutableObjectShortHashMap" />
+            <Class name="org.eclipse.collections.impl.map.immutable.primitive.ImmutableObjectByteHashMap" />
+            <Class name="org.eclipse.collections.impl.map.immutable.primitive.ImmutableObjectCharHashMap" />
+            <Class name="org.eclipse.collections.impl.map.immutable.primitive.ImmutableObjectBooleanHashMap" />
+            <Class name="org.eclipse.collections.impl.map.immutable.primitive.ImmutableIntIntHashMap" />
+            <Class name="org.eclipse.collections.impl.map.immutable.primitive.ImmutableIntFloatHashMap" />
+            <Class name="org.eclipse.collections.impl.map.immutable.primitive.ImmutableIntDoubleHashMap" />
+            <Class name="org.eclipse.collections.impl.map.immutable.primitive.ImmutableIntLongHashMap" />
+            <Class name="org.eclipse.collections.impl.map.immutable.primitive.ImmutableIntShortHashMap" />
+            <Class name="org.eclipse.collections.impl.map.immutable.primitive.ImmutableIntByteHashMap" />
+            <Class name="org.eclipse.collections.impl.map.immutable.primitive.ImmutableIntCharHashMap" />
+            <Class name="org.eclipse.collections.impl.map.immutable.primitive.ImmutableIntBooleanHashMap" />
+            <Class name="org.eclipse.collections.impl.map.immutable.primitive.ImmutableFloatIntHashMap" />
+            <Class name="org.eclipse.collections.impl.map.immutable.primitive.ImmutableFloatFloatHashMap" />
+            <Class name="org.eclipse.collections.impl.map.immutable.primitive.ImmutableFloatDoubleHashMap" />
+            <Class name="org.eclipse.collections.impl.map.immutable.primitive.ImmutableFloatLongHashMap" />
+            <Class name="org.eclipse.collections.impl.map.immutable.primitive.ImmutableFloatShortHashMap" />
+            <Class name="org.eclipse.collections.impl.map.immutable.primitive.ImmutableFloatByteHashMap" />
+            <Class name="org.eclipse.collections.impl.map.immutable.primitive.ImmutableFloatCharHashMap" />
+            <Class name="org.eclipse.collections.impl.map.immutable.primitive.ImmutableFloatBooleanHashMap" />
+            <Class name="org.eclipse.collections.impl.map.immutable.primitive.ImmutableDoubleIntHashMap" />
+            <Class name="org.eclipse.collections.impl.map.immutable.primitive.ImmutableDoubleFloatHashMap" />
+            <Class name="org.eclipse.collections.impl.map.immutable.primitive.ImmutableDoubleDoubleHashMap" />
+            <Class name="org.eclipse.collections.impl.map.immutable.primitive.ImmutableDoubleLongHashMap" />
+            <Class name="org.eclipse.collections.impl.map.immutable.primitive.ImmutableDoubleShortHashMap" />
+            <Class name="org.eclipse.collections.impl.map.immutable.primitive.ImmutableDoubleByteHashMap" />
+            <Class name="org.eclipse.collections.impl.map.immutable.primitive.ImmutableDoubleCharHashMap" />
+            <Class name="org.eclipse.collections.impl.map.immutable.primitive.ImmutableDoubleBooleanHashMap" />
+            <Class name="org.eclipse.collections.impl.map.immutable.primitive.ImmutableLongIntHashMap" />
+            <Class name="org.eclipse.collections.impl.map.immutable.primitive.ImmutableLongFloatHashMap" />
+            <Class name="org.eclipse.collections.impl.map.immutable.primitive.ImmutableLongDoubleHashMap" />
+            <Class name="org.eclipse.collections.impl.map.immutable.primitive.ImmutableLongLongHashMap" />
+            <Class name="org.eclipse.collections.impl.map.immutable.primitive.ImmutableLongShortHashMap" />
+            <Class name="org.eclipse.collections.impl.map.immutable.primitive.ImmutableLongByteHashMap" />
+            <Class name="org.eclipse.collections.impl.map.immutable.primitive.ImmutableLongCharHashMap" />
+            <Class name="org.eclipse.collections.impl.map.immutable.primitive.ImmutableLongBooleanHashMap" />
+            <Class name="org.eclipse.collections.impl.map.immutable.primitive.ImmutableShortIntHashMap" />
+            <Class name="org.eclipse.collections.impl.map.immutable.primitive.ImmutableShortFloatHashMap" />
+            <Class name="org.eclipse.collections.impl.map.immutable.primitive.ImmutableShortDoubleHashMap" />
+            <Class name="org.eclipse.collections.impl.map.immutable.primitive.ImmutableShortLongHashMap" />
+            <Class name="org.eclipse.collections.impl.map.immutable.primitive.ImmutableShortShortHashMap" />
+            <Class name="org.eclipse.collections.impl.map.immutable.primitive.ImmutableShortByteHashMap" />
+            <Class name="org.eclipse.collections.impl.map.immutable.primitive.ImmutableShortCharHashMap" />
+            <Class name="org.eclipse.collections.impl.map.immutable.primitive.ImmutableShortBooleanHashMap" />
+            <Class name="org.eclipse.collections.impl.map.immutable.primitive.ImmutableByteIntHashMap" />
+            <Class name="org.eclipse.collections.impl.map.immutable.primitive.ImmutableByteFloatHashMap" />
+            <Class name="org.eclipse.collections.impl.map.immutable.primitive.ImmutableByteDoubleHashMap" />
+            <Class name="org.eclipse.collections.impl.map.immutable.primitive.ImmutableByteLongHashMap" />
+            <Class name="org.eclipse.collections.impl.map.immutable.primitive.ImmutableByteShortHashMap" />
+            <Class name="org.eclipse.collections.impl.map.immutable.primitive.ImmutableByteByteHashMap" />
+            <Class name="org.eclipse.collections.impl.map.immutable.primitive.ImmutableByteCharHashMap" />
+            <Class name="org.eclipse.collections.impl.map.immutable.primitive.ImmutableByteBooleanHashMap" />
+            <Class name="org.eclipse.collections.impl.map.immutable.primitive.ImmutableCharIntHashMap" />
+            <Class name="org.eclipse.collections.impl.map.immutable.primitive.ImmutableCharFloatHashMap" />
+            <Class name="org.eclipse.collections.impl.map.immutable.primitive.ImmutableCharDoubleHashMap" />
+            <Class name="org.eclipse.collections.impl.map.immutable.primitive.ImmutableCharLongHashMap" />
+            <Class name="org.eclipse.collections.impl.map.immutable.primitive.ImmutableCharShortHashMap" />
+            <Class name="org.eclipse.collections.impl.map.immutable.primitive.ImmutableCharByteHashMap" />
+            <Class name="org.eclipse.collections.impl.map.immutable.primitive.ImmutableCharCharHashMap" />
+            <Class name="org.eclipse.collections.impl.map.immutable.primitive.ImmutableCharBooleanHashMap" />
+        </Or>
+    </Match>
+
+    <Match>
+        <!--A mutable static field could be changed by malicious code or by accident. The field could be made package
+            protected to avoid this vulnerability.-->
+
+        <!-- This is probably a real bug -->
+        <Bug pattern="MS_PKGPROTECT" />
+        <Class name="org.eclipse.collections.impl.block.factory.Predicates" />
+    </Match>
+
+    <Match>
+        <Or>
+            <Bug pattern="SE_BAD_FIELD_INNER_CLASS" />
+            <!--Se: Non-transient non-serializable instance field in serializable class (SE_BAD_FIELD)-->
+            <!--This Serializable class defines a non-primitive instance field which is neither transient,
+                Serializable, or java.lang.Object, and does not appear to implement the Externalizable interface
+                or the readObject() and writeObject() methods.
+                Objects of this class will not be deserialized correctly if a non-Serializable object
+                is stored in this field.        -->
+            <Bug pattern="SE_BAD_FIELD" />
+        </Or>
+    </Match>
+
+    <Match>
+        <!--Se: Serializable inner class (SE_INNER_CLASS)-->
+
+        <!--This Serializable class is an inner class. Any attempt to serialize it will also serialize the associated
+            outer instance. The outer instance is serializable, so this won't fail, but it might serialize a lot more
+            data than intended. If possible, making the inner class a static inner class (also known as a nested class)
+            should solve the problem.-->
+        <Bug pattern="SE_INNER_CLASS" />
+        <Or>
+            <Class name="org.eclipse.collections.impl.map.mutable.UnifiedMap$KeySet" />
+            <Class name="org.eclipse.collections.impl.map.mutable.UnifiedMap$EntrySet" />
+            <Class name="org.eclipse.collections.impl.map.mutable.UnifiedMap$ValuesCollection" />
+            <Class name="org.eclipse.collections.impl.map.strategy.mutable.UnifiedMapWithHashingStrategy$KeySet" />
+            <Class name="org.eclipse.collections.impl.map.strategy.mutable.UnifiedMapWithHashingStrategy$EntrySet" />
+            <Class name="org.eclipse.collections.impl.map.strategy.mutable.UnifiedMapWithHashingStrategy$ValuesCollection" />
+            <Class name="org.eclipse.collections.impl.bimap.mutable.AbstractMutableBiMap$KeySet" />
+            <Class name="org.eclipse.collections.impl.map.sorted.immutable.ImmutableTreeMap$ImmutableSortedMapKeySet" />
+        </Or>
+    </Match>
+
+    <Match>
+        <!--Se: Class is Serializable but its superclass doesn't define a void constructor (SE_NO_SUITABLE_CONSTRUCTOR)-->
+
+        <!--This class implements the Serializable interface and its superclass does not. When such an object is
+            deserialized, the fields of the superclass need to be initialized by invoking the void constructor of the
+            superclass. Since the superclass does not have one, serialization and deserialization will fail at runtime.-->
+        <Bug pattern="SE_NO_SUITABLE_CONSTRUCTOR" />
+        <Or>
+            <Class name="org.eclipse.collections.impl.multimap.list.ImmutableListMultimapImpl" />
+            <Class name="org.eclipse.collections.impl.multimap.set.ImmutableSetMultimapImpl" />
+            <Class name="org.eclipse.collections.impl.multimap.bag.ImmutableBagMultimapImpl" />
+            <Class name="org.eclipse.collections.impl.multimap.set.sorted.ImmutableSortedSetMultimapImpl" />
+            <Class name="org.eclipse.collections.impl.multimap.bag.sorted.immutable.ImmutableSortedBagMultimapImpl" />
+            <Class name="org.eclipse.collections.impl.bimap.immutable.ImmutableHashBiMap" />
+            <Class name="org.eclipse.collections.impl.bimap.immutable.AbstractImmutableBiMap$Inverse" />
+            <Class name="org.eclipse.collections.impl.bag.mutable.SynchronizedBag" />
+            <Class name="org.eclipse.collections.impl.bag.mutable.UnmodifiableBag" />
+            <Class name="org.eclipse.collections.impl.bag.sorted.mutable.SynchronizedSortedBag" />
+            <Class name="org.eclipse.collections.impl.bag.sorted.mutable.UnmodifiableSortedBag" />
+            <Class name="org.eclipse.collections.impl.collection.mutable.SynchronizedMutableCollection" />
+            <Class name="org.eclipse.collections.impl.collection.mutable.UnmodifiableMutableCollection" />
+            <Class name="org.eclipse.collections.impl.list.mutable.SynchronizedMutableList" />
+            <Class name="org.eclipse.collections.impl.list.mutable.UnmodifiableMutableList" />
+            <Class name="org.eclipse.collections.impl.set.mutable.SynchronizedMutableSet" />
+            <Class name="org.eclipse.collections.impl.set.mutable.UnmodifiableMutableSet" />
+            <Class name="org.eclipse.collections.impl.set.sorted.mutable.SynchronizedSortedSet" />
+            <Class name="org.eclipse.collections.impl.set.sorted.mutable.UnmodifiableSortedSet" />
+            <Class name="org.eclipse.collections.impl.map.mutable.SynchronizedMutableMap" />
+            <Class name="org.eclipse.collections.impl.map.sorted.mutable.SynchronizedSortedMap" />
+        </Or>
+    </Match>
+
+    <Match>
+        <!--JLM: Synchronization performed on util.concurrent instance (JLM_JSR166_UTILCONCURRENT_MONITORENTER)-->
+
+        <!--This method performs synchronization an object that is an instance of a class from the java.util.concurrent
+            package (or its subclasses). Instances of these classes have their own concurrency control mechanisms that
+            are orthogonal to the synchronization provided by the Java keyword synchronized. For example, synchronizing
+            on an AtomicBoolean will not prevent other threads from modifying the AtomicBoolean.-->
+
+        <!--Such code may be correct, but should be carefully reviewed and documented, and may confuse people who have
+            to maintain the code at a later date.-->
+        <Bug pattern="JLM_JSR166_UTILCONCURRENT_MONITORENTER" />
+        <Class name="org.eclipse.collections.impl.map.mutable.ConcurrentHashMap" />
+    </Match>
+
+    <!--NP: Read of unwritten field (NP_UNWRITTEN_FIELD)-->
+
+    <!--The program is dereferencing a field that does not seem to ever have a non-null value written to it.
+        Unless the field is initialized via some mechanism not seen by the analysis, dereferencing this value will
+        generate a null pointer exception.-->
+    <Match>
+        <Bug pattern="NP_UNWRITTEN_FIELD" />
+        <Class name="org.eclipse.collections.codegenerator.maven.GenerateMojo" />
+    </Match>
+
+    <!--UwF: Unwritten field (UWF_UNWRITTEN_FIELD)-->
+
+    <!--This field is never written.  All reads of it will return the default value. Check for errors
+    (should it have been initialized?), or remove it if it is useless.-->
+    <Match>
+        <Bug pattern="UWF_UNWRITTEN_FIELD" />
+        <Class name="org.eclipse.collections.codegenerator.maven.GenerateMojo" />
+    </Match>
+
+    <Match>
+        <!--NN: Naked notify (NN_NAKED_NOTIFY)-->
+
+        <!--A call to notify() or notifyAll() was made without any (apparent) accompanying modification to mutable
+            object state.  In general, calling a notify method on a monitor is done because some condition another
+            thread is waiting for has become true.  However, for the condition to be meaningful, it must involve a heap
+            object that is visible to both threads.-->
+
+        <!--This bug does not necessarily indicate an error, since the change to mutable object state may have taken
+            place in a method which then called the method containing the notification.-->
+        <Bug pattern="NN_NAKED_NOTIFY" />
+        <Or>
+            <Class name="org.eclipse.collections.impl.map.mutable.ConcurrentHashMapUnsafe$ResizeContainer" />
+            <Class name="org.eclipse.collections.impl.map.mutable.ConcurrentHashMap$ResizeContainer" />
+        </Or>
+    </Match>
+
+    <Match>
+        <!--Eq: Unusual equals method (EQ_UNUSUAL)-->
+
+        <!--This class doesn't do any of the patterns we recognize for checking that the type of the argument is
+            compatible with the type of the this object. There might not be anything wrong with this code, but it is
+            worth reviewing.-->
+        <Bug pattern="EQ_UNUSUAL" />
+        <Or>
+            <Class name="org.eclipse.collections.impl.set.mutable.UnifiedSet$1" />
+            <Class name="org.eclipse.collections.impl.set.strategy.mutable.UnifiedSetWithHashingStrategy$1" />
+            <Class name="org.eclipse.collections.impl.map.mutable.UnifiedMap$1" />
+            <Class name="org.eclipse.collections.impl.map.mutable.UnifiedMap$2" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.ObjectIntHashMap$1" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.ObjectIntHashMap$2" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.ObjectShortHashMap$1" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.ObjectShortHashMap$2" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.ObjectLongHashMap$1" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.ObjectLongHashMap$2" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.ObjectFloatHashMap$1" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.ObjectFloatHashMap$2" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.ObjectDoubleHashMap$1" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.ObjectDoubleHashMap$2" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.ObjectByteHashMap$1" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.ObjectByteHashMap$2" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.ObjectCharHashMap$1" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.ObjectCharHashMap$2" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.ObjectBooleanHashMap$1" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.ObjectBooleanHashMap$2" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.ObjectIntHashMapWithHashingStrategy$1" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.ObjectIntHashMapWithHashingStrategy$2" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.ObjectShortHashMapWithHashingStrategy$1" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.ObjectShortHashMapWithHashingStrategy$2" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.ObjectLongHashMapWithHashingStrategy$1" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.ObjectLongHashMapWithHashingStrategy$2" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.ObjectFloatHashMapWithHashingStrategy$1" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.ObjectFloatHashMapWithHashingStrategy$2" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.ObjectDoubleHashMapWithHashingStrategy$1" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.ObjectDoubleHashMapWithHashingStrategy$2" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.ObjectByteHashMapWithHashingStrategy$1" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.ObjectByteHashMapWithHashingStrategy$2" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.ObjectCharHashMapWithHashingStrategy$1" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.ObjectCharHashMapWithHashingStrategy$2" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.ObjectBooleanHashMapWithHashingStrategy$1" />
+            <Class name="org.eclipse.collections.impl.map.mutable.primitive.ObjectBooleanHashMapWithHashingStrategy$2" />
+            <Class name="org.eclipse.collections.impl.map.strategy.mutable.UnifiedMapWithHashingStrategy$1" />
+            <Class name="org.eclipse.collections.impl.map.strategy.mutable.UnifiedMapWithHashingStrategy$2" />
+        </Or>
+    </Match>
+
+    <Match>
+        <!--Dm: Reliance on default encoding (DM_DEFAULT_ENCODING)-->
+
+        <!--Found a call to a method which will perform a byte to String (or String to byte) conversion, and will assume
+            that the default platform encoding is suitable. This will cause the application behaviour to vary between
+            platforms. Use an alternative API and specify a charset name or Charset object explicitly.-->
+        <Bug pattern="DM_DEFAULT_ENCODING" />
+        <Class name="org.eclipse.collections.codegenerator.tools.FileUtils" />
+    </Match>
+
+    <Match>
+        <!--Nm: Class names shouldn't shadow simple name of implemented interface-->
+
+        <!--This class/interface has a simple name that is identical to that of an implemented/extended interface,
+        except that the interface is in a different package (e.g., alpha.Foo extends beta.Foo). This can be
+        exceptionally confusing, create lots of situations in which you have to look at import statements to resolve
+        references and creates many opportunities to accidentally define methods that do not override methods in their
+        superclasses.-->
+
+        <Bug pattern="NM_SAME_SIMPLE_NAME_AS_INTERFACE" />
+        <Or>
+            <Class name="org.eclipse.collections.api.block.procedure.ObjectIntProcedure" />
+        </Or>
+    </Match>
+</FindBugsFilter>

@@ -1,0 +1,51 @@
+import "copyright.stg"
+import "primitiveEquals.stg"
+import "primitiveHashCode.stg"
+import "primitiveAPI.stg"
+import "primitiveLiteral.stg"
+
+targetPath() ::= "org/eclipse/collections/api/ordered/primitive"
+
+fileName(primitive) ::= "Reversible<primitive.name>Iterable"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.api.ordered.primitive;
+
+import org.eclipse.collections.api.Lazy<name>Iterable;
+import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
+import org.eclipse.collections.api.block.function.primitive.Object<name>IntToObjectFunction;
+import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
+import org.eclipse.collections.api.ordered.ReversibleIterable;
+
+/**
+ * This file was automatically generated from template file reversiblePrimitiveIterable.stg.
+ *
+ * @since 5.0.
+ */
+public interface Reversible<name>Iterable extends Ordered<name>Iterable
+{
+    <type> getLast();
+
+    Lazy<name>Iterable asReversed();
+
+    <sharedAPI(fileName(primitive), name)>
+
+    \<V> ReversibleIterable\<V> collect(<name>ToObjectFunction\<? extends V> function);
+
+    Reversible<name>Iterable toReversed();
+
+    /**
+     * @since 6.0.
+     */
+    Reversible<name>Iterable distinct();
+
+    \<T> T injectIntoWithIndex(T injectedValue, Object<name>IntToObjectFunction\<? super T, ? extends T> function);
+}
+
+>>

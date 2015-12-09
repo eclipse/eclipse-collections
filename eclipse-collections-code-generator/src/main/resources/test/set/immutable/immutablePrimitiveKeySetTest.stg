@@ -1,0 +1,63 @@
+import "copyright.stg"
+import "primitiveLiteral.stg"
+
+isTest() ::= "true"
+
+skipBoolean() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/map/mutable/primitive"
+
+fileName(primitive) ::= "Immutable<primitive.name>MapKeySetTest"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.wrapperName, primitive.name)>
+>>
+
+body(type, wrapperName, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.map.mutable.primitive;
+
+import org.eclipse.collections.api.set.primitive.<name>Set;
+import org.eclipse.collections.api.set.primitive.Immutable<name>Set;
+import org.eclipse.collections.impl.set.mutable.primitive.AbstractImmutable<name>HashSetTestCase;
+import org.junit.Assert;
+
+/**
+ * JUnit test for {@link Immutable<name>Set} created from the freeze() method.
+ * This file was automatically generated from template file immutablePrimitiveKeySetTest.stg.
+ */
+public class Immutable<primitive.name>MapKeySetTest extends AbstractImmutable<name>HashSetTestCase
+{
+    @Override
+    protected Immutable<name>Set classUnderTest()
+    {
+        return (Immutable<name>Set) <name>ByteHashMap.newWithKeysValues(<(literal.(type))("1")>, (byte) -1, <(literal.(type))("2")>, (byte) 2, <(literal.(type))("3")>, (byte) 4).keySet().freeze();
+    }
+
+    @Override
+    protected Immutable<name>Set newWith(<type>... elements)
+    {
+        <name>ByteHashMap <type>ByteHashMap = new <name>ByteHashMap();
+        for (<type> element : elements)
+        {
+            <type>ByteHashMap.put(element, (byte) 0);
+        }
+        return (Immutable<name>Set) <type>ByteHashMap.keySet().freeze();
+    }
+
+    @Override
+    public void contains()
+    {
+        super.contains();
+        <type> collision1 = AbstractImmutable<name>HashSetTestCase.generateCollisions().getFirst();
+        <type> collision2 = AbstractImmutable<name>HashSetTestCase.generateCollisions().get(1);
+        <name>ByteHashMap <type>ByteHashMap = <name>ByteHashMap.newWithKeysValues(collision1, (byte) 0, collision2,  (byte) 0);
+        <type>ByteHashMap.removeKey(collision2);
+        <name>Set <type>Set = <type>ByteHashMap.keySet().freeze();
+        Assert.assertTrue(<type>Set.contains(collision1));
+        Assert.assertFalse(<type>Set.contains(collision2));
+    }
+}
+
+>>

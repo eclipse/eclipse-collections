@@ -1,0 +1,286 @@
+import "copyright.stg"
+import "primitiveEquals.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+
+skipBoolean() ::= "true"
+
+hasTwoPrimitives() ::= "true"
+
+isTest() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/map/mutable/primitive"
+
+fileName(primitive1, primitive2, sameTwoPrimitives) ::= "Unmodifiable<primitive1.name><primitive2.name>MapKeySetTest"
+
+class(primitive1, primitive2, sameTwoPrimitives) ::= <<
+<body(primitive1.type, primitive2.type, primitive1.name, primitive2.name, primitive1.wrapperName)>
+>>
+
+body(type1, type2, name1, name2, wrapperName1) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.map.mutable.primitive;
+
+import org.eclipse.collections.api.iterator.Mutable<name1>Iterator;
+import org.eclipse.collections.api.set.primitive.Mutable<name1>Set;
+import org.eclipse.collections.impl.block.factory.primitive.<name1>Predicates;
+<if(primitive1.floatingPoint)>import org.eclipse.collections.impl.list.Interval;<endif>
+import org.eclipse.collections.impl.list.mutable.primitive.<name1>ArrayList;
+import org.eclipse.collections.impl.set.mutable.primitive.Abstract<name1>SetTestCase;
+import org.eclipse.collections.impl.test.Verify;
+import org.junit.Assert;
+import org.junit.Test;
+
+/**
+ * JUnit test for {@link Unmodifiable<name1><name2>Map#keySet()}.
+ *
+ * This file was automatically generated from template file unmodifiablePrimitivePrimitiveMapKeySetTest.stg.
+ */
+public class Unmodifiable<name1><name2>MapKeySetTest extends Abstract<name1>SetTestCase
+{
+    @Override
+    protected Mutable<name1>Set classUnderTest()
+    {
+        return new Unmodifiable<name1><name2>Map(<name1><name2>HashMap.newWithKeysValues(<["1", "2", "3"]:keyValue(); separator=", ">)).keySet();
+    }
+
+    @Override
+    protected Mutable<name1>Set newWith(<type1>... elements)
+    {
+        <name1><name2>HashMap map = new <name1><name2>HashMap();
+        for (int i = 0; i \< elements.length; i++)
+        {
+            map.put(elements[i], <(castIntToNarrowType.(type2))("i")>);
+        }
+        return map.asUnmodifiable().keySet();
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void addAllIterable()
+    {
+        this.classUnderTest().addAll(new <name1>ArrayList());
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void add()
+    {
+        this.classUnderTest().add(<(literal.(type1))("0")>);
+    }
+
+    <if(primitive1.floatingPoint)><NaNTests()><endif>
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void addAllArray()
+    {
+        this.classUnderTest().addAll(<["0", "1"]:(literal.(type1))(); separator=", ">);
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void with()
+    {
+        this.classUnderTest().with(<(literal.(type1))("0")>);
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void without()
+    {
+        this.classUnderTest().without(<(literal.(type1))("0")>);
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void withAll()
+    {
+        this.classUnderTest().withAll(new <name1>ArrayList());
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void withoutAll()
+    {
+        this.classUnderTest().withoutAll(new <name1>ArrayList());
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void remove()
+    {
+        this.classUnderTest().remove(<(literal.(type1))("1")>);
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void removeAll_iterable()
+    {
+        this.classUnderTest().removeAll(new <name1>ArrayList());
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void removeAll()
+    {
+        this.classUnderTest().removeAll();
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void retainAll_iterable()
+    {
+        this.classUnderTest().retainAll(new <name1>ArrayList());
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void retainAll()
+    {
+        this.classUnderTest().retainAll();
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void clear()
+    {
+        this.classUnderTest().clear();
+    }
+
+    @Override
+    @Test
+    public void contains()
+    {
+        Assert.assertTrue(this.classUnderTest().contains(<(literal.(type1))("1")>));
+    }
+
+    @Override
+    public void testEquals()
+    {
+        Mutable<name1>Set set1 = this.newWith(<["1", "31", "32"]:(literal.(type1))(); separator=", ">);
+        Mutable<name1>Set set2 = this.newWith(<["32", "31", "1"]:(literal.(type1))(); separator=", ">);
+        Mutable<name1>Set set3 = this.newWith(<["32", "32", "31", "1"]:(literal.(type1))(); separator=", ">);
+        Mutable<name1>Set set4 = this.newWith(<["32", "32", "31", "1", "1"]:(literal.(type1))(); separator=", ">);
+        Mutable<name1>Set set5 = this.newWith(<["32", "1"]:(literal.(type1))(); separator=", ">);
+        Verify.assertEqualsAndHashCode(set1, set2);
+        Verify.assertEqualsAndHashCode(set1, set3);
+        Verify.assertEqualsAndHashCode(set1, set4);
+        Verify.assertEqualsAndHashCode(set2, set3);
+        Verify.assertEqualsAndHashCode(set2, set4);
+        Assert.assertNotEquals(set1, set5);
+    }
+
+    @Override
+    @Test
+    public void noneSatisfy()
+    {
+        super.noneSatisfy();
+        Assert.assertFalse(this.newWith(<["0", "1", "2"]:(literal.(type1))(); separator=", ">).noneSatisfy(<name1>Predicates.equal(<(literal.(type1))("0")>)));
+    }
+
+    @Override
+    @Test
+    public void sum()
+    {
+        super.sum();
+        Assert.assertEquals(<(wideLiteral.(type1))("3")>, this.newWith(<["0", "1", "2"]:(literal.(type1))(); separator=", ">).sum()<wideDelta.(type1)>);
+    }
+
+    <if(primitive1.floatPrimitive)>@Test
+public void sumConsistentRounding()
+{
+    Mutable<name1>Set set = this.newWith(
+            Interval.oneTo(100_000)
+                    .toList()
+                    .shuffleThis()
+                    .collect<name1>(i -> 1.0f / (i.floatValue() * i.floatValue() * i.floatValue() * i.floatValue()))
+                    .toArray());
+
+    // The test only ensures the consistency/stability of rounding. This is not meant to test the "correctness" of the float calculation result.
+    // Indeed the lower bits of this calculation result are always incorrect due to the information loss of original float values.
+    Assert.assertEquals(
+            1.082323233761663,
+            set.sum(),
+            1.0e-15);
+}
+
+    <elseif(primitive1.doublePrimitive)>@Test
+public void sumConsistentRounding()
+{
+    Mutable<name1>Set set = this.newWith(
+            Interval.oneTo(100_000)
+                    .toList()
+                    .shuffleThis()
+                    .collect<name1>(i -> <["1.0"]:(decimalLiteral.(type1))()> / (i.<type1>Value() * i.<type1>Value() * i.<type1>Value() * i.<type1>Value()))
+                    .toArray());
+
+    Assert.assertEquals(
+            1.082323233711138,
+            set.sum(),
+            1.0e-15);
+}
+
+    <endif>
+    @Override
+    public void testHashCode()
+    {
+        Mutable<name1>Set set1 = this.newWith(<["0", "1", "31", "32"]:(literal.(type1))(); separator=", ">);
+        Mutable<name1>Set set2 = this.newWith(<["32", "31", "1", "0"]:(literal.(type1))(); separator=", ">);
+        Assert.assertEquals(set1.hashCode(), set2.hashCode());
+        Assert.assertEquals(this.newObjectCollectionWith(<["0", "1", "31", "32"]:(literal.(type1))(); separator=", ">).hashCode(), set1.hashCode());
+    }
+
+    @Override
+    public void <type1>Iterator_with_remove()
+    {
+        Mutable<name1>Iterator iterator = this.classUnderTest().<type1>Iterator();
+        Assert.assertTrue(iterator.hasNext());
+        iterator.next();
+        Verify.assertThrows(UnsupportedOperationException.class, iterator::remove);
+    }
+
+    @Override
+    public void <type1>Iterator_throws_for_remove_before_next()
+    {
+        Mutable<name1>Iterator iterator = this.classUnderTest().<type1>Iterator();
+        Assert.assertTrue(iterator.hasNext());
+        Verify.assertThrows(UnsupportedOperationException.class, iterator::remove);
+    }
+
+    @Override
+    public void <type1>Iterator_throws_for_consecutive_remove()
+    {
+        // Not applicable for Unmodifiable
+    }
+}
+
+>>
+
+keyValue(value) ::= <<
+<(literal.(type1))(value)>, <(literal.(type2))(value)>
+>>
+
+NaNTests() ::= <<
+@Override
+@Test(expected = UnsupportedOperationException.class)
+public void add_NaN()
+{
+    this.newWith(<wrapperName1>.NaN).add(<wrapperName1>.NaN);
+}
+
+@Override
+@Test(expected = UnsupportedOperationException.class)
+public void add_POSITIVE_INFINITY()
+{
+    this.newWith(<wrapperName1>.POSITIVE_INFINITY).add(<wrapperName1>.POSITIVE_INFINITY);
+}
+
+@Override
+@Test(expected = UnsupportedOperationException.class)
+public void add_NEGATIVE_INFINITY()
+{
+    this.newWith(<wrapperName1>.NEGATIVE_INFINITY).add(<wrapperName1>.NEGATIVE_INFINITY);
+}
+>>

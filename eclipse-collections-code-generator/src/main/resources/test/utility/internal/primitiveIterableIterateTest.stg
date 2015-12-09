@@ -1,0 +1,69 @@
+import "copyright.stg"
+import "primitiveEquals.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+
+isTest() ::= "true"
+
+skipBoolean() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/utility/internal/primitive"
+
+fileName(primitive) ::= "<primitive.name>IterableIterateTest"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name, primitive.wrapperName)>
+>>
+
+body(type, name, wrapperName) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.utility.internal.primitive;
+
+import org.eclipse.collections.api.<name>Iterable;
+import org.eclipse.collections.impl.block.factory.primitive.<name>Predicates;
+import org.eclipse.collections.impl.list.mutable.FastList;
+import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
+import org.eclipse.collections.impl.test.Verify;
+import org.junit.Assert;
+import org.junit.Test;
+
+/**
+ * JUnit test for {@link <name>IterableIterate}.
+ * This file was automatically generated from template file primitiveIterableIterateTest.stg.
+ */
+public class <name>IterableIterateTest
+{
+    private final <name>Iterable iterable = <name>ArrayList.newListWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">);
+
+    @Test
+    public void forEach()
+    {
+        <wideType.(type)>[] sum = new <wideType.(type)>[1];
+        <name>IterableIterate.forEach(this.iterable, (<type> each) -> sum[0] += each);
+        Assert.assertEquals(<(wideLiteral.(type))("6")>, sum[0]<(wideDelta.(type))>);
+    }
+
+    @Test
+    public void select_target()
+    {
+        Verify.assertSize(2, <name>IterableIterate.select(this.iterable, <name>Predicates.greaterThan(<(literal.(type))("1")>), new <name>ArrayList(2)));
+        Verify.assertSize(1, <name>IterableIterate.select(this.iterable, <name>Predicates.greaterThan(<(literal.(type))("2")>), new <name>ArrayList(1)));
+        Verify.assertEmpty(<name>IterableIterate.select(this.iterable, <name>Predicates.lessThan(<(literal.(type))("0")>), new <name>ArrayList(3)));
+    }
+
+    @Test
+    public void reject_target()
+    {
+        Verify.assertSize(1, <name>IterableIterate.reject(this.iterable, <name>Predicates.greaterThan(<(literal.(type))("1")>), new <name>ArrayList(1)));
+        Verify.assertEmpty(<name>IterableIterate.reject(this.iterable, <name>Predicates.greaterThan(<(literal.(type))("0")>), new <name>ArrayList(0)));
+    }
+
+    @Test
+    public void collect_target()
+    {
+        Verify.assertIterableSize(3, <name>IterableIterate.collect(this.iterable, String::valueOf, FastList.\<String>newList()));
+    }
+}
+
+>>

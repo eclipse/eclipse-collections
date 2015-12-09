@@ -1,0 +1,740 @@
+import "copyright.stg"
+import "primitiveEquals.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+
+targetPath() ::= "org/eclipse/collections/impl/map/immutable/primitive"
+
+fileName(primitive) ::= "Immutable<primitive.name>ObjectHashMap"
+
+skipBoolean() ::= "true"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+collectPrimitive(name, type) ::= <<
+public Immutable<name>Collection collect<name>(<name>Function\<? super V> <type>Function)
+{
+    return this.delegate.collect<name>(<type>Function).toImmutable();
+}
+
+public \<R extends Mutable<name>Collection> R collect<name>(<name>Function\<? super V> <type>Function, R target)
+{
+    return this.delegate.collect<name>(<type>Function, target);
+}
+
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.map.immutable.primitive;
+
+import java.io.Serializable;
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.Iterator;
+
+import org.eclipse.collections.api.<name>Iterable;
+import org.eclipse.collections.api.Lazy<name>Iterable;
+import org.eclipse.collections.api.LazyIterable;
+import org.eclipse.collections.api.RichIterable;
+import org.eclipse.collections.api.bag.MutableBag;
+import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
+import org.eclipse.collections.api.block.function.Function;
+import org.eclipse.collections.api.block.function.Function0;
+import org.eclipse.collections.api.block.function.Function2;
+import org.eclipse.collections.api.block.function.primitive.BooleanFunction;
+import org.eclipse.collections.api.block.function.primitive.ByteFunction;
+import org.eclipse.collections.api.block.function.primitive.CharFunction;
+import org.eclipse.collections.api.block.function.primitive.DoubleFunction;
+import org.eclipse.collections.api.block.function.primitive.DoubleObjectToDoubleFunction;
+import org.eclipse.collections.api.block.function.primitive.FloatFunction;
+import org.eclipse.collections.api.block.function.primitive.FloatObjectToFloatFunction;
+import org.eclipse.collections.api.block.function.primitive.IntFunction;
+import org.eclipse.collections.api.block.function.primitive.IntObjectToIntFunction;
+import org.eclipse.collections.api.block.function.primitive.LongFunction;
+import org.eclipse.collections.api.block.function.primitive.LongObjectToLongFunction;
+import org.eclipse.collections.api.block.function.primitive.ShortFunction;
+import org.eclipse.collections.api.block.predicate.Predicate;
+import org.eclipse.collections.api.block.predicate.Predicate2;
+import org.eclipse.collections.api.block.predicate.primitive.<name>ObjectPredicate;
+import org.eclipse.collections.api.block.procedure.Procedure;
+import org.eclipse.collections.api.block.procedure.Procedure2;
+import org.eclipse.collections.api.block.procedure.primitive.<name>ObjectProcedure;
+import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
+import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
+import org.eclipse.collections.api.collection.ImmutableCollection;
+import org.eclipse.collections.api.collection.primitive.ImmutableBooleanCollection;
+import org.eclipse.collections.api.collection.primitive.ImmutableByteCollection;
+import org.eclipse.collections.api.collection.primitive.ImmutableCharCollection;
+import org.eclipse.collections.api.collection.primitive.ImmutableDoubleCollection;
+import org.eclipse.collections.api.collection.primitive.ImmutableFloatCollection;
+import org.eclipse.collections.api.collection.primitive.ImmutableIntCollection;
+import org.eclipse.collections.api.collection.primitive.ImmutableLongCollection;
+import org.eclipse.collections.api.collection.primitive.ImmutableShortCollection;
+import org.eclipse.collections.api.collection.primitive.MutableBooleanCollection;
+import org.eclipse.collections.api.collection.primitive.MutableByteCollection;
+import org.eclipse.collections.api.collection.primitive.MutableCharCollection;
+import org.eclipse.collections.api.collection.primitive.MutableDoubleCollection;
+import org.eclipse.collections.api.collection.primitive.MutableFloatCollection;
+import org.eclipse.collections.api.collection.primitive.MutableIntCollection;
+import org.eclipse.collections.api.collection.primitive.MutableLongCollection;
+import org.eclipse.collections.api.collection.primitive.MutableShortCollection;
+import org.eclipse.collections.api.iterator.<name>Iterator;
+import org.eclipse.collections.api.list.MutableList;
+import org.eclipse.collections.api.map.MapIterable;
+import org.eclipse.collections.api.map.MutableMap;
+import org.eclipse.collections.api.map.primitive.<name>ObjectMap;
+import org.eclipse.collections.api.map.primitive.Immutable<name>ObjectMap;
+import org.eclipse.collections.api.map.primitive.Mutable<name>ObjectMap;
+import org.eclipse.collections.api.map.sorted.MutableSortedMap;
+import org.eclipse.collections.api.multimap.Multimap;
+import org.eclipse.collections.api.multimap.MutableMultimap;
+import org.eclipse.collections.api.partition.PartitionIterable;
+import org.eclipse.collections.api.set.MutableSet;
+import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
+import org.eclipse.collections.api.set.sorted.MutableSortedSet;
+import org.eclipse.collections.api.tuple.Pair;
+import org.eclipse.collections.api.tuple.primitive.<name>ObjectPair;
+import org.eclipse.collections.impl.UnmodifiableIteratorAdapter;
+import org.eclipse.collections.impl.collection.mutable.UnmodifiableMutableCollection;
+import org.eclipse.collections.impl.map.mutable.primitive.<name>ObjectHashMap;
+import org.eclipse.collections.impl.set.mutable.primitive.Unmodifiable<name>Set;
+
+/**
+ * Immutable<name>ObjectHashMap is the non-modifiable equivalent of {@link <name>ObjectHashMap}.
+ * This file was automatically generated from template file immutablePrimitiveObjectHashMap.stg.
+ *
+ * @since 4.0.
+ */
+final class Immutable<name>ObjectHashMap\<V> extends AbstractImmutable<name>ObjectMap\<V> implements Serializable
+{
+    private static final long serialVersionUID = 1L;
+    private final Mutable<name>ObjectMap\<V> delegate;
+
+    Immutable<name>ObjectHashMap(<name>ObjectMap\<? extends V> delegate)
+    {
+        this.delegate = new <name>ObjectHashMap\<V>(delegate);
+    }
+
+    public V get(<type> key)
+    {
+        return this.delegate.get(key);
+    }
+
+    public V getIfAbsent(<type> key, Function0\<? extends V> ifAbsent)
+    {
+        return this.delegate.getIfAbsent(key, ifAbsent);
+    }
+
+    public boolean containsKey(<type> key)
+    {
+        return this.delegate.containsKey(key);
+    }
+
+    public boolean containsValue(Object value)
+    {
+        return this.delegate.containsValue(value);
+    }
+
+    public Immutable<name>ObjectMap\<V> tap(Procedure\<? super V> procedure)
+    {
+        this.forEach(procedure);
+        return this;
+    }
+
+    public void forEachValue(Procedure\<? super V> procedure)
+    {
+        this.delegate.forEachValue(procedure);
+    }
+
+    public void forEachKey(<name>Procedure procedure)
+    {
+        this.delegate.forEachKey(procedure);
+    }
+
+    public void forEachKeyValue(<name>ObjectProcedure\<? super V> procedure)
+    {
+        this.delegate.forEachKeyValue(procedure);
+    }
+
+    public Immutable<name>ObjectMap\<V> select(<name>ObjectPredicate\<? super V> predicate)
+    {
+        return this.delegate.select(predicate).toImmutable();
+    }
+
+    public Immutable<name>ObjectMap\<V> reject(<name>ObjectPredicate\<? super V> predicate)
+    {
+        return this.delegate.reject(predicate).toImmutable();
+    }
+
+    public Immutable<name>ObjectMap\<V> toImmutable()
+    {
+        return this;
+    }
+
+    public int size()
+    {
+        return this.delegate.size();
+    }
+
+    public boolean isEmpty()
+    {
+        return this.delegate.isEmpty();
+    }
+
+    public boolean notEmpty()
+    {
+        return this.delegate.notEmpty();
+    }
+
+    public V getFirst()
+    {
+        return this.delegate.getFirst();
+    }
+
+    public V getLast()
+    {
+        return this.delegate.getLast();
+    }
+
+    public boolean contains(Object object)
+    {
+        return this.delegate.contains(object);
+    }
+
+    public boolean containsAllIterable(Iterable\<?> source)
+    {
+        return this.delegate.containsAllIterable(source);
+    }
+
+    public boolean containsAll(Collection\<?> source)
+    {
+        return this.delegate.containsAll(source);
+    }
+
+    public boolean containsAllArguments(Object... elements)
+    {
+        return this.delegate.containsAllArguments(elements);
+    }
+
+    public ImmutableCollection\<V> select(Predicate\<? super V> predicate)
+    {
+        return this.delegate.select(predicate).toImmutable();
+    }
+
+    public \<R extends Collection\<V>\> R select(Predicate\<? super V> predicate, R target)
+    {
+        return this.delegate.select(predicate, target);
+    }
+
+    public \<P> ImmutableCollection\<V> selectWith(Predicate2\<? super V, ? super P> predicate, P parameter)
+    {
+        return this.delegate.selectWith(predicate, parameter).toImmutable();
+    }
+
+    public \<P, R extends Collection\<V>\> R selectWith(Predicate2\<? super V, ? super P> predicate, P parameter, R targetCollection)
+    {
+        return this.delegate.selectWith(predicate, parameter, targetCollection);
+    }
+
+    public ImmutableCollection\<V> reject(Predicate\<? super V> predicate)
+    {
+        return this.delegate.reject(predicate).toImmutable();
+    }
+
+    public \<R extends Collection\<V>\> R reject(Predicate\<? super V> predicate, R target)
+    {
+        return this.delegate.reject(predicate, target);
+    }
+
+    public \<P> ImmutableCollection\<V> rejectWith(Predicate2\<? super V, ? super P> predicate, P parameter)
+    {
+        return this.delegate.rejectWith(predicate, parameter).toImmutable();
+    }
+
+    public \<P, R extends Collection\<V>\> R rejectWith(Predicate2\<? super V, ? super P> predicate, P parameter, R targetCollection)
+    {
+        return this.delegate.rejectWith(predicate, parameter, targetCollection);
+    }
+
+    public PartitionIterable\<V> partition(Predicate\<? super V> predicate)
+    {
+        return this.delegate.partition(predicate);
+    }
+
+    public \<P> PartitionIterable\<V> partitionWith(Predicate2\<? super V, ? super P> predicate, P parameter)
+    {
+        return this.delegate.partitionWith(predicate, parameter);
+    }
+
+    public \<S> RichIterable\<S> selectInstancesOf(Class\<S> clazz)
+    {
+        return this.delegate.selectInstancesOf(clazz);
+    }
+
+    public \<VV> ImmutableCollection\<VV> collect(Function\<? super V, ? extends VV> function)
+    {
+        return this.delegate.collect(function).toImmutable();
+    }
+
+    <collectPrimitive("Boolean", "boolean")>
+    <collectPrimitive("Byte", "byte")>
+    <collectPrimitive("Char", "char")>
+    <collectPrimitive("Double", "double")>
+    <collectPrimitive("Float", "float")>
+    <collectPrimitive("Int", "int")>
+    <collectPrimitive("Long", "long")>
+    <collectPrimitive("Short", "short")>
+    public \<P, VV> ImmutableCollection\<VV> collectWith(Function2\<? super V, ? super P, ? extends VV> function, P parameter)
+    {
+        return this.delegate.collectWith(function, parameter).toImmutable();
+    }
+
+    public \<VV> RichIterable\<VV> collectIf(Predicate\<? super V> predicate, Function\<? super V, ? extends VV> function)
+    {
+        return this.delegate.collectIf(predicate, function);
+    }
+
+    public \<VV> RichIterable\<VV> flatCollect(Function\<? super V, ? extends Iterable\<VV>\> function)
+    {
+        return this.delegate.flatCollect(function);
+    }
+
+    public V detect(Predicate\<? super V> predicate)
+    {
+        return this.delegate.detect(predicate);
+    }
+
+    public \<P> V detectWith(Predicate2\<? super V, ? super P> predicate, P parameter)
+    {
+        return this.delegate.detectWith(predicate, parameter);
+    }
+
+    public V detectIfNone(Predicate\<? super V> predicate, Function0\<? extends V> function)
+    {
+        return this.delegate.detectIfNone(predicate, function);
+    }
+
+    public \<P> V detectWithIfNone(Predicate2\<? super V, ? super P> predicate, P parameter, Function0\<? extends V> function)
+    {
+        return this.delegate.detectWithIfNone(predicate, parameter, function);
+    }
+
+    public int count(Predicate\<? super V> predicate)
+    {
+        return this.delegate.count(predicate);
+    }
+
+    public \<P> int countWith(Predicate2\<? super V, ? super P> predicate, P parameter)
+    {
+        return this.delegate.countWith(predicate, parameter);
+    }
+
+    public boolean anySatisfy(Predicate\<? super V> predicate)
+    {
+        return this.delegate.anySatisfy(predicate);
+    }
+
+    public \<P> boolean anySatisfyWith(Predicate2\<? super V, ? super P> predicate, P parameter)
+    {
+        return this.delegate.anySatisfyWith(predicate, parameter);
+    }
+
+    public boolean allSatisfy(Predicate\<? super V> predicate)
+    {
+        return this.delegate.allSatisfy(predicate);
+    }
+
+    public \<P> boolean allSatisfyWith(Predicate2\<? super V, ? super P> predicate, P parameter)
+    {
+        return this.delegate.allSatisfyWith(predicate, parameter);
+    }
+
+    public boolean noneSatisfy(Predicate\<? super V> predicate)
+    {
+        return this.delegate.noneSatisfy(predicate);
+    }
+
+    public \<P> boolean noneSatisfyWith(Predicate2\<? super V, ? super P> predicate, P parameter)
+    {
+        return this.delegate.noneSatisfyWith(predicate, parameter);
+    }
+
+    public \<IV> IV injectInto(IV injectedValue, Function2\<? super IV, ? super V, ? extends IV> function)
+    {
+        return this.delegate.injectInto(injectedValue, function);
+    }
+
+    public int injectInto(int injectedValue, IntObjectToIntFunction\<? super V> function)
+    {
+        return this.delegate.injectInto(injectedValue, function);
+    }
+
+    public long injectInto(long injectedValue, LongObjectToLongFunction\<? super V> function)
+    {
+        return this.delegate.injectInto(injectedValue, function);
+    }
+
+    public float injectInto(float injectedValue, FloatObjectToFloatFunction\<? super V> function)
+    {
+        return this.delegate.injectInto(injectedValue, function);
+    }
+
+    public double injectInto(double injectedValue, DoubleObjectToDoubleFunction\<? super V> function)
+    {
+        return this.delegate.injectInto(injectedValue, function);
+    }
+
+    public MutableList\<V> toList()
+    {
+        return this.delegate.toList();
+    }
+
+    public MutableList\<V> toSortedList()
+    {
+        return this.delegate.toSortedList();
+    }
+
+    public MutableList\<V> toSortedList(Comparator\<? super V> comparator)
+    {
+        return this.delegate.toSortedList(comparator);
+    }
+
+    public MutableSet\<V> toSet()
+    {
+        return this.delegate.toSet();
+    }
+
+    public MutableSortedSet\<V> toSortedSet()
+    {
+        return this.delegate.toSortedSet();
+    }
+
+    public MutableSortedSet\<V> toSortedSet(Comparator\<? super V> comparator)
+    {
+        return this.delegate.toSortedSet(comparator);
+    }
+
+    public MutableBag\<V> toBag()
+    {
+        return this.delegate.toBag();
+    }
+
+    public MutableSortedBag\<V> toSortedBag()
+    {
+        return this.delegate.toSortedBag();
+    }
+
+    public MutableSortedBag\<V> toSortedBag(Comparator\<? super V> comparator)
+    {
+        return this.delegate.toSortedBag(comparator);
+    }
+
+    public \<VV extends Comparable\<? super VV>\> MutableSortedBag\<V> toSortedBagBy(Function\<? super V, ? extends VV> function)
+    {
+        return this.delegate.toSortedBagBy(function);
+    }
+
+    public \<NK, NV> MutableMap\<NK, NV> toMap(Function\<? super V, ? extends NK> keyFunction, Function\<? super V, ? extends NV> valueFunction)
+    {
+        return this.delegate.toMap(keyFunction, valueFunction);
+    }
+
+    public \<NK, NV> MutableSortedMap\<NK, NV> toSortedMap(Function\<? super V, ? extends NK> keyFunction, Function\<? super V, ? extends NV> valueFunction)
+    {
+        return this.delegate.toSortedMap(keyFunction, valueFunction);
+    }
+
+    public \<NK, NV> MutableSortedMap\<NK, NV> toSortedMap(Comparator\<? super NK> comparator, Function\<? super V, ? extends NK> keyFunction, Function\<? super V, ? extends NV> valueFunction)
+    {
+        return this.delegate.toSortedMap(comparator, keyFunction, valueFunction);
+    }
+
+    public LazyIterable\<V> asLazy()
+    {
+        return this.delegate.asLazy();
+    }
+
+    public Object[] toArray()
+    {
+        return this.delegate.toArray();
+    }
+
+    public \<T> T[] toArray(T[] a)
+    {
+        return this.delegate.toArray(a);
+    }
+
+    public V min(Comparator\<? super V> comparator)
+    {
+        return this.delegate.min(comparator);
+    }
+
+    public V max(Comparator\<? super V> comparator)
+    {
+        return this.delegate.max(comparator);
+    }
+
+    public V min()
+    {
+        return this.delegate.min();
+    }
+
+    public V max()
+    {
+        return this.delegate.max();
+    }
+
+    public long sumOfInt(IntFunction\<? super V> function)
+    {
+        return this.delegate.sumOfInt(function);
+    }
+
+    public double sumOfFloat(FloatFunction\<? super V> function)
+    {
+        return this.delegate.sumOfFloat(function);
+    }
+
+    public long sumOfLong(LongFunction\<? super V> function)
+    {
+        return this.delegate.sumOfLong(function);
+    }
+
+    public double sumOfDouble(DoubleFunction\<? super V> function)
+    {
+        return this.delegate.sumOfDouble(function);
+    }
+
+    public String makeString()
+    {
+        return this.delegate.makeString();
+    }
+
+    public String makeString(String separator)
+    {
+        return this.delegate.makeString(separator);
+    }
+
+    public String makeString(String start, String separator, String end)
+    {
+        return this.delegate.makeString(start, separator, end);
+    }
+
+    public void appendString(Appendable appendable)
+    {
+        this.delegate.appendString(appendable);
+    }
+
+    public void appendString(Appendable appendable, String separator)
+    {
+        this.delegate.appendString(appendable, separator);
+    }
+
+    public void appendString(Appendable appendable, String start, String separator, String end)
+    {
+        this.delegate.appendString(appendable, start, separator, end);
+    }
+
+    public \<VV> Multimap\<VV, V> groupBy(Function\<? super V, ? extends VV> function)
+    {
+        return this.delegate.groupBy(function);
+    }
+
+    public \<VV, R extends MutableMultimap\<VV, V>\> R groupBy(Function\<? super V, ? extends VV> function, R target)
+    {
+        return this.delegate.groupBy(function, target);
+    }
+
+    public \<VV> Multimap\<VV, V> groupByEach(Function\<? super V, ? extends Iterable\<VV>\> function)
+    {
+        return this.delegate.groupByEach(function);
+    }
+
+    public \<VV, R extends MutableMultimap\<VV, V>\> R groupByEach(Function\<? super V, ? extends Iterable\<VV>\> function, R target)
+    {
+        return this.delegate.groupByEach(function, target);
+    }
+
+    public \<VV> MapIterable\<VV, V> groupByUniqueKey(Function\<? super V, ? extends VV> function)
+    {
+        return this.delegate.groupByUniqueKey(function);
+    }
+
+    public \<VV, R extends MutableMap\<VV, V>\> R groupByUniqueKey(Function\<? super V, ? extends VV> function, R target)
+    {
+        return this.delegate.groupByUniqueKey(function, target);
+    }
+
+    public \<S> RichIterable\<Pair\<V, S>\> zip(Iterable\<S> that)
+    {
+        return this.delegate.zip(that);
+    }
+
+    public \<S, R extends Collection\<Pair\<V, S>\>> R zip(Iterable\<S> that, R target)
+    {
+        return this.delegate.zip(that, target);
+    }
+
+    public RichIterable\<Pair\<V, Integer>\> zipWithIndex()
+    {
+        return this.delegate.zipWithIndex();
+    }
+
+    public \<R extends Collection\<Pair\<V, Integer>\>> R zipWithIndex(R target)
+    {
+        return this.delegate.zipWithIndex(target);
+    }
+
+    public RichIterable\<RichIterable\<V>\> chunk(int size)
+    {
+        return this.delegate.chunk(size);
+    }
+
+    public \<K, VV> MapIterable\<K, VV> aggregateInPlaceBy(Function\<? super V, ? extends K> groupBy, Function0\<? extends VV> zeroValueFactory, Procedure2\<? super VV, ? super V> mutatingAggregator)
+    {
+        return this.delegate.aggregateInPlaceBy(groupBy, zeroValueFactory, mutatingAggregator);
+    }
+
+    public \<K, VV> MapIterable\<K, VV> aggregateBy(Function\<? super V, ? extends K> groupBy, Function0\<? extends VV> zeroValueFactory, Function2\<? super VV, ? super V, ? extends VV> nonMutatingAggregator)
+    {
+        return this.delegate.aggregateBy(groupBy, zeroValueFactory, nonMutatingAggregator);
+    }
+
+    public \<VV extends Comparable\<? super VV>\> V maxBy(Function\<? super V, ? extends VV> function)
+    {
+        return this.delegate.maxBy(function);
+    }
+
+    public \<VV extends Comparable\<? super VV>\> V minBy(Function\<? super V, ? extends VV> function)
+    {
+        return this.delegate.minBy(function);
+    }
+
+    public \<VV extends Comparable\<? super VV>\> MutableSortedSet\<V> toSortedSetBy(Function\<? super V, ? extends VV> function)
+    {
+        return this.delegate.toSortedSetBy(function);
+    }
+
+    public \<VV extends Comparable\<? super VV>\> MutableList\<V> toSortedListBy(Function\<? super V, ? extends VV> function)
+    {
+        return this.delegate.toSortedListBy(function);
+    }
+
+    public \<VV, R extends Collection\<VV>\> R flatCollect(Function\<? super V, ? extends Iterable\<VV>\> function, R target)
+    {
+        return this.delegate.flatCollect(function, target);
+    }
+
+    public \<VV, R extends Collection\<VV>\> R collectIf(Predicate\<? super V> predicate, Function\<? super V, ? extends VV> function, R target)
+    {
+        return this.delegate.collectIf(predicate, function, target);
+    }
+
+    public \<P, VV, R extends Collection\<VV>\> R collectWith(Function2\<? super V, ? super P, ? extends VV> function, P parameter, R targetCollection)
+    {
+        return this.delegate.collectWith(function, parameter, targetCollection);
+    }
+
+    public \<VV, R extends Collection\<VV>\> R collect(Function\<? super V, ? extends VV> function, R target)
+    {
+        return this.delegate.collect(function, target);
+    }
+
+    public Immutable<name>ObjectMap\<V> newWithKeyValue(<type> key, V value)
+    {
+        <name>ObjectHashMap\<V> map = new <name>ObjectHashMap\<V>(this);
+        map.put(key, value);
+        return map.toImmutable();
+    }
+
+    public Immutable<name>ObjectMap\<V> newWithoutKey(<type> key)
+    {
+        <name>ObjectHashMap\<V> map = new <name>ObjectHashMap\<V>(this);
+        map.removeKey(key);
+        return map.toImmutable();
+    }
+
+    public Immutable<name>ObjectMap\<V> newWithoutAllKeys(<name>Iterable keys)
+    {
+        <name>ObjectHashMap\<V> map = new <name>ObjectHashMap\<V>(this);
+        <name>Iterator iterator = keys.<type>Iterator();
+        while (iterator.hasNext())
+        {
+            map.removeKey(iterator.next());
+        }
+        return map.toImmutable();
+    }
+
+    public void forEach(Procedure\<? super V> procedure)
+    {
+        this.each(procedure);
+    }
+
+    public void each(Procedure\<? super V> procedure)
+    {
+        this.delegate.forEach(procedure);
+    }
+
+    public void forEachWithIndex(ObjectIntProcedure\<? super V> objectIntProcedure)
+    {
+        this.delegate.forEachWithIndex(objectIntProcedure);
+    }
+
+    public \<P> void forEachWith(Procedure2\<? super V, ? super P> procedure, P parameter)
+    {
+        this.delegate.forEachWith(procedure, parameter);
+    }
+
+    public Iterator\<V> iterator()
+    {
+        return new UnmodifiableIteratorAdapter\<V>(this.delegate.iterator());
+    }
+
+    public Mutable<name>Set keySet()
+    {
+        return Unmodifiable<name>Set.of(this.delegate.keySet());
+    }
+
+    public Collection\<V> values()
+    {
+        return UnmodifiableMutableCollection.of(this.delegate.values());
+    }
+
+    public Lazy<name>Iterable keysView()
+    {
+        return this.delegate.keysView();
+    }
+
+    public RichIterable\<<name>ObjectPair\<V>\> keyValuesView()
+    {
+        return this.delegate.keyValuesView();
+    }
+
+    @Override
+    public boolean equals(Object obj)
+    {
+        return this.delegate.equals(obj);
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return this.delegate.hashCode();
+    }
+
+    @Override
+    public String toString()
+    {
+        return this.delegate.toString();
+    }
+
+    private Object writeReplace()
+    {
+        return new Immutable<name>ObjectMapSerializationProxy\<V>(this);
+    }
+}
+
+>>

@@ -1,0 +1,87 @@
+import "copyright.stg"
+import "primitiveEquals.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+
+isTest() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/bag/mutable/primitive"
+
+fileName(primitive) ::= "<primitive.name>HashBagTest"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name, primitive.wrapperName)>
+>>
+
+body(type, name, wrapperName) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.bag.mutable.primitive;
+
+import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
+import org.eclipse.collections.impl.test.Verify;
+import org.junit.Assert;
+import org.junit.Test;
+
+/**
+ * JUnit test for {@link <name>HashBag}.
+ * This file was automatically generated from template file primitiveHashBagTest.stg.
+ */
+public class <name>HashBagTest extends AbstractMutable<name>BagTestCase
+{
+    @Override
+    protected final <name>HashBag classUnderTest()
+    {
+        return <name>HashBag.newBagWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">);
+    }
+
+    @Override
+    protected <name>HashBag newWith(<type>... elements)
+    {
+        return <name>HashBag.newBagWith(elements);
+    }
+
+    @Override
+    @Test
+    public void size()
+    {
+        super.size();
+        Verify.assertSize(0, new <name>HashBag(3));
+        Verify.assertSize(0, <name>HashBag.newBag(3));
+        Verify.assertSize(3, <name>HashBag.newBagWith(<["0", "1", "2"]:(literal.(type))(); separator=", ">));
+        Verify.assertSize(3, new <name>HashBag(<name>HashBag.newBagWith(<["0", "1", "2"]:(literal.(type))(); separator=", ">)));
+        Verify.assertSize(3, <name>HashBag.newBag(<name>HashBag.newBagWith(<["0", "1", "2"]:(literal.(type))(); separator=", ">)));
+        Verify.assertSize(3, <name>HashBag.newBag(<name>ArrayList.newListWith(<["0", "1", "2"]:(literal.(type))(); separator=", ">)));
+        Verify.assertSize(3, new <name>HashBag(<name>ArrayList.newListWith(<["0", "1", "2"]:(literal.(type))(); separator=", ">)));
+    }
+
+    @Override
+    @Test
+    public void with()
+    {
+        super.with();
+        <name>HashBag hashBag = new <name>HashBag().with(<["1"]:(literal.(type))(); separator=", ">);
+        <name>HashBag hashBag0 = new <name>HashBag().with(<["1", "2"]:(literal.(type))(); separator=", ">);
+        <name>HashBag hashBag1 = new <name>HashBag().with(<["1", "2", "3"]:(literal.(type))(); separator=", ">);
+        <name>HashBag hashBag2 = new <name>HashBag().with(<(literal.(type))("1")>).with(<(literal.(type))("2")>).with(<(literal.(type))("3")>).with(<(literal.(type))("4")>);
+        <name>HashBag hashBag3 = new <name>HashBag().with(<(literal.(type))("1")>).with(<(literal.(type))("2")>).with(<(literal.(type))("3")>).with(<(literal.(type))("4")>).with(<(literal.(type))("5")>);
+        Assert.assertEquals(<name>HashBag.newBagWith(<(literal.(type))("1")>), hashBag);
+        Assert.assertEquals(<name>HashBag.newBagWith(<["1", "2"]:(literal.(type))(); separator=", ">), hashBag0);
+        Assert.assertEquals(<name>HashBag.newBagWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">), hashBag1);
+        Assert.assertEquals(<name>HashBag.newBagWith(<["1", "2", "3", "4"]:(literal.(type))(); separator=", ">), hashBag2);
+        Assert.assertEquals(<name>HashBag.newBagWith(<["1", "2", "3", "4", "5"]:(literal.(type))(); separator=", ">), hashBag3);
+    }
+
+    @Override
+    @Test
+    public void injectInto()
+    {
+        super.injectInto();
+
+        <name>HashBag hashBag = <name>HashBag.newBagWith(<["1", "1", "2", "2", "2", "2", "3"]:(literal.(type))(); separator=", ">);
+        <wrapperName> sum = hashBag.injectInto(<wrapperName>.valueOf(<(literal.(type))("4")>), (<wrapperName> result, <type> value) -> <wrapperName>.valueOf((<type>) (result + value)));
+        Assert.assertEquals(<wrapperName>.valueOf(<(literal.(type))("17")>), sum);
+    }
+}
+
+>>

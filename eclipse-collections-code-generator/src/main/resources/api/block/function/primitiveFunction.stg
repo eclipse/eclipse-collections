@@ -1,0 +1,31 @@
+import "copyright.stg"
+
+targetPath() ::= "org/eclipse/collections/api/block/function/primitive"
+
+fileName(primitive) ::= "<primitive.name>Function"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name, primitive.wrapperName)>
+>>
+
+body(type, name, wrapperName) ::= <<
+<copyright()>
+
+package org.eclipse.collections.api.block.function.primitive;
+
+import java.io.Serializable;
+
+/**
+ * <name>Function is a primitive Function which may be used to reduce the overhead
+ * of autoboxing <wrapperName> objects in places where primitive <type>s could be used.
+ * This file was automatically generated from template file primitiveFunction.stg.
+ *
+ * @since 3.0.
+ */
+public interface <name>Function\<T>
+        extends Serializable
+{
+    <type> <type>ValueOf(T anObject);
+}
+
+>>

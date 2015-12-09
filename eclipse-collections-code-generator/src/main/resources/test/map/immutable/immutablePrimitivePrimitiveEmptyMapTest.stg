@@ -1,0 +1,246 @@
+import "copyright.stg"
+import "primitiveEquals.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+
+isTest() ::= "true"
+
+hasTwoPrimitives() ::= "true"
+
+skipBoolean() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/map/immutable/primitive"
+
+fileName(primitive1, primitive2, sameTwoPrimitives) ::= "Immutable<primitive1.name><primitive2.name>EmptyMapTest"
+
+class(primitive1, primitive2, sameTwoPrimitives) ::= <<
+<body(primitive1.type, primitive2.type, primitive1.name, primitive2.name, primitive2.wrapperName)>
+>>
+
+body(type1, type2, name1, name2, wrapperName2) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.map.immutable.primitive;
+
+import java.util.NoSuchElementException;
+
+import org.eclipse.collections.api.iterator.<name2>Iterator;
+import org.eclipse.collections.api.map.primitive.Immutable<name1><name2>Map;
+import org.eclipse.collections.impl.factory.primitive.<name1><name2>Maps;
+import org.eclipse.collections.impl.list.mutable.primitive.<name1>ArrayList;
+<if(!sameTwoPrimitives)>import org.eclipse.collections.impl.list.mutable.primitive.<name2>ArrayList;<endif>
+import org.eclipse.collections.impl.math.Mutable<wrapperName2>;
+import org.eclipse.collections.impl.test.Verify;
+import org.junit.Assert;
+import org.junit.Test;
+
+/**
+ * JUnit test for {@link Immutable<name1><name2>EmptyMap}.
+ * This file was automatically generated from template file immutablePrimitivePrimitiveEmptyMapTest.stg.
+ */
+public class Immutable<name1><name2>EmptyMapTest extends AbstractImmutable<name1><name2>MapTestCase
+{
+    @Override
+    protected Immutable<name1><name2>Map classUnderTest()
+    {
+        return <name1><name2>Maps.immutable.with();
+    }
+
+    @Test
+    public void newWithKeyValue()
+    {
+        Immutable<name1><name2>Map map1 = this.classUnderTest();
+        Immutable<name1><name2>Map expected = this.newWithKeysValues(<["0"]:keyValue(); separator=", ">);
+        Assert.assertEquals(expected, map1.newWithKeyValue(<["0"]:keyValue(); separator=", ">));
+        Assert.assertNotSame(map1, map1.newWithKeyValue(<["0"]:keyValue(); separator=", ">));
+        Assert.assertEquals(this.classUnderTest(), map1);
+    }
+
+    @Test
+    public void newWithoutKeyValue()
+    {
+        Immutable<name1><name2>Map map1 = this.classUnderTest();
+        Assert.assertEquals(map1, map1.newWithoutKey(<(literal.(type1))("32")>));
+        Assert.assertSame(map1, map1.newWithoutKey(<(literal.(type1))("32")>));
+        Assert.assertEquals(this.classUnderTest(), map1);
+    }
+
+    @Test
+    public void newWithoutAllKeys()
+    {
+        Immutable<name1><name2>Map map1 = this.classUnderTest();
+        Assert.assertEquals(map1, map1.newWithoutAllKeys(<name1>ArrayList.newListWith(<(literal.(type1))("0")>, <(literal.(type1))("32")>)));
+        Assert.assertSame(map1, map1.newWithoutAllKeys(<name1>ArrayList.newListWith(<(literal.(type1))("0")>, <(literal.(type1))("32")>)));
+        Assert.assertEquals(this.classUnderTest(), map1);
+    }
+
+    @Override
+    @Test
+    public void containsValue()
+    {
+        Assert.assertFalse(this.map.containsValue(<(literal.(type2))("0")>));
+        Assert.assertFalse(this.map.containsValue(<(literal.(type2))("31")>));
+        Assert.assertFalse(this.map.containsValue(<(literal.(type2))("32")>));
+    }
+
+    @Override
+    @Test
+    public void contains()
+    {
+        Assert.assertFalse(this.map.contains(<(literal.(type2))("0")>));
+        Assert.assertFalse(this.map.contains(<(literal.(type2))("31")>));
+        Assert.assertFalse(this.map.contains(<(literal.(type2))("32")>));
+    }
+
+    @Override
+    @Test
+    public void getIfAbsent()
+    {
+        Assert.assertEquals(<(wideLiteral.(type2))("5")>, this.map.getIfAbsent(<(literal.(type1))("0")>, <(literal.(type2))("5")>)<wideDelta.(type2)>);
+        Assert.assertEquals(<(wideLiteral.(type2))("15")>, this.map.getIfAbsent(<(literal.(type1))("31")>, <(literal.(type2))("15")>)<wideDelta.(type2)>);
+        Assert.assertEquals(<(wideLiteral.(type2))("25")>, this.map.getIfAbsent(<(literal.(type1))("32")>, <(literal.(type2))("25")>)<wideDelta.(type2)>);
+    }
+
+    @Override
+    @Test
+    public void asLazy()
+    {
+        Verify.assertEmpty(this.map.asLazy().toList());
+    }
+
+    @Override
+    @Test
+    public void <type2>Iterator()
+    {
+        <name2>Iterator iterator = this.map.<type2>Iterator();
+        Assert.assertFalse(iterator.hasNext());
+        Verify.assertThrows(NoSuchElementException.class, iterator::next);
+    }
+
+    @Override
+    @Test
+    public void getOrThrow()
+    {
+        Verify.assertThrows(IllegalStateException.class, () -> this.classUnderTest().getOrThrow(<(literal.(type1))("0")>));
+        Verify.assertThrows(IllegalStateException.class, () -> this.classUnderTest().getOrThrow(<(literal.(type1))("32")>));
+    }
+
+    @Override
+    @Test
+    public void get()
+    {
+        Assert.assertEquals(<(wideLiteral.(type2))("0")>, this.map.get(<(literal.(type1))("0")>)<wideDelta.(type2)>);
+        Assert.assertEquals(<(wideLiteral.(type2))("0")>, this.map.get(<(literal.(type1))("31")>)<wideDelta.(type2)>);
+        Assert.assertEquals(<(wideLiteral.(type2))("0")>, this.map.get(<(literal.(type1))("32")>)<wideDelta.(type2)>);
+    }
+
+    @Override
+    @Test
+    public void containsAll()
+    {
+        Assert.assertFalse(this.map.containsAll(<["0", "31", "32"]:(literal.(type2))(); separator=", ">));
+        Assert.assertFalse(this.map.containsAll(<["0", "31", "35"]:(literal.(type2))(); separator=", ">));
+        Assert.assertTrue(this.map.containsAll());
+    }
+
+    @Override
+    @Test
+    public void containsKey()
+    {
+        Assert.assertFalse(this.map.containsKey(<(literal.(type1))("0")>));
+        Assert.assertFalse(this.map.containsKey(<(literal.(type1))("31")>));
+        Assert.assertFalse(this.map.containsKey(<(literal.(type1))("32")>));
+    }
+
+    @Override
+    @Test
+    public void keysView()
+    {
+        Assert.assertEquals(<name1>ArrayList.newListWith(), this.map.keysView().toSortedList());
+    }
+
+    @Override
+    @Test
+    public void toSortedArray()
+    {
+        Assert.assertEquals(this.map.toSortedArray().length, 0);
+    }
+
+    @Override
+    @Test
+    public void notEmpty()
+    {
+        Assert.assertFalse(this.classUnderTest().notEmpty());
+    }
+
+    @Override
+    @Test
+    public void containsAll_Iterable()
+    {
+        Assert.assertFalse(this.map.containsAll(<name2>ArrayList.newListWith(<["0", "31", "32"]:(literal.(type2))(); separator=", ">)));
+        Assert.assertFalse(this.map.containsAll(<name2>ArrayList.newListWith(<["0", "31", "35"]:(literal.(type2))(); separator=", ">)));
+        Assert.assertTrue(this.map.containsAll(new <name2>ArrayList()));
+    }
+
+    @Override
+    @Test
+    public void isEmpty()
+    {
+        Assert.assertTrue(this.classUnderTest().isEmpty());
+    }
+
+    @Override
+    public void select()
+    {
+        Assert.assertEquals(this.classUnderTest(), this.classUnderTest().select((<type1> value1, <type2> value2) -> true));
+    }
+
+    @Override
+    @Test
+    public void reject()
+    {
+        Assert.assertEquals(this.classUnderTest(), this.classUnderTest().reject((<type1> value1, <type2> value2) -> false));
+    }
+
+    @Override
+    @Test
+    public void select_value()
+    {
+        Assert.assertEquals(<name2>ArrayList.newListWith(), this.classUnderTest().select((<type2> value) -> true));
+    }
+
+    @Override
+    @Test
+    public void reject_value()
+    {
+        Assert.assertEquals(new <name2>ArrayList(), this.classUnderTest().reject((<type2> value) -> false));
+    }
+
+    @Override
+    @Test
+    public void count()
+    {
+        Assert.assertEquals(0, this.classUnderTest().count((<type2> value) -> true));
+    }
+
+    @Override
+    @Test
+    public void sum()
+    {
+        Assert.assertEquals(<(wideLiteral.(type2))("0")>, this.classUnderTest().sum()<wideDelta.(type2)>);
+    }
+
+    @Test
+    public void injectInto()
+    {
+        Immutable<name1><name2>EmptyMap iterable = new Immutable<name1><name2>EmptyMap();
+        Mutable<wrapperName2> result = iterable.injectInto(new Mutable<wrapperName2>(<(literal.(type2))("0")>), Mutable<wrapperName2>::add);
+        Assert.assertEquals(new Mutable<wrapperName2>(<(literal.(type2))("0")>), result);
+    }
+}
+
+>>
+
+keyValue(value) ::= <<
+<(literal.(type1))(value)>, <(literal.(type2))(value)>
+>>

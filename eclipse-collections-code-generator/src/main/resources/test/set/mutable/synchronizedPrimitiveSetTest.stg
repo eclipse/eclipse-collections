@@ -1,0 +1,56 @@
+import "copyright.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+
+isTest() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/set/mutable/primitive"
+
+fileName(primitive) ::= "Synchronized<primitive.name>SetTest"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.wrapperName, primitive.name)>
+>>
+
+body(type, wrapperName, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.set.mutable.primitive;
+
+import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
+import org.junit.Assert;
+import org.junit.Test;
+
+/**
+ * JUnit test for {@link Synchronized<name>Set}.
+ * This file was automatically generated from template file synchronizedPrimitiveSetTest.stg.
+ */
+public class Synchronized<name>SetTest extends Abstract<name>SetTestCase
+{
+    @Override
+    protected Synchronized<name>Set classUnderTest()
+    {
+        return new Synchronized<name>Set(<name>HashSet.newSetWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">));
+    }
+
+    @Override
+    protected Synchronized<name>Set newWith(<type>... elements)
+    {
+        return new Synchronized<name>Set(<name>HashSet.newSetWith(elements));
+    }
+
+    @Override
+    @Test
+    public void asSynchronized()
+    {
+        super.asSynchronized();
+        Synchronized<name>Set set = this.classUnderTest();
+        Mutable<name>Set setWithLockObject = new Synchronized<name>Set(<name>HashSet.newSetWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">), new Object());
+        Assert.assertEquals(set, setWithLockObject);
+        Assert.assertSame(setWithLockObject, setWithLockObject.asSynchronized());
+        Assert.assertSame(set, set.asSynchronized());
+        Assert.assertEquals(set, set.asSynchronized());
+    }
+}
+
+>>

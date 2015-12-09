@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <option name="DEFAULT_COMPILER" value="Javac" />
+    <addNotNullAssertions enabled="false" />
+    <resourceExtensions>
+      <entry name=".+\.(properties|xml|html|dtd|tld)" />
+      <entry name=".+\.(gif|png|jpeg|jpg)" />
+    </resourceExtensions>
+    <wildcardResourcePatterns>
+      <entry name="!?*.java" />
+    </wildcardResourcePatterns>
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="false">
+        <processorPath useClasspath="true" />
+      </profile>
+      <profile default="false" name="Maven default annotation processors profile" enabled="false">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="acceptance-tests" />
+        <module name="eclipse-collections" />
+        <module name="eclipse-collections-api" />
+        <module name="eclipse-collections-code-generator" />
+        <module name="eclipse-collections-code-generator-ant" />
+        <module name="eclipse-collections-code-generator-maven-plugin" />
+        <module name="eclipse-collections-forkjoin" />
+        <module name="eclipse-collections-testutils" />
+        <module name="jmh-scala-tests" />
+        <module name="jmh-tests" />
+        <module name="junit-trait-runner" />
+        <module name="performance-tests" />
+        <module name="scala-unit-tests" />
+        <module name="serialization-tests" />
+        <module name="unit-tests" />
+        <module name="unit-tests-java8" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="acceptance-tests" target="1.8" />
+      <module name="eclipse-collections-parent" target="1.5" />
+      <module name="eclipse-collections" target="1.5" />
+      <module name="eclipse-collections-api" target="1.5" />
+      <module name="eclipse-collections-code-generator" target="1.5" />
+      <module name="eclipse-collections-code-generator-ant" target="1.5" />
+      <module name="eclipse-collections-code-generator-maven-plugin" target="1.5" />
+      <module name="eclipse-collections-forkjoin" target="1.7" />
+      <module name="eclipse-collections-testutils" target="1.5" />
+      <module name="jmh-tests" target="1.8" />
+      <module name="junit-trait-runner" target="1.8" />
+      <module name="performance-tests" target="1.8" />
+      <module name="scala-unit-tests" target="1.5" />
+      <module name="serialization-tests" target="1.6" />
+      <module name="unit-tests" target="1.8" />
+      <module name="unit-tests-java8" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

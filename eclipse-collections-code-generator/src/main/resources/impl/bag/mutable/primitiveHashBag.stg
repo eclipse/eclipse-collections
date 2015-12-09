@@ -1,0 +1,756 @@
+import "copyright.stg"
+import "primitiveEquals.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+
+targetPath() ::= "org/eclipse/collections/impl/bag/mutable/primitive"
+
+fileName(primitive) ::= "<primitive.name>HashBag"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.bag.mutable.primitive;
+
+import java.io.Externalizable;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
+import java.util.NoSuchElementException;
+
+import org.eclipse.collections.api.<name>Iterable;
+import org.eclipse.collections.api.bag.MutableBag;
+import org.eclipse.collections.api.bag.primitive.<name>Bag;
+import org.eclipse.collections.api.bag.primitive.Immutable<name>Bag;
+import org.eclipse.collections.api.bag.primitive.Mutable<name>Bag;
+import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
+import org.eclipse.collections.api.block.function.primitive.Object<name>ToObjectFunction;
+import org.eclipse.collections.api.block.function.primitive.IntToIntFunction;
+import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
+import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
+import org.eclipse.collections.api.block.procedure.primitive.<name>IntProcedure;
+import org.eclipse.collections.api.iterator.<name>Iterator;
+import org.eclipse.collections.api.iterator.Mutable<name>Iterator;
+import org.eclipse.collections.api.set.primitive.<name>Set;
+import org.eclipse.collections.impl.Counter;
+import org.eclipse.collections.impl.bag.mutable.HashBag;
+import org.eclipse.collections.impl.block.factory.primitive.IntToIntFunctions;
+import org.eclipse.collections.impl.factory.primitive.<name>Bags;
+import org.eclipse.collections.impl.map.mutable.primitive.<name>IntHashMap;
+import org.eclipse.collections.impl.primitive.Abstract<name>Iterable;
+import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
+import net.jcip.annotations.NotThreadSafe;
+
+/**
+ * <name>HashBag is similar to {@link HashBag}, and is memory-optimized for <type> primitives.
+ * This file was automatically generated from template file primitiveHashBag.stg.
+ *
+ * @since 3.0.
+ */
+@NotThreadSafe
+public final class <name>HashBag extends Abstract<name>Iterable implements Mutable<name>Bag, Externalizable
+{
+    private static final long serialVersionUID = 1L;
+
+    private <name>IntHashMap items;
+    private int size;
+
+    public <name>HashBag()
+    {
+        this.items = new <name>IntHashMap();
+    }
+
+    public <name>HashBag(int size)
+    {
+        this.items = new <name>IntHashMap(size);
+    }
+
+    public <name>HashBag(<name>Iterable iterable)
+    {
+        this();
+        this.addAll(iterable);
+    }
+
+    public <name>HashBag(<type>... elements)
+    {
+        this();
+        this.addAll(elements);
+    }
+
+    public <name>HashBag(<name>HashBag bag)
+    {
+        this.items = new <name>IntHashMap(bag.sizeDistinct());
+        this.addAll(bag);
+    }
+
+    public static <name>HashBag newBag(int size)
+    {
+        return new <name>HashBag(size);
+    }
+
+    public static <name>HashBag newBagWith(<type>... source)
+    {
+        return new <name>HashBag(source);
+    }
+
+    public static <name>HashBag newBag(<name>Iterable source)
+    {
+        if (source instanceof <name>HashBag)
+        {
+            return new <name>HashBag((<name>HashBag) source);
+        }
+        return new <name>HashBag(source);
+    }
+
+    public static <name>HashBag newBag(<name>Bag source)
+    {
+        return new <name>HashBag(source);
+    }
+
+    @Override
+    public boolean isEmpty()
+    {
+        return this.items.isEmpty();
+    }
+
+    @Override
+    public boolean notEmpty()
+    {
+        return this.items.notEmpty();
+    }
+
+    @Override
+    public int size()
+    {
+        return this.size;
+    }
+
+    public int sizeDistinct()
+    {
+        return this.items.size();
+    }
+
+    public void clear()
+    {
+        this.items.clear();
+        this.size = 0;
+    }
+
+    public <name>HashBag with(<type> element)
+    {
+        this.add(element);
+        return this;
+    }
+
+    public <name>HashBag with(<type> element1, <type> element2)
+    {
+        this.add(element1);
+        this.add(element2);
+        return this;
+    }
+
+    public <name>HashBag with(<type> element1, <type> element2, <type> element3)
+    {
+        this.add(element1);
+        this.add(element2);
+        this.add(element3);
+        return this;
+    }
+
+    public <name>HashBag withAll(<name>Iterable iterable)
+    {
+        this.addAll(iterable);
+        return this;
+    }
+
+    public <name>HashBag without(<type> element)
+    {
+        this.remove(element);
+        return this;
+    }
+
+    public <name>HashBag withoutAll(<name>Iterable iterable)
+    {
+        this.removeAll(iterable);
+        return this;
+    }
+
+    public boolean contains(<type> value)
+    {
+        return this.items.containsKey(value);
+    }
+
+    public int occurrencesOf(<type> item)
+    {
+        return this.items.get(item);
+    }
+
+    public void forEachWithOccurrences(<name>IntProcedure procedure)
+    {
+        this.items.forEachKeyValue(procedure);
+    }
+
+    public boolean add(<type> item)
+    {
+        this.items.updateValue(item, 0, IntToIntFunctions.increment());
+        this.size++;
+        return true;
+    }
+
+    public boolean remove(<type> item)
+    {
+        int newValue = this.items.updateValue(item, 0, IntToIntFunctions.decrement());
+        if (newValue \<= 0)
+        {
+            this.items.removeKey(item);
+            if (newValue == 0)
+            {
+                this.size--;
+            }
+            return newValue == 0;
+        }
+        this.size--;
+        return true;
+    }
+
+    public boolean addAll(<type>... source)
+    {
+        if (source.length == 0)
+        {
+            return false;
+        }
+
+        for (<type> each : source)
+        {
+            this.add(each);
+        }
+        return true;
+    }
+
+    public boolean addAll(<name>Iterable source)
+    {
+        if (source.isEmpty())
+        {
+            return false;
+        }
+        if (source instanceof <name>Bag)
+        {
+            <name>Bag otherBag = (<name>Bag) source;
+            otherBag.forEachWithOccurrences(new <name>IntProcedure()
+            {
+                public void value(<type> each, int occurrences)
+                {
+                    <name>HashBag.this.addOccurrences(each, occurrences);
+                }
+            });
+        }
+        else
+        {
+            <name>Iterator iterator = source.<type>Iterator();
+            while (iterator.hasNext())
+            {
+                <type> each = iterator.next();
+                this.add(each);
+            }
+        }
+        return true;
+    }
+
+    public boolean removeAll(<type>... source)
+    {
+        if (source.length == 0)
+        {
+            return false;
+        }
+        int oldSize = this.size();
+        for (<type> each : source)
+        {
+            int occurrences = this.items.removeKeyIfAbsent(each, 0);
+            this.size -= occurrences;
+        }
+        return this.size() != oldSize;
+    }
+
+    public boolean removeAll(<name>Iterable source)
+    {
+        if (source.isEmpty())
+        {
+            return false;
+        }
+        int oldSize = this.size();
+        if (source instanceof <name>Bag)
+        {
+            <name>Bag otherBag = (<name>Bag) source;
+            otherBag.forEachWithOccurrences(new <name>IntProcedure()
+            {
+                public void value(<type> each, int occurrences)
+                {
+                    int oldOccurrences = <name>HashBag.this.items.removeKeyIfAbsent(each, 0);
+                    <name>HashBag.this.size -= oldOccurrences;
+                }
+            });
+        }
+        else
+        {
+            <name>Iterator iterator = source.<type>Iterator();
+            while (iterator.hasNext())
+            {
+                <type> each = iterator.next();
+                int occurrences = this.items.removeKeyIfAbsent(each, 0);
+                this.size -= occurrences;
+            }
+        }
+        return this.size() != oldSize;
+    }
+
+    public boolean retainAll(<name>Iterable source)
+    {
+        int oldSize = this.size();
+        final <name>Set sourceSet = source instanceof <name>Set ? (<name>Set) source : source.toSet();
+        <name>HashBag retained = this.select(new <name>Predicate()
+        {
+            public boolean accept(<type> key)
+            {
+                return sourceSet.contains(key);
+            }
+        });
+        if (retained.size() != oldSize)
+        {
+            this.items = retained.items;
+            this.size = retained.size;
+            return true;
+        }
+        return false;
+    }
+
+    public boolean retainAll(<type>... source)
+    {
+        return this.retainAll(<name>HashSet.newSetWith(source));
+    }
+
+    public void addOccurrences(<type> item, final int occurrences)
+    {
+        if (occurrences \< 0)
+        {
+            throw new IllegalArgumentException("Cannot add a negative number of occurrences");
+        }
+        if (occurrences > 0)
+        {
+            this.items.updateValue(item, 0, new IntToIntFunction()
+            {
+                public int valueOf(int intParameter)
+                {
+                    return intParameter + occurrences;
+                }
+            });
+            this.size += occurrences;
+        }
+    }
+
+    public boolean removeOccurrences(<type> item, final int occurrences)
+    {
+        if (occurrences \< 0)
+        {
+            throw new IllegalArgumentException("Cannot remove a negative number of occurrences");
+        }
+
+        if (occurrences == 0)
+        {
+            return false;
+        }
+
+        int newValue = this.items.updateValue(item, 0, new IntToIntFunction()
+        {
+            public int valueOf(int intParameter)
+            {
+                return intParameter - occurrences;
+            }
+        });
+
+        if (newValue \<= 0)
+        {
+            this.size -= occurrences - newValue;
+            this.items.removeKey(item);
+            return newValue + occurrences != 0;
+        }
+
+        this.size -= occurrences;
+        return true;
+    }
+
+    public void forEach(final <name>Procedure procedure)
+    {
+        this.each(procedure);
+    }
+
+    /**
+     * @since 7.0.
+     */
+    public void each(final <name>Procedure procedure)
+    {
+        this.items.forEachKeyValue(new <name>IntProcedure()
+        {
+            public void value(<type> key, int occurrences)
+            {
+                for (int i = 0; i \< occurrences; i++)
+                {
+                    procedure.value(key);
+                }
+            }
+        });
+    }
+
+    public <name>HashBag select(final <name>Predicate predicate)
+    {
+        final <name>HashBag result = new <name>HashBag();
+        this.forEachWithOccurrences(new <name>IntProcedure()
+        {
+            public void value(<type> each, int occurrences)
+            {
+                if (predicate.accept(each))
+                {
+                    result.addOccurrences(each, occurrences);
+                }
+            }
+        });
+        return result;
+    }
+
+    public <name>HashBag reject(final <name>Predicate predicate)
+    {
+        final <name>HashBag result = new <name>HashBag();
+        this.forEachWithOccurrences(new <name>IntProcedure()
+        {
+            public void value(<type> each, int occurrences)
+            {
+                if (!predicate.accept(each))
+                {
+                    result.addOccurrences(each, occurrences);
+                }
+            }
+        });
+        return result;
+    }
+
+    public \<T> T injectInto(T injectedValue, Object<name>ToObjectFunction\<? super T, ? extends T> function)
+    {
+        T result = injectedValue;
+        <name>Iterator it = this.<type>Iterator();
+        while (it.hasNext())
+        {
+            result = function.valueOf(result, it.next());
+        }
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object otherBag)
+    {
+        if (otherBag == this)
+        {
+            return true;
+        }
+        if (!(otherBag instanceof <name>Bag))
+        {
+            return false;
+        }
+        final <name>Bag bag = (<name>Bag) otherBag;
+        if (this.sizeDistinct() != bag.sizeDistinct())
+        {
+            return false;
+        }
+
+        return this.items.keysView().allSatisfy(new <name>Predicate()
+        {
+            public boolean accept(<type> key)
+            {
+                return <name>HashBag.this.occurrencesOf(key) == bag.occurrencesOf(key);
+            }
+        });
+    }
+
+    @Override
+    public int hashCode()
+    {
+        final Counter result = new Counter();
+        this.forEachWithOccurrences(new <name>IntProcedure()
+        {
+            public void value(<type> eachItem, int occurrences)
+            {
+                result.add(<(hashCode.(type))("eachItem")> ^ occurrences);
+            }
+        });
+        return result.getCount();
+    }
+
+    public void appendString(
+            final Appendable appendable,
+            String start,
+            final String separator,
+            String end)
+    {
+        final boolean[] firstItem = {true};
+        try
+        {
+            appendable.append(start);
+            this.items.forEachKeyValue(new <name>IntProcedure()
+            {
+                public void value(<type> each, int occurrences)
+                {
+                    try
+                    {
+                        for (int i = 0; i \< occurrences; i++)
+                        {
+                            if (!firstItem[0])
+                            {
+                                appendable.append(separator);
+                            }
+                            appendable.append(String.valueOf(each));
+                            firstItem[0] = false;
+                        }
+                    }
+                    catch (IOException e)
+                    {
+                        throw new RuntimeException(e);
+                    }
+                }
+            });
+            appendable.append(end);
+        }
+        catch (IOException e)
+        {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public int count(final <name>Predicate predicate)
+    {
+        final Counter result = new Counter();
+        this.forEachWithOccurrences(new <name>IntProcedure()
+        {
+            public void value(<type> each, int occurrences)
+            {
+                if (predicate.accept(each))
+                {
+                    result.add(occurrences);
+                }
+            }
+        });
+        return result.getCount();
+    }
+
+    public boolean anySatisfy(<name>Predicate predicate)
+    {
+        return this.items.keysView().anySatisfy(predicate);
+    }
+
+    public boolean allSatisfy(<name>Predicate predicate)
+    {
+        return this.items.keysView().allSatisfy(predicate);
+    }
+
+    public boolean noneSatisfy(<name>Predicate predicate)
+    {
+        return this.items.keysView().noneSatisfy(predicate);
+    }
+
+    public <type> detectIfNone(<name>Predicate predicate, <type> ifNone)
+    {
+        return this.items.keysView().detectIfNone(predicate, ifNone);
+    }
+
+    public \<V> MutableBag\<V> collect(final <name>ToObjectFunction\<? extends V> function)
+    {
+        final HashBag\<V> result = HashBag.newBag(this.items.size());
+        this.forEachWithOccurrences(new <name>IntProcedure()
+        {
+            public void value(<type> each, int occurrences)
+            {
+                result.addOccurrences(function.valueOf(each), occurrences);
+            }
+        });
+        return result;
+    }
+
+    public <type> max()
+    {
+        if (this.isEmpty())
+        {
+            throw new NoSuchElementException();
+        }
+        return this.items.keysView().max();
+    }
+
+    public <type> min()
+    {
+        if (this.isEmpty())
+        {
+            throw new NoSuchElementException();
+        }
+        return this.items.keysView().min();
+    }
+
+    <if(primitive.floatingPoint)>public <wideType.(type)> sum()
+{
+    final <wideType.(type)>[] result = {<wideZero.(type)>};
+    final <wideType.(type)>[] compensation = {<wideZero.(type)>};
+    this.forEachWithOccurrences(new <name>IntProcedure()
+    {
+        public void value(<type> each, int occurrences)
+        {
+            for(int i = 0; i \< occurrences; i++)
+            {
+                <wideType.(type)> adjustedValue = (<wideType.(type)>) each - compensation[0];
+                <wideType.(type)> nextSum = result[0] + adjustedValue;
+                compensation[0] = nextSum - result[0] - adjustedValue;
+                result[0] = nextSum;
+            }
+        }
+    });
+    return result[0];
+}
+
+    <else>public <wideType.(type)> sum()
+{
+    final <wideType.(type)>[] result = {<wideZero.(type)>};
+    this.forEachWithOccurrences(new <name>IntProcedure()
+    {
+        public void value(<type> each, int occurrences)
+        {
+            result[0] += (<wideType.(type)>) each * occurrences;
+        }
+    });
+    return result[0];
+}
+
+    <endif>
+    public <type>[] toArray()
+    {
+        final <type>[] array = new <type>[this.size()];
+        final int[] index = {0};
+
+        this.forEachWithOccurrences(new <name>IntProcedure()
+        {
+            public void value(<type> each, int occurrences)
+            {
+                for (int i = 0; i \< occurrences; i++)
+                {
+                    array[index[0]] = each;
+                    index[0]++;
+                }
+            }
+        });
+        return array;
+    }
+
+    public Mutable<name>Bag asUnmodifiable()
+    {
+        return new Unmodifiable<name>Bag(this);
+    }
+
+    public Mutable<name>Bag asSynchronized()
+    {
+        return new Synchronized<name>Bag(this);
+    }
+
+    public Immutable<name>Bag toImmutable()
+    {
+        return <name>Bags.immutable.withAll(this);
+    }
+
+    public Mutable<name>Iterator <type>Iterator()
+    {
+        return new InternalIterator();
+    }
+
+    public void writeExternal(final ObjectOutput out) throws IOException
+    {
+        out.writeInt(this.items.size());
+        try
+        {
+            this.items.forEachKeyValue(new <name>IntProcedure()
+            {
+                public void value(<type> each, int occurrences)
+                {
+                    try
+                    {
+                        out.write<name>(each);
+                        out.writeInt(occurrences);
+                    }
+                    catch (IOException e)
+                    {
+                        throw new RuntimeException(e);
+                    }
+                }
+            });
+        }
+        catch (RuntimeException e)
+        {
+            if (e.getCause() instanceof IOException)
+            {
+                throw (IOException) e.getCause();
+            }
+            throw e;
+        }
+    }
+
+    public void readExternal(ObjectInput in) throws IOException
+    {
+        int size = in.readInt();
+        this.items = new <name>IntHashMap(size);
+        for (int i = 0; i \< size; i++)
+        {
+            this.addOccurrences(in.read<name>(), in.readInt());
+        }
+    }
+
+    private class InternalIterator implements Mutable<name>Iterator
+    {
+        private final Mutable<name>Iterator <type>Iterator = <name>HashBag.this.items.keySet().<type>Iterator();
+
+        private <type> currentItem;
+        private int occurrences;
+        private boolean canRemove;
+
+        public boolean hasNext()
+        {
+            return this.occurrences > 0 || this.<type>Iterator.hasNext();
+        }
+
+        public <type> next()
+        {
+            if (this.occurrences == 0)
+            {
+                this.currentItem = this.<type>Iterator.next();
+                this.occurrences = <name>HashBag.this.occurrencesOf(this.currentItem);
+            }
+            this.occurrences--;
+            this.canRemove = true;
+            return this.currentItem;
+        }
+
+        public void remove()
+        {
+            if (!this.canRemove)
+            {
+                throw new IllegalStateException();
+            }
+            if (this.occurrences == 0)
+            {
+                this.<type>Iterator.remove();
+                <name>HashBag.this.size--;
+            }
+            else
+            {
+                <name>HashBag.this.remove(this.currentItem);
+            }
+            this.canRemove = false;
+        }
+    }
+}
+
+>>

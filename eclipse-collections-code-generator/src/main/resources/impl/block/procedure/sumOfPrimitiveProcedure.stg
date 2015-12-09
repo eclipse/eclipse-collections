@@ -1,0 +1,51 @@
+import "copyright.stg"
+
+skipBoolean() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/block/procedure"
+
+fileName(primitive) ::= "SumOf<primitive.name>Procedure"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.block.procedure;
+
+import org.eclipse.collections.api.block.function.Function;
+import org.eclipse.collections.api.block.function.primitive.<name>Function;
+import org.eclipse.collections.api.block.procedure.Procedure;
+
+/**
+ * Implementation of {@link Procedure} that holds on to the summation of elements seen so far,
+ * determined by the {@link Function}.
+ *
+ * This file was automatically generated from template file sumOfPrimitiveProcedure.stg.
+ */
+public class SumOf<name>Procedure\<T> implements Procedure\<T>
+{
+    private static final long serialVersionUID = 1L;
+
+    protected final <name>Function\<? super T> function;
+    protected <type> result;
+
+    public SumOf<name>Procedure(<name>Function\<? super T> function)
+    {
+        this.function = function;
+    }
+
+    public <type> getResult()
+    {
+        return this.result;
+    }
+
+    public void value(T each)
+    {
+        this.result += this.function.<type>ValueOf(each);
+    }
+}
+
+>>

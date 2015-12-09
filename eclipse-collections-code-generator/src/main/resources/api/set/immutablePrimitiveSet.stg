@@ -1,0 +1,37 @@
+import "copyright.stg"
+import "primitiveAPI.stg"
+
+targetPath() ::= "org/eclipse/collections/api/set/primitive"
+
+fileName(primitive) ::= "Immutable<primitive.name>Set"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.api.set.primitive;
+
+import org.eclipse.collections.api.<name>Iterable;
+import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
+import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
+import org.eclipse.collections.api.collection.primitive.Immutable<name>Collection;
+import org.eclipse.collections.api.set.ImmutableSet;
+
+/**
+ * This file was automatically generated from template file immutablePrimitiveSet.stg.
+ *
+ * @since 3.0.
+ */
+public interface Immutable<name>Set extends Immutable<name>Collection, <name>Set
+{
+    <sharedAPI(fileName(primitive), name)>
+
+    \<V> ImmutableSet\<V> collect(<name>ToObjectFunction\<? extends V> function);
+
+    <immutableAPI(fileName(primitive), type, name)>
+}
+
+>>

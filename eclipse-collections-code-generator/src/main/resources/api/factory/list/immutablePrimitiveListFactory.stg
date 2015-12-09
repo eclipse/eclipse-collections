@@ -1,0 +1,64 @@
+import "copyright.stg"
+
+targetPath() ::= "org/eclipse/collections/api/factory/list/primitive"
+
+fileName(primitive) ::= "Immutable<primitive.name>ListFactory"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.api.factory.list.primitive;
+
+import org.eclipse.collections.api.<name>Iterable;
+import org.eclipse.collections.api.list.primitive.Immutable<name>List;
+
+/**
+ * A factory which creates instances of type {@link Immutable<name>List}.
+ * This file was automatically generated from template file immutablePrimitiveListFactory.stg.
+ *
+ * @since 3.2.
+ */
+public interface Immutable<name>ListFactory
+{
+    /**
+     * @since 6.0
+     */
+    Immutable<name>List empty();
+
+    /**
+     * Same as {@link #empty()}.
+     */
+    Immutable<name>List of();
+
+    /**
+     * Same as {@link #empty()}.
+     */
+    Immutable<name>List with();
+
+    /**
+     * Same as {@link #with(<type>)}.
+     */
+    Immutable<name>List of(<type> one);
+
+    Immutable<name>List with(<type> one);
+
+    /**
+     * Same as {@link #with(<type>[])}.
+     */
+    Immutable<name>List of(<type>... items);
+
+    Immutable<name>List with(<type>... items);
+
+    /**
+     * Same as {@link #withAll(<name>Iterable)}.
+     */
+    Immutable<name>List ofAll(<name>Iterable items);
+
+    Immutable<name>List withAll(<name>Iterable items);
+}
+
+>>

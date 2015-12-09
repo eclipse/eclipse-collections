@@ -1,0 +1,209 @@
+import "copyright.stg"
+import "primitiveLiteral.stg"
+
+isTest() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/list/immutable/primitive"
+
+fileName(primitive) ::= "Immutable<primitive.name>EmptyListTest"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.wrapperName, primitive.name)>
+>>
+
+body(type, wrapperName, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.list.immutable.primitive;
+
+import java.util.NoSuchElementException;
+
+import org.eclipse.collections.api.<name>Iterable;
+import org.eclipse.collections.api.collection.primitive.Immutable<name>Collection;
+import org.eclipse.collections.api.list.primitive.Immutable<name>List;
+import org.eclipse.collections.impl.block.factory.primitive.<name>Predicates;
+import org.eclipse.collections.impl.math.Mutable<wrapperName>;
+import org.eclipse.collections.impl.factory.primitive.<name>Lists;
+import org.eclipse.collections.impl.test.Verify;
+import org.junit.Assert;
+import org.junit.Test;
+
+/**
+ * JUnit test for {@link Immutable<name>EmptyList}.
+ * This file was automatically generated from template file immutablePrimitiveEmptyListTest.stg.
+ */
+public class Immutable<name>EmptyListTest extends AbstractImmutable<name>ListTestCase
+{
+    @Override
+    protected Immutable<name>List classUnderTest()
+    {
+        return Immutable<name>EmptyList.INSTANCE;
+    }
+
+    @Override
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void get()
+    {
+        this.classUnderTest().get(1);
+    }
+
+    @Override
+    @Test
+    public void newWithout()
+    {
+        Immutable<name>Collection emptyCollection = this.classUnderTest();
+        Immutable<name>Collection newCollection = emptyCollection.newWithout(<(literal.(type))("9")>);
+        Assert.assertEquals(this.newMutableCollectionWith(), newCollection);
+        Assert.assertSame(emptyCollection, newCollection);
+        Assert.assertEquals(this.newMutableCollectionWith(), emptyCollection);
+    }
+
+    @Override
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void getFirst()
+    {
+        this.classUnderTest().getFirst();
+    }
+
+    @Override
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void getLast()
+    {
+        this.classUnderTest().getLast();
+    }
+
+    @Override
+    @Test
+    public void isEmpty()
+    {
+        Verify.assertEmpty(this.classUnderTest());
+    }
+
+    @Override
+    @Test
+    public void notEmpty()
+    {
+        Assert.assertFalse(this.classUnderTest().notEmpty());
+    }
+
+    @Override
+    @Test
+    public void select()
+    {
+        super.select();
+        <name>Iterable iterable = this.classUnderTest();
+        Verify.assertEmpty(iterable.select(<name>Predicates.lessThan(<(literal.(type))("4")>)));
+        <name>Iterable <type>Iterable = iterable.select(<name>Predicates.greaterThan(<(literal.(type))("4")>));
+        Verify.assertEmpty(<type>Iterable);
+        Assert.assertSame(iterable, <type>Iterable);
+    }
+
+    @Override
+    @Test
+    public void reject()
+    {
+        super.reject();
+        <name>Iterable iterable = this.classUnderTest();
+        Verify.assertEmpty(iterable.reject(<name>Predicates.lessThan(<(literal.(type))("4")>)));
+        <name>Iterable <type>Iterable = iterable.reject(<name>Predicates.greaterThan(<(literal.(type))("4")>));
+        Verify.assertEmpty(<type>Iterable);
+        Assert.assertSame(iterable, <type>Iterable);
+    }
+
+    @Override
+    @Test
+    public void testEquals()
+    {
+        Verify.assertEqualsAndHashCode(this.classUnderTest(), this.classUnderTest());
+        Verify.assertEqualsAndHashCode(this.newMutableCollectionWith(), this.classUnderTest());
+        Verify.assertPostSerializedIdentity(this.newWith());
+        Assert.assertNotEquals(this.classUnderTest(), this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">));
+        Assert.assertNotEquals(this.classUnderTest(), this.newWith(<(literal.(type))("1")>));
+    }
+
+    @Override
+    @Test(expected = ArithmeticException.class)
+    public void average()
+    {
+        this.classUnderTest().average();
+    }
+
+    @Override
+    @Test(expected = NoSuchElementException.class)
+    public void max()
+    {
+        this.classUnderTest().max();
+    }
+
+    @Override
+    @Test(expected = NoSuchElementException.class)
+    public void min()
+    {
+        this.classUnderTest().min();
+    }
+
+    @Test
+    public void dotProduct()
+    {
+        Immutable<name>EmptyList list1 = new Immutable<name>EmptyList();
+        Immutable<name>EmptyList list2 = new Immutable<name>EmptyList();
+        Assert.assertEquals(<(wideLiteral.(type))("0")>, list1.dotProduct(list2)<(wideDelta.(type))>);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void dotProduct_throwsOnListsOfDifferentSizes()
+    {
+        Immutable<name>EmptyList list1 = new Immutable<name>EmptyList();
+        Immutable<name>ArrayList list2 = Immutable<name>ArrayList.newListWith(<["1", "2"]:(literal.(type))(); separator=", ">);
+        list1.dotProduct(list2);
+    }
+
+    @Override
+    @Test
+    public void injectInto()
+    {
+        super.injectInto();
+
+        Immutable<name>EmptyList iterable = new Immutable<name>EmptyList();
+        Mutable<wrapperName> result = iterable.injectInto(new Mutable<wrapperName>(<(literal.(type))("0")>), Mutable<wrapperName>::add);
+        Assert.assertEquals(new Mutable<wrapperName>(<(literal.(type))("0")>), result);
+    }
+
+    @Override
+    @Test
+    public void injectIntoWithIndex()
+    {
+        Immutable<name>List list1 = this.newWith();
+        Immutable<name>List list2 = this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">);
+        Mutable<wrapperName> result = list1.injectIntoWithIndex(new Mutable<wrapperName>(<(literal.(type))("0")>), (Mutable<wrapperName> object, <type> value, int index) -> object.add(<(castIntToNarrowTypeWithParens.(type))("value * list2.get(index)")>));
+        Assert.assertEquals(new Mutable<wrapperName>(<(literal.(type))("0")>), result);
+    }
+
+    @Override
+    @Test
+    public void toReversed()
+    {
+        Assert.assertEquals(<name>Lists.immutable.of(), this.classUnderTest().toReversed());
+    }
+
+    @Override
+    @Test
+    public void forEachWithIndex()
+    {
+        <wideType.(type)>[] sum = new <wideType.(type)>[1];
+        this.classUnderTest().forEachWithIndex((<type> each, int index) -> sum[0] += each + index);
+
+        Assert.assertEquals(0, sum[0], <(literal.(type))("0")>);
+    }
+
+    @Test
+    public void binarySearch()
+    {
+        Assert.assertEquals(-1, this.classUnderTest().binarySearch(<(literal.(type))("7")>));
+        Assert.assertEquals(-1, this.classUnderTest().binarySearch(<(literal.(type))("0")>));
+        Assert.assertEquals(-1, this.classUnderTest().binarySearch(<(literal.(type))("100")>));
+        Assert.assertEquals(-1, this.classUnderTest().binarySearch(<(literal.(type))("-1")>));
+    }
+}
+
+>>

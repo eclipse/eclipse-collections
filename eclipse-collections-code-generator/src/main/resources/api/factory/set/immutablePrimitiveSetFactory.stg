@@ -1,0 +1,64 @@
+import "copyright.stg"
+
+targetPath() ::= "org/eclipse/collections/api/factory/set/primitive"
+
+fileName(primitive) ::= "Immutable<primitive.name>SetFactory"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.api.factory.set.primitive;
+
+import org.eclipse.collections.api.<name>Iterable;
+import org.eclipse.collections.api.set.primitive.Immutable<name>Set;
+
+/**
+ * A factory which creates instances of type {@link Immutable<name>Set}.
+ * This file was automatically generated from template file immutablePrimitiveSetFactory.stg.
+ *
+ * @since 4.0.
+ */
+public interface Immutable<name>SetFactory
+{
+    /**
+     * @since 6.0
+     */
+    Immutable<name>Set empty();
+
+    /**
+     * Same as {@link #empty()}.
+     */
+    Immutable<name>Set of();
+
+    /**
+     * Same as {@link #empty()}.
+     */
+    Immutable<name>Set with();
+
+    /**
+     * Same as {@link #with(<type>)}.
+     */
+    Immutable<name>Set of(<type> one);
+
+    Immutable<name>Set with(<type> one);
+
+    /**
+     * Same as {@link #with(<type>[])}.
+     */
+    Immutable<name>Set of(<type>... items);
+
+    Immutable<name>Set with(<type>... items);
+
+    /**
+     * Same as {@link #withAll(<name>Iterable)}.
+     */
+    Immutable<name>Set ofAll(<name>Iterable items);
+
+    Immutable<name>Set withAll(<name>Iterable items);
+}
+
+>>

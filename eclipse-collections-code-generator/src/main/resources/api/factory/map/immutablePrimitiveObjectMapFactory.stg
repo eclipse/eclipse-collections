@@ -1,0 +1,59 @@
+import "copyright.stg"
+
+targetPath() ::= "org/eclipse/collections/api/factory/map/primitive"
+
+fileName(primitive) ::= "Immutable<primitive.name>ObjectMapFactory"
+
+skipBoolean() ::= "true"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.api.factory.map.primitive;
+
+import org.eclipse.collections.api.map.primitive.Immutable<name>ObjectMap;
+import org.eclipse.collections.api.map.primitive.<name>ObjectMap;
+
+/**
+ * A factory which creates instances of type {@link Immutable<name>ObjectMap}.
+ * This file was automatically generated from template file immutablePrimitiveObjectMapFactory.stg.
+ *
+ * @since 4.0.
+ */
+public interface Immutable<name>ObjectMapFactory
+{
+    /**
+     * @since 6.0
+     */
+    \<V> Immutable<name>ObjectMap\<V> empty();
+
+    /**
+     * Same as {@link #empty()}.
+     */
+    \<V> Immutable<name>ObjectMap\<V> of();
+
+    /**
+     * Same as {@link #empty()}.
+     */
+    \<V> Immutable<name>ObjectMap\<V> with();
+
+    /**
+     * Same as {@link #with(<type>, Object)}.
+     */
+    \<V> Immutable<name>ObjectMap\<V> of(<type> key, V value);
+
+    \<V> Immutable<name>ObjectMap\<V> with(<type> key, V value);
+
+    /**
+     * Same as {@link #withAll(<name>ObjectMap)}.
+     */
+    \<V> Immutable<name>ObjectMap\<V> ofAll(<name>ObjectMap\<? extends V> map);
+
+    \<V> Immutable<name>ObjectMap\<V> withAll(<name>ObjectMap\<? extends V> map);
+}
+
+>>

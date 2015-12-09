@@ -1,0 +1,88 @@
+import "copyright.stg"
+
+skipBooleanKeys() ::= "true"
+
+hasTwoPrimitives() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/api/map/primitive"
+
+fileName(primitive1, primitive2, sameTwoPrimitives) ::= "Mutable<primitive1.name><primitive2.name>Map"
+
+class(primitive1, primitive2, sameTwoPrimitives) ::= <<
+<body(primitive1.type, primitive2.type, primitive1.name, primitive2.name)>
+>>
+
+body(type1, type2, name1, name2) ::= <<
+<copyright()>
+
+package org.eclipse.collections.api.map.primitive;
+
+import org.eclipse.collections.api.<name1>Iterable;
+<if(!sameTwoPrimitives)>import org.eclipse.collections.api.block.function.primitive.<name1>To<name2>Function;<endif>
+import org.eclipse.collections.api.block.function.primitive.<name2>Function;
+import org.eclipse.collections.api.block.function.primitive.<name2>Function0;
+import org.eclipse.collections.api.block.function.primitive.<name2>To<name2>Function;
+import org.eclipse.collections.api.block.predicate.primitive.<name1><name2>Predicate;
+
+/**
+ * This file was automatically generated from template file mutablePrimitivePrimitiveMap.stg.
+ *
+ * @since 3.0.
+ */
+public interface Mutable<name1><name2>Map extends <name1><name2>Map, Mutable<name2>ValuesMap
+{
+    void put(<type1> key, <type2> value);
+
+    void putAll(<name1><name2>Map map);
+
+    void removeKey(<type1> key);
+
+    void remove(<type1> key);
+
+    <type2> removeKeyIfAbsent(<type1> key, <type2> value);
+
+    <type2> getIfAbsentPut(<type1> key, <type2> value);
+
+    <type2> getIfAbsentPut(<type1> key, <name2>Function0 function);
+
+    <type2> getIfAbsentPutWithKey(<type1> key, <name1>To<name2>Function function);
+
+    \<P> <type2> getIfAbsentPutWith(<type1> key, <name2>Function\<? super P> function, P parameter);
+
+    <type2> updateValue(<type1> key, <type2> initialValueIfAbsent, <name2>To<name2>Function function);
+
+    Mutable<name1><name2>Map select(<name1><name2>Predicate predicate);
+
+    Mutable<name1><name2>Map reject(<name1><name2>Predicate predicate);
+
+    Mutable<name1><name2>Map withKeyValue(<type1> key, <type2> value);
+
+    Mutable<name1><name2>Map withoutKey(<type1> key);
+
+    Mutable<name1><name2>Map withoutAllKeys(<name1>Iterable keys);
+
+    Mutable<name1><name2>Map asUnmodifiable();
+
+    Mutable<name1><name2>Map asSynchronized();
+    <(arithmeticMethods.(type2))(type1, type2)>
+}
+
+>>
+
+arithmeticMethods ::= [
+    "byte": "allMethods",
+    "short": "allMethods",
+    "char": "allMethods",
+    "int": "allMethods",
+    "long": "allMethods",
+    "float": "allMethods",
+    "double": "allMethods",
+    "boolean": "noMethods"
+    ]
+
+allMethods(type1, type2) ::= <<
+<\n>
+<type2> addToValue(<type1> key, <type2> toBeAdded);
+>>
+
+noMethods(type1, type2) ::= ""

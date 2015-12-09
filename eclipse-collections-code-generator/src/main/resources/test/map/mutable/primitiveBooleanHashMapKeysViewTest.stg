@@ -1,0 +1,438 @@
+import "copyright.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+import "primitiveEquals.stg"
+
+skipBoolean() ::= "true"
+
+isTest() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/map/mutable/primitive"
+
+fileName(primitive) ::= "<primitive.name>BooleanHashMapKeysViewTest"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name, primitive.wrapperName)>
+>>
+
+body(type, name, wrapperName) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.map.mutable.primitive;
+
+import java.util.Arrays;
+import java.util.NoSuchElementException;
+
+import org.eclipse.collections.api.Lazy<name>Iterable;
+import org.eclipse.collections.api.iterator.<name>Iterator;
+import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
+import org.eclipse.collections.impl.bag.mutable.primitive.<name>HashBag;
+import org.eclipse.collections.impl.block.factory.primitive.<name>Predicates;
+import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
+import org.eclipse.collections.impl.set.mutable.UnifiedSet;
+import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
+import org.eclipse.collections.impl.test.Verify;
+import org.junit.Assert;
+import org.junit.Test;
+
+/**
+ * JUnit test for {@link <name>BooleanHashMap#keysView}.
+ * This file was automatically generated from template file primitiveBooleanHashMapKeysViewTest.stg.
+ */
+public class <name>BooleanHashMapKeysViewTest
+{
+    private final Lazy<name>Iterable iterable = <name>BooleanHashMap.newWithKeysValues(<(literal.(type))("0")>, true, <(literal.(type))("1")>, false, <(literal.(type))("31")>, true,
+            generateCollisions1().getFirst(), false).withKeyValue(generateCollisions1().get(1), true).keysView();
+
+    private static <name>ArrayList generateCollisions1()
+    {
+        <name>ArrayList collisions = new <name>ArrayList();
+        <name>BooleanHashMap hashMap = new <name>BooleanHashMap();
+        for (<type> i = <(literal.(type))("32")>; collisions.size() \<= 10; i++)
+        {
+            if (hashMap.spreadAndMask(i) == hashMap.spreadAndMask(<(literal.(type))("32")>))
+            {
+                collisions.add(i);
+            }
+        }
+        return collisions;
+    }
+
+    @Test
+    public void size()
+    {
+        Verify.assertSize(0, new <name>BooleanHashMap().keysView());
+        Verify.assertSize(5, this.iterable);
+    }
+
+    @Test
+    public void empty()
+    {
+        Assert.assertTrue(new <name>BooleanHashMap().keysView().isEmpty());
+        Assert.assertFalse(new <name>BooleanHashMap().keysView().notEmpty());
+        Assert.assertFalse(this.iterable.isEmpty());
+        Assert.assertTrue(this.iterable.notEmpty());
+        Assert.assertFalse(<name>BooleanHashMap.newWithKeysValues(<(literal.(type))("0")>, true, <(literal.(type))("31")>, false).keysView().isEmpty());
+        Assert.assertTrue(<name>BooleanHashMap.newWithKeysValues(<(literal.(type))("0")>, true, <(literal.(type))("31")>, false).keysView().notEmpty());
+        Assert.assertFalse(<name>BooleanHashMap.newWithKeysValues(<(literal.(type))("31")>, true, <(literal.(type))("32")>, true).keysView().isEmpty());
+        Assert.assertTrue(<name>BooleanHashMap.newWithKeysValues(<(literal.(type))("31")>, true, <(literal.(type))("32")>, true).keysView().notEmpty());
+        Assert.assertFalse(<name>BooleanHashMap.newWithKeysValues(<(literal.(type))("32")>, true, <(literal.(type))("33")>, true).keysView().isEmpty());
+        Assert.assertTrue(<name>BooleanHashMap.newWithKeysValues(<(literal.(type))("32")>, true, <(literal.(type))("33")>, true).keysView().notEmpty());
+    }
+
+    @Test
+    public void contains()
+    {
+        Assert.assertTrue(this.iterable.contains(<(literal.(type))("0")>));
+        Assert.assertTrue(this.iterable.contains(<(literal.(type))("1")>));
+        Assert.assertFalse(this.iterable.contains(<(literal.(type))("2")>));
+        Assert.assertTrue(this.iterable.contains(<(literal.(type))("31")>));
+        Assert.assertTrue(this.iterable.contains(generateCollisions1().getFirst()));
+        Assert.assertTrue(this.iterable.contains(generateCollisions1().get(1)));
+    }
+
+    @Test
+    public void containsAllArray()
+    {
+        Assert.assertTrue(this.iterable.containsAll(<(literal.(type))("0")>, <(literal.(type))("1")>));
+        Assert.assertFalse(this.iterable.containsAll(<(literal.(type))("1")>, <(literal.(type))("5")>));
+        Assert.assertFalse(this.iterable.containsAll(<(literal.(type))("2")>, <(literal.(type))("5")>));
+        Assert.assertFalse(this.iterable.containsAll(<(literal.(type))("31")>, <(literal.(type))("2")>));
+    }
+
+    @Test
+    public void containsAllIterable()
+    {
+        Assert.assertTrue(this.iterable.containsAll(<name>HashSet.newSetWith(<(literal.(type))("0")>, <(literal.(type))("1")>)));
+        Assert.assertFalse(this.iterable.containsAll(<name>HashSet.newSetWith(<(literal.(type))("1")>, <(literal.(type))("5")>)));
+        Assert.assertFalse(this.iterable.containsAll(<name>HashSet.newSetWith(<(literal.(type))("2")>, <(literal.(type))("5")>)));
+        Assert.assertFalse(this.iterable.containsAll(<name>HashSet.newSetWith(<(literal.(type))("31")>, <(literal.(type))("2")>)));
+    }
+
+    @Test
+    public void toArray()
+    {
+        Assert.assertTrue(Arrays.equals(new <type>[]{<(literal.(type))("0")>, <(literal.(type))("1")>}, <name>BooleanHashMap.newWithKeysValues(<(literal.(type))("0")>, true, <(literal.(type))("1")>, false).keysView().toArray())
+                || Arrays.equals(new <type>[]{<(literal.(type))("0")>, <(literal.(type))("1")>}, <name>BooleanHashMap.newWithKeysValues(<(literal.(type))("0")>, true, <(literal.(type))("1")>, false).keysView().toArray()));
+        Assert.assertArrayEquals(new <type>[]{}, new <name>BooleanHashMap().keysView().toArray()<delta.(type)>);
+    }
+
+    @Test
+    public void toSortedArray()
+    {
+        Assert.assertArrayEquals(new <type>[]{<(literal.(type))("0")>, <(literal.(type))("1")>, <(literal.(type))("31")>, generateCollisions1().getFirst(), generateCollisions1().get(1)}, this.iterable.toSortedArray()<delta.(type)>);
+        Assert.assertArrayEquals(new <type>[]{}, new <name>BooleanHashMap().keysView().toSortedArray()<delta.(type)>);
+    }
+
+    @Test
+    public void <type>Iterator()
+    {
+        Mutable<name>Set expected = <name>HashSet.newSetWith(<(literal.(type))("0")>, <(literal.(type))("1")>, <(literal.(type))("31")>, generateCollisions1().getFirst(), generateCollisions1().get(1));
+        Mutable<name>Set actual = <name>HashSet.newSetWith();
+        <name>Iterator iterator = this.iterable.<type>Iterator();
+        Assert.assertTrue(iterator.hasNext());
+        actual.add(iterator.next());
+        Assert.assertTrue(iterator.hasNext());
+        actual.add(iterator.next());
+        Assert.assertTrue(iterator.hasNext());
+        actual.add(iterator.next());
+        Assert.assertTrue(iterator.hasNext());
+        actual.add(iterator.next());
+        Assert.assertTrue(iterator.hasNext());
+        actual.add(iterator.next());
+        Assert.assertFalse(iterator.hasNext());
+        Assert.assertEquals(expected, actual);
+        Verify.assertThrows(NoSuchElementException.class, iterator::next);
+    }
+
+    @Test(expected = NoSuchElementException.class)
+    public void iterator_throws()
+    {
+        <name>Iterator iterator = this.iterable.<type>Iterator();
+        while (iterator.hasNext())
+        {
+            iterator.next();
+        }
+
+        iterator.next();
+    }
+
+    @Test
+    public void forEach()
+    {
+        <type>[] sum = new <type>[1];
+        this.iterable.forEach(each -> sum[0] += each);
+        Assert.assertEquals(32L + generateCollisions1().getFirst() + generateCollisions1().get(1), sum[0]<delta.(type)>);
+    }
+
+    @Test
+    public void count()
+    {
+        Assert.assertEquals(4L, this.iterable.count(<name>Predicates.greaterThan(<(literal.(type))("0")>)));
+        Assert.assertEquals(3L, this.iterable.count(<name>Predicates.lessThan(<(literal.(type))("32")>)));
+        Assert.assertEquals(1L, this.iterable.count(<name>Predicates.greaterThan(<(literal.(type))("32")>)));
+    }
+
+    @Test
+    public void anySatisfy()
+    {
+        Assert.assertTrue(this.iterable.anySatisfy(<name>Predicates.equal(<(literal.(type))("0")>)));
+        Assert.assertTrue(this.iterable.anySatisfy(<name>Predicates.greaterThan(<(literal.(type))("0")>)));
+        Assert.assertTrue(this.iterable.anySatisfy(<name>Predicates.greaterThan(<(literal.(type))("31")>)));
+        Assert.assertFalse(this.iterable.anySatisfy(<name>Predicates.equal(<(literal.(type))("2")>)));
+    }
+
+    @Test
+    public void allSatisfy()
+    {
+        Assert.assertFalse(this.iterable.allSatisfy(<name>Predicates.greaterThan(<(literal.(type))("0")>)));
+        Assert.assertFalse(this.iterable.allSatisfy(<name>Predicates.lessThan(<(literal.(type))("1")>)));
+        Assert.assertFalse(this.iterable.allSatisfy(<name>Predicates.lessThan(generateCollisions1().getFirst())));
+        Assert.assertTrue(this.iterable.allSatisfy(<name>Predicates.not(<name>Predicates.equal(<(literal.(type))("2")>))));
+    }
+
+    @Test
+    public void noneSatisfy()
+    {
+        Assert.assertFalse(this.iterable.noneSatisfy(<name>Predicates.equal(<(literal.(type))("0")>)));
+        Assert.assertFalse(this.iterable.noneSatisfy(<name>Predicates.greaterThan(<(literal.(type))("0")>)));
+        Assert.assertFalse(this.iterable.noneSatisfy(<name>Predicates.greaterThan(<(literal.(type))("31")>)));
+        Assert.assertTrue(this.iterable.noneSatisfy(<name>Predicates.equal(<(literal.(type))("2")>)));
+    }
+
+    @Test
+    public void select()
+    {
+        Verify.assertSize(3, this.iterable.select(<name>Predicates.lessThan(<(literal.(type))("32")>)));
+        Verify.assertSize(4, this.iterable.select(<name>Predicates.greaterThan(<(literal.(type))("0")>)));
+    }
+
+    @Test
+    public void reject()
+    {
+        Verify.assertSize(1, this.iterable.reject(<name>Predicates.greaterThan(<(literal.(type))("0")>)));
+        Verify.assertSize(2, this.iterable.reject(<name>Predicates.lessThan(<(literal.(type))("32")>)));
+    }
+
+    @Test
+    public void detectIfNone()
+    {
+        Assert.assertEquals(<(literal.(type))("0")>, this.iterable.detectIfNone(<name>Predicates.lessThan(<(literal.(type))("1")>), <(literal.(type))("9")>)<delta.(type)>);
+        Assert.assertEquals(<(literal.(type))("1")>, this.iterable.detectIfNone(<name>Predicates.equal(<(literal.(type))("1")>), <(literal.(type))("9")>)<delta.(type)>);
+        Assert.assertEquals(generateCollisions1().get(1), this.iterable.detectIfNone(<name>Predicates.greaterThan(generateCollisions1().getFirst()), <(literal.(type))("9")>)<delta.(type)>);
+        Assert.assertEquals(<(literal.(type))("9")>, this.iterable.detectIfNone(<name>Predicates.greaterThan(generateCollisions1().get(1)), <(literal.(type))("9")>)<delta.(type)>);
+    }
+
+    @Test
+    public void collect()
+    {
+        Assert.assertEquals(
+            UnifiedSet.newSetWith(<(literal.(type))("-1")>, <(literal.(type))("0")>, <(literal.(type))("30")>, <(castIntToNarrowTypeWithParens.(type))("generateCollisions1().getFirst() - 1")>, <(castIntToNarrowTypeWithParens.(type))("generateCollisions1().get(1) - 1")>),
+            this.iterable.collect((<type> parameter) -> <(castIntToNarrowTypeWithParens.(type))("parameter - 1")>).toSet());
+    }
+
+    @Test
+    public void max()
+    {
+        Assert.assertEquals(generateCollisions1().get(1), this.iterable.max()<delta.(type)>);
+    }
+
+    @Test(expected = NoSuchElementException.class)
+    public void max_throws_emptyList()
+    {
+        new <name>BooleanHashMap().keysView().max();
+    }
+
+    @Test
+    public void min()
+    {
+        Assert.assertEquals(<(literal.(type))("0")>, this.iterable.min()<delta.(type)>);
+        Assert.assertEquals(<(literal.(type))("31")>, <name>BooleanHashMap.newWithKeysValues(<(literal.(type))("31")>, true, <(literal.(type))("32")>, false).keysView().min()<delta.(type)>);
+    }
+
+    @Test
+    public void minIfEmpty()
+    {
+        Assert.assertEquals(<(literal.(type))("5")>, new <name>BooleanHashMap().keysView().minIfEmpty(<(literal.(type))("5")>)<delta.(type)>);
+        Assert.assertEquals(<(literal.(type))("0")>, new <name>BooleanHashMap().keysView().minIfEmpty(<(literal.(type))("0")>)<delta.(type)>);
+        Assert.assertEquals(<(literal.(type))("0")>, this.iterable.minIfEmpty(<(literal.(type))("5")>)<delta.(type)>);
+    }
+
+    @Test
+    public void maxIfEmpty()
+    {
+        Assert.assertEquals(<(literal.(type))("5")>, new <name>BooleanHashMap().keysView().maxIfEmpty(<(literal.(type))("5")>)<delta.(type)>);
+        Assert.assertEquals(<(literal.(type))("0")>, new <name>BooleanHashMap().keysView().maxIfEmpty(<(literal.(type))("0")>)<delta.(type)>);
+        Assert.assertEquals(generateCollisions1().get(1), this.iterable.maxIfEmpty(<(literal.(type))("5")>)<delta.(type)>);
+    }
+
+    @Test(expected = NoSuchElementException.class)
+    public void min_throws_emptyList()
+    {
+        new <name>BooleanHashMap().keysView().min();
+    }
+
+    @Test
+    public void sum()
+    {
+        Assert.assertEquals(<(wideLiteral.(type))("94")>, <name>BooleanHashMap.newWithKeysValues(<(literal.(type))("30")>, true, <(literal.(type))("31")>, false, <(literal.(type))("32")>, true).withKeysValues(<(literal.(type))("0")>, true, <(literal.(type))("1")>, false).keysView().sum()<wideDelta.(type)>);
+    }
+
+    @Test(expected = ArithmeticException.class)
+    public void average_throws_emptyList()
+    {
+        new <name>BooleanHashMap().keysView().average();
+    }
+
+    @Test
+    public void average()
+    {
+        Assert.assertEquals(31.0, <name>BooleanHashMap.newWithKeysValues(<(literal.(type))("30")>, true, <(literal.(type))("31")>, false, <(literal.(type))("32")>, true).keysView().average(), 0.0);
+    }
+
+    @Test
+    public void median()
+    {
+        Assert.assertEquals(31.0, <name>BooleanHashMap.newWithKeysValues(<(literal.(type))("30")>, true, <(literal.(type))("31")>, false, <(literal.(type))("32")>, true).keysView().median(), 0.0);
+        Assert.assertEquals(30.5, <name>BooleanHashMap.newWithKeysValues(<(literal.(type))("30")>, true, <(literal.(type))("31")>, false, <(literal.(type))("32")>, true).withKeyValue(<(literal.(type))("1")>, true).keysView().median(), 0.0);
+    }
+
+    @Test(expected = ArithmeticException.class)
+    public void median_throws_emptyList()
+    {
+        new <name>BooleanHashMap().keysView().median();
+    }
+
+    @Test
+    public void testToString()
+    {
+        Assert.assertEquals("[]", new <name>BooleanHashMap().keysView().toString());
+        Assert.assertEquals("[<(toStringLiteral.(type))("0")>]", <name>BooleanHashMap.newWithKeysValues(<(literal.(type))("0")>, true).keysView().toString());
+        Assert.assertEquals("[<(toStringLiteral.(type))("1")>]", <name>BooleanHashMap.newWithKeysValues(<(literal.(type))("1")>, false).keysView().toString());
+        Assert.assertEquals("[<(toStringLiteral.(type))("5")>]", <name>BooleanHashMap.newWithKeysValues(<(literal.(type))("5")>, false).keysView().toString());
+
+        Lazy<name>Iterable iterable1 = <name>BooleanHashMap.newWithKeysValues(<(literal.(type))("0")>, true, <(literal.(type))("1")>, false).keysView();
+        Assert.assertTrue(
+                iterable1.toString(),
+                iterable1.toString().equals("[<["0", "1"]:(toStringLiteral.(type))(); separator=", ">]")
+                        || iterable1.toString().equals("[<["1", "0"]:(toStringLiteral.(type))(); separator=", ">]"));
+
+        Lazy<name>Iterable iterable2 = <name>BooleanHashMap.newWithKeysValues(<(literal.(type))("1")>, false, <(literal.(type))("32")>, true).keysView();
+        Assert.assertTrue(
+                iterable2.toString(),
+                iterable2.toString().equals("[<["1", "32"]:(toStringLiteral.(type))(); separator=", ">]")
+                        || iterable2.toString().equals("[<["32", "1"]:(toStringLiteral.(type))(); separator=", ">]"));
+
+        Lazy<name>Iterable iterable3 = <name>BooleanHashMap.newWithKeysValues(<(literal.(type))("0")>, true, <(literal.(type))("32")>, true).keysView();
+        Assert.assertTrue(
+                iterable3.toString(),
+                iterable3.toString().equals("[<["0", "32"]:(toStringLiteral.(type))(); separator=", ">]")
+                        || iterable3.toString().equals("[<["32", "0"]:(toStringLiteral.(type))(); separator=", ">]"));
+
+        Lazy<name>Iterable iterable4 = <name>BooleanHashMap.newWithKeysValues(<(literal.(type))("32")>, true, <(literal.(type))("33")>, false).keysView();
+        Assert.assertTrue(
+                iterable4.toString(),
+                iterable4.toString().equals("[<["32", "33"]:(toStringLiteral.(type))(); separator=", ">]")
+                        || iterable4.toString().equals("[<["33", "32"]:(toStringLiteral.(type))(); separator=", ">]"));
+    }
+
+    @Test
+    public void makeString()
+    {
+        Assert.assertEquals("", new <name>BooleanHashMap().keysView().makeString());
+        Assert.assertEquals("<(toStringLiteral.(type))("31")>", new <name>BooleanHashMap().withKeyValue(<(literal.(type))("31")>, true).keysView().makeString());
+        Assert.assertEquals("<(toStringLiteral.(type))("32")>", new <name>BooleanHashMap().withKeyValue(<(literal.(type))("32")>, false).keysView().makeString());
+
+        Lazy<name>Iterable iterable0 = <name>BooleanHashMap.newWithKeysValues(<(literal.(type))("0")>, true, <(literal.(type))("1")>, false).keysView();
+        Assert.assertTrue(
+                iterable0.makeString(),
+                "<(toStringLiteral.(type))("0")>, <(toStringLiteral.(type))("1")>".equals(iterable0.makeString())
+                        || "<(toStringLiteral.(type))("1")>, <(toStringLiteral.(type))("0")>".equals(iterable0.makeString()));
+
+        Lazy<name>Iterable iterable1 = <name>BooleanHashMap.newWithKeysValues(<(literal.(type))("0")>, true, <(literal.(type))("31")>, false).keysView();
+        Assert.assertTrue(
+                iterable1.makeString(),
+                "<(toStringLiteral.(type))("0")>, <(toStringLiteral.(type))("31")>".equals(iterable1.makeString())
+                        || "<(toStringLiteral.(type))("31")>, <(toStringLiteral.(type))("0")>".equals(iterable1.makeString()));
+
+        Lazy<name>Iterable iterable2 = <name>BooleanHashMap.newWithKeysValues(<(literal.(type))("31")>, true, <(literal.(type))("32")>, true).keysView();
+        Assert.assertTrue(
+                iterable2.makeString("[", "/", "]"),
+                "[<(toStringLiteral.(type))("31")>/<(toStringLiteral.(type))("32")>]".equals(iterable2.makeString("[", "/", "]"))
+                        || "[<(toStringLiteral.(type))("32")>/<(toStringLiteral.(type))("31")>]".equals(iterable2.makeString("[", "/", "]")));
+
+        Lazy<name>Iterable iterable3 = <name>BooleanHashMap.newWithKeysValues(<(literal.(type))("32")>, true, <(literal.(type))("33")>, true).keysView();
+        Assert.assertTrue(
+                iterable3.makeString("/"),
+                "<(toStringLiteral.(type))("32")>/<(toStringLiteral.(type))("33")>".equals(iterable3.makeString("/"))
+                        || "<(toStringLiteral.(type))("33")>/<(toStringLiteral.(type))("32")>".equals(iterable3.makeString("/")));
+    }
+
+    @Test
+    public void appendString()
+    {
+        StringBuilder appendable = new StringBuilder();
+        new <name>BooleanHashMap().keysView().appendString(appendable);
+        Assert.assertEquals("", appendable.toString());
+
+        StringBuilder appendable0 = new StringBuilder();
+        new <name>BooleanHashMap().withKeyValue(<(literal.(type))("31")>, true).keysView().appendString(appendable0);
+        Assert.assertEquals("<(toStringLiteral.(type))("31")>", appendable0.toString());
+
+        StringBuilder appendable1 = new StringBuilder();
+        new <name>BooleanHashMap().withKeyValue(<(literal.(type))("32")>, true).keysView().appendString(appendable1);
+        Assert.assertEquals("<(toStringLiteral.(type))("32")>", appendable1.toString());
+
+        StringBuilder appendable2 = new StringBuilder();
+        Lazy<name>Iterable set1 = <name>BooleanHashMap.newWithKeysValues(<(literal.(type))("0")>, true, <(literal.(type))("31")>, false).keysView();
+        set1.appendString(appendable2);
+        Assert.assertTrue(appendable2.toString(), "<(toStringLiteral.(type))("0")>, <(toStringLiteral.(type))("31")>".equals(appendable2.toString())
+                || "<(toStringLiteral.(type))("31")>, <(toStringLiteral.(type))("0")>".equals(appendable2.toString()));
+
+        StringBuilder appendable3 = new StringBuilder();
+        Lazy<name>Iterable set2 = <name>BooleanHashMap.newWithKeysValues(<(literal.(type))("31")>, true, <(literal.(type))("32")>, true).keysView();
+        set2.appendString(appendable3, "/");
+        Assert.assertTrue(appendable3.toString(), "<(toStringLiteral.(type))("31")>/<(toStringLiteral.(type))("32")>".equals(appendable3.toString())
+                || "<(toStringLiteral.(type))("32")>/<(toStringLiteral.(type))("31")>".equals(appendable3.toString()));
+
+        StringBuilder appendable4 = new StringBuilder();
+        Lazy<name>Iterable set4 = <name>BooleanHashMap.newWithKeysValues(<(literal.(type))("32")>, true, <(literal.(type))("33")>, true).keysView();
+        set4.appendString(appendable4, "[", "/", "]");
+        Assert.assertTrue(appendable4.toString(), "[<(toStringLiteral.(type))("32")>/<(toStringLiteral.(type))("33")>]".equals(appendable4.toString())
+                || "[<(toStringLiteral.(type))("33")>/<(toStringLiteral.(type))("32")>]".equals(appendable4.toString()));
+    }
+
+    @Test
+    public void toList()
+    {
+        Assert.assertEquals(<name>ArrayList.newListWith(<(literal.(type))("0")>), <name>BooleanHashMap.newWithKeysValues(<(literal.(type))("0")>, true).keysView().toList());
+        Assert.assertEquals(<name>ArrayList.newListWith(<(literal.(type))("31")>), <name>BooleanHashMap.newWithKeysValues(<(literal.(type))("31")>, true).keysView().toList());
+    }
+
+    @Test
+    public void toSortedList()
+    {
+        Assert.assertEquals(<name>ArrayList.newListWith(<(literal.(type))("0")>, <(literal.(type))("1")>, <(literal.(type))("31")>), <name>BooleanHashMap.newWithKeysValues(<(literal.(type))("0")>, true, <(literal.(type))("1")>, false, <(literal.(type))("31")>, true).keysView().toSortedList());
+    }
+
+    @Test
+    public void toSet()
+    {
+        Assert.assertEquals(<name>HashSet.newSetWith(<(literal.(type))("0")>, <(literal.(type))("1")>, <(literal.(type))("31")>), <name>BooleanHashMap.newWithKeysValues(<(literal.(type))("0")>, true, <(literal.(type))("1")>, false, <(literal.(type))("31")>, true).keysView().toSet());
+    }
+
+    @Test
+    public void toBag()
+    {
+        Assert.assertEquals(<name>HashBag.newBagWith(<(literal.(type))("0")>, <(literal.(type))("1")>, <(literal.(type))("31")>), <name>BooleanHashMap.newWithKeysValues(<(literal.(type))("0")>, true, <(literal.(type))("1")>, false, <(literal.(type))("31")>, true).keysView().toBag());
+    }
+
+    @Test
+    public void asLazy()
+    {
+        Assert.assertEquals(this.iterable.toSet(), this.iterable.asLazy().toSet());
+        Verify.assertInstanceOf(Lazy<name>Iterable.class, this.iterable.asLazy());
+    }
+}
+
+>>

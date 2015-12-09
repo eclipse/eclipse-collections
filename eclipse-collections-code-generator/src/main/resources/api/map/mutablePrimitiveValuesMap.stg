@@ -1,0 +1,43 @@
+import "copyright.stg"
+import "primitiveEquals.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+
+targetPath() ::= "org/eclipse/collections/api/map/primitive"
+
+fileName(primitive) ::= "Mutable<primitive.name>ValuesMap"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.api.map.primitive;
+
+import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
+import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
+import org.eclipse.collections.api.collection.primitive.Mutable<name>Collection;
+import org.eclipse.collections.api.collection.MutableCollection;
+import org.eclipse.collections.api.iterator.Mutable<name>Iterator;
+
+/**
+ * This file was automatically generated from template file mutablePrimitiveValuesMap.stg.
+ *
+ * @since 6.0.
+ */
+public interface Mutable<name>ValuesMap extends <name>ValuesMap
+{
+    Mutable<name>Collection select(<name>Predicate predicate);
+
+    Mutable<name>Collection reject(<name>Predicate predicate);
+
+    \<V> MutableCollection\<V> collect(<name>ToObjectFunction\<? extends V> function);
+
+    void clear();
+
+    Mutable<name>Iterator <type>Iterator();
+}
+
+>>

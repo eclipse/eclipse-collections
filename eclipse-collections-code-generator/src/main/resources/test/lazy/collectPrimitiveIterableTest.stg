@@ -1,0 +1,343 @@
+import "copyright.stg"
+import "primitiveEquals.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+
+isTest() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/lazy/primitive"
+
+skipBoolean() ::= "true"
+
+fileName(primitive) ::= "Collect<primitive.name>IterableTest"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.wrapperName, primitive.name)>
+>>
+
+body(type, wrapperName, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.lazy.primitive;
+
+import java.util.NoSuchElementException;
+
+import org.eclipse.collections.api.<name>Iterable;
+import org.eclipse.collections.api.Lazy<name>Iterable;
+import org.eclipse.collections.api.iterator.<name>Iterator;
+import org.eclipse.collections.impl.bag.mutable.primitive.<name>HashBag;
+import org.eclipse.collections.impl.block.factory.PrimitiveFunctions;
+import org.eclipse.collections.impl.block.factory.primitive.<name>Predicates;
+import org.eclipse.collections.impl.factory.Lists;
+import org.eclipse.collections.impl.list.Interval;
+import org.eclipse.collections.impl.list.mutable.FastList;
+import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
+import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
+import org.eclipse.collections.impl.test.Verify;
+import org.junit.Assert;
+import org.junit.Test;
+
+/**
+ * This file was automatically generated from template file collectPrimitiveIterableTest.stg.
+ */
+public class Collect<name>IterableTest
+{
+    private final <name>Iterable <type>Iterable = Interval.oneTo(3).collect<name>(PrimitiveFunctions.unboxIntegerTo<name>());
+
+    @Test
+    public void iterator()
+    {
+        <wideType.(type)> sum = <(wideLiteral.(type))("0")>;
+        <name>Iterator iterator = this.<type>Iterable.<type>Iterator();
+        while (iterator.hasNext())
+        {
+            sum += iterator.next();
+        }
+        Assert.assertEquals(<(wideLiteral.(type))("6")>, sum<(delta.(type))>);
+    }
+
+    @Test
+    public void size()
+    {
+        Assert.assertEquals(3L, this.<type>Iterable.size());
+    }
+
+    @Test
+    public void empty()
+    {
+        Assert.assertTrue(this.<type>Iterable.notEmpty());
+        Assert.assertFalse(this.<type>Iterable.isEmpty());
+    }
+
+    @Test
+    public void forEach()
+    {
+        <wideType.(type)>[] value = new <wideType.(type)>[1];
+        this.<type>Iterable.forEach(each -> { value[0] += each; });
+        Assert.assertEquals(<(wideLiteral.(type))("6")>, value[0]<(delta.(type))>);
+    }
+
+    @Test
+    public void count()
+    {
+        Assert.assertEquals(1, this.<type>Iterable.count(<name>Predicates.equal(<(literal.(type))("1")>)));
+        Assert.assertEquals(3, this.<type>Iterable.count(<name>Predicates.lessThan(<(literal.(type))("4")>)));
+        Assert.assertEquals(2, this.<type>Iterable.count(<name>Predicates.greaterThan(<(literal.(type))("1")>)));
+    }
+
+    @Test
+    public void anySatisfy()
+    {
+        Assert.assertTrue(this.<type>Iterable.anySatisfy(<name>Predicates.greaterThan(<(literal.(type))("1")>)));
+        Assert.assertTrue(this.<type>Iterable.anySatisfy(<name>Predicates.equal(<(literal.(type))("1")>)));
+        Assert.assertFalse(this.<type>Iterable.anySatisfy(<name>Predicates.greaterThan(<(literal.(type))("4")>)));
+    }
+
+    @Test
+    public void noneSatisfy()
+    {
+        Assert.assertFalse(this.<type>Iterable.noneSatisfy(<name>Predicates.greaterThan(<(literal.(type))("2")>)));
+        Assert.assertTrue(this.<type>Iterable.noneSatisfy(<name>Predicates.greaterThan(<(literal.(type))("4")>)));
+    }
+
+    @Test
+    public void allSatisfy()
+    {
+        Assert.assertTrue(this.<type>Iterable.allSatisfy(<name>Predicates.lessThan(<(literal.(type))("4")>)));
+        Assert.assertFalse(this.<type>Iterable.allSatisfy(<name>Predicates.lessThan(<(literal.(type))("3")>)));
+    }
+
+    @Test
+    public void select()
+    {
+        Assert.assertEquals(3L, this.<type>Iterable.select(<name>Predicates.lessThan(<(literal.(type))("4")>)).size());
+        Assert.assertEquals(2L, this.<type>Iterable.select(<name>Predicates.lessThan(<(literal.(type))("3")>)).size());
+    }
+
+    @Test
+    public void reject()
+    {
+        Assert.assertEquals(0L, this.<type>Iterable.reject(<name>Predicates.lessThan(<(literal.(type))("4")>)).size());
+        Assert.assertEquals(1L, this.<type>Iterable.reject(<name>Predicates.lessThan(<(literal.(type))("3")>)).size());
+    }
+
+    @Test
+    public void detectIfNone()
+    {
+        Assert.assertEquals(<(literal.(type))("1")>, this.<type>Iterable.detectIfNone(<name>Predicates.lessThan(<(literal.(type))("4")>), <(literal.(type))("0")>)<(delta.(type))>);
+        Assert.assertEquals(<(literal.(type))("0")>, this.<type>Iterable.detectIfNone(<name>Predicates.greaterThan(<(literal.(type))("3")>), <(literal.(type))("0")>)<(delta.(type))>);
+    }
+
+    @Test
+    public void sum()
+    {
+        Assert.assertEquals(<(wideLiteral.(type))("6")>, this.<type>Iterable.sum()<(delta.(type))>);
+    }
+
+    <if(primitive.floatPrimitive)>@Test
+public void sumConsistentRounding()
+{
+    <name>Iterable iterable =
+        Interval.oneTo(100_000)
+            .toList()
+            .shuffleThis()
+            .collect<name>(i -> 1.0f / (i.floatValue() * i.floatValue() * i.floatValue() * i.floatValue()));
+
+    // The test only ensures the consistency/stability of rounding. This is not meant to test the "correctness" of the float calculation result.
+    // Indeed the lower bits of this calculation result are always incorrect due to the information loss of original float values.
+    Assert.assertEquals(
+            1.082323233761663,
+            iterable.sum(),
+            1.0e-15);
+}
+
+    <elseif(primitive.doublePrimitive)>@Test
+public void sumConsistentRounding()
+{
+    <name>Iterable iterable =
+        Interval.oneTo(100_000)
+            .toList()
+            .shuffleThis()
+            .collect<name>(i -> <["1.0"]:(decimalLiteral.(type))()> / (i.<type>Value() * i.<type>Value() * i.<type>Value() * i.<type>Value()));
+
+    Assert.assertEquals(
+            1.082323233711138,
+            iterable.sum(),
+            1.0e-15);
+}
+
+    <endif>
+    @Test
+    public void max()
+    {
+        Assert.assertEquals(<(literal.(type))("3")>, Interval.fromTo(0, 3).collect<name>(PrimitiveFunctions.unboxIntegerTo<name>()).max()<(delta.(type))>);
+    }
+
+    @Test
+    public void min()
+    {
+        Assert.assertEquals(<(literal.(type))("0")>, Interval.fromTo(0, 3).collect<name>(PrimitiveFunctions.unboxIntegerTo<name>()).min()<(delta.(type))>);
+    }
+
+    @Test
+    public void minIfEmpty()
+    {
+        Assert.assertEquals(<(literal.(type))("0")>, Interval.fromTo(0, 3).collect<name>(PrimitiveFunctions.unboxIntegerTo<name>()).minIfEmpty(<(literal.(type))("0")>)<(delta.(type))>);
+        Assert.assertEquals(<(literal.(type))("0")>, FastList.\<Integer>newList().asLazy().collect<name>(PrimitiveFunctions.unboxIntegerTo<name>()).minIfEmpty(<(literal.(type))("0")>)<(delta.(type))>);
+    }
+
+    @Test
+    public void maxIfEmpty()
+    {
+        Assert.assertEquals(<(literal.(type))("3")>, Interval.fromTo(0, 3).collect<name>(PrimitiveFunctions.unboxIntegerTo<name>()).maxIfEmpty(<(literal.(type))("0")>)<(delta.(type))>);
+        Assert.assertEquals(<(literal.(type))("0")>, FastList.\<Integer>newList().asLazy().collect<name>(PrimitiveFunctions.unboxIntegerTo<name>()).maxIfEmpty(<(literal.(type))("0")>)<(delta.(type))>);
+    }
+
+    @Test(expected = NoSuchElementException.class)
+    public void maxThrowsOnEmpty()
+    {
+        Lists.mutable.\<Integer>of().asLazy().collect<name>(PrimitiveFunctions.unboxIntegerTo<name>()).max();
+    }
+
+    @Test(expected = NoSuchElementException.class)
+    public void minThrowsOnEmpty()
+    {
+        Lists.mutable.\<Integer>of().asLazy().collect<name>(PrimitiveFunctions.unboxIntegerTo<name>()).min();
+    }
+
+    @Test
+    public void average()
+    {
+        Assert.assertEquals(2.5, Interval.oneTo(4).collect<name>(PrimitiveFunctions.unboxIntegerTo<name>()).average(), 0.001);
+    }
+
+    @Test(expected = ArithmeticException.class)
+    public void averageThrowsOnEmpty()
+    {
+        Lists.mutable.\<Integer>of().asLazy().collect<name>(PrimitiveFunctions.unboxIntegerTo<name>()).average();
+    }
+
+    @Test
+    public void median()
+    {
+        Assert.assertEquals(2.5, Interval.oneTo(4).collect<name>(PrimitiveFunctions.unboxIntegerTo<name>()).median(), 0.001);
+        Assert.assertEquals(4.0, Interval.oneTo(7).collect<name>(PrimitiveFunctions.unboxIntegerTo<name>()).median(), 0.001);
+    }
+
+    @Test(expected = ArithmeticException.class)
+    public void medianThrowsOnEmpty()
+    {
+        Lists.mutable.\<Integer>of().asLazy().collect<name>(PrimitiveFunctions.unboxIntegerTo<name>()).median();
+    }
+
+    @Test
+    public void toArray()
+    {
+        Assert.assertArrayEquals(new <type>[]{<(literal.(type))("1")>, <(literal.(type))("2")>, <(literal.(type))("3")>, <(literal.(type))("4")>},
+                Interval.oneTo(4).collect<name>(PrimitiveFunctions.unboxIntegerTo<name>()).toArray()<(delta.(type))>);
+    }
+
+    @Test
+    public void toSortedArray()
+    {
+        Assert.assertArrayEquals(new <type>[]{<(literal.(type))("1")>, <(literal.(type))("2")>, <(literal.(type))("3")>, <(literal.(type))("4")>},
+                Interval.fromTo(4, 1).collect<name>(PrimitiveFunctions.unboxIntegerTo<name>()).toSortedArray()<(delta.(type))>);
+    }
+
+    @Test
+    public void contains()
+    {
+        <name>Iterable <type>Iterable = Interval.fromTo(4, 1).collect<name>(PrimitiveFunctions.unboxIntegerTo<name>());
+        Assert.assertTrue(<type>Iterable.contains(<(literal.(type))("1")>));
+        Assert.assertTrue(<type>Iterable.contains(<(literal.(type))("3")>));
+        Assert.assertTrue(<type>Iterable.contains(<(literal.(type))("4")>));
+        Assert.assertFalse(<type>Iterable.contains(<(literal.(type))("5")>));
+    }
+
+    @Test
+    public void containsAllArray()
+    {
+        <name>Iterable <type>Iterable = Interval.fromTo(4, 1).collect<name>(PrimitiveFunctions.unboxIntegerTo<name>());
+        Assert.assertTrue(<type>Iterable.containsAll(<(literal.(type))("1")>));
+        Assert.assertTrue(<type>Iterable.containsAll(<(literal.(type))("1")>, <(literal.(type))("2")>, <(literal.(type))("3")>, <(literal.(type))("4")>));
+        Assert.assertFalse(<type>Iterable.containsAll(<(literal.(type))("1")>, <(literal.(type))("2")>, <(literal.(type))("3")>, <(literal.(type))("4")>, <(literal.(type))("5")>));
+        Assert.assertFalse(<type>Iterable.containsAll(<(literal.(type))("7")>, <(literal.(type))("6")>, <(literal.(type))("5")>));
+    }
+
+    @Test
+    public void containsAllIterable()
+    {
+        <name>Iterable <type>Iterable = Interval.fromTo(4, 1).collect<name>(PrimitiveFunctions.unboxIntegerTo<name>());
+        Assert.assertTrue(<type>Iterable.containsAll(<name>ArrayList.newListWith(<(literal.(type))("1")>)));
+        Assert.assertTrue(<type>Iterable.containsAll(<name>ArrayList.newListWith(<(literal.(type))("1")>, <(literal.(type))("2")>, <(literal.(type))("3")>, <(literal.(type))("4")>)));
+        Assert.assertFalse(<type>Iterable.containsAll(<name>ArrayList.newListWith(<(literal.(type))("1")>, <(literal.(type))("2")>, <(literal.(type))("3")>, <(literal.(type))("4")>, <(literal.(type))("5")>)));
+        Assert.assertFalse(<type>Iterable.containsAll(<name>ArrayList.newListWith(<(literal.(type))("7")>, <(literal.(type))("6")>, <(literal.(type))("5")>)));
+    }
+
+    @Test
+    public void collect()
+    {
+        Assert.assertEquals(FastList.newListWith("<(toStringLiteral.(type))("1")>", "<(toStringLiteral.(type))("2")>", "<(toStringLiteral.(type))("3")>"), this.<type>Iterable.collect(String::valueOf).toList());
+    }
+
+    @Test
+    public void testToString()
+    {
+        Assert.assertEquals("[<["1", "2", "3"]:(toStringLiteral.(type))(); separator=", ">]", this.<type>Iterable.toString());
+    }
+
+    @Test
+    public void makeString()
+    {
+        Assert.assertEquals("<["1", "2", "3"]:(toStringLiteral.(type))(); separator=", ">", this.<type>Iterable.makeString());
+        Assert.assertEquals("<["1", "2", "3"]:(toStringLiteral.(type))(); separator="/">", this.<type>Iterable.makeString("/"));
+        Assert.assertEquals("[<["1", "2", "3"]:(toStringLiteral.(type))(); separator=", ">]", this.<type>Iterable.makeString("[", ", ", "]"));
+    }
+
+    @Test
+    public void appendString()
+    {
+        StringBuilder appendable = new StringBuilder();
+        this.<type>Iterable.appendString(appendable);
+        Assert.assertEquals("<["1", "2", "3"]:(toStringLiteral.(type))(); separator=", ">", appendable.toString());
+        StringBuilder appendable2 = new StringBuilder();
+        this.<type>Iterable.appendString(appendable2, "/");
+        Assert.assertEquals("<["1", "2", "3"]:(toStringLiteral.(type))(); separator="/">", appendable2.toString());
+        StringBuilder appendable3 = new StringBuilder();
+        this.<type>Iterable.appendString(appendable3, "[", ", ", "]");
+        Assert.assertEquals(this.<type>Iterable.toString(), appendable3.toString());
+    }
+
+    @Test
+    public void toList()
+    {
+        Assert.assertEquals(<name>ArrayList.newListWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">), this.<type>Iterable.toList());
+    }
+
+    @Test
+    public void toSortedList()
+    {
+        Assert.assertEquals(<name>ArrayList.newListWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">), this.<type>Iterable.toSortedList());
+    }
+
+    @Test
+    public void toSet()
+    {
+        Assert.assertEquals(<name>HashSet.newSetWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">), this.<type>Iterable.toSet());
+    }
+
+    @Test
+    public void toBag()
+    {
+        Assert.assertEquals(<name>HashBag.newBagWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">), this.<type>Iterable.toBag());
+    }
+
+    @Test
+    public void asLazy()
+    {
+        Assert.assertEquals(this.<type>Iterable.toSet(), this.<type>Iterable.asLazy().toSet());
+        Verify.assertInstanceOf(Lazy<name>Iterable.class, this.<type>Iterable.asLazy());
+    }
+}
+
+>>

@@ -1,0 +1,551 @@
+import "copyright.stg"
+import "primitiveEquals.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+
+isTest() ::= "true"
+
+hasTwoPrimitives() ::= "true"
+
+skipBoolean() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/map/mutable/primitive"
+
+fileName(primitive1, primitive2, sameTwoPrimitives) ::= "<primitive1.name><primitive2.name>HashMapTest"
+
+class(primitive1, primitive2, sameTwoPrimitives) ::= <<
+<body(primitive1.type, primitive2.type, primitive1.name, primitive2.name, primitive1.wrapperName, primitive2.wrapperName)>
+>>
+
+body(type1, type2, name1, name2, wrapperName1, wrapperName2) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.map.mutable.primitive;
+
+import java.lang.reflect.Field;
+
+import org.eclipse.collections.api.block.function.primitive.<name2>Function;
+import org.eclipse.collections.api.block.function.primitive.<name2>Function0;
+import org.eclipse.collections.api.block.function.primitive.<name2>To<name2>Function;
+<if(!sameTwoPrimitives)>import org.eclipse.collections.api.block.function.primitive.<name1>To<name2>Function;<endif>
+import org.eclipse.collections.impl.factory.primitive.<name1><name2>Maps;
+import org.eclipse.collections.impl.test.Verify;
+import org.eclipse.collections.api.map.primitive.Mutable<name1><name2>Map;
+import org.junit.Assert;
+import org.junit.Test;
+
+/**
+ * JUnit test for {@link <name1><name2>HashMap}.
+ * This file was automatically generated from template file primitivePrimitiveHashMapTest.stg.
+ */
+public class <name1><name2>HashMapTest extends AbstractMutable<name1><name2>MapTestCase
+{
+    @Override
+    protected <name1><name2>HashMap classUnderTest()
+    {
+        return <name1><name2>HashMap.newWithKeysValues(<["0", "31", "32"]:keyValue(); separator=", ">);
+    }
+
+    @Override
+    protected <name1><name2>HashMap newWithKeysValues(<type1> key1, <type2> value1)
+    {
+        return new <name1><name2>HashMap(1).withKeyValue(key1, value1);
+    }
+
+    @Override
+    protected <name1><name2>HashMap newWithKeysValues(<type1> key1, <type2> value1, <type1> key2, <type2> value2)
+    {
+        return new <name1><name2>HashMap(2).withKeysValues(key1, value1, key2, value2);
+    }
+
+    @Override
+    protected <name1><name2>HashMap newWithKeysValues(<type1> key1, <type2> value1, <type1> key2, <type2> value2, <type1> key3, <type2> value3)
+    {
+        return new <name1><name2>HashMap(3).withKeysValues(key1, value1, key2, value2, key3, value3);
+    }
+
+    @Override
+    protected <name1><name2>HashMap newWithKeysValues(<type1> key1, <type2> value1, <type1> key2, <type2> value2, <type1> key3, <type2> value3, <type1> key4, <type2> value4)
+    {
+        return new <name1><name2>HashMap(4).withKeysValues(key1, value1, key2, value2, key3, value3, key4, value4);
+    }
+
+    @Override
+    protected <name1><name2>HashMap getEmptyMap()
+    {
+        return new <name1><name2>HashMap();
+    }
+
+    @Test
+    public void defaultInitialCapacity() throws Exception
+    {
+        <if(!sameTwoPrimitives)>
+        Field keys = <name1><name2>HashMap.class.getDeclaredField("keys");
+        keys.setAccessible(true);
+        Field values = <name1><name2>HashMap.class.getDeclaredField("values");
+        values.setAccessible(true);
+        <else>
+        Field keysValues = <name1><name2>HashMap.class.getDeclaredField("keysValues");
+        keysValues.setAccessible(true);
+        <endif>
+        <name1><name2>HashMap hashMap = new <name1><name2>HashMap();
+        <if(!sameTwoPrimitives)>
+        Assert.assertEquals(16L, ((<type1>[]) keys.get(hashMap)).length);
+        Assert.assertEquals(16L, ((<type2>[]) values.get(hashMap)).length);
+        <else>
+        Assert.assertEquals(32L, ((<type1>[]) keysValues.get(hashMap)).length);
+        <endif>
+    }
+
+    @Test
+    public void newWithInitialCapacity() throws Exception
+    {
+        <if(!sameTwoPrimitives)>
+        Field keys = <name1><name2>HashMap.class.getDeclaredField("keys");
+        keys.setAccessible(true);
+        Field values = <name1><name2>HashMap.class.getDeclaredField("values");
+        values.setAccessible(true);
+
+        <name1><name2>HashMap hashMap = new <name1><name2>HashMap(3);
+        Assert.assertEquals(8L, ((<type1>[]) keys.get(hashMap)).length);
+        Assert.assertEquals(8L, ((<type2>[]) values.get(hashMap)).length);
+
+        <name1><name2>HashMap hashMap2 = new <name1><name2>HashMap(15);
+        Assert.assertEquals(32L, ((<type1>[]) keys.get(hashMap2)).length);
+        Assert.assertEquals(32L, ((<type2>[]) values.get(hashMap2)).length);
+        <else>
+        Field keysValues = <name1><name2>HashMap.class.getDeclaredField("keysValues");
+        keysValues.setAccessible(true);
+        <name1><name2>HashMap hashMap = new <name1><name2>HashMap(3);
+        Assert.assertEquals(16L, ((<type1>[]) keysValues.get(hashMap)).length);
+
+        <name1><name2>HashMap hashMap2 = new <name1><name2>HashMap(15);
+        Assert.assertEquals(64L, ((<type1>[]) keysValues.get(hashMap2)).length);
+        <endif>
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void newWithInitialCapacity_negative_throws()
+    {
+        new <name1><name2>HashMap(-1);
+    }
+
+    @Test
+    public void newMap() throws Exception
+    {
+        <if(!sameTwoPrimitives)>
+        Field keys = <name1><name2>HashMap.class.getDeclaredField("keys");
+        keys.setAccessible(true);
+        Field values = <name1><name2>HashMap.class.getDeclaredField("values");
+        values.setAccessible(true);
+
+        <name1><name2>HashMap hashMap = new <name1><name2>HashMap();
+        Assert.assertEquals(16L, ((<type1>[]) keys.get(hashMap)).length);
+        Assert.assertEquals(16L, ((<type2>[]) values.get(hashMap)).length);
+        <else>
+        Field keysValues = <name1><name2>HashMap.class.getDeclaredField("keysValues");
+        keysValues.setAccessible(true);
+
+        <name1><name2>HashMap hashMap = new <name1><name2>HashMap();
+        Assert.assertEquals(32L, ((<type1>[]) keysValues.get(hashMap)).length);
+        <endif>
+        Assert.assertEquals(new <name1><name2>HashMap(), hashMap);
+    }
+
+    @Test
+    public void putWithRehash() throws Exception
+    {
+        <name1><name2>HashMap hashMap = new <name1><name2>HashMap();
+        for (int i = 2; i \< 10; i++)
+        {
+            Assert.assertFalse(hashMap.containsKey(<(castFromInt.(type1))("i")>));
+            hashMap.put(<(castFromInt.(type1))("i")>, <(castFromInt.(type2))("i")>);
+        }
+
+        <if(!sameTwoPrimitives)>
+        Field keys = <name1><name2>HashMap.class.getDeclaredField("keys");
+        Field values = <name1><name2>HashMap.class.getDeclaredField("values");
+        keys.setAccessible(true);
+        values.setAccessible(true);
+        Assert.assertEquals(16L, ((<type1>[]) keys.get(hashMap)).length);
+        Assert.assertEquals(16L, ((<type2>[]) values.get(hashMap)).length);
+        <endif>
+        Verify.assertSize(8, hashMap);
+        for (int i = 2; i \< 10; i++)
+        {
+            Assert.assertTrue(hashMap.containsKey(<(castFromInt.(type1))("i")>));
+            Assert.assertTrue(hashMap.containsValue(<(castFromInt.(type2))("i")>));
+        }
+
+        Field occupiedWithData = <name1><name2>HashMap.class.getDeclaredField("occupiedWithData");
+        Field occupiedWithSentinels = <name1><name2>HashMap.class.getDeclaredField("occupiedWithSentinels");
+        occupiedWithData.setAccessible(true);
+        occupiedWithSentinels.setAccessible(true);
+        Assert.assertEquals(8, occupiedWithData.get(hashMap));
+        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+
+        hashMap.remove(<(literal.(type1))("2")>);
+        Assert.assertEquals(7, occupiedWithData.get(hashMap));
+        Assert.assertEquals(1, occupiedWithSentinels.get(hashMap));
+        hashMap.put(<(literal.(type1))("10")>, <(literal.(type2))("10")>);
+        hashMap.put(<(literal.(type1))("11")>, <(literal.(type2))("11")>);
+        Assert.assertEquals(9, occupiedWithData.get(hashMap));
+        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+    }
+
+    @Test
+    public void removeWithoutRehash() throws Exception
+    {
+        <name1><name2>HashMap hashMap = new <name1><name2>HashMap();
+        for (int i = 2; i \< 10; i++)
+        {
+            hashMap.put(<(castFromInt.(type1))("i")>, <(castFromInt.(type2))("i")>);
+        }
+
+        <if(!sameTwoPrimitives)>
+        Field keys = <name1><name2>HashMap.class.getDeclaredField("keys");
+        Field values = <name1><name2>HashMap.class.getDeclaredField("values");
+        keys.setAccessible(true);
+        values.setAccessible(true);
+        Assert.assertEquals(16L, ((<type1>[]) keys.get(hashMap)).length);
+        Assert.assertEquals(16L, ((<type2>[]) values.get(hashMap)).length);
+        <endif>
+
+        Field occupiedWithData = <name1><name2>HashMap.class.getDeclaredField("occupiedWithData");
+        occupiedWithData.setAccessible(true);
+        Assert.assertEquals(8, occupiedWithData.get(hashMap));
+
+        Field occupiedWithSentinels = <name1><name2>HashMap.class.getDeclaredField("occupiedWithSentinels");
+        occupiedWithSentinels.setAccessible(true);
+        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+
+        for (int i = 0; i \< 4; i++)
+        {
+            hashMap.remove(<(castIntToNarrowTypeWithParens.(type1))("i + 2")>);
+            Assert.assertEquals(7 - i, occupiedWithData.get(hashMap));
+            Assert.assertEquals(i + 1, occupiedWithSentinels.get(hashMap));
+        }
+
+        hashMap.remove(<(literal.(type1))("6")>);
+        Assert.assertEquals(3, occupiedWithData.get(hashMap));
+        Assert.assertEquals(5, occupiedWithSentinels.get(hashMap));
+    }
+
+    @Test
+    public void occupiedWithDataAndSentinelsOnClear() throws Exception
+    {
+        Field occupiedWithData = <name1><name2>HashMap.class.getDeclaredField("occupiedWithData");
+        Field occupiedWithSentinels = <name1><name2>HashMap.class.getDeclaredField("occupiedWithSentinels");
+        occupiedWithData.setAccessible(true);
+        occupiedWithSentinels.setAccessible(true);
+        <name1><name2>HashMap hashMap = <name1><name2>HashMap.newWithKeysValues(<["2", "3"]:keyValue(); separator=", ">);
+
+        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+        Assert.assertEquals(2, occupiedWithData.get(hashMap));
+
+        hashMap.remove(<(literal.(type1))("2")>);
+        Assert.assertEquals(1, occupiedWithSentinels.get(hashMap));
+        Assert.assertEquals(1, occupiedWithData.get(hashMap));
+
+        hashMap.clear();
+        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+        Assert.assertEquals(0, occupiedWithData.get(hashMap));
+    }
+
+    @Test
+    public void occupiedWithDataAndSentinelsOnRemove() throws Exception
+    {
+        Field occupiedWithData = <name1><name2>HashMap.class.getDeclaredField("occupiedWithData");
+        Field occupiedWithSentinels = <name1><name2>HashMap.class.getDeclaredField("occupiedWithSentinels");
+        occupiedWithData.setAccessible(true);
+        occupiedWithSentinels.setAccessible(true);
+        <name1><name2>HashMap hashMap = <name1><name2>HashMap.newWithKeysValues(<["2", "3", "4"]:keyValue(); separator=", ">);
+
+        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+        Assert.assertEquals(3, occupiedWithData.get(hashMap));
+
+        hashMap.remove(<(literal.(type1))("2")>);
+        Assert.assertEquals(1, occupiedWithSentinels.get(hashMap));
+        Assert.assertEquals(2, occupiedWithData.get(hashMap));
+
+        hashMap.remove(<(literal.(type1))("2")>);
+        Assert.assertEquals(1, occupiedWithSentinels.get(hashMap));
+        Assert.assertEquals(2, occupiedWithData.get(hashMap));
+
+        hashMap.remove(<(literal.(type1))("5")>);
+        Assert.assertEquals(1, occupiedWithSentinels.get(hashMap));
+        Assert.assertEquals(2, occupiedWithData.get(hashMap));
+    }
+
+    @Test
+    public void occupiedWithDataAndSentinelsOnUpdateValue() throws Exception
+    {
+        Field occupiedWithData = <name1><name2>HashMap.class.getDeclaredField("occupiedWithData");
+        Field occupiedWithSentinels = <name1><name2>HashMap.class.getDeclaredField("occupiedWithSentinels");
+        occupiedWithData.setAccessible(true);
+        occupiedWithSentinels.setAccessible(true);
+        <name1><name2>HashMap hashMap = <name1><name2>HashMap.newWithKeysValues(<["2", "3", "4"]:keyValue(); separator=", ">);
+
+        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+        Assert.assertEquals(3, occupiedWithData.get(hashMap));
+
+        <name2>To<name2>Function function = (<type2> <type2>Parameter) -> <type2>Parameter;
+
+        hashMap.updateValue(<(literal.(type1))("2")>, <(literal.(type2))("0")>, function);
+        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+        Assert.assertEquals(3, occupiedWithData.get(hashMap));
+
+        hashMap.updateValue(<(literal.(type1))("5")>, <(literal.(type2))("0")>, function);
+        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+        Assert.assertEquals(4, occupiedWithData.get(hashMap));
+
+        hashMap.remove(<(literal.(type1))("2")>);
+        Assert.assertEquals(1, occupiedWithSentinels.get(hashMap));
+        Assert.assertEquals(3, occupiedWithData.get(hashMap));
+
+        hashMap.updateValue(<(literal.(type1))("2")>, <(literal.(type2))("0")>, function); // putting in a slot marked REMOVED
+        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+        Assert.assertEquals(4, occupiedWithData.get(hashMap));
+    }
+
+    @Test
+    public void occupiedWithDataAndSentinelsOnPut() throws Exception
+    {
+        Field occupiedWithData = <name1><name2>HashMap.class.getDeclaredField("occupiedWithData");
+        Field occupiedWithSentinels = <name1><name2>HashMap.class.getDeclaredField("occupiedWithSentinels");
+        occupiedWithData.setAccessible(true);
+        occupiedWithSentinels.setAccessible(true);
+        <name1><name2>HashMap hashMap = new <name1><name2>HashMap();
+        Assert.assertEquals(0, occupiedWithData.get(hashMap));
+        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+
+        for (int i = 2; i \< 10; i++)
+        {
+            hashMap.put(<(castFromInt.(type1))("i")>, <(castFromInt.(type2))("i")>);
+            Assert.assertEquals(i - 1, occupiedWithData.get(hashMap));
+        }
+
+        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+
+        hashMap.remove(<(literal.(type1))("2")>);
+        Assert.assertEquals(7, occupiedWithData.get(hashMap));
+        Assert.assertEquals(1, occupiedWithSentinels.get(hashMap));
+
+        hashMap.put(<(literal.(type1))("2")>, <(literal.(type2))("9")>); // putting in a slot marked REMOVED
+        Assert.assertEquals(8, occupiedWithData.get(hashMap));
+        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+    }
+
+    @Test
+    public void occupiedWithDataAndSentinelsOnGetIfAbsentPut() throws Exception
+    {
+        Field occupiedWithData = <name1><name2>HashMap.class.getDeclaredField("occupiedWithData");
+        Field occupiedWithSentinels = <name1><name2>HashMap.class.getDeclaredField("occupiedWithSentinels");
+        occupiedWithData.setAccessible(true);
+        occupiedWithSentinels.setAccessible(true);
+        <name1><name2>HashMap hashMap = <name1><name2>HashMap.newWithKeysValues(<["2", "3", "4"]:keyValue(); separator=", ">);
+
+        hashMap.getIfAbsentPut(<(literal.(type1))("2")>, <(literal.(type2))("5")>);
+        Assert.assertEquals(3, occupiedWithData.get(hashMap));
+        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+
+        hashMap.getIfAbsentPut(<(literal.(type1))("5")>, <(literal.(type2))("5")>);
+        Assert.assertEquals(4, occupiedWithData.get(hashMap));
+        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+
+        hashMap.remove(<(literal.(type1))("2")>);
+        Assert.assertEquals(3, occupiedWithData.get(hashMap));
+        Assert.assertEquals(1, occupiedWithSentinels.get(hashMap));
+
+        hashMap.getIfAbsentPut(<(literal.(type1))("2")>, <(literal.(type2))("5")>); //putting in a slot marked REMOVED
+        Assert.assertEquals(4, occupiedWithData.get(hashMap));
+        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+    }
+
+    @Test
+    public void occupiedWithDataAndSentinelsOnGetIfAbsentPutFunction() throws Exception
+    {
+        Field occupiedWithData = <name1><name2>HashMap.class.getDeclaredField("occupiedWithData");
+        Field occupiedWithSentinels = <name1><name2>HashMap.class.getDeclaredField("occupiedWithSentinels");
+        occupiedWithData.setAccessible(true);
+        occupiedWithSentinels.setAccessible(true);
+        <name1><name2>HashMap hashMap = <name1><name2>HashMap.newWithKeysValues(<["2", "3", "4"]:keyValue(); separator=", ">);
+
+        <name2>Function0 function = () -> <(literal.(type2))("5")>;
+
+        hashMap.getIfAbsentPut(<(literal.(type1))("2")>, function);
+        Assert.assertEquals(3, occupiedWithData.get(hashMap));
+        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+
+        hashMap.getIfAbsentPut(<(literal.(type1))("5")>, function);
+        Assert.assertEquals(4, occupiedWithData.get(hashMap));
+        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+
+        hashMap.remove(<(literal.(type1))("2")>);
+        Assert.assertEquals(3, occupiedWithData.get(hashMap));
+        Assert.assertEquals(1, occupiedWithSentinels.get(hashMap));
+
+        hashMap.getIfAbsentPut(<(literal.(type1))("2")>, function); //putting in a slot marked REMOVED
+        Assert.assertEquals(4, occupiedWithData.get(hashMap));
+        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+    }
+
+    @Test
+    public void occupiedWithDataAndSentinelsOnGetIfAbsentPutWith() throws Exception
+    {
+        Field occupiedWithData = <name1><name2>HashMap.class.getDeclaredField("occupiedWithData");
+        Field occupiedWithSentinels = <name1><name2>HashMap.class.getDeclaredField("occupiedWithSentinels");
+        occupiedWithData.setAccessible(true);
+        occupiedWithSentinels.setAccessible(true);
+        <name1><name2>HashMap hashMap = <name1><name2>HashMap.newWithKeysValues(<["2", "3", "4"]:keyValue(); separator=", ">);
+
+        <name2>Function\<<wrapperName2>\> function = <wrapperName2>::<type2>Value;
+
+        hashMap.getIfAbsentPutWith(<(literal.(type1))("2")>, function, <wrapperName2>.valueOf(<(literal.(type2))("5")>));
+        Assert.assertEquals(3, occupiedWithData.get(hashMap));
+        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+
+        hashMap.getIfAbsentPutWith(<(literal.(type1))("5")>, function, <wrapperName2>.valueOf(<(literal.(type2))("5")>));
+        Assert.assertEquals(4, occupiedWithData.get(hashMap));
+        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+
+        hashMap.remove(<(literal.(type1))("2")>);
+        Assert.assertEquals(3, occupiedWithData.get(hashMap));
+        Assert.assertEquals(1, occupiedWithSentinels.get(hashMap));
+
+        hashMap.getIfAbsentPutWith(<(literal.(type1))("2")>, function, <wrapperName2>.valueOf(<(literal.(type2))("5")>)); //putting in a slot marked REMOVED
+        Assert.assertEquals(4, occupiedWithData.get(hashMap));
+        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+    }
+
+    @Test
+    public void occupiedWithDataAndSentinelsOnGetIfAbsentPutWithKey() throws Exception
+    {
+        Field occupiedWithData = <name1><name2>HashMap.class.getDeclaredField("occupiedWithData");
+        Field occupiedWithSentinels = <name1><name2>HashMap.class.getDeclaredField("occupiedWithSentinels");
+        occupiedWithData.setAccessible(true);
+        occupiedWithSentinels.setAccessible(true);
+        <name1><name2>HashMap hashMap = <name1><name2>HashMap.newWithKeysValues(<["2", "3", "4"]:keyValue(); separator=", ">);
+
+        <name1>To<name2>Function function = (<type1> <type1>Parameter) -> (<type2>) <type1>Parameter;
+
+        hashMap.getIfAbsentPutWithKey(<(literal.(type1))("2")>, function);
+        Assert.assertEquals(3, occupiedWithData.get(hashMap));
+        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+
+        hashMap.getIfAbsentPutWithKey(<(literal.(type1))("5")>, function);
+        Assert.assertEquals(4, occupiedWithData.get(hashMap));
+        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+
+        hashMap.remove(<(literal.(type1))("2")>);
+        Assert.assertEquals(3, occupiedWithData.get(hashMap));
+        Assert.assertEquals(1, occupiedWithSentinels.get(hashMap));
+
+        hashMap.getIfAbsentPutWithKey(<(literal.(type1))("2")>, function); //putting in a slot marked REMOVED
+        Assert.assertEquals(4, occupiedWithData.get(hashMap));
+        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+    }
+
+    @Test
+    public void occupiedWithSentinelsOnPutRemovedSlot() throws Exception
+    {
+        Field occupiedWithData = <name1><name2>HashMap.class.getDeclaredField("occupiedWithData");
+        Field occupiedWithSentinels = <name1><name2>HashMap.class.getDeclaredField("occupiedWithSentinels");
+        occupiedWithData.setAccessible(true);
+        occupiedWithSentinels.setAccessible(true);
+        <name1><name2>HashMap hashMap = new <name1><name2>HashMap();
+        Assert.assertEquals(0, occupiedWithData.get(hashMap));
+        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+
+        for (int i = 2; i \< 10; i++)
+        {
+            Assert.assertFalse(hashMap.containsKey(<(castFromInt.(type1))("i")>));
+            hashMap.put(<(castFromInt.(type1))("i")>, <(castFromInt.(type2))("i")>);
+            Assert.assertEquals(i - 1, occupiedWithData.get(hashMap));
+        }
+
+        hashMap.remove(<(literal.(type1))("2")>);
+        Assert.assertEquals(1, occupiedWithSentinels.get(hashMap));
+        Assert.assertEquals(7, occupiedWithData.get(hashMap));
+
+        hashMap.put(<(literal.(type1))("2")>, <(literal.(type2))("3")>); //putting in a slot marked as REMOVED
+
+        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+        Assert.assertEquals(8, occupiedWithData.get(hashMap));
+    }
+
+    @Test
+    public void testPutAll()
+    {
+        Mutable<name1><name2>Map copyMap = new <name1><name2>HashMap();
+
+        for (int i = 2; i \< 10; i++)
+        {
+            Assert.assertFalse(copyMap.containsKey(<(castFromInt.(type1))("i")>));
+            copyMap.put(<(castFromInt.(type1))("i")>, <(castFromInt.(type2))("i")>);
+        }
+
+        Verify.assertSize(8, copyMap);
+        Mutable<name1><name2>Map hashMap = new <name1><name2>HashMap();
+        Verify.assertSize(0, hashMap);
+        hashMap.putAll(copyMap);
+        Verify.assertSize(8, hashMap);
+
+        for (int i = 2; i \< 10; i++)
+        {
+            Assert.assertTrue(hashMap.containsKey(<(castFromInt.(type1))("i")>));
+            Assert.assertTrue(hashMap.containsValue(<(castFromInt.(type2))("i")>));
+        }
+
+        Assert.assertEquals(copyMap, hashMap);
+    }
+
+    @Override
+    @Test
+    public void withKeysValues()
+    {
+        super.withKeysValues();
+        <name1><name2>HashMap hashMap0 = new <name1><name2>HashMap();
+        Assert.assertSame(hashMap0.withKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("1")>, <(literal.(type1))("2")>, <(literal.(type2))("2")>), hashMap0);
+        <name1><name2>HashMap hashMap1 = new <name1><name2>HashMap().withKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("1")>, <(literal.(type1))("2")>, <(literal.(type2))("2")>, <(literal.(type1))("3")>, <(literal.(type2))("3")>);
+        <name1><name2>HashMap hashMap2 = new <name1><name2>HashMap().withKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("1")>, <(literal.(type1))("2")>, <(literal.(type2))("2")>, <(literal.(type1))("3")>, <(literal.(type2))("3")>, <(literal.(type1))("4")>, <(literal.(type2))("4")>);
+        Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("1")>, <(literal.(type1))("2")>, <(literal.(type2))("2")>), hashMap0);
+        Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("1")>, <(literal.(type1))("2")>, <(literal.(type2))("2")>, <(literal.(type1))("3")>, <(literal.(type2))("3")>), hashMap1);
+        Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("1")>, <(literal.(type1))("2")>, <(literal.(type2))("2")>, <(literal.(type1))("3")>, <(literal.(type2))("3")>, <(literal.(type1))("4")>, <(literal.(type2))("4")>), hashMap2);
+    }
+
+    @Test
+    public void injectInto()
+    {
+        <name1><name2>HashMap hashMap = new <name1><name2>HashMap().withKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("2")>, <(literal.(type1))("2")>, <(literal.(type2))("3")>, <(literal.(type1))("3")>, <(literal.(type2))("4")>, <(literal.(type1))("4")>, <(literal.(type2))("5")>);
+        <wrapperName2> sum = hashMap.injectInto(<wrapperName2>.valueOf(<(literal.(type2))("1")>), (<wrapperName2> result, <type2> value) -> <wrapperName2>.valueOf((<type2>) (result + value)));
+        Assert.assertEquals(<wrapperName2>.valueOf(<(literal.(type2))("15")>), sum);
+    }
+
+    @Test
+    public void updateValue_every_slot()
+    {
+        <name2>To<name2>Function incrementFunction = (<type2> value) -> <(castIntToNarrowTypeWithParens.(type2))({value + <(literal.(type2))("1")>})>;
+
+        Mutable<name1><name2>Map hashMap = this.getEmptyMap();
+
+        for (int i = 2; i \< 100; i++)
+        {
+            Assert.assertEquals(<(literal.(type2))("0")>, hashMap.get(<(castFromInt.(type1))("i")>)<(wideDelta.(type2))>);
+            Assert.assertEquals(<(wideLiteral.(type2))("1")>, hashMap.updateValue(<(castFromInt.(type1))("i")>, <(literal.(type2))("0")>, incrementFunction)<(wideDelta.(type2))>);
+            Assert.assertEquals(<(literal.(type2))("1")>, hashMap.get(<(castFromInt.(type1))("i")>)<(wideDelta.(type2))>);
+        }
+    }
+
+    @Test
+    public void classIsNonInstantiable()
+    {
+        Verify.assertClassNonInstantiable(<name1><name2>Maps.class);
+    }
+}
+
+>>
+
+keyValue(value) ::= <<
+<(literal.(type1))(value)>, <(literal.(type2))(value)>
+>>

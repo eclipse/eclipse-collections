@@ -1,0 +1,90 @@
+import "copyright.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+import "primitiveEquals.stg"
+
+skipBoolean() ::= "true"
+
+isTest() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/map/mutable/primitive"
+
+fileName(primitive) ::= "Object<primitive.name>HashMapTest"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name, primitive.wrapperName)>
+>>
+
+body(type, name, wrapperName) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.map.mutable.primitive;
+
+import java.lang.reflect.Field;
+import java.util.Iterator;
+
+import org.eclipse.collections.api.block.function.primitive.<name>Function;
+import org.eclipse.collections.api.block.function.primitive.<name>Function0;
+import org.eclipse.collections.api.block.function.primitive.<name>To<name>Function;
+import org.eclipse.collections.api.map.primitive.MutableObject<name>Map;
+import org.eclipse.collections.impl.factory.primitive.Object<name>Maps;
+import org.eclipse.collections.impl.test.Verify;
+import org.junit.Assert;
+import org.junit.Test;
+
+/**
+ * JUnit test for {@link Object<name>HashMap}.
+ * This file was automatically generated from template file objectPrimitiveHashMapTest.stg.
+ */
+public class Object<name>HashMapTest extends Object<name>HashMapTestCase
+{
+    @Override
+    protected Object<name>HashMap\<String> classUnderTest()
+    {
+        return Object<name>HashMap.newWithKeysValues("0", <(literal.(type))("0")>, "1", <(literal.(type))("1")>, "2", <(literal.(type))("2")>);
+    }
+
+    @Override
+    protected \<T> Object<name>HashMap\<T> newWithKeysValues(T key1, <type> value1)
+    {
+        return Object<name>HashMap.newWithKeysValues(key1, value1);
+    }
+
+    @Override
+    protected \<T> Object<name>HashMap\<T> newWithKeysValues(T key1, <type> value1, T key2, <type> value2)
+    {
+        return Object<name>HashMap.newWithKeysValues(key1, value1, key2, value2);
+    }
+
+    @Override
+    protected \<T> Object<name>HashMap\<T> newWithKeysValues(T key1, <type> value1, T key2, <type> value2, T key3, <type> value3)
+    {
+        return Object<name>HashMap.newWithKeysValues(key1, value1, key2, value2, key3, value3);
+    }
+
+    @Override
+    protected \<T> Object<name>HashMap\<T> newWithKeysValues(T key1, <type> value1, T key2, <type> value2, T key3, <type> value3, T key4, <type> value4)
+    {
+        return Object<name>HashMap.newWithKeysValues(key1, value1, key2, value2, key3, value3, key4, value4);
+    }
+
+    @Override
+    protected \<T> Object<name>HashMap\<T> getEmptyMap()
+    {
+        return new Object<name>HashMap\<>();
+    }
+
+    @Override
+    protected MutableObject<name>Map newMapWithInitialCapacity(int size)
+    {
+        return new Object<name>HashMap\<>(size);
+    }
+
+    @Override
+    protected Class getTargetClass()
+    {
+        return Object<name>HashMap.class;
+    }
+}
+
+>>

@@ -1,0 +1,9 @@
+<component name="CopyrightManager">
+  <copyright>
+    <option name="notice" value="Copyright (c) &amp;#36;today.year Goldman Sachs.&#10;All rights reserved. This program and the accompanying materials&#10;are made available under the terms of the Eclipse Public License v1.0&#10;and Eclipse Distribution License v. 1.0 which accompany this distribution.&#10;The Eclipse Public License is available at http://www.eclipse.org/legal/epl-v10.html&#10;and the Eclipse Distribution License is available at&#10;http://www.eclipse.org/org/documents/edl-v10.php." />
+    <option name="keyword" value="Copyright" />
+    <option name="allowReplaceKeyword" value="Goldman Sachs" />
+    <option name="myName" value="Eclipse" />
+    <option name="myLocal" value="true" />
+  </copyright>
+</component>

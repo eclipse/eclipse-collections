@@ -1,0 +1,305 @@
+import "copyright.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+import "primitiveEquals.stg"
+
+skipBoolean() ::= "true"
+
+isTest() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/map/mutable/primitive"
+
+fileName(primitive) ::= "UnmodifiableObject<primitive.name>MapTest"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name, primitive.wrapperName)>
+>>
+
+body(type, name, wrapperName) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.map.mutable.primitive;
+
+import org.eclipse.collections.api.block.function.primitive.<name>Function;
+import org.eclipse.collections.api.block.function.primitive.<name>Function0;
+import org.eclipse.collections.api.block.function.primitive.<name>To<name>Function;
+import org.eclipse.collections.api.map.primitive.MutableObject<name>Map;
+import org.eclipse.collections.impl.list.mutable.FastList;
+import org.eclipse.collections.impl.test.Verify;
+import org.junit.Assert;
+import org.junit.Test;
+
+/**
+ * JUnit test for {@link UnmodifiableObject<name>Map}.
+ * This file was automatically generated from template file unmodifiableObjectPrimitiveMapTest.stg.
+ */
+public class UnmodifiableObject<name>MapTest extends AbstractMutableObject<name>MapTestCase
+{
+    private final UnmodifiableObject<name>Map\<String> map = this.classUnderTest();
+
+    @Override
+    protected UnmodifiableObject<name>Map\<String> classUnderTest()
+    {
+        return new UnmodifiableObject<name>Map\<>(Object<name>HashMap.newWithKeysValues("0", <(literal.(type))("0")>, "1", <(literal.(type))("1")>, "2", <(literal.(type))("2")>));
+    }
+
+    @Override
+    protected \<T> UnmodifiableObject<name>Map\<T> newWithKeysValues(T key1, <type> value1)
+    {
+        return new UnmodifiableObject<name>Map\<>(Object<name>HashMap.newWithKeysValues(key1, value1));
+    }
+
+    @Override
+    protected \<T> UnmodifiableObject<name>Map\<T> newWithKeysValues(T key1, <type> value1, T key2, <type> value2)
+    {
+        return new UnmodifiableObject<name>Map\<>(Object<name>HashMap.newWithKeysValues(key1, value1, key2, value2));
+    }
+
+    @Override
+    protected \<T> UnmodifiableObject<name>Map\<T> newWithKeysValues(T key1, <type> value1, T key2, <type> value2, T key3, <type> value3)
+    {
+        return new UnmodifiableObject<name>Map\<>(Object<name>HashMap.newWithKeysValues(key1, value1, key2, value2, key3, value3));
+    }
+
+    @Override
+    protected \<T> UnmodifiableObject<name>Map\<T> newWithKeysValues(T key1, <type> value1, T key2, <type> value2, T key3, <type> value3, T key4, <type> value4)
+    {
+        return new UnmodifiableObject<name>Map\<>(Object<name>HashMap.newWithKeysValues(key1, value1, key2, value2, key3, value3, key4, value4));
+    }
+
+    @Override
+    protected \<T> UnmodifiableObject<name>Map\<T> getEmptyMap()
+    {
+        return new UnmodifiableObject<name>Map\<>(new Object<name>HashMap\<>());
+    }
+
+    @Override
+    @Test
+    public void asUnmodifiable()
+    {
+        super.asUnmodifiable();
+        Assert.assertSame(this.map, this.map.asUnmodifiable());
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void clear()
+    {
+        this.map.clear();
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void removeKey()
+    {
+        this.map.removeKey("0");
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void remove()
+    {
+        this.map.remove("0");
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void put()
+    {
+        this.map.put("0", <(literal.(type))("1")>);
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void withKeysValues()
+    {
+        this.map.withKeyValue("1", <(literal.(type))("0")>);
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void withoutKey()
+    {
+        this.map.withoutKey("0");
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void withoutAllKeys()
+    {
+        this.map.withoutAllKeys(FastList.newListWith("0", "1"));
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void putDuplicateWithRemovedSlot()
+    {
+        String collision1 = AbstractMutableObject<name>MapTestCase.generateCollisions().getFirst();
+        this.getEmptyMap().put(collision1, <(literal.(type))("1")>);
+    }
+
+    @Override
+    @Test
+    public void get()
+    {
+        Assert.assertEquals(<(wideLiteral.(type))("0")>, this.map.get("0")<delta.(type)>);
+        Assert.assertEquals(<(wideLiteral.(type))("1")>, this.map.get("1")<delta.(type)>);
+        Assert.assertEquals(<(wideLiteral.(type))("2")>, this.map.get("2")<delta.(type)>);
+
+        Assert.assertEquals(<(wideLiteral.(type))("0")>, this.map.get("5")<delta.(type)>);
+    }
+
+    @Override
+    @Test
+    public void getIfAbsent()
+    {
+        Assert.assertEquals(<(wideLiteral.(type))("0")>, this.map.getIfAbsent("0", <(literal.(type))("1")>)<delta.(type)>);
+        Assert.assertEquals(<(wideLiteral.(type))("1")>, this.map.getIfAbsent("1", <(literal.(type))("2")>)<delta.(type)>);
+        Assert.assertEquals(<(wideLiteral.(type))("2")>, this.map.getIfAbsent("2", <(literal.(type))("3")>)<delta.(type)>);
+        Assert.assertEquals(<(wideLiteral.(type))("4")>, this.map.getIfAbsent("3", <(literal.(type))("4")>)<delta.(type)>);
+    }
+
+    @Override
+    @Test
+    public void getIfAbsentPut_Value()
+    {
+        Assert.assertEquals(<(wideLiteral.(type))("0")>, this.map.getIfAbsentPut("0", <(literal.(type))("100")>)<delta.(type)>);
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void getIfAbsentPut_ValueThrowsException()
+    {
+        this.map.getIfAbsentPut("10", <(literal.(type))("100")>);
+    }
+
+    @Override
+    @Test
+    public void getIfAbsentPut_Function()
+    {
+        <name>Function0 factory = () -> <(literal.(type))("100")>;
+
+        Assert.assertEquals(<(wideLiteral.(type))("0")>, this.map.getIfAbsentPut("0", factory)<delta.(type)>);
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void getIfAbsentPut_FunctionThrowsException()
+    {
+        <name>Function0 factory = () -> { throw new AssertionError(); };
+
+        this.map.getIfAbsentPut("10", factory);
+    }
+
+    @Override
+    @Test
+    public void getIfAbsentPutWith()
+    {
+        <name>Function\<String> functionLength = (String string) -> <(castIntToNarrowType.(type))("string.length()")>;
+
+        Assert.assertEquals(<(wideLiteral.(type))("0")>, this.map.getIfAbsentPutWith("0", functionLength, "123456789")<delta.(type)>);
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void getIfAbsentPutWithThrowsException()
+    {
+        <name>Function\<String> functionLength = (String string) -> { throw new AssertionError(); };
+
+        this.map.getIfAbsentPutWith("10", functionLength, "123456789");
+    }
+
+    @Override
+    @Test
+    public void getIfAbsentPutWithKey()
+    {
+        <name>Function\<Integer> function = (Integer anObject) -> anObject == null ? <(literal.(type))("32")> : <(castIntToNarrowType.(type))("anObject.intValue()")>;
+
+        Assert.assertEquals(<(wideLiteral.(type))("0")>, this.newWithKeysValues(0, <(literal.(type))("0")>).getIfAbsentPutWithKey(0, function)<delta.(type)>);
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void getIfAbsentPutWithKeyThrowsException()
+    {
+        <name>Function\<Integer> function = (Integer anObject) -> { throw new AssertionError(); };
+
+        this.\<Integer>getEmptyMap().getIfAbsentPutWithKey(10, function);
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void addToValue()
+    {
+        this.\<Integer>getEmptyMap().addToValue(10, <(literal.(type))("2")>);
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void updateValue()
+    {
+        <name>To<name>Function incrementFunction = (<type> value) -> { throw new AssertionError(); };
+
+        MutableObject<name>Map\<Integer> map1 = this.getEmptyMap();
+        map1.updateValue(0, <(literal.(type))("0")>, incrementFunction);
+    }
+
+    @Override
+    @Test
+    public void getOrThrow()
+    {
+        Assert.assertEquals(<(wideLiteral.(type))("0")>, this.map.getOrThrow("0")<delta.(type)>);
+        Assert.assertEquals(<(wideLiteral.(type))("1")>, this.map.getOrThrow("1")<delta.(type)>);
+        Assert.assertEquals(<(wideLiteral.(type))("2")>, this.map.getOrThrow("2")<delta.(type)>);
+
+        Verify.assertThrows(IllegalStateException.class, () -> this.map.getOrThrow("5"));
+        Verify.assertThrows(IllegalStateException.class, () -> this.map.getOrThrow(null));
+    }
+
+    @Override
+    @Test
+    public void contains()
+    {
+        Assert.assertTrue(this.map.contains(<(literal.(type))("0")>));
+        Assert.assertTrue(this.map.contains(<(literal.(type))("1")>));
+        Assert.assertTrue(this.map.contains(<(literal.(type))("2")>));
+
+        Assert.assertFalse(this.getEmptyMap().contains(<(literal.(type))("0")>));
+        Assert.assertFalse(this.newWithKeysValues("0", <(literal.(type))("0")>).contains(<(literal.(type))("1")>));
+    }
+
+    @Override
+    @Test
+    public void containsKey()
+    {
+        Assert.assertTrue(this.map.containsKey("0"));
+        Assert.assertTrue(this.map.containsKey("1"));
+        Assert.assertTrue(this.map.containsKey("2"));
+        Assert.assertFalse(this.map.containsKey("3"));
+        Assert.assertFalse(this.map.containsKey(null));
+    }
+
+    @Override
+    @Test
+    public void containsValue()
+    {
+        Assert.assertTrue(this.map.containsValue(<(literal.(type))("0")>));
+        Assert.assertTrue(this.map.containsValue(<(literal.(type))("1")>));
+        Assert.assertTrue(this.map.containsValue(<(literal.(type))("2")>));
+        Assert.assertFalse(this.getEmptyMap().contains(<(literal.(type))("2")>));
+        Assert.assertFalse(this.newWithKeysValues("0", <(literal.(type))("1")>).contains(<(literal.(type))("2")>));
+    }
+
+    @Override
+    @Test
+    public void size()
+    {
+        Verify.assertSize(0, this.getEmptyMap());
+        Verify.assertSize(1, this.newWithKeysValues(0, <(literal.(type))("0")>));
+        Verify.assertSize(1, this.newWithKeysValues(1, <(literal.(type))("1")>));
+        Verify.assertSize(1, this.newWithKeysValues(null, <(literal.(type))("2")>));
+
+        Verify.assertSize(2, this.newWithKeysValues(1, <(literal.(type))("1")>, 5, <(literal.(type))("5")>));
+        Verify.assertSize(2, this.newWithKeysValues(0, <(literal.(type))("0")>, 5, <(literal.(type))("5")>));
+        Verify.assertSize(3, this.newWithKeysValues(1, <(literal.(type))("1")>, 0, <(literal.(type))("0")>, 5, <(literal.(type))("5")>));
+        Verify.assertSize(2, this.newWithKeysValues(6, <(literal.(type))("6")>, 5, <(literal.(type))("5")>));
+    }
+}
+
+>>

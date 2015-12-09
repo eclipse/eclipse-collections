@@ -1,0 +1,55 @@
+import "copyright.stg"
+import "primitiveLiteral.stg"
+
+isTest() ::= "true"
+
+skipBoolean() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/set/immutable/primitive"
+
+fileName(primitive) ::= "Immutable<primitive.name>SetFactoryImplTest"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.wrapperName, primitive.name)>
+>>
+
+body(type, wrapperName, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.set.immutable.primitive;
+
+import org.eclipse.collections.api.set.primitive.Immutable<name>Set;
+import org.eclipse.collections.impl.factory.primitive.<name>Sets;
+import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
+import org.eclipse.collections.impl.test.Verify;
+import org.junit.Assert;
+import org.junit.Test;
+
+/**
+ * JUnit test for {@link Immutable<name>SetFactoryImpl}.
+ * This file was automatically generated from template file immutablePrimitiveSetFactoryImplTest.stg.
+ */
+public class Immutable<name>SetFactoryImplTest
+{
+    @Test
+    public void of()
+    {
+        Verify.assertEmpty(<name>Sets.immutable.of());
+        Assert.assertEquals(<name>HashSet.newSetWith(<(literal.(type))("1")>).toImmutable(), <name>Sets.immutable.of(<(literal.(type))("1")>));
+    }
+
+    @Test
+    public void with()
+    {
+        Verify.assertEmpty(<name>Sets.immutable.with(null));
+    }
+
+    @Test
+    public void ofAll()
+    {
+        Immutable<name>Set set = <name>Sets.immutable.of(<["1", "2", "3"]:(literal.(type))(); separator=", ">);
+        Assert.assertEquals(<name>HashSet.newSet(set).toImmutable(), <name>Sets.immutable.ofAll(set));
+    }
+}
+
+>>

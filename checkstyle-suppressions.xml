@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+<!DOCTYPE suppressions PUBLIC
+    "-//Puppy Crawl//DTD Suppressions 1.1//EN"
+    "http://www.puppycrawl.com/dtds/suppressions_1_1.dtd">
+
+<!--
+  ~ Copyright (c) 2015 Goldman Sachs.
+  ~ All rights reserved. This program and the accompanying materials
+  ~ are made available under the terms of the Eclipse Public License v1.0
+  ~ and Eclipse Distribution License v. 1.0 which accompany this distribution.
+  ~ The Eclipse Public License is available at http://www.eclipse.org/legal/epl-v10.html
+  ~ and the Eclipse Distribution License is available at
+  ~ http://www.eclipse.org/org/documents/edl-v10.php.
+  -->
+
+<suppressions>
+
+    <suppress checks="IllegalType" files="ArrayListAdapter.java" />
+    <suppress checks="IllegalType" files="ArrayListIterate.java" />
+    <suppress checks="IllegalType" files="CompositeArrayList.java" />
+    <suppress checks="IllegalType" files="Interval.java" />
+
+    <suppress checks="IllegalImport" files="AlwaysTearDownTestCase.java" />
+    <suppress checks="IllegalImport" files="AlwaysTearDownUtils.java" />
+    <suppress checks="IllegalImport" files="AlwaysTearDownUtilsTest.java" />
+
+    <suppress checks="EqualsHashCode" files="VerifyTest.java" />
+
+    <suppress checks="RedundantThrows" files="FixedSizeCollection.java" />
+    <suppress checks="RedundantThrows" files="FixedSizeMap.java" />
+
+    <suppress checks="IllegalThrows" files="AlwaysTearDownTestCase.java" />
+    <suppress checks="IllegalThrows" files="CollectionFactoryTest.java" />
+
+    <suppress checks="DeclarationOrder" files="FixedSizeListFactory.java" />
+    <suppress checks="DeclarationOrder" files="FixedSizeSetFactory.java" />
+    <suppress checks="DeclarationOrder" files="FixedSizeMapFactory.java" />
+
+    <suppress checks="IllegalInstantiationCheck" files="VerifyTest.java" />
+    <suppress checks="IllegalInstantiationCheck" files="UnifiedSetTest.java" />
+    <suppress checks="IllegalInstantiationCheck" files="UnifiedSetWithHashingStrategyTest.java" />
+    <suppress checks="IllegalInstantiationCheck" files="ArrayListIterateTest.java" />
+    <suppress checks="IllegalInstantiationCheck" files="IterableIterateTest.java" />
+
+    <suppress checks="ConstantName" files="Bags.java" />
+    <suppress checks="ConstantName" files="Lists.java" />
+    <suppress checks="ConstantName" files="Maps.java" />
+    <suppress checks="ConstantName" files="Sets.java" />
+    <suppress checks="ConstantName" files="Stacks.java" />
+    <suppress checks="ConstantName" files="Multimaps.java" />
+
+    <suppress checks="MethodName" files="EclipseCollectionsCodeGenerator.java" />
+    <suppress files="[\\/]generated-sources[\\/]" checks="[a-zA-Z0-9]*"/>
+
+    <suppress checks="MethodName" files="[\\/]unit-tests-java8[\\/]" />
+
+    <suppress checks="IllegalImport" files="ConcurrentHashMapUnsafe.java" />
+
+    <suppress checks="RegexpHeader" files="MemoryTestBench.java" />
+
+    <!--suppress lambda expression-->
+    <suppress checks="[a-zA-Z0-0]*" files="SerialParallelLazyPerformanceTest.java" />
+
+    <suppress checks="ImportOrder" files="((Boolean)|(Byte)|(Char)|(Double)|(Int)|(Float)|(Long)|(Short)).*.java" />
+
+    <suppress checks="RedundantModifier" files="ImmutableBagSerializationProxy.java" />
+    <suppress checks="RedundantModifier" files="UnmodifiableBag.java" />
+    <suppress checks="RedundantModifier" files="ImmutableSortedBagSerializationProxy.java" />
+    <suppress checks="RedundantModifier" files="ImmutableBiMapSerializationProxy.java" />
+    <suppress checks="RedundantModifier" files="AbstractMutableBiMap.java" />
+    <suppress checks="RedundantModifier" files="DoubletonList.java" />
+    <suppress checks="RedundantModifier" files="QuadrupletonList.java" />
+    <suppress checks="RedundantModifier" files="QuintupletonList.java" />
+    <suppress checks="RedundantModifier" files="SextupletonList.java" />
+    <suppress checks="RedundantModifier" files="SingletonList.java" />
+    <suppress checks="RedundantModifier" files="TripletonList.java" />
+    <suppress checks="RedundantModifier" files="ImmutableBooleanArrayList.java" />
+    <suppress checks="RedundantModifier" files="DoubletonMap.java" />
+    <suppress checks="RedundantModifier" files="SingletonMap.java" />
+    <suppress checks="RedundantModifier" files="TripletonMap.java" />
+    <suppress checks="RedundantModifier" files="ImmutableMapSerializationProxy.java" />
+    <suppress checks="RedundantModifier" files="ImmutableSortedMapSerializationProxy.java" />
+    <suppress checks="RedundantModifier" files="ImmutableMapWithHashingStrategySerializationProxy.java" />
+    <suppress checks="RedundantModifier" files="ImmutableBagMultimapImpl.java" />
+    <suppress checks="RedundantModifier" files="ImmutableSortedBagMultimapImpl.java" />
+    <suppress checks="RedundantModifier" files="ImmutableSetMultimapImpl.java" />
+    <suppress checks="RedundantModifier" files="ImmutableSortedSetMultimapImpl.java" />
+    <suppress checks="RedundantModifier" files="DoubletonSet.java" />
+    <suppress checks="RedundantModifier" files="QuadrupletonSet.java" />
+    <suppress checks="RedundantModifier" files="SingletonSet.java" />
+    <suppress checks="RedundantModifier" files="TripletonSet.java" />
+    <suppress checks="RedundantModifier" files="ImmutableSetSerializationProxy.java" />
+    <suppress checks="RedundantModifier" files="ImmutableSortedSetSerializationProxy.java" />
+    <suppress checks="RedundantModifier" files="ImmutableSetWithHashingStrategySerializationProxy.java" />
+    <suppress checks="RedundantModifier" files="ImmutableArrayStack.java" />
+</suppressions>

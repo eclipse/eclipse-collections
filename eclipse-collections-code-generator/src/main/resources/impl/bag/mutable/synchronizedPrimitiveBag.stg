@@ -1,0 +1,224 @@
+import "copyright.stg"
+import "primitiveEquals.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+
+targetPath() ::= "org/eclipse/collections/impl/bag/mutable/primitive"
+
+fileName(primitive) ::= "Synchronized<primitive.name>Bag"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.bag.mutable.primitive;
+
+import java.util.Collection;
+import java.util.Collections;
+
+import org.eclipse.collections.api.<name>Iterable;
+import org.eclipse.collections.api.Lazy<name>Iterable;
+import org.eclipse.collections.api.bag.MutableBag;
+import org.eclipse.collections.api.bag.primitive.Immutable<name>Bag;
+import org.eclipse.collections.api.bag.primitive.Mutable<name>Bag;
+import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
+import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
+import org.eclipse.collections.api.block.procedure.primitive.<name>IntProcedure;
+import org.eclipse.collections.api.iterator.<name>Iterator;
+import org.eclipse.collections.impl.collection.mutable.primitive.AbstractSynchronized<name>Collection;
+import org.eclipse.collections.impl.factory.primitive.<name>Bags;
+import org.eclipse.collections.impl.lazy.primitive.Lazy<name>IterableAdapter;
+import net.jcip.annotations.GuardedBy;
+import net.jcip.annotations.ThreadSafe;
+
+/**
+ * A synchronized view of a {@link Mutable<name>Bag}. It is imperative that the user manually synchronize on the collection when iterating over it using the
+ * {@link <name>Iterator}, as per {@link Collections#synchronizedCollection(Collection)}.
+ * \<p>
+ * This file was automatically generated from template file synchronizedPrimitiveBag.stg.
+ *
+ * @see Mutable<name>Bag#asSynchronized()
+ * @see MutableBag#asSynchronized()
+ * @since 3.1.
+ */
+@ThreadSafe
+public final class Synchronized<name>Bag
+        extends AbstractSynchronized<name>Collection
+        implements Mutable<name>Bag
+{
+    private static final long serialVersionUID = 1L;
+
+    Synchronized<name>Bag(Mutable<name>Bag bag)
+    {
+        super(bag);
+    }
+
+    Synchronized<name>Bag(Mutable<name>Bag bag, Object newLock)
+    {
+        super(bag, newLock);
+    }
+
+    @GuardedBy("getLock()")
+    private Mutable<name>Bag getMutable<name>Bag()
+    {
+        return (Mutable<name>Bag) this.get<name>Collection();
+    }
+
+    @Override
+    public Synchronized<name>Bag with(<type> element)
+    {
+        synchronized (this.getLock())
+        {
+            this.getMutable<name>Bag().add(element);
+        }
+        return this;
+    }
+
+    @Override
+    public Synchronized<name>Bag without(<type> element)
+    {
+        synchronized (this.getLock())
+        {
+            this.getMutable<name>Bag().remove(element);
+        }
+        return this;
+    }
+
+    @Override
+    public Synchronized<name>Bag withAll(<name>Iterable elements)
+    {
+        synchronized (this.getLock())
+        {
+            this.getMutable<name>Bag().addAll(elements.toArray());
+        }
+        return this;
+    }
+
+    @Override
+    public Synchronized<name>Bag withoutAll(<name>Iterable elements)
+    {
+        synchronized (this.getLock())
+        {
+            this.getMutable<name>Bag().removeAll(elements);
+        }
+        return this;
+    }
+
+    public void addOccurrences(<type> item, int occurrences)
+    {
+        synchronized (this.getLock())
+        {
+            this.getMutable<name>Bag().addOccurrences(item, occurrences);
+        }
+    }
+
+    public boolean removeOccurrences(<type> item, int occurrences)
+    {
+        synchronized (this.getLock())
+        {
+            return this.getMutable<name>Bag().removeOccurrences(item, occurrences);
+        }
+    }
+
+    public int sizeDistinct()
+    {
+        synchronized (this.getLock())
+        {
+            return this.getMutable<name>Bag().sizeDistinct();
+        }
+    }
+
+    public int occurrencesOf(<type> item)
+    {
+        synchronized (this.getLock())
+        {
+            return this.getMutable<name>Bag().occurrencesOf(item);
+        }
+    }
+
+    public void forEachWithOccurrences(<name>IntProcedure procedure)
+    {
+        synchronized (this.getLock())
+        {
+            this.getMutable<name>Bag().forEachWithOccurrences(procedure);
+        }
+    }
+
+    @Override
+    public Mutable<name>Bag select(<name>Predicate predicate)
+    {
+        synchronized (this.getLock())
+        {
+            return this.getMutable<name>Bag().select(predicate);
+        }
+    }
+
+    @Override
+    public Mutable<name>Bag reject(<name>Predicate predicate)
+    {
+        synchronized (this.getLock())
+        {
+            return this.getMutable<name>Bag().reject(predicate);
+        }
+    }
+
+    @Override
+    public \<V> MutableBag\<V> collect(<name>ToObjectFunction\<? extends V> function)
+    {
+        synchronized (this.getLock())
+        {
+            return this.getMutable<name>Bag().collect(function);
+        }
+    }
+
+    @Override
+    public boolean equals(Object otherBag)
+    {
+        synchronized (this.getLock())
+        {
+            return this.getMutable<name>Bag().equals(otherBag);
+        }
+    }
+
+    @Override
+    public int hashCode()
+    {
+        synchronized (this.getLock())
+        {
+            return this.getMutable<name>Bag().hashCode();
+        }
+    }
+
+    @Override
+    public Lazy<name>Iterable asLazy()
+    {
+        synchronized (this.getLock())
+        {
+            return new Lazy<name>IterableAdapter(this);
+        }
+    }
+
+    @Override
+    public Mutable<name>Bag asUnmodifiable()
+    {
+        return new Unmodifiable<name>Bag(this);
+    }
+
+    @Override
+    public Mutable<name>Bag asSynchronized()
+    {
+        return this;
+    }
+
+    @Override
+    public Immutable<name>Bag toImmutable()
+    {
+        return <name>Bags.immutable.withAll(this);
+    }
+}
+
+>>
+

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false">
+    <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/acceptance-tests" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/eclipse-collections" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/eclipse-collections-api" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/eclipse-collections-testutils" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/eclipse-collections-code-generator" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/eclipse-collections-code-generator-ant" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/eclipse-collections-code-generator-maven-plugin" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/eclipse-collections-forkjoin" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/jmh-scala-tests" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/jmh-tests" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/junit-trait-runner" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/performance-tests" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/scala-unit-tests" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/serialization-tests" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/unit-tests" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/unit-tests-java8" charset="UTF-8" />
+  </component>
+</project>

@@ -1,0 +1,61 @@
+import "copyright.stg"
+
+targetPath() ::= "org/eclipse/collections/api/factory/stack/primitive"
+
+fileName(primitive) ::= "Mutable<primitive.name>StackFactory"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.api.factory.stack.primitive;
+
+import org.eclipse.collections.api.<name>Iterable;
+import org.eclipse.collections.api.stack.primitive.Mutable<name>Stack;
+
+/**
+ * A factory which creates instances of type {@link Mutable<name>Stack}.
+ * This file was automatically generated from template file mutablePrimitiveStackFactory.stg.
+ *
+ * @since 6.0.
+ */
+public interface Mutable<name>StackFactory
+{
+    Mutable<name>Stack empty();
+
+    /**
+     * Same as {@link #empty()}.
+     */
+    Mutable<name>Stack of();
+
+    /**
+     * Same as {@link #empty()}.
+     */
+    Mutable<name>Stack with();
+
+    /**
+     * Same as {@link #with(<type>[])}.
+     */
+    Mutable<name>Stack of(<type>... items);
+
+    Mutable<name>Stack with(<type>... items);
+
+    /**
+     * Same as {@link #withAll(<name>Iterable)}.
+     */
+    Mutable<name>Stack ofAll(<name>Iterable items);
+
+    Mutable<name>Stack withAll(<name>Iterable items);
+
+    /**
+     * Same as {@link #withAllReversed(<name>Iterable)}.
+     */
+    Mutable<name>Stack ofAllReversed(<name>Iterable items);
+
+    Mutable<name>Stack withAllReversed(<name>Iterable items);
+}
+
+>>

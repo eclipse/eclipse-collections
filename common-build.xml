@@ -1,0 +1,345 @@
+<!--
+  ~ Copyright (c) 2015 Goldman Sachs.
+  ~ All rights reserved. This program and the accompanying materials
+  ~ are made available under the terms of the Eclipse Public License v1.0
+  ~ and Eclipse Distribution License v. 1.0 which accompany this distribution.
+  ~ The Eclipse Public License is available at http://www.eclipse.org/legal/epl-v10.html
+  ~ and the Eclipse Distribution License is available at
+  ~ http://www.eclipse.org/org/documents/edl-v10.php.
+  -->
+
+<project
+    name="common-build"
+    xmlns:ivy="antlib:org.apache.ivy.ant">
+
+    <property file="../version.properties" />
+
+    <target name="clean" description="Clean the output directory">
+        <delete dir="target" />
+    </target>
+
+    <target name="-test-is-production">
+        <condition property="isProduction">
+            <and>
+                <isset property="build.major" />
+                <isset property="build.minor" />
+                <isset property="build.fix" />
+            </and>
+        </condition>
+    </target>
+
+    <target name="-test-set-prod-dev-properties" depends="-test-is-production">
+        <condition property="isProduction">
+            <isset property="isProduction" />
+        </condition>
+        <condition property="isDevelopment">
+            <not>
+                <isset property="isProduction" />
+            </not>
+        </condition>
+    </target>
+
+    <target name="-deploy-init">
+        <tstamp>
+            <format property="NOW" pattern="yyyy/MM/dd HH:mm" />
+        </tstamp>
+    </target>
+
+    <target name="-deploy-properties-prod" depends="-deploy-init, -test-set-prod-dev-properties" if="isProduction">
+        <property name="deploy.suffix" value="" />
+        <propertyfile file="../deploy.properties">
+            <entry key="build.major" type="string" value="${build.major}" />
+            <entry key="build.minor" type="string" value="${build.minor}" />
+            <entry key="build.fix" type="string" value="${build.fix}" />
+            <entry key="deploy.development" type="int" value="0" />
+            <entry key="deploy.date" type="date" value="${NOW}" />
+        </propertyfile>
+        <copy file="../deploy.properties" tofile="target/deploy.properties" overwrite="true" />
+
+        <property file="target/deploy.properties" />
+
+        <property name="remotedir"
+            value="${ant.project.name}/release/production/${ant.project.name}/${build.major}_${build.minor}_${build.fix}" />
+    </target>
+
+    <target name="-deploy-properties-dev" depends="-deploy-init, -test-set-prod-dev-properties" if="isDevelopment">
+        <copy file="../deploy.properties" tofile="target/deploy.properties" overwrite="true" />
+        <property name="deploy.suffix" value="-SNAPSHOT" />
+        <propertyfile file="target/deploy.properties">
+            <entry key="build.fix" type="int" default="0" operation="+" />
+            <entry key="deploy.development" type="string" value="X" />
+            <entry key="deploy.date" type="date" value="${NOW}" />
+        </propertyfile>
+
+        <property file="target/deploy.properties" />
+
+        <property name="remotedir" value="${ant.project.name}/release/development" />
+    </target>
+
+    <target
+        name="-deploy-properties"
+        depends="-deploy-properties-prod, -deploy-properties-dev">
+    </target>
+
+    <target name="-ivy-init"
+        depends="-deploy-properties">
+        <property name="ivy.dep.file" location="ivy.xml" />
+        <property name="ivy.settings.file" location="../ivysettings.xml" />
+
+        <property name="ivy.jar.file" value="${basedir}/../ivy-${ivy.version}.jar" />
+        <path id="ivy.lib.path">
+            <pathelement location="${ivy.jar.file}" />
+        </path>
+
+        <taskdef resource="org/apache/ivy/ant/antlib.xml" uri="antlib:org.apache.ivy.ant" classpathref="ivy.lib.path" />
+    </target>
+
+    <target name="-compile-init">
+        <uptodate property="compile.uptodate" targetfile="target/compile.uptodate">
+            <srcfiles dir="${src.dir}" includes="**/*.java" />
+        </uptodate>
+    </target>
+
+    <target
+        name="compile"
+        depends="-ivy-init, generate-sources, -compile-init"
+        unless="compile.uptodate"
+        description="Compile the code">
+
+        <ivy:cachepath pathid="compile.classpath" conf="compile, optional" />
+
+        <property name="generatedsrc.dir" location="${src.dir}" />
+        <mkdir dir="${src.dir}" />
+        <mkdir dir="${generatedsrc.dir}" />
+        <mkdir dir="target/classes" />
+        <javac
+            destdir="target/classes"
+            fork="true"
+            source="${source.level}"
+            target="${target.level}"
+            debug="on">
+            <src>
+                <pathelement location="${src.dir}" />
+                <pathelement location="${generatedsrc.dir}" />
+            </src>
+            <classpath refid="compile.classpath" />
+        </javac>
+
+        <copy todir="target/classes" failonerror="false">
+            <fileset dir="src/main/resources" />
+        </copy>
+
+        <touch file="target/compile.uptodate" />
+    </target>
+
+    <target name="jar"
+        depends="compile, -deploy-properties"
+        description="Builds the jar for the application">
+        <jar
+            jarfile="${jar.name}"
+            compress="true"
+            index="false"
+            basedir="target/classes" />
+    </target>
+
+    <target name="-compile-tests-init">
+        <mkdir dir="${testsrc.dir}" />
+        <uptodate property="compile-tests.uptodate" targetfile="target/compile-tests.uptodate">
+            <srcfiles dir="${testsrc.dir}" includes="**/*.java" />
+        </uptodate>
+    </target>
+
+    <target
+        name="compile-tests"
+        depends="jar, -compile-tests-init, -ivy-init"
+        unless="compile-tests.uptodate"
+        description="Compile the test code">
+
+        <ivy:cachepath pathid="compile-test.classpath" conf="compile-test" />
+
+        <mkdir dir="${testsrc.dir}" />
+        <mkdir dir="${generatedtestsrc.dir}" />
+        <mkdir dir="target/test-classes" />
+        <javac
+            destdir="target/test-classes"
+            fork="false"
+            source="1.5"
+            target="1.5"
+            debug="on"
+            updatedproperty="compile-tests.success">
+            <src>
+                <pathelement location="${testsrc.dir}" />
+                <pathelement location="${generatedtestsrc.dir}" />
+            </src>
+            <classpath>
+                <path refid="compile-test.classpath" />
+                <pathelement location="${jar.name}" />
+            </classpath>
+        </javac>
+
+        <copy todir="target/test-classes" failonerror="false">
+            <fileset dir="src/test/resources" />
+        </copy>
+
+        <touch file="target/compile-tests.uptodate" />
+    </target>
+
+    <target name="-test-skip-test">
+        <condition property="skip.test">
+            <or>
+                <istrue value="${skipTests}" />
+                <uptodate targetfile="target/tests.uptodate">
+                    <srcfiles dir="target">
+                        <include name="compile.uptodate" />
+                        <include name="compile-tests.uptodate" />
+                    </srcfiles>
+                </uptodate>
+            </or>
+        </condition>
+    </target>
+
+    <target
+        name="test"
+        depends="-test-skip-test, compile-tests, install"
+        unless="skip.test"
+        description="Run the test cases">
+
+        <ivy:cachepath pathid="test.classpath" conf="test" />
+        <mkdir dir="target/test-reports" />
+        <junit haltonerror="true" haltonfailure="true" fork="true" forkmode="once" dir="target/test-reports">
+            <formatter type="xml" />
+            <formatter type="plain" usefile="false" />
+            <classpath>
+                <path refid="test.classpath" />
+                <pathelement location="${jar.name}" />
+                <pathelement location="target/test-classes" />
+            </classpath>
+            <batchtest todir="target/test-reports">
+                <fileset dir="${testsrc.dir}">
+                    <include name="**/Test*.java" />
+                    <include name="**/*Test.java" />
+                    <include name="**/*TestSuite.java" />
+                    <exclude name="**/Abstract*.java" />
+                    <exclude name="**/*TestCase.java" />
+                    <exclude name="**/*$*" />
+                </fileset>
+            </batchtest>
+        </junit>
+
+        <touch file="target/tests.uptodate" />
+    </target>
+
+    <path id="all-sources">
+        <fileset dir="${src.dir}" />
+    </path>
+
+    <target name="source-jar" depends="-deploy-properties" description="Builds the source jar for the application">
+        <jar
+            jarfile="${source.jar.name}"
+            compress="true"
+            index="false">
+            <resources refid="all-sources" />
+        </jar>
+    </target>
+
+    <target name="javadoc" depends="-deploy-properties, -ivy-init">
+        <ivy:cachepath pathid="runtime.classpath" conf="runtime" />
+
+        <javadoc
+            destdir="target/javadoc"
+            author="true"
+            version="true"
+            use="true"
+            useexternalfile="true"
+            windowtitle="${javadoc.title} - ${build.version.full}">
+
+            <sourcefiles>
+                <resources refid="all-sources" />
+            </sourcefiles>
+
+            <classpath refid="runtime.classpath" />
+
+            <doctitle>${javadoc.title} - ${build.version.full}</doctitle>
+            <link href="http://java.sun.com/j2se/1.5.0/docs/api/" />
+        </javadoc>
+    </target>
+
+    <target name="javadoc-jar"
+        depends="-deploy-properties, javadoc"
+        description="Builds the javadoc jar for the application">
+        <jar
+            jarfile="${javadoc.jar.name}"
+            compress="true"
+            index="false"
+            basedir="target/javadoc" />
+    </target>
+
+    <target
+        name="zip"
+        depends="jar, source-jar"
+        description="Builds a zip file containing the jar and all dependencies">
+        <property name="zip.name"
+            value="target/${ant.project.name}-${build.version.full}-${DSTAMP}-${TSTAMP}.zip" />
+        <ivy:retrieve
+            type="jar,bundle"
+            pattern="managed-lib/[conf]/[artifact]-[revision].[ext]"
+            sync="true"
+            conf="compile" />
+        <ivy:retrieve
+            type="jar,bundle"
+            pattern="managed-lib/compile/[artifact]-[revision].[ext]"
+            conf="optional" />
+
+        <zip destfile="${zip.name}">
+            <fileset file="${jar.name}" />
+            <fileset file="${source.jar.name}" />
+            <fileset file="${javadoc.jar.name}" />
+            <zipfileset dir="managed-lib/compile" prefix="lib" />
+        </zip>
+    </target>
+
+    <target name="help">
+        <echo message="Please run: $ant -projecthelp" />
+    </target>
+
+    <target name="ivy-report" depends="-ivy-init" description="Create Ivy report">
+        <ivy:resolve />
+        <ivy:report todir="target/ivy" graph="false" xml="false" />
+    </target>
+
+    <target name="ivy-clean" depends="-ivy-init" description="clean the ivy cache">
+        <ivy:cleancache />
+    </target>
+
+    <target name="ivy-make-pom" depends="-ivy-init, -deploy-properties" description="Generate Maven pom file">
+        <property name="ivy.pom.version" value="${build.version.full}" />
+        <ivy:makepom ivyfile="ivy.xml" templatefile="../pom-template" pomfile="${pom.name}" conf="compile, optional">
+            <mapping conf="compile" scope="compile" />
+        </ivy:makepom>
+    </target>
+
+    <target name="ivy-deploy"
+        depends="ivy-make-pom, test, jar, source-jar, javadoc-jar"
+        description="Deploy to the Maven Repository">
+
+        <ivy:resolve />
+
+        <ivy:publish resolver="deploy"
+            pubrevision="${build.version.full}"
+            overwrite="true"
+            publishivy="false">
+            <artifacts pattern="target/[artifact]-${build.version.full}(-[classifier]).[ext]" />
+        </ivy:publish>
+
+    </target>
+
+    <target name="install" depends="-ivy-init, jar, source-jar, javadoc-jar, ivy-make-pom"
+        description="installs the module to the local ivy cache">
+        <ivy:resolve />
+        <ivy:publish resolver="local" overwrite="true" pubrevision="${build.version.full}">
+            <artifacts pattern="target/[artifact]-${build.version.full}(-[classifier]).[ext]" />
+        </ivy:publish>
+    </target>
+
+    <target name="generate-sources" />
+</project>

@@ -1,0 +1,48 @@
+import "copyright.stg"
+import "primitiveEquals.stg"
+import "primitiveHashCode.stg"
+import "primitiveAPI.stg"
+import "primitiveLiteral.stg"
+
+targetPath() ::= "org/eclipse/collections/api/ordered/primitive"
+
+fileName(primitive) ::= "Ordered<primitive.name>Iterable"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.api.ordered.primitive;
+
+import org.eclipse.collections.api.<name>Iterable;
+import org.eclipse.collections.api.Lazy<name>Iterable;
+import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
+import org.eclipse.collections.api.block.function.primitive.Object<name>IntToObjectFunction;
+import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
+import org.eclipse.collections.api.block.procedure.primitive.<name>IntProcedure;
+import org.eclipse.collections.api.ordered.OrderedIterable;
+
+/**
+ * This file was automatically generated from template file orderedPrimitiveIterable.stg.
+ *
+ * @since 6.0.
+ */
+public interface Ordered<name>Iterable extends <name>Iterable
+{
+    <type> getFirst();
+
+    int indexOf(<type> value);
+
+    <sharedAPI(fileName(primitive), name)>
+
+    \<V> OrderedIterable\<V> collect(<name>ToObjectFunction\<? extends V> function);
+
+    \<T> T injectIntoWithIndex(T injectedValue, Object<name>IntToObjectFunction\<? super T, ? extends T> function);
+
+    void forEachWithIndex(<name>IntProcedure procedure);
+}
+
+>>

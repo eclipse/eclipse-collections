@@ -1,0 +1,199 @@
+import "copyright.stg"
+import "primitiveEquals.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+
+targetPath() ::= "org/eclipse/collections/impl/primitive"
+
+fileName(primitive) ::= "Abstract<primitive.name>Iterable"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.primitive;
+
+import java.util.Arrays;
+
+import org.eclipse.collections.api.<name>Iterable;
+import org.eclipse.collections.api.Lazy<name>Iterable;
+import org.eclipse.collections.api.bag.primitive.Mutable<name>Bag;
+import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
+import org.eclipse.collections.api.list.primitive.Mutable<name>List;
+import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
+import org.eclipse.collections.impl.bag.mutable.primitive.<name>HashBag;
+import org.eclipse.collections.impl.lazy.primitive.Lazy<name>IterableAdapter;
+import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
+import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
+
+/**
+ * This file was automatically generated from template file abstractPrimitiveIterable.stg.
+ * @since 6.0
+ */
+public abstract class Abstract<name>Iterable implements <name>Iterable
+{
+    @Override
+    public String toString()
+    {
+        return this.makeString("[", ", ", "]");
+    }
+
+    public String makeString()
+    {
+        return this.makeString(", ");
+    }
+
+    public String makeString(String separator)
+    {
+        return this.makeString("", separator, "");
+    }
+
+    public String makeString(String start, String separator, String end)
+    {
+        Appendable stringBuilder = new StringBuilder();
+        this.appendString(stringBuilder, start, separator, end);
+        return stringBuilder.toString();
+    }
+
+    public void appendString(Appendable appendable)
+    {
+        this.appendString(appendable, ", ");
+    }
+
+    public void appendString(Appendable appendable, String separator)
+    {
+        this.appendString(appendable, "", separator, "");
+    }
+
+    <(arithmeticMethods.(type))()>
+
+    public Mutable<name>List toList()
+    {
+        return <name>ArrayList.newList(this);
+    }
+
+    public Mutable<name>Set toSet()
+    {
+        return <name>HashSet.newSet(this);
+    }
+
+    public Mutable<name>Bag toBag()
+    {
+        return <name>HashBag.newBag(this);
+    }
+
+    public boolean containsAll(<type>... source)
+    {
+        for (<type> item : source)
+        {
+            if (!this.contains(item))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+
+    public boolean containsAll(<name>Iterable source)
+    {
+        return source.allSatisfy(new <name>Predicate()
+        {
+            public boolean accept(<type> each)
+            {
+                return Abstract<name>Iterable.this.contains(each);
+            }
+        });
+    }
+
+    public boolean isEmpty()
+    {
+        return this.size() == 0;
+    }
+
+    public boolean notEmpty()
+    {
+        return this.size() != 0;
+    }
+}
+
+>>
+
+arithmeticMethods ::= [
+    "boolean": "noMethods",
+    "default": "allMethods"
+    ]
+
+allMethods() ::= <<
+
+public <type> minIfEmpty(<type> defaultValue)
+{
+    if (this.isEmpty())
+    {
+        return defaultValue;
+    }
+    return this.min();
+}
+
+public <type> maxIfEmpty(<type> defaultValue)
+{
+    if (this.isEmpty())
+    {
+        return defaultValue;
+    }
+    return this.max();
+}
+
+public double average()
+{
+    if (this.isEmpty())
+    {
+        throw new ArithmeticException();
+    }
+    return (double) this.sum() / (double) this.size();
+}
+
+public double median()
+{
+    if (this.isEmpty())
+    {
+        throw new ArithmeticException();
+    }
+    <type>[] sortedArray = this.toSortedArray();
+    int middleIndex = sortedArray.length >\> 1;
+    if (sortedArray.length > 1 && (sortedArray.length & 1) == 0)
+    {
+        <type> first = sortedArray[middleIndex];
+        <type> second = sortedArray[middleIndex - 1];
+        return ((double) first + (double) second) / 2.0;
+    }
+    return (double) sortedArray[middleIndex];
+}
+
+public <type>[] toSortedArray()
+{
+    <type>[] array = this.toArray();
+    Arrays.sort(array);
+    return array;
+}
+
+public Mutable<name>List toSortedList()
+{
+    return this.toList().sortThis();
+}
+
+public Lazy<name>Iterable asLazy()
+{
+    return new Lazy<name>IterableAdapter(this);
+}
+>>
+
+noMethods() ::= <<
+public Lazy<name>Iterable asLazy()
+{
+    return new Lazy<name>IterableAdapter(this);
+}
+>>

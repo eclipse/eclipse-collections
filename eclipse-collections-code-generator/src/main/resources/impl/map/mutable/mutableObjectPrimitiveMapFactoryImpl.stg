@@ -1,0 +1,59 @@
+import "copyright.stg"
+
+targetPath() ::= "org/eclipse/collections/impl/map/mutable/primitive"
+
+fileName(primitive) ::= "MutableObject<primitive.name>MapFactoryImpl"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.map.mutable.primitive;
+
+import org.eclipse.collections.api.block.procedure.Procedure;
+import org.eclipse.collections.api.factory.map.primitive.MutableObject<name>MapFactory;
+import org.eclipse.collections.api.map.primitive.MutableObject<name>Map;
+import org.eclipse.collections.api.map.primitive.Object<name>Map;
+
+/**
+ * MutableObject<name>MapFactoryImpl is a factory implementation which creates instances of type {@link MutableObject<name>Map}.
+ * This file was automatically generated from template file mutableObjectPrimitiveMapFactoryImpl.stg.
+ *
+ * @since 6.0.
+ */
+public class MutableObject<name>MapFactoryImpl implements MutableObject<name>MapFactory
+{
+    public \<K> MutableObject<name>Map\<K> empty()
+    {
+        return new Object<name>HashMap(0);
+    }
+
+    public \<K> MutableObject<name>Map\<K> of()
+    {
+        return this.empty();
+    }
+
+    public \<K> MutableObject<name>Map\<K> with()
+    {
+        return this.empty();
+    }
+
+    public \<K> MutableObject<name>Map\<K> ofAll(Object<name>Map\<? extends K> map)
+    {
+        return this.withAll(map);
+    }
+
+    public \<K> MutableObject<name>Map\<K> withAll(Object<name>Map\<? extends K> map)
+    {
+        if (map.isEmpty())
+        {
+            return this.empty();
+        }
+        return new Object<name>HashMap\<K>(map);
+    }
+}
+
+>>

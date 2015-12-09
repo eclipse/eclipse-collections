@@ -1,0 +1,43 @@
+import "copyright.stg"
+
+hasTwoPrimitives() ::= "true"
+
+skipBooleanKeys() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/factory/primitive"
+
+fileName(primitive1, primitive2, sameTwoPrimitives) ::= "<primitive1.name><primitive2.name>Maps"
+
+class(primitive1, primitive2, sameTwoPrimitives) ::= <<
+<body(primitive1.type, primitive2.type, primitive1.name, primitive2.name)>
+>>
+
+body(type1, type2, name1, name2) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.factory.primitive;
+
+import org.eclipse.collections.api.factory.map.primitive.Immutable<name1><name2>MapFactory;
+import org.eclipse.collections.api.factory.map.primitive.Mutable<name1><name2>MapFactory;
+import org.eclipse.collections.impl.map.immutable.primitive.Immutable<name1><name2>MapFactoryImpl;
+import org.eclipse.collections.impl.map.mutable.primitive.Mutable<name1><name2>MapFactoryImpl;
+
+/**
+ * <name1><name2>Maps is a static utility for creating {@link Immutable<name1><name2>MapFactory}.
+ * This file was automatically generated from template file primitivePrimitiveMaps.stg.
+ *
+ * @since 4.0.
+ */
+@SuppressWarnings("ConstantNamingConvention")
+public final class <name1><name2>Maps
+{
+    public static final Immutable<name1><name2>MapFactory immutable = new Immutable<name1><name2>MapFactoryImpl();
+    public static final Mutable<name1><name2>MapFactory mutable = new Mutable<name1><name2>MapFactoryImpl();
+
+    private <name1><name2>Maps()
+    {
+        throw new AssertionError("Suppress default constructor for noninstantiability");
+    }
+}
+
+>>

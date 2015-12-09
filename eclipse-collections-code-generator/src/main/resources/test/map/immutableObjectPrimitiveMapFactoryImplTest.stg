@@ -1,0 +1,52 @@
+import "copyright.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+
+isTest() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/map/primitive"
+
+fileName(primitive) ::= "ImmutableObject<primitive.name>MapFactoryImplTest"
+
+skipBoolean() ::= "true"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.map.primitive;
+
+import org.eclipse.collections.impl.factory.primitive.Object<name>Maps;
+import org.eclipse.collections.impl.map.mutable.primitive.Object<name>HashMap;
+import org.junit.Assert;
+import org.junit.Test;
+
+/**
+ * This file was automatically generated from template file immutableObjectPrimitiveMapFactoryImplTest.stg.
+ */
+public class ImmutableObject<name>MapFactoryImplTest
+{
+    @Test
+    public void of()
+    {
+        Assert.assertEquals(Object<name>Maps.mutable.of().toImmutable(), Object<name>Maps.immutable.of());
+        Assert.assertEquals(Object<name>HashMap.newWithKeysValues("2", <(literal.(type))("1")>).toImmutable(), Object<name>Maps.immutable.of("2", <(literal.(type))("1")>));
+    }
+
+    @Test
+    public void ofAll()
+    {
+        Assert.assertEquals(Object<name>Maps.mutable.empty().toImmutable(), Object<name>Maps.immutable.ofAll(Object<name>Maps.immutable.of()));
+    }
+
+    @Test
+    public void withAll()
+    {
+        Assert.assertEquals(Object<name>Maps.mutable.with().toImmutable(), Object<name>Maps.immutable.withAll(Object<name>Maps.immutable.of()));
+    }
+}
+
+>>

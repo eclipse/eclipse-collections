@@ -1,0 +1,86 @@
+import "copyright.stg"
+
+targetPath() ::= "org/eclipse/collections/impl/stack/mutable/primitive"
+
+fileName(primitive) ::= "Mutable<primitive.name>StackFactoryImpl"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.stack.mutable.primitive;
+
+import org.eclipse.collections.api.<name>Iterable;
+import org.eclipse.collections.api.factory.stack.primitive.Mutable<name>StackFactory;
+import org.eclipse.collections.api.stack.primitive.Mutable<name>Stack;
+
+/**
+ * Mutable<name>StackFactoryImpl is a factory implementation which creates instances of type {@link Mutable<name>Stack}.
+ * This file was automatically generated from template file mutablePrimitiveStackFactoryImpl.stg.
+ *
+ * @since 6.0.
+ */
+public class Mutable<name>StackFactoryImpl implements Mutable<name>StackFactory
+{
+    public Mutable<name>Stack empty()
+    {
+        return new <name>ArrayStack();
+    }
+
+    public Mutable<name>Stack of()
+    {
+        return this.empty();
+    }
+
+    public Mutable<name>Stack with()
+    {
+        return this.empty();
+    }
+
+    public Mutable<name>Stack of(<type>... items)
+    {
+        return this.with(items);
+    }
+
+    public Mutable<name>Stack with(<type>... items)
+    {
+        if (items.length == 0)
+        {
+            return this.empty();
+        }
+        return <name>ArrayStack.newStackWith(items);
+    }
+
+    public Mutable<name>Stack ofAll(<name>Iterable items)
+    {
+        return this.withAll(items);
+    }
+
+    public Mutable<name>Stack withAll(<name>Iterable items)
+    {
+        if (items.isEmpty())
+        {
+            return this.empty();
+        }
+        return <name>ArrayStack.newStack(items);
+    }
+
+    public Mutable<name>Stack ofAllReversed(<name>Iterable items)
+    {
+        return this.withAllReversed(items);
+    }
+
+    public Mutable<name>Stack withAllReversed(<name>Iterable items)
+    {
+        if (items.isEmpty())
+        {
+            return this.empty();
+        }
+        return <name>ArrayStack.newStackFromTopToBottom(items);
+    }
+}
+
+>>

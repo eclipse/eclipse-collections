@@ -1,0 +1,100 @@
+import "copyright.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+
+isTest() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/list/immutable/primitive"
+
+fileName(primitive) ::= "Immutable<primitive.name>ArrayListTest"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.wrapperName, primitive.name)>
+>>
+
+body(type, wrapperName, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.list.immutable.primitive;
+
+import org.eclipse.collections.api.list.primitive.Immutable<name>List;
+import org.eclipse.collections.impl.factory.primitive.<name>Lists;
+import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
+import org.eclipse.collections.impl.test.Verify;
+import org.junit.Assert;
+import org.junit.Test;
+
+/**
+ * JUnit test for {@link Immutable<name>ArrayList}.
+ * This file was automatically generated from template file immutablePrimitiveArrayListTest.stg.
+ */
+public class Immutable<name>ArrayListTest extends AbstractImmutable<name>ListTestCase
+{
+    @Override
+    protected Immutable<name>List classUnderTest()
+    {
+        return Immutable<name>ArrayList.newListWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">);
+    }
+
+    @Override
+    @Test
+    public void newCollection()
+    {
+        super.newCollection();
+        Assert.assertEquals(<name>ArrayList.newListWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">), Immutable<name>ArrayList.newList(<name>ArrayList.newListWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">)));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void newCollection_throws_empty()
+    {
+        Immutable<name>ArrayList.newListWith();
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void newCollection_throws_single()
+    {
+        Immutable<name>ArrayList.newListWith(<(literal.(type))("42")>);
+    }
+
+    @Override
+    @Test
+    public void size()
+    {
+        super.size();
+        Verify.assertSize(3, <name>Lists.immutable.ofAll(Immutable<name>ArrayList.newList(<name>ArrayList.newListWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">))));
+    }
+
+    @Test
+    public void dotProduct()
+    {
+        Immutable<name>ArrayList list1 = Immutable<name>ArrayList.newListWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">);
+        Immutable<name>ArrayList list2 = Immutable<name>ArrayList.newListWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">);
+        Assert.assertEquals(<(wideLiteral.(type))("14")>, list1.dotProduct(list2)<(wideDelta.(type))>);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void dotProduct_throwsOnListsOfDifferentSizes()
+    {
+        Immutable<name>ArrayList list1 = Immutable<name>ArrayList.newListWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">);
+        Immutable<name>ArrayList list2 = Immutable<name>ArrayList.newListWith(<["1", "2"]:(literal.(type))(); separator=", ">);
+        list1.dotProduct(list2);
+    }
+
+    @Test
+    public void binarySearch()
+    {
+        Immutable<name>ArrayList list = Immutable<name>ArrayList.newListWith(<["2", "3", "5", "6", "9"]:(literal.(type))(); separator=", ">);
+        Assert.assertEquals(-1, list.binarySearch(<(literal.(type))("1")>));
+        Assert.assertEquals(0, list.binarySearch(<(literal.(type))("2")>));
+        Assert.assertEquals(1, list.binarySearch(<(literal.(type))("3")>));
+        Assert.assertEquals(-3, list.binarySearch(<(literal.(type))("4")>));
+        Assert.assertEquals(2, list.binarySearch(<(literal.(type))("5")>));
+        Assert.assertEquals(3, list.binarySearch(<(literal.(type))("6")>));
+        Assert.assertEquals(-5, list.binarySearch(<(literal.(type))("7")>));
+        Assert.assertEquals(-5, list.binarySearch(<(literal.(type))("8")>));
+        Assert.assertEquals(4, list.binarySearch(<(literal.(type))("9")>));
+        Assert.assertEquals(-6, list.binarySearch(<(literal.(type))("10")>));
+    }
+}
+
+>>

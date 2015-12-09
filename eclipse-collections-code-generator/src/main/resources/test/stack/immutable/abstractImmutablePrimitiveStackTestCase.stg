@@ -1,0 +1,191 @@
+import "copyright.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+
+isTest() ::= "true"
+
+skipBoolean() ::="true"
+
+targetPath() ::= "org/eclipse/collections/impl/stack/immutable/primitive"
+
+fileName(primitive) ::= "AbstractImmutable<primitive.name>StackTestCase"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.wrapperName, primitive.name)>
+>>
+
+body(type, wrapperName, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.stack.immutable.primitive;
+
+import org.eclipse.collections.api.<name>Iterable;
+import org.eclipse.collections.api.RichIterable;
+import org.eclipse.collections.api.stack.primitive.Immutable<name>Stack;
+import org.eclipse.collections.api.stack.primitive.Mutable<name>Stack;
+import org.eclipse.collections.impl.factory.primitive.<name>Stacks;
+import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
+import org.eclipse.collections.impl.stack.mutable.ArrayStack;
+import org.eclipse.collections.impl.stack.mutable.primitive.<name>ArrayStack;
+import org.eclipse.collections.impl.stack.primitive.Abstract<name>StackTestCase;
+import org.eclipse.collections.impl.test.Verify;
+import org.junit.Assert;
+import org.junit.Test;
+
+/**
+ * Abstract JUnit test for {@link Immutable<name>Stack}.
+ * This file was automatically generated from template file abstractImmutablePrimitiveStackTestCase.stg.
+ */
+public abstract class AbstractImmutable<name>StackTestCase extends Abstract<name>StackTestCase
+{
+    @Override
+    protected abstract Immutable<name>Stack classUnderTest();
+
+    @Override
+    protected Immutable<name>Stack newWith(<type>... elements)
+    {
+        return <name>Stacks.immutable.of(elements);
+    }
+
+    @Override
+    protected Mutable<name>Stack newMutableCollectionWith(<type>... elements)
+    {
+        return <name>ArrayStack.newStackWith(elements);
+    }
+
+    @Override
+    protected RichIterable\<<wrapperName>\> newObjectCollectionWith(<wrapperName>... elements)
+    {
+        return ArrayStack.newStackWith(elements);
+    }
+
+    @Override
+    protected Immutable<name>Stack newWithTopToBottom(<type>... elements)
+    {
+        return Immutable<name>ArrayStack.newStackFromTopToBottom(elements);
+    }
+
+    protected Immutable<name>Stack newWithIterableTopToBottom(<name>Iterable iterable)
+    {
+        return Immutable<name>ArrayStack.newStackFromTopToBottom(iterable);
+    }
+
+    protected Immutable<name>Stack newWithIterable(<name>Iterable iterable)
+    {
+        return Immutable<name>ArrayStack.newStack(iterable);
+    }
+
+    @Test
+    public void push()
+    {
+        Immutable<name>Stack stack = this.classUnderTest();
+        int size = stack.size();
+        Immutable<name>Stack modified = stack.push(<(literal.(type))("5")>);
+        Assert.assertEquals(<(literal.(type))("5")>, modified.peek()<wideDelta.(type)>);
+        Verify.assertSize(size + 1, modified);
+        Verify.assertSize(size, stack);
+        Assert.assertNotSame(modified, stack);
+        Assert.assertEquals(this.classUnderTest(), stack);
+    }
+
+    @Test
+    public void pop()
+    {
+        Immutable<name>Stack stack = this.classUnderTest();
+        int size = stack.size();
+        Immutable<name>Stack modified = stack.pop();
+        Assert.assertEquals(size - 1, modified.peek()<wideDelta.(type)>);
+        Verify.assertSize(size - 1, modified);
+        Verify.assertSize(size, stack);
+        Assert.assertNotSame(modified, stack);
+        Assert.assertEquals(this.classUnderTest(), stack);
+    }
+
+    @Test
+    public void popWithCount()
+    {
+        Immutable<name>Stack stack = this.classUnderTest();
+        Immutable<name>Stack stack1 = stack.pop(0);
+        Assert.assertSame(stack1, stack);
+        Assert.assertEquals(this.classUnderTest(), stack);
+        int size = stack.size();
+        Immutable<name>Stack modified = stack.pop(2);
+        Assert.assertEquals(size - 2, modified.peek()<wideDelta.(type)>);
+        Verify.assertSize(size - 2, modified);
+        Verify.assertSize(size, stack);
+        Assert.assertNotSame(modified, stack);
+        Assert.assertEquals(this.classUnderTest(), stack);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void pop_with_negative_count_throws_exception()
+    {
+        this.classUnderTest().pop(-1);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void pop_with_count_greater_than_stack_size_throws_exception()
+    {
+        this.classUnderTest().pop(this.classUnderTest().size() + 1);
+    }
+
+    @Override
+    @Test
+    public void testToString()
+    {
+        Assert.assertEquals(this.createExpectedString("[", ", ", "]"), this.classUnderTest().toString());
+    }
+
+    @Override
+    @Test
+    public void makeString()
+    {
+        Assert.assertEquals(this.createExpectedString("", ", ", ""), this.classUnderTest().makeString());
+        Assert.assertEquals(this.createExpectedString("", "|", ""), this.classUnderTest().makeString("|"));
+        Assert.assertEquals(this.createExpectedString("{", "|", "}"), this.classUnderTest().makeString("{", "|", "}"));
+    }
+
+    @Override
+    @Test
+    public void appendString()
+    {
+        StringBuilder appendable1 = new StringBuilder();
+        this.classUnderTest().appendString(appendable1);
+        Assert.assertEquals(this.createExpectedString("", ", ", ""), appendable1.toString());
+
+        StringBuilder appendable2 = new StringBuilder();
+        this.classUnderTest().appendString(appendable2, "|");
+        Assert.assertEquals(this.createExpectedString("", "|", ""), appendable2.toString());
+
+        StringBuilder appendable3 = new StringBuilder();
+        this.classUnderTest().appendString(appendable3, "{", "|", "}");
+        Assert.assertEquals(this.createExpectedString("{", "|", "}"), appendable3.toString());
+    }
+
+    @Override
+    @Test
+    public void toList()
+    {
+        <name>ArrayList expected = <name>ArrayList.newListWith();
+        this.classUnderTest().forEach(expected::add);
+        Assert.assertEquals(expected, this.classUnderTest().toList());
+    }
+
+    @Override
+    @Test(expected = ArithmeticException.class)
+    public void medianThrowsOnEmpty()
+    {
+        <name>Stacks.immutable.of().median();
+    }
+
+    @Override
+    @Test
+    public void toImmutable()
+    {
+        super.toImmutable();
+        Immutable<name>Stack expected = this.classUnderTest();
+        Assert.assertSame(expected, expected.toImmutable());
+    }
+}
+
+>>

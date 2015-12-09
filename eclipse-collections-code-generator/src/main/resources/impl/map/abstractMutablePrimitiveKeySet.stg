@@ -1,0 +1,777 @@
+import "copyright.stg"
+import "primitiveEquals.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+
+targetPath() ::= "org/eclipse/collections/impl/map/mutable/primitive"
+
+skipBoolean() ::= "true"
+
+fileName(primitive) ::= "AbstractMutable<primitive.name>KeySet"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.map.mutable.primitive;
+
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.NoSuchElementException;
+
+import org.eclipse.collections.api.<name>Iterable;
+import org.eclipse.collections.api.Lazy<name>Iterable;
+import org.eclipse.collections.api.bag.primitive.Mutable<name>Bag;
+import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
+import org.eclipse.collections.api.block.function.primitive.Object<name>ToObjectFunction;
+import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
+import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
+import org.eclipse.collections.api.iterator.<name>Iterator;
+import org.eclipse.collections.api.list.primitive.Mutable<name>List;
+import org.eclipse.collections.api.set.primitive.Immutable<name>Set;
+import org.eclipse.collections.impl.bag.mutable.primitive.<name>HashBag;
+import org.eclipse.collections.impl.factory.primitive.<name>Sets;
+import org.eclipse.collections.impl.lazy.primitive.Lazy<name>IterableAdapter;
+import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
+import org.eclipse.collections.api.set.primitive.<name>Set;
+import org.eclipse.collections.api.set.MutableSet;
+import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
+import org.eclipse.collections.impl.factory.Sets;
+import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
+import org.eclipse.collections.impl.set.mutable.primitive.Synchronized<name>Set;
+import org.eclipse.collections.impl.set.mutable.primitive.Unmodifiable<name>Set;
+
+/**
+ * This file was automatically generated from template file abstractMutablePrimitiveKeySet.stg.
+ *
+ * @since 6.0.
+ */
+public abstract class AbstractMutable<name>KeySet implements Mutable<name>Set
+{
+    private static final <type> EMPTY_KEY = <(literal.(type))("0")>;
+    private static final <type> REMOVED_KEY = <(literal.(type))("1")>;
+
+    private static boolean isEmptyKey(<type> key)
+    {
+        return <(equals.(type))("key", "EMPTY_KEY")>;
+    }
+
+    private static boolean isRemovedKey(<type> key)
+    {
+        return <(equals.(type))("key", "REMOVED_KEY")>;
+    }
+
+    private static boolean isNonSentinel(<type> key)
+    {
+        return !isEmptyKey(key) && !isRemovedKey(key);
+    }
+
+    protected abstract <type> getKeyAtIndex(int index);
+
+    protected abstract int getTableSize();
+
+    protected abstract Mutable<name>KeysMap getOuter();
+
+    protected abstract AbstractSentinelValues getSentinelValues();
+
+    public void forEach(<name>Procedure procedure)
+    {
+        this.each(procedure);
+    }
+
+    /**
+     * @since 7.0.
+     */
+    public void each(<name>Procedure procedure)
+    {
+        this.getOuter().forEachKey(procedure);
+    }
+
+    public int count(<name>Predicate predicate)
+    {
+        int count = 0;
+        if (this.getSentinelValues() != null)
+        {
+            if (this.getSentinelValues().containsZeroKey && predicate.accept(EMPTY_KEY))
+            {
+                count++;
+            }
+            if (this.getSentinelValues().containsOneKey && predicate.accept(REMOVED_KEY))
+            {
+                count++;
+            }
+        }
+        for (int i = 0; i \< this.getTableSize(); i++)
+        {
+            if (isNonSentinel(this.getKeyAtIndex(i)) && predicate.accept(this.getKeyAtIndex(i)))
+            {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public boolean anySatisfy(<name>Predicate predicate)
+    {
+        if (this.getSentinelValues() != null)
+        {
+            if (this.getSentinelValues().containsZeroKey && predicate.accept(EMPTY_KEY))
+            {
+                return true;
+            }
+            if (this.getSentinelValues().containsOneKey && predicate.accept(REMOVED_KEY))
+            {
+                return true;
+            }
+        }
+        for (int i = 0; i \< this.getTableSize(); i++)
+        {
+            if (isNonSentinel(this.getKeyAtIndex(i)) && predicate.accept(this.getKeyAtIndex(i)))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean allSatisfy(<name>Predicate predicate)
+    {
+        if (this.getSentinelValues() != null)
+        {
+            if (this.getSentinelValues().containsZeroKey && !predicate.accept(EMPTY_KEY))
+            {
+                return false;
+            }
+            if (this.getSentinelValues().containsOneKey && !predicate.accept(REMOVED_KEY))
+            {
+                return false;
+            }
+        }
+        for (int i = 0; i \< this.getTableSize(); i++)
+        {
+            if (isNonSentinel(this.getKeyAtIndex(i)) && !predicate.accept(this.getKeyAtIndex(i)))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean noneSatisfy(<name>Predicate predicate)
+    {
+        if (this.getSentinelValues() != null)
+        {
+            if (this.getSentinelValues().containsZeroKey && predicate.accept(EMPTY_KEY))
+            {
+                return false;
+            }
+            if (this.getSentinelValues().containsOneKey && predicate.accept(REMOVED_KEY))
+            {
+                return false;
+            }
+        }
+        for (int i = 0; i \< this.getTableSize(); i++)
+        {
+            if (isNonSentinel(this.getKeyAtIndex(i)) && predicate.accept(this.getKeyAtIndex(i)))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean add(<type> element)
+    {
+        throw new UnsupportedOperationException("Cannot call add() on " + this.getClass().getSimpleName());
+    }
+
+    public boolean addAll(<type>... source)
+    {
+        throw new UnsupportedOperationException("Cannot call addAll() on " + this.getClass().getSimpleName());
+    }
+
+    public boolean addAll(<name>Iterable source)
+    {
+        throw new UnsupportedOperationException("Cannot call addAll() on " + this.getClass().getSimpleName());
+    }
+
+    public Mutable<name>Set select(<name>Predicate predicate)
+    {
+        Mutable<name>Set result = new <name>HashSet();
+        if (this.getSentinelValues() != null)
+        {
+            if (this.getSentinelValues().containsZeroKey && predicate.accept(EMPTY_KEY))
+            {
+                result.add(EMPTY_KEY);
+            }
+            if (this.getSentinelValues().containsOneKey && predicate.accept(REMOVED_KEY))
+            {
+                result.add(REMOVED_KEY);
+            }
+        }
+        for (int i = 0; i \< this.getTableSize(); i++)
+        {
+            if (isNonSentinel(this.getKeyAtIndex(i)) && predicate.accept(this.getKeyAtIndex(i)))
+            {
+                result.add(this.getKeyAtIndex(i));
+            }
+        }
+        return result;
+    }
+
+    public Mutable<name>Set reject(<name>Predicate predicate)
+    {
+        Mutable<name>Set result = new <name>HashSet();
+        if (this.getSentinelValues() != null)
+        {
+            if (this.getSentinelValues().containsZeroKey && !predicate.accept(EMPTY_KEY))
+            {
+                result.add(EMPTY_KEY);
+            }
+            if (this.getSentinelValues().containsOneKey && !predicate.accept(REMOVED_KEY))
+            {
+                result.add(REMOVED_KEY);
+            }
+        }
+        for (int i = 0; i \< this.getTableSize(); i++)
+        {
+            if (isNonSentinel(this.getKeyAtIndex(i)) && !predicate.accept(this.getKeyAtIndex(i)))
+            {
+                result.add(this.getKeyAtIndex(i));
+            }
+        }
+        return result;
+    }
+
+    public Mutable<name>Set with(<type> element)
+    {
+        throw new UnsupportedOperationException("Cannot call with() on " + this.getClass().getSimpleName());
+    }
+
+    public Mutable<name>Set without(<type> element)
+    {
+        throw new UnsupportedOperationException("Cannot call without() on " + this.getClass().getSimpleName());
+    }
+
+    public Mutable<name>Set withAll(<name>Iterable elements)
+    {
+        throw new UnsupportedOperationException("Cannot call withAll() on " + this.getClass().getSimpleName());
+    }
+
+    public Mutable<name>Set withoutAll(<name>Iterable elements)
+    {
+        throw new UnsupportedOperationException("Cannot call withoutAll() on " + this.getClass().getSimpleName());
+    }
+
+    public \<V> MutableSet\<V> collect(<name>ToObjectFunction\<? extends V> function)
+    {
+        MutableSet\<V> result = Sets.mutable.with();
+        if (this.getSentinelValues() != null)
+        {
+            if (this.getSentinelValues().containsZeroKey)
+            {
+                result.add(function.valueOf(EMPTY_KEY));
+            }
+            if (this.getSentinelValues().containsOneKey)
+            {
+                result.add(function.valueOf(REMOVED_KEY));
+            }
+        }
+        for (int i = 0; i \< this.getTableSize(); i++)
+        {
+            if (isNonSentinel(this.getKeyAtIndex(i)))
+            {
+                result.add(function.valueOf(this.getKeyAtIndex(i)));
+            }
+        }
+        return result;
+    }
+
+    public boolean remove(<type> key)
+    {
+        int oldSize = this.getOuter().size();
+        this.getOuter().removeKey(key);
+        return oldSize != this.getOuter().size();
+    }
+
+    public boolean removeAll(<name>Iterable source)
+    {
+        int oldSize = this.getOuter().size();
+        <name>Iterator iterator = source.<type>Iterator();
+        while (iterator.hasNext())
+        {
+            this.getOuter().removeKey(iterator.next());
+        }
+        return oldSize != this.getOuter().size();
+    }
+
+    public boolean removeAll(<type>... source)
+    {
+        int oldSize = this.getOuter().size();
+        for (<type> item : source)
+        {
+            this.getOuter().removeKey(item);
+        }
+        return oldSize != this.getOuter().size();
+    }
+
+    public void clear()
+    {
+        this.getOuter().clear();
+    }
+
+    public <type> detectIfNone(<name>Predicate predicate, <type> ifNone)
+    {
+        if (this.getSentinelValues() != null)
+        {
+            if (this.getSentinelValues().containsZeroKey && predicate.accept(EMPTY_KEY))
+            {
+                return EMPTY_KEY;
+            }
+            if (this.getSentinelValues().containsOneKey && predicate.accept(REMOVED_KEY))
+            {
+                return REMOVED_KEY;
+            }
+        }
+        for (int i = 0; i \< this.getTableSize(); i++)
+        {
+            if (isNonSentinel(this.getKeyAtIndex(i)) && predicate.accept(this.getKeyAtIndex(i)))
+            {
+                return this.getKeyAtIndex(i);
+            }
+        }
+        return ifNone;
+    }
+
+    public Mutable<name>Set asUnmodifiable()
+    {
+        return Unmodifiable<name>Set.of(this);
+    }
+
+    public Mutable<name>Set asSynchronized()
+    {
+        return Synchronized<name>Set.of(this);
+    }
+
+    <if(primitive.floatingPoint)>public <wideType.(type)> sum()
+{
+    <wideType.(type)> result = <wideZero.(type)>;
+    <wideType.(type)> compensation = <wideZero.(type)>;
+
+    if (this.getSentinelValues() != null)
+    {
+        if (this.getSentinelValues().containsZeroKey)
+        {
+            <wideType.(type)> adjustedValue = EMPTY_KEY - compensation;
+            <wideType.(type)> nextSum = result + adjustedValue;
+            compensation = nextSum - result - adjustedValue;
+            result = nextSum;
+        }
+        if (this.getSentinelValues().containsOneKey)
+        {
+            <wideType.(type)> adjustedValue = REMOVED_KEY - compensation;
+            <wideType.(type)> nextSum = result + adjustedValue;
+            compensation = nextSum - result - adjustedValue;
+            result = nextSum;
+        }
+    }
+    for (int i = 0; i \< this.getTableSize(); i++)
+    {
+        if (isNonSentinel(this.getKeyAtIndex(i)))
+        {
+            <wideType.(type)> adjustedValue = this.getKeyAtIndex(i) - compensation;
+            <wideType.(type)> nextSum = result + adjustedValue;
+            compensation = nextSum - result - adjustedValue;
+            result = nextSum;
+        }
+    }
+    return result;
+}
+
+    <else>public <wideType.(type)> sum()
+{
+    <wideType.(type)> result = <wideZero.(type)>;
+    if (this.getSentinelValues() != null)
+    {
+        if (this.getSentinelValues().containsZeroKey)
+        {
+            result += EMPTY_KEY;
+        }
+        if (this.getSentinelValues().containsOneKey)
+        {
+            result += REMOVED_KEY;
+        }
+    }
+    for (int i = 0; i \< this.getTableSize(); i++)
+    {
+        if (isNonSentinel(this.getKeyAtIndex(i)))
+        {
+            result += this.getKeyAtIndex(i);
+        }
+    }
+    return result;
+}
+
+    <endif>
+    public <type> max()
+    {
+        if (this.getOuter().isEmpty())
+        {
+            throw new NoSuchElementException();
+        }
+
+        <type> max = 0;
+        boolean isMaxSet = false;
+
+        if (this.getSentinelValues() != null)
+        {
+            if (this.getSentinelValues().containsZeroKey)
+            {
+                max = EMPTY_KEY;
+                isMaxSet = true;
+            }
+            if (this.getSentinelValues().containsOneKey)
+            {
+                max = REMOVED_KEY;
+                isMaxSet = true;
+            }
+        }
+        for (int i = 0; i \< this.getTableSize(); i++)
+        {
+            if (isNonSentinel(this.getKeyAtIndex(i)) && (!isMaxSet || <(lessThan.(type))({max}, {this.getKeyAtIndex(i)})>))
+            {
+                max = this.getKeyAtIndex(i);
+                isMaxSet = true;
+            }
+        }
+        return max;
+    }
+
+    public <type> maxIfEmpty(<type> defaultValue)
+    {
+        if (this.getOuter().isEmpty())
+        {
+            return defaultValue;
+        }
+
+        return this.max();
+    }
+
+    public <type> min()
+    {
+        if (this.getOuter().isEmpty())
+        {
+            throw new NoSuchElementException();
+        }
+
+        <type> min = 0;
+        boolean isMinSet = false;
+
+        if (this.getSentinelValues() != null)
+        {
+            if (this.getSentinelValues().containsZeroKey)
+            {
+                min = EMPTY_KEY;
+                isMinSet = true;
+            }
+            if (this.getSentinelValues().containsOneKey && !isMinSet)
+            {
+                min = REMOVED_KEY;
+                isMinSet = true;
+            }
+        }
+        for (int i = 0; i \< this.getTableSize(); i++)
+        {
+            if (isNonSentinel(this.getKeyAtIndex(i)) && (!isMinSet || <(lessThan.(type))({this.getKeyAtIndex(i)}, {min})>))
+            {
+                min = this.getKeyAtIndex(i);
+                isMinSet = true;
+            }
+        }
+        return min;
+    }
+
+    public <type> minIfEmpty(<type> defaultValue)
+    {
+        if (this.getOuter().isEmpty())
+        {
+            return defaultValue;
+        }
+
+        return this.min();
+    }
+
+    public double average()
+    {
+        if (this.isEmpty())
+        {
+            throw new ArithmeticException();
+        }
+        return <castSum.(type)>this.sum() / (double) this.size();
+    }
+
+    public double median()
+    {
+        if (this.isEmpty())
+        {
+            throw new ArithmeticException();
+        }
+        <type>[] sortedArray = this.toSortedArray();
+        int middleIndex = sortedArray.length >\> 1;
+        if (sortedArray.length > 1 && (sortedArray.length & 1) == 0)
+        {
+            <type> first = sortedArray[middleIndex];
+            <type> second = sortedArray[middleIndex - 1];
+            return (<castDouble.(type)>first + <castDouble.(type)>second) / 2.0;
+        }
+        return <castDouble.(type)>sortedArray[middleIndex];
+    }
+
+    public <type>[] toSortedArray()
+    {
+        <type>[] array = this.toArray();
+        Arrays.sort(array);
+        return array;
+    }
+
+    public Mutable<name>List toSortedList()
+    {
+        return <name>ArrayList.newList(this).sortThis();
+    }
+
+    public <type>[] toArray()
+    {
+        int size = this.getOuter().size();
+        final <type>[] result = new <type>[size];
+        this.getOuter().forEachKey(new <name>Procedure()
+        {
+            private int index;
+
+            public void value(<type> each)
+            {
+                result[this.index] = each;
+                this.index++;
+            }
+        });
+        return result;
+    }
+
+    public boolean contains(<type> value)
+    {
+        return this.getOuter().containsKey(value);
+    }
+
+    public boolean containsAll(<type>... source)
+    {
+        for (<type> item : source)
+        {
+            if (!this.getOuter().containsKey(item))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean containsAll(<name>Iterable source)
+    {
+        <name>Iterator iterator = source.<type>Iterator();
+        while (iterator.hasNext())
+        {
+            if (!this.getOuter().containsKey(iterator.next()))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public Mutable<name>List toList()
+    {
+        return <name>ArrayList.newList(this);
+    }
+
+    public Mutable<name>Set toSet()
+    {
+        return <name>HashSet.newSet(this);
+    }
+
+    public Mutable<name>Bag toBag()
+    {
+        return <name>HashBag.newBag(this);
+    }
+
+    public Lazy<name>Iterable asLazy()
+    {
+        return new Lazy<name>IterableAdapter(this);
+    }
+
+    public \<T> T injectInto(T injectedValue, Object<name>ToObjectFunction\<? super T, ? extends T> function)
+    {
+        T result = injectedValue;
+        if (this.getSentinelValues() != null)
+        {
+            if (this.getSentinelValues().containsZeroKey)
+            {
+                result = function.valueOf(result, EMPTY_KEY);
+            }
+            if (this.getSentinelValues().containsOneKey)
+            {
+                result = function.valueOf(result, REMOVED_KEY);
+            }
+        }
+        for (int i = 0; i \< this.getTableSize(); i++)
+        {
+            if (isNonSentinel(this.getKeyAtIndex(i)))
+            {
+                result = function.valueOf(result, this.getKeyAtIndex(i));
+            }
+        }
+        return result;
+    }
+
+    public Immutable<name>Set toImmutable()
+    {
+        return <name>Sets.immutable.withAll(this);
+    }
+
+    public int size()
+    {
+        return this.getOuter().size();
+    }
+
+    public boolean isEmpty()
+    {
+        return this.getOuter().isEmpty();
+    }
+
+    public boolean notEmpty()
+    {
+        return this.getOuter().notEmpty();
+    }
+
+    @Override
+    public boolean equals(Object obj)
+    {
+        if (this == obj)
+        {
+            return true;
+        }
+
+        if (!(obj instanceof <name>Set))
+        {
+            return false;
+        }
+
+        <name>Set other = (<name>Set) obj;
+        return this.size() == other.size() && this.containsAll(other.toArray());
+    }
+
+    @Override
+    public int hashCode()
+    {
+        int result = 0;
+
+        if (this.getSentinelValues() != null)
+        {
+            if (this.getSentinelValues().containsZeroKey)
+            {
+                result += <(hashCode.(type))("EMPTY_KEY")>;
+            }
+            if (this.getSentinelValues().containsOneKey)
+            {
+                result += <(hashCode.(type))("REMOVED_KEY")>;
+            }
+        }
+        for (int i = 0; i \< this.getTableSize(); i++)
+        {
+            if (isNonSentinel(this.getKeyAtIndex(i)))
+            {
+                result += <(hashCode.(type))({this.getKeyAtIndex(i)})>;
+            }
+        }
+
+        return result;
+    }
+
+    @Override
+    public String toString()
+    {
+        return this.makeString("[", ", ", "]");
+    }
+
+    public String makeString()
+    {
+        return this.makeString(", ");
+    }
+
+    public String makeString(String separator)
+    {
+        return this.makeString("", separator, "");
+    }
+
+    public String makeString(String start, String separator, String end)
+    {
+        Appendable stringBuilder = new StringBuilder();
+        this.appendString(stringBuilder, start, separator, end);
+        return stringBuilder.toString();
+    }
+
+    public void appendString(Appendable appendable)
+    {
+        this.appendString(appendable, ", ");
+    }
+
+    public void appendString(Appendable appendable, String separator)
+    {
+        this.appendString(appendable, "", separator, "");
+    }
+
+    public void appendString(Appendable appendable, String start, String separator, String end)
+    {
+        try
+        {
+            appendable.append(start);
+            boolean first = true;
+            if (this.getSentinelValues() != null)
+            {
+                if (this.getSentinelValues().containsZeroKey)
+                {
+                    appendable.append(String.valueOf(EMPTY_KEY));
+                    first = false;
+                }
+                if (this.getSentinelValues().containsOneKey)
+                {
+                    if (!first)
+                    {
+                        appendable.append(separator);
+                    }
+                    appendable.append(String.valueOf(REMOVED_KEY));
+                    first = false;
+                }
+            }
+            for (int i = 0; i \< this.getTableSize(); i++)
+            {
+                if (isNonSentinel(this.getKeyAtIndex(i)))
+                {
+                    if (!first)
+                    {
+                        appendable.append(separator);
+                    }
+                    appendable.append(String.valueOf(this.getKeyAtIndex(i)));
+                    first = false;
+                }
+            }
+            appendable.append(end);
+        }
+        catch (IOException e)
+        {
+            throw new RuntimeException(e);
+        }
+    }
+}
+
+>>

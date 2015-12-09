@@ -1,0 +1,57 @@
+import "copyright.stg"
+import "primitiveEquals.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+
+skipBoolean() ::= "true"
+
+hasTwoPrimitives() ::= "true"
+
+isTest() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/map/mutable/primitive"
+
+fileName(primitive1, primitive2, sameTwoPrimitives) ::= "<primitive1.name><primitive2.name>HashMapKeysViewTest"
+
+class(primitive1, primitive2, sameTwoPrimitives) ::= <<
+<body(primitive1.type, primitive2.type, primitive1.name, primitive2.name)>
+>>
+
+body(type1, type2, name1, name2) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.map.mutable.primitive;
+
+import org.eclipse.collections.api.Lazy<name1>Iterable;
+import org.eclipse.collections.impl.lazy.primitive.AbstractLazy<name1>IterableTestCase;
+
+/**
+ * JUnit test for {@link <name1><name2>HashMap#keysView}.
+ * This file was automatically generated from template file primitivePrimitiveHashMapKeysViewTest.stg.
+ */
+public class <name1><name2>HashMapKeysViewTest extends AbstractLazy<name1>IterableTestCase
+{
+    @Override
+    protected Lazy<name1>Iterable classUnderTest()
+    {
+        return <name1><name2>HashMap.newWithKeysValues(<["1", "2", "3"]:keyValue(); separator=", ">).keysView();
+    }
+
+    @Override
+    protected Lazy<name1>Iterable getEmptyIterable()
+    {
+        return new <name1><name2>HashMap().keysView();
+    }
+
+    @Override
+    protected Lazy<name1>Iterable newWith(<type1> element1, <type1> element2)
+    {
+        return <name1><name2>HashMap.newWithKeysValues(element1, <(literal.(type2))("1")>, element2, <(literal.(type2))("2")>).keysView();
+    }
+}
+
+>>
+
+keyValue(value) ::= <<
+<(literal.(type1))(value)>, <(literal.(type2))(value)>
+>>

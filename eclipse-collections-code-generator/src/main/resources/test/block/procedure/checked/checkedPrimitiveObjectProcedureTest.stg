@@ -1,0 +1,76 @@
+import "copyright.stg"
+import "primitiveLiteral.stg"
+
+isTest() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/block/procedure/checked/primitive"
+
+fileName(primitive) ::= "Checked<primitive.name>ObjectProcedureTest"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.block.procedure.checked.primitive;
+
+import java.io.IOException;
+
+import org.junit.Assert;
+import org.junit.Test;
+
+import org.eclipse.collections.impl.test.Verify;
+
+/**
+ * Provides a set of common tests of checked procedures for <type> and Object values.
+ * This file was automatically generated from template file checkedPrimitiveObjectProcedureTest.stg.
+ *
+ * @since 5.0.
+ */
+public final class Checked<name>ObjectProcedureTest
+{
+    @Test
+    public void regular()
+    {
+        final boolean[] result = new boolean[1];
+        new Checked<name>ObjectProcedure\<Object>()
+        {
+            @Override
+            public void safeValue(<type> item, Object object) throws Exception
+            {
+                result[0] = true;
+            }
+        }.value(<(zero.(type))>, null);
+        Assert.assertTrue(result[0]);
+    }
+
+    @Test
+    public void runtimeException()
+    {
+        Verify.assertThrows(RuntimeException.class, () -> new Checked<name>ObjectProcedure\<Object>()
+        {
+            @Override
+            public void safeValue(<type> item, Object object) throws Exception
+            {
+                throw new RuntimeException();
+            }
+        }.value(<(zero.(type))>, null));
+    }
+
+    @Test
+    public void checkedException()
+    {
+        Verify.assertThrows(RuntimeException.class, () -> new Checked<name>ObjectProcedure\<Object>()
+        {
+            @Override
+            public void safeValue(<type> item, Object object) throws Exception
+            {
+                throw new IOException();
+            }
+        }.value(<(zero.(type))>, null));
+    }
+}
+
+>>
