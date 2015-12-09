@@ -1,0 +1,491 @@
+import "copyright.stg"
+import "primitiveEquals.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+
+hasTwoPrimitives() ::= "true"
+
+skipBooleanKeys() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/map/mutable/primitive"
+
+fileName(primitive1, primitive2, sameTwoPrimitives) ::= "Unmodifiable<primitive1.name><primitive2.name>Map"
+
+class(primitive1, primitive2, sameTwoPrimitives) ::= <<
+<body(primitive1.type, primitive2.type, primitive1.name, primitive2.name)>
+>>
+
+body(type1, type2, name1, name2) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.map.mutable.primitive;
+
+import java.io.Serializable;
+
+import org.eclipse.collections.api.<name2>Iterable;
+<if(!sameTwoPrimitives)>import org.eclipse.collections.api.<name1>Iterable;<endif>
+<if(!sameTwoPrimitives)>import org.eclipse.collections.api.Lazy<name2>Iterable;<endif>
+import org.eclipse.collections.api.Lazy<name1>Iterable;
+import org.eclipse.collections.api.RichIterable;
+import org.eclipse.collections.api.bag.primitive.Mutable<name2>Bag;
+import org.eclipse.collections.api.block.function.primitive.<name2>Function;
+import org.eclipse.collections.api.block.function.primitive.<name2>Function0;
+import org.eclipse.collections.api.block.function.primitive.<name2>To<name2>Function;
+import org.eclipse.collections.api.block.function.primitive.<name2>ToObjectFunction;
+import org.eclipse.collections.api.block.function.primitive.Object<name2>ToObjectFunction;
+<if(!sameTwoPrimitives)>import org.eclipse.collections.api.block.function.primitive.<name1>To<name2>Function;<endif>
+import org.eclipse.collections.api.block.predicate.primitive.<name2>Predicate;
+import org.eclipse.collections.api.block.predicate.primitive.<name1><name2>Predicate;
+<if(!sameTwoPrimitives)>import org.eclipse.collections.api.block.procedure.primitive.<name2>Procedure;<endif>
+import org.eclipse.collections.api.block.procedure.primitive.<name1><name2>Procedure;
+import org.eclipse.collections.api.block.procedure.primitive.<name1>Procedure;
+import org.eclipse.collections.api.collection.MutableCollection;
+import org.eclipse.collections.api.collection.primitive.Mutable<name2>Collection;
+import org.eclipse.collections.api.iterator.Mutable<name2>Iterator;
+import org.eclipse.collections.api.list.primitive.Mutable<name2>List;
+import org.eclipse.collections.api.map.primitive.Immutable<name1><name2>Map;
+import org.eclipse.collections.api.map.primitive.<name1><name2>Map;
+import org.eclipse.collections.api.map.primitive.Mutable<name1><name2>Map;
+<if(!sameTwoPrimitives)>import org.eclipse.collections.api.set.primitive.Mutable<name1>Set;<endif>
+import org.eclipse.collections.api.set.primitive.Mutable<name2>Set;
+import org.eclipse.collections.api.tuple.primitive.<name1><name2>Pair;
+import org.eclipse.collections.impl.factory.primitive.<name1><name2>Maps;
+import org.eclipse.collections.impl.iterator.Unmodifiable<name2>Iterator;
+import org.eclipse.collections.impl.set.mutable.primitive.Unmodifiable<name1>Set;
+import org.eclipse.collections.impl.collection.mutable.primitive.Unmodifiable<name2>Collection;
+
+/**
+ * This file was automatically generated from template file unmodifiablePrimitivePrimitiveMap.stg.
+ *
+ * @since 3.1.
+ */
+public final class Unmodifiable<name1><name2>Map
+        implements Mutable<name1><name2>Map, Serializable
+{
+    private static final long serialVersionUID = 1L;
+    private final Mutable<name1><name2>Map map;
+
+    Unmodifiable<name1><name2>Map(Mutable<name1><name2>Map map)
+    {
+        this.map = map;
+    }
+
+    public void clear()
+    {
+        throw new UnsupportedOperationException("Cannot call clear() on " + this.getClass().getSimpleName());
+    }
+
+    public void put(<type1> key, <type2> value)
+    {
+        throw new UnsupportedOperationException("Cannot call put() on " + this.getClass().getSimpleName());
+    }
+
+    public void putAll(<name1><name2>Map map)
+    {
+        throw new UnsupportedOperationException("Cannot call putAll() on " + this.getClass().getSimpleName());
+    }
+
+    public void removeKey(<type1> key)
+    {
+        throw new UnsupportedOperationException("Cannot call removeKey() on " + this.getClass().getSimpleName());
+    }
+
+    public void remove(<type1> key)
+    {
+        throw new UnsupportedOperationException("Cannot call remove() on " + this.getClass().getSimpleName());
+    }
+
+    public <type2> removeKeyIfAbsent(<type1> key, <type2> value)
+    {
+        if (this.map.containsKey(key))
+        {
+            throw new UnsupportedOperationException("Cannot call removeKey() on " + this.getClass().getSimpleName());
+        }
+        return value;
+    }
+
+    public <type2> getIfAbsentPut(<type1> key, <type2> value)
+    {
+        return this.map.getIfAbsentPut(key, new <name2>Function0()
+        {
+            public <type2> value()
+            {
+                throw new UnsupportedOperationException();
+            }
+        });
+    }
+
+    public <type2> getIfAbsentPut(<type1> key, <name2>Function0 function)
+    {
+        return this.map.getIfAbsentPut(key, new <name2>Function0()
+        {
+            public <type2> value()
+            {
+                throw new UnsupportedOperationException();
+            }
+        });
+    }
+
+    public <type2> getIfAbsentPutWithKey(<type1> key, <name1>To<name2>Function function)
+    {
+        return this.map.getIfAbsentPut(key, new <name2>Function0()
+        {
+            public <type2> value()
+            {
+                throw new UnsupportedOperationException();
+            }
+        });
+    }
+
+    public \<P> <type2> getIfAbsentPutWith(<type1> key, <name2>Function\<? super P> function, P parameter)
+    {
+        return this.map.getIfAbsentPut(key, new <name2>Function0()
+        {
+            public <type2> value()
+            {
+                throw new UnsupportedOperationException();
+            }
+        });
+    }
+
+    public <type2> updateValue(<type1> key, <type2> initialValueIfAbsent, <name2>To<name2>Function function)
+    {
+        throw new UnsupportedOperationException("Cannot call updateValue() on " + this.getClass().getSimpleName());
+    }
+
+    public <type2> get(<type1> key)
+    {
+        return this.map.get(key);
+    }
+
+    public <type2> getIfAbsent(<type1> key, <type2> ifAbsent)
+    {
+        return this.map.getIfAbsent(key, ifAbsent);
+    }
+
+    public <type2> getOrThrow(<type1> key)
+    {
+        return this.map.getOrThrow(key);
+    }
+
+    public boolean containsKey(<type1> key)
+    {
+        return this.map.containsKey(key);
+    }
+
+    public boolean containsValue(<type2> value)
+    {
+        return this.map.containsValue(value);
+    }
+
+    public void forEachValue(<name2>Procedure procedure)
+    {
+        this.map.forEachValue(procedure);
+    }
+
+    public void forEachKey(<name1>Procedure procedure)
+    {
+        this.map.forEachKey(procedure);
+    }
+
+    public void forEachKeyValue(<name1><name2>Procedure procedure)
+    {
+        this.map.forEachKeyValue(procedure);
+    }
+
+    public Lazy<name1>Iterable keysView()
+    {
+        return this.map.keysView();
+    }
+
+    public RichIterable\<<name1><name2>Pair> keyValuesView()
+    {
+        return this.map.keyValuesView();
+    }
+
+    public Mutable<name1><name2>Map select(<name1><name2>Predicate predicate)
+    {
+        return this.map.select(predicate);
+    }
+
+    public Mutable<name1><name2>Map reject(<name1><name2>Predicate predicate)
+    {
+        return this.map.reject(predicate);
+    }
+
+    public Mutable<name2>Iterator <type2>Iterator()
+    {
+        return new Unmodifiable<name2>Iterator(this.map.<type2>Iterator());
+    }
+
+    public void forEach(<name2>Procedure procedure)
+    {
+        this.each(procedure);
+    }
+
+    /**
+     * @since 7.0.
+     */
+    public void each(<name2>Procedure procedure)
+    {
+        this.map.forEach(procedure);
+    }
+
+    public int count(<name2>Predicate predicate)
+    {
+        return this.map.count(predicate);
+    }
+
+    public boolean anySatisfy(<name2>Predicate predicate)
+    {
+        return this.map.anySatisfy(predicate);
+    }
+
+    public boolean allSatisfy(<name2>Predicate predicate)
+    {
+        return this.map.allSatisfy(predicate);
+    }
+
+    public boolean noneSatisfy(<name2>Predicate predicate)
+    {
+        return this.map.noneSatisfy(predicate);
+    }
+
+    public Mutable<name2>Collection select(<name2>Predicate predicate)
+    {
+        return this.map.select(predicate);
+    }
+
+    public Mutable<name2>Collection reject(<name2>Predicate predicate)
+    {
+        return this.map.reject(predicate);
+    }
+
+    public <type2> detectIfNone(<name2>Predicate predicate, <type2> ifNone)
+    {
+        return this.map.detectIfNone(predicate, ifNone);
+    }
+
+    public \<V> MutableCollection\<V> collect(<name2>ToObjectFunction\<? extends V> function)
+    {
+        return this.map.collect(function);
+    }
+
+    <(arithmeticMethods.(type2))(name2, type2)>
+    public <type2>[] toArray()
+    {
+        return this.map.toArray();
+    }
+
+    public boolean contains(<type2> value)
+    {
+        return this.map.contains(value);
+    }
+
+    public boolean containsAll(<type2>... source)
+    {
+        return this.map.containsAll(source);
+    }
+
+    public boolean containsAll(<name2>Iterable source)
+    {
+        return this.map.containsAll(source);
+    }
+
+    public Mutable<name2>List toList()
+    {
+        return this.map.toList();
+    }
+
+    public Mutable<name2>Set toSet()
+    {
+        return this.map.toSet();
+    }
+
+    public Mutable<name2>Bag toBag()
+    {
+        return this.map.toBag();
+    }
+
+    public Lazy<name2>Iterable asLazy()
+    {
+        return this.map.asLazy();
+    }
+
+    public Mutable<name1><name2>Map withKeyValue(<type1> key, <type2> value)
+    {
+        throw new UnsupportedOperationException("Cannot call withKeyValue() on " + this.getClass().getSimpleName());
+    }
+
+    public Mutable<name1><name2>Map withoutKey(<type1> key)
+    {
+        throw new UnsupportedOperationException("Cannot call withoutKey() on " + this.getClass().getSimpleName());
+    }
+
+    public Mutable<name1><name2>Map withoutAllKeys(<name1>Iterable keys)
+    {
+        throw new UnsupportedOperationException("Cannot call withoutAllKeys() on " + this.getClass().getSimpleName());
+    }
+
+    public Mutable<name1><name2>Map asUnmodifiable()
+    {
+        return this;
+    }
+
+    public Mutable<name1><name2>Map asSynchronized()
+    {
+        return new Synchronized<name1><name2>Map(this);
+    }
+
+    public Immutable<name1><name2>Map toImmutable()
+    {
+        return <name1><name2>Maps.immutable.withAll(this);
+    }
+
+    public int size()
+    {
+        return this.map.size();
+    }
+
+    public boolean isEmpty()
+    {
+        return this.map.isEmpty();
+    }
+
+    public boolean notEmpty()
+    {
+        return this.map.notEmpty();
+    }
+
+    public Mutable<name1>Set keySet()
+    {
+        return Unmodifiable<name1>Set.of(this.map.keySet());
+    }
+
+    public Mutable<name2>Collection values()
+    {
+        return Unmodifiable<name2>Collection.of(this.map.values());
+    }
+
+    @Override
+    public boolean equals(Object otherMap)
+    {
+        return this.map.equals(otherMap);
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return this.map.hashCode();
+    }
+
+    @Override
+    public String toString()
+    {
+        return this.map.toString();
+    }
+
+    public String makeString()
+    {
+        return this.map.makeString();
+    }
+
+    public String makeString(String separator)
+    {
+        return this.map.makeString(separator);
+    }
+
+    public String makeString(String start, String separator, String end)
+    {
+        return this.map.makeString(start, separator, end);
+    }
+
+    public void appendString(Appendable appendable)
+    {
+        this.map.appendString(appendable);
+    }
+
+    public void appendString(Appendable appendable, String separator)
+    {
+        this.map.appendString(appendable, separator);
+    }
+
+    public void appendString(Appendable appendable, String start, String separator, String end)
+    {
+        this.map.appendString(appendable, start, separator, end);
+    }
+
+    public \<T> T injectInto(T injectedValue, Object<name2>ToObjectFunction\<? super T, ? extends T> function)
+    {
+        return this.map.injectInto(injectedValue, function);
+    }
+}
+
+>>
+
+arithmeticMethods ::= [
+    "byte": "allMethods",
+    "short": "allMethods",
+    "char": "allMethods",
+    "int": "allMethods",
+    "long": "allMethods",
+    "float": "allMethods",
+    "double": "allMethods",
+    "boolean": "noMethods"
+    ]
+
+allMethods(name, type) ::=<<
+public <wideType.(type2)> sum()
+{
+    return this.map.sum();
+}
+
+public <type2> max()
+{
+    return this.map.max();
+}
+
+public <type2> maxIfEmpty(<type2> defaultValue)
+{
+    return this.map.maxIfEmpty(defaultValue);
+}
+
+public <type2> min()
+{
+    return this.map.min();
+}
+
+public <type2> minIfEmpty(<type2> defaultValue)
+{
+    return this.map.minIfEmpty(defaultValue);
+}
+
+public double average()
+{
+    return this.map.average();
+}
+
+public double median()
+{
+    return this.map.median();
+}
+
+public <type2> addToValue(<type1> key, <type2> toBeAdded)
+{
+    throw new UnsupportedOperationException("Cannot call addToValue() on " + this.getClass().getSimpleName());
+}
+
+public <type2>[] toSortedArray()
+{
+    return this.map.toSortedArray();
+}
+
+public Mutable<name2>List toSortedList()
+{
+    return this.map.toSortedList();
+}
+
+>>
+
+noMethods(name, type) ::= ""
+

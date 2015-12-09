@@ -1,0 +1,89 @@
+import "copyright.stg"
+import "primitiveHashCode.stg"
+import "primitiveEquals.stg"
+import "primitiveCompare.stg"
+
+targetPath() ::= "org/eclipse/collections/impl/tuple/primitive"
+
+fileName(primitive) ::= "<primitive.name>ObjectPairImpl"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name, primitive.wrapperName)>
+>>
+
+body(type, name, wrapperName) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.tuple.primitive;
+
+import org.eclipse.collections.api.tuple.primitive.<name>ObjectPair;
+import org.eclipse.collections.impl.block.factory.Comparators;
+
+/**
+ * This file was automatically generated from template file primitiveObjectPairImpl.stg
+ */
+public class <name>ObjectPairImpl\<T> implements <name>ObjectPair\<T>
+{
+    private static final long serialVersionUID = 1L;
+
+    private final <type> one;
+    private final T two;
+
+    <name>ObjectPairImpl(<type> newOne, T newTwo)
+    {
+        this.one = newOne;
+        this.two = newTwo;
+    }
+
+    public <type> getOne()
+    {
+        return this.one;
+    }
+
+    public T getTwo()
+    {
+        return this.two;
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o)
+        {
+            return true;
+        }
+        if (!(o instanceof <name>ObjectPair))
+        {
+            return false;
+        }
+
+        <name>ObjectPair\<?> that = (<name>ObjectPair\<?>) o;
+
+        return <(equals.(type))("this.one", "that.getOne()")>
+                && Comparators.nullSafeEquals(this.two, that.getTwo());
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return 29 * <(hashCode.(type))("this.one")> + (this.two == null ? 0 : this.two.hashCode());
+    }
+
+    @Override
+    public String toString()
+    {
+        return this.one + ":" + this.two;
+    }
+
+    public int compareTo(<name>ObjectPair\<T> that)
+    {
+        int i = <(compare.(type))("this.one", "that.getOne()", wrapperName)>;
+        if (i != 0)
+        {
+            return i;
+        }
+        return ((Comparable\<T>) this.two).compareTo(that.getTwo());
+    }
+}
+
+>>

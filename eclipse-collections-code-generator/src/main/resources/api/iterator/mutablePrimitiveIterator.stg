@@ -1,0 +1,26 @@
+import "copyright.stg"
+
+targetPath() ::= "org/eclipse/collections/api/iterator"
+
+fileName(primitive) ::= "Mutable<primitive.name>Iterator"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.api.iterator;
+
+/**
+ * This file was automatically generated from template file mutablePrimitiveIterator.stg.
+ *
+ * @since 6.0.
+ */
+public interface Mutable<name>Iterator extends <name>Iterator
+{
+    void remove();
+}
+
+>>

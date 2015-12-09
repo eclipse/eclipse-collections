@@ -1,0 +1,68 @@
+import "copyright.stg"
+
+targetPath() ::= "org/eclipse/collections/impl/list/mutable/primitive"
+
+fileName(primitive) ::= "Mutable<primitive.name>ListFactoryImpl"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.list.mutable.primitive;
+
+import org.eclipse.collections.api.<name>Iterable;
+import org.eclipse.collections.api.factory.list.primitive.Mutable<name>ListFactory;
+import org.eclipse.collections.api.list.primitive.Mutable<name>List;
+
+/**
+ * Mutable<name>ListFactoryImpl is a factory implementation which creates instances of type {@link Mutable<name>List}.
+ * This file was automatically generated from template file mutablePrimitiveListFactoryImpl.stg.
+ *
+ * @since 6.0.
+ */
+public class Mutable<name>ListFactoryImpl implements Mutable<name>ListFactory
+{
+    public Mutable<name>List empty()
+    {
+        return new <name>ArrayList();
+    }
+
+    public Mutable<name>List of()
+    {
+        return this.empty();
+    }
+
+    public Mutable<name>List with()
+    {
+        return this.empty();
+    }
+
+    public Mutable<name>List of(<type>... items)
+    {
+        return this.with(items);
+    }
+
+    public Mutable<name>List with(<type>... items)
+    {
+        if (items == null || items.length == 0)
+        {
+            return this.with();
+        }
+        return <name>ArrayList.newListWith(items);
+    }
+
+    public Mutable<name>List ofAll(<name>Iterable items)
+    {
+        return this.withAll(items);
+    }
+
+    public Mutable<name>List withAll(<name>Iterable items)
+    {
+        return <name>ArrayList.newList(items);
+    }
+}
+
+>>

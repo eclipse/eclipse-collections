@@ -1,0 +1,806 @@
+import "copyright.stg"
+import "primitiveEquals.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+
+targetPath() ::= "org/eclipse/collections/impl/map/immutable/primitive"
+
+fileName(primitive) ::= "Immutable<primitive.name>ObjectEmptyMap"
+
+skipBoolean() ::= "true"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+collectPrimitive(name, type) ::= <<
+public Immutable<name>Collection collect<name>(<name>Function\<? super V> <type>Function)
+{
+    return <name>Lists.immutable.with();
+}
+
+public \<R extends Mutable<name>Collection> R collect<name>(<name>Function\<? super V> <type>Function, R target)
+{
+    return target;
+}
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.map.immutable.primitive;
+
+import java.io.IOException;
+import java.io.Serializable;
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
+import org.eclipse.collections.api.<name>Iterable;
+import org.eclipse.collections.api.LazyIterable;
+import org.eclipse.collections.api.Lazy<name>Iterable;
+import org.eclipse.collections.api.RichIterable;
+import org.eclipse.collections.api.bag.MutableBag;
+import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
+import org.eclipse.collections.impl.bag.sorted.mutable.TreeBag;
+import org.eclipse.collections.api.block.function.Function;
+import org.eclipse.collections.api.block.function.Function0;
+import org.eclipse.collections.api.block.function.Function2;
+import org.eclipse.collections.api.block.function.primitive.BooleanFunction;
+import org.eclipse.collections.api.block.function.primitive.ByteFunction;
+import org.eclipse.collections.api.block.function.primitive.CharFunction;
+import org.eclipse.collections.api.block.function.primitive.DoubleFunction;
+import org.eclipse.collections.api.block.function.primitive.DoubleObjectToDoubleFunction;
+import org.eclipse.collections.api.block.function.primitive.FloatFunction;
+import org.eclipse.collections.api.block.function.primitive.FloatObjectToFloatFunction;
+import org.eclipse.collections.api.block.function.primitive.IntFunction;
+import org.eclipse.collections.api.block.function.primitive.IntObjectToIntFunction;
+import org.eclipse.collections.api.block.function.primitive.LongFunction;
+import org.eclipse.collections.api.block.function.primitive.LongObjectToLongFunction;
+import org.eclipse.collections.api.block.function.primitive.ShortFunction;
+import org.eclipse.collections.impl.block.factory.Comparators;
+import org.eclipse.collections.api.block.predicate.Predicate;
+import org.eclipse.collections.api.block.predicate.Predicate2;
+import org.eclipse.collections.api.block.predicate.primitive.<name>ObjectPredicate;
+import org.eclipse.collections.api.block.procedure.Procedure;
+import org.eclipse.collections.api.block.procedure.Procedure2;
+import org.eclipse.collections.api.block.procedure.primitive.<name>ObjectProcedure;
+import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
+import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
+import org.eclipse.collections.api.collection.ImmutableCollection;
+import org.eclipse.collections.api.collection.primitive.ImmutableBooleanCollection;
+import org.eclipse.collections.api.collection.primitive.ImmutableByteCollection;
+import org.eclipse.collections.api.collection.primitive.ImmutableCharCollection;
+import org.eclipse.collections.api.collection.primitive.ImmutableDoubleCollection;
+import org.eclipse.collections.api.collection.primitive.ImmutableFloatCollection;
+import org.eclipse.collections.api.collection.primitive.ImmutableIntCollection;
+import org.eclipse.collections.api.collection.primitive.ImmutableLongCollection;
+import org.eclipse.collections.api.collection.primitive.ImmutableShortCollection;
+import org.eclipse.collections.api.list.MutableList;
+import org.eclipse.collections.api.map.MapIterable;
+import org.eclipse.collections.api.map.MutableMap;
+import org.eclipse.collections.api.map.primitive.ObjectDoubleMap;
+import org.eclipse.collections.api.map.primitive.ObjectLongMap;
+import org.eclipse.collections.api.map.primitive.<name>ObjectMap;
+import org.eclipse.collections.api.map.primitive.Immutable<name>ObjectMap;
+import org.eclipse.collections.api.map.sorted.MutableSortedMap;
+import org.eclipse.collections.api.multimap.Multimap;
+import org.eclipse.collections.api.multimap.MutableMultimap;
+import org.eclipse.collections.api.partition.PartitionIterable;
+import org.eclipse.collections.api.set.MutableSet;
+import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
+import org.eclipse.collections.api.set.sorted.MutableSortedSet;
+import org.eclipse.collections.api.tuple.Pair;
+import org.eclipse.collections.api.tuple.primitive.<name>ObjectPair;
+import org.eclipse.collections.impl.factory.Bags;
+import org.eclipse.collections.impl.factory.Lists;
+import org.eclipse.collections.impl.factory.Maps;
+import org.eclipse.collections.impl.factory.Sets;
+import org.eclipse.collections.impl.factory.SortedMaps;
+import org.eclipse.collections.impl.factory.SortedSets;
+import org.eclipse.collections.impl.factory.primitive.BooleanLists;
+import org.eclipse.collections.impl.factory.primitive.ByteLists;
+import org.eclipse.collections.impl.factory.primitive.CharLists;
+import org.eclipse.collections.impl.factory.primitive.DoubleLists;
+import org.eclipse.collections.impl.factory.primitive.FloatLists;
+import org.eclipse.collections.impl.factory.primitive.IntLists;
+import org.eclipse.collections.impl.factory.primitive.LongLists;
+import org.eclipse.collections.impl.factory.primitive.ShortLists;
+import org.eclipse.collections.impl.lazy.LazyIterableAdapter;
+import org.eclipse.collections.impl.map.mutable.UnifiedMap;
+import org.eclipse.collections.impl.list.mutable.FastList;
+import org.eclipse.collections.impl.map.mutable.primitive.<name>ObjectHashMap;
+import org.eclipse.collections.impl.map.mutable.primitive.ObjectDoubleHashMap;
+import org.eclipse.collections.impl.map.mutable.primitive.ObjectLongHashMap;
+import org.eclipse.collections.impl.multimap.list.FastListMultimap;
+import org.eclipse.collections.impl.partition.list.PartitionFastList;
+import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
+import org.eclipse.collections.impl.set.mutable.primitive.Unmodifiable<name>Set;
+import org.eclipse.collections.impl.utility.LazyIterate;
+import org.eclipse.collections.impl.utility.primitive.Lazy<name>Iterate;
+import org.eclipse.collections.api.collection.primitive.MutableBooleanCollection;
+import org.eclipse.collections.api.collection.primitive.MutableByteCollection;
+import org.eclipse.collections.api.collection.primitive.MutableCharCollection;
+import org.eclipse.collections.api.collection.primitive.MutableDoubleCollection;
+import org.eclipse.collections.api.collection.primitive.MutableFloatCollection;
+import org.eclipse.collections.api.collection.primitive.MutableIntCollection;
+import org.eclipse.collections.api.collection.primitive.MutableLongCollection;
+import org.eclipse.collections.api.collection.primitive.MutableShortCollection;
+
+/**
+ * Immutable<name>ObjectEmptyMap is an optimization for {@link Immutable<name>ObjectMap} of size 0.
+ * This file was automatically generated from template file immutablePrimitiveObjectEmptyMap.stg.
+ *
+ * @since 4.0.
+ */
+final class Immutable<name>ObjectEmptyMap\<V> implements Immutable<name>ObjectMap\<V>, Serializable
+{
+    static final Immutable<name>ObjectMap\<?> INSTANCE = new Immutable<name>ObjectEmptyMap\<Object>();
+
+    private static final long serialVersionUID = 1L;
+
+    private Object readResolve()
+    {
+        return INSTANCE;
+    }
+
+    public V get(<type> key)
+    {
+        return null;
+    }
+
+    public V getIfAbsent(<type> key, Function0\<? extends V> ifAbsent)
+    {
+        return ifAbsent.value();
+    }
+
+    public boolean containsKey(<type> key)
+    {
+        return false;
+    }
+
+    public boolean containsValue(Object value)
+    {
+        return false;
+    }
+
+    public Immutable<name>ObjectMap\<V> tap(Procedure\<? super V> procedure)
+    {
+        return this;
+    }
+
+    public void forEachValue(Procedure\<? super V> procedure)
+    {
+    }
+
+    public void forEachKey(<name>Procedure procedure)
+    {
+    }
+
+    public void forEachKeyValue(<name>ObjectProcedure\<? super V> procedure)
+    {
+    }
+
+    public Immutable<name>ObjectMap\<V> select(<name>ObjectPredicate\<? super V> predicate)
+    {
+        return this;
+    }
+
+    public Immutable<name>ObjectMap\<V> reject(<name>ObjectPredicate\<? super V> predicate)
+    {
+        return this;
+    }
+
+    public Immutable<name>ObjectMap\<V> toImmutable()
+    {
+        return this;
+    }
+
+    public int size()
+    {
+        return 0;
+    }
+
+    public boolean isEmpty()
+    {
+        return true;
+    }
+
+    public boolean notEmpty()
+    {
+        return false;
+    }
+
+    public V getFirst()
+    {
+        return null;
+    }
+
+    public V getLast()
+    {
+        return null;
+    }
+
+    public boolean contains(Object object)
+    {
+        return false;
+    }
+
+    public boolean containsAllIterable(Iterable\<?> source)
+    {
+        return !source.iterator().hasNext();
+    }
+
+    public boolean containsAll(Collection\<?> source)
+    {
+        return source.isEmpty();
+    }
+
+    public boolean containsAllArguments(Object... elements)
+    {
+        return elements.length == 0;
+    }
+
+    public ImmutableCollection\<V> select(Predicate\<? super V> predicate)
+    {
+        return Lists.immutable.with();
+    }
+
+    public \<R extends Collection\<V>\> R select(Predicate\<? super V> predicate, R target)
+    {
+        return target;
+    }
+
+    public \<P> ImmutableCollection\<V> selectWith(Predicate2\<? super V, ? super P> predicate, P parameter)
+    {
+        return Lists.immutable.with();
+    }
+
+    public \<P, R extends Collection\<V>\> R selectWith(Predicate2\<? super V, ? super P> predicate, P parameter, R targetCollection)
+    {
+        return targetCollection;
+    }
+
+    public ImmutableCollection\<V> reject(Predicate\<? super V> predicate)
+    {
+        return Lists.immutable.with();
+    }
+
+    public \<R extends Collection\<V>\> R reject(Predicate\<? super V> predicate, R target)
+    {
+        return target;
+    }
+
+    public \<P> ImmutableCollection\<V> rejectWith(Predicate2\<? super V, ? super P> predicate, P parameter)
+    {
+        return Lists.immutable.with();
+    }
+
+    public \<P, R extends Collection\<V>\> R rejectWith(Predicate2\<? super V, ? super P> predicate, P parameter, R targetCollection)
+    {
+        return targetCollection;
+    }
+
+    public PartitionIterable\<V> partition(Predicate\<? super V> predicate)
+    {
+        return new PartitionFastList\<V>();
+    }
+
+    public \<P> PartitionIterable\<V> partitionWith(Predicate2\<? super V, ? super P> predicate, P parameter)
+    {
+        return new PartitionFastList\<V>();
+    }
+
+    public \<S> RichIterable\<S> selectInstancesOf(Class\<S> clazz)
+    {
+        return Lists.mutable.with();
+    }
+
+    public \<VV> ImmutableCollection\<VV> collect(Function\<? super V, ? extends VV> function)
+    {
+        return Lists.immutable.with();
+    }
+
+    <collectPrimitive("Boolean", "boolean")>
+
+    <collectPrimitive("Byte", "byte")>
+
+    <collectPrimitive("Char", "char")>
+
+    <collectPrimitive("Double", "double")>
+
+    <collectPrimitive("Float", "float")>
+
+    <collectPrimitive("Int", "int")>
+
+    <collectPrimitive("Long", "long")>
+
+    <collectPrimitive("Short", "short")>
+
+    public \<VV> RichIterable\<VV> collectIf(Predicate\<? super V> predicate, Function\<? super V, ? extends VV> function)
+    {
+        return Lists.mutable.with();
+    }
+
+    public \<VV> RichIterable\<VV> flatCollect(Function\<? super V, ? extends Iterable\<VV>\> function)
+    {
+        return Lists.mutable.with();
+    }
+
+    public V detect(Predicate\<? super V> predicate)
+    {
+        return null;
+    }
+
+    public \<P> V detectWith(Predicate2\<? super V, ? super P> predicate, P parameter)
+    {
+        return null;
+    }
+
+    public V detectIfNone(Predicate\<? super V> predicate, Function0\<? extends V> function)
+    {
+        return function.value();
+    }
+
+    public \<P> V detectWithIfNone(Predicate2\<? super V, ? super P> predicate, P parameter, Function0\<? extends V> function)
+    {
+        return function.value();
+    }
+
+    public int count(Predicate\<? super V> predicate)
+    {
+        return 0;
+    }
+
+    public \<P> int countWith(Predicate2\<? super V, ? super P> predicate, P parameter)
+    {
+        return 0;
+    }
+
+    public boolean anySatisfy(Predicate\<? super V> predicate)
+    {
+        return false;
+    }
+
+    public \<P> boolean anySatisfyWith(Predicate2\<? super V, ? super P> predicate, P parameter)
+    {
+        return false;
+    }
+
+    public boolean allSatisfy(Predicate\<? super V> predicate)
+    {
+        return true;
+    }
+
+    public \<P> boolean allSatisfyWith(Predicate2\<? super V, ? super P> predicate, P parameter)
+    {
+        return true;
+    }
+
+    public boolean noneSatisfy(Predicate\<? super V> predicate)
+    {
+        return true;
+    }
+
+    public \<P> boolean noneSatisfyWith(Predicate2\<? super V, ? super P> predicate, P parameter)
+    {
+        return true;
+    }
+
+    public \<IV> IV injectInto(IV injectedValue, Function2\<? super IV, ? super V, ? extends IV> function)
+    {
+        return injectedValue;
+    }
+
+    public int injectInto(int injectedValue, IntObjectToIntFunction\<? super V> function)
+    {
+        return injectedValue;
+    }
+
+    public long injectInto(long injectedValue, LongObjectToLongFunction\<? super V> function)
+    {
+        return injectedValue;
+    }
+
+    public float injectInto(float injectedValue, FloatObjectToFloatFunction\<? super V> function)
+    {
+        return injectedValue;
+    }
+
+    public double injectInto(double injectedValue, DoubleObjectToDoubleFunction\<? super V> function)
+    {
+        return injectedValue;
+    }
+
+    public MutableList\<V> toList()
+    {
+        return Lists.mutable.with();
+    }
+
+    public MutableList\<V> toSortedList()
+    {
+        return Lists.mutable.with();
+    }
+
+    public MutableList\<V> toSortedList(Comparator\<? super V> comparator)
+    {
+        return Lists.mutable.with();
+    }
+
+    public MutableSet\<V> toSet()
+    {
+        return Sets.mutable.with();
+    }
+
+    public MutableSortedSet\<V> toSortedSet()
+    {
+        return SortedSets.mutable.with();
+    }
+
+    public MutableSortedSet\<V> toSortedSet(Comparator\<? super V> comparator)
+    {
+        return SortedSets.mutable.with();
+    }
+
+    public MutableBag\<V> toBag()
+    {
+        return Bags.mutable.with();
+    }
+
+    public MutableSortedBag\<V> toSortedBag()
+    {
+        return TreeBag.newBag();
+    }
+
+    public MutableSortedBag\<V> toSortedBag(Comparator\<? super V> comparator)
+    {
+        return TreeBag.newBag(comparator);
+    }
+
+    public \<VV extends Comparable\<? super VV>\> MutableSortedBag\<V> toSortedBagBy(Function\<? super V, ? extends VV> function)
+    {
+        return TreeBag.newBag(Comparators.byFunction(function));
+    }
+
+    public \<NK, NV> MutableMap\<NK, NV> toMap(Function\<? super V, ? extends NK> keyFunction, Function\<? super V, ? extends NV> valueFunction)
+    {
+        return Maps.mutable.with();
+    }
+
+    public \<NK, NV> MutableSortedMap\<NK, NV> toSortedMap(Function\<? super V, ? extends NK> keyFunction, Function\<? super V, ? extends NV> valueFunction)
+    {
+        return SortedMaps.mutable.with();
+    }
+
+    public \<NK, NV> MutableSortedMap\<NK, NV> toSortedMap(Comparator\<? super NK> comparator, Function\<? super V, ? extends NK> keyFunction, Function\<? super V, ? extends NV> valueFunction)
+    {
+        return SortedMaps.mutable.with();
+    }
+
+    public LazyIterable\<V> asLazy()
+    {
+        return new LazyIterableAdapter\<V>(FastList.\<V>newListWith());
+    }
+
+    public Object[] toArray()
+    {
+        return new Object[0];
+    }
+
+    public \<T> T[] toArray(T[] a)
+    {
+        return (T[]) new Object[0];
+    }
+
+    public V min(Comparator\<? super V> comparator)
+    {
+        throw new NoSuchElementException();
+    }
+
+    public V max(Comparator\<? super V> comparator)
+    {
+        throw new NoSuchElementException();
+    }
+
+    public V min()
+    {
+        throw new NoSuchElementException();
+    }
+
+    public V max()
+    {
+        throw new NoSuchElementException();
+    }
+
+    public long sumOfInt(IntFunction\<? super V> function)
+    {
+        return 0L;
+    }
+
+    public double sumOfFloat(FloatFunction\<? super V> function)
+    {
+        return 0.0;
+    }
+
+    public long sumOfLong(LongFunction\<? super V> function)
+    {
+        return 0L;
+    }
+
+    public double sumOfDouble(DoubleFunction\<? super V> function)
+    {
+        return 0.0;
+    }
+
+    public \<V1> ObjectLongMap\<V1> sumByInt(Function\<V, V1> groupBy, IntFunction\<? super V> function)
+    {
+        return ObjectLongHashMap.newMap();
+    }
+
+    public \<V1> ObjectDoubleMap\<V1> sumByFloat(Function\<V, V1> groupBy, FloatFunction\<? super V> function)
+    {
+        return ObjectDoubleHashMap.newMap();
+    }
+
+    public \<V1> ObjectLongMap\<V1> sumByLong(Function\<V, V1> groupBy, LongFunction\<? super V> function)
+    {
+        return ObjectLongHashMap.newMap();
+    }
+
+    public \<V1> ObjectDoubleMap\<V1> sumByDouble(Function\<V, V1> groupBy, DoubleFunction\<? super V> function)
+    {
+        return ObjectDoubleHashMap.newMap();
+    }
+
+    public Mutable<name>Set keySet()
+    {
+        return Unmodifiable<name>Set.of(<name>HashSet.newSetWith());
+    }
+
+    public Collection\<V> values()
+    {
+        return Lists.immutable.\<V>of().castToList();
+    }
+
+    public Lazy<name>Iterable keysView()
+    {
+        return Lazy<name>Iterate.empty();
+    }
+
+    public RichIterable\<<name>ObjectPair\<V>\> keyValuesView()
+    {
+        return LazyIterate.empty();
+    }
+
+    @Override
+    public boolean equals(Object obj)
+    {
+        if (obj == this)
+        {
+            return true;
+        }
+        if (!(obj instanceof <name>ObjectMap))
+        {
+            return false;
+        }
+        <name>ObjectMap\<V> map = (<name>ObjectMap\<V>) obj;
+        return map.isEmpty();
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return 0;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "{}";
+    }
+
+    public String makeString()
+    {
+        return "";
+    }
+
+    public String makeString(String separator)
+    {
+        return "";
+    }
+
+    public String makeString(String start, String separator, String end)
+    {
+        return start + end;
+    }
+
+    public void appendString(Appendable appendable)
+    {
+    }
+
+    public void appendString(Appendable appendable, String separator)
+    {
+    }
+
+    public void appendString(Appendable appendable, String start, String separator, String end)
+    {
+        try
+        {
+            appendable.append(start);
+            appendable.append(end);
+        }
+        catch (IOException e)
+        {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public \<VV> Multimap\<VV, V> groupBy(Function\<? super V, ? extends VV> function)
+    {
+        return FastListMultimap.newMultimap();
+    }
+
+    public \<VV, R extends MutableMultimap\<VV, V>\> R groupBy(Function\<? super V, ? extends VV> function, R target)
+    {
+        return target;
+    }
+
+    public \<VV> Multimap\<VV, V> groupByEach(Function\<? super V, ? extends Iterable\<VV>\> function)
+    {
+        return FastListMultimap.newMultimap();
+    }
+
+    public \<VV, R extends MutableMultimap\<VV, V>\> R groupByEach(Function\<? super V, ? extends Iterable\<VV>\> function, R target)
+    {
+        return target;
+    }
+
+    public \<VV> MapIterable\<VV, V> groupByUniqueKey(Function\<? super V, ? extends VV> function)
+    {
+        return UnifiedMap.newMap();
+    }
+
+    public \<VV, R extends MutableMap\<VV, V>\> R groupByUniqueKey(Function\<? super V, ? extends VV> function, R target)
+    {
+        return target;
+    }
+
+    public \<S> RichIterable\<Pair\<V, S>\> zip(Iterable\<S> that)
+    {
+        return Lists.immutable.of();
+    }
+
+    public \<S, R extends Collection\<Pair\<V, S>\>> R zip(Iterable\<S> that, R target)
+    {
+        return target;
+    }
+
+    public RichIterable\<Pair\<V, Integer>\> zipWithIndex()
+    {
+        return Lists.immutable.of();
+    }
+
+    public \<R extends Collection\<Pair\<V, Integer>\>> R zipWithIndex(R target)
+    {
+        return target;
+    }
+
+    public RichIterable\<RichIterable\<V>\> chunk(int size)
+    {
+        return Lists.immutable.of();
+    }
+
+    public \<K, VV> MapIterable\<K, VV> aggregateInPlaceBy(Function\<? super V, ? extends K> groupBy, Function0\<? extends VV> zeroValueFactory, Procedure2\<? super VV, ? super V> mutatingAggregator)
+    {
+        return Maps.immutable.with();
+    }
+
+    public \<K, VV> MapIterable\<K, VV> aggregateBy(Function\<? super V, ? extends K> groupBy, Function0\<? extends VV> zeroValueFactory, Function2\<? super VV, ? super V, ? extends VV> nonMutatingAggregator)
+    {
+        return Maps.immutable.with();
+    }
+
+    public \<VV extends Comparable\<? super VV>\> V maxBy(Function\<? super V, ? extends VV> function)
+    {
+        throw new NoSuchElementException();
+    }
+
+    public \<VV extends Comparable\<? super VV>\> V minBy(Function\<? super V, ? extends VV> function)
+    {
+        throw new NoSuchElementException();
+    }
+
+    public \<VV extends Comparable\<? super VV>\> MutableSortedSet\<V> toSortedSetBy(Function\<? super V, ? extends VV> function)
+    {
+        return SortedSets.mutable.of();
+    }
+
+    public \<VV extends Comparable\<? super VV>\> MutableList\<V> toSortedListBy(Function\<? super V, ? extends VV> function)
+    {
+        return Lists.mutable.of();
+    }
+
+    public \<VV, R extends Collection\<VV>\> R flatCollect(Function\<? super V, ? extends Iterable\<VV>\> function, R target)
+    {
+        return target;
+    }
+
+    public \<VV, R extends Collection\<VV>\> R collectIf(Predicate\<? super V> predicate, Function\<? super V, ? extends VV> function, R target)
+    {
+        return target;
+    }
+
+    public \<P, VV> ImmutableCollection\<VV> collectWith(Function2\<? super V, ? super P, ? extends VV> function, P parameter)
+    {
+        return Lists.immutable.with();
+    }
+
+    public \<P, VV, R extends Collection\<VV>\> R collectWith(Function2\<? super V, ? super P, ? extends VV> function, P parameter, R targetCollection)
+    {
+        return targetCollection;
+    }
+
+    public \<VV, R extends Collection\<VV>\> R collect(Function\<? super V, ? extends VV> function, R target)
+    {
+        return target;
+    }
+
+    public Immutable<name>ObjectMap\<V> newWithKeyValue(<type> key, V value)
+    {
+        <name>ObjectHashMap\<V> map = new <name>ObjectHashMap\<V>();
+        map.put(key, value);
+        return map.toImmutable();
+    }
+
+    public Immutable<name>ObjectMap\<V> newWithoutKey(<type> key)
+    {
+        return this;
+    }
+
+    public Immutable<name>ObjectMap\<V> newWithoutAllKeys(<name>Iterable keys)
+    {
+        return this;
+    }
+
+    public void forEach(Procedure\<? super V> procedure)
+    {
+    }
+
+    public void each(Procedure\<? super V> procedure)
+    {
+    }
+
+    public void forEachWithIndex(ObjectIntProcedure\<? super V> objectIntProcedure)
+    {
+    }
+
+    public \<P> void forEachWith(Procedure2\<? super V, ? super P> procedure, P parameter)
+    {
+    }
+
+    public Iterator\<V> iterator()
+    {
+        return new InternalIterator();
+    }
+
+    private class InternalIterator implements Iterator\<V>
+    {
+        public boolean hasNext()
+        {
+            return false;
+        }
+
+        public V next()
+        {
+            throw new NoSuchElementException();
+        }
+
+        public void remove()
+        {
+            throw new UnsupportedOperationException("Cannot call remove() on " + this.getClass().getSimpleName());
+        }
+    }
+}
+
+>>

@@ -1,0 +1,749 @@
+import "copyright.stg"
+import "primitiveEquals.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+
+targetPath() ::= "org/eclipse/collections/impl/map/mutable/primitive"
+
+skipBoolean() ::= "true"
+
+fileName(primitive) ::= "AbstractMutable<primitive.name>ValuesMap"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.map.mutable.primitive;
+
+import java.io.IOException;
+import java.util.NoSuchElementException;
+
+import org.eclipse.collections.api.<name>Iterable;
+import org.eclipse.collections.api.Lazy<name>Iterable;
+import org.eclipse.collections.api.bag.primitive.Mutable<name>Bag;
+import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
+import org.eclipse.collections.api.block.function.primitive.Object<name>ToObjectFunction;
+import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
+import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
+import org.eclipse.collections.api.collection.MutableCollection;
+import org.eclipse.collections.api.collection.primitive.Immutable<name>Collection;
+import org.eclipse.collections.api.collection.primitive.Mutable<name>Collection;
+import org.eclipse.collections.api.iterator.<name>Iterator;
+import org.eclipse.collections.api.list.primitive.Mutable<name>List;
+import org.eclipse.collections.api.map.primitive.Mutable<name>ValuesMap;
+import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
+import org.eclipse.collections.impl.collection.mutable.primitive.Synchronized<name>Collection;
+import org.eclipse.collections.impl.collection.mutable.primitive.Unmodifiable<name>Collection;
+import org.eclipse.collections.impl.factory.primitive.<name>Lists;
+import org.eclipse.collections.impl.list.mutable.FastList;
+import org.eclipse.collections.impl.primitive.Abstract<name>Iterable;
+import org.eclipse.collections.impl.lazy.primitive.Lazy<name>IterableAdapter;
+import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
+import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
+
+/**
+ * This file was automatically generated from template file abstractMutablePrimitiveValuesMap.stg.
+ *
+ * @since 6.0.
+ */
+public abstract class AbstractMutable<name>ValuesMap extends Abstract<name>Iterable implements Mutable<name>ValuesMap
+{
+    protected abstract int getOccupiedWithData();
+
+    protected abstract SentinelValues getSentinelValues();
+
+    protected abstract void setSentinelValuesNull();
+
+    protected abstract <type> getEmptyValue();
+
+    protected abstract <type> getValueAtIndex(int index);
+
+    protected abstract int getTableSize();
+
+    protected abstract boolean isNonSentinelAtIndex(int index);
+
+    protected void addEmptyKeyValue(<type> value)
+    {
+        this.getSentinelValues().containsZeroKey = true;
+        this.getSentinelValues().zeroValue = value;
+    }
+
+    protected void removeEmptyKey()
+    {
+        if (this.getSentinelValues().containsOneKey)
+        {
+            this.getSentinelValues().containsZeroKey = false;
+            this.getSentinelValues().zeroValue = this.getEmptyValue();
+        }
+        else
+        {
+            this.setSentinelValuesNull();
+        }
+    }
+
+    protected void addRemovedKeyValue(<type> value)
+    {
+        this.getSentinelValues().containsOneKey = true;
+        this.getSentinelValues().oneValue = value;
+    }
+
+    protected void removeRemovedKey()
+    {
+        if (this.getSentinelValues().containsZeroKey)
+        {
+            this.getSentinelValues().containsOneKey = false;
+            this.getSentinelValues().oneValue = this.getEmptyValue();
+        }
+        else
+        {
+            this.setSentinelValuesNull();
+        }
+    }
+
+    public boolean contains(<type> value)
+    {
+        return this.containsValue(value);
+    }
+
+    @Override
+    public boolean containsAll(<name>Iterable source)
+    {
+        return source.allSatisfy(new <name>Predicate()
+        {
+            public boolean accept(<type> value)
+            {
+                return AbstractMutable<name>ValuesMap.this.contains(value);
+            }
+        });
+    }
+
+    public <type> max()
+    {
+        if (this.isEmpty())
+        {
+            throw new NoSuchElementException();
+        }
+        <name>Iterator iterator = this.<type>Iterator();
+        <type> max = iterator.next();
+        while (iterator.hasNext())
+        {
+            <type> value = iterator.next();
+            if (<(lessThan.(type))("max", "value")>)
+            {
+                max = value;
+            }
+        }
+        return max;
+    }
+
+    public <type> min()
+    {
+        if (this.isEmpty())
+        {
+            throw new NoSuchElementException();
+        }
+        <name>Iterator iterator = this.<type>Iterator();
+        <type> min = iterator.next();
+        while (iterator.hasNext())
+        {
+            <type> value = iterator.next();
+            if (<(lessThan.(type))("value", "min")>)
+            {
+                min = value;
+            }
+        }
+        return min;
+    }
+
+    public int size()
+    {
+        return this.getOccupiedWithData() + (this.getSentinelValues() == null ? 0 : this.getSentinelValues().size());
+    }
+
+    @Override
+    public boolean isEmpty()
+    {
+        return this.getOccupiedWithData() == 0 && (this.getSentinelValues() == null || this.getSentinelValues().size() == 0);
+    }
+
+    @Override
+    public boolean notEmpty()
+    {
+        return this.getOccupiedWithData() != 0 || (this.getSentinelValues() != null && this.getSentinelValues().size() != 0);
+    }
+
+    public void forEach(<name>Procedure procedure)
+    {
+        this.each(procedure);
+    }
+
+    /**
+     * @since 7.0.
+     */
+    public void each(<name>Procedure procedure)
+    {
+        this.forEachValue(procedure);
+    }
+
+    public void appendString(Appendable appendable, String start, String separator, String end)
+    {
+        try
+        {
+            appendable.append(start);
+
+            boolean first = true;
+
+            if (this.getSentinelValues() != null)
+            {
+                if (this.getSentinelValues().containsZeroKey)
+                {
+                    appendable.append(String.valueOf(this.getSentinelValues().zeroValue));
+                    first = false;
+                }
+                if (this.getSentinelValues().containsOneKey)
+                {
+                    if (!first)
+                    {
+                        appendable.append(separator);
+                    }
+                    appendable.append(String.valueOf(this.getSentinelValues().oneValue));
+                    first = false;
+                }
+            }
+            for (int i = 0; i \< this.getTableSize(); i++)
+            {
+                if (this.isNonSentinelAtIndex(i))
+                {
+                    if (!first)
+                    {
+                        appendable.append(separator);
+                    }
+                    appendable.append(String.valueOf(this.getValueAtIndex(i)));
+                    first = false;
+                }
+            }
+            appendable.append(end);
+        }
+        catch (IOException e)
+        {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public <type>[] toArray()
+    {
+        <type>[] array = new <type>[this.size()];
+        int index = 0;
+
+        <forEachValue(template = {array[index] = <value>;<\n>index++})>
+
+        return array;
+    }
+
+    public Mutable<name>Collection select(<name>Predicate predicate)
+    {
+        <name>ArrayList result = new <name>ArrayList();
+
+        <forEachValueSatisfying(template = {result.add(<value>)})>
+
+        return result;
+    }
+
+    public Mutable<name>Collection reject(<name>Predicate predicate)
+    {
+        <name>ArrayList result = new <name>ArrayList();
+        if (this.getSentinelValues() != null)
+        {
+            if (this.getSentinelValues().containsZeroKey && !predicate.accept(this.getSentinelValues().zeroValue))
+            {
+                result.add(this.getSentinelValues().zeroValue);
+            }
+            if (this.getSentinelValues().containsOneKey && !predicate.accept(this.getSentinelValues().oneValue))
+            {
+                result.add(this.getSentinelValues().oneValue);
+            }
+        }
+        for (int i = 0; i \< this.getTableSize(); i++)
+        {
+            if (this.isNonSentinelAtIndex(i) && !predicate.accept(this.getValueAtIndex(i)))
+            {
+                result.add(this.getValueAtIndex(i));
+            }
+        }
+        return result;
+    }
+
+    public \<V> MutableCollection\<V> collect(<name>ToObjectFunction\<? extends V> function)
+    {
+        FastList\<V> target = FastList.newList(this.size());
+        if (this.getSentinelValues() != null)
+        {
+            if (this.getSentinelValues().containsZeroKey)
+            {
+                target.add(function.valueOf(this.getSentinelValues().zeroValue));
+            }
+            if (this.getSentinelValues().containsOneKey)
+            {
+                target.add(function.valueOf(this.getSentinelValues().oneValue));
+            }
+        }
+        for (int i = 0; i \< this.getTableSize(); i++)
+        {
+            if (this.isNonSentinelAtIndex(i))
+            {
+                target.add(function.valueOf(this.getValueAtIndex(i)));
+            }
+        }
+        return target;
+    }
+
+    public <type> detectIfNone(<name>Predicate predicate, <type> value)
+    {
+        <forEachValueSatisfying(template = {return <value>})>
+        return value;
+    }
+
+    public int count(<name>Predicate predicate)
+    {
+        int count = 0;
+        <forEachValueSatisfying(template = {count++})>
+        return count;
+    }
+
+    public boolean anySatisfy(<name>Predicate predicate)
+    {
+        <forEachValueSatisfying(template = {return true})>
+        return false;
+    }
+
+    public boolean allSatisfy(<name>Predicate predicate)
+    {
+        if (this.getSentinelValues() != null)
+        {
+            if (this.getSentinelValues().containsZeroKey && !predicate.accept(this.getSentinelValues().zeroValue))
+            {
+                return false;
+            }
+            if (this.getSentinelValues().containsOneKey && !predicate.accept(this.getSentinelValues().oneValue))
+            {
+                return false;
+            }
+        }
+        for (int i = 0; i \< this.getTableSize(); i++)
+        {
+            if (this.isNonSentinelAtIndex(i) && !predicate.accept(this.getValueAtIndex(i)))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean noneSatisfy(<name>Predicate predicate)
+    {
+        if (this.getSentinelValues() != null)
+        {
+            if (this.getSentinelValues().containsZeroKey && predicate.accept(this.getSentinelValues().zeroValue))
+            {
+                return false;
+            }
+            if (this.getSentinelValues().containsOneKey && predicate.accept(this.getSentinelValues().oneValue))
+            {
+                return false;
+            }
+        }
+        for (int i = 0; i \< this.getTableSize(); i++)
+        {
+            if (this.isNonSentinelAtIndex(i) && predicate.accept(this.getValueAtIndex(i)))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    <if(primitive.floatingPoint)>public <wideType.(type)> sum()
+{
+    <wideType.(type)> result = <wideZero.(type)>;
+    <wideType.(type)> compensation = <wideZero.(type)>;
+
+    <forEachValue(template = {
+<wideType.(type)> adjustedValue = <value> - compensation;
+<wideType.(type)> nextSum = result + adjustedValue;
+compensation = nextSum - result - adjustedValue;
+result = nextSum})>
+
+    return result;
+}
+
+    <else>public <wideType.(type)> sum()
+{
+    <wideType.(type)> result = <wideZero.(type)>;
+
+    <forEachValue(template = {result += <value>})>
+
+    return result;
+}
+
+    <endif>
+    public boolean containsValue(<type> value)
+    {
+        if (this.getSentinelValues() != null && this.getSentinelValues().containsValue(value))
+        {
+            return true;
+        }
+        for (int i = 0; i \< this.getTableSize(); i++)
+        {
+            if (this.isNonSentinelAtIndex(i) && <(equals.(type))({this.getValueAtIndex(i)}, "value")>)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void forEachValue(<name>Procedure procedure)
+    {
+        <forEachValue(template = {procedure.value(<value>)})>
+    }
+
+    protected static class SentinelValues extends AbstractSentinelValues
+    {
+        protected <type> zeroValue;
+        protected <type> oneValue;
+
+        public boolean containsValue(<type> value)
+        {
+            boolean valueEqualsZeroValue = this.containsZeroKey && <(equals.(type))("this.zeroValue", "value")>;
+            boolean valueEqualsOneValue = this.containsOneKey && <(equals.(type))("this.oneValue", "value")>;
+            return valueEqualsZeroValue || valueEqualsOneValue;
+        }
+
+        public SentinelValues copy()
+        {
+            SentinelValues sentinelValues = new SentinelValues();
+            sentinelValues.zeroValue = this.zeroValue;
+            sentinelValues.oneValue = this.oneValue;
+            sentinelValues.containsOneKey = this.containsOneKey;
+            sentinelValues.containsZeroKey = this.containsZeroKey;
+            return sentinelValues;
+        }
+    }
+
+    protected abstract class Abstract<name>ValuesCollection implements Mutable<name>Collection
+    {
+        public void clear()
+        {
+            AbstractMutable<name>ValuesMap.this.clear();
+        }
+
+        public Mutable<name>Collection select(<name>Predicate predicate)
+        {
+            return AbstractMutable<name>ValuesMap.this.select(predicate);
+        }
+
+        public Mutable<name>Collection reject(<name>Predicate predicate)
+        {
+            return AbstractMutable<name>ValuesMap.this.reject(predicate);
+        }
+
+        public <type> detectIfNone(<name>Predicate predicate, <type> ifNone)
+        {
+            return AbstractMutable<name>ValuesMap.this.detectIfNone(predicate, ifNone);
+        }
+
+        public \<V> MutableCollection\<V> collect(<name>ToObjectFunction\<? extends V> function)
+        {
+            return AbstractMutable<name>ValuesMap.this.collect(function);
+        }
+
+        public \<T> T injectInto(T injectedValue, Object<name>ToObjectFunction\<? super T, ? extends T> function)
+        {
+            return AbstractMutable<name>ValuesMap.this.injectInto(injectedValue, function);
+        }
+
+        public <wideType.(type)> sum()
+        {
+            return AbstractMutable<name>ValuesMap.this.sum();
+        }
+
+        public <type> max()
+        {
+            return AbstractMutable<name>ValuesMap.this.max();
+        }
+
+        public <type> maxIfEmpty(<type> defaultValue)
+        {
+            return AbstractMutable<name>ValuesMap.this.maxIfEmpty(defaultValue);
+        }
+
+        public <type> min()
+        {
+            return AbstractMutable<name>ValuesMap.this.min();
+        }
+
+        public <type> minIfEmpty(<type> defaultValue)
+        {
+            return AbstractMutable<name>ValuesMap.this.minIfEmpty(defaultValue);
+        }
+
+        public double average()
+        {
+            return AbstractMutable<name>ValuesMap.this.average();
+        }
+
+        public double median()
+        {
+            return AbstractMutable<name>ValuesMap.this.median();
+        }
+
+        public <type>[] toSortedArray()
+        {
+            return AbstractMutable<name>ValuesMap.this.toSortedArray();
+        }
+
+        public Mutable<name>List toSortedList()
+        {
+            return AbstractMutable<name>ValuesMap.this.toSortedList();
+        }
+
+        public Mutable<name>Collection with(<type> element)
+        {
+            throw new UnsupportedOperationException("Cannot call with() on " + this.getClass().getSimpleName());
+        }
+
+        public Mutable<name>Collection without(<type> element)
+        {
+            throw new UnsupportedOperationException("Cannot call without() on " + this.getClass().getSimpleName());
+        }
+
+        public Mutable<name>Collection withAll(<name>Iterable elements)
+        {
+            throw new UnsupportedOperationException("Cannot call withAll() on " + this.getClass().getSimpleName());
+        }
+
+        public Mutable<name>Collection withoutAll(<name>Iterable elements)
+        {
+            throw new UnsupportedOperationException("Cannot call withoutAll() on " + this.getClass().getSimpleName());
+        }
+
+        public Mutable<name>Collection asUnmodifiable()
+        {
+            return Unmodifiable<name>Collection.of(this);
+        }
+
+        public Mutable<name>Collection asSynchronized()
+        {
+            return Synchronized<name>Collection.of(this);
+        }
+
+        public Immutable<name>Collection toImmutable()
+        {
+            return <name>Lists.immutable.withAll(this);
+        }
+
+        public boolean contains(<type> value)
+        {
+            return AbstractMutable<name>ValuesMap.this.containsValue(value);
+        }
+
+        public boolean containsAll(<type>... source)
+        {
+            return AbstractMutable<name>ValuesMap.this.containsAll(source);
+        }
+
+        public boolean containsAll(<name>Iterable source)
+        {
+            return AbstractMutable<name>ValuesMap.this.containsAll(source);
+        }
+
+        public Mutable<name>List toList()
+        {
+            return AbstractMutable<name>ValuesMap.this.toList();
+        }
+
+        public Mutable<name>Set toSet()
+        {
+            return AbstractMutable<name>ValuesMap.this.toSet();
+        }
+
+        public Mutable<name>Bag toBag()
+        {
+            return AbstractMutable<name>ValuesMap.this.toBag();
+        }
+
+        public Lazy<name>Iterable asLazy()
+        {
+            return new Lazy<name>IterableAdapter(this);
+        }
+
+        public boolean isEmpty()
+        {
+            return AbstractMutable<name>ValuesMap.this.isEmpty();
+        }
+
+        public boolean notEmpty()
+        {
+            return AbstractMutable<name>ValuesMap.this.notEmpty();
+        }
+
+        public String makeString()
+        {
+            return AbstractMutable<name>ValuesMap.this.makeString();
+        }
+
+        public String makeString(String separator)
+        {
+            return AbstractMutable<name>ValuesMap.this.makeString(separator);
+        }
+
+        public String makeString(String start, String separator, String end)
+        {
+            return AbstractMutable<name>ValuesMap.this.makeString(start, separator, end);
+        }
+
+        public void appendString(Appendable appendable)
+        {
+            AbstractMutable<name>ValuesMap.this.appendString(appendable);
+        }
+
+        public void appendString(Appendable appendable, String separator)
+        {
+            AbstractMutable<name>ValuesMap.this.appendString(appendable, separator);
+        }
+
+        public void appendString(Appendable appendable, String start, String separator, String end)
+        {
+            AbstractMutable<name>ValuesMap.this.appendString(appendable, start, separator, end);
+        }
+
+        public void forEach(<name>Procedure procedure)
+        {
+            this.each(procedure);
+        }
+
+        public void each(<name>Procedure procedure)
+        {
+            AbstractMutable<name>ValuesMap.this.each(procedure);
+        }
+
+        public int count(<name>Predicate predicate)
+        {
+            return AbstractMutable<name>ValuesMap.this.count(predicate);
+        }
+
+        public boolean anySatisfy(<name>Predicate predicate)
+        {
+            return AbstractMutable<name>ValuesMap.this.anySatisfy(predicate);
+        }
+
+        public boolean allSatisfy(<name>Predicate predicate)
+        {
+            return AbstractMutable<name>ValuesMap.this.allSatisfy(predicate);
+        }
+
+        public boolean noneSatisfy(<name>Predicate predicate)
+        {
+            return AbstractMutable<name>ValuesMap.this.noneSatisfy(predicate);
+        }
+
+        public boolean add(<type> element)
+        {
+            throw new UnsupportedOperationException("Cannot call add() on " + this.getClass().getSimpleName());
+        }
+
+        public boolean addAll(<type>... source)
+        {
+            throw new UnsupportedOperationException("Cannot call addAll() on " + this.getClass().getSimpleName());
+        }
+
+        public boolean addAll(<name>Iterable source)
+        {
+            throw new UnsupportedOperationException("Cannot call addAll() on " + this.getClass().getSimpleName());
+        }
+
+        public boolean removeAll(<name>Iterable source)
+        {
+            int oldSize = AbstractMutable<name>ValuesMap.this.size();
+
+            <name>Iterator iterator = source.<type>Iterator();
+            while (iterator.hasNext())
+            {
+                this.remove(iterator.next());
+            }
+            return oldSize != AbstractMutable<name>ValuesMap.this.size();
+        }
+
+        public boolean removeAll(<type>... source)
+        {
+            int oldSize = AbstractMutable<name>ValuesMap.this.size();
+
+            for (<type> item : source)
+            {
+                this.remove(item);
+            }
+            return oldSize != AbstractMutable<name>ValuesMap.this.size();
+        }
+
+        public boolean retainAll(<type>... source)
+        {
+            return this.retainAll(<name>HashSet.newSetWith(source));
+        }
+
+        public int size()
+        {
+            return AbstractMutable<name>ValuesMap.this.size();
+        }
+
+        public <type>[] toArray()
+        {
+            return AbstractMutable<name>ValuesMap.this.toArray();
+        }
+    }
+}
+
+>>
+forEachValue(template) ::= <<
+if (this.getSentinelValues() != null)
+{
+    if (this.getSentinelValues().containsZeroKey)
+    {
+        <"this.getSentinelValues().zeroValue":{value | <template>}>;
+    }
+    if (this.getSentinelValues().containsOneKey)
+    {
+        <"this.getSentinelValues().oneValue":{value | <template>}>;
+    }
+}
+for (int i = 0; i \< this.getTableSize(); i++)
+{
+    if (this.isNonSentinelAtIndex(i))
+    {
+        <{this.getValueAtIndex(i)}:{value | <template>}>;
+    }
+}
+>>
+
+forEachValueSatisfying(template) ::= <<
+if (this.getSentinelValues() != null)
+{
+    if (this.getSentinelValues().containsZeroKey && predicate.accept(this.getSentinelValues().zeroValue))
+    {
+        <"this.getSentinelValues().zeroValue":{ value | <template>}>;
+    }
+    if (this.getSentinelValues().containsOneKey && predicate.accept(this.getSentinelValues().oneValue))
+    {
+        <"this.getSentinelValues().oneValue":{ value | <template>}>;
+    }
+}
+for (int i = 0; i \< this.getTableSize(); i++)
+{
+    if (this.isNonSentinelAtIndex(i) && predicate.accept(this.getValueAtIndex(i)))
+    {
+        <{this.getValueAtIndex(i)}:{ value | <template>}>;
+    }
+}
+>>

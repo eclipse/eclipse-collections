@@ -1,0 +1,41 @@
+import "copyright.stg"
+import "primitiveEquals.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+
+targetPath() ::= "org/eclipse/collections/impl/map/primitive"
+
+skipBoolean() ::= "true"
+
+fileName(primitive) ::= "<primitive.name>KeysMap"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.map.primitive;
+
+import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
+
+/**
+ * This file was automatically generated from template file primitiveKeysMap.stg.
+ *
+ * @since 6.0.
+ */
+public interface <name>KeysMap
+{
+    int size();
+
+    boolean containsKey(<type> key);
+
+    void forEachKey(<name>Procedure procedure);
+
+    boolean isEmpty();
+
+    boolean notEmpty();
+}
+
+>>

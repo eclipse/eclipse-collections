@@ -1,0 +1,91 @@
+import "copyright.stg"
+
+targetPath() ::= "org/eclipse/collections/impl/set/immutable/primitive"
+
+fileName(primitive) ::= "Immutable<primitive.name>SetSerializationProxy"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.set.immutable.primitive;
+
+import java.io.Externalizable;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
+
+import org.eclipse.collections.api.set.primitive.<name>Set;
+import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
+import org.eclipse.collections.impl.block.procedure.checked.primitive.Checked<name>Procedure;
+import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
+
+/**
+ * This file was automatically generated from template file immutablePrimitiveSetSerializationProxy.stg.
+ *
+ * @since 4.0.
+ */
+public final class Immutable<name>SetSerializationProxy implements Externalizable
+{
+    private static final long serialVersionUID = 1L;
+
+    private <name>Set set;
+
+    @SuppressWarnings("UnusedDeclaration")
+    public Immutable<name>SetSerializationProxy()
+    {
+        // Empty constructor for Externalizable class
+    }
+
+    public Immutable<name>SetSerializationProxy(<name>Set set)
+    {
+        this.set = set;
+    }
+
+    public void writeExternal(final ObjectOutput out) throws IOException
+    {
+        out.writeInt(this.set.size());
+        try
+        {
+            this.set.forEach(new Checked<name>Procedure()
+            {
+                @Override
+                public void safeValue(<type> item) throws Exception
+                {
+                    out.write<name>(item);
+                }
+            });
+        }
+        catch (RuntimeException e)
+        {
+            if (e.getCause() instanceof IOException)
+            {
+                throw (IOException) e.getCause();
+            }
+            throw e;
+        }
+    }
+
+    public void readExternal(ObjectInput in) throws IOException
+    {
+        int size = in.readInt();
+        Mutable<name>Set deserializedSet = new <name>HashSet(size);
+
+        for (int i = 0; i \< size; i++)
+        {
+            deserializedSet.add(in.read<name>());
+        }
+
+        this.set = deserializedSet;
+    }
+
+    private Object readResolve()
+    {
+        return this.set.toImmutable();
+    }
+}
+
+>>

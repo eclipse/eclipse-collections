@@ -1,0 +1,244 @@
+import "copyright.stg"
+import "primitiveEquals.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+
+skipBoolean() ::= "true"
+
+isTest() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/map/mutable/primitive"
+
+fileName(primitive) ::= "Unmodifiable<primitive.name>ObjectMapKeySetTest"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name, primitive.wrapperName)>
+>>
+
+body(type, name, wrapperName) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.map.mutable.primitive;
+
+import org.eclipse.collections.api.iterator.Mutable<name>Iterator;
+import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
+import org.eclipse.collections.impl.block.factory.primitive.<name>Predicates;
+import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
+import org.eclipse.collections.impl.set.mutable.primitive.Abstract<name>SetTestCase;
+import org.eclipse.collections.impl.test.Verify;
+import org.junit.Assert;
+import org.junit.Test;
+
+/**
+ * JUnit test for {@link Unmodifiable<name>ObjectMap#keySet()}.
+ *
+ * This file was automatically generated from template file unmodifiablePrimitiveObjectMapKeySetTest.stg.
+ */
+public class Unmodifiable<name>ObjectMapKeySetTest extends Abstract<name>SetTestCase
+{
+    @Override
+    protected Mutable<name>Set classUnderTest()
+    {
+        return new Unmodifiable<name>ObjectMap\<>(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, 1, <(literal.(type))("2")>, 2, <(literal.(type))("3")>, 3)).keySet();
+    }
+
+    @Override
+    protected Mutable<name>Set newWith(<type>... elements)
+    {
+        <name>ObjectHashMap\<Integer> map = new <name>ObjectHashMap\<>();
+        for (int i = 0; i \< elements.length; i++)
+        {
+            map.put(elements[i], i);
+        }
+        return map.asUnmodifiable().keySet();
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void addAllIterable()
+    {
+        this.classUnderTest().addAll(new <name>ArrayList());
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void add()
+    {
+        this.classUnderTest().add(<(literal.(type))("0")>);
+    }
+
+    <if(primitive.floatingPoint)><NaNTests()><endif>
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void addAllArray()
+    {
+        this.classUnderTest().addAll(<(literal.(type))("0")>, <(literal.(type))("1")>);
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void with()
+    {
+        this.classUnderTest().with(<(literal.(type))("0")>);
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void without()
+    {
+        this.classUnderTest().without(<(literal.(type))("0")>);
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void withAll()
+    {
+        this.classUnderTest().withAll(new <name>ArrayList());
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void withoutAll()
+    {
+        this.classUnderTest().withoutAll(new <name>ArrayList());
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void clear()
+    {
+        this.classUnderTest().clear();
+    }
+
+    @Override
+    @Test
+    public void contains()
+    {
+        Assert.assertTrue(this.classUnderTest().contains(<(literal.(type))("1")>));
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void remove()
+    {
+        this.classUnderTest().remove(<(literal.(type))("1")>);
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void removeAll_iterable()
+    {
+        this.classUnderTest().removeAll(new <name>ArrayList());
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void removeAll()
+    {
+        this.classUnderTest().removeAll();
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void retainAll_iterable()
+    {
+        this.classUnderTest().retainAll(new <name>ArrayList());
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void retainAll()
+    {
+        this.classUnderTest().retainAll();
+    }
+
+    @Override
+    public void testEquals()
+    {
+        Mutable<name>Set set1 = this.newWith(<(literal.(type))("1")>, <(literal.(type))("31")>, <(literal.(type))("32")>);
+        Mutable<name>Set set2 = this.newWith(<(literal.(type))("32")>, <(literal.(type))("31")>, <(literal.(type))("1")>);
+        Mutable<name>Set set3 = this.newWith(<(literal.(type))("32")>, <(literal.(type))("32")>, <(literal.(type))("31")>, <(literal.(type))("1")>);
+        Mutable<name>Set set4 = this.newWith(<(literal.(type))("32")>, <(literal.(type))("32")>, <(literal.(type))("31")>, <(literal.(type))("1")>, <(literal.(type))("1")>);
+        Mutable<name>Set set5 = this.newWith(<(literal.(type))("32")>, <(literal.(type))("1")>);
+        Verify.assertEqualsAndHashCode(set1, set2);
+        Verify.assertEqualsAndHashCode(set1, set3);
+        Verify.assertEqualsAndHashCode(set1, set4);
+        Verify.assertEqualsAndHashCode(set2, set3);
+        Verify.assertEqualsAndHashCode(set2, set4);
+        Assert.assertNotEquals(set1, set5);
+    }
+
+    @Override
+    @Test
+    public void noneSatisfy()
+    {
+        super.noneSatisfy();
+        Assert.assertFalse(this.newWith(<(literal.(type))("0")>, <(literal.(type))("1")>, <(literal.(type))("2")>).noneSatisfy(<name>Predicates.equal(<(literal.(type))("0")>)));
+    }
+
+    @Override
+    @Test
+    public void sum()
+    {
+        super.sum();
+        Assert.assertEquals(<(wideLiteral.(type))("3")>, this.newWith(<(literal.(type))("0")>, <(literal.(type))("1")>, <(literal.(type))("2")>).sum()<wideDelta.(type)>);
+    }
+
+    @Override
+    public void testHashCode()
+    {
+        Mutable<name>Set set1 = this.newWith(<(literal.(type))("0")>, <(literal.(type))("1")>, <(literal.(type))("31")>, <(literal.(type))("32")>);
+        Mutable<name>Set set2 = this.newWith(<(literal.(type))("32")>, <(literal.(type))("31")>, <(literal.(type))("1")>, <(literal.(type))("0")>);
+        Assert.assertEquals(set1.hashCode(), set2.hashCode());
+        Assert.assertEquals(this.newObjectCollectionWith(<(literal.(type))("0")>, <(literal.(type))("1")>, <(literal.(type))("31")>, <(literal.(type))("32")>).hashCode(), set1.hashCode());
+    }
+
+    @Override
+    public void <type>Iterator_with_remove()
+    {
+        Mutable<name>Iterator iterator = this.classUnderTest().<type>Iterator();
+        Assert.assertTrue(iterator.hasNext());
+        iterator.next();
+        Verify.assertThrows(UnsupportedOperationException.class, iterator::remove);
+    }
+
+    @Override
+    public void <type>Iterator_throws_for_remove_before_next()
+    {
+        Mutable<name>Iterator iterator = this.classUnderTest().<type>Iterator();
+        Assert.assertTrue(iterator.hasNext());
+        Verify.assertThrows(UnsupportedOperationException.class, iterator::remove);
+    }
+
+    @Override
+    public void <type>Iterator_throws_for_consecutive_remove()
+    {
+        // Not applicable for Unmodifiable
+    }
+}
+
+>>
+
+NaNTests() ::= <<
+@Override
+@Test(expected = UnsupportedOperationException.class)
+public void add_NaN()
+{
+    this.newWith(<wrapperName>.NaN).add(<wrapperName>.NaN);
+}
+
+@Override
+@Test(expected = UnsupportedOperationException.class)
+public void add_POSITIVE_INFINITY()
+{
+    this.newWith(<wrapperName>.POSITIVE_INFINITY).add(<wrapperName>.POSITIVE_INFINITY);
+}
+
+@Override
+@Test(expected = UnsupportedOperationException.class)
+public void add_NEGATIVE_INFINITY()
+{
+    this.newWith(<wrapperName>.NEGATIVE_INFINITY).add(<wrapperName>.NEGATIVE_INFINITY);
+}
+>>

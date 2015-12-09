@@ -1,0 +1,37 @@
+import "copyright.stg"
+import "primitiveAPI.stg"
+
+targetPath() ::= "org/eclipse/collections/api/bag/primitive"
+
+fileName(primitive) ::= "Immutable<primitive.name>Bag"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.api.bag.primitive;
+
+import org.eclipse.collections.api.<name>Iterable;
+import org.eclipse.collections.api.bag.ImmutableBag;
+import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
+import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
+import org.eclipse.collections.api.collection.primitive.Immutable<name>Collection;
+
+/**
+ * This file was automatically generated from template file immutablePrimitiveBag.stg.
+ *
+ * @since 3.0.
+ */
+public interface Immutable<name>Bag extends Immutable<name>Collection, <name>Bag
+{
+    <sharedAPI(fileName(primitive), name)>
+
+    \<V> ImmutableBag\<V> collect(<name>ToObjectFunction\<? extends V> function);
+
+    <immutableAPI(fileName(primitive), type, name)>
+}
+
+>>

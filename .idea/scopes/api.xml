@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="api" pattern="src:org.eclipse.collections.api..*" />
+</component>

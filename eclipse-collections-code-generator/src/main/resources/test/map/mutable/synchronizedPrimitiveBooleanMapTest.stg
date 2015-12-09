@@ -1,0 +1,78 @@
+import "copyright.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+import "primitiveEquals.stg"
+
+skipBoolean() ::= "true"
+
+isTest() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/map/mutable/primitive"
+
+fileName(primitive) ::= "Synchronized<primitive.name>BooleanMapTest"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.map.mutable.primitive;
+
+import org.junit.Assert;
+import org.junit.Test;
+
+/**
+ * JUnit test for {@link Synchronized<name>BooleanMap}.
+ * This file was automatically generated from template file synchronizedPrimitiveBooleanMapTest.stg.
+ */
+public class Synchronized<name>BooleanMapTest extends AbstractMutable<name>BooleanMapTestCase
+{
+    @Override
+    protected Synchronized<name>BooleanMap classUnderTest()
+    {
+        return new Synchronized<name>BooleanMap(<name>BooleanHashMap.newWithKeysValues(<(literal.(type))("0")>, true, <(literal.(type))("31")>, false, <(literal.(type))("32")>, true));
+    }
+
+    @Override
+    protected Synchronized<name>BooleanMap newWithKeysValues(<type> key1, boolean value1)
+    {
+        return new Synchronized<name>BooleanMap(new <name>BooleanHashMap(1).withKeyValue(key1, value1));
+    }
+
+    @Override
+    protected Synchronized<name>BooleanMap newWithKeysValues(<type> key1, boolean value1, <type> key2, boolean value2)
+    {
+        return new Synchronized<name>BooleanMap(new <name>BooleanHashMap(2).withKeysValues(key1, value1, key2, value2));
+    }
+
+    @Override
+    protected Synchronized<name>BooleanMap newWithKeysValues(<type> key1, boolean value1, <type> key2, boolean value2, <type> key3, boolean value3)
+    {
+        return new Synchronized<name>BooleanMap(new <name>BooleanHashMap(3).withKeysValues(key1, value1, key2, value2, key3, value3));
+    }
+
+    @Override
+    protected Synchronized<name>BooleanMap newWithKeysValues(<type> key1, boolean value1, <type> key2, boolean value2, <type> key3, boolean value3, <type> key4, boolean value4)
+    {
+        return new Synchronized<name>BooleanMap(new <name>BooleanHashMap(4).withKeysValues(key1, value1, key2, value2, key3, value3, key4, value4));
+    }
+
+    @Override
+    protected Synchronized<name>BooleanMap getEmptyMap()
+    {
+        return new Synchronized<name>BooleanMap(new <name>BooleanHashMap());
+    }
+
+    @Override
+    @Test
+    public void asSynchronized()
+    {
+        super.asSynchronized();
+        Synchronized<name>BooleanMap map1 = this.classUnderTest();
+        Assert.assertSame(map1, map1.asSynchronized());
+    }
+}
+
+>>

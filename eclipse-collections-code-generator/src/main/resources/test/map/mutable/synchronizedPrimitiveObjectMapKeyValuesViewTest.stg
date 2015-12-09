@@ -1,0 +1,54 @@
+import "copyright.stg"
+
+skipBoolean() ::= "true"
+
+isTest() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/map/mutable/primitive"
+
+fileName(primitive) ::= "Synchronized<primitive.name>ObjectMapKeyValuesViewTest"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.map.mutable.primitive;
+
+import org.eclipse.collections.api.map.primitive.Mutable<name>ObjectMap;
+import org.eclipse.collections.impl.map.primitive.Abstract<name>ObjectMapKeyValuesViewTestCase;
+
+/**
+ * JUnit test for {@link Synchronized<name>ObjectMap#keyValuesView()}.
+ * This file was automatically generated from template file synchronizedPrimitiveObjectMapKeyValuesViewTest.stg.
+ */
+public class Synchronized<name>ObjectMapKeyValuesViewTest extends Abstract<name>ObjectMapKeyValuesViewTestCase
+{
+    @Override
+    public Mutable<name>ObjectMap\<Integer> newWithKeysValues(<type> key1, int value1, <type> key2, int value2, <type> key3, int value3)
+    {
+        return <name>ObjectHashMap.newWithKeysValues(key1, value1, key2, value2, key3, value3).asSynchronized();
+    }
+
+    @Override
+    public Mutable<name>ObjectMap\<Integer> newWithKeysValues(<type> key1, int value1, <type> key2, int value2)
+    {
+        return <name>ObjectHashMap.newWithKeysValues(key1, value1, key2, value2).asSynchronized();
+    }
+
+    @Override
+    public Mutable<name>ObjectMap\<Integer> newWithKeysValues(<type> key1, int value1)
+    {
+        return <name>ObjectHashMap.newWithKeysValues(key1, value1).asSynchronized();
+    }
+
+    @Override
+    public Mutable<name>ObjectMap\<Integer> newEmpty()
+    {
+        return <name>ObjectHashMap.\<Integer>newMap().asSynchronized();
+    }
+}
+
+>>

@@ -1,0 +1,56 @@
+import "copyright.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+
+isTest() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/list/mutable/primitive"
+
+fileName(primitive) ::= "Synchronized<primitive.name>ListTest"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.wrapperName, primitive.name)>
+>>
+
+body(type, wrapperName, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.list.mutable.primitive;
+
+import org.eclipse.collections.api.list.primitive.Mutable<name>List;
+import org.junit.Assert;
+import org.junit.Test;
+
+/**
+ * JUnit test for {@link Synchronized<name>List}.
+ * This file was automatically generated from template file synchronizedPrimitiveListTest.stg.
+ */
+public class Synchronized<name>ListTest extends Abstract<name>ListTestCase
+{
+    @Override
+    protected Synchronized<name>List classUnderTest()
+    {
+        return new Synchronized<name>List(<name>ArrayList.newListWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">));
+    }
+
+    @Override
+    protected Synchronized<name>List newWith(<type>... elements)
+    {
+        return new Synchronized<name>List(<name>ArrayList.newListWith(elements));
+    }
+
+    @Override
+    @Test
+    public void asSynchronized()
+    {
+        super.asSynchronized();
+        Synchronized<name>List list = this.classUnderTest();
+        Mutable<name>List listWithLockObject = new Synchronized<name>List(<name>ArrayList.newListWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">), new Object());
+        Assert.assertEquals(list, listWithLockObject);
+        Assert.assertSame(listWithLockObject, listWithLockObject.asSynchronized());
+        Assert.assertSame(list, list.asSynchronized());
+        Assert.assertEquals(list, list.asSynchronized());
+    }
+}
+
+>>

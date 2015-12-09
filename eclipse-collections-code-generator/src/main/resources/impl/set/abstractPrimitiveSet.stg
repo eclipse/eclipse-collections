@@ -1,0 +1,51 @@
+import "copyright.stg"
+import "primitiveLiteral.stg"
+
+skipBoolean() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/set/primitive"
+
+fileName(primitive) ::= "Abstract<primitive.name>Set"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name)::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.set.primitive;
+
+import org.eclipse.collections.api.set.primitive.<name>Set;
+import org.eclipse.collections.impl.primitive.Abstract<name>Iterable;
+
+/**
+ * This file was automatically generated from template file abstractPrimitiveSet.stg.
+ *
+ * @since 6.0.
+ */
+public abstract class Abstract<name>Set extends Abstract<name>Iterable implements <name>Set
+{
+    @Override
+    public boolean equals(Object obj)
+    {
+        if (this == obj)
+        {
+            return true;
+        }
+
+        if (!(obj instanceof <name>Set))
+        {
+            return false;
+        }
+
+        <name>Set other = (<name>Set) obj;
+        return this.size() == other.size() && this.containsAll(other.toArray());
+    }
+
+    @SuppressWarnings("AbstractMethodOverridesAbstractMethod")
+    @Override
+    public abstract int hashCode();
+}
+
+>>

@@ -1,0 +1,58 @@
+import "copyright.stg"
+import "primitiveAPI.stg"
+
+targetPath() ::= "org/eclipse/collections/api/stack/primitive"
+
+fileName(primitive) ::= "Mutable<primitive.name>Stack"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.api.stack.primitive;
+
+import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
+import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
+import org.eclipse.collections.api.list.primitive.<name>List;
+import org.eclipse.collections.api.stack.MutableStack;
+
+/**
+ * This file was automatically generated from template file mutablePrimitiveStack.stg.
+ *
+ * @since 3.0.
+ */
+public interface Mutable<name>Stack extends <name>Stack
+{
+    /**
+     * Adds an item to the top of the stack.
+     */
+    void push(<type> item);
+
+    /**
+     * Removes and returns the top element of the stack.
+     */
+    <type> pop();
+
+    /**
+     * Removes and returns a <name>List of the number of elements specified by the count, beginning with the top of the stack.
+     */
+    <name>List pop(int count);
+
+    /**
+     * Clears the Stack
+     */
+    void clear();
+
+    <sharedAPI(fileName(primitive), name)>
+
+    \<V> MutableStack\<V> collect(<name>ToObjectFunction\<? extends V> function);
+
+    Mutable<name>Stack asUnmodifiable();
+
+    Mutable<name>Stack asSynchronized();
+}
+
+>>

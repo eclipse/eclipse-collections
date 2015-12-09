@@ -1,0 +1,54 @@
+import "copyright.stg"
+
+skipBoolean() ::= "true"
+
+isTest() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/map/mutable/primitive"
+
+fileName(primitive) ::= "<primitive.name>ObjectHashMapKeyValuesViewTest"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.map.mutable.primitive;
+
+import org.eclipse.collections.impl.map.primitive.Abstract<name>ObjectMapKeyValuesViewTestCase;
+
+
+/**
+ * JUnit test for {@link <name>ObjectHashMap#keyValuesView()}.
+ * This file was automatically generated from template file primitiveObjectHashMapKeyValuesViewTest.stg.
+ */
+public class <name>ObjectHashMapKeyValuesViewTest extends Abstract<name>ObjectMapKeyValuesViewTestCase
+{
+    @Override
+    public <name>ObjectHashMap\<Integer> newWithKeysValues(<type> key1, int value1, <type> key2, int value2, <type> key3, int value3)
+    {
+        return <name>ObjectHashMap.newWithKeysValues(key1, value1, key2, value2, key3, value3);
+    }
+
+    @Override
+    public <name>ObjectHashMap\<Integer> newWithKeysValues(<type> key1, int value1, <type> key2, int value2)
+    {
+        return <name>ObjectHashMap.newWithKeysValues(key1, value1, key2, value2);
+    }
+
+    @Override
+    public <name>ObjectHashMap\<Integer> newWithKeysValues(<type> key1, int value1)
+    {
+        return <name>ObjectHashMap.newWithKeysValues(key1, value1);
+    }
+
+    @Override
+    public <name>ObjectHashMap\<Integer> newEmpty()
+    {
+        return <name>ObjectHashMap.newMap();
+    }
+}
+
+>>

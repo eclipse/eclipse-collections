@@ -1,0 +1,210 @@
+import "copyright.stg"
+import "primitiveEquals.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+
+targetPath() ::= "org/eclipse/collections/impl/set/mutable/primitive"
+
+fileName(primitive) ::= "Synchronized<primitive.name>Set"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.set.mutable.primitive;
+
+import java.util.Collection;
+import java.util.Collections;
+
+import org.eclipse.collections.api.<name>Iterable;
+import org.eclipse.collections.api.Lazy<name>Iterable;
+import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
+import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
+import org.eclipse.collections.api.iterator.<name>Iterator;
+import org.eclipse.collections.api.set.MutableSet;
+import org.eclipse.collections.api.set.primitive.Immutable<name>Set;
+import org.eclipse.collections.api.set.primitive.<name>Set;
+import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
+import org.eclipse.collections.impl.collection.mutable.primitive.AbstractSynchronized<name>Collection;
+import org.eclipse.collections.impl.lazy.primitive.Lazy<name>IterableAdapter;
+import net.jcip.annotations.GuardedBy;
+import net.jcip.annotations.ThreadSafe;
+
+/**
+ * A synchronized view of a {@link Mutable<name>Set}. It is imperative that the user manually synchronize on the collection when iterating over it using the
+ * {@link <name>Iterator}, as per {@link Collections#synchronizedCollection(Collection)}.
+ * \<p>
+ * This file was automatically generated from template file synchronizedPrimitiveSet.stg.
+ *
+ * @see Mutable<name>Set#asSynchronized()
+ * @see MutableSet#asSynchronized()
+ * @since 3.1.
+ */
+@ThreadSafe
+public final class Synchronized<name>Set
+        extends AbstractSynchronized<name>Collection
+        implements Mutable<name>Set
+{
+    private static final long serialVersionUID = 1L;
+
+    Synchronized<name>Set(Mutable<name>Set set)
+    {
+        super(set);
+    }
+
+    Synchronized<name>Set(Mutable<name>Set set, Object newLock)
+    {
+        super(set, newLock);
+    }
+
+    /**
+     * This method will take a Mutable<name>Set and wrap it directly in a Synchronized<name>Set.
+     */
+    public static Synchronized<name>Set of(Mutable<name>Set set)
+    {
+        return new Synchronized<name>Set(set);
+    }
+
+    /**
+     * This method will take a Mutable<name>Set and wrap it directly in a Synchronized<name>Set.
+     * Additionally, a developer specifies which lock to use with the collection.
+     */
+    public static Synchronized<name>Set of(Mutable<name>Set set, Object lock)
+    {
+        return new Synchronized<name>Set(set, lock);
+    }
+
+    @GuardedBy("getLock()")
+    private Mutable<name>Set getMutable<name>Set()
+    {
+        return (Mutable<name>Set) this.get<name>Collection();
+    }
+
+    @Override
+    public Synchronized<name>Set without(<type> element)
+    {
+        synchronized (this.getLock())
+        {
+            this.getMutable<name>Set().remove(element);
+        }
+        return this;
+    }
+
+    @Override
+    public Synchronized<name>Set with(<type> element)
+    {
+        synchronized (this.getLock())
+        {
+            this.getMutable<name>Set().add(element);
+        }
+        return this;
+    }
+
+    @Override
+    public Synchronized<name>Set withAll(<name>Iterable elements)
+    {
+        synchronized (this.getLock())
+        {
+            this.getMutable<name>Set().addAll(elements.toArray());
+        }
+        return this;
+    }
+
+    @Override
+    public Synchronized<name>Set withoutAll(<name>Iterable elements)
+    {
+        synchronized (this.getLock())
+        {
+            this.getMutable<name>Set().removeAll(elements);
+        }
+        return this;
+    }
+
+    @Override
+    public Mutable<name>Set select(<name>Predicate predicate)
+    {
+        synchronized (this.getLock())
+        {
+            return this.getMutable<name>Set().select(predicate);
+        }
+    }
+
+    @Override
+    public Mutable<name>Set reject(<name>Predicate predicate)
+    {
+        synchronized (this.getLock())
+        {
+            return this.getMutable<name>Set().reject(predicate);
+        }
+    }
+
+    @Override
+    public \<V> MutableSet\<V> collect(<name>ToObjectFunction\<? extends V> function)
+    {
+        synchronized (this.getLock())
+        {
+            return this.getMutable<name>Set().collect(function);
+        }
+    }
+
+    @Override
+    public boolean equals(Object otherSet)
+    {
+        synchronized (this.getLock())
+        {
+            return this.getMutable<name>Set().equals(otherSet);
+        }
+    }
+
+    @Override
+    public int hashCode()
+    {
+        synchronized (this.getLock())
+        {
+            return this.getMutable<name>Set().hashCode();
+        }
+    }
+
+    @Override
+    public Lazy<name>Iterable asLazy()
+    {
+        synchronized (this.getLock())
+        {
+            return new Lazy<name>IterableAdapter(this);
+        }
+    }
+
+    @Override
+    public Mutable<name>Set asUnmodifiable()
+    {
+        return new Unmodifiable<name>Set(this);
+    }
+
+    @Override
+    public Mutable<name>Set asSynchronized()
+    {
+        return this;
+    }
+
+    public <name>Set freeze()
+    {
+        synchronized (this.getLock())
+        {
+            return this.getMutable<name>Set().freeze();
+        }
+    }
+
+    @Override
+    public Immutable<name>Set toImmutable()
+    {
+        synchronized (this.getLock())
+        {
+            return this.getMutable<name>Set().toImmutable();
+        }
+    }
+}
+
+>>

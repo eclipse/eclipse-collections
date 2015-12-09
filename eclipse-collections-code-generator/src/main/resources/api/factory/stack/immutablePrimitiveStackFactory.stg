@@ -1,0 +1,71 @@
+import "copyright.stg"
+
+targetPath() ::= "org/eclipse/collections/api/factory/stack/primitive"
+
+fileName(primitive) ::= "Immutable<primitive.name>StackFactory"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.api.factory.stack.primitive;
+
+import org.eclipse.collections.api.<name>Iterable;
+import org.eclipse.collections.api.stack.primitive.Immutable<name>Stack;
+
+/**
+ * A factory which creates instances of type {@link Immutable<name>Stack}.
+ * This file was automatically generated from template file immutablePrimitiveStackFactory.stg.
+ *
+ * @since 4.0.
+ */
+public interface Immutable<name>StackFactory
+{
+    /**
+     * @since 6.0
+     */
+    Immutable<name>Stack empty();
+
+    /**
+     * Same as {@link #empty()}.
+     */
+    Immutable<name>Stack of();
+
+    /**
+     * Same as {@link #empty()}.
+     */
+    Immutable<name>Stack with();
+
+    /**
+     * Same as {@link #with(<type>)}.
+     */
+    Immutable<name>Stack of(<type> one);
+
+    Immutable<name>Stack with(<type> one);
+
+    /**
+     * Same as {@link #with(<type>[])}.
+     */
+    Immutable<name>Stack of(<type>... items);
+
+    Immutable<name>Stack with(<type>... items);
+
+    /**
+     * Same as {@link #withAll(<name>Iterable)}.
+     */
+    Immutable<name>Stack ofAll(<name>Iterable items);
+
+    Immutable<name>Stack withAll(<name>Iterable items);
+
+    /**
+     * Same as {@link #withAllReversed(<name>Iterable)}.
+     */
+    Immutable<name>Stack ofAllReversed(<name>Iterable items);
+
+    Immutable<name>Stack withAllReversed(<name>Iterable items);
+}
+
+>>

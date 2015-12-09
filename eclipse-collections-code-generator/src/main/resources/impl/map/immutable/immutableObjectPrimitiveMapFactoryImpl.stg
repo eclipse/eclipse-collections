@@ -1,0 +1,86 @@
+import "copyright.stg"
+
+targetPath() ::= "org/eclipse/collections/impl/map/immutable/primitive"
+
+fileName(primitive) ::= "ImmutableObject<primitive.name>MapFactoryImpl"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.map.immutable.primitive;
+
+import org.eclipse.collections.api.block.procedure.Procedure;
+import org.eclipse.collections.api.factory.map.primitive.ImmutableObject<name>MapFactory;
+import org.eclipse.collections.api.map.primitive.ImmutableObject<name>Map;
+import org.eclipse.collections.api.map.primitive.Object<name>Map;
+
+/**
+ * ImmutableObject<name>MapFactoryImpl is a factory implementation which creates instances of type {@link ImmutableObject<name>Map}.
+ * This file was automatically generated from template file immutableObjectPrimitiveMapFactoryImpl.stg.
+ *
+ * @since 4.0.
+ */
+public class ImmutableObject<name>MapFactoryImpl implements ImmutableObject<name>MapFactory
+{
+    public \<K> ImmutableObject<name>Map\<K> empty()
+    {
+        return (ImmutableObject<name>Map\<K>) ImmutableObject<name>EmptyMap.INSTANCE;
+    }
+
+    public \<K> ImmutableObject<name>Map\<K> of()
+    {
+        return this.empty();
+    }
+
+    public \<K> ImmutableObject<name>Map\<K> with()
+    {
+        return this.empty();
+    }
+
+    public \<K> ImmutableObject<name>Map\<K> of(K key, <type> value)
+    {
+        return this.with(key, value);
+    }
+
+    public \<K> ImmutableObject<name>Map\<K> with(K key, <type> value)
+    {
+        return new ImmutableObject<name>SingletonMap\<K>(key, value);
+    }
+
+    public \<K> ImmutableObject<name>Map\<K> ofAll(Object<name>Map\<? extends K> map)
+    {
+        return this.withAll(map);
+    }
+
+    public \<K> ImmutableObject<name>Map\<K> withAll(Object<name>Map\<? extends K> map)
+    {
+        if (map instanceof ImmutableObject<name>Map)
+        {
+            return (ImmutableObject<name>Map\<K>) map;
+        }
+        if (map.isEmpty())
+        {
+            return this.with();
+        }
+        if (map.size() == 1)
+        {
+            //TODO use keysView() when available.
+            final Object[] array = new Object[1];
+            map.forEachKey(new Procedure\<K>()
+            {
+                public void value(K each)
+                {
+                    array[0] = each;
+                }
+            });
+            return new ImmutableObject<name>SingletonMap\<K>((K) array[0], map.get(array[0]));
+        }
+        return new ImmutableObject<name>HashMap\<K>(map);
+    }
+}
+
+>>

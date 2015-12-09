@@ -1,0 +1,124 @@
+import "copyright.stg"
+import "primitiveEquals.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+
+isTest() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/collection/immutable/primitive"
+
+fileName(primitive) ::= "AbstractImmutable<primitive.name>CollectionTestCase"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.wrapperName, primitive.name)>
+>>
+
+body(type, wrapperName, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.collection.immutable.primitive;
+
+import org.eclipse.collections.api.collection.primitive.Immutable<name>Collection;
+import org.eclipse.collections.api.collection.primitive.Mutable<name>Collection;
+import org.eclipse.collections.impl.collection.mutable.primitive.Abstract<name>IterableTestCase;
+import org.junit.Assert;
+import org.junit.Test;
+
+/**
+ * Abstract JUnit test for {@link Immutable<name>Collection}s.
+ * This file was automatically generated from template file abstractImmutablePrimitiveCollectionTestCase.stg.
+ */
+public abstract class AbstractImmutable<name>CollectionTestCase extends Abstract<name>IterableTestCase
+{
+    @Override
+    protected abstract Immutable<name>Collection classUnderTest();
+
+    @Override
+    protected abstract Immutable<name>Collection newWith(<type>... elements);
+
+    @Override
+    protected abstract Mutable<name>Collection newMutableCollectionWith(<type>... elements);
+
+    protected void assertSizeAndContains(Immutable<name>Collection collection, <type>... elements)
+    {
+        Assert.assertEquals(elements.length, collection.size());
+        for (<type> i: elements)
+        {
+            Assert.assertTrue(collection.contains(i));
+        }
+    }
+
+    @Test
+    public void testNewWith()
+    {
+        Immutable<name>Collection immutableCollection = this.newWith();
+        Immutable<name>Collection collection = immutableCollection.newWith(<(literal.(type))("1")>);
+        Immutable<name>Collection collection0 = immutableCollection.newWith(<(literal.(type))("1")>).newWith(<(literal.(type))("2")>);
+        Immutable<name>Collection collection1 = immutableCollection.newWith(<(literal.(type))("1")>).newWith(<(literal.(type))("2")>).newWith(<(literal.(type))("3")>);
+        Immutable<name>Collection collection2 = immutableCollection.newWith(<(literal.(type))("1")>).newWith(<(literal.(type))("2")>).newWith(<(literal.(type))("3")>).newWith(<(literal.(type))("4")>);
+        Immutable<name>Collection collection3 = immutableCollection.newWith(<(literal.(type))("1")>).newWith(<(literal.(type))("2")>).newWith(<(literal.(type))("3")>).newWith(<(literal.(type))("4")>).newWith(<(literal.(type))("5")>);
+        this.assertSizeAndContains(immutableCollection);
+        this.assertSizeAndContains(collection, <(literal.(type))("1")>);
+        this.assertSizeAndContains(collection0, <(literal.(type))("1")>, <(literal.(type))("2")>);
+        this.assertSizeAndContains(collection1, <(literal.(type))("1")>, <(literal.(type))("2")>, <(literal.(type))("3")>);
+        this.assertSizeAndContains(collection2, <(literal.(type))("1")>, <(literal.(type))("2")>, <(literal.(type))("3")>, <(literal.(type))("4")>);
+        this.assertSizeAndContains(collection3, <(literal.(type))("1")>, <(literal.(type))("2")>, <(literal.(type))("3")>, <(literal.(type))("4")>, <(literal.(type))("5")>);
+    }
+
+    @Test
+    public void newWithAll()
+    {
+        Immutable<name>Collection immutableCollection = this.newWith();
+        Immutable<name>Collection collection = immutableCollection.newWithAll(this.newMutableCollectionWith(<(literal.(type))("1")>));
+        Immutable<name>Collection collection0 = collection.newWithAll(this.newMutableCollectionWith(<(literal.(type))("2")>));
+        Immutable<name>Collection collection1 = collection0.newWithAll(this.newMutableCollectionWith(<(literal.(type))("3")>));
+        Immutable<name>Collection collection2 = immutableCollection.newWithAll(this.newMutableCollectionWith(<["1", "2", "3", "4"]:(literal.(type))(); separator=", ">));
+        Immutable<name>Collection collection3 = immutableCollection.newWithAll(this.newMutableCollectionWith(<["1", "2", "3", "4", "5"]:(literal.(type))(); separator=", ">));
+        this.assertSizeAndContains(immutableCollection);
+        this.assertSizeAndContains(collection, <(literal.(type))("1")>);
+        this.assertSizeAndContains(collection0, <(literal.(type))("1")>, <(literal.(type))("2")>);
+        this.assertSizeAndContains(collection1, <(literal.(type))("1")>, <(literal.(type))("2")>, <(literal.(type))("3")>);
+        this.assertSizeAndContains(collection2, <(literal.(type))("1")>, <(literal.(type))("2")>, <(literal.(type))("3")>, <(literal.(type))("4")>);
+        this.assertSizeAndContains(collection3, <(literal.(type))("1")>, <(literal.(type))("2")>, <(literal.(type))("3")>, <(literal.(type))("4")>, <(literal.(type))("5")>);
+    }
+
+    @Test
+    public void newWithout()
+    {
+        Immutable<name>Collection collection3 = this.newWith(<(literal.(type))("1")>, <(literal.(type))("2")>, <(literal.(type))("3")>, <(literal.(type))("4")>, <(literal.(type))("5")>);
+        Immutable<name>Collection collection2 = collection3.newWithout(<(literal.(type))("5")>);
+        Immutable<name>Collection collection1 = collection2.newWithout(<(literal.(type))("4")>);
+        Immutable<name>Collection collection0 = collection1.newWithout(<(literal.(type))("3")>);
+        Immutable<name>Collection collection4 = collection0.newWithout(<(literal.(type))("2")>);
+        Immutable<name>Collection collection5 = collection4.newWithout(<(literal.(type))("1")>);
+        Immutable<name>Collection collection6 = collection5.newWithout(<(literal.(type))("0")>);
+
+        this.assertSizeAndContains(collection6);
+        this.assertSizeAndContains(collection5);
+        this.assertSizeAndContains(collection4, <(literal.(type))("1")>);
+        this.assertSizeAndContains(collection0, <(literal.(type))("1")>, <(literal.(type))("2")>);
+        this.assertSizeAndContains(collection1, <(literal.(type))("1")>, <(literal.(type))("2")>, <(literal.(type))("3")>);
+        this.assertSizeAndContains(collection2, <(literal.(type))("1")>, <(literal.(type))("2")>, <(literal.(type))("3")>, <(literal.(type))("4")>);
+    }
+
+    @Test
+    public void newWithoutAll()
+    {
+        Immutable<name>Collection collection3 = this.newWith(<(literal.(type))("1")>, <(literal.(type))("2")>, <(literal.(type))("3")>, <(literal.(type))("4")>, <(literal.(type))("5")>);
+        Immutable<name>Collection collection2 = collection3.newWithoutAll(this.newMutableCollectionWith(<(literal.(type))("5")>));
+        Immutable<name>Collection collection1 = collection2.newWithoutAll(this.newMutableCollectionWith(<(literal.(type))("4")>));
+        Immutable<name>Collection collection0 = collection1.newWithoutAll(this.newMutableCollectionWith(<(literal.(type))("3")>));
+        Immutable<name>Collection collection4 = collection0.newWithoutAll(this.newMutableCollectionWith(<(literal.(type))("2")>));
+        Immutable<name>Collection collection5 = collection4.newWithoutAll(this.newMutableCollectionWith(<(literal.(type))("1")>));
+        Immutable<name>Collection collection6 = collection5.newWithoutAll(this.newMutableCollectionWith(<(literal.(type))("0")>));
+
+        this.assertSizeAndContains(collection6);
+        this.assertSizeAndContains(collection5);
+        this.assertSizeAndContains(collection4, <(literal.(type))("1")>);
+        this.assertSizeAndContains(collection0, <(literal.(type))("1")>, <(literal.(type))("2")>);
+        this.assertSizeAndContains(collection1, <(literal.(type))("1")>, <(literal.(type))("2")>, <(literal.(type))("3")>);
+        this.assertSizeAndContains(collection2, <(literal.(type))("1")>, <(literal.(type))("2")>, <(literal.(type))("3")>, <(literal.(type))("4")>);
+    }
+}
+
+>>

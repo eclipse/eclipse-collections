@@ -1,0 +1,31 @@
+import "copyright.stg"
+
+targetPath() ::= "org/eclipse/collections/api/tuple/primitive"
+
+fileName(primitive) ::= "<primitive.name>ObjectPair"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.api.tuple.primitive;
+
+import java.io.Serializable;
+
+import org.eclipse.collections.api.tuple.Pair;
+
+/**
+ * @see Pair
+ * This file was automatically generated from template file primitiveObjectPair.stg
+ */
+public interface <name>ObjectPair\<T> extends Serializable, Comparable\<<name>ObjectPair\<T>\>
+{
+    <type> getOne();
+
+    T getTwo();
+}
+
+>>

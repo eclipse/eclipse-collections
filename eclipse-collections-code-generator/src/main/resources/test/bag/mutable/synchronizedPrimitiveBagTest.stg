@@ -1,0 +1,57 @@
+import "copyright.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+
+isTest() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/bag/mutable/primitive"
+
+fileName(primitive) ::= "Synchronized<primitive.name>BagTest"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.wrapperName, primitive.name)>
+>>
+
+body(type, wrapperName, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.bag.mutable.primitive;
+
+import org.eclipse.collections.api.bag.primitive.Mutable<name>Bag;
+import org.junit.Assert;
+import org.junit.Test;
+
+/**
+ * JUnit test for {@link Synchronized<name>Bag}.
+ * This file was automatically generated from template file synchronizedPrimitiveBagTest.stg.
+ */
+public class Synchronized<name>BagTest extends AbstractMutable<name>BagTestCase
+{
+    @Override
+    protected Synchronized<name>Bag classUnderTest()
+    {
+        return new Synchronized<name>Bag(<name>HashBag.newBagWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">));
+    }
+
+    @Override
+    protected Synchronized<name>Bag newWith(<type>... elements)
+    {
+        return new Synchronized<name>Bag(<name>HashBag.newBagWith(elements));
+    }
+
+    @Override
+    @Test
+    public void asSynchronized()
+    {
+        super.asSynchronized();
+        Synchronized<name>Bag bag = this.classUnderTest();
+        Mutable<name>Bag bagWithLockObject = new Synchronized<name>Bag(<name>HashBag.newBagWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">), new Object());
+        Assert.assertEquals(bag, bagWithLockObject);
+        Assert.assertSame(bagWithLockObject, bagWithLockObject.asSynchronized());
+        Assert.assertSame(bag, bag.asSynchronized());
+        Assert.assertEquals(bag, bag.asSynchronized());
+    }
+}
+
+>>
+

@@ -1,0 +1,11 @@
+import "primitiveImmutableKeySets.stg"
+
+skipBoolean() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/map/mutable/primitive"
+
+fileName(primitive) ::= "Immutable<primitive.name><primitive.name>MapKeySet"
+
+class(primitive) ::= <<
+<primitiveKeySetBody(className = fileName(primitive), type = primitive.type, name = primitive.name, keyArray = "keysValues", increment = "i += 2", sameTwoPrimitiveMapKeySet = true, calledFrom = "immutablePrimitivePrimitiveMapKeySet.stg")>
+>>

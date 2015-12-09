@@ -1,0 +1,76 @@
+import "copyright.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+
+isTest() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/stack/mutable/primitive"
+
+fileName(primitive) ::= "Synchronized<primitive.name>StackTest"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.wrapperName, primitive.name)>
+>>
+
+body(type, wrapperName, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.stack.mutable.primitive;
+
+import org.eclipse.collections.api.<name>Iterable;
+import org.eclipse.collections.api.stack.primitive.Mutable<name>Stack;
+import org.junit.Assert;
+import org.junit.Test;
+
+/**
+ * This file was automatically generated from template file synchronizedPrimitiveStackTest.stg.
+ */
+public class Synchronized<name>StackTest extends AbstractMutable<name>StackTestCase
+{
+    @Override
+    protected Mutable<name>Stack classUnderTest()
+    {
+        return new Synchronized<name>Stack(<name>ArrayStack.newStackWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">));
+    }
+
+    @Override
+    protected Mutable<name>Stack newWith(<type>... elements)
+    {
+        return new Synchronized<name>Stack(<name>ArrayStack.newStackWith(elements));
+    }
+
+    @Override
+    protected Mutable<name>Stack newWithTopToBottom(<type>... elements)
+    {
+        return new Synchronized<name>Stack(<name>ArrayStack.newStackFromTopToBottom(elements));
+    }
+
+    @Override
+    protected Mutable<name>Stack newMutableCollectionWith(<type>... elements)
+    {
+        return new Synchronized<name>Stack(<name>ArrayStack.newStackWith(elements));
+    }
+
+    @Override
+    protected Mutable<name>Stack newWithIterableTopToBottom(<name>Iterable iterable)
+    {
+        return new Synchronized<name>Stack(<name>ArrayStack.newStackFromTopToBottom(iterable));
+    }
+
+    @Override
+    protected Mutable<name>Stack newWithIterable(<name>Iterable iterable)
+    {
+        return new Synchronized<name>Stack(<name>ArrayStack.newStack(iterable));
+    }
+
+    @Override
+    @Test
+    public void asSynchronized()
+    {
+        Mutable<name>Stack stack1 = new Synchronized<name>Stack(<name>ArrayStack.newStackWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">), new Object());
+        Assert.assertEquals(stack1, stack1.asSynchronized());
+        Assert.assertSame(stack1, stack1.asSynchronized());
+    }
+}
+
+>>

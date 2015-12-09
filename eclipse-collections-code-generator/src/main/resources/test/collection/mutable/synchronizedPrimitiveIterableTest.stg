@@ -1,0 +1,120 @@
+import "copyright.stg"
+import "primitiveEquals.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+
+isTest() ::= "true"
+
+skipBoolean() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/collection/mutable/primitive"
+
+fileName(primitive) ::= "Synchronized<primitive.name>IterableTest"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.wrapperName, primitive.name)>
+>>
+
+body(type, wrapperName, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.collection.mutable.primitive;
+
+import java.util.NoSuchElementException;
+
+import org.eclipse.collections.api.<name>Iterable;
+import org.eclipse.collections.api.RichIterable;
+import org.eclipse.collections.api.iterator.<name>Iterator;
+import org.eclipse.collections.impl.list.mutable.FastList;
+import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
+import org.eclipse.collections.impl.primitive.Synchronized<name>Iterable;
+import org.eclipse.collections.impl.test.Verify;
+import org.junit.Assert;
+import org.junit.Test;
+
+/**
+ * JUnit test for {@link Synchronized<name>Iterable}s
+ * This file was automatically generated from template file synchronizedPrimitiveIterableTest.stg.
+ */
+public class Synchronized<name>IterableTest extends Abstract<name>IterableTestCase
+{
+    @Override
+    protected <name>Iterable classUnderTest()
+    {
+        return Synchronized<name>Iterable.of(<name>ArrayList.newListWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">));
+    }
+
+    @Override
+    protected <name>Iterable newWith(<type>... elements)
+    {
+        return Synchronized<name>Iterable.of(<name>ArrayList.newListWith(elements));
+    }
+
+    @Override
+    protected <name>Iterable newMutableCollectionWith(<type>... elements)
+    {
+        return <name>ArrayList.newListWith(elements);
+    }
+
+    @Override
+    protected RichIterable\<<wrapperName>\> newObjectCollectionWith(<wrapperName>... elements)
+    {
+        return FastList.newListWith(elements);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void null_iterable_throws()
+    {
+        Synchronized<name>Iterable iterable = Synchronized<name>Iterable.of(null);
+    }
+
+    @Override
+    @Test
+    public void <type>Iterator()
+    {
+        <name>Iterable iterable = this.newWith(<["0", "1", "2", "3"]:(literal.(type))(); separator=", ">);
+        <name>ArrayList list = <name>ArrayList.newListWith(<["0", "1", "2", "3"]:(literal.(type))(); separator=", ">);
+        <name>Iterator iterator = iterable.<type>Iterator();
+        for (int i = 0; i \< 4; i++)
+        {
+            Assert.assertTrue(iterator.hasNext());
+            Assert.assertTrue(list.remove(iterator.next()));
+        }
+        Verify.assertEmpty(list);
+        Assert.assertFalse(iterator.hasNext());
+
+        Verify.assertThrows(NoSuchElementException.class, iterator::next);
+    }
+
+    @Override
+    @Test
+    public void testEquals()
+    {
+        //Testing equals() is not applicable.
+    }
+
+    <if(primitive.floatingPoint)><NaNEqualsTests()><endif>
+
+    @Override
+    public void testHashCode()
+    {
+        //Testing hashCode() is not applicable.
+    }
+
+    @Override
+    public void newCollection()
+    {
+        //Testing newCollection() is not applicable.
+    }
+}
+
+>>
+
+NaNEqualsTests() ::= <<
+@Override
+@Test
+public void testEquals_NaN()
+{
+    //Testing equals() is not applicable.
+}
+>>

@@ -1,0 +1,35 @@
+import "copyright.stg"
+import "primitiveEquals.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+
+targetPath() ::= "org/eclipse/collections/impl/map/mutable/primitive"
+
+skipBoolean() ::= "true"
+
+fileName(primitive) ::= "Mutable<primitive.name>KeysMap"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.map.mutable.primitive;
+
+import org.eclipse.collections.impl.map.primitive.<name>KeysMap;
+
+/**
+ * This file was automatically generated from template file mutablePrimitiveKeysMap.stg.
+ *
+ * @since 6.0.
+ */
+public interface Mutable<name>KeysMap extends <name>KeysMap
+{
+    void removeKey(<type> key);
+
+    void clear();
+}
+
+>>

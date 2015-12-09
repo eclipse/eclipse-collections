@@ -1,0 +1,303 @@
+import "copyright.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+import "primitiveEquals.stg"
+
+skipBoolean() ::= "true"
+
+isTest() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/map/mutable/primitive"
+
+fileName(primitive) ::= "<primitive.name>BooleanHashMapTest"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name, primitive.wrapperName)>
+>>
+
+body(type, name, wrapperName) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.map.mutable.primitive;
+
+import java.lang.reflect.Field;
+import java.util.BitSet;
+
+import org.eclipse.collections.api.block.function.primitive.BooleanFunction;
+import org.eclipse.collections.api.block.function.primitive.BooleanFunction0;
+import org.eclipse.collections.api.block.function.primitive.BooleanToBooleanFunction;
+import org.eclipse.collections.api.block.function.primitive.<name>ToBooleanFunction;
+import org.eclipse.collections.api.map.primitive.Mutable<name>BooleanMap;
+import org.eclipse.collections.impl.test.Verify;
+import org.junit.Assert;
+import org.junit.Test;
+
+/**
+ * JUnit test for {@link <name>BooleanHashMap}.
+ * This file was automatically generated from template file primitiveBooleanHashMapTest.stg.
+ */
+public class <name>BooleanHashMapTest extends AbstractMutable<name>BooleanMapTestCase
+{
+    @Override
+    protected <name>BooleanHashMap classUnderTest()
+    {
+        return <name>BooleanHashMap.newWithKeysValues(<(literal.(type))("0")>, true, <(literal.(type))("31")>, false, <(literal.(type))("32")>, true);
+    }
+
+    @Override
+    protected <name>BooleanHashMap newWithKeysValues(<type> key1, boolean value1)
+    {
+        return new <name>BooleanHashMap(1).withKeyValue(key1, value1);
+    }
+
+    @Override
+    protected <name>BooleanHashMap newWithKeysValues(<type> key1, boolean value1, <type> key2, boolean value2)
+    {
+        return new <name>BooleanHashMap(2).withKeysValues(key1, value1, key2, value2);
+    }
+
+    @Override
+    protected <name>BooleanHashMap newWithKeysValues(<type> key1, boolean value1, <type> key2, boolean value2, <type> key3, boolean value3)
+    {
+        return new <name>BooleanHashMap(3).withKeysValues(key1, value1, key2, value2, key3, value3);
+    }
+
+    @Override
+    protected <name>BooleanHashMap newWithKeysValues(<type> key1, boolean value1, <type> key2, boolean value2, <type> key3, boolean value3, <type> key4, boolean value4)
+    {
+        return new <name>BooleanHashMap(4).withKeysValues(key1, value1, key2, value2, key3, value3, key4, value4);
+    }
+
+    @Override
+    protected <name>BooleanHashMap getEmptyMap()
+    {
+        return new <name>BooleanHashMap();
+    }
+
+    @Test
+    public void defaultInitialCapacity() throws Exception
+    {
+        Field keys = <name>BooleanHashMap.class.getDeclaredField("keys");
+        keys.setAccessible(true);
+        Field values = <name>BooleanHashMap.class.getDeclaredField("values");
+        values.setAccessible(true);
+
+        <name>BooleanHashMap hashMap = new <name>BooleanHashMap();
+        Assert.assertEquals(16L, ((<type>[]) keys.get(hashMap)).length);
+        Assert.assertEquals(64L, ((BitSet) values.get(hashMap)).size());
+    }
+
+    @Test
+    public void newWithInitialCapacity() throws Exception
+    {
+        Field keys = <name>BooleanHashMap.class.getDeclaredField("keys");
+        keys.setAccessible(true);
+        Field values = <name>BooleanHashMap.class.getDeclaredField("values");
+        values.setAccessible(true);
+
+        <name>BooleanHashMap hashMap = new <name>BooleanHashMap(3);
+        Assert.assertEquals(8L, ((<type>[]) keys.get(hashMap)).length);
+        Assert.assertEquals(64L, ((BitSet) values.get(hashMap)).size());
+
+        <name>BooleanHashMap hashMap2 = new <name>BooleanHashMap(15);
+        Assert.assertEquals(32L, ((<type>[]) keys.get(hashMap2)).length);
+        Assert.assertEquals(64L, ((BitSet) values.get(hashMap)).size());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void newWithInitialCapacity_negative_throws()
+    {
+        new <name>BooleanHashMap(-1);
+    }
+
+    @Test
+    public void newMap() throws Exception
+    {
+        Field keys = <name>BooleanHashMap.class.getDeclaredField("keys");
+        keys.setAccessible(true);
+        Field values = <name>BooleanHashMap.class.getDeclaredField("values");
+        values.setAccessible(true);
+
+        <name>BooleanHashMap hashMap = new <name>BooleanHashMap();
+        Assert.assertEquals(16L, ((<type>[]) keys.get(hashMap)).length);
+        Assert.assertEquals(64L, ((BitSet) values.get(hashMap)).size());
+        Assert.assertEquals(new <name>BooleanHashMap(), hashMap);
+    }
+
+    @Test
+    public void putWithRehash() throws Exception
+    {
+        <name>BooleanHashMap hashMap = new <name>BooleanHashMap();
+        for (<type> i = <(literal.(type))("2")>; i \< 10; i++)
+        {
+            Assert.assertFalse(hashMap.containsKey(i));
+            hashMap.put(i, (<(castRealTypeToInt.(type))("i")> & 1) == <(literal.(type))("0")>);
+        }
+
+        Field keys = <name>BooleanHashMap.class.getDeclaredField("keys");
+        Field values = <name>BooleanHashMap.class.getDeclaredField("values");
+        keys.setAccessible(true);
+        values.setAccessible(true);
+        Assert.assertEquals(16L, ((<type>[]) keys.get(hashMap)).length);
+        Assert.assertEquals(64L, ((BitSet) values.get(hashMap)).size());
+        Verify.assertSize(8, hashMap);
+        for (<type> i = <(literal.(type))("2")>; i \< 10; i++)
+        {
+            Assert.assertTrue(hashMap.containsKey(i));
+        }
+        Assert.assertTrue(hashMap.containsValue(false));
+        Assert.assertTrue(hashMap.containsValue(true));
+        hashMap.put(<(literal.(type))("10")>, true);
+        Assert.assertEquals(32L, ((<type>[]) keys.get(hashMap)).length);
+        Assert.assertEquals(64L, ((BitSet) values.get(hashMap)).size());
+
+        for (<type> i = 11; i \< 75; i++)
+        {
+            Assert.assertFalse(String.valueOf(i), hashMap.containsKey(i));
+            hashMap.put(i, (<(castRealTypeToInt.(type))("i")> & 1) == <(literal.(type))("0")>);
+        }
+        Assert.assertEquals(256L, ((<type>[]) keys.get(hashMap)).length);
+        Assert.assertEquals(256L, ((BitSet) values.get(hashMap)).size());
+    }
+
+    @Test
+    public void testPutAll()
+    {
+        <name>BooleanHashMap hashMap = new <name>BooleanHashMap();
+        Mutable<name>BooleanMap copyMap = new <name>BooleanHashMap();
+
+        for (<type> i = <(literal.(type))("1")>; i \< 11; i++)
+        {
+            Assert.assertFalse(hashMap.containsKey(i));
+            Assert.assertFalse(copyMap.containsKey(i));
+            copyMap.put(i, (<(castRealTypeToInt.(type))("i")> & 1) == <(literal.(type))("0")>);
+        }
+
+        Verify.assertSize(10, copyMap);
+        Verify.assertSize(0, hashMap);
+
+        hashMap.putAll(copyMap);
+
+        Verify.assertSize(10, hashMap);
+
+        for (<type> i = <(literal.(type))("1")>; i \< 11; i++)
+        {
+            Assert.assertTrue(hashMap.containsKey(i));
+            Assert.assertTrue(copyMap.containsKey(i));
+        }
+
+        Assert.assertEquals(hashMap, copyMap);
+    }
+
+    @Override
+    @Test
+    public void withKeysValues()
+    {
+        super.withKeysValues();
+        <name>BooleanHashMap hashMap0 = new <name>BooleanHashMap();
+        Assert.assertSame(hashMap0.withKeysValues(<(literal.(type))("1")>, false, <(literal.(type))("2")>, true), hashMap0);
+        <name>BooleanHashMap hashMap1 = new <name>BooleanHashMap().withKeysValues(<(literal.(type))("1")>, false, <(literal.(type))("2")>, true, <(literal.(type))("3")>, false);
+        <name>BooleanHashMap hashMap2 = new <name>BooleanHashMap().withKeysValues(<(literal.(type))("1")>, false, <(literal.(type))("2")>, true, <(literal.(type))("3")>, false, <(literal.(type))("4")>, true);
+        Assert.assertEquals(<name>BooleanHashMap.newWithKeysValues(<(literal.(type))("1")>, false, <(literal.(type))("2")>, true), hashMap0);
+        Assert.assertEquals(<name>BooleanHashMap.newWithKeysValues(<(literal.(type))("1")>, false, <(literal.(type))("2")>, true, <(literal.(type))("3")>, false), hashMap1);
+        Assert.assertEquals(<name>BooleanHashMap.newWithKeysValues(<(literal.(type))("1")>, false, <(literal.(type))("2")>, true, <(literal.(type))("3")>, false, <(literal.(type))("4")>, true), hashMap2);
+    }
+
+    @Test
+    public void injectInto()
+    {
+        <name>BooleanHashMap hashMap0 = new <name>BooleanHashMap().withKeysValues(<(literal.(type))("1")>, false, <(literal.(type))("2")>, true, <(literal.(type))("3")>, false, <(literal.(type))("4")>, false);
+
+        <wrapperName> total = hashMap0.injectInto(<wrapperName>.valueOf(<(literal.(type))("0")>), (<wrapperName> result, boolean value) -> value ? result : <wrapperName>.valueOf((<type>) (result + <(literal.(type))("2")>)));
+
+        Assert.assertEquals(<wrapperName>.valueOf(<(literal.(type))("6")>), total);
+    }
+
+    @Test
+    public void put_every_slot()
+    {
+        <name>BooleanHashMap hashMap = new <name>BooleanHashMap();
+        for (<type> each = <(literal.(type))("2")>; each \< <(literal.(type))("100")>; each++)
+        {
+            Assert.assertFalse(hashMap.get(each));
+            hashMap.put(each, each % 2 == 0);
+            Assert.assertEquals(each % 2 == 0, hashMap.get(each));
+            hashMap.remove(each);
+            Assert.assertFalse(hashMap.get(each));
+        }
+    }
+
+    @Test
+    public void getIfAbsentPut_every_slot()
+    {
+        <name>BooleanHashMap hashMap = new <name>BooleanHashMap();
+        for (<type> each = <(literal.(type))("2")>; each \< <(literal.(type))("100")>; each++)
+        {
+            Assert.assertFalse(hashMap.get(each));
+            hashMap.getIfAbsentPut(each, each % 2 == 0);
+            Assert.assertEquals(each % 2 == 0, hashMap.get(each));
+        }
+    }
+
+    @Test
+    public void getIfAbsentPutWith_every_slot()
+    {
+        BooleanFunction\<String> functionLength = String::isEmpty;
+
+        Mutable<name>BooleanMap hashMap = this.getEmptyMap();
+
+        for (<type> each = <(literal.(type))("2")>; each \< <(literal.(type))("100")>; each++)
+        {
+            Assert.assertFalse(hashMap.get(each));
+            Assert.assertTrue(hashMap.getIfAbsentPutWith(each, functionLength, ""));
+            Assert.assertTrue(hashMap.get(each));
+        }
+    }
+
+    @Test
+    public void getIfAbsentPutWithKey_every_slot()
+    {
+        <name>ToBooleanFunction function = (<type> each) -> each % 2 == 0;
+
+        Mutable<name>BooleanMap hashMap = this.getEmptyMap();
+
+        for (<type> each = <(literal.(type))("2")>; each \< <(literal.(type))("100")>; each++)
+        {
+            Assert.assertFalse(hashMap.get(each));
+            Assert.assertEquals(each % 2 == 0, hashMap.getIfAbsentPutWithKey(each, function));
+            Assert.assertEquals(each % 2 == 0, hashMap.get(each));
+        }
+    }
+
+    @Test
+    public void getIfAbsentPut_Function_every_slot()
+    {
+        BooleanFunction0 factory = () -> true;
+
+        Mutable<name>BooleanMap hashMap = this.getEmptyMap();
+
+        for (<type> each = <(literal.(type))("2")>; each \< <(literal.(type))("100")>; each++)
+        {
+            Assert.assertFalse(hashMap.get(each));
+            Assert.assertTrue(hashMap.getIfAbsentPut(each, factory));
+            Assert.assertTrue(hashMap.get(each));
+        }
+    }
+
+    @Test
+    public void updateValue_every_slot()
+    {
+        BooleanToBooleanFunction function = (boolean value) -> !value;
+
+        <name>BooleanHashMap hashMap = new <name>BooleanHashMap();
+
+        for (<type> each = <(literal.(type))("2")>; each \< <(literal.(type))("100")>; each++)
+        {
+            Assert.assertFalse(hashMap.get(each));
+            Assert.assertEquals(each % 2 != 0, hashMap.updateValue(each, each % 2 == 0, function));
+            Assert.assertEquals(each % 2 != 0, hashMap.get(each));
+        }
+    }
+}
+
+>>

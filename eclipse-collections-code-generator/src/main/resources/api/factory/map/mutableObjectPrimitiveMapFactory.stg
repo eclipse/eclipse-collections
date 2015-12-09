@@ -1,0 +1,47 @@
+import "copyright.stg"
+
+targetPath() ::= "org/eclipse/collections/api/factory/map/primitive"
+
+fileName(primitive) ::= "MutableObject<primitive.name>MapFactory"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.api.factory.map.primitive;
+
+import org.eclipse.collections.api.map.primitive.MutableObject<name>Map;
+import org.eclipse.collections.api.map.primitive.Object<name>Map;
+
+/**
+ * A factory which creates instances of type {@link MutableObject<name>Map}.
+ * This file was automatically generated from template file mutableObjectPrimitiveMapFactory.stg.
+ *
+ * @since 6.0.
+ */
+public interface MutableObject<name>MapFactory
+{
+    \<K> MutableObject<name>Map\<K> empty();
+
+    /**
+     * Same as {@link #empty()}.
+     */
+    \<K> MutableObject<name>Map\<K> of();
+
+    /**
+     * Same as {@link #empty()}.
+     */
+    \<K> MutableObject<name>Map\<K> with();
+
+    /**
+     * Same as {@link #withAll(Object<name>Map)}.
+     */
+    \<K> MutableObject<name>Map\<K> ofAll(Object<name>Map\<? extends K>  map);
+
+    \<K> MutableObject<name>Map\<K> withAll(Object<name>Map\<? extends K>  map);
+}
+
+>>

@@ -1,0 +1,362 @@
+import "copyright.stg"
+import "primitiveEquals.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+
+targetPath() ::= "org/eclipse/collections/impl/collection/mutable/primitive"
+
+fileName(primitive) ::= "AbstractUnmodifiable<primitive.name>Collection"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.collection.mutable.primitive;
+
+import java.io.Serializable;
+
+import org.eclipse.collections.api.<name>Iterable;
+import org.eclipse.collections.api.Lazy<name>Iterable;
+import org.eclipse.collections.api.bag.primitive.Mutable<name>Bag;
+import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
+import org.eclipse.collections.api.block.function.primitive.Object<name>ToObjectFunction;
+import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
+import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
+import org.eclipse.collections.api.collection.MutableCollection;
+import org.eclipse.collections.api.collection.primitive.Immutable<name>Collection;
+import org.eclipse.collections.api.collection.primitive.Mutable<name>Collection;
+import org.eclipse.collections.api.iterator.Mutable<name>Iterator;
+import org.eclipse.collections.api.list.primitive.Mutable<name>List;
+import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
+import org.eclipse.collections.impl.iterator.Unmodifiable<name>Iterator;
+import org.eclipse.collections.impl.lazy.primitive.Lazy<name>IterableAdapter;
+import net.jcip.annotations.ThreadSafe;
+
+/**
+ * This file was automatically generated from template file abstractUnmodifiablePrimitiveCollection.stg.
+ *
+ * @since 3.1.
+ */
+@ThreadSafe
+public abstract class AbstractUnmodifiable<name>Collection
+        implements Mutable<name>Collection, Serializable
+{
+    private static final long serialVersionUID = 1L;
+
+    private final Mutable<name>Collection collection;
+
+    protected AbstractUnmodifiable<name>Collection(Mutable<name>Collection collection)
+    {
+        this.collection = collection;
+    }
+
+    protected Mutable<name>Collection get<name>Collection()
+    {
+        return this.collection;
+    }
+
+    public int size()
+    {
+        return this.collection.size();
+    }
+
+    public boolean isEmpty()
+    {
+        return this.collection.isEmpty();
+    }
+
+    public boolean notEmpty()
+    {
+        return this.collection.notEmpty();
+    }
+
+    public void clear()
+    {
+        throw new UnsupportedOperationException("Cannot call clear() on " + this.getClass().getSimpleName());
+    }
+
+    public boolean contains(<type> value)
+    {
+        return this.collection.contains(value);
+    }
+
+    public boolean containsAll(<type>... source)
+    {
+        return this.collection.containsAll(source);
+    }
+
+    public boolean containsAll(<name>Iterable source)
+    {
+        return this.collection.containsAll(source);
+    }
+
+    public boolean add(<type> newItem)
+    {
+        throw new UnsupportedOperationException("Cannot call add() on " + this.getClass().getSimpleName());
+    }
+
+    public boolean addAll(<type>... source)
+    {
+        throw new UnsupportedOperationException("Cannot call addAll() on " + this.getClass().getSimpleName());
+    }
+
+    public boolean addAll(<name>Iterable source)
+    {
+        throw new UnsupportedOperationException("Cannot call addAll() on " + this.getClass().getSimpleName());
+    }
+
+    public boolean remove(<type> value)
+    {
+        throw new UnsupportedOperationException("Cannot call remove() on " + this.getClass().getSimpleName());
+    }
+
+    public boolean removeAll(<name>Iterable source)
+    {
+        throw new UnsupportedOperationException("Cannot call removeAll() on " + this.getClass().getSimpleName());
+    }
+
+    public boolean removeAll(<type>... source)
+    {
+        throw new UnsupportedOperationException("Cannot call removeAll() on " + this.getClass().getSimpleName());
+    }
+
+    public boolean retainAll(<name>Iterable source)
+    {
+        throw new UnsupportedOperationException("Cannot call retainAll() on " + this.getClass().getSimpleName());
+    }
+
+    public boolean retainAll(<type>... source)
+    {
+        throw new UnsupportedOperationException("Cannot call retainAll() on " + this.getClass().getSimpleName());
+    }
+
+    public Mutable<name>Iterator <type>Iterator()
+    {
+        return new Unmodifiable<name>Iterator(this.collection.<type>Iterator());
+    }
+
+    public void forEach(<name>Procedure procedure)
+    {
+        this.each(procedure);
+    }
+
+    /**
+     * @since 7.0.
+     */
+    public void each(<name>Procedure procedure)
+    {
+        this.collection.forEach(procedure);
+    }
+
+    public int count(<name>Predicate predicate)
+    {
+        return this.collection.count(predicate);
+    }
+
+    public boolean anySatisfy(<name>Predicate predicate)
+    {
+        return this.collection.anySatisfy(predicate);
+    }
+
+    public boolean allSatisfy(<name>Predicate predicate)
+    {
+        return this.collection.allSatisfy(predicate);
+    }
+
+    public boolean noneSatisfy(<name>Predicate predicate)
+    {
+        return this.collection.noneSatisfy(predicate);
+    }
+
+    public Mutable<name>Collection select(<name>Predicate predicate)
+    {
+        return this.collection.select(predicate);
+    }
+
+    public Mutable<name>Collection reject(<name>Predicate predicate)
+    {
+        return this.collection.reject(predicate);
+    }
+
+    public \<V> MutableCollection\<V> collect(<name>ToObjectFunction\<? extends V> function)
+    {
+        return this.collection.collect(function);
+    }
+
+    public Mutable<name>Collection with(<type> element)
+    {
+        throw new UnsupportedOperationException("Cannot call with() on " + this.getClass().getSimpleName());
+    }
+
+    public Mutable<name>Collection without(<type> element)
+    {
+        throw new UnsupportedOperationException("Cannot call without() on " + this.getClass().getSimpleName());
+    }
+
+    public Mutable<name>Collection withAll(<name>Iterable elements)
+    {
+        throw new UnsupportedOperationException("Cannot call withAll() on " + this.getClass().getSimpleName());
+    }
+
+    public Mutable<name>Collection withoutAll(<name>Iterable elements)
+    {
+        throw new UnsupportedOperationException("Cannot call withoutAll() on " + this.getClass().getSimpleName());
+    }
+
+    public Mutable<name>Collection asUnmodifiable()
+    {
+        return this;
+    }
+
+    public Mutable<name>Collection asSynchronized()
+    {
+        return new Synchronized<name>Collection(this);
+    }
+
+    public Immutable<name>Collection toImmutable()
+    {
+        return this.collection.toImmutable();
+    }
+
+    public Lazy<name>Iterable asLazy()
+    {
+        return new Lazy<name>IterableAdapter(this);
+    }
+
+    public <type> detectIfNone(<name>Predicate predicate, <type> ifNone)
+    {
+        return this.collection.detectIfNone(predicate, ifNone);
+    }
+
+    <(arithmeticMethods.(type))(name, type)>
+    public <type>[] toArray()
+    {
+        return this.collection.toArray();
+    }
+
+    @Override
+    public String toString()
+    {
+        return this.collection.toString();
+    }
+
+    public String makeString()
+    {
+        return this.collection.makeString();
+    }
+
+    public String makeString(String separator)
+    {
+        return this.collection.makeString(separator);
+    }
+
+    public String makeString(String start, String separator, String end)
+    {
+        return this.collection.makeString(start, separator, end);
+    }
+
+    public void appendString(Appendable appendable)
+    {
+        this.collection.appendString(appendable);
+    }
+
+    public void appendString(Appendable appendable, String separator)
+    {
+        this.collection.appendString(appendable, separator);
+    }
+
+    public void appendString(
+            Appendable appendable,
+            String start,
+            String separator,
+            String end)
+    {
+        this.collection.appendString(appendable, start, separator, end);
+    }
+
+    public Mutable<name>List toList()
+    {
+        return this.collection.toList();
+    }
+
+    public Mutable<name>Set toSet()
+    {
+        return this.collection.toSet();
+    }
+
+    public Mutable<name>Bag toBag()
+    {
+        return this.collection.toBag();
+    }
+
+    public \<T> T injectInto(T injectedValue, Object<name>ToObjectFunction\<? super T, ? extends T> function)
+    {
+        return this.collection.injectInto(injectedValue, function);
+    }
+}
+
+>>
+
+arithmeticMethods ::= [
+    "byte": "allMethods",
+    "short": "allMethods",
+    "char": "allMethods",
+    "int": "allMethods",
+    "long": "allMethods",
+    "float": "allMethods",
+    "double": "allMethods",
+    "boolean": "noMethods"
+    ]
+
+allMethods(name, type) ::=<<
+public <wideType.(type)> sum()
+{
+    return this.collection.sum();
+}
+
+public <type> max()
+{
+    return this.collection.max();
+}
+
+public <type> min()
+{
+    return this.collection.min();
+}
+
+public <type> minIfEmpty(<type> defaultValue)
+{
+    return this.collection.minIfEmpty(defaultValue);
+}
+
+public <type> maxIfEmpty(<type> defaultValue)
+{
+    return this.collection.maxIfEmpty(defaultValue);
+}
+
+public double average()
+{
+    return this.collection.average();
+}
+
+public double median()
+{
+    return this.collection.median();
+}
+
+public Mutable<name>List toSortedList()
+{
+    return this.collection.toSortedList();
+}
+
+public <type>[] toSortedArray()
+{
+    return this.collection.toSortedArray();
+}
+
+>>
+
+noMethods(name, type) ::= ""

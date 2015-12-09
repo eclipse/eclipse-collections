@@ -1,0 +1,199 @@
+import "copyright.stg"
+import "primitiveEquals.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+
+isTest() ::= "true"
+skipBoolean() ::="true"
+
+targetPath() ::= "org/eclipse/collections/impl/bag/immutable/primitive"
+
+fileName(primitive) ::= "AbstractImmutable<primitive.name>BagTestCase"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name, primitive.wrapperName)>
+>>
+
+body(type, name, wrapperName) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.bag.immutable.primitive;
+
+import java.util.NoSuchElementException;
+
+import org.eclipse.collections.api.bag.ImmutableBag;
+import org.eclipse.collections.api.bag.primitive.Immutable<name>Bag;
+import org.eclipse.collections.api.bag.primitive.Mutable<name>Bag;
+import org.eclipse.collections.api.iterator.<name>Iterator;
+import org.eclipse.collections.impl.bag.mutable.HashBag;
+import org.eclipse.collections.impl.bag.mutable.primitive.<name>HashBag;
+import org.eclipse.collections.impl.block.factory.primitive.<name>Predicates;
+import org.eclipse.collections.impl.collection.immutable.primitive.AbstractImmutable<name>CollectionTestCase;
+import org.eclipse.collections.impl.factory.primitive.<name>Bags;
+import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
+import org.eclipse.collections.impl.test.Verify;
+import org.junit.Assert;
+import org.junit.Test;
+
+/**
+ * JUnit test for {@link Immutable<name>Bag}.
+ * This file was automatically generated from template file abstractImmutablePrimitiveBagTestCase.stg.
+ */
+public abstract class AbstractImmutable<name>BagTestCase extends AbstractImmutable<name>CollectionTestCase
+{
+    @Override
+    protected abstract Immutable<name>Bag classUnderTest();
+
+    @Override
+    protected Immutable<name>Bag newWith(<type>... elements)
+    {
+        return <name>Bags.immutable.of(elements);
+    }
+
+    @Override
+    protected Mutable<name>Bag newMutableCollectionWith(<type>... elements)
+    {
+        return <name>HashBag.newBagWith(elements);
+    }
+
+    @Override
+    protected ImmutableBag\<<wrapperName>\> newObjectCollectionWith(<wrapperName>... elements)
+    {
+        return HashBag.newBagWith(elements).toImmutable();
+    }
+
+    @Test
+    public void sizeDistinct()
+    {
+        Assert.assertEquals(0L, this.newWith().sizeDistinct());
+        Assert.assertEquals(1L, this.newWith(<(literal.(type))("1")>).sizeDistinct());
+        Assert.assertEquals(3L, this.newWith(<["0", "1", "2"]:(literal.(type))(); separator=", ">).sizeDistinct());
+        Assert.assertEquals(3L, this.newWith(<["0", "1", "1", "2", "2", "2"]:(literal.(type))(); separator=", ">).sizeDistinct());
+    }
+
+    @Test
+    public void forEachWithOccurrences()
+    {
+        StringBuilder stringBuilder = new StringBuilder();
+        this.newWith(<["1", "1", "2"]:(literal.(type))(); separator=", ">).forEachWithOccurrences(
+            (<type> argument1, int argument2) -> stringBuilder.append(argument1).append(argument2));
+        String string = stringBuilder.toString();
+        Assert.assertTrue("<(toStringLiteral.(type))("1")>2<(toStringLiteral.(type))("2")>1".equals(string)
+                || "<(toStringLiteral.(type))("2")>1<(toStringLiteral.(type))("1")>2".equals(string));
+    }
+
+    @Test
+    @Override
+    public void <type>Iterator()
+    {
+        Immutable<name>Bag bag = this.newWith(<["1", "2", "2", "3", "3", "3"]:(literal.(type))(); separator=", ">);
+        <name>ArrayList list = <name>ArrayList.newListWith(<["1", "2", "2", "3", "3", "3"]:(literal.(type))(); separator=", ">);
+        <name>Iterator iterator = bag.<type>Iterator();
+        for (int i = 0; i \< 6; i++)
+        {
+            Assert.assertTrue(iterator.hasNext());
+            Assert.assertTrue(list.remove(iterator.next()));
+        }
+        Verify.assertEmpty(list);
+        Assert.assertFalse(iterator.hasNext());
+
+        Verify.assertThrows(NoSuchElementException.class, iterator::next);
+    }
+
+    @Test
+    @Override
+    public void forEach()
+    {
+        super.forEach();
+        <wideType.(type)>[] sum = new <wideType.(type)>[1];
+        this.newWith(<["1", "2", "2", "3", "3", "3"]:(literal.(type))(); separator=", ">).forEach((<type> each) -> sum[0] += each);
+
+        Assert.assertEquals(14L, sum[0]<(delta.(type))>);
+    }
+
+    @Test
+    @Override
+    public void count()
+    {
+        super.count();
+        Immutable<name>Bag bag = this.newWith(<["1", "2", "2", "3", "3", "3"]:(literal.(type))(); separator=", ">);
+        Assert.assertEquals(5L, bag.count(<name>Predicates.greaterThan(<(literal.(type))("1")>)));
+        Assert.assertEquals(1L, bag.count(<name>Predicates.lessThan(<(literal.(type))("2")>)));
+        Assert.assertEquals(0L, bag.count(<name>Predicates.greaterThan(<(literal.(type))("4")>)));
+    }
+
+    @Test
+    @Override
+    public void sum()
+    {
+        super.sum();
+        Assert.assertEquals(<(wideLiteral.(type))("14")>, this.newWith(<["1", "2", "2", "3", "3", "3"]:(literal.(type))(); separator=", ">).sum()<wideDelta.(type)>);
+    }
+
+    @Test
+    @Override
+    public void testEquals()
+    {
+        super.testEquals();
+        Immutable<name>Bag bag1 = this.newWith(<["0", "1", "1", "2", "2", "2"]:(literal.(type))(); separator=", ">);
+        Immutable<name>Bag bag2 = this.newWith(<["0", "2", "1", "2", "1", "2"]:(literal.(type))(); separator=", ">);
+        Immutable<name>Bag bag3 = this.newWith(<["0", "1", "2", "2", "2"]:(literal.(type))(); separator=", ">);
+        Verify.assertEqualsAndHashCode(bag1, bag2);
+        Assert.assertNotEquals(bag1, bag3);
+        Assert.assertNotEquals(bag2, bag3);
+        Assert.assertNotEquals(this.newWith(), <name>ArrayList.newListWith());
+        Assert.assertNotEquals(this.newWith(<(literal.(type))("1")>), <name>ArrayList.newListWith(<(literal.(type))("1")>));
+    }
+
+    @Test
+    @Override
+    public void testToString()
+    {
+        super.testToString();
+        Assert.assertEquals("[<["1", "1", "1"]:(toStringLiteral.(type))(); separator=", ">]", this.newWith(<["1", "1", "1"]:(literal.(type))(); separator=", ">).toString());
+    }
+
+    @Test
+    @Override
+    public void makeString()
+    {
+        super.makeString();
+        Assert.assertEquals("<["1", "1", "1"]:(toStringLiteral.(type))(); separator=", ">", this.newWith(<["1", "1", "1"]:(literal.(type))(); separator=", ">).makeString());
+    }
+
+    @Test
+    @Override
+    public void appendString()
+    {
+        super.appendString();
+        StringBuilder appendable1 = new StringBuilder();
+        this.newWith(<["1", "1", "1"]:(literal.(type))(); separator=", ">).appendString(appendable1);
+        Assert.assertEquals("<["1", "1", "1"]:(toStringLiteral.(type))(); separator=", ">", appendable1.toString());
+    }
+
+    @Test
+    @Override
+    public void toList()
+    {
+        super.toList();
+        Assert.assertEquals(<name>ArrayList.newListWith(<["1", "1", "1"]:(literal.(type))(); separator=", ">), this.newWith(<["1", "1", "1"]:(literal.(type))(); separator=", ">).toList());
+    }
+
+    @Test
+    @Override
+    public void toSortedList()
+    {
+        super.toSortedList();
+        Assert.assertEquals(<name>ArrayList.newListWith(<["1", "2", "2", "3", "3", "3"]:(literal.(type))(); separator=", ">), this.newWith(<["1", "2", "2", "3", "3", "3"]:(literal.(type))(); separator=", ">).toSortedList());
+    }
+
+    @Test
+    public void toImmutable()
+    {
+        Assert.assertEquals(this.classUnderTest(), this.classUnderTest().toImmutable());
+        Immutable<name>Bag expected = this.classUnderTest();
+        Assert.assertSame(expected, expected.toImmutable());
+    }
+}
+
+>>

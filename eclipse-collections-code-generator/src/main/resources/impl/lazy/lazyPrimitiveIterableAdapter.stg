@@ -1,0 +1,267 @@
+import "copyright.stg"
+import "primitiveEquals.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+
+targetPath() ::= "org/eclipse/collections/impl/lazy/primitive"
+
+fileName(primitive) ::= "Lazy<primitive.name>IterableAdapter"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.lazy.primitive;
+
+import org.eclipse.collections.api.<name>Iterable;
+import org.eclipse.collections.api.bag.primitive.Mutable<name>Bag;
+import org.eclipse.collections.api.block.function.primitive.Object<name>ToObjectFunction;
+import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
+import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
+import org.eclipse.collections.api.iterator.<name>Iterator;
+import org.eclipse.collections.api.list.primitive.Mutable<name>List;
+import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
+
+/**
+ * This file was automatically generated from template file lazyPrimitiveIterableAdapter.stg.
+ *
+ * @since 3.0
+ */
+public class Lazy<name>IterableAdapter
+        extends AbstractLazy<name>Iterable
+{
+    private final <name>Iterable delegate;
+
+    public Lazy<name>IterableAdapter(<name>Iterable delegate)
+    {
+        this.delegate = delegate;
+    }
+
+    public <name>Iterator <type>Iterator()
+    {
+        return this.delegate.<type>Iterator();
+    }
+
+    /**
+     * @since 7.0.
+     */
+    public void each(<name>Procedure procedure)
+    {
+        this.delegate.forEach(procedure);
+    }
+
+    @Override
+    public int size()
+    {
+        return this.delegate.size();
+    }
+
+    @Override
+    public boolean isEmpty()
+    {
+        return this.delegate.isEmpty();
+    }
+
+    @Override
+    public boolean notEmpty()
+    {
+        return this.delegate.notEmpty();
+    }
+
+    @Override
+    public int count(<name>Predicate predicate)
+    {
+        return this.delegate.count(predicate);
+    }
+
+    @Override
+    public boolean anySatisfy(<name>Predicate predicate)
+    {
+        return this.delegate.anySatisfy(predicate);
+    }
+
+    @Override
+    public boolean allSatisfy(<name>Predicate predicate)
+    {
+        return this.delegate.allSatisfy(predicate);
+    }
+
+    @Override
+    public boolean noneSatisfy(<name>Predicate predicate)
+    {
+        return this.delegate.noneSatisfy(predicate);
+    }
+
+    @Override
+    public <type> detectIfNone(<name>Predicate predicate, <type> ifNone)
+    {
+        return this.delegate.detectIfNone(predicate, ifNone);
+    }
+
+    <(arithmeticMethods.(type))(name, type)>
+    @Override
+    public <type>[] toArray()
+    {
+        return this.delegate.toArray();
+    }
+
+    @Override
+    public String toString()
+    {
+        return this.delegate.toString();
+    }
+
+    @Override
+    public String makeString()
+    {
+        return this.delegate.makeString();
+    }
+
+    @Override
+    public String makeString(String separator)
+    {
+        return this.delegate.makeString(separator);
+    }
+
+    @Override
+    public String makeString(String start, String separator, String end)
+    {
+        return this.delegate.makeString(start, separator, end);
+    }
+
+    @Override
+    public void appendString(Appendable appendable)
+    {
+        this.delegate.appendString(appendable);
+    }
+
+    @Override
+    public void appendString(Appendable appendable, String separator)
+    {
+        this.delegate.appendString(appendable, separator);
+    }
+
+    @Override
+    public void appendString(Appendable appendable, String start, String separator, String end)
+    {
+        this.delegate.appendString(appendable, start, separator, end);
+    }
+
+    @Override
+    public boolean contains(<type> value)
+    {
+        return this.delegate.contains(value);
+    }
+
+    @Override
+    public boolean containsAll(<type>... source)
+    {
+        return this.delegate.containsAll(source);
+    }
+
+    @Override
+    public boolean containsAll(<name>Iterable source)
+    {
+        return this.delegate.containsAll(source);
+    }
+
+    @Override
+    public Mutable<name>List toList()
+    {
+        return this.delegate.toList();
+    }
+
+    @Override
+    public Mutable<name>Set toSet()
+    {
+        return this.delegate.toSet();
+    }
+
+    @Override
+    public Mutable<name>Bag toBag()
+    {
+        return this.delegate.toBag();
+    }
+
+    @Override
+    public \<T> T injectInto(T injectedValue, Object<name>ToObjectFunction\<? super T, ? extends T> function)
+    {
+        return this.delegate.injectInto(injectedValue, function);
+    }
+}
+
+>>
+
+arithmeticMethods ::= [
+    "byte": "allMethods",
+    "short": "allMethods",
+    "char": "allMethods",
+    "int": "allMethods",
+    "long": "allMethods",
+    "float": "allMethods",
+    "double": "allMethods",
+    "boolean": "noMethods"
+    ]
+
+
+allMethods(name, type) ::=<<
+@Override
+public <wideType.(type)> sum()
+{
+    return this.delegate.sum();
+}
+
+@Override
+public <type> max()
+{
+    return this.delegate.max();
+}
+
+@Override
+public <type> min()
+{
+    return this.delegate.min();
+}
+
+@Override
+public <type> minIfEmpty(<type> defaultValue)
+{
+    return this.delegate.minIfEmpty(defaultValue);
+}
+
+@Override
+public <type> maxIfEmpty(<type> defaultValue)
+{
+    return this.delegate.maxIfEmpty(defaultValue);
+}
+
+@Override
+public double average()
+{
+    return this.delegate.average();
+}
+
+@Override
+public double median()
+{
+    return this.delegate.median();
+}
+
+@Override
+public <type>[] toSortedArray()
+{
+    return this.delegate.toSortedArray();
+}
+
+@Override
+public Mutable<name>List toSortedList()
+{
+    return this.delegate.toSortedList();
+}
+
+>>
+
+noMethods(name, type) ::= ""

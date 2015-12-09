@@ -1,0 +1,396 @@
+import "copyright.stg"
+import "primitiveEquals.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+
+targetPath() ::= "org/eclipse/collections/impl/stack/immutable/primitive"
+
+fileName(primitive) ::= "Immutable<primitive.name>SingletonStack"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.stack.immutable.primitive;
+
+import java.io.IOException;
+import java.io.Serializable;
+
+import org.eclipse.collections.api.<name>Iterable;
+import org.eclipse.collections.api.Lazy<name>Iterable;
+import org.eclipse.collections.api.bag.primitive.Mutable<name>Bag;
+import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
+import org.eclipse.collections.api.block.function.primitive.Object<name>ToObjectFunction;
+import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
+import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
+import org.eclipse.collections.api.iterator.<name>Iterator;
+import org.eclipse.collections.api.list.primitive.<name>List;
+import org.eclipse.collections.api.list.primitive.Mutable<name>List;
+import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
+import org.eclipse.collections.api.stack.ImmutableStack;
+import org.eclipse.collections.api.stack.primitive.<name>Stack;
+import org.eclipse.collections.api.stack.primitive.Immutable<name>Stack;
+import org.eclipse.collections.impl.bag.mutable.primitive.<name>HashBag;
+import org.eclipse.collections.impl.factory.Stacks;
+import org.eclipse.collections.impl.factory.primitive.<name>Stacks;
+import org.eclipse.collections.impl.iterator.Unmodifiable<name>Iterator;
+import org.eclipse.collections.impl.lazy.primitive.Lazy<name>IterableAdapter;
+import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
+import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
+import org.eclipse.collections.impl.stack.mutable.primitive.<name>ArrayStack;
+import net.jcip.annotations.Immutable;
+
+/**
+ * Immutable<name>SingletonStack is an optimization for {@link Immutable<name>Stack} of size 1.
+ * This file was automatically generated from template file immutablePrimitiveSingletonStack.stg.
+ */
+@Immutable
+final class Immutable<name>SingletonStack implements Immutable<name>Stack, Serializable
+{
+    private static final long serialVersionUID = 1L;
+    private final <type> element1;
+
+    Immutable<name>SingletonStack(<type> element)
+    {
+        this.element1 = element;
+    }
+
+    public <name>Iterator <type>Iterator()
+    {
+        return new Unmodifiable<name>Iterator(<name>ArrayStack.newStackWith(this.element1).<type>Iterator());
+    }
+
+    public void forEach(<name>Procedure procedure)
+    {
+        this.each(procedure);
+    }
+
+    /**
+     * @since 7.0.
+     */
+    public void each(<name>Procedure procedure)
+    {
+        procedure.value(this.element1);
+    }
+
+    public int count(<name>Predicate predicate)
+    {
+        return predicate.accept(this.element1) ? 1 : 0;
+    }
+
+    public boolean anySatisfy(<name>Predicate predicate)
+    {
+        return predicate.accept(this.element1);
+    }
+
+    public boolean allSatisfy(<name>Predicate predicate)
+    {
+        return predicate.accept(this.element1);
+    }
+
+    public boolean noneSatisfy(<name>Predicate predicate)
+    {
+        return !predicate.accept(this.element1);
+    }
+
+    public <type> peek()
+    {
+        return this.element1;
+    }
+
+    public <name>List peek(int count)
+    {
+        this.checkNegativeCount(count);
+        if (count == 0)
+        {
+            return new <name>ArrayList(0);
+        }
+        if (count == 1)
+        {
+            return <name>ArrayList.newListWith(this.element1);
+        }
+        throw new IllegalArgumentException("Count must be less than or equal to size: Count = " + count + " Size = 1");
+    }
+
+    public <type> peekAt(int index)
+    {
+        this.checkNegativeCount(index);
+        if (index == 0)
+        {
+            return this.element1;
+        }
+        throw new IllegalArgumentException("Index must be less than size: Index = " + index + " Size = 1");
+    }
+
+    public Immutable<name>Stack select(<name>Predicate predicate)
+    {
+        return predicate.accept(this.element1) ? <name>Stacks.immutable.with(this.element1)
+                : <name>Stacks.immutable.with();
+    }
+
+    public Immutable<name>Stack reject(<name>Predicate predicate)
+    {
+        return predicate.accept(this.element1) ? <name>Stacks.immutable.with()
+                : <name>Stacks.immutable.with(this.element1);
+    }
+
+    public <type> detectIfNone(<name>Predicate predicate, <type> ifNone)
+    {
+        return predicate.accept(this.element1) ? this.element1 : ifNone;
+    }
+
+    public \<V> ImmutableStack\<V> collect(<name>ToObjectFunction\<? extends V> function)
+    {
+        return Stacks.immutable.with(function.valueOf(this.element1));
+    }
+
+    <(arithmeticMethods.(type))(name, type)>
+    public <type>[] toArray()
+    {
+        return new <type>[]{this.element1};
+    }
+
+    public boolean contains(<type> value)
+    {
+        return <(equals.(type))("this.element1", "value")>;
+    }
+
+    public boolean containsAll(<type>... source)
+    {
+        for (<type> value : source)
+        {
+            if (<(notEquals.(type))("this.element1", "value")>)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean containsAll(<name>Iterable source)
+    {
+        for (<name>Iterator iterator = source.<type>Iterator(); iterator.hasNext(); )
+        {
+            if (<(notEquals.(type))("this.element1", "iterator.next()")>)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public Mutable<name>List toList()
+    {
+        return <name>ArrayList.newListWith(this.element1);
+    }
+
+    public Mutable<name>Set toSet()
+    {
+        return <name>HashSet.newSetWith(this.element1);
+    }
+
+    public Mutable<name>Bag toBag()
+    {
+        return <name>HashBag.newBagWith(this.element1);
+    }
+
+    public Lazy<name>Iterable asLazy()
+    {
+        return new Lazy<name>IterableAdapter(this);
+    }
+
+    public Immutable<name>Stack toImmutable()
+    {
+        return this;
+    }
+
+    public Immutable<name>Stack push(<type> element)
+    {
+        return <name>Stacks.immutable.with(this.element1, element);
+    }
+
+    public Immutable<name>Stack pop()
+    {
+        return <name>Stacks.immutable.with();
+    }
+
+    public Immutable<name>Stack pop(int count)
+    {
+        this.checkNegativeCount(count);
+        if (count == 0)
+        {
+            return this;
+        }
+        if (count == 1)
+        {
+            return <name>Stacks.immutable.with();
+        }
+        throw new IllegalArgumentException("Count must be less than size: Count = " + count + " Size = 1");
+    }
+
+    private void checkNegativeCount(int count)
+    {
+        if (count \< 0)
+        {
+            throw new IllegalArgumentException("Count must be positive but was " + count);
+        }
+    }
+
+    public int size()
+    {
+        return 1;
+    }
+
+    public boolean isEmpty()
+    {
+        return false;
+    }
+
+    public boolean notEmpty()
+    {
+        return true;
+    }
+
+    public \<T> T injectInto(T injectedValue, Object<name>ToObjectFunction\<? super T, ? extends T> function)
+    {
+        return function.valueOf(injectedValue, this.element1);
+    }
+
+    @Override
+    public boolean equals(Object otherStack)
+    {
+        if (otherStack == this)
+        {
+            return true;
+        }
+        if (!(otherStack instanceof <name>Stack))
+        {
+            return false;
+        }
+        <name>Stack stack = (<name>Stack) otherStack;
+        if (stack.size() != 1)
+        {
+            return false;
+        }
+        return <(equals.(type))("this.element1", "stack.peek()")>;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return 31 + <(hashCode.(type))("this.element1")>;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "[" + this.element1 + ']';
+    }
+
+    public String makeString()
+    {
+        return this.makeString(", ");
+    }
+
+    public String makeString(String separator)
+    {
+        return this.makeString("", separator, "");
+    }
+
+    public String makeString(String start, String separator, String end)
+    {
+        Appendable stringBuilder = new StringBuilder();
+        this.appendString(stringBuilder, start, separator, end);
+        return stringBuilder.toString();
+    }
+
+    public void appendString(Appendable appendable)
+    {
+        this.appendString(appendable, ", ");
+    }
+
+    public void appendString(Appendable appendable, String separator)
+    {
+        this.appendString(appendable, "", separator, "");
+    }
+
+    public void appendString(Appendable appendable, String start, String separator, String end)
+    {
+        try
+        {
+            appendable.append(start);
+            appendable.append(String.valueOf(this.element1));
+            appendable.append(end);
+        }
+        catch (IOException e)
+        {
+            throw new RuntimeException(e);
+        }
+    }
+}
+
+>>
+
+arithmeticMethods ::= [
+    "byte": "allMethods",
+    "short": "allMethods",
+    "char": "allMethods",
+    "int": "allMethods",
+    "long": "allMethods",
+    "float": "allMethods",
+    "double": "allMethods",
+    "boolean": "noMethods"
+    ]
+
+allMethods(name, type) ::=<<
+public <wideType.(type)> sum()
+{
+    return this.element1;
+}
+
+public <type> max()
+{
+    return this.element1;
+}
+
+public <type> maxIfEmpty(<type> defaultValue)
+{
+    return this.element1;
+}
+
+public <type> min()
+{
+    return this.element1;
+}
+
+public <type> minIfEmpty(<type> defaultValue)
+{
+    return this.element1;
+}
+
+public double average()
+{
+    return this.element1;
+}
+
+public double median()
+{
+    return this.element1;
+}
+
+public <type>[] toSortedArray()
+{
+    return new <type>[]{this.element1};
+}
+
+public Mutable<name>List toSortedList()
+{
+    return <name>ArrayList.newListWith(this.element1);
+}
+
+>>
+
+noMethods(name, type) ::= ""

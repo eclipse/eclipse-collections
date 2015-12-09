@@ -1,0 +1,149 @@
+import "copyright.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+import "primitiveEquals.stg"
+
+skipBoolean() ::= "true"
+
+isTest() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/map/mutable/primitive"
+
+fileName(primitive) ::= "UnmodifiableObject<primitive.name>MapKeySetTest"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name, primitive.wrapperName)>
+>>
+
+body(type, name, wrapperName) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.map.mutable.primitive;
+
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+import java.util.Set;
+
+import org.eclipse.collections.impl.bag.mutable.HashBag;
+import org.eclipse.collections.impl.list.mutable.FastList;
+import org.eclipse.collections.impl.set.mutable.UnifiedSet;
+import org.eclipse.collections.impl.test.Verify;
+import org.junit.Assert;
+import org.junit.Test;
+
+/**
+ * JUnit test for {@link UnmodifiableObject<name>Map#keySet()}.
+ * This file was automatically generated from template file unmodifiableObjectPrimitiveMapKeySetTest.stg.
+ */
+public class UnmodifiableObject<name>MapKeySetTest
+{
+    private UnmodifiableObject<name>Map\<String> newMapWithKeysValues(String key1, <type> value1, String key2, <type> value2, String key3, <type> value3)
+    {
+        return new UnmodifiableObject<name>Map\<>(Object<name>HashMap.newWithKeysValues(key1, value1, key2, value2, key3, value3));
+    }
+
+    private UnmodifiableObject<name>Map\<String> newMapWithKeysValues(String key1, <type> value1, String key2, <type> value2, String key3, <type> value3, String key4, <type> value4)
+    {
+        return new UnmodifiableObject<name>Map\<>(Object<name>HashMap.newWithKeysValues(key1, value1, key2, value2, key3, value3, key4, value4));
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void add()
+    {
+        this.newMapWithKeysValues("One", <(literal.(type))("1")>, "Two", <(literal.(type))("2")>, "Three", <(literal.(type))("3")>).keySet().add("Four");
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void addAll()
+    {
+        this.newMapWithKeysValues("One", <(literal.(type))("1")>, "Two", <(literal.(type))("2")>, "Three", <(literal.(type))("3")>).keySet().addAll(FastList.newListWith("Four"));
+    }
+
+    @Test
+    public void contains()
+    {
+        UnmodifiableObject<name>Map\<String> map = this.newMapWithKeysValues("One", <(literal.(type))("1")>, "Two", <(literal.(type))("2")>, "Three", <(literal.(type))("3")>, null, <(literal.(type))("4")>);
+        Set\<String> keySet = map.keySet();
+        Assert.assertTrue(keySet.contains("One"));
+        Assert.assertTrue(keySet.contains("Two"));
+        Assert.assertTrue(keySet.contains("Three"));
+        Assert.assertFalse(keySet.contains("Four"));
+        Assert.assertTrue(keySet.contains(null));
+    }
+
+    @Test
+    public void containsAll()
+    {
+        UnmodifiableObject<name>Map\<String> map = this.newMapWithKeysValues("One", <(literal.(type))("1")>, "Two", <(literal.(type))("2")>, "Three", <(literal.(type))("3")>, null, <(literal.(type))("4")>);
+        Set\<String> keySet = map.keySet();
+        Assert.assertTrue(keySet.containsAll(FastList.newListWith("One", "Two")));
+        Assert.assertTrue(keySet.containsAll(FastList.newListWith("One", "Two", "Three", null)));
+        Assert.assertTrue(keySet.containsAll(FastList.newListWith(null, null)));
+        Assert.assertFalse(keySet.containsAll(FastList.newListWith("One", "Four")));
+        Assert.assertFalse(keySet.containsAll(FastList.newListWith("Five", "Four")));
+    }
+
+    @Test
+    public void isEmpty()
+    {
+        UnmodifiableObject<name>Map\<String> map = this.newMapWithKeysValues("One", <(literal.(type))("1")>, "Two", <(literal.(type))("2")>, "Three", <(literal.(type))("3")>, null, <(literal.(type))("4")>);
+        Set\<String> keySet = map.keySet();
+        Assert.assertFalse(keySet.isEmpty());
+        Object<name>HashMap\<String> map1 = Object<name>HashMap.newMap();
+        Set\<String> keySet1 = map1.keySet();
+        Assert.assertTrue(keySet1.isEmpty());
+        map1.put("One", <(literal.(type))("1")>);
+        Assert.assertFalse(keySet1.isEmpty());
+    }
+
+    @Test
+    public void size()
+    {
+        UnmodifiableObject<name>Map\<String> map = this.newMapWithKeysValues("One", <(literal.(type))("1")>, "Two", <(literal.(type))("2")>, "Three", <(literal.(type))("3")>, null, <(literal.(type))("4")>);
+        Set\<String> keySet = map.keySet();
+        Verify.assertSize(4, keySet);
+    }
+
+    @Test
+    public void iterator()
+    {
+        UnmodifiableObject<name>Map\<String> map = this.newMapWithKeysValues("One", <(literal.(type))("1")>, "Two", <(literal.(type))("2")>, "Three", <(literal.(type))("3")>, null, <(literal.(type))("4")>);
+        Set\<String> keySet = map.keySet();
+        Iterator\<String> iterator = keySet.iterator();
+
+        HashBag\<String> expected = HashBag.newBagWith("One", "Two", "Three", null);
+        HashBag\<String> actual = HashBag.newBag();
+        for (int i = 0; i \< 4; i++)
+        {
+            Assert.assertTrue(iterator.hasNext());
+            actual.add(iterator.next());
+        }
+        Assert.assertFalse(iterator.hasNext());
+        Verify.assertThrows(NoSuchElementException.class, iterator::next);
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void keySetEqualsAndHashCode()
+    {
+        UnmodifiableObject<name>Map\<String> map = this.newMapWithKeysValues("One", <(literal.(type))("1")>, "Two", <(literal.(type))("2")>, "Three", <(literal.(type))("3")>, null, <(literal.(type))("0")>);
+        Verify.assertEqualsAndHashCode(UnifiedSet.newSetWith("One", "Two", "Three", null), map.keySet());
+        Assert.assertNotEquals(UnifiedSet.newSetWith("One", "Two", "Three"), map.keySet());
+        Assert.assertNotEquals(FastList.newListWith("One", "Two", "Three", null), map.keySet());
+    }
+
+    @Test
+    public void keySetToArray()
+    {
+        UnmodifiableObject<name>Map\<String> map = this.newMapWithKeysValues("One", <(literal.(type))("1")>, "Two", <(literal.(type))("2")>, "Three", <(literal.(type))("3")>);
+        HashBag\<String> expected = HashBag.newBagWith("One", "Two", "Three");
+        Set\<String> keySet = map.keySet();
+        Assert.assertEquals(expected, HashBag.newBagWith(keySet.toArray()));
+        Assert.assertEquals(expected, HashBag.newBagWith(keySet.toArray(new String[keySet.size()])));
+        Assert.assertEquals(expected, HashBag.newBagWith(keySet.toArray(new String[0])));
+        expected.add(null);
+        Assert.assertEquals(expected, HashBag.newBagWith(keySet.toArray(new String[keySet.size() + 1])));
+    }
+}
+
+>>

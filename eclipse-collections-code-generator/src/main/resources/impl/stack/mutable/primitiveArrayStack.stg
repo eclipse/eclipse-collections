@@ -1,0 +1,506 @@
+import "copyright.stg"
+import "primitiveEquals.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+
+targetPath() ::= "org/eclipse/collections/impl/stack/mutable/primitive"
+
+fileName(primitive) ::= "<primitive.name>ArrayStack"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.stack.mutable.primitive;
+
+import java.io.Externalizable;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
+import java.util.EmptyStackException;
+
+import org.eclipse.collections.api.<name>Iterable;
+import org.eclipse.collections.api.Lazy<name>Iterable;
+import org.eclipse.collections.api.bag.primitive.Mutable<name>Bag;
+import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
+import org.eclipse.collections.api.block.function.primitive.Object<name>ToObjectFunction;
+import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
+import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
+import org.eclipse.collections.api.iterator.<name>Iterator;
+import org.eclipse.collections.api.list.primitive.<name>List;
+import org.eclipse.collections.api.list.primitive.Mutable<name>List;
+import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
+import org.eclipse.collections.api.stack.MutableStack;
+import org.eclipse.collections.api.stack.primitive.<name>Stack;
+import org.eclipse.collections.api.stack.primitive.Immutable<name>Stack;
+import org.eclipse.collections.api.stack.primitive.Mutable<name>Stack;
+import org.eclipse.collections.impl.bag.mutable.primitive.<name>HashBag;
+import org.eclipse.collections.impl.factory.primitive.<name>Stacks;
+import org.eclipse.collections.impl.iterator.Unmodifiable<name>Iterator;
+import org.eclipse.collections.impl.lazy.primitive.Lazy<name>IterableAdapter;
+import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
+import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
+import org.eclipse.collections.impl.stack.mutable.ArrayStack;
+import net.jcip.annotations.NotThreadSafe;
+
+/**
+ * <name>ArrayStack is similar to {@link ArrayStack}, and is memory-optimized for <type> primitives.
+ * This file was automatically generated from template file primitiveArrayStack.stg.
+ */
+@NotThreadSafe
+public final class <name>ArrayStack
+        implements Mutable<name>Stack, Externalizable
+{
+    private static final long serialVersionUID = 1L;
+
+    private transient <name>ArrayList delegate;
+
+    public <name>ArrayStack()
+    {
+        this.delegate = new <name>ArrayList();
+    }
+
+    private <name>ArrayStack(int size)
+    {
+        this.delegate = new <name>ArrayList(size);
+    }
+
+    private <name>ArrayStack(<type>... items)
+    {
+        this.delegate = new <name>ArrayList(items);
+    }
+
+    public static <name>ArrayStack newStackFromTopToBottom(<type>... items)
+    {
+        <name>ArrayStack stack = new <name>ArrayStack(items.length);
+        for (int i = items.length - 1; i >= 0; i--)
+        {
+            stack.push(items[i]);
+        }
+        return stack;
+    }
+
+    public static <name>ArrayStack newStackWith(<type>... items)
+    {
+        return new <name>ArrayStack(items);
+    }
+
+    public static <name>ArrayStack newStack(<name>Iterable items)
+    {
+        <name>ArrayStack stack = new <name>ArrayStack(items.size());
+        stack.delegate = <name>ArrayList.newList(items);
+        return stack;
+    }
+
+    public static <name>ArrayStack newStackFromTopToBottom(<name>Iterable items)
+    {
+        <name>ArrayStack stack = new <name>ArrayStack(items.size());
+        stack.delegate = <name>ArrayList.newList(items).reverseThis();
+        return stack;
+    }
+
+    public void push(<type> item)
+    {
+        this.delegate.add(item);
+    }
+
+    public <type> pop()
+    {
+        this.checkEmptyStack();
+        return this.delegate.removeAtIndex(this.delegate.size() - 1);
+    }
+
+    private void checkEmptyStack()
+    {
+        if (this.delegate.isEmpty())
+        {
+            throw new EmptyStackException();
+        }
+    }
+
+    public <name>List pop(int count)
+    {
+        this.checkPositiveValueForCount(count);
+        this.checkSizeLessThanCount(count);
+        if (count == 0)
+        {
+            return new <name>ArrayList(0);
+        }
+        Mutable<name>List subList = new <name>ArrayList(count);
+        while (count > 0)
+        {
+            subList.add(this.pop());
+            count--;
+        }
+        return subList;
+    }
+
+    private void checkPositiveValueForCount(int count)
+    {
+        if (count \< 0)
+        {
+            throw new IllegalArgumentException("Count must be positive but was " + count);
+        }
+    }
+
+    private void checkSizeLessThanCount(int count)
+    {
+        if (this.delegate.size() \< count)
+        {
+            throw new IllegalArgumentException("Count must be less than size: Count = " + count + " Size = " + this.delegate.size());
+        }
+    }
+
+    public Mutable<name>Stack select(<name>Predicate predicate)
+    {
+        return newStackFromTopToBottom(this.delegate.asReversed().select(predicate));
+    }
+
+    public Mutable<name>Stack reject(<name>Predicate predicate)
+    {
+        return newStackFromTopToBottom(this.delegate.asReversed().reject(predicate));
+    }
+
+    public <type> peek()
+    {
+        this.checkEmptyStack();
+        return this.delegate.getLast();
+    }
+
+    public <name>List peek(int count)
+    {
+        this.checkPositiveValueForCount(count);
+        this.checkSizeLessThanCount(count);
+        if (count == 0)
+        {
+            return new <name>ArrayList(0);
+        }
+        Mutable<name>List subList = new <name>ArrayList(count);
+        int index = this.delegate.size() - 1;
+        for (int i = 0; i \< count; i++)
+        {
+            subList.add(this.delegate.get(index - i));
+        }
+        return subList;
+    }
+
+    public <type> peekAt(int index)
+    {
+        this.rangeCheck(index);
+        return this.delegate.get(this.delegate.size() - 1 - index);
+    }
+
+    private void rangeCheck(int index)
+    {
+        if (index \< 0 || index > this.delegate.size() - 1)
+        {
+            throw new IllegalArgumentException("Index " + index + " out of range.Should be between 0 and " + (this.delegate.size() - 1));
+        }
+    }
+
+    public <name>Iterator <type>Iterator()
+    {
+        return new Unmodifiable<name>Iterator(this.delegate.asReversed().<type>Iterator());
+    }
+
+    public void forEach(<name>Procedure procedure)
+    {
+        this.each(procedure);
+    }
+
+    /**
+     * @since 7.0.
+     */
+    public void each(<name>Procedure procedure)
+    {
+        this.delegate.asReversed().forEach(procedure);
+    }
+
+    public int size()
+    {
+        return this.delegate.size();
+    }
+
+    public boolean isEmpty()
+    {
+        return this.delegate.isEmpty();
+    }
+
+    public boolean notEmpty()
+    {
+        return this.delegate.notEmpty();
+    }
+
+    public int count(<name>Predicate predicate)
+    {
+        return this.delegate.asReversed().count(predicate);
+    }
+
+    public boolean anySatisfy(<name>Predicate predicate)
+    {
+        return this.delegate.asReversed().anySatisfy(predicate);
+    }
+
+    public boolean allSatisfy(<name>Predicate predicate)
+    {
+        return this.delegate.asReversed().allSatisfy(predicate);
+    }
+
+    public boolean noneSatisfy(<name>Predicate predicate)
+    {
+        return this.delegate.asReversed().noneSatisfy(predicate);
+    }
+
+    public <type> detectIfNone(<name>Predicate predicate, <type> ifNone)
+    {
+        return this.delegate.asReversed().detectIfNone(predicate, ifNone);
+    }
+
+    public \<V> MutableStack\<V> collect(<name>ToObjectFunction\<? extends V> function)
+    {
+        return ArrayStack.newStackFromTopToBottom(this.delegate.asReversed().collect(function));
+    }
+
+    public \<V> V injectInto(V injectedValue, Object<name>ToObjectFunction\<? super V, ? extends V> function)
+    {
+        return this.delegate.asReversed().injectInto(injectedValue, function);
+    }
+
+    <(arithmeticMethods.(type))(type)>
+
+    public <type>[] toArray()
+    {
+        return this.delegate.asReversed().toArray();
+    }
+
+    public boolean contains(<type> value)
+    {
+        return this.delegate.asReversed().contains(value);
+    }
+
+    public boolean containsAll(<type>... source)
+    {
+        return this.delegate.asReversed().containsAll(source);
+    }
+
+    public boolean containsAll(<name>Iterable source)
+    {
+        return this.delegate.asReversed().containsAll(source);
+    }
+
+    public void clear()
+    {
+        this.delegate.clear();
+    }
+
+    @Override
+    public boolean equals(Object otherStack)
+    {
+        if (otherStack == this)
+        {
+            return true;
+        }
+        if (!(otherStack instanceof <name>Stack))
+        {
+            return false;
+        }
+        <name>Stack stack = (<name>Stack) otherStack;
+        if (this.size() != stack.size())
+        {
+            return false;
+        }
+        for (int i = 0; i \< this.size(); i++)
+        {
+            if (<(notEquals.(type))("this.peekAt(i)", "stack.peekAt(i)")>)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        int hashCode = 1;
+        <name>Iterable iterable = this.delegate.asReversed();
+        <name>Iterator iterator = iterable.<type>Iterator();
+        while (iterator.hasNext())
+        {
+            <type> item = iterator.next();
+            hashCode = 31 * hashCode + <(hashCode.(type))("item")>;
+        }
+        return hashCode;
+    }
+
+    @Override
+    public String toString()
+    {
+        return this.delegate.asReversed().toString();
+    }
+
+    public String makeString()
+    {
+        return this.delegate.asReversed().makeString();
+    }
+
+    public String makeString(String separator)
+    {
+        return this.delegate.asReversed().makeString(separator);
+    }
+
+    public String makeString(String start, String separator, String end)
+    {
+        return this.delegate.asReversed().makeString(start, separator, end);
+    }
+
+    public void appendString(Appendable appendable)
+    {
+        this.delegate.asReversed().appendString(appendable);
+    }
+
+    public void appendString(Appendable appendable, String separator)
+    {
+        this.delegate.asReversed().appendString(appendable, separator);
+    }
+
+    public void appendString(
+            Appendable appendable,
+            String start,
+            String separator,
+            String end)
+    {
+        this.delegate.asReversed().appendString(appendable, start, separator, end);
+    }
+
+    public Mutable<name>List toList()
+    {
+        return <name>ArrayList.newList(this);
+    }
+
+    public Mutable<name>List toSortedList()
+    {
+        return <name>ArrayList.newList(this).sortThis();
+    }
+
+    public Mutable<name>Set toSet()
+    {
+        return <name>HashSet.newSet(this);
+    }
+
+    public Mutable<name>Bag toBag()
+    {
+        return <name>HashBag.newBag(this);
+    }
+
+    public Lazy<name>Iterable asLazy()
+    {
+        return new Lazy<name>IterableAdapter(this);
+    }
+
+    public Mutable<name>Stack asUnmodifiable()
+    {
+        return new Unmodifiable<name>Stack(this);
+    }
+
+    public Mutable<name>Stack asSynchronized()
+    {
+        return new Synchronized<name>Stack(this);
+    }
+
+    public Immutable<name>Stack toImmutable()
+    {
+        return <name>Stacks.immutable.withAll(this.delegate);
+    }
+
+    public void writeExternal(ObjectOutput out) throws IOException
+    {
+        out.writeInt(this.size());
+        <name>Iterator iterator = this.delegate.asReversed().<type>Iterator();
+        while (iterator.hasNext())
+        {
+            <type> each = iterator.next();
+            out.write<name>(each);
+        }
+    }
+
+    public void readExternal(ObjectInput in) throws IOException
+    {
+        int size = in.readInt();
+        <type>[] array = new <type>[size];
+        for (int i = size - 1; i >= 0; i--)
+        {
+            array[i] = in.read<name>();
+        }
+        this.delegate = <name>ArrayList.newListWith(array);
+    }
+}
+
+>>
+
+arithmeticMethods ::= [
+    "byte": "allMethods",
+    "short": "allMethods",
+    "char": "allMethods",
+    "int": "allMethods",
+    "long": "allMethods",
+    "float": "allMethods",
+    "double": "allMethods",
+    "boolean": "noMethods"
+    ]
+
+allMethods(type) ::= <<
+
+public <wideType.(type)> sum()
+{
+    return this.delegate.sum();
+}
+
+public <type> max()
+{
+    return this.delegate.max();
+}
+
+public <type> min()
+{
+    return this.delegate.min();
+}
+
+public <type> minIfEmpty(<type> defaultValue)
+{
+    if (this.isEmpty())
+    {
+        return defaultValue;
+    }
+    return this.min();
+}
+
+public <type> maxIfEmpty(<type> defaultValue)
+{
+    if (this.isEmpty())
+    {
+        return defaultValue;
+    }
+    return this.max();
+}
+
+public double average()
+{
+    return this.delegate.average();
+}
+
+public double median()
+{
+    return this.delegate.median();
+}
+
+public <type>[] toSortedArray()
+{
+    return this.delegate.toSortedArray();
+}
+>>
+
+noMethods(type) ::= ""

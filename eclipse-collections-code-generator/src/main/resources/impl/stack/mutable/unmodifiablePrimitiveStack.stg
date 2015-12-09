@@ -1,0 +1,341 @@
+import "copyright.stg"
+import "primitiveEquals.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+
+targetPath() ::= "org/eclipse/collections/impl/stack/mutable/primitive"
+
+fileName(primitive) ::= "Unmodifiable<primitive.name>Stack"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.stack.mutable.primitive;
+
+import java.io.Serializable;
+
+import org.eclipse.collections.api.<name>Iterable;
+import org.eclipse.collections.api.Lazy<name>Iterable;
+import org.eclipse.collections.api.bag.primitive.Mutable<name>Bag;
+import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
+import org.eclipse.collections.api.block.function.primitive.Object<name>ToObjectFunction;
+import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
+import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
+import org.eclipse.collections.api.iterator.<name>Iterator;
+import org.eclipse.collections.api.list.primitive.<name>List;
+import org.eclipse.collections.api.list.primitive.Mutable<name>List;
+import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
+import org.eclipse.collections.api.stack.MutableStack;
+import org.eclipse.collections.api.stack.primitive.Immutable<name>Stack;
+import org.eclipse.collections.api.stack.primitive.Mutable<name>Stack;
+import org.eclipse.collections.impl.factory.primitive.<name>Stacks;
+import org.eclipse.collections.impl.iterator.Unmodifiable<name>Iterator;
+import org.eclipse.collections.impl.lazy.primitive.Lazy<name>IterableAdapter;
+import net.jcip.annotations.NotThreadSafe;
+
+/**
+ * This file was automatically generated from template file unmodifiablePrimitiveStack.stg.
+ *
+ * @since 3.1.
+ */
+@NotThreadSafe
+public final class Unmodifiable<name>Stack
+        implements Mutable<name>Stack, Serializable
+{
+    private static final long serialVersionUID = 1L;
+
+    private final Mutable<name>Stack stack;
+
+    Unmodifiable<name>Stack(Mutable<name>Stack stack)
+    {
+        this.stack = stack;
+    }
+
+    public void push(<type> item)
+    {
+        throw new UnsupportedOperationException("Cannot call push() on " + this.getClass().getSimpleName());
+    }
+
+    public <type> pop()
+    {
+        throw new UnsupportedOperationException("Cannot call pop() on " + this.getClass().getSimpleName());
+    }
+
+    public <name>List pop(int count)
+    {
+        throw new UnsupportedOperationException("Cannot call pop() on " + this.getClass().getSimpleName());
+    }
+
+    public <type> peek()
+    {
+        return this.stack.peek();
+    }
+
+    public <name>List peek(int count)
+    {
+        return this.stack.peek(count);
+    }
+
+    public <type> peekAt(int index)
+    {
+        return this.stack.peekAt(index);
+    }
+
+    public int size()
+    {
+        return this.stack.size();
+    }
+
+    public boolean isEmpty()
+    {
+        return this.stack.isEmpty();
+    }
+
+    public boolean notEmpty()
+    {
+        return this.stack.notEmpty();
+    }
+
+    public void clear()
+    {
+        throw new UnsupportedOperationException("Cannot call clear() on " + this.getClass().getSimpleName());
+    }
+
+    public boolean contains(<type> value)
+    {
+        return this.stack.contains(value);
+    }
+
+    public boolean containsAll(<type>... source)
+    {
+        return this.stack.containsAll(source);
+    }
+
+    public boolean containsAll(<name>Iterable source)
+    {
+        return this.stack.containsAll(source);
+    }
+
+    public <name>Iterator <type>Iterator()
+    {
+        return new Unmodifiable<name>Iterator(this.stack.<type>Iterator());
+    }
+
+    public void forEach(<name>Procedure procedure)
+    {
+        this.each(procedure);
+    }
+
+    /**
+     * @since 7.0.
+     */
+    public void each(<name>Procedure procedure)
+    {
+        this.stack.forEach(procedure);
+    }
+
+    public int count(<name>Predicate predicate)
+    {
+        return this.stack.count(predicate);
+    }
+
+    public boolean anySatisfy(<name>Predicate predicate)
+    {
+        return this.stack.anySatisfy(predicate);
+    }
+
+    public boolean allSatisfy(<name>Predicate predicate)
+    {
+        return this.stack.allSatisfy(predicate);
+    }
+
+    public boolean noneSatisfy(<name>Predicate predicate)
+    {
+        return this.stack.noneSatisfy(predicate);
+    }
+
+    public <type> detectIfNone(<name>Predicate predicate, <type> ifNone)
+    {
+        return this.stack.detectIfNone(predicate, ifNone);
+    }
+
+    public Mutable<name>Stack select(<name>Predicate predicate)
+    {
+        return this.stack.select(predicate);
+    }
+
+    public Mutable<name>Stack reject(<name>Predicate predicate)
+    {
+        return this.stack.reject(predicate);
+    }
+
+    public \<V> MutableStack\<V> collect(<name>ToObjectFunction\<? extends V> function)
+    {
+        return this.stack.collect(function);
+    }
+
+    <(arithmeticMethods.(type))(name, type)>
+    public <type>[] toArray()
+    {
+        return this.stack.toArray();
+    }
+
+    @Override
+    public String toString()
+    {
+        return this.stack.toString();
+    }
+
+    public String makeString()
+    {
+        return this.stack.makeString();
+    }
+
+    public String makeString(String separator)
+    {
+        return this.stack.makeString(separator);
+    }
+
+    public String makeString(String start, String separator, String end)
+    {
+        return this.stack.makeString(start, separator, end);
+    }
+
+    public void appendString(Appendable appendable)
+    {
+        this.stack.appendString(appendable);
+    }
+
+    public void appendString(Appendable appendable, String separator)
+    {
+        this.stack.appendString(appendable, separator);
+    }
+
+    public void appendString(
+            Appendable appendable,
+            String start,
+            String separator,
+            String end)
+    {
+        this.stack.appendString(appendable, start, separator, end);
+    }
+
+    public Mutable<name>List toList()
+    {
+        return this.stack.toList();
+    }
+
+    public Mutable<name>Set toSet()
+    {
+        return this.stack.toSet();
+    }
+
+    public Mutable<name>Bag toBag()
+    {
+        return this.stack.toBag();
+    }
+
+    @Override
+    public boolean equals(Object otherStack)
+    {
+        return this.stack.equals(otherStack);
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return this.stack.hashCode();
+    }
+
+    public Lazy<name>Iterable asLazy()
+    {
+        return new Lazy<name>IterableAdapter(this);
+    }
+
+    public Mutable<name>Stack asUnmodifiable()
+    {
+        return this;
+    }
+
+    public Mutable<name>Stack asSynchronized()
+    {
+        return new Synchronized<name>Stack(this);
+    }
+
+    public Immutable<name>Stack toImmutable()
+    {
+        return <name>Stacks.immutable.withAllReversed(this);
+    }
+
+    public \<T> T injectInto(T injectedValue, Object<name>ToObjectFunction\<? super T, ? extends T> function)
+    {
+        return this.stack.injectInto(injectedValue, function);
+    }
+}
+
+>>
+
+arithmeticMethods ::= [
+    "byte": "allMethods",
+    "short": "allMethods",
+    "char": "allMethods",
+    "int": "allMethods",
+    "long": "allMethods",
+    "float": "allMethods",
+    "double": "allMethods",
+    "boolean": "noMethods"
+    ]
+
+allMethods(name, type) ::=<<
+public <wideType.(type)> sum()
+{
+    return this.stack.sum();
+}
+
+public <type> max()
+{
+    return this.stack.max();
+}
+
+public <type> min()
+{
+    return this.stack.min();
+}
+
+public <type> minIfEmpty(<type> defaultValue)
+{
+    return this.stack.minIfEmpty(defaultValue);
+}
+
+public <type> maxIfEmpty(<type> defaultValue)
+{
+    return this.stack.maxIfEmpty(defaultValue);
+}
+
+public double average()
+{
+    return this.stack.average();
+}
+
+public double median()
+{
+    return this.stack.median();
+}
+
+public Mutable<name>List toSortedList()
+{
+    return this.stack.toSortedList();
+}
+
+public <type>[] toSortedArray()
+{
+    return this.stack.toSortedArray();
+}
+
+>>
+
+noMethods(name, type) ::= ""

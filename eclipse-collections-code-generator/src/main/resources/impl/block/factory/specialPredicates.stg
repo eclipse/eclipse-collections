@@ -1,0 +1,219 @@
+intPredicateConstants ::= [
+    "byte": "allIntPredicateConstants",
+    "short": "allIntPredicateConstants",
+    "int": "allIntPredicateConstants",
+    "long": "allIntPredicateConstants",
+    default: "noPredicates"
+]
+
+intPredicateMethods ::= [
+    "byte": "allIntPredicateMethods",
+    "short": "allIntPredicateMethods",
+    "int": "allIntPredicateMethods",
+    "long": "allIntPredicateMethods",
+    default: "noPredicates"
+]
+
+intPredicateClasses ::= [
+    "byte": "allIntPredicateClasses",
+    "short": "allIntPredicateClasses",
+    "int": "allIntPredicateClasses",
+    "long": "allIntPredicateClasses",
+    default: "noPredicates"
+]
+
+noPredicates() ::= ""
+
+allIntPredicateConstants() ::= <<
+private static final <name>IsEvenPredicate IS_EVEN = new <name>IsEvenPredicate();
+private static final <name>IsOddPredicate IS_ODD = new <name>IsOddPredicate();
+>>
+
+allIntPredicateMethods() ::= <<
+public static <name>Predicate isEven()
+{
+    return IS_EVEN;
+}
+
+public static <name>Predicate isOdd()
+{
+    return IS_ODD;
+}
+
+>>
+
+allIntPredicateClasses() ::= <<
+
+private static final class <name>IsEvenPredicate implements <name>Predicate
+{
+    private static final long serialVersionUID = 1L;
+
+    public boolean accept(<type> integral)
+    {
+        return integral % 2 == 0;
+    }
+}
+
+private static final class <name>IsOddPredicate implements <name>Predicate
+{
+    private static final long serialVersionUID = 1L;
+
+    public boolean accept(<type> integral)
+    {
+        return integral % 2 != 0;
+    }
+}
+>>
+
+charPredicateConstants ::= [
+    "char": "allCharPredicateConstants",
+    default: "noPredicates"
+]
+
+allCharPredicateConstants() ::= <<
+private static final IsUpperCaseCharPredicate IS_UPPER_CASE = new IsUpperCaseCharPredicate();
+private static final IsLowerCaseCharPredicate IS_LOWER_CASE = new IsLowerCaseCharPredicate();
+private static final IsDigitCharPredicate IS_DIGIT = new IsDigitCharPredicate();
+private static final IsDigitOrDotCharPredicate IS_DIGIT_OR_DOT = new IsDigitOrDotCharPredicate();
+private static final IsLetterCharPredicate IS_LETTER = new IsLetterCharPredicate();
+private static final IsLetterOrDigitCharPredicate IS_LETTER_OR_DIGIT = new IsLetterOrDigitCharPredicate();
+private static final IsWhiteSpaceCharPredicate IS_WHITESPACE = new IsWhiteSpaceCharPredicate();
+private static final IsUndefinedCharPredicate IS_UNDEFINED = new IsUndefinedCharPredicate();
+
+>>
+
+charPredicateMethods ::= [
+    "char": "allCharPredicateMethods",
+    default: "noPredicates"
+]
+
+allCharPredicateMethods() ::= <<
+public static CharPredicate isUpperCase()
+{
+    return IS_UPPER_CASE;
+}
+
+public static CharPredicate isLowerCase()
+{
+    return IS_LOWER_CASE;
+}
+
+public static CharPredicate isDigit()
+{
+    return IS_DIGIT;
+}
+
+public static CharPredicate isDigitOrDot()
+{
+    return IS_DIGIT_OR_DOT;
+}
+
+public static CharPredicate isLetter()
+{
+    return IS_LETTER;
+}
+
+public static CharPredicate isLetterOrDigit()
+{
+    return IS_LETTER_OR_DIGIT;
+}
+
+public static CharPredicate isWhitespace()
+{
+    return IS_WHITESPACE;
+}
+
+public static CharPredicate isUndefined()
+{
+    return IS_UNDEFINED;
+}
+
+>>
+
+charPredicateClasses ::= [
+    "char": "allCharPredicateClasses",
+    default: "noPredicates"
+]
+
+allCharPredicateClasses() ::= <<
+
+private static class IsUpperCaseCharPredicate implements CharPredicate
+{
+    private static final long serialVersionUID = 1L;
+
+    public boolean accept(char value)
+    {
+        return Character.isUpperCase(value);
+    }
+}
+
+private static class IsLowerCaseCharPredicate implements CharPredicate
+{
+    private static final long serialVersionUID = 1L;
+
+    public boolean accept(char value)
+    {
+        return Character.isLowerCase(value);
+    }
+}
+
+private static class IsDigitCharPredicate implements CharPredicate
+{
+    private static final long serialVersionUID = 1L;
+
+    public boolean accept(char value)
+    {
+        return Character.isDigit(value);
+    }
+}
+
+private static class IsDigitOrDotCharPredicate implements CharPredicate
+{
+    private static final long serialVersionUID = 1L;
+
+    public boolean accept(char value)
+    {
+        return Character.isDigit(value) || value == '.';
+    }
+}
+
+private static class IsLetterCharPredicate implements CharPredicate
+{
+    private static final long serialVersionUID = 1L;
+
+    public boolean accept(char value)
+    {
+        return Character.isLetter(value);
+    }
+}
+
+private static class IsLetterOrDigitCharPredicate implements CharPredicate
+{
+    private static final long serialVersionUID = 1L;
+
+    public boolean accept(char value)
+    {
+        return Character.isLetterOrDigit(value);
+    }
+}
+
+private static class IsWhiteSpaceCharPredicate implements CharPredicate
+{
+    private static final long serialVersionUID = 1L;
+
+    public boolean accept(char value)
+    {
+        return Character.isWhitespace(value);
+    }
+}
+
+private static class IsUndefinedCharPredicate implements CharPredicate
+{
+    private static final long serialVersionUID = 1L;
+
+    public boolean accept(char value)
+    {
+        return !Character.isDefined(value);
+    }
+}
+>>

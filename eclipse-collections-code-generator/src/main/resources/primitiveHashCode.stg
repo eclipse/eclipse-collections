@@ -1,0 +1,145 @@
+hashCode ::= [
+    "boolean": "booleanHashCode",
+    "byte": "narrowHashCode",
+    "short": "narrowHashCode",
+    "char": "narrowHashCode",
+    "int": "intHashCode",
+    "long": "longHashCode",
+    "float": "floatHashCode",
+    "double": "doubleHashCode",
+    default: "no matching hash code"
+]
+
+booleanHashCode(item) ::= <<
+(<item> ? 1231 : 1237)
+>>
+
+intHashCode(item) ::= <<
+<item>
+>>
+
+narrowHashCode(item) ::= <<
+(int) <item>
+>>
+
+longHashCode(item) ::= <<
+(int) (<item> ^ <item> >\>> 32)
+>>
+
+floatHashCode(item) ::= <<
+Float.floatToIntBits(<item>)
+>>
+
+doubleHashCode(item) ::= <<
+(int) (Double.doubleToLongBits(<item>) ^ Double.doubleToLongBits(<item>) >\>> 32)
+>>
+
+bits ::= [
+    "byte": "narrowHashCode",
+    "short": "narrowHashCode",
+    "char": "narrowHashCode",
+    "int": "intHashCode",
+    "long": "intHashCode",
+    "float": "floatHashCode",
+    "double": "doubleBits",
+    default: "no matching bits"
+]
+
+doubleBits(item) ::= <<
+Double.doubleToLongBits(<item>)
+>>
+
+spread ::= [
+    "byte": "spread8",
+    "short": "spread32",
+    "char": "spread32",
+    "int": "spread32",
+    "long": "spread64",
+    "float": "spread32",
+    "double": "spread64",
+    default: "no matching spread function"
+]
+
+spread2 ::= [
+    "byte": "spread28",
+    "short": "spread232",
+    "char": "spread232",
+    "int": "spread232",
+    "long": "spread264",
+    "float": "spread232",
+    "double": "spread264",
+    default: "no matching spread function"
+]
+
+reverseSpread ::= [
+    "byte": "integerReverse",
+    "short": "integerReverse",
+    "char": "integerReverse",
+    "int": "integerReverse",
+    "long": "longReverse",
+    "float": "integerReverse",
+    "double": "longReverse",
+    default: "no matching spread function"
+]
+
+integerReverse() ::= <<
+Integer.reverse
+>>
+
+longReverse() ::= <<
+(int) Long.reverse
+>>
+
+spread8(type) ::= <<
+int spreadAndMask(<type> element)
+{
+    // No spreading necessary for 8-bit types
+    return this.mask(element);
+}
+>>
+
+spread28(type) ::= <<
+>>
+
+spread32(type) ::= <<
+int spreadAndMask(<type> element)
+{
+    int code = SpreadFunctions.<type>SpreadOne(element);
+    return this.mask(code);
+}
+>>
+
+spread232(type) ::= <<
+int spreadTwoAndMask(<type> element)
+{
+    int code = SpreadFunctions.<type>SpreadTwo(element);
+    return this.mask(code);
+}
+>>
+
+spread64(type) ::= <<
+int spreadAndMask(<type> element)
+{
+    long code = SpreadFunctions.<type>SpreadOne(element);
+    return this.mask((int) code);
+}
+>>
+
+spread264(type) ::= <<
+int spreadTwoAndMask(<type> element)
+{
+    long code = SpreadFunctions.<type>SpreadTwo(element);
+    return this.mask((int) code);
+}
+>>
+
+probe ::= [
+    "byte": "probe8",
+    "short": "probe3264",
+    "char": "probe3264",
+    "int": "probe3264",
+    "float": "probe3264",
+    "long": "probe3264",
+    "double": "probe3264",
+    default: "no matching probe function"
+]

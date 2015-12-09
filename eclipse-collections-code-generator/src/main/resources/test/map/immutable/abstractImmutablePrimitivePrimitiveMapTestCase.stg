@@ -1,0 +1,125 @@
+import "copyright.stg"
+import "primitiveEquals.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+
+isTest() ::= "true"
+
+hasTwoPrimitives() ::= "true"
+
+skipBoolean() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/map/immutable/primitive"
+
+fileName(primitive1, primitive2, sameTwoPrimitives) ::= "AbstractImmutable<primitive1.name><primitive2.name>MapTestCase"
+
+class(primitive1, primitive2, sameTwoPrimitives) ::= <<
+<body(primitive1.type, primitive2.type, primitive1.name, primitive2.name)>
+>>
+
+body(type1, type2, name1, name2) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.map.immutable.primitive;
+
+import org.eclipse.collections.api.map.primitive.<name1><name2>Map;
+import org.eclipse.collections.api.map.primitive.Immutable<name1><name2>Map;
+import org.eclipse.collections.impl.factory.primitive.<name1><name2>Maps;
+import org.eclipse.collections.impl.map.mutable.primitive.<name1><name2>HashMap;
+import org.eclipse.collections.impl.map.primitive.Abstract<name1><name2>MapTestCase;
+import org.eclipse.collections.impl.test.Verify;
+import org.junit.Assert;
+import org.junit.Test;
+
+/**
+ * Abstract JUnit test for {@link Immutable<name1><name2>Map}.
+ * This file was automatically generated from template file abstractImmutablePrimitivePrimitiveMapTestCase.stg.
+ */
+public abstract class AbstractImmutable<name1><name2>MapTestCase extends Abstract<name1><name2>MapTestCase
+{
+    @Override
+    protected Immutable<name1><name2>Map classUnderTest()
+    {
+        return <name1><name2>Maps.immutable.withAll(<name1><name2>HashMap.newWithKeysValues(<["0", "31", "32"]:keyValue(); separator=", ">));
+    }
+
+    @Override
+    protected Immutable<name1><name2>Map newWithKeysValues(<type1> key1, <type2> value1)
+    {
+        return <name1><name2>Maps.immutable.with(key1, value1);
+    }
+
+    @Override
+    protected Immutable<name1><name2>Map newWithKeysValues(<type1> key1, <type2> value1, <type1> key2, <type2> value2)
+    {
+        return <name1><name2>Maps.immutable.withAll(new <name1><name2>HashMap(2).withKeysValues(key1, value1, key2, value2));
+    }
+
+    @Override
+    protected Immutable<name1><name2>Map newWithKeysValues(<type1> key1, <type2> value1, <type1> key2, <type2> value2, <type1> key3, <type2> value3)
+    {
+        return <name1><name2>Maps.immutable.withAll(new <name1><name2>HashMap(3).withKeysValues(key1, value1, key2, value2, key3, value3));
+    }
+
+    @Override
+    protected Immutable<name1><name2>Map newWithKeysValues(<type1> key1, <type2> value1, <type1> key2, <type2> value2, <type1> key3, <type2> value3, <type1> key4, <type2> value4)
+    {
+        return <name1><name2>Maps.immutable.withAll(new <name1><name2>HashMap(4).withKeysValues(key1, value1, key2, value2, key3, value3, key4, value4));
+    }
+
+    @Override
+    protected Immutable<name1><name2>Map getEmptyMap()
+    {
+        return <name1><name2>Maps.immutable.with();
+    }
+
+    @Override
+    @Test
+    public void testEquals()
+    {
+        <name1><name2>Map map1 = this.newWithKeysValues(<["0", "1", "32"]:keyValue(); separator=", ">);
+        <name1><name2>Map map2 = this.newWithKeysValues(<["32", "0", "1"]:keyValue(); separator=", ">);
+        <name1><name2>Map map3 = this.newWithKeysValues(<["0"]:keyValue(); separator=", ">, <(literal.(type1))("1")>, <(literal.(type2))("2")>, <["32"]:keyValue(); separator=", ">);
+        <name1><name2>Map map4 = this.newWithKeysValues(<(literal.(type1))("0")>, <(literal.(type2))("1")>, <["1", "32"]:keyValue(); separator=", ">);
+        <name1><name2>Map map5 = this.newWithKeysValues(<["0", "1"]:keyValue(); separator=", ">, <(literal.(type1))("32")>, <(literal.(type2))("33")>);
+        <name1><name2>Map map6 = this.newWithKeysValues(<(literal.(type1))("50")>, <(literal.(type2))("0")>, <(literal.(type1))("60")>, <(literal.(type2))("1")>, <(literal.(type1))("70")>, <(literal.(type2))("33")>);
+        <name1><name2>Map map7 = this.newWithKeysValues(<(literal.(type1))("50")>, <(literal.(type2))("0")>, <(literal.(type1))("60")>, <(literal.(type2))("1")>);
+        <name1><name2>Map map8 = this.newWithKeysValues(<["0", "1"]:keyValue(); separator=", ">);
+
+        Verify.assertEqualsAndHashCode(map1, map2);
+        Verify.assertPostSerializedEqualsAndHashCode(map1);
+        Verify.assertPostSerializedEqualsAndHashCode(map6);
+        Verify.assertPostSerializedEqualsAndHashCode(map8);
+        Verify.assertPostSerializedIdentity(this.getEmptyMap());
+        Assert.assertNotEquals(map1, map3);
+        Assert.assertNotEquals(map1, map4);
+        Assert.assertNotEquals(map1, map5);
+        Assert.assertNotEquals(map7, map6);
+        Assert.assertNotEquals(map7, map8);
+    }
+
+    @Override
+    @Test
+    public void keySet()
+    {
+        super.keySet();
+        Verify.assertThrows(
+                UnsupportedOperationException.class,
+                () -> this.classUnderTest().keySet().remove(<(literal.(type1))("0")>));
+    }
+
+    @Override
+    public void values()
+    {
+        super.values();
+        Verify.assertThrows(
+                UnsupportedOperationException.class,
+                () -> this.classUnderTest().values().remove(<(literal.(type2))("0")>));
+    }
+}
+
+>>
+
+keyValue(value) ::= <<
+<(literal.(type1))(value)>, <(literal.(type2))(value)>
+>>

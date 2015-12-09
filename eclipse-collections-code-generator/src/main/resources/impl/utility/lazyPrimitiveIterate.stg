@@ -1,0 +1,87 @@
+import "copyright.stg"
+
+targetPath() ::= "org/eclipse/collections/impl/utility/primitive"
+
+fileName(primitive) ::= "Lazy<primitive.name>Iterate"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.utility.primitive;
+
+import org.eclipse.collections.api.<name>Iterable;
+import org.eclipse.collections.api.Lazy<name>Iterable;
+import org.eclipse.collections.api.LazyIterable;
+import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
+import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
+import org.eclipse.collections.impl.factory.primitive.<name>Lists;
+import org.eclipse.collections.impl.lazy.primitive.Collect<name>ToObjectIterable;
+import org.eclipse.collections.impl.lazy.primitive.Lazy<name>IterableAdapter;
+import org.eclipse.collections.impl.lazy.primitive.Select<name>Iterable;
+
+/**
+ * Lazy<name>Iterate is a factory class which creates "deferred" <type> iterables around the specified <type> iterables. A "deferred"
+ * <type> iterable performs some operation, such as filtering or transforming, when the result <type> iterable is iterated over.  This
+ * makes the operation very memory efficient, because you don't have to create intermediate collections during the
+ * operation.
+ * This file was automatically generated from template file lazyPrimitiveIterate.stg.
+ *
+ * @since 5.0
+ */
+public final class Lazy<name>Iterate
+{
+    private static final Lazy<name>Iterable EMPTY_ITERABLE = <name>Lists.immutable.of().asLazy();
+
+    private Lazy<name>Iterate()
+    {
+        throw new AssertionError("Suppress default constructor for noninstantiability");
+    }
+
+    /**
+     * Creates a deferred <type> iterable for the specified <type> iterable.
+     */
+    public static Lazy<name>Iterable adapt(<name>Iterable iterable)
+    {
+        return new Lazy<name>IterableAdapter(iterable);
+    }
+
+    /**
+     * Creates a deferred filtering <type> iterable for the specified <type> iterable.
+     */
+    public static Lazy<name>Iterable select(<name>Iterable iterable, <name>Predicate predicate)
+    {
+        return new Select<name>Iterable(iterable, predicate);
+    }
+
+    /**
+     * Creates a deferred transforming <type> iterable for the specified <type> iterable.
+     */
+    public static \<V> LazyIterable\<V> collect(
+            <name>Iterable iterable,
+            <name>ToObjectFunction\<? extends V> function)
+    {
+        return new Collect<name>ToObjectIterable\<V>(iterable, function);
+    }
+
+    /**
+     * Creates a deferred filtering and transforming <type> iterable for the specified <type> iterable.
+     */
+    public static \<V> LazyIterable\<V> collectIf(
+            <name>Iterable iterable,
+            <name>Predicate predicate,
+            <name>ToObjectFunction\<? extends V> function)
+    {
+        return Lazy<name>Iterate.select(iterable, predicate).collect(function);
+    }
+
+    public static Lazy<name>Iterable empty()
+    {
+        return EMPTY_ITERABLE;
+    }
+}
+
+>>

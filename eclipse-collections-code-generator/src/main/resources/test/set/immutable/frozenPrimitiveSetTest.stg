@@ -1,0 +1,59 @@
+import "copyright.stg"
+import "primitiveLiteral.stg"
+
+isTest() ::= "true"
+
+skipBoolean() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/set/immutable/primitive"
+
+fileName(primitive) ::= "Frozen<primitive.name>HashSetTest"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.wrapperName, primitive.name)>
+>>
+
+body(type, wrapperName, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.set.immutable.primitive;
+
+import org.eclipse.collections.api.set.MutableSet;
+import org.eclipse.collections.api.set.primitive.Immutable<name>Set;
+import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
+import org.eclipse.collections.impl.set.mutable.UnifiedSet;
+import org.eclipse.collections.impl.set.mutable.primitive.AbstractImmutable<name>HashSetTestCase;
+import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
+
+/**
+ * JUnit test for {@link Immutable<name>Set} created from the freeze() method.
+ * This file was automatically generated from template file frozenPrimitiveSetTest.stg.
+ */
+public class Frozen<name>HashSetTest extends AbstractImmutable<name>HashSetTestCase
+{
+    @Override
+    protected Immutable<name>Set classUnderTest()
+    {
+        return (Immutable<name>Set) <name>HashSet.newSetWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">).freeze();
+    }
+
+    @Override
+    protected Immutable<name>Set newWith(<type>... elements)
+    {
+        return (Immutable<name>Set) <name>HashSet.newSetWith(elements).freeze();
+    }
+
+    @Override
+    protected Mutable<name>Set newMutableCollectionWith(<type>... elements)
+    {
+        return <name>HashSet.newSetWith(elements);
+    }
+
+    @Override
+    protected MutableSet\<<wrapperName>\> newObjectCollectionWith(<wrapperName>... elements)
+    {
+        return UnifiedSet.newSetWith(elements);
+    }
+}
+
+>>

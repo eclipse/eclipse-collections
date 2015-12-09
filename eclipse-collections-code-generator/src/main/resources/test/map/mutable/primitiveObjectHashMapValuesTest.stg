@@ -1,0 +1,258 @@
+import "copyright.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+import "primitiveEquals.stg"
+
+skipBoolean() ::= "true"
+
+isTest() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/map/mutable/primitive"
+
+fileName(primitive) ::= "<primitive.name>ObjectHashMapValuesTest"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name, primitive.wrapperName)>
+>>
+
+body(type, name, wrapperName) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.map.mutable.primitive;
+
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
+import org.eclipse.collections.api.map.primitive.Mutable<name>ObjectMap;
+import org.eclipse.collections.api.set.MutableSet;
+import org.eclipse.collections.impl.bag.mutable.HashBag;
+import org.eclipse.collections.impl.list.mutable.FastList;
+import org.eclipse.collections.impl.set.mutable.UnifiedSet;
+import org.eclipse.collections.impl.test.Verify;
+import org.junit.Assert;
+import org.junit.Test;
+
+/**
+ * JUnit test for {@link <name>ObjectHashMap#values()}.
+ *
+ * This file was automatically generated from template file primitiveObjectHashMapValuesTest.stg.
+ */
+public class <name>ObjectHashMapValuesTest
+{
+    private <name>ObjectHashMap\<String> newMapWithKeysValues(<type> key1, String value1, <type> key2, String value2)
+    {
+        return <name>ObjectHashMap.newWithKeysValues(key1, value1, key2, value2);
+    }
+
+    private <name>ObjectHashMap\<Integer> newMapWithKeysValues(<type> key1, Integer value1, <type> key2, Integer value2, <type> key3, Integer value3)
+    {
+        return <name>ObjectHashMap.newWithKeysValues(key1, value1, key2, value2, key3, value3);
+    }
+
+    private <name>ObjectHashMap\<Integer> newMapWithKeysValues(<type> key1, Integer value1, <type> key2, Integer value2, <type> key3, Integer value3, <type> key4, Integer value4)
+    {
+        return <name>ObjectHashMap.newWithKeysValues(key1, value1, key2, value2, key3, value3).withKeyValue(key4, value4);
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void add()
+    {
+        this.newMapWithKeysValues(<(literal.(type))("1")>, 1, <(literal.(type))("2")>, 2, <(literal.(type))("3")>, 3).values().add(4);
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void addAll()
+    {
+        this.newMapWithKeysValues(<(literal.(type))("1")>, 1, <(literal.(type))("2")>, 2, <(literal.(type))("3")>, 3).values().addAll(FastList.newListWith(4));
+    }
+
+    @Test
+    public void clear()
+    {
+        <name>ObjectHashMap\<Integer> map = this.newMapWithKeysValues(<(literal.(type))("1")>, 1, <(literal.(type))("2")>, 2, <(literal.(type))("3")>, 3);
+        map.values().clear();
+        Verify.assertIterableEmpty(map);
+        Verify.assertEmpty(map.values());
+    }
+
+    @Test
+    public void contains()
+    {
+        <name>ObjectHashMap\<Integer> map = this.newMapWithKeysValues(<(literal.(type))("1")>, 1, <(literal.(type))("2")>, 2, <(literal.(type))("3")>, null);
+        Collection\<Integer> values = map.values();
+        Assert.assertTrue(values.contains(1));
+        Assert.assertTrue(values.contains(2));
+        Assert.assertTrue(values.contains(null));
+        Assert.assertFalse(values.contains(4));
+        values.remove(null);
+        Assert.assertFalse(values.contains(null));
+        map.removeKey(<(literal.(type))("1")>);
+        Assert.assertFalse(values.contains(1));
+    }
+
+    @Test
+    public void containsAll()
+    {
+        <name>ObjectHashMap\<Integer> map = this.newMapWithKeysValues(<(literal.(type))("1")>, 1, <(literal.(type))("2")>, 2, <(literal.(type))("3")>, null);
+        Collection\<Integer> values = map.values();
+        Assert.assertTrue(values.containsAll(FastList.newListWith(1, 2)));
+        Assert.assertTrue(values.containsAll(FastList.newListWith(1, 2, null)));
+        Assert.assertTrue(values.containsAll(FastList.newListWith(null, null)));
+        Assert.assertFalse(values.containsAll(FastList.newListWith(1, 4)));
+        Assert.assertFalse(values.containsAll(FastList.newListWith(5, 4)));
+        values.remove(null);
+        Assert.assertFalse(values.containsAll(FastList.newListWith(1, 2, null)));
+        Assert.assertTrue(values.containsAll(FastList.newListWith(1, 2)));
+        map.removeKey(<(literal.(type))("1")>);
+        Assert.assertFalse(values.containsAll(FastList.newListWith(1, 2)));
+        Assert.assertTrue(values.containsAll(FastList.newListWith(2)));
+    }
+
+    @Test
+    public void isEmpty()
+    {
+        <name>ObjectHashMap\<Integer> map = this.newMapWithKeysValues(<(literal.(type))("1")>, 1, <(literal.(type))("2")>, 2, <(literal.(type))("3")>, 3, <(literal.(type))("1")>, null);
+        Collection\<Integer> values = map.values();
+        Assert.assertFalse(values.isEmpty());
+        <name>ObjectHashMap\<Integer> map1 = <name>ObjectHashMap.newMap();
+        Collection\<Integer> values1 = map1.values();
+        Assert.assertTrue(values1.isEmpty());
+        map1.put(<(literal.(type))("1")>, 1);
+        Assert.assertFalse(values1.isEmpty());
+    }
+
+    @Test
+    public void size()
+    {
+        <name>ObjectHashMap\<Integer> map = this.newMapWithKeysValues(<(literal.(type))("1")>, 1, <(literal.(type))("2")>, 2, <(literal.(type))("3")>, 3, <(literal.(type))("4")>, null);
+        Collection\<Integer> values = map.values();
+        Verify.assertSize(4, values);
+        map.remove(<(literal.(type))("1")>);
+        Verify.assertSize(3, values);
+        map.put(<(literal.(type))("5")>, 5);
+        Verify.assertSize(4, values);
+
+        <name>ObjectHashMap\<Integer> map1 = <name>ObjectHashMap.newMap();
+        Collection\<Integer> keySet1 = map1.values();
+        Verify.assertSize(0, keySet1);
+        map1.put(<(literal.(type))("1")>, null);
+        Verify.assertSize(1, keySet1);
+    }
+
+    @Test
+    public void iterator()
+    {
+        MutableSet\<String> expected = UnifiedSet.newSetWith("zero", "thirtyOne", null);
+        MutableSet\<String> actual = UnifiedSet.newSet();
+
+        Iterator\<String> iterator = <name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("31")>, "thirtyOne", <(literal.(type))("32")>, null).iterator();
+        Assert.assertTrue(iterator.hasNext());
+        actual.add(iterator.next());
+        Assert.assertTrue(iterator.hasNext());
+        actual.add(iterator.next());
+        Assert.assertTrue(iterator.hasNext());
+        actual.add(iterator.next());
+        Assert.assertFalse(iterator.hasNext());
+
+        Assert.assertEquals(expected, actual);
+        Verify.assertThrows(NoSuchElementException.class, iterator::next);
+
+        Mutable<name>ObjectMap\<String> map1 = this.newMapWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("1")>, null);
+        Iterator\<String> iterator1 = map1.iterator();
+        Verify.assertThrows(IllegalStateException.class, (Runnable) iterator1::remove);
+        iterator1.next();
+        iterator1.remove();
+        Assert.assertTrue(map1.toString(), <name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "zero").equals(map1)
+                || <name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, null).equals(map1));
+        iterator1.next();
+        iterator1.remove();
+        Assert.assertEquals(<name>ObjectHashMap.newMap(), map1);
+        Verify.assertThrows(IllegalStateException.class, (Runnable) iterator1::remove);
+
+        Mutable<name>ObjectMap\<String> map2 = this.newMapWithKeysValues(<(literal.(type))("0")>, null, <(literal.(type))("9")>, "nine");
+        Iterator\<String> iterator2 = map2.iterator();
+        Verify.assertThrows(IllegalStateException.class, (Runnable) iterator2::remove);
+        iterator2.next();
+        iterator2.remove();
+        Assert.assertTrue(map2.toString(), <name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, null).equals(map2)
+                || <name>ObjectHashMap.newWithKeysValues(<(literal.(type))("9")>, "nine").equals(map2));
+        iterator2.next();
+        iterator2.remove();
+        Assert.assertEquals(<name>ObjectHashMap.newMap(), map2);
+
+        Mutable<name>ObjectMap\<String> map3 = this.newMapWithKeysValues(<(literal.(type))("8")>, "eight", <(literal.(type))("9")>, null);
+        Iterator\<String> iterator3 = map3.iterator();
+        Verify.assertThrows(IllegalStateException.class, (Runnable) iterator3::remove);
+        iterator3.next();
+        iterator3.remove();
+        Assert.assertTrue(map3.toString(), <name>ObjectHashMap.newWithKeysValues(<(literal.(type))("8")>, "eight").equals(map3)
+                || <name>ObjectHashMap.newWithKeysValues(<(literal.(type))("9")>, null).equals(map3));
+        iterator3.next();
+        iterator3.remove();
+        Assert.assertEquals(<name>ObjectHashMap.newMap(), map3);
+    }
+
+    @Test
+    public void values()
+    {
+        <name>ObjectHashMap\<Integer> map = this.newMapWithKeysValues(<(literal.(type))("1")>, 1, <(literal.(type))("2")>, 2, <(literal.(type))("3")>, 3);
+        Verify.assertContainsAll(map.values(), 1, 2, 3);
+    }
+
+    @Test
+    public void removeFromValues()
+    {
+        <name>ObjectHashMap\<Integer> map = this.newMapWithKeysValues(<(literal.(type))("1")>, 1, <(literal.(type))("2")>, 2, <(literal.(type))("3")>, 3);
+        Assert.assertFalse(map.values().remove(4));
+
+        Assert.assertTrue(map.values().remove(2));
+        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, 1, <(literal.(type))("3")>, 3), map);
+    }
+
+    @Test
+    public void removeNullFromValues()
+    {
+        <name>ObjectHashMap\<Integer> map = this.newMapWithKeysValues(<(literal.(type))("1")>, 1, <(literal.(type))("2")>, 2, <(literal.(type))("3")>, 3);
+        Assert.assertFalse(map.values().remove(null));
+        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, 1, <(literal.(type))("2")>, 2, <(literal.(type))("3")>, 3), map);
+        map.put(<(literal.(type))("4")>, null);
+        Assert.assertTrue(map.values().remove(null));
+        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, 1, <(literal.(type))("2")>, 2, <(literal.(type))("3")>, 3), map);
+    }
+
+    @Test
+    public void removeAllFromValues()
+    {
+        <name>ObjectHashMap\<Integer> map = this.newMapWithKeysValues(<(literal.(type))("1")>, 1, <(literal.(type))("2")>, 2, <(literal.(type))("3")>, 3);
+        Assert.assertFalse(map.values().removeAll(FastList.newListWith(4)));
+
+        Assert.assertTrue(map.values().removeAll(FastList.newListWith(2, 4)));
+        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, 1, <(literal.(type))("3")>, 3), map);
+    }
+
+    @Test
+    public void retainAllFromValues()
+    {
+        <name>ObjectHashMap\<Integer> map = this.newMapWithKeysValues(<(literal.(type))("1")>, 1, <(literal.(type))("2")>, 2, <(literal.(type))("3")>, 3);
+        Assert.assertFalse(map.values().retainAll(FastList.newListWith(1, 2, 3, 4)));
+
+        Assert.assertTrue(map.values().retainAll(FastList.newListWith(1, 3)));
+        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, 1, <(literal.(type))("3")>, 3), map);
+    }
+
+    @Test
+    public void valuesToArray()
+    {
+        <name>ObjectHashMap\<Integer> map = this.newMapWithKeysValues(<(literal.(type))("1")>, 1, <(literal.(type))("2")>, 2, <(literal.(type))("3")>, null);
+        HashBag\<Integer> expected = HashBag.newBagWith(1, 2, null);
+        Collection\<Integer> values = map.values();
+        Assert.assertEquals(expected, HashBag.newBagWith(values.toArray()));
+        Assert.assertEquals(expected, HashBag.newBagWith(values.toArray(new Integer[values.size()])));
+        Assert.assertEquals(expected, HashBag.newBagWith(values.toArray(new Integer[0])));
+        expected.add(null);
+        Assert.assertEquals(expected, HashBag.newBagWith(values.toArray(new Integer[values.size() + 1])));
+    }
+}
+
+>>

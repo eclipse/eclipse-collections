@@ -1,0 +1,239 @@
+import "copyright.stg"
+import "primitiveEquals.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+
+targetPath() ::= "org/eclipse/collections/impl/lazy/primitive"
+
+skipBoolean() ::= "true"
+
+fileName(primitive) ::= "Collect<primitive.name>Iterable"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.lazy.primitive;
+
+import java.util.Arrays;
+import java.util.Iterator;
+
+import org.eclipse.collections.api.<name>Iterable;
+import org.eclipse.collections.api.LazyIterable;
+import org.eclipse.collections.api.bag.primitive.Mutable<name>Bag;
+import org.eclipse.collections.api.block.function.primitive.<name>Function;
+import org.eclipse.collections.api.block.predicate.Predicate;
+import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
+import org.eclipse.collections.api.block.procedure.Procedure2;
+import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
+import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
+import org.eclipse.collections.api.iterator.<name>Iterator;
+import org.eclipse.collections.api.list.primitive.Mutable<name>List;
+import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
+import org.eclipse.collections.impl.bag.mutable.primitive.<name>HashBag;
+import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
+import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
+import net.jcip.annotations.Immutable;
+
+/**
+ * This file was automatically generated from template file collectPrimitiveIterable.stg.
+ */
+@Immutable
+public class Collect<name>Iterable\<T>
+        extends AbstractLazy<name>Iterable
+{
+    private final LazyIterable\<T> iterable;
+    private final <name>Function\<? super T> function;
+    private final <name>FunctionToProcedure\<T> <type>FunctionToProcedure;
+
+    public Collect<name>Iterable(LazyIterable\<T> adapted, <name>Function\<? super T> function)
+    {
+        this.iterable = adapted;
+        this.function = function;
+        this.<type>FunctionToProcedure = new <name>FunctionToProcedure\<T>(function);
+    }
+
+    public <name>Iterator <type>Iterator()
+    {
+        return new <name>Iterator()
+        {
+            private final Iterator\<T> iterator = Collect<name>Iterable.this.iterable.iterator();
+
+            public <type> next()
+            {
+                return Collect<name>Iterable.this.function.<type>ValueOf(this.iterator.next());
+            }
+
+            public boolean hasNext()
+            {
+                return this.iterator.hasNext();
+            }
+        };
+    }
+
+    public void forEach(<name>Procedure procedure)
+    {
+        this.each(procedure);
+    }
+
+    /**
+     * @since 7.0.
+     */
+    public void each(<name>Procedure procedure)
+    {
+        this.iterable.forEachWith(this.<type>FunctionToProcedure, procedure);
+    }
+
+    @Override
+    public int size()
+    {
+        return this.iterable.size();
+    }
+
+    @Override
+    public boolean isEmpty()
+    {
+        return this.iterable.isEmpty();
+    }
+
+    @Override
+    public boolean notEmpty()
+    {
+        return this.iterable.notEmpty();
+    }
+
+    @Override
+    public int count(final <name>Predicate predicate)
+    {
+        return this.iterable.count(new Predicate\<T>()
+        {
+            public boolean accept(T each)
+            {
+                return predicate.accept(Collect<name>Iterable.this.function.<type>ValueOf(each));
+            }
+        });
+    }
+
+    @Override
+    public boolean anySatisfy(final <name>Predicate predicate)
+    {
+        return this.iterable.anySatisfy(new Predicate\<T>()
+        {
+            public boolean accept(T each)
+            {
+                return predicate.accept(Collect<name>Iterable.this.function.<type>ValueOf(each));
+            }
+        });
+    }
+
+    @Override
+    public boolean allSatisfy(final <name>Predicate predicate)
+    {
+        return this.iterable.allSatisfy(new Predicate\<T>()
+        {
+            public boolean accept(T each)
+            {
+                return predicate.accept(Collect<name>Iterable.this.function.<type>ValueOf(each));
+            }
+        });
+    }
+
+    @Override
+    public boolean noneSatisfy(final <name>Predicate predicate)
+    {
+        return this.iterable.allSatisfy(new Predicate\<T>()
+        {
+            public boolean accept(T each)
+            {
+                return !predicate.accept(Collect<name>Iterable.this.function.<type>ValueOf(each));
+            }
+        });
+    }
+
+    @Override
+    public <type>[] toArray()
+    {
+        final <type>[] array = new <type>[this.size()];
+        this.iterable.forEachWithIndex(new ObjectIntProcedure\<T>()
+        {
+            public void value(T each, int index)
+            {
+                array[index] = Collect<name>Iterable.this.function.<type>ValueOf(each);
+            }
+        });
+        return array;
+    }
+
+    @Override
+    public <type>[] toSortedArray()
+    {
+        <type>[] array = this.toArray();
+        Arrays.sort(array);
+        return array;
+    }
+
+    @Override
+    public Mutable<name>List toList()
+    {
+        return <name>ArrayList.newList(this);
+    }
+
+    @Override
+    public Mutable<name>Set toSet()
+    {
+        return <name>HashSet.newSet(this);
+    }
+
+    @Override
+    public Mutable<name>Bag toBag()
+    {
+        return <name>HashBag.newBag(this);
+    }
+
+    @Override
+    public boolean containsAll(<type>... source)
+    {
+        for (<type> value : source)
+        {
+            if (!this.contains(value))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public boolean containsAll(<name>Iterable source)
+    {
+        for (<name>Iterator iterator = source.<type>Iterator(); iterator.hasNext(); )
+        {
+            if (!this.contains(iterator.next()))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private static final class <name>FunctionToProcedure\<T> implements Procedure2\<T, <name>Procedure>
+    {
+        private static final long serialVersionUID = 1L;
+        private final <name>Function\<? super T> function;
+
+        private <name>FunctionToProcedure(<name>Function\<? super T> function)
+        {
+            this.function = function;
+        }
+
+        public void value(T each, <name>Procedure procedure)
+        {
+            procedure.value(this.function.<type>ValueOf(each));
+        }
+    }
+}
+
+>>

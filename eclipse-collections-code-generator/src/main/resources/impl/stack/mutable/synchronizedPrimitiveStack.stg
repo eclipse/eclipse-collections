@@ -1,0 +1,497 @@
+import "copyright.stg"
+import "primitiveEquals.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+
+targetPath() ::= "org/eclipse/collections/impl/stack/mutable/primitive"
+
+fileName(primitive) ::= "Synchronized<primitive.name>Stack"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.stack.mutable.primitive;
+
+import java.io.Serializable;
+import java.util.Collection;
+import java.util.Collections;
+
+import org.eclipse.collections.api.<name>Iterable;
+import org.eclipse.collections.api.Lazy<name>Iterable;
+import org.eclipse.collections.api.bag.primitive.Mutable<name>Bag;
+import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
+import org.eclipse.collections.api.block.function.primitive.Object<name>ToObjectFunction;
+import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
+import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
+import org.eclipse.collections.api.iterator.<name>Iterator;
+import org.eclipse.collections.api.list.primitive.<name>List;
+import org.eclipse.collections.api.list.primitive.Mutable<name>List;
+import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
+import org.eclipse.collections.api.stack.MutableStack;
+import org.eclipse.collections.api.stack.primitive.Immutable<name>Stack;
+import org.eclipse.collections.api.stack.primitive.Mutable<name>Stack;
+import org.eclipse.collections.impl.factory.primitive.<name>Stacks;
+import org.eclipse.collections.impl.iterator.Unmodifiable<name>Iterator;
+import org.eclipse.collections.impl.lazy.primitive.Lazy<name>IterableAdapter;
+import net.jcip.annotations.GuardedBy;
+import net.jcip.annotations.ThreadSafe;
+
+/**
+ * A synchronized view of a {@link Mutable<name>Stack}. It is imperative that the user manually synchronize on the collection when iterating over it using the
+ * {@link <name>Iterator}, as per {@link Collections#synchronizedCollection(Collection)}.
+ * \<p>
+ * This file was automatically generated from template file synchronizedPrimitiveStack.stg.
+ *
+ * @see Mutable<name>Stack#asSynchronized()
+ * @see MutableStack#asSynchronized()
+ * @since 3.1.
+ */
+@ThreadSafe
+public final class Synchronized<name>Stack
+        implements Mutable<name>Stack, Serializable
+{
+    private static final long serialVersionUID = 1L;
+    private final Object lock;
+    @GuardedBy("this.lock")
+    private final Mutable<name>Stack stack;
+
+    Synchronized<name>Stack(Mutable<name>Stack stack)
+    {
+        this(stack, null);
+    }
+
+    Synchronized<name>Stack(Mutable<name>Stack stack, Object newLock)
+    {
+        this.stack = stack;
+        this.lock = newLock == null ? this : newLock;
+    }
+
+    public void push(<type> item)
+    {
+        synchronized (this.lock)
+        {
+            this.stack.push(item);
+        }
+    }
+
+    public <type> pop()
+    {
+        synchronized (this.lock)
+        {
+            return this.stack.pop();
+        }
+    }
+
+    public <name>List pop(int count)
+    {
+        synchronized (this.lock)
+        {
+            return this.stack.pop(count);
+        }
+    }
+
+    public <type> peek()
+    {
+        synchronized (this.lock)
+        {
+            return this.stack.peek();
+        }
+    }
+
+    public <name>List peek(int count)
+    {
+        synchronized (this.lock)
+        {
+            return this.stack.peek(count);
+        }
+    }
+
+    public <type> peekAt(int index)
+    {
+        synchronized (this.lock)
+        {
+            return this.stack.peekAt(index);
+        }
+    }
+
+    public int size()
+    {
+        synchronized (this.lock)
+        {
+            return this.stack.size();
+        }
+    }
+
+    public boolean isEmpty()
+    {
+        synchronized (this.lock)
+        {
+            return this.stack.isEmpty();
+        }
+    }
+
+    public boolean notEmpty()
+    {
+        synchronized (this.lock)
+        {
+            return this.stack.notEmpty();
+        }
+    }
+
+    public void clear()
+    {
+        synchronized (this.lock)
+        {
+            this.stack.clear();
+        }
+    }
+
+    public boolean contains(<type> value)
+    {
+        synchronized (this.lock)
+        {
+            return this.stack.contains(value);
+        }
+    }
+
+    public boolean containsAll(<type>... source)
+    {
+        synchronized (this.lock)
+        {
+            return this.stack.containsAll(source);
+        }
+    }
+
+    public boolean containsAll(<name>Iterable source)
+    {
+        synchronized (this.lock)
+        {
+            return this.stack.containsAll(source);
+        }
+    }
+
+    /**
+     * Must be called in a synchronized block.
+     */
+    public <name>Iterator <type>Iterator()
+    {
+        return new Unmodifiable<name>Iterator(this.stack.<type>Iterator());
+    }
+
+    public void forEach(<name>Procedure procedure)
+    {
+        this.each(procedure);
+    }
+
+    /**
+     * @since 7.0.
+     */
+    public void each(<name>Procedure procedure)
+    {
+        synchronized (this.lock)
+        {
+            this.stack.forEach(procedure);
+        }
+    }
+
+    public int count(<name>Predicate predicate)
+    {
+        synchronized (this.lock)
+        {
+            return this.stack.count(predicate);
+        }
+    }
+
+    public boolean anySatisfy(<name>Predicate predicate)
+    {
+        synchronized (this.lock)
+        {
+            return this.stack.anySatisfy(predicate);
+        }
+    }
+
+    public boolean allSatisfy(<name>Predicate predicate)
+    {
+        synchronized (this.lock)
+        {
+            return this.stack.allSatisfy(predicate);
+        }
+    }
+
+    public boolean noneSatisfy(<name>Predicate predicate)
+    {
+        synchronized (this.lock)
+        {
+            return this.stack.noneSatisfy(predicate);
+        }
+    }
+
+    public <type> detectIfNone(<name>Predicate predicate, <type> ifNone)
+    {
+        synchronized (this.lock)
+        {
+            return this.stack.detectIfNone(predicate, ifNone);
+        }
+    }
+
+    public Mutable<name>Stack select(<name>Predicate predicate)
+    {
+        synchronized (this.lock)
+        {
+            return this.stack.select(predicate);
+        }
+    }
+
+    public Mutable<name>Stack reject(<name>Predicate predicate)
+    {
+        synchronized (this.lock)
+        {
+            return this.stack.reject(predicate);
+        }
+    }
+
+    public \<V> MutableStack\<V> collect(<name>ToObjectFunction\<? extends V> function)
+    {
+        synchronized (this.lock)
+        {
+            return this.stack.collect(function);
+        }
+    }
+
+    <(arithmeticMethods.(type))(name, type)>
+    public <type>[] toArray()
+    {
+        synchronized (this.lock)
+        {
+            return this.stack.toArray();
+        }
+    }
+
+    @Override
+    public String toString()
+    {
+        synchronized (this.lock)
+        {
+            return this.stack.toString();
+        }
+    }
+
+    public String makeString()
+    {
+        synchronized (this.lock)
+        {
+            return this.stack.makeString();
+        }
+    }
+
+    public String makeString(String separator)
+    {
+        synchronized (this.lock)
+        {
+            return this.stack.makeString(separator);
+        }
+    }
+
+    public String makeString(String start, String separator, String end)
+    {
+        synchronized (this.lock)
+        {
+            return this.stack.makeString(start, separator, end);
+        }
+    }
+
+    public void appendString(Appendable appendable)
+    {
+        synchronized (this.lock)
+        {
+            this.stack.appendString(appendable);
+        }
+    }
+
+    public void appendString(Appendable appendable, String separator)
+    {
+        synchronized (this.lock)
+        {
+            this.stack.appendString(appendable, separator);
+        }
+    }
+
+    public void appendString(
+            Appendable appendable,
+            String start,
+            String separator,
+            String end)
+    {
+        synchronized (this.lock)
+        {
+            this.stack.appendString(appendable, start, separator, end);
+        }
+    }
+
+    public Mutable<name>List toList()
+    {
+        synchronized (this.lock)
+        {
+            return this.stack.toList();
+        }
+    }
+
+    public Mutable<name>Set toSet()
+    {
+        synchronized (this.lock)
+        {
+            return this.stack.toSet();
+        }
+    }
+
+    public Mutable<name>Bag toBag()
+    {
+        synchronized (this.lock)
+        {
+            return this.stack.toBag();
+        }
+    }
+
+    @Override
+    public boolean equals(Object otherStack)
+    {
+        synchronized (this.lock)
+        {
+            return this.stack.equals(otherStack);
+        }
+    }
+
+    @Override
+    public int hashCode()
+    {
+        synchronized (this.lock)
+        {
+            return this.stack.hashCode();
+        }
+    }
+
+    public Lazy<name>Iterable asLazy()
+    {
+        synchronized (this.lock)
+        {
+            return new Lazy<name>IterableAdapter(this);
+        }
+    }
+
+    public Mutable<name>Stack asUnmodifiable()
+    {
+        return new Unmodifiable<name>Stack(this);
+    }
+
+    public Mutable<name>Stack asSynchronized()
+    {
+        return this;
+    }
+
+    public Immutable<name>Stack toImmutable()
+    {
+        return <name>Stacks.immutable.withAllReversed(this);
+    }
+
+    public \<T> T injectInto(T injectedValue, Object<name>ToObjectFunction\<? super T, ? extends T> function)
+    {
+        synchronized (this.lock)
+        {
+            return this.stack.injectInto(injectedValue, function);
+        }
+    }
+}
+
+>>
+
+arithmeticMethods ::= [
+    "byte": "allMethods",
+    "short": "allMethods",
+    "char": "allMethods",
+    "int": "allMethods",
+    "long": "allMethods",
+    "float": "allMethods",
+    "double": "allMethods",
+    "boolean": "noMethods"
+    ]
+
+allMethods(name, type) ::=<<
+public <wideType.(type)> sum()
+{
+    synchronized (this.lock)
+    {
+        return this.stack.sum();
+    }
+}
+
+public <type> max()
+{
+    synchronized (this.lock)
+    {
+        return this.stack.max();
+    }
+}
+
+public <type> min()
+{
+    synchronized (this.lock)
+    {
+        return this.stack.min();
+    }
+}
+
+public <type> minIfEmpty(<type> defaultValue)
+{
+    synchronized (this.lock)
+    {
+        return this.stack.minIfEmpty(defaultValue);
+    }
+}
+
+public <type> maxIfEmpty(<type> defaultValue)
+{
+    synchronized (this.lock)
+    {
+        return this.stack.maxIfEmpty(defaultValue);
+    }
+}
+
+public double average()
+{
+    synchronized (this.lock)
+    {
+        return this.stack.average();
+    }
+}
+
+public double median()
+{
+    synchronized (this.lock)
+    {
+        return this.stack.median();
+    }
+}
+
+public Mutable<name>List toSortedList()
+{
+    synchronized (this.lock)
+    {
+        return this.stack.toSortedList();
+    }
+}
+
+public <type>[] toSortedArray()
+{
+    synchronized (this.lock)
+    {
+        return this.stack.toSortedArray();
+    }
+}
+
+>>
+
+noMethods(name, type) ::= ""

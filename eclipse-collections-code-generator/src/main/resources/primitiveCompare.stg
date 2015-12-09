@@ -1,0 +1,27 @@
+compare ::= [
+    "boolean": "booleanCompare",
+    "byte": "narrowCompare",
+    "short": "narrowCompare",
+    "char": "narrowCompare",
+    "int": "wideCompare",
+    "long": "wideCompare",
+    "float": "wrapperCompare",
+    "double": "wrapperCompare",
+    default: "no matching Compare"
+]
+
+booleanCompare(left, right, wrapperName) ::= <<
+<left> == <right> ? 0 : <left> ? 1 : -1
+>>
+
+narrowCompare(left, right, wrapperName) ::= <<
+<left> - <right>
+>>
+
+wideCompare(left, right, wrapperName) ::= <<
+<left> \< <right> ? -1 : <left> > <right> ? 1 : 0
+>>
+
+wrapperCompare(left, right, wrapperName) ::= <<
+<wrapperName>.compare(<left>, <right>)
+>>

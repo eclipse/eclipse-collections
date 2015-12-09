@@ -1,0 +1,96 @@
+import "copyright.stg"
+import "primitiveEquals.stg"
+import "primitiveHashCode.stg"
+import "primitiveAPI.stg"
+import "primitiveLiteral.stg"
+
+targetPath() ::= "org/eclipse/collections/api/list/primitive"
+
+fileName(primitive) ::= "<primitive.name>List"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.api.list.primitive;
+
+import java.util.List;
+
+import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
+import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
+import org.eclipse.collections.api.list.ListIterable;
+import org.eclipse.collections.api.ordered.primitive.Reversible<name>Iterable;
+
+/**
+ * This file was automatically generated from template file primitiveList.stg.
+ *
+ * @since 3.0.
+ */
+public interface <name>List extends Reversible<name>Iterable
+{
+    <type> get(int index);
+
+    <(arithmeticMethods.(type))(name, type)>
+    int lastIndexOf(<type> value);
+
+    <sharedAPI(fileName(primitive), name)>
+
+    \<V> ListIterable\<V> collect(<name>ToObjectFunction\<? extends V> function);
+
+    /**
+     * Follows the same general contract as {@link List#equals(Object)}.
+     */
+    @Override
+    boolean equals(Object o);
+
+    /**
+     * Follows the same general contract as {@link List#hashCode()}.
+     */
+    @Override
+    int hashCode();
+
+    /**
+     * Returns an immutable copy of this list. If the list is immutable, it returns itself.
+     */
+    Immutable<name>List toImmutable();
+
+    /**
+     * @since 6.0.
+     */
+    <name>List distinct();
+
+    /**
+     * @since 5.0.
+     */
+    <name>List toReversed();
+
+    /**
+     * @see {@link List#subList(int fromIndex, int toIndex)}
+     * @since 5.0.
+     */
+    <name>List subList(int fromIndex, int toIndex);
+}
+
+>>
+arithmeticMethods ::= [
+"byte": "allMethods",
+"short": "allMethods",
+"char": "allMethods",
+"int": "allMethods",
+"long": "allMethods",
+"float": "allMethods",
+"double": "allMethods",
+"boolean": "noMethods"
+]
+
+allMethods(name, type) ::=<<
+<wideType.(type)> dotProduct(<name>List list);
+
+int binarySearch(<type> value);
+
+>>
+
+noMethods(name, type) ::= ""

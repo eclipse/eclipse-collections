@@ -1,0 +1,113 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright (c) 2015 Goldman Sachs.
+  ~ All rights reserved. This program and the accompanying materials
+  ~ are made available under the terms of the Eclipse Public License v1.0
+  ~ and Eclipse Distribution License v. 1.0 which accompany this distribution.
+  ~ The Eclipse Public License is available at http://www.eclipse.org/legal/epl-v10.html
+  ~ and the Eclipse Distribution License is available at
+  ~ http://www.eclipse.org/org/documents/edl-v10.php.
+  -->
+
+<project name="eclipse-collections-parent" default="test" xmlns:ivy="antlib:org.apache.ivy.ant">
+    <description>
+        A delegating master build file, which builds targets in each module
+    </description>
+
+    <property file="version.properties" />
+
+    <target name="clean" description="runs the clean build in each module">
+        <delete dir="target" />
+        <sub-target target="clean" />
+    </target>
+
+    <target name="install" description="installs the artifacts to the local cache">
+        <subant buildpath="./eclipse-collections-code-generator/" target="install" />
+        <subant buildpath="./eclipse-collections-code-generator-ant/" target="install" />
+        <subant buildpath="./eclipse-collections-api/" target="install" />
+        <subant buildpath="./eclipse-collections/" target="install" />
+        <subant buildpath="./eclipse-collections-testutils/" target="install" />
+        <subant buildpath="./eclipse-collections-forkjoin/" target="install" />
+    </target>
+
+    <target name="generate-sources" description="generates sources">
+        <sub-target target="generate-sources" />
+    </target>
+
+    <target name="test" depends="ivy-init, install" description="runs the test build in each module">
+        <sub-target target="test" />
+    </target>
+
+    <target name="zip" depends="ivy-init, install" description="runs the zip build in each module">
+        <subant buildpath="./eclipse-collections-api/" target="zip" />
+        <subant buildpath="./eclipse-collections/" target="zip" />
+        <subant buildpath="./eclipse-collections-testutils/" target="zip" />
+        <subant buildpath="./eclipse-collections-forkjoin/" target="zip" />
+    </target>
+
+    <target name="ivy-init">
+        <!-- download Ivy from web site so that it can be used even without any special installation -->
+        <get
+            src="http://repo1.maven.org/maven2/org/apache/ivy/ivy/${ivy.version}/ivy-${ivy.version}.jar"
+            dest="ivy-${ivy.version}.jar"
+            skipexisting="true"
+            verbose="true" />
+    </target>
+
+    <target name="ivy-clean" depends="ivy-init" description="clean the ivy cache">
+        <property name="ivy.jar.file" value="${basedir}/ivy-${ivy.version}.jar" />
+        <path id="ivy.lib.path">
+            <pathelement location="${ivy.jar.file}" />
+        </path>
+
+        <taskdef
+            resource="org/apache/ivy/ant/antlib.xml"
+            uri="antlib:org.apache.ivy.ant"
+            classpathref="ivy.lib.path" />
+
+        <ivy:cleancache />
+    </target>
+
+    <filelist id="modules">
+        <file name="eclipse-collections-code-generator" />
+        <file name="eclipse-collections-code-generator-ant" />
+        <file name="eclipse-collections-api" />
+        <file name="eclipse-collections" />
+        <file name="eclipse-collections-testutils" />
+        <file name="eclipse-collections-forkjoin" />
+    </filelist>
+
+    <filelist id="all-modules">
+        <file name="eclipse-collections-code-generator" />
+        <file name="eclipse-collections-code-generator-ant" />
+        <file name="eclipse-collections-api" />
+        <file name="eclipse-collections" />
+        <file name="eclipse-collections-testutils" />
+        <file name="eclipse-collections-forkjoin" />
+        <file name="unit-tests" />
+        <file name="scala-unit-tests" />
+        <file name="serialization-tests" />
+        <file name="acceptance-tests" />
+    </filelist>
+
+    <macrodef name="sub-target">
+        <attribute name="target" default="test" />
+
+        <sequential>
+            <subant target="@{target}" verbose="true" inheritall="true">
+                <filelist refid="modules" />
+            </subant>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="sub-target-all">
+        <attribute name="target" default="test" />
+
+        <sequential>
+            <subant target="@{target}" verbose="true" inheritall="true">
+                <filelist refid="all-modules" />
+            </subant>
+        </sequential>
+    </macrodef>
+</project>
+

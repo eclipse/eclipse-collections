@@ -1,0 +1,54 @@
+import "copyright.stg"
+
+targetPath() ::= "org/eclipse/collections/api/factory/bag/primitive"
+
+fileName(primitive) ::= "Mutable<primitive.name>BagFactory"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.api.factory.bag.primitive;
+
+import org.eclipse.collections.api.<name>Iterable;
+import org.eclipse.collections.api.bag.primitive.Mutable<name>Bag;
+
+/**
+ * A factory which creates instances of type {@link Mutable<name>Bag}.
+ * This file was automatically generated from template file mutablePrimitiveBagFactory.stg.
+ *
+ * @since 6.0.
+ */
+public interface Mutable<name>BagFactory
+{
+    Mutable<name>Bag empty();
+
+    /**
+     * Same as {@link #empty()}.
+     */
+    Mutable<name>Bag of();
+
+    /**
+     * Same as {@link #empty()}.
+     */
+    Mutable<name>Bag with();
+
+    /**
+     * Same as {@link #with(<type>[])}.
+     */
+    Mutable<name>Bag of(<type>... items);
+
+    Mutable<name>Bag with(<type>... items);
+
+    /**
+     * Same as {@link #withAll(<name>Iterable)}.
+     */
+    Mutable<name>Bag ofAll(<name>Iterable items);
+
+    Mutable<name>Bag withAll(<name>Iterable items);
+}
+
+>>

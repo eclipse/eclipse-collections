@@ -1,0 +1,67 @@
+import "copyright.stg"
+import "primitiveAPI.stg"
+
+targetPath() ::= "org/eclipse/collections/api/bag/primitive"
+
+fileName(primitive) ::= "<primitive.name>Bag"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.api.bag.primitive;
+
+import org.eclipse.collections.api.<name>Iterable;
+import org.eclipse.collections.api.bag.Bag;
+import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
+import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
+import org.eclipse.collections.api.block.procedure.primitive.<name>IntProcedure;
+
+/**
+ * This file was automatically generated from template file primitiveBag.stg.
+ *
+ * @since 3.0.
+ */
+public interface <name>Bag extends <name>Iterable
+{
+    /**
+     * The size of the Bag when counting only distinct elements.
+     */
+    int sizeDistinct();
+
+    /**
+     * The occurrences of a distinct item in the bag.
+     */
+    int occurrencesOf(<type> item);
+
+    /**
+     * For each distinct item, with the number of occurrences, execute the specified procedure.
+     */
+    void forEachWithOccurrences(<name>IntProcedure procedure);
+
+    <sharedAPI(fileName(primitive), name)>
+
+    \<V> Bag\<V> collect(<name>ToObjectFunction\<? extends V> function);
+
+    /**
+     * Follows the same general contract as {@link Bag#equals(Object)}.
+     */
+    @Override
+    boolean equals(Object o);
+
+    /**
+     * Follows the same general contract as {@link Bag#hashCode()}.
+     */
+    @Override
+    int hashCode();
+
+    /**
+     * Returns an immutable copy of this bag. If the bag is immutable, it returns itself.
+     */
+    Immutable<name>Bag toImmutable();
+}
+
+>>

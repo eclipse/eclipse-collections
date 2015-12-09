@@ -1,0 +1,31 @@
+import "copyright.stg"
+
+targetPath() ::= "org/eclipse/collections/api/block/predicate/primitive"
+
+fileName(primitive) ::= "<primitive.name>ObjectPredicate"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.api.block.predicate.primitive;
+
+import java.io.Serializable;
+
+/**
+ * A two argument Predicate that takes a primitive <type> and
+ * type T as the arguments.
+ * This file was automatically generated from template file primitiveObjectPredicate.stg.
+ *
+ * @since 3.0.
+ */
+public interface <name>ObjectPredicate\<T>
+        extends Serializable
+{
+    boolean accept(<type> value, T object);
+}
+
+>>

@@ -1,0 +1,52 @@
+import "copyright.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+
+isTest() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/map/primitive"
+
+fileName(primitive) ::= "Immutable<primitive.name>BooleanMapFactoryImplTest"
+
+skipBoolean() ::= "true"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.map.primitive;
+
+import org.eclipse.collections.impl.factory.primitive.<name>BooleanMaps;
+import org.eclipse.collections.impl.map.mutable.primitive.<name>BooleanHashMap;
+import org.junit.Assert;
+import org.junit.Test;
+
+/**
+ * This file was automatically generated from template file immutablePrimitiveBooleanMapFactoryImplTest.stg.
+ */
+public class Immutable<name>BooleanMapFactoryImplTest
+{
+    @Test
+    public void of()
+    {
+        Assert.assertEquals(new <name>BooleanHashMap().toImmutable(), <name>BooleanMaps.immutable.of());
+        Assert.assertEquals(<name>BooleanHashMap.newWithKeysValues(<(literal.(type))("1")>, true).toImmutable(), <name>BooleanMaps.immutable.of(<(literal.(type))("1")>, true));
+    }
+
+    @Test
+    public void ofAll()
+    {
+        Assert.assertEquals(new <name>BooleanHashMap().toImmutable(), <name>BooleanMaps.immutable.ofAll(<name>BooleanMaps.immutable.of()));
+    }
+
+    @Test
+    public void withAll()
+    {
+        Assert.assertEquals(new <name>BooleanHashMap().toImmutable(), <name>BooleanMaps.immutable.withAll(<name>BooleanMaps.immutable.of()));
+    }
+}
+
+>>

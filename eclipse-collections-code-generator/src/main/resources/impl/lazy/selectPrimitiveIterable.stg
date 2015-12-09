@@ -1,0 +1,259 @@
+import "copyright.stg"
+import "primitiveEquals.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+
+targetPath() ::= "org/eclipse/collections/impl/lazy/primitive"
+
+fileName(primitive) ::= "Select<primitive.name>Iterable"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.lazy.primitive;
+
+import java.util.NoSuchElementException;
+
+import org.eclipse.collections.api.<name>Iterable;
+import org.eclipse.collections.api.bag.primitive.Mutable<name>Bag;
+import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
+import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
+import org.eclipse.collections.api.iterator.<name>Iterator;
+import org.eclipse.collections.api.list.primitive.Mutable<name>List;
+import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
+import org.eclipse.collections.impl.bag.mutable.primitive.<name>HashBag;
+import org.eclipse.collections.impl.block.factory.primitive.<name>Predicates;
+import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
+import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
+
+/**
+ * This file was automatically generated from template file selectPrimitiveIterable.stg.
+ */
+public class Select<name>Iterable
+        extends AbstractLazy<name>Iterable
+{
+    private final <name>Iterable delegate;
+    private final <name>Predicate predicate;
+
+    public Select<name>Iterable(<name>Iterable delegate, <name>Predicate predicate)
+    {
+        this.delegate = delegate;
+        this.predicate = predicate;
+    }
+
+    public <name>Iterator <type>Iterator()
+    {
+        return new Select<name>Iterator(this.delegate, this.predicate);
+    }
+
+    /**
+     * @since 7.0.
+     */
+    public void each(<name>Procedure procedure)
+    {
+        this.delegate.forEach(new If<name>Procedure(procedure));
+    }
+
+    @Override
+    public int size()
+    {
+        return this.delegate.count(this.predicate);
+    }
+
+    @Override
+    public boolean isEmpty()
+    {
+        return !this.<type>Iterator().hasNext();
+    }
+
+    @Override
+    public boolean notEmpty()
+    {
+        return this.<type>Iterator().hasNext();
+    }
+
+    @Override
+    public int count(<name>Predicate predicate)
+    {
+        Count<name>Procedure count<name>Procedure = new Count<name>Procedure(predicate);
+        this.forEach(count<name>Procedure);
+        return count<name>Procedure.getCount();
+    }
+
+    @Override
+    public boolean anySatisfy(<name>Predicate predicate)
+    {
+        return this.delegate.anySatisfy(<name>Predicates.and(this.predicate, predicate));
+    }
+
+    @Override
+    public boolean allSatisfy(<name>Predicate predicate)
+    {
+        return this.noneSatisfy(<name>Predicates.not(predicate));
+    }
+
+    @Override
+    public boolean noneSatisfy(<name>Predicate predicate)
+    {
+        return !this.anySatisfy(predicate);
+    }
+
+    @Override
+    public <type>[] toArray()
+    {
+        final <type>[] array = new <type>[this.size()];
+        this.forEach(new <name>Procedure()
+        {
+            @SuppressWarnings("FieldMayBeFinal")
+            private int index = 0;
+            public void value(<type> each)
+            {
+                array[this.index++] = each;
+            }
+        });
+        return array;
+    }
+
+    @Override
+    public boolean containsAll(<type>... source)
+    {
+        for (<type> value : source)
+        {
+            if (!this.contains(value))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public boolean containsAll(<name>Iterable source)
+    {
+        for (<name>Iterator iterator = source.<type>Iterator(); iterator.hasNext(); )
+        {
+            if (!this.contains(iterator.next()))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public Mutable<name>List toList()
+    {
+        return <name>ArrayList.newList(this);
+    }
+
+    @Override
+    public Mutable<name>Set toSet()
+    {
+        return <name>HashSet.newSet(this);
+    }
+
+    @Override
+    public Mutable<name>Bag toBag()
+    {
+        return <name>HashBag.newBag(this);
+    }
+
+    private static final class Count<name>Procedure implements <name>Procedure
+    {
+        private static final long serialVersionUID = 1L;
+        private final <name>Predicate predicate;
+        private int counter = 0;
+
+        private Count<name>Procedure(<name>Predicate predicate)
+        {
+            this.predicate = predicate;
+        }
+
+        public void value(<type> each)
+        {
+            if (this.predicate.accept(each))
+            {
+                this.counter++;
+            }
+        }
+
+        public int getCount()
+        {
+            return this.counter;
+        }
+    }
+
+    private final class If<name>Procedure implements <name>Procedure
+    {
+        private static final long serialVersionUID = 1L;
+        private final <name>Procedure procedure;
+
+        private If<name>Procedure(<name>Procedure procedure)
+        {
+            this.procedure = procedure;
+        }
+
+        public void value(<type> each)
+        {
+            if (Select<name>Iterable.this.predicate.accept(each))
+            {
+                this.procedure.value(each);
+            }
+        }
+    }
+
+    private static final class Select<name>Iterator
+            implements <name>Iterator
+    {
+        private final <name>Iterator iterator;
+        private final <name>Predicate predicate;
+        private <type> next;
+        private boolean verifiedHasNext = false;
+
+        private Select<name>Iterator(<name>Iterable iterable, <name>Predicate predicate)
+        {
+            this(iterable.<type>Iterator(), predicate);
+        }
+
+        private Select<name>Iterator(<name>Iterator iterator, <name>Predicate predicate)
+        {
+            this.iterator = iterator;
+            this.predicate = predicate;
+        }
+
+        public boolean hasNext()
+        {
+            if (this.verifiedHasNext)
+            {
+                return true;
+            }
+            while (this.iterator.hasNext())
+            {
+                <type> temp = this.iterator.next();
+                if (this.predicate.accept(temp))
+                {
+                    this.next = temp;
+                    this.verifiedHasNext = true;
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public <type> next()
+        {
+            if (this.verifiedHasNext || this.hasNext())
+            {
+                this.verifiedHasNext = false;
+                return this.next;
+            }
+            throw new NoSuchElementException();
+        }
+    }
+}
+
+>>

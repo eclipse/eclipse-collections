@@ -1,0 +1,30 @@
+import "copyright.stg"
+
+targetPath() ::= "org/eclipse/collections/api/block/procedure/primitive"
+
+fileName(primitive) ::= "<primitive.name>Procedure"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.api.block.procedure.primitive;
+
+import java.io.Serializable;
+
+/**
+ * A one argument procedure that takes a primitive <type> as the argument.
+ * This file was automatically generated from template file primitiveProcedure.stg.
+ *
+ * @since 3.0.
+ */
+public interface <name>Procedure
+        extends Serializable
+{
+    void value(<type> each);
+}
+
+>>

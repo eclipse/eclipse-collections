@@ -1,0 +1,49 @@
+import "copyright.stg"
+import "primitiveLiteral.stg"
+
+targetPath() ::= "org/eclipse/collections/impl/iterator"
+
+fileName(primitive) ::= "Unmodifiable<primitive.name>Iterator"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.iterator;
+
+import org.eclipse.collections.api.iterator.<name>Iterator;
+import org.eclipse.collections.api.iterator.Mutable<name>Iterator;
+
+/**
+ * Unmodifiable<name>Iterator is a wrapper around <name>Iterator which is unmodifiable and doesn't support remove.
+ * This file was automatically generated from template file unmodifiablePrimitiveIterator.stg.
+ */
+public class Unmodifiable<name>Iterator implements Mutable<name>Iterator
+{
+    private final <name>Iterator <type>Iterator;
+
+    public Unmodifiable<name>Iterator(<name>Iterator <type>Iterator)
+    {
+        this.<type>Iterator = <type>Iterator;
+    }
+
+    public boolean hasNext()
+    {
+        return this.<type>Iterator.hasNext();
+    }
+
+    public <type> next()
+    {
+        return this.<type>Iterator.next();
+    }
+
+    public void remove()
+    {
+        throw new UnsupportedOperationException("Cannot call remove() on " + this.getClass().getSimpleName());
+    }
+}
+
+>>

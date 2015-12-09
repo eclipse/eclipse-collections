@@ -1,0 +1,124 @@
+import "copyright.stg"
+import "primitiveEquals.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+
+targetPath() ::= "org/eclipse/collections/impl/lazy/primitive"
+
+skipBoolean() ::= "true"
+
+fileName(primitive) ::= "Collect<primitive.name>ToObjectIterable"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.lazy.primitive;
+
+import java.util.Iterator;
+
+import org.eclipse.collections.api.<name>Iterable;
+import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
+import org.eclipse.collections.api.block.procedure.Procedure;
+import org.eclipse.collections.api.block.procedure.Procedure2;
+import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
+import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
+import org.eclipse.collections.api.iterator.<name>Iterator;
+import org.eclipse.collections.impl.lazy.AbstractLazyIterable;
+
+/**
+ * This file was automatically generated from template file collectPrimitiveToObjectIterable.stg.
+ */
+public class Collect<name>ToObjectIterable\<V>
+        extends AbstractLazyIterable\<V>
+{
+    private final <name>Iterable iterable;
+    private final <name>ToObjectFunction\<? extends V> function;
+
+    public Collect<name>ToObjectIterable(<name>Iterable iterable, <name>ToObjectFunction\<? extends V> function)
+    {
+        this.iterable = iterable;
+        this.function = function;
+    }
+
+    public void each(final Procedure\<? super V> procedure)
+    {
+        this.iterable.forEach(new <name>Procedure()
+        {
+            public void value(<type> each)
+            {
+                procedure.value(Collect<name>ToObjectIterable.this.function.valueOf(each));
+            }
+        });
+    }
+
+    public void forEachWithIndex(final ObjectIntProcedure\<? super V> objectIntProcedure)
+    {
+        this.iterable.forEach(new <name>Procedure()
+        {
+            private int index;
+
+            public void value(<type> each)
+            {
+                objectIntProcedure.value(Collect<name>ToObjectIterable.this.function.valueOf(each), this.index++);
+            }
+        });
+    }
+
+    public \<P> void forEachWith(final Procedure2\<? super V, ? super P> procedure, final P parameter)
+    {
+        this.iterable.forEach(new <name>Procedure()
+        {
+            public void value(<type> each)
+            {
+                procedure.value(Collect<name>ToObjectIterable.this.function.valueOf(each), parameter);
+            }
+        });
+    }
+
+    public Iterator\<V> iterator()
+    {
+        return new Iterator\<V>()
+        {
+            private final <name>Iterator iterator = Collect<name>ToObjectIterable.this.iterable.<type>Iterator();
+
+            public boolean hasNext()
+            {
+                return this.iterator.hasNext();
+            }
+
+            public V next()
+            {
+                return Collect<name>ToObjectIterable.this.function.valueOf(this.iterator.next());
+            }
+
+            public void remove()
+            {
+                throw new UnsupportedOperationException("Cannot call remove() on " + this.getClass().getSimpleName());
+            }
+        };
+    }
+
+    @Override
+    public int size()
+    {
+        return this.iterable.size();
+    }
+
+    @Override
+    public boolean isEmpty()
+    {
+        return this.iterable.isEmpty();
+    }
+
+    @Override
+    public boolean notEmpty()
+    {
+        return this.iterable.notEmpty();
+    }
+}
+
+>>

@@ -1,0 +1,113 @@
+import "copyright.stg"
+import "primitiveLiteral.stg"
+
+targetPath() ::= "org/eclipse/collections/api"
+
+fileName(primitive) ::= "<primitive.name>Iterable"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.api;
+
+import org.eclipse.collections.api.bag.primitive.Mutable<name>Bag;
+import org.eclipse.collections.api.block.function.primitive.Object<name>ToObjectFunction;
+import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
+import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
+import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
+import org.eclipse.collections.api.iterator.<name>Iterator;
+import org.eclipse.collections.api.list.primitive.Mutable<name>List;
+import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
+
+/**
+ * <name>Iterable is an interface which is memory-optimized for <type> primitives.
+ * It is inspired by the interface RichIterable, and contains a subset of the internal iterator methods on RichIterable like collect, sum, etc.
+ * The API also includes an external iterator method, which returns an <name>Iterator. <name>Iterator helps iterate over the <name>Iterable without boxing the primitives.
+ * This file was automatically generated from template file primitiveIterable.stg.
+ */
+public interface <name>Iterable extends PrimitiveIterable
+{
+    <name>Iterator <type>Iterator();
+
+    <type>[] toArray();
+
+    boolean contains(<type> value);
+
+    boolean containsAll(<type>... source);
+
+    boolean containsAll(<name>Iterable source);
+
+    void forEach(<name>Procedure procedure);
+
+    /**
+     * @since 7.0.
+     */
+    void each(<name>Procedure procedure);
+
+    <name>Iterable select(<name>Predicate predicate);
+
+    <name>Iterable reject(<name>Predicate predicate);
+
+    \<V> RichIterable\<V> collect(<name>ToObjectFunction\<? extends V> function);
+
+    <type> detectIfNone(<name>Predicate predicate, <type> ifNone);
+
+    int count(<name>Predicate predicate);
+
+    boolean anySatisfy(<name>Predicate predicate);
+
+    boolean allSatisfy(<name>Predicate predicate);
+
+    boolean noneSatisfy(<name>Predicate predicate);
+
+    Mutable<name>List toList();
+
+    Mutable<name>Set toSet();
+
+    Mutable<name>Bag toBag();
+
+    Lazy<name>Iterable asLazy();
+
+    \<T> T injectInto(T injectedValue, Object<name>ToObjectFunction\<? super T, ? extends T> function);
+    <(arithmeticMethods.(type))()>
+}
+
+>>
+
+arithmeticMethods ::= [
+    "byte": "allMethods",
+    "short": "allMethods",
+    "char": "allMethods",
+    "int": "allMethods",
+    "long": "allMethods",
+    "float": "allMethods",
+    "double": "allMethods",
+    "boolean": "noMethods"
+    ]
+
+allMethods() ::= <<
+<\n>
+<(wideType.(type))> sum();
+
+<type> max();
+
+<type> maxIfEmpty(<type> defaultValue);
+
+<type> min();
+
+<type> minIfEmpty(<type> defaultValue);
+
+double average();
+
+double median();
+
+<type>[] toSortedArray();
+
+Mutable<name>List toSortedList();
+>>
+
+noMethods() ::= ""

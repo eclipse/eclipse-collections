@@ -1,0 +1,63 @@
+import "copyright.stg"
+import "primitiveLiteral.stg"
+
+isTest() ::= "true"
+
+skipBoolean() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/map/mutable/primitive"
+
+fileName(primitive) ::= "Immutable<primitive.name><primitive.name>MapKeySetTest"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.wrapperName, primitive.name)>
+>>
+
+body(type, wrapperName, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.map.mutable.primitive;
+
+import org.eclipse.collections.api.set.primitive.<name>Set;
+import org.eclipse.collections.api.set.primitive.Immutable<name>Set;
+import org.eclipse.collections.impl.set.mutable.primitive.AbstractImmutable<name>HashSetTestCase;
+import org.junit.Assert;
+
+/**
+ * JUnit test for {@link Immutable<name>Set} created from the freeze() method.
+ * This file was automatically generated from template file immutablePrimitivePrimitiveMapKeySetTest.stg.
+ */
+public class Immutable<primitive.name><primitive.name>MapKeySetTest extends AbstractImmutable<name>HashSetTestCase
+{
+    @Override
+    protected Immutable<name>Set classUnderTest()
+    {
+        return (Immutable<name>Set) <name><name>HashMap.newWithKeysValues(<["1", "-1", "2", "2", "3", "4"]:(literal.(type))(); separator=", ">).keySet().freeze();
+    }
+
+    @Override
+    protected Immutable<name>Set newWith(<type>... elements)
+    {
+        <name><name>HashMap <type><name>HashMap = new <name><name>HashMap();
+        for (<type> element : elements)
+        {
+            <type><name>HashMap.put(element, element);
+        }
+        return (Immutable<name>Set) <type><name>HashMap.keySet().freeze();
+    }
+
+    @Override
+    public void contains()
+    {
+        super.contains();
+        <type> collision1 = AbstractImmutable<name>HashSetTestCase.generateCollisions().getFirst();
+        <type> collision2 = AbstractImmutable<name>HashSetTestCase.generateCollisions().get(1);
+        <name><name>HashMap <type><name>HashMap = <name><name>HashMap.newWithKeysValues(collision1, collision1, collision2,  collision2);
+        <type><name>HashMap.removeKey(collision2);
+        <name>Set <type>Set = <type><name>HashMap.keySet().freeze();
+        Assert.assertTrue(<type>Set.contains(collision1));
+        Assert.assertFalse(<type>Set.contains(collision2));
+    }
+}
+
+>>

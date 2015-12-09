@@ -1,0 +1,104 @@
+import "copyright.stg"
+
+targetPath() ::= "org/eclipse/collections/impl/stack/immutable/primitive"
+
+fileName(primitive) ::= "Immutable<primitive.name>StackFactoryImpl"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.stack.immutable.primitive;
+
+import org.eclipse.collections.api.<name>Iterable;
+import org.eclipse.collections.api.factory.stack.primitive.Immutable<name>StackFactory;
+import org.eclipse.collections.api.stack.primitive.Immutable<name>Stack;
+
+/**
+ * Immutable<name>StackFactoryImpl is a factory implementation which creates instances of type {@link Immutable<name>Stack}.
+ * This file was automatically generated from template file immutablePrimitiveStackFactoryImpl.stg.
+ *
+ * @since 4.0.
+ */
+public class Immutable<name>StackFactoryImpl implements Immutable<name>StackFactory
+{
+    public Immutable<name>Stack empty()
+    {
+        return Immutable<name>EmptyStack.INSTANCE;
+    }
+
+    public Immutable<name>Stack of()
+    {
+        return this.empty();
+    }
+
+    public Immutable<name>Stack with()
+    {
+        return this.empty();
+    }
+
+    public Immutable<name>Stack of(<type> one)
+    {
+        return this.with(one);
+    }
+
+    public Immutable<name>Stack with(<type> one)
+    {
+        return new Immutable<name>SingletonStack(one);
+    }
+
+    public Immutable<name>Stack of(<type>... items)
+    {
+        return this.with(items);
+    }
+
+    public Immutable<name>Stack with(<type>... items)
+    {
+        if (items == null || items.length == 0)
+        {
+            return this.with();
+        }
+        if (items.length == 1)
+        {
+            return this.with(items[0]);
+        }
+        return Immutable<name>ArrayStack.newStackWith(items);
+    }
+
+    public Immutable<name>Stack ofAll(<name>Iterable items)
+    {
+        return this.withAll(items);
+    }
+
+    public Immutable<name>Stack withAll(<name>Iterable items)
+    {
+        if (items instanceof Immutable<name>Stack)
+        {
+            return (Immutable<name>Stack) items;
+        }
+        return this.with(items.toArray());
+    }
+
+    public Immutable<name>Stack ofAllReversed(<name>Iterable items)
+    {
+        return this.withAllReversed(items);
+    }
+
+    public Immutable<name>Stack withAllReversed(<name>Iterable items)
+    {
+        if (items == null || items.isEmpty())
+        {
+            return this.with();
+        }
+        if (items.size() == 1)
+        {
+            return this.with(items.toArray());
+        }
+        return Immutable<name>ArrayStack.newStackFromTopToBottom(items);
+    }
+}
+
+>>

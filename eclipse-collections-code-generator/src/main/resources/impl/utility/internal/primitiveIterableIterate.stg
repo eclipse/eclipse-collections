@@ -1,0 +1,185 @@
+import "copyright.stg"
+import "primitiveLiteral.stg"
+
+targetPath() ::= "org/eclipse/collections/impl/utility/internal/primitive"
+
+fileName(primitive) ::= "<primitive.name>IterableIterate"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.utility.internal.primitive;
+
+import java.io.IOException;
+import java.util.Collection;
+
+import org.eclipse.collections.api.<name>Iterable;
+import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
+import org.eclipse.collections.api.block.function.primitive.Object<name>ToObjectFunction;
+import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
+import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
+import org.eclipse.collections.api.collection.primitive.Mutable<name>Collection;
+import org.eclipse.collections.api.iterator.<name>Iterator;
+
+/**
+ * This file was automatically generated from template file primitiveIterableIterate.stg.
+ *
+ * @since 5.0
+ */
+public final class <name>IterableIterate
+{
+    private <name>IterableIterate()
+    {
+        throw new AssertionError("Suppress default constructor for noninstantiability");
+    }
+
+    public static boolean isEmpty(<name>Iterable iterable)
+    {
+        return !iterable.<type>Iterator().hasNext();
+    }
+
+    public static boolean notEmpty(<name>Iterable iterable)
+    {
+        return !<name>IterableIterate.isEmpty(iterable);
+    }
+
+    public static void forEach(<name>Iterable iterable, <name>Procedure procedure)
+    {
+        <name>IteratorIterate.forEach(iterable.<type>Iterator(), procedure);
+    }
+
+    public static \<R extends Mutable<name>Collection> R select(<name>Iterable iterable, <name>Predicate predicate, R targetCollection)
+    {
+        return <name>IteratorIterate.select(iterable.<type>Iterator(), predicate, targetCollection);
+    }
+
+    public static \<R extends Mutable<name>Collection> R reject(<name>Iterable iterable, <name>Predicate predicate, R targetCollection)
+    {
+        return <name>IteratorIterate.reject(iterable.<type>Iterator(), predicate, targetCollection);
+    }
+
+    public static \<V, R extends Collection\<V>\> R collect(
+            <name>Iterable iterable,
+            <name>ToObjectFunction\<? extends V> function,
+            R targetCollection)
+    {
+        return <name>IteratorIterate.collect(iterable.<type>Iterator(), function, targetCollection);
+    }
+
+    public static <type> detectIfNone(<name>Iterable iterable, <name>Predicate predicate, <type> ifNone)
+    {
+        return <name>IteratorIterate.detectIfNone(iterable.<type>Iterator(), predicate, ifNone);
+    }
+
+    public static int count(<name>Iterable iterable, <name>Predicate predicate)
+    {
+        return <name>IteratorIterate.count(iterable.<type>Iterator(), predicate);
+    }
+
+    public static boolean anySatisfy(<name>Iterable iterable, <name>Predicate predicate)
+    {
+        return <name>IteratorIterate.anySatisfy(iterable.<type>Iterator(), predicate);
+    }
+
+    public static boolean allSatisfy(<name>Iterable iterable, <name>Predicate predicate)
+    {
+        return <name>IteratorIterate.allSatisfy(iterable.<type>Iterator(), predicate);
+    }
+
+    public static boolean noneSatisfy(<name>Iterable iterable, <name>Predicate predicate)
+    {
+        return <name>IteratorIterate.noneSatisfy(iterable.<type>Iterator(), predicate);
+    }
+
+    <(arithmeticMethods.(type))()>
+
+    public static void appendString(
+            <name>Iterable iterable,
+            Appendable appendable,
+            String start,
+            String separator,
+            String end)
+    {
+        try
+        {
+            appendable.append(start);
+
+            <name>Iterator iterator = iterable.<type>Iterator();
+            if (iterator.hasNext())
+            {
+                appendable.append(stringValueOfItem(iterable, iterator.next()));
+                while (iterator.hasNext())
+                {
+                    appendable.append(separator);
+                    appendable.append(stringValueOfItem(iterable, iterator.next()));
+                }
+            }
+
+            appendable.append(end);
+        }
+        catch (IOException e)
+        {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static \<T> T injectInto(<name>Iterable iterable, T injectedValue, Object<name>ToObjectFunction\<? super T, ? extends T> function)
+    {
+        return <name>IteratorIterate.injectInto(iterable.<type>Iterator(), injectedValue, function);
+    }
+
+    private static \<T> String stringValueOfItem(<name>Iterable iterable, T item)
+    {
+        return item == iterable
+                ? "(this " + iterable.getClass().getSimpleName() + ')'
+                : String.valueOf(item);
+    }
+}
+
+>>
+
+arithmeticMethods ::= [
+    "boolean": "noMethods",
+    "default": "allMethods"
+    ]
+
+allMethods() ::= <<
+public static <wideType.(type)> sum(<name>Iterable iterable)
+{
+    return <name>IteratorIterate.sum(iterable.<type>Iterator());
+}
+
+public static <type> max(<name>Iterable iterable)
+{
+    return <name>IteratorIterate.max(iterable.<type>Iterator());
+}
+
+public static <type> maxIfEmpty(<name>Iterable iterable, <type> ifEmpty)
+{
+    if (<name>IterableIterate.isEmpty(iterable))
+    {
+        return ifEmpty;
+    }
+    return <name>IteratorIterate.max(iterable.<type>Iterator());
+}
+
+public static <type> min(<name>Iterable iterable)
+{
+    return <name>IteratorIterate.min(iterable.<type>Iterator());
+}
+
+public static <type> minIfEmpty(<name>Iterable iterable, <type> ifEmpty)
+{
+    if (<name>IterableIterate.isEmpty(iterable))
+    {
+        return ifEmpty;
+    }
+    return <name>IteratorIterate.min(iterable.<type>Iterator());
+}
+>>
+
+noMethods() ::= ""

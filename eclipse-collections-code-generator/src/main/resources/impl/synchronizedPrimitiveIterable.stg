@@ -1,0 +1,410 @@
+import "copyright.stg"
+import "primitiveLiteral.stg"
+
+targetPath() ::= "org/eclipse/collections/impl/primitive"
+
+fileName(primitive) ::= "Synchronized<primitive.name>Iterable"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.primitive;
+
+import java.io.Serializable;
+
+import org.eclipse.collections.api.<name>Iterable;
+import org.eclipse.collections.api.Lazy<name>Iterable;
+import org.eclipse.collections.api.RichIterable;
+import org.eclipse.collections.api.bag.primitive.Mutable<name>Bag;
+import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
+import org.eclipse.collections.api.block.function.primitive.Object<name>ToObjectFunction;
+import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
+import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
+import org.eclipse.collections.api.iterator.<name>Iterator;
+import org.eclipse.collections.api.list.primitive.Mutable<name>List;
+import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
+import net.jcip.annotations.GuardedBy;
+
+/**
+ * A synchronized view of a <name>Iterable.
+ * This file was automatically generated from template file synchronizedPrimitiveIterable.stg.
+ *
+ * @since 5.0.
+ */
+public class Synchronized<name>Iterable implements <name>Iterable, Serializable
+{
+    private static final long serialVersionUID = 1L;
+
+    private final Object lock;
+    @GuardedBy("this.lock")
+    private final <name>Iterable iterable;
+
+    protected Synchronized<name>Iterable(<name>Iterable iterable)
+    {
+        this(iterable, null);
+    }
+
+    protected Synchronized<name>Iterable(<name>Iterable iterable, Object newLock)
+    {
+        if (iterable == null)
+        {
+            throw new IllegalArgumentException("Cannot create a Synchronized<name>Iterable on a null collection");
+        }
+        this.iterable = iterable;
+        this.lock = newLock == null ? this : newLock;
+    }
+
+    /**
+     * This method will take a <name>Iterable and wrap it directly in a Synchronized<name>Iterable.
+     */
+    public static Synchronized<name>Iterable of(<name>Iterable iterable)
+    {
+        return new Synchronized<name>Iterable(iterable);
+    }
+
+    /**
+     * This method will take a <name>Iterable and wrap it directly in a Synchronized<name>Iterable. Additionally,
+     * a developer specifies which lock to use with the collection.
+     */
+    public static Synchronized<name>Iterable of(<name>Iterable iterable, Object lock)
+    {
+        return new Synchronized<name>Iterable(iterable, lock);
+    }
+
+    public <type>[] toArray()
+    {
+        synchronized (this.lock)
+        {
+            return this.iterable.toArray();
+        }
+    }
+
+    public boolean contains(<type> value)
+    {
+        synchronized (this.lock)
+        {
+            return this.iterable.contains(value);
+        }
+    }
+
+    public boolean containsAll(<type>... source)
+    {
+        synchronized (this.lock)
+        {
+            return this.iterable.containsAll(source);
+        }
+    }
+
+    public boolean containsAll(<name>Iterable source)
+    {
+        synchronized (this.lock)
+        {
+            return this.iterable.containsAll(source);
+        }
+    }
+
+    public void forEach(<name>Procedure procedure)
+    {
+        this.each(procedure);
+    }
+
+    /**
+     * @since 7.0.
+     */
+    public void each(<name>Procedure procedure)
+    {
+        synchronized (this.lock)
+        {
+            this.iterable.forEach(procedure);
+        }
+    }
+
+    public <name>Iterable select(<name>Predicate predicate)
+    {
+        synchronized (this.lock)
+        {
+            return this.iterable.select(predicate);
+        }
+    }
+
+    public <name>Iterable reject(<name>Predicate predicate)
+    {
+        synchronized (this.lock)
+        {
+            return this.iterable.reject(predicate);
+        }
+    }
+
+    public \<V> RichIterable\<V> collect(<name>ToObjectFunction\<? extends V> function)
+    {
+        synchronized (this.lock)
+        {
+            return this.iterable.collect(function);
+        }
+    }
+
+    public <type> detectIfNone(<name>Predicate predicate, <type> ifNone)
+    {
+        synchronized (this.lock)
+        {
+            return this.iterable.detectIfNone(predicate, ifNone);
+        }
+    }
+
+    public int count(<name>Predicate predicate)
+    {
+        synchronized (this.lock)
+        {
+            return this.iterable.count(predicate);
+        }
+    }
+
+    public boolean anySatisfy(<name>Predicate predicate)
+    {
+        synchronized (this.lock)
+        {
+            return this.iterable.anySatisfy(predicate);
+        }
+    }
+
+    public boolean allSatisfy(<name>Predicate predicate)
+    {
+        synchronized (this.lock)
+        {
+            return this.iterable.allSatisfy(predicate);
+        }
+    }
+
+    public boolean noneSatisfy(<name>Predicate predicate)
+    {
+        synchronized (this.lock)
+        {
+            return this.iterable.noneSatisfy(predicate);
+        }
+    }
+
+    public Mutable<name>List toList()
+    {
+        synchronized (this.lock)
+        {
+            return this.iterable.toList();
+        }
+    }
+
+    public Mutable<name>Set toSet()
+    {
+        synchronized (this.lock)
+        {
+            return this.iterable.toSet();
+        }
+    }
+
+    public Mutable<name>Bag toBag()
+    {
+        synchronized (this.lock)
+        {
+            return this.iterable.toBag();
+        }
+    }
+
+    public Lazy<name>Iterable asLazy()
+    {
+        synchronized (this.lock)
+        {
+            return this.iterable.asLazy();
+        }
+    }
+
+    <(arithmeticMethods.(type))()>
+
+    public int size()
+    {
+        synchronized (this.lock)
+        {
+            return this.iterable.size();
+        }
+    }
+
+    public boolean isEmpty()
+    {
+        synchronized (this.lock)
+        {
+            return this.iterable.isEmpty();
+        }
+    }
+
+    public boolean notEmpty()
+    {
+        synchronized (this.lock)
+        {
+            return this.iterable.notEmpty();
+        }
+    }
+
+    public \<T> T injectInto(T injectedValue, Object<name>ToObjectFunction\<? super T, ? extends T> function)
+    {
+        synchronized (this.lock)
+        {
+            return this.iterable.injectInto(injectedValue, function);
+        }
+    }
+
+    @Override
+    public String toString()
+    {
+        synchronized (this.lock)
+        {
+            return this.iterable.toString();
+        }
+    }
+
+    public String makeString()
+    {
+        synchronized (this.lock)
+        {
+            return this.iterable.makeString();
+        }
+    }
+
+    public String makeString(String separator)
+    {
+        synchronized (this.lock)
+        {
+            return this.iterable.makeString(separator);
+        }
+    }
+
+    public String makeString(String start, String separator, String end)
+    {
+        synchronized (this.lock)
+        {
+            return this.iterable.makeString(start, separator, end);
+        }
+    }
+
+    public void appendString(Appendable appendable)
+    {
+        synchronized (this.lock)
+        {
+            this.iterable.appendString(appendable);
+        }
+    }
+
+    public void appendString(Appendable appendable, String separator)
+    {
+        synchronized (this.lock)
+        {
+            this.iterable.appendString(appendable, separator);
+        }
+    }
+
+    public void appendString(Appendable appendable, String start, String separator, String end)
+    {
+        synchronized (this.lock)
+        {
+            this.iterable.appendString(appendable, start, separator, end);
+        }
+    }
+
+    /**
+     * Must be called in a synchronized block.
+     */
+    public <name>Iterator <type>Iterator()
+    {
+        return this.iterable.<type>Iterator();
+    }
+}
+
+>>
+
+arithmeticMethods ::= [
+    "byte": "allMethods",
+    "short": "allMethods",
+    "char": "allMethods",
+    "int": "allMethods",
+    "long": "allMethods",
+    "float": "allMethods",
+    "double": "allMethods",
+    "boolean": "noMethods"
+    ]
+
+allMethods() ::= <<
+public <wideType.(type)> sum()
+{
+    synchronized (this.lock)
+    {
+        return this.iterable.sum();
+    }
+}
+
+public <type> max()
+{
+    synchronized (this.lock)
+    {
+        return this.iterable.max();
+    }
+}
+
+public <type> maxIfEmpty(<type> defaultValue)
+{
+    synchronized (this.lock)
+    {
+        return this.iterable.maxIfEmpty(defaultValue);
+    }
+}
+
+public <type> min()
+{
+    synchronized (this.lock)
+    {
+        return this.iterable.min();
+    }
+}
+
+public <type> minIfEmpty(<type> defaultValue)
+{
+    synchronized (this.lock)
+    {
+        return this.iterable.minIfEmpty(defaultValue);
+    }
+}
+
+public double average()
+{
+    synchronized (this.lock)
+    {
+        return this.iterable.average();
+    }
+}
+
+public double median()
+{
+    synchronized (this.lock)
+    {
+        return this.iterable.median();
+    }
+}
+
+public <type>[] toSortedArray()
+{
+    synchronized (this.lock)
+    {
+        return this.iterable.toSortedArray();
+    }
+}
+
+public Mutable<name>List toSortedList()
+{
+    synchronized (this.lock)
+    {
+        return this.iterable.toSortedList();
+    }
+}
+
+>>
+
+noMethods() ::= ""

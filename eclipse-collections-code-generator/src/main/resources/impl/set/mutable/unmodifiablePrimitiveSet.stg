@@ -1,0 +1,143 @@
+import "copyright.stg"
+import "primitiveEquals.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+
+targetPath() ::= "org/eclipse/collections/impl/set/mutable/primitive"
+
+fileName(primitive) ::= "Unmodifiable<primitive.name>Set"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.set.mutable.primitive;
+
+import org.eclipse.collections.api.<name>Iterable;
+import org.eclipse.collections.api.Lazy<name>Iterable;
+import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
+import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
+import org.eclipse.collections.api.set.MutableSet;
+import org.eclipse.collections.api.set.primitive.Immutable<name>Set;
+import org.eclipse.collections.api.set.primitive.<name>Set;
+import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
+import org.eclipse.collections.impl.collection.mutable.primitive.AbstractUnmodifiable<name>Collection;
+import org.eclipse.collections.impl.lazy.primitive.Lazy<name>IterableAdapter;
+import net.jcip.annotations.NotThreadSafe;
+
+/**
+ * This file was automatically generated from template file unmodifiablePrimitiveSet.stg.
+ *
+ * @since 3.1.
+ */
+@NotThreadSafe
+public final class Unmodifiable<name>Set
+        extends AbstractUnmodifiable<name>Collection
+        implements Mutable<name>Set
+{
+    private static final long serialVersionUID = 1L;
+
+    Unmodifiable<name>Set(Mutable<name>Set set)
+    {
+        super(set);
+    }
+
+    /**
+     * This method will take a Mutable<name>Set and wrap it directly in a Unmodifiable<name>Set.
+     */
+    public static Unmodifiable<name>Set of(Mutable<name>Set set)
+    {
+        if (set == null)
+        {
+            throw new IllegalArgumentException("cannot create an Unmodifiable<name>Set for null");
+        }
+        return new Unmodifiable<name>Set(set);
+    }
+
+    private Mutable<name>Set getMutable<name>Set()
+    {
+        return (Mutable<name>Set) this.get<name>Collection();
+    }
+
+    @Override
+    public Unmodifiable<name>Set with(<type> element)
+    {
+        throw new UnsupportedOperationException("Cannot call with() on " + this.getClass().getSimpleName());
+    }
+
+    @Override
+    public Unmodifiable<name>Set without(<type> element)
+    {
+        throw new UnsupportedOperationException("Cannot call without() on " + this.getClass().getSimpleName());
+    }
+
+    @Override
+    public Unmodifiable<name>Set withAll(<name>Iterable elements)
+    {
+        throw new UnsupportedOperationException("Cannot call withAll() on " + this.getClass().getSimpleName());
+    }
+
+    @Override
+    public Unmodifiable<name>Set withoutAll(<name>Iterable elements)
+    {
+        throw new UnsupportedOperationException("Cannot call withoutAll() on " + this.getClass().getSimpleName());
+    }
+
+    @Override
+    public Mutable<name>Set select(<name>Predicate predicate)
+    {
+        return this.getMutable<name>Set().select(predicate);
+    }
+
+    @Override
+    public Mutable<name>Set reject(<name>Predicate predicate)
+    {
+        return this.getMutable<name>Set().reject(predicate);
+    }
+
+    @Override
+    public \<V> MutableSet\<V> collect(<name>ToObjectFunction\<? extends V> function)
+    {
+        return this.getMutable<name>Set().collect(function);
+    }
+
+    @Override
+    public boolean equals(Object otherSet)
+    {
+        return this.getMutable<name>Set().equals(otherSet);
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return this.getMutable<name>Set().hashCode();
+    }
+
+    @Override
+    public Mutable<name>Set asUnmodifiable()
+    {
+        return this;
+    }
+
+    @Override
+    public Mutable<name>Set asSynchronized()
+    {
+        return new Synchronized<name>Set(this);
+    }
+
+    public <name>Set freeze()
+    {
+        return this.getMutable<name>Set().freeze();
+    }
+
+    @Override
+    public Immutable<name>Set toImmutable()
+    {
+        return this.getMutable<name>Set().toImmutable();
+    }
+}
+
+>>

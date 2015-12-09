@@ -1,0 +1,410 @@
+import "copyright.stg"
+import "primitiveEquals.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+
+hasTwoPrimitives() ::= "true"
+
+skipBooleanKeys() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/map/immutable/primitive"
+
+fileName(primitive1, primitive2, sameTwoPrimitives) ::= "Immutable<primitive1.name><primitive2.name>EmptyMap"
+
+class(primitive1, primitive2, sameTwoPrimitives) ::= <<
+<body(primitive1.type, primitive2.type, primitive1.name, primitive2.name)>
+>>
+
+body(type1, type2, name1, name2) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.map.immutable.primitive;
+
+import java.io.IOException;
+import java.io.Serializable;
+import java.util.NoSuchElementException;
+
+import org.eclipse.collections.api.<name1>Iterable;
+<if(!sameTwoPrimitives)>import org.eclipse.collections.api.<name2>Iterable;<endif>
+import org.eclipse.collections.api.Lazy<name1>Iterable;
+<if(!sameTwoPrimitives)>import org.eclipse.collections.api.Lazy<name2>Iterable;<endif>
+import org.eclipse.collections.api.RichIterable;
+import org.eclipse.collections.api.bag.primitive.Mutable<name2>Bag;
+import org.eclipse.collections.api.block.function.primitive.<name2>ToObjectFunction;
+import org.eclipse.collections.api.block.function.primitive.Object<name2>ToObjectFunction;
+import org.eclipse.collections.api.block.predicate.primitive.<name1><name2>Predicate;
+import org.eclipse.collections.api.block.predicate.primitive.<name2>Predicate;
+import org.eclipse.collections.api.block.procedure.primitive.<name1>Procedure;
+import org.eclipse.collections.api.block.procedure.primitive.<name1><name2>Procedure;
+<if(!sameTwoPrimitives)>import org.eclipse.collections.api.block.procedure.primitive.<name2>Procedure;<endif>
+import org.eclipse.collections.api.collection.ImmutableCollection;
+import org.eclipse.collections.api.collection.primitive.Immutable<name2>Collection;
+import org.eclipse.collections.api.collection.primitive.Mutable<name2>Collection;
+import org.eclipse.collections.api.iterator.<name2>Iterator;
+import org.eclipse.collections.api.list.primitive.Mutable<name2>List;
+import org.eclipse.collections.api.map.primitive.<name1><name2>Map;
+import org.eclipse.collections.api.map.primitive.Immutable<name1><name2>Map;
+<if(!sameTwoPrimitives)>import org.eclipse.collections.api.set.primitive.Mutable<name1>Set;<endif>
+import org.eclipse.collections.api.set.primitive.Mutable<name2>Set;
+import org.eclipse.collections.api.tuple.primitive.<name1><name2>Pair;
+import org.eclipse.collections.impl.bag.mutable.primitive.<name2>HashBag;
+import org.eclipse.collections.impl.collection.mutable.primitive.Unmodifiable<name2>Collection;
+import org.eclipse.collections.impl.factory.Lists;
+import org.eclipse.collections.impl.factory.primitive.<name2>Lists;
+import org.eclipse.collections.impl.iterator.ImmutableEmpty<name2>Iterator;
+import org.eclipse.collections.impl.lazy.primitive.Lazy<name2>IterableAdapter;
+import org.eclipse.collections.impl.list.mutable.primitive.<name2>ArrayList;
+import org.eclipse.collections.impl.set.mutable.primitive.<name2>HashSet;
+<if(!sameTwoPrimitives)>import org.eclipse.collections.impl.set.mutable.primitive.<name1>HashSet;<endif>
+import org.eclipse.collections.impl.set.mutable.primitive.Unmodifiable<name1>Set;
+import org.eclipse.collections.impl.utility.LazyIterate;
+import org.eclipse.collections.impl.utility.primitive.Lazy<name1>Iterate;
+
+/**
+ * Immutable<name1><name2>EmptyMap is an optimization for {@link Immutable<name1><name2>Map} of size 0.
+ * This file was automatically generated from template file immutablePrimitivePrimitiveEmptyMap.stg.
+ *
+ * @since 4.0.
+ */
+final class Immutable<name1><name2>EmptyMap implements Immutable<name1><name2>Map, Serializable
+{
+    static final Immutable<name1><name2>Map INSTANCE = new Immutable<name1><name2>EmptyMap();
+
+    private static final long serialVersionUID = 1L;
+    private static final <type2> EMPTY_VALUE = <zero.(type2)>;
+
+    private Object readResolve()
+    {
+        return INSTANCE;
+    }
+
+    public <type2> get(<type1> key)
+    {
+        return EMPTY_VALUE;
+    }
+
+    public <type2> getIfAbsent(<type1> key, <type2> ifAbsent)
+    {
+        return ifAbsent;
+    }
+
+    public <type2> getOrThrow(<type1> key)
+    {
+        throw new IllegalStateException("Key " + key + " not present.");
+    }
+
+    public boolean containsKey(<type1> key)
+    {
+        return false;
+    }
+
+    public boolean containsValue(<type2> value)
+    {
+        return false;
+    }
+
+    public void forEachValue(<name2>Procedure procedure)
+    {
+    }
+
+    public void forEachKey(<name1>Procedure procedure)
+    {
+    }
+
+    public void forEachKeyValue(<name1><name2>Procedure procedure)
+    {
+    }
+
+    public Lazy<name1>Iterable keysView()
+    {
+        return Lazy<name1>Iterate.empty();
+    }
+
+    public RichIterable\<<name1><name2>Pair> keyValuesView()
+    {
+        return LazyIterate.empty();
+    }
+
+    public Immutable<name1><name2>Map select(<name1><name2>Predicate predicate)
+    {
+        return this;
+    }
+
+    public Immutable<name1><name2>Map reject(<name1><name2>Predicate predicate)
+    {
+        return this;
+    }
+
+    public Immutable<name1><name2>Map toImmutable()
+    {
+        return this;
+    }
+
+    public <name2>Iterator <type2>Iterator()
+    {
+        return ImmutableEmpty<name2>Iterator.INSTANCE;
+    }
+
+    public void forEach(<name2>Procedure procedure)
+    {
+    }
+
+    /**
+     * @since 7.0.
+     */
+    public void each(<name2>Procedure procedure)
+    {
+    }
+
+    public int count(<name2>Predicate predicate)
+    {
+        return 0;
+    }
+
+    <(arithmeticMethods.(type2))()>
+    public boolean anySatisfy(<name2>Predicate predicate)
+    {
+        return false;
+    }
+
+    public boolean allSatisfy(<name2>Predicate predicate)
+    {
+        return true;
+    }
+
+    public boolean noneSatisfy(<name2>Predicate predicate)
+    {
+        return true;
+    }
+
+    public Immutable<name2>Collection select(<name2>Predicate predicate)
+    {
+        return <name2>Lists.immutable.with();
+    }
+
+    public Immutable<name2>Collection reject(<name2>Predicate predicate)
+    {
+        return <name2>Lists.immutable.with();
+    }
+
+    public <type2> detectIfNone(<name2>Predicate predicate, <type2> ifNone)
+    {
+        return ifNone;
+    }
+
+    public \<V> ImmutableCollection\<V> collect(<name2>ToObjectFunction\<? extends V> function)
+    {
+        return Lists.immutable.of();
+    }
+
+    public \<T> T injectInto(T injectedValue, Object<name2>ToObjectFunction\<? super T, ? extends T> function)
+    {
+        return injectedValue;
+    }
+
+    public <type2>[] toArray()
+    {
+        return new <type2>[0];
+    }
+
+    public boolean contains(<type2> value)
+    {
+        return false;
+    }
+
+    public boolean containsAll(<type2>... source)
+    {
+        return source.length == 0;
+    }
+
+    public boolean containsAll(<name2>Iterable source)
+    {
+        return source.isEmpty();
+    }
+
+    public Mutable<name2>List toList()
+    {
+        return new <name2>ArrayList();
+    }
+
+    public Mutable<name2>Set toSet()
+    {
+        return new <name2>HashSet();
+    }
+
+    public Mutable<name2>Bag toBag()
+    {
+        return new <name2>HashBag();
+    }
+
+    public Lazy<name2>Iterable asLazy()
+    {
+        return new Lazy<name2>IterableAdapter(this);
+    }
+
+    public Immutable<name1><name2>Map newWithKeyValue(<type1> key, <type2> value)
+    {
+        return new Immutable<name1><name2>SingletonMap(key, value);
+    }
+
+    public Immutable<name1><name2>Map newWithoutKey(<type1> key)
+    {
+        return this;
+    }
+
+    public Immutable<name1><name2>Map newWithoutAllKeys(<name1>Iterable keys)
+    {
+        return this;
+    }
+
+    public int size()
+    {
+        return 0;
+    }
+
+    public boolean isEmpty()
+    {
+        return true;
+    }
+
+    public boolean notEmpty()
+    {
+        return false;
+    }
+
+    public Mutable<name1>Set keySet()
+    {
+        return Unmodifiable<name1>Set.of(new <name1>HashSet());
+    }
+
+    public Mutable<name2>Collection values()
+    {
+        return Unmodifiable<name2>Collection.of(new <name2>ArrayList());
+    }
+
+    @Override
+    public boolean equals(Object obj)
+    {
+        if (obj == this)
+        {
+            return true;
+        }
+        if (!(obj instanceof <name1><name2>Map))
+        {
+            return false;
+        }
+        <name1><name2>Map map = (<name1><name2>Map) obj;
+        return map.isEmpty();
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return 0;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "{}";
+    }
+
+    public String makeString()
+    {
+        return "";
+    }
+
+    public String makeString(String separator)
+    {
+        return "";
+    }
+
+    public String makeString(String start, String separator, String end)
+    {
+        return start + end;
+    }
+
+    public void appendString(Appendable appendable)
+    {
+    }
+
+    public void appendString(Appendable appendable, String separator)
+    {
+    }
+
+    public void appendString(Appendable appendable, String start, String separator, String end)
+    {
+        try
+        {
+            appendable.append(start);
+            appendable.append(end);
+        }
+        catch (IOException e)
+        {
+            throw new RuntimeException(e);
+        }
+    }
+}
+
+>>
+
+arithmeticMethods ::= [
+    "byte": "allMethods",
+    "short": "allMethods",
+    "char": "allMethods",
+    "int": "allMethods",
+    "long": "allMethods",
+    "float": "allMethods",
+    "double": "allMethods",
+    "boolean": "noMethods"
+    ]
+
+allMethods() ::= <<
+public <wideType.(type2)> sum()
+{
+    return <wideZero.(type2)>;
+}
+
+public <type2> min()
+{
+    throw new NoSuchElementException();
+}
+
+public <type2> max()
+{
+    throw new NoSuchElementException();
+}
+
+public <type2> maxIfEmpty(<type2> defaultValue)
+{
+    return defaultValue;
+}
+
+public <type2> minIfEmpty(<type2> defaultValue)
+{
+    return defaultValue;
+}
+
+public double average()
+{
+    throw new ArithmeticException();
+}
+
+public double median()
+{
+    throw new ArithmeticException();
+}
+
+public <type2>[] toSortedArray()
+{
+    return new <type2>[0];
+}
+
+public Mutable<name2>List toSortedList()
+{
+    return new <name2>ArrayList();
+}
+
+>>
+
+noMethods() ::= ""

@@ -1,0 +1,46 @@
+import "copyright.stg"
+
+targetPath() ::= "org/eclipse/collections/api/map/primitive"
+
+fileName(primitive) ::= "ImmutableObject<primitive.name>Map"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.api.map.primitive;
+
+import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
+import org.eclipse.collections.api.block.predicate.primitive.Object<name>Predicate;
+import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
+import org.eclipse.collections.api.collection.ImmutableCollection;
+import org.eclipse.collections.api.collection.primitive.Immutable<name>Collection;
+
+/**
+ * This file was automatically generated from template file immutableObjectPrimitiveMap.stg.
+ *
+ * @since 3.0.
+ */
+public interface ImmutableObject<name>Map\<K> extends Object<name>Map\<K>
+{
+    ImmutableObject<name>Map\<K> select(Object<name>Predicate\<? super K> predicate);
+
+    ImmutableObject<name>Map\<K> reject(Object<name>Predicate\<? super K> predicate);
+
+    Immutable<name>Collection select(<name>Predicate predicate);
+
+    Immutable<name>Collection reject(<name>Predicate predicate);
+
+    \<V> ImmutableCollection\<V> collect(<name>ToObjectFunction\<? extends V> function);
+
+    ImmutableObject<name>Map\<K> newWithKeyValue(K key, <type> value);
+
+    ImmutableObject<name>Map\<K> newWithoutKey(K key);
+
+    ImmutableObject<name>Map\<K> newWithoutAllKeys(Iterable\<? extends K> keys);
+}
+
+>>

@@ -1,0 +1,51 @@
+import "copyright.stg"
+
+skipBooleanKeys() ::= "true"
+
+hasTwoPrimitives() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/api/map/primitive"
+
+fileName(primitive1, primitive2, sameTwoPrimitives) ::= "Immutable<primitive1.name><primitive2.name>Map"
+
+class(primitive1, primitive2, sameTwoPrimitives) ::= <<
+<body(primitive1.type, primitive2.type, primitive1.name, primitive2.name)>
+>>
+
+body(type1, type2, name1, name2) ::= <<
+<copyright()>
+
+package org.eclipse.collections.api.map.primitive;
+
+import org.eclipse.collections.api.<name1>Iterable;
+import org.eclipse.collections.api.block.function.primitive.<name2>ToObjectFunction;
+import org.eclipse.collections.api.block.predicate.primitive.<name2>Predicate;
+import org.eclipse.collections.api.block.predicate.primitive.<name1><name2>Predicate;
+import org.eclipse.collections.api.collection.ImmutableCollection;
+import org.eclipse.collections.api.collection.primitive.Immutable<name2>Collection;
+
+/**
+ * This file was automatically generated from template file immutablePrimitivePrimitiveMap.stg.
+ *
+ * @since 3.0.
+ */
+public interface Immutable<name1><name2>Map extends <name1><name2>Map
+{
+    Immutable<name1><name2>Map select(<name1><name2>Predicate predicate);
+
+    Immutable<name1><name2>Map reject(<name1><name2>Predicate predicate);
+
+    Immutable<name2>Collection select(<name2>Predicate predicate);
+
+    Immutable<name2>Collection reject(<name2>Predicate predicate);
+
+    \<V> ImmutableCollection\<V> collect(<name2>ToObjectFunction\<? extends V> function);
+
+    Immutable<name1><name2>Map newWithKeyValue(<type1> key, <type2> value);
+
+    Immutable<name1><name2>Map newWithoutKey(<type1> key);
+
+    Immutable<name1><name2>Map newWithoutAllKeys(<name1>Iterable keys);
+}
+
+>>

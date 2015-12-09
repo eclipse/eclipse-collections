@@ -1,0 +1,115 @@
+import "copyright.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+
+isTest() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/stack/mutable/primitive"
+
+fileName(primitive) ::= "Unmodifiable<primitive.name>StackTest"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.wrapperName, primitive.name)>
+>>
+
+body(type, wrapperName, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.stack.mutable.primitive;
+
+import org.eclipse.collections.api.iterator.Mutable<name>Iterator;
+import org.eclipse.collections.api.stack.primitive.Mutable<name>Stack;
+import org.eclipse.collections.impl.stack.primitive.Abstract<name>StackTestCase;
+import org.eclipse.collections.impl.test.Verify;
+import org.junit.Assert;
+import org.junit.Test;
+
+/**
+ * This file was automatically generated from template file unmodifiablePrimitiveStackTest.stg.
+ */
+public class Unmodifiable<name>StackTest extends Abstract<name>StackTestCase
+{
+    @Override
+    protected Mutable<name>Stack classUnderTest()
+    {
+        return new Unmodifiable<name>Stack(<name>ArrayStack.newStackWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">));
+    }
+
+    @Override
+    protected Mutable<name>Stack newWith(<type>... elements)
+    {
+        return new Unmodifiable<name>Stack(<name>ArrayStack.newStackWith(elements));
+    }
+
+    @Override
+    protected Mutable<name>Stack newMutableCollectionWith(<type>... elements)
+    {
+        return new Unmodifiable<name>Stack(<name>ArrayStack.newStackWith(elements));
+    }
+
+    @Override
+    protected Mutable<name>Stack newWithTopToBottom(<type>... elements)
+    {
+        return new Unmodifiable<name>Stack(<name>ArrayStack.newStackFromTopToBottom(elements));
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void push()
+    {
+        this.classUnderTest().push(<(literal.(type))("5")>);
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void pop()
+    {
+        this.classUnderTest().pop();
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void popWithCount()
+    {
+        this.classUnderTest().pop(2);
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void clear()
+    {
+        this.classUnderTest().clear();
+    }
+
+    @Test
+    public void asUnmodifiable()
+    {
+        Mutable<name>Stack stack1 = new Unmodifiable<name>Stack(<name>ArrayStack.newStackWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">));
+        Assert.assertEquals(stack1, stack1.asUnmodifiable());
+        Assert.assertSame(stack1, stack1.asUnmodifiable());
+    }
+
+    @Test
+    public void asSynchronized()
+    {
+        Mutable<name>Stack stack1 = new Unmodifiable<name>Stack(<name>ArrayStack.newStackWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">));
+        Verify.assertInstanceOf(Synchronized<name>Stack.class, stack1.asSynchronized());
+    }
+
+    @Test
+    public void <type>Iterator_with_remove()
+    {
+        Unmodifiable<name>Stack <type>Iterable = (Unmodifiable<name>Stack) this.classUnderTest();
+        Mutable<name>Iterator iterator = (Mutable<name>Iterator) <type>Iterable.<type>Iterator();
+        Assert.assertTrue(iterator.hasNext());
+        iterator.next();
+        Verify.assertThrows(UnsupportedOperationException.class, iterator::remove);
+    }
+
+    @Test
+    public void <type>Iterator_throws_for_remove_before_next()
+    {
+        Unmodifiable<name>Stack <type>Iterable = (Unmodifiable<name>Stack) this.classUnderTest();
+        Mutable<name>Iterator iterator = (Mutable<name>Iterator) <type>Iterable.<type>Iterator();
+        Assert.assertTrue(iterator.hasNext());
+        Verify.assertThrows(UnsupportedOperationException.class, iterator::remove);
+    }
+}
+
+>>

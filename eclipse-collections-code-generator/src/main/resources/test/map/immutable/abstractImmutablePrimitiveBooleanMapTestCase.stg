@@ -1,0 +1,100 @@
+import "copyright.stg"
+import "primitiveEquals.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+
+isTest() ::= "true"
+
+skipBoolean() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/map/immutable/primitive"
+
+fileName(primitive) ::= "AbstractImmutable<primitive.name>BooleanMapTestCase"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.map.immutable.primitive;
+
+import org.eclipse.collections.api.map.primitive.<name>BooleanMap;
+import org.eclipse.collections.api.map.primitive.Immutable<name>BooleanMap;
+import org.eclipse.collections.impl.factory.primitive.<name>BooleanMaps;
+import org.eclipse.collections.impl.map.mutable.primitive.<name>BooleanHashMap;
+import org.eclipse.collections.impl.map.primitive.Abstract<name>BooleanMapTestCase;
+import org.eclipse.collections.impl.test.Verify;
+import org.junit.Assert;
+import org.junit.Test;
+
+/**
+ * Abstract JUnit test for {@link Immutable<name>BooleanMap}.
+ * This file was automatically generated from template file abstractImmutablePrimitiveBooleanMapTestCase.stg.
+ */
+public abstract class AbstractImmutable<name>BooleanMapTestCase extends Abstract<name>BooleanMapTestCase
+{
+    @Override
+    protected Immutable<name>BooleanMap classUnderTest()
+    {
+        return <name>BooleanMaps.immutable.withAll(<name>BooleanHashMap.newWithKeysValues(<(literal.(type))("0")>, true, <(literal.(type))("31")>, false, <(literal.(type))("32")>, true));
+    }
+
+    @Override
+    protected Immutable<name>BooleanMap newWithKeysValues(<type> key1, boolean value1)
+    {
+        return <name>BooleanMaps.immutable.with(key1, value1);
+    }
+
+    @Override
+    protected Immutable<name>BooleanMap newWithKeysValues(<type> key1, boolean value1, <type> key2, boolean value2)
+    {
+        return <name>BooleanMaps.immutable.withAll(new <name>BooleanHashMap(2).withKeysValues(key1, value1, key2, value2));
+    }
+
+    @Override
+    protected Immutable<name>BooleanMap newWithKeysValues(<type> key1, boolean value1, <type> key2, boolean value2, <type> key3, boolean value3)
+    {
+        return <name>BooleanMaps.immutable.withAll(new <name>BooleanHashMap(3).withKeysValues(key1, value1, key2, value2, key3, value3));
+    }
+
+    @Override
+    protected Immutable<name>BooleanMap newWithKeysValues(<type> key1, boolean value1, <type> key2, boolean value2, <type> key3, boolean value3, <type> key4, boolean value4)
+    {
+        return <name>BooleanMaps.immutable.withAll(new <name>BooleanHashMap(4).withKeysValues(key1, value1, key2, value2, key3, value3, key4, value4));
+    }
+
+    @Override
+    protected Immutable<name>BooleanMap getEmptyMap()
+    {
+        return <name>BooleanMaps.immutable.with();
+    }
+
+    @Override
+    @Test
+    public void testEquals()
+    {
+        <name>BooleanMap map1 = this.newWithKeysValues(<(literal.(type))("0")>, true, <(literal.(type))("31")>, false, <(literal.(type))("32")>, true);
+        <name>BooleanMap map2 = this.newWithKeysValues(<(literal.(type))("32")>, true, <(literal.(type))("0")>, true, <(literal.(type))("31")>, false);
+        <name>BooleanMap map3 = this.newWithKeysValues(<(literal.(type))("0")>, true, <(literal.(type))("31")>, false, <(literal.(type))("32")>, true, <(literal.(type))("2")>, true);
+        <name>BooleanMap map4 = this.newWithKeysValues(<(literal.(type))("0")>, false, <(literal.(type))("31")>, false, <(literal.(type))("32")>, true);
+        <name>BooleanMap map5 = this.newWithKeysValues(<(literal.(type))("0")>, true, <(literal.(type))("31")>, false, <(literal.(type))("32")>, false);
+        <name>BooleanMap map6 = this.newWithKeysValues(<(literal.(type))("50")>, true, <(literal.(type))("60")>, true, <(literal.(type))("70")>, false);
+        <name>BooleanMap map7 = this.newWithKeysValues(<(literal.(type))("50")>, true, <(literal.(type))("60")>, true);
+        <name>BooleanMap map8 = this.newWithKeysValues(<(literal.(type))("0")>, true, <(literal.(type))("1")>, false);
+
+        Verify.assertEqualsAndHashCode(map1, map2);
+        Verify.assertPostSerializedEqualsAndHashCode(map1);
+        Verify.assertPostSerializedEqualsAndHashCode(map6);
+        Verify.assertPostSerializedEqualsAndHashCode(map8);
+        Verify.assertPostSerializedIdentity(this.getEmptyMap());
+        Assert.assertNotEquals(map1, map3);
+        Assert.assertNotEquals(map1, map4);
+        Assert.assertNotEquals(map1, map5);
+        Assert.assertNotEquals(map7, map6);
+        Assert.assertNotEquals(map7, map8);
+    }
+}
+
+>>

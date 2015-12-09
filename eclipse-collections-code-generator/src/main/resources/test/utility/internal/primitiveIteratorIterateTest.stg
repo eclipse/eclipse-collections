@@ -1,0 +1,121 @@
+import "copyright.stg"
+import "primitiveEquals.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+
+isTest() ::= "true"
+
+skipBoolean() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/utility/internal/primitive"
+
+fileName(primitive) ::= "<primitive.name>IteratorIterateTest"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name, primitive.wrapperName)>
+>>
+
+body(type, name, wrapperName) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.utility.internal.primitive;
+
+import java.util.NoSuchElementException;
+import org.eclipse.collections.api.<name>Iterable;
+import org.eclipse.collections.impl.block.factory.primitive.<name>Predicates;
+<if(primitive.floatingPoint)>import org.eclipse.collections.impl.list.Interval;<endif>
+import org.eclipse.collections.impl.list.mutable.FastList;
+import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
+import org.eclipse.collections.impl.test.Verify;
+import org.junit.Assert;
+import org.junit.Test;
+
+/**
+ * JUnit test for {@link <name>IteratorIterate}.
+ * This file was automatically generated from template file primitiveIteratorIterateTest.stg.
+ */
+public class <name>IteratorIterateTest
+{
+    private final <name>Iterable iterable = <name>ArrayList.newListWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">);
+
+    @Test
+    public void select_target()
+    {
+        Verify.assertSize(2, <name>IteratorIterate.select(this.iterable.<type>Iterator(), <name>Predicates.greaterThan(<(literal.(type))("1")>), new <name>ArrayList(2)));
+        Verify.assertSize(2, <name>IteratorIterate.select(this.iterable.<type>Iterator(), <name>Predicates.greaterThan(<(literal.(type))("1")>), new <name>ArrayList(3)));
+        Verify.assertEmpty(<name>IteratorIterate.select(this.iterable.<type>Iterator(), <name>Predicates.lessThan(<(literal.(type))("0")>), new <name>ArrayList(3)));
+    }
+
+    @Test
+    public void reject_target()
+    {
+        Verify.assertSize(1, <name>IteratorIterate.reject(this.iterable.<type>Iterator(), <name>Predicates.greaterThan(<(literal.(type))("1")>), new <name>ArrayList(1)));
+        Verify.assertEmpty(<name>IteratorIterate.reject(this.iterable.<type>Iterator(), <name>Predicates.greaterThan(<(literal.(type))("0")>), new <name>ArrayList(0)));
+    }
+
+    @Test
+    public void collect_target()
+    {
+        Verify.assertIterableSize(3, <name>IteratorIterate.collect(this.iterable.<type>Iterator(), String::valueOf, FastList.\<String>newList()));
+    }
+
+    @Test
+    public void sum()
+    {
+        Assert.assertEquals(<(wideLiteral.(type))("6")>, <name>IteratorIterate.sum(this.iterable.<type>Iterator())<(wideDelta.(type))>);
+        Assert.assertEquals(<(wideLiteral.(type))("0")>, <name>IteratorIterate.sum(new <name>ArrayList().<type>Iterator())<(wideDelta.(type))>);
+    }
+
+    <if(primitive.floatPrimitive)>@Test
+public void sumConsistentRounding()
+{
+    <name>Iterable iterable =
+        <name>ArrayList.newListWith(
+            Interval.oneTo(100_000)
+                    .toList()
+                    .shuffleThis()
+                    .collect<name>(i -> 1.0f / (i.floatValue() * i.floatValue() * i.floatValue() * i.floatValue()))
+                    .toArray());
+
+    // The test only ensures the consistency/stability of rounding. This is not meant to test the "correctness" of the float calculation result.
+    // Indeed the lower bits of this calculation result are always incorrect due to the information loss of original float values.
+    Assert.assertEquals(
+            1.082323233761663,
+            iterable.sum(),
+            1.0e-15);
+}
+
+    <elseif(primitive.doublePrimitive)>@Test
+public void sumConsistentRounding()
+{
+    <name>Iterable iterable =
+        <name>ArrayList.newListWith(
+            Interval.oneTo(100_000)
+                    .toList()
+                    .shuffleThis()
+                    .collect<name>(i -> <["1.0"]:(decimalLiteral.(type))()> / (i.<type>Value() * i.<type>Value() * i.<type>Value() * i.<type>Value()))
+                    .toArray());
+
+    Assert.assertEquals(
+            1.082323233711138,
+            iterable.sum(),
+            1.0e-15);
+}
+
+    <endif>
+    @Test
+    public void min()
+    {
+        Assert.assertEquals(<(literal.(type))("1")>, <name>IteratorIterate.min(this.iterable.<type>Iterator())<(wideDelta.(type))>);
+        Verify.assertThrows(NoSuchElementException.class, () -> <name>IteratorIterate.min(new <name>ArrayList().<type>Iterator()));
+    }
+
+    @Test
+    public void max()
+    {
+        Assert.assertEquals(<(literal.(type))("1")>, <name>IteratorIterate.min(this.iterable.<type>Iterator())<(wideDelta.(type))>);
+        Verify.assertThrows(NoSuchElementException.class, () -> <name>IteratorIterate.max(new <name>ArrayList().<type>Iterator()));
+    }
+}
+
+>>

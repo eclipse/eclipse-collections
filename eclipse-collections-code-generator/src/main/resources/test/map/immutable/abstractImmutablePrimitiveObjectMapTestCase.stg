@@ -1,0 +1,100 @@
+import "copyright.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+
+isTest() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/map/immutable/primitive"
+
+fileName(primitive) ::= "AbstractImmutable<primitive.name>ObjectMapTestCase"
+
+skipBoolean() ::= "true"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.map.immutable.primitive;
+
+import java.util.Iterator;
+
+import org.eclipse.collections.api.map.primitive.Immutable<name>ObjectMap;
+import org.eclipse.collections.impl.factory.primitive.<name>ObjectMaps;
+import org.eclipse.collections.impl.map.mutable.primitive.<name>ObjectHashMap;
+import org.eclipse.collections.impl.map.primitive.Abstract<name>ObjectMapTestCase;
+import org.eclipse.collections.impl.test.Verify;
+import org.junit.Assert;
+import org.junit.Test;
+
+/**
+ * Abstract JUnit test for {@link Immutable<name>ObjectMap}.
+ * This file was automatically generated from template file abstractImmutablePrimitiveObjectMapTestCase.stg.
+ */
+public abstract class AbstractImmutable<name>ObjectMapTestCase extends Abstract<name>ObjectMapTestCase
+{
+    @Override
+    protected abstract Immutable<name>ObjectMap\<String> classUnderTest();
+
+    @Override
+    protected \<T> Immutable<name>ObjectMap\<T> newWithKeysValues(<type> key1, T value1)
+    {
+        return <name>ObjectMaps.immutable.with(key1, value1);
+    }
+
+    @Override
+    protected \<T> Immutable<name>ObjectMap\<T> newWithKeysValues(<type> key1, T value1, <type> key2, T value2)
+    {
+        return <name>ObjectMaps.immutable.withAll(<name>ObjectHashMap.newWithKeysValues(key1, value1, key2, value2));
+    }
+
+    @Override
+    protected \<T> Immutable<name>ObjectMap\<T> newWithKeysValues(<type> key1, T value1, <type> key2, T value2, <type> key3, T value3)
+    {
+        return <name>ObjectMaps.immutable.withAll(<name>ObjectHashMap.newWithKeysValues(key1, value1, key2, value2, key3, value3));
+    }
+
+    @Override
+    protected \<T> Immutable<name>ObjectMap\<T> getEmptyMap()
+    {
+        return <name>ObjectMaps.immutable.with();
+    }
+
+    @Override
+    @Test
+    public void toImmutable()
+    {
+        super.toImmutable();
+        Immutable<name>ObjectMap\<String> map = this.classUnderTest();
+        Assert.assertSame(map, map.toImmutable());
+    }
+
+    @Override
+    @Test
+    public void iterator()
+    {
+        super.iterator();
+        Iterator\<String> iterator = this.classUnderTest().iterator();
+        iterator.next();
+        Verify.assertThrows(UnsupportedOperationException.class, iterator::remove);
+    }
+
+    @Override
+    @Test
+    public void keySet()
+    {
+        super.keySet();
+        Verify.assertThrows(UnsupportedOperationException.class, () -> { this.classUnderTest().keySet().remove(<(literal.(type))("0")>); });
+    }
+
+    @Override
+    public void values()
+    {
+        super.values();
+        Verify.assertThrows(UnsupportedOperationException.class, () -> { this.classUnderTest().values().remove("zero"); });
+    }
+}
+
+>>

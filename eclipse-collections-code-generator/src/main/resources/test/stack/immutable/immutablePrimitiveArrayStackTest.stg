@@ -1,0 +1,66 @@
+import "copyright.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+
+isTest() ::= "true"
+
+skipBoolean() ::="true"
+
+targetPath() ::= "org/eclipse/collections/impl/stack/immutable/primitive"
+
+fileName(primitive) ::= "Immutable<primitive.name>ArrayStackTest"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.wrapperName, primitive.name)>
+>>
+
+body(type, wrapperName, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.stack.immutable.primitive;
+
+import org.eclipse.collections.api.stack.primitive.Immutable<name>Stack;
+import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
+import org.eclipse.collections.impl.math.Mutable<wrapperName>;
+import org.eclipse.collections.impl.stack.mutable.primitive.<name>ArrayStack;
+import org.junit.Assert;
+import org.junit.Test;
+
+
+/**
+ * JUnit test for {@link Immutable<name>ArrayStack}.
+ * This file was automatically generated from template file immutablePrimitiveArrayStackTest.stg.
+ */
+public class Immutable<name>ArrayStackTest extends AbstractImmutable<name>StackTestCase
+{
+    @Override
+    protected Immutable<name>Stack classUnderTest()
+    {
+        return Immutable<name>ArrayStack.newStackWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">);
+    }
+
+    @Test
+    public void newWithIterable()
+    {
+        Assert.assertEquals(<name>ArrayStack.newStackWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">), this.newWithIterable(<name>ArrayList.newListWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">)));
+    }
+
+    @Test
+    public void newWithTopToBottom()
+    {
+        Assert.assertEquals(<name>ArrayStack.newStackFromTopToBottom(<["1", "2", "3"]:(literal.(type))(); separator=", ">), this.newWithTopToBottom(<["1", "2", "3"]:(literal.(type))(); separator=", ">));
+    }
+
+    @Override
+    @Test
+    public void injectInto()
+    {
+        super.injectInto();
+
+        Immutable<name>ArrayStack iterable = Immutable<name>ArrayStack.newStackWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">);
+        Mutable<wrapperName> result = iterable.injectInto(new Mutable<wrapperName>(<(literal.(type))("0")>), Mutable<wrapperName>::add);
+        Assert.assertEquals(new Mutable<wrapperName>(<(literal.(type))("6")>), result);
+    }
+}
+
+>>

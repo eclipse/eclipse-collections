@@ -1,0 +1,86 @@
+import "copyright.stg"
+
+targetPath() ::= "org/eclipse/collections/impl/list/immutable/primitive"
+
+fileName(primitive) ::= "Immutable<primitive.name>ListFactoryImpl"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.list.immutable.primitive;
+
+import org.eclipse.collections.api.<name>Iterable;
+import org.eclipse.collections.api.factory.list.primitive.Immutable<name>ListFactory;
+import org.eclipse.collections.api.list.primitive.Immutable<name>List;
+
+/**
+ * Immutable<name>ListFactoryImpl is a factory implementation which creates instances of type {@link Immutable<name>List}.
+ * This file was automatically generated from template file immutablePrimitiveListFactoryImpl.stg.
+ *
+ * @since 3.2.
+ */
+public class Immutable<name>ListFactoryImpl implements Immutable<name>ListFactory
+{
+    public Immutable<name>List empty()
+    {
+        return Immutable<name>EmptyList.INSTANCE;
+    }
+
+    public Immutable<name>List of()
+    {
+        return this.empty();
+    }
+
+    public Immutable<name>List with()
+    {
+        return this.empty();
+    }
+
+    public Immutable<name>List of(<type> one)
+    {
+        return this.with(one);
+    }
+
+    public Immutable<name>List with(<type> one)
+    {
+        return new Immutable<name>SingletonList(one);
+    }
+
+    public Immutable<name>List of(<type>... items)
+    {
+        return this.with(items);
+    }
+
+    public Immutable<name>List with(<type>... items)
+    {
+        if (items == null || items.length == 0)
+        {
+            return this.with();
+        }
+        if (items.length == 1)
+        {
+            return this.with(items[0]);
+        }
+        return Immutable<name>ArrayList.newListWith(items);
+    }
+
+    public Immutable<name>List ofAll(<name>Iterable items)
+    {
+        return this.withAll(items);
+    }
+
+    public Immutable<name>List withAll(<name>Iterable items)
+    {
+        if (items instanceof Immutable<name>List)
+        {
+            return (Immutable<name>List) items;
+        }
+        return this.with(items.toArray());
+    }
+}
+
+>>

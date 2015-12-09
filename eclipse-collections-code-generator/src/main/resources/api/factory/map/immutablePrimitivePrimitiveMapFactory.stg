@@ -1,0 +1,61 @@
+import "copyright.stg"
+
+hasTwoPrimitives() ::= "true"
+
+skipBooleanKeys() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/api/factory/map/primitive"
+
+fileName(primitive1, primitive2, sameTwoPrimitives) ::= "Immutable<primitive1.name><primitive2.name>MapFactory"
+
+class(primitive1, primitive2, sameTwoPrimitives) ::= <<
+<body(primitive1.type, primitive2.type, primitive1.name, primitive2.name)>
+>>
+
+body(type1, type2, name1, name2) ::= <<
+<copyright()>
+
+package org.eclipse.collections.api.factory.map.primitive;
+
+import org.eclipse.collections.api.map.primitive.<name1><name2>Map;
+import org.eclipse.collections.api.map.primitive.Immutable<name1><name2>Map;
+
+/**
+ * A factory which creates instances of type {@link Immutable<name1><name2>Map}.
+ * This file was automatically generated from template file immutablePrimitivePrimitiveMapFactory.stg.
+ *
+ * @since 4.0.
+ */
+public interface Immutable<name1><name2>MapFactory
+{
+    /**
+     * @since 6.0
+     */
+    Immutable<name1><name2>Map empty();
+
+    /**
+     * Same as {@link #empty()}.
+     */
+    Immutable<name1><name2>Map of();
+
+    /**
+     * Same as {@link #empty()}.
+     */
+    Immutable<name1><name2>Map with();
+
+    /**
+     * Same as {@link #with(<type1>, <type2>)}.
+     */
+    Immutable<name1><name2>Map of(<type1> key, <type2> value);
+
+    Immutable<name1><name2>Map with(<type1> key, <type2> value);
+
+    /**
+     * Same as {@link #withAll(<name1><name2>Map)}.
+     */
+    Immutable<name1><name2>Map ofAll(<name1><name2>Map map);
+
+    Immutable<name1><name2>Map withAll(<name1><name2>Map map);
+}
+
+>>

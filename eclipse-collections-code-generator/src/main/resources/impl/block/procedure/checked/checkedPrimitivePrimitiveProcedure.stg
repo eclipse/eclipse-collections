@@ -1,0 +1,51 @@
+import "copyright.stg"
+
+hasTwoPrimitives() ::= "true"
+
+skipBooleanKeys() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/block/procedure/checked/primitive"
+
+fileName(primitive1, primitive2, sameTwoPrimitives) ::= "Checked<primitive1.name><primitive2.name>Procedure"
+
+class(primitive1, primitive2, sameTwoPrimitives) ::= <<
+<body(primitive1.type, primitive2.type, primitive1.name, primitive2.name)>
+>>
+
+body(type1, type2, name1, name2) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.block.procedure.checked.primitive;
+
+import org.eclipse.collections.api.block.procedure.primitive.<name1><name2>Procedure;
+
+/**
+ * This file was automatically generated from template file checkedPrimitivePrimitiveProcedure.stg.
+ *
+ * @since 4.0.
+ */
+public abstract class Checked<name1><name2>Procedure implements <name1><name2>Procedure
+{
+    private static final long serialVersionUID = 1L;
+
+    public final void value(<type1> item1, <type2> item2)
+    {
+        try
+        {
+            this.safeValue(item1, item2);
+        }
+        catch (RuntimeException e)
+        {
+            throw e;
+        }
+        catch (Exception e)
+        {
+            throw new RuntimeException("Checked exception caught in <name1><name2>Procedure", e);
+        }
+    }
+
+    @SuppressWarnings("ProhibitedExceptionDeclared")
+    public abstract void safeValue(<type1> item1, <type2> item2) throws Exception;
+}
+
+>>

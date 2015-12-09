@@ -1,0 +1,211 @@
+import "copyright.stg"
+import "primitiveEquals.stg"
+import "primitiveEqualsWithDelta.stg"
+import "specialPredicates.stg"
+
+targetPath() ::= "org/eclipse/collections/impl/block/factory/primitive"
+
+fileName(primitive) ::= "<primitive.name>Predicates"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.block.factory.primitive;
+
+import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
+
+/**
+ * Provides a set of common predicates for <type> values.
+ * This file was automatically generated from template file primitivePredicates.stg.
+ */
+public final class <name>Predicates
+{
+    <(intPredicateConstants.(type))()>
+    <(charPredicateConstants.(type))()>
+    private static final <name>Predicate ALWAYS_TRUE = new AlwaysTrue<name>Predicate();
+    private static final <name>Predicate ALWAYS_FALSE = new AlwaysFalse<name>Predicate();
+
+    private <name>Predicates()
+    {
+        throw new AssertionError("Suppress default constructor for noninstantiability");
+    }
+
+    @SuppressWarnings("MisspelledEquals")
+    public static <name>Predicate equal(<type> expected)
+    {
+        return new Equals<name>Predicate(expected);
+    }
+
+    <(equalWithDelta.(type))()>
+    public static <name>Predicate lessThan(<type> expected)
+    {
+        return new LessThan<name>Predicate(expected);
+    }
+
+    public static <name>Predicate greaterThan(<type> expected)
+    {
+        return new GreaterThan<name>Predicate(expected);
+    }
+
+    <(intPredicateMethods.(type))()>
+    <(charPredicateMethods.(type))()>
+    public static <name>Predicate alwaysTrue()
+    {
+        return ALWAYS_TRUE;
+    }
+
+    public static <name>Predicate alwaysFalse()
+    {
+        return ALWAYS_FALSE;
+    }
+
+    public static <name>Predicate and(<name>Predicate one, <name>Predicate two)
+    {
+        return new And<name>Predicate(one, two);
+    }
+
+    public static <name>Predicate or(<name>Predicate one, <name>Predicate two)
+    {
+        return new Or<name>Predicate(one, two);
+    }
+
+    public static <name>Predicate not(<name>Predicate negate)
+    {
+        return new Not<name>Predicate(negate);
+    }
+
+    private static final class Equals<name>Predicate implements <name>Predicate
+    {
+        private static final long serialVersionUID = 1L;
+        private final <type> expected;
+
+        private Equals<name>Predicate(<type> expected)
+        {
+            this.expected = expected;
+        }
+
+        public boolean accept(<type> actual)
+        {
+            return <(equals.(type))("actual", "this.expected")>;
+        }
+    }
+
+    <(equalsWithDeltaClass.(type))()>
+    private static final class LessThan<name>Predicate implements <name>Predicate
+    {
+        private static final long serialVersionUID = 1L;
+
+        private final <type> expected;
+
+        private LessThan<name>Predicate(<type> expected)
+        {
+            this.expected = expected;
+        }
+
+        public boolean accept(<type> actual)
+        {
+            return actual \< this.expected;
+        }
+    }
+
+    private static final class GreaterThan<name>Predicate implements <name>Predicate
+    {
+        private static final long serialVersionUID = 1L;
+
+        private final <type> expected;
+
+        private GreaterThan<name>Predicate(<type> expected)
+        {
+            this.expected = expected;
+        }
+
+        public boolean accept(<type> actual)
+        {
+            return actual > this.expected;
+        }
+    }
+
+    private static final class And<name>Predicate implements <name>Predicate
+    {
+        private static final long serialVersionUID = 1L;
+
+        private final <name>Predicate one;
+        private final <name>Predicate two;
+
+        private And<name>Predicate(<name>Predicate one, <name>Predicate two)
+        {
+            this.one = one;
+            this.two = two;
+        }
+
+        public boolean accept(<type> actual)
+        {
+            return this.one.accept(actual) && this.two.accept(actual);
+        }
+    }
+
+    private static final class Or<name>Predicate implements <name>Predicate
+    {
+        private static final long serialVersionUID = 1L;
+
+        private final <name>Predicate one;
+        private final <name>Predicate two;
+
+        private Or<name>Predicate(<name>Predicate one, <name>Predicate two)
+        {
+            this.one = one;
+            this.two = two;
+        }
+
+        public boolean accept(<type> actual)
+        {
+            return this.one.accept(actual) || this.two.accept(actual);
+        }
+    }
+
+    private static final class Not<name>Predicate implements <name>Predicate
+    {
+        private static final long serialVersionUID = 1L;
+
+        private final <name>Predicate negate;
+
+        private Not<name>Predicate(<name>Predicate negate)
+        {
+            this.negate = negate;
+        }
+
+        public boolean accept(<type> actual)
+        {
+            return !this.negate.accept(actual);
+        }
+    }
+
+    <(intPredicateClasses.(type))()>
+    <(charPredicateClasses.(type))()>
+
+    private static final class AlwaysTrue<name>Predicate implements <name>Predicate
+    {
+        private static final long serialVersionUID = 1L;
+
+        public boolean accept(<type> value)
+        {
+            return true;
+        }
+    }
+
+    private static final class AlwaysFalse<name>Predicate implements <name>Predicate
+    {
+        private static final long serialVersionUID = 1L;
+
+        public boolean accept(<type> value)
+        {
+            return false;
+        }
+    }
+}
+
+>>

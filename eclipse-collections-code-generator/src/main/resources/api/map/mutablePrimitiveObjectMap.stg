@@ -1,0 +1,78 @@
+import "copyright.stg"
+
+skipBoolean() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/api/map/primitive"
+
+fileName(primitive) ::= "Mutable<primitive.name>ObjectMap"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.api.map.primitive;
+
+import org.eclipse.collections.api.<name>Iterable;
+import org.eclipse.collections.api.block.function.Function;
+import org.eclipse.collections.api.block.function.Function0;
+import org.eclipse.collections.api.block.function.Function2;
+import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
+import org.eclipse.collections.api.block.predicate.primitive.<name>ObjectPredicate;
+
+/**
+ * This file was automatically generated from template file mutablePrimitiveObjectMap.stg.
+ *
+ * @since 3.0.
+ */
+public interface Mutable<name>ObjectMap\<V> extends <name>ObjectMap\<V>, MutablePrimitiveObjectMap\<V>
+{
+    V put(<type> key, V value);
+
+    /**
+     * @since 5.0.
+     */
+    void putAll(<name>ObjectMap\<? extends V> map);
+
+    V removeKey(<type> key);
+
+    V remove(<type> key);
+
+    V getIfAbsentPut(<type> key, V value);
+
+    V getIfAbsentPut(<type> key, Function0\<? extends V> function);
+
+    V getIfAbsentPutWithKey(<type> key, <name>ToObjectFunction\<? extends V> function);
+
+    \<P> V getIfAbsentPutWith(<type> key, Function\<? super P, ? extends V> function, P parameter);
+
+    /**
+     * Look up the value associated with {@code key}, apply the {@code function} to it, and replace the value. If there
+     * is no value associated with {@code key}, start it off with a value supplied by {@code factory}.
+     */
+    V updateValue(<type> key, Function0\<? extends V> factory, Function\<? super V, ? extends V> function);
+
+    /**
+     * Same as {@link #updateValue(<type>, Function0, Function)} with a Function2 and specified parameter which is
+     * passed to the function.
+     */
+    \<P> V updateValueWith(<type> key, Function0\<? extends V> factory, Function2\<? super V, ? super P, ? extends V> function, P parameter);
+
+    Mutable<name>ObjectMap\<V> select(<name>ObjectPredicate\<? super V> predicate);
+
+    Mutable<name>ObjectMap\<V> reject(<name>ObjectPredicate\<? super V> predicate);
+
+    Mutable<name>ObjectMap\<V> withKeyValue(<type> key, V value);
+
+    Mutable<name>ObjectMap\<V> withoutKey(<type> key);
+
+    Mutable<name>ObjectMap\<V> withoutAllKeys(<name>Iterable keys);
+
+    Mutable<name>ObjectMap\<V> asUnmodifiable();
+
+    Mutable<name>ObjectMap\<V> asSynchronized();
+}
+
+>>

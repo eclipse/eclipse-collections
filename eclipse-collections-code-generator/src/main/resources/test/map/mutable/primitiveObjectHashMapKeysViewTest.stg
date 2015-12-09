@@ -1,0 +1,49 @@
+import "copyright.stg"
+import "primitiveLiteral.stg"
+
+skipBoolean() ::= "true"
+
+isTest() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/map/mutable/primitive"
+
+fileName(primitive) ::= "<primitive.name>ObjectHashMapKeysViewTest"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.map.mutable.primitive;
+
+import org.eclipse.collections.api.Lazy<name>Iterable;
+import org.eclipse.collections.impl.lazy.primitive.AbstractLazy<name>IterableTestCase;
+
+/**
+ * JUnit test for {@link <name>ObjectHashMap#keysView}.
+ * This file was automatically generated from template file primitiveObjectHashMapKeysViewTest.stg.
+ */
+public class <name>ObjectHashMapKeysViewTest extends AbstractLazy<name>IterableTestCase
+{
+    @Override
+    protected Lazy<name>Iterable classUnderTest()
+    {
+        return <name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, 1, <(literal.(type))("2")>, 2, <(literal.(type))("3")>, 3).keysView();
+    }
+
+    @Override
+    protected Lazy<name>Iterable getEmptyIterable()
+    {
+        return <name>ObjectHashMap.newMap().keysView();
+    }
+
+    @Override
+    protected Lazy<name>Iterable newWith(<type> element1, <type> element2)
+    {
+        return <name>ObjectHashMap.newWithKeysValues(element1, 1, element2, 2).keysView();
+    }
+}
+
+>>

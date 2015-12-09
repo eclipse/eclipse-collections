@@ -1,0 +1,561 @@
+import "copyright.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+import "primitiveEquals.stg"
+
+skipBoolean() ::= "true"
+
+isTest() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/map/mutable/primitive"
+
+fileName(primitive) ::= "Object<primitive.name>HashMapTestCase"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name, primitive.wrapperName)>
+>>
+
+body(type, name, wrapperName) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.map.mutable.primitive;
+
+import java.lang.reflect.Field;
+import java.util.Iterator;
+
+import org.eclipse.collections.api.block.function.primitive.<name>Function;
+import org.eclipse.collections.api.block.function.primitive.<name>Function0;
+import org.eclipse.collections.api.block.function.primitive.<name>To<name>Function;
+import org.eclipse.collections.api.map.primitive.MutableObject<name>Map;
+import org.eclipse.collections.impl.factory.primitive.Object<name>Maps;
+import org.eclipse.collections.impl.test.Verify;
+import org.junit.Assert;
+import org.junit.Test;
+
+public abstract class Object<name>HashMapTestCase extends AbstractMutableObject<name>MapTestCase
+{
+    private final MutableObject<name>Map\<String> map = this.classUnderTest();
+
+    private Class targetClass = getTargetClass();
+
+    protected abstract MutableObject<name>Map newMapWithInitialCapacity(int size);
+
+    protected abstract Class getTargetClass();
+
+    @Test
+    public void defaultInitialCapacity() throws Exception
+    {
+        Field keys = targetClass.getDeclaredField("keys");
+        keys.setAccessible(true);
+        Field values = targetClass.getDeclaredField("values");
+        values.setAccessible(true);
+
+        MutableObject<name>Map\<String> hashMap = this.getEmptyMap();
+        Assert.assertEquals(16L, ((Object[]) keys.get(hashMap)).length);
+        Assert.assertEquals(16L, ((<type>[]) values.get(hashMap)).length);
+    }
+
+
+    @Test
+    public void newWithInitialCapacity() throws Exception
+    {
+        Field keys = targetClass.getDeclaredField("keys");
+        keys.setAccessible(true);
+        Field values = targetClass.getDeclaredField("values");
+        values.setAccessible(true);
+
+        MutableObject<name>Map\<String> hashMap = this.newMapWithInitialCapacity(3);
+        Assert.assertEquals(8L, ((Object[]) keys.get(hashMap)).length);
+        Assert.assertEquals(8L, ((<type>[]) values.get(hashMap)).length);
+
+        MutableObject<name>Map\<String> hashMap2 = this.newMapWithInitialCapacity(15);
+        Assert.assertEquals(32L, ((Object[]) keys.get(hashMap2)).length);
+        Assert.assertEquals(32L, ((<type>[]) values.get(hashMap2)).length);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void newWithInitialCapacity_negative_throws()
+    {
+        this.newMapWithInitialCapacity(-1);
+    }
+
+    @Test
+    public void newMap() throws Exception
+    {
+        Field keys = targetClass.getDeclaredField("keys");
+        keys.setAccessible(true);
+        Field values = targetClass.getDeclaredField("values");
+        values.setAccessible(true);
+
+        MutableObject<name>Map\<String> hashMap = this.getEmptyMap();
+        Assert.assertEquals(16L, ((Object[]) keys.get(hashMap)).length);
+        Assert.assertEquals(16L, ((<type>[]) values.get(hashMap)).length);
+        Assert.assertEquals(this.getEmptyMap(), hashMap);
+    }
+
+    @Test
+    public void occupiedWithDataAndSentinelsOnClear() throws Exception
+    {
+        Field occupiedWithData = targetClass.getDeclaredField("occupiedWithData");
+        Field occupiedWithSentinels = targetClass.getDeclaredField("occupiedWithSentinels");
+        occupiedWithData.setAccessible(true);
+        occupiedWithSentinels.setAccessible(true);
+        MutableObject<name>Map\<Float> hashMap = this.newWithKeysValues(2.0f, <(literal.(type))("2")>, 3.0f, <(literal.(type))("3")>);
+
+        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+        Assert.assertEquals(2, occupiedWithData.get(hashMap));
+
+        hashMap.remove(2.0f);
+        Assert.assertEquals(1, occupiedWithSentinels.get(hashMap));
+        Assert.assertEquals(1, occupiedWithData.get(hashMap));
+
+        hashMap.clear();
+        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+        Assert.assertEquals(0, occupiedWithData.get(hashMap));
+    }
+
+    @Test
+    public void occupiedWithDataAndSentinelsOnRemove() throws Exception
+    {
+        Field occupiedWithData = targetClass.getDeclaredField("occupiedWithData");
+        Field occupiedWithSentinels = targetClass.getDeclaredField("occupiedWithSentinels");
+        occupiedWithData.setAccessible(true);
+        occupiedWithSentinels.setAccessible(true);
+        MutableObject<name>Map\<Float> hashMap = this.newWithKeysValues(2.0f, <(literal.(type))("2")>, 3.0f, <(literal.(type))("3")>, 4.0f, <(literal.(type))("4")>);
+
+        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+        Assert.assertEquals(3, occupiedWithData.get(hashMap));
+
+        hashMap.remove(2.0f);
+        Assert.assertEquals(1, occupiedWithSentinels.get(hashMap));
+        Assert.assertEquals(2, occupiedWithData.get(hashMap));
+
+        hashMap.remove(5.0f);
+        Assert.assertEquals(1, occupiedWithSentinels.get(hashMap));
+        Assert.assertEquals(2, occupiedWithData.get(hashMap));
+
+        hashMap.remove(5.0f);
+        Assert.assertEquals(1, occupiedWithSentinels.get(hashMap));
+        Assert.assertEquals(2, occupiedWithData.get(hashMap));
+
+        hashMap.remove(1.0f);
+        Assert.assertEquals(1, occupiedWithSentinels.get(hashMap));
+        Assert.assertEquals(2, occupiedWithData.get(hashMap));
+    }
+
+    @Test
+    public void occupiedWithDataAndSentinelsOnUpdateValue() throws Exception
+    {
+        Field occupiedWithData = targetClass.getDeclaredField("occupiedWithData");
+        Field occupiedWithSentinels = targetClass.getDeclaredField("occupiedWithSentinels");
+        occupiedWithData.setAccessible(true);
+        occupiedWithSentinels.setAccessible(true);
+        MutableObject<name>Map\<Float> hashMap = this.newWithKeysValues(2.0f, <(literal.(type))("2")>, 3.0f, <(literal.(type))("3")>, 4.0f, <(literal.(type))("4")>);
+
+        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+        Assert.assertEquals(3, occupiedWithData.get(hashMap));
+
+        <name>To<name>Function function = (<type> parameter) -> parameter;
+
+        hashMap.updateValue(2.0f, <(literal.(type))("0")>, function);
+        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+        Assert.assertEquals(3, occupiedWithData.get(hashMap));
+
+        hashMap.updateValue(5.0f, <(literal.(type))("0")>, function);
+        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+        Assert.assertEquals(4, occupiedWithData.get(hashMap));
+
+        hashMap.remove(2.0f);
+        Assert.assertEquals(1, occupiedWithSentinels.get(hashMap));
+        Assert.assertEquals(3, occupiedWithData.get(hashMap));
+
+        hashMap.updateValue(2.0f, <(literal.(type))("0")>, function); // putting in a slot marked REMOVED
+        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+        Assert.assertEquals(4, occupiedWithData.get(hashMap));
+    }
+
+    @Test
+    public void occupiedWithDataAndSentinelsOnPut() throws Exception
+    {
+        Field occupiedWithData = targetClass.getDeclaredField("occupiedWithData");
+        Field occupiedWithSentinels = targetClass.getDeclaredField("occupiedWithSentinels");
+        occupiedWithData.setAccessible(true);
+        occupiedWithSentinels.setAccessible(true);
+        MutableObject<name>Map\<Float> hashMap = this.getEmptyMap();
+        Assert.assertEquals(0, occupiedWithData.get(hashMap));
+        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+
+        for (int i = 2; i \< 10; i++)
+        {
+            hashMap.put((float) i, <(castFromInt.(type))("i")>);
+        }
+
+        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+
+        hashMap.remove(2.0f);
+        Assert.assertEquals(7, occupiedWithData.get(hashMap));
+        Assert.assertEquals(1, occupiedWithSentinels.get(hashMap));
+
+        hashMap.put(2.0f, <(literal.(type))("9")>); // putting in a slot marked REMOVED
+        Assert.assertEquals(8, occupiedWithData.get(hashMap));
+        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+    }
+
+    @Test
+    public void occupiedWithDataAndSentinelsOnGetIfAbsentPut() throws Exception
+    {
+        Field occupiedWithData = targetClass.getDeclaredField("occupiedWithData");
+        Field occupiedWithSentinels = targetClass.getDeclaredField("occupiedWithSentinels");
+        occupiedWithData.setAccessible(true);
+        occupiedWithSentinels.setAccessible(true);
+        MutableObject<name>Map\<Float> hashMap = this.newWithKeysValues(2.0f, <(literal.(type))("2")>, 3.0f, <(literal.(type))("3")>, 4.0f, <(literal.(type))("4")>);
+
+        hashMap.getIfAbsentPut(2.0f, <(literal.(type))("5")>);
+        Assert.assertEquals(3, occupiedWithData.get(hashMap));
+        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+
+        hashMap.getIfAbsentPut(5.0f, <(literal.(type))("5")>);
+        Assert.assertEquals(4, occupiedWithData.get(hashMap));
+        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+
+        hashMap.remove(2.0f);
+        Assert.assertEquals(3, occupiedWithData.get(hashMap));
+        Assert.assertEquals(1, occupiedWithSentinels.get(hashMap));
+
+        hashMap.getIfAbsentPut(2.0f, <(literal.(type))("5")>); //putting in a slot marked REMOVED
+        Assert.assertEquals(4, occupiedWithData.get(hashMap));
+        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+    }
+
+    @Test
+    public void occupiedWithDataAndSentinelsOnGetIfAbsentPutFunction() throws Exception
+    {
+        Field occupiedWithData = targetClass.getDeclaredField("occupiedWithData");
+        Field occupiedWithSentinels = targetClass.getDeclaredField("occupiedWithSentinels");
+        occupiedWithData.setAccessible(true);
+        occupiedWithSentinels.setAccessible(true);
+        MutableObject<name>Map\<Float> hashMap = this.newWithKeysValues(2.0f, <(literal.(type))("2")>, 3.0f, <(literal.(type))("3")>, 4.0f, <(literal.(type))("4")>);
+
+        <name>Function0 function = () -> <(literal.(type))("5")>;
+
+        hashMap.getIfAbsentPut(2.0f, function);
+        Assert.assertEquals(3, occupiedWithData.get(hashMap));
+        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+
+        hashMap.getIfAbsentPut(5.0f, function);
+        Assert.assertEquals(4, occupiedWithData.get(hashMap));
+        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+
+        hashMap.remove(2.0f);
+        Assert.assertEquals(3, occupiedWithData.get(hashMap));
+        Assert.assertEquals(1, occupiedWithSentinels.get(hashMap));
+
+        hashMap.getIfAbsentPut(2.0f, function); //putting in a slot marked REMOVED
+        Assert.assertEquals(4, occupiedWithData.get(hashMap));
+        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+    }
+
+    @Test
+    public void occupiedWithDataAndSentinelsOnGetIfAbsentPutWith() throws Exception
+    {
+        Field occupiedWithData = targetClass.getDeclaredField("occupiedWithData");
+        Field occupiedWithSentinels = targetClass.getDeclaredField("occupiedWithSentinels");
+        occupiedWithData.setAccessible(true);
+        occupiedWithSentinels.setAccessible(true);
+        MutableObject<name>Map\<Float> hashMap = this.newWithKeysValues(2.0f, <(literal.(type))("2")>, 3.0f, <(literal.(type))("3")>, 4.0f, <(literal.(type))("4")>);
+
+        <name>Function\<Integer> function = (Integer object) -> (<type>) object.intValue();
+
+        hashMap.getIfAbsentPutWith(2.0f, function, Integer.valueOf(5));
+        Assert.assertEquals(3, occupiedWithData.get(hashMap));
+        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+
+        hashMap.getIfAbsentPutWith(5.0f, function, Integer.valueOf(5));
+        Assert.assertEquals(4, occupiedWithData.get(hashMap));
+        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+
+        hashMap.remove(2.0f);
+        Assert.assertEquals(3, occupiedWithData.get(hashMap));
+        Assert.assertEquals(1, occupiedWithSentinels.get(hashMap));
+
+        hashMap.getIfAbsentPutWith(2.0f, function, Integer.valueOf(5)); //putting in a slot marked REMOVED
+        Assert.assertEquals(4, occupiedWithData.get(hashMap));
+        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+    }
+
+    @Test
+    public void occupiedWithDataAndSentinelsOnGetIfAbsentPutWithKey() throws Exception
+    {
+        Field occupiedWithData = targetClass.getDeclaredField("occupiedWithData");
+        Field occupiedWithSentinels = targetClass.getDeclaredField("occupiedWithSentinels");
+        occupiedWithData.setAccessible(true);
+        occupiedWithSentinels.setAccessible(true);
+        MutableObject<name>Map\<Float> hashMap = this.newWithKeysValues(2.0f, <(literal.(type))("2")>, 3.0f, <(literal.(type))("3")>, 4.0f, <(literal.(type))("4")>);
+
+        <name>Function\<Float> function = (Float floatParameter) -> (<type>) floatParameter.floatValue();
+
+        hashMap.getIfAbsentPutWithKey(2.0f, function);
+        Assert.assertEquals(3, occupiedWithData.get(hashMap));
+        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+
+        hashMap.getIfAbsentPutWithKey(5.0f, function);
+        Assert.assertEquals(4, occupiedWithData.get(hashMap));
+        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+
+        hashMap.remove(2.0f);
+        Assert.assertEquals(3, occupiedWithData.get(hashMap));
+        Assert.assertEquals(1, occupiedWithSentinels.get(hashMap));
+
+        hashMap.getIfAbsentPutWithKey(2.0f, function); //putting in a slot marked REMOVED
+        Assert.assertEquals(4, occupiedWithData.get(hashMap));
+        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+    }
+
+    @Test
+    public void occupiedWithSentinelsOnPutRemovedSlot() throws Exception
+    {
+        Field occupiedWithData = targetClass.getDeclaredField("occupiedWithData");
+        Field occupiedWithSentinels = targetClass.getDeclaredField("occupiedWithSentinels");
+        occupiedWithData.setAccessible(true);
+        occupiedWithSentinels.setAccessible(true);
+        MutableObject<name>Map\<Float> hashMap = this.getEmptyMap();
+        Assert.assertEquals(0, occupiedWithData.get(hashMap));
+        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+
+        for (int i = 2; i \< 10; i++)
+        {
+            hashMap.put((float) i, <(castFromInt.(type))("i")>);
+        }
+
+        hashMap.remove(2.0f);
+        Assert.assertEquals(1, occupiedWithSentinels.get(hashMap));
+        Assert.assertEquals(7, occupiedWithData.get(hashMap));
+
+        hashMap.put(2.0f, <(literal.(type))("3")>); //putting in a slot marked as REMOVED
+
+        Assert.assertEquals(0, occupiedWithSentinels.get(hashMap));
+        Assert.assertEquals(8, occupiedWithData.get(hashMap));
+    }
+
+    @Test
+    public void removeKeyIfAbsent()
+    {
+        MutableObject<name>Map\<String> map0 = this.newWithKeysValues("0", <(literal.(type))("0")>, "1", <(literal.(type))("1")>);
+        Assert.assertEquals(<(literal.(type))("1")>, map0.removeKeyIfAbsent("1", <(literal.(type))("100")>)<delta.(type)>);
+        Assert.assertEquals(this.newWithKeysValues("0", <(literal.(type))("0")>), map0);
+        Assert.assertEquals(<(literal.(type))("0")>, map0.removeKeyIfAbsent("0", <(literal.(type))("100")>)<delta.(type)>);
+        Assert.assertEquals(this.getEmptyMap(), map0);
+        Assert.assertEquals(<(literal.(type))("100")>, map0.removeKeyIfAbsent("1", <(literal.(type))("100")>)<delta.(type)>);
+        Assert.assertEquals(<(literal.(type))("100")>, map0.removeKeyIfAbsent("0", <(literal.(type))("100")>)<delta.(type)>);
+
+        MutableObject<name>Map\<String> map1 = this.newWithKeysValues("0", <(literal.(type))("0")>, "1", <(literal.(type))("1")>);
+        Assert.assertEquals(<(literal.(type))("0")>, map1.removeKeyIfAbsent("0", <(literal.(type))("100")>)<delta.(type)>);
+        Assert.assertEquals(this.newWithKeysValues("1", <(literal.(type))("1")>), map1);
+        Assert.assertEquals(<(literal.(type))("1")>, map1.removeKeyIfAbsent("1", <(literal.(type))("100")>)<delta.(type)>);
+        Assert.assertEquals(this.getEmptyMap(), map1);
+        Assert.assertEquals(<(literal.(type))("100")>, map1.removeKeyIfAbsent("0", <(literal.(type))("100")>)<delta.(type)>);
+        Assert.assertEquals(<(literal.(type))("100")>, map1.removeKeyIfAbsent("1", <(literal.(type))("100")>)<delta.(type)>);
+
+        Assert.assertEquals(<(literal.(type))("100")>, this.map.removeKeyIfAbsent("5", <(literal.(type))("100")>)<delta.(type)>);
+        Assert.assertEquals(<(literal.(type))("100")>, this.map.removeKeyIfAbsent("50", <(literal.(type))("100")>)<delta.(type)>);
+        Assert.assertEquals(this.newWithKeysValues("0", <(literal.(type))("0")>, "1", <(literal.(type))("1")>, "2", <(literal.(type))("2")>), this.map);
+        Assert.assertEquals(<(literal.(type))("0")>, this.map.removeKeyIfAbsent("0", <(literal.(type))("100")>)<delta.(type)>);
+        Assert.assertEquals(this.newWithKeysValues("1", <(literal.(type))("1")>, "2", <(literal.(type))("2")>), this.map);
+        Assert.assertEquals(<(literal.(type))("1")>, this.map.removeKeyIfAbsent("1", <(literal.(type))("100")>)<delta.(type)>);
+        Assert.assertEquals(this.newWithKeysValues("2", <(literal.(type))("2")>), this.map);
+        Assert.assertEquals(<(literal.(type))("2")>, this.map.removeKeyIfAbsent("2", <(literal.(type))("100")>)<delta.(type)>);
+        Assert.assertEquals(this.getEmptyMap(), this.map);
+        Assert.assertEquals(<(literal.(type))("100")>, this.map.removeKeyIfAbsent("0", <(literal.(type))("100")>)<delta.(type)>);
+        Assert.assertEquals(<(literal.(type))("100")>, this.map.removeKeyIfAbsent("1", <(literal.(type))("100")>)<delta.(type)>);
+        Assert.assertEquals(<(literal.(type))("100")>, this.map.removeKeyIfAbsent("2", <(literal.(type))("100")>)<delta.(type)>);
+        Assert.assertEquals(this.getEmptyMap(), this.map);
+        Verify.assertEmpty(this.map);
+
+        this.map.put(AbstractMutableObject<name>MapTestCase.generateCollisions().get(0), <(literal.(type))("1")>);
+        this.map.put(AbstractMutableObject<name>MapTestCase.generateCollisions().get(1), <(literal.(type))("2")>);
+
+        Assert.assertEquals(<(literal.(type))("1")>, this.map.get(AbstractMutableObject<name>MapTestCase.generateCollisions().get(0))<delta.(type)>);
+        Assert.assertEquals(<(literal.(type))("1")>, this.map.removeKeyIfAbsent(AbstractMutableObject<name>MapTestCase.generateCollisions().get(0), <(literal.(type))("100")>)<delta.(type)>);
+        Assert.assertEquals(<(literal.(type))("0")>, this.map.get(AbstractMutableObject<name>MapTestCase.generateCollisions().get(0))<delta.(type)>);
+
+        Assert.assertEquals(<(literal.(type))("2")>, this.map.get(AbstractMutableObject<name>MapTestCase.generateCollisions().get(1))<delta.(type)>);
+        Assert.assertEquals(<(literal.(type))("2")>, this.map.removeKeyIfAbsent(AbstractMutableObject<name>MapTestCase.generateCollisions().get(1), <(literal.(type))("100")>)<delta.(type)>);
+        Assert.assertEquals(<(literal.(type))("0")>, this.map.get(AbstractMutableObject<name>MapTestCase.generateCollisions().get(1))<delta.(type)>);
+
+        this.map.put(null, <(literal.(type))("3")>);
+
+        Assert.assertEquals(<(literal.(type))("3")>, this.map.get(null)<delta.(type)>);
+        Assert.assertEquals(<(literal.(type))("3")>, this.map.removeKeyIfAbsent(null, <(literal.(type))("100")>)<delta.(type)>);
+        Assert.assertEquals(<(literal.(type))("0")>, this.map.get(null)<delta.(type)>);
+    }
+
+    @Test
+    public void putWithRehash() throws Exception
+    {
+        MutableObject<name>Map\<<wrapperName>\> hashMap = this.getEmptyMap();
+        for (<type> each = 2; each \< 10; each++)
+        {
+            Assert.assertFalse(hashMap.containsKey(each));
+            hashMap.put(each, each);
+        }
+
+        Field keys = targetClass.getDeclaredField("keys");
+        Field values = targetClass.getDeclaredField("values");
+        keys.setAccessible(true);
+        values.setAccessible(true);
+        Assert.assertEquals(16L, ((Object[]) keys.get(hashMap)).length);
+        Assert.assertEquals(16L, ((<type>[]) values.get(hashMap)).length);
+        Verify.assertSize(8, hashMap);
+        for (<type> each = 2; each \< 10; each++)
+        {
+            Assert.assertTrue(hashMap.containsKey(each));
+            Assert.assertTrue(hashMap.containsValue(each));
+        }
+        hashMap.put(<(literal.(type))("10")>, <(literal.(type))("10")>);
+        Assert.assertEquals(32L, ((Object[]) keys.get(hashMap)).length);
+        Assert.assertEquals(32L, ((<type>[]) values.get(hashMap)).length);
+    }
+
+    @Test
+    public void testPutAll()
+    {
+        MutableObject<name>Map\<<wrapperName>\> hashMap = this.getEmptyMap();
+        MutableObject<name>Map\<<wrapperName>\> copyMap = this.getEmptyMap();
+
+        for (<type> each = 1; each \< 11; each++)
+        {
+            Assert.assertFalse(hashMap.containsKey(each));
+            copyMap.put(each, each);
+        }
+
+        Verify.assertSize(10, copyMap);
+        Verify.assertSize(0, hashMap);
+        hashMap.putAll(copyMap);
+        Verify.assertSize(10, hashMap);
+
+        for (<type> each = 1; each \< 11; each++)
+        {
+            Assert.assertTrue(hashMap.containsKey(each));
+        }
+
+        Assert.assertEquals(hashMap, copyMap);
+    }
+
+    @Test
+    public void injectInto()
+    {
+        MutableObject<name>Map\<Integer> hashMap = this.newWithKeysValues(1, <(literal.(type))("2")>, 2, <(literal.(type))("3")>, 3, <(literal.(type))("4")>, 4, <(literal.(type))("5")>);
+        <wrapperName> sum = hashMap.injectInto(<wrapperName>.valueOf(<(literal.(type))("1")>), (<wrapperName> result, <type> value) -> <wrapperName>.valueOf((<type>) (result + value)));
+        Assert.assertEquals(<wrapperName>.valueOf(<(literal.(type))("15")>), sum);
+    }
+
+    @Test
+    public void put_every_slot()
+    {
+        MutableObject<name>Map\<String> hashMap = this.getEmptyMap();
+        for (<type> each = <(literal.(type))("2")>; each \< <(literal.(type))("100")>; each++)
+        {
+            Assert.assertEquals(<(literal.(type))("0")>, hashMap.get(String.valueOf(each))<delta.(type)>);
+            hashMap.put(String.valueOf(each), each);
+            Assert.assertEquals(each, hashMap.get(String.valueOf(each))<delta.(type)>);
+            hashMap.remove(String.valueOf(each));
+            Assert.assertEquals(<(literal.(type))("0")>, hashMap.get(String.valueOf(each))<delta.(type)>);
+        }
+    }
+
+    @Test
+    public void remove_iterator_every_slot()
+    {
+        MutableObject<name>Map\<String> hashMap = this.getEmptyMap();
+        for (<type> each = <(literal.(type))("2")>; each \< <(literal.(type))("100")>; each++)
+        {
+            Assert.assertEquals(<(literal.(type))("0")>, hashMap.get(String.valueOf(each))<delta.(type)>);
+            hashMap.put(String.valueOf(each), each);
+            Iterator\<String> iterator = hashMap.keySet().iterator();
+            Assert.assertTrue(iterator.hasNext());
+            Assert.assertEquals(String.valueOf(each), iterator.next());
+            iterator.remove();
+            Assert.assertEquals(<(literal.(type))("0")>, hashMap.get(String.valueOf(each))<delta.(type)>);
+        }
+    }
+
+    @Test
+    public void getIfAbsentPut_every_slot()
+    {
+        MutableObject<name>Map\<String> hashMap = this.getEmptyMap();
+        for (<type> each = <(literal.(type))("2")>; each \< <(literal.(type))("100")>; each++)
+        {
+            Assert.assertEquals(<(literal.(type))("0")>, hashMap.get(String.valueOf(each))<delta.(type)>);
+            hashMap.getIfAbsentPut(String.valueOf(each), each);
+            Assert.assertEquals(each, hashMap.get(String.valueOf(each))<delta.(type)>);
+        }
+    }
+
+    @Test
+    public void getIfAbsentPutWith_every_slot()
+    {
+        <name>Function\<String> functionLength = (String string) -> <(castIntToNarrowType.(type))("string.length()")>;
+
+        MutableObject<name>Map\<String> hashMap = this.getEmptyMap();
+
+        for (<type> each = <(literal.(type))("2")>; each \< <(literal.(type))("100")>; each++)
+        {
+            Assert.assertEquals(<(literal.(type))("0")>, hashMap.get(String.valueOf(each))<delta.(type)>);
+            Assert.assertEquals(<(literal.(type))("9")>, hashMap.getIfAbsentPutWith(String.valueOf(each), functionLength, "123456789")<delta.(type)>);
+            Assert.assertEquals(<(literal.(type))("9")>, hashMap.get(String.valueOf(each))<delta.(type)>);
+        }
+    }
+
+    @Test
+    public void getIfAbsentPutWithKey_every_slot()
+    {
+        <name>Function\<<wrapperName>\> function = <wrapperName>::<type>Value;
+
+        MutableObject<name>Map\<<wrapperName>\> hashMap = this.getEmptyMap();
+
+        for (<type> each = <(literal.(type))("2")>; each \< <(literal.(type))("100")>; each++)
+        {
+            Assert.assertEquals(<(literal.(type))("0")>, hashMap.get(each)<delta.(type)>);
+            Assert.assertEquals(each, hashMap.getIfAbsentPutWithKey(each, function)<delta.(type)>);
+            Assert.assertEquals(each, hashMap.get(each)<delta.(type)>);
+        }
+    }
+
+    @Test
+    public void getIfAbsentPut_Function_every_slot()
+    {
+        <name>Function0 factory = () -> <(literal.(type))("100")>;
+
+        MutableObject<name>Map\<String> hashMap = this.getEmptyMap();
+
+        for (<type> each = <(literal.(type))("2")>; each \< <(literal.(type))("100")>; each++)
+        {
+            Assert.assertEquals(<(literal.(type))("0")>, hashMap.get(String.valueOf(each))<delta.(type)>);
+            Assert.assertEquals(<(literal.(type))("100")>, hashMap.getIfAbsentPut(String.valueOf(each), factory)<delta.(type)>);
+            Assert.assertEquals(<(literal.(type))("100")>, hashMap.get(String.valueOf(each))<delta.(type)>);
+        }
+    }
+
+    @Test
+    public void updateValue_every_slot()
+    {
+        <name>To<name>Function incrementFunction = (<type> value) -> <(castIntToNarrowTypeWithParens.(type))("value + 1")>;
+
+        MutableObject<name>Map\<String> hashMap = this.getEmptyMap();
+
+        for (<type> each = <(literal.(type))("2")>; each \< <(literal.(type))("100")>; each++)
+        {
+            Assert.assertEquals(<(literal.(type))("0")>, hashMap.get(String.valueOf(each))<delta.(type)>);
+            Assert.assertEquals(each + 1, hashMap.updateValue(String.valueOf(each), each, incrementFunction)<delta.(type)>);
+            Assert.assertEquals(each + 1, hashMap.get(String.valueOf(each))<delta.(type)>);
+        }
+    }
+
+    @Test
+    public void classIsNonInstantiable()
+    {
+        Verify.assertClassNonInstantiable(Object<name>Maps.class);
+    }
+}
+
+>>

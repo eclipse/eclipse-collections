@@ -1,0 +1,62 @@
+import "copyright.stg"
+
+hasTwoPrimitives() ::= "true"
+
+skipBooleanKeys() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/map/mutable/primitive"
+
+fileName(primitive1, primitive2, sameTwoPrimitives) ::= "Mutable<primitive1.name><primitive2.name>MapFactoryImpl"
+
+class(primitive1, primitive2, sameTwoPrimitives) ::= <<
+<body(primitive1.type, primitive2.type, primitive1.name, primitive2.name)>
+>>
+
+body(type1, type2, name1, name2) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.map.mutable.primitive;
+
+import org.eclipse.collections.api.factory.map.primitive.Mutable<name1><name2>MapFactory;
+import org.eclipse.collections.api.map.primitive.Mutable<name1><name2>Map;
+import org.eclipse.collections.api.map.primitive.<name1><name2>Map;
+
+/**
+ * Mutable<name1><name2>MapFactoryImpl is a factory implementation which creates instances of type {@link Mutable<name1><name2>Map}.
+ * This file was automatically generated from template file mutablePrimitivePrimitiveMapFactoryImpl.stg.
+ *
+ * @since 6.0.
+ */
+public class Mutable<name1><name2>MapFactoryImpl implements Mutable<name1><name2>MapFactory
+{
+    public Mutable<name1><name2>Map empty()
+    {
+        return new <name1><name2>HashMap(0);
+    }
+
+    public Mutable<name1><name2>Map of()
+    {
+        return this.empty();
+    }
+
+    public Mutable<name1><name2>Map with()
+    {
+        return this.empty();
+    }
+
+    public Mutable<name1><name2>Map ofAll(<name1><name2>Map map)
+    {
+        return this.withAll(map);
+    }
+
+    public Mutable<name1><name2>Map withAll(<name1><name2>Map map)
+    {
+        if (map.isEmpty())
+        {
+            return this.empty();
+        }
+        return new <name1><name2>HashMap(map);
+    }
+}
+
+>>
