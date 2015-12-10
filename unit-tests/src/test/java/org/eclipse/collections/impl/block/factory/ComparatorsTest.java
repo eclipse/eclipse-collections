@@ -17,6 +17,7 @@ import java.text.SimpleDateFormat;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import org.eclipse.collections.api.block.SerializableComparator;
 import org.eclipse.collections.api.block.function.Function;
@@ -327,7 +328,7 @@ public class ComparatorsTest
         private static final String FANCY_DATE_FORMAT = "EEE, MMM d, ''yy";
         private static final long serialVersionUID = 1L;
 
-        private final DateFormat formatter = new SimpleDateFormat(FANCY_DATE_FORMAT);
+        private final DateFormat formatter = new SimpleDateFormat(FANCY_DATE_FORMAT, Locale.ENGLISH);
 
         @Override
         public int compare(Date o1, Date o2)
