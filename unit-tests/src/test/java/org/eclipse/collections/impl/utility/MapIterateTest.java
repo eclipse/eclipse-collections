@@ -130,7 +130,7 @@ public class MapIterateTest
     {
         MutableMap<Locale, Currency> input = Maps.fixedSize.of(Locale.UK, Currency.getInstance(Locale.UK), Locale.JAPAN, Currency.getInstance(Locale.JAPAN));
 
-        Function2<Locale, Currency, Pair<String, String>> function = (locale, currency) -> Tuples.pair(locale.getDisplayCountry() + ':' + currency.getCurrencyCode(), currency.getCurrencyCode());
+        Function2<Locale, Currency, Pair<String, String>> function = (locale, currency) -> Tuples.pair(locale.getDisplayCountry(Locale.ENGLISH) + ':' + currency.getCurrencyCode(), currency.getCurrencyCode());
         MutableMap<String, String> result = MapIterate.collect(input, function);
 
         Verify.assertContainsKeyValue("United Kingdom:GBP", "GBP", result);
@@ -143,7 +143,7 @@ public class MapIterateTest
     {
         MutableMap<Locale, Currency> input = UnifiedMap.newWithKeysValues(Locale.UK, Currency.getInstance(Locale.UK), Locale.JAPAN, Currency.getInstance(Locale.JAPAN), Locale.CHINA, Currency.getInstance(Locale.GERMANY), Locale.GERMANY, Currency.getInstance(Locale.CHINA));
 
-        MutableMap<String, String> result = MapIterate.collectIf(input, (locale, currency) -> Tuples.pair(locale.getDisplayCountry() + ':' + currency.getCurrencyCode(), currency.getCurrencyCode()), (locale, currency) -> Currency.getInstance(locale).equals(currency));
+        MutableMap<String, String> result = MapIterate.collectIf(input, (locale, currency) -> Tuples.pair(locale.getDisplayCountry(Locale.ENGLISH) + ':' + currency.getCurrencyCode(), currency.getCurrencyCode()), (locale, currency) -> Currency.getInstance(locale).equals(currency));
 
         Verify.assertContainsKeyValue("United Kingdom:GBP", "GBP", result);
         Verify.assertContainsKeyValue("Japan:JPY", "JPY", result);
