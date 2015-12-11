@@ -1,9 +1,40 @@
 language: java
-jdk:
-  - oraclejdk8
+sudo: false
 
-before_install:
-  - cat /etc/mavenrc
-  - sudo rm /etc/mavenrc
-  - export MAVEN_OPTS="-Dmaven.repo.local=$HOME/.m2/repository -Xmx2g -Dorg.slf4j.simpleLogger.showDateTime=true -Dorg.slf4j.simpleLogger.dateTimeFormat=HH:mm:ss:SSS"
+before_install: echo "MAVEN_OPTS='-Dmaven.repo.local=$HOME/.m2/repository -Xmx2g -Dorg.slf4j.simpleLogger.showDateTime=true -Dorg.slf4j.simpleLogger.dateTimeFormat=HH:mm:ss:SSS'" > ~/.mavenrc
+install:
+  -
 
+matrix:
+  fast_finish: true
+  include:
+    - jdk: oraclejdk8
+      env:
+        - DESC="compile all modules"
+        - CMD="mvn install --activate-profiles all -DskipTests=true --batch-mode --show-version --errors"
+
+    - jdk: oraclejdk8
+      env:
+        - DESC="unit tests"
+        - CMD="mvn install --batch-mode --show-version --errors"
+
+    - jdk: oraclejdk8
+      env:
+        - DESC="acceptance tests"
+        - CMD="mvn install --projects acceptance-tests --also-make --activate-profiles all --batch-mode --show-version --errors"
+
+    - jdk: oraclejdk8
+      env:
+        - DESC="checkstyle"
+        - CMD="mvn install checkstyle:check --activate-profiles all -DskipTests=true --batch-mode --show-version --errors"
+
+    - jdk: oraclejdk8
+      env:
+        - DESC="findbugs"
+        - CMD="mvn install findbugs:check --projects '!scala-unit-tests,!jmh-scala-tests,!jmh-tests' --activate-profiles all -DskipTests=true --batch-mode --show-version --errors"
+
+script: eval $CMD
+
+cache:
+  directories:
+  - ~/.m2
