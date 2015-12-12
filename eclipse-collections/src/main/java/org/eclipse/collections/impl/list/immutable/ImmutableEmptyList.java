@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.RandomAccess;
 
+import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.block.function.Function2;
@@ -36,7 +37,6 @@ import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.Stacks;
 import org.eclipse.collections.impl.partition.list.PartitionFastList;
-import net.jcip.annotations.Immutable;
 
 /**
  * This is a zero element {@link ImmutableList} which is created by calling the Lists.immutable.empty() method.

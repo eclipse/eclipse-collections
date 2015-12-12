@@ -10,7 +10,7 @@
 
 package org.eclipse.collections.impl.map.mutable
 
-import org.eclipse.collections.impl.{UnmodifiableIterableTestTrait, InternalIterableTestTrait}
+import org.eclipse.collections.impl.{InternalIterableTestTrait, UnmodifiableIterableTestTrait}
 
 class UnmodifiableMutableMapScalaTest extends InternalIterableTestTrait with UnmodifiableIterableTestTrait
 {

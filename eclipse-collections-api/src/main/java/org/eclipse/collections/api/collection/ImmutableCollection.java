@@ -10,6 +10,7 @@
 
 package org.eclipse.collections.api.collection;
 
+import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function0;
@@ -38,7 +39,6 @@ import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.api.multimap.ImmutableMultimap;
 import org.eclipse.collections.api.partition.PartitionImmutableCollection;
 import org.eclipse.collections.api.tuple.Pair;
-import net.jcip.annotations.Immutable;
 
 /**
  * ImmutableCollection is the common interface between ImmutableList and ImmutableSet.

@@ -10,9 +10,9 @@
 
 package org.eclipse.collections.impl.partition.set.sorted;
 
+import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.partition.set.sorted.PartitionImmutableSortedSet;
 import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
-import net.jcip.annotations.Immutable;
 
 @Immutable
 public class PartitionImmutableSortedSetImpl<T> implements PartitionImmutableSortedSet<T>

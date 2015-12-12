@@ -16,11 +16,11 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.collections.codegenerator.EclipseCollectionsCodeGenerator;
 import org.apache.tools.ant.AntClassLoader;
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Task;
 import org.apache.tools.ant.types.LogLevel;
+import org.eclipse.collections.codegenerator.EclipseCollectionsCodeGenerator;
 
 public class EclipseCollectionsCodeGeneratorTask extends Task
 {

@@ -12,6 +12,7 @@ package org.eclipse.collections.impl.lazy;
 
 import java.util.Iterator;
 
+import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
@@ -23,7 +24,6 @@ import org.eclipse.collections.impl.block.procedure.IfProcedure;
 import org.eclipse.collections.impl.block.procedure.IfProcedureWith;
 import org.eclipse.collections.impl.lazy.iterator.SelectInstancesOfIterator;
 import org.eclipse.collections.impl.utility.Iterate;
-import net.jcip.annotations.Immutable;
 
 /**
  * A SelectIterable is an iterable that filters a source iterable for instances of a Class as it iterates.

@@ -10,14 +10,13 @@
 
 package org.eclipse.collections.impl
 
-import block.factory.Functions
-import list.mutable.FastList
-import map.mutable.UnifiedMap
-import org.junit.Test
-
 import org.eclipse.collections.api.map.MutableMap
-import Prelude._
-import tuple.Tuples
+import org.eclipse.collections.impl.Prelude._
+import org.eclipse.collections.impl.block.factory.Functions
+import org.eclipse.collections.impl.list.mutable.FastList
+import org.eclipse.collections.impl.map.mutable.UnifiedMap
+import org.eclipse.collections.impl.tuple.Tuples
+import org.junit.Test
 
 class SynchronizedMutableMapScalaTest extends SynchronizedMapIterableTestTrait
 {

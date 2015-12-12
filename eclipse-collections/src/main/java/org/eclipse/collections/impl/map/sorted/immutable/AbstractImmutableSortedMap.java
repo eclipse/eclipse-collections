@@ -14,6 +14,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.SortedMap;
 
+import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function0;
@@ -82,7 +83,6 @@ import org.eclipse.collections.impl.map.sorted.mutable.TreeSortedMap;
 import org.eclipse.collections.impl.multimap.list.FastListMultimap;
 import org.eclipse.collections.impl.partition.list.PartitionFastList;
 import org.eclipse.collections.impl.utility.MapIterate;
-import net.jcip.annotations.Immutable;
 
 @Immutable
 public abstract class AbstractImmutableSortedMap<K, V>

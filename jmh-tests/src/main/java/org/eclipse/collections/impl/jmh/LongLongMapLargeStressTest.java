@@ -13,6 +13,8 @@ package org.eclipse.collections.impl.jmh;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
+import net.openhft.koloboke.collect.map.LongLongMap;
+import net.openhft.koloboke.collect.map.hash.HashLongLongMaps;
 import org.eclipse.collections.api.list.primitive.MutableLongList;
 import org.eclipse.collections.api.map.primitive.MutableLongLongMap;
 import org.eclipse.collections.api.set.primitive.MutableLongSet;
@@ -20,8 +22,6 @@ import org.eclipse.collections.impl.jmh.runner.AbstractJMHTestRunner;
 import org.eclipse.collections.impl.list.mutable.primitive.LongArrayList;
 import org.eclipse.collections.impl.map.mutable.primitive.LongLongHashMap;
 import org.eclipse.collections.impl.set.mutable.primitive.LongHashSet;
-import net.openhft.koloboke.collect.map.LongLongMap;
-import net.openhft.koloboke.collect.map.hash.HashLongLongMaps;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Mode;

@@ -10,10 +10,10 @@
 
 package org.eclipse.collections.impl.set
 
-import org.junit.Test
 import org.eclipse.collections.api.set.SetIterable
 import org.eclipse.collections.impl.SynchronizedRichIterableTestTrait
-import sorted.mutable.TreeSortedSet
+import org.eclipse.collections.impl.set.sorted.mutable.TreeSortedSet
+import org.junit.Test
 
 trait SynchronizedSetIterableTestTrait extends SynchronizedRichIterableTestTrait
 {

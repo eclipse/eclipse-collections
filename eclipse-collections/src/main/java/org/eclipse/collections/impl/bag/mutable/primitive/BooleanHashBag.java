@@ -16,6 +16,7 @@ import java.io.ObjectInput;
 import java.io.ObjectOutput;
 import java.util.NoSuchElementException;
 
+import net.jcip.annotations.NotThreadSafe;
 import org.eclipse.collections.api.BooleanIterable;
 import org.eclipse.collections.api.LazyBooleanIterable;
 import org.eclipse.collections.api.bag.MutableBag;
@@ -37,7 +38,6 @@ import org.eclipse.collections.impl.factory.primitive.BooleanBags;
 import org.eclipse.collections.impl.lazy.primitive.LazyBooleanIterableAdapter;
 import org.eclipse.collections.impl.list.mutable.primitive.BooleanArrayList;
 import org.eclipse.collections.impl.set.mutable.primitive.BooleanHashSet;
-import net.jcip.annotations.NotThreadSafe;
 
 /**
  * BooleanHashBag is similar to {@link HashBag}, and is memory-optimized for boolean primitives.

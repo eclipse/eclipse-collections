@@ -12,11 +12,11 @@ package org.eclipse.collections.impl.lazy;
 
 import java.util.Iterator;
 
+import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
 import org.eclipse.collections.impl.lazy.iterator.TakeIterator;
-import net.jcip.annotations.Immutable;
 
 /**
  * Iterates over the first count elements of the adapted Iterable or the full size of the adapted

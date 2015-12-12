@@ -15,7 +15,7 @@ import java.util.concurrent.Executor;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.impl.utility.ArrayIterate;
 
-import static org.eclipse.collections.impl.factory.Iterables.*;
+import static org.eclipse.collections.impl.factory.Iterables.iList;
 
 /**
  * The ParallelArrayIterate class contains a parallel forEach algorithm that work with Java arrays.  The forEach

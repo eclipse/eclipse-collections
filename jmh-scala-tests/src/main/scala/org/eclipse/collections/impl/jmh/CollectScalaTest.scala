@@ -10,9 +10,9 @@
 
 package org.eclipse.collections.impl.jmh
 
-import scala.collection.mutable.ArrayBuffer
-import java.util.concurrent.TimeUnit
 import org.junit.Assert
+
+import scala.collection.mutable.ArrayBuffer
 
 object CollectScalaTest
 {

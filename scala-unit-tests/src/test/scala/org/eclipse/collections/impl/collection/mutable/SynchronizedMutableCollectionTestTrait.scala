@@ -10,13 +10,12 @@
 
 package org.eclipse.collections.impl.collection.mutable
 
-import org.junit.Test
-
-import org.eclipse.collections.api.list.MutableList
 import org.eclipse.collections.api.collection.MutableCollection
+import org.eclipse.collections.api.list.MutableList
 import org.eclipse.collections.impl.Prelude._
-import org.eclipse.collections.impl.{SynchronizedCollectionTestTrait, SynchronizedRichIterableTestTrait}
 import org.eclipse.collections.impl.list.mutable.FastList
+import org.eclipse.collections.impl.{SynchronizedCollectionTestTrait, SynchronizedRichIterableTestTrait}
+import org.junit.Test
 
 trait SynchronizedMutableCollectionTestTrait
         extends SynchronizedRichIterableTestTrait

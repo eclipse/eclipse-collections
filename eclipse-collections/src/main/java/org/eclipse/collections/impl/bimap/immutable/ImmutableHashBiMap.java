@@ -12,8 +12,8 @@ package org.eclipse.collections.impl.bimap.immutable;
 
 import java.io.Serializable;
 
-import org.eclipse.collections.api.map.ImmutableMap;
 import net.jcip.annotations.Immutable;
+import org.eclipse.collections.api.map.ImmutableMap;
 
 @Immutable
 final class ImmutableHashBiMap<K, V> extends AbstractImmutableBiMap<K, V> implements Serializable

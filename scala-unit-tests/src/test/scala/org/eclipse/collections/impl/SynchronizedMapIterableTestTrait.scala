@@ -10,11 +10,10 @@
 
 package org.eclipse.collections.impl
 
-import org.junit.Test
-
-import Prelude._
 import org.eclipse.collections.api.map.MapIterable
-import tuple.Tuples
+import org.eclipse.collections.impl.Prelude._
+import org.eclipse.collections.impl.tuple.Tuples
+import org.junit.Test
 
 trait SynchronizedMapIterableTestTrait extends SynchronizedRichIterableTestTrait
 {

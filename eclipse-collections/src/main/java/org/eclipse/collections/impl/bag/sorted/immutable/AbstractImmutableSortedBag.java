@@ -14,6 +14,7 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.Iterator;
 
+import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.MutableBag;
@@ -75,7 +76,6 @@ import org.eclipse.collections.impl.partition.bag.sorted.PartitionTreeBag;
 import org.eclipse.collections.impl.set.sorted.mutable.TreeSortedSet;
 import org.eclipse.collections.impl.tuple.Tuples;
 import org.eclipse.collections.impl.utility.Iterate;
-import net.jcip.annotations.Immutable;
 
 /**
  * @since 7.0

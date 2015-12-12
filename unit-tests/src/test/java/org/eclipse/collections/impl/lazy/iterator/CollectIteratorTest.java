@@ -17,7 +17,7 @@ import org.eclipse.collections.impl.factory.Lists;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static org.eclipse.collections.impl.factory.Iterables.*;
+import static org.eclipse.collections.impl.factory.Iterables.iList;
 
 public class CollectIteratorTest
 {

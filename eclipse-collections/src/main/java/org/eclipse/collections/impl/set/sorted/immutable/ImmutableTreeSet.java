@@ -18,6 +18,7 @@ import java.util.Set;
 import java.util.SortedSet;
 import java.util.concurrent.ExecutorService;
 
+import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.predicate.Predicate;
@@ -48,7 +49,6 @@ import org.eclipse.collections.impl.set.sorted.mutable.TreeSortedSet;
 import org.eclipse.collections.impl.utility.ArrayIterate;
 import org.eclipse.collections.impl.utility.ListIterate;
 import org.eclipse.collections.impl.utility.internal.InternalArrayIterate;
-import net.jcip.annotations.Immutable;
 
 @Immutable
 final class ImmutableTreeSet<T>

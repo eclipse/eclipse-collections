@@ -12,6 +12,7 @@ package org.eclipse.collections.impl.collection.mutable;
 
 import java.util.Collection;
 
+import net.jcip.annotations.ThreadSafe;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.block.function.Function2;
@@ -24,7 +25,6 @@ import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.tuple.Twin;
 import org.eclipse.collections.impl.collection.AbstractSynchronizedRichIterable;
-import net.jcip.annotations.ThreadSafe;
 
 @ThreadSafe
 public abstract class AbstractSynchronizedMutableCollection<T> extends AbstractSynchronizedRichIterable<T> implements MutableCollection<T>

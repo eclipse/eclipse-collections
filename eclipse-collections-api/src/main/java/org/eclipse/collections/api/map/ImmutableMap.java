@@ -10,6 +10,7 @@
 
 package org.eclipse.collections.api.map;
 
+import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.api.bag.primitive.ImmutableBooleanBag;
 import org.eclipse.collections.api.bag.primitive.ImmutableByteBag;
@@ -40,7 +41,6 @@ import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.partition.bag.PartitionImmutableBag;
 import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.api.tuple.Pair;
-import net.jcip.annotations.Immutable;
 
 /**
  * An ImmutableMap is different than a JCF Map but in that it has no mutating methods.  It shares the read-only

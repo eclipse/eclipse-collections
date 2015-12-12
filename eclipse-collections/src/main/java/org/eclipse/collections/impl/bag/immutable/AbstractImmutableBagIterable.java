@@ -14,6 +14,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
+import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.bag.ImmutableBagIterable;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function0;
@@ -27,7 +28,6 @@ import org.eclipse.collections.impl.block.procedure.MutatingAggregationProcedure
 import org.eclipse.collections.impl.block.procedure.NonMutatingAggregationProcedure;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
-import net.jcip.annotations.Immutable;
 
 @Immutable
 public abstract class AbstractImmutableBagIterable<T>

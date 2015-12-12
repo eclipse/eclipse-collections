@@ -17,6 +17,7 @@ import java.io.ObjectOutput;
 import java.util.BitSet;
 import java.util.NoSuchElementException;
 
+import net.jcip.annotations.NotThreadSafe;
 import org.eclipse.collections.api.BooleanIterable;
 import org.eclipse.collections.api.LazyBooleanIterable;
 import org.eclipse.collections.api.bag.primitive.MutableBooleanBag;
@@ -40,7 +41,6 @@ import org.eclipse.collections.impl.lazy.primitive.LazyBooleanIterableAdapter;
 import org.eclipse.collections.impl.lazy.primitive.ReverseBooleanIterable;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.set.mutable.primitive.BooleanHashSet;
-import net.jcip.annotations.NotThreadSafe;
 
 /**
  * BooleanArrayList is similar to {@link FastList}, and is memory-optimized for boolean primitives.

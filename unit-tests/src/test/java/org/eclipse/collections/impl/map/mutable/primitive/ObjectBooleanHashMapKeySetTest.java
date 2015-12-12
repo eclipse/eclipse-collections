@@ -10,18 +10,7 @@
 
 package org.eclipse.collections.impl.map.mutable.primitive;
 
-import java.util.Iterator;
-import java.util.NoSuchElementException;
-import java.util.Set;
-
-import org.eclipse.collections.api.iterator.MutableBooleanIterator;
 import org.eclipse.collections.api.map.primitive.MutableObjectBooleanMap;
-import org.eclipse.collections.impl.bag.mutable.HashBag;
-import org.eclipse.collections.impl.list.mutable.FastList;
-import org.eclipse.collections.impl.set.mutable.UnifiedSet;
-import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
-import org.junit.Test;
 
 /**
  * JUnit test for {@link ObjectBooleanHashMap#keySet()}.

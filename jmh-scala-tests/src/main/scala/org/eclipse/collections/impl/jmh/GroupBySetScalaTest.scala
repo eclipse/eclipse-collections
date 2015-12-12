@@ -11,8 +11,9 @@
 package org.eclipse.collections.impl.jmh
 
 import org.junit.Assert
-import scala.collection.mutable.HashSet
+
 import scala.collection.IterableView
+import scala.collection.mutable.HashSet
 import scala.collection.parallel.immutable.ParMap
 import scala.collection.parallel.mutable.ParHashSet
 

@@ -10,12 +10,11 @@
 
 package org.eclipse.collections.impl
 
-import org.junit.{Assert, Test}
-
 import org.eclipse.collections.api.list.ListIterable
-import block.procedure.CollectionAddProcedure
-import list.mutable.FastList
-import Prelude._
+import org.eclipse.collections.impl.Prelude._
+import org.eclipse.collections.impl.block.procedure.CollectionAddProcedure
+import org.eclipse.collections.impl.list.mutable.FastList
+import org.junit.{Assert, Test}
 
 trait ListIterableTestTrait extends InternalIterableTestTrait
 {

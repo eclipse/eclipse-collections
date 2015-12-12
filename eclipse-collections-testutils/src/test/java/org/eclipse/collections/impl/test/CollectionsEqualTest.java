@@ -19,7 +19,9 @@ import org.eclipse.collections.api.set.MutableSet;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static org.eclipse.collections.impl.factory.Iterables.*;
+import static org.eclipse.collections.impl.factory.Iterables.mList;
+import static org.eclipse.collections.impl.factory.Iterables.mMap;
+import static org.eclipse.collections.impl.factory.Iterables.mSet;
 
 /**
  * JUnit test to make sure that the methods {@link Verify#assertListsEqual(String, List, List)},

@@ -12,13 +12,13 @@ package org.eclipse.collections.impl.lazy;
 
 import java.util.Iterator;
 
+import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
 import org.eclipse.collections.impl.lazy.iterator.TapIterator;
 import org.eclipse.collections.impl.utility.Iterate;
-import net.jcip.annotations.Immutable;
 
 /**
  * A TapIterable is an iterable that executes a procedure for each element before each iteration.

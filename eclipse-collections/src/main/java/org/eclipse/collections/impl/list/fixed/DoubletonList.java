@@ -15,11 +15,11 @@ import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
 
+import net.jcip.annotations.NotThreadSafe;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
 import org.eclipse.collections.impl.block.factory.Comparators;
-import net.jcip.annotations.NotThreadSafe;
 
 /**
  * A DoubletonList is a two-element memory efficient List.  It is created by calling Lists.fixedSize.of(one, two).

@@ -52,7 +52,6 @@ import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.partition.list.PartitionMutableList;
 import org.eclipse.collections.api.stack.MutableStack;
 import org.eclipse.collections.api.tuple.Pair;
-import org.eclipse.collections.impl.block.factory.HashingStrategies;
 import org.eclipse.collections.impl.collection.mutable.AbstractUnmodifiableMutableCollection;
 import org.eclipse.collections.impl.collection.mutable.UnmodifiableCollectionSerializationProxy;
 import org.eclipse.collections.impl.lazy.ReverseIterable;

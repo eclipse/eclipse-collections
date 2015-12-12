@@ -69,7 +69,6 @@ import org.eclipse.collections.api.partition.list.PartitionMutableList;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.api.tuple.Twin;
 import org.eclipse.collections.impl.block.factory.Comparators;
-import org.eclipse.collections.impl.block.factory.HashingStrategies;
 import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.multimap.list.FastListMultimap;

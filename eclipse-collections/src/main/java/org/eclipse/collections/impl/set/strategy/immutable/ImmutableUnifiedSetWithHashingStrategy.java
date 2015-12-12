@@ -14,6 +14,7 @@ import java.io.Serializable;
 import java.util.Iterator;
 import java.util.concurrent.ExecutorService;
 
+import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.block.HashingStrategy;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.set.ImmutableSet;
@@ -22,7 +23,6 @@ import org.eclipse.collections.impl.UnmodifiableIteratorAdapter;
 import org.eclipse.collections.impl.parallel.BatchIterable;
 import org.eclipse.collections.impl.set.immutable.AbstractImmutableSet;
 import org.eclipse.collections.impl.set.strategy.mutable.UnifiedSetWithHashingStrategy;
-import net.jcip.annotations.Immutable;
 
 @Immutable
 final class ImmutableUnifiedSetWithHashingStrategy<T>

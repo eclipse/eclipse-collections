@@ -15,6 +15,7 @@ import java.util.Set;
 import java.util.SortedSet;
 import java.util.concurrent.ExecutorService;
 
+import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
@@ -91,7 +92,6 @@ import org.eclipse.collections.impl.utility.OrderedIterate;
 import org.eclipse.collections.impl.utility.internal.IterableIterate;
 import org.eclipse.collections.impl.utility.internal.SetIterables;
 import org.eclipse.collections.impl.utility.internal.SortedSetIterables;
-import net.jcip.annotations.Immutable;
 
 /**
  * This class is the parent class for all ImmutableSortedSets.  All implementations of ImmutableSortedSet must implement the SortedSet

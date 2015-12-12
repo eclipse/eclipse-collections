@@ -10,7 +10,7 @@
 
 package org.eclipse.collections.impl
 
-import factory.Maps
+import org.eclipse.collections.impl.factory.Maps
 
 class EmptyMapScalaTest extends EmptyIterableTestTrait
 {

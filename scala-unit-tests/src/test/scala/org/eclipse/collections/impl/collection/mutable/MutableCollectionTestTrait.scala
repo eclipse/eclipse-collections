@@ -10,11 +10,10 @@
 
 package org.eclipse.collections.impl.collection.mutable
 
-import org.junit.Test
-
 import org.eclipse.collections.api.collection.MutableCollection
 import org.eclipse.collections.impl.InternalIterableTestTrait
 import org.eclipse.collections.impl.test.Verify
+import org.junit.Test
 
 // TODO: change to extend RichIterableTestTrait
 trait MutableCollectionTestTrait extends InternalIterableTestTrait

@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.NoSuchElementException;
 
+import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.BooleanIterable;
 import org.eclipse.collections.api.LazyBooleanIterable;
 import org.eclipse.collections.api.bag.primitive.MutableBooleanBag;
@@ -32,7 +33,6 @@ import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.lazy.primitive.LazyBooleanIterableAdapter;
 import org.eclipse.collections.impl.list.mutable.primitive.BooleanArrayList;
 import org.eclipse.collections.impl.set.mutable.primitive.BooleanHashSet;
-import net.jcip.annotations.Immutable;
 
 @Immutable
 final class ImmutableTrueFalseSet implements ImmutableBooleanSet, Serializable

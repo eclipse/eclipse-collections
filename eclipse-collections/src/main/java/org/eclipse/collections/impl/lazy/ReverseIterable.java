@@ -13,12 +13,12 @@ package org.eclipse.collections.impl.lazy;
 import java.util.Iterator;
 import java.util.ListIterator;
 
+import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
 import org.eclipse.collections.api.list.ListIterable;
 import org.eclipse.collections.impl.block.factory.Procedures;
-import net.jcip.annotations.Immutable;
 
 /**
  * A ReverseIterable is an iterable that wraps another iterable and iterates in reverse order.

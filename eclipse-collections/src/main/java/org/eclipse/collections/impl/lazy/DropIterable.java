@@ -12,6 +12,7 @@ package org.eclipse.collections.impl.lazy;
 
 import java.util.Iterator;
 
+import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
@@ -21,7 +22,6 @@ import org.eclipse.collections.impl.block.procedure.IfProcedure;
 import org.eclipse.collections.impl.block.procedure.IfProcedureWith;
 import org.eclipse.collections.impl.lazy.iterator.DropIterator;
 import org.eclipse.collections.impl.utility.Iterate;
-import net.jcip.annotations.Immutable;
 
 /**
  * Iterates over the elements of the adapted Iterable skipping the first count elements or the full adapted Iterable if

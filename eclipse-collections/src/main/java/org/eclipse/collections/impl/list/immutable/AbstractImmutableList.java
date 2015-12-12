@@ -20,6 +20,7 @@ import java.util.ListIterator;
 import java.util.RandomAccess;
 import java.util.concurrent.ExecutorService;
 
+import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.block.HashingStrategy;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
@@ -60,7 +61,6 @@ import org.eclipse.collections.api.stack.MutableStack;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.block.factory.Functions;
-import org.eclipse.collections.impl.block.factory.HashingStrategies;
 import org.eclipse.collections.impl.block.procedure.CollectIfProcedure;
 import org.eclipse.collections.impl.block.procedure.CollectProcedure;
 import org.eclipse.collections.impl.block.procedure.FlatCollectProcedure;
@@ -93,7 +93,6 @@ import org.eclipse.collections.impl.stack.mutable.ArrayStack;
 import org.eclipse.collections.impl.utility.Iterate;
 import org.eclipse.collections.impl.utility.ListIterate;
 import org.eclipse.collections.impl.utility.OrderedIterate;
-import net.jcip.annotations.Immutable;
 
 /**
  * This class is the parent class for all ImmutableLists.  All implementations of ImmutableList must implement the List

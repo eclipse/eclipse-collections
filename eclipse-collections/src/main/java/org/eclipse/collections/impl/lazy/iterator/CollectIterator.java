@@ -13,8 +13,8 @@ package org.eclipse.collections.impl.lazy.iterator;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-import org.eclipse.collections.api.block.function.Function;
 import net.jcip.annotations.Immutable;
+import org.eclipse.collections.api.block.function.Function;
 
 @Immutable
 public final class CollectIterator<T, V>

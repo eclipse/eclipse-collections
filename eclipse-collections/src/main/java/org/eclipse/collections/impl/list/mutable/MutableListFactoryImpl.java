@@ -10,10 +10,10 @@
 
 package org.eclipse.collections.impl.list.mutable;
 
+import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.factory.list.MutableListFactory;
 import org.eclipse.collections.api.list.MutableList;
-import net.jcip.annotations.Immutable;
 
 @Immutable
 public final class MutableListFactoryImpl implements MutableListFactory

@@ -13,11 +13,11 @@ package org.eclipse.collections.impl.lazy.iterator;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.collection.MutableCollection;
 import org.eclipse.collections.impl.factory.Lists;
-import net.jcip.annotations.Immutable;
 
 @Immutable
 public final class ChunkIterator<T>

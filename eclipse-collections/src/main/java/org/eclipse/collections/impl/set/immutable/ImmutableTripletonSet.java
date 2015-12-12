@@ -15,13 +15,13 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
+import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
 import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.factory.Sets;
-import net.jcip.annotations.Immutable;
 
 @Immutable
 final class ImmutableTripletonSet<T>

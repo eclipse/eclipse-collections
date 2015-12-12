@@ -11,9 +11,6 @@
 package org.eclipse.collections.test.bimap.immutable;
 
 import org.eclipse.collections.api.bimap.ImmutableBiMap;
-import org.junit.Test;
-
-import static org.eclipse.collections.impl.test.Verify.assertThrows;
 
 public interface ImmutableBiMapTestCase extends ImmutableUnsortedBiMapTestCase
 {

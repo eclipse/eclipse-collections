@@ -10,8 +10,9 @@
 
 package org.eclipse.collections.impl.jmh
 
-import scala.collection.mutable.ArrayBuffer
 import org.junit.Assert
+
+import scala.collection.mutable.ArrayBuffer
 
 object GroupByScalaTest
 {

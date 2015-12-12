@@ -13,6 +13,7 @@ package org.eclipse.collections.impl.lazy;
 import java.util.Collection;
 import java.util.Iterator;
 
+import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.predicate.Predicate;
@@ -23,7 +24,6 @@ import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
 import org.eclipse.collections.impl.UnmodifiableIteratorAdapter;
 import org.eclipse.collections.impl.utility.Iterate;
 import org.eclipse.collections.impl.utility.LazyIterate;
-import net.jcip.annotations.Immutable;
 
 /**
  * A LazyIterableAdapter wraps any iterable with the LazyIterable interface.

@@ -16,6 +16,7 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.Bag;
 import org.eclipse.collections.api.bag.sorted.ImmutableSortedBag;
@@ -47,7 +48,6 @@ import org.eclipse.collections.impl.multimap.bag.sorted.mutable.TreeBagMultimap;
 import org.eclipse.collections.impl.partition.bag.sorted.PartitionImmutableSortedBagImpl;
 import org.eclipse.collections.impl.partition.bag.sorted.PartitionTreeBag;
 import org.eclipse.collections.impl.utility.OrderedIterate;
-import net.jcip.annotations.Immutable;
 
 @Immutable
 class ImmutableEmptySortedBag<T>

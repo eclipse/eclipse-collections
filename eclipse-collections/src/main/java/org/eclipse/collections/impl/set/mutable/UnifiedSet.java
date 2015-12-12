@@ -24,6 +24,7 @@ import java.util.RandomAccess;
 import java.util.Set;
 import java.util.concurrent.ExecutorService;
 
+import net.jcip.annotations.NotThreadSafe;
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.annotation.Beta;
@@ -60,7 +61,6 @@ import org.eclipse.collections.impl.partition.set.PartitionUnifiedSet;
 import org.eclipse.collections.impl.set.AbstractUnifiedSet;
 import org.eclipse.collections.impl.tuple.Tuples;
 import org.eclipse.collections.impl.utility.Iterate;
-import net.jcip.annotations.NotThreadSafe;
 
 @NotThreadSafe
 public class UnifiedSet<T>

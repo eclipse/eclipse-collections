@@ -10,7 +10,6 @@
 
 package org.eclipse.collections.test;
 
-import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.collection.MutableCollection;
 import org.eclipse.collections.impl.block.factory.Predicates;
 import org.eclipse.collections.impl.block.factory.Predicates2;

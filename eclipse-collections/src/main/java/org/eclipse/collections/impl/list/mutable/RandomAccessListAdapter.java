@@ -46,7 +46,6 @@ import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.partition.list.PartitionMutableList;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.block.factory.Comparators;
-import org.eclipse.collections.impl.block.factory.HashingStrategies;
 import org.eclipse.collections.impl.block.procedure.CollectionAddProcedure;
 import org.eclipse.collections.impl.block.procedure.primitive.CollectBooleanProcedure;
 import org.eclipse.collections.impl.block.procedure.primitive.CollectByteProcedure;

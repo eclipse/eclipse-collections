@@ -20,6 +20,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
+import org.apache.commons.lang.RandomStringUtils;
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.multimap.MutableMultimap;
 import org.eclipse.collections.api.multimap.list.MutableListMultimap;
@@ -29,7 +30,6 @@ import org.eclipse.collections.impl.forkjoin.FJIterate;
 import org.eclipse.collections.impl.jmh.runner.AbstractJMHTestRunner;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.parallel.ParallelIterate;
-import org.apache.commons.lang.RandomStringUtils;
 import org.junit.Assert;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;

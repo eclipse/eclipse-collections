@@ -15,6 +15,7 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 
+import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function0;
@@ -29,7 +30,6 @@ import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.Maps;
 import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.utility.LazyIterate;
-import net.jcip.annotations.Immutable;
 
 /**
  * This is a zero element {@link ImmutableMap} which is created by calling the Maps.immutable.empty() method.
