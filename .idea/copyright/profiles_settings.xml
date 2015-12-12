@@ -1,13 +1,11 @@
 <component name="CopyrightManager">
   <settings default="Eclipse">
     <LanguageOptions name="JAVA">
-      <option name="fileTypeOverride" value="3" />
       <option name="separateBefore" value="true" />
       <option name="separateAfter" value="true" />
       <option name="lenAfter" value="81" />
     </LanguageOptions>
     <LanguageOptions name="Scala">
-      <option name="fileTypeOverride" value="3" />
       <option name="separateBefore" value="true" />
       <option name="separateAfter" value="true" />
       <option name="lenAfter" value="81" />
