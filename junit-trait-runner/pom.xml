@@ -23,7 +23,7 @@
 
     <artifactId>junit-trait-runner</artifactId>
 
-    <name>Goldman Sachs Test Trait JUnit Runner</name>
+    <name>Eclipse Collections Test Trait JUnit Runner</name>
 
     <prerequisites>
         <maven>3.0.5</maven>
