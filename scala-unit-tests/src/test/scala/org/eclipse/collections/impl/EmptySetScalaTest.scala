@@ -10,7 +10,7 @@
 
 package org.eclipse.collections.impl
 
-import factory.Sets
+import org.eclipse.collections.impl.factory.Sets
 
 class EmptySetScalaTest extends EmptyIterableTestTrait
 {

@@ -10,13 +10,13 @@
 
 package org.eclipse.collections.impl
 
-import block.factory.Functions
-import list.mutable.FastList
-import map.sorted.mutable.TreeSortedMap
-import Prelude._
-import org.junit.Test
 import org.eclipse.collections.api.map.sorted.MutableSortedMap
-import tuple.Tuples
+import org.eclipse.collections.impl.Prelude._
+import org.eclipse.collections.impl.block.factory.Functions
+import org.eclipse.collections.impl.list.mutable.FastList
+import org.eclipse.collections.impl.map.sorted.mutable.TreeSortedMap
+import org.eclipse.collections.impl.tuple.Tuples
+import org.junit.Test
 
 class SynchronizedSortedMapScalaTest extends SynchronizedMapIterableTestTrait
 {

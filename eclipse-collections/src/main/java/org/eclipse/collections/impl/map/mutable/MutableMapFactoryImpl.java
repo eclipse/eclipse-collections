@@ -10,11 +10,9 @@
 
 package org.eclipse.collections.impl.map.mutable;
 
-import java.lang.reflect.Field;
-
+import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.factory.map.MutableMapFactory;
 import org.eclipse.collections.api.map.MutableMap;
-import net.jcip.annotations.Immutable;
 
 @Immutable
 public final class MutableMapFactoryImpl implements MutableMapFactory

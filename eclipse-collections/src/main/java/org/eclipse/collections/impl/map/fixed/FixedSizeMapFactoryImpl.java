@@ -10,10 +10,10 @@
 
 package org.eclipse.collections.impl.map.fixed;
 
+import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.factory.map.FixedSizeMapFactory;
 import org.eclipse.collections.api.map.FixedSizeMap;
 import org.eclipse.collections.impl.block.factory.Comparators;
-import net.jcip.annotations.Immutable;
 
 @Immutable
 public class FixedSizeMapFactoryImpl implements FixedSizeMapFactory

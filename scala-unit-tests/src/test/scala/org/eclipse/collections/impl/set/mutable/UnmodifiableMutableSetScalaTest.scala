@@ -11,8 +11,9 @@
 package org.eclipse.collections.impl.set.mutable
 
 import java.util.TreeSet
-import org.eclipse.collections.impl.{UnmodifiableIterableTestTrait, InternalIterableTestTrait}
+
 import org.eclipse.collections.impl.list.mutable.FastList
+import org.eclipse.collections.impl.{InternalIterableTestTrait, UnmodifiableIterableTestTrait}
 
 class UnmodifiableMutableSetScalaTest extends InternalIterableTestTrait with UnmodifiableIterableTestTrait
 {

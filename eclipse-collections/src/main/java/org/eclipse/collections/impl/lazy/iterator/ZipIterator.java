@@ -12,9 +12,9 @@ package org.eclipse.collections.impl.lazy.iterator;
 
 import java.util.Iterator;
 
+import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.tuple.Tuples;
-import net.jcip.annotations.Immutable;
 
 @Immutable
 public final class ZipIterator<X, Y>

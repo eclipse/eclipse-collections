@@ -10,11 +10,11 @@
 
 package org.eclipse.collections.impl.bag.immutable;
 
+import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.bag.Bag;
 import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.api.factory.bag.ImmutableBagFactory;
 import org.eclipse.collections.impl.utility.Iterate;
-import net.jcip.annotations.Immutable;
 
 @Immutable
 public final class ImmutableBagFactoryImpl implements ImmutableBagFactory

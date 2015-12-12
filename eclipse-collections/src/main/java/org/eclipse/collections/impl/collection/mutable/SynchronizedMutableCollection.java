@@ -14,6 +14,7 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Collections;
 
+import net.jcip.annotations.ThreadSafe;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.function.primitive.BooleanFunction;
@@ -40,7 +41,6 @@ import org.eclipse.collections.api.collection.primitive.MutableShortCollection;
 import org.eclipse.collections.api.multimap.MutableMultimap;
 import org.eclipse.collections.api.partition.PartitionMutableCollection;
 import org.eclipse.collections.api.tuple.Pair;
-import net.jcip.annotations.ThreadSafe;
 
 /**
  * A synchronized view of a {@link MutableCollection}. It is imperative that the user manually synchronize on the collection when iterating over it using the

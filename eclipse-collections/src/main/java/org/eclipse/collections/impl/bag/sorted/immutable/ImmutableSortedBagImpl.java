@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.RandomAccess;
 
+import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.bag.Bag;
 import org.eclipse.collections.api.bag.sorted.ImmutableSortedBag;
 import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
@@ -45,7 +46,6 @@ import org.eclipse.collections.impl.partition.bag.sorted.PartitionTreeBag;
 import org.eclipse.collections.impl.utility.ArrayIterate;
 import org.eclipse.collections.impl.utility.ListIterate;
 import org.eclipse.collections.impl.utility.internal.SortedBagIterables;
-import net.jcip.annotations.Immutable;
 
 @Immutable
 class ImmutableSortedBagImpl<T>

@@ -13,10 +13,10 @@ package org.eclipse.collections.impl.set.sorted.immutable;
 import java.util.Comparator;
 import java.util.SortedSet;
 
+import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.factory.set.sorted.ImmutableSortedSetFactory;
 import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 import org.eclipse.collections.impl.utility.Iterate;
-import net.jcip.annotations.Immutable;
 
 @Immutable
 public final class ImmutableSortedSetFactoryImpl implements ImmutableSortedSetFactory

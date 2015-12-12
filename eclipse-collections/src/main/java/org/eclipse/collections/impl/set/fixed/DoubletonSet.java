@@ -18,12 +18,12 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
+import net.jcip.annotations.NotThreadSafe;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.impl.block.factory.Comparators;
-import net.jcip.annotations.NotThreadSafe;
 
 @NotThreadSafe
 final class DoubletonSet<T>

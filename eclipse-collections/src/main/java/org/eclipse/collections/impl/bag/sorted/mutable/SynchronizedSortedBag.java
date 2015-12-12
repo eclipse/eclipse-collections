@@ -16,6 +16,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.concurrent.ExecutorService;
 
+import net.jcip.annotations.GuardedBy;
+import net.jcip.annotations.ThreadSafe;
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.bag.ParallelBag;
 import org.eclipse.collections.api.bag.sorted.ImmutableSortedBag;
@@ -56,8 +58,6 @@ import org.eclipse.collections.api.tuple.primitive.ObjectIntPair;
 import org.eclipse.collections.impl.collection.mutable.AbstractSynchronizedMutableCollection;
 import org.eclipse.collections.impl.collection.mutable.SynchronizedCollectionSerializationProxy;
 import org.eclipse.collections.impl.stack.mutable.ArrayStack;
-import net.jcip.annotations.GuardedBy;
-import net.jcip.annotations.ThreadSafe;
 
 /**
  * A synchronized view of a {@link MutableSortedBag}. It is imperative that the user manually synchronize on the collection when iterating over it using the

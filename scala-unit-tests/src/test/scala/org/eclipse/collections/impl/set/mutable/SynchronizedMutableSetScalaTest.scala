@@ -10,9 +10,9 @@
 
 package org.eclipse.collections.impl.set.mutable
 
-import org.junit.Test
 import org.eclipse.collections.impl.collection.mutable.SynchronizedMutableCollectionTestTrait
 import org.eclipse.collections.impl.list.mutable.FastList
+import org.junit.Test
 
 class SynchronizedMutableSetScalaTest extends SynchronizedMutableCollectionTestTrait with SynchronizedUnsortedSetIterableTestTrait
 {

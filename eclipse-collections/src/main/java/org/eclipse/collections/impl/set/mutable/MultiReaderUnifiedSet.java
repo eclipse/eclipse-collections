@@ -68,7 +68,7 @@ import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.lazy.parallel.set.MultiReaderParallelUnsortedSetIterable;
 import org.eclipse.collections.impl.utility.LazyIterate;
 
-import static org.eclipse.collections.impl.factory.Iterables.*;
+import static org.eclipse.collections.impl.factory.Iterables.mList;
 
 /**
  * MultiReadUnifiedSet provides a thread-safe wrapper around a UnifiedSet, using a ReentrantReadWriteLock.  In order to

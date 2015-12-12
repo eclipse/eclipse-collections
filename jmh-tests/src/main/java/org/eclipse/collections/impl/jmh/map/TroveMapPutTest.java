@@ -13,11 +13,11 @@ package org.eclipse.collections.impl.jmh.map;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
-import org.eclipse.collections.impl.jmh.runner.AbstractJMHTestRunner;
 import gnu.trove.impl.Constants;
 import gnu.trove.map.TMap;
 import gnu.trove.map.hash.THashMap;
 import org.apache.commons.lang.RandomStringUtils;
+import org.eclipse.collections.impl.jmh.runner.AbstractJMHTestRunner;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Mode;

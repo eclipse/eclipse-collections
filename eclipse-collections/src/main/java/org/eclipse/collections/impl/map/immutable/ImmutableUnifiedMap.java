@@ -15,6 +15,7 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 
+import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function0;
@@ -27,7 +28,6 @@ import org.eclipse.collections.impl.collection.mutable.UnmodifiableMutableCollec
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.parallel.BatchIterable;
 import org.eclipse.collections.impl.set.mutable.UnmodifiableMutableSet;
-import net.jcip.annotations.Immutable;
 
 @Immutable
 /**

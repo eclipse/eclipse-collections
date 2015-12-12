@@ -14,6 +14,7 @@ import java.text.NumberFormat;
 import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import org.apache.commons.lang.RandomStringUtils;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.block.function.Function2;
@@ -37,7 +38,6 @@ import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.Tuples;
 import org.eclipse.collections.impl.utility.Iterate;
-import org.apache.commons.lang.RandomStringUtils;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;

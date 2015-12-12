@@ -14,6 +14,7 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.concurrent.ExecutorService;
 
+import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
@@ -92,7 +93,6 @@ import org.eclipse.collections.impl.set.mutable.primitive.IntHashSet;
 import org.eclipse.collections.impl.set.mutable.primitive.LongHashSet;
 import org.eclipse.collections.impl.set.mutable.primitive.ShortHashSet;
 import org.eclipse.collections.impl.utility.internal.SetIterables;
-import net.jcip.annotations.Immutable;
 
 /**
  * This class is the parent class for all ImmutableSets.  All implementations of ImmutableSet must implement the Set

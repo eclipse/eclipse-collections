@@ -20,6 +20,7 @@ import java.util.Comparator;
 import java.util.EmptyStackException;
 import java.util.Iterator;
 
+import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.MutableBag;
@@ -98,7 +99,6 @@ import org.eclipse.collections.impl.stack.mutable.primitive.LongArrayStack;
 import org.eclipse.collections.impl.stack.mutable.primitive.ShortArrayStack;
 import org.eclipse.collections.impl.utility.Iterate;
 import org.eclipse.collections.impl.utility.LazyIterate;
-import net.jcip.annotations.Immutable;
 
 /**
  * The immutable equivalent of ArrayStack. Wraps a FastList.

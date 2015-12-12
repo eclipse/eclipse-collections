@@ -10,11 +10,11 @@
 
 package org.eclipse.collections.impl.set.strategy.immutable;
 
+import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.block.HashingStrategy;
 import org.eclipse.collections.api.factory.set.strategy.ImmutableHashingStrategySetFactory;
 import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.impl.utility.Iterate;
-import net.jcip.annotations.Immutable;
 
 @Immutable
 public final class ImmutableHashingStrategySetFactoryImpl implements ImmutableHashingStrategySetFactory

@@ -10,10 +10,10 @@
 
 package org.eclipse.collections.impl.partition.bag.sorted;
 
+import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.bag.sorted.ImmutableSortedBag;
 import org.eclipse.collections.api.partition.bag.sorted.PartitionImmutableSortedBag;
 import org.eclipse.collections.api.partition.bag.sorted.PartitionSortedBag;
-import net.jcip.annotations.Immutable;
 
 /**
  * @since 4.2

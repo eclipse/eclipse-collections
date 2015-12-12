@@ -16,6 +16,7 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.Bag;
@@ -80,7 +81,6 @@ import org.eclipse.collections.impl.partition.bag.PartitionHashBag;
 import org.eclipse.collections.impl.utility.ArrayIterate;
 import org.eclipse.collections.impl.utility.Iterate;
 import org.eclipse.collections.impl.utility.LazyIterate;
-import net.jcip.annotations.Immutable;
 
 /**
  * This is a zero element {@link ImmutableBag} which is created by calling the Bags.immutable.empty().

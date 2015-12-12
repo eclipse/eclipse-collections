@@ -15,7 +15,6 @@ import java.util.NoSuchElementException;
 
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.block.HashingStrategy;
-import org.eclipse.collections.api.map.primitive.MutableObjectBooleanMap;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.impl.block.factory.HashingStrategies;
 import org.eclipse.collections.impl.lazy.AbstractLazyIterableTestCase;

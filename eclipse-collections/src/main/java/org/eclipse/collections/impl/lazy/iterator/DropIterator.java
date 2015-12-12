@@ -12,8 +12,8 @@ package org.eclipse.collections.impl.lazy.iterator;
 
 import java.util.Iterator;
 
-import org.eclipse.collections.impl.block.predicate.DropIterablePredicate;
 import net.jcip.annotations.Immutable;
+import org.eclipse.collections.impl.block.predicate.DropIterablePredicate;
 
 /**
  * Iterates over the elements of the iterator skipping the first count elements or the full iterator if the count is

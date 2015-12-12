@@ -14,7 +14,6 @@ import org.eclipse.collections.api.block.HashingStrategy;
 import org.eclipse.collections.api.collection.primitive.MutableBooleanCollection;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.impl.block.factory.HashingStrategies;
-import org.eclipse.collections.impl.collection.mutable.primitive.AbstractMutableBooleanCollectionTestCase;
 import org.eclipse.collections.impl.list.mutable.FastList;
 
 public class ObjectBooleanHashMapWithHashingStrategyValuesTest extends ObjectBooleanHashMapValuesTestCase

@@ -10,8 +10,8 @@
 
 package org.eclipse.collections.impl.collection.mutable
 
-import org.eclipse.collections.impl.{UnmodifiableIterableTestTrait, InternalIterableTestTrait}
 import org.eclipse.collections.impl.list.mutable.FastList
+import org.eclipse.collections.impl.{InternalIterableTestTrait, UnmodifiableIterableTestTrait}
 
 class UnmodifiableMutableCollectionScalaTest extends InternalIterableTestTrait with UnmodifiableIterableTestTrait
 {

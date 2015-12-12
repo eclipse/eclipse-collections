@@ -14,7 +14,6 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
 
-import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.block.HashingStrategy;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;

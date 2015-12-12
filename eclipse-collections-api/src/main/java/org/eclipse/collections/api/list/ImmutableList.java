@@ -12,6 +12,7 @@ package org.eclipse.collections.api.list;
 
 import java.util.List;
 
+import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.block.HashingStrategy;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
@@ -38,7 +39,6 @@ import org.eclipse.collections.api.list.primitive.ImmutableShortList;
 import org.eclipse.collections.api.multimap.list.ImmutableListMultimap;
 import org.eclipse.collections.api.partition.list.PartitionImmutableList;
 import org.eclipse.collections.api.tuple.Pair;
-import net.jcip.annotations.Immutable;
 
 /**
  * ImmutableList is the non-modifiable equivalent interface to {@link MutableList}. {@link MutableList#toImmutable()}

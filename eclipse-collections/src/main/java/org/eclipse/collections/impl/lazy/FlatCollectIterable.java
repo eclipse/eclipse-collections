@@ -12,6 +12,7 @@ package org.eclipse.collections.impl.lazy;
 
 import java.util.Iterator;
 
+import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
@@ -22,7 +23,6 @@ import org.eclipse.collections.impl.Counter;
 import org.eclipse.collections.impl.block.factory.Predicates;
 import org.eclipse.collections.impl.lazy.iterator.FlatCollectIterator;
 import org.eclipse.collections.impl.utility.Iterate;
-import net.jcip.annotations.Immutable;
 
 @Immutable
 public class FlatCollectIterable<T, V>

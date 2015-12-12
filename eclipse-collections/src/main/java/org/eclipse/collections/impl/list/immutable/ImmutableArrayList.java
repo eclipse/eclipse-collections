@@ -18,6 +18,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.RandomAccess;
 
+import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.block.function.Function2;
@@ -37,7 +38,6 @@ import org.eclipse.collections.impl.utility.Iterate;
 import org.eclipse.collections.impl.utility.ListIterate;
 import org.eclipse.collections.impl.utility.internal.InternalArrayIterate;
 import org.eclipse.collections.impl.utility.internal.RandomAccessListIterate;
-import net.jcip.annotations.Immutable;
 
 /**
  * An ImmutableArrayList wraps a Java array but it cannot be modified after creation.

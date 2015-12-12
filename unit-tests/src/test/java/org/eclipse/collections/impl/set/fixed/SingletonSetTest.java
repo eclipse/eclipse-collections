@@ -37,7 +37,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.eclipse.collections.impl.factory.Iterables.*;
+import static org.eclipse.collections.impl.factory.Iterables.iSet;
+import static org.eclipse.collections.impl.factory.Iterables.mSet;
 
 /**
  * JUnit test for {@link SingletonSet}.

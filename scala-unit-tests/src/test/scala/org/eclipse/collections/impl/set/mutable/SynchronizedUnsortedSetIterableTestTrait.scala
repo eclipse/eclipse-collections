@@ -10,9 +10,9 @@
 
 package org.eclipse.collections.impl.set.mutable
 
-import org.junit.Test
 import org.eclipse.collections.api.set.UnsortedSetIterable
 import org.eclipse.collections.impl.set.SynchronizedSetIterableTestTrait
+import org.junit.Test
 
 trait SynchronizedUnsortedSetIterableTestTrait extends SynchronizedSetIterableTestTrait
 {

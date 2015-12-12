@@ -24,7 +24,7 @@ import org.eclipse.collections.impl.tuple.ImmutableEntry;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static org.eclipse.collections.impl.factory.Iterables.*;
+import static org.eclipse.collections.impl.factory.Iterables.iSet;
 
 /**
  * JUnit test for {@link ConcurrentMutableHashMap}.

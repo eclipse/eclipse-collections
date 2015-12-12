@@ -11,8 +11,9 @@
 package org.eclipse.collections.impl.jmh
 
 import org.junit.Assert
-import scala.collection.mutable.ArrayBuffer
+
 import scala.collection.mutable
+import scala.collection.mutable.ArrayBuffer
 
 object FunctionalInterfaceScalaTest
 {

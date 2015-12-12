@@ -37,13 +37,13 @@ import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.math.IntegerSum;
 import org.eclipse.collections.impl.math.Sum;
 import org.eclipse.collections.impl.test.Verify;
-import org.eclipse.collections.impl.utility.ArrayListIterate;
 import org.eclipse.collections.impl.utility.Iterate;
 import org.eclipse.collections.impl.utility.ListIterate;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static org.eclipse.collections.impl.factory.Iterables.*;
+import static org.eclipse.collections.impl.factory.Iterables.iList;
+import static org.eclipse.collections.impl.factory.Iterables.mList;
 
 /**
  * JUnit test for {@link IterableIterate}.

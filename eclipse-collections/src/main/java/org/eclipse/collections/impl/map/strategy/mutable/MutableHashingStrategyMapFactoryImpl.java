@@ -10,10 +10,10 @@
 
 package org.eclipse.collections.impl.map.strategy.mutable;
 
+import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.block.HashingStrategy;
 import org.eclipse.collections.api.factory.map.strategy.MutableHashingStrategyMapFactory;
 import org.eclipse.collections.api.map.MutableMap;
-import net.jcip.annotations.Immutable;
 
 @Immutable
 public final class MutableHashingStrategyMapFactoryImpl implements MutableHashingStrategyMapFactory

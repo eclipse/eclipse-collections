@@ -34,7 +34,8 @@ import org.eclipse.collections.impl.utility.ListIterate;
 import org.eclipse.collections.impl.utility.MapIterate;
 import org.junit.Test;
 
-import static org.eclipse.collections.impl.factory.Iterables.*;
+import static org.eclipse.collections.impl.factory.Iterables.iList;
+import static org.eclipse.collections.impl.factory.Iterables.mList;
 
 public class CheckedBlocksTest
 {

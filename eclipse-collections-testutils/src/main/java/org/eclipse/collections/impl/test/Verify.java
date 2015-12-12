@@ -28,6 +28,7 @@ import java.util.Set;
 import java.util.SortedSet;
 import java.util.concurrent.Callable;
 
+import org.apache.commons.codec.binary.Base64;
 import org.eclipse.collections.api.InternalIterable;
 import org.eclipse.collections.api.PrimitiveIterable;
 import org.eclipse.collections.api.bag.Bag;
@@ -56,7 +57,6 @@ import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.tuple.ImmutableEntry;
 import org.eclipse.collections.impl.utility.ArrayIterate;
 import org.eclipse.collections.impl.utility.Iterate;
-import org.apache.commons.codec.binary.Base64;
 import org.junit.Assert;
 
 /**

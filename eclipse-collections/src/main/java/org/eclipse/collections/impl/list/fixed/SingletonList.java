@@ -16,6 +16,7 @@ import java.io.ObjectInput;
 import java.io.ObjectOutput;
 import java.util.Comparator;
 
+import net.jcip.annotations.NotThreadSafe;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.primitive.BooleanFunction;
 import org.eclipse.collections.api.block.function.primitive.ByteFunction;
@@ -30,7 +31,6 @@ import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.impl.block.factory.Comparators;
-import net.jcip.annotations.NotThreadSafe;
 
 /**
  * This class is a memory efficient list with one element.  Unlike Collections.singletonList(), it can be sorted.  It is

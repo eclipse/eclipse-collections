@@ -22,6 +22,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.RandomAccess;
 
+import net.jcip.annotations.NotThreadSafe;
 import org.eclipse.collections.api.block.HashingStrategy;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function0;
@@ -89,7 +90,6 @@ import org.eclipse.collections.impl.utility.Iterate;
 import org.eclipse.collections.impl.utility.ListIterate;
 import org.eclipse.collections.impl.utility.internal.InternalArrayIterate;
 import org.eclipse.collections.impl.utility.internal.RandomAccessListIterate;
-import net.jcip.annotations.NotThreadSafe;
 
 /**
  * FastList is an attempt to provide the same functionality as ArrayList without the support for concurrent

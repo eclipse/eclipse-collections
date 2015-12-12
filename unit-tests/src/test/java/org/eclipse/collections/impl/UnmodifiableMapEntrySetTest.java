@@ -13,7 +13,6 @@ package org.eclipse.collections.impl;
 import java.util.Iterator;
 import java.util.Map;
 
-import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.collection.ImmutableCollection;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MutableMap;

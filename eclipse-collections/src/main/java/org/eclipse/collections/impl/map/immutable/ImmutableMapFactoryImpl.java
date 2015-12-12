@@ -12,10 +12,10 @@ package org.eclipse.collections.impl.map.immutable;
 
 import java.util.Map;
 
+import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.factory.map.ImmutableMapFactory;
 import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.impl.block.factory.Comparators;
-import net.jcip.annotations.Immutable;
 
 @Immutable
 public final class ImmutableMapFactoryImpl implements ImmutableMapFactory

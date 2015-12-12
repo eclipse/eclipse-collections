@@ -15,11 +15,11 @@ import java.net.URLClassLoader;
 import java.util.Arrays;
 import java.util.List;
 
-import org.eclipse.collections.codegenerator.EclipseCollectionsCodeGenerator;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.project.MavenProject;
+import org.eclipse.collections.codegenerator.EclipseCollectionsCodeGenerator;
 
 /**
  * @goal generate

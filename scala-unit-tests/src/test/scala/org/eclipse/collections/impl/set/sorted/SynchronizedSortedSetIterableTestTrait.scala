@@ -10,9 +10,9 @@
 
 package org.eclipse.collections.impl.set.sorted
 
-import org.junit.Test
 import org.eclipse.collections.api.set.sorted.SortedSetIterable
 import org.eclipse.collections.impl.set.SynchronizedSetIterableTestTrait
+import org.junit.Test
 
 trait SynchronizedSortedSetIterableTestTrait extends SynchronizedSetIterableTestTrait
 {

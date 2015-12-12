@@ -17,6 +17,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
+import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.block.HashingStrategy;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.procedure.Procedure;
@@ -27,7 +28,6 @@ import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.EmptyIterator;
 import org.eclipse.collections.impl.factory.HashingStrategySets;
 import org.eclipse.collections.impl.set.immutable.AbstractImmutableSet;
-import net.jcip.annotations.Immutable;
 
 /**
  * This is a zero element {@link ImmutableUnifiedSetWithHashingStrategy} which is created by calling the HashingStrategySets.immutable.empty() method.

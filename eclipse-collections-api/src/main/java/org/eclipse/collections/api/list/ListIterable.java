@@ -16,7 +16,6 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.concurrent.ExecutorService;
 
-import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.annotation.Beta;
 import org.eclipse.collections.api.block.HashingStrategy;
 import org.eclipse.collections.api.block.function.Function;

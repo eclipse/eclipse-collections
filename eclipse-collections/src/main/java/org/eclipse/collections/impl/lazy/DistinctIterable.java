@@ -12,11 +12,11 @@ package org.eclipse.collections.impl.lazy;
 
 import java.util.Iterator;
 
+import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.impl.lazy.iterator.DistinctIterator;
 import org.eclipse.collections.impl.utility.internal.IterableIterate;
-import net.jcip.annotations.Immutable;
 
 /**
  * A DistinctIterable is an iterable that eliminates duplicates from a source iterable as it iterates.

@@ -12,15 +12,14 @@ package org.eclipse.collections.impl
 
 import java.util.Collections
 
-import org.junit.Test
-import org.slf4j.LoggerFactory
-
 import org.eclipse.collections.api._
 import org.eclipse.collections.api.block.function.Function
-import block.factory.Comparators
-import list.mutable.FastList
-import utility.internal.IteratorIterate
-import Prelude._
+import org.eclipse.collections.impl.Prelude._
+import org.eclipse.collections.impl.block.factory.Comparators
+import org.eclipse.collections.impl.list.mutable.FastList
+import org.eclipse.collections.impl.utility.internal.IteratorIterate
+import org.junit.Test
+import org.slf4j.LoggerFactory
 
 object MutableAnagramTest
 {

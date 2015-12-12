@@ -35,7 +35,8 @@ import org.eclipse.collections.impl.utility.Iterate;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static org.eclipse.collections.impl.factory.Iterables.*;
+import static org.eclipse.collections.impl.factory.Iterables.iMap;
+import static org.eclipse.collections.impl.factory.Iterables.mList;
 
 public abstract class UnifiedMapTestCase extends MutableMapTestCase
 {

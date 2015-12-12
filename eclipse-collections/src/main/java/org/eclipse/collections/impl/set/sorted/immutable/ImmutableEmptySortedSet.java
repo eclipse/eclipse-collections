@@ -17,6 +17,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
+import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
@@ -31,7 +32,6 @@ import org.eclipse.collections.impl.EmptyIterator;
 import org.eclipse.collections.impl.factory.SortedSets;
 import org.eclipse.collections.impl.stack.mutable.ArrayStack;
 import org.eclipse.collections.impl.utility.ListIterate;
-import net.jcip.annotations.Immutable;
 
 /**
  * This is a zero element {@link ImmutableSortedSet} which is created by calling the SortedSets.immutable.empty() method.

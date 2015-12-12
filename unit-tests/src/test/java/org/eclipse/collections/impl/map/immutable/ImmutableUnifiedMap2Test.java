@@ -20,7 +20,7 @@ import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static org.eclipse.collections.impl.factory.Iterables.*;
+import static org.eclipse.collections.impl.factory.Iterables.iSet;
 
 public class ImmutableUnifiedMap2Test extends MapIterableTestCase
 {

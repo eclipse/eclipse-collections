@@ -14,8 +14,6 @@ import org.eclipse.collections.test.UnmodifiableMutableCollectionTestCase;
 import org.eclipse.collections.test.set.UnmodifiableSetTestCase;
 import org.junit.Test;
 
-import static org.eclipse.collections.impl.test.Verify.assertThrows;
-
 public interface UnmodifiableMutableSetTestCase extends UnmodifiableMutableCollectionTestCase, UnmodifiableSetTestCase, MutableSetTestCase
 {
     @Override

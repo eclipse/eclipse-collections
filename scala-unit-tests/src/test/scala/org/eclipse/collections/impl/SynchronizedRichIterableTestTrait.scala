@@ -12,16 +12,15 @@ package org.eclipse.collections.impl
 
 import java.lang.StringBuilder
 
-import list.mutable.FastList
-import multimap.list.FastListMultimap
-import org.junit.Test
-
 import org.eclipse.collections.api.RichIterable
 import org.eclipse.collections.api.collection.MutableCollection
-import org.eclipse.collections.api.tuple.Pair
-import org.eclipse.collections.api.multimap.MutableMultimap
-import Prelude._
 import org.eclipse.collections.api.list.MutableList
+import org.eclipse.collections.api.multimap.MutableMultimap
+import org.eclipse.collections.api.tuple.Pair
+import org.eclipse.collections.impl.Prelude._
+import org.eclipse.collections.impl.list.mutable.FastList
+import org.eclipse.collections.impl.multimap.list.FastListMultimap
+import org.junit.Test
 
 trait SynchronizedRichIterableTestTrait extends SynchronizedMutableIterableTestTrait /* with RichIterableTestTrait */
 {

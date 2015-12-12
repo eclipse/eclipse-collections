@@ -11,6 +11,7 @@
 package org.eclipse.collections.impl.jmh
 
 import org.junit.Assert
+
 import scala.collection.mutable
 
 object CountSetScalaTest

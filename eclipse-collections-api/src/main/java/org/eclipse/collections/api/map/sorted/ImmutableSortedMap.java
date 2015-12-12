@@ -12,6 +12,7 @@ package org.eclipse.collections.api.map.sorted;
 
 import java.util.SortedMap;
 
+import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.block.function.Function2;
@@ -42,7 +43,6 @@ import org.eclipse.collections.api.multimap.list.ImmutableListMultimap;
 import org.eclipse.collections.api.multimap.sortedset.ImmutableSortedSetMultimap;
 import org.eclipse.collections.api.partition.list.PartitionImmutableList;
 import org.eclipse.collections.api.tuple.Pair;
-import net.jcip.annotations.Immutable;
 
 /**
  * An ImmutableSortedMap is different than a JCF SortedMap in that it has no mutating methods, but it shares

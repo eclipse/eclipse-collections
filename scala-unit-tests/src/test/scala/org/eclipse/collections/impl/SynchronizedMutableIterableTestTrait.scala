@@ -10,9 +10,9 @@
 
 package org.eclipse.collections.impl
 
-import Prelude._
-import org.junit.Test
 import org.eclipse.collections.api.InternalIterable
+import org.eclipse.collections.impl.Prelude._
+import org.junit.Test
 
 trait SynchronizedMutableIterableTestTrait extends SynchronizedTestTrait with InternalIterableTestTrait
 {

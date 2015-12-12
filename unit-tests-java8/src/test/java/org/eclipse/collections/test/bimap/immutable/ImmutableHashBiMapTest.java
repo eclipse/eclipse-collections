@@ -16,10 +16,7 @@ import org.eclipse.collections.api.bimap.ImmutableBiMap;
 import org.eclipse.collections.api.bimap.MutableBiMap;
 import org.eclipse.collections.impl.bimap.mutable.HashBiMap;
 import org.eclipse.junit.runners.Java8Runner;
-import org.junit.Ignore;
 import org.junit.runner.RunWith;
-
-import static org.junit.Assert.assertNull;
 
 @RunWith(Java8Runner.class)
 public class ImmutableHashBiMapTest implements ImmutableBiMapTestCase

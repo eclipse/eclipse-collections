@@ -10,23 +10,9 @@
 
 package org.eclipse.collections.impl.map.mutable.primitive;
 
-import java.util.NoSuchElementException;
-
-import org.eclipse.collections.api.BooleanIterable;
-import org.eclipse.collections.api.block.function.primitive.BooleanToObjectFunction;
 import org.eclipse.collections.api.collection.primitive.MutableBooleanCollection;
-import org.eclipse.collections.api.iterator.BooleanIterator;
-import org.eclipse.collections.api.iterator.MutableBooleanIterator;
 import org.eclipse.collections.api.list.MutableList;
-import org.eclipse.collections.impl.block.factory.primitive.BooleanPredicates;
-import org.eclipse.collections.impl.collection.mutable.primitive.AbstractMutableBooleanCollectionTestCase;
-import org.eclipse.collections.impl.collection.mutable.primitive.SynchronizedBooleanCollection;
-import org.eclipse.collections.impl.collection.mutable.primitive.UnmodifiableBooleanCollection;
 import org.eclipse.collections.impl.list.mutable.FastList;
-import org.eclipse.collections.impl.list.mutable.primitive.BooleanArrayList;
-import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
-import org.junit.Test;
 
 /**
  * JUnit test for {@link ObjectBooleanHashMap#values()}.

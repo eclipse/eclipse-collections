@@ -10,14 +10,14 @@
 
 package org.eclipse.collections.impl.jmh
 
-import java.util.concurrent.ExecutorService
-import java.util.concurrent.Executors
-import java.util.concurrent.TimeUnit
-import org.apache.commons.lang.RandomStringUtils
 import java.util
+import java.util.concurrent.{ExecutorService, Executors, TimeUnit}
+
+import org.apache.commons.lang.RandomStringUtils
 import org.junit.Assert
-import scala.collection.parallel.immutable.ParSet
+
 import scala.collection.mutable
+import scala.collection.parallel.immutable.ParSet
 
 object AnagramSetScalaTest
 {

@@ -10,9 +10,9 @@
 
 package org.eclipse.collections.impl.collection.mutable
 
-import org.junit.Test
-import org.eclipse.collections.impl.set.sorted.mutable.TreeSortedSet
 import org.eclipse.collections.impl.set.sorted.SynchronizedSortedSetIterableTestTrait
+import org.eclipse.collections.impl.set.sorted.mutable.TreeSortedSet
+import org.junit.Test
 
 class SynchronizedSortedSetScalaTest extends SynchronizedMutableCollectionTestTrait with SynchronizedSortedSetIterableTestTrait
 {

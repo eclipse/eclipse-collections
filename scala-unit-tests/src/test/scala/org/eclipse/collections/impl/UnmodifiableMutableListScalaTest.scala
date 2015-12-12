@@ -10,7 +10,7 @@
 
 package org.eclipse.collections.impl
 
-import list.mutable.FastList
+import org.eclipse.collections.impl.list.mutable.FastList
 
 class UnmodifiableMutableListScalaTest extends ListIterableTestTrait with UnmodifiableListIterableTestTrait
 {
