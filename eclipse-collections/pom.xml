@@ -212,12 +212,6 @@
                     <version>2.8.1</version>
                 </plugin>
 
-                <plugin>
-                    <groupId>com.fortify.ps.maven.plugin</groupId>
-                    <artifactId>maven-sca-plugin</artifactId>
-                    <version>2.6</version>
-                </plugin>
-
             </plugins>
         </pluginManagement>
 
