@@ -30,8 +30,8 @@
     <!-- Checks whether files end with a new line.                        -->
     <!-- See http://checkstyle.sf.net/config_misc.html#NewlineAtEndOfFile -->
     <module name="NewlineAtEndOfFile">
-        <property name="lineSeparator" value="system" />
-        <property name="fileExtensions" value="java, xml" />
+        <property name="lineSeparator" value="lf" />
+        <property name="fileExtensions" value="java, xml, stg, scala" />
     </module>
 
     <module name="TreeWalker">
@@ -254,7 +254,7 @@
 
     <module name="RegexpHeader">
         <property name="headerFile" value="java.header" />
-        <property name="multiLines" value="17, 18, 19, 21, 22" />
+        <property name="multiLines" value="11, 12, 13, 15, 16" />
         <property name="fileExtensions" value="java, scala" />
     </module>
 

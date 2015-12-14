@@ -1,4 +1,4 @@
-/*******************************************************************************
+/*
  * Copyright (c) 2015 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -6,13 +6,15 @@
  * The Eclipse Public License is available at http://www.eclipse.org/legal/epl-v10.html
  * and the Eclipse Distribution License is available at
  * http://www.eclipse.org/org/documents/edl-v10.php.
- *******************************************************************************/
+ */
 
 package org.eclipse.collections.impl.jmh;
 
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
+import net.openhft.koloboke.collect.map.LongLongMap;
+import net.openhft.koloboke.collect.map.hash.HashLongLongMaps;
 import org.eclipse.collections.api.list.primitive.MutableLongList;
 import org.eclipse.collections.api.map.primitive.MutableLongLongMap;
 import org.eclipse.collections.api.set.primitive.MutableLongSet;
@@ -21,8 +23,6 @@ import org.eclipse.collections.impl.jmh.runner.AbstractJMHTestRunner;
 import org.eclipse.collections.impl.list.mutable.primitive.LongArrayList;
 import org.eclipse.collections.impl.map.mutable.primitive.LongLongHashMap;
 import org.eclipse.collections.impl.set.mutable.primitive.LongHashSet;
-import net.openhft.koloboke.collect.map.LongLongMap;
-import net.openhft.koloboke.collect.map.hash.HashLongLongMaps;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Mode;

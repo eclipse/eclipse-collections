@@ -1,4 +1,4 @@
-/*******************************************************************************
+/*
  * Copyright (c) 2015 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -6,13 +6,14 @@
  * The Eclipse Public License is available at http://www.eclipse.org/legal/epl-v10.html
  * and the Eclipse Distribution License is available at
  * http://www.eclipse.org/org/documents/edl-v10.php.
- *******************************************************************************/
+ */
 
 package org.eclipse.collections.api.set.sorted;
 
 import java.util.Set;
 import java.util.SortedSet;
 
+import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.function.primitive.BooleanFunction;
@@ -40,7 +41,6 @@ import org.eclipse.collections.api.partition.set.sorted.PartitionImmutableSorted
 import org.eclipse.collections.api.set.ImmutableSetIterable;
 import org.eclipse.collections.api.set.SetIterable;
 import org.eclipse.collections.api.tuple.Pair;
-import net.jcip.annotations.Immutable;
 
 /**
  * ImmutableSortedSet is the non-modifiable equivalent interface to {@link MutableSortedSet}. {@link

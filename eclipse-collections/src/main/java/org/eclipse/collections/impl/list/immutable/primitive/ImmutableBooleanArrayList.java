@@ -1,4 +1,4 @@
-/*******************************************************************************
+/*
  * Copyright (c) 2015 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -6,7 +6,7 @@
  * The Eclipse Public License is available at http://www.eclipse.org/legal/epl-v10.html
  * and the Eclipse Distribution License is available at
  * http://www.eclipse.org/org/documents/edl-v10.php.
- *******************************************************************************/
+ */
 
 package org.eclipse.collections.impl.list.immutable.primitive;
 
@@ -18,6 +18,7 @@ import java.io.Serializable;
 import java.util.BitSet;
 import java.util.NoSuchElementException;
 
+import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.BooleanIterable;
 import org.eclipse.collections.api.LazyBooleanIterable;
 import org.eclipse.collections.api.bag.primitive.MutableBooleanBag;
@@ -40,7 +41,6 @@ import org.eclipse.collections.impl.lazy.primitive.ReverseBooleanIterable;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.list.mutable.primitive.BooleanArrayList;
 import org.eclipse.collections.impl.set.mutable.primitive.BooleanHashSet;
-import net.jcip.annotations.Immutable;
 
 /**
  * ImmutableBooleanArrayList is the non-modifiable equivalent of {@link BooleanArrayList}.

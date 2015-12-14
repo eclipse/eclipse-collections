@@ -1,4 +1,4 @@
-/*******************************************************************************
+/*
  * Copyright (c) 2015 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -6,12 +6,13 @@
  * The Eclipse Public License is available at http://www.eclipse.org/legal/epl-v10.html
  * and the Eclipse Distribution License is available at
  * http://www.eclipse.org/org/documents/edl-v10.php.
- *******************************************************************************/
+ */
 
 package org.eclipse.collections.impl.lazy;
 
 import java.util.Collection;
 
+import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.LazyBooleanIterable;
 import org.eclipse.collections.api.LazyByteIterable;
 import org.eclipse.collections.api.LazyCharIterable;
@@ -63,7 +64,6 @@ import org.eclipse.collections.impl.multimap.list.FastListMultimap;
 import org.eclipse.collections.impl.partition.list.PartitionFastList;
 import org.eclipse.collections.impl.stack.mutable.ArrayStack;
 import org.eclipse.collections.impl.utility.LazyIterate;
-import net.jcip.annotations.Immutable;
 
 /**
  * AbstractLazyIterable provides a base from which deferred iterables such as SelectIterable,

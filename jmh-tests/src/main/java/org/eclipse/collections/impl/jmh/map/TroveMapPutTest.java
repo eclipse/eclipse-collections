@@ -1,4 +1,4 @@
-/*******************************************************************************
+/*
  * Copyright (c) 2015 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -6,18 +6,18 @@
  * The Eclipse Public License is available at http://www.eclipse.org/legal/epl-v10.html
  * and the Eclipse Distribution License is available at
  * http://www.eclipse.org/org/documents/edl-v10.php.
- *******************************************************************************/
+ */
 
 package org.eclipse.collections.impl.jmh.map;
 
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
-import org.eclipse.collections.impl.jmh.runner.AbstractJMHTestRunner;
 import gnu.trove.impl.Constants;
 import gnu.trove.map.TMap;
 import gnu.trove.map.hash.THashMap;
 import org.apache.commons.lang.RandomStringUtils;
+import org.eclipse.collections.impl.jmh.runner.AbstractJMHTestRunner;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Mode;

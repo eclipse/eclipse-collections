@@ -1,4 +1,4 @@
-/*******************************************************************************
+/*
  * Copyright (c) 2015 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -6,21 +6,20 @@
  * The Eclipse Public License is available at http://www.eclipse.org/legal/epl-v10.html
  * and the Eclipse Distribution License is available at
  * http://www.eclipse.org/org/documents/edl-v10.php.
- *******************************************************************************/
+ */
 
 package org.eclipse.collections.impl
 
 import java.util.Collections
 
-import org.junit.Test
-import org.slf4j.LoggerFactory
-
 import org.eclipse.collections.api._
 import org.eclipse.collections.api.block.function.Function
-import block.factory.Comparators
-import list.mutable.FastList
-import utility.internal.IteratorIterate
-import Prelude._
+import org.eclipse.collections.impl.Prelude._
+import org.eclipse.collections.impl.block.factory.Comparators
+import org.eclipse.collections.impl.list.mutable.FastList
+import org.eclipse.collections.impl.utility.internal.IteratorIterate
+import org.junit.Test
+import org.slf4j.LoggerFactory
 
 object MutableAnagramTest
 {
