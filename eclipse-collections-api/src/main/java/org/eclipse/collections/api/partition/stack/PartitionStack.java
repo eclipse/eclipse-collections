@@ -10,7 +10,7 @@
 
 package org.eclipse.collections.api.partition.stack;
 
-import org.eclipse.collections.api.partition.PartitionIterable;
+import org.eclipse.collections.api.partition.ordered.PartitionOrderedIterable;
 import org.eclipse.collections.api.stack.StackIterable;
 
 /**
@@ -18,7 +18,7 @@ import org.eclipse.collections.api.stack.StackIterable;
  * The results that answer true for the Predicate will be returned from the getSelected() method and the results
  * that answer false for the predicate will be returned from the getRejected() method.
  */
-public interface PartitionStack<T> extends PartitionIterable<T>
+public interface PartitionStack<T> extends PartitionOrderedIterable<T>
 {
     StackIterable<T> getSelected();
 

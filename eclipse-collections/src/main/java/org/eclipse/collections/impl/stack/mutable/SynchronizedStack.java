@@ -34,6 +34,7 @@ import org.eclipse.collections.api.block.function.primitive.IntFunction;
 import org.eclipse.collections.api.block.function.primitive.IntObjectToIntFunction;
 import org.eclipse.collections.api.block.function.primitive.LongFunction;
 import org.eclipse.collections.api.block.function.primitive.LongObjectToLongFunction;
+import org.eclipse.collections.api.block.function.primitive.ObjectIntToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.ShortFunction;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
@@ -56,6 +57,7 @@ import org.eclipse.collections.api.map.primitive.ObjectLongMap;
 import org.eclipse.collections.api.map.sorted.MutableSortedMap;
 import org.eclipse.collections.api.multimap.MutableMultimap;
 import org.eclipse.collections.api.multimap.list.MutableListMultimap;
+import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.partition.stack.PartitionMutableStack;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
@@ -71,9 +73,6 @@ import org.eclipse.collections.api.stack.primitive.MutableLongStack;
 import org.eclipse.collections.api.stack.primitive.MutableShortStack;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.UnmodifiableIteratorAdapter;
-import org.eclipse.collections.impl.block.procedure.MutatingAggregationProcedure;
-import org.eclipse.collections.impl.block.procedure.NonMutatingAggregationProcedure;
-import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 
 /**
  * A synchronized view of a {@link MutableStack}. It is imperative that the user manually synchronize on the collection when iterating over it using the
@@ -262,7 +261,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
-    public <S> RichIterable<S> selectInstancesOf(Class<S> clazz)
+    public <S> MutableStack<S> selectInstancesOf(Class<S> clazz)
     {
         synchronized (this.lock)
         {
@@ -1174,9 +1173,10 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
             Function0<? extends V> zeroValueFactory,
             Procedure2<? super V, ? super T> mutatingAggregator)
     {
-        MutableMap<K, V> map = UnifiedMap.newMap();
-        this.forEach(new MutatingAggregationProcedure<T, K, V>(map, groupBy, zeroValueFactory, mutatingAggregator));
-        return map;
+        synchronized (this.lock)
+        {
+            return this.delegate.aggregateInPlaceBy(groupBy, zeroValueFactory, mutatingAggregator);
+        }
     }
 
     public <K, V> MutableMap<K, V> aggregateBy(
@@ -1184,8 +1184,89 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
             Function0<? extends V> zeroValueFactory,
             Function2<? super V, ? super T, ? extends V> nonMutatingAggregator)
     {
-        MutableMap<K, V> map = UnifiedMap.newMap();
-        this.forEach(new NonMutatingAggregationProcedure<T, K, V>(map, groupBy, zeroValueFactory, nonMutatingAggregator));
-        return map;
+        synchronized (this.lock)
+        {
+            return this.delegate.aggregateBy(groupBy, zeroValueFactory, nonMutatingAggregator);
+        }
+    }
+
+    public MutableStack<T> takeWhile(Predicate<? super T> predicate)
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.takeWhile(predicate);
+        }
+    }
+
+    public MutableStack<T> dropWhile(Predicate<? super T> predicate)
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.dropWhile(predicate);
+        }
+    }
+
+    public PartitionMutableStack<T> partitionWhile(Predicate<? super T> predicate)
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.partitionWhile(predicate);
+        }
+    }
+
+    public MutableStack<T> distinct()
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.distinct();
+        }
+    }
+
+    public <V> MutableStack<V> collectWithIndex(ObjectIntToObjectFunction<? super T, ? extends V> function)
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.collectWithIndex(function);
+        }
+    }
+
+    public int indexOf(Object object)
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.indexOf(object);
+        }
+    }
+
+    public <S> boolean corresponds(OrderedIterable<S> other, Predicate2<? super T, ? super S> predicate)
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.corresponds(other, predicate);
+        }
+    }
+
+    public void forEach(int startIndex, int endIndex, Procedure<? super T> procedure)
+    {
+        synchronized (this.lock)
+        {
+            this.delegate.forEach(startIndex, endIndex, procedure);
+        }
+    }
+
+    public void forEachWithIndex(int fromIndex, int toIndex, ObjectIntProcedure<? super T> objectIntProcedure)
+    {
+        synchronized (this.lock)
+        {
+            this.delegate.forEachWithIndex(fromIndex, toIndex, objectIntProcedure);
+        }
+    }
+
+    public int detectIndex(Predicate<? super T> predicate)
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.detectIndex(predicate);
+        }
     }
 }

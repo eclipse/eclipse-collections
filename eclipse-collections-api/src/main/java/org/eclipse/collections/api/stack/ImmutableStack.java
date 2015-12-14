@@ -11,6 +11,7 @@
 package org.eclipse.collections.api.stack;
 
 import org.eclipse.collections.api.block.function.Function;
+import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.function.primitive.BooleanFunction;
 import org.eclipse.collections.api.block.function.primitive.ByteFunction;
@@ -19,10 +20,12 @@ import org.eclipse.collections.api.block.function.primitive.DoubleFunction;
 import org.eclipse.collections.api.block.function.primitive.FloatFunction;
 import org.eclipse.collections.api.block.function.primitive.IntFunction;
 import org.eclipse.collections.api.block.function.primitive.LongFunction;
+import org.eclipse.collections.api.block.function.primitive.ObjectIntToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.ShortFunction;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
+import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.api.multimap.list.ImmutableListMultimap;
 import org.eclipse.collections.api.partition.stack.PartitionImmutableStack;
@@ -44,6 +47,14 @@ public interface ImmutableStack<T> extends StackIterable<T>
 
     ImmutableStack<T> pop(int count);
 
+    ImmutableStack<T> takeWhile(Predicate<? super T> predicate);
+
+    ImmutableStack<T> dropWhile(Predicate<? super T> predicate);
+
+    PartitionImmutableStack<T> partitionWhile(Predicate<? super T> predicate);
+
+    ImmutableStack<T> distinct();
+
     ImmutableStack<T> tap(Procedure<? super T> procedure);
 
     ImmutableStack<T> select(Predicate<? super T> predicate);
@@ -53,6 +64,8 @@ public interface ImmutableStack<T> extends StackIterable<T>
     ImmutableStack<T> reject(Predicate<? super T> predicate);
 
     <P> ImmutableStack<T> rejectWith(Predicate2<? super T, ? super P> predicate, P parameter);
+
+    <S> ImmutableStack<S> selectInstancesOf(Class<S> clazz);
 
     PartitionImmutableStack<T> partition(Predicate<? super T> predicate);
 
@@ -80,6 +93,8 @@ public interface ImmutableStack<T> extends StackIterable<T>
 
     <V> ImmutableStack<V> collectIf(Predicate<? super T> predicate, Function<? super T, ? extends V> function);
 
+    <V> ImmutableStack<V> collectWithIndex(ObjectIntToObjectFunction<? super T, ? extends V> function);
+
     <V> ImmutableStack<V> flatCollect(Function<? super T, ? extends Iterable<V>> function);
 
     <V> ImmutableListMultimap<V, T> groupBy(Function<? super T, ? extends V> function);
@@ -91,6 +106,10 @@ public interface ImmutableStack<T> extends StackIterable<T>
     <S> ImmutableStack<Pair<T, S>> zip(Iterable<S> that);
 
     ImmutableStack<Pair<T, Integer>> zipWithIndex();
+
+    <K, V> ImmutableMap<K, V> aggregateInPlaceBy(Function<? super T, ? extends K> groupBy, Function0<? extends V> zeroValueFactory, Procedure2<? super V, ? super T> mutatingAggregator);
+
+    <K, V> ImmutableMap<K, V> aggregateBy(Function<? super T, ? extends K> groupBy, Function0<? extends V> zeroValueFactory, Function2<? super V, ? super T, ? extends V> nonMutatingAggregator);
 
     /**
      * Size takes linear time on ImmutableStacks.

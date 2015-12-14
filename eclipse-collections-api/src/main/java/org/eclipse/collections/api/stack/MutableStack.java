@@ -13,6 +13,7 @@ package org.eclipse.collections.api.stack;
 import java.util.Collection;
 
 import org.eclipse.collections.api.block.function.Function;
+import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.function.primitive.BooleanFunction;
 import org.eclipse.collections.api.block.function.primitive.ByteFunction;
@@ -21,10 +22,12 @@ import org.eclipse.collections.api.block.function.primitive.DoubleFunction;
 import org.eclipse.collections.api.block.function.primitive.FloatFunction;
 import org.eclipse.collections.api.block.function.primitive.IntFunction;
 import org.eclipse.collections.api.block.function.primitive.LongFunction;
+import org.eclipse.collections.api.block.function.primitive.ObjectIntToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.ShortFunction;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
+import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.list.ListIterable;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.multimap.list.MutableListMultimap;
@@ -70,6 +73,14 @@ public interface MutableStack<T> extends StackIterable<T>
 
     void clear();
 
+    MutableStack<T> takeWhile(Predicate<? super T> predicate);
+
+    MutableStack<T> dropWhile(Predicate<? super T> predicate);
+
+    PartitionMutableStack<T> partitionWhile(Predicate<? super T> predicate);
+
+    MutableStack<T> distinct();
+
     MutableStack<T> asUnmodifiable();
 
     MutableStack<T> asSynchronized();
@@ -83,6 +94,8 @@ public interface MutableStack<T> extends StackIterable<T>
     MutableStack<T> reject(Predicate<? super T> predicate);
 
     <P> MutableStack<T> rejectWith(Predicate2<? super T, ? super P> predicate, P parameter);
+
+    <S> MutableStack<S> selectInstancesOf(Class<S> clazz);
 
     PartitionMutableStack<T> partition(Predicate<? super T> predicate);
 
@@ -110,6 +123,8 @@ public interface MutableStack<T> extends StackIterable<T>
 
     <V> MutableStack<V> collectIf(Predicate<? super T> predicate, Function<? super T, ? extends V> function);
 
+    <V> MutableStack<V> collectWithIndex(ObjectIntToObjectFunction<? super T, ? extends V> function);
+
     <V> MutableStack<V> flatCollect(Function<? super T, ? extends Iterable<V>> function);
 
     <V> MutableListMultimap<V, T> groupBy(Function<? super T, ? extends V> function);
@@ -121,4 +136,8 @@ public interface MutableStack<T> extends StackIterable<T>
     <S> MutableStack<Pair<T, S>> zip(Iterable<S> that);
 
     MutableStack<Pair<T, Integer>> zipWithIndex();
+
+    <K, V> MutableMap<K, V> aggregateInPlaceBy(Function<? super T, ? extends K> groupBy, Function0<? extends V> zeroValueFactory, Procedure2<? super V, ? super T> mutatingAggregator);
+
+    <K, V> MutableMap<K, V> aggregateBy(Function<? super T, ? extends K> groupBy, Function0<? extends V> zeroValueFactory, Function2<? super V, ? super T, ? extends V> nonMutatingAggregator);
 }
