@@ -98,6 +98,8 @@ public interface MutableOrderedMap<K, V> extends OrderedMap<K, V>, MutableMapIte
 
     MutableList<Pair<V, Integer>> zipWithIndex();
 
+    <VV> MutableList<VV> collect(Function<? super V, ? extends VV> function);
+
     <P, V1> MutableList<V1> collectWith(Function2<? super V, ? super P, ? extends V1> function, P parameter);
 
     <V1> MutableList<V1> collectIf(Predicate<? super V> predicate, Function<? super V, ? extends V1> function);

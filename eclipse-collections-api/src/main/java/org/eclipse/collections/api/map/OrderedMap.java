@@ -105,6 +105,8 @@ public interface OrderedMap<K, V>
 
     ListIterable<Pair<V, Integer>> zipWithIndex();
 
+    <VV> ListIterable<VV> collect(Function<? super V, ? extends VV> function);
+
     <P, V1> ListIterable<V1> collectWith(Function2<? super V, ? super P, ? extends V1> function, P parameter);
 
     <V1> ListIterable<V1> collectIf(Predicate<? super V> predicate, Function<? super V, ? extends V1> function);

@@ -100,6 +100,8 @@ public interface ImmutableOrderedMap<K, V> extends OrderedMap<K, V>, ImmutableMa
 
     ImmutableList<Pair<V, Integer>> zipWithIndex();
 
+    <VV> ImmutableList<VV> collect(Function<? super V, ? extends VV> function);
+
     <P, V1> ImmutableList<V1> collectWith(Function2<? super V, ? super P, ? extends V1> function, P parameter);
 
     <V1> ImmutableList<V1> collectIf(Predicate<? super V> predicate, Function<? super V, ? extends V1> function);
