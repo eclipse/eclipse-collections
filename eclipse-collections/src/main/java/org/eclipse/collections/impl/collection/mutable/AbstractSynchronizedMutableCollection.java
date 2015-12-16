@@ -154,6 +154,15 @@ public abstract class AbstractSynchronizedMutableCollection<T> extends AbstractS
         }
     }
 
+    @Override
+    public <V> MutableMap<V, T> groupByUniqueKey(Function<? super T, ? extends V> function)
+    {
+        synchronized (this.lock)
+        {
+            return this.getDelegate().groupByUniqueKey(function);
+        }
+    }
+
     public <K, V> MutableMap<K, V> aggregateInPlaceBy(
             Function<? super T, ? extends K> groupBy,
             Function0<? extends V> zeroValueFactory,

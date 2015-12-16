@@ -238,6 +238,31 @@ public abstract class AbstractSynchronizedMapIterable<K, V>
         }
     }
 
+    @Override
+    public <VV> MutableMapIterable<VV, V> groupByUniqueKey(Function<? super V, ? extends VV> function)
+    {
+        synchronized (this.lock)
+        {
+            return this.getDelegate().groupByUniqueKey(function);
+        }
+    }
+
+    public <KK, VV> MutableMapIterable<KK, VV> aggregateInPlaceBy(Function<? super V, ? extends KK> groupBy, Function0<? extends VV> zeroValueFactory, Procedure2<? super VV, ? super V> mutatingAggregator)
+    {
+        synchronized (this.lock)
+        {
+            return this.getDelegate().aggregateInPlaceBy(groupBy, zeroValueFactory, mutatingAggregator);
+        }
+    }
+
+    public <KK, VV> MutableMapIterable<KK, VV> aggregateBy(Function<? super V, ? extends KK> groupBy, Function0<? extends VV> zeroValueFactory, Function2<? super VV, ? super V, ? extends VV> nonMutatingAggregator)
+    {
+        synchronized (this.lock)
+        {
+            return this.getDelegate().aggregateBy(groupBy, zeroValueFactory, nonMutatingAggregator);
+        }
+    }
+
     public RichIterable<Pair<K, V>> keyValuesView()
     {
         synchronized (this.lock)

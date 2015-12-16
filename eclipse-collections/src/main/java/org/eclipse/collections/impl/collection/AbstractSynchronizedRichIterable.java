@@ -48,6 +48,7 @@ import org.eclipse.collections.api.collection.primitive.MutableIntCollection;
 import org.eclipse.collections.api.collection.primitive.MutableLongCollection;
 import org.eclipse.collections.api.collection.primitive.MutableShortCollection;
 import org.eclipse.collections.api.list.MutableList;
+import org.eclipse.collections.api.map.MapIterable;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.primitive.ObjectDoubleMap;
 import org.eclipse.collections.api.map.primitive.ObjectLongMap;
@@ -837,7 +838,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
-    public <V> MutableMap<V, T> groupByUniqueKey(Function<? super T, ? extends V> function)
+    public <V> MapIterable<V, T> groupByUniqueKey(Function<? super T, ? extends V> function)
     {
         synchronized (this.lock)
         {

@@ -434,6 +434,16 @@ public class SynchronizedSortedMap<K, V>
         }
     }
 
+    @Override
+    public <VV> MutableMap<VV, V> groupByUniqueKey(Function<? super V, ? extends VV> function)
+    {
+        synchronized (this.lock)
+        {
+            return this.getDelegate().groupByUniqueKey(function);
+        }
+    }
+
+    @Override
     public <K2, V2> MutableMap<K2, V2> aggregateInPlaceBy(
             Function<? super V, ? extends K2> groupBy,
             Function0<? extends V2> zeroValueFactory,
@@ -445,6 +455,7 @@ public class SynchronizedSortedMap<K, V>
         }
     }
 
+    @Override
     public <K2, V2> MutableMap<K2, V2> aggregateBy(
             Function<? super V, ? extends K2> groupBy,
             Function0<? extends V2> zeroValueFactory,
