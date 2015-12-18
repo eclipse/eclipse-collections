@@ -94,9 +94,9 @@ public abstract class AbstractMutableMapIterable<K, V> extends AbstractMapIterab
         return newValue;
     }
 
-    public <V1> MutableMap<V1, V> groupByUniqueKey(Function<? super V, ? extends V1> function)
+    public <VV> MutableMapIterable<VV, V> groupByUniqueKey(Function<? super V, ? extends VV> function)
     {
-        return this.groupByUniqueKey(function, UnifiedMap.<V1, V>newMap());
+        return this.groupByUniqueKey(function, UnifiedMap.<VV, V>newMap());
     }
 
     public <K2, V2> MutableMap<K2, V2> aggregateInPlaceBy(
