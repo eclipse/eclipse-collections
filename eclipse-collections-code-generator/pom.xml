@@ -27,8 +27,7 @@
         <clover.version>4.0.6</clover.version>
         <checkstyle.version>2.16</checkstyle.version>
 
-        <!-- this setting is needed for TeamCity -->
-        <maven.deploy.skip>${build.is.personal}</maven.deploy.skip>
+        <maven.deploy.skip>true</maven.deploy.skip>
     </properties>
 
     <dependencies>
