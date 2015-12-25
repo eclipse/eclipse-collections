@@ -17,7 +17,7 @@
 
     <artifactId>eclipse-collections-code-generator</artifactId>
     <groupId>org.eclipse.collections</groupId>
-    <version>7.0.0</version>
+    <version>7.1.0-SNAPSHOT</version>
 
     <name>Eclipse Collections Code Generator</name>
 
