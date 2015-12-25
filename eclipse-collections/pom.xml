@@ -19,7 +19,7 @@
 
     <groupId>org.eclipse.collections</groupId>
     <artifactId>eclipse-collections</artifactId>
-    <version>7.0.0</version>
+    <version>7.1.0-SNAPSHOT</version>
     <packaging>bundle</packaging>
 
     <name>Eclipse Collections Main Library</name>
@@ -90,7 +90,7 @@
         <dependency>
             <groupId>org.eclipse.collections</groupId>
             <artifactId>eclipse-collections-api</artifactId>
-            <version>7.0.0</version>
+            <version>7.1.0-SNAPSHOT</version>
         </dependency>
 
         <!-- External dependencies -->
@@ -226,7 +226,7 @@
             <plugin>
                 <groupId>org.eclipse.collections</groupId>
                 <artifactId>eclipse-collections-code-generator-maven-plugin</artifactId>
-                <version>7.0.0</version>
+                <version>7.1.0-SNAPSHOT</version>
                 <executions>
                     <execution>
                         <phase>generate-sources</phase>

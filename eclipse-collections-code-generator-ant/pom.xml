@@ -17,7 +17,7 @@
 
     <groupId>org.eclipse.collections</groupId>
     <artifactId>eclipse-collections-code-generator-ant</artifactId>
-    <version>7.0.0</version>
+    <version>7.1.0-SNAPSHOT</version>
 
     <name>Eclipse Collections Code Generator Ant Task</name>
 
@@ -34,7 +34,7 @@
         <dependency>
             <groupId>org.eclipse.collections</groupId>
             <artifactId>eclipse-collections-code-generator</artifactId>
-            <version>7.0.0</version>
+            <version>7.1.0-SNAPSHOT</version>
         </dependency>
 
         <dependency>
