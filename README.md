@@ -1,5 +1,6 @@
 # Eclipse Collections
 
+[![][travis img]][travis]
 [![][maven img]][maven]
 [![][license-epl img]][license-epl]
 [![][license-edl img]][license-edl]
@@ -48,6 +49,9 @@ MutableList<String> sortedLastNames = people.collect(Person::getLastName).sortTh
 * Encapsulates a lot of the structural complexity of parallel iteration and lazy evaluation
 * Adds new containers including Bag, Interval, Multimap, BiMap, and immutable versions of all types
 * Has been under active development since 2005 and is a mature library
+
+[travis]:https://travis-ci.org/eclipse/eclipse-collections
+[travis img]:https://travis-ci.org/eclipse/eclipse-collections.svg?branch=master
 
 [maven]:http://search.maven.org/#search|gav|1|g:"org.eclipse.collections"%20AND%20a:"eclipse-collections"
 [maven img]:https://maven-badges.herokuapp.com/maven-central/org.eclipse.collections/eclipse-collections/badge.svg
