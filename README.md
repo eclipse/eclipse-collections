@@ -3,6 +3,7 @@ Eclipse Collections
 
 [![][travis img]][travis]
 [![][maven img]][maven]
+[![][release img]][release]
 [![][license-epl img]][license-epl]
 [![][license-edl img]][license-edl]
 
@@ -137,6 +138,9 @@ Additional information
 
 [maven]:http://search.maven.org/#search|gav|1|g:"org.eclipse.collections"%20AND%20a:"eclipse-collections"
 [maven img]:https://maven-badges.herokuapp.com/maven-central/org.eclipse.collections/eclipse-collections/badge.svg
+
+[release]:https://github.com/eclipse/eclipse-collections/releases
+[release img]:https://img.shields.io/github/release/eclipse/eclipse-collections.svg
 
 [license-epl]:LICENSE-EPL-1.0.txt
 [license-epl img]:https://img.shields.io/badge/License-EPL-blue.svg
