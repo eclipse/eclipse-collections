@@ -16,7 +16,7 @@
 
     <groupId>org.eclipse.collections</groupId>
     <artifactId>eclipse-collections-code-generator-maven-plugin</artifactId>
-    <version>7.0.0</version>
+    <version>7.1.0-SNAPSHOT</version>
 
     <packaging>maven-plugin</packaging>
 
@@ -36,7 +36,7 @@
         <dependency>
             <groupId>org.eclipse.collections</groupId>
             <artifactId>eclipse-collections-code-generator</artifactId>
-            <version>7.0.0</version>
+            <version>7.1.0-SNAPSHOT</version>
         </dependency>
 
         <dependency>
