@@ -25,6 +25,11 @@
 
     <name>Eclipse Collections Test Trait JUnit Runner</name>
 
+    <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
+
     <prerequisites>
         <maven>3.0.5</maven>
     </prerequisites>
@@ -34,7 +39,6 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.12</version>
             <scope>compile</scope>
         </dependency>
 
@@ -42,17 +46,6 @@
 
     <build>
         <plugins>
-
-            <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                    <fork>true</fork>
-                    <maxmem>2048m</maxmem>
-                    <verbose>true</verbose>
-                </configuration>
-            </plugin>
 
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -80,7 +73,8 @@
                             <rules>
                                 <!-- <DependencyConvergence /> -->
                                 <requirePluginVersions>
-                                    <unCheckedPluginList>org.eclipse.collections:eclipse-collections-code-generator-maven-plugin
+                                    <unCheckedPluginList>
+                                        org.eclipse.collections:eclipse-collections-code-generator-maven-plugin
                                     </unCheckedPluginList>
                                 </requirePluginVersions>
                                 <requireJavaVersion>

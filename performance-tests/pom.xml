@@ -104,17 +104,6 @@
         <plugins>
 
             <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                    <fork>true</fork>
-                    <maxmem>2048m</maxmem>
-                    <verbose>true</verbose>
-                </configuration>
-            </plugin>
-
-            <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
             </plugin>
 
