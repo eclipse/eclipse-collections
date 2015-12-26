@@ -1,7 +1,7 @@
 language: java
 sudo: false
 
-before_install: echo "MAVEN_OPTS='-Dmaven.repo.local=$HOME/.m2/repository -Xmx2g -Dorg.slf4j.simpleLogger.showDateTime=true -Dorg.slf4j.simpleLogger.dateTimeFormat=HH:mm:ss:SSS'" > ~/.mavenrc
+before_install: echo "MAVEN_OPTS='-Dmaven.repo.local=$HOME/.m2/repository -Xmx1g -Dorg.slf4j.simpleLogger.showDateTime=true -Dorg.slf4j.simpleLogger.dateTimeFormat=HH:mm:ss:SSS'" > ~/.mavenrc
 install:
   -
 
@@ -32,6 +32,11 @@ matrix:
       env:
         - DESC="compile all modules"
         - CMD="mvn install --activate-profiles all -DskipTests=true --batch-mode --show-version --errors"
+
+    - jdk: oraclejdk7
+      env:
+        - DESC="compile with Java 7"
+        - CMD="mvn install --projects eclipse-collections-code-generator,eclipse-collections-code-generator-maven-plugin,eclipse-collections,eclipse-collections-api,eclipse-collections-testutils,eclipse-collections-forkjoin,serialization-tests -Dmaven.compiler.verbose=true --batch-mode --show-version --errors; jdk_switcher use oraclejdk8; mvn install --projects eclipse-collections-code-generator,eclipse-collections-code-generator-maven-plugin,unit-tests,junit-trait-runner,unit-tests-java8 -Dmaven.compiler.verbose=true --batch-mode --show-version --errors"
 
 script: eval $CMD
 
