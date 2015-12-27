@@ -50,18 +50,6 @@ MutableList<String> sortedLastNames = people.collect(Person::getLastName).sortTh
 * Adds new containers including Bag, Interval, Multimap, BiMap, and immutable versions of all types
 * Has been under active development since 2005 and is a mature library
 
-[travis]:https://travis-ci.org/eclipse/eclipse-collections
-[travis img]:https://travis-ci.org/eclipse/eclipse-collections.svg?branch=master
-
-[maven]:http://search.maven.org/#search|gav|1|g:"org.eclipse.collections"%20AND%20a:"eclipse-collections"
-[maven img]:https://maven-badges.herokuapp.com/maven-central/org.eclipse.collections/eclipse-collections/badge.svg
-
-[license-epl]:LICENSE-EPL-1.0.txt
-[license-epl img]:https://img.shields.io/badge/License-EPL-blue.svg
-
-[license-edl]:LICENSE-EDL-1.0.txt
-[license-edl img]:https://img.shields.io/badge/License-EDL-blue.svg
-
 ## Acquiring Eclipse Collections
 
 ### Maven
@@ -110,3 +98,14 @@ compile 'org.eclipse.collections:eclipse-collections-forkjoin:7.0.0'
 <dependency org="org.eclipse.collections" name="eclipse-collections-forkjoin" rev="7.0.0"/>
 ```
 
+[travis]:https://travis-ci.org/eclipse/eclipse-collections
+[travis img]:https://travis-ci.org/eclipse/eclipse-collections.svg?branch=master
+
+[maven]:http://search.maven.org/#search|gav|1|g:"org.eclipse.collections"%20AND%20a:"eclipse-collections"
+[maven img]:https://maven-badges.herokuapp.com/maven-central/org.eclipse.collections/eclipse-collections/badge.svg
+
+[license-epl]:LICENSE-EPL-1.0.txt
+[license-epl img]:https://img.shields.io/badge/License-EPL-blue.svg
+
+[license-edl]:LICENSE-EDL-1.0.txt
+[license-edl img]:https://img.shields.io/badge/License-EDL-blue.svg
