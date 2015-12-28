@@ -1757,6 +1757,12 @@ public class UnifiedSetWithHashingStrategy<T>
                         bucket.three = null;
                         return;
                     default:
+                        if (bucket.three instanceof ChainedBucket)
+                        {
+                            i -= 3;
+                            oldBucket = bucket;
+                            continue;
+                        }
                         throw new AssertionError();
                 }
             }

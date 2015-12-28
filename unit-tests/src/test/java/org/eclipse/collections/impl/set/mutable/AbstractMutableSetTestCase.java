@@ -33,6 +33,7 @@ import org.eclipse.collections.impl.block.procedure.CollectionAddProcedure;
 import org.eclipse.collections.impl.collection.mutable.AbstractCollectionTestCase;
 import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.list.Interval;
+import org.eclipse.collections.impl.list.fixed.ArrayAdapter;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.utility.Iterate;
@@ -62,6 +63,9 @@ public abstract class AbstractMutableSetTestCase extends AbstractCollectionTestC
     protected static final MutableList<Integer> MORE_COLLISIONS = FastList.newList(COLLISIONS)
             .with(COLLISION_6, COLLISION_7, COLLISION_8, COLLISION_9);
     protected static final int SIZE = 8;
+    protected static final String[] FREQUENT_COLLISIONS = {"\u9103\ufffe", "\u9104\uffdf",
+            "\u9105\uffc0", "\u9106\uffa1", "\u9107\uff82", "\u9108\uff63", "\u9109\uff44",
+            "\u910a\uff25", "\u910b\uff06", "\u910c\ufee7"};
 
     @Override
     protected abstract <T> MutableSet<T> newWith(T... littleElements);
@@ -880,5 +884,22 @@ public abstract class AbstractMutableSetTestCase extends AbstractCollectionTestC
         RichIterable<Integer> integers = this.newWith(2, 4, 1, 3);
         MutableSortedBag<Integer> bag = integers.toSortedBagBy(String::valueOf);
         Verify.assertSortedBagsEqual(TreeBag.newBagWith(1, 2, 3, 4), bag);
+    }
+
+    @Test
+    public void frequentCollisions()
+    {
+        String[] expected = ArrayAdapter.adapt(FREQUENT_COLLISIONS)
+                .subList(0, FREQUENT_COLLISIONS.length - 2)
+                .toArray(new String[FREQUENT_COLLISIONS.length - 2]);
+        MutableSet<String> set1 = this.newWith();
+        MutableSet<String> set2 = this.newWith();
+
+        Collections.addAll(set1, FREQUENT_COLLISIONS);
+        Collections.addAll(set2, expected);
+
+        set1.retainAll(set2);
+
+        Assert.assertArrayEquals(expected, set1.toArray());
     }
 }
