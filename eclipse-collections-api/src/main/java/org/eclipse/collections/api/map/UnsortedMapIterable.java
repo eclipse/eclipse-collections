@@ -69,6 +69,8 @@ public interface UnsortedMapIterable<K, V>
 
     PartitionBag<V> partition(Predicate<? super V> predicate);
 
+    <P> PartitionBag<V> partitionWith(Predicate2<? super V, ? super P> predicate, P parameter);
+
     <S> Bag<S> selectInstancesOf(Class<S> clazz);
 
     <V1> Bag<V1> collect(Function<? super V, ? extends V1> function);
