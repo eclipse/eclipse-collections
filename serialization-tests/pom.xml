@@ -26,6 +26,9 @@
     <name>Eclipse Collections Serialization Test Suite</name>
 
     <properties>
+        <maven.compiler.source>1.6</maven.compiler.source>
+        <maven.compiler.target>1.6</maven.compiler.target>
+
         <maven.deploy.skip>true</maven.deploy.skip>
     </properties>
 
@@ -70,17 +73,6 @@
     <build>
 
         <plugins>
-
-            <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
-                    <fork>true</fork>
-                    <maxmem>2048m</maxmem>
-                    <verbose>true</verbose>
-                </configuration>
-            </plugin>
 
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
