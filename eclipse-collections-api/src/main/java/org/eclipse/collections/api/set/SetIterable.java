@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -18,6 +18,7 @@ import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.annotation.Beta;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
+import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.partition.set.PartitionSet;
 import org.eclipse.collections.api.tuple.Pair;
@@ -91,6 +92,8 @@ public interface SetIterable<T> extends RichIterable<T>
      */
     <B> LazyIterable<Pair<T, B>> cartesianProduct(SetIterable<B> set);
 
+    SetIterable<T> tap(Procedure<? super T> procedure);
+
     SetIterable<T> select(Predicate<? super T> predicate);
 
     <P> SetIterable<T> selectWith(Predicate2<? super T, ? super P> predicate, P parameter);
@@ -122,11 +125,13 @@ public interface SetIterable<T> extends RichIterable<T>
     /**
      * Follows the same general contract as {@link Set#equals(Object)}.
      */
+    @Override
     boolean equals(Object o);
 
     /**
      * Follows the same general contract as {@link Set#hashCode()}.
      */
+    @Override
     int hashCode();
 
     ImmutableSetIterable<T> toImmutable();

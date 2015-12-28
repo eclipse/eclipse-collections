@@ -21,6 +21,7 @@ import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
 import org.eclipse.collections.api.block.predicate.primitive.<name>ObjectPredicate;
+import org.eclipse.collections.api.block.procedure.Procedure;
 
 /**
  * This file was automatically generated from template file mutablePrimitiveObjectMap.stg.
@@ -59,6 +60,8 @@ public interface Mutable<name>ObjectMap\<V> extends <name>ObjectMap\<V>, Mutable
      * passed to the function.
      */
     \<P> V updateValueWith(<type> key, Function0\<? extends V> factory, Function2\<? super V, ? super P, ? extends V> function, P parameter);
+
+    Mutable<name>ObjectMap\<V> tap(Procedure\<? super V> procedure);
 
     Mutable<name>ObjectMap\<V> select(<name>ObjectPredicate\<? super V> predicate);
 
