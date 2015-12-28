@@ -37,6 +37,7 @@ import org.eclipse.collections.impl.bag.mutable.HashBag;
 import org.eclipse.collections.impl.bag.mutable.primitive.BooleanHashBag;
 import org.eclipse.collections.impl.block.factory.primitive.BooleanPredicates;
 import org.eclipse.collections.impl.factory.Bags;
+import org.eclipse.collections.impl.factory.primitive.BooleanBags;
 import org.eclipse.collections.impl.list.mutable.primitive.BooleanArrayList;
 import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
@@ -468,9 +469,9 @@ public abstract class Abstract<name>BooleanMapTestCase
     {
         <name>BooleanMap map = this.newWithKeysValues(<(literal.(type))("0")>, true, <(literal.(type))("1")>, false, <(literal.(type))("2")>, true, <(literal.(type))("3")>, false);
         BooleanIterable actual1 = map.select(BooleanPredicates.isTrue());
-        Assert.assertEquals(BooleanArrayList.newListWith(true, true), actual1);
+        Assert.assertEquals(BooleanBags.immutable.with(true, true), actual1);
         BooleanIterable actual2 = map.select(BooleanPredicates.isFalse());
-        Assert.assertEquals(BooleanArrayList.newListWith(false, false), actual2);
+        Assert.assertEquals(BooleanBags.immutable.with(false, false), actual2);
     }
 
     @Test
@@ -478,9 +479,9 @@ public abstract class Abstract<name>BooleanMapTestCase
     {
         <name>BooleanMap map = this.newWithKeysValues(<(literal.(type))("0")>, true, <(literal.(type))("1")>, false, <(literal.(type))("2")>, true, <(literal.(type))("3")>, false);
         BooleanIterable actual1 = map.reject(BooleanPredicates.isTrue());
-        Assert.assertEquals(BooleanArrayList.newListWith(false, false), actual1);
+        Assert.assertEquals(BooleanBags.immutable.with(false, false), actual1);
         BooleanIterable actual2 = map.reject(BooleanPredicates.isFalse());
-        Assert.assertEquals(BooleanArrayList.newListWith(true, true), actual2);
+        Assert.assertEquals(BooleanBags.immutable.with(true, true), actual2);
     }
 
     @Test

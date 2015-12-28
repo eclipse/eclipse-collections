@@ -33,7 +33,7 @@ import org.eclipse.collections.api.tuple.primitive.<name>ObjectPair;
  *
  * @since 3.0.
  */
-public interface <name>ObjectMap\<V> extends RichIterable\<V>
+public interface <name>ObjectMap\<V> extends PrimitiveObjectMap\<V>
 {
     V get(<type> key);
 
@@ -41,11 +41,7 @@ public interface <name>ObjectMap\<V> extends RichIterable\<V>
 
     boolean containsKey(<type> key);
 
-    boolean containsValue(Object value);
-
     <name>ObjectMap\<V> tap(Procedure\<? super V> procedure);
-
-    void forEachValue(Procedure\<? super V> procedure);
 
     void forEachKey(<name>Procedure procedure);
 
@@ -55,34 +51,9 @@ public interface <name>ObjectMap\<V> extends RichIterable\<V>
 
     <name>ObjectMap\<V> reject(<name>ObjectPredicate\<? super V> predicate);
 
-    /**
-     * Follows the same general contract as {@link Map#equals(Object)}.
-     */
-    @Override
-    boolean equals(Object o);
-
-    /**
-     * Follows the same general contract as {@link Map#hashCode()}.
-     */
-    @Override
-    int hashCode();
-
-    /**
-     * Returns a string representation of this <name>ObjectMap. The string representation consists of a list of the
-     * map's key-value pairs in the order they are returned by its iterator. The key and value in each key-value pair are separated
-     * by a colon (\<tt>":"\</tt>) and each pair is enclosed in square brackets (\<tt>"[]"\</tt>). Adjacent key-value pairs
-     * are separated by the characters \<tt>", "\</tt> (comma and space). Keys and values are converted to strings as by
-     * String#valueOf().
-     *
-     * @return a string representation of this <name>ObjectMap
-     */
-    String toString();
-
     Immutable<name>ObjectMap\<V> toImmutable();
 
     Mutable<name>Set keySet();
-
-    Collection\<V> values();
 
     /**
      * @since 5.0

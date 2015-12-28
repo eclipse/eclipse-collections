@@ -41,6 +41,7 @@ import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.predicate.primitive.<name>ObjectPredicate;
 import org.eclipse.collections.api.block.procedure.Procedure2;
+import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MapIterable;
 import org.eclipse.collections.api.map.primitive.Immutable<name>ObjectMap;
 import org.eclipse.collections.api.map.primitive.<name>ObjectMap;
@@ -51,6 +52,14 @@ import org.eclipse.collections.api.partition.PartitionIterable;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.bag.mutable.HashBag;
+import org.eclipse.collections.impl.bag.mutable.primitive.BooleanHashBag;
+import org.eclipse.collections.impl.bag.mutable.primitive.ByteHashBag;
+import org.eclipse.collections.impl.bag.mutable.primitive.CharHashBag;
+import org.eclipse.collections.impl.bag.mutable.primitive.DoubleHashBag;
+import org.eclipse.collections.impl.bag.mutable.primitive.FloatHashBag;
+import org.eclipse.collections.impl.bag.mutable.primitive.IntHashBag;
+import org.eclipse.collections.impl.bag.mutable.primitive.LongHashBag;
+import org.eclipse.collections.impl.bag.mutable.primitive.ShortHashBag;
 import org.eclipse.collections.impl.bag.sorted.mutable.TreeBag;
 import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.block.factory.Functions;
@@ -63,14 +72,7 @@ import org.eclipse.collections.impl.block.factory.StringPredicates;
 import org.eclipse.collections.impl.block.factory.StringPredicates2;
 import org.eclipse.collections.impl.factory.primitive.<name>ObjectMaps;
 import org.eclipse.collections.impl.list.mutable.FastList;
-import org.eclipse.collections.impl.list.mutable.primitive.BooleanArrayList;
-import org.eclipse.collections.impl.list.mutable.primitive.ByteArrayList;
-import org.eclipse.collections.impl.list.mutable.primitive.CharArrayList;
-import org.eclipse.collections.impl.list.mutable.primitive.DoubleArrayList;
-import org.eclipse.collections.impl.list.mutable.primitive.FloatArrayList;
-import org.eclipse.collections.impl.list.mutable.primitive.IntArrayList;
-import org.eclipse.collections.impl.list.mutable.primitive.LongArrayList;
-import org.eclipse.collections.impl.list.mutable.primitive.ShortArrayList;
+import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.map.mutable.primitive.<name>ObjectHashMap;
 import org.eclipse.collections.impl.map.mutable.primitive.<name>ObjectHashMapTest;
@@ -146,17 +148,17 @@ public abstract class Abstract<name>ObjectMapTestCase
             map1.select((<type> value, String object) -> object.endsWith("ne")));
 
         RichIterable\<String> actual1 = map1.select(StringPredicates.endsWith("ne"));
-        Assert.assertTrue(FastList.newListWith("one", "nine").equals(actual1) || FastList.newListWith("nine", "one").equals(actual1));
+        Assert.assertTrue(HashBag.newBagWith("one", "nine").equals(actual1));
 
-        Assert.assertEquals(FastList.newListWith("nine"), map1.select(Predicates.equal("nine")));
+        Assert.assertEquals(HashBag.newBagWith("nine"), map1.select(Predicates.equal("nine")));
 
-        Assert.assertEquals(FastList.newListWith("zero"), map1.select(StringPredicates.endsWith("o")));
+        Assert.assertEquals(HashBag.newBagWith("zero"), map1.select(StringPredicates.endsWith("o")));
 
-        Assert.assertEquals(FastList.newListWith("nine"), map1.select(Predicates.equal("nine"), FastList.\<String>newList()));
+        Assert.assertEquals(HashBag.newBagWith("nine"), map1.select(Predicates.equal("nine"), HashBag.\<String>newBag()));
 
-        Assert.assertEquals(FastList.newListWith("one", "nine"), map1.select(StringPredicates.endsWith("ne"), FastList.\<String>newList()));
+        Assert.assertEquals(HashBag.newBagWith("one", "nine"), map1.select(StringPredicates.endsWith("ne"), HashBag.\<String>newBag()));
 
-        Assert.assertEquals(FastList.newListWith("zero"), map1.select(StringPredicates.endsWith("o"), FastList.\<String>newList()));
+        Assert.assertEquals(HashBag.newBagWith("zero"), map1.select(StringPredicates.endsWith("o"), HashBag.\<String>newBag()));
     }
 
     @Test
@@ -164,11 +166,11 @@ public abstract class Abstract<name>ObjectMapTestCase
     {
         <name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("1")>, "one", <(literal.(type))("9")>, "nine");
 
-        Assert.assertEquals(FastList.newListWith("one", "nine"), map1.selectWith(StringPredicates2.endsWith(), "ne"));
+        Assert.assertEquals(HashBag.newBagWith("one", "nine"), map1.selectWith(StringPredicates2.endsWith(), "ne"));
 
-        Assert.assertEquals(FastList.newListWith("nine"), map1.selectWith(Object::equals, "nine"));
+        Assert.assertEquals(HashBag.newBagWith("nine"), map1.selectWith(Object::equals, "nine"));
 
-        Assert.assertEquals(FastList.newListWith("zero"), map1.selectWith(StringPredicates2.endsWith(), "o"));
+        Assert.assertEquals(HashBag.newBagWith("zero"), map1.selectWith(StringPredicates2.endsWith(), "o"));
     }
 
     @Test
@@ -176,11 +178,11 @@ public abstract class Abstract<name>ObjectMapTestCase
     {
         <name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("1")>, "one", <(literal.(type))("9")>, "nine");
 
-        Assert.assertEquals(FastList.newListWith("one", "nine"), map1.selectWith(StringPredicates2.endsWith(), "ne", FastList.\<String>newList()));
+        Assert.assertEquals(HashBag.newBagWith("one", "nine"), map1.selectWith(StringPredicates2.endsWith(), "ne", HashBag.\<String>newBag()));
 
-        Assert.assertEquals(FastList.newListWith("nine"), map1.selectWith(Object::equals, "nine", FastList.\<String>newList()));
+        Assert.assertEquals(HashBag.newBagWith("nine"), map1.selectWith(Object::equals, "nine", HashBag.\<String>newBag()));
 
-        Assert.assertEquals(FastList.newListWith("zero"), map1.selectWith(StringPredicates2.endsWith(), "o", FastList.\<String>newList()));
+        Assert.assertEquals(HashBag.newBagWith("zero"), map1.selectWith(StringPredicates2.endsWith(), "o", HashBag.\<String>newBag()));
     }
 
     @Test
@@ -197,8 +199,8 @@ public abstract class Abstract<name>ObjectMapTestCase
     {
         <name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("1")>, "one", <(literal.(type))("9")>, "nine");
 
-        Assert.assertEquals(FastList.newListWith("ZERO", "ONE", "NINE"), map1.collect(StringFunctions.toUpperCase()));
-        Assert.assertEquals(FastList.newListWith("ZERO", "ONE", "NINE"), map1.collect(StringFunctions.toUpperCase(), FastList.\<String>newList()));
+        Assert.assertEquals(HashBag.newBagWith("ZERO", "ONE", "NINE"), map1.collect(StringFunctions.toUpperCase()));
+        Assert.assertEquals(HashBag.newBagWith("ZERO", "ONE", "NINE"), map1.collect(StringFunctions.toUpperCase(), HashBag.\<String>newBag()));
     }
 
     @Test
@@ -206,16 +208,16 @@ public abstract class Abstract<name>ObjectMapTestCase
     {
         <name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("0")>, "true", <(literal.(type))("1")>, "false", <(literal.(type))("2")>, "nah");
 
-        Assert.assertEquals(BooleanArrayList.newListWith(true, false, false), map1.collectBoolean(StringFunctions.toPrimitiveBoolean()));
+        Assert.assertEquals(BooleanHashBag.newBagWith(true, false, false), map1.collectBoolean(StringFunctions.toPrimitiveBoolean()));
     }
 
     @Test
     public void collectBoolean_withTarget()
     {
         <name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("0")>, "true", <(literal.(type))("1")>, "false", <(literal.(type))("2")>, "nah");
-        BooleanArrayList target = new BooleanArrayList();
+        BooleanHashBag target = new BooleanHashBag();
         Assert.assertSame(target, map1.collectBoolean(StringFunctions.toPrimitiveBoolean(), target));
-        Assert.assertEquals(BooleanArrayList.newListWith(true, false, false), target);
+        Assert.assertEquals(BooleanHashBag.newBagWith(true, false, false), target);
     }
 
     @Test
@@ -223,16 +225,16 @@ public abstract class Abstract<name>ObjectMapTestCase
     {
         <name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("0")>, "0", <(literal.(type))("1")>, "1", <(literal.(type))("2")>, "9");
 
-        Assert.assertEquals(ByteArrayList.newListWith((byte) 0, (byte) 1, (byte) 9), map1.collectByte(Byte::parseByte));
+        Assert.assertEquals(ByteHashBag.newBagWith((byte) 0, (byte) 1, (byte) 9), map1.collectByte(Byte::parseByte));
     }
 
     @Test
     public void collectByte_withTarget()
     {
         <name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("0")>, "0", <(literal.(type))("1")>, "1", <(literal.(type))("2")>, "9");
-        ByteArrayList target = new ByteArrayList();
+        ByteHashBag target = new ByteHashBag();
         Assert.assertSame(target, map1.collectByte(Byte::parseByte, target));
-        Assert.assertEquals(ByteArrayList.newListWith((byte) 0, (byte) 1, (byte) 9), target);
+        Assert.assertEquals(ByteHashBag.newBagWith((byte) 0, (byte) 1, (byte) 9), target);
     }
 
     @Test
@@ -240,16 +242,16 @@ public abstract class Abstract<name>ObjectMapTestCase
     {
         <name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("0")>, "0", <(literal.(type))("1")>, "1", <(literal.(type))("2")>, "9");
 
-        Assert.assertEquals(CharArrayList.newListWith((char) 0, (char) 1, (char) 9), map1.collectChar(StringFunctions.toPrimitiveChar()));
+        Assert.assertEquals(CharHashBag.newBagWith((char) 0, (char) 1, (char) 9), map1.collectChar(StringFunctions.toPrimitiveChar()));
     }
 
     @Test
     public void collectChar_withTarget()
     {
         <name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("0")>, "0", <(literal.(type))("1")>, "1", <(literal.(type))("2")>, "9");
-        CharArrayList target = new CharArrayList();
+        CharHashBag target = new CharHashBag();
         Assert.assertSame(target, map1.collectChar(StringFunctions.toPrimitiveChar(), target));
-        Assert.assertEquals(CharArrayList.newListWith((char) 0, (char) 1, (char) 9), target);
+        Assert.assertEquals(CharHashBag.newBagWith((char) 0, (char) 1, (char) 9), target);
     }
 
     @Test
@@ -257,16 +259,16 @@ public abstract class Abstract<name>ObjectMapTestCase
     {
         <name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("0")>, "0", <(literal.(type))("1")>, "1", <(literal.(type))("2")>, "9");
 
-        Assert.assertEquals(DoubleArrayList.newListWith(0.0d, 1.0d, 9.0d), map1.collectDouble(Double::parseDouble));
+        Assert.assertEquals(DoubleHashBag.newBagWith(0.0d, 1.0d, 9.0d), map1.collectDouble(Double::parseDouble));
     }
 
     @Test
     public void collectDouble_withTarget()
     {
         <name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("0")>, "0", <(literal.(type))("1")>, "1", <(literal.(type))("2")>, "9");
-        DoubleArrayList target = new DoubleArrayList();
+        DoubleHashBag target = new DoubleHashBag();
         Assert.assertSame(target, map1.collectDouble(Double::parseDouble, target));
-        Assert.assertEquals(DoubleArrayList.newListWith(0.0d, 1.0d, 9.0d), target);
+        Assert.assertEquals(DoubleHashBag.newBagWith(0.0d, 1.0d, 9.0d), target);
     }
 
     @Test
@@ -274,16 +276,16 @@ public abstract class Abstract<name>ObjectMapTestCase
     {
         <name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("0")>, "0", <(literal.(type))("1")>, "1", <(literal.(type))("2")>, "9");
 
-        Assert.assertEquals(FloatArrayList.newListWith(0.0f, 1.0f, 9.0f), map1.collectFloat(Float::parseFloat));
+        Assert.assertEquals(FloatHashBag.newBagWith(0.0f, 1.0f, 9.0f), map1.collectFloat(Float::parseFloat));
     }
 
     @Test
     public void collectFloat_withTarget()
     {
         <name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("0")>, "0", <(literal.(type))("1")>, "1", <(literal.(type))("2")>, "9");
-        FloatArrayList target = new FloatArrayList();
+        FloatHashBag target = new FloatHashBag();
         Assert.assertSame(target, map1.collectFloat(Float::parseFloat, target));
-        Assert.assertEquals(FloatArrayList.newListWith(0.0f, 1.0f, 9.0f), target);
+        Assert.assertEquals(FloatHashBag.newBagWith(0.0f, 1.0f, 9.0f), target);
     }
 
     @Test
@@ -291,16 +293,16 @@ public abstract class Abstract<name>ObjectMapTestCase
     {
         <name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("0")>, "0", <(literal.(type))("1")>, "1", <(literal.(type))("2")>, "9");
 
-        Assert.assertEquals(IntArrayList.newListWith(0, 1, 9), map1.collectInt(Integer::parseInt));
+        Assert.assertEquals(IntHashBag.newBagWith(0, 1, 9), map1.collectInt(Integer::parseInt));
     }
 
     @Test
     public void collectInt_withTarget()
     {
         <name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("0")>, "0", <(literal.(type))("1")>, "1", <(literal.(type))("2")>, "9");
-        IntArrayList target = new IntArrayList();
+        IntHashBag target = new IntHashBag();
         Assert.assertSame(target, map1.collectInt(Integer::parseInt, target));
-        Assert.assertEquals(IntArrayList.newListWith(0, 1, 9), target);
+        Assert.assertEquals(IntHashBag.newBagWith(0, 1, 9), target);
     }
 
     @Test
@@ -308,16 +310,16 @@ public abstract class Abstract<name>ObjectMapTestCase
     {
         <name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("0")>, "0", <(literal.(type))("1")>, "1", <(literal.(type))("2")>, "9");
 
-        Assert.assertEquals(LongArrayList.newListWith(0L, 1L, 9L), map1.collectLong(Long::parseLong));
+        Assert.assertEquals(LongHashBag.newBagWith(0L, 1L, 9L), map1.collectLong(Long::parseLong));
     }
 
     @Test
     public void collectLong_withTarget()
     {
         <name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("0")>, "0", <(literal.(type))("1")>, "1", <(literal.(type))("2")>, "9");
-        LongArrayList target = new LongArrayList();
+        LongHashBag target = new LongHashBag();
         Assert.assertSame(target, map1.collectLong(Long::parseLong, target));
-        Assert.assertEquals(LongArrayList.newListWith(0L, 1L, 9L), target);
+        Assert.assertEquals(LongHashBag.newBagWith(0L, 1L, 9L), target);
     }
 
     @Test
@@ -325,16 +327,16 @@ public abstract class Abstract<name>ObjectMapTestCase
     {
         <name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("0")>, "0", <(literal.(type))("1")>, "1", <(literal.(type))("2")>, "9");
 
-        Assert.assertEquals(ShortArrayList.newListWith((short) 0, (short) 1, (short) 9), map1.collectShort(Short::parseShort));
+        Assert.assertEquals(ShortHashBag.newBagWith((short) 0, (short) 1, (short) 9), map1.collectShort(Short::parseShort));
     }
 
     @Test
     public void collectShort_withTarget()
     {
         <name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("0")>, "0", <(literal.(type))("1")>, "1", <(literal.(type))("2")>, "9");
-        ShortArrayList target = new ShortArrayList();
+        ShortHashBag target = new ShortHashBag();
         Assert.assertSame(target, map1.collectShort(Short::parseShort, target));
-        Assert.assertEquals(ShortArrayList.newListWith((short) 0, (short) 1, (short) 9), target);
+        Assert.assertEquals(ShortHashBag.newBagWith((short) 0, (short) 1, (short) 9), target);
     }
 
     @Test
@@ -342,7 +344,7 @@ public abstract class Abstract<name>ObjectMapTestCase
     {
         <name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("1")>, "one", <(literal.(type))("9")>, "nine");
 
-        Assert.assertEquals(FastList.newListWith("ZERO!", "ONE!", "NINE!"),
+        Assert.assertEquals(HashBag.newBagWith("ZERO!", "ONE!", "NINE!"),
             map1.collectWith((String argument1, String argument2) -> argument1.toUpperCase() + argument2, "!"));
     }
 
@@ -351,8 +353,8 @@ public abstract class Abstract<name>ObjectMapTestCase
     {
         <name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("1")>, "one", <(literal.(type))("9")>, "nine");
 
-        Assert.assertEquals(FastList.newListWith("ZERO!", "ONE!", "NINE!"),
-            map1.collectWith((String argument1, String argument2) -> argument1.toUpperCase() + argument2, "!", FastList.\<String>newList()));
+        Assert.assertEquals(HashBag.newBagWith("ZERO!", "ONE!", "NINE!"),
+            map1.collectWith((String argument1, String argument2) -> argument1.toUpperCase() + argument2, "!", HashBag.\<String>newBag()));
     }
 
     @Test
@@ -362,7 +364,7 @@ public abstract class Abstract<name>ObjectMapTestCase
 
         Assert.assertEquals(HashBag.newBagWith("ONE", "NINE"), map1.collectIf(StringPredicates.endsWith("ne"), StringFunctions.toUpperCase()));
         Assert.assertEquals(HashBag.newBagWith("ZERO"), map1.collectIf(StringPredicates.endsWith("o"), StringFunctions.toUpperCase()));
-        Assert.assertEquals(FastList.newListWith("ZERO"), map1.collectIf(StringPredicates.endsWith("o"), StringFunctions.toUpperCase(), FastList.\<String>newList()));
+        Assert.assertEquals(HashBag.newBagWith("ZERO"), map1.collectIf(StringPredicates.endsWith("o"), StringFunctions.toUpperCase(), HashBag.\<String>newBag()));
     }
 
     @Test
@@ -372,9 +374,9 @@ public abstract class Abstract<name>ObjectMapTestCase
         <name>ObjectMap\<String> map2 = this.newWithKeysValues(<(literal.(type))("1")>, "one", <(literal.(type))("9")>, "nine");
         <name>ObjectMap\<String> map3 = this.newWithKeysValues(<(literal.(type))("5")>, "five", <(literal.(type))("9")>, "nine");
 
-        Function\<String, FastList\<Character>\> toChars = (String object) ->
+        Function\<String, MutableList\<Character>\> toChars = (String object) ->
             {
-                FastList\<Character> list = FastList.newList();
+                MutableList\<Character> list = FastList.newList();
                 char[] chars = object.toCharArray();
                 for (char aChar : chars)
                 {
@@ -923,12 +925,12 @@ public abstract class Abstract<name>ObjectMapTestCase
             map1.reject((<type> value, String object) -> !object.endsWith("ne")));
 
         RichIterable\<String> actual1 = map1.reject(StringPredicates.endsWith("ne").not());
-        Assert.assertTrue(FastList.newListWith("one", "nine").equals(actual1) || FastList.newListWith("nine", "one").equals(actual1));
-        Assert.assertEquals(FastList.newListWith("nine"), map1.reject(Predicates.equal("nine").not()));
-        Assert.assertEquals(FastList.newListWith("zero"), map1.reject(StringPredicates.endsWith("o").not()));
-        Assert.assertEquals(FastList.newListWith("nine"), map1.reject(Predicates.equal("nine").not(), FastList.\<String>newList()));
-        Assert.assertEquals(FastList.newListWith("one", "nine"), map1.reject(StringPredicates.endsWith("ne").not(), FastList.\<String>newList()));
-        Assert.assertEquals(FastList.newListWith("zero"), map1.reject(StringPredicates.endsWith("o").not(), FastList.\<String>newList()));
+        Assert.assertTrue(HashBag.newBagWith("one", "nine").equals(actual1));
+        Assert.assertEquals(HashBag.newBagWith("nine"), map1.reject(Predicates.equal("nine").not()));
+        Assert.assertEquals(HashBag.newBagWith("zero"), map1.reject(StringPredicates.endsWith("o").not()));
+        Assert.assertEquals(HashBag.newBagWith("nine"), map1.reject(Predicates.equal("nine").not(), HashBag.\<String>newBag()));
+        Assert.assertEquals(HashBag.newBagWith("one", "nine"), map1.reject(StringPredicates.endsWith("ne").not(), HashBag.\<String>newBag()));
+        Assert.assertEquals(HashBag.newBagWith("zero"), map1.reject(StringPredicates.endsWith("o").not(), HashBag.\<String>newBag()));
     }
 
     @Test
@@ -936,9 +938,9 @@ public abstract class Abstract<name>ObjectMapTestCase
     {
         <name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("1")>, "one", <(literal.(type))("9")>, "nine");
 
-        Assert.assertEquals(FastList.newListWith("one", "nine"), map1.rejectWith(StringPredicates2.notEndsWith(), "ne"));
-        Assert.assertEquals(FastList.newListWith("nine"), map1.rejectWith(Predicates2.notEqual(), "nine"));
-        Assert.assertEquals(FastList.newListWith("zero"), map1.rejectWith(StringPredicates2.notEndsWith(), "o"));
+        Assert.assertEquals(HashBag.newBagWith("one", "nine"), map1.rejectWith(StringPredicates2.notEndsWith(), "ne"));
+        Assert.assertEquals(HashBag.newBagWith("nine"), map1.rejectWith(Predicates2.notEqual(), "nine"));
+        Assert.assertEquals(HashBag.newBagWith("zero"), map1.rejectWith(StringPredicates2.notEndsWith(), "o"));
     }
 
     @Test
@@ -946,9 +948,9 @@ public abstract class Abstract<name>ObjectMapTestCase
     {
         <name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("1")>, "one", <(literal.(type))("9")>, "nine");
 
-        Assert.assertEquals(FastList.newListWith("one", "nine"), map1.rejectWith(StringPredicates2.notEndsWith(), "ne", FastList.\<String>newList()));
-        Assert.assertEquals(FastList.newListWith("nine"), map1.rejectWith(Predicates2.notEqual(), "nine", FastList.\<String>newList()));
-        Assert.assertEquals(FastList.newListWith("zero"), map1.rejectWith(StringPredicates2.notEndsWith(), "o", FastList.\<String>newList()));
+        Assert.assertEquals(HashBag.newBagWith("one", "nine"), map1.rejectWith(StringPredicates2.notEndsWith(), "ne", HashBag.\<String>newBag()));
+        Assert.assertEquals(HashBag.newBagWith("nine"), map1.rejectWith(Predicates2.notEqual(), "nine", HashBag.\<String>newBag()));
+        Assert.assertEquals(HashBag.newBagWith("zero"), map1.rejectWith(StringPredicates2.notEndsWith(), "o", HashBag.\<String>newBag()));
     }
 
     @Test

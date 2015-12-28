@@ -18,11 +18,11 @@ body(type1, type2, name1, name2) ::= <<
 package org.eclipse.collections.api.map.primitive;
 
 import org.eclipse.collections.api.<name1>Iterable;
+import org.eclipse.collections.api.bag.ImmutableBag;
+import org.eclipse.collections.api.bag.primitive.Immutable<name2>Bag;
 import org.eclipse.collections.api.block.function.primitive.<name2>ToObjectFunction;
 import org.eclipse.collections.api.block.predicate.primitive.<name2>Predicate;
 import org.eclipse.collections.api.block.predicate.primitive.<name1><name2>Predicate;
-import org.eclipse.collections.api.collection.ImmutableCollection;
-import org.eclipse.collections.api.collection.primitive.Immutable<name2>Collection;
 
 /**
  * This file was automatically generated from template file immutablePrimitivePrimitiveMap.stg.
@@ -35,11 +35,11 @@ public interface Immutable<name1><name2>Map extends <name1><name2>Map
 
     Immutable<name1><name2>Map reject(<name1><name2>Predicate predicate);
 
-    Immutable<name2>Collection select(<name2>Predicate predicate);
+    Immutable<name2>Bag select(<name2>Predicate predicate);
 
-    Immutable<name2>Collection reject(<name2>Predicate predicate);
+    Immutable<name2>Bag reject(<name2>Predicate predicate);
 
-    \<V> ImmutableCollection\<V> collect(<name2>ToObjectFunction\<? extends V> function);
+    \<V> ImmutableBag\<V> collect(<name2>ToObjectFunction\<? extends V> function);
 
     Immutable<name1><name2>Map newWithKeyValue(<type1> key, <type2> value);
 

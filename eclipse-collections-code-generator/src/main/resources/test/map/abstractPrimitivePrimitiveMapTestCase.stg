@@ -27,7 +27,6 @@ import java.util.NoSuchElementException;
 
 import org.eclipse.collections.api.<name2>Iterable;
 import org.eclipse.collections.api.Lazy<name2>Iterable;
-import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.block.function.primitive.<name2>ToObjectFunction;
 import org.eclipse.collections.api.iterator.<name2>Iterator;
@@ -35,11 +34,10 @@ import org.eclipse.collections.api.map.primitive.<name1><name2>Map;
 import org.eclipse.collections.api.map.primitive.Immutable<name1><name2>Map;
 import org.eclipse.collections.api.set.primitive.Mutable<name2>Set;
 import org.eclipse.collections.api.tuple.primitive.<name1><name2>Pair;
-import org.eclipse.collections.impl.bag.mutable.HashBag;
 import org.eclipse.collections.impl.bag.mutable.primitive.<name2>HashBag;
 import org.eclipse.collections.impl.block.factory.primitive.<name2>Predicates;
 import org.eclipse.collections.impl.factory.Bags;
-import org.eclipse.collections.impl.factory.Lists;
+import org.eclipse.collections.impl.factory.primitive.<name2>Bags;
 import org.eclipse.collections.impl.factory.primitive.<name1><name2>Maps;
 import org.eclipse.collections.impl.list.mutable.primitive.<name1>ArrayList;
 <if(!sameTwoPrimitives)>import org.eclipse.collections.impl.list.mutable.primitive.<name2>ArrayList;<endif>
@@ -579,13 +577,9 @@ public abstract class Abstract<name1><name2>MapTestCase
     {
         <name1><name2>Map map = this.newWithKeysValues(<["0", "1", "2", "3"]:keyValue(); separator=", ">);
         <name2>Iterable actual1 = map.select(<name2>Predicates.greaterThan(<(literal.(type2))("1")>));
-        Assert.assertTrue(
-                <name2>ArrayList.newListWith(<(literal.(type2))("2")>, <(literal.(type2))("3")>).equals(actual1)
-                        || <name2>ArrayList.newListWith(<(literal.(type2))("3")>, <(literal.(type2))("2")>).equals(actual1));
+        Assert.assertEquals(<name2>Bags.immutable.with(<(literal.(type2))("2")>, <(literal.(type2))("3")>), actual1);
         <name2>Iterable actual2 = map.select(<name2>Predicates.lessThan(<(literal.(type2))("2")>));
-        Assert.assertTrue(
-                <name2>ArrayList.newListWith(<(literal.(type2))("0")>, <(literal.(type2))("1")>).equals(actual2)
-                        || <name2>ArrayList.newListWith(<(literal.(type2))("1")>, <(literal.(type2))("0")>).equals(actual2));
+        Assert.assertEquals(<name2>Bags.immutable.with(<(literal.(type2))("0")>, <(literal.(type2))("1")>), actual2);
     }
 
     @Test
@@ -593,13 +587,9 @@ public abstract class Abstract<name1><name2>MapTestCase
     {
         <name1><name2>Map map = this.newWithKeysValues(<["0", "1", "2", "3"]:keyValue(); separator=", ">);
         <name2>Iterable actual1 = map.reject(<name2>Predicates.lessThan(<(literal.(type2))("2")>));
-        Assert.assertTrue(
-                <name2>ArrayList.newListWith(<(literal.(type2))("2")>, <(literal.(type2))("3")>).equals(actual1)
-                        || <name2>ArrayList.newListWith(<(literal.(type2))("3")>, <(literal.(type2))("2")>).equals(actual1));
+        Assert.assertEquals(<name2>Bags.immutable.with(<(literal.(type2))("2")>, <(literal.(type2))("3")>), actual1);
         <name2>Iterable actual2 = map.reject(<name2>Predicates.greaterThan(<(literal.(type2))("1")>));
-        Assert.assertTrue(
-                <name2>ArrayList.newListWith(<(literal.(type2))("0")>, <(literal.(type2))("1")>).equals(actual2)
-                        || <name2>ArrayList.newListWith(<(literal.(type2))("1")>, <(literal.(type2))("0")>).equals(actual2));
+        Assert.assertEquals(<name2>Bags.immutable.with(<(literal.(type2))("0")>, <(literal.(type2))("1")>), actual2);
     }
 
     @Test
@@ -607,12 +597,10 @@ public abstract class Abstract<name1><name2>MapTestCase
     {
         <name1><name2>Map map = this.newWithKeysValues(<["0", "1", "2", "3"]:keyValue(); separator=", ">);
 
-        <name2>ToObjectFunction\<<primitive2.wrapperName>\> function = (<type2> parameter) -> <(castIntToNarrowTypeWithParens.(type2))("parameter + 1")>;
-        RichIterable\<<primitive2.wrapperName>\> objects = map.collect(function);
-
-        Assert.assertEquals(HashBag.newBagWith(<["1", "2", "3", "4"]:(literal.(type2))(); separator=", ">), objects.toBag());
-        Assert.assertEquals(Lists.immutable.with(), this.getEmptyMap().collect(function));
-        Assert.assertEquals(Lists.immutable.with(<(literal.(type2))("2")>), this.newWithKeysValues(<["1"]:keyValue(); separator=", ">).collect(function));
+        <name2>ToObjectFunction\<<primitive2.wrapperName>\> function = (parameter) -> <(castIntToNarrowTypeWithParens.(type2))("parameter + 1")>;
+        Assert.assertEquals(Bags.immutable.with(<["1", "2", "3", "4"]:(literal.(type2))(); separator=", ">), map.collect(function));
+        Assert.assertEquals(Bags.immutable.empty(), this.getEmptyMap().collect(function));
+        Assert.assertEquals(Bags.immutable.with(<(literal.(type2))("2")>), this.newWithKeysValues(<["1"]:keyValue(); separator=", ">).collect(function));
     }
 
     @Test

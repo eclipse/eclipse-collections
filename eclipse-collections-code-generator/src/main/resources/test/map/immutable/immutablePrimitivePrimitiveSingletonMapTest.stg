@@ -31,6 +31,7 @@ import org.eclipse.collections.api.map.primitive.<name1><name2>Map;
 import org.eclipse.collections.api.map.primitive.Immutable<name1><name2>Map;
 import org.eclipse.collections.impl.block.factory.primitive.<name2>Predicates;
 import org.eclipse.collections.impl.factory.primitive.<name1><name2>Maps;
+import org.eclipse.collections.impl.factory.primitive.<name2>Bags;
 import org.eclipse.collections.impl.list.mutable.primitive.<name1>ArrayList;
 <if(!sameTwoPrimitives)>import org.eclipse.collections.impl.list.mutable.primitive.<name2>ArrayList;<endif>
 import org.eclipse.collections.impl.map.mutable.primitive.<name1><name2>HashMap;
@@ -219,10 +220,10 @@ public class Immutable<name1><name2>SingletonMapTest extends AbstractImmutable<n
     public void select_value()
     {
         <name2>Iterable actual1 = this.classUnderTest().select(<name2>Predicates.equal(<(literal.(type2))("1")>));
-        Assert.assertEquals(<name2>ArrayList.newListWith(), actual1);
+        Assert.assertEquals(<name2>Bags.immutable.empty(), actual1);
 
         <name2>Iterable actual2 = this.classUnderTest().select(<name2>Predicates.equal(<(literal.(type2))("0")>));
-        Assert.assertEquals(<name2>ArrayList.newListWith(<(literal.(type2))("0")>), actual2);
+        Assert.assertEquals(<name2>Bags.immutable.with(<(literal.(type2))("0")>), actual2);
     }
 
     @Override
@@ -230,10 +231,10 @@ public class Immutable<name1><name2>SingletonMapTest extends AbstractImmutable<n
     public void reject_value()
     {
         <name2>Iterable actual1 = this.classUnderTest().reject(<name2>Predicates.equal(<(literal.(type2))("0")>));
-        Assert.assertEquals(<name2>ArrayList.newListWith(), actual1);
+        Assert.assertEquals(<name2>Bags.immutable.empty(), actual1);
 
         <name2>Iterable actual2 = this.classUnderTest().reject(<name2>Predicates.equal(<(literal.(type2))("1")>));
-        Assert.assertEquals(<name2>ArrayList.newListWith(<(literal.(type2))("0")>), actual2);
+        Assert.assertEquals(<name2>Bags.immutable.with(<(literal.(type2))("0")>), actual2);
     }
 
     @Override

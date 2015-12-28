@@ -45,39 +45,13 @@ import org.eclipse.collections.api.collection.primitive.ImmutableShortCollection
  *
  * @since 3.0.
  */
-public interface Immutable<name>ObjectMap\<V> extends <name>ObjectMap\<V>
+public interface Immutable<name>ObjectMap\<V> extends <name>ObjectMap\<V>, ImmutablePrimitiveObjectMap\<V>
 {
     Immutable<name>ObjectMap\<V> tap(Procedure\<? super V> procedure);
 
     Immutable<name>ObjectMap\<V> select(<name>ObjectPredicate\<? super V> predicate);
 
     Immutable<name>ObjectMap\<V> reject(<name>ObjectPredicate\<? super V> predicate);
-
-    ImmutableCollection\<V> select(Predicate\<? super V> predicate);
-
-    \<P> ImmutableCollection\<V> selectWith(Predicate2\<? super V, ? super P> predicate, P parameter);
-
-    ImmutableCollection\<V> reject(Predicate\<? super V> predicate);
-
-    \<VV> ImmutableCollection\<VV> collect(Function\<? super V, ? extends VV> function);
-
-    ImmutableBooleanCollection collectBoolean(BooleanFunction\<? super V> booleanFunction);
-
-    ImmutableByteCollection collectByte(ByteFunction\<? super V> byteFunction);
-
-    ImmutableCharCollection collectChar(CharFunction\<? super V> charFunction);
-
-    ImmutableDoubleCollection collectDouble(DoubleFunction\<? super V> doubleFunction);
-
-    ImmutableFloatCollection collectFloat(FloatFunction\<? super V> floatFunction);
-
-    ImmutableIntCollection collectInt(IntFunction\<? super V> intFunction);
-
-    ImmutableLongCollection collectLong(LongFunction\<? super V> longFunction);
-
-    ImmutableShortCollection collectShort(ShortFunction\<? super V> shortFunction);
-
-    \<P, VV> ImmutableCollection\<VV> collectWith(Function2\<? super V, ? super P, ? extends VV> function, P parameter);
 
     Immutable<name>ObjectMap\<V> newWithKeyValue(<type> key, V value);
 

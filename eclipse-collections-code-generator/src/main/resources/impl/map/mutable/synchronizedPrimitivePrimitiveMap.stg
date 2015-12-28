@@ -29,6 +29,7 @@ import org.eclipse.collections.api.<name2>Iterable;
 <if(!sameTwoPrimitives)>import org.eclipse.collections.api.Lazy<name2>Iterable;<endif>
 import org.eclipse.collections.api.Lazy<name1>Iterable;
 import org.eclipse.collections.api.RichIterable;
+import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.bag.primitive.Mutable<name2>Bag;
 import org.eclipse.collections.api.block.function.primitive.<name2>Function;
 import org.eclipse.collections.api.block.function.primitive.<name2>Function0;
@@ -41,7 +42,6 @@ import org.eclipse.collections.api.block.predicate.primitive.<name1><name2>Predi
 <if(!sameTwoPrimitives)>import org.eclipse.collections.api.block.procedure.primitive.<name2>Procedure;<endif>
 import org.eclipse.collections.api.block.procedure.primitive.<name1><name2>Procedure;
 import org.eclipse.collections.api.block.procedure.primitive.<name1>Procedure;
-import org.eclipse.collections.api.collection.MutableCollection;
 import org.eclipse.collections.api.collection.primitive.Mutable<name2>Collection;
 import org.eclipse.collections.api.iterator.Mutable<name2>Iterator;
 import org.eclipse.collections.api.list.primitive.Mutable<name2>List;
@@ -327,7 +327,7 @@ public final class Synchronized<name1><name2>Map
         }
     }
 
-    public Mutable<name2>Collection select(<name2>Predicate predicate)
+    public Mutable<name2>Bag select(<name2>Predicate predicate)
     {
         synchronized (this.lock)
         {
@@ -335,11 +335,19 @@ public final class Synchronized<name1><name2>Map
         }
     }
 
-    public Mutable<name2>Collection reject(<name2>Predicate predicate)
+    public Mutable<name2>Bag reject(<name2>Predicate predicate)
     {
         synchronized (this.lock)
         {
             return this.map.reject(predicate);
+        }
+    }
+
+    public \<V> MutableBag\<V> collect(<name2>ToObjectFunction\<? extends V> function)
+    {
+        synchronized (this.lock)
+        {
+            return this.map.collect(function);
         }
     }
 
@@ -348,14 +356,6 @@ public final class Synchronized<name1><name2>Map
         synchronized (this.lock)
         {
             return this.map.detectIfNone(predicate, ifNone);
-        }
-    }
-
-    public \<V> MutableCollection\<V> collect(<name2>ToObjectFunction\<? extends V> function)
-    {
-        synchronized (this.lock)
-        {
-            return this.map.collect(function);
         }
     }
 

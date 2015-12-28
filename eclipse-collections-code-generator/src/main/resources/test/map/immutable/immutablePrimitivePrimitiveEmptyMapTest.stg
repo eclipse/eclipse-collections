@@ -26,6 +26,7 @@ import java.util.NoSuchElementException;
 
 import org.eclipse.collections.api.iterator.<name2>Iterator;
 import org.eclipse.collections.api.map.primitive.Immutable<name1><name2>Map;
+import org.eclipse.collections.impl.factory.primitive.<name2>Bags;
 import org.eclipse.collections.impl.factory.primitive.<name1><name2>Maps;
 import org.eclipse.collections.impl.list.mutable.primitive.<name1>ArrayList;
 <if(!sameTwoPrimitives)>import org.eclipse.collections.impl.list.mutable.primitive.<name2>ArrayList;<endif>
@@ -206,14 +207,14 @@ public class Immutable<name1><name2>EmptyMapTest extends AbstractImmutable<name1
     @Test
     public void select_value()
     {
-        Assert.assertEquals(<name2>ArrayList.newListWith(), this.classUnderTest().select((<type2> value) -> true));
+        Assert.assertEquals(<name2>Bags.immutable.empty(), this.classUnderTest().select(value -> true));
     }
 
     @Override
     @Test
     public void reject_value()
     {
-        Assert.assertEquals(new <name2>ArrayList(), this.classUnderTest().reject((<type2> value) -> false));
+        Assert.assertEquals(<name2>Bags.immutable.empty(), this.classUnderTest().reject(value -> false));
     }
 
     @Override

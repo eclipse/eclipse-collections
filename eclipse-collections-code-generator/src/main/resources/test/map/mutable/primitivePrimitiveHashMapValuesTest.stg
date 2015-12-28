@@ -25,16 +25,16 @@ package org.eclipse.collections.impl.map.mutable.primitive;
 import java.util.NoSuchElementException;
 
 import org.eclipse.collections.api.<name2>Iterable;
+import org.eclipse.collections.api.bag.Bag;
 import org.eclipse.collections.api.block.function.primitive.<name2>ToObjectFunction;
 import org.eclipse.collections.api.collection.primitive.Mutable<name2>Collection;
 import org.eclipse.collections.api.iterator.<name2>Iterator;
-import org.eclipse.collections.api.list.MutableList;
+import org.eclipse.collections.impl.bag.mutable.HashBag;
 import org.eclipse.collections.impl.block.factory.primitive.<name2>Predicates;
 import org.eclipse.collections.impl.collection.mutable.primitive.AbstractMutable<name2>CollectionTestCase;
 import org.eclipse.collections.impl.collection.mutable.primitive.Synchronized<name2>Collection;
 import org.eclipse.collections.impl.collection.mutable.primitive.Unmodifiable<name2>Collection;
 <if(primitive2.floatingPoint)>import org.eclipse.collections.impl.list.Interval;<endif>
-import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.list.mutable.primitive.<name2>ArrayList;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
@@ -70,9 +70,9 @@ public class <name1><name2>HashMapValuesTest extends AbstractMutable<name2>Colle
     }
 
     @Override
-    protected MutableList\<<wrapperName2>\> newObjectCollectionWith(<wrapperName2>... elements)
+    protected Bag\<<wrapperName2>\> newObjectCollectionWith(<wrapperName2>... elements)
     {
-        return FastList.newListWith(elements);
+        return HashBag.newBagWith(elements);
     }
 
     @Override

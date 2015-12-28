@@ -23,11 +23,14 @@ package org.eclipse.collections.impl.map.immutable.primitive;
 import java.io.IOException;
 import java.io.Serializable;
 
+import org.eclipse.collections.api.<name1>Iterable;
 import org.eclipse.collections.api.<name2>Iterable;
 <if(!sameTwoPrimitives)>import org.eclipse.collections.api.<name1>Iterable;<endif>
 import org.eclipse.collections.api.Lazy<name2>Iterable;
 <if(!sameTwoPrimitives)>import org.eclipse.collections.api.Lazy<name1>Iterable;<endif>
 import org.eclipse.collections.api.RichIterable;
+import org.eclipse.collections.api.bag.ImmutableBag;
+import org.eclipse.collections.api.bag.primitive.Immutable<name2>Bag;
 import org.eclipse.collections.api.bag.primitive.Mutable<name2>Bag;
 import org.eclipse.collections.api.block.function.primitive.<name2>ToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.Object<name2>ToObjectFunction;
@@ -36,7 +39,6 @@ import org.eclipse.collections.api.block.predicate.primitive.<name1><name2>Predi
 import org.eclipse.collections.api.block.procedure.primitive.<name2>Procedure;
 import org.eclipse.collections.api.block.procedure.primitive.<name1><name2>Procedure;
 <if(!sameTwoPrimitives)>import org.eclipse.collections.api.block.procedure.primitive.<name1>Procedure;<endif>
-import org.eclipse.collections.api.collection.ImmutableCollection;
 import org.eclipse.collections.api.collection.primitive.Immutable<name2>Collection;
 import org.eclipse.collections.api.collection.primitive.Mutable<name2>Collection;
 import org.eclipse.collections.api.iterator.<name2>Iterator;
@@ -48,9 +50,11 @@ import org.eclipse.collections.api.set.primitive.Mutable<name2>Set;
 import org.eclipse.collections.api.tuple.primitive.<name1><name2>Pair;
 import org.eclipse.collections.impl.bag.mutable.primitive.<name2>HashBag;
 import org.eclipse.collections.impl.collection.mutable.primitive.Unmodifiable<name2>Collection;
+import org.eclipse.collections.impl.factory.Bags;
 import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.primitive.<name1><name2>Maps;
 import org.eclipse.collections.impl.factory.primitive.<name1>Lists;
+import org.eclipse.collections.impl.factory.primitive.<name2>Bags;
 import org.eclipse.collections.impl.iterator.Unmodifiable<name2>Iterator;
 import org.eclipse.collections.impl.lazy.primitive.Lazy<name2>IterableAdapter;
 import org.eclipse.collections.impl.list.mutable.primitive.<name2>ArrayList;
@@ -63,6 +67,7 @@ import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 /**
  * Immutable<name1><name2>SingletonMap is an optimization for {@link Immutable<name1><name2>Map} of size 1.
  * This file was automatically generated from template file immutablePrimitivePrimitiveSingletonMap.stg.
+ *
  * @since 4.0.
  */
 final class Immutable<name1><name2>SingletonMap implements Immutable<name1><name2>Map, Serializable
@@ -193,24 +198,24 @@ final class Immutable<name1><name2>SingletonMap implements Immutable<name1><name
         return !predicate.accept(this.value1);
     }
 
-    public Immutable<name2>Collection select(<name2>Predicate predicate)
+    public Immutable<name2>Bag select(<name2>Predicate predicate)
     {
-        return predicate.accept(this.value1) ? <name2>ArrayList.newListWith(this.value1).toImmutable() : new <name2>ArrayList().toImmutable();
+        return predicate.accept(this.value1) ? <name2>HashBag.newBagWith(this.value1).toImmutable() : <name2>Bags.immutable.empty();
     }
 
-    public Immutable<name2>Collection reject(<name2>Predicate predicate)
+    public Immutable<name2>Bag reject(<name2>Predicate predicate)
     {
-        return predicate.accept(this.value1) ? new <name2>ArrayList().toImmutable() : <name2>ArrayList.newListWith(this.value1).toImmutable();
+        return predicate.accept(this.value1) ? <name2>Bags.immutable.empty() : <name2>HashBag.newBagWith(this.value1).toImmutable();
+    }
+
+    public \<V> ImmutableBag\<V> collect(<name2>ToObjectFunction\<? extends V> function)
+    {
+        return Bags.immutable.of(function.valueOf(this.value1));
     }
 
     public <type2> detectIfNone(<name2>Predicate predicate, <type2> ifNone)
     {
         return predicate.accept(this.value1) ? this.value1 : ifNone;
-    }
-
-    public \<V> ImmutableCollection\<V> collect(<name2>ToObjectFunction\<? extends V> function)
-    {
-        return Lists.immutable.of(function.valueOf(this.value1));
     }
 
     public <type2>[] toArray()

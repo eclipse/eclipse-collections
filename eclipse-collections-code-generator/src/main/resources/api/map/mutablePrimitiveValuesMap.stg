@@ -16,10 +16,10 @@ body(type, name) ::= <<
 
 package org.eclipse.collections.api.map.primitive;
 
+import org.eclipse.collections.api.bag.MutableBag;
+import org.eclipse.collections.api.bag.primitive.Mutable<name>Bag;
 import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
 import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
-import org.eclipse.collections.api.collection.primitive.Mutable<name>Collection;
-import org.eclipse.collections.api.collection.MutableCollection;
 import org.eclipse.collections.api.iterator.Mutable<name>Iterator;
 
 /**
@@ -29,11 +29,11 @@ import org.eclipse.collections.api.iterator.Mutable<name>Iterator;
  */
 public interface Mutable<name>ValuesMap extends <name>ValuesMap
 {
-    Mutable<name>Collection select(<name>Predicate predicate);
+    Mutable<name>Bag select(<name>Predicate predicate);
 
-    Mutable<name>Collection reject(<name>Predicate predicate);
+    Mutable<name>Bag reject(<name>Predicate predicate);
 
-    \<V> MutableCollection\<V> collect(<name>ToObjectFunction\<? extends V> function);
+    \<V> MutableBag\<V> collect(<name>ToObjectFunction\<? extends V> function);
 
     void clear();
 

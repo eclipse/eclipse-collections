@@ -27,9 +27,10 @@ import org.eclipse.collections.api.iterator.BooleanIterator;
 import org.eclipse.collections.api.map.primitive.<name>BooleanMap;
 import org.eclipse.collections.api.map.primitive.Immutable<name>BooleanMap;
 import org.eclipse.collections.impl.block.factory.primitive.BooleanPredicates;
+import org.eclipse.collections.impl.factory.primitive.BooleanBags;
 import org.eclipse.collections.impl.factory.primitive.<name>BooleanMaps;
-import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
 import org.eclipse.collections.impl.list.mutable.primitive.BooleanArrayList;
+import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
 import org.eclipse.collections.impl.map.mutable.primitive.<name>BooleanHashMap;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
@@ -230,10 +231,10 @@ public class Immutable<name>BooleanSingletonMapTest extends AbstractImmutable<na
     public void select_value()
     {
         BooleanIterable actual1 = this.classUnderTest().select(BooleanPredicates.isFalse());
-        Assert.assertEquals(BooleanArrayList.newListWith(), actual1);
+        Assert.assertEquals(BooleanBags.immutable.empty(), actual1);
 
         BooleanIterable actual2 = this.classUnderTest().select(BooleanPredicates.isTrue());
-        Assert.assertEquals(BooleanArrayList.newListWith(true), actual2);
+        Assert.assertEquals(BooleanBags.immutable.with(true), actual2);
     }
 
     @Override
@@ -241,10 +242,10 @@ public class Immutable<name>BooleanSingletonMapTest extends AbstractImmutable<na
     public void reject_value()
     {
         BooleanIterable actual1 = this.classUnderTest().reject(BooleanPredicates.isTrue());
-        Assert.assertEquals(BooleanArrayList.newListWith(), actual1);
+        Assert.assertEquals(BooleanBags.immutable.empty(), actual1);
 
         BooleanIterable actual2 = this.classUnderTest().reject(BooleanPredicates.isFalse());
-        Assert.assertEquals(BooleanArrayList.newListWith(true), actual2);
+        Assert.assertEquals(BooleanBags.immutable.with(true), actual2);
     }
 
     @Override
