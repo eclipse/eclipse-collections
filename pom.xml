@@ -115,7 +115,7 @@
         <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
         <sonar.core.codeCoveragePlugin>clover</sonar.core.codeCoveragePlugin>
         <sonar.clover.version>${clover.version}</sonar.clover.version>
-        <project.previous.version>6.1.0</project.previous.version>
+        <project.previous.version>7.0.0</project.previous.version>
     </properties>
 
     <dependencyManagement>
