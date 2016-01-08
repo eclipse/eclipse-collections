@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -669,7 +669,7 @@ public class ArrayStack<T> implements MutableStack<T>, Externalizable
 
     public <V extends Comparable<? super V>> T minBy(Function<? super T, ? extends V> function)
     {
-        return this.delegate.asReversed().toList().minBy(function);
+        return this.delegate.asReversed().minBy(function);
     }
 
     public String makeString()
