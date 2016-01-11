@@ -94,7 +94,6 @@ public class Synchronized<name>IterableTest extends Abstract<name>IterableTestCa
     }
 
     <if(primitive.floatingPoint)><NaNEqualsTests()><endif>
-
     @Override
     public void testHashCode()
     {
@@ -117,4 +116,5 @@ public void testEquals_NaN()
 {
     //Testing equals() is not applicable.
 }
+
 >>

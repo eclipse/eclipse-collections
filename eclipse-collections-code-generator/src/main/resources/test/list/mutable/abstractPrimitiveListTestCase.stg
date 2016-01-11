@@ -239,7 +239,6 @@ public abstract class Abstract<name>ListTestCase extends AbstractMutable<name>Co
         Assert.assertEquals(this.newMutableCollectionWith(<["1", "4", "3"]:(literal.(type))(); separator=", ">), list);
     }
 
-
     @Test(expected = UnsupportedOperationException.class)
     public void subList()
     {
@@ -417,7 +416,6 @@ public abstract class Abstract<name>ListTestCase extends AbstractMutable<name>Co
         Mutable<wrapperName> result = arrayList.injectInto(new Mutable<wrapperName>(<(literal.(type))("0")>), Mutable<wrapperName>::add);
         Assert.assertEquals(new Mutable<wrapperName>(<(literal.(type))("6")>), result);
     }
-
 
     @Test
     public void injectIntoWithIndex()

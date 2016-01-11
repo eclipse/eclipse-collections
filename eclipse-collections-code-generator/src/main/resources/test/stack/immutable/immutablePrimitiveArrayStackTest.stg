@@ -26,7 +26,6 @@ import org.eclipse.collections.impl.stack.mutable.primitive.<name>ArrayStack;
 import org.junit.Assert;
 import org.junit.Test;
 
-
 /**
  * JUnit test for {@link Immutable<name>ArrayStack}.
  * This file was automatically generated from template file immutablePrimitiveArrayStackTest.stg.

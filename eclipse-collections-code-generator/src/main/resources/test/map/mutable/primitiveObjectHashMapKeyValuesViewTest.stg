@@ -19,7 +19,6 @@ package org.eclipse.collections.impl.map.mutable.primitive;
 
 import org.eclipse.collections.impl.map.primitive.Abstract<name>ObjectMapKeyValuesViewTestCase;
 
-
 /**
  * JUnit test for {@link <name>ObjectHashMap#keyValuesView()}.
  * This file was automatically generated from template file primitiveObjectHashMapKeyValuesViewTest.stg.

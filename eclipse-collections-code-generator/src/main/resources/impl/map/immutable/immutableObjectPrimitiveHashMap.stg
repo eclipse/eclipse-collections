@@ -393,12 +393,10 @@ public <type>[] toSortedArray()
     return this.delegate.toSortedArray();
 }
 
-
 public Mutable<name>List toSortedList()
 {
     return this.delegate.toSortedList();
 }
-
 
 >>
 

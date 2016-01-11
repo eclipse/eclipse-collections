@@ -679,5 +679,3 @@ public Mutable<name>List toSortedList()
 >>
 
 noMethods(name, type) ::= ""
-
-

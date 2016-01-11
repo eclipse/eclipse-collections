@@ -178,7 +178,6 @@ public class Object<name>HashMapWithHashingStrategy\<K> implements MutableObject
         return new Object<name>HashMapWithHashingStrategy\<K>(map.hashingStrategy, map);
     }
 
-
     public static \<K> Object<name>HashMapWithHashingStrategy\<K> newWithKeysValues(HashingStrategy\<? super K> hashingStrategy, K key1, <type> value1)
     {
         return new Object<name>HashMapWithHashingStrategy\<K>(hashingStrategy, 1).withKeyValue(key1, value1);

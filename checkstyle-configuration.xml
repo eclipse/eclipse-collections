@@ -4,7 +4,7 @@
     "http://www.puppycrawl.com/dtds/configuration_1_2.dtd">
 
 <!--
-  ~ Copyright (c) 2015 Goldman Sachs.
+  ~ Copyright (c) 2016 Goldman Sachs.
   ~ All rights reserved. This program and the accompanying materials
   ~ are made available under the terms of the Eclipse Public License v1.0
   ~ and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -261,23 +261,8 @@
     <module name="FileTabCharacter" />
 
     <module name="RegexpMultiline">
-        <property name="format" value="\{\r\r" />
-        <property name="message" value="First line after opening a scope may not be blank." />
-    </module>
-
-    <module name="RegexpMultiline">
         <property name="format" value="\{\n\n" />
         <property name="message" value="First line after opening a scope may not be blank." />
-    </module>
-
-    <module name="RegexpMultiline">
-        <property name="format" value="\{\r\n\r\n" />
-        <property name="message" value="First line after opening a scope may not be blank." />
-    </module>
-
-    <module name="RegexpMultiline">
-        <property name="format" value="\r\r[ ]*\}" />
-        <property name="message" value="Last line before closing a scope may not be blank." />
     </module>
 
     <module name="RegexpMultiline">
@@ -286,8 +271,14 @@
     </module>
 
     <module name="RegexpMultiline">
-        <property name="format" value="\r\n\r\n[ ]*\}" />
-        <property name="message" value="Last line before closing a scope may not be blank." />
+        <property name="format" value="\n\n\n" />
+        <property name="message" value="Extra newline." />
     </module>
+
+    <module name="RegexpMultiline">
+        <property name="format" value="\r" />
+        <property name="message" value="Carriage return." />
+    </module>
+
 
 </module>

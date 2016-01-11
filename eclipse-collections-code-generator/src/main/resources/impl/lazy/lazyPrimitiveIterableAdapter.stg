@@ -206,7 +206,6 @@ arithmeticMethods ::= [
     "boolean": "noMethods"
     ]
 
-
 allMethods(name, type) ::=<<
 @Override
 public <wideType.(type)> sum()

@@ -108,7 +108,6 @@ public class <name1><name2>HashMapValuesTest extends AbstractMutable<name2>Colle
     }
 
     <if(primitive2.floatingPoint)><NaNTests()><endif>
-
     @Override
     @Test(expected = UnsupportedOperationException.class)
     public void addAllArray()
@@ -604,6 +603,7 @@ public void testEquals_NaN()
 {
     //Testing equals() is not applicable for Mutable<name2>Collection.
 }
+
 >>
 
 sumMethodFloat ::= [

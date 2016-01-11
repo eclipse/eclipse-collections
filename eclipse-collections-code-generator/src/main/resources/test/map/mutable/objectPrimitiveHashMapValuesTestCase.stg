@@ -126,7 +126,6 @@ public abstract class Object<name>HashMapValuesTestCase extends AbstractMutable<
     }
 
     <if(primitive.floatingPoint)><NaNTests()><endif>
-
     @Override
     @Test(expected = UnsupportedOperationException.class)
     public void addAllArray()

@@ -55,7 +55,6 @@ public abstract class Object<name>HashMapTestCase extends AbstractMutableObject<
         Assert.assertEquals(16L, ((<type>[]) values.get(hashMap)).length);
     }
 
-
     @Test
     public void newWithInitialCapacity() throws Exception
     {

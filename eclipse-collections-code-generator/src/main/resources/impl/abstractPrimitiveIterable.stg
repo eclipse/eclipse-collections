@@ -97,7 +97,6 @@ public abstract class Abstract<name>Iterable implements <name>Iterable
         return true;
     }
 
-
     public boolean containsAll(<name>Iterable source)
     {
         return source.allSatisfy(new <name>Predicate()

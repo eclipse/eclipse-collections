@@ -68,7 +68,6 @@ public class Unmodifiable<name>ObjectMapKeySetTest extends Abstract<name>SetTest
     }
 
     <if(primitive.floatingPoint)><NaNTests()><endif>
-
     @Override
     @Test(expected = UnsupportedOperationException.class)
     public void addAllArray()
@@ -241,4 +240,5 @@ public void add_NEGATIVE_INFINITY()
 {
     this.newWith(<wrapperName>.NEGATIVE_INFINITY).add(<wrapperName>.NEGATIVE_INFINITY);
 }
+
 >>

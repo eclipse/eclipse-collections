@@ -25,7 +25,6 @@ import org.eclipse.collections.impl.set.immutable.primitive.AbstractImmutable<na
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
 
-
 /**
  * This file was automatically generated from template file <calledFrom>
  *

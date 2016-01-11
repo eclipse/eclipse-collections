@@ -105,8 +105,8 @@ public class UnmodifiableObject<name>MapValuesTest extends AbstractMutable<name>
         this.classUnderTest().add(<(literal.(type))("0")>);
     }
 
-    <if(primitive.floatingPoint)><NaNTests()><endif>
-
+    <if(primitive.floatingPoint)><NaNTests()>
+    <endif>
     @Override
     @Test(expected = UnsupportedOperationException.class)
     public void addAllArray()

@@ -17,7 +17,6 @@ collectPrimitive(fromName, fromType, toName, toType) ::= <<
 Lazy<toName>Iterable collect<toName>(<fromName>To<toName>Function function);
 >>
 
-
 body(type, name) ::= <<
 <copyright()>
 

@@ -660,7 +660,6 @@ public double median()
     }
 }
 
-
 public <type2> addToValue(<type1> key, <type2> toBeAdded)
 {
     synchronized (this.lock)

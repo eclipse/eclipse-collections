@@ -69,7 +69,6 @@ public class <name1><name2>HashMapKeySetTest extends Abstract<name1>SetTestCase
     }
 
     <if(primitive1.floatingPoint)><NaNTests()><endif>
-
     @Override
     @Test(expected = UnsupportedOperationException.class)
     public void addAllArray()
@@ -174,4 +173,5 @@ public void add_NEGATIVE_INFINITY()
 {
     this.newWith(<wrapperName1>.NEGATIVE_INFINITY).add(<wrapperName1>.NEGATIVE_INFINITY);
 }
+
 >>
