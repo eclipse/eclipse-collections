@@ -5,7 +5,7 @@
 [![][license-epl img]][license-epl]
 [![][license-edl img]][license-edl]
 
-Eclipse Collections is a collections framework for Java. It has JDK-compatible List, Set and Map implementations with a rich API and set of utility classes that work with any JDK compatible Collections, Arrays, Maps or Strings. The iteration protocol was inspired by the Smalltalk collection framework.
+Eclipse Collections is a collections framework for Java. It has JDK-compatible List, Set and Map implementations with a rich API, additional types not found in the JDK like Bags, Multimaps and set of utility classes that work with any JDK compatible Collections, Arrays, Maps or Strings. The iteration protocol was inspired by the Smalltalk collection framework.
 
 ## Quick Example
 Eclipse Collections puts iteration methods on the container types. Lambdas are simulated using anonymous inner classes. Here's a code example that demonstrates the usual style of programming with Eclipse Collections.
@@ -98,6 +98,27 @@ compile 'org.eclipse.collections:eclipse-collections-forkjoin:7.0.0'
 <dependency org="org.eclipse.collections" name="eclipse-collections-forkjoin" rev="7.0.0"/>
 ```
 
+## License
+Eclipse Collections is open sourced under the Eclipse Public License v1.0 and the Eclipse Distribution License v1.0.
+
+## How to Contribute
+We welcome contributions to the Eclipse Collections project!!
+
+The Eclipse Collections project accepts contributions via pull requests in this GitHub. Please see [How To Contribute](CONTRIBUTING.md) for more detail.
+
+## Project Roadmap
+* Project Roadmap: https://github.com/eclipse/eclipse-collections/wiki/Roadmap
+
+## Links
+* Project Website: http://www.eclipse.org/collections
+* Eclipse PME: https://projects.eclipse.org/projects/technology.collections
+* GitHub: https://github.com/eclipse/eclipse-collections
+* Issues: https://github.com/eclipse/eclipse-collections/issues
+* Mailing lists: https://dev.eclipse.org/mailman/listinfo/collections-dev
+* Wiki: https://github.com/eclipse/eclipse-collections/wiki
+* Forum: https://www.eclipse.org/forums/index.php?t=thread&frm_id=329
+* StackOverflow: http://stackoverflow.com/questions/tagged/eclipse-collections
+
 [travis]:https://travis-ci.org/eclipse/eclipse-collections
 [travis img]:https://travis-ci.org/eclipse/eclipse-collections.svg?branch=master
 
@@ -109,3 +130,4 @@ compile 'org.eclipse.collections:eclipse-collections-forkjoin:7.0.0'
 
 [license-edl]:LICENSE-EDL-1.0.txt
 [license-edl img]:https://img.shields.io/badge/License-EDL-blue.svg
+
