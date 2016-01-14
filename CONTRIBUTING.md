@@ -10,10 +10,9 @@ If this is your first time contributing to an Eclipse Foundation project, you'll
 - [Sign your commits](https://wiki.eclipse.org/Development_Resources/Contributing_via_Git#Signing_off_on_a_commit)
 
 Issues
---------------
+------
 
-This project uses [GitHub issues](https://github.com/eclipse/eclipse-collections/issues) to track ongoing development and issues. Be sure to search for existing issues before you create another one. Remember 
-that contributions are always welcome!
+Search the [issue tracker](https://github.com/eclipse/eclipse-collections/issues) for a relevant issue or create a new one.
 
 Making changes
 --------------
