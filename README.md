@@ -129,7 +129,7 @@ Additional information
 * Wiki: https://github.com/eclipse/eclipse-collections/wiki
 * StackOverflow: http://stackoverflow.com/questions/tagged/eclipse-collections
 * Mailing lists: https://dev.eclipse.org/mailman/listinfo/collections-dev
-* Eclipse PME: https://projects.eclipse.org/projects/technology.collections
+* Eclipse PMI: https://projects.eclipse.org/projects/technology.collections
 * Forum: https://www.eclipse.org/forums/index.php?t=thread&frm_id=329
 
 [travis]:https://travis-ci.org/eclipse/eclipse-collections
