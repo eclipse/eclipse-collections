@@ -16,6 +16,7 @@ import java.util.Comparator;
 
 import org.eclipse.collections.api.bag.Bag;
 import org.eclipse.collections.api.bag.MutableBag;
+import org.eclipse.collections.api.bag.MutableBagIterable;
 import org.eclipse.collections.api.bag.primitive.MutableBooleanBag;
 import org.eclipse.collections.api.bag.primitive.MutableByteBag;
 import org.eclipse.collections.api.bag.primitive.MutableCharBag;
@@ -77,9 +78,9 @@ public abstract class AbstractBag<T>
     @Override
     public <R extends Collection<T>> R select(final Predicate<? super T> predicate, final R target)
     {
-        if (target instanceof MutableBag<?>)
+        if (target instanceof MutableBagIterable<?>)
         {
-            final MutableBag<T> targetBag = (MutableBag<T>) target;
+            final MutableBagIterable<T> targetBag = (MutableBagIterable<T>) target;
 
             this.forEachWithOccurrences(new ObjectIntProcedure<T>()
             {
@@ -117,9 +118,9 @@ public abstract class AbstractBag<T>
             final P parameter,
             final R target)
     {
-        if (target instanceof MutableBag<?>)
+        if (target instanceof MutableBagIterable<?>)
         {
-            final MutableBag<T> targetBag = (MutableBag<T>) target;
+            final MutableBagIterable<T> targetBag = (MutableBagIterable<T>) target;
 
             this.forEachWithOccurrences(new ObjectIntProcedure<T>()
             {
@@ -154,9 +155,9 @@ public abstract class AbstractBag<T>
     @Override
     public <R extends Collection<T>> R reject(final Predicate<? super T> predicate, final R target)
     {
-        if (target instanceof MutableBag<?>)
+        if (target instanceof MutableBagIterable<?>)
         {
-            final MutableBag<T> targetBag = (MutableBag<T>) target;
+            final MutableBagIterable<T> targetBag = (MutableBagIterable<T>) target;
 
             this.forEachWithOccurrences(new ObjectIntProcedure<T>()
             {
@@ -194,9 +195,9 @@ public abstract class AbstractBag<T>
             final P parameter,
             final R target)
     {
-        if (target instanceof MutableBag<?>)
+        if (target instanceof MutableBagIterable<?>)
         {
-            final MutableBag<T> targetBag = (MutableBag<T>) target;
+            final MutableBagIterable<T> targetBag = (MutableBagIterable<T>) target;
 
             this.forEachWithOccurrences(new ObjectIntProcedure<T>()
             {
@@ -248,9 +249,9 @@ public abstract class AbstractBag<T>
     @Override
     public <V, R extends Collection<V>> R collect(final Function<? super T, ? extends V> function, final R target)
     {
-        if (target instanceof MutableBag<?>)
+        if (target instanceof MutableBagIterable<?>)
         {
-            final MutableBag<V> targetBag = (MutableBag<V>) target;
+            final MutableBagIterable<V> targetBag = (MutableBagIterable<V>) target;
 
             this.forEachWithOccurrences(new ObjectIntProcedure<T>()
             {
@@ -283,9 +284,9 @@ public abstract class AbstractBag<T>
             final P parameter,
             final R target)
     {
-        if (target instanceof MutableBag<?>)
+        if (target instanceof MutableBagIterable<?>)
         {
-            final MutableBag<V> targetBag = (MutableBag<V>) target;
+            final MutableBagIterable<V> targetBag = (MutableBagIterable<V>) target;
 
             this.forEachWithOccurrences(new ObjectIntProcedure<T>()
             {
@@ -318,9 +319,9 @@ public abstract class AbstractBag<T>
             final Function<? super T, ? extends V> function,
             final R target)
     {
-        if (target instanceof MutableBag<?>)
+        if (target instanceof MutableBagIterable<?>)
         {
-            final MutableBag<V> targetBag = (MutableBag<V>) target;
+            final MutableBagIterable<V> targetBag = (MutableBagIterable<V>) target;
 
             this.forEachWithOccurrences(new ObjectIntProcedure<T>()
             {
@@ -356,9 +357,9 @@ public abstract class AbstractBag<T>
     @Override
     public <V, R extends Collection<V>> R flatCollect(final Function<? super T, ? extends Iterable<V>> function, final R target)
     {
-        if (target instanceof MutableBag<?>)
+        if (target instanceof MutableBagIterable<?>)
         {
-            final MutableBag<V> targetBag = (MutableBag<V>) target;
+            final MutableBagIterable<V> targetBag = (MutableBagIterable<V>) target;
 
             this.forEachWithOccurrences(new ObjectIntProcedure<T>()
             {
