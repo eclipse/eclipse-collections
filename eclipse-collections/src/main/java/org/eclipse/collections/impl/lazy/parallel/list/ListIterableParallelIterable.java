@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -85,12 +85,6 @@ public final class ListIterableParallelIterable<T> extends AbstractParallelListI
     }
 
     @Override
-    public <V> ParallelListIterable<V> flatCollect(Function<? super T, ? extends Iterable<V>> function)
-    {
-        return new ParallelFlatCollectListIterable<T, V>(this, function);
-    }
-
-    @Override
     public Object[] toArray()
     {
         // TODO: Implement in parallel
@@ -125,6 +119,7 @@ public final class ListIterableParallelIterable<T> extends AbstractParallelListI
         return this.delegate.groupByUniqueKey(function);
     }
 
+    @Override
     public int getBatchSize()
     {
         return this.batchSize;
