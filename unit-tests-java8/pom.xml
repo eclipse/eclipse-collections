@@ -27,6 +27,9 @@
     <name>Eclipse Collections Java 8 Unit Test Suite</name>
 
     <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+
         <maven.deploy.skip>true</maven.deploy.skip>
     </properties>
 
@@ -60,7 +63,6 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.12</version>
             <scope>test</scope>
         </dependency>
 
@@ -74,7 +76,7 @@
         <dependency>
             <groupId>org.eclipse.collections</groupId>
             <artifactId>junit-trait-runner</artifactId>
-            <version>7.0.0</version>
+            <version>${project.version}</version>
             <scope>test</scope>
         </dependency>
 
@@ -101,17 +103,6 @@
 
     <build>
         <plugins>
-
-            <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                    <fork>true</fork>
-                    <maxmem>2048m</maxmem>
-                    <verbose>true</verbose>
-                </configuration>
-            </plugin>
 
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
