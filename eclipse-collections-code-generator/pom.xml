@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  ~ Copyright (c) 2015 Goldman Sachs.
+  ~ Copyright (c) 2016 Goldman Sachs.
   ~ All rights reserved. This program and the accompanying materials
   ~ are made available under the terms of the Eclipse Public License v1.0
   ~ and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -13,11 +13,15 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
+    <parent>
+        <artifactId>eclipse-collections-parent</artifactId>
+        <groupId>org.eclipse.collections</groupId>
+        <version>7.0.1-SNAPSHOT</version>
+    </parent>
+
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>eclipse-collections-code-generator</artifactId>
-    <groupId>org.eclipse.collections</groupId>
-    <version>7.0.0</version>
 
     <name>Eclipse Collections Code Generator</name>
 
@@ -26,6 +30,9 @@
 
         <clover.version>4.0.6</clover.version>
         <checkstyle.version>2.16</checkstyle.version>
+
+        <maven.compiler.source>1.5</maven.compiler.source>
+        <maven.compiler.target>1.5</maven.compiler.target>
 
         <maven.deploy.skip>true</maven.deploy.skip>
     </properties>
@@ -45,134 +52,8 @@
     </dependencies>
 
     <build>
-        <pluginManagement>
-            <plugins>
-
-                <plugin>
-                    <artifactId>maven-antrun-plugin</artifactId>
-                    <version>1.8</version>
-                </plugin>
-
-                <plugin>
-                    <artifactId>maven-assembly-plugin</artifactId>
-                    <version>2.5.5</version>
-                </plugin>
-
-                <plugin>
-                    <artifactId>maven-clean-plugin</artifactId>
-                    <version>2.6.1</version>
-                </plugin>
-
-                <plugin>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <version>2.5.1</version>
-                </plugin>
-
-                <plugin>
-                    <artifactId>maven-dependency-plugin</artifactId>
-                    <version>2.10</version>
-                </plugin>
-
-                <plugin>
-                    <artifactId>maven-deploy-plugin</artifactId>
-                    <version>2.8.2</version>
-                </plugin>
-
-                <plugin>
-                    <artifactId>maven-install-plugin</artifactId>
-                    <version>2.5.2</version>
-                </plugin>
-
-                <plugin>
-                    <artifactId>maven-jar-plugin</artifactId>
-                    <version>2.5</version>
-                </plugin>
-
-                <plugin>
-                    <artifactId>maven-javadoc-plugin</artifactId>
-                    <version>2.10.3</version>
-                </plugin>
-
-                <plugin>
-                    <artifactId>maven-release-plugin</artifactId>
-                    <version>3.0-r1585899</version>
-                </plugin>
-
-                <plugin>
-                    <artifactId>maven-resources-plugin</artifactId>
-                    <version>2.7</version>
-                </plugin>
-
-                <plugin>
-                    <artifactId>maven-site-plugin</artifactId>
-                    <version>3.4</version>
-                </plugin>
-
-                <plugin>
-                    <artifactId>maven-source-plugin</artifactId>
-                    <version>2.4</version>
-                </plugin>
-
-                <plugin>
-                    <artifactId>maven-enforcer-plugin</artifactId>
-                    <version>1.4.1</version>
-                </plugin>
-
-                <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>versions-maven-plugin</artifactId>
-                    <version>2.2</version>
-                </plugin>
-
-                <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>clirr-maven-plugin</artifactId>
-                    <version>2.7</version>
-                </plugin>
-
-                <plugin>
-                    <groupId>org.apache.felix</groupId>
-                    <artifactId>maven-bundle-plugin</artifactId>
-                    <version>3.0.0</version>
-                </plugin>
-
-                <plugin>
-                    <groupId>org.scala-tools</groupId>
-                    <artifactId>maven-scala-plugin</artifactId>
-                    <version>2.15.2</version>
-                </plugin>
-
-                <plugin>
-                    <artifactId>maven-surefire-plugin</artifactId>
-                    <version>2.18.1</version>
-                </plugin>
-
-                <plugin>
-                    <artifactId>maven-project-info-reports-plugin</artifactId>
-                    <version>2.8.1</version>
-                </plugin>
-
-                <plugin>
-                    <groupId>com.fortify.ps.maven.plugin</groupId>
-                    <artifactId>maven-sca-plugin</artifactId>
-                    <version>2.6</version>
-                </plugin>
-
-            </plugins>
-        </pluginManagement>
 
         <plugins>
-
-            <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.5</source>
-                    <target>1.5</target>
-                    <fork>true</fork>
-                    <maxmem>2048m</maxmem>
-                    <verbose>true</verbose>
-                </configuration>
-            </plugin>
 
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>

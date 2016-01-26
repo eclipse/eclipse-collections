@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  ~ Copyright (c) 2015 Goldman Sachs.
+  ~ Copyright (c) 2016 Goldman Sachs.
   ~ All rights reserved. This program and the accompanying materials
   ~ are made available under the terms of the Eclipse Public License v1.0
   ~ and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -18,7 +18,7 @@
 
     <groupId>org.eclipse.collections</groupId>
     <artifactId>eclipse-collections-parent</artifactId>
-    <version>7.0.0</version>
+    <version>7.0.1-SNAPSHOT</version>
 
     <packaging>pom</packaging>
 
@@ -98,12 +98,19 @@
         <clover.version>4.0.6</clover.version>
         <checkstyle.version>2.16</checkstyle.version>
         <scala.version>2.11.7</scala.version>
+
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.fork>true</maven.compiler.fork>
+        <maven.compiler.verbose>true</maven.compiler.verbose>
+        <maven.compiler.meminitial>2048m</maven.compiler.meminitial>
+        <maven.compiler.maxmem>2048m</maven.compiler.maxmem>
+
         <!--Sonar settings-->
         <sonar.language>java</sonar.language>
         <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
         <sonar.core.codeCoveragePlugin>clover</sonar.core.codeCoveragePlugin>
         <sonar.clover.version>${clover.version}</sonar.clover.version>
-        <maven.deploy.skip>true</maven.deploy.skip>
     </properties>
 
     <dependencyManagement>
@@ -171,12 +178,7 @@
 
                 <plugin>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>2.5.1</version>
-                    <configuration>
-                        <fork>true</fork>
-                        <maxmem>2048m</maxmem>
-                        <verbose>true</verbose>
-                    </configuration>
+                    <version>3.3</version>
                 </plugin>
 
                 <plugin>
@@ -278,12 +280,6 @@
                 <plugin>
                     <artifactId>maven-project-info-reports-plugin</artifactId>
                     <version>2.8.1</version>
-                </plugin>
-
-                <plugin>
-                    <groupId>com.fortify.ps.maven.plugin</groupId>
-                    <artifactId>maven-sca-plugin</artifactId>
-                    <version>2.6</version>
                 </plugin>
 
                 <plugin>
