@@ -7,6 +7,7 @@ If this is your first time contributing to an Eclipse Foundation project, you'll
 - Open your [Account Settings tab](https://dev.eclipse.org/site_login/myaccount.php#open_tab_accountsettings), enter your GitHub ID and click Update Account
 - Read and [sign the CLA](https://projects.eclipse.org/user/sign/cla)
 - Your git commits must use the same email address as your Eclipse account
+- Your git commits must be signed-off by the same user as your Eclipse account
 - [Sign your commits](https://wiki.eclipse.org/Development_Resources/Contributing_via_Git#Signing_off_on_a_commit)
 
 Issues
@@ -69,6 +70,10 @@ Commit messages
 
 - [Use the imperative mood][imperative-mood] as in "Fix bug" or "Add feature" rather than "Fixed bug" or "Added feature"
 - [Mention the GitHub issue][github-issue] when relevant
+- Sign-off your commits
+```bash
+$ git commit -s
+```
 - It's a good idea to follow the [advice in Pro Git](https://git-scm.com/book/ch5-2.html)
 
 Pull requests
