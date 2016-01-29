@@ -25,6 +25,12 @@ import org.eclipse.collections.api.multimap.list.MutableListMultimap;
 import org.eclipse.collections.api.multimap.set.ImmutableSetMultimap;
 import org.eclipse.collections.api.multimap.set.MutableSetMultimap;
 import org.eclipse.collections.api.multimap.set.SetMultimap;
+import org.eclipse.collections.api.multimap.sortedbag.ImmutableSortedBagMultimap;
+import org.eclipse.collections.api.multimap.sortedbag.MutableSortedBagMultimap;
+import org.eclipse.collections.api.multimap.sortedbag.SortedBagMultimap;
+import org.eclipse.collections.api.multimap.sortedset.ImmutableSortedSetMultimap;
+import org.eclipse.collections.api.multimap.sortedset.MutableSortedSetMultimap;
+import org.eclipse.collections.api.multimap.sortedset.SortedSetMultimap;
 import org.eclipse.collections.impl.bag.mutable.HashBag;
 import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.block.factory.IntegerPredicates;
@@ -35,8 +41,10 @@ import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.list.mutable.primitive.IntArrayList;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.multimap.bag.HashBagMultimap;
+import org.eclipse.collections.impl.multimap.bag.sorted.mutable.TreeBagMultimap;
 import org.eclipse.collections.impl.multimap.list.FastListMultimap;
 import org.eclipse.collections.impl.multimap.set.UnifiedSetMultimap;
+import org.eclipse.collections.impl.multimap.set.sorted.TreeSortedSetMultimap;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.set.sorted.mutable.TreeSortedSet;
 import org.eclipse.collections.impl.tuple.Tuples;
@@ -587,6 +595,168 @@ public class VerifyTest
             public void run()
             {
                 Verify.assertBagMultimapsEqual(multimap1, HashBagMultimap.newMultimap(Tuples.pair(1, "One"), Tuples.pair(2, "Two"), Tuples.pair(2, "TwoTwo"), Tuples.pair(3, "Three")));
+            }
+        });
+    }
+
+    @Test
+    public void assertSortedSetMultimapsEquals()
+    {
+        final SortedSetMultimap<Integer, Integer> multimap1 = TreeSortedSetMultimap.newMultimap(Tuples.pair(1, 1), Tuples.pair(2, 1), Tuples.pair(2, 2));
+        MutableSortedSetMultimap<Integer, Integer> multimap2 = null;
+        Verify.assertSortedSetMultimapsEqual(null, multimap2);
+        multimap2 = TreeSortedSetMultimap.newMultimap(Tuples.pair(2, 1), Tuples.pair(1, 1), Tuples.pair(2, 2));
+        Verify.assertSortedSetMultimapsEqual(multimap1, multimap2);
+
+        final MutableSortedSetMultimap<Integer, Integer> multimap3 = TreeSortedSetMultimap.newMultimap(Tuples.pair(1, 1), Tuples.pair(2, 1), Tuples.pair(2, 2), Tuples.pair(2, 2));
+        Verify.assertSortedSetMultimapsEqual(multimap1, multimap3);
+        Verify.assertSortedSetMultimapsEqual(multimap3, multimap2);
+        SortedSetMultimap<Integer, Integer> multimap4 = TreeSortedSetMultimap.newMultimap(Tuples.pair(2, 1), Tuples.pair(1, 1), Tuples.pair(2, 2)).toImmutable();
+        Verify.assertSortedSetMultimapsEqual(multimap3, multimap4);
+        Verify.assertSortedSetMultimapsEqual("message", multimap3.toImmutable(), multimap4);
+
+        final MutableSortedSetMultimap<Integer, Integer> multimap5 = TreeSortedSetMultimap.newMultimap(Comparators.reverseNaturalOrder());
+        multimap5.putAllPairs(Tuples.pair(2, 1), Tuples.pair(1, 1), Tuples.pair(2, 2));
+        MutableSortedSetMultimap<Integer, Integer> multimap6 = TreeSortedSetMultimap.newMultimap(Comparators.reverseNaturalOrder());
+        multimap6.putAllPairs(Tuples.pair(2, 1), Tuples.pair(1, 1), Tuples.pair(2, 2));
+        Verify.assertSortedSetMultimapsEqual(multimap5, multimap6);
+        Verify.assertSortedSetMultimapsEqual(multimap5, multimap6.toImmutable());
+        Verify.assertSortedSetMultimapsEqual(multimap5.toImmutable(), multimap6.toImmutable());
+
+        multimap3.put(2, 3);
+        Verify.assertError(AssertionError.class, new Runnable()
+        {
+            public void run()
+            {
+                Verify.assertSortedSetMultimapsEqual(multimap1, null);
+            }
+        });
+        Verify.assertError(AssertionError.class, new Runnable()
+        {
+            public void run()
+            {
+                Verify.assertSortedSetMultimapsEqual(multimap1, multimap3);
+            }
+        });
+        Verify.assertError(AssertionFailedError.class, new Runnable()
+        {
+            public void run()
+            {
+                Verify.assertSortedSetMultimapsEqual(multimap1, multimap5);
+            }
+        });
+        Verify.assertError(AssertionError.class, new Runnable()
+        {
+            public void run()
+            {
+                Verify.assertSortedSetMultimapsEqual("message", multimap1, TreeSortedSetMultimap.newMultimap(Tuples.pair(1, 2), Tuples.pair(2, 1), Tuples.pair(2, 2)));
+            }
+        });
+        Verify.assertError(AssertionError.class, new Runnable()
+        {
+            public void run()
+            {
+                Verify.assertSortedSetMultimapsEqual(multimap1, TreeSortedSetMultimap.newMultimap(Tuples.pair(3, 1), Tuples.pair(2, 1), Tuples.pair(2, 2)));
+            }
+        });
+        Verify.assertError(AssertionError.class, new Runnable()
+        {
+            public void run()
+            {
+                Verify.assertSortedSetMultimapsEqual(multimap1, TreeSortedSetMultimap.newMultimap(Tuples.pair(1, 1), Tuples.pair(2, 2), Tuples.pair(2, 3)));
+            }
+        });
+        Verify.assertError(AssertionError.class, new Runnable()
+        {
+            public void run()
+            {
+                Verify.assertSortedSetMultimapsEqual(multimap1, TreeSortedSetMultimap.newMultimap(Tuples.pair(1, 1), Tuples.pair(2, 1), Tuples.pair(2, 2), Tuples.pair(3, 1)));
+            }
+        });
+    }
+
+    @Test
+    public void assertSortedBagMultimapsEquals()
+    {
+        final SortedBagMultimap<Integer, Integer> multimap1 = TreeBagMultimap.newMultimap(Tuples.pair(1, 1), Tuples.pair(2, 1), Tuples.pair(2, 2));
+        MutableSortedBagMultimap<Integer, Integer> multimap2 = null;
+        Verify.assertSortedBagMultimapsEqual(null, multimap2);
+        multimap2 = TreeBagMultimap.newMultimap(Tuples.pair(2, 1), Tuples.pair(1, 1), Tuples.pair(2, 2));
+        Verify.assertSortedBagMultimapsEqual(multimap1, multimap2);
+
+        final MutableSortedBagMultimap<Integer, Integer> multimap3 = TreeBagMultimap.newMultimap(Tuples.pair(1, 1), Tuples.pair(2, 1), Tuples.pair(2, 2));
+        Verify.assertSortedBagMultimapsEqual(multimap1, multimap3);
+        multimap2.put(2, 2);
+        multimap3.put(2, 2);
+        Verify.assertSortedBagMultimapsEqual(multimap3, multimap2);
+        final ImmutableSortedBagMultimap<Integer, Integer> multimap4 = TreeBagMultimap.newMultimap(Tuples.pair(2, 1), Tuples.pair(1, 1), Tuples.pair(2, 2), Tuples.pair(2, 2)).toImmutable();
+        Verify.assertSortedBagMultimapsEqual(multimap3, multimap4);
+        Verify.assertSortedBagMultimapsEqual("message", multimap3.toImmutable(), multimap4);
+
+        final MutableSortedBagMultimap<Integer, Integer> multimap5 = TreeBagMultimap.newMultimap(Comparators.reverseNaturalOrder());
+        multimap5.putAllPairs(Tuples.pair(2, 1), Tuples.pair(1, 1), Tuples.pair(2, 2));
+        MutableSortedBagMultimap<Integer, Integer> multimap6 = TreeBagMultimap.newMultimap(Comparators.reverseNaturalOrder());
+        multimap6.putAllPairs(Tuples.pair(2, 1), Tuples.pair(1, 1), Tuples.pair(2, 2));
+        Verify.assertSortedBagMultimapsEqual(multimap5, multimap6);
+        Verify.assertSortedBagMultimapsEqual(multimap5, multimap6.toImmutable());
+        Verify.assertSortedBagMultimapsEqual(multimap5.toImmutable(), multimap6.toImmutable());
+
+        Verify.assertError(AssertionError.class, new Runnable()
+        {
+            public void run()
+            {
+                Verify.assertSortedBagMultimapsEqual(multimap1, null);
+            }
+        });
+        Verify.assertError(AssertionError.class, new Runnable()
+        {
+            public void run()
+            {
+                Verify.assertSortedBagMultimapsEqual(multimap1, multimap3);
+            }
+        });
+        Verify.assertError(AssertionFailedError.class, new Runnable()
+        {
+            public void run()
+            {
+                Verify.assertSortedBagMultimapsEqual(multimap1, multimap5);
+            }
+        });
+
+        multimap3.put(2, 3);
+        Verify.assertError(AssertionError.class, new Runnable()
+        {
+            public void run()
+            {
+                Verify.assertSortedBagMultimapsEqual(multimap3, multimap4);
+            }
+        });
+        Verify.assertError(AssertionError.class, new Runnable()
+        {
+            public void run()
+            {
+                Verify.assertSortedBagMultimapsEqual("message", multimap1, TreeBagMultimap.newMultimap(Tuples.pair(1, 2), Tuples.pair(2, 1), Tuples.pair(2, 2)));
+            }
+        });
+        Verify.assertError(AssertionError.class, new Runnable()
+        {
+            public void run()
+            {
+                Verify.assertSortedBagMultimapsEqual(multimap1, TreeBagMultimap.newMultimap(Tuples.pair(3, 1), Tuples.pair(2, 1), Tuples.pair(2, 2)));
+            }
+        });
+        Verify.assertError(AssertionError.class, new Runnable()
+        {
+            public void run()
+            {
+                Verify.assertSortedBagMultimapsEqual(multimap1, TreeBagMultimap.newMultimap(Tuples.pair(1, 1), Tuples.pair(2, 2), Tuples.pair(2, 2)));
+            }
+        });
+        Verify.assertError(AssertionError.class, new Runnable()
+        {
+            public void run()
+            {
+                Verify.assertSortedBagMultimapsEqual(multimap1, TreeBagMultimap.newMultimap(Tuples.pair(1, 1), Tuples.pair(2, 1), Tuples.pair(2, 2), Tuples.pair(3, 1)));
             }
         });
     }
