@@ -14,6 +14,7 @@ import org.eclipse.collections.api.collection.MutableCollection;
 import org.eclipse.collections.api.multimap.ImmutableMultimap;
 import org.eclipse.collections.api.multimap.bag.ImmutableBagMultimap;
 import org.eclipse.collections.api.multimap.list.ImmutableListMultimap;
+import org.eclipse.collections.api.multimap.list.MutableListMultimap;
 import org.eclipse.collections.api.multimap.sortedbag.ImmutableSortedBagMultimap;
 import org.eclipse.collections.api.multimap.sortedbag.MutableSortedBagMultimap;
 import org.eclipse.collections.impl.block.factory.Comparators;
@@ -70,33 +71,32 @@ public class ImmutableSortedBagMultimapImplTest extends AbstractImmutableMultima
     @Test
     public void collectValues()
     {
-        TreeBagMultimap<String, Integer> mutableMultimap = TreeBagMultimap.newMultimap(Comparators.<Integer>reverseNaturalOrder());
+        MutableSortedBagMultimap<String, Integer> mutableMultimap = TreeBagMultimap.newMultimap(Comparators.<Integer>reverseNaturalOrder());
         mutableMultimap.putAll("1", FastList.newListWith(4, 3, 2, 1, 1));
         mutableMultimap.putAll("2", FastList.newListWith(5, 4, 3, 2, 2));
         ImmutableSortedBagMultimap<String, Integer> immutableMap = mutableMultimap.toImmutable();
         ImmutableListMultimap<String, String> collectedMultimap = immutableMap.collectValues(value -> value + "Value");
-        FastListMultimap<String, String> expectedMultimap = FastListMultimap.<String, String>newMultimap();
+        MutableListMultimap<String, String> expectedMultimap = FastListMultimap.<String, String>newMultimap();
         expectedMultimap.putAll("1", FastList.newListWith("4Value", "3Value", "2Value", "1Value", "1Value"));
         expectedMultimap.putAll("2", FastList.newListWith("5Value", "4Value", "3Value", "2Value", "2Value"));
         ImmutableListMultimap<String, String> expectedImmutableMultimap = expectedMultimap.toImmutable();
-        Assert.assertEquals(expectedImmutableMultimap, collectedMultimap);
+        Verify.assertListMultimapsEqual(expectedImmutableMultimap, collectedMultimap);
     }
 
     @Override
     @Test
     public void rejectKeysMultiValues()
     {
-        TreeBagMultimap<Integer, Integer> multimap = TreeBagMultimap.newMultimap(Comparators.<Integer>reverseNaturalOrder());
+        MutableSortedBagMultimap<Integer, Integer> multimap = TreeBagMultimap.newMultimap(Comparators.<Integer>reverseNaturalOrder());
         multimap.putAll(1, FastList.newListWith(4, 3, 2, 1, 1));
         multimap.putAll(2, FastList.newListWith(5, 4, 3, 2, 2));
         multimap.putAll(3, FastList.newListWith(4, 3, 1, 1));
         multimap.putAll(4, FastList.newListWith(4, 3, 1));
         ImmutableSortedBagMultimap<Integer, Integer> immutableMultimap = multimap.toImmutable();
         ImmutableSortedBagMultimap<Integer, Integer> selectedMultimap = immutableMultimap.rejectKeysMultiValues((key, values) -> (key % 2 == 0 || Iterate.sizeOf(values) > 4));
-        TreeBagMultimap<Integer, Integer> expectedMultimap = TreeBagMultimap.newMultimap(Comparators.<Integer>reverseNaturalOrder());
+        MutableSortedBagMultimap<Integer, Integer> expectedMultimap = TreeBagMultimap.newMultimap(Comparators.<Integer>reverseNaturalOrder());
         expectedMultimap.putAll(3, FastList.newListWith(4, 3, 1, 1));
-        Assert.assertEquals(expectedMultimap, selectedMultimap);
-        Verify.assertSortedBagsEqual(expectedMultimap.toImmutable().get(3), selectedMultimap.get(3));
+        Verify.assertSortedBagMultimapsEqual(expectedMultimap, selectedMultimap);
         Assert.assertEquals(expectedMultimap.toImmutable().comparator(), selectedMultimap.comparator());
     }
 

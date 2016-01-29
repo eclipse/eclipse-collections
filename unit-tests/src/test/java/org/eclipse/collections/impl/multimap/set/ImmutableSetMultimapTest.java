@@ -22,6 +22,7 @@ import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.multimap.AbstractImmutableMultimapTestCase;
 import org.eclipse.collections.impl.multimap.bag.HashBagMultimap;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
+import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.Tuples;
 import org.eclipse.collections.impl.utility.Iterate;
 import org.junit.Assert;
@@ -87,7 +88,7 @@ public class ImmutableSetMultimapTest extends AbstractImmutableMultimapTestCase
         MutableSetMultimap<String, Integer> expectedMultimap = UnifiedSetMultimap.newMultimap();
         expectedMultimap.putAll("Two", FastList.newListWith(2, 4));
         ImmutableSetMultimap<String, Integer> expectedImmutableMultimap = expectedMultimap.toImmutable();
-        Assert.assertEquals(expectedImmutableMultimap, selectedMultimap);
+        Verify.assertSetMultimapsEqual(expectedImmutableMultimap, selectedMultimap);
     }
 
     @Override
@@ -102,7 +103,7 @@ public class ImmutableSetMultimapTest extends AbstractImmutableMultimapTestCase
         MutableSetMultimap<String, Integer> expectedMultimap = UnifiedSetMultimap.newMultimap();
         expectedMultimap.putAll("One", FastList.newListWith(1, 3));
         ImmutableSetMultimap<String, Integer> expectedImmutableMultimap = expectedMultimap.toImmutable();
-        Assert.assertEquals(expectedImmutableMultimap, rejectedMultimap);
+        Verify.assertSetMultimapsEqual(expectedImmutableMultimap, rejectedMultimap);
     }
 
     @Override
@@ -119,7 +120,7 @@ public class ImmutableSetMultimapTest extends AbstractImmutableMultimapTestCase
         MutableSetMultimap<Integer, String> expectedMultimap = UnifiedSetMultimap.newMultimap();
         expectedMultimap.putAll(2, FastList.newListWith("2", "3", "4", "5", "2"));
         ImmutableSetMultimap<Integer, String> expectedImmutableMultimap = expectedMultimap.toImmutable();
-        Assert.assertEquals(expectedImmutableMultimap, selectedMultimap);
+        Verify.assertSetMultimapsEqual(expectedImmutableMultimap, selectedMultimap);
     }
 
     @Override
@@ -136,7 +137,7 @@ public class ImmutableSetMultimapTest extends AbstractImmutableMultimapTestCase
         MutableSetMultimap<Integer, String> expectedMultimap = UnifiedSetMultimap.newMultimap();
         expectedMultimap.putAll(3, FastList.newListWith("2", "3", "4", "2"));
         ImmutableSetMultimap<Integer, String> expectedImmutableMultimap = expectedMultimap.toImmutable();
-        Assert.assertEquals(expectedImmutableMultimap, rejectedMultimap);
+        Verify.assertSetMultimapsEqual(expectedImmutableMultimap, rejectedMultimap);
     }
 
     @Override
@@ -152,14 +153,14 @@ public class ImmutableSetMultimapTest extends AbstractImmutableMultimapTestCase
         expectedMultimap.putAll(1, FastList.newListWith("1Value", "2Value", "3Value", "4Value"));
         expectedMultimap.putAll(2, FastList.newListWith("2Value", "3Value", "4Value", "5Value"));
         ImmutableBagMultimap<Integer, String> expectedImmutableMultimap = expectedMultimap.toImmutable();
-        Assert.assertEquals(expectedImmutableMultimap, collectedMultimap);
+        Verify.assertBagMultimapsEqual(expectedImmutableMultimap, collectedMultimap);
 
         ImmutableBagMultimap<Integer, String> collectedMultimap2 = immutableMap.collectKeysValues((key, value) -> Tuples.pair(1, value + "Value"));
         MutableBagMultimap<Integer, String> expectedMultimap2 = HashBagMultimap.newMultimap();
         expectedMultimap2.putAll(1, FastList.newListWith("1Value", "2Value", "3Value", "4Value"));
         expectedMultimap2.putAll(1, FastList.newListWith("2Value", "3Value", "4Value", "5Value"));
         ImmutableBagMultimap<Integer, String> expectedImmutableMultimap2 = expectedMultimap2.toImmutable();
-        Assert.assertEquals(expectedImmutableMultimap2, collectedMultimap2);
+        Verify.assertBagMultimapsEqual(expectedImmutableMultimap2, collectedMultimap2);
     }
 
     @Override
@@ -175,6 +176,6 @@ public class ImmutableSetMultimapTest extends AbstractImmutableMultimapTestCase
         expectedMultimap.putAll("1", FastList.newListWith("1Value", "2Value", "3Value", "4Value"));
         expectedMultimap.putAll("2", FastList.newListWith("2Value", "3Value", "4Value", "5Value"));
         ImmutableBagMultimap<String, String> expectedImmutableMultimap = expectedMultimap.toImmutable();
-        Assert.assertEquals(expectedImmutableMultimap, collectedMultimap);
+        Verify.assertBagMultimapsEqual(expectedImmutableMultimap, collectedMultimap);
     }
 }
