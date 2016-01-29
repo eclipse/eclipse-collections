@@ -15,7 +15,16 @@ import java.util.Map;
 import java.util.TreeSet;
 import java.util.concurrent.Callable;
 
+import junit.framework.AssertionFailedError;
+import org.eclipse.collections.api.multimap.bag.BagMultimap;
+import org.eclipse.collections.api.multimap.bag.ImmutableBagMultimap;
+import org.eclipse.collections.api.multimap.bag.MutableBagMultimap;
+import org.eclipse.collections.api.multimap.list.ImmutableListMultimap;
+import org.eclipse.collections.api.multimap.list.ListMultimap;
 import org.eclipse.collections.api.multimap.list.MutableListMultimap;
+import org.eclipse.collections.api.multimap.set.ImmutableSetMultimap;
+import org.eclipse.collections.api.multimap.set.MutableSetMultimap;
+import org.eclipse.collections.api.multimap.set.SetMultimap;
 import org.eclipse.collections.impl.bag.mutable.HashBag;
 import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.block.factory.IntegerPredicates;
@@ -25,7 +34,9 @@ import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.list.mutable.primitive.IntArrayList;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
+import org.eclipse.collections.impl.multimap.bag.HashBagMultimap;
 import org.eclipse.collections.impl.multimap.list.FastListMultimap;
+import org.eclipse.collections.impl.multimap.set.UnifiedSetMultimap;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.set.sorted.mutable.TreeSortedSet;
 import org.eclipse.collections.impl.tuple.Tuples;
@@ -375,6 +386,207 @@ public class VerifyTest
             public void run()
             {
                 Verify.assertBagsEqual("message", HashBag.newBagWith(1, 1, 2, 2, 4, 4), HashBag.newBagWith(1, 1, 2, 2, 3, 3));
+            }
+        });
+    }
+
+    @Test
+    public void assertListMultimapsEquals()
+    {
+        final ListMultimap<Integer, String> multimap1 = FastListMultimap.newMultimap(Tuples.pair(1, "One"), Tuples.pair(2, "Two"), Tuples.pair(2, "TwoTwo"));
+        MutableListMultimap<Integer, String> multimap2 = null;
+        Verify.assertListMultimapsEqual(null, multimap2);
+        multimap2 = FastListMultimap.newMultimap(Tuples.pair(2, "Two"), Tuples.pair(1, "One"), Tuples.pair(2, "TwoTwo"));
+        Verify.assertListMultimapsEqual(multimap1, multimap2);
+
+        final MutableListMultimap<Integer, String> multimap3 = FastListMultimap.newMultimap(Tuples.pair(1, "One"), Tuples.pair(2, "Two"), Tuples.pair(2, "TwoTwo"));
+        Verify.assertListMultimapsEqual(multimap1, multimap3);
+        multimap2.put(2, "TwoTwo");
+        multimap3.put(2, "TwoTwo");
+        Verify.assertListMultimapsEqual(multimap3, multimap2);
+        ImmutableListMultimap<Integer, String> multimap4 = FastListMultimap.newMultimap(Tuples.pair(2, "Two"), Tuples.pair(1, "One"), Tuples.pair(2, "TwoTwo"), Tuples.pair(2, "TwoTwo")).toImmutable();
+        Verify.assertListMultimapsEqual(multimap3, multimap4);
+        Verify.assertListMultimapsEqual("message", multimap3.toImmutable(), multimap4);
+
+        Verify.assertError(AssertionError.class, new Runnable()
+        {
+            public void run()
+            {
+                Verify.assertListMultimapsEqual(multimap1, null);
+            }
+        });
+        Verify.assertError(AssertionError.class, new Runnable()
+        {
+            public void run()
+            {
+                Verify.assertListMultimapsEqual(multimap1, multimap3);
+            }
+        });
+        Verify.assertError(AssertionFailedError.class, new Runnable()
+        {
+            public void run()
+            {
+                Verify.assertListMultimapsEqual("message", multimap1, FastListMultimap.newMultimap(Tuples.pair(1, "One"), Tuples.pair(2, "TwoTwo"), Tuples.pair(2, "Two")));
+            }
+        });
+        Verify.assertError(AssertionFailedError.class, new Runnable()
+        {
+            public void run()
+            {
+                Verify.assertListMultimapsEqual(multimap1, FastListMultimap.newMultimap(Tuples.pair(1, "OneOne"), Tuples.pair(2, "Two"), Tuples.pair(2, "TwoTwo")));
+            }
+        });
+        Verify.assertError(AssertionError.class, new Runnable()
+        {
+            public void run()
+            {
+                Verify.assertListMultimapsEqual(multimap1, FastListMultimap.newMultimap(Tuples.pair(3, "One"), Tuples.pair(2, "Two"), Tuples.pair(2, "TwoTwo")));
+            }
+        });
+        Verify.assertError(AssertionFailedError.class, new Runnable()
+        {
+            public void run()
+            {
+                Verify.assertListMultimapsEqual(multimap1, FastListMultimap.newMultimap(Tuples.pair(1, "OneOne"), Tuples.pair(2, "One"), Tuples.pair(2, "TwoTwo")));
+            }
+        });
+        Verify.assertError(AssertionError.class, new Runnable()
+        {
+            public void run()
+            {
+                Verify.assertListMultimapsEqual(multimap1, FastListMultimap.newMultimap(Tuples.pair(1, "One"), Tuples.pair(2, "Two"), Tuples.pair(2, "TwoTwo"), Tuples.pair(3, "Three")));
+            }
+        });
+    }
+
+    @Test
+    public void assertSetMultimapsEquals()
+    {
+        final SetMultimap<Integer, String> multimap1 = UnifiedSetMultimap.newMultimap(Tuples.pair(1, "One"), Tuples.pair(2, "Two"), Tuples.pair(2, "TwoTwo"));
+        MutableSetMultimap<Integer, String> multimap2 = null;
+        Verify.assertSetMultimapsEqual(null, multimap2);
+        multimap2 = UnifiedSetMultimap.newMultimap(Tuples.pair(2, "Two"), Tuples.pair(1, "One"), Tuples.pair(2, "TwoTwo"));
+        Verify.assertSetMultimapsEqual(multimap1, multimap2);
+
+        final MutableSetMultimap<Integer, String> multimap3 = UnifiedSetMultimap.newMultimap(Tuples.pair(1, "One"), Tuples.pair(2, "Two"), Tuples.pair(2, "TwoTwo"), Tuples.pair(2, "TwoTwo"));
+        Verify.assertSetMultimapsEqual(multimap1, multimap3);
+        Verify.assertSetMultimapsEqual(multimap3, multimap2);
+        ImmutableSetMultimap<Integer, String> multimap4 = UnifiedSetMultimap.newMultimap(Tuples.pair(2, "Two"), Tuples.pair(1, "One"), Tuples.pair(2, "TwoTwo")).toImmutable();
+        Verify.assertSetMultimapsEqual(multimap3, multimap4);
+        Verify.assertSetMultimapsEqual("message", multimap3.toImmutable(), multimap4);
+
+        multimap3.put(2, "TwoTwoTwo");
+        Verify.assertError(AssertionError.class, new Runnable()
+        {
+            public void run()
+            {
+                Verify.assertSetMultimapsEqual(multimap1, null);
+            }
+        });
+        Verify.assertError(AssertionError.class, new Runnable()
+        {
+            public void run()
+            {
+                Verify.assertSetMultimapsEqual(multimap1, multimap3);
+            }
+        });
+        Verify.assertError(AssertionFailedError.class, new Runnable()
+        {
+            public void run()
+            {
+                Verify.assertSetMultimapsEqual("message", multimap1, UnifiedSetMultimap.newMultimap(Tuples.pair(1, "OneOne"), Tuples.pair(2, "Two"), Tuples.pair(2, "TwoTwo")));
+            }
+        });
+        Verify.assertError(AssertionError.class, new Runnable()
+        {
+            public void run()
+            {
+                Verify.assertSetMultimapsEqual(multimap1, UnifiedSetMultimap.newMultimap(Tuples.pair(3, "One"), Tuples.pair(2, "Two"), Tuples.pair(2, "TwoTwo")));
+            }
+        });
+        Verify.assertError(AssertionFailedError.class, new Runnable()
+        {
+            public void run()
+            {
+                Verify.assertSetMultimapsEqual(multimap1, UnifiedSetMultimap.newMultimap(Tuples.pair(1, "One"), Tuples.pair(2, "One"), Tuples.pair(2, "TwoTwo")));
+            }
+        });
+        Verify.assertError(AssertionError.class, new Runnable()
+        {
+            public void run()
+            {
+                Verify.assertSetMultimapsEqual(multimap1, UnifiedSetMultimap.newMultimap(Tuples.pair(1, "One"), Tuples.pair(2, "Two"), Tuples.pair(2, "TwoTwo"), Tuples.pair(3, "Three")));
+            }
+        });
+    }
+
+    @Test
+    public void assertBagMultimapsEquals()
+    {
+        final BagMultimap<Integer, String> multimap1 = HashBagMultimap.newMultimap(Tuples.pair(1, "One"), Tuples.pair(2, "Two"), Tuples.pair(2, "TwoTwo"));
+        MutableBagMultimap<Integer, String> multimap2 = null;
+        Verify.assertBagMultimapsEqual(null, multimap2);
+        multimap2 = HashBagMultimap.newMultimap(Tuples.pair(2, "Two"), Tuples.pair(1, "One"), Tuples.pair(2, "TwoTwo"));
+        Verify.assertBagMultimapsEqual(multimap1, multimap2);
+
+        final MutableBagMultimap<Integer, String> multimap3 = HashBagMultimap.newMultimap(Tuples.pair(1, "One"), Tuples.pair(2, "Two"), Tuples.pair(2, "TwoTwo"));
+        Verify.assertBagMultimapsEqual(multimap1, multimap3);
+        multimap2.put(2, "TwoTwo");
+        multimap3.put(2, "TwoTwo");
+        Verify.assertBagMultimapsEqual(multimap3, multimap2);
+        final ImmutableBagMultimap<Integer, String> multimap4 = HashBagMultimap.newMultimap(Tuples.pair(2, "Two"), Tuples.pair(1, "One"), Tuples.pair(2, "TwoTwo"), Tuples.pair(2, "TwoTwo")).toImmutable();
+        Verify.assertBagMultimapsEqual(multimap3, multimap4);
+        Verify.assertBagMultimapsEqual("message", multimap3.toImmutable(), multimap4);
+
+        Verify.assertError(AssertionError.class, new Runnable()
+        {
+            public void run()
+            {
+                Verify.assertBagMultimapsEqual(multimap1, null);
+            }
+        });
+        Verify.assertError(AssertionError.class, new Runnable()
+        {
+            public void run()
+            {
+                Verify.assertBagMultimapsEqual(multimap1, multimap3);
+            }
+        });
+
+        multimap3.put(2, "TwoTwoTwo");
+        Verify.assertError(AssertionError.class, new Runnable()
+        {
+            public void run()
+            {
+                Verify.assertBagMultimapsEqual(multimap3, multimap4);
+            }
+        });
+        Verify.assertError(AssertionError.class, new Runnable()
+        {
+            public void run()
+            {
+                Verify.assertBagMultimapsEqual("message", multimap1, HashBagMultimap.newMultimap(Tuples.pair(1, "OneOne"), Tuples.pair(2, "Two"), Tuples.pair(2, "TwoTwo")));
+            }
+        });
+        Verify.assertError(AssertionError.class, new Runnable()
+        {
+            public void run()
+            {
+                Verify.assertBagMultimapsEqual(multimap1, HashBagMultimap.newMultimap(Tuples.pair(3, "One"), Tuples.pair(2, "Two"), Tuples.pair(2, "TwoTwo")));
+            }
+        });
+        Verify.assertError(AssertionError.class, new Runnable()
+        {
+            public void run()
+            {
+                Verify.assertBagMultimapsEqual(multimap1, HashBagMultimap.newMultimap(Tuples.pair(1, "One"), Tuples.pair(2, "One"), Tuples.pair(2, "TwoTwo")));
+            }
+        });
+        Verify.assertError(AssertionError.class, new Runnable()
+        {
+            public void run()
+            {
+                Verify.assertBagMultimapsEqual(multimap1, HashBagMultimap.newMultimap(Tuples.pair(1, "One"), Tuples.pair(2, "Two"), Tuples.pair(2, "TwoTwo"), Tuples.pair(3, "Three")));
             }
         });
     }
