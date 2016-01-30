@@ -2374,6 +2374,7 @@ public final class Verify extends Assert
             {
                 Verify.assertListsEqual(multimapName + " value list for key:" + key, (List<V>) expectedListMultimap.get(key), (List<V>) actualListMultimap.get(key));
             }
+            Assert.assertEquals(multimapName, expectedListMultimap, actualListMultimap);
         }
         catch (AssertionError e)
         {
@@ -2412,6 +2413,7 @@ public final class Verify extends Assert
             {
                 Verify.assertSetsEqual(multimapName + " value set for key:" + key, (Set<V>) expectedSetMultimap.get(key), (Set<V>) actualSetMultimap.get(key));
             }
+            Assert.assertEquals(multimapName, expectedSetMultimap, actualSetMultimap);
         }
         catch (AssertionError e)
         {
@@ -2450,6 +2452,7 @@ public final class Verify extends Assert
             {
                 Verify.assertBagsEqual(multimapName + " value bag for key:" + key, (Bag<V>) expectedBagMultimap.get(key), (Bag<V>) actualBagMultimap.get(key));
             }
+            Assert.assertEquals(multimapName, expectedBagMultimap, actualBagMultimap);
         }
         catch (AssertionError e)
         {
@@ -2488,6 +2491,7 @@ public final class Verify extends Assert
             {
                 Verify.assertSortedSetsEqual(multimapName + " value set for key:" + key, (SortedSet<V>) expectedSortedSetMultimap.get(key), (SortedSet<V>) actualSortedSetMultimap.get(key));
             }
+            Assert.assertEquals(multimapName, expectedSortedSetMultimap, actualSortedSetMultimap);
         }
         catch (AssertionError e)
         {
@@ -2526,6 +2530,7 @@ public final class Verify extends Assert
             {
                 Verify.assertSortedBagsEqual(multimapName + " value set for key:" + key, (SortedBag<V>) expectedSortedBagMultimap.get(key), (SortedBag<V>) actualSortedBagMultimap.get(key));
             }
+            Assert.assertEquals(multimapName, expectedSortedBagMultimap, actualSortedBagMultimap);
         }
         catch (AssertionError e)
         {
