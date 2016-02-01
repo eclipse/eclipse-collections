@@ -50,7 +50,6 @@ import org.junit.Test;
 import static org.eclipse.collections.impl.test.Verify.assertIterablesEqual;
 import static org.eclipse.collections.impl.test.Verify.assertThrows;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
@@ -110,7 +109,18 @@ public interface IterableTestCase
         }
 
         Assert.assertEquals(o1, o2);
-        IterableTestCase.checkNotSame(o1, o2);
+
+        assertFalse("Neither item should equal null", o1.equals(null));
+        assertFalse("Neither item should equal null", o2.equals(null));
+        assertNotEquals("Neither item should equal new Object()", o1.equals(new Object()));
+        assertNotEquals("Neither item should equal new Object()", o2.equals(new Object()));
+        Assert.assertEquals(o1, o1);
+        Assert.assertEquals(o2, o2);
+        Assert.assertEquals(o1, o2);
+        Assert.assertEquals(o2, o1);
+        Assert.assertEquals(o1.hashCode(), o2.hashCode());
+
+        checkNotSame(o1, o2);
 
         if (o1 instanceof MultiReaderFastList<?> || o2 instanceof MultiReaderFastList<?>)
         {
@@ -154,6 +164,19 @@ public interface IterableTestCase
             return;
         }
         assertNotSame(o1, o2);
+    }
+
+    static void assertNotEquals(Object o1, Object o2)
+    {
+        Assert.assertNotEquals(o1, o2);
+        Assert.assertNotEquals(o2, o1);
+
+        assertFalse("Neither item should equal null", o1.equals(null));
+        assertFalse("Neither item should equal null", o2.equals(null));
+        Assert.assertNotEquals("Neither item should equal new Object()", o1.equals(new Object()));
+        Assert.assertNotEquals("Neither item should equal new Object()", o2.equals(new Object()));
+        Assert.assertEquals(o1, o1);
+        Assert.assertEquals(o2, o2);
     }
 
     static <T> void addAllTo(T[] elements, MutableCollection<T> result)
