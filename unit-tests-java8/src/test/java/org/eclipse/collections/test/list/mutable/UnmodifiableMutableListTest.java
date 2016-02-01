@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -12,6 +12,7 @@ package org.eclipse.collections.test.list.mutable;
 
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.impl.list.mutable.FastList;
+import org.eclipse.collections.test.IterableTestCase;
 import org.eclipse.junit.runners.Java8Runner;
 import org.junit.runner.RunWith;
 
@@ -22,6 +23,8 @@ public class UnmodifiableMutableListTest implements UnmodifiableMutableListTestC
     @Override
     public final <T> MutableList<T> newWith(T... elements)
     {
-        return FastList.newListWith(elements).asUnmodifiable();
+        MutableList<T> result = new FastList<>();
+        IterableTestCase.addAllTo(elements, result);
+        return result.asUnmodifiable();
     }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -10,13 +10,13 @@
 
 package org.eclipse.collections.test.bag.mutable.sorted;
 
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Iterator;
 
 import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
 import org.eclipse.collections.impl.bag.sorted.mutable.TreeBag;
 import org.eclipse.collections.impl.block.factory.Comparators;
+import org.eclipse.collections.test.IterableTestCase;
 import org.eclipse.junit.runners.Java8Runner;
 import org.junit.runner.RunWith;
 
@@ -27,7 +27,9 @@ public class TreeBagNoIteratorTest implements MutableSortedBagTestCase, OrderedI
     @Override
     public final <T> MutableSortedBag<T> newWith(T... elements)
     {
-        return new TreeBagNoIterator<>(Comparators.reverseNaturalOrder(), Arrays.asList(elements));
+        MutableSortedBag<T> result = new TreeBagNoIterator<>(Comparators.reverseNaturalOrder());
+        IterableTestCase.addAllTo(elements, result);
+        return result;
     }
 
     @Override
@@ -49,9 +51,9 @@ public class TreeBagNoIteratorTest implements MutableSortedBagTestCase, OrderedI
             // For serialization
         }
 
-        public TreeBagNoIterator(Comparator<? super T> comparator, Iterable<? extends T> iterable)
+        public TreeBagNoIterator(Comparator<? super T> comparator)
         {
-            super(comparator, iterable);
+            super(comparator);
         }
 
         @Override

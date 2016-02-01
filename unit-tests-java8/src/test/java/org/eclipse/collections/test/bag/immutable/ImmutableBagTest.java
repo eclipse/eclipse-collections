@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -11,7 +11,9 @@
 package org.eclipse.collections.test.bag.immutable;
 
 import org.eclipse.collections.api.bag.ImmutableBag;
+import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.impl.bag.mutable.HashBag;
+import org.eclipse.collections.test.IterableTestCase;
 import org.eclipse.junit.runners.Java8Runner;
 import org.junit.runner.RunWith;
 
@@ -22,6 +24,8 @@ public class ImmutableBagTest implements ImmutableBagTestCase
     @Override
     public final <T> ImmutableBag<T> newWith(T... elements)
     {
-        return HashBag.newBagWith(elements).toImmutable();
+        MutableBag<T> result = new HashBag<>();
+        IterableTestCase.addAllTo(elements, result);
+        return result.toImmutable();
     }
 }

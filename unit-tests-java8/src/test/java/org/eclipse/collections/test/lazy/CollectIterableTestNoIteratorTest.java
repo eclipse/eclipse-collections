@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -11,8 +11,10 @@
 package org.eclipse.collections.test.lazy;
 
 import org.eclipse.collections.api.LazyIterable;
+import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.impl.block.factory.Functions;
 import org.eclipse.collections.impl.lazy.CollectIterable;
+import org.eclipse.collections.test.IterableTestCase;
 import org.eclipse.collections.test.LazyNoIteratorTestCase;
 import org.eclipse.collections.test.list.mutable.FastListNoIterator;
 import org.eclipse.junit.runners.Java8Runner;
@@ -24,6 +26,8 @@ public class CollectIterableTestNoIteratorTest implements LazyNoIteratorTestCase
     @Override
     public <T> LazyIterable<T> newWith(T... elements)
     {
-        return new CollectIterable<>(new FastListNoIterator<T>().with(elements), Functions.identity());
+        MutableList<T> list = new FastListNoIterator<>();
+        IterableTestCase.addAllTo(elements, list);
+        return new CollectIterable<>(list, Functions.identity());
     }
 }

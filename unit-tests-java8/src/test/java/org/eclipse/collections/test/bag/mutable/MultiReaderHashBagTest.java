@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -16,6 +16,7 @@ import java.util.NoSuchElementException;
 import org.eclipse.collections.api.collection.MutableCollection;
 import org.eclipse.collections.impl.bag.mutable.MultiReaderHashBag;
 import org.eclipse.collections.impl.block.factory.Procedures;
+import org.eclipse.collections.test.IterableTestCase;
 import org.eclipse.collections.test.collection.mutable.MultiReaderMutableCollectionTestCase;
 import org.eclipse.junit.runners.Java8Runner;
 import org.junit.Test;
@@ -33,7 +34,9 @@ public class MultiReaderHashBagTest implements MutableBagTestCase, MultiReaderMu
     @Override
     public final <T> MultiReaderHashBag<T> newWith(T... elements)
     {
-        return MultiReaderHashBag.newBagWith(elements);
+        MultiReaderHashBag<T> result = MultiReaderHashBag.newBag();
+        IterableTestCase.addAllTo(elements, result);
+        return result;
     }
 
     @Test
