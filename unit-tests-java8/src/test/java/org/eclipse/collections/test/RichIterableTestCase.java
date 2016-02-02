@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -826,33 +826,43 @@ public interface RichIterableTestCase extends IterableTestCase
                 this.getExpectedFiltered(4, 4, 4, 4, 2, 2),
                 iterable.select(IntegerPredicates.isEven()));
 
-        assertEquals(
-                this.newMutableForFilter(4, 4, 4, 4, 2, 2),
-                iterable.select(IntegerPredicates.isEven(), this.<Integer>newMutableForFilter()));
+        {
+            MutableCollection<Integer> target = this.newMutableForFilter();
+            MutableCollection<Integer> result = iterable.select(IntegerPredicates.isEven(), target);
+            assertEquals(this.newMutableForFilter(4, 4, 4, 4, 2, 2), result);
+            assertSame(target, result);
+        }
 
         assertEquals(
                 this.getExpectedFiltered(4, 4, 4, 4, 3, 3, 3),
                 iterable.selectWith(Predicates2.greaterThan(), 2));
 
-        assertEquals(
-                this.newMutableForFilter(4, 4, 4, 4, 3, 3, 3),
-                iterable.selectWith(Predicates2.<Integer>greaterThan(), 2, this.<Integer>newMutableForFilter()));
+        {
+            MutableCollection<Integer> target = this.newMutableForFilter();
+            MutableCollection<Integer> result = iterable.selectWith(Predicates2.greaterThan(), 2, target);
+            assertEquals(this.newMutableForFilter(4, 4, 4, 4, 3, 3, 3), result);
+            assertSame(target, result);
+        }
 
         assertEquals(
                 this.getExpectedFiltered(4, 4, 4, 4, 2, 2),
                 iterable.reject(IntegerPredicates.isOdd()));
 
-        assertEquals(
-                this.newMutableForFilter(4, 4, 4, 4, 2, 2),
-                iterable.reject(IntegerPredicates.isOdd(), this.<Integer>newMutableForFilter()));
+        {
+            MutableCollection<Integer> target = this.newMutableForFilter();
+            MutableCollection<Integer> result = iterable.reject(IntegerPredicates.isOdd(), target);
+            assertEquals(this.newMutableForFilter(4, 4, 4, 4, 2, 2), result);
+            assertSame(target, result);
+        }
 
         assertEquals(
                 this.getExpectedFiltered(4, 4, 4, 4, 3, 3, 3),
                 iterable.rejectWith(Predicates2.lessThan(), 3));
 
-        assertEquals(
-                this.newMutableForFilter(4, 4, 4, 4, 3, 3, 3),
-                iterable.rejectWith(Predicates2.<Integer>lessThan(), 3, this.<Integer>newMutableForFilter()));
+        MutableCollection<Integer> target = this.newMutableForFilter();
+        MutableCollection<Integer> result = iterable.rejectWith(Predicates2.lessThan(), 3, target);
+        assertEquals(this.newMutableForFilter(4, 4, 4, 4, 3, 3, 3), result);
+        assertSame(target, result);
     }
 
     @Test
@@ -885,17 +895,21 @@ public interface RichIterableTestCase extends IterableTestCase
                 this.getExpectedTransformed(3, 3, 2, 2, 1, 1, 3, 3, 2, 2, 1, 1),
                 iterable.collect(i -> i % 10));
 
-        assertEquals(
-                this.newMutableForTransform(3, 3, 2, 2, 1, 1, 3, 3, 2, 2, 1, 1),
-                iterable.collect(i -> i % 10, this.newMutableForTransform()));
+        {
+            MutableCollection<Integer> target = this.newMutableForTransform();
+            MutableCollection<Integer> result = iterable.collect(i -> i % 10, target);
+            assertEquals(this.newMutableForTransform(3, 3, 2, 2, 1, 1, 3, 3, 2, 2, 1, 1), result);
+            assertSame(target, result);
+        }
 
         assertEquals(
                 this.getExpectedTransformed(3, 3, 2, 2, 1, 1, 3, 3, 2, 2, 1, 1),
                 iterable.collectWith((i, mod) -> i % mod, 10));
 
-        assertEquals(
-                this.newMutableForTransform(3, 3, 2, 2, 1, 1, 3, 3, 2, 2, 1, 1),
-                iterable.collectWith((i, mod) -> i % mod, 10, this.newMutableForTransform()));
+        MutableCollection<Integer> target = this.newMutableForTransform();
+        MutableCollection<Integer> result = iterable.collectWith((i, mod) -> i % mod, 10, target);
+        assertEquals(this.newMutableForTransform(3, 3, 2, 2, 1, 1, 3, 3, 2, 2, 1, 1), result);
+        assertSame(target, result);
     }
 
     @Test
@@ -907,9 +921,10 @@ public interface RichIterableTestCase extends IterableTestCase
                 this.getExpectedTransformed(3, 3, 1, 1, 3, 3, 1, 1),
                 iterable.collectIf(i -> i % 2 != 0, i -> i % 10));
 
-        assertEquals(
-                this.newMutableForTransform(3, 3, 1, 1, 3, 3, 1, 1),
-                iterable.collectIf(i -> i % 2 != 0, i -> i % 10, this.newMutableForTransform()));
+        MutableCollection<Integer> target = this.newMutableForTransform();
+        MutableCollection<Integer> result = iterable.collectIf(i -> i % 2 != 0, i -> i % 10, target);
+        assertEquals(this.newMutableForTransform(3, 3, 1, 1, 3, 3, 1, 1), result);
+        assertSame(target, result);
     }
 
     @Test
@@ -919,9 +934,12 @@ public interface RichIterableTestCase extends IterableTestCase
                 this.getExpectedBoolean(false, false, true, true, false, false),
                 this.newWith(3, 3, 2, 2, 1, 1).collectBoolean(each -> each % 2 == 0));
 
-        assertEquals(
-                this.newBooleanForTransform(false, false, true, true, false, false),
-                this.newWith(3, 3, 2, 2, 1, 1).collectBoolean(each -> each % 2 == 0, this.newBooleanForTransform()));
+        {
+            MutableBooleanCollection target = this.newBooleanForTransform();
+            MutableBooleanCollection result = this.newWith(3, 3, 2, 2, 1, 1).collectBoolean(each -> each % 2 == 0, target);
+            assertEquals(this.newBooleanForTransform(false, false, true, true, false, false), result);
+            assertSame(target, result);
+        }
 
         RichIterable<Integer> iterable = this.newWith(13, 13, 12, 12, 11, 11, 3, 3, 2, 2, 1, 1);
 
@@ -929,57 +947,76 @@ public interface RichIterableTestCase extends IterableTestCase
                 this.getExpectedByte((byte) 3, (byte) 3, (byte) 2, (byte) 2, (byte) 1, (byte) 1, (byte) 3, (byte) 3, (byte) 2, (byte) 2, (byte) 1, (byte) 1),
                 iterable.collectByte(each -> (byte) (each % 10)));
 
-        assertEquals(
-                this.newByteForTransform((byte) 3, (byte) 3, (byte) 2, (byte) 2, (byte) 1, (byte) 1, (byte) 3, (byte) 3, (byte) 2, (byte) 2, (byte) 1, (byte) 1),
-                iterable.collectByte(each -> (byte) (each % 10), this.newByteForTransform()));
+        {
+            MutableByteCollection target = this.newByteForTransform();
+            MutableByteCollection result = iterable.collectByte(each -> (byte) (each % 10), target);
+            assertEquals(this.newByteForTransform((byte) 3, (byte) 3, (byte) 2, (byte) 2, (byte) 1, (byte) 1, (byte) 3, (byte) 3, (byte) 2, (byte) 2, (byte) 1, (byte) 1), result);
+            assertSame(target, result);
+        }
 
         assertEquals(
                 this.getExpectedChar((char) 3, (char) 3, (char) 2, (char) 2, (char) 1, (char) 1, (char) 3, (char) 3, (char) 2, (char) 2, (char) 1, (char) 1),
                 iterable.collectChar(each -> (char) (each % 10)));
 
-        assertEquals(
-                this.newCharForTransform((char) 3, (char) 3, (char) 2, (char) 2, (char) 1, (char) 1, (char) 3, (char) 3, (char) 2, (char) 2, (char) 1, (char) 1),
-                iterable.collectChar(each -> (char) (each % 10), this.newCharForTransform()));
+        {
+            MutableCharCollection target = this.newCharForTransform();
+            MutableCharCollection result = iterable.collectChar(each -> (char) (each % 10), target);
+            assertEquals(this.newCharForTransform((char) 3, (char) 3, (char) 2, (char) 2, (char) 1, (char) 1, (char) 3, (char) 3, (char) 2, (char) 2, (char) 1, (char) 1), result);
+            assertSame(target, result);
+        }
 
         assertEquals(
                 this.getExpectedDouble(3.0, 3.0, 2.0, 2.0, 1.0, 1.0, 3.0, 3.0, 2.0, 2.0, 1.0, 1.0),
                 iterable.collectDouble(each -> (double) (each % 10)));
 
-        assertEquals(
-                this.newDoubleForTransform(3.0, 3.0, 2.0, 2.0, 1.0, 1.0, 3.0, 3.0, 2.0, 2.0, 1.0, 1.0),
-                iterable.collectDouble(each -> (double) (each % 10), this.newDoubleForTransform()));
+        {
+            MutableDoubleCollection target = this.newDoubleForTransform();
+            MutableDoubleCollection result = iterable.collectDouble(each -> (double) (each % 10), target);
+            assertEquals(this.newDoubleForTransform(3.0, 3.0, 2.0, 2.0, 1.0, 1.0, 3.0, 3.0, 2.0, 2.0, 1.0, 1.0), result);
+            assertSame(target, result);
+        }
 
         assertEquals(
                 this.getExpectedFloat(3.0f, 3.0f, 2.0f, 2.0f, 1.0f, 1.0f, 3.0f, 3.0f, 2.0f, 2.0f, 1.0f, 1.0f),
                 iterable.collectFloat(each -> (float) (each % 10)));
 
-        assertEquals(
-                this.newFloatForTransform(3.0f, 3.0f, 2.0f, 2.0f, 1.0f, 1.0f, 3.0f, 3.0f, 2.0f, 2.0f, 1.0f, 1.0f),
-                iterable.collectFloat(each -> (float) (each % 10), this.newFloatForTransform()));
+        {
+            MutableFloatCollection target = this.newFloatForTransform();
+            MutableFloatCollection result = iterable.collectFloat(each -> (float) (each % 10), target);
+            assertEquals(this.newFloatForTransform(3.0f, 3.0f, 2.0f, 2.0f, 1.0f, 1.0f, 3.0f, 3.0f, 2.0f, 2.0f, 1.0f, 1.0f), result);
+            assertSame(target, result);
+        }
 
         assertEquals(
                 this.getExpectedInt(3, 3, 2, 2, 1, 1, 3, 3, 2, 2, 1, 1),
                 iterable.collectInt(each -> each % 10));
 
-        assertEquals(
-                this.newIntForTransform(3, 3, 2, 2, 1, 1, 3, 3, 2, 2, 1, 1),
-                iterable.collectInt(each -> each % 10, this.newIntForTransform()));
+        {
+            MutableIntCollection target = this.newIntForTransform();
+            MutableIntCollection result = iterable.collectInt(each -> each % 10, target);
+            assertEquals(this.newIntForTransform(3, 3, 2, 2, 1, 1, 3, 3, 2, 2, 1, 1), result);
+            assertSame(target, result);
+        }
 
         assertEquals(
                 this.getExpectedLong(3, 3, 2, 2, 1, 1, 3, 3, 2, 2, 1, 1),
                 iterable.collectLong(each -> each % 10));
 
-        assertEquals(
-                this.newLongForTransform(3, 3, 2, 2, 1, 1, 3, 3, 2, 2, 1, 1),
-                iterable.collectLong(each -> each % 10, this.newLongForTransform()));
+        {
+            MutableLongCollection target = this.newLongForTransform();
+            MutableLongCollection result = iterable.collectLong(each -> each % 10, target);
+            assertEquals(this.newLongForTransform(3, 3, 2, 2, 1, 1, 3, 3, 2, 2, 1, 1), result);
+            assertSame(target, result);
+        }
 
         assertEquals(
                 this.getExpectedShort((short) 3, (short) 3, (short) 2, (short) 2, (short) 1, (short) 1, (short) 3, (short) 3, (short) 2, (short) 2, (short) 1, (short) 1),
                 iterable.collectShort(each -> (short) (each % 10)));
 
-        assertEquals(
-                this.newShortForTransform((short) 3, (short) 3, (short) 2, (short) 2, (short) 1, (short) 1, (short) 3, (short) 3, (short) 2, (short) 2, (short) 1, (short) 1),
-                iterable.collectShort(each -> (short) (each % 10), this.newShortForTransform()));
+        MutableShortCollection target = this.newShortForTransform();
+        MutableShortCollection result = iterable.collectShort(each -> (short) (each % 10), target);
+        assertEquals(this.newShortForTransform((short) 3, (short) 3, (short) 2, (short) 2, (short) 1, (short) 1, (short) 3, (short) 3, (short) 2, (short) 2, (short) 1, (short) 1), result);
+        assertSame(target, result);
     }
 
     @Test
@@ -1157,10 +1194,10 @@ public interface RichIterableTestCase extends IterableTestCase
         assertEquals(expectedGroupBy, iterable.groupBy(groupByFunction).toMap());
 
         Function<Integer, Boolean> function = (Integer object) -> true;
-        MutableMultimap<Boolean, Integer> multimap2 = iterable.groupBy(
-                groupByFunction,
-                this.<Integer>newWith().groupBy(function).toMutable());
+        MutableMultimap<Boolean, Integer> target = this.<Integer>newWith().groupBy(function).toMutable();
+        MutableMultimap<Boolean, Integer> multimap2 = iterable.groupBy(groupByFunction, target);
         assertEquals(expectedGroupBy, multimap2.toMap());
+        assertSame(target, multimap2);
 
         Function<Integer, Iterable<Integer>> groupByEachFunction = integer -> Interval.fromTo(-1, -integer);
 
@@ -1173,9 +1210,10 @@ public interface RichIterableTestCase extends IterableTestCase
 
         assertEquals(expectedGroupByEach, iterable.groupByEach(groupByEachFunction).toMap());
 
-        Multimap<Integer, Integer> actualWithTarget =
-                iterable.groupByEach(groupByEachFunction, this.<Integer>newWith().groupByEach(groupByEachFunction).toMutable());
+        MutableMultimap<Integer, Integer> target2 = this.<Integer>newWith().groupByEach(groupByEachFunction).toMutable();
+        Multimap<Integer, Integer> actualWithTarget = iterable.groupByEach(groupByEachFunction, target2);
         assertEquals(expectedGroupByEach, actualWithTarget.toMap());
+        assertSame(target2, actualWithTarget);
     }
 
     @Test
