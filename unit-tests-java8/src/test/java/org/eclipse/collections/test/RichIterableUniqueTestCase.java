@@ -55,6 +55,7 @@ import static org.eclipse.collections.test.IterableTestCase.assertEquals;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertSame;
+import static org.junit.Assert.fail;
 
 public interface RichIterableUniqueTestCase extends RichIterableTestCase
 {
@@ -100,10 +101,26 @@ public interface RichIterableUniqueTestCase extends RichIterableTestCase
     @Test
     default void InternalIterable_forEach()
     {
-        RichIterable<Integer> iterable = this.newWith(3, 2, 1);
+        {
+            RichIterable<Integer> iterable = this.newWith(3, 2, 1);
+            MutableCollection<Integer> result = this.newMutableForFilter();
+            iterable.forEach(Procedures.cast(i -> result.add(i + 10)));
+            assertEquals(this.newMutableForFilter(13, 12, 11), result);
+        }
+
+        {
+            RichIterable<Integer> iterable = this.newWith(2, 1);
+            MutableCollection<Integer> result = this.newMutableForFilter();
+            iterable.forEach(Procedures.cast(i -> result.add(i + 10)));
+            assertEquals(this.newMutableForFilter(12, 11), result);
+        }
+
+        RichIterable<Integer> iterable = this.newWith(1);
         MutableCollection<Integer> result = this.newMutableForFilter();
         iterable.forEach(Procedures.cast(i -> result.add(i + 10)));
-        assertEquals(this.newMutableForFilter(13, 12, 11), result);
+        assertEquals(this.newMutableForFilter(11), result);
+
+        this.newWith().forEach(Procedures.cast(each -> fail()));
     }
 
     @Override
