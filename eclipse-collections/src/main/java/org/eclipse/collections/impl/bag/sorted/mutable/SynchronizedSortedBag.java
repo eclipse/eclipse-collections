@@ -161,11 +161,11 @@ public class SynchronizedSortedBag<T>
         return new SynchronizedCollectionSerializationProxy<T>(this.getDelegate());
     }
 
-    public void addOccurrences(T item, int occurrences)
+    public int addOccurrences(T item, int occurrences)
     {
         synchronized (this.getLock())
         {
-            this.getDelegate().addOccurrences(item, occurrences);
+            return this.getDelegate().addOccurrences(item, occurrences);
         }
     }
 

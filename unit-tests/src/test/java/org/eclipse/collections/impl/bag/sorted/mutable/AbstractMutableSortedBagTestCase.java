@@ -888,20 +888,20 @@ public abstract class AbstractMutableSortedBagTestCase extends MutableBagTestCas
         super.addOccurrences();
 
         MutableSortedBag<Integer> bag = this.newWith();
-        bag.addOccurrences(0, 3);
-        bag.addOccurrences(2, 0);
-        bag.addOccurrences(1, 2);
+        Assert.assertEquals(3, bag.addOccurrences(0, 3));
+        Assert.assertEquals(0, bag.addOccurrences(2, 0));
+        Assert.assertEquals(2, bag.addOccurrences(1, 2));
         Verify.assertSortedBagsEqual(TreeBag.newBagWith(0, 0, 0, 1, 1), bag);
-        bag.addOccurrences(0, 3);
-        bag.addOccurrences(1, 2);
+        Assert.assertEquals(6, bag.addOccurrences(0, 3));
+        Assert.assertEquals(4, bag.addOccurrences(1, 2));
         Verify.assertSortedBagsEqual(TreeBag.newBagWith(0, 0, 0, 0, 0, 0, 1, 1, 1, 1), bag);
 
         MutableSortedBag<Integer> revBag = this.newWith(Collections.<Integer>reverseOrder());
-        revBag.addOccurrences(2, 3);
-        revBag.addOccurrences(3, 2);
+        Assert.assertEquals(3, revBag.addOccurrences(2, 3));
+        Assert.assertEquals(2, revBag.addOccurrences(3, 2));
         Verify.assertSortedBagsEqual(TreeBag.newBagWith(Collections.reverseOrder(), 3, 3, 2, 2, 2), revBag);
-        revBag.addOccurrences(2, 3);
-        revBag.addOccurrences(3, 2);
+        Assert.assertEquals(6, revBag.addOccurrences(2, 3));
+        Assert.assertEquals(4, revBag.addOccurrences(3, 2));
         Verify.assertSortedBagsEqual(TreeBag.newBagWith(Collections.reverseOrder(), 3, 3, 3, 3, 2, 2, 2, 2, 2, 2), revBag);
     }
 

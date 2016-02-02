@@ -90,10 +90,14 @@ public class MultiReaderHashBagTest extends MultiReaderMutableCollectionTestCase
     public void addOccurrences()
     {
         MultiReaderHashBag<Integer> bag = MultiReaderHashBag.newBagWith(1, 1, 2, 3);
-        bag.addOccurrences(1, 2);
-        bag.addOccurrences(4, 2);
-        bag.addOccurrences(2, 1);
+        Assert.assertEquals(2, bag.addOccurrences(1, 0));
+        Assert.assertEquals(4, bag.addOccurrences(1, 2));
+        Assert.assertEquals(0, bag.addOccurrences(4, 0));
+        Assert.assertEquals(2, bag.addOccurrences(4, 2));
+        Assert.assertEquals(2, bag.addOccurrences(2, 1));
         MutableBagTestCase.assertBagsEqual(HashBag.newBagWith(1, 1, 1, 1, 2, 2, 3, 4, 4), bag);
+        Assert.assertEquals(3, bag.addOccurrences(2, 1));
+        MutableBagTestCase.assertBagsEqual(HashBag.newBagWith(1, 1, 1, 1, 2, 2, 2, 3, 4, 4), bag);
     }
 
     @Test(expected = IllegalArgumentException.class)

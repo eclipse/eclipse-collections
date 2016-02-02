@@ -275,7 +275,7 @@ public class UnmodifiableBag<T>
         return this.getMutableBag().groupByEach(function);
     }
 
-    public void addOccurrences(T item, int occurrences)
+    public int addOccurrences(T item, int occurrences)
     {
         throw new UnsupportedOperationException("Cannot call addOccurrences() on " + this.getClass().getSimpleName());
     }

@@ -127,7 +127,7 @@ public class UnmodifiableSortedBag<T>
         return this.getSortedBag().newEmpty();
     }
 
-    public void addOccurrences(T item, int occurrences)
+    public int addOccurrences(T item, int occurrences)
     {
         throw new UnsupportedOperationException("Cannot call addOccurrences() on " + this.getClass().getSimpleName());
     }

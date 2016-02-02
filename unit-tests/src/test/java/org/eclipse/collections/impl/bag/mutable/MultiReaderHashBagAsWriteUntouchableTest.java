@@ -39,9 +39,12 @@ public class MultiReaderHashBagAsWriteUntouchableTest extends AbstractCollection
     @Test
     public void addOccurrences()
     {
-        MutableBag<Integer> bag = MultiReaderHashBag.newBagWith(1, 1);
-        bag.addOccurrences(1, 2);
+        MutableBag<Integer> bag = this.newWith(1, 1);
+        Assert.assertEquals(4, bag.addOccurrences(1, 2));
         MutableBagTestCase.assertBagsEqual(HashBag.newBagWith(1, 1, 1, 1), bag);
+        Assert.assertEquals(0, bag.addOccurrences(2, 0));
+        Assert.assertEquals(2, bag.addOccurrences(2, 2));
+        MutableBagTestCase.assertBagsEqual(HashBag.newBagWith(1, 1, 1, 1, 2, 2), bag);
     }
 
     @Override
