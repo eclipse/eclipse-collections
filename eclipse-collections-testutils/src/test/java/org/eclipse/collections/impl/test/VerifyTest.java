@@ -673,6 +673,22 @@ public class VerifyTest
     }
 
     @Test
+    public void assertNotInstanceOf()
+    {
+        Verify.assertNotInstanceOf(Integer.class, 1L);
+
+        try
+        {
+            Verify.assertNotInstanceOf(Integer.class, 1);
+            Assert.fail();
+        }
+        catch (AssertionError e)
+        {
+            Verify.assertContains(VerifyTest.class.getName(), e.getStackTrace()[0].toString());
+        }
+    }
+
+    @Test
     public void assertSortedSetsEqual()
     {
         TreeSortedSet<Integer> integers = TreeSortedSet.newSetWith(Comparators.<Integer>reverseNaturalOrder(), 1, 2, 3, 4);

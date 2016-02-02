@@ -786,6 +786,39 @@ public final class Verify extends Assert
     }
 
     /**
+     * Assert that the given object is not an instanceof expectedClassType.
+     */
+    public static void assertNotInstanceOf(Class<?> expectedClassType, Object actualObject)
+    {
+        try
+        {
+            Verify.assertNotInstanceOf(actualObject.getClass().getName(), expectedClassType, actualObject);
+        }
+        catch (AssertionError e)
+        {
+            Verify.throwMangledException(e);
+        }
+    }
+
+    /**
+     * Assert that the given object is not an instanceof expectedClassType.
+     */
+    public static void assertNotInstanceOf(String objectName, Class<?> expectedClassType, Object actualObject)
+    {
+        try
+        {
+            if (expectedClassType.isInstance(actualObject))
+            {
+                Assert.fail(objectName + " is an instance of " + expectedClassType.getName());
+            }
+        }
+        catch (AssertionError e)
+        {
+            Verify.throwMangledException(e);
+        }
+    }
+
+    /**
      * Assert that the given {@link Map} is empty.
      */
     public static void assertEmpty(Map<?, ?> actualMap)
