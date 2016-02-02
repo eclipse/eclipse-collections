@@ -78,8 +78,7 @@ public abstract class AbstractMutableSetMultimapTestCase extends AbstractMutable
         MutableSetMultimap<String, Integer> selectedMultimap = multimap.selectKeysValues((key, value) -> ("Two".equals(key) && (value % 2 == 0)));
         MutableSetMultimap<String, Integer> expectedMultimap = UnifiedSetMultimap.newMultimap();
         expectedMultimap.putAll("Two", FastList.newListWith(2, 4));
-        Assert.assertEquals(expectedMultimap, selectedMultimap);
-        Verify.assertSetsEqual(expectedMultimap.get("Two"), selectedMultimap.get("Two"));
+        Verify.assertSetMultimapsEqual(expectedMultimap, selectedMultimap);
     }
 
     @Override
@@ -92,8 +91,7 @@ public abstract class AbstractMutableSetMultimapTestCase extends AbstractMutable
         MutableSetMultimap<String, Integer> rejectedMultimap = multimap.rejectKeysValues((key, value) -> ("Two".equals(key) || (value % 2 == 0)));
         MutableSetMultimap<String, Integer> expectedMultimap = UnifiedSetMultimap.newMultimap();
         expectedMultimap.putAll("One", FastList.newListWith(1, 3));
-        Assert.assertEquals(expectedMultimap, rejectedMultimap);
-        Verify.assertSetsEqual(expectedMultimap.get("One"), rejectedMultimap.get("One"));
+        Verify.assertSetMultimapsEqual(expectedMultimap, rejectedMultimap);
     }
 
     @Override
@@ -110,8 +108,7 @@ public abstract class AbstractMutableSetMultimapTestCase extends AbstractMutable
         MutableSetMultimap<Integer, String> selectedMultimap = multimap.selectKeysMultiValues((key, values) -> (key % 2 == 0 && Iterate.sizeOf(values) > 3));
         MutableSetMultimap<Integer, String> expectedMultimap = UnifiedSetMultimap.newMultimap();
         expectedMultimap.putAll(2, FastList.newListWith("2", "3", "4", "5", "2"));
-        Assert.assertEquals(expectedMultimap, selectedMultimap);
-        Verify.assertSetsEqual(expectedMultimap.get(2), selectedMultimap.get(2));
+        Verify.assertSetMultimapsEqual(expectedMultimap, selectedMultimap);
     }
 
     @Override
@@ -128,8 +125,7 @@ public abstract class AbstractMutableSetMultimapTestCase extends AbstractMutable
         MutableSetMultimap<Integer, String> rejectedMultimap = multimap.rejectKeysMultiValues((key, values) -> (key % 2 == 0 || Iterate.sizeOf(values) > 4));
         MutableSetMultimap<Integer, String> expectedMultimap = UnifiedSetMultimap.newMultimap();
         expectedMultimap.putAll(3, FastList.newListWith("2", "3", "4", "2"));
-        Assert.assertEquals(expectedMultimap, rejectedMultimap);
-        Verify.assertSetsEqual(expectedMultimap.get(3), rejectedMultimap.get(3));
+        Verify.assertSetMultimapsEqual(expectedMultimap, rejectedMultimap);
     }
 
     @Override
@@ -143,16 +139,13 @@ public abstract class AbstractMutableSetMultimapTestCase extends AbstractMutable
         MutableBagMultimap<Integer, String> expectedMultimap1 = HashBagMultimap.newMultimap();
         expectedMultimap1.putAll(1, FastList.newListWith("1Value", "2Value", "3Value", "4Value"));
         expectedMultimap1.putAll(2, FastList.newListWith("2Value", "3Value", "4Value", "5Value"));
-        Assert.assertEquals(expectedMultimap1, collectedMultimap1);
-        Assert.assertEquals(expectedMultimap1.get(1), collectedMultimap1.get(1));
-        Assert.assertEquals(expectedMultimap1.get(2), collectedMultimap1.get(2));
+        Verify.assertBagMultimapsEqual(expectedMultimap1, collectedMultimap1);
 
         MutableBagMultimap<Integer, String> collectedMultimap2 = multimap.collectKeysValues((key, value) -> Tuples.pair(1, value + "Value"));
         MutableBagMultimap<Integer, String> expectedMultimap2 = HashBagMultimap.newMultimap();
         expectedMultimap2.putAll(1, FastList.newListWith("1Value", "2Value", "3Value", "4Value"));
         expectedMultimap2.putAll(1, FastList.newListWith("2Value", "3Value", "4Value", "5Value"));
-        Assert.assertEquals(expectedMultimap2, collectedMultimap2);
-        Assert.assertEquals(expectedMultimap2.get(1), collectedMultimap2.get(1));
+        Verify.assertBagMultimapsEqual(expectedMultimap2, collectedMultimap2);
     }
 
     @Override
@@ -166,8 +159,6 @@ public abstract class AbstractMutableSetMultimapTestCase extends AbstractMutable
         MutableBagMultimap<String, String> expectedMultimap = HashBagMultimap.newMultimap();
         expectedMultimap.putAll("1", FastList.newListWith("1Value", "2Value", "3Value", "4Value"));
         expectedMultimap.putAll("2", FastList.newListWith("2Value", "3Value", "4Value", "5Value"));
-        Assert.assertEquals(expectedMultimap, collectedMultimap);
-        Assert.assertEquals(expectedMultimap.get("1"), collectedMultimap.get("1"));
-        Assert.assertEquals(expectedMultimap.get("2"), collectedMultimap.get("2"));
+        Verify.assertBagMultimapsEqual(expectedMultimap, collectedMultimap);
     }
 }

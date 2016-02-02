@@ -44,6 +44,11 @@ import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.MutableMapIterable;
 import org.eclipse.collections.api.map.sorted.SortedMapIterable;
 import org.eclipse.collections.api.multimap.Multimap;
+import org.eclipse.collections.api.multimap.bag.BagMultimap;
+import org.eclipse.collections.api.multimap.list.ListMultimap;
+import org.eclipse.collections.api.multimap.set.SetMultimap;
+import org.eclipse.collections.api.multimap.sortedbag.SortedBagMultimap;
+import org.eclipse.collections.api.multimap.sortedset.SortedSetMultimap;
 import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.impl.block.factory.Comparators;
@@ -2331,6 +2336,201 @@ public final class Verify extends Assert
                     Assert.assertEquals("Occurrences of " + expectedKey, expectedValue, actualValue);
                 }
             });
+        }
+        catch (AssertionError e)
+        {
+            Verify.throwMangledException(e);
+        }
+    }
+
+    public static <K, V> void assertListMultimapsEqual(ListMultimap<K, V> expectedListMultimap, ListMultimap<K, V> actualListMultimap)
+    {
+        try
+        {
+            Verify.assertListMultimapsEqual("ListMultimap", expectedListMultimap, actualListMultimap);
+        }
+        catch (AssertionError e)
+        {
+            Verify.throwMangledException(e);
+        }
+    }
+
+    public static <K, V> void assertListMultimapsEqual(String multimapName, ListMultimap<K, V> expectedListMultimap, ListMultimap<K, V> actualListMultimap)
+    {
+        try
+        {
+            if (expectedListMultimap == null)
+            {
+                Assert.assertNull(multimapName + " should be null", actualListMultimap);
+                return;
+            }
+
+            Assert.assertNotNull(multimapName + " should not be null", actualListMultimap);
+
+            Assert.assertEquals(multimapName + " size", expectedListMultimap.size(), actualListMultimap.size());
+            Verify.assertBagsEqual(multimapName + " keyBag", expectedListMultimap.keyBag(), actualListMultimap.keyBag());
+
+            for (K key : expectedListMultimap.keysView())
+            {
+                Verify.assertListsEqual(multimapName + " value list for key:" + key, (List<V>) expectedListMultimap.get(key), (List<V>) actualListMultimap.get(key));
+            }
+            Assert.assertEquals(multimapName, expectedListMultimap, actualListMultimap);
+        }
+        catch (AssertionError e)
+        {
+            Verify.throwMangledException(e);
+        }
+    }
+
+    public static <K, V> void assertSetMultimapsEqual(SetMultimap<K, V> expectedSetMultimap, SetMultimap<K, V> actualSetMultimap)
+    {
+        try
+        {
+            Verify.assertSetMultimapsEqual("SetMultimap", expectedSetMultimap, actualSetMultimap);
+        }
+        catch (AssertionError e)
+        {
+            Verify.throwMangledException(e);
+        }
+    }
+
+    public static <K, V> void assertSetMultimapsEqual(String multimapName, SetMultimap<K, V> expectedSetMultimap, SetMultimap<K, V> actualSetMultimap)
+    {
+        try
+        {
+            if (expectedSetMultimap == null)
+            {
+                Assert.assertNull(multimapName + " should be null", actualSetMultimap);
+                return;
+            }
+
+            Assert.assertNotNull(multimapName + " should not be null", actualSetMultimap);
+
+            Assert.assertEquals(multimapName + " size", expectedSetMultimap.size(), actualSetMultimap.size());
+            Verify.assertBagsEqual(multimapName + " keyBag", expectedSetMultimap.keyBag(), actualSetMultimap.keyBag());
+
+            for (K key : expectedSetMultimap.keysView())
+            {
+                Verify.assertSetsEqual(multimapName + " value set for key:" + key, (Set<V>) expectedSetMultimap.get(key), (Set<V>) actualSetMultimap.get(key));
+            }
+            Assert.assertEquals(multimapName, expectedSetMultimap, actualSetMultimap);
+        }
+        catch (AssertionError e)
+        {
+            Verify.throwMangledException(e);
+        }
+    }
+
+    public static <K, V> void assertBagMultimapsEqual(BagMultimap<K, V> expectedBagMultimap, BagMultimap<K, V> actualBagMultimap)
+    {
+        try
+        {
+            Verify.assertBagMultimapsEqual("BagMultimap", expectedBagMultimap, actualBagMultimap);
+        }
+        catch (AssertionError e)
+        {
+            Verify.throwMangledException(e);
+        }
+    }
+
+    public static <K, V> void assertBagMultimapsEqual(String multimapName, BagMultimap<K, V> expectedBagMultimap, BagMultimap<K, V> actualBagMultimap)
+    {
+        try
+        {
+            if (expectedBagMultimap == null)
+            {
+                Assert.assertNull(multimapName + " should be null", actualBagMultimap);
+                return;
+            }
+
+            Assert.assertNotNull(multimapName + " should not be null", actualBagMultimap);
+
+            Assert.assertEquals(multimapName + " size", expectedBagMultimap.size(), actualBagMultimap.size());
+            Verify.assertBagsEqual(multimapName + " keyBag", expectedBagMultimap.keyBag(), actualBagMultimap.keyBag());
+
+            for (K key : expectedBagMultimap.keysView())
+            {
+                Verify.assertBagsEqual(multimapName + " value bag for key:" + key, (Bag<V>) expectedBagMultimap.get(key), (Bag<V>) actualBagMultimap.get(key));
+            }
+            Assert.assertEquals(multimapName, expectedBagMultimap, actualBagMultimap);
+        }
+        catch (AssertionError e)
+        {
+            Verify.throwMangledException(e);
+        }
+    }
+
+    public static <K, V> void assertSortedSetMultimapsEqual(SortedSetMultimap<K, V> expectedSortedSetMultimap, SortedSetMultimap<K, V> actualSortedSetMultimap)
+    {
+        try
+        {
+            Verify.assertSortedSetMultimapsEqual("SortedSetMultimap", expectedSortedSetMultimap, actualSortedSetMultimap);
+        }
+        catch (AssertionError e)
+        {
+            Verify.throwMangledException(e);
+        }
+    }
+
+    public static <K, V> void assertSortedSetMultimapsEqual(String multimapName, SortedSetMultimap<K, V> expectedSortedSetMultimap, SortedSetMultimap<K, V> actualSortedSetMultimap)
+    {
+        try
+        {
+            if (expectedSortedSetMultimap == null)
+            {
+                Assert.assertNull(multimapName + " should be null", actualSortedSetMultimap);
+                return;
+            }
+
+            Assert.assertNotNull(multimapName + " should not be null", actualSortedSetMultimap);
+
+            Assert.assertEquals(multimapName + " size", expectedSortedSetMultimap.size(), actualSortedSetMultimap.size());
+            Verify.assertBagsEqual(multimapName + " keyBag", expectedSortedSetMultimap.keyBag(), actualSortedSetMultimap.keyBag());
+
+            for (K key : expectedSortedSetMultimap.keysView())
+            {
+                Verify.assertSortedSetsEqual(multimapName + " value set for key:" + key, (SortedSet<V>) expectedSortedSetMultimap.get(key), (SortedSet<V>) actualSortedSetMultimap.get(key));
+            }
+            Assert.assertEquals(multimapName, expectedSortedSetMultimap, actualSortedSetMultimap);
+        }
+        catch (AssertionError e)
+        {
+            Verify.throwMangledException(e);
+        }
+    }
+
+    public static <K, V> void assertSortedBagMultimapsEqual(SortedBagMultimap<K, V> expectedSortedBagMultimap, SortedBagMultimap<K, V> actualSortedBagMultimap)
+    {
+        try
+        {
+            Verify.assertSortedBagMultimapsEqual("SortedBagMultimap", expectedSortedBagMultimap, actualSortedBagMultimap);
+        }
+        catch (AssertionError e)
+        {
+            Verify.throwMangledException(e);
+        }
+    }
+
+    public static <K, V> void assertSortedBagMultimapsEqual(String multimapName, SortedBagMultimap<K, V> expectedSortedBagMultimap, SortedBagMultimap<K, V> actualSortedBagMultimap)
+    {
+        try
+        {
+            if (expectedSortedBagMultimap == null)
+            {
+                Assert.assertNull(multimapName + " should be null", actualSortedBagMultimap);
+                return;
+            }
+
+            Assert.assertNotNull(multimapName + " should not be null", actualSortedBagMultimap);
+
+            Assert.assertEquals(multimapName + " size", expectedSortedBagMultimap.size(), actualSortedBagMultimap.size());
+            Verify.assertBagsEqual(multimapName + " keyBag", expectedSortedBagMultimap.keyBag(), actualSortedBagMultimap.keyBag());
+
+            for (K key : expectedSortedBagMultimap.keysView())
+            {
+                Verify.assertSortedBagsEqual(multimapName + " value set for key:" + key, (SortedBag<V>) expectedSortedBagMultimap.get(key), (SortedBag<V>) actualSortedBagMultimap.get(key));
+            }
+            Assert.assertEquals(multimapName, expectedSortedBagMultimap, actualSortedBagMultimap);
         }
         catch (AssertionError e)
         {
