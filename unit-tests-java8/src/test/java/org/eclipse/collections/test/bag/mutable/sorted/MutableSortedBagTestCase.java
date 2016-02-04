@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -14,20 +14,20 @@ import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
 import org.eclipse.collections.impl.bag.sorted.mutable.TreeBag;
 import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.test.MutableOrderedIterableTestCase;
-import org.eclipse.collections.test.collection.mutable.MutableCollectionTestCase;
 import org.junit.Test;
 
 import static org.eclipse.collections.test.IterableTestCase.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-public interface MutableSortedBagTestCase extends SortedBagTestCase, MutableCollectionTestCase, MutableOrderedIterableTestCase
+public interface MutableSortedBagTestCase extends SortedBagTestCase, MutableOrderedIterableTestCase, MutableBagIterableTestCase
 {
     @Override
     <T> MutableSortedBag<T> newWith(T... elements);
 
+    @Override
     @Test
-    default void MutableBag_addOccurrences()
+    default void MutableBagIterable_addOccurrences()
     {
         MutableSortedBag<Integer> mutableSortedBag = this.newWith(3, 3, 3, 2, 2, 1);
         mutableSortedBag.addOccurrences(4, 4);
@@ -38,15 +38,17 @@ public interface MutableSortedBagTestCase extends SortedBagTestCase, MutableColl
         assertEquals(TreeBag.newBagWith(Comparators.reverseNaturalOrder(), 4, 4, 4, 4, 3, 3, 3, 2, 2, 1, 1, 1), mutableSortedBag);
     }
 
+    @Override
     @Test(expected = IllegalArgumentException.class)
-    default void MutableBag_addOccurrences_throws()
+    default void MutableBagIterable_addOccurrences_throws()
     {
         MutableSortedBag<Integer> mutableSortedBag = this.newWith(3, 3, 3, 2, 2, 1);
         mutableSortedBag.addOccurrences(4, -1);
     }
 
+    @Override
     @Test
-    default void MutableBag_removeOccurrences()
+    default void MutableBagIterable_removeOccurrences()
     {
         MutableSortedBag<Integer> mutableBag = this.newWith(3, 3, 3, 2, 2, 1);
         assertFalse(mutableBag.removeOccurrences(4, 4));
@@ -63,8 +65,9 @@ public interface MutableSortedBagTestCase extends SortedBagTestCase, MutableColl
         assertEquals(TreeBag.newBagWith(Comparators.reverseNaturalOrder(), 3), mutableBag);
     }
 
+    @Override
     @Test(expected = IllegalArgumentException.class)
-    default void MutableBag_removeOccurrences_throws()
+    default void MutableBagIterable_removeOccurrences_throws()
     {
         MutableSortedBag<Integer> mutableBag = this.newWith(3, 3, 3, 2, 2, 1);
         assertFalse(mutableBag.removeOccurrences(4, -1));
