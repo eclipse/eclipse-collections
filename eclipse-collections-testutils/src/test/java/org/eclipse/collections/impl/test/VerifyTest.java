@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -1907,6 +1907,22 @@ public class VerifyTest
         catch (AssertionError ex)
         {
             Verify.assertContains("to be non-instantiable", ex.getMessage());
+            Verify.assertContains(VerifyTest.class.getName(), ex.getStackTrace()[0].toString());
+        }
+    }
+
+    @Test
+    public void assertNotSerializable()
+    {
+        Verify.assertNotSerializable(new Object());
+
+        try
+        {
+            Verify.assertNotSerializable("serializable");
+        }
+        catch (AssertionError ex)
+        {
+            Assert.assertEquals("Block did not throw an exception of type java.io.NotSerializableException", ex.getMessage());
             Verify.assertContains(VerifyTest.class.getName(), ex.getStackTrace()[0].toString());
         }
     }

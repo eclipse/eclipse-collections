@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -13,6 +13,7 @@ package org.eclipse.collections.impl.test;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.NotSerializableException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.ObjectStreamClass;
@@ -190,8 +191,7 @@ public final class Verify extends Assert
 
     public static void fail(String message, Throwable cause)
     {
-        AssertionError failedException = new AssertionError(message);
-        failedException.initCause(cause);
+        AssertionError failedException = new AssertionError(message, cause);
         Verify.throwMangledException(failedException);
     }
 
@@ -3745,6 +3745,25 @@ public final class Verify extends Assert
             return string + '\n';
         }
         return string;
+    }
+
+    public static void assertNotSerializable(final Object actualObject)
+    {
+        try
+        {
+            Verify.assertThrows(NotSerializableException.class, new Callable<Void>()
+            {
+                public Void call() throws IOException
+                {
+                    new ObjectOutputStream(new ByteArrayOutputStream()).writeObject(actualObject);
+                    return null;
+                }
+            });
+        }
+        catch (AssertionError e)
+        {
+            Verify.throwMangledException(e);
+        }
     }
 
     /**
