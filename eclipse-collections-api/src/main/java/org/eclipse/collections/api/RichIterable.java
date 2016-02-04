@@ -1149,7 +1149,7 @@ public interface
      * Person person =
      *     people.detect(new Predicate&lt;Person&gt;()
      *     {
-     *         public boolean value(Person person)
+     *         public boolean accept(Person person)
      *         {
      *             return person.getFirstName().equals("John") && person.getLastName().equals("Smith");
      *         }
@@ -1175,7 +1175,7 @@ public interface
      * Person person =
      *     people.detectWith(new Predicate2&lt;Person, String&gt;()
      *     {
-     *         public boolean value(Person person, String fullName)
+     *         public boolean accept(Person person, String fullName)
      *         {
      *             return person.getFullName().equals(fullName);
      *         }
@@ -1653,7 +1653,7 @@ public interface
      * Multimap&lt;String, Person&gt; peopleByLastName =
      *     people.groupBy(new Function&lt;Person, String&gt;()
      *     {
-     *         public String value(Person person)
+     *         public String valueOf(Person person)
      *         {
      *             return person.getLastName();
      *         }
@@ -1679,7 +1679,7 @@ public interface
      * FastListMultimap&lt;String, Person&gt; peopleByLastName =
      *     people.groupBy(new Function&lt;Person, String&gt;()
      *     {
-     *         public String value(Person person)
+     *         public String valueOf(Person person)
      *         {
      *             return person.getLastName();
      *         }
