@@ -47,7 +47,12 @@ import org.eclipse.collections.api.map.primitive.ObjectDoubleMap;
 import org.eclipse.collections.api.map.primitive.ObjectLongMap;
 import org.eclipse.collections.api.multimap.Multimap;
 import org.eclipse.collections.api.multimap.MutableMultimap;
+import org.eclipse.collections.api.multimap.bag.BagMultimap;
+import org.eclipse.collections.api.multimap.bag.MutableBagMultimap;
+import org.eclipse.collections.api.multimap.list.MutableListMultimap;
 import org.eclipse.collections.api.multimap.set.MutableSetMultimap;
+import org.eclipse.collections.api.multimap.sortedbag.MutableSortedBagMultimap;
+import org.eclipse.collections.api.multimap.sortedset.MutableSortedSetMultimap;
 import org.eclipse.collections.api.partition.PartitionIterable;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.tuple.Pair;
@@ -67,8 +72,10 @@ import org.eclipse.collections.impl.block.function.MaxSizeFunction;
 import org.eclipse.collections.impl.block.function.MinSizeFunction;
 import org.eclipse.collections.impl.block.predicate.PairPredicate;
 import org.eclipse.collections.impl.block.procedure.CollectionAddProcedure;
+import org.eclipse.collections.impl.factory.Bags;
 import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.Maps;
+import org.eclipse.collections.impl.factory.Multimaps;
 import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.list.mutable.FastList;
@@ -83,8 +90,11 @@ import org.eclipse.collections.impl.list.mutable.primitive.ShortArrayList;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.math.IntegerSum;
 import org.eclipse.collections.impl.math.Sum;
+import org.eclipse.collections.impl.multimap.bag.HashBagMultimap;
+import org.eclipse.collections.impl.multimap.bag.sorted.mutable.TreeBagMultimap;
 import org.eclipse.collections.impl.multimap.list.FastListMultimap;
 import org.eclipse.collections.impl.multimap.set.UnifiedSetMultimap;
+import org.eclipse.collections.impl.multimap.set.sorted.TreeSortedSetMultimap;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.Tuples;
@@ -708,7 +718,7 @@ public class IterateTest
     @Test
     public void addToMap()
     {
-        MutableSet<Integer> set = Interval.toSet(1, 5);
+        MutableSet<Integer> set = this.getIntegerSet();
         MutableMap<String, Integer> map = UnifiedMap.newMap();
         map.put("the answer", 42);
 
@@ -736,6 +746,97 @@ public class IterateTest
         Verify.assertContainsKeyValue("3", 30, map);
         Verify.assertContainsKeyValue("4", 40, map);
         Verify.assertContainsKeyValue("5", 50, map);
+    }
+
+    @Test
+    public void toMultimap()
+    {
+        MutableList<Integer> list = Lists.mutable.of(1, 2, 2, 3, 3, 3);
+
+        Pair[] expectedPairs = {Tuples.pair("Key1", "1"),
+                Tuples.pair("Key1", "1"),
+                Tuples.pair("Key2", "1"),
+                Tuples.pair("Key2", "2"),
+                Tuples.pair("Key2", "1"),
+                Tuples.pair("Key2", "2"),
+                Tuples.pair("Key3", "1"),
+                Tuples.pair("Key3", "3"),
+                Tuples.pair("Key3", "1"),
+                Tuples.pair("Key3", "3"),
+                Tuples.pair("Key3", "1"),
+                Tuples.pair("Key3", "3")};
+
+        Function<Integer, String> keyFunction = each -> "Key" + each;
+        Function<Integer, Iterable<String>> valuesFunction = each -> Lists.mutable.of("1", String.valueOf(each));
+        MutableListMultimap<String, String> actualMultimap1 = Iterate.toMultimap(list, keyFunction, valuesFunction, Multimaps.mutable.list.empty());
+        Verify.assertListMultimapsEqual(FastListMultimap.newMultimap(expectedPairs), actualMultimap1);
+
+        MutableSetMultimap<String, String> actualMultimap2 = Iterate.toMultimap(list, keyFunction, valuesFunction, Multimaps.mutable.set.empty());
+        Verify.assertSetMultimapsEqual(UnifiedSetMultimap.newMultimap(expectedPairs), actualMultimap2);
+
+        MutableBagMultimap<String, String> actualMultimap3 = Iterate.toMultimap(list, keyFunction, valuesFunction, Multimaps.mutable.bag.empty());
+        Verify.assertBagMultimapsEqual(HashBagMultimap.newMultimap(expectedPairs), actualMultimap3);
+
+        MutableSortedSetMultimap<String, String> expectedMultimap4 = TreeSortedSetMultimap.newMultimap(Comparators.naturalOrder());
+        expectedMultimap4.putAllPairs(expectedPairs);
+        MutableSortedSetMultimap<String, String> actualMultimap4 = Iterate.toMultimap(list, keyFunction, valuesFunction, Multimaps.mutable.sortedSet.with(Comparators.naturalOrder()));
+        Verify.assertSortedSetMultimapsEqual(expectedMultimap4, actualMultimap4);
+        Assert.assertSame(expectedMultimap4.comparator(), actualMultimap4.comparator());
+
+        MutableSortedSetMultimap<String, String> expectedMultimap5 = TreeSortedSetMultimap.newMultimap(Comparators.reverseNaturalOrder());
+        expectedMultimap5.putAllPairs(expectedPairs);
+        MutableSortedSetMultimap<String, String> actualMultimap5 = Iterate.toMultimap(list, keyFunction, valuesFunction, Multimaps.mutable.sortedSet.with(Comparators.reverseNaturalOrder()));
+        Verify.assertSortedSetMultimapsEqual(expectedMultimap5, actualMultimap5);
+        Assert.assertSame(expectedMultimap5.comparator(), actualMultimap5.comparator());
+
+        MutableSortedBagMultimap<String, String> expectedMultimap6 = TreeBagMultimap.newMultimap(Comparators.naturalOrder());
+        expectedMultimap6.putAllPairs(expectedPairs);
+        MutableSortedBagMultimap<String, String> actualMultimap6 = Iterate.toMultimap(list, keyFunction, valuesFunction, TreeBagMultimap.newMultimap(Comparators.naturalOrder()));
+        Verify.assertSortedBagMultimapsEqual(expectedMultimap6, actualMultimap6);
+        Assert.assertSame(expectedMultimap6.comparator(), actualMultimap6.comparator());
+
+        MutableSortedBagMultimap<String, String> expectedMultimap7 = TreeBagMultimap.newMultimap(Comparators.reverseNaturalOrder());
+        expectedMultimap7.putAllPairs(expectedPairs);
+        MutableSortedBagMultimap<String, String> actualMultimap7 = Iterate.toMultimap(list, keyFunction, valuesFunction, TreeBagMultimap.newMultimap(Comparators.reverseNaturalOrder()));
+        Verify.assertSortedBagMultimapsEqual(expectedMultimap7, actualMultimap7);
+        Assert.assertSame(expectedMultimap7.comparator(), actualMultimap7.comparator());
+
+        // Below tests are for examples only. They do not add any coverage.
+        BagMultimap<String, String> expectedMultimap8 = HashBagMultimap.newMultimap(Tuples.pair("Key1", "1"),
+                Tuples.pair("Key2", "1"),
+                Tuples.pair("Key2", "2"),
+                Tuples.pair("Key2", "1"),
+                Tuples.pair("Key2", "2"),
+                Tuples.pair("Key3", "1"),
+                Tuples.pair("Key3", "3"),
+                Tuples.pair("Key3", "1"),
+                Tuples.pair("Key3", "3"),
+                Tuples.pair("Key3", "1"),
+                Tuples.pair("Key3", "3"));
+        MutableBagMultimap<String, String> actualMultimap8 = Iterate.toMultimap(list, keyFunction, each -> Sets.mutable.of("1", "1", String.valueOf(each)), Multimaps.mutable.bag.empty());
+        Verify.assertBagMultimapsEqual(expectedMultimap8, actualMultimap8);
+
+        MutableBagMultimap<String, String> expectedMultimap9 = HashBagMultimap.newMultimap(Tuples.pair("Key1", "1"),
+                Tuples.pair("Key1", "1"),
+                Tuples.pair("Key1", "1"),
+                Tuples.pair("Key2", "1"),
+                Tuples.pair("Key2", "1"),
+                Tuples.pair("Key2", "2"),
+                Tuples.pair("Key2", "1"),
+                Tuples.pair("Key2", "1"),
+                Tuples.pair("Key2", "2"),
+                Tuples.pair("Key3", "1"),
+                Tuples.pair("Key3", "1"),
+                Tuples.pair("Key3", "3"),
+                Tuples.pair("Key3", "1"),
+                Tuples.pair("Key3", "1"),
+                Tuples.pair("Key3", "3"),
+                Tuples.pair("Key3", "1"),
+                Tuples.pair("Key3", "1"),
+                Tuples.pair("Key3", "3"));
+
+        MutableBagMultimap<String, String> actualMultimap9 = Iterate.toMultimap(list, keyFunction, each -> Bags.mutable.of("1", "1", String.valueOf(each)), Multimaps.mutable.bag.empty());
+        Verify.assertBagMultimapsEqual(expectedMultimap9, actualMultimap9);
     }
 
     @Test
