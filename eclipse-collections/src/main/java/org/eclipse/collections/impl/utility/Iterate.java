@@ -253,7 +253,7 @@ public final class Iterate
      * Collection&lt;Person&gt; selected =
      *     Iterate.<b>select</b>(people, new Predicate&lt;Person&gt;()
      *     {
-     *         public boolean value(Person person)
+     *         public boolean accept(Person person)
      *         {
      *             return person.getAddress().getCity().equals("Metuchen");
      *         }
@@ -400,7 +400,7 @@ public final class Iterate
      * PartitionIterable&lt;Person&gt; newYorkersAndNonNewYorkers =
      *      Iterate.<b>partition</b>(people, new Predicate&lt;Person&gt;()
      *      {
-     *          public boolean value(Person person)
+     *          public boolean accept(Person person)
      *          {
      *              return person.getAddress().getState().getName().equals("New York");
      *          }
@@ -442,7 +442,7 @@ public final class Iterate
      * PartitionIterable&lt;Person&gt; newYorkersAndNonNewYorkers =
      *      Iterate.<b>partitionWith</b>(people, new Predicate&lt;Person, String&gt;()
      *      {
-     *          public boolean value(Person person, String state)
+     *          public boolean accept(Person person, String state)
      *          {
      *              return person.getAddress().getState().getName().equals(state);
      *          }
@@ -1172,7 +1172,7 @@ public final class Iterate
      *      Iterate.<b>collect</b>(people,
      *          new Function&lt;Person, String&gt;()
      *          {
-     *              public String value(Person person)
+     *              public String valueOf(Person person)
      *              {
      *                  return person.getFirstName() + " " + person.getLastName();
      *              }
@@ -1227,7 +1227,7 @@ public final class Iterate
      *      Iterate.<b>collect</b>(people,
      *          new Function&lt;Person, String&gt;()
      *          {
-     *              public String value(Person person)
+     *              public String valueOf(Person person)
      *              {
      *                  return person.getFirstName() + " " + person.getLastName();
      *              }
@@ -2249,7 +2249,7 @@ public final class Iterate
      * <pre>
      * Person person = Iterate.<b>detect</b>(people, new Predicate&lt;Person&gt;()
      * {
-     *     public boolean value(Person person)
+     *     public boolean accept(Person person)
      *     {
      *         return person.getFirstName().equals("John") && person.getLastName().equals("Smith");
      *     }
@@ -2290,7 +2290,7 @@ public final class Iterate
      * <pre>
      * Person person = Iterate.<b>detectWith</b>(people, new Predicate2&lt;Person, String&gt;()
      * {
-     *     public boolean value(Person person, String fullName)
+     *     public boolean accept(Person person, String fullName)
      *     {
      *         return person.getFullName().equals(fullName);
      *     }
