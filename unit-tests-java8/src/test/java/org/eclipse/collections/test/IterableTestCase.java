@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -147,7 +147,8 @@ public interface IterableTestCase
         if ((o1 instanceof Number && o2 instanceof Number)
                 || (o1 instanceof Boolean && o2 instanceof Boolean)
                 || o1 instanceof ImmutableCollection<?> && o2 instanceof ImmutableCollection<?>
-                && ((ImmutableCollection<?>) o1).isEmpty() && ((ImmutableCollection<?>) o2).isEmpty())
+                && ((ImmutableCollection<?>) o1).isEmpty() && ((ImmutableCollection<?>) o2).isEmpty()
+                && !(o1 instanceof SortedIterable<?>) && !(o2 instanceof SortedIterable<?>))
         {
             assertSame(o1, o2);
             return;
@@ -171,7 +172,7 @@ public interface IterableTestCase
     {
         Iterable<Integer> iterable = this.newWith(3, 3, 3, 2, 2, 1);
         Object deserialized = SerializeTestHelper.serializeDeserialize(iterable);
-        Assert.assertNotSame(iterable, deserialized);
+        assertNotSame(iterable, deserialized);
     }
 
     @Test
