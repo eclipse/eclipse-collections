@@ -51,7 +51,7 @@
         <dependency org="junit" name="junit" rev="${junit.version}" conf="compile-test" />
         <dependency org="org.hamcrest" name="hamcrest-core" rev="1.3" conf="compile-test" />
         <dependency org="commons-lang" name="commons-lang" rev="2.6" conf="compile-test" />
-        <dependency org="com.google.guava" name="guava" rev="18.0" conf="compile-test" />
+        <dependency org="com.google.guava" name="guava" rev="19.0" conf="compile-test" />
         <dependency org="net.sf.trove4j" name="trove4j" rev="3.0.3" conf="compile-test" />
 
         <conflict manager="strict" />
