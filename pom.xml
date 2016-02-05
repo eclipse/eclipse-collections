@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  ~ Copyright (c) 2015 Goldman Sachs.
+  ~ Copyright (c) 2016 Goldman Sachs.
   ~ All rights reserved. This program and the accompanying materials
   ~ are made available under the terms of the Eclipse Public License v1.0
   ~ and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -96,8 +96,12 @@
 
         <slf4j.version>1.7.12</slf4j.version>
         <clover.version>4.0.6</clover.version>
-        <checkstyle.version>2.16</checkstyle.version>
         <scala.version>2.11.7</scala.version>
+        <guava.version>18.0</guava.version>
+        <trove4j.version>3.0.3</trove4j.version>
+        <checkstyle.version>6.11.1</checkstyle.version>
+        <checkstyle.plugin.version>2.16</checkstyle.plugin.version>
+        <findbugs.plugin.version>3.0.2</findbugs.plugin.version>
 
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
@@ -111,6 +115,7 @@
         <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
         <sonar.core.codeCoveragePlugin>clover</sonar.core.codeCoveragePlugin>
         <sonar.clover.version>${clover.version}</sonar.clover.version>
+        <project.previous.version>6.1.0</project.previous.version>
     </properties>
 
     <dependencyManagement>
@@ -139,6 +144,7 @@
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-nop</artifactId>
                 <version>${slf4j.version}</version>
+                <scope>test</scope>
             </dependency>
 
             <dependency>
@@ -234,10 +240,33 @@
                     </executions>
                 </plugin>
 
-
                 <plugin>
                     <artifactId>maven-enforcer-plugin</artifactId>
                     <version>1.4.1</version>
+                    <executions>
+                        <execution>
+                            <id>enforce</id>
+                            <configuration>
+                                <rules>
+                                    <DependencyConvergence />
+                                    <requireJavaVersion>
+                                        <version>1.8.0</version>
+                                    </requireJavaVersion>
+                                    <requireMavenVersion>
+                                        <version>3.0.2</version>
+                                    </requireMavenVersion>
+                                    <requirePluginVersions>
+                                        <unCheckedPluginList>
+                                            org.eclipse.collections:eclipse-collections-code-generator-maven-plugin
+                                        </unCheckedPluginList>
+                                    </requirePluginVersions>
+                                </rules>
+                            </configuration>
+                            <goals>
+                                <goal>enforce</goal>
+                            </goals>
+                        </execution>
+                    </executions>
                 </plugin>
 
                 <plugin>
@@ -256,12 +285,24 @@
                     <groupId>org.apache.felix</groupId>
                     <artifactId>maven-bundle-plugin</artifactId>
                     <version>3.0.0</version>
+                    <extensions>true</extensions>
                 </plugin>
 
                 <plugin>
                     <groupId>net.alchim31.maven</groupId>
                     <artifactId>scala-maven-plugin</artifactId>
                     <version>3.2.2</version>
+                    <configuration>
+                        <scalaVersion>${scala.version}</scalaVersion>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>compile</goal>
+                                <goal>testCompile</goal>
+                            </goals>
+                        </execution>
+                    </executions>
                 </plugin>
 
                 <plugin>
@@ -290,18 +331,19 @@
 
                 <plugin>
                     <artifactId>maven-checkstyle-plugin</artifactId>
-                    <version>${checkstyle.version}</version>
+                    <version>${checkstyle.plugin.version}</version>
                     <configuration>
                         <configLocation>checkstyle-configuration.xml</configLocation>
                         <logViolationsToConsole>true</logViolationsToConsole>
                         <includeTestSourceDirectory>true</includeTestSourceDirectory>
                         <cacheFile>${basedir}/target/checkstyleCache</cacheFile>
+                        <suppressionsLocation>checkstyle-suppressions.xml</suppressionsLocation>
                     </configuration>
                     <dependencies>
                         <dependency>
                             <groupId>com.puppycrawl.tools</groupId>
                             <artifactId>checkstyle</artifactId>
-                            <version>6.11.1</version>
+                            <version>${checkstyle.version}</version>
                         </dependency>
                     </dependencies>
                 </plugin>
@@ -309,7 +351,7 @@
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>findbugs-maven-plugin</artifactId>
-                    <version>3.0.2</version>
+                    <version>${findbugs.plugin.version}</version>
                     <configuration>
                         <effort>Max</effort>
                         <threshold>Default</threshold>
@@ -326,12 +368,11 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>sonar-maven-plugin</artifactId>
-                <version>2.6</version>
             </plugin>
 
             <plugin>
                 <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>${checkstyle.version}</version>
+                <version>${checkstyle.plugin.version}</version>
                 <configuration>
                     <configLocation>checkstyle-configuration.xml</configLocation>
                     <logViolationsToConsole>true</logViolationsToConsole>
@@ -363,26 +404,6 @@
 
             <plugin>
                 <artifactId>maven-enforcer-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>enforce</id>
-                        <configuration>
-                            <rules>
-                                <DependencyConvergence />
-                                <requirePluginVersions />
-                                <requireJavaVersion>
-                                    <version>1.7.0</version>
-                                </requireJavaVersion>
-                                <requireMavenVersion>
-                                    <version>3.0.2</version>
-                                </requireMavenVersion>
-                            </rules>
-                        </configuration>
-                        <goals>
-                            <goal>enforce</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
 
             <plugin>
@@ -429,7 +450,7 @@
 
             <plugin>
                 <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>${checkstyle.version}</version>
+                <version>${checkstyle.plugin.version}</version>
                 <configuration>
                     <configLocation>checkstyle-configuration.xml</configLocation>
                     <logViolationsToConsole>true</logViolationsToConsole>
@@ -455,7 +476,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>findbugs-maven-plugin</artifactId>
-                <version>3.0.2</version>
+                <version>${findbugs.plugin.version}</version>
                 <configuration>
                     <effort>Max</effort>
                     <threshold>Default</threshold>
@@ -547,9 +568,9 @@
                             <licenseLocation>${clover.license}</licenseLocation>
                             <contextFilters>@deprecated</contextFilters>
                             <generateHistorical>true</generateHistorical>
+                            <historyDir>${user.home}/clover/${project.artifactId}</historyDir>
                             <includesAllSourceRoots>true</includesAllSourceRoots>
                             <instrumentLambda>block</instrumentLambda>
-                            <historyDir>${user.home}/clover/${project.artifactId}</historyDir>
                             <excludes>
                                 <exclude>**/FileUtils.java</exclude>
                                 <exclude>**/GenerateMojo.java</exclude>
@@ -560,6 +581,15 @@
                                 <exclude>**/jmh/**/*.java</exclude>
                             </excludes>
                         </configuration>
+                        <executions>
+                            <execution>
+                                <id>setup</id>
+                                <phase>process-test-sources</phase>
+                                <goals>
+                                    <goal>setup</goal>
+                                </goals>
+                            </execution>
+                        </executions>
                     </plugin>
                 </plugins>
             </build>
