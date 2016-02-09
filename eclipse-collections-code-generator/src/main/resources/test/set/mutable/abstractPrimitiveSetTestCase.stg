@@ -146,12 +146,11 @@ public abstract class Abstract<name>SetTestCase extends AbstractMutable<name>Col
         Assert.assertFalse(set.add(<(literal.(type))("1")>));
     }
 
-    <if(primitive.floatingPoint)><NaNTests("NaN")><endif>
-
-    <if(primitive.floatingPoint)><NaNTests("POSITIVE_INFINITY")><endif>
-
-    <if(primitive.floatingPoint)><NaNTests("NEGATIVE_INFINITY")><endif>
-
+<if(primitive.floatingPoint)><\\>
+    <NaNTests("NaN")>
+    <NaNTests("POSITIVE_INFINITY")>
+    <NaNTests("NEGATIVE_INFINITY")>
+<endif>
     @Override
     @Test
     public void addAllIterable()
@@ -474,4 +473,5 @@ public void add_<key>()
     Assert.assertFalse(set.add(<wrapperName>.<key>));
     Verify.assertSize(hashSet.size(), set);
 }
+
 >>

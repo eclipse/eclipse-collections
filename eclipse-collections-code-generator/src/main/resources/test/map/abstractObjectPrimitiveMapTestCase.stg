@@ -225,7 +225,6 @@ public abstract class AbstractObject<name>MapTestCase
                         || "{null=<(toStringLiteral.(type))("0")>, 1=<(toStringLiteral.(type))("1")>}".equals(map2.toString()));
     }
 
-
     @Test
     public void <type>Iterator()
     {

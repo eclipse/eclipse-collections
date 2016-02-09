@@ -22,7 +22,6 @@ import org.eclipse.collections.api.map.primitive.Object<name>Map;
 import org.eclipse.collections.impl.block.factory.HashingStrategies;
 import org.eclipse.collections.impl.map.primitive.AbstractObject<name>MapKeyValuesViewTestCase;
 
-
 /**
  * JUnit test for {@link Object<name>HashMapWithHashingStrategy#keyValuesView()}.
  * This file was automatically generated from template file objectPrimitiveHashMapKeyValuesViewTest.stg.

@@ -59,11 +59,7 @@ public final class <name>PredicatesTest
         Assert.assertFalse(<name>Predicates.alwaysFalse().accept(<(literal.(type))("5")>));
     }
 
-    <(intPredicatesTest.(type))()>
-    <(charPredicatesTest.(type))()>
-    <(doublePredicatesTest.(type))()>
-    <(floatPredicatesTest.(type))()>
-
+    <(predicatesTest.(type))()>
     @Test
     public void testAnd()
     {
@@ -96,25 +92,13 @@ public final class <name>PredicatesTest
 
 >>
 
-intPredicatesTest ::=[
+predicatesTest ::=[
     "byte": "allIntPredicateTests",
     "short": "allIntPredicateTests",
     "int": "allIntPredicateTests",
     "long": "allIntPredicateTests",
-    default: "noTests"
-]
-
-charPredicatesTest ::=[
     "char": "allCharPredicateTests",
-    default: "noTests"
-]
-
-doublePredicatesTest ::=[
     "double": "allDoublePredicateTests",
-    default: "noTests"
-]
-
-floatPredicatesTest ::=[
     "float": "allFloatPredicateTests",
     default: "noTests"
 ]
@@ -203,6 +187,7 @@ public void testIsUndefined()
     Assert.assertTrue(CharPredicates.isUndefined().accept((char) 888));
     Assert.assertFalse(CharPredicates.isUndefined().accept('a'));
 }
+
 >>
 
 allDoublePredicateTests() ::= <<
@@ -214,6 +199,7 @@ public void equalWithDelta()
     Assert.assertTrue(DoublePredicates.not(DoublePredicates.equal(5.0, Double.valueOf("1e-15"))).accept(6.0));
     Assert.assertTrue(DoublePredicates.not(DoublePredicates.equal(5.0, 1.0)).accept(7.0));
 }
+
 >>
 
 allFloatPredicateTests() ::= <<
@@ -225,5 +211,6 @@ public void equalWithDelta()
     Assert.assertTrue(FloatPredicates.not(FloatPredicates.equal(5.0f, Float.valueOf("1e-15"))).accept(6.0f));
     Assert.assertTrue(FloatPredicates.not(FloatPredicates.equal(5.0f, 1.0f)).accept(7.0f));
 }
+
 >>
 

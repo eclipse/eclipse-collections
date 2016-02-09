@@ -224,14 +224,11 @@ public abstract class AbstractMutable<name>ObjectMapTestCase extends Abstract<na
         Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("1")>, "one"), emptyMap1);
     }
 
-    <if(primitive.floatingPoint)><NaNTests("NaN")><endif>
-
-    <if(primitive.floatingPoint)><NaNTests("POSITIVE_INFINITY")><endif>
-
-    <if(primitive.floatingPoint)><NaNTests("NEGATIVE_INFINITY")><endif>
-
-    <if(primitive.floatingPoint)><ZeroTests()><endif>
-
+<if(primitive.floatingPoint)><NaNTests("NaN")>
+    <NaNTests("POSITIVE_INFINITY")>
+    <NaNTests("NEGATIVE_INFINITY")>
+    <ZeroTests()>
+<endif>
     @Test
     public void putDuplicateWithRemovedSlot()
     {
@@ -790,6 +787,7 @@ public void put_<key>()
     Assert.assertEquals("one", map.put(<wrapperName>.<key>, "two"));
     Verify.assertIterableSize(hashmap.size(), map);
 }
+
 >>
 
 ZeroTests() ::= <<
@@ -816,6 +814,7 @@ public void put_zero()
     Assert.assertNull(map.put(-<(literal.(type))("0")>, "two"));
     Verify.assertIterableSize(hashmap.size(), map);
 }
+
 >>
 
 differentNaNs() ::= <<
@@ -836,6 +835,7 @@ public void put_different_NaNs()
     Assert.assertTrue(hashMap.containsKey(<wrapperName>.<bitsType.(type)>BitsTo<name>(nan1)));
     Assert.assertTrue(map.containsKey(<wrapperName>.<bitsType.(type)>BitsTo<name>(nan1)));
 }
+
 >>
 
 NaNBits1 ::= [

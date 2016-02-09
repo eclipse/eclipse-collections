@@ -90,7 +90,6 @@ public abstract class Abstract<name>BooleanMapTestCase
         Assert.assertFalse(this.classUnderTest().getOrThrow(<(literal.(type))("31")>));
         Assert.assertTrue(this.classUnderTest().getOrThrow(<(literal.(type))("32")>));
 
-
         Verify.assertThrows(IllegalStateException.class, () -> this.classUnderTest().getOrThrow(<(literal.(type))("1")>));
         Verify.assertThrows(IllegalStateException.class, () -> this.classUnderTest().getOrThrow(<(literal.(type))("33")>));
     }

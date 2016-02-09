@@ -20,7 +20,6 @@ package org.eclipse.collections.impl.map.mutable.primitive;
 import org.eclipse.collections.api.map.primitive.Object<name>Map;
 import org.eclipse.collections.impl.map.primitive.AbstractObject<name>MapKeyValuesViewTestCase;
 
-
 /**
  * JUnit test for {@link Object<name>HashMap#keyValuesView()}.
  * This file was automatically generated from template file objectPrimitiveHashMapKeyValuesViewTest.stg.

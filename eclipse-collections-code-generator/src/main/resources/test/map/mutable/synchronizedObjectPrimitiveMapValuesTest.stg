@@ -105,7 +105,6 @@ public class SynchronizedObject<name>MapValuesTest extends AbstractMutable<name>
     }
 
     <if(primitive.floatingPoint)><NaNTests()><endif>
-
     @Override
     @Test(expected = UnsupportedOperationException.class)
     public void addAllArray()

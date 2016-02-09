@@ -51,7 +51,6 @@ public abstract class AbstractMutable<name>StackTestCase extends Abstract<name>S
 
     protected abstract Mutable<name>Stack newWithIterable(<name>Iterable iterable);
 
-
     @Override
     public void peekAtIndex()
     {
@@ -109,7 +108,6 @@ public abstract class AbstractMutable<name>StackTestCase extends Abstract<name>S
         Assert.assertEquals(<(literal.(type))("2")>, stack.pop()<wideDelta.(type)>);
         Assert.assertEquals(<(literal.(type))("1")>, stack.pop()<wideDelta.(type)>);
     }
-
 
     @Test
     public void testNewStackFromTopToBottomOrder()

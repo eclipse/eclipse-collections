@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -122,6 +122,7 @@ public final class PrimitiveFunctions
         return new Function2<ObjectLongHashMap<V>, T, ObjectLongHashMap<V>>()
         {
             private static final long serialVersionUID = 1L;
+
             public ObjectLongHashMap<V> value(ObjectLongHashMap<V> map, T each)
             {
                 map.addToValue(groupBy.valueOf(each), function.intValueOf(each));
@@ -155,6 +156,7 @@ public final class PrimitiveFunctions
         return new Function2<ObjectLongHashMap<V>, T, ObjectLongHashMap<V>>()
         {
             private static final long serialVersionUID = 1L;
+
             public ObjectLongHashMap<V> value(ObjectLongHashMap<V> map, T each)
             {
                 map.addToValue(groupBy.valueOf(each), function.longValueOf(each));

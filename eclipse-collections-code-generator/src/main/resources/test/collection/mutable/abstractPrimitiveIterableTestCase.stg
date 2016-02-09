@@ -131,18 +131,13 @@ public abstract class Abstract<name>IterableTestCase
         Assert.assertFalse(iterable2.contains(<(castIntToNarrowTypeWithParens.(type))("iterable2.size() + 1")>));
     }
 
-    <if(primitive.floatingPoint)><NaNTests("NaN")><endif>
-
-    <if(primitive.floatingPoint)><NaNTests("NEGATIVE_INFINITY")><endif>
-
-    <if(primitive.floatingPoint)><NaNTests("POSITIVE_INFINITY")><endif>
-
-    <if(primitive.floatingPoint)><ZeroTests()><endif>
-
-    <if(primitive.floatingPoint)><NaNEqualsTests()><endif>
-
-    <if(primitive.floatingPoint)><differentNaNs()><endif>
-
+<if(primitive.floatingPoint)><NaNTests("NaN")>
+    <NaNTests("NEGATIVE_INFINITY")>
+    <NaNTests("POSITIVE_INFINITY")>
+    <ZeroTests()>
+    <NaNEqualsTests()>
+    <differentNaNs()>
+<endif>
     @Test
     public void containsAllArray()
     {
@@ -827,7 +822,6 @@ kahanFloatSumTest() ::= <<
 
 kahanDoubleSumTest() ::= <<
 
-
 >>
 
 noTest() ::= ""
@@ -916,6 +910,7 @@ public void contains_<key>()
     Assert.assertTrue(hashSet.contains(<wrapperName>.<key>));
     Assert.assertTrue(primitiveIterable.contains(<wrapperName>.<key>));
 }
+
 >>
 
 NaNEqualsTests() ::= <<
@@ -955,6 +950,7 @@ public void testEquals_NaN()
     Assert.assertNotEquals(hashSet5, hashSet1);
     Assert.assertNotEquals(iterable5, iterable1);
 }
+
 >>
 
 differentNaNs() ::= <<
@@ -968,6 +964,7 @@ public void contains_different_NaNs()
     <bitsType.(type)> nan2 = <NaNBits2.(type)>;
     Assert.assertEquals(hashSet.contains(<wrapperName>.<bitsType.(type)>BitsTo<name>(nan2)), primitiveIterable.contains(<wrapperName>.<bitsType.(type)>BitsTo<name>(nan2)));
 }
+
 >>
 
 ZeroTests() ::= <<
@@ -983,6 +980,7 @@ public void contains_zero()
     Assert.assertTrue(iterable.contains(<(literal.(type))("0")>));
     Assert.assertFalse(iterable.contains(-<(literal.(type))("0")>));
 }
+
 >>
 
 NaNBits1 ::= [

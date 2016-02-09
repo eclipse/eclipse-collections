@@ -39,18 +39,19 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="acceptance-tests" target="1.8" />
-      <module name="eclipse-collections-parent" target="1.5" />
       <module name="eclipse-collections" target="1.5" />
       <module name="eclipse-collections-api" target="1.5" />
       <module name="eclipse-collections-code-generator" target="1.5" />
       <module name="eclipse-collections-code-generator-ant" target="1.5" />
       <module name="eclipse-collections-code-generator-maven-plugin" target="1.5" />
       <module name="eclipse-collections-forkjoin" target="1.7" />
+      <module name="eclipse-collections-parent" target="1.8" />
       <module name="eclipse-collections-testutils" target="1.5" />
+      <module name="jmh-scala-tests" target="1.8" />
       <module name="jmh-tests" target="1.8" />
       <module name="junit-trait-runner" target="1.8" />
       <module name="performance-tests" target="1.8" />
-      <module name="scala-unit-tests" target="1.5" />
+      <module name="scala-unit-tests" target="1.8" />
       <module name="serialization-tests" target="1.6" />
       <module name="unit-tests" target="1.8" />
       <module name="unit-tests-java8" target="1.8" />

@@ -315,7 +315,6 @@ final class Immutable<name>SingletonSet implements Immutable<name>Set, Serializa
     }
 }
 
-
 >>
 
 arithmeticMethods ::= [

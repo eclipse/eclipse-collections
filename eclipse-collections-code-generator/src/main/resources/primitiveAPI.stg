@@ -23,5 +23,3 @@ sharedAPI(fileName, name) ::= <<
 
 <fileName> reject(<name>Predicate predicate);
 >>
-
-
