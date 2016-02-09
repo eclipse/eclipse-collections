@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -10,8 +10,11 @@
 
 package org.eclipse.collections.impl.bimap.mutable;
 
+import org.eclipse.collections.api.bimap.MutableBiMap;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.test.Verify;
+import org.eclipse.collections.impl.test.domain.Key;
+import org.eclipse.collections.impl.utility.Iterate;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -101,5 +104,24 @@ public class HashBiMapTest extends AbstractMutableBiMapTestCase
         AbstractMutableBiMapTestCase.assertBiMapsEqual(HashBiMap.newWithKeysValues(1, 'a', 2, 'b', 3, 'c', 4, 'd'), map44);
         Assert.assertSame(map, map44);
         Assert.assertSame(map3, map4);
+    }
+
+    @Test
+    public void forcePut_inverseKeyPreservation()
+    {
+        Key key1 = new Key("1");
+        Key key2 = new Key("2");
+
+        Key value1 = new Key("abc");
+        Key value2 = new Key("xyz");
+
+        Key duplicateOfKey1 = new Key("1");
+
+        HashBiMap<Key, Key> biMap = this.newMapWithKeysValues(key1, value1, key2, value2);
+
+        biMap.forcePut(duplicateOfKey1, value2);
+
+        Assert.assertSame(key1, Iterate.getFirst(biMap.entrySet()).getKey());
+        Assert.assertSame(key1, Iterate.getFirst(biMap.inverse().entrySet()).getValue());
     }
 }
