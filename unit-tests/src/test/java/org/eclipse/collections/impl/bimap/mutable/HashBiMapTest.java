@@ -113,13 +113,12 @@ public class HashBiMapTest extends AbstractMutableBiMapTestCase
         Key key2 = new Key("2");
 
         Key value1 = new Key("abc");
-        Key value2 = new Key("xyz");
 
         Key duplicateOfKey1 = new Key("1");
 
-        HashBiMap<Key, Key> biMap = this.newMapWithKeysValues(key1, value1, key2, value2);
+        HashBiMap<Key, Key> biMap = this.newMapWithKeysValues(key1, value1, key2, new Key("xyz"));
 
-        biMap.forcePut(duplicateOfKey1, value2);
+        biMap.forcePut(duplicateOfKey1, new Key("xyz"));
 
         Assert.assertSame(key1, Iterate.getFirst(biMap.entrySet()).getKey());
         Assert.assertSame(key1, Iterate.getFirst(biMap.inverse().entrySet()).getValue());
