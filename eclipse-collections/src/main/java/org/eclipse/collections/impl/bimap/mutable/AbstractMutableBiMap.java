@@ -204,11 +204,16 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
         }
 
         boolean containsKey = this.delegate.containsKey(key);
-        V put = this.delegate.put(key, value);
+
         if (containsKey)
         {
-            this.inverse.delegate.removeKey(put);
+            V oldValue = this.delegate.put(key, value);
+            K oldKeyToPreserve = this.inverse.delegate.removeKey(oldValue);
+            this.inverse.delegate.put(value, oldKeyToPreserve);
+            return oldValue;
         }
+
+        V put = this.delegate.put(key, value);
         this.inverse.delegate.put(value, key);
         return put;
     }
@@ -225,16 +230,31 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
         }
 
         boolean containsKey = this.delegate.containsKey(key);
+        if (containsValue)
+        {
+            V oldValueToPreserve =  this.delegate.get(this.inverse.delegate.get(value));
+            V put = this.delegate.put(key, oldValueToPreserve);
+
+            if (containsKey)
+            {
+                K oldKeyToPreserve = this.inverse.delegate.removeKey(put);
+                K oldKey = this.inverse.delegate.put(value, oldKeyToPreserve);
+                this.delegate.removeKey(oldKey);
+                return put;
+            }
+            K oldKey = this.inverse.delegate.put(value, key);
+            this.delegate.removeKey(oldKey);
+            return put;
+        }
+
         V put = this.delegate.put(key, value);
+
         if (containsKey)
         {
             this.inverse.delegate.removeKey(put);
         }
-        K oldKey = this.inverse.delegate.put(value, key);
-        if (containsValue)
-        {
-            this.delegate.removeKey(oldKey);
-        }
+
+        this.inverse.delegate.put(value, key);
         return put;
     }
 
