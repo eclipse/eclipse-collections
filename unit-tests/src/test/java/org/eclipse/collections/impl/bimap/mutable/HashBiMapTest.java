@@ -10,7 +10,6 @@
 
 package org.eclipse.collections.impl.bimap.mutable;
 
-import org.eclipse.collections.api.bimap.MutableBiMap;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.test.domain.Key;
@@ -107,20 +106,22 @@ public class HashBiMapTest extends AbstractMutableBiMapTestCase
     }
 
     @Test
-    public void forcePut_inverseKeyPreservation()
+    public void forcePut_inverseKeyAndValuePreservation()
     {
         Key key1 = new Key("1");
-        Key key2 = new Key("2");
+        Key value2 = new Key("xyz");
 
-        Key value1 = new Key("abc");
+        HashBiMap<Key, Key> biMap = this.newMapWithKeysValues(key1, new Key("abc"), new Key("2"), value2);
 
         Key duplicateOfKey1 = new Key("1");
+        Key duplicateOfValue2 = new Key("xyz");
 
-        HashBiMap<Key, Key> biMap = this.newMapWithKeysValues(key1, value1, key2, new Key("xyz"));
-
-        biMap.forcePut(duplicateOfKey1, new Key("xyz"));
+        biMap.forcePut(duplicateOfKey1, duplicateOfValue2);
 
         Assert.assertSame(key1, Iterate.getFirst(biMap.entrySet()).getKey());
         Assert.assertSame(key1, Iterate.getFirst(biMap.inverse().entrySet()).getValue());
+
+        Assert.assertSame(value2, Iterate.getFirst(biMap.entrySet()).getValue());
+        Assert.assertSame(value2, Iterate.getFirst(biMap.inverse().entrySet()).getKey());
     }
 }
