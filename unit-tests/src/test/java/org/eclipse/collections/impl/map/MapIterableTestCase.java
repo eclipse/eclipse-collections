@@ -835,6 +835,8 @@ public abstract class MapIterableTestCase
         String value = map.getFirst();
         Assert.assertNotNull(value);
         Assert.assertTrue(value, map.valuesView().contains(value));
+
+        Assert.assertNull(this.newMap().getFirst());
     }
 
     @Test
@@ -845,6 +847,8 @@ public abstract class MapIterableTestCase
         String value = map.getLast();
         Assert.assertNotNull(value);
         Assert.assertTrue(value, map.valuesView().contains(value));
+
+        Assert.assertNull(this.newMap().getLast());
     }
 
     @Test
