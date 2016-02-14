@@ -54,7 +54,6 @@ import org.eclipse.collections.impl.lazy.parallel.set.AbstractParallelUnsortedSe
 import org.eclipse.collections.impl.lazy.parallel.set.RootUnsortedSetBatch;
 import org.eclipse.collections.impl.lazy.parallel.set.SelectUnsortedSetBatch;
 import org.eclipse.collections.impl.lazy.parallel.set.UnsortedSetBatch;
-import org.eclipse.collections.impl.multimap.set.UnifiedSetMultimap;
 import org.eclipse.collections.impl.multimap.set.strategy.UnifiedSetWithHashingStrategyMultimap;
 import org.eclipse.collections.impl.partition.set.strategy.PartitionUnifiedSetWithHashingStrategy;
 import org.eclipse.collections.impl.set.AbstractUnifiedSet;
@@ -1897,10 +1896,9 @@ public class UnifiedSetWithHashingStrategy<T>
         return this.groupBy(function, UnifiedSetWithHashingStrategyMultimap.<V, T>newMultimap(this.hashingStrategy));
     }
 
-    public <V> UnifiedSetMultimap<V, T> groupByEach(
-            Function<? super T, ? extends Iterable<V>> function)
+    public <V> UnifiedSetWithHashingStrategyMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function)
     {
-        return this.groupByEach(function, UnifiedSetMultimap.<V, T>newMultimap());
+        return this.groupByEach(function, UnifiedSetWithHashingStrategyMultimap.<V, T>newMultimap(this.hashingStrategy));
     }
 
     public T get(T key)

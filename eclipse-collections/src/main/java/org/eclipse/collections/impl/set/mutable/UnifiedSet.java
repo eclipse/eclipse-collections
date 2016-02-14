@@ -1859,6 +1859,11 @@ public class UnifiedSet<T>
         return this.groupBy(function, UnifiedSetMultimap.<V, T>newMultimap());
     }
 
+    public <V> UnifiedSetMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function)
+    {
+        return this.groupByEach(function, new UnifiedSetMultimap<V, T>());
+    }
+
     public T get(T key)
     {
         int index = this.index(key);
