@@ -36,7 +36,6 @@ import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.bag.mutable.HashBag;
 import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.block.factory.Predicates;
-import org.eclipse.collections.impl.block.factory.Predicates2;
 import org.eclipse.collections.impl.block.procedure.MultimapEachPutProcedure;
 import org.eclipse.collections.impl.factory.Bags;
 import org.eclipse.collections.impl.factory.Sets;
@@ -135,6 +134,7 @@ final class ImmutableSingletonBag<T>
         return HashBag.newBag(elements).with(this.value).toImmutable();
     }
 
+    @Override
     public ImmutableBag<T> newWithoutAll(Iterable<? extends T> elements)
     {
         return this.emptyIfMatchesOrThis(Predicates.in(elements));
@@ -224,13 +224,19 @@ final class ImmutableSingletonBag<T>
 
     public ImmutableBag<T> reject(Predicate<? super T> predicate)
     {
-        return this.select(Predicates.not(predicate));
+        return predicate.accept(this.value)
+                ? Bags.immutable.<T>empty()
+                : this;
     }
 
     @Override
     public <R extends Collection<T>> R reject(Predicate<? super T> predicate, R target)
     {
-        return this.select(Predicates.not(predicate), target);
+        if (!predicate.accept(this.value))
+        {
+            target.add(this.value);
+        }
+        return target;
     }
 
     @Override
@@ -239,7 +245,11 @@ final class ImmutableSingletonBag<T>
             P parameter,
             R target)
     {
-        return this.selectWith(Predicates2.not(predicate), parameter, target);
+        if (!predicate.accept(this.value, parameter))
+        {
+            target.add(this.value);
+        }
+        return target;
     }
 
     public <S> ImmutableBag<S> selectInstancesOf(Class<S> clazz)
@@ -361,6 +371,7 @@ final class ImmutableSingletonBag<T>
         return UnifiedMap.newWithKeysValues(this.value, 1);
     }
 
+    @Override
     public ImmutableBag<T> toImmutable()
     {
         return this;

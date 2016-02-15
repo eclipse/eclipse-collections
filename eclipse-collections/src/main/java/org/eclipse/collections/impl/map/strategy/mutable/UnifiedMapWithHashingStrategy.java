@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -1035,6 +1035,25 @@ public class UnifiedMapWithHashingStrategy<K, V> extends AbstractMutableMap<K, V
                 procedure.value(this.nonSentinel(cur), (V) this.table[i + 1]);
             }
         }
+    }
+
+    @Override
+    public V getFirst()
+    {
+        for (int i = 0; i < this.table.length; i += 2)
+        {
+            Object cur = this.table[i];
+            if (cur == CHAINED_KEY)
+            {
+                Object[] chain = (Object[]) this.table[i + 1];
+                return (V) chain[1];
+            }
+            if (cur != null)
+            {
+                return (V) this.table[i + 1];
+            }
+        }
+        return null;
     }
 
     public <E> MutableMap<K, V> collectKeysAndValues(

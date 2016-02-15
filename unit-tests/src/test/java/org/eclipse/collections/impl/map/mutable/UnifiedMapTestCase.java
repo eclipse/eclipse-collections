@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -57,8 +57,8 @@ public abstract class UnifiedMapTestCase extends MutableMapTestCase
     protected static final MutableList<Integer> MORE_COLLISIONS = FastList.newList(COLLISIONS)
             .with(COLLISION_6, COLLISION_7, COLLISION_8, COLLISION_9);
     protected static final String[] FREQUENT_COLLISIONS = {"\u9103\ufffe", "\u9104\uffdf",
-        "\u9105\uffc0", "\u9106\uffa1", "\u9107\uff82", "\u9108\uff63", "\u9109\uff44",
-        "\u910a\uff25", "\u910b\uff06", "\u910c\ufee7"};
+            "\u9105\uffc0", "\u9106\uffa1", "\u9107\uff82", "\u9108\uff63", "\u9109\uff44",
+            "\u910a\uff25", "\u910b\uff06", "\u910c\ufee7"};
 
     @Test
     public void valuesCollection_toArray()
@@ -850,6 +850,16 @@ public abstract class UnifiedMapTestCase extends MutableMapTestCase
         }
 
         Assert.assertArrayEquals(expected, map.keysView().toArray());
+    }
+
+    @Override
+    public void getFirst()
+    {
+        super.getFirst();
+
+        MutableMap<String, String> map = this.newMap();
+        map.collectKeysAndValues(Arrays.asList(FREQUENT_COLLISIONS), Functions.identity(), Functions.identity());
+        Assert.assertEquals(FREQUENT_COLLISIONS[0], map.getFirst());
     }
 
     private static final class NoInstanceOfInEquals
