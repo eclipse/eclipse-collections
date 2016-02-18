@@ -937,11 +937,14 @@ public class ObjectBooleanHashMapWithHashingStrategy<K> implements MutableObject
 
     private boolean nullSafeEquals(K key, Object other)
     {
-        if (key == null && other == null)
+        if (key == null)
         {
-            return true;
+            if (other == null)
+            {
+                return true;
+            }
         }
-        if (key != NULL_KEY && other != null)
+        else if (key != NULL_KEY && other != null)
         {
             if (this.hashingStrategy.equals(key, this.toNonSentinel(other)))
             {
