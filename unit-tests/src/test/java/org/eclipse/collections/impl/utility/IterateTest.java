@@ -1882,14 +1882,16 @@ public class IterateTest
     @Test
     public void chunk()
     {
-        FastList<String> fastList = FastList.newListWith("1", "2", "3", "4", "5", "6", "7");
+        MutableList<String> fastList = FastList.newListWith("1", "2", "3", "4", "5", "6", "7");
         RichIterable<RichIterable<String>> groups1 = Iterate.chunk(fastList, 2);
         RichIterable<Integer> sizes1 = groups1.collect(Functions.getSizeOf());
         Assert.assertEquals(FastList.newListWith(2, 2, 2, 1), sizes1);
-        ArrayList<String> arrayList = new ArrayList<>(fastList);
+
+        List<String> arrayList = new ArrayList<>(fastList);
         RichIterable<RichIterable<String>> groups2 = Iterate.chunk(arrayList, 2);
-        RichIterable<Integer> sizes2 = groups1.collect(Functions.getSizeOf());
+        RichIterable<Integer> sizes2 = groups2.collect(Functions.getSizeOf());
         Assert.assertEquals(FastList.newListWith(2, 2, 2, 1), sizes2);
+
         Verify.assertThrows(IllegalArgumentException.class, () -> Iterate.chunk(null, 1));
     }
 
