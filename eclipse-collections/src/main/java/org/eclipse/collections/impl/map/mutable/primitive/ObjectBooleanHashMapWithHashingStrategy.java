@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -214,7 +214,6 @@ public class ObjectBooleanHashMapWithHashingStrategy<K> implements MutableObject
         }
         return possibleResult;
     }
-
 
     @Override
     public boolean equals(Object obj)
@@ -938,11 +937,14 @@ public class ObjectBooleanHashMapWithHashingStrategy<K> implements MutableObject
 
     private boolean nullSafeEquals(K key, Object other)
     {
-        if (key == null && other == null)
+        if (key == null)
         {
-            return true;
+            if (other == null)
+            {
+                return true;
+            }
         }
-        if (key != NULL_KEY && other != null)
+        else if (key != NULL_KEY && other != null)
         {
             if (this.hashingStrategy.equals(key, this.toNonSentinel(other)))
             {
