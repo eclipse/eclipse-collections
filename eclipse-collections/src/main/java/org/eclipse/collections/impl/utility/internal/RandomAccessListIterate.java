@@ -774,7 +774,8 @@ public final class RandomAccessListIterate
     public static <T> long sumOfInt(List<T> list, IntFunction<? super T> function)
     {
         long result = 0;
-        for (int i = 0; i < list.size(); i++)
+        int size = list.size();
+        for (int i = 0; i < size; i++)
         {
             result += (long) function.intValueOf(list.get(i));
         }
@@ -784,7 +785,8 @@ public final class RandomAccessListIterate
     public static <T> long sumOfLong(List<T> list, LongFunction<? super T> function)
     {
         long result = 0L;
-        for (int i = 0; i < list.size(); i++)
+        int size = list.size();
+        for (int i = 0; i < size; i++)
         {
             result += function.longValueOf(list.get(i));
         }
@@ -795,7 +797,8 @@ public final class RandomAccessListIterate
     {
         double sum = 0.0d;
         double compensation = 0.0d;
-        for (int i = 0; i < list.size(); i++)
+        int size = list.size();
+        for (int i = 0; i < size; i++)
         {
             double adjustedValue = (double) function.floatValueOf(list.get(i)) - compensation;
             double nextSum = sum + adjustedValue;
@@ -809,7 +812,8 @@ public final class RandomAccessListIterate
     {
         double sum = 0.0d;
         double compensation = 0.0d;
-        for (int i = 0; i < list.size(); i++)
+        int size = list.size();
+        for (int i = 0; i < size; i++)
         {
             double adjustedValue = function.doubleValueOf(list.get(i)) - compensation;
             double nextSum = sum + adjustedValue;
