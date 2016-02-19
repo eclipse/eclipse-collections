@@ -1448,7 +1448,7 @@ public class Object<name>HashMap\<K> implements MutableObject<name>Map\<K>, Exte
             if (isNonSentinel(this.currentKey))
             {
                 int index = this.position - 1;
-                Object<name>HashMap.this.removeKeyAtIndex(toNonSentinel(this.currentKey), index);
+                Object<name>HashMap.this.removeKeyAtIndex(Object<name>HashMap.this.toNonSentinel(this.currentKey), index);
             }
             else
             {
