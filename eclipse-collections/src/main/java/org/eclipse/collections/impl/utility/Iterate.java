@@ -72,6 +72,7 @@ import org.eclipse.collections.impl.block.factory.Procedures2;
 import org.eclipse.collections.impl.block.procedure.MapCollectProcedure;
 import org.eclipse.collections.impl.block.procedure.MaxComparatorProcedure;
 import org.eclipse.collections.impl.block.procedure.MinComparatorProcedure;
+import org.eclipse.collections.impl.block.procedure.MultimapKeyValuePutAllProcedure;
 import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
@@ -2996,6 +2997,48 @@ public final class Iterate
     }
 
     /**
+     * Iterate over the specified collection applying the specified Functions to each element to calculate
+     * a key and values, add the results to {@code targetMultimap} and return the {@code targetMultimap}.
+     * <p>
+     * Example using a Java 8 lambda expression:
+     * <pre>
+     * MutableMultimap&lt;String, String&gt; multimap =
+     *      Iterate.<b>toMultimap</b>(integers, each -> "key:" + each, each -> Lists.mutable.of("value:" + each), FastListMultimap.newMultimap());
+     * </pre>
+     * <p>
+     * Example using an anonymous inner class:
+     * <pre>
+     * MutableMultimap&lt;String, String&gt; multimap =
+     *      Iterate.<b>groupByAndCollect</b>(integers,
+     *          new Function&lt;Integer, String&gt;()
+     *          {
+     *              public String valueOf(Integer each)
+     *              {
+     *                  return "key:" + each;
+     *              }
+     *          }, new Function&lt;Integer, Iterable&lt;String&gt;&gt;()
+     *          {
+     *              public Iterable&lt;String&gt; valueOf(Integer each)
+     *              {
+     *                  return Lists.mutable.of("value:" + each);
+     *              }
+     *          }, FastListMultimap.newMultimap());
+     * </pre>
+     *
+     * @see Iterate#groupBy(Iterable, Function) when only keys get transformed
+     * @see Iterate#groupByEach(Iterable, Function) when only keys get transformed and Function returns multiple keys
+     */
+    public static <T, K, V, R extends MutableMultimap<K, V>> R toMultimap(
+            Iterable<T> iterable,
+            Function<? super T, ? extends K> keyFunction,
+            Function<? super T, ? extends Iterable<V>> valuesFunction,
+            R targetMultimap)
+    {
+        Iterate.forEach(iterable, new MultimapKeyValuePutAllProcedure<T, K, V>(targetMultimap, keyFunction, valuesFunction));
+        return targetMultimap;
+    }
+
+    /**
      * Return the specified collection as a sorted List.
      */
     public static <T extends Comparable<? super T>> MutableList<T> toSortedList(Iterable<T> iterable)
@@ -3089,6 +3132,8 @@ public final class Iterate
 
     /**
      * @see RichIterable#groupBy(Function)
+     * @see Iterate#groupByEach(Iterable, Function) when function returns multiple keys
+     * @see Iterate#toMultimap(Iterable, Function, Function, MutableMultimap) when both keys and values get transformed
      */
     public static <T, V> MutableMultimap<V, T> groupBy(
             Iterable<T> iterable,
@@ -3119,6 +3164,8 @@ public final class Iterate
 
     /**
      * @see RichIterable#groupBy(Function, MutableMultimap)
+     * @see Iterate#groupByEach(Iterable, Function, MutableMultimap) when function returns multiple keys
+     * @see Iterate#toMultimap(Iterable, Function, Function, MutableMultimap) when both keys and values get transformed
      */
     public static <T, V, R extends MutableMultimap<V, T>> R groupBy(
             Iterable<T> iterable,
@@ -3202,6 +3249,8 @@ public final class Iterate
 
     /**
      * @see RichIterable#groupByEach(Function)
+     * @see Iterate#groupBy(Iterable, Function) when function returns single key
+     * @see Iterate#toMultimap(Iterable, Function, Function, MutableMultimap) when both keys and values get transformed
      */
     public static <T, V> MutableMultimap<V, T> groupByEach(
             Iterable<T> iterable,
@@ -3232,6 +3281,8 @@ public final class Iterate
 
     /**
      * @see RichIterable#groupByEach(Function, MutableMultimap)
+     * @see Iterate#groupBy(Iterable, Function, MutableMultimap) when function returns single key
+     * @see Iterate#toMultimap(Iterable, Function, Function, MutableMultimap) when both keys and values get transformed
      */
     public static <T, V, R extends MutableMultimap<V, T>> R groupByEach(
             Iterable<T> iterable,
