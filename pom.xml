@@ -314,7 +314,7 @@
                         </includes>
                         <argLine>-XX:-OmitStackTraceInFastThrow</argLine>
                         <runOrder>random</runOrder>
-                        <forkMode>never</forkMode>
+                        <forkCount>0</forkCount>
                     </configuration>
                 </plugin>
 
