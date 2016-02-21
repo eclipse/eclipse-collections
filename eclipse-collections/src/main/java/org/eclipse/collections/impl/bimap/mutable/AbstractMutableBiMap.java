@@ -441,7 +441,7 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
     @Override
     public MutableBiMap<K, V> asUnmodifiable()
     {
-        throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".asUnmodifiable() not implemented yet");
+        return UnmodifiableBiMap.of(this);
     }
 
     @Override
