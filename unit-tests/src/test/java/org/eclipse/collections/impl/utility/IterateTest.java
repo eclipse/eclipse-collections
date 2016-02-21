@@ -549,6 +549,53 @@ public class IterateTest
     }
 
     @Test
+    public void groupByAndCollect()
+    {
+        MutableList<Integer> list = Lists.mutable.of(1, 2, 2, 3, 3, 3);
+
+        Pair[] expectedPairs = {Tuples.pair("Key1", "1"),
+                Tuples.pair("Key2", "2"),
+                Tuples.pair("Key2", "2"),
+                Tuples.pair("Key3", "3"),
+                Tuples.pair("Key3", "3"),
+                Tuples.pair("Key3", "3")};
+        Function<Integer, String> keyFunction = each -> "Key" + each;
+        Function<Integer, String> valueFunction = String::valueOf;
+        MutableListMultimap<String, String> actualMultimap1 = Iterate.groupByAndCollect(list, keyFunction, valueFunction, Multimaps.mutable.list.empty());
+        Verify.assertListMultimapsEqual(FastListMultimap.newMultimap(expectedPairs), actualMultimap1);
+
+        MutableSetMultimap<String, String> actualMultimap2 = Iterate.groupByAndCollect(list, keyFunction, valueFunction, Multimaps.mutable.set.empty());
+        Verify.assertSetMultimapsEqual(UnifiedSetMultimap.newMultimap(expectedPairs), actualMultimap2);
+
+        MutableBagMultimap<String, String> actualMultimap3 = Iterate.groupByAndCollect(list, keyFunction, valueFunction, Multimaps.mutable.bag.empty());
+        Verify.assertBagMultimapsEqual(HashBagMultimap.newMultimap(expectedPairs), actualMultimap3);
+
+        MutableSortedSetMultimap<String, String> expectedMultimap4 = TreeSortedSetMultimap.newMultimap(Comparators.naturalOrder());
+        expectedMultimap4.putAllPairs(expectedPairs);
+        MutableSortedSetMultimap<String, String> actualMultimap4 = Iterate.groupByAndCollect(list, keyFunction, valueFunction, Multimaps.mutable.sortedSet.with(Comparators.naturalOrder()));
+        Verify.assertSortedSetMultimapsEqual(expectedMultimap4, actualMultimap4);
+        Assert.assertSame(expectedMultimap4.comparator(), actualMultimap4.comparator());
+
+        MutableSortedSetMultimap<String, String> expectedMultimap5 = TreeSortedSetMultimap.newMultimap(Comparators.reverseNaturalOrder());
+        expectedMultimap5.putAllPairs(expectedPairs);
+        MutableSortedSetMultimap<String, String> actualMultimap5 = Iterate.groupByAndCollect(list, keyFunction, valueFunction, Multimaps.mutable.sortedSet.with(Comparators.reverseNaturalOrder()));
+        Verify.assertSortedSetMultimapsEqual(expectedMultimap5, actualMultimap5);
+        Assert.assertSame(expectedMultimap5.comparator(), actualMultimap5.comparator());
+
+        MutableSortedBagMultimap<String, String> expectedMultimap6 = TreeBagMultimap.newMultimap(Comparators.naturalOrder());
+        expectedMultimap6.putAllPairs(expectedPairs);
+        MutableSortedBagMultimap<String, String> actualMultimap6 = Iterate.groupByAndCollect(list, keyFunction, valueFunction, TreeBagMultimap.newMultimap(Comparators.naturalOrder()));
+        Verify.assertSortedBagMultimapsEqual(expectedMultimap6, actualMultimap6);
+        Assert.assertSame(expectedMultimap6.comparator(), actualMultimap6.comparator());
+
+        MutableSortedBagMultimap<String, String> expectedMultimap7 = TreeBagMultimap.newMultimap(Comparators.reverseNaturalOrder());
+        expectedMultimap7.putAllPairs(expectedPairs);
+        MutableSortedBagMultimap<String, String> actualMultimap7 = Iterate.groupByAndCollect(list, keyFunction, valueFunction, TreeBagMultimap.newMultimap(Comparators.reverseNaturalOrder()));
+        Verify.assertSortedBagMultimapsEqual(expectedMultimap7, actualMultimap7);
+        Assert.assertSame(expectedMultimap7.comparator(), actualMultimap7.comparator());
+    }
+
+    @Test
     public void toList()
     {
         Assert.assertEquals(FastList.newListWith(1, 2, 3), FastList.newList(Interval.oneTo(3)));
