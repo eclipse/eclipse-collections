@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -98,33 +98,15 @@ public class CollectIterable<T, V>
     }
 
     @Override
-    public <P> boolean anySatisfyWith(Predicate2<? super V, ? super P> predicate, P parameter)
-    {
-        return this.anySatisfy(Predicates.bind(predicate, parameter));
-    }
-
-    @Override
     public boolean allSatisfy(Predicate<? super V> predicate)
     {
         return Iterate.allSatisfy(this.adapted, Predicates.attributePredicate(this.function, predicate));
     }
 
     @Override
-    public <P> boolean allSatisfyWith(Predicate2<? super V, ? super P> predicate, P parameter)
-    {
-        return this.allSatisfy(Predicates.bind(predicate, parameter));
-    }
-
-    @Override
     public boolean noneSatisfy(Predicate<? super V> predicate)
     {
         return Iterate.noneSatisfy(this.adapted, Predicates.attributePredicate(this.function, predicate));
-    }
-
-    @Override
-    public <P> boolean noneSatisfyWith(Predicate2<? super V, ? super P> predicate, P parameter)
-    {
-        return this.noneSatisfy(Predicates.bind(predicate, parameter));
     }
 
     @Override
