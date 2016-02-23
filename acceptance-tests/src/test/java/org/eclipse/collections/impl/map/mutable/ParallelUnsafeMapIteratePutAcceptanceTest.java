@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -27,9 +27,13 @@ import org.eclipse.collections.impl.test.Verify;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ParallelUnsafeMapIteratePutAcceptanceTest
 {
+    private static final Logger LOGGER = LoggerFactory.getLogger(ParallelUnsafeMapIteratePutAcceptanceTest.class);
+
     private static final long SEED = 0x12345678ABCDL;
 
     private static final long PUT_REPEAT = 100;
@@ -90,7 +94,7 @@ public class ParallelUnsafeMapIteratePutAcceptanceTest
 
     private void runPutTest1(int threadCount, Integer[] contents, Integer[] constContents, ExecutorService executorService, boolean warmup)
     {
-        long ops = (warmup ? 1000000 / contents.length : 1000000 * PUT_REPEAT / contents.length) + 1;
+        long ops = ((warmup ? 1000000 : 1000000 * PUT_REPEAT) / contents.length) + 1;
         Future<?>[] futures = new Future<?>[threadCount];
         for (int i = 0; i < ops; i++)
         {
@@ -173,6 +177,7 @@ public class ParallelUnsafeMapIteratePutAcceptanceTest
                         }
                     }
                 }
+                LOGGER.info("Processed chunk ending at: {}", end);
             }
             if (this.total < 0)
             {
