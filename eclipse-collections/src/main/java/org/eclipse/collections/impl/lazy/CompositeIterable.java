@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -14,6 +14,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import net.jcip.annotations.Immutable;
+import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
@@ -85,6 +86,57 @@ public final class CompositeIterable<E>
                 Iterate.forEachWith(iterable, procedure, parameter);
             }
         });
+    }
+
+    @Override
+    public boolean anySatisfy(final Predicate<? super E> predicate)
+    {
+        return this.iterables.anySatisfy(new Predicate<Iterable<E>>()
+        {
+            public boolean accept(Iterable<E> each)
+            {
+                return Iterate.anySatisfy(each, predicate);
+            }
+        });
+    }
+
+    @Override
+    public boolean allSatisfy(final Predicate<? super E> predicate)
+    {
+        return this.iterables.allSatisfy(new Predicate<Iterable<E>>()
+        {
+            public boolean accept(Iterable<E> each)
+            {
+                return Iterate.allSatisfy(each, predicate);
+            }
+        });
+    }
+
+    @Override
+    public boolean noneSatisfy(final Predicate<? super E> predicate)
+    {
+        return this.iterables.noneSatisfy(new Predicate<Iterable<E>>()
+        {
+            public boolean accept(Iterable<E> each)
+            {
+                return Iterate.anySatisfy(each, predicate);
+            }
+        });
+    }
+
+    @Override
+    public E detect(Predicate<? super E> predicate)
+    {
+        for (int i = 0; i < this.iterables.size(); i++)
+        {
+            Iterable<E> eachIterable = this.iterables.get(i);
+            E result = Iterate.detect(eachIterable, predicate);
+            if (result != null)
+            {
+                return result;
+            }
+        }
+        return null;
     }
 
     public void add(Iterable<E> iterable)
