@@ -30,8 +30,8 @@ matrix:
 
     - jdk: oraclejdk8
       env:
-        - DESC="compile all modules"
-        - CMD="mvn install --activate-profiles all -DskipTests=true --batch-mode --show-version --errors"
+        - DESC="compile jmh-tests and performance-tests"
+        - CMD="mvn install --projects jmh-tests,performance-tests --also-make --activate-profiles all -DskipTests=true --batch-mode --show-version --errors"
 
     - jdk: oraclejdk8
       env:
