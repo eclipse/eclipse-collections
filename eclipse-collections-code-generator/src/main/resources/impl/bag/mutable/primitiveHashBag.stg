@@ -382,7 +382,7 @@ public final class <name>HashBag extends Abstract<name>Iterable implements Mutab
         return true;
     }
 
-    public void forEach(final <name>Procedure procedure)
+    public void forEach(<name>Procedure procedure)
     {
         this.each(procedure);
     }

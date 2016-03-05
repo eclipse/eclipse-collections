@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -1215,8 +1215,13 @@ public class ArrayIterateTest
     {
         String[] array = {"1", "2", "3", "4", "5", "6", "7"};
         RichIterable<RichIterable<String>> groups = ArrayIterate.chunk(array, 2);
-        RichIterable<Integer> sizes = groups.collect(RichIterable::size);
-        Assert.assertEquals(FastList.newListWith(2, 2, 2, 1), sizes);
+        Assert.assertEquals(
+                Lists.immutable.with(
+                        Lists.immutable.with("1", "2"),
+                        Lists.immutable.with("3", "4"),
+                        Lists.immutable.with("5", "6"),
+                        Lists.immutable.with("7")),
+                groups);
     }
 
     @Test(expected = IllegalArgumentException.class)
