@@ -53,6 +53,19 @@ public class ObjectBooleanHashMapWithHashingStrategyTest extends ObjectBooleanHa
 
     private static final HashingStrategy<Person> FIRST_NAME_HASHING_STRATEGY = HashingStrategies.fromFunction(Person.TO_FIRST);
     private static final HashingStrategy<Person> LAST_NAME_HASHING_STRATEGY = HashingStrategies.fromFunction(Person.TO_LAST);
+    private static final HashingStrategy<Person> CONSTANT_HASHCODE_STRATEGY = new HashingStrategy<Person>() {
+        @Override
+        public int computeHashCode(Person object)
+        {
+            return 0;
+        }
+
+        @Override
+        public boolean equals(Person person1, Person person2)
+        {
+            return person1.getLastName().equals(person2.getLastName());
+        }
+    };
 
     private static final Person JOHNSMITH = new Person("John", "Smith");
     private static final Person JANESMITH = new Person("Jane", "Smith");
@@ -185,10 +198,15 @@ public class ObjectBooleanHashMapWithHashingStrategyTest extends ObjectBooleanHa
     {
         ObjectBooleanHashMapWithHashingStrategy<Person> map1 = ObjectBooleanHashMapWithHashingStrategy.newWithKeysValues(LAST_NAME_HASHING_STRATEGY, JOHNDOE, true, JANEDOE, true, JOHNSMITH, true, JANESMITH, true);
         ObjectBooleanHashMapWithHashingStrategy<Person> map2 = ObjectBooleanHashMapWithHashingStrategy.newWithKeysValues(FIRST_NAME_HASHING_STRATEGY, JOHNDOE, true, JANEDOE, true, JOHNSMITH, true, JANESMITH, true);
+        ObjectBooleanHashMapWithHashingStrategy<Person> mapWithConstantHashCodeStrategy = ObjectBooleanHashMapWithHashingStrategy.newWithKeysValues(CONSTANT_HASHCODE_STRATEGY, JOHNDOE, true, JANEDOE, true, JOHNSMITH, true, JANESMITH, true);
 
         Assert.assertEquals(map1, map2);
         Assert.assertEquals(map2, map1);
+        Assert.assertEquals(mapWithConstantHashCodeStrategy, map2);
+        Assert.assertEquals(map2, mapWithConstantHashCodeStrategy);
         Assert.assertNotEquals(map1.hashCode(), map2.hashCode());
+        Assert.assertNotEquals(map1.hashCode(), mapWithConstantHashCodeStrategy.hashCode());
+        Assert.assertNotEquals(map2.hashCode(), mapWithConstantHashCodeStrategy.hashCode());
 
         ObjectBooleanHashMapWithHashingStrategy<Person> map3 = ObjectBooleanHashMapWithHashingStrategy.newWithKeysValues(LAST_NAME_HASHING_STRATEGY, JOHNDOE, true, JANEDOE, false, JOHNSMITH, true, JANESMITH, false);
 
