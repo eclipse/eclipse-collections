@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -207,7 +207,7 @@ public abstract class AbstractMultimap<K, V, C extends RichIterable<V>>
         this.getMap().forEachKey(procedure);
     }
 
-    public void forEachKeyValue(final Procedure2<K, V> procedure)
+    public void forEachKeyValue(final Procedure2<? super K, ? super V> procedure)
     {
         final Procedure2<V, K> innerProcedure = new Procedure2<V, K>()
         {
