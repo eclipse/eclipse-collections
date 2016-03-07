@@ -226,7 +226,7 @@ public abstract class AbstractMultimap<K, V, C extends RichIterable<V>>
         });
     }
 
-    public void forEachKeyMultiValues(Procedure2<K, ? super Iterable<V>> procedure)
+    public void forEachKeyMultiValues(Procedure2<? super K, ? super Iterable<V>> procedure)
     {
         this.getMap().forEachKeyValue(procedure);
     }

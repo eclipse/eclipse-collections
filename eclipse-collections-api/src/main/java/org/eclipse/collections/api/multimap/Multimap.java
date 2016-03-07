@@ -117,8 +117,9 @@ public interface Multimap<K, V>
      * {@code [ ["key1", {@link RichIterable["val1", "val2", "val2"]}], ["key2", {@link RichIterable["val3"]}] ]}
      *
      * @since 6.0
+     * @param procedure
      */
-    void forEachKeyMultiValues(Procedure2<K, ? super Iterable<V>> procedure);
+    void forEachKeyMultiValues(Procedure2<? super K, ? super Iterable<V>> procedure);
 
     /**
      * Returns the number of key-value entry pairs.
