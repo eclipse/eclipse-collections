@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -12,20 +12,29 @@ package org.eclipse.collections.test;
 
 import org.junit.Test;
 
+import static org.eclipse.collections.impl.test.Verify.assertThrows;
+
 public interface UnmodifiableCollectionTestCase extends CollectionTestCase, UnmodifiableIterableTestCase
 {
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     default void Collection_add()
     {
-        this.newWith(1, 2, 3).add(4);
+        assertThrows(UnsupportedOperationException.class, () -> this.newWith(1, 2, 3).add(4));
     }
 
     @Override
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
+    default void Collection_remove()
+    {
+        assertThrows(UnsupportedOperationException.class, () -> this.newWith(1, 2, 3).remove(3));
+    }
+
+    @Override
+    @Test
     default void Collection_clear()
     {
-        this.newWith(1, 2, 3).clear();
+        assertThrows(UnsupportedOperationException.class, () -> this.newWith(1, 2, 3).clear());
     }
 
     @Override

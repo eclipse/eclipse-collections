@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -15,6 +15,8 @@ import org.eclipse.collections.test.collection.mutable.MutableCollectionUniqueTe
 import org.eclipse.collections.test.set.SetTestCase;
 import org.eclipse.collections.test.set.UnsortedSetIterableTestCase;
 import org.junit.Test;
+
+import static org.eclipse.collections.test.IterableTestCase.assertEquals;
 
 public interface MutableSetTestCase extends SetTestCase, UnsortedSetIterableTestCase, MutableCollectionUniqueTestCase
 {
@@ -44,5 +46,19 @@ public interface MutableSetTestCase extends SetTestCase, UnsortedSetIterableTest
     default void Iterable_remove()
     {
         SetTestCase.super.Iterable_remove();
+    }
+
+    @Override
+    @Test
+    default void equalsAndHashCode()
+    {
+        UnsortedSetIterableTestCase.super.equalsAndHashCode();
+
+        if (this.allowsRemove())
+        {
+            MutableSet<Integer> singleCollisionBucket = this.newWith(COLLISION_1, COLLISION_2);
+            singleCollisionBucket.remove(COLLISION_2);
+            assertEquals(singleCollisionBucket, this.newWith(COLLISION_1));
+        }
     }
 }

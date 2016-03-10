@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -50,7 +50,6 @@ import org.junit.Test;
 import static org.eclipse.collections.impl.test.Verify.assertIterablesEqual;
 import static org.eclipse.collections.impl.test.Verify.assertThrows;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
@@ -110,7 +109,18 @@ public interface IterableTestCase
         }
 
         Assert.assertEquals(o1, o2);
-        IterableTestCase.checkNotSame(o1, o2);
+
+        assertFalse("Neither item should equal null", o1.equals(null));
+        assertFalse("Neither item should equal null", o2.equals(null));
+        assertNotEquals("Neither item should equal new Object()", o1.equals(new Object()));
+        assertNotEquals("Neither item should equal new Object()", o2.equals(new Object()));
+        Assert.assertEquals(o1, o1);
+        Assert.assertEquals(o2, o2);
+        Assert.assertEquals(o1, o2);
+        Assert.assertEquals(o2, o1);
+        Assert.assertEquals(o1.hashCode(), o2.hashCode());
+
+        checkNotSame(o1, o2);
 
         if (o1 instanceof MultiReaderFastList<?> || o2 instanceof MultiReaderFastList<?>)
         {
@@ -147,12 +157,26 @@ public interface IterableTestCase
         if ((o1 instanceof Number && o2 instanceof Number)
                 || (o1 instanceof Boolean && o2 instanceof Boolean)
                 || o1 instanceof ImmutableCollection<?> && o2 instanceof ImmutableCollection<?>
-                && ((ImmutableCollection<?>) o1).isEmpty() && ((ImmutableCollection<?>) o2).isEmpty())
+                && ((ImmutableCollection<?>) o1).isEmpty() && ((ImmutableCollection<?>) o2).isEmpty()
+                && !(o1 instanceof SortedIterable<?>) && !(o2 instanceof SortedIterable<?>))
         {
             assertSame(o1, o2);
             return;
         }
         assertNotSame(o1, o2);
+    }
+
+    static void assertNotEquals(Object o1, Object o2)
+    {
+        Assert.assertNotEquals(o1, o2);
+        Assert.assertNotEquals(o2, o1);
+
+        assertFalse("Neither item should equal null", o1.equals(null));
+        assertFalse("Neither item should equal null", o2.equals(null));
+        Assert.assertNotEquals("Neither item should equal new Object()", o1.equals(new Object()));
+        Assert.assertNotEquals("Neither item should equal new Object()", o2.equals(new Object()));
+        Assert.assertEquals(o1, o1);
+        Assert.assertEquals(o2, o2);
     }
 
     static <T> void addAllTo(T[] elements, MutableCollection<T> result)
@@ -171,7 +195,7 @@ public interface IterableTestCase
     {
         Iterable<Integer> iterable = this.newWith(3, 3, 3, 2, 2, 1);
         Object deserialized = SerializeTestHelper.serializeDeserialize(iterable);
-        Assert.assertNotSame(iterable, deserialized);
+        assertNotSame(iterable, deserialized);
     }
 
     @Test

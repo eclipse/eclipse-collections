@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -50,8 +50,9 @@ public interface MutableSortedBagNoComparatorTestCase extends SortedBagTestCase,
         assertEquals("{1=1, 2=2, 3=3}", this.newWith(3, 3, 3, 2, 2, 1).toStringOfItemToCount());
     }
 
+    @Override
     @Test
-    default void MutableBag_addOccurrences()
+    default void MutableBagIterable_addOccurrences()
     {
         MutableSortedBag<Integer> mutableSortedBag = this.newWith(1, 2, 2, 3, 3, 3);
         mutableSortedBag.addOccurrences(4, 4);
@@ -62,8 +63,9 @@ public interface MutableSortedBagNoComparatorTestCase extends SortedBagTestCase,
         assertEquals(TreeBag.newBagWith(1, 1, 1, 2, 2, 3, 3, 3, 4, 4, 4, 4), mutableSortedBag);
     }
 
+    @Override
     @Test
-    default void MutableBag_removeOccurrences()
+    default void MutableBagIterable_removeOccurrences()
     {
         MutableSortedBag<Integer> mutableBag = this.newWith(1, 2, 2, 3, 3, 3);
         assertFalse(mutableBag.removeOccurrences(4, 4));
@@ -80,6 +82,7 @@ public interface MutableSortedBagNoComparatorTestCase extends SortedBagTestCase,
         assertEquals(TreeBag.newBagWith(3), mutableBag);
     }
 
+    @Override
     @Test
     default void SortedBag_forEachWith()
     {

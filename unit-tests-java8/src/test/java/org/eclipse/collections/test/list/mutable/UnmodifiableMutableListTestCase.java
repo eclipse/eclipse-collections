@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -16,6 +16,8 @@ import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.test.UnmodifiableMutableCollectionTestCase;
 import org.eclipse.collections.test.list.UnmodifiableListTestCase;
 import org.junit.Test;
+
+import static org.eclipse.collections.impl.test.Verify.assertThrows;
 
 public interface UnmodifiableMutableListTestCase extends UnmodifiableMutableCollectionTestCase, UnmodifiableListTestCase, MutableListTestCase
 {
@@ -46,5 +48,12 @@ public interface UnmodifiableMutableListTestCase extends UnmodifiableMutableColl
     default void MutableList_sortThis_comparator()
     {
         this.newWith(5, 1, 4, 2, 3).sortThis(Comparators.reverseNaturalOrder());
+    }
+
+    @Override
+    @Test
+    default void MutableList_subList_subList_remove()
+    {
+        assertThrows(UnsupportedOperationException.class, () -> this.newWith().subList(0, 0).remove(new Object()));
     }
 }

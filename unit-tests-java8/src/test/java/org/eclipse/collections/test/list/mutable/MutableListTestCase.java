@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -76,5 +76,25 @@ public interface MutableListTestCase extends MutableCollectionTestCase, ListTest
         MutableList<Integer> sortedList = mutableList.sortThis(Comparators.reverseNaturalOrder());
         assertSame(mutableList, sortedList);
         assertEquals(Lists.immutable.with(5, 4, 3, 2, 1), sortedList);
+    }
+
+    @Test
+    default void MutableList_subList_subList_remove()
+    {
+        MutableList<String> list = this.newWith("A", "B", "C", "D");
+        MutableList<String> sublist = list.subList(0, 3);
+        MutableList<String> sublist2 = sublist.subList(0, 2);
+
+        assertEquals(Lists.immutable.with("A", "B", "C"), sublist);
+        assertEquals(Lists.immutable.with("A", "B"), sublist2);
+
+        sublist2.add("X");
+
+        assertEquals(Lists.immutable.with("A", "B", "X", "C"), sublist);
+        assertEquals(Lists.immutable.with("A", "B", "X"), sublist2);
+
+        assertEquals("B", sublist2.remove(1));
+        assertEquals(Lists.immutable.with("A", "X", "C"), sublist);
+        assertEquals(Lists.immutable.with("A", "X"), sublist2);
     }
 }

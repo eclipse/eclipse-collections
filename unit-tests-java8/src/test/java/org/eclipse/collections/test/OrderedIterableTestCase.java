@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -13,6 +13,8 @@ package org.eclipse.collections.test;
 import java.util.Iterator;
 
 import org.eclipse.collections.api.RichIterable;
+import org.eclipse.collections.api.list.MutableList;
+import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.tuple.Tuples;
@@ -100,6 +102,8 @@ public interface OrderedIterableTestCase extends RichIterableTestCase
     default void OrderedIterable_zipWithIndex_target()
     {
         RichIterable<Integer> iterable = this.newWith(4, 4, 4, 4, 3, 3, 3, 2, 2, 1);
+        MutableList<Pair<Integer, Integer>> target = Lists.mutable.empty();
+        MutableList<Pair<Integer, Integer>> result = iterable.zipWithIndex(target);
         Assert.assertEquals(
                 Lists.immutable.with(
                         Tuples.pair(4, 0),
@@ -112,6 +116,7 @@ public interface OrderedIterableTestCase extends RichIterableTestCase
                         Tuples.pair(2, 7),
                         Tuples.pair(2, 8),
                         Tuples.pair(1, 9)),
-                iterable.zipWithIndex(Lists.mutable.empty()));
+                result);
+        assertSame(target, result);
     }
 }
