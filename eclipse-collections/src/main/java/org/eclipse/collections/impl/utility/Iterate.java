@@ -73,6 +73,7 @@ import org.eclipse.collections.impl.block.procedure.MapCollectProcedure;
 import org.eclipse.collections.impl.block.procedure.MaxComparatorProcedure;
 import org.eclipse.collections.impl.block.procedure.MinComparatorProcedure;
 import org.eclipse.collections.impl.block.procedure.MultimapKeyValuePutAllProcedure;
+import org.eclipse.collections.impl.block.procedure.MultimapKeyValuePutProcedure;
 import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
@@ -3027,6 +3028,7 @@ public final class Iterate
      *
      * @see Iterate#groupBy(Iterable, Function) when only keys get transformed
      * @see Iterate#groupByEach(Iterable, Function) when only keys get transformed and Function returns multiple keys
+     * @see Iterate#groupByAndCollect(Iterable, Function, Function, MutableMultimap) when both keys and values get transformed and Function returns single key and value
      */
     public static <T, K, V, R extends MutableMultimap<K, V>> R toMultimap(
             Iterable<T> iterable,
@@ -3133,7 +3135,8 @@ public final class Iterate
     /**
      * @see RichIterable#groupBy(Function)
      * @see Iterate#groupByEach(Iterable, Function) when function returns multiple keys
-     * @see Iterate#toMultimap(Iterable, Function, Function, MutableMultimap) when both keys and values get transformed
+     * @see Iterate#groupByAndCollect(Iterable, Function, Function, MutableMultimap) when both keys and values get transformed
+     * @see Iterate#toMultimap(Iterable, Function, Function, MutableMultimap) when both keys and values get transformed and Function returns multiple values
      */
     public static <T, V> MutableMultimap<V, T> groupBy(
             Iterable<T> iterable,
@@ -3165,7 +3168,8 @@ public final class Iterate
     /**
      * @see RichIterable#groupBy(Function, MutableMultimap)
      * @see Iterate#groupByEach(Iterable, Function, MutableMultimap) when function returns multiple keys
-     * @see Iterate#toMultimap(Iterable, Function, Function, MutableMultimap) when both keys and values get transformed
+     * @see Iterate#groupByAndCollect(Iterable, Function, Function, MutableMultimap) when both keys and values get transformed
+     * @see Iterate#toMultimap(Iterable, Function, Function, MutableMultimap) when both keys and values get transformed and Function returns multiple values
      */
     public static <T, V, R extends MutableMultimap<V, T>> R groupBy(
             Iterable<T> iterable,
@@ -3250,7 +3254,8 @@ public final class Iterate
     /**
      * @see RichIterable#groupByEach(Function)
      * @see Iterate#groupBy(Iterable, Function) when function returns single key
-     * @see Iterate#toMultimap(Iterable, Function, Function, MutableMultimap) when both keys and values get transformed
+     * @see Iterate#groupByAndCollect(Iterable, Function, Function, MutableMultimap) when both keys and values get transformed
+     * @see Iterate#toMultimap(Iterable, Function, Function, MutableMultimap) when both keys and values get transformed and Function returns multiple values
      */
     public static <T, V> MutableMultimap<V, T> groupByEach(
             Iterable<T> iterable,
@@ -3282,7 +3287,8 @@ public final class Iterate
     /**
      * @see RichIterable#groupByEach(Function, MutableMultimap)
      * @see Iterate#groupBy(Iterable, Function, MutableMultimap) when function returns single key
-     * @see Iterate#toMultimap(Iterable, Function, Function, MutableMultimap) when both keys and values get transformed
+     * @see Iterate#groupByAndCollect(Iterable, Function, Function, MutableMultimap) when both keys and values get transformed
+     * @see Iterate#toMultimap(Iterable, Function, Function, MutableMultimap) when both keys and values get transformed and Function returns multiple values
      */
     public static <T, V, R extends MutableMultimap<V, T>> R groupByEach(
             Iterable<T> iterable,
@@ -3306,6 +3312,49 @@ public final class Iterate
             return IterableIterate.groupByEach(iterable, function, targetCollection);
         }
         throw new IllegalArgumentException("Cannot perform a groupByEach on null");
+    }
+
+    /**
+     * Iterate over the specified collection applying the specified Functions to each element to calculate
+     * a key and value, add the results to {@code targetMultimap} and return the {@code targetMultimap}.
+     * <p>
+     * Example using a Java 8 lambda expression:
+     * <pre>
+     * MutableMultimap&lt;String, String&gt; multimap =
+     *      Iterate.<b>groupByAndCollect</b>(integers, each -> "key:" + each, each -> "value:" + each, FastListMultimap.newMultimap());
+     * </pre>
+     * <p>
+     * Example using an anonymous inner class:
+     * <pre>
+     * MutableMultimap&lt;String, String&gt; multimap =
+     *      Iterate.<b>groupByAndCollect</b>(integers,
+     *          new Function&lt;Integer, String&gt;()
+     *          {
+     *              public String valueOf(Integer each)
+     *              {
+     *                  return "key:" + each;
+     *              }
+     *          }, new Function&lt;Integer, String&gt;()
+     *          {
+     *              public String valueOf(Integer each)
+     *              {
+     *                  return "value:" + each;
+     *              }
+     *          }, FastListMultimap.newMultimap());
+     * </pre>
+     *
+     * @see Iterate#groupBy(Iterable, Function) when only keys get transformed
+     * @see Iterate#groupByEach(Iterable, Function) when function returns multiple keys
+     * @see Iterate#toMultimap(Iterable, Function, Function, MutableMultimap) when both keys and values get transformed and Function returns multiple values
+     */
+    public static <T, K, V, R extends MutableMultimap<K, V>> R groupByAndCollect(
+            Iterable<T> iterable,
+            Function<? super T, ? extends K> groupByFunction,
+            Function<? super T, ? extends V> valueFunction,
+            R targetMultimap)
+    {
+        Iterate.forEach(iterable, new MultimapKeyValuePutProcedure<T, K, V>(targetMultimap, groupByFunction, valueFunction));
+        return targetMultimap;
     }
 
     /**
