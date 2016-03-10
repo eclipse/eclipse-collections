@@ -81,45 +81,45 @@ Acquiring Eclipse Collections
 <dependency>
   <groupId>org.eclipse.collections</groupId>
   <artifactId>eclipse-collections-api</artifactId>
-  <version>7.0.1</version>
+  <version>7.0.2</version>
 </dependency>
 
 <dependency>
   <groupId>org.eclipse.collections</groupId>
   <artifactId>eclipse-collections</artifactId>
-  <version>7.0.1</version>
+  <version>7.0.2</version>
 </dependency>
 
 <dependency>
   <groupId>org.eclipse.collections</groupId>
   <artifactId>eclipse-collections-testutils</artifactId>
-  <version>7.0.1</version>
+  <version>7.0.2</version>
   <scope>test</scope>
 </dependency>
 
 <dependency>
   <groupId>org.eclipse.collections</groupId>
   <artifactId>eclipse-collections-forkjoin</artifactId>
-  <version>7.0.1</version>
+  <version>7.0.2</version>
 </dependency>
 ```
 
 ### Gradle
 
 ```groovy
-compile 'org.eclipse.collections:eclipse-collections-api:7.0.1'
-compile 'org.eclipse.collections:eclipse-collections:7.0.1'
-testCompile 'org.eclipse.collections:eclipse-collections-testutils:7.0.1'
-compile 'org.eclipse.collections:eclipse-collections-forkjoin:7.0.1'
+compile 'org.eclipse.collections:eclipse-collections-api:7.0.2'
+compile 'org.eclipse.collections:eclipse-collections:7.0.2'
+testCompile 'org.eclipse.collections:eclipse-collections-testutils:7.0.2'
+compile 'org.eclipse.collections:eclipse-collections-forkjoin:7.0.2'
 ```
 
 ### Ivy
 
 ```xml
-<dependency org="org.eclipse.collections" name="eclipse-collections-api" rev="7.0.1" />
-<dependency org="org.eclipse.collections" name="eclipse-collections" rev="7.0.1" />
-<dependency org="org.eclipse.collections" name="eclipse-collections-testutils" rev="7.0.1" />
-<dependency org="org.eclipse.collections" name="eclipse-collections-forkjoin" rev="7.0.1"/>
+<dependency org="org.eclipse.collections" name="eclipse-collections-api" rev="7.0.2" />
+<dependency org="org.eclipse.collections" name="eclipse-collections" rev="7.0.2" />
+<dependency org="org.eclipse.collections" name="eclipse-collections-testutils" rev="7.0.2" />
+<dependency org="org.eclipse.collections" name="eclipse-collections-forkjoin" rev="7.0.2"/>
 ```
 
 Additional information
