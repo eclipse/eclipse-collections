@@ -828,6 +828,10 @@ public interface RichIterableTestCase extends IterableTestCase
         });
         assertEquals(expectedIterationOrder, sumOfLongIterationOrder);
 
+        MutableCollection<Integer> expectedInjectIntoIterationOrder = this.allowsDuplicates()
+                ? this.newMutableForFilter(4, 4, 4, 4, 3, 3, 3, 2, 2, 1)
+                : expectedIterationOrder;
+
         MutableCollection<Integer> injectIntoIterationOrder = this.newMutableForFilter();
         this.getInstanceUnderTest().injectInto(0, new Function2<Integer, Integer, Integer>()
         {
@@ -837,7 +841,7 @@ public interface RichIterableTestCase extends IterableTestCase
                 return argument1 + argument2;
             }
         });
-        assertEquals(this.newMutableForFilter(4, 4, 4, 4, 3, 3, 3, 2, 2, 1), injectIntoIterationOrder);
+        assertEquals(expectedInjectIntoIterationOrder, injectIntoIterationOrder);
 
         MutableCollection<Integer> injectIntoIntIterationOrder = this.newMutableForFilter();
         this.getInstanceUnderTest().injectInto(0, new IntObjectToIntFunction<Integer>()
@@ -848,7 +852,7 @@ public interface RichIterableTestCase extends IterableTestCase
                 return intParameter + objectParameter;
             }
         });
-        assertEquals(this.newMutableForFilter(4, 4, 4, 4, 3, 3, 3, 2, 2, 1), injectIntoIntIterationOrder);
+        assertEquals(expectedInjectIntoIterationOrder, injectIntoIntIterationOrder);
 
         MutableCollection<Integer> injectIntoLongIterationOrder = this.newMutableForFilter();
         this.getInstanceUnderTest().injectInto(0L, new LongObjectToLongFunction<Integer>()
@@ -859,7 +863,7 @@ public interface RichIterableTestCase extends IterableTestCase
                 return longParameter + objectParameter;
             }
         });
-        assertEquals(this.newMutableForFilter(4, 4, 4, 4, 3, 3, 3, 2, 2, 1), injectIntoLongIterationOrder);
+        assertEquals(expectedInjectIntoIterationOrder, injectIntoLongIterationOrder);
 
         MutableCollection<Integer> injectIntoDoubleIterationOrder = this.newMutableForFilter();
         this.getInstanceUnderTest().injectInto(0L, new DoubleObjectToDoubleFunction<Integer>()
@@ -870,7 +874,7 @@ public interface RichIterableTestCase extends IterableTestCase
                 return doubleParameter + objectParameter;
             }
         });
-        assertEquals(this.newMutableForFilter(4, 4, 4, 4, 3, 3, 3, 2, 2, 1), injectIntoDoubleIterationOrder);
+        assertEquals(expectedInjectIntoIterationOrder, injectIntoDoubleIterationOrder);
 
         MutableCollection<Integer> injectIntoFloatIterationOrder = this.newMutableForFilter();
         this.getInstanceUnderTest().injectInto(0L, new FloatObjectToFloatFunction<Integer>()
@@ -881,7 +885,7 @@ public interface RichIterableTestCase extends IterableTestCase
                 return floatParameter + objectParameter;
             }
         });
-        assertEquals(this.newMutableForFilter(4, 4, 4, 4, 3, 3, 3, 2, 2, 1), injectIntoFloatIterationOrder);
+        assertEquals(expectedInjectIntoIterationOrder, injectIntoFloatIterationOrder);
 
         Counter toSortedListCount = new Counter();
         this.getInstanceUnderTest().toSortedList((o1, o2) -> {

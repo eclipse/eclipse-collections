@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -13,9 +13,11 @@ package org.eclipse.collections.impl.lazy;
 import java.util.Iterator;
 
 import net.jcip.annotations.Immutable;
+import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
+import org.eclipse.collections.impl.block.factory.Predicates;
 import org.eclipse.collections.impl.block.predicate.DropIterablePredicate;
 import org.eclipse.collections.impl.block.procedure.IfObjectIntProcedure;
 import org.eclipse.collections.impl.block.procedure.IfProcedure;
@@ -58,6 +60,30 @@ public class DropIterable<T> extends AbstractLazyIterable<T>
     public <P> void forEachWith(Procedure2<? super T, ? super P> procedure, P parameter)
     {
         Iterate.forEachWith(this.adapted, new IfProcedureWith<T, P>(new DropIterablePredicate<T>(this.count), procedure), parameter);
+    }
+
+    @Override
+    public boolean anySatisfy(Predicate<? super T> predicate)
+    {
+        return Iterate.anySatisfy(this.adapted, Predicates.and(new DropIterablePredicate<T>(this.count), predicate));
+    }
+
+    @Override
+    public boolean allSatisfy(Predicate<? super T> predicate)
+    {
+        return Iterate.allSatisfy(this.adapted, Predicates.or(Predicates.not(new DropIterablePredicate<T>(this.count)), predicate));
+    }
+
+    @Override
+    public boolean noneSatisfy(Predicate<? super T> predicate)
+    {
+        return Iterate.noneSatisfy(this.adapted, Predicates.and(new DropIterablePredicate<T>(this.count), predicate));
+    }
+
+    @Override
+    public T detect(Predicate<? super T> predicate)
+    {
+        return Iterate.detect(this.adapted, Predicates.and(new DropIterablePredicate<T>(this.count), predicate));
     }
 
     public Iterator<T> iterator()
