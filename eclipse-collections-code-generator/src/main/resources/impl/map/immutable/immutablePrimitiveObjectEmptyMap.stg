@@ -413,6 +413,11 @@ final class Immutable<name>ObjectEmptyMap\<V> implements Immutable<name>ObjectMa
         return injectedValue;
     }
 
+    public \<R extends Collection\<V>\> R into(R target)
+    {
+        return target;
+    }
+
     public MutableList\<V> toList()
     {
         return Lists.mutable.with();

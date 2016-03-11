@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -1332,6 +1332,13 @@ public interface
     double injectInto(double injectedValue, DoubleObjectToDoubleFunction<? super T> function);
 
     /**
+     * Adds all the elements in this iterable to the specific target Collection.
+     *
+     * @since 8.0
+     */
+    <R extends Collection<T>> R into(R target);
+
+    /**
      * Converts the collection to a MutableList implementation.
      *
      * @since 1.0
@@ -1740,6 +1747,7 @@ public interface
      * @return a string representation of this RichIterable
      * @since 1.0
      */
+    @Override
     String toString();
 
     /**

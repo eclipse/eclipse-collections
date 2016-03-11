@@ -732,6 +732,14 @@ public final class Synchronized<name>ObjectMap\<V>
         }
     }
 
+    public \<R extends Collection\<V>\> R into(R target)
+    {
+        synchronized (this.lock)
+        {
+            return this.map.into(target);
+        }
+    }
+
     public MutableList\<V> toList()
     {
         synchronized (this.lock)

@@ -763,6 +763,11 @@ public class ArrayStack<T> implements MutableStack<T>, Externalizable
         this.delegate.asReversed().forEachWithIndex(objectIntProcedure);
     }
 
+    public <R extends Collection<T>> R into(R target)
+    {
+        return this.delegate.asReversed().into(target);
+    }
+
     public MutableList<T> toList()
     {
         return this.delegate.asReversed().toList();

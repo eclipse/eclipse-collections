@@ -167,4 +167,17 @@ public interface UnsortedSetLikeTestTrait extends RichIterableUniqueTestCase, Un
                 Lists.immutable.with(1, 3, 2),
                 Lists.immutable.with(1, 2, 3)));
     }
+
+    @Override
+    @Test
+    default void RichIterable_into()
+    {
+        assertThat(this.newWith(3, 2, 1).into(Lists.mutable.empty()), isOneOf(
+                Lists.immutable.with(3, 2, 1),
+                Lists.immutable.with(3, 1, 2),
+                Lists.immutable.with(2, 3, 1),
+                Lists.immutable.with(2, 1, 3),
+                Lists.immutable.with(1, 3, 2),
+                Lists.immutable.with(1, 2, 3)));
+    }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -180,6 +180,11 @@ public abstract class AbstractBiMap<K, V> implements BiMap<K, V>
     public RichIterable<Pair<K, V>> keyValuesView()
     {
         return this.getDelegate().keyValuesView();
+    }
+
+    public <R extends Collection<V>> R into(R target)
+    {
+        return this.getDelegate().into(target);
     }
 
     public MutableList<V> toList()

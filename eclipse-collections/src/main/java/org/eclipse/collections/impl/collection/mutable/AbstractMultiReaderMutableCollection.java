@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -238,6 +238,19 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         try
         {
             return this.getDelegate().anySatisfyWith(predicate, parameter);
+        }
+        finally
+        {
+            this.unlockReadLock();
+        }
+    }
+
+    public <R extends Collection<T>> R into(R target)
+    {
+        this.acquireReadLock();
+        try
+        {
+            return this.getDelegate().into(target);
         }
         finally
         {
@@ -1564,6 +1577,11 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
                 P parameter)
         {
             return this.delegate.anySatisfyWith(predicate, parameter);
+        }
+
+        public <R extends Collection<T>> R into(R target)
+        {
+            return this.delegate.into(target);
         }
 
         public MutableList<T> toList()
