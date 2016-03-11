@@ -8,6 +8,7 @@ Community Engagement
 
 * Migrated the GS Collections Kata to the [Eclipse Collections Kata](https://github.com/eclipse/eclipse-collections-kata).
 * Implemented the [Eclipse Collections converter](https://github.com/eclipse/gsc-ec-converter) which can replace usages of GS Collection with Eclipse Collections in your codebases.
+* Updated Eclipse project files.
 
 New Functionality
 -----------------
