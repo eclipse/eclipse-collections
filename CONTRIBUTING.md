@@ -18,6 +18,7 @@ Making changes
 --------------
 
 Fork the repository in GitHub, make changes in your fork, and submit a pull request.
+**Make sure to add a description of your changes to [RELEASE_NOTE_DRAFT.md](RELEASE_NOTE_DRAFT.md) that is going to be published as a release note.**
 
 Contact us
 ----------
