@@ -1,67 +1,50 @@
-
 7.1.0 (April 2016)
-================
+==================
 
-Primary theme of Eclipse Collections 7.1.0 release is the community engagement.
+The primary theme of the 7.1.0 release is community engagement.
 
-Community engagement
+Community Engagement
 --------------------
 
 * Migrated the GS Collections Kata to the [Eclipse Collections Kata](https://github.com/eclipse/eclipse-collections-kata).
-* Implemented the [Eclipse Collections converter](https://github.com/eclipse/gsc-ec-converter), with provideing instruction on migration from GS Collections to Eclipse Collections.
+* Implemented the [Eclipse Collections converter](https://github.com/eclipse/gsc-ec-converter) which can replace usages of GS Collection with Eclipse Collections in your codebases.
 
-New Functionalities
-------------------
+New Functionality
+-----------------
 
-* Implemented Verify.assertListMultimapsEqual(), Verify.assertSetMultimapsEqual(), Verify.assertBagMultimapsEqual(), Verify.assertSortedSetMultimapsEqual(), Verify.assertSortedBagMultimapsEqual().
-* Implemented Verify.assertNotInstanceOf. 
 * Implemented Iterate.toMultimap().
 * Implemented Iterate.groupByAndCollect().
 
 Optimizations
 -------------
 
-* Simplified and optimize a few methods in ImmutableSingletonBag.
+* Simplified and optimized a few methods in ImmutableSingletonBag.
 * Fixed performance problem in ArrayStack.minBy().
 * Optimized UnifiedMap.getFirst() to not delegate to an iterator.
 * Optimized AbstractBag for all MutableBagIterable targets, not just MutableBag targets.
-* Optimized iteration patterns in a few LazyIterables to not delegate to an Iterator. 
+* Optimized iteration patterns in a few LazyIterables to not delegate to an Iterator.
 * Extracted size variables to make iteration patterns in RandomAccessListIterate consistent.
-
 
 Test Improvements
 -----------------
 
-* Added new assertions and test coverage.
-* Fixed IterableTestCase.checkNotSame to factor in empty sorted immutable collections having different instances due to construction with a comparator.
-* Added a new assertion Verify.assertNotSerializable().
-* Added test coverage for UnmodifiableSortedBag and extract UnmodifiableBagIterableTestCase.
-* Added test coverage for additional classes in the java 8 test suite.
-* Added test coverage for smaller collections: forEach(), contains(), anySatisfy(), allSatisfy(), noneSatisfy().
-* Added assertions that methods which take target collections return the same instance.
-* Added additional sanity checks within assertion methods in IterableTestCase.
-* Consistently use IterableTestCase.addAllTo() in implementations of IterableTestCase.newWith() to ensure usage of the correct parent interface, RichIterableTestCase or RichIterableWithDuplicatesTestCase.
-* Added test coverage for removing from the sublist of a sublist.
-* Added additional test coverage for sets with hash collisions.
+* Implemented Verify.assertListMultimapsEqual(), Verify.assertSetMultimapsEqual(), Verify.assertBagMultimapsEqual(), Verify.assertSortedSetMultimapsEqual(), Verify.assertSortedBagMultimapsEqual().
+* Added new assertions Verify.assertNotSerializable() and Verify.assertNotInstanceOf().
+* Fixed IterableTestCase.checkNotSame() to factor in empty sorted immutable collections having different instances due to construction with a comparator.
+* Added test coverage for additional classes and methods in the java 8 test suite.
+* Replaced forkMode with forkCount for surefire plugin.
 
 Bug fixes
 ---------
 
-* Fixed UnifiedSet.ChainedBucket.removeLongChain() method to handle many collisions in one bucket.
-* Fixed memory leak in HashBiMap.
-* Fixed incorrect code path in key collision handling and keyset iterator based remove operation in primitive Maps with Hashing Strategy.
-* Fixed bug in ArrayIterate.chunk(). 
+* Fixed bug in ArrayIterate.chunk().
 
-Documentation, build and configuration
--------------------------------
+Documentation
+-------------
 
-* Added instructions for commit sign-off to contribution guide. 
-* Fixed syntax of examples in Javadoc. 
+* Added instructions for commit sign-off to contribution guide.
+* Fixed syntax of examples in Javadoc.
 * Added badge for GitHub release notes to the README.
-* Added periodic logging to the parallel map acceptance tests to prevent timeouts.
-* Set up a Travis job to compile, but not run, jmh-tests and performance-tests.
-* Moved the slowest Travis job to run first.
-* Replaced forkMode with forkCount for surefire plugin.
 
 Acquiring Eclipse Collections
 -----------------------------
