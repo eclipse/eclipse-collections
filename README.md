@@ -9,6 +9,15 @@ Eclipse Collections
 
 Eclipse Collections is a collections framework for Java. It has JDK-compatible List, Set and Map implementations with a rich API, additional types not found in the JDK like Bags, Multimaps, and set of utility classes that work with any JDK compatible Collections, Arrays, Maps, or Strings. The iteration protocol was inspired by the Smalltalk collection framework.
 
+Learn Eclipse Collections
+------------------------
+
+Check out the [Eclipse Collections Kata](https://github.com/eclipse/eclipse-collections-kata), a fun way to help you learn idiomatic Eclipse Collections usage.
+A [kata](https://en.wikipedia.org/wiki/Kata) is an exercise in martial arts.
+A [code kata](http://codekata.com/) is an exercise in programming which helps hone your skills through practice and repetition.
+This particular kata is set up as a series of unit tests which fail.
+Your task is to make them pass, using Eclipse Collections.
+
 Quick Example
 -------------
 
