@@ -1,2 +1,4 @@
 target
 .maven
+jmh-scala-tests/.cache-main
+scala-unit-tests/.cache-tests
