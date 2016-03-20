@@ -261,7 +261,7 @@ final class ImmutableSingletonBag<T>
 
     public <V> ImmutableBag<V> collect(Function<? super T, ? extends V> function)
     {
-        return Bags.immutable.with(function.valueOf(this.value));
+        return Bags.immutable.<V>with(function.valueOf(this.value));
     }
 
     public <V> ImmutableBag<V> collectIf(
@@ -269,7 +269,7 @@ final class ImmutableSingletonBag<T>
             Function<? super T, ? extends V> function)
     {
         return predicate.accept(this.value)
-                ? Bags.immutable.with(function.valueOf(this.value))
+                ? Bags.immutable.<V>with(function.valueOf(this.value))
                 : Bags.immutable.<V>empty();
     }
 
