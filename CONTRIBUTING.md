@@ -17,7 +17,11 @@ Search the [issue tracker](https://github.com/eclipse/eclipse-collections/issues
 Making changes
 --------------
 
-Fork the repository in GitHub, make changes in your fork, and submit a pull request.
+Fork the repository in GitHub and make changes in your fork.
+
+Please add a description of your changes to the [draft release notes](RELEASE_NOTE_DRAFT.md).
+
+Finally, submit a pull request.
 
 Contact us
 ----------
@@ -87,8 +91,6 @@ Submit your pull request when ready. Three checks will be kicked off automatical
 - The standard GitHub check that the pull request has no conflicts with the base branch.
 
 Make sure all the checks pass. One of the committers will take a look and provide feedback or merge your contribution.
-
-Please add a description of your changes to the draft release notes in the wiki.
 
 That's it! Thanks for contributing to Eclipse Collections!
 
