@@ -740,7 +740,7 @@ public final class MapIterate
         {
             public Pair<K2, V2> value(K1 key, V1 value)
             {
-                return Tuples.pair(keyFunction.valueOf(key), valueFunction.valueOf(value));
+                return (Pair<K2, V2>) Tuples.pair(keyFunction.valueOf(key), valueFunction.valueOf(value));
             }
         }, MapAdapter.adapt(target));
     }

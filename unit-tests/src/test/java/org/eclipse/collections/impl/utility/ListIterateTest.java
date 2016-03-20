@@ -138,8 +138,8 @@ public class ListIterateTest
     {
         MutableList<Float> list = Lists.fixedSize.of(1.0f, 2.0f, 3.0f);
         List<Float> linked = new LinkedList<>(list);
-        Assert.assertEquals(7.0f, ListIterate.injectInto(1.0f, list, AddFunction.FLOAT), 0.001);
-        Assert.assertEquals(7.0f, ListIterate.injectInto(1.0f, linked, AddFunction.FLOAT), 0.001);
+        Assert.assertEquals(7.0f, ListIterate.injectInto(1.0f, list, AddFunction.FLOAT), 0.001f);
+        Assert.assertEquals(7.0f, ListIterate.injectInto(1.0f, linked, AddFunction.FLOAT), 0.001f);
 
         Assert.assertEquals(7.0f, ListIterate.injectInto(1.0f, list, AddFunction.FLOAT_TO_FLOAT), 0.001);
         Assert.assertEquals(7.0f, ListIterate.injectInto(1.0f, linked, AddFunction.FLOAT_TO_FLOAT), 0.001);

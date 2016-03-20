@@ -62,7 +62,7 @@ public class ScalaAnyRefMapGetTest extends AbstractJMHTestRunner
     {
         int localSize = this.size;
         String[] localElements = this.elements;
-        Map<String, String> localScalaAnyRefMap = this.scalaAnyRefMap;
+        scala.collection.Map<String, String> localScalaAnyRefMap = this.scalaAnyRefMap;
 
         for (int i = 0; i < localSize; i++)
         {
