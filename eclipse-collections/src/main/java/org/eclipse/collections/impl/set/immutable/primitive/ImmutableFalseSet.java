@@ -130,7 +130,7 @@ final class ImmutableFalseSet implements ImmutableBooleanSet, Serializable
 
     public <V> ImmutableSet<V> collect(BooleanToObjectFunction<? extends V> function)
     {
-        return Sets.immutable.with(function.valueOf(false));
+        return Sets.immutable.<V>with(function.valueOf(false));
     }
 
     public boolean[] toArray()

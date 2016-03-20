@@ -154,7 +154,7 @@ public class ImmutableSingletonBagTest extends ImmutableBagTestCase
 
         Assert.assertEquals(
                 Maps.fixedSize.of(String.class, VAL),
-                this.newBag().toMap(Object::getClass, String::valueOf));
+                this.newBag().toMap(o -> o.getClass(), String::valueOf));
     }
 
     @Test
@@ -347,8 +347,8 @@ public class ImmutableSingletonBagTest extends ImmutableBagTestCase
     public void collectIf()
     {
         super.collectIf();
-        Assert.assertEquals(Bags.immutable.of(String.class), this.newBag().collectIf(ignored -> true, Object::getClass));
-        Assert.assertEquals(Bags.immutable.of(), this.newBag().collectIf(ignored -> false, Object::getClass));
+        Assert.assertEquals(Bags.immutable.of(String.class), this.newBag().collectIf(ignored -> true, o -> o.getClass()));
+        Assert.assertEquals(Bags.immutable.of(), this.newBag().collectIf(ignored -> false, o -> o.getClass()));
     }
 
     @Override
