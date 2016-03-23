@@ -221,7 +221,7 @@ final class SingletonMap<K, V>
     @Override
     public <R> FixedSizeMap<K, R> collectValues(Function2<? super K, ? super V, ? extends R> function)
     {
-        return Maps.fixedSize.of(this.key1, function.value(this.key1, this.value1));
+        return Maps.fixedSize.<K, R>of(this.key1, function.value(this.key1, this.value1));
     }
 
     @Override

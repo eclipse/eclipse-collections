@@ -130,7 +130,7 @@ final class ImmutableTrueSet implements ImmutableBooleanSet, Serializable
 
     public <V> ImmutableSet<V> collect(BooleanToObjectFunction<? extends V> function)
     {
-        return Sets.immutable.with(function.valueOf(true));
+        return Sets.immutable.<V>with(function.valueOf(true));
     }
 
     public boolean[] toArray()
