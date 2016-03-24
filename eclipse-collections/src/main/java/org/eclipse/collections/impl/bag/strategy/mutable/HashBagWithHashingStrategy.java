@@ -15,15 +15,10 @@ import java.io.Serializable;
 import org.eclipse.collections.api.bag.Bag;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.block.HashingStrategy;
-import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.primitive.IntPredicate;
 import org.eclipse.collections.api.block.predicate.primitive.ObjectIntPredicate;
-import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
 import org.eclipse.collections.api.map.primitive.MutableObjectIntMap;
-import org.eclipse.collections.api.tuple.primitive.ObjectIntPair;
-import org.eclipse.collections.impl.Counter;
 import org.eclipse.collections.impl.bag.mutable.AbstractHashBag;
-import org.eclipse.collections.impl.block.factory.primitive.IntToIntFunctions;
 import org.eclipse.collections.impl.map.mutable.primitive.ObjectIntHashMapWithHashingStrategy;
 import org.eclipse.collections.impl.utility.ArrayIterate;
 import org.eclipse.collections.impl.utility.Iterate;
@@ -102,43 +97,9 @@ public class HashBagWithHashingStrategy<T>
     }
 
     @Override
-    public boolean equals(Object other)
+    protected int computeHashCode(T item)
     {
-        if (this == other)
-        {
-            return true;
-        }
-        if (!(other instanceof Bag))
-        {
-            return false;
-        }
-        final Bag<?> bag = (Bag<?>) other;
-        if (this.sizeDistinct() != bag.sizeDistinct())
-        {
-            return false;
-        }
-
-        return this.items.keyValuesView().allSatisfy(new Predicate<ObjectIntPair<T>>()
-        {
-            public boolean accept(ObjectIntPair<T> each)
-            {
-                return bag.occurrencesOf(each.getOne()) == each.getTwo();
-            }
-        });
-    }
-
-    @Override
-    public int hashCode()
-    {
-        final Counter counter = new Counter();
-        this.items.forEachKeyValue(new ObjectIntProcedure<T>()
-        {
-            public void value(T item, int count)
-            {
-                counter.add((item == null ? 0 : HashBagWithHashingStrategy.this.hashingStrategy.computeHashCode(item)) ^ count);
-            }
-        });
-        return counter.getCount();
+        return this.hashingStrategy.computeHashCode(item);
     }
 
     @Override
@@ -186,12 +147,5 @@ public class HashBagWithHashingStrategy<T>
     public MutableBag<T> newEmpty()
     {
         return HashBagWithHashingStrategy.newBag(this.hashingStrategy);
-    }
-
-    public boolean add(T item)
-    {
-        this.items.updateValue(item, 0, IntToIntFunctions.increment());
-        this.size++;
-        return true;
     }
 }

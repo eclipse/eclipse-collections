@@ -25,6 +25,7 @@ import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.primitive.MutableObjectIntMap;
+import org.eclipse.collections.api.tuple.primitive.ObjectIntPair;
 import org.eclipse.collections.impl.Counter;
 import org.eclipse.collections.impl.block.factory.primitive.IntToIntFunctions;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
@@ -70,6 +71,48 @@ public abstract class AbstractHashBag<T> extends AbstractMutableBag<T>
         }
     }
 
+    @Override
+    public boolean equals(Object other)
+    {
+        if (this == other)
+        {
+            return true;
+        }
+        if (!(other instanceof Bag))
+        {
+            return false;
+        }
+        final Bag<?> bag = (Bag<?>) other;
+        if (this.sizeDistinct() != bag.sizeDistinct())
+        {
+            return false;
+        }
+
+        return this.items.keyValuesView().allSatisfy(new Predicate<ObjectIntPair<T>>()
+        {
+            public boolean accept(ObjectIntPair<T> each)
+            {
+                return bag.occurrencesOf(each.getOne()) == each.getTwo();
+            }
+        });
+    }
+
+    @Override
+    public int hashCode()
+    {
+        final Counter counter = new Counter();
+        this.items.forEachKeyValue(new ObjectIntProcedure<T>()
+        {
+            public void value(T item, int count)
+            {
+                counter.add((item == null ? 0 : AbstractHashBag.this.computeHashCode(item)) ^ count);
+            }
+        });
+        return counter.getCount();
+    }
+
+    protected abstract int computeHashCode(T item);
+
     public abstract MutableBag<T> selectByOccurrences(IntPredicate predicate);
 
     @Override
@@ -88,9 +131,9 @@ public abstract class AbstractHashBag<T> extends AbstractMutableBag<T>
         return this.items.get(item);
     }
 
-    public void forEachWithOccurrences(ObjectIntProcedure<? super T> procedure)
+    public void forEachWithOccurrences(ObjectIntProcedure<? super T> objectIntProcedure)
     {
-        this.items.forEachKeyValue(procedure);
+        this.items.forEachKeyValue(objectIntProcedure);
     }
 
     public MutableMap<T, Integer> toMapOfItemToCount()
@@ -104,6 +147,13 @@ public abstract class AbstractHashBag<T> extends AbstractMutableBag<T>
             }
         });
         return map;
+    }
+
+    public boolean add(T item)
+    {
+        this.items.updateValue(item, 0, IntToIntFunctions.increment());
+        this.size++;
+        return true;
     }
 
     public boolean remove(Object item)
@@ -131,11 +181,6 @@ public abstract class AbstractHashBag<T> extends AbstractMutableBag<T>
     public boolean isEmpty()
     {
         return this.items.isEmpty();
-    }
-
-    public int size()
-    {
-        return this.size;
     }
 
     public void each(final Procedure<? super T> procedure)
@@ -297,6 +342,11 @@ public abstract class AbstractHashBag<T> extends AbstractMutableBag<T>
             }
         }
         return this.size != oldSize;
+    }
+
+    public int size()
+    {
+        return this.size;
     }
 
     @Override
