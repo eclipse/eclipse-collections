@@ -15,6 +15,7 @@ New Functionality
 
 * Implemented Iterate.toMultimap().
 * Implemented Iterate.groupByAndCollect().
+* Implemented HashBagWithHashingStrategy.
 
 Optimizations
 -------------
