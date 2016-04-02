@@ -52,6 +52,26 @@
         <developerConnection>scm:git:https://github.com/eclipse/eclipse-collections.git</developerConnection>
     </scm>
 
+    <issueManagement>
+        <system>GitHub</system>
+        <url>https://github.com/eclipse/eclipse-collections/issues</url>
+    </issueManagement>
+
+    <ciManagement>
+        <system>Travis CI</system>
+        <url>https://travis-ci.org/eclipse/eclipse-collections</url>
+    </ciManagement>
+
+    <mailingLists>
+        <mailingList>
+            <name>collections-dev</name>
+            <subscribe>https://dev.eclipse.org/mailman/listinfo/collections-dev</subscribe>
+            <unsubscribe>https://dev.eclipse.org/mailman/listinfo/collections-dev</unsubscribe>
+            <post>collections-dev@eclipse.org</post>
+            <archive>https://dev.eclipse.org/mhonarc/lists/collections-dev</archive>
+        </mailingList>
+    </mailingLists>
+
     <developers>
         <developer>
             <name>Craig P. Motlin</name>
