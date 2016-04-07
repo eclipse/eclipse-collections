@@ -15,9 +15,9 @@ import java.util.NoSuchElementException;
 
 import org.eclipse.collections.api.collection.MutableCollection;
 import org.eclipse.collections.impl.list.mutable.MultiReaderFastList;
+import org.eclipse.collections.impl.test.junit.Java8Runner;
 import org.eclipse.collections.test.IterableTestCase;
 import org.eclipse.collections.test.collection.mutable.MultiReaderMutableCollectionTestCase;
-import org.eclipse.junit.runners.Java8Runner;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 

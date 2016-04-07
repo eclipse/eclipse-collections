@@ -12,8 +12,8 @@ package org.eclipse.collections.test.list.mutable;
 
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.impl.list.mutable.FastList;
+import org.eclipse.collections.impl.test.junit.Java8Runner;
 import org.eclipse.collections.test.IterableTestCase;
-import org.eclipse.junit.runners.Java8Runner;
 import org.junit.runner.RunWith;
 
 @RunWith(Java8Runner.class)
