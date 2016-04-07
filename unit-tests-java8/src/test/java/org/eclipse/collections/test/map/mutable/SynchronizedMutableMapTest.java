@@ -15,7 +15,7 @@ import java.util.Random;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.impl.map.mutable.SynchronizedMutableMap;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
-import org.eclipse.junit.runners.Java8Runner;
+import org.eclipse.collections.impl.test.junit.Java8Runner;
 import org.junit.runner.RunWith;
 
 import static org.junit.Assert.assertNull;

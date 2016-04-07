@@ -14,10 +14,10 @@ import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.impl.lazy.CompositeIterable;
+import org.eclipse.collections.impl.test.junit.Java8Runner;
 import org.eclipse.collections.impl.utility.ArrayIterate;
 import org.eclipse.collections.test.LazyNoIteratorTestCase;
 import org.eclipse.collections.test.list.mutable.FastListNoIterator;
-import org.eclipse.junit.runners.Java8Runner;
 import org.junit.runner.RunWith;
 
 @RunWith(Java8Runner.class)

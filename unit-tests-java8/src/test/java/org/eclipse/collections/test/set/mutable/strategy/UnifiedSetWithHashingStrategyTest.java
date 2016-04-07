@@ -13,9 +13,9 @@ package org.eclipse.collections.test.set.mutable.strategy;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.impl.block.factory.HashingStrategies;
 import org.eclipse.collections.impl.set.strategy.mutable.UnifiedSetWithHashingStrategy;
+import org.eclipse.collections.impl.test.junit.Java8Runner;
 import org.eclipse.collections.test.IterableTestCase;
 import org.eclipse.collections.test.set.mutable.MutableSetTestCase;
-import org.eclipse.junit.runners.Java8Runner;
 import org.junit.runner.RunWith;
 
 @RunWith(Java8Runner.class)

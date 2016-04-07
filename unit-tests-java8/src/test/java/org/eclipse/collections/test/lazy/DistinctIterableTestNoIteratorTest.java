@@ -15,11 +15,11 @@ import org.eclipse.collections.api.list.ListIterable;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.lazy.DistinctIterable;
+import org.eclipse.collections.impl.test.junit.Java8Runner;
 import org.eclipse.collections.test.NoIteratorTestCase;
 import org.eclipse.collections.test.RichIterableUniqueTestCase;
 import org.eclipse.collections.test.list.TransformsToListTrait;
 import org.eclipse.collections.test.list.mutable.FastListNoIterator;
-import org.eclipse.junit.runners.Java8Runner;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
