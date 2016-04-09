@@ -10,11 +10,14 @@
 
 package org.eclipse.collections.impl.multimap.set;
 
+import org.eclipse.collections.api.list.MutableList;
+import org.eclipse.collections.api.multimap.MutableMultimap;
 import org.eclipse.collections.api.multimap.bag.MutableBagMultimap;
 import org.eclipse.collections.api.multimap.set.MutableSetMultimap;
 import org.eclipse.collections.api.multimap.set.SetMultimap;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.tuple.Pair;
+import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.multimap.AbstractMutableMultimapTestCase;
@@ -57,6 +60,18 @@ public abstract class AbstractMutableSetMultimapTestCase extends AbstractMutable
 
     @Override
     protected abstract <V> MutableSet<V> createCollection(V... args);
+
+    @Override
+    public void testPutAllPairs()
+    {
+        super.testPutAllPairs();
+
+        MutableMultimap<Integer, String> multimap = this.newMultimapWithKeysValues(1, "One", 2, "2");
+        MutableList<Pair<Integer, String>> pairs = Lists.mutable.of(Tuples.pair(1, "One"));
+        Assert.assertFalse(multimap.putAllPairs(pairs));
+        MutableMultimap<Integer, String> expected = this.newMultimapWithKeysValues(1, "One", 2, "2");
+        Assert.assertEquals(expected, multimap);
+    }
 
     @Override
     @Test

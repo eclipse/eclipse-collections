@@ -202,6 +202,16 @@ public abstract class AbstractMutableMultimap<K, V, C extends MutableCollection<
         return changed;
     }
 
+    public boolean putAllPairs(Iterable<Pair<K, V>> pairs)
+    {
+        boolean changed = false;
+        for (Pair<K, V> pair : pairs)
+        {
+            changed |= this.put(pair.getOne(), pair.getTwo());
+        }
+        return changed;
+    }
+
     public boolean putAll(K key, Iterable<? extends V> values)
     {
         return Iterate.notEmpty(values) && this.putAllNotEmpty(key, values);

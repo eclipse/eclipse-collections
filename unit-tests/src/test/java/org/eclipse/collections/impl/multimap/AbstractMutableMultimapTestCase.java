@@ -12,6 +12,8 @@ package org.eclipse.collections.impl.multimap;
 
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.MutableBag;
+import org.eclipse.collections.api.list.ImmutableList;
+import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.multimap.ImmutableMultimap;
 import org.eclipse.collections.api.multimap.Multimap;
@@ -22,6 +24,7 @@ import org.eclipse.collections.impl.bag.mutable.HashBag;
 import org.eclipse.collections.impl.block.procedure.CollectionAddProcedure;
 import org.eclipse.collections.impl.factory.Bags;
 import org.eclipse.collections.impl.factory.Lists;
+import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.test.Verify;
@@ -129,6 +132,43 @@ public abstract class AbstractMutableMultimapTestCase extends AbstractMultimapTe
         expected.put(4, "Four");
         expected.put(5, "Five");
         Assert.assertEquals(expected, multimap);
+    }
+
+    @Test
+    public void testPutAllPairs()
+    {
+        MutableMultimap<Integer, String> multimap1 = this.newMultimapWithKeysValues(1, "One", 2, "2");
+        MutableList<Pair<Integer, String>> pairs1 = Lists.mutable.of(Tuples.pair(1, "One"), Tuples.pair(2, "Two"), Tuples.pair(3, "Three"));
+        Assert.assertTrue(multimap1.putAllPairs(pairs1));
+        MutableMultimap<Integer, String> expected1 = this.newMultimap();
+        expected1.put(1, "One");
+        expected1.put(1, "One");
+        expected1.put(2, "2");
+        expected1.put(2, "Two");
+        expected1.put(3, "Three");
+        Assert.assertEquals(expected1, multimap1);
+
+        MutableMultimap<Integer, String> multimap2 = this.newMultimapWithKeysValues(1, "One", 2, "2");
+        ImmutableList<Pair<Integer, String>> pairs2 = Lists.immutable.of(Tuples.pair(1, "One"), Tuples.pair(2, "Two"), Tuples.pair(3, "Three"));
+        Assert.assertTrue(multimap2.putAllPairs(pairs2));
+        MutableMultimap<Integer, String> expected2 = this.newMultimap();
+        expected2.put(1, "One");
+        expected2.put(1, "One");
+        expected2.put(2, "2");
+        expected2.put(2, "Two");
+        expected2.put(3, "Three");
+        Assert.assertEquals(expected2, multimap2);
+
+        MutableMultimap<String, Integer> multimap3 = this.newMultimapWithKeysValues("One", 1, "Two", 2);
+        MutableSet<Pair<String, Integer>> pairs3 = Sets.mutable.of(Tuples.pair("One", 1), Tuples.pair("Two", 2), Tuples.pair("Three", 3));
+        Assert.assertTrue(multimap3.putAllPairs(pairs3));
+        MutableMultimap<String, Integer> expected3 = this.newMultimap();
+        expected3.put("One", 1);
+        expected3.put("One", 1);
+        expected3.put("Two", 2);
+        expected3.put("Two", 2);
+        expected3.put("Three", 3);
+        Assert.assertEquals(expected3, multimap3);
     }
 
     @Test
