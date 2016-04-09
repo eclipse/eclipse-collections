@@ -21,6 +21,7 @@ import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.map.MutableMap;
+import org.eclipse.collections.api.set.SetIterable;
 import org.eclipse.collections.api.tuple.Pair;
 
 /**
@@ -165,6 +166,11 @@ public interface Multimap<K, V>
      * Returns a lazy view of the unique keys.
      */
     RichIterable<K> keysView();
+
+    /**
+     * Returns a unmodifiable {@link SetIterable} of keys with O(1) complexity.
+     */
+    SetIterable<K> keySet();
 
     /**
      * Returns a {@link Bag} of keys with the count corresponding to the number of mapped values.
