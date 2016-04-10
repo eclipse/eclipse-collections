@@ -20,7 +20,7 @@
     <parent>
         <artifactId>eclipse-collections-parent</artifactId>
         <groupId>org.eclipse.collections</groupId>
-        <version>7.1.0</version>
+        <version>8.0.0-SNAPSHOT</version>
     </parent>
 
     <artifactId>eclipse-collections-api</artifactId>
