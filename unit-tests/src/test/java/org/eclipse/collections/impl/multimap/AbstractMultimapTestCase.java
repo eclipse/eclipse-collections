@@ -17,14 +17,17 @@ import org.eclipse.collections.api.list.ListIterable;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.multimap.Multimap;
 import org.eclipse.collections.api.set.MutableSet;
+import org.eclipse.collections.api.set.SetIterable;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.bag.mutable.HashBag;
 import org.eclipse.collections.impl.block.factory.Functions;
 import org.eclipse.collections.impl.block.procedure.CollectionAddProcedure;
 import org.eclipse.collections.impl.factory.Bags;
 import org.eclipse.collections.impl.factory.Lists;
+import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
+import org.eclipse.collections.impl.set.mutable.UnmodifiableMutableSet;
 import org.eclipse.collections.impl.test.SerializeTestHelper;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.Tuples;
@@ -273,6 +276,16 @@ public abstract class AbstractMultimapTestCase
         Multimap<String, Integer> multimap =
                 this.newMultimapWithKeysValues("One", 1, "Two", 2, "Three", 3);
         Assert.assertEquals(Bags.mutable.of("One", "Two", "Three"), multimap.keysView().toBag());
+    }
+
+    @Test
+    public void keySet()
+    {
+        Multimap<String, Integer> multimap =
+                this.newMultimapWithKeysValues("One", 1, "One", 1, "Two", 2, "Three", 3);
+        SetIterable<String> keySet = multimap.keySet();
+        Verify.assertInstanceOf(UnmodifiableMutableSet.class, keySet);
+        Assert.assertEquals(Sets.mutable.of("One", "Two", "Three"), keySet);
     }
 
     @Test

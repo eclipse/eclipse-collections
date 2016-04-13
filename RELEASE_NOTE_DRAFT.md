@@ -1,20 +1,20 @@
-8.0.0 
+8.0.0
 =====
 
 New Functionality
 -----------------
 
-* A Placeholder 
+* Implemented Multimap.keySet() to return an unmodifiable SetIterable of keys.
 
 Optimizations
 -------------
 
-* A Placeholder 
+* A Placeholder
 
 Bug fixes
 ---------
 
-* A Placeholder 
+* A Placeholder
 
 Acquiring Eclipse Collections
 -----------------------------

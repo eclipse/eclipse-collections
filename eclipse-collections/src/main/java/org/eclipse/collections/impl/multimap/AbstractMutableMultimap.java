@@ -23,8 +23,10 @@ import org.eclipse.collections.api.collection.MutableCollection;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.multimap.Multimap;
 import org.eclipse.collections.api.multimap.MutableMultimap;
+import org.eclipse.collections.api.set.SetIterable;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.block.procedure.checked.MultimapKeyValuesSerializingProcedure;
+import org.eclipse.collections.impl.set.mutable.UnmodifiableMutableSet;
 import org.eclipse.collections.impl.utility.Iterate;
 
 public abstract class AbstractMutableMultimap<K, V, C extends MutableCollection<V>>
@@ -294,6 +296,11 @@ public abstract class AbstractMutableMultimap<K, V, C extends MutableCollection<
     }
 
     // Views
+
+    public SetIterable<K> keySet()
+    {
+        return UnmodifiableMutableSet.of(this.getMap().keySet());
+    }
 
     public C get(K key)
     {

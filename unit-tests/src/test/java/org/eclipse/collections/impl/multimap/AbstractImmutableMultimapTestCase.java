@@ -14,8 +14,10 @@ import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.collection.MutableCollection;
 import org.eclipse.collections.api.multimap.ImmutableMultimap;
 import org.eclipse.collections.api.multimap.Multimap;
+import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
+import org.eclipse.collections.impl.set.mutable.UnmodifiableMutableSet;
 import org.eclipse.collections.impl.test.SerializeTestHelper;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.Tuples;
@@ -71,6 +73,18 @@ public abstract class AbstractImmutableMultimapTestCase
         Verify.assertNotEmpty(notEmpty);
         Assert.assertTrue(notEmpty.notEmpty());
         Assert.assertFalse(notEmpty.isEmpty());
+    }
+
+    @Test
+    public void keySet()
+    {
+        ImmutableMultimap<String, Integer> multimap = this.<String, Integer>classUnderTest()
+                .newWith("One", 1)
+                .newWith("One", 1)
+                .newWith("Two", 2)
+                .newWith("Three", 3);
+        Verify.assertInstanceOf(UnmodifiableMutableSet.class, multimap.keySet());
+        Assert.assertEquals(Sets.mutable.of("One", "Two", "Three"), multimap.keySet());
     }
 
     @Test
