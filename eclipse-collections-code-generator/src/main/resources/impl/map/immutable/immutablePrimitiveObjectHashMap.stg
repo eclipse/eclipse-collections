@@ -388,6 +388,11 @@ final class Immutable<name>ObjectHashMap\<V> extends AbstractImmutable<name>Obje
         return this.delegate.injectInto(injectedValue, function);
     }
 
+    public \<R extends Collection\<V>\> R into(R target)
+    {
+        return this.delegate.into(target);
+    }
+
     public MutableList\<V> toList()
     {
         return this.delegate.toList();

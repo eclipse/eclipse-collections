@@ -1527,6 +1527,14 @@ public interface RichIterableTestCase extends IterableTestCase
     }
 
     @Test
+    default void RichIterable_into()
+    {
+        assertEquals(
+                Lists.immutable.with(0, 4, 4, 4, 4, 3, 3, 3, 2, 2, 1),
+                this.newWith(4, 4, 4, 4, 3, 3, 3, 2, 2, 1).into(Lists.mutable.with(0)));
+    }
+
+    @Test
     default void RichIterable_toSortedList()
     {
         RichIterable<Integer> iterable = this.newWith(4, 4, 4, 4, 3, 3, 3, 2, 2, 1);

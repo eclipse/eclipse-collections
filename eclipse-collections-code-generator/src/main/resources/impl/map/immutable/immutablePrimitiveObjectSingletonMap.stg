@@ -518,6 +518,11 @@ final class Immutable<name>ObjectSingletonMap\<V> extends AbstractImmutable<name
         return function.doubleValueOf(injectedValue, this.value1);
     }
 
+    public \<R extends Collection\<V>\> R into(R target)
+    {
+        return Iterate.addAllTo(this, target);
+    }
+
     public MutableList\<V> toList()
     {
         return Lists.mutable.with(this.value1);

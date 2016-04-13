@@ -97,4 +97,16 @@ public interface UnsortedMapIterableTestCase extends MapIterableTestCase, Unorde
                         Lists.immutable.with(1, 2, 2),
                         Lists.immutable.with(2, 1, 2)));
     }
+
+    @Override
+    @Test
+    default void RichIterable_into()
+    {
+        assertThat(
+                this.newWith(2, 2, 1).into(Lists.mutable.empty()),
+                isOneOf(
+                        Lists.immutable.with(2, 2, 1),
+                        Lists.immutable.with(1, 2, 2),
+                        Lists.immutable.with(2, 1, 2)));
+    }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -1029,6 +1029,13 @@ public abstract class AbstractRichIterableTestCase
     {
         MutableList<Integer> list = this.newWith(1, 2, 3, 4).toList();
         Verify.assertContainsAll(list, 1, 2, 3, 4);
+    }
+
+    @Test
+    public void toCollection()
+    {
+        MutableList<Integer> list = this.newWith(1, 2, 3, 4).into(Lists.mutable.with(0));
+        Verify.assertContainsAll(list, 0, 1, 2, 3, 4);
     }
 
     @Test

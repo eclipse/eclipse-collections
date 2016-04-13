@@ -777,6 +777,15 @@ public interface RichIterableUniqueTestCase extends RichIterableTestCase
 
     @Override
     @Test
+    default void RichIterable_into()
+    {
+        assertEquals(
+                Lists.immutable.with(4, 3, 2, 1),
+                this.newWith(4, 3, 2, 1).into(Lists.mutable.empty()));
+    }
+
+    @Override
+    @Test
     default void RichIterable_toSortedList()
     {
         RichIterable<Integer> iterable = this.newWith(4, 3, 2, 1);

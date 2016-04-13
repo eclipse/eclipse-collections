@@ -507,6 +507,11 @@ public final class Unmodifiable<name>ObjectMap\<V>
         return this.map.injectInto(injectedValue, function);
     }
 
+    public \<R extends Collection\<V>\> R into(R target)
+    {
+        return this.map.into(target);
+    }
+
     public MutableList\<V> toList()
     {
         return this.map.toList();
