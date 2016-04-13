@@ -58,7 +58,7 @@ public abstract class AbstractHashBag<T> extends AbstractMutableBag<T>
         return source.notEmpty();
     }
 
-    public void addOccurrences(T item, int occurrences)
+    public int addOccurrences(T item, int occurrences)
     {
         if (occurrences < 0)
         {
@@ -66,9 +66,11 @@ public abstract class AbstractHashBag<T> extends AbstractMutableBag<T>
         }
         if (occurrences > 0)
         {
-            this.items.updateValue(item, 0, IntToIntFunctions.add(occurrences));
+            int updatedOccurrences = this.items.updateValue(item, 0, IntToIntFunctions.add(occurrences));
             this.size += occurrences;
+            return updatedOccurrences;
         }
+        return this.occurrencesOf(item);
     }
 
     @Override

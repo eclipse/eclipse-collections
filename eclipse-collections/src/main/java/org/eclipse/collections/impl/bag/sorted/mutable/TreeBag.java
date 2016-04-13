@@ -444,7 +444,7 @@ public class TreeBag<T>
         return new InternalIterator();
     }
 
-    public void addOccurrences(T item, int occurrences)
+    public int addOccurrences(T item, int occurrences)
     {
         if (occurrences < 0)
         {
@@ -452,9 +452,12 @@ public class TreeBag<T>
         }
         if (occurrences > 0)
         {
-            this.items.getIfAbsentPut(item, NEW_COUNTER_BLOCK).add(occurrences);
+            Counter counter = this.items.getIfAbsentPut(item, NEW_COUNTER_BLOCK);
+            counter.add(occurrences);
             this.size += occurrences;
+            return counter.getCount();
         }
+        return this.occurrencesOf(item);
     }
 
     public boolean removeOccurrences(Object item, int occurrences)

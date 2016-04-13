@@ -45,9 +45,9 @@ public interface MutableBagIterableTestCase extends MutableCollectionTestCase
     default void MutableBagIterable_addOccurrences()
     {
         MutableBagIterable<Integer> mutableBag = this.newWith(1, 2, 2, 3, 3, 3);
-        mutableBag.addOccurrences(4, 4);
+        assertEquals(4, mutableBag.addOccurrences(4, 4));
         assertEquals(Bags.immutable.with(1, 2, 2, 3, 3, 3, 4, 4, 4, 4), mutableBag);
-        mutableBag.addOccurrences(1, 2);
+        assertEquals(3, mutableBag.addOccurrences(1, 2));
         assertEquals(Bags.immutable.with(1, 1, 1, 2, 2, 3, 3, 3, 4, 4, 4, 4), mutableBag);
     }
 

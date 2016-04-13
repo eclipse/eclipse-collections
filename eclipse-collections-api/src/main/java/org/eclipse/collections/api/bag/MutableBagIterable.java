@@ -26,7 +26,20 @@ import org.eclipse.collections.api.tuple.primitive.ObjectIntPair;
 
 public interface MutableBagIterable<T> extends Bag<T>, MutableCollection<T>
 {
-    void addOccurrences(T item, int occurrences);
+    /**
+     * Add number of {@code occurrences} for an {@code item}. If the {@code item} does not exist, then the {@code item} is added to the bag.
+     *
+     * <p>
+     *  For Example:
+     *  <pre>
+     * MutableBagIterable&lt;String&gt; names = Bags.mutable.of("A", "B", "B");
+     * Assert.assertEquals(4, names.<b>addOccurrences</b>("A", 3));
+     * </pre>
+     *
+     * @return updated number of occurrences.
+     * @throws  IllegalArgumentException if {@code occurrences} are less than 0.
+     */
+    int addOccurrences(T item, int occurrences);
 
     boolean removeOccurrences(Object item, int occurrences);
 

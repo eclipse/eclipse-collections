@@ -136,9 +136,12 @@ public class SynchronizedBagTest extends AbstractSynchronizedCollectionTestCase
     public void addOccurrences()
     {
         MutableBag<Integer> integers = this.newWith(1, 1, 1, 1, 2, 2, 2, 3, 3, 4);
-        Assert.assertEquals(0, integers.occurrencesOf(5));
-        integers.addOccurrences(5, 5);
-        Assert.assertEquals(5, integers.occurrencesOf(5));
+        Assert.assertEquals(6, integers.addOccurrences(1, 2));
+        Verify.assertBagsEqual(this.newWith(1, 1, 1, 1, 1, 1, 2, 2, 2, 3, 3, 4), integers);
+        Assert.assertEquals(0, integers.addOccurrences(5, 0));
+        Assert.assertEquals(2, integers.addOccurrences(5, 2));
+        Assert.assertEquals(3, integers.addOccurrences(3, 1));
+        Verify.assertBagsEqual(this.newWith(1, 1, 1, 1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 5, 5), integers);
     }
 
     @Test

@@ -30,11 +30,11 @@ public interface MutableSortedBagTestCase extends SortedBagTestCase, MutableOrde
     default void MutableBagIterable_addOccurrences()
     {
         MutableSortedBag<Integer> mutableSortedBag = this.newWith(3, 3, 3, 2, 2, 1);
-        mutableSortedBag.addOccurrences(4, 4);
+        assertEquals(4, mutableSortedBag.addOccurrences(4, 4));
         assertEquals(TreeBag.newBagWith(Comparators.reverseNaturalOrder(), 4, 4, 4, 4, 3, 3, 3, 2, 2, 1), mutableSortedBag);
-        mutableSortedBag.addOccurrences(1, 2);
+        assertEquals(3, mutableSortedBag.addOccurrences(1, 2));
         assertEquals(TreeBag.newBagWith(Comparators.reverseNaturalOrder(), 4, 4, 4, 4, 3, 3, 3, 2, 2, 1, 1, 1), mutableSortedBag);
-        mutableSortedBag.addOccurrences(1, 0);
+        assertEquals(3, mutableSortedBag.addOccurrences(1, 0));
         assertEquals(TreeBag.newBagWith(Comparators.reverseNaturalOrder(), 4, 4, 4, 4, 3, 3, 3, 2, 2, 1, 1, 1), mutableSortedBag);
     }
 

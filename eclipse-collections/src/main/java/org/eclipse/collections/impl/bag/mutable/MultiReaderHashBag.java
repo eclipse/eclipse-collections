@@ -217,12 +217,12 @@ public final class MultiReaderHashBag<T>
         }
     }
 
-    public void addOccurrences(T item, int occurrences)
+    public int addOccurrences(T item, int occurrences)
     {
         this.acquireWriteLock();
         try
         {
-            this.delegate.addOccurrences(item, occurrences);
+            return this.delegate.addOccurrences(item, occurrences);
         }
         finally
         {
@@ -860,9 +860,9 @@ public final class MultiReaderHashBag<T>
             return iterator;
         }
 
-        public void addOccurrences(T item, int occurrences)
+        public int addOccurrences(T item, int occurrences)
         {
-            this.getDelegate().addOccurrences(item, occurrences);
+            return this.getDelegate().addOccurrences(item, occurrences);
         }
 
         public boolean removeOccurrences(Object item, int occurrences)

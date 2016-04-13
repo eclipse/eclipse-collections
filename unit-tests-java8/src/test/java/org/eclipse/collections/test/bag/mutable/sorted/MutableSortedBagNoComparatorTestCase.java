@@ -55,11 +55,11 @@ public interface MutableSortedBagNoComparatorTestCase extends SortedBagTestCase,
     default void MutableBagIterable_addOccurrences()
     {
         MutableSortedBag<Integer> mutableSortedBag = this.newWith(1, 2, 2, 3, 3, 3);
-        mutableSortedBag.addOccurrences(4, 4);
+        assertEquals(4, mutableSortedBag.addOccurrences(4, 4));
         assertEquals(TreeBag.newBagWith(1, 2, 2, 3, 3, 3, 4, 4, 4, 4), mutableSortedBag);
-        mutableSortedBag.addOccurrences(1, 2);
+        assertEquals(3, mutableSortedBag.addOccurrences(1, 2));
         assertEquals(TreeBag.newBagWith(1, 1, 1, 2, 2, 3, 3, 3, 4, 4, 4, 4), mutableSortedBag);
-        mutableSortedBag.addOccurrences(1, 0);
+        assertEquals(3, mutableSortedBag.addOccurrences(1, 0));
         assertEquals(TreeBag.newBagWith(1, 1, 1, 2, 2, 3, 3, 3, 4, 4, 4, 4), mutableSortedBag);
     }
 

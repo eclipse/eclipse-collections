@@ -229,9 +229,16 @@ public abstract class MutableBagTestCase extends AbstractCollectionTestCase
     @Test
     public void addOccurrences()
     {
-        MutableBagIterable<Object> bag = this.newWith();
-        bag.addOccurrences(new Object(), 0);
-        MutableBagTestCase.assertBagsEqual(HashBag.newBag(), bag);
+        MutableBagIterable<String> bag = this.newWith();
+        Assert.assertEquals(0, bag.addOccurrences("0", 0));
+        Assert.assertEquals(1, bag.addOccurrences("1", 1));
+        Assert.assertEquals(1, bag.addOccurrences("1", 0));
+        Assert.assertEquals(2, bag.addOccurrences("2", 2));
+        MutableBagTestCase.assertBagsEqual(HashBag.newBagWith("1", "2", "2"), bag);
+        Assert.assertEquals(1, bag.addOccurrences("1", 0));
+        Assert.assertEquals(6, bag.addOccurrences("2", 4));
+        Assert.assertEquals(1, bag.addOccurrences("3", 1));
+        MutableBagTestCase.assertBagsEqual(HashBag.newBagWith("1", "2", "2", "2", "2", "2", "2", "3"), bag);
     }
 
     @Test(expected = IllegalArgumentException.class)
