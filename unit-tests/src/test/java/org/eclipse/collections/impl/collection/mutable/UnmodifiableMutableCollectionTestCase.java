@@ -182,7 +182,7 @@ public abstract class UnmodifiableMutableCollectionTestCase<T>
     public void collect()
     {
         Assert.assertEquals(this.getCollection(), this.getCollection().collect(Functions.getPassThru()));
-        Assert.assertNotEquals(this.getCollection(), this.getCollection().collect(Object::getClass));
+        Assert.assertNotEquals(this.getCollection(), this.getCollection().collect(o -> o.getClass()));
     }
 
     @Test
@@ -245,14 +245,14 @@ public abstract class UnmodifiableMutableCollectionTestCase<T>
     public void collectWith()
     {
         Assert.assertEquals(this.getCollection(), this.getCollection().collectWith(Functions2.fromFunction(Functions.getPassThru()), null));
-        Assert.assertNotEquals(this.getCollection(), this.getCollection().collectWith(Functions2.fromFunction(Object::getClass), null));
+        Assert.assertNotEquals(this.getCollection(), this.getCollection().collectWith(Functions2.fromFunction(o -> o.getClass()), null));
     }
 
     @Test
     public void collectIf()
     {
         Assert.assertEquals(this.getCollection(), this.getCollection().collectIf(ignored -> true, Functions.getPassThru()));
-        Assert.assertNotEquals(this.getCollection(), this.getCollection().collectIf(ignored -> false, Object::getClass));
+        Assert.assertNotEquals(this.getCollection(), this.getCollection().collectIf(ignored -> false, o -> o.getClass()));
     }
 
     @Test

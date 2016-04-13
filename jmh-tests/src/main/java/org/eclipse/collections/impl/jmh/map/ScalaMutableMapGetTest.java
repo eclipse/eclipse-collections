@@ -61,7 +61,7 @@ public class ScalaMutableMapGetTest extends AbstractJMHTestRunner
     {
         int localSize = this.size;
         String[] localElements = this.elements;
-        Map<String, String> localScalaMap = this.scalaMap;
+        scala.collection.Map<String, String> localScalaMap = this.scalaMap;
 
         for (int i = 0; i < localSize; i++)
         {

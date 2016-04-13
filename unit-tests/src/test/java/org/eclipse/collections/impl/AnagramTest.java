@@ -94,7 +94,7 @@ public class AnagramTest
         results.forEach(
                 Procedures.ifTrue(
                         iterable -> iterable.size() >= SIZE_THRESHOLD,
-                        Functions.bind(Procedures.cast(LOGGER::info), iterable -> iterable.size() + ": " + iterable)));
+                        Functions.bind(Procedures.cast(LOGGER::info), (RichIterable<String> iterable) -> iterable.size() + ": " + iterable)));
         Verify.assertIterableSize(SIZE_THRESHOLD, results.getLast());
     }
 
@@ -117,7 +117,7 @@ public class AnagramTest
         this.getWords().groupBy(Alphagram::new)
                 .multiValuesView().forEach(Procedures.ifTrue(iterable -> iterable.size() >= SIZE_THRESHOLD, results::add));
         results.sortThisByInt(iterable -> -iterable.size())
-                .forEach(Functions.bind(Procedures.cast(LOGGER::info), iterable -> iterable.size() + ": " + iterable));
+                .forEach(Functions.bind(Procedures.cast(LOGGER::info), (RichIterable<String> iterable) -> iterable.size() + ": " + iterable));
         Verify.assertIterableSize(SIZE_THRESHOLD, results.getLast());
     }
 
@@ -129,7 +129,7 @@ public class AnagramTest
         MutableList<MutableList<String>> results =
                 map.select(iterable -> iterable.size() >= SIZE_THRESHOLD, Lists.mutable.<MutableList<String>>of())
                         .sortThisByInt(iterable -> -iterable.size());
-        results.forEach(Functions.bind(Procedures.cast(LOGGER::info), iterable -> iterable.size() + ": " + iterable));
+        results.forEach(Functions.bind(Procedures.cast(LOGGER::info), (RichIterable<String> iterable) -> iterable.size() + ": " + iterable));
         Assert.assertTrue(this.listContainsTestGroupAtElementsOneOrTwo(results));
         Verify.assertSize(SIZE_THRESHOLD, results.getLast());
     }
