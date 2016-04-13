@@ -46,6 +46,8 @@ public interface MutableMultimap<K, V>
     // Bulk Operations
     boolean putAllPairs(Pair<K, V>... pairs);
 
+    boolean putAllPairs(Iterable<Pair<K, V>> pairs);
+
     boolean putAll(K key, Iterable<? extends V> values);
 
     <KK extends K, VV extends V> boolean putAll(Multimap<KK, VV> multimap);
