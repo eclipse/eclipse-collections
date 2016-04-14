@@ -7,12 +7,12 @@ New Functionality
 * Changed MutableBagIterable.addOccurrences(T item, int occurrences) to return the updated number of occurrences instead of void.
 * Implemented Multimap.keySet() to return an unmodifiable SetIterable of keys.
 * Implemented MutableMultimap.putAllPairs(Iterable<Pair<K, V>> keyValuePairs).
-* Pull up into() from LazyIterable to RichIterable
+* Pull up into() from LazyIterable to RichIterable.
 
 Optimizations
 -------------
 
-* A Placeholder
+* Optimize MutableList.chunk() for RandomAccess lists to use the backing array instead of an iterator.
 
 Bug fixes
 ---------

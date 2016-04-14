@@ -22,6 +22,7 @@ import java.util.Random;
 import java.util.RandomAccess;
 import java.util.concurrent.ExecutorService;
 
+import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.block.HashingStrategy;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function0;
@@ -1114,6 +1115,35 @@ public abstract class AbstractMutableList<T>
     public int binarySearch(T key)
     {
         return Collections.binarySearch((List<? extends Comparable<? super T>>) this, key);
+    }
+
+    @Override
+    public RichIterable<RichIterable<T>> chunk(int size)
+    {
+        if (size <= 0)
+        {
+            throw new IllegalArgumentException("Size for groups must be positive but was: " + size);
+        }
+
+        if (this instanceof RandomAccess)
+        {
+            MutableList<RichIterable<T>> result = Lists.mutable.empty();
+            int i = 0;
+            while (i < this.size())
+            {
+                MutableList<T> batch = new FastList<T>(Math.min(size, this.size() - i));
+
+                for (int j = 0; j < size && i < this.size(); j++)
+                {
+                    batch.add(this.get(i));
+                    i++;
+                }
+                result.add(batch);
+            }
+            return result;
+        }
+
+        return super.chunk(size);
     }
 
     public MutableList<T> take(int count)
