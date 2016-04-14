@@ -182,7 +182,7 @@ final class ImmutableSingletonMap<K, V>
     @Override
     public <R> ImmutableMap<K, R> collectValues(Function2<? super K, ? super V, ? extends R> function)
     {
-        return Maps.immutable.with(this.key1, function.value(this.key1, this.value1));
+        return Maps.immutable.<K, R>with(this.key1, function.value(this.key1, this.value1));
     }
 
     @Override
