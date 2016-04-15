@@ -10,15 +10,47 @@
 
 package org.eclipse.collections.impl.factory;
 
+import org.eclipse.collections.api.bag.Bag;
 import org.eclipse.collections.api.bag.ImmutableBag;
+import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.factory.bag.ImmutableBagFactory;
+import org.eclipse.collections.api.factory.bag.MutableBagFactory;
 import org.eclipse.collections.impl.bag.mutable.HashBag;
+import org.eclipse.collections.impl.list.mutable.FastList;
+import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
 import org.junit.Test;
 
 public class BagsTest
 {
+    @Test
+    public void mutables()
+    {
+        MutableBagFactory bagFactory = Bags.mutable;
+        Verify.assertBagsEqual(HashBag.newBag(), bagFactory.of());
+        Verify.assertInstanceOf(MutableBag.class, bagFactory.of());
+        Verify.assertBagsEqual(HashBag.newBagWith(1), bagFactory.of(1));
+        Verify.assertInstanceOf(MutableBag.class, bagFactory.of(1));
+        Verify.assertBagsEqual(HashBag.newBagWith(1, 2), bagFactory.of(1, 2));
+        Verify.assertInstanceOf(MutableBag.class, bagFactory.of(1, 2));
+        Verify.assertBagsEqual(HashBag.newBagWith(1, 2, 3), bagFactory.of(1, 2, 3));
+        Verify.assertInstanceOf(MutableBag.class, bagFactory.of(1, 2, 3));
+        Verify.assertBagsEqual(HashBag.newBagWith(1, 2, 3, 4), bagFactory.of(1, 2, 3, 4));
+        Verify.assertInstanceOf(MutableBag.class, bagFactory.of(1, 2, 3, 4));
+        Verify.assertBagsEqual(HashBag.newBagWith(1, 2, 3, 4, 5), bagFactory.of(1, 2, 3, 4, 5));
+        Verify.assertInstanceOf(MutableBag.class, bagFactory.of(1, 2, 3, 4, 5));
+
+        Bag<Integer> bag = HashBag.newBagWith(1, 2, 2, 3, 3, 3);
+        Verify.assertBagsEqual(HashBag.newBagWith(1, 2, 2, 3, 3, 3), bagFactory.ofAll(bag));
+        Verify.assertInstanceOf(MutableBag.class, bagFactory.ofAll(bag));
+        Assert.assertNotSame(bagFactory.ofAll(bag), bag);
+        Verify.assertBagsEqual(HashBag.newBagWith(1, 2, 2, 3, 3, 3), bagFactory.ofAll(FastList.newListWith(1, 2, 2, 3, 3, 3)));
+        Verify.assertInstanceOf(MutableBag.class, bagFactory.ofAll(FastList.newListWith(1, 2, 2, 3, 3, 3)));
+        Verify.assertBagsEqual(HashBag.newBagWith(1, 2, 3, 4, 5), bagFactory.ofAll(UnifiedSet.newSetWith(1, 2, 3, 4, 5)));
+        Verify.assertInstanceOf(MutableBag.class, bagFactory.ofAll(UnifiedSet.newSetWith(1, 2, 3, 4, 5)));
+    }
+
     @Test
     public void immutables()
     {
