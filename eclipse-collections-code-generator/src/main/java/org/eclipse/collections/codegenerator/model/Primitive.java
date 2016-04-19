@@ -85,4 +85,15 @@ public enum Primitive
     {
         return this == INT || this == LONG || this == DOUBLE;
     }
+
+    public Primitive[] getAllPrimitives()
+    {
+        return Primitive.values();
+    }
+
+    @Override
+    public String toString()
+    {
+        return this.getName();
+    }
 }

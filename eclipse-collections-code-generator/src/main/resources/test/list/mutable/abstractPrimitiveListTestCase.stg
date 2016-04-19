@@ -1,4 +1,5 @@
 import "copyright.stg"
+import "primitiveEquals.stg"
 import "primitiveHashCode.stg"
 import "primitiveLiteral.stg"
 
@@ -9,18 +10,39 @@ targetPath() ::= "org/eclipse/collections/impl/list/mutable/primitive"
 fileName(primitive) ::= "Abstract<primitive.name>ListTestCase"
 
 class(primitive) ::= <<
-<body(primitive.type, primitive.wrapperName, primitive.name)>
+<body(primitive.type, primitive.wrapperName, primitive.name, primitive.allPrimitives)>
 >>
 
-body(type, wrapperName, name) ::= <<
+collectPrimitive(toName, toType) ::= <<
+@Test
+public void collect<toName>()
+{
+    Mutable<name>List list = this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">);
+
+    Mutable<toName>List mutable<toName>List =
+        list.collect<toName>(<type>Parameter -> (<toType>) (<type>Parameter + <(literal.(type))("1")>));
+
+    Assert.assertEquals(<toName>ArrayList.newListWith(<["2", "3", "4"]:(literal.(toType))(); separator=", ">), mutable<toName>List);
+}>>
+
+importPrimitiveFunction(toName) ::= <<
+import org.eclipse.collections.api.block.function.primitive.<name>To<toName>Function;<\n>
+>>
+
+importMutablePrimitiveList(toName) ::= <<
+import org.eclipse.collections.api.list.primitive.Mutable<toName>List;<\n>
+>>
+
+body(type, wrapperName, name, allPrimitives) ::= <<
 <copyright()>
 
 package org.eclipse.collections.impl.list.mutable.primitive;
 
+<allPrimitives:importPrimitiveFunction()>
 import org.eclipse.collections.api.iterator.<name>Iterator;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.list.primitive.Immutable<name>List;
-import org.eclipse.collections.api.list.primitive.Mutable<name>List;
+<allPrimitives:importMutablePrimitiveList()>
 import org.eclipse.collections.impl.collection.mutable.primitive.AbstractMutable<name>CollectionTestCase;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.math.Mutable<wrapperName>;
@@ -430,6 +452,30 @@ public abstract class Abstract<name>ListTestCase extends AbstractMutable<name>Co
         Mutable<wrapperName> result = list1.injectIntoWithIndex(new Mutable<wrapperName>(<(literal.(type))("0")>),
             (Mutable<wrapperName> object, <type> value, int index) -> object.add(<(castIntToNarrowTypeWithParens.(type))("value * list2.get(index)")>));
         Assert.assertEquals(new Mutable<wrapperName>(<(literal.(type))("14")>), result);
+    }
+
+    <collectPrimitive("Byte", "byte")>
+
+    <collectPrimitive("Short", "short")>
+
+    <collectPrimitive("Char", "char")>
+
+    <collectPrimitive("Int", "int")>
+
+    <collectPrimitive("Long", "long")>
+
+    <collectPrimitive("Float", "float")>
+
+    <collectPrimitive("Double", "double")>
+
+    @Test
+    public void collectBoolean()
+    {
+        Mutable<name>List list = this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">);
+
+        MutableBooleanList mutableBooleanList = list.collectBoolean(each -> <(equals.(type))("each", {<(literal.(type))("1")>})>);
+
+        Assert.assertEquals(BooleanArrayList.newListWith(true, false, false), mutableBooleanList);
     }
 }
 

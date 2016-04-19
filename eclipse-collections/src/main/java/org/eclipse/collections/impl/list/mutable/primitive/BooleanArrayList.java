@@ -21,7 +21,23 @@ import net.jcip.annotations.NotThreadSafe;
 import org.eclipse.collections.api.BooleanIterable;
 import org.eclipse.collections.api.LazyBooleanIterable;
 import org.eclipse.collections.api.bag.primitive.MutableBooleanBag;
+import org.eclipse.collections.api.block.function.primitive.BooleanToBooleanFunction;
+import org.eclipse.collections.api.block.function.primitive.BooleanToByteFunction;
+import org.eclipse.collections.api.block.function.primitive.BooleanToCharFunction;
+import org.eclipse.collections.api.block.function.primitive.BooleanToDoubleFunction;
+import org.eclipse.collections.api.block.function.primitive.BooleanToFloatFunction;
+import org.eclipse.collections.api.block.function.primitive.BooleanToIntFunction;
+import org.eclipse.collections.api.block.function.primitive.BooleanToLongFunction;
 import org.eclipse.collections.api.block.function.primitive.BooleanToObjectFunction;
+import org.eclipse.collections.api.block.function.primitive.BooleanToShortFunction;
+import org.eclipse.collections.api.block.function.primitive.IntToBooleanFunction;
+import org.eclipse.collections.api.block.function.primitive.IntToByteFunction;
+import org.eclipse.collections.api.block.function.primitive.IntToCharFunction;
+import org.eclipse.collections.api.block.function.primitive.IntToDoubleFunction;
+import org.eclipse.collections.api.block.function.primitive.IntToFloatFunction;
+import org.eclipse.collections.api.block.function.primitive.IntToIntFunction;
+import org.eclipse.collections.api.block.function.primitive.IntToLongFunction;
+import org.eclipse.collections.api.block.function.primitive.IntToShortFunction;
 import org.eclipse.collections.api.block.function.primitive.ObjectBooleanIntToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.ObjectBooleanToObjectFunction;
 import org.eclipse.collections.api.block.predicate.primitive.BooleanPredicate;
@@ -33,6 +49,13 @@ import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.list.primitive.BooleanList;
 import org.eclipse.collections.api.list.primitive.ImmutableBooleanList;
 import org.eclipse.collections.api.list.primitive.MutableBooleanList;
+import org.eclipse.collections.api.list.primitive.MutableByteList;
+import org.eclipse.collections.api.list.primitive.MutableCharList;
+import org.eclipse.collections.api.list.primitive.MutableDoubleList;
+import org.eclipse.collections.api.list.primitive.MutableFloatList;
+import org.eclipse.collections.api.list.primitive.MutableIntList;
+import org.eclipse.collections.api.list.primitive.MutableLongList;
+import org.eclipse.collections.api.list.primitive.MutableShortList;
 import org.eclipse.collections.api.set.primitive.BooleanSet;
 import org.eclipse.collections.api.set.primitive.MutableBooleanSet;
 import org.eclipse.collections.impl.bag.mutable.primitive.BooleanHashBag;
@@ -732,6 +755,110 @@ public final class BooleanArrayList
     public <V> MutableList<V> collect(BooleanToObjectFunction<? extends V> function)
     {
         FastList<V> target = FastList.newList(this.size);
+        for (int i = 0; i < this.size; i++)
+        {
+            target.add(function.valueOf(this.items.get(i)));
+        }
+        return target;
+    }
+
+    /**
+     * @since 8.0
+     */
+    public MutableIntList collectInt(BooleanToIntFunction function)
+    {
+        MutableIntList target = new IntArrayList(this.size);
+        for (int i = 0; i < this.size; i++)
+        {
+            target.add(function.valueOf(this.items.get(i)));
+        }
+        return target;
+    }
+
+    /**
+     * @since 8.0
+     */
+    public MutableFloatList collectFloat(BooleanToFloatFunction function)
+    {
+        MutableFloatList target = new FloatArrayList(this.size);
+        for (int i = 0; i < this.size; i++)
+        {
+            target.add(function.valueOf(this.items.get(i)));
+        }
+        return target;
+    }
+
+    /**
+     * @since 8.0
+     */
+    public MutableDoubleList collectDouble(BooleanToDoubleFunction function)
+    {
+        MutableDoubleList target = new DoubleArrayList(this.size);
+        for (int i = 0; i < this.size; i++)
+        {
+            target.add(function.valueOf(this.items.get(i)));
+        }
+        return target;
+    }
+
+    /**
+     * @since 8.0
+     */
+    public MutableLongList collectLong(BooleanToLongFunction function)
+    {
+        MutableLongList target = new LongArrayList(this.size);
+        for (int i = 0; i < this.size; i++)
+        {
+            target.add(function.valueOf(this.items.get(i)));
+        }
+        return target;
+    }
+
+    /**
+     * @since 8.0
+     */
+    public MutableShortList collectShort(BooleanToShortFunction function)
+    {
+        MutableShortList target = new ShortArrayList(this.size);
+        for (int i = 0; i < this.size; i++)
+        {
+            target.add(function.valueOf(this.items.get(i)));
+        }
+        return target;
+    }
+
+    /**
+     * @since 8.0
+     */
+    public MutableByteList collectByte(BooleanToByteFunction function)
+    {
+        MutableByteList target = new ByteArrayList(this.size);
+        for (int i = 0; i < this.size; i++)
+        {
+            target.add(function.valueOf(this.items.get(i)));
+        }
+        return target;
+    }
+
+    /**
+     * @since 8.0
+     */
+    public MutableCharList collectChar(BooleanToCharFunction function)
+    {
+        MutableCharList target = new CharArrayList(this.size);
+        for (int i = 0; i < this.size; i++)
+        {
+            target.add(function.valueOf(this.items.get(i)));
+        }
+        return target;
+    }
+
+    /**
+     * @since 8.0
+     */
+    public MutableBooleanList collectBoolean(BooleanToBooleanFunction function)
+    {
+        MutableBooleanList target = new BooleanArrayList(this.size);
         for (int i = 0; i < this.size; i++)
         {
             target.add(function.valueOf(this.items.get(i)));
