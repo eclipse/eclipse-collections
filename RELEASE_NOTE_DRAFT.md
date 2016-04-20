@@ -5,6 +5,7 @@ New Functionality
 -----------------
 
 * Changed MutableBagIterable.addOccurrences(T item, int occurrences) to return the updated number of occurrences instead of void.
+* Implemented Bags.mutable.ofAll(Iterable<? extends T> items) and Bags.mutable.withAll(Iterable<? extends T> items).
 * Implemented Multimap.keySet() to return an unmodifiable SetIterable of keys.
 * Implemented MutableMultimap.putAllPairs(Iterable<Pair<K, V>> keyValuePairs).
 * Pull up into() from LazyIterable to RichIterable.

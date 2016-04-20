@@ -38,4 +38,11 @@ public interface MutableBagFactory
     <T> MutableBag<T> of(T... elements);
 
     <T> MutableBag<T> with(T... elements);
+
+    /**
+     * Same as {@link #withAll(Iterable)}.
+     */
+    <T> MutableBag<T> ofAll(Iterable<? extends T> items);
+
+    <T> MutableBag<T> withAll(Iterable<? extends T> items);
 }

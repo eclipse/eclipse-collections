@@ -41,4 +41,14 @@ public final class MutableBagFactoryImpl implements MutableBagFactory
     {
         return HashBag.newBagWith(elements);
     }
+
+    public <T> MutableBag<T> ofAll(Iterable<? extends T> items)
+    {
+        return this.withAll(items);
+    }
+
+    public <T> MutableBag<T> withAll(Iterable<? extends T> items)
+    {
+        return HashBag.newBag(items);
+    }
 }
