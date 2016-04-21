@@ -10,6 +10,7 @@
 
 package org.eclipse.collections.impl.jmh;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ExecutorService;
@@ -19,6 +20,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.eclipse.collections.api.list.MutableList;
+import org.eclipse.collections.api.list.primitive.IntList;
 import org.eclipse.collections.impl.jmh.runner.AbstractJMHTestRunner;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.openjdk.jmh.annotations.Benchmark;
@@ -41,6 +43,7 @@ public class SumOfIntTest extends AbstractJMHTestRunner
 
     private final List<Integer> integersJDK = INTEGERS.limit(SIZE).collect(Collectors.toList());
     private final MutableList<Integer> integersEC = FastList.newListWith(this.integersJDK.toArray(new Integer[SIZE]));
+    private final IntList intList = this.integersEC.collectInt(Integer::intValue);
 
     private ExecutorService executorService;
 
@@ -48,6 +51,8 @@ public class SumOfIntTest extends AbstractJMHTestRunner
     public void setUp()
     {
         this.executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
+        Collections.shuffle(this.integersJDK);
+        Collections.shuffle(this.integersEC);
     }
 
     @TearDown
@@ -58,49 +63,49 @@ public class SumOfIntTest extends AbstractJMHTestRunner
     }
 
     @Benchmark
-    public int serial_lazy_collectIntSum_jdk()
+    public int serial_lazy_mapToIntSum_jdk()
     {
-        return this.integersJDK.stream().mapToInt(each -> each).sum();
+        return this.integersJDK.stream().mapToInt(Integer::intValue).sum();
     }
 
     @Benchmark
-    public int serial_lazy_collectIntSum_streams_ec()
+    public int serial_lazy_mapToIntSum_streams_ec()
     {
-        return this.integersEC.stream().mapToInt(each -> each).sum();
+        return this.integersEC.stream().mapToInt(Integer::intValue).sum();
     }
 
     @Benchmark
-    public long serial_lazy_collectLongSum_jdk()
+    public long serial_lazy_mapToLongSum_jdk()
     {
-        return this.integersJDK.stream().mapToLong(each -> each).sum();
+        return this.integersJDK.stream().mapToLong(Integer::longValue).sum();
     }
 
     @Benchmark
-    public long serial_lazy_collectLongSum_streams_ec()
+    public long serial_lazy_mapToLongSum_streams_ec()
     {
-        return this.integersEC.stream().mapToLong(each -> each).sum();
+        return this.integersEC.stream().mapToLong(Integer::longValue).sum();
     }
 
     @Benchmark
-    public int parallel_lazy_collectIntSum_jdk()
+    public int parallel_lazy_mapToIntSum_jdk()
     {
         return this.integersJDK.parallelStream().mapToInt(Integer::intValue).sum();
     }
 
     @Benchmark
-    public int parallel_lazy_collectIntSum_streams_ec()
+    public int parallel_lazy_mapToIntSum_streams_ec()
     {
         return this.integersEC.parallelStream().mapToInt(Integer::intValue).sum();
     }
 
     @Benchmark
-    public long parallel_lazy_collectLongSum_jdk()
+    public long parallel_lazy_mapToLongSum_jdk()
     {
         return this.integersJDK.parallelStream().mapToLong(Integer::longValue).sum();
     }
 
     @Benchmark
-    public long parallel_lazy_collectLongSum_streams_ec()
+    public long parallel_lazy_mapToLongSum_streams_ec()
     {
         return this.integersEC.parallelStream().mapToLong(Integer::longValue).sum();
     }
@@ -108,30 +113,36 @@ public class SumOfIntTest extends AbstractJMHTestRunner
     @Benchmark
     public long serial_eager_directSumOfInt_ec()
     {
-        return this.integersEC.sumOfInt(each -> each);
+        return this.integersEC.sumOfInt(Integer::intValue);
     }
 
     @Benchmark
     public long serial_eager_collectIntSum_ec()
     {
-        return this.integersEC.collectInt(each -> each).sum();
+        return this.integersEC.collectInt(Integer::intValue).sum();
     }
 
     @Benchmark
     public long serial_lazy_collectIntSum_ec()
     {
-        return this.integersEC.asLazy().collectInt(each -> each).sum();
+        return this.integersEC.asLazy().collectInt(Integer::intValue).sum();
     }
 
     @Benchmark
-    public long parallel_lazy_directSumOfInt_ec()
+    public long parallel_lazy_sumOfInt_ec()
     {
-        return this.integersEC.asParallel(this.executorService, BATCH_SIZE).sumOfInt(each -> each);
+        return this.integersEC.asParallel(this.executorService, BATCH_SIZE).sumOfInt(Integer::intValue);
     }
 
     @Benchmark
-    public long serial_lazy_directSumOfInt_ec()
+    public long serial_lazy_sumOfInt_ec()
     {
-        return this.integersEC.asLazy().sumOfInt(each -> each);
+        return this.integersEC.asLazy().sumOfInt(Integer::intValue);
+    }
+
+    @Benchmark
+    public long serial_eager_sum_intList()
+    {
+        return this.intList.sum();
     }
 }
