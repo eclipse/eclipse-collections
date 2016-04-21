@@ -44,6 +44,7 @@ import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.multimap.set.ImmutableSetMultimap;
+import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.partition.set.PartitionImmutableSet;
 import org.eclipse.collections.api.partition.set.PartitionMutableSet;
 import org.eclipse.collections.api.set.ImmutableSet;
@@ -321,11 +322,19 @@ public abstract class AbstractImmutableBiMap<K, V> extends AbstractBiMap<K, V> i
         return this.partition(Predicates.bind(predicate, parameter));
     }
 
+    /**
+     * @deprecated in 8.0. Use {@link OrderedIterable#zip(Iterable)} instead.
+     */
+    @Deprecated
     public <S> ImmutableSet<Pair<V, S>> zip(Iterable<S> that)
     {
         return this.delegate.zip(that, new UnifiedSet<Pair<V, S>>()).toImmutable();
     }
 
+    /**
+     * @deprecated in 8.0. Use {@link OrderedIterable#zipWithIndex()} instead.
+     */
+    @Deprecated
     public ImmutableSet<Pair<V, Integer>> zipWithIndex()
     {
         return this.delegate.zipWithIndex(new UnifiedSet<Pair<V, Integer>>()).toImmutable();

@@ -368,6 +368,10 @@ public class SynchronizedBiMap<K, V> extends AbstractSynchronizedMapIterable<K, 
         }
     }
 
+    /**
+     * @deprecated in 8.0. Use {@link OrderedIterable#zipWithIndex()} instead.
+     */
+    @Deprecated
     public MutableSet<Pair<V, Integer>> zipWithIndex()
     {
         synchronized (this.lock)

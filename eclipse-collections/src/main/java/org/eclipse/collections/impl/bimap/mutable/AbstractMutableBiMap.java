@@ -544,6 +544,10 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
         return this.delegate.collectIf(predicate, function);
     }
 
+    /**
+     * @deprecated in 8.0. Use {@link OrderedIterable#zipWithIndex()} instead.
+     */
+    @Deprecated
     public MutableSet<Pair<V, Integer>> zipWithIndex()
     {
         return this.delegate.zipWithIndex(new UnifiedSet<Pair<V, Integer>>());
@@ -559,6 +563,10 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
         return this.delegate.groupByEach(function, new UnifiedSetMultimap<VV, V>());
     }
 
+    /**
+     * @deprecated in 8.0. Use {@link OrderedIterable#zip(Iterable)} instead.
+     */
+    @Deprecated
     public <S> MutableSet<Pair<V, S>> zip(Iterable<S> that)
     {
         return this.delegate.zip(that, new UnifiedSet<Pair<V, S>>());
