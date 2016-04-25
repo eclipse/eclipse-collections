@@ -9,6 +9,7 @@ New Functionality
 * Implemented Multimap.keySet() to return an unmodifiable SetIterable of keys.
 * Implemented MutableMultimap.putAllPairs(Iterable<Pair<K, V>> keyValuePairs).
 * Pull up into() from LazyIterable to RichIterable.
+* Made StackIterable implement OrderedIterable.
 
 Optimizations
 -------------
@@ -18,7 +19,14 @@ Optimizations
 Bug fixes
 ---------
 
-* A Placeholder
+* Changed AbstractSynchronizedRichIterable.groupByUniqueKey() to return MapIterable instead of MutableMap.
+* Changed AbstractMutableMapIterable.groupByUniqueKey() to return MutableMapIterable instead of MutableMap.
+* Changed MutableMapIterable.aggregateBy() to return MutableMap instead of MutableMapIterable.
+* Fixed return types on MapIterable.collect(Function2) overrides.
+* Fixed return type of UnifiedSetWithHashingStrategy.groupByEach() method to preserve hashing strategy.
+* Fixed generics on Multimap.forEachKeyValue().
+* Fixed generics on Multimap.forEachKeyMultiValues().
+* Made primitive-object maps more bag-like. Change the filtering and transformation methods to return bags since they contain duplicates and no meaningful order.
 
 Acquiring Eclipse Collections
 -----------------------------
