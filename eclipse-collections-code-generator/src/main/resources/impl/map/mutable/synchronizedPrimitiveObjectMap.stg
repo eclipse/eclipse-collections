@@ -14,7 +14,7 @@ class(primitive) ::= <<
 >>
 
 collectPrimitive(name, type) ::= <<
-public Mutable<name>Collection collect<name>(<name>Function\<? super V> <type>Function)
+public Mutable<name>Bag collect<name>(<name>Function\<? super V> <type>Function)
 {
     synchronized (this.lock)
     {
@@ -29,6 +29,7 @@ public \<R extends Mutable<name>Collection> R collect<name>(<name>Function\<? su
         return this.map.collect<name>(<type>Function, target);
     }
 }
+
 >>
 
 body(type, name) ::= <<
@@ -42,16 +43,25 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 
+import net.jcip.annotations.GuardedBy;
 import org.eclipse.collections.api.<name>Iterable;
 import org.eclipse.collections.api.Lazy<name>Iterable;
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.MutableBag;
+import org.eclipse.collections.api.bag.primitive.MutableBooleanBag;
+import org.eclipse.collections.api.bag.primitive.MutableByteBag;
+import org.eclipse.collections.api.bag.primitive.MutableCharBag;
+import org.eclipse.collections.api.bag.primitive.MutableDoubleBag;
+import org.eclipse.collections.api.bag.primitive.MutableFloatBag;
+import org.eclipse.collections.api.bag.primitive.MutableIntBag;
+import org.eclipse.collections.api.bag.primitive.MutableLongBag;
+import org.eclipse.collections.api.bag.primitive.MutableShortBag;
 import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
-import org.eclipse.collections.api.multimap.bag.MutableBagMultimap;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.block.function.Function2;
+import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.BooleanFunction;
 import org.eclipse.collections.api.block.function.primitive.ByteFunction;
 import org.eclipse.collections.api.block.function.primitive.CharFunction;
@@ -61,7 +71,6 @@ import org.eclipse.collections.api.block.function.primitive.FloatFunction;
 import org.eclipse.collections.api.block.function.primitive.FloatObjectToFloatFunction;
 import org.eclipse.collections.api.block.function.primitive.IntFunction;
 import org.eclipse.collections.api.block.function.primitive.IntObjectToIntFunction;
-import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.LongFunction;
 import org.eclipse.collections.api.block.function.primitive.LongObjectToLongFunction;
 import org.eclipse.collections.api.block.function.primitive.ShortFunction;
@@ -73,7 +82,6 @@ import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.block.procedure.primitive.<name>ObjectProcedure;
 import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
-import org.eclipse.collections.api.collection.MutableCollection;
 import org.eclipse.collections.api.collection.primitive.MutableBooleanCollection;
 import org.eclipse.collections.api.collection.primitive.MutableByteCollection;
 import org.eclipse.collections.api.collection.primitive.MutableCharCollection;
@@ -85,18 +93,18 @@ import org.eclipse.collections.api.collection.primitive.MutableShortCollection;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.primitive.<name>ObjectMap;
+import org.eclipse.collections.api.map.primitive.Mutable<name>ObjectMap;
 import org.eclipse.collections.api.map.primitive.Immutable<name>ObjectMap;
 import org.eclipse.collections.api.map.primitive.ObjectDoubleMap;
 import org.eclipse.collections.api.map.primitive.ObjectLongMap;
-import org.eclipse.collections.api.map.primitive.Mutable<name>ObjectMap;
 import org.eclipse.collections.api.map.sorted.MutableSortedMap;
 import org.eclipse.collections.api.multimap.MutableMultimap;
-import org.eclipse.collections.api.partition.PartitionMutableCollection;
+import org.eclipse.collections.api.multimap.bag.MutableBagMultimap;
+import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.partition.bag.PartitionMutableBag;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
-import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.api.tuple.primitive.<name>ObjectPair;
 import org.eclipse.collections.impl.SynchronizedRichIterable;
@@ -105,8 +113,6 @@ import org.eclipse.collections.impl.collection.mutable.SynchronizedMutableCollec
 import org.eclipse.collections.impl.factory.primitive.<name>ObjectMaps;
 import org.eclipse.collections.impl.primitive.Synchronized<name>Iterable;
 import org.eclipse.collections.impl.set.mutable.primitive.Synchronized<name>Set;
-import org.eclipse.collections.impl.bag.mutable.HashBag;
-import net.jcip.annotations.GuardedBy;
 
 /**
  * A synchronized view of a {@link Mutable<name>ObjectMap}. It is imperative that the user manually synchronize on the collection when iterating over it using the
@@ -376,7 +382,7 @@ public final class Synchronized<name>ObjectMap\<V>
         }
     }
 
-    public MutableCollection\<V> select(Predicate\<? super V> predicate)
+    public MutableBag\<V> select(Predicate\<? super V> predicate)
     {
         synchronized (this.lock)
         {
@@ -392,7 +398,7 @@ public final class Synchronized<name>ObjectMap\<V>
         }
     }
 
-    public \<P> MutableCollection\<V> selectWith(Predicate2\<? super V, ? super P> predicate, P parameter)
+    public \<P> MutableBag\<V> selectWith(Predicate2\<? super V, ? super P> predicate, P parameter)
     {
         synchronized (this.lock)
         {
@@ -476,7 +482,7 @@ public final class Synchronized<name>ObjectMap\<V>
         }
     }
 
-    public MutableCollection\<V> reject(Predicate\<? super V> predicate)
+    public MutableBag\<V> reject(Predicate\<? super V> predicate)
     {
         synchronized (this.lock)
         {
@@ -492,7 +498,7 @@ public final class Synchronized<name>ObjectMap\<V>
         }
     }
 
-    public \<P> MutableCollection\<V> rejectWith(Predicate2\<? super V, ? super P> predicate, P parameter)
+    public \<P> MutableBag\<V> rejectWith(Predicate2\<? super V, ? super P> predicate, P parameter)
     {
         synchronized (this.lock)
         {
@@ -516,7 +522,7 @@ public final class Synchronized<name>ObjectMap\<V>
         }
     }
 
-    public \<VV> MutableCollection\<VV> collect(Function\<? super V, ? extends VV> function)
+    public \<VV> MutableBag\<VV> collect(Function\<? super V, ? extends VV> function)
     {
         synchronized (this.lock)
         {
@@ -525,22 +531,15 @@ public final class Synchronized<name>ObjectMap\<V>
     }
 
     <collectPrimitive("Boolean", "boolean")>
-
     <collectPrimitive("Byte", "byte")>
-
     <collectPrimitive("Char", "char")>
-
     <collectPrimitive("Double", "double")>
-
     <collectPrimitive("Float", "float")>
-
     <collectPrimitive("Int", "int")>
-
     <collectPrimitive("Long", "long")>
-
     <collectPrimitive("Short", "short")>
 
-    public \<P, VV> MutableCollection\<VV> collectWith(Function2\<? super V, ? super P, ? extends VV> function, P parameter)
+    public \<P, VV> MutableBag\<VV> collectWith(Function2\<? super V, ? super P, ? extends VV> function, P parameter)
     {
         synchronized (this.lock)
         {
@@ -580,7 +579,7 @@ public final class Synchronized<name>ObjectMap\<V>
         }
     }
 
-    public \<VV> RichIterable\<VV> flatCollect(Function\<? super V, ? extends Iterable\<VV>\> function)
+    public \<VV> MutableBag\<VV> flatCollect(Function\<? super V, ? extends Iterable\<VV>\> function)
     {
         synchronized (this.lock)
         {

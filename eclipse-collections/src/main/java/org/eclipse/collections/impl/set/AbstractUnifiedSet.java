@@ -49,7 +49,6 @@ import org.eclipse.collections.impl.AbstractRichIterable;
 import org.eclipse.collections.impl.block.procedure.MutatingAggregationProcedure;
 import org.eclipse.collections.impl.block.procedure.NonMutatingAggregationProcedure;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
-import org.eclipse.collections.impl.multimap.set.UnifiedSetMultimap;
 import org.eclipse.collections.impl.parallel.BatchIterable;
 import org.eclipse.collections.impl.set.mutable.SynchronizedMutableSet;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
@@ -314,12 +313,6 @@ public abstract class AbstractUnifiedSet<T>
     public boolean retainAll(Collection<?> collection)
     {
         return this.retainAllIterable(collection);
-    }
-
-    public <V> UnifiedSetMultimap<V, T> groupByEach(
-            Function<? super T, ? extends Iterable<V>> function)
-    {
-        return this.groupByEach(function, UnifiedSetMultimap.<V, T>newMultimap());
     }
 
     public <V> MutableMap<V, T> groupByUniqueKey(

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -16,6 +16,7 @@ import java.util.concurrent.ExecutorService;
 
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
+import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.set.FixedSizeSet;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.set.ParallelUnsortedSetIterable;
@@ -107,6 +108,13 @@ abstract class AbstractMemoryEfficientMutableSet<T>
             return this;
         }
         return Sets.fixedSize.ofAll(this.toList().withoutAll(elements));
+    }
+
+    @Override
+    public FixedSizeSet<T> tap(Procedure<? super T> procedure)
+    {
+        this.each(procedure);
+        return this;
     }
 
     protected abstract class MemoryEfficientSetIterator

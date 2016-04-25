@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -16,6 +16,7 @@ import java.util.NoSuchElementException;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
+import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.list.ListIterable;
 import org.eclipse.collections.api.multimap.ordered.SortedIterableMultimap;
 import org.eclipse.collections.api.partition.ordered.PartitionSortedIterable;
@@ -37,6 +38,8 @@ public interface SortedIterable<T> extends OrderedIterable<T>
      * ordering of its elements.
      */
     Comparator<? super T> comparator();
+
+    SortedIterable<T> tap(Procedure<? super T> procedure);
 
     /**
      * Returns the initial elements that satisfy the Predicate. Short circuits at the first element which does not

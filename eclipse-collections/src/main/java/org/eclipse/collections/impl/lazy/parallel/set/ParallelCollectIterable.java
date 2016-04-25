@@ -13,7 +13,6 @@ package org.eclipse.collections.impl.lazy.parallel.set;
 import java.util.concurrent.ExecutorService;
 
 import org.eclipse.collections.api.LazyIterable;
-import org.eclipse.collections.api.ParallelIterable;
 import org.eclipse.collections.api.annotation.Beta;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.predicate.Predicate;
@@ -81,12 +80,6 @@ public class ParallelCollectIterable<T, V> extends AbstractParallelIterableImpl<
     {
         T resultItem = this.delegate.detect(Predicates.attributePredicate(this.function, predicate));
         return resultItem == null ? null : this.function.valueOf(resultItem);
-    }
-
-    @Override
-    public <V1> ParallelIterable<V1> flatCollect(Function<? super V, ? extends Iterable<V1>> function)
-    {
-        return new ParallelFlatCollectIterable<V, V1>(this, function);
     }
 
     @Override

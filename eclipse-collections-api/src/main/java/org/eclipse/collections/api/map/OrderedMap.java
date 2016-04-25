@@ -11,7 +11,6 @@
 package org.eclipse.collections.api.map;
 
 import org.eclipse.collections.api.block.function.Function;
-import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.function.primitive.BooleanFunction;
 import org.eclipse.collections.api.block.function.primitive.ByteFunction;
@@ -24,7 +23,6 @@ import org.eclipse.collections.api.block.function.primitive.ShortFunction;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
-import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.list.ListIterable;
 import org.eclipse.collections.api.list.primitive.BooleanList;
 import org.eclipse.collections.api.list.primitive.ByteList;
@@ -107,6 +105,8 @@ public interface OrderedMap<K, V>
 
     ListIterable<Pair<V, Integer>> zipWithIndex();
 
+    <VV> ListIterable<VV> collect(Function<? super V, ? extends VV> function);
+
     <P, V1> ListIterable<V1> collectWith(Function2<? super V, ? super P, ? extends V1> function, P parameter);
 
     <V1> ListIterable<V1> collectIf(Predicate<? super V> predicate, Function<? super V, ? extends V1> function);
@@ -120,8 +120,4 @@ public interface OrderedMap<K, V>
     <V1> ListMultimap<V1, V> groupByEach(Function<? super V, ? extends Iterable<V1>> function);
 
     <V1> OrderedMap<V1, V> groupByUniqueKey(Function<? super V, ? extends V1> function);
-
-    <KK, VV> OrderedMap<KK, VV> aggregateInPlaceBy(Function<? super V, ? extends KK> groupBy, Function0<? extends VV> zeroValueFactory, Procedure2<? super VV, ? super V> mutatingAggregator);
-
-    <KK, VV> OrderedMap<KK, VV> aggregateBy(Function<? super V, ? extends KK> groupBy, Function0<? extends VV> zeroValueFactory, Function2<? super VV, ? super V, ? extends VV> nonMutatingAggregator);
 }

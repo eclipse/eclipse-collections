@@ -16,10 +16,10 @@ body(type, name) ::= <<
 
 package org.eclipse.collections.api.stack.primitive;
 
-import org.eclipse.collections.api.<name>Iterable;
 import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
 import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
 import org.eclipse.collections.api.list.primitive.<name>List;
+import org.eclipse.collections.api.ordered.primitive.Ordered<name>Iterable;
 import org.eclipse.collections.api.stack.StackIterable;
 
 /**
@@ -27,7 +27,7 @@ import org.eclipse.collections.api.stack.StackIterable;
  *
  * @since 3.0.
  */
-public interface <name>Stack extends <name>Iterable
+public interface <name>Stack extends Ordered<name>Iterable
 {
     /**
      * Returns the top of the stack.

@@ -23,7 +23,9 @@ import org.eclipse.collections.api.Lazy<name>Iterable;
 import org.eclipse.collections.api.bag.primitive.Mutable<name>Bag;
 import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.Object<name>ToObjectFunction;
+import org.eclipse.collections.api.block.function.primitive.Object<name>IntToObjectFunction;
 import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
+import org.eclipse.collections.api.block.procedure.primitive.<name>IntProcedure;
 import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
 import org.eclipse.collections.api.iterator.<name>Iterator;
 import org.eclipse.collections.api.list.primitive.<name>List;
@@ -274,6 +276,26 @@ public final class Unmodifiable<name>Stack
     public \<T> T injectInto(T injectedValue, Object<name>ToObjectFunction\<? super T, ? extends T> function)
     {
         return this.stack.injectInto(injectedValue, function);
+    }
+
+    public <type> getFirst()
+    {
+        return this.stack.getFirst();
+    }
+
+    public int indexOf(<type> value)
+    {
+        return this.stack.indexOf(value);
+    }
+
+    public \<T> T injectIntoWithIndex(T injectedValue, Object<name>IntToObjectFunction\<? super T, ? extends T> function)
+    {
+        return this.stack.injectIntoWithIndex(injectedValue, function);
+    }
+
+    public void forEachWithIndex(<name>IntProcedure procedure)
+    {
+        this.stack.forEachWithIndex(procedure);
     }
 }
 

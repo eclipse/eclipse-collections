@@ -33,6 +33,7 @@ import org.eclipse.collections.api.block.function.primitive.IntFunction;
 import org.eclipse.collections.api.block.function.primitive.IntObjectToIntFunction;
 import org.eclipse.collections.api.block.function.primitive.LongFunction;
 import org.eclipse.collections.api.block.function.primitive.LongObjectToLongFunction;
+import org.eclipse.collections.api.block.function.primitive.ObjectIntToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.ShortFunction;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
@@ -55,6 +56,7 @@ import org.eclipse.collections.api.map.primitive.ObjectLongMap;
 import org.eclipse.collections.api.map.sorted.MutableSortedMap;
 import org.eclipse.collections.api.multimap.MutableMultimap;
 import org.eclipse.collections.api.multimap.list.MutableListMultimap;
+import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.partition.stack.PartitionMutableStack;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
@@ -71,9 +73,6 @@ import org.eclipse.collections.api.stack.primitive.MutableShortStack;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.UnmodifiableIteratorAdapter;
 import org.eclipse.collections.impl.block.factory.PrimitiveFunctions;
-import org.eclipse.collections.impl.block.procedure.MutatingAggregationProcedure;
-import org.eclipse.collections.impl.block.procedure.NonMutatingAggregationProcedure;
-import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.map.mutable.primitive.ObjectDoubleHashMap;
 import org.eclipse.collections.impl.map.mutable.primitive.ObjectLongHashMap;
 
@@ -162,7 +161,7 @@ public final class UnmodifiableStack<T> implements MutableStack<T>, Serializable
         return this.mutableStack.partitionWith(predicate, parameter);
     }
 
-    public <S> RichIterable<S> selectInstancesOf(Class<S> clazz)
+    public <S> MutableStack<S> selectInstancesOf(Class<S> clazz)
     {
         return this.mutableStack.selectInstancesOf(clazz);
     }
@@ -572,6 +571,11 @@ public final class UnmodifiableStack<T> implements MutableStack<T>, Serializable
         return this.mutableStack.max();
     }
 
+    public int detectIndex(Predicate<? super T> predicate)
+    {
+        return this.mutableStack.detectIndex(predicate);
+    }
+
     public <V extends Comparable<? super V>> T minBy(Function<? super T, ? extends V> function)
     {
         return this.mutableStack.minBy(function);
@@ -743,6 +747,16 @@ public final class UnmodifiableStack<T> implements MutableStack<T>, Serializable
         this.mutableStack.forEachWithIndex(objectIntProcedure);
     }
 
+    public void forEachWithIndex(int fromIndex, int toIndex, ObjectIntProcedure<? super T> objectIntProcedure)
+    {
+        this.mutableStack.forEachWithIndex(fromIndex, toIndex, objectIntProcedure);
+    }
+
+    public <V> MutableStack<V> collectWithIndex(ObjectIntToObjectFunction<? super T, ? extends V> function)
+    {
+        return this.mutableStack.collectWithIndex(function);
+    }
+
     public <P> void forEachWith(Procedure2<? super T, ? super P> procedure, P parameter)
     {
         this.mutableStack.forEachWith(procedure, parameter);
@@ -775,9 +789,7 @@ public final class UnmodifiableStack<T> implements MutableStack<T>, Serializable
             Function0<? extends V> zeroValueFactory,
             Procedure2<? super V, ? super T> mutatingAggregator)
     {
-        MutableMap<K, V> map = UnifiedMap.newMap();
-        this.forEach(new MutatingAggregationProcedure<T, K, V>(map, groupBy, zeroValueFactory, mutatingAggregator));
-        return map;
+        return this.mutableStack.aggregateInPlaceBy(groupBy, zeroValueFactory, mutatingAggregator);
     }
 
     public <K, V> MutableMap<K, V> aggregateBy(
@@ -785,8 +797,41 @@ public final class UnmodifiableStack<T> implements MutableStack<T>, Serializable
             Function0<? extends V> zeroValueFactory,
             Function2<? super V, ? super T, ? extends V> nonMutatingAggregator)
     {
-        MutableMap<K, V> map = UnifiedMap.newMap();
-        this.forEach(new NonMutatingAggregationProcedure<T, K, V>(map, groupBy, zeroValueFactory, nonMutatingAggregator));
-        return map;
+        return this.mutableStack.aggregateBy(groupBy, zeroValueFactory, nonMutatingAggregator);
+    }
+
+    public int indexOf(Object object)
+    {
+        return this.mutableStack.indexOf(object);
+    }
+
+    public <S> boolean corresponds(OrderedIterable<S> other, Predicate2<? super T, ? super S> predicate)
+    {
+        return this.mutableStack.corresponds(other, predicate);
+    }
+
+    public void forEach(int startIndex, int endIndex, Procedure<? super T> procedure)
+    {
+        this.mutableStack.forEach(startIndex, endIndex, procedure);
+    }
+
+    public MutableStack<T> takeWhile(Predicate<? super T> predicate)
+    {
+        return this.mutableStack.takeWhile(predicate);
+    }
+
+    public MutableStack<T> dropWhile(Predicate<? super T> predicate)
+    {
+        return this.mutableStack.dropWhile(predicate);
+    }
+
+    public PartitionMutableStack<T> partitionWhile(Predicate<? super T> predicate)
+    {
+        return this.mutableStack.partitionWhile(predicate);
+    }
+
+    public MutableStack<T> distinct()
+    {
+        return this.mutableStack.distinct();
     }
 }

@@ -13,7 +13,6 @@ package org.eclipse.collections.api.stack;
 import java.util.AbstractCollection;
 import java.util.List;
 
-import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.function.primitive.BooleanFunction;
@@ -23,12 +22,14 @@ import org.eclipse.collections.api.block.function.primitive.DoubleFunction;
 import org.eclipse.collections.api.block.function.primitive.FloatFunction;
 import org.eclipse.collections.api.block.function.primitive.IntFunction;
 import org.eclipse.collections.api.block.function.primitive.LongFunction;
+import org.eclipse.collections.api.block.function.primitive.ObjectIntToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.ShortFunction;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.list.ListIterable;
 import org.eclipse.collections.api.multimap.list.ListMultimap;
+import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.partition.stack.PartitionStack;
 import org.eclipse.collections.api.stack.primitive.BooleanStack;
 import org.eclipse.collections.api.stack.primitive.ByteStack;
@@ -53,7 +54,7 @@ import org.eclipse.collections.api.tuple.Pair;
  * {@link #toString()} follows the same rules as {@link AbstractCollection#toString()} except it processes the elements
  * in the same order as {@code forEach()}.
  */
-public interface StackIterable<T> extends RichIterable<T>
+public interface StackIterable<T> extends OrderedIterable<T>
 {
     /**
      * @return the top of the stack.
@@ -90,12 +91,22 @@ public interface StackIterable<T> extends RichIterable<T>
     /**
      * Follows the same general contract as {@link List#equals(Object)}, but for Stacks.
      */
+    @Override
     boolean equals(Object o);
 
     /**
      * Follows the same general contract as {@link List#hashCode()}, but for Stacks.
      */
+    @Override
     int hashCode();
+
+    StackIterable<T> takeWhile(Predicate<? super T> predicate);
+
+    StackIterable<T> dropWhile(Predicate<? super T> predicate);
+
+    PartitionStack<T> partitionWhile(Predicate<? super T> predicate);
+
+    StackIterable<T> distinct();
 
     /**
      * Converts the stack to a MutableStack implementation.
@@ -113,6 +124,8 @@ public interface StackIterable<T> extends RichIterable<T>
     StackIterable<T> reject(Predicate<? super T> predicate);
 
     <P> StackIterable<T> rejectWith(Predicate2<? super T, ? super P> predicate, P parameter);
+
+    <S> StackIterable<S> selectInstancesOf(Class<S> clazz);
 
     PartitionStack<T> partition(Predicate<? super T> predicate);
 
@@ -139,6 +152,8 @@ public interface StackIterable<T> extends RichIterable<T>
     <P, V> StackIterable<V> collectWith(Function2<? super T, ? super P, ? extends V> function, P parameter);
 
     <V> StackIterable<V> collectIf(Predicate<? super T> predicate, Function<? super T, ? extends V> function);
+
+    <V> StackIterable<V> collectWithIndex(ObjectIntToObjectFunction<? super T, ? extends V> function);
 
     <V> StackIterable<V> flatCollect(Function<? super T, ? extends Iterable<V>> function);
 

@@ -23,11 +23,28 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-import org.eclipse.collections.api.block.function.Function;
+import org.eclipse.collections.api.bag.MutableBag;
+import org.eclipse.collections.api.bag.primitive.MutableBooleanBag;
+import org.eclipse.collections.api.bag.primitive.MutableByteBag;
+import org.eclipse.collections.api.bag.primitive.MutableCharBag;
+import org.eclipse.collections.api.bag.primitive.MutableDoubleBag;
+import org.eclipse.collections.api.bag.primitive.MutableFloatBag;
+import org.eclipse.collections.api.bag.primitive.MutableIntBag;
+import org.eclipse.collections.api.bag.primitive.MutableLongBag;
+import org.eclipse.collections.api.bag.primitive.MutableShortBag;
 import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.map.primitive.Immutable<name>ObjectMap;
 import org.eclipse.collections.api.partition.PartitionIterable;
+import org.eclipse.collections.impl.bag.mutable.HashBag;
+import org.eclipse.collections.impl.bag.mutable.primitive.BooleanHashBag;
+import org.eclipse.collections.impl.bag.mutable.primitive.ByteHashBag;
+import org.eclipse.collections.impl.bag.mutable.primitive.CharHashBag;
+import org.eclipse.collections.impl.bag.mutable.primitive.DoubleHashBag;
+import org.eclipse.collections.impl.bag.mutable.primitive.FloatHashBag;
+import org.eclipse.collections.impl.bag.mutable.primitive.IntHashBag;
+import org.eclipse.collections.impl.bag.mutable.primitive.LongHashBag;
+import org.eclipse.collections.impl.bag.mutable.primitive.ShortHashBag;
 import org.eclipse.collections.impl.bag.sorted.mutable.TreeBag;
 import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.block.factory.Functions0;
@@ -37,16 +54,7 @@ import org.eclipse.collections.impl.block.factory.StringFunctions;
 import org.eclipse.collections.impl.block.factory.StringPredicates;
 import org.eclipse.collections.impl.block.factory.StringPredicates2;
 import org.eclipse.collections.impl.list.mutable.FastList;
-import org.eclipse.collections.impl.list.mutable.primitive.BooleanArrayList;
-import org.eclipse.collections.impl.list.mutable.primitive.ByteArrayList;
-import org.eclipse.collections.impl.list.mutable.primitive.CharArrayList;
-import org.eclipse.collections.impl.list.mutable.primitive.DoubleArrayList;
-import org.eclipse.collections.impl.list.mutable.primitive.FloatArrayList;
-import org.eclipse.collections.impl.list.mutable.primitive.IntArrayList;
-import org.eclipse.collections.impl.list.mutable.primitive.LongArrayList;
-import org.eclipse.collections.impl.list.mutable.primitive.ShortArrayList;
 import org.eclipse.collections.impl.map.mutable.primitive.<name>ObjectHashMap;
-import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.utility.StringIterate;
 import org.junit.Assert;
@@ -281,29 +289,29 @@ public class Immutable<name>ObjectSingletonMapTest extends AbstractImmutable<nam
 
         Verify.assertIterableEmpty(this.classUnderTest().select((<type> value, String object) -> value != 0));
 
-        Assert.assertEquals(FastList.newListWith("zero"), this.classUnderTest().select(Predicates.equal("zero")));
+        Assert.assertEquals(HashBag.newBagWith("zero"), this.classUnderTest().select(Predicates.equal("zero")));
         Verify.assertIterableEmpty(this.classUnderTest().select(Predicates.equal("one")));
 
-        FastList\<String> target = FastList.newList();
+        MutableBag\<String> target = HashBag.newBag();
         Assert.assertSame(target, this.classUnderTest().select(Predicates.equal("zero"), target));
-        Assert.assertEquals(FastList.newListWith("zero"), target);
+        Assert.assertEquals(HashBag.newBagWith("zero"), target);
     }
 
     @Override
     public void selectWith()
     {
-        Assert.assertEquals(FastList.newListWith("zero"), this.classUnderTest().selectWith(Object::equals, "zero"));
+        Assert.assertEquals(HashBag.newBagWith("zero"), this.classUnderTest().selectWith(Object::equals, "zero"));
 
-        FastList\<String> target = FastList.newList();
+        MutableBag\<String> target = HashBag.newBag();
         Assert.assertSame(target, this.classUnderTest().selectWith(Object::equals, "zero", target));
-        Assert.assertEquals(FastList.newListWith("zero"), target);
+        Assert.assertEquals(HashBag.newBagWith("zero"), target);
     }
 
     @Override
     @Test
     public void selectInstancesOf()
     {
-        Assert.assertEquals(FastList.newListWith("zero"), this.classUnderTest().selectInstancesOf(String.class));
+        Assert.assertEquals(HashBag.newBagWith("zero"), this.classUnderTest().selectInstancesOf(String.class));
         Verify.assertIterableEmpty(this.classUnderTest().selectInstancesOf(Integer.class));
     }
 
@@ -317,24 +325,24 @@ public class Immutable<name>ObjectSingletonMapTest extends AbstractImmutable<nam
 
         Verify.assertIterableEmpty(this.classUnderTest().reject((value, object) -> value == 0));
 
-        Assert.assertEquals(FastList.newListWith("zero"), this.classUnderTest().reject(Predicates.equal("one")));
+        Assert.assertEquals(HashBag.newBagWith("zero"), this.classUnderTest().reject(Predicates.equal("one")));
         Verify.assertIterableEmpty(this.classUnderTest().reject(Predicates.equal("zero")));
 
-        FastList\<String> target = FastList.newList();
+        MutableBag\<String> target = HashBag.newBag();
         Assert.assertSame(target, this.classUnderTest().reject(Predicates.equal("one"), target));
-        Assert.assertEquals(FastList.newListWith("zero"), target);
+        Assert.assertEquals(HashBag.newBagWith("zero"), target);
     }
 
     @Override
     @Test
     public void rejectWith()
     {
-        Assert.assertEquals(FastList.newListWith("zero"), this.classUnderTest().rejectWith(Object::equals, "one"));
+        Assert.assertEquals(HashBag.newBagWith("zero"), this.classUnderTest().rejectWith(Object::equals, "one"));
         Verify.assertIterableEmpty(this.classUnderTest().rejectWith(Object::equals, "zero"));
 
-        FastList\<String> target = FastList.newList();
+        MutableBag\<String> target = HashBag.newBag();
         Assert.assertSame(target, this.classUnderTest().rejectWith(Object::equals, "one", target));
-        Assert.assertEquals(FastList.newListWith("zero"), target);
+        Assert.assertEquals(HashBag.newBagWith("zero"), target);
     }
 
     @Override
@@ -439,7 +447,7 @@ public class Immutable<name>ObjectSingletonMapTest extends AbstractImmutable<nam
     {
         PartitionIterable\<String> result = this.classUnderTest().partition(StringPredicates.endsWith("ne"));
         Verify.assertIterableEmpty(result.getSelected());
-        Assert.assertEquals(FastList.newListWith("zero"), result.getRejected());
+        Assert.assertEquals(HashBag.newBagWith("zero"), result.getRejected());
     }
 
     @Override
@@ -447,7 +455,7 @@ public class Immutable<name>ObjectSingletonMapTest extends AbstractImmutable<nam
     public void partitionWith()
     {
         PartitionIterable\<String> result = this.classUnderTest().partitionWith(StringPredicates2.endsWith(), "ro");
-        Assert.assertEquals(FastList.newListWith("zero"), result.getSelected());
+        Assert.assertEquals(HashBag.newBagWith("zero"), result.getSelected());
         Verify.assertIterableEmpty(result.getRejected());
     }
 
@@ -495,28 +503,28 @@ public class Immutable<name>ObjectSingletonMapTest extends AbstractImmutable<nam
     @Test
     public void sumOfInt()
     {
-        Assert.assertEquals(4L, this.classUnderTest().sumOfInt((String value) -> value.length()));
+        Assert.assertEquals(4L, this.classUnderTest().sumOfInt(String::length));
     }
 
     @Override
     @Test
     public void sumOfFloat()
     {
-        Assert.assertEquals(4.0d, this.classUnderTest().sumOfFloat((String value) -> (float) value.length()), 0.0d);
+        Assert.assertEquals(4.0d, this.classUnderTest().sumOfFloat(value -> (float) value.length()), 0.0d);
     }
 
     @Override
     @Test
     public void sumOfLong()
     {
-        Assert.assertEquals(4L, this.classUnderTest().sumOfLong((String value) -> (long) value.length()));
+        Assert.assertEquals(4L, this.classUnderTest().sumOfLong(value -> (long) value.length()));
     }
 
     @Override
     @Test
     public void sumOfDouble()
     {
-        Assert.assertEquals(4.0d, this.classUnderTest().sumOfDouble((String value) -> (double) value.length()), 0.0d);
+        Assert.assertEquals(4.0d, this.classUnderTest().sumOfDouble(value -> (double) value.length()), 0.0d);
     }
 
     @Override
@@ -524,36 +532,35 @@ public class Immutable<name>ObjectSingletonMapTest extends AbstractImmutable<nam
     public void collectIf()
     {
         Assert.assertEquals(
-                FastList.newListWith("ZERO"),
+                HashBag.newBagWith("ZERO"),
                 this.classUnderTest().collectIf(StringPredicates.endsWith("ro"), StringFunctions.toUpperCase()));
         Verify.assertIterableEmpty(this.classUnderTest().collectIf(StringPredicates.endsWith("ne"), StringFunctions.toUpperCase()));
-        FastList\<String> target = FastList.newList();
+        MutableBag\<String> target = HashBag.newBag();
         Assert.assertSame(
                 target,
                 this.classUnderTest().collectIf(StringPredicates.endsWith("ro"), StringFunctions.toUpperCase(), target));
-        Assert.assertEquals(FastList.newListWith("ZERO"), target);
+        Assert.assertEquals(HashBag.newBagWith("ZERO"), target);
     }
 
     @Override
     @Test
     public void flatCollect()
     {
-        Function\<String, Iterable\<Character>\> function = (String value) -> StringIterate.toSet(value);
-        Verify.assertListsEqual(FastList.newListWith('e', 'o', 'r', 'z'), this.classUnderTest().flatCollect(function).toSortedList());
-        UnifiedSet\<Character> target = UnifiedSet.newSet();
-        Assert.assertSame(target, this.classUnderTest().flatCollect(function, target));
-        Verify.assertSetsEqual(UnifiedSet.newSetWith('z', 'e', 'r', 'o'), target);
+        Verify.assertBagsEqual(HashBag.newBagWith('z', 'e', 'r', 'o'), this.classUnderTest().flatCollect(StringIterate::toSet));
+        MutableBag\<Character> target = HashBag.newBag();
+        Assert.assertSame(target, this.classUnderTest().flatCollect(StringIterate::toSet, target));
+        Verify.assertBagsEqual(HashBag.newBagWith('z', 'e', 'r', 'o'), target);
     }
 
     @Override
     @Test
     public void collect()
     {
-        Assert.assertEquals(FastList.newListWith("ZERO"), this.classUnderTest().collect(StringFunctions.toUpperCase()));
+        Assert.assertEquals(HashBag.newBagWith("ZERO"), this.classUnderTest().collect(StringFunctions.toUpperCase()));
 
-        FastList\<String> target = FastList.newList();
+        MutableBag\<String> target = HashBag.newBag();
         Assert.assertSame(target, this.classUnderTest().collect(StringFunctions.toUpperCase(), target));
-        Assert.assertEquals(FastList.newListWith("ZERO"), target);
+        Assert.assertEquals(HashBag.newBagWith("ZERO"), target);
     }
 
     @Override
@@ -561,11 +568,11 @@ public class Immutable<name>ObjectSingletonMapTest extends AbstractImmutable<nam
     public void collectWith()
     {
         Function2\<String, String, String> function = (String each, String param) -> each.toUpperCase() + param;
-        Assert.assertEquals(FastList.newListWith("ZERO!"), this.classUnderTest().collectWith(function, "!"));
+        Assert.assertEquals(HashBag.newBagWith("ZERO!"), this.classUnderTest().collectWith(function, "!"));
 
-        FastList\<String> target = FastList.newList();
+        MutableBag\<String> target = HashBag.newBag();
         Assert.assertSame(target, this.classUnderTest().collectWith(function, "!", target));
-        Assert.assertEquals(FastList.newListWith("ZERO!"), target);
+        Assert.assertEquals(HashBag.newBagWith("ZERO!"), target);
     }
 
     @Override
@@ -573,7 +580,7 @@ public class Immutable<name>ObjectSingletonMapTest extends AbstractImmutable<nam
     public void collectBoolean()
     {
         Assert.assertEquals(
-                BooleanArrayList.newListWith(true),
+                BooleanHashBag.newBagWith(true),
                 this.newWithKeysValues(<(literal.(type))("0")>, "true").collectBoolean(StringFunctions.toPrimitiveBoolean()));
     }
 
@@ -581,9 +588,9 @@ public class Immutable<name>ObjectSingletonMapTest extends AbstractImmutable<nam
     @Test
     public void collectBoolean_withTarget()
     {
-        BooleanArrayList target = new BooleanArrayList();
+        MutableBooleanBag target = new BooleanHashBag();
         Assert.assertSame(target, this.newWithKeysValues(<(literal.(type))("0")>, "true").collectBoolean(StringFunctions.toPrimitiveBoolean(), target));
-        Assert.assertEquals(BooleanArrayList.newListWith(true), target);
+        Assert.assertEquals(BooleanHashBag.newBagWith(true), target);
     }
 
     @Override
@@ -591,7 +598,7 @@ public class Immutable<name>ObjectSingletonMapTest extends AbstractImmutable<nam
     public void collectByte()
     {
         Assert.assertEquals(
-                ByteArrayList.newListWith((byte) 0),
+                ByteHashBag.newBagWith((byte) 0),
                 this.newWithKeysValues(<(literal.(type))("0")>, "0").collectByte(Byte::parseByte));
     }
 
@@ -599,9 +606,9 @@ public class Immutable<name>ObjectSingletonMapTest extends AbstractImmutable<nam
     @Test
     public void collectByte_withTarget()
     {
-        ByteArrayList target = new ByteArrayList();
+        MutableByteBag target = new ByteHashBag();
         Assert.assertSame(target, this.newWithKeysValues(<(literal.(type))("0")>, "0").collectByte(Byte::parseByte, target));
-        Assert.assertEquals(ByteArrayList.newListWith((byte) 0), target);
+        Assert.assertEquals(ByteHashBag.newBagWith((byte) 0), target);
     }
 
     @Override
@@ -609,7 +616,7 @@ public class Immutable<name>ObjectSingletonMapTest extends AbstractImmutable<nam
     public void collectChar()
     {
         Assert.assertEquals(
-                CharArrayList.newListWith((char) 0),
+                CharHashBag.newBagWith((char) 0),
                 this.newWithKeysValues(<(literal.(type))("0")>, "0").collectChar(StringFunctions.toPrimitiveChar()));
     }
 
@@ -617,9 +624,9 @@ public class Immutable<name>ObjectSingletonMapTest extends AbstractImmutable<nam
     @Test
     public void collectChar_withTarget()
     {
-        CharArrayList target = new CharArrayList();
+        MutableCharBag target = new CharHashBag();
         Assert.assertSame(target, this.newWithKeysValues(<(literal.(type))("0")>, "0").collectChar(StringFunctions.toPrimitiveChar(), target));
-        Assert.assertEquals(CharArrayList.newListWith((char) 0), target);
+        Assert.assertEquals(CharHashBag.newBagWith((char) 0), target);
     }
 
     @Override
@@ -627,7 +634,7 @@ public class Immutable<name>ObjectSingletonMapTest extends AbstractImmutable<nam
     public void collectDouble()
     {
         Assert.assertEquals(
-                DoubleArrayList.newListWith((double) 0),
+                DoubleHashBag.newBagWith((double) 0),
                 this.newWithKeysValues(<(literal.(type))("0")>, "0").collectDouble(Double::parseDouble));
     }
 
@@ -635,9 +642,9 @@ public class Immutable<name>ObjectSingletonMapTest extends AbstractImmutable<nam
     @Test
     public void collectDouble_withTarget()
     {
-        DoubleArrayList target = new DoubleArrayList();
+        MutableDoubleBag target = new DoubleHashBag();
         Assert.assertSame(target, this.newWithKeysValues(<(literal.(type))("0")>, "0").collectDouble(Double::parseDouble, target));
-        Assert.assertEquals(DoubleArrayList.newListWith((double) 0), target);
+        Assert.assertEquals(DoubleHashBag.newBagWith((double) 0), target);
     }
 
     @Override
@@ -645,7 +652,7 @@ public class Immutable<name>ObjectSingletonMapTest extends AbstractImmutable<nam
     public void collectFloat()
     {
         Assert.assertEquals(
-                FloatArrayList.newListWith((float) 0),
+                FloatHashBag.newBagWith((float) 0),
                 this.newWithKeysValues(<(literal.(type))("0")>, "0").collectFloat(Float::parseFloat));
     }
 
@@ -653,9 +660,9 @@ public class Immutable<name>ObjectSingletonMapTest extends AbstractImmutable<nam
     @Test
     public void collectFloat_withTarget()
     {
-        FloatArrayList target = new FloatArrayList();
+        MutableFloatBag target = new FloatHashBag();
         Assert.assertSame(target, this.newWithKeysValues(<(literal.(type))("0")>, "0").collectFloat(Float::parseFloat, target));
-        Assert.assertEquals(FloatArrayList.newListWith((float) 0), target);
+        Assert.assertEquals(FloatHashBag.newBagWith((float) 0), target);
     }
 
     @Override
@@ -663,7 +670,7 @@ public class Immutable<name>ObjectSingletonMapTest extends AbstractImmutable<nam
     public void collectInt()
     {
         Assert.assertEquals(
-                IntArrayList.newListWith((int) 0),
+                IntHashBag.newBagWith((int) 0),
                 this.newWithKeysValues(<(literal.(type))("0")>, "0").collectInt(Integer::parseInt));
     }
 
@@ -671,9 +678,9 @@ public class Immutable<name>ObjectSingletonMapTest extends AbstractImmutable<nam
     @Test
     public void collectInt_withTarget()
     {
-        IntArrayList target = new IntArrayList();
+        MutableIntBag target = new IntHashBag();
         Assert.assertSame(target, this.newWithKeysValues(<(literal.(type))("0")>, "0").collectInt(Integer::parseInt, target));
-        Assert.assertEquals(IntArrayList.newListWith((int) 0), target);
+        Assert.assertEquals(IntHashBag.newBagWith((int) 0), target);
     }
 
     @Override
@@ -681,7 +688,7 @@ public class Immutable<name>ObjectSingletonMapTest extends AbstractImmutable<nam
     public void collectLong()
     {
         Assert.assertEquals(
-                LongArrayList.newListWith(0L),
+                LongHashBag.newBagWith(0L),
                 this.newWithKeysValues(<(literal.(type))("0")>, "0").collectLong(Long::parseLong));
     }
 
@@ -689,9 +696,9 @@ public class Immutable<name>ObjectSingletonMapTest extends AbstractImmutable<nam
     @Test
     public void collectLong_withTarget()
     {
-        LongArrayList target = new LongArrayList();
+        MutableLongBag target = new LongHashBag();
         Assert.assertSame(target, this.newWithKeysValues(<(literal.(type))("0")>, "0").collectLong(Long::parseLong, target));
-        Assert.assertEquals(LongArrayList.newListWith(0L), target);
+        Assert.assertEquals(LongHashBag.newBagWith(0L), target);
     }
 
     @Override
@@ -699,7 +706,7 @@ public class Immutable<name>ObjectSingletonMapTest extends AbstractImmutable<nam
     public void collectShort()
     {
         Assert.assertEquals(
-                ShortArrayList.newListWith((short) 0),
+                ShortHashBag.newBagWith((short) 0),
                 this.newWithKeysValues(<(literal.(type))("0")>, "0").collectShort(Short::parseShort));
     }
 
@@ -707,9 +714,9 @@ public class Immutable<name>ObjectSingletonMapTest extends AbstractImmutable<nam
     @Test
     public void collectShort_withTarget()
     {
-        ShortArrayList target = new ShortArrayList();
+        MutableShortBag target = new ShortHashBag();
         Assert.assertSame(target, this.newWithKeysValues(<(literal.(type))("0")>, "0").collectShort(Short::parseShort, target));
-        Assert.assertEquals(ShortArrayList.newListWith((short) 0), target);
+        Assert.assertEquals(ShortHashBag.newBagWith((short) 0), target);
     }
 
     @Override

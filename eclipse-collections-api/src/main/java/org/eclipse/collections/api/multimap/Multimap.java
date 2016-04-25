@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -101,8 +101,9 @@ public interface Multimap<K, V>
      * The given procedure would be invoked with the parameters:
      * <p>
      * {@code [ ["key1", "val1"], ["key1", "val2"], ["key1", "val2"], ["key2", "val3"] ]}
+     * @param procedure
      */
-    void forEachKeyValue(Procedure2<K, V> procedure);
+    void forEachKeyValue(Procedure2<? super K, ? super V> procedure);
 
     /**
      * Calls the {@code procedure} with each <em>key-Iterable[value]</em>.
@@ -116,8 +117,9 @@ public interface Multimap<K, V>
      * {@code [ ["key1", {@link RichIterable["val1", "val2", "val2"]}], ["key2", {@link RichIterable["val3"]}] ]}
      *
      * @since 6.0
+     * @param procedure
      */
-    void forEachKeyMultiValues(Procedure2<K, ? super Iterable<V>> procedure);
+    void forEachKeyMultiValues(Procedure2<? super K, ? super Iterable<V>> procedure);
 
     /**
      * Returns the number of key-value entry pairs.
@@ -221,6 +223,7 @@ public interface Multimap<K, V>
      * <p>
      * Any two empty Multimaps are equal, because they both have empty {@link #toMap} views.
      */
+    @Override
     boolean equals(Object obj);
 
     /**
@@ -228,6 +231,7 @@ public interface Multimap<K, V>
      * <p>
      * The hash code of a Multimap is defined as the hash code of the map view, as returned by {@link #toMap}.
      */
+    @Override
     int hashCode();
 
     /**

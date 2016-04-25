@@ -20,6 +20,7 @@ import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
+import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.MutableMapIterable;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.collection.AbstractSynchronizedRichIterable;
@@ -235,6 +236,31 @@ public abstract class AbstractSynchronizedMapIterable<K, V>
         synchronized (this.lock)
         {
             return this.getDelegate().updateValueWith(key, factory, function, parameter);
+        }
+    }
+
+    @Override
+    public <VV> MutableMapIterable<VV, V> groupByUniqueKey(Function<? super V, ? extends VV> function)
+    {
+        synchronized (this.lock)
+        {
+            return this.getDelegate().groupByUniqueKey(function);
+        }
+    }
+
+    public <KK, VV> MutableMap<KK, VV> aggregateInPlaceBy(Function<? super V, ? extends KK> groupBy, Function0<? extends VV> zeroValueFactory, Procedure2<? super VV, ? super V> mutatingAggregator)
+    {
+        synchronized (this.lock)
+        {
+            return this.getDelegate().aggregateInPlaceBy(groupBy, zeroValueFactory, mutatingAggregator);
+        }
+    }
+
+    public <KK, VV> MutableMap<KK, VV> aggregateBy(Function<? super V, ? extends KK> groupBy, Function0<? extends VV> zeroValueFactory, Function2<? super VV, ? super V, ? extends VV> nonMutatingAggregator)
+    {
+        synchronized (this.lock)
+        {
+            return this.getDelegate().aggregateBy(groupBy, zeroValueFactory, nonMutatingAggregator);
         }
     }
 

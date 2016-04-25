@@ -74,6 +74,7 @@ import org.eclipse.collections.impl.utility.MapIterate;
 public abstract class AbstractMutableMap<K, V> extends AbstractMutableMapIterable<K, V>
         implements MutableMap<K, V>
 {
+    @Override
     @SuppressWarnings("AbstractMethodOverridesAbstractMethod")
     public abstract MutableMap<K, V> clone();
 
@@ -318,5 +319,11 @@ public abstract class AbstractMutableMap<K, V> extends AbstractMutableMapIterabl
     public <VV> MutableBagMultimap<VV, V> groupByEach(Function<? super V, ? extends Iterable<VV>> function)
     {
         return this.groupByEach(function, HashBagMultimap.<VV, V>newMultimap());
+    }
+
+    @Override
+    public <VV> MutableMap<VV, V> groupByUniqueKey(Function<? super V, ? extends VV> function)
+    {
+        return this.groupByUniqueKey(function, UnifiedMap.<VV, V>newMap());
     }
 }

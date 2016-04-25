@@ -23,6 +23,7 @@ import java.util.NoSuchElementException;
 
 import org.eclipse.collections.api.<name>Iterable;
 import org.eclipse.collections.api.Lazy<name>Iterable;
+import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.bag.primitive.Mutable<name>Bag;
 import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.Object<name>ToObjectFunction;
@@ -35,13 +36,13 @@ import org.eclipse.collections.api.iterator.<name>Iterator;
 import org.eclipse.collections.api.list.primitive.Mutable<name>List;
 import org.eclipse.collections.api.map.primitive.Mutable<name>ValuesMap;
 import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
+import org.eclipse.collections.impl.bag.mutable.HashBag;
+import org.eclipse.collections.impl.bag.mutable.primitive.<name>HashBag;
 import org.eclipse.collections.impl.collection.mutable.primitive.Synchronized<name>Collection;
 import org.eclipse.collections.impl.collection.mutable.primitive.Unmodifiable<name>Collection;
 import org.eclipse.collections.impl.factory.primitive.<name>Lists;
-import org.eclipse.collections.impl.list.mutable.FastList;
-import org.eclipse.collections.impl.primitive.Abstract<name>Iterable;
 import org.eclipse.collections.impl.lazy.primitive.Lazy<name>IterableAdapter;
-import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
+import org.eclipse.collections.impl.primitive.Abstract<name>Iterable;
 import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
 
 /**
@@ -243,18 +244,18 @@ public abstract class AbstractMutable<name>ValuesMap extends Abstract<name>Itera
         return array;
     }
 
-    public Mutable<name>Collection select(<name>Predicate predicate)
+    public Mutable<name>Bag select(<name>Predicate predicate)
     {
-        <name>ArrayList result = new <name>ArrayList();
+        Mutable<name>Bag result = new <name>HashBag();
 
         <forEachValueSatisfying(template = {result.add(<value>)})>
 
         return result;
     }
 
-    public Mutable<name>Collection reject(<name>Predicate predicate)
+    public Mutable<name>Bag reject(<name>Predicate predicate)
     {
-        <name>ArrayList result = new <name>ArrayList();
+        Mutable<name>Bag result = new <name>HashBag();
         if (this.getSentinelValues() != null)
         {
             if (this.getSentinelValues().containsZeroKey && !predicate.accept(this.getSentinelValues().zeroValue))
@@ -276,9 +277,9 @@ public abstract class AbstractMutable<name>ValuesMap extends Abstract<name>Itera
         return result;
     }
 
-    public \<V> MutableCollection\<V> collect(<name>ToObjectFunction\<? extends V> function)
+    public \<V> MutableBag\<V> collect(<name>ToObjectFunction\<? extends V> function)
     {
-        FastList\<V> target = FastList.newList(this.size());
+        MutableBag\<V> target = HashBag.newBag(this.size());
         if (this.getSentinelValues() != null)
         {
             if (this.getSentinelValues().containsZeroKey)

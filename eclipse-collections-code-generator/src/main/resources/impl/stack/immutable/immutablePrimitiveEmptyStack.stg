@@ -23,8 +23,10 @@ import org.eclipse.collections.api.<name>Iterable;
 import org.eclipse.collections.api.Lazy<name>Iterable;
 import org.eclipse.collections.api.bag.primitive.Mutable<name>Bag;
 import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
+import org.eclipse.collections.api.block.function.primitive.Object<name>IntToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.Object<name>ToObjectFunction;
 import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
+import org.eclipse.collections.api.block.procedure.primitive.<name>IntProcedure;
 import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
 import org.eclipse.collections.api.iterator.<name>Iterator;
 import org.eclipse.collections.api.list.primitive.<name>List;
@@ -289,6 +291,26 @@ final class Immutable<name>EmptyStack implements Immutable<name>Stack, Serializa
         {
             throw new RuntimeException(e);
         }
+    }
+
+    public <type> getFirst()
+    {
+        throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".getFirst() not implemented yet");
+    }
+
+    public int indexOf(<type> value)
+    {
+        throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".indexOf() not implemented yet");
+    }
+
+    public \<T> T injectIntoWithIndex(T injectedValue, Object<name>IntToObjectFunction\<? super T, ? extends T> function)
+    {
+        throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".injectIntoWithIndex() not implemented yet");
+    }
+
+    public void forEachWithIndex(<name>IntProcedure procedure)
+    {
+        throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".forEachWithIndex() not implemented yet");
     }
 }
 

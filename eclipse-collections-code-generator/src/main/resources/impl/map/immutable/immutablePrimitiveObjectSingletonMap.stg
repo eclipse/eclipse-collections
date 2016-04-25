@@ -14,9 +14,9 @@ class(primitive) ::= <<
 >>
 
 collectPrimitive(name, type) ::= <<
-public Immutable<name>Collection collect<name>(<name>Function\<? super V> <type>Function)
+public Immutable<name>Bag collect<name>(<name>Function\<? super V> <type>Function)
 {
-    return <name>Lists.immutable.with(<type>Function.<type>ValueOf(this.value1));
+    return <name>Bags.immutable.with(<type>Function.<type>ValueOf(this.value1));
 }
 
 public \<R extends Mutable<name>Collection> R collect<name>(<name>Function\<? super V> <type>Function, R target)
@@ -42,7 +42,16 @@ import org.eclipse.collections.api.Lazy<name>Iterable;
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.<name>Iterable;
+import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.api.bag.MutableBag;
+import org.eclipse.collections.api.bag.primitive.ImmutableBooleanBag;
+import org.eclipse.collections.api.bag.primitive.ImmutableByteBag;
+import org.eclipse.collections.api.bag.primitive.ImmutableCharBag;
+import org.eclipse.collections.api.bag.primitive.ImmutableDoubleBag;
+import org.eclipse.collections.api.bag.primitive.ImmutableFloatBag;
+import org.eclipse.collections.api.bag.primitive.ImmutableIntBag;
+import org.eclipse.collections.api.bag.primitive.ImmutableLongBag;
+import org.eclipse.collections.api.bag.primitive.ImmutableShortBag;
 import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
 import org.eclipse.collections.impl.bag.sorted.mutable.TreeBag;
 import org.eclipse.collections.api.block.function.Function;
@@ -68,15 +77,6 @@ import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
 import org.eclipse.collections.api.block.procedure.primitive.<name>ObjectProcedure;
 import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
-import org.eclipse.collections.api.collection.ImmutableCollection;
-import org.eclipse.collections.api.collection.primitive.ImmutableBooleanCollection;
-import org.eclipse.collections.api.collection.primitive.ImmutableByteCollection;
-import org.eclipse.collections.api.collection.primitive.ImmutableCharCollection;
-import org.eclipse.collections.api.collection.primitive.ImmutableDoubleCollection;
-import org.eclipse.collections.api.collection.primitive.ImmutableFloatCollection;
-import org.eclipse.collections.api.collection.primitive.ImmutableIntCollection;
-import org.eclipse.collections.api.collection.primitive.ImmutableLongCollection;
-import org.eclipse.collections.api.collection.primitive.ImmutableShortCollection;
 import org.eclipse.collections.api.collection.primitive.MutableBooleanCollection;
 import org.eclipse.collections.api.collection.primitive.MutableByteCollection;
 import org.eclipse.collections.api.collection.primitive.MutableCharCollection;
@@ -86,21 +86,25 @@ import org.eclipse.collections.api.collection.primitive.MutableIntCollection;
 import org.eclipse.collections.api.collection.primitive.MutableLongCollection;
 import org.eclipse.collections.api.collection.primitive.MutableShortCollection;
 import org.eclipse.collections.api.list.MutableList;
-import org.eclipse.collections.api.map.MapIterable;
+import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.primitive.<name>ObjectMap;
 import org.eclipse.collections.api.map.primitive.Immutable<name>ObjectMap;
 import org.eclipse.collections.api.map.sorted.MutableSortedMap;
-import org.eclipse.collections.api.multimap.Multimap;
 import org.eclipse.collections.api.multimap.MutableMultimap;
-import org.eclipse.collections.api.partition.PartitionIterable;
-import org.eclipse.collections.api.partition.list.PartitionMutableList;
+import org.eclipse.collections.api.multimap.bag.ImmutableBagMultimap;
+import org.eclipse.collections.api.partition.PartitionMutableCollection;
+import org.eclipse.collections.api.partition.bag.PartitionImmutableBag;
+import org.eclipse.collections.api.partition.bag.PartitionMutableBag;
+import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.api.tuple.primitive.<name>ObjectPair;
 import org.eclipse.collections.impl.UnmodifiableIteratorAdapter;
+import org.eclipse.collections.impl.bag.mutable.HashBag;
+import org.eclipse.collections.impl.bag.sorted.mutable.TreeBag;
 import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.block.procedure.MutatingAggregationProcedure;
 import org.eclipse.collections.impl.block.procedure.NonMutatingAggregationProcedure;
@@ -109,26 +113,28 @@ import org.eclipse.collections.impl.block.procedure.PartitionPredicate2Procedure
 import org.eclipse.collections.impl.factory.Bags;
 import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.Maps;
+import org.eclipse.collections.impl.factory.Multimaps;
 import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.factory.SortedMaps;
 import org.eclipse.collections.impl.factory.SortedSets;
-import org.eclipse.collections.impl.factory.primitive.BooleanLists;
-import org.eclipse.collections.impl.factory.primitive.ByteLists;
-import org.eclipse.collections.impl.factory.primitive.CharLists;
-import org.eclipse.collections.impl.factory.primitive.DoubleLists;
-import org.eclipse.collections.impl.factory.primitive.FloatLists;
-import org.eclipse.collections.impl.factory.primitive.IntLists;
-import org.eclipse.collections.impl.factory.primitive.LongLists;
-import org.eclipse.collections.impl.factory.primitive.ShortLists;
+import org.eclipse.collections.impl.factory.primitive.BooleanBags;
+import org.eclipse.collections.impl.factory.primitive.ByteBags;
+import org.eclipse.collections.impl.factory.primitive.CharBags;
+import org.eclipse.collections.impl.factory.primitive.DoubleBags;
+import org.eclipse.collections.impl.factory.primitive.FloatBags;
+import org.eclipse.collections.impl.factory.primitive.IntBags;
+import org.eclipse.collections.impl.factory.primitive.LongBags;
+import org.eclipse.collections.impl.factory.primitive.ShortBags;
+import org.eclipse.collections.impl.factory.primitive.<name>Lists;
 import org.eclipse.collections.impl.lazy.LazyIterableAdapter;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.map.mutable.primitive.<name>ObjectHashMap;
-import org.eclipse.collections.impl.multimap.list.FastListMultimap;
-import org.eclipse.collections.impl.partition.list.PartitionFastList;
+import org.eclipse.collections.impl.multimap.bag.HashBagMultimap;
+import org.eclipse.collections.impl.partition.bag.PartitionHashBag;
+import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
 import org.eclipse.collections.impl.set.mutable.primitive.Unmodifiable<name>Set;
-import org.eclipse.collections.impl.tuple.Tuples;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.eclipse.collections.impl.utility.Iterate;
 import org.eclipse.collections.impl.utility.internal.IterableIterate;
@@ -335,9 +341,9 @@ final class Immutable<name>ObjectSingletonMap\<V> extends AbstractImmutable<name
         return true;
     }
 
-    public ImmutableCollection\<V> select(Predicate\<? super V> predicate)
+    public ImmutableBag\<V> select(Predicate\<? super V> predicate)
     {
-        return predicate.accept(this.value1) ? Lists.immutable.with(this.value1) : Lists.immutable.\<V>with();
+        return predicate.accept(this.value1) ? Bags.immutable.with(this.value1) : Bags.immutable.\<V>with();
     }
 
     public \<R extends Collection\<V>\> R select(Predicate\<? super V> predicate, R target)
@@ -349,9 +355,9 @@ final class Immutable<name>ObjectSingletonMap\<V> extends AbstractImmutable<name
         return target;
     }
 
-    public \<P> ImmutableCollection\<V> selectWith(Predicate2\<? super V, ? super P> predicate, P parameter)
+    public \<P> ImmutableBag\<V> selectWith(Predicate2\<? super V, ? super P> predicate, P parameter)
     {
-        return predicate.accept(this.value1, parameter) ? Lists.immutable.with(this.value1) : Lists.immutable.\<V>with();
+        return predicate.accept(this.value1, parameter) ? Bags.immutable.with(this.value1) : Bags.immutable.\<V>with();
     }
 
     public \<P, R extends Collection\<V>\> R selectWith(Predicate2\<? super V, ? super P> predicate, P parameter, R targetCollection)
@@ -363,9 +369,9 @@ final class Immutable<name>ObjectSingletonMap\<V> extends AbstractImmutable<name
         return targetCollection;
     }
 
-    public ImmutableCollection\<V> reject(Predicate\<? super V> predicate)
+    public ImmutableBag\<V> reject(Predicate\<? super V> predicate)
     {
-        return predicate.accept(this.value1) ? Lists.immutable.\<V>with() : Lists.immutable.with(this.value1);
+        return predicate.accept(this.value1) ? Bags.immutable.\<V>with() : Bags.immutable.with(this.value1);
     }
 
     public \<R extends Collection\<V>\> R reject(Predicate\<? super V> predicate, R target)
@@ -377,9 +383,9 @@ final class Immutable<name>ObjectSingletonMap\<V> extends AbstractImmutable<name
         return target;
     }
 
-    public \<P> ImmutableCollection\<V> rejectWith(Predicate2\<? super V, ? super P> predicate, P parameter)
+    public \<P> ImmutableBag\<V> rejectWith(Predicate2\<? super V, ? super P> predicate, P parameter)
     {
-        return predicate.accept(this.value1, parameter) ? Lists.immutable.\<V>with() : Lists.immutable.with(this.value1);
+        return predicate.accept(this.value1, parameter) ? Bags.immutable.\<V>with() : Bags.immutable.with(this.value1);
     }
 
     public \<P, R extends Collection\<V>\> R rejectWith(Predicate2\<? super V, ? super P> predicate, P parameter, R targetCollection)
@@ -391,28 +397,28 @@ final class Immutable<name>ObjectSingletonMap\<V> extends AbstractImmutable<name
         return targetCollection;
     }
 
-    public PartitionIterable\<V> partition(Predicate\<? super V> predicate)
+    public PartitionImmutableBag\<V> partition(Predicate\<? super V> predicate)
     {
-        PartitionMutableList\<V> partitionMutableList = new PartitionFastList\<V>();
-        this.forEach(new PartitionProcedure\<V>(predicate, partitionMutableList));
-        return partitionMutableList;
+        PartitionMutableBag\<V> partitionMutableBag = new PartitionHashBag\<V>();
+        this.forEach(new PartitionProcedure\<V>(predicate, partitionMutableBag));
+        return partitionMutableBag.toImmutable();
     }
 
-    public \<P> PartitionIterable\<V> partitionWith(Predicate2\<? super V, ? super P> predicate, P parameter)
+    public \<P> PartitionImmutableBag\<V> partitionWith(Predicate2\<? super V, ? super P> predicate, P parameter)
     {
-        PartitionMutableList\<V> partitionMutableList = new PartitionFastList\<V>();
-        this.forEach(new PartitionPredicate2Procedure\<V, P>(predicate, parameter, partitionMutableList));
-        return partitionMutableList;
+        PartitionMutableBag\<V> partitionMutableBag = new PartitionHashBag\<V>();
+        this.forEach(new PartitionPredicate2Procedure\<V, P>(predicate, parameter, partitionMutableBag));
+        return partitionMutableBag.toImmutable();
     }
 
-    public \<S> RichIterable\<S> selectInstancesOf(Class\<S> clazz)
+    public \<S> ImmutableBag\<S> selectInstancesOf(Class\<S> clazz)
     {
-        return clazz.isInstance(this.value1) ? Lists.immutable.with(clazz.cast(this.value1)) : Lists.immutable.\<S>with();
+        return clazz.isInstance(this.value1) ? Bags.immutable.with(clazz.cast(this.value1)) : Bags.immutable.\<S>with();
     }
 
-    public \<VV> ImmutableCollection\<VV> collect(Function\<? super V, ? extends VV> function)
+    public \<VV> ImmutableBag\<VV> collect(Function\<? super V, ? extends VV> function)
     {
-        return Lists.immutable.with(function.valueOf(this.value1));
+        return Bags.immutable.with(function.valueOf(this.value1));
     }
 
     <collectPrimitive("Boolean", "boolean")>
@@ -423,14 +429,14 @@ final class Immutable<name>ObjectSingletonMap\<V> extends AbstractImmutable<name
     <collectPrimitive("Int", "int")>
     <collectPrimitive("Long", "long")>
     <collectPrimitive("Short", "short")>
-    public \<VV> RichIterable\<VV> collectIf(Predicate\<? super V> predicate, Function\<? super V, ? extends VV> function)
+    public \<VV> ImmutableBag\<VV> collectIf(Predicate\<? super V> predicate, Function\<? super V, ? extends VV> function)
     {
-        return predicate.accept(this.value1) ? Lists.immutable.with(function.valueOf(this.value1)) : Lists.immutable.\<VV>with();
+        return predicate.accept(this.value1) ? Bags.immutable.with(function.valueOf(this.value1)) : Bags.immutable.\<VV>with();
     }
 
-    public \<VV> RichIterable\<VV> flatCollect(Function\<? super V, ? extends Iterable\<VV>\> function)
+    public \<VV> ImmutableBag\<VV> flatCollect(Function\<? super V, ? extends Iterable\<VV>\> function)
     {
-        return Lists.immutable.withAll(function.valueOf(this.value1));
+        return Bags.immutable.withAll(function.valueOf(this.value1));
     }
 
     public V detect(Predicate\<? super V> predicate)
@@ -684,9 +690,9 @@ final class Immutable<name>ObjectSingletonMap\<V> extends AbstractImmutable<name
         }
     }
 
-    public \<VV> Multimap\<VV, V> groupBy(Function\<? super V, ? extends VV> function)
+    public \<VV> ImmutableBagMultimap\<VV, V> groupBy(Function\<? super V, ? extends VV> function)
     {
-        return new FastListMultimap\<VV, V>(Tuples.pair(function.valueOf(this.value1), this.value1));
+        return Multimaps.immutable.bag.with(function.valueOf(this.value1), this.value1);
     }
 
     public \<VV, R extends MutableMultimap\<VV, V>\> R groupBy(Function\<? super V, ? extends VV> function, R target)
@@ -695,14 +701,14 @@ final class Immutable<name>ObjectSingletonMap\<V> extends AbstractImmutable<name
         return target;
     }
 
-    public \<VV> Multimap\<VV, V> groupByEach(Function\<? super V, ? extends Iterable\<VV>\> function)
+    public \<VV> ImmutableBagMultimap\<VV, V> groupByEach(Function\<? super V, ? extends Iterable\<VV>\> function)
     {
-        return this.groupByEach(function, FastListMultimap.\<VV, V>newMultimap());
+        return this.groupByEach(function, HashBagMultimap.\<VV, V>newMultimap()).toImmutable();
     }
 
     public \<VV, R extends MutableMultimap\<VV, V>\> R groupByEach(Function\<? super V, ? extends Iterable\<VV>\> function, R target)
     {
-        Iterable\<VV> iterable  = function.valueOf(this.value1);
+        Iterable\<VV> iterable = function.valueOf(this.value1);
         for (VV key : iterable)
         {
             target.put(key, this.value1);
@@ -710,9 +716,9 @@ final class Immutable<name>ObjectSingletonMap\<V> extends AbstractImmutable<name
         return target;
     }
 
-    public \<VV> MapIterable\<VV, V> groupByUniqueKey(Function\<? super V, ? extends VV> function)
+    public \<VV> ImmutableMap\<VV, V> groupByUniqueKey(Function\<? super V, ? extends VV> function)
     {
-        return new UnifiedMap(Tuples.pair(function.valueOf(this.value1), this.value1));
+        return Maps.immutable.with(function.valueOf(this.value1), this.value1);
     }
 
     public \<VV, R extends MutableMap\<VV, V>\> R groupByUniqueKey(Function\<? super V, ? extends VV> function, R target)
@@ -724,9 +730,9 @@ final class Immutable<name>ObjectSingletonMap\<V> extends AbstractImmutable<name
         return target;
     }
 
-    public \<S> RichIterable\<Pair\<V, S>\> zip(Iterable\<S> that)
+    public \<S> ImmutableBag\<Pair\<V, S>\> zip(Iterable\<S> that)
     {
-        return this.zip(that, FastList.\<Pair\<V, S>\>newList());
+        return this.zip(that, HashBag.\<Pair\<V, S>\>newBag()).toImmutable();
     }
 
     public \<S, R extends Collection\<Pair\<V, S>\>> R zip(Iterable\<S> that, R target)
@@ -734,9 +740,9 @@ final class Immutable<name>ObjectSingletonMap\<V> extends AbstractImmutable<name
         return IterableIterate.zip(this, that, target);
     }
 
-    public RichIterable\<Pair\<V, Integer>\> zipWithIndex()
+    public ImmutableSet\<Pair\<V, Integer>\> zipWithIndex()
     {
-        return this.zipWithIndex(FastList.\<Pair\<V, Integer>\>newList());
+        return this.zipWithIndex(UnifiedSet.\<Pair\<V, Integer>\>newSet()).toImmutable();
     }
 
     public \<R extends Collection\<Pair\<V, Integer>\>> R zipWithIndex(R target)
@@ -755,18 +761,18 @@ final class Immutable<name>ObjectSingletonMap\<V> extends AbstractImmutable<name
         return result;
     }
 
-    public \<K, VV> MapIterable\<K, VV> aggregateInPlaceBy(Function\<? super V, ? extends K> groupBy, Function0\<? extends VV> zeroValueFactory, Procedure2\<? super VV, ? super V> mutatingAggregator)
+    public \<K, VV> ImmutableMap\<K, VV> aggregateInPlaceBy(Function\<? super V, ? extends K> groupBy, Function0\<? extends VV> zeroValueFactory, Procedure2\<? super VV, ? super V> mutatingAggregator)
     {
         MutableMap\<K, VV> map = UnifiedMap.newMap();
         this.forEach(new MutatingAggregationProcedure\<V, K, VV>(map, groupBy, zeroValueFactory, mutatingAggregator));
-        return map;
+        return map.toImmutable();
     }
 
-    public \<K, VV> MapIterable\<K, VV> aggregateBy(Function\<? super V, ? extends K> groupBy, Function0\<? extends VV> zeroValueFactory, Function2\<? super VV, ? super V, ? extends VV> nonMutatingAggregator)
+    public \<K, VV> ImmutableMap\<K, VV> aggregateBy(Function\<? super V, ? extends K> groupBy, Function0\<? extends VV> zeroValueFactory, Function2\<? super VV, ? super V, ? extends VV> nonMutatingAggregator)
     {
         MutableMap\<K, VV> map = UnifiedMap.newMap();
         this.forEach(new NonMutatingAggregationProcedure\<V, K, VV>(map, groupBy, zeroValueFactory, nonMutatingAggregator));
-        return map;
+        return map.toImmutable();
     }
 
     public \<VV extends Comparable\<? super VV>\> V maxBy(Function\<? super V, ? extends VV> function)
@@ -804,9 +810,9 @@ final class Immutable<name>ObjectSingletonMap\<V> extends AbstractImmutable<name
         return target;
     }
 
-    public \<P, VV> ImmutableCollection\<VV> collectWith(Function2\<? super V, ? super P, ? extends VV> function, P parameter)
+    public \<P, VV> ImmutableBag\<VV> collectWith(Function2\<? super V, ? super P, ? extends VV> function, P parameter)
     {
-        return Lists.immutable.with(function.value(this.value1, parameter));
+        return Bags.immutable.with(function.value(this.value1, parameter));
     }
 
     public \<P, VV, R extends Collection\<VV>\> R collectWith(Function2\<? super V, ? super P, ? extends VV> function, P parameter, R targetCollection)

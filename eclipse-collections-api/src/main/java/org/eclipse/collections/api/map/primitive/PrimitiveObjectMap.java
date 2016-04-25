@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -8,8 +8,12 @@
  * http://www.eclipse.org/org/documents/edl-v10.php.
  */
 
-package org.eclipse.collections.api.map;
+package org.eclipse.collections.api.map.primitive;
 
+import java.util.Collection;
+import java.util.Map;
+
+import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.Bag;
 import org.eclipse.collections.api.bag.primitive.BooleanBag;
 import org.eclipse.collections.api.bag.primitive.ByteBag;
@@ -32,32 +36,46 @@ import org.eclipse.collections.api.block.function.primitive.ShortFunction;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
+import org.eclipse.collections.api.map.UnsortedMapIterable;
 import org.eclipse.collections.api.multimap.bag.BagMultimap;
-import org.eclipse.collections.api.multimap.set.UnsortedSetMultimap;
 import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.partition.bag.PartitionBag;
 import org.eclipse.collections.api.set.UnsortedSetIterable;
 import org.eclipse.collections.api.tuple.Pair;
 
 /**
- * An iterable Map whose elements are unsorted.
+ * @since 8.0.
  */
-public interface UnsortedMapIterable<K, V>
-        extends MapIterable<K, V>
+public interface PrimitiveObjectMap<V> extends RichIterable<V>
 {
-    UnsortedSetMultimap<V, K> flip();
+    boolean containsValue(Object value);
 
-    UnsortedMapIterable<V, K> flipUniqueValues();
+    void forEachValue(Procedure<? super V> procedure);
 
-    UnsortedMapIterable<K, V> tap(Procedure<? super V> procedure);
+    /**
+     * Follows the same general contract as {@link Map#equals(Object)}.
+     */
+    @Override
+    boolean equals(Object o);
 
-    UnsortedMapIterable<K, V> select(Predicate2<? super K, ? super V> predicate);
+    /**
+     * Follows the same general contract as {@link Map#hashCode()}.
+     */
+    @Override
+    int hashCode();
 
-    UnsortedMapIterable<K, V> reject(Predicate2<? super K, ? super V> predicate);
+    /**
+     * Returns a string representation of this PrimitiveObjectMap. The string representation consists of a list of the
+     * map's key-value pairs in the order they are returned by its iterator. The key and value in each key-value pair are separated
+     * by a colon (<tt>":"</tt>) and each pair is enclosed in square brackets (<tt>"[]"</tt>). Adjacent key-value pairs
+     * are separated by the characters <tt>", "</tt> (comma and space). Keys and values are converted to strings as by
+     * String#valueOf().
+     *
+     * @return a string representation of this PrimitiveObjectMap
+     */
+    String toString();
 
-    <R> UnsortedMapIterable<K, R> collectValues(Function2<? super K, ? super V, ? extends R> function);
-
-    <K2, V2> UnsortedMapIterable<K2, V2> collect(Function2<? super K, ? super V, Pair<K2, V2>> function);
+    Collection<V> values();
 
     Bag<V> select(Predicate<? super V> predicate);
 
@@ -73,7 +91,7 @@ public interface UnsortedMapIterable<K, V>
 
     <S> Bag<S> selectInstancesOf(Class<S> clazz);
 
-    <V1> Bag<V1> collect(Function<? super V, ? extends V1> function);
+    <VV> Bag<VV> collect(Function<? super V, ? extends VV> function);
 
     BooleanBag collectBoolean(BooleanFunction<? super V> booleanFunction);
 
@@ -91,17 +109,17 @@ public interface UnsortedMapIterable<K, V>
 
     ShortBag collectShort(ShortFunction<? super V> shortFunction);
 
-    <P, V1> Bag<V1> collectWith(Function2<? super V, ? super P, ? extends V1> function, P parameter);
+    <P, VV> Bag<VV> collectWith(Function2<? super V, ? super P, ? extends VV> function, P parameter);
 
-    <V1> Bag<V1> collectIf(Predicate<? super V> predicate, Function<? super V, ? extends V1> function);
+    <VV> Bag<VV> collectIf(Predicate<? super V> predicate, Function<? super V, ? extends VV> function);
 
-    <V1> Bag<V1> flatCollect(Function<? super V, ? extends Iterable<V1>> function);
+    <VV> Bag<VV> flatCollect(Function<? super V, ? extends Iterable<VV>> function);
 
-    <V1> BagMultimap<V1, V> groupBy(Function<? super V, ? extends V1> function);
+    <VV> BagMultimap<VV, V> groupBy(Function<? super V, ? extends VV> function);
 
-    <V1> BagMultimap<V1, V> groupByEach(Function<? super V, ? extends Iterable<V1>> function);
+    <VV> BagMultimap<VV, V> groupByEach(Function<? super V, ? extends Iterable<VV>> function);
 
-    <V1> UnsortedMapIterable<V1, V> groupByUniqueKey(Function<? super V, ? extends V1> function);
+    <VV> UnsortedMapIterable<VV, V> groupByUniqueKey(Function<? super V, ? extends VV> function);
 
     /**
      * @deprecated in 6.0. Use {@link OrderedIterable#zip(Iterable)} instead.
@@ -114,11 +132,4 @@ public interface UnsortedMapIterable<K, V>
      */
     @Deprecated
     UnsortedSetIterable<Pair<V, Integer>> zipWithIndex();
-
-    /**
-     * Converts the UnsortedMapIterable to an immutable implementation. Returns this for immutable maps.
-     *
-     * @since 5.0
-     */
-    ImmutableMap<K, V> toImmutable();
 }

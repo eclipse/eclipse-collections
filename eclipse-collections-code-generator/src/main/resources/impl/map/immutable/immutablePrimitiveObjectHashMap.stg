@@ -1,4 +1,5 @@
 import "copyright.stg"
+import "copyright.stg"
 import "primitiveEquals.stg"
 import "primitiveHashCode.stg"
 import "primitiveLiteral.stg"
@@ -14,7 +15,7 @@ class(primitive) ::= <<
 >>
 
 collectPrimitive(name, type) ::= <<
-public Immutable<name>Collection collect<name>(<name>Function\<? super V> <type>Function)
+public Immutable<name>Bag collect<name>(<name>Function\<? super V> <type>Function)
 {
     return this.delegate.collect<name>(<type>Function).toImmutable();
 }
@@ -40,7 +41,16 @@ import org.eclipse.collections.api.<name>Iterable;
 import org.eclipse.collections.api.Lazy<name>Iterable;
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.RichIterable;
+import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.api.bag.MutableBag;
+import org.eclipse.collections.api.bag.primitive.ImmutableBooleanBag;
+import org.eclipse.collections.api.bag.primitive.ImmutableByteBag;
+import org.eclipse.collections.api.bag.primitive.ImmutableCharBag;
+import org.eclipse.collections.api.bag.primitive.ImmutableDoubleBag;
+import org.eclipse.collections.api.bag.primitive.ImmutableFloatBag;
+import org.eclipse.collections.api.bag.primitive.ImmutableIntBag;
+import org.eclipse.collections.api.bag.primitive.ImmutableLongBag;
+import org.eclipse.collections.api.bag.primitive.ImmutableShortBag;
 import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function0;
@@ -65,15 +75,6 @@ import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.block.procedure.primitive.<name>ObjectProcedure;
 import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
-import org.eclipse.collections.api.collection.ImmutableCollection;
-import org.eclipse.collections.api.collection.primitive.ImmutableBooleanCollection;
-import org.eclipse.collections.api.collection.primitive.ImmutableByteCollection;
-import org.eclipse.collections.api.collection.primitive.ImmutableCharCollection;
-import org.eclipse.collections.api.collection.primitive.ImmutableDoubleCollection;
-import org.eclipse.collections.api.collection.primitive.ImmutableFloatCollection;
-import org.eclipse.collections.api.collection.primitive.ImmutableIntCollection;
-import org.eclipse.collections.api.collection.primitive.ImmutableLongCollection;
-import org.eclipse.collections.api.collection.primitive.ImmutableShortCollection;
 import org.eclipse.collections.api.collection.primitive.MutableBooleanCollection;
 import org.eclipse.collections.api.collection.primitive.MutableByteCollection;
 import org.eclipse.collections.api.collection.primitive.MutableCharCollection;
@@ -84,15 +85,16 @@ import org.eclipse.collections.api.collection.primitive.MutableLongCollection;
 import org.eclipse.collections.api.collection.primitive.MutableShortCollection;
 import org.eclipse.collections.api.iterator.<name>Iterator;
 import org.eclipse.collections.api.list.MutableList;
-import org.eclipse.collections.api.map.MapIterable;
+import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.primitive.<name>ObjectMap;
 import org.eclipse.collections.api.map.primitive.Immutable<name>ObjectMap;
 import org.eclipse.collections.api.map.primitive.Mutable<name>ObjectMap;
 import org.eclipse.collections.api.map.sorted.MutableSortedMap;
-import org.eclipse.collections.api.multimap.Multimap;
 import org.eclipse.collections.api.multimap.MutableMultimap;
-import org.eclipse.collections.api.partition.PartitionIterable;
+import org.eclipse.collections.api.multimap.bag.ImmutableBagMultimap;
+import org.eclipse.collections.api.partition.bag.PartitionImmutableBag;
+import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
@@ -220,7 +222,7 @@ final class Immutable<name>ObjectHashMap\<V> extends AbstractImmutable<name>Obje
         return this.delegate.containsAllArguments(elements);
     }
 
-    public ImmutableCollection\<V> select(Predicate\<? super V> predicate)
+    public ImmutableBag\<V> select(Predicate\<? super V> predicate)
     {
         return this.delegate.select(predicate).toImmutable();
     }
@@ -230,17 +232,17 @@ final class Immutable<name>ObjectHashMap\<V> extends AbstractImmutable<name>Obje
         return this.delegate.select(predicate, target);
     }
 
-    public \<P> ImmutableCollection\<V> selectWith(Predicate2\<? super V, ? super P> predicate, P parameter)
+    public \<P> ImmutableBag\<V> selectWith(Predicate2\<? super V, ? super P> predicate, P parameter)
     {
         return this.delegate.selectWith(predicate, parameter).toImmutable();
     }
 
-    public \<P, R extends Collection\<V>\> R selectWith(Predicate2\<? super V, ? super P> predicate, P parameter, R targetCollection)
+    public \<P, R extends Collection\<V>\> R selectWith(Predicate2\<? super V, ? super P> predicate, P parameter, R target)
     {
-        return this.delegate.selectWith(predicate, parameter, targetCollection);
+        return this.delegate.selectWith(predicate, parameter, target);
     }
 
-    public ImmutableCollection\<V> reject(Predicate\<? super V> predicate)
+    public ImmutableBag\<V> reject(Predicate\<? super V> predicate)
     {
         return this.delegate.reject(predicate).toImmutable();
     }
@@ -250,32 +252,32 @@ final class Immutable<name>ObjectHashMap\<V> extends AbstractImmutable<name>Obje
         return this.delegate.reject(predicate, target);
     }
 
-    public \<P> ImmutableCollection\<V> rejectWith(Predicate2\<? super V, ? super P> predicate, P parameter)
+    public \<P> ImmutableBag\<V> rejectWith(Predicate2\<? super V, ? super P> predicate, P parameter)
     {
         return this.delegate.rejectWith(predicate, parameter).toImmutable();
     }
 
-    public \<P, R extends Collection\<V>\> R rejectWith(Predicate2\<? super V, ? super P> predicate, P parameter, R targetCollection)
+    public \<P, R extends Collection\<V>\> R rejectWith(Predicate2\<? super V, ? super P> predicate, P parameter, R target)
     {
-        return this.delegate.rejectWith(predicate, parameter, targetCollection);
+        return this.delegate.rejectWith(predicate, parameter, target);
     }
 
-    public PartitionIterable\<V> partition(Predicate\<? super V> predicate)
+    public PartitionImmutableBag\<V> partition(Predicate\<? super V> predicate)
     {
-        return this.delegate.partition(predicate);
+        return this.delegate.partition(predicate).toImmutable();
     }
 
-    public \<P> PartitionIterable\<V> partitionWith(Predicate2\<? super V, ? super P> predicate, P parameter)
+    public \<P> PartitionImmutableBag\<V> partitionWith(Predicate2\<? super V, ? super P> predicate, P parameter)
     {
-        return this.delegate.partitionWith(predicate, parameter);
+        return this.delegate.partitionWith(predicate, parameter).toImmutable();
     }
 
-    public \<S> RichIterable\<S> selectInstancesOf(Class\<S> clazz)
+    public \<S> ImmutableBag\<S> selectInstancesOf(Class\<S> clazz)
     {
-        return this.delegate.selectInstancesOf(clazz);
+        return this.delegate.selectInstancesOf(clazz).toImmutable();
     }
 
-    public \<VV> ImmutableCollection\<VV> collect(Function\<? super V, ? extends VV> function)
+    public \<VV> ImmutableBag\<VV> collect(Function\<? super V, ? extends VV> function)
     {
         return this.delegate.collect(function).toImmutable();
     }
@@ -288,19 +290,19 @@ final class Immutable<name>ObjectHashMap\<V> extends AbstractImmutable<name>Obje
     <collectPrimitive("Int", "int")>
     <collectPrimitive("Long", "long")>
     <collectPrimitive("Short", "short")>
-    public \<P, VV> ImmutableCollection\<VV> collectWith(Function2\<? super V, ? super P, ? extends VV> function, P parameter)
+    public \<P, VV> ImmutableBag\<VV> collectWith(Function2\<? super V, ? super P, ? extends VV> function, P parameter)
     {
         return this.delegate.collectWith(function, parameter).toImmutable();
     }
 
-    public \<VV> RichIterable\<VV> collectIf(Predicate\<? super V> predicate, Function\<? super V, ? extends VV> function)
+    public \<VV> ImmutableBag\<VV> collectIf(Predicate\<? super V> predicate, Function\<? super V, ? extends VV> function)
     {
-        return this.delegate.collectIf(predicate, function);
+        return this.delegate.collectIf(predicate, function).toImmutable();
     }
 
-    public \<VV> RichIterable\<VV> flatCollect(Function\<? super V, ? extends Iterable\<VV>\> function)
+    public \<VV> ImmutableBag\<VV> flatCollect(Function\<? super V, ? extends Iterable\<VV>\> function)
     {
-        return this.delegate.flatCollect(function);
+        return this.delegate.flatCollect(function).toImmutable();
     }
 
     public V detect(Predicate\<? super V> predicate)
@@ -543,9 +545,9 @@ final class Immutable<name>ObjectHashMap\<V> extends AbstractImmutable<name>Obje
         this.delegate.appendString(appendable, start, separator, end);
     }
 
-    public \<VV> Multimap\<VV, V> groupBy(Function\<? super V, ? extends VV> function)
+    public \<VV> ImmutableBagMultimap\<VV, V> groupBy(Function\<? super V, ? extends VV> function)
     {
-        return this.delegate.groupBy(function);
+        return this.delegate.groupBy(function).toImmutable();
     }
 
     public \<VV, R extends MutableMultimap\<VV, V>\> R groupBy(Function\<? super V, ? extends VV> function, R target)
@@ -553,9 +555,9 @@ final class Immutable<name>ObjectHashMap\<V> extends AbstractImmutable<name>Obje
         return this.delegate.groupBy(function, target);
     }
 
-    public \<VV> Multimap\<VV, V> groupByEach(Function\<? super V, ? extends Iterable\<VV>\> function)
+    public \<VV> ImmutableBagMultimap\<VV, V> groupByEach(Function\<? super V, ? extends Iterable\<VV>\> function)
     {
-        return this.delegate.groupByEach(function);
+        return this.delegate.groupByEach(function).toImmutable();
     }
 
     public \<VV, R extends MutableMultimap\<VV, V>\> R groupByEach(Function\<? super V, ? extends Iterable\<VV>\> function, R target)
@@ -563,9 +565,9 @@ final class Immutable<name>ObjectHashMap\<V> extends AbstractImmutable<name>Obje
         return this.delegate.groupByEach(function, target);
     }
 
-    public \<VV> MapIterable\<VV, V> groupByUniqueKey(Function\<? super V, ? extends VV> function)
+    public \<VV> ImmutableMap\<VV, V> groupByUniqueKey(Function\<? super V, ? extends VV> function)
     {
-        return this.delegate.groupByUniqueKey(function);
+        return this.delegate.groupByUniqueKey(function).toImmutable();
     }
 
     public \<VV, R extends MutableMap\<VV, V>\> R groupByUniqueKey(Function\<? super V, ? extends VV> function, R target)
@@ -573,9 +575,9 @@ final class Immutable<name>ObjectHashMap\<V> extends AbstractImmutable<name>Obje
         return this.delegate.groupByUniqueKey(function, target);
     }
 
-    public \<S> RichIterable\<Pair\<V, S>\> zip(Iterable\<S> that)
+    public \<S> ImmutableBag\<Pair\<V, S>\> zip(Iterable\<S> that)
     {
-        return this.delegate.zip(that);
+        return this.delegate.zip(that).toImmutable();
     }
 
     public \<S, R extends Collection\<Pair\<V, S>\>> R zip(Iterable\<S> that, R target)
@@ -583,9 +585,9 @@ final class Immutable<name>ObjectHashMap\<V> extends AbstractImmutable<name>Obje
         return this.delegate.zip(that, target);
     }
 
-    public RichIterable\<Pair\<V, Integer>\> zipWithIndex()
+    public ImmutableSet\<Pair\<V, Integer>\> zipWithIndex()
     {
-        return this.delegate.zipWithIndex();
+        return this.delegate.zipWithIndex().toImmutable();
     }
 
     public \<R extends Collection\<Pair\<V, Integer>\>> R zipWithIndex(R target)
@@ -598,14 +600,14 @@ final class Immutable<name>ObjectHashMap\<V> extends AbstractImmutable<name>Obje
         return this.delegate.chunk(size);
     }
 
-    public \<K, VV> MapIterable\<K, VV> aggregateInPlaceBy(Function\<? super V, ? extends K> groupBy, Function0\<? extends VV> zeroValueFactory, Procedure2\<? super VV, ? super V> mutatingAggregator)
+    public \<K, VV> ImmutableMap\<K, VV> aggregateInPlaceBy(Function\<? super V, ? extends K> groupBy, Function0\<? extends VV> zeroValueFactory, Procedure2\<? super VV, ? super V> mutatingAggregator)
     {
-        return this.delegate.aggregateInPlaceBy(groupBy, zeroValueFactory, mutatingAggregator);
+        return this.delegate.aggregateInPlaceBy(groupBy, zeroValueFactory, mutatingAggregator).toImmutable();
     }
 
-    public \<K, VV> MapIterable\<K, VV> aggregateBy(Function\<? super V, ? extends K> groupBy, Function0\<? extends VV> zeroValueFactory, Function2\<? super VV, ? super V, ? extends VV> nonMutatingAggregator)
+    public \<K, VV> ImmutableMap\<K, VV> aggregateBy(Function\<? super V, ? extends K> groupBy, Function0\<? extends VV> zeroValueFactory, Function2\<? super VV, ? super V, ? extends VV> nonMutatingAggregator)
     {
-        return this.delegate.aggregateBy(groupBy, zeroValueFactory, nonMutatingAggregator);
+        return this.delegate.aggregateBy(groupBy, zeroValueFactory, nonMutatingAggregator).toImmutable();
     }
 
     public \<VV extends Comparable\<? super VV>\> V maxBy(Function\<? super V, ? extends VV> function)
@@ -718,19 +720,16 @@ final class Immutable<name>ObjectHashMap\<V> extends AbstractImmutable<name>Obje
         return this.delegate.keyValuesView();
     }
 
-    @Override
     public boolean equals(Object obj)
     {
         return this.delegate.equals(obj);
     }
 
-    @Override
     public int hashCode()
     {
         return this.delegate.hashCode();
     }
 
-    @Override
     public String toString()
     {
         return this.delegate.toString();

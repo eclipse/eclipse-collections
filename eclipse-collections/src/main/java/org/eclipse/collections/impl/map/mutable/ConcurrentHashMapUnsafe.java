@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -2053,6 +2053,13 @@ public class ConcurrentHashMapUnsafe<K, V>
     public MutableMap<K, V> newEmpty()
     {
         return ConcurrentHashMapUnsafe.newMap();
+    }
+
+    @Override
+    public ConcurrentMutableMap<K, V> tap(Procedure<? super V> procedure)
+    {
+        this.each(procedure);
+        return this;
     }
 
     @Override

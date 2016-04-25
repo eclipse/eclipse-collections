@@ -21,8 +21,10 @@ import org.eclipse.collections.api.BooleanIterable;
 import org.eclipse.collections.api.LazyBooleanIterable;
 import org.eclipse.collections.api.bag.primitive.MutableBooleanBag;
 import org.eclipse.collections.api.block.function.primitive.BooleanToObjectFunction;
+import org.eclipse.collections.api.block.function.primitive.ObjectBooleanIntToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.ObjectBooleanToObjectFunction;
 import org.eclipse.collections.api.block.predicate.primitive.BooleanPredicate;
+import org.eclipse.collections.api.block.procedure.primitive.BooleanIntProcedure;
 import org.eclipse.collections.api.block.procedure.primitive.BooleanProcedure;
 import org.eclipse.collections.api.iterator.BooleanIterator;
 import org.eclipse.collections.api.iterator.MutableBooleanIterator;
@@ -149,12 +151,12 @@ public final class BooleanArrayStack implements MutableBooleanStack, Externaliza
 
     public MutableBooleanStack select(BooleanPredicate predicate)
     {
-        return newStackFromTopToBottom(this.delegate.asReversed().select(predicate));
+        return BooleanArrayStack.newStackFromTopToBottom(this.delegate.asReversed().select(predicate));
     }
 
     public MutableBooleanStack reject(BooleanPredicate predicate)
     {
-        return newStackFromTopToBottom(this.delegate.asReversed().reject(predicate));
+        return BooleanArrayStack.newStackFromTopToBottom(this.delegate.asReversed().reject(predicate));
     }
 
     public MutableBooleanStack asUnmodifiable()
@@ -378,6 +380,26 @@ public final class BooleanArrayStack implements MutableBooleanStack, Externaliza
             String end)
     {
         this.delegate.asReversed().appendString(appendable, start, separator, end);
+    }
+
+    public boolean getFirst()
+    {
+        throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".getFirst() not implemented yet");
+    }
+
+    public int indexOf(boolean value)
+    {
+        throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".indexOf() not implemented yet");
+    }
+
+    public <T> T injectIntoWithIndex(T injectedValue, ObjectBooleanIntToObjectFunction<? super T, ? extends T> function)
+    {
+        throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".injectIntoWithIndex() not implemented yet");
+    }
+
+    public void forEachWithIndex(BooleanIntProcedure procedure)
+    {
+        throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".forEachWithIndex() not implemented yet");
     }
 
     public MutableBooleanList toList()

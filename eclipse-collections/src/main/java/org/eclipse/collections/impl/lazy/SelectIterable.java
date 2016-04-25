@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -14,7 +14,6 @@ import java.util.Iterator;
 
 import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.block.predicate.Predicate;
-import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
@@ -70,33 +69,15 @@ public class SelectIterable<T>
     }
 
     @Override
-    public <P> boolean anySatisfyWith(Predicate2<? super T, ? super P> predicate, P parameter)
-    {
-        return this.anySatisfy(Predicates.bind(predicate, parameter));
-    }
-
-    @Override
     public boolean allSatisfy(Predicate<? super T> predicate)
     {
         return Iterate.allSatisfy(this.adapted, new AllSatisfyPredicate<T>(this.predicate, predicate));
     }
 
     @Override
-    public <P> boolean allSatisfyWith(Predicate2<? super T, ? super P> predicate, P parameter)
-    {
-        return this.allSatisfy(Predicates.bind(predicate, parameter));
-    }
-
-    @Override
     public boolean noneSatisfy(Predicate<? super T> predicate)
     {
         return Iterate.noneSatisfy(this.adapted, new AllSatisfyPredicate<T>(this.predicate, predicate));
-    }
-
-    @Override
-    public <P> boolean noneSatisfyWith(Predicate2<? super T, ? super P> predicate, P parameter)
-    {
-        return this.noneSatisfy(Predicates.bind(predicate, parameter));
     }
 
     @Override

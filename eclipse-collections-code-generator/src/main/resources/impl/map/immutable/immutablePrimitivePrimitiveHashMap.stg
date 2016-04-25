@@ -31,7 +31,9 @@ import org.eclipse.collections.api.<name1>Iterable;
 import org.eclipse.collections.api.Lazy<name1>Iterable;
 <if(!sameTwoPrimitives)>import org.eclipse.collections.api.Lazy<name2>Iterable;<endif>
 import org.eclipse.collections.api.RichIterable;
+import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.api.bag.primitive.Mutable<name2>Bag;
+import org.eclipse.collections.api.bag.primitive.Immutable<name2>Bag;
 import org.eclipse.collections.api.block.function.primitive.<name2>ToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.Object<name2>ToObjectFunction;
 import org.eclipse.collections.api.block.predicate.primitive.<name1><name2>Predicate;
@@ -181,24 +183,24 @@ final class Immutable<name1><name2>HashMap implements Immutable<name1><name2>Map
         return this.delegate.noneSatisfy(predicate);
     }
 
-    public Immutable<name2>Collection select(<name2>Predicate predicate)
+    public Immutable<name2>Bag select(<name2>Predicate predicate)
     {
         return this.delegate.select(predicate).toImmutable();
     }
 
-    public Immutable<name2>Collection reject(<name2>Predicate predicate)
+    public Immutable<name2>Bag reject(<name2>Predicate predicate)
     {
         return this.delegate.reject(predicate).toImmutable();
+    }
+
+    public \<V> ImmutableBag\<V> collect(<name2>ToObjectFunction\<? extends V> function)
+    {
+        return this.delegate.collect(function).toImmutable();
     }
 
     public <type2> detectIfNone(<name2>Predicate predicate, <type2> ifNone)
     {
         return this.delegate.detectIfNone(predicate, ifNone);
-    }
-
-    public \<V> ImmutableCollection\<V> collect(<name2>ToObjectFunction\<? extends V> function)
-    {
-        return this.delegate.collect(function).toImmutable();
     }
 
     <(arithmeticMethods.(type2))()>

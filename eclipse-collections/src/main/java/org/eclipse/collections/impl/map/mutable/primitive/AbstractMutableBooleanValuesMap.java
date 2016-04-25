@@ -14,6 +14,7 @@ import java.io.IOException;
 
 import org.eclipse.collections.api.BooleanIterable;
 import org.eclipse.collections.api.LazyBooleanIterable;
+import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.bag.primitive.MutableBooleanBag;
 import org.eclipse.collections.api.block.function.primitive.BooleanToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.ObjectBooleanToObjectFunction;
@@ -26,11 +27,12 @@ import org.eclipse.collections.api.iterator.BooleanIterator;
 import org.eclipse.collections.api.list.primitive.MutableBooleanList;
 import org.eclipse.collections.api.map.primitive.MutableBooleanValuesMap;
 import org.eclipse.collections.api.set.primitive.MutableBooleanSet;
+import org.eclipse.collections.impl.bag.mutable.HashBag;
 import org.eclipse.collections.impl.collection.mutable.primitive.SynchronizedBooleanCollection;
 import org.eclipse.collections.impl.collection.mutable.primitive.UnmodifiableBooleanCollection;
+import org.eclipse.collections.impl.factory.primitive.BooleanBags;
 import org.eclipse.collections.impl.factory.primitive.BooleanLists;
 import org.eclipse.collections.impl.lazy.primitive.LazyBooleanIterableAdapter;
-import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.primitive.AbstractBooleanIterable;
 import org.eclipse.collections.impl.set.mutable.primitive.BooleanHashSet;
 
@@ -229,9 +231,9 @@ public abstract class AbstractMutableBooleanValuesMap extends AbstractBooleanIte
         }
     }
 
-    public MutableBooleanCollection select(BooleanPredicate predicate)
+    public MutableBooleanBag select(BooleanPredicate predicate)
     {
-        MutableBooleanList result = BooleanLists.mutable.empty();
+        MutableBooleanBag result = BooleanBags.mutable.empty();
 
         if (this.getSentinelValues() != null)
         {
@@ -255,9 +257,9 @@ public abstract class AbstractMutableBooleanValuesMap extends AbstractBooleanIte
         return result;
     }
 
-    public MutableBooleanCollection reject(BooleanPredicate predicate)
+    public MutableBooleanBag reject(BooleanPredicate predicate)
     {
-        MutableBooleanList result = BooleanLists.mutable.empty();
+        MutableBooleanBag result = BooleanBags.mutable.empty();
         if (this.getSentinelValues() != null)
         {
             if (this.getSentinelValues().containsZeroKey && !predicate.accept(this.getSentinelValues().zeroValue))
@@ -277,6 +279,30 @@ public abstract class AbstractMutableBooleanValuesMap extends AbstractBooleanIte
             }
         }
         return result;
+    }
+
+    public <V> MutableBag<V> collect(BooleanToObjectFunction<? extends V> function)
+    {
+        MutableBag<V> target = HashBag.newBag(this.size());
+        if (this.getSentinelValues() != null)
+        {
+            if (this.getSentinelValues().containsZeroKey)
+            {
+                target.add(function.valueOf(this.getSentinelValues().zeroValue));
+            }
+            if (this.getSentinelValues().containsOneKey)
+            {
+                target.add(function.valueOf(this.getSentinelValues().oneValue));
+            }
+        }
+        for (int i = 0; i < this.getTableSize(); i++)
+        {
+            if (this.isNonSentinelAtIndex(i))
+            {
+                target.add(function.valueOf(this.getValueAtIndex(i)));
+            }
+        }
+        return target;
     }
 
     public boolean detectIfNone(BooleanPredicate predicate, boolean value)
@@ -300,30 +326,6 @@ public abstract class AbstractMutableBooleanValuesMap extends AbstractBooleanIte
             }
         }
         return value;
-    }
-
-    public <V> MutableCollection<V> collect(BooleanToObjectFunction<? extends V> function)
-    {
-        FastList<V> target = FastList.newList(this.size());
-        if (this.getSentinelValues() != null)
-        {
-            if (this.getSentinelValues().containsZeroKey)
-            {
-                target.add(function.valueOf(this.getSentinelValues().zeroValue));
-            }
-            if (this.getSentinelValues().containsOneKey)
-            {
-                target.add(function.valueOf(this.getSentinelValues().oneValue));
-            }
-        }
-        for (int i = 0; i < this.getTableSize(); i++)
-        {
-            if (this.isNonSentinelAtIndex(i))
-            {
-                target.add(function.valueOf(this.getValueAtIndex(i)));
-            }
-        }
-        return target;
     }
 
     public int count(BooleanPredicate predicate)

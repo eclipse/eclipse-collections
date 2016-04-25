@@ -17,6 +17,11 @@ body(type, name) ::= <<
 package org.eclipse.collections.api.map.primitive;
 
 import org.eclipse.collections.api.<name>Iterable;
+import org.eclipse.collections.api.RichIterable;
+import org.eclipse.collections.api.bag.Bag;
+import org.eclipse.collections.api.bag.primitive.<name>Bag;
+import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
+import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
 import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
 import org.eclipse.collections.api.collection.primitive.Mutable<name>Collection;
 
@@ -32,6 +37,12 @@ public interface <name>ValuesMap extends <name>Iterable
     void forEachValue(<name>Procedure procedure);
 
     Mutable<name>Collection values();
+
+    <name>Bag select(<name>Predicate predicate);
+
+    <name>Bag reject(<name>Predicate predicate);
+
+    \<V> Bag\<V> collect(<name>ToObjectFunction\<? extends V> function);
 }
 
 >>

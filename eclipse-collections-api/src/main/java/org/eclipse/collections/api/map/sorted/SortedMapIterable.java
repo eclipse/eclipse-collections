@@ -35,6 +35,7 @@ import org.eclipse.collections.api.list.primitive.IntList;
 import org.eclipse.collections.api.list.primitive.LongList;
 import org.eclipse.collections.api.list.primitive.ShortList;
 import org.eclipse.collections.api.map.MapIterable;
+import org.eclipse.collections.api.map.UnsortedMapIterable;
 import org.eclipse.collections.api.multimap.list.ListMultimap;
 import org.eclipse.collections.api.multimap.sortedset.SortedSetMultimap;
 import org.eclipse.collections.api.ordered.ReversibleIterable;
@@ -58,6 +59,8 @@ public interface SortedMapIterable<K, V>
     SortedMapIterable<K, V> select(Predicate2<? super K, ? super V> predicate);
 
     SortedMapIterable<K, V> reject(Predicate2<? super K, ? super V> predicate);
+
+    <K2, V2> UnsortedMapIterable<K2, V2> collect(Function2<? super K, ? super V, Pair<K2, V2>> function);
 
     <R> SortedMapIterable<K, R> collectValues(Function2<? super K, ? super V, ? extends R> function);
 

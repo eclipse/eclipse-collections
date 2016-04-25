@@ -25,9 +25,10 @@ import java.util.NoSuchElementException;
 import org.eclipse.collections.api.iterator.BooleanIterator;
 import org.eclipse.collections.api.map.primitive.Immutable<name>BooleanMap;
 import org.eclipse.collections.impl.block.factory.primitive.BooleanPredicates;
+import org.eclipse.collections.impl.factory.primitive.BooleanBags;
 import org.eclipse.collections.impl.factory.primitive.<name>BooleanMaps;
-import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
 import org.eclipse.collections.impl.list.mutable.primitive.BooleanArrayList;
+import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
 import org.junit.Test;
@@ -204,31 +205,31 @@ public class Immutable<name>BooleanEmptyMapTest extends AbstractImmutable<name>B
     @Override
     public void select()
     {
-        Assert.assertEquals(this.classUnderTest(), this.classUnderTest().select((<type> value1, boolean value2) -> true));
+        Assert.assertEquals(this.classUnderTest(), this.classUnderTest().select((key, value) -> true));
     }
 
     @Override
     public void reject()
     {
-        Assert.assertEquals(this.classUnderTest(), this.classUnderTest().reject((<type> value1, boolean value2) -> false));
+        Assert.assertEquals(this.classUnderTest(), this.classUnderTest().reject((key, value) -> false));
     }
 
     @Override
     public void select_value()
     {
-        Assert.assertEquals(BooleanArrayList.newListWith(), this.classUnderTest().select((boolean value) -> true));
+        Assert.assertEquals(BooleanBags.immutable.empty(), this.classUnderTest().select(value -> true));
     }
 
     @Override
     public void reject_value()
     {
-        Assert.assertEquals(BooleanArrayList.newListWith(), this.classUnderTest().reject((boolean value) -> false));
+        Assert.assertEquals(BooleanBags.immutable.empty(), this.classUnderTest().reject(value -> false));
     }
 
     @Override
     public void count()
     {
-        Assert.assertEquals(0, this.classUnderTest().count((boolean value) -> true));
+        Assert.assertEquals(0, this.classUnderTest().count(value -> true));
     }
 }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -31,6 +31,7 @@ import org.eclipse.collections.api.block.function.primitive.ShortFunction;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.predicate.primitive.IntPredicate;
+import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.multimap.bag.UnsortedBagMultimap;
 import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.partition.bag.PartitionUnsortedBag;
@@ -39,6 +40,8 @@ import org.eclipse.collections.api.tuple.Pair;
 
 public interface UnsortedBag<T> extends Bag<T>
 {
+    UnsortedBag<T> tap(Procedure<? super T> procedure);
+
     UnsortedBag<T> selectByOccurrences(IntPredicate predicate);
 
     UnsortedBag<T> select(Predicate<? super T> predicate);
