@@ -52,7 +52,7 @@ public final class LazyIterate
     }
 
     /**
-     * Creates a deferred rich iterable for the specified iterable
+     * Creates a deferred rich iterable for the specified iterable.
      */
     public static <T> LazyIterable<T> adapt(Iterable<T> iterable)
     {
@@ -60,7 +60,7 @@ public final class LazyIterate
     }
 
     /**
-     * Creates a deferred filtering iterable for the specified iterable
+     * Creates a deferred filtering iterable for the specified iterable.
      */
     public static <T> LazyIterable<T> select(Iterable<T> iterable, Predicate<? super T> predicate)
     {
@@ -68,7 +68,7 @@ public final class LazyIterate
     }
 
     /**
-     * Creates a deferred negative filtering iterable for the specified iterable
+     * Creates a deferred negative filtering iterable for the specified iterable.
      */
     public static <T> LazyIterable<T> reject(Iterable<T> iterable, Predicate<? super T> predicate)
     {
@@ -81,7 +81,7 @@ public final class LazyIterate
     }
 
     /**
-     * Creates a deferred transforming iterable for the specified iterable
+     * Creates a deferred transforming iterable for the specified iterable.
      */
     public static <T, V> LazyIterable<V> collect(
             Iterable<T> iterable,
@@ -91,7 +91,7 @@ public final class LazyIterate
     }
 
     /**
-     * Creates a deferred flattening iterable for the specified iterable
+     * Creates a deferred flattening iterable for the specified iterable.
      */
     public static <T, V> LazyIterable<V> flatCollect(
             Iterable<T> iterable,
@@ -101,7 +101,7 @@ public final class LazyIterate
     }
 
     /**
-     * Creates a deferred filtering and transforming iterable for the specified iterable
+     * Creates a deferred filtering and transforming iterable for the specified iterable.
      */
     public static <T, V> LazyIterable<V> collectIf(
             Iterable<T> iterable,
@@ -112,7 +112,7 @@ public final class LazyIterate
     }
 
     /**
-     * Creates a deferred take iterable for the specified iterable using the specified count as the limit
+     * Creates a deferred take iterable for the specified iterable using the specified count as the limit.
      */
     public static <T> LazyIterable<T> take(Iterable<T> iterable, int count)
     {
@@ -120,7 +120,7 @@ public final class LazyIterate
     }
 
     /**
-     * Creates a deferred drop iterable for the specified iterable using the specified count as the size to drop
+     * Creates a deferred drop iterable for the specified iterable using the specified count as the size to drop.
      */
     public static <T> LazyIterable<T> drop(Iterable<T> iterable, int count)
     {
@@ -160,7 +160,7 @@ public final class LazyIterate
     }
 
     /**
-     * Combines iterables into a deferred composite iterable
+     * Combines iterables into a deferred composite iterable.
      */
     public static <T> LazyIterable<T> concatenate(Iterable<T>... iterables)
     {
