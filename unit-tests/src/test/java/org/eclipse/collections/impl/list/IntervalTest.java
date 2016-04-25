@@ -793,6 +793,7 @@ public class IntervalTest
     @Test
     public void take()
     {
+        Verify.assertIterableEmpty(Interval.fromTo(1, 3).take(0));
         Assert.assertEquals(FastList.newListWith(1, 2), Interval.fromTo(1, 3).take(2));
         Assert.assertEquals(FastList.newListWith(1, 2), Interval.fromTo(1, 2).take(3));
 
@@ -803,6 +804,7 @@ public class IntervalTest
     public void drop()
     {
         Assert.assertEquals(FastList.newListWith(3, 4), Interval.fromTo(1, 4).drop(2));
+        Assert.assertEquals(FastList.newListWith(1, 2, 3, 4), Interval.fromTo(1, 4).drop(0));
         Verify.assertIterableEmpty(Interval.fromTo(1, 2).drop(3));
 
         Verify.assertThrows(IllegalArgumentException.class, () -> Interval.fromTo(1, 3).drop(-1));
@@ -845,7 +847,8 @@ public class IntervalTest
         MutableList<Integer> tapResult = Lists.mutable.of();
         Interval interval = Interval.fromTo(10, -10).by(-5);
         LazyIterable<Integer> lazyTapIterable = interval.tap(tapResult::add);
-        lazyTapIterable.each(x -> { }); //force evaluation
+        lazyTapIterable.each(x -> {
+        }); //force evaluation
         Assert.assertEquals(interval, tapResult);
     }
 }

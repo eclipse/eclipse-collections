@@ -19,6 +19,7 @@ Optimizations
 Bug fixes
 ---------
 
+* Fixed Interval.take(int count) when count is 0. Old behavior was to return an Interval of size 1. This is a behavior breaking change.
 * Changed AbstractSynchronizedRichIterable.groupByUniqueKey() to return MapIterable instead of MutableMap.
 * Changed AbstractMutableMapIterable.groupByUniqueKey() to return MutableMapIterable instead of MutableMap.
 * Changed MutableMapIterable.aggregateBy() to return MutableMap instead of MutableMapIterable.
