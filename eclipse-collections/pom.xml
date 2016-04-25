@@ -28,11 +28,6 @@
 
     <name>Eclipse Collections Main Library</name>
 
-    <properties>
-        <maven.compiler.source>1.5</maven.compiler.source>
-        <maven.compiler.target>1.5</maven.compiler.target>
-    </properties>
-
     <dependencies>
 
         <dependency>
@@ -85,7 +80,7 @@
                 <configuration>
                     <instructions>
                         <Export-Package>org.eclipse.collections.impl</Export-Package>
-                        <Bundle-RequiredExecutionEnvironment>J2SE-1.5,JavaSE-1.6</Bundle-RequiredExecutionEnvironment>
+                        <Bundle-RequiredExecutionEnvironment>JavaSE-1.8</Bundle-RequiredExecutionEnvironment>
                         <Import-Package>
                             net.jcip.annotations;resolution:=optional,*
                         </Import-Package>
@@ -115,7 +110,7 @@
                     <windowtitle>Eclipse Collections - ${project.version}</windowtitle>
                     <show>public</show>
                     <links>
-                        <link>http://java.sun.com/j2se/1.5.0/docs/api/</link>
+                        <link>https://docs.oracle.com/javase/8/docs/api/</link>
                     </links>
                     <destDir>${project.version}</destDir>
                     <additionalparam>-Xdoclint:none</additionalparam>

@@ -33,15 +33,6 @@ matrix:
         - DESC="compile jmh-tests and performance-tests"
         - CMD="mvn install --projects jmh-tests,performance-tests --also-make --activate-profiles all -DskipTests=true --batch-mode --show-version --errors"
 
-    - jdk: oraclejdk8
-      env:
-        - DESC="compile with Java 7"
-        - CMD1="mvn install --projects eclipse-collections-code-generator,eclipse-collections-code-generator-maven-plugin -Dmaven.compiler.verbose=true --batch-mode --show-version --errors;"
-        - CMD2="jdk_switcher use oraclejdk7;"
-        - CMD3="mvn install --projects eclipse-collections,eclipse-collections-api,eclipse-collections-testutils,eclipse-collections-forkjoin,serialization-tests -Denforcer.skip=true -Dmaven.compiler.verbose=true --batch-mode --show-version --errors;"
-        - CMD4="jdk_switcher use oraclejdk8;"
-        - CMD5="mvn install --projects unit-tests,junit-trait-runner,unit-tests-java8 -Dmaven.compiler.verbose=true --batch-mode --show-version --errors"
-        - CMD=$CMD1$CMD2$CMD3$CMD4$CMD5
 script: eval $CMD
 
 cache:

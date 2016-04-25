@@ -115,8 +115,8 @@
         <javac
             destdir="target/classes"
             fork="true"
-            source="${source.level}"
-            target="${target.level}"
+            source="1.8"
+            target="1.8"
             debug="on">
             <src>
                 <pathelement location="${src.dir}" />
@@ -163,8 +163,8 @@
         <javac
             destdir="target/test-classes"
             fork="false"
-            source="1.5"
-            target="1.5"
+            source="1.8"
+            target="1.8"
             debug="on"
             updatedproperty="compile-tests.success">
             <src>
@@ -260,7 +260,7 @@
             <classpath refid="runtime.classpath" />
 
             <doctitle>${javadoc.title} - ${build.version.full}</doctitle>
-            <link href="http://java.sun.com/j2se/1.5.0/docs/api/" />
+            <link href="https://docs.oracle.com/javase/8/docs/api/" />
         </javadoc>
     </target>
 

@@ -15,8 +15,6 @@
     <property name="testsrc.dir" location="src/test/java" />
     <property name="ivy.pom.name" value="Eclipse Collections Test Utilities" />
     <property name="javadoc.title" value="Eclipse Collections Test Utilities" />
-    <property name="source.level" value="1.5" />
-    <property name="target.level" value="1.5" />
 
     <import file="../common-build.xml" />
 </project>

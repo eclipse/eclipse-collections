@@ -414,7 +414,7 @@
                     <windowtitle>Eclipse Collections - ${project.version}</windowtitle>
                     <show>public</show>
                     <links>
-                        <link>http://java.sun.com/j2se/1.5.0/docs/api/</link>
+                        <link>https://docs.oracle.com/javase/8/docs/api/</link>
                         <link>http://junit.sourceforge.net/javadoc/</link>
                     </links>
                     <destDir>${project.version}</destDir>
@@ -461,7 +461,7 @@
                     <windowtitle>Eclipse Collections - ${project.version}</windowtitle>
                     <show>public</show>
                     <links>
-                        <link>http://java.sun.com/j2se/1.5.0/docs/api/</link>
+                        <link>https://docs.oracle.com/javase/8/docs/api/</link>
                         <link>http://junit.sourceforge.net/javadoc/</link>
                     </links>
                     <additionalparam>-Xdoclint:none</additionalparam>
