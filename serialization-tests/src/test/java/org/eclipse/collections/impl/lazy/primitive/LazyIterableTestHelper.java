@@ -240,6 +240,18 @@ public class LazyIterableTestHelper<T> implements LazyIterable<T>
     }
 
     @Override
+    public LazyIterable<T> takeWhile(Predicate<? super T> predicate)
+    {
+        return null;
+    }
+
+    @Override
+    public LazyIterable<T> dropWhile(Predicate<? super T> predicate)
+    {
+        return null;
+    }
+
+    @Override
     public LazyIterable<T> distinct()
     {
         return null;

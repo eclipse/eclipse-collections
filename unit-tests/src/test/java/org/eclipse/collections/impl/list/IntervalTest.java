@@ -811,6 +811,26 @@ public class IntervalTest
     }
 
     @Test
+    public void takeWhile()
+    {
+        Verify.assertIterableEmpty(Interval.fromTo(1, 3).takeWhile(Predicates.alwaysFalse()).toList());
+        Assert.assertEquals(FastList.newListWith(1, 2), Interval.fromTo(1, 3).takeWhile(each -> each <= 2).toList());
+        Assert.assertEquals(FastList.newListWith(1, 2), Interval.fromTo(1, 2).takeWhile(Predicates.alwaysTrue()).toList());
+
+        Verify.assertThrows(IllegalStateException.class, () -> Interval.fromTo(1, 3).takeWhile(null));
+    }
+
+    @Test
+    public void dropWhile()
+    {
+        Assert.assertEquals(FastList.newListWith(3, 4), Interval.fromTo(1, 4).dropWhile(each -> each <= 2).toList());
+        Assert.assertEquals(FastList.newListWith(1, 2, 3, 4), Interval.fromTo(1, 4).dropWhile(Predicates.alwaysFalse()).toList());
+        Verify.assertIterableEmpty(Interval.fromTo(1, 2).dropWhile(Predicates.alwaysTrue()).toList());
+
+        Verify.assertThrows(IllegalStateException.class, () -> Interval.fromTo(1, 3).dropWhile(null));
+    }
+
+    @Test
     public void distinct()
     {
         LazyIterable<Integer> integers = Interval.oneTo(1000000000);

@@ -8,6 +8,7 @@ New Functionality
 * Implemented Bags.mutable.ofAll(Iterable<? extends T> items) and Bags.mutable.withAll(Iterable<? extends T> items).
 * Implemented Multimap.keySet() to return an unmodifiable SetIterable of keys.
 * Implemented MutableMultimap.putAllPairs(Iterable<Pair<K, V>> keyValuePairs).
+* Implemented LazyIterable.takeWhile(Predicate<? super T> predicate) and LazyIterable.dropWhile(Predicate<? super T> predicate).
 * Pull up into() from LazyIterable to RichIterable.
 * Made StackIterable implement OrderedIterable.
 

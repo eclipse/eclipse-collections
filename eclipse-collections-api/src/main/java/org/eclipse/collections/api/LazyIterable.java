@@ -25,6 +25,7 @@ import org.eclipse.collections.api.block.function.primitive.ShortFunction;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
+import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.tuple.Pair;
 
 /**
@@ -78,6 +79,18 @@ public interface LazyIterable<T>
      * Creates a deferred drop iterable for the current iterable using the specified count as the limit.
      */
     LazyIterable<T> drop(int count);
+
+    /**
+     * @see OrderedIterable#takeWhile(Predicate)
+     * @since 8.0
+     */
+    LazyIterable<T> takeWhile(Predicate<? super T> predicate);
+
+    /**
+     * @see OrderedIterable#dropWhile(Predicate)
+     * @since 8.0
+     */
+    LazyIterable<T> dropWhile(Predicate<? super T> predicate);
 
     /**
      * Creates a deferred distinct iterable to get distinct elements from the current iterable.

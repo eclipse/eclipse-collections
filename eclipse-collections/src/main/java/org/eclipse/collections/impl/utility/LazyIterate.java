@@ -22,12 +22,14 @@ import org.eclipse.collections.impl.lazy.CollectIterable;
 import org.eclipse.collections.impl.lazy.CompositeIterable;
 import org.eclipse.collections.impl.lazy.DistinctIterable;
 import org.eclipse.collections.impl.lazy.DropIterable;
+import org.eclipse.collections.impl.lazy.DropWhileIterable;
 import org.eclipse.collections.impl.lazy.FlatCollectIterable;
 import org.eclipse.collections.impl.lazy.LazyIterableAdapter;
 import org.eclipse.collections.impl.lazy.RejectIterable;
 import org.eclipse.collections.impl.lazy.SelectInstancesOfIterable;
 import org.eclipse.collections.impl.lazy.SelectIterable;
 import org.eclipse.collections.impl.lazy.TakeIterable;
+import org.eclipse.collections.impl.lazy.TakeWhileIterable;
 import org.eclipse.collections.impl.lazy.TapIterable;
 import org.eclipse.collections.impl.lazy.ZipIterable;
 import org.eclipse.collections.impl.lazy.ZipWithIndexIterable;
@@ -126,7 +128,29 @@ public final class LazyIterate
     }
 
     /**
-     * Creates a deferred distinct iterable for the specified iterable
+     * Creates a deferred takeWhile iterable for the specified iterable using the specified predicate.
+     * Short circuits at the first element which does not satisfy the Predicate.
+     *
+     * @since 8.0
+     */
+    public static <T> LazyIterable<T> takeWhile(Iterable<T> iterable, Predicate<? super T> predicate)
+    {
+        return new TakeWhileIterable<T>(iterable, predicate);
+    }
+
+    /**
+     * Creates a deferred dropWhile iterable for the specified iterable using the specified count as the size to drop.
+     * Short circuits at the first element which satisfies the Predicate.
+     *
+     * @since 8.0
+     */
+    public static <T> LazyIterable<T> dropWhile(Iterable<T> iterable, Predicate<? super T> predicate)
+    {
+        return new DropWhileIterable<T>(iterable, predicate);
+    }
+
+    /**
+     * Creates a deferred distinct iterable for the specified iterable.
      *
      * @since 5.0
      */
