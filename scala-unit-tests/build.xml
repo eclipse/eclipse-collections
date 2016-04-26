@@ -71,7 +71,7 @@
         <mkdir dir="target/test-classes" />
         <scalac
             destdir="target/test-classes"
-            target="jvm-1.5">
+            target="jvm-1.8">
             <src>
                 <pathelement location="${testsrc.dir}" />
             </src>

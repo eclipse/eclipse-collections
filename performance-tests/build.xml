@@ -12,8 +12,6 @@
 
 <project name="performance-tests" default="test" basedir=".">
     <property name="testsrc.dir" location="src/test/java" />
-    <property name="source.level" value="1.5" />
-    <property name="target.level" value="1.5" />
     <property name="src.dir" location="src/main/java" />
 
     <import file="../common-build.xml" />

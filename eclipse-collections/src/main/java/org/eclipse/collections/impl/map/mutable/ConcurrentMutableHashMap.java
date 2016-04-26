@@ -11,7 +11,6 @@
 package org.eclipse.collections.impl.map.mutable;
 
 import java.io.Serializable;
-import java.util.AbstractSet;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map;
@@ -31,7 +30,6 @@ import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.block.procedure.MapEntryToProcedure2;
 import org.eclipse.collections.impl.factory.Maps;
-import org.eclipse.collections.impl.tuple.ImmutableEntry;
 import org.eclipse.collections.impl.utility.Iterate;
 import org.eclipse.collections.impl.utility.internal.IterableIterate;
 
@@ -48,7 +46,6 @@ public final class ConcurrentMutableHashMap<K, V>
         implements ConcurrentMutableMap<K, V>, Serializable
 {
     private static final long serialVersionUID = 1L;
-    private static final String JAVA_SPECIFICATION_VERSION = System.getProperty("java.specification.version");
 
     private final ConcurrentMap<K, V> delegate;
 
@@ -176,10 +173,6 @@ public final class ConcurrentMutableHashMap<K, V>
 
     public Set<Entry<K, V>> entrySet()
     {
-        if ("1.5".equals(JAVA_SPECIFICATION_VERSION))
-        {
-            return new SafeEntrySetAdapter<K, V>(this.delegate.entrySet());
-        }
         return this.delegate.entrySet();
     }
 
@@ -378,48 +371,6 @@ public final class ConcurrentMutableHashMap<K, V>
     public V replace(K key, V value)
     {
         return this.delegate.replace(key, value);
-    }
-
-    private static final class SafeEntrySetAdapter<K, V>
-            extends AbstractSet<Entry<K, V>>
-    {
-        private final Set<Entry<K, V>> delegate;
-
-        private SafeEntrySetAdapter(Set<Entry<K, V>> newDelegate)
-        {
-            this.delegate = newDelegate;
-        }
-
-        @Override
-        public Iterator<Entry<K, V>> iterator()
-        {
-            return new Iterator<Entry<K, V>>()
-            {
-                private final Iterator<Entry<K, V>> entryIterator = SafeEntrySetAdapter.this.delegate.iterator();
-
-                public boolean hasNext()
-                {
-                    return this.entryIterator.hasNext();
-                }
-
-                public Entry<K, V> next()
-                {
-                    Entry<K, V> superNext = this.entryIterator.next();
-                    return ImmutableEntry.of(superNext.getKey(), superNext.getValue());
-                }
-
-                public void remove()
-                {
-                    this.entryIterator.remove();
-                }
-            };
-        }
-
-        @Override
-        public int size()
-        {
-            return this.delegate.size();
-        }
     }
 
     @Override

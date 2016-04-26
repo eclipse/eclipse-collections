@@ -268,7 +268,7 @@ public final class Comparators
 
         public int compare(SortedSetIterable<T> setA, SortedSetIterable<T> setB)
         {
-            int compareTo = Integer.valueOf(setA.size()).compareTo(setB.size());
+            int compareTo = Integer.compare(setA.size(), setB.size());
             if (compareTo == 0)
             {
                 return setA.compareTo(setB);

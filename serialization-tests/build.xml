@@ -13,8 +13,6 @@
 <project name="serialization-tests" default="test" basedir="." xmlns:ivy="antlib:org.apache.ivy.ant">
     <property name="src.dir" location="src/main/java" />
     <property name="testsrc.dir" location="src/test/java" />
-    <property name="source.level" value="1.5" />
-    <property name="target.level" value="1.5" />
 
     <import file="../common-build.xml" />
 
