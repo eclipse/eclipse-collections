@@ -22,7 +22,7 @@ import org.eclipse.collections.impl.block.predicate.DropIterablePredicate;
 import org.eclipse.collections.impl.block.procedure.IfObjectIntProcedure;
 import org.eclipse.collections.impl.block.procedure.IfProcedure;
 import org.eclipse.collections.impl.block.procedure.IfProcedureWith;
-import org.eclipse.collections.impl.lazy.iterator.DropIterator;
+import org.eclipse.collections.impl.lazy.iterator.SelectIterator;
 import org.eclipse.collections.impl.utility.Iterate;
 
 /**
@@ -88,6 +88,6 @@ public class DropIterable<T> extends AbstractLazyIterable<T>
 
     public Iterator<T> iterator()
     {
-        return new DropIterator<T>(this.adapted, this.count);
+        return new SelectIterator<T>(this.adapted.iterator(), new DropIterablePredicate<T>(this.count));
     }
 }

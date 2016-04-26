@@ -13,13 +13,17 @@ package org.eclipse.collections.impl.lazy.iterator;
 import java.util.Iterator;
 
 import net.jcip.annotations.Immutable;
+import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.impl.block.predicate.DropIterablePredicate;
 
 /**
  * Iterates over the elements of the iterator skipping the first count elements or the full iterator if the count is
  * non-positive.
+ *
+ * @deprecated in 8.0. Use {@link SelectIterator#SelectIterator(Iterable, Predicate)} with {@link DropIterablePredicate#DropIterablePredicate(int)} as a predicate instead.
  */
 @Immutable
+@Deprecated
 public final class DropIterator<T> implements Iterator<T>
 {
     private final Iterator<T> delegateIterator;
