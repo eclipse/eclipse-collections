@@ -43,6 +43,8 @@ import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.api.map.MutableMap;
+import org.eclipse.collections.api.map.primitive.ImmutableObjectDoubleMap;
+import org.eclipse.collections.api.map.primitive.ImmutableObjectLongMap;
 import org.eclipse.collections.api.multimap.set.ImmutableSetMultimap;
 import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.partition.set.PartitionImmutableSet;
@@ -338,6 +340,26 @@ public abstract class AbstractImmutableBiMap<K, V> extends AbstractBiMap<K, V> i
     public ImmutableSet<Pair<V, Integer>> zipWithIndex()
     {
         return this.delegate.zipWithIndex(new UnifiedSet<Pair<V, Integer>>()).toImmutable();
+    }
+
+    public <V1> ImmutableObjectLongMap<V1> sumByInt(Function<? super V, ? extends V1> groupBy, IntFunction<? super V> function)
+    {
+        return this.delegate.sumByInt(groupBy, function).toImmutable();
+    }
+
+    public <V1> ImmutableObjectDoubleMap<V1> sumByFloat(Function<? super V, ? extends V1> groupBy, FloatFunction<? super V> function)
+    {
+        return this.delegate.sumByFloat(groupBy, function).toImmutable();
+    }
+
+    public <V1> ImmutableObjectLongMap<V1> sumByLong(Function<? super V, ? extends V1> groupBy, LongFunction<? super V> function)
+    {
+        return this.delegate.sumByLong(groupBy, function).toImmutable();
+    }
+
+    public <V1> ImmutableObjectDoubleMap<V1> sumByDouble(Function<? super V, ? extends V1> groupBy, DoubleFunction<? super V> function)
+    {
+        return this.delegate.sumByDouble(groupBy, function).toImmutable();
     }
 
     public <VV> ImmutableSetMultimap<VV, V> groupBy(Function<? super V, ? extends VV> function)

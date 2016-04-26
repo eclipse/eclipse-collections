@@ -33,8 +33,8 @@ import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
 import org.eclipse.collections.api.list.ListIterable;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MutableMap;
-import org.eclipse.collections.api.map.primitive.ObjectDoubleMap;
-import org.eclipse.collections.api.map.primitive.ObjectLongMap;
+import org.eclipse.collections.api.map.primitive.MutableObjectDoubleMap;
+import org.eclipse.collections.api.map.primitive.MutableObjectLongMap;
 import org.eclipse.collections.api.multimap.MutableMultimap;
 import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.set.MutableSet;
@@ -47,9 +47,10 @@ import org.eclipse.collections.impl.block.procedure.FastListRejectProcedure;
 import org.eclipse.collections.impl.block.procedure.FastListSelectProcedure;
 import org.eclipse.collections.impl.block.procedure.MultimapPutProcedure;
 import org.eclipse.collections.impl.factory.Lists;
+import org.eclipse.collections.impl.factory.primitive.ObjectDoubleMaps;
+import org.eclipse.collections.impl.factory.primitive.ObjectLongMaps;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.map.mutable.primitive.ObjectDoubleHashMap;
-import org.eclipse.collections.impl.map.mutable.primitive.ObjectLongHashMap;
 import org.eclipse.collections.impl.partition.list.PartitionFastList;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.set.strategy.mutable.UnifiedSetWithHashingStrategy;
@@ -924,9 +925,9 @@ public final class InternalArrayIterate
         return sum;
     }
 
-    public static <V, T> ObjectLongMap<V> sumByInt(T[] array, int size, Function<T, V> groupBy, IntFunction<? super T> function)
+    public static <V, T> MutableObjectLongMap<V> sumByInt(T[] array, int size, Function<? super T, ? extends V> groupBy, IntFunction<? super T> function)
     {
-        ObjectLongHashMap<V> result = ObjectLongHashMap.newMap();
+        MutableObjectLongMap<V> result = ObjectLongMaps.mutable.empty();
         for (int i = 0; i < size; i++)
         {
             T item = array[i];
@@ -935,9 +936,9 @@ public final class InternalArrayIterate
         return result;
     }
 
-    public static <V, T> ObjectLongMap<V> sumByLong(T[] array, int size, Function<T, V> groupBy, LongFunction<? super T> function)
+    public static <V, T> MutableObjectLongMap<V> sumByLong(T[] array, int size, Function<? super T, ? extends V> groupBy, LongFunction<? super T> function)
     {
-        ObjectLongHashMap<V> result = ObjectLongHashMap.newMap();
+        MutableObjectLongMap<V> result = ObjectLongMaps.mutable.empty();
         for (int i = 0; i < size; i++)
         {
             T item = array[i];
@@ -946,10 +947,10 @@ public final class InternalArrayIterate
         return result;
     }
 
-    public static <V, T> ObjectDoubleMap<V> sumByFloat(T[] array, int size, Function<T, V> groupBy, FloatFunction<? super T> function)
+    public static <V, T> MutableObjectDoubleMap<V> sumByFloat(T[] array, int size, Function<? super T, ? extends V> groupBy, FloatFunction<? super T> function)
     {
-        ObjectDoubleHashMap<V> result = ObjectDoubleHashMap.newMap();
-        ObjectDoubleHashMap<V> groupKeyToCompensation = ObjectDoubleHashMap.newMap();
+        MutableObjectDoubleMap<V> result = ObjectDoubleMaps.mutable.empty();
+        MutableObjectDoubleMap<V> groupKeyToCompensation = ObjectDoubleMaps.mutable.empty();
         for (int i = 0; i < size; i++)
         {
             T item = array[i];
@@ -963,10 +964,10 @@ public final class InternalArrayIterate
         return result;
     }
 
-    public static <V, T> ObjectDoubleMap<V> sumByDouble(T[] array, int size, Function<T, V> groupBy, DoubleFunction<? super T> function)
+    public static <V, T> MutableObjectDoubleMap<V> sumByDouble(T[] array, int size, Function<? super T, ? extends V> groupBy, DoubleFunction<? super T> function)
     {
-        ObjectDoubleHashMap<V> result = ObjectDoubleHashMap.newMap();
-        ObjectDoubleHashMap<V> groupKeyToCompensation = ObjectDoubleHashMap.newMap();
+        MutableObjectDoubleMap<V> result = ObjectDoubleMaps.mutable.empty();
+        MutableObjectDoubleMap<V> groupKeyToCompensation = ObjectDoubleHashMap.newMap();
         for (int i = 0; i < size; i++)
         {
             T item = array[i];

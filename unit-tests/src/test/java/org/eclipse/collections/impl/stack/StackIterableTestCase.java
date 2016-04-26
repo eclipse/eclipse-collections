@@ -758,24 +758,6 @@ public abstract class StackIterableTestCase
     }
 
     @Test
-    public void sumByInt()
-    {
-        RichIterable<Integer> values = this.newStackFromTopToBottom(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
-        ObjectLongMap<Integer> result = values.sumByInt(i -> i % 2, e -> e);
-        Assert.assertEquals(25, result.get(1));
-        Assert.assertEquals(30, result.get(0));
-    }
-
-    @Test
-    public void sumByFloat()
-    {
-        RichIterable<Integer> values = this.newStackFromTopToBottom(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
-        ObjectDoubleMap<Integer> result = values.sumByFloat(f -> f % 2, e -> e);
-        Assert.assertEquals(25.0f, result.get(1), 0.0);
-        Assert.assertEquals(30.0f, result.get(0), 0.0);
-    }
-
-    @Test
     public void sumByFloatConsistentRounding()
     {
         MutableList<Integer> group1 = Interval.oneTo(100_000).toList().shuffleThis();
@@ -801,24 +783,6 @@ public abstract class StackIterableTestCase
                 1.082323233761663,
                 result.get(2),
                 1.0e-15);
-    }
-
-    @Test
-    public void sumByLong()
-    {
-        RichIterable<Integer> values = this.newStackFromTopToBottom(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
-        ObjectLongMap<Integer> result = values.sumByLong(l -> l % 2, e -> e);
-        Assert.assertEquals(25, result.get(1));
-        Assert.assertEquals(30, result.get(0));
-    }
-
-    @Test
-    public void sumByDouble()
-    {
-        RichIterable<Integer> values = this.newStackFromTopToBottom(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
-        ObjectDoubleMap<Integer> result = values.sumByDouble(d -> d % 2, e -> e);
-        Assert.assertEquals(25.0d, result.get(1), 0.0);
-        Assert.assertEquals(30.0d, result.get(0), 0.0);
     }
 
     @Test

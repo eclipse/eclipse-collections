@@ -104,4 +104,12 @@ public interface ImmutablePrimitiveObjectMap<V> extends PrimitiveObjectMap<V>
      */
     @Deprecated
     ImmutableSet<Pair<V, Integer>> zipWithIndex();
+
+    <VV> ImmutableObjectLongMap<VV> sumByInt(Function<? super V, ? extends VV> groupBy, IntFunction<? super V> function);
+
+    <VV> ImmutableObjectDoubleMap<VV> sumByFloat(Function<? super V, ? extends VV> groupBy, FloatFunction<? super V> function);
+
+    <VV> ImmutableObjectLongMap<VV> sumByLong(Function<? super V, ? extends VV> groupBy, LongFunction<? super V> function);
+
+    <VV> ImmutableObjectDoubleMap<VV> sumByDouble(Function<? super V, ? extends VV> groupBy, DoubleFunction<? super V> function);
 }

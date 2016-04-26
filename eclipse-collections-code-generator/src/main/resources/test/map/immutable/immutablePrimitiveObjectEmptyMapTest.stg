@@ -40,6 +40,8 @@ import org.eclipse.collections.impl.block.factory.Predicates2;
 import org.eclipse.collections.impl.block.factory.StringFunctions;
 import org.eclipse.collections.impl.block.factory.StringPredicates;
 import org.eclipse.collections.impl.block.factory.StringPredicates2;
+import org.eclipse.collections.impl.factory.primitive.ObjectDoubleMaps;
+import org.eclipse.collections.impl.factory.primitive.ObjectLongMaps;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.list.mutable.primitive.BooleanArrayList;
 import org.eclipse.collections.impl.list.mutable.primitive.ByteArrayList;
@@ -693,6 +695,34 @@ public class Immutable<name>ObjectEmptyMapTest extends AbstractImmutable<name>Ob
         sortedBag.addOccurrences(10, 2);
 
         Verify.assertSortedBagsEqual(TreeBag.newBagWith(Comparators.byFunction(function), 10, 10, 1, 1, 1), sortedBag);
+    }
+
+    @Test
+    public void sumByInt()
+    {
+        Immutable<name>ObjectMap\<Integer> map = new Immutable<name>ObjectEmptyMap\<>();
+        Assert.assertEquals(ObjectLongMaps.immutable.empty(), map.sumByInt(Object::toString, Integer::valueOf));
+    }
+
+    @Test
+    public void sumByFloat()
+    {
+        Immutable<name>ObjectMap\<Integer> map = new Immutable<name>ObjectEmptyMap\<>();
+        Assert.assertEquals(ObjectDoubleMaps.immutable.empty(), map.sumByFloat(Object::toString, Float::valueOf));
+    }
+
+    @Test
+    public void sumByLong()
+    {
+        Immutable<name>ObjectMap\<Integer> map = new Immutable<name>ObjectEmptyMap\<>();
+        Assert.assertEquals(ObjectLongMaps.immutable.empty(), map.sumByLong(Object::toString, Long::valueOf));
+    }
+
+    @Test
+    public void sumByDouble()
+    {
+        Immutable<name>ObjectMap\<Integer> map = new Immutable<name>ObjectEmptyMap\<>();
+        Assert.assertEquals(ObjectDoubleMaps.immutable.empty(), map.sumByDouble(Object::toString, Double::valueOf));
     }
 }
 

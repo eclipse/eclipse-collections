@@ -28,6 +28,7 @@ Bug fixes
 * Fixed return type of UnifiedSetWithHashingStrategy.groupByEach() method to preserve hashing strategy.
 * Fixed generics on Multimap.forEachKeyValue().
 * Fixed generics on Multimap.forEachKeyMultiValues().
+* Fixed method signature of sumByInt(), sumByLong(), sumByFloat() and sumByDouble(). Added missing covariant overrides, now calling these iteration patterns on mutable side will return a MutableObjectPrimitiveMap, on immutable side it will return ImmutableObjectPrimitiveMap.
 * Made primitive-object maps more bag-like. Change the filtering and transformation methods to return bags since they contain duplicates and no meaningful order.
 
 Acquiring Eclipse Collections

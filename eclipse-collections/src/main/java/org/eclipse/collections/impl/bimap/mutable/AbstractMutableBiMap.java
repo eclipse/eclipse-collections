@@ -48,6 +48,8 @@ import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.map.MutableMap;
+import org.eclipse.collections.api.map.primitive.MutableObjectDoubleMap;
+import org.eclipse.collections.api.map.primitive.MutableObjectLongMap;
 import org.eclipse.collections.api.multimap.set.MutableSetMultimap;
 import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.partition.set.PartitionMutableSet;
@@ -233,7 +235,7 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
         boolean containsKey = this.delegate.containsKey(key);
         if (containsValue)
         {
-            V oldValueToPreserve =  this.delegate.get(this.inverse.delegate.get(value));
+            V oldValueToPreserve = this.delegate.get(this.inverse.delegate.get(value));
             V put = this.delegate.put(key, oldValueToPreserve);
 
             if (containsKey)
@@ -623,6 +625,26 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
     public <K2, V2> MutableMap<K2, V2> aggregateInPlaceBy(Function<? super V, ? extends K2> groupBy, Function0<? extends V2> zeroValueFactory, Procedure2<? super V2, ? super V> mutatingAggregator)
     {
         return this.delegate.aggregateInPlaceBy(groupBy, zeroValueFactory, mutatingAggregator);
+    }
+
+    public <V1> MutableObjectLongMap<V1> sumByInt(Function<? super V, ? extends V1> groupBy, IntFunction<? super V> function)
+    {
+        return this.delegate.sumByInt(groupBy, function);
+    }
+
+    public <V1> MutableObjectDoubleMap<V1> sumByFloat(Function<? super V, ? extends V1> groupBy, FloatFunction<? super V> function)
+    {
+        return this.delegate.sumByFloat(groupBy, function);
+    }
+
+    public <V1> MutableObjectLongMap<V1> sumByLong(Function<? super V, ? extends V1> groupBy, LongFunction<? super V> function)
+    {
+        return this.delegate.sumByLong(groupBy, function);
+    }
+
+    public <V1> MutableObjectDoubleMap<V1> sumByDouble(Function<? super V, ? extends V1> groupBy, DoubleFunction<? super V> function)
+    {
+        return this.delegate.sumByDouble(groupBy, function);
     }
 
     public <S> MutableSet<S> selectInstancesOf(Class<S> clazz)

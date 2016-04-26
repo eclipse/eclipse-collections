@@ -835,7 +835,7 @@ public class SynchronizedRichIterable<T>
         }
     }
 
-    public <V> ObjectLongMap<V> sumByInt(Function<T, V> groupBy, IntFunction<? super T> function)
+    public <V> ObjectLongMap<V> sumByInt(Function<? super T, ? extends V> groupBy, IntFunction<? super T> function)
     {
         synchronized (this.lock)
         {
@@ -843,7 +843,7 @@ public class SynchronizedRichIterable<T>
         }
     }
 
-    public <V> ObjectDoubleMap<V> sumByFloat(Function<T, V> groupBy, FloatFunction<? super T> function)
+    public <V> ObjectDoubleMap<V> sumByFloat(Function<? super T, ? extends V> groupBy, FloatFunction<? super T> function)
     {
         synchronized (this.lock)
         {
@@ -851,7 +851,7 @@ public class SynchronizedRichIterable<T>
         }
     }
 
-    public <V> ObjectLongMap<V> sumByLong(Function<T, V> groupBy, LongFunction<? super T> function)
+    public <V> ObjectLongMap<V> sumByLong(Function<? super T, ? extends V> groupBy, LongFunction<? super T> function)
     {
         synchronized (this.lock)
         {
@@ -859,7 +859,7 @@ public class SynchronizedRichIterable<T>
         }
     }
 
-    public <V> ObjectDoubleMap<V> sumByDouble(Function<T, V> groupBy, DoubleFunction<? super T> function)
+    public <V> ObjectDoubleMap<V> sumByDouble(Function<? super T, ? extends V> groupBy, DoubleFunction<? super T> function)
     {
         synchronized (this.lock)
         {

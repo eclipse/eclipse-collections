@@ -50,8 +50,6 @@ import org.eclipse.collections.api.collection.primitive.MutableShortCollection;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MapIterable;
 import org.eclipse.collections.api.map.MutableMap;
-import org.eclipse.collections.api.map.primitive.ObjectDoubleMap;
-import org.eclipse.collections.api.map.primitive.ObjectLongMap;
 import org.eclipse.collections.api.map.sorted.MutableSortedMap;
 import org.eclipse.collections.api.multimap.MutableMultimap;
 import org.eclipse.collections.api.set.MutableSet;
@@ -735,38 +733,6 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         synchronized (this.lock)
         {
             return this.delegate.sumOfDouble(function);
-        }
-    }
-
-    public <V> ObjectLongMap<V> sumByInt(Function<T, V> groupBy, IntFunction<? super T> function)
-    {
-        synchronized (this.lock)
-        {
-            return this.delegate.sumByInt(groupBy, function);
-        }
-    }
-
-    public <V> ObjectDoubleMap<V> sumByFloat(Function<T, V> groupBy, FloatFunction<? super T> function)
-    {
-        synchronized (this.lock)
-        {
-            return this.delegate.sumByFloat(groupBy, function);
-        }
-    }
-
-    public <V> ObjectLongMap<V> sumByLong(Function<T, V> groupBy, LongFunction<? super T> function)
-    {
-        synchronized (this.lock)
-        {
-            return this.delegate.sumByLong(groupBy, function);
-        }
-    }
-
-    public <V> ObjectDoubleMap<V> sumByDouble(Function<T, V> groupBy, DoubleFunction<? super T> function)
-    {
-        synchronized (this.lock)
-        {
-            return this.delegate.sumByDouble(groupBy, function);
         }
     }
 

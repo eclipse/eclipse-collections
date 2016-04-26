@@ -12,6 +12,8 @@ package org.eclipse.collections.impl.stack.mutable;
 
 import java.util.EmptyStackException;
 
+import org.eclipse.collections.api.map.primitive.MutableObjectDoubleMap;
+import org.eclipse.collections.api.map.primitive.MutableObjectLongMap;
 import org.eclipse.collections.api.stack.MutableStack;
 import org.eclipse.collections.impl.factory.Stacks;
 import org.eclipse.collections.impl.list.mutable.FastList;
@@ -204,5 +206,37 @@ public abstract class MutableStackTestCase extends StackIterableTestCase
     public void asSynchronized()
     {
         Verify.assertInstanceOf(SynchronizedStack.class, this.newStackWith().asSynchronized());
+    }
+
+    public void sumByInt()
+    {
+        MutableStack<Integer> values = this.newStackFromTopToBottom(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+        MutableObjectLongMap<Integer> result = values.sumByInt(i -> i % 2, e -> e);
+        Assert.assertEquals(25, result.get(1));
+        Assert.assertEquals(30, result.get(0));
+    }
+
+    public void sumByFloat()
+    {
+        MutableStack<Integer> values = this.newStackFromTopToBottom(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+        MutableObjectDoubleMap<Integer> result = values.sumByFloat(f -> f % 2, e -> e);
+        Assert.assertEquals(25.0f, result.get(1), 0.0);
+        Assert.assertEquals(30.0f, result.get(0), 0.0);
+    }
+
+    public void sumByLong()
+    {
+        MutableStack<Integer> values = this.newStackFromTopToBottom(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+        MutableObjectLongMap<Integer> result = values.sumByLong(l -> l % 2, e -> e);
+        Assert.assertEquals(25, result.get(1));
+        Assert.assertEquals(30, result.get(0));
+    }
+
+    public void sumByDouble()
+    {
+        MutableStack<Integer> values = this.newStackFromTopToBottom(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+        MutableObjectDoubleMap<Integer> result = values.sumByDouble(d -> d % 2, e -> e);
+        Assert.assertEquals(25.0d, result.get(1), 0.0);
+        Assert.assertEquals(30.0d, result.get(0), 0.0);
     }
 }

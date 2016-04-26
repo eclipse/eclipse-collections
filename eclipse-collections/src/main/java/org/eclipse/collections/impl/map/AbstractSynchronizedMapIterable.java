@@ -17,11 +17,17 @@ import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.block.function.Function2;
+import org.eclipse.collections.api.block.function.primitive.DoubleFunction;
+import org.eclipse.collections.api.block.function.primitive.FloatFunction;
+import org.eclipse.collections.api.block.function.primitive.IntFunction;
+import org.eclipse.collections.api.block.function.primitive.LongFunction;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.MutableMapIterable;
+import org.eclipse.collections.api.map.primitive.MutableObjectDoubleMap;
+import org.eclipse.collections.api.map.primitive.MutableObjectLongMap;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.collection.AbstractSynchronizedRichIterable;
 import org.eclipse.collections.impl.tuple.AbstractImmutableEntry;
@@ -271,6 +277,38 @@ public abstract class AbstractSynchronizedMapIterable<K, V>
             Set<Entry<K, V>> entries = this.getDelegate().entrySet();
             Iterable<Pair<K, V>> pairs = Iterate.collect(entries, AbstractImmutableEntry.<K, V>getPairFunction());
             return LazyIterate.adapt(pairs);
+        }
+    }
+
+    public <V1> MutableObjectLongMap<V1> sumByInt(Function<? super V, ? extends V1> groupBy, IntFunction<? super V> function)
+    {
+        synchronized (this.lock)
+        {
+            return this.getDelegate().sumByInt(groupBy, function);
+        }
+    }
+
+    public <V1> MutableObjectDoubleMap<V1> sumByFloat(Function<? super V, ? extends V1> groupBy, FloatFunction<? super V> function)
+    {
+        synchronized (this.lock)
+        {
+            return this.getDelegate().sumByFloat(groupBy, function);
+        }
+    }
+
+    public <V1> MutableObjectLongMap<V1> sumByLong(Function<? super V, ? extends V1> groupBy, LongFunction<? super V> function)
+    {
+        synchronized (this.lock)
+        {
+            return this.getDelegate().sumByLong(groupBy, function);
+        }
+    }
+
+    public <V1> MutableObjectDoubleMap<V1> sumByDouble(Function<? super V, ? extends V1> groupBy, DoubleFunction<? super V> function)
+    {
+        synchronized (this.lock)
+        {
+            return this.getDelegate().sumByDouble(groupBy, function);
         }
     }
 }

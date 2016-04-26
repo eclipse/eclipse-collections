@@ -39,6 +39,8 @@ import org.eclipse.collections.api.collection.primitive.ImmutableFloatCollection
 import org.eclipse.collections.api.collection.primitive.ImmutableIntCollection;
 import org.eclipse.collections.api.collection.primitive.ImmutableLongCollection;
 import org.eclipse.collections.api.collection.primitive.ImmutableShortCollection;
+import org.eclipse.collections.api.map.primitive.ImmutableObjectDoubleMap;
+import org.eclipse.collections.api.map.primitive.ImmutableObjectLongMap;
 
 /**
  * This file was automatically generated from template file immutablePrimitiveObjectMap.stg.
