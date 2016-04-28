@@ -18,6 +18,7 @@ import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.map.ImmutableMapIterable;
 import org.eclipse.collections.api.multimap.set.ImmutableSetMultimap;
+import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.partition.set.PartitionImmutableSet;
 import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.api.tuple.Pair;
@@ -83,7 +84,15 @@ public interface ImmutableBiMap<K, V> extends BiMap<K, V>, ImmutableMapIterable<
 
     <VV> ImmutableBiMap<VV, V> groupByUniqueKey(Function<? super V, ? extends VV> function);
 
+    /**
+     * @deprecated in 8.0. Use {@link OrderedIterable#zip(Iterable)} instead.
+     */
+    @Deprecated
     <S> ImmutableSet<Pair<V, S>> zip(Iterable<S> that);
 
+    /**
+     * @deprecated in 8.0. Use {@link OrderedIterable#zipWithIndex()} instead.
+     */
+    @Deprecated
     ImmutableSet<Pair<V, Integer>> zipWithIndex();
 }

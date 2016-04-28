@@ -17,6 +17,7 @@ import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.map.MapIterable;
 import org.eclipse.collections.api.multimap.set.SetMultimap;
+import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.partition.set.PartitionUnsortedSet;
 import org.eclipse.collections.api.set.SetIterable;
 import org.eclipse.collections.api.tuple.Pair;
@@ -82,8 +83,16 @@ public interface BiMap<K, V> extends MapIterable<K, V>
 
     <S> SetIterable<S> selectInstancesOf(Class<S> clazz);
 
+    /**
+     * @deprecated in 8.0. Use {@link OrderedIterable#zip(Iterable)} instead.
+     */
+    @Deprecated
     <S> SetIterable<Pair<V, S>> zip(Iterable<S> that);
 
+    /**
+     * @deprecated in 8.0. Use {@link OrderedIterable#zipWithIndex()} instead.
+     */
+    @Deprecated
     SetIterable<Pair<V, Integer>> zipWithIndex();
 
     <V1> SetMultimap<V1, V> groupBy(Function<? super V, ? extends V1> function);

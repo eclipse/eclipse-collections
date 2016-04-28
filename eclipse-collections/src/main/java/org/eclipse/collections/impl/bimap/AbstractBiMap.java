@@ -54,6 +54,7 @@ import org.eclipse.collections.api.map.primitive.ObjectDoubleMap;
 import org.eclipse.collections.api.map.primitive.ObjectLongMap;
 import org.eclipse.collections.api.map.sorted.MutableSortedMap;
 import org.eclipse.collections.api.multimap.MutableMultimap;
+import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 import org.eclipse.collections.api.tuple.Pair;
@@ -523,11 +524,19 @@ public abstract class AbstractBiMap<K, V> implements BiMap<K, V>
         return this.getDelegate().rejectWith(predicate, parameter, targetCollection);
     }
 
+    /**
+     * @deprecated in 8.0. Use {@link OrderedIterable#zip(Iterable, R)} instead.
+     */
+    @Deprecated
     public <S, R extends Collection<Pair<V, S>>> R zip(Iterable<S> that, R target)
     {
         return this.getDelegate().zip(that, target);
     }
 
+    /**
+     * @deprecated in 8.0. Use {@link OrderedIterable#zipWithIndex(R)} instead.
+     */
+    @Deprecated
     public <R extends Collection<Pair<V, Integer>>> R zipWithIndex(R target)
     {
         return this.getDelegate().zipWithIndex(target);

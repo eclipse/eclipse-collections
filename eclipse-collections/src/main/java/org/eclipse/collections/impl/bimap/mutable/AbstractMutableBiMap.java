@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -49,6 +49,7 @@ import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.multimap.set.MutableSetMultimap;
+import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.partition.set.PartitionMutableSet;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.tuple.Pair;
@@ -404,7 +405,7 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
 
     public MutableBiMap<K, V> asSynchronized()
     {
-        throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".asSynchronized() not implemented yet");
+        return SynchronizedBiMap.of(this);
     }
 
     public MutableBiMap<K, V> asUnmodifiable()
@@ -543,6 +544,10 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
         return this.delegate.collectIf(predicate, function);
     }
 
+    /**
+     * @deprecated in 8.0. Use {@link OrderedIterable#zipWithIndex()} instead.
+     */
+    @Deprecated
     public MutableSet<Pair<V, Integer>> zipWithIndex()
     {
         return this.delegate.zipWithIndex(new UnifiedSet<Pair<V, Integer>>());
@@ -558,6 +563,10 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
         return this.delegate.groupByEach(function, new UnifiedSetMultimap<VV, V>());
     }
 
+    /**
+     * @deprecated in 8.0. Use {@link OrderedIterable#zip(Iterable)} instead.
+     */
+    @Deprecated
     public <S> MutableSet<Pair<V, S>> zip(Iterable<S> that)
     {
         return this.delegate.zip(that, new UnifiedSet<Pair<V, S>>());
