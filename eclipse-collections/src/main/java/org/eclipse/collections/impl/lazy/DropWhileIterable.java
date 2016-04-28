@@ -18,7 +18,7 @@ import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
 import org.eclipse.collections.impl.block.factory.Predicates;
-import org.eclipse.collections.impl.block.predicate.DropIterablePredicate;
+import org.eclipse.collections.impl.block.predicate.DropWhileIterablePredicate;
 import org.eclipse.collections.impl.block.procedure.IfObjectIntProcedure;
 import org.eclipse.collections.impl.block.procedure.IfProcedure;
 import org.eclipse.collections.impl.block.procedure.IfProcedureWith;
@@ -26,68 +26,69 @@ import org.eclipse.collections.impl.lazy.iterator.SelectIterator;
 import org.eclipse.collections.impl.utility.Iterate;
 
 /**
- * Iterates over the elements of the adapted Iterable skipping the first count elements or the full adapted Iterable if
- * the count is non-positive.
+ * Iterates over the elements of the adapted Iterable skipping the first elements until the predicate returns false.
+ *
+ * @since 8.0
  */
 @Immutable
-public class DropIterable<T> extends AbstractLazyIterable<T>
+public class DropWhileIterable<T> extends AbstractLazyIterable<T>
 {
     private final Iterable<T> adapted;
-    private final int count;
+    private final Predicate<? super T> predicate;
 
-    public DropIterable(Iterable<T> newAdapted, int count)
+    public DropWhileIterable(Iterable<T> newAdapted, Predicate<? super T> predicate)
     {
-        if (count < 0)
+        if (predicate == null)
         {
-            throw new IllegalArgumentException("Count must be greater than zero, but was: " + count);
+            throw new IllegalStateException("Predicate cannot be null");
         }
         this.adapted = newAdapted;
-        this.count = count;
+        this.predicate = predicate;
     }
 
     public void each(Procedure<? super T> procedure)
     {
-        Iterate.forEach(this.adapted, new IfProcedure<T>(new DropIterablePredicate<T>(this.count), procedure));
+        Iterate.forEach(this.adapted, new IfProcedure<T>(new DropWhileIterablePredicate<T>(this.predicate), procedure));
     }
 
     @Override
     public void forEachWithIndex(ObjectIntProcedure<? super T> objectIntProcedure)
     {
-        Iterate.forEach(this.adapted, new IfObjectIntProcedure<T>(new DropIterablePredicate<T>(this.count), objectIntProcedure));
+        Iterate.forEach(this.adapted, new IfObjectIntProcedure<T>(new DropWhileIterablePredicate<T>(this.predicate), objectIntProcedure));
     }
 
     @Override
     public <P> void forEachWith(Procedure2<? super T, ? super P> procedure, P parameter)
     {
-        Iterate.forEachWith(this.adapted, new IfProcedureWith<T, P>(new DropIterablePredicate<T>(this.count), procedure), parameter);
+        Iterate.forEachWith(this.adapted, new IfProcedureWith<T, P>(new DropWhileIterablePredicate<T>(this.predicate), procedure), parameter);
     }
 
     @Override
     public boolean anySatisfy(Predicate<? super T> predicate)
     {
-        return Iterate.anySatisfy(this.adapted, Predicates.and(new DropIterablePredicate<T>(this.count), predicate));
+        return Iterate.anySatisfy(this.adapted, Predicates.and(new DropWhileIterablePredicate<T>(this.predicate), predicate));
     }
 
     @Override
     public boolean allSatisfy(Predicate<? super T> predicate)
     {
-        return Iterate.allSatisfy(this.adapted, Predicates.or(Predicates.not(new DropIterablePredicate<T>(this.count)), predicate));
+        return Iterate.allSatisfy(this.adapted, Predicates.or(Predicates.not(new DropWhileIterablePredicate<T>(this.predicate)), predicate));
     }
 
     @Override
     public boolean noneSatisfy(Predicate<? super T> predicate)
     {
-        return Iterate.noneSatisfy(this.adapted, Predicates.and(new DropIterablePredicate<T>(this.count), predicate));
+        return Iterate.noneSatisfy(this.adapted, Predicates.and(new DropWhileIterablePredicate<T>(this.predicate), predicate));
     }
 
     @Override
     public T detect(Predicate<? super T> predicate)
     {
-        return Iterate.detect(this.adapted, Predicates.and(new DropIterablePredicate<T>(this.count), predicate));
+        return Iterate.detect(this.adapted, Predicates.and(new DropWhileIterablePredicate<T>(this.predicate), predicate));
     }
 
     public Iterator<T> iterator()
     {
-        return new SelectIterator<T>(this.adapted.iterator(), new DropIterablePredicate<T>(this.count));
+        return new SelectIterator<T>(this.adapted.iterator(), new DropWhileIterablePredicate<T>(this.predicate));
     }
 }

@@ -1052,7 +1052,7 @@ public final class Interval
     }
 
     @Override
-    public Interval take(int count)
+    public LazyIterable<Integer> take(int count)
     {
         if (count < 0)
         {
@@ -1063,7 +1063,7 @@ public final class Interval
         {
             return Interval.fromToBy(this.from, this.locationAfterN(count - 1), this.step);
         }
-        return Interval.fromToBy(this.from, this.from, this.step);
+        return Lists.immutable.<Integer>empty().asLazy();
     }
 
     @Override

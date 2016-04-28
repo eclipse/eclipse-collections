@@ -111,6 +111,18 @@ public class LazyIterableAdapter<T>
     }
 
     @Override
+    public LazyIterable<T> takeWhile(Predicate<? super T> predicate)
+    {
+        return LazyIterate.takeWhile(this.adapted, predicate);
+    }
+
+    @Override
+    public LazyIterable<T> dropWhile(Predicate<? super T> predicate)
+    {
+        return LazyIterate.dropWhile(this.adapted, predicate);
+    }
+
+    @Override
     public LazyIterable<T> distinct()
     {
         return LazyIterate.distinct(this.adapted);

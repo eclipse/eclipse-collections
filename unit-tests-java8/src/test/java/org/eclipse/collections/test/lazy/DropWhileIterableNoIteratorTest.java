@@ -12,7 +12,8 @@ package org.eclipse.collections.test.lazy;
 
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.list.MutableList;
-import org.eclipse.collections.impl.lazy.DropIterable;
+import org.eclipse.collections.impl.block.factory.Predicates;
+import org.eclipse.collections.impl.lazy.DropWhileIterable;
 import org.eclipse.collections.impl.test.junit.Java8Runner;
 import org.eclipse.collections.test.IterableTestCase;
 import org.eclipse.collections.test.LazyNoIteratorTestCase;
@@ -20,13 +21,15 @@ import org.eclipse.collections.test.list.mutable.FastListNoIterator;
 import org.junit.runner.RunWith;
 
 @RunWith(Java8Runner.class)
-public class DropIterableTestNoIteratorTest implements LazyNoIteratorTestCase
+public class DropWhileIterableNoIteratorTest implements LazyNoIteratorTestCase
 {
     @Override
     public <T> LazyIterable<T> newWith(T... elements)
     {
         MutableList<T> list = new FastListNoIterator<>();
+        T object = (T) new Object();
+        list.add(object);
         IterableTestCase.addAllTo(elements, list);
-        return new DropIterable<>(list, 0);
+        return new DropWhileIterable<>(list, each -> each == object);
     }
 }

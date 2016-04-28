@@ -8,6 +8,7 @@ New Functionality
 * Implemented Bags.mutable.ofAll(Iterable<? extends T> items) and Bags.mutable.withAll(Iterable<? extends T> items).
 * Implemented Multimap.keySet() to return an unmodifiable SetIterable of keys.
 * Implemented MutableMultimap.putAllPairs(Iterable<Pair<K, V>> keyValuePairs).
+* Implemented LazyIterable.takeWhile(Predicate<? super T> predicate) and LazyIterable.dropWhile(Predicate<? super T> predicate).
 * Pull up into() from LazyIterable to RichIterable.
 * Made StackIterable implement OrderedIterable.
 
@@ -19,6 +20,7 @@ Optimizations
 Bug fixes
 ---------
 
+* Fixed Interval.take(int count) when count is 0. Old behavior was to return an Interval of size 1. This is a behavior breaking change.
 * Changed AbstractSynchronizedRichIterable.groupByUniqueKey() to return MapIterable instead of MutableMap.
 * Changed AbstractMutableMapIterable.groupByUniqueKey() to return MutableMapIterable instead of MutableMap.
 * Changed MutableMapIterable.aggregateBy() to return MutableMap instead of MutableMapIterable.

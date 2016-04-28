@@ -377,6 +377,41 @@ public abstract class AbstractLazyIterableTestCase
     }
 
     @Test
+    public void takeWhile()
+    {
+        LazyIterable<Integer> lazyIterable = this.lazyIterable;
+        Assert.assertEquals(FastList.newList(), lazyIterable.takeWhile(Predicates.alwaysFalse()).toList());
+        Assert.assertEquals(FastList.newListWith(1), lazyIterable.takeWhile(each -> each <= 1).toList());
+        Assert.assertEquals(FastList.newListWith(1, 2), lazyIterable.takeWhile(each -> each <= 2).toList());
+        Assert.assertEquals(FastList.newListWith(1, 2, 3, 4, 5, 6), lazyIterable.takeWhile(each -> each <= lazyIterable.size() - 1).toList());
+        Assert.assertEquals(FastList.newListWith(1, 2, 3, 4, 5, 6, 7), lazyIterable.takeWhile(each -> each <= lazyIterable.size()).toList());
+        Assert.assertEquals(FastList.newListWith(1, 2, 3, 4, 5, 6, 7), lazyIterable.takeWhile(Predicates.alwaysTrue()).toList());
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void takeWhile_null_throws()
+    {
+        this.lazyIterable.takeWhile(null);
+    }
+
+    @Test
+    public void dropWhile()
+    {
+        LazyIterable<Integer> lazyIterable = this.lazyIterable;
+        Assert.assertEquals(FastList.newListWith(1, 2, 3, 4, 5, 6, 7), lazyIterable.dropWhile(Predicates.alwaysFalse()).toList());
+        Assert.assertEquals(FastList.newListWith(3, 4, 5, 6, 7), lazyIterable.dropWhile(each -> each <= 2).toList());
+        Assert.assertEquals(FastList.newListWith(7), lazyIterable.dropWhile(each -> each <= lazyIterable.size() - 1).toList());
+        Assert.assertEquals(FastList.newList(), lazyIterable.dropWhile(each -> each <= lazyIterable.size()).toList());
+        Assert.assertEquals(FastList.newList(), lazyIterable.dropWhile(Predicates.alwaysTrue()).toList());
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void dropWhile_null_throws()
+    {
+        this.lazyIterable.dropWhile(null);
+    }
+
+    @Test
     public void detect()
     {
         Assert.assertEquals(Integer.valueOf(3), this.lazyIterable.detect(Integer.valueOf(3)::equals));

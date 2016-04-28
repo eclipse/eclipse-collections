@@ -233,6 +233,16 @@ public abstract class AbstractLazyIterable<T>
         return LazyIterate.drop(this, count);
     }
 
+    public LazyIterable<T> takeWhile(Predicate<? super T> predicate)
+    {
+        return LazyIterate.takeWhile(this, predicate);
+    }
+
+    public LazyIterable<T> dropWhile(Predicate<? super T> predicate)
+    {
+        return LazyIterate.dropWhile(this, predicate);
+    }
+
     public LazyIterable<T> distinct()
     {
         return LazyIterate.distinct(this);
