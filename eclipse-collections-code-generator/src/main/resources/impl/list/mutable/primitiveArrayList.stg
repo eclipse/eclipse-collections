@@ -838,9 +838,8 @@ public class <name>ArrayList extends Abstract<name>Iterable
 
     public <name>ArrayList reverseThis()
     {
-        int size = this.items.length;
-        int endIndex = size - 1;
-        for (int i = 0; i \< size / 2; i++)
+        int endIndex = this.size - 1;
+        for (int i = 0; i \< this.size / 2; i++)
         {
             <type> tempSwapValue = this.items[i];
             this.items[i] = this.items[endIndex - i];

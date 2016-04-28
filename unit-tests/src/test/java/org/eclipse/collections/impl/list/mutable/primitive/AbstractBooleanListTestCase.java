@@ -302,6 +302,10 @@ public abstract class AbstractBooleanListTestCase extends AbstractMutableBoolean
         Assert.assertEquals(BooleanArrayList.newListWith(true, true, false, false), this.newWith(false, false, true, true).reverseThis());
         MutableBooleanList originalList = this.newWith(true, true, false, false);
         Assert.assertSame(originalList, originalList.reverseThis());
+        MutableBooleanList originalList2 = this.newWith(true, false, false);
+        originalList2.removeAtIndex(2);
+        Assert.assertEquals(originalList2, BooleanArrayList.newListWith(true, false));
+        Assert.assertEquals(originalList2.reverseThis(), BooleanArrayList.newListWith(false, true));
     }
 
     @Test
