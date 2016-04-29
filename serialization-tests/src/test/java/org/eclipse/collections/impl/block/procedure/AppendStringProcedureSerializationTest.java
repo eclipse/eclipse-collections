@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -23,6 +23,6 @@ public class AppendStringProcedureSerializationTest
                 "rO0ABXNyAEJvcmcuZWNsaXBzZS5jb2xsZWN0aW9ucy5pbXBsLmJsb2NrLnByb2NlZHVyZS5BcHBl\n"
                         + "bmRTdHJpbmdQcm9jZWR1cmUAAAAAAAAAAQIAA1oABWZpcnN0TAAKYXBwZW5kYWJsZXQAFkxqYXZh\n"
                         + "L2xhbmcvQXBwZW5kYWJsZTtMAAlzZXBhcmF0b3J0ABJMamF2YS9sYW5nL1N0cmluZzt4cAFwcA==\n",
-                new AppendStringProcedure<Object>(null, null));
+                new AppendStringProcedure<>(null, null));
     }
 }

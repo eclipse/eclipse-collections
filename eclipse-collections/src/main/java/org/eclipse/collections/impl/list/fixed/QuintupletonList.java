@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -55,7 +55,7 @@ final class QuintupletonList<T>
     @Override
     public SextupletonList<T> with(T value)
     {
-        return new SextupletonList<T>(this.element1, this.element2, this.element3, this.element4, this.element5, value);
+        return new SextupletonList<>(this.element1, this.element2, this.element3, this.element4, this.element5, value);
     }
 
     // Weird implementation of clone() is ok on final classes
@@ -63,7 +63,7 @@ final class QuintupletonList<T>
     @Override
     public QuintupletonList<T> clone()
     {
-        return new QuintupletonList<T>(this.element1, this.element2, this.element3, this.element4, this.element5);
+        return new QuintupletonList<>(this.element1, this.element2, this.element3, this.element4, this.element5);
     }
 
     public int size()

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -77,7 +77,7 @@ class SingletonSet<T>
     @Override
     public SingletonSet<T> clone()
     {
-        return new SingletonSet<T>(this.element1);
+        return new SingletonSet<>(this.element1);
     }
 
     @Override
@@ -144,14 +144,14 @@ class SingletonSet<T>
 
     public MutableSet<T> with(T element)
     {
-        return this.contains(element) ? this : new DoubletonSet<T>(this.element1, element);
+        return this.contains(element) ? this : new DoubletonSet<>(this.element1, element);
     }
 
     public MutableSet<T> without(T element)
     {
         if (Comparators.nullSafeEquals(element, this.element1))
         {
-            return new EmptySet<T>();
+            return new EmptySet<>();
         }
         return this;
     }

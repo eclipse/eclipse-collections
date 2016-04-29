@@ -108,22 +108,22 @@ public final class MultiReaderHashBag<T>
 
     public static <T> MultiReaderHashBag<T> newBag()
     {
-        return new MultiReaderHashBag<T>(HashBag.<T>newBag());
+        return new MultiReaderHashBag<>(HashBag.<T>newBag());
     }
 
     public static <T> MultiReaderHashBag<T> newBag(int capacity)
     {
-        return new MultiReaderHashBag<T>(HashBag.<T>newBag(capacity));
+        return new MultiReaderHashBag<>(HashBag.<T>newBag(capacity));
     }
 
     public static <T> MultiReaderHashBag<T> newBag(Iterable<T> iterable)
     {
-        return new MultiReaderHashBag<T>(HashBag.newBag(iterable));
+        return new MultiReaderHashBag<>(HashBag.newBag(iterable));
     }
 
     public static <T> MultiReaderHashBag<T> newBagWith(T... elements)
     {
-        return new MultiReaderHashBag<T>(HashBag.newBagWith(elements));
+        return new MultiReaderHashBag<>(HashBag.newBagWith(elements));
     }
 
     @Override
@@ -140,12 +140,12 @@ public final class MultiReaderHashBag<T>
 
     UntouchableMutableBag<T> asReadUntouchable()
     {
-        return new UntouchableMutableBag<T>(this.delegate.asUnmodifiable());
+        return new UntouchableMutableBag<>(this.delegate.asUnmodifiable());
     }
 
     UntouchableMutableBag<T> asWriteUntouchable()
     {
-        return new UntouchableMutableBag<T>(this.delegate);
+        return new UntouchableMutableBag<>(this.delegate);
     }
 
     public void withReadLockAndDelegate(Procedure<MutableBag<T>> procedure)
@@ -849,7 +849,7 @@ public final class MultiReaderHashBag<T>
 
         public Iterator<T> iterator()
         {
-            UntouchableIterator<T> iterator = new UntouchableIterator<T>(this.delegate.iterator());
+            UntouchableIterator<T> iterator = new UntouchableIterator<>(this.delegate.iterator());
             this.requestedIterators.add(iterator);
             return iterator;
         }

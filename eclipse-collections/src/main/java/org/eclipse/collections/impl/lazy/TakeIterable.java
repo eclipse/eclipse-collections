@@ -85,6 +85,6 @@ public class TakeIterable<T> extends AbstractLazyIterable<T>
 
     public Iterator<T> iterator()
     {
-        return new TakeIterator<T>(this.adapted, this.count);
+        return new TakeIterator<>(this.adapted, this.count);
     }
 }

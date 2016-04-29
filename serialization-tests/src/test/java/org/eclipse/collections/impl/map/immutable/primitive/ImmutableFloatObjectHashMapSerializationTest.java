@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -25,6 +25,6 @@ public class ImmutableFloatObjectHashMapSerializationTest
                         + "aXZlLkFic3RyYWN0SW1tdXRhYmxlRmxvYXRPYmplY3RNYXAkSW1tdXRhYmxlRmxvYXRPYmplY3RN\n"
                         + "YXBTZXJpYWxpemF0aW9uUHJveHkAAAAAAAAAAQwAAHhwdwgAAAACP4AAAHQAATF3BEAAAAB0AAEy\n"
                         + "eA==",
-                new ImmutableFloatObjectHashMap<String>(FloatObjectHashMap.newWithKeysValues(1.0f, "1", 2.0f, "2")));
+                new ImmutableFloatObjectHashMap<>(FloatObjectHashMap.newWithKeysValues(1.0f, "1", 2.0f, "2")));
     }
 }

@@ -101,7 +101,7 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
 
     protected static <T> boolean anySatisfy(AbstractParallelIterable<T, ? extends RootBatch<T>> parallelIterable, final Predicate<? super T> predicate)
     {
-        final CompletionService<Boolean> completionService = new ExecutorCompletionService<Boolean>(parallelIterable.getExecutorService());
+        final CompletionService<Boolean> completionService = new ExecutorCompletionService<>(parallelIterable.getExecutorService());
         MutableSet<Future<Boolean>> futures = parallelIterable.split().collect(new Function<RootBatch<T>, Future<Boolean>>()
         {
             public Future<Boolean> valueOf(final RootBatch<T> batch)
@@ -140,7 +140,7 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
 
     protected static <T> boolean allSatisfy(AbstractParallelIterable<T, ? extends RootBatch<T>> parallelIterable, final Predicate<? super T> predicate)
     {
-        final CompletionService<Boolean> completionService = new ExecutorCompletionService<Boolean>(parallelIterable.getExecutorService());
+        final CompletionService<Boolean> completionService = new ExecutorCompletionService<>(parallelIterable.getExecutorService());
         MutableSet<Future<Boolean>> futures = parallelIterable.split().collect(new Function<RootBatch<T>, Future<Boolean>>()
         {
             public Future<Boolean> valueOf(final RootBatch<T> batch)
@@ -277,7 +277,7 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
             }
         }).toList();
 
-        final ExecutorCompletionService<V> completionService = new ExecutorCompletionService<V>(this.getExecutorService());
+        final ExecutorCompletionService<V> completionService = new ExecutorCompletionService<>(this.getExecutorService());
         callables.each(completionService::submit);
 
         int numTasks = callables.size();
@@ -370,7 +370,7 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
             }
         }).toList();
 
-        final ExecutorCompletionService<T> completionService = new ExecutorCompletionService<T>(this.getExecutorService());
+        final ExecutorCompletionService<T> completionService = new ExecutorCompletionService<>(this.getExecutorService());
         callables.each(completionService::submit);
 
         try
@@ -542,7 +542,7 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
             batch.forEach(CollectionAddProcedure.on(list));
             return list;
         };
-        MutableList<T> state = new CompositeFastList<T>();
+        MutableList<T> state = new CompositeFastList<>();
         this.collectCombine(map, MutableList<T>::addAll, state);
         return state;
     }
@@ -620,7 +620,7 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
             Function<? super T, ? extends NV> valueFunction)
     {
         MutableMap<NK, NV> map = UnifiedMap.<NK, NV>newMap().asSynchronized();
-        this.forEach(new MapCollectProcedure<T, NK, NV>(map, keyFunction, valueFunction));
+        this.forEach(new MapCollectProcedure<>(map, keyFunction, valueFunction));
         return map;
     }
 
@@ -629,7 +629,7 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
             Function<? super T, ? extends NV> valueFunction)
     {
         MutableSortedMap<NK, NV> sortedMap = TreeSortedMap.<NK, NV>newMap().asSynchronized();
-        this.forEach(new MapCollectProcedure<T, NK, NV>(sortedMap, keyFunction, valueFunction));
+        this.forEach(new MapCollectProcedure<>(sortedMap, keyFunction, valueFunction));
         return sortedMap;
     }
 
@@ -638,7 +638,7 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
             Function<? super T, ? extends NV> valueFunction)
     {
         MutableSortedMap<NK, NV> sortedMap = TreeSortedMap.<NK, NV>newMap(comparator).asSynchronized();
-        this.forEach(new MapCollectProcedure<T, NK, NV>(sortedMap, keyFunction, valueFunction));
+        this.forEach(new MapCollectProcedure<>(sortedMap, keyFunction, valueFunction));
         return sortedMap;
     }
 
@@ -648,7 +648,7 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
             Function2<? super V, ? super T, ? extends V> nonMutatingAggregator)
     {
         MutableMap<K, V> map = ConcurrentHashMapUnsafe.newMap();
-        this.forEach(new NonMutatingAggregationProcedure<T, K, V>(map, groupBy, zeroValueFactory, nonMutatingAggregator));
+        this.forEach(new NonMutatingAggregationProcedure<>(map, groupBy, zeroValueFactory, nonMutatingAggregator));
         return map;
     }
 
@@ -658,7 +658,7 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
             Procedure2<? super V, ? super T> mutatingAggregator)
     {
         MutableMap<K, V> map = ConcurrentHashMapUnsafe.newMap();
-        this.forEach(new MutatingAggregationProcedure<T, K, V>(map, groupBy, zeroValueFactory, mutatingAggregator));
+        this.forEach(new MutatingAggregationProcedure<>(map, groupBy, zeroValueFactory, mutatingAggregator));
         return map;
     }
 

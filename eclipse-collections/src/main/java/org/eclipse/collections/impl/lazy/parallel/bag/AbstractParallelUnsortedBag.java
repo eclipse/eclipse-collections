@@ -43,7 +43,7 @@ public abstract class AbstractParallelUnsortedBag<T, B extends UnsortedBagBatch<
 
     public ParallelUnsortedBag<T> select(Predicate<? super T> predicate)
     {
-        return new ParallelSelectUnsortedBag<T>(this, predicate);
+        return new ParallelSelectUnsortedBag<>(this, predicate);
     }
 
     public <P> ParallelUnsortedBag<T> selectWith(Predicate2<? super T, ? super P> predicate, P parameter)
@@ -68,7 +68,7 @@ public abstract class AbstractParallelUnsortedBag<T, B extends UnsortedBagBatch<
 
     public <V> ParallelUnsortedBag<V> collect(Function<? super T, ? extends V> function)
     {
-        return new ParallelCollectUnsortedBag<T, V>(this, function);
+        return new ParallelCollectUnsortedBag<>(this, function);
     }
 
     public <P, V> ParallelUnsortedBag<V> collectWith(Function2<? super T, ? super P, ? extends V> function, P parameter)

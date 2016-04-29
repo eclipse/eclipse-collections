@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -22,8 +22,8 @@ import org.eclipse.collections.impl.block.procedure.checked.ThrowingProcedure2;
  */
 public final class Procedures2
 {
-    public static final Procedure2<?, ?> ADD_TO_COLLECTION = new AddToCollection<Object>();
-    public static final Procedure2<?, ?> REMOVE_FROM_COLLECTION = new RemoveFromCollection<Object>();
+    public static final Procedure2<?, ?> ADD_TO_COLLECTION = new AddToCollection<>();
+    public static final Procedure2<?, ?> REMOVE_FROM_COLLECTION = new RemoveFromCollection<>();
 
     private Procedures2()
     {
@@ -32,12 +32,12 @@ public final class Procedures2
 
     public static <T, P> Procedure2<T, P> throwing(ThrowingProcedure2<T, P> throwingProcedure2)
     {
-        return new ThrowingProcedure2Adapter<T, P>(throwingProcedure2);
+        return new ThrowingProcedure2Adapter<>(throwingProcedure2);
     }
 
     public static <T, P> Procedure2<T, P> fromProcedure(Procedure<? super T> procedure)
     {
-        return new ProcedureAdapter<T, P>(procedure);
+        return new ProcedureAdapter<>(procedure);
     }
 
     public static <T> Procedure2<T, Collection<T>> addToCollection()

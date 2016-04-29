@@ -63,27 +63,27 @@ public final class SynchronizedPutHashBagMultimap<K, V>
 
     public static <K, V> SynchronizedPutHashBagMultimap<K, V> newMultimap()
     {
-        return new SynchronizedPutHashBagMultimap<K, V>();
+        return new SynchronizedPutHashBagMultimap<>();
     }
 
     public static <K, V> SynchronizedPutHashBagMultimap<K, V> newMultimap(int initialCapacity, float loadFactor, int concurrencyLevel)
     {
-        return new SynchronizedPutHashBagMultimap<K, V>(initialCapacity);
+        return new SynchronizedPutHashBagMultimap<>(initialCapacity);
     }
 
     public static <K, V> SynchronizedPutHashBagMultimap<K, V> newMultimap(Multimap<? extends K, ? extends V> multimap)
     {
-        return new SynchronizedPutHashBagMultimap<K, V>(multimap);
+        return new SynchronizedPutHashBagMultimap<>(multimap);
     }
 
     public static <K, V> SynchronizedPutHashBagMultimap<K, V> newMultimap(Pair<K, V>... pairs)
     {
-        return new SynchronizedPutHashBagMultimap<K, V>(pairs);
+        return new SynchronizedPutHashBagMultimap<>(pairs);
     }
 
     public static <K, V> SynchronizedPutHashBagMultimap<K, V> newMultimap(Iterable<Pair<K, V>> inputIterable)
     {
-        return new SynchronizedPutHashBagMultimap<K, V>(inputIterable);
+        return new SynchronizedPutHashBagMultimap<>(inputIterable);
     }
 
     @Override
@@ -94,12 +94,12 @@ public final class SynchronizedPutHashBagMultimap<K, V>
 
     public SynchronizedPutHashBagMultimap<K, V> newEmpty()
     {
-        return new SynchronizedPutHashBagMultimap<K, V>();
+        return new SynchronizedPutHashBagMultimap<>();
     }
 
     public MutableBagMultimap<K, V> toMutable()
     {
-        return new SynchronizedPutHashBagMultimap<K, V>(this);
+        return new SynchronizedPutHashBagMultimap<>(this);
     }
 
     public ImmutableBagMultimap<K, V> toImmutable()
@@ -108,7 +108,7 @@ public final class SynchronizedPutHashBagMultimap<K, V>
 
         this.map.forEachKeyValue((key, bag) -> map.put(key, bag.toImmutable()));
 
-        return new ImmutableBagMultimapImpl<K, V>(map);
+        return new ImmutableBagMultimapImpl<>(map);
     }
 
     public HashBagMultimap<K, V> selectKeysValues(Predicate2<? super K, ? super V> predicate)

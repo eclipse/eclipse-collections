@@ -45,7 +45,7 @@ public abstract class AbstractMutableListMultimap<K, V> extends AbstractMutableM
 
     public MutableListMultimap<K, V> toMutable()
     {
-        return new FastListMultimap<K, V>(this);
+        return new FastListMultimap<>(this);
     }
 
     public ImmutableListMultimap<K, V> toImmutable()
@@ -54,7 +54,7 @@ public abstract class AbstractMutableListMultimap<K, V> extends AbstractMutableM
 
         this.map.forEachKeyValue((key, list) -> map.put(key, list.toImmutable()));
 
-        return new ImmutableListMultimapImpl<K, V>(map);
+        return new ImmutableListMultimapImpl<>(map);
     }
 
     public <K2, V2> HashBagMultimap<K2, V2> collectKeysValues(Function2<? super K, ? super V, Pair<K2, V2>> function)

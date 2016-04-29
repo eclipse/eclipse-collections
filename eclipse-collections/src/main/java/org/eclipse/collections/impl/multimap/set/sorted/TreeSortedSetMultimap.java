@@ -73,27 +73,27 @@ public final class TreeSortedSetMultimap<K, V>
 
     public static <K, V> TreeSortedSetMultimap<K, V> newMultimap()
     {
-        return new TreeSortedSetMultimap<K, V>();
+        return new TreeSortedSetMultimap<>();
     }
 
     public static <K, V> TreeSortedSetMultimap<K, V> newMultimap(Multimap<? extends K, ? extends V> multimap)
     {
-        return new TreeSortedSetMultimap<K, V>(multimap);
+        return new TreeSortedSetMultimap<>(multimap);
     }
 
     public static <K, V> TreeSortedSetMultimap<K, V> newMultimap(Comparator<? super V> comparator)
     {
-        return new TreeSortedSetMultimap<K, V>(comparator);
+        return new TreeSortedSetMultimap<>(comparator);
     }
 
     public static <K, V> TreeSortedSetMultimap<K, V> newMultimap(Pair<K, V>... pairs)
     {
-        return new TreeSortedSetMultimap<K, V>(pairs);
+        return new TreeSortedSetMultimap<>(pairs);
     }
 
     public static <K, V> TreeSortedSetMultimap<K, V> newMultimap(Iterable<Pair<K, V>> inputIterable)
     {
-        return new TreeSortedSetMultimap<K, V>(inputIterable);
+        return new TreeSortedSetMultimap<>(inputIterable);
     }
 
     @Override
@@ -111,12 +111,12 @@ public final class TreeSortedSetMultimap<K, V>
     @Override
     protected MutableSortedSet<V> createCollection()
     {
-        return new TreeSortedSet<V>(this.comparator);
+        return new TreeSortedSet<>(this.comparator);
     }
 
     public TreeSortedSetMultimap<K, V> newEmpty()
     {
-        return new TreeSortedSetMultimap<K, V>(this.comparator());
+        return new TreeSortedSetMultimap<>(this.comparator());
     }
 
     public Comparator<? super V> comparator()
@@ -126,7 +126,7 @@ public final class TreeSortedSetMultimap<K, V>
 
     public MutableSortedSetMultimap<K, V> toMutable()
     {
-        return new TreeSortedSetMultimap<K, V>(this);
+        return new TreeSortedSetMultimap<>(this);
     }
 
     public ImmutableSortedSetMultimap<K, V> toImmutable()
@@ -134,7 +134,7 @@ public final class TreeSortedSetMultimap<K, V>
         final MutableMap<K, ImmutableSortedSet<V>> map = UnifiedMap.newMap();
 
         this.map.forEachKeyValue((key, set) -> map.put(key, set.toImmutable()));
-        return new ImmutableSortedSetMultimapImpl<K, V>(map, this.comparator());
+        return new ImmutableSortedSetMultimapImpl<>(map, this.comparator());
     }
 
     @Override

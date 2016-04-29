@@ -632,14 +632,14 @@ public class VerifyTest
     {
         TreeSortedSet<Integer> integers = TreeSortedSet.newSetWith(Comparators.<Integer>reverseNaturalOrder(), 1, 2, 3, 4);
         Verify.assertSortedSetsEqual(null, null);
-        Verify.assertSortedSetsEqual(TreeSortedSet.newSet(), new TreeSet<Object>());
-        Verify.assertSortedSetsEqual(TreeSortedSet.newSetWith(1, 2, 3), new TreeSet<Integer>(FastList.newListWith(1, 2, 3)));
-        Verify.assertSortedSetsEqual(new TreeSet<Integer>(integers), integers);
+        Verify.assertSortedSetsEqual(TreeSortedSet.newSet(), new TreeSet<>());
+        Verify.assertSortedSetsEqual(TreeSortedSet.newSetWith(1, 2, 3), new TreeSet<>(FastList.newListWith(1, 2, 3)));
+        Verify.assertSortedSetsEqual(new TreeSet<>(integers), integers);
         Verify.assertSortedSetsEqual(TreeSortedSet.newSet(integers), integers);
 
         try
         {
-            Verify.assertSortedSetsEqual(TreeSortedSet.newSetWith(1, 2, 3), new TreeSet<Object>(FastList.newListWith()));
+            Verify.assertSortedSetsEqual(TreeSortedSet.newSetWith(1, 2, 3), new TreeSet<>(FastList.newListWith()));
             Assert.fail();
         }
         catch (AssertionError e)

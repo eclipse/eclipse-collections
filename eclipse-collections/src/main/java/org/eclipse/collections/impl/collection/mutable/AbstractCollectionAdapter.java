@@ -817,7 +817,7 @@ public abstract class AbstractCollectionAdapter<T>
             Procedure2<? super V, ? super T> mutatingAggregator)
     {
         MutableMap<K, V> map = UnifiedMap.newMap();
-        this.forEach(new MutatingAggregationProcedure<T, K, V>(map, groupBy, zeroValueFactory, mutatingAggregator));
+        this.forEach(new MutatingAggregationProcedure<>(map, groupBy, zeroValueFactory, mutatingAggregator));
         return map;
     }
 
@@ -827,7 +827,7 @@ public abstract class AbstractCollectionAdapter<T>
             Function2<? super V, ? super T, ? extends V> nonMutatingAggregator)
     {
         MutableMap<K, V> map = UnifiedMap.newMap();
-        this.forEach(new NonMutatingAggregationProcedure<T, K, V>(map, groupBy, zeroValueFactory, nonMutatingAggregator));
+        this.forEach(new NonMutatingAggregationProcedure<>(map, groupBy, zeroValueFactory, nonMutatingAggregator));
         return map;
     }
 }

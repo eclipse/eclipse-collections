@@ -2821,7 +2821,7 @@ public final class Verify extends Assert
 
                 if (!actualMultimap.containsKeyAndValue(expectedKey, expectedValue))
                 {
-                    missingEntries.add(new ImmutableEntry<Object, Object>(expectedKey, expectedValue));
+                    missingEntries.add(new ImmutableEntry<>(expectedKey, expectedValue));
                 }
             }
 

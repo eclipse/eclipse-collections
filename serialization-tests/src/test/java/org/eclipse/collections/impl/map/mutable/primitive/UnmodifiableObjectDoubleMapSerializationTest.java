@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -25,6 +25,6 @@ public class UnmodifiableObjectDoubleMapSerializationTest
                         + "aXBzZS9jb2xsZWN0aW9ucy9hcGkvbWFwL3ByaW1pdGl2ZS9NdXRhYmxlT2JqZWN0RG91YmxlTWFw\n"
                         + "O3hwc3IARm9yZy5lY2xpcHNlLmNvbGxlY3Rpb25zLmltcGwubWFwLm11dGFibGUucHJpbWl0aXZl\n"
                         + "Lk9iamVjdERvdWJsZUhhc2hNYXAAAAAAAAAAAQwAAHhwdwQAAAAAeA==",
-                new UnmodifiableObjectDoubleMap<Object>(new ObjectDoubleHashMap<Object>()));
+                new UnmodifiableObjectDoubleMap<>(new ObjectDoubleHashMap<>()));
     }
 }

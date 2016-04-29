@@ -110,7 +110,7 @@ class ImmutableSortedBagImpl<T>
         {
             int[] occurrences = this.occurrences.clone();
             occurrences[index] += 1;
-            return new ImmutableSortedBagImpl<T>(this.elements.clone(), occurrences, this.comparator);
+            return new ImmutableSortedBagImpl<>(this.elements.clone(), occurrences, this.comparator);
         }
 
         int insertionPoint = (index + 1) * -1;
@@ -127,7 +127,7 @@ class ImmutableSortedBagImpl<T>
         System.arraycopy(this.elements, insertionPoint, elements, insertionPoint + 1, this.elements.length - insertionPoint);
         System.arraycopy(this.occurrences, insertionPoint, occurrences, insertionPoint + 1, this.occurrences.length - insertionPoint);
 
-        return new ImmutableSortedBagImpl<T>(elements, occurrences, this.comparator);
+        return new ImmutableSortedBagImpl<>(elements, occurrences, this.comparator);
     }
 
     public ImmutableSortedBag<T> newWithout(T element)
@@ -143,7 +143,7 @@ class ImmutableSortedBagImpl<T>
         {
             int[] occurrences = this.occurrences.clone();
             occurrences[index] -= 1;
-            return new ImmutableSortedBagImpl<T>(this.elements.clone(), occurrences, this.comparator);
+            return new ImmutableSortedBagImpl<>(this.elements.clone(), occurrences, this.comparator);
         }
 
         T[] elements = (T[]) new Object[this.elements.length - 1];
@@ -155,7 +155,7 @@ class ImmutableSortedBagImpl<T>
         System.arraycopy(this.elements, index + 1, elements, index, elements.length - index);
         System.arraycopy(this.occurrences, index + 1, occurrences, index, occurrences.length - index);
 
-        return new ImmutableSortedBagImpl<T>(elements, occurrences, this.comparator);
+        return new ImmutableSortedBagImpl<>(elements, occurrences, this.comparator);
     }
 
     public ImmutableSortedBag<T> newWithAll(Iterable<? extends T> elements)
@@ -262,7 +262,7 @@ class ImmutableSortedBagImpl<T>
 
     public PartitionImmutableSortedBag<T> partitionWhile(Predicate<? super T> predicate)
     {
-        PartitionTreeBag<T> result = new PartitionTreeBag<T>(this.comparator());
+        PartitionTreeBag<T> result = new PartitionTreeBag<>(this.comparator());
         MutableSortedBag<T> selected = result.getSelected();
         MutableSortedBag<T> rejected = result.getRejected();
 
@@ -275,7 +275,7 @@ class ImmutableSortedBagImpl<T>
         {
             rejected.addOccurrences(this.elements[j], this.occurrences[j]);
         }
-        return new PartitionImmutableSortedBagImpl<T>(result);
+        return new PartitionImmutableSortedBagImpl<>(result);
     }
 
     public void forEachWithOccurrences(ObjectIntProcedure<? super T> procedure)

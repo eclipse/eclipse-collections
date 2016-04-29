@@ -161,12 +161,12 @@ public class ConcurrentHashMapUnsafe<K, V>
 
     public static <K, V> ConcurrentHashMapUnsafe<K, V> newMap()
     {
-        return new ConcurrentHashMapUnsafe<K, V>();
+        return new ConcurrentHashMapUnsafe<>();
     }
 
     public static <K, V> ConcurrentHashMapUnsafe<K, V> newMap(int newSize)
     {
-        return new ConcurrentHashMapUnsafe<K, V>(newSize);
+        return new ConcurrentHashMapUnsafe<>(newSize);
     }
 
     private static Object arrayAt(Object[] array, int index)
@@ -214,7 +214,7 @@ public class ConcurrentHashMapUnsafe<K, V>
                     }
                     e = e.getNext();
                 }
-                Entry<K, V> newEntry = new Entry<K, V>(key, value, (Entry<K, V>) o);
+                Entry<K, V> newEntry = new Entry<>(key, value, (Entry<K, V>) o);
                 if (ConcurrentHashMapUnsafe.casArrayAt(currentArray, index, o, newEntry))
                 {
                     this.incrementSizeAndPossiblyResize(currentArray, length, o);
@@ -451,12 +451,12 @@ public class ConcurrentHashMapUnsafe<K, V>
                     }
                     else
                     {
-                        newEntry = new Entry<K, V>(toCopyEntry.getKey(), toCopyEntry.getValue());
+                        newEntry = new Entry<>(toCopyEntry.getKey(), toCopyEntry.getValue());
                     }
                 }
                 else
                 {
-                    newEntry = new Entry<K, V>(toCopyEntry.getKey(), toCopyEntry.getValue(), (Entry<K, V>) o);
+                    newEntry = new Entry<>(toCopyEntry.getKey(), toCopyEntry.getValue(), (Entry<K, V>) o);
                 }
                 if (ConcurrentHashMapUnsafe.casArrayAt(currentArray, index, o, newEntry))
                 {
@@ -518,7 +518,7 @@ public class ConcurrentHashMapUnsafe<K, V>
                     createdValue = true;
                     newValue = factory.valueOf(key);
                 }
-                Entry<K, V> newEntry = new Entry<K, V>(key, newValue, (Entry<K, V>) o);
+                Entry<K, V> newEntry = new Entry<>(key, newValue, (Entry<K, V>) o);
                 if (ConcurrentHashMapUnsafe.casArrayAt(currentArray, index, o, newEntry))
                 {
                     this.incrementSizeAndPossiblyResize(currentArray, length, o);
@@ -561,7 +561,7 @@ public class ConcurrentHashMapUnsafe<K, V>
                     createdValue = true;
                     newValue = factory.value();
                 }
-                Entry<K, V> newEntry = new Entry<K, V>(key, newValue, (Entry<K, V>) o);
+                Entry<K, V> newEntry = new Entry<>(key, newValue, (Entry<K, V>) o);
                 if (ConcurrentHashMapUnsafe.casArrayAt(currentArray, index, o, newEntry))
                 {
                     this.incrementSizeAndPossiblyResize(currentArray, length, o);
@@ -597,7 +597,7 @@ public class ConcurrentHashMapUnsafe<K, V>
                     }
                     e = e.getNext();
                 }
-                Entry<K, V> newEntry = new Entry<K, V>(key, value, (Entry<K, V>) o);
+                Entry<K, V> newEntry = new Entry<>(key, value, (Entry<K, V>) o);
                 if (ConcurrentHashMapUnsafe.casArrayAt(currentArray, index, o, newEntry))
                 {
                     this.incrementSizeAndPossiblyResize(currentArray, length, o);
@@ -652,7 +652,7 @@ public class ConcurrentHashMapUnsafe<K, V>
                     }
                     key = keyTransformer.value(key, newValue);
                 }
-                Entry<K, V> newEntry = new Entry<K, V>(key, newValue, (Entry<K, V>) o);
+                Entry<K, V> newEntry = new Entry<>(key, newValue, (Entry<K, V>) o);
                 if (ConcurrentHashMapUnsafe.casArrayAt(currentArray, index, o, newEntry))
                 {
                     this.incrementSizeAndPossiblyResize(currentArray, length, o);
@@ -905,7 +905,7 @@ public class ConcurrentHashMapUnsafe<K, V>
         Object o = ConcurrentHashMapUnsafe.arrayAt(currentArray, index);
         if (o == null)
         {
-            Entry<K, V> newEntry = new Entry<K, V>(key, value, null);
+            Entry<K, V> newEntry = new Entry<>(key, value, null);
             if (ConcurrentHashMapUnsafe.casArrayAt(currentArray, index, null, newEntry))
             {
                 this.addToSize(1);
@@ -937,7 +937,7 @@ public class ConcurrentHashMapUnsafe<K, V>
                     if (candidate.equals(key))
                     {
                         V oldValue = e.getValue();
-                        Entry<K, V> newEntry = new Entry<K, V>(e.getKey(), value, this.createReplacementChainForRemoval((Entry<K, V>) o, e));
+                        Entry<K, V> newEntry = new Entry<>(e.getKey(), value, this.createReplacementChainForRemoval((Entry<K, V>) o, e));
                         if (!ConcurrentHashMapUnsafe.casArrayAt(currentArray, index, o, newEntry))
                         {
                             //noinspection ContinueStatementWithLabel
@@ -947,7 +947,7 @@ public class ConcurrentHashMapUnsafe<K, V>
                     }
                     e = e.getNext();
                 }
-                Entry<K, V> newEntry = new Entry<K, V>(key, value, (Entry<K, V>) o);
+                Entry<K, V> newEntry = new Entry<>(key, value, (Entry<K, V>) o);
                 if (ConcurrentHashMapUnsafe.casArrayAt(currentArray, index, o, newEntry))
                 {
                     this.incrementSizeAndPossiblyResize(currentArray, length, o);
@@ -1114,7 +1114,7 @@ public class ConcurrentHashMapUnsafe<K, V>
                 if (oldValue == e.getValue() || (oldValue != null && oldValue.equals(e.getValue())))
                 {
                     Entry<K, V> replacement = this.createReplacementChainForRemoval((Entry<K, V>) o, e);
-                    Entry<K, V> newEntry = new Entry<K, V>(key, newValue, replacement);
+                    Entry<K, V> newEntry = new Entry<>(key, newValue, replacement);
                     return ConcurrentHashMapUnsafe.casArrayAt(currentArray, index, o, newEntry) || this.slowReplace(key, oldValue, newValue, hash, currentArray);
                 }
                 return false;
@@ -1148,7 +1148,7 @@ public class ConcurrentHashMapUnsafe<K, V>
                         if (oldValue == e.getValue() || (oldValue != null && oldValue.equals(e.getValue())))
                         {
                             Entry<K, V> replacement = this.createReplacementChainForRemoval((Entry<K, V>) o, e);
-                            Entry<K, V> newEntry = new Entry<K, V>(key, newValue, replacement);
+                            Entry<K, V> newEntry = new Entry<>(key, newValue, replacement);
                             if (ConcurrentHashMapUnsafe.casArrayAt(currentArray, index, o, newEntry))
                             {
                                 return true;
@@ -1201,7 +1201,7 @@ public class ConcurrentHashMapUnsafe<K, V>
                     if (candidate.equals(key))
                     {
                         V oldValue = e.getValue();
-                        Entry<K, V> newEntry = new Entry<K, V>(e.getKey(), value, this.createReplacementChainForRemoval((Entry<K, V>) o, e));
+                        Entry<K, V> newEntry = new Entry<>(e.getKey(), value, this.createReplacementChainForRemoval((Entry<K, V>) o, e));
                         if (!ConcurrentHashMapUnsafe.casArrayAt(currentArray, index, o, newEntry))
                         {
                             //noinspection ContinueStatementWithLabel
@@ -1295,7 +1295,7 @@ public class ConcurrentHashMapUnsafe<K, V>
         {
             if (e != toRemove)
             {
-                replacement = new Entry<K, V>(e.getKey(), e.getValue(), replacement);
+                replacement = new Entry<>(e.getKey(), e.getValue(), replacement);
             }
             e = e.getNext();
         }
@@ -1608,7 +1608,7 @@ public class ConcurrentHashMapUnsafe<K, V>
                     }
                     if (this.todo == null)
                     {
-                        this.todo = new FastList<IteratorState>(4);
+                        this.todo = new FastList<>(4);
                     }
                     if (endResized < this.currentState.end)
                     {
@@ -1967,7 +1967,7 @@ public class ConcurrentHashMapUnsafe<K, V>
 
     public static <NK, NV> ConcurrentHashMapUnsafe<NK, NV> newMap(Map<NK, NV> map)
     {
-        ConcurrentHashMapUnsafe<NK, NV> result = new ConcurrentHashMapUnsafe<NK, NV>(map.size());
+        ConcurrentHashMapUnsafe<NK, NV> result = new ConcurrentHashMapUnsafe<>(map.size());
         result.putAll(map);
         return result;
     }
@@ -2058,7 +2058,7 @@ public class ConcurrentHashMapUnsafe<K, V>
 
     public void forEachKeyValue(Procedure2<? super K, ? super V> procedure)
     {
-        IterableIterate.forEach(this.entrySet(), new MapEntryToProcedure2<K, V>(procedure));
+        IterableIterate.forEach(this.entrySet(), new MapEntryToProcedure2<>(procedure));
     }
 
     public <E> MutableMap<K, V> collectKeysAndValues(
@@ -2108,7 +2108,7 @@ public class ConcurrentHashMapUnsafe<K, V>
                     createdValue = true;
                     newValue = function.valueOf(parameter);
                 }
-                Entry<K, V> newEntry = new Entry<K, V>(key, newValue, (Entry<K, V>) o);
+                Entry<K, V> newEntry = new Entry<>(key, newValue, (Entry<K, V>) o);
                 if (ConcurrentHashMapUnsafe.casArrayAt(currentArray, index, o, newEntry))
                 {
                     this.incrementSizeAndPossiblyResize(currentArray, length, o);
@@ -2194,7 +2194,7 @@ public class ConcurrentHashMapUnsafe<K, V>
         if (o == null)
         {
             V result = function.valueOf(factory.value());
-            Entry<K, V> newEntry = new Entry<K, V>(key, result, null);
+            Entry<K, V> newEntry = new Entry<>(key, result, null);
             if (ConcurrentHashMapUnsafe.casArrayAt(currentArray, index, null, newEntry))
             {
                 this.addToSize(1);
@@ -2227,7 +2227,7 @@ public class ConcurrentHashMapUnsafe<K, V>
                     {
                         V oldValue = e.getValue();
                         V newValue = function.valueOf(oldValue);
-                        Entry<K, V> newEntry = new Entry<K, V>(e.getKey(), newValue, this.createReplacementChainForRemoval((Entry<K, V>) o, e));
+                        Entry<K, V> newEntry = new Entry<>(e.getKey(), newValue, this.createReplacementChainForRemoval((Entry<K, V>) o, e));
                         if (!ConcurrentHashMapUnsafe.casArrayAt(currentArray, index, o, newEntry))
                         {
                             //noinspection ContinueStatementWithLabel
@@ -2239,7 +2239,7 @@ public class ConcurrentHashMapUnsafe<K, V>
                     e = e.getNext();
                 }
                 V result = function.valueOf(factory.value());
-                Entry<K, V> newEntry = new Entry<K, V>(key, result, (Entry<K, V>) o);
+                Entry<K, V> newEntry = new Entry<>(key, result, (Entry<K, V>) o);
                 if (ConcurrentHashMapUnsafe.casArrayAt(currentArray, index, o, newEntry))
                 {
                     this.incrementSizeAndPossiblyResize(currentArray, length, o);
@@ -2260,7 +2260,7 @@ public class ConcurrentHashMapUnsafe<K, V>
         if (o == null)
         {
             V result = function.value(factory.value(), parameter);
-            Entry<K, V> newEntry = new Entry<K, V>(key, result, null);
+            Entry<K, V> newEntry = new Entry<>(key, result, null);
             if (ConcurrentHashMapUnsafe.casArrayAt(currentArray, index, null, newEntry))
             {
                 this.addToSize(1);
@@ -2299,7 +2299,7 @@ public class ConcurrentHashMapUnsafe<K, V>
                     {
                         V oldValue = e.getValue();
                         V newValue = function.value(oldValue, parameter);
-                        Entry<K, V> newEntry = new Entry<K, V>(e.getKey(), newValue, this.createReplacementChainForRemoval((Entry<K, V>) o, e));
+                        Entry<K, V> newEntry = new Entry<>(e.getKey(), newValue, this.createReplacementChainForRemoval((Entry<K, V>) o, e));
                         if (!ConcurrentHashMapUnsafe.casArrayAt(currentArray, index, o, newEntry))
                         {
                             //noinspection ContinueStatementWithLabel
@@ -2310,7 +2310,7 @@ public class ConcurrentHashMapUnsafe<K, V>
                     e = e.getNext();
                 }
                 V result = function.value(factory.value(), parameter);
-                Entry<K, V> newEntry = new Entry<K, V>(key, result, (Entry<K, V>) o);
+                Entry<K, V> newEntry = new Entry<>(key, result, (Entry<K, V>) o);
                 if (ConcurrentHashMapUnsafe.casArrayAt(currentArray, index, o, newEntry))
                 {
                     this.incrementSizeAndPossiblyResize(currentArray, length, o);

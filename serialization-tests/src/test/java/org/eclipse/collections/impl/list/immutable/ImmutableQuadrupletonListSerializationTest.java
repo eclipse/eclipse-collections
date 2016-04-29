@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -24,6 +24,6 @@ public class ImmutableQuadrupletonListSerializationTest
                         + "YmplY3Q7TAAIZWxlbWVudDJxAH4AAUwACGVsZW1lbnQzcQB+AAFMAAhlbGVtZW50NHEAfgABeHBz\n"
                         + "cgARamF2YS5sYW5nLkludGVnZXIS4qCk94GHOAIAAUkABXZhbHVleHIAEGphdmEubGFuZy5OdW1i\n"
                         + "ZXKGrJUdC5TgiwIAAHhwAAAAAXNxAH4AAwAAAAJzcQB+AAMAAAADc3EAfgADAAAABA==",
-                new ImmutableQuadrupletonList<Integer>(1, 2, 3, 4));
+                new ImmutableQuadrupletonList<>(1, 2, 3, 4));
     }
 }

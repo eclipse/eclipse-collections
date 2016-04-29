@@ -47,7 +47,7 @@ public class HashBagWithHashingStrategy<T>
             throw new IllegalArgumentException("Cannot Instantiate HashBagWithHashingStrategy with null HashingStrategy");
         }
         this.hashingStrategy = hashingStrategy;
-        this.items = new ObjectIntHashMapWithHashingStrategy<T>(hashingStrategy, size);
+        this.items = new ObjectIntHashMapWithHashingStrategy<>(hashingStrategy, size);
     }
 
     private HashBagWithHashingStrategy(HashingStrategy<? super T> hashingStrategy, MutableObjectIntMap<T> map)
@@ -59,12 +59,12 @@ public class HashBagWithHashingStrategy<T>
 
     public static <E> HashBagWithHashingStrategy<E> newBag(HashingStrategy<? super E> hashingStrategy)
     {
-        return new HashBagWithHashingStrategy<E>(hashingStrategy);
+        return new HashBagWithHashingStrategy<>(hashingStrategy);
     }
 
     public static <E> HashBagWithHashingStrategy<E> newBag(HashingStrategy<? super E> hashingStrategy, int size)
     {
-        return new HashBagWithHashingStrategy<E>(hashingStrategy, size);
+        return new HashBagWithHashingStrategy<>(hashingStrategy, size);
     }
 
     public static <E> HashBagWithHashingStrategy<E> newBag(HashingStrategy<? super E> hashingStrategy, Bag<? extends E> source)
@@ -107,12 +107,12 @@ public class HashBagWithHashingStrategy<T>
         MutableObjectIntMap<T> map = this.items.select((each, occurrences) -> {
             return predicate.accept(occurrences);
         });
-        return new HashBagWithHashingStrategy<T>(this.hashingStrategy, map);
+        return new HashBagWithHashingStrategy<>(this.hashingStrategy, map);
     }
 
     protected Object writeReplace()
     {
-        return new HashBagWithHashingStrategySerializationProxy<T>(this);
+        return new HashBagWithHashingStrategySerializationProxy<>(this);
     }
 
     public MutableBag<T> with(T element)

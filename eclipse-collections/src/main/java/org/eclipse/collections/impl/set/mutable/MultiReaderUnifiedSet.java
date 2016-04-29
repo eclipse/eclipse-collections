@@ -112,22 +112,22 @@ public final class MultiReaderUnifiedSet<T>
 
     public static <T> MultiReaderUnifiedSet<T> newSet()
     {
-        return new MultiReaderUnifiedSet<T>(UnifiedSet.<T>newSet());
+        return new MultiReaderUnifiedSet<>(UnifiedSet.<T>newSet());
     }
 
     public static <T> MultiReaderUnifiedSet<T> newSet(int capacity)
     {
-        return new MultiReaderUnifiedSet<T>(UnifiedSet.<T>newSet(capacity));
+        return new MultiReaderUnifiedSet<>(UnifiedSet.<T>newSet(capacity));
     }
 
     public static <T> MultiReaderUnifiedSet<T> newSet(Iterable<T> iterable)
     {
-        return new MultiReaderUnifiedSet<T>(UnifiedSet.newSet(iterable));
+        return new MultiReaderUnifiedSet<>(UnifiedSet.newSet(iterable));
     }
 
     public static <T> MultiReaderUnifiedSet<T> newSetWith(T... elements)
     {
-        return new MultiReaderUnifiedSet<T>(UnifiedSet.newSetWith(elements));
+        return new MultiReaderUnifiedSet<>(UnifiedSet.newSetWith(elements));
     }
 
     @Override
@@ -146,14 +146,14 @@ public final class MultiReaderUnifiedSet<T>
 
     UntouchableMutableSet<T> asReadUntouchable()
     {
-        return new UntouchableMutableSet<T>(this.delegate.asUnmodifiable());
+        return new UntouchableMutableSet<>(this.delegate.asUnmodifiable());
     }
 
     // Exposed for testing
 
     UntouchableMutableSet<T> asWriteUntouchable()
     {
-        return new UntouchableMutableSet<T>(this.delegate);
+        return new UntouchableMutableSet<>(this.delegate);
     }
 
     public void withReadLockAndDelegate(Procedure<MutableSet<T>> procedure)
@@ -231,7 +231,7 @@ public final class MultiReaderUnifiedSet<T>
         this.acquireReadLock();
         try
         {
-            return new MultiReaderUnifiedSet<T>(this.delegate.clone());
+            return new MultiReaderUnifiedSet<>(this.delegate.clone());
         }
         finally
         {
@@ -821,7 +821,7 @@ public final class MultiReaderUnifiedSet<T>
 
         public Iterator<T> iterator()
         {
-            UntouchableIterator<T> iterator = new UntouchableIterator<T>(this.delegate.iterator());
+            UntouchableIterator<T> iterator = new UntouchableIterator<>(this.delegate.iterator());
             this.requestedIterators.add(iterator);
             return iterator;
         }
@@ -1190,6 +1190,6 @@ public final class MultiReaderUnifiedSet<T>
 
     public ParallelUnsortedSetIterable<T> asParallel(ExecutorService executorService, int batchSize)
     {
-        return new MultiReaderParallelUnsortedSetIterable<T>(this.delegate.asParallel(executorService, batchSize), this.lock);
+        return new MultiReaderParallelUnsortedSetIterable<>(this.delegate.asParallel(executorService, batchSize), this.lock);
     }
 }

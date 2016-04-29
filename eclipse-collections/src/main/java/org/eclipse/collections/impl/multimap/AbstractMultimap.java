@@ -109,7 +109,7 @@ public abstract class AbstractMultimap<K, V, C extends RichIterable<V>>
 
     public RichIterable<Pair<K, V>> keyValuePairsView()
     {
-        return this.keyMultiValuePairsView().flatCollect(pair -> pair.getTwo().collect(new KeyValuePairFunction<V, K>(pair.getOne())));
+        return this.keyMultiValuePairsView().flatCollect(pair -> pair.getTwo().collect(new KeyValuePairFunction<>(pair.getOne())));
     }
 
     // Comparison and hashing

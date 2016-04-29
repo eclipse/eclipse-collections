@@ -242,22 +242,22 @@ public abstract class AbstractImmutableSortedMap<K, V>
 
     public PartitionImmutableList<V> partition(Predicate<? super V> predicate)
     {
-        PartitionMutableList<V> partitionFastList = new PartitionFastList<V>();
-        this.forEach(new PartitionProcedure<V>(predicate, partitionFastList));
+        PartitionMutableList<V> partitionFastList = new PartitionFastList<>();
+        this.forEach(new PartitionProcedure<>(predicate, partitionFastList));
         return partitionFastList.toImmutable();
     }
 
     public <P> PartitionImmutableList<V> partitionWith(Predicate2<? super V, ? super P> predicate, P parameter)
     {
-        PartitionMutableList<V> partitionFastList = new PartitionFastList<V>();
-        this.forEach(new PartitionPredicate2Procedure<V, P>(predicate, parameter, partitionFastList));
+        PartitionMutableList<V> partitionFastList = new PartitionFastList<>();
+        this.forEach(new PartitionPredicate2Procedure<>(predicate, parameter, partitionFastList));
         return partitionFastList.toImmutable();
     }
 
     public <S> ImmutableList<S> selectInstancesOf(Class<S> clazz)
     {
         FastList<S> result = FastList.newList(this.size());
-        this.forEach(new SelectInstancesOfProcedure<S>(clazz, result));
+        this.forEach(new SelectInstancesOfProcedure<>(clazz, result));
         return result.toImmutable();
     }
 
@@ -269,56 +269,56 @@ public abstract class AbstractImmutableSortedMap<K, V>
     public ImmutableBooleanList collectBoolean(BooleanFunction<? super V> booleanFunction)
     {
         BooleanArrayList result = new BooleanArrayList(this.size());
-        this.forEach(new CollectBooleanProcedure<V>(booleanFunction, result));
+        this.forEach(new CollectBooleanProcedure<>(booleanFunction, result));
         return result.toImmutable();
     }
 
     public ImmutableByteList collectByte(ByteFunction<? super V> byteFunction)
     {
         ByteArrayList result = new ByteArrayList(this.size());
-        this.forEach(new CollectByteProcedure<V>(byteFunction, result));
+        this.forEach(new CollectByteProcedure<>(byteFunction, result));
         return result.toImmutable();
     }
 
     public ImmutableCharList collectChar(CharFunction<? super V> charFunction)
     {
         CharArrayList result = new CharArrayList(this.size());
-        this.forEach(new CollectCharProcedure<V>(charFunction, result));
+        this.forEach(new CollectCharProcedure<>(charFunction, result));
         return result.toImmutable();
     }
 
     public ImmutableDoubleList collectDouble(DoubleFunction<? super V> doubleFunction)
     {
         DoubleArrayList result = new DoubleArrayList(this.size());
-        this.forEach(new CollectDoubleProcedure<V>(doubleFunction, result));
+        this.forEach(new CollectDoubleProcedure<>(doubleFunction, result));
         return result.toImmutable();
     }
 
     public ImmutableFloatList collectFloat(FloatFunction<? super V> floatFunction)
     {
         FloatArrayList result = new FloatArrayList(this.size());
-        this.forEach(new CollectFloatProcedure<V>(floatFunction, result));
+        this.forEach(new CollectFloatProcedure<>(floatFunction, result));
         return result.toImmutable();
     }
 
     public ImmutableIntList collectInt(IntFunction<? super V> intFunction)
     {
         IntArrayList result = new IntArrayList(this.size());
-        this.forEach(new CollectIntProcedure<V>(intFunction, result));
+        this.forEach(new CollectIntProcedure<>(intFunction, result));
         return result.toImmutable();
     }
 
     public ImmutableLongList collectLong(LongFunction<? super V> longFunction)
     {
         LongArrayList result = new LongArrayList(this.size());
-        this.forEach(new CollectLongProcedure<V>(longFunction, result));
+        this.forEach(new CollectLongProcedure<>(longFunction, result));
         return result.toImmutable();
     }
 
     public ImmutableShortList collectShort(ShortFunction<? super V> shortFunction)
     {
         ShortArrayList result = new ShortArrayList(this.size());
-        this.forEach(new CollectShortProcedure<V>(shortFunction, result));
+        this.forEach(new CollectShortProcedure<>(shortFunction, result));
         return result.toImmutable();
     }
 
@@ -402,7 +402,7 @@ public abstract class AbstractImmutableSortedMap<K, V>
             Procedure2<? super V2, ? super V> mutatingAggregator)
     {
         MutableMap<K2, V2> map = UnifiedMap.newMap();
-        this.forEach(new MutatingAggregationProcedure<V, K2, V2>(map, groupBy, zeroValueFactory, mutatingAggregator));
+        this.forEach(new MutatingAggregationProcedure<>(map, groupBy, zeroValueFactory, mutatingAggregator));
         return map.toImmutable();
     }
 
@@ -412,7 +412,7 @@ public abstract class AbstractImmutableSortedMap<K, V>
             Function2<? super V2, ? super V, ? extends V2> nonMutatingAggregator)
     {
         MutableMap<K2, V2> map = UnifiedMap.newMap();
-        this.forEach(new NonMutatingAggregationProcedure<V, K2, V2>(map, groupBy, zeroValueFactory, nonMutatingAggregator));
+        this.forEach(new NonMutatingAggregationProcedure<>(map, groupBy, zeroValueFactory, nonMutatingAggregator));
         return map.toImmutable();
     }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -36,7 +36,7 @@ public class ZipIterable<X, Y>
 
     public Iterator<Pair<X, Y>> iterator()
     {
-        return new ZipIterator<X, Y>(this.xs, this.ys);
+        return new ZipIterator<>(this.xs, this.ys);
     }
 
     public void each(Procedure<? super Pair<X, Y>> procedure)

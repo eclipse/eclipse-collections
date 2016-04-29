@@ -47,7 +47,7 @@ class ParallelSelectUnsortedBag<T> extends AbstractParallelUnsortedBag<T, Unsort
 
     public void forEach(Procedure<? super T> procedure)
     {
-        this.parallelIterable.forEach(new IfProcedure<T>(this.predicate, procedure));
+        this.parallelIterable.forEach(new IfProcedure<>(this.predicate, procedure));
     }
 
     public void forEachWithOccurrences(final ObjectIntProcedure<? super T> procedure)
@@ -67,7 +67,7 @@ class ParallelSelectUnsortedBag<T> extends AbstractParallelUnsortedBag<T, Unsort
 
     public boolean allSatisfy(Predicate<? super T> predicate)
     {
-        return this.parallelIterable.allSatisfy(new SelectAllSatisfyPredicate<T>(this.predicate, predicate));
+        return this.parallelIterable.allSatisfy(new SelectAllSatisfyPredicate<>(this.predicate, predicate));
     }
 
     @Override

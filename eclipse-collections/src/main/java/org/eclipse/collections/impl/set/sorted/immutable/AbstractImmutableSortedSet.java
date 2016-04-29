@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -159,56 +159,56 @@ abstract class AbstractImmutableSortedSet<T> extends AbstractImmutableCollection
     public ImmutableBooleanList collectBoolean(BooleanFunction<? super T> booleanFunction)
     {
         BooleanArrayList result = new BooleanArrayList(this.size());
-        this.forEach(new CollectBooleanProcedure<T>(booleanFunction, result));
+        this.forEach(new CollectBooleanProcedure<>(booleanFunction, result));
         return result.toImmutable();
     }
 
     public ImmutableByteList collectByte(ByteFunction<? super T> byteFunction)
     {
         ByteArrayList result = new ByteArrayList(this.size());
-        this.forEach(new CollectByteProcedure<T>(byteFunction, result));
+        this.forEach(new CollectByteProcedure<>(byteFunction, result));
         return result.toImmutable();
     }
 
     public ImmutableCharList collectChar(CharFunction<? super T> charFunction)
     {
         CharArrayList result = new CharArrayList(this.size());
-        this.forEach(new CollectCharProcedure<T>(charFunction, result));
+        this.forEach(new CollectCharProcedure<>(charFunction, result));
         return result.toImmutable();
     }
 
     public ImmutableDoubleList collectDouble(DoubleFunction<? super T> doubleFunction)
     {
         DoubleArrayList result = new DoubleArrayList(this.size());
-        this.forEach(new CollectDoubleProcedure<T>(doubleFunction, result));
+        this.forEach(new CollectDoubleProcedure<>(doubleFunction, result));
         return result.toImmutable();
     }
 
     public ImmutableFloatList collectFloat(FloatFunction<? super T> floatFunction)
     {
         FloatArrayList result = new FloatArrayList(this.size());
-        this.forEach(new CollectFloatProcedure<T>(floatFunction, result));
+        this.forEach(new CollectFloatProcedure<>(floatFunction, result));
         return result.toImmutable();
     }
 
     public ImmutableIntList collectInt(IntFunction<? super T> intFunction)
     {
         IntArrayList result = new IntArrayList(this.size());
-        this.forEach(new CollectIntProcedure<T>(intFunction, result));
+        this.forEach(new CollectIntProcedure<>(intFunction, result));
         return result.toImmutable();
     }
 
     public ImmutableLongList collectLong(LongFunction<? super T> longFunction)
     {
         LongArrayList result = new LongArrayList(this.size());
-        this.forEach(new CollectLongProcedure<T>(longFunction, result));
+        this.forEach(new CollectLongProcedure<>(longFunction, result));
         return result.toImmutable();
     }
 
     public ImmutableShortList collectShort(ShortFunction<? super T> shortFunction)
     {
         ShortArrayList result = new ShortArrayList(this.size());
-        this.forEach(new CollectShortProcedure<T>(shortFunction, result));
+        this.forEach(new CollectShortProcedure<>(shortFunction, result));
         return result.toImmutable();
     }
 
@@ -226,7 +226,7 @@ abstract class AbstractImmutableSortedSet<T> extends AbstractImmutableCollection
     public ImmutableSortedSet<T> select(Predicate<? super T> predicate)
     {
         TreeSortedSet<T> result = TreeSortedSet.newSet(this.comparator());
-        this.forEach(new SelectProcedure<T>(predicate, result));
+        this.forEach(new SelectProcedure<>(predicate, result));
         return result.toImmutable();
     }
 
@@ -238,7 +238,7 @@ abstract class AbstractImmutableSortedSet<T> extends AbstractImmutableCollection
     public ImmutableSortedSet<T> reject(Predicate<? super T> predicate)
     {
         TreeSortedSet<T> result = TreeSortedSet.newSet(this.comparator());
-        this.forEach(new RejectProcedure<T>(predicate, result));
+        this.forEach(new RejectProcedure<>(predicate, result));
         return result.toImmutable();
     }
 
@@ -249,35 +249,35 @@ abstract class AbstractImmutableSortedSet<T> extends AbstractImmutableCollection
 
     public PartitionImmutableSortedSet<T> partition(Predicate<? super T> predicate)
     {
-        PartitionMutableSortedSet<T> partitionTreeSortedSet = new PartitionTreeSortedSet<T>(this.comparator());
-        this.forEach(new PartitionProcedure<T>(predicate, partitionTreeSortedSet));
+        PartitionMutableSortedSet<T> partitionTreeSortedSet = new PartitionTreeSortedSet<>(this.comparator());
+        this.forEach(new PartitionProcedure<>(predicate, partitionTreeSortedSet));
         return partitionTreeSortedSet.toImmutable();
     }
 
     public <P> PartitionImmutableSortedSet<T> partitionWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
-        PartitionMutableSortedSet<T> partitionTreeSortedSet = new PartitionTreeSortedSet<T>(this.comparator());
-        this.forEach(new PartitionPredicate2Procedure<T, P>(predicate, parameter, partitionTreeSortedSet));
+        PartitionMutableSortedSet<T> partitionTreeSortedSet = new PartitionTreeSortedSet<>(this.comparator());
+        this.forEach(new PartitionPredicate2Procedure<>(predicate, parameter, partitionTreeSortedSet));
         return partitionTreeSortedSet.toImmutable();
     }
 
     public PartitionImmutableSortedSet<T> partitionWhile(Predicate<? super T> predicate)
     {
-        PartitionTreeSortedSet<T> result = new PartitionTreeSortedSet<T>(this.comparator());
+        PartitionTreeSortedSet<T> result = new PartitionTreeSortedSet<>(this.comparator());
         return IterableIterate.partitionWhile(this, predicate, result).toImmutable();
     }
 
     public <S> ImmutableSortedSet<S> selectInstancesOf(Class<S> clazz)
     {
         TreeSortedSet<S> result = TreeSortedSet.newSet((Comparator<? super S>) this.comparator());
-        this.forEach(new SelectInstancesOfProcedure<S>(clazz, result));
+        this.forEach(new SelectInstancesOfProcedure<>(clazz, result));
         return result.toImmutable();
     }
 
     public <V> ImmutableList<V> collect(Function<? super T, ? extends V> function)
     {
         MutableList<V> result = Lists.mutable.empty();
-        this.forEach(new CollectProcedure<T, V>(function, result));
+        this.forEach(new CollectProcedure<>(function, result));
         return result.toImmutable();
     }
 
@@ -289,14 +289,14 @@ abstract class AbstractImmutableSortedSet<T> extends AbstractImmutableCollection
     public <V> ImmutableList<V> collectIf(Predicate<? super T> predicate, Function<? super T, ? extends V> function)
     {
         MutableList<V> result = Lists.mutable.empty();
-        this.forEach(new CollectIfProcedure<T, V>(result, function, predicate));
+        this.forEach(new CollectIfProcedure<>(result, function, predicate));
         return result.toImmutable();
     }
 
     public <V> ImmutableList<V> flatCollect(Function<? super T, ? extends Iterable<V>> function)
     {
         MutableList<V> result = Lists.mutable.empty();
-        this.forEach(new FlatCollectProcedure<T, V>(function, result));
+        this.forEach(new FlatCollectProcedure<>(function, result));
         return result.toImmutable();
     }
 
@@ -443,7 +443,7 @@ abstract class AbstractImmutableSortedSet<T> extends AbstractImmutableCollection
         {
             throw new IllegalArgumentException();
         }
-        return new NonParallelSortedSetIterable<T>(this);
+        return new NonParallelSortedSetIterable<>(this);
     }
 
     public void reverseForEach(Procedure<? super T> procedure)

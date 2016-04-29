@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -295,7 +295,7 @@ public final class InternalArrayIterate
 
     public static <T> PartitionFastList<T> partition(T[] array, int size, Predicate<? super T> predicate)
     {
-        PartitionFastList<T> partitionFastList = new PartitionFastList<T>();
+        PartitionFastList<T> partitionFastList = new PartitionFastList<>();
 
         for (int i = 0; i < size; i++)
         {
@@ -308,7 +308,7 @@ public final class InternalArrayIterate
 
     public static <T, P> PartitionFastList<T> partitionWith(T[] array, int size, Predicate2<? super T, ? super P> predicate, P parameter)
     {
-        PartitionFastList<T> partitionFastList = new PartitionFastList<T>();
+        PartitionFastList<T> partitionFastList = new PartitionFastList<>();
 
         for (int i = 0; i < size; i++)
         {

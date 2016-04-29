@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -147,19 +147,19 @@ public class FastList<T>
 
     public static <E> FastList<E> newList()
     {
-        return new FastList<E>();
+        return new FastList<>();
     }
 
     public static <E> FastList<E> wrapCopy(E... array)
     {
         E[] newArray = (E[]) new Object[array.length];
         System.arraycopy(array, 0, newArray, 0, array.length);
-        return new FastList<E>(newArray);
+        return new FastList<>(newArray);
     }
 
     public static <E> FastList<E> newList(int initialCapacity)
     {
-        return new FastList<E>(initialCapacity);
+        return new FastList<>(initialCapacity);
     }
 
     public static <E> FastList<E> newList(Iterable<? extends E> source)
@@ -175,7 +175,7 @@ public class FastList<T>
      */
     public static <E> FastList<E> newListWith(E... elements)
     {
-        return new FastList<E>(elements);
+        return new FastList<>(elements);
     }
 
     /**
@@ -1374,7 +1374,7 @@ public class FastList<T>
     @Override
     public PartitionMutableList<T> partitionWhile(Predicate<? super T> predicate)
     {
-        PartitionMutableList<T> result = new PartitionFastList<T>();
+        PartitionMutableList<T> result = new PartitionFastList<>();
         FastList<T> selected = (FastList<T>) result.getSelected();
         FastList<T> rejected = (FastList<T>) result.getRejected();
         int partitionIndex = this.detectNotIndex(predicate);

@@ -33,7 +33,7 @@ public abstract class AbstractBatch<T> implements Batch<T>
 {
     public int count(Predicate<? super T> predicate)
     {
-        CountProcedure<T> procedure = new CountProcedure<T>(predicate);
+        CountProcedure<T> procedure = new CountProcedure<>(predicate);
         this.forEach(procedure);
         return procedure.getCount();
     }
@@ -53,56 +53,56 @@ public abstract class AbstractBatch<T> implements Batch<T>
 
     public T min(Comparator<? super T> comparator)
     {
-        MinComparatorProcedure<T> procedure = new MinComparatorProcedure<T>(comparator);
+        MinComparatorProcedure<T> procedure = new MinComparatorProcedure<>(comparator);
         this.forEach(procedure);
         return procedure.isVisitedAtLeastOnce() ? procedure.getResult() : null;
     }
 
     public T max(Comparator<? super T> comparator)
     {
-        MaxComparatorProcedure<T> procedure = new MaxComparatorProcedure<T>(comparator);
+        MaxComparatorProcedure<T> procedure = new MaxComparatorProcedure<>(comparator);
         this.forEach(procedure);
         return procedure.isVisitedAtLeastOnce() ? procedure.getResult() : null;
     }
 
     public <V extends Comparable<? super V>> T minBy(Function<? super T, ? extends V> function)
     {
-        MinByProcedure<T, V> procedure = new MinByProcedure<T, V>(function);
+        MinByProcedure<T, V> procedure = new MinByProcedure<>(function);
         this.forEach(procedure);
         return procedure.isVisitedAtLeastOnce() ? procedure.getResult() : null;
     }
 
     public <V extends Comparable<? super V>> T maxBy(Function<? super T, ? extends V> function)
     {
-        MaxByProcedure<T, V> procedure = new MaxByProcedure<T, V>(function);
+        MaxByProcedure<T, V> procedure = new MaxByProcedure<>(function);
         this.forEach(procedure);
         return procedure.isVisitedAtLeastOnce() ? procedure.getResult() : null;
     }
 
     public long sumOfInt(IntFunction<? super T> function)
     {
-        SumOfIntProcedure<T> procedure = new SumOfIntProcedure<T>(function);
+        SumOfIntProcedure<T> procedure = new SumOfIntProcedure<>(function);
         this.forEach(procedure);
         return procedure.getResult();
     }
 
     public DoubleSumResultHolder sumOfFloat(FloatFunction<? super T> function)
     {
-        SumOfFloatProcedure<T> procedure = new SumOfFloatProcedure<T>(function);
+        SumOfFloatProcedure<T> procedure = new SumOfFloatProcedure<>(function);
         this.forEach(procedure);
         return procedure;
     }
 
     public long sumOfLong(LongFunction<? super T> function)
     {
-        SumOfLongProcedure<T> procedure = new SumOfLongProcedure<T>(function);
+        SumOfLongProcedure<T> procedure = new SumOfLongProcedure<>(function);
         this.forEach(procedure);
         return procedure.getResult();
     }
 
     public DoubleSumResultHolder sumOfDouble(DoubleFunction<? super T> function)
     {
-        SumOfDoubleProcedure<T> procedure = new SumOfDoubleProcedure<T>(function);
+        SumOfDoubleProcedure<T> procedure = new SumOfDoubleProcedure<>(function);
         this.forEach(procedure);
         return procedure;
     }

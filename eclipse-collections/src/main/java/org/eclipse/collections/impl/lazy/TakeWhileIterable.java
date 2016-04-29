@@ -80,6 +80,6 @@ public class TakeWhileIterable<T> extends AbstractLazyIterable<T>
 
     public Iterator<T> iterator()
     {
-        return new TakeWhileIterator<T>(this.adapted, this.predicate);
+        return new TakeWhileIterator<>(this.adapted, this.predicate);
     }
 }

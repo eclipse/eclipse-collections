@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -61,12 +61,12 @@ public final class ImmutableListMultimapImpl<K, V>
 
     public ImmutableListMultimap<K, V> newEmpty()
     {
-        return new ImmutableListMultimapImpl<K, V>(Maps.immutable.<K, ImmutableList<V>>of());
+        return new ImmutableListMultimapImpl<>(Maps.immutable.<K, ImmutableList<V>>of());
     }
 
     public MutableListMultimap<K, V> toMutable()
     {
-        return new FastListMultimap<K, V>(this);
+        return new FastListMultimap<>(this);
     }
 
     @Override
@@ -77,7 +77,7 @@ public final class ImmutableListMultimapImpl<K, V>
 
     private Object writeReplace()
     {
-        return new ImmutableListMultimapSerializationProxy<K, V>(this.map);
+        return new ImmutableListMultimapSerializationProxy<>(this.map);
     }
 
     public static class ImmutableListMultimapSerializationProxy<K, V>
@@ -99,7 +99,7 @@ public final class ImmutableListMultimapImpl<K, V>
         @Override
         protected AbstractMutableMultimap<K, V, MutableList<V>> createEmptyMutableMultimap()
         {
-            return new FastListMultimap<K, V>();
+            return new FastListMultimap<>();
         }
     }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -27,6 +27,6 @@ public final class CollectProcedureFactory<T, V> implements ProcedureFactory<Col
 
     public CollectProcedure<T, V> create()
     {
-        return new CollectProcedure<T, V>(this.function, new FastList<V>(this.collectionSize));
+        return new CollectProcedure<>(this.function, new FastList<>(this.collectionSize));
     }
 }

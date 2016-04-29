@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -52,22 +52,22 @@ public abstract class AbstractSynchronizedParallelIterable<T, PI extends Paralle
 
     protected <A> ParallelListIterable<A> wrap(ParallelListIterable<A> wrapped)
     {
-        return new SynchronizedParallelListIterable<A>(wrapped, this.lock);
+        return new SynchronizedParallelListIterable<>(wrapped, this.lock);
     }
 
     protected <A> ParallelUnsortedSetIterable<A> wrap(ParallelUnsortedSetIterable<A> wrapped)
     {
-        return new SynchronizedParallelUnsortedSetIterable<A>(wrapped, this.lock);
+        return new SynchronizedParallelUnsortedSetIterable<>(wrapped, this.lock);
     }
 
     protected <A> ParallelSortedSetIterable<A> wrap(ParallelSortedSetIterable<A> wrapped)
     {
-        return new SynchronizedParallelSortedSetIterable<A>(wrapped, this.lock);
+        return new SynchronizedParallelSortedSetIterable<>(wrapped, this.lock);
     }
 
     protected <A> ParallelIterable<A> wrap(ParallelIterable<A> wrapped)
     {
-        return new SynchronizedParallelIterable<A>(wrapped, this.lock);
+        return new SynchronizedParallelIterable<>(wrapped, this.lock);
     }
 
     public void forEach(Procedure<? super T> procedure)

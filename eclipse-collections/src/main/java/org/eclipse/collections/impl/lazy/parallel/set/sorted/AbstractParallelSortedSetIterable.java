@@ -43,7 +43,7 @@ public abstract class AbstractParallelSortedSetIterable<T, B extends SortedSetBa
 
     public ParallelSortedSetIterable<T> select(Predicate<? super T> predicate)
     {
-        return new ParallelSelectSortedSetIterable<T>(this, predicate);
+        return new ParallelSelectSortedSetIterable<>(this, predicate);
     }
 
     public <P> ParallelSortedSetIterable<T> selectWith(Predicate2<? super T, ? super P> predicate, P parameter)
@@ -68,7 +68,7 @@ public abstract class AbstractParallelSortedSetIterable<T, B extends SortedSetBa
 
     public <V> ParallelListIterable<V> collect(Function<? super T, ? extends V> function)
     {
-        return new ParallelCollectListIterable<T, V>(this, function);
+        return new ParallelCollectListIterable<>(this, function);
     }
 
     public <P, V> ParallelListIterable<V> collectWith(Function2<? super T, ? super P, ? extends V> function, P parameter)
@@ -83,7 +83,7 @@ public abstract class AbstractParallelSortedSetIterable<T, B extends SortedSetBa
 
     public <V> ParallelListIterable<V> flatCollect(Function<? super T, ? extends Iterable<V>> function)
     {
-        return new ParallelFlatCollectListIterable<T, V>(this, function);
+        return new ParallelFlatCollectListIterable<>(this, function);
     }
 
     public <V> SortedSetMultimap<V, T> groupBy(final Function<? super T, ? extends V> function)

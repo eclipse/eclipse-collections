@@ -59,7 +59,7 @@ public abstract class AbstractMutableBagMultimap<K, V> extends AbstractMutableMu
 
         this.map.forEachKeyValue((key, bag) -> result.put(key, bag.toImmutable()));
 
-        return new ImmutableBagMultimapImpl<K, V>(result);
+        return new ImmutableBagMultimapImpl<>(result);
     }
 
     public <K2, V2> HashBagMultimap<K2, V2> collectKeysValues(Function2<? super K, ? super V, Pair<K2, V2>> function)

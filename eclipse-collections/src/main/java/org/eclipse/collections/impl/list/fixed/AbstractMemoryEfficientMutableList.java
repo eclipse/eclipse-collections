@@ -131,7 +131,7 @@ public abstract class AbstractMemoryEfficientMutableList<T>
     @Override
     public MutableList<T> subList(int fromIndex, int toIndex)
     {
-        return new SubList<T>(this, fromIndex, toIndex);
+        return new SubList<>(this, fromIndex, toIndex);
     }
 
     @Override
@@ -233,12 +233,12 @@ public abstract class AbstractMemoryEfficientMutableList<T>
     @Override
     public ListIterator<T> listIterator(int index)
     {
-        return new FixedSizeListIteratorAdapter<T>(super.listIterator(index));
+        return new FixedSizeListIteratorAdapter<>(super.listIterator(index));
     }
 
     @Override
     public ListIterator<T> listIterator()
     {
-        return new FixedSizeListIteratorAdapter<T>(super.listIterator());
+        return new FixedSizeListIteratorAdapter<>(super.listIterator());
     }
 }

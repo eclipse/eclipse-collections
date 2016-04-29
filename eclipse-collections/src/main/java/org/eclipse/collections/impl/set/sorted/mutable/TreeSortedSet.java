@@ -109,23 +109,23 @@ public class TreeSortedSet<T> extends AbstractMutableCollection<T>
 
     public TreeSortedSet()
     {
-        this.treeSet = new TreeSet<T>();
+        this.treeSet = new TreeSet<>();
     }
 
     public TreeSortedSet(Iterable<? extends T> iterable)
     {
-        this.treeSet = new TreeSet<T>();
+        this.treeSet = new TreeSet<>();
         this.addAllIterable(iterable);
     }
 
     public TreeSortedSet(Comparator<? super T> comparator)
     {
-        this.treeSet = new TreeSet<T>(comparator);
+        this.treeSet = new TreeSet<>(comparator);
     }
 
     public TreeSortedSet(SortedSet<T> set)
     {
-        this.treeSet = new TreeSet<T>(set);
+        this.treeSet = new TreeSet<>(set);
     }
 
     public TreeSortedSet(Comparator<? super T> comparator, Iterable<? extends T> iterable)
@@ -136,19 +136,19 @@ public class TreeSortedSet<T> extends AbstractMutableCollection<T>
 
     public static <T> TreeSortedSet<T> newSet()
     {
-        return new TreeSortedSet<T>();
+        return new TreeSortedSet<>();
     }
 
     public static <T> TreeSortedSet<T> newSet(Comparator<? super T> comparator)
     {
-        return new TreeSortedSet<T>(comparator);
+        return new TreeSortedSet<>(comparator);
     }
 
     public static <T> TreeSortedSet<T> newSet(Iterable<? extends T> source)
     {
         if (source instanceof SortedSet<?>)
         {
-            return new TreeSortedSet<T>((SortedSet<T>) source);
+            return new TreeSortedSet<>((SortedSet<T>) source);
         }
         TreeSortedSet<T> sortedSet = TreeSortedSet.newSet();
         Iterate.forEach(source, CollectionAddProcedure.on(sortedSet));
@@ -157,7 +157,7 @@ public class TreeSortedSet<T> extends AbstractMutableCollection<T>
 
     public static <T> TreeSortedSet<T> newSet(Comparator<? super T> comparator, Iterable<? extends T> iterable)
     {
-        return new TreeSortedSet<T>(comparator, iterable);
+        return new TreeSortedSet<>(comparator, iterable);
     }
 
     public static <T> TreeSortedSet<T> newSetWith(T... elements)
@@ -191,7 +191,7 @@ public class TreeSortedSet<T> extends AbstractMutableCollection<T>
         {
             throw new IllegalArgumentException();
         }
-        return new NonParallelSortedSetIterable<T>(this);
+        return new NonParallelSortedSetIterable<>(this);
     }
 
     public ImmutableSortedSet<T> toImmutable()
@@ -341,111 +341,111 @@ public class TreeSortedSet<T> extends AbstractMutableCollection<T>
     public TreeSortedSet<T> select(Predicate<? super T> predicate)
     {
         TreeSortedSet<T> result = this.newEmpty();
-        this.forEach(new SelectProcedure<T>(predicate, result));
+        this.forEach(new SelectProcedure<>(predicate, result));
         return result;
     }
 
     public TreeSortedSet<T> reject(Predicate<? super T> predicate)
     {
         TreeSortedSet<T> result = this.newEmpty();
-        this.forEach(new RejectProcedure<T>(predicate, result));
+        this.forEach(new RejectProcedure<>(predicate, result));
         return result;
     }
 
     public PartitionMutableSortedSet<T> partition(Predicate<? super T> predicate)
     {
-        PartitionTreeSortedSet<T> partitionTreeSortedSet = new PartitionTreeSortedSet<T>(this.comparator());
-        this.forEach(new PartitionProcedure<T>(predicate, partitionTreeSortedSet));
+        PartitionTreeSortedSet<T> partitionTreeSortedSet = new PartitionTreeSortedSet<>(this.comparator());
+        this.forEach(new PartitionProcedure<>(predicate, partitionTreeSortedSet));
         return partitionTreeSortedSet;
     }
 
     public <P> PartitionMutableSortedSet<T> partitionWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
-        PartitionTreeSortedSet<T> partitionTreeSortedSet = new PartitionTreeSortedSet<T>(this.comparator());
-        this.forEach(new PartitionPredicate2Procedure<T, P>(predicate, parameter, partitionTreeSortedSet));
+        PartitionTreeSortedSet<T> partitionTreeSortedSet = new PartitionTreeSortedSet<>(this.comparator());
+        this.forEach(new PartitionPredicate2Procedure<>(predicate, parameter, partitionTreeSortedSet));
         return partitionTreeSortedSet;
     }
 
     public PartitionMutableSortedSet<T> partitionWhile(Predicate<? super T> predicate)
     {
-        PartitionTreeSortedSet<T> result = new PartitionTreeSortedSet<T>(this.comparator());
+        PartitionTreeSortedSet<T> result = new PartitionTreeSortedSet<>(this.comparator());
         return IterableIterate.partitionWhile(this, predicate, result);
     }
 
     public <S> TreeSortedSet<S> selectInstancesOf(Class<S> clazz)
     {
         TreeSortedSet<S> result = (TreeSortedSet<S>) this.newEmpty();
-        this.forEach(new SelectInstancesOfProcedure<S>(clazz, result));
+        this.forEach(new SelectInstancesOfProcedure<>(clazz, result));
         return result;
     }
 
     public <V> MutableList<V> collect(Function<? super T, ? extends V> function)
     {
         MutableList<V> result = FastList.newList();
-        this.forEach(new CollectProcedure<T, V>(function, result));
+        this.forEach(new CollectProcedure<>(function, result));
         return result;
     }
 
     public MutableBooleanList collectBoolean(BooleanFunction<? super T> booleanFunction)
     {
         BooleanArrayList result = new BooleanArrayList(this.size());
-        this.forEach(new CollectBooleanProcedure<T>(booleanFunction, result));
+        this.forEach(new CollectBooleanProcedure<>(booleanFunction, result));
         return result;
     }
 
     public MutableByteList collectByte(ByteFunction<? super T> byteFunction)
     {
         ByteArrayList result = new ByteArrayList(this.size());
-        this.forEach(new CollectByteProcedure<T>(byteFunction, result));
+        this.forEach(new CollectByteProcedure<>(byteFunction, result));
         return result;
     }
 
     public MutableCharList collectChar(CharFunction<? super T> charFunction)
     {
         CharArrayList result = new CharArrayList(this.size());
-        this.forEach(new CollectCharProcedure<T>(charFunction, result));
+        this.forEach(new CollectCharProcedure<>(charFunction, result));
         return result;
     }
 
     public MutableDoubleList collectDouble(DoubleFunction<? super T> doubleFunction)
     {
         DoubleArrayList result = new DoubleArrayList(this.size());
-        this.forEach(new CollectDoubleProcedure<T>(doubleFunction, result));
+        this.forEach(new CollectDoubleProcedure<>(doubleFunction, result));
         return result;
     }
 
     public MutableFloatList collectFloat(FloatFunction<? super T> floatFunction)
     {
         FloatArrayList result = new FloatArrayList(this.size());
-        this.forEach(new CollectFloatProcedure<T>(floatFunction, result));
+        this.forEach(new CollectFloatProcedure<>(floatFunction, result));
         return result;
     }
 
     public MutableIntList collectInt(IntFunction<? super T> intFunction)
     {
         IntArrayList result = new IntArrayList(this.size());
-        this.forEach(new CollectIntProcedure<T>(intFunction, result));
+        this.forEach(new CollectIntProcedure<>(intFunction, result));
         return result;
     }
 
     public MutableLongList collectLong(LongFunction<? super T> longFunction)
     {
         LongArrayList result = new LongArrayList(this.size());
-        this.forEach(new CollectLongProcedure<T>(longFunction, result));
+        this.forEach(new CollectLongProcedure<>(longFunction, result));
         return result;
     }
 
     public MutableShortList collectShort(ShortFunction<? super T> shortFunction)
     {
         ShortArrayList result = new ShortArrayList(this.size());
-        this.forEach(new CollectShortProcedure<T>(shortFunction, result));
+        this.forEach(new CollectShortProcedure<>(shortFunction, result));
         return result;
     }
 
     public <V> MutableList<V> flatCollect(Function<? super T, ? extends Iterable<V>> function)
     {
         MutableList<V> result = FastList.newList();
-        this.forEach(new FlatCollectProcedure<T, V>(function, result));
+        this.forEach(new FlatCollectProcedure<>(function, result));
         return result;
     }
 
@@ -454,7 +454,7 @@ public class TreeSortedSet<T> extends AbstractMutableCollection<T>
             Function<? super T, ? extends V> function)
     {
         MutableList<V> result = FastList.newList();
-        this.forEach(new CollectIfProcedure<T, V>(result, function, predicate));
+        this.forEach(new CollectIfProcedure<>(result, function, predicate));
         return result;
     }
 
@@ -740,7 +740,7 @@ public class TreeSortedSet<T> extends AbstractMutableCollection<T>
 
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
     {
-        this.treeSet = new TreeSet<T>((Comparator<T>) in.readObject());
+        this.treeSet = new TreeSet<>((Comparator<T>) in.readObject());
         int size = in.readInt();
         for (int i = 0; i < size; i++)
         {

@@ -93,7 +93,7 @@ public abstract class AbstractImmutableBag<T>
 
     public PartitionImmutableBag<T> partition(final Predicate<? super T> predicate)
     {
-        final PartitionMutableBag<T> partitionMutableBag = new PartitionHashBag<T>();
+        final PartitionMutableBag<T> partitionMutableBag = new PartitionHashBag<>();
         this.forEachWithOccurrences((each, occurrences) -> {
             MutableBag<T> bucket = predicate.accept(each)
                     ? partitionMutableBag.getSelected()
@@ -105,7 +105,7 @@ public abstract class AbstractImmutableBag<T>
 
     public <P> PartitionImmutableBag<T> partitionWith(final Predicate2<? super T, ? super P> predicate, final P parameter)
     {
-        final PartitionMutableBag<T> partitionMutableBag = new PartitionHashBag<T>();
+        final PartitionMutableBag<T> partitionMutableBag = new PartitionHashBag<>();
         this.forEachWithOccurrences((each, occurrences) -> {
             MutableBag<T> bucket = predicate.accept(each, parameter)
                     ? partitionMutableBag.getSelected()

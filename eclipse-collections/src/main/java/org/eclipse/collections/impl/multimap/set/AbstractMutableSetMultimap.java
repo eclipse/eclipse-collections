@@ -46,7 +46,7 @@ public abstract class AbstractMutableSetMultimap<K, V> extends AbstractMutableMu
 
     public MutableSetMultimap<K, V> toMutable()
     {
-        return new UnifiedSetMultimap<K, V>(this);
+        return new UnifiedSetMultimap<>(this);
     }
 
     public ImmutableSetMultimap<K, V> toImmutable()
@@ -55,7 +55,7 @@ public abstract class AbstractMutableSetMultimap<K, V> extends AbstractMutableMu
 
         this.map.forEachKeyValue((key, set) -> map.put(key, set.toImmutable()));
 
-        return new ImmutableSetMultimapImpl<K, V>(map);
+        return new ImmutableSetMultimapImpl<>(map);
     }
 
     public <K2, V2> MutableBagMultimap<K2, V2> collectKeysValues(Function2<? super K, ? super V, Pair<K2, V2>> function)

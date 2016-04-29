@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -92,13 +92,13 @@ final class ImmutableEmptyBag<T>
         extends AbstractImmutableBag<T>
         implements Serializable
 {
-    static final ImmutableBag<?> INSTANCE = new ImmutableEmptyBag<Object>();
+    static final ImmutableBag<?> INSTANCE = new ImmutableEmptyBag<>();
 
     private static final long serialVersionUID = 1L;
 
     private static final LazyIterable<?> LAZY_ITERABLE = LazyIterate.adapt(INSTANCE);
     private static final Object[] TO_ARRAY = new Object[0];
-    private static final PartitionImmutableBag<Object> IMMUTABLE_EMPTY_PARTITION = new PartitionHashBag<Object>().toImmutable();
+    private static final PartitionImmutableBag<Object> IMMUTABLE_EMPTY_PARTITION = new PartitionHashBag<>().toImmutable();
 
     @Override
     public boolean equals(Object obj)
@@ -645,6 +645,6 @@ final class ImmutableEmptyBag<T>
 
     private Object writeReplace()
     {
-        return new ImmutableBagSerializationProxy<T>(this);
+        return new ImmutableBagSerializationProxy<>(this);
     }
 }

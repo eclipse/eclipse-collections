@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -42,47 +42,47 @@ public class NonParallelSortedSetIterable<T> extends NonParallelIterable<T, Sort
 
     public ParallelSortedSetIterable<T> select(Predicate<? super T> predicate)
     {
-        return new NonParallelSortedSetIterable<T>(this.delegate.select(predicate));
+        return new NonParallelSortedSetIterable<>(this.delegate.select(predicate));
     }
 
     public <P> ParallelSortedSetIterable<T> selectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
-        return new NonParallelSortedSetIterable<T>(this.delegate.selectWith(predicate, parameter));
+        return new NonParallelSortedSetIterable<>(this.delegate.selectWith(predicate, parameter));
     }
 
     public ParallelSortedSetIterable<T> reject(Predicate<? super T> predicate)
     {
-        return new NonParallelSortedSetIterable<T>(this.delegate.reject(predicate));
+        return new NonParallelSortedSetIterable<>(this.delegate.reject(predicate));
     }
 
     public <P> ParallelSortedSetIterable<T> rejectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
-        return new NonParallelSortedSetIterable<T>(this.delegate.rejectWith(predicate, parameter));
+        return new NonParallelSortedSetIterable<>(this.delegate.rejectWith(predicate, parameter));
     }
 
     public <S> ParallelSortedSetIterable<S> selectInstancesOf(Class<S> clazz)
     {
-        return new NonParallelSortedSetIterable<S>(this.delegate.selectInstancesOf(clazz));
+        return new NonParallelSortedSetIterable<>(this.delegate.selectInstancesOf(clazz));
     }
 
     public <V> ParallelListIterable<V> collect(Function<? super T, ? extends V> function)
     {
-        return new NonParallelListIterable<V>(this.delegate.collect(function));
+        return new NonParallelListIterable<>(this.delegate.collect(function));
     }
 
     public <P, V> ParallelListIterable<V> collectWith(Function2<? super T, ? super P, ? extends V> function, P parameter)
     {
-        return new NonParallelListIterable<V>(this.delegate.collectWith(function, parameter));
+        return new NonParallelListIterable<>(this.delegate.collectWith(function, parameter));
     }
 
     public <V> ParallelListIterable<V> collectIf(Predicate<? super T> predicate, Function<? super T, ? extends V> function)
     {
-        return new NonParallelListIterable<V>(this.delegate.collectIf(predicate, function));
+        return new NonParallelListIterable<>(this.delegate.collectIf(predicate, function));
     }
 
     public <V> ParallelListIterable<V> flatCollect(Function<? super T, ? extends Iterable<V>> function)
     {
-        return new NonParallelListIterable<V>(this.delegate.flatCollect(function));
+        return new NonParallelListIterable<>(this.delegate.flatCollect(function));
     }
 
     public <V> SortedSetMultimap<V, T> groupBy(Function<? super T, ? extends V> function)

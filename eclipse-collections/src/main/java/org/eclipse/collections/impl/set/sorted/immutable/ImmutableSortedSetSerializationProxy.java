@@ -66,7 +66,7 @@ class ImmutableSortedSetSerializationProxy<T> implements Externalizable
     {
         Comparator<T> comparator = (Comparator<T>) in.readObject();
         int size = in.readInt();
-        MutableSortedSet<T> deserializedSet = new TreeSortedSet<T>(comparator);
+        MutableSortedSet<T> deserializedSet = new TreeSortedSet<>(comparator);
 
         for (int i = 0; i < size; i++)
         {

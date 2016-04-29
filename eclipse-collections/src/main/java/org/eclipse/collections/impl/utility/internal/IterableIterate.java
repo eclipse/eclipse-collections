@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -894,7 +894,7 @@ public final class IterableIterate
             Iterable<T> iterable,
             Function<? super T, ? extends V> function)
     {
-        return IterableIterate.groupBy(iterable, function, new FastListMultimap<V, T>());
+        return IterableIterate.groupBy(iterable, function, new FastListMultimap<>());
     }
 
     /**
@@ -915,7 +915,7 @@ public final class IterableIterate
             Iterable<T> iterable,
             Function<? super T, ? extends Iterable<V>> function)
     {
-        return IterableIterate.groupByEach(iterable, function, new FastListMultimap<V, T>());
+        return IterableIterate.groupByEach(iterable, function, new FastListMultimap<>());
     }
 
     /**

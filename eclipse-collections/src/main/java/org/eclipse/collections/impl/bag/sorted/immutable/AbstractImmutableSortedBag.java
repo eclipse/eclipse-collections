@@ -102,7 +102,7 @@ abstract class AbstractImmutableSortedBag<T>
 
     protected Object writeReplace()
     {
-        return new ImmutableSortedBagSerializationProxy<T>(this);
+        return new ImmutableSortedBagSerializationProxy<>(this);
     }
 
     public <V> ImmutableSortedBagMultimap<V, T> groupBy(Function<? super T, ? extends V> function)
@@ -142,7 +142,7 @@ abstract class AbstractImmutableSortedBag<T>
 
     public PartitionImmutableSortedBag<T> partition(final Predicate<? super T> predicate)
     {
-        final PartitionMutableSortedBag<T> result = new PartitionTreeBag<T>(this.comparator());
+        final PartitionMutableSortedBag<T> result = new PartitionTreeBag<>(this.comparator());
         this.forEachWithOccurrences((each, index) -> {
             MutableSortedBag<T> bucket = predicate.accept(each) ? result.getSelected() : result.getRejected();
             bucket.addOccurrences(each, index);
@@ -152,7 +152,7 @@ abstract class AbstractImmutableSortedBag<T>
 
     public <P> PartitionImmutableSortedBag<T> partitionWith(final Predicate2<? super T, ? super P> predicate, final P parameter)
     {
-        final PartitionMutableSortedBag<T> result = new PartitionTreeBag<T>(this.comparator());
+        final PartitionMutableSortedBag<T> result = new PartitionTreeBag<>(this.comparator());
         this.forEachWithOccurrences((each, index) -> {
             MutableSortedBag<T> bucket = predicate.accept(each, parameter)
                     ? result.getSelected()

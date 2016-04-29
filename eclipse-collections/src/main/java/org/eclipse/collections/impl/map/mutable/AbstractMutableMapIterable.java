@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -114,7 +114,7 @@ public abstract class AbstractMutableMapIterable<K, V> extends AbstractMapIterab
             Procedure2<? super V2, ? super V> mutatingAggregator)
     {
         MutableMap<K2, V2> map = UnifiedMap.newMap();
-        this.forEach(new MutatingAggregationProcedure<V, K2, V2>(map, groupBy, zeroValueFactory, mutatingAggregator));
+        this.forEach(new MutatingAggregationProcedure<>(map, groupBy, zeroValueFactory, mutatingAggregator));
         return map;
     }
 
@@ -124,7 +124,7 @@ public abstract class AbstractMutableMapIterable<K, V> extends AbstractMapIterab
             Function2<? super V2, ? super V, ? extends V2> nonMutatingAggregator)
     {
         MutableMap<K2, V2> map = UnifiedMap.newMap();
-        this.forEach(new NonMutatingAggregationProcedure<V, K2, V2>(map, groupBy, zeroValueFactory, nonMutatingAggregator));
+        this.forEach(new NonMutatingAggregationProcedure<>(map, groupBy, zeroValueFactory, nonMutatingAggregator));
         return map;
     }
 

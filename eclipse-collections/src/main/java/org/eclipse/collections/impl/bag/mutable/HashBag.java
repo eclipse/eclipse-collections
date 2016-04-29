@@ -43,7 +43,7 @@ public class HashBag<T>
 
     public HashBag(int size)
     {
-        this.items = new ObjectIntHashMap<T>(size);
+        this.items = new ObjectIntHashMap<>(size);
     }
 
     private HashBag(MutableObjectIntMap<T> map)
@@ -54,12 +54,12 @@ public class HashBag<T>
 
     public static <E> HashBag<E> newBag()
     {
-        return new HashBag<E>();
+        return new HashBag<>();
     }
 
     public static <E> HashBag<E> newBag(int size)
     {
-        return new HashBag<E>(size);
+        return new HashBag<>(size);
     }
 
     public static <E> HashBag<E> newBag(Bag<? extends E> source)
@@ -97,7 +97,7 @@ public class HashBag<T>
         MutableObjectIntMap<T> map = this.items.select((each, occurrences) -> {
             return predicate.accept(occurrences);
         });
-        return new HashBag<T>(map);
+        return new HashBag<>(map);
     }
 
     public void writeExternal(ObjectOutput out) throws IOException
@@ -107,7 +107,7 @@ public class HashBag<T>
 
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
     {
-        this.items = new ObjectIntHashMap<T>();
+        this.items = new ObjectIntHashMap<>();
         ((ObjectIntHashMap<T>) this.items).readExternal(in);
         this.size = (int) this.items.sum();
     }

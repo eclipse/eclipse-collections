@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -88,7 +88,7 @@ public class SynchronizedMutableList<T>
     {
         MutableList<E> mutableList =
                 list instanceof MutableList ? (MutableList<E>) list : ListAdapter.adapt(list);
-        return new SynchronizedMutableList<E>(mutableList);
+        return new SynchronizedMutableList<>(mutableList);
     }
 
     /**
@@ -101,7 +101,7 @@ public class SynchronizedMutableList<T>
     {
         MutableList<E> mutableList =
                 list instanceof MutableList ? (MutableList<E>) list : ListAdapter.adapt(list);
-        return new SynchronizedMutableList<E>(mutableList, lock);
+        return new SynchronizedMutableList<>(mutableList, lock);
     }
 
     @Override
@@ -154,7 +154,7 @@ public class SynchronizedMutableList<T>
 
     protected Object writeReplace()
     {
-        return new SynchronizedCollectionSerializationProxy<T>(this.getDelegate());
+        return new SynchronizedCollectionSerializationProxy<>(this.getDelegate());
     }
 
     public boolean addAll(int index, Collection<? extends T> collection)
@@ -225,7 +225,7 @@ public class SynchronizedMutableList<T>
 
     public ParallelListIterable<T> asParallel(ExecutorService executorService, int batchSize)
     {
-        return new SynchronizedParallelListIterable<T>(this.getDelegate().asParallel(executorService, batchSize), this.getLock());
+        return new SynchronizedParallelListIterable<>(this.getDelegate().asParallel(executorService, batchSize), this.getLock());
     }
 
     public int binarySearch(T key, Comparator<? super T> comparator)

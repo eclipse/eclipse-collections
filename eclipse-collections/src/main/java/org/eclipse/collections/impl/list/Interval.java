@@ -643,7 +643,7 @@ public final class Interval
             Function<? super Integer, ? extends T> function,
             R target)
     {
-        CollectProcedure<Integer, T> procedure = new CollectProcedure<Integer, T>(function, target);
+        CollectProcedure<Integer, T> procedure = new CollectProcedure<>(function, target);
         this.forEach(procedure);
         return target;
     }
@@ -651,7 +651,7 @@ public final class Interval
     @Override
     public <R extends Collection<Integer>> R select(Predicate<? super Integer> predicate, R target)
     {
-        SelectProcedure<Integer> procedure = new SelectProcedure<Integer>(predicate, target);
+        SelectProcedure<Integer> procedure = new SelectProcedure<>(predicate, target);
         this.forEach(procedure);
         return target;
     }
@@ -659,7 +659,7 @@ public final class Interval
     @Override
     public <R extends Collection<Integer>> R reject(Predicate<? super Integer> predicate, R target)
     {
-        RejectProcedure<Integer> procedure = new RejectProcedure<Integer>(predicate, target);
+        RejectProcedure<Integer> procedure = new RejectProcedure<>(predicate, target);
         this.forEach(procedure);
         return target;
     }
@@ -998,12 +998,12 @@ public final class Interval
 
     public ListIterator<Integer> listIterator()
     {
-        return new MutableListIterator<Integer>(this, 0);
+        return new MutableListIterator<>(this, 0);
     }
 
     public ListIterator<Integer> listIterator(int index)
     {
-        return new MutableListIterator<Integer>(this, index);
+        return new MutableListIterator<>(this, index);
     }
 
     public Interval subList(int fromIndex, int toIndex)

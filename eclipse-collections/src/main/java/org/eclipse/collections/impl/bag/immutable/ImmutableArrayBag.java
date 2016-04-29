@@ -84,7 +84,7 @@ public class ImmutableArrayBag<T>
                 this.index++;
             }
         });
-        return new ImmutableArrayBag<T>(newKeys, newCounts);
+        return new ImmutableArrayBag<>(newKeys, newCounts);
     }
 
     public void forEachWithOccurrences(ObjectIntProcedure<? super T> objectIntProcedure)
@@ -146,7 +146,7 @@ public class ImmutableArrayBag<T>
         {
             newCounts[elementIndex]++;
         }
-        return new ImmutableArrayBag<T>(newKeys, newCounts);
+        return new ImmutableArrayBag<>(newKeys, newCounts);
     }
 
     public ImmutableBag<T> newWithout(T element)
@@ -170,7 +170,7 @@ public class ImmutableArrayBag<T>
                 System.arraycopy(this.keys, elementIndex + 1, newKeys, elementIndex, newKeys.length - elementIndex);
                 System.arraycopy(this.counts, elementIndex + 1, newCounts, elementIndex, newCounts.length - elementIndex);
             }
-            return new ImmutableArrayBag<T>(newKeys, newCounts);
+            return new ImmutableArrayBag<>(newKeys, newCounts);
         }
         return this;
     }
@@ -419,7 +419,7 @@ public class ImmutableArrayBag<T>
 
     protected Object writeReplace()
     {
-        return new ImmutableBagSerializationProxy<T>(this);
+        return new ImmutableBagSerializationProxy<>(this);
     }
 
     private final class ArrayBagIterator

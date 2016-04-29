@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -68,17 +68,17 @@ final class ImmutableTreeSet<T>
 
     public static <T> ImmutableSortedSet<T> newSetWith(T... elements)
     {
-        return new ImmutableTreeSet<T>(TreeSortedSet.newSetWith(elements));
+        return new ImmutableTreeSet<>(TreeSortedSet.newSetWith(elements));
     }
 
     public static <T> ImmutableSortedSet<T> newSetWith(Comparator<? super T> comparator, T... elements)
     {
-        return new ImmutableTreeSet<T>(TreeSortedSet.newSetWith(comparator, elements));
+        return new ImmutableTreeSet<>(TreeSortedSet.newSetWith(comparator, elements));
     }
 
     public static <T> ImmutableSortedSet<T> newSet(SortedSet<T> set)
     {
-        return new ImmutableTreeSet<T>(TreeSortedSet.newSet(set));
+        return new ImmutableTreeSet<>(TreeSortedSet.newSet(set));
     }
 
     public int size()
@@ -88,7 +88,7 @@ final class ImmutableTreeSet<T>
 
     private Object writeReplace()
     {
-        return new ImmutableSortedSetSerializationProxy<T>(this);
+        return new ImmutableSortedSetSerializationProxy<>(this);
     }
 
     @Override
@@ -410,17 +410,17 @@ final class ImmutableTreeSet<T>
 
         public SortedSetBatch<T> select(Predicate<? super T> predicate)
         {
-            return new SelectSortedSetBatch<T>(this, predicate);
+            return new SelectSortedSetBatch<>(this, predicate);
         }
 
         public <V> ListBatch<V> collect(Function<? super T, ? extends V> function)
         {
-            return new CollectSortedSetBatch<T, V>(this, function);
+            return new CollectSortedSetBatch<>(this, function);
         }
 
         public <V> ListBatch<V> flatCollect(Function<? super T, ? extends Iterable<V>> function)
         {
-            return new FlatCollectSortedSetBatch<T, V>(this, function);
+            return new FlatCollectSortedSetBatch<>(this, function);
         }
 
         public SortedSetBatch<T> distinct(ConcurrentHashMap<T, Boolean> distinct)

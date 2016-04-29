@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -126,56 +126,56 @@ public abstract class AbstractMutableMap<K, V> extends AbstractMutableMapIterabl
     public MutableBooleanBag collectBoolean(BooleanFunction<? super V> booleanFunction)
     {
         MutableBooleanBag result = new BooleanHashBag();
-        this.forEach(new CollectBooleanProcedure<V>(booleanFunction, result));
+        this.forEach(new CollectBooleanProcedure<>(booleanFunction, result));
         return result;
     }
 
     public MutableByteBag collectByte(ByteFunction<? super V> byteFunction)
     {
         MutableByteBag result = new ByteHashBag();
-        this.forEach(new CollectByteProcedure<V>(byteFunction, result));
+        this.forEach(new CollectByteProcedure<>(byteFunction, result));
         return result;
     }
 
     public MutableCharBag collectChar(CharFunction<? super V> charFunction)
     {
         MutableCharBag result = new CharHashBag();
-        this.forEach(new CollectCharProcedure<V>(charFunction, result));
+        this.forEach(new CollectCharProcedure<>(charFunction, result));
         return result;
     }
 
     public MutableDoubleBag collectDouble(DoubleFunction<? super V> doubleFunction)
     {
         MutableDoubleBag result = new DoubleHashBag();
-        this.forEach(new CollectDoubleProcedure<V>(doubleFunction, result));
+        this.forEach(new CollectDoubleProcedure<>(doubleFunction, result));
         return result;
     }
 
     public MutableFloatBag collectFloat(FloatFunction<? super V> floatFunction)
     {
         MutableFloatBag result = new FloatHashBag();
-        this.forEach(new CollectFloatProcedure<V>(floatFunction, result));
+        this.forEach(new CollectFloatProcedure<>(floatFunction, result));
         return result;
     }
 
     public MutableIntBag collectInt(IntFunction<? super V> intFunction)
     {
         MutableIntBag result = new IntHashBag();
-        this.forEach(new CollectIntProcedure<V>(intFunction, result));
+        this.forEach(new CollectIntProcedure<>(intFunction, result));
         return result;
     }
 
     public MutableLongBag collectLong(LongFunction<? super V> longFunction)
     {
         MutableLongBag result = new LongHashBag();
-        this.forEach(new CollectLongProcedure<V>(longFunction, result));
+        this.forEach(new CollectLongProcedure<>(longFunction, result));
         return result;
     }
 
     public MutableShortBag collectShort(ShortFunction<? super V> shortFunction)
     {
         MutableShortBag result = new ShortHashBag();
-        this.forEach(new CollectShortProcedure<V>(shortFunction, result));
+        this.forEach(new CollectShortProcedure<>(shortFunction, result));
         return result;
     }
 
@@ -186,17 +186,17 @@ public abstract class AbstractMutableMap<K, V> extends AbstractMutableMapIterabl
 
     public <R> MutableBag<R> collectIf(Predicate<? super V> predicate, Function<? super V, ? extends R> function)
     {
-        return this.collectIf(predicate, function, new HashBag<R>());
+        return this.collectIf(predicate, function, new HashBag<>());
     }
 
     public <R> MutableBag<R> flatCollect(Function<? super V, ? extends Iterable<R>> function)
     {
-        return this.flatCollect(function, new HashBag<R>());
+        return this.flatCollect(function, new HashBag<>());
     }
 
     public MutableBag<V> select(Predicate<? super V> predicate)
     {
-        return this.select(predicate, new HashBag<V>());
+        return this.select(predicate, new HashBag<>());
     }
 
     public MutableMap<K, V> tap(Procedure<? super V> procedure)
@@ -212,7 +212,7 @@ public abstract class AbstractMutableMap<K, V> extends AbstractMutableMapIterabl
 
     public MutableBag<V> reject(Predicate<? super V> predicate)
     {
-        return this.reject(predicate, new HashBag<V>());
+        return this.reject(predicate, new HashBag<>());
     }
 
     public <P> MutableBag<V> rejectWith(Predicate2<? super V, ? super P> predicate, P parameter)
@@ -222,22 +222,22 @@ public abstract class AbstractMutableMap<K, V> extends AbstractMutableMapIterabl
 
     public PartitionMutableBag<V> partition(Predicate<? super V> predicate)
     {
-        PartitionMutableBag<V> partitionMutableBag = new PartitionHashBag<V>();
-        this.forEach(new PartitionProcedure<V>(predicate, partitionMutableBag));
+        PartitionMutableBag<V> partitionMutableBag = new PartitionHashBag<>();
+        this.forEach(new PartitionProcedure<>(predicate, partitionMutableBag));
         return partitionMutableBag;
     }
 
     public <P> PartitionMutableBag<V> partitionWith(Predicate2<? super V, ? super P> predicate, P parameter)
     {
-        PartitionMutableBag<V> partitionMutableBag = new PartitionHashBag<V>();
-        this.forEach(new PartitionPredicate2Procedure<V, P>(predicate, parameter, partitionMutableBag));
+        PartitionMutableBag<V> partitionMutableBag = new PartitionHashBag<>();
+        this.forEach(new PartitionPredicate2Procedure<>(predicate, parameter, partitionMutableBag));
         return partitionMutableBag;
     }
 
     public <S> MutableBag<S> selectInstancesOf(Class<S> clazz)
     {
         MutableBag<S> result = HashBag.newBag();
-        this.forEach(new SelectInstancesOfProcedure<S>(clazz, result));
+        this.forEach(new SelectInstancesOfProcedure<>(clazz, result));
         return result;
     }
 
@@ -247,7 +247,7 @@ public abstract class AbstractMutableMap<K, V> extends AbstractMutableMapIterabl
     @Deprecated
     public <S> MutableBag<Pair<V, S>> zip(Iterable<S> that)
     {
-        return this.zip(that, new HashBag<Pair<V, S>>(this.size()));
+        return this.zip(that, new HashBag<>(this.size()));
     }
 
     /**
@@ -256,7 +256,7 @@ public abstract class AbstractMutableMap<K, V> extends AbstractMutableMapIterabl
     @Deprecated
     public MutableSet<Pair<V, Integer>> zipWithIndex()
     {
-        return this.zipWithIndex(new UnifiedSet<Pair<V, Integer>>(this.size()));
+        return this.zipWithIndex(new UnifiedSet<>(this.size()));
     }
 
     public MutableMap<K, V> withKeyValue(K key, V value)

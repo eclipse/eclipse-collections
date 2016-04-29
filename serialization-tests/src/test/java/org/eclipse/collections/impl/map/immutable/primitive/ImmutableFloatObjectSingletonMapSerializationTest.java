@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -23,6 +23,6 @@ public class ImmutableFloatObjectSingletonMapSerializationTest
                 "rO0ABXNyAH5vcmcuZWNsaXBzZS5jb2xsZWN0aW9ucy5pbXBsLm1hcC5pbW11dGFibGUucHJpbWl0\n"
                         + "aXZlLkFic3RyYWN0SW1tdXRhYmxlRmxvYXRPYmplY3RNYXAkSW1tdXRhYmxlRmxvYXRPYmplY3RN\n"
                         + "YXBTZXJpYWxpemF0aW9uUHJveHkAAAAAAAAAAQwAAHhwdwgAAAABP4AAAHQAATF4",
-                new ImmutableFloatObjectSingletonMap<String>(1.0f, "1"));
+                new ImmutableFloatObjectSingletonMap<>(1.0f, "1"));
     }
 }

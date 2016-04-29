@@ -92,7 +92,7 @@ public class UnmodifiableRichIterable<T>
         {
             throw new IllegalArgumentException("cannot create a UnmodifiableRichIterable for null");
         }
-        return new UnmodifiableRichIterable<E>(iterable);
+        return new UnmodifiableRichIterable<>(iterable);
     }
 
     public <R extends Collection<T>> R select(Predicate<? super T> predicate, R target)
@@ -599,7 +599,7 @@ public class UnmodifiableRichIterable<T>
 
     public Iterator<T> iterator()
     {
-        return new UnmodifiableIteratorAdapter<T>(this.iterable.iterator());
+        return new UnmodifiableIteratorAdapter<>(this.iterable.iterator());
     }
 
     @Override

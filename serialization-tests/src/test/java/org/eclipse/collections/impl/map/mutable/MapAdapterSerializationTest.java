@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -24,7 +24,7 @@ public class MapAdapterSerializationTest
                         + "ZXIAAAAAAAAAAQIAAUwACGRlbGVnYXRldAAPTGphdmEvdXRpbC9NYXA7eHBzcgAzb3JnLmVjbGlw\n"
                         + "c2UuY29sbGVjdGlvbnMuaW1wbC5tYXAubXV0YWJsZS5VbmlmaWVkTWFwAAAAAAAAAAEMAAB4cHcI\n"
                         + "AAAAAD9AAAB4",
-                new MapAdapter<Object, Object>(UnifiedMap.newMap()));
+                new MapAdapter<>(UnifiedMap.newMap()));
     }
 
     @Test
@@ -33,7 +33,7 @@ public class MapAdapterSerializationTest
         Verify.assertSerializedForm(
                 1L,
                 UnifiedMapSerializationTest.UNIFIED_MAP_KEY_SET,
-                new MapAdapter<Object, Object>(UnifiedMap.newMap()).keySet());
+                new MapAdapter<>(UnifiedMap.newMap()).keySet());
     }
 
     @Test
@@ -42,7 +42,7 @@ public class MapAdapterSerializationTest
         Verify.assertSerializedForm(
                 1L,
                 UnifiedMapSerializationTest.UNIFIED_MAP_ENTRY_SET,
-                new MapAdapter<Object, Object>(UnifiedMap.newMap()).entrySet());
+                new MapAdapter<>(UnifiedMap.newMap()).entrySet());
     }
 
     @Test
@@ -51,6 +51,6 @@ public class MapAdapterSerializationTest
         Verify.assertSerializedForm(
                 1L,
                 UnifiedMapSerializationTest.UNIFIED_MAP_VALUES,
-                new MapAdapter<Object, Object>(UnifiedMap.newMap()).values());
+                new MapAdapter<>(UnifiedMap.newMap()).values());
     }
 }

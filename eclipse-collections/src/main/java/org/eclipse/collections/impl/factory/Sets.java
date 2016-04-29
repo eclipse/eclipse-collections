@@ -215,7 +215,7 @@ public final class Sets
         if (comparator != null)
         {
             // TODO: this should return a SortedSetAdapter once implemented
-            return SetAdapter.adapt(new TreeSet<E>(comparator));
+            return SetAdapter.adapt(new TreeSet<>(comparator));
         }
         return UnifiedSet.newSet();
     }

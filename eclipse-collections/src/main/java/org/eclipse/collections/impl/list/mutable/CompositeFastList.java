@@ -149,7 +149,7 @@ public final class CompositeFastList<E>
     @Override
     public void forEachWithIndex(ObjectIntProcedure<? super E> objectIntProcedure)
     {
-        this.lists.forEach(new ProcedureToInnerListObjectIntProcedure<E>(objectIntProcedure));
+        this.lists.forEach(new ProcedureToInnerListObjectIntProcedure<>(objectIntProcedure));
     }
 
     @Override
@@ -678,6 +678,6 @@ public final class CompositeFastList<E>
     @Override
     public ParallelListIterable<E> asParallel(ExecutorService executorService, int batchSize)
     {
-        return new NonParallelListIterable<E>(this);
+        return new NonParallelListIterable<>(this);
     }
 }

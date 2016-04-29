@@ -67,7 +67,7 @@ public class ParallelFlatCollectListIterable<T, V> extends AbstractParallelListI
     {
         // Some predicates are stateful, so they cannot be called more than once pre element,
         // that's why we use an AtomicReference to return the accepted element
-        final AtomicReference<V> result = new AtomicReference<V>();
+        final AtomicReference<V> result = new AtomicReference<>();
         this.parallelIterable.anySatisfy(each -> Iterate.anySatisfy(this.function.valueOf(each), each1 -> {
             if (predicate.accept(each1))
             {

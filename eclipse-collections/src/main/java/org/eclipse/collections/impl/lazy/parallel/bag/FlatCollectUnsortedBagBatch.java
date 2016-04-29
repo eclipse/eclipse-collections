@@ -43,16 +43,16 @@ public class FlatCollectUnsortedBagBatch<T, V> extends AbstractBatch<V> implemen
 
     public UnsortedBagBatch<V> select(Predicate<? super V> predicate)
     {
-        return new SelectUnsortedBagBatch<V>(this, predicate);
+        return new SelectUnsortedBagBatch<>(this, predicate);
     }
 
     public <VV> UnsortedBagBatch<VV> collect(Function<? super V, ? extends VV> function)
     {
-        return new CollectUnsortedBagBatch<V, VV>(this, function);
+        return new CollectUnsortedBagBatch<>(this, function);
     }
 
     public <V1> UnsortedBagBatch<V1> flatCollect(Function<? super V, ? extends Iterable<V1>> function)
     {
-        return new FlatCollectUnsortedBagBatch<V, V1>(this, function);
+        return new FlatCollectUnsortedBagBatch<>(this, function);
     }
 }

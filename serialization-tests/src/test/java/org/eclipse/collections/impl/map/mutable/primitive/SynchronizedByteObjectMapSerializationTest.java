@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -26,6 +26,6 @@ public class SynchronizedByteObjectMapSerializationTest
                         + "aXZlL011dGFibGVCeXRlT2JqZWN0TWFwO3hwcQB+AANzcgBEb3JnLmVjbGlwc2UuY29sbGVjdGlv\n"
                         + "bnMuaW1wbC5tYXAubXV0YWJsZS5wcmltaXRpdmUuQnl0ZU9iamVjdEhhc2hNYXAAAAAAAAAAAQwA\n"
                         + "AHhwdwQAAAAAeA==",
-                new SynchronizedByteObjectMap<Object>(new ByteObjectHashMap<Object>()));
+                new SynchronizedByteObjectMap<>(new ByteObjectHashMap<>()));
     }
 }

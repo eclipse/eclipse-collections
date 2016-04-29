@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -157,7 +157,7 @@ public abstract class AbstractImmutableSet<T> extends AbstractImmutableCollectio
     public ImmutableSet<T> select(Predicate<? super T> predicate)
     {
         MutableList<T> intermediateResult = FastList.newList();
-        this.forEach(new SelectProcedure<T>(predicate, intermediateResult));
+        this.forEach(new SelectProcedure<>(predicate, intermediateResult));
         return Sets.immutable.withAll(intermediateResult);
     }
 
@@ -169,7 +169,7 @@ public abstract class AbstractImmutableSet<T> extends AbstractImmutableCollectio
     public ImmutableSet<T> reject(Predicate<? super T> predicate)
     {
         MutableList<T> intermediateResult = FastList.newList();
-        this.forEach(new RejectProcedure<T>(predicate, intermediateResult));
+        this.forEach(new RejectProcedure<>(predicate, intermediateResult));
         return Sets.immutable.withAll(intermediateResult);
     }
 
@@ -180,85 +180,85 @@ public abstract class AbstractImmutableSet<T> extends AbstractImmutableCollectio
 
     public PartitionImmutableSet<T> partition(Predicate<? super T> predicate)
     {
-        PartitionMutableSet<T> partitionUnifiedSet = new PartitionUnifiedSet<T>();
-        this.forEach(new PartitionProcedure<T>(predicate, partitionUnifiedSet));
+        PartitionMutableSet<T> partitionUnifiedSet = new PartitionUnifiedSet<>();
+        this.forEach(new PartitionProcedure<>(predicate, partitionUnifiedSet));
         return partitionUnifiedSet.toImmutable();
     }
 
     public <P> PartitionImmutableSet<T> partitionWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
-        PartitionMutableSet<T> partitionUnifiedSet = new PartitionUnifiedSet<T>();
-        this.forEach(new PartitionPredicate2Procedure<T, P>(predicate, parameter, partitionUnifiedSet));
+        PartitionMutableSet<T> partitionUnifiedSet = new PartitionUnifiedSet<>();
+        this.forEach(new PartitionPredicate2Procedure<>(predicate, parameter, partitionUnifiedSet));
         return partitionUnifiedSet.toImmutable();
     }
 
     public <S> ImmutableSet<S> selectInstancesOf(Class<S> clazz)
     {
         MutableSet<S> result = UnifiedSet.newSet(this.size());
-        this.forEach(new SelectInstancesOfProcedure<S>(clazz, result));
+        this.forEach(new SelectInstancesOfProcedure<>(clazz, result));
         return result.toImmutable();
     }
 
     public <V> ImmutableSet<V> collect(Function<? super T, ? extends V> function)
     {
         MutableSet<V> result = UnifiedSet.newSet();
-        this.forEach(new CollectProcedure<T, V>(function, result));
+        this.forEach(new CollectProcedure<>(function, result));
         return result.toImmutable();
     }
 
     public ImmutableBooleanSet collectBoolean(BooleanFunction<? super T> booleanFunction)
     {
         MutableBooleanSet result = new BooleanHashSet();
-        this.forEach(new CollectBooleanProcedure<T>(booleanFunction, result));
+        this.forEach(new CollectBooleanProcedure<>(booleanFunction, result));
         return result.toImmutable();
     }
 
     public ImmutableByteSet collectByte(ByteFunction<? super T> byteFunction)
     {
         MutableByteSet result = new ByteHashSet();
-        this.forEach(new CollectByteProcedure<T>(byteFunction, result));
+        this.forEach(new CollectByteProcedure<>(byteFunction, result));
         return result.toImmutable();
     }
 
     public ImmutableCharSet collectChar(CharFunction<? super T> charFunction)
     {
         MutableCharSet result = new CharHashSet(this.size());
-        this.forEach(new CollectCharProcedure<T>(charFunction, result));
+        this.forEach(new CollectCharProcedure<>(charFunction, result));
         return result.toImmutable();
     }
 
     public ImmutableDoubleSet collectDouble(DoubleFunction<? super T> doubleFunction)
     {
         MutableDoubleSet result = new DoubleHashSet(this.size());
-        this.forEach(new CollectDoubleProcedure<T>(doubleFunction, result));
+        this.forEach(new CollectDoubleProcedure<>(doubleFunction, result));
         return result.toImmutable();
     }
 
     public ImmutableFloatSet collectFloat(FloatFunction<? super T> floatFunction)
     {
         MutableFloatSet result = new FloatHashSet(this.size());
-        this.forEach(new CollectFloatProcedure<T>(floatFunction, result));
+        this.forEach(new CollectFloatProcedure<>(floatFunction, result));
         return result.toImmutable();
     }
 
     public ImmutableIntSet collectInt(IntFunction<? super T> intFunction)
     {
         MutableIntSet result = new IntHashSet(this.size());
-        this.forEach(new CollectIntProcedure<T>(intFunction, result));
+        this.forEach(new CollectIntProcedure<>(intFunction, result));
         return result.toImmutable();
     }
 
     public ImmutableLongSet collectLong(LongFunction<? super T> longFunction)
     {
         MutableLongSet result = new LongHashSet(this.size());
-        this.forEach(new CollectLongProcedure<T>(longFunction, result));
+        this.forEach(new CollectLongProcedure<>(longFunction, result));
         return result.toImmutable();
     }
 
     public ImmutableShortSet collectShort(ShortFunction<? super T> shortFunction)
     {
         MutableShortSet result = new ShortHashSet(this.size());
-        this.forEach(new CollectShortProcedure<T>(shortFunction, result));
+        this.forEach(new CollectShortProcedure<>(shortFunction, result));
         return result.toImmutable();
     }
 
@@ -270,14 +270,14 @@ public abstract class AbstractImmutableSet<T> extends AbstractImmutableCollectio
     public <V> ImmutableSet<V> collectIf(Predicate<? super T> predicate, Function<? super T, ? extends V> function)
     {
         MutableSet<V> result = UnifiedSet.newSet();
-        this.forEach(new CollectIfProcedure<T, V>(result, function, predicate));
+        this.forEach(new CollectIfProcedure<>(result, function, predicate));
         return result.toImmutable();
     }
 
     public <V> ImmutableSet<V> flatCollect(Function<? super T, ? extends Iterable<V>> function)
     {
         MutableSet<V> result = UnifiedSet.newSet();
-        this.forEach(new FlatCollectProcedure<T, V>(function, result));
+        this.forEach(new FlatCollectProcedure<>(function, result));
         return result.toImmutable();
     }
 

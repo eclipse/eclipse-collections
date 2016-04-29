@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -33,7 +33,7 @@ public class SelectSortedSetBatch<T> extends AbstractBatch<T> implements SortedS
 
     public void forEach(Procedure<? super T> procedure)
     {
-        this.sortedSetBatch.forEach(new IfProcedure<T>(this.predicate, procedure));
+        this.sortedSetBatch.forEach(new IfProcedure<>(this.predicate, procedure));
     }
 
     /*
@@ -45,17 +45,17 @@ public class SelectSortedSetBatch<T> extends AbstractBatch<T> implements SortedS
 
     public SortedSetBatch<T> select(Predicate<? super T> predicate)
     {
-        return new SelectSortedSetBatch<T>(this, predicate);
+        return new SelectSortedSetBatch<>(this, predicate);
     }
 
     public <V> ListBatch<V> collect(Function<? super T, ? extends V> function)
     {
-        return new CollectSortedSetBatch<T, V>(this, function);
+        return new CollectSortedSetBatch<>(this, function);
     }
 
     public <V> ListBatch<V> flatCollect(Function<? super T, ? extends Iterable<V>> function)
     {
-        return new FlatCollectSortedSetBatch<T, V>(this, function);
+        return new FlatCollectSortedSetBatch<>(this, function);
     }
 
     public SortedSetBatch<T> distinct(ConcurrentHashMap<T, Boolean> distinct)

@@ -124,17 +124,17 @@ final class ImmutableArrayStack<T> implements ImmutableStack<T>, Serializable
 
     public static <T> ImmutableStack<T> newStack()
     {
-        return new ImmutableArrayStack<T>(FastList.<T>newList());
+        return new ImmutableArrayStack<>(FastList.<T>newList());
     }
 
     public static <E> ImmutableArrayStack<E> newStack(Iterable<? extends E> iterable)
     {
-        return new ImmutableArrayStack<E>((E[]) Iterate.toArray(iterable));
+        return new ImmutableArrayStack<>((E[]) Iterate.toArray(iterable));
     }
 
     public static <E> ImmutableArrayStack<E> newStackWith(E... elements)
     {
-        return new ImmutableArrayStack<E>(elements.clone());
+        return new ImmutableArrayStack<>(elements.clone());
     }
 
     public static <T> ImmutableArrayStack<T> newStackFromTopToBottom(Iterable<? extends T> items)
@@ -144,14 +144,14 @@ final class ImmutableArrayStack<T> implements ImmutableStack<T>, Serializable
 
     public static <T> ImmutableArrayStack<T> newStackFromTopToBottom(T... items)
     {
-        return new ImmutableArrayStack<T>(FastList.newListWith(items).reverseThis());
+        return new ImmutableArrayStack<>(FastList.newListWith(items).reverseThis());
     }
 
     public ImmutableStack<T> push(T item)
     {
         FastList<T> newDelegate = FastList.newList(this.delegate);
         newDelegate.add(item);
-        return new ImmutableArrayStack<T>(newDelegate);
+        return new ImmutableArrayStack<>(newDelegate);
     }
 
     public ImmutableStack<T> pop()
@@ -159,7 +159,7 @@ final class ImmutableArrayStack<T> implements ImmutableStack<T>, Serializable
         this.checkEmptyStack();
         FastList<T> newDelegate = FastList.newList(this.delegate);
         newDelegate.remove(this.delegate.size() - 1);
-        return new ImmutableArrayStack<T>(newDelegate);
+        return new ImmutableArrayStack<>(newDelegate);
     }
 
     public ImmutableStack<T> pop(int count)
@@ -177,7 +177,7 @@ final class ImmutableArrayStack<T> implements ImmutableStack<T>, Serializable
             newDelegate.remove(this.delegate.size() - 1);
             count--;
         }
-        return new ImmutableArrayStack<T>(newDelegate);
+        return new ImmutableArrayStack<>(newDelegate);
     }
 
     public T peek()
@@ -320,15 +320,15 @@ final class ImmutableArrayStack<T> implements ImmutableStack<T>, Serializable
 
     public PartitionImmutableStack<T> partition(Predicate<? super T> predicate)
     {
-        PartitionArrayStack<T> partitionMutableStack = new PartitionArrayStack<T>();
-        this.delegate.asReversed().forEach(new PartitionArrayStack.PartitionProcedure<T>(predicate, partitionMutableStack));
+        PartitionArrayStack<T> partitionMutableStack = new PartitionArrayStack<>();
+        this.delegate.asReversed().forEach(new PartitionArrayStack.PartitionProcedure<>(predicate, partitionMutableStack));
         return partitionMutableStack.toImmutable();
     }
 
     public <P> PartitionImmutableStack<T> partitionWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
-        PartitionArrayStack<T> partitionMutableStack = new PartitionArrayStack<T>();
-        this.delegate.asReversed().forEach(new PartitionArrayStack.PartitionPredicate2Procedure<T, P>(predicate, parameter, partitionMutableStack));
+        PartitionArrayStack<T> partitionMutableStack = new PartitionArrayStack<>();
+        this.delegate.asReversed().forEach(new PartitionArrayStack.PartitionPredicate2Procedure<>(predicate, parameter, partitionMutableStack));
         return partitionMutableStack.toImmutable();
     }
 
@@ -803,14 +803,14 @@ final class ImmutableArrayStack<T> implements ImmutableStack<T>, Serializable
     public <K, V> ImmutableMap<K, V> aggregateInPlaceBy(Function<? super T, ? extends K> groupBy, Function0<? extends V> zeroValueFactory, Procedure2<? super V, ? super T> mutatingAggregator)
     {
         MutableMap<K, V> map = UnifiedMap.newMap();
-        this.forEach(new MutatingAggregationProcedure<T, K, V>(map, groupBy, zeroValueFactory, mutatingAggregator));
+        this.forEach(new MutatingAggregationProcedure<>(map, groupBy, zeroValueFactory, mutatingAggregator));
         return map.toImmutable();
     }
 
     public <K, V> ImmutableMap<K, V> aggregateBy(Function<? super T, ? extends K> groupBy, Function0<? extends V> zeroValueFactory, Function2<? super V, ? super T, ? extends V> nonMutatingAggregator)
     {
         MutableMap<K, V> map = UnifiedMap.newMap();
-        this.forEach(new NonMutatingAggregationProcedure<T, K, V>(map, groupBy, zeroValueFactory, nonMutatingAggregator));
+        this.forEach(new NonMutatingAggregationProcedure<>(map, groupBy, zeroValueFactory, nonMutatingAggregator));
         return map.toImmutable();
     }
 
@@ -964,7 +964,7 @@ final class ImmutableArrayStack<T> implements ImmutableStack<T>, Serializable
 
     private Object writeReplace()
     {
-        return new ImmutableStackSerializationProxy<T>(this);
+        return new ImmutableStackSerializationProxy<>(this);
     }
 
     private static class ImmutableStackSerializationProxy<T> implements Externalizable
@@ -1010,7 +1010,7 @@ final class ImmutableArrayStack<T> implements ImmutableStack<T>, Serializable
         public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
         {
             int size = in.readInt();
-            FastList<T> deserializedDelegate = new FastList<T>(size);
+            FastList<T> deserializedDelegate = new FastList<>(size);
 
             for (int i = 0; i < size; i++)
             {

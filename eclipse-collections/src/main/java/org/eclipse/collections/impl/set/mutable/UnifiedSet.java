@@ -151,23 +151,23 @@ public class UnifiedSet<T>
 
     public static <K> UnifiedSet<K> newSet()
     {
-        return new UnifiedSet<K>();
+        return new UnifiedSet<>();
     }
 
     public static <K> UnifiedSet<K> newSet(int size)
     {
-        return new UnifiedSet<K>(size);
+        return new UnifiedSet<>(size);
     }
 
     public static <K> UnifiedSet<K> newSet(Iterable<? extends K> source)
     {
         if (source instanceof UnifiedSet)
         {
-            return new UnifiedSet<K>((UnifiedSet<K>) source);
+            return new UnifiedSet<>((UnifiedSet<K>) source);
         }
         if (source instanceof Collection)
         {
-            return new UnifiedSet<K>((Collection<K>) source);
+            return new UnifiedSet<>((Collection<K>) source);
         }
         if (source == null)
         {
@@ -182,7 +182,7 @@ public class UnifiedSet<T>
 
     public static <K> UnifiedSet<K> newSet(int size, float loadFactor)
     {
-        return new UnifiedSet<K>(size, loadFactor);
+        return new UnifiedSet<>(size, loadFactor);
     }
 
     public static <K> UnifiedSet<K> newSetWith(K... elements)
@@ -712,22 +712,22 @@ public class UnifiedSet<T>
 
     public PartitionMutableSet<T> partition(Predicate<? super T> predicate)
     {
-        PartitionMutableSet<T> partitionUnifiedSet = new PartitionUnifiedSet<T>();
-        this.forEach(new PartitionProcedure<T>(predicate, partitionUnifiedSet));
+        PartitionMutableSet<T> partitionUnifiedSet = new PartitionUnifiedSet<>();
+        this.forEach(new PartitionProcedure<>(predicate, partitionUnifiedSet));
         return partitionUnifiedSet;
     }
 
     public <P> PartitionMutableSet<T> partitionWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
-        PartitionMutableSet<T> partitionUnifiedSet = new PartitionUnifiedSet<T>();
-        this.forEach(new PartitionPredicate2Procedure<T, P>(predicate, parameter, partitionUnifiedSet));
+        PartitionMutableSet<T> partitionUnifiedSet = new PartitionUnifiedSet<>();
+        this.forEach(new PartitionPredicate2Procedure<>(predicate, parameter, partitionUnifiedSet));
         return partitionUnifiedSet;
     }
 
     public <S> UnifiedSet<S> selectInstancesOf(Class<S> clazz)
     {
         UnifiedSet<S> result = UnifiedSet.newSet();
-        this.forEach(new SelectInstancesOfProcedure<S>(clazz, result));
+        this.forEach(new SelectInstancesOfProcedure<>(clazz, result));
         return result;
     }
 
@@ -1421,7 +1421,7 @@ public class UnifiedSet<T>
     private boolean retainAllFromNonSet(Iterable<?> iterable)
     {
         int retainedSize = Iterate.sizeOf(iterable);
-        UnifiedSet<T> retainedCopy = new UnifiedSet<T>(retainedSize, this.loadFactor);
+        UnifiedSet<T> retainedCopy = new UnifiedSet<>(retainedSize, this.loadFactor);
         for (Object key : iterable)
         {
             this.addIfFound((T) key, retainedCopy);
@@ -1455,7 +1455,7 @@ public class UnifiedSet<T>
     @Override
     public UnifiedSet<T> clone()
     {
-        return new UnifiedSet<T>(this);
+        return new UnifiedSet<>(this);
     }
 
     @Override
@@ -1855,7 +1855,7 @@ public class UnifiedSet<T>
 
     public <V> UnifiedSetMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function)
     {
-        return this.groupByEach(function, new UnifiedSetMultimap<V, T>());
+        return this.groupByEach(function, new UnifiedSetMultimap<>());
     }
 
     public T get(T key)
@@ -2214,17 +2214,17 @@ public class UnifiedSet<T>
 
         public UnsortedSetBatch<T> select(Predicate<? super T> predicate)
         {
-            return new SelectUnsortedSetBatch<T>(this, predicate);
+            return new SelectUnsortedSetBatch<>(this, predicate);
         }
 
         public <V> UnsortedBagBatch<V> collect(Function<? super T, ? extends V> function)
         {
-            return new CollectUnsortedBagBatch<T, V>(this, function);
+            return new CollectUnsortedBagBatch<>(this, function);
         }
 
         public <V> UnsortedBagBatch<V> flatCollect(Function<? super T, ? extends Iterable<V>> function)
         {
-            return new FlatCollectUnsortedBagBatch<T, V>(this, function);
+            return new FlatCollectUnsortedBagBatch<>(this, function);
         }
     }
 

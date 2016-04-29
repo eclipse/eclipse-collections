@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -25,6 +25,6 @@ public class ImmutableSextupletonListSerializationTest
                         + "bGVtZW50NXEAfgABTAAIZWxlbWVudDZxAH4AAXhwc3IAEWphdmEubGFuZy5JbnRlZ2VyEuKgpPeB\n"
                         + "hzgCAAFJAAV2YWx1ZXhyABBqYXZhLmxhbmcuTnVtYmVyhqyVHQuU4IsCAAB4cAAAAAFzcQB+AAMA\n"
                         + "AAACc3EAfgADAAAAA3NxAH4AAwAAAARzcQB+AAMAAAAFc3EAfgADAAAABg==",
-                new ImmutableSextupletonList<Integer>(1, 2, 3, 4, 5, 6));
+                new ImmutableSextupletonList<>(1, 2, 3, 4, 5, 6));
     }
 }

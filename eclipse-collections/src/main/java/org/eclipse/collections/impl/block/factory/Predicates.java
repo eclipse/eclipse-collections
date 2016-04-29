@@ -41,7 +41,7 @@ public abstract class Predicates<T>
 
     public static <T> Predicates<T> adapt(Predicate<T> predicate)
     {
-        return new PredicateAdapter<T>(predicate);
+        return new PredicateAdapter<>(predicate);
     }
 
     /**
@@ -56,52 +56,52 @@ public abstract class Predicates<T>
 
     public static <T> Predicate<T> throwing(ThrowingPredicate<T> throwingPredicate)
     {
-        return new ThrowingPredicateAdapter<T>(throwingPredicate);
+        return new ThrowingPredicateAdapter<>(throwingPredicate);
     }
 
     public static <P, T> Predicate<T> bind(Predicate2<? super T, ? super P> predicate, P parameter)
     {
-        return new BindPredicate2<T, P>(predicate, parameter);
+        return new BindPredicate2<>(predicate, parameter);
     }
 
     public static <T> Predicate<T> synchronizedEach(Predicate<T> predicate)
     {
-        return new SynchronizedPredicate<T>(predicate);
+        return new SynchronizedPredicate<>(predicate);
     }
 
     public static <T> Predicates<T> or(Iterable<? extends Predicate<? super T>> predicates)
     {
-        return new OrIterablePredicate<T>(predicates);
+        return new OrIterablePredicate<>(predicates);
     }
 
     public static <T> Predicates<T> or(Predicate<? super T> predicate1, Predicate<? super T> predicate2)
     {
-        return new OrPredicate<T>(predicate1, predicate2);
+        return new OrPredicate<>(predicate1, predicate2);
     }
 
     public static <T> Predicates<T> or(Predicate<? super T>... predicates)
     {
-        return new OrIterablePredicate<T>(Arrays.asList(predicates));
+        return new OrIterablePredicate<>(Arrays.asList(predicates));
     }
 
     public static <T> Predicates<T> and(Iterable<? extends Predicate<? super T>> predicates)
     {
-        return new AndIterablePredicate<T>(predicates);
+        return new AndIterablePredicate<>(predicates);
     }
 
     public static <T> Predicates<T> and(Predicate<? super T> predicate1, Predicate<? super T> predicate2)
     {
-        return new AndPredicate<T>(predicate1, predicate2);
+        return new AndPredicate<>(predicate1, predicate2);
     }
 
     public static <T> Predicates<T> and(Predicate<? super T>... predicates)
     {
-        return new AndIterablePredicate<T>(Arrays.asList(predicates));
+        return new AndIterablePredicate<>(Arrays.asList(predicates));
     }
 
     public static <T> Predicates<T> not(Predicate<T> predicate)
     {
-        return new NotPredicate<T>(predicate);
+        return new NotPredicate<>(predicate);
     }
 
     public Predicates<T> not()
@@ -111,17 +111,17 @@ public abstract class Predicates<T>
 
     public static <T> Predicates<T> neither(Predicate<? super T> operation1, Predicate<? super T> operation2)
     {
-        return new NeitherPredicate<T>(operation1, operation2);
+        return new NeitherPredicate<>(operation1, operation2);
     }
 
     public static <T> Predicates<T> noneOf(Predicate<? super T>... operations)
     {
-        return new NoneOfIterablePredicate<T>(Arrays.asList(operations));
+        return new NoneOfIterablePredicate<>(Arrays.asList(operations));
     }
 
     public static <T> Predicates<T> noneOf(Iterable<? extends Predicate<? super T>> operations)
     {
-        return new NoneOfIterablePredicate<T>(operations);
+        return new NoneOfIterablePredicate<>(operations);
     }
 
     /**
@@ -143,7 +143,7 @@ public abstract class Predicates<T>
     public static <T extends Comparable<? super T>> Predicates<T> betweenInclusive(T from, T to)
     {
         Predicates.failIfDifferentTypes(from, to);
-        return new BetweenInclusive<T>(from, to);
+        return new BetweenInclusive<>(from, to);
     }
 
     private static void failIfDifferentTypes(Object from, Object to)
@@ -164,7 +164,7 @@ public abstract class Predicates<T>
     public static <T extends Comparable<? super T>> Predicates<T> betweenExclusive(T from, T to)
     {
         Predicates.failIfDifferentTypes(from, to);
-        return new BetweenExclusive<T>(from, to);
+        return new BetweenExclusive<>(from, to);
     }
 
     /**
@@ -174,7 +174,7 @@ public abstract class Predicates<T>
     public static <T extends Comparable<? super T>> Predicates<T> betweenInclusiveFrom(T from, T to)
     {
         Predicates.failIfDifferentTypes(from, to);
-        return new BetweenInclusiveFrom<T>(from, to);
+        return new BetweenInclusiveFrom<>(from, to);
     }
 
     /**
@@ -184,7 +184,7 @@ public abstract class Predicates<T>
     public static <T extends Comparable<? super T>> Predicates<T> betweenInclusiveTo(T from, T to)
     {
         Predicates.failIfDifferentTypes(from, to);
-        return new BetweenInclusiveTo<T>(from, to);
+        return new BetweenInclusiveTo<>(from, to);
     }
 
     /**
@@ -302,50 +302,50 @@ public abstract class Predicates<T>
 
     public static <T extends Comparable<? super T>> Predicates<T> lessThan(T object)
     {
-        return new LessThanPredicate<T>(object);
+        return new LessThanPredicate<>(object);
     }
 
     public static <T, V extends Comparable<? super V>> Predicates<T> attributeLessThan(
             Function<? super T, ? extends V> function,
             V object)
     {
-        return new AttributePredicate<T, V>(function, new LessThanPredicate<V>(object));
+        return new AttributePredicate<T, V>(function, new LessThanPredicate<>(object));
     }
 
     public static <T extends Comparable<? super T>> Predicates<T> lessThanOrEqualTo(T object)
     {
-        return new LessThanOrEqualPredicate<T>(object);
+        return new LessThanOrEqualPredicate<>(object);
     }
 
     public static <T, V extends Comparable<? super V>> Predicates<T> attributeLessThanOrEqualTo(
             Function<? super T, ? extends V> function,
             V object)
     {
-        return new AttributePredicate<T, V>(function, new LessThanOrEqualPredicate<V>(object));
+        return new AttributePredicate<T, V>(function, new LessThanOrEqualPredicate<>(object));
     }
 
     public static <T extends Comparable<? super T>> Predicates<T> greaterThan(T object)
     {
-        return new GreaterThanPredicate<T>(object);
+        return new GreaterThanPredicate<>(object);
     }
 
     public static <T, V extends Comparable<? super V>> Predicates<T> attributeGreaterThan(
             Function<? super T, ? extends V> function,
             V object)
     {
-        return new AttributePredicate<T, V>(function, new GreaterThanPredicate<V>(object));
+        return new AttributePredicate<T, V>(function, new GreaterThanPredicate<>(object));
     }
 
     public static <T extends Comparable<? super T>> Predicates<T> greaterThanOrEqualTo(T object)
     {
-        return new GreaterThanOrEqualPredicate<T>(object);
+        return new GreaterThanOrEqualPredicate<>(object);
     }
 
     public static <T, V extends Comparable<? super V>> Predicates<T> attributeGreaterThanOrEqualTo(
             Function<? super T, ? extends V> function,
             V object)
     {
-        return new AttributePredicate<T, V>(function, new GreaterThanOrEqualPredicate<V>(object));
+        return new AttributePredicate<T, V>(function, new GreaterThanOrEqualPredicate<>(object));
     }
 
     public static <T, V> Predicates<T> attributePredicate(
@@ -364,17 +364,17 @@ public abstract class Predicates<T>
 
     public static <T> Predicates<Iterable<T>> anySatisfy(Predicate<? super T> predicate)
     {
-        return new AnySatisfy<T>(predicate);
+        return new AnySatisfy<>(predicate);
     }
 
     public static <T> Predicates<Iterable<T>> allSatisfy(Predicate<? super T> predicate)
     {
-        return new AllSatisfy<T>(predicate);
+        return new AllSatisfy<>(predicate);
     }
 
     public static <T> Predicates<Iterable<T>> noneSatisfy(Predicate<? super T> predicate)
     {
-        return new NoneSatisfy<T>(predicate);
+        return new NoneSatisfy<>(predicate);
     }
 
     public static <T, V> Predicates<T> attributeAnySatisfy(
@@ -409,12 +409,12 @@ public abstract class Predicates<T>
 
     public static <T> Predicates<T> ifTrue(Function<? super T, Boolean> function)
     {
-        return new AttributeTrue<T>(function);
+        return new AttributeTrue<>(function);
     }
 
     public static <T> Predicates<T> ifFalse(Function<? super T, Boolean> function)
     {
-        return new AttributeFalse<T>(function);
+        return new AttributeFalse<>(function);
     }
 
     public static <T> Predicates<T> attributeNotEqual(

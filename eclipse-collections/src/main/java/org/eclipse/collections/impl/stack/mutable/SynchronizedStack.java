@@ -106,7 +106,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
      */
     public static <T, S extends MutableStack<T>> SynchronizedStack<T> of(S stack)
     {
-        return new SynchronizedStack<T>(stack);
+        return new SynchronizedStack<>(stack);
     }
 
     public T pop()
@@ -1165,7 +1165,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
 
     public Iterator<T> iterator()
     {
-        return new UnmodifiableIteratorAdapter<T>(this.delegate.iterator());
+        return new UnmodifiableIteratorAdapter<>(this.delegate.iterator());
     }
 
     public <K, V> MutableMap<K, V> aggregateInPlaceBy(

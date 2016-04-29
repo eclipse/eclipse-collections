@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -24,6 +24,6 @@ public class ImmutableObjectIntHashMapSerializationTest
                 "rO0ABXNyAHpvcmcuZWNsaXBzZS5jb2xsZWN0aW9ucy5pbXBsLm1hcC5pbW11dGFibGUucHJpbWl0\n"
                         + "aXZlLkFic3RyYWN0SW1tdXRhYmxlT2JqZWN0SW50TWFwJEltbXV0YWJsZU9iamVjdEludE1hcFNl\n"
                         + "cmlhbGl6YXRpb25Qcm94eQAAAAAAAAABDAAAeHB3BAAAAAJ0AAEydwQAAAACdAABMXcEAAAAAXg=\n",
-                new ImmutableObjectIntHashMap<String>(ObjectIntHashMap.newWithKeysValues("1", 1, "2", 2)));
+                new ImmutableObjectIntHashMap<>(ObjectIntHashMap.newWithKeysValues("1", 1, "2", 2)));
     }
 }

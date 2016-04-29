@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -38,7 +38,7 @@ public final class HashingStrategies
 
     public static <T> HashingStrategy<T> nullSafeHashingStrategy(HashingStrategy<T> nonNullSafeStrategy)
     {
-        return new NullSafeHashingStrategy<T>(nonNullSafeStrategy);
+        return new NullSafeHashingStrategy<>(nonNullSafeStrategy);
     }
 
     public static <T, V> HashingStrategy<T> fromFunction(Function<? super T, ? extends V> function)
@@ -58,7 +58,7 @@ public final class HashingStrategies
             throw new IllegalArgumentException("Nothing to chain");
         }
 
-        return new ChainedHashingStrategy<T>(hashingStrategies);
+        return new ChainedHashingStrategy<>(hashingStrategies);
     }
 
     public static <T, V1, V2> HashingStrategy<T> fromFunctions(Function<? super T, ? extends V1> one, Function<? super T, ? extends V2> two)
@@ -78,42 +78,42 @@ public final class HashingStrategies
 
     public static <T> HashingStrategy<T> fromBooleanFunction(BooleanFunction<? super T> function)
     {
-        return new BooleanFunctionHashingStrategy<T>(function);
+        return new BooleanFunctionHashingStrategy<>(function);
     }
 
     public static <T> HashingStrategy<T> fromByteFunction(ByteFunction<? super T> function)
     {
-        return new ByteFunctionHashingStrategy<T>(function);
+        return new ByteFunctionHashingStrategy<>(function);
     }
 
     public static <T> HashingStrategy<T> fromCharFunction(CharFunction<? super T> function)
     {
-        return new CharFunctionHashingStrategy<T>(function);
+        return new CharFunctionHashingStrategy<>(function);
     }
 
     public static <T> HashingStrategy<T> fromDoubleFunction(DoubleFunction<? super T> function)
     {
-        return new DoubleFunctionHashingStrategy<T>(function);
+        return new DoubleFunctionHashingStrategy<>(function);
     }
 
     public static <T> HashingStrategy<T> fromFloatFunction(FloatFunction<? super T> function)
     {
-        return new FloatFunctionHashingStrategy<T>(function);
+        return new FloatFunctionHashingStrategy<>(function);
     }
 
     public static <T> HashingStrategy<T> fromIntFunction(IntFunction<? super T> function)
     {
-        return new IntFunctionHashingStrategy<T>(function);
+        return new IntFunctionHashingStrategy<>(function);
     }
 
     public static <T> HashingStrategy<T> fromLongFunction(LongFunction<? super T> function)
     {
-        return new LongFunctionHashingStrategy<T>(function);
+        return new LongFunctionHashingStrategy<>(function);
     }
 
     public static <T> HashingStrategy<T> fromShortFunction(ShortFunction<? super T> function)
     {
-        return new ShortFunctionHashingStrategy<T>(function);
+        return new ShortFunctionHashingStrategy<>(function);
     }
 
     private static class DefaultStrategy implements HashingStrategy<Object>

@@ -272,7 +272,7 @@ public class FJIterateTest
                 FJIterate.forEach(
                         FJIterateTest.createIntegerList(5),
                         new PassThruProcedureFactory<>(EXCEPTION_PROCEDURE),
-                        new PassThruCombiner<Procedure<Integer>>(),
+                        new PassThruCombiner<>(),
                         1,
                         5);
             }
@@ -369,7 +369,7 @@ public class FJIterateTest
                 FJIterate.forEachWithIndex(
                         FJIterateTest.createIntegerList(5),
                         new PassThruObjectIntProcedureFactory<>(EXCEPTION_OBJECT_INT_PROCEDURE),
-                        new PassThruCombiner<ObjectIntProcedure<Integer>>(),
+                        new PassThruCombiner<>(),
                         1,
                         5);
             }

@@ -241,7 +241,7 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
             Function<? super T, ? extends V> valueFunction)
     {
         MutableMap<K, V> map = Maps.mutable.empty();
-        this.forEach(new MapCollectProcedure<T, K, V>(map, keyFunction, valueFunction));
+        this.forEach(new MapCollectProcedure<>(map, keyFunction, valueFunction));
         return map;
     }
 
@@ -250,7 +250,7 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
             Function<? super T, ? extends V> valueFunction)
     {
         MutableSortedMap<K, V> sortedMap = SortedMaps.mutable.empty();
-        this.forEach(new MapCollectProcedure<T, K, V>(sortedMap, keyFunction, valueFunction));
+        this.forEach(new MapCollectProcedure<>(sortedMap, keyFunction, valueFunction));
         return sortedMap;
     }
 
@@ -260,13 +260,13 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
             Function<? super T, ? extends V> valueFunction)
     {
         MutableSortedMap<K, V> sortedMap = SortedMaps.mutable.with(comparator);
-        this.forEach(new MapCollectProcedure<T, K, V>(sortedMap, keyFunction, valueFunction));
+        this.forEach(new MapCollectProcedure<>(sortedMap, keyFunction, valueFunction));
         return sortedMap;
     }
 
     public <R extends Collection<T>> R select(Predicate<? super T> predicate, R target)
     {
-        this.forEach(new SelectProcedure<T>(predicate, target));
+        this.forEach(new SelectProcedure<>(predicate, target));
         return target;
     }
 
@@ -280,7 +280,7 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
 
     public <R extends Collection<T>> R reject(Predicate<? super T> predicate, R target)
     {
-        this.forEach(new RejectProcedure<T>(predicate, target));
+        this.forEach(new RejectProcedure<>(predicate, target));
         return target;
     }
 
@@ -294,7 +294,7 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
 
     public <V, R extends Collection<V>> R collect(Function<? super T, ? extends V> function, R target)
     {
-        this.forEach(new CollectProcedure<T, V>(function, target));
+        this.forEach(new CollectProcedure<>(function, target));
         return target;
     }
 
@@ -311,7 +311,7 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
             Function<? super T, ? extends V> function,
             R target)
     {
-        this.forEach(new CollectIfProcedure<T, V>(target, function, predicate));
+        this.forEach(new CollectIfProcedure<>(target, function, predicate));
         return target;
     }
 
@@ -331,42 +331,42 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
 
     public T min(Comparator<? super T> comparator)
     {
-        MinComparatorProcedure<T> procedure = new MinComparatorProcedure<T>(comparator);
+        MinComparatorProcedure<T> procedure = new MinComparatorProcedure<>(comparator);
         this.forEach(procedure);
         return procedure.getResult();
     }
 
     public T max(Comparator<? super T> comparator)
     {
-        MaxComparatorProcedure<T> procedure = new MaxComparatorProcedure<T>(comparator);
+        MaxComparatorProcedure<T> procedure = new MaxComparatorProcedure<>(comparator);
         this.forEach(procedure);
         return procedure.getResult();
     }
 
     public T min()
     {
-        MinProcedure<T> procedure = new MinProcedure<T>();
+        MinProcedure<T> procedure = new MinProcedure<>();
         this.forEach(procedure);
         return procedure.getResult();
     }
 
     public T max()
     {
-        MaxProcedure<T> procedure = new MaxProcedure<T>();
+        MaxProcedure<T> procedure = new MaxProcedure<>();
         this.forEach(procedure);
         return procedure.getResult();
     }
 
     public <V extends Comparable<? super V>> T minBy(Function<? super T, ? extends V> function)
     {
-        MinByProcedure<T, V> minByProcedure = new MinByProcedure<T, V>(function);
+        MinByProcedure<T, V> minByProcedure = new MinByProcedure<>(function);
         this.forEach(minByProcedure);
         return minByProcedure.getResult();
     }
 
     public <V extends Comparable<? super V>> T maxBy(Function<? super T, ? extends V> function)
     {
-        MaxByProcedure<T, V> maxByProcedure = new MaxByProcedure<T, V>(function);
+        MaxByProcedure<T, V> maxByProcedure = new MaxByProcedure<>(function);
         this.forEach(maxByProcedure);
         return maxByProcedure.getResult();
     }
@@ -380,7 +380,7 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
             Function<? super T, ? extends Iterable<V>> function,
             R target)
     {
-        this.forEach(new FlatCollectProcedure<T, V>(function, target));
+        this.forEach(new FlatCollectProcedure<>(function, target));
         return target;
     }
 
@@ -426,7 +426,7 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
 
     public int count(Predicate<? super T> predicate)
     {
-        CountProcedure<T> procedure = new CountProcedure<T>(predicate);
+        CountProcedure<T> procedure = new CountProcedure<>(predicate);
         this.forEach(procedure);
         return procedure.getCount();
     }
@@ -438,28 +438,28 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
 
     public <IV> IV injectInto(IV injectedValue, Function2<? super IV, ? super T, ? extends IV> function)
     {
-        InjectIntoProcedure<IV, T> procedure = new InjectIntoProcedure<IV, T>(injectedValue, function);
+        InjectIntoProcedure<IV, T> procedure = new InjectIntoProcedure<>(injectedValue, function);
         this.forEach(procedure);
         return procedure.getResult();
     }
 
     public int injectInto(int injectedValue, IntObjectToIntFunction<? super T> function)
     {
-        InjectIntoIntProcedure<T> procedure = new InjectIntoIntProcedure<T>(injectedValue, function);
+        InjectIntoIntProcedure<T> procedure = new InjectIntoIntProcedure<>(injectedValue, function);
         this.forEach(procedure);
         return procedure.getResult();
     }
 
     public long injectInto(long injectedValue, LongObjectToLongFunction<? super T> function)
     {
-        InjectIntoLongProcedure<T> procedure = new InjectIntoLongProcedure<T>(injectedValue, function);
+        InjectIntoLongProcedure<T> procedure = new InjectIntoLongProcedure<>(injectedValue, function);
         this.forEach(procedure);
         return procedure.getResult();
     }
 
     public double injectInto(double injectedValue, DoubleObjectToDoubleFunction<? super T> function)
     {
-        InjectIntoDoubleProcedure<T> procedure = new InjectIntoDoubleProcedure<T>(injectedValue, function);
+        InjectIntoDoubleProcedure<T> procedure = new InjectIntoDoubleProcedure<>(injectedValue, function);
         this.forEach(procedure);
         return procedure.getResult();
     }
@@ -471,35 +471,35 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
 
     public float injectInto(float injectedValue, FloatObjectToFloatFunction<? super T> function)
     {
-        InjectIntoFloatProcedure<T> procedure = new InjectIntoFloatProcedure<T>(injectedValue, function);
+        InjectIntoFloatProcedure<T> procedure = new InjectIntoFloatProcedure<>(injectedValue, function);
         this.forEach(procedure);
         return procedure.getResult();
     }
 
     public long sumOfInt(IntFunction<? super T> function)
     {
-        SumOfIntProcedure<T> procedure = new SumOfIntProcedure<T>(function);
+        SumOfIntProcedure<T> procedure = new SumOfIntProcedure<>(function);
         this.forEach(procedure);
         return procedure.getResult();
     }
 
     public double sumOfFloat(FloatFunction<? super T> function)
     {
-        SumOfFloatProcedure<T> procedure = new SumOfFloatProcedure<T>(function);
+        SumOfFloatProcedure<T> procedure = new SumOfFloatProcedure<>(function);
         this.forEach(procedure);
         return procedure.getResult();
     }
 
     public long sumOfLong(LongFunction<? super T> function)
     {
-        SumOfLongProcedure<T> procedure = new SumOfLongProcedure<T>(function);
+        SumOfLongProcedure<T> procedure = new SumOfLongProcedure<>(function);
         this.forEach(procedure);
         return procedure.getResult();
     }
 
     public double sumOfDouble(DoubleFunction<? super T> function)
     {
-        SumOfDoubleProcedure<T> procedure = new SumOfDoubleProcedure<T>(function);
+        SumOfDoubleProcedure<T> procedure = new SumOfDoubleProcedure<>(function);
         this.forEach(procedure);
         return procedure.getResult();
     }
@@ -573,13 +573,13 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
 
     public void appendString(Appendable appendable, String separator)
     {
-        AppendStringProcedure<T> appendStringProcedure = new AppendStringProcedure<T>(appendable, separator);
+        AppendStringProcedure<T> appendStringProcedure = new AppendStringProcedure<>(appendable, separator);
         this.forEach(appendStringProcedure);
     }
 
     public void appendString(Appendable appendable, String start, String separator, String end)
     {
-        AppendStringProcedure<T> appendStringProcedure = new AppendStringProcedure<T>(appendable, separator);
+        AppendStringProcedure<T> appendStringProcedure = new AppendStringProcedure<>(appendable, separator);
         try
         {
             appendable.append(start);
@@ -599,49 +599,49 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
 
     public <R extends MutableBooleanCollection> R collectBoolean(BooleanFunction<? super T> booleanFunction, R target)
     {
-        this.forEach(new CollectBooleanProcedure<T>(booleanFunction, target));
+        this.forEach(new CollectBooleanProcedure<>(booleanFunction, target));
         return target;
     }
 
     public <R extends MutableByteCollection> R collectByte(ByteFunction<? super T> byteFunction, R target)
     {
-        this.forEach(new CollectByteProcedure<T>(byteFunction, target));
+        this.forEach(new CollectByteProcedure<>(byteFunction, target));
         return target;
     }
 
     public <R extends MutableCharCollection> R collectChar(CharFunction<? super T> charFunction, R target)
     {
-        this.forEach(new CollectCharProcedure<T>(charFunction, target));
+        this.forEach(new CollectCharProcedure<>(charFunction, target));
         return target;
     }
 
     public <R extends MutableDoubleCollection> R collectDouble(DoubleFunction<? super T> doubleFunction, R target)
     {
-        this.forEach(new CollectDoubleProcedure<T>(doubleFunction, target));
+        this.forEach(new CollectDoubleProcedure<>(doubleFunction, target));
         return target;
     }
 
     public <R extends MutableFloatCollection> R collectFloat(FloatFunction<? super T> floatFunction, R target)
     {
-        this.forEach(new CollectFloatProcedure<T>(floatFunction, target));
+        this.forEach(new CollectFloatProcedure<>(floatFunction, target));
         return target;
     }
 
     public <R extends MutableIntCollection> R collectInt(IntFunction<? super T> intFunction, R target)
     {
-        this.forEach(new CollectIntProcedure<T>(intFunction, target));
+        this.forEach(new CollectIntProcedure<>(intFunction, target));
         return target;
     }
 
     public <R extends MutableLongCollection> R collectLong(LongFunction<? super T> longFunction, R target)
     {
-        this.forEach(new CollectLongProcedure<T>(longFunction, target));
+        this.forEach(new CollectLongProcedure<>(longFunction, target));
         return target;
     }
 
     public <R extends MutableShortCollection> R collectShort(ShortFunction<? super T> shortFunction, R target)
     {
-        this.forEach(new CollectShortProcedure<T>(shortFunction, target));
+        this.forEach(new CollectShortProcedure<>(shortFunction, target));
         return target;
     }
 
@@ -665,7 +665,7 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
             Function<? super T, ? extends V> function,
             R target)
     {
-        this.forEach(new GroupByUniqueKeyProcedure<T, V>(target, function));
+        this.forEach(new GroupByUniqueKeyProcedure<>(target, function));
         return target;
     }
 }

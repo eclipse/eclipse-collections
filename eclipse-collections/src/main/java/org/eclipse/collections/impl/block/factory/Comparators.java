@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -66,17 +66,17 @@ public final class Comparators
         {
             throw new NullPointerException();
         }
-        return new ReverseComparator<T>(comparator);
+        return new ReverseComparator<>(comparator);
     }
 
     public static <T> SerializableComparator<T> safeNullsLow(Comparator<T> notNullSafeComparator)
     {
-        return new SafeNullsLowComparator<T>(notNullSafeComparator);
+        return new SafeNullsLowComparator<>(notNullSafeComparator);
     }
 
     public static <T> SerializableComparator<T> safeNullsHigh(Comparator<T> notNullSafeComparator)
     {
-        return new SafeNullsHighComparator<T>(notNullSafeComparator);
+        return new SafeNullsHighComparator<>(notNullSafeComparator);
     }
 
     public static <T> SerializableComparator<T> chain(Comparator<T>... comparators)
@@ -86,7 +86,7 @@ public final class Comparators
             throw new IllegalArgumentException("Nothing to chain");
         }
 
-        return new ChainedComparator<T>(comparators);
+        return new ChainedComparator<>(comparators);
     }
 
     public static <T, V extends Comparable<? super V>> SerializableComparator<T> fromFunctions(
@@ -138,7 +138,7 @@ public final class Comparators
      */
     public static <T> SerializableComparator<Pair<T, ?>> byFirstOfPair(Comparator<? super T> comparator)
     {
-        return new ByFirstOfPairComparator<T>(comparator);
+        return new ByFirstOfPairComparator<>(comparator);
     }
 
     /**
@@ -149,7 +149,7 @@ public final class Comparators
      */
     public static <T> SerializableComparator<Pair<?, T>> bySecondOfPair(Comparator<? super T> comparator)
     {
-        return new BySecondOfPairComparator<T>(comparator);
+        return new BySecondOfPairComparator<>(comparator);
     }
 
     private static final class NaturalOrderComparator<T extends Comparable<T>> implements SerializableComparator<T>
@@ -378,7 +378,7 @@ public final class Comparators
             Function<? super T, ? extends V> function,
             Comparator<V> comparator)
     {
-        return new FunctionComparator<T, V>(function, comparator);
+        return new FunctionComparator<>(function, comparator);
     }
 
     public static boolean nullSafeEquals(Object value1, Object value2)

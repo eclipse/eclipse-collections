@@ -52,12 +52,12 @@ public class ParallelDistinctIterable<T> extends AbstractParallelUnsortedSetIter
     public LazyIterable<UnsortedSetBatch<T>> split()
     {
         // TODO: Replace the map with a concurrent set once it's implemented
-        final ConcurrentHashMap<T, Boolean> distinct = new ConcurrentHashMap<T, Boolean>();
+        final ConcurrentHashMap<T, Boolean> distinct = new ConcurrentHashMap<>();
         return this.delegate.split().collect(new Function<Batch<T>, UnsortedSetBatch<T>>()
         {
             public UnsortedSetBatch<T> valueOf(Batch<T> batch)
             {
-                return new DistinctBatch<T>(batch, distinct);
+                return new DistinctBatch<>(batch, distinct);
             }
         });
     }
@@ -71,7 +71,7 @@ public class ParallelDistinctIterable<T> extends AbstractParallelUnsortedSetIter
     public void forEach(final Procedure<? super T> procedure)
     {
         // TODO: Replace the map with a concurrent set once it's implemented
-        final ConcurrentHashMap<T, Boolean> distinct = new ConcurrentHashMap<T, Boolean>();
+        final ConcurrentHashMap<T, Boolean> distinct = new ConcurrentHashMap<>();
         this.delegate.forEach(each -> {
             if (distinct.put(each, true) == null)
             {
@@ -82,17 +82,17 @@ public class ParallelDistinctIterable<T> extends AbstractParallelUnsortedSetIter
 
     public boolean anySatisfy(Predicate<? super T> predicate)
     {
-        return this.delegate.anySatisfy(new DistinctAndPredicate<T>(predicate));
+        return this.delegate.anySatisfy(new DistinctAndPredicate<>(predicate));
     }
 
     public boolean allSatisfy(Predicate<? super T> predicate)
     {
-        return this.delegate.allSatisfy(new DistinctOrPredicate<T>(predicate));
+        return this.delegate.allSatisfy(new DistinctOrPredicate<>(predicate));
     }
 
     public T detect(Predicate<? super T> predicate)
     {
-        return this.delegate.detect(new DistinctAndPredicate<T>(predicate));
+        return this.delegate.detect(new DistinctAndPredicate<>(predicate));
     }
 
     @Override
@@ -113,14 +113,14 @@ public class ParallelDistinctIterable<T> extends AbstractParallelUnsortedSetIter
     public <V> UnsortedSetMultimap<V, T> groupBy(Function<? super T, ? extends V> function)
     {
         // TODO: Implement in parallel
-        return this.delegate.toSet().groupBy(function, new UnifiedSetMultimap<V, T>());
+        return this.delegate.toSet().groupBy(function, new UnifiedSetMultimap<>());
     }
 
     @Override
     public <V> UnsortedSetMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function)
     {
         // TODO: Implement in parallel
-        return this.delegate.toSet().groupByEach(function, new UnifiedSetMultimap<V, T>());
+        return this.delegate.toSet().groupByEach(function, new UnifiedSetMultimap<>());
     }
 
     @Override
@@ -133,7 +133,7 @@ public class ParallelDistinctIterable<T> extends AbstractParallelUnsortedSetIter
     private static final class DistinctAndPredicate<T> implements Predicate<T>
     {
         // TODO: Replace the map with a concurrent set once it's implemented
-        private final ConcurrentHashMap<T, Boolean> distinct = new ConcurrentHashMap<T, Boolean>();
+        private final ConcurrentHashMap<T, Boolean> distinct = new ConcurrentHashMap<>();
         private final Predicate<? super T> predicate;
 
         private DistinctAndPredicate(Predicate<? super T> predicate)
@@ -150,7 +150,7 @@ public class ParallelDistinctIterable<T> extends AbstractParallelUnsortedSetIter
     private static final class DistinctOrPredicate<T> implements Predicate<T>
     {
         // TODO: Replace the map with a concurrent set once it's implemented
-        private final ConcurrentHashMap<T, Boolean> distinct = new ConcurrentHashMap<T, Boolean>();
+        private final ConcurrentHashMap<T, Boolean> distinct = new ConcurrentHashMap<>();
         private final Predicate<? super T> predicate;
 
         private DistinctOrPredicate(Predicate<? super T> predicate)

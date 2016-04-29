@@ -67,7 +67,7 @@ class ImmutableSortedBagSerializationProxy<T> implements Externalizable
     {
         int size = in.readInt();
         Comparator<T> comparator = (Comparator<T>) in.readObject();
-        MutableSortedBag<T> deserializedBag = new TreeBag<T>(comparator);
+        MutableSortedBag<T> deserializedBag = new TreeBag<>(comparator);
 
         for (int i = 0; i < size; i++)
         {

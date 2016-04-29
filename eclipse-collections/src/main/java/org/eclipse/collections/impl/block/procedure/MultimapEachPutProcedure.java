@@ -37,7 +37,7 @@ public final class MultimapEachPutProcedure<K, V> implements Procedure<V>
             MutableMultimap<K, V> multimap,
             Function<? super V, ? extends Iterable<K>> keyFunction)
     {
-        return new MultimapEachPutProcedure<K, V>(multimap, keyFunction);
+        return new MultimapEachPutProcedure<>(multimap, keyFunction);
     }
 
     public void value(V each)

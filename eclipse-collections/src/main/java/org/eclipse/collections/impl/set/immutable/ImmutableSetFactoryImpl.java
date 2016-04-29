@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -41,7 +41,7 @@ public final class ImmutableSetFactoryImpl implements ImmutableSetFactory
 
     public <T> ImmutableSet<T> with(T one)
     {
-        return new ImmutableSingletonSet<T>(one);
+        return new ImmutableSingletonSet<>(one);
     }
 
     public <T> ImmutableSet<T> of(T one, T two)
@@ -55,7 +55,7 @@ public final class ImmutableSetFactoryImpl implements ImmutableSetFactory
         {
             return this.of(one);
         }
-        return new ImmutableDoubletonSet<T>(one, two);
+        return new ImmutableDoubletonSet<>(one, two);
     }
 
     public <T> ImmutableSet<T> of(T one, T two, T three)
@@ -77,7 +77,7 @@ public final class ImmutableSetFactoryImpl implements ImmutableSetFactory
         {
             return this.of(one, two);
         }
-        return new ImmutableTripletonSet<T>(one, two, three);
+        return new ImmutableTripletonSet<>(one, two, three);
     }
 
     public <T> ImmutableSet<T> of(T one, T two, T three, T four)
@@ -111,7 +111,7 @@ public final class ImmutableSetFactoryImpl implements ImmutableSetFactory
         {
             return this.of(one, two, three);
         }
-        return new ImmutableQuadrupletonSet<T>(one, two, three, four);
+        return new ImmutableQuadrupletonSet<>(one, two, three, four);
     }
 
     public <T> ImmutableSet<T> of(T... items)

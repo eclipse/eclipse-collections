@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -84,7 +84,7 @@ public class SynchronizedMutableSet<T>
      */
     public static <E, S extends Set<E>> SynchronizedMutableSet<E> of(S set)
     {
-        return new SynchronizedMutableSet<E>(SetAdapter.adapt(set));
+        return new SynchronizedMutableSet<>(SetAdapter.adapt(set));
     }
 
     /**
@@ -95,7 +95,7 @@ public class SynchronizedMutableSet<T>
      */
     public static <E, S extends Set<E>> SynchronizedMutableSet<E> of(S set, Object lock)
     {
-        return new SynchronizedMutableSet<E>(SetAdapter.adapt(set), lock);
+        return new SynchronizedMutableSet<>(SetAdapter.adapt(set), lock);
     }
 
     @GuardedBy("getLock()")
@@ -147,7 +147,7 @@ public class SynchronizedMutableSet<T>
 
     protected Object writeReplace()
     {
-        return new SynchronizedCollectionSerializationProxy<T>(this.getMutableSet());
+        return new SynchronizedCollectionSerializationProxy<>(this.getMutableSet());
     }
 
     public MutableSet<T> tap(Procedure<? super T> procedure)
@@ -451,7 +451,7 @@ public class SynchronizedMutableSet<T>
 
     public ParallelUnsortedSetIterable<T> asParallel(ExecutorService executorService, int batchSize)
     {
-        return new SynchronizedParallelUnsortedSetIterable<T>(this.getMutableSet().asParallel(executorService, batchSize), this.getLock());
+        return new SynchronizedParallelUnsortedSetIterable<>(this.getMutableSet().asParallel(executorService, batchSize), this.getLock());
     }
 
     public MutableSet<T> asUnmodifiable()

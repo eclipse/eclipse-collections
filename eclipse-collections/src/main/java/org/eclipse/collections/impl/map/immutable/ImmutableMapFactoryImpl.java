@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -42,7 +42,7 @@ public final class ImmutableMapFactoryImpl implements ImmutableMapFactory
 
     public <K, V> ImmutableMap<K, V> with(K key, V value)
     {
-        return new ImmutableSingletonMap<K, V>(key, value);
+        return new ImmutableSingletonMap<>(key, value);
     }
 
     public <K, V> ImmutableMap<K, V> of(K key1, V value1, K key2, V value2)
@@ -56,7 +56,7 @@ public final class ImmutableMapFactoryImpl implements ImmutableMapFactory
         {
             return this.of(key1, value2);
         }
-        return new ImmutableDoubletonMap<K, V>(key1, value1, key2, value2);
+        return new ImmutableDoubletonMap<>(key1, value1, key2, value2);
     }
 
     public <K, V> ImmutableMap<K, V> of(K key1, V value1, K key2, V value2, K key3, V value3)
@@ -83,7 +83,7 @@ public final class ImmutableMapFactoryImpl implements ImmutableMapFactory
             return this.of(key1, value1, key2, value3);
         }
 
-        return new ImmutableTripletonMap<K, V>(key1, value1, key2, value2, key3, value3);
+        return new ImmutableTripletonMap<>(key1, value1, key2, value2, key3, value3);
     }
 
     public <K, V> ImmutableMap<K, V> of(K key1, V value1, K key2, V value2, K key3, V value3, K key4, V value4)
@@ -117,7 +117,7 @@ public final class ImmutableMapFactoryImpl implements ImmutableMapFactory
         {
             return this.of(key1, value1, key2, value2, key3, value4);
         }
-        return new ImmutableQuadrupletonMap<K, V>(key1, value1, key2, value2, key3, value3, key4, value4);
+        return new ImmutableQuadrupletonMap<>(key1, value1, key2, value2, key3, value3, key4, value4);
     }
 
     /**
@@ -143,7 +143,7 @@ public final class ImmutableMapFactoryImpl implements ImmutableMapFactory
 
         if (map.size() > 4)
         {
-            return new ImmutableUnifiedMap<K, V>(map);
+            return new ImmutableUnifiedMap<>(map);
         }
 
         Map.Entry<K, V>[] entries = map.entrySet().toArray(new Map.Entry[map.entrySet().size()]);

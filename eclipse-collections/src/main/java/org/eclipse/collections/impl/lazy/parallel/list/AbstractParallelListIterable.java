@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -34,12 +34,12 @@ public abstract class AbstractParallelListIterable<T, B extends ListBatch<T>> ex
 
     public ParallelUnsortedSetIterable<T> asUnique()
     {
-        return new ParallelDistinctListIterable<T>(this);
+        return new ParallelDistinctListIterable<>(this);
     }
 
     public ParallelListIterable<T> select(Predicate<? super T> predicate)
     {
-        return new ParallelSelectListIterable<T>(this, predicate);
+        return new ParallelSelectListIterable<>(this, predicate);
     }
 
     public <P> ParallelListIterable<T> selectWith(Predicate2<? super T, ? super P> predicate, P parameter)
@@ -64,7 +64,7 @@ public abstract class AbstractParallelListIterable<T, B extends ListBatch<T>> ex
 
     public <V> ParallelListIterable<V> collect(Function<? super T, ? extends V> function)
     {
-        return new ParallelCollectListIterable<T, V>(this, function);
+        return new ParallelCollectListIterable<>(this, function);
     }
 
     public <P, V> ParallelListIterable<V> collectWith(Function2<? super T, ? super P, ? extends V> function, P parameter)
@@ -79,7 +79,7 @@ public abstract class AbstractParallelListIterable<T, B extends ListBatch<T>> ex
 
     public <V> ParallelListIterable<V> flatCollect(Function<? super T, ? extends Iterable<V>> function)
     {
-        return new ParallelFlatCollectListIterable<T, V>(this, function);
+        return new ParallelFlatCollectListIterable<>(this, function);
     }
 
     public <V> ListMultimap<V, T> groupBy(Function<? super T, ? extends V> function)

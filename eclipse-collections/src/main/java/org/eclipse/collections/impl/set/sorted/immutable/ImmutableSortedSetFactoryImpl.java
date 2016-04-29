@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -28,7 +28,7 @@ public final class ImmutableSortedSetFactoryImpl implements ImmutableSortedSetFa
 
     public <T> ImmutableSortedSet<T> empty(Comparator<? super T> comparator)
     {
-        return new ImmutableEmptySortedSet<T>(comparator);
+        return new ImmutableEmptySortedSet<>(comparator);
     }
 
     public <T> ImmutableSortedSet<T> of()
@@ -82,7 +82,7 @@ public final class ImmutableSortedSetFactoryImpl implements ImmutableSortedSetFa
         {
             return this.of();
         }
-        return new ImmutableEmptySortedSet<T>(comparator);
+        return new ImmutableEmptySortedSet<>(comparator);
     }
 
     public <T> ImmutableSortedSet<T> of(Comparator<? super T> comparator, T... items)

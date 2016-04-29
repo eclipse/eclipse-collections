@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -36,47 +36,47 @@ public class NonParallelUnsortedSetIterable<T> extends NonParallelIterable<T, Un
 
     public ParallelUnsortedSetIterable<T> select(Predicate<? super T> predicate)
     {
-        return new NonParallelUnsortedSetIterable<T>(this.delegate.select(predicate));
+        return new NonParallelUnsortedSetIterable<>(this.delegate.select(predicate));
     }
 
     public <P> ParallelUnsortedSetIterable<T> selectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
-        return new NonParallelUnsortedSetIterable<T>(this.delegate.selectWith(predicate, parameter));
+        return new NonParallelUnsortedSetIterable<>(this.delegate.selectWith(predicate, parameter));
     }
 
     public ParallelUnsortedSetIterable<T> reject(Predicate<? super T> predicate)
     {
-        return new NonParallelUnsortedSetIterable<T>(this.delegate.reject(predicate));
+        return new NonParallelUnsortedSetIterable<>(this.delegate.reject(predicate));
     }
 
     public <P> ParallelUnsortedSetIterable<T> rejectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
-        return new NonParallelUnsortedSetIterable<T>(this.delegate.rejectWith(predicate, parameter));
+        return new NonParallelUnsortedSetIterable<>(this.delegate.rejectWith(predicate, parameter));
     }
 
     public <S> ParallelUnsortedSetIterable<S> selectInstancesOf(Class<S> clazz)
     {
-        return new NonParallelUnsortedSetIterable<S>(this.delegate.selectInstancesOf(clazz));
+        return new NonParallelUnsortedSetIterable<>(this.delegate.selectInstancesOf(clazz));
     }
 
     public <V> ParallelIterable<V> collect(Function<? super T, ? extends V> function)
     {
-        return new NonParallelUnsortedBag<V>(this.delegate.collect(function, new HashBag<V>()));
+        return new NonParallelUnsortedBag<>(this.delegate.collect(function, new HashBag<>()));
     }
 
     public <P, V> ParallelIterable<V> collectWith(Function2<? super T, ? super P, ? extends V> function, P parameter)
     {
-        return new NonParallelUnsortedBag<V>(this.delegate.collectWith(function, parameter, new HashBag<V>()));
+        return new NonParallelUnsortedBag<>(this.delegate.collectWith(function, parameter, new HashBag<>()));
     }
 
     public <V> ParallelIterable<V> collectIf(Predicate<? super T> predicate, Function<? super T, ? extends V> function)
     {
-        return new NonParallelUnsortedBag<V>(this.delegate.collectIf(predicate, function, new HashBag<V>()));
+        return new NonParallelUnsortedBag<>(this.delegate.collectIf(predicate, function, new HashBag<>()));
     }
 
     public <V> ParallelIterable<V> flatCollect(Function<? super T, ? extends Iterable<V>> function)
     {
-        return new NonParallelUnsortedBag<V>(this.delegate.flatCollect(function, new HashBag<V>()));
+        return new NonParallelUnsortedBag<>(this.delegate.flatCollect(function, new HashBag<>()));
     }
 
     public <V> UnsortedSetMultimap<V, T> groupBy(Function<? super T, ? extends V> function)

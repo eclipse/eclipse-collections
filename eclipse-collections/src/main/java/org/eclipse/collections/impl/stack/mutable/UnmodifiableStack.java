@@ -73,11 +73,8 @@ import org.eclipse.collections.api.stack.primitive.MutableShortStack;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.UnmodifiableIteratorAdapter;
 import org.eclipse.collections.impl.block.factory.PrimitiveFunctions;
-import org.eclipse.collections.impl.block.procedure.MutatingAggregationProcedure;
-import org.eclipse.collections.impl.block.procedure.NonMutatingAggregationProcedure;
 import org.eclipse.collections.impl.factory.primitive.ObjectDoubleMaps;
 import org.eclipse.collections.impl.factory.primitive.ObjectLongMaps;
-import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 
 public final class UnmodifiableStack<T> implements MutableStack<T>, Serializable
 {
@@ -96,7 +93,7 @@ public final class UnmodifiableStack<T> implements MutableStack<T>, Serializable
 
     public static <T, S extends MutableStack<T>> UnmodifiableStack<T> of(S stack)
     {
-        return new UnmodifiableStack<T>(stack);
+        return new UnmodifiableStack<>(stack);
     }
 
     public T pop()
@@ -131,7 +128,7 @@ public final class UnmodifiableStack<T> implements MutableStack<T>, Serializable
 
     public Iterator<T> iterator()
     {
-        return new UnmodifiableIteratorAdapter<T>(this.mutableStack.iterator());
+        return new UnmodifiableIteratorAdapter<>(this.mutableStack.iterator());
     }
 
     public MutableStack<T> select(Predicate<? super T> predicate)

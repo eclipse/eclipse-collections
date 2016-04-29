@@ -129,22 +129,22 @@ public class ArrayStack<T> implements MutableStack<T>, Externalizable
 
     public static <T> ArrayStack<T> newStack()
     {
-        return new ArrayStack<T>();
+        return new ArrayStack<>();
     }
 
     public static <T> ArrayStack<T> newStack(Iterable<? extends T> items)
     {
-        return new ArrayStack<T>((Iterable<T>) items);
+        return new ArrayStack<>((Iterable<T>) items);
     }
 
     public static <T> ArrayStack<T> newStackWith(T... items)
     {
-        return new ArrayStack<T>(items);
+        return new ArrayStack<>(items);
     }
 
     public static <T> ArrayStack<T> newStackFromTopToBottom(T... items)
     {
-        ArrayStack<T> stack = new ArrayStack<T>(items.length);
+        ArrayStack<T> stack = new ArrayStack<>(items.length);
         for (int i = items.length - 1; i >= 0; i--)
         {
             stack.push(items[i]);
@@ -504,15 +504,15 @@ public class ArrayStack<T> implements MutableStack<T>, Externalizable
 
     public PartitionMutableStack<T> partition(Predicate<? super T> predicate)
     {
-        PartitionArrayStack<T> partitionMutableStack = new PartitionArrayStack<T>();
-        this.delegate.asReversed().forEach(new PartitionArrayStack.PartitionProcedure<T>(predicate, partitionMutableStack));
+        PartitionArrayStack<T> partitionMutableStack = new PartitionArrayStack<>();
+        this.delegate.asReversed().forEach(new PartitionArrayStack.PartitionProcedure<>(predicate, partitionMutableStack));
         return partitionMutableStack;
     }
 
     public <P> PartitionMutableStack<T> partitionWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
-        PartitionArrayStack<T> partitionMutableStack = new PartitionArrayStack<T>();
-        this.delegate.asReversed().forEach(new PartitionArrayStack.PartitionPredicate2Procedure<T, P>(predicate, parameter, partitionMutableStack));
+        PartitionArrayStack<T> partitionMutableStack = new PartitionArrayStack<>();
+        this.delegate.asReversed().forEach(new PartitionArrayStack.PartitionPredicate2Procedure<>(predicate, parameter, partitionMutableStack));
         return partitionMutableStack;
     }
 
@@ -980,14 +980,14 @@ public class ArrayStack<T> implements MutableStack<T>, Externalizable
     public <K, V> MutableMap<K, V> aggregateInPlaceBy(Function<? super T, ? extends K> groupBy, Function0<? extends V> zeroValueFactory, Procedure2<? super V, ? super T> mutatingAggregator)
     {
         MutableMap<K, V> map = UnifiedMap.newMap();
-        this.forEach(new MutatingAggregationProcedure<T, K, V>(map, groupBy, zeroValueFactory, mutatingAggregator));
+        this.forEach(new MutatingAggregationProcedure<>(map, groupBy, zeroValueFactory, mutatingAggregator));
         return map;
     }
 
     public <K, V> MutableMap<K, V> aggregateBy(Function<? super T, ? extends K> groupBy, Function0<? extends V> zeroValueFactory, Function2<? super V, ? super T, ? extends V> nonMutatingAggregator)
     {
         MutableMap<K, V> map = UnifiedMap.newMap();
-        this.forEach(new NonMutatingAggregationProcedure<T, K, V>(map, groupBy, zeroValueFactory, nonMutatingAggregator));
+        this.forEach(new NonMutatingAggregationProcedure<>(map, groupBy, zeroValueFactory, nonMutatingAggregator));
         return map;
     }
 

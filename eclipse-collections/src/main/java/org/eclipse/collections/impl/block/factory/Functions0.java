@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -32,11 +32,11 @@ public final class Functions0
 {
     private static final TrueFunction TRUE_FUNCTION = new TrueFunction();
     private static final FalseFunction FALSE_FUNCTION = new FalseFunction();
-    private static final NewFastListFunction<?> NEW_FAST_LIST_FUNCTION = new NewFastListFunction<Object>();
-    private static final NewUnifiedSetFunction<?> NEW_UNIFIED_SET_FUNCTION = new NewUnifiedSetFunction<Object>();
-    private static final NewHashBagFunction<?> NEW_HASH_BAG_FUNCTION = new NewHashBagFunction<Object>();
-    private static final NewUnifiedMapFunction<?, ?> NEW_UNIFIED_MAP_FUNCTION = new NewUnifiedMapFunction<Object, Object>();
-    private static final NullFunction<?> NULL_FUNCTION = new NullFunction<Object>();
+    private static final NewFastListFunction<?> NEW_FAST_LIST_FUNCTION = new NewFastListFunction<>();
+    private static final NewUnifiedSetFunction<?> NEW_UNIFIED_SET_FUNCTION = new NewUnifiedSetFunction<>();
+    private static final NewHashBagFunction<?> NEW_HASH_BAG_FUNCTION = new NewHashBagFunction<>();
+    private static final NewUnifiedMapFunction<?, ?> NEW_UNIFIED_MAP_FUNCTION = new NewUnifiedMapFunction<>();
+    private static final NullFunction<?> NULL_FUNCTION = new NullFunction<>();
     private static final AtomicIntegerZeroFunction ATOMIC_INTEGER_ZERO = new AtomicIntegerZeroFunction();
     private static final AtomicLongZeroFunction ATOMIC_LONG_ZERO = new AtomicLongZeroFunction();
     private static final IntegerZeroFunction INTEGER_ZERO = new IntegerZeroFunction();
@@ -86,7 +86,7 @@ public final class Functions0
 
     public static <T> Function0<T> throwing(ThrowingFunction0<T> throwingFunction0)
     {
-        return new ThrowingFunction0Adapter<T>(throwingFunction0);
+        return new ThrowingFunction0Adapter<>(throwingFunction0);
     }
 
     public static <T> Function0<T> nullValue()
@@ -96,7 +96,7 @@ public final class Functions0
 
     public static <T> Function0<T> value(T t)
     {
-        return new PassThruFunction0<T>(t);
+        return new PassThruFunction0<>(t);
     }
 
     public static Function0<Integer> zeroInteger()

@@ -89,27 +89,27 @@ public final class SynchronizedPutTreeSortedSetMultimap<K, V>
 
     public static <K, V> SynchronizedPutTreeSortedSetMultimap<K, V> newMultimap(Comparator<? super V> comparator)
     {
-        return new SynchronizedPutTreeSortedSetMultimap<K, V>(comparator);
+        return new SynchronizedPutTreeSortedSetMultimap<>(comparator);
     }
 
     public static <K, V> SynchronizedPutTreeSortedSetMultimap<K, V> newMultimap()
     {
-        return new SynchronizedPutTreeSortedSetMultimap<K, V>();
+        return new SynchronizedPutTreeSortedSetMultimap<>();
     }
 
     public static <K, V> SynchronizedPutTreeSortedSetMultimap<K, V> newMultimap(Multimap<? extends K, ? extends V> multimap)
     {
-        return new SynchronizedPutTreeSortedSetMultimap<K, V>(multimap);
+        return new SynchronizedPutTreeSortedSetMultimap<>(multimap);
     }
 
     public static <K, V> SynchronizedPutTreeSortedSetMultimap<K, V> newMultimap(Pair<K, V>... pairs)
     {
-        return new SynchronizedPutTreeSortedSetMultimap<K, V>(pairs);
+        return new SynchronizedPutTreeSortedSetMultimap<>(pairs);
     }
 
     public static <K, V> SynchronizedPutTreeSortedSetMultimap<K, V> newMultimap(Iterable<Pair<K, V>> inputIterable)
     {
-        return new SynchronizedPutTreeSortedSetMultimap<K, V>(inputIterable);
+        return new SynchronizedPutTreeSortedSetMultimap<>(inputIterable);
     }
 
     @Override
@@ -120,7 +120,7 @@ public final class SynchronizedPutTreeSortedSetMultimap<K, V>
 
     public SynchronizedPutTreeSortedSetMultimap<K, V> newEmpty()
     {
-        return new SynchronizedPutTreeSortedSetMultimap<K, V>();
+        return new SynchronizedPutTreeSortedSetMultimap<>();
     }
 
     public Comparator<? super V> comparator()
@@ -130,7 +130,7 @@ public final class SynchronizedPutTreeSortedSetMultimap<K, V>
 
     public MutableSortedSetMultimap<K, V> toMutable()
     {
-        return new SynchronizedPutTreeSortedSetMultimap<K, V>(this);
+        return new SynchronizedPutTreeSortedSetMultimap<>(this);
     }
 
     public ImmutableSortedSetMultimap<K, V> toImmutable()
@@ -138,7 +138,7 @@ public final class SynchronizedPutTreeSortedSetMultimap<K, V>
         final MutableMap<K, ImmutableSortedSet<V>> map = UnifiedMap.newMap();
 
         this.map.forEachKeyValue((key, set) -> map.put(key, set.toImmutable()));
-        return new ImmutableSortedSetMultimapImpl<K, V>(map, this.comparator());
+        return new ImmutableSortedSetMultimapImpl<>(map, this.comparator());
     }
 
     public TreeSortedSetMultimap<K, V> selectKeysValues(Predicate2<? super K, ? super V> predicate)

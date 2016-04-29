@@ -120,22 +120,22 @@ public final class MultiReaderFastList<T>
 
     public static <T> MultiReaderFastList<T> newList()
     {
-        return new MultiReaderFastList<T>(FastList.<T>newList());
+        return new MultiReaderFastList<>(FastList.<T>newList());
     }
 
     public static <T> MultiReaderFastList<T> newList(int capacity)
     {
-        return new MultiReaderFastList<T>(FastList.<T>newList(capacity));
+        return new MultiReaderFastList<>(FastList.<T>newList(capacity));
     }
 
     public static <T> MultiReaderFastList<T> newList(Iterable<T> iterable)
     {
-        return new MultiReaderFastList<T>(FastList.newList(iterable));
+        return new MultiReaderFastList<>(FastList.newList(iterable));
     }
 
     public static <T> MultiReaderFastList<T> newListWith(T... elements)
     {
-        return new MultiReaderFastList<T>(FastList.newListWith(elements));
+        return new MultiReaderFastList<>(FastList.newListWith(elements));
     }
 
     @Override
@@ -152,12 +152,12 @@ public final class MultiReaderFastList<T>
 
     UntouchableMutableList<T> asReadUntouchable()
     {
-        return new UntouchableMutableList<T>(this.delegate.asUnmodifiable());
+        return new UntouchableMutableList<>(this.delegate.asUnmodifiable());
     }
 
     UntouchableMutableList<T> asWriteUntouchable()
     {
-        return new UntouchableMutableList<T>(this.delegate);
+        return new UntouchableMutableList<>(this.delegate);
     }
 
     public void withReadLockAndDelegate(Procedure<MutableList<T>> procedure)
@@ -235,7 +235,7 @@ public final class MultiReaderFastList<T>
         this.acquireReadLock();
         try
         {
-            return new MultiReaderFastList<T>(this.delegate.clone());
+            return new MultiReaderFastList<>(this.delegate.clone());
         }
         finally
         {
@@ -704,7 +704,7 @@ public final class MultiReaderFastList<T>
         this.acquireReadLock();
         try
         {
-            return new MultiReaderFastList<T>(this.delegate.subList(fromIndex, toIndex), this.lock);
+            return new MultiReaderFastList<>(this.delegate.subList(fromIndex, toIndex), this.lock);
         }
         finally
         {
@@ -1366,7 +1366,7 @@ public final class MultiReaderFastList<T>
 
         public MutableList<T> subList(int fromIndex, int toIndex)
         {
-            UntouchableMutableList<T> subList = new UntouchableMutableList<T>(
+            UntouchableMutableList<T> subList = new UntouchableMutableList<>(
                     this.getDelegate().subList(fromIndex, toIndex));
             this.requestedSubLists.add(subList);
             return subList;
@@ -1374,7 +1374,7 @@ public final class MultiReaderFastList<T>
 
         public Iterator<T> iterator()
         {
-            UntouchableListIterator<T> iterator = new UntouchableListIterator<T>(this.delegate.iterator());
+            UntouchableListIterator<T> iterator = new UntouchableListIterator<>(this.delegate.iterator());
             this.requestedIterators.add(iterator);
             return iterator;
         }
@@ -1406,14 +1406,14 @@ public final class MultiReaderFastList<T>
 
         public ListIterator<T> listIterator()
         {
-            UntouchableListIterator<T> iterator = new UntouchableListIterator<T>(this.getDelegate().listIterator());
+            UntouchableListIterator<T> iterator = new UntouchableListIterator<>(this.getDelegate().listIterator());
             this.requestedIterators.add(iterator);
             return iterator;
         }
 
         public ListIterator<T> listIterator(int index)
         {
-            UntouchableListIterator<T> iterator = new UntouchableListIterator<T>(this.getDelegate().listIterator(index));
+            UntouchableListIterator<T> iterator = new UntouchableListIterator<>(this.getDelegate().listIterator(index));
             this.requestedIterators.add(iterator);
             return iterator;
         }
@@ -1445,7 +1445,7 @@ public final class MultiReaderFastList<T>
 
         public ParallelListIterable<T> asParallel(ExecutorService executorService, int batchSize)
         {
-            return new ListIterableParallelIterable<T>(this, executorService, batchSize);
+            return new ListIterableParallelIterable<>(this, executorService, batchSize);
         }
 
         public int binarySearch(T key, Comparator<? super T> comparator)
@@ -1784,6 +1784,6 @@ public final class MultiReaderFastList<T>
 
     public ParallelListIterable<T> asParallel(ExecutorService executorService, int batchSize)
     {
-        return new MultiReaderParallelListIterable<T>(this.delegate.asParallel(executorService, batchSize), this.lock);
+        return new MultiReaderParallelListIterable<>(this.delegate.asParallel(executorService, batchSize), this.lock);
     }
 }

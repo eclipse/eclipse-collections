@@ -182,14 +182,14 @@ public class UnifiedMapWithHashingStrategy<K, V> extends AbstractMutableMap<K, V
 
     public static <K, V> UnifiedMapWithHashingStrategy<K, V> newMap(HashingStrategy<? super K> hashingStrategy)
     {
-        return new UnifiedMapWithHashingStrategy<K, V>(hashingStrategy);
+        return new UnifiedMapWithHashingStrategy<>(hashingStrategy);
     }
 
     public static <K, V> UnifiedMapWithHashingStrategy<K, V> newMap(
             HashingStrategy<? super K> hashingStrategy,
             int size)
     {
-        return new UnifiedMapWithHashingStrategy<K, V>(hashingStrategy, size);
+        return new UnifiedMapWithHashingStrategy<>(hashingStrategy, size);
     }
 
     public static <K, V> UnifiedMapWithHashingStrategy<K, V> newMap(
@@ -197,14 +197,14 @@ public class UnifiedMapWithHashingStrategy<K, V> extends AbstractMutableMap<K, V
             int size,
             float loadFactor)
     {
-        return new UnifiedMapWithHashingStrategy<K, V>(hashingStrategy, size, loadFactor);
+        return new UnifiedMapWithHashingStrategy<>(hashingStrategy, size, loadFactor);
     }
 
     public static <K, V> UnifiedMapWithHashingStrategy<K, V> newMap(
             HashingStrategy<? super K> hashingStrategy,
             Map<? extends K, ? extends V> map)
     {
-        return new UnifiedMapWithHashingStrategy<K, V>(hashingStrategy, map);
+        return new UnifiedMapWithHashingStrategy<>(hashingStrategy, map);
     }
 
     public static <K, V> UnifiedMapWithHashingStrategy<K, V> newMapWith(HashingStrategy<? super K> hashingStrategy, Iterable<Pair<K, V>> inputIterable)
@@ -220,14 +220,14 @@ public class UnifiedMapWithHashingStrategy<K, V> extends AbstractMutableMap<K, V
 
     public static <K, V> UnifiedMapWithHashingStrategy<K, V> newMap(UnifiedMapWithHashingStrategy<K, V> map)
     {
-        return new UnifiedMapWithHashingStrategy<K, V>(map.hashingStrategy, map);
+        return new UnifiedMapWithHashingStrategy<>(map.hashingStrategy, map);
     }
 
     public static <K, V> UnifiedMapWithHashingStrategy<K, V> newMapWith(
             HashingStrategy<? super K> hashingStrategy,
             Pair<K, V>... pairs)
     {
-        return new UnifiedMapWithHashingStrategy<K, V>(hashingStrategy, pairs);
+        return new UnifiedMapWithHashingStrategy<>(hashingStrategy, pairs);
     }
 
     public static <K, V> UnifiedMapWithHashingStrategy<K, V> newWithKeysValues(
@@ -302,12 +302,12 @@ public class UnifiedMapWithHashingStrategy<K, V> extends AbstractMutableMap<K, V
     @Override
     public UnifiedMapWithHashingStrategy<K, V> clone()
     {
-        return new UnifiedMapWithHashingStrategy<K, V>(this.hashingStrategy, this);
+        return new UnifiedMapWithHashingStrategy<>(this.hashingStrategy, this);
     }
 
     public MutableMap<K, V> newEmpty()
     {
-        return new UnifiedMapWithHashingStrategy<K, V>(this.hashingStrategy);
+        return new UnifiedMapWithHashingStrategy<>(this.hashingStrategy);
     }
 
     @Override
@@ -1061,7 +1061,7 @@ public class UnifiedMapWithHashingStrategy<K, V> extends AbstractMutableMap<K, V
             Function<? super E, ? extends K> keyFunction,
             Function<? super E, ? extends V> valueFunction)
     {
-        Iterate.forEach(iterable, new MapCollectProcedure<E, K, V>(this, keyFunction, valueFunction));
+        Iterate.forEach(iterable, new MapCollectProcedure<>(this, keyFunction, valueFunction));
         return this;
     }
 
@@ -1707,7 +1707,7 @@ public class UnifiedMapWithHashingStrategy<K, V> extends AbstractMutableMap<K, V
         public boolean retainAll(Collection<?> collection)
         {
             int retainedSize = collection.size();
-            UnifiedMapWithHashingStrategy<K, V> retainedCopy = new UnifiedMapWithHashingStrategy<K, V>(
+            UnifiedMapWithHashingStrategy<K, V> retainedCopy = new UnifiedMapWithHashingStrategy<>(
                     UnifiedMapWithHashingStrategy.this.hashingStrategy, retainedSize, UnifiedMapWithHashingStrategy.this.loadFactor);
             for (Object key : collection)
             {
@@ -2041,7 +2041,7 @@ public class UnifiedMapWithHashingStrategy<K, V> extends AbstractMutableMap<K, V
     protected class EntrySet implements Set<Entry<K, V>>, Serializable, BatchIterable<Entry<K, V>>
     {
         private static final long serialVersionUID = 1L;
-        private transient WeakReference<UnifiedMapWithHashingStrategy<K, V>> holder = new WeakReference<UnifiedMapWithHashingStrategy<K, V>>(UnifiedMapWithHashingStrategy.this);
+        private transient WeakReference<UnifiedMapWithHashingStrategy<K, V>> holder = new WeakReference<>(UnifiedMapWithHashingStrategy.this);
 
         public boolean add(Entry<K, V> entry)
         {
@@ -2206,7 +2206,7 @@ public class UnifiedMapWithHashingStrategy<K, V> extends AbstractMutableMap<K, V
         public boolean retainAll(Collection<?> collection)
         {
             int retainedSize = collection.size();
-            UnifiedMapWithHashingStrategy<K, V> retainedCopy = new UnifiedMapWithHashingStrategy<K, V>(
+            UnifiedMapWithHashingStrategy<K, V> retainedCopy = new UnifiedMapWithHashingStrategy<>(
                     UnifiedMapWithHashingStrategy.this.hashingStrategy, retainedSize, UnifiedMapWithHashingStrategy.this.loadFactor);
 
             for (Object obj : collection)
@@ -2314,13 +2314,13 @@ public class UnifiedMapWithHashingStrategy<K, V> extends AbstractMutableMap<K, V
                                 break;
                             }
                             result[count++] =
-                                    new WeakBoundEntry<K, V>(UnifiedMapWithHashingStrategy.this.nonSentinel(cur), (V) chain[j + 1], this.holder,
+                                    new WeakBoundEntry<>(UnifiedMapWithHashingStrategy.this.nonSentinel(cur), (V) chain[j + 1], this.holder,
                                             UnifiedMapWithHashingStrategy.this.hashingStrategy);
                         }
                     }
                     else
                     {
-                        result[count++] = new WeakBoundEntry<K, V>(UnifiedMapWithHashingStrategy.this.nonSentinel(x), (V) table[i + 1], this.holder,
+                        result[count++] = new WeakBoundEntry<>(UnifiedMapWithHashingStrategy.this.nonSentinel(x), (V) table[i + 1], this.holder,
                                 UnifiedMapWithHashingStrategy.this.hashingStrategy);
                     }
                 }
@@ -2353,7 +2353,7 @@ public class UnifiedMapWithHashingStrategy<K, V> extends AbstractMutableMap<K, V
                 throws IOException, ClassNotFoundException
         {
             in.defaultReadObject();
-            this.holder = new WeakReference<UnifiedMapWithHashingStrategy<K, V>>(UnifiedMapWithHashingStrategy.this);
+            this.holder = new WeakReference<>(UnifiedMapWithHashingStrategy.this);
         }
 
         @Override
@@ -2399,7 +2399,7 @@ public class UnifiedMapWithHashingStrategy<K, V> extends AbstractMutableMap<K, V
                 this.position += 2;
             }
             this.lastReturned = true;
-            return new WeakBoundEntry<K, V>(UnifiedMapWithHashingStrategy.this.nonSentinel(cur), (V) value, this.holder,
+            return new WeakBoundEntry<>(UnifiedMapWithHashingStrategy.this.nonSentinel(cur), (V) value, this.holder,
                     UnifiedMapWithHashingStrategy.this.hashingStrategy);
         }
 
@@ -2427,7 +2427,7 @@ public class UnifiedMapWithHashingStrategy<K, V> extends AbstractMutableMap<K, V
             }
             this.position += 2;
             this.lastReturned = true;
-            return new WeakBoundEntry<K, V>(UnifiedMapWithHashingStrategy.this.nonSentinel(cur), (V) value, this.holder,
+            return new WeakBoundEntry<>(UnifiedMapWithHashingStrategy.this.nonSentinel(cur), (V) value, this.holder,
                     UnifiedMapWithHashingStrategy.this.hashingStrategy);
         }
     }

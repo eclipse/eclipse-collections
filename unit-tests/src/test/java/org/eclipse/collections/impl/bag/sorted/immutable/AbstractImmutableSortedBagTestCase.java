@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -655,7 +655,7 @@ public abstract class AbstractImmutableSortedBagTestCase extends AbstractImmutab
     public void detectWithIfNone()
     {
         ImmutableSortedBag<Integer> integers = this.classUnderTest();
-        Function0<Integer> function = new PassThruFunction0<Integer>(integers.size() + 1);
+        Function0<Integer> function = new PassThruFunction0<>(integers.size() + 1);
         Integer sum = Integer.valueOf(integers.size() + 1);
         Assert.assertEquals(Integer.valueOf(1), integers.detectWithIfNone(Object::equals, Integer.valueOf(1), function));
         Assert.assertEquals(Integer.valueOf(integers.size() + 1), integers.detectWithIfNone(Object::equals, sum, function));
@@ -666,7 +666,7 @@ public abstract class AbstractImmutableSortedBagTestCase extends AbstractImmutab
     public void detectIfNone()
     {
         ImmutableSortedBag<Integer> integers = this.classUnderTest();
-        Function0<Integer> function = new PassThruFunction0<Integer>(integers.size() + 1);
+        Function0<Integer> function = new PassThruFunction0<>(integers.size() + 1);
         Assert.assertEquals(Integer.valueOf(1), integers.detectIfNone(Predicates.equal(1), function));
         Assert.assertEquals(Integer.valueOf(integers.size() + 1), integers.detectIfNone(Predicates.equal(integers.size() + 1), function));
     }

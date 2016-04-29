@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -84,9 +84,9 @@ public final class ListAdapter<T>
         }
         if (list instanceof RandomAccess)
         {
-            return new RandomAccessListAdapter<E>(list);
+            return new RandomAccessListAdapter<>(list);
         }
-        return new ListAdapter<E>(list);
+        return new ListAdapter<>(list);
     }
 
     public ImmutableList<T> toImmutable()
@@ -316,6 +316,6 @@ public final class ListAdapter<T>
     @Override
     public ParallelListIterable<T> asParallel(ExecutorService executorService, int batchSize)
     {
-        return new NonParallelListIterable<T>(this);
+        return new NonParallelListIterable<>(this);
     }
 }

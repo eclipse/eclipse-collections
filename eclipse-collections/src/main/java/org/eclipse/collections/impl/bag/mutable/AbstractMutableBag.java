@@ -70,7 +70,7 @@ public abstract class AbstractMutableBag<T>
 
     public SynchronizedBag<T> asSynchronized()
     {
-        return new SynchronizedBag<T>(this);
+        return new SynchronizedBag<>(this);
     }
 
     public MutableBag<T> tap(Procedure<? super T> procedure)
@@ -113,7 +113,7 @@ public abstract class AbstractMutableBag<T>
 
     public PartitionMutableBag<T> partition(final Predicate<? super T> predicate)
     {
-        final PartitionMutableBag<T> result = new PartitionHashBag<T>();
+        final PartitionMutableBag<T> result = new PartitionHashBag<>();
         this.forEachWithOccurrences((each, index) -> {
             MutableBag<T> bucket = predicate.accept(each) ? result.getSelected() : result.getRejected();
             bucket.addOccurrences(each, index);
@@ -123,7 +123,7 @@ public abstract class AbstractMutableBag<T>
 
     public <P> PartitionMutableBag<T> partitionWith(final Predicate2<? super T, ? super P> predicate, final P parameter)
     {
-        final PartitionMutableBag<T> result = new PartitionHashBag<T>();
+        final PartitionMutableBag<T> result = new PartitionHashBag<>();
         this.forEachWithOccurrences((each, index) -> {
             MutableBag<T> bucket = predicate.accept(each, parameter) ? result.getSelected() : result.getRejected();
             bucket.addOccurrences(each, index);
@@ -220,6 +220,6 @@ public abstract class AbstractMutableBag<T>
         {
             throw new IllegalArgumentException();
         }
-        return new NonParallelUnsortedBag<T>(this);
+        return new NonParallelUnsortedBag<>(this);
     }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -22,6 +22,6 @@ public class MapPutProcedureSerializationTest
                 1L,
                 "rO0ABXNyADxvcmcuZWNsaXBzZS5jb2xsZWN0aW9ucy5pbXBsLmJsb2NrLnByb2NlZHVyZS5NYXBQ\n"
                         + "dXRQcm9jZWR1cmUAAAAAAAAAAQIAAUwABm5ld01hcHQAD0xqYXZhL3V0aWwvTWFwO3hwcA==",
-                new MapPutProcedure<Object, Object>(null));
+                new MapPutProcedure<>(null));
     }
 }

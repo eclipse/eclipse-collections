@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -77,7 +77,7 @@ public class UnmodifiableSortedBag<T>
         {
             throw new IllegalArgumentException("cannot create an UnmodifiableSortedBag for null");
         }
-        return new UnmodifiableSortedBag<E>(bag);
+        return new UnmodifiableSortedBag<>(bag);
     }
 
     protected MutableSortedBag<T> getSortedBag()
@@ -457,6 +457,6 @@ public class UnmodifiableSortedBag<T>
 
     protected Object writeReplace()
     {
-        return new UnmodifiableCollectionSerializationProxy<T>(this.getSortedBag());
+        return new UnmodifiableCollectionSerializationProxy<>(this.getSortedBag());
     }
 }

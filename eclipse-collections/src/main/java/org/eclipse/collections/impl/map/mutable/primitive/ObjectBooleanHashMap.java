@@ -177,7 +177,7 @@ public class ObjectBooleanHashMap<K> implements MutableObjectBooleanMap<K>, Exte
 
     public static <K> ObjectBooleanHashMap<K> newMap()
     {
-        return new ObjectBooleanHashMap<K>();
+        return new ObjectBooleanHashMap<>();
     }
 
     public static <K> ObjectBooleanHashMap<K> newWithKeysValues(K key1, boolean value1)
@@ -711,12 +711,12 @@ public class ObjectBooleanHashMap<K> implements MutableObjectBooleanMap<K>, Exte
 
     public MutableObjectBooleanMap<K> asUnmodifiable()
     {
-        return new UnmodifiableObjectBooleanMap<K>(this);
+        return new UnmodifiableObjectBooleanMap<>(this);
     }
 
     public MutableObjectBooleanMap<K> asSynchronized()
     {
-        return new SynchronizedObjectBooleanMap<K>(this);
+        return new SynchronizedObjectBooleanMap<>(this);
     }
 
     public boolean get(Object key)
@@ -1612,7 +1612,7 @@ public class ObjectBooleanHashMap<K> implements MutableObjectBooleanMap<K>, Exte
 
         public Iterator<K> iterator()
         {
-            return new InternalKeysViewIterator<K>();
+            return new InternalKeysViewIterator<>();
         }
 
         public class InternalKeysViewIterator<K> implements Iterator<K>

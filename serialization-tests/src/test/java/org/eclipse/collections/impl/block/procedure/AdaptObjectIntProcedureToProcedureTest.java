@@ -26,6 +26,6 @@ public class AdaptObjectIntProcedureToProcedureTest
                         + "TG9yZy9lY2xpcHNlL2NvbGxlY3Rpb25zL2FwaS9ibG9jay9wcm9jZWR1cmUvcHJpbWl0aXZlL09i\n"
                         + "amVjdEludFByb2NlZHVyZTt4cHNyACRvcmcuZWNsaXBzZS5jb2xsZWN0aW9ucy5pbXBsLkNvdW50\n"
                         + "ZXIAAAAAAAAAAQwAAHhwdwQAAAAAeHA=",
-                new AdaptObjectIntProcedureToProcedure<Object>(null));
+                new AdaptObjectIntProcedureToProcedure<>(null));
     }
 }

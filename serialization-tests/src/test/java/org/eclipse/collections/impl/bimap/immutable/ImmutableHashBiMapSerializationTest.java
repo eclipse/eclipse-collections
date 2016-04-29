@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -24,7 +24,7 @@ public class ImmutableHashBiMapSerializationTest
     @Test
     public void serializedForm()
     {
-        ImmutableHashBiMap<Integer, Character> biMap = new ImmutableHashBiMap<Integer, Character>(
+        ImmutableHashBiMap<Integer, Character> biMap = new ImmutableHashBiMap<>(
                 Maps.immutable.with(1, 'a'),
                 Maps.immutable.with('a', 1));
 
@@ -34,7 +34,7 @@ public class ImmutableHashBiMapSerializationTest
     @Test
     public void inverse()
     {
-        ImmutableHashBiMap<Character, Integer> biMap = new ImmutableHashBiMap<Character, Integer>(
+        ImmutableHashBiMap<Character, Integer> biMap = new ImmutableHashBiMap<>(
                 Maps.immutable.with('a', 1),
                 Maps.immutable.with(1, 'a'));
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -84,9 +84,9 @@ public class UnmodifiableMutableList<T>
         }
         if (list instanceof RandomAccess)
         {
-            return new RandomAccessUnmodifiableMutableList<E>(RandomAccessListAdapter.adapt(list));
+            return new RandomAccessUnmodifiableMutableList<>(RandomAccessListAdapter.adapt(list));
         }
-        return new UnmodifiableMutableList<E>(ListAdapter.adapt(list));
+        return new UnmodifiableMutableList<>(ListAdapter.adapt(list));
     }
 
     private MutableList<T> getMutableList()
@@ -285,7 +285,7 @@ public class UnmodifiableMutableList<T>
 
     public ListIterator<T> listIterator(int index)
     {
-        return new UnmodifiableListIteratorAdapter<T>(this.getMutableList().listIterator(index));
+        return new UnmodifiableListIteratorAdapter<>(this.getMutableList().listIterator(index));
     }
 
     public UnmodifiableMutableList<T> subList(int fromIndex, int toIndex)
@@ -541,6 +541,6 @@ public class UnmodifiableMutableList<T>
 
     protected Object writeReplace()
     {
-        return new UnmodifiableCollectionSerializationProxy<T>(this.getMutableList());
+        return new UnmodifiableCollectionSerializationProxy<>(this.getMutableList());
     }
 }

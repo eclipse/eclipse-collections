@@ -42,7 +42,7 @@ public class CollectBooleanIterable<T>
     {
         this.iterable = adapted;
         this.function = function;
-        this.booleanFunctionToProcedure = new BooleanFunctionToProcedure<T>(function);
+        this.booleanFunctionToProcedure = new BooleanFunctionToProcedure<>(function);
     }
 
     public BooleanIterator booleanIterator()

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -148,56 +148,56 @@ public abstract class AbstractMutableSortedMap<K, V> extends AbstractMutableMapI
     public MutableBooleanList collectBoolean(BooleanFunction<? super V> booleanFunction)
     {
         BooleanArrayList result = new BooleanArrayList(this.size());
-        this.forEach(new CollectBooleanProcedure<V>(booleanFunction, result));
+        this.forEach(new CollectBooleanProcedure<>(booleanFunction, result));
         return result;
     }
 
     public MutableByteList collectByte(ByteFunction<? super V> byteFunction)
     {
         ByteArrayList result = new ByteArrayList(this.size());
-        this.forEach(new CollectByteProcedure<V>(byteFunction, result));
+        this.forEach(new CollectByteProcedure<>(byteFunction, result));
         return result;
     }
 
     public MutableCharList collectChar(CharFunction<? super V> charFunction)
     {
         CharArrayList result = new CharArrayList(this.size());
-        this.forEach(new CollectCharProcedure<V>(charFunction, result));
+        this.forEach(new CollectCharProcedure<>(charFunction, result));
         return result;
     }
 
     public MutableDoubleList collectDouble(DoubleFunction<? super V> doubleFunction)
     {
         DoubleArrayList result = new DoubleArrayList(this.size());
-        this.forEach(new CollectDoubleProcedure<V>(doubleFunction, result));
+        this.forEach(new CollectDoubleProcedure<>(doubleFunction, result));
         return result;
     }
 
     public MutableFloatList collectFloat(FloatFunction<? super V> floatFunction)
     {
         FloatArrayList result = new FloatArrayList(this.size());
-        this.forEach(new CollectFloatProcedure<V>(floatFunction, result));
+        this.forEach(new CollectFloatProcedure<>(floatFunction, result));
         return result;
     }
 
     public MutableIntList collectInt(IntFunction<? super V> intFunction)
     {
         IntArrayList result = new IntArrayList(this.size());
-        this.forEach(new CollectIntProcedure<V>(intFunction, result));
+        this.forEach(new CollectIntProcedure<>(intFunction, result));
         return result;
     }
 
     public MutableLongList collectLong(LongFunction<? super V> longFunction)
     {
         LongArrayList result = new LongArrayList(this.size());
-        this.forEach(new CollectLongProcedure<V>(longFunction, result));
+        this.forEach(new CollectLongProcedure<>(longFunction, result));
         return result;
     }
 
     public MutableShortList collectShort(ShortFunction<? super V> shortFunction)
     {
         ShortArrayList result = new ShortArrayList(this.size());
-        this.forEach(new CollectShortProcedure<V>(shortFunction, result));
+        this.forEach(new CollectShortProcedure<>(shortFunction, result));
         return result;
     }
 
@@ -206,7 +206,7 @@ public abstract class AbstractMutableSortedMap<K, V> extends AbstractMutableMapI
             Function<? super E, ? extends K> keyFunction,
             Function<? super E, ? extends V> valueFunction)
     {
-        Iterate.forEach(iterable, new MapCollectProcedure<E, K, V>(this, keyFunction, valueFunction));
+        Iterate.forEach(iterable, new MapCollectProcedure<>(this, keyFunction, valueFunction));
         return this;
     }
 
@@ -273,22 +273,22 @@ public abstract class AbstractMutableSortedMap<K, V> extends AbstractMutableMapI
 
     public PartitionMutableList<V> partition(Predicate<? super V> predicate)
     {
-        PartitionMutableList<V> partitionMutableList = new PartitionFastList<V>();
-        this.forEach(new PartitionProcedure<V>(predicate, partitionMutableList));
+        PartitionMutableList<V> partitionMutableList = new PartitionFastList<>();
+        this.forEach(new PartitionProcedure<>(predicate, partitionMutableList));
         return partitionMutableList;
     }
 
     public <P> PartitionMutableList<V> partitionWith(Predicate2<? super V, ? super P> predicate, P parameter)
     {
-        PartitionMutableList<V> partitionMutableList = new PartitionFastList<V>();
-        this.forEach(new PartitionPredicate2Procedure<V, P>(predicate, parameter, partitionMutableList));
+        PartitionMutableList<V> partitionMutableList = new PartitionFastList<>();
+        this.forEach(new PartitionPredicate2Procedure<>(predicate, parameter, partitionMutableList));
         return partitionMutableList;
     }
 
     public <S> MutableList<S> selectInstancesOf(Class<S> clazz)
     {
         FastList<S> result = FastList.newList(this.size());
-        this.forEach(new SelectInstancesOfProcedure<S>(clazz, result));
+        this.forEach(new SelectInstancesOfProcedure<>(clazz, result));
         result.trimToSize();
         return result;
     }

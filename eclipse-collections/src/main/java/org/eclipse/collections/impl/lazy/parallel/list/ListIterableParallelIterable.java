@@ -20,7 +20,6 @@ import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.list.ListIterable;
-import org.eclipse.collections.api.list.ParallelListIterable;
 import org.eclipse.collections.api.map.MapIterable;
 import org.eclipse.collections.api.multimap.list.ListMultimap;
 import org.eclipse.collections.impl.lazy.AbstractLazyIterable;
@@ -140,7 +139,7 @@ public final class ListIterableParallelIterable<T> extends AbstractParallelListI
             int chunkEndIndex = (this.chunkIndex + 1) * ListIterableParallelIterable.this.getBatchSize();
             int truncatedChunkEndIndex = Math.min(chunkEndIndex, ListIterableParallelIterable.this.delegate.size());
             this.chunkIndex++;
-            return new ListIterableBatch<T>(ListIterableParallelIterable.this.delegate, chunkStartIndex, truncatedChunkEndIndex);
+            return new ListIterableBatch<>(ListIterableParallelIterable.this.delegate, chunkStartIndex, truncatedChunkEndIndex);
         }
 
         public void remove()

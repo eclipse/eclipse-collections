@@ -45,7 +45,7 @@ public class FlatCollectIterable<T, V>
     @Override
     public void forEachWithIndex(ObjectIntProcedure<? super V> objectIntProcedure)
     {
-        final Procedure<V> innerProcedure = new AdaptObjectIntProcedureToProcedure<V>(objectIntProcedure);
+        final Procedure<V> innerProcedure = new AdaptObjectIntProcedureToProcedure<>(objectIntProcedure);
         Iterate.forEach(this.adapted, each -> {
             Iterable<V> iterable = this.function.valueOf(each);
             Iterate.forEach(iterable, innerProcedure);
@@ -114,6 +114,6 @@ public class FlatCollectIterable<T, V>
 
     public Iterator<V> iterator()
     {
-        return new FlatCollectIterator<T, V>(this.adapted, this.function);
+        return new FlatCollectIterator<>(this.adapted, this.function);
     }
 }

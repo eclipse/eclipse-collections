@@ -168,28 +168,28 @@ public class UnifiedSetWithHashingStrategy<T>
 
     public static <K> UnifiedSetWithHashingStrategy<K> newSet(HashingStrategy<? super K> hashingStrategy)
     {
-        return new UnifiedSetWithHashingStrategy<K>(hashingStrategy);
+        return new UnifiedSetWithHashingStrategy<>(hashingStrategy);
     }
 
     public static <K> UnifiedSetWithHashingStrategy<K> newSet(UnifiedSetWithHashingStrategy<K> set)
     {
-        return new UnifiedSetWithHashingStrategy<K>(set.hashingStrategy, set);
+        return new UnifiedSetWithHashingStrategy<>(set.hashingStrategy, set);
     }
 
     public static <K> UnifiedSetWithHashingStrategy<K> newSet(HashingStrategy<? super K> hashingStrategy, int size)
     {
-        return new UnifiedSetWithHashingStrategy<K>(hashingStrategy, size);
+        return new UnifiedSetWithHashingStrategy<>(hashingStrategy, size);
     }
 
     public static <K> UnifiedSetWithHashingStrategy<K> newSet(HashingStrategy<? super K> hashingStrategy, Iterable<? extends K> source)
     {
         if (source instanceof UnifiedSetWithHashingStrategy<?>)
         {
-            return new UnifiedSetWithHashingStrategy<K>(hashingStrategy, (UnifiedSetWithHashingStrategy<K>) source);
+            return new UnifiedSetWithHashingStrategy<>(hashingStrategy, (UnifiedSetWithHashingStrategy<K>) source);
         }
         if (source instanceof Collection<?>)
         {
-            return new UnifiedSetWithHashingStrategy<K>(hashingStrategy, (Collection<K>) source);
+            return new UnifiedSetWithHashingStrategy<>(hashingStrategy, (Collection<K>) source);
         }
         if (source == null)
         {
@@ -204,7 +204,7 @@ public class UnifiedSetWithHashingStrategy<T>
 
     public static <K> UnifiedSetWithHashingStrategy<K> newSet(HashingStrategy<? super K> hashingStrategy, int size, float loadFactor)
     {
-        return new UnifiedSetWithHashingStrategy<K>(hashingStrategy, size, loadFactor);
+        return new UnifiedSetWithHashingStrategy<>(hashingStrategy, size, loadFactor);
     }
 
     public static <K> UnifiedSetWithHashingStrategy<K> newSetWith(HashingStrategy<? super K> hashingStrategy, K... elements)
@@ -733,22 +733,22 @@ public class UnifiedSetWithHashingStrategy<T>
 
     public PartitionMutableSet<T> partition(Predicate<? super T> predicate)
     {
-        PartitionMutableSet<T> partitionMutableSet = new PartitionUnifiedSetWithHashingStrategy<T>(this.hashingStrategy);
-        this.forEach(new PartitionProcedure<T>(predicate, partitionMutableSet));
+        PartitionMutableSet<T> partitionMutableSet = new PartitionUnifiedSetWithHashingStrategy<>(this.hashingStrategy);
+        this.forEach(new PartitionProcedure<>(predicate, partitionMutableSet));
         return partitionMutableSet;
     }
 
     public <P> PartitionMutableSet<T> partitionWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
-        PartitionMutableSet<T> partitionMutableSet = new PartitionUnifiedSetWithHashingStrategy<T>(this.hashingStrategy);
-        this.forEach(new PartitionPredicate2Procedure<T, P>(predicate, parameter, partitionMutableSet));
+        PartitionMutableSet<T> partitionMutableSet = new PartitionUnifiedSetWithHashingStrategy<>(this.hashingStrategy);
+        this.forEach(new PartitionPredicate2Procedure<>(predicate, parameter, partitionMutableSet));
         return partitionMutableSet;
     }
 
     public <S> UnifiedSetWithHashingStrategy<S> selectInstancesOf(Class<S> clazz)
     {
         UnifiedSetWithHashingStrategy<S> result = (UnifiedSetWithHashingStrategy<S>) this.newEmpty();
-        this.forEach(new SelectInstancesOfProcedure<S>(clazz, result));
+        this.forEach(new SelectInstancesOfProcedure<>(clazz, result));
         return result;
     }
 
@@ -1458,7 +1458,7 @@ public class UnifiedSetWithHashingStrategy<T>
     private boolean retainAllFromNonSet(Iterable<?> iterable)
     {
         int retainedSize = Iterate.sizeOf(iterable);
-        UnifiedSetWithHashingStrategy<T> retainedCopy = new UnifiedSetWithHashingStrategy<T>(this.hashingStrategy, retainedSize, this.loadFactor);
+        UnifiedSetWithHashingStrategy<T> retainedCopy = new UnifiedSetWithHashingStrategy<>(this.hashingStrategy, retainedSize, this.loadFactor);
         for (Object key : iterable)
         {
             this.addIfFound((T) key, retainedCopy);
@@ -1492,7 +1492,7 @@ public class UnifiedSetWithHashingStrategy<T>
     @Override
     public UnifiedSetWithHashingStrategy<T> clone()
     {
-        return new UnifiedSetWithHashingStrategy<T>(this.hashingStrategy, this);
+        return new UnifiedSetWithHashingStrategy<>(this.hashingStrategy, this);
     }
 
     @Override
@@ -2262,17 +2262,17 @@ public class UnifiedSetWithHashingStrategy<T>
 
         public UnsortedSetBatch<T> select(Predicate<? super T> predicate)
         {
-            return new SelectUnsortedSetBatch<T>(this, predicate);
+            return new SelectUnsortedSetBatch<>(this, predicate);
         }
 
         public <V> UnsortedBagBatch<V> collect(Function<? super T, ? extends V> function)
         {
-            return new CollectUnsortedBagBatch<T, V>(this, function);
+            return new CollectUnsortedBagBatch<>(this, function);
         }
 
         public <V> UnsortedBagBatch<V> flatCollect(Function<? super T, ? extends Iterable<V>> function)
         {
-            return new FlatCollectUnsortedBagBatch<T, V>(this, function);
+            return new FlatCollectUnsortedBagBatch<>(this, function);
         }
     }
 

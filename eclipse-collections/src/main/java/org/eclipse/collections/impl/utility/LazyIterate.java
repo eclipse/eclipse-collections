@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -56,7 +56,7 @@ public final class LazyIterate
      */
     public static <T> LazyIterable<T> adapt(Iterable<T> iterable)
     {
-        return new LazyIterableAdapter<T>(iterable);
+        return new LazyIterableAdapter<>(iterable);
     }
 
     /**
@@ -64,7 +64,7 @@ public final class LazyIterate
      */
     public static <T> LazyIterable<T> select(Iterable<T> iterable, Predicate<? super T> predicate)
     {
-        return new SelectIterable<T>(iterable, predicate);
+        return new SelectIterable<>(iterable, predicate);
     }
 
     /**
@@ -72,12 +72,12 @@ public final class LazyIterate
      */
     public static <T> LazyIterable<T> reject(Iterable<T> iterable, Predicate<? super T> predicate)
     {
-        return new RejectIterable<T>(iterable, predicate);
+        return new RejectIterable<>(iterable, predicate);
     }
 
     public static <T> LazyIterable<T> selectInstancesOf(Iterable<?> iterable, Class<T> clazz)
     {
-        return new SelectInstancesOfIterable<T>(iterable, clazz);
+        return new SelectInstancesOfIterable<>(iterable, clazz);
     }
 
     /**
@@ -87,7 +87,7 @@ public final class LazyIterate
             Iterable<T> iterable,
             Function<? super T, ? extends V> function)
     {
-        return new CollectIterable<T, V>(iterable, function);
+        return new CollectIterable<>(iterable, function);
     }
 
     /**
@@ -97,7 +97,7 @@ public final class LazyIterate
             Iterable<T> iterable,
             Function<? super T, ? extends Iterable<V>> function)
     {
-        return new FlatCollectIterable<T, V>(iterable, function);
+        return new FlatCollectIterable<>(iterable, function);
     }
 
     /**
@@ -116,7 +116,7 @@ public final class LazyIterate
      */
     public static <T> LazyIterable<T> take(Iterable<T> iterable, int count)
     {
-        return new TakeIterable<T>(iterable, count);
+        return new TakeIterable<>(iterable, count);
     }
 
     /**
@@ -124,7 +124,7 @@ public final class LazyIterate
      */
     public static <T> LazyIterable<T> drop(Iterable<T> iterable, int count)
     {
-        return new DropIterable<T>(iterable, count);
+        return new DropIterable<>(iterable, count);
     }
 
     /**
@@ -135,7 +135,7 @@ public final class LazyIterate
      */
     public static <T> LazyIterable<T> takeWhile(Iterable<T> iterable, Predicate<? super T> predicate)
     {
-        return new TakeWhileIterable<T>(iterable, predicate);
+        return new TakeWhileIterable<>(iterable, predicate);
     }
 
     /**
@@ -146,7 +146,7 @@ public final class LazyIterate
      */
     public static <T> LazyIterable<T> dropWhile(Iterable<T> iterable, Predicate<? super T> predicate)
     {
-        return new DropWhileIterable<T>(iterable, predicate);
+        return new DropWhileIterable<>(iterable, predicate);
     }
 
     /**
@@ -156,7 +156,7 @@ public final class LazyIterate
      */
     public static <T> LazyIterable<T> distinct(Iterable<T> iterable)
     {
-        return new DistinctIterable<T>(iterable);
+        return new DistinctIterable<>(iterable);
     }
 
     /**
@@ -174,17 +174,17 @@ public final class LazyIterate
 
     public static <A, B> LazyIterable<Pair<A, B>> zip(Iterable<A> as, Iterable<B> bs)
     {
-        return new ZipIterable<A, B>(as, bs);
+        return new ZipIterable<>(as, bs);
     }
 
     public static <T> LazyIterable<Pair<T, Integer>> zipWithIndex(Iterable<T> iterable)
     {
-        return new ZipWithIndexIterable<T>(iterable);
+        return new ZipWithIndexIterable<>(iterable);
     }
 
     public static <T> LazyIterable<RichIterable<T>> chunk(Iterable<T> iterable, int size)
     {
-        return new ChunkIterable<T>(iterable, size);
+        return new ChunkIterable<>(iterable, size);
     }
 
     /**
@@ -194,6 +194,6 @@ public final class LazyIterate
      */
     public static <T> LazyIterable<T> tap(Iterable<T> iterable, Procedure<? super T> procedure)
     {
-        return new TapIterable<T>(iterable, procedure);
+        return new TapIterable<>(iterable, procedure);
     }
 }

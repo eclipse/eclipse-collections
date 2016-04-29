@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -58,7 +58,7 @@ public final class Multimaps
 
         public static final class ImmutableListMultimapFactory
         {
-            public static final ImmutableListMultimap<Object, Object> EMPTY = new ImmutableListMultimapImpl<Object, Object>(Maps.immutable.<Object, ImmutableList<Object>>with());
+            public static final ImmutableListMultimap<Object, Object> EMPTY = new ImmutableListMultimapImpl<>(Maps.immutable.<Object, ImmutableList<Object>>with());
 
             private ImmutableListMultimapFactory()
             {
@@ -76,7 +76,7 @@ public final class Multimaps
 
             public <K, V> ImmutableListMultimap<K, V> with(K key, V value)
             {
-                return new ImmutableListMultimapImpl<K, V>(Maps.immutable.with(key, Lists.immutable.with(value)));
+                return new ImmutableListMultimapImpl<>(Maps.immutable.with(key, Lists.immutable.with(value)));
             }
 
             public <K, V> ImmutableListMultimap<K, V> with(K key1, V value1, K key2, V value2)
@@ -99,7 +99,7 @@ public final class Multimaps
 
         public static final class ImmutableSetMultimapFactory
         {
-            public static final ImmutableSetMultimap<Object, Object> EMPTY = new ImmutableSetMultimapImpl<Object, Object>(Maps.immutable.<Object, ImmutableSet<Object>>with());
+            public static final ImmutableSetMultimap<Object, Object> EMPTY = new ImmutableSetMultimapImpl<>(Maps.immutable.<Object, ImmutableSet<Object>>with());
 
             private ImmutableSetMultimapFactory()
             {
@@ -117,7 +117,7 @@ public final class Multimaps
 
             public <K, V> ImmutableSetMultimap<K, V> with(K key, V value)
             {
-                return new ImmutableSetMultimapImpl<K, V>(Maps.immutable.with(key, Sets.immutable.with(value)));
+                return new ImmutableSetMultimapImpl<>(Maps.immutable.with(key, Sets.immutable.with(value)));
             }
 
             public <K, V> ImmutableSetMultimap<K, V> with(K key1, V value1, K key2, V value2)
@@ -146,12 +146,12 @@ public final class Multimaps
 
             public <K, V> ImmutableSortedSetMultimap<K, V> with(Comparator<V> comparator)
             {
-                return new ImmutableSortedSetMultimapImpl<K, V>(Maps.immutable.<K, ImmutableSortedSet<V>>with(), comparator);
+                return new ImmutableSortedSetMultimapImpl<>(Maps.immutable.<K, ImmutableSortedSet<V>>with(), comparator);
             }
 
             public <K, V> ImmutableSortedSetMultimap<K, V> with(Comparator<V> comparator, K key, V value)
             {
-                return new ImmutableSortedSetMultimapImpl<K, V>(Maps.immutable.with(key, SortedSets.immutable.with(comparator, value)), comparator);
+                return new ImmutableSortedSetMultimapImpl<>(Maps.immutable.with(key, SortedSets.immutable.with(comparator, value)), comparator);
             }
 
             public <K, V> ImmutableSortedSetMultimap<K, V> with(Comparator<V> comparator, K key1, V value1, K key2, V value2)
@@ -174,7 +174,7 @@ public final class Multimaps
 
         public static final class ImmutableBagMultimapFactory
         {
-            public static final ImmutableBagMultimap<Object, Object> EMPTY = new ImmutableBagMultimapImpl<Object, Object>(Maps.immutable.<Object, ImmutableBag<Object>>with());
+            public static final ImmutableBagMultimap<Object, Object> EMPTY = new ImmutableBagMultimapImpl<>(Maps.immutable.<Object, ImmutableBag<Object>>with());
 
             private ImmutableBagMultimapFactory()
             {
@@ -192,7 +192,7 @@ public final class Multimaps
 
             public <K, V> ImmutableBagMultimap<K, V> with(K key, V value)
             {
-                return new ImmutableBagMultimapImpl<K, V>(Maps.immutable.with(key, Bags.immutable.with(value)));
+                return new ImmutableBagMultimapImpl<>(Maps.immutable.with(key, Bags.immutable.with(value)));
             }
 
             public <K, V> ImmutableBagMultimap<K, V> with(K key1, V value1, K key2, V value2)

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -144,7 +144,7 @@ public final class SortedSetAdapter<T>
         {
             return (MutableSortedSet<T>) set;
         }
-        return new SortedSetAdapter<T>(set);
+        return new SortedSetAdapter<>(set);
     }
 
     @Override
@@ -259,22 +259,22 @@ public final class SortedSetAdapter<T>
     @Override
     public PartitionMutableSortedSet<T> partition(Predicate<? super T> predicate)
     {
-        PartitionMutableSortedSet<T> partitionMutableSortedSet = new PartitionTreeSortedSet<T>(this.comparator());
-        this.forEach(new PartitionProcedure<T>(predicate, partitionMutableSortedSet));
+        PartitionMutableSortedSet<T> partitionMutableSortedSet = new PartitionTreeSortedSet<>(this.comparator());
+        this.forEach(new PartitionProcedure<>(predicate, partitionMutableSortedSet));
         return partitionMutableSortedSet;
     }
 
     @Override
     public <P> PartitionMutableSortedSet<T> partitionWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
-        PartitionMutableSortedSet<T> partitionMutableSortedSet = new PartitionTreeSortedSet<T>(this.comparator());
-        this.forEach(new PartitionPredicate2Procedure<T, P>(predicate, parameter, partitionMutableSortedSet));
+        PartitionMutableSortedSet<T> partitionMutableSortedSet = new PartitionTreeSortedSet<>(this.comparator());
+        this.forEach(new PartitionPredicate2Procedure<>(predicate, parameter, partitionMutableSortedSet));
         return partitionMutableSortedSet;
     }
 
     public PartitionMutableSortedSet<T> partitionWhile(Predicate<? super T> predicate)
     {
-        PartitionTreeSortedSet<T> result = new PartitionTreeSortedSet<T>(this.comparator());
+        PartitionTreeSortedSet<T> result = new PartitionTreeSortedSet<>(this.comparator());
         return IterableIterate.partitionWhile(this, predicate, result);
     }
 
@@ -294,7 +294,7 @@ public final class SortedSetAdapter<T>
     public <S> MutableSortedSet<S> selectInstancesOf(Class<S> clazz)
     {
         TreeSortedSet<S> result = TreeSortedSet.newSet((Comparator<? super S>) this.comparator());
-        this.forEach(new SelectInstancesOfProcedure<S>(clazz, result));
+        this.forEach(new SelectInstancesOfProcedure<>(clazz, result));
         return result;
     }
 
@@ -308,7 +308,7 @@ public final class SortedSetAdapter<T>
     public MutableBooleanList collectBoolean(BooleanFunction<? super T> booleanFunction)
     {
         BooleanArrayList result = new BooleanArrayList(this.size());
-        this.forEach(new CollectBooleanProcedure<T>(booleanFunction, result));
+        this.forEach(new CollectBooleanProcedure<>(booleanFunction, result));
         return result;
     }
 
@@ -316,7 +316,7 @@ public final class SortedSetAdapter<T>
     public MutableByteList collectByte(ByteFunction<? super T> byteFunction)
     {
         ByteArrayList result = new ByteArrayList(this.size());
-        this.forEach(new CollectByteProcedure<T>(byteFunction, result));
+        this.forEach(new CollectByteProcedure<>(byteFunction, result));
         return result;
     }
 
@@ -324,7 +324,7 @@ public final class SortedSetAdapter<T>
     public MutableCharList collectChar(CharFunction<? super T> charFunction)
     {
         CharArrayList result = new CharArrayList(this.size());
-        this.forEach(new CollectCharProcedure<T>(charFunction, result));
+        this.forEach(new CollectCharProcedure<>(charFunction, result));
         return result;
     }
 
@@ -332,7 +332,7 @@ public final class SortedSetAdapter<T>
     public MutableDoubleList collectDouble(DoubleFunction<? super T> doubleFunction)
     {
         DoubleArrayList result = new DoubleArrayList(this.size());
-        this.forEach(new CollectDoubleProcedure<T>(doubleFunction, result));
+        this.forEach(new CollectDoubleProcedure<>(doubleFunction, result));
         return result;
     }
 
@@ -340,7 +340,7 @@ public final class SortedSetAdapter<T>
     public MutableFloatList collectFloat(FloatFunction<? super T> floatFunction)
     {
         FloatArrayList result = new FloatArrayList(this.size());
-        this.forEach(new CollectFloatProcedure<T>(floatFunction, result));
+        this.forEach(new CollectFloatProcedure<>(floatFunction, result));
         return result;
     }
 
@@ -348,7 +348,7 @@ public final class SortedSetAdapter<T>
     public MutableIntList collectInt(IntFunction<? super T> intFunction)
     {
         IntArrayList result = new IntArrayList(this.size());
-        this.forEach(new CollectIntProcedure<T>(intFunction, result));
+        this.forEach(new CollectIntProcedure<>(intFunction, result));
         return result;
     }
 
@@ -356,7 +356,7 @@ public final class SortedSetAdapter<T>
     public MutableLongList collectLong(LongFunction<? super T> longFunction)
     {
         LongArrayList result = new LongArrayList(this.size());
-        this.forEach(new CollectLongProcedure<T>(longFunction, result));
+        this.forEach(new CollectLongProcedure<>(longFunction, result));
         return result;
     }
 
@@ -364,7 +364,7 @@ public final class SortedSetAdapter<T>
     public MutableShortList collectShort(ShortFunction<? super T> shortFunction)
     {
         ShortArrayList result = new ShortArrayList(this.size());
-        this.forEach(new CollectShortProcedure<T>(shortFunction, result));
+        this.forEach(new CollectShortProcedure<>(shortFunction, result));
         return result;
     }
 
@@ -623,7 +623,7 @@ public final class SortedSetAdapter<T>
         {
             throw new IllegalArgumentException();
         }
-        return new NonParallelSortedSetIterable<T>(this);
+        return new NonParallelSortedSetIterable<>(this);
     }
 
     public MutableSortedSet<T> toReversed()

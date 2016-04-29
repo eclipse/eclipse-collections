@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -26,6 +26,6 @@ public class SortedMapAdapterSerializationTest
                         + "b3J0ZWRNYXBBZGFwdGVyAAAAAAAAAAECAAFMAAhkZWxlZ2F0ZXQAFUxqYXZhL3V0aWwvU29ydGVk\n"
                         + "TWFwO3hwc3IAEWphdmEudXRpbC5UcmVlTWFwDMH2Pi0lauYDAAFMAApjb21wYXJhdG9ydAAWTGph\n"
                         + "dmEvdXRpbC9Db21wYXJhdG9yO3hwcHcEAAAAAHg=",
-                new SortedMapAdapter<Object, Object>(new TreeMap<Object, Object>()));
+                new SortedMapAdapter<>(new TreeMap<>()));
     }
 }

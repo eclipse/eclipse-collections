@@ -71,22 +71,22 @@ public final class TreeBagMultimap<K, V>
 
     public static <K, V> TreeBagMultimap<K, V> newMultimap()
     {
-        return new TreeBagMultimap<K, V>();
+        return new TreeBagMultimap<>();
     }
 
     public static <K, V> TreeBagMultimap<K, V> newMultimap(Multimap<? extends K, ? extends V> multimap)
     {
-        return new TreeBagMultimap<K, V>(multimap);
+        return new TreeBagMultimap<>(multimap);
     }
 
     public static <K, V> TreeBagMultimap<K, V> newMultimap(Comparator<? super V> comparator)
     {
-        return new TreeBagMultimap<K, V>(comparator);
+        return new TreeBagMultimap<>(comparator);
     }
 
     public static <K, V> TreeBagMultimap<K, V> newMultimap(Pair<K, V>... pairs)
     {
-        return new TreeBagMultimap<K, V>(pairs);
+        return new TreeBagMultimap<>(pairs);
     }
 
     @Override
@@ -109,7 +109,7 @@ public final class TreeBagMultimap<K, V>
 
     public TreeBagMultimap<K, V> newEmpty()
     {
-        return new TreeBagMultimap<K, V>(this.comparator);
+        return new TreeBagMultimap<>(this.comparator);
     }
 
     public Comparator<? super V> comparator()
@@ -119,7 +119,7 @@ public final class TreeBagMultimap<K, V>
 
     public MutableSortedBagMultimap<K, V> toMutable()
     {
-        return new TreeBagMultimap<K, V>(this);
+        return new TreeBagMultimap<>(this);
     }
 
     public ImmutableSortedBagMultimap<K, V> toImmutable()
@@ -127,7 +127,7 @@ public final class TreeBagMultimap<K, V>
         final MutableMap<K, ImmutableSortedBag<V>> map = UnifiedMap.newMap();
 
         this.map.forEachKeyValue((key, bag) -> map.put(key, bag.toImmutable()));
-        return new ImmutableSortedBagMultimapImpl<K, V>(map, this.comparator());
+        return new ImmutableSortedBagMultimapImpl<>(map, this.comparator());
     }
 
     @Override

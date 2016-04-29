@@ -63,12 +63,12 @@ public final class ImmutableBagMultimapImpl<K, V>
 
     public ImmutableBagMultimap<K, V> newEmpty()
     {
-        return new ImmutableBagMultimapImpl<K, V>(Maps.immutable.<K, ImmutableBag<V>>of());
+        return new ImmutableBagMultimapImpl<>(Maps.immutable.<K, ImmutableBag<V>>of());
     }
 
     public MutableBagMultimap<K, V> toMutable()
     {
-        return new HashBagMultimap<K, V>(this);
+        return new HashBagMultimap<>(this);
     }
 
     @Override
@@ -79,7 +79,7 @@ public final class ImmutableBagMultimapImpl<K, V>
 
     private Object writeReplace()
     {
-        return new ImmutableBagMultimapSerializationProxy<K, V>(this.map);
+        return new ImmutableBagMultimapSerializationProxy<>(this.map);
     }
 
     private static class ImmutableBagMultimapSerializationProxy<K, V>
@@ -108,7 +108,7 @@ public final class ImmutableBagMultimapImpl<K, V>
 
         public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
         {
-            this.multimap = new HashBagMultimap<K, V>();
+            this.multimap = new HashBagMultimap<>();
             int keyCount = in.readInt();
             for (int i = 0; i < keyCount; i++)
             {

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -50,22 +50,22 @@ public final class HashBagMultimap<K, V>
 
     public static <K, V> HashBagMultimap<K, V> newMultimap(Multimap<? extends K, ? extends V> multimap)
     {
-        return new HashBagMultimap<K, V>(multimap);
+        return new HashBagMultimap<>(multimap);
     }
 
     public static <K, V> HashBagMultimap<K, V> newMultimap()
     {
-        return new HashBagMultimap<K, V>();
+        return new HashBagMultimap<>();
     }
 
     public static <K, V> HashBagMultimap<K, V> newMultimap(Pair<K, V>... pairs)
     {
-        return new HashBagMultimap<K, V>(pairs);
+        return new HashBagMultimap<>(pairs);
     }
 
     public static <K, V> HashBagMultimap<K, V> newMultimap(Iterable<Pair<K, V>> inputIterable)
     {
-        return new HashBagMultimap<K, V>(inputIterable);
+        return new HashBagMultimap<>(inputIterable);
     }
 
     @Override
@@ -88,7 +88,7 @@ public final class HashBagMultimap<K, V>
 
     public HashBagMultimap<K, V> newEmpty()
     {
-        return new HashBagMultimap<K, V>();
+        return new HashBagMultimap<>();
     }
 
     public MutableBagMultimap<V, K> flip()

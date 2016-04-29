@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -54,26 +54,26 @@ public abstract class Predicates2<T, P>
 
     public static <T, P> Predicate2<T, P> throwing(ThrowingPredicate2<T, P> throwingPredicate2)
     {
-        return new ThrowingPredicate2Adapter<T, P>(throwingPredicate2);
+        return new ThrowingPredicate2Adapter<>(throwingPredicate2);
     }
 
     public static <T, P> Predicates2<T, P> not(Predicate2<T, P> predicate)
     {
-        return new Not<T, P>(predicate);
+        return new Not<>(predicate);
     }
 
     public static <T, P> Predicates2<T, P> or(
             Predicate2<? super T, ? super P> left,
             Predicate2<? super T, ? super P> right)
     {
-        return new Or<T, P>(left, right);
+        return new Or<>(left, right);
     }
 
     public static <T, P> Predicates2<T, P> and(
             Predicate2<? super T, ? super P> left,
             Predicate2<? super T, ? super P> right)
     {
-        return new And<T, P>(left, right);
+        return new And<>(left, right);
     }
 
     public static <T> Predicates2<T, Iterable<?>> attributeIn(Function<T, ?> function)
@@ -168,34 +168,34 @@ public abstract class Predicates2<T, P>
 
     public static <T> Predicates2<T, Object> attributeNotEqual(Function<T, ?> function)
     {
-        return new AttributePredicates2<T, Object>(function, Predicates2.notEqual());
+        return new AttributePredicates2<>(function, Predicates2.notEqual());
     }
 
     public static <T, P extends Comparable<? super P>> Predicates2<T, P> attributeLessThan(Function<T, P> function)
     {
-        return new AttributePredicates2<T, P>(function, (Predicate2<P, P>) LESS_THAN);
+        return new AttributePredicates2<>(function, (Predicate2<P, P>) LESS_THAN);
     }
 
     public static <T, P extends Comparable<? super P>> Predicates2<T, P> attributeLessThanOrEqualTo(
             Function<T, P> function)
     {
-        return new AttributePredicates2<T, P>(function, (Predicate2<P, P>) LESS_THAN_OR_EQUAL);
+        return new AttributePredicates2<>(function, (Predicate2<P, P>) LESS_THAN_OR_EQUAL);
     }
 
     public static <T, P extends Comparable<? super P>> Predicates2<T, P> attributeGreaterThan(Function<T, P> function)
     {
-        return new AttributePredicates2<T, P>(function, (Predicate2<P, P>) GREATER_THAN);
+        return new AttributePredicates2<>(function, (Predicate2<P, P>) GREATER_THAN);
     }
 
     public static <T, P extends Comparable<? super P>> Predicates2<T, P> attributeGreaterThanOrEqualTo(
             Function<T, P> function)
     {
-        return new AttributePredicates2<T, P>(function, (Predicate2<P, P>) GREATER_THAN_OR_EQUAL);
+        return new AttributePredicates2<>(function, (Predicate2<P, P>) GREATER_THAN_OR_EQUAL);
     }
 
     public static <T> Predicates2<T, Object> attributeEqual(Function<T, ?> function)
     {
-        return new AttributePredicates2<T, Object>(function, Predicates2.equal());
+        return new AttributePredicates2<>(function, Predicates2.equal());
     }
 
     private static final class Or<T, P>

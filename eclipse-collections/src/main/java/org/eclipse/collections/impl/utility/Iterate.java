@@ -2948,7 +2948,7 @@ public final class Iterate
             Function<? super T, ? extends K> keyFunction)
     {
         MutableMap<K, T> map = UnifiedMap.newMap();
-        Iterate.forEach(iterable, new MapCollectProcedure<T, K, T>(map, keyFunction));
+        Iterate.forEach(iterable, new MapCollectProcedure<>(map, keyFunction));
         return map;
     }
 
@@ -2974,7 +2974,7 @@ public final class Iterate
             Function<? super T, ? extends K> keyFunction,
             M map)
     {
-        Iterate.forEach(iterable, new MapCollectProcedure<T, K, V>(map, keyFunction));
+        Iterate.forEach(iterable, new MapCollectProcedure<>(map, keyFunction));
         return map;
     }
 
@@ -2989,7 +2989,7 @@ public final class Iterate
             Function<? super T, ? extends V> valueFunction,
             M map)
     {
-        Iterate.forEach(iterable, new MapCollectProcedure<T, K, V>(map, keyFunction, valueFunction));
+        Iterate.forEach(iterable, new MapCollectProcedure<>(map, keyFunction, valueFunction));
         return map;
     }
 
@@ -3032,7 +3032,7 @@ public final class Iterate
             Function<? super T, ? extends Iterable<V>> valuesFunction,
             R targetMultimap)
     {
-        Iterate.forEach(iterable, new MultimapKeyValuePutAllProcedure<T, K, V>(targetMultimap, keyFunction, valuesFunction));
+        Iterate.forEach(iterable, new MultimapKeyValuePutAllProcedure<>(targetMultimap, keyFunction, valuesFunction));
         return targetMultimap;
     }
 
@@ -3349,7 +3349,7 @@ public final class Iterate
             Function<? super T, ? extends V> valueFunction,
             R targetMultimap)
     {
-        Iterate.forEach(iterable, new MultimapKeyValuePutProcedure<T, K, V>(targetMultimap, groupByFunction, valueFunction));
+        Iterate.forEach(iterable, new MultimapKeyValuePutProcedure<>(targetMultimap, groupByFunction, valueFunction));
         return targetMultimap;
     }
 
@@ -3395,7 +3395,7 @@ public final class Iterate
      */
     public static <T> T min(Iterable<T> iterable, Comparator<? super T> comparator)
     {
-        MinComparatorProcedure<T> procedure = new MinComparatorProcedure<T>(comparator);
+        MinComparatorProcedure<T> procedure = new MinComparatorProcedure<>(comparator);
         Iterate.forEach(iterable, procedure);
         return procedure.getResult();
     }
@@ -3405,7 +3405,7 @@ public final class Iterate
      */
     public static <T> T max(Iterable<T> iterable, Comparator<? super T> comparator)
     {
-        MaxComparatorProcedure<T> procedure = new MaxComparatorProcedure<T>(comparator);
+        MaxComparatorProcedure<T> procedure = new MaxComparatorProcedure<>(comparator);
         Iterate.forEach(iterable, procedure);
         return procedure.getResult();
     }
@@ -3675,7 +3675,7 @@ public final class Iterate
      */
     public static <K, V> HashBagMultimap<V, K> flip(BagMultimap<K, V> bagMultimap)
     {
-        final HashBagMultimap<V, K> result = new HashBagMultimap<V, K>();
+        final HashBagMultimap<V, K> result = new HashBagMultimap<>();
         bagMultimap.forEachKeyMultiValues((key, values) -> Iterate.forEach(values, value -> result.put(value, key)));
         return result;
     }
@@ -3685,7 +3685,7 @@ public final class Iterate
      */
     public static <K, V> HashBagMultimap<V, K> flip(ListMultimap<K, V> listMultimap)
     {
-        final HashBagMultimap<V, K> result = new HashBagMultimap<V, K>();
+        final HashBagMultimap<V, K> result = new HashBagMultimap<>();
         listMultimap.forEachKeyMultiValues((key, values) -> Iterate.forEach(values, value -> result.put(value, key)));
         return result;
     }
@@ -3695,7 +3695,7 @@ public final class Iterate
      */
     public static <K, V> UnifiedSetMultimap<V, K> flip(SetMultimap<K, V> setMultimap)
     {
-        final UnifiedSetMultimap<V, K> result = new UnifiedSetMultimap<V, K>();
+        final UnifiedSetMultimap<V, K> result = new UnifiedSetMultimap<>();
         setMultimap.forEachKeyMultiValues((key, values) -> Iterate.forEach(values, value -> result.put(value, key)));
         return result;
     }

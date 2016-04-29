@@ -67,27 +67,27 @@ public final class SynchronizedPutUnifiedSetMultimap<K, V>
 
     public static <K, V> SynchronizedPutUnifiedSetMultimap<K, V> newMultimap()
     {
-        return new SynchronizedPutUnifiedSetMultimap<K, V>();
+        return new SynchronizedPutUnifiedSetMultimap<>();
     }
 
     public static <K, V> SynchronizedPutUnifiedSetMultimap<K, V> newMultimap(int initialCapacity, float loadFactor, int concurrencyLevel)
     {
-        return new SynchronizedPutUnifiedSetMultimap<K, V>(initialCapacity);
+        return new SynchronizedPutUnifiedSetMultimap<>(initialCapacity);
     }
 
     public static <K, V> SynchronizedPutUnifiedSetMultimap<K, V> newMultimap(Multimap<? extends K, ? extends V> multimap)
     {
-        return new SynchronizedPutUnifiedSetMultimap<K, V>(multimap);
+        return new SynchronizedPutUnifiedSetMultimap<>(multimap);
     }
 
     public static <K, V> SynchronizedPutUnifiedSetMultimap<K, V> newMultimap(Pair<K, V>... pairs)
     {
-        return new SynchronizedPutUnifiedSetMultimap<K, V>(pairs);
+        return new SynchronizedPutUnifiedSetMultimap<>(pairs);
     }
 
     public static <K, V> SynchronizedPutUnifiedSetMultimap<K, V> newMultimap(Iterable<Pair<K, V>> inputIterable)
     {
-        return new SynchronizedPutUnifiedSetMultimap<K, V>(inputIterable);
+        return new SynchronizedPutUnifiedSetMultimap<>(inputIterable);
     }
 
     @Override
@@ -98,12 +98,12 @@ public final class SynchronizedPutUnifiedSetMultimap<K, V>
 
     public SynchronizedPutUnifiedSetMultimap<K, V> newEmpty()
     {
-        return new SynchronizedPutUnifiedSetMultimap<K, V>();
+        return new SynchronizedPutUnifiedSetMultimap<>();
     }
 
     public MutableSetMultimap<K, V> toMutable()
     {
-        return new SynchronizedPutUnifiedSetMultimap<K, V>(this);
+        return new SynchronizedPutUnifiedSetMultimap<>(this);
     }
 
     public ImmutableSetMultimap<K, V> toImmutable()
@@ -112,7 +112,7 @@ public final class SynchronizedPutUnifiedSetMultimap<K, V>
 
         this.map.forEachKeyValue((key, set) -> map.put(key, set.toImmutable()));
 
-        return new ImmutableSetMultimapImpl<K, V>(map);
+        return new ImmutableSetMultimapImpl<>(map);
     }
 
     public UnifiedSetMultimap<K, V> selectKeysValues(Predicate2<? super K, ? super V> predicate)

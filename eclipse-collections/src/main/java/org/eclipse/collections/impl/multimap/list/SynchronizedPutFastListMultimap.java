@@ -68,27 +68,27 @@ public final class SynchronizedPutFastListMultimap<K, V>
 
     public static <K, V> SynchronizedPutFastListMultimap<K, V> newMultimap()
     {
-        return new SynchronizedPutFastListMultimap<K, V>();
+        return new SynchronizedPutFastListMultimap<>();
     }
 
     public static <K, V> SynchronizedPutFastListMultimap<K, V> newMultimap(int initialCapacity, float loadFactor, int concurrencyLevel)
     {
-        return new SynchronizedPutFastListMultimap<K, V>(initialCapacity);
+        return new SynchronizedPutFastListMultimap<>(initialCapacity);
     }
 
     public static <K, V> SynchronizedPutFastListMultimap<K, V> newMultimap(Multimap<? extends K, ? extends V> multimap)
     {
-        return new SynchronizedPutFastListMultimap<K, V>(multimap);
+        return new SynchronizedPutFastListMultimap<>(multimap);
     }
 
     public static <K, V> SynchronizedPutFastListMultimap<K, V> newMultimap(Pair<K, V>... pairs)
     {
-        return new SynchronizedPutFastListMultimap<K, V>(pairs);
+        return new SynchronizedPutFastListMultimap<>(pairs);
     }
 
     public static <K, V> SynchronizedPutFastListMultimap<K, V> newMultimap(Iterable<Pair<K, V>> inputIterable)
     {
-        return new SynchronizedPutFastListMultimap<K, V>(inputIterable);
+        return new SynchronizedPutFastListMultimap<>(inputIterable);
     }
 
     @Override
@@ -99,12 +99,12 @@ public final class SynchronizedPutFastListMultimap<K, V>
 
     public SynchronizedPutFastListMultimap<K, V> newEmpty()
     {
-        return new SynchronizedPutFastListMultimap<K, V>();
+        return new SynchronizedPutFastListMultimap<>();
     }
 
     public MutableListMultimap<K, V> toMutable()
     {
-        return new SynchronizedPutFastListMultimap<K, V>(this);
+        return new SynchronizedPutFastListMultimap<>(this);
     }
 
     public ImmutableListMultimap<K, V> toImmutable()
@@ -113,7 +113,7 @@ public final class SynchronizedPutFastListMultimap<K, V>
 
         this.map.forEachKeyValue((key, list) -> map.put(key, list.toImmutable()));
 
-        return new ImmutableListMultimapImpl<K, V>(map);
+        return new ImmutableListMultimapImpl<>(map);
     }
 
     public MutableBagMultimap<V, K> flip()

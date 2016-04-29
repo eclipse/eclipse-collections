@@ -170,27 +170,27 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
 
     public static <K, V> UnifiedMap<K, V> newMap()
     {
-        return new UnifiedMap<K, V>();
+        return new UnifiedMap<>();
     }
 
     public static <K, V> UnifiedMap<K, V> newMap(int size)
     {
-        return new UnifiedMap<K, V>(size);
+        return new UnifiedMap<>(size);
     }
 
     public static <K, V> UnifiedMap<K, V> newMap(int size, float loadFactor)
     {
-        return new UnifiedMap<K, V>(size, loadFactor);
+        return new UnifiedMap<>(size, loadFactor);
     }
 
     public static <K, V> UnifiedMap<K, V> newMap(Map<? extends K, ? extends V> map)
     {
-        return new UnifiedMap<K, V>(map);
+        return new UnifiedMap<>(map);
     }
 
     public static <K, V> UnifiedMap<K, V> newMapWith(Pair<K, V>... pairs)
     {
-        return new UnifiedMap<K, V>(pairs);
+        return new UnifiedMap<>(pairs);
     }
 
     public static <K, V> UnifiedMap<K, V> newMapWith(Iterable<Pair<K, V>> inputIterable)
@@ -260,12 +260,12 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
     @Override
     public UnifiedMap<K, V> clone()
     {
-        return new UnifiedMap<K, V>(this);
+        return new UnifiedMap<>(this);
     }
 
     public MutableMap<K, V> newEmpty()
     {
-        return new UnifiedMap<K, V>();
+        return new UnifiedMap<>();
     }
 
     @Override
@@ -1019,7 +1019,7 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
             Function<? super E, ? extends K> keyFunction,
             Function<? super E, ? extends V> valueFunction)
     {
-        Iterate.forEach(iterable, new MapCollectProcedure<E, K, V>(this, keyFunction, valueFunction));
+        Iterate.forEach(iterable, new MapCollectProcedure<>(this, keyFunction, valueFunction));
         return this;
     }
 
@@ -1949,7 +1949,7 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
         public boolean retainAll(Collection<?> collection)
         {
             int retainedSize = collection.size();
-            UnifiedMap<K, V> retainedCopy = new UnifiedMap<K, V>(retainedSize, UnifiedMap.this.loadFactor);
+            UnifiedMap<K, V> retainedCopy = new UnifiedMap<>(retainedSize, UnifiedMap.this.loadFactor);
             for (Object key : collection)
             {
                 this.putIfFound(key, retainedCopy);
@@ -2281,7 +2281,7 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
     protected class EntrySet implements Set<Entry<K, V>>, Serializable, BatchIterable<Entry<K, V>>
     {
         private static final long serialVersionUID = 1L;
-        private transient WeakReference<UnifiedMap<K, V>> holder = new WeakReference<UnifiedMap<K, V>>(UnifiedMap.this);
+        private transient WeakReference<UnifiedMap<K, V>> holder = new WeakReference<>(UnifiedMap.this);
 
         public boolean add(Entry<K, V> entry)
         {
@@ -2446,7 +2446,7 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
         public boolean retainAll(Collection<?> collection)
         {
             int retainedSize = collection.size();
-            UnifiedMap<K, V> retainedCopy = new UnifiedMap<K, V>(retainedSize, UnifiedMap.this.loadFactor);
+            UnifiedMap<K, V> retainedCopy = new UnifiedMap<>(retainedSize, UnifiedMap.this.loadFactor);
 
             for (Object obj : collection)
             {
@@ -2553,12 +2553,12 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
                                 break;
                             }
                             result[count++] =
-                                    new WeakBoundEntry<K, V>(UnifiedMap.this.nonSentinel(cur), (V) chain[j + 1], this.holder);
+                                    new WeakBoundEntry<>(UnifiedMap.this.nonSentinel(cur), (V) chain[j + 1], this.holder);
                         }
                     }
                     else
                     {
-                        result[count++] = new WeakBoundEntry<K, V>(UnifiedMap.this.nonSentinel(x), (V) table[i + 1], this.holder);
+                        result[count++] = new WeakBoundEntry<>(UnifiedMap.this.nonSentinel(x), (V) table[i + 1], this.holder);
                     }
                 }
             }
@@ -2590,7 +2590,7 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
                 throws IOException, ClassNotFoundException
         {
             in.defaultReadObject();
-            this.holder = new WeakReference<UnifiedMap<K, V>>(UnifiedMap.this);
+            this.holder = new WeakReference<>(UnifiedMap.this);
         }
 
         @Override
@@ -2636,7 +2636,7 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
                 this.position += 2;
             }
             this.lastReturned = true;
-            return new WeakBoundEntry<K, V>(UnifiedMap.this.nonSentinel(cur), (V) value, this.holder);
+            return new WeakBoundEntry<>(UnifiedMap.this.nonSentinel(cur), (V) value, this.holder);
         }
 
         public Entry<K, V> next()
@@ -2663,7 +2663,7 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
             }
             this.position += 2;
             this.lastReturned = true;
-            return new WeakBoundEntry<K, V>(UnifiedMap.this.nonSentinel(cur), (V) value, this.holder);
+            return new WeakBoundEntry<>(UnifiedMap.this.nonSentinel(cur), (V) value, this.holder);
         }
     }
 

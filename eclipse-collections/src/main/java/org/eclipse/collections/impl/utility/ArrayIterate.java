@@ -1251,7 +1251,7 @@ public final class ArrayIterate
             Function<? super V, ? extends K> keyFunction)
     {
         MutableMap<K, V> map = UnifiedMap.newMap();
-        Procedure<V> procedure = new MapCollectProcedure<V, K, V>(map, keyFunction);
+        Procedure<V> procedure = new MapCollectProcedure<>(map, keyFunction);
         ArrayIterate.forEach(objectArray, procedure);
         return map;
     }
@@ -1266,7 +1266,7 @@ public final class ArrayIterate
             Function<? super T, ? extends V> valueFunction)
     {
         MutableMap<K, V> map = UnifiedMap.newMap();
-        Procedure<T> procedure = new MapCollectProcedure<T, K, V>(map, keyFunction, valueFunction);
+        Procedure<T> procedure = new MapCollectProcedure<>(map, keyFunction, valueFunction);
         ArrayIterate.forEach(objectArray, procedure);
         return map;
     }

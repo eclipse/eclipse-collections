@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -28,6 +28,6 @@ public class ImmutableUnifiedMapWithHashingStrategySerializationTest
                         + "c2hpbmdTdHJhdGVnaWVzJERlZmF1bHRTdHJhdGVneQAAAAAAAAABAgAAeHB3BAAAAAJzcgARamF2\n"
                         + "YS5sYW5nLkludGVnZXIS4qCk94GHOAIAAUkABXZhbHVleHIAEGphdmEubGFuZy5OdW1iZXKGrJUd\n"
                         + "C5TgiwIAAHhwAAAAAXEAfgAGc3EAfgAEAAAAAnEAfgAHeA==",
-                new ImmutableUnifiedMapWithHashingStrategy<Integer, Integer>(HashingStrategies.defaultStrategy(), Tuples.pair(1, 1), Tuples.pair(2, 2)));
+                new ImmutableUnifiedMapWithHashingStrategy<>(HashingStrategies.defaultStrategy(), Tuples.pair(1, 1), Tuples.pair(2, 2)));
     }
 }

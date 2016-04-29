@@ -60,7 +60,7 @@ public class DistinctIterable<T>
     @Override
     public void forEachWithIndex(ObjectIntProcedure<? super T> objectIntProcedure)
     {
-        this.each(new AdaptObjectIntProcedureToProcedure<T>(objectIntProcedure));
+        this.each(new AdaptObjectIntProcedureToProcedure<>(objectIntProcedure));
     }
 
     @Override
@@ -97,6 +97,6 @@ public class DistinctIterable<T>
 
     public Iterator<T> iterator()
     {
-        return new DistinctIterator<T>(this.adapted);
+        return new DistinctIterator<>(this.adapted);
     }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -26,6 +26,6 @@ public class ImmutableOctupletonListSerializationTest
                         + "AAF4cHNyABFqYXZhLmxhbmcuSW50ZWdlchLioKT3gYc4AgABSQAFdmFsdWV4cgAQamF2YS5sYW5n\n"
                         + "Lk51bWJlcoaslR0LlOCLAgAAeHAAAAABc3EAfgADAAAAAnNxAH4AAwAAAANzcQB+AAMAAAAEc3EA\n"
                         + "fgADAAAABXNxAH4AAwAAAAZzcQB+AAMAAAAHc3EAfgADAAAACA==",
-                new ImmutableOctupletonList<Integer>(1, 2, 3, 4, 5, 6, 7, 8));
+                new ImmutableOctupletonList<>(1, 2, 3, 4, 5, 6, 7, 8));
     }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -27,7 +27,7 @@ public class ImmutableSortedBagFactoryImpl implements ImmutableSortedBagFactory
 
     public <T> ImmutableSortedBag<T> empty(Comparator<? super T> comparator)
     {
-        return new ImmutableEmptySortedBag<T>(comparator);
+        return new ImmutableEmptySortedBag<>(comparator);
     }
 
     public <T> ImmutableSortedBag<T> of()
@@ -51,7 +51,7 @@ public class ImmutableSortedBagFactoryImpl implements ImmutableSortedBagFactory
         {
             return this.of();
         }
-        return new ImmutableSortedBagImpl<T>(TreeBag.newBagWith(items));
+        return new ImmutableSortedBagImpl<>(TreeBag.newBagWith(items));
     }
 
     public <T> ImmutableSortedBag<T> ofAll(Iterable<? extends T> items)
@@ -80,7 +80,7 @@ public class ImmutableSortedBagFactoryImpl implements ImmutableSortedBagFactory
         {
             return this.of();
         }
-        return new ImmutableEmptySortedBag<T>(comparator);
+        return new ImmutableEmptySortedBag<>(comparator);
     }
 
     public <T> ImmutableSortedBag<T> of(Comparator<? super T> comparator, T... items)
@@ -94,7 +94,7 @@ public class ImmutableSortedBagFactoryImpl implements ImmutableSortedBagFactory
         {
             return this.of(comparator);
         }
-        return new ImmutableSortedBagImpl<T>(TreeBag.newBagWith(comparator, items));
+        return new ImmutableSortedBagImpl<>(TreeBag.newBagWith(comparator, items));
     }
 
     public <T> ImmutableSortedBag<T> ofAll(Comparator<? super T> comparator, Iterable<? extends T> items)
@@ -122,6 +122,6 @@ public class ImmutableSortedBagFactoryImpl implements ImmutableSortedBagFactory
         {
             return this.of(bag.comparator());
         }
-        return new ImmutableSortedBagImpl<T>(bag);
+        return new ImmutableSortedBagImpl<>(bag);
     }
 }

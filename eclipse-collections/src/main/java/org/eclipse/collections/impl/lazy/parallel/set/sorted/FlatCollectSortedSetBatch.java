@@ -43,21 +43,21 @@ public class FlatCollectSortedSetBatch<T, V> extends AbstractBatch<V> implements
 
     public ListBatch<V> select(Predicate<? super V> predicate)
     {
-        return new SelectListBatch<V>(this, predicate);
+        return new SelectListBatch<>(this, predicate);
     }
 
     public <VV> ListBatch<VV> collect(Function<? super V, ? extends VV> function)
     {
-        return new CollectListBatch<V, VV>(this, function);
+        return new CollectListBatch<>(this, function);
     }
 
     public <VV> ListBatch<VV> flatCollect(Function<? super V, ? extends Iterable<VV>> function)
     {
-        return new FlatCollectListBatch<V, VV>(this, function);
+        return new FlatCollectListBatch<>(this, function);
     }
 
     public UnsortedSetBatch<V> distinct(ConcurrentHashMap<V, Boolean> distinct)
     {
-        return new DistinctBatch<V>(this, distinct);
+        return new DistinctBatch<>(this, distinct);
     }
 }

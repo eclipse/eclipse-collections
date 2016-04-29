@@ -44,7 +44,6 @@ import org.eclipse.collections.api.partition.set.PartitionMutableSet;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.collection.mutable.SynchronizedMutableCollection;
-import org.eclipse.collections.impl.factory.BiMaps;
 import org.eclipse.collections.impl.list.fixed.ArrayAdapter;
 import org.eclipse.collections.impl.map.AbstractSynchronizedMapIterable;
 import org.eclipse.collections.impl.map.mutable.SynchronizedBiMapSerializationProxy;
@@ -74,7 +73,7 @@ public class SynchronizedBiMap<K, V> extends AbstractSynchronizedMapIterable<K, 
         {
             throw new IllegalArgumentException("cannot create a SynchronizedBiMap for null");
         }
-        return new SynchronizedBiMap<K, V>(map);
+        return new SynchronizedBiMap<>(map);
     }
 
     @Override
@@ -338,7 +337,7 @@ public class SynchronizedBiMap<K, V> extends AbstractSynchronizedMapIterable<K, 
     {
         synchronized (this.lock)
         {
-            return new SynchronizedBiMap<V, K>(this.getDelegate().inverse(), this.lock);
+            return new SynchronizedBiMap<>(this.getDelegate().inverse(), this.lock);
         }
     }
 
@@ -474,6 +473,6 @@ public class SynchronizedBiMap<K, V> extends AbstractSynchronizedMapIterable<K, 
 
     protected Object writeReplace()
     {
-        return new SynchronizedBiMapSerializationProxy<K, V>(this.getDelegate());
+        return new SynchronizedBiMapSerializationProxy<>(this.getDelegate());
     }
 }

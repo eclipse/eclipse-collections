@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -80,28 +80,28 @@ public final class HashBagMultimapWithHashingStrategy<K, V>
 
     public static <K, V> HashBagMultimapWithHashingStrategy<K, V> newMultimap(HashBagMultimapWithHashingStrategy<K, V> multimap)
     {
-        return new HashBagMultimapWithHashingStrategy<K, V>(multimap);
+        return new HashBagMultimapWithHashingStrategy<>(multimap);
     }
 
     public static <K, V> HashBagMultimapWithHashingStrategy<K, V> newMultimap(HashingStrategy<? super K> multimapHashingStrategy, Multimap<? extends K, ? extends V> multimap)
     {
-        return new HashBagMultimapWithHashingStrategy<K, V>(multimapHashingStrategy, multimap);
+        return new HashBagMultimapWithHashingStrategy<>(multimapHashingStrategy, multimap);
     }
 
     public static <K, V> HashBagMultimapWithHashingStrategy<K, V> newMultimap(HashingStrategy<? super K> multimapHashingStrategy)
     {
-        return new HashBagMultimapWithHashingStrategy<K, V>(multimapHashingStrategy);
+        return new HashBagMultimapWithHashingStrategy<>(multimapHashingStrategy);
     }
 
     @SafeVarargs
     public static <K, V> HashBagMultimapWithHashingStrategy<K, V> newMultimap(HashingStrategy<? super K> multimapHashingStrategy, Pair<K, V>... pairs)
     {
-        return new HashBagMultimapWithHashingStrategy<K, V>(multimapHashingStrategy, pairs);
+        return new HashBagMultimapWithHashingStrategy<>(multimapHashingStrategy, pairs);
     }
 
     public static <K, V> HashBagMultimapWithHashingStrategy<K, V> newMultimap(HashingStrategy<? super K> multimapHashingStrategy, Iterable<Pair<K, V>> inputIterable)
     {
-        return new HashBagMultimapWithHashingStrategy<K, V>(multimapHashingStrategy, inputIterable);
+        return new HashBagMultimapWithHashingStrategy<>(multimapHashingStrategy, inputIterable);
     }
 
     @Override
@@ -129,7 +129,7 @@ public final class HashBagMultimapWithHashingStrategy<K, V>
 
     public HashBagMultimapWithHashingStrategy<K, V> newEmpty()
     {
-        return new HashBagMultimapWithHashingStrategy<K, V>(this.hashingStrategy);
+        return new HashBagMultimapWithHashingStrategy<>(this.hashingStrategy);
     }
 
     @Override

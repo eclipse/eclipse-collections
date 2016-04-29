@@ -47,16 +47,16 @@ public class DistinctBatch<T> extends AbstractBatch<T> implements UnsortedSetBat
 
     public UnsortedSetBatch<T> select(Predicate<? super T> predicate)
     {
-        return new SelectUnsortedSetBatch<T>(this, predicate);
+        return new SelectUnsortedSetBatch<>(this, predicate);
     }
 
     public <V> UnsortedBagBatch<V> collect(Function<? super T, ? extends V> function)
     {
-        return new CollectUnsortedBagBatch<T, V>(this, function);
+        return new CollectUnsortedBagBatch<>(this, function);
     }
 
     public <V> UnsortedBagBatch<V> flatCollect(Function<? super T, ? extends Iterable<V>> function)
     {
-        return new FlatCollectUnsortedBagBatch<T, V>(this, function);
+        return new FlatCollectUnsortedBagBatch<>(this, function);
     }
 }

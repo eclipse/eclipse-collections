@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -84,12 +84,12 @@ public class SynchronizedSortedBag<T>
 
     public static <E> SynchronizedSortedBag<E> of(MutableSortedBag<E> bag)
     {
-        return new SynchronizedSortedBag<E>(bag);
+        return new SynchronizedSortedBag<>(bag);
     }
 
     public static <E> MutableSortedBag<E> of(MutableSortedBag<E> bag, Object lock)
     {
-        return new SynchronizedSortedBag<E>(bag, lock);
+        return new SynchronizedSortedBag<>(bag, lock);
     }
 
     @Override
@@ -158,7 +158,7 @@ public class SynchronizedSortedBag<T>
 
     protected Object writeReplace()
     {
-        return new SynchronizedCollectionSerializationProxy<T>(this.getDelegate());
+        return new SynchronizedCollectionSerializationProxy<>(this.getDelegate());
     }
 
     public int addOccurrences(T item, int occurrences)

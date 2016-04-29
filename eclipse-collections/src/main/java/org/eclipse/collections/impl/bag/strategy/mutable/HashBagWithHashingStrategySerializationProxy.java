@@ -64,7 +64,7 @@ class HashBagWithHashingStrategySerializationProxy<T> implements Externalizable
     {
         HashingStrategy<T> hashingStrategy = (HashingStrategy<T>) in.readObject();
         int size = in.readInt();
-        HashBagWithHashingStrategy<T> deserializedBag = new HashBagWithHashingStrategy<T>(hashingStrategy, size);
+        HashBagWithHashingStrategy<T> deserializedBag = new HashBagWithHashingStrategy<>(hashingStrategy, size);
 
         for (int i = 0; i < size; i++)
         {

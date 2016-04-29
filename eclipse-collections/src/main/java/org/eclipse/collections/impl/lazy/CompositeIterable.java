@@ -42,7 +42,7 @@ public final class CompositeIterable<E>
 
     public static <T> CompositeIterable<T> with(Iterable<T>... iterables)
     {
-        return new CompositeIterable<T>(FastList.newListWith(iterables));
+        return new CompositeIterable<>(FastList.newListWith(iterables));
     }
 
     public void each(final Procedure<? super E> procedure)

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -61,7 +61,7 @@ final class ImmutableUnifiedSet<T>
 
     public Iterator<T> iterator()
     {
-        return new UnmodifiableIteratorAdapter<T>(this.delegate.iterator());
+        return new UnmodifiableIteratorAdapter<>(this.delegate.iterator());
     }
 
     public T getFirst()
@@ -76,12 +76,12 @@ final class ImmutableUnifiedSet<T>
 
     public static <T> ImmutableSet<T> newSetWith(T... elements)
     {
-        return new ImmutableUnifiedSet<T>(UnifiedSet.newSetWith(elements));
+        return new ImmutableUnifiedSet<>(UnifiedSet.newSetWith(elements));
     }
 
     public static <T> ImmutableSet<T> newSet(Iterable<T> iterable)
     {
-        return new ImmutableUnifiedSet<T>(UnifiedSet.newSet(iterable));
+        return new ImmutableUnifiedSet<>(UnifiedSet.newSet(iterable));
     }
 
     public void each(Procedure<? super T> procedure)
@@ -101,7 +101,7 @@ final class ImmutableUnifiedSet<T>
 
     private Object writeReplace()
     {
-        return new ImmutableSetSerializationProxy<T>(this);
+        return new ImmutableSetSerializationProxy<>(this);
     }
 
     @Override

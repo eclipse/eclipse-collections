@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -118,15 +118,15 @@ final class TripletonMap<K, V>
     {
         if (Comparators.nullSafeEquals(key, this.key1))
         {
-            return new DoubletonMap<K, V>(this.key2, this.value2, this.key3, this.value3);
+            return new DoubletonMap<>(this.key2, this.value2, this.key3, this.value3);
         }
         if (Comparators.nullSafeEquals(key, this.key2))
         {
-            return new DoubletonMap<K, V>(this.key1, this.value1, this.key3, this.value3);
+            return new DoubletonMap<>(this.key1, this.value1, this.key3, this.value3);
         }
         if (Comparators.nullSafeEquals(key, this.key3))
         {
-            return new DoubletonMap<K, V>(this.key1, this.value1, this.key2, this.value2);
+            return new DoubletonMap<>(this.key1, this.value1, this.key2, this.value2);
         }
         return this;
     }
@@ -135,7 +135,7 @@ final class TripletonMap<K, V>
     @Override
     public TripletonMap<K, V> clone()
     {
-        return new TripletonMap<K, V>(this.key1, this.value1, this.key2, this.value2, this.key3, this.value3);
+        return new TripletonMap<>(this.key1, this.value1, this.key2, this.value2, this.key3, this.value3);
     }
 
     @Override
@@ -193,9 +193,9 @@ final class TripletonMap<K, V>
     public MutableSet<Entry<K, V>> entrySet()
     {
         return Sets.fixedSize.<Map.Entry<K, V>>of(
-                new ImmutableEntry<K, V>(this.key1, this.value1),
-                new ImmutableEntry<K, V>(this.key2, this.value2),
-                new ImmutableEntry<K, V>(this.key3, this.value3));
+                new ImmutableEntry<>(this.key1, this.value1),
+                new ImmutableEntry<>(this.key2, this.value2),
+                new ImmutableEntry<>(this.key3, this.value3));
     }
 
     @Override
@@ -244,7 +244,7 @@ final class TripletonMap<K, V>
         {
             throw new IllegalStateException("Duplicate value: " + this.value3 + " found at key: " + this.key3 + " and key: " + this.key3);
         }
-        return new TripletonMap<V, K>(this.value1, this.key1, this.value2, this.key2, this.value3, this.key3);
+        return new TripletonMap<>(this.value1, this.key1, this.value2, this.key2, this.value3, this.key3);
     }
 
     public void forEachKeyValue(Procedure2<? super K, ? super V> procedure)

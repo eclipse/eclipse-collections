@@ -112,7 +112,7 @@ public final class IteratorIterate
      */
     public static <T> PartitionMutableList<T> partition(Iterator<T> iterator, Predicate<? super T> predicate)
     {
-        PartitionMutableList<T> result = new PartitionFastList<T>();
+        PartitionMutableList<T> result = new PartitionFastList<>();
         MutableList<T> selected = result.getSelected();
         MutableList<T> rejected = result.getRejected();
 
@@ -134,7 +134,7 @@ public final class IteratorIterate
             Predicate2<? super T, ? super P> predicate,
             P parameter)
     {
-        PartitionMutableList<T> result = new PartitionFastList<T>();
+        PartitionMutableList<T> result = new PartitionFastList<>();
         MutableList<T> selected = result.getSelected();
         MutableList<T> rejected = result.getRejected();
 
@@ -1304,7 +1304,7 @@ public final class IteratorIterate
             Procedure2<? super V, ? super T> mutatingAggregator)
     {
         MutableMap<K, V> map = UnifiedMap.newMap();
-        IteratorIterate.forEach(iterator, new MutatingAggregationProcedure<T, K, V>(map, groupBy, zeroValueFactory, mutatingAggregator));
+        IteratorIterate.forEach(iterator, new MutatingAggregationProcedure<>(map, groupBy, zeroValueFactory, mutatingAggregator));
         return map;
     }
 
@@ -1315,7 +1315,7 @@ public final class IteratorIterate
             Function2<? super V, ? super T, ? extends V> nonMutatingAggregator)
     {
         MutableMap<K, V> map = UnifiedMap.newMap();
-        IteratorIterate.forEach(iterator, new NonMutatingAggregationProcedure<T, K, V>(map, groupBy, zeroValueFactory, nonMutatingAggregator));
+        IteratorIterate.forEach(iterator, new NonMutatingAggregationProcedure<>(map, groupBy, zeroValueFactory, nonMutatingAggregator));
         return map;
     }
 

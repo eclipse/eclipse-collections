@@ -51,7 +51,7 @@ public final class ConcurrentMutableHashMap<K, V>
 
     private ConcurrentMutableHashMap()
     {
-        this(new ConcurrentHashMap<K, V>());
+        this(new ConcurrentHashMap<>());
     }
 
     public ConcurrentMutableHashMap(ConcurrentMap<K, V> delegate)
@@ -61,22 +61,22 @@ public final class ConcurrentMutableHashMap<K, V>
 
     public static <NK, NV> ConcurrentMutableHashMap<NK, NV> newMap()
     {
-        return new ConcurrentMutableHashMap<NK, NV>();
+        return new ConcurrentMutableHashMap<>();
     }
 
     public static <NK, NV> ConcurrentMutableHashMap<NK, NV> newMap(int initialCapacity)
     {
-        return new ConcurrentMutableHashMap<NK, NV>(new ConcurrentHashMap<NK, NV>(initialCapacity));
+        return new ConcurrentMutableHashMap<>(new ConcurrentHashMap<>(initialCapacity));
     }
 
     public static <NK, NV> ConcurrentMutableHashMap<NK, NV> newMap(int initialCapacity, float loadFactor, int concurrencyLevel)
     {
-        return new ConcurrentMutableHashMap<NK, NV>(new ConcurrentHashMap<NK, NV>(initialCapacity, loadFactor, concurrencyLevel));
+        return new ConcurrentMutableHashMap<>(new ConcurrentHashMap<>(initialCapacity, loadFactor, concurrencyLevel));
     }
 
     public static <NK, NV> ConcurrentMutableHashMap<NK, NV> newMap(Map<NK, NV> map)
     {
-        return new ConcurrentMutableHashMap<NK, NV>(new ConcurrentHashMap<NK, NV>(map));
+        return new ConcurrentMutableHashMap<>(new ConcurrentHashMap<>(map));
     }
 
     @Override
@@ -207,7 +207,7 @@ public final class ConcurrentMutableHashMap<K, V>
 
     public void forEachKeyValue(Procedure2<? super K, ? super V> procedure)
     {
-        IterableIterate.forEach(this.delegate.entrySet(), new MapEntryToProcedure2<K, V>(procedure));
+        IterableIterate.forEach(this.delegate.entrySet(), new MapEntryToProcedure2<>(procedure));
     }
 
     public V get(Object key)

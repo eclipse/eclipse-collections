@@ -705,7 +705,7 @@ public abstract class AbstractMutableList<T>
 
     public Iterator<T> iterator()
     {
-        return new MutableIterator<T>(this);
+        return new MutableIterator<>(this);
     }
 
     public ListIterator<T> listIterator()
@@ -720,7 +720,7 @@ public abstract class AbstractMutableList<T>
             throw new IndexOutOfBoundsException("Index: " + index);
         }
 
-        return new MutableListIterator<T>(this, index);
+        return new MutableListIterator<>(this, index);
     }
 
     public MutableList<T> toReversed()
@@ -748,7 +748,7 @@ public abstract class AbstractMutableList<T>
 
     public MutableList<T> subList(int fromIndex, int toIndex)
     {
-        return new SubList<T>(this, fromIndex, toIndex);
+        return new SubList<>(this, fromIndex, toIndex);
     }
 
     protected static class SubList<T>
@@ -941,7 +941,7 @@ public abstract class AbstractMutableList<T>
         @Override
         public MutableList<T> subList(int fromIndex, int toIndex)
         {
-            return new SubList<T>(this, fromIndex, toIndex);
+            return new SubList<>(this, fromIndex, toIndex);
         }
 
         private void checkIfOutOfBounds(int index)
@@ -957,7 +957,7 @@ public abstract class AbstractMutableList<T>
         @Override
         public MutableList<T> clone()
         {
-            return new FastList<T>(this);
+            return new FastList<>(this);
         }
 
         @Override
@@ -1098,7 +1098,7 @@ public abstract class AbstractMutableList<T>
 
     public ParallelListIterable<T> asParallel(ExecutorService executorService, int batchSize)
     {
-        return new ListIterableParallelIterable<T>(this, executorService, batchSize);
+        return new ListIterableParallelIterable<>(this, executorService, batchSize);
     }
 
     public int binarySearch(T key, Comparator<? super T> comparator)
@@ -1125,7 +1125,7 @@ public abstract class AbstractMutableList<T>
             int i = 0;
             while (i < this.size())
             {
-                MutableList<T> batch = new FastList<T>(Math.min(size, this.size() - i));
+                MutableList<T> batch = new FastList<>(Math.min(size, this.size() - i));
 
                 for (int j = 0; j < size && i < this.size(); j++)
                 {

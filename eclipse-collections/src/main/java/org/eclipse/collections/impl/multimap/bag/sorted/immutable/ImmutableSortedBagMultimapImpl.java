@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -108,7 +108,7 @@ public class ImmutableSortedBagMultimapImpl<K, V>
 
     public ImmutableSortedBagMultimap<K, V> newEmpty()
     {
-        return new ImmutableSortedBagMultimapImpl<K, V>(Maps.immutable.<K, ImmutableSortedBag<V>>with(), this.comparator);
+        return new ImmutableSortedBagMultimapImpl<>(Maps.immutable.<K, ImmutableSortedBag<V>>with(), this.comparator);
     }
 
     public Comparator<? super V> comparator()
@@ -118,7 +118,7 @@ public class ImmutableSortedBagMultimapImpl<K, V>
 
     public MutableSortedBagMultimap<K, V> toMutable()
     {
-        return new TreeBagMultimap<K, V>(this);
+        return new TreeBagMultimap<>(this);
     }
 
     public ImmutableBagMultimap<V, K> flip()
@@ -158,7 +158,7 @@ public class ImmutableSortedBagMultimapImpl<K, V>
 
     private Object writeReplace()
     {
-        return new ImmutableSortedBagMultimapSerializationProxy<K, V>(this.map, this.comparator());
+        return new ImmutableSortedBagMultimapSerializationProxy<>(this.map, this.comparator());
     }
 
     private static final class ImmutableSortedBagMultimapSerializationProxy<K, V>
@@ -196,7 +196,7 @@ public class ImmutableSortedBagMultimapImpl<K, V>
         @Override
         protected AbstractMutableMultimap<K, V, MutableSortedBag<V>> createEmptyMutableMultimap()
         {
-            return new TreeBagMultimap<K, V>(this.comparator);
+            return new TreeBagMultimap<>(this.comparator);
         }
     }
 }

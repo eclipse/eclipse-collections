@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -75,7 +75,7 @@ public class ImmutableTreeMap<K, V>
 
     public static <K, V> ImmutableSortedMap<K, V> newMap(SortedMap<K, V> sortedMap)
     {
-        return new ImmutableTreeMap<K, V>(sortedMap);
+        return new ImmutableTreeMap<>(sortedMap);
     }
 
     @Override
@@ -232,7 +232,7 @@ public class ImmutableTreeMap<K, V>
     public Set<Entry<K, V>> entrySet()
     {
         int length = this.keys.length;
-        MutableSortedSet<Entry<K, V>> entrySet = SortedSets.mutable.with(new EntryComparator<K, V>(this.comparator));
+        MutableSortedSet<Entry<K, V>> entrySet = SortedSets.mutable.with(new EntryComparator<>(this.comparator));
         for (int index = 0; index < length; index++)
         {
             entrySet.add(ImmutableEntry.of(this.keys[index], this.values[index]));
@@ -242,7 +242,7 @@ public class ImmutableTreeMap<K, V>
 
     protected Object writeReplace()
     {
-        return new ImmutableSortedMapSerializationProxy<K, V>(this);
+        return new ImmutableSortedMapSerializationProxy<>(this);
     }
 
     public ImmutableSortedMap<K, V> take(int count)

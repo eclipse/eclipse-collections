@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -112,7 +112,7 @@ public final class RandomAccessListAdapter<T>
         {
             return ArrayListAdapter.adapt((ArrayList<E>) list);
         }
-        return new RandomAccessListAdapter<E>(list);
+        return new RandomAccessListAdapter<>(list);
     }
 
     public ImmutableList<T> toImmutable()
@@ -332,7 +332,7 @@ public final class RandomAccessListAdapter<T>
     public MutableBooleanList collectBoolean(BooleanFunction<? super T> booleanFunction)
     {
         BooleanArrayList result = new BooleanArrayList(this.size());
-        this.forEach(new CollectBooleanProcedure<T>(booleanFunction, result));
+        this.forEach(new CollectBooleanProcedure<>(booleanFunction, result));
         return result;
     }
 
@@ -340,7 +340,7 @@ public final class RandomAccessListAdapter<T>
     public MutableByteList collectByte(ByteFunction<? super T> byteFunction)
     {
         ByteArrayList result = new ByteArrayList(this.size());
-        this.forEach(new CollectByteProcedure<T>(byteFunction, result));
+        this.forEach(new CollectByteProcedure<>(byteFunction, result));
         return result;
     }
 
@@ -348,7 +348,7 @@ public final class RandomAccessListAdapter<T>
     public MutableCharList collectChar(CharFunction<? super T> charFunction)
     {
         CharArrayList result = new CharArrayList(this.size());
-        this.forEach(new CollectCharProcedure<T>(charFunction, result));
+        this.forEach(new CollectCharProcedure<>(charFunction, result));
         return result;
     }
 
@@ -356,7 +356,7 @@ public final class RandomAccessListAdapter<T>
     public MutableDoubleList collectDouble(DoubleFunction<? super T> doubleFunction)
     {
         DoubleArrayList result = new DoubleArrayList(this.size());
-        this.forEach(new CollectDoubleProcedure<T>(doubleFunction, result));
+        this.forEach(new CollectDoubleProcedure<>(doubleFunction, result));
         return result;
     }
 
@@ -364,7 +364,7 @@ public final class RandomAccessListAdapter<T>
     public MutableFloatList collectFloat(FloatFunction<? super T> floatFunction)
     {
         FloatArrayList result = new FloatArrayList(this.size());
-        this.forEach(new CollectFloatProcedure<T>(floatFunction, result));
+        this.forEach(new CollectFloatProcedure<>(floatFunction, result));
         return result;
     }
 
@@ -372,7 +372,7 @@ public final class RandomAccessListAdapter<T>
     public MutableIntList collectInt(IntFunction<? super T> intFunction)
     {
         IntArrayList result = new IntArrayList(this.size());
-        this.forEach(new CollectIntProcedure<T>(intFunction, result));
+        this.forEach(new CollectIntProcedure<>(intFunction, result));
         return result;
     }
 
@@ -380,7 +380,7 @@ public final class RandomAccessListAdapter<T>
     public MutableLongList collectLong(LongFunction<? super T> longFunction)
     {
         LongArrayList result = new LongArrayList(this.size());
-        this.forEach(new CollectLongProcedure<T>(longFunction, result));
+        this.forEach(new CollectLongProcedure<>(longFunction, result));
         return result;
     }
 
@@ -388,7 +388,7 @@ public final class RandomAccessListAdapter<T>
     public MutableShortList collectShort(ShortFunction<? super T> shortFunction)
     {
         ShortArrayList result = new ShortArrayList(this.size());
-        this.forEach(new CollectShortProcedure<T>(shortFunction, result));
+        this.forEach(new CollectShortProcedure<>(shortFunction, result));
         return result;
     }
 

@@ -64,7 +64,7 @@ class ImmutableBiMapSerializationProxy<K, V> implements Externalizable
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
     {
         int size = in.readInt();
-        MutableBiMap<K, V> deserializedBiMap = new HashBiMap<K, V>(size);
+        MutableBiMap<K, V> deserializedBiMap = new HashBiMap<>(size);
 
         for (int i = 0; i < size; i++)
         {

@@ -92,26 +92,26 @@ public class TreeBag<T>
 
     public static <E> TreeBag<E> newBag()
     {
-        return new TreeBag<E>();
+        return new TreeBag<>();
     }
 
     public static <E> TreeBag<E> newBag(Comparator<? super E> comparator)
     {
-        return new TreeBag<E>(comparator);
+        return new TreeBag<>(comparator);
     }
 
     public static <E> TreeBag<E> newBag(Iterable<? extends E> source)
     {
         if (source instanceof SortedBag<?>)
         {
-            return new TreeBag<E>((SortedBag<E>) source);
+            return new TreeBag<>((SortedBag<E>) source);
         }
         return Iterate.addAllTo(source, TreeBag.<E>newBag());
     }
 
     public static <E> TreeBag<E> newBag(Comparator<? super E> comparator, Iterable<? extends E> iterable)
     {
-        return new TreeBag<E>(comparator, iterable);
+        return new TreeBag<>(comparator, iterable);
     }
 
     public static <E> TreeBag<E> newBagWith(E... elements)
@@ -129,7 +129,7 @@ public class TreeBag<T>
     @Override
     public TreeBag<T> clone()
     {
-        return new TreeBag<T>(this);
+        return new TreeBag<>(this);
     }
 
     @Override
@@ -181,7 +181,7 @@ public class TreeBag<T>
         MutableSortedMap<T, Counter> map = this.items.select((each, occurrences) -> {
             return predicate.accept(occurrences.getCount());
         });
-        return new TreeBag<T>(map);
+        return new TreeBag<>(map);
     }
 
     public int occurrencesOf(Object item)
@@ -259,7 +259,7 @@ public class TreeBag<T>
 
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
     {
-        this.items = new TreeSortedMap<T, Counter>((Comparator<T>) in.readObject());
+        this.items = new TreeSortedMap<>((Comparator<T>) in.readObject());
         int size = in.readInt();
         for (int i = 0; i < size; i++)
         {

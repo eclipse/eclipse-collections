@@ -347,7 +347,7 @@ public abstract class AbstractMutableMultimap<K, V, C extends MutableCollection<
     public void writeExternal(ObjectOutput out) throws IOException
     {
         out.writeInt(this.map.size());
-        this.map.forEachKeyValue(new MultimapKeyValuesSerializingProcedure<K, V>(out));
+        this.map.forEachKeyValue(new MultimapKeyValuesSerializingProcedure<>(out));
     }
 
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException

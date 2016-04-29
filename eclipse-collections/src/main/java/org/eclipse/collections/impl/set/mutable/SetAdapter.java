@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -124,7 +124,7 @@ public final class SetAdapter<T>
         {
             return (MutableSet<E>) set;
         }
-        return new SetAdapter<E>(set);
+        return new SetAdapter<>(set);
     }
 
     @Override
@@ -233,16 +233,16 @@ public final class SetAdapter<T>
     @Override
     public PartitionMutableSet<T> partition(Predicate<? super T> predicate)
     {
-        PartitionMutableSet<T> partitionUnifiedSet = new PartitionUnifiedSet<T>();
-        this.forEach(new PartitionProcedure<T>(predicate, partitionUnifiedSet));
+        PartitionMutableSet<T> partitionUnifiedSet = new PartitionUnifiedSet<>();
+        this.forEach(new PartitionProcedure<>(predicate, partitionUnifiedSet));
         return partitionUnifiedSet;
     }
 
     @Override
     public <P> PartitionMutableSet<T> partitionWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
-        PartitionMutableSet<T> partitionUnifiedSet = new PartitionUnifiedSet<T>();
-        this.forEach(new PartitionPredicate2Procedure<T, P>(predicate, parameter, partitionUnifiedSet));
+        PartitionMutableSet<T> partitionUnifiedSet = new PartitionUnifiedSet<>();
+        this.forEach(new PartitionPredicate2Procedure<>(predicate, parameter, partitionUnifiedSet));
         return partitionUnifiedSet;
     }
 
@@ -250,7 +250,7 @@ public final class SetAdapter<T>
     public <S> MutableSet<S> selectInstancesOf(Class<S> clazz)
     {
         MutableSet<S> result = UnifiedSet.newSet();
-        this.forEach(new SelectInstancesOfProcedure<S>(clazz, result));
+        this.forEach(new SelectInstancesOfProcedure<>(clazz, result));
         return result;
     }
 
@@ -264,7 +264,7 @@ public final class SetAdapter<T>
     public MutableBooleanSet collectBoolean(BooleanFunction<? super T> booleanFunction)
     {
         BooleanHashSet result = new BooleanHashSet();
-        this.forEach(new CollectBooleanProcedure<T>(booleanFunction, result));
+        this.forEach(new CollectBooleanProcedure<>(booleanFunction, result));
         return result;
     }
 
@@ -272,7 +272,7 @@ public final class SetAdapter<T>
     public MutableByteSet collectByte(ByteFunction<? super T> byteFunction)
     {
         ByteHashSet result = new ByteHashSet(this.size());
-        this.forEach(new CollectByteProcedure<T>(byteFunction, result));
+        this.forEach(new CollectByteProcedure<>(byteFunction, result));
         return result;
     }
 
@@ -280,7 +280,7 @@ public final class SetAdapter<T>
     public MutableCharSet collectChar(CharFunction<? super T> charFunction)
     {
         CharHashSet result = new CharHashSet(this.size());
-        this.forEach(new CollectCharProcedure<T>(charFunction, result));
+        this.forEach(new CollectCharProcedure<>(charFunction, result));
         return result;
     }
 
@@ -288,7 +288,7 @@ public final class SetAdapter<T>
     public MutableDoubleSet collectDouble(DoubleFunction<? super T> doubleFunction)
     {
         DoubleHashSet result = new DoubleHashSet(this.size());
-        this.forEach(new CollectDoubleProcedure<T>(doubleFunction, result));
+        this.forEach(new CollectDoubleProcedure<>(doubleFunction, result));
         return result;
     }
 
@@ -296,7 +296,7 @@ public final class SetAdapter<T>
     public MutableFloatSet collectFloat(FloatFunction<? super T> floatFunction)
     {
         FloatHashSet result = new FloatHashSet(this.size());
-        this.forEach(new CollectFloatProcedure<T>(floatFunction, result));
+        this.forEach(new CollectFloatProcedure<>(floatFunction, result));
         return result;
     }
 
@@ -304,7 +304,7 @@ public final class SetAdapter<T>
     public MutableIntSet collectInt(IntFunction<? super T> intFunction)
     {
         IntHashSet result = new IntHashSet(this.size());
-        this.forEach(new CollectIntProcedure<T>(intFunction, result));
+        this.forEach(new CollectIntProcedure<>(intFunction, result));
         return result;
     }
 
@@ -312,7 +312,7 @@ public final class SetAdapter<T>
     public MutableLongSet collectLong(LongFunction<? super T> longFunction)
     {
         LongHashSet result = new LongHashSet(this.size());
-        this.forEach(new CollectLongProcedure<T>(longFunction, result));
+        this.forEach(new CollectLongProcedure<>(longFunction, result));
         return result;
     }
 
@@ -320,7 +320,7 @@ public final class SetAdapter<T>
     public MutableShortSet collectShort(ShortFunction<? super T> shortFunction)
     {
         ShortHashSet result = new ShortHashSet(this.size());
-        this.forEach(new CollectShortProcedure<T>(shortFunction, result));
+        this.forEach(new CollectShortProcedure<>(shortFunction, result));
         return result;
     }
 
@@ -456,6 +456,6 @@ public final class SetAdapter<T>
 
     public ParallelUnsortedSetIterable<T> asParallel(ExecutorService executorService, int batchSize)
     {
-        return new NonParallelUnsortedSetIterable<T>(this);
+        return new NonParallelUnsortedSetIterable<>(this);
     }
 }

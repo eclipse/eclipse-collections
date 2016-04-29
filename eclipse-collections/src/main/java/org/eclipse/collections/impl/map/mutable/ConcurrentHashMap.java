@@ -116,12 +116,12 @@ public final class ConcurrentHashMap<K, V>
 
     public static <K, V> ConcurrentHashMap<K, V> newMap()
     {
-        return new ConcurrentHashMap<K, V>();
+        return new ConcurrentHashMap<>();
     }
 
     public static <K, V> ConcurrentHashMap<K, V> newMap(int newSize)
     {
-        return new ConcurrentHashMap<K, V>(newSize);
+        return new ConcurrentHashMap<>(newSize);
     }
 
     private static int indexFor(int h, int length)
@@ -154,7 +154,7 @@ public final class ConcurrentHashMap<K, V>
                     }
                     e = e.getNext();
                 }
-                Entry<K, V> newEntry = new Entry<K, V>(key, value, (Entry<K, V>) o);
+                Entry<K, V> newEntry = new Entry<>(key, value, (Entry<K, V>) o);
                 if (currentArray.compareAndSet(index, o, newEntry))
                 {
                     this.incrementSizeAndPossiblyResize(currentArray, length, o);
@@ -388,12 +388,12 @@ public final class ConcurrentHashMap<K, V>
                     }
                     else
                     {
-                        newEntry = new Entry<K, V>(toCopyEntry.getKey(), toCopyEntry.getValue());
+                        newEntry = new Entry<>(toCopyEntry.getKey(), toCopyEntry.getValue());
                     }
                 }
                 else
                 {
-                    newEntry = new Entry<K, V>(toCopyEntry.getKey(), toCopyEntry.getValue(), (Entry<K, V>) o);
+                    newEntry = new Entry<>(toCopyEntry.getKey(), toCopyEntry.getValue(), (Entry<K, V>) o);
                 }
                 if (currentArray.compareAndSet(index, o, newEntry))
                 {
@@ -441,7 +441,7 @@ public final class ConcurrentHashMap<K, V>
                     createdValue = true;
                     newValue = factory.value();
                 }
-                Entry<K, V> newEntry = new Entry<K, V>(key, newValue, (Entry<K, V>) o);
+                Entry<K, V> newEntry = new Entry<>(key, newValue, (Entry<K, V>) o);
                 if (currentArray.compareAndSet(index, o, newEntry))
                 {
                     this.incrementSizeAndPossiblyResize(currentArray, length, o);
@@ -477,7 +477,7 @@ public final class ConcurrentHashMap<K, V>
                     }
                     e = e.getNext();
                 }
-                Entry<K, V> newEntry = new Entry<K, V>(key, value, (Entry<K, V>) o);
+                Entry<K, V> newEntry = new Entry<>(key, value, (Entry<K, V>) o);
                 if (currentArray.compareAndSet(index, o, newEntry))
                 {
                     this.incrementSizeAndPossiblyResize(currentArray, length, o);
@@ -532,7 +532,7 @@ public final class ConcurrentHashMap<K, V>
                     }
                     key = keyTransformer.value(key, newValue);
                 }
-                Entry<K, V> newEntry = new Entry<K, V>(key, newValue, (Entry<K, V>) o);
+                Entry<K, V> newEntry = new Entry<>(key, newValue, (Entry<K, V>) o);
                 if (currentArray.compareAndSet(index, o, newEntry))
                 {
                     this.incrementSizeAndPossiblyResize(currentArray, length, o);
@@ -784,7 +784,7 @@ public final class ConcurrentHashMap<K, V>
         Object o = currentArray.get(index);
         if (o == null)
         {
-            Entry<K, V> newEntry = new Entry<K, V>(key, value, null);
+            Entry<K, V> newEntry = new Entry<>(key, value, null);
             if (currentArray.compareAndSet(index, null, newEntry))
             {
                 this.addToSize(1);
@@ -816,7 +816,7 @@ public final class ConcurrentHashMap<K, V>
                     if (candidate.equals(key))
                     {
                         V oldValue = e.getValue();
-                        Entry<K, V> newEntry = new Entry<K, V>(e.getKey(), value, this.createReplacementChainForRemoval((Entry<K, V>) o, e));
+                        Entry<K, V> newEntry = new Entry<>(e.getKey(), value, this.createReplacementChainForRemoval((Entry<K, V>) o, e));
                         if (!currentArray.compareAndSet(index, o, newEntry))
                         {
                             //noinspection ContinueStatementWithLabel
@@ -826,7 +826,7 @@ public final class ConcurrentHashMap<K, V>
                     }
                     e = e.getNext();
                 }
-                Entry<K, V> newEntry = new Entry<K, V>(key, value, (Entry<K, V>) o);
+                Entry<K, V> newEntry = new Entry<>(key, value, (Entry<K, V>) o);
                 if (currentArray.compareAndSet(index, o, newEntry))
                 {
                     this.incrementSizeAndPossiblyResize(currentArray, length, o);
@@ -993,7 +993,7 @@ public final class ConcurrentHashMap<K, V>
                 if (oldValue == e.getValue() || (oldValue != null && oldValue.equals(e.getValue())))
                 {
                     Entry<K, V> replacement = this.createReplacementChainForRemoval((Entry<K, V>) o, e);
-                    Entry<K, V> newEntry = new Entry<K, V>(key, newValue, replacement);
+                    Entry<K, V> newEntry = new Entry<>(key, newValue, replacement);
                     return currentArray.compareAndSet(index, o, newEntry) || this.slowReplace(key, oldValue, newValue, hash, currentArray);
                 }
                 return false;
@@ -1027,7 +1027,7 @@ public final class ConcurrentHashMap<K, V>
                         if (oldValue == e.getValue() || (oldValue != null && oldValue.equals(e.getValue())))
                         {
                             Entry<K, V> replacement = this.createReplacementChainForRemoval((Entry<K, V>) o, e);
-                            Entry<K, V> newEntry = new Entry<K, V>(key, newValue, replacement);
+                            Entry<K, V> newEntry = new Entry<>(key, newValue, replacement);
                             if (currentArray.compareAndSet(index, o, newEntry))
                             {
                                 return true;
@@ -1080,7 +1080,7 @@ public final class ConcurrentHashMap<K, V>
                     if (candidate.equals(key))
                     {
                         V oldValue = e.getValue();
-                        Entry<K, V> newEntry = new Entry<K, V>(e.getKey(), value, this.createReplacementChainForRemoval((Entry<K, V>) o, e));
+                        Entry<K, V> newEntry = new Entry<>(e.getKey(), value, this.createReplacementChainForRemoval((Entry<K, V>) o, e));
                         if (!currentArray.compareAndSet(index, o, newEntry))
                         {
                             //noinspection ContinueStatementWithLabel
@@ -1174,7 +1174,7 @@ public final class ConcurrentHashMap<K, V>
         {
             if (e != toRemove)
             {
-                replacement = new Entry<K, V>(e.getKey(), e.getValue(), replacement);
+                replacement = new Entry<>(e.getKey(), e.getValue(), replacement);
             }
             e = e.getNext();
         }
@@ -1487,7 +1487,7 @@ public final class ConcurrentHashMap<K, V>
                     }
                     if (this.todo == null)
                     {
-                        this.todo = new FastList<IteratorState>(4);
+                        this.todo = new FastList<>(4);
                     }
                     if (endResized < this.currentState.end)
                     {
@@ -1846,7 +1846,7 @@ public final class ConcurrentHashMap<K, V>
 
     public static <NK, NV> ConcurrentHashMap<NK, NV> newMap(Map<NK, NV> map)
     {
-        ConcurrentHashMap<NK, NV> result = new ConcurrentHashMap<NK, NV>(map.size());
+        ConcurrentHashMap<NK, NV> result = new ConcurrentHashMap<>(map.size());
         result.putAll(map);
         return result;
     }
@@ -1937,7 +1937,7 @@ public final class ConcurrentHashMap<K, V>
 
     public void forEachKeyValue(Procedure2<? super K, ? super V> procedure)
     {
-        IterableIterate.forEach(this.entrySet(), new MapEntryToProcedure2<K, V>(procedure));
+        IterableIterate.forEach(this.entrySet(), new MapEntryToProcedure2<>(procedure));
     }
 
     public <E> MutableMap<K, V> collectKeysAndValues(
@@ -1987,7 +1987,7 @@ public final class ConcurrentHashMap<K, V>
                     createdValue = true;
                     newValue = function.valueOf(parameter);
                 }
-                Entry<K, V> newEntry = new Entry<K, V>(key, newValue, (Entry<K, V>) o);
+                Entry<K, V> newEntry = new Entry<>(key, newValue, (Entry<K, V>) o);
                 if (currentArray.compareAndSet(index, o, newEntry))
                 {
                     this.incrementSizeAndPossiblyResize(currentArray, length, o);
@@ -2046,7 +2046,7 @@ public final class ConcurrentHashMap<K, V>
         if (o == null)
         {
             V result = function.valueOf(factory.value());
-            Entry<K, V> newEntry = new Entry<K, V>(key, result, null);
+            Entry<K, V> newEntry = new Entry<>(key, result, null);
             if (currentArray.compareAndSet(index, null, newEntry))
             {
                 this.addToSize(1);
@@ -2079,7 +2079,7 @@ public final class ConcurrentHashMap<K, V>
                     {
                         V oldValue = e.getValue();
                         V newValue = function.valueOf(oldValue);
-                        Entry<K, V> newEntry = new Entry<K, V>(e.getKey(), newValue, this.createReplacementChainForRemoval((Entry<K, V>) o, e));
+                        Entry<K, V> newEntry = new Entry<>(e.getKey(), newValue, this.createReplacementChainForRemoval((Entry<K, V>) o, e));
                         if (!currentArray.compareAndSet(index, o, newEntry))
                         {
                             //noinspection ContinueStatementWithLabel
@@ -2090,7 +2090,7 @@ public final class ConcurrentHashMap<K, V>
                     e = e.getNext();
                 }
                 V result = function.valueOf(factory.value());
-                Entry<K, V> newEntry = new Entry<K, V>(key, result, (Entry<K, V>) o);
+                Entry<K, V> newEntry = new Entry<>(key, result, (Entry<K, V>) o);
                 if (currentArray.compareAndSet(index, o, newEntry))
                 {
                     this.incrementSizeAndPossiblyResize(currentArray, length, o);
@@ -2111,7 +2111,7 @@ public final class ConcurrentHashMap<K, V>
         if (o == null)
         {
             V result = function.value(factory.value(), parameter);
-            Entry<K, V> newEntry = new Entry<K, V>(key, result, null);
+            Entry<K, V> newEntry = new Entry<>(key, result, null);
             if (currentArray.compareAndSet(index, null, newEntry))
             {
                 this.addToSize(1);
@@ -2150,7 +2150,7 @@ public final class ConcurrentHashMap<K, V>
                     {
                         V oldValue = e.getValue();
                         V newValue = function.value(oldValue, parameter);
-                        Entry<K, V> newEntry = new Entry<K, V>(e.getKey(), newValue, this.createReplacementChainForRemoval((Entry<K, V>) o, e));
+                        Entry<K, V> newEntry = new Entry<>(e.getKey(), newValue, this.createReplacementChainForRemoval((Entry<K, V>) o, e));
                         if (!currentArray.compareAndSet(index, o, newEntry))
                         {
                             //noinspection ContinueStatementWithLabel
@@ -2161,7 +2161,7 @@ public final class ConcurrentHashMap<K, V>
                     e = e.getNext();
                 }
                 V result = function.value(factory.value(), parameter);
-                Entry<K, V> newEntry = new Entry<K, V>(key, result, (Entry<K, V>) o);
+                Entry<K, V> newEntry = new Entry<>(key, result, (Entry<K, V>) o);
                 if (currentArray.compareAndSet(index, o, newEntry))
                 {
                     this.incrementSizeAndPossiblyResize(currentArray, length, o);

@@ -64,7 +64,7 @@ public class CollectIterable<T, V>
 
     public Iterator<V> iterator()
     {
-        return new CollectIterator<T, V>(this.adapted, this.function);
+        return new CollectIterator<>(this.adapted, this.function);
     }
 
     @Override

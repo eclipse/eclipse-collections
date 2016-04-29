@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -71,7 +71,7 @@ public class SynchronizedMutableCollection<T>
      */
     public static <E, C extends Collection<E>> SynchronizedMutableCollection<E> of(C collection)
     {
-        return new SynchronizedMutableCollection<E>(CollectionAdapter.adapt(collection));
+        return new SynchronizedMutableCollection<>(CollectionAdapter.adapt(collection));
     }
 
     /**
@@ -82,12 +82,12 @@ public class SynchronizedMutableCollection<T>
      */
     public static <E, C extends Collection<E>> SynchronizedMutableCollection<E> of(C collection, Object lock)
     {
-        return new SynchronizedMutableCollection<E>(CollectionAdapter.adapt(collection), lock);
+        return new SynchronizedMutableCollection<>(CollectionAdapter.adapt(collection), lock);
     }
 
     protected Object writeReplace()
     {
-        return new SynchronizedCollectionSerializationProxy<T>(this.getDelegate());
+        return new SynchronizedCollectionSerializationProxy<>(this.getDelegate());
     }
 
     public MutableCollection<T> with(T element)
@@ -118,7 +118,7 @@ public class SynchronizedMutableCollection<T>
     {
         synchronized (this.lock)
         {
-            return new UnmodifiableMutableCollection<T>(this);
+            return new UnmodifiableMutableCollection<>(this);
         }
     }
 

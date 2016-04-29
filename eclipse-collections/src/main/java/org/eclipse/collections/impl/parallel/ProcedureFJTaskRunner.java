@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -36,7 +36,7 @@ public final class ProcedureFJTaskRunner<T, BT extends Procedure<? super T>>
         this.taskCount = taskCount;
         if (this.combiner.useCombineOne())
         {
-            this.outputQueue = new ArrayBlockingQueue<BT>(taskCount);
+            this.outputQueue = new ArrayBlockingQueue<>(taskCount);
             this.latch = null;
         }
         else
@@ -53,7 +53,7 @@ public final class ProcedureFJTaskRunner<T, BT extends Procedure<? super T>>
         int size = this.taskCount;
         for (int index = 0; index < size; index++)
         {
-            ProcedureFJTask<T, BT> procedureFJTask = new ProcedureFJTask<T, BT>(this, procedureFactory, list, index, sectionSize,
+            ProcedureFJTask<T, BT> procedureFJTask = new ProcedureFJTask<>(this, procedureFactory, list, index, sectionSize,
                     index == this.taskCount - 1);
             this.procedures[index] = procedureFJTask;
             executor.execute(procedureFJTask);

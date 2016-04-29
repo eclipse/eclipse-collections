@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -54,7 +54,7 @@ class ImmutableEmptySortedBag<T>
         extends AbstractImmutableSortedBag<T>
         implements Serializable
 {
-    static final ImmutableSortedBag<?> INSTANCE = new ImmutableEmptySortedBag<Object>();
+    static final ImmutableSortedBag<?> INSTANCE = new ImmutableEmptySortedBag<>();
 
     private static final long serialVersionUID = 1L;
     private final Comparator<? super T> comparator;
@@ -273,7 +273,7 @@ class ImmutableEmptySortedBag<T>
 
     public PartitionImmutableSortedBag<T> partitionWhile(Predicate<? super T> predicate)
     {
-        return new PartitionImmutableSortedBagImpl<T>(new PartitionTreeBag<T>(this.comparator()));
+        return new PartitionImmutableSortedBagImpl<>(new PartitionTreeBag<>(this.comparator()));
     }
 
     public ImmutableSortedSet<T> distinct()

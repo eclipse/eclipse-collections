@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -92,7 +92,7 @@ final class DoubletonMap<K, V>
             this.value2 = addValue;
             return this;
         }
-        return new TripletonMap<K, V>(this.key1, this.value1, this.key2, this.value2, addKey, addValue);
+        return new TripletonMap<>(this.key1, this.value1, this.key2, this.value2, addKey, addValue);
     }
 
     @Override
@@ -100,11 +100,11 @@ final class DoubletonMap<K, V>
     {
         if (Comparators.nullSafeEquals(key, this.key1))
         {
-            return new SingletonMap<K, V>(this.key2, this.value2);
+            return new SingletonMap<>(this.key2, this.value2);
         }
         if (Comparators.nullSafeEquals(key, this.key2))
         {
-            return new SingletonMap<K, V>(this.key1, this.value1);
+            return new SingletonMap<>(this.key1, this.value1);
         }
         return this;
     }
@@ -113,7 +113,7 @@ final class DoubletonMap<K, V>
     @Override
     public DoubletonMap<K, V> clone()
     {
-        return new DoubletonMap<K, V>(this.key1, this.value1, this.key2, this.value2);
+        return new DoubletonMap<>(this.key1, this.value1, this.key2, this.value2);
     }
 
     @Override
@@ -158,8 +158,8 @@ final class DoubletonMap<K, V>
     public MutableSet<Entry<K, V>> entrySet()
     {
         return Sets.fixedSize.<Map.Entry<K, V>>of(
-                new ImmutableEntry<K, V>(this.key1, this.value1),
-                new ImmutableEntry<K, V>(this.key2, this.value2));
+                new ImmutableEntry<>(this.key1, this.value1),
+                new ImmutableEntry<>(this.key2, this.value2));
     }
 
     @Override
@@ -196,7 +196,7 @@ final class DoubletonMap<K, V>
         {
             throw new IllegalStateException("Duplicate value: " + this.value1 + " found at key: " + this.key1 + " and key: " + this.key2);
         }
-        return new DoubletonMap<V, K>(this.value1, this.key1, this.value2, this.key2);
+        return new DoubletonMap<>(this.value1, this.key1, this.value2, this.key2);
     }
 
     public void forEachKeyValue(Procedure2<? super K, ? super V> procedure)

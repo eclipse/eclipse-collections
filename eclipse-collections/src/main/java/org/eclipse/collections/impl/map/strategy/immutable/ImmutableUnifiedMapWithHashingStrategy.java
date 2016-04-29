@@ -241,6 +241,6 @@ public class ImmutableUnifiedMapWithHashingStrategy<K, V>
 
     protected Object writeReplace()
     {
-        return new ImmutableMapWithHashingStrategySerializationProxy<K, V>(this, this.delegate.hashingStrategy());
+        return new ImmutableMapWithHashingStrategySerializationProxy<>(this, this.delegate.hashingStrategy());
     }
 }

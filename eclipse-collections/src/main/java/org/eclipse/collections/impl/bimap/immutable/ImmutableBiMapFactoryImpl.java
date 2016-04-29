@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -45,7 +45,7 @@ public class ImmutableBiMapFactoryImpl implements ImmutableBiMapFactory
 
     public <K, V> ImmutableBiMap<K, V> with(K key, V value)
     {
-        return new ImmutableHashBiMap<K, V>(
+        return new ImmutableHashBiMap<>(
                 Maps.immutable.with(key, value),
                 Maps.immutable.with(value, key));
     }
@@ -57,7 +57,7 @@ public class ImmutableBiMapFactoryImpl implements ImmutableBiMapFactory
 
     public <K, V> ImmutableBiMap<K, V> with(K key1, V value1, K key2, V value2)
     {
-        return new ImmutableHashBiMap<K, V>(
+        return new ImmutableHashBiMap<>(
                 Maps.immutable.with(key1, value1, key2, value2),
                 Maps.immutable.with(value1, key1, value2, key2));
     }
@@ -69,7 +69,7 @@ public class ImmutableBiMapFactoryImpl implements ImmutableBiMapFactory
 
     public <K, V> ImmutableBiMap<K, V> with(K key1, V value1, K key2, V value2, K key3, V value3)
     {
-        return new ImmutableHashBiMap<K, V>(
+        return new ImmutableHashBiMap<>(
                 Maps.immutable.with(key1, value1, key2, value2, key3, value3),
                 Maps.immutable.with(value1, key1, value2, key2, value3, key3));
     }
@@ -81,7 +81,7 @@ public class ImmutableBiMapFactoryImpl implements ImmutableBiMapFactory
 
     public <K, V> ImmutableBiMap<K, V> with(K key1, V value1, K key2, V value2, K key3, V value3, K key4, V value4)
     {
-        return new ImmutableHashBiMap<K, V>(
+        return new ImmutableHashBiMap<>(
                 Maps.immutable.with(key1, value1, key2, value2, key3, value3, key4, value4),
                 Maps.immutable.with(value1, key1, value2, key2, value3, key3, value4, key4));
     }
@@ -102,7 +102,7 @@ public class ImmutableBiMapFactoryImpl implements ImmutableBiMapFactory
             return this.withAll((MutableBiMap<K, V>) map);
         }
         ImmutableMap<K, V> immutableMap = Maps.immutable.withAll(map);
-        return new ImmutableHashBiMap<K, V>(immutableMap, Maps.immutable.withAll(MapIterate.flipUniqueValues(immutableMap)));
+        return new ImmutableHashBiMap<>(immutableMap, Maps.immutable.withAll(MapIterate.flipUniqueValues(immutableMap)));
     }
 
     public <K, V> ImmutableBiMap<K, V> ofAll(MutableBiMap<K, V> biMap)
@@ -112,7 +112,7 @@ public class ImmutableBiMapFactoryImpl implements ImmutableBiMapFactory
 
     public <K, V> ImmutableBiMap<K, V> withAll(MutableBiMap<K, V> biMap)
     {
-        return new ImmutableHashBiMap<K, V>(Maps.immutable.withAll(biMap), Maps.immutable.withAll(biMap.inverse()));
+        return new ImmutableHashBiMap<>(Maps.immutable.withAll(biMap), Maps.immutable.withAll(biMap.inverse()));
     }
 
     public <K, V> ImmutableBiMap<K, V> ofAll(ImmutableMap<K, V> immutableMap)
@@ -126,6 +126,6 @@ public class ImmutableBiMapFactoryImpl implements ImmutableBiMapFactory
         {
             return (ImmutableBiMap<K, V>) immutableMap;
         }
-        return new ImmutableHashBiMap<K, V>(immutableMap, immutableMap.flipUniqueValues());
+        return new ImmutableHashBiMap<>(immutableMap, immutableMap.flipUniqueValues());
     }
 }

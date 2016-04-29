@@ -109,6 +109,6 @@ public class TapIterable<T>
 
     public Iterator<T> iterator()
     {
-        return new TapIterator<T>(this.adapted, this.procedure);
+        return new TapIterator<>(this.adapted, this.procedure);
     }
 }

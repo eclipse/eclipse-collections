@@ -1019,7 +1019,7 @@ public final class RandomAccessListIterate
 
     public static <T> PartitionMutableList<T> partition(List<T> list, Predicate<? super T> predicate)
     {
-        PartitionFastList<T> partitionFastList = new PartitionFastList<T>();
+        PartitionFastList<T> partitionFastList = new PartitionFastList<>();
 
         int size = list.size();
         for (int i = 0; i < size; i++)
@@ -1033,7 +1033,7 @@ public final class RandomAccessListIterate
 
     public static <T, P> PartitionMutableList<T> partitionWith(List<T> list, Predicate2<? super T, ? super P> predicate, P parameter)
     {
-        PartitionFastList<T> partitionFastList = new PartitionFastList<T>();
+        PartitionFastList<T> partitionFastList = new PartitionFastList<>();
 
         int size = list.size();
         for (int i = 0; i < size; i++)
@@ -1581,7 +1581,7 @@ public final class RandomAccessListIterate
             Procedure2<? super V, ? super T> mutatingAggregator)
     {
         MutableMap<K, V> map = UnifiedMap.newMap();
-        RandomAccessListIterate.forEach(list, new MutatingAggregationProcedure<T, K, V>(map, groupBy, zeroValueFactory, mutatingAggregator));
+        RandomAccessListIterate.forEach(list, new MutatingAggregationProcedure<>(map, groupBy, zeroValueFactory, mutatingAggregator));
         return map;
     }
 
@@ -1592,7 +1592,7 @@ public final class RandomAccessListIterate
             Function2<? super V, ? super T, ? extends V> nonMutatingAggregator)
     {
         MutableMap<K, V> map = UnifiedMap.newMap();
-        RandomAccessListIterate.forEach(list, new NonMutatingAggregationProcedure<T, K, V>(map, groupBy, zeroValueFactory, nonMutatingAggregator));
+        RandomAccessListIterate.forEach(list, new NonMutatingAggregationProcedure<>(map, groupBy, zeroValueFactory, nonMutatingAggregator));
         return map;
     }
 
@@ -1638,7 +1638,7 @@ public final class RandomAccessListIterate
 
     public static <T> PartitionMutableList<T> partitionWhile(List<T> list, Predicate<? super T> predicate)
     {
-        PartitionMutableList<T> result = new PartitionFastList<T>();
+        PartitionMutableList<T> result = new PartitionFastList<>();
         MutableList<T> selected = result.getSelected();
 
         int size = list.size();

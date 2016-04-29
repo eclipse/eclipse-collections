@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -76,7 +76,7 @@ public class UnmodifiableBag<T>
         {
             throw new IllegalArgumentException("cannot create an UnmodifiableBag for null");
         }
-        return new UnmodifiableBag<E>(bag);
+        return new UnmodifiableBag<>(bag);
     }
 
     protected MutableBag<T> getMutableBag()
@@ -356,7 +356,7 @@ public class UnmodifiableBag<T>
 
     protected Object writeReplace()
     {
-        return new UnmodifiableBagSerializationProxy<T>(this.getMutableBag());
+        return new UnmodifiableBagSerializationProxy<>(this.getMutableBag());
     }
 
     private static class UnmodifiableBagSerializationProxy<T> implements Externalizable

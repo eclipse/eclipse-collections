@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -26,6 +26,6 @@ public class PartitionArrayStackPartitionProcedureSerializationTest
                         + "TXV0YWJsZVN0YWNrdABCTG9yZy9lY2xpcHNlL2NvbGxlY3Rpb25zL2ltcGwvcGFydGl0aW9uL3N0\n"
                         + "YWNrL1BhcnRpdGlvbkFycmF5U3RhY2s7TAAJcHJlZGljYXRldAA3TG9yZy9lY2xpcHNlL2NvbGxl\n"
                         + "Y3Rpb25zL2FwaS9ibG9jay9wcmVkaWNhdGUvUHJlZGljYXRlO3hwcHA=",
-                new PartitionArrayStack.PartitionProcedure<Object>(null, null));
+                new PartitionArrayStack.PartitionProcedure<>(null, null));
     }
 }

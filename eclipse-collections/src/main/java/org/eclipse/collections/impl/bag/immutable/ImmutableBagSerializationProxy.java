@@ -64,7 +64,7 @@ class ImmutableBagSerializationProxy<T> implements Externalizable
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
     {
         int size = in.readInt();
-        MutableBag<T> deserializedBag = new HashBag<T>(size);
+        MutableBag<T> deserializedBag = new HashBag<>(size);
 
         for (int i = 0; i < size; i++)
         {

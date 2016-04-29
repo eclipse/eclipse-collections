@@ -25,6 +25,6 @@ public class MultimapKeyValuePutAllProcedureSerializationTest
                         + "cmcvZWNsaXBzZS9jb2xsZWN0aW9ucy9hcGkvYmxvY2svZnVuY3Rpb24vRnVuY3Rpb247TAAPbXV0\n"
                         + "YWJsZU11bHRpbWFwdAA2TG9yZy9lY2xpcHNlL2NvbGxlY3Rpb25zL2FwaS9tdWx0aW1hcC9NdXRh\n"
                         + "YmxlTXVsdGltYXA7TAANdmFsdWVGdW5jdGlvbnEAfgABeHBwcHA=",
-                new MultimapKeyValuePutAllProcedure<Object, Object, Object>(null, null, null));
+                new MultimapKeyValuePutAllProcedure<>(null, null, null));
     }
 }

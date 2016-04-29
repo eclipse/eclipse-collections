@@ -102,7 +102,7 @@ public class UnmodifiableMutableMap<K, V>
         {
             throw new IllegalArgumentException("cannot create a UnmodifiableMutableMap for null");
         }
-        return new UnmodifiableMutableMap<K, V>(MapAdapter.adapt(map));
+        return new UnmodifiableMutableMap<>(MapAdapter.adapt(map));
     }
 
     public MutableMap<K, V> newEmpty()
@@ -322,7 +322,7 @@ public class UnmodifiableMutableMap<K, V>
 
     public Iterator<V> iterator()
     {
-        return new UnmodifiableIteratorAdapter<V>(this.getMutableMap().iterator());
+        return new UnmodifiableIteratorAdapter<>(this.getMutableMap().iterator());
     }
 
     @Override

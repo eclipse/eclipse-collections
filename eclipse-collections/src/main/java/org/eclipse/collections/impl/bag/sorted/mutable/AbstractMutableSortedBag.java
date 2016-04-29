@@ -140,7 +140,7 @@ public abstract class AbstractMutableSortedBag<T>
 
     public PartitionMutableSortedBag<T> partition(final Predicate<? super T> predicate)
     {
-        final PartitionMutableSortedBag<T> result = new PartitionTreeBag<T>(this.comparator());
+        final PartitionMutableSortedBag<T> result = new PartitionTreeBag<>(this.comparator());
         this.forEachWithOccurrences((each, index) -> {
             MutableSortedBag<T> bucket = predicate.accept(each) ? result.getSelected() : result.getRejected();
             bucket.addOccurrences(each, index);
@@ -150,7 +150,7 @@ public abstract class AbstractMutableSortedBag<T>
 
     public <P> PartitionMutableSortedBag<T> partitionWith(final Predicate2<? super T, ? super P> predicate, final P parameter)
     {
-        final PartitionMutableSortedBag<T> result = new PartitionTreeBag<T>(this.comparator());
+        final PartitionMutableSortedBag<T> result = new PartitionTreeBag<>(this.comparator());
         this.forEachWithOccurrences((each, index) -> {
             MutableSortedBag<T> bucket = predicate.accept(each, parameter) ? result.getSelected() : result.getRejected();
             bucket.addOccurrences(each, index);
@@ -160,7 +160,7 @@ public abstract class AbstractMutableSortedBag<T>
 
     public PartitionMutableSortedBag<T> partitionWhile(Predicate<? super T> predicate)
     {
-        PartitionTreeBag<T> result = new PartitionTreeBag<T>(this.comparator());
+        PartitionTreeBag<T> result = new PartitionTreeBag<>(this.comparator());
         return IterableIterate.partitionWhile(this, predicate, result);
     }
 

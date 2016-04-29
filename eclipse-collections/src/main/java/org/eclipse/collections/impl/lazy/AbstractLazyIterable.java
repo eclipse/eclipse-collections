@@ -144,8 +144,8 @@ public abstract class AbstractLazyIterable<T>
 
     public PartitionMutableList<T> partition(Predicate<? super T> predicate)
     {
-        PartitionMutableList<T> partitionMutableList = new PartitionFastList<T>();
-        this.forEach(new PartitionProcedure<T>(predicate, partitionMutableList));
+        PartitionMutableList<T> partitionMutableList = new PartitionFastList<>();
+        this.forEach(new PartitionProcedure<>(predicate, partitionMutableList));
         return partitionMutableList;
     }
 
@@ -166,42 +166,42 @@ public abstract class AbstractLazyIterable<T>
 
     public LazyBooleanIterable collectBoolean(BooleanFunction<? super T> booleanFunction)
     {
-        return new CollectBooleanIterable<T>(this, booleanFunction);
+        return new CollectBooleanIterable<>(this, booleanFunction);
     }
 
     public LazyByteIterable collectByte(ByteFunction<? super T> byteFunction)
     {
-        return new CollectByteIterable<T>(this, byteFunction);
+        return new CollectByteIterable<>(this, byteFunction);
     }
 
     public LazyCharIterable collectChar(CharFunction<? super T> charFunction)
     {
-        return new CollectCharIterable<T>(this, charFunction);
+        return new CollectCharIterable<>(this, charFunction);
     }
 
     public LazyDoubleIterable collectDouble(DoubleFunction<? super T> doubleFunction)
     {
-        return new CollectDoubleIterable<T>(this, doubleFunction);
+        return new CollectDoubleIterable<>(this, doubleFunction);
     }
 
     public LazyFloatIterable collectFloat(FloatFunction<? super T> floatFunction)
     {
-        return new CollectFloatIterable<T>(this, floatFunction);
+        return new CollectFloatIterable<>(this, floatFunction);
     }
 
     public LazyIntIterable collectInt(IntFunction<? super T> intFunction)
     {
-        return new CollectIntIterable<T>(this, intFunction);
+        return new CollectIntIterable<>(this, intFunction);
     }
 
     public LazyLongIterable collectLong(LongFunction<? super T> longFunction)
     {
-        return new CollectLongIterable<T>(this, longFunction);
+        return new CollectLongIterable<>(this, longFunction);
     }
 
     public LazyShortIterable collectShort(ShortFunction<? super T> shortFunction)
     {
-        return new CollectShortIterable<T>(this, shortFunction);
+        return new CollectShortIterable<>(this, shortFunction);
     }
 
     public <P, V> LazyIterable<V> collectWith(Function2<? super T, ? super P, ? extends V> function, P parameter)
@@ -295,7 +295,7 @@ public abstract class AbstractLazyIterable<T>
             Procedure2<? super V, ? super T> mutatingAggregator)
     {
         MutableMap<K, V> map = UnifiedMap.newMap();
-        this.forEach(new MutatingAggregationProcedure<T, K, V>(map, groupBy, zeroValueFactory, mutatingAggregator));
+        this.forEach(new MutatingAggregationProcedure<>(map, groupBy, zeroValueFactory, mutatingAggregator));
         return map;
     }
 
@@ -305,7 +305,7 @@ public abstract class AbstractLazyIterable<T>
             Function2<? super V, ? super T, ? extends V> nonMutatingAggregator)
     {
         MutableMap<K, V> map = UnifiedMap.newMap();
-        this.forEach(new NonMutatingAggregationProcedure<T, K, V>(map, groupBy, zeroValueFactory, nonMutatingAggregator));
+        this.forEach(new NonMutatingAggregationProcedure<>(map, groupBy, zeroValueFactory, nonMutatingAggregator));
         return map;
     }
 

@@ -53,20 +53,20 @@ public final class Functions
 
     private static final Function<Object, Boolean> TRUE_FUNCTION = new TrueFunction();
     private static final Function<Object, Boolean> FALSE_FUNCTION = new FalseFunction();
-    private static final Function<?, ?> PASS_THRU_FUNCTION = new PassThruFunction<Object>();
+    private static final Function<?, ?> PASS_THRU_FUNCTION = new PassThruFunction<>();
     private static final Function<String, String> STRING_TRIM_FUNCTION = new StringTrimFunction();
     private static final Function<Object, Class<?>> CLASS_FUNCTION = new ClassFunction();
     private static final Function<Number, Double> MATH_SIN_FUNCTION = new MathSinFunction();
     private static final Function<Integer, Integer> SQUARED_INTEGER = new SquaredIntegerFunction();
     private static final Function<Object, String> TO_STRING_FUNCTION = new ToStringFunction();
     private static final Function<String, Integer> STRING_TO_INTEGER_FUNCTION = new StringToIntegerFunction();
-    private static final Function<?, ?> MAP_KEY_FUNCTION = new MapKeyFunction<Object>();
-    private static final Function<?, ?> MAP_VALUE_FUNCTION = new MapValueFunction<Object>();
+    private static final Function<?, ?> MAP_KEY_FUNCTION = new MapKeyFunction<>();
+    private static final Function<?, ?> MAP_VALUE_FUNCTION = new MapValueFunction<>();
     private static final Function<Iterable<?>, Integer> SIZE_FUNCTION = new SizeFunction();
-    private static final FirstOfPairFunction<?> FIRST_OF_PAIR_FUNCTION = new FirstOfPairFunction<Object>();
-    private static final SecondOfPairFunction<?> SECOND_OF_PAIR_FUNCTION = new SecondOfPairFunction<Object>();
+    private static final FirstOfPairFunction<?> FIRST_OF_PAIR_FUNCTION = new FirstOfPairFunction<>();
+    private static final SecondOfPairFunction<?> SECOND_OF_PAIR_FUNCTION = new SecondOfPairFunction<>();
     private static final CheckedFunction<String, Class<?>> CLASS_FOR_NAME = new ClassForNameFunction();
-    private static final SwappedPairFunction<?, ?> SWAPPED_PAIR_FUNCTION = new SwappedPairFunction<Object, Object>();
+    private static final SwappedPairFunction<?, ?> SWAPPED_PAIR_FUNCTION = new SwappedPairFunction<>();
 
     private Functions()
     {
@@ -185,7 +185,7 @@ public final class Functions
 
     public static <T, V> Function<T, V> throwing(ThrowingFunction<T, V> throwingFunction)
     {
-        return new ThrowingFunctionAdapter<T, V>(throwingFunction);
+        return new ThrowingFunctionAdapter<>(throwingFunction);
     }
 
     /**
@@ -233,7 +233,7 @@ public final class Functions
 
     public static <T, V> Function<T, V> getFixedValue(V value)
     {
-        return new FixedValueFunction<T, V>(value);
+        return new FixedValueFunction<>(value);
     }
 
     public static Function<Object, Class<?>> getToClass()
@@ -288,42 +288,42 @@ public final class Functions
 
     public static <T> SerializableComparator<T> toBooleanComparator(BooleanFunction<T> function)
     {
-        return new BooleanFunctionComparator<T>(function);
+        return new BooleanFunctionComparator<>(function);
     }
 
     public static <T> SerializableComparator<T> toByteComparator(ByteFunction<T> function)
     {
-        return new ByteFunctionComparator<T>(function);
+        return new ByteFunctionComparator<>(function);
     }
 
     public static <T> SerializableComparator<T> toCharComparator(CharFunction<T> function)
     {
-        return new CharFunctionComparator<T>(function);
+        return new CharFunctionComparator<>(function);
     }
 
     public static <T> SerializableComparator<T> toFloatComparator(FloatFunction<T> function)
     {
-        return new FloatFunctionComparator<T>(function);
+        return new FloatFunctionComparator<>(function);
     }
 
     public static <T> SerializableComparator<T> toShortComparator(ShortFunction<T> function)
     {
-        return new ShortFunctionComparator<T>(function);
+        return new ShortFunctionComparator<>(function);
     }
 
     public static <T> SerializableComparator<T> toIntComparator(IntFunction<T> function)
     {
-        return new IntFunctionComparator<T>(function);
+        return new IntFunctionComparator<>(function);
     }
 
     public static <T> SerializableComparator<T> toDoubleComparator(DoubleFunction<T> function)
     {
-        return new DoubleFunctionComparator<T>(function);
+        return new DoubleFunctionComparator<>(function);
     }
 
     public static <T> SerializableComparator<T> toLongComparator(LongFunction<T> function)
     {
-        return new LongFunctionComparator<T>(function);
+        return new LongFunctionComparator<>(function);
     }
 
     public static Function<String, Integer> getStringToInteger()
@@ -333,17 +333,17 @@ public final class Functions
 
     public static <T, V> Function<T, V> withDefault(Function<? super T, ? extends V> function, V defaultValue)
     {
-        return new DefaultFunction<T, V>(function, defaultValue);
+        return new DefaultFunction<>(function, defaultValue);
     }
 
     public static <T, V> Function<T, V> nullSafe(Function<? super T, ? extends V> function)
     {
-        return new NullSafeFunction<T, V>(function, null);
+        return new NullSafeFunction<>(function, null);
     }
 
     public static <T, V> Function<T, V> nullSafe(Function<? super T, ? extends V> function, V nullValue)
     {
-        return new NullSafeFunction<T, V>(function, nullValue);
+        return new NullSafeFunction<>(function, nullValue);
     }
 
     public static <V1> Function<Pair<V1, ?>, V1> firstOfPair()
@@ -375,7 +375,7 @@ public final class Functions
      */
     public static <T, P, R> Function<T, R> bind(Function2<? super T, ? super P, ? extends R> function, P parameter)
     {
-        return new BindFunction2<T, P, R>(function, parameter);
+        return new BindFunction2<>(function, parameter);
     }
 
     /**
@@ -389,7 +389,7 @@ public final class Functions
             Procedure<? super T2> delegate,
             Function<? super T1, T2> function)
     {
-        return new BindProcedure<T1, T2>(delegate, function);
+        return new BindProcedure<>(delegate, function);
     }
 
     /**
@@ -403,7 +403,7 @@ public final class Functions
             ObjectIntProcedure<? super T2> delegate,
             Function<? super T1, T2> function)
     {
-        return new BindObjectIntProcedure<T1, T2>(delegate, function);
+        return new BindObjectIntProcedure<>(delegate, function);
     }
 
     /**
@@ -416,7 +416,7 @@ public final class Functions
     public static <T1, T2, T3> Procedure2<T1, T3> bind(
             Procedure2<? super T2, T3> delegate, Function<? super T1, T2> function)
     {
-        return new BindProcedure2<T1, T2, T3>(delegate, function);
+        return new BindProcedure2<>(delegate, function);
     }
 
     public static Function<Integer, Integer> squaredInteger()
@@ -426,26 +426,26 @@ public final class Functions
 
     public static <T, V> Function<T, V> firstNotNullValue(Function<T, V>... functions)
     {
-        return new FirstNotNullFunction<T, V>(functions);
+        return new FirstNotNullFunction<>(functions);
     }
 
     public static <T> Function<T, String> firstNotEmptyStringValue(
             Function<T, String>... functions)
     {
-        return new FirstNotEmptyStringFunction<T>(functions);
+        return new FirstNotEmptyStringFunction<>(functions);
     }
 
     public static <T1, T2, I extends Iterable<T2>> Function<T1, I> firstNotEmptyCollectionValue(
             Function<T1, I>... functions)
     {
-        return new FirstNotEmptyCollectionFunction<T1, T2, I>(functions);
+        return new FirstNotEmptyCollectionFunction<>(functions);
     }
 
     public static <T, V> Function<T, V> ifTrue(
             Predicate<? super T> predicate,
             Function<? super T, ? extends V> function)
     {
-        return new IfFunction<T, V>(predicate, function);
+        return new IfFunction<>(predicate, function);
     }
 
     public static <T, V> Function<T, V> ifElse(
@@ -453,13 +453,13 @@ public final class Functions
             Function<? super T, ? extends V> trueFunction,
             Function<? super T, ? extends V> falseFunction)
     {
-        return new IfFunction<T, V>(predicate, trueFunction, falseFunction);
+        return new IfFunction<>(predicate, trueFunction, falseFunction);
     }
 
     public static <T extends Comparable<? super T>, V> CaseFunction<T, V> caseDefault(
             Function<? super T, ? extends V> defaultFunction)
     {
-        return new CaseFunction<T, V>(defaultFunction);
+        return new CaseFunction<>(defaultFunction);
     }
 
     public static <T extends Comparable<? super T>, V> CaseFunction<T, V> caseDefault(
@@ -473,7 +473,7 @@ public final class Functions
 
     public static <T, V> Function<T, V> synchronizedEach(Function<T, V> function)
     {
-        return new SynchronizedFunction<T, V>(function);
+        return new SynchronizedFunction<>(function);
     }
 
     public static Function<String, Class<?>> classForName()
@@ -578,47 +578,47 @@ public final class Functions
 
     public static <T1, T2, T3> FunctionChain<T1, T2, T3> chain(Function<T1, T2> function1, Function<? super T2, T3> function2)
     {
-        return new FunctionChain<T1, T2, T3>(function1, function2);
+        return new FunctionChain<>(function1, function2);
     }
 
     public static <T1, T2> BooleanFunctionChain<T1, T2> chainBoolean(Function<T1, T2> function1, BooleanFunction<? super T2> function2)
     {
-        return new BooleanFunctionChain<T1, T2>(function1, function2);
+        return new BooleanFunctionChain<>(function1, function2);
     }
 
     public static <T1, T2> ByteFunctionChain<T1, T2> chainByte(Function<T1, T2> function1, ByteFunction<? super T2> function2)
     {
-        return new ByteFunctionChain<T1, T2>(function1, function2);
+        return new ByteFunctionChain<>(function1, function2);
     }
 
     public static <T1, T2> CharFunctionChain<T1, T2> chainChar(Function<T1, T2> function1, CharFunction<? super T2> function2)
     {
-        return new CharFunctionChain<T1, T2>(function1, function2);
+        return new CharFunctionChain<>(function1, function2);
     }
 
     public static <T1, T2> DoubleFunctionChain<T1, T2> chainDouble(Function<T1, T2> function1, DoubleFunction<? super T2> function2)
     {
-        return new DoubleFunctionChain<T1, T2>(function1, function2);
+        return new DoubleFunctionChain<>(function1, function2);
     }
 
     public static <T1, T2> FloatFunctionChain<T1, T2> chainFloat(Function<T1, T2> function1, FloatFunction<? super T2> function2)
     {
-        return new FloatFunctionChain<T1, T2>(function1, function2);
+        return new FloatFunctionChain<>(function1, function2);
     }
 
     public static <T1, T2> IntFunctionChain<T1, T2> chainInt(Function<T1, T2> function1, IntFunction<? super T2> function2)
     {
-        return new IntFunctionChain<T1, T2>(function1, function2);
+        return new IntFunctionChain<>(function1, function2);
     }
 
     public static <T1, T2> LongFunctionChain<T1, T2> chainLong(Function<T1, T2> function1, LongFunction<? super T2> function2)
     {
-        return new LongFunctionChain<T1, T2>(function1, function2);
+        return new LongFunctionChain<>(function1, function2);
     }
 
     public static <T1, T2> ShortFunctionChain<T1, T2> chainShort(Function<T1, T2> function1, ShortFunction<? super T2> function2)
     {
-        return new ShortFunctionChain<T1, T2>(function1, function2);
+        return new ShortFunctionChain<>(function1, function2);
     }
 
     private static class DoublePassThruFunction implements Function<Double, Double>, DoubleFunction<Double>
@@ -807,47 +807,47 @@ public final class Functions
 
         public <T4> FunctionChain<T1, T3, T4> chain(Function<? super T3, T4> function)
         {
-            return new FunctionChain<T1, T3, T4>(this, function);
+            return new FunctionChain<>(this, function);
         }
 
         public BooleanFunctionChain<T1, T3> chainBoolean(BooleanFunction<? super T3> function)
         {
-            return new BooleanFunctionChain<T1, T3>(this, function);
+            return new BooleanFunctionChain<>(this, function);
         }
 
         public ByteFunctionChain<T1, T3> chainByte(ByteFunction<? super T3> function)
         {
-            return new ByteFunctionChain<T1, T3>(this, function);
+            return new ByteFunctionChain<>(this, function);
         }
 
         public CharFunctionChain<T1, T3> chainChar(CharFunction<? super T3> function)
         {
-            return new CharFunctionChain<T1, T3>(this, function);
+            return new CharFunctionChain<>(this, function);
         }
 
         public DoubleFunctionChain<T1, T3> chainDouble(DoubleFunction<? super T3> function)
         {
-            return new DoubleFunctionChain<T1, T3>(this, function);
+            return new DoubleFunctionChain<>(this, function);
         }
 
         public FloatFunctionChain<T1, T3> chainFloat(FloatFunction<? super T3> function)
         {
-            return new FloatFunctionChain<T1, T3>(this, function);
+            return new FloatFunctionChain<>(this, function);
         }
 
         public IntFunctionChain<T1, T3> chainInt(IntFunction<? super T3> function)
         {
-            return new IntFunctionChain<T1, T3>(this, function);
+            return new IntFunctionChain<>(this, function);
         }
 
         public LongFunctionChain<T1, T3> chainLong(LongFunction<? super T3> function)
         {
-            return new LongFunctionChain<T1, T3>(this, function);
+            return new LongFunctionChain<>(this, function);
         }
 
         public ShortFunctionChain<T1, T3> chainShort(ShortFunction<? super T3> function)
         {
-            return new ShortFunctionChain<T1, T3>(this, function);
+            return new ShortFunctionChain<>(this, function);
         }
     }
 

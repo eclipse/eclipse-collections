@@ -245,56 +245,56 @@ public abstract class AbstractImmutableMap<K, V>
     public ImmutableBooleanBag collectBoolean(BooleanFunction<? super V> booleanFunction)
     {
         MutableBooleanBag result = new BooleanHashBag();
-        this.forEach(new CollectBooleanProcedure<V>(booleanFunction, result));
+        this.forEach(new CollectBooleanProcedure<>(booleanFunction, result));
         return result.toImmutable();
     }
 
     public ImmutableByteBag collectByte(ByteFunction<? super V> byteFunction)
     {
         MutableByteBag result = new ByteHashBag();
-        this.forEach(new CollectByteProcedure<V>(byteFunction, result));
+        this.forEach(new CollectByteProcedure<>(byteFunction, result));
         return result.toImmutable();
     }
 
     public ImmutableCharBag collectChar(CharFunction<? super V> charFunction)
     {
         MutableCharBag result = new CharHashBag();
-        this.forEach(new CollectCharProcedure<V>(charFunction, result));
+        this.forEach(new CollectCharProcedure<>(charFunction, result));
         return result.toImmutable();
     }
 
     public ImmutableDoubleBag collectDouble(DoubleFunction<? super V> doubleFunction)
     {
         MutableDoubleBag result = new DoubleHashBag();
-        this.forEach(new CollectDoubleProcedure<V>(doubleFunction, result));
+        this.forEach(new CollectDoubleProcedure<>(doubleFunction, result));
         return result.toImmutable();
     }
 
     public ImmutableFloatBag collectFloat(FloatFunction<? super V> floatFunction)
     {
         MutableFloatBag result = new FloatHashBag();
-        this.forEach(new CollectFloatProcedure<V>(floatFunction, result));
+        this.forEach(new CollectFloatProcedure<>(floatFunction, result));
         return result.toImmutable();
     }
 
     public ImmutableIntBag collectInt(IntFunction<? super V> intFunction)
     {
         MutableIntBag result = new IntHashBag();
-        this.forEach(new CollectIntProcedure<V>(intFunction, result));
+        this.forEach(new CollectIntProcedure<>(intFunction, result));
         return result.toImmutable();
     }
 
     public ImmutableLongBag collectLong(LongFunction<? super V> longFunction)
     {
         MutableLongBag result = new LongHashBag();
-        this.forEach(new CollectLongProcedure<V>(longFunction, result));
+        this.forEach(new CollectLongProcedure<>(longFunction, result));
         return result.toImmutable();
     }
 
     public ImmutableShortBag collectShort(ShortFunction<? super V> shortFunction)
     {
         MutableShortBag result = new ShortHashBag();
-        this.forEach(new CollectShortProcedure<V>(shortFunction, result));
+        this.forEach(new CollectShortProcedure<>(shortFunction, result));
         return result.toImmutable();
     }
 
@@ -305,12 +305,12 @@ public abstract class AbstractImmutableMap<K, V>
 
     public <R> ImmutableBag<R> flatCollect(Function<? super V, ? extends Iterable<R>> function)
     {
-        return this.flatCollect(function, new HashBag<R>()).toImmutable();
+        return this.flatCollect(function, new HashBag<>()).toImmutable();
     }
 
     public ImmutableBag<V> select(Predicate<? super V> predicate)
     {
-        return this.select(predicate, new HashBag<V>()).toImmutable();
+        return this.select(predicate, new HashBag<>()).toImmutable();
     }
 
     public <P> ImmutableBag<V> selectWith(Predicate2<? super V, ? super P> predicate, P parameter)
@@ -326,7 +326,7 @@ public abstract class AbstractImmutableMap<K, V>
 
     public ImmutableBag<V> reject(Predicate<? super V> predicate)
     {
-        return this.reject(predicate, new HashBag<V>()).toImmutable();
+        return this.reject(predicate, new HashBag<>()).toImmutable();
     }
 
     public <P> ImmutableBag<V> rejectWith(Predicate2<? super V, ? super P> predicate, P parameter)
@@ -336,22 +336,22 @@ public abstract class AbstractImmutableMap<K, V>
 
     public PartitionImmutableBag<V> partition(Predicate<? super V> predicate)
     {
-        PartitionMutableBag<V> partitionMutableBag = new PartitionHashBag<V>();
-        this.forEach(new PartitionProcedure<V>(predicate, partitionMutableBag));
+        PartitionMutableBag<V> partitionMutableBag = new PartitionHashBag<>();
+        this.forEach(new PartitionProcedure<>(predicate, partitionMutableBag));
         return partitionMutableBag.toImmutable();
     }
 
     public <P> PartitionImmutableBag<V> partitionWith(Predicate2<? super V, ? super P> predicate, P parameter)
     {
-        PartitionMutableBag<V> partitionMutableBag = new PartitionHashBag<V>();
-        this.forEach(new PartitionPredicate2Procedure<V, P>(predicate, parameter, partitionMutableBag));
+        PartitionMutableBag<V> partitionMutableBag = new PartitionHashBag<>();
+        this.forEach(new PartitionPredicate2Procedure<>(predicate, parameter, partitionMutableBag));
         return partitionMutableBag.toImmutable();
     }
 
     public <S> ImmutableBag<S> selectInstancesOf(Class<S> clazz)
     {
         MutableBag<S> result = HashBag.newBag();
-        this.forEach(new SelectInstancesOfProcedure<S>(clazz, result));
+        this.forEach(new SelectInstancesOfProcedure<>(clazz, result));
         return result.toImmutable();
     }
 
@@ -394,7 +394,7 @@ public abstract class AbstractImmutableMap<K, V>
             Procedure2<? super V2, ? super V> mutatingAggregator)
     {
         MutableMap<K2, V2> map = UnifiedMap.newMap();
-        this.forEach(new MutatingAggregationProcedure<V, K2, V2>(map, groupBy, zeroValueFactory, mutatingAggregator));
+        this.forEach(new MutatingAggregationProcedure<>(map, groupBy, zeroValueFactory, mutatingAggregator));
         return map.toImmutable();
     }
 
@@ -404,7 +404,7 @@ public abstract class AbstractImmutableMap<K, V>
             Function2<? super V2, ? super V, ? extends V2> nonMutatingAggregator)
     {
         MutableMap<K2, V2> map = UnifiedMap.newMap();
-        this.forEach(new NonMutatingAggregationProcedure<V, K2, V2>(map, groupBy, zeroValueFactory, nonMutatingAggregator));
+        this.forEach(new NonMutatingAggregationProcedure<>(map, groupBy, zeroValueFactory, nonMutatingAggregator));
         return map.toImmutable();
     }
 

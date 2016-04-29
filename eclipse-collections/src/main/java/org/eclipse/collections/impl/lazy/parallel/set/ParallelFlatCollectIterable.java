@@ -68,7 +68,7 @@ public class ParallelFlatCollectIterable<T, V> extends AbstractParallelIterableI
 
     public V detect(final Predicate<? super V> predicate)
     {
-        final AtomicReference<V> result = new AtomicReference<V>();
+        final AtomicReference<V> result = new AtomicReference<>();
         this.delegate.anySatisfy(each -> Iterate.anySatisfy(this.function.valueOf(each), each1 -> {
             if (predicate.accept(each1))
             {

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -78,12 +78,12 @@ public class ImmutableHashBag<T>
 
     public static <T> ImmutableHashBag<T> newBag()
     {
-        return new ImmutableHashBag<T>();
+        return new ImmutableHashBag<>();
     }
 
     public static <T> ImmutableHashBag<T> newBag(Iterable<? extends T> source)
     {
-        return new ImmutableHashBag<T>(source);
+        return new ImmutableHashBag<>(source);
     }
 
     public static <T> ImmutableHashBag<T> newBagWith(T... elements)
@@ -93,7 +93,7 @@ public class ImmutableHashBag<T>
 
     public static <T> ImmutableHashBag<T> newBagWith(Bag<? extends T> bag)
     {
-        return new ImmutableHashBag<T>(bag);
+        return new ImmutableHashBag<>(bag);
     }
 
     public ImmutableBag<T> newWith(T element)
@@ -607,11 +607,11 @@ public class ImmutableHashBag<T>
 
     public Iterator<T> iterator()
     {
-        return new UnmodifiableIteratorAdapter<T>(this.delegate.iterator());
+        return new UnmodifiableIteratorAdapter<>(this.delegate.iterator());
     }
 
     protected Object writeReplace()
     {
-        return new ImmutableBagSerializationProxy<T>(this);
+        return new ImmutableBagSerializationProxy<>(this);
     }
 }

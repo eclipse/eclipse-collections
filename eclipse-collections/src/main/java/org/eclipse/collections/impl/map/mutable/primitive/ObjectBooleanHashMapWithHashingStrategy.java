@@ -167,17 +167,17 @@ public class ObjectBooleanHashMapWithHashingStrategy<K> implements MutableObject
 
     public static <K> ObjectBooleanHashMapWithHashingStrategy<K> newMap(HashingStrategy<? super K> hashingStrategy)
     {
-        return new ObjectBooleanHashMapWithHashingStrategy<K>(hashingStrategy);
+        return new ObjectBooleanHashMapWithHashingStrategy<>(hashingStrategy);
     }
 
     public static <K> ObjectBooleanHashMapWithHashingStrategy<K> newMap(HashingStrategy<? super K> hashingStrategy, ObjectBooleanMap<K> map)
     {
-        return new ObjectBooleanHashMapWithHashingStrategy<K>(hashingStrategy, map);
+        return new ObjectBooleanHashMapWithHashingStrategy<>(hashingStrategy, map);
     }
 
     public static <K> ObjectBooleanHashMapWithHashingStrategy<K> newMap(ObjectBooleanHashMapWithHashingStrategy<K> map)
     {
-        return new ObjectBooleanHashMapWithHashingStrategy<K>(map.hashingStrategy, map);
+        return new ObjectBooleanHashMapWithHashingStrategy<>(map.hashingStrategy, map);
     }
 
     public static <K> ObjectBooleanHashMapWithHashingStrategy<K> newWithKeysValues(HashingStrategy<? super K> hashingStrategy, K key, boolean value)
@@ -723,12 +723,12 @@ public class ObjectBooleanHashMapWithHashingStrategy<K> implements MutableObject
 
     public MutableObjectBooleanMap<K> asUnmodifiable()
     {
-        return new UnmodifiableObjectBooleanMap<K>(this);
+        return new UnmodifiableObjectBooleanMap<>(this);
     }
 
     public MutableObjectBooleanMap<K> asSynchronized()
     {
-        return new SynchronizedObjectBooleanMap<K>(this);
+        return new SynchronizedObjectBooleanMap<>(this);
     }
 
     public boolean get(Object key)
@@ -1624,7 +1624,7 @@ public class ObjectBooleanHashMapWithHashingStrategy<K> implements MutableObject
 
         public Iterator<K> iterator()
         {
-            return new InternalKeysViewIterator<K>();
+            return new InternalKeysViewIterator<>();
         }
 
         public class InternalKeysViewIterator<K> implements Iterator<K>

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -28,7 +28,7 @@ public final class ImmutableHashingStrategyMapFactoryImpl implements ImmutableHa
 
     public <K, V> ImmutableMap<K, V> with(HashingStrategy<? super K> hashingStrategy)
     {
-        return new ImmutableEmptyMapWithHashingStrategy<K, V>(hashingStrategy);
+        return new ImmutableEmptyMapWithHashingStrategy<>(hashingStrategy);
     }
 
     public <K, V> ImmutableMap<K, V> of(HashingStrategy<? super K> hashingStrategy, K key, V value)
@@ -141,6 +141,6 @@ public final class ImmutableHashingStrategyMapFactoryImpl implements ImmutableHa
             return this.of(mapWithHashingStrategy.hashingStrategy());
         }
 
-        return new ImmutableUnifiedMapWithHashingStrategy<K, V>(mapWithHashingStrategy);
+        return new ImmutableUnifiedMapWithHashingStrategy<>(mapWithHashingStrategy);
     }
 }

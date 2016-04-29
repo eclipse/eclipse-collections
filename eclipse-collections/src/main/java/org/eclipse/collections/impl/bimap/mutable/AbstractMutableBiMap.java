@@ -77,7 +77,7 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
     AbstractMutableBiMap(Map<K, V> map)
     {
         this.delegate = UnifiedMap.newMap();
-        this.inverse = new Inverse<V, K>(UnifiedMap.<V, K>newMap(), this);
+        this.inverse = new Inverse<>(UnifiedMap.<V, K>newMap(), this);
         this.putAll(map);
     }
 
@@ -86,7 +86,7 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
         this.checkNull(delegate, inverse);
         this.checkSame(delegate, inverse);
         this.delegate = UnifiedMap.newMap(delegate);
-        this.inverse = new Inverse<V, K>(inverse, this);
+        this.inverse = new Inverse<>(inverse, this);
     }
 
     private AbstractMutableBiMap(Map<K, V> delegate, AbstractMutableBiMap<V, K> valuesToKeys)
@@ -141,7 +141,7 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
 
     public HashBiMap<K, V> newEmpty()
     {
-        return new HashBiMap<K, V>();
+        return new HashBiMap<>();
     }
 
     public MutableBiMap<K, V> withKeyValue(K key, V value)
@@ -192,7 +192,7 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
 
     public MutableBiMap<V, K> flipUniqueValues()
     {
-        return new HashBiMap<V, K>(this.inverse());
+        return new HashBiMap<>(this.inverse());
     }
 
     public V put(K key, V value)
@@ -418,7 +418,7 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
     @Override
     public MutableBiMap<K, V> clone()
     {
-        return new HashBiMap<K, V>(this);
+        return new HashBiMap<>(this);
     }
 
     public MutableBiMap<K, V> tap(Procedure<? super V> procedure)
@@ -534,17 +534,17 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
     @Deprecated
     public MutableSet<Pair<V, Integer>> zipWithIndex()
     {
-        return this.delegate.zipWithIndex(new UnifiedSet<Pair<V, Integer>>());
+        return this.delegate.zipWithIndex(new UnifiedSet<>());
     }
 
     public <VV> MutableSetMultimap<VV, V> groupBy(Function<? super V, ? extends VV> function)
     {
-        return this.delegate.groupBy(function, new UnifiedSetMultimap<VV, V>());
+        return this.delegate.groupBy(function, new UnifiedSetMultimap<>());
     }
 
     public <VV> MutableSetMultimap<VV, V> groupByEach(Function<? super V, ? extends Iterable<VV>> function)
     {
-        return this.delegate.groupByEach(function, new UnifiedSetMultimap<VV, V>());
+        return this.delegate.groupByEach(function, new UnifiedSetMultimap<>());
     }
 
     /**
@@ -553,33 +553,33 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
     @Deprecated
     public <S> MutableSet<Pair<V, S>> zip(Iterable<S> that)
     {
-        return this.delegate.zip(that, new UnifiedSet<Pair<V, S>>());
+        return this.delegate.zip(that, new UnifiedSet<>());
     }
 
     public MutableSet<V> select(Predicate<? super V> predicate)
     {
-        return this.delegate.select(predicate, new UnifiedSet<V>());
+        return this.delegate.select(predicate, new UnifiedSet<>());
     }
 
     public <P> MutableSet<V> selectWith(Predicate2<? super V, ? super P> predicate, P parameter)
     {
-        return this.delegate.selectWith(predicate, parameter, new UnifiedSet<V>());
+        return this.delegate.selectWith(predicate, parameter, new UnifiedSet<>());
     }
 
     public MutableSet<V> reject(Predicate<? super V> predicate)
     {
-        return this.delegate.reject(predicate, new UnifiedSet<V>());
+        return this.delegate.reject(predicate, new UnifiedSet<>());
     }
 
     public <P> MutableSet<V> rejectWith(Predicate2<? super V, ? super P> predicate, P parameter)
     {
-        return this.delegate.rejectWith(predicate, parameter, new UnifiedSet<V>());
+        return this.delegate.rejectWith(predicate, parameter, new UnifiedSet<>());
     }
 
     public PartitionMutableSet<V> partition(Predicate<? super V> predicate)
     {
-        PartitionMutableSet<V> result = new PartitionUnifiedSet<V>();
-        this.inverse.forEachKey(new PartitionProcedure<V>(predicate, result));
+        PartitionMutableSet<V> result = new PartitionUnifiedSet<>();
+        this.inverse.forEachKey(new PartitionProcedure<>(predicate, result));
         return result;
     }
 
@@ -596,7 +596,7 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
 
     public <VV> MutableBiMap<VV, V> groupByUniqueKey(Function<? super V, ? extends VV> function)
     {
-        return new HashBiMap<VV, V>(this.delegate.groupByUniqueKey(function));
+        return new HashBiMap<>(this.delegate.groupByUniqueKey(function));
     }
 
     public <K2, V2> MutableMap<K2, V2> aggregateBy(Function<? super V, ? extends K2> groupBy, Function0<? extends V2> zeroValueFactory, Function2<? super V2, ? super V, ? extends V2> nonMutatingAggregator)
@@ -631,8 +631,8 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
 
     public <S> MutableSet<S> selectInstancesOf(Class<S> clazz)
     {
-        MutableSet<S> result = new UnifiedSet<S>();
-        this.inverse.forEachKey(new SelectInstancesOfProcedure<S>(clazz, result));
+        MutableSet<S> result = new UnifiedSet<>();
+        this.inverse.forEachKey(new SelectInstancesOfProcedure<>(clazz, result));
         return result;
     }
 
@@ -647,7 +647,7 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
         this.delegate.readExternal(in);
         final UnifiedMap<V, K> inverseDelegate = UnifiedMap.newMap();
         this.delegate.forEachKeyValue((key, value) -> inverseDelegate.put(value, key));
-        this.inverse = new Inverse<V, K>(inverseDelegate, this);
+        this.inverse = new Inverse<>(inverseDelegate, this);
     }
 
     private class InternalIterator implements Iterator<V>

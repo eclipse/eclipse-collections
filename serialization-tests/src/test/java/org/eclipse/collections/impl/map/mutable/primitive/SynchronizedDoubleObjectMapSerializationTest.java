@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -26,6 +26,6 @@ public class SynchronizedDoubleObjectMapSerializationTest
                         + "aXRpdmUvTXV0YWJsZURvdWJsZU9iamVjdE1hcDt4cHEAfgADc3IARm9yZy5lY2xpcHNlLmNvbGxl\n"
                         + "Y3Rpb25zLmltcGwubWFwLm11dGFibGUucHJpbWl0aXZlLkRvdWJsZU9iamVjdEhhc2hNYXAAAAAA\n"
                         + "AAAAAQwAAHhwdwQAAAAAeA==",
-                new SynchronizedDoubleObjectMap<Object>(new DoubleObjectHashMap<Object>()));
+                new SynchronizedDoubleObjectMap<>(new DoubleObjectHashMap<>()));
     }
 }

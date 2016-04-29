@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -43,7 +43,7 @@ public final class ImmutableListFactoryImpl implements ImmutableListFactory
 
     public <T> ImmutableList<T> with(T one)
     {
-        return new ImmutableSingletonList<T>(one);
+        return new ImmutableSingletonList<>(one);
     }
 
     public <T> ImmutableList<T> of(T one, T two)
@@ -53,7 +53,7 @@ public final class ImmutableListFactoryImpl implements ImmutableListFactory
 
     public <T> ImmutableList<T> with(T one, T two)
     {
-        return new ImmutableDoubletonList<T>(one, two);
+        return new ImmutableDoubletonList<>(one, two);
     }
 
     public <T> ImmutableList<T> of(T one, T two, T three)
@@ -63,7 +63,7 @@ public final class ImmutableListFactoryImpl implements ImmutableListFactory
 
     public <T> ImmutableList<T> with(T one, T two, T three)
     {
-        return new ImmutableTripletonList<T>(one, two, three);
+        return new ImmutableTripletonList<>(one, two, three);
     }
 
     public <T> ImmutableList<T> of(T one, T two, T three, T four)
@@ -73,7 +73,7 @@ public final class ImmutableListFactoryImpl implements ImmutableListFactory
 
     public <T> ImmutableList<T> with(T one, T two, T three, T four)
     {
-        return new ImmutableQuadrupletonList<T>(one, two, three, four);
+        return new ImmutableQuadrupletonList<>(one, two, three, four);
     }
 
     public <T> ImmutableList<T> of(T one, T two, T three, T four, T five)
@@ -83,7 +83,7 @@ public final class ImmutableListFactoryImpl implements ImmutableListFactory
 
     public <T> ImmutableList<T> with(T one, T two, T three, T four, T five)
     {
-        return new ImmutableQuintupletonList<T>(one, two, three, four, five);
+        return new ImmutableQuintupletonList<>(one, two, three, four, five);
     }
 
     public <T> ImmutableList<T> of(T one, T two, T three, T four, T five, T six)
@@ -93,7 +93,7 @@ public final class ImmutableListFactoryImpl implements ImmutableListFactory
 
     public <T> ImmutableList<T> with(T one, T two, T three, T four, T five, T six)
     {
-        return new ImmutableSextupletonList<T>(one, two, three, four, five, six);
+        return new ImmutableSextupletonList<>(one, two, three, four, five, six);
     }
 
     public <T> ImmutableList<T> of(T one, T two, T three, T four, T five, T six, T seven)
@@ -103,7 +103,7 @@ public final class ImmutableListFactoryImpl implements ImmutableListFactory
 
     public <T> ImmutableList<T> with(T one, T two, T three, T four, T five, T six, T seven)
     {
-        return new ImmutableSeptupletonList<T>(one, two, three, four, five, six, seven);
+        return new ImmutableSeptupletonList<>(one, two, three, four, five, six, seven);
     }
 
     public <T> ImmutableList<T> of(T one, T two, T three, T four, T five, T six, T seven, T eight)
@@ -113,7 +113,7 @@ public final class ImmutableListFactoryImpl implements ImmutableListFactory
 
     public <T> ImmutableList<T> with(T one, T two, T three, T four, T five, T six, T seven, T eight)
     {
-        return new ImmutableOctupletonList<T>(one, two, three, four, five, six, seven, eight);
+        return new ImmutableOctupletonList<>(one, two, three, four, five, six, seven, eight);
     }
 
     public <T> ImmutableList<T> of(T one, T two, T three, T four, T five, T six, T seven, T eight, T nine)
@@ -123,7 +123,7 @@ public final class ImmutableListFactoryImpl implements ImmutableListFactory
 
     public <T> ImmutableList<T> with(T one, T two, T three, T four, T five, T six, T seven, T eight, T nine)
     {
-        return new ImmutableNonupletonList<T>(one, two, three, four, five, six, seven, eight, nine);
+        return new ImmutableNonupletonList<>(one, two, three, four, five, six, seven, eight, nine);
     }
 
     public <T> ImmutableList<T> of(T one, T two, T three, T four, T five, T six, T seven, T eight, T nine, T ten)
@@ -133,7 +133,7 @@ public final class ImmutableListFactoryImpl implements ImmutableListFactory
 
     public <T> ImmutableList<T> with(T one, T two, T three, T four, T five, T six, T seven, T eight, T nine, T ten)
     {
-        return new ImmutableDecapletonList<T>(one, two, three, four, five, six, seven, eight, nine, ten);
+        return new ImmutableDecapletonList<>(one, two, three, four, five, six, seven, eight, nine, ten);
     }
 
     public <T> ImmutableList<T> of(T... items)

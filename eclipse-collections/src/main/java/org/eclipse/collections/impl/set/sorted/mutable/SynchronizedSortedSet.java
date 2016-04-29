@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -90,7 +90,7 @@ public class SynchronizedSortedSet<T>
      */
     public static <E, S extends SortedSet<E>> SynchronizedSortedSet<E> of(S set)
     {
-        return new SynchronizedSortedSet<E>(SortedSetAdapter.adapt(set));
+        return new SynchronizedSortedSet<>(SortedSetAdapter.adapt(set));
     }
 
     /**
@@ -101,7 +101,7 @@ public class SynchronizedSortedSet<T>
      */
     public static <E, S extends SortedSet<E>> MutableSortedSet<E> of(S set, Object lock)
     {
-        return new SynchronizedSortedSet<E>(SortedSetAdapter.adapt(set), lock);
+        return new SynchronizedSortedSet<>(SortedSetAdapter.adapt(set), lock);
     }
 
     @Override
@@ -154,7 +154,7 @@ public class SynchronizedSortedSet<T>
 
     protected Object writeReplace()
     {
-        return new SynchronizedCollectionSerializationProxy<T>(this.getDelegate());
+        return new SynchronizedCollectionSerializationProxy<>(this.getDelegate());
     }
 
     public Comparator<? super T> comparator()
@@ -562,7 +562,7 @@ public class SynchronizedSortedSet<T>
 
     public ParallelSortedSetIterable<T> asParallel(ExecutorService executorService, int batchSize)
     {
-        return new SynchronizedParallelSortedSetIterable<T>(this.getDelegate().asParallel(executorService, batchSize), this);
+        return new SynchronizedParallelSortedSetIterable<>(this.getDelegate().asParallel(executorService, batchSize), this);
     }
 
     public ImmutableSortedSet<T> toImmutable()

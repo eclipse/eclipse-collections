@@ -58,7 +58,7 @@ public class EclipseCollectionsCodeGeneratorTask extends Task
 
     private List<URL> getClassPathURLs()
     {
-        List<URL> urls = new ArrayList<URL>();
+        List<URL> urls = new ArrayList<>();
         String[] classPathStrings = ((AntClassLoader) this.getClass().getClassLoader()).getClasspath().split(CLASSPATH_SEPARATOR);
 
         for (String classPathString : classPathStrings)

@@ -93,17 +93,17 @@ public final class ArrayListAdapter<T>
 
     public static <E> ArrayListAdapter<E> newList()
     {
-        return new ArrayListAdapter<E>(new ArrayList<E>());
+        return new ArrayListAdapter<>(new ArrayList<>());
     }
 
     public static <E> ArrayListAdapter<E> newList(int size)
     {
-        return new ArrayListAdapter<E>(new ArrayList<E>(size));
+        return new ArrayListAdapter<>(new ArrayList<>(size));
     }
 
     public static <E> ArrayListAdapter<E> adapt(ArrayList<E> newDelegate)
     {
-        return new ArrayListAdapter<E>(newDelegate);
+        return new ArrayListAdapter<>(newDelegate);
     }
 
     public MutableList<T> asUnmodifiable()
@@ -124,7 +124,7 @@ public final class ArrayListAdapter<T>
     @Override
     public ArrayListAdapter<T> clone()
     {
-        return new ArrayListAdapter<T>((ArrayList<T>) this.delegate.clone());
+        return new ArrayListAdapter<>((ArrayList<T>) this.delegate.clone());
     }
 
     public ArrayListAdapter<T> newEmpty()

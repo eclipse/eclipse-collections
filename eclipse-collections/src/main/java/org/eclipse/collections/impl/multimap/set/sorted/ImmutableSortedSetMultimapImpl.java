@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -83,7 +83,7 @@ public final class ImmutableSortedSetMultimapImpl<K, V>
 
     public ImmutableSortedSetMultimap<K, V> newEmpty()
     {
-        return new ImmutableSortedSetMultimapImpl<K, V>(Maps.immutable.<K, ImmutableSortedSet<V>>with(), this.comparator());
+        return new ImmutableSortedSetMultimapImpl<>(Maps.immutable.<K, ImmutableSortedSet<V>>with(), this.comparator());
     }
 
     public Comparator<? super V> comparator()
@@ -93,7 +93,7 @@ public final class ImmutableSortedSetMultimapImpl<K, V>
 
     public MutableSortedSetMultimap<K, V> toMutable()
     {
-        return new TreeSortedSetMultimap<K, V>(this);
+        return new TreeSortedSetMultimap<>(this);
     }
 
     @Override
@@ -104,7 +104,7 @@ public final class ImmutableSortedSetMultimapImpl<K, V>
 
     private Object writeReplace()
     {
-        return new ImmutableSortedSetMultimapSerializationProxy<K, V>(this.map, this.comparator());
+        return new ImmutableSortedSetMultimapSerializationProxy<>(this.map, this.comparator());
     }
 
     private static final class ImmutableSortedSetMultimapSerializationProxy<K, V>
@@ -142,7 +142,7 @@ public final class ImmutableSortedSetMultimapImpl<K, V>
         @Override
         protected AbstractMutableMultimap<K, V, MutableSortedSet<V>> createEmptyMutableMultimap()
         {
-            return new TreeSortedSetMultimap<K, V>(this.comparator);
+            return new TreeSortedSetMultimap<>(this.comparator);
         }
     }
 

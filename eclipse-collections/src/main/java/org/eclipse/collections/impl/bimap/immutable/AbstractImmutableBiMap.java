@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -79,7 +79,7 @@ public abstract class AbstractImmutableBiMap<K, V> extends AbstractBiMap<K, V> i
     AbstractImmutableBiMap(ImmutableMap<K, V> map, ImmutableMap<V, K> inverse)
     {
         this.delegate = map;
-        this.inverse = new Inverse<V, K>(inverse, this);
+        this.inverse = new Inverse<>(inverse, this);
     }
 
     @Override
@@ -96,14 +96,14 @@ public abstract class AbstractImmutableBiMap<K, V> extends AbstractBiMap<K, V> i
 
     public ImmutableBiMap<K, V> newWithKeyValue(K key, V value)
     {
-        HashBiMap<K, V> map = new HashBiMap<K, V>(this.delegate.castToMap());
+        HashBiMap<K, V> map = new HashBiMap<>(this.delegate.castToMap());
         map.put(key, value);
         return map.toImmutable();
     }
 
     public ImmutableBiMap<K, V> newWithAllKeyValues(Iterable<? extends Pair<? extends K, ? extends V>> keyValues)
     {
-        HashBiMap<K, V> map = new HashBiMap<K, V>(this.delegate.castToMap());
+        HashBiMap<K, V> map = new HashBiMap<>(this.delegate.castToMap());
         for (Pair<? extends K, ? extends V> keyValuePair : keyValues)
         {
             map.put(keyValuePair.getOne(), keyValuePair.getTwo());
@@ -118,14 +118,14 @@ public abstract class AbstractImmutableBiMap<K, V> extends AbstractBiMap<K, V> i
 
     public ImmutableBiMap<K, V> newWithoutKey(K key)
     {
-        HashBiMap<K, V> map = new HashBiMap<K, V>(this.delegate.castToMap());
+        HashBiMap<K, V> map = new HashBiMap<>(this.delegate.castToMap());
         map.removeKey(key);
         return map.toImmutable();
     }
 
     public ImmutableBiMap<K, V> newWithoutAllKeys(Iterable<? extends K> keys)
     {
-        HashBiMap<K, V> map = new HashBiMap<K, V>(this.delegate.castToMap());
+        HashBiMap<K, V> map = new HashBiMap<>(this.delegate.castToMap());
         for (K key : keys)
         {
             map.removeKey(key);
@@ -314,8 +314,8 @@ public abstract class AbstractImmutableBiMap<K, V> extends AbstractBiMap<K, V> i
 
     public PartitionImmutableSet<V> partition(Predicate<? super V> predicate)
     {
-        PartitionMutableSet<V> result = new PartitionUnifiedSet<V>();
-        this.inverse.forEachKey(new PartitionProcedure<V>(predicate, result));
+        PartitionMutableSet<V> result = new PartitionUnifiedSet<>();
+        this.inverse.forEachKey(new PartitionProcedure<>(predicate, result));
         return result.toImmutable();
     }
 
@@ -330,7 +330,7 @@ public abstract class AbstractImmutableBiMap<K, V> extends AbstractBiMap<K, V> i
     @Deprecated
     public <S> ImmutableSet<Pair<V, S>> zip(Iterable<S> that)
     {
-        return this.delegate.zip(that, new UnifiedSet<Pair<V, S>>()).toImmutable();
+        return this.delegate.zip(that, new UnifiedSet<>()).toImmutable();
     }
 
     /**
@@ -339,7 +339,7 @@ public abstract class AbstractImmutableBiMap<K, V> extends AbstractBiMap<K, V> i
     @Deprecated
     public ImmutableSet<Pair<V, Integer>> zipWithIndex()
     {
-        return this.delegate.zipWithIndex(new UnifiedSet<Pair<V, Integer>>()).toImmutable();
+        return this.delegate.zipWithIndex(new UnifiedSet<>()).toImmutable();
     }
 
     public <V1> ImmutableObjectLongMap<V1> sumByInt(Function<? super V, ? extends V1> groupBy, IntFunction<? super V> function)
@@ -369,7 +369,7 @@ public abstract class AbstractImmutableBiMap<K, V> extends AbstractBiMap<K, V> i
 
     public <VV> ImmutableSetMultimap<VV, V> groupByEach(Function<? super V, ? extends Iterable<VV>> function)
     {
-        return this.delegate.groupByEach(function, new UnifiedSetMultimap<VV, V>()).toImmutable();
+        return this.delegate.groupByEach(function, new UnifiedSetMultimap<>()).toImmutable();
     }
 
     public <VV> ImmutableBiMap<VV, V> groupByUniqueKey(Function<? super V, ? extends VV> function)
@@ -389,8 +389,8 @@ public abstract class AbstractImmutableBiMap<K, V> extends AbstractBiMap<K, V> i
 
     public <S> ImmutableSet<S> selectInstancesOf(Class<S> clazz)
     {
-        MutableSet<S> result = new UnifiedSet<S>();
-        this.inverse.forEachKey(new SelectInstancesOfProcedure<S>(clazz, result));
+        MutableSet<S> result = new UnifiedSet<>();
+        this.inverse.forEachKey(new SelectInstancesOfProcedure<>(clazz, result));
         return result.toImmutable();
     }
 
@@ -403,7 +403,7 @@ public abstract class AbstractImmutableBiMap<K, V> extends AbstractBiMap<K, V> i
 
         protected Object writeReplace()
         {
-            return new ImmutableBiMapSerializationProxy<K, V>(this);
+            return new ImmutableBiMapSerializationProxy<>(this);
         }
     }
 }

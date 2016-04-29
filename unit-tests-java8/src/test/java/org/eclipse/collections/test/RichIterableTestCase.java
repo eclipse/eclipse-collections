@@ -776,7 +776,7 @@ public interface RichIterableTestCase extends IterableTestCase
         this.getInstanceUnderTest().groupByEach(each -> {
             groupByEachTargetIterationOrder.add(each);
             return Lists.immutable.with(each);
-        }, new HashBagMultimap<Integer, Integer>());
+        }, new HashBagMultimap<>());
         assertEquals(expectedIterationOrder, groupByEachTargetIterationOrder);
 
         MutableCollection<Integer> sumOfFloatIterationOrder = this.newMutableForFilter();

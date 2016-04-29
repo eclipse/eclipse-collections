@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -61,12 +61,12 @@ public final class ImmutableSetMultimapImpl<K, V>
 
     public ImmutableSetMultimap<K, V> newEmpty()
     {
-        return new ImmutableSetMultimapImpl<K, V>(Maps.immutable.<K, ImmutableSet<V>>with());
+        return new ImmutableSetMultimapImpl<>(Maps.immutable.<K, ImmutableSet<V>>with());
     }
 
     public MutableSetMultimap<K, V> toMutable()
     {
-        return new UnifiedSetMultimap<K, V>(this);
+        return new UnifiedSetMultimap<>(this);
     }
 
     @Override
@@ -77,7 +77,7 @@ public final class ImmutableSetMultimapImpl<K, V>
 
     private Object writeReplace()
     {
-        return new ImmutableSetMultimapSerializationProxy<K, V>(this.map);
+        return new ImmutableSetMultimapSerializationProxy<>(this.map);
     }
 
     private static final class ImmutableSetMultimapSerializationProxy<K, V>
@@ -99,7 +99,7 @@ public final class ImmutableSetMultimapImpl<K, V>
         @Override
         protected AbstractMutableMultimap<K, V, MutableSet<V>> createEmptyMutableMultimap()
         {
-            return new UnifiedSetMultimap<K, V>();
+            return new UnifiedSetMultimap<>();
         }
     }
 

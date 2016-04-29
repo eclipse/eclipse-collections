@@ -112,7 +112,7 @@ public class UnmodifiableTreeMap<K, V>
         {
             throw new IllegalArgumentException("cannot create a UnmodifiableSortedMap for null");
         }
-        return new UnmodifiableTreeMap<K, V>(SortedMapAdapter.adapt(map));
+        return new UnmodifiableTreeMap<>(SortedMapAdapter.adapt(map));
     }
 
     public V add(Pair<K, V> keyValuePair)
@@ -281,7 +281,7 @@ public class UnmodifiableTreeMap<K, V>
 
     public Iterator<V> iterator()
     {
-        return new UnmodifiableIteratorAdapter<V>(this.getMutableSortedMap().iterator());
+        return new UnmodifiableIteratorAdapter<>(this.getMutableSortedMap().iterator());
     }
 
     @Override
@@ -995,7 +995,7 @@ public class UnmodifiableTreeMap<K, V>
             Procedure2<? super V2, ? super V> mutatingAggregator)
     {
         MutableMap<K2, V2> map = UnifiedMap.newMap();
-        this.forEach(new MutatingAggregationProcedure<V, K2, V2>(map, groupBy, zeroValueFactory, mutatingAggregator));
+        this.forEach(new MutatingAggregationProcedure<>(map, groupBy, zeroValueFactory, mutatingAggregator));
         return map;
     }
 
@@ -1005,7 +1005,7 @@ public class UnmodifiableTreeMap<K, V>
             Function2<? super V2, ? super V, ? extends V2> nonMutatingAggregator)
     {
         MutableMap<K2, V2> map = UnifiedMap.newMap();
-        this.forEach(new NonMutatingAggregationProcedure<V, K2, V2>(map, groupBy, zeroValueFactory, nonMutatingAggregator));
+        this.forEach(new NonMutatingAggregationProcedure<>(map, groupBy, zeroValueFactory, nonMutatingAggregator));
         return map;
     }
 

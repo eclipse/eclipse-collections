@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -27,6 +27,6 @@ public final class FastListCollectProcedureFactory<T, V> implements ProcedureFac
 
     public FastListCollectProcedure<T, V> create()
     {
-        return new FastListCollectProcedure<T, V>(this.function, FastList.<V>newList(this.collectionSize));
+        return new FastListCollectProcedure<>(this.function, FastList.<V>newList(this.collectionSize));
     }
 }

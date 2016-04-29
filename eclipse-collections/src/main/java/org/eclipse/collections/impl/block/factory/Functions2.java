@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -31,12 +31,12 @@ public final class Functions2
 
     public static <T, V, P> Function2<T, P, V> fromFunction(Function<? super T, ? extends V> function)
     {
-        return new FunctionAdapter<T, P, V>(function);
+        return new FunctionAdapter<>(function);
     }
 
     public static <T, V, P> Function2<T, P, V> throwing(ThrowingFunction2<T, P, V> throwingFunction2)
     {
-        return new ThrowingFunction2Adapter<T, P, V>(throwingFunction2);
+        return new ThrowingFunction2Adapter<>(throwingFunction2);
     }
 
     public static Function2<Integer, Integer, Integer> integerAddition()
@@ -46,12 +46,12 @@ public final class Functions2
 
     public static <T> Function2<T, T, T> min(Comparator<? super T> comparator)
     {
-        return new MinFunction2<T>(comparator);
+        return new MinFunction2<>(comparator);
     }
 
     public static <T> Function2<T, T, T> max(Comparator<? super T> comparator)
     {
-        return new MaxFunction2<T>(comparator);
+        return new MaxFunction2<>(comparator);
     }
 
     public static <T, V extends Comparable<? super V>> Function2<T, T, T> minBy(Function<? super T, ? extends V> function)

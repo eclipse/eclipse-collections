@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -1713,7 +1713,7 @@ public final class ListIterate
         {
             return RandomAccessListIterate.partitionWhile(list, predicate);
         }
-        PartitionMutableList<T> result = new PartitionFastList<T>();
+        PartitionMutableList<T> result = new PartitionFastList<>();
         MutableList<T> selected = result.getSelected();
         MutableList<T> rejected = result.getRejected();
 

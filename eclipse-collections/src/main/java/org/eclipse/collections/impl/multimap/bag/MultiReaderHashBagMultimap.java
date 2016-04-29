@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -50,22 +50,22 @@ public final class MultiReaderHashBagMultimap<K, V>
 
     public static <K, V> MultiReaderHashBagMultimap<K, V> newMultimap()
     {
-        return new MultiReaderHashBagMultimap<K, V>();
+        return new MultiReaderHashBagMultimap<>();
     }
 
     public static <K, V> MultiReaderHashBagMultimap<K, V> newMultimap(Multimap<? extends K, ? extends V> multimap)
     {
-        return new MultiReaderHashBagMultimap<K, V>(multimap);
+        return new MultiReaderHashBagMultimap<>(multimap);
     }
 
     public static <K, V> MultiReaderHashBagMultimap<K, V> newMultimap(Pair<K, V>... pairs)
     {
-        return new MultiReaderHashBagMultimap<K, V>(pairs);
+        return new MultiReaderHashBagMultimap<>(pairs);
     }
 
     public static <K, V> MultiReaderHashBagMultimap<K, V> newMultimap(Iterable<Pair<K, V>> inputIterable)
     {
-        return new MultiReaderHashBagMultimap<K, V>(inputIterable);
+        return new MultiReaderHashBagMultimap<>(inputIterable);
     }
 
     @Override
@@ -88,7 +88,7 @@ public final class MultiReaderHashBagMultimap<K, V>
 
     public MultiReaderHashBagMultimap<K, V> newEmpty()
     {
-        return new MultiReaderHashBagMultimap<K, V>();
+        return new MultiReaderHashBagMultimap<>();
     }
 
     public MutableBagMultimap<V, K> flip()

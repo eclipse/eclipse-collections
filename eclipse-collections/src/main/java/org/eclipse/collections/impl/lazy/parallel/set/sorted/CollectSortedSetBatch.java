@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -50,21 +50,21 @@ public class CollectSortedSetBatch<T, V> extends AbstractBatch<V> implements Lis
 
     public ListBatch<V> select(Predicate<? super V> predicate)
     {
-        return new SelectListBatch<V>(this, predicate);
+        return new SelectListBatch<>(this, predicate);
     }
 
     public <VV> ListBatch<VV> collect(Function<? super V, ? extends VV> function)
     {
-        return new CollectListBatch<V, VV>(this, function);
+        return new CollectListBatch<>(this, function);
     }
 
     public <VV> ListBatch<VV> flatCollect(Function<? super V, ? extends Iterable<VV>> function)
     {
-        return new FlatCollectListBatch<V, VV>(this, function);
+        return new FlatCollectListBatch<>(this, function);
     }
 
     public UnsortedSetBatch<V> distinct(ConcurrentHashMap<V, Boolean> distinct)
     {
-        return new DistinctBatch<V>(this, distinct);
+        return new DistinctBatch<>(this, distinct);
     }
 }

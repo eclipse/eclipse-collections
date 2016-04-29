@@ -103,7 +103,7 @@ public class SynchronizedRichIterable<T>
      */
     public static <E> SynchronizedRichIterable<E> of(RichIterable<E> iterable)
     {
-        return new SynchronizedRichIterable<E>(iterable);
+        return new SynchronizedRichIterable<>(iterable);
     }
 
     /**
@@ -112,7 +112,7 @@ public class SynchronizedRichIterable<T>
      */
     public static <E> SynchronizedRichIterable<E> of(RichIterable<E> iterable, Object lock)
     {
-        return new SynchronizedRichIterable<E>(iterable, lock);
+        return new SynchronizedRichIterable<>(iterable, lock);
     }
 
     public int size()

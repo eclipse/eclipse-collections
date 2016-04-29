@@ -40,7 +40,7 @@ public abstract class AbstractParallelUnsortedSetIterable<T, B extends UnsortedS
 
     public ParallelUnsortedSetIterable<T> select(Predicate<? super T> predicate)
     {
-        return new ParallelSelectUnsortedSetIterable<T>(this, predicate);
+        return new ParallelSelectUnsortedSetIterable<>(this, predicate);
     }
 
     public <P> ParallelUnsortedSetIterable<T> selectWith(Predicate2<? super T, ? super P> predicate, P parameter)
@@ -65,7 +65,7 @@ public abstract class AbstractParallelUnsortedSetIterable<T, B extends UnsortedS
 
     public <V> ParallelIterable<V> collect(Function<? super T, ? extends V> function)
     {
-        return new ParallelCollectIterable<T, V>(this, function);
+        return new ParallelCollectIterable<>(this, function);
     }
 
     public <P, V> ParallelIterable<V> collectWith(Function2<? super T, ? super P, ? extends V> function, P parameter)
@@ -80,7 +80,7 @@ public abstract class AbstractParallelUnsortedSetIterable<T, B extends UnsortedS
 
     public <V> ParallelIterable<V> flatCollect(Function<? super T, ? extends Iterable<V>> function)
     {
-        return new ParallelFlatCollectIterable<T, V>(this, function);
+        return new ParallelFlatCollectIterable<>(this, function);
     }
 
     public <V> UnsortedSetMultimap<V, T> groupBy(final Function<? super T, ? extends V> function)

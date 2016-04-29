@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -77,7 +77,7 @@ final class SingletonMap<K, V>
             this.value1 = addValue;
             return this;
         }
-        return new DoubletonMap<K, V>(this.key1, this.value1, addKey, addValue);
+        return new DoubletonMap<>(this.key1, this.value1, addKey, addValue);
     }
 
     @Override
@@ -85,7 +85,7 @@ final class SingletonMap<K, V>
     {
         if (Comparators.nullSafeEquals(key, this.key1))
         {
-            return new EmptyMap<K, V>();
+            return new EmptyMap<>();
         }
         return this;
     }
@@ -94,7 +94,7 @@ final class SingletonMap<K, V>
     @Override
     public SingletonMap<K, V> clone()
     {
-        return new SingletonMap<K, V>(this.key1, this.value1);
+        return new SingletonMap<>(this.key1, this.value1);
     }
 
     @Override
@@ -135,7 +135,7 @@ final class SingletonMap<K, V>
 
     public MutableSet<Entry<K, V>> entrySet()
     {
-        return Sets.fixedSize.<Map.Entry<K, V>>of(new ImmutableEntry<K, V>(this.key1, this.value1));
+        return Sets.fixedSize.<Map.Entry<K, V>>of(new ImmutableEntry<>(this.key1, this.value1));
     }
 
     @Override

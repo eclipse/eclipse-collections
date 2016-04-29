@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -24,6 +24,6 @@ public class IfProcedureWithSerializationTest
                         + "b2NlZHVyZVdpdGgAAAAAAAAAAQIAAkwACXByZWRpY2F0ZXQAN0xvcmcvZWNsaXBzZS9jb2xsZWN0\n"
                         + "aW9ucy9hcGkvYmxvY2svcHJlZGljYXRlL1ByZWRpY2F0ZTtMAAlwcm9jZWR1cmV0ADhMb3JnL2Vj\n"
                         + "bGlwc2UvY29sbGVjdGlvbnMvYXBpL2Jsb2NrL3Byb2NlZHVyZS9Qcm9jZWR1cmUyO3hwcHA=",
-                new IfProcedureWith<Object, Object>(null, null));
+                new IfProcedureWith<>(null, null));
     }
 }

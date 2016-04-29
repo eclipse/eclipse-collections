@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -122,22 +122,22 @@ public abstract class AbstractMutableSet<T>
 
     public PartitionMutableSet<T> partition(Predicate<? super T> predicate)
     {
-        PartitionMutableSet<T> partitionMutableSet = new PartitionUnifiedSet<T>();
-        this.forEach(new PartitionProcedure<T>(predicate, partitionMutableSet));
+        PartitionMutableSet<T> partitionMutableSet = new PartitionUnifiedSet<>();
+        this.forEach(new PartitionProcedure<>(predicate, partitionMutableSet));
         return partitionMutableSet;
     }
 
     public <P> PartitionMutableSet<T> partitionWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
-        PartitionMutableSet<T> partitionMutableSet = new PartitionUnifiedSet<T>();
-        this.forEach(new PartitionPredicate2Procedure<T, P>(predicate, parameter, partitionMutableSet));
+        PartitionMutableSet<T> partitionMutableSet = new PartitionUnifiedSet<>();
+        this.forEach(new PartitionPredicate2Procedure<>(predicate, parameter, partitionMutableSet));
         return partitionMutableSet;
     }
 
     public <S> MutableSet<S> selectInstancesOf(Class<S> clazz)
     {
         MutableSet<S> result = (MutableSet<S>) this.newEmpty();
-        this.forEach(new SelectInstancesOfProcedure<S>(clazz, result));
+        this.forEach(new SelectInstancesOfProcedure<>(clazz, result));
         return result;
     }
 
@@ -149,56 +149,56 @@ public abstract class AbstractMutableSet<T>
     public MutableBooleanSet collectBoolean(BooleanFunction<? super T> booleanFunction)
     {
         MutableBooleanSet result = new BooleanHashSet();
-        this.forEach(new CollectBooleanProcedure<T>(booleanFunction, result));
+        this.forEach(new CollectBooleanProcedure<>(booleanFunction, result));
         return result;
     }
 
     public MutableByteSet collectByte(ByteFunction<? super T> byteFunction)
     {
         MutableByteSet result = new ByteHashSet();
-        this.forEach(new CollectByteProcedure<T>(byteFunction, result));
+        this.forEach(new CollectByteProcedure<>(byteFunction, result));
         return result;
     }
 
     public MutableCharSet collectChar(CharFunction<? super T> charFunction)
     {
         MutableCharSet result = new CharHashSet(this.size());
-        this.forEach(new CollectCharProcedure<T>(charFunction, result));
+        this.forEach(new CollectCharProcedure<>(charFunction, result));
         return result;
     }
 
     public MutableDoubleSet collectDouble(DoubleFunction<? super T> doubleFunction)
     {
         MutableDoubleSet result = new DoubleHashSet(this.size());
-        this.forEach(new CollectDoubleProcedure<T>(doubleFunction, result));
+        this.forEach(new CollectDoubleProcedure<>(doubleFunction, result));
         return result;
     }
 
     public MutableFloatSet collectFloat(FloatFunction<? super T> floatFunction)
     {
         MutableFloatSet result = new FloatHashSet(this.size());
-        this.forEach(new CollectFloatProcedure<T>(floatFunction, result));
+        this.forEach(new CollectFloatProcedure<>(floatFunction, result));
         return result;
     }
 
     public MutableIntSet collectInt(IntFunction<? super T> intFunction)
     {
         MutableIntSet result = new IntHashSet(this.size());
-        this.forEach(new CollectIntProcedure<T>(intFunction, result));
+        this.forEach(new CollectIntProcedure<>(intFunction, result));
         return result;
     }
 
     public MutableLongSet collectLong(LongFunction<? super T> longFunction)
     {
         MutableLongSet result = new LongHashSet(this.size());
-        this.forEach(new CollectLongProcedure<T>(longFunction, result));
+        this.forEach(new CollectLongProcedure<>(longFunction, result));
         return result;
     }
 
     public MutableShortSet collectShort(ShortFunction<? super T> shortFunction)
     {
         MutableShortSet result = new ShortHashSet(this.size());
-        this.forEach(new CollectShortProcedure<T>(shortFunction, result));
+        this.forEach(new CollectShortProcedure<>(shortFunction, result));
         return result;
     }
 
