@@ -35,7 +35,7 @@ public class DistinctBatch<T> extends AbstractBatch<T> implements UnsortedSetBat
         this.distinct = distinct;
     }
 
-    public void forEach(final Procedure<? super T> procedure)
+    public void forEach(Procedure<? super T> procedure)
     {
         this.batch.forEach(each -> {
             if (this.distinct.put(each, true) == null)

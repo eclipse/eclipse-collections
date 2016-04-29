@@ -196,7 +196,7 @@ public class CodePointAdapter extends AbstractIntIterable implements CharSequenc
 
     public CodePointAdapter newWithAll(IntIterable elements)
     {
-        final StringBuilder builder = new StringBuilder(this.adapted);
+        StringBuilder builder = new StringBuilder(this.adapted);
         elements.each(builder::appendCodePoint);
         return new CodePointAdapter(builder.toString());
     }
@@ -210,7 +210,7 @@ public class CodePointAdapter extends AbstractIntIterable implements CharSequenc
 
     public CodePointAdapter toReversed()
     {
-        final StringBuilder builder = new StringBuilder();
+        StringBuilder builder = new StringBuilder();
         LazyIntIterable reversed = this.asReversed();
         reversed.each(builder::appendCodePoint);
         return new CodePointAdapter(builder.toString());

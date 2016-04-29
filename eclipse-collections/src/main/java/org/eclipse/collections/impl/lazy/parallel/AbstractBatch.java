@@ -38,9 +38,9 @@ public abstract class AbstractBatch<T> implements Batch<T>
         return procedure.getCount();
     }
 
-    public String makeString(final String separator)
+    public String makeString(String separator)
     {
-        final StringBuilder stringBuilder = new StringBuilder();
+        StringBuilder stringBuilder = new StringBuilder();
         this.forEach(each -> {
             if (stringBuilder.length() != 0)
             {

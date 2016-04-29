@@ -289,10 +289,10 @@ public final class MapIterate
      */
     public static <K, V, R extends Map<K, V>> R selectMapOnEntry(
             Map<K, V> map,
-            final Predicate2<? super K, ? super V> predicate,
+            Predicate2<? super K, ? super V> predicate,
             R target)
     {
-        final Procedure2<K, V> mapTransferProcedure = new MapPutProcedure<>(target);
+        Procedure2<K, V> mapTransferProcedure = new MapPutProcedure<>(target);
         Procedure2<K, V> procedure = (key, value) -> {
             if (predicate.accept(key, value))
             {
@@ -309,10 +309,10 @@ public final class MapIterate
      * If the result of the evaluation is true, the map entry is moved to a result map.
      * The result map is returned containing all entries in the source map that evaluated to true.
      */
-    public static <K, V> MutableMap<K, V> selectMapOnKey(Map<K, V> map, final Predicate<? super K> predicate)
+    public static <K, V> MutableMap<K, V> selectMapOnKey(Map<K, V> map, Predicate<? super K> predicate)
     {
         MutableMap<K, V> resultMap = UnifiedMap.newMap();
-        final Procedure2<K, V> mapTransferProcedure = new MapPutProcedure<>(resultMap);
+        Procedure2<K, V> mapTransferProcedure = new MapPutProcedure<>(resultMap);
         Procedure2<K, V> procedure = (key, value) -> {
             if (predicate.accept(key))
             {
@@ -328,10 +328,10 @@ public final class MapIterate
      * If the result of the evaluation is true, the map entry is moved to a result map.
      * The result map is returned containing all entries in the source map that evaluated to true.
      */
-    public static <K, V> MutableMap<K, V> selectMapOnValue(Map<K, V> map, final Predicate<? super V> predicate)
+    public static <K, V> MutableMap<K, V> selectMapOnValue(Map<K, V> map, Predicate<? super V> predicate)
     {
         MutableMap<K, V> resultMap = UnifiedMap.newMap();
-        final Procedure2<K, V> mapTransferProcedure = new MapPutProcedure<>(resultMap);
+        Procedure2<K, V> mapTransferProcedure = new MapPutProcedure<>(resultMap);
         Procedure2<K, V> procedure = (key, value) -> {
             if (predicate.accept(value))
             {
@@ -380,8 +380,8 @@ public final class MapIterate
      */
     public static <K, V, R extends Map<K, V>> R rejectMapOnEntry(
             Map<K, V> map,
-            final Predicate2<? super K, ? super V> predicate,
-            final R target)
+            Predicate2<? super K, ? super V> predicate,
+            R target)
     {
         MapIterate.forEachKeyValue(map, (argument1, argument2) -> {
             if (!predicate.accept(argument1, argument2))
@@ -614,8 +614,8 @@ public final class MapIterate
      */
     public static <K1, V1, K2, V2, R extends Map<K2, V2>> R collect(
             Map<K1, V1> map,
-            final Function2<? super K1, ? super V1, Pair<K2, V2>> function,
-            final R target)
+            Function2<? super K1, ? super V1, Pair<K2, V2>> function,
+            R target)
     {
         MapIterate.forEachKeyValue(map, (key, value) -> {
             Pair<K2, V2> pair = function.value(key, value);
@@ -641,8 +641,8 @@ public final class MapIterate
      */
     public static <K, V, V2, R extends Map<K, V2>> R collectValues(
             Map<K, V> map,
-            final Function2<? super K, ? super V, ? extends V2> function,
-            final R target)
+            Function2<? super K, ? super V, ? extends V2> function,
+            R target)
     {
         MapIterate.forEachKeyValue(map, (key, value) -> target.put(key, function.value(key, value)));
 
@@ -669,11 +669,11 @@ public final class MapIterate
      */
     public static <K1, V1, K2, V2> MutableMap<K2, V2> collectIf(
             Map<K1, V1> map,
-            final Function2<? super K1, ? super V1, Pair<K2, V2>> function,
-            final Predicate2<? super K1, ? super V1> predicate,
+            Function2<? super K1, ? super V1, Pair<K2, V2>> function,
+            Predicate2<? super K1, ? super V1> predicate,
             Map<K2, V2> target)
     {
-        final MutableMap<K2, V2> result = MapAdapter.adapt(target);
+        MutableMap<K2, V2> result = MapAdapter.adapt(target);
 
         MapIterate.forEachKeyValue(map, (key, value) -> {
             if (predicate.accept(key, value))
@@ -702,8 +702,8 @@ public final class MapIterate
      */
     public static <K1, V1, K2, V2> MutableMap<K2, V2> collect(
             Map<K1, V1> map,
-            final Function<? super K1, ? extends K2> keyFunction,
-            final Function<? super V1, ? extends V2> valueFunction,
+            Function<? super K1, ? extends K2> keyFunction,
+            Function<? super V1, ? extends V2> valueFunction,
             Map<K2, V2> target)
     {
         return MapIterate.collect(map, (key, value) -> Tuples.pair(keyFunction.valueOf(key), valueFunction.valueOf(value)), MapAdapter.adapt(target));
@@ -796,7 +796,7 @@ public final class MapIterate
      */
     public static <K, V> MutableMap<V, K> flipUniqueValues(MapIterable<K, V> mapIterable)
     {
-        final MutableMap<V, K> result = UnifiedMap.newMap();
+        MutableMap<V, K> result = UnifiedMap.newMap();
 
         mapIterable.forEachKeyValue((key, value) -> {
             K oldKey = result.put(value, key);
@@ -810,7 +810,7 @@ public final class MapIterate
 
     public static <K, V> Pair<K, V> detect(
             Map<K, V> map,
-            final Predicate2<? super K, ? super V> predicate)
+            Predicate2<? super K, ? super V> predicate)
     {
         if (map == null)
         {
@@ -877,8 +877,8 @@ public final class MapIterate
     public static <IV, K, V> IV injectIntoIf(
             IV initialValue,
             Map<K, V> map,
-            final Predicate<? super V> predicate,
-            final Function2<? super IV, ? super V, ? extends IV> function)
+            Predicate<? super V> predicate,
+            Function2<? super IV, ? super V, ? extends IV> function)
     {
         Function2<IV, ? super V, IV> ifFunction = (accumulator, item) -> {
             if (predicate.accept(item))
@@ -920,7 +920,7 @@ public final class MapIterate
      */
     public static <K, V> MutableList<Pair<K, V>> toListOfPairs(Map<K, V> map)
     {
-        final MutableList<Pair<K, V>> pairs = FastList.newList(map.size());
+        MutableList<Pair<K, V>> pairs = FastList.newList(map.size());
         MapIterate.forEachKeyValue(map, (key, value) -> pairs.add(Tuples.pair(key, value)));
         return pairs;
     }
@@ -943,7 +943,7 @@ public final class MapIterate
      */
     public static <K, V> MutableMap<V, K> reverseMapping(Map<K, V> map)
     {
-        final MutableMap<V, K> reverseMap = UnifiedMap.newMap(map.size());
+        MutableMap<V, K> reverseMap = UnifiedMap.newMap(map.size());
         MapIterate.forEachKeyValue(map, (sourceKey, sourceValue) -> reverseMap.put(sourceValue, sourceKey));
         return reverseMap;
     }
@@ -969,14 +969,14 @@ public final class MapIterate
 
     public static <K, V> MutableSetMultimap<V, K> flip(MapIterable<K, V> iMap)
     {
-        final MutableSetMultimap<V, K> result = Multimaps.mutable.set.with();
+        MutableSetMultimap<V, K> result = Multimaps.mutable.set.with();
         iMap.forEachKeyValue((key, val) -> result.put(val, key));
         return result;
     }
 
     public static <K, V> MutableSortedSetMultimap<V, K> flip(SortedMapIterable<K, V> iMap)
     {
-        final MutableSortedSetMultimap<V, K> result = new TreeSortedSetMultimap<>(iMap.comparator());
+        MutableSortedSetMultimap<V, K> result = new TreeSortedSetMultimap<>(iMap.comparator());
         iMap.forEachKeyValue((key, val) -> result.put(val, key));
         return result;
     }

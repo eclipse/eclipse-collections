@@ -55,7 +55,7 @@ public abstract class AbstractMutableBagMultimap<K, V> extends AbstractMutableMu
 
     public ImmutableBagMultimap<K, V> toImmutable()
     {
-        final MutableMap<K, ImmutableBag<V>> result = (MutableMap<K, ImmutableBag<V>>) (MutableMap<?, ?>) this.createMapWithKeyCount(this.map.size());
+        MutableMap<K, ImmutableBag<V>> result = (MutableMap<K, ImmutableBag<V>>) (MutableMap<?, ?>) this.createMapWithKeyCount(this.map.size());
 
         this.map.forEachKeyValue((key, bag) -> result.put(key, bag.toImmutable()));
 
@@ -68,7 +68,7 @@ public abstract class AbstractMutableBagMultimap<K, V> extends AbstractMutableMu
     }
 
     @Override
-    public void writeExternal(final ObjectOutput out) throws IOException
+    public void writeExternal(ObjectOutput out) throws IOException
     {
         int keysCount = this.map.size();
         out.writeInt(keysCount);

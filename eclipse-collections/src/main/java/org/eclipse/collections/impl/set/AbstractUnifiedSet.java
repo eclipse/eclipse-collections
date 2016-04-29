@@ -253,8 +253,8 @@ public abstract class AbstractUnifiedSet<T>
 
     public <IV, P> IV injectIntoWith(
             IV injectValue,
-            final Function3<? super IV, ? super T, ? super P, ? extends IV> function,
-            final P parameter)
+            Function3<? super IV, ? super T, ? super P, ? extends IV> function,
+            P parameter)
     {
         return this.injectInto(injectValue, (argument1, argument2) -> function.value(argument1, argument2, parameter));
     }

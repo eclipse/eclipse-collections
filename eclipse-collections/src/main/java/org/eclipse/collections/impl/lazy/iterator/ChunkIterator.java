@@ -27,7 +27,7 @@ public final class ChunkIterator<T>
     private final int size;
     private final Function0<MutableCollection<T>> speciesNewStrategy;
 
-    public ChunkIterator(final Iterable<T> iterable, int size)
+    public ChunkIterator(Iterable<T> iterable, int size)
     {
         if (size <= 0)
         {

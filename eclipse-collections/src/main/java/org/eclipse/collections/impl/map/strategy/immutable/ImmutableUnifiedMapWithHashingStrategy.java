@@ -124,9 +124,9 @@ public class ImmutableUnifiedMapWithHashingStrategy<K, V>
     @Override
     public Set<Entry<K, V>> entrySet()
     {
-        final UnifiedSetWithHashingStrategy<Entry<K, V>> result = UnifiedSetWithHashingStrategy.newSet(
+        UnifiedSetWithHashingStrategy<Entry<K, V>> result = UnifiedSetWithHashingStrategy.newSet(
                 HashingStrategies.defaultStrategy(), this.delegate.size());
-        final HashingStrategy<? super K> hashingStrategy = this.delegate.hashingStrategy();
+        HashingStrategy<? super K> hashingStrategy = this.delegate.hashingStrategy();
         this.forEachKeyValue((argument1, argument2) -> result.put(ImmutableEntryWithHashingStrategy.of(argument1, argument2, hashingStrategy)));
         return result.toImmutable().castToSet();
     }

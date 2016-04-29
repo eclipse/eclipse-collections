@@ -282,7 +282,7 @@ public class FJIterateTest
     @Test
     public void testForEachWithIndexToArrayUsingFastListSerialPath()
     {
-        final Integer[] array = new Integer[200];
+        Integer[] array = new Integer[200];
         FastList<Integer> list = (FastList<Integer>) Interval.oneTo(200).toList();
         Assert.assertTrue(ArrayIterate.allSatisfy(array, Predicates.isNull()));
         FJIterate.forEachWithIndex(list, new ObjectIntProcedure<Integer>()
@@ -298,7 +298,7 @@ public class FJIterateTest
     @Test
     public void testForEachWithIndexToArrayUsingFastList()
     {
-        final Integer[] array = new Integer[200];
+        Integer[] array = new Integer[200];
         FastList<Integer> list = (FastList<Integer>) Interval.oneTo(200).toList();
         Assert.assertTrue(ArrayIterate.allSatisfy(array, Predicates.isNull()));
         FJIterate.forEachWithIndex(list, new ObjectIntProcedure<Integer>()
@@ -314,7 +314,7 @@ public class FJIterateTest
     @Test
     public void testForEachWithIndexToArrayUsingImmutableList()
     {
-        final Integer[] array = new Integer[200];
+        Integer[] array = new Integer[200];
         ImmutableList<Integer> list = Interval.oneTo(200).toList().toImmutable();
         Assert.assertTrue(ArrayIterate.allSatisfy(array, Predicates.isNull()));
         FJIterate.forEachWithIndex(list, new ObjectIntProcedure<Integer>()
@@ -330,7 +330,7 @@ public class FJIterateTest
     @Test
     public void testForEachWithIndexToArrayUsingArrayList()
     {
-        final Integer[] array = new Integer[200];
+        Integer[] array = new Integer[200];
         MutableList<Integer> list = FastList.newList(Interval.oneTo(200));
         Assert.assertTrue(ArrayIterate.allSatisfy(array, Predicates.isNull()));
         FJIterate.forEachWithIndex(list, new ObjectIntProcedure<Integer>()
@@ -346,7 +346,7 @@ public class FJIterateTest
     @Test
     public void testForEachWithIndexToArrayUsingFixedArrayList()
     {
-        final Integer[] array = new Integer[10];
+        Integer[] array = new Integer[10];
         List<Integer> list = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
         Assert.assertTrue(ArrayIterate.allSatisfy(array, Predicates.isNull()));
         FJIterate.forEachWithIndex(list, new ObjectIntProcedure<Integer>()

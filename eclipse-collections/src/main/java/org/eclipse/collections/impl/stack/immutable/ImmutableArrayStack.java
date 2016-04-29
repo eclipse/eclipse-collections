@@ -982,7 +982,7 @@ final class ImmutableArrayStack<T> implements ImmutableStack<T>, Serializable
             this.stack = stack;
         }
 
-        public void writeExternal(final ObjectOutput out) throws IOException
+        public void writeExternal(ObjectOutput out) throws IOException
         {
             out.writeInt(this.stack.size());
             try

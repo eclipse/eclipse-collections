@@ -143,7 +143,7 @@ public class TreeBag<T>
         {
             return false;
         }
-        final Bag<?> bag = (Bag<?>) other;
+        Bag<?> bag = (Bag<?>) other;
         if (this.sizeDistinct() != bag.sizeDistinct())
         {
             return false;
@@ -155,7 +155,7 @@ public class TreeBag<T>
     @Override
     public int hashCode()
     {
-        final Counter counter = new Counter();
+        Counter counter = new Counter();
         this.forEachWithOccurrences((each, count) -> counter.add((each == null ? 0 : each.hashCode()) ^ count));
         return counter.getCount();
     }
@@ -171,12 +171,12 @@ public class TreeBag<T>
         return this.items.size();
     }
 
-    public void forEachWithOccurrences(final ObjectIntProcedure<? super T> procedure)
+    public void forEachWithOccurrences(ObjectIntProcedure<? super T> procedure)
     {
         this.items.forEachKeyValue((item, count) -> procedure.value(item, count.getCount()));
     }
 
-    public MutableSortedBag<T> selectByOccurrences(final IntPredicate predicate)
+    public MutableSortedBag<T> selectByOccurrences(IntPredicate predicate)
     {
         MutableSortedMap<T, Counter> map = this.items.select((each, occurrences) -> {
             return predicate.accept(occurrences.getCount());
@@ -232,7 +232,7 @@ public class TreeBag<T>
         return SortedBagIterables.compare(this, otherBag);
     }
 
-    public void writeExternal(final ObjectOutput out) throws IOException
+    public void writeExternal(ObjectOutput out) throws IOException
     {
         out.writeObject(this.comparator());
         out.writeInt(this.items.size());
@@ -267,7 +267,7 @@ public class TreeBag<T>
         }
     }
 
-    public void each(final Procedure<? super T> procedure)
+    public void each(Procedure<? super T> procedure)
     {
         this.items.forEachKeyValue((key, value) -> {
             for (int i = 0; i < value.getCount(); i++)
@@ -278,9 +278,9 @@ public class TreeBag<T>
     }
 
     @Override
-    public void forEachWithIndex(final ObjectIntProcedure<? super T> objectIntProcedure)
+    public void forEachWithIndex(ObjectIntProcedure<? super T> objectIntProcedure)
     {
-        final Counter index = new Counter();
+        Counter index = new Counter();
         this.items.forEachKeyValue((key, value) -> {
             for (int i = 0; i < value.getCount(); i++)
             {
@@ -387,7 +387,7 @@ public class TreeBag<T>
     }
 
     @Override
-    public <P> void forEachWith(final Procedure2<? super T, ? super P> procedure, final P parameter)
+    public <P> void forEachWith(Procedure2<? super T, ? super P> procedure, P parameter)
     {
         this.items.forEachKeyValue((key, value) -> {
             for (int i = 0; i < value.getCount(); i++)
@@ -574,7 +574,7 @@ public class TreeBag<T>
 
     public MutableSortedSet<Pair<T, Integer>> zipWithIndex()
     {
-        final Comparator<? super T> comparator = this.items.comparator();
+        Comparator<? super T> comparator = this.items.comparator();
         return this.zipWithIndex(TreeSortedSet.newSet(new Comparator<Pair<T, Integer>>()
         {
             public int compare(Pair<T, Integer> o1, Pair<T, Integer> o2)

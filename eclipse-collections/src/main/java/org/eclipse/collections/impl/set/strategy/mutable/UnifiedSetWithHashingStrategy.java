@@ -722,11 +722,11 @@ public class UnifiedSetWithHashingStrategy<T>
     }
 
     public <P> Twin<MutableList<T>> selectAndRejectWith(
-            final Predicate2<? super T, ? super P> predicate,
+            Predicate2<? super T, ? super P> predicate,
             P parameter)
     {
-        final MutableList<T> positiveResult = Lists.mutable.empty();
-        final MutableList<T> negativeResult = Lists.mutable.empty();
+        MutableList<T> positiveResult = Lists.mutable.empty();
+        MutableList<T> negativeResult = Lists.mutable.empty();
         this.forEachWith((each, parm) -> (predicate.accept(each, parm) ? positiveResult : negativeResult).add(each), parameter);
         return Tuples.twin(positiveResult, negativeResult);
     }

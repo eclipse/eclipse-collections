@@ -71,8 +71,8 @@ public class ImmutableArrayBag<T>
     public static <T> ImmutableArrayBag<T> copyFrom(Bag<T> bag)
     {
         int distinctItemCount = bag.sizeDistinct();
-        final T[] newKeys = (T[]) new Object[distinctItemCount];
-        final int[] newCounts = new int[distinctItemCount];
+        T[] newKeys = (T[]) new Object[distinctItemCount];
+        int[] newCounts = new int[distinctItemCount];
         bag.forEachWithOccurrences(new ObjectIntProcedure<T>()
         {
             private int index;
@@ -177,7 +177,7 @@ public class ImmutableArrayBag<T>
 
     public MutableMap<T, Integer> toMapOfItemToCount()
     {
-        final MutableMap<T, Integer> map = UnifiedMap.newMap(this.size());
+        MutableMap<T, Integer> map = UnifiedMap.newMap(this.size());
         this.forEachWithOccurrences(map::put);
         return map;
     }
@@ -187,9 +187,9 @@ public class ImmutableArrayBag<T>
         return Bags.immutable.withAll(Iterate.addAllTo(elements, HashBag.newBag(this)));
     }
 
-    public ImmutableBag<T> selectByOccurrences(final IntPredicate predicate)
+    public ImmutableBag<T> selectByOccurrences(IntPredicate predicate)
     {
-        final MutableBag<T> result = HashBag.newBag();
+        MutableBag<T> result = HashBag.newBag();
         this.forEachWithOccurrences((each, occurrences) -> {
             if (predicate.accept(occurrences))
             {
@@ -199,9 +199,9 @@ public class ImmutableArrayBag<T>
         return result.toImmutable();
     }
 
-    public <S> ImmutableBag<S> selectInstancesOf(final Class<S> clazz)
+    public <S> ImmutableBag<S> selectInstancesOf(Class<S> clazz)
     {
-        final MutableBag<S> result = HashBag.newBag();
+        MutableBag<S> result = HashBag.newBag();
         this.forEachWithOccurrences((each, index) -> {
             if (clazz.isInstance(each))
             {

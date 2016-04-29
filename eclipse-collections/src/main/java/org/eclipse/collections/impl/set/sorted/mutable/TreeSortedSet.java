@@ -725,7 +725,7 @@ public class TreeSortedSet<T> extends AbstractMutableCollection<T>
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".detectLastIndex() not implemented yet");
     }
 
-    public void writeExternal(final ObjectOutput out) throws IOException
+    public void writeExternal(ObjectOutput out) throws IOException
     {
         out.writeObject(this.comparator());
         out.writeInt(this.size());

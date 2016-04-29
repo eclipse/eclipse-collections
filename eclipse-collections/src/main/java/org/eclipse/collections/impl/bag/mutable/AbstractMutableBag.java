@@ -79,9 +79,9 @@ public abstract class AbstractMutableBag<T>
         return this;
     }
 
-    public <S> MutableBag<S> selectInstancesOf(final Class<S> clazz)
+    public <S> MutableBag<S> selectInstancesOf(Class<S> clazz)
     {
-        final MutableBag<S> result = HashBag.newBag();
+        MutableBag<S> result = HashBag.newBag();
         this.forEachWithOccurrences((each, occurrences) -> {
             if (clazz.isInstance(each))
             {
@@ -111,9 +111,9 @@ public abstract class AbstractMutableBag<T>
         return this.rejectWith(predicate, parameter, this.newEmpty());
     }
 
-    public PartitionMutableBag<T> partition(final Predicate<? super T> predicate)
+    public PartitionMutableBag<T> partition(Predicate<? super T> predicate)
     {
-        final PartitionMutableBag<T> result = new PartitionHashBag<>();
+        PartitionMutableBag<T> result = new PartitionHashBag<>();
         this.forEachWithOccurrences((each, index) -> {
             MutableBag<T> bucket = predicate.accept(each) ? result.getSelected() : result.getRejected();
             bucket.addOccurrences(each, index);
@@ -121,9 +121,9 @@ public abstract class AbstractMutableBag<T>
         return result;
     }
 
-    public <P> PartitionMutableBag<T> partitionWith(final Predicate2<? super T, ? super P> predicate, final P parameter)
+    public <P> PartitionMutableBag<T> partitionWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
-        final PartitionMutableBag<T> result = new PartitionHashBag<>();
+        PartitionMutableBag<T> result = new PartitionHashBag<>();
         this.forEachWithOccurrences((each, index) -> {
             MutableBag<T> bucket = predicate.accept(each, parameter) ? result.getSelected() : result.getRejected();
             bucket.addOccurrences(each, index);

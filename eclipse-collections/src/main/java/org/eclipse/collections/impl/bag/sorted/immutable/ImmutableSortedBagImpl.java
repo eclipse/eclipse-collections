@@ -501,7 +501,7 @@ class ImmutableSortedBagImpl<T>
     @Override
     public Object[] toArray()
     {
-        final Object[] result = new Object[this.size()];
+        Object[] result = new Object[this.size()];
         this.each(new Procedure<T>()
         {
             private int i;
@@ -535,7 +535,7 @@ class ImmutableSortedBagImpl<T>
 
     public MutableSortedMap<T, Integer> toMapOfItemToCount()
     {
-        final MutableSortedMap<T, Integer> map = TreeSortedMap.newMap(this.comparator());
+        MutableSortedMap<T, Integer> map = TreeSortedMap.newMap(this.comparator());
         this.forEachWithOccurrences(map::put);
         return map;
     }
@@ -693,7 +693,7 @@ class ImmutableSortedBagImpl<T>
     @Override
     public int hashCode()
     {
-        final Counter counter = new Counter();
+        Counter counter = new Counter();
         this.forEachWithOccurrences((each, count) -> counter.add((each == null ? 0 : each.hashCode()) ^ count));
         return counter.getCount();
     }

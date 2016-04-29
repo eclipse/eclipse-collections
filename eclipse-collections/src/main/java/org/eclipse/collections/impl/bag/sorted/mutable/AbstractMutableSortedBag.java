@@ -88,15 +88,15 @@ public abstract class AbstractMutableSortedBag<T>
 
     public MutableSortedMap<T, Integer> toMapOfItemToCount()
     {
-        final MutableSortedMap<T, Integer> map = TreeSortedMap.newMap(this.comparator());
+        MutableSortedMap<T, Integer> map = TreeSortedMap.newMap(this.comparator());
         this.forEachWithOccurrences(map::put);
         return map;
     }
 
-    public <S> MutableSortedBag<S> selectInstancesOf(final Class<S> clazz)
+    public <S> MutableSortedBag<S> selectInstancesOf(Class<S> clazz)
     {
         Comparator<? super S> comparator = (Comparator<? super S>) this.comparator();
-        final MutableSortedBag<S> result = TreeBag.newBag(comparator);
+        MutableSortedBag<S> result = TreeBag.newBag(comparator);
         this.forEachWithOccurrences((each, occurrences) -> {
             if (clazz.isInstance(each))
             {
@@ -138,9 +138,9 @@ public abstract class AbstractMutableSortedBag<T>
         return this.rejectWith(predicate, parameter, TreeBag.newBag(this.comparator()));
     }
 
-    public PartitionMutableSortedBag<T> partition(final Predicate<? super T> predicate)
+    public PartitionMutableSortedBag<T> partition(Predicate<? super T> predicate)
     {
-        final PartitionMutableSortedBag<T> result = new PartitionTreeBag<>(this.comparator());
+        PartitionMutableSortedBag<T> result = new PartitionTreeBag<>(this.comparator());
         this.forEachWithOccurrences((each, index) -> {
             MutableSortedBag<T> bucket = predicate.accept(each) ? result.getSelected() : result.getRejected();
             bucket.addOccurrences(each, index);
@@ -148,9 +148,9 @@ public abstract class AbstractMutableSortedBag<T>
         return result;
     }
 
-    public <P> PartitionMutableSortedBag<T> partitionWith(final Predicate2<? super T, ? super P> predicate, final P parameter)
+    public <P> PartitionMutableSortedBag<T> partitionWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
-        final PartitionMutableSortedBag<T> result = new PartitionTreeBag<>(this.comparator());
+        PartitionMutableSortedBag<T> result = new PartitionTreeBag<>(this.comparator());
         this.forEachWithOccurrences((each, index) -> {
             MutableSortedBag<T> bucket = predicate.accept(each, parameter) ? result.getSelected() : result.getRejected();
             bucket.addOccurrences(each, index);

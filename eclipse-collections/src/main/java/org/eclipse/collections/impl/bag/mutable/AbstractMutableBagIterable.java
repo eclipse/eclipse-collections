@@ -143,8 +143,8 @@ public abstract class AbstractMutableBagIterable<T>
 
     @Override
     public <P> T detectWithIfNone(
-            final Predicate2<? super T, ? super P> predicate,
-            final P parameter,
+            Predicate2<? super T, ? super P> predicate,
+            P parameter,
             Function0<? extends T> function)
     {
         return this.getKeysView().detectIfNone(each -> predicate.accept(each, parameter), function);

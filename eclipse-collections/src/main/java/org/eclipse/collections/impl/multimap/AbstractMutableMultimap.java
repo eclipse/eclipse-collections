@@ -324,7 +324,7 @@ public abstract class AbstractMutableMultimap<K, V, C extends MutableCollection<
 
     public MutableMap<K, RichIterable<V>> toMap()
     {
-        final MutableMap<K, RichIterable<V>> result = (MutableMap<K, RichIterable<V>>) (MutableMap<?, ?>) this.map.newEmpty();
+        MutableMap<K, RichIterable<V>> result = (MutableMap<K, RichIterable<V>>) (MutableMap<?, ?>) this.map.newEmpty();
         this.map.forEachKeyValue((key, collection) -> {
             MutableCollection<V> mutableCollection = collection.newEmpty();
             mutableCollection.addAll(collection);
@@ -333,9 +333,9 @@ public abstract class AbstractMutableMultimap<K, V, C extends MutableCollection<
         return result;
     }
 
-    public <R extends Collection<V>> MutableMap<K, R> toMap(final Function0<R> collectionFactory)
+    public <R extends Collection<V>> MutableMap<K, R> toMap(Function0<R> collectionFactory)
     {
-        final MutableMap<K, R> result = (MutableMap<K, R>) this.createMapWithKeyCount(this.map.size());
+        MutableMap<K, R> result = (MutableMap<K, R>) this.createMapWithKeyCount(this.map.size());
         this.map.forEachKeyValue((key, collection) -> {
             R mutableCollection = collectionFactory.value();
             mutableCollection.addAll(collection);

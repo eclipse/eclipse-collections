@@ -2083,11 +2083,11 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
 
         public <K, V> MutableMap<K, V> aggregateInPlaceBy(
-                final Function<? super T, ? extends K> groupBy,
-                final Function0<? extends V> zeroValueFactory,
-                final Procedure2<? super V, ? super T> mutatingAggregator)
+                Function<? super T, ? extends K> groupBy,
+                Function0<? extends V> zeroValueFactory,
+                Procedure2<? super V, ? super T> mutatingAggregator)
         {
-            final MutableMap<K, V> map = UnifiedMap.newMap();
+            MutableMap<K, V> map = UnifiedMap.newMap();
             this.each(each -> {
                 K key = groupBy.valueOf(each);
                 V value = map.getIfAbsentPut(key, zeroValueFactory);
@@ -2097,11 +2097,11 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
 
         public <K, V> MutableMap<K, V> aggregateBy(
-                final Function<? super T, ? extends K> groupBy,
-                final Function0<? extends V> zeroValueFactory,
-                final Function2<? super V, ? super T, ? extends V> nonMutatingAggregator)
+                Function<? super T, ? extends K> groupBy,
+                Function0<? extends V> zeroValueFactory,
+                Function2<? super V, ? super T, ? extends V> nonMutatingAggregator)
         {
-            final MutableMap<K, V> map = UnifiedMap.newMap();
+            MutableMap<K, V> map = UnifiedMap.newMap();
             this.each(each -> {
                 K key = groupBy.valueOf(each);
                 V value = map.getIfAbsentPut(key, zeroValueFactory);

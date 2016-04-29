@@ -32,7 +32,7 @@ public class FlatCollectListBatch<T, V> extends AbstractBatch<V> implements List
         this.function = function;
     }
 
-    public void forEach(final Procedure<? super V> procedure)
+    public void forEach(Procedure<? super V> procedure)
     {
         this.batch.forEach(each -> Iterate.forEach(this.function.valueOf(each), procedure));
     }

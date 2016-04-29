@@ -50,7 +50,7 @@ class ParallelSelectUnsortedBag<T> extends AbstractParallelUnsortedBag<T, Unsort
         this.parallelIterable.forEach(new IfProcedure<>(this.predicate, procedure));
     }
 
-    public void forEachWithOccurrences(final ObjectIntProcedure<? super T> procedure)
+    public void forEachWithOccurrences(ObjectIntProcedure<? super T> procedure)
     {
         this.parallelIterable.forEachWithOccurrences((each, parameter) -> {
             if (this.predicate.accept(each))

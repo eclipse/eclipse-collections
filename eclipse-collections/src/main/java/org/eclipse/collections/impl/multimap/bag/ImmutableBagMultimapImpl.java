@@ -126,7 +126,7 @@ public final class ImmutableBagMultimapImpl<K, V>
             }
         }
 
-        public void writeExternal(final ObjectOutput out) throws IOException
+        public void writeExternal(ObjectOutput out) throws IOException
         {
             int keysCount = this.map.size();
             out.writeInt(keysCount);

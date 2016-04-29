@@ -108,7 +108,7 @@ public final class SynchronizedPutUnifiedSetMultimap<K, V>
 
     public ImmutableSetMultimap<K, V> toImmutable()
     {
-        final MutableMap<K, ImmutableSet<V>> map = UnifiedMap.newMap();
+        MutableMap<K, ImmutableSet<V>> map = UnifiedMap.newMap();
 
         this.map.forEachKeyValue((key, set) -> map.put(key, set.toImmutable()));
 

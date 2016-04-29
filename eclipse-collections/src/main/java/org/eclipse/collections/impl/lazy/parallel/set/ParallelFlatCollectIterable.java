@@ -61,14 +61,14 @@ public class ParallelFlatCollectIterable<T, V> extends AbstractParallelIterableI
         });
     }
 
-    public void forEach(final Procedure<? super V> procedure)
+    public void forEach(Procedure<? super V> procedure)
     {
         this.delegate.forEach(each -> Iterate.forEach(this.function.valueOf(each), procedure));
     }
 
-    public V detect(final Predicate<? super V> predicate)
+    public V detect(Predicate<? super V> predicate)
     {
-        final AtomicReference<V> result = new AtomicReference<>();
+        AtomicReference<V> result = new AtomicReference<>();
         this.delegate.anySatisfy(each -> Iterate.anySatisfy(this.function.valueOf(each), each1 -> {
             if (predicate.accept(each1))
             {
@@ -82,12 +82,12 @@ public class ParallelFlatCollectIterable<T, V> extends AbstractParallelIterableI
         return result.get();
     }
 
-    public boolean anySatisfy(final Predicate<? super V> predicate)
+    public boolean anySatisfy(Predicate<? super V> predicate)
     {
         return this.delegate.anySatisfy(each -> Iterate.anySatisfy(this.function.valueOf(each), predicate));
     }
 
-    public boolean allSatisfy(final Predicate<? super V> predicate)
+    public boolean allSatisfy(Predicate<? super V> predicate)
     {
         return this.delegate.allSatisfy(each -> Iterate.allSatisfy(this.function.valueOf(each), predicate));
     }

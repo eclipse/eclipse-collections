@@ -847,7 +847,7 @@ public abstract class Predicates<T>
             return "and";
         }
 
-        public boolean accept(final T anObject)
+        public boolean accept(T anObject)
         {
             Predicate<Predicate<? super T>> predicate = aPredicate -> aPredicate.accept(anObject);
             return Iterate.allSatisfy(this.predicates, predicate);
@@ -870,7 +870,7 @@ public abstract class Predicates<T>
             return "or";
         }
 
-        public boolean accept(final T anObject)
+        public boolean accept(T anObject)
         {
             Predicate<Predicate<? super T>> predicate = aPredicate -> aPredicate.accept(anObject);
             return Iterate.anySatisfy(this.predicates, predicate);
@@ -893,7 +893,7 @@ public abstract class Predicates<T>
             return "noneOf";
         }
 
-        public boolean accept(final T anObject)
+        public boolean accept(T anObject)
         {
             Predicate<Predicate<? super T>> predicate = aPredicate -> !aPredicate.accept(anObject);
             return Iterate.allSatisfy(this.predicates, predicate);

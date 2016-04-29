@@ -32,13 +32,13 @@ public class CollectBooleanToObjectIterable<V> extends AbstractLazyIterable<V>
         this.function = function;
     }
 
-    public void each(final Procedure<? super V> procedure)
+    public void each(Procedure<? super V> procedure)
     {
         this.iterable.forEach(each -> procedure.value(this.function.valueOf(each)));
     }
 
     @Override
-    public void forEachWithIndex(final ObjectIntProcedure<? super V> objectIntProcedure)
+    public void forEachWithIndex(ObjectIntProcedure<? super V> objectIntProcedure)
     {
         this.iterable.forEach(new BooleanProcedure()
         {
@@ -52,7 +52,7 @@ public class CollectBooleanToObjectIterable<V> extends AbstractLazyIterable<V>
     }
 
     @Override
-    public <P> void forEachWith(final Procedure2<? super V, ? super P> procedure, final P parameter)
+    public <P> void forEachWith(Procedure2<? super V, ? super P> procedure, P parameter)
     {
         this.iterable.forEach(each -> procedure.value(this.function.valueOf(each), parameter));
     }

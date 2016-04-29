@@ -117,7 +117,7 @@ public abstract class AbstractLazyIterable<T>
 
     public T getLast()
     {
-        final T[] result = (T[]) new Object[1];
+        T[] result = (T[]) new Object[1];
         this.each(each -> result[0] = each);
         return result[0];
     }

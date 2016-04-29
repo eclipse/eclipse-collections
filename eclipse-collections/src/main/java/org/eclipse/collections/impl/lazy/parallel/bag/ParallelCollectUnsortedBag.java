@@ -62,7 +62,7 @@ public class ParallelCollectUnsortedBag<T, V> extends AbstractParallelUnsortedBa
         this.parallelIterable.forEach(Functions.bind(procedure, this.function));
     }
 
-    public void forEachWithOccurrences(final ObjectIntProcedure<? super V> procedure)
+    public void forEachWithOccurrences(ObjectIntProcedure<? super V> procedure)
     {
         this.parallelIterable.forEachWithOccurrences((each, parameter) -> procedure.value(this.function.valueOf(each), parameter));
     }

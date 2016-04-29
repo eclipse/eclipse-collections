@@ -1680,10 +1680,10 @@ public final class ArrayIterate
      * @see Iterate#sumByBigDecimal(Iterable, Function, Function)
      * @since 6.0
      */
-    public static <V, T> MutableMap<V, BigDecimal> sumByBigDecimal(T[] array, Function<T, V> groupBy, final Function<? super T, BigDecimal> function)
+    public static <V, T> MutableMap<V, BigDecimal> sumByBigDecimal(T[] array, Function<T, V> groupBy, Function<? super T, BigDecimal> function)
     {
         MutableMap<V, BigDecimal> result = UnifiedMap.newMap();
-        for (final T each : array)
+        for (T each : array)
         {
             result.updateValue(groupBy.valueOf(each), Functions0.zeroBigDecimal(), original -> original.add(function.valueOf(each)));
         }
@@ -1694,10 +1694,10 @@ public final class ArrayIterate
      * @see Iterate#sumByBigInteger(Iterable, Function, Function)
      * @since 6.0
      */
-    public static <V, T> MutableMap<V, BigInteger> sumByBigInteger(T[] array, Function<T, V> groupBy, final Function<? super T, BigInteger> function)
+    public static <V, T> MutableMap<V, BigInteger> sumByBigInteger(T[] array, Function<T, V> groupBy, Function<? super T, BigInteger> function)
     {
         MutableMap<V, BigInteger> result = UnifiedMap.newMap();
-        for (final T each : array)
+        for (T each : array)
         {
             result.updateValue(groupBy.valueOf(each), Functions0.zeroBigInteger(), original -> original.add(function.valueOf(each)));
         }

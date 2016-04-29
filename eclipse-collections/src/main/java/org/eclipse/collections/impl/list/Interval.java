@@ -387,7 +387,7 @@ public final class Interval
     }
 
     @Override
-    public void forEachWithIndex(final ObjectIntProcedure<? super Integer> objectIntProcedure)
+    public void forEachWithIndex(ObjectIntProcedure<? super Integer> objectIntProcedure)
     {
         this.forEachWithIndex((IntIntProcedure) objectIntProcedure::value);
     }
@@ -416,7 +416,7 @@ public final class Interval
     }
 
     @Override
-    public <P> void forEachWith(final Procedure2<? super Integer, ? super P> procedure, P parameter)
+    public <P> void forEachWith(Procedure2<? super Integer, ? super P> procedure, P parameter)
     {
         this.forEachWith((IntObjectProcedure<P>) procedure::value, parameter);
     }
@@ -439,7 +439,7 @@ public final class Interval
         }
     }
 
-    public void each(final Procedure<? super Integer> procedure)
+    public void each(Procedure<? super Integer> procedure)
     {
         this.forEach((IntProcedure) procedure::value);
     }
@@ -478,10 +478,10 @@ public final class Interval
     }
 
     private void executeAndCountdown(
-            final Procedure<? super Integer> procedure,
+            Procedure<? super Integer> procedure,
             Executor executor,
-            final CountDownLatch latch,
-            final Integer integer)
+            CountDownLatch latch,
+            Integer integer)
     {
         executor.execute(() -> {
             try
@@ -757,7 +757,7 @@ public final class Interval
     @Override
     public Integer[] toArray()
     {
-        final Integer[] result = new Integer[this.size()];
+        Integer[] result = new Integer[this.size()];
         this.forEachWithIndex((ObjectIntProcedure<Integer>) (each, index) -> result[index] = each);
         return result;
     }
@@ -767,7 +767,7 @@ public final class Interval
      */
     public int[] toIntArray()
     {
-        final int[] result = new int[this.size()];
+        int[] result = new int[this.size()];
         this.forEachWithIndex((IntIntProcedure) (each, index) -> result[index] = each);
         return result;
     }

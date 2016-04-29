@@ -562,7 +562,7 @@ public final class IntInterval
 
     public int[] toArray()
     {
-        final int[] result = new int[this.size()];
+        int[] result = new int[this.size()];
         this.forEachWithIndex((each, index) -> result[index] = each);
         return result;
     }

@@ -311,65 +311,65 @@ public final class ArrayListAdapter<T>
     }
 
     @Override
-    public MutableBooleanList collectBoolean(final BooleanFunction<? super T> booleanFunction)
+    public MutableBooleanList collectBoolean(BooleanFunction<? super T> booleanFunction)
     {
-        final BooleanArrayList result = new BooleanArrayList(this.size());
+        BooleanArrayList result = new BooleanArrayList(this.size());
         this.each(each -> result.add(booleanFunction.booleanValueOf(each)));
         return result;
     }
 
     @Override
-    public MutableByteList collectByte(final ByteFunction<? super T> byteFunction)
+    public MutableByteList collectByte(ByteFunction<? super T> byteFunction)
     {
-        final ByteArrayList result = new ByteArrayList(this.size());
+        ByteArrayList result = new ByteArrayList(this.size());
         this.each(each -> result.add(byteFunction.byteValueOf(each)));
         return result;
     }
 
     @Override
-    public MutableCharList collectChar(final CharFunction<? super T> charFunction)
+    public MutableCharList collectChar(CharFunction<? super T> charFunction)
     {
-        final CharArrayList result = new CharArrayList(this.size());
+        CharArrayList result = new CharArrayList(this.size());
         this.each(each -> result.add(charFunction.charValueOf(each)));
         return result;
     }
 
     @Override
-    public MutableDoubleList collectDouble(final DoubleFunction<? super T> doubleFunction)
+    public MutableDoubleList collectDouble(DoubleFunction<? super T> doubleFunction)
     {
-        final DoubleArrayList result = new DoubleArrayList(this.size());
+        DoubleArrayList result = new DoubleArrayList(this.size());
         this.each(each -> result.add(doubleFunction.doubleValueOf(each)));
         return result;
     }
 
     @Override
-    public MutableFloatList collectFloat(final FloatFunction<? super T> floatFunction)
+    public MutableFloatList collectFloat(FloatFunction<? super T> floatFunction)
     {
-        final FloatArrayList result = new FloatArrayList(this.size());
+        FloatArrayList result = new FloatArrayList(this.size());
         this.each(each -> result.add(floatFunction.floatValueOf(each)));
         return result;
     }
 
     @Override
-    public MutableIntList collectInt(final IntFunction<? super T> intFunction)
+    public MutableIntList collectInt(IntFunction<? super T> intFunction)
     {
-        final IntArrayList result = new IntArrayList(this.size());
+        IntArrayList result = new IntArrayList(this.size());
         this.each(each -> result.add(intFunction.intValueOf(each)));
         return result;
     }
 
     @Override
-    public MutableLongList collectLong(final LongFunction<? super T> longFunction)
+    public MutableLongList collectLong(LongFunction<? super T> longFunction)
     {
-        final LongArrayList result = new LongArrayList(this.size());
+        LongArrayList result = new LongArrayList(this.size());
         this.each(each -> result.add(longFunction.longValueOf(each)));
         return result;
     }
 
     @Override
-    public MutableShortList collectShort(final ShortFunction<? super T> shortFunction)
+    public MutableShortList collectShort(ShortFunction<? super T> shortFunction)
     {
-        final ShortArrayList result = new ShortArrayList(this.size());
+        ShortArrayList result = new ShortArrayList(this.size());
         this.each(each -> result.add(shortFunction.shortValueOf(each)));
         return result;
     }

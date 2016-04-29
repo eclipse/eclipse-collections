@@ -1626,7 +1626,7 @@ public final class ParallelIterate
             this.function = function;
         }
 
-        public void value(final T each)
+        public void value(T each)
         {
             this.map.updateValue(this.groupBy.valueOf(each), Functions0.zeroBigDecimal(), original -> original.add(this.function.valueOf(each)));
         }
@@ -1677,7 +1677,7 @@ public final class ParallelIterate
             this.function = function;
         }
 
-        public void value(final T each)
+        public void value(T each)
         {
             this.map.updateValue(this.groupBy.valueOf(each), Functions0.zeroBigInteger(), original -> original.add(this.function.valueOf(each)));
         }

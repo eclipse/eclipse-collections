@@ -45,15 +45,15 @@ public final class CompositeIterable<E>
         return new CompositeIterable<>(FastList.newListWith(iterables));
     }
 
-    public void each(final Procedure<? super E> procedure)
+    public void each(Procedure<? super E> procedure)
     {
         this.iterables.each(iterable -> Iterate.forEach(iterable, procedure));
     }
 
     @Override
-    public void forEachWithIndex(final ObjectIntProcedure<? super E> objectIntProcedure)
+    public void forEachWithIndex(ObjectIntProcedure<? super E> objectIntProcedure)
     {
-        final Counter index = new Counter();
+        Counter index = new Counter();
         this.iterables.each(iterable -> Iterate.forEach(iterable, object -> {
             objectIntProcedure.value(object, index.getCount());
             index.increment();
@@ -61,25 +61,25 @@ public final class CompositeIterable<E>
     }
 
     @Override
-    public <P> void forEachWith(final Procedure2<? super E, ? super P> procedure, final P parameter)
+    public <P> void forEachWith(Procedure2<? super E, ? super P> procedure, P parameter)
     {
         this.iterables.each(iterable -> Iterate.forEachWith(iterable, procedure, parameter));
     }
 
     @Override
-    public boolean anySatisfy(final Predicate<? super E> predicate)
+    public boolean anySatisfy(Predicate<? super E> predicate)
     {
         return this.iterables.anySatisfy(each -> Iterate.anySatisfy(each, predicate));
     }
 
     @Override
-    public boolean allSatisfy(final Predicate<? super E> predicate)
+    public boolean allSatisfy(Predicate<? super E> predicate)
     {
         return this.iterables.allSatisfy(each -> Iterate.allSatisfy(each, predicate));
     }
 
     @Override
-    public boolean noneSatisfy(final Predicate<? super E> predicate)
+    public boolean noneSatisfy(Predicate<? super E> predicate)
     {
         return this.iterables.noneSatisfy(each -> Iterate.anySatisfy(each, predicate));
     }

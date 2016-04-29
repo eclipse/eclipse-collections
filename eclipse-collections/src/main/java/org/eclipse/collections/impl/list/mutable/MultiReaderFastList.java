@@ -951,12 +951,12 @@ public final class MultiReaderFastList<T>
         }
     }
 
-    public void reverseForEach(final Procedure<? super T> procedure)
+    public void reverseForEach(Procedure<? super T> procedure)
     {
         this.withReadLockRun(() -> this.getDelegate().reverseForEach(procedure));
     }
 
-    public void forEachWithIndex(final int fromIndex, final int toIndex, final ObjectIntProcedure<? super T> objectIntProcedure)
+    public void forEachWithIndex(int fromIndex, int toIndex, ObjectIntProcedure<? super T> objectIntProcedure)
     {
         this.withReadLockRun(() -> this.getDelegate().forEachWithIndex(fromIndex, toIndex, objectIntProcedure));
     }

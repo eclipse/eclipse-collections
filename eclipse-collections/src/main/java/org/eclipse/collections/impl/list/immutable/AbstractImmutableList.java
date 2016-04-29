@@ -197,9 +197,9 @@ abstract class AbstractImmutableList<T>
 
     public ImmutableList<T> newWithAll(Iterable<? extends T> elements)
     {
-        final int oldSize = this.size();
+        int oldSize = this.size();
         int newSize = Iterate.sizeOf(elements);
-        final T[] array = (T[]) new Object[oldSize + newSize];
+        T[] array = (T[]) new Object[oldSize + newSize];
         this.toArray(array);
         Iterate.forEachWithIndex(elements, new ObjectIntProcedure<T>()
         {

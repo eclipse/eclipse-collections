@@ -417,7 +417,7 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
     public boolean retainAll(ByteIterable source)
     {
         int oldSize = this.size();
-        final ByteSet sourceSet = source instanceof ByteSet ? (ByteSet) source : source.toSet();
+        ByteSet sourceSet = source instanceof ByteSet ? (ByteSet) source : source.toSet();
 
         ByteHashSet retained = this.select(sourceSet::contains);
         if (retained.size() != oldSize)
@@ -585,9 +585,9 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
         }
     }
 
-    public ByteHashSet select(final BytePredicate predicate)
+    public ByteHashSet select(BytePredicate predicate)
     {
-        final ByteHashSet result = new ByteHashSet();
+        ByteHashSet result = new ByteHashSet();
 
         this.forEach(value -> {
             if (predicate.accept(value))
@@ -599,9 +599,9 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
         return result;
     }
 
-    public MutableByteSet reject(final BytePredicate predicate)
+    public MutableByteSet reject(BytePredicate predicate)
     {
-        final MutableByteSet result = new ByteHashSet();
+        MutableByteSet result = new ByteHashSet();
 
         this.forEach(value -> {
             if (!predicate.accept(value))
@@ -613,9 +613,9 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
         return result;
     }
 
-    public <V> MutableSet<V> collect(final ByteToObjectFunction<? extends V> function)
+    public <V> MutableSet<V> collect(ByteToObjectFunction<? extends V> function)
     {
-        final MutableSet<V> target = UnifiedSet.newSet(this.size());
+        MutableSet<V> target = UnifiedSet.newSet(this.size());
 
         this.forEach(each -> target.add(function.valueOf(each)));
 
@@ -865,7 +865,7 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
                 this.bitGroup1, this.bitGroup2, this.size);
     }
 
-    public void writeExternal(final ObjectOutput out) throws IOException
+    public void writeExternal(ObjectOutput out) throws IOException
     {
         out.writeInt(this.size());
 
@@ -1145,9 +1145,9 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
             }
         }
 
-        public ImmutableByteSet select(final BytePredicate predicate)
+        public ImmutableByteSet select(BytePredicate predicate)
         {
-            final MutableByteSet result = new ByteHashSet();
+            MutableByteSet result = new ByteHashSet();
 
             this.forEach(value -> {
                 if (predicate.accept(value))
@@ -1159,9 +1159,9 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
             return result.toImmutable();
         }
 
-        public ImmutableByteSet reject(final BytePredicate predicate)
+        public ImmutableByteSet reject(BytePredicate predicate)
         {
-            final MutableByteSet result = new ByteHashSet();
+            MutableByteSet result = new ByteHashSet();
 
             this.forEach(value -> {
                 if (!predicate.accept(value))
@@ -1173,9 +1173,9 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
             return result.toImmutable();
         }
 
-        public <V> ImmutableSet<V> collect(final ByteToObjectFunction<? extends V> function)
+        public <V> ImmutableSet<V> collect(ByteToObjectFunction<? extends V> function)
         {
-            final MutableSet<V> target = UnifiedSet.newSet(this.size());
+            MutableSet<V> target = UnifiedSet.newSet(this.size());
 
             this.forEach(each -> target.add(function.valueOf(each)));
 

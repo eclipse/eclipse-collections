@@ -74,11 +74,11 @@ public abstract class AbstractBag<T>
         implements Collection<T>, Bag<T>
 {
     @Override
-    public <R extends Collection<T>> R select(final Predicate<? super T> predicate, final R target)
+    public <R extends Collection<T>> R select(Predicate<? super T> predicate, R target)
     {
         if (target instanceof MutableBagIterable<?>)
         {
-            final MutableBagIterable<T> targetBag = (MutableBagIterable<T>) target;
+            MutableBagIterable<T> targetBag = (MutableBagIterable<T>) target;
 
             this.forEachWithOccurrences((each, occurrences) -> {
                 if (predicate.accept(each))
@@ -104,13 +104,13 @@ public abstract class AbstractBag<T>
 
     @Override
     public <P, R extends Collection<T>> R selectWith(
-            final Predicate2<? super T, ? super P> predicate,
-            final P parameter,
-            final R target)
+            Predicate2<? super T, ? super P> predicate,
+            P parameter,
+            R target)
     {
         if (target instanceof MutableBagIterable<?>)
         {
-            final MutableBagIterable<T> targetBag = (MutableBagIterable<T>) target;
+            MutableBagIterable<T> targetBag = (MutableBagIterable<T>) target;
 
             this.forEachWithOccurrences((each, occurrences) -> {
                 if (predicate.accept(each, parameter))
@@ -135,11 +135,11 @@ public abstract class AbstractBag<T>
     }
 
     @Override
-    public <R extends Collection<T>> R reject(final Predicate<? super T> predicate, final R target)
+    public <R extends Collection<T>> R reject(Predicate<? super T> predicate, R target)
     {
         if (target instanceof MutableBagIterable<?>)
         {
-            final MutableBagIterable<T> targetBag = (MutableBagIterable<T>) target;
+            MutableBagIterable<T> targetBag = (MutableBagIterable<T>) target;
 
             this.forEachWithOccurrences((each, occurrences) -> {
                 if (!predicate.accept(each))
@@ -165,13 +165,13 @@ public abstract class AbstractBag<T>
 
     @Override
     public <P, R extends Collection<T>> R rejectWith(
-            final Predicate2<? super T, ? super P> predicate,
-            final P parameter,
-            final R target)
+            Predicate2<? super T, ? super P> predicate,
+            P parameter,
+            R target)
     {
         if (target instanceof MutableBagIterable<?>)
         {
-            final MutableBagIterable<T> targetBag = (MutableBagIterable<T>) target;
+            MutableBagIterable<T> targetBag = (MutableBagIterable<T>) target;
 
             this.forEachWithOccurrences((each, occurrences) -> {
                 if (!predicate.accept(each, parameter))
@@ -196,9 +196,9 @@ public abstract class AbstractBag<T>
     }
 
     @Override
-    public int count(final Predicate<? super T> predicate)
+    public int count(Predicate<? super T> predicate)
     {
-        final Counter result = new Counter();
+        Counter result = new Counter();
         this.forEachWithOccurrences((each, occurrences) -> {
             if (predicate.accept(each))
             {
@@ -209,11 +209,11 @@ public abstract class AbstractBag<T>
     }
 
     @Override
-    public <V, R extends Collection<V>> R collect(final Function<? super T, ? extends V> function, final R target)
+    public <V, R extends Collection<V>> R collect(Function<? super T, ? extends V> function, R target)
     {
         if (target instanceof MutableBagIterable<?>)
         {
-            final MutableBagIterable<V> targetBag = (MutableBagIterable<V>) target;
+            MutableBagIterable<V> targetBag = (MutableBagIterable<V>) target;
 
             this.forEachWithOccurrences((each, occurrences) -> targetBag.addOccurrences(function.valueOf(each), occurrences));
         }
@@ -232,13 +232,13 @@ public abstract class AbstractBag<T>
 
     @Override
     public <P, V, R extends Collection<V>> R collectWith(
-            final Function2<? super T, ? super P, ? extends V> function,
-            final P parameter,
-            final R target)
+            Function2<? super T, ? super P, ? extends V> function,
+            P parameter,
+            R target)
     {
         if (target instanceof MutableBagIterable<?>)
         {
-            final MutableBagIterable<V> targetBag = (MutableBagIterable<V>) target;
+            MutableBagIterable<V> targetBag = (MutableBagIterable<V>) target;
 
             this.forEachWithOccurrences((each, occurrences) -> targetBag.addOccurrences(function.value(each, parameter), occurrences));
         }
@@ -257,13 +257,13 @@ public abstract class AbstractBag<T>
 
     @Override
     public <V, R extends Collection<V>> R collectIf(
-            final Predicate<? super T> predicate,
-            final Function<? super T, ? extends V> function,
-            final R target)
+            Predicate<? super T> predicate,
+            Function<? super T, ? extends V> function,
+            R target)
     {
         if (target instanceof MutableBagIterable<?>)
         {
-            final MutableBagIterable<V> targetBag = (MutableBagIterable<V>) target;
+            MutableBagIterable<V> targetBag = (MutableBagIterable<V>) target;
 
             this.forEachWithOccurrences((each, occurrences) -> {
                 if (predicate.accept(each))
@@ -289,11 +289,11 @@ public abstract class AbstractBag<T>
     }
 
     @Override
-    public <V, R extends Collection<V>> R flatCollect(final Function<? super T, ? extends Iterable<V>> function, final R target)
+    public <V, R extends Collection<V>> R flatCollect(Function<? super T, ? extends Iterable<V>> function, R target)
     {
         if (target instanceof MutableBagIterable<?>)
         {
-            final MutableBagIterable<V> targetBag = (MutableBagIterable<V>) target;
+            MutableBagIterable<V> targetBag = (MutableBagIterable<V>) target;
 
             this.forEachWithOccurrences((each, occurrences) -> {
                 Iterable<V> values = function.valueOf(each);
@@ -314,11 +314,11 @@ public abstract class AbstractBag<T>
     }
 
     @Override
-    public <R extends MutableBooleanCollection> R collectBoolean(final BooleanFunction<? super T> booleanFunction, final R target)
+    public <R extends MutableBooleanCollection> R collectBoolean(BooleanFunction<? super T> booleanFunction, R target)
     {
         if (target instanceof MutableBooleanBag)
         {
-            final MutableBooleanBag targetBag = (MutableBooleanBag) target;
+            MutableBooleanBag targetBag = (MutableBooleanBag) target;
             this.forEachWithOccurrences((each, occurrences) -> targetBag.addOccurrences(booleanFunction.booleanValueOf(each), occurrences));
         }
         else
@@ -335,11 +335,11 @@ public abstract class AbstractBag<T>
     }
 
     @Override
-    public <R extends MutableByteCollection> R collectByte(final ByteFunction<? super T> byteFunction, final R target)
+    public <R extends MutableByteCollection> R collectByte(ByteFunction<? super T> byteFunction, R target)
     {
         if (target instanceof MutableByteBag)
         {
-            final MutableByteBag targetBag = (MutableByteBag) target;
+            MutableByteBag targetBag = (MutableByteBag) target;
             this.forEachWithOccurrences((each, occurrences) -> targetBag.addOccurrences(byteFunction.byteValueOf(each), occurrences));
         }
         else
@@ -356,11 +356,11 @@ public abstract class AbstractBag<T>
     }
 
     @Override
-    public <R extends MutableCharCollection> R collectChar(final CharFunction<? super T> charFunction, final R target)
+    public <R extends MutableCharCollection> R collectChar(CharFunction<? super T> charFunction, R target)
     {
         if (target instanceof MutableCharBag)
         {
-            final MutableCharBag targetBag = (MutableCharBag) target;
+            MutableCharBag targetBag = (MutableCharBag) target;
             this.forEachWithOccurrences((each, occurrences) -> targetBag.addOccurrences(charFunction.charValueOf(each), occurrences));
         }
         else
@@ -377,11 +377,11 @@ public abstract class AbstractBag<T>
     }
 
     @Override
-    public <R extends MutableDoubleCollection> R collectDouble(final DoubleFunction<? super T> doubleFunction, final R target)
+    public <R extends MutableDoubleCollection> R collectDouble(DoubleFunction<? super T> doubleFunction, R target)
     {
         if (target instanceof MutableDoubleBag)
         {
-            final MutableDoubleBag targetBag = (MutableDoubleBag) target;
+            MutableDoubleBag targetBag = (MutableDoubleBag) target;
             this.forEachWithOccurrences((each, occurrences) -> targetBag.addOccurrences(doubleFunction.doubleValueOf(each), occurrences));
         }
         else
@@ -398,11 +398,11 @@ public abstract class AbstractBag<T>
     }
 
     @Override
-    public <R extends MutableFloatCollection> R collectFloat(final FloatFunction<? super T> floatFunction, final R target)
+    public <R extends MutableFloatCollection> R collectFloat(FloatFunction<? super T> floatFunction, R target)
     {
         if (target instanceof MutableFloatBag)
         {
-            final MutableFloatBag targetBag = (MutableFloatBag) target;
+            MutableFloatBag targetBag = (MutableFloatBag) target;
             this.forEachWithOccurrences((each, occurrences) -> targetBag.addOccurrences(floatFunction.floatValueOf(each), occurrences));
         }
         else
@@ -419,11 +419,11 @@ public abstract class AbstractBag<T>
     }
 
     @Override
-    public <R extends MutableIntCollection> R collectInt(final IntFunction<? super T> intFunction, final R target)
+    public <R extends MutableIntCollection> R collectInt(IntFunction<? super T> intFunction, R target)
     {
         if (target instanceof MutableIntBag)
         {
-            final MutableIntBag targetBag = (MutableIntBag) target;
+            MutableIntBag targetBag = (MutableIntBag) target;
             this.forEachWithOccurrences((each, occurrences) -> targetBag.addOccurrences(intFunction.intValueOf(each), occurrences));
         }
         else
@@ -440,11 +440,11 @@ public abstract class AbstractBag<T>
     }
 
     @Override
-    public <R extends MutableLongCollection> R collectLong(final LongFunction<? super T> longFunction, final R target)
+    public <R extends MutableLongCollection> R collectLong(LongFunction<? super T> longFunction, R target)
     {
         if (target instanceof MutableLongBag)
         {
-            final MutableLongBag targetBag = (MutableLongBag) target;
+            MutableLongBag targetBag = (MutableLongBag) target;
             this.forEachWithOccurrences((each, occurrences) -> targetBag.addOccurrences(longFunction.longValueOf(each), occurrences));
         }
         else
@@ -461,11 +461,11 @@ public abstract class AbstractBag<T>
     }
 
     @Override
-    public <R extends MutableShortCollection> R collectShort(final ShortFunction<? super T> shortFunction, final R target)
+    public <R extends MutableShortCollection> R collectShort(ShortFunction<? super T> shortFunction, R target)
     {
         if (target instanceof MutableShortBag)
         {
-            final MutableShortBag targetBag = (MutableShortBag) target;
+            MutableShortBag targetBag = (MutableShortBag) target;
             this.forEachWithOccurrences((each, occurrences) -> targetBag.addOccurrences(shortFunction.shortValueOf(each), occurrences));
         }
         else
@@ -483,8 +483,8 @@ public abstract class AbstractBag<T>
 
     @Override
     public <V, R extends MutableMultimap<V, T>> R groupBy(
-            final Function<? super T, ? extends V> function,
-            final R target)
+            Function<? super T, ? extends V> function,
+            R target)
     {
         this.forEachWithOccurrences((each, occurrences) -> {
             V value = function.valueOf(each);
@@ -495,8 +495,8 @@ public abstract class AbstractBag<T>
 
     @Override
     public <V, R extends MutableMultimap<V, T>> R groupByEach(
-            final Function<? super T, ? extends Iterable<V>> function,
-            final R target)
+            Function<? super T, ? extends Iterable<V>> function,
+            R target)
     {
         this.forEachWithOccurrences((each, occurrences) -> {
             Iterable<V> values = function.valueOf(each);
@@ -506,9 +506,9 @@ public abstract class AbstractBag<T>
     }
 
     @Override
-    public long sumOfInt(final IntFunction<? super T> function)
+    public long sumOfInt(IntFunction<? super T> function)
     {
-        final long[] sum = {0L};
+        long[] sum = {0L};
         this.forEachWithOccurrences((each, occurrences) -> {
             int intValue = function.intValueOf(each);
             sum[0] += (long) intValue * (long) occurrences;
@@ -517,10 +517,10 @@ public abstract class AbstractBag<T>
     }
 
     @Override
-    public double sumOfFloat(final FloatFunction<? super T> function)
+    public double sumOfFloat(FloatFunction<? super T> function)
     {
-        final double[] sum = {0.0d};
-        final double[] compensation = {0.0d};
+        double[] sum = {0.0d};
+        double[] compensation = {0.0d};
         this.forEachWithOccurrences((each, occurrences) -> {
             float f = function.floatValueOf(each);
             for (int i = 0; i < occurrences; i++)
@@ -535,9 +535,9 @@ public abstract class AbstractBag<T>
     }
 
     @Override
-    public long sumOfLong(final LongFunction<? super T> function)
+    public long sumOfLong(LongFunction<? super T> function)
     {
-        final long[] sum = {0L};
+        long[] sum = {0L};
         this.forEachWithOccurrences((each, occurrences) -> {
             long longValue = function.longValueOf(each);
             sum[0] += longValue * (long) occurrences;
@@ -546,10 +546,10 @@ public abstract class AbstractBag<T>
     }
 
     @Override
-    public double sumOfDouble(final DoubleFunction<? super T> function)
+    public double sumOfDouble(DoubleFunction<? super T> function)
     {
-        final double[] sum = {0.0d};
-        final double[] compensation = {0.0d};
+        double[] sum = {0.0d};
+        double[] compensation = {0.0d};
         this.forEachWithOccurrences((each, occurrences) -> {
             double d = function.doubleValueOf(each);
             for (int i = 0; i < occurrences; i++)
@@ -564,9 +564,9 @@ public abstract class AbstractBag<T>
     }
 
     @Override
-    public <IV> IV injectInto(IV injectedValue, final Function2<? super IV, ? super T, ? extends IV> function)
+    public <IV> IV injectInto(IV injectedValue, Function2<? super IV, ? super T, ? extends IV> function)
     {
-        final IV[] result = (IV[]) new Object[]{injectedValue};
+        IV[] result = (IV[]) new Object[]{injectedValue};
         this.forEachWithOccurrences((each, occurrences) -> {
             for (int i = 0; i < occurrences; i++)
             {
@@ -577,9 +577,9 @@ public abstract class AbstractBag<T>
     }
 
     @Override
-    public int injectInto(int injectedValue, final IntObjectToIntFunction<? super T> function)
+    public int injectInto(int injectedValue, IntObjectToIntFunction<? super T> function)
     {
-        final int[] result = {injectedValue};
+        int[] result = {injectedValue};
         this.forEachWithOccurrences((each, occurrences) -> {
             for (int i = 0; i < occurrences; i++)
             {
@@ -590,9 +590,9 @@ public abstract class AbstractBag<T>
     }
 
     @Override
-    public long injectInto(long injectedValue, final LongObjectToLongFunction<? super T> function)
+    public long injectInto(long injectedValue, LongObjectToLongFunction<? super T> function)
     {
-        final long[] result = {injectedValue};
+        long[] result = {injectedValue};
         this.forEachWithOccurrences((each, occurrences) -> {
             for (int i = 0; i < occurrences; i++)
             {
@@ -603,9 +603,9 @@ public abstract class AbstractBag<T>
     }
 
     @Override
-    public double injectInto(double injectedValue, final DoubleObjectToDoubleFunction<? super T> function)
+    public double injectInto(double injectedValue, DoubleObjectToDoubleFunction<? super T> function)
     {
-        final double[] result = {injectedValue};
+        double[] result = {injectedValue};
         this.forEachWithOccurrences((each, occurrences) -> {
             for (int i = 0; i < occurrences; i++)
             {
@@ -616,9 +616,9 @@ public abstract class AbstractBag<T>
     }
 
     @Override
-    public float injectInto(float injectedValue, final FloatObjectToFloatFunction<? super T> function)
+    public float injectInto(float injectedValue, FloatObjectToFloatFunction<? super T> function)
     {
-        final float[] result = {injectedValue};
+        float[] result = {injectedValue};
         this.forEachWithOccurrences((each, occurrences) -> {
             for (int i = 0; i < occurrences; i++)
             {
@@ -628,9 +628,9 @@ public abstract class AbstractBag<T>
         return result[0];
     }
 
-    public <IV, P> IV injectIntoWith(IV injectedValue, final Function3<? super IV, ? super T, ? super P, ? extends IV> function, final P parameter)
+    public <IV, P> IV injectIntoWith(IV injectedValue, Function3<? super IV, ? super T, ? super P, ? extends IV> function, P parameter)
     {
-        final IV[] result = (IV[]) new Object[]{injectedValue};
+        IV[] result = (IV[]) new Object[]{injectedValue};
         this.forEachWithOccurrences((each, occurrences) -> {
             for (int i = 0; i < occurrences; i++)
             {
@@ -646,7 +646,7 @@ public abstract class AbstractBag<T>
         {
             return "{}";
         }
-        final StringBuilder builder = new StringBuilder().append('{');
+        StringBuilder builder = new StringBuilder().append('{');
         this.forEachWithOccurrences((each, occurrences) -> {
             builder.append(each);
             builder.append('=');
@@ -660,7 +660,7 @@ public abstract class AbstractBag<T>
 
     protected MutableList<ObjectIntPair<T>> toListWithOccurrences()
     {
-        final MutableList<ObjectIntPair<T>> result = FastList.newList(this.sizeDistinct());
+        MutableList<ObjectIntPair<T>> result = FastList.newList(this.sizeDistinct());
         this.forEachWithOccurrences((each, count) -> result.add(PrimitiveTuples.pair(each, count)));
         return result;
     }
@@ -668,7 +668,7 @@ public abstract class AbstractBag<T>
     @Override
     public MutableList<T> toList()
     {
-        final MutableList<T> result = FastList.newList(this.size());
+        MutableList<T> result = FastList.newList(this.size());
         this.forEachWithOccurrences((each, occurrences) -> {
             for (int i = 0; i < occurrences; i++)
             {
@@ -679,11 +679,11 @@ public abstract class AbstractBag<T>
     }
 
     @Override
-    public MutableList<T> toSortedList(final Comparator<? super T> comparator)
+    public MutableList<T> toSortedList(Comparator<? super T> comparator)
     {
         MutableList<ObjectIntPair<T>> sorted = this.toListWithOccurrences().sortThis((o1, o2) -> comparator.compare(o1.getOne(), o2.getOne()));
 
-        final MutableList<T> result = FastList.newList(this.size());
+        MutableList<T> result = FastList.newList(this.size());
         sorted.each(each -> {
             T object = each.getOne();
             int occurrences = each.getTwo();
@@ -698,7 +698,7 @@ public abstract class AbstractBag<T>
     @Override
     public MutableSet<T> toSet()
     {
-        final MutableSet<T> result = UnifiedSet.newSet(this.sizeDistinct());
+        MutableSet<T> result = UnifiedSet.newSet(this.sizeDistinct());
         this.forEachWithOccurrences((each, occurrences) -> result.add(each));
         return result;
     }
@@ -706,7 +706,7 @@ public abstract class AbstractBag<T>
     @Override
     public MutableSortedSet<T> toSortedSet()
     {
-        final MutableSortedSet<T> result = SortedSets.mutable.empty();
+        MutableSortedSet<T> result = SortedSets.mutable.empty();
         this.forEachWithOccurrences((each, occurrences) -> result.add(each));
         return result;
     }
@@ -714,7 +714,7 @@ public abstract class AbstractBag<T>
     @Override
     public MutableSortedSet<T> toSortedSet(Comparator<? super T> comparator)
     {
-        final MutableSortedSet<T> result = SortedSets.mutable.with(comparator);
+        MutableSortedSet<T> result = SortedSets.mutable.with(comparator);
         this.forEachWithOccurrences((each, occurrences) -> result.add(each));
         return result;
     }
@@ -722,7 +722,7 @@ public abstract class AbstractBag<T>
     @Override
     public MutableBag<T> toBag()
     {
-        final MutableBag<T> result = HashBag.newBag(this.sizeDistinct());
+        MutableBag<T> result = HashBag.newBag(this.sizeDistinct());
         this.forEachWithOccurrences(result::addOccurrences);
         return result;
     }
@@ -730,7 +730,7 @@ public abstract class AbstractBag<T>
     @Override
     public MutableSortedBag<T> toSortedBag()
     {
-        final MutableSortedBag<T> result = TreeBag.newBag();
+        MutableSortedBag<T> result = TreeBag.newBag();
         this.forEachWithOccurrences(result::addOccurrences);
         return result;
     }
@@ -738,7 +738,7 @@ public abstract class AbstractBag<T>
     @Override
     public MutableSortedBag<T> toSortedBag(Comparator<? super T> comparator)
     {
-        final MutableSortedBag<T> result = TreeBag.newBag(comparator);
+        MutableSortedBag<T> result = TreeBag.newBag(comparator);
         this.forEachWithOccurrences(result::addOccurrences);
         return result;
     }

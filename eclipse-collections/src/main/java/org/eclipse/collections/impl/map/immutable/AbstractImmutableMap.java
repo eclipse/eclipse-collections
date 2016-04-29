@@ -139,7 +139,7 @@ public abstract class AbstractImmutableMap<K, V>
 
     public Set<Entry<K, V>> entrySet()
     {
-        final MutableSet<Entry<K, V>> set = UnifiedSet.newSet(this.size());
+        MutableSet<Entry<K, V>> set = UnifiedSet.newSet(this.size());
         this.forEachKeyValue((key, value) -> set.add(ImmutableEntry.of(key, value)));
         return set.toImmutable().castToSet();
     }

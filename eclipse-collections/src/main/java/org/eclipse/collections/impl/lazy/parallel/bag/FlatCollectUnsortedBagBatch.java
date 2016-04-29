@@ -31,7 +31,7 @@ public class FlatCollectUnsortedBagBatch<T, V> extends AbstractBatch<V> implemen
         this.function = function;
     }
 
-    public void forEach(final Procedure<? super V> procedure)
+    public void forEach(Procedure<? super V> procedure)
     {
         this.unsortedBagBatch.forEach(each -> Iterate.forEach(this.function.valueOf(each), procedure::value));
     }

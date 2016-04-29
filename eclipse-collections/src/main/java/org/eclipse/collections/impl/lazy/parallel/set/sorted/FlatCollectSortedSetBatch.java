@@ -36,7 +36,7 @@ public class FlatCollectSortedSetBatch<T, V> extends AbstractBatch<V> implements
         this.function = function;
     }
 
-    public void forEach(final Procedure<? super V> procedure)
+    public void forEach(Procedure<? super V> procedure)
     {
         this.sortedSetBatch.forEach(each -> Iterate.forEach(this.function.valueOf(each), procedure));
     }

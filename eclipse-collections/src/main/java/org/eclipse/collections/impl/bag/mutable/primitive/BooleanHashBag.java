@@ -450,9 +450,9 @@ public final class BooleanHashBag implements MutableBooleanBag, Externalizable
         }
     }
 
-    public MutableBooleanBag select(final BooleanPredicate predicate)
+    public MutableBooleanBag select(BooleanPredicate predicate)
     {
-        final MutableBooleanBag result = new BooleanHashBag();
+        MutableBooleanBag result = new BooleanHashBag();
         this.forEachWithOccurrences((each, occurrences) -> {
             if (predicate.accept(each))
             {
@@ -462,9 +462,9 @@ public final class BooleanHashBag implements MutableBooleanBag, Externalizable
         return result;
     }
 
-    public MutableBooleanBag reject(final BooleanPredicate predicate)
+    public MutableBooleanBag reject(BooleanPredicate predicate)
     {
-        final MutableBooleanBag result = new BooleanHashBag();
+        MutableBooleanBag result = new BooleanHashBag();
         this.forEachWithOccurrences((each, occurrences) -> {
             if (!predicate.accept(each))
             {
@@ -652,8 +652,8 @@ public final class BooleanHashBag implements MutableBooleanBag, Externalizable
 
     public boolean[] toArray()
     {
-        final boolean[] array = new boolean[this.size()];
-        final int[] index = {0};
+        boolean[] array = new boolean[this.size()];
+        int[] index = {0};
 
         this.forEachWithOccurrences((each, occurrences) -> {
             for (int i = 0; i < occurrences; i++)

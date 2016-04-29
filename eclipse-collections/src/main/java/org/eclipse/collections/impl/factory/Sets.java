@@ -269,7 +269,7 @@ public final class Sets
         return Iterate.injectInto(seed, set, (accumulator, element) -> Sets.union(accumulator, accumulator.collect(innerSet -> innerSet.toSet().with(element))));
     }
 
-    public static <A, B> LazyIterable<Pair<A, B>> cartesianProduct(Set<A> set1, final Set<B> set2)
+    public static <A, B> LazyIterable<Pair<A, B>> cartesianProduct(Set<A> set1, Set<B> set2)
     {
         return LazyIterate.flatCollect(set1, first -> LazyIterate.collect(set2, second -> Tuples.pair(first, second)));
     }

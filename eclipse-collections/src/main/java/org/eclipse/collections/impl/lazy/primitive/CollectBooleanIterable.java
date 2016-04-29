@@ -95,25 +95,25 @@ public class CollectBooleanIterable<T>
     }
 
     @Override
-    public int count(final BooleanPredicate predicate)
+    public int count(BooleanPredicate predicate)
     {
         return this.iterable.count(each -> predicate.accept(this.function.booleanValueOf(each)));
     }
 
     @Override
-    public boolean anySatisfy(final BooleanPredicate predicate)
+    public boolean anySatisfy(BooleanPredicate predicate)
     {
         return this.iterable.anySatisfy(each -> predicate.accept(this.function.booleanValueOf(each)));
     }
 
     @Override
-    public boolean allSatisfy(final BooleanPredicate predicate)
+    public boolean allSatisfy(BooleanPredicate predicate)
     {
         return this.iterable.allSatisfy(each -> predicate.accept(this.function.booleanValueOf(each)));
     }
 
     @Override
-    public boolean noneSatisfy(final BooleanPredicate predicate)
+    public boolean noneSatisfy(BooleanPredicate predicate)
     {
         return this.iterable.allSatisfy(each -> !predicate.accept(this.function.booleanValueOf(each)));
     }
@@ -121,7 +121,7 @@ public class CollectBooleanIterable<T>
     @Override
     public boolean[] toArray()
     {
-        final boolean[] array = new boolean[this.size()];
+        boolean[] array = new boolean[this.size()];
         this.iterable.forEachWithIndex((each, index) -> array[index] = this.function.booleanValueOf(each));
         return array;
     }

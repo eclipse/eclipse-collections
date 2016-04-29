@@ -889,7 +889,7 @@ public final class Iterate
     /**
      * SortThis is a mutating method.  The List passed in is also returned.
      */
-    public static <T, L extends List<T>> L sortThis(L list, final Predicate2<? super T, ? super T> predicate)
+    public static <T, L extends List<T>> L sortThis(L list, Predicate2<? super T, ? super T> predicate)
     {
         return Iterate.sortThis(list, (Comparator<T>) (o1, o2) -> {
             if (predicate.accept(o1, o2))
@@ -3675,7 +3675,7 @@ public final class Iterate
      */
     public static <K, V> HashBagMultimap<V, K> flip(BagMultimap<K, V> bagMultimap)
     {
-        final HashBagMultimap<V, K> result = new HashBagMultimap<>();
+        HashBagMultimap<V, K> result = new HashBagMultimap<>();
         bagMultimap.forEachKeyMultiValues((key, values) -> Iterate.forEach(values, value -> result.put(value, key)));
         return result;
     }
@@ -3685,7 +3685,7 @@ public final class Iterate
      */
     public static <K, V> HashBagMultimap<V, K> flip(ListMultimap<K, V> listMultimap)
     {
-        final HashBagMultimap<V, K> result = new HashBagMultimap<>();
+        HashBagMultimap<V, K> result = new HashBagMultimap<>();
         listMultimap.forEachKeyMultiValues((key, values) -> Iterate.forEach(values, value -> result.put(value, key)));
         return result;
     }
@@ -3695,7 +3695,7 @@ public final class Iterate
      */
     public static <K, V> UnifiedSetMultimap<V, K> flip(SetMultimap<K, V> setMultimap)
     {
-        final UnifiedSetMultimap<V, K> result = new UnifiedSetMultimap<>();
+        UnifiedSetMultimap<V, K> result = new UnifiedSetMultimap<>();
         setMultimap.forEachKeyMultiValues((key, values) -> Iterate.forEach(values, value -> result.put(value, key)));
         return result;
     }

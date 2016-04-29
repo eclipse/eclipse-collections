@@ -35,7 +35,7 @@ class HashBagWithHashingStrategySerializationProxy<T> implements Externalizable
         this.bagWithHashingStrategy = bagWithHashingStrategy;
     }
 
-    public void writeExternal(final ObjectOutput out) throws IOException
+    public void writeExternal(ObjectOutput out) throws IOException
     {
         out.writeObject(this.bagWithHashingStrategy.hashingStrategy());
         out.writeInt(this.bagWithHashingStrategy.sizeDistinct());

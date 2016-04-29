@@ -1308,7 +1308,7 @@ public class ObjectBooleanHashMap<K> implements MutableObjectBooleanMap<K>, Exte
         public boolean retainAll(BooleanIterable source)
         {
             int oldSize = ObjectBooleanHashMap.this.size();
-            final BooleanSet sourceSet = source instanceof BooleanSet ? (BooleanSet) source : source.toSet();
+            BooleanSet sourceSet = source instanceof BooleanSet ? (BooleanSet) source : source.toSet();
             ObjectBooleanHashMap<K> retained = ObjectBooleanHashMap.this.select((object, value) -> sourceSet.contains(value));
             if (retained.size() != oldSize)
             {

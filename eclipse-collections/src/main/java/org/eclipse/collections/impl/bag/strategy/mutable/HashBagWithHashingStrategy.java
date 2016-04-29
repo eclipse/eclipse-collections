@@ -102,7 +102,7 @@ public class HashBagWithHashingStrategy<T>
     }
 
     @Override
-    public MutableBag<T> selectByOccurrences(final IntPredicate predicate)
+    public MutableBag<T> selectByOccurrences(IntPredicate predicate)
     {
         MutableObjectIntMap<T> map = this.items.select((each, occurrences) -> {
             return predicate.accept(occurrences);

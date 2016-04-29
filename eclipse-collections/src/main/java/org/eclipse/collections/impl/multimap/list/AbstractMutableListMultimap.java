@@ -50,7 +50,7 @@ public abstract class AbstractMutableListMultimap<K, V> extends AbstractMutableM
 
     public ImmutableListMultimap<K, V> toImmutable()
     {
-        final MutableMap<K, ImmutableList<V>> map = UnifiedMap.newMap();
+        MutableMap<K, ImmutableList<V>> map = UnifiedMap.newMap();
 
         this.map.forEachKeyValue((key, list) -> map.put(key, list.toImmutable()));
 

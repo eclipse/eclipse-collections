@@ -870,7 +870,7 @@ public abstract class AbstractMutableList<T>
         }
 
         @Override
-        public ListIterator<T> listIterator(final int index)
+        public ListIterator<T> listIterator(int index)
         {
             if (index < 0 || index > this.size)
             {

@@ -37,7 +37,7 @@ public class FlatCollectIterable<T, V>
         this.function = function;
     }
 
-    public void each(final Procedure<? super V> procedure)
+    public void each(Procedure<? super V> procedure)
     {
         Iterate.forEach(this.adapted, each -> Iterate.forEach(this.function.valueOf(each), procedure));
     }
@@ -45,7 +45,7 @@ public class FlatCollectIterable<T, V>
     @Override
     public void forEachWithIndex(ObjectIntProcedure<? super V> objectIntProcedure)
     {
-        final Procedure<V> innerProcedure = new AdaptObjectIntProcedureToProcedure<>(objectIntProcedure);
+        Procedure<V> innerProcedure = new AdaptObjectIntProcedureToProcedure<>(objectIntProcedure);
         Iterate.forEach(this.adapted, each -> {
             Iterable<V> iterable = this.function.valueOf(each);
             Iterate.forEach(iterable, innerProcedure);
@@ -53,15 +53,15 @@ public class FlatCollectIterable<T, V>
     }
 
     @Override
-    public <P> void forEachWith(final Procedure2<? super V, ? super P> procedure, final P parameter)
+    public <P> void forEachWith(Procedure2<? super V, ? super P> procedure, P parameter)
     {
         Iterate.forEach(this.adapted, each -> Iterate.forEachWith(this.function.valueOf(each), procedure, parameter));
     }
 
     @Override
-    public V detect(final Predicate<? super V> predicate)
+    public V detect(Predicate<? super V> predicate)
     {
-        final V[] result = (V[]) new Object[1];
+        V[] result = (V[]) new Object[1];
         Iterate.detect(this.adapted, each -> {
             Iterable<V> iterable = this.function.valueOf(each);
             return Iterate.anySatisfy(iterable, each1 -> {
@@ -77,7 +77,7 @@ public class FlatCollectIterable<T, V>
     }
 
     @Override
-    public boolean anySatisfy(final Predicate<? super V> predicate)
+    public boolean anySatisfy(Predicate<? super V> predicate)
     {
         return Iterate.anySatisfy(this.adapted, each -> Iterate.anySatisfy(this.function.valueOf(each), predicate));
     }
@@ -89,7 +89,7 @@ public class FlatCollectIterable<T, V>
     }
 
     @Override
-    public boolean allSatisfy(final Predicate<? super V> predicate)
+    public boolean allSatisfy(Predicate<? super V> predicate)
     {
         return Iterate.allSatisfy(this.adapted, each -> Iterate.allSatisfy(this.function.valueOf(each), predicate));
     }
@@ -101,7 +101,7 @@ public class FlatCollectIterable<T, V>
     }
 
     @Override
-    public boolean noneSatisfy(final Predicate<? super V> predicate)
+    public boolean noneSatisfy(Predicate<? super V> predicate)
     {
         return Iterate.noneSatisfy(this.adapted, each -> Iterate.anySatisfy(this.function.valueOf(each), predicate));
     }

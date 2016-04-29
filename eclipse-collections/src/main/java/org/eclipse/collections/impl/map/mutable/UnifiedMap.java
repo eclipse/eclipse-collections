@@ -1386,7 +1386,7 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
     @Override
     public String toString()
     {
-        final StringBuilder builder = new StringBuilder();
+        StringBuilder builder = new StringBuilder();
         builder.append('{');
 
         this.forEachKeyValue(new Procedure2<K, V>()

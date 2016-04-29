@@ -427,9 +427,9 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
         return this;
     }
 
-    public HashBiMap<K, V> select(final Predicate2<? super K, ? super V> predicate)
+    public HashBiMap<K, V> select(Predicate2<? super K, ? super V> predicate)
     {
-        final HashBiMap<K, V> result = HashBiMap.newMap();
+        HashBiMap<K, V> result = HashBiMap.newMap();
         this.delegate.forEachKeyValue((key, value) -> {
             if (predicate.accept(key, value))
             {
@@ -439,9 +439,9 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
         return result;
     }
 
-    public HashBiMap<K, V> reject(final Predicate2<? super K, ? super V> predicate)
+    public HashBiMap<K, V> reject(Predicate2<? super K, ? super V> predicate)
     {
-        final HashBiMap<K, V> result = HashBiMap.newMap();
+        HashBiMap<K, V> result = HashBiMap.newMap();
         this.delegate.forEachKeyValue((key, value) -> {
             if (!predicate.accept(key, value))
             {
@@ -451,9 +451,9 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
         return result;
     }
 
-    public <K2, V2> HashBiMap<K2, V2> collect(final Function2<? super K, ? super V, Pair<K2, V2>> function)
+    public <K2, V2> HashBiMap<K2, V2> collect(Function2<? super K, ? super V, Pair<K2, V2>> function)
     {
-        final HashBiMap<K2, V2> result = HashBiMap.newMap();
+        HashBiMap<K2, V2> result = HashBiMap.newMap();
         this.delegate.forEachKeyValue((key, value) -> {
             Pair<K2, V2> pair = function.value(key, value);
             result.put(pair.getOne(), pair.getTwo());
@@ -461,9 +461,9 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
         return result;
     }
 
-    public <R> HashBiMap<K, R> collectValues(final Function2<? super K, ? super V, ? extends R> function)
+    public <R> HashBiMap<K, R> collectValues(Function2<? super K, ? super V, ? extends R> function)
     {
-        final HashBiMap<K, R> result = HashBiMap.newMap();
+        HashBiMap<K, R> result = HashBiMap.newMap();
         this.delegate.forEachKeyValue((key, value) -> result.put(key, function.value(key, value)));
         return result;
     }
@@ -645,7 +645,7 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
     {
         this.delegate = UnifiedMap.newMap();
         this.delegate.readExternal(in);
-        final UnifiedMap<V, K> inverseDelegate = UnifiedMap.newMap();
+        UnifiedMap<V, K> inverseDelegate = UnifiedMap.newMap();
         this.delegate.forEachKeyValue((key, value) -> inverseDelegate.put(value, key));
         this.inverse = new Inverse<>(inverseDelegate, this);
     }

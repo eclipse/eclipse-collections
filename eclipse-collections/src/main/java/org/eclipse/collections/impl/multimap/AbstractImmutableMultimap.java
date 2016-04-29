@@ -112,9 +112,9 @@ public abstract class AbstractImmutableMultimap<K, V, C extends ImmutableCollect
         return (MutableMap<K, RichIterable<V>>) (MutableMap<?, ?>) this.map.toMap();
     }
 
-    public <R extends Collection<V>> MutableMap<K, R> toMap(final Function0<R> collectionFactory)
+    public <R extends Collection<V>> MutableMap<K, R> toMap(Function0<R> collectionFactory)
     {
-        final MutableMap<K, R> result = UnifiedMap.newMap();
+        MutableMap<K, R> result = UnifiedMap.newMap();
         this.map.forEachKeyValue((key, iterable) -> {
             R newCollection = collectionFactory.value();
             Iterate.addAllTo(iterable, newCollection);

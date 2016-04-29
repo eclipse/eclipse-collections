@@ -135,7 +135,7 @@ public final class SynchronizedPutTreeSortedSetMultimap<K, V>
 
     public ImmutableSortedSetMultimap<K, V> toImmutable()
     {
-        final MutableMap<K, ImmutableSortedSet<V>> map = UnifiedMap.newMap();
+        MutableMap<K, ImmutableSortedSet<V>> map = UnifiedMap.newMap();
 
         this.map.forEachKeyValue((key, set) -> map.put(key, set.toImmutable()));
         return new ImmutableSortedSetMultimapImpl<>(map, this.comparator());

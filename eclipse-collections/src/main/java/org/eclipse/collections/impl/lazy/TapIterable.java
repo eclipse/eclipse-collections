@@ -36,7 +36,7 @@ public class TapIterable<T>
         this.procedure = procedure;
     }
 
-    public void each(final Procedure<? super T> procedure)
+    public void each(Procedure<? super T> procedure)
     {
         Iterate.forEach(this.adapted, each -> {
             this.procedure.value(each);
@@ -45,7 +45,7 @@ public class TapIterable<T>
     }
 
     @Override
-    public void forEachWithIndex(final ObjectIntProcedure<? super T> objectIntProcedure)
+    public void forEachWithIndex(ObjectIntProcedure<? super T> objectIntProcedure)
     {
         Iterate.forEachWithIndex(this.adapted, (each, index) -> {
             this.procedure.value(each);
@@ -54,7 +54,7 @@ public class TapIterable<T>
     }
 
     @Override
-    public <P> void forEachWith(final Procedure2<? super T, ? super P> procedure, P parameter)
+    public <P> void forEachWith(Procedure2<? super T, ? super P> procedure, P parameter)
     {
         Iterate.forEachWith(this.adapted, (each, aParameter) -> {
             this.procedure.value(each);
@@ -63,7 +63,7 @@ public class TapIterable<T>
     }
 
     @Override
-    public boolean anySatisfy(final Predicate<? super T> predicate)
+    public boolean anySatisfy(Predicate<? super T> predicate)
     {
         return Iterate.anySatisfy(this.adapted, each -> {
             this.procedure.value(each);
@@ -72,7 +72,7 @@ public class TapIterable<T>
     }
 
     @Override
-    public boolean allSatisfy(final Predicate<? super T> predicate)
+    public boolean allSatisfy(Predicate<? super T> predicate)
     {
         return Iterate.allSatisfy(this.adapted, each -> {
             this.procedure.value(each);
@@ -81,7 +81,7 @@ public class TapIterable<T>
     }
 
     @Override
-    public boolean noneSatisfy(final Predicate<? super T> predicate)
+    public boolean noneSatisfy(Predicate<? super T> predicate)
     {
         return Iterate.noneSatisfy(this.adapted, each -> {
             this.procedure.value(each);
@@ -99,7 +99,7 @@ public class TapIterable<T>
     }
 
     @Override
-    public T detect(final Predicate<? super T> predicate)
+    public T detect(Predicate<? super T> predicate)
     {
         return Iterate.detect(this.adapted, each -> {
             this.procedure.value(each);

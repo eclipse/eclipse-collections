@@ -726,8 +726,8 @@ public final class Functions
     }
 
     public static <T, V1, V2> Function<T, Pair<V1, V2>> pair(
-            final Function<? super T, V1> function1,
-            final Function<? super T, V2> function2)
+            Function<? super T, V1> function1,
+            Function<? super T, V2> function2)
     {
         return t -> Tuples.pair(function1.valueOf(t), function2.valueOf(t));
     }

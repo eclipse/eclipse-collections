@@ -206,9 +206,9 @@ public abstract class AbstractImmutableSortedMap<K, V>
         return this.select(Predicates.bind(predicate, parameter));
     }
 
-    public ImmutableSortedMap<K, V> select(final Predicate2<? super K, ? super V> predicate)
+    public ImmutableSortedMap<K, V> select(Predicate2<? super K, ? super V> predicate)
     {
-        final MutableSortedMap<K, V> selectedMap = SortedMaps.mutable.with(this.comparator());
+        MutableSortedMap<K, V> selectedMap = SortedMaps.mutable.with(this.comparator());
         this.forEachKeyValue((key, value) -> {
             if (predicate.accept(key, value))
             {
@@ -228,9 +228,9 @@ public abstract class AbstractImmutableSortedMap<K, V>
         return this.reject(Predicates.bind(predicate, parameter));
     }
 
-    public ImmutableSortedMap<K, V> reject(final Predicate2<? super K, ? super V> predicate)
+    public ImmutableSortedMap<K, V> reject(Predicate2<? super K, ? super V> predicate)
     {
-        final MutableSortedMap<K, V> rejectedMap = SortedMaps.mutable.with(this.comparator());
+        MutableSortedMap<K, V> rejectedMap = SortedMaps.mutable.with(this.comparator());
         this.forEachKeyValue((key, value) -> {
             if (!predicate.accept(key, value))
             {
@@ -322,9 +322,9 @@ public abstract class AbstractImmutableSortedMap<K, V>
         return result.toImmutable();
     }
 
-    public <K2, V2> ImmutableMap<K2, V2> collect(final Function2<? super K, ? super V, Pair<K2, V2>> function)
+    public <K2, V2> ImmutableMap<K2, V2> collect(Function2<? super K, ? super V, Pair<K2, V2>> function)
     {
-        final MutableMap<K2, V2> collectedMap = UnifiedMap.newMap(this.size());
+        MutableMap<K2, V2> collectedMap = UnifiedMap.newMap(this.size());
         this.forEachKeyValue((key, value) -> collectedMap.add(function.value(key, value)));
         return collectedMap.toImmutable();
     }
@@ -339,14 +339,14 @@ public abstract class AbstractImmutableSortedMap<K, V>
         return this.collectIf(predicate, function, FastList.<R>newList(this.size())).toImmutable();
     }
 
-    public <R> ImmutableSortedMap<K, R> collectValues(final Function2<? super K, ? super V, ? extends R> function)
+    public <R> ImmutableSortedMap<K, R> collectValues(Function2<? super K, ? super V, ? extends R> function)
     {
-        final MutableSortedMap<K, R> collectedMap = SortedMaps.mutable.with(this.comparator());
+        MutableSortedMap<K, R> collectedMap = SortedMaps.mutable.with(this.comparator());
         this.forEachKeyValue((key, value) -> collectedMap.put(key, function.value(key, value)));
         return collectedMap.toImmutable();
     }
 
-    public Pair<K, V> detect(final Predicate2<? super K, ? super V> predicate)
+    public Pair<K, V> detect(Predicate2<? super K, ? super V> predicate)
     {
         return this.keyValuesView().detect(each -> predicate.accept(each.getOne(), each.getTwo()));
     }

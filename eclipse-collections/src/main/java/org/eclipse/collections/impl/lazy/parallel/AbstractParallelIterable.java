@@ -70,11 +70,11 @@ import org.eclipse.collections.impl.set.sorted.mutable.TreeSortedSet;
 @Beta
 public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements ParallelIterable<T>
 {
-    protected static <T> void forEach(final AbstractParallelIterable<T, ? extends RootBatch<T>> parallelIterable, final Procedure<? super T> procedure)
+    protected static <T> void forEach(AbstractParallelIterable<T, ? extends RootBatch<T>> parallelIterable, Procedure<? super T> procedure)
     {
         LazyIterable<Future<?>> futures = parallelIterable.split().collect(new Function<RootBatch<T>, Future<?>>()
         {
-            public Future<?> valueOf(final RootBatch<T> chunk)
+            public Future<?> valueOf(RootBatch<T> chunk)
             {
                 return parallelIterable.getExecutorService().submit(() -> chunk.forEach(procedure));
             }
@@ -99,12 +99,12 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
         }
     }
 
-    protected static <T> boolean anySatisfy(AbstractParallelIterable<T, ? extends RootBatch<T>> parallelIterable, final Predicate<? super T> predicate)
+    protected static <T> boolean anySatisfy(AbstractParallelIterable<T, ? extends RootBatch<T>> parallelIterable, Predicate<? super T> predicate)
     {
-        final CompletionService<Boolean> completionService = new ExecutorCompletionService<>(parallelIterable.getExecutorService());
+        CompletionService<Boolean> completionService = new ExecutorCompletionService<>(parallelIterable.getExecutorService());
         MutableSet<Future<Boolean>> futures = parallelIterable.split().collect(new Function<RootBatch<T>, Future<Boolean>>()
         {
-            public Future<Boolean> valueOf(final RootBatch<T> batch)
+            public Future<Boolean> valueOf(RootBatch<T> batch)
             {
                 return completionService.submit(() -> batch.anySatisfy(predicate));
             }
@@ -138,12 +138,12 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
         return false;
     }
 
-    protected static <T> boolean allSatisfy(AbstractParallelIterable<T, ? extends RootBatch<T>> parallelIterable, final Predicate<? super T> predicate)
+    protected static <T> boolean allSatisfy(AbstractParallelIterable<T, ? extends RootBatch<T>> parallelIterable, Predicate<? super T> predicate)
     {
-        final CompletionService<Boolean> completionService = new ExecutorCompletionService<>(parallelIterable.getExecutorService());
+        CompletionService<Boolean> completionService = new ExecutorCompletionService<>(parallelIterable.getExecutorService());
         MutableSet<Future<Boolean>> futures = parallelIterable.split().collect(new Function<RootBatch<T>, Future<Boolean>>()
         {
-            public Future<Boolean> valueOf(final RootBatch<T> batch)
+            public Future<Boolean> valueOf(RootBatch<T> batch)
             {
                 return completionService.submit(() -> batch.allSatisfy(predicate));
             }
@@ -177,12 +177,12 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
         return true;
     }
 
-    protected static <T> T detect(final AbstractParallelIterable<T, ? extends RootBatch<T>> parallelIterable, final Predicate<? super T> predicate)
+    protected static <T> T detect(AbstractParallelIterable<T, ? extends RootBatch<T>> parallelIterable, Predicate<? super T> predicate)
     {
         LazyIterable<? extends RootBatch<T>> chunks = parallelIterable.split();
         LazyIterable<Future<T>> futures = chunks.collect(new Function<RootBatch<T>, Future<T>>()
         {
-            public Future<T> valueOf(final RootBatch<T> chunk)
+            public Future<T> valueOf(RootBatch<T> chunk)
             {
                 return parallelIterable.getExecutorService().submit(() -> chunk.detect(predicate));
             }
@@ -236,12 +236,12 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
         }
     }
 
-    private <S, V> void collectCombineOrdered(final Function<Batch<T>, V> function, Procedure2<S, V> combineProcedure, S state)
+    private <S, V> void collectCombineOrdered(Function<Batch<T>, V> function, Procedure2<S, V> combineProcedure, S state)
     {
         LazyIterable<? extends Batch<T>> chunks = this.split();
         LazyIterable<Future<V>> futures = chunks.collect(new Function<Batch<T>, Future<V>>()
         {
-            public Future<V> valueOf(final Batch<T> chunk)
+            public Future<V> valueOf(Batch<T> chunk)
             {
                 return AbstractParallelIterable.this.getExecutorService().submit(() -> function.valueOf(chunk));
             }
@@ -266,18 +266,18 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
         }
     }
 
-    private <S, V> void collectCombineUnordered(final Function<Batch<T>, V> function, Procedure2<S, V> combineProcedure, S state)
+    private <S, V> void collectCombineUnordered(Function<Batch<T>, V> function, Procedure2<S, V> combineProcedure, S state)
     {
         LazyIterable<? extends Batch<T>> chunks = this.split();
         MutableList<Callable<V>> callables = chunks.collect(new Function<Batch<T>, Callable<V>>()
         {
-            public Callable<V> valueOf(final Batch<T> chunk)
+            public Callable<V> valueOf(Batch<T> chunk)
             {
                 return () -> function.valueOf(chunk);
             }
         }).toList();
 
-        final ExecutorCompletionService<V> completionService = new ExecutorCompletionService<>(this.getExecutorService());
+        ExecutorCompletionService<V> completionService = new ExecutorCompletionService<>(this.getExecutorService());
         callables.each(completionService::submit);
 
         int numTasks = callables.size();
@@ -308,12 +308,12 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
                 : this.collectReduceUnordered(map, function2);
     }
 
-    private T collectReduceOrdered(final Function<Batch<T>, T> map, Function2<T, T, T> function2)
+    private T collectReduceOrdered(Function<Batch<T>, T> map, Function2<T, T, T> function2)
     {
         LazyIterable<? extends Batch<T>> chunks = this.split();
         LazyIterable<Future<T>> futures = chunks.collect(new Function<Batch<T>, Future<T>>()
         {
-            public Future<T> valueOf(final Batch<T> chunk)
+            public Future<T> valueOf(Batch<T> chunk)
             {
                 return AbstractParallelIterable.this.getExecutorService().submit(() -> map.valueOf(chunk));
             }
@@ -359,18 +359,18 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
         }
     }
 
-    private T collectReduceUnordered(final Function<Batch<T>, T> map, Function2<T, T, T> function2)
+    private T collectReduceUnordered(Function<Batch<T>, T> map, Function2<T, T, T> function2)
     {
         LazyIterable<? extends Batch<T>> chunks = this.split();
         MutableList<Callable<T>> callables = chunks.collect(new Function<Batch<T>, Callable<T>>()
         {
-            public Callable<T> valueOf(final Batch<T> chunk)
+            public Callable<T> valueOf(Batch<T> chunk)
             {
                 return () -> map.valueOf(chunk);
             }
         }).toList();
 
-        final ExecutorCompletionService<T> completionService = new ExecutorCompletionService<>(this.getExecutorService());
+        ExecutorCompletionService<T> completionService = new ExecutorCompletionService<>(this.getExecutorService());
         callables.each(completionService::submit);
 
         try
@@ -447,7 +447,7 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
         this.appendString(appendable, "", separator, "");
     }
 
-    public void appendString(final Appendable appendable, String start, final String separator, String end)
+    public void appendString(Appendable appendable, String start, String separator, String end)
     {
         try
         {
@@ -662,7 +662,7 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
         return map;
     }
 
-    public int count(final Predicate<? super T> predicate)
+    public int count(Predicate<? super T> predicate)
     {
         Function<Batch<T>, Integer> map = batch -> batch.count(predicate);
 
@@ -676,13 +676,13 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
         return this.count(Predicates.bind(predicate, parameter));
     }
 
-    public T min(final Comparator<? super T> comparator)
+    public T min(Comparator<? super T> comparator)
     {
         Function<Batch<T>, T> map = batch -> batch.min(comparator);
         return this.collectReduce(map, Functions2.min(comparator));
     }
 
-    public T max(final Comparator<? super T> comparator)
+    public T max(Comparator<? super T> comparator)
     {
         Function<Batch<T>, T> map = batch -> batch.max(comparator);
         return this.collectReduce(map, Functions2.max(comparator));
@@ -698,44 +698,44 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
         return this.max(Comparators.naturalOrder());
     }
 
-    public <V extends Comparable<? super V>> T minBy(final Function<? super T, ? extends V> function)
+    public <V extends Comparable<? super V>> T minBy(Function<? super T, ? extends V> function)
     {
         Function<Batch<T>, T> map = batch -> batch.minBy(function);
         return this.collectReduce(map, Functions2.minBy(function));
     }
 
-    public <V extends Comparable<? super V>> T maxBy(final Function<? super T, ? extends V> function)
+    public <V extends Comparable<? super V>> T maxBy(Function<? super T, ? extends V> function)
     {
         Function<Batch<T>, T> map = batch -> batch.maxBy(function);
         return this.collectReduce(map, Functions2.maxBy(function));
     }
 
-    public long sumOfInt(final IntFunction<? super T> function)
+    public long sumOfInt(IntFunction<? super T> function)
     {
         return this.sumOfLongOrdered(batch -> batch.sumOfInt(function));
     }
 
-    public double sumOfFloat(final FloatFunction<? super T> function)
+    public double sumOfFloat(FloatFunction<? super T> function)
     {
         return this.sumOfDoubleOrdered(batch -> batch.sumOfFloat(function));
     }
 
-    public long sumOfLong(final LongFunction<? super T> function)
+    public long sumOfLong(LongFunction<? super T> function)
     {
         return this.sumOfLongOrdered(batch -> batch.sumOfLong(function));
     }
 
-    public double sumOfDouble(final DoubleFunction<? super T> function)
+    public double sumOfDouble(DoubleFunction<? super T> function)
     {
         return this.sumOfDoubleOrdered(batch -> batch.sumOfDouble(function));
     }
 
-    private long sumOfLongOrdered(final LongFunction<Batch<T>> map)
+    private long sumOfLongOrdered(LongFunction<Batch<T>> map)
     {
         LazyIterable<? extends Batch<T>> chunks = this.split();
         LazyIterable<Future<Long>> futures = chunks.collect(new Function<Batch<T>, Future<Long>>()
         {
-            public Future<Long> valueOf(final Batch<T> chunk)
+            public Future<Long> valueOf(Batch<T> chunk)
             {
                 return AbstractParallelIterable.this.getExecutorService().submit(() -> map.longValueOf(chunk));
             }
@@ -762,12 +762,12 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
         }
     }
 
-    private double sumOfDoubleOrdered(final Function<Batch<T>, DoubleSumResultHolder> map)
+    private double sumOfDoubleOrdered(Function<Batch<T>, DoubleSumResultHolder> map)
     {
         LazyIterable<? extends Batch<T>> chunks = this.split();
         LazyIterable<Future<DoubleSumResultHolder>> futures = chunks.collect(new Function<Batch<T>, Future<DoubleSumResultHolder>>()
         {
-            public Future<DoubleSumResultHolder> valueOf(final Batch<T> chunk)
+            public Future<DoubleSumResultHolder> valueOf(Batch<T> chunk)
             {
                 return AbstractParallelIterable.this.getExecutorService().submit(() -> map.valueOf(chunk));
             }
@@ -799,9 +799,9 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
         }
     }
 
-    public <V> MapIterable<V, T> groupByUniqueKey(final Function<? super T, ? extends V> function)
+    public <V> MapIterable<V, T> groupByUniqueKey(Function<? super T, ? extends V> function)
     {
-        final MutableMap<V, T> result = ConcurrentHashMap.newMap();
+        MutableMap<V, T> result = ConcurrentHashMap.newMap();
         this.forEach(value -> {
             V key = function.valueOf(value);
             if (result.put(key, value) != null)

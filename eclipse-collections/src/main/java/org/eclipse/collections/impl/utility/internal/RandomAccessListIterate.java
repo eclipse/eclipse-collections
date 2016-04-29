@@ -845,25 +845,25 @@ public final class RandomAccessListIterate
         return result;
     }
 
-    public static <V, T> MutableMap<V, BigDecimal> sumByBigDecimal(List<T> list, Function<T, V> groupBy, final Function<? super T, BigDecimal> function)
+    public static <V, T> MutableMap<V, BigDecimal> sumByBigDecimal(List<T> list, Function<T, V> groupBy, Function<? super T, BigDecimal> function)
     {
         MutableMap<V, BigDecimal> result = UnifiedMap.newMap();
         int size = list.size();
         for (int i = 0; i < size; i++)
         {
-            final T item = list.get(i);
+            T item = list.get(i);
             result.updateValue(groupBy.valueOf(item), Functions0.zeroBigDecimal(), original -> original.add(function.valueOf(item)));
         }
         return result;
     }
 
-    public static <V, T> MutableMap<V, BigInteger> sumByBigInteger(List<T> list, Function<T, V> groupBy, final Function<? super T, BigInteger> function)
+    public static <V, T> MutableMap<V, BigInteger> sumByBigInteger(List<T> list, Function<T, V> groupBy, Function<? super T, BigInteger> function)
     {
         MutableMap<V, BigInteger> result = UnifiedMap.newMap();
         int size = list.size();
         for (int i = 0; i < size; i++)
         {
-            final T item = list.get(i);
+            T item = list.get(i);
             result.updateValue(groupBy.valueOf(item), Functions0.zeroBigInteger(), original -> original.add(function.valueOf(item)));
         }
         return result;

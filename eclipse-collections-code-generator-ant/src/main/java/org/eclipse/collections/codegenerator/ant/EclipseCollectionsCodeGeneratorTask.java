@@ -32,7 +32,7 @@ public class EclipseCollectionsCodeGeneratorTask extends Task
     {
         this.log("Scanning all template files from " + this.templateDirectory);
 
-        final boolean[] error = new boolean[1];
+        boolean[] error = new boolean[1];
         EclipseCollectionsCodeGenerator.ErrorListener errorListener = new EclipseCollectionsCodeGenerator.ErrorListener()
         {
             public void error(String string)

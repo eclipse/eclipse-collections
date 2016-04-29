@@ -52,7 +52,7 @@ public class ParallelDistinctIterable<T> extends AbstractParallelUnsortedSetIter
     public LazyIterable<UnsortedSetBatch<T>> split()
     {
         // TODO: Replace the map with a concurrent set once it's implemented
-        final ConcurrentHashMap<T, Boolean> distinct = new ConcurrentHashMap<>();
+        ConcurrentHashMap<T, Boolean> distinct = new ConcurrentHashMap<>();
         return this.delegate.split().collect(new Function<Batch<T>, UnsortedSetBatch<T>>()
         {
             public UnsortedSetBatch<T> valueOf(Batch<T> batch)
@@ -68,10 +68,10 @@ public class ParallelDistinctIterable<T> extends AbstractParallelUnsortedSetIter
         return this;
     }
 
-    public void forEach(final Procedure<? super T> procedure)
+    public void forEach(Procedure<? super T> procedure)
     {
         // TODO: Replace the map with a concurrent set once it's implemented
-        final ConcurrentHashMap<T, Boolean> distinct = new ConcurrentHashMap<>();
+        ConcurrentHashMap<T, Boolean> distinct = new ConcurrentHashMap<>();
         this.delegate.forEach(each -> {
             if (distinct.put(each, true) == null)
             {

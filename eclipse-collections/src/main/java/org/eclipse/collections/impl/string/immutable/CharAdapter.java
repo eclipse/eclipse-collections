@@ -113,7 +113,7 @@ public class CharAdapter extends AbstractCharIterable implements CharSequence, I
         return this.adapted.toCharArray();
     }
 
-    public boolean contains(final char expected)
+    public boolean contains(char expected)
     {
         return StringIterate.anySatisfyChar(this.adapted, value -> expected == value);
     }

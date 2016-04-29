@@ -126,7 +126,7 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
 
     public Object[] toArray()
     {
-        final Object[] result = new Object[this.size()];
+        Object[] result = new Object[this.size()];
         this.forEachWithIndex((each, index) -> result[index] = each);
         return result;
     }
@@ -134,7 +134,7 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
     public <E> E[] toArray(E[] array)
     {
         int size = this.size();
-        final E[] result = array.length < size
+        E[] result = array.length < size
                 ? (E[]) Array.newInstance(array.getClass().getComponentType(), size)
                 : array;
 

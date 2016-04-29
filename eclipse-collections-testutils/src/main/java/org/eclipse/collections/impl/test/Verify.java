@@ -2002,7 +2002,7 @@ public final class Verify extends Assert
 
     public static void assertContainsAll(
             String collectionName,
-            final Iterable<?> iterable,
+            Iterable<?> iterable,
             Object... items)
     {
         try
@@ -2307,7 +2307,7 @@ public final class Verify extends Assert
         }
     }
 
-    public static void assertBagsEqual(String bagName, Bag<?> expectedBag, final Bag<?> actualBag)
+    public static void assertBagsEqual(String bagName, Bag<?> expectedBag, Bag<?> actualBag)
     {
         try
         {
@@ -3741,7 +3741,7 @@ public final class Verify extends Assert
         return string;
     }
 
-    public static void assertNotSerializable(final Object actualObject)
+    public static void assertNotSerializable(Object actualObject)
     {
         try
         {

@@ -83,9 +83,9 @@ public abstract class AbstractParallelUnsortedSetIterable<T, B extends UnsortedS
         return new ParallelFlatCollectIterable<>(this, function);
     }
 
-    public <V> UnsortedSetMultimap<V, T> groupBy(final Function<? super T, ? extends V> function)
+    public <V> UnsortedSetMultimap<V, T> groupBy(Function<? super T, ? extends V> function)
     {
-        final MutableSetMultimap<V, T> result = SynchronizedPutUnifiedSetMultimap.newMultimap();
+        MutableSetMultimap<V, T> result = SynchronizedPutUnifiedSetMultimap.newMultimap();
         this.forEach(each -> {
             V key = function.valueOf(each);
             result.put(key, each);
@@ -93,9 +93,9 @@ public abstract class AbstractParallelUnsortedSetIterable<T, B extends UnsortedS
         return result;
     }
 
-    public <V> UnsortedSetMultimap<V, T> groupByEach(final Function<? super T, ? extends Iterable<V>> function)
+    public <V> UnsortedSetMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function)
     {
-        final MutableSetMultimap<V, T> result = SynchronizedPutUnifiedSetMultimap.newMultimap();
+        MutableSetMultimap<V, T> result = SynchronizedPutUnifiedSetMultimap.newMultimap();
         this.forEach(each -> {
             Iterable<V> keys = function.valueOf(each);
             for (V key : keys)

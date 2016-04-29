@@ -150,7 +150,7 @@ public final class SetIterables
         return powerSet(set).collect(MutableSet<T>::toImmutable).toImmutable();
     }
 
-    public static <A, B> LazyIterable<Pair<A, B>> cartesianProduct(SetIterable<A> set1, final SetIterable<B> set2)
+    public static <A, B> LazyIterable<Pair<A, B>> cartesianProduct(SetIterable<A> set1, SetIterable<B> set2)
     {
         return LazyIterate.flatCollect(set1, first -> LazyIterate.collect(set2, second -> Tuples.pair(first, second)));
     }

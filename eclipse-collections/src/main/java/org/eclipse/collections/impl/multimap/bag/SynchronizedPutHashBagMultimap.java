@@ -104,7 +104,7 @@ public final class SynchronizedPutHashBagMultimap<K, V>
 
     public ImmutableBagMultimap<K, V> toImmutable()
     {
-        final MutableMap<K, ImmutableBag<V>> map = UnifiedMap.newMap();
+        MutableMap<K, ImmutableBag<V>> map = UnifiedMap.newMap();
 
         this.map.forEachKeyValue((key, bag) -> map.put(key, bag.toImmutable()));
 

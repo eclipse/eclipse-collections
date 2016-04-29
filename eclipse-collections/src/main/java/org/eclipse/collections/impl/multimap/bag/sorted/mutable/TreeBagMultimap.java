@@ -132,7 +132,7 @@ public final class TreeBagMultimap<K, V>
 
     public ImmutableSortedBagMultimap<K, V> toImmutable()
     {
-        final MutableMap<K, ImmutableSortedBag<V>> map = UnifiedMap.newMap();
+        MutableMap<K, ImmutableSortedBag<V>> map = UnifiedMap.newMap();
 
         this.map.forEachKeyValue((key, bag) -> map.put(key, bag.toImmutable()));
         return new ImmutableSortedBagMultimapImpl<>(map, this.comparator());

@@ -123,31 +123,31 @@ public class CollectIterable<T, V>
     }
 
     @Override
-    public <IV> IV injectInto(IV injectedValue, final Function2<? super IV, ? super V, ? extends IV> f)
+    public <IV> IV injectInto(IV injectedValue, Function2<? super IV, ? super V, ? extends IV> f)
     {
         return Iterate.injectInto(injectedValue, this.adapted, (argument1, argument2) -> f.value(argument1, this.function.valueOf(argument2)));
     }
 
     @Override
-    public int injectInto(int injectedValue, final IntObjectToIntFunction<? super V> f)
+    public int injectInto(int injectedValue, IntObjectToIntFunction<? super V> f)
     {
         return Iterate.injectInto(injectedValue, this.adapted, (IntObjectToIntFunction<T>) (intParameter, objectParameter) -> f.intValueOf(intParameter, this.function.valueOf(objectParameter)));
     }
 
     @Override
-    public long injectInto(long injectedValue, final LongObjectToLongFunction<? super V> f)
+    public long injectInto(long injectedValue, LongObjectToLongFunction<? super V> f)
     {
         return Iterate.injectInto(injectedValue, this.adapted, (LongObjectToLongFunction<T>) (intParameter, objectParameter) -> f.longValueOf(intParameter, this.function.valueOf(objectParameter)));
     }
 
     @Override
-    public double injectInto(double injectedValue, final DoubleObjectToDoubleFunction<? super V> f)
+    public double injectInto(double injectedValue, DoubleObjectToDoubleFunction<? super V> f)
     {
         return Iterate.injectInto(injectedValue, this.adapted, (DoubleObjectToDoubleFunction<T>) (intParameter, objectParameter) -> f.doubleValueOf(intParameter, this.function.valueOf(objectParameter)));
     }
 
     @Override
-    public float injectInto(float injectedValue, final FloatObjectToFloatFunction<? super V> f)
+    public float injectInto(float injectedValue, FloatObjectToFloatFunction<? super V> f)
     {
         return Iterate.injectInto(injectedValue, this.adapted, (FloatObjectToFloatFunction<T>) (intParameter, objectParameter) -> f.floatValueOf(intParameter, this.function.valueOf(objectParameter)));
     }

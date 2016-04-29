@@ -58,16 +58,16 @@ public class ParallelFlatCollectListIterable<T, V> extends AbstractParallelListI
         });
     }
 
-    public void forEach(final Procedure<? super V> procedure)
+    public void forEach(Procedure<? super V> procedure)
     {
         this.parallelIterable.forEach(each -> Iterate.forEach(this.function.valueOf(each), procedure));
     }
 
-    public V detect(final Predicate<? super V> predicate)
+    public V detect(Predicate<? super V> predicate)
     {
         // Some predicates are stateful, so they cannot be called more than once pre element,
         // that's why we use an AtomicReference to return the accepted element
-        final AtomicReference<V> result = new AtomicReference<>();
+        AtomicReference<V> result = new AtomicReference<>();
         this.parallelIterable.anySatisfy(each -> Iterate.anySatisfy(this.function.valueOf(each), each1 -> {
             if (predicate.accept(each1))
             {
@@ -81,12 +81,12 @@ public class ParallelFlatCollectListIterable<T, V> extends AbstractParallelListI
         return result.get();
     }
 
-    public boolean anySatisfy(final Predicate<? super V> predicate)
+    public boolean anySatisfy(Predicate<? super V> predicate)
     {
         return this.parallelIterable.anySatisfy(each -> Iterate.anySatisfy(this.function.valueOf(each), predicate));
     }
 
-    public boolean allSatisfy(final Predicate<? super V> predicate)
+    public boolean allSatisfy(Predicate<? super V> predicate)
     {
         return this.parallelIterable.allSatisfy(each -> Iterate.allSatisfy(this.function.valueOf(each), predicate));
     }

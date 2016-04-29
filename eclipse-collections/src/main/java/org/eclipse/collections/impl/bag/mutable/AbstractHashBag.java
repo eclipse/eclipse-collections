@@ -83,7 +83,7 @@ public abstract class AbstractHashBag<T> extends AbstractMutableBag<T>
         {
             return false;
         }
-        final Bag<?> bag = (Bag<?>) other;
+        Bag<?> bag = (Bag<?>) other;
         if (this.sizeDistinct() != bag.sizeDistinct())
         {
             return false;
@@ -95,7 +95,7 @@ public abstract class AbstractHashBag<T> extends AbstractMutableBag<T>
     @Override
     public int hashCode()
     {
-        final Counter counter = new Counter();
+        Counter counter = new Counter();
         this.items.forEachKeyValue((item, count) -> counter.add((item == null ? 0 : AbstractHashBag.this.computeHashCode(item)) ^ count));
         return counter.getCount();
     }
@@ -127,7 +127,7 @@ public abstract class AbstractHashBag<T> extends AbstractMutableBag<T>
 
     public MutableMap<T, Integer> toMapOfItemToCount()
     {
-        final MutableMap<T, Integer> map = UnifiedMap.newMap(this.items.size());
+        MutableMap<T, Integer> map = UnifiedMap.newMap(this.items.size());
         this.forEachWithOccurrences(map::put);
         return map;
     }
@@ -166,7 +166,7 @@ public abstract class AbstractHashBag<T> extends AbstractMutableBag<T>
         return this.items.isEmpty();
     }
 
-    public void each(final Procedure<? super T> procedure)
+    public void each(Procedure<? super T> procedure)
     {
         this.items.forEachKeyValue((key, count) -> {
             for (int i = 0; i < count; i++)
@@ -177,9 +177,9 @@ public abstract class AbstractHashBag<T> extends AbstractMutableBag<T>
     }
 
     @Override
-    public void forEachWithIndex(final ObjectIntProcedure<? super T> objectIntProcedure)
+    public void forEachWithIndex(ObjectIntProcedure<? super T> objectIntProcedure)
     {
-        final Counter index = new Counter();
+        Counter index = new Counter();
         this.items.forEachKeyValue((key, count) -> {
             for (int i = 0; i < count; i++)
             {
@@ -190,7 +190,7 @@ public abstract class AbstractHashBag<T> extends AbstractMutableBag<T>
     }
 
     @Override
-    public <P> void forEachWith(final Procedure2<? super T, ? super P> procedure, final P parameter)
+    public <P> void forEachWith(Procedure2<? super T, ? super P> procedure, P parameter)
     {
         this.items.forEachKeyValue((key, count) -> {
             for (int i = 0; i < count; i++)

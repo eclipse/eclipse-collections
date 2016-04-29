@@ -853,7 +853,7 @@ public final class ConcurrentHashMap<K, V>
         if (map instanceof ConcurrentHashMap<?, ?> && chunks > 1 && map.size() > 50000)
         {
             ConcurrentHashMap<K, V> incoming = (ConcurrentHashMap<K, V>) map;
-            final AtomicReferenceArray currentArray = incoming.table;
+            AtomicReferenceArray currentArray = incoming.table;
             FutureTask<?>[] futures = new FutureTask<?>[chunks];
             int chunkSize = currentArray.length() / chunks;
             if (currentArray.length() % chunks != 0)
@@ -862,8 +862,8 @@ public final class ConcurrentHashMap<K, V>
             }
             for (int i = 0; i < chunks; i++)
             {
-                final int start = i * chunkSize;
-                final int end = Math.min((i + 1) * chunkSize, currentArray.length());
+                int start = i * chunkSize;
+                int end = Math.min((i + 1) * chunkSize, currentArray.length());
                 futures[i] = new FutureTask(() -> this.sequentialPutAll(currentArray, start, end), null);
                 executor.execute(futures[i]);
             }
@@ -1183,7 +1183,7 @@ public final class ConcurrentHashMap<K, V>
 
     public void parallelForEachKeyValue(List<Procedure2<K, V>> blocks, Executor executor)
     {
-        final AtomicReferenceArray currentArray = this.table;
+        AtomicReferenceArray currentArray = this.table;
         int chunks = blocks.size();
         if (chunks > 1)
         {
@@ -1195,9 +1195,9 @@ public final class ConcurrentHashMap<K, V>
             }
             for (int i = 0; i < chunks; i++)
             {
-                final int start = i * chunkSize;
-                final int end = Math.min((i + 1) * chunkSize, currentArray.length());
-                final Procedure2<K, V> block = blocks.get(i);
+                int start = i * chunkSize;
+                int end = Math.min((i + 1) * chunkSize, currentArray.length());
+                Procedure2<K, V> block = blocks.get(i);
                 futures[i] = new FutureTask(() -> this.sequentialForEachKeyValue(block, currentArray, start, end), null);
                 executor.execute(futures[i]);
             }
@@ -1241,7 +1241,7 @@ public final class ConcurrentHashMap<K, V>
 
     public void parallelForEachValue(List<Procedure<V>> blocks, Executor executor)
     {
-        final AtomicReferenceArray currentArray = this.table;
+        AtomicReferenceArray currentArray = this.table;
         int chunks = blocks.size();
         if (chunks > 1)
         {
@@ -1253,9 +1253,9 @@ public final class ConcurrentHashMap<K, V>
             }
             for (int i = 0; i < chunks; i++)
             {
-                final int start = i * chunkSize;
-                final int end = Math.min((i + 1) * chunkSize, currentArray.length() - 1);
-                final Procedure<V> block = blocks.get(i);
+                int start = i * chunkSize;
+                int end = Math.min((i + 1) * chunkSize, currentArray.length() - 1);
+                Procedure<V> block = blocks.get(i);
                 futures[i] = new FutureTask(() -> this.sequentialForEachValue(block, currentArray, start, end), null);
                 executor.execute(futures[i]);
             }
