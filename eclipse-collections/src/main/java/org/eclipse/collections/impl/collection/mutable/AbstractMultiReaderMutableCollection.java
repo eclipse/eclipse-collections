@@ -51,8 +51,8 @@ import org.eclipse.collections.api.collection.primitive.MutableLongCollection;
 import org.eclipse.collections.api.collection.primitive.MutableShortCollection;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MutableMap;
-import org.eclipse.collections.api.map.primitive.ObjectDoubleMap;
-import org.eclipse.collections.api.map.primitive.ObjectLongMap;
+import org.eclipse.collections.api.map.primitive.MutableObjectDoubleMap;
+import org.eclipse.collections.api.map.primitive.MutableObjectLongMap;
 import org.eclipse.collections.api.map.sorted.MutableSortedMap;
 import org.eclipse.collections.api.multimap.MutableMultimap;
 import org.eclipse.collections.api.set.MutableSet;
@@ -62,9 +62,9 @@ import org.eclipse.collections.api.tuple.Twin;
 import org.eclipse.collections.impl.block.factory.PrimitiveFunctions;
 import org.eclipse.collections.impl.block.procedure.MutatingAggregationProcedure;
 import org.eclipse.collections.impl.block.procedure.NonMutatingAggregationProcedure;
+import org.eclipse.collections.impl.factory.primitive.ObjectDoubleMaps;
+import org.eclipse.collections.impl.factory.primitive.ObjectLongMaps;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
-import org.eclipse.collections.impl.map.mutable.primitive.ObjectDoubleHashMap;
-import org.eclipse.collections.impl.map.mutable.primitive.ObjectLongHashMap;
 
 /**
  * AbstractMultiReaderMutableCollection is a common abstraction that provides thread-safe collection behaviors.
@@ -1039,27 +1039,27 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
-    public <V> ObjectLongMap<V> sumByInt(Function<T, V> groupBy, IntFunction<? super T> function)
+    public <V> MutableObjectLongMap<V> sumByInt(Function<? super T, ? extends V> groupBy, IntFunction<? super T> function)
     {
-        ObjectLongHashMap<V> result = ObjectLongHashMap.newMap();
+        MutableObjectLongMap<V> result = ObjectLongMaps.mutable.empty();
         return this.injectInto(result, PrimitiveFunctions.sumByIntFunction(groupBy, function));
     }
 
-    public <V> ObjectDoubleMap<V> sumByFloat(Function<T, V> groupBy, FloatFunction<? super T> function)
+    public <V> MutableObjectDoubleMap<V> sumByFloat(Function<? super T, ? extends V> groupBy, FloatFunction<? super T> function)
     {
-        ObjectDoubleHashMap<V> result = ObjectDoubleHashMap.newMap();
+        MutableObjectDoubleMap<V> result = ObjectDoubleMaps.mutable.empty();
         return this.injectInto(result, PrimitiveFunctions.sumByFloatFunction(groupBy, function));
     }
 
-    public <V> ObjectLongMap<V> sumByLong(Function<T, V> groupBy, LongFunction<? super T> function)
+    public <V> MutableObjectLongMap<V> sumByLong(Function<? super T, ? extends V> groupBy, LongFunction<? super T> function)
     {
-        ObjectLongHashMap<V> result = ObjectLongHashMap.newMap();
+        MutableObjectLongMap<V> result = ObjectLongMaps.mutable.empty();
         return this.injectInto(result, PrimitiveFunctions.sumByLongFunction(groupBy, function));
     }
 
-    public <V> ObjectDoubleMap<V> sumByDouble(Function<T, V> groupBy, DoubleFunction<? super T> function)
+    public <V> MutableObjectDoubleMap<V> sumByDouble(Function<? super T, ? extends V> groupBy, DoubleFunction<? super T> function)
     {
-        ObjectDoubleHashMap<V> result = ObjectDoubleHashMap.newMap();
+        MutableObjectDoubleMap<V> result = ObjectDoubleMaps.mutable.empty();
         return this.injectInto(result, PrimitiveFunctions.sumByDoubleFunction(groupBy, function));
     }
 
@@ -1836,22 +1836,22 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
             return this.delegate.sumOfDouble(function);
         }
 
-        public <V> ObjectLongMap<V> sumByInt(Function<T, V> groupBy, IntFunction<? super T> function)
+        public <V> MutableObjectLongMap<V> sumByInt(Function<? super T, ? extends V> groupBy, IntFunction<? super T> function)
         {
             return this.delegate.sumByInt(groupBy, function);
         }
 
-        public <V> ObjectDoubleMap<V> sumByFloat(Function<T, V> groupBy, FloatFunction<? super T> function)
+        public <V> MutableObjectDoubleMap<V> sumByFloat(Function<? super T, ? extends V> groupBy, FloatFunction<? super T> function)
         {
             return this.delegate.sumByFloat(groupBy, function);
         }
 
-        public <V> ObjectLongMap<V> sumByLong(Function<T, V> groupBy, LongFunction<? super T> function)
+        public <V> MutableObjectLongMap<V> sumByLong(Function<? super T, ? extends V> groupBy, LongFunction<? super T> function)
         {
             return this.delegate.sumByLong(groupBy, function);
         }
 
-        public <V> ObjectDoubleMap<V> sumByDouble(Function<T, V> groupBy, DoubleFunction<? super T> function)
+        public <V> MutableObjectDoubleMap<V> sumByDouble(Function<? super T, ? extends V> groupBy, DoubleFunction<? super T> function)
         {
             return this.delegate.sumByDouble(groupBy, function);
         }

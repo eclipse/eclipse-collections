@@ -30,6 +30,8 @@ import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.list.ListIterable;
 import org.eclipse.collections.api.map.MutableMap;
+import org.eclipse.collections.api.map.primitive.MutableObjectDoubleMap;
+import org.eclipse.collections.api.map.primitive.MutableObjectLongMap;
 import org.eclipse.collections.api.multimap.list.MutableListMultimap;
 import org.eclipse.collections.api.partition.stack.PartitionMutableStack;
 import org.eclipse.collections.api.stack.primitive.MutableBooleanStack;
@@ -126,6 +128,14 @@ public interface MutableStack<T> extends StackIterable<T>
     <V> MutableStack<V> collectWithIndex(ObjectIntToObjectFunction<? super T, ? extends V> function);
 
     <V> MutableStack<V> flatCollect(Function<? super T, ? extends Iterable<V>> function);
+
+    <V> MutableObjectLongMap<V> sumByInt(Function<? super T, ? extends V> groupBy, IntFunction<? super T> function);
+
+    <V> MutableObjectDoubleMap<V> sumByFloat(Function<? super T, ? extends V> groupBy, FloatFunction<? super T> function);
+
+    <V> MutableObjectLongMap<V> sumByLong(Function<? super T, ? extends V> groupBy, LongFunction<? super T> function);
+
+    <V> MutableObjectDoubleMap<V> sumByDouble(Function<? super T, ? extends V> groupBy, DoubleFunction<? super T> function);
 
     <V> MutableListMultimap<V, T> groupBy(Function<? super T, ? extends V> function);
 

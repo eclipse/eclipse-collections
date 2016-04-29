@@ -50,8 +50,6 @@ import org.eclipse.collections.api.collection.primitive.MutableShortCollection;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MapIterable;
 import org.eclipse.collections.api.map.MutableMap;
-import org.eclipse.collections.api.map.primitive.ObjectDoubleMap;
-import org.eclipse.collections.api.map.primitive.ObjectLongMap;
 import org.eclipse.collections.api.map.sorted.MutableSortedMap;
 import org.eclipse.collections.api.multimap.MutableMultimap;
 import org.eclipse.collections.api.ordered.OrderedIterable;
@@ -605,25 +603,5 @@ public abstract class AbstractBiMap<K, V> implements BiMap<K, V>
     public double sumOfDouble(DoubleFunction<? super V> function)
     {
         return this.getDelegate().sumOfDouble(function);
-    }
-
-    public <V1> ObjectLongMap<V1> sumByInt(Function<V, V1> groupBy, IntFunction<? super V> function)
-    {
-        return this.getDelegate().sumByInt(groupBy, function);
-    }
-
-    public <V1> ObjectDoubleMap<V1> sumByFloat(Function<V, V1> groupBy, FloatFunction<? super V> function)
-    {
-        return this.getDelegate().sumByFloat(groupBy, function);
-    }
-
-    public <V1> ObjectLongMap<V1> sumByLong(Function<V, V1> groupBy, LongFunction<? super V> function)
-    {
-        return this.getDelegate().sumByLong(groupBy, function);
-    }
-
-    public <V1> ObjectDoubleMap<V1> sumByDouble(Function<V, V1> groupBy, DoubleFunction<? super V> function)
-    {
-        return this.getDelegate().sumByDouble(groupBy, function);
     }
 }

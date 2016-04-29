@@ -32,6 +32,8 @@ import org.eclipse.collections.api.collection.primitive.ImmutableLongCollection;
 import org.eclipse.collections.api.collection.primitive.ImmutableShortCollection;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MapIterable;
+import org.eclipse.collections.api.map.primitive.ImmutableObjectDoubleMap;
+import org.eclipse.collections.api.map.primitive.ImmutableObjectLongMap;
 import org.eclipse.collections.api.partition.PartitionImmutableCollection;
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 import org.eclipse.collections.impl.Counter;
@@ -45,6 +47,7 @@ import org.eclipse.collections.impl.block.factory.Procedures;
 import org.eclipse.collections.impl.block.function.AddFunction;
 import org.eclipse.collections.impl.block.function.PassThruFunction0;
 import org.eclipse.collections.impl.factory.Lists;
+import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.set.sorted.mutable.TreeSortedSet;
 import org.eclipse.collections.impl.test.Verify;
@@ -55,7 +58,9 @@ import static org.eclipse.collections.impl.factory.Iterables.iList;
 
 public abstract class AbstractImmutableCollectionTestCase
 {
-    public static final Predicate<Integer> ERROR_THROWING_PREDICATE = each -> { throw new AssertionError(); };
+    public static final Predicate<Integer> ERROR_THROWING_PREDICATE = each -> {
+        throw new AssertionError();
+    };
 
     public static final Predicates2<Integer, Class<Integer>> ERROR_THROWING_PREDICATE_2 = new Predicates2<Integer, Class<Integer>>()
     {
@@ -231,6 +236,103 @@ public abstract class AbstractImmutableCollectionTestCase
         Assert.assertEquals(
                 this.classUnderTest().injectInto(0, AddFunction.INTEGER_TO_LONG),
                 this.classUnderTest().sumOfLong(Integer::longValue));
+    }
+
+    @Test
+    public void sumByInt()
+    {
+        MutableCollection<Integer> integers = this.newMutable();
+        integers.addAllIterable(FastList.newListWith(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
+        ImmutableCollection<Integer> values = integers.toImmutable();
+        ImmutableObjectLongMap<Integer> result = values.sumByInt(i -> i % 2, e -> e);
+        Assert.assertEquals(25, result.get(1));
+        Assert.assertEquals(30, result.get(0));
+    }
+
+    @Test
+    public void sumByFloat()
+    {
+        MutableCollection<Integer> integers = this.newMutable();
+        integers.addAllIterable(FastList.newListWith(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
+        ImmutableCollection<Integer> values = integers.toImmutable();
+        ImmutableObjectDoubleMap<Integer> result = values.sumByFloat(f -> f % 2, e -> e);
+        Assert.assertEquals(25.0f, result.get(1), 0.0);
+        Assert.assertEquals(30.0f, result.get(0), 0.0);
+    }
+
+    @Test
+    public void sumByFloatConsistentRounding()
+    {
+        MutableList<Integer> group1 = Interval.oneTo(100_000).toList().shuffleThis();
+        MutableList<Integer> group2 = Interval.fromTo(100_001, 200_000).toList().shuffleThis();
+        MutableList<Integer> integers = Lists.mutable.withAll(group1);
+        integers.addAll(group2);
+        ImmutableCollection<Integer> values = integers.toImmutable();
+
+        ImmutableObjectDoubleMap<Integer> result = values.sumByFloat(
+                integer -> integer > 100_000 ? 2 : 1,
+                integer -> {
+                    Integer i = integer > 100_000 ? integer - 100_000 : integer;
+                    return 1.0f / (i.floatValue() * i.floatValue() * i.floatValue() * i.floatValue());
+                });
+
+        // The test only ensures the consistency/stability of rounding. This is not meant to test the "correctness" of the float calculation result.
+        // Indeed the lower bits of this calculation result are always incorrect due to the information loss of original float values.
+        Assert.assertEquals(
+                1.082323233761663,
+                result.get(1),
+                1.0e-15);
+        Assert.assertEquals(
+                1.082323233761663,
+                result.get(2),
+                1.0e-15);
+    }
+
+    @Test
+    public void sumByLong()
+    {
+        MutableCollection<Integer> integers = this.newMutable();
+        integers.addAllIterable(FastList.newListWith(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
+        ImmutableCollection<Integer> values = integers.toImmutable();
+        ImmutableObjectLongMap<Integer> result = values.sumByLong(l -> l % 2, e -> e);
+        Assert.assertEquals(25, result.get(1));
+        Assert.assertEquals(30, result.get(0));
+    }
+
+    @Test
+    public void sumByDouble()
+    {
+        MutableCollection<Integer> integers = this.newMutable();
+        integers.addAllIterable(FastList.newListWith(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
+        ImmutableCollection<Integer> values = integers.toImmutable();
+        ImmutableObjectDoubleMap<Integer> result = values.sumByDouble(d -> d % 2, e -> e);
+        Assert.assertEquals(25.0d, result.get(1), 0.0);
+        Assert.assertEquals(30.0d, result.get(0), 0.0);
+    }
+
+    @Test
+    public void sumByDoubleConsistentRounding()
+    {
+        MutableList<Integer> group1 = Interval.oneTo(100_000).toList().shuffleThis();
+        MutableList<Integer> group2 = Interval.fromTo(100_001, 200_000).toList().shuffleThis();
+        MutableList<Integer> integers = Lists.mutable.withAll(group1);
+        integers.addAll(group2);
+        ImmutableCollection<Integer> values = integers.toImmutable();
+        ImmutableObjectDoubleMap<Integer> result = values.sumByDouble(
+                integer -> integer > 100_000 ? 2 : 1,
+                integer -> {
+                    Integer i = integer > 100_000 ? integer - 100_000 : integer;
+                    return 1.0d / (i.doubleValue() * i.doubleValue() * i.doubleValue() * i.doubleValue());
+                });
+
+        Assert.assertEquals(
+                1.082323233711138,
+                result.get(1),
+                1.0e-15);
+        Assert.assertEquals(
+                1.082323233711138,
+                result.get(2),
+                1.0e-15);
     }
 
     @Test

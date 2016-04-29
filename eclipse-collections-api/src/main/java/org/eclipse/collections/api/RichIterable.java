@@ -1568,28 +1568,28 @@ public interface
      *
      * @since 6.0
      */
-    <V> ObjectLongMap<V> sumByInt(Function<T, V> groupBy, IntFunction<? super T> function);
+    <V> ObjectLongMap<V> sumByInt(Function<? super T, ? extends V> groupBy, IntFunction<? super T> function);
 
     /**
      * Groups and sums the values using the two specified functions.
      *
      * @since 6.0
      */
-    <V> ObjectDoubleMap<V> sumByFloat(Function<T, V> groupBy, FloatFunction<? super T> function);
+    <V> ObjectDoubleMap<V> sumByFloat(Function<? super T, ? extends V> groupBy, FloatFunction<? super T> function);
 
     /**
      * Groups and sums the values using the two specified functions.
      *
      * @since 6.0
      */
-    <V> ObjectLongMap<V> sumByLong(Function<T, V> groupBy, LongFunction<? super T> function);
+    <V> ObjectLongMap<V> sumByLong(Function<? super T, ? extends V> groupBy, LongFunction<? super T> function);
 
     /**
      * Groups and sums the values using the two specified functions.
      *
      * @since 6.0
      */
-    <V> ObjectDoubleMap<V> sumByDouble(Function<T, V> groupBy, DoubleFunction<? super T> function);
+    <V> ObjectDoubleMap<V> sumByDouble(Function<? super T, ? extends V> groupBy, DoubleFunction<? super T> function);
 
     /**
      * Returns a string representation of this collection by delegating to {@link #makeString(String)} and defaulting

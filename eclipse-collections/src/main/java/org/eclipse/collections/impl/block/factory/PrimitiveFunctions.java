@@ -21,9 +21,8 @@ import org.eclipse.collections.api.block.function.primitive.IntFunction;
 import org.eclipse.collections.api.block.function.primitive.LongFunction;
 import org.eclipse.collections.api.block.function.primitive.ShortFunction;
 import org.eclipse.collections.api.map.primitive.MutableObjectDoubleMap;
+import org.eclipse.collections.api.map.primitive.MutableObjectLongMap;
 import org.eclipse.collections.impl.factory.primitive.ObjectDoubleMaps;
-import org.eclipse.collections.impl.map.mutable.primitive.ObjectDoubleHashMap;
-import org.eclipse.collections.impl.map.mutable.primitive.ObjectLongHashMap;
 
 public final class PrimitiveFunctions
 {
@@ -117,13 +116,13 @@ public final class PrimitiveFunctions
         return UNBOX_FLOAT_TO_FLOAT;
     }
 
-    public static <T, V> Function2<ObjectLongHashMap<V>, T, ObjectLongHashMap<V>> sumByIntFunction(final Function<T, V> groupBy, final IntFunction<? super T> function)
+    public static <T, V> Function2<MutableObjectLongMap<V>, T, MutableObjectLongMap<V>> sumByIntFunction(final Function<? super T, ? extends V> groupBy, final IntFunction<? super T> function)
     {
-        return new Function2<ObjectLongHashMap<V>, T, ObjectLongHashMap<V>>()
+        return new Function2<MutableObjectLongMap<V>, T, MutableObjectLongMap<V>>()
         {
             private static final long serialVersionUID = 1L;
 
-            public ObjectLongHashMap<V> value(ObjectLongHashMap<V> map, T each)
+            public MutableObjectLongMap<V> value(MutableObjectLongMap<V> map, T each)
             {
                 map.addToValue(groupBy.valueOf(each), function.intValueOf(each));
                 return map;
@@ -131,14 +130,14 @@ public final class PrimitiveFunctions
         };
     }
 
-    public static <T, V> Function2<ObjectDoubleHashMap<V>, T, ObjectDoubleHashMap<V>> sumByFloatFunction(final Function<T, V> groupBy, final FloatFunction<? super T> function)
+    public static <T, V> Function2<MutableObjectDoubleMap<V>, T, MutableObjectDoubleMap<V>> sumByFloatFunction(final Function<? super T, ? extends V> groupBy, final FloatFunction<? super T> function)
     {
-        return new Function2<ObjectDoubleHashMap<V>, T, ObjectDoubleHashMap<V>>()
+        return new Function2<MutableObjectDoubleMap<V>, T, MutableObjectDoubleMap<V>>()
         {
             private static final long serialVersionUID = 1L;
-            private final MutableObjectDoubleMap<V> compensation = ObjectDoubleMaps.mutable.of();
+            private final MutableObjectDoubleMap<V> compensation = ObjectDoubleMaps.mutable.empty();
 
-            public ObjectDoubleHashMap<V> value(ObjectDoubleHashMap<V> map, T each)
+            public MutableObjectDoubleMap<V> value(MutableObjectDoubleMap<V> map, T each)
             {
                 V groupKey = groupBy.valueOf(each);
                 double compensation = this.compensation.getIfAbsent(groupKey, 0.0d);
@@ -151,13 +150,13 @@ public final class PrimitiveFunctions
         };
     }
 
-    public static <T, V> Function2<ObjectLongHashMap<V>, T, ObjectLongHashMap<V>> sumByLongFunction(final Function<T, V> groupBy, final LongFunction<? super T> function)
+    public static <T, V> Function2<MutableObjectLongMap<V>, T, MutableObjectLongMap<V>> sumByLongFunction(final Function<? super T, ? extends V> groupBy, final LongFunction<? super T> function)
     {
-        return new Function2<ObjectLongHashMap<V>, T, ObjectLongHashMap<V>>()
+        return new Function2<MutableObjectLongMap<V>, T, MutableObjectLongMap<V>>()
         {
             private static final long serialVersionUID = 1L;
 
-            public ObjectLongHashMap<V> value(ObjectLongHashMap<V> map, T each)
+            public MutableObjectLongMap<V> value(MutableObjectLongMap<V> map, T each)
             {
                 map.addToValue(groupBy.valueOf(each), function.longValueOf(each));
                 return map;
@@ -165,14 +164,14 @@ public final class PrimitiveFunctions
         };
     }
 
-    public static <T, V> Function2<ObjectDoubleHashMap<V>, T, ObjectDoubleHashMap<V>> sumByDoubleFunction(final Function<T, V> groupBy, final DoubleFunction<? super T> function)
+    public static <T, V> Function2<MutableObjectDoubleMap<V>, T, MutableObjectDoubleMap<V>> sumByDoubleFunction(final Function<? super T, ? extends V> groupBy, final DoubleFunction<? super T> function)
     {
-        return new Function2<ObjectDoubleHashMap<V>, T, ObjectDoubleHashMap<V>>()
+        return new Function2<MutableObjectDoubleMap<V>, T, MutableObjectDoubleMap<V>>()
         {
             private static final long serialVersionUID = 1L;
-            private final MutableObjectDoubleMap<V> compensation = ObjectDoubleMaps.mutable.of();
+            private final MutableObjectDoubleMap<V> compensation = ObjectDoubleMaps.mutable.empty();
 
-            public ObjectDoubleHashMap<V> value(ObjectDoubleHashMap<V> map, T each)
+            public MutableObjectDoubleMap<V> value(MutableObjectDoubleMap<V> map, T each)
             {
                 V groupKey = groupBy.valueOf(each);
                 double compensation = this.compensation.getIfAbsent(groupKey, 0.0d);
