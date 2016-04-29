@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -385,13 +385,7 @@ public abstract class AbstractBag<T>
                     Iterable<V> values = function.valueOf(each);
                     for (int i = 0; i < occurrences; i++)
                     {
-                        Iterate.forEach(values, new Procedure<V>()
-                        {
-                            public void value(V each)
-                            {
-                                target.add(each);
-                            }
-                        });
+                        Iterate.forEach(values, target::add);
                     }
                 }
             });
@@ -985,13 +979,7 @@ public abstract class AbstractBag<T>
     public MutableBag<T> toBag()
     {
         final MutableBag<T> result = HashBag.newBag(this.sizeDistinct());
-        this.forEachWithOccurrences(new ObjectIntProcedure<T>()
-        {
-            public void value(T each, int occurrences)
-            {
-                result.addOccurrences(each, occurrences);
-            }
-        });
+        this.forEachWithOccurrences(result::addOccurrences);
         return result;
     }
 
@@ -999,13 +987,7 @@ public abstract class AbstractBag<T>
     public MutableSortedBag<T> toSortedBag()
     {
         final MutableSortedBag<T> result = TreeBag.newBag();
-        this.forEachWithOccurrences(new ObjectIntProcedure<T>()
-        {
-            public void value(T each, int occurrences)
-            {
-                result.addOccurrences(each, occurrences);
-            }
-        });
+        this.forEachWithOccurrences(result::addOccurrences);
         return result;
     }
 
@@ -1013,13 +995,7 @@ public abstract class AbstractBag<T>
     public MutableSortedBag<T> toSortedBag(Comparator<? super T> comparator)
     {
         final MutableSortedBag<T> result = TreeBag.newBag(comparator);
-        this.forEachWithOccurrences(new ObjectIntProcedure<T>()
-        {
-            public void value(T each, int occurrences)
-            {
-                result.addOccurrences(each, occurrences);
-            }
-        });
+        this.forEachWithOccurrences(result::addOccurrences);
         return result;
     }
 

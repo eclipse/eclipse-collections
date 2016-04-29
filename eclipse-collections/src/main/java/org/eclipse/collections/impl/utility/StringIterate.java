@@ -326,13 +326,7 @@ public final class StringIterate
     @Deprecated
     public static void forEach(String string, final org.eclipse.collections.impl.block.procedure.primitive.CharProcedure procedure)
     {
-        StringIterate.forEachChar(string, new CharProcedure()
-        {
-            public void value(char each)
-            {
-                procedure.value(each);
-            }
-        });
+        StringIterate.forEachChar(string, procedure::value);
     }
 
     /**
@@ -476,13 +470,7 @@ public final class StringIterate
     @Deprecated
     public static int count(String string, final org.eclipse.collections.impl.block.predicate.primitive.CharPredicate predicate)
     {
-        return StringIterate.countChar(string, new CharPredicate()
-        {
-            public boolean accept(char value)
-            {
-                return predicate.accept(value);
-            }
-        });
+        return StringIterate.countChar(string, predicate::accept);
     }
 
     /**
@@ -553,13 +541,7 @@ public final class StringIterate
     @Deprecated
     public static String collect(String string, final CharFunction function)
     {
-        return StringIterate.collectChar(string, new CharToCharFunction()
-        {
-            public char valueOf(char charParameter)
-            {
-                return function.valueOf(charParameter);
-            }
-        });
+        return StringIterate.collectChar(string, function::valueOf);
     }
 
     /**

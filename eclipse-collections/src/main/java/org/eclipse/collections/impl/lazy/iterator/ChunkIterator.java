@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -37,26 +37,9 @@ public final class ChunkIterator<T>
         this.size = size;
         this.iterator = iterable.iterator();
 
-        if (iterable instanceof MutableCollection)
-        {
-            this.speciesNewStrategy = new Function0<MutableCollection<T>>()
-            {
-                public MutableCollection<T> value()
-                {
-                    return ((MutableCollection<T>) iterable).newEmpty();
-                }
-            };
-        }
-        else
-        {
-            this.speciesNewStrategy = new Function0<MutableCollection<T>>()
-            {
-                public MutableCollection<T> value()
-                {
-                    return Lists.mutable.empty();
-                }
-            };
-        }
+        this.speciesNewStrategy = iterable instanceof MutableCollection
+                ? ((MutableCollection<T>) iterable)::newEmpty
+                : Lists.mutable::empty;
     }
 
     public void remove()

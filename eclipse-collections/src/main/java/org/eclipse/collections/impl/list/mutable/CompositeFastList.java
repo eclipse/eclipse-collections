@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -53,20 +53,8 @@ public final class CompositeFastList<E>
         extends AbstractMutableList<E>
         implements BatchIterable<E>, Serializable
 {
-    private static final Predicate2<FastList<?>, Object> REMOVE_PREDICATE = new Predicate2<FastList<?>, Object>()
-    {
-        public boolean accept(FastList<?> list, Object toRemove)
-        {
-            return list.remove(toRemove);
-        }
-    };
-    private static final Procedure<FastList<?>> REVERSE_LIST_PROCEDURE = new Procedure<FastList<?>>()
-    {
-        public void value(FastList<?> each)
-        {
-            each.reverseThis();
-        }
-    };
+    private static final Predicate2<FastList<?>, Object> REMOVE_PREDICATE = FastList::remove;
+    private static final Procedure<FastList<?>> REVERSE_LIST_PROCEDURE = FastList::reverseThis;
 
     private static final long serialVersionUID = 2L;
     private final FastList<FastList<E>> lists = FastList.newList();
@@ -229,13 +217,7 @@ public final class CompositeFastList<E>
     @Override
     public boolean isEmpty()
     {
-        return this.lists.allSatisfy(new Predicate<FastList<E>>()
-        {
-            public boolean accept(FastList<E> list)
-            {
-                return list.isEmpty();
-            }
-        });
+        return this.lists.allSatisfy(FastList<E>::isEmpty);
     }
 
     @Override
@@ -354,13 +336,7 @@ public final class CompositeFastList<E>
 
     public void clear()
     {
-        this.lists.forEach(new Procedure<FastList<E>>()
-        {
-            public void value(FastList<E> object)
-            {
-                object.clear();
-            }
-        });
+        this.lists.each(FastList<E>::clear);
         this.size = 0;
     }
 

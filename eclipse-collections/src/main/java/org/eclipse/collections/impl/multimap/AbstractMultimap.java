@@ -94,13 +94,7 @@ public abstract class AbstractMultimap<K, V, C extends RichIterable<V>>
 
     public RichIterable<RichIterable<V>> multiValuesView()
     {
-        return this.getMap().valuesView().collect(new Function<C, RichIterable<V>>()
-        {
-            public RichIterable<V> valueOf(C multiValue)
-            {
-                return UnmodifiableRichIterable.of(multiValue);
-            }
-        });
+        return this.getMap().valuesView().collect(UnmodifiableRichIterable::of);
     }
 
     public Bag<K> keyBag()

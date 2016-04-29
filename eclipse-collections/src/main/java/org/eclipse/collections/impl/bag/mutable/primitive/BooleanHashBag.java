@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -200,13 +200,7 @@ public final class BooleanHashBag implements MutableBooleanBag, Externalizable
 
     public boolean containsAll(BooleanIterable source)
     {
-        return source.allSatisfy(new BooleanPredicate()
-        {
-            public boolean accept(boolean each)
-            {
-                return BooleanHashBag.this.contains(each);
-            }
-        });
+        return source.allSatisfy(this::contains);
     }
 
     public int occurrencesOf(boolean item)
@@ -283,13 +277,7 @@ public final class BooleanHashBag implements MutableBooleanBag, Externalizable
         if (source instanceof BooleanBag)
         {
             BooleanBag otherBag = (BooleanBag) source;
-            otherBag.forEachWithOccurrences(new BooleanIntProcedure()
-            {
-                public void value(boolean each, int occurrences)
-                {
-                    BooleanHashBag.this.addOccurrences(each, occurrences);
-                }
-            });
+            otherBag.forEachWithOccurrences(this::addOccurrences);
         }
         else
         {

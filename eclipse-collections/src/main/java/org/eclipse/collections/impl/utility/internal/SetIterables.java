@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -161,13 +161,7 @@ public final class SetIterables
      */
     public static <T> ImmutableSet<ImmutableSet<T>> immutablePowerSet(Set<T> set)
     {
-        return powerSet(set).collect(new Function<MutableSet<T>, ImmutableSet<T>>()
-        {
-            public ImmutableSet<T> valueOf(MutableSet<T> set)
-            {
-                return set.toImmutable();
-            }
-        }).toImmutable();
+        return powerSet(set).collect(MutableSet<T>::toImmutable).toImmutable();
     }
 
     public static <A, B> LazyIterable<Pair<A, B>> cartesianProduct(SetIterable<A> set1, final SetIterable<B> set2)

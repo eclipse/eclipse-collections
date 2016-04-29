@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -76,13 +76,7 @@ public class CodePointAdapter extends AbstractIntIterable implements CharSequenc
         {
             return new CodePointAdapter(iterable.toString());
         }
-        StringBuilder builder = iterable.injectInto(new StringBuilder(), new ObjectIntToObjectFunction<StringBuilder, StringBuilder>()
-        {
-            public StringBuilder valueOf(StringBuilder builder, int value)
-            {
-                return builder.appendCodePoint(value);
-            }
-        });
+        StringBuilder builder = iterable.injectInto(new StringBuilder(), StringBuilder::appendCodePoint);
         return new CodePointAdapter(builder.toString());
     }
 
@@ -203,13 +197,7 @@ public class CodePointAdapter extends AbstractIntIterable implements CharSequenc
     public CodePointAdapter newWithAll(IntIterable elements)
     {
         final StringBuilder builder = new StringBuilder(this.adapted);
-        elements.each(new IntProcedure()
-        {
-            public void value(int each)
-            {
-                builder.appendCodePoint(each);
-            }
-        });
+        elements.each(builder::appendCodePoint);
         return new CodePointAdapter(builder.toString());
     }
 
@@ -224,13 +212,7 @@ public class CodePointAdapter extends AbstractIntIterable implements CharSequenc
     {
         final StringBuilder builder = new StringBuilder();
         LazyIntIterable reversed = this.asReversed();
-        reversed.each(new IntProcedure()
-        {
-            public void value(int codePoint)
-            {
-                builder.appendCodePoint(codePoint);
-            }
-        });
+        reversed.each(builder::appendCodePoint);
         return new CodePointAdapter(builder.toString());
     }
 

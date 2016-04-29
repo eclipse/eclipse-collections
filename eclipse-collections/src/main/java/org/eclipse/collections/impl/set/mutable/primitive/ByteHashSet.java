@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -419,13 +419,7 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
         int oldSize = this.size();
         final ByteSet sourceSet = source instanceof ByteSet ? (ByteSet) source : source.toSet();
 
-        ByteHashSet retained = this.select(new BytePredicate()
-        {
-            public boolean accept(byte value)
-            {
-                return sourceSet.contains(value);
-            }
-        });
+        ByteHashSet retained = this.select(sourceSet::contains);
         if (retained.size() != oldSize)
         {
             this.bitGroup3 = retained.bitGroup3;

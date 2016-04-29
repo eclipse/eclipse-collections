@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -62,13 +62,7 @@ public final class SortedSetIterables
      */
     public static <T> ImmutableSortedSet<ImmutableSortedSet<T>> immutablePowerSet(SortedSet<T> set)
     {
-        return powerSet(set).collect(new Function<MutableSortedSet<T>, ImmutableSortedSet<T>>()
-        {
-            public ImmutableSortedSet<T> valueOf(MutableSortedSet<T> set)
-            {
-                return set.toImmutable();
-            }
-        }, TreeSortedSet.<ImmutableSortedSet<T>>newSet(Comparators.<T>powerSet())).toImmutable();
+        return powerSet(set).collect(MutableSortedSet<T>::toImmutable, TreeSortedSet.<ImmutableSortedSet<T>>newSet(Comparators.<T>powerSet())).toImmutable();
     }
 
     public static <T> int compare(SortedSetIterable<T> setA, SortedSetIterable<T> setB)

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -25,7 +25,6 @@ import org.eclipse.collections.api.bag.Bag;
 import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
 import org.eclipse.collections.api.bag.sorted.SortedBag;
 import org.eclipse.collections.api.block.function.Function;
-import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.predicate.primitive.IntPredicate;
@@ -60,13 +59,6 @@ public class TreeBag<T>
         extends AbstractMutableSortedBag<T>
         implements Externalizable
 {
-    private static final Function0<Counter> NEW_COUNTER_BLOCK = new Function0<Counter>()
-    {
-        public Counter value()
-        {
-            return new Counter();
-        }
-    };
     private static final long serialVersionUID = 1L;
     private MutableSortedMap<T, Counter> items;
     private int size;
@@ -452,7 +444,7 @@ public class TreeBag<T>
         }
         if (occurrences > 0)
         {
-            Counter counter = this.items.getIfAbsentPut(item, NEW_COUNTER_BLOCK);
+            Counter counter = this.items.getIfAbsentPut(item, Counter::new);
             counter.add(occurrences);
             this.size += occurrences;
             return counter.getCount();
@@ -701,7 +693,7 @@ public class TreeBag<T>
 
     public boolean add(T item)
     {
-        Counter counter = this.items.getIfAbsentPut(item, NEW_COUNTER_BLOCK);
+        Counter counter = this.items.getIfAbsentPut(item, Counter::new);
         counter.increment();
         this.size++;
         return true;

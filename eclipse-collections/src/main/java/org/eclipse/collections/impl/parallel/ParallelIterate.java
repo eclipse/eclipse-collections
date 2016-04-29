@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -33,7 +33,6 @@ import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
-import org.eclipse.collections.api.block.procedure.primitive.ObjectLongProcedure;
 import org.eclipse.collections.api.list.ListIterable;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.primitive.ObjectDoubleMap;
@@ -1600,13 +1599,7 @@ public final class ParallelIterate
             }
             else
             {
-                thingToCombine.getResult().forEachKeyValue(new ObjectLongProcedure<V>()
-                {
-                    public void value(V each, long value)
-                    {
-                        SumByLongCombiner.this.result.addToValue(each, value);
-                    }
-                });
+                thingToCombine.getResult().forEachKeyValue(this.result::addToValue);
             }
         }
     }
@@ -1657,13 +1650,7 @@ public final class ParallelIterate
             }
             else
             {
-                thingToCombine.getResult().forEachKeyValue(new ObjectLongProcedure<V>()
-                {
-                    public void value(V each, long value)
-                    {
-                        SumByIntCombiner.this.result.addToValue(each, value);
-                    }
-                });
+                thingToCombine.getResult().forEachKeyValue(this.result::addToValue);
             }
         }
     }

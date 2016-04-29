@@ -1186,13 +1186,7 @@ public class UnifiedMapWithHashingStrategy<K, V> extends AbstractMutableMap<K, V
         else if (map instanceof UnsortedMapIterable)
         {
             MapIterable<K, V> mapIterable = (MapIterable<K, V>) map;
-            mapIterable.forEachKeyValue(new Procedure2<K, V>()
-            {
-                public void value(K key, V value)
-                {
-                    UnifiedMapWithHashingStrategy.this.put(key, value);
-                }
-            });
+            mapIterable.forEachKeyValue(this::put);
         }
         else
         {

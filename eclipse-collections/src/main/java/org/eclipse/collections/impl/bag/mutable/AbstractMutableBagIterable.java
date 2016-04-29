@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -285,12 +285,6 @@ public abstract class AbstractMutableBagIterable<T>
 
     public MutableList<ObjectIntPair<T>> bottomOccurrences(int n)
     {
-        return this.occurrencesSortingBy(n, new IntFunction<ObjectIntPair<T>>()
-        {
-            public int intValueOf(ObjectIntPair<T> item)
-            {
-                return item.getTwo();
-            }
-        }, Lists.mutable.<ObjectIntPair<T>>empty());
+        return this.occurrencesSortingBy(n, ObjectIntPair<T>::getTwo, Lists.mutable.<ObjectIntPair<T>>empty());
     }
 }

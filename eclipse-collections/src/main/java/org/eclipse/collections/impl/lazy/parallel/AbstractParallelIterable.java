@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -314,13 +314,7 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
         }).toList();
 
         final ExecutorCompletionService<V> completionService = new ExecutorCompletionService<V>(this.getExecutorService());
-        callables.forEach(new Procedure<Callable<V>>()
-        {
-            public void value(Callable<V> callable)
-            {
-                completionService.submit(callable);
-            }
-        });
+        callables.each(completionService::submit);
 
         int numTasks = callables.size();
         while (numTasks > 0)
@@ -425,13 +419,7 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
         }).toList();
 
         final ExecutorCompletionService<T> completionService = new ExecutorCompletionService<T>(this.getExecutorService());
-        callables.forEach(new Procedure<Callable<T>>()
-        {
-            public void value(Callable<T> callable)
-            {
-                completionService.submit(callable);
-            }
-        });
+        callables.each(completionService::submit);
 
         try
         {
@@ -612,15 +600,8 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
                 return list;
             }
         };
-        Procedure2<MutableList<T>, FastList<T>> reduce = new Procedure2<MutableList<T>, FastList<T>>()
-        {
-            public void value(MutableList<T> accumulator, FastList<T> each)
-            {
-                accumulator.addAll(each);
-            }
-        };
         MutableList<T> state = new CompositeFastList<T>();
-        this.collectCombine(map, reduce, state);
+        this.collectCombine(map, MutableList<T>::addAll, state);
         return state;
     }
 
@@ -749,16 +730,8 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
             }
         };
 
-        Procedure2<Counter, Integer> combineProcedure = new Procedure2<Counter, Integer>()
-        {
-            public void value(Counter counter, Integer eachCount)
-            {
-                counter.add(eachCount);
-            }
-        };
-
         Counter state = new Counter();
-        this.collectCombineUnordered(map, combineProcedure, state);
+        this.collectCombineUnordered(map, Counter::add, state);
         return state.getCount();
     }
 

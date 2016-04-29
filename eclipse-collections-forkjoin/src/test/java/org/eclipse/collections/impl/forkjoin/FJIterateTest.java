@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -399,13 +399,7 @@ public class FJIterateTest
     @Test
     public void select()
     {
-        this.iterables.forEach(new Procedure<RichIterable<Integer>>()
-        {
-            public void value(RichIterable<Integer> each)
-            {
-                FJIterateTest.this.basicSelect(each);
-            }
-        });
+        this.iterables.each(this::basicSelect);
     }
 
     private void basicSelect(RichIterable<Integer> iterable)
@@ -435,13 +429,7 @@ public class FJIterateTest
     @Test
     public void count()
     {
-        this.iterables.forEach(new Procedure<RichIterable<Integer>>()
-        {
-            public void value(RichIterable<Integer> each)
-            {
-                FJIterateTest.this.basicCount(each);
-            }
-        });
+        this.iterables.each(this::basicCount);
     }
 
     private void basicCount(RichIterable<Integer> iterable)
@@ -455,13 +443,7 @@ public class FJIterateTest
     @Test
     public void reject()
     {
-        this.iterables.forEach(new Procedure<RichIterable<Integer>>()
-        {
-            public void value(RichIterable<Integer> each)
-            {
-                FJIterateTest.this.basicReject(each);
-            }
-        });
+        this.iterables.each(this::basicReject);
     }
 
     private void basicReject(RichIterable<Integer> iterable)
@@ -478,13 +460,7 @@ public class FJIterateTest
     @Test
     public void collect()
     {
-        this.iterables.forEach(new Procedure<RichIterable<Integer>>()
-        {
-            public void value(RichIterable<Integer> each)
-            {
-                FJIterateTest.this.basicCollect(each);
-            }
-        });
+        this.iterables.each(this::basicCollect);
     }
 
     private void basicCollect(RichIterable<Integer> iterable)
@@ -503,13 +479,7 @@ public class FJIterateTest
     @Test
     public void collectIf()
     {
-        this.iterables.forEach(new Procedure<RichIterable<Integer>>()
-        {
-            public void value(RichIterable<Integer> each)
-            {
-                FJIterateTest.this.basicCollectIf(each);
-            }
-        });
+        this.iterables.each(this::basicCollectIf);
     }
 
     private void basicCollectIf(RichIterable<Integer> collection)
@@ -683,13 +653,7 @@ public class FJIterateTest
     @Test
     public void flatCollect()
     {
-        this.iterables.forEach(new Procedure<RichIterable<Integer>>()
-        {
-            public void value(RichIterable<Integer> each)
-            {
-                FJIterateTest.this.basicFlatCollect(each);
-            }
-        });
+        this.iterables.each(this::basicFlatCollect);
     }
 
     private void basicFlatCollect(RichIterable<Integer> iterable)

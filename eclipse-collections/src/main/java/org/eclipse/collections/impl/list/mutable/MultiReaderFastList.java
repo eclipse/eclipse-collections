@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -1473,20 +1473,8 @@ public final class MultiReaderFastList<T>
         public void becomeUseless()
         {
             this.delegate = null;
-            this.requestedSubLists.forEach(new Procedure<UntouchableMutableList<T>>()
-            {
-                public void value(UntouchableMutableList<T> each)
-                {
-                    each.becomeUseless();
-                }
-            });
-            this.requestedIterators.forEach(new Procedure<UntouchableListIterator<T>>()
-            {
-                public void value(UntouchableListIterator<T> each)
-                {
-                    each.becomeUseless();
-                }
-            });
+            this.requestedSubLists.each(UntouchableMutableList<T>::becomeUseless);
+            this.requestedIterators.each(UntouchableListIterator<T>::becomeUseless);
         }
 
         private MutableList<T> getDelegate()
