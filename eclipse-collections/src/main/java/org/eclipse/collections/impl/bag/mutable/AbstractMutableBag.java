@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -37,7 +37,6 @@ import org.eclipse.collections.api.block.function.primitive.ShortFunction;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
-import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
 import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.partition.bag.PartitionMutableBag;
 import org.eclipse.collections.api.set.MutableSet;
@@ -83,14 +82,10 @@ public abstract class AbstractMutableBag<T>
     public <S> MutableBag<S> selectInstancesOf(final Class<S> clazz)
     {
         final MutableBag<S> result = HashBag.newBag();
-        this.forEachWithOccurrences(new ObjectIntProcedure<T>()
-        {
-            public void value(T each, int occurrences)
+        this.forEachWithOccurrences((each, occurrences) -> {
+            if (clazz.isInstance(each))
             {
-                if (clazz.isInstance(each))
-                {
-                    result.addOccurrences((S) each, occurrences);
-                }
+                result.addOccurrences((S) each, occurrences);
             }
         });
         return result;
@@ -119,13 +114,9 @@ public abstract class AbstractMutableBag<T>
     public PartitionMutableBag<T> partition(final Predicate<? super T> predicate)
     {
         final PartitionMutableBag<T> result = new PartitionHashBag<T>();
-        this.forEachWithOccurrences(new ObjectIntProcedure<T>()
-        {
-            public void value(T each, int index)
-            {
-                MutableBag<T> bucket = predicate.accept(each) ? result.getSelected() : result.getRejected();
-                bucket.addOccurrences(each, index);
-            }
+        this.forEachWithOccurrences((each, index) -> {
+            MutableBag<T> bucket = predicate.accept(each) ? result.getSelected() : result.getRejected();
+            bucket.addOccurrences(each, index);
         });
         return result;
     }
@@ -133,13 +124,9 @@ public abstract class AbstractMutableBag<T>
     public <P> PartitionMutableBag<T> partitionWith(final Predicate2<? super T, ? super P> predicate, final P parameter)
     {
         final PartitionMutableBag<T> result = new PartitionHashBag<T>();
-        this.forEachWithOccurrences(new ObjectIntProcedure<T>()
-        {
-            public void value(T each, int index)
-            {
-                MutableBag<T> bucket = predicate.accept(each, parameter) ? result.getSelected() : result.getRejected();
-                bucket.addOccurrences(each, index);
-            }
+        this.forEachWithOccurrences((each, index) -> {
+            MutableBag<T> bucket = predicate.accept(each, parameter) ? result.getSelected() : result.getRejected();
+            bucket.addOccurrences(each, index);
         });
         return result;
     }

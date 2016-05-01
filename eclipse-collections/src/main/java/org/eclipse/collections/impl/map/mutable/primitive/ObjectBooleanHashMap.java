@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -1309,13 +1309,7 @@ public class ObjectBooleanHashMap<K> implements MutableObjectBooleanMap<K>, Exte
         {
             int oldSize = ObjectBooleanHashMap.this.size();
             final BooleanSet sourceSet = source instanceof BooleanSet ? (BooleanSet) source : source.toSet();
-            ObjectBooleanHashMap<K> retained = ObjectBooleanHashMap.this.select(new ObjectBooleanPredicate<K>()
-            {
-                public boolean accept(K object, boolean value)
-                {
-                    return sourceSet.contains(value);
-                }
-            });
+            ObjectBooleanHashMap<K> retained = ObjectBooleanHashMap.this.select((object, value) -> sourceSet.contains(value));
             if (retained.size() != oldSize)
             {
                 ObjectBooleanHashMap.this.keys = retained.keys;

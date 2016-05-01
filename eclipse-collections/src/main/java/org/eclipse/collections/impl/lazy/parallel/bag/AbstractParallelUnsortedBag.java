@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -17,7 +17,6 @@ import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
-import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
 import org.eclipse.collections.api.multimap.bag.MutableBagMultimap;
 import org.eclipse.collections.api.multimap.bag.UnsortedBagMultimap;
 import org.eclipse.collections.api.set.ParallelUnsortedSetIterable;
@@ -98,15 +97,11 @@ public abstract class AbstractParallelUnsortedBag<T, B extends UnsortedBagBatch<
     public <V> UnsortedBagMultimap<V, T> groupBy(final Function<? super T, ? extends V> function)
     {
         final MutableBagMultimap<V, T> result = SynchronizedPutHashBagMultimap.newMultimap();
-        this.forEachWithOccurrences(new ObjectIntProcedure<T>()
-        {
-            public void value(T each, int occurrences)
+        this.forEachWithOccurrences((each, occurrences) -> {
+            V key = function.valueOf(each);
+            for (int i = 0; i < occurrences; i++)
             {
-                V key = function.valueOf(each);
-                for (int i = 0; i < occurrences; i++)
-                {
-                    result.put(key, each);
-                }
+                result.put(key, each);
             }
         });
         return result;
@@ -115,17 +110,13 @@ public abstract class AbstractParallelUnsortedBag<T, B extends UnsortedBagBatch<
     public <V> UnsortedBagMultimap<V, T> groupByEach(final Function<? super T, ? extends Iterable<V>> function)
     {
         final MutableBagMultimap<V, T> result = SynchronizedPutHashBagMultimap.newMultimap();
-        this.forEachWithOccurrences(new ObjectIntProcedure<T>()
-        {
-            public void value(T each, int occurrences)
+        this.forEachWithOccurrences((each, occurrences) -> {
+            Iterable<V> keys = function.valueOf(each);
+            for (V key : keys)
             {
-                Iterable<V> keys = function.valueOf(each);
-                for (V key : keys)
+                for (int i = 0; i < occurrences; i++)
                 {
-                    for (int i = 0; i < occurrences; i++)
-                    {
-                        result.put(key, each);
-                    }
+                    result.put(key, each);
                 }
             }
         });

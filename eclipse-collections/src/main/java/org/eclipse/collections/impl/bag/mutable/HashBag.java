@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs and others.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -19,7 +19,6 @@ import java.util.Arrays;
 import org.eclipse.collections.api.bag.Bag;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.block.predicate.primitive.IntPredicate;
-import org.eclipse.collections.api.block.predicate.primitive.ObjectIntPredicate;
 import org.eclipse.collections.api.map.primitive.MutableObjectIntMap;
 import org.eclipse.collections.impl.map.mutable.primitive.ObjectIntHashMap;
 import org.eclipse.collections.impl.utility.ArrayIterate;
@@ -95,12 +94,8 @@ public class HashBag<T>
     @Override
     public MutableBag<T> selectByOccurrences(final IntPredicate predicate)
     {
-        MutableObjectIntMap<T> map = this.items.select(new ObjectIntPredicate<T>()
-        {
-            public boolean accept(T each, int occurrences)
-            {
-                return predicate.accept(occurrences);
-            }
+        MutableObjectIntMap<T> map = this.items.select((each, occurrences) -> {
+            return predicate.accept(occurrences);
         });
         return new HashBag<T>(map);
     }

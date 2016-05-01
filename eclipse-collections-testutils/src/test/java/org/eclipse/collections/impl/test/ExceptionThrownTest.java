@@ -57,12 +57,8 @@ public class ExceptionThrownTest
             Verify.assertThrowsWithCause(
                     IllegalStateException.class,
                     IllegalArgumentException.class,
-                    new Runnable()
-                    {
-                        public void run()
-                        {
-                            throw new IllegalStateException();
-                        }
+                    (Runnable) () -> {
+                        throw new IllegalStateException();
                     });
             Assert.fail("AssertionError expected");
         }

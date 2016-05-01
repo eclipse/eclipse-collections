@@ -190,14 +190,10 @@ public class ImmutableArrayBag<T>
     public ImmutableBag<T> selectByOccurrences(final IntPredicate predicate)
     {
         final MutableBag<T> result = HashBag.newBag();
-        this.forEachWithOccurrences(new ObjectIntProcedure<T>()
-        {
-            public void value(T each, int occurrences)
+        this.forEachWithOccurrences((each, occurrences) -> {
+            if (predicate.accept(occurrences))
             {
-                if (predicate.accept(occurrences))
-                {
-                    result.addOccurrences(each, occurrences);
-                }
+                result.addOccurrences(each, occurrences);
             }
         });
         return result.toImmutable();
@@ -206,14 +202,10 @@ public class ImmutableArrayBag<T>
     public <S> ImmutableBag<S> selectInstancesOf(final Class<S> clazz)
     {
         final MutableBag<S> result = HashBag.newBag();
-        this.forEachWithOccurrences(new ObjectIntProcedure<T>()
-        {
-            public void value(T each, int index)
+        this.forEachWithOccurrences((each, index) -> {
+            if (clazz.isInstance(each))
             {
-                if (clazz.isInstance(each))
-                {
-                    result.addOccurrences((S) each, index);
-                }
+                result.addOccurrences((S) each, index);
             }
         });
         return ImmutableArrayBag.copyFrom(result);

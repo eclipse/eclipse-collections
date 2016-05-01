@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -16,29 +16,11 @@ import org.eclipse.collections.api.block.function.Function;
 
 public final class Person implements Comparable<Person>, Serializable
 {
-    public static final Function<Person, String> TO_FIRST = new Function<Person, String>()
-    {
-        public String valueOf(Person person)
-        {
-            return person.firstName;
-        }
-    };
+    public static final Function<Person, String> TO_FIRST = person -> person.firstName;
 
-    public static final Function<Person, String> TO_LAST = new Function<Person, String>()
-    {
-        public String valueOf(Person person)
-        {
-            return person.lastName;
-        }
-    };
+    public static final Function<Person, String> TO_LAST = person -> person.lastName;
 
-    public static final Function<Person, Integer> TO_AGE = new Function<Person, Integer>()
-    {
-        public Integer valueOf(Person person)
-        {
-            return person.age;
-        }
-    };
+    public static final Function<Person, Integer> TO_AGE = person -> person.age;
     private static final long serialVersionUID = 1L;
 
     private final String firstName;

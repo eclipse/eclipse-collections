@@ -19,16 +19,12 @@ public class MultimapEachPutProcedureSerializationTest
     public void serializedForm()
     {
         Verify.assertSerializedForm(
-                1L,
+                2L,
                 "rO0ABXNyAEVvcmcuZWNsaXBzZS5jb2xsZWN0aW9ucy5pbXBsLmJsb2NrLnByb2NlZHVyZS5NdWx0\n"
-                        + "aW1hcEVhY2hQdXRQcm9jZWR1cmUAAAAAAAAAAQIAA0wADWVhY2hQcm9jZWR1cmV0ADhMb3JnL2Vj\n"
-                        + "bGlwc2UvY29sbGVjdGlvbnMvYXBpL2Jsb2NrL3Byb2NlZHVyZS9Qcm9jZWR1cmUyO0wAC2tleUZ1\n"
-                        + "bmN0aW9udAA1TG9yZy9lY2xpcHNlL2NvbGxlY3Rpb25zL2FwaS9ibG9jay9mdW5jdGlvbi9GdW5j\n"
-                        + "dGlvbjtMAAhtdWx0aW1hcHQANkxvcmcvZWNsaXBzZS9jb2xsZWN0aW9ucy9hcGkvbXVsdGltYXAv\n"
-                        + "TXV0YWJsZU11bHRpbWFwO3hwc3IAR29yZy5lY2xpcHNlLmNvbGxlY3Rpb25zLmltcGwuYmxvY2su\n"
-                        + "cHJvY2VkdXJlLk11bHRpbWFwRWFjaFB1dFByb2NlZHVyZSQxNw5+OlkSRcgCAAFMAAZ0aGlzJDB0\n"
-                        + "AEdMb3JnL2VjbGlwc2UvY29sbGVjdGlvbnMvaW1wbC9ibG9jay9wcm9jZWR1cmUvTXVsdGltYXBF\n"
-                        + "YWNoUHV0UHJvY2VkdXJlO3hwcQB+AARwcA==",
+                        + "aW1hcEVhY2hQdXRQcm9jZWR1cmUAAAAAAAAAAgIAAkwAC2tleUZ1bmN0aW9udAA1TG9yZy9lY2xp\n"
+                        + "cHNlL2NvbGxlY3Rpb25zL2FwaS9ibG9jay9mdW5jdGlvbi9GdW5jdGlvbjtMAAhtdWx0aW1hcHQA\n"
+                        + "NkxvcmcvZWNsaXBzZS9jb2xsZWN0aW9ucy9hcGkvbXVsdGltYXAvTXV0YWJsZU11bHRpbWFwO3hw\n"
+                        + "cHA=",
                 new MultimapEachPutProcedure<Object, Object>(null, null));
     }
 }

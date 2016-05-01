@@ -36,7 +36,6 @@ import org.eclipse.collections.api.block.function.primitive.ShortFunction;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
-import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
 import org.eclipse.collections.api.collection.MutableCollection;
 import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
@@ -95,15 +94,11 @@ public abstract class AbstractImmutableBag<T>
     public PartitionImmutableBag<T> partition(final Predicate<? super T> predicate)
     {
         final PartitionMutableBag<T> partitionMutableBag = new PartitionHashBag<T>();
-        this.forEachWithOccurrences(new ObjectIntProcedure<T>()
-        {
-            public void value(T each, int occurrences)
-            {
-                MutableBag<T> bucket = predicate.accept(each)
-                        ? partitionMutableBag.getSelected()
-                        : partitionMutableBag.getRejected();
-                bucket.addOccurrences(each, occurrences);
-            }
+        this.forEachWithOccurrences((each, occurrences) -> {
+            MutableBag<T> bucket = predicate.accept(each)
+                    ? partitionMutableBag.getSelected()
+                    : partitionMutableBag.getRejected();
+            bucket.addOccurrences(each, occurrences);
         });
         return partitionMutableBag.toImmutable();
     }
@@ -111,15 +106,11 @@ public abstract class AbstractImmutableBag<T>
     public <P> PartitionImmutableBag<T> partitionWith(final Predicate2<? super T, ? super P> predicate, final P parameter)
     {
         final PartitionMutableBag<T> partitionMutableBag = new PartitionHashBag<T>();
-        this.forEachWithOccurrences(new ObjectIntProcedure<T>()
-        {
-            public void value(T each, int occurrences)
-            {
-                MutableBag<T> bucket = predicate.accept(each, parameter)
-                        ? partitionMutableBag.getSelected()
-                        : partitionMutableBag.getRejected();
-                bucket.addOccurrences(each, occurrences);
-            }
+        this.forEachWithOccurrences((each, occurrences) -> {
+            MutableBag<T> bucket = predicate.accept(each, parameter)
+                    ? partitionMutableBag.getSelected()
+                    : partitionMutableBag.getRejected();
+            bucket.addOccurrences(each, occurrences);
         });
         return partitionMutableBag.toImmutable();
     }
@@ -172,13 +163,7 @@ public abstract class AbstractImmutableBag<T>
     public ImmutableList<ObjectIntPair<T>> topOccurrences(int n)
     {
         return this.occurrencesSortingBy(n,
-                new IntFunction<ObjectIntPair<T>>()
-                {
-                    public int intValueOf(ObjectIntPair<T> item)
-                    {
-                        return -item.getTwo();
-                    }
-                },
+                item -> -item.getTwo(),
                 Lists.fixedSize.<ObjectIntPair<T>>empty()
         ).toImmutable();
     }

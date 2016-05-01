@@ -13,8 +13,6 @@ package org.eclipse.collections.impl.utility.internal;
 import java.util.Set;
 
 import org.eclipse.collections.api.LazyIterable;
-import org.eclipse.collections.api.block.function.Function;
-import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.set.SetIterable;
@@ -141,19 +139,7 @@ public final class SetIterables
 
     private static <T> MutableSet<MutableSet<T>> powerSetWithSeed(Set<T> set, MutableSet<MutableSet<T>> seed)
     {
-        return Iterate.injectInto(seed, set, new Function2<MutableSet<MutableSet<T>>, T, MutableSet<MutableSet<T>>>()
-        {
-            public MutableSet<MutableSet<T>> value(MutableSet<MutableSet<T>> accumulator, final T element)
-            {
-                return SetIterables.union(accumulator, accumulator.collect(new Function<MutableSet<T>, MutableSet<T>>()
-                {
-                    public MutableSet<T> valueOf(MutableSet<T> innerSet)
-                    {
-                        return innerSet.clone().with(element);
-                    }
-                }));
-            }
-        });
+        return Iterate.injectInto(seed, set, (accumulator, element) -> SetIterables.union(accumulator, accumulator.collect(innerSet -> innerSet.clone().with(element))));
     }
 
     /**
@@ -166,18 +152,6 @@ public final class SetIterables
 
     public static <A, B> LazyIterable<Pair<A, B>> cartesianProduct(SetIterable<A> set1, final SetIterable<B> set2)
     {
-        return LazyIterate.flatCollect(set1, new Function<A, LazyIterable<Pair<A, B>>>()
-        {
-            public LazyIterable<Pair<A, B>> valueOf(final A first)
-            {
-                return LazyIterate.collect(set2, new Function<B, Pair<A, B>>()
-                {
-                    public Pair<A, B> valueOf(B second)
-                    {
-                        return Tuples.pair(first, second);
-                    }
-                });
-            }
-        });
+        return LazyIterate.flatCollect(set1, first -> LazyIterate.collect(set2, second -> Tuples.pair(first, second)));
     }
 }

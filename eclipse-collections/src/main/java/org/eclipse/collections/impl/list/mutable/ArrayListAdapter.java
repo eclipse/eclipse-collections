@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -314,13 +314,7 @@ public final class ArrayListAdapter<T>
     public MutableBooleanList collectBoolean(final BooleanFunction<? super T> booleanFunction)
     {
         final BooleanArrayList result = new BooleanArrayList(this.size());
-        this.forEach(new Procedure<T>()
-        {
-            public void value(T each)
-            {
-                result.add(booleanFunction.booleanValueOf(each));
-            }
-        });
+        this.each(each -> result.add(booleanFunction.booleanValueOf(each)));
         return result;
     }
 
@@ -328,13 +322,7 @@ public final class ArrayListAdapter<T>
     public MutableByteList collectByte(final ByteFunction<? super T> byteFunction)
     {
         final ByteArrayList result = new ByteArrayList(this.size());
-        this.forEach(new Procedure<T>()
-        {
-            public void value(T each)
-            {
-                result.add(byteFunction.byteValueOf(each));
-            }
-        });
+        this.each(each -> result.add(byteFunction.byteValueOf(each)));
         return result;
     }
 
@@ -342,13 +330,7 @@ public final class ArrayListAdapter<T>
     public MutableCharList collectChar(final CharFunction<? super T> charFunction)
     {
         final CharArrayList result = new CharArrayList(this.size());
-        this.forEach(new Procedure<T>()
-        {
-            public void value(T each)
-            {
-                result.add(charFunction.charValueOf(each));
-            }
-        });
+        this.each(each -> result.add(charFunction.charValueOf(each)));
         return result;
     }
 
@@ -356,13 +338,7 @@ public final class ArrayListAdapter<T>
     public MutableDoubleList collectDouble(final DoubleFunction<? super T> doubleFunction)
     {
         final DoubleArrayList result = new DoubleArrayList(this.size());
-        this.forEach(new Procedure<T>()
-        {
-            public void value(T each)
-            {
-                result.add(doubleFunction.doubleValueOf(each));
-            }
-        });
+        this.each(each -> result.add(doubleFunction.doubleValueOf(each)));
         return result;
     }
 
@@ -370,13 +346,7 @@ public final class ArrayListAdapter<T>
     public MutableFloatList collectFloat(final FloatFunction<? super T> floatFunction)
     {
         final FloatArrayList result = new FloatArrayList(this.size());
-        this.forEach(new Procedure<T>()
-        {
-            public void value(T each)
-            {
-                result.add(floatFunction.floatValueOf(each));
-            }
-        });
+        this.each(each -> result.add(floatFunction.floatValueOf(each)));
         return result;
     }
 
@@ -384,13 +354,7 @@ public final class ArrayListAdapter<T>
     public MutableIntList collectInt(final IntFunction<? super T> intFunction)
     {
         final IntArrayList result = new IntArrayList(this.size());
-        this.forEach(new Procedure<T>()
-        {
-            public void value(T each)
-            {
-                result.add(intFunction.intValueOf(each));
-            }
-        });
+        this.each(each -> result.add(intFunction.intValueOf(each)));
         return result;
     }
 
@@ -398,13 +362,7 @@ public final class ArrayListAdapter<T>
     public MutableLongList collectLong(final LongFunction<? super T> longFunction)
     {
         final LongArrayList result = new LongArrayList(this.size());
-        this.forEach(new Procedure<T>()
-        {
-            public void value(T each)
-            {
-                result.add(longFunction.longValueOf(each));
-            }
-        });
+        this.each(each -> result.add(longFunction.longValueOf(each)));
         return result;
     }
 
@@ -412,13 +370,7 @@ public final class ArrayListAdapter<T>
     public MutableShortList collectShort(final ShortFunction<? super T> shortFunction)
     {
         final ShortArrayList result = new ShortArrayList(this.size());
-        this.forEach(new Procedure<T>()
-        {
-            public void value(T each)
-            {
-                result.add(shortFunction.shortValueOf(each));
-            }
-        });
+        this.each(each -> result.add(shortFunction.shortValueOf(each)));
         return result;
     }
 

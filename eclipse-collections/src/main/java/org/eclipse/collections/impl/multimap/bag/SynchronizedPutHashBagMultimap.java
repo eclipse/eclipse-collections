@@ -17,8 +17,6 @@ import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.predicate.Predicate2;
-import org.eclipse.collections.api.block.procedure.Procedure;
-import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.multimap.Multimap;
 import org.eclipse.collections.api.multimap.bag.ImmutableBagMultimap;
@@ -55,13 +53,7 @@ public final class SynchronizedPutHashBagMultimap<K, V>
 
     public SynchronizedPutHashBagMultimap(Pair<K, V>... pairs)
     {
-        ArrayIterate.forEach(pairs, new Procedure<Pair<K, V>>()
-        {
-            public void value(Pair<K, V> pair)
-            {
-                SynchronizedPutHashBagMultimap.this.put(pair.getOne(), pair.getTwo());
-            }
-        });
+        ArrayIterate.forEach(pairs, pair -> SynchronizedPutHashBagMultimap.this.put(pair.getOne(), pair.getTwo()));
     }
 
     public SynchronizedPutHashBagMultimap(Iterable<Pair<K, V>> inputIterable)
@@ -114,13 +106,7 @@ public final class SynchronizedPutHashBagMultimap<K, V>
     {
         final MutableMap<K, ImmutableBag<V>> map = UnifiedMap.newMap();
 
-        this.map.forEachKeyValue(new Procedure2<K, MutableBag<V>>()
-        {
-            public void value(K key, MutableBag<V> bag)
-            {
-                map.put(key, bag.toImmutable());
-            }
-        });
+        this.map.forEachKeyValue((key, bag) -> map.put(key, bag.toImmutable()));
 
         return new ImmutableBagMultimapImpl<K, V>(map);
     }

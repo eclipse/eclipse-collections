@@ -25,7 +25,6 @@ import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.function.primitive.DoubleFunction;
-import org.eclipse.collections.api.block.function.primitive.DoubleFunction0;
 import org.eclipse.collections.api.block.function.primitive.FloatFunction;
 import org.eclipse.collections.api.block.function.primitive.IntFunction;
 import org.eclipse.collections.api.block.function.primitive.LongFunction;
@@ -1386,13 +1385,7 @@ public final class ParallelIterate
         public void value(T each)
         {
             V groupKey = this.groupBy.valueOf(each);
-            DoubleDoublePair sumCompensation = this.map.getIfAbsentPut(groupKey, new Function0<DoubleDoublePair>()
-            {
-                public DoubleDoublePair value()
-                {
-                    return PrimitiveTuples.pair(0.0d, 0.0d);
-                }
-            });
+            DoubleDoublePair sumCompensation = this.map.getIfAbsentPut(groupKey, () -> PrimitiveTuples.pair(0.0d, 0.0d));
             double sum = sumCompensation.getOne();
             double compensation = sumCompensation.getTwo();
             double adjustedValue = this.function.doubleValueOf(each) - compensation;
@@ -1428,35 +1421,21 @@ public final class ParallelIterate
         {
             if (this.result.isEmpty())
             {
-                thingToCombine.getResult().forEachKeyValue(new Procedure2<V, DoubleDoublePair>()
-                {
-                    public void value(V each, DoubleDoublePair sumCompensation)
-                    {
-                        SumByDoubleCombiner.this.result.put(each, sumCompensation.getOne());
-                        SumByDoubleCombiner.this.compensation.put(each, sumCompensation.getTwo());
-                    }
+                thingToCombine.getResult().forEachKeyValue((each, sumCompensation) -> {
+                    this.result.put(each, sumCompensation.getOne());
+                    this.compensation.put(each, sumCompensation.getTwo());
                 });
             }
             else
             {
-                thingToCombine.getResult().forEachKeyValue(new Procedure2<V, DoubleDoublePair>()
-                {
-                    public void value(V each, DoubleDoublePair sumCompensation)
-                    {
-                        double sum = SumByDoubleCombiner.this.result.get(each);
-                        double currentCompensation = SumByDoubleCombiner.this.compensation.getIfAbsentPut(each, new DoubleFunction0()
-                        {
-                            public double value()
-                            {
-                                return 0.0d;
-                            }
-                        }) + sumCompensation.getTwo();
+                thingToCombine.getResult().forEachKeyValue((each, sumCompensation) -> {
+                    double sum = this.result.get(each);
+                    double currentCompensation = this.compensation.getIfAbsentPut(each, () -> 0.0d) + sumCompensation.getTwo();
 
-                        double adjustedValue = sumCompensation.getOne() - currentCompensation;
-                        double nextSum = sum + adjustedValue;
-                        SumByDoubleCombiner.this.compensation.put(each, nextSum - sum - adjustedValue);
-                        SumByDoubleCombiner.this.result.put(each, nextSum);
-                    }
+                    double adjustedValue = sumCompensation.getOne() - currentCompensation;
+                    double nextSum = sum + adjustedValue;
+                    this.compensation.put(each, nextSum - sum - adjustedValue);
+                    this.result.put(each, nextSum);
                 });
             }
         }
@@ -1477,13 +1456,7 @@ public final class ParallelIterate
         public void value(T each)
         {
             V groupKey = this.groupBy.valueOf(each);
-            DoubleDoublePair sumCompensation = this.map.getIfAbsentPut(groupKey, new Function0<DoubleDoublePair>()
-            {
-                public DoubleDoublePair value()
-                {
-                    return PrimitiveTuples.pair(0.0d, 0.0d);
-                }
-            });
+            DoubleDoublePair sumCompensation = this.map.getIfAbsentPut(groupKey, () -> PrimitiveTuples.pair(0.0d, 0.0d));
             double sum = sumCompensation.getOne();
             double compensation = sumCompensation.getTwo();
             double adjustedValue = this.function.floatValueOf(each) - compensation;
@@ -1519,35 +1492,21 @@ public final class ParallelIterate
         {
             if (this.result.isEmpty())
             {
-                thingToCombine.getResult().forEachKeyValue(new Procedure2<V, DoubleDoublePair>()
-                {
-                    public void value(V each, DoubleDoublePair sumCompensation)
-                    {
-                        SumByFloatCombiner.this.result.put(each, sumCompensation.getOne());
-                        SumByFloatCombiner.this.compensation.put(each, sumCompensation.getTwo());
-                    }
+                thingToCombine.getResult().forEachKeyValue((each, sumCompensation) -> {
+                    this.result.put(each, sumCompensation.getOne());
+                    this.compensation.put(each, sumCompensation.getTwo());
                 });
             }
             else
             {
-                thingToCombine.getResult().forEachKeyValue(new Procedure2<V, DoubleDoublePair>()
-                {
-                    public void value(V each, DoubleDoublePair sumCompensation)
-                    {
-                        double sum = SumByFloatCombiner.this.result.get(each);
-                        double currentCompensation = SumByFloatCombiner.this.compensation.getIfAbsentPut(each, new DoubleFunction0()
-                        {
-                            public double value()
-                            {
-                                return 0.0d;
-                            }
-                        }) + sumCompensation.getTwo();
+                thingToCombine.getResult().forEachKeyValue((each, sumCompensation) -> {
+                    double sum = this.result.get(each);
+                    double currentCompensation = this.compensation.getIfAbsentPut(each, () -> 0.0d) + sumCompensation.getTwo();
 
-                        double adjustedValue = sumCompensation.getOne() - currentCompensation;
-                        double nextSum = sum + adjustedValue;
-                        SumByFloatCombiner.this.compensation.put(each, nextSum - sum - adjustedValue);
-                        SumByFloatCombiner.this.result.put(each, nextSum);
-                    }
+                    double adjustedValue = sumCompensation.getOne() - currentCompensation;
+                    double nextSum = sum + adjustedValue;
+                    this.compensation.put(each, nextSum - sum - adjustedValue);
+                    this.result.put(each, nextSum);
                 });
             }
         }
@@ -1669,13 +1628,7 @@ public final class ParallelIterate
 
         public void value(final T each)
         {
-            this.map.updateValue(this.groupBy.valueOf(each), Functions0.zeroBigDecimal(), new Function<BigDecimal, BigDecimal>()
-            {
-                public BigDecimal valueOf(BigDecimal original)
-                {
-                    return original.add(SumByBigDecimalProcedure.this.function.valueOf(each));
-                }
-            });
+            this.map.updateValue(this.groupBy.valueOf(each), Functions0.zeroBigDecimal(), original -> original.add(this.function.valueOf(each)));
         }
 
         public MutableMap<V, BigDecimal> getResult()
@@ -1707,19 +1660,7 @@ public final class ParallelIterate
             }
             else
             {
-                thingToCombine.getResult().forEachKeyValue(new Procedure2<V, BigDecimal>()
-                {
-                    public void value(V key, final BigDecimal value)
-                    {
-                        SumByBigDecimalCombiner.this.result.updateValue(key, Functions0.zeroBigDecimal(), new Function<BigDecimal, BigDecimal>()
-                        {
-                            public BigDecimal valueOf(BigDecimal original)
-                            {
-                                return original.add(value);
-                            }
-                        });
-                    }
-                });
+                thingToCombine.getResult().forEachKeyValue((key, value) -> this.result.updateValue(key, Functions0.zeroBigDecimal(), original -> original.add(value)));
             }
         }
     }
@@ -1738,13 +1679,7 @@ public final class ParallelIterate
 
         public void value(final T each)
         {
-            this.map.updateValue(this.groupBy.valueOf(each), Functions0.zeroBigInteger(), new Function<BigInteger, BigInteger>()
-            {
-                public BigInteger valueOf(BigInteger original)
-                {
-                    return original.add(SumByBigIntegerProcedure.this.function.valueOf(each));
-                }
-            });
+            this.map.updateValue(this.groupBy.valueOf(each), Functions0.zeroBigInteger(), original -> original.add(this.function.valueOf(each)));
         }
 
         public MutableMap<V, BigInteger> getResult()
@@ -1776,19 +1711,7 @@ public final class ParallelIterate
             }
             else
             {
-                thingToCombine.getResult().forEachKeyValue(new Procedure2<V, BigInteger>()
-                {
-                    public void value(V key, final BigInteger value)
-                    {
-                        SumByBigIntegerCombiner.this.result.updateValue(key, Functions0.zeroBigInteger(), new Function<BigInteger, BigInteger>()
-                        {
-                            public BigInteger valueOf(BigInteger original)
-                            {
-                                return original.add(value);
-                            }
-                        });
-                    }
-                });
+                thingToCombine.getResult().forEachKeyValue((key, value) -> this.result.updateValue(key, Functions0.zeroBigInteger(), original -> original.add(value)));
             }
         }
     }

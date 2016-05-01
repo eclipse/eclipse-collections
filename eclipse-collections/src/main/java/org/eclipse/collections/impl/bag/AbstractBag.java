@@ -43,8 +43,6 @@ import org.eclipse.collections.api.block.function.primitive.LongObjectToLongFunc
 import org.eclipse.collections.api.block.function.primitive.ShortFunction;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
-import org.eclipse.collections.api.block.procedure.Procedure;
-import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
 import org.eclipse.collections.api.collection.primitive.MutableBooleanCollection;
 import org.eclipse.collections.api.collection.primitive.MutableByteCollection;
 import org.eclipse.collections.api.collection.primitive.MutableCharCollection;
@@ -82,29 +80,21 @@ public abstract class AbstractBag<T>
         {
             final MutableBagIterable<T> targetBag = (MutableBagIterable<T>) target;
 
-            this.forEachWithOccurrences(new ObjectIntProcedure<T>()
-            {
-                public void value(T each, int occurrences)
+            this.forEachWithOccurrences((each, occurrences) -> {
+                if (predicate.accept(each))
                 {
-                    if (predicate.accept(each))
-                    {
-                        targetBag.addOccurrences(each, occurrences);
-                    }
+                    targetBag.addOccurrences(each, occurrences);
                 }
             });
         }
         else
         {
-            this.forEachWithOccurrences(new ObjectIntProcedure<T>()
-            {
-                public void value(T each, int occurrences)
+            this.forEachWithOccurrences((each, occurrences) -> {
+                if (predicate.accept(each))
                 {
-                    if (predicate.accept(each))
+                    for (int i = 0; i < occurrences; i++)
                     {
-                        for (int i = 0; i < occurrences; i++)
-                        {
-                            target.add(each);
-                        }
+                        target.add(each);
                     }
                 }
             });
@@ -122,29 +112,21 @@ public abstract class AbstractBag<T>
         {
             final MutableBagIterable<T> targetBag = (MutableBagIterable<T>) target;
 
-            this.forEachWithOccurrences(new ObjectIntProcedure<T>()
-            {
-                public void value(T each, int occurrences)
+            this.forEachWithOccurrences((each, occurrences) -> {
+                if (predicate.accept(each, parameter))
                 {
-                    if (predicate.accept(each, parameter))
-                    {
-                        targetBag.addOccurrences(each, occurrences);
-                    }
+                    targetBag.addOccurrences(each, occurrences);
                 }
             });
         }
         else
         {
-            this.forEachWithOccurrences(new ObjectIntProcedure<T>()
-            {
-                public void value(T each, int occurrences)
+            this.forEachWithOccurrences((each, occurrences) -> {
+                if (predicate.accept(each, parameter))
                 {
-                    if (predicate.accept(each, parameter))
+                    for (int i = 0; i < occurrences; i++)
                     {
-                        for (int i = 0; i < occurrences; i++)
-                        {
-                            target.add(each);
-                        }
+                        target.add(each);
                     }
                 }
             });
@@ -159,29 +141,21 @@ public abstract class AbstractBag<T>
         {
             final MutableBagIterable<T> targetBag = (MutableBagIterable<T>) target;
 
-            this.forEachWithOccurrences(new ObjectIntProcedure<T>()
-            {
-                public void value(T each, int occurrences)
+            this.forEachWithOccurrences((each, occurrences) -> {
+                if (!predicate.accept(each))
                 {
-                    if (!predicate.accept(each))
-                    {
-                        targetBag.addOccurrences(each, occurrences);
-                    }
+                    targetBag.addOccurrences(each, occurrences);
                 }
             });
         }
         else
         {
-            this.forEachWithOccurrences(new ObjectIntProcedure<T>()
-            {
-                public void value(T each, int occurrences)
+            this.forEachWithOccurrences((each, occurrences) -> {
+                if (!predicate.accept(each))
                 {
-                    if (!predicate.accept(each))
+                    for (int i = 0; i < occurrences; i++)
                     {
-                        for (int i = 0; i < occurrences; i++)
-                        {
-                            target.add(each);
-                        }
+                        target.add(each);
                     }
                 }
             });
@@ -199,29 +173,21 @@ public abstract class AbstractBag<T>
         {
             final MutableBagIterable<T> targetBag = (MutableBagIterable<T>) target;
 
-            this.forEachWithOccurrences(new ObjectIntProcedure<T>()
-            {
-                public void value(T each, int occurrences)
+            this.forEachWithOccurrences((each, occurrences) -> {
+                if (!predicate.accept(each, parameter))
                 {
-                    if (!predicate.accept(each, parameter))
-                    {
-                        targetBag.addOccurrences(each, occurrences);
-                    }
+                    targetBag.addOccurrences(each, occurrences);
                 }
             });
         }
         else
         {
-            this.forEachWithOccurrences(new ObjectIntProcedure<T>()
-            {
-                public void value(T each, int occurrences)
+            this.forEachWithOccurrences((each, occurrences) -> {
+                if (!predicate.accept(each, parameter))
                 {
-                    if (!predicate.accept(each, parameter))
+                    for (int i = 0; i < occurrences; i++)
                     {
-                        for (int i = 0; i < occurrences; i++)
-                        {
-                            target.add(each);
-                        }
+                        target.add(each);
                     }
                 }
             });
@@ -233,14 +199,10 @@ public abstract class AbstractBag<T>
     public int count(final Predicate<? super T> predicate)
     {
         final Counter result = new Counter();
-        this.forEachWithOccurrences(new ObjectIntProcedure<T>()
-        {
-            public void value(T each, int occurrences)
+        this.forEachWithOccurrences((each, occurrences) -> {
+            if (predicate.accept(each))
             {
-                if (predicate.accept(each))
-                {
-                    result.add(occurrences);
-                }
+                result.add(occurrences);
             }
         });
         return result.getCount();
@@ -253,25 +215,15 @@ public abstract class AbstractBag<T>
         {
             final MutableBagIterable<V> targetBag = (MutableBagIterable<V>) target;
 
-            this.forEachWithOccurrences(new ObjectIntProcedure<T>()
-            {
-                public void value(T each, int occurrences)
-                {
-                    targetBag.addOccurrences(function.valueOf(each), occurrences);
-                }
-            });
+            this.forEachWithOccurrences((each, occurrences) -> targetBag.addOccurrences(function.valueOf(each), occurrences));
         }
         else
         {
-            this.forEachWithOccurrences(new ObjectIntProcedure<T>()
-            {
-                public void value(T each, int occurrences)
+            this.forEachWithOccurrences((each, occurrences) -> {
+                V value = function.valueOf(each);
+                for (int i = 0; i < occurrences; i++)
                 {
-                    V value = function.valueOf(each);
-                    for (int i = 0; i < occurrences; i++)
-                    {
-                        target.add(value);
-                    }
+                    target.add(value);
                 }
             });
         }
@@ -288,25 +240,15 @@ public abstract class AbstractBag<T>
         {
             final MutableBagIterable<V> targetBag = (MutableBagIterable<V>) target;
 
-            this.forEachWithOccurrences(new ObjectIntProcedure<T>()
-            {
-                public void value(T each, int occurrences)
-                {
-                    targetBag.addOccurrences(function.value(each, parameter), occurrences);
-                }
-            });
+            this.forEachWithOccurrences((each, occurrences) -> targetBag.addOccurrences(function.value(each, parameter), occurrences));
         }
         else
         {
-            this.forEachWithOccurrences(new ObjectIntProcedure<T>()
-            {
-                public void value(T each, int occurrences)
+            this.forEachWithOccurrences((each, occurrences) -> {
+                V value = function.value(each, parameter);
+                for (int i = 0; i < occurrences; i++)
                 {
-                    V value = function.value(each, parameter);
-                    for (int i = 0; i < occurrences; i++)
-                    {
-                        target.add(value);
-                    }
+                    target.add(value);
                 }
             });
         }
@@ -323,30 +265,22 @@ public abstract class AbstractBag<T>
         {
             final MutableBagIterable<V> targetBag = (MutableBagIterable<V>) target;
 
-            this.forEachWithOccurrences(new ObjectIntProcedure<T>()
-            {
-                public void value(T each, int occurrences)
+            this.forEachWithOccurrences((each, occurrences) -> {
+                if (predicate.accept(each))
                 {
-                    if (predicate.accept(each))
-                    {
-                        targetBag.addOccurrences(function.valueOf(each), occurrences);
-                    }
+                    targetBag.addOccurrences(function.valueOf(each), occurrences);
                 }
             });
         }
         else
         {
-            this.forEachWithOccurrences(new ObjectIntProcedure<T>()
-            {
-                public void value(T each, int occurrences)
+            this.forEachWithOccurrences((each, occurrences) -> {
+                if (predicate.accept(each))
                 {
-                    if (predicate.accept(each))
+                    V value = function.valueOf(each);
+                    for (int i = 0; i < occurrences; i++)
                     {
-                        V value = function.valueOf(each);
-                        for (int i = 0; i < occurrences; i++)
-                        {
-                            target.add(value);
-                        }
+                        target.add(value);
                     }
                 }
             });
@@ -361,32 +295,18 @@ public abstract class AbstractBag<T>
         {
             final MutableBagIterable<V> targetBag = (MutableBagIterable<V>) target;
 
-            this.forEachWithOccurrences(new ObjectIntProcedure<T>()
-            {
-                public void value(T each, final int occurrences)
-                {
-                    Iterable<V> values = function.valueOf(each);
-                    Iterate.forEach(values, new Procedure<V>()
-                    {
-                        public void value(V each)
-                        {
-                            targetBag.addOccurrences(each, occurrences);
-                        }
-                    });
-                }
+            this.forEachWithOccurrences((each, occurrences) -> {
+                Iterable<V> values = function.valueOf(each);
+                Iterate.forEach(values, eachValue -> targetBag.addOccurrences(eachValue, occurrences));
             });
         }
         else
         {
-            this.forEachWithOccurrences(new ObjectIntProcedure<T>()
-            {
-                public void value(T each, int occurrences)
+            this.forEachWithOccurrences((each, occurrences) -> {
+                Iterable<V> values = function.valueOf(each);
+                for (int i = 0; i < occurrences; i++)
                 {
-                    Iterable<V> values = function.valueOf(each);
-                    for (int i = 0; i < occurrences; i++)
-                    {
-                        Iterate.forEach(values, target::add);
-                    }
+                    Iterate.forEach(values, target::add);
                 }
             });
         }
@@ -399,25 +319,15 @@ public abstract class AbstractBag<T>
         if (target instanceof MutableBooleanBag)
         {
             final MutableBooleanBag targetBag = (MutableBooleanBag) target;
-            this.forEachWithOccurrences(new ObjectIntProcedure<T>()
-            {
-                public void value(T each, int occurrences)
-                {
-                    targetBag.addOccurrences(booleanFunction.booleanValueOf(each), occurrences);
-                }
-            });
+            this.forEachWithOccurrences((each, occurrences) -> targetBag.addOccurrences(booleanFunction.booleanValueOf(each), occurrences));
         }
         else
         {
-            this.forEachWithOccurrences(new ObjectIntProcedure<T>()
-            {
-                public void value(T each, int occurrences)
+            this.forEachWithOccurrences((each, occurrences) -> {
+                boolean value = booleanFunction.booleanValueOf(each);
+                for (int i = 0; i < occurrences; i++)
                 {
-                    boolean value = booleanFunction.booleanValueOf(each);
-                    for (int i = 0; i < occurrences; i++)
-                    {
-                        target.add(value);
-                    }
+                    target.add(value);
                 }
             });
         }
@@ -430,25 +340,15 @@ public abstract class AbstractBag<T>
         if (target instanceof MutableByteBag)
         {
             final MutableByteBag targetBag = (MutableByteBag) target;
-            this.forEachWithOccurrences(new ObjectIntProcedure<T>()
-            {
-                public void value(T each, int occurrences)
-                {
-                    targetBag.addOccurrences(byteFunction.byteValueOf(each), occurrences);
-                }
-            });
+            this.forEachWithOccurrences((each, occurrences) -> targetBag.addOccurrences(byteFunction.byteValueOf(each), occurrences));
         }
         else
         {
-            this.forEachWithOccurrences(new ObjectIntProcedure<T>()
-            {
-                public void value(T each, int occurrences)
+            this.forEachWithOccurrences((each, occurrences) -> {
+                byte value = byteFunction.byteValueOf(each);
+                for (int i = 0; i < occurrences; i++)
                 {
-                    byte value = byteFunction.byteValueOf(each);
-                    for (int i = 0; i < occurrences; i++)
-                    {
-                        target.add(value);
-                    }
+                    target.add(value);
                 }
             });
         }
@@ -461,25 +361,15 @@ public abstract class AbstractBag<T>
         if (target instanceof MutableCharBag)
         {
             final MutableCharBag targetBag = (MutableCharBag) target;
-            this.forEachWithOccurrences(new ObjectIntProcedure<T>()
-            {
-                public void value(T each, int occurrences)
-                {
-                    targetBag.addOccurrences(charFunction.charValueOf(each), occurrences);
-                }
-            });
+            this.forEachWithOccurrences((each, occurrences) -> targetBag.addOccurrences(charFunction.charValueOf(each), occurrences));
         }
         else
         {
-            this.forEachWithOccurrences(new ObjectIntProcedure<T>()
-            {
-                public void value(T each, int occurrences)
+            this.forEachWithOccurrences((each, occurrences) -> {
+                char value = charFunction.charValueOf(each);
+                for (int i = 0; i < occurrences; i++)
                 {
-                    char value = charFunction.charValueOf(each);
-                    for (int i = 0; i < occurrences; i++)
-                    {
-                        target.add(value);
-                    }
+                    target.add(value);
                 }
             });
         }
@@ -492,25 +382,15 @@ public abstract class AbstractBag<T>
         if (target instanceof MutableDoubleBag)
         {
             final MutableDoubleBag targetBag = (MutableDoubleBag) target;
-            this.forEachWithOccurrences(new ObjectIntProcedure<T>()
-            {
-                public void value(T each, int occurrences)
-                {
-                    targetBag.addOccurrences(doubleFunction.doubleValueOf(each), occurrences);
-                }
-            });
+            this.forEachWithOccurrences((each, occurrences) -> targetBag.addOccurrences(doubleFunction.doubleValueOf(each), occurrences));
         }
         else
         {
-            this.forEachWithOccurrences(new ObjectIntProcedure<T>()
-            {
-                public void value(T each, int occurrences)
+            this.forEachWithOccurrences((each, occurrences) -> {
+                double value = doubleFunction.doubleValueOf(each);
+                for (int i = 0; i < occurrences; i++)
                 {
-                    double value = doubleFunction.doubleValueOf(each);
-                    for (int i = 0; i < occurrences; i++)
-                    {
-                        target.add(value);
-                    }
+                    target.add(value);
                 }
             });
         }
@@ -523,25 +403,15 @@ public abstract class AbstractBag<T>
         if (target instanceof MutableFloatBag)
         {
             final MutableFloatBag targetBag = (MutableFloatBag) target;
-            this.forEachWithOccurrences(new ObjectIntProcedure<T>()
-            {
-                public void value(T each, int occurrences)
-                {
-                    targetBag.addOccurrences(floatFunction.floatValueOf(each), occurrences);
-                }
-            });
+            this.forEachWithOccurrences((each, occurrences) -> targetBag.addOccurrences(floatFunction.floatValueOf(each), occurrences));
         }
         else
         {
-            this.forEachWithOccurrences(new ObjectIntProcedure<T>()
-            {
-                public void value(T each, int occurrences)
+            this.forEachWithOccurrences((each, occurrences) -> {
+                float value = floatFunction.floatValueOf(each);
+                for (int i = 0; i < occurrences; i++)
                 {
-                    float value = floatFunction.floatValueOf(each);
-                    for (int i = 0; i < occurrences; i++)
-                    {
-                        target.add(value);
-                    }
+                    target.add(value);
                 }
             });
         }
@@ -554,25 +424,15 @@ public abstract class AbstractBag<T>
         if (target instanceof MutableIntBag)
         {
             final MutableIntBag targetBag = (MutableIntBag) target;
-            this.forEachWithOccurrences(new ObjectIntProcedure<T>()
-            {
-                public void value(T each, int occurrences)
-                {
-                    targetBag.addOccurrences(intFunction.intValueOf(each), occurrences);
-                }
-            });
+            this.forEachWithOccurrences((each, occurrences) -> targetBag.addOccurrences(intFunction.intValueOf(each), occurrences));
         }
         else
         {
-            this.forEachWithOccurrences(new ObjectIntProcedure<T>()
-            {
-                public void value(T each, int occurrences)
+            this.forEachWithOccurrences((each, occurrences) -> {
+                int value = intFunction.intValueOf(each);
+                for (int i = 0; i < occurrences; i++)
                 {
-                    int value = intFunction.intValueOf(each);
-                    for (int i = 0; i < occurrences; i++)
-                    {
-                        target.add(value);
-                    }
+                    target.add(value);
                 }
             });
         }
@@ -585,25 +445,15 @@ public abstract class AbstractBag<T>
         if (target instanceof MutableLongBag)
         {
             final MutableLongBag targetBag = (MutableLongBag) target;
-            this.forEachWithOccurrences(new ObjectIntProcedure<T>()
-            {
-                public void value(T each, int occurrences)
-                {
-                    targetBag.addOccurrences(longFunction.longValueOf(each), occurrences);
-                }
-            });
+            this.forEachWithOccurrences((each, occurrences) -> targetBag.addOccurrences(longFunction.longValueOf(each), occurrences));
         }
         else
         {
-            this.forEachWithOccurrences(new ObjectIntProcedure<T>()
-            {
-                public void value(T each, int occurrences)
+            this.forEachWithOccurrences((each, occurrences) -> {
+                long value = longFunction.longValueOf(each);
+                for (int i = 0; i < occurrences; i++)
                 {
-                    long value = longFunction.longValueOf(each);
-                    for (int i = 0; i < occurrences; i++)
-                    {
-                        target.add(value);
-                    }
+                    target.add(value);
                 }
             });
         }
@@ -616,25 +466,15 @@ public abstract class AbstractBag<T>
         if (target instanceof MutableShortBag)
         {
             final MutableShortBag targetBag = (MutableShortBag) target;
-            this.forEachWithOccurrences(new ObjectIntProcedure<T>()
-            {
-                public void value(T each, int occurrences)
-                {
-                    targetBag.addOccurrences(shortFunction.shortValueOf(each), occurrences);
-                }
-            });
+            this.forEachWithOccurrences((each, occurrences) -> targetBag.addOccurrences(shortFunction.shortValueOf(each), occurrences));
         }
         else
         {
-            this.forEachWithOccurrences(new ObjectIntProcedure<T>()
-            {
-                public void value(T each, int occurrences)
+            this.forEachWithOccurrences((each, occurrences) -> {
+                short value = shortFunction.shortValueOf(each);
+                for (int i = 0; i < occurrences; i++)
                 {
-                    short value = shortFunction.shortValueOf(each);
-                    for (int i = 0; i < occurrences; i++)
-                    {
-                        target.add(value);
-                    }
+                    target.add(value);
                 }
             });
         }
@@ -646,13 +486,9 @@ public abstract class AbstractBag<T>
             final Function<? super T, ? extends V> function,
             final R target)
     {
-        this.forEachWithOccurrences(new ObjectIntProcedure<T>()
-        {
-            public void value(T each, int occurrences)
-            {
-                V value = function.valueOf(each);
-                target.putAll(value, Collections.nCopies(occurrences, each));
-            }
+        this.forEachWithOccurrences((each, occurrences) -> {
+            V value = function.valueOf(each);
+            target.putAll(value, Collections.nCopies(occurrences, each));
         });
         return target;
     }
@@ -662,19 +498,9 @@ public abstract class AbstractBag<T>
             final Function<? super T, ? extends Iterable<V>> function,
             final R target)
     {
-        this.forEachWithOccurrences(new ObjectIntProcedure<T>()
-        {
-            public void value(final T each, final int occurrences)
-            {
-                Iterable<V> values = function.valueOf(each);
-                Iterate.forEach(values, new Procedure<V>()
-                {
-                    public void value(V value)
-                    {
-                        target.putAll(value, Collections.nCopies(occurrences, each));
-                    }
-                });
-            }
+        this.forEachWithOccurrences((each, occurrences) -> {
+            Iterable<V> values = function.valueOf(each);
+            Iterate.forEach(values, value -> target.putAll(value, Collections.nCopies(occurrences, each)));
         });
         return target;
     }
@@ -683,13 +509,9 @@ public abstract class AbstractBag<T>
     public long sumOfInt(final IntFunction<? super T> function)
     {
         final long[] sum = {0L};
-        this.forEachWithOccurrences(new ObjectIntProcedure<T>()
-        {
-            public void value(T each, int occurrences)
-            {
-                int intValue = function.intValueOf(each);
-                sum[0] += (long) intValue * (long) occurrences;
-            }
+        this.forEachWithOccurrences((each, occurrences) -> {
+            int intValue = function.intValueOf(each);
+            sum[0] += (long) intValue * (long) occurrences;
         });
         return sum[0];
     }
@@ -699,18 +521,14 @@ public abstract class AbstractBag<T>
     {
         final double[] sum = {0.0d};
         final double[] compensation = {0.0d};
-        this.forEachWithOccurrences(new ObjectIntProcedure<T>()
-        {
-            public void value(T each, int occurrences)
+        this.forEachWithOccurrences((each, occurrences) -> {
+            float f = function.floatValueOf(each);
+            for (int i = 0; i < occurrences; i++)
             {
-                float f = function.floatValueOf(each);
-                for (int i = 0; i < occurrences; i++)
-                {
-                    double adjustedValue = f - compensation[0];
-                    double nextSum = sum[0] + adjustedValue;
-                    compensation[0] = nextSum - sum[0] - adjustedValue;
-                    sum[0] = nextSum;
-                }
+                double adjustedValue = f - compensation[0];
+                double nextSum = sum[0] + adjustedValue;
+                compensation[0] = nextSum - sum[0] - adjustedValue;
+                sum[0] = nextSum;
             }
         });
         return sum[0];
@@ -720,13 +538,9 @@ public abstract class AbstractBag<T>
     public long sumOfLong(final LongFunction<? super T> function)
     {
         final long[] sum = {0L};
-        this.forEachWithOccurrences(new ObjectIntProcedure<T>()
-        {
-            public void value(T each, int occurrences)
-            {
-                long longValue = function.longValueOf(each);
-                sum[0] += longValue * (long) occurrences;
-            }
+        this.forEachWithOccurrences((each, occurrences) -> {
+            long longValue = function.longValueOf(each);
+            sum[0] += longValue * (long) occurrences;
         });
         return sum[0];
     }
@@ -736,18 +550,14 @@ public abstract class AbstractBag<T>
     {
         final double[] sum = {0.0d};
         final double[] compensation = {0.0d};
-        this.forEachWithOccurrences(new ObjectIntProcedure<T>()
-        {
-            public void value(T each, int occurrences)
+        this.forEachWithOccurrences((each, occurrences) -> {
+            double d = function.doubleValueOf(each);
+            for (int i = 0; i < occurrences; i++)
             {
-                double d = function.doubleValueOf(each);
-                for (int i = 0; i < occurrences; i++)
-                {
-                    double y = d - compensation[0];
-                    double t = sum[0] + y;
-                    compensation[0] = t - sum[0] - y;
-                    sum[0] = t;
-                }
+                double y = d - compensation[0];
+                double t = sum[0] + y;
+                compensation[0] = t - sum[0] - y;
+                sum[0] = t;
             }
         });
         return sum[0];
@@ -757,14 +567,10 @@ public abstract class AbstractBag<T>
     public <IV> IV injectInto(IV injectedValue, final Function2<? super IV, ? super T, ? extends IV> function)
     {
         final IV[] result = (IV[]) new Object[]{injectedValue};
-        this.forEachWithOccurrences(new ObjectIntProcedure<T>()
-        {
-            public void value(T each, int occurrences)
+        this.forEachWithOccurrences((each, occurrences) -> {
+            for (int i = 0; i < occurrences; i++)
             {
-                for (int i = 0; i < occurrences; i++)
-                {
-                    result[0] = function.value(result[0], each);
-                }
+                result[0] = function.value(result[0], each);
             }
         });
         return result[0];
@@ -774,14 +580,10 @@ public abstract class AbstractBag<T>
     public int injectInto(int injectedValue, final IntObjectToIntFunction<? super T> function)
     {
         final int[] result = {injectedValue};
-        this.forEachWithOccurrences(new ObjectIntProcedure<T>()
-        {
-            public void value(T each, int occurrences)
+        this.forEachWithOccurrences((each, occurrences) -> {
+            for (int i = 0; i < occurrences; i++)
             {
-                for (int i = 0; i < occurrences; i++)
-                {
-                    result[0] = function.intValueOf(result[0], each);
-                }
+                result[0] = function.intValueOf(result[0], each);
             }
         });
         return result[0];
@@ -791,14 +593,10 @@ public abstract class AbstractBag<T>
     public long injectInto(long injectedValue, final LongObjectToLongFunction<? super T> function)
     {
         final long[] result = {injectedValue};
-        this.forEachWithOccurrences(new ObjectIntProcedure<T>()
-        {
-            public void value(T each, int occurrences)
+        this.forEachWithOccurrences((each, occurrences) -> {
+            for (int i = 0; i < occurrences; i++)
             {
-                for (int i = 0; i < occurrences; i++)
-                {
-                    result[0] = function.longValueOf(result[0], each);
-                }
+                result[0] = function.longValueOf(result[0], each);
             }
         });
         return result[0];
@@ -808,14 +606,10 @@ public abstract class AbstractBag<T>
     public double injectInto(double injectedValue, final DoubleObjectToDoubleFunction<? super T> function)
     {
         final double[] result = {injectedValue};
-        this.forEachWithOccurrences(new ObjectIntProcedure<T>()
-        {
-            public void value(T each, int occurrences)
+        this.forEachWithOccurrences((each, occurrences) -> {
+            for (int i = 0; i < occurrences; i++)
             {
-                for (int i = 0; i < occurrences; i++)
-                {
-                    result[0] = function.doubleValueOf(result[0], each);
-                }
+                result[0] = function.doubleValueOf(result[0], each);
             }
         });
         return result[0];
@@ -825,14 +619,10 @@ public abstract class AbstractBag<T>
     public float injectInto(float injectedValue, final FloatObjectToFloatFunction<? super T> function)
     {
         final float[] result = {injectedValue};
-        this.forEachWithOccurrences(new ObjectIntProcedure<T>()
-        {
-            public void value(T each, int occurrences)
+        this.forEachWithOccurrences((each, occurrences) -> {
+            for (int i = 0; i < occurrences; i++)
             {
-                for (int i = 0; i < occurrences; i++)
-                {
-                    result[0] = function.floatValueOf(result[0], each);
-                }
+                result[0] = function.floatValueOf(result[0], each);
             }
         });
         return result[0];
@@ -841,14 +631,10 @@ public abstract class AbstractBag<T>
     public <IV, P> IV injectIntoWith(IV injectedValue, final Function3<? super IV, ? super T, ? super P, ? extends IV> function, final P parameter)
     {
         final IV[] result = (IV[]) new Object[]{injectedValue};
-        this.forEachWithOccurrences(new ObjectIntProcedure<T>()
-        {
-            public void value(T each, int occurrences)
+        this.forEachWithOccurrences((each, occurrences) -> {
+            for (int i = 0; i < occurrences; i++)
             {
-                for (int i = 0; i < occurrences; i++)
-                {
-                    result[0] = function.value(result[0], each, parameter);
-                }
+                result[0] = function.value(result[0], each, parameter);
             }
         });
         return result[0];
@@ -861,15 +647,11 @@ public abstract class AbstractBag<T>
             return "{}";
         }
         final StringBuilder builder = new StringBuilder().append('{');
-        this.forEachWithOccurrences(new ObjectIntProcedure<T>()
-        {
-            public void value(T each, int occurrences)
-            {
-                builder.append(each);
-                builder.append('=');
-                builder.append(occurrences);
-                builder.append(", ");
-            }
+        this.forEachWithOccurrences((each, occurrences) -> {
+            builder.append(each);
+            builder.append('=');
+            builder.append(occurrences);
+            builder.append(", ");
         });
         builder.deleteCharAt(builder.length() - 1);
         builder.deleteCharAt(builder.length() - 1);
@@ -879,13 +661,7 @@ public abstract class AbstractBag<T>
     protected MutableList<ObjectIntPair<T>> toListWithOccurrences()
     {
         final MutableList<ObjectIntPair<T>> result = FastList.newList(this.sizeDistinct());
-        this.forEachWithOccurrences(new ObjectIntProcedure<T>()
-        {
-            public void value(T each, int count)
-            {
-                result.add(PrimitiveTuples.pair(each, count));
-            }
-        });
+        this.forEachWithOccurrences((each, count) -> result.add(PrimitiveTuples.pair(each, count)));
         return result;
     }
 
@@ -893,14 +669,10 @@ public abstract class AbstractBag<T>
     public MutableList<T> toList()
     {
         final MutableList<T> result = FastList.newList(this.size());
-        this.forEachWithOccurrences(new ObjectIntProcedure<T>()
-        {
-            public void value(T each, int occurrences)
+        this.forEachWithOccurrences((each, occurrences) -> {
+            for (int i = 0; i < occurrences; i++)
             {
-                for (int i = 0; i < occurrences; i++)
-                {
-                    result.add(each);
-                }
+                result.add(each);
             }
         });
         return result;
@@ -909,25 +681,15 @@ public abstract class AbstractBag<T>
     @Override
     public MutableList<T> toSortedList(final Comparator<? super T> comparator)
     {
-        MutableList<ObjectIntPair<T>> sorted = this.toListWithOccurrences().sortThis(new Comparator<ObjectIntPair<T>>()
-        {
-            public int compare(ObjectIntPair<T> o1, ObjectIntPair<T> o2)
-            {
-                return comparator.compare(o1.getOne(), o2.getOne());
-            }
-        });
+        MutableList<ObjectIntPair<T>> sorted = this.toListWithOccurrences().sortThis((o1, o2) -> comparator.compare(o1.getOne(), o2.getOne()));
 
         final MutableList<T> result = FastList.newList(this.size());
-        sorted.forEach(new Procedure<ObjectIntPair<T>>()
-        {
-            public void value(ObjectIntPair<T> each)
+        sorted.each(each -> {
+            T object = each.getOne();
+            int occurrences = each.getTwo();
+            for (int i = 0; i < occurrences; i++)
             {
-                T object = each.getOne();
-                int occurrences = each.getTwo();
-                for (int i = 0; i < occurrences; i++)
-                {
-                    result.add(object);
-                }
+                result.add(object);
             }
         });
         return result;
@@ -937,13 +699,7 @@ public abstract class AbstractBag<T>
     public MutableSet<T> toSet()
     {
         final MutableSet<T> result = UnifiedSet.newSet(this.sizeDistinct());
-        this.forEachWithOccurrences(new ObjectIntProcedure<T>()
-        {
-            public void value(T each, int occurrences)
-            {
-                result.add(each);
-            }
-        });
+        this.forEachWithOccurrences((each, occurrences) -> result.add(each));
         return result;
     }
 
@@ -951,13 +707,7 @@ public abstract class AbstractBag<T>
     public MutableSortedSet<T> toSortedSet()
     {
         final MutableSortedSet<T> result = SortedSets.mutable.empty();
-        this.forEachWithOccurrences(new ObjectIntProcedure<T>()
-        {
-            public void value(T each, int occurrences)
-            {
-                result.add(each);
-            }
-        });
+        this.forEachWithOccurrences((each, occurrences) -> result.add(each));
         return result;
     }
 
@@ -965,13 +715,7 @@ public abstract class AbstractBag<T>
     public MutableSortedSet<T> toSortedSet(Comparator<? super T> comparator)
     {
         final MutableSortedSet<T> result = SortedSets.mutable.with(comparator);
-        this.forEachWithOccurrences(new ObjectIntProcedure<T>()
-        {
-            public void value(T each, int occurrences)
-            {
-                result.add(each);
-            }
-        });
+        this.forEachWithOccurrences((each, occurrences) -> result.add(each));
         return result;
     }
 

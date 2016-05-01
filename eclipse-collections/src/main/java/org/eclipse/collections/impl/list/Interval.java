@@ -356,13 +356,7 @@ public final class Interval
      */
     private BigInteger bigIntegerProduct()
     {
-        return this.injectInto(BigInteger.valueOf(1L), new Function2<BigInteger, Integer, BigInteger>()
-        {
-            public BigInteger value(BigInteger result, Integer each)
-            {
-                return result.multiply(BigInteger.valueOf(each.longValue()));
-            }
-        });
+        return this.injectInto(BigInteger.valueOf(1L), (result, each) -> result.multiply(BigInteger.valueOf(each.longValue())));
     }
 
     private void failIfOutOfFactorialRange()
@@ -489,18 +483,14 @@ public final class Interval
             final CountDownLatch latch,
             final Integer integer)
     {
-        executor.execute(new Runnable()
-        {
-            public void run()
+        executor.execute(() -> {
+            try
             {
-                try
-                {
-                    procedure.value(integer);
-                }
-                finally
-                {
-                    latch.countDown();
-                }
+                procedure.value(integer);
+            }
+            finally
+            {
+                latch.countDown();
             }
         });
     }

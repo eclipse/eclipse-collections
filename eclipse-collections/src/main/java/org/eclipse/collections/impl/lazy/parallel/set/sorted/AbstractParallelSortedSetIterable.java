@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -15,7 +15,6 @@ import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
-import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.list.ParallelListIterable;
 import org.eclipse.collections.api.map.MapIterable;
 import org.eclipse.collections.api.multimap.sortedset.MutableSortedSetMultimap;
@@ -90,13 +89,9 @@ public abstract class AbstractParallelSortedSetIterable<T, B extends SortedSetBa
     public <V> SortedSetMultimap<V, T> groupBy(final Function<? super T, ? extends V> function)
     {
         final MutableSortedSetMultimap<V, T> result = SynchronizedPutTreeSortedSetMultimap.newMultimap();
-        this.forEach(new Procedure<T>()
-        {
-            public void value(T each)
-            {
-                V key = function.valueOf(each);
-                result.put(key, each);
-            }
+        this.forEach(each -> {
+            V key = function.valueOf(each);
+            result.put(key, each);
         });
         return result;
     }
@@ -104,15 +99,11 @@ public abstract class AbstractParallelSortedSetIterable<T, B extends SortedSetBa
     public <V> SortedSetMultimap<V, T> groupByEach(final Function<? super T, ? extends Iterable<V>> function)
     {
         final MutableSortedSetMultimap<V, T> result = SynchronizedPutTreeSortedSetMultimap.newMultimap();
-        this.forEach(new Procedure<T>()
-        {
-            public void value(T each)
+        this.forEach(each -> {
+            Iterable<V> keys = function.valueOf(each);
+            for (V key : keys)
             {
-                Iterable<V> keys = function.valueOf(each);
-                for (V key : keys)
-                {
-                    result.put(key, each);
-                }
+                result.put(key, each);
             }
         });
         return result;

@@ -69,41 +69,21 @@ import org.junit.Test;
 
 public class FJIterateTest
 {
-    private static final Procedure<Integer> EXCEPTION_PROCEDURE = new Procedure<Integer>()
-    {
-        public void value(Integer value)
-        {
-            throw new RuntimeException("Thread death on its way!");
-        }
+    private static final Procedure<Integer> EXCEPTION_PROCEDURE = value -> {
+        throw new RuntimeException("Thread death on its way!");
     };
 
-    private static final ObjectIntProcedure<Integer> EXCEPTION_OBJECT_INT_PROCEDURE = new ObjectIntProcedure<Integer>()
-    {
-        public void value(Integer object, int index)
-        {
-            throw new RuntimeException("Thread death on its way!");
-        }
+    private static final ObjectIntProcedure<Integer> EXCEPTION_OBJECT_INT_PROCEDURE = (object, index) -> {
+        throw new RuntimeException("Thread death on its way!");
     };
 
-    private static final Function<Integer, Collection<String>> INT_TO_TWO_STRINGS = new Function<Integer, Collection<String>>()
-    {
-        public Collection<String> valueOf(Integer integer)
-        {
-            return Lists.fixedSize.of(integer.toString(), integer.toString());
-        }
-    };
+    private static final Function<Integer, Collection<String>> INT_TO_TWO_STRINGS = integer -> Lists.fixedSize.of(integer.toString(), integer.toString());
 
     private static final Function0<AtomicInteger> ATOMIC_INTEGER_NEW = Functions0.zeroAtomicInteger();
 
     private static final Function0<Integer> INTEGER_NEW = Functions0.value(0);
 
-    private static final Function<Integer, String> EVEN_OR_ODD = new Function<Integer, String>()
-    {
-        public String valueOf(Integer value)
-        {
-            return value % 2 == 0 ? "Even" : "Odd";
-        }
-    };
+    private static final Function<Integer, String> EVEN_OR_ODD = value -> value % 2 == 0 ? "Even" : "Odd";
 
     private ImmutableList<RichIterable<Integer>> iterables;
     private final ForkJoinPool executor = new ForkJoinPool(2);
@@ -564,13 +544,7 @@ public class FJIterateTest
     @Test
     public void aggregateInPlaceBy()
     {
-        Procedure2<AtomicInteger, Integer> countAggregator = new Procedure2<AtomicInteger, Integer>()
-        {
-            public void value(AtomicInteger aggregate, Integer value)
-            {
-                aggregate.incrementAndGet();
-            }
-        };
+        Procedure2<AtomicInteger, Integer> countAggregator = (aggregate, value) -> aggregate.incrementAndGet();
         List<Integer> list = Interval.oneTo(2000);
         MutableMap<String, AtomicInteger> aggregation =
                 FJIterate.aggregateInPlaceBy(list, EVEN_OR_ODD, ATOMIC_INTEGER_NEW, countAggregator);
@@ -584,13 +558,7 @@ public class FJIterateTest
     @Test
     public void aggregateInPlaceByWithBatchSize()
     {
-        Procedure2<AtomicInteger, Integer> sumAggregator = new Procedure2<AtomicInteger, Integer>()
-        {
-            public void value(AtomicInteger aggregate, Integer value)
-            {
-                aggregate.addAndGet(value);
-            }
-        };
+        Procedure2<AtomicInteger, Integer> sumAggregator = (aggregate, value) -> aggregate.addAndGet(value);
         MutableList<Integer> list = LazyIterate.adapt(Collections.nCopies(100, 1))
                 .concatenate(Collections.nCopies(200, 2))
                 .concatenate(Collections.nCopies(300, 3))
@@ -606,13 +574,7 @@ public class FJIterateTest
     @Test
     public void aggregateBy()
     {
-        Function2<Integer, Integer, Integer> countAggregator = new Function2<Integer, Integer, Integer>()
-        {
-            public Integer value(Integer aggregate, Integer value)
-            {
-                return aggregate + 1;
-            }
-        };
+        Function2<Integer, Integer, Integer> countAggregator = (aggregate, value) -> aggregate + 1;
         List<Integer> list = Interval.oneTo(20000);
         MutableMap<String, Integer> aggregation =
                 FJIterate.aggregateBy(list, EVEN_OR_ODD, INTEGER_NEW, countAggregator);
@@ -626,13 +588,7 @@ public class FJIterateTest
     @Test
     public void aggregateByWithBatchSize()
     {
-        Function2<Integer, Integer, Integer> sumAggregator = new Function2<Integer, Integer, Integer>()
-        {
-            public Integer value(Integer aggregate, Integer value)
-            {
-                return aggregate + value;
-            }
-        };
+        Function2<Integer, Integer, Integer> sumAggregator = (aggregate, value) -> aggregate + value;
         MutableList<Integer> list = LazyIterate.adapt(Collections.nCopies(1000, 1))
                 .concatenate(Collections.nCopies(2000, 2))
                 .concatenate(Collections.nCopies(3000, 3))

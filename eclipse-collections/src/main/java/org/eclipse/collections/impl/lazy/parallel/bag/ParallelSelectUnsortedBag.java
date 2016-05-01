@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -52,14 +52,10 @@ class ParallelSelectUnsortedBag<T> extends AbstractParallelUnsortedBag<T, Unsort
 
     public void forEachWithOccurrences(final ObjectIntProcedure<? super T> procedure)
     {
-        this.parallelIterable.forEachWithOccurrences(new ObjectIntProcedure<T>()
-        {
-            public void value(T each, int parameter)
+        this.parallelIterable.forEachWithOccurrences((each, parameter) -> {
+            if (this.predicate.accept(each))
             {
-                if (ParallelSelectUnsortedBag.this.predicate.accept(each))
-                {
-                    procedure.value(each, parameter);
-                }
+                procedure.value(each, parameter);
             }
         });
     }

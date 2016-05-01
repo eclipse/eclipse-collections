@@ -694,13 +694,7 @@ class ImmutableSortedBagImpl<T>
     public int hashCode()
     {
         final Counter counter = new Counter();
-        this.forEachWithOccurrences(new ObjectIntProcedure<T>()
-        {
-            public void value(T each, int count)
-            {
-                counter.add((each == null ? 0 : each.hashCode()) ^ count);
-            }
-        });
+        this.forEachWithOccurrences((each, count) -> counter.add((each == null ? 0 : each.hashCode()) ^ count));
         return counter.getCount();
     }
 

@@ -49,14 +49,10 @@ public class DistinctIterable<T>
     {
         final MutableSet<T> seenSoFar = UnifiedSet.newSet();
 
-        Iterate.forEach(this.adapted, new Procedure<T>()
-        {
-            public void value(T each)
+        Iterate.forEach(this.adapted, each -> {
+            if (seenSoFar.add(each))
             {
-                if (seenSoFar.add(each))
-                {
-                    procedure.value(each);
-                }
+                procedure.value(each);
             }
         });
     }
@@ -72,13 +68,7 @@ public class DistinctIterable<T>
     {
         final MutableSet<T> seenSoFar = UnifiedSet.newSet();
 
-        return Iterate.anySatisfy(this.adapted, new Predicate<T>()
-        {
-            public boolean accept(T each)
-            {
-                return seenSoFar.add(each) && predicate.accept(each);
-            }
-        });
+        return Iterate.anySatisfy(this.adapted, each -> seenSoFar.add(each) && predicate.accept(each));
     }
 
     @Override
@@ -86,13 +76,7 @@ public class DistinctIterable<T>
     {
         final MutableSet<T> seenSoFar = UnifiedSet.newSet();
 
-        return Iterate.allSatisfy(this.adapted, new Predicate<T>()
-        {
-            public boolean accept(T each)
-            {
-                return !seenSoFar.add(each) || predicate.accept(each);
-            }
-        });
+        return Iterate.allSatisfy(this.adapted, each -> !seenSoFar.add(each) || predicate.accept(each));
     }
 
     @Override
@@ -100,13 +84,7 @@ public class DistinctIterable<T>
     {
         final MutableSet<T> seenSoFar = UnifiedSet.newSet();
 
-        return Iterate.allSatisfy(this.adapted, new Predicate<T>()
-        {
-            public boolean accept(T each)
-            {
-                return !seenSoFar.add(each) || !predicate.accept(each);
-            }
-        });
+        return Iterate.allSatisfy(this.adapted, each -> !seenSoFar.add(each) || !predicate.accept(each));
     }
 
     @Override
@@ -114,13 +92,7 @@ public class DistinctIterable<T>
     {
         final MutableSet<T> seenSoFar = UnifiedSet.newSet();
 
-        return Iterate.detect(this.adapted, new Predicate<T>()
-        {
-            public boolean accept(T each)
-            {
-                return seenSoFar.add(each) && predicate.accept(each);
-            }
-        });
+        return Iterate.detect(this.adapted, each -> seenSoFar.add(each) && predicate.accept(each));
     }
 
     public Iterator<T> iterator()

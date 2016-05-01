@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -1281,13 +1281,7 @@ public final class IteratorIterate
         while (iterator.hasNext())
         {
             final T item = iterator.next();
-            result.updateValue(groupBy.valueOf(item), Functions0.zeroBigDecimal(), new Function<BigDecimal, BigDecimal>()
-            {
-                public BigDecimal valueOf(BigDecimal original)
-                {
-                    return original.add(function.valueOf(item));
-                }
-            });
+            result.updateValue(groupBy.valueOf(item), Functions0.zeroBigDecimal(), original -> original.add(function.valueOf(item)));
         }
         return result;
     }
@@ -1298,13 +1292,7 @@ public final class IteratorIterate
         while (iterator.hasNext())
         {
             final T item = iterator.next();
-            result.updateValue(groupBy.valueOf(item), Functions0.zeroBigInteger(), new Function<BigInteger, BigInteger>()
-            {
-                public BigInteger valueOf(BigInteger original)
-                {
-                    return original.add(function.valueOf(item));
-                }
-            });
+            result.updateValue(groupBy.valueOf(item), Functions0.zeroBigInteger(), original -> original.add(function.valueOf(item)));
         }
         return result;
     }

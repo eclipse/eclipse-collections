@@ -953,24 +953,12 @@ public final class MultiReaderFastList<T>
 
     public void reverseForEach(final Procedure<? super T> procedure)
     {
-        this.withReadLockRun(new Runnable()
-        {
-            public void run()
-            {
-                MultiReaderFastList.this.getDelegate().reverseForEach(procedure);
-            }
-        });
+        this.withReadLockRun(() -> this.getDelegate().reverseForEach(procedure));
     }
 
     public void forEachWithIndex(final int fromIndex, final int toIndex, final ObjectIntProcedure<? super T> objectIntProcedure)
     {
-        this.withReadLockRun(new Runnable()
-        {
-            public void run()
-            {
-                MultiReaderFastList.this.getDelegate().forEachWithIndex(fromIndex, toIndex, objectIntProcedure);
-            }
-        });
+        this.withReadLockRun(() -> this.getDelegate().forEachWithIndex(fromIndex, toIndex, objectIntProcedure));
     }
 
     public void writeExternal(ObjectOutput out) throws IOException

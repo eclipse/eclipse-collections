@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -12,7 +12,6 @@ package org.eclipse.collections.impl.multimap.list;
 
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
-import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MutableMap;
@@ -53,13 +52,7 @@ public abstract class AbstractMutableListMultimap<K, V> extends AbstractMutableM
     {
         final MutableMap<K, ImmutableList<V>> map = UnifiedMap.newMap();
 
-        this.map.forEachKeyValue(new Procedure2<K, MutableList<V>>()
-        {
-            public void value(K key, MutableList<V> list)
-            {
-                map.put(key, list.toImmutable());
-            }
-        });
+        this.map.forEachKeyValue((key, list) -> map.put(key, list.toImmutable()));
 
         return new ImmutableListMultimapImpl<K, V>(map);
     }

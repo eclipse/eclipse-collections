@@ -1321,13 +1321,7 @@ public class ObjectBooleanHashMapWithHashingStrategy<K> implements MutableObject
         {
             int oldSize = ObjectBooleanHashMapWithHashingStrategy.this.size();
             final BooleanSet sourceSet = source instanceof BooleanSet ? (BooleanSet) source : source.toSet();
-            ObjectBooleanHashMapWithHashingStrategy<K> retained = ObjectBooleanHashMapWithHashingStrategy.this.select(new ObjectBooleanPredicate<K>()
-            {
-                public boolean accept(K object, boolean value)
-                {
-                    return sourceSet.contains(value);
-                }
-            });
+            ObjectBooleanHashMapWithHashingStrategy<K> retained = ObjectBooleanHashMapWithHashingStrategy.this.select((object, value) -> sourceSet.contains(value));
             if (retained.size() != oldSize)
             {
                 ObjectBooleanHashMapWithHashingStrategy.this.keys = retained.keys;

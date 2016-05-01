@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -1877,13 +1877,7 @@ public abstract class AbstractMutableSortedBagTestCase extends MutableBagTestCas
     {
         private static final Function2<Integer, Integer, Holder> FROM_INT_INT = (each, each2) -> new Holder(each + each2);
         private static final Function<Integer, MutableList<Holder>> FROM_LIST = object -> FastList.newListWith(new Holder(object), new Holder(object));
-        private static final IntFunction<Holder> TO_NUMBER = new IntFunction<Holder>()
-        {
-            public int intValueOf(Holder holder)
-            {
-                return holder.number;
-            }
-        };
+        private static final IntFunction<Holder> TO_NUMBER = holder -> holder.number;
         private final int number;
 
         private Holder(int i)

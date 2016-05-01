@@ -147,13 +147,7 @@ public abstract class AbstractMutableBagIterable<T>
             final P parameter,
             Function0<? extends T> function)
     {
-        return this.getKeysView().detectIfNone(new Predicate<T>()
-        {
-            public boolean accept(T each)
-            {
-                return predicate.accept(each, parameter);
-            }
-        }, function);
+        return this.getKeysView().detectIfNone(each -> predicate.accept(each, parameter), function);
     }
 
     @Override
@@ -274,13 +268,7 @@ public abstract class AbstractMutableBagIterable<T>
 
     public MutableList<ObjectIntPair<T>> topOccurrences(int n)
     {
-        return this.occurrencesSortingBy(n, new IntFunction<ObjectIntPair<T>>()
-        {
-            public int intValueOf(ObjectIntPair<T> item)
-            {
-                return -item.getTwo();
-            }
-        }, Lists.mutable.<ObjectIntPair<T>>empty());
+        return this.occurrencesSortingBy(n, item -> -item.getTwo(), Lists.mutable.<ObjectIntPair<T>>empty());
     }
 
     public MutableList<ObjectIntPair<T>> bottomOccurrences(int n)

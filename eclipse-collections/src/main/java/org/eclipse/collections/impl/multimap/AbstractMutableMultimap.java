@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -325,14 +325,10 @@ public abstract class AbstractMutableMultimap<K, V, C extends MutableCollection<
     public MutableMap<K, RichIterable<V>> toMap()
     {
         final MutableMap<K, RichIterable<V>> result = (MutableMap<K, RichIterable<V>>) (MutableMap<?, ?>) this.map.newEmpty();
-        this.map.forEachKeyValue(new Procedure2<K, C>()
-        {
-            public void value(K key, C collection)
-            {
-                MutableCollection<V> mutableCollection = collection.newEmpty();
-                mutableCollection.addAll(collection);
-                result.put(key, mutableCollection);
-            }
+        this.map.forEachKeyValue((key, collection) -> {
+            MutableCollection<V> mutableCollection = collection.newEmpty();
+            mutableCollection.addAll(collection);
+            result.put(key, mutableCollection);
         });
         return result;
     }
@@ -340,14 +336,10 @@ public abstract class AbstractMutableMultimap<K, V, C extends MutableCollection<
     public <R extends Collection<V>> MutableMap<K, R> toMap(final Function0<R> collectionFactory)
     {
         final MutableMap<K, R> result = (MutableMap<K, R>) this.createMapWithKeyCount(this.map.size());
-        this.map.forEachKeyValue(new Procedure2<K, C>()
-        {
-            public void value(K key, C collection)
-            {
-                R mutableCollection = collectionFactory.value();
-                mutableCollection.addAll(collection);
-                result.put(key, mutableCollection);
-            }
+        this.map.forEachKeyValue((key, collection) -> {
+            R mutableCollection = collectionFactory.value();
+            mutableCollection.addAll(collection);
+            result.put(key, mutableCollection);
         });
         return result;
     }

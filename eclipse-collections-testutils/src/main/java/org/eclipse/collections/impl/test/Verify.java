@@ -2011,13 +2011,7 @@ public final class Verify extends Assert
 
             Verify.assertNotEmpty("Expected items in assertion", items);
 
-            Predicate<Object> containsPredicate = new Predicate<Object>()
-            {
-                public boolean accept(Object each)
-                {
-                    return Iterate.contains(iterable, each);
-                }
-            };
+            Predicate<Object> containsPredicate = each -> Iterate.contains(iterable, each);
 
             if (!ArrayIterate.allSatisfy(items, containsPredicate))
             {
@@ -3751,13 +3745,9 @@ public final class Verify extends Assert
     {
         try
         {
-            Verify.assertThrows(NotSerializableException.class, new Callable<Void>()
-            {
-                public Void call() throws IOException
-                {
-                    new ObjectOutputStream(new ByteArrayOutputStream()).writeObject(actualObject);
-                    return null;
-                }
+            Verify.assertThrows(NotSerializableException.class, () -> {
+                new ObjectOutputStream(new ByteArrayOutputStream()).writeObject(actualObject);
+                return null;
             });
         }
         catch (AssertionError e)

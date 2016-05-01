@@ -76,13 +76,7 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
         {
             public Future<?> valueOf(final RootBatch<T> chunk)
             {
-                return parallelIterable.getExecutorService().submit(new Runnable()
-                {
-                    public void run()
-                    {
-                        chunk.forEach(procedure);
-                    }
-                });
+                return parallelIterable.getExecutorService().submit(() -> chunk.forEach(procedure));
             }
         });
         // The call to toList() is important to stop the lazy evaluation and force all the Runnables to start executing.
@@ -112,13 +106,7 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
         {
             public Future<Boolean> valueOf(final RootBatch<T> batch)
             {
-                return completionService.submit(new Callable<Boolean>()
-                {
-                    public Boolean call()
-                    {
-                        return batch.anySatisfy(predicate);
-                    }
-                });
+                return completionService.submit(() -> batch.anySatisfy(predicate));
             }
         }, UnifiedSet.<Future<Boolean>>newSet());
 
@@ -157,13 +145,7 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
         {
             public Future<Boolean> valueOf(final RootBatch<T> batch)
             {
-                return completionService.submit(new Callable<Boolean>()
-                {
-                    public Boolean call()
-                    {
-                        return batch.allSatisfy(predicate);
-                    }
-                });
+                return completionService.submit(() -> batch.allSatisfy(predicate));
             }
         }, UnifiedSet.<Future<Boolean>>newSet());
 
@@ -202,13 +184,7 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
         {
             public Future<T> valueOf(final RootBatch<T> chunk)
             {
-                return parallelIterable.getExecutorService().submit(new Callable<T>()
-                {
-                    public T call()
-                    {
-                        return chunk.detect(predicate);
-                    }
-                });
+                return parallelIterable.getExecutorService().submit(() -> chunk.detect(predicate));
             }
         });
         // The call to toList() is important to stop the lazy evaluation and force all the Runnables to start executing.
@@ -267,13 +243,7 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
         {
             public Future<V> valueOf(final Batch<T> chunk)
             {
-                return AbstractParallelIterable.this.getExecutorService().submit(new Callable<V>()
-                {
-                    public V call()
-                    {
-                        return function.valueOf(chunk);
-                    }
-                });
+                return AbstractParallelIterable.this.getExecutorService().submit(() -> function.valueOf(chunk));
             }
         });
         // The call to toList() is important to stop the lazy evaluation and force all the Runnables to start executing.
@@ -303,13 +273,7 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
         {
             public Callable<V> valueOf(final Batch<T> chunk)
             {
-                return new Callable<V>()
-                {
-                    public V call()
-                    {
-                        return function.valueOf(chunk);
-                    }
-                };
+                return () -> function.valueOf(chunk);
             }
         }).toList();
 
@@ -351,13 +315,7 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
         {
             public Future<T> valueOf(final Batch<T> chunk)
             {
-                return AbstractParallelIterable.this.getExecutorService().submit(new Callable<T>()
-                {
-                    public T call()
-                    {
-                        return map.valueOf(chunk);
-                    }
-                });
+                return AbstractParallelIterable.this.getExecutorService().submit(() -> map.valueOf(chunk));
             }
         });
         // The call to toList() is important to stop the lazy evaluation and force all the Runnables to start executing.
@@ -408,13 +366,7 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
         {
             public Callable<T> valueOf(final Batch<T> chunk)
             {
-                return new Callable<T>()
-                {
-                    public T call()
-                    {
-                        return map.valueOf(chunk);
-                    }
-                };
+                return () -> map.valueOf(chunk);
             }
         }).toList();
 
@@ -500,13 +452,7 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
         try
         {
             appendable.append(start);
-            Function<Batch<T>, String> map = new Function<Batch<T>, String>()
-            {
-                public String valueOf(Batch<T> batch)
-                {
-                    return batch.makeString(separator);
-                }
-            };
+            Function<Batch<T>, String> map = batch -> batch.makeString(separator);
             Procedure2<Appendable, String> reduce = new CheckedProcedure2<Appendable, String>()
             {
                 private boolean first = true;
@@ -591,14 +537,10 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
 
     public MutableList<T> toList()
     {
-        Function<Batch<T>, FastList<T>> map = new Function<Batch<T>, FastList<T>>()
-        {
-            public FastList<T> valueOf(Batch<T> batch)
-            {
-                FastList<T> list = FastList.newList();
-                batch.forEach(CollectionAddProcedure.on(list));
-                return list;
-            }
+        Function<Batch<T>, FastList<T>> map = batch -> {
+            FastList<T> list = FastList.newList();
+            batch.forEach(CollectionAddProcedure.on(list));
+            return list;
         };
         MutableList<T> state = new CompositeFastList<T>();
         this.collectCombine(map, MutableList<T>::addAll, state);
@@ -722,13 +664,7 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
 
     public int count(final Predicate<? super T> predicate)
     {
-        Function<Batch<T>, Integer> map = new Function<Batch<T>, Integer>()
-        {
-            public Integer valueOf(Batch<T> batch)
-            {
-                return batch.count(predicate);
-            }
-        };
+        Function<Batch<T>, Integer> map = batch -> batch.count(predicate);
 
         Counter state = new Counter();
         this.collectCombineUnordered(map, Counter::add, state);
@@ -742,25 +678,13 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
 
     public T min(final Comparator<? super T> comparator)
     {
-        Function<Batch<T>, T> map = new Function<Batch<T>, T>()
-        {
-            public T valueOf(Batch<T> batch)
-            {
-                return batch.min(comparator);
-            }
-        };
+        Function<Batch<T>, T> map = batch -> batch.min(comparator);
         return this.collectReduce(map, Functions2.min(comparator));
     }
 
     public T max(final Comparator<? super T> comparator)
     {
-        Function<Batch<T>, T> map = new Function<Batch<T>, T>()
-        {
-            public T valueOf(Batch<T> batch)
-            {
-                return batch.max(comparator);
-            }
-        };
+        Function<Batch<T>, T> map = batch -> batch.max(comparator);
         return this.collectReduce(map, Functions2.max(comparator));
     }
 
@@ -776,74 +700,34 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
 
     public <V extends Comparable<? super V>> T minBy(final Function<? super T, ? extends V> function)
     {
-        Function<Batch<T>, T> map = new Function<Batch<T>, T>()
-        {
-            public T valueOf(Batch<T> batch)
-            {
-                return batch.minBy(function);
-            }
-        };
+        Function<Batch<T>, T> map = batch -> batch.minBy(function);
         return this.collectReduce(map, Functions2.minBy(function));
     }
 
     public <V extends Comparable<? super V>> T maxBy(final Function<? super T, ? extends V> function)
     {
-        Function<Batch<T>, T> map = new Function<Batch<T>, T>()
-        {
-            public T valueOf(Batch<T> batch)
-            {
-                return batch.maxBy(function);
-            }
-        };
+        Function<Batch<T>, T> map = batch -> batch.maxBy(function);
         return this.collectReduce(map, Functions2.maxBy(function));
     }
 
     public long sumOfInt(final IntFunction<? super T> function)
     {
-        LongFunction<Batch<T>> map = new LongFunction<Batch<T>>()
-        {
-            public long longValueOf(Batch<T> batch)
-            {
-                return batch.sumOfInt(function);
-            }
-        };
-        return this.sumOfLongOrdered(map);
+        return this.sumOfLongOrdered(batch -> batch.sumOfInt(function));
     }
 
     public double sumOfFloat(final FloatFunction<? super T> function)
     {
-        Function<Batch<T>, DoubleSumResultHolder> map = new Function<Batch<T>, DoubleSumResultHolder>()
-        {
-            public DoubleSumResultHolder valueOf(Batch<T> batch)
-            {
-                return batch.sumOfFloat(function);
-            }
-        };
-        return this.sumOfDoubleOrdered(map);
+        return this.sumOfDoubleOrdered(batch -> batch.sumOfFloat(function));
     }
 
     public long sumOfLong(final LongFunction<? super T> function)
     {
-        LongFunction<Batch<T>> map = new LongFunction<Batch<T>>()
-        {
-            public long longValueOf(Batch<T> batch)
-            {
-                return batch.sumOfLong(function);
-            }
-        };
-        return this.sumOfLongOrdered(map);
+        return this.sumOfLongOrdered(batch -> batch.sumOfLong(function));
     }
 
     public double sumOfDouble(final DoubleFunction<? super T> function)
     {
-        Function<Batch<T>, DoubleSumResultHolder> map = new Function<Batch<T>, DoubleSumResultHolder>()
-        {
-            public DoubleSumResultHolder valueOf(Batch<T> batch)
-            {
-                return batch.sumOfDouble(function);
-            }
-        };
-        return this.sumOfDoubleOrdered(map);
+        return this.sumOfDoubleOrdered(batch -> batch.sumOfDouble(function));
     }
 
     private long sumOfLongOrdered(final LongFunction<Batch<T>> map)
@@ -853,13 +737,7 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
         {
             public Future<Long> valueOf(final Batch<T> chunk)
             {
-                return AbstractParallelIterable.this.getExecutorService().submit(new Callable<Long>()
-                {
-                    public Long call()
-                    {
-                        return map.longValueOf(chunk);
-                    }
-                });
+                return AbstractParallelIterable.this.getExecutorService().submit(() -> map.longValueOf(chunk));
             }
         });
         // The call to toList() is important to stop the lazy evaluation and force all the Runnables to start executing.
@@ -891,13 +769,7 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
         {
             public Future<DoubleSumResultHolder> valueOf(final Batch<T> chunk)
             {
-                return AbstractParallelIterable.this.getExecutorService().submit(new Callable<DoubleSumResultHolder>()
-                {
-                    public DoubleSumResultHolder call()
-                    {
-                        return map.valueOf(chunk);
-                    }
-                });
+                return AbstractParallelIterable.this.getExecutorService().submit(() -> map.valueOf(chunk));
             }
         });
         // The call to toList() is important to stop the lazy evaluation and force all the Runnables to start executing.
@@ -930,15 +802,11 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
     public <V> MapIterable<V, T> groupByUniqueKey(final Function<? super T, ? extends V> function)
     {
         final MutableMap<V, T> result = ConcurrentHashMap.newMap();
-        this.forEach(new Procedure<T>()
-        {
-            public void value(T value)
+        this.forEach(value -> {
+            V key = function.valueOf(value);
+            if (result.put(key, value) != null)
             {
-                V key = function.valueOf(value);
-                if (result.put(key, value) != null)
-                {
-                    throw new IllegalStateException("Key " + key + " already exists in map!");
-                }
+                throw new IllegalStateException("Key " + key + " already exists in map!");
             }
         });
         return result;

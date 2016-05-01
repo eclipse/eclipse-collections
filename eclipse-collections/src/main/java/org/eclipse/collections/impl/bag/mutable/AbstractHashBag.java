@@ -25,7 +25,6 @@ import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.primitive.MutableObjectIntMap;
-import org.eclipse.collections.api.tuple.primitive.ObjectIntPair;
 import org.eclipse.collections.impl.Counter;
 import org.eclipse.collections.impl.block.factory.primitive.IntToIntFunctions;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
@@ -90,26 +89,14 @@ public abstract class AbstractHashBag<T> extends AbstractMutableBag<T>
             return false;
         }
 
-        return this.items.keyValuesView().allSatisfy(new Predicate<ObjectIntPair<T>>()
-        {
-            public boolean accept(ObjectIntPair<T> each)
-            {
-                return bag.occurrencesOf(each.getOne()) == each.getTwo();
-            }
-        });
+        return this.items.keyValuesView().allSatisfy(each -> bag.occurrencesOf(each.getOne()) == each.getTwo());
     }
 
     @Override
     public int hashCode()
     {
         final Counter counter = new Counter();
-        this.items.forEachKeyValue(new ObjectIntProcedure<T>()
-        {
-            public void value(T item, int count)
-            {
-                counter.add((item == null ? 0 : AbstractHashBag.this.computeHashCode(item)) ^ count);
-            }
-        });
+        this.items.forEachKeyValue((item, count) -> counter.add((item == null ? 0 : AbstractHashBag.this.computeHashCode(item)) ^ count));
         return counter.getCount();
     }
 
@@ -181,14 +168,10 @@ public abstract class AbstractHashBag<T> extends AbstractMutableBag<T>
 
     public void each(final Procedure<? super T> procedure)
     {
-        this.items.forEachKeyValue(new ObjectIntProcedure<T>()
-        {
-            public void value(T key, int count)
+        this.items.forEachKeyValue((key, count) -> {
+            for (int i = 0; i < count; i++)
             {
-                for (int i = 0; i < count; i++)
-                {
-                    procedure.value(key);
-                }
+                procedure.value(key);
             }
         });
     }
@@ -197,15 +180,11 @@ public abstract class AbstractHashBag<T> extends AbstractMutableBag<T>
     public void forEachWithIndex(final ObjectIntProcedure<? super T> objectIntProcedure)
     {
         final Counter index = new Counter();
-        this.items.forEachKeyValue(new ObjectIntProcedure<T>()
-        {
-            public void value(T key, int count)
+        this.items.forEachKeyValue((key, count) -> {
+            for (int i = 0; i < count; i++)
             {
-                for (int i = 0; i < count; i++)
-                {
-                    objectIntProcedure.value(key, index.getCount());
-                    index.increment();
-                }
+                objectIntProcedure.value(key, index.getCount());
+                index.increment();
             }
         });
     }
@@ -213,14 +192,10 @@ public abstract class AbstractHashBag<T> extends AbstractMutableBag<T>
     @Override
     public <P> void forEachWith(final Procedure2<? super T, ? super P> procedure, final P parameter)
     {
-        this.items.forEachKeyValue(new ObjectIntProcedure<T>()
-        {
-            public void value(T key, int count)
+        this.items.forEachKeyValue((key, count) -> {
+            for (int i = 0; i < count; i++)
             {
-                for (int i = 0; i < count; i++)
-                {
-                    procedure.value(key, parameter);
-                }
+                procedure.value(key, parameter);
             }
         });
     }

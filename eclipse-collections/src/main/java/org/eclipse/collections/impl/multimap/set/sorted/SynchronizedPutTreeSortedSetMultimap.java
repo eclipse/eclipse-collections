@@ -19,8 +19,6 @@ import java.util.Comparator;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.predicate.Predicate2;
-import org.eclipse.collections.api.block.procedure.Procedure;
-import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.multimap.Multimap;
 import org.eclipse.collections.api.multimap.set.MutableSetMultimap;
@@ -66,13 +64,7 @@ public final class SynchronizedPutTreeSortedSetMultimap<K, V>
     public SynchronizedPutTreeSortedSetMultimap(Pair<K, V>... pairs)
     {
         this();
-        ArrayIterate.forEach(pairs, new Procedure<Pair<K, V>>()
-        {
-            public void value(Pair<K, V> pair)
-            {
-                SynchronizedPutTreeSortedSetMultimap.this.put(pair.getOne(), pair.getTwo());
-            }
-        });
+        ArrayIterate.forEach(pairs, pair -> SynchronizedPutTreeSortedSetMultimap.this.put(pair.getOne(), pair.getTwo()));
     }
 
     public SynchronizedPutTreeSortedSetMultimap(Iterable<Pair<K, V>> inputIterable)
@@ -145,13 +137,7 @@ public final class SynchronizedPutTreeSortedSetMultimap<K, V>
     {
         final MutableMap<K, ImmutableSortedSet<V>> map = UnifiedMap.newMap();
 
-        this.map.forEachKeyValue(new Procedure2<K, MutableSortedSet<V>>()
-        {
-            public void value(K key, MutableSortedSet<V> set)
-            {
-                map.put(key, set.toImmutable());
-            }
-        });
+        this.map.forEachKeyValue((key, set) -> map.put(key, set.toImmutable()));
         return new ImmutableSortedSetMultimapImpl<K, V>(map, this.comparator());
     }
 

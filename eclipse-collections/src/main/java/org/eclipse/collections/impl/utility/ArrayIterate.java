@@ -1685,13 +1685,7 @@ public final class ArrayIterate
         MutableMap<V, BigDecimal> result = UnifiedMap.newMap();
         for (final T each : array)
         {
-            result.updateValue(groupBy.valueOf(each), Functions0.zeroBigDecimal(), new Function<BigDecimal, BigDecimal>()
-            {
-                public BigDecimal valueOf(BigDecimal original)
-                {
-                    return original.add(function.valueOf(each));
-                }
-            });
+            result.updateValue(groupBy.valueOf(each), Functions0.zeroBigDecimal(), original -> original.add(function.valueOf(each)));
         }
         return result;
     }
@@ -1705,13 +1699,7 @@ public final class ArrayIterate
         MutableMap<V, BigInteger> result = UnifiedMap.newMap();
         for (final T each : array)
         {
-            result.updateValue(groupBy.valueOf(each), Functions0.zeroBigInteger(), new Function<BigInteger, BigInteger>()
-            {
-                public BigInteger valueOf(BigInteger original)
-                {
-                    return original.add(function.valueOf(each));
-                }
-            });
+            result.updateValue(groupBy.valueOf(each), Functions0.zeroBigInteger(), original -> original.add(function.valueOf(each)));
         }
         return result;
     }

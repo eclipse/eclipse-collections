@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -889,13 +889,7 @@ public class PredicatesTest
 
     public static final class Employee
     {
-        public static final Function<Employee, MutableList<Address>> TO_ADDRESSES = new Function<Employee, MutableList<Address>>()
-        {
-            public MutableList<Address> valueOf(Employee employee)
-            {
-                return employee.addresses;
-            }
-        };
+        public static final Function<Employee, MutableList<Address>> TO_ADDRESSES = employee -> employee.addresses;
         public static final Function<Employee, MutableList<Dependent>> TO_DEPENEDENTS = employee -> employee.dependents;
         private final MutableList<Address> addresses;
         private final MutableList<Dependent> dependents = Lists.mutable.of();

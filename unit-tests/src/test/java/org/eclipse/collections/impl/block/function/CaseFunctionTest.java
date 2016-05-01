@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -55,13 +55,7 @@ public class CaseFunctionTest
 
     public static final class Foo implements Comparable<Foo>
     {
-        public static final Function<Foo, Double> TO_VALUE = new Function<Foo, Double>()
-        {
-            public Double valueOf(Foo foo)
-            {
-                return foo.value;
-            }
-        };
+        public static final Function<Foo, Double> TO_VALUE = foo -> foo.value;
 
         private final String description;
         private final double value;

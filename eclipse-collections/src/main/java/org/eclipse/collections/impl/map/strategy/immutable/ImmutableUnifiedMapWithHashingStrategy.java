@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -127,13 +127,7 @@ public class ImmutableUnifiedMapWithHashingStrategy<K, V>
         final UnifiedSetWithHashingStrategy<Entry<K, V>> result = UnifiedSetWithHashingStrategy.newSet(
                 HashingStrategies.<Entry<K, V>>defaultStrategy(), this.delegate.size());
         final HashingStrategy<? super K> hashingStrategy = this.delegate.hashingStrategy();
-        this.forEachKeyValue(new Procedure2<K, V>()
-        {
-            public void value(K argument1, V argument2)
-            {
-                result.put(ImmutableEntryWithHashingStrategy.of(argument1, argument2, hashingStrategy));
-            }
-        });
+        this.forEachKeyValue((argument1, argument2) -> result.put(ImmutableEntryWithHashingStrategy.of(argument1, argument2, hashingStrategy)));
         return result.toImmutable().castToSet();
     }
 

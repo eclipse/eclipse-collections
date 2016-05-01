@@ -710,13 +710,7 @@ public final class StringIterate
      */
     public static int occurrencesOfChar(String string, final char value)
     {
-        return StringIterate.countChar(string, new CharPredicate()
-        {
-            public boolean accept(char character)
-            {
-                return value == character;
-            }
-        });
+        return StringIterate.countChar(string, character -> value == character);
     }
 
     /**
@@ -737,13 +731,7 @@ public final class StringIterate
      */
     public static int occurrencesOfCodePoint(String string, final int value)
     {
-        return StringIterate.countCodePoint(string, new CodePointPredicate()
-        {
-            public boolean accept(int codePoint)
-            {
-                return value == codePoint;
-            }
-        });
+        return StringIterate.countCodePoint(string, codePoint -> value == codePoint);
     }
 
     /**

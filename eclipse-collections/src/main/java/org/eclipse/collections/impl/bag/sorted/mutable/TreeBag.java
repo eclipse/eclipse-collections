@@ -149,26 +149,14 @@ public class TreeBag<T>
             return false;
         }
 
-        return this.items.keyValuesView().allSatisfy(new Predicate<Pair<T, Counter>>()
-        {
-            public boolean accept(Pair<T, Counter> each)
-            {
-                return bag.occurrencesOf(each.getOne()) == each.getTwo().getCount();
-            }
-        });
+        return this.items.keyValuesView().allSatisfy(each -> bag.occurrencesOf(each.getOne()) == each.getTwo().getCount());
     }
 
     @Override
     public int hashCode()
     {
         final Counter counter = new Counter();
-        this.forEachWithOccurrences(new ObjectIntProcedure<T>()
-        {
-            public void value(T each, int count)
-            {
-                counter.add((each == null ? 0 : each.hashCode()) ^ count);
-            }
-        });
+        this.forEachWithOccurrences((each, count) -> counter.add((each == null ? 0 : each.hashCode()) ^ count));
         return counter.getCount();
     }
 
@@ -185,23 +173,13 @@ public class TreeBag<T>
 
     public void forEachWithOccurrences(final ObjectIntProcedure<? super T> procedure)
     {
-        this.items.forEachKeyValue(new Procedure2<T, Counter>()
-        {
-            public void value(T item, Counter count)
-            {
-                procedure.value(item, count.getCount());
-            }
-        });
+        this.items.forEachKeyValue((item, count) -> procedure.value(item, count.getCount()));
     }
 
     public MutableSortedBag<T> selectByOccurrences(final IntPredicate predicate)
     {
-        MutableSortedMap<T, Counter> map = this.items.select(new Predicate2<T, Counter>()
-        {
-            public boolean accept(T each, Counter occurrences)
-            {
-                return predicate.accept(occurrences.getCount());
-            }
+        MutableSortedMap<T, Counter> map = this.items.select((each, occurrences) -> {
+            return predicate.accept(occurrences.getCount());
         });
         return new TreeBag<T>(map);
     }
@@ -291,14 +269,10 @@ public class TreeBag<T>
 
     public void each(final Procedure<? super T> procedure)
     {
-        this.items.forEachKeyValue(new Procedure2<T, Counter>()
-        {
-            public void value(T key, Counter value)
+        this.items.forEachKeyValue((key, value) -> {
+            for (int i = 0; i < value.getCount(); i++)
             {
-                for (int i = 0; i < value.getCount(); i++)
-                {
-                    procedure.value(key);
-                }
+                procedure.value(key);
             }
         });
     }
@@ -307,15 +281,11 @@ public class TreeBag<T>
     public void forEachWithIndex(final ObjectIntProcedure<? super T> objectIntProcedure)
     {
         final Counter index = new Counter();
-        this.items.forEachKeyValue(new Procedure2<T, Counter>()
-        {
-            public void value(T key, Counter value)
+        this.items.forEachKeyValue((key, value) -> {
+            for (int i = 0; i < value.getCount(); i++)
             {
-                for (int i = 0; i < value.getCount(); i++)
-                {
-                    objectIntProcedure.value(key, index.getCount());
-                    index.increment();
-                }
+                objectIntProcedure.value(key, index.getCount());
+                index.increment();
             }
         });
     }
@@ -419,14 +389,10 @@ public class TreeBag<T>
     @Override
     public <P> void forEachWith(final Procedure2<? super T, ? super P> procedure, final P parameter)
     {
-        this.items.forEachKeyValue(new Procedure2<T, Counter>()
-        {
-            public void value(T key, Counter value)
+        this.items.forEachKeyValue((key, value) -> {
+            for (int i = 0; i < value.getCount(); i++)
             {
-                for (int i = 0; i < value.getCount(); i++)
-                {
-                    procedure.value(key, parameter);
-                }
+                procedure.value(key, parameter);
             }
         });
     }

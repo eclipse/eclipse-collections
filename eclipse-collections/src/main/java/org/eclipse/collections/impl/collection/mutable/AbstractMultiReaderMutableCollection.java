@@ -2088,14 +2088,10 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
                 final Procedure2<? super V, ? super T> mutatingAggregator)
         {
             final MutableMap<K, V> map = UnifiedMap.newMap();
-            this.forEach(new Procedure<T>()
-            {
-                public void value(T each)
-                {
-                    K key = groupBy.valueOf(each);
-                    V value = map.getIfAbsentPut(key, zeroValueFactory);
-                    mutatingAggregator.value(value, each);
-                }
+            this.each(each -> {
+                K key = groupBy.valueOf(each);
+                V value = map.getIfAbsentPut(key, zeroValueFactory);
+                mutatingAggregator.value(value, each);
             });
             return map;
         }
@@ -2106,14 +2102,10 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
                 final Function2<? super V, ? super T, ? extends V> nonMutatingAggregator)
         {
             final MutableMap<K, V> map = UnifiedMap.newMap();
-            this.forEach(new Procedure<T>()
-            {
-                public void value(T each)
-                {
-                    K key = groupBy.valueOf(each);
-                    V value = map.getIfAbsentPut(key, zeroValueFactory);
-                    map.put(key, nonMutatingAggregator.value(value, each));
-                }
+            this.each(each -> {
+                K key = groupBy.valueOf(each);
+                V value = map.getIfAbsentPut(key, zeroValueFactory);
+                map.put(key, nonMutatingAggregator.value(value, each));
             });
             return map;
         }

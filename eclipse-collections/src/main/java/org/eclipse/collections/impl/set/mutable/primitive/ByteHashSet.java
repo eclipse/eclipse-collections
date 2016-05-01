@@ -589,14 +589,10 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
     {
         final ByteHashSet result = new ByteHashSet();
 
-        this.forEach(new ByteProcedure()
-        {
-            public void value(byte value)
+        this.forEach(value -> {
+            if (predicate.accept(value))
             {
-                if (predicate.accept(value))
-                {
-                    result.add(value);
-                }
+                result.add(value);
             }
         });
 
@@ -607,14 +603,10 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
     {
         final MutableByteSet result = new ByteHashSet();
 
-        this.forEach(new ByteProcedure()
-        {
-            public void value(byte value)
+        this.forEach(value -> {
+            if (!predicate.accept(value))
             {
-                if (!predicate.accept(value))
-                {
-                    result.add(value);
-                }
+                result.add(value);
             }
         });
 
@@ -625,13 +617,7 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
     {
         final MutableSet<V> target = UnifiedSet.newSet(this.size());
 
-        this.forEach(new ByteProcedure()
-        {
-            public void value(byte each)
-            {
-                target.add(function.valueOf(each));
-            }
-        });
+        this.forEach(each -> target.add(function.valueOf(each)));
 
         return target;
     }
@@ -1163,14 +1149,10 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
         {
             final MutableByteSet result = new ByteHashSet();
 
-            this.forEach(new ByteProcedure()
-            {
-                public void value(byte value)
+            this.forEach(value -> {
+                if (predicate.accept(value))
                 {
-                    if (predicate.accept(value))
-                    {
-                        result.add(value);
-                    }
+                    result.add(value);
                 }
             });
 
@@ -1181,14 +1163,10 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
         {
             final MutableByteSet result = new ByteHashSet();
 
-            this.forEach(new ByteProcedure()
-            {
-                public void value(byte value)
+            this.forEach(value -> {
+                if (!predicate.accept(value))
                 {
-                    if (!predicate.accept(value))
-                    {
-                        result.add(value);
-                    }
+                    result.add(value);
                 }
             });
 
@@ -1199,13 +1177,7 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
         {
             final MutableSet<V> target = UnifiedSet.newSet(this.size());
 
-            this.forEach(new ByteProcedure()
-            {
-                public void value(byte each)
-                {
-                    target.add(function.valueOf(each));
-                }
-            });
+            this.forEach(each -> target.add(function.valueOf(each)));
 
             return target.toImmutable();
         }

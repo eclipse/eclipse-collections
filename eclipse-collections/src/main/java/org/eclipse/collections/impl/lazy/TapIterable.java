@@ -38,104 +38,72 @@ public class TapIterable<T>
 
     public void each(final Procedure<? super T> procedure)
     {
-        Iterate.forEach(this.adapted, new Procedure<T>()
-        {
-            public void value(T each)
-            {
-                TapIterable.this.procedure.value(each);
-                procedure.value(each);
-            }
+        Iterate.forEach(this.adapted, each -> {
+            this.procedure.value(each);
+            procedure.value(each);
         });
     }
 
     @Override
     public void forEachWithIndex(final ObjectIntProcedure<? super T> objectIntProcedure)
     {
-        Iterate.forEachWithIndex(this.adapted, new ObjectIntProcedure<T>()
-        {
-            public void value(T each, int index)
-            {
-                TapIterable.this.procedure.value(each);
-                objectIntProcedure.value(each, index);
-            }
+        Iterate.forEachWithIndex(this.adapted, (each, index) -> {
+            this.procedure.value(each);
+            objectIntProcedure.value(each, index);
         });
     }
 
     @Override
     public <P> void forEachWith(final Procedure2<? super T, ? super P> procedure, P parameter)
     {
-        Iterate.forEachWith(this.adapted, new Procedure2<T, P>()
-        {
-            public void value(T each, P aParameter)
-            {
-                TapIterable.this.procedure.value(each);
-                procedure.value(each, aParameter);
-            }
+        Iterate.forEachWith(this.adapted, (each, aParameter) -> {
+            this.procedure.value(each);
+            procedure.value(each, aParameter);
         }, parameter);
     }
 
     @Override
     public boolean anySatisfy(final Predicate<? super T> predicate)
     {
-        return Iterate.anySatisfy(this.adapted, new Predicate<T>()
-        {
-            public boolean accept(T each)
-            {
-                TapIterable.this.procedure.value(each);
-                return predicate.accept(each);
-            }
+        return Iterate.anySatisfy(this.adapted, each -> {
+            this.procedure.value(each);
+            return predicate.accept(each);
         });
     }
 
     @Override
     public boolean allSatisfy(final Predicate<? super T> predicate)
     {
-        return Iterate.allSatisfy(this.adapted, new Predicate<T>()
-        {
-            public boolean accept(T each)
-            {
-                TapIterable.this.procedure.value(each);
-                return predicate.accept(each);
-            }
+        return Iterate.allSatisfy(this.adapted, each -> {
+            this.procedure.value(each);
+            return predicate.accept(each);
         });
     }
 
     @Override
     public boolean noneSatisfy(final Predicate<? super T> predicate)
     {
-        return Iterate.noneSatisfy(this.adapted, new Predicate<T>()
-        {
-            public boolean accept(T each)
-            {
-                TapIterable.this.procedure.value(each);
-                return predicate.accept(each);
-            }
+        return Iterate.noneSatisfy(this.adapted, each -> {
+            this.procedure.value(each);
+            return predicate.accept(each);
         });
     }
 
     @Override
     public T getFirst()
     {
-        return Iterate.detect(this.adapted, new Predicate<T>()
-        {
-            public boolean accept(T each)
-            {
-                TapIterable.this.procedure.value(each);
-                return true;
-            }
+        return Iterate.detect(this.adapted, each -> {
+            this.procedure.value(each);
+            return true;
         });
     }
 
     @Override
     public T detect(final Predicate<? super T> predicate)
     {
-        return Iterate.detect(this.adapted, new Predicate<T>()
-        {
-            public boolean accept(T each)
-            {
-                TapIterable.this.procedure.value(each);
-                return predicate.accept(each);
-            }
+        return Iterate.detect(this.adapted, each -> {
+            this.procedure.value(each);
+            return predicate.accept(each);
         });
     }
 

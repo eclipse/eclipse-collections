@@ -15,8 +15,6 @@ import java.io.Externalizable;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.predicate.Predicate2;
-import org.eclipse.collections.api.block.procedure.Procedure;
-import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MutableMap;
@@ -59,13 +57,7 @@ public final class SynchronizedPutFastListMultimap<K, V>
     public SynchronizedPutFastListMultimap(Pair<K, V>... pairs)
     {
         this();
-        ArrayIterate.forEach(pairs, new Procedure<Pair<K, V>>()
-        {
-            public void value(Pair<K, V> pair)
-            {
-                SynchronizedPutFastListMultimap.this.put(pair.getOne(), pair.getTwo());
-            }
-        });
+        ArrayIterate.forEach(pairs, pair -> SynchronizedPutFastListMultimap.this.put(pair.getOne(), pair.getTwo()));
     }
 
     public SynchronizedPutFastListMultimap(Iterable<Pair<K, V>> inputIterable)
@@ -119,13 +111,7 @@ public final class SynchronizedPutFastListMultimap<K, V>
     {
         final MutableMap<K, ImmutableList<V>> map = UnifiedMap.newMap();
 
-        this.map.forEachKeyValue(new Procedure2<K, MutableList<V>>()
-        {
-            public void value(K key, MutableList<V> list)
-            {
-                map.put(key, list.toImmutable());
-            }
-        });
+        this.map.forEachKeyValue((key, list) -> map.put(key, list.toImmutable()));
 
         return new ImmutableListMultimapImpl<K, V>(map);
     }

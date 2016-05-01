@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -17,7 +17,6 @@ import java.util.Collection;
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.block.procedure.Procedure;
-import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.collection.ImmutableCollection;
 import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.api.map.MutableMap;
@@ -116,14 +115,10 @@ public abstract class AbstractImmutableMultimap<K, V, C extends ImmutableCollect
     public <R extends Collection<V>> MutableMap<K, R> toMap(final Function0<R> collectionFactory)
     {
         final MutableMap<K, R> result = UnifiedMap.newMap();
-        this.map.forEachKeyValue(new Procedure2<K, C>()
-        {
-            public void value(K key, C iterable)
-            {
-                R newCollection = collectionFactory.value();
-                Iterate.addAllTo(iterable, newCollection);
-                result.put(key, newCollection);
-            }
+        this.map.forEachKeyValue((key, iterable) -> {
+            R newCollection = collectionFactory.value();
+            Iterate.addAllTo(iterable, newCollection);
+            result.put(key, newCollection);
         });
 
         return result;

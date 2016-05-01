@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -81,13 +81,7 @@ public abstract class AbstractMutableList<T>
         extends AbstractMutableCollection<T>
         implements MutableList<T>
 {
-    private static final IntObjectToIntFunction<?> HASH_CODE_FUNCTION = new IntObjectToIntFunction<Object>()
-    {
-        public int intValueOf(int hashCode, Object item)
-        {
-            return 31 * hashCode + (item == null ? 0 : item.hashCode());
-        }
-    };
+    private static final IntObjectToIntFunction<?> HASH_CODE_FUNCTION = (hashCode, item) -> 31 * hashCode + (item == null ? 0 : item.hashCode());
 
     @Override
     public MutableList<T> clone()

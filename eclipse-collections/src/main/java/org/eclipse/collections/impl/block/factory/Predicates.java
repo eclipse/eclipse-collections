@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -849,13 +849,7 @@ public abstract class Predicates<T>
 
         public boolean accept(final T anObject)
         {
-            Predicate<Predicate<? super T>> predicate = new Predicate<Predicate<? super T>>()
-            {
-                public boolean accept(Predicate<? super T> aPredicate)
-                {
-                    return aPredicate.accept(anObject);
-                }
-            };
+            Predicate<Predicate<? super T>> predicate = aPredicate -> aPredicate.accept(anObject);
             return Iterate.allSatisfy(this.predicates, predicate);
         }
     }
@@ -878,13 +872,7 @@ public abstract class Predicates<T>
 
         public boolean accept(final T anObject)
         {
-            Predicate<Predicate<? super T>> predicate = new Predicate<Predicate<? super T>>()
-            {
-                public boolean accept(Predicate<? super T> aPredicate)
-                {
-                    return aPredicate.accept(anObject);
-                }
-            };
+            Predicate<Predicate<? super T>> predicate = aPredicate -> aPredicate.accept(anObject);
             return Iterate.anySatisfy(this.predicates, predicate);
         }
     }
@@ -907,13 +895,7 @@ public abstract class Predicates<T>
 
         public boolean accept(final T anObject)
         {
-            Predicate<Predicate<? super T>> predicate = new Predicate<Predicate<? super T>>()
-            {
-                public boolean accept(Predicate<? super T> aPredicate)
-                {
-                    return !aPredicate.accept(anObject);
-                }
-            };
+            Predicate<Predicate<? super T>> predicate = aPredicate -> !aPredicate.accept(anObject);
             return Iterate.allSatisfy(this.predicates, predicate);
         }
     }

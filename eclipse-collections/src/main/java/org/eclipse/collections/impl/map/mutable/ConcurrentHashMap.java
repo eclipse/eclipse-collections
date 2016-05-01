@@ -864,13 +864,7 @@ public final class ConcurrentHashMap<K, V>
             {
                 final int start = i * chunkSize;
                 final int end = Math.min((i + 1) * chunkSize, currentArray.length());
-                futures[i] = new FutureTask(new Runnable()
-                {
-                    public void run()
-                    {
-                        ConcurrentHashMap.this.sequentialPutAll(currentArray, start, end);
-                    }
-                }, null);
+                futures[i] = new FutureTask(() -> this.sequentialPutAll(currentArray, start, end), null);
                 executor.execute(futures[i]);
             }
             for (int i = 0; i < chunks; i++)
@@ -1204,13 +1198,7 @@ public final class ConcurrentHashMap<K, V>
                 final int start = i * chunkSize;
                 final int end = Math.min((i + 1) * chunkSize, currentArray.length());
                 final Procedure2<K, V> block = blocks.get(i);
-                futures[i] = new FutureTask(new Runnable()
-                {
-                    public void run()
-                    {
-                        ConcurrentHashMap.this.sequentialForEachKeyValue(block, currentArray, start, end);
-                    }
-                }, null);
+                futures[i] = new FutureTask(() -> this.sequentialForEachKeyValue(block, currentArray, start, end), null);
                 executor.execute(futures[i]);
             }
             for (int i = 0; i < chunks; i++)
@@ -1268,13 +1256,7 @@ public final class ConcurrentHashMap<K, V>
                 final int start = i * chunkSize;
                 final int end = Math.min((i + 1) * chunkSize, currentArray.length() - 1);
                 final Procedure<V> block = blocks.get(i);
-                futures[i] = new FutureTask(new Runnable()
-                {
-                    public void run()
-                    {
-                        ConcurrentHashMap.this.sequentialForEachValue(block, currentArray, start, end);
-                    }
-                }, null);
+                futures[i] = new FutureTask(() -> this.sequentialForEachValue(block, currentArray, start, end), null);
                 executor.execute(futures[i]);
             }
             for (int i = 0; i < chunks; i++)

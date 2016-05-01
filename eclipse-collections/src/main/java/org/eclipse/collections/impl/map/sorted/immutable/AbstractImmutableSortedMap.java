@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -209,14 +209,10 @@ public abstract class AbstractImmutableSortedMap<K, V>
     public ImmutableSortedMap<K, V> select(final Predicate2<? super K, ? super V> predicate)
     {
         final MutableSortedMap<K, V> selectedMap = SortedMaps.mutable.with(this.comparator());
-        this.forEachKeyValue(new Procedure2<K, V>()
-        {
-            public void value(K key, V value)
+        this.forEachKeyValue((key, value) -> {
+            if (predicate.accept(key, value))
             {
-                if (predicate.accept(key, value))
-                {
-                    selectedMap.put(key, value);
-                }
+                selectedMap.put(key, value);
             }
         });
         return selectedMap.toImmutable();
@@ -235,14 +231,10 @@ public abstract class AbstractImmutableSortedMap<K, V>
     public ImmutableSortedMap<K, V> reject(final Predicate2<? super K, ? super V> predicate)
     {
         final MutableSortedMap<K, V> rejectedMap = SortedMaps.mutable.with(this.comparator());
-        this.forEachKeyValue(new Procedure2<K, V>()
-        {
-            public void value(K key, V value)
+        this.forEachKeyValue((key, value) -> {
+            if (!predicate.accept(key, value))
             {
-                if (!predicate.accept(key, value))
-                {
-                    rejectedMap.put(key, value);
-                }
+                rejectedMap.put(key, value);
             }
         });
         return rejectedMap.toImmutable();
@@ -333,13 +325,7 @@ public abstract class AbstractImmutableSortedMap<K, V>
     public <K2, V2> ImmutableMap<K2, V2> collect(final Function2<? super K, ? super V, Pair<K2, V2>> function)
     {
         final MutableMap<K2, V2> collectedMap = UnifiedMap.newMap(this.size());
-        this.forEachKeyValue(new Procedure2<K, V>()
-        {
-            public void value(K key, V value)
-            {
-                collectedMap.add(function.value(key, value));
-            }
-        });
+        this.forEachKeyValue((key, value) -> collectedMap.add(function.value(key, value)));
         return collectedMap.toImmutable();
     }
 
@@ -356,25 +342,13 @@ public abstract class AbstractImmutableSortedMap<K, V>
     public <R> ImmutableSortedMap<K, R> collectValues(final Function2<? super K, ? super V, ? extends R> function)
     {
         final MutableSortedMap<K, R> collectedMap = SortedMaps.mutable.with(this.comparator());
-        this.forEachKeyValue(new Procedure2<K, V>()
-        {
-            public void value(K key, V value)
-            {
-                collectedMap.put(key, function.value(key, value));
-            }
-        });
+        this.forEachKeyValue((key, value) -> collectedMap.put(key, function.value(key, value)));
         return collectedMap.toImmutable();
     }
 
     public Pair<K, V> detect(final Predicate2<? super K, ? super V> predicate)
     {
-        return this.keyValuesView().detect(new Predicate<Pair<K, V>>()
-        {
-            public boolean accept(Pair<K, V> each)
-            {
-                return predicate.accept(each.getOne(), each.getTwo());
-            }
-        });
+        return this.keyValuesView().detect(each -> predicate.accept(each.getOne(), each.getTwo()));
     }
 
     public <R> ImmutableList<R> flatCollect(Function<? super V, ? extends Iterable<R>> function)

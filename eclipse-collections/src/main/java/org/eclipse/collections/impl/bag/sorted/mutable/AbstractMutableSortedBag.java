@@ -31,7 +31,6 @@ import org.eclipse.collections.api.block.function.primitive.ShortFunction;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
-import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.list.primitive.MutableBooleanList;
 import org.eclipse.collections.api.list.primitive.MutableByteList;
@@ -98,14 +97,10 @@ public abstract class AbstractMutableSortedBag<T>
     {
         Comparator<? super S> comparator = (Comparator<? super S>) this.comparator();
         final MutableSortedBag<S> result = TreeBag.newBag(comparator);
-        this.forEachWithOccurrences(new ObjectIntProcedure<T>()
-        {
-            public void value(T each, int occurrences)
+        this.forEachWithOccurrences((each, occurrences) -> {
+            if (clazz.isInstance(each))
             {
-                if (clazz.isInstance(each))
-                {
-                    result.addOccurrences(clazz.cast(each), occurrences);
-                }
+                result.addOccurrences(clazz.cast(each), occurrences);
             }
         });
         return result;
@@ -146,13 +141,9 @@ public abstract class AbstractMutableSortedBag<T>
     public PartitionMutableSortedBag<T> partition(final Predicate<? super T> predicate)
     {
         final PartitionMutableSortedBag<T> result = new PartitionTreeBag<T>(this.comparator());
-        this.forEachWithOccurrences(new ObjectIntProcedure<T>()
-        {
-            public void value(T each, int index)
-            {
-                MutableSortedBag<T> bucket = predicate.accept(each) ? result.getSelected() : result.getRejected();
-                bucket.addOccurrences(each, index);
-            }
+        this.forEachWithOccurrences((each, index) -> {
+            MutableSortedBag<T> bucket = predicate.accept(each) ? result.getSelected() : result.getRejected();
+            bucket.addOccurrences(each, index);
         });
         return result;
     }
@@ -160,13 +151,9 @@ public abstract class AbstractMutableSortedBag<T>
     public <P> PartitionMutableSortedBag<T> partitionWith(final Predicate2<? super T, ? super P> predicate, final P parameter)
     {
         final PartitionMutableSortedBag<T> result = new PartitionTreeBag<T>(this.comparator());
-        this.forEachWithOccurrences(new ObjectIntProcedure<T>()
-        {
-            public void value(T each, int index)
-            {
-                MutableSortedBag<T> bucket = predicate.accept(each, parameter) ? result.getSelected() : result.getRejected();
-                bucket.addOccurrences(each, index);
-            }
+        this.forEachWithOccurrences((each, index) -> {
+            MutableSortedBag<T> bucket = predicate.accept(each, parameter) ? result.getSelected() : result.getRejected();
+            bucket.addOccurrences(each, index);
         });
         return result;
     }

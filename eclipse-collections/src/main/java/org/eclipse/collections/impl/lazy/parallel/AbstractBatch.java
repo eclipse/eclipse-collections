@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -18,7 +18,6 @@ import org.eclipse.collections.api.block.function.primitive.FloatFunction;
 import org.eclipse.collections.api.block.function.primitive.IntFunction;
 import org.eclipse.collections.api.block.function.primitive.LongFunction;
 import org.eclipse.collections.api.block.predicate.Predicate;
-import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.impl.block.procedure.CountProcedure;
 import org.eclipse.collections.impl.block.procedure.DoubleSumResultHolder;
 import org.eclipse.collections.impl.block.procedure.MaxByProcedure;
@@ -42,16 +41,12 @@ public abstract class AbstractBatch<T> implements Batch<T>
     public String makeString(final String separator)
     {
         final StringBuilder stringBuilder = new StringBuilder();
-        this.forEach(new Procedure<T>()
-        {
-            public void value(T each)
+        this.forEach(each -> {
+            if (stringBuilder.length() != 0)
             {
-                if (stringBuilder.length() != 0)
-                {
-                    stringBuilder.append(separator);
-                }
-                stringBuilder.append(each);
+                stringBuilder.append(separator);
             }
+            stringBuilder.append(each);
         });
         return stringBuilder.toString();
     }

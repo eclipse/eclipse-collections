@@ -113,73 +113,37 @@ public final class CompositeFastList<E>
     @Override
     public void each(final Procedure<? super E> procedure)
     {
-        this.lists.forEach(new Procedure<FastList<E>>()
-        {
-            public void value(FastList<E> list)
-            {
-                list.forEach(procedure);
-            }
-        });
+        this.lists.each(list -> list.forEach(procedure));
     }
 
     @Override
     public <IV> IV injectInto(IV injectedValue, final Function2<? super IV, ? super E, ? extends IV> function)
     {
-        return this.lists.injectInto(injectedValue, new Function2<IV, FastList<E>, IV>()
-        {
-            public IV value(IV inject, FastList<E> list)
-            {
-                return list.injectInto(inject, function);
-            }
-        });
+        return this.lists.injectInto(injectedValue, (Function2<IV, FastList<E>, IV>) (inject, list) -> list.injectInto(inject, function));
     }
 
     @Override
     public int injectInto(int injectedValue, final IntObjectToIntFunction<? super E> function)
     {
-        return this.lists.injectInto(injectedValue, new IntObjectToIntFunction<FastList<E>>()
-        {
-            public int intValueOf(int inject, FastList<E> list)
-            {
-                return list.injectInto(inject, function);
-            }
-        });
+        return this.lists.injectInto(injectedValue, (IntObjectToIntFunction<FastList<E>>) (inject, list) -> list.injectInto(inject, function));
     }
 
     @Override
     public float injectInto(float injectedValue, final FloatObjectToFloatFunction<? super E> function)
     {
-        return this.lists.injectInto(injectedValue, new FloatObjectToFloatFunction<FastList<E>>()
-        {
-            public float floatValueOf(float inject, FastList<E> list)
-            {
-                return list.injectInto(inject, function);
-            }
-        });
+        return this.lists.injectInto(injectedValue, (FloatObjectToFloatFunction<FastList<E>>) (inject, list) -> list.injectInto(inject, function));
     }
 
     @Override
     public long injectInto(long injectedValue, final LongObjectToLongFunction<? super E> function)
     {
-        return this.lists.injectInto(injectedValue, new LongObjectToLongFunction<FastList<E>>()
-        {
-            public long longValueOf(long inject, FastList<E> list)
-            {
-                return list.injectInto(inject, function);
-            }
-        });
+        return this.lists.injectInto(injectedValue, (LongObjectToLongFunction<FastList<E>>) (inject, list) -> list.injectInto(inject, function));
     }
 
     @Override
     public double injectInto(double injectedValue, final DoubleObjectToDoubleFunction<? super E> function)
     {
-        return this.lists.injectInto(injectedValue, new DoubleObjectToDoubleFunction<FastList<E>>()
-        {
-            public double doubleValueOf(double inject, FastList<E> list)
-            {
-                return list.injectInto(inject, function);
-            }
-        });
+        return this.lists.injectInto(injectedValue, (DoubleObjectToDoubleFunction<FastList<E>>) (inject, list) -> list.injectInto(inject, function));
     }
 
     @Override
@@ -191,13 +155,7 @@ public final class CompositeFastList<E>
     @Override
     public void reverseForEach(final Procedure<? super E> procedure)
     {
-        this.lists.reverseForEach(new Procedure<FastList<E>>()
-        {
-            public void value(FastList<E> each)
-            {
-                each.reverseForEach(procedure);
-            }
-        });
+        this.lists.reverseForEach(each -> each.reverseForEach(procedure));
     }
 
     @Override
@@ -205,13 +163,7 @@ public final class CompositeFastList<E>
             final Procedure2<? super E, ? super P> procedure2,
             final P parameter)
     {
-        this.lists.forEach(new Procedure<FastList<E>>()
-        {
-            public void value(FastList<E> list)
-            {
-                list.forEachWith(procedure2, parameter);
-            }
-        });
+        this.lists.each(list -> list.forEachWith(procedure2, parameter));
     }
 
     @Override
@@ -223,13 +175,7 @@ public final class CompositeFastList<E>
     @Override
     public boolean contains(final Object object)
     {
-        return this.lists.anySatisfy(new Predicate<FastList<E>>()
-        {
-            public boolean accept(FastList<E> list)
-            {
-                return list.contains(object);
-            }
-        });
+        return this.lists.anySatisfy(list -> list.contains(object));
     }
 
     @Override
@@ -246,13 +192,7 @@ public final class CompositeFastList<E>
     public Object[] toArray()
     {
         final Object[] result = new Object[this.size()];
-        this.forEachWithIndex(new ObjectIntProcedure<E>()
-        {
-            public void value(E each, int index)
-            {
-                result[index] = each;
-            }
-        });
+        this.forEachWithIndex((each, index) -> result[index] = each);
         return result;
     }
 
@@ -304,13 +244,7 @@ public final class CompositeFastList<E>
                 ? array
                 : (Object[]) Array.newInstance(array.getClass().getComponentType(), size);
 
-        this.forEachWithIndex(new ObjectIntProcedure<E>()
-        {
-            public void value(E each, int index)
-            {
-                result[index] = each;
-            }
-        });
+        this.forEachWithIndex((each, index) -> result[index] = each);
 
         if (result.length > size)
         {
@@ -542,13 +476,7 @@ public final class CompositeFastList<E>
     @Override
     public boolean anySatisfy(final Predicate<? super E> predicate)
     {
-        return this.lists.anySatisfy(new Predicate<FastList<E>>()
-        {
-            public boolean accept(FastList<E> each)
-            {
-                return each.anySatisfy(predicate);
-            }
-        });
+        return this.lists.anySatisfy(each -> each.anySatisfy(predicate));
     }
 
     @Override
@@ -620,61 +548,31 @@ public final class CompositeFastList<E>
     @Override
     public <P> boolean anySatisfyWith(final Predicate2<? super E, ? super P> predicate, P parameter)
     {
-        return this.lists.anySatisfyWith(new Predicate2<FastList<E>, P>()
-        {
-            public boolean accept(FastList<E> each, P parm)
-            {
-                return each.anySatisfyWith(predicate, parm);
-            }
-        }, parameter);
+        return this.lists.anySatisfyWith((each, parm) -> each.anySatisfyWith(predicate, parm), parameter);
     }
 
     @Override
     public boolean allSatisfy(final Predicate<? super E> predicate)
     {
-        return this.lists.allSatisfy(new Predicate<FastList<E>>()
-        {
-            public boolean accept(FastList<E> each)
-            {
-                return each.allSatisfy(predicate);
-            }
-        });
+        return this.lists.allSatisfy(each -> each.allSatisfy(predicate));
     }
 
     @Override
     public <P> boolean allSatisfyWith(final Predicate2<? super E, ? super P> predicate, P parameter)
     {
-        return this.lists.allSatisfyWith(new Predicate2<FastList<E>, P>()
-        {
-            public boolean accept(FastList<E> each, P param)
-            {
-                return each.allSatisfyWith(predicate, param);
-            }
-        }, parameter);
+        return this.lists.allSatisfyWith((each, param) -> each.allSatisfyWith(predicate, param), parameter);
     }
 
     @Override
     public boolean noneSatisfy(final Predicate<? super E> predicate)
     {
-        return this.lists.allSatisfy(new Predicate<FastList<E>>()
-        {
-            public boolean accept(FastList<E> each)
-            {
-                return each.noneSatisfy(predicate);
-            }
-        });
+        return this.lists.allSatisfy(each -> each.noneSatisfy(predicate));
     }
 
     @Override
     public <P> boolean noneSatisfyWith(final Predicate2<? super E, ? super P> predicate, P parameter)
     {
-        return this.lists.allSatisfyWith(new Predicate2<FastList<E>, P>()
-        {
-            public boolean accept(FastList<E> each, P param)
-            {
-                return each.noneSatisfyWith(predicate, param);
-            }
-        }, parameter);
+        return this.lists.allSatisfyWith((each, param) -> each.noneSatisfyWith(predicate, param), parameter);
     }
 
     /**
@@ -768,15 +666,11 @@ public final class CompositeFastList<E>
 
         public void value(FastList<E> list)
         {
-            list.forEach(new Procedure<E>()
-            {
-                public void value(E object)
-                {
-                    ProcedureToInnerListObjectIntProcedure.this.objectIntProcedure.value(
-                            object,
-                            ProcedureToInnerListObjectIntProcedure.this.index);
-                    ProcedureToInnerListObjectIntProcedure.this.index++;
-                }
+            list.each(object -> {
+                this.objectIntProcedure.value(
+                        object,
+                        this.index);
+                this.index++;
             });
         }
     }

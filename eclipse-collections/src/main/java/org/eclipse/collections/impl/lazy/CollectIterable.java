@@ -125,61 +125,31 @@ public class CollectIterable<T, V>
     @Override
     public <IV> IV injectInto(IV injectedValue, final Function2<? super IV, ? super V, ? extends IV> f)
     {
-        return Iterate.injectInto(injectedValue, this.adapted, new Function2<IV, T, IV>()
-        {
-            public IV value(IV argument1, T argument2)
-            {
-                return f.value(argument1, CollectIterable.this.function.valueOf(argument2));
-            }
-        });
+        return Iterate.injectInto(injectedValue, this.adapted, (argument1, argument2) -> f.value(argument1, this.function.valueOf(argument2)));
     }
 
     @Override
     public int injectInto(int injectedValue, final IntObjectToIntFunction<? super V> f)
     {
-        return Iterate.injectInto(injectedValue, this.adapted, new IntObjectToIntFunction<T>()
-        {
-            public int intValueOf(int intParameter, T objectParameter)
-            {
-                return f.intValueOf(intParameter, CollectIterable.this.function.valueOf(objectParameter));
-            }
-        });
+        return Iterate.injectInto(injectedValue, this.adapted, (IntObjectToIntFunction<T>) (intParameter, objectParameter) -> f.intValueOf(intParameter, this.function.valueOf(objectParameter)));
     }
 
     @Override
     public long injectInto(long injectedValue, final LongObjectToLongFunction<? super V> f)
     {
-        return Iterate.injectInto(injectedValue, this.adapted, new LongObjectToLongFunction<T>()
-        {
-            public long longValueOf(long intParameter, T objectParameter)
-            {
-                return f.longValueOf(intParameter, CollectIterable.this.function.valueOf(objectParameter));
-            }
-        });
+        return Iterate.injectInto(injectedValue, this.adapted, (LongObjectToLongFunction<T>) (intParameter, objectParameter) -> f.longValueOf(intParameter, this.function.valueOf(objectParameter)));
     }
 
     @Override
     public double injectInto(double injectedValue, final DoubleObjectToDoubleFunction<? super V> f)
     {
-        return Iterate.injectInto(injectedValue, this.adapted, new DoubleObjectToDoubleFunction<T>()
-        {
-            public double doubleValueOf(double intParameter, T objectParameter)
-            {
-                return f.doubleValueOf(intParameter, CollectIterable.this.function.valueOf(objectParameter));
-            }
-        });
+        return Iterate.injectInto(injectedValue, this.adapted, (DoubleObjectToDoubleFunction<T>) (intParameter, objectParameter) -> f.doubleValueOf(intParameter, this.function.valueOf(objectParameter)));
     }
 
     @Override
     public float injectInto(float injectedValue, final FloatObjectToFloatFunction<? super V> f)
     {
-        return Iterate.injectInto(injectedValue, this.adapted, new FloatObjectToFloatFunction<T>()
-        {
-            public float floatValueOf(float intParameter, T objectParameter)
-            {
-                return f.floatValueOf(intParameter, CollectIterable.this.function.valueOf(objectParameter));
-            }
-        });
+        return Iterate.injectInto(injectedValue, this.adapted, (FloatObjectToFloatFunction<T>) (intParameter, objectParameter) -> f.floatValueOf(intParameter, this.function.valueOf(objectParameter)));
     }
 
     @Override

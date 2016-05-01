@@ -47,81 +47,41 @@ public final class CompositeIterable<E>
 
     public void each(final Procedure<? super E> procedure)
     {
-        this.iterables.forEach(new Procedure<Iterable<E>>()
-        {
-            public void value(Iterable<E> iterable)
-            {
-                Iterate.forEach(iterable, procedure);
-            }
-        });
+        this.iterables.each(iterable -> Iterate.forEach(iterable, procedure));
     }
 
     @Override
     public void forEachWithIndex(final ObjectIntProcedure<? super E> objectIntProcedure)
     {
         final Counter index = new Counter();
-        this.iterables.forEach(new Procedure<Iterable<E>>()
-        {
-            public void value(Iterable<E> iterable)
-            {
-                Iterate.forEach(iterable, new Procedure<E>()
-                {
-                    public void value(E object)
-                    {
-                        objectIntProcedure.value(object, index.getCount());
-                        index.increment();
-                    }
-                });
-            }
-        });
+        this.iterables.each(iterable -> Iterate.forEach(iterable, object -> {
+            objectIntProcedure.value(object, index.getCount());
+            index.increment();
+        }));
     }
 
     @Override
     public <P> void forEachWith(final Procedure2<? super E, ? super P> procedure, final P parameter)
     {
-        this.iterables.forEach(new Procedure<Iterable<E>>()
-        {
-            public void value(Iterable<E> iterable)
-            {
-                Iterate.forEachWith(iterable, procedure, parameter);
-            }
-        });
+        this.iterables.each(iterable -> Iterate.forEachWith(iterable, procedure, parameter));
     }
 
     @Override
     public boolean anySatisfy(final Predicate<? super E> predicate)
     {
-        return this.iterables.anySatisfy(new Predicate<Iterable<E>>()
-        {
-            public boolean accept(Iterable<E> each)
-            {
-                return Iterate.anySatisfy(each, predicate);
-            }
-        });
+        return this.iterables.anySatisfy(each -> Iterate.anySatisfy(each, predicate));
     }
 
     @Override
     public boolean allSatisfy(final Predicate<? super E> predicate)
     {
-        return this.iterables.allSatisfy(new Predicate<Iterable<E>>()
-        {
-            public boolean accept(Iterable<E> each)
-            {
-                return Iterate.allSatisfy(each, predicate);
-            }
-        });
+        return this.iterables.allSatisfy(each -> Iterate.allSatisfy(each, predicate));
     }
 
     @Override
     public boolean noneSatisfy(final Predicate<? super E> predicate)
     {
-        return this.iterables.noneSatisfy(new Predicate<Iterable<E>>()
-        {
-            public boolean accept(Iterable<E> each)
-            {
-                return Iterate.anySatisfy(each, predicate);
-            }
-        });
+        return this.iterables.noneSatisfy(each -> Iterate.anySatisfy(each, predicate));
     }
 
     @Override

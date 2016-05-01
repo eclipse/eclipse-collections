@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs and others.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -430,14 +430,10 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
     public HashBiMap<K, V> select(final Predicate2<? super K, ? super V> predicate)
     {
         final HashBiMap<K, V> result = HashBiMap.newMap();
-        this.delegate.forEachKeyValue(new Procedure2<K, V>()
-        {
-            public void value(K key, V value)
+        this.delegate.forEachKeyValue((key, value) -> {
+            if (predicate.accept(key, value))
             {
-                if (predicate.accept(key, value))
-                {
-                    result.put(key, value);
-                }
+                result.put(key, value);
             }
         });
         return result;
@@ -446,14 +442,10 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
     public HashBiMap<K, V> reject(final Predicate2<? super K, ? super V> predicate)
     {
         final HashBiMap<K, V> result = HashBiMap.newMap();
-        this.delegate.forEachKeyValue(new Procedure2<K, V>()
-        {
-            public void value(K key, V value)
+        this.delegate.forEachKeyValue((key, value) -> {
+            if (!predicate.accept(key, value))
             {
-                if (!predicate.accept(key, value))
-                {
-                    result.put(key, value);
-                }
+                result.put(key, value);
             }
         });
         return result;
@@ -462,13 +454,9 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
     public <K2, V2> HashBiMap<K2, V2> collect(final Function2<? super K, ? super V, Pair<K2, V2>> function)
     {
         final HashBiMap<K2, V2> result = HashBiMap.newMap();
-        this.delegate.forEachKeyValue(new Procedure2<K, V>()
-        {
-            public void value(K key, V value)
-            {
-                Pair<K2, V2> pair = function.value(key, value);
-                result.put(pair.getOne(), pair.getTwo());
-            }
+        this.delegate.forEachKeyValue((key, value) -> {
+            Pair<K2, V2> pair = function.value(key, value);
+            result.put(pair.getOne(), pair.getTwo());
         });
         return result;
     }
@@ -476,13 +464,7 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
     public <R> HashBiMap<K, R> collectValues(final Function2<? super K, ? super V, ? extends R> function)
     {
         final HashBiMap<K, R> result = HashBiMap.newMap();
-        this.delegate.forEachKeyValue(new Procedure2<K, V>()
-        {
-            public void value(K key, V value)
-            {
-                result.put(key, function.value(key, value));
-            }
-        });
+        this.delegate.forEachKeyValue((key, value) -> result.put(key, function.value(key, value)));
         return result;
     }
 
@@ -664,13 +646,7 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
         this.delegate = UnifiedMap.newMap();
         this.delegate.readExternal(in);
         final UnifiedMap<V, K> inverseDelegate = UnifiedMap.newMap();
-        this.delegate.forEachKeyValue(new Procedure2<K, V>()
-        {
-            public void value(K key, V value)
-            {
-                inverseDelegate.put(value, key);
-            }
-        });
+        this.delegate.forEachKeyValue((key, value) -> inverseDelegate.put(value, key));
         this.inverse = new Inverse<V, K>(inverseDelegate, this);
     }
 

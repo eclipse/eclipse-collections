@@ -127,13 +127,7 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
     public Object[] toArray()
     {
         final Object[] result = new Object[this.size()];
-        this.forEachWithIndex(new ObjectIntProcedure<T>()
-        {
-            public void value(T each, int index)
-            {
-                result[index] = each;
-            }
-        });
+        this.forEachWithIndex((each, index) -> result[index] = each);
         return result;
     }
 

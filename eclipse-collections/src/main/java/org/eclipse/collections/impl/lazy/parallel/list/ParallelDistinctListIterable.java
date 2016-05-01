@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -71,14 +71,10 @@ class ParallelDistinctListIterable<T> extends AbstractParallelUnsortedSetIterabl
     {
         // TODO: Replace the map with a concurrent set once it's implemented
         final ConcurrentHashMap<T, Boolean> distinct = new ConcurrentHashMap<T, Boolean>();
-        this.delegate.forEach(new Procedure<T>()
-        {
-            public void value(T each)
+        this.delegate.forEach(each -> {
+            if (distinct.put(each, true) == null)
             {
-                if (distinct.put(each, true) == null)
-                {
-                    procedure.value(each);
-                }
+                procedure.value(each);
             }
         });
     }

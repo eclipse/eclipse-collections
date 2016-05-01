@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -256,13 +256,7 @@ public abstract class AbstractUnifiedSet<T>
             final Function3<? super IV, ? super T, ? super P, ? extends IV> function,
             final P parameter)
     {
-        return this.injectInto(injectValue, new Function2<IV, T, IV>()
-        {
-            public IV value(IV argument1, T argument2)
-            {
-                return function.value(argument1, argument2, parameter);
-            }
-        });
+        return this.injectInto(injectValue, (argument1, argument2) -> function.value(argument1, argument2, parameter));
     }
 
     public MutableSet<T> asUnmodifiable()

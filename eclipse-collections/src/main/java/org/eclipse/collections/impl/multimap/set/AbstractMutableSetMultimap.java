@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -12,7 +12,6 @@ package org.eclipse.collections.impl.multimap.set;
 
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
-import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.multimap.bag.MutableBagMultimap;
 import org.eclipse.collections.api.multimap.set.ImmutableSetMultimap;
@@ -54,13 +53,7 @@ public abstract class AbstractMutableSetMultimap<K, V> extends AbstractMutableMu
     {
         final MutableMap<K, ImmutableSet<V>> map = UnifiedMap.newMap();
 
-        this.map.forEachKeyValue(new Procedure2<K, MutableSet<V>>()
-        {
-            public void value(K key, MutableSet<V> set)
-            {
-                map.put(key, set.toImmutable());
-            }
-        });
+        this.map.forEachKeyValue((key, set) -> map.put(key, set.toImmutable()));
 
         return new ImmutableSetMultimapImpl<K, V>(map);
     }

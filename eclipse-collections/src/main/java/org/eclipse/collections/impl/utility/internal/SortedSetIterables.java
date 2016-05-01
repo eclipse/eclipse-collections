@@ -14,8 +14,6 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.SortedSet;
 
-import org.eclipse.collections.api.block.function.Function;
-import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 import org.eclipse.collections.api.set.sorted.SortedSetIterable;
@@ -40,21 +38,11 @@ public final class SortedSetIterables
         TreeSortedSet<MutableSortedSet<T>> sortedSetIterables = TreeSortedSet.newSet(Comparators.<T>powerSet());
         MutableSortedSet<MutableSortedSet<T>> seed = sortedSetIterables.with(innerTree);
 
-        return Iterate.injectInto(seed, set, new Function2<MutableSortedSet<MutableSortedSet<T>>, T, MutableSortedSet<MutableSortedSet<T>>>()
-        {
-            public MutableSortedSet<MutableSortedSet<T>> value(MutableSortedSet<MutableSortedSet<T>> accumulator, final T element)
-            {
-                return accumulator.union(accumulator.collect(new Function<MutableSortedSet<T>, MutableSortedSet<T>>()
-                {
-                    public MutableSortedSet<T> valueOf(MutableSortedSet<T> set)
-                    {
-                        MutableSortedSet<T> newSet = set.clone();
-                        newSet.add(element);
-                        return newSet;
-                    }
-                }).toSet());
-            }
-        });
+        return Iterate.injectInto(seed, set, (accumulator, element) -> accumulator.union(accumulator.collect(set1 -> {
+            MutableSortedSet<T> newSet = set1.clone();
+            newSet.add(element);
+            return newSet;
+        }).toSet()));
     }
 
     /**
