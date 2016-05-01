@@ -93,11 +93,13 @@ public final class Counter implements Externalizable
         return this.count;
     }
 
+    @Override
     public void writeExternal(ObjectOutput out) throws IOException
     {
         out.writeInt(this.count);
     }
 
+    @Override
     public void readExternal(ObjectInput in) throws IOException
     {
         this.count = in.readInt();

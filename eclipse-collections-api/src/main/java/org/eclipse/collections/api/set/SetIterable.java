@@ -92,25 +92,34 @@ public interface SetIterable<T> extends RichIterable<T>
      */
     <B> LazyIterable<Pair<T, B>> cartesianProduct(SetIterable<B> set);
 
+    @Override
     SetIterable<T> tap(Procedure<? super T> procedure);
 
+    @Override
     SetIterable<T> select(Predicate<? super T> predicate);
 
+    @Override
     <P> SetIterable<T> selectWith(Predicate2<? super T, ? super P> predicate, P parameter);
 
+    @Override
     SetIterable<T> reject(Predicate<? super T> predicate);
 
+    @Override
     <P> SetIterable<T> rejectWith(Predicate2<? super T, ? super P> predicate, P parameter);
 
+    @Override
     PartitionSet<T> partition(Predicate<? super T> predicate);
 
+    @Override
     <P> PartitionSet<T> partitionWith(Predicate2<? super T, ? super P> predicate, P parameter);
 
+    @Override
     <S> SetIterable<S> selectInstancesOf(Class<S> clazz);
 
     /**
      * @deprecated in 6.0. Use {@link OrderedIterable#zipWithIndex()} instead.
      */
+    @Override
     @Deprecated
     SetIterable<Pair<T, Integer>> zipWithIndex();
 

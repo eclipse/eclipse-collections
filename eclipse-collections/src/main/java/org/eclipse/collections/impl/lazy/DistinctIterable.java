@@ -45,6 +45,7 @@ public class DistinctIterable<T>
         return this;
     }
 
+    @Override
     public void each(Procedure<? super T> procedure)
     {
         MutableSet<T> seenSoFar = UnifiedSet.newSet();
@@ -95,6 +96,7 @@ public class DistinctIterable<T>
         return Iterate.detect(this.adapted, each -> seenSoFar.add(each) && predicate.accept(each));
     }
 
+    @Override
     public Iterator<T> iterator()
     {
         return new DistinctIterator<>(this.adapted);

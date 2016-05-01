@@ -37,6 +37,7 @@ class ImmutableSortedMapSerializationProxy<K, V> implements Externalizable
         this.map = map;
     }
 
+    @Override
     public void writeExternal(ObjectOutput out) throws IOException
     {
         out.writeObject(this.map.comparator());
@@ -62,6 +63,7 @@ class ImmutableSortedMapSerializationProxy<K, V> implements Externalizable
         }
     }
 
+    @Override
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
     {
         Comparator<? super K> comparator = (Comparator<? super K>) in.readObject();

@@ -35,6 +35,7 @@ class HashBagWithHashingStrategySerializationProxy<T> implements Externalizable
         this.bagWithHashingStrategy = bagWithHashingStrategy;
     }
 
+    @Override
     public void writeExternal(ObjectOutput out) throws IOException
     {
         out.writeObject(this.bagWithHashingStrategy.hashingStrategy());
@@ -60,6 +61,7 @@ class HashBagWithHashingStrategySerializationProxy<T> implements Externalizable
         }
     }
 
+    @Override
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
     {
         HashingStrategy<T> hashingStrategy = (HashingStrategy<T>) in.readObject();

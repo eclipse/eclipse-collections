@@ -34,11 +34,13 @@ public class SynchronizedBiMapSerializationProxy<K, V> implements Externalizable
         this.map = map;
     }
 
+    @Override
     public void writeExternal(ObjectOutput out) throws IOException
     {
         out.writeObject(this.map);
     }
 
+    @Override
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
     {
         this.map = (MutableBiMap<K, V>) in.readObject();

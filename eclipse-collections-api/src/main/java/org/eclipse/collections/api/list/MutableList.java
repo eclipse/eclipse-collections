@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -47,56 +47,81 @@ import org.eclipse.collections.api.tuple.Pair;
 public interface MutableList<T>
         extends MutableCollection<T>, List<T>, Cloneable, ListIterable<T>
 {
+    @Override
     MutableList<T> with(T element);
 
+    @Override
     MutableList<T> without(T element);
 
+    @Override
     MutableList<T> withAll(Iterable<? extends T> elements);
 
+    @Override
     MutableList<T> withoutAll(Iterable<? extends T> elements);
 
+    @Override
     MutableList<T> newEmpty();
 
     MutableList<T> clone();
 
+    @Override
     MutableList<T> tap(Procedure<? super T> procedure);
 
+    @Override
     MutableList<T> select(Predicate<? super T> predicate);
 
+    @Override
     <P> MutableList<T> selectWith(Predicate2<? super T, ? super P> predicate, P parameter);
 
+    @Override
     MutableList<T> reject(Predicate<? super T> predicate);
 
+    @Override
     <P> MutableList<T> rejectWith(Predicate2<? super T, ? super P> predicate, P parameter);
 
+    @Override
     PartitionMutableList<T> partition(Predicate<? super T> predicate);
 
+    @Override
     <P> PartitionMutableList<T> partitionWith(Predicate2<? super T, ? super P> predicate, P parameter);
 
+    @Override
     <S> MutableList<S> selectInstancesOf(Class<S> clazz);
 
+    @Override
     <V> MutableList<V> collect(Function<? super T, ? extends V> function);
 
+    @Override
     MutableBooleanList collectBoolean(BooleanFunction<? super T> booleanFunction);
 
+    @Override
     MutableByteList collectByte(ByteFunction<? super T> byteFunction);
 
+    @Override
     MutableCharList collectChar(CharFunction<? super T> charFunction);
 
+    @Override
     MutableDoubleList collectDouble(DoubleFunction<? super T> doubleFunction);
 
+    @Override
     MutableFloatList collectFloat(FloatFunction<? super T> floatFunction);
 
+    @Override
     MutableIntList collectInt(IntFunction<? super T> intFunction);
 
+    @Override
     MutableLongList collectLong(LongFunction<? super T> longFunction);
 
+    @Override
     MutableShortList collectShort(ShortFunction<? super T> shortFunction);
 
+    @Override
     <P, V> MutableList<V> collectWith(Function2<? super T, ? super P, ? extends V> function, P parameter);
 
+    @Override
     <V> MutableList<V> collectIf(Predicate<? super T> predicate, Function<? super T, ? extends V> function);
 
+    @Override
     <V> MutableList<V> flatCollect(Function<? super T, ? extends Iterable<V>> function);
 
     /**
@@ -104,6 +129,7 @@ public interface MutableList<T>
      *
      * @since 7.0
      */
+    @Override
     MutableList<T> distinct();
 
     /**
@@ -111,6 +137,7 @@ public interface MutableList<T>
      *
      * @since 7.0
      */
+    @Override
     MutableList<T> distinct(HashingStrategy<? super T> hashingStrategy);
 
     /**
@@ -169,6 +196,7 @@ public interface MutableList<T>
      */
     MutableList<T> sortThisByDouble(DoubleFunction<? super T> function);
 
+    @Override
     MutableList<T> subList(int fromIndex, int toIndex);
 
     /**
@@ -177,37 +205,50 @@ public interface MutableList<T>
      *
      * @return an unmodifiable view of this list
      */
+    @Override
     MutableList<T> asUnmodifiable();
 
+    @Override
     MutableList<T> asSynchronized();
 
     /**
      * Returns an immutable copy of this list. If the list is immutable, it returns itself.
      * The returned list will be <tt>Serializable</tt> if this list is <tt>Serializable</tt>.
      */
+    @Override
     ImmutableList<T> toImmutable();
 
+    @Override
     <V> MutableListMultimap<V, T> groupBy(Function<? super T, ? extends V> function);
 
+    @Override
     <V> MutableListMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function);
 
+    @Override
     <S> MutableList<Pair<T, S>> zip(Iterable<S> that);
 
+    @Override
     MutableList<Pair<T, Integer>> zipWithIndex();
 
+    @Override
     MutableList<T> take(int count);
 
+    @Override
     MutableList<T> takeWhile(Predicate<? super T> predicate);
 
+    @Override
     MutableList<T> drop(int count);
 
+    @Override
     MutableList<T> dropWhile(Predicate<? super T> predicate);
 
+    @Override
     PartitionMutableList<T> partitionWhile(Predicate<? super T> predicate);
 
     /**
      * Returns a new MutableList in reverse order
      */
+    @Override
     MutableList<T> toReversed();
 
     /**

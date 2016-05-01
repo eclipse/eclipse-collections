@@ -109,21 +109,25 @@ import org.eclipse.collections.impl.utility.internal.IterableIterate;
 
 public abstract class AbstractRichIterable<T> implements RichIterable<T>
 {
+    @Override
     public boolean contains(Object object)
     {
         return this.anySatisfyWith(Predicates2.equal(), object);
     }
 
+    @Override
     public boolean containsAllIterable(Iterable<?> source)
     {
         return Iterate.allSatisfyWith(source, Predicates2.in(), this);
     }
 
+    @Override
     public boolean containsAllArguments(Object... elements)
     {
         return ArrayIterate.allSatisfyWith(elements, Predicates2.in(), this);
     }
 
+    @Override
     public Object[] toArray()
     {
         Object[] result = new Object[this.size()];
@@ -131,6 +135,7 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
         return result;
     }
 
+    @Override
     public <E> E[] toArray(E[] array)
     {
         int size = this.size();
@@ -152,16 +157,19 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
         return result;
     }
 
+    @Override
     public boolean isEmpty()
     {
         return this.size() == 0;
     }
 
+    @Override
     public boolean notEmpty()
     {
         return !this.isEmpty();
     }
 
+    @Override
     public MutableList<T> toList()
     {
         MutableList<T> list = Lists.mutable.empty();
@@ -169,21 +177,25 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
         return list;
     }
 
+    @Override
     public MutableList<T> toSortedList()
     {
         return this.toList().sortThis();
     }
 
+    @Override
     public MutableList<T> toSortedList(Comparator<? super T> comparator)
     {
         return this.toList().sortThis(comparator);
     }
 
+    @Override
     public <V extends Comparable<? super V>> MutableList<T> toSortedListBy(Function<? super T, ? extends V> function)
     {
         return this.toSortedList(Comparators.byFunction(function));
     }
 
+    @Override
     public MutableSortedSet<T> toSortedSet()
     {
         MutableSortedSet<T> treeSet = SortedSets.mutable.empty();
@@ -191,6 +203,7 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
         return treeSet;
     }
 
+    @Override
     public MutableSortedSet<T> toSortedSet(Comparator<? super T> comparator)
     {
         MutableSortedSet<T> treeSet = SortedSets.mutable.with(comparator);
@@ -198,11 +211,13 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
         return treeSet;
     }
 
+    @Override
     public <V extends Comparable<? super V>> MutableSortedSet<T> toSortedSetBy(Function<? super T, ? extends V> function)
     {
         return this.toSortedSet(Comparators.byFunction(function));
     }
 
+    @Override
     public MutableSet<T> toSet()
     {
         MutableSet<T> set = Sets.mutable.empty();
@@ -210,6 +225,7 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
         return set;
     }
 
+    @Override
     public MutableBag<T> toBag()
     {
         MutableBag<T> bag = Bags.mutable.empty();
@@ -217,6 +233,7 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
         return bag;
     }
 
+    @Override
     public MutableSortedBag<T> toSortedBag()
     {
         MutableSortedBag<T> sortedBag = TreeBag.newBag();
@@ -224,6 +241,7 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
         return sortedBag;
     }
 
+    @Override
     public MutableSortedBag<T> toSortedBag(Comparator<? super T> comparator)
     {
         MutableSortedBag<T> sortedBag = TreeBag.newBag(comparator);
@@ -231,11 +249,13 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
         return sortedBag;
     }
 
+    @Override
     public <V extends Comparable<? super V>> MutableSortedBag<T> toSortedBagBy(Function<? super T, ? extends V> function)
     {
         return this.toSortedBag(Comparators.byFunction(function));
     }
 
+    @Override
     public <K, V> MutableMap<K, V> toMap(
             Function<? super T, ? extends K> keyFunction,
             Function<? super T, ? extends V> valueFunction)
@@ -245,6 +265,7 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
         return map;
     }
 
+    @Override
     public <K, V> MutableSortedMap<K, V> toSortedMap(
             Function<? super T, ? extends K> keyFunction,
             Function<? super T, ? extends V> valueFunction)
@@ -254,6 +275,7 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
         return sortedMap;
     }
 
+    @Override
     public <K, V> MutableSortedMap<K, V> toSortedMap(
             Comparator<? super K> comparator,
             Function<? super T, ? extends K> keyFunction,
@@ -264,12 +286,14 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
         return sortedMap;
     }
 
+    @Override
     public <R extends Collection<T>> R select(Predicate<? super T> predicate, R target)
     {
         this.forEach(new SelectProcedure<>(predicate, target));
         return target;
     }
 
+    @Override
     public <P, R extends Collection<T>> R selectWith(
             Predicate2<? super T, ? super P> predicate,
             P parameter,
@@ -278,12 +302,14 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
         return this.select(Predicates.bind(predicate, parameter), target);
     }
 
+    @Override
     public <R extends Collection<T>> R reject(Predicate<? super T> predicate, R target)
     {
         this.forEach(new RejectProcedure<>(predicate, target));
         return target;
     }
 
+    @Override
     public <P, R extends Collection<T>> R rejectWith(
             Predicate2<? super T, ? super P> predicate,
             P parameter,
@@ -292,12 +318,14 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
         return this.reject(Predicates.bind(predicate, parameter), target);
     }
 
+    @Override
     public <V, R extends Collection<V>> R collect(Function<? super T, ? extends V> function, R target)
     {
         this.forEach(new CollectProcedure<>(function, target));
         return target;
     }
 
+    @Override
     public <P, V, R extends Collection<V>> R collectWith(
             Function2<? super T, ? super P, ? extends V> function,
             P parameter,
@@ -306,6 +334,7 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
         return this.collect(Functions.bind(function, parameter), target);
     }
 
+    @Override
     public <V, R extends Collection<V>> R collectIf(
             Predicate<? super T> predicate,
             Function<? super T, ? extends V> function,
@@ -315,12 +344,14 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
         return target;
     }
 
+    @Override
     public T detectIfNone(Predicate<? super T> predicate, Function0<? extends T> function)
     {
         T result = this.detect(predicate);
         return result == null ? function.value() : result;
     }
 
+    @Override
     public <P> T detectWithIfNone(
             Predicate2<? super T, ? super P> predicate,
             P parameter,
@@ -329,6 +360,7 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
         return this.detectIfNone(Predicates.bind(predicate, parameter), function);
     }
 
+    @Override
     public T min(Comparator<? super T> comparator)
     {
         MinComparatorProcedure<T> procedure = new MinComparatorProcedure<>(comparator);
@@ -336,6 +368,7 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
         return procedure.getResult();
     }
 
+    @Override
     public T max(Comparator<? super T> comparator)
     {
         MaxComparatorProcedure<T> procedure = new MaxComparatorProcedure<>(comparator);
@@ -343,6 +376,7 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
         return procedure.getResult();
     }
 
+    @Override
     public T min()
     {
         MinProcedure<T> procedure = new MinProcedure<>();
@@ -350,6 +384,7 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
         return procedure.getResult();
     }
 
+    @Override
     public T max()
     {
         MaxProcedure<T> procedure = new MaxProcedure<>();
@@ -357,6 +392,7 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
         return procedure.getResult();
     }
 
+    @Override
     public <V extends Comparable<? super V>> T minBy(Function<? super T, ? extends V> function)
     {
         MinByProcedure<T, V> minByProcedure = new MinByProcedure<>(function);
@@ -364,6 +400,7 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
         return minByProcedure.getResult();
     }
 
+    @Override
     public <V extends Comparable<? super V>> T maxBy(Function<? super T, ? extends V> function)
     {
         MaxByProcedure<T, V> maxByProcedure = new MaxByProcedure<>(function);
@@ -371,11 +408,13 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
         return maxByProcedure.getResult();
     }
 
+    @Override
     public LazyIterable<T> asLazy()
     {
         return LazyIterate.adapt(this);
     }
 
+    @Override
     public <V, R extends Collection<V>> R flatCollect(
             Function<? super T, ? extends Iterable<V>> function,
             R target)
@@ -384,46 +423,55 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
         return target;
     }
 
+    @Override
     public T detect(Predicate<? super T> predicate)
     {
         return IterableIterate.detect(this, predicate);
     }
 
+    @Override
     public <P> T detectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         return this.detect(Predicates.bind(predicate, parameter));
     }
 
+    @Override
     public boolean anySatisfy(Predicate<? super T> predicate)
     {
         return IterableIterate.anySatisfy(this, predicate);
     }
 
+    @Override
     public boolean allSatisfy(Predicate<? super T> predicate)
     {
         return IterableIterate.allSatisfy(this, predicate);
     }
 
+    @Override
     public boolean noneSatisfy(Predicate<? super T> predicate)
     {
         return IterableIterate.noneSatisfy(this, predicate);
     }
 
+    @Override
     public <P> boolean anySatisfyWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         return this.anySatisfy(Predicates.bind(predicate, parameter));
     }
 
+    @Override
     public <P> boolean allSatisfyWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         return this.allSatisfy(Predicates.bind(predicate, parameter));
     }
 
+    @Override
     public <P> boolean noneSatisfyWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         return this.noneSatisfy(Predicates.bind(predicate, parameter));
     }
 
+    @Override
     public int count(Predicate<? super T> predicate)
     {
         CountProcedure<T> procedure = new CountProcedure<>(predicate);
@@ -431,11 +479,13 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
         return procedure.getCount();
     }
 
+    @Override
     public <P> int countWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         return this.count(Predicates.bind(predicate, parameter));
     }
 
+    @Override
     public <IV> IV injectInto(IV injectedValue, Function2<? super IV, ? super T, ? extends IV> function)
     {
         InjectIntoProcedure<IV, T> procedure = new InjectIntoProcedure<>(injectedValue, function);
@@ -443,6 +493,7 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
         return procedure.getResult();
     }
 
+    @Override
     public int injectInto(int injectedValue, IntObjectToIntFunction<? super T> function)
     {
         InjectIntoIntProcedure<T> procedure = new InjectIntoIntProcedure<>(injectedValue, function);
@@ -450,6 +501,7 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
         return procedure.getResult();
     }
 
+    @Override
     public long injectInto(long injectedValue, LongObjectToLongFunction<? super T> function)
     {
         InjectIntoLongProcedure<T> procedure = new InjectIntoLongProcedure<>(injectedValue, function);
@@ -457,6 +509,7 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
         return procedure.getResult();
     }
 
+    @Override
     public double injectInto(double injectedValue, DoubleObjectToDoubleFunction<? super T> function)
     {
         InjectIntoDoubleProcedure<T> procedure = new InjectIntoDoubleProcedure<>(injectedValue, function);
@@ -464,11 +517,13 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
         return procedure.getResult();
     }
 
+    @Override
     public <R extends Collection<T>> R into(R target)
     {
         return Iterate.addAllTo(this, target);
     }
 
+    @Override
     public float injectInto(float injectedValue, FloatObjectToFloatFunction<? super T> function)
     {
         InjectIntoFloatProcedure<T> procedure = new InjectIntoFloatProcedure<>(injectedValue, function);
@@ -476,6 +531,7 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
         return procedure.getResult();
     }
 
+    @Override
     public long sumOfInt(IntFunction<? super T> function)
     {
         SumOfIntProcedure<T> procedure = new SumOfIntProcedure<>(function);
@@ -483,6 +539,7 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
         return procedure.getResult();
     }
 
+    @Override
     public double sumOfFloat(FloatFunction<? super T> function)
     {
         SumOfFloatProcedure<T> procedure = new SumOfFloatProcedure<>(function);
@@ -490,6 +547,7 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
         return procedure.getResult();
     }
 
+    @Override
     public long sumOfLong(LongFunction<? super T> function)
     {
         SumOfLongProcedure<T> procedure = new SumOfLongProcedure<>(function);
@@ -497,6 +555,7 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
         return procedure.getResult();
     }
 
+    @Override
     public double sumOfDouble(DoubleFunction<? super T> function)
     {
         SumOfDoubleProcedure<T> procedure = new SumOfDoubleProcedure<>(function);
@@ -504,26 +563,31 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
         return procedure.getResult();
     }
 
+    @Override
     public void forEachWithIndex(ObjectIntProcedure<? super T> objectIntProcedure)
     {
         IterableIterate.forEachWithIndex(this, objectIntProcedure);
     }
 
+    @Override
     public final void forEach(Procedure<? super T> procedure)
     {
         this.each(procedure);
     }
 
+    @Override
     public <P> void forEachWith(Procedure2<? super T, ? super P> procedure, P parameter)
     {
         this.forEach(Procedures.bind(procedure, parameter));
     }
 
+    @Override
     public <S, R extends Collection<Pair<T, S>>> R zip(Iterable<S> that, R target)
     {
         return IterableIterate.zip(this, that, target);
     }
 
+    @Override
     public <R extends Collection<Pair<T, Integer>>> R zipWithIndex(R target)
     {
         this.forEach(ZipWithIndexProcedure.create(target));
@@ -549,16 +613,19 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
         return this.makeString("[", ", ", "]");
     }
 
+    @Override
     public String makeString()
     {
         return this.makeString(", ");
     }
 
+    @Override
     public String makeString(String separator)
     {
         return this.makeString("", separator, "");
     }
 
+    @Override
     public String makeString(String start, String separator, String end)
     {
         Appendable stringBuilder = new StringBuilder();
@@ -566,17 +633,20 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
         return stringBuilder.toString();
     }
 
+    @Override
     public void appendString(Appendable appendable)
     {
         this.appendString(appendable, ", ");
     }
 
+    @Override
     public void appendString(Appendable appendable, String separator)
     {
         AppendStringProcedure<T> appendStringProcedure = new AppendStringProcedure<>(appendable, separator);
         this.forEach(appendStringProcedure);
     }
 
+    @Override
     public void appendString(Appendable appendable, String start, String separator, String end)
     {
         AppendStringProcedure<T> appendStringProcedure = new AppendStringProcedure<>(appendable, separator);
@@ -592,59 +662,69 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
         }
     }
 
+    @Override
     public boolean containsAll(Collection<?> collection)
     {
         return this.containsAllIterable(collection);
     }
 
+    @Override
     public <R extends MutableBooleanCollection> R collectBoolean(BooleanFunction<? super T> booleanFunction, R target)
     {
         this.forEach(new CollectBooleanProcedure<>(booleanFunction, target));
         return target;
     }
 
+    @Override
     public <R extends MutableByteCollection> R collectByte(ByteFunction<? super T> byteFunction, R target)
     {
         this.forEach(new CollectByteProcedure<>(byteFunction, target));
         return target;
     }
 
+    @Override
     public <R extends MutableCharCollection> R collectChar(CharFunction<? super T> charFunction, R target)
     {
         this.forEach(new CollectCharProcedure<>(charFunction, target));
         return target;
     }
 
+    @Override
     public <R extends MutableDoubleCollection> R collectDouble(DoubleFunction<? super T> doubleFunction, R target)
     {
         this.forEach(new CollectDoubleProcedure<>(doubleFunction, target));
         return target;
     }
 
+    @Override
     public <R extends MutableFloatCollection> R collectFloat(FloatFunction<? super T> floatFunction, R target)
     {
         this.forEach(new CollectFloatProcedure<>(floatFunction, target));
         return target;
     }
 
+    @Override
     public <R extends MutableIntCollection> R collectInt(IntFunction<? super T> intFunction, R target)
     {
         this.forEach(new CollectIntProcedure<>(intFunction, target));
         return target;
     }
 
+    @Override
     public <R extends MutableLongCollection> R collectLong(LongFunction<? super T> longFunction, R target)
     {
         this.forEach(new CollectLongProcedure<>(longFunction, target));
         return target;
     }
 
+    @Override
     public <R extends MutableShortCollection> R collectShort(ShortFunction<? super T> shortFunction, R target)
     {
         this.forEach(new CollectShortProcedure<>(shortFunction, target));
         return target;
     }
 
+    @Override
     public <V, R extends MutableMultimap<V, T>> R groupBy(
             Function<? super T, ? extends V> function,
             R target)
@@ -653,6 +733,7 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
         return target;
     }
 
+    @Override
     public <V, R extends MutableMultimap<V, T>> R groupByEach(
             Function<? super T, ? extends Iterable<V>> function,
             R target)
@@ -661,6 +742,7 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
         return target;
     }
 
+    @Override
     public <V, R extends MutableMap<V, T>> R groupByUniqueKey(
             Function<? super T, ? extends V> function,
             R target)

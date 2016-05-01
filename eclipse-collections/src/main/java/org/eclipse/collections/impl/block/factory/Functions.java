@@ -77,6 +77,7 @@ public final class Functions
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public T valueOf(T anObject)
         {
             return anObject;
@@ -87,6 +88,7 @@ public final class Functions
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public String valueOf(String s)
         {
             return s.trim();
@@ -103,6 +105,7 @@ public final class Functions
             this.value = value;
         }
 
+        @Override
         public V valueOf(T object)
         {
             return this.value;
@@ -113,6 +116,7 @@ public final class Functions
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public Class<?> valueOf(Object anObject)
         {
             return anObject.getClass();
@@ -129,6 +133,7 @@ public final class Functions
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public Double valueOf(Number number)
         {
             return Math.sin(number.doubleValue());
@@ -145,6 +150,7 @@ public final class Functions
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public Integer valueOf(Integer value)
         {
             return value * value;
@@ -155,6 +161,7 @@ public final class Functions
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public String valueOf(Object anObject)
         {
             return String.valueOf(anObject);
@@ -171,6 +178,7 @@ public final class Functions
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public Integer valueOf(String string)
         {
             return Integer.valueOf(string);
@@ -492,6 +500,7 @@ public final class Functions
             this.functions = functions;
         }
 
+        @Override
         public V valueOf(T object)
         {
             for (Function<T, V> function : this.functions)
@@ -517,6 +526,7 @@ public final class Functions
             this.functions = functions;
         }
 
+        @Override
         public String valueOf(T object)
         {
             for (Function<T, String> function : this.functions)
@@ -542,6 +552,7 @@ public final class Functions
             this.functions = functions;
         }
 
+        @Override
         public I valueOf(T1 object)
         {
             for (Function<T1, I> function : this.functions)
@@ -567,6 +578,7 @@ public final class Functions
             this.function = function;
         }
 
+        @Override
         public V valueOf(T each)
         {
             synchronized (each)
@@ -625,11 +637,13 @@ public final class Functions
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public double doubleValueOf(Double each)
         {
             return each.doubleValue();
         }
 
+        @Override
         public Double valueOf(Double each)
         {
             return each;
@@ -646,11 +660,13 @@ public final class Functions
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public int intValueOf(Integer each)
         {
             return each.intValue();
         }
 
+        @Override
         public Integer valueOf(Integer each)
         {
             return each;
@@ -667,11 +683,13 @@ public final class Functions
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public long longValueOf(Long each)
         {
             return each.longValue();
         }
 
+        @Override
         public Long valueOf(Long each)
         {
             return each;
@@ -696,6 +714,7 @@ public final class Functions
             this.defaultValue = newDefaultValue;
         }
 
+        @Override
         public V valueOf(T anObject)
         {
             V returnValue = this.function.valueOf(anObject);
@@ -719,6 +738,7 @@ public final class Functions
             this.nullValue = nullValue;
         }
 
+        @Override
         public V valueOf(T object)
         {
             return object == null ? this.nullValue : this.function.valueOf(object);
@@ -754,6 +774,7 @@ public final class Functions
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public K valueOf(Map.Entry<K, ?> entry)
         {
             return entry.getKey();
@@ -764,6 +785,7 @@ public final class Functions
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public V valueOf(Map.Entry<?, V> entry)
         {
             return entry.getValue();
@@ -782,6 +804,7 @@ public final class Functions
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public int intValueOf(Iterable<?> iterable)
         {
             return Iterate.sizeOf(iterable);
@@ -800,6 +823,7 @@ public final class Functions
             this.function2 = function2;
         }
 
+        @Override
         public T3 valueOf(T1 object)
         {
             return this.function2.valueOf(this.function1.valueOf(object));
@@ -863,6 +887,7 @@ public final class Functions
             this.function2 = function2;
         }
 
+        @Override
         public boolean booleanValueOf(T1 object)
         {
             return this.function2.booleanValueOf(this.function1.valueOf(object));
@@ -881,6 +906,7 @@ public final class Functions
             this.function2 = function2;
         }
 
+        @Override
         public byte byteValueOf(T1 object)
         {
             return this.function2.byteValueOf(this.function1.valueOf(object));
@@ -899,6 +925,7 @@ public final class Functions
             this.function2 = function2;
         }
 
+        @Override
         public char charValueOf(T1 object)
         {
             return this.function2.charValueOf(this.function1.valueOf(object));
@@ -917,6 +944,7 @@ public final class Functions
             this.function2 = function2;
         }
 
+        @Override
         public double doubleValueOf(T1 object)
         {
             return this.function2.doubleValueOf(this.function1.valueOf(object));
@@ -935,6 +963,7 @@ public final class Functions
             this.function2 = function2;
         }
 
+        @Override
         public float floatValueOf(T1 object)
         {
             return this.function2.floatValueOf(this.function1.valueOf(object));
@@ -953,6 +982,7 @@ public final class Functions
             this.function2 = function2;
         }
 
+        @Override
         public int intValueOf(T1 object)
         {
             return this.function2.intValueOf(this.function1.valueOf(object));
@@ -971,6 +1001,7 @@ public final class Functions
             this.function2 = function2;
         }
 
+        @Override
         public long longValueOf(T1 object)
         {
             return this.function2.longValueOf(this.function1.valueOf(object));
@@ -989,6 +1020,7 @@ public final class Functions
             this.function2 = function2;
         }
 
+        @Override
         public short shortValueOf(T1 object)
         {
             return this.function2.shortValueOf(this.function1.valueOf(object));
@@ -999,6 +1031,7 @@ public final class Functions
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public T valueOf(Pair<T, ?> pair)
         {
             return pair.getOne();
@@ -1009,6 +1042,7 @@ public final class Functions
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public T valueOf(Pair<?, T> pair)
         {
             return pair.getTwo();
@@ -1019,6 +1053,7 @@ public final class Functions
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public Class<?> safeValueOf(String className) throws ClassNotFoundException
         {
             return Class.forName(className);
@@ -1037,6 +1072,7 @@ public final class Functions
             this.function = function;
         }
 
+        @Override
         public void value(T1 each, int index)
         {
             this.delegate.value(this.function.valueOf(each), index);
@@ -1055,6 +1091,7 @@ public final class Functions
             this.function = function;
         }
 
+        @Override
         public void value(T1 each)
         {
             this.delegate.value(this.function.valueOf(each));
@@ -1073,6 +1110,7 @@ public final class Functions
             this.function = function;
         }
 
+        @Override
         public void value(T1 each, T3 constant)
         {
             this.delegate.value(this.function.valueOf(each), constant);
@@ -1091,6 +1129,7 @@ public final class Functions
             this.parameter = parameter;
         }
 
+        @Override
         public T3 valueOf(T1 object)
         {
             return this.delegate.value(object, this.parameter);
@@ -1101,6 +1140,7 @@ public final class Functions
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public Pair<T, S> valueOf(Pair<S, T> pair)
         {
             return pair.swap();
@@ -1117,6 +1157,7 @@ public final class Functions
             this.throwingFunction = throwingFunction;
         }
 
+        @Override
         public V safeValueOf(T object) throws Exception
         {
             return this.throwingFunction.safeValueOf(object);
@@ -1127,6 +1168,7 @@ public final class Functions
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public Boolean valueOf(Object object)
         {
             return Boolean.TRUE;
@@ -1137,6 +1179,7 @@ public final class Functions
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public Boolean valueOf(Object object)
         {
             return Boolean.FALSE;

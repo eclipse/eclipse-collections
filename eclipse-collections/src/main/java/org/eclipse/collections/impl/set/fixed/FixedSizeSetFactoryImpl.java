@@ -22,36 +22,43 @@ public class FixedSizeSetFactoryImpl implements FixedSizeSetFactory
 {
     private static final FixedSizeSet<?> EMPTY_SET = new EmptySet<>();
 
+    @Override
     public <T> FixedSizeSet<T> empty()
     {
         return (FixedSizeSet<T>) FixedSizeSetFactoryImpl.EMPTY_SET;
     }
 
+    @Override
     public <T> FixedSizeSet<T> of()
     {
         return this.empty();
     }
 
+    @Override
     public <T> FixedSizeSet<T> with()
     {
         return this.empty();
     }
 
+    @Override
     public <T> FixedSizeSet<T> of(T one)
     {
         return this.with(one);
     }
 
+    @Override
     public <T> FixedSizeSet<T> with(T one)
     {
         return new SingletonSet<>(one);
     }
 
+    @Override
     public <T> FixedSizeSet<T> of(T one, T two)
     {
         return this.with(one, two);
     }
 
+    @Override
     public <T> FixedSizeSet<T> with(T one, T two)
     {
         if (Comparators.nullSafeEquals(one, two))
@@ -61,11 +68,13 @@ public class FixedSizeSetFactoryImpl implements FixedSizeSetFactory
         return new DoubletonSet<>(one, two);
     }
 
+    @Override
     public <T> FixedSizeSet<T> of(T one, T two, T three)
     {
         return this.with(one, two, three);
     }
 
+    @Override
     public <T> FixedSizeSet<T> with(T one, T two, T three)
     {
         if (Comparators.nullSafeEquals(one, two))
@@ -83,11 +92,13 @@ public class FixedSizeSetFactoryImpl implements FixedSizeSetFactory
         return new TripletonSet<>(one, two, three);
     }
 
+    @Override
     public <T> FixedSizeSet<T> of(T one, T two, T three, T four)
     {
         return this.with(one, two, three, four);
     }
 
+    @Override
     public <T> FixedSizeSet<T> with(T one, T two, T three, T four)
     {
         if (Comparators.nullSafeEquals(one, two))
@@ -117,11 +128,13 @@ public class FixedSizeSetFactoryImpl implements FixedSizeSetFactory
         return new QuadrupletonSet<>(one, two, three, four);
     }
 
+    @Override
     public <T> MutableSet<T> ofAll(Iterable<? extends T> items)
     {
         return this.withAll(items);
     }
 
+    @Override
     public <T> MutableSet<T> withAll(Iterable<? extends T> items)
     {
         UnifiedSet<T> set = UnifiedSet.newSet(items);

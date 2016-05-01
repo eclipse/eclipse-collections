@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -42,6 +42,7 @@ public abstract class AbstractMapIterable<K, V> extends AbstractRichIterable<V> 
         return oValue == value || oValue != null && oValue.equals(value);
     }
 
+    @Override
     public <A> A ifPresentApply(K key, Function<? super V, ? extends A> function)
     {
         V result = this.get(key);
@@ -53,6 +54,7 @@ public abstract class AbstractMapIterable<K, V> extends AbstractRichIterable<V> 
         return result == null && !this.containsKey(key);
     }
 
+    @Override
     public V getIfAbsent(K key, Function0<? extends V> function)
     {
         V result = this.get(key);
@@ -63,6 +65,7 @@ public abstract class AbstractMapIterable<K, V> extends AbstractRichIterable<V> 
         return function.value();
     }
 
+    @Override
     public V getIfAbsentValue(K key, V value)
     {
         V result = this.get(key);
@@ -73,6 +76,7 @@ public abstract class AbstractMapIterable<K, V> extends AbstractRichIterable<V> 
         return value;
     }
 
+    @Override
     public <P> V getIfAbsentWith(
             K key,
             Function<? super P, ? extends V> function,
@@ -128,11 +132,13 @@ public abstract class AbstractMapIterable<K, V> extends AbstractRichIterable<V> 
         return this.valuesView().asLazy();
     }
 
+    @Override
     public RichIterable<RichIterable<V>> chunk(int size)
     {
         return this.valuesView().chunk(size);
     }
 
+    @Override
     public void each(Procedure<? super V> procedure)
     {
         this.forEachValue(procedure);
@@ -150,11 +156,13 @@ public abstract class AbstractMapIterable<K, V> extends AbstractRichIterable<V> 
         this.valuesView().forEachWithIndex(objectIntProcedure);
     }
 
+    @Override
     public void forEachKey(Procedure<? super K> procedure)
     {
         this.keysView().forEach(procedure);
     }
 
+    @Override
     public void forEachValue(Procedure<? super V> procedure)
     {
         this.valuesView().forEach(procedure);
@@ -190,11 +198,13 @@ public abstract class AbstractMapIterable<K, V> extends AbstractRichIterable<V> 
         return this.valuesView().detectWithIfNone(predicate, parameter, function);
     }
 
+    @Override
     public V getFirst()
     {
         return this.valuesView().getFirst();
     }
 
+    @Override
     public V getLast()
     {
         return this.valuesView().getLast();

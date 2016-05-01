@@ -74,6 +74,7 @@ public final class Functions2
             this.function = function;
         }
 
+        @Override
         public V value(T each, P parameter)
         {
             return this.function.valueOf(each);
@@ -84,6 +85,7 @@ public final class Functions2
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public Integer value(Integer aggregate, Integer value)
         {
             return aggregate + value;
@@ -100,6 +102,7 @@ public final class Functions2
             this.throwingFunction2 = throwingFunction2;
         }
 
+        @Override
         public V safeValue(T argument1, P argument2) throws Exception
         {
             return this.throwingFunction2.safeValue(argument1, argument2);
@@ -116,6 +119,7 @@ public final class Functions2
             this.comparator = comparator;
         }
 
+        @Override
         public T value(T argument1, T argument2)
         {
             return this.comparator.compare(argument1, argument2) > 0 ? argument2 : argument1;
@@ -132,6 +136,7 @@ public final class Functions2
             this.comparator = comparator;
         }
 
+        @Override
         public T value(T argument1, T argument2)
         {
             return this.comparator.compare(argument1, argument2) < 0 ? argument2 : argument1;
@@ -148,6 +153,7 @@ public final class Functions2
             this.function = function;
         }
 
+        @Override
         public T value(T argument1, T argument2)
         {
             V first = this.function.valueOf(argument1);
@@ -166,6 +172,7 @@ public final class Functions2
             this.function = function;
         }
 
+        @Override
         public T value(T argument1, T argument2)
         {
             V first = this.function.valueOf(argument1);

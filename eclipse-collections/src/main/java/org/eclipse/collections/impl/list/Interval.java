@@ -439,6 +439,7 @@ public final class Interval
         }
     }
 
+    @Override
     public void each(Procedure<? super Integer> procedure)
     {
         this.forEach((IntProcedure) procedure::value);
@@ -778,6 +779,7 @@ public final class Interval
         return "Interval from: " + this.from + " to: " + this.to + " step: " + this.step + " size: " + this.size();
     }
 
+    @Override
     public Iterator<Integer> iterator()
     {
         return new IntegerIterator();
@@ -787,6 +789,7 @@ public final class Interval
     {
         private int current = Interval.this.from;
 
+        @Override
         public boolean hasNext()
         {
             if (Interval.this.from <= Interval.this.to)
@@ -796,6 +799,7 @@ public final class Interval
             return this.current >= Interval.this.to;
         }
 
+        @Override
         public Integer next()
         {
             if (this.hasNext())
@@ -807,6 +811,7 @@ public final class Interval
             throw new NoSuchElementException();
         }
 
+        @Override
         public void remove()
         {
             throw new UnsupportedOperationException("Cannot remove a value from an Interval");
@@ -867,6 +872,7 @@ public final class Interval
         }
     }
 
+    @Override
     public Integer get(int index)
     {
         this.checkBounds("index", index);
@@ -894,6 +900,7 @@ public final class Interval
         return (int) Math.max((long) this.from + (long) this.step * (long) index, this.to);
     }
 
+    @Override
     public int indexOf(Object object)
     {
         if (!(object instanceof Integer))
@@ -915,6 +922,7 @@ public final class Interval
         return -1;
     }
 
+    @Override
     public int lastIndexOf(Object object)
     {
         return this.indexOf(object);
@@ -944,68 +952,81 @@ public final class Interval
         return bag;
     }
 
+    @Override
     public boolean add(Integer integer)
     {
         throw new UnsupportedOperationException("Cannot call add() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public boolean remove(Object o)
     {
         throw new UnsupportedOperationException("Cannot call remove() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     @SuppressWarnings("TypeParameterExtendsFinalClass")
     public boolean addAll(Collection<? extends Integer> collection)
     {
         throw new UnsupportedOperationException("Cannot call addAll() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     @SuppressWarnings("TypeParameterExtendsFinalClass")
     public boolean addAll(int index, Collection<? extends Integer> collection)
     {
         throw new UnsupportedOperationException("Cannot call addAll() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public boolean removeAll(Collection<?> collection)
     {
         throw new UnsupportedOperationException("Cannot call removeAll() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public boolean retainAll(Collection<?> collection)
     {
         throw new UnsupportedOperationException("Cannot call retainAll() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public void clear()
     {
         throw new UnsupportedOperationException("Cannot call clear() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public Integer set(int index, Integer element)
     {
         throw new UnsupportedOperationException("Cannot call set() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public void add(int index, Integer element)
     {
         throw new UnsupportedOperationException("Cannot call add() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public Integer remove(int index)
     {
         throw new UnsupportedOperationException("Cannot call remove() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public ListIterator<Integer> listIterator()
     {
         return new MutableListIterator<>(this, 0);
     }
 
+    @Override
     public ListIterator<Integer> listIterator(int index)
     {
         return new MutableListIterator<>(this, index);
     }
 
+    @Override
     public Interval subList(int fromIndex, int toIndex)
     {
         return Interval.fromToBy(this.get(fromIndex), this.get(toIndex - 1), this.step);

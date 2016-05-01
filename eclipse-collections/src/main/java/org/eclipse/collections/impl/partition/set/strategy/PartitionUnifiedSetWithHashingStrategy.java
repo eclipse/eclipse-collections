@@ -29,16 +29,19 @@ public class PartitionUnifiedSetWithHashingStrategy<T>
         this.rejected = UnifiedSetWithHashingStrategy.newSet(hashingStrategy);
     }
 
+    @Override
     public MutableSet<T> getSelected()
     {
         return this.selected;
     }
 
+    @Override
     public MutableSet<T> getRejected()
     {
         return this.rejected;
     }
 
+    @Override
     public PartitionImmutableSet<T> toImmutable()
     {
         return new PartitionImmutableSetImpl<>(this);

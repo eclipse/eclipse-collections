@@ -134,6 +134,7 @@ public final class Functions0
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public MutableList<T> value()
         {
             return Lists.mutable.empty();
@@ -144,6 +145,7 @@ public final class Functions0
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public MutableMap<K, V> value()
         {
             return Maps.mutable.empty();
@@ -154,6 +156,7 @@ public final class Functions0
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public MutableSet<T> value()
         {
             return Sets.mutable.empty();
@@ -164,6 +167,7 @@ public final class Functions0
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public MutableBag<T> value()
         {
             return Bags.mutable.empty();
@@ -174,6 +178,7 @@ public final class Functions0
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public T value()
         {
             return null;
@@ -184,6 +189,7 @@ public final class Functions0
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public Integer value()
         {
             return Integer.valueOf(0);
@@ -194,6 +200,7 @@ public final class Functions0
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public AtomicInteger value()
         {
             return new AtomicInteger(0);
@@ -204,6 +211,7 @@ public final class Functions0
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public AtomicLong value()
         {
             return new AtomicLong(0);
@@ -220,6 +228,7 @@ public final class Functions0
             this.throwingFunction0 = throwingFunction0;
         }
 
+        @Override
         public T safeValue() throws Exception
         {
             return this.throwingFunction0.safeValue();
@@ -230,6 +239,7 @@ public final class Functions0
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public BigDecimal value()
         {
             return BigDecimal.ZERO;
@@ -240,6 +250,7 @@ public final class Functions0
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public BigInteger value()
         {
             return BigInteger.ZERO;
@@ -250,6 +261,7 @@ public final class Functions0
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public Boolean value()
         {
             return Boolean.TRUE;
@@ -260,6 +272,7 @@ public final class Functions0
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public Boolean value()
         {
             return Boolean.FALSE;

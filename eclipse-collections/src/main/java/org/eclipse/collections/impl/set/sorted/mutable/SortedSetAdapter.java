@@ -118,21 +118,25 @@ public final class SortedSetAdapter<T>
         return this.delegate;
     }
 
+    @Override
     public MutableSortedSet<T> asUnmodifiable()
     {
         return UnmodifiableSortedSet.of(this);
     }
 
+    @Override
     public MutableSortedSet<T> asSynchronized()
     {
         return SynchronizedSortedSet.of(this);
     }
 
+    @Override
     public ImmutableSortedSet<T> toImmutable()
     {
         return SortedSets.immutable.withSortedSet(this.delegate);
     }
 
+    @Override
     public MutableStack<T> toStack()
     {
         return ArrayStack.newStack(this);
@@ -177,6 +181,7 @@ public final class SortedSetAdapter<T>
         return this.delegate.hashCode();
     }
 
+    @Override
     public SortedSetAdapter<T> with(T element)
     {
         this.add(element);
@@ -204,18 +209,21 @@ public final class SortedSetAdapter<T>
         return this;
     }
 
+    @Override
     public SortedSetAdapter<T> without(T element)
     {
         this.remove(element);
         return this;
     }
 
+    @Override
     public SortedSetAdapter<T> withAll(Iterable<? extends T> elements)
     {
         this.addAllIterable(elements);
         return this;
     }
 
+    @Override
     public SortedSetAdapter<T> withoutAll(Iterable<? extends T> elements)
     {
         this.removeAllIterable(elements);
@@ -225,6 +233,7 @@ public final class SortedSetAdapter<T>
     /**
      * @deprecated use {@link TreeSortedSet#newSet()} instead (inlineable)
      */
+    @Override
     @Deprecated
     public MutableSortedSet<T> newEmpty()
     {
@@ -272,18 +281,21 @@ public final class SortedSetAdapter<T>
         return partitionMutableSortedSet;
     }
 
+    @Override
     public PartitionMutableSortedSet<T> partitionWhile(Predicate<? super T> predicate)
     {
         PartitionTreeSortedSet<T> result = new PartitionTreeSortedSet<>(this.comparator());
         return IterableIterate.partitionWhile(this, predicate, result);
     }
 
+    @Override
     public MutableSortedSet<T> takeWhile(Predicate<? super T> predicate)
     {
         MutableSortedSet<T> result = TreeSortedSet.newSet(this.comparator());
         return IterableIterate.takeWhile(this, predicate, result);
     }
 
+    @Override
     public MutableSortedSet<T> dropWhile(Predicate<? super T> predicate)
     {
         MutableSortedSet<T> result = TreeSortedSet.newSet(this.comparator());
@@ -382,6 +394,7 @@ public final class SortedSetAdapter<T>
         return Iterate.flatCollect(this.delegate, function, FastList.newList());
     }
 
+    @Override
     public int detectIndex(Predicate<? super T> predicate)
     {
         return Iterate.detectIndex(this.delegate, predicate);
@@ -435,16 +448,19 @@ public final class SortedSetAdapter<T>
         return Iterate.zipWithIndex(this.delegate, TreeSortedSet.newSet(Comparators.byFirstOfPair(comparator)));
     }
 
+    @Override
     public MutableSortedSet<T> distinct()
     {
         return TreeSortedSet.newSet(this);
     }
 
+    @Override
     public <S> boolean corresponds(OrderedIterable<S> other, Predicate2<? super T, ? super S> predicate)
     {
         return OrderedIterate.corresponds(this, other, predicate);
     }
 
+    @Override
     public void forEach(int fromIndex, int toIndex, Procedure<? super T> procedure)
     {
         ListIterate.rangeCheck(fromIndex, toIndex, this.size());
@@ -467,6 +483,7 @@ public final class SortedSetAdapter<T>
         }
     }
 
+    @Override
     public void forEachWithIndex(int fromIndex, int toIndex, ObjectIntProcedure<? super T> objectIntProcedure)
     {
         ListIterate.rangeCheck(fromIndex, toIndex, this.size());
@@ -489,86 +506,103 @@ public final class SortedSetAdapter<T>
         }
     }
 
+    @Override
     public MutableSortedSet<T> union(SetIterable<? extends T> set)
     {
         return this.unionInto(set, TreeSortedSet.newSet(this.comparator()));
     }
 
+    @Override
     public <R extends Set<T>> R unionInto(SetIterable<? extends T> set, R targetSet)
     {
         return SetIterables.unionInto(this, set, targetSet);
     }
 
+    @Override
     public MutableSortedSet<T> intersect(SetIterable<? extends T> set)
     {
         return this.intersectInto(set, TreeSortedSet.newSet(this.comparator()));
     }
 
+    @Override
     public <R extends Set<T>> R intersectInto(SetIterable<? extends T> set, R targetSet)
     {
         return SetIterables.intersectInto(this, set, targetSet);
     }
 
+    @Override
     public MutableSortedSet<T> difference(SetIterable<? extends T> subtrahendSet)
     {
         return this.differenceInto(subtrahendSet, TreeSortedSet.newSet(this.comparator()));
     }
 
+    @Override
     public <R extends Set<T>> R differenceInto(SetIterable<? extends T> subtrahendSet, R targetSet)
     {
         return SetIterables.differenceInto(this, subtrahendSet, targetSet);
     }
 
+    @Override
     public MutableSortedSet<T> symmetricDifference(SetIterable<? extends T> setB)
     {
         return this.symmetricDifferenceInto(setB, TreeSortedSet.newSet(this.comparator()));
     }
 
+    @Override
     public <R extends Set<T>> R symmetricDifferenceInto(SetIterable<? extends T> set, R targetSet)
     {
         return SetIterables.symmetricDifferenceInto(this, set, targetSet);
     }
 
+    @Override
     public Comparator<? super T> comparator()
     {
         return this.delegate.comparator();
     }
 
+    @Override
     public boolean isSubsetOf(SetIterable<? extends T> candidateSuperset)
     {
         return SetIterables.isSubsetOf(this, candidateSuperset);
     }
 
+    @Override
     public boolean isProperSubsetOf(SetIterable<? extends T> candidateSuperset)
     {
         return SetIterables.isProperSubsetOf(this, candidateSuperset);
     }
 
+    @Override
     public MutableSortedSet<SortedSetIterable<T>> powerSet()
     {
         return (MutableSortedSet<SortedSetIterable<T>>) (MutableSortedSet<?>) SortedSetIterables.powerSet(this);
     }
 
+    @Override
     public <B> LazyIterable<Pair<T, B>> cartesianProduct(SetIterable<B> set)
     {
         return SetIterables.cartesianProduct(this, set);
     }
 
+    @Override
     public MutableSortedSet<T> subSet(T fromElement, T toElement)
     {
         return SortedSetAdapter.adapt(this.delegate.subSet(fromElement, toElement));
     }
 
+    @Override
     public MutableSortedSet<T> headSet(T toElement)
     {
         return SortedSetAdapter.adapt(this.delegate.headSet(toElement));
     }
 
+    @Override
     public MutableSortedSet<T> tailSet(T fromElement)
     {
         return SortedSetAdapter.adapt(this.delegate.tailSet(fromElement));
     }
 
+    @Override
     public T first()
     {
         if (this.delegate.isEmpty())
@@ -578,6 +612,7 @@ public final class SortedSetAdapter<T>
         return this.delegate.first();
     }
 
+    @Override
     public T last()
     {
         if (this.delegate.isEmpty())
@@ -587,6 +622,7 @@ public final class SortedSetAdapter<T>
         return this.delegate.last();
     }
 
+    @Override
     public int indexOf(Object object)
     {
         if (this.delegate.contains(object))
@@ -608,11 +644,13 @@ public final class SortedSetAdapter<T>
         return this.last();
     }
 
+    @Override
     public int compareTo(SortedSetIterable<T> o)
     {
         return SortedSetIterables.compare(this, o);
     }
 
+    @Override
     public ParallelSortedSetIterable<T> asParallel(ExecutorService executorService, int batchSize)
     {
         if (executorService == null)
@@ -626,31 +664,37 @@ public final class SortedSetAdapter<T>
         return new NonParallelSortedSetIterable<>(this);
     }
 
+    @Override
     public MutableSortedSet<T> toReversed()
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".toReversed() not implemented yet");
     }
 
+    @Override
     public MutableSortedSet<T> take(int count)
     {
         return IterableIterate.take(this.getDelegate(), Math.min(this.size(), count), TreeSortedSet.newSet(this.comparator()));
     }
 
+    @Override
     public MutableSortedSet<T> drop(int count)
     {
         return IterableIterate.drop(this.getDelegate(), count, TreeSortedSet.newSet(this.comparator()));
     }
 
+    @Override
     public void reverseForEach(Procedure<? super T> procedure)
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".reverseForEach() not implemented yet");
     }
 
+    @Override
     public LazyIterable<T> asReversed()
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".asReversed() not implemented yet");
     }
 
+    @Override
     public int detectLastIndex(Predicate<? super T> predicate)
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".detectLastIndex() not implemented yet");

@@ -21,31 +21,37 @@ import org.eclipse.collections.impl.utility.Iterate;
 @Immutable
 public final class ImmutableSortedSetFactoryImpl implements ImmutableSortedSetFactory
 {
+    @Override
     public <T> ImmutableSortedSet<T> empty()
     {
         return (ImmutableSortedSet<T>) ImmutableEmptySortedSet.INSTANCE;
     }
 
+    @Override
     public <T> ImmutableSortedSet<T> empty(Comparator<? super T> comparator)
     {
         return new ImmutableEmptySortedSet<>(comparator);
     }
 
+    @Override
     public <T> ImmutableSortedSet<T> of()
     {
         return this.empty();
     }
 
+    @Override
     public <T> ImmutableSortedSet<T> with()
     {
         return this.empty();
     }
 
+    @Override
     public <T> ImmutableSortedSet<T> of(T... items)
     {
         return this.with(items);
     }
 
+    @Override
     public <T> ImmutableSortedSet<T> with(T... items)
     {
         if (items == null || items.length == 0)
@@ -56,11 +62,13 @@ public final class ImmutableSortedSetFactoryImpl implements ImmutableSortedSetFa
         return ImmutableTreeSet.newSetWith(items);
     }
 
+    @Override
     public <T> ImmutableSortedSet<T> ofAll(Iterable<? extends T> items)
     {
         return this.withAll(items);
     }
 
+    @Override
     public <T> ImmutableSortedSet<T> withAll(Iterable<? extends T> items)
     {
         if (items instanceof ImmutableSortedSet<?>)
@@ -71,11 +79,13 @@ public final class ImmutableSortedSetFactoryImpl implements ImmutableSortedSetFa
         return this.of((T[]) Iterate.toArray(items));
     }
 
+    @Override
     public <T> ImmutableSortedSet<T> of(Comparator<? super T> comparator)
     {
         return this.with(comparator);
     }
 
+    @Override
     public <T> ImmutableSortedSet<T> with(Comparator<? super T> comparator)
     {
         if (comparator == null)
@@ -85,11 +95,13 @@ public final class ImmutableSortedSetFactoryImpl implements ImmutableSortedSetFa
         return new ImmutableEmptySortedSet<>(comparator);
     }
 
+    @Override
     public <T> ImmutableSortedSet<T> of(Comparator<? super T> comparator, T... items)
     {
         return this.with(comparator, items);
     }
 
+    @Override
     public <T> ImmutableSortedSet<T> with(Comparator<? super T> comparator, T... items)
     {
         if (items == null || items.length == 0)
@@ -100,21 +112,25 @@ public final class ImmutableSortedSetFactoryImpl implements ImmutableSortedSetFa
         return ImmutableTreeSet.newSetWith(comparator, items);
     }
 
+    @Override
     public <T> ImmutableSortedSet<T> ofAll(Comparator<? super T> comparator, Iterable<? extends T> items)
     {
         return this.withAll(comparator, items);
     }
 
+    @Override
     public <T> ImmutableSortedSet<T> withAll(Comparator<? super T> comparator, Iterable<? extends T> items)
     {
         return this.of(comparator, (T[]) Iterate.toArray(items));
     }
 
+    @Override
     public <T> ImmutableSortedSet<T> ofSortedSet(SortedSet<T> set)
     {
         return this.withSortedSet(set);
     }
 
+    @Override
     public <T> ImmutableSortedSet<T> withSortedSet(SortedSet<T> set)
     {
         if (set instanceof ImmutableSortedSet)

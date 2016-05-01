@@ -40,6 +40,7 @@ public class SelectIterable<T>
         this.predicate = newPredicate;
     }
 
+    @Override
     public void each(Procedure<? super T> procedure)
     {
         Iterate.forEach(this.adapted, new IfProcedure<>(this.predicate, procedure));
@@ -57,6 +58,7 @@ public class SelectIterable<T>
         Iterate.forEachWith(this.adapted, new IfProcedureWith<>(this.predicate, procedure), parameter);
     }
 
+    @Override
     public Iterator<T> iterator()
     {
         return new SelectIterator<>(this.adapted.iterator(), this.predicate);

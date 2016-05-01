@@ -33,46 +33,55 @@ public final class EmptyIterator<T>
         return (EmptyIterator<T>) INSTANCE;
     }
 
+    @Override
     public boolean hasNext()
     {
         return false;
     }
 
+    @Override
     public T next()
     {
         throw new NoSuchElementException();
     }
 
+    @Override
     public void remove()
     {
         throw new UnsupportedOperationException("Cannot call remove() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public boolean hasPrevious()
     {
         return false;
     }
 
+    @Override
     public T previous()
     {
         throw new NoSuchElementException();
     }
 
+    @Override
     public int nextIndex()
     {
         return 0;
     }
 
+    @Override
     public int previousIndex()
     {
         return -1;
     }
 
+    @Override
     public void set(T t)
     {
         throw new UnsupportedOperationException("Cannot call set() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public void add(T t)
     {
         throw new UnsupportedOperationException("Cannot call add() on " + this.getClass().getSimpleName());

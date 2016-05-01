@@ -25,6 +25,7 @@ public final class CollectProcedureFactory<T, V> implements ProcedureFactory<Col
         this.function = function;
     }
 
+    @Override
     public CollectProcedure<T, V> create()
     {
         return new CollectProcedure<>(this.function, new FastList<>(this.collectionSize));

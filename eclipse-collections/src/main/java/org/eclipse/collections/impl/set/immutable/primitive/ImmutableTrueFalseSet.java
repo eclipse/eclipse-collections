@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -44,16 +44,19 @@ final class ImmutableTrueFalseSet implements ImmutableBooleanSet, Serializable
         // Singleton
     }
 
+    @Override
     public ImmutableBooleanSet newWith(boolean element)
     {
         return ImmutableTrueFalseSet.INSTANCE;
     }
 
+    @Override
     public ImmutableBooleanSet newWithout(boolean element)
     {
         return element ? ImmutableFalseSet.INSTANCE : ImmutableTrueSet.INSTANCE;
     }
 
+    @Override
     public ImmutableBooleanSet newWithAll(BooleanIterable elements)
     {
         ImmutableBooleanSet result = this;
@@ -65,6 +68,7 @@ final class ImmutableTrueFalseSet implements ImmutableBooleanSet, Serializable
         return result;
     }
 
+    @Override
     public ImmutableBooleanSet newWithoutAll(BooleanIterable elements)
     {
         ImmutableBooleanSet result = this;
@@ -76,11 +80,13 @@ final class ImmutableTrueFalseSet implements ImmutableBooleanSet, Serializable
         return result;
     }
 
+    @Override
     public BooleanIterator booleanIterator()
     {
         return new FalseTrueIterator();
     }
 
+    @Override
     public void forEach(BooleanProcedure procedure)
     {
         this.each(procedure);
@@ -89,17 +95,20 @@ final class ImmutableTrueFalseSet implements ImmutableBooleanSet, Serializable
     /**
      * @since 7.0.
      */
+    @Override
     public void each(BooleanProcedure procedure)
     {
         procedure.value(false);
         procedure.value(true);
     }
 
+    @Override
     public <T> T injectInto(T injectedValue, ObjectBooleanToObjectFunction<? super T, ? extends T> function)
     {
         return function.valueOf(function.valueOf(injectedValue, false), true);
     }
 
+    @Override
     public int count(BooleanPredicate predicate)
     {
         int count = 0;
@@ -114,21 +123,25 @@ final class ImmutableTrueFalseSet implements ImmutableBooleanSet, Serializable
         return count;
     }
 
+    @Override
     public boolean anySatisfy(BooleanPredicate predicate)
     {
         return predicate.accept(false) || predicate.accept(true);
     }
 
+    @Override
     public boolean allSatisfy(BooleanPredicate predicate)
     {
         return predicate.accept(false) && predicate.accept(true);
     }
 
+    @Override
     public boolean noneSatisfy(BooleanPredicate predicate)
     {
         return !predicate.accept(false) && !predicate.accept(true);
     }
 
+    @Override
     public ImmutableBooleanSet select(BooleanPredicate predicate)
     {
         if (predicate.accept(true))
@@ -138,6 +151,7 @@ final class ImmutableTrueFalseSet implements ImmutableBooleanSet, Serializable
         return predicate.accept(false) ? ImmutableFalseSet.INSTANCE : ImmutableBooleanEmptySet.INSTANCE;
     }
 
+    @Override
     public ImmutableBooleanSet reject(BooleanPredicate predicate)
     {
         if (predicate.accept(true))
@@ -147,6 +161,7 @@ final class ImmutableTrueFalseSet implements ImmutableBooleanSet, Serializable
         return predicate.accept(false) ? ImmutableTrueSet.INSTANCE : this;
     }
 
+    @Override
     public boolean detectIfNone(BooleanPredicate predicate, boolean ifNone)
     {
         if (predicate.accept(false))
@@ -160,51 +175,61 @@ final class ImmutableTrueFalseSet implements ImmutableBooleanSet, Serializable
         return ifNone;
     }
 
+    @Override
     public <V> ImmutableSet<V> collect(BooleanToObjectFunction<? extends V> function)
     {
         return Sets.immutable.with(function.valueOf(false), function.valueOf(true));
     }
 
+    @Override
     public boolean[] toArray()
     {
         return new boolean[]{false, true};
     }
 
+    @Override
     public boolean contains(boolean value)
     {
         return true;
     }
 
+    @Override
     public boolean containsAll(boolean... source)
     {
         return true;
     }
 
+    @Override
     public boolean containsAll(BooleanIterable source)
     {
         return true;
     }
 
+    @Override
     public BooleanSet freeze()
     {
         return this;
     }
 
+    @Override
     public ImmutableBooleanSet toImmutable()
     {
         return this;
     }
 
+    @Override
     public int size()
     {
         return 2;
     }
 
+    @Override
     public boolean isEmpty()
     {
         return false;
     }
 
+    @Override
     public boolean notEmpty()
     {
         return true;
@@ -239,21 +264,25 @@ final class ImmutableTrueFalseSet implements ImmutableBooleanSet, Serializable
         return "[false, true]";
     }
 
+    @Override
     public String makeString()
     {
         return "false, true";
     }
 
+    @Override
     public String makeString(String separator)
     {
         return "false" + separator + "true";
     }
 
+    @Override
     public String makeString(String start, String separator, String end)
     {
         return start + "false" + separator + "true" + end;
     }
 
+    @Override
     public void appendString(Appendable appendable)
     {
         try
@@ -266,6 +295,7 @@ final class ImmutableTrueFalseSet implements ImmutableBooleanSet, Serializable
         }
     }
 
+    @Override
     public void appendString(Appendable appendable, String separator)
     {
         try
@@ -280,6 +310,7 @@ final class ImmutableTrueFalseSet implements ImmutableBooleanSet, Serializable
         }
     }
 
+    @Override
     public void appendString(Appendable appendable, String start, String separator, String end)
     {
         try
@@ -296,21 +327,25 @@ final class ImmutableTrueFalseSet implements ImmutableBooleanSet, Serializable
         }
     }
 
+    @Override
     public MutableBooleanList toList()
     {
         return BooleanArrayList.newList(this);
     }
 
+    @Override
     public MutableBooleanSet toSet()
     {
         return BooleanHashSet.newSet(this);
     }
 
+    @Override
     public MutableBooleanBag toBag()
     {
         return BooleanHashBag.newBag(this);
     }
 
+    @Override
     public LazyBooleanIterable asLazy()
     {
         return new LazyBooleanIterableAdapter(this);
@@ -320,6 +355,7 @@ final class ImmutableTrueFalseSet implements ImmutableBooleanSet, Serializable
     {
         private int currentIndex;
 
+        @Override
         public boolean next()
         {
             switch (this.currentIndex)
@@ -335,6 +371,7 @@ final class ImmutableTrueFalseSet implements ImmutableBooleanSet, Serializable
             }
         }
 
+        @Override
         public boolean hasNext()
         {
             return this.currentIndex < 2;

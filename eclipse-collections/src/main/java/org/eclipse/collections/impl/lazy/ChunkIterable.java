@@ -39,11 +39,13 @@ public class ChunkIterable<T>
         this.size = size;
     }
 
+    @Override
     public Iterator<RichIterable<T>> iterator()
     {
         return new ChunkIterator<>(this.iterable, this.size);
     }
 
+    @Override
     public void each(Procedure<? super RichIterable<T>> procedure)
     {
         IterableIterate.forEach(this, procedure);

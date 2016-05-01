@@ -20,16 +20,19 @@ public class PartitionUnifiedSet<T> implements PartitionMutableSet<T>
     private final MutableSet<T> selected = UnifiedSet.newSet();
     private final MutableSet<T> rejected = UnifiedSet.newSet();
 
+    @Override
     public MutableSet<T> getSelected()
     {
         return this.selected;
     }
 
+    @Override
     public MutableSet<T> getRejected()
     {
         return this.rejected;
     }
 
+    @Override
     public PartitionImmutableSet<T> toImmutable()
     {
         return new PartitionImmutableSetImpl<>(this);

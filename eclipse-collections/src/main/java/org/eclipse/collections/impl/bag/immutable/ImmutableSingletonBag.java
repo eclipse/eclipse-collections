@@ -114,11 +114,13 @@ final class ImmutableSingletonBag<T>
         return this.value;
     }
 
+    @Override
     public ImmutableBag<T> newWith(T element)
     {
         return Bags.immutable.with(this.value, element);
     }
 
+    @Override
     public ImmutableBag<T> newWithout(T element)
     {
         return this.emptyIfMatchesOrThis(Predicates.equal(element));
@@ -129,6 +131,7 @@ final class ImmutableSingletonBag<T>
         return predicate.accept(this.value) ? Bags.immutable.empty() : this;
     }
 
+    @Override
     public ImmutableBag<T> newWithAll(Iterable<? extends T> elements)
     {
         return HashBag.newBag(elements).with(this.value).toImmutable();
@@ -140,6 +143,7 @@ final class ImmutableSingletonBag<T>
         return this.emptyIfMatchesOrThis(Predicates.in(elements));
     }
 
+    @Override
     public int size()
     {
         return 1;
@@ -157,11 +161,13 @@ final class ImmutableSingletonBag<T>
         return true;
     }
 
+    @Override
     public T getFirst()
     {
         return this.value;
     }
 
+    @Override
     public T getLast()
     {
         return this.value;
@@ -185,6 +191,7 @@ final class ImmutableSingletonBag<T>
         return ArrayIterate.allSatisfy(elements, Predicates.equal(this.value));
     }
 
+    @Override
     public ImmutableBag<T> selectByOccurrences(IntPredicate predicate)
     {
         return predicate.accept(1)
@@ -192,6 +199,7 @@ final class ImmutableSingletonBag<T>
                 : Bags.immutable.empty();
     }
 
+    @Override
     public ImmutableBag<T> select(Predicate<? super T> predicate)
     {
         return predicate.accept(this.value)
@@ -222,6 +230,7 @@ final class ImmutableSingletonBag<T>
         return target;
     }
 
+    @Override
     public ImmutableBag<T> reject(Predicate<? super T> predicate)
     {
         return predicate.accept(this.value)
@@ -252,6 +261,7 @@ final class ImmutableSingletonBag<T>
         return target;
     }
 
+    @Override
     public <S> ImmutableBag<S> selectInstancesOf(Class<S> clazz)
     {
         return clazz.isInstance(this.value)
@@ -259,11 +269,13 @@ final class ImmutableSingletonBag<T>
                 : Bags.immutable.empty();
     }
 
+    @Override
     public <V> ImmutableBag<V> collect(Function<? super T, ? extends V> function)
     {
         return Bags.immutable.with(function.valueOf(this.value));
     }
 
+    @Override
     public <V> ImmutableBag<V> collectIf(
             Predicate<? super T> predicate,
             Function<? super T, ? extends V> function)
@@ -284,6 +296,7 @@ final class ImmutableSingletonBag<T>
         return target;
     }
 
+    @Override
     public <V> ImmutableBag<V> flatCollect(Function<? super T, ? extends Iterable<V>> function)
     {
         return this.flatCollect(function, HashBag.newBag()).toImmutable();
@@ -327,6 +340,7 @@ final class ImmutableSingletonBag<T>
         return predicate.accept(this.value);
     }
 
+    @Override
     public <V> ImmutableBagMultimap<V, T> groupBy(Function<? super T, ? extends V> function)
     {
         return this.groupBy(function, HashBagMultimap.<V, T>newMultimap()).toImmutable();
@@ -339,6 +353,7 @@ final class ImmutableSingletonBag<T>
         return target;
     }
 
+    @Override
     public <V> ImmutableBagMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function)
     {
         return this.groupByEach(function, HashBagMultimap.newMultimap()).toImmutable();
@@ -351,21 +366,25 @@ final class ImmutableSingletonBag<T>
         return target;
     }
 
+    @Override
     public int sizeDistinct()
     {
         return 1;
     }
 
+    @Override
     public int occurrencesOf(Object item)
     {
         return Comparators.nullSafeEquals(this.value, item) ? 1 : 0;
     }
 
+    @Override
     public void forEachWithOccurrences(ObjectIntProcedure<? super T> objectIntProcedure)
     {
         objectIntProcedure.value(this.value, 1);
     }
 
+    @Override
     public MutableMap<T, Integer> toMapOfItemToCount()
     {
         return UnifiedMap.newWithKeysValues(this.value, 1);
@@ -377,6 +396,7 @@ final class ImmutableSingletonBag<T>
         return this;
     }
 
+    @Override
     public void each(Procedure<? super T> procedure)
     {
         procedure.value(this.value);
@@ -397,6 +417,7 @@ final class ImmutableSingletonBag<T>
     /**
      * @deprecated in 6.0. Use {@link OrderedIterable#zip(Iterable)} instead.
      */
+    @Override
     @Deprecated
     public <S> ImmutableBag<Pair<T, S>> zip(Iterable<S> that)
     {
@@ -411,12 +432,14 @@ final class ImmutableSingletonBag<T>
     /**
      * @deprecated in 6.0. Use {@link OrderedIterable#zipWithIndex()} instead.
      */
+    @Override
     @Deprecated
     public ImmutableSet<Pair<T, Integer>> zipWithIndex()
     {
         return Sets.immutable.with(Tuples.pair(this.value, 0));
     }
 
+    @Override
     public Iterator<T> iterator()
     {
         return new SingletonIterator();
@@ -427,11 +450,13 @@ final class ImmutableSingletonBag<T>
     {
         private boolean next = true;
 
+        @Override
         public boolean hasNext()
         {
             return this.next;
         }
 
+        @Override
         public T next()
         {
             if (this.next)
@@ -442,6 +467,7 @@ final class ImmutableSingletonBag<T>
             throw new NoSuchElementException("i=" + this.next);
         }
 
+        @Override
         public void remove()
         {
             throw new UnsupportedOperationException("Cannot remove from an ImmutableBag");

@@ -59,6 +59,7 @@ public class SortedMapAdapter<K, V>
         return map instanceof MutableSortedMap<?, ?> ? (MutableSortedMap<K, V>) map : new SortedMapAdapter<>(map);
     }
 
+    @Override
     public void forEachKeyValue(Procedure2<? super K, ? super V> procedure)
     {
         MapIterate.forEachKeyValue(this.delegate, procedure);
@@ -67,27 +68,32 @@ public class SortedMapAdapter<K, V>
     /**
      * @deprecated use {@link TreeSortedMap#newEmpty()} instead (inlineable)
      */
+    @Override
     @Deprecated
     public MutableSortedMap<K, V> newEmpty()
     {
         return TreeSortedMap.newMap(this.delegate.comparator());
     }
 
+    @Override
     public boolean containsKey(Object key)
     {
         return this.delegate.containsKey(key);
     }
 
+    @Override
     public boolean containsValue(Object value)
     {
         return this.delegate.containsValue(value);
     }
 
+    @Override
     public Comparator<? super K> comparator()
     {
         return this.delegate.comparator();
     }
 
+    @Override
     public int size()
     {
         return this.delegate.size();
@@ -105,71 +111,85 @@ public class SortedMapAdapter<K, V>
         return this.delegate.values().iterator();
     }
 
+    @Override
     public V remove(Object key)
     {
         return this.delegate.remove(key);
     }
 
+    @Override
     public void putAll(Map<? extends K, ? extends V> map)
     {
         this.delegate.putAll(map);
     }
 
+    @Override
     public MutableCollection<V> values()
     {
         return CollectionAdapter.adapt(this.delegate.values());
     }
 
+    @Override
     public MutableSet<Entry<K, V>> entrySet()
     {
         return SetAdapter.adapt(this.delegate.entrySet());
     }
 
+    @Override
     public MutableSet<K> keySet()
     {
         return SetAdapter.adapt(this.delegate.keySet());
     }
 
+    @Override
     public K firstKey()
     {
         return this.delegate.firstKey();
     }
 
+    @Override
     public K lastKey()
     {
         return this.delegate.lastKey();
     }
 
+    @Override
     public MutableSortedMap<K, V> headMap(K toKey)
     {
         return SortedMapAdapter.adapt(this.delegate.headMap(toKey));
     }
 
+    @Override
     public MutableSortedMap<K, V> tailMap(K fromKey)
     {
         return SortedMapAdapter.adapt(this.delegate.tailMap(fromKey));
     }
 
+    @Override
     public MutableSortedMap<K, V> subMap(K fromKey, K toKey)
     {
         return SortedMapAdapter.adapt(this.delegate.subMap(fromKey, toKey));
     }
 
+    @Override
     public void clear()
     {
         this.delegate.clear();
     }
 
+    @Override
     public V get(Object key)
     {
         return this.delegate.get(key);
     }
 
+    @Override
     public V put(K key, V value)
     {
         return this.delegate.put(key, value);
     }
 
+    @Override
     public V removeKey(K key)
     {
         return this.delegate.remove(key);
@@ -206,11 +226,13 @@ public class SortedMapAdapter<K, V>
         return this.delegate.hashCode();
     }
 
+    @Override
     public MutableSortedMap<K, V> toReversed()
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".toReversed() not implemented yet");
     }
 
+    @Override
     public MutableSortedMap<K, V> take(int count)
     {
         if (count < 0)
@@ -229,11 +251,13 @@ public class SortedMapAdapter<K, V>
         return output;
     }
 
+    @Override
     public MutableSortedMap<K, V> takeWhile(Predicate<? super V> predicate)
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".takeWhile() not implemented yet");
     }
 
+    @Override
     public MutableSortedMap<K, V> drop(int count)
     {
         if (count < 0)
@@ -265,16 +289,19 @@ public class SortedMapAdapter<K, V>
         return output;
     }
 
+    @Override
     public MutableSortedMap<K, V> dropWhile(Predicate<? super V> predicate)
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".dropWhile() not implemented yet");
     }
 
+    @Override
     public PartitionMutableList<V> partitionWhile(Predicate<? super V> predicate)
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".partitionWhile() not implemented yet");
     }
 
+    @Override
     public MutableList<V> distinct()
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".distinct() not implemented yet");

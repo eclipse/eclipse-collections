@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -75,79 +75,115 @@ public interface MutableStack<T> extends StackIterable<T>
 
     void clear();
 
+    @Override
     MutableStack<T> takeWhile(Predicate<? super T> predicate);
 
+    @Override
     MutableStack<T> dropWhile(Predicate<? super T> predicate);
 
+    @Override
     PartitionMutableStack<T> partitionWhile(Predicate<? super T> predicate);
 
+    @Override
     MutableStack<T> distinct();
 
     MutableStack<T> asUnmodifiable();
 
     MutableStack<T> asSynchronized();
 
+    @Override
     MutableStack<T> tap(Procedure<? super T> procedure);
 
+    @Override
     MutableStack<T> select(Predicate<? super T> predicate);
 
+    @Override
     <P> MutableStack<T> selectWith(Predicate2<? super T, ? super P> predicate, P parameter);
 
+    @Override
     MutableStack<T> reject(Predicate<? super T> predicate);
 
+    @Override
     <P> MutableStack<T> rejectWith(Predicate2<? super T, ? super P> predicate, P parameter);
 
+    @Override
     <S> MutableStack<S> selectInstancesOf(Class<S> clazz);
 
+    @Override
     PartitionMutableStack<T> partition(Predicate<? super T> predicate);
 
+    @Override
     <P> PartitionMutableStack<T> partitionWith(Predicate2<? super T, ? super P> predicate, P parameter);
 
+    @Override
     <V> MutableStack<V> collect(Function<? super T, ? extends V> function);
 
+    @Override
     MutableBooleanStack collectBoolean(BooleanFunction<? super T> booleanFunction);
 
+    @Override
     MutableByteStack collectByte(ByteFunction<? super T> byteFunction);
 
+    @Override
     MutableCharStack collectChar(CharFunction<? super T> charFunction);
 
+    @Override
     MutableDoubleStack collectDouble(DoubleFunction<? super T> doubleFunction);
 
+    @Override
     MutableFloatStack collectFloat(FloatFunction<? super T> floatFunction);
 
+    @Override
     MutableIntStack collectInt(IntFunction<? super T> intFunction);
 
+    @Override
     MutableLongStack collectLong(LongFunction<? super T> longFunction);
 
+    @Override
     MutableShortStack collectShort(ShortFunction<? super T> shortFunction);
 
+    @Override
     <P, V> MutableStack<V> collectWith(Function2<? super T, ? super P, ? extends V> function, P parameter);
 
+    @Override
     <V> MutableStack<V> collectIf(Predicate<? super T> predicate, Function<? super T, ? extends V> function);
 
+    @Override
     <V> MutableStack<V> collectWithIndex(ObjectIntToObjectFunction<? super T, ? extends V> function);
 
+    @Override
     <V> MutableStack<V> flatCollect(Function<? super T, ? extends Iterable<V>> function);
 
+    @Override
     <V> MutableObjectLongMap<V> sumByInt(Function<? super T, ? extends V> groupBy, IntFunction<? super T> function);
 
+    @Override
     <V> MutableObjectDoubleMap<V> sumByFloat(Function<? super T, ? extends V> groupBy, FloatFunction<? super T> function);
 
+    @Override
     <V> MutableObjectLongMap<V> sumByLong(Function<? super T, ? extends V> groupBy, LongFunction<? super T> function);
 
+    @Override
     <V> MutableObjectDoubleMap<V> sumByDouble(Function<? super T, ? extends V> groupBy, DoubleFunction<? super T> function);
 
+    @Override
     <V> MutableListMultimap<V, T> groupBy(Function<? super T, ? extends V> function);
 
+    @Override
     <V> MutableListMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function);
 
+    @Override
     <V> MutableMap<V, T> groupByUniqueKey(Function<? super T, ? extends V> function);
 
+    @Override
     <S> MutableStack<Pair<T, S>> zip(Iterable<S> that);
 
+    @Override
     MutableStack<Pair<T, Integer>> zipWithIndex();
 
+    @Override
     <K, V> MutableMap<K, V> aggregateInPlaceBy(Function<? super T, ? extends K> groupBy, Function0<? extends V> zeroValueFactory, Procedure2<? super V, ? super T> mutatingAggregator);
 
+    @Override
     <K, V> MutableMap<K, V> aggregateBy(Function<? super T, ? extends K> groupBy, Function0<? extends V> zeroValueFactory, Function2<? super V, ? super T, ? extends V> nonMutatingAggregator);
 }

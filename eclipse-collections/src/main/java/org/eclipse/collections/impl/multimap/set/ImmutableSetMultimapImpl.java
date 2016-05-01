@@ -59,11 +59,13 @@ public final class ImmutableSetMultimapImpl<K, V>
         return Sets.immutable.empty();
     }
 
+    @Override
     public ImmutableSetMultimap<K, V> newEmpty()
     {
         return new ImmutableSetMultimapImpl<>(Maps.immutable.with());
     }
 
+    @Override
     public MutableSetMultimap<K, V> toMutable()
     {
         return new UnifiedSetMultimap<>(this);
@@ -127,36 +129,43 @@ public final class ImmutableSetMultimapImpl<K, V>
         return (ImmutableSetMultimap<K, V>) super.newWithoutAll(key);
     }
 
+    @Override
     public ImmutableSetMultimap<V, K> flip()
     {
         return Iterate.flip(this).toImmutable();
     }
 
+    @Override
     public ImmutableSetMultimap<K, V> selectKeysValues(Predicate2<? super K, ? super V> predicate)
     {
         return this.selectKeysValues(predicate, UnifiedSetMultimap.newMultimap()).toImmutable();
     }
 
+    @Override
     public ImmutableSetMultimap<K, V> rejectKeysValues(Predicate2<? super K, ? super V> predicate)
     {
         return this.rejectKeysValues(predicate, UnifiedSetMultimap.newMultimap()).toImmutable();
     }
 
+    @Override
     public ImmutableSetMultimap<K, V> selectKeysMultiValues(Predicate2<? super K, ? super Iterable<V>> predicate)
     {
         return this.selectKeysMultiValues(predicate, UnifiedSetMultimap.newMultimap()).toImmutable();
     }
 
+    @Override
     public ImmutableSetMultimap<K, V> rejectKeysMultiValues(Predicate2<? super K, ? super Iterable<V>> predicate)
     {
         return this.rejectKeysMultiValues(predicate, UnifiedSetMultimap.newMultimap()).toImmutable();
     }
 
+    @Override
     public <K2, V2> ImmutableBagMultimap<K2, V2> collectKeysValues(Function2<? super K, ? super V, Pair<K2, V2>> function)
     {
         return this.collectKeysValues(function, HashBagMultimap.newMultimap()).toImmutable();
     }
 
+    @Override
     public <V2> ImmutableBagMultimap<K, V2> collectValues(Function<? super V, ? extends V2> function)
     {
         return this.collectValues(function, HashBagMultimap.<K, V2>newMultimap()).toImmutable();

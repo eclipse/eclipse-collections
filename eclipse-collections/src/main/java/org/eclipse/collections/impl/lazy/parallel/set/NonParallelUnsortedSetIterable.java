@@ -29,61 +29,73 @@ public class NonParallelUnsortedSetIterable<T> extends NonParallelIterable<T, Un
         super(delegate);
     }
 
+    @Override
     public ParallelUnsortedSetIterable<T> asUnique()
     {
         return this;
     }
 
+    @Override
     public ParallelUnsortedSetIterable<T> select(Predicate<? super T> predicate)
     {
         return new NonParallelUnsortedSetIterable<>(this.delegate.select(predicate));
     }
 
+    @Override
     public <P> ParallelUnsortedSetIterable<T> selectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         return new NonParallelUnsortedSetIterable<>(this.delegate.selectWith(predicate, parameter));
     }
 
+    @Override
     public ParallelUnsortedSetIterable<T> reject(Predicate<? super T> predicate)
     {
         return new NonParallelUnsortedSetIterable<>(this.delegate.reject(predicate));
     }
 
+    @Override
     public <P> ParallelUnsortedSetIterable<T> rejectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         return new NonParallelUnsortedSetIterable<>(this.delegate.rejectWith(predicate, parameter));
     }
 
+    @Override
     public <S> ParallelUnsortedSetIterable<S> selectInstancesOf(Class<S> clazz)
     {
         return new NonParallelUnsortedSetIterable<>(this.delegate.selectInstancesOf(clazz));
     }
 
+    @Override
     public <V> ParallelIterable<V> collect(Function<? super T, ? extends V> function)
     {
         return new NonParallelUnsortedBag<>(this.delegate.collect(function, new HashBag<>()));
     }
 
+    @Override
     public <P, V> ParallelIterable<V> collectWith(Function2<? super T, ? super P, ? extends V> function, P parameter)
     {
         return new NonParallelUnsortedBag<>(this.delegate.collectWith(function, parameter, new HashBag<>()));
     }
 
+    @Override
     public <V> ParallelIterable<V> collectIf(Predicate<? super T> predicate, Function<? super T, ? extends V> function)
     {
         return new NonParallelUnsortedBag<>(this.delegate.collectIf(predicate, function, new HashBag<>()));
     }
 
+    @Override
     public <V> ParallelIterable<V> flatCollect(Function<? super T, ? extends Iterable<V>> function)
     {
         return new NonParallelUnsortedBag<>(this.delegate.flatCollect(function, new HashBag<>()));
     }
 
+    @Override
     public <V> UnsortedSetMultimap<V, T> groupBy(Function<? super T, ? extends V> function)
     {
         return this.delegate.groupBy(function);
     }
 
+    @Override
     public <V> UnsortedSetMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function)
     {
         return this.delegate.groupByEach(function);

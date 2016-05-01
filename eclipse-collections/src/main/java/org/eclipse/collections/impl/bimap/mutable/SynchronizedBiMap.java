@@ -82,6 +82,7 @@ public class SynchronizedBiMap<K, V> extends AbstractSynchronizedMapIterable<K, 
         return (MutableBiMap<K, V>) super.getDelegate();
     }
 
+    @Override
     public V forcePut(K key, V value)
     {
         synchronized (this.lock)
@@ -90,16 +91,19 @@ public class SynchronizedBiMap<K, V> extends AbstractSynchronizedMapIterable<K, 
         }
     }
 
+    @Override
     public MutableBiMap<K, V> asSynchronized()
     {
         return this;
     }
 
+    @Override
     public MutableBiMap<K, V> asUnmodifiable()
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".asUnmodifiable() not implemented yet");
     }
 
+    @Override
     public MutableBiMap<K, V> clone()
     {
         synchronized (this.lock)
@@ -108,6 +112,7 @@ public class SynchronizedBiMap<K, V> extends AbstractSynchronizedMapIterable<K, 
         }
     }
 
+    @Override
     public MutableBiMap<K, V> tap(Procedure<? super V> procedure)
     {
         synchronized (this.lock)
@@ -117,6 +122,7 @@ public class SynchronizedBiMap<K, V> extends AbstractSynchronizedMapIterable<K, 
         }
     }
 
+    @Override
     public <K2, V2> MutableBiMap<K2, V2> collect(Function2<? super K, ? super V, Pair<K2, V2>> function)
     {
         synchronized (this.lock)
@@ -125,6 +131,7 @@ public class SynchronizedBiMap<K, V> extends AbstractSynchronizedMapIterable<K, 
         }
     }
 
+    @Override
     public <R> MutableBiMap<K, R> collectValues(Function2<? super K, ? super V, ? extends R> function)
     {
         synchronized (this.lock)
@@ -133,6 +140,7 @@ public class SynchronizedBiMap<K, V> extends AbstractSynchronizedMapIterable<K, 
         }
     }
 
+    @Override
     public MutableSet<V> select(Predicate<? super V> predicate)
     {
         synchronized (this.lock)
@@ -141,6 +149,7 @@ public class SynchronizedBiMap<K, V> extends AbstractSynchronizedMapIterable<K, 
         }
     }
 
+    @Override
     public MutableBiMap<K, V> select(Predicate2<? super K, ? super V> predicate)
     {
         synchronized (this.lock)
@@ -149,6 +158,7 @@ public class SynchronizedBiMap<K, V> extends AbstractSynchronizedMapIterable<K, 
         }
     }
 
+    @Override
     public <P> MutableSet<V> selectWith(Predicate2<? super V, ? super P> predicate, P parameter)
     {
         synchronized (this.lock)
@@ -157,6 +167,7 @@ public class SynchronizedBiMap<K, V> extends AbstractSynchronizedMapIterable<K, 
         }
     }
 
+    @Override
     public <S> MutableSet<S> selectInstancesOf(Class<S> clazz)
     {
         synchronized (this.lock)
@@ -165,6 +176,7 @@ public class SynchronizedBiMap<K, V> extends AbstractSynchronizedMapIterable<K, 
         }
     }
 
+    @Override
     public MutableSet<V> reject(Predicate<? super V> predicate)
     {
         synchronized (this.lock)
@@ -173,6 +185,7 @@ public class SynchronizedBiMap<K, V> extends AbstractSynchronizedMapIterable<K, 
         }
     }
 
+    @Override
     public MutableBiMap<K, V> reject(Predicate2<? super K, ? super V> predicate)
     {
         synchronized (this.lock)
@@ -181,6 +194,7 @@ public class SynchronizedBiMap<K, V> extends AbstractSynchronizedMapIterable<K, 
         }
     }
 
+    @Override
     public <P> MutableSet<V> rejectWith(Predicate2<? super V, ? super P> predicate, P parameter)
     {
         synchronized (this.lock)
@@ -189,6 +203,7 @@ public class SynchronizedBiMap<K, V> extends AbstractSynchronizedMapIterable<K, 
         }
     }
 
+    @Override
     public PartitionMutableSet<V> partition(Predicate<? super V> predicate)
     {
         synchronized (this.lock)
@@ -197,6 +212,7 @@ public class SynchronizedBiMap<K, V> extends AbstractSynchronizedMapIterable<K, 
         }
     }
 
+    @Override
     public <P> PartitionMutableSet<V> partitionWith(Predicate2<? super V, ? super P> predicate, P parameter)
     {
         synchronized (this.lock)
@@ -205,6 +221,7 @@ public class SynchronizedBiMap<K, V> extends AbstractSynchronizedMapIterable<K, 
         }
     }
 
+    @Override
     public <V1> RichIterable<V1> collect(Function<? super V, ? extends V1> function)
     {
         synchronized (this.lock)
@@ -213,6 +230,7 @@ public class SynchronizedBiMap<K, V> extends AbstractSynchronizedMapIterable<K, 
         }
     }
 
+    @Override
     public BooleanIterable collectBoolean(BooleanFunction<? super V> booleanFunction)
     {
         synchronized (this.lock)
@@ -221,6 +239,7 @@ public class SynchronizedBiMap<K, V> extends AbstractSynchronizedMapIterable<K, 
         }
     }
 
+    @Override
     public ByteIterable collectByte(ByteFunction<? super V> byteFunction)
     {
         synchronized (this.lock)
@@ -229,6 +248,7 @@ public class SynchronizedBiMap<K, V> extends AbstractSynchronizedMapIterable<K, 
         }
     }
 
+    @Override
     public CharIterable collectChar(CharFunction<? super V> charFunction)
     {
         synchronized (this.lock)
@@ -237,6 +257,7 @@ public class SynchronizedBiMap<K, V> extends AbstractSynchronizedMapIterable<K, 
         }
     }
 
+    @Override
     public DoubleIterable collectDouble(DoubleFunction<? super V> doubleFunction)
     {
         synchronized (this.lock)
@@ -245,6 +266,7 @@ public class SynchronizedBiMap<K, V> extends AbstractSynchronizedMapIterable<K, 
         }
     }
 
+    @Override
     public FloatIterable collectFloat(FloatFunction<? super V> floatFunction)
     {
         synchronized (this.lock)
@@ -253,6 +275,7 @@ public class SynchronizedBiMap<K, V> extends AbstractSynchronizedMapIterable<K, 
         }
     }
 
+    @Override
     public IntIterable collectInt(IntFunction<? super V> intFunction)
     {
         synchronized (this.lock)
@@ -261,6 +284,7 @@ public class SynchronizedBiMap<K, V> extends AbstractSynchronizedMapIterable<K, 
         }
     }
 
+    @Override
     public LongIterable collectLong(LongFunction<? super V> longFunction)
     {
         synchronized (this.lock)
@@ -269,6 +293,7 @@ public class SynchronizedBiMap<K, V> extends AbstractSynchronizedMapIterable<K, 
         }
     }
 
+    @Override
     public ShortIterable collectShort(ShortFunction<? super V> shortFunction)
     {
         synchronized (this.lock)
@@ -277,6 +302,7 @@ public class SynchronizedBiMap<K, V> extends AbstractSynchronizedMapIterable<K, 
         }
     }
 
+    @Override
     public <P, V1> RichIterable<V1> collectWith(Function2<? super V, ? super P, ? extends V1> function, P parameter)
     {
         synchronized (this.lock)
@@ -285,6 +311,7 @@ public class SynchronizedBiMap<K, V> extends AbstractSynchronizedMapIterable<K, 
         }
     }
 
+    @Override
     public <V1> RichIterable<V1> collectIf(Predicate<? super V> predicate, Function<? super V, ? extends V1> function)
     {
         synchronized (this.lock)
@@ -293,6 +320,7 @@ public class SynchronizedBiMap<K, V> extends AbstractSynchronizedMapIterable<K, 
         }
     }
 
+    @Override
     public <V1> RichIterable<V1> flatCollect(Function<? super V, ? extends Iterable<V1>> function)
     {
         synchronized (this.lock)
@@ -301,6 +329,7 @@ public class SynchronizedBiMap<K, V> extends AbstractSynchronizedMapIterable<K, 
         }
     }
 
+    @Override
     public <V1> MutableSetMultimap<V1, V> groupBy(Function<? super V, ? extends V1> function)
     {
         synchronized (this.lock)
@@ -309,6 +338,7 @@ public class SynchronizedBiMap<K, V> extends AbstractSynchronizedMapIterable<K, 
         }
     }
 
+    @Override
     public <V1> MutableSetMultimap<V1, V> groupByEach(Function<? super V, ? extends Iterable<V1>> function)
     {
         synchronized (this.lock)
@@ -317,6 +347,7 @@ public class SynchronizedBiMap<K, V> extends AbstractSynchronizedMapIterable<K, 
         }
     }
 
+    @Override
     public MutableSetMultimap<V, K> flip()
     {
         synchronized (this.lock)
@@ -325,6 +356,7 @@ public class SynchronizedBiMap<K, V> extends AbstractSynchronizedMapIterable<K, 
         }
     }
 
+    @Override
     public MutableBiMap<K, V> newEmpty()
     {
         synchronized (this.lock)
@@ -333,6 +365,7 @@ public class SynchronizedBiMap<K, V> extends AbstractSynchronizedMapIterable<K, 
         }
     }
 
+    @Override
     public MutableBiMap<V, K> inverse()
     {
         synchronized (this.lock)
@@ -341,6 +374,7 @@ public class SynchronizedBiMap<K, V> extends AbstractSynchronizedMapIterable<K, 
         }
     }
 
+    @Override
     public MutableBiMap<V, K> flipUniqueValues()
     {
         synchronized (this.lock)
@@ -349,16 +383,19 @@ public class SynchronizedBiMap<K, V> extends AbstractSynchronizedMapIterable<K, 
         }
     }
 
+    @Override
     public RichIterable<K> keysView()
     {
         return LazyIterate.adapt(this.keySet());
     }
 
+    @Override
     public RichIterable<V> valuesView()
     {
         return LazyIterate.adapt(this.values());
     }
 
+    @Override
     public ImmutableBiMap<K, V> toImmutable()
     {
         synchronized (this.lock)
@@ -370,6 +407,7 @@ public class SynchronizedBiMap<K, V> extends AbstractSynchronizedMapIterable<K, 
     /**
      * @deprecated in 8.0. Use {@link OrderedIterable#zipWithIndex()} instead.
      */
+    @Override
     @Deprecated
     public MutableSet<Pair<V, Integer>> zipWithIndex()
     {
@@ -391,6 +429,7 @@ public class SynchronizedBiMap<K, V> extends AbstractSynchronizedMapIterable<K, 
     /**
      * @deprecated in 8.0. Use {@link OrderedIterable#zip(Iterable)} instead.
      */
+    @Override
     @Deprecated
     public <S> MutableSet<Pair<V, S>> zip(Iterable<S> that)
     {
@@ -400,6 +439,7 @@ public class SynchronizedBiMap<K, V> extends AbstractSynchronizedMapIterable<K, 
         }
     }
 
+    @Override
     public MutableBiMap<K, V> withKeyValue(K key, V value)
     {
         synchronized (this.lock)
@@ -409,6 +449,7 @@ public class SynchronizedBiMap<K, V> extends AbstractSynchronizedMapIterable<K, 
         }
     }
 
+    @Override
     public MutableBiMap<K, V> withAllKeyValues(Iterable<? extends Pair<? extends K, ? extends V>> keyValues)
     {
         synchronized (this.lock)
@@ -421,11 +462,13 @@ public class SynchronizedBiMap<K, V> extends AbstractSynchronizedMapIterable<K, 
         }
     }
 
+    @Override
     public MutableBiMap<K, V> withAllKeyValueArguments(Pair<? extends K, ? extends V>... keyValuePairs)
     {
         return this.withAllKeyValues(ArrayAdapter.adapt(keyValuePairs));
     }
 
+    @Override
     public MutableBiMap<K, V> withoutKey(K key)
     {
         synchronized (this.lock)
@@ -435,6 +478,7 @@ public class SynchronizedBiMap<K, V> extends AbstractSynchronizedMapIterable<K, 
         }
     }
 
+    @Override
     public MutableBiMap<K, V> withoutAllKeys(Iterable<? extends K> keys)
     {
         synchronized (this.lock)
@@ -447,6 +491,7 @@ public class SynchronizedBiMap<K, V> extends AbstractSynchronizedMapIterable<K, 
         }
     }
 
+    @Override
     public Set<K> keySet()
     {
         synchronized (this.lock)
@@ -455,6 +500,7 @@ public class SynchronizedBiMap<K, V> extends AbstractSynchronizedMapIterable<K, 
         }
     }
 
+    @Override
     public Collection<V> values()
     {
         synchronized (this.lock)
@@ -463,6 +509,7 @@ public class SynchronizedBiMap<K, V> extends AbstractSynchronizedMapIterable<K, 
         }
     }
 
+    @Override
     public Set<Entry<K, V>> entrySet()
     {
         synchronized (this.lock)

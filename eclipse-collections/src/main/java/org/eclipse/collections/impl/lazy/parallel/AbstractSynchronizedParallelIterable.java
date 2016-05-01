@@ -70,6 +70,7 @@ public abstract class AbstractSynchronizedParallelIterable<T, PI extends Paralle
         return new SynchronizedParallelIterable<>(wrapped, this.lock);
     }
 
+    @Override
     public void forEach(Procedure<? super T> procedure)
     {
         synchronized (this.lock)
@@ -78,6 +79,7 @@ public abstract class AbstractSynchronizedParallelIterable<T, PI extends Paralle
         }
     }
 
+    @Override
     public <P> void forEachWith(Procedure2<? super T, ? super P> procedure, P parameter)
     {
         synchronized (this.lock)
@@ -86,6 +88,7 @@ public abstract class AbstractSynchronizedParallelIterable<T, PI extends Paralle
         }
     }
 
+    @Override
     public T detect(Predicate<? super T> predicate)
     {
         synchronized (this.lock)
@@ -94,6 +97,7 @@ public abstract class AbstractSynchronizedParallelIterable<T, PI extends Paralle
         }
     }
 
+    @Override
     public <P> T detectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         synchronized (this.lock)
@@ -102,6 +106,7 @@ public abstract class AbstractSynchronizedParallelIterable<T, PI extends Paralle
         }
     }
 
+    @Override
     public T detectIfNone(Predicate<? super T> predicate, Function0<? extends T> function)
     {
         synchronized (this.lock)
@@ -110,6 +115,7 @@ public abstract class AbstractSynchronizedParallelIterable<T, PI extends Paralle
         }
     }
 
+    @Override
     public <P> T detectWithIfNone(Predicate2<? super T, ? super P> predicate, P parameter, Function0<? extends T> function)
     {
         synchronized (this.lock)
@@ -118,6 +124,7 @@ public abstract class AbstractSynchronizedParallelIterable<T, PI extends Paralle
         }
     }
 
+    @Override
     public int count(Predicate<? super T> predicate)
     {
         synchronized (this.lock)
@@ -126,6 +133,7 @@ public abstract class AbstractSynchronizedParallelIterable<T, PI extends Paralle
         }
     }
 
+    @Override
     public <P> int countWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         synchronized (this.lock)
@@ -134,6 +142,7 @@ public abstract class AbstractSynchronizedParallelIterable<T, PI extends Paralle
         }
     }
 
+    @Override
     public boolean anySatisfy(Predicate<? super T> predicate)
     {
         synchronized (this.lock)
@@ -142,6 +151,7 @@ public abstract class AbstractSynchronizedParallelIterable<T, PI extends Paralle
         }
     }
 
+    @Override
     public <P> boolean anySatisfyWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         synchronized (this.lock)
@@ -150,6 +160,7 @@ public abstract class AbstractSynchronizedParallelIterable<T, PI extends Paralle
         }
     }
 
+    @Override
     public boolean allSatisfy(Predicate<? super T> predicate)
     {
         synchronized (this.lock)
@@ -158,6 +169,7 @@ public abstract class AbstractSynchronizedParallelIterable<T, PI extends Paralle
         }
     }
 
+    @Override
     public <P> boolean allSatisfyWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         synchronized (this.lock)
@@ -166,6 +178,7 @@ public abstract class AbstractSynchronizedParallelIterable<T, PI extends Paralle
         }
     }
 
+    @Override
     public boolean noneSatisfy(Predicate<? super T> predicate)
     {
         synchronized (this.lock)
@@ -174,6 +187,7 @@ public abstract class AbstractSynchronizedParallelIterable<T, PI extends Paralle
         }
     }
 
+    @Override
     public <P> boolean noneSatisfyWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         synchronized (this.lock)
@@ -182,6 +196,7 @@ public abstract class AbstractSynchronizedParallelIterable<T, PI extends Paralle
         }
     }
 
+    @Override
     public MutableList<T> toList()
     {
         synchronized (this.lock)
@@ -190,6 +205,7 @@ public abstract class AbstractSynchronizedParallelIterable<T, PI extends Paralle
         }
     }
 
+    @Override
     public MutableList<T> toSortedList()
     {
         synchronized (this.lock)
@@ -198,6 +214,7 @@ public abstract class AbstractSynchronizedParallelIterable<T, PI extends Paralle
         }
     }
 
+    @Override
     public MutableList<T> toSortedList(Comparator<? super T> comparator)
     {
         synchronized (this.lock)
@@ -206,6 +223,7 @@ public abstract class AbstractSynchronizedParallelIterable<T, PI extends Paralle
         }
     }
 
+    @Override
     public <V extends Comparable<? super V>> MutableList<T> toSortedListBy(Function<? super T, ? extends V> function)
     {
         synchronized (this.lock)
@@ -214,6 +232,7 @@ public abstract class AbstractSynchronizedParallelIterable<T, PI extends Paralle
         }
     }
 
+    @Override
     public MutableSet<T> toSet()
     {
         synchronized (this.lock)
@@ -222,6 +241,7 @@ public abstract class AbstractSynchronizedParallelIterable<T, PI extends Paralle
         }
     }
 
+    @Override
     public MutableSortedSet<T> toSortedSet()
     {
         synchronized (this.lock)
@@ -230,6 +250,7 @@ public abstract class AbstractSynchronizedParallelIterable<T, PI extends Paralle
         }
     }
 
+    @Override
     public MutableSortedSet<T> toSortedSet(Comparator<? super T> comparator)
     {
         synchronized (this.lock)
@@ -238,6 +259,7 @@ public abstract class AbstractSynchronizedParallelIterable<T, PI extends Paralle
         }
     }
 
+    @Override
     public <V extends Comparable<? super V>> MutableSortedSet<T> toSortedSetBy(Function<? super T, ? extends V> function)
     {
         synchronized (this.lock)
@@ -246,6 +268,7 @@ public abstract class AbstractSynchronizedParallelIterable<T, PI extends Paralle
         }
     }
 
+    @Override
     public MutableBag<T> toBag()
     {
         synchronized (this.lock)
@@ -254,6 +277,7 @@ public abstract class AbstractSynchronizedParallelIterable<T, PI extends Paralle
         }
     }
 
+    @Override
     public MutableSortedBag<T> toSortedBag()
     {
         synchronized (this.lock)
@@ -262,6 +286,7 @@ public abstract class AbstractSynchronizedParallelIterable<T, PI extends Paralle
         }
     }
 
+    @Override
     public MutableSortedBag<T> toSortedBag(Comparator<? super T> comparator)
     {
         synchronized (this.lock)
@@ -270,6 +295,7 @@ public abstract class AbstractSynchronizedParallelIterable<T, PI extends Paralle
         }
     }
 
+    @Override
     public <V extends Comparable<? super V>> MutableSortedBag<T> toSortedBagBy(Function<? super T, ? extends V> function)
     {
         synchronized (this.lock)
@@ -278,6 +304,7 @@ public abstract class AbstractSynchronizedParallelIterable<T, PI extends Paralle
         }
     }
 
+    @Override
     public <NK, NV> MutableMap<NK, NV> toMap(Function<? super T, ? extends NK> keyFunction, Function<? super T, ? extends NV> valueFunction)
     {
         synchronized (this.lock)
@@ -286,6 +313,7 @@ public abstract class AbstractSynchronizedParallelIterable<T, PI extends Paralle
         }
     }
 
+    @Override
     public <NK, NV> MutableSortedMap<NK, NV> toSortedMap(Function<? super T, ? extends NK> keyFunction, Function<? super T, ? extends NV> valueFunction)
     {
         synchronized (this.lock)
@@ -294,6 +322,7 @@ public abstract class AbstractSynchronizedParallelIterable<T, PI extends Paralle
         }
     }
 
+    @Override
     public <NK, NV> MutableSortedMap<NK, NV> toSortedMap(Comparator<? super NK> comparator, Function<? super T, ? extends NK> keyFunction, Function<? super T, ? extends NV> valueFunction)
     {
         synchronized (this.lock)
@@ -302,6 +331,7 @@ public abstract class AbstractSynchronizedParallelIterable<T, PI extends Paralle
         }
     }
 
+    @Override
     public Object[] toArray()
     {
         synchronized (this.lock)
@@ -310,6 +340,7 @@ public abstract class AbstractSynchronizedParallelIterable<T, PI extends Paralle
         }
     }
 
+    @Override
     public <T1> T1[] toArray(T1[] target)
     {
         synchronized (this.lock)
@@ -318,6 +349,7 @@ public abstract class AbstractSynchronizedParallelIterable<T, PI extends Paralle
         }
     }
 
+    @Override
     public T min(Comparator<? super T> comparator)
     {
         synchronized (this.lock)
@@ -326,6 +358,7 @@ public abstract class AbstractSynchronizedParallelIterable<T, PI extends Paralle
         }
     }
 
+    @Override
     public T max(Comparator<? super T> comparator)
     {
         synchronized (this.lock)
@@ -334,6 +367,7 @@ public abstract class AbstractSynchronizedParallelIterable<T, PI extends Paralle
         }
     }
 
+    @Override
     public T min()
     {
         synchronized (this.lock)
@@ -342,6 +376,7 @@ public abstract class AbstractSynchronizedParallelIterable<T, PI extends Paralle
         }
     }
 
+    @Override
     public T max()
     {
         synchronized (this.lock)
@@ -350,6 +385,7 @@ public abstract class AbstractSynchronizedParallelIterable<T, PI extends Paralle
         }
     }
 
+    @Override
     public <V extends Comparable<? super V>> T minBy(Function<? super T, ? extends V> function)
     {
         synchronized (this.lock)
@@ -358,6 +394,7 @@ public abstract class AbstractSynchronizedParallelIterable<T, PI extends Paralle
         }
     }
 
+    @Override
     public <V extends Comparable<? super V>> T maxBy(Function<? super T, ? extends V> function)
     {
         synchronized (this.lock)
@@ -366,6 +403,7 @@ public abstract class AbstractSynchronizedParallelIterable<T, PI extends Paralle
         }
     }
 
+    @Override
     public long sumOfInt(IntFunction<? super T> function)
     {
         synchronized (this.lock)
@@ -374,6 +412,7 @@ public abstract class AbstractSynchronizedParallelIterable<T, PI extends Paralle
         }
     }
 
+    @Override
     public double sumOfFloat(FloatFunction<? super T> function)
     {
         synchronized (this.lock)
@@ -382,6 +421,7 @@ public abstract class AbstractSynchronizedParallelIterable<T, PI extends Paralle
         }
     }
 
+    @Override
     public long sumOfLong(LongFunction<? super T> function)
     {
         synchronized (this.lock)
@@ -390,6 +430,7 @@ public abstract class AbstractSynchronizedParallelIterable<T, PI extends Paralle
         }
     }
 
+    @Override
     public double sumOfDouble(DoubleFunction<? super T> function)
     {
         synchronized (this.lock)
@@ -398,6 +439,7 @@ public abstract class AbstractSynchronizedParallelIterable<T, PI extends Paralle
         }
     }
 
+    @Override
     public String makeString()
     {
         synchronized (this.lock)
@@ -406,6 +448,7 @@ public abstract class AbstractSynchronizedParallelIterable<T, PI extends Paralle
         }
     }
 
+    @Override
     public String makeString(String separator)
     {
         synchronized (this.lock)
@@ -414,6 +457,7 @@ public abstract class AbstractSynchronizedParallelIterable<T, PI extends Paralle
         }
     }
 
+    @Override
     public String makeString(String start, String separator, String end)
     {
         synchronized (this.lock)
@@ -422,6 +466,7 @@ public abstract class AbstractSynchronizedParallelIterable<T, PI extends Paralle
         }
     }
 
+    @Override
     public void appendString(Appendable appendable)
     {
         synchronized (this.lock)
@@ -430,6 +475,7 @@ public abstract class AbstractSynchronizedParallelIterable<T, PI extends Paralle
         }
     }
 
+    @Override
     public void appendString(Appendable appendable, String separator)
     {
         synchronized (this.lock)
@@ -438,6 +484,7 @@ public abstract class AbstractSynchronizedParallelIterable<T, PI extends Paralle
         }
     }
 
+    @Override
     public void appendString(Appendable appendable, String start, String separator, String end)
     {
         synchronized (this.lock)
@@ -446,6 +493,7 @@ public abstract class AbstractSynchronizedParallelIterable<T, PI extends Paralle
         }
     }
 
+    @Override
     public <V> MapIterable<V, T> groupByUniqueKey(Function<? super T, ? extends V> function)
     {
         synchronized (this.lock)
@@ -454,6 +502,7 @@ public abstract class AbstractSynchronizedParallelIterable<T, PI extends Paralle
         }
     }
 
+    @Override
     public <K, V> MapIterable<K, V> aggregateInPlaceBy(Function<? super T, ? extends K> groupBy, Function0<? extends V> zeroValueFactory, Procedure2<? super V, ? super T> mutatingAggregator)
     {
         synchronized (this.lock)
@@ -462,6 +511,7 @@ public abstract class AbstractSynchronizedParallelIterable<T, PI extends Paralle
         }
     }
 
+    @Override
     public <K, V> MapIterable<K, V> aggregateBy(Function<? super T, ? extends K> groupBy, Function0<? extends V> zeroValueFactory, Function2<? super V, ? super T, ? extends V> nonMutatingAggregator)
     {
         synchronized (this.lock)

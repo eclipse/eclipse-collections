@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -35,11 +35,13 @@ public final class TakeIterator<T> implements Iterator<T>
         this.count = count;
     }
 
+    @Override
     public boolean hasNext()
     {
         return this.currentIndex < this.count && this.iterator.hasNext();
     }
 
+    @Override
     public T next()
     {
         if (this.hasNext())
@@ -50,6 +52,7 @@ public final class TakeIterator<T> implements Iterator<T>
         throw new NoSuchElementException();
     }
 
+    @Override
     public void remove()
     {
         throw new UnsupportedOperationException("Cannot remove from a take iterator");

@@ -510,6 +510,7 @@ public abstract class Predicates<T>
             this.predicate = newPredicate;
         }
 
+        @Override
         public boolean accept(T o)
         {
             return this.predicate.accept(o);
@@ -536,6 +537,7 @@ public abstract class Predicates<T>
             this.predicate = newPredicate;
         }
 
+        @Override
         public boolean accept(T anObject)
         {
             return this.predicate.accept(this.function.valueOf(anObject));
@@ -556,6 +558,7 @@ public abstract class Predicates<T>
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public boolean accept(Boolean anObject)
         {
             return Boolean.FALSE.equals(anObject);
@@ -566,6 +569,7 @@ public abstract class Predicates<T>
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public boolean accept(Boolean anObject)
         {
             return Boolean.TRUE.equals(anObject);
@@ -616,6 +620,7 @@ public abstract class Predicates<T>
             this.predicate = predicate;
         }
 
+        @Override
         public boolean accept(Iterable<T> iterable)
         {
             return Iterate.anySatisfy(iterable, this.predicate);
@@ -632,6 +637,7 @@ public abstract class Predicates<T>
             this.predicate = predicate;
         }
 
+        @Override
         public boolean accept(Iterable<T> iterable)
         {
             return Iterate.allSatisfy(iterable, this.predicate);
@@ -648,6 +654,7 @@ public abstract class Predicates<T>
             this.predicate = predicate;
         }
 
+        @Override
         public boolean accept(Iterable<T> iterable)
         {
             return Iterate.noneSatisfy(iterable, this.predicate);
@@ -676,6 +683,7 @@ public abstract class Predicates<T>
             super(newCompareTo);
         }
 
+        @Override
         public boolean accept(T o)
         {
             return o.compareTo(this.compareTo) < 0;
@@ -711,6 +719,7 @@ public abstract class Predicates<T>
             super(newCompareFrom, newCompareTo);
         }
 
+        @Override
         public boolean accept(T o)
         {
             return o.compareTo(this.compareFrom) >= 0 && o.compareTo(this.compareTo) <= 0;
@@ -727,6 +736,7 @@ public abstract class Predicates<T>
             super(newCompareFrom, newCompareTo);
         }
 
+        @Override
         public boolean accept(T o)
         {
             return o.compareTo(this.compareFrom) > 0 && o.compareTo(this.compareTo) <= 0;
@@ -743,6 +753,7 @@ public abstract class Predicates<T>
             super(newCompareFrom, newCompareTo);
         }
 
+        @Override
         public boolean accept(T o)
         {
             return o.compareTo(this.compareFrom) >= 0 && o.compareTo(this.compareTo) < 0;
@@ -759,6 +770,7 @@ public abstract class Predicates<T>
             super(newCompareFrom, newCompareTo);
         }
 
+        @Override
         public boolean accept(T o)
         {
             return o.compareTo(this.compareFrom) > 0 && o.compareTo(this.compareTo) < 0;
@@ -775,6 +787,7 @@ public abstract class Predicates<T>
             super(newCompareTo);
         }
 
+        @Override
         public boolean accept(T o)
         {
             return o.compareTo(this.compareTo) <= 0;
@@ -797,6 +810,7 @@ public abstract class Predicates<T>
             super(newCompareTo);
         }
 
+        @Override
         public boolean accept(T o)
         {
             return o.compareTo(this.compareTo) > 0;
@@ -819,6 +833,7 @@ public abstract class Predicates<T>
             super(newCompareTo);
         }
 
+        @Override
         public boolean accept(T o)
         {
             return o.compareTo(this.compareTo) >= 0;
@@ -847,6 +862,7 @@ public abstract class Predicates<T>
             return "and";
         }
 
+        @Override
         public boolean accept(T anObject)
         {
             Predicate<Predicate<? super T>> predicate = aPredicate -> aPredicate.accept(anObject);
@@ -870,6 +886,7 @@ public abstract class Predicates<T>
             return "or";
         }
 
+        @Override
         public boolean accept(T anObject)
         {
             Predicate<Predicate<? super T>> predicate = aPredicate -> aPredicate.accept(anObject);
@@ -893,6 +910,7 @@ public abstract class Predicates<T>
             return "noneOf";
         }
 
+        @Override
         public boolean accept(T anObject)
         {
             Predicate<Predicate<? super T>> predicate = aPredicate -> !aPredicate.accept(anObject);
@@ -933,6 +951,7 @@ public abstract class Predicates<T>
             this.right = two;
         }
 
+        @Override
         public boolean accept(T anObject)
         {
             return this.left.accept(anObject) && this.right.accept(anObject);
@@ -958,6 +977,7 @@ public abstract class Predicates<T>
             this.right = two;
         }
 
+        @Override
         public boolean accept(T anObject)
         {
             return !this.left.accept(anObject) && !this.right.accept(anObject);
@@ -983,6 +1003,7 @@ public abstract class Predicates<T>
             this.right = two;
         }
 
+        @Override
         public boolean accept(T anObject)
         {
             return this.left.accept(anObject) || this.right.accept(anObject);
@@ -1006,6 +1027,7 @@ public abstract class Predicates<T>
             this.predicate = newPredicate;
         }
 
+        @Override
         public boolean accept(T anObject)
         {
             return !this.predicate.accept(anObject);
@@ -1029,6 +1051,7 @@ public abstract class Predicates<T>
             this.compareObject = newCompareObject;
         }
 
+        @Override
         public boolean accept(Object anObject)
         {
             return this.compareObject.equals(anObject);
@@ -1052,6 +1075,7 @@ public abstract class Predicates<T>
             this.collection = collection;
         }
 
+        @Override
         public boolean accept(Object anObject)
         {
             return this.collection.contains(anObject);
@@ -1075,6 +1099,7 @@ public abstract class Predicates<T>
             this.collection = collection;
         }
 
+        @Override
         public boolean accept(Object anObject)
         {
             return !this.collection.contains(anObject);
@@ -1098,6 +1123,7 @@ public abstract class Predicates<T>
             this.setIterable = setIterable;
         }
 
+        @Override
         public boolean accept(Object anObject)
         {
             return this.setIterable.contains(anObject);
@@ -1121,6 +1147,7 @@ public abstract class Predicates<T>
             this.setIterable = setIterable;
         }
 
+        @Override
         public boolean accept(Object anObject)
         {
             return !this.setIterable.contains(anObject);
@@ -1144,6 +1171,7 @@ public abstract class Predicates<T>
             this.set = set;
         }
 
+        @Override
         public boolean accept(Object anObject)
         {
             return this.set.contains(anObject);
@@ -1167,6 +1195,7 @@ public abstract class Predicates<T>
             this.set = set;
         }
 
+        @Override
         public boolean accept(Object anObject)
         {
             return !this.set.contains(anObject);
@@ -1190,6 +1219,7 @@ public abstract class Predicates<T>
             this.compareObject = newCompareObject;
         }
 
+        @Override
         public boolean accept(Object anObject)
         {
             return !this.compareObject.equals(anObject);
@@ -1207,6 +1237,7 @@ public abstract class Predicates<T>
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public boolean accept(Object anObject)
         {
             return anObject == null;
@@ -1224,6 +1255,7 @@ public abstract class Predicates<T>
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public boolean accept(Object anObject)
         {
             return anObject != null;
@@ -1247,6 +1279,7 @@ public abstract class Predicates<T>
             this.clazz = newClass;
         }
 
+        @Override
         public boolean accept(Object anObject)
         {
             return this.clazz.isAssignableFrom(anObject.getClass());
@@ -1270,6 +1303,7 @@ public abstract class Predicates<T>
             this.clazz = newClass;
         }
 
+        @Override
         public boolean accept(Object anObject)
         {
             return this.clazz.isInstance(anObject);
@@ -1293,6 +1327,7 @@ public abstract class Predicates<T>
             this.clazz = newClass;
         }
 
+        @Override
         public boolean accept(Object anObject)
         {
             return !this.clazz.isInstance(anObject);
@@ -1310,6 +1345,7 @@ public abstract class Predicates<T>
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public boolean accept(Object anObject)
         {
             return true;
@@ -1327,6 +1363,7 @@ public abstract class Predicates<T>
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public boolean accept(Object anObject)
         {
             return false;
@@ -1350,6 +1387,7 @@ public abstract class Predicates<T>
             this.twin = object;
         }
 
+        @Override
         public boolean accept(Object anObject)
         {
             return this.twin == anObject;
@@ -1373,6 +1411,7 @@ public abstract class Predicates<T>
             this.twin = object;
         }
 
+        @Override
         public boolean accept(Object anObject)
         {
             return this.twin != anObject;
@@ -1395,6 +1434,7 @@ public abstract class Predicates<T>
             this.predicate = predicate;
         }
 
+        @Override
         public boolean accept(T each)
         {
             synchronized (each)
@@ -1415,6 +1455,7 @@ public abstract class Predicates<T>
             this.aClass = aClass;
         }
 
+        @Override
         public boolean accept(Class<?> each)
         {
             return this.aClass.isAssignableFrom(each);
@@ -1432,6 +1473,7 @@ public abstract class Predicates<T>
             this.aClass = aClass;
         }
 
+        @Override
         public boolean accept(Class<?> each)
         {
             return each.isAssignableFrom(this.aClass);
@@ -1451,6 +1493,7 @@ public abstract class Predicates<T>
             this.parameter = parameter;
         }
 
+        @Override
         public boolean accept(T each)
         {
             return this.predicate.accept(each, this.parameter);
@@ -1473,6 +1516,7 @@ public abstract class Predicates<T>
             this.throwingPredicate = throwingPredicate;
         }
 
+        @Override
         public boolean safeAccept(T object) throws Exception
         {
             return this.throwingPredicate.safeAccept(object);

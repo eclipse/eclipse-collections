@@ -85,6 +85,7 @@ final class ImmutableEmptySetWithHashingStrategy<T>
         return this;
     }
 
+    @Override
     public int size()
     {
         return 0;
@@ -96,6 +97,7 @@ final class ImmutableEmptySetWithHashingStrategy<T>
         return false;
     }
 
+    @Override
     public void each(Procedure<? super T> procedure)
     {
     }
@@ -110,6 +112,7 @@ final class ImmutableEmptySetWithHashingStrategy<T>
     {
     }
 
+    @Override
     public Iterator<T> iterator()
     {
         return EmptyIterator.getInstance();
@@ -163,11 +166,13 @@ final class ImmutableEmptySetWithHashingStrategy<T>
         return target;
     }
 
+    @Override
     public T getFirst()
     {
         return null;
     }
 
+    @Override
     public T getLast()
     {
         return null;

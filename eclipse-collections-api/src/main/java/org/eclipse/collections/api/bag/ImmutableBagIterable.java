@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -24,29 +24,42 @@ import org.eclipse.collections.api.tuple.Pair;
 
 public interface ImmutableBagIterable<T> extends Bag<T>, ImmutableCollection<T>
 {
+    @Override
     ImmutableBagIterable<T> tap(Procedure<? super T> procedure);
 
+    @Override
     ImmutableBagIterable<T> select(Predicate<? super T> predicate);
 
+    @Override
     <P> ImmutableBagIterable<T> selectWith(Predicate2<? super T, ? super P> predicate, P parameter);
 
+    @Override
     ImmutableBagIterable<T> reject(Predicate<? super T> predicate);
 
+    @Override
     <P> ImmutableBagIterable<T> rejectWith(Predicate2<? super T, ? super P> predicate, P parameter);
 
+    @Override
     PartitionImmutableBagIterable<T> partition(Predicate<? super T> predicate);
 
+    @Override
     <P> PartitionImmutableBagIterable<T> partitionWith(Predicate2<? super T, ? super P> predicate, P parameter);
 
+    @Override
     <S> ImmutableBagIterable<S> selectInstancesOf(Class<S> clazz);
 
+    @Override
     <V> ImmutableBagIterableMultimap<V, T> groupBy(Function<? super T, ? extends V> function);
 
+    @Override
     <V> ImmutableBagIterableMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function);
 
+    @Override
     ImmutableSetIterable<Pair<T, Integer>> zipWithIndex();
 
+    @Override
     ImmutableBagIterable<T> selectByOccurrences(IntPredicate predicate);
 
+    @Override
     MutableMapIterable<T, Integer> toMapOfItemToCount();
 }

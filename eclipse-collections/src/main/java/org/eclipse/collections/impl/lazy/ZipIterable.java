@@ -34,11 +34,13 @@ public class ZipIterable<X, Y>
         this.ys = ys;
     }
 
+    @Override
     public Iterator<Pair<X, Y>> iterator()
     {
         return new ZipIterator<>(this.xs, this.ys);
     }
 
+    @Override
     public void each(Procedure<? super Pair<X, Y>> procedure)
     {
         IterableIterate.forEach(this, procedure);

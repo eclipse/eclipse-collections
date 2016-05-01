@@ -640,6 +640,7 @@ public abstract class AbstractBag<T>
         return result[0];
     }
 
+    @Override
     public String toStringOfItemToCount()
     {
         if (this.isEmpty())

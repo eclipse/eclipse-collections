@@ -58,11 +58,13 @@ public class ParallelFlatCollectListIterable<T, V> extends AbstractParallelListI
         });
     }
 
+    @Override
     public void forEach(Procedure<? super V> procedure)
     {
         this.parallelIterable.forEach(each -> Iterate.forEach(this.function.valueOf(each), procedure));
     }
 
+    @Override
     public V detect(Predicate<? super V> predicate)
     {
         // Some predicates are stateful, so they cannot be called more than once pre element,
@@ -81,11 +83,13 @@ public class ParallelFlatCollectListIterable<T, V> extends AbstractParallelListI
         return result.get();
     }
 
+    @Override
     public boolean anySatisfy(Predicate<? super V> predicate)
     {
         return this.parallelIterable.anySatisfy(each -> Iterate.anySatisfy(this.function.valueOf(each), predicate));
     }
 
+    @Override
     public boolean allSatisfy(Predicate<? super V> predicate)
     {
         return this.parallelIterable.allSatisfy(each -> Iterate.allSatisfy(this.function.valueOf(each), predicate));

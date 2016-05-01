@@ -45,6 +45,7 @@ public class CollectIterable<T, V>
         this.function = function;
     }
 
+    @Override
     public void each(Procedure<? super V> procedure)
     {
         Iterate.forEach(this.adapted, Functions.bind(procedure, this.function));
@@ -62,6 +63,7 @@ public class CollectIterable<T, V>
         Iterate.forEachWith(this.adapted, Functions.bind(procedure, this.function), parameter);
     }
 
+    @Override
     public Iterator<V> iterator()
     {
         return new CollectIterator<>(this.adapted, this.function);

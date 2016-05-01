@@ -28,16 +28,19 @@ public class PartitionTreeSortedSet<T> implements PartitionMutableSortedSet<T>
         this.rejected = TreeSortedSet.newSet(comparator);
     }
 
+    @Override
     public MutableSortedSet<T> getSelected()
     {
         return this.selected;
     }
 
+    @Override
     public MutableSortedSet<T> getRejected()
     {
         return this.rejected;
     }
 
+    @Override
     public PartitionImmutableSortedSet<T> toImmutable()
     {
         return new PartitionImmutableSortedSetImpl<>(this);

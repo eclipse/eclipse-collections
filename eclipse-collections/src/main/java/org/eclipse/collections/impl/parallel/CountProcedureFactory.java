@@ -22,6 +22,7 @@ public final class CountProcedureFactory<T> implements ProcedureFactory<CountPro
         this.predicate = predicate;
     }
 
+    @Override
     public CountProcedure<T> create()
     {
         return new CountProcedure<>(this.predicate);

@@ -101,11 +101,13 @@ import org.eclipse.collections.impl.utility.internal.SortedSetIterables;
 abstract class AbstractImmutableSortedSet<T> extends AbstractImmutableCollection<T>
         implements ImmutableSortedSet<T>, SortedSet<T>
 {
+    @Override
     public SortedSet<T> castToSortedSet()
     {
         return this;
     }
 
+    @Override
     public ImmutableSortedSet<T> newWith(T element)
     {
         if (!this.contains(element))
@@ -115,6 +117,7 @@ abstract class AbstractImmutableSortedSet<T> extends AbstractImmutableCollection
         return this;
     }
 
+    @Override
     public ImmutableSortedSet<T> newWithout(T element)
     {
         if (this.contains(element))
@@ -126,6 +129,7 @@ abstract class AbstractImmutableSortedSet<T> extends AbstractImmutableCollection
         return this;
     }
 
+    @Override
     public ImmutableSortedSet<T> newWithAll(Iterable<? extends T> elements)
     {
         TreeSortedSet<T> result = TreeSortedSet.newSet(this);
@@ -133,6 +137,7 @@ abstract class AbstractImmutableSortedSet<T> extends AbstractImmutableCollection
         return result.toImmutable();
     }
 
+    @Override
     public ImmutableSortedSet<T> newWithoutAll(Iterable<? extends T> elements)
     {
         TreeSortedSet<T> result = TreeSortedSet.newSet(this);
@@ -140,11 +145,13 @@ abstract class AbstractImmutableSortedSet<T> extends AbstractImmutableCollection
         return result.toImmutable();
     }
 
+    @Override
     public T getFirst()
     {
         return this.first();
     }
 
+    @Override
     public T getLast()
     {
         return this.last();
@@ -156,6 +163,7 @@ abstract class AbstractImmutableSortedSet<T> extends AbstractImmutableCollection
         return TreeSortedSet.newSet(this.comparator());
     }
 
+    @Override
     public ImmutableBooleanList collectBoolean(BooleanFunction<? super T> booleanFunction)
     {
         BooleanArrayList result = new BooleanArrayList(this.size());
@@ -163,6 +171,7 @@ abstract class AbstractImmutableSortedSet<T> extends AbstractImmutableCollection
         return result.toImmutable();
     }
 
+    @Override
     public ImmutableByteList collectByte(ByteFunction<? super T> byteFunction)
     {
         ByteArrayList result = new ByteArrayList(this.size());
@@ -170,6 +179,7 @@ abstract class AbstractImmutableSortedSet<T> extends AbstractImmutableCollection
         return result.toImmutable();
     }
 
+    @Override
     public ImmutableCharList collectChar(CharFunction<? super T> charFunction)
     {
         CharArrayList result = new CharArrayList(this.size());
@@ -177,6 +187,7 @@ abstract class AbstractImmutableSortedSet<T> extends AbstractImmutableCollection
         return result.toImmutable();
     }
 
+    @Override
     public ImmutableDoubleList collectDouble(DoubleFunction<? super T> doubleFunction)
     {
         DoubleArrayList result = new DoubleArrayList(this.size());
@@ -184,6 +195,7 @@ abstract class AbstractImmutableSortedSet<T> extends AbstractImmutableCollection
         return result.toImmutable();
     }
 
+    @Override
     public ImmutableFloatList collectFloat(FloatFunction<? super T> floatFunction)
     {
         FloatArrayList result = new FloatArrayList(this.size());
@@ -191,6 +203,7 @@ abstract class AbstractImmutableSortedSet<T> extends AbstractImmutableCollection
         return result.toImmutable();
     }
 
+    @Override
     public ImmutableIntList collectInt(IntFunction<? super T> intFunction)
     {
         IntArrayList result = new IntArrayList(this.size());
@@ -198,6 +211,7 @@ abstract class AbstractImmutableSortedSet<T> extends AbstractImmutableCollection
         return result.toImmutable();
     }
 
+    @Override
     public ImmutableLongList collectLong(LongFunction<? super T> longFunction)
     {
         LongArrayList result = new LongArrayList(this.size());
@@ -205,6 +219,7 @@ abstract class AbstractImmutableSortedSet<T> extends AbstractImmutableCollection
         return result.toImmutable();
     }
 
+    @Override
     public ImmutableShortList collectShort(ShortFunction<? super T> shortFunction)
     {
         ShortArrayList result = new ShortArrayList(this.size());
@@ -212,17 +227,20 @@ abstract class AbstractImmutableSortedSet<T> extends AbstractImmutableCollection
         return result.toImmutable();
     }
 
+    @Override
     public ImmutableSortedSet<T> tap(Procedure<? super T> procedure)
     {
         this.forEach(procedure);
         return this;
     }
 
+    @Override
     public <S> boolean corresponds(OrderedIterable<S> other, Predicate2<? super T, ? super S> predicate)
     {
         return OrderedIterate.corresponds(this, other, predicate);
     }
 
+    @Override
     public ImmutableSortedSet<T> select(Predicate<? super T> predicate)
     {
         TreeSortedSet<T> result = TreeSortedSet.newSet(this.comparator());
@@ -230,11 +248,13 @@ abstract class AbstractImmutableSortedSet<T> extends AbstractImmutableCollection
         return result.toImmutable();
     }
 
+    @Override
     public <P> ImmutableSortedSet<T> selectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         return this.select(Predicates.bind(predicate, parameter));
     }
 
+    @Override
     public ImmutableSortedSet<T> reject(Predicate<? super T> predicate)
     {
         TreeSortedSet<T> result = TreeSortedSet.newSet(this.comparator());
@@ -242,11 +262,13 @@ abstract class AbstractImmutableSortedSet<T> extends AbstractImmutableCollection
         return result.toImmutable();
     }
 
+    @Override
     public <P> ImmutableSortedSet<T> rejectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         return this.reject(Predicates.bind(predicate, parameter));
     }
 
+    @Override
     public PartitionImmutableSortedSet<T> partition(Predicate<? super T> predicate)
     {
         PartitionMutableSortedSet<T> partitionTreeSortedSet = new PartitionTreeSortedSet<>(this.comparator());
@@ -254,6 +276,7 @@ abstract class AbstractImmutableSortedSet<T> extends AbstractImmutableCollection
         return partitionTreeSortedSet.toImmutable();
     }
 
+    @Override
     public <P> PartitionImmutableSortedSet<T> partitionWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         PartitionMutableSortedSet<T> partitionTreeSortedSet = new PartitionTreeSortedSet<>(this.comparator());
@@ -261,12 +284,14 @@ abstract class AbstractImmutableSortedSet<T> extends AbstractImmutableCollection
         return partitionTreeSortedSet.toImmutable();
     }
 
+    @Override
     public PartitionImmutableSortedSet<T> partitionWhile(Predicate<? super T> predicate)
     {
         PartitionTreeSortedSet<T> result = new PartitionTreeSortedSet<>(this.comparator());
         return IterableIterate.partitionWhile(this, predicate, result).toImmutable();
     }
 
+    @Override
     public <S> ImmutableSortedSet<S> selectInstancesOf(Class<S> clazz)
     {
         TreeSortedSet<S> result = TreeSortedSet.newSet((Comparator<? super S>) this.comparator());
@@ -274,6 +299,7 @@ abstract class AbstractImmutableSortedSet<T> extends AbstractImmutableCollection
         return result.toImmutable();
     }
 
+    @Override
     public <V> ImmutableList<V> collect(Function<? super T, ? extends V> function)
     {
         MutableList<V> result = Lists.mutable.empty();
@@ -281,11 +307,13 @@ abstract class AbstractImmutableSortedSet<T> extends AbstractImmutableCollection
         return result.toImmutable();
     }
 
+    @Override
     public <P, V> ImmutableList<V> collectWith(Function2<? super T, ? super P, ? extends V> function, P parameter)
     {
         return this.collect(Functions.bind(function, parameter));
     }
 
+    @Override
     public <V> ImmutableList<V> collectIf(Predicate<? super T> predicate, Function<? super T, ? extends V> function)
     {
         MutableList<V> result = Lists.mutable.empty();
@@ -293,6 +321,7 @@ abstract class AbstractImmutableSortedSet<T> extends AbstractImmutableCollection
         return result.toImmutable();
     }
 
+    @Override
     public <V> ImmutableList<V> flatCollect(Function<? super T, ? extends Iterable<V>> function)
     {
         MutableList<V> result = Lists.mutable.empty();
@@ -300,26 +329,31 @@ abstract class AbstractImmutableSortedSet<T> extends AbstractImmutableCollection
         return result.toImmutable();
     }
 
+    @Override
     public int detectIndex(Predicate<? super T> predicate)
     {
         return Iterate.detectIndex(this, predicate);
     }
 
+    @Override
     public <V> ImmutableSortedSetMultimap<V, T> groupBy(Function<? super T, ? extends V> function)
     {
         return this.groupBy(function, TreeSortedSetMultimap.<V, T>newMultimap(this.comparator())).toImmutable();
     }
 
+    @Override
     public <V> ImmutableSortedSetMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function)
     {
         return this.groupByEach(function, TreeSortedSetMultimap.newMultimap(this.comparator())).toImmutable();
     }
 
+    @Override
     public <S> ImmutableList<Pair<T, S>> zip(Iterable<S> that)
     {
         return Iterate.zip(this, that, FastList.newList()).toImmutable();
     }
 
+    @Override
     public ImmutableSortedSet<Pair<T, Integer>> zipWithIndex()
     {
         Comparator<? super T> comparator = this.comparator();
@@ -331,108 +365,129 @@ abstract class AbstractImmutableSortedSet<T> extends AbstractImmutableCollection
         return Iterate.zipWithIndex(this, TreeSortedSet.newSet(Comparators.byFirstOfPair(comparator))).toImmutable();
     }
 
+    @Override
     public ImmutableSortedSet<T> distinct()
     {
         return this;
     }
 
+    @Override
     public ImmutableSortedSet<T> takeWhile(Predicate<? super T> predicate)
     {
         MutableSortedSet<T> result = TreeSortedSet.newSet(this.comparator());
         return IterableIterate.takeWhile(this, predicate, result).toImmutable();
     }
 
+    @Override
     public ImmutableSortedSet<T> dropWhile(Predicate<? super T> predicate)
     {
         MutableSortedSet<T> result = TreeSortedSet.newSet(this.comparator());
         return IterableIterate.dropWhile(this, predicate, result).toImmutable();
     }
 
+    @Override
     public MutableStack<T> toStack()
     {
         return ArrayStack.newStack(this);
     }
 
+    @Override
     public ImmutableSortedSet<T> union(SetIterable<? extends T> set)
     {
         return SetIterables.unionInto(this, set, TreeSortedSet.newSet(this.comparator())).toImmutable();
     }
 
+    @Override
     public <R extends Set<T>> R unionInto(SetIterable<? extends T> set, R targetSet)
     {
         return SetIterables.unionInto(this, set, targetSet);
     }
 
+    @Override
     public ImmutableSortedSet<T> intersect(SetIterable<? extends T> set)
     {
         return SetIterables.intersectInto(this, set, TreeSortedSet.newSet(this.comparator())).toImmutable();
     }
 
+    @Override
     public <R extends Set<T>> R intersectInto(SetIterable<? extends T> set, R targetSet)
     {
         return SetIterables.intersectInto(this, set, targetSet);
     }
 
+    @Override
     public ImmutableSortedSet<T> difference(SetIterable<? extends T> subtrahendSet)
     {
         return SetIterables.differenceInto(this, subtrahendSet, TreeSortedSet.newSet(this.comparator())).toImmutable();
     }
 
+    @Override
     public <R extends Set<T>> R differenceInto(SetIterable<? extends T> subtrahendSet, R targetSet)
     {
         return SetIterables.differenceInto(this, subtrahendSet, targetSet);
     }
 
+    @Override
     public ImmutableSortedSet<T> symmetricDifference(SetIterable<? extends T> setB)
     {
         return SetIterables.symmetricDifferenceInto(this, setB, TreeSortedSet.newSet(this.comparator())).toImmutable();
     }
 
+    @Override
     public <R extends Set<T>> R symmetricDifferenceInto(SetIterable<? extends T> set, R targetSet)
     {
         return SetIterables.symmetricDifferenceInto(this, set, targetSet);
     }
 
+    @Override
     public boolean isSubsetOf(SetIterable<? extends T> candidateSuperset)
     {
         return SetIterables.isSubsetOf(this, candidateSuperset);
     }
 
+    @Override
     public boolean isProperSubsetOf(SetIterable<? extends T> candidateSuperset)
     {
         return SetIterables.isProperSubsetOf(this, candidateSuperset);
     }
 
+    @Override
     public ImmutableSortedSet<SortedSetIterable<T>> powerSet()
     {
         return (ImmutableSortedSet<SortedSetIterable<T>>) (ImmutableSortedSet<?>) SortedSetIterables.immutablePowerSet(this);
     }
 
+    @Override
     public <B> LazyIterable<Pair<T, B>> cartesianProduct(SetIterable<B> set)
     {
         return SetIterables.cartesianProduct(this, set);
     }
 
+    @Override
     public SortedSet<T> subSet(T fromElement, T toElement)
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".subSet() not implemented yet");
     }
 
+    @Override
     public SortedSet<T> headSet(T toElement)
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".headSet() not implemented yet");
     }
 
+    @Override
     public SortedSet<T> tailSet(T fromElement)
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".tailSet() not implemented yet");
     }
 
+    @Override
     public ImmutableSortedSet<T> toImmutable()
     {
         return this;
     }
 
+    @Override
     public ParallelSortedSetIterable<T> asParallel(ExecutorService executorService, int batchSize)
     {
         if (executorService == null)
@@ -446,21 +501,25 @@ abstract class AbstractImmutableSortedSet<T> extends AbstractImmutableCollection
         return new NonParallelSortedSetIterable<>(this);
     }
 
+    @Override
     public void reverseForEach(Procedure<? super T> procedure)
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".reverseForEach() not implemented yet");
     }
 
+    @Override
     public LazyIterable<T> asReversed()
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".asReversed() not implemented yet");
     }
 
+    @Override
     public ImmutableSortedSet<T> toReversed()
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".toReversed() not implemented yet");
     }
 
+    @Override
     public int detectLastIndex(Predicate<? super T> predicate)
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".detectLastIndex() not implemented yet");

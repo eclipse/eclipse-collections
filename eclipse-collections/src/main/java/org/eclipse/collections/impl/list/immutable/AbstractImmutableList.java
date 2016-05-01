@@ -103,6 +103,7 @@ abstract class AbstractImmutableList<T>
         extends AbstractImmutableCollection<T>
         implements ImmutableList<T>, List<T>
 {
+    @Override
     public List<T> castToList()
     {
         return this;
@@ -175,6 +176,7 @@ abstract class AbstractImmutableList<T>
         return hashCode;
     }
 
+    @Override
     public ImmutableList<T> newWithout(T element)
     {
         int indexToRemove = this.indexOf(element);
@@ -195,6 +197,7 @@ abstract class AbstractImmutableList<T>
         return Lists.immutable.with(results);
     }
 
+    @Override
     public ImmutableList<T> newWithAll(Iterable<? extends T> elements)
     {
         int oldSize = this.size();
@@ -211,6 +214,7 @@ abstract class AbstractImmutableList<T>
         return Lists.immutable.with(array);
     }
 
+    @Override
     public ImmutableList<T> newWithoutAll(Iterable<? extends T> elements)
     {
         FastList<T> result = FastList.newListWith((T[]) this.toArray());
@@ -218,16 +222,19 @@ abstract class AbstractImmutableList<T>
         return result.toImmutable();
     }
 
+    @Override
     public T getFirst()
     {
         return this.isEmpty() ? null : this.get(0);
     }
 
+    @Override
     public T getLast()
     {
         return this.isEmpty() ? null : this.get(this.size() - 1);
     }
 
+    @Override
     public ImmutableList<T> select(Predicate<? super T> predicate)
     {
         MutableList<T> result = Lists.mutable.empty();
@@ -235,6 +242,7 @@ abstract class AbstractImmutableList<T>
         return result.toImmutable();
     }
 
+    @Override
     public <P> ImmutableList<T> selectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         return ListIterate.selectWith(this, predicate, parameter, FastList.newList()).toImmutable();
@@ -249,6 +257,7 @@ abstract class AbstractImmutableList<T>
         return ListIterate.selectWith(this, predicate, parameter, target);
     }
 
+    @Override
     public ImmutableList<T> reject(Predicate<? super T> predicate)
     {
         MutableList<T> result = Lists.mutable.empty();
@@ -256,6 +265,7 @@ abstract class AbstractImmutableList<T>
         return result.toImmutable();
     }
 
+    @Override
     public <P> ImmutableList<T> rejectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         return ListIterate.rejectWith(this, predicate, parameter, FastList.newList()).toImmutable();
@@ -270,16 +280,19 @@ abstract class AbstractImmutableList<T>
         return ListIterate.rejectWith(this, predicate, parameter, target);
     }
 
+    @Override
     public PartitionImmutableList<T> partition(Predicate<? super T> predicate)
     {
         return ListIterate.partition(this, predicate).toImmutable();
     }
 
+    @Override
     public <P> PartitionImmutableList<T> partitionWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         return ListIterate.partitionWith(this, predicate, parameter).toImmutable();
     }
 
+    @Override
     public <S> ImmutableList<S> selectInstancesOf(Class<S> clazz)
     {
         FastList<S> result = FastList.newList(this.size());
@@ -287,6 +300,7 @@ abstract class AbstractImmutableList<T>
         return result.toImmutable();
     }
 
+    @Override
     public <V> ImmutableList<V> collect(Function<? super T, ? extends V> function)
     {
         MutableList<V> result = Lists.mutable.empty();
@@ -294,6 +308,7 @@ abstract class AbstractImmutableList<T>
         return result.toImmutable();
     }
 
+    @Override
     public ImmutableBooleanList collectBoolean(BooleanFunction<? super T> booleanFunction)
     {
         BooleanArrayList result = new BooleanArrayList(this.size());
@@ -301,6 +316,7 @@ abstract class AbstractImmutableList<T>
         return result.toImmutable();
     }
 
+    @Override
     public ImmutableByteList collectByte(ByteFunction<? super T> byteFunction)
     {
         ByteArrayList result = new ByteArrayList(this.size());
@@ -308,6 +324,7 @@ abstract class AbstractImmutableList<T>
         return result.toImmutable();
     }
 
+    @Override
     public ImmutableCharList collectChar(CharFunction<? super T> charFunction)
     {
         CharArrayList result = new CharArrayList(this.size());
@@ -315,6 +332,7 @@ abstract class AbstractImmutableList<T>
         return result.toImmutable();
     }
 
+    @Override
     public ImmutableDoubleList collectDouble(DoubleFunction<? super T> doubleFunction)
     {
         DoubleArrayList result = new DoubleArrayList(this.size());
@@ -322,6 +340,7 @@ abstract class AbstractImmutableList<T>
         return result.toImmutable();
     }
 
+    @Override
     public ImmutableFloatList collectFloat(FloatFunction<? super T> floatFunction)
     {
         FloatArrayList result = new FloatArrayList(this.size());
@@ -329,6 +348,7 @@ abstract class AbstractImmutableList<T>
         return result.toImmutable();
     }
 
+    @Override
     public ImmutableIntList collectInt(IntFunction<? super T> intFunction)
     {
         IntArrayList result = new IntArrayList(this.size());
@@ -336,6 +356,7 @@ abstract class AbstractImmutableList<T>
         return result.toImmutable();
     }
 
+    @Override
     public ImmutableLongList collectLong(LongFunction<? super T> longFunction)
     {
         LongArrayList result = new LongArrayList(this.size());
@@ -343,6 +364,7 @@ abstract class AbstractImmutableList<T>
         return result.toImmutable();
     }
 
+    @Override
     public ImmutableShortList collectShort(ShortFunction<? super T> shortFunction)
     {
         ShortArrayList result = new ShortArrayList(this.size());
@@ -350,11 +372,13 @@ abstract class AbstractImmutableList<T>
         return result.toImmutable();
     }
 
+    @Override
     public <P, V> ImmutableList<V> collectWith(Function2<? super T, ? super P, ? extends V> function, P parameter)
     {
         return this.collect(Functions.bind(function, parameter));
     }
 
+    @Override
     public <V> ImmutableList<V> collectIf(
             Predicate<? super T> predicate,
             Function<? super T, ? extends V> function)
@@ -371,6 +395,7 @@ abstract class AbstractImmutableList<T>
         return ListIterate.collectWith(this, function, parameter, target);
     }
 
+    @Override
     public <V> ImmutableList<V> flatCollect(Function<? super T, ? extends Iterable<V>> function)
     {
         MutableList<V> result = Lists.mutable.empty();
@@ -385,11 +410,13 @@ abstract class AbstractImmutableList<T>
         return ListIterate.flatCollect(this, function, target);
     }
 
+    @Override
     public int detectIndex(Predicate<? super T> predicate)
     {
         return ListIterate.detectIndex(this, predicate);
     }
 
+    @Override
     public int detectLastIndex(Predicate<? super T> predicate)
     {
         return ListIterate.detectLastIndex(this, predicate);
@@ -464,12 +491,14 @@ abstract class AbstractImmutableList<T>
         return ListIterate.sumOfDouble(this, function);
     }
 
+    @Override
     public ImmutableList<T> tap(Procedure<? super T> procedure)
     {
         this.forEach(procedure);
         return this;
     }
 
+    @Override
     public <S> boolean corresponds(OrderedIterable<S> other, Predicate2<? super T, ? super S> predicate)
     {
         return OrderedIterate.corresponds(this, other, predicate);
@@ -497,6 +526,7 @@ abstract class AbstractImmutableList<T>
         }
     }
 
+    @Override
     public void forEach(
             int from, int to, Procedure<? super T> procedure)
     {
@@ -518,6 +548,7 @@ abstract class AbstractImmutableList<T>
         }
     }
 
+    @Override
     public void forEachWithIndex(
             int from, int to, ObjectIntProcedure<? super T> objectIntProcedure)
     {
@@ -539,6 +570,7 @@ abstract class AbstractImmutableList<T>
         }
     }
 
+    @Override
     public void reverseForEach(Procedure<? super T> procedure)
     {
         if (this.notEmpty())
@@ -547,6 +579,7 @@ abstract class AbstractImmutableList<T>
         }
     }
 
+    @Override
     public int indexOf(Object object)
     {
         int n = this.size();
@@ -573,6 +606,7 @@ abstract class AbstractImmutableList<T>
         return -1;
     }
 
+    @Override
     public int lastIndexOf(Object object)
     {
         int n = this.size() - 1;
@@ -599,36 +633,43 @@ abstract class AbstractImmutableList<T>
         return -1;
     }
 
+    @Override
     public Iterator<T> iterator()
     {
         return this.listIterator(0);
     }
 
+    @Override
     public boolean addAll(int index, Collection<? extends T> collection)
     {
         throw new UnsupportedOperationException("Cannot call addAll() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public T set(int index, T element)
     {
         throw new UnsupportedOperationException("Cannot call set() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public void add(int index, T element)
     {
         throw new UnsupportedOperationException("Cannot call add() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public T remove(int index)
     {
         throw new UnsupportedOperationException("Cannot call remove() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public ListIterator<T> listIterator()
     {
         return new ImmutableListIterator<>(this, 0);
     }
 
+    @Override
     public ListIterator<T> listIterator(int index)
     {
         if (index < 0 || index > this.size())
@@ -639,16 +680,19 @@ abstract class AbstractImmutableList<T>
         return new ImmutableListIterator<>(this, index);
     }
 
+    @Override
     public ImmutableSubList<T> subList(int fromIndex, int toIndex)
     {
         return new ImmutableSubList<>(this, fromIndex, toIndex);
     }
 
+    @Override
     public ImmutableList<T> distinct()
     {
         return ListIterate.distinct(this.castToList()).toImmutable();
     }
 
+    @Override
     public ImmutableList<T> distinct(HashingStrategy<? super T> hashingStrategy)
     {
         return ListIterate.distinct(this.castToList(), hashingStrategy).toImmutable();
@@ -660,6 +704,7 @@ abstract class AbstractImmutableList<T>
         ListIterate.appendString(this, appendable, start, separator, end);
     }
 
+    @Override
     public <V> ImmutableListMultimap<V, T> groupBy(Function<? super T, ? extends V> function)
     {
         return this.groupBy(function, FastListMultimap.<V, T>newMultimap()).toImmutable();
@@ -673,6 +718,7 @@ abstract class AbstractImmutableList<T>
         return ListIterate.groupBy(this, function, target);
     }
 
+    @Override
     public <V> ImmutableListMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function)
     {
         return this.groupByEach(function, FastListMultimap.newMultimap()).toImmutable();
@@ -722,16 +768,19 @@ abstract class AbstractImmutableList<T>
         return ListIterate.maxBy(this, function);
     }
 
+    @Override
     public <S> ImmutableList<Pair<T, S>> zip(Iterable<S> that)
     {
         return this.zip(that, FastList.newList()).toImmutable();
     }
 
+    @Override
     public ImmutableList<Pair<T, Integer>> zipWithIndex()
     {
         return this.zipWithIndex(FastList.newList()).toImmutable();
     }
 
+    @Override
     public ImmutableList<T> take(int count)
     {
         if (count >= this.size())
@@ -741,11 +790,13 @@ abstract class AbstractImmutableList<T>
         return ListIterate.take(this, count).toImmutable();
     }
 
+    @Override
     public ImmutableList<T> takeWhile(Predicate<? super T> predicate)
     {
         return ListIterate.takeWhile(this, predicate).toImmutable();
     }
 
+    @Override
     public ImmutableList<T> drop(int count)
     {
         if (count == 0)
@@ -755,11 +806,13 @@ abstract class AbstractImmutableList<T>
         return ListIterate.drop(this, count).toImmutable();
     }
 
+    @Override
     public ImmutableList<T> dropWhile(Predicate<? super T> predicate)
     {
         return ListIterate.dropWhile(this, predicate).toImmutable();
     }
 
+    @Override
     public PartitionImmutableList<T> partitionWhile(Predicate<? super T> predicate)
     {
         return ListIterate.partitionWhile(this, predicate).toImmutable();
@@ -771,36 +824,43 @@ abstract class AbstractImmutableList<T>
         return FastList.newList(size);
     }
 
+    @Override
     public MutableStack<T> toStack()
     {
         return ArrayStack.newStack(this);
     }
 
+    @Override
     public ReverseIterable<T> asReversed()
     {
         return ReverseIterable.adapt(this);
     }
 
+    @Override
     public ImmutableList<T> toReversed()
     {
         return Lists.immutable.withAll(this.asReversed());
     }
 
+    @Override
     public ParallelListIterable<T> asParallel(ExecutorService executorService, int batchSize)
     {
         return new ListIterableParallelIterable<>(this, executorService, batchSize);
     }
 
+    @Override
     public int binarySearch(T key, Comparator<? super T> comparator)
     {
         return Collections.binarySearch(this, key, comparator);
     }
 
+    @Override
     public int binarySearch(T key)
     {
         return Collections.binarySearch((List<? extends Comparable<? super T>>) this, key);
     }
 
+    @Override
     public ImmutableList<T> toImmutable()
     {
         return this;
@@ -836,17 +896,20 @@ abstract class AbstractImmutableList<T>
             this.size = toIndex - fromIndex;
         }
 
+        @Override
         public T get(int index)
         {
             this.checkIfOutOfBounds(index);
             return this.original.get(index + this.offset);
         }
 
+        @Override
         public int size()
         {
             return this.size;
         }
 
+        @Override
         public ImmutableList<T> newWith(T newItem)
         {
             int oldSize = this.size();
@@ -912,6 +975,7 @@ abstract class AbstractImmutableList<T>
             return ArrayStack.newStack(this);
         }
 
+        @Override
         public void each(Procedure<? super T> procedure)
         {
             ListIterate.forEach(this, procedure);

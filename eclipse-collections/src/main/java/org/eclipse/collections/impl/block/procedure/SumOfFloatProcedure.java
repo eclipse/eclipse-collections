@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -31,16 +31,19 @@ public class SumOfFloatProcedure<T> implements Procedure<T>, DoubleSumResultHold
         this.function = function;
     }
 
+    @Override
     public double getResult()
     {
         return this.result;
     }
 
+    @Override
     public double getCompensation()
     {
         return this.compensation;
     }
 
+    @Override
     public void value(T each)
     {
         double adjustedValue = (double) this.function.floatValueOf(each) - this.compensation;

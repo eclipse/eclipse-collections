@@ -40,6 +40,7 @@ public class TakeIterable<T> extends AbstractLazyIterable<T>
 
     // TODO: implement in terms of LazyIterate.whileDo() when it is added.
 
+    @Override
     public void each(Procedure<? super T> procedure)
     {
         int i = 0;
@@ -83,6 +84,7 @@ public class TakeIterable<T> extends AbstractLazyIterable<T>
         return result;
     }
 
+    @Override
     public Iterator<T> iterator()
     {
         return new TakeIterator<>(this.adapted, this.count);

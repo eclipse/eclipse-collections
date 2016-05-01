@@ -197,16 +197,19 @@ public class TreeSortedMap<K, V>
         return this;
     }
 
+    @Override
     public int size()
     {
         return this.treeMap.size();
     }
 
+    @Override
     public MutableSortedMap<K, V> newEmpty()
     {
         return new TreeSortedMap<>(this.comparator());
     }
 
+    @Override
     public V removeKey(K key)
     {
         return this.treeMap.remove(key);
@@ -230,96 +233,115 @@ public class TreeSortedMap<K, V>
         return this.treeMap.hashCode();
     }
 
+    @Override
     public void forEachKeyValue(Procedure2<? super K, ? super V> procedure2)
     {
         MapIterate.forEachKeyValue(this.treeMap, procedure2);
     }
 
+    @Override
     public K firstKey()
     {
         return this.treeMap.firstKey();
     }
 
+    @Override
     public K lastKey()
     {
         return this.treeMap.lastKey();
     }
 
+    @Override
     public MutableSet<Entry<K, V>> entrySet()
     {
         return SetAdapter.adapt(this.treeMap.entrySet());
     }
 
+    @Override
     public MutableSet<K> keySet()
     {
         return SetAdapter.adapt(this.treeMap.keySet());
     }
 
+    @Override
     public MutableCollection<V> values()
     {
         return CollectionAdapter.adapt(this.treeMap.values());
     }
 
+    @Override
     public Comparator<? super K> comparator()
     {
         return this.treeMap.comparator();
     }
 
+    @Override
     public V get(Object key)
     {
         return this.treeMap.get(key);
     }
 
+    @Override
     public V put(K key, V value)
     {
         return this.treeMap.put(key, value);
     }
 
+    @Override
     public V remove(Object key)
     {
         return this.treeMap.remove(key);
     }
 
+    @Override
     public void putAll(Map<? extends K, ? extends V> map)
     {
         this.treeMap.putAll(map);
     }
 
+    @Override
     public void clear()
     {
         this.treeMap.clear();
     }
 
+    @Override
     public boolean containsKey(Object key)
     {
         return this.treeMap.containsKey(key);
     }
 
+    @Override
     public MutableSortedMap<K, V> headMap(K toKey)
     {
         return SortedMapAdapter.adapt(this.treeMap.headMap(toKey));
     }
 
+    @Override
     public MutableSortedMap<K, V> tailMap(K fromKey)
     {
         return SortedMapAdapter.adapt(this.treeMap.tailMap(fromKey));
     }
 
+    @Override
     public MutableSortedMap<K, V> subMap(K fromKey, K toKey)
     {
         return SortedMapAdapter.adapt(this.treeMap.subMap(fromKey, toKey));
     }
 
+    @Override
     public boolean containsValue(Object value)
     {
         return this.treeMap.containsValue(value);
     }
 
+    @Override
     public MutableSortedMap<K, V> toReversed()
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".toReversed() not implemented yet");
     }
 
+    @Override
     public MutableSortedMap<K, V> take(int count)
     {
         if (count < 0)
@@ -338,11 +360,13 @@ public class TreeSortedMap<K, V>
         return output;
     }
 
+    @Override
     public MutableSortedMap<K, V> takeWhile(Predicate<? super V> predicate)
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".takeWhile() not implemented yet");
     }
 
+    @Override
     public MutableSortedMap<K, V> drop(int count)
     {
         if (count < 0)
@@ -374,16 +398,19 @@ public class TreeSortedMap<K, V>
         return output;
     }
 
+    @Override
     public MutableSortedMap<K, V> dropWhile(Predicate<? super V> predicate)
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".dropWhile() not implemented yet");
     }
 
+    @Override
     public PartitionMutableList<V> partitionWhile(Predicate<? super V> predicate)
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".partitionWhile() not implemented yet");
     }
 
+    @Override
     public MutableList<V> distinct()
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".distinct() not implemented yet");
@@ -395,6 +422,7 @@ public class TreeSortedMap<K, V>
         return this.treeMap.toString();
     }
 
+    @Override
     public void writeExternal(ObjectOutput out) throws IOException
     {
         out.writeObject(this.comparator());
@@ -406,6 +434,7 @@ public class TreeSortedMap<K, V>
         }
     }
 
+    @Override
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
     {
         this.treeMap = new TreeMap<>((Comparator<? super K>) in.readObject());

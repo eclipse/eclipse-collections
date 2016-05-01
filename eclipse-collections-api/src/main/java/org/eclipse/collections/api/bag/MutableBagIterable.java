@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -45,47 +45,66 @@ public interface MutableBagIterable<T> extends Bag<T>, MutableCollection<T>
 
     boolean setOccurrences(T item, int occurrences);
 
+    @Override
     MutableBagIterable<T> tap(Procedure<? super T> procedure);
 
+    @Override
     MutableBagIterable<T> select(Predicate<? super T> predicate);
 
+    @Override
     <P> MutableBagIterable<T> selectWith(Predicate2<? super T, ? super P> predicate, P parameter);
 
+    @Override
     MutableBagIterable<T> reject(Predicate<? super T> predicate);
 
+    @Override
     <P> MutableBagIterable<T> rejectWith(Predicate2<? super T, ? super P> predicate, P parameter);
 
+    @Override
     PartitionMutableBagIterable<T> partition(Predicate<? super T> predicate);
 
+    @Override
     <P> PartitionMutableBagIterable<T> partitionWith(Predicate2<? super T, ? super P> predicate, P parameter);
 
+    @Override
     <S> MutableBagIterable<S> selectInstancesOf(Class<S> clazz);
 
+    @Override
     <V> MutableBagIterableMultimap<V, T> groupBy(Function<? super T, ? extends V> function);
 
+    @Override
     <V> MutableBagIterableMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function);
 
+    @Override
     MutableSetIterable<Pair<T, Integer>> zipWithIndex();
 
+    @Override
     MutableBagIterable<T> selectByOccurrences(IntPredicate predicate);
 
+    @Override
     MutableMapIterable<T, Integer> toMapOfItemToCount();
 
     /**
      * @since 6.0
      */
+    @Override
     MutableList<ObjectIntPair<T>> topOccurrences(int count);
 
     /**
      * @since 6.0
      */
+    @Override
     MutableList<ObjectIntPair<T>> bottomOccurrences(int count);
 
+    @Override
     MutableBagIterable<T> with(T element);
 
+    @Override
     MutableBagIterable<T> without(T element);
 
+    @Override
     MutableBagIterable<T> withAll(Iterable<? extends T> elements);
 
+    @Override
     MutableBagIterable<T> withoutAll(Iterable<? extends T> elements);
 }

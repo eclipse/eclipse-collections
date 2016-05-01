@@ -105,31 +105,37 @@ public final class MultiReaderFastListMultimap<K, V>
         return MultiReaderFastList.newList(this.initialListCapacity);
     }
 
+    @Override
     public MultiReaderFastListMultimap<K, V> newEmpty()
     {
         return new MultiReaderFastListMultimap<>();
     }
 
+    @Override
     public MutableBagMultimap<V, K> flip()
     {
         return Iterate.flip(this);
     }
 
+    @Override
     public FastListMultimap<K, V> selectKeysValues(Predicate2<? super K, ? super V> predicate)
     {
         return this.selectKeysValues(predicate, FastListMultimap.newMultimap());
     }
 
+    @Override
     public FastListMultimap<K, V> rejectKeysValues(Predicate2<? super K, ? super V> predicate)
     {
         return this.rejectKeysValues(predicate, FastListMultimap.newMultimap());
     }
 
+    @Override
     public FastListMultimap<K, V> selectKeysMultiValues(Predicate2<? super K, ? super Iterable<V>> predicate)
     {
         return this.selectKeysMultiValues(predicate, FastListMultimap.newMultimap());
     }
 
+    @Override
     public FastListMultimap<K, V> rejectKeysMultiValues(Predicate2<? super K, ? super Iterable<V>> predicate)
     {
         return this.rejectKeysMultiValues(predicate, FastListMultimap.newMultimap());

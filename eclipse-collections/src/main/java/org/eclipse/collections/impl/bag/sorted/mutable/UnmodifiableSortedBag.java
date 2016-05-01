@@ -127,16 +127,19 @@ public class UnmodifiableSortedBag<T>
         return this.getSortedBag().newEmpty();
     }
 
+    @Override
     public int addOccurrences(T item, int occurrences)
     {
         throw new UnsupportedOperationException("Cannot call addOccurrences() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public boolean removeOccurrences(Object item, int occurrences)
     {
         throw new UnsupportedOperationException("Cannot call removeOccurences() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public boolean setOccurrences(T item, int occurrences)
     {
         throw new UnsupportedOperationException("Cannot call setOccurrences() on " + this.getClass().getSimpleName());
@@ -185,46 +188,55 @@ public class UnmodifiableSortedBag<T>
         return this.getSortedBag().partitionWith(predicate, parameter);
     }
 
+    @Override
     public PartitionMutableSortedBag<T> partitionWhile(Predicate<? super T> predicate)
     {
         return this.getSortedBag().partition(predicate);
     }
 
+    @Override
     public int sizeDistinct()
     {
         return this.getSortedBag().sizeDistinct();
     }
 
+    @Override
     public int occurrencesOf(Object item)
     {
         return this.getSortedBag().occurrencesOf(item);
     }
 
+    @Override
     public void forEachWithOccurrences(ObjectIntProcedure<? super T> procedure)
     {
         this.getSortedBag().forEachWithOccurrences(procedure);
     }
 
+    @Override
     public MutableSortedMap<T, Integer> toMapOfItemToCount()
     {
         return this.getSortedBag().toMapOfItemToCount();
     }
 
+    @Override
     public String toStringOfItemToCount()
     {
         return this.getSortedBag().toStringOfItemToCount();
     }
 
+    @Override
     public MutableSortedBag<T> selectByOccurrences(IntPredicate predicate)
     {
         return this.getSortedBag().selectByOccurrences(predicate);
     }
 
+    @Override
     public MutableList<ObjectIntPair<T>> topOccurrences(int count)
     {
         return this.getSortedBag().topOccurrences(count);
     }
 
+    @Override
     public MutableList<ObjectIntPair<T>> bottomOccurrences(int count)
     {
         return this.getSortedBag().bottomOccurrences(count);
@@ -296,41 +308,49 @@ public class UnmodifiableSortedBag<T>
         return this.getSortedBag().flatCollect(function);
     }
 
+    @Override
     public MutableSortedSet<T> distinct()
     {
         return this.getSortedBag().distinct();
     }
 
+    @Override
     public <S> boolean corresponds(OrderedIterable<S> other, Predicate2<? super T, ? super S> predicate)
     {
         return this.getSortedBag().corresponds(other, predicate);
     }
 
+    @Override
     public void forEach(int startIndex, int endIndex, Procedure<? super T> procedure)
     {
         this.getSortedBag().forEach(startIndex, endIndex, procedure);
     }
 
+    @Override
     public void forEachWithIndex(int fromIndex, int toIndex, ObjectIntProcedure<? super T> objectIntProcedure)
     {
         this.getSortedBag().forEachWithIndex(fromIndex, toIndex, objectIntProcedure);
     }
 
+    @Override
     public MutableStack<T> toStack()
     {
         return this.getSortedBag().toStack();
     }
 
+    @Override
     public int indexOf(Object object)
     {
         return this.getSortedBag().indexOf(object);
     }
 
+    @Override
     public MutableSortedBag<T> takeWhile(Predicate<? super T> predicate)
     {
         return this.getSortedBag().takeWhile(predicate);
     }
 
+    @Override
     public MutableSortedBag<T> dropWhile(Predicate<? super T> predicate)
     {
         return this.getSortedBag().dropWhile(predicate);
@@ -350,6 +370,7 @@ public class UnmodifiableSortedBag<T>
         return this.getSortedBag().collectIf(predicate, function);
     }
 
+    @Override
     public int detectIndex(Predicate<? super T> predicate)
     {
         return this.getSortedBag().detectIndex(predicate);
@@ -391,36 +412,43 @@ public class UnmodifiableSortedBag<T>
         return this.getSortedBag().zipWithIndex(target);
     }
 
+    @Override
     public MutableSortedBag<T> toReversed()
     {
         return this.getSortedBag().toReversed();
     }
 
+    @Override
     public MutableSortedBag<T> take(int count)
     {
         return this.getSortedBag().take(count);
     }
 
+    @Override
     public MutableSortedBag<T> drop(int count)
     {
         return this.getSortedBag().drop(count);
     }
 
+    @Override
     public void reverseForEach(Procedure<? super T> procedure)
     {
         this.getSortedBag().reverseForEach(procedure);
     }
 
+    @Override
     public LazyIterable<T> asReversed()
     {
         return this.getSortedBag().asReversed();
     }
 
+    @Override
     public int detectLastIndex(Predicate<? super T> predicate)
     {
         return this.getSortedBag().detectLastIndex(predicate);
     }
 
+    @Override
     public Comparator<? super T> comparator()
     {
         return this.getSortedBag().comparator();
@@ -450,6 +478,7 @@ public class UnmodifiableSortedBag<T>
         throw new UnsupportedOperationException("Cannot call withoutAll() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public int compareTo(SortedBag<T> o)
     {
         return this.getSortedBag().compareTo(o);

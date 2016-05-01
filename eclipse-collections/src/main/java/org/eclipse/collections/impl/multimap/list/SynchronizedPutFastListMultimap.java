@@ -97,16 +97,19 @@ public final class SynchronizedPutFastListMultimap<K, V>
         return FastList.newList(1);
     }
 
+    @Override
     public SynchronizedPutFastListMultimap<K, V> newEmpty()
     {
         return new SynchronizedPutFastListMultimap<>();
     }
 
+    @Override
     public MutableListMultimap<K, V> toMutable()
     {
         return new SynchronizedPutFastListMultimap<>(this);
     }
 
+    @Override
     public ImmutableListMultimap<K, V> toImmutable()
     {
         MutableMap<K, ImmutableList<V>> map = UnifiedMap.newMap();
@@ -116,36 +119,43 @@ public final class SynchronizedPutFastListMultimap<K, V>
         return new ImmutableListMultimapImpl<>(map);
     }
 
+    @Override
     public MutableBagMultimap<V, K> flip()
     {
         return Iterate.flip(this);
     }
 
+    @Override
     public FastListMultimap<K, V> selectKeysValues(Predicate2<? super K, ? super V> predicate)
     {
         return this.selectKeysValues(predicate, FastListMultimap.newMultimap());
     }
 
+    @Override
     public FastListMultimap<K, V> rejectKeysValues(Predicate2<? super K, ? super V> predicate)
     {
         return this.rejectKeysValues(predicate, FastListMultimap.newMultimap());
     }
 
+    @Override
     public FastListMultimap<K, V> selectKeysMultiValues(Predicate2<? super K, ? super Iterable<V>> predicate)
     {
         return this.selectKeysMultiValues(predicate, FastListMultimap.newMultimap());
     }
 
+    @Override
     public FastListMultimap<K, V> rejectKeysMultiValues(Predicate2<? super K, ? super Iterable<V>> predicate)
     {
         return this.rejectKeysMultiValues(predicate, FastListMultimap.newMultimap());
     }
 
+    @Override
     public <K2, V2> HashBagMultimap<K2, V2> collectKeysValues(Function2<? super K, ? super V, Pair<K2, V2>> function)
     {
         return this.collectKeysValues(function, HashBagMultimap.newMultimap());
     }
 
+    @Override
     public <V2> FastListMultimap<K, V2> collectValues(Function<? super V, ? extends V2> function)
     {
         return this.collectValues(function, FastListMultimap.newMultimap());

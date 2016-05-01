@@ -19,36 +19,43 @@ import org.eclipse.collections.impl.utility.Iterate;
 @Immutable
 public final class ImmutableSetFactoryImpl implements ImmutableSetFactory
 {
+    @Override
     public <T> ImmutableSet<T> empty()
     {
         return (ImmutableSet<T>) ImmutableEmptySet.INSTANCE;
     }
 
+    @Override
     public <T> ImmutableSet<T> of()
     {
         return this.empty();
     }
 
+    @Override
     public <T> ImmutableSet<T> with()
     {
         return this.empty();
     }
 
+    @Override
     public <T> ImmutableSet<T> of(T one)
     {
         return this.with(one);
     }
 
+    @Override
     public <T> ImmutableSet<T> with(T one)
     {
         return new ImmutableSingletonSet<>(one);
     }
 
+    @Override
     public <T> ImmutableSet<T> of(T one, T two)
     {
         return this.with(one, two);
     }
 
+    @Override
     public <T> ImmutableSet<T> with(T one, T two)
     {
         if (Comparators.nullSafeEquals(one, two))
@@ -58,11 +65,13 @@ public final class ImmutableSetFactoryImpl implements ImmutableSetFactory
         return new ImmutableDoubletonSet<>(one, two);
     }
 
+    @Override
     public <T> ImmutableSet<T> of(T one, T two, T three)
     {
         return this.with(one, two, three);
     }
 
+    @Override
     public <T> ImmutableSet<T> with(T one, T two, T three)
     {
         if (Comparators.nullSafeEquals(one, two))
@@ -80,11 +89,13 @@ public final class ImmutableSetFactoryImpl implements ImmutableSetFactory
         return new ImmutableTripletonSet<>(one, two, three);
     }
 
+    @Override
     public <T> ImmutableSet<T> of(T one, T two, T three, T four)
     {
         return this.with(one, two, three, four);
     }
 
+    @Override
     public <T> ImmutableSet<T> with(T one, T two, T three, T four)
     {
         if (Comparators.nullSafeEquals(one, two))
@@ -114,11 +125,13 @@ public final class ImmutableSetFactoryImpl implements ImmutableSetFactory
         return new ImmutableQuadrupletonSet<>(one, two, three, four);
     }
 
+    @Override
     public <T> ImmutableSet<T> of(T... items)
     {
         return this.with(items);
     }
 
+    @Override
     public <T> ImmutableSet<T> with(T... items)
     {
         if (items == null || items.length == 0)
@@ -141,11 +154,13 @@ public final class ImmutableSetFactoryImpl implements ImmutableSetFactory
         }
     }
 
+    @Override
     public <T> ImmutableSet<T> ofAll(Iterable<? extends T> items)
     {
         return this.withAll(items);
     }
 
+    @Override
     public <T> ImmutableSet<T> withAll(Iterable<? extends T> items)
     {
         if (items instanceof ImmutableSet<?>)

@@ -31,6 +31,7 @@ public final class CollectIfProcedureFactory<T, V> implements ProcedureFactory<C
         this.predicate = predicate;
     }
 
+    @Override
     public CollectIfProcedure<T, V> create()
     {
         return new CollectIfProcedure<>(FastList.newList(this.collectionSize), this.function, this.predicate);

@@ -102,6 +102,7 @@ import org.eclipse.collections.impl.utility.internal.SetIterables;
 public abstract class AbstractImmutableSet<T> extends AbstractImmutableCollection<T>
         implements ImmutableSet<T>, Set<T>
 {
+    @Override
     public Set<T> castToSet()
     {
         return this;
@@ -112,6 +113,7 @@ public abstract class AbstractImmutableSet<T> extends AbstractImmutableCollectio
         return element == null ? 0 : element.hashCode();
     }
 
+    @Override
     public ImmutableSet<T> newWith(T element)
     {
         if (!this.contains(element))
@@ -123,6 +125,7 @@ public abstract class AbstractImmutableSet<T> extends AbstractImmutableCollectio
         return this;
     }
 
+    @Override
     public ImmutableSet<T> newWithout(T element)
     {
         if (this.contains(element))
@@ -134,6 +137,7 @@ public abstract class AbstractImmutableSet<T> extends AbstractImmutableCollectio
         return this;
     }
 
+    @Override
     public ImmutableSet<T> newWithAll(Iterable<? extends T> elements)
     {
         MutableSet<T> result = UnifiedSet.newSet(elements);
@@ -141,6 +145,7 @@ public abstract class AbstractImmutableSet<T> extends AbstractImmutableCollectio
         return result.toImmutable();
     }
 
+    @Override
     public ImmutableSet<T> newWithoutAll(Iterable<? extends T> elements)
     {
         MutableSet<T> result = UnifiedSet.newSet(this);
@@ -148,12 +153,14 @@ public abstract class AbstractImmutableSet<T> extends AbstractImmutableCollectio
         return result.toImmutable();
     }
 
+    @Override
     public ImmutableSet<T> tap(Procedure<? super T> procedure)
     {
         this.forEach(procedure);
         return this;
     }
 
+    @Override
     public ImmutableSet<T> select(Predicate<? super T> predicate)
     {
         MutableList<T> intermediateResult = FastList.newList();
@@ -161,11 +168,13 @@ public abstract class AbstractImmutableSet<T> extends AbstractImmutableCollectio
         return Sets.immutable.withAll(intermediateResult);
     }
 
+    @Override
     public <P> ImmutableSet<T> selectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         return this.select(Predicates.bind(predicate, parameter));
     }
 
+    @Override
     public ImmutableSet<T> reject(Predicate<? super T> predicate)
     {
         MutableList<T> intermediateResult = FastList.newList();
@@ -173,11 +182,13 @@ public abstract class AbstractImmutableSet<T> extends AbstractImmutableCollectio
         return Sets.immutable.withAll(intermediateResult);
     }
 
+    @Override
     public <P> ImmutableSet<T> rejectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         return this.reject(Predicates.bind(predicate, parameter));
     }
 
+    @Override
     public PartitionImmutableSet<T> partition(Predicate<? super T> predicate)
     {
         PartitionMutableSet<T> partitionUnifiedSet = new PartitionUnifiedSet<>();
@@ -185,6 +196,7 @@ public abstract class AbstractImmutableSet<T> extends AbstractImmutableCollectio
         return partitionUnifiedSet.toImmutable();
     }
 
+    @Override
     public <P> PartitionImmutableSet<T> partitionWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         PartitionMutableSet<T> partitionUnifiedSet = new PartitionUnifiedSet<>();
@@ -192,6 +204,7 @@ public abstract class AbstractImmutableSet<T> extends AbstractImmutableCollectio
         return partitionUnifiedSet.toImmutable();
     }
 
+    @Override
     public <S> ImmutableSet<S> selectInstancesOf(Class<S> clazz)
     {
         MutableSet<S> result = UnifiedSet.newSet(this.size());
@@ -199,6 +212,7 @@ public abstract class AbstractImmutableSet<T> extends AbstractImmutableCollectio
         return result.toImmutable();
     }
 
+    @Override
     public <V> ImmutableSet<V> collect(Function<? super T, ? extends V> function)
     {
         MutableSet<V> result = UnifiedSet.newSet();
@@ -206,6 +220,7 @@ public abstract class AbstractImmutableSet<T> extends AbstractImmutableCollectio
         return result.toImmutable();
     }
 
+    @Override
     public ImmutableBooleanSet collectBoolean(BooleanFunction<? super T> booleanFunction)
     {
         MutableBooleanSet result = new BooleanHashSet();
@@ -213,6 +228,7 @@ public abstract class AbstractImmutableSet<T> extends AbstractImmutableCollectio
         return result.toImmutable();
     }
 
+    @Override
     public ImmutableByteSet collectByte(ByteFunction<? super T> byteFunction)
     {
         MutableByteSet result = new ByteHashSet();
@@ -220,6 +236,7 @@ public abstract class AbstractImmutableSet<T> extends AbstractImmutableCollectio
         return result.toImmutable();
     }
 
+    @Override
     public ImmutableCharSet collectChar(CharFunction<? super T> charFunction)
     {
         MutableCharSet result = new CharHashSet(this.size());
@@ -227,6 +244,7 @@ public abstract class AbstractImmutableSet<T> extends AbstractImmutableCollectio
         return result.toImmutable();
     }
 
+    @Override
     public ImmutableDoubleSet collectDouble(DoubleFunction<? super T> doubleFunction)
     {
         MutableDoubleSet result = new DoubleHashSet(this.size());
@@ -234,6 +252,7 @@ public abstract class AbstractImmutableSet<T> extends AbstractImmutableCollectio
         return result.toImmutable();
     }
 
+    @Override
     public ImmutableFloatSet collectFloat(FloatFunction<? super T> floatFunction)
     {
         MutableFloatSet result = new FloatHashSet(this.size());
@@ -241,6 +260,7 @@ public abstract class AbstractImmutableSet<T> extends AbstractImmutableCollectio
         return result.toImmutable();
     }
 
+    @Override
     public ImmutableIntSet collectInt(IntFunction<? super T> intFunction)
     {
         MutableIntSet result = new IntHashSet(this.size());
@@ -248,6 +268,7 @@ public abstract class AbstractImmutableSet<T> extends AbstractImmutableCollectio
         return result.toImmutable();
     }
 
+    @Override
     public ImmutableLongSet collectLong(LongFunction<? super T> longFunction)
     {
         MutableLongSet result = new LongHashSet(this.size());
@@ -255,6 +276,7 @@ public abstract class AbstractImmutableSet<T> extends AbstractImmutableCollectio
         return result.toImmutable();
     }
 
+    @Override
     public ImmutableShortSet collectShort(ShortFunction<? super T> shortFunction)
     {
         MutableShortSet result = new ShortHashSet(this.size());
@@ -262,11 +284,13 @@ public abstract class AbstractImmutableSet<T> extends AbstractImmutableCollectio
         return result.toImmutable();
     }
 
+    @Override
     public <P, V> ImmutableSet<V> collectWith(Function2<? super T, ? super P, ? extends V> function, P parameter)
     {
         return this.collect(Functions.bind(function, parameter));
     }
 
+    @Override
     public <V> ImmutableSet<V> collectIf(Predicate<? super T> predicate, Function<? super T, ? extends V> function)
     {
         MutableSet<V> result = UnifiedSet.newSet();
@@ -274,6 +298,7 @@ public abstract class AbstractImmutableSet<T> extends AbstractImmutableCollectio
         return result.toImmutable();
     }
 
+    @Override
     public <V> ImmutableSet<V> flatCollect(Function<? super T, ? extends Iterable<V>> function)
     {
         MutableSet<V> result = UnifiedSet.newSet();
@@ -281,6 +306,7 @@ public abstract class AbstractImmutableSet<T> extends AbstractImmutableCollectio
         return result.toImmutable();
     }
 
+    @Override
     public ImmutableSet<T> toImmutable()
     {
         return this;
@@ -293,22 +319,26 @@ public abstract class AbstractImmutableSet<T> extends AbstractImmutableCollectio
 
         protected abstract T getElement(int i);
 
+        @Override
         public boolean hasNext()
         {
             return this.next < AbstractImmutableSet.this.size();
         }
 
+        @Override
         public T next()
         {
             return this.getElement(this.next++);
         }
 
+        @Override
         public void remove()
         {
             throw new UnsupportedOperationException("Cannot remove from an ImmutableSet");
         }
     }
 
+    @Override
     public <V> ImmutableSetMultimap<V, T> groupBy(Function<? super T, ? extends V> function)
     {
         return this.groupBy(function, UnifiedSetMultimap.<V, T>newMultimap()).toImmutable();
@@ -321,6 +351,7 @@ public abstract class AbstractImmutableSet<T> extends AbstractImmutableCollectio
         return target;
     }
 
+    @Override
     public <V> ImmutableSetMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function)
     {
         return this.groupByEach(function, UnifiedSetMultimap.newMultimap()).toImmutable();
@@ -336,6 +367,7 @@ public abstract class AbstractImmutableSet<T> extends AbstractImmutableCollectio
     /**
      * @deprecated in 6.0. Use {@link OrderedIterable#zip(Iterable)} instead.
      */
+    @Override
     @Deprecated
     public <S> ImmutableSet<Pair<T, S>> zip(Iterable<S> that)
     {
@@ -345,6 +377,7 @@ public abstract class AbstractImmutableSet<T> extends AbstractImmutableCollectio
     /**
      * @deprecated in 6.0. Use {@link OrderedIterable#zipWithIndex()} instead.
      */
+    @Override
     @Deprecated
     public ImmutableSet<Pair<T, Integer>> zipWithIndex()
     {
@@ -357,66 +390,79 @@ public abstract class AbstractImmutableSet<T> extends AbstractImmutableCollectio
         return UnifiedSet.newSet(size);
     }
 
+    @Override
     public ImmutableSet<T> union(SetIterable<? extends T> set)
     {
         return SetIterables.union(this, set).toImmutable();
     }
 
+    @Override
     public <R extends Set<T>> R unionInto(SetIterable<? extends T> set, R targetSet)
     {
         return SetIterables.unionInto(this, set, targetSet);
     }
 
+    @Override
     public ImmutableSet<T> intersect(SetIterable<? extends T> set)
     {
         return SetIterables.intersect(this, set).toImmutable();
     }
 
+    @Override
     public <R extends Set<T>> R intersectInto(SetIterable<? extends T> set, R targetSet)
     {
         return SetIterables.intersectInto(this, set, targetSet);
     }
 
+    @Override
     public ImmutableSet<T> difference(SetIterable<? extends T> subtrahendSet)
     {
         return SetIterables.difference(this, subtrahendSet).toImmutable();
     }
 
+    @Override
     public <R extends Set<T>> R differenceInto(SetIterable<? extends T> subtrahendSet, R targetSet)
     {
         return SetIterables.differenceInto(this, subtrahendSet, targetSet);
     }
 
+    @Override
     public ImmutableSet<T> symmetricDifference(SetIterable<? extends T> setB)
     {
         return SetIterables.symmetricDifference(this, setB).toImmutable();
     }
 
+    @Override
     public <R extends Set<T>> R symmetricDifferenceInto(SetIterable<? extends T> set, R targetSet)
     {
         return SetIterables.symmetricDifferenceInto(this, set, targetSet);
     }
 
+    @Override
     public boolean isSubsetOf(SetIterable<? extends T> candidateSuperset)
     {
         return SetIterables.isSubsetOf(this, candidateSuperset);
     }
 
+    @Override
     public boolean isProperSubsetOf(SetIterable<? extends T> candidateSuperset)
     {
         return SetIterables.isProperSubsetOf(this, candidateSuperset);
     }
 
+    @Override
     public ImmutableSet<UnsortedSetIterable<T>> powerSet()
     {
         return (ImmutableSet<UnsortedSetIterable<T>>) (ImmutableSet<?>) SetIterables.immutablePowerSet(this);
     }
 
+    @Override
     public <B> LazyIterable<Pair<T, B>> cartesianProduct(SetIterable<B> set)
     {
         return SetIterables.cartesianProduct(this, set);
     }
 
+    @Override
     public ParallelUnsortedSetIterable<T> asParallel(ExecutorService executorService, int batchSize)
     {
         return this.toSet().asParallel(executorService, batchSize);

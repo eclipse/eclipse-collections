@@ -65,6 +65,7 @@ final class EmptyList<T>
         return this;
     }
 
+    @Override
     public int size()
     {
         return 0;
@@ -76,11 +77,13 @@ final class EmptyList<T>
         return false;
     }
 
+    @Override
     public T get(int index)
     {
         throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + this.size());
     }
 
+    @Override
     public T set(int index, T element)
     {
         throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + this.size());

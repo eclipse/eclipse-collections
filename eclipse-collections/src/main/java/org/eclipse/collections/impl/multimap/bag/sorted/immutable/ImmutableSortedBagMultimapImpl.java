@@ -106,51 +106,61 @@ public class ImmutableSortedBagMultimapImpl<K, V>
         return this;
     }
 
+    @Override
     public ImmutableSortedBagMultimap<K, V> newEmpty()
     {
         return new ImmutableSortedBagMultimapImpl<>(Maps.immutable.with(), this.comparator);
     }
 
+    @Override
     public Comparator<? super V> comparator()
     {
         return this.comparator;
     }
 
+    @Override
     public MutableSortedBagMultimap<K, V> toMutable()
     {
         return new TreeBagMultimap<>(this);
     }
 
+    @Override
     public ImmutableBagMultimap<V, K> flip()
     {
         return Iterate.flip(this).toImmutable();
     }
 
+    @Override
     public ImmutableSortedBagMultimap<K, V> selectKeysValues(Predicate2<? super K, ? super V> predicate)
     {
         return this.selectKeysValues(predicate, TreeBagMultimap.newMultimap(this.comparator)).toImmutable();
     }
 
+    @Override
     public ImmutableSortedBagMultimap<K, V> rejectKeysValues(Predicate2<? super K, ? super V> predicate)
     {
         return this.rejectKeysValues(predicate, TreeBagMultimap.newMultimap(this.comparator)).toImmutable();
     }
 
+    @Override
     public ImmutableSortedBagMultimap<K, V> selectKeysMultiValues(Predicate2<? super K, ? super Iterable<V>> predicate)
     {
         return this.selectKeysMultiValues(predicate, TreeBagMultimap.newMultimap(this.comparator)).toImmutable();
     }
 
+    @Override
     public ImmutableSortedBagMultimap<K, V> rejectKeysMultiValues(Predicate2<? super K, ? super Iterable<V>> predicate)
     {
         return this.rejectKeysMultiValues(predicate, TreeBagMultimap.newMultimap(this.comparator)).toImmutable();
     }
 
+    @Override
     public <K2, V2> ImmutableBagMultimap<K2, V2> collectKeysValues(Function2<? super K, ? super V, Pair<K2, V2>> function)
     {
         return this.collectKeysValues(function, HashBagMultimap.newMultimap()).toImmutable();
     }
 
+    @Override
     public <V2> ImmutableListMultimap<K, V2> collectValues(Function<? super V, ? extends V2> function)
     {
         return this.collectValues(function, FastListMultimap.<K, V2>newMultimap()).toImmutable();

@@ -223,6 +223,7 @@ public class UnifiedSet<T>
         return h & this.table.length - 1;
     }
 
+    @Override
     public void clear()
     {
         if (this.occupied == 0)
@@ -238,6 +239,7 @@ public class UnifiedSet<T>
         }
     }
 
+    @Override
     public boolean add(T key)
     {
         int index = this.index(key);
@@ -436,6 +438,7 @@ public class UnifiedSet<T>
         while (true);
     }
 
+    @Override
     public void batchForEach(Procedure<? super T> procedure, int sectionIndex, int sectionCount)
     {
         Object[] set = this.table;
@@ -459,12 +462,14 @@ public class UnifiedSet<T>
         }
     }
 
+    @Override
     public MutableSet<T> tap(Procedure<? super T> procedure)
     {
         this.forEach(procedure);
         return this;
     }
 
+    @Override
     public void each(Procedure<? super T> procedure)
     {
         this.each(procedure, 0, this.table.length);
@@ -614,11 +619,13 @@ public class UnifiedSet<T>
         while (true);
     }
 
+    @Override
     public UnifiedSet<T> newEmpty()
     {
         return UnifiedSet.newSet();
     }
 
+    @Override
     public T getFirst()
     {
         for (int i = 0; i < this.table.length; i++)
@@ -636,6 +643,7 @@ public class UnifiedSet<T>
         return null;
     }
 
+    @Override
     public T getLast()
     {
         for (int i = this.table.length - 1; i >= 0; i--)
@@ -676,11 +684,13 @@ public class UnifiedSet<T>
         return this.nonSentinel(bucket.zero);
     }
 
+    @Override
     public UnifiedSet<T> select(Predicate<? super T> predicate)
     {
         return this.select(predicate, this.newEmpty());
     }
 
+    @Override
     public <P> UnifiedSet<T> selectWith(
             Predicate2<? super T, ? super P> predicate,
             P parameter)
@@ -688,11 +698,13 @@ public class UnifiedSet<T>
         return this.selectWith(predicate, parameter, this.newEmpty());
     }
 
+    @Override
     public UnifiedSet<T> reject(Predicate<? super T> predicate)
     {
         return this.reject(predicate, this.newEmpty());
     }
 
+    @Override
     public <P> UnifiedSet<T> rejectWith(
             Predicate2<? super T, ? super P> predicate,
             P parameter)
@@ -700,6 +712,7 @@ public class UnifiedSet<T>
         return this.rejectWith(predicate, parameter, this.newEmpty());
     }
 
+    @Override
     public <P> Twin<MutableList<T>> selectAndRejectWith(
             Predicate2<? super T, ? super P> predicate,
             P parameter)
@@ -710,6 +723,7 @@ public class UnifiedSet<T>
         return Tuples.twin(positiveResult, negativeResult);
     }
 
+    @Override
     public PartitionMutableSet<T> partition(Predicate<? super T> predicate)
     {
         PartitionMutableSet<T> partitionUnifiedSet = new PartitionUnifiedSet<>();
@@ -717,6 +731,7 @@ public class UnifiedSet<T>
         return partitionUnifiedSet;
     }
 
+    @Override
     public <P> PartitionMutableSet<T> partitionWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         PartitionMutableSet<T> partitionUnifiedSet = new PartitionUnifiedSet<>();
@@ -724,6 +739,7 @@ public class UnifiedSet<T>
         return partitionUnifiedSet;
     }
 
+    @Override
     public <S> UnifiedSet<S> selectInstancesOf(Class<S> clazz)
     {
         UnifiedSet<S> result = UnifiedSet.newSet();
@@ -943,11 +959,13 @@ public class UnifiedSet<T>
         while (true);
     }
 
+    @Override
     public ImmutableSet<T> toImmutable()
     {
         return Sets.immutable.withAll(this);
     }
 
+    @Override
     public UnifiedSet<T> with(T element)
     {
         this.add(element);
@@ -975,24 +993,28 @@ public class UnifiedSet<T>
         return this;
     }
 
+    @Override
     public UnifiedSet<T> withAll(Iterable<? extends T> iterable)
     {
         this.addAllIterable(iterable);
         return this;
     }
 
+    @Override
     public UnifiedSet<T> without(T element)
     {
         this.remove(element);
         return this;
     }
 
+    @Override
     public UnifiedSet<T> withoutAll(Iterable<? extends T> elements)
     {
         this.removeAllIterable(elements);
         return this;
     }
 
+    @Override
     public boolean addAllIterable(Iterable<? extends T> iterable)
     {
         if (iterable instanceof UnifiedSet)
@@ -1083,6 +1105,7 @@ public class UnifiedSet<T>
         while (true);
     }
 
+    @Override
     public boolean remove(Object key)
     {
         int index = this.index(key);
@@ -1209,6 +1232,7 @@ public class UnifiedSet<T>
         while (true);
     }
 
+    @Override
     public int size()
     {
         return this.occupied;
@@ -1281,6 +1305,7 @@ public class UnifiedSet<T>
         while (true);
     }
 
+    @Override
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
     {
         int size = in.readInt();
@@ -1292,6 +1317,7 @@ public class UnifiedSet<T>
         }
     }
 
+    @Override
     public void writeExternal(ObjectOutput out) throws IOException
     {
         out.writeInt(this.size());
@@ -1409,6 +1435,7 @@ public class UnifiedSet<T>
         while (true);
     }
 
+    @Override
     public boolean retainAllIterable(Iterable<?> iterable)
     {
         if (iterable instanceof Set)
@@ -1535,6 +1562,7 @@ public class UnifiedSet<T>
         return result;
     }
 
+    @Override
     public Iterator<T> iterator()
     {
         return new PositionalIterator();
@@ -1547,11 +1575,13 @@ public class UnifiedSet<T>
         protected int chainPosition;
         protected boolean lastReturned;
 
+        @Override
         public boolean hasNext()
         {
             return this.count < UnifiedSet.this.size();
         }
 
+        @Override
         public void remove()
         {
             if (!this.lastReturned)
@@ -1610,6 +1640,7 @@ public class UnifiedSet<T>
             return UnifiedSet.this.nonSentinel(cur);
         }
 
+        @Override
         public T next()
         {
             if (!this.hasNext())
@@ -1847,17 +1878,20 @@ public class UnifiedSet<T>
         }
     }
 
+    @Override
     public <V> UnifiedSetMultimap<V, T> groupBy(
             Function<? super T, ? extends V> function)
     {
         return this.groupBy(function, UnifiedSetMultimap.newMultimap());
     }
 
+    @Override
     public <V> UnifiedSetMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function)
     {
         return this.groupByEach(function, new UnifiedSetMultimap<>());
     }
 
+    @Override
     public T get(T key)
     {
         int index = this.index(key);
@@ -1920,6 +1954,7 @@ public class UnifiedSet<T>
         while (true);
     }
 
+    @Override
     public T put(T key)
     {
         int index = this.index(key);
@@ -2015,6 +2050,7 @@ public class UnifiedSet<T>
         return key;
     }
 
+    @Override
     public T removeFromPool(T key)
     {
         int index = this.index(key);
@@ -2167,6 +2203,7 @@ public class UnifiedSet<T>
         return cur == key || (cur == NULL_KEY ? key == null : cur.equals(key));
     }
 
+    @Override
     @Beta
     public ParallelUnsortedSetIterable<T> asParallel(ExecutorService executorService, int batchSize)
     {
@@ -2192,36 +2229,43 @@ public class UnifiedSet<T>
             this.chunkEndIndex = chunkEndIndex;
         }
 
+        @Override
         public void forEach(Procedure<? super T> procedure)
         {
             UnifiedSet.this.each(procedure, this.chunkStartIndex, this.chunkEndIndex);
         }
 
+        @Override
         public boolean anySatisfy(Predicate<? super T> predicate)
         {
             return UnifiedSet.this.shortCircuit(predicate, true, true, false, this.chunkStartIndex, this.chunkEndIndex);
         }
 
+        @Override
         public boolean allSatisfy(Predicate<? super T> predicate)
         {
             return UnifiedSet.this.shortCircuit(predicate, false, false, true, this.chunkStartIndex, this.chunkEndIndex);
         }
 
+        @Override
         public T detect(Predicate<? super T> predicate)
         {
             return UnifiedSet.this.detect(predicate, this.chunkStartIndex, this.chunkEndIndex);
         }
 
+        @Override
         public UnsortedSetBatch<T> select(Predicate<? super T> predicate)
         {
             return new SelectUnsortedSetBatch<>(this, predicate);
         }
 
+        @Override
         public <V> UnsortedBagBatch<V> collect(Function<? super T, ? extends V> function)
         {
             return new CollectUnsortedBagBatch<>(this, function);
         }
 
+        @Override
         public <V> UnsortedBagBatch<V> flatCollect(Function<? super T, ? extends Iterable<V>> function)
         {
             return new FlatCollectUnsortedBagBatch<>(this, function);
@@ -2257,21 +2301,25 @@ public class UnifiedSet<T>
             return new UnifiedSetParallelSplitLazyIterable();
         }
 
+        @Override
         public void forEach(Procedure<? super T> procedure)
         {
             AbstractParallelIterable.forEach(this, procedure);
         }
 
+        @Override
         public boolean anySatisfy(Predicate<? super T> predicate)
         {
             return AbstractParallelIterable.anySatisfy(this, predicate);
         }
 
+        @Override
         public boolean allSatisfy(Predicate<? super T> predicate)
         {
             return AbstractParallelIterable.allSatisfy(this, predicate);
         }
 
+        @Override
         public T detect(Predicate<? super T> predicate)
         {
             return AbstractParallelIterable.detect(this, predicate);
@@ -2295,11 +2343,13 @@ public class UnifiedSet<T>
         {
             protected int chunkIndex;
 
+            @Override
             public boolean hasNext()
             {
                 return this.chunkIndex * UnifiedSetParallelUnsortedIterable.this.batchSize < UnifiedSet.this.table.length;
             }
 
+            @Override
             public RootUnsortedSetBatch<T> next()
             {
                 int chunkStartIndex = this.chunkIndex * UnifiedSetParallelUnsortedIterable.this.batchSize;
@@ -2309,6 +2359,7 @@ public class UnifiedSet<T>
                 return new UnifiedUnsortedSetBatch(chunkStartIndex, truncatedChunkEndIndex);
             }
 
+            @Override
             public void remove()
             {
                 throw new UnsupportedOperationException("Cannot call remove() on " + this.getClass().getSimpleName());
@@ -2318,6 +2369,7 @@ public class UnifiedSet<T>
         private class UnifiedSetParallelSplitLazyIterable
                 extends AbstractLazyIterable<RootUnsortedSetBatch<T>>
         {
+            @Override
             public void each(Procedure<? super RootUnsortedSetBatch<T>> procedure)
             {
                 for (RootUnsortedSetBatch<T> chunk : this)
@@ -2326,6 +2378,7 @@ public class UnifiedSet<T>
                 }
             }
 
+            @Override
             public Iterator<RootUnsortedSetBatch<T>> iterator()
             {
                 return new UnifiedSetParallelSplitIterator();

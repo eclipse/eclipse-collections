@@ -34,56 +34,67 @@ public abstract class AbstractParallelIterableImpl<T, B extends Batch<T>> extend
         return false;
     }
 
+    @Override
     public ParallelUnsortedSetIterable<T> asUnique()
     {
         return new ParallelDistinctIterable<>(this);
     }
 
+    @Override
     public ParallelIterable<T> select(Predicate<? super T> predicate)
     {
         return new ParallelSelectIterable<>(this, predicate);
     }
 
+    @Override
     public <P> ParallelIterable<T> selectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         return this.select(Predicates.bind(predicate, parameter));
     }
 
+    @Override
     public <S> ParallelIterable<S> selectInstancesOf(Class<S> clazz)
     {
         return (ParallelIterable<S>) this.select(Predicates.instanceOf(clazz));
     }
 
+    @Override
     public ParallelIterable<T> reject(Predicate<? super T> predicate)
     {
         return this.select(Predicates.not(predicate));
     }
 
+    @Override
     public <P> ParallelIterable<T> rejectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         return this.reject(Predicates.bind(predicate, parameter));
     }
 
+    @Override
     public <V> ParallelIterable<V> collect(Function<? super T, ? extends V> function)
     {
         return new ParallelCollectIterable<>(this, function);
     }
 
+    @Override
     public <P, V> ParallelIterable<V> collectWith(Function2<? super T, ? super P, ? extends V> function, P parameter)
     {
         return this.collect(Functions.bind(function, parameter));
     }
 
+    @Override
     public <V> ParallelIterable<V> collectIf(Predicate<? super T> predicate, Function<? super T, ? extends V> function)
     {
         return this.select(predicate).collect(function);
     }
 
+    @Override
     public <V> ParallelIterable<V> flatCollect(Function<? super T, ? extends Iterable<V>> function)
     {
         return new ParallelFlatCollectIterable<>(this, function);
     }
 
+    @Override
     public <V> UnsortedBagMultimap<V, T> groupBy(Function<? super T, ? extends V> function)
     {
         MutableBagMultimap<V, T> result = SynchronizedPutHashBagMultimap.newMultimap();
@@ -94,6 +105,7 @@ public abstract class AbstractParallelIterableImpl<T, B extends Batch<T>> extend
         return result;
     }
 
+    @Override
     public <V> UnsortedBagMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function)
     {
         MutableBagMultimap<V, T> result = SynchronizedPutHashBagMultimap.newMultimap();

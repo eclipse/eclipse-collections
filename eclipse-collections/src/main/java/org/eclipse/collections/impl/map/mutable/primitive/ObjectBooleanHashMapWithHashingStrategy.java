@@ -287,31 +287,37 @@ public class ObjectBooleanHashMapWithHashingStrategy<K> implements MutableObject
         return appendable.toString();
     }
 
+    @Override
     public int size()
     {
         return this.occupiedWithData;
     }
 
+    @Override
     public boolean isEmpty()
     {
         return this.size() == 0;
     }
 
+    @Override
     public boolean notEmpty()
     {
         return this.size() != 0;
     }
 
+    @Override
     public String makeString()
     {
         return this.makeString(", ");
     }
 
+    @Override
     public String makeString(String separator)
     {
         return this.makeString("", separator, "");
     }
 
+    @Override
     public String makeString(String start, String separator, String end)
     {
         Appendable stringBuilder = new StringBuilder();
@@ -319,16 +325,19 @@ public class ObjectBooleanHashMapWithHashingStrategy<K> implements MutableObject
         return stringBuilder.toString();
     }
 
+    @Override
     public void appendString(Appendable appendable)
     {
         this.appendString(appendable, ", ");
     }
 
+    @Override
     public void appendString(Appendable appendable, String separator)
     {
         this.appendString(appendable, "", separator, "");
     }
 
+    @Override
     public void appendString(Appendable appendable, String start, String separator, String end)
     {
         try
@@ -358,11 +367,13 @@ public class ObjectBooleanHashMapWithHashingStrategy<K> implements MutableObject
         }
     }
 
+    @Override
     public MutableBooleanIterator booleanIterator()
     {
         return new InternalBooleanIterator();
     }
 
+    @Override
     public boolean[] toArray()
     {
         boolean[] result = new boolean[this.size()];
@@ -378,11 +389,13 @@ public class ObjectBooleanHashMapWithHashingStrategy<K> implements MutableObject
         return result;
     }
 
+    @Override
     public boolean contains(boolean value)
     {
         return this.containsValue(value);
     }
 
+    @Override
     public boolean containsAll(boolean... source)
     {
         for (boolean item : source)
@@ -395,21 +408,25 @@ public class ObjectBooleanHashMapWithHashingStrategy<K> implements MutableObject
         return true;
     }
 
+    @Override
     public boolean containsAll(BooleanIterable source)
     {
         return this.containsAll(source.toArray());
     }
 
+    @Override
     public void forEach(BooleanProcedure procedure)
     {
         this.forEachValue(procedure);
     }
 
+    @Override
     public void each(BooleanProcedure procedure)
     {
         this.forEach(procedure);
     }
 
+    @Override
     public boolean detectIfNone(BooleanPredicate predicate, boolean ifNone)
     {
         for (int i = 0; i < this.keys.length; i++)
@@ -422,6 +439,7 @@ public class ObjectBooleanHashMapWithHashingStrategy<K> implements MutableObject
         return ifNone;
     }
 
+    @Override
     public MutableBooleanCollection select(BooleanPredicate predicate)
     {
         MutableBooleanList result = BooleanLists.mutable.empty();
@@ -435,6 +453,7 @@ public class ObjectBooleanHashMapWithHashingStrategy<K> implements MutableObject
         return result;
     }
 
+    @Override
     public int count(BooleanPredicate predicate)
     {
         int count = 0;
@@ -448,6 +467,7 @@ public class ObjectBooleanHashMapWithHashingStrategy<K> implements MutableObject
         return count;
     }
 
+    @Override
     public MutableBooleanCollection reject(BooleanPredicate predicate)
     {
         MutableBooleanList result = BooleanLists.mutable.empty();
@@ -461,6 +481,7 @@ public class ObjectBooleanHashMapWithHashingStrategy<K> implements MutableObject
         return result;
     }
 
+    @Override
     public boolean anySatisfy(BooleanPredicate predicate)
     {
         for (int i = 0; i < this.keys.length; i++)
@@ -473,6 +494,7 @@ public class ObjectBooleanHashMapWithHashingStrategy<K> implements MutableObject
         return false;
     }
 
+    @Override
     public boolean allSatisfy(BooleanPredicate predicate)
     {
         for (int i = 0; i < this.keys.length; i++)
@@ -485,6 +507,7 @@ public class ObjectBooleanHashMapWithHashingStrategy<K> implements MutableObject
         return true;
     }
 
+    @Override
     public <V> MutableCollection<V> collect(BooleanToObjectFunction<? extends V> function)
     {
         MutableList<V> result = FastList.newList(this.size());
@@ -498,6 +521,7 @@ public class ObjectBooleanHashMapWithHashingStrategy<K> implements MutableObject
         return result;
     }
 
+    @Override
     public boolean noneSatisfy(BooleanPredicate predicate)
     {
         for (int i = 0; i < this.keys.length; i++)
@@ -510,6 +534,7 @@ public class ObjectBooleanHashMapWithHashingStrategy<K> implements MutableObject
         return true;
     }
 
+    @Override
     public MutableBooleanList toList()
     {
         MutableBooleanList result = new BooleanArrayList(this.size());
@@ -523,6 +548,7 @@ public class ObjectBooleanHashMapWithHashingStrategy<K> implements MutableObject
         return result;
     }
 
+    @Override
     public MutableBooleanSet toSet()
     {
         MutableBooleanSet result = new BooleanHashSet();
@@ -536,6 +562,7 @@ public class ObjectBooleanHashMapWithHashingStrategy<K> implements MutableObject
         return result;
     }
 
+    @Override
     public MutableBooleanBag toBag()
     {
         MutableBooleanBag result = new BooleanHashBag();
@@ -549,11 +576,13 @@ public class ObjectBooleanHashMapWithHashingStrategy<K> implements MutableObject
         return result;
     }
 
+    @Override
     public LazyBooleanIterable asLazy()
     {
         return new LazyBooleanIterableAdapter(this);
     }
 
+    @Override
     public <V> V injectInto(V injectedValue, ObjectBooleanToObjectFunction<? super V, ? extends V> function)
     {
         V result = injectedValue;
@@ -569,6 +598,7 @@ public class ObjectBooleanHashMapWithHashingStrategy<K> implements MutableObject
         return result;
     }
 
+    @Override
     public void clear()
     {
         this.occupiedWithData = 0;
@@ -577,6 +607,7 @@ public class ObjectBooleanHashMapWithHashingStrategy<K> implements MutableObject
         this.values.clear();
     }
 
+    @Override
     public void put(K key, boolean value)
     {
         int index = this.probe(key);
@@ -591,6 +622,7 @@ public class ObjectBooleanHashMapWithHashingStrategy<K> implements MutableObject
         this.addKeyValueAtIndex(key, value, index);
     }
 
+    @Override
     public void putAll(ObjectBooleanMap<? extends K> map)
     {
         map.forEachKeyValue(new ObjectBooleanProcedure<K>()
@@ -602,12 +634,14 @@ public class ObjectBooleanHashMapWithHashingStrategy<K> implements MutableObject
         });
     }
 
+    @Override
     public void removeKey(K key)
     {
         int index = this.probe(key);
         this.removeKeyAtIndex(key, index);
     }
 
+    @Override
     public void remove(Object key)
     {
         this.removeKey((K) key);
@@ -624,6 +658,7 @@ public class ObjectBooleanHashMapWithHashingStrategy<K> implements MutableObject
         }
     }
 
+    @Override
     public boolean removeKeyIfAbsent(K key, boolean value)
     {
         int index = this.probe(key);
@@ -640,6 +675,7 @@ public class ObjectBooleanHashMapWithHashingStrategy<K> implements MutableObject
         return value;
     }
 
+    @Override
     public boolean getIfAbsentPut(K key, boolean value)
     {
         int index = this.probe(key);
@@ -651,6 +687,7 @@ public class ObjectBooleanHashMapWithHashingStrategy<K> implements MutableObject
         return value;
     }
 
+    @Override
     public boolean getIfAbsentPut(K key, BooleanFunction0 function)
     {
         int index = this.probe(key);
@@ -663,6 +700,7 @@ public class ObjectBooleanHashMapWithHashingStrategy<K> implements MutableObject
         return value;
     }
 
+    @Override
     public boolean getIfAbsentPutWithKey(K key, BooleanFunction<? super K> function)
     {
         int index = this.probe(key);
@@ -675,6 +713,7 @@ public class ObjectBooleanHashMapWithHashingStrategy<K> implements MutableObject
         return value;
     }
 
+    @Override
     public <P> boolean getIfAbsentPutWith(K key, BooleanFunction<? super P> function, P parameter)
     {
         int index = this.probe(key);
@@ -687,6 +726,7 @@ public class ObjectBooleanHashMapWithHashingStrategy<K> implements MutableObject
         return value;
     }
 
+    @Override
     public boolean updateValue(K key, boolean initialValueIfAbsent, BooleanToBooleanFunction function)
     {
         int index = this.probe(key);
@@ -700,18 +740,21 @@ public class ObjectBooleanHashMapWithHashingStrategy<K> implements MutableObject
         return value;
     }
 
+    @Override
     public ObjectBooleanHashMapWithHashingStrategy<K> withKeyValue(K key1, boolean value1)
     {
         this.put(key1, value1);
         return this;
     }
 
+    @Override
     public ObjectBooleanHashMapWithHashingStrategy<K> withoutKey(K key)
     {
         this.removeKey(key);
         return this;
     }
 
+    @Override
     public ObjectBooleanHashMapWithHashingStrategy<K> withoutAllKeys(Iterable<? extends K> keys)
     {
         for (K key : keys)
@@ -721,21 +764,25 @@ public class ObjectBooleanHashMapWithHashingStrategy<K> implements MutableObject
         return this;
     }
 
+    @Override
     public MutableObjectBooleanMap<K> asUnmodifiable()
     {
         return new UnmodifiableObjectBooleanMap<>(this);
     }
 
+    @Override
     public MutableObjectBooleanMap<K> asSynchronized()
     {
         return new SynchronizedObjectBooleanMap<>(this);
     }
 
+    @Override
     public boolean get(Object key)
     {
         return this.getIfAbsent(key, EMPTY_VALUE);
     }
 
+    @Override
     public boolean getOrThrow(Object key)
     {
         int index = this.probe(key);
@@ -746,6 +793,7 @@ public class ObjectBooleanHashMapWithHashingStrategy<K> implements MutableObject
         throw new IllegalStateException("Key " + key + " not present.");
     }
 
+    @Override
     public boolean getIfAbsent(Object key, boolean ifAbsent)
     {
         int index = this.probe(key);
@@ -756,12 +804,14 @@ public class ObjectBooleanHashMapWithHashingStrategy<K> implements MutableObject
         return ifAbsent;
     }
 
+    @Override
     public boolean containsKey(Object key)
     {
         int index = this.probe(key);
         return ObjectBooleanHashMapWithHashingStrategy.isNonSentinel(this.keys[index]) && this.nullSafeEquals(this.toNonSentinel(this.keys[index]), key);
     }
 
+    @Override
     public boolean containsValue(boolean value)
     {
         for (int i = 0; i < this.keys.length; i++)
@@ -774,6 +824,7 @@ public class ObjectBooleanHashMapWithHashingStrategy<K> implements MutableObject
         return false;
     }
 
+    @Override
     public void forEachValue(BooleanProcedure procedure)
     {
         for (int i = 0; i < this.keys.length; i++)
@@ -785,6 +836,7 @@ public class ObjectBooleanHashMapWithHashingStrategy<K> implements MutableObject
         }
     }
 
+    @Override
     public void forEachKey(Procedure<? super K> procedure)
     {
         for (int i = 0; i < this.keys.length; i++)
@@ -796,6 +848,7 @@ public class ObjectBooleanHashMapWithHashingStrategy<K> implements MutableObject
         }
     }
 
+    @Override
     public void forEachKeyValue(ObjectBooleanProcedure<? super K> procedure)
     {
         for (int i = 0; i < this.keys.length; i++)
@@ -807,6 +860,7 @@ public class ObjectBooleanHashMapWithHashingStrategy<K> implements MutableObject
         }
     }
 
+    @Override
     public ObjectBooleanHashMapWithHashingStrategy<K> select(ObjectBooleanPredicate<? super K> predicate)
     {
         ObjectBooleanHashMapWithHashingStrategy<K> result = ObjectBooleanHashMapWithHashingStrategy.newMap(this.hashingStrategy);
@@ -820,6 +874,7 @@ public class ObjectBooleanHashMapWithHashingStrategy<K> implements MutableObject
         return result;
     }
 
+    @Override
     public ObjectBooleanHashMapWithHashingStrategy<K> reject(ObjectBooleanPredicate<? super K> predicate)
     {
         ObjectBooleanHashMapWithHashingStrategy<K> result = ObjectBooleanHashMapWithHashingStrategy.newMap(this.hashingStrategy);
@@ -833,31 +888,37 @@ public class ObjectBooleanHashMapWithHashingStrategy<K> implements MutableObject
         return result;
     }
 
+    @Override
     public ImmutableObjectBooleanMap<K> toImmutable()
     {
         return ObjectBooleanMaps.immutable.withAll(this);
     }
 
+    @Override
     public Set<K> keySet()
     {
         return new KeySet();
     }
 
+    @Override
     public MutableBooleanCollection values()
     {
         return new ValuesCollection();
     }
 
+    @Override
     public LazyIterable<K> keysView()
     {
         return new KeysView();
     }
 
+    @Override
     public RichIterable<ObjectBooleanPair<K>> keyValuesView()
     {
         return new KeyValuesView();
     }
 
+    @Override
     public void writeExternal(ObjectOutput out) throws IOException
     {
         out.writeObject(this.hashingStrategy);
@@ -872,6 +933,7 @@ public class ObjectBooleanHashMapWithHashingStrategy<K> implements MutableObject
         }
     }
 
+    @Override
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
     {
         this.hashingStrategy = (HashingStrategy<? super K>) in.readObject();
@@ -1095,21 +1157,25 @@ public class ObjectBooleanHashMapWithHashingStrategy<K> implements MutableObject
             return hashCode;
         }
 
+        @Override
         public int size()
         {
             return ObjectBooleanHashMapWithHashingStrategy.this.size();
         }
 
+        @Override
         public boolean isEmpty()
         {
             return ObjectBooleanHashMapWithHashingStrategy.this.isEmpty();
         }
 
+        @Override
         public boolean contains(Object o)
         {
             return ObjectBooleanHashMapWithHashingStrategy.this.containsKey(o);
         }
 
+        @Override
         public Object[] toArray()
         {
             int size = ObjectBooleanHashMapWithHashingStrategy.this.size();
@@ -1118,6 +1184,7 @@ public class ObjectBooleanHashMapWithHashingStrategy<K> implements MutableObject
             return result;
         }
 
+        @Override
         public <T> T[] toArray(T[] array)
         {
             T[] result = array;
@@ -1134,11 +1201,13 @@ public class ObjectBooleanHashMapWithHashingStrategy<K> implements MutableObject
             return result;
         }
 
+        @Override
         public boolean add(K key)
         {
             throw new UnsupportedOperationException("Cannot call add() on " + this.getClass().getSimpleName());
         }
 
+        @Override
         public boolean remove(Object key)
         {
             int oldSize = ObjectBooleanHashMapWithHashingStrategy.this.size();
@@ -1146,6 +1215,7 @@ public class ObjectBooleanHashMapWithHashingStrategy<K> implements MutableObject
             return oldSize != ObjectBooleanHashMapWithHashingStrategy.this.size();
         }
 
+        @Override
         public boolean containsAll(Collection<?> collection)
         {
             for (Object aCollection : collection)
@@ -1158,11 +1228,13 @@ public class ObjectBooleanHashMapWithHashingStrategy<K> implements MutableObject
             return true;
         }
 
+        @Override
         public boolean addAll(Collection<? extends K> collection)
         {
             throw new UnsupportedOperationException("Cannot call addAll() on " + this.getClass().getSimpleName());
         }
 
+        @Override
         public boolean retainAll(Collection<?> collection)
         {
             int oldSize = ObjectBooleanHashMapWithHashingStrategy.this.size();
@@ -1178,6 +1250,7 @@ public class ObjectBooleanHashMapWithHashingStrategy<K> implements MutableObject
             return oldSize != ObjectBooleanHashMapWithHashingStrategy.this.size();
         }
 
+        @Override
         public boolean removeAll(Collection<?> collection)
         {
             int oldSize = ObjectBooleanHashMapWithHashingStrategy.this.size();
@@ -1188,11 +1261,13 @@ public class ObjectBooleanHashMapWithHashingStrategy<K> implements MutableObject
             return oldSize != ObjectBooleanHashMapWithHashingStrategy.this.size();
         }
 
+        @Override
         public void clear()
         {
             ObjectBooleanHashMapWithHashingStrategy.this.clear();
         }
 
+        @Override
         public Iterator<K> iterator()
         {
             return new KeySetIterator();
@@ -1219,11 +1294,13 @@ public class ObjectBooleanHashMapWithHashingStrategy<K> implements MutableObject
         private K currentKey;
         private boolean isCurrentKeySet;
 
+        @Override
         public boolean hasNext()
         {
             return this.count < ObjectBooleanHashMapWithHashingStrategy.this.size();
         }
 
+        @Override
         public K next()
         {
             if (!this.hasNext())
@@ -1242,6 +1319,7 @@ public class ObjectBooleanHashMapWithHashingStrategy<K> implements MutableObject
             return ObjectBooleanHashMapWithHashingStrategy.this.toNonSentinel(this.currentKey);
         }
 
+        @Override
         public void remove()
         {
             if (!this.isCurrentKeySet)
@@ -1266,21 +1344,25 @@ public class ObjectBooleanHashMapWithHashingStrategy<K> implements MutableObject
 
     private class ValuesCollection implements MutableBooleanCollection
     {
+        @Override
         public boolean add(boolean element)
         {
             throw new UnsupportedOperationException("Cannot call add() on " + this.getClass().getSimpleName());
         }
 
+        @Override
         public boolean addAll(boolean... source)
         {
             throw new UnsupportedOperationException("Cannot call addAll() on " + this.getClass().getSimpleName());
         }
 
+        @Override
         public boolean addAll(BooleanIterable source)
         {
             throw new UnsupportedOperationException("Cannot call addAll() on " + this.getClass().getSimpleName());
         }
 
+        @Override
         public boolean remove(boolean element)
         {
             for (int i = 0; i < ObjectBooleanHashMapWithHashingStrategy.this.values.size(); i++)
@@ -1294,6 +1376,7 @@ public class ObjectBooleanHashMapWithHashingStrategy<K> implements MutableObject
             return false;
         }
 
+        @Override
         public boolean removeAll(BooleanIterable source)
         {
             int oldSize = ObjectBooleanHashMapWithHashingStrategy.this.size();
@@ -1306,6 +1389,7 @@ public class ObjectBooleanHashMapWithHashingStrategy<K> implements MutableObject
             return oldSize != ObjectBooleanHashMapWithHashingStrategy.this.size();
         }
 
+        @Override
         public boolean removeAll(boolean... source)
         {
             int oldSize = ObjectBooleanHashMapWithHashingStrategy.this.size();
@@ -1317,6 +1401,7 @@ public class ObjectBooleanHashMapWithHashingStrategy<K> implements MutableObject
             return oldSize != ObjectBooleanHashMapWithHashingStrategy.this.size();
         }
 
+        @Override
         public boolean retainAll(BooleanIterable source)
         {
             int oldSize = ObjectBooleanHashMapWithHashingStrategy.this.size();
@@ -1333,176 +1418,211 @@ public class ObjectBooleanHashMapWithHashingStrategy<K> implements MutableObject
             return false;
         }
 
+        @Override
         public boolean retainAll(boolean... source)
         {
             return this.retainAll(BooleanHashSet.newSetWith(source));
         }
 
+        @Override
         public void clear()
         {
             ObjectBooleanHashMapWithHashingStrategy.this.clear();
         }
 
+        @Override
         public MutableBooleanCollection with(boolean element)
         {
             throw new UnsupportedOperationException("Cannot call with() on " + this.getClass().getSimpleName());
         }
 
+        @Override
         public MutableBooleanCollection without(boolean element)
         {
             throw new UnsupportedOperationException("Cannot call without() on " + this.getClass().getSimpleName());
         }
 
+        @Override
         public MutableBooleanCollection withAll(BooleanIterable elements)
         {
             throw new UnsupportedOperationException("Cannot call withAll() on " + this.getClass().getSimpleName());
         }
 
+        @Override
         public MutableBooleanCollection withoutAll(BooleanIterable elements)
         {
             throw new UnsupportedOperationException("Cannot call withoutAll() on " + this.getClass().getSimpleName());
         }
 
+        @Override
         public MutableBooleanCollection asUnmodifiable()
         {
             return UnmodifiableBooleanCollection.of(this);
         }
 
+        @Override
         public MutableBooleanCollection asSynchronized()
         {
             return SynchronizedBooleanCollection.of(this);
         }
 
+        @Override
         public ImmutableBooleanCollection toImmutable()
         {
             return BooleanLists.immutable.withAll(this);
         }
 
+        @Override
         public MutableBooleanCollection select(BooleanPredicate predicate)
         {
             return ObjectBooleanHashMapWithHashingStrategy.this.select(predicate);
         }
 
+        @Override
         public MutableBooleanCollection reject(BooleanPredicate predicate)
         {
             return ObjectBooleanHashMapWithHashingStrategy.this.reject(predicate);
         }
 
+        @Override
         public MutableBooleanIterator booleanIterator()
         {
             return ObjectBooleanHashMapWithHashingStrategy.this.booleanIterator();
         }
 
+        @Override
         public boolean[] toArray()
         {
             return ObjectBooleanHashMapWithHashingStrategy.this.toArray();
         }
 
+        @Override
         public <V> MutableCollection<V> collect(BooleanToObjectFunction<? extends V> function)
         {
             return ObjectBooleanHashMapWithHashingStrategy.this.collect(function);
         }
 
+        @Override
         public boolean contains(boolean value)
         {
             return ObjectBooleanHashMapWithHashingStrategy.this.containsValue(value);
         }
 
+        @Override
         public boolean containsAll(boolean... source)
         {
             return ObjectBooleanHashMapWithHashingStrategy.this.containsAll(source);
         }
 
+        @Override
         public boolean containsAll(BooleanIterable source)
         {
             return ObjectBooleanHashMapWithHashingStrategy.this.containsAll(source);
         }
 
+        @Override
         public void forEach(BooleanProcedure procedure)
         {
             ObjectBooleanHashMapWithHashingStrategy.this.forEach(procedure);
         }
 
+        @Override
         public void each(BooleanProcedure procedure)
         {
             ObjectBooleanHashMapWithHashingStrategy.this.forEach(procedure);
         }
 
+        @Override
         public boolean detectIfNone(BooleanPredicate predicate, boolean ifNone)
         {
             return ObjectBooleanHashMapWithHashingStrategy.this.detectIfNone(predicate, ifNone);
         }
 
+        @Override
         public int count(BooleanPredicate predicate)
         {
             return ObjectBooleanHashMapWithHashingStrategy.this.count(predicate);
         }
 
+        @Override
         public boolean anySatisfy(BooleanPredicate predicate)
         {
             return ObjectBooleanHashMapWithHashingStrategy.this.anySatisfy(predicate);
         }
 
+        @Override
         public boolean allSatisfy(BooleanPredicate predicate)
         {
             return ObjectBooleanHashMapWithHashingStrategy.this.allSatisfy(predicate);
         }
 
+        @Override
         public boolean noneSatisfy(BooleanPredicate predicate)
         {
             return ObjectBooleanHashMapWithHashingStrategy.this.noneSatisfy(predicate);
         }
 
+        @Override
         public MutableBooleanList toList()
         {
             return ObjectBooleanHashMapWithHashingStrategy.this.toList();
         }
 
+        @Override
         public MutableBooleanSet toSet()
         {
             return ObjectBooleanHashMapWithHashingStrategy.this.toSet();
         }
 
+        @Override
         public MutableBooleanBag toBag()
         {
             return ObjectBooleanHashMapWithHashingStrategy.this.toBag();
         }
 
+        @Override
         public LazyBooleanIterable asLazy()
         {
             return new LazyBooleanIterableAdapter(this);
         }
 
+        @Override
         public <T> T injectInto(T injectedValue, ObjectBooleanToObjectFunction<? super T, ? extends T> function)
         {
             return ObjectBooleanHashMapWithHashingStrategy.this.injectInto(injectedValue, function);
         }
 
+        @Override
         public int size()
         {
             return ObjectBooleanHashMapWithHashingStrategy.this.size();
         }
 
+        @Override
         public boolean isEmpty()
         {
             return ObjectBooleanHashMapWithHashingStrategy.this.isEmpty();
         }
 
+        @Override
         public boolean notEmpty()
         {
             return ObjectBooleanHashMapWithHashingStrategy.this.notEmpty();
         }
 
+        @Override
         public String makeString()
         {
             return this.makeString(", ");
         }
 
+        @Override
         public String makeString(String separator)
         {
             return this.makeString("", separator, "");
         }
 
+        @Override
         public String makeString(String start, String separator, String end)
         {
             Appendable stringBuilder = new StringBuilder();
@@ -1510,16 +1630,19 @@ public class ObjectBooleanHashMapWithHashingStrategy<K> implements MutableObject
             return stringBuilder.toString();
         }
 
+        @Override
         public void appendString(Appendable appendable)
         {
             this.appendString(appendable, ", ");
         }
 
+        @Override
         public void appendString(Appendable appendable, String separator)
         {
             this.appendString(appendable, "", separator, "");
         }
 
+        @Override
         public void appendString(Appendable appendable, String start, String separator, String end)
         {
             try
@@ -1555,11 +1678,13 @@ public class ObjectBooleanHashMapWithHashingStrategy<K> implements MutableObject
         private int count;
         private int position;
 
+        @Override
         public boolean hasNext()
         {
             return this.count != ObjectBooleanHashMapWithHashingStrategy.this.size();
         }
 
+        @Override
         public boolean next()
         {
             if (!this.hasNext())
@@ -1578,6 +1703,7 @@ public class ObjectBooleanHashMapWithHashingStrategy<K> implements MutableObject
             return result;
         }
 
+        @Override
         public void remove()
         {
             if (this.position == 0 || !ObjectBooleanHashMapWithHashingStrategy.isNonSentinel(ObjectBooleanHashMapWithHashingStrategy.this.keys[this.position - 1]))
@@ -1591,6 +1717,7 @@ public class ObjectBooleanHashMapWithHashingStrategy<K> implements MutableObject
 
     private class KeysView extends AbstractLazyIterable<K>
     {
+        @Override
         public void each(Procedure<? super K> procedure)
         {
             ObjectBooleanHashMapWithHashingStrategy.this.forEachKey(procedure);
@@ -1622,6 +1749,7 @@ public class ObjectBooleanHashMapWithHashingStrategy<K> implements MutableObject
             }
         }
 
+        @Override
         public Iterator<K> iterator()
         {
             return new InternalKeysViewIterator<>();
@@ -1632,11 +1760,13 @@ public class ObjectBooleanHashMapWithHashingStrategy<K> implements MutableObject
             private int count;
             private int position;
 
+            @Override
             public boolean hasNext()
             {
                 return this.count != ObjectBooleanHashMapWithHashingStrategy.this.size();
             }
 
+            @Override
             public K next()
             {
                 if (!this.hasNext())
@@ -1655,6 +1785,7 @@ public class ObjectBooleanHashMapWithHashingStrategy<K> implements MutableObject
                 return result;
             }
 
+            @Override
             public void remove()
             {
                 throw new UnsupportedOperationException("Cannot call remove() on " + this.getClass().getSimpleName());
@@ -1664,6 +1795,7 @@ public class ObjectBooleanHashMapWithHashingStrategy<K> implements MutableObject
 
     private class KeyValuesView extends AbstractLazyIterable<ObjectBooleanPair<K>>
     {
+        @Override
         public void each(Procedure<? super ObjectBooleanPair<K>> procedure)
         {
             for (int i = 0; i < ObjectBooleanHashMapWithHashingStrategy.this.keys.length; i++)
@@ -1701,6 +1833,7 @@ public class ObjectBooleanHashMapWithHashingStrategy<K> implements MutableObject
             }
         }
 
+        @Override
         public Iterator<ObjectBooleanPair<K>> iterator()
         {
             return new InternalKeyValuesIterator();
@@ -1711,11 +1844,13 @@ public class ObjectBooleanHashMapWithHashingStrategy<K> implements MutableObject
             private int count;
             private int position;
 
+            @Override
             public boolean hasNext()
             {
                 return this.count != ObjectBooleanHashMapWithHashingStrategy.this.size();
             }
 
+            @Override
             public ObjectBooleanPair<K> next()
             {
                 if (!this.hasNext())
@@ -1734,6 +1869,7 @@ public class ObjectBooleanHashMapWithHashingStrategy<K> implements MutableObject
                 return result;
             }
 
+            @Override
             public void remove()
             {
                 throw new UnsupportedOperationException("Cannot call remove() on " + this.getClass().getSimpleName());

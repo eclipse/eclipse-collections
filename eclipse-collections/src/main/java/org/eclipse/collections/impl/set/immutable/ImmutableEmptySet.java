@@ -92,6 +92,7 @@ final class ImmutableEmptySet<T>
         return this;
     }
 
+    @Override
     public int size()
     {
         return 0;
@@ -109,6 +110,7 @@ final class ImmutableEmptySet<T>
         return this;
     }
 
+    @Override
     public void each(Procedure<? super T> procedure)
     {
     }
@@ -123,16 +125,19 @@ final class ImmutableEmptySet<T>
     {
     }
 
+    @Override
     public T getFirst()
     {
         return null;
     }
 
+    @Override
     public T getLast()
     {
         return null;
     }
 
+    @Override
     public Iterator<T> iterator()
     {
         return EmptyIterator.getInstance();

@@ -245,6 +245,7 @@ public final class IntInterval
     /**
      * Returns true if the IntInterval contains all of the specified int values.
      */
+    @Override
     public boolean containsAll(int... values)
     {
         for (int value : values)
@@ -257,6 +258,7 @@ public final class IntInterval
         return true;
     }
 
+    @Override
     public boolean containsAll(IntIterable source)
     {
         for (IntIterator iterator = source.intIterator(); iterator.hasNext(); )
@@ -287,6 +289,7 @@ public final class IntInterval
     /**
      * Returns true if the IntInterval contains the specified int value.
      */
+    @Override
     public boolean contains(int value)
     {
         return this.isWithinBoundaries(value) && (value - this.from) % this.step == 0;
@@ -298,6 +301,7 @@ public final class IntInterval
                 || this.step < 0 && this.to <= value && value <= this.from;
     }
 
+    @Override
     public void forEachWithIndex(IntIntProcedure procedure)
     {
         int index = 0;
@@ -317,6 +321,7 @@ public final class IntInterval
         }
     }
 
+    @Override
     public void forEach(IntProcedure procedure)
     {
         this.each(procedure);
@@ -325,6 +330,7 @@ public final class IntInterval
     /**
      * @since 7.0.
      */
+    @Override
     public void each(IntProcedure procedure)
     {
         if (this.from <= this.to)
@@ -343,6 +349,7 @@ public final class IntInterval
         }
     }
 
+    @Override
     public int count(IntPredicate predicate)
     {
         int count = 0;
@@ -356,6 +363,7 @@ public final class IntInterval
         return count;
     }
 
+    @Override
     public boolean anySatisfy(IntPredicate predicate)
     {
         for (int i = 0; i < this.size(); i++)
@@ -368,6 +376,7 @@ public final class IntInterval
         return false;
     }
 
+    @Override
     public boolean allSatisfy(IntPredicate predicate)
     {
         for (int i = 0; i < this.size(); i++)
@@ -380,6 +389,7 @@ public final class IntInterval
         return true;
     }
 
+    @Override
     public boolean noneSatisfy(IntPredicate predicate)
     {
         for (int i = 0; i < this.size(); i++)
@@ -457,6 +467,7 @@ public final class IntInterval
     /**
      * Returns a new IntInterval with the from and to values reversed and the step value negated.
      */
+    @Override
     public IntInterval toReversed()
     {
         return IntInterval.fromToBy(this.to, this.from, -this.step);
@@ -465,11 +476,13 @@ public final class IntInterval
     /**
      * @since 6.0
      */
+    @Override
     public ImmutableIntList distinct()
     {
         return this;
     }
 
+    @Override
     public ImmutableIntList subList(int fromIndex, int toIndex)
     {
         throw new UnsupportedOperationException("subList not yet implemented!");
@@ -478,11 +491,13 @@ public final class IntInterval
     /**
      * Calculates and returns the size of the interval.
      */
+    @Override
     public int size()
     {
         return (this.to - this.from) / this.step + 1;
     }
 
+    @Override
     public long dotProduct(IntList list)
     {
         if (this.size() != list.size())
@@ -497,26 +512,31 @@ public final class IntInterval
         return sum;
     }
 
+    @Override
     public boolean isEmpty()
     {
         return this.size() == 0;
     }
 
+    @Override
     public boolean notEmpty()
     {
         return !this.isEmpty();
     }
 
+    @Override
     public String makeString()
     {
         return this.makeString(", ");
     }
 
+    @Override
     public String makeString(String separator)
     {
         return this.makeString("", separator, "");
     }
 
+    @Override
     public String makeString(String start, String separator, String end)
     {
         Appendable stringBuilder = new StringBuilder();
@@ -524,16 +544,19 @@ public final class IntInterval
         return stringBuilder.toString();
     }
 
+    @Override
     public void appendString(Appendable appendable)
     {
         this.appendString(appendable, ", ");
     }
 
+    @Override
     public void appendString(Appendable appendable, String separator)
     {
         this.appendString(appendable, "", separator, "");
     }
 
+    @Override
     public void appendString(
             Appendable appendable,
             String start,
@@ -560,6 +583,7 @@ public final class IntInterval
         }
     }
 
+    @Override
     public int[] toArray()
     {
         int[] result = new int[this.size()];
@@ -567,6 +591,7 @@ public final class IntInterval
         return result;
     }
 
+    @Override
     public <T> T injectInto(T injectedValue, ObjectIntToObjectFunction<? super T, ? extends T> function)
     {
         T result = injectedValue;
@@ -587,6 +612,7 @@ public final class IntInterval
         return result;
     }
 
+    @Override
     public <T> T injectIntoWithIndex(T injectedValue, ObjectIntIntToObjectFunction<? super T, ? extends T> function)
     {
         T result = injectedValue;
@@ -617,21 +643,25 @@ public final class IntInterval
         return this.makeString("[", ", ", "]");
     }
 
+    @Override
     public IntIterator intIterator()
     {
         return new IntIntervalIterator();
     }
 
+    @Override
     public int getFirst()
     {
         return this.from;
     }
 
+    @Override
     public int getLast()
     {
         return this.locationAfterN(this.size() - 1);
     }
 
+    @Override
     public int get(int index)
     {
         this.checkBounds("index", index);
@@ -659,6 +689,7 @@ public final class IntInterval
         return (int) Math.max((long) this.from + (long) this.step * (long) index, this.to);
     }
 
+    @Override
     public int indexOf(int value)
     {
         if (!this.isWithinBoundaries(value))
@@ -674,36 +705,43 @@ public final class IntInterval
         return -1;
     }
 
+    @Override
     public int lastIndexOf(int value)
     {
         return this.indexOf(value);
     }
 
+    @Override
     public ImmutableIntList select(IntPredicate predicate)
     {
         return IntArrayList.newList(new SelectIntIterable(this, predicate)).toImmutable();
     }
 
+    @Override
     public ImmutableIntList reject(IntPredicate predicate)
     {
         return IntArrayList.newList(new SelectIntIterable(this, IntPredicates.not(predicate))).toImmutable();
     }
 
+    @Override
     public int detectIfNone(IntPredicate predicate, int ifNone)
     {
         return new SelectIntIterable(this, predicate).detectIfNone(predicate, ifNone);
     }
 
+    @Override
     public <V> ImmutableList<V> collect(IntToObjectFunction<? extends V> function)
     {
         return new CollectIntToObjectIterable<V>(this, function).toList().toImmutable();
     }
 
+    @Override
     public LazyIntIterable asReversed()
     {
         return ReverseIntIterable.adapt(this);
     }
 
+    @Override
     public long sum()
     {
         long sum = 0L;
@@ -714,6 +752,7 @@ public final class IntInterval
         return sum;
     }
 
+    @Override
     public int max()
     {
         if (this.from >= this.to)
@@ -723,6 +762,7 @@ public final class IntInterval
         return this.getLast();
     }
 
+    @Override
     public int min()
     {
         if (this.from <= this.to)
@@ -732,21 +772,25 @@ public final class IntInterval
         return this.getLast();
     }
 
+    @Override
     public int minIfEmpty(int defaultValue)
     {
         return this.min();
     }
 
+    @Override
     public int maxIfEmpty(int defaultValue)
     {
         return this.max();
     }
 
+    @Override
     public double average()
     {
         return (double) this.sum() / (double) this.size();
     }
 
+    @Override
     public double median()
     {
         int[] sortedArray = this.toSortedArray();
@@ -760,6 +804,7 @@ public final class IntInterval
         return (double) sortedArray[middleIndex];
     }
 
+    @Override
     public int binarySearch(int value)
     {
         if (this.step > 0 && this.from > value || this.step < 0 && this.from < value)
@@ -777,6 +822,7 @@ public final class IntInterval
         return diff % this.step == 0 ? index : (index + 2) * -1;
     }
 
+    @Override
     public int[] toSortedArray()
     {
         int[] array = this.toArray();
@@ -784,51 +830,61 @@ public final class IntInterval
         return array;
     }
 
+    @Override
     public MutableIntList toList()
     {
         return IntArrayList.newList(this);
     }
 
+    @Override
     public MutableIntList toSortedList()
     {
         return IntArrayList.newList(this).sortThis();
     }
 
+    @Override
     public MutableIntSet toSet()
     {
         return IntHashSet.newSet(this);
     }
 
+    @Override
     public MutableIntBag toBag()
     {
         return IntHashBag.newBag(this);
     }
 
+    @Override
     public LazyIntIterable asLazy()
     {
         return new LazyIntIterableAdapter(this);
     }
 
+    @Override
     public ImmutableIntList toImmutable()
     {
         return this;
     }
 
+    @Override
     public ImmutableIntList newWith(int element)
     {
         return IntArrayList.newList(this).with(element).toImmutable();
     }
 
+    @Override
     public ImmutableIntList newWithout(int element)
     {
         return IntArrayList.newList(this).without(element).toImmutable();
     }
 
+    @Override
     public ImmutableIntList newWithAll(IntIterable elements)
     {
         return IntArrayList.newList(this).withAll(elements).toImmutable();
     }
 
+    @Override
     public ImmutableIntList newWithoutAll(IntIterable elements)
     {
         return IntArrayList.newList(this).withoutAll(elements).toImmutable();
@@ -838,6 +894,7 @@ public final class IntInterval
     {
         private int current = IntInterval.this.from;
 
+        @Override
         public boolean hasNext()
         {
             if (IntInterval.this.from <= IntInterval.this.to)
@@ -847,6 +904,7 @@ public final class IntInterval
             return this.current >= IntInterval.this.to;
         }
 
+        @Override
         public int next()
         {
             if (this.hasNext())

@@ -32,6 +32,7 @@ public final class BagAddOccurrencesProcedure<T> implements ObjectIntProcedure<T
         return new BagAddOccurrencesProcedure<>(mutableBag);
     }
 
+    @Override
     public void value(T each, int occurrences)
     {
         this.mutableBag.addOccurrences(each, occurrences);

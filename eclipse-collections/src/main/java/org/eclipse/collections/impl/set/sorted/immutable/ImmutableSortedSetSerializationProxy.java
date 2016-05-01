@@ -38,6 +38,7 @@ class ImmutableSortedSetSerializationProxy<T> implements Externalizable
         this.set = set;
     }
 
+    @Override
     public void writeExternal(ObjectOutput out) throws IOException
     {
         out.writeObject(this.set.comparator());
@@ -62,6 +63,7 @@ class ImmutableSortedSetSerializationProxy<T> implements Externalizable
         }
     }
 
+    @Override
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
     {
         Comparator<T> comparator = (Comparator<T>) in.readObject();

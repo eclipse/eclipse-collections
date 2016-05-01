@@ -33,6 +33,7 @@ public final class CollectionRemoveProcedure<T> implements Procedure<T>
         return new CollectionRemoveProcedure<>(newCollection);
     }
 
+    @Override
     public void value(T object)
     {
         this.collection.remove(object);

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -148,6 +148,7 @@ public final class StringFunctions
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public String valueOf(String object)
         {
             return object.toUpperCase();
@@ -164,6 +165,7 @@ public final class StringFunctions
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public String valueOf(String object)
         {
             return object.toLowerCase();
@@ -180,6 +182,7 @@ public final class StringFunctions
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public int intValueOf(String string)
         {
             return string.length();
@@ -196,6 +199,7 @@ public final class StringFunctions
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public String valueOf(String string)
         {
             return string.trim();
@@ -213,6 +217,7 @@ public final class StringFunctions
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public Character valueOf(String object)
         {
             return object == null || object.length() < 1 ? null : object.charAt(0);
@@ -223,6 +228,7 @@ public final class StringFunctions
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public Integer valueOf(String string)
         {
             return Integer.valueOf(string);
@@ -233,6 +239,7 @@ public final class StringFunctions
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public boolean booleanValueOf(String string)
         {
             return Boolean.parseBoolean(string);
@@ -243,6 +250,7 @@ public final class StringFunctions
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public byte byteValueOf(String string)
         {
             return Byte.parseByte(string);
@@ -253,6 +261,7 @@ public final class StringFunctions
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public char charValueOf(String string)
         {
             return string.charAt(0);
@@ -263,6 +272,7 @@ public final class StringFunctions
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public char charValueOf(String string)
         {
             return (char) Integer.parseInt(string);
@@ -273,6 +283,7 @@ public final class StringFunctions
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public double doubleValueOf(String string)
         {
             return Double.parseDouble(string);
@@ -283,6 +294,7 @@ public final class StringFunctions
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public float floatValueOf(String string)
         {
             return Float.parseFloat(string);
@@ -293,6 +305,7 @@ public final class StringFunctions
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public int intValueOf(String string)
         {
             return Integer.parseInt(string);
@@ -303,6 +316,7 @@ public final class StringFunctions
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public long longValueOf(String string)
         {
             return Long.parseLong(string);
@@ -313,6 +327,7 @@ public final class StringFunctions
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public short shortValueOf(String string)
         {
             return Short.parseShort(string);
@@ -332,6 +347,7 @@ public final class StringFunctions
             this.endIndex = endIndex;
         }
 
+        @Override
         public String valueOf(String string)
         {
             return string.substring(this.beginIndex, this.endIndex);
@@ -355,6 +371,7 @@ public final class StringFunctions
             this.valueToAppend = valueToAppend;
         }
 
+        @Override
         public String valueOf(String string)
         {
             return string + this.valueToAppend;
@@ -372,6 +389,7 @@ public final class StringFunctions
             this.valueToPrepend = valueToPrepend;
         }
 
+        @Override
         public String valueOf(String string)
         {
             return this.valueToPrepend + string;

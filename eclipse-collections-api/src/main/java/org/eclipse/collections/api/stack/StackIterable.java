@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -75,17 +75,20 @@ public interface StackIterable<T> extends OrderedIterable<T>
     /**
      * Should return the same value as peek().
      */
+    @Override
     T getFirst();
 
     /**
      * Should not work as it violates the contract of a Stack.
      */
+    @Override
     T getLast();
 
     /**
      * Follows the same rules as {@link AbstractCollection#toString()} except it processes the elements
      * in the same order as {@code forEach()}.
      */
+    @Override
     String toString();
 
     /**
@@ -100,12 +103,16 @@ public interface StackIterable<T> extends OrderedIterable<T>
     @Override
     int hashCode();
 
+    @Override
     StackIterable<T> takeWhile(Predicate<? super T> predicate);
 
+    @Override
     StackIterable<T> dropWhile(Predicate<? super T> predicate);
 
+    @Override
     PartitionStack<T> partitionWhile(Predicate<? super T> predicate);
 
+    @Override
     StackIterable<T> distinct();
 
     /**
@@ -113,56 +120,81 @@ public interface StackIterable<T> extends OrderedIterable<T>
      *
      * @since 2.0
      */
+    @Override
     MutableStack<T> toStack();
 
+    @Override
     StackIterable<T> tap(Procedure<? super T> procedure);
 
+    @Override
     StackIterable<T> select(Predicate<? super T> predicate);
 
+    @Override
     <P> StackIterable<T> selectWith(Predicate2<? super T, ? super P> predicate, P parameter);
 
+    @Override
     StackIterable<T> reject(Predicate<? super T> predicate);
 
+    @Override
     <P> StackIterable<T> rejectWith(Predicate2<? super T, ? super P> predicate, P parameter);
 
+    @Override
     <S> StackIterable<S> selectInstancesOf(Class<S> clazz);
 
+    @Override
     PartitionStack<T> partition(Predicate<? super T> predicate);
 
+    @Override
     <P> PartitionStack<T> partitionWith(Predicate2<? super T, ? super P> predicate, P parameter);
 
+    @Override
     <V> StackIterable<V> collect(Function<? super T, ? extends V> function);
 
+    @Override
     BooleanStack collectBoolean(BooleanFunction<? super T> booleanFunction);
 
+    @Override
     ByteStack collectByte(ByteFunction<? super T> byteFunction);
 
+    @Override
     CharStack collectChar(CharFunction<? super T> charFunction);
 
+    @Override
     DoubleStack collectDouble(DoubleFunction<? super T> doubleFunction);
 
+    @Override
     FloatStack collectFloat(FloatFunction<? super T> floatFunction);
 
+    @Override
     IntStack collectInt(IntFunction<? super T> intFunction);
 
+    @Override
     LongStack collectLong(LongFunction<? super T> longFunction);
 
+    @Override
     ShortStack collectShort(ShortFunction<? super T> shortFunction);
 
+    @Override
     <P, V> StackIterable<V> collectWith(Function2<? super T, ? super P, ? extends V> function, P parameter);
 
+    @Override
     <V> StackIterable<V> collectIf(Predicate<? super T> predicate, Function<? super T, ? extends V> function);
 
     <V> StackIterable<V> collectWithIndex(ObjectIntToObjectFunction<? super T, ? extends V> function);
 
+    @Override
     <V> StackIterable<V> flatCollect(Function<? super T, ? extends Iterable<V>> function);
 
+    @Override
     <V> ListMultimap<V, T> groupBy(Function<? super T, ? extends V> function);
 
+    @Override
     <V> ListMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function);
 
+    @Override
     <S> StackIterable<Pair<T, S>> zip(Iterable<S> that);
 
+    @Override
     StackIterable<Pair<T, Integer>> zipWithIndex();
 
     /**

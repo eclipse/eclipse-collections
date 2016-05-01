@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -199,6 +199,7 @@ public final class StringPredicates
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public boolean accept(String anObject)
         {
             return anObject != null && anObject.length() == 0;
@@ -215,6 +216,7 @@ public final class StringPredicates
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public boolean accept(String anObject)
         {
             return anObject != null && anObject.length() > 0;
@@ -231,6 +233,7 @@ public final class StringPredicates
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public boolean accept(String anObject)
         {
             return StringIterate.anySatisfy(anObject, CodePointPredicate.IS_LETTER);
@@ -247,6 +250,7 @@ public final class StringPredicates
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public boolean accept(String anObject)
         {
             return StringIterate.anySatisfy(anObject, CodePointPredicate.IS_DIGIT);
@@ -263,6 +267,7 @@ public final class StringPredicates
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public boolean accept(String anObject)
         {
             return StringIterate.anySatisfy(anObject, CodePointPredicate.IS_LETTER_OR_DIGIT);
@@ -279,6 +284,7 @@ public final class StringPredicates
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public boolean accept(String string)
         {
             boolean hasLetter = false;
@@ -312,6 +318,7 @@ public final class StringPredicates
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public boolean accept(String anObject)
         {
             return StringIterate.anySatisfy(anObject, CodePointPredicate.IS_WHITESPACE);
@@ -328,6 +335,7 @@ public final class StringPredicates
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public boolean accept(String anObject)
         {
             return StringIterate.anySatisfy(anObject, CodePointPredicate.IS_UPPERCASE);
@@ -344,6 +352,7 @@ public final class StringPredicates
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public boolean accept(String anObject)
         {
             return StringIterate.anySatisfy(anObject, CodePointPredicate.IS_LOWERCASE);
@@ -360,6 +369,7 @@ public final class StringPredicates
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public boolean accept(String anObject)
         {
             return StringIterate.anySatisfy(anObject, CodePointPredicate.IS_UNDEFINED);
@@ -376,6 +386,7 @@ public final class StringPredicates
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public boolean accept(String anObject)
         {
             return StringIterate.allSatisfy(anObject, CodePointPredicate.IS_DIGIT);
@@ -392,6 +403,7 @@ public final class StringPredicates
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public boolean accept(String anObject)
         {
             return StringIterate.allSatisfy(anObject, CodePointPredicate.IS_LETTER_OR_DIGIT);
@@ -408,6 +420,7 @@ public final class StringPredicates
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public boolean accept(String string)
         {
             return StringIterate.isEmptyOrWhitespace(string);
@@ -424,6 +437,7 @@ public final class StringPredicates
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public boolean accept(String string)
         {
             return StringIterate.notEmptyOrWhitespace(string);
@@ -440,6 +454,7 @@ public final class StringPredicates
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public boolean accept(String anObject)
         {
             return anObject != null && StringIterate.allSatisfy(anObject, CodePointPredicate.IS_LETTER);
@@ -462,6 +477,7 @@ public final class StringPredicates
             this.otherString = newOtherString;
         }
 
+        @Override
         public boolean accept(String string)
         {
             return StringIterate.notEmpty(string) && string.contains(this.otherString);
@@ -484,6 +500,7 @@ public final class StringPredicates
             this.otherString = newOtherString;
         }
 
+        @Override
         public boolean accept(String string)
         {
             return StringIterate.isEmpty(string) || !string.contains(this.otherString);
@@ -506,6 +523,7 @@ public final class StringPredicates
             this.character = newCharacter;
         }
 
+        @Override
         public boolean accept(String string)
         {
             return StringIterate.notEmpty(string) && string.indexOf(this.character) > -1;
@@ -528,6 +546,7 @@ public final class StringPredicates
             this.substring = newSubstring;
         }
 
+        @Override
         public boolean accept(String anObject)
         {
             return anObject != null && anObject.startsWith(this.substring);
@@ -550,6 +569,7 @@ public final class StringPredicates
             this.substring = newSubstring;
         }
 
+        @Override
         public boolean accept(String anObject)
         {
             return anObject != null && anObject.endsWith(this.substring);
@@ -572,6 +592,7 @@ public final class StringPredicates
             this.size = newSize;
         }
 
+        @Override
         public boolean accept(String anObject)
         {
             return anObject != null && anObject.length() == this.size;
@@ -594,6 +615,7 @@ public final class StringPredicates
             this.otherString = newOtherString;
         }
 
+        @Override
         public boolean accept(String anObject)
         {
             return anObject != null && anObject.equalsIgnoreCase(this.otherString);
@@ -616,6 +638,7 @@ public final class StringPredicates
             this.regex = newRegex;
         }
 
+        @Override
         public boolean accept(String anObject)
         {
             return anObject != null && anObject.matches(this.regex);
@@ -638,6 +661,7 @@ public final class StringPredicates
             this.string = newString;
         }
 
+        @Override
         public boolean accept(String anObject)
         {
             return anObject != null && anObject.compareTo(this.string) < 0;
@@ -660,6 +684,7 @@ public final class StringPredicates
             this.string = newString;
         }
 
+        @Override
         public boolean accept(String anObject)
         {
             return anObject != null && anObject.compareTo(this.string) <= 0;
@@ -682,6 +707,7 @@ public final class StringPredicates
             this.string = newString;
         }
 
+        @Override
         public boolean accept(String anObject)
         {
             return anObject != null && anObject.compareTo(this.string) > 0;
@@ -704,6 +730,7 @@ public final class StringPredicates
             this.string = newString;
         }
 
+        @Override
         public boolean accept(String anObject)
         {
             return anObject != null && anObject.compareTo(this.string) >= 0;

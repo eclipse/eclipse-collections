@@ -139,6 +139,7 @@ public interface RichIterableUniqueTestCase extends RichIterableTestCase
         assertEquals(3, this.newWith(3, 2, 1).size());
     }
 
+    @Override
     @Test
     default void RichIterable_toArray()
     {

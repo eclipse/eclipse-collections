@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -111,6 +111,7 @@ public final class BooleanPredicates
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public boolean accept(boolean value)
         {
             return value;
@@ -121,6 +122,7 @@ public final class BooleanPredicates
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public boolean accept(boolean value)
         {
             return !value;
@@ -140,6 +142,7 @@ public final class BooleanPredicates
             this.two = two;
         }
 
+        @Override
         public boolean accept(boolean actual)
         {
             return this.one.accept(actual) && this.two.accept(actual);
@@ -159,6 +162,7 @@ public final class BooleanPredicates
             this.two = two;
         }
 
+        @Override
         public boolean accept(boolean actual)
         {
             return this.one.accept(actual) || this.two.accept(actual);
@@ -176,6 +180,7 @@ public final class BooleanPredicates
             this.negate = negate;
         }
 
+        @Override
         public boolean accept(boolean actual)
         {
             return !this.negate.accept(actual);
@@ -186,6 +191,7 @@ public final class BooleanPredicates
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public boolean accept(boolean value)
         {
             return false;
@@ -196,6 +202,7 @@ public final class BooleanPredicates
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public boolean accept(boolean value)
         {
             return true;
@@ -206,6 +213,7 @@ public final class BooleanPredicates
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public boolean accept(boolean value)
         {
             return true;
@@ -216,6 +224,7 @@ public final class BooleanPredicates
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public boolean accept(boolean value)
         {
             return false;

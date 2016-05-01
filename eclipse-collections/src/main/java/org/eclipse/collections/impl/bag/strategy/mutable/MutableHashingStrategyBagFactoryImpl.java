@@ -19,36 +19,43 @@ import org.eclipse.collections.impl.utility.Iterate;
 @Immutable
 public class MutableHashingStrategyBagFactoryImpl implements MutableHashingStrategyBagFactory
 {
+    @Override
     public <T> MutableBag<T> of(HashingStrategy<? super T> hashingStrategy)
     {
         return this.with(hashingStrategy);
     }
 
+    @Override
     public <T> MutableBag<T> empty(HashingStrategy<? super T> hashingStrategy)
     {
         return this.with(hashingStrategy);
     }
 
+    @Override
     public <T> MutableBag<T> with(HashingStrategy<? super T> hashingStrategy)
     {
         return HashBagWithHashingStrategy.newBagWith(hashingStrategy);
     }
 
+    @Override
     public <T> MutableBag<T> of(HashingStrategy<? super T> hashingStrategy, T... items)
     {
         return this.with(hashingStrategy, items);
     }
 
+    @Override
     public <T> MutableBag<T> with(HashingStrategy<? super T> hashingStrategy, T... items)
     {
         return HashBagWithHashingStrategy.newBagWith(hashingStrategy, items);
     }
 
+    @Override
     public <T> MutableBag<T> ofAll(HashingStrategy<? super T> hashingStrategy, Iterable<? extends T> items)
     {
         return this.withAll(hashingStrategy, items);
     }
 
+    @Override
     public <T> MutableBag<T> withAll(HashingStrategy<? super T> hashingStrategy, Iterable<? extends T> items)
     {
         if (Iterate.isEmpty(items))

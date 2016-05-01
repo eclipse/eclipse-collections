@@ -38,6 +38,7 @@ class ImmutableSortedBagSerializationProxy<T> implements Externalizable
         this.bag = bag;
     }
 
+    @Override
     public void writeExternal(ObjectOutput out) throws IOException
     {
         out.writeInt(this.bag.sizeDistinct());
@@ -63,6 +64,7 @@ class ImmutableSortedBagSerializationProxy<T> implements Externalizable
         }
     }
 
+    @Override
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
     {
         int size = in.readInt();

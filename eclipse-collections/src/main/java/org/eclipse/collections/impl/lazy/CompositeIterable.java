@@ -45,6 +45,7 @@ public final class CompositeIterable<E>
         return new CompositeIterable<>(FastList.newListWith(iterables));
     }
 
+    @Override
     public void each(Procedure<? super E> procedure)
     {
         this.iterables.each(iterable -> Iterate.forEach(iterable, procedure));
@@ -104,6 +105,7 @@ public final class CompositeIterable<E>
         this.iterables.add(iterable);
     }
 
+    @Override
     public Iterator<E> iterator()
     {
         return new CompositeIterator(this.iterables);
@@ -121,6 +123,7 @@ public final class CompositeIterable<E>
             this.innerIterator = EmptyIterator.getInstance();
         }
 
+        @Override
         public boolean hasNext()
         {
             while (true)
@@ -137,6 +140,7 @@ public final class CompositeIterable<E>
             }
         }
 
+        @Override
         public E next()
         {
             if (!this.hasNext())
@@ -146,6 +150,7 @@ public final class CompositeIterable<E>
             return this.innerIterator.next();
         }
 
+        @Override
         public void remove()
         {
             throw new UnsupportedOperationException("Cannot remove from a composite iterator");

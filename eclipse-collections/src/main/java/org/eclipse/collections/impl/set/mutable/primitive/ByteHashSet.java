@@ -101,6 +101,7 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
         return new ByteHashSet(source);
     }
 
+    @Override
     public boolean add(byte element)
     {
         if (element <= MAX_BYTE_GROUP_1)
@@ -155,6 +156,7 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
         return false;
     }
 
+    @Override
     public boolean remove(byte value)
     {
         if (value <= MAX_BYTE_GROUP_1)
@@ -202,6 +204,7 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
         return true;
     }
 
+    @Override
     public boolean contains(byte value)
     {
         if (value <= MAX_BYTE_GROUP_1)
@@ -249,31 +252,37 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
         return this.makeString("[", ", ", "]");
     }
 
+    @Override
     public int size()
     {
         return this.size;
     }
 
+    @Override
     public boolean isEmpty()
     {
         return this.size() == 0;
     }
 
+    @Override
     public boolean notEmpty()
     {
         return this.size() != 0;
     }
 
+    @Override
     public String makeString()
     {
         return this.makeString(", ");
     }
 
+    @Override
     public String makeString(String separator)
     {
         return this.makeString("", separator, "");
     }
 
+    @Override
     public String makeString(String start, String separator, String end)
     {
         Appendable stringBuilder = new StringBuilder();
@@ -281,16 +290,19 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
         return stringBuilder.toString();
     }
 
+    @Override
     public void appendString(Appendable appendable)
     {
         this.appendString(appendable, ", ");
     }
 
+    @Override
     public void appendString(Appendable appendable, String separator)
     {
         this.appendString(appendable, "", separator, "");
     }
 
+    @Override
     public void appendString(Appendable appendable, String start, String separator, String end)
     {
         try
@@ -318,6 +330,7 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
         }
     }
 
+    @Override
     public boolean addAll(byte... source)
     {
         int oldSize = this.size();
@@ -328,6 +341,7 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
         return this.size() != oldSize;
     }
 
+    @Override
     public boolean addAll(ByteIterable source)
     {
         if (source.isEmpty())
@@ -365,6 +379,7 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
         return this.size() != oldSize;
     }
 
+    @Override
     public boolean removeAll(ByteIterable source)
     {
         if (source.isEmpty())
@@ -400,6 +415,7 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
         return this.size() != oldSize;
     }
 
+    @Override
     public boolean removeAll(byte... source)
     {
         if (source.length == 0)
@@ -414,6 +430,7 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
         return this.size() != oldSize;
     }
 
+    @Override
     public boolean retainAll(ByteIterable source)
     {
         int oldSize = this.size();
@@ -433,11 +450,13 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
         return false;
     }
 
+    @Override
     public boolean retainAll(byte... source)
     {
         return this.retainAll(ByteHashSet.newSetWith(source));
     }
 
+    @Override
     public void clear()
     {
         this.size = 0;
@@ -447,40 +466,47 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
         this.bitGroup2 = 0L;
     }
 
+    @Override
     public ByteHashSet with(byte element)
     {
         this.add(element);
         return this;
     }
 
+    @Override
     public ByteHashSet without(byte element)
     {
         this.remove(element);
         return this;
     }
 
+    @Override
     public ByteHashSet withAll(ByteIterable elements)
     {
         this.addAll(elements.toArray());
         return this;
     }
 
+    @Override
     public ByteHashSet withoutAll(ByteIterable elements)
     {
         this.removeAll(elements);
         return this;
     }
 
+    @Override
     public MutableByteSet asUnmodifiable()
     {
         return new UnmodifiableByteSet(this);
     }
 
+    @Override
     public MutableByteSet asSynchronized()
     {
         return new SynchronizedByteSet(this);
     }
 
+    @Override
     public ImmutableByteSet toImmutable()
     {
         if (this.size() == 0)
@@ -496,11 +522,13 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
                 mutableSet.bitGroup1, mutableSet.bitGroup2, mutableSet.size);
     }
 
+    @Override
     public MutableByteIterator byteIterator()
     {
         return new MutableInternalByteIterator();
     }
 
+    @Override
     public byte[] toArray()
     {
         byte[] array = new byte[this.size()];
@@ -518,6 +546,7 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
         return array;
     }
 
+    @Override
     public boolean containsAll(byte... source)
     {
         for (byte item : source)
@@ -530,6 +559,7 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
         return true;
     }
 
+    @Override
     public boolean containsAll(ByteIterable source)
     {
         for (ByteIterator iterator = source.byteIterator(); iterator.hasNext(); )
@@ -542,6 +572,7 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
         return true;
     }
 
+    @Override
     public void forEach(ByteProcedure procedure)
     {
         this.each(procedure);
@@ -550,6 +581,7 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
     /**
      * @since 7.0.
      */
+    @Override
     public void each(ByteProcedure procedure)
     {
         long bitGroup1 = this.bitGroup1;
@@ -585,6 +617,7 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
         }
     }
 
+    @Override
     public ByteHashSet select(BytePredicate predicate)
     {
         ByteHashSet result = new ByteHashSet();
@@ -599,6 +632,7 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
         return result;
     }
 
+    @Override
     public MutableByteSet reject(BytePredicate predicate)
     {
         MutableByteSet result = new ByteHashSet();
@@ -613,6 +647,7 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
         return result;
     }
 
+    @Override
     public <V> MutableSet<V> collect(ByteToObjectFunction<? extends V> function)
     {
         MutableSet<V> target = UnifiedSet.newSet(this.size());
@@ -622,6 +657,7 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
         return target;
     }
 
+    @Override
     public byte detectIfNone(BytePredicate predicate, byte ifNone)
     {
         ByteIterator iterator = this.byteIterator();
@@ -639,6 +675,7 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
         return ifNone;
     }
 
+    @Override
     public int count(BytePredicate predicate)
     {
         int count = 0;
@@ -655,6 +692,7 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
         return count;
     }
 
+    @Override
     public boolean anySatisfy(BytePredicate predicate)
     {
         ByteIterator iterator = this.byteIterator();
@@ -670,6 +708,7 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
         return false;
     }
 
+    @Override
     public boolean allSatisfy(BytePredicate predicate)
     {
         ByteIterator iterator = this.byteIterator();
@@ -685,6 +724,7 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
         return true;
     }
 
+    @Override
     public boolean noneSatisfy(BytePredicate predicate)
     {
         ByteIterator iterator = this.byteIterator();
@@ -700,26 +740,31 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
         return true;
     }
 
+    @Override
     public MutableByteList toList()
     {
         return ByteArrayList.newList(this);
     }
 
+    @Override
     public MutableByteSet toSet()
     {
         return ByteHashSet.newSet(this);
     }
 
+    @Override
     public MutableByteBag toBag()
     {
         return ByteHashBag.newBag(this);
     }
 
+    @Override
     public LazyByteIterable asLazy()
     {
         return new LazyByteIterableAdapter(this);
     }
 
+    @Override
     public long sum()
     {
         long result = 0L;
@@ -734,6 +779,7 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
         return result;
     }
 
+    @Override
     public byte max()
     {
         if (this.isEmpty())
@@ -763,6 +809,7 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
         return max;
     }
 
+    @Override
     public byte maxIfEmpty(byte defaultValue)
     {
         if (this.isEmpty())
@@ -772,6 +819,7 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
         return this.max();
     }
 
+    @Override
     public byte min()
     {
         if (this.isEmpty())
@@ -803,6 +851,7 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
         return min;
     }
 
+    @Override
     public byte minIfEmpty(byte defaultValue)
     {
         if (this.isEmpty())
@@ -812,6 +861,7 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
         return this.min();
     }
 
+    @Override
     public double average()
     {
         if (this.isEmpty())
@@ -821,6 +871,7 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
         return (double) this.sum() / (double) this.size();
     }
 
+    @Override
     public double median()
     {
         if (this.isEmpty())
@@ -838,6 +889,7 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
         return (double) sortedArray[middleIndex];
     }
 
+    @Override
     public byte[] toSortedArray()
     {
         byte[] array = this.toArray();
@@ -845,11 +897,13 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
         return array;
     }
 
+    @Override
     public MutableByteList toSortedList()
     {
         return ByteArrayList.newList(this).sortThis();
     }
 
+    @Override
     public ByteSet freeze()
     {
         if (this.size() == 0)
@@ -865,6 +919,7 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
                 this.bitGroup1, this.bitGroup2, this.size);
     }
 
+    @Override
     public void writeExternal(ObjectOutput out) throws IOException
     {
         out.writeInt(this.size());
@@ -878,6 +933,7 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
         });
     }
 
+    @Override
     public void readExternal(ObjectInput in) throws IOException
     {
         int size = in.readInt();
@@ -888,6 +944,7 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
         }
     }
 
+    @Override
     public <T> T injectInto(T injectedValue, ObjectByteToObjectFunction<? super T, ? extends T> function)
     {
         T result = injectedValue;
@@ -950,51 +1007,61 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
             return this.makeString("[", ", ", "]");
         }
 
+        @Override
         public ImmutableByteSet newWith(byte element)
         {
             return ByteHashSet.newSet(this).with(element).toImmutable();
         }
 
+        @Override
         public ImmutableByteSet newWithout(byte element)
         {
             return ByteHashSet.newSet(this).without(element).toImmutable();
         }
 
+        @Override
         public ImmutableByteSet newWithAll(ByteIterable elements)
         {
             return ByteHashSet.newSet(this).withAll(elements).toImmutable();
         }
 
+        @Override
         public ImmutableByteSet newWithoutAll(ByteIterable elements)
         {
             return ByteHashSet.newSet(this).withoutAll(elements).toImmutable();
         }
 
+        @Override
         public int size()
         {
             return this.size;
         }
 
+        @Override
         public boolean isEmpty()
         {
             return this.size() == 0;
         }
 
+        @Override
         public boolean notEmpty()
         {
             return this.size() != 0;
         }
 
+        @Override
         public String makeString()
         {
             return this.makeString(", ");
         }
 
+        @Override
         public String makeString(String separator)
         {
             return this.makeString("", separator, "");
         }
 
+        @Override
         public String makeString(String start, String separator, String end)
         {
             Appendable stringBuilder = new StringBuilder();
@@ -1002,16 +1069,19 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
             return stringBuilder.toString();
         }
 
+        @Override
         public void appendString(Appendable appendable)
         {
             this.appendString(appendable, ", ");
         }
 
+        @Override
         public void appendString(Appendable appendable, String separator)
         {
             this.appendString(appendable, "", separator, "");
         }
 
+        @Override
         public void appendString(Appendable appendable, String start, String separator, String end)
         {
             try
@@ -1041,11 +1111,13 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
             }
         }
 
+        @Override
         public ByteIterator byteIterator()
         {
             return new InternalByteIterator();
         }
 
+        @Override
         public byte[] toArray()
         {
             byte[] array = new byte[this.size()];
@@ -1063,6 +1135,7 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
             return array;
         }
 
+        @Override
         public boolean contains(byte value)
         {
             if (value <= MAX_BYTE_GROUP_1)
@@ -1081,6 +1154,7 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
             return ((this.bitGroup4 >>> value) & 1L) != 0;
         }
 
+        @Override
         public boolean containsAll(byte... source)
         {
             for (byte item : source)
@@ -1093,6 +1167,7 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
             return true;
         }
 
+        @Override
         public boolean containsAll(ByteIterable source)
         {
             for (ByteIterator iterator = source.byteIterator(); iterator.hasNext(); )
@@ -1105,11 +1180,13 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
             return true;
         }
 
+        @Override
         public void forEach(ByteProcedure procedure)
         {
             this.each(procedure);
         }
 
+        @Override
         public void each(ByteProcedure procedure)
         {
             long bitGroup1 = this.bitGroup1;
@@ -1145,6 +1222,7 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
             }
         }
 
+        @Override
         public ImmutableByteSet select(BytePredicate predicate)
         {
             MutableByteSet result = new ByteHashSet();
@@ -1159,6 +1237,7 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
             return result.toImmutable();
         }
 
+        @Override
         public ImmutableByteSet reject(BytePredicate predicate)
         {
             MutableByteSet result = new ByteHashSet();
@@ -1173,6 +1252,7 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
             return result.toImmutable();
         }
 
+        @Override
         public <V> ImmutableSet<V> collect(ByteToObjectFunction<? extends V> function)
         {
             MutableSet<V> target = UnifiedSet.newSet(this.size());
@@ -1182,6 +1262,7 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
             return target.toImmutable();
         }
 
+        @Override
         public byte detectIfNone(BytePredicate predicate, byte ifNone)
         {
             ByteIterator iterator = this.byteIterator();
@@ -1199,6 +1280,7 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
             return ifNone;
         }
 
+        @Override
         public int count(BytePredicate predicate)
         {
             int count = 0;
@@ -1215,6 +1297,7 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
             return count;
         }
 
+        @Override
         public boolean anySatisfy(BytePredicate predicate)
         {
             ByteIterator iterator = this.byteIterator();
@@ -1230,6 +1313,7 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
             return false;
         }
 
+        @Override
         public boolean allSatisfy(BytePredicate predicate)
         {
             ByteIterator iterator = this.byteIterator();
@@ -1245,6 +1329,7 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
             return true;
         }
 
+        @Override
         public boolean noneSatisfy(BytePredicate predicate)
         {
             ByteIterator iterator = this.byteIterator();
@@ -1260,26 +1345,31 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
             return true;
         }
 
+        @Override
         public MutableByteList toList()
         {
             return ByteArrayList.newList(this);
         }
 
+        @Override
         public MutableByteSet toSet()
         {
             return ByteHashSet.newSet(this);
         }
 
+        @Override
         public MutableByteBag toBag()
         {
             return ByteHashBag.newBag(this);
         }
 
+        @Override
         public LazyByteIterable asLazy()
         {
             return new LazyByteIterableAdapter(this);
         }
 
+        @Override
         public long sum()
         {
             long result = 0L;
@@ -1294,6 +1384,7 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
             return result;
         }
 
+        @Override
         public byte max()
         {
             byte max = 0;
@@ -1319,11 +1410,13 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
             return max;
         }
 
+        @Override
         public byte maxIfEmpty(byte defaultValue)
         {
             return this.max();
         }
 
+        @Override
         public byte min()
         {
             byte min = 0;
@@ -1350,16 +1443,19 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
             return min;
         }
 
+        @Override
         public byte minIfEmpty(byte defaultValue)
         {
             return this.min();
         }
 
+        @Override
         public double average()
         {
             return (double) this.sum() / (double) this.size();
         }
 
+        @Override
         public double median()
         {
             byte[] sortedArray = this.toSortedArray();
@@ -1373,6 +1469,7 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
             return (double) sortedArray[middleIndex];
         }
 
+        @Override
         public byte[] toSortedArray()
         {
             byte[] array = this.toArray();
@@ -1380,11 +1477,13 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
             return array;
         }
 
+        @Override
         public MutableByteList toSortedList()
         {
             return ByteArrayList.newList(this).sortThis();
         }
 
+        @Override
         public <T> T injectInto(T injectedValue, ObjectByteToObjectFunction<? super T, ? extends T> function)
         {
             T result = injectedValue;
@@ -1399,11 +1498,13 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
             return result;
         }
 
+        @Override
         public ByteSet freeze()
         {
             return this;
         }
 
+        @Override
         public ImmutableByteSet toImmutable()
         {
             return this;
@@ -1419,11 +1520,13 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
             private int count;
             private byte minusOneTwentyEightToPlusOneTwentySeven = -128;
 
+            @Override
             public boolean hasNext()
             {
                 return this.count < ImmutableByteHashSet.this.size();
             }
 
+            @Override
             public byte next()
             {
                 if (!this.hasNext())
@@ -1453,11 +1556,13 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
         private int count;
         private byte minusOneTwentyEightToPlusOneTwentySeven = -128;
 
+        @Override
         public boolean hasNext()
         {
             return this.count < ByteHashSet.this.size();
         }
 
+        @Override
         public byte next()
         {
             if (!this.hasNext())
@@ -1481,6 +1586,7 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
             throw new NoSuchElementException("no more element, unexpected situation");
         }
 
+        @Override
         public void remove()
         {
             if (this.count == 0 || !ByteHashSet.this.remove((byte) (this.minusOneTwentyEightToPlusOneTwentySeven - 1)))

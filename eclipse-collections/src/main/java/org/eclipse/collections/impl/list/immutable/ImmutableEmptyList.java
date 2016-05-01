@@ -68,6 +68,7 @@ final class ImmutableEmptyList<T>
         return this;
     }
 
+    @Override
     public int size()
     {
         return 0;
@@ -79,6 +80,7 @@ final class ImmutableEmptyList<T>
         return false;
     }
 
+    @Override
     public T get(int index)
     {
         throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + this.size());
@@ -90,6 +92,7 @@ final class ImmutableEmptyList<T>
         return this;
     }
 
+    @Override
     public void each(Procedure<? super T> procedure)
     {
     }
@@ -109,6 +112,7 @@ final class ImmutableEmptyList<T>
     {
     }
 
+    @Override
     public ImmutableList<T> newWith(T newItem)
     {
         return Lists.immutable.with(newItem);

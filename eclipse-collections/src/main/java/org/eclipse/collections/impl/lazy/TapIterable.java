@@ -36,6 +36,7 @@ public class TapIterable<T>
         this.procedure = procedure;
     }
 
+    @Override
     public void each(Procedure<? super T> procedure)
     {
         Iterate.forEach(this.adapted, each -> {
@@ -107,6 +108,7 @@ public class TapIterable<T>
         });
     }
 
+    @Override
     public Iterator<T> iterator()
     {
         return new TapIterator<>(this.adapted, this.procedure);

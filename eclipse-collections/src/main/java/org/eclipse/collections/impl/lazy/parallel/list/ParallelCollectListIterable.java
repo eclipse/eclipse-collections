@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -58,21 +58,25 @@ public class ParallelCollectListIterable<T, V> extends AbstractParallelListItera
         });
     }
 
+    @Override
     public void forEach(Procedure<? super V> procedure)
     {
         this.parallelIterable.forEach(Functions.bind(procedure, this.function));
     }
 
+    @Override
     public boolean anySatisfy(Predicate<? super V> predicate)
     {
         return this.parallelIterable.anySatisfy(Predicates.attributePredicate(this.function, predicate));
     }
 
+    @Override
     public boolean allSatisfy(Predicate<? super V> predicate)
     {
         return this.parallelIterable.allSatisfy(Predicates.attributePredicate(this.function, predicate));
     }
 
+    @Override
     public V detect(Predicate<? super V> predicate)
     {
         T resultItem = this.parallelIterable.detect(Predicates.attributePredicate(this.function, predicate));

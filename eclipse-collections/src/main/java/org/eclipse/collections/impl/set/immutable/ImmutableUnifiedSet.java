@@ -36,6 +36,7 @@ final class ImmutableUnifiedSet<T>
         this.delegate = delegate;
     }
 
+    @Override
     public int size()
     {
         return this.delegate.size();
@@ -59,16 +60,19 @@ final class ImmutableUnifiedSet<T>
         return this.delegate.contains(object);
     }
 
+    @Override
     public Iterator<T> iterator()
     {
         return new UnmodifiableIteratorAdapter<>(this.delegate.iterator());
     }
 
+    @Override
     public T getFirst()
     {
         return this.delegate.getFirst();
     }
 
+    @Override
     public T getLast()
     {
         return this.delegate.getLast();
@@ -84,16 +88,19 @@ final class ImmutableUnifiedSet<T>
         return new ImmutableUnifiedSet<>(UnifiedSet.newSet(iterable));
     }
 
+    @Override
     public void each(Procedure<? super T> procedure)
     {
         this.delegate.forEach(procedure);
     }
 
+    @Override
     public int getBatchCount(int batchSize)
     {
         return this.delegate.getBatchCount(batchSize);
     }
 
+    @Override
     public void batchForEach(Procedure<? super T> procedure, int sectionIndex, int sectionCount)
     {
         this.delegate.batchForEach(procedure, sectionIndex, sectionCount);

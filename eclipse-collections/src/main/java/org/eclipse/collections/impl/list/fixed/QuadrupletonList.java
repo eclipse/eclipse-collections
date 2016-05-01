@@ -64,11 +64,13 @@ final class QuadrupletonList<T>
         return new QuadrupletonList<>(this.element1, this.element2, this.element3, this.element4);
     }
 
+    @Override
     public int size()
     {
         return 4;
     }
 
+    @Override
     public T get(int index)
     {
         switch (index)
@@ -98,6 +100,7 @@ final class QuadrupletonList<T>
     /**
      * set is implemented purely to allow the List to be sorted, not because this List should be considered mutable.
      */
+    @Override
     public T set(int index, T element)
     {
         switch (index)
@@ -162,6 +165,7 @@ final class QuadrupletonList<T>
         procedure.value(this.element4, parameter);
     }
 
+    @Override
     public void writeExternal(ObjectOutput out) throws IOException
     {
         out.writeObject(this.element1);
@@ -170,6 +174,7 @@ final class QuadrupletonList<T>
         out.writeObject(this.element4);
     }
 
+    @Override
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
     {
         this.element1 = (T) in.readObject();

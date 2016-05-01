@@ -39,6 +39,7 @@ public class LazyIterableAdapter<T>
         this.adapted = newAdapted;
     }
 
+    @Override
     public void each(Procedure<? super T> procedure)
     {
         Iterate.forEach(this.adapted, procedure);
@@ -56,6 +57,7 @@ public class LazyIterableAdapter<T>
         Iterate.forEachWith(this.adapted, procedure, parameter);
     }
 
+    @Override
     public Iterator<T> iterator()
     {
         return new UnmodifiableIteratorAdapter<>(this.adapted.iterator());

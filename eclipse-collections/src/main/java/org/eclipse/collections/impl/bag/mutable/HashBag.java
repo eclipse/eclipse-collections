@@ -100,11 +100,13 @@ public class HashBag<T>
         return new HashBag<>(map);
     }
 
+    @Override
     public void writeExternal(ObjectOutput out) throws IOException
     {
         ((ObjectIntHashMap<T>) this.items).writeExternal(out);
     }
 
+    @Override
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
     {
         this.items = new ObjectIntHashMap<>();
@@ -112,29 +114,34 @@ public class HashBag<T>
         this.size = (int) this.items.sum();
     }
 
+    @Override
     public HashBag<T> without(T element)
     {
         this.remove(element);
         return this;
     }
 
+    @Override
     public MutableBag<T> newEmpty()
     {
         return HashBag.newBag();
     }
 
+    @Override
     public HashBag<T> with(T element)
     {
         this.add(element);
         return this;
     }
 
+    @Override
     public HashBag<T> withAll(Iterable<? extends T> iterable)
     {
         this.addAllIterable(iterable);
         return this;
     }
 
+    @Override
     public HashBag<T> withoutAll(Iterable<? extends T> iterable)
     {
         this.removeAllIterable(iterable);

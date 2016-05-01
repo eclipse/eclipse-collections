@@ -45,71 +45,101 @@ import org.eclipse.collections.api.tuple.Pair;
  */
 public interface ImmutablePrimitiveObjectMap<V> extends PrimitiveObjectMap<V>
 {
+    @Override
     <K, VV> ImmutableMap<K, VV> aggregateInPlaceBy(Function<? super V, ? extends K> groupBy, Function0<? extends VV> zeroValueFactory, Procedure2<? super VV, ? super V> mutatingAggregator);
 
+    @Override
     <K, VV> ImmutableMap<K, VV> aggregateBy(Function<? super V, ? extends K> groupBy, Function0<? extends VV> zeroValueFactory, Function2<? super VV, ? super V, ? extends VV> nonMutatingAggregator);
 
+    @Override
     <VV> ImmutableBagMultimap<VV, V> groupByEach(Function<? super V, ? extends Iterable<VV>> function);
 
+    @Override
     <VV> ImmutableBagMultimap<VV, V> groupBy(Function<? super V, ? extends VV> function);
 
+    @Override
     <VV> ImmutableMap<VV, V> groupByUniqueKey(Function<? super V, ? extends VV> function);
 
+    @Override
     <VV> ImmutableBag<VV> collectIf(Predicate<? super V> predicate, Function<? super V, ? extends VV> function);
 
+    @Override
     <VV> ImmutableBag<VV> collect(Function<? super V, ? extends VV> function);
 
+    @Override
     <VV> ImmutableBag<VV> flatCollect(Function<? super V, ? extends Iterable<VV>> function);
 
+    @Override
     ImmutableBooleanBag collectBoolean(BooleanFunction<? super V> booleanFunction);
 
+    @Override
     ImmutableByteBag collectByte(ByteFunction<? super V> byteFunction);
 
+    @Override
     ImmutableCharBag collectChar(CharFunction<? super V> charFunction);
 
+    @Override
     ImmutableDoubleBag collectDouble(DoubleFunction<? super V> doubleFunction);
 
+    @Override
     ImmutableFloatBag collectFloat(FloatFunction<? super V> floatFunction);
 
+    @Override
     ImmutableIntBag collectInt(IntFunction<? super V> intFunction);
 
+    @Override
     ImmutableLongBag collectLong(LongFunction<? super V> longFunction);
 
+    @Override
     ImmutableShortBag collectShort(ShortFunction<? super V> shortFunction);
 
+    @Override
     <P, VV> ImmutableBag<VV> collectWith(Function2<? super V, ? super P, ? extends VV> function, P parameter);
 
+    @Override
     <S> ImmutableBag<S> selectInstancesOf(Class<S> clazz);
 
+    @Override
     ImmutableBag<V> select(Predicate<? super V> predicate);
 
+    @Override
     <P> ImmutableBag<V> selectWith(Predicate2<? super V, ? super P> predicate, P parameter);
 
+    @Override
     ImmutableBag<V> reject(Predicate<? super V> predicate);
 
+    @Override
     <P> ImmutableBag<V> rejectWith(Predicate2<? super V, ? super P> predicate, P parameter);
 
+    @Override
     PartitionImmutableBag<V> partition(Predicate<? super V> predicate);
 
+    @Override
     <P> PartitionImmutableBag<V> partitionWith(Predicate2<? super V, ? super P> predicate, P parameter);
 
     /**
      * @deprecated in 7.0. Use {@link OrderedIterable#zip(Iterable)} instead.
      */
+    @Override
     @Deprecated
     <S> ImmutableBag<Pair<V, S>> zip(Iterable<S> that);
 
     /**
      * @deprecated in 7.0. Use {@link OrderedIterable#zipWithIndex()} instead.
      */
+    @Override
     @Deprecated
     ImmutableSet<Pair<V, Integer>> zipWithIndex();
 
+    @Override
     <VV> ImmutableObjectLongMap<VV> sumByInt(Function<? super V, ? extends VV> groupBy, IntFunction<? super V> function);
 
+    @Override
     <VV> ImmutableObjectDoubleMap<VV> sumByFloat(Function<? super V, ? extends VV> groupBy, FloatFunction<? super V> function);
 
+    @Override
     <VV> ImmutableObjectLongMap<VV> sumByLong(Function<? super V, ? extends VV> groupBy, LongFunction<? super V> function);
 
+    @Override
     <VV> ImmutableObjectDoubleMap<VV> sumByDouble(Function<? super V, ? extends VV> groupBy, DoubleFunction<? super V> function);
 }

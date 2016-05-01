@@ -39,6 +39,7 @@ final class ImmutableDoubletonSet<T>
         this.element2 = obj2;
     }
 
+    @Override
     public int size()
     {
         return 2;
@@ -96,21 +97,25 @@ final class ImmutableDoubletonSet<T>
         return Comparators.nullSafeEquals(obj, this.element1) || Comparators.nullSafeEquals(obj, this.element2);
     }
 
+    @Override
     public Iterator<T> iterator()
     {
         return new DoubletonSetIterator();
     }
 
+    @Override
     public T getFirst()
     {
         return this.element1;
     }
 
+    @Override
     public T getLast()
     {
         return this.element2;
     }
 
+    @Override
     public void each(Procedure<? super T> procedure)
     {
         procedure.value(this.element1);

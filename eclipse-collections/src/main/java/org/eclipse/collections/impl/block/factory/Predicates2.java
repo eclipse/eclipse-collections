@@ -212,6 +212,7 @@ public abstract class Predicates2<T, P>
             this.right = two;
         }
 
+        @Override
         public boolean accept(T each, P injectedValue)
         {
             return this.left.accept(each, injectedValue) || this.right.accept(each, injectedValue);
@@ -238,6 +239,7 @@ public abstract class Predicates2<T, P>
             this.right = two;
         }
 
+        @Override
         public boolean accept(T each, P injectedValue)
         {
             return this.left.accept(each, injectedValue) && this.right.accept(each, injectedValue);
@@ -266,6 +268,7 @@ public abstract class Predicates2<T, P>
             this.predicate = predicate;
         }
 
+        @Override
         public boolean accept(T each, P injectedValue)
         {
             return this.predicate.accept(this.function.valueOf(each), injectedValue);
@@ -290,6 +293,7 @@ public abstract class Predicates2<T, P>
             this.predicate = predicate;
         }
 
+        @Override
         public boolean accept(T each, P injectedValue)
         {
             return !this.predicate.accept(each, injectedValue);
@@ -307,6 +311,7 @@ public abstract class Predicates2<T, P>
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public boolean accept(Object each, Object compareTo)
         {
             if (compareTo == null)
@@ -328,6 +333,7 @@ public abstract class Predicates2<T, P>
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public boolean accept(Object each, Iterable<?> injectedIterable)
         {
             return Iterate.contains(injectedIterable, each);
@@ -345,6 +351,7 @@ public abstract class Predicates2<T, P>
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public boolean accept(Object each, Iterable<?> injectedIterable)
         {
             return !Iterate.contains(injectedIterable, each);
@@ -362,6 +369,7 @@ public abstract class Predicates2<T, P>
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public boolean accept(T each, T comparison)
         {
             return each.compareTo(comparison) < 0;
@@ -379,6 +387,7 @@ public abstract class Predicates2<T, P>
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public boolean accept(T each, T comparison)
         {
             return each.compareTo(comparison) <= 0;
@@ -396,6 +405,7 @@ public abstract class Predicates2<T, P>
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public boolean accept(T each, T comparison)
         {
             return each.compareTo(comparison) > 0;
@@ -413,6 +423,7 @@ public abstract class Predicates2<T, P>
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public boolean accept(T each, T comparison)
         {
             return each.compareTo(comparison) >= 0;
@@ -430,6 +441,7 @@ public abstract class Predicates2<T, P>
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public boolean accept(Object each, Object compareTo)
         {
             if (compareTo == null)
@@ -451,6 +463,7 @@ public abstract class Predicates2<T, P>
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public boolean accept(Object each, Class<?> injectedClass)
         {
             return injectedClass.isInstance(each);
@@ -468,6 +481,7 @@ public abstract class Predicates2<T, P>
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public boolean accept(Object each, Class<?> injectedClass)
         {
             return !injectedClass.isInstance(each);
@@ -485,6 +499,7 @@ public abstract class Predicates2<T, P>
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public boolean accept(Object each, Object injectedValue)
         {
             return each == injectedValue;
@@ -502,6 +517,7 @@ public abstract class Predicates2<T, P>
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public boolean accept(Object each, Object injectedValue)
         {
             return each != injectedValue;
@@ -519,6 +535,7 @@ public abstract class Predicates2<T, P>
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public boolean accept(Object each, Object notImportant)
         {
             return each == null;
@@ -536,6 +553,7 @@ public abstract class Predicates2<T, P>
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public boolean accept(Object each, Object notImportant)
         {
             return each != null;
@@ -553,6 +571,7 @@ public abstract class Predicates2<T, P>
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public boolean accept(Object each, Object notImportant)
         {
             return true;
@@ -570,6 +589,7 @@ public abstract class Predicates2<T, P>
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public boolean accept(Object each, Object notImportant)
         {
             return false;
@@ -592,6 +612,7 @@ public abstract class Predicates2<T, P>
             this.throwingPredicate2 = throwingPredicate2;
         }
 
+        @Override
         public boolean safeAccept(T object, P param) throws Exception
         {
             return this.throwingPredicate2.safeAccept(object, param);

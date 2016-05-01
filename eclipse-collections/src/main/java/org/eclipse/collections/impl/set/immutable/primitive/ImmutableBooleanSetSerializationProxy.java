@@ -40,6 +40,7 @@ public final class ImmutableBooleanSetSerializationProxy implements Externalizab
         this.set = set;
     }
 
+    @Override
     public void writeExternal(ObjectOutput out) throws IOException
     {
         out.writeInt(this.set.size());
@@ -63,6 +64,7 @@ public final class ImmutableBooleanSetSerializationProxy implements Externalizab
         }
     }
 
+    @Override
     public void readExternal(ObjectInput in) throws IOException
     {
         int size = in.readInt();

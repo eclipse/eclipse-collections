@@ -31,16 +31,19 @@ public class PartitionTreeBag<T> implements PartitionMutableSortedBag<T>
         this.rejected = TreeBag.newBag(comparator);
     }
 
+    @Override
     public MutableSortedBag<T> getSelected()
     {
         return this.selected;
     }
 
+    @Override
     public MutableSortedBag<T> getRejected()
     {
         return this.rejected;
     }
 
+    @Override
     public PartitionImmutableSortedBag<T> toImmutable()
     {
         return new PartitionImmutableSortedBagImpl<>(this);

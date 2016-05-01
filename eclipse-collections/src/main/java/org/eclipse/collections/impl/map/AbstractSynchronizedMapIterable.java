@@ -57,6 +57,7 @@ public abstract class AbstractSynchronizedMapIterable<K, V>
         return (MutableMapIterable<K, V>) super.getDelegate();
     }
 
+    @Override
     public V get(Object key)
     {
         synchronized (this.lock)
@@ -65,6 +66,7 @@ public abstract class AbstractSynchronizedMapIterable<K, V>
         }
     }
 
+    @Override
     public V getIfAbsent(K key, Function0<? extends V> function)
     {
         synchronized (this.lock)
@@ -73,6 +75,7 @@ public abstract class AbstractSynchronizedMapIterable<K, V>
         }
     }
 
+    @Override
     public V getIfAbsentValue(K key, V value)
     {
         synchronized (this.lock)
@@ -81,6 +84,7 @@ public abstract class AbstractSynchronizedMapIterable<K, V>
         }
     }
 
+    @Override
     public <P> V getIfAbsentWith(K key, Function<? super P, ? extends V> function, P parameter)
     {
         synchronized (this.lock)
@@ -89,6 +93,7 @@ public abstract class AbstractSynchronizedMapIterable<K, V>
         }
     }
 
+    @Override
     public <A> A ifPresentApply(K key, Function<? super V, ? extends A> function)
     {
         synchronized (this.lock)
@@ -97,6 +102,7 @@ public abstract class AbstractSynchronizedMapIterable<K, V>
         }
     }
 
+    @Override
     public boolean containsKey(Object key)
     {
         synchronized (this.lock)
@@ -105,6 +111,7 @@ public abstract class AbstractSynchronizedMapIterable<K, V>
         }
     }
 
+    @Override
     public boolean containsValue(Object value)
     {
         synchronized (this.lock)
@@ -113,6 +120,7 @@ public abstract class AbstractSynchronizedMapIterable<K, V>
         }
     }
 
+    @Override
     public void forEachValue(Procedure<? super V> procedure)
     {
         synchronized (this.lock)
@@ -121,6 +129,7 @@ public abstract class AbstractSynchronizedMapIterable<K, V>
         }
     }
 
+    @Override
     public void forEachKey(Procedure<? super K> procedure)
     {
         synchronized (this.lock)
@@ -129,6 +138,7 @@ public abstract class AbstractSynchronizedMapIterable<K, V>
         }
     }
 
+    @Override
     public void forEachKeyValue(Procedure2<? super K, ? super V> procedure2)
     {
         synchronized (this.lock)
@@ -137,6 +147,7 @@ public abstract class AbstractSynchronizedMapIterable<K, V>
         }
     }
 
+    @Override
     public Pair<K, V> detect(Predicate2<? super K, ? super V> predicate)
     {
         synchronized (this.lock)
@@ -145,6 +156,7 @@ public abstract class AbstractSynchronizedMapIterable<K, V>
         }
     }
 
+    @Override
     public V getIfAbsentPut(K key, Function0<? extends V> function)
     {
         synchronized (this.lock)
@@ -153,6 +165,7 @@ public abstract class AbstractSynchronizedMapIterable<K, V>
         }
     }
 
+    @Override
     public V getIfAbsentPut(K key, V value)
     {
         synchronized (this.lock)
@@ -161,6 +174,7 @@ public abstract class AbstractSynchronizedMapIterable<K, V>
         }
     }
 
+    @Override
     public V getIfAbsentPutWithKey(K key, Function<? super K, ? extends V> function)
     {
         synchronized (this.lock)
@@ -169,6 +183,7 @@ public abstract class AbstractSynchronizedMapIterable<K, V>
         }
     }
 
+    @Override
     public <P> V getIfAbsentPutWith(K key, Function<? super P, ? extends V> function, P parameter)
     {
         synchronized (this.lock)
@@ -177,6 +192,7 @@ public abstract class AbstractSynchronizedMapIterable<K, V>
         }
     }
 
+    @Override
     public V put(K key, V value)
     {
         synchronized (this.lock)
@@ -185,6 +201,7 @@ public abstract class AbstractSynchronizedMapIterable<K, V>
         }
     }
 
+    @Override
     public V remove(Object key)
     {
         synchronized (this.lock)
@@ -193,6 +210,7 @@ public abstract class AbstractSynchronizedMapIterable<K, V>
         }
     }
 
+    @Override
     public V removeKey(K key)
     {
         synchronized (this.lock)
@@ -201,6 +219,7 @@ public abstract class AbstractSynchronizedMapIterable<K, V>
         }
     }
 
+    @Override
     public void putAll(Map<? extends K, ? extends V> map)
     {
         synchronized (this.lock)
@@ -209,6 +228,7 @@ public abstract class AbstractSynchronizedMapIterable<K, V>
         }
     }
 
+    @Override
     public void clear()
     {
         synchronized (this.lock)
@@ -217,6 +237,7 @@ public abstract class AbstractSynchronizedMapIterable<K, V>
         }
     }
 
+    @Override
     public V add(Pair<K, V> keyValuePair)
     {
         synchronized (this.lock)
@@ -225,6 +246,7 @@ public abstract class AbstractSynchronizedMapIterable<K, V>
         }
     }
 
+    @Override
     public V updateValue(K key, Function0<? extends V> factory, Function<? super V, ? extends V> function)
     {
         synchronized (this.lock)
@@ -233,6 +255,7 @@ public abstract class AbstractSynchronizedMapIterable<K, V>
         }
     }
 
+    @Override
     public <P> V updateValueWith(
             K key,
             Function0<? extends V> factory,
@@ -254,6 +277,7 @@ public abstract class AbstractSynchronizedMapIterable<K, V>
         }
     }
 
+    @Override
     public <KK, VV> MutableMap<KK, VV> aggregateInPlaceBy(Function<? super V, ? extends KK> groupBy, Function0<? extends VV> zeroValueFactory, Procedure2<? super VV, ? super V> mutatingAggregator)
     {
         synchronized (this.lock)
@@ -262,6 +286,7 @@ public abstract class AbstractSynchronizedMapIterable<K, V>
         }
     }
 
+    @Override
     public <KK, VV> MutableMap<KK, VV> aggregateBy(Function<? super V, ? extends KK> groupBy, Function0<? extends VV> zeroValueFactory, Function2<? super VV, ? super V, ? extends VV> nonMutatingAggregator)
     {
         synchronized (this.lock)
@@ -270,6 +295,7 @@ public abstract class AbstractSynchronizedMapIterable<K, V>
         }
     }
 
+    @Override
     public RichIterable<Pair<K, V>> keyValuesView()
     {
         synchronized (this.lock)
@@ -280,6 +306,7 @@ public abstract class AbstractSynchronizedMapIterable<K, V>
         }
     }
 
+    @Override
     public <V1> MutableObjectLongMap<V1> sumByInt(Function<? super V, ? extends V1> groupBy, IntFunction<? super V> function)
     {
         synchronized (this.lock)
@@ -288,6 +315,7 @@ public abstract class AbstractSynchronizedMapIterable<K, V>
         }
     }
 
+    @Override
     public <V1> MutableObjectDoubleMap<V1> sumByFloat(Function<? super V, ? extends V1> groupBy, FloatFunction<? super V> function)
     {
         synchronized (this.lock)
@@ -296,6 +324,7 @@ public abstract class AbstractSynchronizedMapIterable<K, V>
         }
     }
 
+    @Override
     public <V1> MutableObjectLongMap<V1> sumByLong(Function<? super V, ? extends V1> groupBy, LongFunction<? super V> function)
     {
         synchronized (this.lock)
@@ -304,6 +333,7 @@ public abstract class AbstractSynchronizedMapIterable<K, V>
         }
     }
 
+    @Override
     public <V1> MutableObjectDoubleMap<V1> sumByDouble(Function<? super V, ? extends V1> groupBy, DoubleFunction<? super V> function)
     {
         synchronized (this.lock)

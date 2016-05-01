@@ -106,16 +106,19 @@ public final class ArrayListAdapter<T>
         return new ArrayListAdapter<>(newDelegate);
     }
 
+    @Override
     public MutableList<T> asUnmodifiable()
     {
         return UnmodifiableMutableList.of(this);
     }
 
+    @Override
     public MutableList<T> asSynchronized()
     {
         return SynchronizedMutableList.of(this);
     }
 
+    @Override
     public ImmutableList<T> toImmutable()
     {
         return Lists.immutable.withAll(this);
@@ -127,6 +130,7 @@ public final class ArrayListAdapter<T>
         return new ArrayListAdapter<>((ArrayList<T>) this.delegate.clone());
     }
 
+    @Override
     public ArrayListAdapter<T> newEmpty()
     {
         return ArrayListAdapter.newList();
@@ -144,6 +148,7 @@ public final class ArrayListAdapter<T>
         ArrayListIterate.forEach(this.delegate, procedure);
     }
 
+    @Override
     public void reverseForEach(Procedure<? super T> procedure)
     {
         ArrayListIterate.reverseForEach(this.delegate, procedure);
@@ -155,6 +160,7 @@ public final class ArrayListAdapter<T>
         ArrayListIterate.forEachWithIndex(this.delegate, objectIntProcedure);
     }
 
+    @Override
     public void forEachWithIndex(int fromIndex, int toIndex, ObjectIntProcedure<? super T> objectIntProcedure)
     {
         ArrayListIterate.forEachWithIndex(this.delegate, fromIndex, toIndex, objectIntProcedure);
@@ -179,6 +185,7 @@ public final class ArrayListAdapter<T>
         return ArrayListIterate.count(this.delegate, predicate);
     }
 
+    @Override
     public <S> boolean corresponds(OrderedIterable<S> other, Predicate2<? super T, ? super S> predicate)
     {
         return RandomAccessListIterate.corresponds(this.delegate, other, predicate);
@@ -208,22 +215,26 @@ public final class ArrayListAdapter<T>
         return ArrayListIterate.injectInto(injectedValue, this.delegate, function);
     }
 
+    @Override
     public void forEach(int fromIndex, int toIndex, Procedure<? super T> procedure)
     {
         ArrayListIterate.forEach(this.delegate, fromIndex, toIndex, procedure);
     }
 
+    @Override
     public ArrayListAdapter<T> sortThis(Comparator<? super T> comparator)
     {
         Iterate.sortThis(this.delegate, comparator);
         return this;
     }
 
+    @Override
     public ArrayListAdapter<T> sortThis()
     {
         return this.sortThis(Comparators.naturalOrder());
     }
 
+    @Override
     public ArrayListAdapter<T> with(T element)
     {
         this.add(element);
@@ -251,18 +262,21 @@ public final class ArrayListAdapter<T>
         return this;
     }
 
+    @Override
     public ArrayListAdapter<T> without(T element)
     {
         this.remove(element);
         return this;
     }
 
+    @Override
     public ArrayListAdapter<T> withAll(Iterable<? extends T> elements)
     {
         this.addAllIterable(elements);
         return this;
     }
 
+    @Override
     public ArrayListAdapter<T> withoutAll(Iterable<? extends T> elements)
     {
         this.removeAllIterable(elements);
@@ -386,11 +400,13 @@ public final class ArrayListAdapter<T>
         return this.wrap(ArrayListIterate.collectIf(this.delegate, predicate, function));
     }
 
+    @Override
     public int detectIndex(Predicate<? super T> predicate)
     {
         return ArrayListIterate.detectIndex(this.delegate, predicate);
     }
 
+    @Override
     public int detectLastIndex(Predicate<? super T> predicate)
     {
         return ArrayListIterate.detectLastIndex(this.delegate, predicate);
@@ -426,11 +442,13 @@ public final class ArrayListAdapter<T>
         return this.wrap(ArrayListIterate.collectWith(this.delegate, function, parameter));
     }
 
+    @Override
     public ArrayListAdapter<T> distinct()
     {
         return this.wrap(ArrayListIterate.distinct(this.delegate));
     }
 
+    @Override
     public ArrayListAdapter<T> distinct(HashingStrategy<? super T> hashingStrategy)
     {
         return this.wrap(ArrayListIterate.distinct(this.delegate, hashingStrategy));
@@ -448,6 +466,7 @@ public final class ArrayListAdapter<T>
         return ArrayListIterate.zipWithIndex(this.delegate);
     }
 
+    @Override
     public MutableList<T> take(int count)
     {
         if (count < 0)
@@ -457,11 +476,13 @@ public final class ArrayListAdapter<T>
         return ArrayListIterate.take(this.delegate, count, FastList.newList(Math.min(this.size(), count)));
     }
 
+    @Override
     public MutableList<T> takeWhile(Predicate<? super T> predicate)
     {
         return ArrayListIterate.takeWhile(this.delegate, predicate);
     }
 
+    @Override
     public MutableList<T> drop(int count)
     {
         if (count < 0)
@@ -471,11 +492,13 @@ public final class ArrayListAdapter<T>
         return ArrayListIterate.drop(this.delegate, count, FastList.newList(this.size() - Math.min(this.size(), count)));
     }
 
+    @Override
     public MutableList<T> dropWhile(Predicate<? super T> predicate)
     {
         return ArrayListIterate.dropWhile(this.delegate, predicate);
     }
 
+    @Override
     public PartitionMutableList<T> partitionWhile(Predicate<? super T> predicate)
     {
         return ArrayListIterate.partitionWhile(this.delegate, predicate);

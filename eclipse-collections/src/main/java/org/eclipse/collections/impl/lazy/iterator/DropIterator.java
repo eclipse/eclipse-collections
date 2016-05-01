@@ -38,16 +38,19 @@ public final class DropIterator<T> implements Iterator<T>
         this.delegateIterator = new SelectIterator<>(iterator, new DropIterablePredicate<>(count));
     }
 
+    @Override
     public boolean hasNext()
     {
         return this.delegateIterator.hasNext();
     }
 
+    @Override
     public T next()
     {
         return this.delegateIterator.next();
     }
 
+    @Override
     public void remove()
     {
         throw new UnsupportedOperationException("Cannot remove from a drop iterator");

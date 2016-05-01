@@ -53,11 +53,13 @@ public abstract class AbstractMutableBagIterable<T>
 {
     protected abstract RichIterable<T> getKeysView();
 
+    @Override
     public boolean addAll(Collection<? extends T> source)
     {
         return this.addAllIterable(source);
     }
 
+    @Override
     public boolean addAllIterable(Iterable<? extends T> iterable)
     {
         int oldSize = this.size();
@@ -65,16 +67,19 @@ public abstract class AbstractMutableBagIterable<T>
         return oldSize != this.size();
     }
 
+    @Override
     public boolean removeAll(Collection<?> collection)
     {
         return this.removeAllIterable(collection);
     }
 
+    @Override
     public boolean retainAll(Collection<?> collection)
     {
         return this.retainAllIterable(collection);
     }
 
+    @Override
     public boolean retainAllIterable(Iterable<?> iterable)
     {
         int oldSize = this.size();
@@ -82,26 +87,31 @@ public abstract class AbstractMutableBagIterable<T>
         return this.size() != oldSize;
     }
 
+    @Override
     public <P> Twin<MutableList<T>> selectAndRejectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         return IterableIterate.selectAndRejectWith(this, predicate, parameter);
     }
 
+    @Override
     public T getFirst()
     {
         return this.getKeysView().getFirst();
     }
 
+    @Override
     public T getLast()
     {
         return this.getKeysView().getLast();
     }
 
+    @Override
     public <V> MutableMap<V, T> groupByUniqueKey(Function<? super T, ? extends V> function)
     {
         return this.groupByUniqueKey(function, UnifiedMap.newMap());
     }
 
+    @Override
     public RichIterable<RichIterable<T>> chunk(int size)
     {
         if (size <= 0)
@@ -222,6 +232,7 @@ public abstract class AbstractMutableBagIterable<T>
         return this.getKeysView().maxBy(function);
     }
 
+    @Override
     public <K, V> MutableMap<K, V> aggregateInPlaceBy(
             Function<? super T, ? extends K> groupBy,
             Function0<? extends V> zeroValueFactory,
@@ -232,6 +243,7 @@ public abstract class AbstractMutableBagIterable<T>
         return map;
     }
 
+    @Override
     public <K, V> MutableMap<K, V> aggregateBy(
             Function<? super T, ? extends K> groupBy,
             Function0<? extends V> zeroValueFactory,
@@ -242,35 +254,41 @@ public abstract class AbstractMutableBagIterable<T>
         return map;
     }
 
+    @Override
     public <V> MutableObjectLongMap<V> sumByInt(Function<? super T, ? extends V> groupBy, IntFunction<? super T> function)
     {
         MutableObjectLongMap<V> result = ObjectLongHashMap.newMap();
         return this.injectInto(result, PrimitiveFunctions.sumByIntFunction(groupBy, function));
     }
 
+    @Override
     public <V> MutableObjectDoubleMap<V> sumByFloat(Function<? super T, ? extends V> groupBy, FloatFunction<? super T> function)
     {
         MutableObjectDoubleMap<V> result = ObjectDoubleHashMap.newMap();
         return this.injectInto(result, PrimitiveFunctions.sumByFloatFunction(groupBy, function));
     }
 
+    @Override
     public <V> MutableObjectLongMap<V> sumByLong(Function<? super T, ? extends V> groupBy, LongFunction<? super T> function)
     {
         MutableObjectLongMap<V> result = ObjectLongHashMap.newMap();
         return this.injectInto(result, PrimitiveFunctions.sumByLongFunction(groupBy, function));
     }
 
+    @Override
     public <V> MutableObjectDoubleMap<V> sumByDouble(Function<? super T, ? extends V> groupBy, DoubleFunction<? super T> function)
     {
         MutableObjectDoubleMap<V> result = ObjectDoubleHashMap.newMap();
         return this.injectInto(result, PrimitiveFunctions.sumByDoubleFunction(groupBy, function));
     }
 
+    @Override
     public MutableList<ObjectIntPair<T>> topOccurrences(int n)
     {
         return this.occurrencesSortingBy(n, item -> -item.getTwo(), Lists.mutable.empty());
     }
 
+    @Override
     public MutableList<ObjectIntPair<T>> bottomOccurrences(int n)
     {
         return this.occurrencesSortingBy(n, ObjectIntPair::getTwo, Lists.mutable.empty());

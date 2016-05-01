@@ -32,11 +32,13 @@ public class ZipWithIndexIterable<T>
         this.iterable = iterable;
     }
 
+    @Override
     public Iterator<Pair<T, Integer>> iterator()
     {
         return new ZipWithIndexIterator<>(this.iterable);
     }
 
+    @Override
     public void each(Procedure<? super Pair<T, Integer>> procedure)
     {
         IterableIterate.forEach(this, procedure);

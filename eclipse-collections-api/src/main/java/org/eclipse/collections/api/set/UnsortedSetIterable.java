@@ -49,63 +49,89 @@ public interface UnsortedSetIterable<T>
      */
     UnsortedSetIterable<UnsortedSetIterable<T>> powerSet();
 
+    @Override
     UnsortedSetIterable<T> tap(Procedure<? super T> procedure);
 
+    @Override
     <V> UnsortedSetIterable<V> collect(Function<? super T, ? extends V> function);
 
+    @Override
     BooleanSet collectBoolean(BooleanFunction<? super T> booleanFunction);
 
+    @Override
     ByteSet collectByte(ByteFunction<? super T> byteFunction);
 
+    @Override
     CharSet collectChar(CharFunction<? super T> charFunction);
 
+    @Override
     DoubleSet collectDouble(DoubleFunction<? super T> doubleFunction);
 
+    @Override
     FloatSet collectFloat(FloatFunction<? super T> floatFunction);
 
+    @Override
     IntSet collectInt(IntFunction<? super T> intFunction);
 
+    @Override
     LongSet collectLong(LongFunction<? super T> longFunction);
 
+    @Override
     ShortSet collectShort(ShortFunction<? super T> shortFunction);
 
+    @Override
     <P, V> UnsortedSetIterable<V> collectWith(Function2<? super T, ? super P, ? extends V> function, P parameter);
 
+    @Override
     <V> UnsortedSetIterable<V> collectIf(Predicate<? super T> predicate, Function<? super T, ? extends V> function);
 
+    @Override
     <V> UnsortedSetIterable<V> flatCollect(Function<? super T, ? extends Iterable<V>> function);
 
+    @Override
     <V> UnsortedSetMultimap<V, T> groupBy(Function<? super T, ? extends V> function);
 
+    @Override
     <V> UnsortedSetMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function);
 
+    @Override
     UnsortedSetIterable<T> union(SetIterable<? extends T> set);
 
+    @Override
     UnsortedSetIterable<T> intersect(SetIterable<? extends T> set);
 
+    @Override
     UnsortedSetIterable<T> difference(SetIterable<? extends T> subtrahendSet);
 
+    @Override
     UnsortedSetIterable<T> symmetricDifference(SetIterable<? extends T> setB);
 
+    @Override
     UnsortedSetIterable<T> select(Predicate<? super T> predicate);
 
+    @Override
     <P> UnsortedSetIterable<T> selectWith(Predicate2<? super T, ? super P> predicate, P parameter);
 
+    @Override
     UnsortedSetIterable<T> reject(Predicate<? super T> predicate);
 
+    @Override
     <P> UnsortedSetIterable<T> rejectWith(Predicate2<? super T, ? super P> predicate, P parameter);
 
+    @Override
     <S> UnsortedSetIterable<S> selectInstancesOf(Class<S> clazz);
 
     /**
      * @deprecated in 6.0. Use {@link OrderedIterable#zip(Iterable)} instead.
      */
+    @Override
     @Deprecated
     <S> UnsortedSetIterable<Pair<T, S>> zip(Iterable<S> that);
 
     /**
      * @deprecated in 6.0. Use {@link OrderedIterable#zipWithIndex()} instead.
      */
+    @Override
     @Deprecated
     UnsortedSetIterable<Pair<T, Integer>> zipWithIndex();
 
@@ -114,7 +140,9 @@ public interface UnsortedSetIterable<T>
      *
      * @since 5.0
      */
+    @Override
     ImmutableSet<T> toImmutable();
 
+    @Override
     ParallelUnsortedSetIterable<T> asParallel(ExecutorService executorService, int batchSize);
 }

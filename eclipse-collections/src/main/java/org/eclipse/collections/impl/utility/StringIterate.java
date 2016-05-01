@@ -1259,6 +1259,7 @@ public final class StringIterate
             this.characters = characters;
         }
 
+        @Override
         public void value(char character)
         {
             this.characters.add(Character.valueOf(character));
@@ -1274,6 +1275,7 @@ public final class StringIterate
             this.characters = characters;
         }
 
+        @Override
         public void value(char character)
         {
             this.characters.add(Character.valueOf(Character.toLowerCase(character)));
@@ -1289,6 +1291,7 @@ public final class StringIterate
             this.characters = characters;
         }
 
+        @Override
         public void value(char character)
         {
             this.characters.add(Character.valueOf(Character.toUpperCase(character)));

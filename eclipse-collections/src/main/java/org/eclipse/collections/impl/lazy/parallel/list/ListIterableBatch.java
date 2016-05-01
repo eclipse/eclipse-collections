@@ -33,6 +33,7 @@ public class ListIterableBatch<T> extends AbstractBatch<T> implements RootListBa
         this.chunkEndIndex = chunkEndIndex;
     }
 
+    @Override
     public void forEach(Procedure<? super T> procedure)
     {
         for (int i = this.chunkStartIndex; i < this.chunkEndIndex; i++)
@@ -55,6 +56,7 @@ public class ListIterableBatch<T> extends AbstractBatch<T> implements RootListBa
         return count;
     }
 
+    @Override
     public boolean anySatisfy(Predicate<? super T> predicate)
     {
         for (int i = this.chunkStartIndex; i < this.chunkEndIndex; i++)
@@ -67,6 +69,7 @@ public class ListIterableBatch<T> extends AbstractBatch<T> implements RootListBa
         return false;
     }
 
+    @Override
     public boolean allSatisfy(Predicate<? super T> predicate)
     {
         for (int i = this.chunkStartIndex; i < this.chunkEndIndex; i++)
@@ -79,6 +82,7 @@ public class ListIterableBatch<T> extends AbstractBatch<T> implements RootListBa
         return true;
     }
 
+    @Override
     public T detect(Predicate<? super T> predicate)
     {
         for (int i = this.chunkStartIndex; i < this.chunkEndIndex; i++)
@@ -91,21 +95,25 @@ public class ListIterableBatch<T> extends AbstractBatch<T> implements RootListBa
         return null;
     }
 
+    @Override
     public ListBatch<T> select(Predicate<? super T> predicate)
     {
         return new SelectListBatch<>(this, predicate);
     }
 
+    @Override
     public <V> ListBatch<V> collect(Function<? super T, ? extends V> function)
     {
         return new CollectListBatch<>(this, function);
     }
 
+    @Override
     public <V> ListBatch<V> flatCollect(Function<? super T, ? extends Iterable<V>> function)
     {
         return new FlatCollectListBatch<>(this, function);
     }
 
+    @Override
     public UnsortedSetBatch<T> distinct(ConcurrentHashMap<T, Boolean> distinct)
     {
         return new DistinctBatch<>(this, distinct);

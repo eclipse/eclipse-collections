@@ -31,26 +31,31 @@ public class FlatCollectUnsortedBagBatch<T, V> extends AbstractBatch<V> implemen
         this.function = function;
     }
 
+    @Override
     public void forEach(Procedure<? super V> procedure)
     {
         this.unsortedBagBatch.forEach(each -> Iterate.forEach(this.function.valueOf(each), procedure::value));
     }
 
+    @Override
     public void forEachWithOccurrences(ObjectIntProcedure<? super V> procedure)
     {
         throw new UnsupportedOperationException("not implemented yet");
     }
 
+    @Override
     public UnsortedBagBatch<V> select(Predicate<? super V> predicate)
     {
         return new SelectUnsortedBagBatch<>(this, predicate);
     }
 
+    @Override
     public <VV> UnsortedBagBatch<VV> collect(Function<? super V, ? extends VV> function)
     {
         return new CollectUnsortedBagBatch<>(this, function);
     }
 
+    @Override
     public <V1> UnsortedBagBatch<V1> flatCollect(Function<? super V, ? extends Iterable<V1>> function)
     {
         return new FlatCollectUnsortedBagBatch<>(this, function);

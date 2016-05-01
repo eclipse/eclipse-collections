@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -94,6 +94,7 @@ final class ImmutableBooleanArrayList
         return new IndexOutOfBoundsException("Index: " + index + " Size: " + this.size);
     }
 
+    @Override
     public boolean get(int index)
     {
         if (index < this.size)
@@ -103,16 +104,19 @@ final class ImmutableBooleanArrayList
         throw this.newIndexOutOfBoundsException(index);
     }
 
+    @Override
     public boolean getFirst()
     {
         return this.items.get(0);
     }
 
+    @Override
     public boolean getLast()
     {
         return this.items.get(this.size - 1);
     }
 
+    @Override
     public int indexOf(boolean value)
     {
         for (int i = 0; i < this.size; i++)
@@ -125,6 +129,7 @@ final class ImmutableBooleanArrayList
         return -1;
     }
 
+    @Override
     public int lastIndexOf(boolean value)
     {
         for (int i = this.size - 1; i >= 0; i--)
@@ -137,11 +142,13 @@ final class ImmutableBooleanArrayList
         return -1;
     }
 
+    @Override
     public BooleanIterator booleanIterator()
     {
         return new InternalBooleanIterator();
     }
 
+    @Override
     public void forEach(BooleanProcedure procedure)
     {
         this.each(procedure);
@@ -150,6 +157,7 @@ final class ImmutableBooleanArrayList
     /**
      * @since 7.0.
      */
+    @Override
     public void each(BooleanProcedure procedure)
     {
         for (int i = 0; i < this.size; i++)
@@ -158,6 +166,7 @@ final class ImmutableBooleanArrayList
         }
     }
 
+    @Override
     public void forEachWithIndex(BooleanIntProcedure procedure)
     {
         for (int i = 0; i < this.size; i++)
@@ -166,6 +175,7 @@ final class ImmutableBooleanArrayList
         }
     }
 
+    @Override
     public int count(BooleanPredicate predicate)
     {
         int count = 0;
@@ -179,6 +189,7 @@ final class ImmutableBooleanArrayList
         return count;
     }
 
+    @Override
     public boolean anySatisfy(BooleanPredicate predicate)
     {
         for (int i = 0; i < this.size; i++)
@@ -191,6 +202,7 @@ final class ImmutableBooleanArrayList
         return false;
     }
 
+    @Override
     public boolean allSatisfy(BooleanPredicate predicate)
     {
         for (int i = 0; i < this.size; i++)
@@ -203,6 +215,7 @@ final class ImmutableBooleanArrayList
         return true;
     }
 
+    @Override
     public boolean noneSatisfy(BooleanPredicate predicate)
     {
         for (int i = 0; i < this.size; i++)
@@ -215,6 +228,7 @@ final class ImmutableBooleanArrayList
         return true;
     }
 
+    @Override
     public ImmutableBooleanList select(BooleanPredicate predicate)
     {
         MutableBooleanList result = BooleanLists.mutable.empty();
@@ -229,6 +243,7 @@ final class ImmutableBooleanArrayList
         return result.toImmutable();
     }
 
+    @Override
     public ImmutableBooleanList reject(BooleanPredicate predicate)
     {
         MutableBooleanList result = BooleanLists.mutable.empty();
@@ -243,6 +258,7 @@ final class ImmutableBooleanArrayList
         return result.toImmutable();
     }
 
+    @Override
     public boolean detectIfNone(BooleanPredicate predicate, boolean ifNone)
     {
         for (int i = 0; i < this.size; i++)
@@ -256,6 +272,7 @@ final class ImmutableBooleanArrayList
         return ifNone;
     }
 
+    @Override
     public <V> ImmutableList<V> collect(BooleanToObjectFunction<? extends V> function)
     {
         FastList<V> target = FastList.newList(this.size);
@@ -266,6 +283,7 @@ final class ImmutableBooleanArrayList
         return target.toImmutable();
     }
 
+    @Override
     public boolean[] toArray()
     {
         boolean[] newItems = new boolean[this.size];
@@ -276,6 +294,7 @@ final class ImmutableBooleanArrayList
         return newItems;
     }
 
+    @Override
     public boolean contains(boolean value)
     {
         for (int i = 0; i < this.size; i++)
@@ -288,6 +307,7 @@ final class ImmutableBooleanArrayList
         return false;
     }
 
+    @Override
     public boolean containsAll(boolean... source)
     {
         for (boolean value : source)
@@ -300,6 +320,7 @@ final class ImmutableBooleanArrayList
         return true;
     }
 
+    @Override
     public boolean containsAll(BooleanIterable source)
     {
         for (BooleanIterator iterator = source.booleanIterator(); iterator.hasNext(); )
@@ -312,36 +333,43 @@ final class ImmutableBooleanArrayList
         return true;
     }
 
+    @Override
     public LazyBooleanIterable asReversed()
     {
         return ReverseBooleanIterable.adapt(this);
     }
 
+    @Override
     public MutableBooleanList toList()
     {
         return BooleanArrayList.newList(this);
     }
 
+    @Override
     public MutableBooleanSet toSet()
     {
         return BooleanHashSet.newSet(this);
     }
 
+    @Override
     public MutableBooleanBag toBag()
     {
         return BooleanHashBag.newBag(this);
     }
 
+    @Override
     public LazyBooleanIterable asLazy()
     {
         return new LazyBooleanIterableAdapter(this);
     }
 
+    @Override
     public ImmutableBooleanList toImmutable()
     {
         return this;
     }
 
+    @Override
     public ImmutableBooleanArrayList toReversed()
     {
         return ImmutableBooleanArrayList.newList(this.asReversed());
@@ -350,6 +378,7 @@ final class ImmutableBooleanArrayList
     /**
      * @since 6.0
      */
+    @Override
     public ImmutableBooleanList distinct()
     {
         BooleanArrayList target = new BooleanArrayList();
@@ -365,6 +394,7 @@ final class ImmutableBooleanArrayList
         return target.toImmutable();
     }
 
+    @Override
     public ImmutableBooleanList newWith(boolean element)
     {
         BitSet newItems = (BitSet) this.items.clone();
@@ -375,6 +405,7 @@ final class ImmutableBooleanArrayList
         return new ImmutableBooleanArrayList(newItems, this.size + 1);
     }
 
+    @Override
     public ImmutableBooleanList newWithout(boolean element)
     {
         int index = this.indexOf(element);
@@ -394,6 +425,7 @@ final class ImmutableBooleanArrayList
         return this;
     }
 
+    @Override
     public ImmutableBooleanList newWithAll(BooleanIterable elements)
     {
         BitSet newItems = (BitSet) this.items.clone();
@@ -408,6 +440,7 @@ final class ImmutableBooleanArrayList
         return new ImmutableBooleanArrayList(newItems, this.size + elements.size());
     }
 
+    @Override
     public ImmutableBooleanList newWithoutAll(BooleanIterable elements)
     {
         MutableBooleanList list = this.toList();
@@ -415,16 +448,19 @@ final class ImmutableBooleanArrayList
         return list.toImmutable();
     }
 
+    @Override
     public int size()
     {
         return this.size;
     }
 
+    @Override
     public boolean isEmpty()
     {
         return false;
     }
 
+    @Override
     public boolean notEmpty()
     {
         return true;
@@ -468,6 +504,7 @@ final class ImmutableBooleanArrayList
         return hashCode;
     }
 
+    @Override
     public <T> T injectInto(T injectedValue, ObjectBooleanToObjectFunction<? super T, ? extends T> function)
     {
         T result = injectedValue;
@@ -478,6 +515,7 @@ final class ImmutableBooleanArrayList
         return result;
     }
 
+    @Override
     public <T> T injectIntoWithIndex(T injectedValue, ObjectBooleanIntToObjectFunction<? super T, ? extends T> function)
     {
         T result = injectedValue;
@@ -494,16 +532,19 @@ final class ImmutableBooleanArrayList
         return this.makeString("[", ", ", "]");
     }
 
+    @Override
     public String makeString()
     {
         return this.makeString(", ");
     }
 
+    @Override
     public String makeString(String separator)
     {
         return this.makeString("", separator, "");
     }
 
+    @Override
     public String makeString(String start, String separator, String end)
     {
         Appendable stringBuilder = new StringBuilder();
@@ -511,16 +552,19 @@ final class ImmutableBooleanArrayList
         return stringBuilder.toString();
     }
 
+    @Override
     public void appendString(Appendable appendable)
     {
         this.appendString(appendable, ", ");
     }
 
+    @Override
     public void appendString(Appendable appendable, String separator)
     {
         this.appendString(appendable, "", separator, "");
     }
 
+    @Override
     public void appendString(
             Appendable appendable,
             String start,
@@ -547,6 +591,7 @@ final class ImmutableBooleanArrayList
         }
     }
 
+    @Override
     public ImmutableBooleanList subList(int fromIndex, int toIndex)
     {
         throw new UnsupportedOperationException("subList not yet implemented!");
@@ -572,6 +617,7 @@ final class ImmutableBooleanArrayList
             this.list = list;
         }
 
+        @Override
         public void writeExternal(ObjectOutput out) throws IOException
         {
             out.writeInt(this.list.size());
@@ -581,6 +627,7 @@ final class ImmutableBooleanArrayList
             }
         }
 
+        @Override
         public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
         {
             int inputSize = in.readInt();
@@ -607,11 +654,13 @@ final class ImmutableBooleanArrayList
          */
         private int currentIndex;
 
+        @Override
         public boolean hasNext()
         {
             return this.currentIndex != ImmutableBooleanArrayList.this.size;
         }
 
+        @Override
         public boolean next()
         {
             if (!this.hasNext())

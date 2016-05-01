@@ -70,6 +70,7 @@ final class SingletonList<T>
         return new SingletonList<>(this.element1);
     }
 
+    @Override
     public int size()
     {
         return 1;
@@ -81,6 +82,7 @@ final class SingletonList<T>
         return Comparators.nullSafeEquals(obj, this.element1);
     }
 
+    @Override
     public T get(int index)
     {
         if (index == 0)
@@ -93,6 +95,7 @@ final class SingletonList<T>
     /**
      * set is implemented purely to allow the List to be sorted, not because this List should be considered mutable.
      */
+    @Override
     public T set(int index, T element)
     {
         if (index == 0)
@@ -194,11 +197,13 @@ final class SingletonList<T>
         procedure.value(this.element1, parameter);
     }
 
+    @Override
     public void writeExternal(ObjectOutput out) throws IOException
     {
         out.writeObject(this.element1);
     }
 
+    @Override
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
     {
         this.element1 = (T) in.readObject();

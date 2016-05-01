@@ -56,21 +56,25 @@ public class ParallelSelectIterable<T> extends AbstractParallelIterableImpl<T, B
         });
     }
 
+    @Override
     public void forEach(Procedure<? super T> procedure)
     {
         this.parallelIterable.forEach(new IfProcedure<>(this.predicate, procedure));
     }
 
+    @Override
     public boolean anySatisfy(Predicate<? super T> predicate)
     {
         return this.parallelIterable.anySatisfy(Predicates.and(this.predicate, predicate));
     }
 
+    @Override
     public boolean allSatisfy(Predicate<? super T> predicate)
     {
         return this.parallelIterable.allSatisfy(new SelectAllSatisfyPredicate<>(this.predicate, predicate));
     }
 
+    @Override
     public T detect(Predicate<? super T> predicate)
     {
         return this.parallelIterable.detect(Predicates.and(this.predicate, predicate));
@@ -101,6 +105,7 @@ public class ParallelSelectIterable<T> extends AbstractParallelIterableImpl<T, B
             this.right = right;
         }
 
+        @Override
         public boolean accept(T each)
         {
             boolean leftResult = this.left.accept(each);

@@ -123,6 +123,7 @@ public final class BatchIterableProcedureFJTaskRunner<T, BT extends Procedure<? 
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public BT valueOf(BatchIterableProcedureFJTask<T, BT> object)
         {
             return object.getProcedure();

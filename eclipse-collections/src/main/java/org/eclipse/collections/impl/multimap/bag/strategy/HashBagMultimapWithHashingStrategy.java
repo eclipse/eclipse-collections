@@ -127,6 +127,7 @@ public final class HashBagMultimapWithHashingStrategy<K, V>
         return this.hashingStrategy;
     }
 
+    @Override
     public HashBagMultimapWithHashingStrategy<K, V> newEmpty()
     {
         return new HashBagMultimapWithHashingStrategy<>(this.hashingStrategy);
@@ -149,31 +150,37 @@ public final class HashBagMultimapWithHashingStrategy<K, V>
     // Currently this returns a HashBagMultimap.
     // On a future release, it will return HashBagWithHashingStrategyMultimap, where the HashBag collection hashing strategy
     // will be the hashing strategy of this multimap
+    @Override
     public MutableBagMultimap<V, K> flip()
     {
         return Iterate.flip(this);
     }
 
+    @Override
     public <V2> HashBagMultimapWithHashingStrategy<K, V2> collectValues(Function<? super V, ? extends V2> function)
     {
         return this.collectValues(function, HashBagMultimapWithHashingStrategy.newMultimap(this.hashingStrategy));
     }
 
+    @Override
     public HashBagMultimapWithHashingStrategy<K, V> selectKeysValues(Predicate2<? super K, ? super V> predicate)
     {
         return this.selectKeysValues(predicate, this.newEmpty());
     }
 
+    @Override
     public HashBagMultimapWithHashingStrategy<K, V> rejectKeysValues(Predicate2<? super K, ? super V> predicate)
     {
         return this.rejectKeysValues(predicate, this.newEmpty());
     }
 
+    @Override
     public HashBagMultimapWithHashingStrategy<K, V> selectKeysMultiValues(Predicate2<? super K, ? super Iterable<V>> predicate)
     {
         return this.selectKeysMultiValues(predicate, this.newEmpty());
     }
 
+    @Override
     public HashBagMultimapWithHashingStrategy<K, V> rejectKeysMultiValues(Predicate2<? super K, ? super Iterable<V>> predicate)
     {
         return this.rejectKeysMultiValues(predicate, this.newEmpty());

@@ -131,6 +131,7 @@ public class CollectIterableTest extends AbstractLazyIterableTestCase
         Assert.assertNull(collect.getLast());
     }
 
+    @Override
     @Test
     public void toArray()
     {

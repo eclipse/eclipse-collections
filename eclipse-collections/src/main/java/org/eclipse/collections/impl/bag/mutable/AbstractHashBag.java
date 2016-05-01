@@ -57,6 +57,7 @@ public abstract class AbstractHashBag<T> extends AbstractMutableBag<T>
         return source.notEmpty();
     }
 
+    @Override
     public int addOccurrences(T item, int occurrences)
     {
         if (occurrences < 0)
@@ -102,6 +103,7 @@ public abstract class AbstractHashBag<T> extends AbstractMutableBag<T>
 
     protected abstract int computeHashCode(T item);
 
+    @Override
     public abstract MutableBag<T> selectByOccurrences(IntPredicate predicate);
 
     @Override
@@ -110,21 +112,25 @@ public abstract class AbstractHashBag<T> extends AbstractMutableBag<T>
         return this.items.keysView();
     }
 
+    @Override
     public int sizeDistinct()
     {
         return this.items.size();
     }
 
+    @Override
     public int occurrencesOf(Object item)
     {
         return this.items.get(item);
     }
 
+    @Override
     public void forEachWithOccurrences(ObjectIntProcedure<? super T> objectIntProcedure)
     {
         this.items.forEachKeyValue(objectIntProcedure);
     }
 
+    @Override
     public MutableMap<T, Integer> toMapOfItemToCount()
     {
         MutableMap<T, Integer> map = UnifiedMap.newMap(this.items.size());
@@ -132,6 +138,7 @@ public abstract class AbstractHashBag<T> extends AbstractMutableBag<T>
         return map;
     }
 
+    @Override
     public boolean add(T item)
     {
         this.items.updateValue(item, 0, IntToIntFunctions.increment());
@@ -139,6 +146,7 @@ public abstract class AbstractHashBag<T> extends AbstractMutableBag<T>
         return true;
     }
 
+    @Override
     public boolean remove(Object item)
     {
         int newValue = this.items.updateValue((T) item, 0, IntToIntFunctions.decrement());
@@ -154,6 +162,7 @@ public abstract class AbstractHashBag<T> extends AbstractMutableBag<T>
         return true;
     }
 
+    @Override
     public void clear()
     {
         this.items.clear();
@@ -166,6 +175,7 @@ public abstract class AbstractHashBag<T> extends AbstractMutableBag<T>
         return this.items.isEmpty();
     }
 
+    @Override
     public void each(Procedure<? super T> procedure)
     {
         this.items.forEachKeyValue((key, count) -> {
@@ -200,11 +210,13 @@ public abstract class AbstractHashBag<T> extends AbstractMutableBag<T>
         });
     }
 
+    @Override
     public Iterator<T> iterator()
     {
         return new InternalIterator();
     }
 
+    @Override
     public boolean removeOccurrences(Object item, int occurrences)
     {
         if (occurrences < 0)
@@ -230,6 +242,7 @@ public abstract class AbstractHashBag<T> extends AbstractMutableBag<T>
         return true;
     }
 
+    @Override
     public boolean setOccurrences(T item, int occurrences)
     {
         if (occurrences < 0)
@@ -257,6 +270,7 @@ public abstract class AbstractHashBag<T> extends AbstractMutableBag<T>
         return true;
     }
 
+    @Override
     public boolean removeIf(Predicate<? super T> predicate)
     {
         boolean changed = false;
@@ -273,6 +287,7 @@ public abstract class AbstractHashBag<T> extends AbstractMutableBag<T>
         return changed;
     }
 
+    @Override
     public <P> boolean removeIfWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         boolean changed = false;
@@ -289,6 +304,7 @@ public abstract class AbstractHashBag<T> extends AbstractMutableBag<T>
         return changed;
     }
 
+    @Override
     public boolean removeAllIterable(Iterable<?> iterable)
     {
         int oldSize = this.size;
@@ -315,6 +331,7 @@ public abstract class AbstractHashBag<T> extends AbstractMutableBag<T>
         return this.size != oldSize;
     }
 
+    @Override
     public int size()
     {
         return this.size;
@@ -326,11 +343,13 @@ public abstract class AbstractHashBag<T> extends AbstractMutableBag<T>
         return this.items.containsKey(o);
     }
 
+    @Override
     public <V> HashBagMultimap<V, T> groupBy(Function<? super T, ? extends V> function)
     {
         return this.groupBy(function, HashBagMultimap.newMultimap());
     }
 
+    @Override
     public <V> HashBagMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function)
     {
         return this.groupByEach(function, HashBagMultimap.newMultimap());
@@ -344,11 +363,13 @@ public abstract class AbstractHashBag<T> extends AbstractMutableBag<T>
         private int occurrences;
         private boolean canRemove;
 
+        @Override
         public boolean hasNext()
         {
             return this.occurrences > 0 || this.iterator.hasNext();
         }
 
+        @Override
         public T next()
         {
             if (this.occurrences == 0)
@@ -361,6 +382,7 @@ public abstract class AbstractHashBag<T> extends AbstractMutableBag<T>
             return this.currentItem;
         }
 
+        @Override
         public void remove()
         {
             if (!this.canRemove)

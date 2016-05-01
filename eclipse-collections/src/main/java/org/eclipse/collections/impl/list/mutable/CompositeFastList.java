@@ -66,6 +66,7 @@ public final class CompositeFastList<E>
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".clone() not implemented yet");
     }
 
+    @Override
     public int size()
     {
         return this.size;
@@ -81,6 +82,7 @@ public final class CompositeFastList<E>
         this.size = newSize;
     }
 
+    @Override
     public void batchForEach(Procedure<? super E> procedure, int sectionIndex, int sectionCount)
     {
         if (this.lists.size() == 1)
@@ -93,6 +95,7 @@ public final class CompositeFastList<E>
         }
     }
 
+    @Override
     public int getBatchCount(int batchSize)
     {
         if (this.lists.size() == 1)
@@ -263,11 +266,13 @@ public final class CompositeFastList<E>
         this.lists.add((FastList<E>) collection);
     }
 
+    @Override
     public boolean addAll(int index, Collection<? extends E> collection)
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".addAll(index, collection) not implemented yet");
     }
 
+    @Override
     public void clear()
     {
         this.lists.each(FastList<E>::clear);
@@ -308,6 +313,7 @@ public final class CompositeFastList<E>
         return changed;
     }
 
+    @Override
     public E get(int index)
     {
         this.rangeCheck(index);
@@ -329,6 +335,7 @@ public final class CompositeFastList<E>
         }
     }
 
+    @Override
     public E set(int index, E element)
     {
         this.rangeCheck(index);
@@ -342,6 +349,7 @@ public final class CompositeFastList<E>
         return this.lists.get(p).set(index, element);
     }
 
+    @Override
     public void add(int index, E element)
     {
         int localSize = this.size();
@@ -364,6 +372,7 @@ public final class CompositeFastList<E>
         }
     }
 
+    @Override
     public E remove(int index)
     {
         this.rangeCheck(index);
@@ -617,6 +626,7 @@ public final class CompositeFastList<E>
             this.currentIndex = 0;
         }
 
+        @Override
         public boolean hasNext()
         {
             if (this.currentIterator.hasNext())
@@ -631,6 +641,7 @@ public final class CompositeFastList<E>
             return false;
         }
 
+        @Override
         public E next()
         {
             if (this.currentIterator.hasNext())
@@ -645,6 +656,7 @@ public final class CompositeFastList<E>
             throw new NoSuchElementException();
         }
 
+        @Override
         public void remove()
         {
             CompositeFastList.this.size--;
@@ -664,6 +676,7 @@ public final class CompositeFastList<E>
             this.objectIntProcedure = objectIntProcedure;
         }
 
+        @Override
         public void value(FastList<E> list)
         {
             list.each(object -> {

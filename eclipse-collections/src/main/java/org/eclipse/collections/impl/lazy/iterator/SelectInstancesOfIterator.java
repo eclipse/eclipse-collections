@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -32,11 +32,13 @@ public final class SelectInstancesOfIterator<T>
         this.clazz = clazz;
     }
 
+    @Override
     public void remove()
     {
         throw new UnsupportedOperationException("Cannot remove from a selectInstances iterator");
     }
 
+    @Override
     public boolean hasNext()
     {
         if (this.next != NULL)
@@ -55,6 +57,7 @@ public final class SelectInstancesOfIterator<T>
         return false;
     }
 
+    @Override
     public T next()
     {
         if (this.next != NULL || this.hasNext())

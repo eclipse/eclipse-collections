@@ -19,21 +19,25 @@ import org.eclipse.collections.impl.utility.Iterate;
 @Immutable
 public final class ImmutableHashingStrategySetFactoryImpl implements ImmutableHashingStrategySetFactory
 {
+    @Override
     public <T> ImmutableSet<T> of(HashingStrategy<? super T> hashingStrategy)
     {
         return this.with(hashingStrategy);
     }
 
+    @Override
     public <T> ImmutableSet<T> with(HashingStrategy<? super T> hashingStrategy)
     {
         return new ImmutableEmptySetWithHashingStrategy<>(hashingStrategy);
     }
 
+    @Override
     public <T> ImmutableSet<T> of(HashingStrategy<? super T> hashingStrategy, T... items)
     {
         return this.with(hashingStrategy, items);
     }
 
+    @Override
     public <T> ImmutableSet<T> with(HashingStrategy<? super T> hashingStrategy, T... items)
     {
         if (items == null || items.length == 0)
@@ -44,11 +48,13 @@ public final class ImmutableHashingStrategySetFactoryImpl implements ImmutableHa
         return ImmutableUnifiedSetWithHashingStrategy.newSetWith(hashingStrategy, items);
     }
 
+    @Override
     public <T> ImmutableSet<T> ofAll(HashingStrategy<? super T> hashingStrategy, Iterable<? extends T> items)
     {
         return this.withAll(hashingStrategy, items);
     }
 
+    @Override
     public <T> ImmutableSet<T> withAll(HashingStrategy<? super T> hashingStrategy, Iterable<? extends T> items)
     {
         return this.with(hashingStrategy, (T[]) Iterate.toArray(items));

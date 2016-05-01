@@ -61,11 +61,13 @@ public final class ImmutableBagMultimapImpl<K, V>
         return Bags.immutable.empty();
     }
 
+    @Override
     public ImmutableBagMultimap<K, V> newEmpty()
     {
         return new ImmutableBagMultimapImpl<>(Maps.immutable.of());
     }
 
+    @Override
     public MutableBagMultimap<K, V> toMutable()
     {
         return new HashBagMultimap<>(this);
@@ -106,6 +108,7 @@ public final class ImmutableBagMultimapImpl<K, V>
             return this.multimap.toImmutable();
         }
 
+        @Override
         public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
         {
             this.multimap = new HashBagMultimap<>();
@@ -126,6 +129,7 @@ public final class ImmutableBagMultimapImpl<K, V>
             }
         }
 
+        @Override
         public void writeExternal(ObjectOutput out) throws IOException
         {
             int keysCount = this.map.size();
@@ -173,36 +177,43 @@ public final class ImmutableBagMultimapImpl<K, V>
         return (ImmutableBagMultimap<K, V>) super.newWithoutAll(key);
     }
 
+    @Override
     public ImmutableBagMultimap<V, K> flip()
     {
         return Iterate.flip(this).toImmutable();
     }
 
+    @Override
     public ImmutableBagMultimap<K, V> selectKeysValues(Predicate2<? super K, ? super V> predicate)
     {
         return this.selectKeysValues(predicate, HashBagMultimap.newMultimap()).toImmutable();
     }
 
+    @Override
     public ImmutableBagMultimap<K, V> rejectKeysValues(Predicate2<? super K, ? super V> predicate)
     {
         return this.rejectKeysValues(predicate, HashBagMultimap.newMultimap()).toImmutable();
     }
 
+    @Override
     public ImmutableBagMultimap<K, V> selectKeysMultiValues(Predicate2<? super K, ? super Iterable<V>> predicate)
     {
         return this.selectKeysMultiValues(predicate, HashBagMultimap.newMultimap()).toImmutable();
     }
 
+    @Override
     public ImmutableBagMultimap<K, V> rejectKeysMultiValues(Predicate2<? super K, ? super Iterable<V>> predicate)
     {
         return this.rejectKeysMultiValues(predicate, HashBagMultimap.newMultimap()).toImmutable();
     }
 
+    @Override
     public <K2, V2> ImmutableBagMultimap<K2, V2> collectKeysValues(Function2<? super K, ? super V, Pair<K2, V2>> function)
     {
         return this.collectKeysValues(function, HashBagMultimap.newMultimap()).toImmutable();
     }
 
+    @Override
     public <V2> ImmutableBagMultimap<K, V2> collectValues(Function<? super V, ? extends V2> function)
     {
         return this.collectValues(function, HashBagMultimap.<K, V2>newMultimap()).toImmutable();

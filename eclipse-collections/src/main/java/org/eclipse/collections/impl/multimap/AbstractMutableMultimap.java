@@ -92,6 +92,7 @@ public abstract class AbstractMutableMultimap<K, V, C extends MutableCollection<
     /**
      * Use the size method directly instead of totalSize internally so subclasses can override if necessary.
      */
+    @Override
     public int size()
     {
         return this.totalSize;
@@ -142,11 +143,13 @@ public abstract class AbstractMutableMultimap<K, V, C extends MutableCollection<
         this.totalSize = 0;
     }
 
+    @Override
     public int sizeDistinct()
     {
         return this.map.size();
     }
 
+    @Override
     public boolean isEmpty()
     {
         return this.size() == 0;
@@ -154,6 +157,7 @@ public abstract class AbstractMutableMultimap<K, V, C extends MutableCollection<
 
     // Modification Operations
 
+    @Override
     public boolean put(K key, V value)
     {
         C collection = this.getIfAbsentPutCollection(key);
@@ -166,11 +170,13 @@ public abstract class AbstractMutableMultimap<K, V, C extends MutableCollection<
         return false;
     }
 
+    @Override
     public boolean add(Pair<K, V> keyValuePair)
     {
         return this.put(keyValuePair.getOne(), keyValuePair.getTwo());
     }
 
+    @Override
     public boolean remove(Object key, Object value)
     {
         C collection = this.map.get(key);
@@ -192,6 +198,7 @@ public abstract class AbstractMutableMultimap<K, V, C extends MutableCollection<
     }
 
     // Bulk Operations
+    @Override
     public boolean putAllPairs(Pair<K, V>... pairs)
     {
         boolean changed = false;
@@ -202,6 +209,7 @@ public abstract class AbstractMutableMultimap<K, V, C extends MutableCollection<
         return changed;
     }
 
+    @Override
     public boolean putAllPairs(Iterable<Pair<K, V>> pairs)
     {
         boolean changed = false;
@@ -212,6 +220,7 @@ public abstract class AbstractMutableMultimap<K, V, C extends MutableCollection<
         return changed;
     }
 
+    @Override
     public boolean putAll(K key, Iterable<? extends V> values)
     {
         return Iterate.notEmpty(values) && this.putAllNotEmpty(key, values);
@@ -226,6 +235,7 @@ public abstract class AbstractMutableMultimap<K, V, C extends MutableCollection<
         return newSize > oldSize;
     }
 
+    @Override
     public <KK extends K, VV extends V> boolean putAll(Multimap<KK, VV> multimap)
     {
         if (multimap instanceof AbstractMutableMultimap)
@@ -242,6 +252,7 @@ public abstract class AbstractMutableMultimap<K, V, C extends MutableCollection<
             private static final long serialVersionUID = 1L;
             private boolean changed;
 
+            @Override
             public void value(Pair<KK, RichIterable<VV>> each)
             {
                 this.changed |= AbstractMutableMultimap.this.putAll(each.getOne(), each.getTwo());
@@ -261,6 +272,7 @@ public abstract class AbstractMutableMultimap<K, V, C extends MutableCollection<
 
             private boolean changed;
 
+            @Override
             public void value(KK key, MutableCollection<VV> value)
             {
                 this.changed |= AbstractMutableMultimap.this.putAll(key, value);
@@ -272,6 +284,7 @@ public abstract class AbstractMutableMultimap<K, V, C extends MutableCollection<
         return putProcedure.changed;
     }
 
+    @Override
     public C replaceValues(K key, Iterable<? extends V> values)
     {
         if (Iterate.isEmpty(values))
@@ -286,6 +299,7 @@ public abstract class AbstractMutableMultimap<K, V, C extends MutableCollection<
         return (C) oldValues.asUnmodifiable();
     }
 
+    @Override
     public C removeAll(Object key)
     {
         C collection = this.map.remove(key);
@@ -294,6 +308,7 @@ public abstract class AbstractMutableMultimap<K, V, C extends MutableCollection<
         return (C) collection.asUnmodifiable();
     }
 
+    @Override
     public void clear()
     {
         // Clear each collection, to make previously returned collections empty.
@@ -307,11 +322,13 @@ public abstract class AbstractMutableMultimap<K, V, C extends MutableCollection<
 
     // Views
 
+    @Override
     public SetIterable<K> keySet()
     {
         return UnmodifiableMutableSet.of(this.getMap().keySet());
     }
 
+    @Override
     public C get(K key)
     {
         return (C) this.map.getIfAbsentWith(key, this.createCollectionBlock(), this).asUnmodifiable();
@@ -322,6 +339,7 @@ public abstract class AbstractMutableMultimap<K, V, C extends MutableCollection<
         return this.map.getIfAbsentPutWith(key, this.createCollectionBlock(), this);
     }
 
+    @Override
     public MutableMap<K, RichIterable<V>> toMap()
     {
         MutableMap<K, RichIterable<V>> result = (MutableMap<K, RichIterable<V>>) (MutableMap<?, ?>) this.map.newEmpty();
@@ -333,6 +351,7 @@ public abstract class AbstractMutableMultimap<K, V, C extends MutableCollection<
         return result;
     }
 
+    @Override
     public <R extends Collection<V>> MutableMap<K, R> toMap(Function0<R> collectionFactory)
     {
         MutableMap<K, R> result = (MutableMap<K, R>) this.createMapWithKeyCount(this.map.size());

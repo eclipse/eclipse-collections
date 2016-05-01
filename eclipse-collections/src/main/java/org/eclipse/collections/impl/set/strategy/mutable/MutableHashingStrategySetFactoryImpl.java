@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -19,31 +19,37 @@ import org.eclipse.collections.impl.utility.Iterate;
 @Immutable
 public final class MutableHashingStrategySetFactoryImpl implements MutableHashingStrategySetFactory
 {
+    @Override
     public <T> MutableSet<T> of(HashingStrategy<? super T> hashingStrategy)
     {
         return this.with(hashingStrategy);
     }
 
+    @Override
     public <T> MutableSet<T> with(HashingStrategy<? super T> hashingStrategy)
     {
         return UnifiedSetWithHashingStrategy.newSetWith(hashingStrategy);
     }
 
+    @Override
     public <T> MutableSet<T> of(HashingStrategy<? super T> hashingStrategy, T... items)
     {
         return this.with(hashingStrategy, items);
     }
 
+    @Override
     public <T> MutableSet<T> with(HashingStrategy<? super T> hashingStrategy, T... items)
     {
         return UnifiedSetWithHashingStrategy.newSetWith(hashingStrategy, items);
     }
 
+    @Override
     public <T> MutableSet<T> ofAll(HashingStrategy<? super T> hashingStrategy, Iterable<? extends T> items)
     {
         return this.withAll(hashingStrategy, items);
     }
 
+    @Override
     public <T> MutableSet<T> withAll(HashingStrategy<? super T> hashingStrategy, Iterable<? extends T> items)
     {
         if (Iterate.isEmpty(items))

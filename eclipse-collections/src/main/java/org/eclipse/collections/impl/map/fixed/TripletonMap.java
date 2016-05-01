@@ -144,11 +144,13 @@ final class TripletonMap<K, V>
         return Maps.immutable.with(this.key1, this.value1, this.key2, this.value2, this.key3, this.value3);
     }
 
+    @Override
     public int size()
     {
         return 3;
     }
 
+    @Override
     public boolean containsKey(Object key)
     {
         return Comparators.nullSafeEquals(this.key3, key)
@@ -156,6 +158,7 @@ final class TripletonMap<K, V>
                 || Comparators.nullSafeEquals(this.key1, key);
     }
 
+    @Override
     public boolean containsValue(Object value)
     {
         return Comparators.nullSafeEquals(this.value3, value)
@@ -163,6 +166,7 @@ final class TripletonMap<K, V>
                 || Comparators.nullSafeEquals(this.value1, value);
     }
 
+    @Override
     public V get(Object key)
     {
         if (Comparators.nullSafeEquals(this.key3, key))
@@ -180,16 +184,19 @@ final class TripletonMap<K, V>
         return null;
     }
 
+    @Override
     public Set<K> keySet()
     {
         return Sets.fixedSize.of(this.key1, this.key2, this.key3);
     }
 
+    @Override
     public Collection<V> values()
     {
         return Lists.fixedSize.of(this.value1, this.value2, this.value3);
     }
 
+    @Override
     public MutableSet<Entry<K, V>> entrySet()
     {
         return Sets.fixedSize.of(
@@ -247,6 +254,7 @@ final class TripletonMap<K, V>
         return new TripletonMap<>(this.value1, this.key1, this.value2, this.key2, this.value3, this.key3);
     }
 
+    @Override
     public void forEachKeyValue(Procedure2<? super K, ? super V> procedure)
     {
         procedure.value(this.key1, this.value1);
@@ -286,6 +294,7 @@ final class TripletonMap<K, V>
         procedure.value(this.value3, parameter);
     }
 
+    @Override
     public void writeExternal(ObjectOutput out) throws IOException
     {
         out.writeObject(this.key1);
@@ -296,6 +305,7 @@ final class TripletonMap<K, V>
         out.writeObject(this.value3);
     }
 
+    @Override
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
     {
         this.key1 = (K) in.readObject();

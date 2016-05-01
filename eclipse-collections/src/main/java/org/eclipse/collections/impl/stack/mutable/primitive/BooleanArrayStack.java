@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -97,11 +97,13 @@ public final class BooleanArrayStack implements MutableBooleanStack, Externaliza
         return stack;
     }
 
+    @Override
     public void push(boolean item)
     {
         this.delegate.add(item);
     }
 
+    @Override
     public boolean pop()
     {
         this.checkEmptyStack();
@@ -116,6 +118,7 @@ public final class BooleanArrayStack implements MutableBooleanStack, Externaliza
         }
     }
 
+    @Override
     public BooleanList pop(int count)
     {
         this.checkPositiveValueForCount(count);
@@ -149,37 +152,44 @@ public final class BooleanArrayStack implements MutableBooleanStack, Externaliza
         }
     }
 
+    @Override
     public MutableBooleanStack select(BooleanPredicate predicate)
     {
         return BooleanArrayStack.newStackFromTopToBottom(this.delegate.asReversed().select(predicate));
     }
 
+    @Override
     public MutableBooleanStack reject(BooleanPredicate predicate)
     {
         return BooleanArrayStack.newStackFromTopToBottom(this.delegate.asReversed().reject(predicate));
     }
 
+    @Override
     public MutableBooleanStack asUnmodifiable()
     {
         return new UnmodifiableBooleanStack(this);
     }
 
+    @Override
     public MutableBooleanStack asSynchronized()
     {
         return new SynchronizedBooleanStack(this);
     }
 
+    @Override
     public ImmutableBooleanStack toImmutable()
     {
         return BooleanStacks.immutable.withAll(this.delegate);
     }
 
+    @Override
     public boolean peek()
     {
         this.checkEmptyStack();
         return this.delegate.getLast();
     }
 
+    @Override
     public BooleanList peek(int count)
     {
         this.checkPositiveValueForCount(count);
@@ -197,6 +207,7 @@ public final class BooleanArrayStack implements MutableBooleanStack, Externaliza
         return subList;
     }
 
+    @Override
     public boolean peekAt(int index)
     {
         this.rangeCheck(index);
@@ -211,11 +222,13 @@ public final class BooleanArrayStack implements MutableBooleanStack, Externaliza
         }
     }
 
+    @Override
     public MutableBooleanIterator booleanIterator()
     {
         return new UnmodifiableBooleanIterator(this.delegate.asReversed().booleanIterator());
     }
 
+    @Override
     public void forEach(BooleanProcedure procedure)
     {
         this.each(procedure);
@@ -224,81 +237,97 @@ public final class BooleanArrayStack implements MutableBooleanStack, Externaliza
     /**
      * @since 7.0.
      */
+    @Override
     public void each(BooleanProcedure procedure)
     {
         this.delegate.asReversed().forEach(procedure);
     }
 
+    @Override
     public int size()
     {
         return this.delegate.size();
     }
 
+    @Override
     public boolean isEmpty()
     {
         return this.delegate.isEmpty();
     }
 
+    @Override
     public boolean notEmpty()
     {
         return this.delegate.notEmpty();
     }
 
+    @Override
     public int count(BooleanPredicate predicate)
     {
         return this.delegate.asReversed().count(predicate);
     }
 
+    @Override
     public boolean anySatisfy(BooleanPredicate predicate)
     {
         return this.delegate.asReversed().anySatisfy(predicate);
     }
 
+    @Override
     public boolean allSatisfy(BooleanPredicate predicate)
     {
         return this.delegate.asReversed().allSatisfy(predicate);
     }
 
+    @Override
     public boolean noneSatisfy(BooleanPredicate predicate)
     {
         return this.delegate.asReversed().noneSatisfy(predicate);
     }
 
+    @Override
     public boolean detectIfNone(BooleanPredicate predicate, boolean ifNone)
     {
         return this.delegate.asReversed().detectIfNone(predicate, ifNone);
     }
 
+    @Override
     public <V> MutableStack<V> collect(BooleanToObjectFunction<? extends V> function)
     {
         return ArrayStack.newStackFromTopToBottom(this.delegate.asReversed().collect(function));
     }
 
+    @Override
     public <V> V injectInto(V injectedValue, ObjectBooleanToObjectFunction<? super V, ? extends V> function)
     {
         return this.delegate.asReversed().injectInto(injectedValue, function);
     }
 
+    @Override
     public boolean[] toArray()
     {
         return this.delegate.asReversed().toArray();
     }
 
+    @Override
     public boolean contains(boolean value)
     {
         return this.delegate.asReversed().contains(value);
     }
 
+    @Override
     public boolean containsAll(boolean... source)
     {
         return this.delegate.asReversed().containsAll(source);
     }
 
+    @Override
     public boolean containsAll(BooleanIterable source)
     {
         return this.delegate.asReversed().containsAll(source);
     }
 
+    @Override
     public void clear()
     {
         this.delegate.clear();
@@ -348,31 +377,37 @@ public final class BooleanArrayStack implements MutableBooleanStack, Externaliza
         return this.delegate.asReversed().toString();
     }
 
+    @Override
     public String makeString()
     {
         return this.delegate.asReversed().makeString();
     }
 
+    @Override
     public String makeString(String separator)
     {
         return this.delegate.asReversed().makeString(separator);
     }
 
+    @Override
     public String makeString(String start, String separator, String end)
     {
         return this.delegate.asReversed().makeString(start, separator, end);
     }
 
+    @Override
     public void appendString(Appendable appendable)
     {
         this.delegate.asReversed().appendString(appendable);
     }
 
+    @Override
     public void appendString(Appendable appendable, String separator)
     {
         this.delegate.asReversed().appendString(appendable, separator);
     }
 
+    @Override
     public void appendString(
             Appendable appendable,
             String start,
@@ -382,46 +417,55 @@ public final class BooleanArrayStack implements MutableBooleanStack, Externaliza
         this.delegate.asReversed().appendString(appendable, start, separator, end);
     }
 
+    @Override
     public boolean getFirst()
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".getFirst() not implemented yet");
     }
 
+    @Override
     public int indexOf(boolean value)
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".indexOf() not implemented yet");
     }
 
+    @Override
     public <T> T injectIntoWithIndex(T injectedValue, ObjectBooleanIntToObjectFunction<? super T, ? extends T> function)
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".injectIntoWithIndex() not implemented yet");
     }
 
+    @Override
     public void forEachWithIndex(BooleanIntProcedure procedure)
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".forEachWithIndex() not implemented yet");
     }
 
+    @Override
     public MutableBooleanList toList()
     {
         return BooleanArrayList.newList(this);
     }
 
+    @Override
     public MutableBooleanSet toSet()
     {
         return BooleanHashSet.newSet(this);
     }
 
+    @Override
     public MutableBooleanBag toBag()
     {
         return BooleanHashBag.newBag(this);
     }
 
+    @Override
     public LazyBooleanIterable asLazy()
     {
         return new LazyBooleanIterableAdapter(this);
     }
 
+    @Override
     public void writeExternal(ObjectOutput out) throws IOException
     {
         out.writeInt(this.size());
@@ -433,6 +477,7 @@ public final class BooleanArrayStack implements MutableBooleanStack, Externaliza
         }
     }
 
+    @Override
     public void readExternal(ObjectInput in) throws IOException
     {
         int size = in.readInt();

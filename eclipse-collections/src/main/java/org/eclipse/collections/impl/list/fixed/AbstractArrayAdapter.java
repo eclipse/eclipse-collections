@@ -250,6 +250,7 @@ public abstract class AbstractArrayAdapter<T>
         return InternalArrayIterate.selectAndRejectWith(this.items, this.items.length, predicate, parameter);
     }
 
+    @Override
     public int size()
     {
         return this.items.length;
@@ -343,16 +344,19 @@ public abstract class AbstractArrayAdapter<T>
         throw new UnsupportedOperationException("Cannot call retainAllIterable() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public void clear()
     {
         throw new UnsupportedOperationException("Cannot call clear() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public boolean addAll(int index, Collection<? extends T> collection)
     {
         throw new UnsupportedOperationException("Cannot call addAll() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public T get(int index)
     {
         if (index >= this.size())
@@ -363,11 +367,13 @@ public abstract class AbstractArrayAdapter<T>
         return this.items[index];
     }
 
+    @Override
     public void add(int index, T element)
     {
         throw new UnsupportedOperationException("Cannot call add() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public T remove(int index)
     {
         throw new UnsupportedOperationException("Cannot call remove() on " + this.getClass().getSimpleName());

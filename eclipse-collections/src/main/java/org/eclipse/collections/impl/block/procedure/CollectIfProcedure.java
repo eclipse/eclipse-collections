@@ -39,6 +39,7 @@ public final class CollectIfProcedure<T, V>
         this.collection = targetCollection;
     }
 
+    @Override
     public void value(T object)
     {
         if (this.predicate.accept(object))

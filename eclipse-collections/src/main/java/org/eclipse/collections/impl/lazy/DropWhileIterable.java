@@ -46,6 +46,7 @@ public class DropWhileIterable<T> extends AbstractLazyIterable<T>
         this.predicate = predicate;
     }
 
+    @Override
     public void each(Procedure<? super T> procedure)
     {
         Iterate.forEach(this.adapted, new IfProcedure<>(new DropWhileIterablePredicate<>(this.predicate), procedure));
@@ -87,6 +88,7 @@ public class DropWhileIterable<T> extends AbstractLazyIterable<T>
         return Iterate.detect(this.adapted, Predicates.and(new DropWhileIterablePredicate<>(this.predicate), predicate));
     }
 
+    @Override
     public Iterator<T> iterator()
     {
         return new SelectIterator<>(this.adapted.iterator(), new DropWhileIterablePredicate<>(this.predicate));

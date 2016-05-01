@@ -120,11 +120,13 @@ public final class HashingStrategies
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public int computeHashCode(Object object)
         {
             return object.hashCode();
         }
 
+        @Override
         public boolean equals(Object object1, Object object2)
         {
             return object1.equals(object2);
@@ -142,11 +144,13 @@ public final class HashingStrategies
             this.nonNullSafeStrategy = nonNullSafeStrategy;
         }
 
+        @Override
         public int computeHashCode(T object)
         {
             return object == null ? 0 : this.nonNullSafeStrategy.computeHashCode(object);
         }
 
+        @Override
         public boolean equals(T object1, T object2)
         {
             return object1 == null || object2 == null ? object1 == object2 : this.nonNullSafeStrategy.equals(object1, object2);
@@ -164,11 +168,13 @@ public final class HashingStrategies
             this.function = function;
         }
 
+        @Override
         public int computeHashCode(T object)
         {
             return this.function.valueOf(object).hashCode();
         }
 
+        @Override
         public boolean equals(T object1, T object2)
         {
             return this.function.valueOf(object1).equals(this.function.valueOf(object2));
@@ -186,11 +192,13 @@ public final class HashingStrategies
             this.function = function;
         }
 
+        @Override
         public int computeHashCode(T object)
         {
             return this.function.booleanValueOf(object) ? Boolean.TRUE.hashCode() : Boolean.FALSE.hashCode();
         }
 
+        @Override
         public boolean equals(T object1, T object2)
         {
             return this.function.booleanValueOf(object1) == this.function.booleanValueOf(object2);
@@ -208,11 +216,13 @@ public final class HashingStrategies
             this.function = function;
         }
 
+        @Override
         public int computeHashCode(T object)
         {
             return this.function.byteValueOf(object);
         }
 
+        @Override
         public boolean equals(T object1, T object2)
         {
             return this.function.byteValueOf(object1) == this.function.byteValueOf(object2);
@@ -230,11 +240,13 @@ public final class HashingStrategies
             this.function = function;
         }
 
+        @Override
         public int computeHashCode(T object)
         {
             return this.function.charValueOf(object);
         }
 
+        @Override
         public boolean equals(T object1, T object2)
         {
             return this.function.charValueOf(object1) == this.function.charValueOf(object2);
@@ -252,11 +264,13 @@ public final class HashingStrategies
             this.function = function;
         }
 
+        @Override
         public int computeHashCode(T object)
         {
             return HashingStrategies.longHashCode(Double.doubleToLongBits(this.function.doubleValueOf(object)));
         }
 
+        @Override
         public boolean equals(T object1, T object2)
         {
             return Double.compare(this.function.doubleValueOf(object1), this.function.doubleValueOf(object2)) == 0;
@@ -274,11 +288,13 @@ public final class HashingStrategies
             this.function = function;
         }
 
+        @Override
         public int computeHashCode(T object)
         {
             return Float.floatToIntBits(this.function.floatValueOf(object));
         }
 
+        @Override
         public boolean equals(T object1, T object2)
         {
             return Float.compare(this.function.floatValueOf(object1), this.function.floatValueOf(object2)) == 0;
@@ -296,11 +312,13 @@ public final class HashingStrategies
             this.function = function;
         }
 
+        @Override
         public int computeHashCode(T object)
         {
             return this.function.intValueOf(object);
         }
 
+        @Override
         public boolean equals(T object1, T object2)
         {
             return this.function.intValueOf(object1) == this.function.intValueOf(object2);
@@ -318,11 +336,13 @@ public final class HashingStrategies
             this.function = function;
         }
 
+        @Override
         public int computeHashCode(T object)
         {
             return HashingStrategies.longHashCode(this.function.longValueOf(object));
         }
 
+        @Override
         public boolean equals(T object1, T object2)
         {
             return this.function.longValueOf(object1) == this.function.longValueOf(object2);
@@ -340,11 +360,13 @@ public final class HashingStrategies
             this.function = function;
         }
 
+        @Override
         public int computeHashCode(T object)
         {
             return this.function.shortValueOf(object);
         }
 
+        @Override
         public boolean equals(T object1, T object2)
         {
             return this.function.shortValueOf(object1) == this.function.shortValueOf(object2);
@@ -355,11 +377,13 @@ public final class HashingStrategies
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public int computeHashCode(Object object)
         {
             return System.identityHashCode(object);
         }
 
+        @Override
         public boolean equals(Object object1, Object object2)
         {
             return object1 == object2;
@@ -376,6 +400,7 @@ public final class HashingStrategies
             this.hashingStrategies = hashingStrategies;
         }
 
+        @Override
         public int computeHashCode(T object)
         {
             int hashCode = this.hashingStrategies[0].computeHashCode(object);
@@ -386,6 +411,7 @@ public final class HashingStrategies
             return hashCode;
         }
 
+        @Override
         public boolean equals(T object1, T object2)
         {
             for (HashingStrategy<T> hashingStrategy : this.hashingStrategies)

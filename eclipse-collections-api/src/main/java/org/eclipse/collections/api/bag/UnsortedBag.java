@@ -40,64 +40,89 @@ import org.eclipse.collections.api.tuple.Pair;
 
 public interface UnsortedBag<T> extends Bag<T>
 {
+    @Override
     UnsortedBag<T> tap(Procedure<? super T> procedure);
 
+    @Override
     UnsortedBag<T> selectByOccurrences(IntPredicate predicate);
 
+    @Override
     UnsortedBag<T> select(Predicate<? super T> predicate);
 
+    @Override
     <P> UnsortedBag<T> selectWith(Predicate2<? super T, ? super P> predicate, P parameter);
 
+    @Override
     UnsortedBag<T> reject(Predicate<? super T> predicate);
 
+    @Override
     <P> UnsortedBag<T> rejectWith(Predicate2<? super T, ? super P> predicate, P parameter);
 
+    @Override
     <S> UnsortedBag<S> selectInstancesOf(Class<S> clazz);
 
+    @Override
     PartitionUnsortedBag<T> partition(Predicate<? super T> predicate);
 
+    @Override
     <V> UnsortedBag<V> collect(Function<? super T, ? extends V> function);
 
+    @Override
     BooleanBag collectBoolean(BooleanFunction<? super T> booleanFunction);
 
+    @Override
     ByteBag collectByte(ByteFunction<? super T> byteFunction);
 
+    @Override
     CharBag collectChar(CharFunction<? super T> charFunction);
 
+    @Override
     DoubleBag collectDouble(DoubleFunction<? super T> doubleFunction);
 
+    @Override
     FloatBag collectFloat(FloatFunction<? super T> floatFunction);
 
+    @Override
     IntBag collectInt(IntFunction<? super T> intFunction);
 
+    @Override
     LongBag collectLong(LongFunction<? super T> longFunction);
 
+    @Override
     ShortBag collectShort(ShortFunction<? super T> shortFunction);
 
+    @Override
     <P, V> UnsortedBag<V> collectWith(Function2<? super T, ? super P, ? extends V> function, P parameter);
 
+    @Override
     <V> UnsortedBag<V> collectIf(Predicate<? super T> predicate, Function<? super T, ? extends V> function);
 
+    @Override
     <V> UnsortedBag<V> flatCollect(Function<? super T, ? extends Iterable<V>> function);
 
     /**
      * @deprecated in 6.0. Use {@link OrderedIterable#zip(Iterable)} instead.
      */
+    @Override
     @Deprecated
     <S> UnsortedBag<Pair<T, S>> zip(Iterable<S> that);
 
     /**
      * @deprecated in 6.0. Use {@link OrderedIterable#zipWithIndex()} instead.
      */
+    @Override
     @Deprecated
     UnsortedSetIterable<Pair<T, Integer>> zipWithIndex();
 
+    @Override
     <V> UnsortedBagMultimap<V, T> groupBy(Function<? super T, ? extends V> function);
 
+    @Override
     <V> UnsortedBagMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function);
 
     /**
      * Converts the UnsortedBag to an ImmutableBag. If the bag is immutable, it returns itself.
      */
+    @Override
     ImmutableBag<T> toImmutable();
 }

@@ -96,41 +96,49 @@ public abstract class AbstractImmutableSortedMap<K, V>
         extends AbstractMapIterable<K, V>
         implements ImmutableSortedMap<K, V>, SortedMap<K, V>
 {
+    @Override
     public SortedMap<K, V> castToMap()
     {
         return this;
     }
 
+    @Override
     public SortedMap<K, V> castToSortedMap()
     {
         return this;
     }
 
+    @Override
     public MutableSortedMap<K, V> toSortedMap()
     {
         return TreeSortedMap.newMap(this);
     }
 
+    @Override
     public ImmutableSortedMap<K, V> toImmutable()
     {
         return this;
     }
 
+    @Override
     public Iterator<V> iterator()
     {
         return this.valuesView().iterator();
     }
 
+    @Override
     public void putAll(Map<? extends K, ? extends V> map)
     {
         throw new UnsupportedOperationException("Cannot call putAll() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public void clear()
     {
         throw new UnsupportedOperationException("Cannot call clear() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public ImmutableSortedMap<K, V> newWithKeyValue(K key, V value)
     {
         TreeSortedMap<K, V> sortedMap = TreeSortedMap.newMap(this);
@@ -138,6 +146,7 @@ public abstract class AbstractImmutableSortedMap<K, V>
         return sortedMap.toImmutable();
     }
 
+    @Override
     public ImmutableSortedMap<K, V> newWithAllKeyValues(Iterable<? extends Pair<? extends K, ? extends V>> keyValues)
     {
         TreeSortedMap<K, V> sortedMap = TreeSortedMap.newMap(this);
@@ -148,6 +157,7 @@ public abstract class AbstractImmutableSortedMap<K, V>
         return sortedMap.toImmutable();
     }
 
+    @Override
     public ImmutableSortedMap<K, V> newWithAllKeyValueArguments(Pair<? extends K, ? extends V>... keyValuePairs)
     {
         TreeSortedMap<K, V> sortedMap = TreeSortedMap.newMap(this);
@@ -158,6 +168,7 @@ public abstract class AbstractImmutableSortedMap<K, V>
         return sortedMap.toImmutable();
     }
 
+    @Override
     public ImmutableSortedMap<K, V> newWithoutKey(K key)
     {
         TreeSortedMap<K, V> sortedMap = TreeSortedMap.newMap(this);
@@ -165,6 +176,7 @@ public abstract class AbstractImmutableSortedMap<K, V>
         return sortedMap.toImmutable();
     }
 
+    @Override
     public ImmutableSortedMap<K, V> newWithoutAllKeys(Iterable<? extends K> keys)
     {
         TreeSortedMap<K, V> sortedMap = TreeSortedMap.newMap(this);
@@ -175,37 +187,44 @@ public abstract class AbstractImmutableSortedMap<K, V>
         return sortedMap.toImmutable();
     }
 
+    @Override
     public V put(K key, V value)
     {
         throw new UnsupportedOperationException("Cannot call put() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public V remove(Object key)
     {
         throw new UnsupportedOperationException("Cannot call remove() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public ImmutableSortedSetMultimap<V, K> flip()
     {
         return MapIterate.flip(this).toImmutable();
     }
 
+    @Override
     public ImmutableSortedMap<K, V> tap(Procedure<? super V> procedure)
     {
         this.forEach(procedure);
         return this;
     }
 
+    @Override
     public ImmutableList<V> select(Predicate<? super V> predicate)
     {
         return this.select(predicate, FastList.newList(this.size())).toImmutable();
     }
 
+    @Override
     public <P> ImmutableList<V> selectWith(Predicate2<? super V, ? super P> predicate, P parameter)
     {
         return this.select(Predicates.bind(predicate, parameter));
     }
 
+    @Override
     public ImmutableSortedMap<K, V> select(Predicate2<? super K, ? super V> predicate)
     {
         MutableSortedMap<K, V> selectedMap = SortedMaps.mutable.with(this.comparator());
@@ -218,16 +237,19 @@ public abstract class AbstractImmutableSortedMap<K, V>
         return selectedMap.toImmutable();
     }
 
+    @Override
     public ImmutableList<V> reject(Predicate<? super V> predicate)
     {
         return this.reject(predicate, FastList.newList(this.size())).toImmutable();
     }
 
+    @Override
     public <P> ImmutableList<V> rejectWith(Predicate2<? super V, ? super P> predicate, P parameter)
     {
         return this.reject(Predicates.bind(predicate, parameter));
     }
 
+    @Override
     public ImmutableSortedMap<K, V> reject(Predicate2<? super K, ? super V> predicate)
     {
         MutableSortedMap<K, V> rejectedMap = SortedMaps.mutable.with(this.comparator());
@@ -240,6 +262,7 @@ public abstract class AbstractImmutableSortedMap<K, V>
         return rejectedMap.toImmutable();
     }
 
+    @Override
     public PartitionImmutableList<V> partition(Predicate<? super V> predicate)
     {
         PartitionMutableList<V> partitionFastList = new PartitionFastList<>();
@@ -247,6 +270,7 @@ public abstract class AbstractImmutableSortedMap<K, V>
         return partitionFastList.toImmutable();
     }
 
+    @Override
     public <P> PartitionImmutableList<V> partitionWith(Predicate2<? super V, ? super P> predicate, P parameter)
     {
         PartitionMutableList<V> partitionFastList = new PartitionFastList<>();
@@ -254,6 +278,7 @@ public abstract class AbstractImmutableSortedMap<K, V>
         return partitionFastList.toImmutable();
     }
 
+    @Override
     public <S> ImmutableList<S> selectInstancesOf(Class<S> clazz)
     {
         FastList<S> result = FastList.newList(this.size());
@@ -261,11 +286,13 @@ public abstract class AbstractImmutableSortedMap<K, V>
         return result.toImmutable();
     }
 
+    @Override
     public <R> ImmutableList<R> collect(Function<? super V, ? extends R> function)
     {
         return this.collect(function, FastList.<R>newList(this.size())).toImmutable();
     }
 
+    @Override
     public ImmutableBooleanList collectBoolean(BooleanFunction<? super V> booleanFunction)
     {
         BooleanArrayList result = new BooleanArrayList(this.size());
@@ -273,6 +300,7 @@ public abstract class AbstractImmutableSortedMap<K, V>
         return result.toImmutable();
     }
 
+    @Override
     public ImmutableByteList collectByte(ByteFunction<? super V> byteFunction)
     {
         ByteArrayList result = new ByteArrayList(this.size());
@@ -280,6 +308,7 @@ public abstract class AbstractImmutableSortedMap<K, V>
         return result.toImmutable();
     }
 
+    @Override
     public ImmutableCharList collectChar(CharFunction<? super V> charFunction)
     {
         CharArrayList result = new CharArrayList(this.size());
@@ -287,6 +316,7 @@ public abstract class AbstractImmutableSortedMap<K, V>
         return result.toImmutable();
     }
 
+    @Override
     public ImmutableDoubleList collectDouble(DoubleFunction<? super V> doubleFunction)
     {
         DoubleArrayList result = new DoubleArrayList(this.size());
@@ -294,6 +324,7 @@ public abstract class AbstractImmutableSortedMap<K, V>
         return result.toImmutable();
     }
 
+    @Override
     public ImmutableFloatList collectFloat(FloatFunction<? super V> floatFunction)
     {
         FloatArrayList result = new FloatArrayList(this.size());
@@ -301,6 +332,7 @@ public abstract class AbstractImmutableSortedMap<K, V>
         return result.toImmutable();
     }
 
+    @Override
     public ImmutableIntList collectInt(IntFunction<? super V> intFunction)
     {
         IntArrayList result = new IntArrayList(this.size());
@@ -308,6 +340,7 @@ public abstract class AbstractImmutableSortedMap<K, V>
         return result.toImmutable();
     }
 
+    @Override
     public ImmutableLongList collectLong(LongFunction<? super V> longFunction)
     {
         LongArrayList result = new LongArrayList(this.size());
@@ -315,6 +348,7 @@ public abstract class AbstractImmutableSortedMap<K, V>
         return result.toImmutable();
     }
 
+    @Override
     public ImmutableShortList collectShort(ShortFunction<? super V> shortFunction)
     {
         ShortArrayList result = new ShortArrayList(this.size());
@@ -322,6 +356,7 @@ public abstract class AbstractImmutableSortedMap<K, V>
         return result.toImmutable();
     }
 
+    @Override
     public <K2, V2> ImmutableMap<K2, V2> collect(Function2<? super K, ? super V, Pair<K2, V2>> function)
     {
         MutableMap<K2, V2> collectedMap = UnifiedMap.newMap(this.size());
@@ -329,16 +364,19 @@ public abstract class AbstractImmutableSortedMap<K, V>
         return collectedMap.toImmutable();
     }
 
+    @Override
     public <P, VV> ImmutableList<VV> collectWith(Function2<? super V, ? super P, ? extends VV> function, P parameter)
     {
         return this.collect(Functions.bind(function, parameter));
     }
 
+    @Override
     public <R> ImmutableList<R> collectIf(Predicate<? super V> predicate, Function<? super V, ? extends R> function)
     {
         return this.collectIf(predicate, function, FastList.<R>newList(this.size())).toImmutable();
     }
 
+    @Override
     public <R> ImmutableSortedMap<K, R> collectValues(Function2<? super K, ? super V, ? extends R> function)
     {
         MutableSortedMap<K, R> collectedMap = SortedMaps.mutable.with(this.comparator());
@@ -346,56 +384,67 @@ public abstract class AbstractImmutableSortedMap<K, V>
         return collectedMap.toImmutable();
     }
 
+    @Override
     public Pair<K, V> detect(Predicate2<? super K, ? super V> predicate)
     {
         return this.keyValuesView().detect(each -> predicate.accept(each.getOne(), each.getTwo()));
     }
 
+    @Override
     public <R> ImmutableList<R> flatCollect(Function<? super V, ? extends Iterable<R>> function)
     {
         return this.flatCollect(function, FastList.newList(this.size())).toImmutable();
     }
 
+    @Override
     public <S> ImmutableList<Pair<V, S>> zip(Iterable<S> that)
     {
         return this.zip(that, FastList.newList(this.size())).toImmutable();
     }
 
+    @Override
     public ImmutableList<Pair<V, Integer>> zipWithIndex()
     {
         return this.zipWithIndex(FastList.newList(this.size())).toImmutable();
     }
 
+    @Override
     public SortedMap<K, V> subMap(K fromKey, K toKey)
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".subMap() not implemented yet");
     }
 
+    @Override
     public SortedMap<K, V> headMap(K toKey)
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".headMap() not implemented yet");
     }
 
+    @Override
     public SortedMap<K, V> tailMap(K fromKey)
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".tailMap() not implemented yet");
     }
 
+    @Override
     public <R> ImmutableListMultimap<R, V> groupBy(Function<? super V, ? extends R> function)
     {
         return this.groupBy(function, FastListMultimap.<R, V>newMultimap()).toImmutable();
     }
 
+    @Override
     public <R> ImmutableListMultimap<R, V> groupByEach(Function<? super V, ? extends Iterable<R>> function)
     {
         return this.groupByEach(function, FastListMultimap.newMultimap()).toImmutable();
     }
 
+    @Override
     public <V1> ImmutableMap<V1, V> groupByUniqueKey(Function<? super V, ? extends V1> function)
     {
         return this.groupByUniqueKey(function, UnifiedMap.<V1, V>newMap()).toImmutable();
     }
 
+    @Override
     public <K2, V2> ImmutableMap<K2, V2> aggregateInPlaceBy(
             Function<? super V, ? extends K2> groupBy,
             Function0<? extends V2> zeroValueFactory,
@@ -406,6 +455,7 @@ public abstract class AbstractImmutableSortedMap<K, V>
         return map.toImmutable();
     }
 
+    @Override
     public <K2, V2> ImmutableMap<K2, V2> aggregateBy(
             Function<? super V, ? extends K2> groupBy,
             Function0<? extends V2> zeroValueFactory,
@@ -416,95 +466,113 @@ public abstract class AbstractImmutableSortedMap<K, V>
         return map.toImmutable();
     }
 
+    @Override
     public <V1> ImmutableObjectLongMap<V1> sumByInt(Function<? super V, ? extends V1> groupBy, IntFunction<? super V> function)
     {
         MutableObjectLongMap<V1> result = ObjectLongHashMap.newMap();
         return this.injectInto(result, PrimitiveFunctions.sumByIntFunction(groupBy, function)).toImmutable();
     }
 
+    @Override
     public <V1> ImmutableObjectDoubleMap<V1> sumByFloat(Function<? super V, ? extends V1> groupBy, FloatFunction<? super V> function)
     {
         MutableObjectDoubleMap<V1> result = ObjectDoubleHashMap.newMap();
         return this.injectInto(result, PrimitiveFunctions.sumByFloatFunction(groupBy, function)).toImmutable();
     }
 
+    @Override
     public <V1> ImmutableObjectLongMap<V1> sumByLong(Function<? super V, ? extends V1> groupBy, LongFunction<? super V> function)
     {
         MutableObjectLongMap<V1> result = ObjectLongHashMap.newMap();
         return this.injectInto(result, PrimitiveFunctions.sumByLongFunction(groupBy, function)).toImmutable();
     }
 
+    @Override
     public <V1> ImmutableObjectDoubleMap<V1> sumByDouble(Function<? super V, ? extends V1> groupBy, DoubleFunction<? super V> function)
     {
         MutableObjectDoubleMap<V1> result = ObjectDoubleHashMap.newMap();
         return this.injectInto(result, PrimitiveFunctions.sumByDoubleFunction(groupBy, function)).toImmutable();
     }
 
+    @Override
     public void reverseForEach(Procedure<? super V> procedure)
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".reverseForEach() not implemented yet");
     }
 
+    @Override
     public LazyIterable<V> asReversed()
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".asReversed() not implemented yet");
     }
 
+    @Override
     public ImmutableSortedMap<K, V> toReversed()
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".toReversed() not implemented yet");
     }
 
+    @Override
     public int detectLastIndex(Predicate<? super V> predicate)
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".detectLastIndex() not implemented yet");
     }
 
+    @Override
     public ImmutableSortedMap<K, V> takeWhile(Predicate<? super V> predicate)
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".takeWhile() not implemented yet");
     }
 
+    @Override
     public ImmutableSortedMap<K, V> dropWhile(Predicate<? super V> predicate)
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".dropWhile() not implemented yet");
     }
 
+    @Override
     public PartitionImmutableList<V> partitionWhile(Predicate<? super V> predicate)
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".partitionWhile() not implemented yet");
     }
 
+    @Override
     public ImmutableList<V> distinct()
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".distinct() not implemented yet");
     }
 
+    @Override
     public int indexOf(Object object)
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".indexOf() not implemented yet");
     }
 
+    @Override
     public <S> boolean corresponds(OrderedIterable<S> other, Predicate2<? super V, ? super S> predicate)
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".corresponds() not implemented yet");
     }
 
+    @Override
     public void forEach(int startIndex, int endIndex, Procedure<? super V> procedure)
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".forEach() not implemented yet");
     }
 
+    @Override
     public void forEachWithIndex(int fromIndex, int toIndex, ObjectIntProcedure<? super V> objectIntProcedure)
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".forEachWithIndex() not implemented yet");
     }
 
+    @Override
     public MutableStack<V> toStack()
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".toStack() not implemented yet");
     }
 
+    @Override
     public int detectIndex(Predicate<? super V> predicate)
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".detectIndex() not implemented yet");

@@ -65,32 +65,38 @@ public abstract class AbstractImmutableBag<T>
         extends AbstractImmutableBagIterable<T>
         implements ImmutableBag<T>
 {
+    @Override
     public ImmutableBag<T> newWithoutAll(Iterable<? extends T> elements)
     {
         return this.reject(Predicates.in(elements));
     }
 
+    @Override
     public ImmutableBag<T> toImmutable()
     {
         return this;
     }
 
+    @Override
     public ImmutableBag<T> tap(Procedure<? super T> procedure)
     {
         this.forEach(procedure);
         return this;
     }
 
+    @Override
     public <P> ImmutableBag<T> selectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         return this.select(Predicates.bind(predicate, parameter));
     }
 
+    @Override
     public <P> ImmutableBag<T> rejectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         return this.reject(Predicates.bind(predicate, parameter));
     }
 
+    @Override
     public PartitionImmutableBag<T> partition(Predicate<? super T> predicate)
     {
         PartitionMutableBag<T> partitionMutableBag = new PartitionHashBag<>();
@@ -103,6 +109,7 @@ public abstract class AbstractImmutableBag<T>
         return partitionMutableBag.toImmutable();
     }
 
+    @Override
     public <P> PartitionImmutableBag<T> partitionWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         PartitionMutableBag<T> partitionMutableBag = new PartitionHashBag<>();
@@ -115,51 +122,61 @@ public abstract class AbstractImmutableBag<T>
         return partitionMutableBag.toImmutable();
     }
 
+    @Override
     public <P, V> ImmutableBag<V> collectWith(Function2<? super T, ? super P, ? extends V> function, P parameter)
     {
         return this.collect(Functions.bind(function, parameter));
     }
 
+    @Override
     public ImmutableBooleanBag collectBoolean(BooleanFunction<? super T> booleanFunction)
     {
         return this.collectBoolean(booleanFunction, new BooleanHashBag()).toImmutable();
     }
 
+    @Override
     public ImmutableByteBag collectByte(ByteFunction<? super T> byteFunction)
     {
         return this.collectByte(byteFunction, new ByteHashBag()).toImmutable();
     }
 
+    @Override
     public ImmutableCharBag collectChar(CharFunction<? super T> charFunction)
     {
         return this.collectChar(charFunction, new CharHashBag()).toImmutable();
     }
 
+    @Override
     public ImmutableDoubleBag collectDouble(DoubleFunction<? super T> doubleFunction)
     {
         return this.collectDouble(doubleFunction, new DoubleHashBag()).toImmutable();
     }
 
+    @Override
     public ImmutableFloatBag collectFloat(FloatFunction<? super T> floatFunction)
     {
         return this.collectFloat(floatFunction, new FloatHashBag()).toImmutable();
     }
 
+    @Override
     public ImmutableIntBag collectInt(IntFunction<? super T> intFunction)
     {
         return this.collectInt(intFunction, new IntHashBag()).toImmutable();
     }
 
+    @Override
     public ImmutableLongBag collectLong(LongFunction<? super T> longFunction)
     {
         return this.collectLong(longFunction, new LongHashBag()).toImmutable();
     }
 
+    @Override
     public ImmutableShortBag collectShort(ShortFunction<? super T> shortFunction)
     {
         return this.collectShort(shortFunction, new ShortHashBag()).toImmutable();
     }
 
+    @Override
     public ImmutableList<ObjectIntPair<T>> topOccurrences(int n)
     {
         return this.occurrencesSortingBy(n,
@@ -168,6 +185,7 @@ public abstract class AbstractImmutableBag<T>
         ).toImmutable();
     }
 
+    @Override
     public ImmutableList<ObjectIntPair<T>> bottomOccurrences(int n)
     {
         return this.occurrencesSortingBy(
@@ -177,11 +195,13 @@ public abstract class AbstractImmutableBag<T>
         ).toImmutable();
     }
 
+    @Override
     public <V> ImmutableMap<V, T> groupByUniqueKey(Function<? super T, ? extends V> function)
     {
         return this.groupByUniqueKey(function, UnifiedMap.<V, T>newMap()).toImmutable();
     }
 
+    @Override
     public RichIterable<RichIterable<T>> chunk(int size)
     {
         if (size <= 0)

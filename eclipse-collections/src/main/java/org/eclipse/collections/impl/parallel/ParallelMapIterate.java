@@ -122,6 +122,7 @@ public final class ParallelMapIterate
             this.procedure = procedure;
         }
 
+        @Override
         public void value(Pair<T1, T2> pair)
         {
             this.procedure.value(pair.getOne(), pair.getTwo());

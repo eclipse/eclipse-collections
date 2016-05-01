@@ -102,6 +102,7 @@ final class ImmutableEmptySortedSet<T>
         return this;
     }
 
+    @Override
     public int size()
     {
         return 0;
@@ -123,10 +124,12 @@ final class ImmutableEmptySortedSet<T>
         return this;
     }
 
+    @Override
     public void each(Procedure<? super T> procedure)
     {
     }
 
+    @Override
     public void forEach(int startIndex, int endIndex, Procedure<? super T> procedure)
     {
         ListIterate.rangeCheck(startIndex, endIndex, 0);
@@ -137,6 +140,7 @@ final class ImmutableEmptySortedSet<T>
     {
     }
 
+    @Override
     public void forEachWithIndex(int fromIndex, int toIndex, ObjectIntProcedure<? super T> objectIntProcedure)
     {
         ListIterate.rangeCheck(fromIndex, toIndex, 0);
@@ -177,6 +181,7 @@ final class ImmutableEmptySortedSet<T>
         return (ImmutableSortedSet<S>) this;
     }
 
+    @Override
     public Iterator<T> iterator()
     {
         return EmptyIterator.getInstance();
@@ -236,31 +241,37 @@ final class ImmutableEmptySortedSet<T>
         return ArrayStack.newStack();
     }
 
+    @Override
     public T first()
     {
         throw new NoSuchElementException();
     }
 
+    @Override
     public T last()
     {
         throw new NoSuchElementException();
     }
 
+    @Override
     public int indexOf(Object object)
     {
         return -1;
     }
 
+    @Override
     public Comparator<? super T> comparator()
     {
         return this.comparator;
     }
 
+    @Override
     public int compareTo(SortedSetIterable<T> o)
     {
         return o.size() * -1;
     }
 
+    @Override
     public ImmutableSortedSet<T> take(int count)
     {
         if (count < 0)
@@ -270,6 +281,7 @@ final class ImmutableEmptySortedSet<T>
         return this;
     }
 
+    @Override
     public ImmutableSortedSet<T> drop(int count)
     {
         if (count < 0)

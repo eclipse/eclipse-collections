@@ -72,11 +72,13 @@ final class DoubletonList<T>
         return this.element2;
     }
 
+    @Override
     public int size()
     {
         return 2;
     }
 
+    @Override
     public T get(int index)
     {
         switch (index)
@@ -99,6 +101,7 @@ final class DoubletonList<T>
     /**
      * set is implemented purely to allow the List to be sorted, not because this List should be considered mutable.
      */
+    @Override
     public T set(int index, T element)
     {
         switch (index)
@@ -137,12 +140,14 @@ final class DoubletonList<T>
         procedure.value(this.element2, parameter);
     }
 
+    @Override
     public void writeExternal(ObjectOutput out) throws IOException
     {
         out.writeObject(this.element1);
         out.writeObject(this.element2);
     }
 
+    @Override
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
     {
         this.element1 = (T) in.readObject();

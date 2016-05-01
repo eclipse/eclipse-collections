@@ -84,16 +84,19 @@ abstract class AbstractImmutableSortedBag<T>
         extends AbstractImmutableBagIterable<T>
         implements ImmutableSortedBag<T>
 {
+    @Override
     public ImmutableSortedBag<T> newWithoutAll(Iterable<? extends T> elements)
     {
         return this.reject(Predicates.in(elements));
     }
 
+    @Override
     public ImmutableSortedBag<T> toImmutable()
     {
         return this;
     }
 
+    @Override
     public ImmutableSortedBag<T> tap(Procedure<? super T> procedure)
     {
         this.forEach(procedure);
@@ -105,41 +108,49 @@ abstract class AbstractImmutableSortedBag<T>
         return new ImmutableSortedBagSerializationProxy<>(this);
     }
 
+    @Override
     public <V> ImmutableSortedBagMultimap<V, T> groupBy(Function<? super T, ? extends V> function)
     {
         return this.groupBy(function, TreeBagMultimap.<V, T>newMultimap(this.comparator())).toImmutable();
     }
 
+    @Override
     public <V> ImmutableSortedBagMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function)
     {
         return this.groupByEach(function, TreeBagMultimap.newMultimap(this.comparator())).toImmutable();
     }
 
+    @Override
     public <V> ImmutableMap<V, T> groupByUniqueKey(Function<? super T, ? extends V> function)
     {
         return this.groupByUniqueKey(function, UnifiedMap.<V, T>newMap()).toImmutable();
     }
 
+    @Override
     public ImmutableSortedBag<T> select(Predicate<? super T> predicate)
     {
         return this.select(predicate, TreeBag.newBag(this.comparator())).toImmutable();
     }
 
+    @Override
     public <P> ImmutableSortedBag<T> selectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         return this.selectWith(predicate, parameter, TreeBag.newBag(this.comparator())).toImmutable();
     }
 
+    @Override
     public ImmutableSortedBag<T> reject(Predicate<? super T> predicate)
     {
         return this.reject(predicate, TreeBag.newBag(this.comparator())).toImmutable();
     }
 
+    @Override
     public <P> ImmutableSortedBag<T> rejectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         return this.rejectWith(predicate, parameter, TreeBag.newBag(this.comparator())).toImmutable();
     }
 
+    @Override
     public PartitionImmutableSortedBag<T> partition(Predicate<? super T> predicate)
     {
         PartitionMutableSortedBag<T> result = new PartitionTreeBag<>(this.comparator());
@@ -150,6 +161,7 @@ abstract class AbstractImmutableSortedBag<T>
         return result.toImmutable();
     }
 
+    @Override
     public <P> PartitionImmutableSortedBag<T> partitionWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         PartitionMutableSortedBag<T> result = new PartitionTreeBag<>(this.comparator());
@@ -162,66 +174,79 @@ abstract class AbstractImmutableSortedBag<T>
         return result.toImmutable();
     }
 
+    @Override
     public <V> ImmutableList<V> collect(Function<? super T, ? extends V> function)
     {
         return this.collect(function, FastList.<V>newList()).toImmutable();
     }
 
+    @Override
     public <P, V> ImmutableList<V> collectWith(Function2<? super T, ? super P, ? extends V> function, P parameter)
     {
         return this.collectWith(function, parameter, FastList.<V>newList()).toImmutable();
     }
 
+    @Override
     public <V> ImmutableList<V> collectIf(Predicate<? super T> predicate, Function<? super T, ? extends V> function)
     {
         return this.collectIf(predicate, function, FastList.<V>newList()).toImmutable();
     }
 
+    @Override
     public ImmutableBooleanList collectBoolean(BooleanFunction<? super T> booleanFunction)
     {
         return this.collectBoolean(booleanFunction, new BooleanArrayList(this.size())).toImmutable();
     }
 
+    @Override
     public ImmutableByteList collectByte(ByteFunction<? super T> byteFunction)
     {
         return this.collectByte(byteFunction, new ByteArrayList(this.size())).toImmutable();
     }
 
+    @Override
     public ImmutableCharList collectChar(CharFunction<? super T> charFunction)
     {
         return this.collectChar(charFunction, new CharArrayList(this.size())).toImmutable();
     }
 
+    @Override
     public ImmutableDoubleList collectDouble(DoubleFunction<? super T> doubleFunction)
     {
         return this.collectDouble(doubleFunction, new DoubleArrayList(this.size())).toImmutable();
     }
 
+    @Override
     public ImmutableFloatList collectFloat(FloatFunction<? super T> floatFunction)
     {
         return this.collectFloat(floatFunction, new FloatArrayList(this.size())).toImmutable();
     }
 
+    @Override
     public ImmutableIntList collectInt(IntFunction<? super T> intFunction)
     {
         return this.collectInt(intFunction, new IntArrayList(this.size())).toImmutable();
     }
 
+    @Override
     public ImmutableLongList collectLong(LongFunction<? super T> longFunction)
     {
         return this.collectLong(longFunction, new LongArrayList(this.size())).toImmutable();
     }
 
+    @Override
     public ImmutableShortList collectShort(ShortFunction<? super T> shortFunction)
     {
         return this.collectShort(shortFunction, new ShortArrayList(this.size())).toImmutable();
     }
 
+    @Override
     public <V> ImmutableList<V> flatCollect(Function<? super T, ? extends Iterable<V>> function)
     {
         return this.flatCollect(function, FastList.newList()).toImmutable();
     }
 
+    @Override
     public ImmutableSortedBag<T> selectByOccurrences(IntPredicate predicate)
     {
         MutableSortedBag<T> result = TreeBag.newBag(this.comparator());
@@ -234,6 +259,7 @@ abstract class AbstractImmutableSortedBag<T>
         return result.toImmutable();
     }
 
+    @Override
     public <S> ImmutableSortedBag<S> selectInstancesOf(Class<S> clazz)
     {
         Comparator<? super S> comparator = (Comparator<? super S>) this.comparator();
@@ -247,6 +273,7 @@ abstract class AbstractImmutableSortedBag<T>
         return result.toImmutable();
     }
 
+    @Override
     public <S> ImmutableList<Pair<T, S>> zip(Iterable<S> that)
     {
         MutableList<Pair<T, S>> list = FastList.newList();
@@ -294,6 +321,7 @@ abstract class AbstractImmutableSortedBag<T>
         return target;
     }
 
+    @Override
     public ImmutableSortedSet<Pair<T, Integer>> zipWithIndex()
     {
         Comparator<? super T> comparator = (Comparator<? super T>) (this.comparator() == null ? Comparators.naturalOrder() : this.comparator());
@@ -304,11 +332,13 @@ abstract class AbstractImmutableSortedBag<T>
         return Iterate.zipWithIndex(this, pairs).toImmutable();
     }
 
+    @Override
     public ImmutableList<ObjectIntPair<T>> topOccurrences(int n)
     {
         return this.occurrencesSortingBy(n, item -> -item.getTwo()).toImmutable();
     }
 
+    @Override
     public ImmutableList<ObjectIntPair<T>> bottomOccurrences(int n)
     {
         return this.occurrencesSortingBy(n, ObjectIntPair::getTwo).toImmutable();
@@ -335,11 +365,13 @@ abstract class AbstractImmutableSortedBag<T>
         return results;
     }
 
+    @Override
     public MutableStack<T> toStack()
     {
         return Stacks.mutable.withAll(this);
     }
 
+    @Override
     public RichIterable<RichIterable<T>> chunk(int size)
     {
         if (size <= 0)
@@ -364,21 +396,25 @@ abstract class AbstractImmutableSortedBag<T>
         return result.toImmutable();
     }
 
+    @Override
     public ImmutableSortedBag<T> toReversed()
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".toReversed() not implemented yet");
     }
 
+    @Override
     public int detectLastIndex(Predicate<? super T> predicate)
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".detectLastIndex() not implemented yet");
     }
 
+    @Override
     public void reverseForEach(Procedure<? super T> procedure)
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".reverseForEach() not implemented yet");
     }
 
+    @Override
     public LazyIterable<T> asReversed()
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".asReversed() not implemented yet");

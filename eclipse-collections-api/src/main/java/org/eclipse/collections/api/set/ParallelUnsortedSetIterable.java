@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -26,26 +26,34 @@ import org.eclipse.collections.api.multimap.set.UnsortedSetMultimap;
 @Beta
 public interface ParallelUnsortedSetIterable<T> extends ParallelSetIterable<T>
 {
+    @Override
     ParallelUnsortedSetIterable<T> asUnique();
 
     /**
      * Creates a parallel iterable for selecting elements from the current iterable.
      */
+    @Override
     ParallelUnsortedSetIterable<T> select(Predicate<? super T> predicate);
 
+    @Override
     <P> ParallelUnsortedSetIterable<T> selectWith(Predicate2<? super T, ? super P> predicate, P parameter);
 
     /**
      * Creates a parallel iterable for rejecting elements from the current iterable.
      */
+    @Override
     ParallelUnsortedSetIterable<T> reject(Predicate<? super T> predicate);
 
+    @Override
     <P> ParallelUnsortedSetIterable<T> rejectWith(Predicate2<? super T, ? super P> predicate, P parameter);
 
+    @Override
     <S> ParallelUnsortedSetIterable<S> selectInstancesOf(Class<S> clazz);
 
+    @Override
     <V> UnsortedSetMultimap<V, T> groupBy(Function<? super T, ? extends V> function);
 
+    @Override
     <V> UnsortedSetMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function);
 
 //    /**

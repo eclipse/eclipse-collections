@@ -52,6 +52,7 @@ final class EmptySet<T>
         return this;
     }
 
+    @Override
     public int size()
     {
         return 0;
@@ -63,16 +64,19 @@ final class EmptySet<T>
         return false;
     }
 
+    @Override
     public T getFirst()
     {
         return null;
     }
 
+    @Override
     public T getLast()
     {
         return null;
     }
 
+    @Override
     public void each(Procedure<? super T> procedure)
     {
     }
@@ -87,6 +91,7 @@ final class EmptySet<T>
     {
     }
 
+    @Override
     public Iterator<T> iterator()
     {
         return EmptyIterator.getInstance();
@@ -183,11 +188,13 @@ final class EmptySet<T>
         return target;
     }
 
+    @Override
     public MutableSet<T> with(T element)
     {
         return new SingletonSet<>(element);
     }
 
+    @Override
     public MutableSet<T> without(T element)
     {
         return this;

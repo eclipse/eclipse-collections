@@ -136,6 +136,7 @@ public interface SortedSetIterableTestCase extends SetIterableTestCase, SortedIt
         // Cannot contain duplicates
     }
 
+    @Override
     @Test
     default void OrderedIterable_zipWithIndex()
     {
@@ -149,6 +150,7 @@ public interface SortedSetIterableTestCase extends SetIterableTestCase, SortedIt
                 iterable.zipWithIndex().toList());
     }
 
+    @Override
     @Test
     default void OrderedIterable_zipWithIndex_target()
     {

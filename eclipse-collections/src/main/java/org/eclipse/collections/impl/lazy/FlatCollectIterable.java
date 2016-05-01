@@ -37,6 +37,7 @@ public class FlatCollectIterable<T, V>
         this.function = function;
     }
 
+    @Override
     public void each(Procedure<? super V> procedure)
     {
         Iterate.forEach(this.adapted, each -> Iterate.forEach(this.function.valueOf(each), procedure));
@@ -112,6 +113,7 @@ public class FlatCollectIterable<T, V>
         return this.noneSatisfy(Predicates.bind(predicate, parameter));
     }
 
+    @Override
     public Iterator<V> iterator()
     {
         return new FlatCollectIterator<>(this.adapted, this.function);

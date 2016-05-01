@@ -42,16 +42,19 @@ public final class ChunkIterator<T>
                 : Lists.mutable::empty;
     }
 
+    @Override
     public void remove()
     {
         throw new UnsupportedOperationException("Cannot call remove() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public boolean hasNext()
     {
         return this.iterator.hasNext();
     }
 
+    @Override
     public RichIterable<T> next()
     {
         if (!this.iterator.hasNext())

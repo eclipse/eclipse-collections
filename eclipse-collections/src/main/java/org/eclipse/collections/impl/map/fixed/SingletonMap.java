@@ -58,6 +58,7 @@ final class SingletonMap<K, V>
         this.value1 = value1;
     }
 
+    @Override
     public int size()
     {
         return 1;
@@ -103,16 +104,19 @@ final class SingletonMap<K, V>
         return Maps.immutable.with(this.key1, this.value1);
     }
 
+    @Override
     public boolean containsKey(Object key)
     {
         return Comparators.nullSafeEquals(this.key1, key);
     }
 
+    @Override
     public boolean containsValue(Object value)
     {
         return Comparators.nullSafeEquals(this.value1, value);
     }
 
+    @Override
     public V get(Object key)
     {
         if (Comparators.nullSafeEquals(this.key1, key))
@@ -123,16 +127,19 @@ final class SingletonMap<K, V>
         return null;
     }
 
+    @Override
     public Set<K> keySet()
     {
         return Sets.fixedSize.of(this.key1);
     }
 
+    @Override
     public Collection<V> values()
     {
         return Lists.fixedSize.of(this.value1);
     }
 
+    @Override
     public MutableSet<Entry<K, V>> entrySet()
     {
         return Sets.fixedSize.of(new ImmutableEntry<>(this.key1, this.value1));
@@ -167,6 +174,7 @@ final class SingletonMap<K, V>
         return Maps.fixedSize.with(this.value1, this.key1);
     }
 
+    @Override
     public void forEachKeyValue(Procedure2<? super K, ? super V> procedure)
     {
         procedure.value(this.key1, this.value1);
@@ -196,12 +204,14 @@ final class SingletonMap<K, V>
         procedure.value(this.value1, parameter);
     }
 
+    @Override
     public void writeExternal(ObjectOutput out) throws IOException
     {
         out.writeObject(this.key1);
         out.writeObject(this.value1);
     }
 
+    @Override
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
     {
         this.key1 = (K) in.readObject();

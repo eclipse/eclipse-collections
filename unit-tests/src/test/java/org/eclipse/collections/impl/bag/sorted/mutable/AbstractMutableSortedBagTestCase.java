@@ -82,6 +82,7 @@ public abstract class AbstractMutableSortedBagTestCase extends MutableBagTestCas
     @Override
     protected abstract <T> MutableSortedBag<T> newWith(T... littleElements);
 
+    @Override
     protected <T> MutableSortedBag<T> newWithOccurrences(ObjectIntPair<T>... elementsWithOccurrences)
     {
         MutableSortedBag<T> bag = this.newWith();

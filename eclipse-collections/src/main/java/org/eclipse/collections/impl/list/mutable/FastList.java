@@ -204,6 +204,7 @@ public class FastList<T>
         return result;
     }
 
+    @Override
     public void clear()
     {
         Arrays.fill(this.items, null);
@@ -224,11 +225,13 @@ public class FastList<T>
         InternalArrayIterate.forEachWithIndexWithoutChecks(this.items, from, to, objectIntProcedure);
     }
 
+    @Override
     public void batchForEach(Procedure<? super T> procedure, int sectionIndex, int sectionCount)
     {
         InternalArrayIterate.batchForEach(procedure, this.items, this.size, sectionIndex, sectionCount);
     }
 
+    @Override
     public int getBatchCount(int batchSize)
     {
         return Math.max(1, this.size() / batchSize);
@@ -372,6 +375,7 @@ public class FastList<T>
         throw this.newIndexOutOfBoundsException(index);
     }
 
+    @Override
     public T set(int index, T element)
     {
         T previous = this.get(index);
@@ -963,6 +967,7 @@ public class FastList<T>
         return result == null ? defaultValueBlock.value() : result;
     }
 
+    @Override
     public T get(int index)
     {
         if (index < this.size)
@@ -1000,6 +1005,7 @@ public class FastList<T>
         }
     }
 
+    @Override
     public void add(int index, T element)
     {
         if (index > -1 && index < this.size)
@@ -1042,6 +1048,7 @@ public class FastList<T>
         return result < oldSize ? MAXIMUM_ARRAY_SIZE : result;
     }
 
+    @Override
     public T remove(int index)
     {
         T previous = this.get(index);
@@ -1066,6 +1073,7 @@ public class FastList<T>
         return false;
     }
 
+    @Override
     public boolean addAll(int index, Collection<? extends T> source)
     {
         if (index > this.size || index < 0)
@@ -1146,6 +1154,7 @@ public class FastList<T>
         }
     }
 
+    @Override
     public int size()
     {
         return this.size;
@@ -1442,6 +1451,7 @@ public class FastList<T>
         return hashCode;
     }
 
+    @Override
     public void writeExternal(ObjectOutput out) throws IOException
     {
         out.writeInt(this.size());
@@ -1451,6 +1461,7 @@ public class FastList<T>
         }
     }
 
+    @Override
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
     {
         this.size = in.readInt();

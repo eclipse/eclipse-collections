@@ -37,6 +37,7 @@ final class ImmutableSingletonSet<T>
         this.element1 = obj1;
     }
 
+    @Override
     public int size()
     {
         return 1;
@@ -89,6 +90,7 @@ final class ImmutableSingletonSet<T>
         return Comparators.nullSafeEquals(obj, this.element1);
     }
 
+    @Override
     public Iterator<T> iterator()
     {
         return new SingletonSetIterator();
@@ -108,16 +110,19 @@ final class ImmutableSingletonSet<T>
         }
     }
 
+    @Override
     public T getFirst()
     {
         return this.element1;
     }
 
+    @Override
     public T getLast()
     {
         return this.element1;
     }
 
+    @Override
     public void each(Procedure<? super T> procedure)
     {
         procedure.value(this.element1);

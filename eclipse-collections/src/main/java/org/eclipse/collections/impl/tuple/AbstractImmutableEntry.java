@@ -54,11 +54,13 @@ public class AbstractImmutableEntry<K, V> implements Map.Entry<K, V>, Serializab
         return (Function<Map.Entry<K, V>, Pair<K, V>>) (Function<?, ?>) TO_PAIR;
     }
 
+    @Override
     public K getKey()
     {
         return this.key;
     }
 
+    @Override
     public V getValue()
     {
         return this.value;
@@ -70,6 +72,7 @@ public class AbstractImmutableEntry<K, V> implements Map.Entry<K, V>, Serializab
      * This implementation throws an {@link UnsupportedOperationException}. Override this method to support mutable
      * map entries.
      */
+    @Override
     public V setValue(V value)
     {
         throw new UnsupportedOperationException("Cannot call setValue() on " + this.getClass().getSimpleName());
@@ -92,6 +95,7 @@ public class AbstractImmutableEntry<K, V> implements Map.Entry<K, V>, Serializab
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public K valueOf(Map.Entry<K, ?> entry)
         {
             return entry.getKey();
@@ -106,6 +110,7 @@ public class AbstractImmutableEntry<K, V> implements Map.Entry<K, V>, Serializab
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public V valueOf(Map.Entry<?, V> entry)
         {
             return entry.getValue();
@@ -116,6 +121,7 @@ public class AbstractImmutableEntry<K, V> implements Map.Entry<K, V>, Serializab
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public Pair<K, V> valueOf(Map.Entry<K, V> entry)
         {
             return Tuples.pairFrom(entry);

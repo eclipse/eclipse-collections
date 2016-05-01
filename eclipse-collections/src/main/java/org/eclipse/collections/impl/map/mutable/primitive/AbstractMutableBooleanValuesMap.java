@@ -90,6 +90,7 @@ public abstract class AbstractMutableBooleanValuesMap extends AbstractBooleanIte
         }
     }
 
+    @Override
     public boolean contains(boolean value)
     {
         return this.containsValue(value);
@@ -101,6 +102,7 @@ public abstract class AbstractMutableBooleanValuesMap extends AbstractBooleanIte
         return source.allSatisfy(this::contains);
     }
 
+    @Override
     public int size()
     {
         return this.getOccupiedWithData() + (this.getSentinelValues() == null ? 0 : this.getSentinelValues().size());
@@ -118,6 +120,7 @@ public abstract class AbstractMutableBooleanValuesMap extends AbstractBooleanIte
         return this.getOccupiedWithData() != 0 || (this.getSentinelValues() != null && this.getSentinelValues().size() != 0);
     }
 
+    @Override
     public void forEach(BooleanProcedure procedure)
     {
         this.each(procedure);
@@ -126,11 +129,13 @@ public abstract class AbstractMutableBooleanValuesMap extends AbstractBooleanIte
     /**
      * @since 7.0.
      */
+    @Override
     public void each(BooleanProcedure procedure)
     {
         this.forEachValue(procedure);
     }
 
+    @Override
     public void forEachValue(BooleanProcedure procedure)
     {
         if (this.getSentinelValues() != null)
@@ -153,6 +158,7 @@ public abstract class AbstractMutableBooleanValuesMap extends AbstractBooleanIte
         }
     }
 
+    @Override
     public <V> V injectInto(V injectedValue, ObjectBooleanToObjectFunction<? super V, ? extends V> function)
     {
         V result = injectedValue;
@@ -180,6 +186,7 @@ public abstract class AbstractMutableBooleanValuesMap extends AbstractBooleanIte
         return result;
     }
 
+    @Override
     public void appendString(Appendable appendable, String start, String separator, String end)
     {
         try
@@ -225,6 +232,7 @@ public abstract class AbstractMutableBooleanValuesMap extends AbstractBooleanIte
         }
     }
 
+    @Override
     public MutableBooleanBag select(BooleanPredicate predicate)
     {
         MutableBooleanBag result = BooleanBags.mutable.empty();
@@ -251,6 +259,7 @@ public abstract class AbstractMutableBooleanValuesMap extends AbstractBooleanIte
         return result;
     }
 
+    @Override
     public MutableBooleanBag reject(BooleanPredicate predicate)
     {
         MutableBooleanBag result = BooleanBags.mutable.empty();
@@ -275,6 +284,7 @@ public abstract class AbstractMutableBooleanValuesMap extends AbstractBooleanIte
         return result;
     }
 
+    @Override
     public <V> MutableBag<V> collect(BooleanToObjectFunction<? extends V> function)
     {
         MutableBag<V> target = HashBag.newBag(this.size());
@@ -299,6 +309,7 @@ public abstract class AbstractMutableBooleanValuesMap extends AbstractBooleanIte
         return target;
     }
 
+    @Override
     public boolean detectIfNone(BooleanPredicate predicate, boolean value)
     {
         if (this.getSentinelValues() != null)
@@ -322,6 +333,7 @@ public abstract class AbstractMutableBooleanValuesMap extends AbstractBooleanIte
         return value;
     }
 
+    @Override
     public int count(BooleanPredicate predicate)
     {
         int count = 0;
@@ -346,6 +358,7 @@ public abstract class AbstractMutableBooleanValuesMap extends AbstractBooleanIte
         return count;
     }
 
+    @Override
     public boolean anySatisfy(BooleanPredicate predicate)
     {
         if (this.getSentinelValues() != null)
@@ -369,6 +382,7 @@ public abstract class AbstractMutableBooleanValuesMap extends AbstractBooleanIte
         return false;
     }
 
+    @Override
     public boolean allSatisfy(BooleanPredicate predicate)
     {
         if (this.getSentinelValues() != null)
@@ -392,11 +406,13 @@ public abstract class AbstractMutableBooleanValuesMap extends AbstractBooleanIte
         return true;
     }
 
+    @Override
     public boolean noneSatisfy(BooleanPredicate predicate)
     {
         return !this.anySatisfy(predicate);
     }
 
+    @Override
     public boolean[] toArray()
     {
         boolean[] array = new boolean[this.size()];
@@ -442,186 +458,223 @@ public abstract class AbstractMutableBooleanValuesMap extends AbstractBooleanIte
 
     protected abstract class AbstractBooleanValuesCollection implements MutableBooleanCollection
     {
+        @Override
         public void clear()
         {
             AbstractMutableBooleanValuesMap.this.clear();
         }
 
+        @Override
         public MutableBooleanCollection select(BooleanPredicate predicate)
         {
             return AbstractMutableBooleanValuesMap.this.select(predicate);
         }
 
+        @Override
         public MutableBooleanCollection reject(BooleanPredicate predicate)
         {
             return AbstractMutableBooleanValuesMap.this.reject(predicate);
         }
 
+        @Override
         public boolean detectIfNone(BooleanPredicate predicate, boolean ifNone)
         {
             return AbstractMutableBooleanValuesMap.this.detectIfNone(predicate, ifNone);
         }
 
+        @Override
         public <V> MutableCollection<V> collect(BooleanToObjectFunction<? extends V> function)
         {
             return AbstractMutableBooleanValuesMap.this.collect(function);
         }
 
+        @Override
         public <T> T injectInto(T injectedValue, ObjectBooleanToObjectFunction<? super T, ? extends T> function)
         {
             return AbstractMutableBooleanValuesMap.this.injectInto(injectedValue, function);
         }
 
+        @Override
         public MutableBooleanCollection with(boolean element)
         {
             throw new UnsupportedOperationException("Cannot call with() on " + this.getClass().getSimpleName());
         }
 
+        @Override
         public MutableBooleanCollection without(boolean element)
         {
             throw new UnsupportedOperationException("Cannot call without() on " + this.getClass().getSimpleName());
         }
 
+        @Override
         public MutableBooleanCollection withAll(BooleanIterable elements)
         {
             throw new UnsupportedOperationException("Cannot call withAll() on " + this.getClass().getSimpleName());
         }
 
+        @Override
         public MutableBooleanCollection withoutAll(BooleanIterable elements)
         {
             throw new UnsupportedOperationException("Cannot call withoutAll() on " + this.getClass().getSimpleName());
         }
 
+        @Override
         public MutableBooleanCollection asUnmodifiable()
         {
             return UnmodifiableBooleanCollection.of(this);
         }
 
+        @Override
         public MutableBooleanCollection asSynchronized()
         {
             return SynchronizedBooleanCollection.of(this);
         }
 
+        @Override
         public ImmutableBooleanCollection toImmutable()
         {
             return BooleanLists.immutable.withAll(this);
         }
 
+        @Override
         public boolean contains(boolean value)
         {
             return AbstractMutableBooleanValuesMap.this.containsValue(value);
         }
 
+        @Override
         public boolean containsAll(boolean... source)
         {
             return AbstractMutableBooleanValuesMap.this.containsAll(source);
         }
 
+        @Override
         public boolean containsAll(BooleanIterable source)
         {
             return AbstractMutableBooleanValuesMap.this.containsAll(source);
         }
 
+        @Override
         public MutableBooleanList toList()
         {
             return AbstractMutableBooleanValuesMap.this.toList();
         }
 
+        @Override
         public MutableBooleanSet toSet()
         {
             return AbstractMutableBooleanValuesMap.this.toSet();
         }
 
+        @Override
         public MutableBooleanBag toBag()
         {
             return AbstractMutableBooleanValuesMap.this.toBag();
         }
 
+        @Override
         public LazyBooleanIterable asLazy()
         {
             return new LazyBooleanIterableAdapter(this);
         }
 
+        @Override
         public boolean isEmpty()
         {
             return AbstractMutableBooleanValuesMap.this.isEmpty();
         }
 
+        @Override
         public boolean notEmpty()
         {
             return AbstractMutableBooleanValuesMap.this.notEmpty();
         }
 
+        @Override
         public String makeString()
         {
             return AbstractMutableBooleanValuesMap.this.makeString();
         }
 
+        @Override
         public String makeString(String separator)
         {
             return AbstractMutableBooleanValuesMap.this.makeString(separator);
         }
 
+        @Override
         public String makeString(String start, String separator, String end)
         {
             return AbstractMutableBooleanValuesMap.this.makeString(start, separator, end);
         }
 
+        @Override
         public void appendString(Appendable appendable)
         {
             AbstractMutableBooleanValuesMap.this.appendString(appendable);
         }
 
+        @Override
         public void appendString(Appendable appendable, String separator)
         {
             AbstractMutableBooleanValuesMap.this.appendString(appendable, separator);
         }
 
+        @Override
         public void forEach(BooleanProcedure procedure)
         {
             this.each(procedure);
         }
 
+        @Override
         public void each(BooleanProcedure procedure)
         {
             AbstractMutableBooleanValuesMap.this.forEach(procedure);
         }
 
+        @Override
         public int count(BooleanPredicate predicate)
         {
             return AbstractMutableBooleanValuesMap.this.count(predicate);
         }
 
+        @Override
         public boolean anySatisfy(BooleanPredicate predicate)
         {
             return AbstractMutableBooleanValuesMap.this.anySatisfy(predicate);
         }
 
+        @Override
         public boolean allSatisfy(BooleanPredicate predicate)
         {
             return AbstractMutableBooleanValuesMap.this.allSatisfy(predicate);
         }
 
+        @Override
         public boolean noneSatisfy(BooleanPredicate predicate)
         {
             return AbstractMutableBooleanValuesMap.this.noneSatisfy(predicate);
         }
 
+        @Override
         public boolean add(boolean element)
         {
             throw new UnsupportedOperationException("Cannot call add() on " + this.getClass().getSimpleName());
         }
 
+        @Override
         public boolean addAll(boolean... source)
         {
             throw new UnsupportedOperationException("Cannot call addAll() on " + this.getClass().getSimpleName());
         }
 
+        @Override
         public boolean addAll(BooleanIterable source)
         {
             throw new UnsupportedOperationException("Cannot call addAll() on " + this.getClass().getSimpleName());
         }
 
+        @Override
         public boolean removeAll(BooleanIterable source)
         {
             int oldSize = AbstractMutableBooleanValuesMap.this.size();
@@ -634,6 +687,7 @@ public abstract class AbstractMutableBooleanValuesMap extends AbstractBooleanIte
             return oldSize != AbstractMutableBooleanValuesMap.this.size();
         }
 
+        @Override
         public boolean removeAll(boolean... source)
         {
             int oldSize = AbstractMutableBooleanValuesMap.this.size();
@@ -645,16 +699,19 @@ public abstract class AbstractMutableBooleanValuesMap extends AbstractBooleanIte
             return oldSize != AbstractMutableBooleanValuesMap.this.size();
         }
 
+        @Override
         public boolean retainAll(boolean... source)
         {
             return this.retainAll(BooleanHashSet.newSetWith(source));
         }
 
+        @Override
         public int size()
         {
             return AbstractMutableBooleanValuesMap.this.size();
         }
 
+        @Override
         public boolean[] toArray()
         {
             return AbstractMutableBooleanValuesMap.this.toArray();

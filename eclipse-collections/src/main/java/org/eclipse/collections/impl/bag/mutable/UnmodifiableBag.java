@@ -114,6 +114,7 @@ public class UnmodifiableBag<T>
         return this.getMutableBag().hashCode();
     }
 
+    @Override
     public String toStringOfItemToCount()
     {
         return this.getMutableBag().toStringOfItemToCount();
@@ -125,6 +126,7 @@ public class UnmodifiableBag<T>
         return this.getMutableBag().newEmpty();
     }
 
+    @Override
     public MutableBag<T> selectByOccurrences(IntPredicate predicate)
     {
         return this.getMutableBag().selectByOccurrences(predicate);
@@ -239,11 +241,13 @@ public class UnmodifiableBag<T>
         return this.getMutableBag().flatCollect(function);
     }
 
+    @Override
     public MutableList<ObjectIntPair<T>> topOccurrences(int count)
     {
         return this.getMutableBag().topOccurrences(count);
     }
 
+    @Override
     public MutableList<ObjectIntPair<T>> bottomOccurrences(int count)
     {
         return this.getMutableBag().bottomOccurrences(count);
@@ -275,36 +279,43 @@ public class UnmodifiableBag<T>
         return this.getMutableBag().groupByEach(function);
     }
 
+    @Override
     public int addOccurrences(T item, int occurrences)
     {
         throw new UnsupportedOperationException("Cannot call addOccurrences() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public boolean removeOccurrences(Object item, int occurrences)
     {
         throw new UnsupportedOperationException("Cannot call removeOccurrences() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public boolean setOccurrences(T item, int occurrences)
     {
         throw new UnsupportedOperationException("Cannot call setOccurrences() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public int sizeDistinct()
     {
         return this.getMutableBag().sizeDistinct();
     }
 
+    @Override
     public int occurrencesOf(Object item)
     {
         return this.getMutableBag().occurrencesOf(item);
     }
 
+    @Override
     public void forEachWithOccurrences(ObjectIntProcedure<? super T> objectIntProcedure)
     {
         this.getMutableBag().forEachWithOccurrences(objectIntProcedure);
     }
 
+    @Override
     public MutableMap<T, Integer> toMapOfItemToCount()
     {
         return this.getMutableBag().toMapOfItemToCount();
@@ -376,6 +387,7 @@ public class UnmodifiableBag<T>
             this.mutableBag = bag;
         }
 
+        @Override
         public void writeExternal(ObjectOutput out) throws IOException
         {
             try
@@ -392,6 +404,7 @@ public class UnmodifiableBag<T>
             }
         }
 
+        @Override
         public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
         {
             this.mutableBag = (MutableBag<T>) in.readObject();

@@ -420,16 +420,19 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
         return this.makeString("[", ", ", "]");
     }
 
+    @Override
     public String makeString()
     {
         return this.makeString(", ");
     }
 
+    @Override
     public String makeString(String separator)
     {
         return this.makeString("", separator, "");
     }
 
+    @Override
     public String makeString(String start, String separator, String end)
     {
         Appendable stringBuilder = new StringBuilder();
@@ -437,16 +440,19 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
         return stringBuilder.toString();
     }
 
+    @Override
     public void appendString(Appendable appendable)
     {
         this.appendString(appendable, ", ");
     }
 
+    @Override
     public void appendString(Appendable appendable, String separator)
     {
         this.appendString(appendable, "", separator, "");
     }
 
+    @Override
     public void appendString(Appendable appendable, String start, String separator, String end)
     {
         try
@@ -484,57 +490,68 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
         }
     }
 
+    @Override
     public <P> void forEachWith(Procedure2<? super T, ? super P> procedure, P parameter)
     {
         this.forEach(Procedures.bind(procedure, parameter));
     }
 
+    @Override
     public <P> boolean anySatisfyWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         return this.anySatisfy(Predicates.bind(predicate, parameter));
     }
 
+    @Override
     public <P> boolean allSatisfyWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         return this.allSatisfy(Predicates.bind(predicate, parameter));
     }
 
+    @Override
     public boolean noneSatisfy(Predicate<? super T> predicate)
     {
         return this.allSatisfy(Predicates.not(predicate));
     }
 
+    @Override
     public <P> boolean noneSatisfyWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         return this.noneSatisfy(Predicates.bind(predicate, parameter));
     }
 
+    @Override
     public <P> T detectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         return this.detect(Predicates.bind(predicate, parameter));
     }
 
+    @Override
     public T detectIfNone(Predicate<? super T> predicate, Function0<? extends T> function)
     {
         T result = this.detect(predicate);
         return result == null ? function.value() : result;
     }
 
+    @Override
     public <P> T detectWithIfNone(Predicate2<? super T, ? super P> predicate, P parameter, Function0<? extends T> function)
     {
         return this.detectIfNone(Predicates.bind(predicate, parameter), function);
     }
 
+    @Override
     public Object[] toArray()
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".toArray() not implemented yet");
     }
 
+    @Override
     public <E> E[] toArray(E[] array)
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".toArray() not implemented yet");
     }
 
+    @Override
     public MutableList<T> toList()
     {
         Function<Batch<T>, FastList<T>> map = batch -> {
@@ -547,21 +564,25 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
         return state;
     }
 
+    @Override
     public MutableList<T> toSortedList()
     {
         return this.toList().toSortedList();
     }
 
+    @Override
     public MutableList<T> toSortedList(Comparator<? super T> comparator)
     {
         return this.toList().toSortedList(comparator);
     }
 
+    @Override
     public <V extends Comparable<? super V>> MutableList<T> toSortedListBy(Function<? super T, ? extends V> function)
     {
         return this.toSortedList(Comparators.byFunction(function));
     }
 
+    @Override
     public MutableSet<T> toSet()
     {
         ConcurrentHashMapUnsafe<T, Boolean> map = ConcurrentHashMapUnsafe.newMap();
@@ -570,6 +591,7 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
         return SetAdapter.adapt(map.keySet());
     }
 
+    @Override
     public MutableSortedSet<T> toSortedSet()
     {
         MutableSortedSet<T> result = TreeSortedSet.<T>newSet().asSynchronized();
@@ -577,11 +599,13 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
         return result;
     }
 
+    @Override
     public <V extends Comparable<? super V>> MutableSortedSet<T> toSortedSetBy(Function<? super T, ? extends V> function)
     {
         return this.toSortedSet(Comparators.byFunction(function));
     }
 
+    @Override
     public MutableBag<T> toBag()
     {
         MutableBag<T> result = HashBag.<T>newBag().asSynchronized();
@@ -589,6 +613,7 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
         return result;
     }
 
+    @Override
     public MutableSortedBag<T> toSortedBag()
     {
         MutableSortedBag<T> result = TreeBag.<T>newBag().asSynchronized();
@@ -596,6 +621,7 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
         return result;
     }
 
+    @Override
     public MutableSortedBag<T> toSortedBag(Comparator<? super T> comparator)
     {
         MutableSortedBag<T> result = TreeBag.newBag(comparator).asSynchronized();
@@ -603,11 +629,13 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
         return result;
     }
 
+    @Override
     public <V extends Comparable<? super V>> MutableSortedBag<T> toSortedBagBy(Function<? super T, ? extends V> function)
     {
         return this.toSortedBag(Comparators.byFunction(function));
     }
 
+    @Override
     public MutableSortedSet<T> toSortedSet(Comparator<? super T> comparator)
     {
         MutableSortedSet<T> result = TreeSortedSet.newSet(comparator).asSynchronized();
@@ -615,6 +643,7 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
         return result;
     }
 
+    @Override
     public <NK, NV> MutableMap<NK, NV> toMap(
             Function<? super T, ? extends NK> keyFunction,
             Function<? super T, ? extends NV> valueFunction)
@@ -624,6 +653,7 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
         return map;
     }
 
+    @Override
     public <NK, NV> MutableSortedMap<NK, NV> toSortedMap(
             Function<? super T, ? extends NK> keyFunction,
             Function<? super T, ? extends NV> valueFunction)
@@ -633,6 +663,7 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
         return sortedMap;
     }
 
+    @Override
     public <NK, NV> MutableSortedMap<NK, NV> toSortedMap(Comparator<? super NK> comparator,
             Function<? super T, ? extends NK> keyFunction,
             Function<? super T, ? extends NV> valueFunction)
@@ -642,6 +673,7 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
         return sortedMap;
     }
 
+    @Override
     public <K, V> MapIterable<K, V> aggregateBy(
             Function<? super T, ? extends K> groupBy,
             Function0<? extends V> zeroValueFactory,
@@ -652,6 +684,7 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
         return map;
     }
 
+    @Override
     public <K, V> MapIterable<K, V> aggregateInPlaceBy(
             Function<? super T, ? extends K> groupBy,
             Function0<? extends V> zeroValueFactory,
@@ -662,6 +695,7 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
         return map;
     }
 
+    @Override
     public int count(Predicate<? super T> predicate)
     {
         Function<Batch<T>, Integer> map = batch -> batch.count(predicate);
@@ -671,60 +705,71 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
         return state.getCount();
     }
 
+    @Override
     public <P> int countWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         return this.count(Predicates.bind(predicate, parameter));
     }
 
+    @Override
     public T min(Comparator<? super T> comparator)
     {
         Function<Batch<T>, T> map = batch -> batch.min(comparator);
         return this.collectReduce(map, Functions2.min(comparator));
     }
 
+    @Override
     public T max(Comparator<? super T> comparator)
     {
         Function<Batch<T>, T> map = batch -> batch.max(comparator);
         return this.collectReduce(map, Functions2.max(comparator));
     }
 
+    @Override
     public T min()
     {
         return this.min(Comparators.naturalOrder());
     }
 
+    @Override
     public T max()
     {
         return this.max(Comparators.naturalOrder());
     }
 
+    @Override
     public <V extends Comparable<? super V>> T minBy(Function<? super T, ? extends V> function)
     {
         Function<Batch<T>, T> map = batch -> batch.minBy(function);
         return this.collectReduce(map, Functions2.minBy(function));
     }
 
+    @Override
     public <V extends Comparable<? super V>> T maxBy(Function<? super T, ? extends V> function)
     {
         Function<Batch<T>, T> map = batch -> batch.maxBy(function);
         return this.collectReduce(map, Functions2.maxBy(function));
     }
 
+    @Override
     public long sumOfInt(IntFunction<? super T> function)
     {
         return this.sumOfLongOrdered(batch -> batch.sumOfInt(function));
     }
 
+    @Override
     public double sumOfFloat(FloatFunction<? super T> function)
     {
         return this.sumOfDoubleOrdered(batch -> batch.sumOfFloat(function));
     }
 
+    @Override
     public long sumOfLong(LongFunction<? super T> function)
     {
         return this.sumOfLongOrdered(batch -> batch.sumOfLong(function));
     }
 
+    @Override
     public double sumOfDouble(DoubleFunction<? super T> function)
     {
         return this.sumOfDoubleOrdered(batch -> batch.sumOfDouble(function));
@@ -799,6 +844,7 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
         }
     }
 
+    @Override
     public <V> MapIterable<V, T> groupByUniqueKey(Function<? super T, ? extends V> function)
     {
         MutableMap<V, T> result = ConcurrentHashMap.newMap();

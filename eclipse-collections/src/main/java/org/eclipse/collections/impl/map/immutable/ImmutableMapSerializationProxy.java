@@ -37,6 +37,7 @@ class ImmutableMapSerializationProxy<K, V> implements Externalizable
         this.map = map;
     }
 
+    @Override
     public void writeExternal(ObjectOutput out) throws IOException
     {
         out.writeInt(this.map.size());
@@ -61,6 +62,7 @@ class ImmutableMapSerializationProxy<K, V> implements Externalizable
         }
     }
 
+    @Override
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
     {
         int size = in.readInt();

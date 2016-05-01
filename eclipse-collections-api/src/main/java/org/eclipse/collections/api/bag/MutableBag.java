@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -49,77 +49,110 @@ import org.eclipse.collections.api.tuple.Pair;
 public interface MutableBag<T>
         extends UnsortedBag<T>, MutableBagIterable<T>
 {
+    @Override
     MutableMap<T, Integer> toMapOfItemToCount();
 
+    @Override
     MutableBag<T> selectByOccurrences(IntPredicate predicate);
 
+    @Override
     MutableBag<T> with(T element);
 
+    @Override
     MutableBag<T> without(T element);
 
+    @Override
     MutableBag<T> withAll(Iterable<? extends T> elements);
 
+    @Override
     MutableBag<T> withoutAll(Iterable<? extends T> elements);
 
+    @Override
     MutableBag<T> newEmpty();
 
+    @Override
     MutableBag<T> asUnmodifiable();
 
+    @Override
     MutableBag<T> asSynchronized();
 
+    @Override
     PartitionMutableBag<T> partition(Predicate<? super T> predicate);
 
+    @Override
     <P> PartitionMutableBag<T> partitionWith(Predicate2<? super T, ? super P> predicate, P parameter);
 
+    @Override
     <V> MutableBagMultimap<V, T> groupBy(Function<? super T, ? extends V> function);
 
+    @Override
     <V> MutableBagMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function);
 
     /**
      * @deprecated in 6.0. Use {@link OrderedIterable#zip(Iterable)} instead.
      */
+    @Override
     @Deprecated
     <S> MutableBag<Pair<T, S>> zip(Iterable<S> that);
 
     /**
      * @deprecated in 6.0. Use {@link OrderedIterable#zipWithIndex()} instead.
      */
+    @Override
     @Deprecated
     MutableSet<Pair<T, Integer>> zipWithIndex();
 
+    @Override
     MutableBag<T> tap(Procedure<? super T> procedure);
 
+    @Override
     MutableBag<T> select(Predicate<? super T> predicate);
 
+    @Override
     <P> MutableBag<T> selectWith(Predicate2<? super T, ? super P> predicate, P parameter);
 
+    @Override
     MutableBag<T> reject(Predicate<? super T> predicate);
 
+    @Override
     <P> MutableBag<T> rejectWith(Predicate2<? super T, ? super P> predicate, P parameter);
 
+    @Override
     <S> MutableBag<S> selectInstancesOf(Class<S> clazz);
 
+    @Override
     <V> MutableBag<V> collect(Function<? super T, ? extends V> function);
 
+    @Override
     MutableByteBag collectByte(ByteFunction<? super T> byteFunction);
 
+    @Override
     MutableCharBag collectChar(CharFunction<? super T> charFunction);
 
+    @Override
     MutableIntBag collectInt(IntFunction<? super T> intFunction);
 
+    @Override
     MutableBooleanBag collectBoolean(BooleanFunction<? super T> booleanFunction);
 
+    @Override
     MutableDoubleBag collectDouble(DoubleFunction<? super T> doubleFunction);
 
+    @Override
     MutableFloatBag collectFloat(FloatFunction<? super T> floatFunction);
 
+    @Override
     MutableLongBag collectLong(LongFunction<? super T> longFunction);
 
+    @Override
     MutableShortBag collectShort(ShortFunction<? super T> shortFunction);
 
+    @Override
     <P, V> MutableBag<V> collectWith(Function2<? super T, ? super P, ? extends V> function, P parameter);
 
+    @Override
     <V> MutableBag<V> collectIf(Predicate<? super T> predicate, Function<? super T, ? extends V> function);
 
+    @Override
     <V> MutableBag<V> flatCollect(Function<? super T, ? extends Iterable<V>> function);
 }

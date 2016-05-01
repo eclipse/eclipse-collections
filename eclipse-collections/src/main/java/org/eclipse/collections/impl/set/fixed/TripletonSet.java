@@ -50,6 +50,7 @@ final class TripletonSet<T>
         this.element3 = obj3;
     }
 
+    @Override
     public int size()
     {
         return 3;
@@ -97,11 +98,13 @@ final class TripletonSet<T>
                 || Comparators.nullSafeEquals(obj, this.element3);
     }
 
+    @Override
     public Iterator<T> iterator()
     {
         return new TripletonSetIterator();
     }
 
+    @Override
     public T getFirst()
     {
         return this.element1;
@@ -112,11 +115,13 @@ final class TripletonSet<T>
         return this.element2;
     }
 
+    @Override
     public T getLast()
     {
         return this.element3;
     }
 
+    @Override
     public void each(Procedure<? super T> procedure)
     {
         procedure.value(this.element1);
@@ -140,6 +145,7 @@ final class TripletonSet<T>
         procedure.value(this.element3, parameter);
     }
 
+    @Override
     public void writeExternal(ObjectOutput out) throws IOException
     {
         out.writeObject(this.element1);
@@ -147,6 +153,7 @@ final class TripletonSet<T>
         out.writeObject(this.element3);
     }
 
+    @Override
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
     {
         this.element1 = (T) in.readObject();
@@ -176,11 +183,13 @@ final class TripletonSet<T>
         }
     }
 
+    @Override
     public MutableSet<T> with(T element)
     {
         return this.contains(element) ? this : new QuadrupletonSet<>(this.element1, this.element2, this.element3, element);
     }
 
+    @Override
     public MutableSet<T> without(T element)
     {
         if (Comparators.nullSafeEquals(element, this.element1))

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -23,11 +23,13 @@ public final class MutableListIterator<T> extends MutableIterator<T> implements 
         this.currentIndex = index;
     }
 
+    @Override
     public boolean hasPrevious()
     {
         return this.currentIndex != 0;
     }
 
+    @Override
     public T previous()
     {
         try
@@ -44,16 +46,19 @@ public final class MutableListIterator<T> extends MutableIterator<T> implements 
         }
     }
 
+    @Override
     public int nextIndex()
     {
         return this.currentIndex;
     }
 
+    @Override
     public int previousIndex()
     {
         return this.currentIndex - 1;
     }
 
+    @Override
     public void set(T o)
     {
         if (this.lastIndex == -1)
@@ -71,6 +76,7 @@ public final class MutableListIterator<T> extends MutableIterator<T> implements 
         }
     }
 
+    @Override
     public void add(T o)
     {
         this.list.add(this.currentIndex++, o);

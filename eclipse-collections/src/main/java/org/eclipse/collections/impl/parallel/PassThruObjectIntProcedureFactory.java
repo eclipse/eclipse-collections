@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -24,6 +24,7 @@ public final class PassThruObjectIntProcedureFactory<BT extends ObjectIntProcedu
         this.procedure = procedure;
     }
 
+    @Override
     public BT create()
     {
         return this.procedure;

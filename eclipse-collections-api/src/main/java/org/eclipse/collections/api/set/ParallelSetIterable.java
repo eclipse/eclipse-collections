@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -23,25 +23,33 @@ import org.eclipse.collections.api.multimap.set.SetMultimap;
 @Beta
 public interface ParallelSetIterable<T> extends ParallelIterable<T>
 {
+    @Override
     ParallelSetIterable<T> asUnique();
 
     /**
      * Creates a parallel iterable for selecting elements from the current iterable.
      */
+    @Override
     ParallelSetIterable<T> select(Predicate<? super T> predicate);
 
+    @Override
     <P> ParallelSetIterable<T> selectWith(Predicate2<? super T, ? super P> predicate, P parameter);
 
     /**
      * Creates a parallel iterable for rejecting elements from the current iterable.
      */
+    @Override
     ParallelSetIterable<T> reject(Predicate<? super T> predicate);
 
+    @Override
     <P> ParallelSetIterable<T> rejectWith(Predicate2<? super T, ? super P> predicate, P parameter);
 
+    @Override
     <S> ParallelSetIterable<S> selectInstancesOf(Class<S> clazz);
 
+    @Override
     <V> SetMultimap<V, T> groupBy(Function<? super T, ? extends V> function);
 
+    @Override
     <V> SetMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function);
 }

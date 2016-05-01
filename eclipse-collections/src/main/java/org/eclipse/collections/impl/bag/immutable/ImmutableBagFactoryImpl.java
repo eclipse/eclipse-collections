@@ -19,36 +19,43 @@ import org.eclipse.collections.impl.utility.Iterate;
 @Immutable
 public final class ImmutableBagFactoryImpl implements ImmutableBagFactory
 {
+    @Override
     public <T> ImmutableBag<T> empty()
     {
         return (ImmutableBag<T>) ImmutableEmptyBag.INSTANCE;
     }
 
+    @Override
     public <T> ImmutableBag<T> of()
     {
         return this.empty();
     }
 
+    @Override
     public <T> ImmutableBag<T> with()
     {
         return this.empty();
     }
 
+    @Override
     public <T> ImmutableBag<T> of(T element)
     {
         return this.with(element);
     }
 
+    @Override
     public <T> ImmutableBag<T> with(T element)
     {
         return new ImmutableSingletonBag<>(element);
     }
 
+    @Override
     public <T> ImmutableBag<T> of(T... elements)
     {
         return this.with(elements);
     }
 
+    @Override
     public <T> ImmutableBag<T> with(T... elements)
     {
         if (elements == null || elements.length == 0)
@@ -66,11 +73,13 @@ public final class ImmutableBagFactoryImpl implements ImmutableBagFactory
         return ImmutableHashBag.newBagWith(elements);
     }
 
+    @Override
     public <T> ImmutableBag<T> ofAll(Iterable<? extends T> items)
     {
         return this.withAll(items);
     }
 
+    @Override
     public <T> ImmutableBag<T> withAll(Iterable<? extends T> items)
     {
         if (items instanceof ImmutableBag<?>)

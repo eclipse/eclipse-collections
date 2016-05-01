@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -49,79 +49,112 @@ import org.eclipse.collections.api.tuple.Pair;
 public interface ImmutableSet<T>
         extends UnsortedSetIterable<T>, ImmutableSetIterable<T>
 {
+    @Override
     ImmutableSet<T> newWith(T element);
 
+    @Override
     ImmutableSet<T> newWithout(T element);
 
+    @Override
     ImmutableSet<T> newWithAll(Iterable<? extends T> elements);
 
+    @Override
     ImmutableSet<T> newWithoutAll(Iterable<? extends T> elements);
 
+    @Override
     ImmutableSet<T> tap(Procedure<? super T> procedure);
 
+    @Override
     ImmutableSet<T> select(Predicate<? super T> predicate);
 
+    @Override
     <P> ImmutableSet<T> selectWith(Predicate2<? super T, ? super P> predicate, P parameter);
 
+    @Override
     ImmutableSet<T> reject(Predicate<? super T> predicate);
 
+    @Override
     <P> ImmutableSet<T> rejectWith(Predicate2<? super T, ? super P> predicate, P parameter);
 
+    @Override
     PartitionImmutableSet<T> partition(Predicate<? super T> predicate);
 
+    @Override
     <P> PartitionImmutableSet<T> partitionWith(Predicate2<? super T, ? super P> predicate, P parameter);
 
+    @Override
     <S> ImmutableSet<S> selectInstancesOf(Class<S> clazz);
 
+    @Override
     <V> ImmutableSet<V> collect(Function<? super T, ? extends V> function);
 
+    @Override
     ImmutableBooleanSet collectBoolean(BooleanFunction<? super T> booleanFunction);
 
+    @Override
     ImmutableByteSet collectByte(ByteFunction<? super T> byteFunction);
 
+    @Override
     ImmutableCharSet collectChar(CharFunction<? super T> charFunction);
 
+    @Override
     ImmutableDoubleSet collectDouble(DoubleFunction<? super T> doubleFunction);
 
+    @Override
     ImmutableFloatSet collectFloat(FloatFunction<? super T> floatFunction);
 
+    @Override
     ImmutableIntSet collectInt(IntFunction<? super T> intFunction);
 
+    @Override
     ImmutableLongSet collectLong(LongFunction<? super T> longFunction);
 
+    @Override
     ImmutableShortSet collectShort(ShortFunction<? super T> shortFunction);
 
+    @Override
     <P, V> ImmutableSet<V> collectWith(Function2<? super T, ? super P, ? extends V> function, P parameter);
 
+    @Override
     <V> ImmutableSet<V> collectIf(Predicate<? super T> predicate, Function<? super T, ? extends V> function);
 
+    @Override
     <V> ImmutableSet<V> flatCollect(Function<? super T, ? extends Iterable<V>> function);
 
+    @Override
     <V> ImmutableSetMultimap<V, T> groupBy(Function<? super T, ? extends V> function);
 
+    @Override
     <V> ImmutableSetMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function);
 
     /**
      * @deprecated in 6.0. Use {@link OrderedIterable#zip(Iterable)} instead.
      */
+    @Override
     @Deprecated
     <S> ImmutableSet<Pair<T, S>> zip(Iterable<S> that);
 
     /**
      * @deprecated in 6.0. Use {@link OrderedIterable#zipWithIndex()} instead.
      */
+    @Override
     @Deprecated
     ImmutableSet<Pair<T, Integer>> zipWithIndex();
 
     Set<T> castToSet();
 
+    @Override
     ImmutableSet<T> union(SetIterable<? extends T> set);
 
+    @Override
     ImmutableSet<T> intersect(SetIterable<? extends T> set);
 
+    @Override
     ImmutableSet<T> difference(SetIterable<? extends T> subtrahendSet);
 
+    @Override
     ImmutableSet<T> symmetricDifference(SetIterable<? extends T> setB);
 
+    @Override
     ImmutableSet<UnsortedSetIterable<T>> powerSet();
 }

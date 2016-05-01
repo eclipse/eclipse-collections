@@ -62,11 +62,13 @@ final class TripletonList<T>
         return new TripletonList<>(this.element1, this.element2, this.element3);
     }
 
+    @Override
     public int size()
     {
         return 3;
     }
 
+    @Override
     public T get(int index)
     {
         switch (index)
@@ -93,6 +95,7 @@ final class TripletonList<T>
     /**
      * set is implemented purely to allow the List to be sorted, not because this List should be considered mutable.
      */
+    @Override
     public T set(int index, T element)
     {
         switch (index)
@@ -150,6 +153,7 @@ final class TripletonList<T>
         procedure.value(this.element3, parameter);
     }
 
+    @Override
     public void writeExternal(ObjectOutput out) throws IOException
     {
         out.writeObject(this.element1);
@@ -157,6 +161,7 @@ final class TripletonList<T>
         out.writeObject(this.element3);
     }
 
+    @Override
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
     {
         this.element1 = (T) in.readObject();

@@ -24,11 +24,13 @@ public abstract class AbstractProcedureCombiner<BT>
         this.useCombineOne = useCombineOne;
     }
 
+    @Override
     public void combineAll(Iterable<BT> thingsToCombine)
     {
         Iterate.forEach(thingsToCombine, this::combineOne);
     }
 
+    @Override
     public boolean useCombineOne()
     {
         return this.useCombineOne;

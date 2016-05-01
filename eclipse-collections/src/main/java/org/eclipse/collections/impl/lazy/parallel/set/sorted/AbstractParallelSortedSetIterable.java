@@ -36,56 +36,67 @@ public abstract class AbstractParallelSortedSetIterable<T, B extends SortedSetBa
         return true;
     }
 
+    @Override
     public ParallelSortedSetIterable<T> asUnique()
     {
         return this;
     }
 
+    @Override
     public ParallelSortedSetIterable<T> select(Predicate<? super T> predicate)
     {
         return new ParallelSelectSortedSetIterable<>(this, predicate);
     }
 
+    @Override
     public <P> ParallelSortedSetIterable<T> selectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         return this.select(Predicates.bind(predicate, parameter));
     }
 
+    @Override
     public <S> ParallelSortedSetIterable<S> selectInstancesOf(Class<S> clazz)
     {
         return (ParallelSortedSetIterable<S>) this.select(Predicates.instanceOf(clazz));
     }
 
+    @Override
     public ParallelSortedSetIterable<T> reject(Predicate<? super T> predicate)
     {
         return this.select(Predicates.not(predicate));
     }
 
+    @Override
     public <P> ParallelSortedSetIterable<T> rejectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         return this.reject(Predicates.bind(predicate, parameter));
     }
 
+    @Override
     public <V> ParallelListIterable<V> collect(Function<? super T, ? extends V> function)
     {
         return new ParallelCollectListIterable<>(this, function);
     }
 
+    @Override
     public <P, V> ParallelListIterable<V> collectWith(Function2<? super T, ? super P, ? extends V> function, P parameter)
     {
         return this.collect(Functions.bind(function, parameter));
     }
 
+    @Override
     public <V> ParallelListIterable<V> collectIf(Predicate<? super T> predicate, Function<? super T, ? extends V> function)
     {
         return this.select(predicate).collect(function);
     }
 
+    @Override
     public <V> ParallelListIterable<V> flatCollect(Function<? super T, ? extends Iterable<V>> function)
     {
         return new ParallelFlatCollectListIterable<>(this, function);
     }
 
+    @Override
     public <V> SortedSetMultimap<V, T> groupBy(Function<? super T, ? extends V> function)
     {
         MutableSortedSetMultimap<V, T> result = SynchronizedPutTreeSortedSetMultimap.newMultimap();
@@ -96,6 +107,7 @@ public abstract class AbstractParallelSortedSetIterable<T, B extends SortedSetBa
         return result;
     }
 
+    @Override
     public <V> SortedSetMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function)
     {
         MutableSortedSetMultimap<V, T> result = SynchronizedPutTreeSortedSetMultimap.newMultimap();

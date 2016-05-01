@@ -52,6 +52,7 @@ final class QuadrupletonSet<T>
         this.element4 = obj4;
     }
 
+    @Override
     public int size()
     {
         return 4;
@@ -102,11 +103,13 @@ final class QuadrupletonSet<T>
                 || Comparators.nullSafeEquals(obj, this.element4);
     }
 
+    @Override
     public Iterator<T> iterator()
     {
         return new QuadrupletonSetIterator();
     }
 
+    @Override
     public T getFirst()
     {
         return this.element1;
@@ -122,11 +125,13 @@ final class QuadrupletonSet<T>
         return this.element3;
     }
 
+    @Override
     public T getLast()
     {
         return this.element4;
     }
 
+    @Override
     public void each(Procedure<? super T> procedure)
     {
         procedure.value(this.element1);
@@ -153,6 +158,7 @@ final class QuadrupletonSet<T>
         procedure.value(this.element4, parameter);
     }
 
+    @Override
     public void writeExternal(ObjectOutput out) throws IOException
     {
         out.writeObject(this.element1);
@@ -161,6 +167,7 @@ final class QuadrupletonSet<T>
         out.writeObject(this.element4);
     }
 
+    @Override
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
     {
         this.element1 = (T) in.readObject();
@@ -195,11 +202,13 @@ final class QuadrupletonSet<T>
         }
     }
 
+    @Override
     public MutableSet<T> with(T element)
     {
         return this.contains(element) ? this : UnifiedSet.newSet(this).with(element);
     }
 
+    @Override
     public MutableSet<T> without(T element)
     {
         if (Comparators.nullSafeEquals(element, this.element1))

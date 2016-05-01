@@ -1382,6 +1382,7 @@ public final class ParallelIterate
             this.function = function;
         }
 
+        @Override
         public void value(T each)
         {
             V groupKey = this.groupBy.valueOf(each);
@@ -1400,6 +1401,7 @@ public final class ParallelIterate
             return this.map;
         }
 
+        @Override
         public SumByDoubleProcedure<T, V> create()
         {
             return new SumByDoubleProcedure<>(this.groupBy, this.function);
@@ -1417,6 +1419,7 @@ public final class ParallelIterate
             this.result = result;
         }
 
+        @Override
         public void combineOne(SumByDoubleProcedure<T, V> thingToCombine)
         {
             if (this.result.isEmpty())
@@ -1453,6 +1456,7 @@ public final class ParallelIterate
             this.function = function;
         }
 
+        @Override
         public void value(T each)
         {
             V groupKey = this.groupBy.valueOf(each);
@@ -1471,6 +1475,7 @@ public final class ParallelIterate
             return this.map;
         }
 
+        @Override
         public SumByFloatProcedure<T, V> create()
         {
             return new SumByFloatProcedure<>(this.groupBy, this.function);
@@ -1488,6 +1493,7 @@ public final class ParallelIterate
             this.result = result;
         }
 
+        @Override
         public void combineOne(SumByFloatProcedure<T, V> thingToCombine)
         {
             if (this.result.isEmpty())
@@ -1524,6 +1530,7 @@ public final class ParallelIterate
             this.function = function;
         }
 
+        @Override
         public void value(T each)
         {
             this.map.addToValue(this.groupBy.valueOf(each), this.function.longValueOf(each));
@@ -1534,6 +1541,7 @@ public final class ParallelIterate
             return this.map;
         }
 
+        @Override
         public SumByLongProcedure<T, V> create()
         {
             return new SumByLongProcedure<>(this.groupBy, this.function);
@@ -1550,6 +1558,7 @@ public final class ParallelIterate
             this.result = result;
         }
 
+        @Override
         public void combineOne(SumByLongProcedure<T, V> thingToCombine)
         {
             if (this.result.isEmpty())
@@ -1575,6 +1584,7 @@ public final class ParallelIterate
             this.function = function;
         }
 
+        @Override
         public void value(T each)
         {
             this.map.addToValue(this.groupBy.valueOf(each), (long) this.function.intValueOf(each));
@@ -1585,6 +1595,7 @@ public final class ParallelIterate
             return this.map;
         }
 
+        @Override
         public SumByIntProcedure<T, V> create()
         {
             return new SumByIntProcedure<>(this.groupBy, this.function);
@@ -1601,6 +1612,7 @@ public final class ParallelIterate
             this.result = result;
         }
 
+        @Override
         public void combineOne(SumByIntProcedure<T, V> thingToCombine)
         {
             if (this.result.isEmpty())
@@ -1626,6 +1638,7 @@ public final class ParallelIterate
             this.function = function;
         }
 
+        @Override
         public void value(T each)
         {
             this.map.updateValue(this.groupBy.valueOf(each), Functions0.zeroBigDecimal(), original -> original.add(this.function.valueOf(each)));
@@ -1636,6 +1649,7 @@ public final class ParallelIterate
             return this.map;
         }
 
+        @Override
         public SumByBigDecimalProcedure<T, V> create()
         {
             return new SumByBigDecimalProcedure<>(this.groupBy, this.function);
@@ -1652,6 +1666,7 @@ public final class ParallelIterate
             this.result = result;
         }
 
+        @Override
         public void combineOne(SumByBigDecimalProcedure<T, V> thingToCombine)
         {
             if (this.result.isEmpty())
@@ -1677,6 +1692,7 @@ public final class ParallelIterate
             this.function = function;
         }
 
+        @Override
         public void value(T each)
         {
             this.map.updateValue(this.groupBy.valueOf(each), Functions0.zeroBigInteger(), original -> original.add(this.function.valueOf(each)));
@@ -1687,6 +1703,7 @@ public final class ParallelIterate
             return this.map;
         }
 
+        @Override
         public SumByBigIntegerProcedure<T, V> create()
         {
             return new SumByBigIntegerProcedure<>(this.groupBy, this.function);
@@ -1703,6 +1720,7 @@ public final class ParallelIterate
             this.result = result;
         }
 
+        @Override
         public void combineOne(SumByBigIntegerProcedure<T, V> thingToCombine)
         {
             if (this.result.isEmpty())

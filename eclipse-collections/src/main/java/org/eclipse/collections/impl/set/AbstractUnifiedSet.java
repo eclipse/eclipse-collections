@@ -80,6 +80,7 @@ public abstract class AbstractUnifiedSet<T>
 
     protected abstract T detect(Predicate<? super T> predicate, int start, int end);
 
+    @Override
     @SuppressWarnings("AbstractMethodOverridesAbstractMethod")
     public abstract MutableSet<T> clone();
 
@@ -137,66 +138,79 @@ public abstract class AbstractUnifiedSet<T>
         return this.shortCircuit(predicate, expected, onShortCircuit, atEnd, 0, this.getTable().length);
     }
 
+    @Override
     public int getBatchCount(int batchSize)
     {
         return Math.max(1, this.getTable().length / batchSize);
     }
 
+    @Override
     public <V> UnifiedSet<V> collect(Function<? super T, ? extends V> function)
     {
         return this.collect(function, UnifiedSet.newSet());
     }
 
+    @Override
     public MutableBooleanSet collectBoolean(BooleanFunction<? super T> booleanFunction)
     {
         return this.collectBoolean(booleanFunction, new BooleanHashSet());
     }
 
+    @Override
     public MutableByteSet collectByte(ByteFunction<? super T> byteFunction)
     {
         return this.collectByte(byteFunction, new ByteHashSet());
     }
 
+    @Override
     public MutableCharSet collectChar(CharFunction<? super T> charFunction)
     {
         return this.collectChar(charFunction, new CharHashSet());
     }
 
+    @Override
     public MutableDoubleSet collectDouble(DoubleFunction<? super T> doubleFunction)
     {
         return this.collectDouble(doubleFunction, new DoubleHashSet());
     }
 
+    @Override
     public MutableFloatSet collectFloat(FloatFunction<? super T> floatFunction)
     {
         return this.collectFloat(floatFunction, new FloatHashSet());
     }
 
+    @Override
     public MutableIntSet collectInt(IntFunction<? super T> intFunction)
     {
         return this.collectInt(intFunction, new IntHashSet());
     }
 
+    @Override
     public MutableLongSet collectLong(LongFunction<? super T> longFunction)
     {
         return this.collectLong(longFunction, new LongHashSet());
     }
 
+    @Override
     public MutableShortSet collectShort(ShortFunction<? super T> shortFunction)
     {
         return this.collectShort(shortFunction, new ShortHashSet());
     }
 
+    @Override
     public <V> UnifiedSet<V> flatCollect(Function<? super T, ? extends Iterable<V>> function)
     {
         return this.flatCollect(function, UnifiedSet.newSet());
     }
 
+    @Override
     public <P, A> UnifiedSet<A> collectWith(Function2<? super T, ? super P, ? extends A> function, P parameter)
     {
         return this.collectWith(function, parameter, UnifiedSet.newSet());
     }
 
+    @Override
     public <V> UnifiedSet<V> collectIf(
             Predicate<? super T> predicate, Function<? super T, ? extends V> function)
     {
@@ -251,6 +265,7 @@ public abstract class AbstractUnifiedSet<T>
         return this.shortCircuitWith(predicate, parameter, true, false, true);
     }
 
+    @Override
     public <IV, P> IV injectIntoWith(
             IV injectValue,
             Function3<? super IV, ? super T, ? super P, ? extends IV> function,
@@ -259,16 +274,19 @@ public abstract class AbstractUnifiedSet<T>
         return this.injectInto(injectValue, (argument1, argument2) -> function.value(argument1, argument2, parameter));
     }
 
+    @Override
     public MutableSet<T> asUnmodifiable()
     {
         return UnmodifiableMutableSet.of(this);
     }
 
+    @Override
     public MutableSet<T> asSynchronized()
     {
         return SynchronizedMutableSet.of(this);
     }
 
+    @Override
     public boolean removeAllIterable(Iterable<?> iterable)
     {
         boolean changed = false;
@@ -279,11 +297,13 @@ public abstract class AbstractUnifiedSet<T>
         return changed;
     }
 
+    @Override
     public boolean retainAll(Collection<?> collection)
     {
         return this.retainAllIterable(collection);
     }
 
+    @Override
     public <V> MutableMap<V, T> groupByUniqueKey(
             Function<? super T, ? extends V> function)
     {
@@ -293,6 +313,7 @@ public abstract class AbstractUnifiedSet<T>
     /**
      * @deprecated in 6.0. Use {@link OrderedIterable#zip(Iterable)} instead.
      */
+    @Override
     @Deprecated
     public <S> MutableSet<Pair<T, S>> zip(Iterable<S> that)
     {
@@ -302,72 +323,86 @@ public abstract class AbstractUnifiedSet<T>
     /**
      * @deprecated in 6.0. Use {@link OrderedIterable#zipWithIndex()} instead.
      */
+    @Override
     @Deprecated
     public MutableSet<Pair<T, Integer>> zipWithIndex()
     {
         return this.zipWithIndex(UnifiedSet.newSet());
     }
 
+    @Override
     public RichIterable<RichIterable<T>> chunk(int size)
     {
         return MutableCollectionIterate.chunk(this, size);
     }
 
+    @Override
     public MutableSet<T> union(SetIterable<? extends T> set)
     {
         return SetIterables.unionInto(this, set, this.newEmpty());
     }
 
+    @Override
     public <R extends Set<T>> R unionInto(SetIterable<? extends T> set, R targetSet)
     {
         return SetIterables.unionInto(this, set, targetSet);
     }
 
+    @Override
     public MutableSet<T> intersect(SetIterable<? extends T> set)
     {
         return SetIterables.intersectInto(this, set, this.newEmpty());
     }
 
+    @Override
     public <R extends Set<T>> R intersectInto(SetIterable<? extends T> set, R targetSet)
     {
         return SetIterables.intersectInto(this, set, targetSet);
     }
 
+    @Override
     public MutableSet<T> difference(SetIterable<? extends T> subtrahendSet)
     {
         return SetIterables.differenceInto(this, subtrahendSet, this.newEmpty());
     }
 
+    @Override
     public <R extends Set<T>> R differenceInto(SetIterable<? extends T> subtrahendSet, R targetSet)
     {
         return SetIterables.differenceInto(this, subtrahendSet, targetSet);
     }
 
+    @Override
     public MutableSet<T> symmetricDifference(SetIterable<? extends T> setB)
     {
         return SetIterables.symmetricDifferenceInto(this, setB, this.newEmpty());
     }
 
+    @Override
     public <R extends Set<T>> R symmetricDifferenceInto(SetIterable<? extends T> set, R targetSet)
     {
         return SetIterables.symmetricDifferenceInto(this, set, targetSet);
     }
 
+    @Override
     public boolean isSubsetOf(SetIterable<? extends T> candidateSuperset)
     {
         return SetIterables.isSubsetOf(this, candidateSuperset);
     }
 
+    @Override
     public boolean isProperSubsetOf(SetIterable<? extends T> candidateSuperset)
     {
         return SetIterables.isProperSubsetOf(this, candidateSuperset);
     }
 
+    @Override
     public MutableSet<UnsortedSetIterable<T>> powerSet()
     {
         return (MutableSet<UnsortedSetIterable<T>>) (MutableSet<?>) SetIterables.powerSet(this);
     }
 
+    @Override
     public <B> LazyIterable<Pair<T, B>> cartesianProduct(SetIterable<B> set)
     {
         return SetIterables.cartesianProduct(this, set);

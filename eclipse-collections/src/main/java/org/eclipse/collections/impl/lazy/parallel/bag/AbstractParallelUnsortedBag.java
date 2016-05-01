@@ -36,51 +36,61 @@ public abstract class AbstractParallelUnsortedBag<T, B extends UnsortedBagBatch<
         return false;
     }
 
+    @Override
     public ParallelUnsortedSetIterable<T> asUnique()
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".asUnique() not implemented yet");
     }
 
+    @Override
     public ParallelUnsortedBag<T> select(Predicate<? super T> predicate)
     {
         return new ParallelSelectUnsortedBag<>(this, predicate);
     }
 
+    @Override
     public <P> ParallelUnsortedBag<T> selectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         return this.select(Predicates.bind(predicate, parameter));
     }
 
+    @Override
     public <S> ParallelUnsortedBag<S> selectInstancesOf(Class<S> clazz)
     {
         return (ParallelUnsortedBag<S>) this.select(Predicates.instanceOf(clazz));
     }
 
+    @Override
     public ParallelUnsortedBag<T> reject(Predicate<? super T> predicate)
     {
         return this.select(Predicates.not(predicate));
     }
 
+    @Override
     public <P> ParallelUnsortedBag<T> rejectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         return this.reject(Predicates.bind(predicate, parameter));
     }
 
+    @Override
     public <V> ParallelUnsortedBag<V> collect(Function<? super T, ? extends V> function)
     {
         return new ParallelCollectUnsortedBag<>(this, function);
     }
 
+    @Override
     public <P, V> ParallelUnsortedBag<V> collectWith(Function2<? super T, ? super P, ? extends V> function, P parameter)
     {
         return this.collect(Functions.bind(function, parameter));
     }
 
+    @Override
     public <V> ParallelUnsortedBag<V> collectIf(Predicate<? super T> predicate, Function<? super T, ? extends V> function)
     {
         return this.select(predicate).collect(function);
     }
 
+    @Override
     public <V> ParallelUnsortedBag<V> flatCollect(Function<? super T, ? extends Iterable<V>> function)
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".flatCollect() not implemented yet");
@@ -94,6 +104,7 @@ public abstract class AbstractParallelUnsortedBag<T, B extends UnsortedBagBatch<
         return result;
     }
 
+    @Override
     public <V> UnsortedBagMultimap<V, T> groupBy(Function<? super T, ? extends V> function)
     {
         MutableBagMultimap<V, T> result = SynchronizedPutHashBagMultimap.newMultimap();
@@ -107,6 +118,7 @@ public abstract class AbstractParallelUnsortedBag<T, B extends UnsortedBagBatch<
         return result;
     }
 
+    @Override
     public <V> UnsortedBagMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function)
     {
         MutableBagMultimap<V, T> result = SynchronizedPutHashBagMultimap.newMultimap();

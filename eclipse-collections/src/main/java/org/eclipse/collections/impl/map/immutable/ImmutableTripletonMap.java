@@ -53,16 +53,19 @@ final class ImmutableTripletonMap<K, V>
         this.value3 = value3;
     }
 
+    @Override
     public RichIterable<K> keysView()
     {
         return Lists.immutable.with(this.key1, this.key2, this.key3).asLazy();
     }
 
+    @Override
     public RichIterable<V> valuesView()
     {
         return Lists.immutable.with(this.value1, this.value2, this.value3).asLazy();
     }
 
+    @Override
     public RichIterable<Pair<K, V>> keyValuesView()
     {
         return Lists.immutable.with(
@@ -71,11 +74,13 @@ final class ImmutableTripletonMap<K, V>
                 Tuples.pair(this.key3, this.value3)).asLazy();
     }
 
+    @Override
     public int size()
     {
         return 3;
     }
 
+    @Override
     public boolean containsKey(Object key)
     {
         return Comparators.nullSafeEquals(this.key3, key)
@@ -83,6 +88,7 @@ final class ImmutableTripletonMap<K, V>
                 || Comparators.nullSafeEquals(this.key1, key);
     }
 
+    @Override
     public boolean containsValue(Object value)
     {
         return Comparators.nullSafeEquals(this.value3, value)
@@ -90,6 +96,7 @@ final class ImmutableTripletonMap<K, V>
                 || Comparators.nullSafeEquals(this.value1, value);
     }
 
+    @Override
     public V get(Object key)
     {
         if (Comparators.nullSafeEquals(this.key3, key))
@@ -107,11 +114,13 @@ final class ImmutableTripletonMap<K, V>
         return null;
     }
 
+    @Override
     public Set<K> keySet()
     {
         return Sets.immutable.with(this.key1, this.key2, this.key3).castToSet();
     }
 
+    @Override
     public Collection<V> values()
     {
         return Lists.immutable.with(this.value1, this.value2, this.value3).castToList();
@@ -154,6 +163,7 @@ final class ImmutableTripletonMap<K, V>
         return Maps.immutable.with(this.value1, this.key1, this.value2, this.key2, this.value3, this.key3);
     }
 
+    @Override
     public void forEachKeyValue(Procedure2<? super K, ? super V> procedure)
     {
         procedure.value(this.key1, this.value1);

@@ -156,6 +156,7 @@ public final class Comparators
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public int compare(T o1, T o2)
         {
             if (o1 == null || o2 == null)
@@ -177,6 +178,7 @@ public final class Comparators
             this.comparator = comparator;
         }
 
+        @Override
         public int compare(T o1, T o2)
         {
             return this.comparator.compare(o2, o1);
@@ -194,6 +196,7 @@ public final class Comparators
             this.notNullSafeComparator = newNotNullSafeComparator;
         }
 
+        @Override
         public int compare(T value1, T value2)
         {
             if (value1 != null && value2 != null)
@@ -221,6 +224,7 @@ public final class Comparators
             this.notNullSafeComparator = newNotNullSafeComparator;
         }
 
+        @Override
         public int compare(T value1, T value2)
         {
             if (value1 != null && value2 != null)
@@ -248,6 +252,7 @@ public final class Comparators
             this.comparators = comparators;
         }
 
+        @Override
         public int compare(T value1, T value2)
         {
             for (Comparator<T> comparator : this.comparators)
@@ -266,6 +271,7 @@ public final class Comparators
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public int compare(SortedSetIterable<T> setA, SortedSetIterable<T> setB)
         {
             int compareTo = Integer.compare(setA.size(), setB.size());
@@ -281,6 +287,7 @@ public final class Comparators
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public int compare(Collection<?> c1, Collection<?> c2)
         {
             return c1.size() - c2.size();
@@ -291,6 +298,7 @@ public final class Comparators
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public int compare(Collection<?> c1, Collection<?> c2)
         {
             return c2.size() - c1.size();
@@ -412,6 +420,7 @@ public final class Comparators
             this.comparator = comparator;
         }
 
+        @Override
         public int compare(Pair<T, ?> p1, Pair<T, ?> p2)
         {
             return this.comparator.compare(p1.getOne(), p2.getOne());
@@ -429,6 +438,7 @@ public final class Comparators
             this.comparator = comparator;
         }
 
+        @Override
         public int compare(Pair<?, T> p1, Pair<?, T> p2)
         {
             return this.comparator.compare(p1.getTwo(), p2.getTwo());

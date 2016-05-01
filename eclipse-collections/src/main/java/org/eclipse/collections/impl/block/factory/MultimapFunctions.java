@@ -40,6 +40,7 @@ public final class MultimapFunctions
             this.multimap = multimap;
         }
 
+        @Override
         public RichIterable<V> valueOf(K subject)
         {
             return this.multimap.get(subject);

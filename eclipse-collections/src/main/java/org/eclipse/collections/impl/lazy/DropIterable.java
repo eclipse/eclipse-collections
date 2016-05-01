@@ -45,6 +45,7 @@ public class DropIterable<T> extends AbstractLazyIterable<T>
         this.count = count;
     }
 
+    @Override
     public void each(Procedure<? super T> procedure)
     {
         Iterate.forEach(this.adapted, new IfProcedure<>(new DropIterablePredicate<>(this.count), procedure));
@@ -86,6 +87,7 @@ public class DropIterable<T> extends AbstractLazyIterable<T>
         return Iterate.detect(this.adapted, Predicates.and(new DropIterablePredicate<>(this.count), predicate));
     }
 
+    @Override
     public Iterator<T> iterator()
     {
         return new SelectIterator<>(this.adapted.iterator(), new DropIterablePredicate<>(this.count));

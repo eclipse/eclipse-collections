@@ -49,6 +49,7 @@ public class GenerateMojo extends AbstractMojo
      */
     private MavenProject project;
 
+    @Override
     public void execute() throws MojoExecutionException, MojoFailureException
     {
         if (this.skipCodeGen)

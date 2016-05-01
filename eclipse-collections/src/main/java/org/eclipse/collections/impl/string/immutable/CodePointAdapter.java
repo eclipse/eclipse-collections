@@ -80,16 +80,19 @@ public class CodePointAdapter extends AbstractIntIterable implements CharSequenc
         return new CodePointAdapter(builder.toString());
     }
 
+    @Override
     public char charAt(int index)
     {
         return this.adapted.charAt(index);
     }
 
+    @Override
     public int length()
     {
         return this.adapted.length();
     }
 
+    @Override
     public String subSequence(int start, int end)
     {
         return this.adapted.substring(start, end);
@@ -106,16 +109,19 @@ public class CodePointAdapter extends AbstractIntIterable implements CharSequenc
         return this.adapted;
     }
 
+    @Override
     public IntIterator intIterator()
     {
         return new InternalIntIterator();
     }
 
+    @Override
     public int[] toArray()
     {
         return this.toList().toArray();
     }
 
+    @Override
     public boolean contains(int expected)
     {
         int length = this.adapted.length();
@@ -131,11 +137,13 @@ public class CodePointAdapter extends AbstractIntIterable implements CharSequenc
         return false;
     }
 
+    @Override
     public void forEach(IntProcedure procedure)
     {
         this.each(procedure);
     }
 
+    @Override
     public void each(IntProcedure procedure)
     {
         int length = this.adapted.length();
@@ -147,6 +155,7 @@ public class CodePointAdapter extends AbstractIntIterable implements CharSequenc
         }
     }
 
+    @Override
     public CodePointAdapter distinct()
     {
         StringBuilder builder = new StringBuilder();
@@ -165,6 +174,7 @@ public class CodePointAdapter extends AbstractIntIterable implements CharSequenc
         return new CodePointAdapter(builder.toString());
     }
 
+    @Override
     public CodePointAdapter newWith(int element)
     {
         StringBuilder builder = new StringBuilder(this.adapted);
@@ -172,6 +182,7 @@ public class CodePointAdapter extends AbstractIntIterable implements CharSequenc
         return new CodePointAdapter(builder.toString());
     }
 
+    @Override
     public CodePointAdapter newWithout(int element)
     {
         StringBuilder builder = new StringBuilder();
@@ -194,6 +205,7 @@ public class CodePointAdapter extends AbstractIntIterable implements CharSequenc
         return new CodePointAdapter(builder.toString());
     }
 
+    @Override
     public CodePointAdapter newWithAll(IntIterable elements)
     {
         StringBuilder builder = new StringBuilder(this.adapted);
@@ -201,6 +213,7 @@ public class CodePointAdapter extends AbstractIntIterable implements CharSequenc
         return new CodePointAdapter(builder.toString());
     }
 
+    @Override
     public CodePointAdapter newWithoutAll(IntIterable elements)
     {
         MutableIntList mutableIntList = this.toList();
@@ -208,6 +221,7 @@ public class CodePointAdapter extends AbstractIntIterable implements CharSequenc
         return CodePointAdapter.from(mutableIntList.toArray());
     }
 
+    @Override
     public CodePointAdapter toReversed()
     {
         StringBuilder builder = new StringBuilder();
@@ -216,11 +230,13 @@ public class CodePointAdapter extends AbstractIntIterable implements CharSequenc
         return new CodePointAdapter(builder.toString());
     }
 
+    @Override
     public ImmutableIntList subList(int fromIndex, int toIndex)
     {
         throw new UnsupportedOperationException("SubList is not implemented on CodePointAdapter");
     }
 
+    @Override
     public int get(int index)
     {
         int currentIndex = 0;
@@ -237,16 +253,19 @@ public class CodePointAdapter extends AbstractIntIterable implements CharSequenc
         throw new IndexOutOfBoundsException("Index out of bounds");
     }
 
+    @Override
     public long dotProduct(IntList list)
     {
         throw new UnsupportedOperationException("DotProduct is not implemented on CodePointAdapter");
     }
 
+    @Override
     public int binarySearch(int value)
     {
         throw new UnsupportedOperationException("BinarySearch is not implemented on CodePointAdapter");
     }
 
+    @Override
     public int lastIndexOf(int value)
     {
         for (int i = this.size() - 1; i >= 0; i--)
@@ -260,21 +279,25 @@ public class CodePointAdapter extends AbstractIntIterable implements CharSequenc
         return -1;
     }
 
+    @Override
     public ImmutableIntList toImmutable()
     {
         return this;
     }
 
+    @Override
     public int getLast()
     {
         return this.get(this.size() - 1);
     }
 
+    @Override
     public LazyIntIterable asReversed()
     {
         return ReverseIntIterable.adapt(this);
     }
 
+    @Override
     public <T> T injectIntoWithIndex(T injectedValue, ObjectIntIntToObjectFunction<? super T, ? extends T> function)
     {
         T result = injectedValue;
@@ -287,11 +310,13 @@ public class CodePointAdapter extends AbstractIntIterable implements CharSequenc
         return result;
     }
 
+    @Override
     public int getFirst()
     {
         return this.get(0);
     }
 
+    @Override
     public int indexOf(int value)
     {
         int currentIndex = 0;
@@ -308,6 +333,7 @@ public class CodePointAdapter extends AbstractIntIterable implements CharSequenc
         return -1;
     }
 
+    @Override
     public void forEachWithIndex(IntIntProcedure procedure)
     {
         int currentIndex = 0;
@@ -320,6 +346,7 @@ public class CodePointAdapter extends AbstractIntIterable implements CharSequenc
         }
     }
 
+    @Override
     public CodePointAdapter select(IntPredicate predicate)
     {
         StringBuilder selected = new StringBuilder();
@@ -335,6 +362,7 @@ public class CodePointAdapter extends AbstractIntIterable implements CharSequenc
         return new CodePointAdapter(selected.toString());
     }
 
+    @Override
     public CodePointAdapter reject(IntPredicate predicate)
     {
         StringBuilder rejected = new StringBuilder();
@@ -350,6 +378,7 @@ public class CodePointAdapter extends AbstractIntIterable implements CharSequenc
         return new CodePointAdapter(rejected.toString());
     }
 
+    @Override
     public <V> ImmutableList<V> collect(IntToObjectFunction<? extends V> function)
     {
         FastList<V> list = FastList.newList(this.adapted.length());
@@ -374,6 +403,7 @@ public class CodePointAdapter extends AbstractIntIterable implements CharSequenc
         return CodePointAdapter.adapt(collected.toString());
     }
 
+    @Override
     public int detectIfNone(IntPredicate predicate, int ifNone)
     {
         for (int i = 0; i < this.adapted.length(); )
@@ -388,6 +418,7 @@ public class CodePointAdapter extends AbstractIntIterable implements CharSequenc
         return ifNone;
     }
 
+    @Override
     public int count(IntPredicate predicate)
     {
         int count = 0;
@@ -403,6 +434,7 @@ public class CodePointAdapter extends AbstractIntIterable implements CharSequenc
         return count;
     }
 
+    @Override
     public boolean anySatisfy(IntPredicate predicate)
     {
         for (int i = 0; i < this.adapted.length(); )
@@ -417,6 +449,7 @@ public class CodePointAdapter extends AbstractIntIterable implements CharSequenc
         return false;
     }
 
+    @Override
     public boolean allSatisfy(IntPredicate predicate)
     {
         for (int i = 0; i < this.adapted.length(); )
@@ -431,6 +464,7 @@ public class CodePointAdapter extends AbstractIntIterable implements CharSequenc
         return true;
     }
 
+    @Override
     public boolean noneSatisfy(IntPredicate predicate)
     {
         for (int i = 0; i < this.adapted.length(); )
@@ -484,6 +518,7 @@ public class CodePointAdapter extends AbstractIntIterable implements CharSequenc
         return bag;
     }
 
+    @Override
     public <T> T injectInto(T injectedValue, ObjectIntToObjectFunction<? super T, ? extends T> function)
     {
         T result = injectedValue;
@@ -496,6 +531,7 @@ public class CodePointAdapter extends AbstractIntIterable implements CharSequenc
         return result;
     }
 
+    @Override
     public long sum()
     {
         long sum = 0;
@@ -508,6 +544,7 @@ public class CodePointAdapter extends AbstractIntIterable implements CharSequenc
         return sum;
     }
 
+    @Override
     public int max()
     {
         if (this.isEmpty())
@@ -527,6 +564,7 @@ public class CodePointAdapter extends AbstractIntIterable implements CharSequenc
         return max;
     }
 
+    @Override
     public int min()
     {
         if (this.isEmpty())
@@ -546,6 +584,7 @@ public class CodePointAdapter extends AbstractIntIterable implements CharSequenc
         return min;
     }
 
+    @Override
     public int size()
     {
         int size = 0;
@@ -558,6 +597,7 @@ public class CodePointAdapter extends AbstractIntIterable implements CharSequenc
         return size;
     }
 
+    @Override
     public void appendString(Appendable appendable, String start, String separator, String end)
     {
         try
@@ -672,11 +712,13 @@ public class CodePointAdapter extends AbstractIntIterable implements CharSequenc
          */
         private int currentIndex;
 
+        @Override
         public boolean hasNext()
         {
             return this.currentIndex != CodePointAdapter.this.adapted.length();
         }
 
+        @Override
         public int next()
         {
             if (!this.hasNext())

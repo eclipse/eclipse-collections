@@ -51,6 +51,7 @@ public final class CaseProcedure<T> implements Procedure<T>
         return this;
     }
 
+    @Override
     public void value(T argument)
     {
         for (Pair<Predicate<? super T>, Procedure<? super T>> pair : this.predicateProcedures)

@@ -25,6 +25,7 @@ public final class FastListRejectProcedureFactory<T> implements ProcedureFactory
         this.collectionSize = newInitialCapacity;
     }
 
+    @Override
     public FastListRejectProcedure<T> create()
     {
         return new FastListRejectProcedure<>(this.predicate, FastList.newList(this.collectionSize));

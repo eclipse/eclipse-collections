@@ -125,6 +125,7 @@ public final class ProcedureFJTaskRunner<T, BT extends Procedure<? super T>>
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public BT valueOf(ProcedureFJTask<T, BT> object)
         {
             return object.getProcedure();

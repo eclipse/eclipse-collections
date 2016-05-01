@@ -30,26 +30,31 @@ public class SelectUnsortedBagBatch<T> extends AbstractBatch<T> implements Unsor
         this.predicate = predicate;
     }
 
+    @Override
     public void forEach(Procedure<? super T> procedure)
     {
         this.unsortedBagBatch.forEach(new IfProcedure<>(this.predicate, procedure));
     }
 
+    @Override
     public void forEachWithOccurrences(ObjectIntProcedure<? super T> procedure)
     {
         this.unsortedBagBatch.forEachWithOccurrences(new IfProcedureWithOccurrences<>(this.predicate, procedure));
     }
 
+    @Override
     public UnsortedBagBatch<T> select(Predicate<? super T> predicate)
     {
         return new SelectUnsortedBagBatch<>(this, predicate);
     }
 
+    @Override
     public <V> UnsortedBagBatch<V> collect(Function<? super T, ? extends V> function)
     {
         return new CollectUnsortedBagBatch<>(this, function);
     }
 
+    @Override
     public <V> UnsortedBagBatch<V> flatCollect(Function<? super T, ? extends Iterable<V>> function)
     {
         return new FlatCollectUnsortedBagBatch<>(this, function);
@@ -73,6 +78,7 @@ public class SelectUnsortedBagBatch<T> extends AbstractBatch<T> implements Unsor
             this.procedure = procedure;
         }
 
+        @Override
         public void value(T each, int parameter)
         {
             if (this.predicate.accept(each))

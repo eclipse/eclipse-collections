@@ -20,36 +20,43 @@ import org.eclipse.collections.impl.block.factory.Comparators;
 @Immutable
 public final class ImmutableMapFactoryImpl implements ImmutableMapFactory
 {
+    @Override
     public <K, V> ImmutableMap<K, V> empty()
     {
         return (ImmutableMap<K, V>) ImmutableEmptyMap.INSTANCE;
     }
 
+    @Override
     public <K, V> ImmutableMap<K, V> of()
     {
         return this.empty();
     }
 
+    @Override
     public <K, V> ImmutableMap<K, V> with()
     {
         return this.empty();
     }
 
+    @Override
     public <K, V> ImmutableMap<K, V> of(K key, V value)
     {
         return this.with(key, value);
     }
 
+    @Override
     public <K, V> ImmutableMap<K, V> with(K key, V value)
     {
         return new ImmutableSingletonMap<>(key, value);
     }
 
+    @Override
     public <K, V> ImmutableMap<K, V> of(K key1, V value1, K key2, V value2)
     {
         return this.with(key1, value1, key2, value2);
     }
 
+    @Override
     public <K, V> ImmutableMap<K, V> with(K key1, V value1, K key2, V value2)
     {
         if (Comparators.nullSafeEquals(key1, key2))
@@ -59,11 +66,13 @@ public final class ImmutableMapFactoryImpl implements ImmutableMapFactory
         return new ImmutableDoubletonMap<>(key1, value1, key2, value2);
     }
 
+    @Override
     public <K, V> ImmutableMap<K, V> of(K key1, V value1, K key2, V value2, K key3, V value3)
     {
         return this.with(key1, value1, key2, value2, key3, value3);
     }
 
+    @Override
     public <K, V> ImmutableMap<K, V> with(K key1, V value1, K key2, V value2, K key3, V value3)
     {
         if (Comparators.nullSafeEquals(key1, key2) && Comparators.nullSafeEquals(key2, key3))
@@ -86,11 +95,13 @@ public final class ImmutableMapFactoryImpl implements ImmutableMapFactory
         return new ImmutableTripletonMap<>(key1, value1, key2, value2, key3, value3);
     }
 
+    @Override
     public <K, V> ImmutableMap<K, V> of(K key1, V value1, K key2, V value2, K key3, V value3, K key4, V value4)
     {
         return this.with(key1, value1, key2, value2, key3, value3, key4, value4);
     }
 
+    @Override
     public <K, V> ImmutableMap<K, V> with(K key1, V value1, K key2, V value2, K key3, V value3, K key4, V value4)
     {
         if (Comparators.nullSafeEquals(key1, key2))
@@ -123,17 +134,20 @@ public final class ImmutableMapFactoryImpl implements ImmutableMapFactory
     /**
      * @deprecated use {@link #ofAll(Map)} instead (inlineable)
      */
+    @Override
     @Deprecated
     public <K, V> ImmutableMap<K, V> ofMap(Map<K, V> map)
     {
         return this.ofAll(map);
     }
 
+    @Override
     public <K, V> ImmutableMap<K, V> ofAll(Map<K, V> map)
     {
         return this.withAll(map);
     }
 
+    @Override
     public <K, V> ImmutableMap<K, V> withAll(Map<K, V> map)
     {
         if (map.isEmpty())

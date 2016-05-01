@@ -189,6 +189,7 @@ public class ConcurrentHashMapUnsafe<K, V>
         return h & (length - 2);
     }
 
+    @Override
     public V putIfAbsent(K key, V value)
     {
         int hash = this.hash(key);
@@ -662,6 +663,7 @@ public class ConcurrentHashMapUnsafe<K, V>
         }
     }
 
+    @Override
     public boolean remove(Object key, Object value)
     {
         int hash = this.hash(key);
@@ -746,6 +748,7 @@ public class ConcurrentHashMapUnsafe<K, V>
         }
     }
 
+    @Override
     public int size()
     {
         int localSize = this.size;
@@ -765,11 +768,13 @@ public class ConcurrentHashMapUnsafe<K, V>
         return this.size() == 0;
     }
 
+    @Override
     public boolean containsKey(Object key)
     {
         return this.getEntry(key) != null;
     }
 
+    @Override
     public boolean containsValue(Object value)
     {
         Object[] currentArray = this.table;
@@ -817,6 +822,7 @@ public class ConcurrentHashMapUnsafe<K, V>
         return v == value || v != null && v.equals(value);
     }
 
+    @Override
     public V get(Object key)
     {
         int hash = this.hash(key);
@@ -896,6 +902,7 @@ public class ConcurrentHashMapUnsafe<K, V>
         }
     }
 
+    @Override
     public V put(K key, V value)
     {
         int hash = this.hash(key);
@@ -1026,6 +1033,7 @@ public class ConcurrentHashMapUnsafe<K, V>
         }
     }
 
+    @Override
     public void putAll(Map<? extends K, ? extends V> map)
     {
         MapIterate.forEachKeyValue(map, new Procedure2<K, V>()
@@ -1037,6 +1045,7 @@ public class ConcurrentHashMapUnsafe<K, V>
         });
     }
 
+    @Override
     public void clear()
     {
         Object[] currentArray = this.table;
@@ -1079,21 +1088,25 @@ public class ConcurrentHashMapUnsafe<K, V>
         while (resizeContainer != null);
     }
 
+    @Override
     public Set<K> keySet()
     {
         return new KeySet();
     }
 
+    @Override
     public Collection<V> values()
     {
         return new Values();
     }
 
+    @Override
     public Set<Map.Entry<K, V>> entrySet()
     {
         return new EntrySet();
     }
 
+    @Override
     public boolean replace(K key, V oldValue, V newValue)
     {
         int hash = this.hash(key);
@@ -1165,6 +1178,7 @@ public class ConcurrentHashMapUnsafe<K, V>
         }
     }
 
+    @Override
     public V replace(K key, V value)
     {
         int hash = this.hash(key);
@@ -1216,6 +1230,7 @@ public class ConcurrentHashMapUnsafe<K, V>
         }
     }
 
+    @Override
     public V remove(Object key)
     {
         int hash = this.hash(key);
@@ -1510,6 +1525,7 @@ public class ConcurrentHashMapUnsafe<K, V>
         }
     }
 
+    @Override
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
     {
         int size = in.readInt();
@@ -1525,6 +1541,7 @@ public class ConcurrentHashMapUnsafe<K, V>
         }
     }
 
+    @Override
     public void writeExternal(ObjectOutput out) throws IOException
     {
         int size = this.size();
@@ -1639,6 +1656,7 @@ public class ConcurrentHashMapUnsafe<K, V>
             }
         }
 
+        @Override
         public final boolean hasNext()
         {
             return this.next != null;
@@ -1660,6 +1678,7 @@ public class ConcurrentHashMapUnsafe<K, V>
             return e;
         }
 
+        @Override
         public void remove()
         {
             if (this.current == null)
@@ -1674,6 +1693,7 @@ public class ConcurrentHashMapUnsafe<K, V>
 
     private final class ValueIterator extends HashIterator<V>
     {
+        @Override
         public V next()
         {
             return this.nextEntry().value;
@@ -1682,6 +1702,7 @@ public class ConcurrentHashMapUnsafe<K, V>
 
     private final class KeyIterator extends HashIterator<K>
     {
+        @Override
         public K next()
         {
             return this.nextEntry().getKey();
@@ -1690,6 +1711,7 @@ public class ConcurrentHashMapUnsafe<K, V>
 
     private final class EntryIterator extends HashIterator<Map.Entry<K, V>>
     {
+        @Override
         public Map.Entry<K, V> next()
         {
             return this.nextEntry();
@@ -1820,16 +1842,19 @@ public class ConcurrentHashMapUnsafe<K, V>
             this.next = next;
         }
 
+        @Override
         public K getKey()
         {
             return this.key;
         }
 
+        @Override
         public V getValue()
         {
             return this.value;
         }
 
+        @Override
         public V setValue(V value)
         {
             throw new RuntimeException("not implemented");
@@ -2032,6 +2057,7 @@ public class ConcurrentHashMapUnsafe<K, V>
         return this.values().iterator();
     }
 
+    @Override
     public MutableMap<K, V> newEmpty()
     {
         return ConcurrentHashMapUnsafe.newMap();
@@ -2056,11 +2082,13 @@ public class ConcurrentHashMapUnsafe<K, V>
         IterableIterate.forEach(this.keySet(), procedure);
     }
 
+    @Override
     public void forEachKeyValue(Procedure2<? super K, ? super V> procedure)
     {
         IterableIterate.forEach(this.entrySet(), new MapEntryToProcedure2<>(procedure));
     }
 
+    @Override
     public <E> MutableMap<K, V> collectKeysAndValues(
             Iterable<E> iterable,
             Function<? super E, ? extends K> keyFunction,
@@ -2070,6 +2098,7 @@ public class ConcurrentHashMapUnsafe<K, V>
         return this;
     }
 
+    @Override
     public V removeKey(K key)
     {
         return this.remove(key);

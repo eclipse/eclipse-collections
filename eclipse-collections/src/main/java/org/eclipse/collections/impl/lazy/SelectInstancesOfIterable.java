@@ -40,6 +40,7 @@ public class SelectInstancesOfIterable<T>
         this.clazz = clazz;
     }
 
+    @Override
     public void each(Procedure<? super T> procedure)
     {
         Iterate.forEach((Iterable<T>) this.adapted, new IfProcedure<>(Predicates.instanceOf(this.clazz), procedure));
@@ -87,6 +88,7 @@ public class SelectInstancesOfIterable<T>
         return Iterate.detect((Iterable<T>) this.adapted, Predicates.and(Predicates.instanceOf(this.clazz), predicate));
     }
 
+    @Override
     public Iterator<T> iterator()
     {
         return new SelectInstancesOfIterator<>(this.adapted, this.clazz);

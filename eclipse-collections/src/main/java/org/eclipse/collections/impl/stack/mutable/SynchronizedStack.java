@@ -109,6 +109,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         return new SynchronizedStack<>(stack);
     }
 
+    @Override
     public T pop()
     {
         synchronized (this.lock)
@@ -117,6 +118,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public ListIterable<T> pop(int count)
     {
         synchronized (this.lock)
@@ -125,6 +127,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public <R extends Collection<T>> R pop(int count, R targetCollection)
     {
         synchronized (this.lock)
@@ -133,6 +136,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public <R extends MutableStack<T>> R pop(int count, R targetStack)
     {
         synchronized (this.lock)
@@ -141,6 +145,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public void clear()
     {
         synchronized (this.lock)
@@ -149,6 +154,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public void push(T item)
     {
         synchronized (this.lock)
@@ -157,6 +163,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public T peek()
     {
         synchronized (this.lock)
@@ -165,6 +172,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public ListIterable<T> peek(int count)
     {
         synchronized (this.lock)
@@ -173,6 +181,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public T peekAt(int index)
     {
         synchronized (this.lock)
@@ -181,6 +190,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public MutableStack<T> select(Predicate<? super T> predicate)
     {
         synchronized (this.lock)
@@ -189,6 +199,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public <P> MutableStack<T> selectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         synchronized (this.lock)
@@ -197,6 +208,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public <R extends Collection<T>> R select(Predicate<? super T> predicate, R target)
     {
         synchronized (this.lock)
@@ -205,6 +217,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public <P, R extends Collection<T>> R selectWith(Predicate2<? super T, ? super P> predicate, P parameter, R targetCollection)
     {
         synchronized (this.lock)
@@ -213,6 +226,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public MutableStack<T> reject(Predicate<? super T> predicate)
     {
         synchronized (this.lock)
@@ -221,6 +235,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public <P> MutableStack<T> rejectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         synchronized (this.lock)
@@ -229,6 +244,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public <R extends Collection<T>> R reject(Predicate<? super T> predicate, R target)
     {
         synchronized (this.lock)
@@ -237,6 +253,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public <P, R extends Collection<T>> R rejectWith(Predicate2<? super T, ? super P> predicate, P parameter, R targetCollection)
     {
         synchronized (this.lock)
@@ -245,6 +262,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public PartitionMutableStack<T> partition(Predicate<? super T> predicate)
     {
         synchronized (this.lock)
@@ -253,6 +271,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public <P> PartitionMutableStack<T> partitionWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         synchronized (this.lock)
@@ -261,6 +280,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public <S> MutableStack<S> selectInstancesOf(Class<S> clazz)
     {
         synchronized (this.lock)
@@ -269,6 +289,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public <V> MutableStack<V> collect(Function<? super T, ? extends V> function)
     {
         synchronized (this.lock)
@@ -277,6 +298,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public MutableBooleanStack collectBoolean(BooleanFunction<? super T> booleanFunction)
     {
         synchronized (this.lock)
@@ -285,6 +307,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public <R extends MutableBooleanCollection> R collectBoolean(BooleanFunction<? super T> booleanFunction, R target)
     {
         synchronized (this.lock)
@@ -293,6 +316,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public MutableByteStack collectByte(ByteFunction<? super T> byteFunction)
     {
         synchronized (this.lock)
@@ -301,6 +325,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public <R extends MutableByteCollection> R collectByte(ByteFunction<? super T> byteFunction, R target)
     {
         synchronized (this.lock)
@@ -309,6 +334,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public MutableCharStack collectChar(CharFunction<? super T> charFunction)
     {
         synchronized (this.lock)
@@ -317,6 +343,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public <R extends MutableCharCollection> R collectChar(CharFunction<? super T> charFunction, R target)
     {
         synchronized (this.lock)
@@ -325,6 +352,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public MutableDoubleStack collectDouble(DoubleFunction<? super T> doubleFunction)
     {
         synchronized (this.lock)
@@ -333,6 +361,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public <R extends MutableDoubleCollection> R collectDouble(DoubleFunction<? super T> doubleFunction, R target)
     {
         synchronized (this.lock)
@@ -341,6 +370,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public MutableFloatStack collectFloat(FloatFunction<? super T> floatFunction)
     {
         synchronized (this.lock)
@@ -349,6 +379,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public <R extends MutableFloatCollection> R collectFloat(FloatFunction<? super T> floatFunction, R target)
     {
         synchronized (this.lock)
@@ -357,6 +388,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public MutableIntStack collectInt(IntFunction<? super T> intFunction)
     {
         synchronized (this.lock)
@@ -365,6 +397,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public <R extends MutableIntCollection> R collectInt(IntFunction<? super T> intFunction, R target)
     {
         synchronized (this.lock)
@@ -373,6 +406,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public MutableLongStack collectLong(LongFunction<? super T> longFunction)
     {
         synchronized (this.lock)
@@ -381,6 +415,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public <R extends MutableLongCollection> R collectLong(LongFunction<? super T> longFunction, R target)
     {
         synchronized (this.lock)
@@ -389,6 +424,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public MutableShortStack collectShort(ShortFunction<? super T> shortFunction)
     {
         synchronized (this.lock)
@@ -397,6 +433,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public <R extends MutableShortCollection> R collectShort(ShortFunction<? super T> shortFunction, R target)
     {
         synchronized (this.lock)
@@ -405,6 +442,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public <V, R extends Collection<V>> R collect(Function<? super T, ? extends V> function, R target)
     {
         synchronized (this.lock)
@@ -413,6 +451,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public <P, V> MutableStack<V> collectWith(Function2<? super T, ? super P, ? extends V> function, P parameter)
     {
         synchronized (this.lock)
@@ -421,6 +460,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public <P, V, R extends Collection<V>> R collectWith(Function2<? super T, ? super P, ? extends V> function, P parameter, R targetCollection)
     {
         synchronized (this.lock)
@@ -429,6 +469,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public <V> MutableStack<V> collectIf(Predicate<? super T> predicate, Function<? super T, ? extends V> function)
     {
         synchronized (this.lock)
@@ -437,6 +478,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public <V, R extends Collection<V>> R collectIf(Predicate<? super T> predicate, Function<? super T, ? extends V> function, R target)
     {
         synchronized (this.lock)
@@ -445,6 +487,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public <V> MutableStack<V> flatCollect(Function<? super T, ? extends Iterable<V>> function)
     {
         synchronized (this.lock)
@@ -453,6 +496,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public <V, R extends Collection<V>> R flatCollect(Function<? super T, ? extends Iterable<V>> function, R target)
     {
         synchronized (this.lock)
@@ -461,6 +505,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public <S, R extends Collection<Pair<T, S>>> R zip(Iterable<S> that, R target)
     {
         synchronized (this.lock)
@@ -469,6 +514,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public <S> MutableStack<Pair<T, S>> zip(Iterable<S> that)
     {
         synchronized (this.lock)
@@ -477,6 +523,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public <R extends Collection<Pair<T, Integer>>> R zipWithIndex(R target)
     {
         synchronized (this.lock)
@@ -485,6 +532,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public MutableStack<Pair<T, Integer>> zipWithIndex()
     {
         synchronized (this.lock)
@@ -493,6 +541,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public int size()
     {
         synchronized (this.lock)
@@ -501,6 +550,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public boolean isEmpty()
     {
         synchronized (this.lock)
@@ -509,6 +559,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public boolean notEmpty()
     {
         synchronized (this.lock)
@@ -517,6 +568,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public T getFirst()
     {
         synchronized (this.lock)
@@ -525,11 +577,13 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public T getLast()
     {
         return this.delegate.getLast();
     }
 
+    @Override
     public boolean contains(Object object)
     {
         synchronized (this.lock)
@@ -538,6 +592,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public boolean containsAllIterable(Iterable<?> source)
     {
         synchronized (this.lock)
@@ -546,6 +601,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public boolean containsAll(Collection<?> source)
     {
         synchronized (this.lock)
@@ -554,6 +610,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public boolean containsAllArguments(Object... elements)
     {
         synchronized (this.lock)
@@ -562,6 +619,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public T detect(Predicate<? super T> predicate)
     {
         synchronized (this.lock)
@@ -570,6 +628,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public <P> T detectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         synchronized (this.lock)
@@ -578,6 +637,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public T detectIfNone(Predicate<? super T> predicate, Function0<? extends T> function)
     {
         synchronized (this.lock)
@@ -586,6 +646,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public <P> T detectWithIfNone(Predicate2<? super T, ? super P> predicate, P parameter, Function0<? extends T> function)
     {
         synchronized (this.lock)
@@ -594,6 +655,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public int count(Predicate<? super T> predicate)
     {
         synchronized (this.lock)
@@ -602,6 +664,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public <P> int countWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         synchronized (this.lock)
@@ -610,6 +673,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public boolean anySatisfy(Predicate<? super T> predicate)
     {
         synchronized (this.lock)
@@ -618,6 +682,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public <P> boolean anySatisfyWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         synchronized (this.lock)
@@ -626,6 +691,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public boolean allSatisfy(Predicate<? super T> predicate)
     {
         synchronized (this.lock)
@@ -634,6 +700,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public <P> boolean allSatisfyWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         synchronized (this.lock)
@@ -642,6 +709,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public boolean noneSatisfy(Predicate<? super T> predicate)
     {
         synchronized (this.lock)
@@ -650,6 +718,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public <P> boolean noneSatisfyWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         synchronized (this.lock)
@@ -658,6 +727,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public <IV> IV injectInto(IV injectedValue, Function2<? super IV, ? super T, ? extends IV> function)
     {
         synchronized (this.lock)
@@ -666,6 +736,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public int injectInto(int injectedValue, IntObjectToIntFunction<? super T> intObjectToIntFunction)
     {
         synchronized (this.lock)
@@ -674,6 +745,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public long injectInto(long injectedValue, LongObjectToLongFunction<? super T> longObjectToLongFunction)
     {
         synchronized (this.lock)
@@ -682,6 +754,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public float injectInto(float injectedValue, FloatObjectToFloatFunction<? super T> floatObjectToFloatFunction)
     {
         synchronized (this.lock)
@@ -690,6 +763,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public double injectInto(double injectedValue, DoubleObjectToDoubleFunction<? super T> doubleObjectToDoubleFunction)
     {
         synchronized (this.lock)
@@ -698,6 +772,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public <R extends Collection<T>> R into(R target)
     {
         synchronized (this.lock)
@@ -706,6 +781,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public MutableList<T> toList()
     {
         synchronized (this.lock)
@@ -714,6 +790,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public MutableList<T> toSortedList()
     {
         synchronized (this.lock)
@@ -722,6 +799,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public MutableList<T> toSortedList(Comparator<? super T> comparator)
     {
         synchronized (this.lock)
@@ -730,6 +808,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public <V extends Comparable<? super V>> MutableList<T> toSortedListBy(Function<? super T, ? extends V> function)
     {
         synchronized (this.lock)
@@ -738,6 +817,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public MutableSet<T> toSet()
     {
         synchronized (this.lock)
@@ -746,6 +826,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public MutableSortedSet<T> toSortedSet()
     {
         synchronized (this.lock)
@@ -754,6 +835,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public MutableSortedSet<T> toSortedSet(Comparator<? super T> comparator)
     {
         synchronized (this.lock)
@@ -762,6 +844,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public MutableStack<T> toStack()
     {
         synchronized (this.lock)
@@ -770,6 +853,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public ImmutableStack<T> toImmutable()
     {
         synchronized (this.lock)
@@ -778,6 +862,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public <V extends Comparable<? super V>> MutableSortedSet<T> toSortedSetBy(Function<? super T, ? extends V> function)
     {
         synchronized (this.lock)
@@ -786,6 +871,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public MutableBag<T> toBag()
     {
         synchronized (this.lock)
@@ -794,6 +880,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public MutableSortedBag<T> toSortedBag()
     {
         synchronized (this.lock)
@@ -802,6 +889,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public MutableSortedBag<T> toSortedBag(Comparator<? super T> comparator)
     {
         synchronized (this.lock)
@@ -810,6 +898,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public <V extends Comparable<? super V>> MutableSortedBag<T> toSortedBagBy(Function<? super T, ? extends V> function)
     {
         synchronized (this.lock)
@@ -818,6 +907,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public <NK, NV> MutableMap<NK, NV> toMap(Function<? super T, ? extends NK> keyFunction, Function<? super T, ? extends NV> valueFunction)
     {
         synchronized (this.lock)
@@ -826,6 +916,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public <NK, NV> MutableSortedMap<NK, NV> toSortedMap(Function<? super T, ? extends NK> keyFunction, Function<? super T, ? extends NV> valueFunction)
     {
         synchronized (this.lock)
@@ -834,6 +925,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public <NK, NV> MutableSortedMap<NK, NV> toSortedMap(Comparator<? super NK> comparator, Function<? super T, ? extends NK> keyFunction, Function<? super T, ? extends NV> valueFunction)
     {
         synchronized (this.lock)
@@ -842,6 +934,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public LazyIterable<T> asLazy()
     {
         synchronized (this.lock)
@@ -850,6 +943,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public Object[] toArray()
     {
         synchronized (this.lock)
@@ -858,6 +952,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public <T> T[] toArray(T[] a)
     {
         synchronized (this.lock)
@@ -866,6 +961,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public T min(Comparator<? super T> comparator)
     {
         synchronized (this.lock)
@@ -874,6 +970,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public T max(Comparator<? super T> comparator)
     {
         synchronized (this.lock)
@@ -882,6 +979,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public T min()
     {
         synchronized (this.lock)
@@ -890,6 +988,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public T max()
     {
         synchronized (this.lock)
@@ -898,6 +997,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public <V extends Comparable<? super V>> T minBy(Function<? super T, ? extends V> function)
     {
         synchronized (this.lock)
@@ -906,6 +1006,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public <V extends Comparable<? super V>> T maxBy(Function<? super T, ? extends V> function)
     {
         synchronized (this.lock)
@@ -914,6 +1015,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public long sumOfInt(IntFunction<? super T> intFunction)
     {
         synchronized (this.lock)
@@ -922,6 +1024,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public double sumOfFloat(FloatFunction<? super T> floatFunction)
     {
         synchronized (this.lock)
@@ -930,6 +1033,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public long sumOfLong(LongFunction<? super T> longFunction)
     {
         synchronized (this.lock)
@@ -938,6 +1042,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public double sumOfDouble(DoubleFunction<? super T> doubleFunction)
     {
         synchronized (this.lock)
@@ -946,6 +1051,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public <V> MutableObjectLongMap<V> sumByInt(Function<? super T, ? extends V> groupBy, IntFunction<? super T> function)
     {
         synchronized (this.lock)
@@ -954,6 +1060,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public <V> MutableObjectDoubleMap<V> sumByFloat(Function<? super T, ? extends V> groupBy, FloatFunction<? super T> function)
     {
         synchronized (this.lock)
@@ -962,6 +1069,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public <V> MutableObjectLongMap<V> sumByLong(Function<? super T, ? extends V> groupBy, LongFunction<? super T> function)
     {
         synchronized (this.lock)
@@ -970,6 +1078,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public <V> MutableObjectDoubleMap<V> sumByDouble(Function<? super T, ? extends V> groupBy, DoubleFunction<? super T> function)
     {
         synchronized (this.lock)
@@ -978,6 +1087,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public String makeString()
     {
         synchronized (this.lock)
@@ -986,6 +1096,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public String makeString(String separator)
     {
         synchronized (this.lock)
@@ -994,6 +1105,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public String makeString(String start, String separator, String end)
     {
         synchronized (this.lock)
@@ -1002,6 +1114,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public void appendString(Appendable appendable)
     {
         synchronized (this.lock)
@@ -1010,6 +1123,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public void appendString(Appendable appendable, String separator)
     {
         synchronized (this.lock)
@@ -1018,6 +1132,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public void appendString(Appendable appendable, String start, String separator, String end)
     {
         synchronized (this.lock)
@@ -1026,6 +1141,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public <V> MutableListMultimap<V, T> groupBy(Function<? super T, ? extends V> function)
     {
         synchronized (this.lock)
@@ -1034,6 +1150,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public <V, R extends MutableMultimap<V, T>> R groupBy(Function<? super T, ? extends V> function, R target)
     {
         synchronized (this.lock)
@@ -1042,6 +1159,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public <V> MutableListMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function)
     {
         synchronized (this.lock)
@@ -1050,6 +1168,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public <V, R extends MutableMultimap<V, T>> R groupByEach(Function<? super T, ? extends Iterable<V>> function, R target)
     {
         synchronized (this.lock)
@@ -1058,6 +1177,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public <V> MutableMap<V, T> groupByUniqueKey(Function<? super T, ? extends V> function)
     {
         synchronized (this.lock)
@@ -1066,6 +1186,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public <V, R extends MutableMap<V, T>> R groupByUniqueKey(Function<? super T, ? extends V> function, R target)
     {
         synchronized (this.lock)
@@ -1074,6 +1195,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public RichIterable<RichIterable<T>> chunk(int size)
     {
         synchronized (this.lock)
@@ -1082,6 +1204,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public MutableStack<T> tap(Procedure<? super T> procedure)
     {
         synchronized (this.lock)
@@ -1091,11 +1214,13 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public void forEach(Procedure<? super T> procedure)
     {
         this.each(procedure);
     }
 
+    @Override
     public void each(Procedure<? super T> procedure)
     {
         synchronized (this.lock)
@@ -1113,6 +1238,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public void forEachWithIndex(ObjectIntProcedure<? super T> objectIntProcedure)
     {
         synchronized (this.lock)
@@ -1121,6 +1247,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public <P> void forEachWith(Procedure2<? super T, ? super P> procedure, P parameter)
     {
         synchronized (this.lock)
@@ -1129,6 +1256,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public MutableStack<T> asUnmodifiable()
     {
         synchronized (this.lock)
@@ -1155,6 +1283,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public MutableStack<T> asSynchronized()
     {
         synchronized (this.lock)
@@ -1163,11 +1292,13 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public Iterator<T> iterator()
     {
         return new UnmodifiableIteratorAdapter<>(this.delegate.iterator());
     }
 
+    @Override
     public <K, V> MutableMap<K, V> aggregateInPlaceBy(
             Function<? super T, ? extends K> groupBy,
             Function0<? extends V> zeroValueFactory,
@@ -1179,6 +1310,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public <K, V> MutableMap<K, V> aggregateBy(
             Function<? super T, ? extends K> groupBy,
             Function0<? extends V> zeroValueFactory,
@@ -1190,6 +1322,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public MutableStack<T> takeWhile(Predicate<? super T> predicate)
     {
         synchronized (this.lock)
@@ -1198,6 +1331,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public MutableStack<T> dropWhile(Predicate<? super T> predicate)
     {
         synchronized (this.lock)
@@ -1206,6 +1340,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public PartitionMutableStack<T> partitionWhile(Predicate<? super T> predicate)
     {
         synchronized (this.lock)
@@ -1214,6 +1349,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public MutableStack<T> distinct()
     {
         synchronized (this.lock)
@@ -1222,6 +1358,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public <V> MutableStack<V> collectWithIndex(ObjectIntToObjectFunction<? super T, ? extends V> function)
     {
         synchronized (this.lock)
@@ -1230,6 +1367,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public int indexOf(Object object)
     {
         synchronized (this.lock)
@@ -1238,6 +1376,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public <S> boolean corresponds(OrderedIterable<S> other, Predicate2<? super T, ? super S> predicate)
     {
         synchronized (this.lock)
@@ -1246,6 +1385,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public void forEach(int startIndex, int endIndex, Procedure<? super T> procedure)
     {
         synchronized (this.lock)
@@ -1254,6 +1394,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public void forEachWithIndex(int fromIndex, int toIndex, ObjectIntProcedure<? super T> objectIntProcedure)
     {
         synchronized (this.lock)
@@ -1262,6 +1403,7 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         }
     }
 
+    @Override
     public int detectIndex(Predicate<? super T> predicate)
     {
         synchronized (this.lock)

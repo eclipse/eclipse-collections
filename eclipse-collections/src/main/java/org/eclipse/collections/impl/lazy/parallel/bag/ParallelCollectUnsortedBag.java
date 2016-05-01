@@ -57,26 +57,31 @@ public class ParallelCollectUnsortedBag<T, V> extends AbstractParallelUnsortedBa
         });
     }
 
+    @Override
     public void forEach(Procedure<? super V> procedure)
     {
         this.parallelIterable.forEach(Functions.bind(procedure, this.function));
     }
 
+    @Override
     public void forEachWithOccurrences(ObjectIntProcedure<? super V> procedure)
     {
         this.parallelIterable.forEachWithOccurrences((each, parameter) -> procedure.value(this.function.valueOf(each), parameter));
     }
 
+    @Override
     public boolean anySatisfy(Predicate<? super V> predicate)
     {
         return this.parallelIterable.anySatisfy(Predicates.attributePredicate(this.function, predicate));
     }
 
+    @Override
     public boolean allSatisfy(Predicate<? super V> predicate)
     {
         return this.parallelIterable.allSatisfy(Predicates.attributePredicate(this.function, predicate));
     }
 
+    @Override
     public V detect(Predicate<? super V> predicate)
     {
         T resultItem = this.parallelIterable.detect(Predicates.attributePredicate(this.function, predicate));

@@ -37,6 +37,7 @@ class ImmutableBiMapSerializationProxy<K, V> implements Externalizable
         this.biMap = biMap;
     }
 
+    @Override
     public void writeExternal(ObjectOutput out) throws IOException
     {
         out.writeInt(this.biMap.size());
@@ -61,6 +62,7 @@ class ImmutableBiMapSerializationProxy<K, V> implements Externalizable
         }
     }
 
+    @Override
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
     {
         int size = in.readInt();

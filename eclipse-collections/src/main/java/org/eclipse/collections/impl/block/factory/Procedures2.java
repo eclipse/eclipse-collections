@@ -60,6 +60,7 @@ public final class Procedures2
             this.procedure = procedure;
         }
 
+        @Override
         public void value(T each, P parameter)
         {
             this.procedure.value(each);
@@ -70,6 +71,7 @@ public final class Procedures2
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public void value(T each, Collection<T> target)
         {
             target.add(each);
@@ -80,6 +82,7 @@ public final class Procedures2
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public void value(T each, Collection<T> target)
         {
             target.remove(each);
@@ -96,6 +99,7 @@ public final class Procedures2
             this.throwingProcedure2 = throwingProcedure2;
         }
 
+        @Override
         public void safeValue(T object, P parameter) throws Exception
         {
             this.throwingProcedure2.safeValue(object, parameter);

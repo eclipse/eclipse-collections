@@ -36,26 +36,31 @@ public class FlatCollectSortedSetBatch<T, V> extends AbstractBatch<V> implements
         this.function = function;
     }
 
+    @Override
     public void forEach(Procedure<? super V> procedure)
     {
         this.sortedSetBatch.forEach(each -> Iterate.forEach(this.function.valueOf(each), procedure));
     }
 
+    @Override
     public ListBatch<V> select(Predicate<? super V> predicate)
     {
         return new SelectListBatch<>(this, predicate);
     }
 
+    @Override
     public <VV> ListBatch<VV> collect(Function<? super V, ? extends VV> function)
     {
         return new CollectListBatch<>(this, function);
     }
 
+    @Override
     public <VV> ListBatch<VV> flatCollect(Function<? super V, ? extends Iterable<VV>> function)
     {
         return new FlatCollectListBatch<>(this, function);
     }
 
+    @Override
     public UnsortedSetBatch<V> distinct(ConcurrentHashMap<V, Boolean> distinct)
     {
         return new DistinctBatch<>(this, distinct);

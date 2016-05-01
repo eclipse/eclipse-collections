@@ -25,6 +25,7 @@ public final class FlatCollectProcedureFactory<T, V> implements ProcedureFactory
         this.function = function;
     }
 
+    @Override
     public FlatCollectProcedure<T, V> create()
     {
         return new FlatCollectProcedure<>(this.function, new FastList<>(this.collectionSize));

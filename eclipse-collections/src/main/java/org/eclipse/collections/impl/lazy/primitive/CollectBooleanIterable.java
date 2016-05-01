@@ -45,6 +45,7 @@ public class CollectBooleanIterable<T>
         this.booleanFunctionToProcedure = new BooleanFunctionToProcedure<>(function);
     }
 
+    @Override
     public BooleanIterator booleanIterator()
     {
         return new BooleanIterator()
@@ -63,6 +64,7 @@ public class CollectBooleanIterable<T>
         };
     }
 
+    @Override
     public void forEach(BooleanProcedure procedure)
     {
         this.each(procedure);
@@ -71,6 +73,7 @@ public class CollectBooleanIterable<T>
     /**
      * @since 7.0.
      */
+    @Override
     public void each(BooleanProcedure procedure)
     {
         this.iterable.forEachWith(this.booleanFunctionToProcedure, procedure);
@@ -180,6 +183,7 @@ public class CollectBooleanIterable<T>
             this.function = function;
         }
 
+        @Override
         public void value(T each, BooleanProcedure procedure)
         {
             procedure.value(this.function.booleanValueOf(each));

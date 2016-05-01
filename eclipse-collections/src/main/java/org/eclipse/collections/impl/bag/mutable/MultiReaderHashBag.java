@@ -178,6 +178,7 @@ public final class MultiReaderHashBag<T>
         }
     }
 
+    @Override
     public MutableBag<T> asSynchronized()
     {
         this.acquireReadLock();
@@ -191,6 +192,7 @@ public final class MultiReaderHashBag<T>
         }
     }
 
+    @Override
     public MutableBag<T> asUnmodifiable()
     {
         this.acquireReadLock();
@@ -204,6 +206,7 @@ public final class MultiReaderHashBag<T>
         }
     }
 
+    @Override
     public ImmutableBag<T> toImmutable()
     {
         this.acquireReadLock();
@@ -217,6 +220,7 @@ public final class MultiReaderHashBag<T>
         }
     }
 
+    @Override
     public int addOccurrences(T item, int occurrences)
     {
         this.acquireWriteLock();
@@ -230,6 +234,7 @@ public final class MultiReaderHashBag<T>
         }
     }
 
+    @Override
     public boolean removeOccurrences(Object item, int occurrences)
     {
         this.acquireWriteLock();
@@ -243,6 +248,7 @@ public final class MultiReaderHashBag<T>
         }
     }
 
+    @Override
     public boolean setOccurrences(T item, int occurrences)
     {
         this.acquireWriteLock();
@@ -256,6 +262,7 @@ public final class MultiReaderHashBag<T>
         }
     }
 
+    @Override
     public int occurrencesOf(Object item)
     {
         this.acquireReadLock();
@@ -269,6 +276,7 @@ public final class MultiReaderHashBag<T>
         }
     }
 
+    @Override
     public int sizeDistinct()
     {
         this.acquireReadLock();
@@ -282,6 +290,7 @@ public final class MultiReaderHashBag<T>
         }
     }
 
+    @Override
     public <V> MutableBag<V> collect(Function<? super T, ? extends V> function)
     {
         this.acquireReadLock();
@@ -295,6 +304,7 @@ public final class MultiReaderHashBag<T>
         }
     }
 
+    @Override
     public MutableBooleanBag collectBoolean(BooleanFunction<? super T> booleanFunction)
     {
         this.acquireReadLock();
@@ -308,6 +318,7 @@ public final class MultiReaderHashBag<T>
         }
     }
 
+    @Override
     public MutableByteBag collectByte(ByteFunction<? super T> byteFunction)
     {
         this.acquireReadLock();
@@ -321,6 +332,7 @@ public final class MultiReaderHashBag<T>
         }
     }
 
+    @Override
     public MutableCharBag collectChar(CharFunction<? super T> charFunction)
     {
         this.acquireReadLock();
@@ -334,6 +346,7 @@ public final class MultiReaderHashBag<T>
         }
     }
 
+    @Override
     public MutableDoubleBag collectDouble(DoubleFunction<? super T> doubleFunction)
     {
         this.acquireReadLock();
@@ -347,6 +360,7 @@ public final class MultiReaderHashBag<T>
         }
     }
 
+    @Override
     public MutableFloatBag collectFloat(FloatFunction<? super T> floatFunction)
     {
         this.acquireReadLock();
@@ -360,6 +374,7 @@ public final class MultiReaderHashBag<T>
         }
     }
 
+    @Override
     public MutableIntBag collectInt(IntFunction<? super T> intFunction)
     {
         this.acquireReadLock();
@@ -373,6 +388,7 @@ public final class MultiReaderHashBag<T>
         }
     }
 
+    @Override
     public MutableLongBag collectLong(LongFunction<? super T> longFunction)
     {
         this.acquireReadLock();
@@ -386,6 +402,7 @@ public final class MultiReaderHashBag<T>
         }
     }
 
+    @Override
     public MutableShortBag collectShort(ShortFunction<? super T> shortFunction)
     {
         this.acquireReadLock();
@@ -399,6 +416,7 @@ public final class MultiReaderHashBag<T>
         }
     }
 
+    @Override
     public <V> MutableBag<V> flatCollect(
             Function<? super T, ? extends Iterable<V>> function)
     {
@@ -413,6 +431,7 @@ public final class MultiReaderHashBag<T>
         }
     }
 
+    @Override
     public MutableList<ObjectIntPair<T>> topOccurrences(int count)
     {
         this.acquireReadLock();
@@ -426,6 +445,7 @@ public final class MultiReaderHashBag<T>
         }
     }
 
+    @Override
     public MutableList<ObjectIntPair<T>> bottomOccurrences(int count)
     {
         this.acquireReadLock();
@@ -439,6 +459,7 @@ public final class MultiReaderHashBag<T>
         }
     }
 
+    @Override
     public <V> MutableBag<V> collectIf(
             Predicate<? super T> predicate,
             Function<? super T, ? extends V> function)
@@ -454,6 +475,7 @@ public final class MultiReaderHashBag<T>
         }
     }
 
+    @Override
     public <P, V> MutableBag<V> collectWith(
             Function2<? super T, ? super P, ? extends V> function,
             P parameter)
@@ -469,11 +491,13 @@ public final class MultiReaderHashBag<T>
         }
     }
 
+    @Override
     public MutableBag<T> newEmpty()
     {
         return MultiReaderHashBag.newBag();
     }
 
+    @Override
     public MutableBag<T> reject(Predicate<? super T> predicate)
     {
         this.acquireReadLock();
@@ -487,6 +511,7 @@ public final class MultiReaderHashBag<T>
         }
     }
 
+    @Override
     public <P> MutableBag<T> rejectWith(
             Predicate2<? super T, ? super P> predicate,
             P parameter)
@@ -502,6 +527,7 @@ public final class MultiReaderHashBag<T>
         }
     }
 
+    @Override
     public MutableBag<T> tap(Procedure<? super T> procedure)
     {
         this.acquireReadLock();
@@ -516,6 +542,7 @@ public final class MultiReaderHashBag<T>
         }
     }
 
+    @Override
     public MutableBag<T> select(Predicate<? super T> predicate)
     {
         this.acquireReadLock();
@@ -529,6 +556,7 @@ public final class MultiReaderHashBag<T>
         }
     }
 
+    @Override
     public <P> MutableBag<T> selectWith(
             Predicate2<? super T, ? super P> predicate,
             P parameter)
@@ -544,6 +572,7 @@ public final class MultiReaderHashBag<T>
         }
     }
 
+    @Override
     public MutableBag<T> selectByOccurrences(IntPredicate predicate)
     {
         this.acquireReadLock();
@@ -557,6 +586,7 @@ public final class MultiReaderHashBag<T>
         }
     }
 
+    @Override
     public <S> MutableBag<S> selectInstancesOf(Class<S> clazz)
     {
         this.acquireReadLock();
@@ -570,6 +600,7 @@ public final class MultiReaderHashBag<T>
         }
     }
 
+    @Override
     public PartitionMutableBag<T> partition(Predicate<? super T> predicate)
     {
         this.acquireReadLock();
@@ -583,6 +614,7 @@ public final class MultiReaderHashBag<T>
         }
     }
 
+    @Override
     public <P> PartitionMutableBag<T> partitionWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         this.acquireReadLock();
@@ -596,30 +628,35 @@ public final class MultiReaderHashBag<T>
         }
     }
 
+    @Override
     public MutableBag<T> with(T element)
     {
         this.add(element);
         return this;
     }
 
+    @Override
     public MutableBag<T> without(T element)
     {
         this.remove(element);
         return this;
     }
 
+    @Override
     public MutableBag<T> withAll(Iterable<? extends T> elements)
     {
         this.addAllIterable(elements);
         return this;
     }
 
+    @Override
     public MutableBag<T> withoutAll(Iterable<? extends T> elements)
     {
         this.removeAllIterable(elements);
         return this;
     }
 
+    @Override
     public MutableMap<T, Integer> toMapOfItemToCount()
     {
         this.acquireReadLock();
@@ -633,6 +670,7 @@ public final class MultiReaderHashBag<T>
         }
     }
 
+    @Override
     public String toStringOfItemToCount()
     {
         this.acquireReadLock();
@@ -646,6 +684,7 @@ public final class MultiReaderHashBag<T>
         }
     }
 
+    @Override
     public <V> MutableBagMultimap<V, T> groupBy(Function<? super T, ? extends V> function)
     {
         this.acquireReadLock();
@@ -659,6 +698,7 @@ public final class MultiReaderHashBag<T>
         }
     }
 
+    @Override
     public <V> MutableBagMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function)
     {
         this.acquireReadLock();
@@ -672,6 +712,7 @@ public final class MultiReaderHashBag<T>
         }
     }
 
+    @Override
     public <V> MutableMap<V, T> groupByUniqueKey(Function<? super T, ? extends V> function)
     {
         this.acquireReadLock();
@@ -688,6 +729,7 @@ public final class MultiReaderHashBag<T>
     /**
      * @deprecated in 6.0. Use {@link OrderedIterable#zip(Iterable)} instead.
      */
+    @Override
     @Deprecated
     public <S> MutableBag<Pair<T, S>> zip(Iterable<S> that)
     {
@@ -705,6 +747,7 @@ public final class MultiReaderHashBag<T>
     /**
      * @deprecated in 6.0. Use {@link OrderedIterable#zipWithIndex()} instead.
      */
+    @Override
     @Deprecated
     public MutableSet<Pair<T, Integer>> zipWithIndex()
     {
@@ -719,6 +762,7 @@ public final class MultiReaderHashBag<T>
         }
     }
 
+    @Override
     public RichIterable<RichIterable<T>> chunk(int size)
     {
         this.acquireReadLock();
@@ -732,6 +776,7 @@ public final class MultiReaderHashBag<T>
         }
     }
 
+    @Override
     public void forEachWithOccurrences(ObjectIntProcedure<? super T> procedure)
     {
         this.acquireReadLock();
@@ -773,11 +818,13 @@ public final class MultiReaderHashBag<T>
         }
     }
 
+    @Override
     public void writeExternal(ObjectOutput out) throws IOException
     {
         out.writeObject(this.delegate);
     }
 
+    @Override
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
     {
         this.delegate = (MutableBag<T>) in.readObject();
@@ -803,50 +850,59 @@ public final class MultiReaderHashBag<T>
             this.requestedIterators.each(UntouchableIterator::becomeUseless);
         }
 
+        @Override
         public MutableBag<T> with(T element)
         {
             this.add(element);
             return this;
         }
 
+        @Override
         public MutableBag<T> without(T element)
         {
             this.remove(element);
             return this;
         }
 
+        @Override
         public MutableBag<T> withAll(Iterable<? extends T> elements)
         {
             this.addAllIterable(elements);
             return this;
         }
 
+        @Override
         public MutableBag<T> withoutAll(Iterable<? extends T> elements)
         {
             this.removeAllIterable(elements);
             return this;
         }
 
+        @Override
         public MutableBag<T> asSynchronized()
         {
             throw new UnsupportedOperationException("cannot wrap an UntouchableMutableBag");
         }
 
+        @Override
         public MutableBag<T> asUnmodifiable()
         {
             throw new UnsupportedOperationException("cannot wrap an UntouchableMutableBag");
         }
 
+        @Override
         public ImmutableBag<T> toImmutable()
         {
             return Bags.immutable.withAll(this.getDelegate());
         }
 
+        @Override
         public LazyIterable<T> asLazy()
         {
             return LazyIterate.adapt(this);
         }
 
+        @Override
         public Iterator<T> iterator()
         {
             UntouchableIterator<T> iterator = new UntouchableIterator<>(this.delegate.iterator());
@@ -854,131 +910,157 @@ public final class MultiReaderHashBag<T>
             return iterator;
         }
 
+        @Override
         public int addOccurrences(T item, int occurrences)
         {
             return this.getDelegate().addOccurrences(item, occurrences);
         }
 
+        @Override
         public boolean removeOccurrences(Object item, int occurrences)
         {
             return this.getDelegate().removeOccurrences(item, occurrences);
         }
 
+        @Override
         public boolean setOccurrences(T item, int occurrences)
         {
             return this.getDelegate().setOccurrences(item, occurrences);
         }
 
+        @Override
         public int occurrencesOf(Object item)
         {
             return this.getDelegate().occurrencesOf(item);
         }
 
+        @Override
         public int sizeDistinct()
         {
             return this.getDelegate().sizeDistinct();
         }
 
+        @Override
         public <V> MutableBag<V> collect(Function<? super T, ? extends V> function)
         {
             return this.getDelegate().collect(function);
         }
 
+        @Override
         public MutableBooleanBag collectBoolean(BooleanFunction<? super T> booleanFunction)
         {
             return this.getDelegate().collectBoolean(booleanFunction);
         }
 
+        @Override
         public <R extends MutableBooleanCollection> R collectBoolean(BooleanFunction<? super T> booleanFunction, R target)
         {
             return this.getDelegate().collectBoolean(booleanFunction, target);
         }
 
+        @Override
         public MutableByteBag collectByte(ByteFunction<? super T> byteFunction)
         {
             return this.getDelegate().collectByte(byteFunction);
         }
 
+        @Override
         public <R extends MutableByteCollection> R collectByte(ByteFunction<? super T> byteFunction, R target)
         {
             return this.getDelegate().collectByte(byteFunction, target);
         }
 
+        @Override
         public MutableCharBag collectChar(CharFunction<? super T> charFunction)
         {
             return this.getDelegate().collectChar(charFunction);
         }
 
+        @Override
         public <R extends MutableCharCollection> R collectChar(CharFunction<? super T> charFunction, R target)
         {
             return this.getDelegate().collectChar(charFunction, target);
         }
 
+        @Override
         public MutableDoubleBag collectDouble(DoubleFunction<? super T> doubleFunction)
         {
             return this.getDelegate().collectDouble(doubleFunction);
         }
 
+        @Override
         public <R extends MutableDoubleCollection> R collectDouble(DoubleFunction<? super T> doubleFunction, R target)
         {
             return this.getDelegate().collectDouble(doubleFunction, target);
         }
 
+        @Override
         public MutableFloatBag collectFloat(FloatFunction<? super T> floatFunction)
         {
             return this.getDelegate().collectFloat(floatFunction);
         }
 
+        @Override
         public <R extends MutableFloatCollection> R collectFloat(FloatFunction<? super T> floatFunction, R target)
         {
             return this.getDelegate().collectFloat(floatFunction, target);
         }
 
+        @Override
         public MutableIntBag collectInt(IntFunction<? super T> intFunction)
         {
             return this.getDelegate().collectInt(intFunction);
         }
 
+        @Override
         public <R extends MutableIntCollection> R collectInt(IntFunction<? super T> intFunction, R target)
         {
             return this.getDelegate().collectInt(intFunction, target);
         }
 
+        @Override
         public MutableLongBag collectLong(LongFunction<? super T> longFunction)
         {
             return this.getDelegate().collectLong(longFunction);
         }
 
+        @Override
         public <R extends MutableLongCollection> R collectLong(LongFunction<? super T> longFunction, R target)
         {
             return this.getDelegate().collectLong(longFunction, target);
         }
 
+        @Override
         public MutableShortBag collectShort(ShortFunction<? super T> shortFunction)
         {
             return this.getDelegate().collectShort(shortFunction);
         }
 
+        @Override
         public <R extends MutableShortCollection> R collectShort(ShortFunction<? super T> shortFunction, R target)
         {
             return this.getDelegate().collectShort(shortFunction, target);
         }
 
+        @Override
         public <V> MutableBag<V> flatCollect(Function<? super T, ? extends Iterable<V>> function)
         {
             return this.getDelegate().flatCollect(function);
         }
 
+        @Override
         public MutableList<ObjectIntPair<T>> topOccurrences(int count)
         {
             return this.getDelegate().topOccurrences(count);
         }
 
+        @Override
         public MutableList<ObjectIntPair<T>> bottomOccurrences(int count)
         {
             return this.getDelegate().bottomOccurrences(count);
         }
 
+        @Override
         public <V> MutableBag<V> collectIf(
                 Predicate<? super T> predicate,
                 Function<? super T, ? extends V> function)
@@ -986,6 +1068,7 @@ public final class MultiReaderHashBag<T>
             return this.getDelegate().collectIf(predicate, function);
         }
 
+        @Override
         public <P, V> MutableBag<V> collectWith(
                 Function2<? super T, ? super P, ? extends V> function,
                 P parameter)
@@ -993,31 +1076,37 @@ public final class MultiReaderHashBag<T>
             return this.getDelegate().collectWith(function, parameter);
         }
 
+        @Override
         public <V> MutableBagMultimap<V, T> groupBy(Function<? super T, ? extends V> function)
         {
             return this.getDelegate().groupBy(function);
         }
 
+        @Override
         public <V> MutableBagMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function)
         {
             return this.getDelegate().groupByEach(function);
         }
 
+        @Override
         public <V> MutableMap<V, T> groupByUniqueKey(Function<? super T, ? extends V> function)
         {
             return this.getDelegate().groupByUniqueKey(function);
         }
 
+        @Override
         public MutableBag<T> newEmpty()
         {
             return this.getDelegate().newEmpty();
         }
 
+        @Override
         public MutableBag<T> reject(Predicate<? super T> predicate)
         {
             return this.getDelegate().reject(predicate);
         }
 
+        @Override
         public <P> MutableBag<T> rejectWith(
                 Predicate2<? super T, ? super P> predicate,
                 P parameter)
@@ -1025,17 +1114,20 @@ public final class MultiReaderHashBag<T>
             return this.getDelegate().rejectWith(predicate, parameter);
         }
 
+        @Override
         public MutableBag<T> tap(Procedure<? super T> procedure)
         {
             this.forEach(procedure);
             return this;
         }
 
+        @Override
         public MutableBag<T> select(Predicate<? super T> predicate)
         {
             return this.getDelegate().select(predicate);
         }
 
+        @Override
         public <P> MutableBag<T> selectWith(
                 Predicate2<? super T, ? super P> predicate,
                 P parameter)
@@ -1043,26 +1135,31 @@ public final class MultiReaderHashBag<T>
             return this.getDelegate().selectWith(predicate, parameter);
         }
 
+        @Override
         public MutableBag<T> selectByOccurrences(IntPredicate predicate)
         {
             return this.getDelegate().selectByOccurrences(predicate);
         }
 
+        @Override
         public <S> MutableBag<S> selectInstancesOf(Class<S> clazz)
         {
             return this.getDelegate().selectInstancesOf(clazz);
         }
 
+        @Override
         public void forEachWithOccurrences(ObjectIntProcedure<? super T> procedure)
         {
             this.getDelegate().forEachWithOccurrences(procedure);
         }
 
+        @Override
         public PartitionMutableBag<T> partition(Predicate<? super T> predicate)
         {
             return this.getDelegate().partition(predicate);
         }
 
+        @Override
         public <P> PartitionMutableBag<T> partitionWith(Predicate2<? super T, ? super P> predicate, P parameter)
         {
             return this.getDelegate().partitionWith(predicate, parameter);
@@ -1071,6 +1168,7 @@ public final class MultiReaderHashBag<T>
         /**
          * @deprecated in 6.0. Use {@link OrderedIterable#zip(Iterable)} instead.
          */
+        @Override
         @Deprecated
         public <S> MutableBag<Pair<T, S>> zip(Iterable<S> that)
         {
@@ -1080,17 +1178,20 @@ public final class MultiReaderHashBag<T>
         /**
          * @deprecated in 6.0. Use {@link OrderedIterable#zipWithIndex()} instead.
          */
+        @Override
         @Deprecated
         public MutableSet<Pair<T, Integer>> zipWithIndex()
         {
             return this.getDelegate().zipWithIndex();
         }
 
+        @Override
         public MutableMap<T, Integer> toMapOfItemToCount()
         {
             return this.getDelegate().toMapOfItemToCount();
         }
 
+        @Override
         public String toStringOfItemToCount()
         {
             return this.getDelegate().toStringOfItemToCount();
@@ -1112,16 +1213,19 @@ public final class MultiReaderHashBag<T>
             this.delegate = newDelegate;
         }
 
+        @Override
         public boolean hasNext()
         {
             return this.delegate.hasNext();
         }
 
+        @Override
         public T next()
         {
             return this.delegate.next();
         }
 
+        @Override
         public void remove()
         {
             this.delegate.remove();

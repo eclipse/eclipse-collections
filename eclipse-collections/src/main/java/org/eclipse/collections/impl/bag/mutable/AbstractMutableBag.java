@@ -58,27 +58,32 @@ public abstract class AbstractMutableBag<T>
         extends AbstractMutableBagIterable<T>
         implements MutableBag<T>
 {
+    @Override
     public ImmutableBag<T> toImmutable()
     {
         return Bags.immutable.withAll(this);
     }
 
+    @Override
     public UnmodifiableBag<T> asUnmodifiable()
     {
         return UnmodifiableBag.of(this);
     }
 
+    @Override
     public SynchronizedBag<T> asSynchronized()
     {
         return new SynchronizedBag<>(this);
     }
 
+    @Override
     public MutableBag<T> tap(Procedure<? super T> procedure)
     {
         this.forEach(procedure);
         return this;
     }
 
+    @Override
     public <S> MutableBag<S> selectInstancesOf(Class<S> clazz)
     {
         MutableBag<S> result = HashBag.newBag();
@@ -91,26 +96,31 @@ public abstract class AbstractMutableBag<T>
         return result;
     }
 
+    @Override
     public MutableBag<T> select(Predicate<? super T> predicate)
     {
         return this.select(predicate, this.newEmpty());
     }
 
+    @Override
     public <P> MutableBag<T> selectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         return this.selectWith(predicate, parameter, this.newEmpty());
     }
 
+    @Override
     public MutableBag<T> reject(Predicate<? super T> predicate)
     {
         return this.reject(predicate, this.newEmpty());
     }
 
+    @Override
     public <P> MutableBag<T> rejectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         return this.rejectWith(predicate, parameter, this.newEmpty());
     }
 
+    @Override
     public PartitionMutableBag<T> partition(Predicate<? super T> predicate)
     {
         PartitionMutableBag<T> result = new PartitionHashBag<>();
@@ -121,6 +131,7 @@ public abstract class AbstractMutableBag<T>
         return result;
     }
 
+    @Override
     public <P> PartitionMutableBag<T> partitionWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         PartitionMutableBag<T> result = new PartitionHashBag<>();
@@ -131,61 +142,73 @@ public abstract class AbstractMutableBag<T>
         return result;
     }
 
+    @Override
     public <V> MutableBag<V> collect(Function<? super T, ? extends V> function)
     {
         return this.collect(function, HashBag.newBag());
     }
 
+    @Override
     public <P, V> MutableBag<V> collectWith(Function2<? super T, ? super P, ? extends V> function, P parameter)
     {
         return this.collectWith(function, parameter, HashBag.newBag());
     }
 
+    @Override
     public <V> MutableBag<V> collectIf(Predicate<? super T> predicate, Function<? super T, ? extends V> function)
     {
         return this.collectIf(predicate, function, HashBag.newBag());
     }
 
+    @Override
     public <V> MutableBag<V> flatCollect(Function<? super T, ? extends Iterable<V>> function)
     {
         return this.flatCollect(function, HashBag.newBag());
     }
 
+    @Override
     public MutableBooleanBag collectBoolean(BooleanFunction<? super T> booleanFunction)
     {
         return this.collectBoolean(booleanFunction, new BooleanHashBag());
     }
 
+    @Override
     public MutableByteBag collectByte(ByteFunction<? super T> byteFunction)
     {
         return this.collectByte(byteFunction, new ByteHashBag());
     }
 
+    @Override
     public MutableCharBag collectChar(CharFunction<? super T> charFunction)
     {
         return this.collectChar(charFunction, new CharHashBag());
     }
 
+    @Override
     public MutableDoubleBag collectDouble(DoubleFunction<? super T> doubleFunction)
     {
         return this.collectDouble(doubleFunction, new DoubleHashBag());
     }
 
+    @Override
     public MutableFloatBag collectFloat(FloatFunction<? super T> floatFunction)
     {
         return this.collectFloat(floatFunction, new FloatHashBag());
     }
 
+    @Override
     public MutableIntBag collectInt(IntFunction<? super T> intFunction)
     {
         return this.collectInt(intFunction, new IntHashBag());
     }
 
+    @Override
     public MutableLongBag collectLong(LongFunction<? super T> longFunction)
     {
         return this.collectLong(longFunction, new LongHashBag());
     }
 
+    @Override
     public MutableShortBag collectShort(ShortFunction<? super T> shortFunction)
     {
         return this.collectShort(shortFunction, new ShortHashBag());
@@ -194,6 +217,7 @@ public abstract class AbstractMutableBag<T>
     /**
      * @deprecated in 6.0. Use {@link OrderedIterable#zip(Iterable)} instead.
      */
+    @Override
     @Deprecated
     public <S> MutableBag<Pair<T, S>> zip(Iterable<S> that)
     {
@@ -203,6 +227,7 @@ public abstract class AbstractMutableBag<T>
     /**
      * @deprecated in 6.0. Use {@link OrderedIterable#zipWithIndex()} instead.
      */
+    @Override
     @Deprecated
     public MutableSet<Pair<T, Integer>> zipWithIndex()
     {

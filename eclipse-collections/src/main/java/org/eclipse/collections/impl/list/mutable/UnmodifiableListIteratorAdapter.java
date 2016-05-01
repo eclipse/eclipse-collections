@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -22,46 +22,55 @@ public class UnmodifiableListIteratorAdapter<T>
         this.iterator = iterator;
     }
 
+    @Override
     public boolean hasNext()
     {
         return this.iterator.hasNext();
     }
 
+    @Override
     public T next()
     {
         return this.iterator.next();
     }
 
+    @Override
     public boolean hasPrevious()
     {
         return this.iterator.hasPrevious();
     }
 
+    @Override
     public T previous()
     {
         return this.iterator.previous();
     }
 
+    @Override
     public int nextIndex()
     {
         return this.iterator.nextIndex();
     }
 
+    @Override
     public int previousIndex()
     {
         return this.iterator.previousIndex();
     }
 
+    @Override
     public void remove()
     {
         throw new UnsupportedOperationException("Cannot call remove() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public void set(T o)
     {
         throw new UnsupportedOperationException("Cannot call set() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public void add(T o)
     {
         throw new UnsupportedOperationException("Cannot call add() on " + this.getClass().getSimpleName());

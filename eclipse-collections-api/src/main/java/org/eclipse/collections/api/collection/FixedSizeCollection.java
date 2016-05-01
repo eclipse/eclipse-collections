@@ -38,6 +38,7 @@ public interface FixedSizeCollection<T>
      *
      * @see #add(Object)
      */
+    @Override
     MutableCollection<T> with(T element);
 
     /**
@@ -56,6 +57,7 @@ public interface FixedSizeCollection<T>
      *
      * @see #remove(Object)
      */
+    @Override
     MutableCollection<T> without(T element);
 
     /**
@@ -73,6 +75,7 @@ public interface FixedSizeCollection<T>
      *
      * @see #addAll(Collection)
      */
+    @Override
     MutableCollection<T> withAll(Iterable<? extends T> elements);
 
     /**
@@ -90,62 +93,75 @@ public interface FixedSizeCollection<T>
      *
      * @see #removeAll(Collection)
      */
+    @Override
     MutableCollection<T> withoutAll(Iterable<? extends T> elements);
 
     /**
      * @throws UnsupportedOperationException
      */
+    @Override
     boolean add(T t);
 
     /**
      * @throws UnsupportedOperationException
      */
+    @Override
     boolean addAllIterable(Iterable<? extends T> iterable);
 
     /**
      * @throws UnsupportedOperationException
      */
+    @Override
     boolean addAll(Collection<? extends T> collection);
 
     /**
      * @throws UnsupportedOperationException
      */
+    @Override
     boolean remove(Object o);
 
     /**
      * @throws UnsupportedOperationException
      */
+    @Override
     boolean removeAll(Collection<?> collection);
 
     /**
      * @throws UnsupportedOperationException
      */
+    @Override
     boolean removeAllIterable(Iterable<?> iterable);
 
     /**
      * @throws UnsupportedOperationException
      */
+    @Override
     boolean removeIf(Predicate<? super T> predicate);
 
     /**
      * @throws UnsupportedOperationException
      */
+    @Override
     <P> boolean removeIfWith(Predicate2<? super T, ? super P> predicate, P parameter);
 
     /**
      * @throws UnsupportedOperationException
      */
+    @Override
     boolean retainAll(Collection<?> collection);
 
     /**
      * @throws UnsupportedOperationException
      */
+    @Override
     boolean retainAllIterable(Iterable<?> iterable);
 
     /**
      * @throws UnsupportedOperationException
      */
+    @Override
     void clear();
 
+    @Override
     FixedSizeCollection<T> tap(Procedure<? super T> procedure);
 }

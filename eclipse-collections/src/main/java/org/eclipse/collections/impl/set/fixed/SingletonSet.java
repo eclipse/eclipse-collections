@@ -46,6 +46,7 @@ class SingletonSet<T>
         // For Externalizable use only
     }
 
+    @Override
     public int size()
     {
         return 1;
@@ -86,6 +87,7 @@ class SingletonSet<T>
         return Comparators.nullSafeEquals(obj, this.element1);
     }
 
+    @Override
     public Iterator<T> iterator()
     {
         return new SingletonSetIterator();
@@ -105,16 +107,19 @@ class SingletonSet<T>
         }
     }
 
+    @Override
     public T getFirst()
     {
         return this.element1;
     }
 
+    @Override
     public T getLast()
     {
         return this.element1;
     }
 
+    @Override
     public void each(Procedure<? super T> procedure)
     {
         procedure.value(this.element1);
@@ -132,21 +137,25 @@ class SingletonSet<T>
         procedure.value(this.element1, parameter);
     }
 
+    @Override
     public void writeExternal(ObjectOutput out) throws IOException
     {
         out.writeObject(this.element1);
     }
 
+    @Override
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
     {
         this.element1 = (T) in.readObject();
     }
 
+    @Override
     public MutableSet<T> with(T element)
     {
         return this.contains(element) ? this : new DoubletonSet<>(this.element1, element);
     }
 
+    @Override
     public MutableSet<T> without(T element)
     {
         if (Comparators.nullSafeEquals(element, this.element1))

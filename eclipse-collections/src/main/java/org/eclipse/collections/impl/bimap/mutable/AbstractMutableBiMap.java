@@ -139,17 +139,20 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
         return this.inverse.delegate;
     }
 
+    @Override
     public HashBiMap<K, V> newEmpty()
     {
         return new HashBiMap<>();
     }
 
+    @Override
     public MutableBiMap<K, V> withKeyValue(K key, V value)
     {
         this.put(key, value);
         return this;
     }
 
+    @Override
     public MutableBiMap<K, V> withAllKeyValues(Iterable<? extends Pair<? extends K, ? extends V>> keyValues)
     {
         for (Pair<? extends K, ? extends V> keyVal : keyValues)
@@ -159,17 +162,20 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
         return this;
     }
 
+    @Override
     public MutableBiMap<K, V> withAllKeyValueArguments(Pair<? extends K, ? extends V>... keyValuePairs)
     {
         return this.withAllKeyValues(ArrayAdapter.adapt(keyValuePairs));
     }
 
+    @Override
     public MutableBiMap<K, V> withoutKey(K key)
     {
         this.removeKey(key);
         return this;
     }
 
+    @Override
     public MutableBiMap<K, V> withoutAllKeys(Iterable<? extends K> keys)
     {
         for (K key : keys)
@@ -179,22 +185,26 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
         return this;
     }
 
+    @Override
     public MutableBiMap<V, K> inverse()
     {
         return this.inverse;
     }
 
+    @Override
     public MutableSetMultimap<V, K> flip()
     {
         // TODO: We could optimize this since we know the values are unique
         return MapIterate.flip(this);
     }
 
+    @Override
     public MutableBiMap<V, K> flipUniqueValues()
     {
         return new HashBiMap<>(this.inverse());
     }
 
+    @Override
     public V put(K key, V value)
     {
         if (this.inverse.delegate.containsKey(value))
@@ -221,6 +231,7 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
         return put;
     }
 
+    @Override
     public V forcePut(K key, V value)
     {
         boolean containsValue = this.inverse.delegate.containsKey(value);
@@ -261,6 +272,7 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
         return put;
     }
 
+    @Override
     public void putAll(Map<? extends K, ? extends V> map)
     {
         Set<? extends Map.Entry<? extends K, ? extends V>> entries = map.entrySet();
@@ -270,11 +282,13 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
         }
     }
 
+    @Override
     public V add(Pair<K, V> keyValuePair)
     {
         return this.put(keyValuePair.getOne(), keyValuePair.getTwo());
     }
 
+    @Override
     public V remove(Object key)
     {
         if (!this.delegate.containsKey(key))
@@ -286,17 +300,20 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
         return oldValue;
     }
 
+    @Override
     public V removeKey(K key)
     {
         return this.remove(key);
     }
 
+    @Override
     public void clear()
     {
         this.delegate.clear();
         this.inverse.delegate.clear();
     }
 
+    @Override
     public V getIfAbsentPut(K key, V value)
     {
         V oldValue = this.delegate.get(key);
@@ -310,6 +327,7 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
         return value;
     }
 
+    @Override
     public V getIfAbsentPut(K key, Function0<? extends V> function)
     {
         V value = this.delegate.get(key);
@@ -324,6 +342,7 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
         return newValue;
     }
 
+    @Override
     public <P> V getIfAbsentPutWith(K key, Function<? super P, ? extends V> function, P parameter)
     {
         V value = this.delegate.get(key);
@@ -338,6 +357,7 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
         return newValue;
     }
 
+    @Override
     public V getIfAbsentPutWithKey(K key, Function<? super K, ? extends V> function)
     {
         V value = this.delegate.get(key);
@@ -352,6 +372,7 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
         return newValue;
     }
 
+    @Override
     public V updateValue(K key, Function0<? extends V> factory, Function<? super V, ? extends V> function)
     {
         if (this.delegate.containsKey(key))
@@ -366,6 +387,7 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
         return newValue;
     }
 
+    @Override
     public <P> V updateValueWith(K key, Function0<? extends V> factory, Function2<? super V, ? super P, ? extends V> function, P parameter)
     {
         if (this.delegate.containsKey(key))
@@ -380,36 +402,43 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
         return newValue;
     }
 
+    @Override
     public Set<K> keySet()
     {
         return new KeySet();
     }
 
+    @Override
     public Collection<V> values()
     {
         return new ValuesCollection();
     }
 
+    @Override
     public Set<Map.Entry<K, V>> entrySet()
     {
         return new EntrySet();
     }
 
+    @Override
     public Iterator<V> iterator()
     {
         return new InternalIterator();
     }
 
+    @Override
     public ImmutableBiMap<K, V> toImmutable()
     {
         return BiMaps.immutable.withAll(this.delegate);
     }
 
+    @Override
     public MutableBiMap<K, V> asSynchronized()
     {
         return SynchronizedBiMap.of(this);
     }
 
+    @Override
     public MutableBiMap<K, V> asUnmodifiable()
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".asUnmodifiable() not implemented yet");
@@ -421,12 +450,14 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
         return new HashBiMap<>(this);
     }
 
+    @Override
     public MutableBiMap<K, V> tap(Procedure<? super V> procedure)
     {
         this.forEach(procedure);
         return this;
     }
 
+    @Override
     public HashBiMap<K, V> select(Predicate2<? super K, ? super V> predicate)
     {
         HashBiMap<K, V> result = HashBiMap.newMap();
@@ -439,6 +470,7 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
         return result;
     }
 
+    @Override
     public HashBiMap<K, V> reject(Predicate2<? super K, ? super V> predicate)
     {
         HashBiMap<K, V> result = HashBiMap.newMap();
@@ -451,6 +483,7 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
         return result;
     }
 
+    @Override
     public <K2, V2> HashBiMap<K2, V2> collect(Function2<? super K, ? super V, Pair<K2, V2>> function)
     {
         HashBiMap<K2, V2> result = HashBiMap.newMap();
@@ -461,6 +494,7 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
         return result;
     }
 
+    @Override
     public <R> HashBiMap<K, R> collectValues(Function2<? super K, ? super V, ? extends R> function)
     {
         HashBiMap<K, R> result = HashBiMap.newMap();
@@ -468,61 +502,73 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
         return result;
     }
 
+    @Override
     public <VV> MutableBag<VV> collect(Function<? super V, ? extends VV> function)
     {
         return this.delegate.collect(function);
     }
 
+    @Override
     public <P, VV> MutableBag<VV> collectWith(Function2<? super V, ? super P, ? extends VV> function, P parameter)
     {
         return this.delegate.collectWith(function, parameter);
     }
 
+    @Override
     public <VV> MutableBag<VV> flatCollect(Function<? super V, ? extends Iterable<VV>> function)
     {
         return this.delegate.flatCollect(function);
     }
 
+    @Override
     public MutableBooleanBag collectBoolean(BooleanFunction<? super V> booleanFunction)
     {
         return this.delegate.collectBoolean(booleanFunction);
     }
 
+    @Override
     public MutableByteBag collectByte(ByteFunction<? super V> byteFunction)
     {
         return this.delegate.collectByte(byteFunction);
     }
 
+    @Override
     public MutableCharBag collectChar(CharFunction<? super V> charFunction)
     {
         return this.delegate.collectChar(charFunction);
     }
 
+    @Override
     public MutableDoubleBag collectDouble(DoubleFunction<? super V> doubleFunction)
     {
         return this.delegate.collectDouble(doubleFunction);
     }
 
+    @Override
     public MutableFloatBag collectFloat(FloatFunction<? super V> floatFunction)
     {
         return this.delegate.collectFloat(floatFunction);
     }
 
+    @Override
     public MutableIntBag collectInt(IntFunction<? super V> intFunction)
     {
         return this.delegate.collectInt(intFunction);
     }
 
+    @Override
     public MutableLongBag collectLong(LongFunction<? super V> longFunction)
     {
         return this.delegate.collectLong(longFunction);
     }
 
+    @Override
     public MutableShortBag collectShort(ShortFunction<? super V> shortFunction)
     {
         return this.delegate.collectShort(shortFunction);
     }
 
+    @Override
     public <VV> MutableBag<VV> collectIf(Predicate<? super V> predicate, Function<? super V, ? extends VV> function)
     {
         return this.delegate.collectIf(predicate, function);
@@ -531,17 +577,20 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
     /**
      * @deprecated in 8.0. Use {@link OrderedIterable#zipWithIndex()} instead.
      */
+    @Override
     @Deprecated
     public MutableSet<Pair<V, Integer>> zipWithIndex()
     {
         return this.delegate.zipWithIndex(new UnifiedSet<>());
     }
 
+    @Override
     public <VV> MutableSetMultimap<VV, V> groupBy(Function<? super V, ? extends VV> function)
     {
         return this.delegate.groupBy(function, new UnifiedSetMultimap<>());
     }
 
+    @Override
     public <VV> MutableSetMultimap<VV, V> groupByEach(Function<? super V, ? extends Iterable<VV>> function)
     {
         return this.delegate.groupByEach(function, new UnifiedSetMultimap<>());
@@ -550,32 +599,38 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
     /**
      * @deprecated in 8.0. Use {@link OrderedIterable#zip(Iterable)} instead.
      */
+    @Override
     @Deprecated
     public <S> MutableSet<Pair<V, S>> zip(Iterable<S> that)
     {
         return this.delegate.zip(that, new UnifiedSet<>());
     }
 
+    @Override
     public MutableSet<V> select(Predicate<? super V> predicate)
     {
         return this.delegate.select(predicate, new UnifiedSet<>());
     }
 
+    @Override
     public <P> MutableSet<V> selectWith(Predicate2<? super V, ? super P> predicate, P parameter)
     {
         return this.delegate.selectWith(predicate, parameter, new UnifiedSet<>());
     }
 
+    @Override
     public MutableSet<V> reject(Predicate<? super V> predicate)
     {
         return this.delegate.reject(predicate, new UnifiedSet<>());
     }
 
+    @Override
     public <P> MutableSet<V> rejectWith(Predicate2<? super V, ? super P> predicate, P parameter)
     {
         return this.delegate.rejectWith(predicate, parameter, new UnifiedSet<>());
     }
 
+    @Override
     public PartitionMutableSet<V> partition(Predicate<? super V> predicate)
     {
         PartitionMutableSet<V> result = new PartitionUnifiedSet<>();
@@ -583,6 +638,7 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
         return result;
     }
 
+    @Override
     public <P> PartitionMutableSet<V> partitionWith(Predicate2<? super V, ? super P> predicate, P parameter)
     {
         return this.partition(Predicates.bind(predicate, parameter));
@@ -594,41 +650,49 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
         this.inverse.delegate.forEachKey(procedure);
     }
 
+    @Override
     public <VV> MutableBiMap<VV, V> groupByUniqueKey(Function<? super V, ? extends VV> function)
     {
         return new HashBiMap<>(this.delegate.groupByUniqueKey(function));
     }
 
+    @Override
     public <K2, V2> MutableMap<K2, V2> aggregateBy(Function<? super V, ? extends K2> groupBy, Function0<? extends V2> zeroValueFactory, Function2<? super V2, ? super V, ? extends V2> nonMutatingAggregator)
     {
         return this.delegate.aggregateBy(groupBy, zeroValueFactory, nonMutatingAggregator);
     }
 
+    @Override
     public <K2, V2> MutableMap<K2, V2> aggregateInPlaceBy(Function<? super V, ? extends K2> groupBy, Function0<? extends V2> zeroValueFactory, Procedure2<? super V2, ? super V> mutatingAggregator)
     {
         return this.delegate.aggregateInPlaceBy(groupBy, zeroValueFactory, mutatingAggregator);
     }
 
+    @Override
     public <V1> MutableObjectLongMap<V1> sumByInt(Function<? super V, ? extends V1> groupBy, IntFunction<? super V> function)
     {
         return this.delegate.sumByInt(groupBy, function);
     }
 
+    @Override
     public <V1> MutableObjectDoubleMap<V1> sumByFloat(Function<? super V, ? extends V1> groupBy, FloatFunction<? super V> function)
     {
         return this.delegate.sumByFloat(groupBy, function);
     }
 
+    @Override
     public <V1> MutableObjectLongMap<V1> sumByLong(Function<? super V, ? extends V1> groupBy, LongFunction<? super V> function)
     {
         return this.delegate.sumByLong(groupBy, function);
     }
 
+    @Override
     public <V1> MutableObjectDoubleMap<V1> sumByDouble(Function<? super V, ? extends V1> groupBy, DoubleFunction<? super V> function)
     {
         return this.delegate.sumByDouble(groupBy, function);
     }
 
+    @Override
     public <S> MutableSet<S> selectInstancesOf(Class<S> clazz)
     {
         MutableSet<S> result = new UnifiedSet<>();
@@ -655,11 +719,13 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
         private final Iterator<V> iterator = AbstractMutableBiMap.this.delegate.iterator();
         private V currentValue;
 
+        @Override
         public boolean hasNext()
         {
             return this.iterator.hasNext();
         }
 
+        @Override
         public V next()
         {
             V next = this.iterator.next();
@@ -667,6 +733,7 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
             return next;
         }
 
+        @Override
         public void remove()
         {
             this.iterator.remove();
@@ -688,36 +755,43 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
             return AbstractMutableBiMap.this.delegate.keySet().hashCode();
         }
 
+        @Override
         public int size()
         {
             return AbstractMutableBiMap.this.size();
         }
 
+        @Override
         public boolean isEmpty()
         {
             return AbstractMutableBiMap.this.isEmpty();
         }
 
+        @Override
         public boolean contains(Object key)
         {
             return AbstractMutableBiMap.this.delegate.containsKey(key);
         }
 
+        @Override
         public Object[] toArray()
         {
             return AbstractMutableBiMap.this.delegate.keySet().toArray();
         }
 
+        @Override
         public <T> T[] toArray(T[] a)
         {
             return AbstractMutableBiMap.this.delegate.keySet().toArray(a);
         }
 
+        @Override
         public boolean add(K key)
         {
             throw new UnsupportedOperationException("Cannot call add() on " + this.getClass().getSimpleName());
         }
 
+        @Override
         public boolean remove(Object key)
         {
             int oldSize = AbstractMutableBiMap.this.size();
@@ -725,6 +799,7 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
             return AbstractMutableBiMap.this.size() != oldSize;
         }
 
+        @Override
         public boolean containsAll(Collection<?> source)
         {
             for (Object key : source)
@@ -737,11 +812,13 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
             return true;
         }
 
+        @Override
         public boolean addAll(Collection<? extends K> source)
         {
             throw new UnsupportedOperationException("Cannot call addAll() on " + this.getClass().getSimpleName());
         }
 
+        @Override
         public boolean retainAll(Collection<?> collection)
         {
             int oldSize = AbstractMutableBiMap.this.size();
@@ -757,6 +834,7 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
             return oldSize != AbstractMutableBiMap.this.size();
         }
 
+        @Override
         public boolean removeAll(Collection<?> collection)
         {
             int oldSize = AbstractMutableBiMap.this.size();
@@ -767,11 +845,13 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
             return oldSize != AbstractMutableBiMap.this.size();
         }
 
+        @Override
         public void clear()
         {
             AbstractMutableBiMap.this.clear();
         }
 
+        @Override
         public Iterator<K> iterator()
         {
             return AbstractMutableBiMap.this.inverse().iterator();
@@ -793,36 +873,43 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
 
     private class ValuesCollection implements Collection<V>
     {
+        @Override
         public int size()
         {
             return AbstractMutableBiMap.this.size();
         }
 
+        @Override
         public boolean isEmpty()
         {
             return AbstractMutableBiMap.this.isEmpty();
         }
 
+        @Override
         public boolean contains(Object key)
         {
             return AbstractMutableBiMap.this.inverse.delegate.containsKey(key);
         }
 
+        @Override
         public Object[] toArray()
         {
             return AbstractMutableBiMap.this.delegate.values().toArray();
         }
 
+        @Override
         public <T> T[] toArray(T[] a)
         {
             return AbstractMutableBiMap.this.delegate.values().toArray(a);
         }
 
+        @Override
         public boolean add(V v)
         {
             throw new UnsupportedOperationException("Cannot call add() on " + this.getClass().getSimpleName());
         }
 
+        @Override
         public boolean remove(Object value)
         {
             int oldSize = AbstractMutableBiMap.this.size();
@@ -830,6 +917,7 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
             return oldSize != AbstractMutableBiMap.this.size();
         }
 
+        @Override
         public boolean containsAll(Collection<?> collection)
         {
             for (Object key : collection)
@@ -842,11 +930,13 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
             return true;
         }
 
+        @Override
         public boolean addAll(Collection<? extends V> collection)
         {
             throw new UnsupportedOperationException("Cannot call addAll() on " + this.getClass().getSimpleName());
         }
 
+        @Override
         public boolean removeAll(Collection<?> collection)
         {
             int oldSize = AbstractMutableBiMap.this.size();
@@ -857,6 +947,7 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
             return oldSize != AbstractMutableBiMap.this.size();
         }
 
+        @Override
         public boolean retainAll(Collection<?> collection)
         {
             int oldSize = AbstractMutableBiMap.this.size();
@@ -872,11 +963,13 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
             return oldSize != AbstractMutableBiMap.this.size();
         }
 
+        @Override
         public void clear()
         {
             AbstractMutableBiMap.this.clear();
         }
 
+        @Override
         public Iterator<V> iterator()
         {
             return AbstractMutableBiMap.this.iterator();
@@ -911,16 +1004,19 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
             return AbstractMutableBiMap.this.hashCode();
         }
 
+        @Override
         public int size()
         {
             return AbstractMutableBiMap.this.size();
         }
 
+        @Override
         public boolean isEmpty()
         {
             return AbstractMutableBiMap.this.isEmpty();
         }
 
+        @Override
         public boolean contains(Object o)
         {
             if (!(o instanceof Map.Entry))
@@ -937,12 +1033,14 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
             return entry.getValue() == null && AbstractMutableBiMap.this.containsKey(key);
         }
 
+        @Override
         public Object[] toArray()
         {
             Object[] result = new Object[AbstractMutableBiMap.this.size()];
             return this.copyEntries(result);
         }
 
+        @Override
         public <T> T[] toArray(T[] result)
         {
             int size = AbstractMutableBiMap.this.size();
@@ -958,11 +1056,13 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
             return result;
         }
 
+        @Override
         public boolean add(Map.Entry<K, V> entry)
         {
             throw new UnsupportedOperationException();
         }
 
+        @Override
         public boolean remove(Object e)
         {
             if (!(e instanceof Map.Entry))
@@ -991,6 +1091,7 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
             return false;
         }
 
+        @Override
         public boolean containsAll(Collection<?> collection)
         {
             for (Object obj : collection)
@@ -1003,11 +1104,13 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
             return true;
         }
 
+        @Override
         public boolean addAll(Collection<? extends Map.Entry<K, V>> collection)
         {
             throw new UnsupportedOperationException("Cannot call addAll() on " + this.getClass().getSimpleName());
         }
 
+        @Override
         public boolean retainAll(Collection<?> collection)
         {
             int oldSize = AbstractMutableBiMap.this.size();
@@ -1023,6 +1126,7 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
             return oldSize != AbstractMutableBiMap.this.size();
         }
 
+        @Override
         public boolean removeAll(Collection<?> collection)
         {
             boolean changed = false;
@@ -1036,11 +1140,13 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
             return changed;
         }
 
+        @Override
         public void clear()
         {
             AbstractMutableBiMap.this.clear();
         }
 
+        @Override
         public Iterator<Map.Entry<K, V>> iterator()
         {
             return new InternalEntrySetIterator();
@@ -1062,11 +1168,13 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
             private final Iterator<Entry<K, V>> iterator = AbstractMutableBiMap.this.delegate.entrySet().iterator();
             private V currentValue;
 
+            @Override
             public boolean hasNext()
             {
                 return this.iterator.hasNext();
             }
 
+            @Override
             public Entry<K, V> next()
             {
                 Entry<K, V> next = this.iterator.next();
@@ -1075,6 +1183,7 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
                 return result;
             }
 
+            @Override
             public void remove()
             {
                 this.iterator.remove();
@@ -1093,11 +1202,13 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
                 this.value = value;
             }
 
+            @Override
             public K getKey()
             {
                 return this.key;
             }
 
+            @Override
             public V getValue()
             {
                 return this.value;
@@ -1130,6 +1241,7 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
                 return this.key + "=" + this.value;
             }
 
+            @Override
             public V setValue(V value)
             {
                 V result = AbstractMutableBiMap.this.put(this.key, value);

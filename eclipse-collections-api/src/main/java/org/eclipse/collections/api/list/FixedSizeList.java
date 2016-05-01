@@ -21,7 +21,9 @@ import org.eclipse.collections.api.collection.FixedSizeCollection;
 public interface FixedSizeList<T>
         extends MutableList<T>, FixedSizeCollection<T>
 {
+    @Override
     FixedSizeList<T> toReversed();
 
+    @Override
     FixedSizeList<T> tap(Procedure<? super T> procedure);
 }

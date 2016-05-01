@@ -69,6 +69,7 @@ final class ImmutableArrayList<T>
         return new ImmutableArrayList<>(elements.clone());
     }
 
+    @Override
     public ImmutableList<T> newWith(T newItem)
     {
         int oldSize = this.size();
@@ -125,6 +126,7 @@ final class ImmutableArrayList<T>
         return this.isEmpty() ? null : this.items[this.items.length - 1];
     }
 
+    @Override
     public void each(Procedure<? super T> procedure)
     {
         for (T each : this.items)
@@ -139,11 +141,13 @@ final class ImmutableArrayList<T>
         InternalArrayIterate.forEachWithIndex(this.items, this.items.length, objectIntProcedure);
     }
 
+    @Override
     public void batchForEach(Procedure<? super T> procedure, int sectionIndex, int sectionCount)
     {
         InternalArrayIterate.batchForEach(procedure, this.items, this.items.length, sectionIndex, sectionCount);
     }
 
+    @Override
     public int getBatchCount(int batchSize)
     {
         return Math.max(1, this.size() / batchSize);
@@ -311,6 +315,7 @@ final class ImmutableArrayList<T>
         return result;
     }
 
+    @Override
     public int size()
     {
         return this.items.length;
@@ -390,6 +395,7 @@ final class ImmutableArrayList<T>
         return Iterate.allSatisfy(collection, Predicates.in(this.items));
     }
 
+    @Override
     public T get(int index)
     {
         return this.items[index];

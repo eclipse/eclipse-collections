@@ -86,36 +86,43 @@ public final class MultiReaderHashBagMultimap<K, V>
         return MultiReaderHashBag.newBag();
     }
 
+    @Override
     public MultiReaderHashBagMultimap<K, V> newEmpty()
     {
         return new MultiReaderHashBagMultimap<>();
     }
 
+    @Override
     public MutableBagMultimap<V, K> flip()
     {
         return Iterate.flip(this);
     }
 
+    @Override
     public <V2> MultiReaderHashBagMultimap<K, V2> collectValues(Function<? super V, ? extends V2> function)
     {
         return this.collectValues(function, MultiReaderHashBagMultimap.newMultimap());
     }
 
+    @Override
     public MultiReaderHashBagMultimap<K, V> selectKeysValues(Predicate2<? super K, ? super V> predicate)
     {
         return this.selectKeysValues(predicate, this.newEmpty());
     }
 
+    @Override
     public MultiReaderHashBagMultimap<K, V> rejectKeysValues(Predicate2<? super K, ? super V> predicate)
     {
         return this.rejectKeysValues(predicate, this.newEmpty());
     }
 
+    @Override
     public MultiReaderHashBagMultimap<K, V> selectKeysMultiValues(Predicate2<? super K, ? super Iterable<V>> predicate)
     {
         return this.selectKeysMultiValues(predicate, this.newEmpty());
     }
 
+    @Override
     public MultiReaderHashBagMultimap<K, V> rejectKeysMultiValues(Predicate2<? super K, ? super Iterable<V>> predicate)
     {
         return this.rejectKeysMultiValues(predicate, this.newEmpty());

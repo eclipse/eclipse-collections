@@ -37,6 +37,7 @@ class ImmutableSetSerializationProxy<T> implements Externalizable
         this.set = set;
     }
 
+    @Override
     public void writeExternal(ObjectOutput out) throws IOException
     {
         out.writeInt(this.set.size());
@@ -60,6 +61,7 @@ class ImmutableSetSerializationProxy<T> implements Externalizable
         }
     }
 
+    @Override
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
     {
         int size = in.readInt();

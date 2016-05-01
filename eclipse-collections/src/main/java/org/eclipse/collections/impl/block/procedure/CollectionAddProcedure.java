@@ -33,6 +33,7 @@ public final class CollectionAddProcedure<T> implements Procedure<T>
         return new CollectionAddProcedure<>(newCollection);
     }
 
+    @Override
     public void value(T object)
     {
         this.collection.add(object);

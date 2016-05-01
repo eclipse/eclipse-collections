@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -52,85 +52,125 @@ import org.eclipse.collections.api.tuple.Pair;
 public interface ImmutableSortedSet<T>
         extends SortedSetIterable<T>, ImmutableSetIterable<T>
 {
+    @Override
     ImmutableSortedSet<T> newWith(T element);
 
+    @Override
     ImmutableSortedSet<T> newWithout(T element);
 
+    @Override
     ImmutableSortedSet<T> newWithAll(Iterable<? extends T> elements);
 
+    @Override
     ImmutableSortedSet<T> newWithoutAll(Iterable<? extends T> elements);
 
+    @Override
     ImmutableSortedSet<T> tap(Procedure<? super T> procedure);
 
+    @Override
     ImmutableSortedSet<T> select(Predicate<? super T> predicate);
 
+    @Override
     <P> ImmutableSortedSet<T> selectWith(Predicate2<? super T, ? super P> predicate, P parameter);
 
+    @Override
     ImmutableSortedSet<T> reject(Predicate<? super T> predicate);
 
+    @Override
     <P> ImmutableSortedSet<T> rejectWith(Predicate2<? super T, ? super P> predicate, P parameter);
 
+    @Override
     PartitionImmutableSortedSet<T> partition(Predicate<? super T> predicate);
 
+    @Override
     <P> PartitionImmutableSortedSet<T> partitionWith(Predicate2<? super T, ? super P> predicate, P parameter);
 
+    @Override
     PartitionImmutableSortedSet<T> partitionWhile(Predicate<? super T> predicate);
 
+    @Override
     <S> ImmutableSortedSet<S> selectInstancesOf(Class<S> clazz);
 
+    @Override
     <V> ImmutableList<V> collect(Function<? super T, ? extends V> function);
 
+    @Override
     ImmutableBooleanList collectBoolean(BooleanFunction<? super T> booleanFunction);
 
+    @Override
     ImmutableByteList collectByte(ByteFunction<? super T> byteFunction);
 
+    @Override
     ImmutableCharList collectChar(CharFunction<? super T> charFunction);
 
+    @Override
     ImmutableDoubleList collectDouble(DoubleFunction<? super T> doubleFunction);
 
+    @Override
     ImmutableFloatList collectFloat(FloatFunction<? super T> floatFunction);
 
+    @Override
     ImmutableIntList collectInt(IntFunction<? super T> intFunction);
 
+    @Override
     ImmutableLongList collectLong(LongFunction<? super T> longFunction);
 
+    @Override
     ImmutableShortList collectShort(ShortFunction<? super T> shortFunction);
 
+    @Override
     <P, V> ImmutableList<V> collectWith(Function2<? super T, ? super P, ? extends V> function, P parameter);
 
+    @Override
     <V> ImmutableList<V> collectIf(Predicate<? super T> predicate, Function<? super T, ? extends V> function);
 
+    @Override
     <V> ImmutableList<V> flatCollect(Function<? super T, ? extends Iterable<V>> function);
 
+    @Override
     ImmutableSortedSet<T> distinct();
 
+    @Override
     ImmutableSortedSet<T> takeWhile(Predicate<? super T> predicate);
 
+    @Override
     ImmutableSortedSet<T> dropWhile(Predicate<? super T> predicate);
 
+    @Override
     <V> ImmutableSortedSetMultimap<V, T> groupBy(Function<? super T, ? extends V> function);
 
+    @Override
     <V> ImmutableSortedSetMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function);
 
+    @Override
     <S> ImmutableList<Pair<T, S>> zip(Iterable<S> that);
 
+    @Override
     ImmutableSortedSet<Pair<T, Integer>> zipWithIndex();
 
+    @Override
     ImmutableSortedSet<T> toReversed();
 
+    @Override
     ImmutableSortedSet<T> take(int count);
 
+    @Override
     ImmutableSortedSet<T> drop(int count);
 
     SortedSet<T> castToSortedSet();
 
+    @Override
     ImmutableSortedSet<T> union(SetIterable<? extends T> set);
 
+    @Override
     ImmutableSortedSet<T> intersect(SetIterable<? extends T> set);
 
+    @Override
     ImmutableSortedSet<T> difference(SetIterable<? extends T> subtrahendSet);
 
+    @Override
     ImmutableSortedSet<T> symmetricDifference(SetIterable<? extends T> setB);
 
+    @Override
     ImmutableSortedSet<SortedSetIterable<T>> powerSet();
 }

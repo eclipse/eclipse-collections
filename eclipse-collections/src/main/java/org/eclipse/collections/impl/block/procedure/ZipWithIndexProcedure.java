@@ -37,6 +37,7 @@ public final class ZipWithIndexProcedure<T, R extends Collection<Pair<T, Integer
         return new ZipWithIndexProcedure<>(target);
     }
 
+    @Override
     public void value(T each)
     {
         this.target.add(Tuples.pair(each, Integer.valueOf(this.index)));

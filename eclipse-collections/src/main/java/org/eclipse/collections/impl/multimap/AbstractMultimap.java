@@ -62,16 +62,19 @@ public abstract class AbstractMultimap<K, V, C extends RichIterable<V>>
 
     // Query Operations
 
+    @Override
     public boolean containsKey(Object key)
     {
         return this.getMap().containsKey(key);
     }
 
+    @Override
     public boolean containsValue(Object value)
     {
         return this.getMap().anySatisfy(collection -> collection.contains(value));
     }
 
+    @Override
     public boolean containsKeyAndValue(Object key, Object value)
     {
         C collection = this.getMap().get(key);
@@ -80,16 +83,19 @@ public abstract class AbstractMultimap<K, V, C extends RichIterable<V>>
 
     // Views
 
+    @Override
     public RichIterable<K> keysView()
     {
         return this.getMap().keysView();
     }
 
+    @Override
     public RichIterable<RichIterable<V>> multiValuesView()
     {
         return this.getMap().valuesView().collect(UnmodifiableRichIterable::of);
     }
 
+    @Override
     public Bag<K> keyBag()
     {
         MutableBag<K> bag = Bags.mutable.empty();
@@ -97,16 +103,19 @@ public abstract class AbstractMultimap<K, V, C extends RichIterable<V>>
         return bag;
     }
 
+    @Override
     public RichIterable<V> valuesView()
     {
         return this.getMap().valuesView().flatCollect(Functions.<Iterable<V>>identity());
     }
 
+    @Override
     public RichIterable<Pair<K, RichIterable<V>>> keyMultiValuePairsView()
     {
         return this.getMap().keyValuesView().collect(pair -> Tuples.pair(pair.getOne(), UnmodifiableRichIterable.of(pair.getTwo())));
     }
 
+    @Override
     public RichIterable<Pair<K, V>> keyValuePairsView()
     {
         return this.keyMultiValuePairsView().flatCollect(pair -> pair.getTwo().collect(new KeyValuePairFunction<>(pair.getOne())));
@@ -155,21 +164,25 @@ public abstract class AbstractMultimap<K, V, C extends RichIterable<V>>
         return this.getMap().toString();
     }
 
+    @Override
     public boolean notEmpty()
     {
         return !this.isEmpty();
     }
 
+    @Override
     public void forEachValue(Procedure<? super V> procedure)
     {
         this.getMap().forEachValue(collection -> collection.forEach(procedure));
     }
 
+    @Override
     public void forEachKey(Procedure<? super K> procedure)
     {
         this.getMap().forEachKey(procedure);
     }
 
+    @Override
     public void forEachKeyValue(Procedure2<? super K, ? super V> procedure)
     {
         Procedure2<V, K> innerProcedure = (value, key) -> procedure.value(key, value);
@@ -177,11 +190,13 @@ public abstract class AbstractMultimap<K, V, C extends RichIterable<V>>
         this.getMap().forEachKeyValue((key, collection) -> collection.forEachWith(innerProcedure, key));
     }
 
+    @Override
     public void forEachKeyMultiValues(Procedure2<? super K, ? super Iterable<V>> procedure)
     {
         this.getMap().forEachKeyValue(procedure);
     }
 
+    @Override
     public <R extends MutableMultimap<K, V>> R selectKeysValues(Predicate2<? super K, ? super V> predicate, R target)
     {
         this.getMap().forEachKeyValue((key, collection) -> {
@@ -191,6 +206,7 @@ public abstract class AbstractMultimap<K, V, C extends RichIterable<V>>
         return target;
     }
 
+    @Override
     public <R extends MutableMultimap<K, V>> R rejectKeysValues(Predicate2<? super K, ? super V> predicate, R target)
     {
         this.getMap().forEachKeyValue((key, collection) -> {
@@ -200,6 +216,7 @@ public abstract class AbstractMultimap<K, V, C extends RichIterable<V>>
         return target;
     }
 
+    @Override
     public <R extends MutableMultimap<K, V>> R selectKeysMultiValues(Predicate2<? super K, ? super Iterable<V>> predicate, R target)
     {
         this.forEachKeyMultiValues((key, collection) -> {
@@ -211,6 +228,7 @@ public abstract class AbstractMultimap<K, V, C extends RichIterable<V>>
         return target;
     }
 
+    @Override
     public <R extends MutableMultimap<K, V>> R rejectKeysMultiValues(Predicate2<? super K, ? super Iterable<V>> predicate, R target)
     {
         this.forEachKeyMultiValues((key, collection) -> {
@@ -233,18 +251,21 @@ public abstract class AbstractMultimap<K, V, C extends RichIterable<V>>
             this.key = key;
         }
 
+        @Override
         public Pair<K, V> valueOf(V value)
         {
             return Tuples.pair(this.key, value);
         }
     }
 
+    @Override
     public <K2, V2, R extends MutableMultimap<K2, V2>> R collectKeysValues(Function2<? super K, ? super V, Pair<K2, V2>> function, R target)
     {
         this.getMap().forEachKeyValue((key, collection) -> collection.each(value -> target.add(function.value(key, value))));
         return target;
     }
 
+    @Override
     public <V2, R extends MutableMultimap<K, V2>> R collectValues(Function<? super V, ? extends V2> function, R target)
     {
         this.getMap().forEachKeyValue((key, collection) -> target.putAll(key, collection.collect(function)));

@@ -44,11 +44,13 @@ public abstract class AbstractMutableSetMultimap<K, V> extends AbstractMutableMu
         super(size);
     }
 
+    @Override
     public MutableSetMultimap<K, V> toMutable()
     {
         return new UnifiedSetMultimap<>(this);
     }
 
+    @Override
     public ImmutableSetMultimap<K, V> toImmutable()
     {
         MutableMap<K, ImmutableSet<V>> map = UnifiedMap.newMap();
@@ -58,11 +60,13 @@ public abstract class AbstractMutableSetMultimap<K, V> extends AbstractMutableMu
         return new ImmutableSetMultimapImpl<>(map);
     }
 
+    @Override
     public <K2, V2> MutableBagMultimap<K2, V2> collectKeysValues(Function2<? super K, ? super V, Pair<K2, V2>> function)
     {
         return this.collectKeysValues(function, HashBagMultimap.newMultimap());
     }
 
+    @Override
     public <V2> MutableBagMultimap<K, V2> collectValues(Function<? super V, ? extends V2> function)
     {
         return this.collectValues(function, HashBagMultimap.newMultimap());

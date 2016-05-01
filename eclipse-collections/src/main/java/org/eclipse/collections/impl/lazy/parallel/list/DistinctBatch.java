@@ -35,6 +35,7 @@ public class DistinctBatch<T> extends AbstractBatch<T> implements UnsortedSetBat
         this.distinct = distinct;
     }
 
+    @Override
     public void forEach(Procedure<? super T> procedure)
     {
         this.batch.forEach(each -> {
@@ -45,16 +46,19 @@ public class DistinctBatch<T> extends AbstractBatch<T> implements UnsortedSetBat
         });
     }
 
+    @Override
     public UnsortedSetBatch<T> select(Predicate<? super T> predicate)
     {
         return new SelectUnsortedSetBatch<>(this, predicate);
     }
 
+    @Override
     public <V> UnsortedBagBatch<V> collect(Function<? super T, ? extends V> function)
     {
         return new CollectUnsortedBagBatch<>(this, function);
     }
 
+    @Override
     public <V> UnsortedBagBatch<V> flatCollect(Function<? super T, ? extends Iterable<V>> function)
     {
         return new FlatCollectUnsortedBagBatch<>(this, function);

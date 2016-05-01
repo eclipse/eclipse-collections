@@ -66,16 +66,19 @@ public final class CollectionAdapter<T>
         return this.delegate;
     }
 
+    @Override
     public MutableCollection<T> asUnmodifiable()
     {
         return UnmodifiableMutableCollection.of(this);
     }
 
+    @Override
     public MutableCollection<T> asSynchronized()
     {
         return SynchronizedMutableCollection.of(this);
     }
 
+    @Override
     public ImmutableCollection<T> toImmutable()
     {
         return this.delegate instanceof Set
@@ -162,24 +165,28 @@ public final class CollectionAdapter<T>
         return this;
     }
 
+    @Override
     public CollectionAdapter<T> with(T element)
     {
         this.delegate.add(element);
         return this;
     }
 
+    @Override
     public CollectionAdapter<T> without(T element)
     {
         this.delegate.remove(element);
         return this;
     }
 
+    @Override
     public CollectionAdapter<T> withAll(Iterable<? extends T> elements)
     {
         Iterate.forEach(elements, new CollectionAddProcedure<>(this.delegate));
         return this;
     }
 
+    @Override
     public CollectionAdapter<T> withoutAll(Iterable<? extends T> elements)
     {
         Iterate.forEach(elements, new CollectionRemoveProcedure<>(this.delegate));
@@ -189,6 +196,7 @@ public final class CollectionAdapter<T>
     /**
      * @deprecated use {@link FastList#newList()} or {@link UnifiedSet#newSet()} instead
      */
+    @Override
     @Deprecated
     public MutableCollection<T> newEmpty()
     {

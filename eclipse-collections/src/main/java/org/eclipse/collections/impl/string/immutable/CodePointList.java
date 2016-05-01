@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -97,6 +97,7 @@ public class CodePointList extends AbstractIntIterable implements CharSequence, 
         return builder;
     }
 
+    @Override
     public char charAt(int index)
     {
         int currentIndex = 0;
@@ -121,6 +122,7 @@ public class CodePointList extends AbstractIntIterable implements CharSequence, 
         throw new IndexOutOfBoundsException("Char value at " + index + " is out of bounds for length " + currentIndex);
     }
 
+    @Override
     public int length()
     {
         int length = 0;
@@ -131,6 +133,7 @@ public class CodePointList extends AbstractIntIterable implements CharSequence, 
         return length;
     }
 
+    @Override
     public String subSequence(int start, int end)
     {
         StringBuilder builder = this.toStringBuilder();
@@ -146,131 +149,157 @@ public class CodePointList extends AbstractIntIterable implements CharSequence, 
         return this.toStringBuilder().toString();
     }
 
+    @Override
     public IntIterator intIterator()
     {
         return this.codePoints.intIterator();
     }
 
+    @Override
     public int[] toArray()
     {
         return this.codePoints.toArray();
     }
 
+    @Override
     public boolean contains(int expected)
     {
         return this.codePoints.contains(expected);
     }
 
+    @Override
     public void forEach(IntProcedure procedure)
     {
         this.each(procedure);
     }
 
+    @Override
     public void each(IntProcedure procedure)
     {
         this.codePoints.each(procedure);
     }
 
+    @Override
     public CodePointList distinct()
     {
         return new CodePointList(this.codePoints.distinct());
     }
 
+    @Override
     public CodePointList newWith(int element)
     {
         return new CodePointList(this.codePoints.newWith(element));
     }
 
+    @Override
     public CodePointList newWithout(int element)
     {
         return new CodePointList(this.codePoints.newWithout(element));
     }
 
+    @Override
     public CodePointList newWithAll(IntIterable elements)
     {
         return new CodePointList(this.codePoints.newWithAll(elements));
     }
 
+    @Override
     public CodePointList newWithoutAll(IntIterable elements)
     {
         return new CodePointList(this.codePoints.newWithoutAll(elements));
     }
 
+    @Override
     public CodePointList toReversed()
     {
         return new CodePointList(this.codePoints.toReversed());
     }
 
+    @Override
     public ImmutableIntList subList(int fromIndex, int toIndex)
     {
         return this.codePoints.subList(fromIndex, toIndex);
     }
 
+    @Override
     public int get(int index)
     {
         return this.codePoints.get(index);
     }
 
+    @Override
     public long dotProduct(IntList list)
     {
         return this.codePoints.dotProduct(list);
     }
 
+    @Override
     public int binarySearch(int value)
     {
         return this.codePoints.binarySearch(value);
     }
 
+    @Override
     public int lastIndexOf(int value)
     {
         return this.codePoints.lastIndexOf(value);
     }
 
+    @Override
     public ImmutableIntList toImmutable()
     {
         return this;
     }
 
+    @Override
     public int getLast()
     {
         return this.codePoints.getLast();
     }
 
+    @Override
     public LazyIntIterable asReversed()
     {
         return this.codePoints.asReversed();
     }
 
+    @Override
     public <T> T injectIntoWithIndex(T injectedValue, ObjectIntIntToObjectFunction<? super T, ? extends T> function)
     {
         return this.codePoints.injectIntoWithIndex(injectedValue, function);
     }
 
+    @Override
     public int getFirst()
     {
         return this.codePoints.getFirst();
     }
 
+    @Override
     public int indexOf(int value)
     {
         return this.codePoints.indexOf(value);
     }
 
+    @Override
     public void forEachWithIndex(IntIntProcedure procedure)
     {
         this.codePoints.forEachWithIndex(procedure);
     }
 
+    @Override
     public CodePointList select(IntPredicate predicate)
     {
         return new CodePointList(this.codePoints.select(predicate));
     }
 
+    @Override
     public CodePointList reject(IntPredicate predicate)
     {
         return new CodePointList(this.codePoints.reject(predicate));
     }
 
+    @Override
     public <V> ImmutableList<V> collect(IntToObjectFunction<? extends V> function)
     {
         return this.codePoints.collect(function);
@@ -287,26 +316,31 @@ public class CodePointList extends AbstractIntIterable implements CharSequence, 
         return new CodePointList(collected.toImmutable());
     }
 
+    @Override
     public int detectIfNone(IntPredicate predicate, int ifNone)
     {
         return this.codePoints.detectIfNone(predicate, ifNone);
     }
 
+    @Override
     public int count(IntPredicate predicate)
     {
         return this.codePoints.count(predicate);
     }
 
+    @Override
     public boolean anySatisfy(IntPredicate predicate)
     {
         return this.codePoints.anySatisfy(predicate);
     }
 
+    @Override
     public boolean allSatisfy(IntPredicate predicate)
     {
         return this.codePoints.allSatisfy(predicate);
     }
 
+    @Override
     public boolean noneSatisfy(IntPredicate predicate)
     {
         return this.codePoints.noneSatisfy(predicate);
@@ -330,31 +364,37 @@ public class CodePointList extends AbstractIntIterable implements CharSequence, 
         return this.codePoints.toBag();
     }
 
+    @Override
     public <T> T injectInto(T injectedValue, ObjectIntToObjectFunction<? super T, ? extends T> function)
     {
         return this.codePoints.injectInto(injectedValue, function);
     }
 
+    @Override
     public long sum()
     {
         return this.codePoints.sum();
     }
 
+    @Override
     public int max()
     {
         return this.codePoints.max();
     }
 
+    @Override
     public int min()
     {
         return this.codePoints.min();
     }
 
+    @Override
     public int size()
     {
         return this.codePoints.size();
     }
 
+    @Override
     public void appendString(Appendable appendable, String start, String separator, String end)
     {
         try

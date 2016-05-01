@@ -39,6 +39,7 @@ class ImmutableMapWithHashingStrategySerializationProxy<K, V> implements Externa
         this.hashingStrategy = hashingStrategy;
     }
 
+    @Override
     public void writeExternal(ObjectOutput out) throws IOException
     {
         out.writeObject(this.hashingStrategy);
@@ -64,6 +65,7 @@ class ImmutableMapWithHashingStrategySerializationProxy<K, V> implements Externa
         }
     }
 
+    @Override
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
     {
         HashingStrategy<? super K> strategy = (HashingStrategy<? super K>) in.readObject();

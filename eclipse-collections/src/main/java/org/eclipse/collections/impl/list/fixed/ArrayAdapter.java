@@ -117,6 +117,7 @@ public final class ArrayAdapter<T>
         return new ArrayAdapter<>(elements.clone());
     }
 
+    @Override
     public T set(int index, T element)
     {
         T oldValue = this.items[index];

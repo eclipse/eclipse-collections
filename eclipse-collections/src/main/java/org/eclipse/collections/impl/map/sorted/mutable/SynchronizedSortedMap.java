@@ -100,6 +100,7 @@ public class SynchronizedSortedMap<K, V>
         return (MutableSortedMap<K, V>) super.getDelegate();
     }
 
+    @Override
     public Comparator<? super K> comparator()
     {
         synchronized (this.lock)
@@ -108,6 +109,7 @@ public class SynchronizedSortedMap<K, V>
         }
     }
 
+    @Override
     public MutableSortedMap<K, V> withKeyValue(K key, V value)
     {
         synchronized (this.lock)
@@ -120,17 +122,20 @@ public class SynchronizedSortedMap<K, V>
     /**
      * @deprecated in 6.0 Use {@link #withAllKeyValueArguments(Pair[])} instead. Inlineable.
      */
+    @Override
     @Deprecated
     public MutableSortedMap<K, V> with(Pair<K, V>... pairs)
     {
         return this.withAllKeyValueArguments(pairs);
     }
 
+    @Override
     public MutableSortedMap<K, V> withAllKeyValueArguments(Pair<? extends K, ? extends V>... keyValuePairs)
     {
         return this.withAllKeyValues(ArrayAdapter.adapt(keyValuePairs));
     }
 
+    @Override
     public MutableSortedMap<K, V> withAllKeyValues(Iterable<? extends Pair<? extends K, ? extends V>> keyValues)
     {
         synchronized (this.lock)
@@ -143,12 +148,14 @@ public class SynchronizedSortedMap<K, V>
         }
     }
 
+    @Override
     public MutableSortedMap<K, V> withoutKey(K key)
     {
         this.remove(key);
         return this;
     }
 
+    @Override
     public MutableSortedMap<K, V> withoutAllKeys(Iterable<? extends K> keys)
     {
         synchronized (this.lock)
@@ -161,6 +168,7 @@ public class SynchronizedSortedMap<K, V>
         }
     }
 
+    @Override
     public MutableSortedMap<K, V> newEmpty()
     {
         synchronized (this.lock)
@@ -183,6 +191,7 @@ public class SynchronizedSortedMap<K, V>
         return new SynchronizedMapSerializationProxy<>(this.getDelegate());
     }
 
+    @Override
     public <E> MutableSortedMap<K, V> collectKeysAndValues(
             Iterable<E> iterable,
             Function<? super E, ? extends K> keyFunction,
@@ -194,6 +203,7 @@ public class SynchronizedSortedMap<K, V>
         }
     }
 
+    @Override
     public K firstKey()
     {
         synchronized (this.getLock())
@@ -202,6 +212,7 @@ public class SynchronizedSortedMap<K, V>
         }
     }
 
+    @Override
     public K lastKey()
     {
         synchronized (this.getLock())
@@ -210,6 +221,7 @@ public class SynchronizedSortedMap<K, V>
         }
     }
 
+    @Override
     public MutableSortedMap<K, V> tap(Procedure<? super V> procedure)
     {
         synchronized (this.lock)
@@ -219,6 +231,7 @@ public class SynchronizedSortedMap<K, V>
         }
     }
 
+    @Override
     public MutableList<V> select(Predicate<? super V> predicate)
     {
         synchronized (this.lock)
@@ -227,6 +240,7 @@ public class SynchronizedSortedMap<K, V>
         }
     }
 
+    @Override
     public <P> MutableList<V> selectWith(Predicate2<? super V, ? super P> predicate, P parameter)
     {
         synchronized (this.lock)
@@ -235,6 +249,7 @@ public class SynchronizedSortedMap<K, V>
         }
     }
 
+    @Override
     public MutableList<V> reject(Predicate<? super V> predicate)
     {
         synchronized (this.lock)
@@ -243,6 +258,7 @@ public class SynchronizedSortedMap<K, V>
         }
     }
 
+    @Override
     public <P> MutableList<V> rejectWith(Predicate2<? super V, ? super P> predicate, P parameter)
     {
         synchronized (this.lock)
@@ -251,6 +267,7 @@ public class SynchronizedSortedMap<K, V>
         }
     }
 
+    @Override
     public PartitionMutableList<V> partition(Predicate<? super V> predicate)
     {
         synchronized (this.lock)
@@ -259,6 +276,7 @@ public class SynchronizedSortedMap<K, V>
         }
     }
 
+    @Override
     public MutableList<Pair<V, Integer>> zipWithIndex()
     {
         synchronized (this.lock)
@@ -267,6 +285,7 @@ public class SynchronizedSortedMap<K, V>
         }
     }
 
+    @Override
     public <P> PartitionMutableList<V> partitionWith(Predicate2<? super V, ? super P> predicate, P parameter)
     {
         synchronized (this.lock)
@@ -275,6 +294,7 @@ public class SynchronizedSortedMap<K, V>
         }
     }
 
+    @Override
     public <S> MutableList<S> selectInstancesOf(Class<S> clazz)
     {
         synchronized (this.lock)
@@ -283,6 +303,7 @@ public class SynchronizedSortedMap<K, V>
         }
     }
 
+    @Override
     public <R> MutableList<R> collect(Function<? super V, ? extends R> function)
     {
         synchronized (this.lock)
@@ -291,6 +312,7 @@ public class SynchronizedSortedMap<K, V>
         }
     }
 
+    @Override
     public MutableBooleanList collectBoolean(BooleanFunction<? super V> booleanFunction)
     {
         synchronized (this.lock)
@@ -299,6 +321,7 @@ public class SynchronizedSortedMap<K, V>
         }
     }
 
+    @Override
     public MutableByteList collectByte(ByteFunction<? super V> byteFunction)
     {
         synchronized (this.lock)
@@ -307,6 +330,7 @@ public class SynchronizedSortedMap<K, V>
         }
     }
 
+    @Override
     public MutableCharList collectChar(CharFunction<? super V> charFunction)
     {
         synchronized (this.lock)
@@ -315,6 +339,7 @@ public class SynchronizedSortedMap<K, V>
         }
     }
 
+    @Override
     public MutableDoubleList collectDouble(DoubleFunction<? super V> doubleFunction)
     {
         synchronized (this.lock)
@@ -323,6 +348,7 @@ public class SynchronizedSortedMap<K, V>
         }
     }
 
+    @Override
     public MutableFloatList collectFloat(FloatFunction<? super V> floatFunction)
     {
         synchronized (this.lock)
@@ -331,6 +357,7 @@ public class SynchronizedSortedMap<K, V>
         }
     }
 
+    @Override
     public MutableIntList collectInt(IntFunction<? super V> intFunction)
     {
         synchronized (this.lock)
@@ -339,6 +366,7 @@ public class SynchronizedSortedMap<K, V>
         }
     }
 
+    @Override
     public MutableLongList collectLong(LongFunction<? super V> longFunction)
     {
         synchronized (this.lock)
@@ -347,6 +375,7 @@ public class SynchronizedSortedMap<K, V>
         }
     }
 
+    @Override
     public MutableShortList collectShort(ShortFunction<? super V> shortFunction)
     {
         synchronized (this.lock)
@@ -355,6 +384,7 @@ public class SynchronizedSortedMap<K, V>
         }
     }
 
+    @Override
     public <P, VV> MutableList<VV> collectWith(Function2<? super V, ? super P, ? extends VV> function, P parameter)
     {
         synchronized (this.lock)
@@ -363,6 +393,7 @@ public class SynchronizedSortedMap<K, V>
         }
     }
 
+    @Override
     public <R> MutableList<R> collectIf(
             Predicate<? super V> predicate,
             Function<? super V, ? extends R> function)
@@ -373,6 +404,7 @@ public class SynchronizedSortedMap<K, V>
         }
     }
 
+    @Override
     public <R> MutableList<R> flatCollect(Function<? super V, ? extends Iterable<R>> function)
     {
         synchronized (this.lock)
@@ -408,6 +440,7 @@ public class SynchronizedSortedMap<K, V>
         }
     }
 
+    @Override
     public <KK> MutableListMultimap<KK, V> groupBy(Function<? super V, ? extends KK> function)
     {
         synchronized (this.lock)
@@ -416,6 +449,7 @@ public class SynchronizedSortedMap<K, V>
         }
     }
 
+    @Override
     public <KK> MutableListMultimap<KK, V> groupByEach(Function<? super V, ? extends Iterable<KK>> function)
     {
         synchronized (this.lock)
@@ -424,6 +458,7 @@ public class SynchronizedSortedMap<K, V>
         }
     }
 
+    @Override
     public <S> MutableList<Pair<V, S>> zip(Iterable<S> that)
     {
         synchronized (this.lock)
@@ -441,6 +476,7 @@ public class SynchronizedSortedMap<K, V>
         }
     }
 
+    @Override
     public MutableMapIterable<V, K> flipUniqueValues()
     {
         synchronized (this.lock)
@@ -449,6 +485,7 @@ public class SynchronizedSortedMap<K, V>
         }
     }
 
+    @Override
     public MutableSortedSetMultimap<V, K> flip()
     {
         synchronized (this.lock)
@@ -457,6 +494,7 @@ public class SynchronizedSortedMap<K, V>
         }
     }
 
+    @Override
     public MutableSortedMap<K, V> select(Predicate2<? super K, ? super V> predicate)
     {
         synchronized (this.lock)
@@ -465,6 +503,7 @@ public class SynchronizedSortedMap<K, V>
         }
     }
 
+    @Override
     public MutableSortedMap<K, V> reject(Predicate2<? super K, ? super V> predicate)
     {
         synchronized (this.lock)
@@ -473,6 +512,7 @@ public class SynchronizedSortedMap<K, V>
         }
     }
 
+    @Override
     public <K2, V2> MutableMap<K2, V2> collect(Function2<? super K, ? super V, Pair<K2, V2>> function)
     {
         synchronized (this.lock)
@@ -481,6 +521,7 @@ public class SynchronizedSortedMap<K, V>
         }
     }
 
+    @Override
     public <R> MutableSortedMap<K, R> collectValues(Function2<? super K, ? super V, ? extends R> function)
     {
         synchronized (this.lock)
@@ -489,16 +530,19 @@ public class SynchronizedSortedMap<K, V>
         }
     }
 
+    @Override
     public RichIterable<K> keysView()
     {
         return LazyIterate.adapt(this.keySet());
     }
 
+    @Override
     public RichIterable<V> valuesView()
     {
         return LazyIterate.adapt(this.values());
     }
 
+    @Override
     public MutableSortedMap<K, V> asUnmodifiable()
     {
         synchronized (this.lock)
@@ -507,11 +551,13 @@ public class SynchronizedSortedMap<K, V>
         }
     }
 
+    @Override
     public MutableSortedMap<K, V> asSynchronized()
     {
         return this;
     }
 
+    @Override
     public ImmutableSortedMap<K, V> toImmutable()
     {
         synchronized (this.lock)
@@ -520,6 +566,7 @@ public class SynchronizedSortedMap<K, V>
         }
     }
 
+    @Override
     public MutableSet<K> keySet()
     {
         synchronized (this.lock)
@@ -528,6 +575,7 @@ public class SynchronizedSortedMap<K, V>
         }
     }
 
+    @Override
     public MutableCollection<V> values()
     {
         synchronized (this.lock)
@@ -536,6 +584,7 @@ public class SynchronizedSortedMap<K, V>
         }
     }
 
+    @Override
     public MutableSet<Entry<K, V>> entrySet()
     {
         synchronized (this.lock)
@@ -544,6 +593,7 @@ public class SynchronizedSortedMap<K, V>
         }
     }
 
+    @Override
     public MutableSortedMap<K, V> headMap(K toKey)
     {
         synchronized (this.lock)
@@ -552,6 +602,7 @@ public class SynchronizedSortedMap<K, V>
         }
     }
 
+    @Override
     public MutableSortedMap<K, V> tailMap(K fromKey)
     {
         synchronized (this.lock)
@@ -560,6 +611,7 @@ public class SynchronizedSortedMap<K, V>
         }
     }
 
+    @Override
     public MutableSortedMap<K, V> subMap(K fromKey, K toKey)
     {
         synchronized (this.lock)
@@ -568,6 +620,7 @@ public class SynchronizedSortedMap<K, V>
         }
     }
 
+    @Override
     public void reverseForEach(Procedure<? super V> procedure)
     {
         synchronized (this.lock)
@@ -576,11 +629,13 @@ public class SynchronizedSortedMap<K, V>
         }
     }
 
+    @Override
     public LazyIterable<V> asReversed()
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".asReversed() not implemented yet");
     }
 
+    @Override
     public int detectLastIndex(Predicate<? super V> predicate)
     {
         synchronized (this.lock)
@@ -589,6 +644,7 @@ public class SynchronizedSortedMap<K, V>
         }
     }
 
+    @Override
     public int indexOf(Object object)
     {
         synchronized (this.lock)
@@ -597,6 +653,7 @@ public class SynchronizedSortedMap<K, V>
         }
     }
 
+    @Override
     public <S> boolean corresponds(OrderedIterable<S> other, Predicate2<? super V, ? super S> predicate)
     {
         synchronized (this.lock)
@@ -605,6 +662,7 @@ public class SynchronizedSortedMap<K, V>
         }
     }
 
+    @Override
     public void forEach(int startIndex, int endIndex, Procedure<? super V> procedure)
     {
         synchronized (this.lock)
@@ -613,6 +671,7 @@ public class SynchronizedSortedMap<K, V>
         }
     }
 
+    @Override
     public void forEachWithIndex(int fromIndex, int toIndex, ObjectIntProcedure<? super V> objectIntProcedure)
     {
         synchronized (this.lock)
@@ -621,6 +680,7 @@ public class SynchronizedSortedMap<K, V>
         }
     }
 
+    @Override
     public MutableStack<V> toStack()
     {
         synchronized (this.lock)
@@ -629,6 +689,7 @@ public class SynchronizedSortedMap<K, V>
         }
     }
 
+    @Override
     public int detectIndex(Predicate<? super V> predicate)
     {
         synchronized (this.lock)
@@ -637,6 +698,7 @@ public class SynchronizedSortedMap<K, V>
         }
     }
 
+    @Override
     public MutableSortedMap<K, V> toReversed()
     {
         synchronized (this.lock)
@@ -645,6 +707,7 @@ public class SynchronizedSortedMap<K, V>
         }
     }
 
+    @Override
     public MutableSortedMap<K, V> take(int count)
     {
         synchronized (this.lock)
@@ -653,6 +716,7 @@ public class SynchronizedSortedMap<K, V>
         }
     }
 
+    @Override
     public MutableSortedMap<K, V> takeWhile(Predicate<? super V> predicate)
     {
         synchronized (this.lock)
@@ -661,6 +725,7 @@ public class SynchronizedSortedMap<K, V>
         }
     }
 
+    @Override
     public MutableSortedMap<K, V> drop(int count)
     {
         synchronized (this.lock)
@@ -669,6 +734,7 @@ public class SynchronizedSortedMap<K, V>
         }
     }
 
+    @Override
     public MutableSortedMap<K, V> dropWhile(Predicate<? super V> predicate)
     {
         synchronized (this.lock)
@@ -677,6 +743,7 @@ public class SynchronizedSortedMap<K, V>
         }
     }
 
+    @Override
     public PartitionMutableList<V> partitionWhile(Predicate<? super V> predicate)
     {
         synchronized (this.lock)
@@ -685,6 +752,7 @@ public class SynchronizedSortedMap<K, V>
         }
     }
 
+    @Override
     public MutableList<V> distinct()
     {
         synchronized (this.lock)

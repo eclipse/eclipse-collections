@@ -38,6 +38,7 @@ class ImmutableSetWithHashingStrategySerializationProxy<T> implements Externaliz
         this.hashingStrategy = hashingStrategy;
     }
 
+    @Override
     public void writeExternal(ObjectOutput out) throws IOException
     {
         out.writeObject(this.hashingStrategy);
@@ -62,6 +63,7 @@ class ImmutableSetWithHashingStrategySerializationProxy<T> implements Externaliz
         }
     }
 
+    @Override
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
     {
         HashingStrategy<? super T> strategy = (HashingStrategy<? super T>) in.readObject();

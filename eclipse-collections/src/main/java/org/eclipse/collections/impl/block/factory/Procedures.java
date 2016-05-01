@@ -116,6 +116,7 @@ public final class Procedures
             this.stream = stream;
         }
 
+        @Override
         public void value(T each)
         {
             this.stream.println(each);
@@ -133,6 +134,7 @@ public final class Procedures
             this.appendable = appendable;
         }
 
+        @Override
         public void value(T each)
         {
             try
@@ -163,6 +165,7 @@ public final class Procedures
             this.objectIntProcedure = objectIntProcedure;
         }
 
+        @Override
         public void value(T each)
         {
             this.objectIntProcedure.value(each, this.count);
@@ -180,6 +183,7 @@ public final class Procedures
             this.procedure = procedure;
         }
 
+        @Override
         public void value(T each)
         {
             if (each == null)
@@ -208,6 +212,7 @@ public final class Procedures
             this.parameter = parameter;
         }
 
+        @Override
         public void value(T each)
         {
             this.procedure.value(each, this.parameter);
@@ -224,6 +229,7 @@ public final class Procedures
             this.throwingProcedure = throwingProcedure;
         }
 
+        @Override
         public void safeValue(T object) throws Exception
         {
             this.throwingProcedure.safeValue(object);

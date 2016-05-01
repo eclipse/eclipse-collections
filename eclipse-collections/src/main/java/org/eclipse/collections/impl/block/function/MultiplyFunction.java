@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -27,6 +27,7 @@ public final class MultiplyFunction
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public Integer value(Integer argument1, Integer argument2)
         {
             return argument1 * argument2;
@@ -37,6 +38,7 @@ public final class MultiplyFunction
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public Double value(Double argument1, Double argument2)
         {
             return argument1 * argument2;
@@ -47,6 +49,7 @@ public final class MultiplyFunction
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public Long value(Long argument1, Long argument2)
         {
             return argument1 * argument2;

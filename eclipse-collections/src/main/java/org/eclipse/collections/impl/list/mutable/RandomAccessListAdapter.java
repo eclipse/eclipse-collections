@@ -115,16 +115,19 @@ public final class RandomAccessListAdapter<T>
         return new RandomAccessListAdapter<>(list);
     }
 
+    @Override
     public ImmutableList<T> toImmutable()
     {
         return Lists.immutable.withAll(this.delegate);
     }
 
+    @Override
     public MutableList<T> asUnmodifiable()
     {
         return UnmodifiableMutableList.of(this);
     }
 
+    @Override
     public MutableList<T> asSynchronized()
     {
         return SynchronizedMutableList.of(this);
@@ -139,6 +142,7 @@ public final class RandomAccessListAdapter<T>
     /**
      * @deprecated use {@link FastList#newList()} instead (inlineable)
      */
+    @Override
     @Deprecated
     public MutableList<T> newEmpty()
     {
@@ -157,6 +161,7 @@ public final class RandomAccessListAdapter<T>
         RandomAccessListIterate.forEach(this.delegate, procedure);
     }
 
+    @Override
     public void reverseForEach(Procedure<? super T> procedure)
     {
         ListIterate.reverseForEach(this.delegate, procedure);
@@ -168,6 +173,7 @@ public final class RandomAccessListAdapter<T>
         RandomAccessListIterate.forEachWithIndex(this.delegate, objectIntProcedure);
     }
 
+    @Override
     public void forEachWithIndex(int fromIndex, int toIndex, ObjectIntProcedure<? super T> objectIntProcedure)
     {
         RandomAccessListIterate.forEachWithIndex(this.delegate, fromIndex, toIndex, objectIntProcedure);
@@ -186,11 +192,13 @@ public final class RandomAccessListAdapter<T>
         return result == null ? function.value() : result;
     }
 
+    @Override
     public int detectIndex(Predicate<? super T> predicate)
     {
         return RandomAccessListIterate.detectIndex(this.delegate, predicate);
     }
 
+    @Override
     public int detectLastIndex(Predicate<? super T> predicate)
     {
         return RandomAccessListIterate.detectLastIndex(this.delegate, predicate);
@@ -202,6 +210,7 @@ public final class RandomAccessListAdapter<T>
         return RandomAccessListIterate.count(this.delegate, predicate);
     }
 
+    @Override
     public <S> boolean corresponds(OrderedIterable<S> other, Predicate2<? super T, ? super S> predicate)
     {
         return RandomAccessListIterate.corresponds(this.delegate, other, predicate);
@@ -231,22 +240,26 @@ public final class RandomAccessListAdapter<T>
         return RandomAccessListIterate.injectInto(injectedValue, this.delegate, function);
     }
 
+    @Override
     public void forEach(int fromIndex, int toIndex, Procedure<? super T> procedure)
     {
         RandomAccessListIterate.forEach(this.delegate, fromIndex, toIndex, procedure);
     }
 
+    @Override
     public RandomAccessListAdapter<T> sortThis(Comparator<? super T> comparator)
     {
         Iterate.sortThis(this.delegate, comparator);
         return this;
     }
 
+    @Override
     public RandomAccessListAdapter<T> sortThis()
     {
         return this.sortThis(Comparators.naturalOrder());
     }
 
+    @Override
     public RandomAccessListAdapter<T> with(T element)
     {
         this.add(element);
@@ -274,18 +287,21 @@ public final class RandomAccessListAdapter<T>
         return this;
     }
 
+    @Override
     public RandomAccessListAdapter<T> without(T element)
     {
         this.remove(element);
         return this;
     }
 
+    @Override
     public RandomAccessListAdapter<T> withAll(Iterable<? extends T> elements)
     {
         this.addAllIterable(elements);
         return this;
     }
 
+    @Override
     public RandomAccessListAdapter<T> withoutAll(Iterable<? extends T> elements)
     {
         this.removeAllIterable(elements);
@@ -436,11 +452,13 @@ public final class RandomAccessListAdapter<T>
         return RandomAccessListIterate.collectWith(this.delegate, function, parameter, FastList.newList(this.delegate.size()));
     }
 
+    @Override
     public MutableList<T> distinct()
     {
         return RandomAccessListIterate.distinct(this.delegate);
     }
 
+    @Override
     public MutableList<T> distinct(HashingStrategy<? super T> hashingStrategy)
     {
         return RandomAccessListIterate.distinct(this.delegate, hashingStrategy);
@@ -458,26 +476,31 @@ public final class RandomAccessListAdapter<T>
         return RandomAccessListIterate.zipWithIndex(this.delegate, FastList.newList(this.delegate.size()));
     }
 
+    @Override
     public MutableList<T> take(int count)
     {
         return RandomAccessListIterate.take(this.delegate, count);
     }
 
+    @Override
     public MutableList<T> takeWhile(Predicate<? super T> predicate)
     {
         return RandomAccessListIterate.takeWhile(this.delegate, predicate);
     }
 
+    @Override
     public MutableList<T> drop(int count)
     {
         return RandomAccessListIterate.drop(this.delegate, count);
     }
 
+    @Override
     public MutableList<T> dropWhile(Predicate<? super T> predicate)
     {
         return RandomAccessListIterate.dropWhile(this.delegate, predicate);
     }
 
+    @Override
     public PartitionMutableList<T> partitionWhile(Predicate<? super T> predicate)
     {
         return RandomAccessListIterate.partitionWhile(this.delegate, predicate);

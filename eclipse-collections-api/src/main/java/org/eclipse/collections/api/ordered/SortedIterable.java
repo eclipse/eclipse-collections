@@ -39,24 +39,28 @@ public interface SortedIterable<T> extends OrderedIterable<T>
      */
     Comparator<? super T> comparator();
 
+    @Override
     SortedIterable<T> tap(Procedure<? super T> procedure);
 
     /**
      * Returns the initial elements that satisfy the Predicate. Short circuits at the first element which does not
      * satisfy the Predicate.
      */
+    @Override
     SortedIterable<T> takeWhile(Predicate<? super T> predicate);
 
     /**
      * Returns the final elements that do not satisfy the Predicate. Short circuits at the first element which does
      * satisfy the Predicate.
      */
+    @Override
     SortedIterable<T> dropWhile(Predicate<? super T> predicate);
 
     /**
      * Returns a Partition of the initial elements that satisfy the Predicate and the remaining elements. Short circuits at the first element which does
      * satisfy the Predicate.
      */
+    @Override
     PartitionSortedIterable<T> partitionWhile(Predicate<? super T> predicate);
 
     /**
@@ -67,11 +71,13 @@ public interface SortedIterable<T> extends OrderedIterable<T>
      *
      * @return {@code SortedIterable} of distinct elements
      */
+    @Override
     SortedIterable<T> distinct();
 
     /**
      * Converts the SortedIterable to a mutable MutableStack implementation.
      */
+    @Override
     MutableStack<T> toStack();
 
     /**
@@ -81,6 +87,7 @@ public interface SortedIterable<T> extends OrderedIterable<T>
      * @throws ClassCastException     if the elements are not {@link Comparable}
      * @throws NoSuchElementException if the SortedIterable is empty
      */
+    @Override
     T min();
 
     /**
@@ -90,25 +97,36 @@ public interface SortedIterable<T> extends OrderedIterable<T>
      * @throws ClassCastException     if the elements are not {@link Comparable}
      * @throws NoSuchElementException if the SortedIterable is empty
      */
+    @Override
     T max();
 
+    @Override
     SortedIterable<T> select(Predicate<? super T> predicate);
 
+    @Override
     <P> SortedIterable<T> selectWith(Predicate2<? super T, ? super P> predicate, P parameter);
 
+    @Override
     SortedIterable<T> reject(Predicate<? super T> predicate);
 
+    @Override
     <P> SortedIterable<T> rejectWith(Predicate2<? super T, ? super P> predicate, P parameter);
 
+    @Override
     PartitionSortedIterable<T> partition(Predicate<? super T> predicate);
 
+    @Override
     <S> SortedIterable<S> selectInstancesOf(Class<S> clazz);
 
+    @Override
     <V> SortedIterableMultimap<V, T> groupBy(Function<? super T, ? extends V> function);
 
+    @Override
     <V> SortedIterableMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function);
 
+    @Override
     <S> ListIterable<Pair<T, S>> zip(Iterable<S> that);
 
+    @Override
     SortedIterable<Pair<T, Integer>> zipWithIndex();
 }

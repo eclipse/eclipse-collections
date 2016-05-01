@@ -41,6 +41,7 @@ final class ImmutableTripletonSet<T>
         this.element3 = obj3;
     }
 
+    @Override
     public int size()
     {
         return 3;
@@ -108,21 +109,25 @@ final class ImmutableTripletonSet<T>
                 || Comparators.nullSafeEquals(obj, this.element3);
     }
 
+    @Override
     public Iterator<T> iterator()
     {
         return new TripletonSetIterator();
     }
 
+    @Override
     public T getFirst()
     {
         return this.element1;
     }
 
+    @Override
     public T getLast()
     {
         return this.element3;
     }
 
+    @Override
     public void each(Procedure<? super T> procedure)
     {
         procedure.value(this.element1);

@@ -19,5 +19,6 @@ import org.eclipse.collections.api.collection.FixedSizeCollection;
 public interface FixedSizeSet<T>
         extends MutableSet<T>, FixedSizeCollection<T>
 {
+    @Override
     FixedSizeSet<T> tap(Procedure<? super T> procedure);
 }

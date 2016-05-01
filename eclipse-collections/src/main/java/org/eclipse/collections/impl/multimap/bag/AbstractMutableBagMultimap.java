@@ -46,6 +46,7 @@ public abstract class AbstractMutableBagMultimap<K, V> extends AbstractMutableMu
         super(size);
     }
 
+    @Override
     public MutableBagMultimap<K, V> toMutable()
     {
         MutableBagMultimap<K, V> mutableBagMultimap = this.newEmpty();
@@ -53,6 +54,7 @@ public abstract class AbstractMutableBagMultimap<K, V> extends AbstractMutableMu
         return mutableBagMultimap;
     }
 
+    @Override
     public ImmutableBagMultimap<K, V> toImmutable()
     {
         MutableMap<K, ImmutableBag<V>> result = (MutableMap<K, ImmutableBag<V>>) (MutableMap<?, ?>) this.createMapWithKeyCount(this.map.size());
@@ -62,6 +64,7 @@ public abstract class AbstractMutableBagMultimap<K, V> extends AbstractMutableMu
         return new ImmutableBagMultimapImpl<>(result);
     }
 
+    @Override
     public <K2, V2> HashBagMultimap<K2, V2> collectKeysValues(Function2<? super K, ? super V, Pair<K2, V2>> function)
     {
         return this.collectKeysValues(function, HashBagMultimap.newMultimap());
@@ -111,6 +114,7 @@ public abstract class AbstractMutableBagMultimap<K, V> extends AbstractMutableMu
         }
     }
 
+    @Override
     public void putOccurrences(K key, V value, int occurrences)
     {
         if (occurrences < 0)

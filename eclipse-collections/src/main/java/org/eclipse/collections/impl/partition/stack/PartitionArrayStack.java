@@ -25,21 +25,25 @@ public class PartitionArrayStack<T> implements PartitionMutableStack<T>
     private final MutableList<T> selected = FastList.newList();
     private final MutableList<T> rejected = FastList.newList();
 
+    @Override
     public MutableStack<T> getSelected()
     {
         return ArrayStack.newStackFromTopToBottom(this.selected);
     }
 
+    @Override
     public MutableStack<T> getRejected()
     {
         return ArrayStack.newStackFromTopToBottom(this.rejected);
     }
 
+    @Override
     public PartitionImmutableStack<T> toImmutable()
     {
         return new PartitionImmutableStackImpl<>(this);
     }
 
+    @Override
     public void add(T t)
     {
         throw new UnsupportedOperationException("add is no longer supported for PartitionArrayStack");
@@ -58,6 +62,7 @@ public class PartitionArrayStack<T> implements PartitionMutableStack<T>
             this.partitionMutableStack = partitionMutableStack;
         }
 
+        @Override
         public void value(T each)
         {
             MutableList<T> bucket = this.predicate.accept(each)
@@ -82,6 +87,7 @@ public class PartitionArrayStack<T> implements PartitionMutableStack<T>
             this.partitionMutableStack = partitionMutableStack;
         }
 
+        @Override
         public void value(T each)
         {
             MutableList<T> bucket = this.predicate.accept(each, this.parameter)

@@ -37,6 +37,7 @@ public final class ChainedProcedure<T> implements Procedure<T>
         this.procedures.add(procedure);
     }
 
+    @Override
     public void value(T object)
     {
         int size = this.procedures.size();

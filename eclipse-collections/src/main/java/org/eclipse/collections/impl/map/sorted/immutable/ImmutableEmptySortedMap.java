@@ -58,36 +58,43 @@ final class ImmutableEmptySortedMap<K, V>
         this.comparator = comparator;
     }
 
+    @Override
     public int size()
     {
         return 0;
     }
 
+    @Override
     public RichIterable<K> keysView()
     {
         return LazyIterate.empty();
     }
 
+    @Override
     public RichIterable<V> valuesView()
     {
         return LazyIterate.empty();
     }
 
+    @Override
     public RichIterable<Pair<K, V>> keyValuesView()
     {
         return LazyIterate.empty();
     }
 
+    @Override
     public boolean containsKey(Object key)
     {
         return false;
     }
 
+    @Override
     public boolean containsValue(Object value)
     {
         return false;
     }
 
+    @Override
     public V get(Object key)
     {
         return null;
@@ -122,10 +129,12 @@ final class ImmutableEmptySortedMap<K, V>
         return this;
     }
 
+    @Override
     public void forEachKeyValue(Procedure2<? super K, ? super V> procedure)
     {
     }
 
+    @Override
     public ImmutableMap<V, K> flipUniqueValues()
     {
         return Maps.immutable.with();
@@ -214,6 +223,7 @@ final class ImmutableEmptySortedMap<K, V>
         return this;
     }
 
+    @Override
     public Set<Entry<K, V>> entrySet()
     {
         return Sets.immutable.<Entry<K, V>>with().castToSet();
@@ -225,26 +235,31 @@ final class ImmutableEmptySortedMap<K, V>
         return this;
     }
 
+    @Override
     public Comparator<? super K> comparator()
     {
         return this.comparator;
     }
 
+    @Override
     public Set<K> keySet()
     {
         return Sets.immutable.<K>of().castToSet();
     }
 
+    @Override
     public Collection<V> values()
     {
         return Lists.immutable.<V>empty().castToList();
     }
 
+    @Override
     public K firstKey()
     {
         throw new NoSuchElementException();
     }
 
+    @Override
     public K lastKey()
     {
         throw new NoSuchElementException();
@@ -255,6 +270,7 @@ final class ImmutableEmptySortedMap<K, V>
         return new ImmutableSortedMapSerializationProxy<>(this);
     }
 
+    @Override
     public ImmutableSortedMap<K, V> take(int count)
     {
         if (count < 0)
@@ -265,6 +281,7 @@ final class ImmutableEmptySortedMap<K, V>
         return this;
     }
 
+    @Override
     public ImmutableSortedMap<K, V> drop(int count)
     {
         if (count < 0)

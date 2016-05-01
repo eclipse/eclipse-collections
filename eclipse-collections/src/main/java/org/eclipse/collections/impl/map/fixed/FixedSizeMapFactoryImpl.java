@@ -20,36 +20,43 @@ public class FixedSizeMapFactoryImpl implements FixedSizeMapFactory
 {
     private static final FixedSizeMap<?, ?> EMPTY_MAP = new EmptyMap<>();
 
+    @Override
     public <K, V> FixedSizeMap<K, V> empty()
     {
         return (FixedSizeMap<K, V>) EMPTY_MAP;
     }
 
+    @Override
     public <K, V> FixedSizeMap<K, V> of()
     {
         return this.empty();
     }
 
+    @Override
     public <K, V> FixedSizeMap<K, V> with()
     {
         return this.empty();
     }
 
+    @Override
     public <K, V> FixedSizeMap<K, V> of(K key, V value)
     {
         return this.with(key, value);
     }
 
+    @Override
     public <K, V> FixedSizeMap<K, V> with(K key, V value)
     {
         return new SingletonMap<>(key, value);
     }
 
+    @Override
     public <K, V> FixedSizeMap<K, V> of(K key1, V value1, K key2, V value2)
     {
         return this.with(key1, value1, key2, value2);
     }
 
+    @Override
     public <K, V> FixedSizeMap<K, V> with(K key1, V value1, K key2, V value2)
     {
         if (Comparators.nullSafeEquals(key1, key2))
@@ -59,11 +66,13 @@ public class FixedSizeMapFactoryImpl implements FixedSizeMapFactory
         return new DoubletonMap<>(key1, value1, key2, value2);
     }
 
+    @Override
     public <K, V> FixedSizeMap<K, V> of(K key1, V value1, K key2, V value2, K key3, V value3)
     {
         return this.with(key1, value1, key2, value2, key3, value3);
     }
 
+    @Override
     public <K, V> FixedSizeMap<K, V> with(K key1, V value1, K key2, V value2, K key3, V value3)
     {
         if (Comparators.nullSafeEquals(key1, key2) && Comparators.nullSafeEquals(key2, key3))

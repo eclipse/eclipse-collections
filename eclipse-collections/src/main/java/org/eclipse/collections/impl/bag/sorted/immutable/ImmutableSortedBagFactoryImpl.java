@@ -20,31 +20,37 @@ import org.eclipse.collections.impl.utility.Iterate;
 
 public class ImmutableSortedBagFactoryImpl implements ImmutableSortedBagFactory
 {
+    @Override
     public <T> ImmutableSortedBag<T> empty()
     {
         return (ImmutableSortedBag<T>) ImmutableEmptySortedBag.INSTANCE;
     }
 
+    @Override
     public <T> ImmutableSortedBag<T> empty(Comparator<? super T> comparator)
     {
         return new ImmutableEmptySortedBag<>(comparator);
     }
 
+    @Override
     public <T> ImmutableSortedBag<T> of()
     {
         return this.with();
     }
 
+    @Override
     public <T> ImmutableSortedBag<T> with()
     {
         return this.empty();
     }
 
+    @Override
     public <T> ImmutableSortedBag<T> of(T... items)
     {
         return this.with(items);
     }
 
+    @Override
     public <T> ImmutableSortedBag<T> with(T... items)
     {
         if (items == null || items.length == 0)
@@ -54,11 +60,13 @@ public class ImmutableSortedBagFactoryImpl implements ImmutableSortedBagFactory
         return new ImmutableSortedBagImpl<>(TreeBag.newBagWith(items));
     }
 
+    @Override
     public <T> ImmutableSortedBag<T> ofAll(Iterable<? extends T> items)
     {
         return this.withAll(items);
     }
 
+    @Override
     public <T> ImmutableSortedBag<T> withAll(Iterable<? extends T> items)
     {
         if (items instanceof ImmutableSortedBag<?>)
@@ -69,11 +77,13 @@ public class ImmutableSortedBagFactoryImpl implements ImmutableSortedBagFactory
         return this.of((T[]) Iterate.toArray(items));
     }
 
+    @Override
     public <T> ImmutableSortedBag<T> of(Comparator<? super T> comparator)
     {
         return this.with(comparator);
     }
 
+    @Override
     public <T> ImmutableSortedBag<T> with(Comparator<? super T> comparator)
     {
         if (comparator == null)
@@ -83,11 +93,13 @@ public class ImmutableSortedBagFactoryImpl implements ImmutableSortedBagFactory
         return new ImmutableEmptySortedBag<>(comparator);
     }
 
+    @Override
     public <T> ImmutableSortedBag<T> of(Comparator<? super T> comparator, T... items)
     {
         return this.with(comparator, items);
     }
 
+    @Override
     public <T> ImmutableSortedBag<T> with(Comparator<? super T> comparator, T... items)
     {
         if (items == null || items.length == 0)
@@ -97,21 +109,25 @@ public class ImmutableSortedBagFactoryImpl implements ImmutableSortedBagFactory
         return new ImmutableSortedBagImpl<>(TreeBag.newBagWith(comparator, items));
     }
 
+    @Override
     public <T> ImmutableSortedBag<T> ofAll(Comparator<? super T> comparator, Iterable<? extends T> items)
     {
         return this.withAll(comparator, items);
     }
 
+    @Override
     public <T> ImmutableSortedBag<T> withAll(Comparator<? super T> comparator, Iterable<? extends T> items)
     {
         return this.of(comparator, (T[]) Iterate.toArray(items));
     }
 
+    @Override
     public <T> ImmutableSortedBag<T> ofSortedBag(SortedBag<T> bag)
     {
         return this.withSortedBag(bag);
     }
 
+    @Override
     public <T> ImmutableSortedBag<T> withSortedBag(SortedBag<T> bag)
     {
         if (bag instanceof ImmutableSortedBag)

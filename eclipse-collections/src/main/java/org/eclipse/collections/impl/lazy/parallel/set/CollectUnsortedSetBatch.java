@@ -32,6 +32,7 @@ public class CollectUnsortedSetBatch<T, V> extends AbstractBatch<V> implements U
         this.function = function;
     }
 
+    @Override
     public void forEach(Procedure<? super V> procedure)
     {
         this.unsortedSetBatch.forEach(Functions.bind(procedure, this.function));
@@ -44,16 +45,19 @@ public class CollectUnsortedSetBatch<T, V> extends AbstractBatch<V> implements U
     }
     */
 
+    @Override
     public UnsortedSetBatch<V> select(Predicate<? super V> predicate)
     {
         return new SelectUnsortedSetBatch<>(this, predicate);
     }
 
+    @Override
     public <VV> UnsortedBagBatch<VV> collect(Function<? super V, ? extends VV> function)
     {
         return new CollectUnsortedBagBatch<>(this, function);
     }
 
+    @Override
     public <V1> UnsortedBagBatch<V1> flatCollect(Function<? super V, ? extends Iterable<V1>> function)
     {
         return new FlatCollectUnsortedBagBatch<>(this, function);

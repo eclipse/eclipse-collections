@@ -173,6 +173,7 @@ public class UnmodifiableSortedSet<T>
         return this.getSortedSet().partitionWith(predicate, parameter);
     }
 
+    @Override
     public PartitionMutableSortedSet<T> partitionWhile(Predicate<? super T> predicate)
     {
         return this.getSortedSet().partitionWhile(predicate);
@@ -258,21 +259,25 @@ public class UnmodifiableSortedSet<T>
         return this.getSortedSet().collectIf(predicate, function);
     }
 
+    @Override
     public MutableSortedSet<T> distinct()
     {
         return this.getSortedSet().distinct();
     }
 
+    @Override
     public MutableSortedSet<T> takeWhile(Predicate<? super T> predicate)
     {
         return this.getSortedSet().takeWhile(predicate);
     }
 
+    @Override
     public MutableSortedSet<T> dropWhile(Predicate<? super T> predicate)
     {
         return this.getSortedSet().dropWhile(predicate);
     }
 
+    @Override
     public int detectIndex(Predicate<? super T> predicate)
     {
         return this.getSortedSet().detectIndex(predicate);
@@ -314,151 +319,181 @@ public class UnmodifiableSortedSet<T>
         return this.getSortedSet().zipWithIndex(target);
     }
 
+    @Override
     public Comparator<? super T> comparator()
     {
         return this.getSortedSet().comparator();
     }
 
+    @Override
     public MutableSortedSet<T> union(SetIterable<? extends T> set)
     {
         return this.getSortedSet().union(set);
     }
 
+    @Override
     public <R extends Set<T>> R unionInto(SetIterable<? extends T> set, R targetSet)
     {
         return this.getSortedSet().unionInto(set, targetSet);
     }
 
+    @Override
     public MutableSortedSet<T> intersect(SetIterable<? extends T> set)
     {
         return this.getSortedSet().intersect(set);
     }
 
+    @Override
     public <R extends Set<T>> R intersectInto(SetIterable<? extends T> set, R targetSet)
     {
         return this.getSortedSet().intersectInto(set, targetSet);
     }
 
+    @Override
     public MutableSortedSet<T> difference(SetIterable<? extends T> subtrahendSet)
     {
         return this.getSortedSet().difference(subtrahendSet);
     }
 
+    @Override
     public <R extends Set<T>> R differenceInto(SetIterable<? extends T> subtrahendSet, R targetSet)
     {
         return this.getSortedSet().differenceInto(subtrahendSet, targetSet);
     }
 
+    @Override
     public MutableSortedSet<T> symmetricDifference(SetIterable<? extends T> setB)
     {
         return this.getSortedSet().symmetricDifference(setB);
     }
 
+    @Override
     public <R extends Set<T>> R symmetricDifferenceInto(SetIterable<? extends T> set, R targetSet)
     {
         return this.getSortedSet().symmetricDifferenceInto(set, targetSet);
     }
 
+    @Override
     public boolean isSubsetOf(SetIterable<? extends T> candidateSuperset)
     {
         return this.getSortedSet().isSubsetOf(candidateSuperset);
     }
 
+    @Override
     public boolean isProperSubsetOf(SetIterable<? extends T> candidateSuperset)
     {
         return this.getSortedSet().isProperSubsetOf(candidateSuperset);
     }
 
+    @Override
     public MutableSortedSet<SortedSetIterable<T>> powerSet()
     {
         return this.getSortedSet().powerSet();
     }
 
+    @Override
     public <B> LazyIterable<Pair<T, B>> cartesianProduct(SetIterable<B> set)
     {
         return this.getSortedSet().cartesianProduct(set);
     }
 
+    @Override
     public MutableSortedSet<T> subSet(T fromElement, T toElement)
     {
         return this.getSortedSet().subSet(fromElement, toElement).asUnmodifiable();
     }
 
+    @Override
     public MutableSortedSet<T> headSet(T toElement)
     {
         return this.getSortedSet().headSet(toElement).asUnmodifiable();
     }
 
+    @Override
     public MutableSortedSet<T> tailSet(T fromElement)
     {
         return this.getSortedSet().tailSet(fromElement).asUnmodifiable();
     }
 
+    @Override
     public T first()
     {
         return this.getSortedSet().first();
     }
 
+    @Override
     public T last()
     {
         return this.getSortedSet().last();
     }
 
+    @Override
     public int compareTo(SortedSetIterable<T> o)
     {
         return this.getSortedSet().compareTo(o);
     }
 
+    @Override
     public MutableStack<T> toStack()
     {
         return this.getSortedSet().toStack();
     }
 
+    @Override
     public int indexOf(Object object)
     {
         return this.getSortedSet().indexOf(object);
     }
 
+    @Override
     public <S> boolean corresponds(OrderedIterable<S> other, Predicate2<? super T, ? super S> predicate)
     {
         return this.getSortedSet().corresponds(other, predicate);
     }
 
+    @Override
     public void forEach(int startIndex, int endIndex, Procedure<? super T> procedure)
     {
         this.getSortedSet().forEach(startIndex, endIndex, procedure);
     }
 
+    @Override
     public void forEachWithIndex(int fromIndex, int toIndex, ObjectIntProcedure<? super T> objectIntProcedure)
     {
         this.getSortedSet().forEachWithIndex(fromIndex, toIndex, objectIntProcedure);
     }
 
+    @Override
     public MutableSortedSet<T> toReversed()
     {
         return this.getSortedSet().toReversed();
     }
 
+    @Override
     public MutableSortedSet<T> take(int count)
     {
         return this.getSortedSet().take(count);
     }
 
+    @Override
     public MutableSortedSet<T> drop(int count)
     {
         return this.getSortedSet().drop(count);
     }
 
+    @Override
     public void reverseForEach(Procedure<? super T> procedure)
     {
         this.getSortedSet().reverseForEach(procedure);
     }
 
+    @Override
     public LazyIterable<T> asReversed()
     {
         return this.getSortedSet().asReversed();
     }
 
+    @Override
     public int detectLastIndex(Predicate<? super T> predicate)
     {
         return this.getSortedSet().detectLastIndex(predicate);
@@ -493,6 +528,7 @@ public class UnmodifiableSortedSet<T>
         return new UnmodifiableCollectionSerializationProxy<>(this.getSortedSet());
     }
 
+    @Override
     public ParallelSortedSetIterable<T> asParallel(ExecutorService executorService, int batchSize)
     {
         return this.getSortedSet().asParallel(executorService, batchSize);

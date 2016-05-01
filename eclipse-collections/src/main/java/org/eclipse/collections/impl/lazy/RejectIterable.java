@@ -40,6 +40,7 @@ public class RejectIterable<T>
         this.predicate = Predicates.not(newPredicate);
     }
 
+    @Override
     public void each(Procedure<? super T> procedure)
     {
         Iterate.forEach(this.adapted, new IfProcedure<>(this.predicate, procedure));
@@ -60,6 +61,7 @@ public class RejectIterable<T>
     /**
      * We use a SelectIterator, since we have already negated the predicate
      */
+    @Override
     public Iterator<T> iterator()
     {
         return new SelectIterator<>(this.adapted, this.predicate);

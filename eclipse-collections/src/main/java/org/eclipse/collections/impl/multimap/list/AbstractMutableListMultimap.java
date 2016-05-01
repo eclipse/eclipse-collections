@@ -43,11 +43,13 @@ public abstract class AbstractMutableListMultimap<K, V> extends AbstractMutableM
         super(size);
     }
 
+    @Override
     public MutableListMultimap<K, V> toMutable()
     {
         return new FastListMultimap<>(this);
     }
 
+    @Override
     public ImmutableListMultimap<K, V> toImmutable()
     {
         MutableMap<K, ImmutableList<V>> map = UnifiedMap.newMap();
@@ -57,11 +59,13 @@ public abstract class AbstractMutableListMultimap<K, V> extends AbstractMutableM
         return new ImmutableListMultimapImpl<>(map);
     }
 
+    @Override
     public <K2, V2> HashBagMultimap<K2, V2> collectKeysValues(Function2<? super K, ? super V, Pair<K2, V2>> function)
     {
         return this.collectKeysValues(function, HashBagMultimap.newMultimap());
     }
 
+    @Override
     public <V2> FastListMultimap<K, V2> collectValues(Function<? super V, ? extends V2> function)
     {
         return this.collectValues(function, FastListMultimap.newMultimap());

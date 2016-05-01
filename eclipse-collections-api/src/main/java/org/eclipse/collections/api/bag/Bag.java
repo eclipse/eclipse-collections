@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -54,26 +54,37 @@ public interface Bag<T>
     @Override
     int hashCode();
 
+    @Override
     Bag<T> tap(Procedure<? super T> procedure);
 
+    @Override
     Bag<T> select(Predicate<? super T> predicate);
 
+    @Override
     <P> Bag<T> selectWith(Predicate2<? super T, ? super P> predicate, P parameter);
 
+    @Override
     Bag<T> reject(Predicate<? super T> predicate);
 
+    @Override
     <P> Bag<T> rejectWith(Predicate2<? super T, ? super P> predicate, P parameter);
 
+    @Override
     PartitionBag<T> partition(Predicate<? super T> predicate);
 
+    @Override
     <P> PartitionBag<T> partitionWith(Predicate2<? super T, ? super P> predicate, P parameter);
 
+    @Override
     <S> Bag<S> selectInstancesOf(Class<S> clazz);
 
+    @Override
     <V> BagMultimap<V, T> groupBy(Function<? super T, ? extends V> function);
 
+    @Override
     <V> BagMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function);
 
+    @Override
     SetIterable<Pair<T, Integer>> zipWithIndex();
 
     /**

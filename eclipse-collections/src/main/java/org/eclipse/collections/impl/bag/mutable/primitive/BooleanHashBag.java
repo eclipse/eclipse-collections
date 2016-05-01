@@ -101,32 +101,38 @@ public final class BooleanHashBag implements MutableBooleanBag, Externalizable
         return this.trueCount > 0;
     }
 
+    @Override
     public boolean isEmpty()
     {
         return !this.containsFalse() && !this.containsTrue();
     }
 
+    @Override
     public boolean notEmpty()
     {
         return this.containsFalse() || this.containsTrue();
     }
 
+    @Override
     public int size()
     {
         return this.falseCount + this.trueCount;
     }
 
+    @Override
     public int sizeDistinct()
     {
         return (this.containsFalse() ? 1 : 0) + (this.containsTrue() ? 1 : 0);
     }
 
+    @Override
     public void clear()
     {
         this.falseCount = 0;
         this.trueCount = 0;
     }
 
+    @Override
     public BooleanHashBag with(boolean element)
     {
         this.add(element);
@@ -148,44 +154,52 @@ public final class BooleanHashBag implements MutableBooleanBag, Externalizable
         return this;
     }
 
+    @Override
     public BooleanHashBag withAll(BooleanIterable iterable)
     {
         this.addAll(iterable);
         return this;
     }
 
+    @Override
     public BooleanHashBag without(boolean element)
     {
         this.remove(element);
         return this;
     }
 
+    @Override
     public BooleanHashBag withoutAll(BooleanIterable iterable)
     {
         this.removeAll(iterable);
         return this;
     }
 
+    @Override
     public MutableBooleanBag asUnmodifiable()
     {
         return new UnmodifiableBooleanBag(this);
     }
 
+    @Override
     public MutableBooleanBag asSynchronized()
     {
         return new SynchronizedBooleanBag(this);
     }
 
+    @Override
     public ImmutableBooleanBag toImmutable()
     {
         return BooleanBags.immutable.withAll(this);
     }
 
+    @Override
     public boolean contains(boolean value)
     {
         return value ? this.containsTrue() : this.containsFalse();
     }
 
+    @Override
     public boolean containsAll(boolean... source)
     {
         for (boolean each : source)
@@ -198,16 +212,19 @@ public final class BooleanHashBag implements MutableBooleanBag, Externalizable
         return true;
     }
 
+    @Override
     public boolean containsAll(BooleanIterable source)
     {
         return source.allSatisfy(this::contains);
     }
 
+    @Override
     public int occurrencesOf(boolean item)
     {
         return item ? this.trueCount : this.falseCount;
     }
 
+    @Override
     public void forEachWithOccurrences(BooleanIntProcedure procedure)
     {
         if (this.containsFalse())
@@ -220,6 +237,7 @@ public final class BooleanHashBag implements MutableBooleanBag, Externalizable
         }
     }
 
+    @Override
     public boolean add(boolean item)
     {
         if (item)
@@ -233,6 +251,7 @@ public final class BooleanHashBag implements MutableBooleanBag, Externalizable
         return true;
     }
 
+    @Override
     public boolean remove(boolean item)
     {
         if (item)
@@ -254,6 +273,7 @@ public final class BooleanHashBag implements MutableBooleanBag, Externalizable
         return true;
     }
 
+    @Override
     public boolean addAll(boolean... source)
     {
         if (source.length < 1)
@@ -268,6 +288,7 @@ public final class BooleanHashBag implements MutableBooleanBag, Externalizable
         return true;
     }
 
+    @Override
     public boolean addAll(BooleanIterable source)
     {
         if (source.isEmpty())
@@ -291,6 +312,7 @@ public final class BooleanHashBag implements MutableBooleanBag, Externalizable
         return true;
     }
 
+    @Override
     public boolean removeAll(boolean... source)
     {
         if (source.length == 0)
@@ -312,6 +334,7 @@ public final class BooleanHashBag implements MutableBooleanBag, Externalizable
         return this.size() != oldSize;
     }
 
+    @Override
     public boolean removeAll(BooleanIterable source)
     {
         if (source.isEmpty())
@@ -352,6 +375,7 @@ public final class BooleanHashBag implements MutableBooleanBag, Externalizable
         return this.size() != oldSize;
     }
 
+    @Override
     public boolean retainAll(BooleanIterable elements)
     {
         int oldSize = this.size();
@@ -367,11 +391,13 @@ public final class BooleanHashBag implements MutableBooleanBag, Externalizable
         return this.size() != oldSize;
     }
 
+    @Override
     public boolean retainAll(boolean... source)
     {
         return this.retainAll(BooleanHashSet.newSetWith(source));
     }
 
+    @Override
     public void addOccurrences(boolean item, int occurrences)
     {
         if (occurrences < 0)
@@ -391,6 +417,7 @@ public final class BooleanHashBag implements MutableBooleanBag, Externalizable
         }
     }
 
+    @Override
     public boolean removeOccurrences(boolean item, int occurrences)
     {
         if (occurrences < 0)
@@ -430,6 +457,7 @@ public final class BooleanHashBag implements MutableBooleanBag, Externalizable
         return true;
     }
 
+    @Override
     public void forEach(BooleanProcedure procedure)
     {
         this.each(procedure);
@@ -438,6 +466,7 @@ public final class BooleanHashBag implements MutableBooleanBag, Externalizable
     /**
      * @since 7.0.
      */
+    @Override
     public void each(BooleanProcedure procedure)
     {
         for (int i = 0; i < this.falseCount; i++)
@@ -450,6 +479,7 @@ public final class BooleanHashBag implements MutableBooleanBag, Externalizable
         }
     }
 
+    @Override
     public MutableBooleanBag select(BooleanPredicate predicate)
     {
         MutableBooleanBag result = new BooleanHashBag();
@@ -462,6 +492,7 @@ public final class BooleanHashBag implements MutableBooleanBag, Externalizable
         return result;
     }
 
+    @Override
     public MutableBooleanBag reject(BooleanPredicate predicate)
     {
         MutableBooleanBag result = new BooleanHashBag();
@@ -474,6 +505,7 @@ public final class BooleanHashBag implements MutableBooleanBag, Externalizable
         return result;
     }
 
+    @Override
     public <T> T injectInto(T injectedValue, ObjectBooleanToObjectFunction<? super T, ? extends T> function)
     {
         T result = injectedValue;
@@ -528,16 +560,19 @@ public final class BooleanHashBag implements MutableBooleanBag, Externalizable
         return this.makeString("[", ", ", "]");
     }
 
+    @Override
     public String makeString()
     {
         return this.makeString(", ");
     }
 
+    @Override
     public String makeString(String separator)
     {
         return this.makeString("", separator, "");
     }
 
+    @Override
     public String makeString(String start, String separator, String end)
     {
         Appendable stringBuilder = new StringBuilder();
@@ -545,16 +580,19 @@ public final class BooleanHashBag implements MutableBooleanBag, Externalizable
         return stringBuilder.toString();
     }
 
+    @Override
     public void appendString(Appendable appendable)
     {
         this.appendString(appendable, ", ");
     }
 
+    @Override
     public void appendString(Appendable appendable, String separator)
     {
         this.appendString(appendable, "", separator, "");
     }
 
+    @Override
     public void appendString(
             Appendable appendable,
             String start,
@@ -591,6 +629,7 @@ public final class BooleanHashBag implements MutableBooleanBag, Externalizable
         }
     }
 
+    @Override
     public int count(BooleanPredicate predicate)
     {
         int result = 0;
@@ -606,21 +645,25 @@ public final class BooleanHashBag implements MutableBooleanBag, Externalizable
         return result;
     }
 
+    @Override
     public boolean anySatisfy(BooleanPredicate predicate)
     {
         return this.containsFalse() && predicate.accept(false) || this.containsTrue() && predicate.accept(true);
     }
 
+    @Override
     public boolean allSatisfy(BooleanPredicate predicate)
     {
         return (!this.containsFalse() || predicate.accept(false)) && (!this.containsTrue() || predicate.accept(true));
     }
 
+    @Override
     public boolean noneSatisfy(BooleanPredicate predicate)
     {
         return (!this.containsFalse() || !predicate.accept(false)) && (!this.containsTrue() || !predicate.accept(true));
     }
 
+    @Override
     public boolean detectIfNone(BooleanPredicate predicate, boolean ifNone)
     {
         if (this.containsFalse() && predicate.accept(false))
@@ -636,6 +679,7 @@ public final class BooleanHashBag implements MutableBooleanBag, Externalizable
         return ifNone;
     }
 
+    @Override
     public <V> MutableBag<V> collect(BooleanToObjectFunction<? extends V> function)
     {
         HashBag<V> result = HashBag.newBag();
@@ -650,6 +694,7 @@ public final class BooleanHashBag implements MutableBooleanBag, Externalizable
         return result;
     }
 
+    @Override
     public boolean[] toArray()
     {
         boolean[] array = new boolean[this.size()];
@@ -665,37 +710,44 @@ public final class BooleanHashBag implements MutableBooleanBag, Externalizable
         return array;
     }
 
+    @Override
     public MutableBooleanList toList()
     {
         return BooleanArrayList.newList(this);
     }
 
+    @Override
     public MutableBooleanSet toSet()
     {
         return BooleanHashSet.newSet(this);
     }
 
+    @Override
     public MutableBooleanBag toBag()
     {
         return BooleanHashBag.newBag(this);
     }
 
+    @Override
     public LazyBooleanIterable asLazy()
     {
         return new LazyBooleanIterableAdapter(this);
     }
 
+    @Override
     public MutableBooleanIterator booleanIterator()
     {
         return new InternalIterator(this.falseCount, this.trueCount);
     }
 
+    @Override
     public void writeExternal(ObjectOutput out) throws IOException
     {
         out.writeInt(this.falseCount);
         out.writeInt(this.trueCount);
     }
 
+    @Override
     public void readExternal(ObjectInput in) throws IOException
     {
         this.falseCount = in.readInt();
@@ -715,11 +767,13 @@ public final class BooleanHashBag implements MutableBooleanBag, Externalizable
             this.internalTrueCount = trueCount;
         }
 
+        @Override
         public boolean hasNext()
         {
             return this.internalFalseCount > 0 || this.internalTrueCount > 0;
         }
 
+        @Override
         public boolean next()
         {
             this.removedAlready = false;
@@ -738,6 +792,7 @@ public final class BooleanHashBag implements MutableBooleanBag, Externalizable
             throw new NoSuchElementException("next() called, but the iterator is exhausted");
         }
 
+        @Override
         public void remove()
         {
             if (this.removedAlready)

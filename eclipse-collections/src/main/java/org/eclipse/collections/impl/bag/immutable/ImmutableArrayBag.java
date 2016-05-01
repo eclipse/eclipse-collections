@@ -87,6 +87,7 @@ public class ImmutableArrayBag<T>
         return new ImmutableArrayBag<>(newKeys, newCounts);
     }
 
+    @Override
     public void forEachWithOccurrences(ObjectIntProcedure<? super T> objectIntProcedure)
     {
         for (int i = 0; i < this.keys.length; i++)
@@ -95,11 +96,13 @@ public class ImmutableArrayBag<T>
         }
     }
 
+    @Override
     public int sizeDistinct()
     {
         return this.keys.length;
     }
 
+    @Override
     public int size()
     {
         int sum = 0;
@@ -110,6 +113,7 @@ public class ImmutableArrayBag<T>
         return sum;
     }
 
+    @Override
     public int occurrencesOf(Object item)
     {
         int index = ArrayIterate.detectIndexWith(this.keys, Predicates2.equal(), item);
@@ -120,6 +124,7 @@ public class ImmutableArrayBag<T>
         return 0;
     }
 
+    @Override
     public ImmutableBag<T> newWith(T element)
     {
         int elementIndex = ArrayIterate.detectIndexWith(this.keys, Predicates2.equal(), element);
@@ -149,6 +154,7 @@ public class ImmutableArrayBag<T>
         return new ImmutableArrayBag<>(newKeys, newCounts);
     }
 
+    @Override
     public ImmutableBag<T> newWithout(T element)
     {
         int elementIndex = ArrayIterate.detectIndexWith(this.keys, Predicates2.equal(), element);
@@ -175,6 +181,7 @@ public class ImmutableArrayBag<T>
         return this;
     }
 
+    @Override
     public MutableMap<T, Integer> toMapOfItemToCount()
     {
         MutableMap<T, Integer> map = UnifiedMap.newMap(this.size());
@@ -182,11 +189,13 @@ public class ImmutableArrayBag<T>
         return map;
     }
 
+    @Override
     public ImmutableBag<T> newWithAll(Iterable<? extends T> elements)
     {
         return Bags.immutable.withAll(Iterate.addAllTo(elements, HashBag.newBag(this)));
     }
 
+    @Override
     public ImmutableBag<T> selectByOccurrences(IntPredicate predicate)
     {
         MutableBag<T> result = HashBag.newBag();
@@ -199,6 +208,7 @@ public class ImmutableArrayBag<T>
         return result.toImmutable();
     }
 
+    @Override
     public <S> ImmutableBag<S> selectInstancesOf(Class<S> clazz)
     {
         MutableBag<S> result = HashBag.newBag();
@@ -211,42 +221,50 @@ public class ImmutableArrayBag<T>
         return ImmutableArrayBag.copyFrom(result);
     }
 
+    @Override
     public <V> ImmutableBagMultimap<V, T> groupBy(Function<? super T, ? extends V> function)
     {
         return this.groupBy(function, HashBagMultimap.<V, T>newMultimap()).toImmutable();
     }
 
+    @Override
     public <V> ImmutableBagMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function)
     {
         return this.groupByEach(function, HashBagMultimap.newMultimap()).toImmutable();
     }
 
+    @Override
     public T getFirst()
     {
         return ArrayIterate.getFirst(this.keys);
     }
 
+    @Override
     public T getLast()
     {
         return ArrayIterate.getLast(this.keys);
     }
 
+    @Override
     public ImmutableBag<T> select(Predicate<? super T> predicate)
     {
         return this.select(predicate, HashBag.newBag()).toImmutable();
     }
 
+    @Override
     public ImmutableBag<T> reject(Predicate<? super T> predicate)
     {
         return this.reject(predicate, HashBag.newBag()).toImmutable();
     }
 
+    @Override
     public <V> ImmutableBag<V> collect(Function<? super T, ? extends V> function)
     {
         MutableBag<V> result = this.collect(function, HashBag.newBag());
         return ImmutableArrayBag.copyFrom(result);
     }
 
+    @Override
     public <V> ImmutableBag<V> collectIf(
             Predicate<? super T> predicate,
             Function<? super T, ? extends V> function)
@@ -255,6 +273,7 @@ public class ImmutableArrayBag<T>
         return ImmutableArrayBag.copyFrom(result);
     }
 
+    @Override
     public <V> ImmutableBag<V> flatCollect(Function<? super T, ? extends Iterable<V>> function)
     {
         return this.flatCollect(function, HashBag.newBag()).toImmutable();
@@ -298,6 +317,7 @@ public class ImmutableArrayBag<T>
         return sum;
     }
 
+    @Override
     public void each(Procedure<? super T> procedure)
     {
         for (int i = 0; i < this.keys.length; i++)
@@ -310,6 +330,7 @@ public class ImmutableArrayBag<T>
         }
     }
 
+    @Override
     public Iterator<T> iterator()
     {
         return new ArrayBagIterator();
@@ -402,6 +423,7 @@ public class ImmutableArrayBag<T>
     /**
      * @deprecated in 6.0. Use {@link OrderedIterable#zip(Iterable)} instead.
      */
+    @Override
     @Deprecated
     public <S> ImmutableBag<Pair<T, S>> zip(Iterable<S> that)
     {
@@ -411,6 +433,7 @@ public class ImmutableArrayBag<T>
     /**
      * @deprecated in 6.0. Use {@link OrderedIterable#zipWithIndex()} instead.
      */
+    @Override
     @Deprecated
     public ImmutableSet<Pair<T, Integer>> zipWithIndex()
     {
@@ -433,12 +456,14 @@ public class ImmutableArrayBag<T>
             this.remainingOccurrences = ImmutableArrayBag.this.sizeDistinct() > 0 ? ImmutableArrayBag.this.counts[0] : 0;
         }
 
+        @Override
         public boolean hasNext()
         {
             return this.position != ImmutableArrayBag.this.keys.length
                     && !(this.position == ImmutableArrayBag.this.keys.length - 1 && this.remainingOccurrences == 0);
         }
 
+        @Override
         public T next()
         {
             if (!this.hasNext())
@@ -460,6 +485,7 @@ public class ImmutableArrayBag<T>
             return result;
         }
 
+        @Override
         public void remove()
         {
             throw new UnsupportedOperationException("Cannot remove from an ImmutableArrayBag");

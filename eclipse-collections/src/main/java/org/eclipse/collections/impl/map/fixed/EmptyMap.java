@@ -44,6 +44,7 @@ final class EmptyMap<K, V>
         return Maps.fixedSize.of();
     }
 
+    @Override
     public int size()
     {
         return 0;
@@ -80,31 +81,37 @@ final class EmptyMap<K, V>
         return Multimaps.mutable.set.with();
     }
 
+    @Override
     public boolean containsKey(Object key)
     {
         return false;
     }
 
+    @Override
     public boolean containsValue(Object value)
     {
         return false;
     }
 
+    @Override
     public V get(Object key)
     {
         return null;
     }
 
+    @Override
     public Set<K> keySet()
     {
         return Sets.fixedSize.of();
     }
 
+    @Override
     public Collection<V> values()
     {
         return Lists.fixedSize.of();
     }
 
+    @Override
     public MutableSet<Entry<K, V>> entrySet()
     {
         return Sets.fixedSize.of();
@@ -145,6 +152,7 @@ final class EmptyMap<K, V>
         return this;
     }
 
+    @Override
     public void forEachKeyValue(Procedure2<? super K, ? super V> procedure)
     {
     }

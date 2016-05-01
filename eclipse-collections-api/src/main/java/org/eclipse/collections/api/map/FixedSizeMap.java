@@ -23,27 +23,33 @@ public interface FixedSizeMap<K, V>
     /**
      * @throws UnsupportedOperationException
      */
+    @Override
     void clear();
 
     /**
      * @throws UnsupportedOperationException
      */
+    @Override
     V put(K key, V value);
 
     /**
      * @throws UnsupportedOperationException
      */
+    @Override
     void putAll(Map<? extends K, ? extends V> map);
 
     /**
      * @throws UnsupportedOperationException
      */
+    @Override
     V remove(Object key);
 
     /**
      * @throws UnsupportedOperationException
      */
+    @Override
     V removeKey(K key);
 
+    @Override
     FixedSizeMap<K, V> tap(Procedure<? super V> procedure);
 }

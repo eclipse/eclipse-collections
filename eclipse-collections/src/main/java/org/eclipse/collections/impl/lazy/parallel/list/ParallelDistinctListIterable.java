@@ -67,6 +67,7 @@ class ParallelDistinctListIterable<T> extends AbstractParallelUnsortedSetIterabl
         return this;
     }
 
+    @Override
     public void forEach(Procedure<? super T> procedure)
     {
         // TODO: Replace the map with a concurrent set once it's implemented
@@ -79,16 +80,19 @@ class ParallelDistinctListIterable<T> extends AbstractParallelUnsortedSetIterabl
         });
     }
 
+    @Override
     public boolean anySatisfy(Predicate<? super T> predicate)
     {
         return this.delegate.anySatisfy(new DistinctAndPredicate<>(predicate));
     }
 
+    @Override
     public boolean allSatisfy(Predicate<? super T> predicate)
     {
         return this.delegate.allSatisfy(new DistinctOrPredicate<>(predicate));
     }
 
+    @Override
     public T detect(Predicate<? super T> predicate)
     {
         return this.delegate.detect(new DistinctAndPredicate<>(predicate));
@@ -140,6 +144,7 @@ class ParallelDistinctListIterable<T> extends AbstractParallelUnsortedSetIterabl
             this.predicate = predicate;
         }
 
+        @Override
         public boolean accept(T each)
         {
             return this.distinct.put(each, true) == null && this.predicate.accept(each);
@@ -157,6 +162,7 @@ class ParallelDistinctListIterable<T> extends AbstractParallelUnsortedSetIterabl
             this.predicate = predicate;
         }
 
+        @Override
         public boolean accept(T each)
         {
             boolean distinct = this.distinct.put(each, true) == null;

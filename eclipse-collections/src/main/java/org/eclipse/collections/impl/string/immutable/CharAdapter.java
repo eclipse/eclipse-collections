@@ -74,16 +74,19 @@ public class CharAdapter extends AbstractCharIterable implements CharSequence, I
         return new CharAdapter(iterable.makeString(""));
     }
 
+    @Override
     public char charAt(int index)
     {
         return this.adapted.charAt(index);
     }
 
+    @Override
     public int length()
     {
         return this.adapted.length();
     }
 
+    @Override
     public String subSequence(int start, int end)
     {
         return this.adapted.substring(start, end);
@@ -103,31 +106,37 @@ public class CharAdapter extends AbstractCharIterable implements CharSequence, I
         return this.adapted;
     }
 
+    @Override
     public CharIterator charIterator()
     {
         return new InternalCharIterator();
     }
 
+    @Override
     public char[] toArray()
     {
         return this.adapted.toCharArray();
     }
 
+    @Override
     public boolean contains(char expected)
     {
         return StringIterate.anySatisfyChar(this.adapted, value -> expected == value);
     }
 
+    @Override
     public void forEach(CharProcedure procedure)
     {
         this.each(procedure);
     }
 
+    @Override
     public void each(CharProcedure procedure)
     {
         StringIterate.forEachChar(this.adapted, procedure);
     }
 
+    @Override
     public CharAdapter distinct()
     {
         StringBuilder builder = new StringBuilder();
@@ -145,11 +154,13 @@ public class CharAdapter extends AbstractCharIterable implements CharSequence, I
         return new CharAdapter(builder.toString());
     }
 
+    @Override
     public CharAdapter newWith(char element)
     {
         return new CharAdapter(this.adapted + element);
     }
 
+    @Override
     public CharAdapter newWithout(char element)
     {
         StringBuilder builder = new StringBuilder(this.adapted);
@@ -162,6 +173,7 @@ public class CharAdapter extends AbstractCharIterable implements CharSequence, I
         return new CharAdapter(builder.toString());
     }
 
+    @Override
     public CharAdapter newWithAll(CharIterable elements)
     {
         MutableCharList mutableCharList = this.toList();
@@ -169,6 +181,7 @@ public class CharAdapter extends AbstractCharIterable implements CharSequence, I
         return new CharAdapter(new String(mutableCharList.toArray()));
     }
 
+    @Override
     public CharAdapter newWithoutAll(CharIterable elements)
     {
         MutableCharList mutableCharList = this.toList();
@@ -176,17 +189,20 @@ public class CharAdapter extends AbstractCharIterable implements CharSequence, I
         return new CharAdapter(new String(mutableCharList.toArray()));
     }
 
+    @Override
     public CharAdapter toReversed()
     {
         StringBuilder builder = new StringBuilder(this.adapted);
         return new CharAdapter(builder.reverse().toString());
     }
 
+    @Override
     public ImmutableCharList subList(int fromIndex, int toIndex)
     {
         throw new UnsupportedOperationException("SubList is not implemented on CharAdapter");
     }
 
+    @Override
     public char get(int index)
     {
         return this.adapted.charAt(index);
@@ -197,16 +213,19 @@ public class CharAdapter extends AbstractCharIterable implements CharSequence, I
         return Character.valueOf(this.get(index));
     }
 
+    @Override
     public long dotProduct(CharList list)
     {
         throw new UnsupportedOperationException("DotProduct is not implemented on CharAdapter");
     }
 
+    @Override
     public int binarySearch(char value)
     {
         throw new UnsupportedOperationException("BinarySearch is not implemented on CharAdapter");
     }
 
+    @Override
     public int lastIndexOf(char value)
     {
         for (int i = this.size() - 1; i >= 0; i--)
@@ -219,21 +238,25 @@ public class CharAdapter extends AbstractCharIterable implements CharSequence, I
         return -1;
     }
 
+    @Override
     public ImmutableCharList toImmutable()
     {
         return this;
     }
 
+    @Override
     public char getLast()
     {
         return this.get(this.size() - 1);
     }
 
+    @Override
     public LazyCharIterable asReversed()
     {
         return ReverseCharIterable.adapt(this);
     }
 
+    @Override
     public <T> T injectIntoWithIndex(T injectedValue, ObjectCharIntToObjectFunction<? super T, ? extends T> function)
     {
         T result = injectedValue;
@@ -245,11 +268,13 @@ public class CharAdapter extends AbstractCharIterable implements CharSequence, I
         return result;
     }
 
+    @Override
     public char getFirst()
     {
         return this.get(0);
     }
 
+    @Override
     public int indexOf(char value)
     {
         int size = this.size();
@@ -263,6 +288,7 @@ public class CharAdapter extends AbstractCharIterable implements CharSequence, I
         return -1;
     }
 
+    @Override
     public void forEachWithIndex(CharIntProcedure procedure)
     {
         int size = this.size();
@@ -272,16 +298,19 @@ public class CharAdapter extends AbstractCharIterable implements CharSequence, I
         }
     }
 
+    @Override
     public CharAdapter select(CharPredicate predicate)
     {
         return new CharAdapter(StringIterate.selectChar(this.adapted, predicate));
     }
 
+    @Override
     public CharAdapter reject(CharPredicate predicate)
     {
         return new CharAdapter(StringIterate.rejectChar(this.adapted, predicate));
     }
 
+    @Override
     public <V> ImmutableList<V> collect(CharToObjectFunction<? extends V> function)
     {
         int size = this.size();
@@ -304,26 +333,31 @@ public class CharAdapter extends AbstractCharIterable implements CharSequence, I
         return new CharAdapter(builder.toString());
     }
 
+    @Override
     public char detectIfNone(CharPredicate predicate, char ifNone)
     {
         return StringIterate.detectCharIfNone(this.adapted, predicate, ifNone);
     }
 
+    @Override
     public int count(CharPredicate predicate)
     {
         return StringIterate.countChar(this.adapted, predicate);
     }
 
+    @Override
     public boolean anySatisfy(CharPredicate predicate)
     {
         return StringIterate.anySatisfyChar(this.adapted, predicate);
     }
 
+    @Override
     public boolean allSatisfy(CharPredicate predicate)
     {
         return StringIterate.allSatisfyChar(this.adapted, predicate);
     }
 
+    @Override
     public boolean noneSatisfy(CharPredicate predicate)
     {
         return StringIterate.noneSatisfyChar(this.adapted, predicate);
@@ -365,6 +399,7 @@ public class CharAdapter extends AbstractCharIterable implements CharSequence, I
         return bag;
     }
 
+    @Override
     public <T> T injectInto(T injectedValue, ObjectCharToObjectFunction<? super T, ? extends T> function)
     {
         T result = injectedValue;
@@ -376,6 +411,7 @@ public class CharAdapter extends AbstractCharIterable implements CharSequence, I
         return result;
     }
 
+    @Override
     public long sum()
     {
         long sum = 0;
@@ -387,6 +423,7 @@ public class CharAdapter extends AbstractCharIterable implements CharSequence, I
         return sum;
     }
 
+    @Override
     public char max()
     {
         if (this.isEmpty())
@@ -406,6 +443,7 @@ public class CharAdapter extends AbstractCharIterable implements CharSequence, I
         return max;
     }
 
+    @Override
     public char min()
     {
         if (this.isEmpty())
@@ -425,11 +463,13 @@ public class CharAdapter extends AbstractCharIterable implements CharSequence, I
         return min;
     }
 
+    @Override
     public int size()
     {
         return this.adapted.length();
     }
 
+    @Override
     public void appendString(Appendable appendable, String start, String separator, String end)
     {
         try
@@ -498,11 +538,13 @@ public class CharAdapter extends AbstractCharIterable implements CharSequence, I
          */
         private int currentIndex;
 
+        @Override
         public boolean hasNext()
         {
             return this.currentIndex != CharAdapter.this.adapted.length();
         }
 
+        @Override
         public char next()
         {
             if (!this.hasNext())

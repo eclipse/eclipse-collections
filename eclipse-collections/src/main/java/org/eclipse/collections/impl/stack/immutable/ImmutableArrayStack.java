@@ -145,6 +145,7 @@ final class ImmutableArrayStack<T> implements ImmutableStack<T>, Serializable
         return new ImmutableArrayStack<>(FastList.newListWith(items).reverseThis());
     }
 
+    @Override
     public ImmutableStack<T> push(T item)
     {
         FastList<T> newDelegate = FastList.newList(this.delegate);
@@ -152,6 +153,7 @@ final class ImmutableArrayStack<T> implements ImmutableStack<T>, Serializable
         return new ImmutableArrayStack<>(newDelegate);
     }
 
+    @Override
     public ImmutableStack<T> pop()
     {
         this.checkEmptyStack();
@@ -160,6 +162,7 @@ final class ImmutableArrayStack<T> implements ImmutableStack<T>, Serializable
         return new ImmutableArrayStack<>(newDelegate);
     }
 
+    @Override
     public ImmutableStack<T> pop(int count)
     {
         this.checkNegativeCount(count);
@@ -178,6 +181,7 @@ final class ImmutableArrayStack<T> implements ImmutableStack<T>, Serializable
         return new ImmutableArrayStack<>(newDelegate);
     }
 
+    @Override
     public T peek()
     {
         this.checkEmptyStack();
@@ -192,6 +196,7 @@ final class ImmutableArrayStack<T> implements ImmutableStack<T>, Serializable
         }
     }
 
+    @Override
     public ListIterable<T> peek(int count)
     {
         this.checkNegativeCount(count);
@@ -233,6 +238,7 @@ final class ImmutableArrayStack<T> implements ImmutableStack<T>, Serializable
         }
     }
 
+    @Override
     public T peekAt(int index)
     {
         this.checkNegativeCount(index);
@@ -241,81 +247,97 @@ final class ImmutableArrayStack<T> implements ImmutableStack<T>, Serializable
         return this.delegate.get(this.delegate.size() - 1 - index);
     }
 
+    @Override
     public T getFirst()
     {
         return this.peek();
     }
 
+    @Override
     public T getLast()
     {
         throw new UnsupportedOperationException("Cannot call getLast() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public boolean contains(Object object)
     {
         return this.delegate.asReversed().contains(object);
     }
 
+    @Override
     public boolean containsAllIterable(Iterable<?> source)
     {
         return this.delegate.asReversed().containsAllIterable(source);
     }
 
+    @Override
     public boolean containsAll(Collection<?> source)
     {
         return this.delegate.asReversed().containsAll(source);
     }
 
+    @Override
     public boolean containsAllArguments(Object... elements)
     {
         return this.delegate.asReversed().containsAllArguments(elements);
     }
 
+    @Override
     public MutableStack<T> toStack()
     {
         return ArrayStack.newStackFromTopToBottom(this);
     }
 
+    @Override
     public ImmutableStack<T> select(Predicate<? super T> predicate)
     {
         return ImmutableArrayStack.newStackFromTopToBottom(this.delegate.asReversed().select(predicate).toList());
     }
 
+    @Override
     public <P> ImmutableStack<T> selectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         return this.select(Predicates.bind(predicate, parameter));
     }
 
+    @Override
     public <R extends Collection<T>> R select(Predicate<? super T> predicate, R target)
     {
         return this.delegate.asReversed().select(predicate, target);
     }
 
+    @Override
     public <P, R extends Collection<T>> R selectWith(Predicate2<? super T, ? super P> predicate, P parameter, R targetCollection)
     {
         return this.delegate.asReversed().selectWith(predicate, parameter, targetCollection);
     }
 
+    @Override
     public ImmutableStack<T> reject(Predicate<? super T> predicate)
     {
         return ImmutableArrayStack.newStackFromTopToBottom(this.delegate.asReversed().reject(predicate).toList());
     }
 
+    @Override
     public <R extends Collection<T>> R reject(Predicate<? super T> predicate, R target)
     {
         return this.delegate.asReversed().reject(predicate, target);
     }
 
+    @Override
     public <P> ImmutableStack<T> rejectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         return this.reject(Predicates.bind(predicate, parameter));
     }
 
+    @Override
     public <P, R extends Collection<T>> R rejectWith(Predicate2<? super T, ? super P> predicate, P parameter, R targetCollection)
     {
         return this.delegate.asReversed().rejectWith(predicate, parameter, targetCollection);
     }
 
+    @Override
     public PartitionImmutableStack<T> partition(Predicate<? super T> predicate)
     {
         PartitionArrayStack<T> partitionMutableStack = new PartitionArrayStack<>();
@@ -323,6 +345,7 @@ final class ImmutableArrayStack<T> implements ImmutableStack<T>, Serializable
         return partitionMutableStack.toImmutable();
     }
 
+    @Override
     public <P> PartitionImmutableStack<T> partitionWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         PartitionArrayStack<T> partitionMutableStack = new PartitionArrayStack<>();
@@ -330,451 +353,541 @@ final class ImmutableArrayStack<T> implements ImmutableStack<T>, Serializable
         return partitionMutableStack.toImmutable();
     }
 
+    @Override
     public <S> ImmutableStack<S> selectInstancesOf(Class<S> clazz)
     {
         return ImmutableArrayStack.newStackFromTopToBottom(this.delegate.asReversed().selectInstancesOf(clazz).toList());
     }
 
+    @Override
     public <V> ImmutableStack<V> collect(Function<? super T, ? extends V> function)
     {
         return ImmutableArrayStack.newStackFromTopToBottom(this.delegate.asReversed().collect(function));
     }
 
+    @Override
     public ImmutableBooleanStack collectBoolean(BooleanFunction<? super T> booleanFunction)
     {
         return BooleanArrayStack.newStackFromTopToBottom(this.delegate.asReversed().collectBoolean(booleanFunction)).toImmutable();
     }
 
+    @Override
     public <R extends MutableBooleanCollection> R collectBoolean(BooleanFunction<? super T> booleanFunction, R target)
     {
         return this.delegate.asReversed().collectBoolean(booleanFunction, target);
     }
 
+    @Override
     public ImmutableByteStack collectByte(ByteFunction<? super T> byteFunction)
     {
         return ByteArrayStack.newStackFromTopToBottom(this.delegate.asReversed().collectByte(byteFunction)).toImmutable();
     }
 
+    @Override
     public <R extends MutableByteCollection> R collectByte(ByteFunction<? super T> byteFunction, R target)
     {
         return this.delegate.asReversed().collectByte(byteFunction, target);
     }
 
+    @Override
     public ImmutableCharStack collectChar(CharFunction<? super T> charFunction)
     {
         return CharArrayStack.newStackFromTopToBottom(this.delegate.asReversed().collectChar(charFunction)).toImmutable();
     }
 
+    @Override
     public <R extends MutableCharCollection> R collectChar(CharFunction<? super T> charFunction, R target)
     {
         return this.delegate.asReversed().collectChar(charFunction, target);
     }
 
+    @Override
     public ImmutableDoubleStack collectDouble(DoubleFunction<? super T> doubleFunction)
     {
         return DoubleArrayStack.newStackFromTopToBottom(this.delegate.asReversed().collectDouble(doubleFunction)).toImmutable();
     }
 
+    @Override
     public <R extends MutableDoubleCollection> R collectDouble(DoubleFunction<? super T> doubleFunction, R target)
     {
         return this.delegate.asReversed().collectDouble(doubleFunction, target);
     }
 
+    @Override
     public ImmutableFloatStack collectFloat(FloatFunction<? super T> floatFunction)
     {
         return FloatArrayStack.newStackFromTopToBottom(this.delegate.asReversed().collectFloat(floatFunction)).toImmutable();
     }
 
+    @Override
     public <R extends MutableFloatCollection> R collectFloat(FloatFunction<? super T> floatFunction, R target)
     {
         return this.delegate.asReversed().collectFloat(floatFunction, target);
     }
 
+    @Override
     public ImmutableIntStack collectInt(IntFunction<? super T> intFunction)
     {
         return IntArrayStack.newStackFromTopToBottom(this.delegate.asReversed().collectInt(intFunction)).toImmutable();
     }
 
+    @Override
     public <R extends MutableIntCollection> R collectInt(IntFunction<? super T> intFunction, R target)
     {
         return this.delegate.asReversed().collectInt(intFunction, target);
     }
 
+    @Override
     public ImmutableLongStack collectLong(LongFunction<? super T> longFunction)
     {
         return LongArrayStack.newStackFromTopToBottom(this.delegate.asReversed().collectLong(longFunction)).toImmutable();
     }
 
+    @Override
     public <R extends MutableLongCollection> R collectLong(LongFunction<? super T> longFunction, R target)
     {
         return this.delegate.asReversed().collectLong(longFunction, target);
     }
 
+    @Override
     public ImmutableShortStack collectShort(ShortFunction<? super T> shortFunction)
     {
         return ShortArrayStack.newStackFromTopToBottom(this.delegate.asReversed().collectShort(shortFunction)).toImmutable();
     }
 
+    @Override
     public <R extends MutableShortCollection> R collectShort(ShortFunction<? super T> shortFunction, R target)
     {
         return this.delegate.asReversed().collectShort(shortFunction, target);
     }
 
+    @Override
     public <V, R extends Collection<V>> R collect(Function<? super T, ? extends V> function, R target)
     {
         return this.delegate.asReversed().collect(function, target);
     }
 
+    @Override
     public <P, V> ImmutableStack<V> collectWith(Function2<? super T, ? super P, ? extends V> function, P parameter)
     {
         return ImmutableArrayStack.newStackFromTopToBottom(this.delegate.asReversed().collectWith(function, parameter).toList());
     }
 
+    @Override
     public <P, V, R extends Collection<V>> R collectWith(Function2<? super T, ? super P, ? extends V> function, P parameter, R targetCollection)
     {
         return this.delegate.asReversed().collectWith(function, parameter, targetCollection);
     }
 
+    @Override
     public <V> ImmutableStack<V> collectIf(Predicate<? super T> predicate, Function<? super T, ? extends V> function)
     {
         return ImmutableArrayStack.newStackFromTopToBottom(this.delegate.asReversed().collectIf(predicate, function).toList());
     }
 
+    @Override
     public <V, R extends Collection<V>> R collectIf(Predicate<? super T> predicate, Function<? super T, ? extends V> function, R target)
     {
         return this.delegate.asReversed().collectIf(predicate, function, target);
     }
 
+    @Override
     public <V> ImmutableStack<V> flatCollect(Function<? super T, ? extends Iterable<V>> function)
     {
         return ImmutableArrayStack.newStackFromTopToBottom(this.delegate.asReversed().flatCollect(function).toList());
     }
 
+    @Override
     public <V, R extends Collection<V>> R flatCollect(Function<? super T, ? extends Iterable<V>> function, R target)
     {
         return this.delegate.asReversed().flatCollect(function, target);
     }
 
+    @Override
     public T detect(Predicate<? super T> predicate)
     {
         return this.delegate.asReversed().detect(predicate);
     }
 
+    @Override
     public <P> T detectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         return this.delegate.asReversed().detectWith(predicate, parameter);
     }
 
+    @Override
     public T detectIfNone(Predicate<? super T> predicate, Function0<? extends T> function)
     {
         return this.delegate.asReversed().detectIfNone(predicate, function);
     }
 
+    @Override
     public <P> T detectWithIfNone(Predicate2<? super T, ? super P> predicate, P parameter, Function0<? extends T> function)
     {
         return this.delegate.asReversed().detectWithIfNone(predicate, parameter, function);
     }
 
+    @Override
     public int count(Predicate<? super T> predicate)
     {
         return this.delegate.asReversed().count(predicate);
     }
 
+    @Override
     public <P> int countWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         return this.delegate.asReversed().countWith(predicate, parameter);
     }
 
+    @Override
     public boolean anySatisfy(Predicate<? super T> predicate)
     {
         return this.delegate.asReversed().anySatisfy(predicate);
     }
 
+    @Override
     public <P> boolean anySatisfyWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         return this.delegate.asReversed().anySatisfyWith(predicate, parameter);
     }
 
+    @Override
     public boolean allSatisfy(Predicate<? super T> predicate)
     {
         return this.delegate.asReversed().allSatisfy(predicate);
     }
 
+    @Override
     public <P> boolean allSatisfyWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         return this.delegate.asReversed().allSatisfyWith(predicate, parameter);
     }
 
+    @Override
     public boolean noneSatisfy(Predicate<? super T> predicate)
     {
         return this.delegate.asReversed().noneSatisfy(predicate);
     }
 
+    @Override
     public <P> boolean noneSatisfyWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         return this.delegate.asReversed().noneSatisfyWith(predicate, parameter);
     }
 
+    @Override
     public <IV> IV injectInto(IV injectedValue, Function2<? super IV, ? super T, ? extends IV> function)
     {
         return this.delegate.asReversed().injectInto(injectedValue, function);
     }
 
+    @Override
     public int injectInto(int injectedValue, IntObjectToIntFunction<? super T> intObjectToIntFunction)
     {
         return this.delegate.asReversed().injectInto(injectedValue, intObjectToIntFunction);
     }
 
+    @Override
     public long injectInto(long injectedValue, LongObjectToLongFunction<? super T> longObjectToLongFunction)
     {
         return this.delegate.asReversed().injectInto(injectedValue, longObjectToLongFunction);
     }
 
+    @Override
     public double injectInto(double injectedValue, DoubleObjectToDoubleFunction<? super T> doubleObjectToDoubleFunction)
     {
         return this.delegate.asReversed().injectInto(injectedValue, doubleObjectToDoubleFunction);
     }
 
+    @Override
     public float injectInto(float injectedValue, FloatObjectToFloatFunction<? super T> floatObjectToFloatFunction)
     {
         return this.delegate.asReversed().injectInto(injectedValue, floatObjectToFloatFunction);
     }
 
+    @Override
     public <R extends Collection<T>> R into(R target)
     {
         return this.delegate.asReversed().into(target);
     }
 
+    @Override
     public MutableList<T> toList()
     {
         return this.delegate.asReversed().toList();
     }
 
+    @Override
     public MutableList<T> toSortedList()
     {
         return this.delegate.asReversed().toSortedList();
     }
 
+    @Override
     public MutableList<T> toSortedList(Comparator<? super T> comparator)
     {
         return this.delegate.asReversed().toSortedList(comparator);
     }
 
+    @Override
     public <V extends Comparable<? super V>> MutableList<T> toSortedListBy(Function<? super T, ? extends V> function)
     {
         return this.delegate.asReversed().toSortedListBy(function);
     }
 
+    @Override
     public MutableSet<T> toSet()
     {
         return this.delegate.asReversed().toSet();
     }
 
+    @Override
     public MutableSortedSet<T> toSortedSet()
     {
         return this.delegate.asReversed().toSortedSet();
     }
 
+    @Override
     public MutableSortedSet<T> toSortedSet(Comparator<? super T> comparator)
     {
         return this.delegate.asReversed().toSortedSet(comparator);
     }
 
+    @Override
     public <V extends Comparable<? super V>> MutableSortedSet<T> toSortedSetBy(Function<? super T, ? extends V> function)
     {
         return this.delegate.asReversed().toSortedSetBy(function);
     }
 
+    @Override
     public MutableBag<T> toBag()
     {
         return this.delegate.asReversed().toBag();
     }
 
+    @Override
     public MutableSortedBag<T> toSortedBag()
     {
         return this.delegate.asReversed().toSortedBag();
     }
 
+    @Override
     public MutableSortedBag<T> toSortedBag(Comparator<? super T> comparator)
     {
         return this.delegate.asReversed().toSortedBag(comparator);
     }
 
+    @Override
     public <V extends Comparable<? super V>> MutableSortedBag<T> toSortedBagBy(Function<? super T, ? extends V> function)
     {
         return this.delegate.asReversed().toSortedBagBy(function);
     }
 
+    @Override
     public <NK, NV> MutableMap<NK, NV> toMap(Function<? super T, ? extends NK> keyFunction, Function<? super T, ? extends NV> valueFunction)
     {
         return this.delegate.asReversed().toMap(keyFunction, valueFunction);
     }
 
+    @Override
     public <NK, NV> MutableSortedMap<NK, NV> toSortedMap(Function<? super T, ? extends NK> keyFunction, Function<? super T, ? extends NV> valueFunction)
     {
         return this.delegate.asReversed().toSortedMap(keyFunction, valueFunction);
     }
 
+    @Override
     public <NK, NV> MutableSortedMap<NK, NV> toSortedMap(Comparator<? super NK> comparator, Function<? super T, ? extends NK> keyFunction, Function<? super T, ? extends NV> valueFunction)
     {
         return this.delegate.asReversed().toSortedMap(comparator, keyFunction, valueFunction);
     }
 
+    @Override
     public LazyIterable<T> asLazy()
     {
         return LazyIterate.adapt(this);
     }
 
+    @Override
     public Object[] toArray()
     {
         return this.delegate.asReversed().toArray();
     }
 
+    @Override
     public <T> T[] toArray(T[] a)
     {
         return this.delegate.asReversed().toArray(a);
     }
 
+    @Override
     public T min(Comparator<? super T> comparator)
     {
         return this.delegate.asReversed().min(comparator);
     }
 
+    @Override
     public T max(Comparator<? super T> comparator)
     {
         return this.delegate.asReversed().max(comparator);
     }
 
+    @Override
     public T min()
     {
         return this.delegate.asReversed().min();
     }
 
+    @Override
     public T max()
     {
         return this.delegate.asReversed().max();
     }
 
+    @Override
     public <V extends Comparable<? super V>> T minBy(Function<? super T, ? extends V> function)
     {
         return this.delegate.asReversed().toList().minBy(function);
     }
 
+    @Override
     public <V extends Comparable<? super V>> T maxBy(Function<? super T, ? extends V> function)
     {
         return this.delegate.asReversed().maxBy(function);
     }
 
+    @Override
     public long sumOfInt(IntFunction<? super T> intFunction)
     {
         return this.delegate.asReversed().sumOfInt(intFunction);
     }
 
+    @Override
     public double sumOfFloat(FloatFunction<? super T> floatFunction)
     {
         return this.delegate.asReversed().sumOfFloat(floatFunction);
     }
 
+    @Override
     public long sumOfLong(LongFunction<? super T> longFunction)
     {
         return this.delegate.asReversed().sumOfLong(longFunction);
     }
 
+    @Override
     public double sumOfDouble(DoubleFunction<? super T> doubleFunction)
     {
         return this.delegate.asReversed().sumOfDouble(doubleFunction);
     }
 
+    @Override
     public <V> ImmutableObjectLongMap<V> sumByInt(Function<? super T, ? extends V> groupBy, IntFunction<? super T> function)
     {
         return this.delegate.asReversed().sumByInt(groupBy, function).toImmutable();
     }
 
+    @Override
     public <V> ImmutableObjectDoubleMap<V> sumByFloat(Function<? super T, ? extends V> groupBy, FloatFunction<? super T> function)
     {
         return this.delegate.asReversed().sumByFloat(groupBy, function).toImmutable();
     }
 
+    @Override
     public <V> ImmutableObjectLongMap<V> sumByLong(Function<? super T, ? extends V> groupBy, LongFunction<? super T> function)
     {
         return this.delegate.asReversed().sumByLong(groupBy, function).toImmutable();
     }
 
+    @Override
     public <V> ImmutableObjectDoubleMap<V> sumByDouble(Function<? super T, ? extends V> groupBy, DoubleFunction<? super T> function)
     {
         return this.delegate.asReversed().sumByDouble(groupBy, function).toImmutable();
     }
 
+    @Override
     public String makeString()
     {
         return this.delegate.asReversed().makeString();
     }
 
+    @Override
     public String makeString(String separator)
     {
         return this.delegate.asReversed().makeString(separator);
     }
 
+    @Override
     public String makeString(String start, String separator, String end)
     {
         return this.delegate.asReversed().makeString(start, separator, end);
     }
 
+    @Override
     public void appendString(Appendable appendable)
     {
         this.delegate.asReversed().appendString(appendable);
     }
 
+    @Override
     public void appendString(Appendable appendable, String separator)
     {
         this.delegate.asReversed().appendString(appendable, separator);
     }
 
+    @Override
     public void appendString(Appendable appendable, String start, String separator, String end)
     {
         this.delegate.asReversed().appendString(appendable, start, separator, end);
     }
 
+    @Override
     public <V> ImmutableListMultimap<V, T> groupBy(Function<? super T, ? extends V> function)
     {
         return this.groupBy(function, FastListMultimap.<V, T>newMultimap()).toImmutable();
     }
 
+    @Override
     public <V, R extends MutableMultimap<V, T>> R groupBy(Function<? super T, ? extends V> function, R target)
     {
         return this.delegate.asReversed().groupBy(function, target);
     }
 
+    @Override
     public <V> ImmutableListMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function)
     {
         return this.groupByEach(function, FastListMultimap.newMultimap()).toImmutable();
     }
 
+    @Override
     public <V, R extends MutableMultimap<V, T>> R groupByEach(Function<? super T, ? extends Iterable<V>> function, R target)
     {
         return this.delegate.asReversed().groupByEach(function, target);
     }
 
+    @Override
     public <V> ImmutableMap<V, T> groupByUniqueKey(Function<? super T, ? extends V> function)
     {
         return this.groupByUniqueKey(function, UnifiedMap.<V, T>newMap()).toImmutable();
     }
 
+    @Override
     public <V, R extends MutableMap<V, T>> R groupByUniqueKey(Function<? super T, ? extends V> function, R target)
     {
         return this.delegate.asReversed().groupByUniqueKey(function, target);
     }
 
+    @Override
     public <S> ImmutableStack<Pair<T, S>> zip(Iterable<S> that)
     {
         return ImmutableArrayStack.newStackFromTopToBottom(this.delegate.asReversed().zip(that).toList());
     }
 
+    @Override
     public <S, R extends Collection<Pair<T, S>>> R zip(Iterable<S> that, R target)
     {
         return this.delegate.asReversed().zip(that, target);
     }
 
+    @Override
     public ImmutableStack<Pair<T, Integer>> zipWithIndex()
     {
         int maxIndex = this.delegate.size() - 1;
@@ -783,21 +896,25 @@ final class ImmutableArrayStack<T> implements ImmutableStack<T>, Serializable
         return ImmutableArrayStack.newStackFromTopToBottom(this.delegate.asReversed().zip(indicies).toList());
     }
 
+    @Override
     public <R extends Collection<Pair<T, Integer>>> R zipWithIndex(R target)
     {
         return this.delegate.asReversed().zipWithIndex(target);
     }
 
+    @Override
     public ImmutableStack<T> toImmutable()
     {
         return this;
     }
 
+    @Override
     public RichIterable<RichIterable<T>> chunk(int size)
     {
         return this.delegate.asReversed().chunk(size);
     }
 
+    @Override
     public <K, V> ImmutableMap<K, V> aggregateInPlaceBy(Function<? super T, ? extends K> groupBy, Function0<? extends V> zeroValueFactory, Procedure2<? super V, ? super T> mutatingAggregator)
     {
         MutableMap<K, V> map = UnifiedMap.newMap();
@@ -805,6 +922,7 @@ final class ImmutableArrayStack<T> implements ImmutableStack<T>, Serializable
         return map.toImmutable();
     }
 
+    @Override
     public <K, V> ImmutableMap<K, V> aggregateBy(Function<? super T, ? extends K> groupBy, Function0<? extends V> zeroValueFactory, Function2<? super V, ? super T, ? extends V> nonMutatingAggregator)
     {
         MutableMap<K, V> map = UnifiedMap.newMap();
@@ -812,72 +930,86 @@ final class ImmutableArrayStack<T> implements ImmutableStack<T>, Serializable
         return map.toImmutable();
     }
 
+    @Override
     public int size()
     {
         return this.delegate.size();
     }
 
+    @Override
     public boolean isEmpty()
     {
         return this.delegate.isEmpty();
     }
 
+    @Override
     public boolean notEmpty()
     {
         return this.delegate.notEmpty();
     }
 
+    @Override
     public ImmutableStack<T> tap(Procedure<? super T> procedure)
     {
         this.forEach(procedure);
         return this;
     }
 
+    @Override
     public void forEach(Procedure<? super T> procedure)
     {
         this.each(procedure);
     }
 
+    @Override
     public void each(Procedure<? super T> procedure)
     {
         this.delegate.reverseForEach(procedure);
     }
 
+    @Override
     public void forEachWithIndex(ObjectIntProcedure<? super T> objectIntProcedure)
     {
         this.delegate.asReversed().forEachWithIndex(objectIntProcedure);
     }
 
+    @Override
     public <P> void forEachWith(Procedure2<? super T, ? super P> procedure, P parameter)
     {
         this.delegate.asReversed().forEachWith(procedure, parameter);
     }
 
+    @Override
     public ImmutableStack<T> takeWhile(Predicate<? super T> predicate)
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".takeWhile() not implemented yet");
     }
 
+    @Override
     public ImmutableStack<T> dropWhile(Predicate<? super T> predicate)
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".dropWhile() not implemented yet");
     }
 
+    @Override
     public PartitionImmutableStack<T> partitionWhile(Predicate<? super T> predicate)
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".partitionWhile() not implemented yet");
     }
 
+    @Override
     public ImmutableStack<T> distinct()
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".distinct() not implemented yet");
     }
 
+    @Override
     public int indexOf(Object object)
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".indexOf() not implemented yet");
     }
 
+    @Override
     public <S> boolean corresponds(OrderedIterable<S> other, Predicate2<? super T, ? super S> predicate)
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".corresponds() not implemented yet");
@@ -888,26 +1020,31 @@ final class ImmutableArrayStack<T> implements ImmutableStack<T>, Serializable
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".hasSameElements() not implemented yet");
     }
 
+    @Override
     public void forEach(int startIndex, int endIndex, Procedure<? super T> procedure)
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".forEach() not implemented yet");
     }
 
+    @Override
     public void forEachWithIndex(int fromIndex, int toIndex, ObjectIntProcedure<? super T> objectIntProcedure)
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".forEachWithIndex() not implemented yet");
     }
 
+    @Override
     public <V> ImmutableStack<V> collectWithIndex(ObjectIntToObjectFunction<? super T, ? extends V> function)
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".collectWithIndex() not implemented yet");
     }
 
+    @Override
     public int detectIndex(Predicate<? super T> predicate)
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".detectIndex() not implemented yet");
     }
 
+    @Override
     public Iterator<T> iterator()
     {
         return this.delegate.asReversed().iterator();
@@ -982,6 +1119,7 @@ final class ImmutableArrayStack<T> implements ImmutableStack<T>, Serializable
             this.stack = stack;
         }
 
+        @Override
         public void writeExternal(ObjectOutput out) throws IOException
         {
             out.writeInt(this.stack.size());
@@ -1005,6 +1143,7 @@ final class ImmutableArrayStack<T> implements ImmutableStack<T>, Serializable
             }
         }
 
+        @Override
         public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
         {
             int size = in.readInt();

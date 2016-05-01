@@ -33,21 +33,25 @@ class PairImpl<T1, T2>
         this.two = newTwo;
     }
 
+    @Override
     public T1 getOne()
     {
         return this.one;
     }
 
+    @Override
     public T2 getTwo()
     {
         return this.two;
     }
 
+    @Override
     public void put(Map<T1, T2> map)
     {
         map.put(this.one, this.two);
     }
 
+    @Override
     public PairImpl<T2, T1> swap()
     {
         return new PairImpl<>(this.two, this.one);
@@ -85,11 +89,13 @@ class PairImpl<T1, T2>
         return this.one + ":" + this.two;
     }
 
+    @Override
     public Map.Entry<T1, T2> toEntry()
     {
         return ImmutableEntry.of(this.one, this.two);
     }
 
+    @Override
     public int compareTo(Pair<T1, T2> other)
     {
         int i = ((Comparable<T1>) this.one).compareTo(other.getOne());

@@ -20,16 +20,19 @@ public class PartitionFastList<T> implements PartitionMutableList<T>
     private final MutableList<T> selected = FastList.newList();
     private final MutableList<T> rejected = FastList.newList();
 
+    @Override
     public MutableList<T> getSelected()
     {
         return this.selected;
     }
 
+    @Override
     public MutableList<T> getRejected()
     {
         return this.rejected;
     }
 
+    @Override
     public PartitionImmutableList<T> toImmutable()
     {
         return new PartitionImmutableListImpl<>(this);

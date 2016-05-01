@@ -74,31 +74,37 @@ public class ImmutableUnifiedMapWithHashingStrategy<K, V>
         return this.delegate.toString();
     }
 
+    @Override
     public int size()
     {
         return this.delegate.size();
     }
 
+    @Override
     public boolean containsKey(Object key)
     {
         return this.delegate.containsKey(key);
     }
 
+    @Override
     public boolean containsValue(Object value)
     {
         return this.delegate.containsValue(value);
     }
 
+    @Override
     public V get(Object key)
     {
         return this.delegate.get(key);
     }
 
+    @Override
     public int getBatchCount(int batchSize)
     {
         return this.delegate.getBatchCount(batchSize);
     }
 
+    @Override
     public void batchForEach(Procedure<? super V> procedure, int sectionIndex, int sectionCount)
     {
         this.delegate.batchForEach(procedure, sectionIndex, sectionCount);
@@ -116,6 +122,7 @@ public class ImmutableUnifiedMapWithHashingStrategy<K, V>
         this.delegate.forEachKey(procedure);
     }
 
+    @Override
     public void forEachKeyValue(Procedure2<? super K, ? super V> procedure)
     {
         this.delegate.forEachKeyValue(procedure);
@@ -131,26 +138,31 @@ public class ImmutableUnifiedMapWithHashingStrategy<K, V>
         return result.toImmutable().castToSet();
     }
 
+    @Override
     public Set<K> keySet()
     {
         return UnmodifiableMutableSet.of(this.delegate.keySet());
     }
 
+    @Override
     public Collection<V> values()
     {
         return UnmodifiableMutableCollection.of(this.delegate.values());
     }
 
+    @Override
     public RichIterable<K> keysView()
     {
         return this.delegate.keysView();
     }
 
+    @Override
     public RichIterable<V> valuesView()
     {
         return this.delegate.valuesView();
     }
 
+    @Override
     public RichIterable<Pair<K, V>> keyValuesView()
     {
         return this.delegate.keyValuesView();

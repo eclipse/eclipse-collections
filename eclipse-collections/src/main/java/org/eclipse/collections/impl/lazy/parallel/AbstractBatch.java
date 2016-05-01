@@ -31,6 +31,7 @@ import org.eclipse.collections.impl.block.procedure.SumOfLongProcedure;
 
 public abstract class AbstractBatch<T> implements Batch<T>
 {
+    @Override
     public int count(Predicate<? super T> predicate)
     {
         CountProcedure<T> procedure = new CountProcedure<>(predicate);
@@ -38,6 +39,7 @@ public abstract class AbstractBatch<T> implements Batch<T>
         return procedure.getCount();
     }
 
+    @Override
     public String makeString(String separator)
     {
         StringBuilder stringBuilder = new StringBuilder();
@@ -51,6 +53,7 @@ public abstract class AbstractBatch<T> implements Batch<T>
         return stringBuilder.toString();
     }
 
+    @Override
     public T min(Comparator<? super T> comparator)
     {
         MinComparatorProcedure<T> procedure = new MinComparatorProcedure<>(comparator);
@@ -58,6 +61,7 @@ public abstract class AbstractBatch<T> implements Batch<T>
         return procedure.isVisitedAtLeastOnce() ? procedure.getResult() : null;
     }
 
+    @Override
     public T max(Comparator<? super T> comparator)
     {
         MaxComparatorProcedure<T> procedure = new MaxComparatorProcedure<>(comparator);
@@ -65,6 +69,7 @@ public abstract class AbstractBatch<T> implements Batch<T>
         return procedure.isVisitedAtLeastOnce() ? procedure.getResult() : null;
     }
 
+    @Override
     public <V extends Comparable<? super V>> T minBy(Function<? super T, ? extends V> function)
     {
         MinByProcedure<T, V> procedure = new MinByProcedure<>(function);
@@ -72,6 +77,7 @@ public abstract class AbstractBatch<T> implements Batch<T>
         return procedure.isVisitedAtLeastOnce() ? procedure.getResult() : null;
     }
 
+    @Override
     public <V extends Comparable<? super V>> T maxBy(Function<? super T, ? extends V> function)
     {
         MaxByProcedure<T, V> procedure = new MaxByProcedure<>(function);
@@ -79,6 +85,7 @@ public abstract class AbstractBatch<T> implements Batch<T>
         return procedure.isVisitedAtLeastOnce() ? procedure.getResult() : null;
     }
 
+    @Override
     public long sumOfInt(IntFunction<? super T> function)
     {
         SumOfIntProcedure<T> procedure = new SumOfIntProcedure<>(function);
@@ -86,6 +93,7 @@ public abstract class AbstractBatch<T> implements Batch<T>
         return procedure.getResult();
     }
 
+    @Override
     public DoubleSumResultHolder sumOfFloat(FloatFunction<? super T> function)
     {
         SumOfFloatProcedure<T> procedure = new SumOfFloatProcedure<>(function);
@@ -93,6 +101,7 @@ public abstract class AbstractBatch<T> implements Batch<T>
         return procedure;
     }
 
+    @Override
     public long sumOfLong(LongFunction<? super T> function)
     {
         SumOfLongProcedure<T> procedure = new SumOfLongProcedure<>(function);
@@ -100,6 +109,7 @@ public abstract class AbstractBatch<T> implements Batch<T>
         return procedure.getResult();
     }
 
+    @Override
     public DoubleSumResultHolder sumOfDouble(DoubleFunction<? super T> function)
     {
         SumOfDoubleProcedure<T> procedure = new SumOfDoubleProcedure<>(function);

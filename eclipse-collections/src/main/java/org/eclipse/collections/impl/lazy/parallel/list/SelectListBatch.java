@@ -31,6 +31,7 @@ public class SelectListBatch<T> extends AbstractBatch<T> implements ListBatch<T>
         this.predicate = predicate;
     }
 
+    @Override
     public void forEach(Procedure<? super T> procedure)
     {
         this.listBatch.forEach(new IfProcedure<>(this.predicate, procedure));
@@ -43,21 +44,25 @@ public class SelectListBatch<T> extends AbstractBatch<T> implements ListBatch<T>
     }
     */
 
+    @Override
     public ListBatch<T> select(Predicate<? super T> predicate)
     {
         return new SelectListBatch<>(this, predicate);
     }
 
+    @Override
     public <V> ListBatch<V> collect(Function<? super T, ? extends V> function)
     {
         return new CollectListBatch<>(this, function);
     }
 
+    @Override
     public <V> ListBatch<V> flatCollect(Function<? super T, ? extends Iterable<V>> function)
     {
         return new FlatCollectListBatch<>(this, function);
     }
 
+    @Override
     public UnsortedSetBatch<T> distinct(ConcurrentHashMap<T, Boolean> distinct)
     {
         return new DistinctBatch<>(this, distinct);

@@ -102,6 +102,7 @@ class ImmutableSortedBagImpl<T>
         this.size = size;
     }
 
+    @Override
     public ImmutableSortedBag<T> newWith(T element)
     {
         int index = Arrays.binarySearch(this.elements, element, this.comparator);
@@ -130,6 +131,7 @@ class ImmutableSortedBagImpl<T>
         return new ImmutableSortedBagImpl<>(elements, occurrences, this.comparator);
     }
 
+    @Override
     public ImmutableSortedBag<T> newWithout(T element)
     {
         int index = Arrays.binarySearch(this.elements, element, this.comparator);
@@ -158,6 +160,7 @@ class ImmutableSortedBagImpl<T>
         return new ImmutableSortedBagImpl<>(elements, occurrences, this.comparator);
     }
 
+    @Override
     public ImmutableSortedBag<T> newWithAll(Iterable<? extends T> elements)
     {
         MutableSortedBag<T> result = TreeBag.newBag(this);
@@ -165,6 +168,7 @@ class ImmutableSortedBagImpl<T>
         return result.toImmutable();
     }
 
+    @Override
     public Comparator<? super T> comparator()
     {
         return this.comparator;
@@ -206,6 +210,7 @@ class ImmutableSortedBagImpl<T>
         return ArrayIterate.maxBy(this.elements, function);
     }
 
+    @Override
     public ImmutableSortedBag<T> takeWhile(Predicate<? super T> predicate)
     {
         MutableSortedBag<T> bag = TreeBag.newBag(this.comparator);
@@ -223,6 +228,7 @@ class ImmutableSortedBagImpl<T>
         return bag.toImmutable();
     }
 
+    @Override
     public ImmutableSortedBag<T> dropWhile(Predicate<? super T> predicate)
     {
         MutableSortedBag<T> bag = TreeBag.newBag(this.comparator);
@@ -234,6 +240,7 @@ class ImmutableSortedBagImpl<T>
         return bag.toImmutable();
     }
 
+    @Override
     public int detectIndex(Predicate<? super T> predicate)
     {
         int result = 0;
@@ -260,6 +267,7 @@ class ImmutableSortedBagImpl<T>
         return this.elements.length;
     }
 
+    @Override
     public PartitionImmutableSortedBag<T> partitionWhile(Predicate<? super T> predicate)
     {
         PartitionTreeBag<T> result = new PartitionTreeBag<>(this.comparator());
@@ -278,6 +286,7 @@ class ImmutableSortedBagImpl<T>
         return new PartitionImmutableSortedBagImpl<>(result);
     }
 
+    @Override
     public void forEachWithOccurrences(ObjectIntProcedure<? super T> procedure)
     {
         for (int i = 0; i < this.occurrences.length; i++)
@@ -286,16 +295,19 @@ class ImmutableSortedBagImpl<T>
         }
     }
 
+    @Override
     public int sizeDistinct()
     {
         return this.elements.length;
     }
 
+    @Override
     public int size()
     {
         return this.size;
     }
 
+    @Override
     public int indexOf(Object object)
     {
         int result = 0;
@@ -310,16 +322,19 @@ class ImmutableSortedBagImpl<T>
         return -1;
     }
 
+    @Override
     public T getFirst()
     {
         return ArrayIterate.getFirst(this.elements);
     }
 
+    @Override
     public T getLast()
     {
         return ArrayIterate.getLast(this.elements);
     }
 
+    @Override
     public void forEach(int fromIndex, int toIndex, Procedure<? super T> procedure)
     {
         int index = fromIndex;
@@ -359,6 +374,7 @@ class ImmutableSortedBagImpl<T>
         }
     }
 
+    @Override
     public void each(Procedure<? super T> procedure)
     {
         for (int i = 0; i < this.elements.length; i++)
@@ -386,6 +402,7 @@ class ImmutableSortedBagImpl<T>
         }
     }
 
+    @Override
     public void forEachWithIndex(int fromIndex, int toIndex, ObjectIntProcedure<? super T> objectIntProcedure)
     {
         ListIterate.rangeCheck(fromIndex, toIndex, this.size());
@@ -425,6 +442,7 @@ class ImmutableSortedBagImpl<T>
         }
     }
 
+    @Override
     public int occurrencesOf(Object item)
     {
         int index = Arrays.binarySearch(this.elements, (T) item, this.comparator);
@@ -435,11 +453,13 @@ class ImmutableSortedBagImpl<T>
         return 0;
     }
 
+    @Override
     public ImmutableSortedSet<T> distinct()
     {
         return SortedSets.immutable.with(this.comparator(), this.elements);
     }
 
+    @Override
     public <S> boolean corresponds(OrderedIterable<S> other, Predicate2<? super T, ? super S> predicate)
     {
         if (this.size != other.size())
@@ -533,6 +553,7 @@ class ImmutableSortedBagImpl<T>
         return array1;
     }
 
+    @Override
     public MutableSortedMap<T, Integer> toMapOfItemToCount()
     {
         MutableSortedMap<T, Integer> map = TreeSortedMap.newMap(this.comparator());
@@ -540,6 +561,7 @@ class ImmutableSortedBagImpl<T>
         return map;
     }
 
+    @Override
     public int compareTo(SortedBag<T> otherBag)
     {
         return SortedBagIterables.compare(this, otherBag);
@@ -593,11 +615,13 @@ class ImmutableSortedBagImpl<T>
         return Arrays.binarySearch(this.elements, (T) object, this.comparator) >= 0;
     }
 
+    @Override
     public Iterator<T> iterator()
     {
         return new InternalIterator();
     }
 
+    @Override
     public ImmutableSortedBag<T> take(int count)
     {
         if (count < 0)
@@ -631,6 +655,7 @@ class ImmutableSortedBagImpl<T>
         throw new AssertionError();
     }
 
+    @Override
     public ImmutableSortedBag<T> drop(int count)
     {
         if (count < 0)
@@ -703,11 +728,13 @@ class ImmutableSortedBagImpl<T>
         private int position;
         private int occurrencesRemaining = ImmutableSortedBagImpl.this.isEmpty() ? 0 : ImmutableSortedBagImpl.this.occurrences[0];
 
+        @Override
         public boolean hasNext()
         {
             return this.position < ImmutableSortedBagImpl.this.elements.length - 1 || this.occurrencesRemaining != 0;
         }
 
+        @Override
         public T next()
         {
             if (!this.hasNext())
@@ -723,6 +750,7 @@ class ImmutableSortedBagImpl<T>
             return ImmutableSortedBagImpl.this.elements[this.position];
         }
 
+        @Override
         public void remove()
         {
             throw new UnsupportedOperationException("Cannot call remove() on " + this.getClass().getSimpleName());

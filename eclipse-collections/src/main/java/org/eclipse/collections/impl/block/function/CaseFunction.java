@@ -47,6 +47,7 @@ public class CaseFunction<T extends Comparable<? super T>, V> implements Functio
         return this;
     }
 
+    @Override
     public V valueOf(T argument)
     {
         for (Pair<Predicate<? super T>, Function<? super T, ? extends V>> pair : this.predicateFunctions)

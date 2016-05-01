@@ -87,11 +87,13 @@ abstract class AbstractMemoryEfficientMutableSet<T>
         throw new UnsupportedOperationException("Cannot removeIfWith from a fixed size set: " + this.getClass());
     }
 
+    @Override
     public void clear()
     {
         throw new UnsupportedOperationException("Cannot clear a fixed size set: " + this.getClass());
     }
 
+    @Override
     public MutableSet<T> withAll(Iterable<? extends T> elements)
     {
         if (Iterate.isEmpty(elements))
@@ -101,6 +103,7 @@ abstract class AbstractMemoryEfficientMutableSet<T>
         return Sets.fixedSize.ofAll(this.toList().withAll(elements));
     }
 
+    @Override
     public MutableSet<T> withoutAll(Iterable<? extends T> elements)
     {
         if (Iterate.isEmpty(elements))
@@ -124,22 +127,26 @@ abstract class AbstractMemoryEfficientMutableSet<T>
 
         protected abstract T getElement(int i);
 
+        @Override
         public boolean hasNext()
         {
             return this.next < AbstractMemoryEfficientMutableSet.this.size();
         }
 
+        @Override
         public T next()
         {
             return this.getElement(this.next++);
         }
 
+        @Override
         public void remove()
         {
             throw new UnsupportedOperationException("Cannot remove from a fixed size set: " + this.getClass());
         }
     }
 
+    @Override
     public ParallelUnsortedSetIterable<T> asParallel(ExecutorService executorService, int batchSize)
     {
         return this.toSet().asParallel(executorService, batchSize);
