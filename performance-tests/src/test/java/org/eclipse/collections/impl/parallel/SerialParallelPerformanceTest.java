@@ -183,9 +183,7 @@ public class SerialParallelPerformanceTest
     {
         Interval interval = Interval.fromTo(-(count / 2), count / 2 - 1);
         MutableList<Function0<Iterable<Integer>>> generators = FastList.newList();
-        generators.add(() -> {
-            return interval.toList().shuffleThis();
-        });
+        generators.add(() -> interval.toList().shuffleThis());
         generators.add(() -> {
             MutableList<Integer> integers = interval.toList().shuffleThis();
             return integers.toImmutable();
