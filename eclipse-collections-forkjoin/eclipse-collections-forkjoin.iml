@@ -13,6 +13,7 @@
       <excludeFolder url="file://$MODULE_DIR$/target/surefire-reports" />
       <excludeFolder url="file://$MODULE_DIR$/target/test-classes" />
     </content>
+    <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="eclipse-collections-api" />
     <orderEntry type="library" name="Maven: net.jcip:jcip-annotations:1.0" level="project" />
