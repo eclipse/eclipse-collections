@@ -353,7 +353,7 @@ public abstract class AbstractBiMap<K, V> implements BiMap<K, V>
     @Override
     public void forEachValue(Procedure<? super V> procedure)
     {
-        this.getInverse().forEachKey(procedure);
+        this.getDelegate().forEachValue(procedure);
     }
 
     @Override
@@ -371,7 +371,7 @@ public abstract class AbstractBiMap<K, V> implements BiMap<K, V>
     @Override
     public void each(Procedure<? super V> procedure)
     {
-        this.getInverse().forEachKey(procedure);
+        this.getDelegate().forEachValue(procedure);
     }
 
     @Override
