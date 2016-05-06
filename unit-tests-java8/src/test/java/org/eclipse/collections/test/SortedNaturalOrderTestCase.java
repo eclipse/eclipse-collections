@@ -301,9 +301,16 @@ public interface SortedNaturalOrderTestCase extends OrderedIterableTestCase
     @Test
     default void RichIterable_toList()
     {
+        RichIterable<Integer> iterable = this.newWith(1, 2, 2, 3, 3, 3, 4, 4, 4, 4);
         assertEquals(
                 Lists.immutable.with(1, 2, 2, 3, 3, 3, 4, 4, 4, 4),
-                this.newWith(1, 2, 2, 3, 3, 3, 4, 4, 4, 4).toList());
+                iterable.toList());
+
+        MutableList<Integer> target = Lists.mutable.empty();
+        iterable.each(target::add);
+        assertEquals(
+                target,
+                iterable.toList());
     }
 
     @Override

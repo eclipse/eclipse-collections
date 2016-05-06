@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -14,6 +14,7 @@ import java.util.Iterator;
 
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.collection.MutableCollection;
+import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.set.UnsortedSetIterable;
 import org.eclipse.collections.impl.factory.Lists;
@@ -159,13 +160,20 @@ public interface UnsortedSetLikeTestTrait extends RichIterableUniqueTestCase, Un
     @Test
     default void RichIterable_toList()
     {
-        assertThat(this.newWith(3, 2, 1).toList(), isOneOf(
+        RichIterable<Integer> iterable = this.newWith(3, 2, 1);
+        assertThat(iterable.toList(), isOneOf(
                 Lists.immutable.with(3, 2, 1),
                 Lists.immutable.with(3, 1, 2),
                 Lists.immutable.with(2, 3, 1),
                 Lists.immutable.with(2, 1, 3),
                 Lists.immutable.with(1, 3, 2),
                 Lists.immutable.with(1, 2, 3)));
+
+        MutableList<Integer> target = Lists.mutable.empty();
+        iterable.each(target::add);
+        assertEquals(
+                target,
+                iterable.toList());
     }
 
     @Override
