@@ -653,7 +653,7 @@ public class ArrayIterateTest
     public void selectAndRejectWith()
     {
         Twin<MutableList<Integer>> result =
-                ArrayIterate.selectAndRejectWith(INTEGER_ARRAY, Predicates2.<Integer>lessThan(), 3);
+                ArrayIterate.selectAndRejectWith(INTEGER_ARRAY, Predicates2.lessThan(), 3);
         MutableList<Integer> positive = result.getOne();
         MutableList<Integer> negative = result.getTwo();
         Verify.assertSize(2, positive);
@@ -690,7 +690,7 @@ public class ArrayIterateTest
     {
         Object[] integers = Lists.fixedSize.of(1, 2, 3).toArray();
         Verify.assertContainsAll(ArrayIterate.collectIf(integers, Integer.class::isInstance, String::valueOf), "1", "2", "3");
-        Verify.assertContainsAll(ArrayIterate.collectIf(integers, Integer.class::isInstance, String::valueOf, FastList.<String>newList()), "1", "2", "3");
+        Verify.assertContainsAll(ArrayIterate.collectIf(integers, Integer.class::isInstance, String::valueOf, FastList.newList()), "1", "2", "3");
     }
 
     @Test
@@ -821,7 +821,7 @@ public class ArrayIterateTest
             Integer[] array = integers.toArray(new Integer[i]);
             ArrayIterate.sort(array, array.length, null);
             Assert.assertArrayEquals(array, Interval.oneTo(i).toArray());
-            ArrayIterate.sort(array, array.length, Comparator.<Integer>reverseOrder());
+            ArrayIterate.sort(array, array.length, Comparator.reverseOrder());
             Integer[] expected = Interval.oneTo(i).reverseThis().toArray();
             Assert.assertArrayEquals(array, expected);
         }
@@ -915,9 +915,9 @@ public class ArrayIterateTest
         Integer[] array = this.createIntegerArray(1);
         Assert.assertEquals(
                 Integer.valueOf(1),
-                ArrayIterate.detectWith(array, Predicates2.<Integer>lessThan(), 2));
+                ArrayIterate.detectWith(array, Predicates2.lessThan(), 2));
         Assert.assertNull(
-                ArrayIterate.detectWith(new Integer[0], Predicates2.<Integer>lessThan(), 2));
+                ArrayIterate.detectWith(new Integer[0], Predicates2.lessThan(), 2));
     }
 
     @Test
@@ -1100,7 +1100,7 @@ public class ArrayIterateTest
         Function<Integer, Boolean> isOddFunction = object -> IntegerPredicates.isOdd().accept(object);
 
         MutableMap<Boolean, RichIterable<Integer>> expected =
-                UnifiedMap.<Boolean, RichIterable<Integer>>newWithKeysValues(
+                UnifiedMap.newWithKeysValues(
                         Boolean.TRUE, FastList.newListWith(1, 3, 5, 7),
                         Boolean.FALSE, FastList.newListWith(2, 4, 6));
 
@@ -1189,7 +1189,7 @@ public class ArrayIterateTest
 
         Assert.assertEquals(
                 ArrayIterate.zip(array, nulls),
-                ArrayIterate.zip(array, nulls, FastList.<Pair<String, Object>>newList()));
+                ArrayIterate.zip(array, nulls, FastList.newList()));
     }
 
     @Test
@@ -1203,11 +1203,11 @@ public class ArrayIterateTest
                 pairs.collect((Function<Pair<String, ?>, String>) Pair::getOne));
         Assert.assertEquals(
                 Interval.zeroTo(array.length - 1).toList(),
-                pairs.collect((Function<Pair<?, Integer>, Integer>) Pair::getTwo, FastList.<Integer>newList()));
+                pairs.collect((Function<Pair<?, Integer>, Integer>) Pair::getTwo, FastList.newList()));
 
         Assert.assertEquals(
                 ArrayIterate.zipWithIndex(array),
-                ArrayIterate.zipWithIndex(array, FastList.<Pair<String, Integer>>newList()));
+                ArrayIterate.zipWithIndex(array, FastList.newList()));
     }
 
     @Test

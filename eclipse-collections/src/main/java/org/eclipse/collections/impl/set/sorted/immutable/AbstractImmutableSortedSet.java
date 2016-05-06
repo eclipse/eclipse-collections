@@ -312,12 +312,12 @@ abstract class AbstractImmutableSortedSet<T> extends AbstractImmutableCollection
 
     public <V> ImmutableSortedSetMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function)
     {
-        return this.groupByEach(function, TreeSortedSetMultimap.<V, T>newMultimap(this.comparator())).toImmutable();
+        return this.groupByEach(function, TreeSortedSetMultimap.newMultimap(this.comparator())).toImmutable();
     }
 
     public <S> ImmutableList<Pair<T, S>> zip(Iterable<S> that)
     {
-        return Iterate.zip(this, that, FastList.<Pair<T, S>>newList()).toImmutable();
+        return Iterate.zip(this, that, FastList.newList()).toImmutable();
     }
 
     public ImmutableSortedSet<Pair<T, Integer>> zipWithIndex()
@@ -325,10 +325,10 @@ abstract class AbstractImmutableSortedSet<T> extends AbstractImmutableCollection
         Comparator<? super T> comparator = this.comparator();
         if (comparator == null)
         {
-            TreeSortedSet<Pair<T, Integer>> pairs = TreeSortedSet.newSet(Comparators.<Pair<T, Integer>, T>byFunction(Functions.<T>firstOfPair(), Comparators.<T>naturalOrder()));
+            TreeSortedSet<Pair<T, Integer>> pairs = TreeSortedSet.newSet(Comparators.byFunction(Functions.firstOfPair(), Comparators.naturalOrder()));
             return Iterate.zipWithIndex(this, pairs).toImmutable();
         }
-        return Iterate.zipWithIndex(this, TreeSortedSet.<Pair<T, Integer>>newSet(Comparators.byFirstOfPair(comparator))).toImmutable();
+        return Iterate.zipWithIndex(this, TreeSortedSet.newSet(Comparators.byFirstOfPair(comparator))).toImmutable();
     }
 
     public ImmutableSortedSet<T> distinct()

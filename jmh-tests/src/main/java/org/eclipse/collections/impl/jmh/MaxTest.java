@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -58,19 +58,19 @@ public class MaxTest extends AbstractJMHTestRunner
     @Benchmark
     public int serial_lazy_jdk()
     {
-        return this.integersJDK.stream().max(Comparator.<Integer>naturalOrder()).get();
+        return this.integersJDK.stream().max(Comparator.naturalOrder()).get();
     }
 
     @Benchmark
     public int serial_lazy_reverse_jdk()
     {
-        return this.integersJDK.stream().max(Comparator.<Integer>reverseOrder()).get();
+        return this.integersJDK.stream().max(Comparator.reverseOrder()).get();
     }
 
     @Benchmark
     public int serial_lazy_reverse_streams_ec()
     {
-        return this.integersEC.stream().max(Comparator.<Integer>reverseOrder()).get();
+        return this.integersEC.stream().max(Comparator.reverseOrder()).get();
     }
 
     @Benchmark
@@ -88,25 +88,25 @@ public class MaxTest extends AbstractJMHTestRunner
     @Benchmark
     public int parallel_lazy_jdk()
     {
-        return this.integersJDK.parallelStream().max(Comparator.<Integer>naturalOrder()).get();
+        return this.integersJDK.parallelStream().max(Comparator.naturalOrder()).get();
     }
 
     @Benchmark
     public int parallel_lazy_streams_ec()
     {
-        return this.integersEC.parallelStream().max(Comparator.<Integer>naturalOrder()).get();
+        return this.integersEC.parallelStream().max(Comparator.naturalOrder()).get();
     }
 
     @Benchmark
     public int parallel_lazy_reverse_jdk()
     {
-        return this.integersJDK.parallelStream().max(Comparator.<Integer>reverseOrder()).get();
+        return this.integersJDK.parallelStream().max(Comparator.reverseOrder()).get();
     }
 
     @Benchmark
     public int parallel_lazy_reverse_streams_ec()
     {
-        return this.integersEC.parallelStream().max(Comparator.<Integer>reverseOrder()).get();
+        return this.integersEC.parallelStream().max(Comparator.reverseOrder()).get();
     }
 
     @Benchmark
@@ -124,36 +124,36 @@ public class MaxTest extends AbstractJMHTestRunner
     @Benchmark
     public int serial_eager_ec()
     {
-        return this.integersEC.max(Comparator.<Integer>naturalOrder());
+        return this.integersEC.max(Comparator.naturalOrder());
     }
 
     @Benchmark
     public int serial_eager_reverse_ec()
     {
-        return this.integersEC.max(Comparator.<Integer>reverseOrder());
+        return this.integersEC.max(Comparator.reverseOrder());
     }
 
     @Benchmark
     public int serial_lazy_ec()
     {
-        return this.integersEC.asLazy().max(Comparator.<Integer>naturalOrder());
+        return this.integersEC.asLazy().max(Comparator.naturalOrder());
     }
 
     @Benchmark
     public int serial_lazy_reverse_ec()
     {
-        return this.integersEC.asLazy().max(Comparator.<Integer>reverseOrder());
+        return this.integersEC.asLazy().max(Comparator.reverseOrder());
     }
 
     @Benchmark
     public int parallel_lazy_ec()
     {
-        return this.integersEC.asParallel(this.executorService, BATCH_SIZE).max(Comparator.<Integer>naturalOrder());
+        return this.integersEC.asParallel(this.executorService, BATCH_SIZE).max(Comparator.naturalOrder());
     }
 
     @Benchmark
     public int parallel_lazy_reverse_ec()
     {
-        return this.integersEC.asParallel(this.executorService, BATCH_SIZE).max(Comparator.<Integer>reverseOrder());
+        return this.integersEC.asParallel(this.executorService, BATCH_SIZE).max(Comparator.reverseOrder());
     }
 }

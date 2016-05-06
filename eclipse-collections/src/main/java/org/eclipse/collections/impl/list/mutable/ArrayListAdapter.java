@@ -454,7 +454,7 @@ public final class ArrayListAdapter<T>
         {
             throw new IllegalArgumentException("Count must be greater than zero, but was: " + count);
         }
-        return ArrayListIterate.take(this.delegate, count, FastList.<T>newList(Math.min(this.size(), count)));
+        return ArrayListIterate.take(this.delegate, count, FastList.newList(Math.min(this.size(), count)));
     }
 
     public MutableList<T> takeWhile(Predicate<? super T> predicate)
@@ -468,7 +468,7 @@ public final class ArrayListAdapter<T>
         {
             throw new IllegalArgumentException("Count must be greater than zero, but was: " + count);
         }
-        return ArrayListIterate.drop(this.delegate, count, FastList.<T>newList(this.size() - Math.min(this.size(), count)));
+        return ArrayListIterate.drop(this.delegate, count, FastList.newList(this.size() - Math.min(this.size(), count)));
     }
 
     public MutableList<T> dropWhile(Predicate<? super T> predicate)

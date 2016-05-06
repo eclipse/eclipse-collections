@@ -120,12 +120,12 @@ public final class MultiReaderFastList<T>
 
     public static <T> MultiReaderFastList<T> newList()
     {
-        return new MultiReaderFastList<>(FastList.<T>newList());
+        return new MultiReaderFastList<>(FastList.newList());
     }
 
     public static <T> MultiReaderFastList<T> newList(int capacity)
     {
-        return new MultiReaderFastList<>(FastList.<T>newList(capacity));
+        return new MultiReaderFastList<>(FastList.newList(capacity));
     }
 
     public static <T> MultiReaderFastList<T> newList(Iterable<T> iterable)
@@ -1461,8 +1461,8 @@ public final class MultiReaderFastList<T>
         public void becomeUseless()
         {
             this.delegate = null;
-            this.requestedSubLists.each(UntouchableMutableList<T>::becomeUseless);
-            this.requestedIterators.each(UntouchableListIterator<T>::becomeUseless);
+            this.requestedSubLists.each(UntouchableMutableList::becomeUseless);
+            this.requestedIterators.each(UntouchableListIterator::becomeUseless);
         }
 
         private MutableList<T> getDelegate()

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -140,7 +140,7 @@ public abstract class ParallelIterableTestCase
     public void forEachWith()
     {
         MutableCollection<Integer> actual = HashBag.<Integer>newBag().asSynchronized();
-        this.classUnderTest().forEachWith(Procedures2.<Integer>addToCollection(), actual);
+        this.classUnderTest().forEachWith(Procedures2.addToCollection(), actual);
         Assert.assertEquals(this.getExpected().toBag(), actual);
     }
 
@@ -166,16 +166,16 @@ public abstract class ParallelIterableTestCase
     public void selectWith()
     {
         Assert.assertEquals(
-                this.getExpected().selectWith(Predicates2.<Integer>greaterThan(), 1).selectWith(Predicates2.<Integer>lessThan(), 4),
-                this.getActual(this.classUnderTest().selectWith(Predicates2.<Integer>greaterThan(), 1).selectWith(Predicates2.<Integer>lessThan(), 4)));
+                this.getExpected().selectWith(Predicates2.greaterThan(), 1).selectWith(Predicates2.lessThan(), 4),
+                this.getActual(this.classUnderTest().selectWith(Predicates2.greaterThan(), 1).selectWith(Predicates2.lessThan(), 4)));
 
         Assert.assertEquals(
-                this.getExpected().selectWith(Predicates2.<Integer>greaterThan(), 1).selectWith(Predicates2.<Integer>lessThan(), 4).toList().toBag(),
-                this.classUnderTest().selectWith(Predicates2.<Integer>greaterThan(), 1).selectWith(Predicates2.<Integer>lessThan(), 4).toList().toBag());
+                this.getExpected().selectWith(Predicates2.greaterThan(), 1).selectWith(Predicates2.lessThan(), 4).toList().toBag(),
+                this.classUnderTest().selectWith(Predicates2.greaterThan(), 1).selectWith(Predicates2.lessThan(), 4).toList().toBag());
 
         Assert.assertEquals(
-                this.getExpected().selectWith(Predicates2.<Integer>greaterThan(), 1).selectWith(Predicates2.<Integer>lessThan(), 4).toBag(),
-                this.classUnderTest().selectWith(Predicates2.<Integer>greaterThan(), 1).selectWith(Predicates2.<Integer>lessThan(), 4).toBag());
+                this.getExpected().selectWith(Predicates2.greaterThan(), 1).selectWith(Predicates2.lessThan(), 4).toBag(),
+                this.classUnderTest().selectWith(Predicates2.greaterThan(), 1).selectWith(Predicates2.lessThan(), 4).toBag());
     }
 
     @Test
@@ -200,16 +200,16 @@ public abstract class ParallelIterableTestCase
     public void rejectWith()
     {
         Assert.assertEquals(
-                this.getExpected().rejectWith(Predicates2.<Integer>lessThanOrEqualTo(), 1).rejectWith(Predicates2.<Integer>greaterThanOrEqualTo(), 4),
-                this.getActual(this.classUnderTest().rejectWith(Predicates2.<Integer>lessThanOrEqualTo(), 1).rejectWith(Predicates2.<Integer>greaterThanOrEqualTo(), 4)));
+                this.getExpected().rejectWith(Predicates2.lessThanOrEqualTo(), 1).rejectWith(Predicates2.greaterThanOrEqualTo(), 4),
+                this.getActual(this.classUnderTest().rejectWith(Predicates2.lessThanOrEqualTo(), 1).rejectWith(Predicates2.greaterThanOrEqualTo(), 4)));
 
         Assert.assertEquals(
-                this.getExpected().rejectWith(Predicates2.<Integer>lessThanOrEqualTo(), 1).rejectWith(Predicates2.<Integer>greaterThanOrEqualTo(), 4).toList().toBag(),
-                this.classUnderTest().rejectWith(Predicates2.<Integer>lessThanOrEqualTo(), 1).rejectWith(Predicates2.<Integer>greaterThanOrEqualTo(), 4).toList().toBag());
+                this.getExpected().rejectWith(Predicates2.lessThanOrEqualTo(), 1).rejectWith(Predicates2.greaterThanOrEqualTo(), 4).toList().toBag(),
+                this.classUnderTest().rejectWith(Predicates2.lessThanOrEqualTo(), 1).rejectWith(Predicates2.greaterThanOrEqualTo(), 4).toList().toBag());
 
         Assert.assertEquals(
-                this.getExpected().rejectWith(Predicates2.<Integer>lessThanOrEqualTo(), 1).rejectWith(Predicates2.<Integer>greaterThanOrEqualTo(), 4).toBag(),
-                this.classUnderTest().rejectWith(Predicates2.<Integer>lessThanOrEqualTo(), 1).rejectWith(Predicates2.<Integer>greaterThanOrEqualTo(), 4).toBag());
+                this.getExpected().rejectWith(Predicates2.lessThanOrEqualTo(), 1).rejectWith(Predicates2.greaterThanOrEqualTo(), 4).toBag(),
+                this.classUnderTest().rejectWith(Predicates2.lessThanOrEqualTo(), 1).rejectWith(Predicates2.greaterThanOrEqualTo(), 4).toBag());
     }
 
     @Test
@@ -437,18 +437,18 @@ public abstract class ParallelIterableTestCase
     @Test
     public void anySatisfyWith()
     {
-        Assert.assertFalse(this.classUnderTest().anySatisfyWith(Predicates2.<Integer>lessThan(), 0));
-        Assert.assertFalse(this.classUnderTest().anySatisfyWith(Predicates2.<Integer>lessThan(), 1));
-        Assert.assertTrue(this.classUnderTest().anySatisfyWith(Predicates2.<Integer>lessThan(), 2));
-        Assert.assertTrue(this.classUnderTest().anySatisfyWith(Predicates2.<Integer>lessThan(), 3));
-        Assert.assertTrue(this.classUnderTest().anySatisfyWith(Predicates2.<Integer>lessThan(), 4));
-        Assert.assertTrue(this.classUnderTest().anySatisfyWith(Predicates2.<Integer>lessThan(), 5));
-        Assert.assertTrue(this.classUnderTest().anySatisfyWith(Predicates2.<Integer>greaterThan(), 0));
-        Assert.assertTrue(this.classUnderTest().anySatisfyWith(Predicates2.<Integer>greaterThan(), 1));
-        Assert.assertTrue(this.classUnderTest().anySatisfyWith(Predicates2.<Integer>greaterThan(), 2));
-        Assert.assertTrue(this.classUnderTest().anySatisfyWith(Predicates2.<Integer>greaterThan(), 3));
-        Assert.assertFalse(this.classUnderTest().anySatisfyWith(Predicates2.<Integer>greaterThan(), 4));
-        Assert.assertFalse(this.classUnderTest().anySatisfyWith(Predicates2.<Integer>greaterThan(), 5));
+        Assert.assertFalse(this.classUnderTest().anySatisfyWith(Predicates2.lessThan(), 0));
+        Assert.assertFalse(this.classUnderTest().anySatisfyWith(Predicates2.lessThan(), 1));
+        Assert.assertTrue(this.classUnderTest().anySatisfyWith(Predicates2.lessThan(), 2));
+        Assert.assertTrue(this.classUnderTest().anySatisfyWith(Predicates2.lessThan(), 3));
+        Assert.assertTrue(this.classUnderTest().anySatisfyWith(Predicates2.lessThan(), 4));
+        Assert.assertTrue(this.classUnderTest().anySatisfyWith(Predicates2.lessThan(), 5));
+        Assert.assertTrue(this.classUnderTest().anySatisfyWith(Predicates2.greaterThan(), 0));
+        Assert.assertTrue(this.classUnderTest().anySatisfyWith(Predicates2.greaterThan(), 1));
+        Assert.assertTrue(this.classUnderTest().anySatisfyWith(Predicates2.greaterThan(), 2));
+        Assert.assertTrue(this.classUnderTest().anySatisfyWith(Predicates2.greaterThan(), 3));
+        Assert.assertFalse(this.classUnderTest().anySatisfyWith(Predicates2.greaterThan(), 4));
+        Assert.assertFalse(this.classUnderTest().anySatisfyWith(Predicates2.greaterThan(), 5));
     }
 
     @Test
@@ -471,18 +471,18 @@ public abstract class ParallelIterableTestCase
     @Test
     public void allSatisfyWith()
     {
-        Assert.assertFalse(this.classUnderTest().allSatisfyWith(Predicates2.<Integer>lessThan(), 0));
-        Assert.assertFalse(this.classUnderTest().allSatisfyWith(Predicates2.<Integer>lessThan(), 1));
-        Assert.assertFalse(this.classUnderTest().allSatisfyWith(Predicates2.<Integer>lessThan(), 2));
-        Assert.assertFalse(this.classUnderTest().allSatisfyWith(Predicates2.<Integer>lessThan(), 3));
-        Assert.assertFalse(this.classUnderTest().allSatisfyWith(Predicates2.<Integer>lessThan(), 4));
-        Assert.assertTrue(this.classUnderTest().allSatisfyWith(Predicates2.<Integer>lessThan(), 5));
-        Assert.assertTrue(this.classUnderTest().allSatisfyWith(Predicates2.<Integer>greaterThan(), 0));
-        Assert.assertFalse(this.classUnderTest().allSatisfyWith(Predicates2.<Integer>greaterThan(), 1));
-        Assert.assertFalse(this.classUnderTest().allSatisfyWith(Predicates2.<Integer>greaterThan(), 2));
-        Assert.assertFalse(this.classUnderTest().allSatisfyWith(Predicates2.<Integer>greaterThan(), 3));
-        Assert.assertFalse(this.classUnderTest().allSatisfyWith(Predicates2.<Integer>greaterThan(), 4));
-        Assert.assertFalse(this.classUnderTest().allSatisfyWith(Predicates2.<Integer>greaterThan(), 5));
+        Assert.assertFalse(this.classUnderTest().allSatisfyWith(Predicates2.lessThan(), 0));
+        Assert.assertFalse(this.classUnderTest().allSatisfyWith(Predicates2.lessThan(), 1));
+        Assert.assertFalse(this.classUnderTest().allSatisfyWith(Predicates2.lessThan(), 2));
+        Assert.assertFalse(this.classUnderTest().allSatisfyWith(Predicates2.lessThan(), 3));
+        Assert.assertFalse(this.classUnderTest().allSatisfyWith(Predicates2.lessThan(), 4));
+        Assert.assertTrue(this.classUnderTest().allSatisfyWith(Predicates2.lessThan(), 5));
+        Assert.assertTrue(this.classUnderTest().allSatisfyWith(Predicates2.greaterThan(), 0));
+        Assert.assertFalse(this.classUnderTest().allSatisfyWith(Predicates2.greaterThan(), 1));
+        Assert.assertFalse(this.classUnderTest().allSatisfyWith(Predicates2.greaterThan(), 2));
+        Assert.assertFalse(this.classUnderTest().allSatisfyWith(Predicates2.greaterThan(), 3));
+        Assert.assertFalse(this.classUnderTest().allSatisfyWith(Predicates2.greaterThan(), 4));
+        Assert.assertFalse(this.classUnderTest().allSatisfyWith(Predicates2.greaterThan(), 5));
     }
 
     @Test
@@ -505,18 +505,18 @@ public abstract class ParallelIterableTestCase
     @Test
     public void noneSatisfyWith()
     {
-        Assert.assertTrue(this.classUnderTest().noneSatisfyWith(Predicates2.<Integer>lessThan(), 0));
-        Assert.assertTrue(this.classUnderTest().noneSatisfyWith(Predicates2.<Integer>lessThan(), 1));
-        Assert.assertFalse(this.classUnderTest().noneSatisfyWith(Predicates2.<Integer>lessThan(), 2));
-        Assert.assertFalse(this.classUnderTest().noneSatisfyWith(Predicates2.<Integer>lessThan(), 3));
-        Assert.assertFalse(this.classUnderTest().noneSatisfyWith(Predicates2.<Integer>lessThan(), 4));
-        Assert.assertFalse(this.classUnderTest().noneSatisfyWith(Predicates2.<Integer>lessThan(), 5));
-        Assert.assertFalse(this.classUnderTest().noneSatisfyWith(Predicates2.<Integer>greaterThan(), 0));
-        Assert.assertFalse(this.classUnderTest().noneSatisfyWith(Predicates2.<Integer>greaterThan(), 1));
-        Assert.assertFalse(this.classUnderTest().noneSatisfyWith(Predicates2.<Integer>greaterThan(), 2));
-        Assert.assertFalse(this.classUnderTest().noneSatisfyWith(Predicates2.<Integer>greaterThan(), 3));
-        Assert.assertTrue(this.classUnderTest().noneSatisfyWith(Predicates2.<Integer>greaterThan(), 4));
-        Assert.assertTrue(this.classUnderTest().noneSatisfyWith(Predicates2.<Integer>greaterThan(), 5));
+        Assert.assertTrue(this.classUnderTest().noneSatisfyWith(Predicates2.lessThan(), 0));
+        Assert.assertTrue(this.classUnderTest().noneSatisfyWith(Predicates2.lessThan(), 1));
+        Assert.assertFalse(this.classUnderTest().noneSatisfyWith(Predicates2.lessThan(), 2));
+        Assert.assertFalse(this.classUnderTest().noneSatisfyWith(Predicates2.lessThan(), 3));
+        Assert.assertFalse(this.classUnderTest().noneSatisfyWith(Predicates2.lessThan(), 4));
+        Assert.assertFalse(this.classUnderTest().noneSatisfyWith(Predicates2.lessThan(), 5));
+        Assert.assertFalse(this.classUnderTest().noneSatisfyWith(Predicates2.greaterThan(), 0));
+        Assert.assertFalse(this.classUnderTest().noneSatisfyWith(Predicates2.greaterThan(), 1));
+        Assert.assertFalse(this.classUnderTest().noneSatisfyWith(Predicates2.greaterThan(), 2));
+        Assert.assertFalse(this.classUnderTest().noneSatisfyWith(Predicates2.greaterThan(), 3));
+        Assert.assertTrue(this.classUnderTest().noneSatisfyWith(Predicates2.greaterThan(), 4));
+        Assert.assertTrue(this.classUnderTest().noneSatisfyWith(Predicates2.greaterThan(), 5));
     }
 
     @Test
@@ -531,8 +531,8 @@ public abstract class ParallelIterableTestCase
     public void countWith()
     {
         Assert.assertEquals(
-                this.getExpected().countWith(Predicates2.<Integer>greaterThan(), 2),
-                this.classUnderTest().countWith(Predicates2.<Integer>greaterThan(), 2));
+                this.getExpected().countWith(Predicates2.greaterThan(), 2),
+                this.classUnderTest().countWith(Predicates2.greaterThan(), 2));
     }
 
     @Test
@@ -655,11 +655,11 @@ public abstract class ParallelIterableTestCase
     public void toSortedMap_comparator()
     {
         Verify.assertSortedMapsEqual(
-                this.getExpected().toSortedMap(Comparators.<Integer>reverseNaturalOrder(), id -> id, String::valueOf),
-                this.classUnderTest().toSortedMap(Comparators.<Integer>reverseNaturalOrder(), id -> id, String::valueOf));
+                this.getExpected().toSortedMap(Comparators.reverseNaturalOrder(), id -> id, String::valueOf),
+                this.classUnderTest().toSortedMap(Comparators.reverseNaturalOrder(), id -> id, String::valueOf));
         Verify.assertListsEqual(
-                this.getExpected().toSortedMap(Comparators.<Integer>reverseNaturalOrder(), id -> id, String::valueOf).keySet().toList(),
-                this.classUnderTest().toSortedMap(Comparators.<Integer>reverseNaturalOrder(), id -> id, String::valueOf).keySet().toList());
+                this.getExpected().toSortedMap(Comparators.reverseNaturalOrder(), id -> id, String::valueOf).keySet().toList(),
+                this.classUnderTest().toSortedMap(Comparators.reverseNaturalOrder(), id -> id, String::valueOf).keySet().toList());
     }
 
     @Test

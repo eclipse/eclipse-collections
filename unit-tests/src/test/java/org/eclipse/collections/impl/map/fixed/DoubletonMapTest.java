@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -226,9 +226,9 @@ public class DoubletonMapTest extends AbstractMemoryEfficientMutableMapTest
     public void ifPresentApply()
     {
         MutableMap<Integer, String> map = new DoubletonMap<>(1, "1", 2, "2");
-        Assert.assertNull(map.ifPresentApply(4, Functions.<String>getPassThru()));
-        Assert.assertEquals("1", map.ifPresentApply(1, Functions.<String>getPassThru()));
-        Assert.assertEquals("2", map.ifPresentApply(2, Functions.<String>getPassThru()));
+        Assert.assertNull(map.ifPresentApply(4, Functions.getPassThru()));
+        Assert.assertEquals("1", map.ifPresentApply(1, Functions.getPassThru()));
+        Assert.assertEquals("2", map.ifPresentApply(2, Functions.getPassThru()));
     }
 
     @Override

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -50,7 +50,7 @@ public class TreeBagTest extends AbstractMutableSortedBagTestCase
     @Test
     public void sortedBagIterableConstructor()
     {
-        TreeBag<Integer> sortedBagA = TreeBag.newBag(Collections.<Integer>reverseOrder());
+        TreeBag<Integer> sortedBagA = TreeBag.newBag(Collections.reverseOrder());
         TreeBag<Integer> sortedBagB = TreeBag.newBag(sortedBagA.with(1).with(2, 3).with(4, 5, 6).with(1, 1, 1, 1));
         Verify.assertSortedBagsEqual(sortedBagA, sortedBagB);
         Assert.assertTrue(sortedBagA.getFirst().equals(sortedBagB.getFirst()) && sortedBagB.getFirst() == 6);

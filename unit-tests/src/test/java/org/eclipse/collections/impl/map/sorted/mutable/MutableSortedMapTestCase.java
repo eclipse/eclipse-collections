@@ -101,7 +101,7 @@ public abstract class MutableSortedMapTestCase extends MutableMapIterableTestCas
     public void testNewEmpty()
     {
         MutableSortedMap<Integer, Integer> map = this.newMapWithKeysValues(1, 1, 2, 2);
-        MutableSortedMap<Integer, Integer> revMap = this.newMapWithKeysValues(Comparators.<Integer>reverseNaturalOrder(), 1, 1, 2, 2);
+        MutableSortedMap<Integer, Integer> revMap = this.newMapWithKeysValues(Comparators.reverseNaturalOrder(), 1, 1, 2, 2);
         Verify.assertEmpty(map.newEmpty());
         Verify.assertEmpty(revMap.newEmpty());
         Assert.assertEquals(Comparators.<Integer>reverseNaturalOrder(), revMap.newEmpty().comparator());
@@ -324,7 +324,7 @@ public abstract class MutableSortedMapTestCase extends MutableMapIterableTestCas
 
         Assert.assertEquals(
                 map.zipWithIndex().toSet(),
-                map.zipWithIndex(UnifiedSet.<Pair<String, Integer>>newSet()));
+                map.zipWithIndex(UnifiedSet.newSet()));
     }
 
     @Override
@@ -342,7 +342,7 @@ public abstract class MutableSortedMapTestCase extends MutableMapIterableTestCas
     public void select_value()
     {
         super.select_value();
-        MutableSortedMap<String, Integer> map = this.newMapWithKeysValues(Comparators.<String>reverseNaturalOrder(),
+        MutableSortedMap<String, Integer> map = this.newMapWithKeysValues(Comparators.reverseNaturalOrder(),
                 "A", 1, "B", 2, "C", 3);
         Verify.assertListsEqual(FastList.newListWith(2, 1), map.select(Predicates.lessThan(3)));
     }
@@ -352,7 +352,7 @@ public abstract class MutableSortedMapTestCase extends MutableMapIterableTestCas
     public void reject_value()
     {
         super.reject_value();
-        MutableSortedMap<String, Integer> map = this.newMapWithKeysValues(Comparators.<String>reverseNaturalOrder(),
+        MutableSortedMap<String, Integer> map = this.newMapWithKeysValues(Comparators.reverseNaturalOrder(),
                 "A", 1, "B", 2, "C", 3);
         Verify.assertListsEqual(FastList.newListWith(2, 1), map.reject(Predicates.greaterThan(2)));
     }
@@ -362,7 +362,7 @@ public abstract class MutableSortedMapTestCase extends MutableMapIterableTestCas
     public void partition_value()
     {
         MutableSortedMap<String, Integer> map = this.newMapWithKeysValues(
-                Comparators.<String>reverseNaturalOrder(),
+                Comparators.reverseNaturalOrder(),
                 "A", 1,
                 "B", 2,
                 "C", 3,
@@ -377,7 +377,7 @@ public abstract class MutableSortedMapTestCase extends MutableMapIterableTestCas
     public void partitionWith_value()
     {
         MutableSortedMap<String, Integer> map = this.newMapWithKeysValues(
-                Comparators.<String>reverseNaturalOrder(),
+                Comparators.reverseNaturalOrder(),
                 "A", 1,
                 "B", 2,
                 "C", 3,
@@ -392,7 +392,7 @@ public abstract class MutableSortedMapTestCase extends MutableMapIterableTestCas
     public void collect_value()
     {
         super.collect_value();
-        MutableSortedMap<String, Integer> map = this.newMapWithKeysValues(Comparators.<String>reverseNaturalOrder(),
+        MutableSortedMap<String, Integer> map = this.newMapWithKeysValues(Comparators.reverseNaturalOrder(),
                 "A", 1, "B", 2, "C", 3);
         MutableList<String> collect = map.collect(Functions.getToString());
         Verify.assertListsEqual(FastList.newListWith("3", "2", "1"), collect);
@@ -422,7 +422,7 @@ public abstract class MutableSortedMapTestCase extends MutableMapIterableTestCas
     public void collectMap()
     {
         super.collectMap();
-        MutableSortedMap<String, Integer> map = this.newMapWithKeysValues(Comparators.<String>reverseNaturalOrder(),
+        MutableSortedMap<String, Integer> map = this.newMapWithKeysValues(Comparators.reverseNaturalOrder(),
                 "1", 1, "2", 2, "3", 3);
         Function2<String, Integer, Pair<Integer, String>> function = (String argument1, Integer argument2) -> Tuples.pair(argument2.intValue(), String.valueOf(argument2));
         MutableMap<Integer, String> collect = map.collect(function);
@@ -434,7 +434,7 @@ public abstract class MutableSortedMapTestCase extends MutableMapIterableTestCas
     public void selectMap()
     {
         super.selectMap();
-        MutableSortedMap<String, Integer> map = this.newMapWithKeysValues(Comparators.<String>reverseNaturalOrder(),
+        MutableSortedMap<String, Integer> map = this.newMapWithKeysValues(Comparators.reverseNaturalOrder(),
                 "1", 1, "2", 3, "3", 2, "4", 1);
         MutableSortedMap<String, Integer> select = map.select((argument1, argument2) -> argument2 != 1);
         Verify.assertMapsEqual(UnifiedMap.newWithKeysValues("2", 3, "3", 2), select);
@@ -446,7 +446,7 @@ public abstract class MutableSortedMapTestCase extends MutableMapIterableTestCas
     public void rejectMap()
     {
         super.rejectMap();
-        MutableSortedMap<String, Integer> map = this.newMapWithKeysValues(Comparators.<String>reverseNaturalOrder(),
+        MutableSortedMap<String, Integer> map = this.newMapWithKeysValues(Comparators.reverseNaturalOrder(),
                 "1", 1, "2", 3, "3", 2, "4", 1);
         MutableSortedMap<String, Integer> select = map.reject((argument1, argument2) -> argument2 == 1);
         Verify.assertMapsEqual(UnifiedMap.newWithKeysValues("2", 3, "3", 2), select);
@@ -478,7 +478,7 @@ public abstract class MutableSortedMapTestCase extends MutableMapIterableTestCas
     public void collectIf()
     {
         super.collectIf();
-        MutableSortedMap<String, Integer> map = this.newMapWithKeysValues(Comparators.<String>reverseNaturalOrder(),
+        MutableSortedMap<String, Integer> map = this.newMapWithKeysValues(Comparators.reverseNaturalOrder(),
                 "1", 4, "2", 3, "3", 2, "4", 1);
         MutableList<String> collect = map.collectIf(Predicates.greaterThan(1), String::valueOf);
         Verify.assertListsEqual(FastList.newListWith("2", "3", "4"), collect);
@@ -559,7 +559,7 @@ public abstract class MutableSortedMapTestCase extends MutableMapIterableTestCas
     @Test
     public void entrySet_sorted()
     {
-        LazyIterable<Pair<String, Integer>> pairs = Interval.oneTo(100).collect(Functions.pair(Functions.getToString(), Functions.<Integer>getPassThru()));
+        LazyIterable<Pair<String, Integer>> pairs = Interval.oneTo(100).collect(Functions.pair(Functions.getToString(), Functions.getPassThru()));
         MutableSortedMap<String, Integer> mutableSortedMap = new TreeSortedMap<>(pairs.toArray(new Pair[]{}));
         MutableList<Map.Entry<String, Integer>> entries = FastList.newList(mutableSortedMap.entrySet());
         MutableList<Map.Entry<String, Integer>> sortedEntries = entries.toSortedListBy(Functions.getKeyFunction());
@@ -723,7 +723,7 @@ public abstract class MutableSortedMapTestCase extends MutableMapIterableTestCas
         MutableSortedMap<String, Integer> map = this.newMapWithKeysValues("One", 1, "Two", 2, "Four", 4);
         Assert.assertEquals("Four", map.firstKey());
 
-        MutableSortedMap<String, Integer> revMap = this.newMapWithKeysValues(Comparators.<String>reverseNaturalOrder(),
+        MutableSortedMap<String, Integer> revMap = this.newMapWithKeysValues(Comparators.reverseNaturalOrder(),
                 "One", 1, "Two", 2, "Four", 4);
         Assert.assertEquals("Two", revMap.firstKey());
 
@@ -737,7 +737,7 @@ public abstract class MutableSortedMapTestCase extends MutableMapIterableTestCas
         MutableSortedMap<String, Integer> map = this.newMapWithKeysValues("One", 1, "Two", 2, "Four", 4);
         Assert.assertEquals("Two", map.lastKey());
 
-        MutableSortedMap<String, Integer> revMap = this.newMapWithKeysValues(Comparators.<String>reverseNaturalOrder(),
+        MutableSortedMap<String, Integer> revMap = this.newMapWithKeysValues(Comparators.reverseNaturalOrder(),
                 "One", 1, "Two", 2, "Four", 4);
         Assert.assertEquals("Four", revMap.lastKey());
 

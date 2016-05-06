@@ -43,7 +43,7 @@ public final class SynchronizedPutHashBagMultimap<K, V>
 
     public SynchronizedPutHashBagMultimap(int initialCapacity)
     {
-        super(ConcurrentHashMap.<K, MutableBag<V>>newMap(initialCapacity));
+        super(ConcurrentHashMap.newMap(initialCapacity));
     }
 
     public SynchronizedPutHashBagMultimap(Multimap<? extends K, ? extends V> multimap)
@@ -113,32 +113,32 @@ public final class SynchronizedPutHashBagMultimap<K, V>
 
     public HashBagMultimap<K, V> selectKeysValues(Predicate2<? super K, ? super V> predicate)
     {
-        return this.selectKeysValues(predicate, HashBagMultimap.<K, V>newMultimap());
+        return this.selectKeysValues(predicate, HashBagMultimap.newMultimap());
     }
 
     public HashBagMultimap<K, V> rejectKeysValues(Predicate2<? super K, ? super V> predicate)
     {
-        return this.rejectKeysValues(predicate, HashBagMultimap.<K, V>newMultimap());
+        return this.rejectKeysValues(predicate, HashBagMultimap.newMultimap());
     }
 
     public HashBagMultimap<K, V> selectKeysMultiValues(Predicate2<? super K, ? super Iterable<V>> predicate)
     {
-        return this.selectKeysMultiValues(predicate, HashBagMultimap.<K, V>newMultimap());
+        return this.selectKeysMultiValues(predicate, HashBagMultimap.newMultimap());
     }
 
     public HashBagMultimap<K, V> rejectKeysMultiValues(Predicate2<? super K, ? super Iterable<V>> predicate)
     {
-        return this.rejectKeysMultiValues(predicate, HashBagMultimap.<K, V>newMultimap());
+        return this.rejectKeysMultiValues(predicate, HashBagMultimap.newMultimap());
     }
 
     public <K2, V2> HashBagMultimap<K2, V2> collectKeysValues(Function2<? super K, ? super V, Pair<K2, V2>> function)
     {
-        return this.collectKeysValues(function, HashBagMultimap.<K2, V2>newMultimap());
+        return this.collectKeysValues(function, HashBagMultimap.newMultimap());
     }
 
     public <V2> HashBagMultimap<K, V2> collectValues(Function<? super V, ? extends V2> function)
     {
-        return this.collectValues(function, HashBagMultimap.<K, V2>newMultimap());
+        return this.collectValues(function, HashBagMultimap.newMultimap());
     }
 
     public MutableBagMultimap<V, K> flip()

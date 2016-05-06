@@ -808,7 +808,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
     {
         synchronized (this.lock)
         {
-            return this.delegate.groupByUniqueKey(function, UnifiedMap.<V, T>newMap());
+            return this.delegate.groupByUniqueKey(function, UnifiedMap.newMap());
         }
     }
 

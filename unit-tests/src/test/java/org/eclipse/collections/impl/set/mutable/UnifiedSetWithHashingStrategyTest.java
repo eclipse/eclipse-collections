@@ -84,7 +84,7 @@ public class UnifiedSetWithHashingStrategyTest extends AbstractUnifiedSetTestCas
     @Override
     protected <T> MutableSet<T> newWith(T... littleElements)
     {
-        return UnifiedSetWithHashingStrategy.newSetWith(HashingStrategies.nullSafeHashingStrategy(HashingStrategies.<T>defaultStrategy()), littleElements);
+        return UnifiedSetWithHashingStrategy.newSetWith(HashingStrategies.nullSafeHashingStrategy(HashingStrategies.defaultStrategy()), littleElements);
     }
 
     @Test
@@ -197,7 +197,7 @@ public class UnifiedSetWithHashingStrategyTest extends AbstractUnifiedSetTestCas
 
         MutableSet<String> list = UnifiedSetWithHashingStrategy.newSet(STRING_HASHING_STRATEGY).with("A")
                 .withAll(Lists.fixedSize.of("1", "2"))
-                .withAll(Lists.fixedSize.<String>of())
+                .withAll(Lists.fixedSize.of())
                 .withAll(Sets.fixedSize.of("3", "4"));
         Verify.assertEqualsAndHashCode(UnifiedSetWithHashingStrategy.newSetWith(
                 STRING_HASHING_STRATEGY, "A", "1", "2", "3", "4"), list);

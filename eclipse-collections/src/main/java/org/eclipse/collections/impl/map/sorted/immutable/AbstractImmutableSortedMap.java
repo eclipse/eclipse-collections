@@ -198,7 +198,7 @@ public abstract class AbstractImmutableSortedMap<K, V>
 
     public ImmutableList<V> select(Predicate<? super V> predicate)
     {
-        return this.select(predicate, FastList.<V>newList(this.size())).toImmutable();
+        return this.select(predicate, FastList.newList(this.size())).toImmutable();
     }
 
     public <P> ImmutableList<V> selectWith(Predicate2<? super V, ? super P> predicate, P parameter)
@@ -220,7 +220,7 @@ public abstract class AbstractImmutableSortedMap<K, V>
 
     public ImmutableList<V> reject(Predicate<? super V> predicate)
     {
-        return this.reject(predicate, FastList.<V>newList(this.size())).toImmutable();
+        return this.reject(predicate, FastList.newList(this.size())).toImmutable();
     }
 
     public <P> ImmutableList<V> rejectWith(Predicate2<? super V, ? super P> predicate, P parameter)
@@ -353,17 +353,17 @@ public abstract class AbstractImmutableSortedMap<K, V>
 
     public <R> ImmutableList<R> flatCollect(Function<? super V, ? extends Iterable<R>> function)
     {
-        return this.flatCollect(function, FastList.<R>newList(this.size())).toImmutable();
+        return this.flatCollect(function, FastList.newList(this.size())).toImmutable();
     }
 
     public <S> ImmutableList<Pair<V, S>> zip(Iterable<S> that)
     {
-        return this.zip(that, FastList.<Pair<V, S>>newList(this.size())).toImmutable();
+        return this.zip(that, FastList.newList(this.size())).toImmutable();
     }
 
     public ImmutableList<Pair<V, Integer>> zipWithIndex()
     {
-        return this.zipWithIndex(FastList.<Pair<V, Integer>>newList(this.size())).toImmutable();
+        return this.zipWithIndex(FastList.newList(this.size())).toImmutable();
     }
 
     public SortedMap<K, V> subMap(K fromKey, K toKey)
@@ -388,7 +388,7 @@ public abstract class AbstractImmutableSortedMap<K, V>
 
     public <R> ImmutableListMultimap<R, V> groupByEach(Function<? super V, ? extends Iterable<R>> function)
     {
-        return this.groupByEach(function, FastListMultimap.<R, V>newMultimap()).toImmutable();
+        return this.groupByEach(function, FastListMultimap.newMultimap()).toImmutable();
     }
 
     public <V1> ImmutableMap<V1, V> groupByUniqueKey(Function<? super V, ? extends V1> function)

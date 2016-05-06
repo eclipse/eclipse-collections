@@ -125,7 +125,7 @@ public class ImmutableUnifiedMapWithHashingStrategy<K, V>
     public Set<Entry<K, V>> entrySet()
     {
         final UnifiedSetWithHashingStrategy<Entry<K, V>> result = UnifiedSetWithHashingStrategy.newSet(
-                HashingStrategies.<Entry<K, V>>defaultStrategy(), this.delegate.size());
+                HashingStrategies.defaultStrategy(), this.delegate.size());
         final HashingStrategy<? super K> hashingStrategy = this.delegate.hashingStrategy();
         this.forEachKeyValue((argument1, argument2) -> result.put(ImmutableEntryWithHashingStrategy.of(argument1, argument2, hashingStrategy)));
         return result.toImmutable().castToSet();
@@ -221,7 +221,7 @@ public class ImmutableUnifiedMapWithHashingStrategy<K, V>
     public <R> ImmutableMap<K, R> collectValues(Function2<? super K, ? super V, ? extends R> function)
     {
         MutableMap<K, R> result = MapIterate.collectValues(this, function,
-                UnifiedMapWithHashingStrategy.<K, R>newMap(this.delegate.hashingStrategy(), this.delegate.size()));
+                UnifiedMapWithHashingStrategy.newMap(this.delegate.hashingStrategy(), this.delegate.size()));
         return result.toImmutable();
     }
 

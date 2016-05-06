@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -50,13 +50,13 @@ public interface SortedBagTestCase extends SortedIterableTestCase, BagTestCase, 
     {
         // Must test with two classes that are mutually Comparable
 
-        SortedBag<A> numbers = this.<A>newWith(
+        SortedBag<A> numbers = this.newWith(
                 new C(4.0), new C(4.0), new C(4.0), new C(4.0),
                 new B(3), new B(3), new B(3),
                 new C(2.0), new C(2.0),
                 new B(1));
         assertEquals(
-                this.<B>getExpectedFiltered(new B(3), new B(3), new B(3), new B(1)),
+                this.getExpectedFiltered(new B(3), new B(3), new B(3), new B(1)),
                 numbers.selectInstancesOf(B.class));
         assertEquals(
                 this.getExpectedFiltered(

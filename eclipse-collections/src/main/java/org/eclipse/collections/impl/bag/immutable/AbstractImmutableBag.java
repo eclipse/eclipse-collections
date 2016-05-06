@@ -164,7 +164,7 @@ public abstract class AbstractImmutableBag<T>
     {
         return this.occurrencesSortingBy(n,
                 item -> -item.getTwo(),
-                Lists.fixedSize.<ObjectIntPair<T>>empty()
+                Lists.fixedSize.empty()
         ).toImmutable();
     }
 
@@ -172,8 +172,8 @@ public abstract class AbstractImmutableBag<T>
     {
         return this.occurrencesSortingBy(
                 n,
-                ObjectIntPair<T>::getTwo,
-                Lists.fixedSize.<ObjectIntPair<T>>empty()
+                ObjectIntPair::getTwo,
+                Lists.fixedSize.empty()
         ).toImmutable();
     }
 

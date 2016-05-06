@@ -37,7 +37,7 @@ public final class CompositeIterable<E>
 
     public CompositeIterable()
     {
-        this(FastList.<Iterable<E>>newList());
+        this(FastList.newList());
     }
 
     public static <T> CompositeIterable<T> with(Iterable<T>... iterables)

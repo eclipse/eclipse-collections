@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -173,24 +173,24 @@ public class SingletonListTest extends AbstractMemoryEfficientMutableListTestCas
     @Test
     public void selectWith()
     {
-        Verify.assertContainsAll(SingletonListTest.newWith(1).selectWith(Predicates2.<Integer>lessThan(), 3), 1);
-        Verify.assertEmpty(SingletonListTest.newWith(1).selectWith(Predicates2.<Integer>greaterThan(), 3));
+        Verify.assertContainsAll(SingletonListTest.newWith(1).selectWith(Predicates2.lessThan(), 3), 1);
+        Verify.assertEmpty(SingletonListTest.newWith(1).selectWith(Predicates2.greaterThan(), 3));
     }
 
     @Test
     public void reject()
     {
         Verify.assertEmpty(SingletonListTest.newWith(1).reject(Predicates.lessThan(3)));
-        Verify.assertContainsAll(SingletonListTest.newWith(1).reject(Predicates.greaterThan(3), UnifiedSet.<Integer>newSet()), 1);
+        Verify.assertContainsAll(SingletonListTest.newWith(1).reject(Predicates.greaterThan(3), UnifiedSet.newSet()), 1);
     }
 
     @Test
     public void rejectWith()
     {
-        Verify.assertEmpty(SingletonListTest.newWith(1).rejectWith(Predicates2.<Integer>lessThan(), 3));
-        Verify.assertContainsAll(SingletonListTest.newWith(1).rejectWith(Predicates2.<Integer>greaterThan(),
+        Verify.assertEmpty(SingletonListTest.newWith(1).rejectWith(Predicates2.lessThan(), 3));
+        Verify.assertContainsAll(SingletonListTest.newWith(1).rejectWith(Predicates2.greaterThan(),
                         3,
-                        UnifiedSet.<Integer>newSet()),
+                UnifiedSet.newSet()),
                 1);
     }
 
@@ -200,7 +200,7 @@ public class SingletonListTest extends AbstractMemoryEfficientMutableListTestCas
         Verify.assertContainsAll(SingletonListTest.newWith(1).collect(String::valueOf), "1");
         Verify.assertContainsAll(SingletonListTest.newWith(1).collect(
                         String::valueOf,
-                        UnifiedSet.<String>newSet()),
+                UnifiedSet.newSet()),
                 "1");
     }
 
@@ -211,7 +211,7 @@ public class SingletonListTest extends AbstractMemoryEfficientMutableListTestCas
         Verify.assertListsEqual(FastList.newListWith("1"), SingletonListTest.newWith(1).flatCollect(function));
         Verify.assertSetsEqual(
                 UnifiedSet.newSetWith("1"),
-                SingletonListTest.newWith(1).flatCollect(function, UnifiedSet.<String>newSet()));
+                SingletonListTest.newWith(1).flatCollect(function, UnifiedSet.newSet()));
     }
 
     @Test
@@ -309,7 +309,7 @@ public class SingletonListTest extends AbstractMemoryEfficientMutableListTestCas
         Verify.assertContainsAll(SingletonListTest.newWith(1).collectIf(
                 Integer.class::isInstance,
                 String::valueOf,
-                FastList.<String>newList()), "1");
+                FastList.newList()), "1");
     }
 
     @Test
@@ -320,7 +320,7 @@ public class SingletonListTest extends AbstractMemoryEfficientMutableListTestCas
                 SingletonListTest.newWith(1).collectWith(AddFunction.INTEGER, 1));
         Assert.assertEquals(
                 FastList.newListWith(2),
-                SingletonListTest.newWith(1).collectWith(AddFunction.INTEGER, 1, FastList.<Integer>newList()));
+                SingletonListTest.newWith(1).collectWith(AddFunction.INTEGER, 1, FastList.newList()));
     }
 
     @Test
@@ -438,7 +438,7 @@ public class SingletonListTest extends AbstractMemoryEfficientMutableListTestCas
     public void toSortedList()
     {
         MutableList<Integer> integers = SingletonListTest.newWith(1);
-        MutableList<Integer> list = integers.toSortedList(Collections.<Integer>reverseOrder());
+        MutableList<Integer> list = integers.toSortedList(Collections.reverseOrder());
         Verify.assertStartsWith(list, 1);
         Assert.assertNotSame(integers, list);
         MutableList<Integer> list2 = integers.toSortedList();
@@ -501,7 +501,7 @@ public class SingletonListTest extends AbstractMemoryEfficientMutableListTestCas
     @Test
     public void testToString()
     {
-        MutableList<MutableList<?>> list = Lists.fixedSize.<MutableList<?>>of(Lists.fixedSize.of());
+        MutableList<MutableList<?>> list = Lists.fixedSize.of(Lists.fixedSize.of());
         list.set(0, list);
         Assert.assertEquals("[(this SingletonList)]", list.toString());
     }

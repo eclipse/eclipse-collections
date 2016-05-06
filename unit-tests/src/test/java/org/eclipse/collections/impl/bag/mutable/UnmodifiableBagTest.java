@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -93,7 +93,7 @@ public class UnmodifiableBagTest
     public void equalsAndHashCode()
     {
         Verify.assertEqualsAndHashCode(this.getCollection(), Bags.mutable.of(""));
-        MutableBag<Number> numbers = UnmodifiableBag.of(HashBag.<Number>newBagWith(1, 1, 2, 2, 2, 3));
+        MutableBag<Number> numbers = UnmodifiableBag.of(HashBag.newBagWith(1, 1, 2, 2, 2, 3));
         Verify.assertPostSerializedEqualsAndHashCode(numbers);
         Verify.assertInstanceOf(UnmodifiableBag.class, SerializeTestHelper.serializeDeserialize(numbers));
     }
@@ -115,7 +115,7 @@ public class UnmodifiableBagTest
     @Test
     public void selectInstancesOf()
     {
-        MutableBag<Number> numbers = UnmodifiableBag.of(HashBag.<Number>newBagWith(1, 2.0, 3, 4.0, 5));
+        MutableBag<Number> numbers = UnmodifiableBag.of(HashBag.newBagWith(1, 2.0, 3, 4.0, 5));
         Assert.assertEquals(iBag(1, 3, 5), numbers.selectInstancesOf(Integer.class));
         Assert.assertEquals(iBag(1, 2.0, 3, 4.0, 5), numbers.selectInstancesOf(Number.class));
     }

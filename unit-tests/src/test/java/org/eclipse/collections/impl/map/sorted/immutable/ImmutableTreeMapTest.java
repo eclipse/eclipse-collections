@@ -103,7 +103,7 @@ public class ImmutableTreeMapTest extends ImmutableSortedMapTestCase
     public void testToString()
     {
         Assert.assertEquals("{1=1, 2=2, 3=3, 4=4}", this.classUnderTest().toString());
-        Assert.assertEquals("{4=4, 3=3, 2=2, 1=1}", this.classUnderTest(Comparators.<Integer>reverseNaturalOrder()).toString());
+        Assert.assertEquals("{4=4, 3=3, 2=2, 1=1}", this.classUnderTest(Comparators.reverseNaturalOrder()).toString());
         Assert.assertEquals("{}", new ImmutableTreeMap<>(new TreeSortedMap<>()).toString());
     }
 

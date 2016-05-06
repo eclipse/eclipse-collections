@@ -33,6 +33,6 @@ public final class FastListCollectIfProcedureFactory<T, V> implements ProcedureF
 
     public FastListCollectIfProcedure<T, V> create()
     {
-        return new FastListCollectIfProcedure<>(FastList.<V>newList(this.collectionSize), this.function, this.predicate);
+        return new FastListCollectIfProcedure<>(FastList.newList(this.collectionSize), this.function, this.predicate);
     }
 }

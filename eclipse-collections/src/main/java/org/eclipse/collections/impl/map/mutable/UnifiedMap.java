@@ -164,8 +164,8 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
         this(Math.max(pairs.length, DEFAULT_INITIAL_CAPACITY), DEFAULT_LOAD_FACTOR);
         ArrayIterate.forEach(pairs, new MapCollectProcedure<Pair<K, V>, K, V>(
                 this,
-                Functions.<K>firstOfPair(),
-                Functions.<V>secondOfPair()));
+                Functions.firstOfPair(),
+                Functions.secondOfPair()));
     }
 
     public static <K, V> UnifiedMap<K, V> newMap()

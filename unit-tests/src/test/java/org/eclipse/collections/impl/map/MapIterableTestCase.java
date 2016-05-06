@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -626,8 +626,8 @@ public abstract class MapIterableTestCase
         MutableSortedBag<Integer> sorted = map.toSortedBag();
         Verify.assertSortedBagsEqual(TreeBag.newBagWith(1, 2, 3, 4), sorted);
 
-        MutableSortedBag<Integer> reverse = map.toSortedBag(Collections.<Integer>reverseOrder());
-        Verify.assertSortedBagsEqual(TreeBag.newBagWith(Comparators.<Integer>reverseNaturalOrder(), 1, 2, 3, 4), reverse);
+        MutableSortedBag<Integer> reverse = map.toSortedBag(Collections.reverseOrder());
+        Verify.assertSortedBagsEqual(TreeBag.newBagWith(Comparators.reverseNaturalOrder(), 1, 2, 3, 4), reverse);
     }
 
     @Test
@@ -683,7 +683,7 @@ public abstract class MapIterableTestCase
         MutableList<Integer> sorted = map.toSortedList();
         Assert.assertEquals(FastList.newListWith(1, 2, 3, 4), sorted);
 
-        MutableList<Integer> reverse = map.toSortedList(Collections.<Integer>reverseOrder());
+        MutableList<Integer> reverse = map.toSortedList(Collections.reverseOrder());
         Assert.assertEquals(FastList.newListWith(4, 3, 2, 1), reverse);
     }
 
@@ -704,8 +704,8 @@ public abstract class MapIterableTestCase
         MutableSortedSet<Integer> sorted = map.toSortedSet();
         Verify.assertSortedSetsEqual(TreeSortedSet.newSetWith(1, 2, 3, 4), sorted);
 
-        MutableSortedSet<Integer> reverse = map.toSortedSet(Collections.<Integer>reverseOrder());
-        Verify.assertSortedSetsEqual(TreeSortedSet.newSetWith(Comparators.<Integer>reverseNaturalOrder(), 1, 2, 3, 4), reverse);
+        MutableSortedSet<Integer> reverse = map.toSortedSet(Collections.reverseOrder());
+        Verify.assertSortedSetsEqual(TreeSortedSet.newSetWith(Comparators.reverseNaturalOrder(), 1, 2, 3, 4), reverse);
     }
 
     @Test
@@ -756,7 +756,7 @@ public abstract class MapIterableTestCase
         Verify.assertContainsAll(
                 map.collect(
                         String::valueOf,
-                        UnifiedSet.<String>newSet()), "1", "2", "3", "4");
+                        UnifiedSet.newSet()), "1", "2", "3", "4");
     }
 
     @Test
@@ -767,7 +767,7 @@ public abstract class MapIterableTestCase
         Bag<String> odd = map.collectIf(IntegerPredicates.isOdd(), Functions.getToString()).toBag();
         Assert.assertEquals(Bags.mutable.of("1", "3"), odd);
 
-        Bag<String> even = map.collectIf(IntegerPredicates.isEven(), String::valueOf, HashBag.<String>newBag());
+        Bag<String> even = map.collectIf(IntegerPredicates.isEven(), String::valueOf, HashBag.newBag());
         Assert.assertEquals(Bags.mutable.of("2", "4"), even);
     }
 
@@ -785,7 +785,7 @@ public abstract class MapIterableTestCase
     {
         MapIterable<String, Integer> map = this.newMapWithKeysValues("1", 1, "2", 2, "3", 3, "4", 4);
 
-        FastList<Integer> actual = map.collectWith(AddFunction.INTEGER, 1, FastList.<Integer>newList());
+        FastList<Integer> actual = map.collectWith(AddFunction.INTEGER, 1, FastList.newList());
         Verify.assertContainsAll(actual, 2, 3, 4, 5);
     }
 
@@ -961,7 +961,7 @@ public abstract class MapIterableTestCase
                 Character.valueOf('w'),
                 Character.valueOf('o')));
 
-        RichIterable<Character> blobFromTarget = map.flatCollect(function, FastList.<Character>newList());
+        RichIterable<Character> blobFromTarget = map.flatCollect(function, FastList.newList());
         Assert.assertTrue(blobFromTarget.containsAllArguments(
                 Character.valueOf('O'),
                 Character.valueOf('n'),
@@ -990,7 +990,7 @@ public abstract class MapIterableTestCase
             Assert.assertTrue(expected.get(each).containsAllIterable(values));
         });
 
-        Multimap<Boolean, Integer> actualFromTarget = map.groupBy(isOddFunction, FastListMultimap.<Boolean, Integer>newMultimap());
+        Multimap<Boolean, Integer> actualFromTarget = map.groupBy(isOddFunction, FastListMultimap.newMultimap());
         expected.forEachKey(each -> {
             Assert.assertTrue(actualFromTarget.containsKey(each));
             MutableList<Integer> values = actualFromTarget.get(each).toList();
@@ -1019,7 +1019,7 @@ public abstract class MapIterableTestCase
             Assert.assertTrue(expected.get(each).containsAllIterable(values));
         });
 
-        Multimap<Integer, Integer> actualFromTarget = map.groupByEach(function, FastListMultimap.<Integer, Integer>newMultimap());
+        Multimap<Integer, Integer> actualFromTarget = map.groupByEach(function, FastListMultimap.newMultimap());
         expected.forEachKey(each -> {
             Assert.assertTrue(actualFromTarget.containsKey(each));
             MutableList<Integer> values = actualFromTarget.get(each).toList();
@@ -1234,7 +1234,7 @@ public abstract class MapIterableTestCase
         MapIterable<String, Integer> map = this.newMapWithKeysValues("1", 1, "2", 2, "3", 3, "4", 4);
 
         Verify.assertContainsAll(map.reject(Predicates.lessThan(3)).toSet(), 3, 4);
-        Verify.assertContainsAll(map.reject(Predicates.lessThan(3), UnifiedSet.<Integer>newSet()), 3, 4);
+        Verify.assertContainsAll(map.reject(Predicates.lessThan(3), UnifiedSet.newSet()), 3, 4);
     }
 
     @Test
@@ -1242,7 +1242,7 @@ public abstract class MapIterableTestCase
     {
         MapIterable<String, Integer> map = this.newMapWithKeysValues("1", 1, "2", 2, "3", 3, "4", 4);
 
-        Verify.assertContainsAll(map.rejectWith(Predicates2.<Integer>lessThan(), 3, UnifiedSet.<Integer>newSet()), 3, 4);
+        Verify.assertContainsAll(map.rejectWith(Predicates2.lessThan(), 3, UnifiedSet.newSet()), 3, 4);
     }
 
     @Test
@@ -1251,7 +1251,7 @@ public abstract class MapIterableTestCase
         MapIterable<String, Integer> map = this.newMapWithKeysValues("1", 1, "2", 2, "3", 3, "4", 4);
 
         Verify.assertContainsAll(map.select(Predicates.lessThan(3)).toSet(), 1, 2);
-        Verify.assertContainsAll(map.select(Predicates.lessThan(3), UnifiedSet.<Integer>newSet()), 1, 2);
+        Verify.assertContainsAll(map.select(Predicates.lessThan(3), UnifiedSet.newSet()), 1, 2);
     }
 
     @Test
@@ -1259,7 +1259,7 @@ public abstract class MapIterableTestCase
     {
         MapIterable<String, Integer> map = this.newMapWithKeysValues("1", 1, "2", 2, "3", 3, "4", 4);
 
-        Verify.assertContainsAll(map.selectWith(Predicates2.<Integer>lessThan(), 3, UnifiedSet.<Integer>newSet()), 1, 2);
+        Verify.assertContainsAll(map.selectWith(Predicates2.lessThan(), 3, UnifiedSet.newSet()), 1, 2);
     }
 
     @Test
@@ -1291,7 +1291,7 @@ public abstract class MapIterableTestCase
     @Test
     public void selectInstancesOf_value()
     {
-        MapIterable<String, Number> map = this.<String, Number>newMapWithKeysValues("1", 1, "2", 2.0, "3", 3, "4", 4.0);
+        MapIterable<String, Number> map = this.newMapWithKeysValues("1", 1, "2", 2.0, "3", 3, "4", 4.0);
         Assert.assertEquals(iBag(1, 3), map.selectInstancesOf(Integer.class).toBag());
     }
 
@@ -1339,7 +1339,7 @@ public abstract class MapIterableTestCase
 
         Assert.assertEquals(
                 map.zip(nulls).toSet(),
-                map.zip(nulls, UnifiedSet.<Pair<String, Object>>newSet()));
+                map.zip(nulls, UnifiedSet.newSet()));
     }
 
     @Test
@@ -1354,11 +1354,11 @@ public abstract class MapIterableTestCase
                 pairs.collect((Function<Pair<String, ?>, String>) Pair::getOne).toSet());
         Assert.assertEquals(
                 Interval.zeroTo(map.size() - 1).toSet(),
-                pairs.collect((Function<Pair<?, Integer>, Integer>) Pair::getTwo, UnifiedSet.<Integer>newSet()));
+                pairs.collect((Function<Pair<?, Integer>, Integer>) Pair::getTwo, UnifiedSet.newSet()));
 
         Assert.assertEquals(
                 map.zipWithIndex().toSet(),
-                map.zipWithIndex(UnifiedSet.<Pair<String, Integer>>newSet()));
+                map.zipWithIndex(UnifiedSet.newSet()));
     }
 
     @Test

@@ -205,25 +205,25 @@ public abstract class AbstractImmutableMap<K, V>
 
     public <K2, V2> ImmutableMap<K2, V2> collect(Function2<? super K, ? super V, Pair<K2, V2>> function)
     {
-        UnifiedMap<K2, V2> result = MapIterate.collect(this, function, UnifiedMap.<K2, V2>newMap());
+        UnifiedMap<K2, V2> result = MapIterate.collect(this, function, UnifiedMap.newMap());
         return result.toImmutable();
     }
 
     public <R> ImmutableMap<K, R> collectValues(Function2<? super K, ? super V, ? extends R> function)
     {
-        UnifiedMap<K, R> result = MapIterate.collectValues(this, function, UnifiedMap.<K, R>newMap(this.size()));
+        UnifiedMap<K, R> result = MapIterate.collectValues(this, function, UnifiedMap.newMap(this.size()));
         return result.toImmutable();
     }
 
     public ImmutableMap<K, V> select(Predicate2<? super K, ? super V> predicate)
     {
-        UnifiedMap<K, V> result = MapIterate.selectMapOnEntry(this, predicate, UnifiedMap.<K, V>newMap());
+        UnifiedMap<K, V> result = MapIterate.selectMapOnEntry(this, predicate, UnifiedMap.newMap());
         return result.toImmutable();
     }
 
     public ImmutableMap<K, V> reject(Predicate2<? super K, ? super V> predicate)
     {
-        UnifiedMap<K, V> result = MapIterate.rejectMapOnEntry(this, predicate, UnifiedMap.<K, V>newMap());
+        UnifiedMap<K, V> result = MapIterate.rejectMapOnEntry(this, predicate, UnifiedMap.newMap());
         return result.toImmutable();
     }
 
@@ -361,7 +361,7 @@ public abstract class AbstractImmutableMap<K, V>
     @Deprecated
     public <S> ImmutableBag<Pair<V, S>> zip(Iterable<S> that)
     {
-        return this.zip(that, HashBag.<Pair<V, S>>newBag(this.size())).toImmutable();
+        return this.zip(that, HashBag.newBag(this.size())).toImmutable();
     }
 
     /**
@@ -370,7 +370,7 @@ public abstract class AbstractImmutableMap<K, V>
     @Deprecated
     public ImmutableSet<Pair<V, Integer>> zipWithIndex()
     {
-        return this.zipWithIndex(UnifiedSet.<Pair<V, Integer>>newSet(this.size())).toImmutable();
+        return this.zipWithIndex(UnifiedSet.newSet(this.size())).toImmutable();
     }
 
     public <VV> ImmutableBagMultimap<VV, V> groupBy(Function<? super V, ? extends VV> function)
@@ -380,7 +380,7 @@ public abstract class AbstractImmutableMap<K, V>
 
     public <VV> ImmutableBagMultimap<VV, V> groupByEach(Function<? super V, ? extends Iterable<VV>> function)
     {
-        return this.groupByEach(function, HashBagMultimap.<VV, V>newMultimap()).toImmutable();
+        return this.groupByEach(function, HashBagMultimap.newMultimap()).toImmutable();
     }
 
     public <V1> ImmutableMap<V1, V> groupByUniqueKey(Function<? super V, ? extends V1> function)

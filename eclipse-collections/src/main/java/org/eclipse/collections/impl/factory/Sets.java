@@ -102,8 +102,8 @@ public final class Sets
             Set<? extends E> setA,
             Set<? extends E> setB)
     {
-        return setA.size() > setB.size() ? fillSet(targetSet, Sets.<E, R>addAllProcedure(), setA, setB)
-                : fillSet(targetSet, Sets.<E, R>addAllProcedure(), setB, setA);
+        return setA.size() > setB.size() ? fillSet(targetSet, Sets.addAllProcedure(), setA, setB)
+                : fillSet(targetSet, Sets.addAllProcedure(), setB, setA);
     }
 
     public static <E> MutableSet<E> unionAll(Set<? extends E>... sets)
@@ -116,7 +116,7 @@ public final class Sets
             Set<? extends E>... sets)
     {
         Arrays.sort(sets, 0, sets.length, Comparators.descendingCollectionSizeComparator());
-        return fillSet(targetSet, Sets.<E, R>addAllProcedure(), sets);
+        return fillSet(targetSet, Sets.addAllProcedure(), sets);
     }
 
     public static <E> MutableSet<E> intersect(
@@ -131,8 +131,8 @@ public final class Sets
             Set<? extends E> setA,
             Set<? extends E> setB)
     {
-        return setA.size() < setB.size() ? fillSet(targetSet, Sets.<E, R>retainAllProcedure(), setA, setB)
-                : fillSet(targetSet, Sets.<E, R>retainAllProcedure(), setB, setA);
+        return setA.size() < setB.size() ? fillSet(targetSet, Sets.retainAllProcedure(), setA, setB)
+                : fillSet(targetSet, Sets.retainAllProcedure(), setB, setA);
     }
 
     public static <E> MutableSet<E> intersectAll(Set<? extends E>... sets)
@@ -145,7 +145,7 @@ public final class Sets
             Set<? extends E>... sets)
     {
         Arrays.sort(sets, 0, sets.length, Comparators.ascendingCollectionSizeComparator());
-        return fillSet(targetSet, Sets.<E, R>retainAllProcedure(), sets);
+        return fillSet(targetSet, Sets.retainAllProcedure(), sets);
     }
 
     public static <E> MutableSet<E> difference(
@@ -160,7 +160,7 @@ public final class Sets
             Set<? extends E> minuendSet,
             Set<? extends E> subtrahendSet)
     {
-        return fillSet(targetSet, Sets.<E, R>removeAllProcedure(), minuendSet, subtrahendSet);
+        return fillSet(targetSet, Sets.removeAllProcedure(), minuendSet, subtrahendSet);
     }
 
     public static <E> MutableSet<E> differenceAll(Set<? extends E>... sets)
@@ -172,7 +172,7 @@ public final class Sets
             R targetSet,
             Set<? extends E>... sets)
     {
-        return fillSet(targetSet, Sets.<E, R>removeAllProcedure(), sets);
+        return fillSet(targetSet, Sets.removeAllProcedure(), sets);
     }
 
     public static <E> MutableSet<E> symmetricDifference(
@@ -265,7 +265,7 @@ public final class Sets
 
     public static <T> MutableSet<MutableSet<T>> powerSet(Set<T> set)
     {
-        MutableSet<MutableSet<T>> seed = UnifiedSet.<MutableSet<T>>newSetWith(UnifiedSet.<T>newSet());
+        MutableSet<MutableSet<T>> seed = UnifiedSet.newSetWith(UnifiedSet.newSet());
         return Iterate.injectInto(seed, set, (accumulator, element) -> Sets.union(accumulator, accumulator.collect(innerSet -> innerSet.toSet().with(element))));
     }
 

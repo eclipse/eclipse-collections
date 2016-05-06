@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -22,7 +22,7 @@ public class ImmutableUnifiedMapWithHashingStrategy2Test extends MapIterableTest
     protected <K, V> ImmutableMap<K, V> newMap()
     {
         return new ImmutableUnifiedMapWithHashingStrategy<>(
-                UnifiedMapWithHashingStrategy.<K, V>newMap(HashingStrategies.nullSafeHashingStrategy(HashingStrategies.<K>defaultStrategy())));
+                UnifiedMapWithHashingStrategy.newMap(HashingStrategies.nullSafeHashingStrategy(HashingStrategies.defaultStrategy())));
     }
 
     @Override
@@ -30,7 +30,7 @@ public class ImmutableUnifiedMapWithHashingStrategy2Test extends MapIterableTest
     {
         return new ImmutableUnifiedMapWithHashingStrategy<>(
                 UnifiedMapWithHashingStrategy.newWithKeysValues(HashingStrategies.nullSafeHashingStrategy(
-                        HashingStrategies.<K>defaultStrategy()), key1, value1));
+                        HashingStrategies.defaultStrategy()), key1, value1));
     }
 
     @Override
@@ -38,7 +38,7 @@ public class ImmutableUnifiedMapWithHashingStrategy2Test extends MapIterableTest
     {
         return new ImmutableUnifiedMapWithHashingStrategy<>(
                 UnifiedMapWithHashingStrategy.newWithKeysValues(HashingStrategies.nullSafeHashingStrategy(
-                        HashingStrategies.<K>defaultStrategy()), key1, value1, key2, value2));
+                        HashingStrategies.defaultStrategy()), key1, value1, key2, value2));
     }
 
     @Override
@@ -46,7 +46,7 @@ public class ImmutableUnifiedMapWithHashingStrategy2Test extends MapIterableTest
     {
         return new ImmutableUnifiedMapWithHashingStrategy<>(
                 UnifiedMapWithHashingStrategy.newWithKeysValues(HashingStrategies.nullSafeHashingStrategy(
-                        HashingStrategies.<K>defaultStrategy()), key1, value1, key2, value2, key3, value3));
+                        HashingStrategies.defaultStrategy()), key1, value1, key2, value2, key3, value3));
     }
 
     @Override
@@ -54,6 +54,6 @@ public class ImmutableUnifiedMapWithHashingStrategy2Test extends MapIterableTest
     {
         return new ImmutableUnifiedMapWithHashingStrategy<>(
                 UnifiedMapWithHashingStrategy.newMapWith(HashingStrategies.nullSafeHashingStrategy(
-                        HashingStrategies.<K>defaultStrategy()), Tuples.pair(key1, value1), Tuples.pair(key2, value2), Tuples.pair(key3, value3), Tuples.pair(key4, value4)));
+                        HashingStrategies.defaultStrategy()), Tuples.pair(key1, value1), Tuples.pair(key2, value2), Tuples.pair(key3, value3), Tuples.pair(key4, value4)));
     }
 }

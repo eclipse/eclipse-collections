@@ -42,7 +42,7 @@ public final class SetIterables
             SetIterable<? extends E> setA,
             SetIterable<? extends E> setB)
     {
-        return SetIterables.unionInto(setA, setB, UnifiedSet.<E>newSet());
+        return SetIterables.unionInto(setA, setB, UnifiedSet.newSet());
     }
 
     public static <E, R extends Set<E>> R unionInto(
@@ -59,7 +59,7 @@ public final class SetIterables
             SetIterable<? extends E> setA,
             SetIterable<? extends E> setB)
     {
-        return SetIterables.intersectInto(setA, setB, UnifiedSet.<E>newSet());
+        return SetIterables.intersectInto(setA, setB, UnifiedSet.newSet());
     }
 
     public static <E, R extends Set<E>> R intersectInto(
@@ -77,7 +77,7 @@ public final class SetIterables
             SetIterable<? extends E> minuendSet,
             SetIterable<? extends E> subtrahendSet)
     {
-        return SetIterables.differenceInto(minuendSet, subtrahendSet, UnifiedSet.<E>newSet());
+        return SetIterables.differenceInto(minuendSet, subtrahendSet, UnifiedSet.newSet());
     }
 
     public static <E, R extends Set<E>> R differenceInto(
@@ -95,7 +95,7 @@ public final class SetIterables
             SetIterable<? extends E> setA,
             SetIterable<? extends E> setB)
     {
-        return SetIterables.symmetricDifferenceInto(setA, setB, UnifiedSet.<E>newSet());
+        return SetIterables.symmetricDifferenceInto(setA, setB, UnifiedSet.newSet());
     }
 
     public static <E, R extends Set<E>> R symmetricDifferenceInto(
@@ -127,13 +127,13 @@ public final class SetIterables
 
     public static <T> MutableSet<MutableSet<T>> powerSet(Set<T> set)
     {
-        MutableSet<MutableSet<T>> seed = UnifiedSet.<MutableSet<T>>newSetWith(UnifiedSet.<T>newSet());
+        MutableSet<MutableSet<T>> seed = UnifiedSet.newSetWith(UnifiedSet.newSet());
         return powerSetWithSeed(set, seed);
     }
 
     public static <T> MutableSet<MutableSet<T>> powerSet(UnifiedSetWithHashingStrategy<T> set)
     {
-        MutableSet<MutableSet<T>> seed = UnifiedSet.<MutableSet<T>>newSetWith(set.newEmpty());
+        MutableSet<MutableSet<T>> seed = UnifiedSet.newSetWith(set.newEmpty());
         return powerSetWithSeed(set, seed);
     }
 

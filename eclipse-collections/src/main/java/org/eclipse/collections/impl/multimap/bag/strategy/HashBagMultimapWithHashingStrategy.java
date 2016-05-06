@@ -156,7 +156,7 @@ public final class HashBagMultimapWithHashingStrategy<K, V>
 
     public <V2> HashBagMultimapWithHashingStrategy<K, V2> collectValues(Function<? super V, ? extends V2> function)
     {
-        return this.collectValues(function, HashBagMultimapWithHashingStrategy.<K, V2>newMultimap(this.hashingStrategy));
+        return this.collectValues(function, HashBagMultimapWithHashingStrategy.newMultimap(this.hashingStrategy));
     }
 
     public HashBagMultimapWithHashingStrategy<K, V> selectKeysValues(Predicate2<? super K, ? super V> predicate)

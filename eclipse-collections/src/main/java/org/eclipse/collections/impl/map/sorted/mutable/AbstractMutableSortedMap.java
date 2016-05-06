@@ -212,7 +212,7 @@ public abstract class AbstractMutableSortedMap<K, V> extends AbstractMutableMapI
 
     public <R> MutableSortedMap<K, R> collectValues(Function2<? super K, ? super V, ? extends R> function)
     {
-        return MapIterate.collectValues(this, function, TreeSortedMap.<K, R>newMap(this.comparator()));
+        return MapIterate.collectValues(this, function, TreeSortedMap.newMap(this.comparator()));
     }
 
     public MutableSortedMap<K, V> tap(Procedure<? super V> procedure)
@@ -233,7 +233,7 @@ public abstract class AbstractMutableSortedMap<K, V> extends AbstractMutableMapI
 
     public <R> MutableList<R> collect(Function<? super V, ? extends R> function)
     {
-        return this.collect(function, FastList.<R>newList(this.size()));
+        return this.collect(function, FastList.newList(this.size()));
     }
 
     public <P, VV> MutableList<VV> collectWith(Function2<? super V, ? super P, ? extends VV> function, P parameter)
@@ -243,17 +243,17 @@ public abstract class AbstractMutableSortedMap<K, V> extends AbstractMutableMapI
 
     public <R> MutableList<R> collectIf(Predicate<? super V> predicate, Function<? super V, ? extends R> function)
     {
-        return this.collectIf(predicate, function, FastList.<R>newList(this.size()));
+        return this.collectIf(predicate, function, FastList.newList(this.size()));
     }
 
     public <R> MutableList<R> flatCollect(Function<? super V, ? extends Iterable<R>> function)
     {
-        return this.flatCollect(function, FastList.<R>newList(this.size()));
+        return this.flatCollect(function, FastList.newList(this.size()));
     }
 
     public MutableList<V> reject(Predicate<? super V> predicate)
     {
-        return this.reject(predicate, FastList.<V>newList(this.size()));
+        return this.reject(predicate, FastList.newList(this.size()));
     }
 
     public <P> MutableList<V> selectWith(Predicate2<? super V, ? super P> predicate, P parameter)
@@ -268,7 +268,7 @@ public abstract class AbstractMutableSortedMap<K, V> extends AbstractMutableMapI
 
     public MutableList<V> select(Predicate<? super V> predicate)
     {
-        return this.select(predicate, FastList.<V>newList(this.size()));
+        return this.select(predicate, FastList.newList(this.size()));
     }
 
     public PartitionMutableList<V> partition(Predicate<? super V> predicate)
@@ -295,28 +295,28 @@ public abstract class AbstractMutableSortedMap<K, V> extends AbstractMutableMapI
 
     public <S> MutableList<Pair<V, S>> zip(Iterable<S> that)
     {
-        return this.zip(that, FastList.<Pair<V, S>>newList(this.size()));
+        return this.zip(that, FastList.newList(this.size()));
     }
 
     public MutableList<Pair<V, Integer>> zipWithIndex()
     {
-        return this.zipWithIndex(FastList.<Pair<V, Integer>>newList(this.size()));
+        return this.zipWithIndex(FastList.newList(this.size()));
     }
 
     public <VV> MutableListMultimap<VV, V> groupBy(Function<? super V, ? extends VV> function)
     {
-        return this.groupBy(function, FastListMultimap.<VV, V>newMultimap());
+        return this.groupBy(function, FastListMultimap.newMultimap());
     }
 
     public <VV> MutableListMultimap<VV, V> groupByEach(Function<? super V, ? extends Iterable<VV>> function)
     {
-        return this.groupByEach(function, FastListMultimap.<VV, V>newMultimap());
+        return this.groupByEach(function, FastListMultimap.newMultimap());
     }
 
     @Override
     public <VV> MutableMap<VV, V> groupByUniqueKey(Function<? super V, ? extends VV> function)
     {
-        return this.groupByUniqueKey(function, UnifiedMap.<VV, V>newMap());
+        return this.groupByUniqueKey(function, UnifiedMap.newMap());
     }
 
     public void reverseForEach(Procedure<? super V> procedure)

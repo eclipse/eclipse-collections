@@ -33,6 +33,6 @@ public final class CollectIfProcedureFactory<T, V> implements ProcedureFactory<C
 
     public CollectIfProcedure<T, V> create()
     {
-        return new CollectIfProcedure<>(FastList.<V>newList(this.collectionSize), this.function, this.predicate);
+        return new CollectIfProcedure<>(FastList.newList(this.collectionSize), this.function, this.predicate);
     }
 }

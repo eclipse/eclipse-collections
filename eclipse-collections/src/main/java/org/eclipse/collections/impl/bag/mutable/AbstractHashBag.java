@@ -328,12 +328,12 @@ public abstract class AbstractHashBag<T> extends AbstractMutableBag<T>
 
     public <V> HashBagMultimap<V, T> groupBy(Function<? super T, ? extends V> function)
     {
-        return this.groupBy(function, HashBagMultimap.<V, T>newMultimap());
+        return this.groupBy(function, HashBagMultimap.newMultimap());
     }
 
     public <V> HashBagMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function)
     {
-        return this.groupByEach(function, HashBagMultimap.<V, T>newMultimap());
+        return this.groupByEach(function, HashBagMultimap.newMultimap());
     }
 
     private class InternalIterator implements Iterator<T>

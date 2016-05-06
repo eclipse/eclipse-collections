@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -75,7 +75,7 @@ public abstract class MutableMapIterableTestCase extends MapIterableTestCase
     public void clear()
     {
         MutableMapIterable<Integer, Object> map =
-                this.<Integer, Object>newMapWithKeysValues(1, "One", 2, "Two", 3, "Three");
+                this.newMapWithKeysValues(1, "One", 2, "Two", 3, "Three");
         map.clear();
         Verify.assertEmpty(map);
 

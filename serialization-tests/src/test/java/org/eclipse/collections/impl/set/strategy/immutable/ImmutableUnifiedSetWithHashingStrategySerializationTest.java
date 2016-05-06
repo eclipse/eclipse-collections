@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -28,6 +28,6 @@ public class ImmutableUnifiedSetWithHashingStrategySerializationTest
                         + "YS5sYW5nLkludGVnZXIS4qCk94GHOAIAAUkABXZhbHVleHIAEGphdmEubGFuZy5OdW1iZXKGrJUd\n"
                         + "C5TgiwIAAHhwAAAAAXNxAH4ABAAAAAJzcQB+AAQAAAADc3EAfgAEAAAABHNxAH4ABAAAAAVzcQB+\n"
                         + "AAQAAAAGc3EAfgAEAAAAB3NxAH4ABAAAAAhzcQB+AAQAAAAJc3EAfgAEAAAACnNxAH4ABAAAAAt4\n",
-                ImmutableUnifiedSetWithHashingStrategy.newSetWith(HashingStrategies.<Integer>defaultStrategy(), 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11));
+                ImmutableUnifiedSetWithHashingStrategy.newSetWith(HashingStrategies.defaultStrategy(), 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11));
     }
 }

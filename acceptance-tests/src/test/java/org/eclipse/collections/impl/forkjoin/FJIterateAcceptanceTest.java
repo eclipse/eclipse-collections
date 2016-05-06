@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -99,10 +99,10 @@ public class FJIterateAcceptanceTest
                 interval.toSortedSet().asUnmodifiable(),
                 interval.toSortedSet().asSynchronized(),
                 interval.toSortedSet().toImmutable(),
-                interval.toMap(Functions.<Integer>getPassThru(), Functions.<Integer>getPassThru()),
-                interval.toMap(Functions.<Integer>getPassThru(), Functions.<Integer>getPassThru()).asUnmodifiable(),
-                interval.toMap(Functions.<Integer>getPassThru(), Functions.<Integer>getPassThru()).asSynchronized(),
-                interval.toMap(Functions.<Integer>getPassThru(), Functions.<Integer>getPassThru()).toImmutable(),
+                interval.toMap(Functions.getPassThru(), Functions.getPassThru()),
+                interval.toMap(Functions.getPassThru(), Functions.getPassThru()).asUnmodifiable(),
+                interval.toMap(Functions.getPassThru(), Functions.getPassThru()).asSynchronized(),
+                interval.toMap(Functions.getPassThru(), Functions.getPassThru()).toImmutable(),
                 ArrayListAdapter.<Integer>newList().withAll(interval),
                 ArrayListAdapter.<Integer>newList().withAll(interval).asUnmodifiable(),
                 ArrayListAdapter.<Integer>newList().withAll(interval).asSynchronized(),
@@ -357,7 +357,7 @@ public class FJIterateAcceptanceTest
     private void basicSelect(RichIterable<Integer> iterable)
     {
         Collection<Integer> actual1 = FJIterate.select(iterable, Predicates.greaterThan(10000));
-        Collection<Integer> actual2 = FJIterate.select(iterable, Predicates.greaterThan(10000), HashBag.<Integer>newBag(), 3, this.executor, true);
+        Collection<Integer> actual2 = FJIterate.select(iterable, Predicates.greaterThan(10000), HashBag.newBag(), 3, this.executor, true);
         Collection<Integer> actual3 = FJIterate.select(iterable, Predicates.greaterThan(10000), true);
         RichIterable<Integer> expected = iterable.select(Predicates.greaterThan(10000));
         Assert.assertEquals(expected.getClass().getSimpleName() + '/' + actual1.getClass().getSimpleName(), expected, actual1);
@@ -401,7 +401,7 @@ public class FJIterateAcceptanceTest
     private void basicReject(RichIterable<Integer> iterable)
     {
         Collection<Integer> actual1 = FJIterate.reject(iterable, Predicates.greaterThan(10000));
-        Collection<Integer> actual2 = FJIterate.reject(iterable, Predicates.greaterThan(10000), HashBag.<Integer>newBag(), 3, this.executor, true);
+        Collection<Integer> actual2 = FJIterate.reject(iterable, Predicates.greaterThan(10000), HashBag.newBag(), 3, this.executor, true);
         Collection<Integer> actual3 = FJIterate.reject(iterable, Predicates.greaterThan(10000), true);
         RichIterable<Integer> expected = iterable.reject(Predicates.greaterThan(10000));
         Assert.assertEquals(expected.getClass().getSimpleName() + '/' + actual1.getClass().getSimpleName(), expected, actual1);
@@ -418,7 +418,7 @@ public class FJIterateAcceptanceTest
     private void basicCollect(RichIterable<Integer> iterable)
     {
         Collection<String> actual1 = FJIterate.collect(iterable, String::valueOf);
-        Collection<String> actual2 = FJIterate.collect(iterable, String::valueOf, HashBag.<String>newBag(), 3, this.executor, false);
+        Collection<String> actual2 = FJIterate.collect(iterable, String::valueOf, HashBag.newBag(), 3, this.executor, false);
         Collection<String> actual3 = FJIterate.collect(iterable, String::valueOf, true);
         RichIterable<String> expected = iterable.collect(String::valueOf);
         Verify.assertSize(20000, actual1);
@@ -438,8 +438,8 @@ public class FJIterateAcceptanceTest
     {
         Predicate<Integer> greaterThan = Predicates.greaterThan(10000);
         Collection<String> actual1 = FJIterate.collectIf(collection, greaterThan, String::valueOf);
-        Collection<String> actual2 = FJIterate.collectIf(collection, greaterThan, String::valueOf, HashBag.<String>newBag(), 3, this.executor, true);
-        Collection<String> actual3 = FJIterate.collectIf(collection, greaterThan, String::valueOf, HashBag.<String>newBag(), 3, this.executor, true);
+        Collection<String> actual2 = FJIterate.collectIf(collection, greaterThan, String::valueOf, HashBag.newBag(), 3, this.executor, true);
+        Collection<String> actual3 = FJIterate.collectIf(collection, greaterThan, String::valueOf, HashBag.newBag(), 3, this.executor, true);
         Bag<String> expected = collection.collectIf(greaterThan, String::valueOf).toBag();
         Verify.assertSize(10000, actual1);
         Verify.assertNotContains(String.valueOf(9000), actual1);
@@ -459,10 +459,10 @@ public class FJIterateAcceptanceTest
     private void basicFlatCollect(RichIterable<Integer> iterable)
     {
         Collection<String> actual1 = FJIterate.flatCollect(iterable, INT_TO_TWO_STRINGS);
-        Collection<String> actual2 = FJIterate.flatCollect(iterable, INT_TO_TWO_STRINGS, HashBag.<String>newBag(), 3, this.executor, false);
+        Collection<String> actual2 = FJIterate.flatCollect(iterable, INT_TO_TWO_STRINGS, HashBag.newBag(), 3, this.executor, false);
         Collection<String> actual3 = FJIterate.flatCollect(iterable, INT_TO_TWO_STRINGS, true);
         RichIterable<String> expected1 = iterable.flatCollect(INT_TO_TWO_STRINGS);
-        RichIterable<String> expected2 = iterable.flatCollect(INT_TO_TWO_STRINGS, HashBag.<String>newBag());
+        RichIterable<String> expected2 = iterable.flatCollect(INT_TO_TWO_STRINGS, HashBag.newBag());
         Verify.assertContains(String.valueOf(20000), actual1);
         Assert.assertEquals(expected1.getClass().getSimpleName() + '/' + actual1.getClass().getSimpleName(), expected1, actual1);
         Assert.assertEquals(expected2.getClass().getSimpleName() + '/' + actual2.getClass().getSimpleName(), expected2, actual2);

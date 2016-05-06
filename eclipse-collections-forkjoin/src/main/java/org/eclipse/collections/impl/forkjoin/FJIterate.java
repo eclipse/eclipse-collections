@@ -948,7 +948,7 @@ public final class FJIterate
                 groupBy,
                 zeroValueFactory,
                 nonMutatingAggregator,
-                ConcurrentHashMap.<K, V>newMap(),
+                ConcurrentHashMap.newMap(),
                 batchSize,
                 executor);
     }
@@ -1135,7 +1135,7 @@ public final class FJIterate
             int batchSize,
             ForkJoinPool executor)
     {
-        return FJIterate.groupBy(iterable, function, SynchronizedPutFastListMultimap.<K, V>newMultimap(), batchSize, executor);
+        return FJIterate.groupBy(iterable, function, SynchronizedPutFastListMultimap.newMultimap(), batchSize, executor);
     }
 
     /**

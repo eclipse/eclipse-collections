@@ -178,7 +178,7 @@ public final class ArrayIterate
             throw new IllegalArgumentException("Cannot perform a select on null");
         }
 
-        return ArrayIterate.select(objectArray, predicate, FastList.<T>newList());
+        return ArrayIterate.select(objectArray, predicate, FastList.newList());
     }
 
     /**
@@ -193,7 +193,7 @@ public final class ArrayIterate
         {
             throw new IllegalArgumentException("Cannot perform a selectWith on null");
         }
-        return ArrayIterate.selectWith(objectArray, predicate, parameter, FastList.<T>newList());
+        return ArrayIterate.selectWith(objectArray, predicate, parameter, FastList.newList());
     }
 
     /**
@@ -292,7 +292,7 @@ public final class ArrayIterate
                 objectArray,
                 predicate,
                 function,
-                FastList.<V>newList(objectArray.length));
+                FastList.newList(objectArray.length));
     }
 
     /**
@@ -347,7 +347,7 @@ public final class ArrayIterate
      */
     public static <T> MutableList<T> reject(T[] objectArray, Predicate<? super T> predicate)
     {
-        return ArrayIterate.reject(objectArray, predicate, FastList.<T>newList());
+        return ArrayIterate.reject(objectArray, predicate, FastList.newList());
     }
 
     /**
@@ -366,7 +366,7 @@ public final class ArrayIterate
                 objectArray,
                 predicate,
                 parameter,
-                FastList.<T>newList());
+                FastList.newList());
     }
 
     /**
@@ -405,7 +405,7 @@ public final class ArrayIterate
      */
     public static <T, R extends Collection<T>> R addAllTo(T[] objectArray, R targetCollection)
     {
-        ArrayIterate.forEachWith(objectArray, Procedures2.<T>addToCollection(), targetCollection);
+        ArrayIterate.forEachWith(objectArray, Procedures2.addToCollection(), targetCollection);
         return targetCollection;
     }
 
@@ -420,7 +420,7 @@ public final class ArrayIterate
         {
             throw new IllegalArgumentException("Cannot perform a collect on null");
         }
-        return ArrayIterate.collect(objectArray, function, FastList.<V>newList(objectArray.length));
+        return ArrayIterate.collect(objectArray, function, FastList.newList(objectArray.length));
     }
 
     /**
@@ -704,7 +704,7 @@ public final class ArrayIterate
         {
             throw new IllegalArgumentException("Cannot perform a flatCollect on null");
         }
-        return ArrayIterate.flatCollect(objectArray, function, FastList.<V>newList(objectArray.length));
+        return ArrayIterate.flatCollect(objectArray, function, FastList.newList(objectArray.length));
     }
 
     public static <T, V, R extends Collection<V>> R flatCollect(
@@ -1013,7 +1013,7 @@ public final class ArrayIterate
      */
     public static <T> MutableList<T> distinct(T[] objectArray)
     {
-        return ArrayIterate.distinct(objectArray, FastList.<T>newList());
+        return ArrayIterate.distinct(objectArray, FastList.newList());
     }
 
     /**
@@ -1304,7 +1304,7 @@ public final class ArrayIterate
         {
             throw new IllegalArgumentException("Cannot perform a collectWith on null");
         }
-        return ArrayIterate.collectWith(objectArray, function, parameter, FastList.<V>newList(objectArray.length));
+        return ArrayIterate.collectWith(objectArray, function, parameter, FastList.newList(objectArray.length));
     }
 
     /**
@@ -1356,7 +1356,7 @@ public final class ArrayIterate
         {
             throw new IllegalArgumentException("Count must be greater than zero, but was: " + count);
         }
-        return ArrayIterate.take(array, count, FastList.<T>newList(Math.min(array.length, count)));
+        return ArrayIterate.take(array, count, FastList.newList(Math.min(array.length, count)));
     }
 
     /**
@@ -1385,7 +1385,7 @@ public final class ArrayIterate
         {
             throw new IllegalArgumentException("Count must be greater than zero, but was: " + count);
         }
-        return ArrayIterate.drop(array, count, FastList.<T>newList(array.length - Math.min(array.length, count)));
+        return ArrayIterate.drop(array, count, FastList.newList(array.length - Math.min(array.length, count)));
     }
 
     /**
@@ -1411,7 +1411,7 @@ public final class ArrayIterate
             T[] array,
             Function<? super T, ? extends V> function)
     {
-        return ArrayIterate.groupBy(array, function, FastListMultimap.<V, T>newMultimap());
+        return ArrayIterate.groupBy(array, function, FastListMultimap.newMultimap());
     }
 
     /**
@@ -1432,7 +1432,7 @@ public final class ArrayIterate
             T[] array,
             Function<? super T, ? extends Iterable<V>> function)
     {
-        return ArrayIterate.groupByEach(array, function, FastListMultimap.<V, T>newMultimap());
+        return ArrayIterate.groupByEach(array, function, FastListMultimap.newMultimap());
     }
 
     /**
@@ -1453,7 +1453,7 @@ public final class ArrayIterate
             T[] array,
             Function<? super T, ? extends V> function)
     {
-        return ArrayIterate.groupByUniqueKey(array, function, UnifiedMap.<V, T>newMap());
+        return ArrayIterate.groupByUniqueKey(array, function, UnifiedMap.newMap());
     }
 
     /**
@@ -1500,7 +1500,7 @@ public final class ArrayIterate
      */
     public static <X, Y> MutableList<Pair<X, Y>> zip(X[] xs, Y[] ys)
     {
-        return ArrayIterate.zip(xs, ys, FastList.<Pair<X, Y>>newList());
+        return ArrayIterate.zip(xs, ys, FastList.newList());
     }
 
     /**
@@ -1521,7 +1521,7 @@ public final class ArrayIterate
      */
     public static <T> MutableList<Pair<T, Integer>> zipWithIndex(T... array)
     {
-        return ArrayIterate.zipWithIndex(array, FastList.<Pair<T, Integer>>newList());
+        return ArrayIterate.zipWithIndex(array, FastList.newList());
     }
 
     /**

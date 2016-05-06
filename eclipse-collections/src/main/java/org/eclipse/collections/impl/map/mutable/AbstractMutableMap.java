@@ -105,7 +105,7 @@ public abstract class AbstractMutableMap<K, V> extends AbstractMutableMapIterabl
 
     public <R> MutableMap<K, R> collectValues(Function2<? super K, ? super V, ? extends R> function)
     {
-        return MapIterate.collectValues(this, function, this.<K, R>newEmpty(this.size()));
+        return MapIterate.collectValues(this, function, this.newEmpty(this.size()));
     }
 
     public MutableMap<K, V> select(Predicate2<? super K, ? super V> predicate)
@@ -120,7 +120,7 @@ public abstract class AbstractMutableMap<K, V> extends AbstractMutableMapIterabl
 
     public <R> MutableBag<R> collect(Function<? super V, ? extends R> function)
     {
-        return this.collect(function, HashBag.<R>newBag());
+        return this.collect(function, HashBag.newBag());
     }
 
     public MutableBooleanBag collectBoolean(BooleanFunction<? super V> booleanFunction)
@@ -313,17 +313,17 @@ public abstract class AbstractMutableMap<K, V> extends AbstractMutableMapIterabl
 
     public <VV> MutableBagMultimap<VV, V> groupBy(Function<? super V, ? extends VV> function)
     {
-        return this.groupBy(function, HashBagMultimap.<VV, V>newMultimap());
+        return this.groupBy(function, HashBagMultimap.newMultimap());
     }
 
     public <VV> MutableBagMultimap<VV, V> groupByEach(Function<? super V, ? extends Iterable<VV>> function)
     {
-        return this.groupByEach(function, HashBagMultimap.<VV, V>newMultimap());
+        return this.groupByEach(function, HashBagMultimap.newMultimap());
     }
 
     @Override
     public <VV> MutableMap<VV, V> groupByUniqueKey(Function<? super V, ? extends VV> function)
     {
-        return this.groupByUniqueKey(function, UnifiedMap.<VV, V>newMap());
+        return this.groupByUniqueKey(function, UnifiedMap.newMap());
     }
 }

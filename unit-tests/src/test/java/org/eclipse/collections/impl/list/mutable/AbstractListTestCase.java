@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -462,7 +462,7 @@ public abstract class AbstractListTestCase
     public void sortThis_with_comparator_small()
     {
         MutableList<Integer> actual = this.newWith(1, 2, 3).shuffleThis();
-        MutableList<Integer> sorted = actual.sortThis(Collections.<Integer>reverseOrder());
+        MutableList<Integer> sorted = actual.sortThis(Collections.reverseOrder());
         Assert.assertSame(actual, sorted);
         Assert.assertEquals(FastList.newListWith(3, 2, 1), actual);
     }
@@ -471,7 +471,7 @@ public abstract class AbstractListTestCase
     public void sortThis_with_comparator()
     {
         MutableList<Integer> actual = this.newWith(1, 2, 3, 4, 5, 6, 7, 8, 9, 10).shuffleThis();
-        MutableList<Integer> sorted = actual.sortThis(Collections.<Integer>reverseOrder());
+        MutableList<Integer> sorted = actual.sortThis(Collections.reverseOrder());
         Assert.assertSame(actual, sorted);
         Assert.assertEquals(FastList.newListWith(10, 9, 8, 7, 6, 5, 4, 3, 2, 1), actual);
     }
@@ -480,7 +480,7 @@ public abstract class AbstractListTestCase
     public void sortThis_with_comparator_large()
     {
         MutableList<Integer> actual = this.newWith(Interval.oneTo(1000).toArray()).shuffleThis();
-        MutableList<Integer> sorted = actual.sortThis(Collections.<Integer>reverseOrder());
+        MutableList<Integer> sorted = actual.sortThis(Collections.reverseOrder());
         Assert.assertSame(actual, sorted);
         Assert.assertEquals(Interval.fromToBy(1000, 1, -1).toList(), actual);
     }
@@ -713,7 +713,7 @@ public abstract class AbstractListTestCase
 
         list.addAll(FastList.newListWith(0, 1, 2, 3));
         list.addAll(FastList.newListWith(4, 5, 6));
-        list.addAll(FastList.<Integer>newList());
+        list.addAll(FastList.newList());
         list.addAll(FastList.newListWith(7, 8, 9));
 
         this.validateForEachOnRange(list, 0, 0, FastList.newListWith(0));
@@ -724,7 +724,7 @@ public abstract class AbstractListTestCase
 
         Verify.assertThrows(
                 IndexOutOfBoundsException.class,
-                () -> this.validateForEachOnRange(list, 10, 10, FastList.<Integer>newList()));
+                () -> this.validateForEachOnRange(list, 10, 10, FastList.newList()));
     }
 
     protected void validateForEachOnRange(MutableList<Integer> list, int from, int to, List<Integer> expectedOutput)
@@ -742,7 +742,7 @@ public abstract class AbstractListTestCase
 
         list.addAll(FastList.newListWith(0, 1, 2, 3));
         list.addAll(FastList.newListWith(4, 5, 6));
-        list.addAll(FastList.<Integer>newList());
+        list.addAll(FastList.newList());
         list.addAll(FastList.newListWith(7, 8, 9));
 
         this.validateForEachWithIndexOnRange(list, 0, 0, FastList.newListWith(0));
@@ -752,7 +752,7 @@ public abstract class AbstractListTestCase
         this.validateForEachWithIndexOnRange(list, 0, 9, FastList.newListWith(0, 1, 2, 3, 4, 5, 6, 7, 8, 9));
         Verify.assertThrows(
                 IndexOutOfBoundsException.class,
-                () -> this.validateForEachWithIndexOnRange(list, 10, 10, FastList.<Integer>newList()));
+                () -> this.validateForEachWithIndexOnRange(list, 10, 10, FastList.newList()));
     }
 
     protected void validateForEachWithIndexOnRange(

@@ -90,7 +90,7 @@ public abstract class AbstractMutableCollection<T>
         }
         else
         {
-            Iterate.forEachWith(iterable, Procedures2.<T>addToCollection(), this);
+            Iterate.forEachWith(iterable, Procedures2.addToCollection(), this);
         }
         return oldSize != this.size();
     }

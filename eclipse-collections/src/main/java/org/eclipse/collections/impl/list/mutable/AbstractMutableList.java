@@ -238,7 +238,7 @@ public abstract class AbstractMutableList<T>
 
     public <V> MutableList<V> collect(Function<? super T, ? extends V> function)
     {
-        return this.collect(function, FastList.<V>newList());
+        return this.collect(function, FastList.newList());
     }
 
     public MutableBooleanList collectBoolean(BooleanFunction<? super T> booleanFunction)
@@ -289,7 +289,7 @@ public abstract class AbstractMutableList<T>
 
     public <V> MutableList<V> flatCollect(Function<? super T, ? extends Iterable<V>> function)
     {
-        return this.flatCollect(function, FastList.<V>newList());
+        return this.flatCollect(function, FastList.newList());
     }
 
     @Override
@@ -301,7 +301,7 @@ public abstract class AbstractMutableList<T>
 
     public <P, V> MutableList<V> collectWith(Function2<? super T, ? super P, ? extends V> function, P parameter)
     {
-        return this.collectWith(function, parameter, FastList.<V>newList());
+        return this.collectWith(function, parameter, FastList.newList());
     }
 
     @Override
@@ -314,7 +314,7 @@ public abstract class AbstractMutableList<T>
     public <V> MutableList<V> collectIf(
             Predicate<? super T> predicate, Function<? super T, ? extends V> function)
     {
-        return this.collectIf(predicate, function, FastList.<V>newList());
+        return this.collectIf(predicate, function, FastList.newList());
     }
 
     @Override

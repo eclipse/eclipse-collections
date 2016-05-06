@@ -27,6 +27,6 @@ public final class FastListSelectProcedureFactory<T> implements ProcedureFactory
 
     public FastListSelectProcedure<T> create()
     {
-        return new FastListSelectProcedure<>(this.predicate, FastList.<T>newList(this.collectionSize));
+        return new FastListSelectProcedure<>(this.predicate, FastList.newList(this.collectionSize));
     }
 }

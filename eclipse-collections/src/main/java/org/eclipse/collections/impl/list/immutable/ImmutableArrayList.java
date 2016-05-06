@@ -159,13 +159,13 @@ final class ImmutableArrayList<T>
     @Override
     public ImmutableList<T> select(Predicate<? super T> predicate)
     {
-        return InternalArrayIterate.select(this.items, this.items.length, predicate, FastList.<T>newList()).toImmutable();
+        return InternalArrayIterate.select(this.items, this.items.length, predicate, FastList.newList()).toImmutable();
     }
 
     @Override
     public <P> ImmutableList<T> selectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
-        return InternalArrayIterate.selectWith(this.items, this.items.length, predicate, parameter, FastList.<T>newList()).toImmutable();
+        return InternalArrayIterate.selectWith(this.items, this.items.length, predicate, parameter, FastList.newList()).toImmutable();
     }
 
     @Override
@@ -180,13 +180,13 @@ final class ImmutableArrayList<T>
     @Override
     public ImmutableList<T> reject(Predicate<? super T> predicate)
     {
-        return InternalArrayIterate.reject(this.items, this.items.length, predicate, FastList.<T>newList()).toImmutable();
+        return InternalArrayIterate.reject(this.items, this.items.length, predicate, FastList.newList()).toImmutable();
     }
 
     @Override
     public <P> ImmutableList<T> rejectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
-        return InternalArrayIterate.rejectWith(this.items, this.items.length, predicate, parameter, FastList.<T>newList()).toImmutable();
+        return InternalArrayIterate.rejectWith(this.items, this.items.length, predicate, parameter, FastList.newList()).toImmutable();
     }
 
     @Override
@@ -248,7 +248,7 @@ final class ImmutableArrayList<T>
     @Override
     public <V> ImmutableList<V> flatCollect(Function<? super T, ? extends Iterable<V>> function)
     {
-        return InternalArrayIterate.flatCollect(this.items, this.items.length, function, FastList.<V>newList(this.items.length)).toImmutable();
+        return InternalArrayIterate.flatCollect(this.items, this.items.length, function, FastList.newList(this.items.length)).toImmutable();
     }
 
     @Override

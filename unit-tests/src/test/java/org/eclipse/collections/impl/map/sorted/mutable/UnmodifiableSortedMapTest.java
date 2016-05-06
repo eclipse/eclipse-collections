@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -24,7 +24,7 @@ public class UnmodifiableSortedMapTest
     private final UnmodifiableSortedMap<Integer, String> map = new UnmodifiableSortedMap<>(
             new TreeMap<>(SortedMaps.mutable.of(1, "1", 2, "2", 3, "3", 4, "4")));
     private final UnmodifiableSortedMap<Integer, String> revMap = new UnmodifiableSortedMap<>(
-            new TreeMap<>(SortedMaps.mutable.of(Comparators.<Integer>reverseNaturalOrder(),
+            new TreeMap<>(SortedMaps.mutable.of(Comparators.reverseNaturalOrder(),
                     1, "1", 2, "2", 3, "3", 4, "4")));
 
     @Test

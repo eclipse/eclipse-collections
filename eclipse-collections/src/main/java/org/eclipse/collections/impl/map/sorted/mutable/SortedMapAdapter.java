@@ -178,7 +178,7 @@ public class SortedMapAdapter<K, V>
     @Override
     public MutableSortedMap<K, V> with(Pair<K, V>... pairs)
     {
-        ArrayIterate.forEach(pairs, new MapCollectProcedure<Pair<K, V>, K, V>(this, Functions.<K>firstOfPair(), Functions.<V>secondOfPair()));
+        ArrayIterate.forEach(pairs, new MapCollectProcedure<Pair<K, V>, K, V>(this, Functions.firstOfPair(), Functions.secondOfPair()));
         return this;
     }
 

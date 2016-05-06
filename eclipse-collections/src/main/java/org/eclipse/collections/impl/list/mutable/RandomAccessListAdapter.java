@@ -295,13 +295,13 @@ public final class RandomAccessListAdapter<T>
     @Override
     public MutableList<T> select(Predicate<? super T> predicate)
     {
-        return RandomAccessListIterate.select(this.delegate, predicate, FastList.<T>newList());
+        return RandomAccessListIterate.select(this.delegate, predicate, FastList.newList());
     }
 
     @Override
     public MutableList<T> reject(Predicate<? super T> predicate)
     {
-        return RandomAccessListIterate.reject(this.delegate, predicate, FastList.<T>newList());
+        return RandomAccessListIterate.reject(this.delegate, predicate, FastList.newList());
     }
 
     @Override
@@ -325,7 +325,7 @@ public final class RandomAccessListAdapter<T>
     @Override
     public <V> MutableList<V> collect(Function<? super T, ? extends V> function)
     {
-        return RandomAccessListIterate.collect(this.delegate, function, FastList.<V>newList(this.delegate.size()));
+        return RandomAccessListIterate.collect(this.delegate, function, FastList.newList(this.delegate.size()));
     }
 
     @Override
@@ -395,7 +395,7 @@ public final class RandomAccessListAdapter<T>
     @Override
     public <V> MutableList<V> flatCollect(Function<? super T, ? extends Iterable<V>> function)
     {
-        return RandomAccessListIterate.flatCollect(this.delegate, function, FastList.<V>newList(this.delegate.size()));
+        return RandomAccessListIterate.flatCollect(this.delegate, function, FastList.newList(this.delegate.size()));
     }
 
     @Override
@@ -403,37 +403,37 @@ public final class RandomAccessListAdapter<T>
             Predicate<? super T> predicate,
             Function<? super T, ? extends V> function)
     {
-        return RandomAccessListIterate.collectIf(this.delegate, predicate, function, FastList.<V>newList());
+        return RandomAccessListIterate.collectIf(this.delegate, predicate, function, FastList.newList());
     }
 
     @Override
     public <V> FastListMultimap<V, T> groupBy(Function<? super T, ? extends V> function)
     {
-        return RandomAccessListIterate.groupBy(this.delegate, function, FastListMultimap.<V, T>newMultimap());
+        return RandomAccessListIterate.groupBy(this.delegate, function, FastListMultimap.newMultimap());
     }
 
     @Override
     public <V> FastListMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function)
     {
-        return RandomAccessListIterate.groupByEach(this.delegate, function, FastListMultimap.<V, T>newMultimap());
+        return RandomAccessListIterate.groupByEach(this.delegate, function, FastListMultimap.newMultimap());
     }
 
     @Override
     public <P> MutableList<T> selectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
-        return RandomAccessListIterate.selectWith(this.delegate, predicate, parameter, FastList.<T>newList());
+        return RandomAccessListIterate.selectWith(this.delegate, predicate, parameter, FastList.newList());
     }
 
     @Override
     public <P> MutableList<T> rejectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
-        return RandomAccessListIterate.rejectWith(this.delegate, predicate, parameter, FastList.<T>newList());
+        return RandomAccessListIterate.rejectWith(this.delegate, predicate, parameter, FastList.newList());
     }
 
     @Override
     public <P, V> MutableList<V> collectWith(Function2<? super T, ? super P, ? extends V> function, P parameter)
     {
-        return RandomAccessListIterate.collectWith(this.delegate, function, parameter, FastList.<V>newList(this.delegate.size()));
+        return RandomAccessListIterate.collectWith(this.delegate, function, parameter, FastList.newList(this.delegate.size()));
     }
 
     public MutableList<T> distinct()
@@ -449,13 +449,13 @@ public final class RandomAccessListAdapter<T>
     @Override
     public <S> MutableList<Pair<T, S>> zip(Iterable<S> that)
     {
-        return RandomAccessListIterate.zip(this.delegate, that, FastList.<Pair<T, S>>newList(this.delegate.size()));
+        return RandomAccessListIterate.zip(this.delegate, that, FastList.newList(this.delegate.size()));
     }
 
     @Override
     public MutableList<Pair<T, Integer>> zipWithIndex()
     {
-        return RandomAccessListIterate.zipWithIndex(this.delegate, FastList.<Pair<T, Integer>>newList(this.delegate.size()));
+        return RandomAccessListIterate.zipWithIndex(this.delegate, FastList.newList(this.delegate.size()));
     }
 
     public MutableList<T> take(int count)

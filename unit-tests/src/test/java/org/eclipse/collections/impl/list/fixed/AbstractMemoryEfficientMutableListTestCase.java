@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -191,7 +191,7 @@ public abstract class AbstractMemoryEfficientMutableListTestCase
         Assert.assertTrue(listWith.containsAll(list));
         Verify.assertContainsAll(listWith, "11", "12");
         Verify.assertInstanceOf(FixedSizeList.class, listWith);
-        Assert.assertSame(listWith, listWith.withAll(FastList.<String>newList()));
+        Assert.assertSame(listWith, listWith.withAll(FastList.newList()));
     }
 
     @Test
@@ -202,7 +202,7 @@ public abstract class AbstractMemoryEfficientMutableListTestCase
         Assert.assertTrue(listWithout.containsAll(this.classUnderTest()));
         Verify.assertContainsNone(listWithout, "11", "12");
         Verify.assertInstanceOf(FixedSizeList.class, listWithout);
-        Assert.assertSame(listWithout, listWithout.withoutAll(FastList.<String>newList()));
+        Assert.assertSame(listWithout, listWithout.withoutAll(FastList.newList()));
     }
 
     @Test

@@ -63,7 +63,7 @@ public final class ParallelArrayIterate
             {
                 BT procedure = procedureFactory.create();
                 ArrayIterate.forEach(array, procedure);
-                ParallelArrayIterate.<T, BT>combineSingleProcedure(combiner, procedure);
+                ParallelArrayIterate.combineSingleProcedure(combiner, procedure);
             }
             else
             {

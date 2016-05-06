@@ -1683,7 +1683,7 @@ public final class ArrayListIterate
             ArrayList<T> list,
             Function<? super T, ? extends V> function)
     {
-        return ArrayListIterate.groupBy(list, function, FastListMultimap.<V, T>newMultimap());
+        return ArrayListIterate.groupBy(list, function, FastListMultimap.newMultimap());
     }
 
     /**
@@ -1714,7 +1714,7 @@ public final class ArrayListIterate
             ArrayList<T> list,
             Function<? super T, ? extends Iterable<V>> function)
     {
-        return ArrayListIterate.groupByEach(list, function, FastListMultimap.<V, T>newMultimap());
+        return ArrayListIterate.groupByEach(list, function, FastListMultimap.newMultimap());
     }
 
     /**
@@ -1749,7 +1749,7 @@ public final class ArrayListIterate
             ArrayList<T> list,
             Function<? super T, ? extends V> function)
     {
-        return ArrayListIterate.groupByUniqueKey(list, function, UnifiedMap.<V, T>newMap());
+        return ArrayListIterate.groupByUniqueKey(list, function, UnifiedMap.newMap());
     }
 
     /**
@@ -1787,7 +1787,7 @@ public final class ArrayListIterate
      */
     public static <X, Y> MutableList<Pair<X, Y>> zip(ArrayList<X> xs, Iterable<Y> ys)
     {
-        return ArrayListIterate.zip(xs, ys, FastList.<Pair<X, Y>>newList());
+        return ArrayListIterate.zip(xs, ys, FastList.newList());
     }
 
     /**
@@ -1814,7 +1814,7 @@ public final class ArrayListIterate
      */
     public static <T> MutableList<Pair<T, Integer>> zipWithIndex(ArrayList<T> list)
     {
-        return ArrayListIterate.zipWithIndex(list, FastList.<Pair<T, Integer>>newList());
+        return ArrayListIterate.zipWithIndex(list, FastList.newList());
     }
 
     /**

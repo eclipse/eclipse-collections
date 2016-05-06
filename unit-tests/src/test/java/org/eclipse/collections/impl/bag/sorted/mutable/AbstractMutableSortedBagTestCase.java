@@ -145,7 +145,7 @@ public abstract class AbstractMutableSortedBagTestCase extends MutableBagTestCas
         super.addAll();
 
         TreeBag<Integer> expected = TreeBag.newBag(Comparators.reverseNaturalOrder(), FastList.newListWith(1, 1, 2, 3));
-        MutableSortedBag<Integer> collection = this.newWith(Comparators.<Integer>reverseNaturalOrder());
+        MutableSortedBag<Integer> collection = this.newWith(Comparators.reverseNaturalOrder());
 
         Assert.assertTrue(collection.addAll(FastList.newListWith(3, 2, 1, 1)));
         Verify.assertSortedBagsEqual(expected, collection);
@@ -158,7 +158,7 @@ public abstract class AbstractMutableSortedBagTestCase extends MutableBagTestCas
         super.addAllIterable();
 
         TreeBag<Integer> expected = TreeBag.newBag(Collections.reverseOrder(), FastList.newListWith(2, 1, 2, 3));
-        MutableSortedBag<Integer> collection = this.newWith(Collections.<Integer>reverseOrder());
+        MutableSortedBag<Integer> collection = this.newWith(Collections.reverseOrder());
 
         Assert.assertTrue(collection.addAllIterable(FastList.newListWith(3, 2, 1, 2)));
         Verify.assertSortedBagsEqual(expected, collection);
@@ -313,8 +313,8 @@ public abstract class AbstractMutableSortedBagTestCase extends MutableBagTestCas
         MutableSortedBag<Integer> integers = this.newWith(3, 3, 2, 1, 4, 5);
         Verify.assertSortedBagsEqual(TreeBag.newBagWith(3, 3, 2, 1), integers.select(Predicates.lessThanOrEqualTo(3)));
         Verify.assertEmpty(integers.select(Predicates.greaterThan(6)));
-        MutableSortedBag<Integer> revInt = this.newWith(Collections.<Integer>reverseOrder(), 1, 2, 4, 3, 3, 5);
-        Verify.assertSortedBagsEqual(TreeBag.newBagWith(Collections.<Integer>reverseOrder(), 3, 3, 2, 1), revInt.select(Predicates.lessThan(4)));
+        MutableSortedBag<Integer> revInt = this.newWith(Collections.reverseOrder(), 1, 2, 4, 3, 3, 5);
+        Verify.assertSortedBagsEqual(TreeBag.newBagWith(Collections.reverseOrder(), 3, 3, 2, 1), revInt.select(Predicates.lessThan(4)));
     }
 
     @Override
@@ -324,7 +324,7 @@ public abstract class AbstractMutableSortedBagTestCase extends MutableBagTestCas
         super.selectWith();
         Verify.assertSortedBagsEqual(
                 TreeBag.newBagWith(Comparators.reverseNaturalOrder(), 1, 1, 2, 3, 3),
-                this.newWith(Comparators.reverseNaturalOrder(), 1, 3, 1, 2, 5, 3, 6, 6).selectWith(Predicates2.<Integer>lessThan(), 4));
+                this.newWith(Comparators.reverseNaturalOrder(), 1, 3, 1, 2, 5, 3, 6, 6).selectWith(Predicates2.lessThan(), 4));
     }
 
     @Override
@@ -336,9 +336,9 @@ public abstract class AbstractMutableSortedBagTestCase extends MutableBagTestCas
                 TreeBag.newBagWith(Comparators.reverseNaturalOrder(), 1, 1, 2, 3, 3),
                 this.newWith(Comparators.reverseNaturalOrder(), 1, 3, 1, 2, 5, 3, 6, 6)
                         .selectWith(
-                                Predicates2.<Integer>lessThan(),
+                                Predicates2.lessThan(),
                                 4,
-                                TreeBag.newBag(Comparators.<Integer>reverseNaturalOrder())));
+                                TreeBag.newBag(Comparators.reverseNaturalOrder())));
     }
 
     @Override
@@ -349,8 +349,8 @@ public abstract class AbstractMutableSortedBagTestCase extends MutableBagTestCas
         MutableSortedBag<Integer> integers = this.newWith(4, 4, 2, 1, 3, 5, 6, 6);
         Verify.assertSortedBagsEqual(TreeBag.newBagWith(1, 2, 3, 4, 4), integers.reject(Predicates.greaterThan(4)));
         Verify.assertEmpty(integers.reject(Predicates.greaterThan(0)));
-        MutableSortedBag<Integer> revInt = this.newWith(Collections.<Integer>reverseOrder(), 1, 2, 2, 4, 3, 5);
-        Verify.assertSortedBagsEqual(TreeBag.newBagWith(Collections.<Integer>reverseOrder(), 3, 2, 2, 1), revInt.reject(Predicates.greaterThan(3)));
+        MutableSortedBag<Integer> revInt = this.newWith(Collections.reverseOrder(), 1, 2, 2, 4, 3, 5);
+        Verify.assertSortedBagsEqual(TreeBag.newBagWith(Collections.reverseOrder(), 3, 2, 2, 1), revInt.reject(Predicates.greaterThan(3)));
     }
 
     @Override
@@ -361,7 +361,7 @@ public abstract class AbstractMutableSortedBagTestCase extends MutableBagTestCas
         Verify.assertSortedBagsEqual(
                 TreeBag.newBagWith(Comparators.reverseNaturalOrder(), 1, 1, 2, 3),
                 this.newWith(Comparators.reverseNaturalOrder(), 1, 1, 2, 3, 5, 4, 5)
-                        .rejectWith(Predicates2.<Integer>greaterThan(), 3));
+                        .rejectWith(Predicates2.greaterThan(), 3));
     }
 
     @Override
@@ -372,7 +372,7 @@ public abstract class AbstractMutableSortedBagTestCase extends MutableBagTestCas
         Verify.assertSortedBagsEqual(
                 TreeBag.newBagWith(Comparators.reverseNaturalOrder(), 1, 1, 2, 3),
                 this.newWith(Comparators.reverseNaturalOrder(), 1, 1, 2, 3, 5, 4, 5)
-                        .rejectWith(Predicates2.<Integer>greaterThan(), 3, TreeBag.newBag(Comparators.<Integer>reverseNaturalOrder())));
+                        .rejectWith(Predicates2.greaterThan(), 3, TreeBag.newBag(Comparators.reverseNaturalOrder())));
     }
 
     @Override
@@ -402,7 +402,7 @@ public abstract class AbstractMutableSortedBagTestCase extends MutableBagTestCas
     @Test
     public void partitionWhile()
     {
-        MutableSortedBag<Integer> integers = this.newWith(Comparators.<Integer>reverseNaturalOrder(), 4, 2, 1, 3, 5, 6);
+        MutableSortedBag<Integer> integers = this.newWith(Comparators.reverseNaturalOrder(), 4, 2, 1, 3, 5, 6);
         PartitionMutableSortedBag<Integer> partition = integers.partitionWhile(Predicates.greaterThan(3));
         Verify.assertSortedBagsEqual(this.newWith(Comparators.reverseNaturalOrder(), 6, 5, 4), partition.getSelected());
         Verify.assertSortedBagsEqual(this.newWith(Comparators.reverseNaturalOrder(), 3, 2, 1), partition.getRejected());
@@ -464,11 +464,11 @@ public abstract class AbstractMutableSortedBagTestCase extends MutableBagTestCas
     @Test
     public void dropWhile()
     {
-        MutableSortedBag<Integer> integers = this.newWith(Comparators.<Integer>reverseNaturalOrder(), 1, 1, 2, 2, 3, 3, 4, 4);
-        Verify.assertSortedBagsEqual(TreeBag.newBagWith(Comparators.<Integer>reverseNaturalOrder(), 3, 3, 2, 2, 1, 1), integers.dropWhile(IntegerPredicates.isEven()));
-        Verify.assertSortedBagsEqual(TreeBag.newBagWith(Comparators.<Integer>reverseNaturalOrder(), 4, 4, 3, 3, 2, 2, 1, 1), integers.dropWhile(IntegerPredicates.isOdd()));
+        MutableSortedBag<Integer> integers = this.newWith(Comparators.reverseNaturalOrder(), 1, 1, 2, 2, 3, 3, 4, 4);
+        Verify.assertSortedBagsEqual(TreeBag.newBagWith(Comparators.reverseNaturalOrder(), 3, 3, 2, 2, 1, 1), integers.dropWhile(IntegerPredicates.isEven()));
+        Verify.assertSortedBagsEqual(TreeBag.newBagWith(Comparators.reverseNaturalOrder(), 4, 4, 3, 3, 2, 2, 1, 1), integers.dropWhile(IntegerPredicates.isOdd()));
         MutableSortedBag<Integer> drop = integers.dropWhile(Predicates.greaterThan(2));
-        Verify.assertSortedBagsEqual(TreeBag.newBagWith(Comparators.<Integer>reverseNaturalOrder(), 2, 2, 1, 1), drop);
+        Verify.assertSortedBagsEqual(TreeBag.newBagWith(Comparators.reverseNaturalOrder(), 2, 2, 1, 1), drop);
         Assert.assertEquals(Comparators.<Integer>reverseNaturalOrder(), drop.comparator());
     }
 
@@ -510,11 +510,11 @@ public abstract class AbstractMutableSortedBagTestCase extends MutableBagTestCas
     public void groupBy()
     {
         super.groupBy();
-        MutableSortedBag<Integer> integers = this.newWith(Collections.<Integer>reverseOrder(), 1, 1, 1, 2, 3, 4, 5, 6, 7, 8, 9);
+        MutableSortedBag<Integer> integers = this.newWith(Collections.reverseOrder(), 1, 1, 1, 2, 3, 4, 5, 6, 7, 8, 9);
         Function<Integer, Boolean> isOddFunction = object -> IntegerPredicates.isOdd().accept(object);
         MutableSortedBagMultimap<Boolean, Integer> map = integers.groupBy(isOddFunction);
-        Verify.assertSortedBagsEqual(TreeBag.newBagWith(Collections.<Integer>reverseOrder(), 9, 7, 5, 3, 1, 1, 1), map.get(Boolean.TRUE));
-        Verify.assertSortedBagsEqual(TreeBag.newBagWith(Collections.<Integer>reverseOrder(), 8, 6, 4, 2), map.get(Boolean.FALSE));
+        Verify.assertSortedBagsEqual(TreeBag.newBagWith(Collections.reverseOrder(), 9, 7, 5, 3, 1, 1, 1), map.get(Boolean.TRUE));
+        Verify.assertSortedBagsEqual(TreeBag.newBagWith(Collections.reverseOrder(), 8, 6, 4, 2), map.get(Boolean.FALSE));
         Verify.assertSize(2, map.keysView().toList());
     }
 
@@ -523,7 +523,7 @@ public abstract class AbstractMutableSortedBagTestCase extends MutableBagTestCas
     public void groupByEach()
     {
         super.groupByEach();
-        MutableSortedBag<Integer> bag = this.newWith(Collections.<Integer>reverseOrder(), 1, 1, 1, 2, 3, 4, 5, 6, 7, 8, 9);
+        MutableSortedBag<Integer> bag = this.newWith(Collections.reverseOrder(), 1, 1, 1, 2, 3, 4, 5, 6, 7, 8, 9);
         NegativeIntervalFunction function = new NegativeIntervalFunction();
         MutableSortedBagMultimap<Integer, Integer> expected =
                 this.newWith(Collections.<Integer>reverseOrder()).groupByEach(function);
@@ -554,7 +554,7 @@ public abstract class AbstractMutableSortedBagTestCase extends MutableBagTestCas
     public void zip()
     {
         super.zip();
-        MutableSortedBag<Integer> revInt = this.newWith(Collections.<Integer>reverseOrder(), 2, 2, 3, 5, 1, 4);
+        MutableSortedBag<Integer> revInt = this.newWith(Collections.reverseOrder(), 2, 2, 3, 5, 1, 4);
         MutableSortedBag<Integer> integers = this.newWith(1, 3, 2, 2, 4, 5);
         MutableList<Pair<Integer, Integer>> zip = integers.zip(revInt);
         Verify.assertSize(6, zip);
@@ -589,7 +589,7 @@ public abstract class AbstractMutableSortedBagTestCase extends MutableBagTestCas
     public void zipWithIndex()
     {
         super.zipWithIndex();
-        MutableSortedBag<Integer> integers = this.newWith(Collections.<Integer>reverseOrder(), 1, 3, 5, 5, 5, 2, 4);
+        MutableSortedBag<Integer> integers = this.newWith(Collections.reverseOrder(), 1, 3, 5, 5, 5, 2, 4);
         Assert.assertEquals(UnifiedSet.newSetWith(
                         Tuples.pair(5, 0),
                         Tuples.pair(5, 1),
@@ -604,9 +604,9 @@ public abstract class AbstractMutableSortedBagTestCase extends MutableBagTestCas
     @Override
     public void selectInstancesOf()
     {
-        MutableSortedBag<Number> numbers = this.<Number>newWith((Number o1, Number o2) -> Double.compare(o2.doubleValue(), o1.doubleValue()), 5, 4.0, 3, 2.0, 1, 1);
+        MutableSortedBag<Number> numbers = this.newWith((Number o1, Number o2) -> Double.compare(o2.doubleValue(), o1.doubleValue()), 5, 4.0, 3, 2.0, 1, 1);
         MutableSortedBag<Integer> integers = numbers.selectInstancesOf(Integer.class);
-        Verify.assertSortedBagsEqual(TreeBag.newBagWith(Comparators.<Integer>reverseNaturalOrder(), 5, 3, 1, 1), integers);
+        Verify.assertSortedBagsEqual(TreeBag.newBagWith(Comparators.reverseNaturalOrder(), 5, 3, 1, 1), integers);
     }
 
     @Override
@@ -628,17 +628,17 @@ public abstract class AbstractMutableSortedBagTestCase extends MutableBagTestCas
     {
         super.add();
 
-        MutableSortedBag<Integer> bag = this.newWith(Collections.<Integer>reverseOrder());
+        MutableSortedBag<Integer> bag = this.newWith(Collections.reverseOrder());
         Assert.assertTrue(bag.add(1));
         Verify.assertSortedBagsEqual(this.newWith(1), bag);
         Assert.assertTrue(bag.add(3));
-        Verify.assertSortedBagsEqual(TreeBag.newBagWith(Collections.<Integer>reverseOrder(), 3, 1), bag);
+        Verify.assertSortedBagsEqual(TreeBag.newBagWith(Collections.reverseOrder(), 3, 1), bag);
         Verify.assertSize(2, bag);
         Assert.assertTrue(bag.add(2));
-        Verify.assertSortedBagsEqual(TreeBag.newBagWith(Collections.<Integer>reverseOrder(), 3, 2, 1), bag);
+        Verify.assertSortedBagsEqual(TreeBag.newBagWith(Collections.reverseOrder(), 3, 2, 1), bag);
         Verify.assertSize(3, bag);
         Assert.assertTrue(bag.add(2));
-        Verify.assertSortedBagsEqual(TreeBag.newBagWith(Collections.<Integer>reverseOrder(), 3, 2, 2, 1), bag);
+        Verify.assertSortedBagsEqual(TreeBag.newBagWith(Collections.reverseOrder(), 3, 2, 2, 1), bag);
         Verify.assertSize(4, bag);
     }
 
@@ -896,7 +896,7 @@ public abstract class AbstractMutableSortedBagTestCase extends MutableBagTestCas
         Assert.assertEquals(4, bag.addOccurrences(1, 2));
         Verify.assertSortedBagsEqual(TreeBag.newBagWith(0, 0, 0, 0, 0, 0, 1, 1, 1, 1), bag);
 
-        MutableSortedBag<Integer> revBag = this.newWith(Collections.<Integer>reverseOrder());
+        MutableSortedBag<Integer> revBag = this.newWith(Collections.reverseOrder());
         Assert.assertEquals(3, revBag.addOccurrences(2, 3));
         Assert.assertEquals(2, revBag.addOccurrences(3, 2));
         Verify.assertSortedBagsEqual(TreeBag.newBagWith(Collections.reverseOrder(), 3, 3, 2, 2, 2), revBag);
@@ -1062,9 +1062,9 @@ public abstract class AbstractMutableSortedBagTestCase extends MutableBagTestCas
         super.toSortedMap_with_comparator();
 
         Verify.assertSortedMapsEqual(
-                TreeSortedMap.newMapWith(Comparators.<Integer>reverseNaturalOrder(), 3, "3", 2, "2", 1, "1"),
+                TreeSortedMap.newMapWith(Comparators.reverseNaturalOrder(), 3, "3", 2, "2", 1, "1"),
                 this.newWith(3, 2, 1, 1).toSortedMap(
-                        Comparators.<Integer>reverseNaturalOrder(),
+                        Comparators.reverseNaturalOrder(),
                         Functions.getIntegerPassThru(),
                         String::valueOf));
     }
@@ -1293,7 +1293,7 @@ public abstract class AbstractMutableSortedBagTestCase extends MutableBagTestCas
                 this.newWith(Comparators.reverseNaturalOrder(), 1, 1, 2, 3, 4).min());
         Assert.assertEquals(
                 Integer.valueOf(4),
-                this.newWith(Comparators.reverseNaturalOrder(), 1, 2, 3, 4).min(Comparators.<Integer>reverseNaturalOrder()));
+                this.newWith(Comparators.reverseNaturalOrder(), 1, 2, 3, 4).min(Comparators.reverseNaturalOrder()));
     }
 
     @Override
@@ -1307,7 +1307,7 @@ public abstract class AbstractMutableSortedBagTestCase extends MutableBagTestCas
                 this.newWith(Comparators.reverseNaturalOrder(), 1, 1, 2, 3, 4).min());
         Assert.assertEquals(
                 Integer.valueOf(4),
-                this.newWith(Comparators.reverseNaturalOrder(), 1, 1, 1, 2, 3, 4).min(Comparators.<Integer>reverseNaturalOrder()));
+                this.newWith(Comparators.reverseNaturalOrder(), 1, 1, 1, 2, 3, 4).min(Comparators.reverseNaturalOrder()));
     }
 
     @Override
@@ -1339,8 +1339,8 @@ public abstract class AbstractMutableSortedBagTestCase extends MutableBagTestCas
         super.detectWith();
 
         MutableSortedBag<Integer> bag = this.newWith(Comparators.reverseNaturalOrder(), 1, 2, 3, 4, 4, 5);
-        Assert.assertEquals(Integer.valueOf(5), bag.detectWith(Predicates2.<Integer>greaterThan(), 3));
-        Assert.assertEquals(Integer.valueOf(2), bag.detectWith(Predicates2.<Integer>lessThan(), 3));
+        Assert.assertEquals(Integer.valueOf(5), bag.detectWith(Predicates2.greaterThan(), 3));
+        Assert.assertEquals(Integer.valueOf(2), bag.detectWith(Predicates2.lessThan(), 3));
         Assert.assertNull(this.newWith(1, 2, 3, 4, 5).detectWith(Object::equals, 6));
     }
 
@@ -1366,13 +1366,13 @@ public abstract class AbstractMutableSortedBagTestCase extends MutableBagTestCas
         Assert.assertEquals(
                 Integer.valueOf(5),
                 this.newWith(Comparators.reverseNaturalOrder(), 1, 1, 1, 2, 3, 4, 5).detectWithIfNone(
-                        Predicates2.<Integer>greaterThan(),
+                        Predicates2.greaterThan(),
                         4,
                         function));
         Assert.assertEquals(
                 Integer.valueOf(-42),
                 this.newWith(Comparators.reverseNaturalOrder(), 1, 2, 2, 2, 3, 4, 5).detectWithIfNone(
-                        Predicates2.<Integer>lessThan(),
+                        Predicates2.lessThan(),
                         0,
                         function));
     }
@@ -1410,9 +1410,9 @@ public abstract class AbstractMutableSortedBagTestCase extends MutableBagTestCas
         super.allSatisfyWith();
 
         MutableSortedBag<Integer> bag = TreeBag.newBagWith(Comparators.reverseNaturalOrder(), 3, 3, 3, 2, 2, 1);
-        Assert.assertTrue(bag.allSatisfyWith(Predicates2.<Integer>lessThan(), 4));
+        Assert.assertTrue(bag.allSatisfyWith(Predicates2.lessThan(), 4));
         Assert.assertFalse(bag.allSatisfyWith(Object::equals, 2));
-        Assert.assertFalse(bag.allSatisfyWith(Predicates2.<Integer>greaterThan(), 4));
+        Assert.assertFalse(bag.allSatisfyWith(Predicates2.greaterThan(), 4));
     }
 
     @Override
@@ -1436,9 +1436,9 @@ public abstract class AbstractMutableSortedBagTestCase extends MutableBagTestCas
 
         MutableSortedBag<Integer> bag = TreeBag.newBagWith(Comparators.reverseNaturalOrder(), 3, 3, 3, 2, 2, 1);
 
-        Assert.assertFalse(bag.noneSatisfyWith(Predicates2.<Integer>lessThan(), 4));
+        Assert.assertFalse(bag.noneSatisfyWith(Predicates2.lessThan(), 4));
         Assert.assertFalse(bag.noneSatisfyWith(Object::equals, 2));
-        Assert.assertTrue(bag.noneSatisfyWith(Predicates2.<Integer>greaterThan(), 4));
+        Assert.assertTrue(bag.noneSatisfyWith(Predicates2.greaterThan(), 4));
     }
 
     @Override
@@ -1460,9 +1460,9 @@ public abstract class AbstractMutableSortedBagTestCase extends MutableBagTestCas
         super.anySatisfyWith();
 
         MutableSortedBag<Integer> bag = TreeBag.newBagWith(Comparators.reverseNaturalOrder(), 3, 3, 3, 2, 2, 1);
-        Assert.assertTrue(bag.anySatisfyWith(Predicates2.<Integer>lessThan(), 4));
+        Assert.assertTrue(bag.anySatisfyWith(Predicates2.lessThan(), 4));
         Assert.assertTrue(bag.anySatisfyWith(Object::equals, 2));
-        Assert.assertFalse(bag.anySatisfyWith(Predicates2.<Integer>greaterThan(), 4));
+        Assert.assertFalse(bag.anySatisfyWith(Predicates2.greaterThan(), 4));
     }
 
     @Override
@@ -1484,9 +1484,9 @@ public abstract class AbstractMutableSortedBagTestCase extends MutableBagTestCas
         super.countWith();
 
         MutableSortedBag<Integer> sortedBag = this.newWith(Collections.reverseOrder(), 3, 2, 2, 2, 1);
-        Assert.assertEquals(1, sortedBag.countWith(Predicates2.<Integer>greaterThan(), 2));
-        Assert.assertEquals(4, sortedBag.countWith(Predicates2.<Integer>greaterThan(), 1));
-        Assert.assertEquals(0, sortedBag.countWith(Predicates2.<Integer>greaterThan(), 3));
+        Assert.assertEquals(1, sortedBag.countWith(Predicates2.greaterThan(), 2));
+        Assert.assertEquals(4, sortedBag.countWith(Predicates2.greaterThan(), 1));
+        Assert.assertEquals(0, sortedBag.countWith(Predicates2.greaterThan(), 3));
     }
 
     @Override
@@ -1705,7 +1705,7 @@ public abstract class AbstractMutableSortedBagTestCase extends MutableBagTestCas
     public void toSortedBag_natural_ordering()
     {
         super.toSortedBag_natural_ordering();
-        RichIterable<Integer> integers = this.newWith(Comparator.<Integer>reverseOrder(), 2, 2, 2, 1, 1);
+        RichIterable<Integer> integers = this.newWith(Comparator.reverseOrder(), 2, 2, 2, 1, 1);
         MutableSortedBag<Integer> bag = integers.toSortedBag();
         Verify.assertSortedBagsEqual(TreeBag.newBagWith(1, 1, 2, 2, 2), bag);
     }
@@ -1716,8 +1716,8 @@ public abstract class AbstractMutableSortedBagTestCase extends MutableBagTestCas
     {
         super.toSortedList_with_comparator();
         RichIterable<Integer> integers = this.newWith(2, 4, 4, 1);
-        MutableSortedBag<Integer> bag = integers.toSortedBag(Collections.<Integer>reverseOrder());
-        Verify.assertSortedBagsEqual(TreeBag.newBagWith(Collections.<Integer>reverseOrder(), 4, 4, 2, 1), bag);
+        MutableSortedBag<Integer> bag = integers.toSortedBag(Collections.reverseOrder());
+        Verify.assertSortedBagsEqual(TreeBag.newBagWith(Collections.reverseOrder(), 4, 4, 2, 1), bag);
     }
 
     @Override

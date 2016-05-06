@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -97,7 +97,7 @@ public class ArrayListIterateTest
 
         ArrayList<Integer> integers2 = this.newArrayList(1, 2, 3, 4, 5, 6, 7, 8, 9);
         Verify.assertStartsWith(
-                ArrayListIterate.sortThis(integers2, Collections.<Integer>reverseOrder()),
+                ArrayListIterate.sortThis(integers2, Collections.reverseOrder()),
                 9, 8, 7, 6, 5, 4, 3, 2, 1);
 
         ArrayList<Integer> integers3 = this.newArrayList(1, 2, 3, 4, 5, 6, 7, 8, 9);
@@ -138,7 +138,7 @@ public class ArrayListIterateTest
         Verify.assertStartsWith(ArrayListIterate.sortThis(integers), 1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 
         ArrayList<Integer> integers2 = this.newArrayList(1, 2, 3, 4, 5, 6, 7, 8);
-        Verify.assertStartsWith(ArrayListIterate.sortThis(integers2, Collections.<Integer>reverseOrder()), 8, 7, 6, 5, 4, 3, 2, 1);
+        Verify.assertStartsWith(ArrayListIterate.sortThis(integers2, Collections.reverseOrder()), 8, 7, 6, 5, 4, 3, 2, 1);
 
         ArrayList<Integer> integers3 = this.newArrayList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
         Verify.assertStartsWith(ArrayListIterate.sortThis(integers3), 1, 2, 3, 4, 5, 6, 7, 8, 9, 10);

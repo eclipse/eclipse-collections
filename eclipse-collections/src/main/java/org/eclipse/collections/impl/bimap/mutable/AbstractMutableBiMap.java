@@ -77,7 +77,7 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
     AbstractMutableBiMap(Map<K, V> map)
     {
         this.delegate = UnifiedMap.newMap();
-        this.inverse = new Inverse<>(UnifiedMap.<V, K>newMap(), this);
+        this.inverse = new Inverse<>(UnifiedMap.newMap(), this);
         this.putAll(map);
     }
 
@@ -1146,7 +1146,7 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
         public Inverse()
         {
             // Empty constructor for Externalizable class
-            super(UnifiedMap.<K, V>newMap(), UnifiedMap.<V, K>newMap());
+            super(UnifiedMap.newMap(), UnifiedMap.newMap());
         }
 
         Inverse(Map<K, V> delegate, AbstractMutableBiMap<V, K> inverse)

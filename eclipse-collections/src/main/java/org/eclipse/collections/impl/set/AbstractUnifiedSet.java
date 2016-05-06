@@ -144,7 +144,7 @@ public abstract class AbstractUnifiedSet<T>
 
     public <V> UnifiedSet<V> collect(Function<? super T, ? extends V> function)
     {
-        return this.collect(function, UnifiedSet.<V>newSet());
+        return this.collect(function, UnifiedSet.newSet());
     }
 
     public MutableBooleanSet collectBoolean(BooleanFunction<? super T> booleanFunction)
@@ -189,18 +189,18 @@ public abstract class AbstractUnifiedSet<T>
 
     public <V> UnifiedSet<V> flatCollect(Function<? super T, ? extends Iterable<V>> function)
     {
-        return this.flatCollect(function, UnifiedSet.<V>newSet());
+        return this.flatCollect(function, UnifiedSet.newSet());
     }
 
     public <P, A> UnifiedSet<A> collectWith(Function2<? super T, ? super P, ? extends A> function, P parameter)
     {
-        return this.collectWith(function, parameter, UnifiedSet.<A>newSet());
+        return this.collectWith(function, parameter, UnifiedSet.newSet());
     }
 
     public <V> UnifiedSet<V> collectIf(
             Predicate<? super T> predicate, Function<? super T, ? extends V> function)
     {
-        return this.collectIf(predicate, function, UnifiedSet.<V>newSet());
+        return this.collectIf(predicate, function, UnifiedSet.newSet());
     }
 
     @Override
@@ -287,7 +287,7 @@ public abstract class AbstractUnifiedSet<T>
     public <V> MutableMap<V, T> groupByUniqueKey(
             Function<? super T, ? extends V> function)
     {
-        return this.groupByUniqueKey(function, UnifiedMap.<V, T>newMap());
+        return this.groupByUniqueKey(function, UnifiedMap.newMap());
     }
 
     /**
@@ -296,7 +296,7 @@ public abstract class AbstractUnifiedSet<T>
     @Deprecated
     public <S> MutableSet<Pair<T, S>> zip(Iterable<S> that)
     {
-        return this.zip(that, UnifiedSet.<Pair<T, S>>newSet());
+        return this.zip(that, UnifiedSet.newSet());
     }
 
     /**
@@ -305,7 +305,7 @@ public abstract class AbstractUnifiedSet<T>
     @Deprecated
     public MutableSet<Pair<T, Integer>> zipWithIndex()
     {
-        return this.zipWithIndex(UnifiedSet.<Pair<T, Integer>>newSet());
+        return this.zipWithIndex(UnifiedSet.newSet());
     }
 
     public RichIterable<RichIterable<T>> chunk(int size)

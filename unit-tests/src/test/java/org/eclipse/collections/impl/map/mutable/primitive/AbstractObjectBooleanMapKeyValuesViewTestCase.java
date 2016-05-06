@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -161,7 +161,7 @@ public abstract class AbstractObjectBooleanMapKeyValuesViewTestCase
     @Test
     public void selectWith_target()
     {
-        HashBag<ObjectBooleanPair<Integer>> result = this.newWith(1, true, 2, false, 3, true).selectWith(Predicates2.notEqual(), PrimitiveTuples.pair(Integer.valueOf(2), false), HashBag.<ObjectBooleanPair<Integer>>newBag());
+        HashBag<ObjectBooleanPair<Integer>> result = this.newWith(1, true, 2, false, 3, true).selectWith(Predicates2.notEqual(), PrimitiveTuples.pair(Integer.valueOf(2), false), HashBag.newBag());
         Assert.assertEquals(Bags.immutable.of(PrimitiveTuples.pair(Integer.valueOf(1), true), PrimitiveTuples.pair(Integer.valueOf(3), true)), result);
     }
 
@@ -186,7 +186,7 @@ public abstract class AbstractObjectBooleanMapKeyValuesViewTestCase
     @Test
     public void rejectWith_target()
     {
-        HashBag<ObjectBooleanPair<Integer>> result = this.newWith(1, true, 2, false, 3, true).rejectWith(Object::equals, PrimitiveTuples.pair(Integer.valueOf(2), false), HashBag.<ObjectBooleanPair<Integer>>newBag());
+        HashBag<ObjectBooleanPair<Integer>> result = this.newWith(1, true, 2, false, 3, true).rejectWith(Object::equals, PrimitiveTuples.pair(Integer.valueOf(2), false), HashBag.newBag());
         Assert.assertEquals(Bags.immutable.of(PrimitiveTuples.pair(Integer.valueOf(1), true), PrimitiveTuples.pair(Integer.valueOf(3), true)), result);
     }
 
@@ -219,7 +219,7 @@ public abstract class AbstractObjectBooleanMapKeyValuesViewTestCase
 
         Verify.assertSetsEqual(
                 UnifiedSet.newSetWith("1:true", "2:false", "3:true"),
-                collection.flatCollect(function, UnifiedSet.<String>newSet()));
+                collection.flatCollect(function, UnifiedSet.newSet()));
     }
 
     @Test
@@ -378,7 +378,7 @@ public abstract class AbstractObjectBooleanMapKeyValuesViewTestCase
                 this.newWith(1, true, 2, false, 3, true).collectIf(
                         ObjectBooleanPair.class::isInstance,
                         String::valueOf,
-                        UnifiedSet.<String>newSet()),
+                        UnifiedSet.newSet()),
                 "1:true", "2:false", "3:true");
     }
 
@@ -395,7 +395,7 @@ public abstract class AbstractObjectBooleanMapKeyValuesViewTestCase
     {
         Assert.assertEquals(
                 Bags.mutable.of(5L, 7L, 9L),
-                this.newWith(2, true, 3, false, 4, true).collectWith((argument1, argument2) -> (argument1.getOne() + argument1.getOne() + argument2), 1L, HashBag.<Long>newBag()));
+                this.newWith(2, true, 3, false, 4, true).collectWith((argument1, argument2) -> (argument1.getOne() + argument1.getOne() + argument2), 1L, HashBag.newBag()));
     }
 
     @Test

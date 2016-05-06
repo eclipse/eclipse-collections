@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -114,14 +114,14 @@ public class ImmutableTreeSetTest
     public void powerSet()
     {
         ImmutableSortedSet<SortedSetIterable<Integer>> intPowerSet = SortedSets.immutable.of(1, 2, 3).powerSet();
-        ImmutableSortedSet<SortedSetIterable<Integer>> revPowerSet = SortedSets.immutable.of(Comparators.<Integer>reverseNaturalOrder(), 1, 2, 3).powerSet();
+        ImmutableSortedSet<SortedSetIterable<Integer>> revPowerSet = SortedSets.immutable.of(Comparators.reverseNaturalOrder(), 1, 2, 3).powerSet();
 
-        FastList<TreeSortedSet<Integer>> expectedSortedSet = FastList.newListWith(TreeSortedSet.<Integer>newSet(), TreeSortedSet.newSetWith(1), TreeSortedSet.newSetWith(2),
+        FastList<TreeSortedSet<Integer>> expectedSortedSet = FastList.newListWith(TreeSortedSet.newSet(), TreeSortedSet.newSetWith(1), TreeSortedSet.newSetWith(2),
                 TreeSortedSet.newSetWith(3), TreeSortedSet.newSetWith(1, 2), TreeSortedSet.newSetWith(1, 3), TreeSortedSet.newSetWith(2, 3), TreeSortedSet.newSetWith(1, 2, 3));
-        FastList<TreeSortedSet<Integer>> expectedRevSortedSet = FastList.newListWith(TreeSortedSet.<Integer>newSet(), TreeSortedSet.newSetWith(Comparators.<Integer>reverseNaturalOrder(), 3),
-                TreeSortedSet.newSetWith(Comparators.<Integer>reverseNaturalOrder(), 2), TreeSortedSet.newSetWith(Comparators.<Integer>reverseNaturalOrder(), 1),
-                TreeSortedSet.newSetWith(Comparators.<Integer>reverseNaturalOrder(), 2, 3), TreeSortedSet.newSetWith(Comparators.<Integer>reverseNaturalOrder(), 1, 3),
-                TreeSortedSet.newSetWith(Comparators.<Integer>reverseNaturalOrder(), 1, 2), TreeSortedSet.newSetWith(Comparators.<Integer>reverseNaturalOrder(), 1, 2, 3));
+        FastList<TreeSortedSet<Integer>> expectedRevSortedSet = FastList.newListWith(TreeSortedSet.newSet(), TreeSortedSet.newSetWith(Comparators.reverseNaturalOrder(), 3),
+                TreeSortedSet.newSetWith(Comparators.reverseNaturalOrder(), 2), TreeSortedSet.newSetWith(Comparators.reverseNaturalOrder(), 1),
+                TreeSortedSet.newSetWith(Comparators.reverseNaturalOrder(), 2, 3), TreeSortedSet.newSetWith(Comparators.reverseNaturalOrder(), 1, 3),
+                TreeSortedSet.newSetWith(Comparators.reverseNaturalOrder(), 1, 2), TreeSortedSet.newSetWith(Comparators.reverseNaturalOrder(), 1, 2, 3));
 
         Verify.assertListsEqual(expectedSortedSet, intPowerSet.toList());
         Verify.assertListsEqual(expectedRevSortedSet, revPowerSet.toList());
@@ -143,7 +143,7 @@ public class ImmutableTreeSetTest
     @Test
     public void collectBoolean()
     {
-        ImmutableSortedSet<Integer> integers = this.classUnderTest(Collections.<Integer>reverseOrder());
+        ImmutableSortedSet<Integer> integers = this.classUnderTest(Collections.reverseOrder());
         Assert.assertEquals(BooleanArrayList.newListWith(true, true, true, true), integers.collectBoolean(PrimitiveFunctions.integerIsPositive()));
     }
 
@@ -151,7 +151,7 @@ public class ImmutableTreeSetTest
     @Test
     public void collectByte()
     {
-        ImmutableSortedSet<Integer> integers = this.classUnderTest(Collections.<Integer>reverseOrder());
+        ImmutableSortedSet<Integer> integers = this.classUnderTest(Collections.reverseOrder());
         Assert.assertEquals(ByteArrayList.newListWith((byte) 4, (byte) 3, (byte) 2, (byte) 1), integers.collectByte(PrimitiveFunctions.unboxIntegerToByte()));
     }
 
@@ -159,7 +159,7 @@ public class ImmutableTreeSetTest
     @Test
     public void collectChar()
     {
-        ImmutableSortedSet<Integer> integers = this.classUnderTest(Collections.<Integer>reverseOrder());
+        ImmutableSortedSet<Integer> integers = this.classUnderTest(Collections.reverseOrder());
         Assert.assertEquals(CharArrayList.newListWith('D', 'C', 'B', 'A'), integers.collectChar(integer -> (char) (integer.intValue() + 64)));
     }
 
@@ -167,7 +167,7 @@ public class ImmutableTreeSetTest
     @Test
     public void collectDouble()
     {
-        ImmutableSortedSet<Integer> integers = this.classUnderTest(Collections.<Integer>reverseOrder());
+        ImmutableSortedSet<Integer> integers = this.classUnderTest(Collections.reverseOrder());
         Assert.assertEquals(DoubleArrayList.newListWith(4.0d, 3.0d, 2.0d, 1.0d), integers.collectDouble(PrimitiveFunctions.unboxIntegerToDouble()));
     }
 
@@ -175,7 +175,7 @@ public class ImmutableTreeSetTest
     @Test
     public void collectFloat()
     {
-        ImmutableSortedSet<Integer> integers = this.classUnderTest(Collections.<Integer>reverseOrder());
+        ImmutableSortedSet<Integer> integers = this.classUnderTest(Collections.reverseOrder());
         Assert.assertEquals(FloatArrayList.newListWith(4.0f, 3.0f, 2.0f, 1.0f), integers.collectFloat(PrimitiveFunctions.unboxIntegerToFloat()));
     }
 
@@ -183,7 +183,7 @@ public class ImmutableTreeSetTest
     @Test
     public void collectInt()
     {
-        ImmutableSortedSet<Integer> integers = this.classUnderTest(Collections.<Integer>reverseOrder());
+        ImmutableSortedSet<Integer> integers = this.classUnderTest(Collections.reverseOrder());
         Assert.assertEquals(IntArrayList.newListWith(4, 3, 2, 1), integers.collectInt(PrimitiveFunctions.unboxIntegerToInt()));
     }
 
@@ -191,7 +191,7 @@ public class ImmutableTreeSetTest
     @Test
     public void collectLong()
     {
-        ImmutableSortedSet<Integer> integers = this.classUnderTest(Collections.<Integer>reverseOrder());
+        ImmutableSortedSet<Integer> integers = this.classUnderTest(Collections.reverseOrder());
         Assert.assertEquals(LongArrayList.newListWith(4, 3, 2, 1), integers.collectLong(PrimitiveFunctions.unboxIntegerToLong()));
     }
 
@@ -199,7 +199,7 @@ public class ImmutableTreeSetTest
     @Test
     public void collectShort()
     {
-        ImmutableSortedSet<Integer> integers = this.classUnderTest(Collections.<Integer>reverseOrder());
+        ImmutableSortedSet<Integer> integers = this.classUnderTest(Collections.reverseOrder());
         Assert.assertEquals(ShortArrayList.newListWith((short) 4, (short) 3, (short) 2, (short) 1), integers.collectShort(PrimitiveFunctions.unboxIntegerToShort()));
     }
 }

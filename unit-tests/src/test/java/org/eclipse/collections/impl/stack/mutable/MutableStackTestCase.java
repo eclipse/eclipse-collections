@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -74,10 +74,10 @@ public abstract class MutableStackTestCase extends StackIterableTestCase
         Assert.assertEquals(this.newStackFromTopToBottom(1, 2, 3), stack5);
 
         MutableStack<Integer> stack6 = this.newStackFromTopToBottom(1, 2, 3, 4);
-        Assert.assertEquals(FastList.newListWith(1, 2), stack6.pop(2, FastList.<Integer>newList()));
+        Assert.assertEquals(FastList.newListWith(1, 2), stack6.pop(2, FastList.newList()));
 
         MutableStack<Integer> stack7 = this.newStackFromTopToBottom(1, 2, 3, 4);
-        Assert.assertEquals(ArrayStack.newStackFromTopToBottom(2, 1), stack7.pop(2, ArrayStack.<Integer>newStack()));
+        Assert.assertEquals(ArrayStack.newStackFromTopToBottom(2, 1), stack7.pop(2, ArrayStack.newStack()));
 
         MutableStack<Integer> stack8 = this.newStackFromTopToBottom(1, 2, 3, 4);
         Verify.assertIterableEmpty(stack8.pop(0));
@@ -87,8 +87,8 @@ public abstract class MutableStackTestCase extends StackIterableTestCase
         MutableStack<Integer> stack9 = ArrayStack.newStack();
         Assert.assertEquals(FastList.newList(), stack9.pop(0));
         Assert.assertEquals(FastList.newList(), stack9.peek(0));
-        Assert.assertEquals(FastList.newList(), stack9.pop(0, FastList.<Integer>newList()));
-        Assert.assertEquals(ArrayStack.newStack(), stack9.pop(0, ArrayStack.<Integer>newStack()));
+        Assert.assertEquals(FastList.newList(), stack9.pop(0, FastList.newList()));
+        Assert.assertEquals(ArrayStack.newStack(), stack9.pop(0, ArrayStack.newStack()));
     }
 
     @Test
@@ -169,13 +169,13 @@ public abstract class MutableStackTestCase extends StackIterableTestCase
     @Test(expected = IllegalArgumentException.class)
     public void pop_target_count_throws()
     {
-        this.newStackWith(1, 2, 3).pop(5, FastList.<Integer>newList());
+        this.newStackWith(1, 2, 3).pop(5, FastList.newList());
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void pop_target_neg_throws()
     {
-        this.newStackWith(1, 2, 3).pop(-1, FastList.<Integer>newList());
+        this.newStackWith(1, 2, 3).pop(-1, FastList.newList());
     }
 
     @Test(expected = EmptyStackException.class)
@@ -187,13 +187,13 @@ public abstract class MutableStackTestCase extends StackIterableTestCase
     @Test(expected = IllegalArgumentException.class)
     public void pop_targetStack_count_throws()
     {
-        this.newStackWith(1, 2, 3).pop(5, ArrayStack.<Integer>newStack());
+        this.newStackWith(1, 2, 3).pop(5, ArrayStack.newStack());
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void pop_targetStack_neg_throws()
     {
-        this.newStackWith(1, 2, 3).pop(-1, ArrayStack.<Integer>newStack());
+        this.newStackWith(1, 2, 3).pop(-1, ArrayStack.newStack());
     }
 
     @Test

@@ -324,7 +324,7 @@ public class FastList<T>
     private void addAllCollection(Collection<? extends T> source)
     {
         this.ensureCapacity(this.size + source.size());
-        Iterate.forEachWith(source, Procedures2.<T>addToCollection(), this);
+        Iterate.forEachWith(source, Procedures2.addToCollection(), this);
     }
 
     @Override
@@ -478,7 +478,7 @@ public class FastList<T>
     @Override
     public <V> FastListMultimap<V, T> groupBy(Function<? super T, ? extends V> function)
     {
-        return this.groupBy(function, FastListMultimap.<V, T>newMultimap());
+        return this.groupBy(function, FastListMultimap.newMultimap());
     }
 
     @Override
@@ -490,7 +490,7 @@ public class FastList<T>
     @Override
     public <V> FastListMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function)
     {
-        return this.groupByEach(function, FastListMultimap.<V, T>newMultimap());
+        return this.groupByEach(function, FastListMultimap.newMultimap());
     }
 
     @Override
@@ -504,7 +504,7 @@ public class FastList<T>
     @Override
     public <K> MutableMap<K, T> groupByUniqueKey(Function<? super T, ? extends K> function)
     {
-        return this.groupByUniqueKey(function, UnifiedMap.<K, T>newMap());
+        return this.groupByUniqueKey(function, UnifiedMap.newMap());
     }
 
     @Override
@@ -582,7 +582,7 @@ public class FastList<T>
     @Override
     public FastList<T> select(Predicate<? super T> predicate)
     {
-        return this.select(predicate, FastList.<T>newList());
+        return this.select(predicate, FastList.newList());
     }
 
     @Override
@@ -594,7 +594,7 @@ public class FastList<T>
     @Override
     public <P> FastList<T> selectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
-        return this.selectWith(predicate, parameter, FastList.<T>newList());
+        return this.selectWith(predicate, parameter, FastList.newList());
     }
 
     @Override
@@ -609,7 +609,7 @@ public class FastList<T>
     @Override
     public FastList<T> reject(Predicate<? super T> predicate)
     {
-        return this.reject(predicate, FastList.<T>newList());
+        return this.reject(predicate, FastList.newList());
     }
 
     @Override
@@ -621,7 +621,7 @@ public class FastList<T>
     @Override
     public <P> FastList<T> rejectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
-        return this.rejectWith(predicate, parameter, FastList.<T>newList());
+        return this.rejectWith(predicate, parameter, FastList.newList());
     }
 
     @Override
@@ -703,7 +703,7 @@ public class FastList<T>
     @Override
     public <V> FastList<V> collect(Function<? super T, ? extends V> function)
     {
-        return this.collect(function, FastList.<V>newList(this.size()));
+        return this.collect(function, FastList.newList(this.size()));
     }
 
     @Override
@@ -843,7 +843,7 @@ public class FastList<T>
     @Override
     public <V> FastList<V> flatCollect(Function<? super T, ? extends Iterable<V>> function)
     {
-        return this.flatCollect(function, FastList.<V>newList(this.size()));
+        return this.flatCollect(function, FastList.newList(this.size()));
     }
 
     @Override
@@ -857,7 +857,7 @@ public class FastList<T>
     @Override
     public <P, V> FastList<V> collectWith(Function2<? super T, ? super P, ? extends V> function, P parameter)
     {
-        return this.collectWith(function, parameter, FastList.<V>newList(this.size()));
+        return this.collectWith(function, parameter, FastList.newList(this.size()));
     }
 
     @Override
@@ -874,7 +874,7 @@ public class FastList<T>
             Predicate<? super T> predicate,
             Function<? super T, ? extends V> function)
     {
-        return this.collectIf(predicate, function, FastList.<V>newList());
+        return this.collectIf(predicate, function, FastList.newList());
     }
 
     @Override

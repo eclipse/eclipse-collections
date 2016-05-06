@@ -169,7 +169,7 @@ public class ImmutableEmptySortedMapTest extends ImmutableSortedMapTestCase
         Integer absentKey = this.size() + 1;
 
         ImmutableSortedMap<Integer, String> classUnderTest = this.classUnderTest();
-        Assert.assertNull(classUnderTest.ifPresentApply(absentKey, Functions.<String>getPassThru()));
+        Assert.assertNull(classUnderTest.ifPresentApply(absentKey, Functions.getPassThru()));
     }
 
     @Override
@@ -261,7 +261,7 @@ public class ImmutableEmptySortedMapTest extends ImmutableSortedMapTestCase
         Verify.assertInstanceOf(ImmutableEmptySortedMap.class, actual);
         Assert.assertSame(ImmutableEmptySortedMap.INSTANCE, actual);
 
-        ImmutableSortedMap<Integer, String> revMap = this.classUnderTest(Comparators.<Integer>reverseNaturalOrder());
+        ImmutableSortedMap<Integer, String> revMap = this.classUnderTest(Comparators.reverseNaturalOrder());
         ImmutableSortedMap<Integer, String> revActual = revMap.select((ignored1, ignored2) -> true);
         Verify.assertInstanceOf(ImmutableEmptySortedMap.class, revActual);
         Assert.assertSame(revMap.comparator(), revActual.comparator());
@@ -276,7 +276,7 @@ public class ImmutableEmptySortedMapTest extends ImmutableSortedMapTestCase
         Verify.assertInstanceOf(ImmutableEmptySortedMap.class, actual);
         Assert.assertSame(ImmutableEmptySortedMap.INSTANCE, actual);
 
-        ImmutableSortedMap<Integer, String> revMap = this.classUnderTest(Comparators.<Integer>reverseNaturalOrder());
+        ImmutableSortedMap<Integer, String> revMap = this.classUnderTest(Comparators.reverseNaturalOrder());
         ImmutableSortedMap<Integer, String> revActual = revMap.reject((ignored1, ignored2) -> true);
         Verify.assertInstanceOf(ImmutableEmptySortedMap.class, revActual);
         Assert.assertSame(revMap.comparator(), revActual.comparator());
@@ -287,7 +287,7 @@ public class ImmutableEmptySortedMapTest extends ImmutableSortedMapTestCase
     public void collectMap()
     {
         ImmutableSortedMap<Integer, String> map = this.classUnderTest();
-        ImmutableSortedMap<Integer, String> revMap = this.classUnderTest(Comparators.<Integer>reverseNaturalOrder());
+        ImmutableSortedMap<Integer, String> revMap = this.classUnderTest(Comparators.reverseNaturalOrder());
 
         Function2<Integer, String, Pair<Integer, String>> alwaysTrueFunction = Tuples::pair;
         ImmutableMap<Integer, String> collect = map.collect(alwaysTrueFunction);
@@ -314,7 +314,7 @@ public class ImmutableEmptySortedMapTest extends ImmutableSortedMapTestCase
         super.containsKey();
 
         ImmutableSortedMap<Integer, String> map = this.classUnderTest();
-        ImmutableSortedMap<Integer, String> revMap = this.classUnderTest(Comparators.<Integer>reverseNaturalOrder());
+        ImmutableSortedMap<Integer, String> revMap = this.classUnderTest(Comparators.reverseNaturalOrder());
         Assert.assertFalse(map.containsKey(0));
         Assert.assertFalse(revMap.containsKey(1));
     }
@@ -325,7 +325,7 @@ public class ImmutableEmptySortedMapTest extends ImmutableSortedMapTestCase
         ImmutableEmptySortedMap<Integer, String> map = (ImmutableEmptySortedMap<Integer, String>)
                 this.classUnderTest();
         ImmutableEmptySortedMap<Integer, String> revMap = (ImmutableEmptySortedMap<Integer, String>)
-                this.classUnderTest(Comparators.<Integer>reverseNaturalOrder());
+                this.classUnderTest(Comparators.reverseNaturalOrder());
 
         Verify.assertEmpty(map.values());
         Assert.assertSame(Lists.immutable.of(), map.values());
@@ -346,7 +346,7 @@ public class ImmutableEmptySortedMapTest extends ImmutableSortedMapTestCase
         Assert.assertSame(ImmutableEmptySortedMap.INSTANCE, map);
         Assert.assertSame(map, deserialized);
 
-        ImmutableSortedMap<Integer, String> revMap = this.classUnderTest(Comparators.<Integer>reverseNaturalOrder());
+        ImmutableSortedMap<Integer, String> revMap = this.classUnderTest(Comparators.reverseNaturalOrder());
         ImmutableSortedMap<Integer, String> revDeserialized = SerializeTestHelper.serializeDeserialize(revMap);
         Verify.assertInstanceOf(ImmutableSortedMap.class, revDeserialized);
         Assert.assertNotNull(revDeserialized.comparator());

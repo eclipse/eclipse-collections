@@ -89,7 +89,7 @@ public abstract class AbstractLazyIterable<T>
 
     public <R extends Collection<T>> R into(R target)
     {
-        this.forEachWith(Procedures2.<T>addToCollection(), target);
+        this.forEachWith(Procedures2.addToCollection(), target);
         return target;
     }
 
@@ -256,17 +256,17 @@ public abstract class AbstractLazyIterable<T>
 
     public <V> Multimap<V, T> groupBy(Function<? super T, ? extends V> function)
     {
-        return this.groupBy(function, FastListMultimap.<V, T>newMultimap());
+        return this.groupBy(function, FastListMultimap.newMultimap());
     }
 
     public <V> Multimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function)
     {
-        return this.groupByEach(function, FastListMultimap.<V, T>newMultimap());
+        return this.groupByEach(function, FastListMultimap.newMultimap());
     }
 
     public <V> MapIterable<V, T> groupByUniqueKey(Function<? super T, ? extends V> function)
     {
-        return this.groupByUniqueKey(function, UnifiedMap.<V, T>newMap());
+        return this.groupByUniqueKey(function, UnifiedMap.newMap());
     }
 
     public <S> LazyIterable<Pair<T, S>> zip(Iterable<S> that)

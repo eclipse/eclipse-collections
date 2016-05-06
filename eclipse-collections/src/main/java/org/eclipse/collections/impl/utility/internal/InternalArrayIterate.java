@@ -855,7 +855,7 @@ public final class InternalArrayIterate
      */
     public static <T> FastList<T> distinct(T[] objectArray, int size)
     {
-        return InternalArrayIterate.distinct(objectArray, size, FastList.<T>newList());
+        return InternalArrayIterate.distinct(objectArray, size, FastList.newList());
     }
 
     /**

@@ -244,7 +244,7 @@ public final class MapIterate
      */
     public static <K, V> MutableList<V> select(Map<K, V> map, Predicate<? super V> predicate)
     {
-        return MapIterate.select(map, predicate, FastList.<V>newList());
+        return MapIterate.select(map, predicate, FastList.newList());
     }
 
     /**
@@ -279,7 +279,7 @@ public final class MapIterate
             Map<K, V> map,
             Predicate2<? super K, ? super V> predicate)
     {
-        return MapIterate.selectMapOnEntry(map, predicate, UnifiedMap.<K, V>newMap());
+        return MapIterate.selectMapOnEntry(map, predicate, UnifiedMap.newMap());
     }
 
     /**
@@ -347,7 +347,7 @@ public final class MapIterate
      */
     public static <K, V> MutableList<V> reject(Map<K, V> map, Predicate<? super V> predicate)
     {
-        return MapIterate.reject(map, predicate, FastList.<V>newList());
+        return MapIterate.reject(map, predicate, FastList.newList());
     }
 
     /**
@@ -371,7 +371,7 @@ public final class MapIterate
             Map<K, V> map,
             Predicate2<? super K, ? super V> predicate)
     {
-        return MapIterate.rejectMapOnEntry(map, predicate, UnifiedMap.<K, V>newMap());
+        return MapIterate.rejectMapOnEntry(map, predicate, UnifiedMap.newMap());
     }
 
     /**
@@ -418,7 +418,7 @@ public final class MapIterate
             Map<K, V> map,
             Function<? super V, ? extends A> function)
     {
-        return collect(map, function, FastList.<A>newList(map.size()));
+        return collect(map, function, FastList.newList(map.size()));
     }
 
     /**
@@ -605,7 +605,7 @@ public final class MapIterate
             Map<K, V> map,
             Function2<? super K, ? super V, Pair<K2, V2>> function)
     {
-        return MapIterate.collect(map, function, UnifiedMap.<K2, V2>newMap(map.size()));
+        return MapIterate.collect(map, function, UnifiedMap.newMap(map.size()));
     }
 
     /**
@@ -632,7 +632,7 @@ public final class MapIterate
             Map<K, V> map,
             Function2<? super K, ? super V, ? extends V2> function)
     {
-        return MapIterate.collectValues(map, function, UnifiedMap.<K, V2>newMap(map.size()));
+        return MapIterate.collectValues(map, function, UnifiedMap.newMap(map.size()));
     }
 
     /**
@@ -659,7 +659,7 @@ public final class MapIterate
             Function2<? super K1, ? super V1, Pair<K2, V2>> function,
             Predicate2<? super K1, ? super V1> predicate)
     {
-        return MapIterate.collectIf(map, function, predicate, UnifiedMap.<K2, V2>newMap());
+        return MapIterate.collectIf(map, function, predicate, UnifiedMap.newMap());
     }
 
     /**
@@ -694,7 +694,7 @@ public final class MapIterate
             Function<? super K1, ? extends K2> keyFunction,
             Function<? super V1, ? extends V2> valueFunction)
     {
-        return MapIterate.collect(map, keyFunction, valueFunction, UnifiedMap.<K2, V2>newMap());
+        return MapIterate.collect(map, keyFunction, valueFunction, UnifiedMap.newMap());
     }
 
     /**
@@ -826,7 +826,7 @@ public final class MapIterate
             }
             else
             {
-                entries = LazyIterate.adapt(map.entrySet()).collect(AbstractImmutableEntry.<K, V>getPairFunction());
+                entries = LazyIterate.adapt(map.entrySet()).collect(AbstractImmutableEntry.getPairFunction());
             }
             return entries.detect(each -> predicate.accept(each.getOne(), each.getTwo()));
         }

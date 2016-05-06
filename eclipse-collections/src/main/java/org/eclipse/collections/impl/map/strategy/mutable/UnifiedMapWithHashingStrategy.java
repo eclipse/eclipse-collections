@@ -176,8 +176,8 @@ public class UnifiedMapWithHashingStrategy<K, V> extends AbstractMutableMap<K, V
         this(hashingStrategy, Math.max(pairs.length, DEFAULT_INITIAL_CAPACITY), DEFAULT_LOAD_FACTOR);
         ArrayIterate.forEach(pairs, new MapCollectProcedure<Pair<K, V>, K, V>(
                 this,
-                Functions.<K>firstOfPair(),
-                Functions.<V>secondOfPair()));
+                Functions.firstOfPair(),
+                Functions.secondOfPair()));
     }
 
     public static <K, V> UnifiedMapWithHashingStrategy<K, V> newMap(HashingStrategy<? super K> hashingStrategy)

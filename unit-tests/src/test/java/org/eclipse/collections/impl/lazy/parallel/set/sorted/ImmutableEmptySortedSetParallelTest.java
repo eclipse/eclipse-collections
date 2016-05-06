@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -72,8 +72,8 @@ public class ImmutableEmptySortedSetParallelTest extends NonParallelSortedSetIte
     @Override
     public void allSatisfyWith()
     {
-        Assert.assertTrue(this.classUnderTest().allSatisfyWith(Predicates2.<Integer>lessThan(), 0));
-        Assert.assertTrue(this.classUnderTest().allSatisfyWith(Predicates2.<Integer>greaterThanOrEqualTo(), 0));
+        Assert.assertTrue(this.classUnderTest().allSatisfyWith(Predicates2.lessThan(), 0));
+        Assert.assertTrue(this.classUnderTest().allSatisfyWith(Predicates2.greaterThanOrEqualTo(), 0));
     }
 
     @Override
@@ -86,8 +86,8 @@ public class ImmutableEmptySortedSetParallelTest extends NonParallelSortedSetIte
     @Override
     public void anySatisfyWith()
     {
-        Assert.assertFalse(this.classUnderTest().anySatisfyWith(Predicates2.<Integer>lessThan(), 0));
-        Assert.assertFalse(this.classUnderTest().anySatisfyWith(Predicates2.<Integer>greaterThanOrEqualTo(), 0));
+        Assert.assertFalse(this.classUnderTest().anySatisfyWith(Predicates2.lessThan(), 0));
+        Assert.assertFalse(this.classUnderTest().anySatisfyWith(Predicates2.greaterThanOrEqualTo(), 0));
     }
 
     @Override
@@ -100,8 +100,8 @@ public class ImmutableEmptySortedSetParallelTest extends NonParallelSortedSetIte
     @Override
     public void noneSatisfyWith()
     {
-        Assert.assertTrue(this.classUnderTest().noneSatisfyWith(Predicates2.<Integer>lessThan(), 0));
-        Assert.assertTrue(this.classUnderTest().noneSatisfyWith(Predicates2.<Integer>greaterThanOrEqualTo(), 0));
+        Assert.assertTrue(this.classUnderTest().noneSatisfyWith(Predicates2.lessThan(), 0));
+        Assert.assertTrue(this.classUnderTest().noneSatisfyWith(Predicates2.greaterThanOrEqualTo(), 0));
     }
 
     @Override

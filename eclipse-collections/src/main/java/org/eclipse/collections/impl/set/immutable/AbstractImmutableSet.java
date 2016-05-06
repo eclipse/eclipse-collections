@@ -323,7 +323,7 @@ public abstract class AbstractImmutableSet<T> extends AbstractImmutableCollectio
 
     public <V> ImmutableSetMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function)
     {
-        return this.groupByEach(function, UnifiedSetMultimap.<V, T>newMultimap()).toImmutable();
+        return this.groupByEach(function, UnifiedSetMultimap.newMultimap()).toImmutable();
     }
 
     @Override
@@ -339,7 +339,7 @@ public abstract class AbstractImmutableSet<T> extends AbstractImmutableCollectio
     @Deprecated
     public <S> ImmutableSet<Pair<T, S>> zip(Iterable<S> that)
     {
-        return this.zip(that, UnifiedSet.<Pair<T, S>>newSet()).toImmutable();
+        return this.zip(that, UnifiedSet.newSet()).toImmutable();
     }
 
     /**
@@ -348,7 +348,7 @@ public abstract class AbstractImmutableSet<T> extends AbstractImmutableCollectio
     @Deprecated
     public ImmutableSet<Pair<T, Integer>> zipWithIndex()
     {
-        return this.zipWithIndex(UnifiedSet.<Pair<T, Integer>>newSet()).toImmutable();
+        return this.zipWithIndex(UnifiedSet.newSet()).toImmutable();
     }
 
     @Override

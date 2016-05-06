@@ -112,7 +112,7 @@ abstract class AbstractImmutableSortedBag<T>
 
     public <V> ImmutableSortedBagMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function)
     {
-        return this.groupByEach(function, TreeBagMultimap.<V, T>newMultimap(this.comparator())).toImmutable();
+        return this.groupByEach(function, TreeBagMultimap.newMultimap(this.comparator())).toImmutable();
     }
 
     public <V> ImmutableMap<V, T> groupByUniqueKey(Function<? super T, ? extends V> function)
@@ -219,7 +219,7 @@ abstract class AbstractImmutableSortedBag<T>
 
     public <V> ImmutableList<V> flatCollect(Function<? super T, ? extends Iterable<V>> function)
     {
-        return this.flatCollect(function, FastList.<V>newList()).toImmutable();
+        return this.flatCollect(function, FastList.newList()).toImmutable();
     }
 
     public ImmutableSortedBag<T> selectByOccurrences(final IntPredicate predicate)
@@ -311,7 +311,7 @@ abstract class AbstractImmutableSortedBag<T>
 
     public ImmutableList<ObjectIntPair<T>> bottomOccurrences(int n)
     {
-        return this.occurrencesSortingBy(n, ObjectIntPair<T>::getTwo).toImmutable();
+        return this.occurrencesSortingBy(n, ObjectIntPair::getTwo).toImmutable();
     }
 
     private MutableList<ObjectIntPair<T>> occurrencesSortingBy(int n, IntFunction<ObjectIntPair<T>> function)

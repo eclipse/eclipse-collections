@@ -61,7 +61,7 @@ public abstract class AbstractMutableBagIterable<T>
     public boolean addAllIterable(Iterable<? extends T> iterable)
     {
         int oldSize = this.size();
-        Iterate.forEachWith(iterable, Procedures2.<T>addToCollection(), this);
+        Iterate.forEachWith(iterable, Procedures2.addToCollection(), this);
         return oldSize != this.size();
     }
 
@@ -99,7 +99,7 @@ public abstract class AbstractMutableBagIterable<T>
 
     public <V> MutableMap<V, T> groupByUniqueKey(Function<? super T, ? extends V> function)
     {
-        return this.groupByUniqueKey(function, UnifiedMap.<V, T>newMap());
+        return this.groupByUniqueKey(function, UnifiedMap.newMap());
     }
 
     public RichIterable<RichIterable<T>> chunk(int size)
@@ -268,11 +268,11 @@ public abstract class AbstractMutableBagIterable<T>
 
     public MutableList<ObjectIntPair<T>> topOccurrences(int n)
     {
-        return this.occurrencesSortingBy(n, item -> -item.getTwo(), Lists.mutable.<ObjectIntPair<T>>empty());
+        return this.occurrencesSortingBy(n, item -> -item.getTwo(), Lists.mutable.empty());
     }
 
     public MutableList<ObjectIntPair<T>> bottomOccurrences(int n)
     {
-        return this.occurrencesSortingBy(n, ObjectIntPair<T>::getTwo, Lists.mutable.<ObjectIntPair<T>>empty());
+        return this.occurrencesSortingBy(n, ObjectIntPair::getTwo, Lists.mutable.empty());
     }
 }

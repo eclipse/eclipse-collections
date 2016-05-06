@@ -198,7 +198,7 @@ public class UnifiedSetWithHashingStrategy<T>
         UnifiedSetWithHashingStrategy<K> result = source instanceof RichIterable<?>
                 ? UnifiedSetWithHashingStrategy.newSet(hashingStrategy, ((RichIterable<?>) source).size())
                 : UnifiedSetWithHashingStrategy.newSet(hashingStrategy);
-        Iterate.forEachWith(source, Procedures2.<K>addToCollection(), result);
+        Iterate.forEachWith(source, Procedures2.addToCollection(), result);
         return result;
     }
 
@@ -1050,7 +1050,7 @@ public class UnifiedSetWithHashingStrategy<T>
         int size = Iterate.sizeOf(iterable);
         this.ensureCapacity(size);
         int oldSize = this.size();
-        Iterate.forEachWith(iterable, Procedures2.<T>addToCollection(), this);
+        Iterate.forEachWith(iterable, Procedures2.addToCollection(), this);
         return this.size() != oldSize;
     }
 
@@ -1887,12 +1887,12 @@ public class UnifiedSetWithHashingStrategy<T>
     public <V> UnifiedSetWithHashingStrategyMultimap<V, T> groupBy(
             Function<? super T, ? extends V> function)
     {
-        return this.groupBy(function, UnifiedSetWithHashingStrategyMultimap.<V, T>newMultimap(this.hashingStrategy));
+        return this.groupBy(function, UnifiedSetWithHashingStrategyMultimap.newMultimap(this.hashingStrategy));
     }
 
     public <V> UnifiedSetWithHashingStrategyMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function)
     {
-        return this.groupByEach(function, UnifiedSetWithHashingStrategyMultimap.<V, T>newMultimap(this.hashingStrategy));
+        return this.groupByEach(function, UnifiedSetWithHashingStrategyMultimap.newMultimap(this.hashingStrategy));
     }
 
     public T get(T key)

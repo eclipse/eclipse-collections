@@ -106,7 +106,7 @@ public class TreeBag<T>
         {
             return new TreeBag<>((SortedBag<E>) source);
         }
-        return Iterate.addAllTo(source, TreeBag.<E>newBag());
+        return Iterate.addAllTo(source, TreeBag.newBag());
     }
 
     public static <E> TreeBag<E> newBag(Comparator<? super E> comparator, Iterable<? extends E> iterable)
@@ -596,12 +596,12 @@ public class TreeBag<T>
 
     public <V> TreeBagMultimap<V, T> groupBy(Function<? super T, ? extends V> function)
     {
-        return this.groupBy(function, TreeBagMultimap.<V, T>newMultimap(this.comparator()));
+        return this.groupBy(function, TreeBagMultimap.newMultimap(this.comparator()));
     }
 
     public <V> TreeBagMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function)
     {
-        return this.groupByEach(function, TreeBagMultimap.<V, T>newMultimap(this.comparator()));
+        return this.groupByEach(function, TreeBagMultimap.newMultimap(this.comparator()));
     }
 
     public int detectIndex(Predicate<? super T> predicate)

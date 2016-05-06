@@ -278,7 +278,7 @@ public abstract class AbstractImmutableBiMap<K, V> extends AbstractBiMap<K, V> i
 
     public ImmutableBiMap<K, V> select(Predicate2<? super K, ? super V> predicate)
     {
-        return MapIterate.selectMapOnEntry(this, predicate, HashBiMap.<K, V>newMap()).toImmutable();
+        return MapIterate.selectMapOnEntry(this, predicate, HashBiMap.newMap()).toImmutable();
     }
 
     public ImmutableBiMap<K, V> tap(Procedure<? super V> procedure)
@@ -289,27 +289,27 @@ public abstract class AbstractImmutableBiMap<K, V> extends AbstractBiMap<K, V> i
 
     public ImmutableSet<V> select(Predicate<? super V> predicate)
     {
-        return this.delegate.select(predicate, Sets.mutable.<V>empty()).toImmutable();
+        return this.delegate.select(predicate, Sets.mutable.empty()).toImmutable();
     }
 
     public <P> ImmutableSet<V> selectWith(Predicate2<? super V, ? super P> predicate, P parameter)
     {
-        return this.delegate.selectWith(predicate, parameter, Sets.mutable.<V>empty()).toImmutable();
+        return this.delegate.selectWith(predicate, parameter, Sets.mutable.empty()).toImmutable();
     }
 
     public ImmutableBiMap<K, V> reject(Predicate2<? super K, ? super V> predicate)
     {
-        return MapIterate.rejectMapOnEntry(this, predicate, HashBiMap.<K, V>newMap()).toImmutable();
+        return MapIterate.rejectMapOnEntry(this, predicate, HashBiMap.newMap()).toImmutable();
     }
 
     public ImmutableSet<V> reject(Predicate<? super V> predicate)
     {
-        return this.delegate.reject(predicate, Sets.mutable.<V>empty()).toImmutable();
+        return this.delegate.reject(predicate, Sets.mutable.empty()).toImmutable();
     }
 
     public <P> ImmutableSet<V> rejectWith(Predicate2<? super V, ? super P> predicate, P parameter)
     {
-        return this.delegate.rejectWith(predicate, parameter, Sets.mutable.<V>empty()).toImmutable();
+        return this.delegate.rejectWith(predicate, parameter, Sets.mutable.empty()).toImmutable();
     }
 
     public PartitionImmutableSet<V> partition(Predicate<? super V> predicate)

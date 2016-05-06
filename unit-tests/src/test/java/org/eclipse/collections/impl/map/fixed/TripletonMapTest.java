@@ -263,10 +263,10 @@ public class TripletonMapTest extends AbstractMemoryEfficientMutableMapTest
     public void ifPresentApply()
     {
         MutableMap<Integer, String> map = new TripletonMap<>(1, "1", 2, "2", 3, "3");
-        Assert.assertNull(map.ifPresentApply(4, Functions.<String>getPassThru()));
-        Assert.assertEquals("1", map.ifPresentApply(1, Functions.<String>getPassThru()));
-        Assert.assertEquals("2", map.ifPresentApply(2, Functions.<String>getPassThru()));
-        Assert.assertEquals("3", map.ifPresentApply(3, Functions.<String>getPassThru()));
+        Assert.assertNull(map.ifPresentApply(4, Functions.getPassThru()));
+        Assert.assertEquals("1", map.ifPresentApply(1, Functions.getPassThru()));
+        Assert.assertEquals("2", map.ifPresentApply(2, Functions.getPassThru()));
+        Assert.assertEquals("3", map.ifPresentApply(3, Functions.getPassThru()));
     }
 
     @Override

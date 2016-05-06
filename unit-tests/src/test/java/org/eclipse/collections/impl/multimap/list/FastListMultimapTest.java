@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -112,7 +112,7 @@ public class FastListMultimapTest extends AbstractMutableListMultimapTestCase
         Pair<Integer, String> pair333 = Tuples.pair(Integer.valueOf(3), "Three");
         Pair<Integer, String> pair444 = Tuples.pair(Integer.valueOf(4), "Four");
 
-        MutableList<Pair<Integer, String>> testList = FastList.<Pair<Integer, String>>newListWith(pair1, pair2, pair3, pair4, pair11, pair22, pair33, pair44, pair111, pair222, pair333, pair444);
+        MutableList<Pair<Integer, String>> testList = FastList.newListWith(pair1, pair2, pair3, pair4, pair11, pair22, pair33, pair44, pair111, pair222, pair333, pair444);
 
         MutableListMultimap<Integer, String> actual = FastListMultimap.newMultimap(testList);
 

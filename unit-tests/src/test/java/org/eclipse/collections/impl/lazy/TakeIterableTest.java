@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -36,7 +36,7 @@ public class TakeIterableTest extends AbstractLazyIterableTestCase
     public void setUp()
     {
         this.takeIterable = new TakeIterable<>(Interval.oneTo(5), 2);
-        this.emptyListTakeIterable = new TakeIterable<>(FastList.<Integer>newList(), 2);
+        this.emptyListTakeIterable = new TakeIterable<>(FastList.newList(), 2);
         this.zeroCountTakeIterable = new TakeIterable<>(Interval.oneTo(5), 0);
         this.sameCountTakeIterable = new TakeIterable<>(Interval.oneTo(5), 5);
         this.higherCountTakeIterable = new TakeIterable<>(Interval.oneTo(5), 10);

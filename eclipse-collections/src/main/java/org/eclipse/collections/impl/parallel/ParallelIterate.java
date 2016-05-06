@@ -1037,7 +1037,7 @@ public final class ParallelIterate
                 groupBy,
                 zeroValueFactory,
                 nonMutatingAggregator,
-                ConcurrentHashMap.<K, V>newMap(),
+                ConcurrentHashMap.newMap(),
                 batchSize,
                 executor);
     }
@@ -1213,7 +1213,7 @@ public final class ParallelIterate
             int batchSize,
             Executor executor)
     {
-        return ParallelIterate.groupBy(iterable, function, SynchronizedPutFastListMultimap.<K, V>newMultimap(), batchSize, executor);
+        return ParallelIterate.groupBy(iterable, function, SynchronizedPutFastListMultimap.newMultimap(), batchSize, executor);
     }
 
     /**

@@ -98,7 +98,7 @@ public final class HashBagMultimap<K, V>
 
     public <V2> HashBagMultimap<K, V2> collectValues(Function<? super V, ? extends V2> function)
     {
-        return this.collectValues(function, HashBagMultimap.<K, V2>newMultimap());
+        return this.collectValues(function, HashBagMultimap.newMultimap());
     }
 
     public HashBagMultimap<K, V> selectKeysValues(Predicate2<? super K, ? super V> predicate)

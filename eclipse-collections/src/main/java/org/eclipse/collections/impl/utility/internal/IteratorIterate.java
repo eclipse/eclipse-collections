@@ -1091,7 +1091,7 @@ public final class IteratorIterate
      */
     public static <T> MutableList<T> distinct(Iterator<T> iterator)
     {
-        return IteratorIterate.distinct(iterator, FastList.<T>newList());
+        return IteratorIterate.distinct(iterator, FastList.newList());
     }
 
     /**

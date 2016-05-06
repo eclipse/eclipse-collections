@@ -706,7 +706,7 @@ public class ArrayStack<T> implements MutableStack<T>, Externalizable
 
     public <V> MutableListMultimap<V, T> groupBy(Function<? super T, ? extends V> function)
     {
-        return this.groupBy(function, FastListMultimap.<V, T>newMultimap());
+        return this.groupBy(function, FastListMultimap.newMultimap());
     }
 
     public <V, R extends MutableMultimap<V, T>> R groupBy(Function<? super T, ? extends V> function, R target)
@@ -716,7 +716,7 @@ public class ArrayStack<T> implements MutableStack<T>, Externalizable
 
     public <V> MutableListMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function)
     {
-        return this.groupByEach(function, FastListMultimap.<V, T>newMultimap());
+        return this.groupByEach(function, FastListMultimap.newMultimap());
     }
 
     public <V, R extends MutableMultimap<V, T>> R groupByEach(Function<? super T, ? extends Iterable<V>> function, R target)
@@ -726,7 +726,7 @@ public class ArrayStack<T> implements MutableStack<T>, Externalizable
 
     public <V> MutableMap<V, T> groupByUniqueKey(Function<? super T, ? extends V> function)
     {
-        return this.groupByUniqueKey(function, UnifiedMap.<V, T>newMap());
+        return this.groupByUniqueKey(function, UnifiedMap.newMap());
     }
 
     public <V, R extends MutableMap<V, T>> R groupByUniqueKey(Function<? super T, ? extends V> function, R target)

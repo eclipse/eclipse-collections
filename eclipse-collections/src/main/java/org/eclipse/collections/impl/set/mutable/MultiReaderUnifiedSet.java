@@ -112,12 +112,12 @@ public final class MultiReaderUnifiedSet<T>
 
     public static <T> MultiReaderUnifiedSet<T> newSet()
     {
-        return new MultiReaderUnifiedSet<>(UnifiedSet.<T>newSet());
+        return new MultiReaderUnifiedSet<>(UnifiedSet.newSet());
     }
 
     public static <T> MultiReaderUnifiedSet<T> newSet(int capacity)
     {
-        return new MultiReaderUnifiedSet<>(UnifiedSet.<T>newSet(capacity));
+        return new MultiReaderUnifiedSet<>(UnifiedSet.newSet(capacity));
     }
 
     public static <T> MultiReaderUnifiedSet<T> newSet(Iterable<T> iterable)
@@ -592,7 +592,7 @@ public final class MultiReaderUnifiedSet<T>
         public void becomeUseless()
         {
             this.delegate = null;
-            this.requestedIterators.each(UntouchableIterator<T>::becomeUseless);
+            this.requestedIterators.each(UntouchableIterator::becomeUseless);
         }
 
         /**

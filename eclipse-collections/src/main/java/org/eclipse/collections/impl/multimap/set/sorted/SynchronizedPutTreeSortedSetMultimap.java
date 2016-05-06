@@ -143,32 +143,32 @@ public final class SynchronizedPutTreeSortedSetMultimap<K, V>
 
     public TreeSortedSetMultimap<K, V> selectKeysValues(Predicate2<? super K, ? super V> predicate)
     {
-        return this.selectKeysValues(predicate, TreeSortedSetMultimap.<K, V>newMultimap(this.comparator));
+        return this.selectKeysValues(predicate, TreeSortedSetMultimap.newMultimap(this.comparator));
     }
 
     public TreeSortedSetMultimap<K, V> rejectKeysValues(Predicate2<? super K, ? super V> predicate)
     {
-        return this.rejectKeysValues(predicate, TreeSortedSetMultimap.<K, V>newMultimap(this.comparator));
+        return this.rejectKeysValues(predicate, TreeSortedSetMultimap.newMultimap(this.comparator));
     }
 
     public TreeSortedSetMultimap<K, V> selectKeysMultiValues(Predicate2<? super K, ? super Iterable<V>> predicate)
     {
-        return this.selectKeysMultiValues(predicate, TreeSortedSetMultimap.<K, V>newMultimap(this.comparator));
+        return this.selectKeysMultiValues(predicate, TreeSortedSetMultimap.newMultimap(this.comparator));
     }
 
     public TreeSortedSetMultimap<K, V> rejectKeysMultiValues(Predicate2<? super K, ? super Iterable<V>> predicate)
     {
-        return this.rejectKeysMultiValues(predicate, TreeSortedSetMultimap.<K, V>newMultimap(this.comparator));
+        return this.rejectKeysMultiValues(predicate, TreeSortedSetMultimap.newMultimap(this.comparator));
     }
 
     public <K2, V2> HashBagMultimap<K2, V2> collectKeysValues(Function2<? super K, ? super V, Pair<K2, V2>> function)
     {
-        return this.collectKeysValues(function, HashBagMultimap.<K2, V2>newMultimap());
+        return this.collectKeysValues(function, HashBagMultimap.newMultimap());
     }
 
     public <V2> FastListMultimap<K, V2> collectValues(Function<? super V, ? extends V2> function)
     {
-        return this.collectValues(function, FastListMultimap.<K, V2>newMultimap());
+        return this.collectValues(function, FastListMultimap.newMultimap());
     }
 
     public MutableSetMultimap<V, K> flip()

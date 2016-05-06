@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -255,8 +255,8 @@ public class UnmodifiableMutableSetTest extends AbstractCollectionTestCase
     public void toSortedBag_with_comparator()
     {
         RichIterable<Integer> integers = this.newWith(2, 4, 1, 3);
-        MutableSortedBag<Integer> bag = integers.toSortedBag(Collections.<Integer>reverseOrder());
-        Verify.assertSortedBagsEqual(TreeBag.newBagWith(Collections.<Integer>reverseOrder(), 4, 3, 2, 1), bag);
+        MutableSortedBag<Integer> bag = integers.toSortedBag(Collections.reverseOrder());
+        Verify.assertSortedBagsEqual(TreeBag.newBagWith(Collections.reverseOrder(), 4, 3, 2, 1), bag);
     }
 
     @Override

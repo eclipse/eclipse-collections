@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -62,7 +62,7 @@ public class UnifiedSetTest extends AbstractMutableSetTestCase
 
         MutableSet<String> list = UnifiedSet.<String>newSet().with("A")
                 .withAll(Lists.fixedSize.of("1", "2"))
-                .withAll(Lists.fixedSize.<String>of())
+                .withAll(Lists.fixedSize.of())
                 .withAll(Sets.fixedSize.of("3", "4"));
         Verify.assertEqualsAndHashCode(UnifiedSet.newSetWith("A", "1", "2", "3", "4"), list);
     }

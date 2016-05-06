@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -96,7 +96,7 @@ public class TreeSortedMapTest extends MutableSortedMapTestCase
     {
         UnifiedMap<Integer, String> unifiedMap = UnifiedMap.newWithKeysValues(1, "One", 2, "Two", 3, "Three");
         TreeSortedMap<Integer, String> sortedMap = TreeSortedMap.newMap(unifiedMap);
-        TreeSortedMap<Integer, String> revSortedMap = TreeSortedMap.newMap(Comparators.<Integer>reverseNaturalOrder(),
+        TreeSortedMap<Integer, String> revSortedMap = TreeSortedMap.newMap(Comparators.reverseNaturalOrder(),
                 unifiedMap);
 
         Verify.assertMapsEqual(unifiedMap, sortedMap);

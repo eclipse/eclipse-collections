@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -219,7 +219,7 @@ public class DoubletonSetTest extends AbstractMemoryEfficientMutableSetTestCase
         Assert.assertEquals(expected, actual);
 
         Multimap<Integer, Integer> actualWithTarget =
-                set.groupByEach(new NegativeIntervalFunction(), UnifiedSetMultimap.<Integer, Integer>newMultimap());
+                set.groupByEach(new NegativeIntervalFunction(), UnifiedSetMultimap.newMultimap());
         Assert.assertEquals(expected, actualWithTarget);
     }
 }

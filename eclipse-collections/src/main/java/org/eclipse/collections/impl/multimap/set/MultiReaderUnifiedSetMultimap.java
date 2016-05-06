@@ -97,21 +97,21 @@ public final class MultiReaderUnifiedSetMultimap<K, V>
 
     public UnifiedSetMultimap<K, V> selectKeysValues(Predicate2<? super K, ? super V> predicate)
     {
-        return this.selectKeysValues(predicate, UnifiedSetMultimap.<K, V>newMultimap());
+        return this.selectKeysValues(predicate, UnifiedSetMultimap.newMultimap());
     }
 
     public UnifiedSetMultimap<K, V> rejectKeysValues(Predicate2<? super K, ? super V> predicate)
     {
-        return this.rejectKeysValues(predicate, UnifiedSetMultimap.<K, V>newMultimap());
+        return this.rejectKeysValues(predicate, UnifiedSetMultimap.newMultimap());
     }
 
     public UnifiedSetMultimap<K, V> selectKeysMultiValues(Predicate2<? super K, ? super Iterable<V>> predicate)
     {
-        return this.selectKeysMultiValues(predicate, UnifiedSetMultimap.<K, V>newMultimap());
+        return this.selectKeysMultiValues(predicate, UnifiedSetMultimap.newMultimap());
     }
 
     public UnifiedSetMultimap<K, V> rejectKeysMultiValues(Predicate2<? super K, ? super Iterable<V>> predicate)
     {
-        return this.rejectKeysMultiValues(predicate, UnifiedSetMultimap.<K, V>newMultimap());
+        return this.rejectKeysMultiValues(predicate, UnifiedSetMultimap.newMultimap());
     }
 }

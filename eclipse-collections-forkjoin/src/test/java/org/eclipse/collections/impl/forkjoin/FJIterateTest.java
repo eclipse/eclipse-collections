@@ -109,10 +109,10 @@ public class FJIterateTest
                 interval.toSortedSet().asUnmodifiable(),
                 interval.toSortedSet().asSynchronized(),
                 interval.toSortedSet().toImmutable(),
-                interval.toMap(Functions.<Integer>getPassThru(), Functions.<Integer>getPassThru()),
-                interval.toMap(Functions.<Integer>getPassThru(), Functions.<Integer>getPassThru()).asUnmodifiable(),
-                interval.toMap(Functions.<Integer>getPassThru(), Functions.<Integer>getPassThru()).asSynchronized(),
-                interval.toMap(Functions.<Integer>getPassThru(), Functions.<Integer>getPassThru()).toImmutable(),
+                interval.toMap(Functions.getPassThru(), Functions.getPassThru()),
+                interval.toMap(Functions.getPassThru(), Functions.getPassThru()).asUnmodifiable(),
+                interval.toMap(Functions.getPassThru(), Functions.getPassThru()).asSynchronized(),
+                interval.toMap(Functions.getPassThru(), Functions.getPassThru()).toImmutable(),
                 new CompositeFastList<Integer>().withAll(interval.toList()),
                 new CompositeFastList<Integer>().withAll(interval.toList()).asUnmodifiable(),
                 new CompositeFastList<Integer>().withAll(interval.toList()).asSynchronized(),
@@ -385,7 +385,7 @@ public class FJIterateTest
     private void basicSelect(RichIterable<Integer> iterable)
     {
         Collection<Integer> actual1 = FJIterate.select(iterable, Predicates.greaterThan(100));
-        Collection<Integer> actual2 = FJIterate.select(iterable, Predicates.greaterThan(100), HashBag.<Integer>newBag(), 3, this.executor, true);
+        Collection<Integer> actual2 = FJIterate.select(iterable, Predicates.greaterThan(100), HashBag.newBag(), 3, this.executor, true);
         Collection<Integer> actual3 = FJIterate.select(iterable, Predicates.greaterThan(100), true);
         RichIterable<Integer> expected = iterable.select(Predicates.greaterThan(100));
         Assert.assertEquals(expected.getClass().getSimpleName() + '/' + actual1.getClass().getSimpleName(), expected, actual1);
@@ -429,7 +429,7 @@ public class FJIterateTest
     private void basicReject(RichIterable<Integer> iterable)
     {
         Collection<Integer> actual1 = FJIterate.reject(iterable, Predicates.greaterThan(100));
-        Collection<Integer> actual2 = FJIterate.reject(iterable, Predicates.greaterThan(100), HashBag.<Integer>newBag(), 3, this.executor, true);
+        Collection<Integer> actual2 = FJIterate.reject(iterable, Predicates.greaterThan(100), HashBag.newBag(), 3, this.executor, true);
         Collection<Integer> actual3 = FJIterate.reject(iterable, Predicates.greaterThan(100), true);
         RichIterable<Integer> expected = iterable.reject(Predicates.greaterThan(100));
         Assert.assertEquals(expected.getClass().getSimpleName() + '/' + actual1.getClass().getSimpleName(), expected, actual1);
@@ -446,7 +446,7 @@ public class FJIterateTest
     private void basicCollect(RichIterable<Integer> iterable)
     {
         Collection<String> actual1 = FJIterate.collect(iterable, Functions.getToString());
-        Collection<String> actual2 = FJIterate.collect(iterable, Functions.getToString(), HashBag.<String>newBag(), 3, this.executor, false);
+        Collection<String> actual2 = FJIterate.collect(iterable, Functions.getToString(), HashBag.newBag(), 3, this.executor, false);
         Collection<String> actual3 = FJIterate.collect(iterable, Functions.getToString(), true);
         RichIterable<String> expected = iterable.collect(Functions.getToString());
         Verify.assertSize(200, actual1);
@@ -466,8 +466,8 @@ public class FJIterateTest
     {
         Predicate<Integer> greaterThan = Predicates.greaterThan(100);
         Collection<String> actual1 = FJIterate.collectIf(collection, greaterThan, Functions.getToString());
-        Collection<String> actual2 = FJIterate.collectIf(collection, greaterThan, Functions.getToString(), HashBag.<String>newBag(), 3, this.executor, true);
-        Collection<String> actual3 = FJIterate.collectIf(collection, greaterThan, Functions.getToString(), HashBag.<String>newBag(), 3, this.executor, true);
+        Collection<String> actual2 = FJIterate.collectIf(collection, greaterThan, Functions.getToString(), HashBag.newBag(), 3, this.executor, true);
+        Collection<String> actual3 = FJIterate.collectIf(collection, greaterThan, Functions.getToString(), HashBag.newBag(), 3, this.executor, true);
         Bag<String> expected = collection.collectIf(greaterThan, Functions.getToString()).toBag();
         Verify.assertSize(100, actual1);
         Verify.assertNotContains(String.valueOf(90), actual1);
@@ -486,12 +486,12 @@ public class FJIterateTest
         Multimap<String, Integer> expectedAsSet = iterable.toSet().groupBy(Functions.getToString());
         Multimap<String, Integer> result1 = FJIterate.groupBy(iterable.toList(), Functions.getToString(), 100);
         Multimap<String, Integer> result2 = FJIterate.groupBy(iterable.toList(), Functions.getToString());
-        Multimap<String, Integer> result3 = FJIterate.groupBy(iterable.toSet(), Functions.getToString(), SynchronizedPutUnifiedSetMultimap.<String, Integer>newMultimap(), 100);
-        Multimap<String, Integer> result4 = FJIterate.groupBy(iterable.toSet(), Functions.getToString(), SynchronizedPutUnifiedSetMultimap.<String, Integer>newMultimap());
-        Multimap<String, Integer> result5 = FJIterate.groupBy(iterable.toSortedSet(), Functions.getToString(), SynchronizedPutUnifiedSetMultimap.<String, Integer>newMultimap(), 100);
-        Multimap<String, Integer> result6 = FJIterate.groupBy(iterable.toSortedSet(), Functions.getToString(), SynchronizedPutUnifiedSetMultimap.<String, Integer>newMultimap());
-        Multimap<String, Integer> result7 = FJIterate.groupBy(iterable.toBag(), Functions.getToString(), SynchronizedPutHashBagMultimap.<String, Integer>newMultimap(), 100);
-        Multimap<String, Integer> result8 = FJIterate.groupBy(iterable.toBag(), Functions.getToString(), SynchronizedPutHashBagMultimap.<String, Integer>newMultimap());
+        Multimap<String, Integer> result3 = FJIterate.groupBy(iterable.toSet(), Functions.getToString(), SynchronizedPutUnifiedSetMultimap.newMultimap(), 100);
+        Multimap<String, Integer> result4 = FJIterate.groupBy(iterable.toSet(), Functions.getToString(), SynchronizedPutUnifiedSetMultimap.newMultimap());
+        Multimap<String, Integer> result5 = FJIterate.groupBy(iterable.toSortedSet(), Functions.getToString(), SynchronizedPutUnifiedSetMultimap.newMultimap(), 100);
+        Multimap<String, Integer> result6 = FJIterate.groupBy(iterable.toSortedSet(), Functions.getToString(), SynchronizedPutUnifiedSetMultimap.newMultimap());
+        Multimap<String, Integer> result7 = FJIterate.groupBy(iterable.toBag(), Functions.getToString(), SynchronizedPutHashBagMultimap.newMultimap(), 100);
+        Multimap<String, Integer> result8 = FJIterate.groupBy(iterable.toBag(), Functions.getToString(), SynchronizedPutHashBagMultimap.newMultimap());
         Multimap<String, Integer> result9 = FJIterate.groupBy(iterable.toList().toImmutable(), Functions.getToString());
         Assert.assertEquals(expected, HashBagMultimap.newMultimap(result1));
         Assert.assertEquals(expected, HashBagMultimap.newMultimap(result2));
@@ -615,10 +615,10 @@ public class FJIterateTest
     private void basicFlatCollect(RichIterable<Integer> iterable)
     {
         Collection<String> actual1 = FJIterate.flatCollect(iterable, INT_TO_TWO_STRINGS);
-        Collection<String> actual2 = FJIterate.flatCollect(iterable, INT_TO_TWO_STRINGS, HashBag.<String>newBag(), 3, this.executor, false);
+        Collection<String> actual2 = FJIterate.flatCollect(iterable, INT_TO_TWO_STRINGS, HashBag.newBag(), 3, this.executor, false);
         Collection<String> actual3 = FJIterate.flatCollect(iterable, INT_TO_TWO_STRINGS, true);
         RichIterable<String> expected1 = iterable.flatCollect(INT_TO_TWO_STRINGS);
-        RichIterable<String> expected2 = iterable.flatCollect(INT_TO_TWO_STRINGS, HashBag.<String>newBag());
+        RichIterable<String> expected2 = iterable.flatCollect(INT_TO_TWO_STRINGS, HashBag.newBag());
         Verify.assertContains(String.valueOf(200), actual1);
         Assert.assertEquals(expected1.getClass().getSimpleName() + '/' + actual1.getClass().getSimpleName(), expected1, actual1);
         Assert.assertEquals(expected2.getClass().getSimpleName() + '/' + actual2.getClass().getSimpleName(), expected2, actual2);

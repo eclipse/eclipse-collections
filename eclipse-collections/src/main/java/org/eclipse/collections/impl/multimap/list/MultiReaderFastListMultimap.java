@@ -117,21 +117,21 @@ public final class MultiReaderFastListMultimap<K, V>
 
     public FastListMultimap<K, V> selectKeysValues(Predicate2<? super K, ? super V> predicate)
     {
-        return this.selectKeysValues(predicate, FastListMultimap.<K, V>newMultimap());
+        return this.selectKeysValues(predicate, FastListMultimap.newMultimap());
     }
 
     public FastListMultimap<K, V> rejectKeysValues(Predicate2<? super K, ? super V> predicate)
     {
-        return this.rejectKeysValues(predicate, FastListMultimap.<K, V>newMultimap());
+        return this.rejectKeysValues(predicate, FastListMultimap.newMultimap());
     }
 
     public FastListMultimap<K, V> selectKeysMultiValues(Predicate2<? super K, ? super Iterable<V>> predicate)
     {
-        return this.selectKeysMultiValues(predicate, FastListMultimap.<K, V>newMultimap());
+        return this.selectKeysMultiValues(predicate, FastListMultimap.newMultimap());
     }
 
     public FastListMultimap<K, V> rejectKeysMultiValues(Predicate2<? super K, ? super Iterable<V>> predicate)
     {
-        return this.rejectKeysMultiValues(predicate, FastListMultimap.<K, V>newMultimap());
+        return this.rejectKeysMultiValues(predicate, FastListMultimap.newMultimap());
     }
 }

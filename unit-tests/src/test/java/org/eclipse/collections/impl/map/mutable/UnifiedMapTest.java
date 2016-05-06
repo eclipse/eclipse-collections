@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -151,7 +151,7 @@ public class UnifiedMapTest extends UnifiedMapTestCase
 
         Assert.assertEquals(
                 UnifiedMap.newMapWith(pair1, pair2, pair3, pair4),
-                UnifiedMap.newMapWith(UnifiedSet.<Pair<Integer, String>>newSetWith(pair1, pair2, pair3, pair4)));
+                UnifiedMap.newMapWith(UnifiedSet.newSetWith(pair1, pair2, pair3, pair4)));
     }
 
     @Test
@@ -549,7 +549,7 @@ public class UnifiedMapTest extends UnifiedMapTestCase
                 UnifiedMap.<Integer, Boolean>newMap().withKeysValues(null, true, 1, true, 2, false, 3, false),
                 nulls.collectValues((key, value) -> key == null || value == null));
 
-        UnifiedMap<Integer, Integer> empty = UnifiedMap.<Integer, Integer>newMap();
+        UnifiedMap<Integer, Integer> empty = UnifiedMap.newMap();
         Verify.assertEmpty(empty.collectValues((key, value) -> key + value));
     }
 

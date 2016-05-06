@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -27,7 +27,6 @@ import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MapIterable;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.primitive.ObjectDoubleMap;
-import org.eclipse.collections.api.map.primitive.ObjectLongMap;
 import org.eclipse.collections.api.multimap.Multimap;
 import org.eclipse.collections.api.multimap.MutableMultimap;
 import org.eclipse.collections.api.multimap.list.ListMultimap;
@@ -242,7 +241,7 @@ public abstract class StackIterableTestCase
                 stack.collect(function));
         Assert.assertEquals(3, function.count);
 
-        Assert.assertEquals(FastList.newListWith("true", "false", "null"), stack.collect(String::valueOf, FastList.<String>newList()));
+        Assert.assertEquals(FastList.newListWith("true", "false", "null"), stack.collect(String::valueOf, FastList.newList()));
     }
 
     @Test
@@ -400,7 +399,7 @@ public abstract class StackIterableTestCase
         CountingFunction<Object, String> function2 = CountingFunction.of(String::valueOf);
         Assert.assertEquals(
                 FastList.newListWith("1", "2"),
-                stack.collectIf(predicate2, function2, FastList.<String>newList()));
+                stack.collectIf(predicate2, function2, FastList.newList()));
         Assert.assertEquals(5, predicate2.count);
         Assert.assertEquals(2, function2.count);
     }
@@ -420,7 +419,7 @@ public abstract class StackIterableTestCase
         StackIterable<Integer> stack = this.newStackFromTopToBottom(3, 2, 1);
         Assert.assertEquals(
                 FastList.newListWith(4, 3, 2),
-                stack.collectWith(AddFunction.INTEGER, 1, FastList.<Integer>newList()));
+                stack.collectWith(AddFunction.INTEGER, 1, FastList.newList()));
     }
 
     @Test
@@ -445,7 +444,7 @@ public abstract class StackIterableTestCase
 
         Assert.assertEquals(
                 FastList.newListWith('1', 'O', 'n', 'e', '2', 'T', 'w', 'o'),
-                stack.flatCollect(function, FastList.<Character>newList()));
+                stack.flatCollect(function, FastList.newList()));
     }
 
     @Test
@@ -461,13 +460,13 @@ public abstract class StackIterableTestCase
                 stack.select(Predicates.greaterThan(1)));
         Assert.assertEquals(
                 FastList.newListWith(2, 3),
-                stack.select(Predicates.greaterThan(1), FastList.<Integer>newList()));
+                stack.select(Predicates.greaterThan(1), FastList.newList()));
     }
 
     @Test
     public void selectInstancesOf()
     {
-        StackIterable<Number> numbers = this.<Number>newStackFromTopToBottom(1, 2.0, 3, 4.0, 5);
+        StackIterable<Number> numbers = this.newStackFromTopToBottom(1, 2.0, 3, 4.0, 5);
         Assert.assertEquals(this.newStackFromTopToBottom(1, 3, 5), numbers.selectInstancesOf(Integer.class));
         Assert.assertEquals(this.<Number>newStackFromTopToBottom(1, 2.0, 3, 4.0, 5), numbers.selectInstancesOf(Number.class));
     }
@@ -477,7 +476,7 @@ public abstract class StackIterableTestCase
     {
         Assert.assertEquals(
                 ArrayStack.newStackFromTopToBottom(2, 1),
-                this.newStackFromTopToBottom(5, 4, 3, 2, 1).selectWith(Predicates2.<Integer>lessThan(), 3));
+                this.newStackFromTopToBottom(5, 4, 3, 2, 1).selectWith(Predicates2.lessThan(), 3));
     }
 
     @Test
@@ -485,7 +484,7 @@ public abstract class StackIterableTestCase
     {
         Assert.assertEquals(
                 UnifiedSet.newSetWith(2, 1),
-                this.newStackFromTopToBottom(5, 4, 3, 2, 1).selectWith(Predicates2.<Integer>lessThan(), 3, UnifiedSet.<Integer>newSet()));
+                this.newStackFromTopToBottom(5, 4, 3, 2, 1).selectWith(Predicates2.lessThan(), 3, UnifiedSet.newSet()));
     }
 
     @Test
@@ -499,7 +498,7 @@ public abstract class StackIterableTestCase
         Assert.assertEquals(3, predicate.count);
         Assert.assertEquals(
                 FastList.newListWith(2, 1),
-                stack.reject(Predicates.greaterThan(2), FastList.<Integer>newList()));
+                stack.reject(Predicates.greaterThan(2), FastList.newList()));
     }
 
     @Test
@@ -508,7 +507,7 @@ public abstract class StackIterableTestCase
         StackIterable<Integer> stack = this.newStackFromTopToBottom(3, 2, 1);
         Assert.assertEquals(
                 this.newStackFromTopToBottom(2, 1),
-                stack.rejectWith(Predicates2.<Integer>greaterThan(), 2));
+                stack.rejectWith(Predicates2.greaterThan(), 2));
     }
 
     @Test
@@ -516,7 +515,7 @@ public abstract class StackIterableTestCase
     {
         Assert.assertEquals(
                 UnifiedSet.newSetWith(5, 4, 3),
-                this.newStackFromTopToBottom(5, 4, 3, 2, 1).rejectWith(Predicates2.<Integer>lessThan(), 3, UnifiedSet.<Integer>newSet()));
+                this.newStackFromTopToBottom(5, 4, 3, 2, 1).rejectWith(Predicates2.lessThan(), 3, UnifiedSet.newSet()));
     }
 
     @Test
@@ -580,7 +579,7 @@ public abstract class StackIterableTestCase
     @Test
     public void partitionWith()
     {
-        PartitionStack<Integer> partition = this.newStackFromTopToBottom(1, 2, 3, 4, 5).partitionWith(Predicates2.<Integer>lessThan(), 3);
+        PartitionStack<Integer> partition = this.newStackFromTopToBottom(1, 2, 3, 4, 5).partitionWith(Predicates2.lessThan(), 3);
         Assert.assertEquals(this.newStackFromTopToBottom(1, 2), partition.getSelected());
         Assert.assertEquals(this.newStackFromTopToBottom(3, 4, 5), partition.getRejected());
     }
@@ -604,7 +603,7 @@ public abstract class StackIterableTestCase
 
         Assert.assertEquals(
                 expected.toSet(),
-                stack.zip(interval, UnifiedSet.<Pair<String, Integer>>newSet()));
+                stack.zip(interval, UnifiedSet.newSet()));
     }
 
     @Test
@@ -618,7 +617,7 @@ public abstract class StackIterableTestCase
                 Tuples.pair("2", 2),
                 Tuples.pair("1", 3));
         Assert.assertEquals(expected, stack.zipWithIndex());
-        Assert.assertEquals(expected.toSet(), stack.zipWithIndex(UnifiedSet.<Pair<String, Integer>>newSet()));
+        Assert.assertEquals(expected.toSet(), stack.zipWithIndex(UnifiedSet.newSet()));
     }
 
     @Test
@@ -819,7 +818,7 @@ public abstract class StackIterableTestCase
                 this.newStackFromTopToBottom(4, 3, 2, 1).max());
         Assert.assertEquals(
                 Integer.valueOf(1),
-                this.newStackFromTopToBottom(4, 3, 2, 1).max(Comparators.<Integer>reverseNaturalOrder()));
+                this.newStackFromTopToBottom(4, 3, 2, 1).max(Comparators.reverseNaturalOrder()));
     }
 
     @Test
@@ -838,7 +837,7 @@ public abstract class StackIterableTestCase
                 this.newStackWith(1, 2, 3, 4).min());
         Assert.assertEquals(
                 Integer.valueOf(4),
-                this.newStackWith(1, 2, 3, 4).min(Comparators.<Integer>reverseNaturalOrder()));
+                this.newStackWith(1, 2, 3, 4).min(Comparators.reverseNaturalOrder()));
     }
 
     @Test
@@ -893,7 +892,7 @@ public abstract class StackIterableTestCase
                 Tuples.pair(Boolean.FALSE, "2"),
                 Tuples.pair(Boolean.TRUE, "1"));
         Assert.assertEquals(expected, stack.groupBy(object -> IntegerPredicates.isOdd().accept(Integer.parseInt(object))));
-        Assert.assertEquals(expected, stack.groupBy(object -> IntegerPredicates.isOdd().accept(Integer.parseInt(object)), FastListMultimap.<Boolean, String>newMultimap()));
+        Assert.assertEquals(expected, stack.groupBy(object -> IntegerPredicates.isOdd().accept(Integer.parseInt(object)), FastListMultimap.newMultimap()));
     }
 
     @Test
@@ -909,7 +908,7 @@ public abstract class StackIterableTestCase
         Assert.assertEquals(expected, actual);
 
         Multimap<Integer, Integer> actualWithTarget =
-                stack.groupByEach(new NegativeIntervalFunction(), FastListMultimap.<Integer, Integer>newMultimap());
+                stack.groupByEach(new NegativeIntervalFunction(), FastListMultimap.newMultimap());
         Assert.assertEquals(expected, actualWithTarget);
     }
 
@@ -1009,7 +1008,7 @@ public abstract class StackIterableTestCase
                 this.newStackFromTopToBottom(4, 3, 1, 2).toSortedList());
         Assert.assertEquals(
                 Interval.fromTo(4, 1),
-                this.newStackFromTopToBottom(4, 3, 1, 2).toSortedList(Collections.<Integer>reverseOrder()));
+                this.newStackFromTopToBottom(4, 3, 1, 2).toSortedList(Collections.reverseOrder()));
     }
 
     @Test
@@ -1105,8 +1104,8 @@ public abstract class StackIterableTestCase
         Assert.assertEquals(UnifiedMap.newWithKeysValues(3, "3", 2, "2", 1, "1"),
                 this.newStackFromTopToBottom(3, 2, 1).toSortedMap(Functions.getIntegerPassThru(), String::valueOf));
 
-        Assert.assertEquals(TreeSortedMap.newMapWith(Comparators.<Integer>reverseNaturalOrder(), 3, "3", 2, "2", 1, "1"),
-                this.newStackFromTopToBottom(3, 2, 1).toSortedMap(Comparators.<Integer>reverseNaturalOrder(),
+        Assert.assertEquals(TreeSortedMap.newMapWith(Comparators.reverseNaturalOrder(), 3, "3", 2, "2", 1, "1"),
+                this.newStackFromTopToBottom(3, 2, 1).toSortedMap(Comparators.reverseNaturalOrder(),
                         Functions.getIntegerPassThru(), String::valueOf));
     }
 

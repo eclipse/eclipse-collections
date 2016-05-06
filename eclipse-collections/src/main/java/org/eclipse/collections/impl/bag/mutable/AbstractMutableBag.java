@@ -133,22 +133,22 @@ public abstract class AbstractMutableBag<T>
 
     public <V> MutableBag<V> collect(Function<? super T, ? extends V> function)
     {
-        return this.collect(function, HashBag.<V>newBag());
+        return this.collect(function, HashBag.newBag());
     }
 
     public <P, V> MutableBag<V> collectWith(Function2<? super T, ? super P, ? extends V> function, P parameter)
     {
-        return this.collectWith(function, parameter, HashBag.<V>newBag());
+        return this.collectWith(function, parameter, HashBag.newBag());
     }
 
     public <V> MutableBag<V> collectIf(Predicate<? super T> predicate, Function<? super T, ? extends V> function)
     {
-        return this.collectIf(predicate, function, HashBag.<V>newBag());
+        return this.collectIf(predicate, function, HashBag.newBag());
     }
 
     public <V> MutableBag<V> flatCollect(Function<? super T, ? extends Iterable<V>> function)
     {
-        return this.flatCollect(function, HashBag.<V>newBag());
+        return this.flatCollect(function, HashBag.newBag());
     }
 
     public MutableBooleanBag collectBoolean(BooleanFunction<? super T> booleanFunction)
@@ -197,7 +197,7 @@ public abstract class AbstractMutableBag<T>
     @Deprecated
     public <S> MutableBag<Pair<T, S>> zip(Iterable<S> that)
     {
-        return this.zip(that, HashBag.<Pair<T, S>>newBag());
+        return this.zip(that, HashBag.newBag());
     }
 
     /**
@@ -206,7 +206,7 @@ public abstract class AbstractMutableBag<T>
     @Deprecated
     public MutableSet<Pair<T, Integer>> zipWithIndex()
     {
-        return this.zipWithIndex(UnifiedSet.<Pair<T, Integer>>newSet());
+        return this.zipWithIndex(UnifiedSet.newSet());
     }
 
     @Beta

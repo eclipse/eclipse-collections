@@ -117,7 +117,7 @@ public final class RandomAccessListIterate
      */
     public static <T> MutableList<T> select(List<T> list, Predicate<? super T> predicate)
     {
-        return RandomAccessListIterate.select(list, predicate, FastList.<T>newList());
+        return RandomAccessListIterate.select(list, predicate, FastList.newList());
     }
 
     /**
@@ -128,7 +128,7 @@ public final class RandomAccessListIterate
             Predicate2<? super T, ? super IV> predicate,
             IV injectedValue)
     {
-        return RandomAccessListIterate.selectWith(list, predicate, injectedValue, FastList.<T>newList());
+        return RandomAccessListIterate.selectWith(list, predicate, injectedValue, FastList.newList());
     }
 
     /**
@@ -238,7 +238,7 @@ public final class RandomAccessListIterate
             Predicate<? super T> predicate,
             Function<? super T, ? extends A> function)
     {
-        return RandomAccessListIterate.collectIf(list, predicate, function, FastList.<A>newList());
+        return RandomAccessListIterate.collectIf(list, predicate, function, FastList.newList());
     }
 
     /**
@@ -267,7 +267,7 @@ public final class RandomAccessListIterate
      */
     public static <T> MutableList<T> reject(List<T> list, Predicate<? super T> predicate)
     {
-        return RandomAccessListIterate.reject(list, predicate, FastList.<T>newList());
+        return RandomAccessListIterate.reject(list, predicate, FastList.newList());
     }
 
     /**
@@ -278,7 +278,7 @@ public final class RandomAccessListIterate
             Predicate2<? super T, ? super IV> predicate,
             IV injectedValue)
     {
-        return RandomAccessListIterate.rejectWith(list, predicate, injectedValue, FastList.<T>newList());
+        return RandomAccessListIterate.rejectWith(list, predicate, injectedValue, FastList.newList());
     }
 
     /**
@@ -329,7 +329,7 @@ public final class RandomAccessListIterate
             List<T> list,
             Function<? super T, ? extends A> function)
     {
-        return RandomAccessListIterate.collect(list, function, FastList.<A>newList(list.size()));
+        return RandomAccessListIterate.collect(list, function, FastList.newList(list.size()));
     }
 
     /**
@@ -563,7 +563,7 @@ public final class RandomAccessListIterate
             List<T> list,
             Function<? super T, ? extends Iterable<A>> function)
     {
-        return RandomAccessListIterate.flatCollect(list, function, FastList.<A>newList(list.size()));
+        return RandomAccessListIterate.flatCollect(list, function, FastList.newList(list.size()));
     }
 
     /**
@@ -1218,7 +1218,7 @@ public final class RandomAccessListIterate
      */
     public static <T> MutableList<T> distinct(List<T> list)
     {
-        return RandomAccessListIterate.distinct(list, FastList.<T>newList());
+        return RandomAccessListIterate.distinct(list, FastList.newList());
     }
 
     /**
@@ -1249,7 +1249,7 @@ public final class RandomAccessListIterate
         {
             throw new IllegalArgumentException("Count must be greater than zero, but was: " + count);
         }
-        return RandomAccessListIterate.take(list, count, FastList.<T>newList(Math.min(list.size(), count)));
+        return RandomAccessListIterate.take(list, count, FastList.newList(Math.min(list.size(), count)));
     }
 
     /**
@@ -1278,7 +1278,7 @@ public final class RandomAccessListIterate
         {
             throw new IllegalArgumentException("Count must be greater than zero, but was: " + count);
         }
-        return RandomAccessListIterate.drop(list, count, FastList.<T>newList(list.size() - Math.min(list.size(), count)));
+        return RandomAccessListIterate.drop(list, count, FastList.newList(list.size() - Math.min(list.size(), count)));
     }
 
     /**
@@ -1340,7 +1340,7 @@ public final class RandomAccessListIterate
             List<T> list,
             Function<? super T, ? extends V> function)
     {
-        return RandomAccessListIterate.groupBy(list, function, FastListMultimap.<V, T>newMultimap());
+        return RandomAccessListIterate.groupBy(list, function, FastListMultimap.newMultimap());
     }
 
     /**
@@ -1364,7 +1364,7 @@ public final class RandomAccessListIterate
             List<T> list,
             Function<? super T, ? extends Iterable<V>> function)
     {
-        return RandomAccessListIterate.groupByEach(list, function, FastListMultimap.<V, T>newMultimap());
+        return RandomAccessListIterate.groupByEach(list, function, FastListMultimap.newMultimap());
     }
 
     public static <T, V, R extends MutableMultimap<V, T>> R groupByEach(
@@ -1389,7 +1389,7 @@ public final class RandomAccessListIterate
             List<T> list,
             Function<? super T, ? extends K> function)
     {
-        return RandomAccessListIterate.groupByUniqueKey(list, function, UnifiedMap.<K, T>newMap());
+        return RandomAccessListIterate.groupByUniqueKey(list, function, UnifiedMap.newMap());
     }
 
     public static <K, T, R extends MutableMap<K, T>> R groupByUniqueKey(
@@ -1540,7 +1540,7 @@ public final class RandomAccessListIterate
             List<X> list,
             Iterable<Y> iterable)
     {
-        return RandomAccessListIterate.zip(list, iterable, FastList.<Pair<X, Y>>newList());
+        return RandomAccessListIterate.zip(list, iterable, FastList.newList());
     }
 
     public static <X, Y, R extends Collection<Pair<X, Y>>> R zip(
@@ -1559,7 +1559,7 @@ public final class RandomAccessListIterate
 
     public static <T> MutableList<Pair<T, Integer>> zipWithIndex(List<T> list)
     {
-        return RandomAccessListIterate.zipWithIndex(list, FastList.<Pair<T, Integer>>newList());
+        return RandomAccessListIterate.zipWithIndex(list, FastList.newList());
     }
 
     public static <T, R extends Collection<Pair<T, Integer>>> R zipWithIndex(

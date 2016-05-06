@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -60,12 +60,12 @@ public class CollectionAdapterTest extends AbstractCollectionTestCase
 
     private <T> CollectionAdapter<T> newSet()
     {
-        return new CollectionAdapter<>(UnifiedSet.<T>newSet());
+        return new CollectionAdapter<>(UnifiedSet.newSet());
     }
 
     private <T> CollectionAdapter<T> newList()
     {
-        return new CollectionAdapter<>(FastList.<T>newList());
+        return new CollectionAdapter<>(FastList.newList());
     }
 
     @Test(expected = NullPointerException.class)
@@ -108,7 +108,7 @@ public class CollectionAdapterTest extends AbstractCollectionTestCase
         Verify.assertContainsAll(this.<Integer>newSet().with(1, 2, 3, 4, 5).select(Predicates.lessThan(3)), 1, 2);
         Verify.assertContainsAll(this.<Integer>newSet().with(-1, 2, 3, 4, 5).select(
                 Predicates.lessThan(3),
-                FastList.<Integer>newList()), -1, 2);
+                FastList.newList()), -1, 2);
     }
 
     @Override
@@ -124,7 +124,7 @@ public class CollectionAdapterTest extends AbstractCollectionTestCase
     {
         super.reject();
         Verify.assertContainsAll(this.<Integer>newSet().with(1, 2, 3, 4).reject(Predicates.lessThan(3)), 3, 4);
-        Verify.assertContainsAll(this.<Integer>newSet().with(1, 2, 3, 4).reject(Predicates.lessThan(3), FastList.<Integer>newList()), 3, 4);
+        Verify.assertContainsAll(this.<Integer>newSet().with(1, 2, 3, 4).reject(Predicates.lessThan(3), FastList.newList()), 3, 4);
     }
 
     @Override
@@ -151,7 +151,7 @@ public class CollectionAdapterTest extends AbstractCollectionTestCase
                 UnifiedSet.newSetWith("1", "2", "3", "4"),
                 this.newSet().with(1, 2, 3, 4).collect(
                         String::valueOf,
-                        UnifiedSet.<String>newSet()));
+                        UnifiedSet.newSet()));
     }
 
     @Override
@@ -219,7 +219,7 @@ public class CollectionAdapterTest extends AbstractCollectionTestCase
         Multimap<Boolean, Integer> multimap = list.groupBy(object -> IntegerPredicates.isOdd().accept(object));
 
         MutableMap<Boolean, RichIterable<Integer>> expected =
-                UnifiedMap.<Boolean, RichIterable<Integer>>newWithKeysValues(
+                UnifiedMap.newWithKeysValues(
                         Boolean.TRUE, FastList.newListWith(1, 3, 5, 7),
                         Boolean.FALSE, FastList.newListWith(2, 4, 6));
 

@@ -126,7 +126,7 @@ final class ImmutableSingletonBag<T>
 
     private ImmutableBag<T> emptyIfMatchesOrThis(Predicate<Object> predicate)
     {
-        return predicate.accept(this.value) ? Bags.immutable.<T>empty() : this;
+        return predicate.accept(this.value) ? Bags.immutable.empty() : this;
     }
 
     public ImmutableBag<T> newWithAll(Iterable<? extends T> elements)
@@ -189,14 +189,14 @@ final class ImmutableSingletonBag<T>
     {
         return predicate.accept(1)
                 ? this
-                : Bags.immutable.<T>empty();
+                : Bags.immutable.empty();
     }
 
     public ImmutableBag<T> select(Predicate<? super T> predicate)
     {
         return predicate.accept(this.value)
                 ? this
-                : Bags.immutable.<T>empty();
+                : Bags.immutable.empty();
     }
 
     @Override
@@ -225,7 +225,7 @@ final class ImmutableSingletonBag<T>
     public ImmutableBag<T> reject(Predicate<? super T> predicate)
     {
         return predicate.accept(this.value)
-                ? Bags.immutable.<T>empty()
+                ? Bags.immutable.empty()
                 : this;
     }
 
@@ -256,7 +256,7 @@ final class ImmutableSingletonBag<T>
     {
         return clazz.isInstance(this.value)
                 ? (ImmutableBag<S>) this
-                : Bags.immutable.<S>empty();
+                : Bags.immutable.empty();
     }
 
     public <V> ImmutableBag<V> collect(Function<? super T, ? extends V> function)
@@ -270,7 +270,7 @@ final class ImmutableSingletonBag<T>
     {
         return predicate.accept(this.value)
                 ? Bags.immutable.with(function.valueOf(this.value))
-                : Bags.immutable.<V>empty();
+                : Bags.immutable.empty();
     }
 
     @Override
@@ -286,7 +286,7 @@ final class ImmutableSingletonBag<T>
 
     public <V> ImmutableBag<V> flatCollect(Function<? super T, ? extends Iterable<V>> function)
     {
-        return this.flatCollect(function, HashBag.<V>newBag()).toImmutable();
+        return this.flatCollect(function, HashBag.newBag()).toImmutable();
     }
 
     @Override
@@ -341,7 +341,7 @@ final class ImmutableSingletonBag<T>
 
     public <V> ImmutableBagMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function)
     {
-        return this.groupByEach(function, HashBagMultimap.<V, T>newMultimap()).toImmutable();
+        return this.groupByEach(function, HashBagMultimap.newMultimap()).toImmutable();
     }
 
     @Override

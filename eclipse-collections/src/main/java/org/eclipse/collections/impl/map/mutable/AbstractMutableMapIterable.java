@@ -105,7 +105,7 @@ public abstract class AbstractMutableMapIterable<K, V> extends AbstractMapIterab
 
     public <VV> MutableMapIterable<VV, V> groupByUniqueKey(Function<? super V, ? extends VV> function)
     {
-        return this.groupByUniqueKey(function, UnifiedMap.<VV, V>newMap());
+        return this.groupByUniqueKey(function, UnifiedMap.newMap());
     }
 
     public <K2, V2> MutableMap<K2, V2> aggregateInPlaceBy(
@@ -140,12 +140,12 @@ public abstract class AbstractMutableMapIterable<K, V> extends AbstractMapIterab
 
     public RichIterable<Pair<K, V>> keyValuesView()
     {
-        return LazyIterate.adapt(this.entrySet()).collect(AbstractImmutableEntry.<K, V>getPairFunction());
+        return LazyIterate.adapt(this.entrySet()).collect(AbstractImmutableEntry.getPairFunction());
     }
 
     public <K2, V2> MutableMap<K2, V2> collect(Function2<? super K, ? super V, Pair<K2, V2>> function)
     {
-        return MapIterate.collect(this, function, UnifiedMap.<K2, V2>newMap(this.size()));
+        return MapIterate.collect(this, function, UnifiedMap.newMap(this.size()));
     }
 
     public MutableMap<V, K> flipUniqueValues()

@@ -301,7 +301,7 @@ public final class SortedSetAdapter<T>
     @Override
     public <V> MutableList<V> collect(Function<? super T, ? extends V> function)
     {
-        return Iterate.collect(this.delegate, function, FastList.<V>newList());
+        return Iterate.collect(this.delegate, function, FastList.newList());
     }
 
     @Override
@@ -373,13 +373,13 @@ public final class SortedSetAdapter<T>
             Predicate<? super T> predicate,
             Function<? super T, ? extends V> function)
     {
-        return Iterate.collectIf(this.delegate, predicate, function, FastList.<V>newList());
+        return Iterate.collectIf(this.delegate, predicate, function, FastList.newList());
     }
 
     @Override
     public <V> MutableList<V> flatCollect(Function<? super T, ? extends Iterable<V>> function)
     {
-        return Iterate.flatCollect(this.delegate, function, FastList.<V>newList());
+        return Iterate.flatCollect(this.delegate, function, FastList.newList());
     }
 
     public int detectIndex(Predicate<? super T> predicate)
@@ -390,13 +390,13 @@ public final class SortedSetAdapter<T>
     @Override
     public <V> TreeSortedSetMultimap<V, T> groupBy(Function<? super T, ? extends V> function)
     {
-        return Iterate.groupBy(this.delegate, function, TreeSortedSetMultimap.<V, T>newMultimap(this.comparator()));
+        return Iterate.groupBy(this.delegate, function, TreeSortedSetMultimap.newMultimap(this.comparator()));
     }
 
     @Override
     public <V> TreeSortedSetMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function)
     {
-        return Iterate.groupByEach(this.delegate, function, TreeSortedSetMultimap.<V, T>newMultimap(this.comparator()));
+        return Iterate.groupByEach(this.delegate, function, TreeSortedSetMultimap.newMultimap(this.comparator()));
     }
 
     @Override
@@ -414,13 +414,13 @@ public final class SortedSetAdapter<T>
     @Override
     public <P, V> MutableList<V> collectWith(Function2<? super T, ? super P, ? extends V> function, P parameter)
     {
-        return Iterate.collectWith(this.delegate, function, parameter, FastList.<V>newList());
+        return Iterate.collectWith(this.delegate, function, parameter, FastList.newList());
     }
 
     @Override
     public <S> MutableList<Pair<T, S>> zip(Iterable<S> that)
     {
-        return Iterate.zip(this.delegate, that, FastList.<Pair<T, S>>newList());
+        return Iterate.zip(this.delegate, that, FastList.newList());
     }
 
     @Override
@@ -429,10 +429,10 @@ public final class SortedSetAdapter<T>
         Comparator<? super T> comparator = this.comparator();
         if (comparator == null)
         {
-            TreeSortedSet<Pair<T, Integer>> pairs = TreeSortedSet.newSet(Comparators.<Pair<T, Integer>, T>byFunction(Functions.<T>firstOfPair(), Comparators.<T>naturalOrder()));
+            TreeSortedSet<Pair<T, Integer>> pairs = TreeSortedSet.newSet(Comparators.byFunction(Functions.firstOfPair(), Comparators.naturalOrder()));
             return Iterate.zipWithIndex(this.delegate, pairs);
         }
-        return Iterate.zipWithIndex(this.delegate, TreeSortedSet.<Pair<T, Integer>>newSet(Comparators.byFirstOfPair(comparator)));
+        return Iterate.zipWithIndex(this.delegate, TreeSortedSet.newSet(Comparators.byFirstOfPair(comparator)));
     }
 
     public MutableSortedSet<T> distinct()

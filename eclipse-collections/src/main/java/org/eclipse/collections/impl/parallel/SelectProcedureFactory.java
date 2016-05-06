@@ -27,6 +27,6 @@ public final class SelectProcedureFactory<T> implements ProcedureFactory<SelectP
 
     public SelectProcedure<T> create()
     {
-        return new SelectProcedure<>(this.predicate, FastList.<T>newList(this.collectionSize));
+        return new SelectProcedure<>(this.predicate, FastList.newList(this.collectionSize));
     }
 }

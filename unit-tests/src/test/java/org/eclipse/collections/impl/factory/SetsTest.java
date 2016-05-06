@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -107,7 +107,7 @@ public class SetsTest
     public void unionUnique()
     {
         this.assertUnionProperties(
-                this.<String>containsExactlyProcedure(),
+                this.containsExactlyProcedure(),
                 Verify::assertSetsEqual,
                 this.uniqueSets.get(0),
                 this.uniqueSets.get(1),
@@ -118,7 +118,7 @@ public class SetsTest
     @Test
     public void unionUniqueSorted()
     {
-        this.assertUnionProperties(this.<String>containsExactlyInOrderProcedure(),
+        this.assertUnionProperties(this.containsExactlyInOrderProcedure(),
                 this::assertSetsEqualAndSorted,
                 this.uniqueSortedSets.get(0),
                 this.uniqueSortedSets.get(1),
@@ -137,7 +137,7 @@ public class SetsTest
     @Test
     public void unionOverlapping()
     {
-        this.assertUnionProperties(this.<String>containsExactlyProcedure(),
+        this.assertUnionProperties(this.containsExactlyProcedure(),
                 Verify::assertSetsEqual,
                 this.overlappingSets.get(0),
                 this.overlappingSets.get(1),
@@ -148,7 +148,7 @@ public class SetsTest
     @Test
     public void unionOverlappingSorted()
     {
-        this.assertUnionProperties(this.<String>containsExactlyInOrderProcedure(),
+        this.assertUnionProperties(this.containsExactlyInOrderProcedure(),
                 this::assertSetsEqualAndSorted,
                 this.overlappingSortedSets.get(0),
                 this.overlappingSortedSets.get(1),
@@ -167,7 +167,7 @@ public class SetsTest
     @Test
     public void unionIdentical()
     {
-        this.assertUnionProperties(this.<String>containsExactlyProcedure(),
+        this.assertUnionProperties(this.containsExactlyProcedure(),
                 Verify::assertSetsEqual,
                 this.identicalSets.get(0),
                 this.identicalSets.get(1),
@@ -178,7 +178,7 @@ public class SetsTest
     @Test
     public void unionIdenticalSorted()
     {
-        this.assertUnionProperties(this.<String>containsExactlyInOrderProcedure(),
+        this.assertUnionProperties(this.containsExactlyInOrderProcedure(),
                 this::assertSetsEqualAndSorted,
                 this.identicalSortedSets.get(0),
                 this.identicalSortedSets.get(1),
@@ -218,7 +218,7 @@ public class SetsTest
     @Test
     public void intersectUnique()
     {
-        this.assertIntersectionProperties(this.<String>containsExactlyProcedure(),
+        this.assertIntersectionProperties(this.containsExactlyProcedure(),
                 Verify::assertSetsEqual,
                 this.uniqueSets.get(0),
                 this.uniqueSets.get(1),
@@ -228,13 +228,13 @@ public class SetsTest
     @Test
     public void intersectUniqueSorted()
     {
-        this.assertIntersectionProperties(this.<String>containsExactlyInOrderProcedure(),
+        this.assertIntersectionProperties(this.containsExactlyInOrderProcedure(),
                 this::assertSetsEqualAndSorted,
                 this.uniqueSortedSets.get(0),
                 this.uniqueSortedSets.get(1),
                 this.uniqueSortedSets.get(2));
 
-        this.assertIntersectionProperties(this.<String>containsExactlyInOrderProcedure(),
+        this.assertIntersectionProperties(this.containsExactlyInOrderProcedure(),
                 this::assertSetsEqualAndSorted,
                 this.uniqueReverseSortedSets.get(0),
                 this.uniqueReverseSortedSets.get(1),
@@ -244,7 +244,7 @@ public class SetsTest
     @Test
     public void intersectOverlapping()
     {
-        this.assertIntersectionProperties(this.<String>containsExactlyProcedure(),
+        this.assertIntersectionProperties(this.containsExactlyProcedure(),
                 Verify::assertSetsEqual,
                 this.overlappingSets.get(0),
                 this.overlappingSets.get(1),
@@ -255,14 +255,14 @@ public class SetsTest
     @Test
     public void intersectOverlappingSorted()
     {
-        this.assertIntersectionProperties(this.<String>containsExactlyInOrderProcedure(),
+        this.assertIntersectionProperties(this.containsExactlyInOrderProcedure(),
                 this::assertSetsEqualAndSorted,
                 this.overlappingSortedSets.get(0),
                 this.overlappingSortedSets.get(1),
                 this.overlappingSortedSets.get(2),
                 "Dick");
 
-        this.assertIntersectionProperties(this.<String>containsExactlyInOrderProcedure(),
+        this.assertIntersectionProperties(this.containsExactlyInOrderProcedure(),
                 this::assertSetsEqualAndSorted,
                 this.overlappingReverseSortedSets.get(0),
                 this.overlappingReverseSortedSets.get(1),
@@ -273,7 +273,7 @@ public class SetsTest
     @Test
     public void intersectIdentical()
     {
-        this.assertIntersectionProperties(this.<String>containsExactlyProcedure(),
+        this.assertIntersectionProperties(this.containsExactlyProcedure(),
                 Verify::assertSetsEqual,
                 this.identicalSets.get(0),
                 this.identicalSets.get(1),
@@ -284,14 +284,14 @@ public class SetsTest
     @Test
     public void intersectIdenticalSorted()
     {
-        this.assertIntersectionProperties(this.<String>containsExactlyInOrderProcedure(),
+        this.assertIntersectionProperties(this.containsExactlyInOrderProcedure(),
                 this::assertSetsEqualAndSorted,
                 this.identicalSortedSets.get(0),
                 this.identicalSortedSets.get(1),
                 this.identicalSortedSets.get(2),
                 "Dick", "Harry", "Tom");
 
-        this.assertIntersectionProperties(this.<String>containsExactlyInOrderProcedure(),
+        this.assertIntersectionProperties(this.containsExactlyInOrderProcedure(),
                 this::assertSetsEqualAndSorted,
                 this.identicalReverseSortedSets.get(0),
                 this.identicalReverseSortedSets.get(1),
@@ -323,7 +323,7 @@ public class SetsTest
     @Test
     public void differenceUnique()
     {
-        this.assertForwardAndBackward(this.<String>containsExactlyProcedure(),
+        this.assertForwardAndBackward(this.containsExactlyProcedure(),
                 Sets::difference,
                 this.uniqueSets.get(0),
                 this.uniqueSets.get(1),
@@ -334,7 +334,7 @@ public class SetsTest
     @Test
     public void differenceUniqueSorted()
     {
-        this.assertForwardAndBackward(this.<String>containsExactlyInOrderProcedure(),
+        this.assertForwardAndBackward(this.containsExactlyInOrderProcedure(),
                 Sets::difference,
                 this.uniqueSortedSets.get(0),
                 this.uniqueSortedSets.get(1),
@@ -345,7 +345,7 @@ public class SetsTest
     @Test
     public void differenceOverlapping()
     {
-        this.assertForwardAndBackward(this.<String>containsExactlyProcedure(),
+        this.assertForwardAndBackward(this.containsExactlyProcedure(),
                 Sets::difference,
                 this.overlappingSets.get(0),
                 this.overlappingSets.get(1),
@@ -356,7 +356,7 @@ public class SetsTest
     @Test
     public void differenceOverlappingSorted()
     {
-        this.assertForwardAndBackward(this.<String>containsExactlyInOrderProcedure(),
+        this.assertForwardAndBackward(this.containsExactlyInOrderProcedure(),
                 Sets::difference,
                 this.overlappingSortedSets.get(0),
                 this.overlappingSortedSets.get(1),
@@ -367,7 +367,7 @@ public class SetsTest
     @Test
     public void differenceIdentical()
     {
-        this.assertForwardAndBackward(this.<String>containsExactlyProcedure(),
+        this.assertForwardAndBackward(this.containsExactlyProcedure(),
                 Sets::difference,
                 this.identicalSets.get(0),
                 this.identicalSets.get(1),
@@ -378,7 +378,7 @@ public class SetsTest
     @Test
     public void differenceIdenticalSorted()
     {
-        this.assertForwardAndBackward(this.<String>containsExactlyInOrderProcedure(),
+        this.assertForwardAndBackward(this.containsExactlyInOrderProcedure(),
                 Sets::difference,
                 this.identicalSortedSets.get(0),
                 this.identicalSortedSets.get(1),
@@ -419,7 +419,7 @@ public class SetsTest
     @Test
     public void symmetricDifferenceUnique()
     {
-        this.assertForwardAndBackward(this.<String>containsExactlyProcedure(),
+        this.assertForwardAndBackward(this.containsExactlyProcedure(),
                 Sets::symmetricDifference,
                 this.uniqueSets.get(0),
                 this.uniqueSets.get(1),
@@ -430,7 +430,7 @@ public class SetsTest
     @Test
     public void symmetricDifferenceUniqueSorted()
     {
-        this.assertForwardAndBackward(this.<String>containsExactlyInOrderProcedure(),
+        this.assertForwardAndBackward(this.containsExactlyInOrderProcedure(),
                 Sets::symmetricDifference,
                 this.uniqueSortedSets.get(0),
                 this.uniqueSortedSets.get(1),
@@ -441,7 +441,7 @@ public class SetsTest
     @Test
     public void symmetricDifferenceOverlapping()
     {
-        this.assertForwardAndBackward(this.<String>containsExactlyProcedure(),
+        this.assertForwardAndBackward(this.containsExactlyProcedure(),
                 Sets::symmetricDifference,
                 this.overlappingSets.get(0),
                 this.overlappingSets.get(1),
@@ -452,7 +452,7 @@ public class SetsTest
     @Test
     public void symmetricDifferenceOverlappingSorted()
     {
-        this.assertForwardAndBackward(this.<String>containsExactlyInOrderProcedure(),
+        this.assertForwardAndBackward(this.containsExactlyInOrderProcedure(),
                 Sets::symmetricDifference,
                 this.overlappingSortedSets.get(0),
                 this.overlappingSortedSets.get(1),
@@ -463,7 +463,7 @@ public class SetsTest
     @Test
     public void symmetricDifferenceIdentical()
     {
-        this.assertForwardAndBackward(this.<String>containsExactlyProcedure(),
+        this.assertForwardAndBackward(this.containsExactlyProcedure(),
                 Sets::symmetricDifference,
                 this.identicalSets.get(0),
                 this.identicalSets.get(1),
@@ -474,7 +474,7 @@ public class SetsTest
     @Test
     public void symmetricDifferenceIdenticalSorted()
     {
-        this.assertForwardAndBackward(this.<String>containsExactlyInOrderProcedure(),
+        this.assertForwardAndBackward(this.containsExactlyInOrderProcedure(),
                 Sets::symmetricDifference,
                 this.identicalSortedSets.get(0),
                 this.identicalSortedSets.get(1),
@@ -726,8 +726,8 @@ public class SetsTest
     public void powerSet()
     {
         MutableSet<Integer> set = UnifiedSet.newSetWith(1, 2, 3);
-        MutableSet<MutableSet<Integer>> expectedPowerSet = UnifiedSet.<MutableSet<Integer>>newSetWith(
-                UnifiedSet.<Integer>newSet(),
+        MutableSet<MutableSet<Integer>> expectedPowerSet = UnifiedSet.newSetWith(
+                UnifiedSet.newSet(),
                 UnifiedSet.newSetWith(1),
                 UnifiedSet.newSetWith(2),
                 UnifiedSet.newSetWith(3),

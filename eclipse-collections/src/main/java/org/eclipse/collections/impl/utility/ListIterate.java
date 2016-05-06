@@ -166,7 +166,7 @@ public final class ListIterate
      */
     public static <T> MutableList<T> select(List<T> list, Predicate<? super T> predicate)
     {
-        return ListIterate.select(list, predicate, FastList.<T>newList());
+        return ListIterate.select(list, predicate, FastList.newList());
     }
 
     /**
@@ -177,7 +177,7 @@ public final class ListIterate
             Predicate2<? super T, ? super IV> predicate,
             IV injectedValue)
     {
-        return ListIterate.selectWith(list, predicate, injectedValue, FastList.<T>newList());
+        return ListIterate.selectWith(list, predicate, injectedValue, FastList.newList());
     }
 
     /**
@@ -260,7 +260,7 @@ public final class ListIterate
             Predicate<? super T> predicate,
             Function<? super T, ? extends A> function)
     {
-        return ListIterate.collectIf(list, predicate, function, FastList.<A>newList());
+        return ListIterate.collectIf(list, predicate, function, FastList.newList());
     }
 
     /**
@@ -284,7 +284,7 @@ public final class ListIterate
      */
     public static <T> MutableList<T> reject(List<T> list, Predicate<? super T> predicate)
     {
-        return ListIterate.reject(list, predicate, FastList.<T>newList());
+        return ListIterate.reject(list, predicate, FastList.newList());
     }
 
     /**
@@ -295,7 +295,7 @@ public final class ListIterate
             Predicate2<? super T, ? super IV> predicate,
             IV injectedValue)
     {
-        return ListIterate.rejectWith(list, predicate, injectedValue, FastList.<T>newList());
+        return ListIterate.rejectWith(list, predicate, injectedValue, FastList.newList());
     }
 
     /**
@@ -336,7 +336,7 @@ public final class ListIterate
             List<T> list,
             Function<? super T, ? extends A> function)
     {
-        return ListIterate.collect(list, function, FastList.<A>newList(list.size()));
+        return ListIterate.collect(list, function, FastList.newList(list.size()));
     }
 
     /**
@@ -593,7 +593,7 @@ public final class ListIterate
             List<T> list,
             Function<? super T, ? extends Iterable<A>> function)
     {
-        return ListIterate.flatCollect(list, function, FastList.<A>newList(list.size()));
+        return ListIterate.flatCollect(list, function, FastList.newList(list.size()));
     }
 
     /**
@@ -1285,7 +1285,7 @@ public final class ListIterate
             Function2<? super T, ? super P, ? extends A> function,
             P parameter)
     {
-        return ListIterate.collectWith(list, function, parameter, FastList.<A>newList(list.size()));
+        return ListIterate.collectWith(list, function, parameter, FastList.newList(list.size()));
     }
 
     /**
@@ -1322,7 +1322,7 @@ public final class ListIterate
      */
     public static <T> MutableList<T> distinct(List<T> list)
     {
-        return ListIterate.distinct(list, FastList.<T>newList());
+        return ListIterate.distinct(list, FastList.newList());
     }
 
     /**
@@ -1363,9 +1363,9 @@ public final class ListIterate
         }
         if (list instanceof RandomAccess)
         {
-            return RandomAccessListIterate.take(list, count, FastList.<T>newList(Math.min(list.size(), count)));
+            return RandomAccessListIterate.take(list, count, FastList.newList(Math.min(list.size(), count)));
         }
-        return ListIterate.take(list, count, FastList.<T>newList());
+        return ListIterate.take(list, count, FastList.newList());
     }
 
     /**
@@ -1395,9 +1395,9 @@ public final class ListIterate
         }
         if (list instanceof RandomAccess)
         {
-            return RandomAccessListIterate.drop(list, count, FastList.<T>newList(list.size() - Math.min(list.size(), count)));
+            return RandomAccessListIterate.drop(list, count, FastList.newList(list.size() - Math.min(list.size(), count)));
         }
-        return ListIterate.drop(list, count, FastList.<T>newList());
+        return ListIterate.drop(list, count, FastList.newList());
     }
 
     /**
@@ -1443,7 +1443,7 @@ public final class ListIterate
             List<T> list,
             Function<? super T, ? extends V> function)
     {
-        return ListIterate.groupBy(list, function, FastListMultimap.<V, T>newMultimap());
+        return ListIterate.groupBy(list, function, FastListMultimap.newMultimap());
     }
 
     /**
@@ -1468,7 +1468,7 @@ public final class ListIterate
             List<T> list,
             Function<? super T, ? extends Iterable<V>> function)
     {
-        return ListIterate.groupByEach(list, function, FastListMultimap.<V, T>newMultimap());
+        return ListIterate.groupByEach(list, function, FastListMultimap.newMultimap());
     }
 
     /**
@@ -1612,7 +1612,7 @@ public final class ListIterate
             List<X> list,
             Iterable<Y> iterable)
     {
-        return ListIterate.zip(list, iterable, FastList.<Pair<X, Y>>newList());
+        return ListIterate.zip(list, iterable, FastList.newList());
     }
 
     /**
@@ -1635,7 +1635,7 @@ public final class ListIterate
      */
     public static <T> MutableList<Pair<T, Integer>> zipWithIndex(List<T> list)
     {
-        return ListIterate.zipWithIndex(list, FastList.<Pair<T, Integer>>newList(list.size()));
+        return ListIterate.zipWithIndex(list, FastList.newList(list.size()));
     }
 
     /**

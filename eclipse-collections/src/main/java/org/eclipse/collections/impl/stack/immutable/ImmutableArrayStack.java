@@ -60,8 +60,6 @@ import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.primitive.ImmutableObjectDoubleMap;
 import org.eclipse.collections.api.map.primitive.ImmutableObjectLongMap;
-import org.eclipse.collections.api.map.primitive.MutableObjectDoubleMap;
-import org.eclipse.collections.api.map.primitive.MutableObjectLongMap;
 import org.eclipse.collections.api.map.sorted.MutableSortedMap;
 import org.eclipse.collections.api.multimap.MutableMultimap;
 import org.eclipse.collections.api.multimap.list.ImmutableListMultimap;
@@ -124,7 +122,7 @@ final class ImmutableArrayStack<T> implements ImmutableStack<T>, Serializable
 
     public static <T> ImmutableStack<T> newStack()
     {
-        return new ImmutableArrayStack<>(FastList.<T>newList());
+        return new ImmutableArrayStack<>(FastList.newList());
     }
 
     public static <E> ImmutableArrayStack<E> newStack(Iterable<? extends E> iterable)
@@ -749,7 +747,7 @@ final class ImmutableArrayStack<T> implements ImmutableStack<T>, Serializable
 
     public <V> ImmutableListMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function)
     {
-        return this.groupByEach(function, FastListMultimap.<V, T>newMultimap()).toImmutable();
+        return this.groupByEach(function, FastListMultimap.newMultimap()).toImmutable();
     }
 
     public <V, R extends MutableMultimap<V, T>> R groupByEach(Function<? super T, ? extends Iterable<V>> function, R target)

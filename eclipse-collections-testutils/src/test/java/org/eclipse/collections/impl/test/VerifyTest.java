@@ -28,7 +28,6 @@ import org.eclipse.collections.api.multimap.set.SetMultimap;
 import org.eclipse.collections.api.multimap.sortedbag.ImmutableSortedBagMultimap;
 import org.eclipse.collections.api.multimap.sortedbag.MutableSortedBagMultimap;
 import org.eclipse.collections.api.multimap.sortedbag.SortedBagMultimap;
-import org.eclipse.collections.api.multimap.sortedset.ImmutableSortedSetMultimap;
 import org.eclipse.collections.api.multimap.sortedset.MutableSortedSetMultimap;
 import org.eclipse.collections.api.multimap.sortedset.SortedSetMultimap;
 import org.eclipse.collections.impl.bag.mutable.HashBag;
@@ -214,7 +213,7 @@ public class VerifyTest
         ListMultimap<Integer, String> nullMultimap = null;
         Verify.assertListMultimapsEqual(null, nullMultimap);
         ListMultimap<Integer, String> emptyMultimap = FastListMultimap.newMultimap();
-        Verify.assertListMultimapsEqual(FastListMultimap.<Integer, String>newMultimap(), emptyMultimap);
+        Verify.assertListMultimapsEqual(FastListMultimap.newMultimap(), emptyMultimap);
         final ListMultimap<Integer, String> multimap1 = FastListMultimap.newMultimap(Tuples.pair(1, "One"), Tuples.pair(2, "Two"), Tuples.pair(2, "TwoTwo"));
         MutableListMultimap<Integer, String> multimap2 = FastListMultimap.newMultimap(Tuples.pair(2, "Two"), Tuples.pair(1, "One"), Tuples.pair(2, "TwoTwo"));
         Verify.assertListMultimapsEqual(multimap1, multimap2);
@@ -243,7 +242,7 @@ public class VerifyTest
         SetMultimap<Integer, String> nullMultimap = null;
         Verify.assertSetMultimapsEqual(null, nullMultimap);
         SetMultimap<Integer, String> emptyMultimap = UnifiedSetMultimap.newMultimap();
-        Verify.assertSetMultimapsEqual(UnifiedSetMultimap.<Integer, String>newMultimap(), emptyMultimap);
+        Verify.assertSetMultimapsEqual(UnifiedSetMultimap.newMultimap(), emptyMultimap);
         final SetMultimap<Integer, String> multimap1 = UnifiedSetMultimap.newMultimap(Tuples.pair(1, "One"), Tuples.pair(2, "Two"), Tuples.pair(2, "TwoTwo"));
         MutableSetMultimap<Integer, String> multimap2 = UnifiedSetMultimap.newMultimap(Tuples.pair(2, "Two"), Tuples.pair(1, "One"), Tuples.pair(2, "TwoTwo"));
         Verify.assertSetMultimapsEqual(multimap1, multimap2);
@@ -270,7 +269,7 @@ public class VerifyTest
         BagMultimap<Integer, String> nullMultimap = null;
         Verify.assertBagMultimapsEqual(null, nullMultimap);
         BagMultimap<Integer, String> emptyMultimap = HashBagMultimap.newMultimap();
-        Verify.assertBagMultimapsEqual(HashBagMultimap.<Integer, String>newMultimap(), emptyMultimap);
+        Verify.assertBagMultimapsEqual(HashBagMultimap.newMultimap(), emptyMultimap);
         final BagMultimap<Integer, String> multimap1 = HashBagMultimap.newMultimap(Tuples.pair(1, "One"), Tuples.pair(2, "Two"), Tuples.pair(2, "TwoTwo"));
         MutableBagMultimap<Integer, String> multimap2 = HashBagMultimap.newMultimap(Tuples.pair(2, "Two"), Tuples.pair(1, "One"), Tuples.pair(2, "TwoTwo"));
         Verify.assertBagMultimapsEqual(multimap1, multimap2);
@@ -301,7 +300,7 @@ public class VerifyTest
         SortedSetMultimap<Integer, Integer> nullMultimap = null;
         Verify.assertSortedSetMultimapsEqual(null, nullMultimap);
         SortedSetMultimap<Integer, Integer> emptyMultimap = TreeSortedSetMultimap.newMultimap();
-        Verify.assertSortedSetMultimapsEqual(TreeSortedSetMultimap.<Integer, Integer>newMultimap(), emptyMultimap);
+        Verify.assertSortedSetMultimapsEqual(TreeSortedSetMultimap.newMultimap(), emptyMultimap);
         final SortedSetMultimap<Integer, Integer> multimap1 = TreeSortedSetMultimap.newMultimap(Tuples.pair(1, 1), Tuples.pair(2, 1), Tuples.pair(2, 2));
         SortedSetMultimap<Integer, Integer> multimap2 = TreeSortedSetMultimap.newMultimap(Tuples.pair(2, 1), Tuples.pair(1, 1), Tuples.pair(2, 2));
         Verify.assertSortedSetMultimapsEqual(multimap1, multimap2);
@@ -336,7 +335,7 @@ public class VerifyTest
         SortedBagMultimap<Integer, Integer> nullMultimap = null;
         Verify.assertSortedBagMultimapsEqual(null, nullMultimap);
         SortedBagMultimap<Integer, Integer> blankMultimap = TreeBagMultimap.newMultimap();
-        Verify.assertSortedBagMultimapsEqual(TreeBagMultimap.<Integer, Integer>newMultimap(), blankMultimap);
+        Verify.assertSortedBagMultimapsEqual(TreeBagMultimap.newMultimap(), blankMultimap);
         final SortedBagMultimap<Integer, Integer> multimap1 = TreeBagMultimap.newMultimap(Tuples.pair(1, 1), Tuples.pair(2, 1), Tuples.pair(2, 2));
         MutableSortedBagMultimap<Integer, Integer> multimap2 = TreeBagMultimap.newMultimap(Tuples.pair(2, 1), Tuples.pair(1, 1), Tuples.pair(2, 2));
         Verify.assertSortedBagMultimapsEqual(multimap1, multimap2);
@@ -630,7 +629,7 @@ public class VerifyTest
     @Test
     public void assertSortedSetsEqual()
     {
-        TreeSortedSet<Integer> integers = TreeSortedSet.newSetWith(Comparators.<Integer>reverseNaturalOrder(), 1, 2, 3, 4);
+        TreeSortedSet<Integer> integers = TreeSortedSet.newSetWith(Comparators.reverseNaturalOrder(), 1, 2, 3, 4);
         Verify.assertSortedSetsEqual(null, null);
         Verify.assertSortedSetsEqual(TreeSortedSet.newSet(), new TreeSet<>());
         Verify.assertSortedSetsEqual(TreeSortedSet.newSetWith(1, 2, 3), new TreeSet<>(FastList.newListWith(1, 2, 3)));
@@ -659,7 +658,7 @@ public class VerifyTest
 
         try
         {
-            Verify.assertSortedSetsEqual(TreeSortedSet.newSetWith(Comparators.<Integer>reverseNaturalOrder(), 1, 2, 3, 4, 5), integers);
+            Verify.assertSortedSetsEqual(TreeSortedSet.newSetWith(Comparators.reverseNaturalOrder(), 1, 2, 3, 4, 5), integers);
             Assert.fail();
         }
         catch (AssertionError e)
@@ -669,7 +668,7 @@ public class VerifyTest
 
         try
         {
-            Verify.assertSortedSetsEqual(TreeSortedSet.newSetWith(Comparators.<Integer>reverseNaturalOrder(), 3, 4), integers);
+            Verify.assertSortedSetsEqual(TreeSortedSet.newSetWith(Comparators.reverseNaturalOrder(), 3, 4), integers);
             Assert.fail();
         }
         catch (AssertionError e)

@@ -201,7 +201,7 @@ public final class CompositeFastList<E>
     {
         if (this.lists.isEmpty())
         {
-            this.addComposited(FastList.<E>newList());
+            this.addComposited(FastList.newList());
         }
         Collection<E> list = this.lists.getLast();
         this.size++;

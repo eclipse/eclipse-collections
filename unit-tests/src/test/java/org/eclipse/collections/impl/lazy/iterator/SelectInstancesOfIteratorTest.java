@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -25,7 +25,7 @@ public class SelectInstancesOfIteratorTest
     @Test
     public void iterator()
     {
-        MutableList<Number> list = FastList.<Number>newListWith(null, 1, 2.0, null, 3, 4.0, 5, null);
+        MutableList<Number> list = FastList.newListWith(null, 1, 2.0, null, 3, 4.0, 5, null);
         this.assertElements(new SelectInstancesOfIterator<>(list.iterator(), Integer.class));
         this.assertElements(new SelectInstancesOfIterator<>(list, Integer.class));
     }

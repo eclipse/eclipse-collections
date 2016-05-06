@@ -218,7 +218,7 @@ public class ImmutableArrayBag<T>
 
     public <V> ImmutableBagMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function)
     {
-        return this.groupByEach(function, HashBagMultimap.<V, T>newMultimap()).toImmutable();
+        return this.groupByEach(function, HashBagMultimap.newMultimap()).toImmutable();
     }
 
     public T getFirst()
@@ -233,17 +233,17 @@ public class ImmutableArrayBag<T>
 
     public ImmutableBag<T> select(Predicate<? super T> predicate)
     {
-        return this.select(predicate, HashBag.<T>newBag()).toImmutable();
+        return this.select(predicate, HashBag.newBag()).toImmutable();
     }
 
     public ImmutableBag<T> reject(Predicate<? super T> predicate)
     {
-        return this.reject(predicate, HashBag.<T>newBag()).toImmutable();
+        return this.reject(predicate, HashBag.newBag()).toImmutable();
     }
 
     public <V> ImmutableBag<V> collect(Function<? super T, ? extends V> function)
     {
-        MutableBag<V> result = this.collect(function, HashBag.<V>newBag());
+        MutableBag<V> result = this.collect(function, HashBag.newBag());
         return ImmutableArrayBag.copyFrom(result);
     }
 
@@ -251,13 +251,13 @@ public class ImmutableArrayBag<T>
             Predicate<? super T> predicate,
             Function<? super T, ? extends V> function)
     {
-        MutableBag<V> result = this.collectIf(predicate, function, HashBag.<V>newBag());
+        MutableBag<V> result = this.collectIf(predicate, function, HashBag.newBag());
         return ImmutableArrayBag.copyFrom(result);
     }
 
     public <V> ImmutableBag<V> flatCollect(Function<? super T, ? extends Iterable<V>> function)
     {
-        return this.flatCollect(function, HashBag.<V>newBag()).toImmutable();
+        return this.flatCollect(function, HashBag.newBag()).toImmutable();
     }
 
     @Override
@@ -405,7 +405,7 @@ public class ImmutableArrayBag<T>
     @Deprecated
     public <S> ImmutableBag<Pair<T, S>> zip(Iterable<S> that)
     {
-        return this.zip(that, HashBag.<Pair<T, S>>newBag()).toImmutable();
+        return this.zip(that, HashBag.newBag()).toImmutable();
     }
 
     /**
@@ -414,7 +414,7 @@ public class ImmutableArrayBag<T>
     @Deprecated
     public ImmutableSet<Pair<T, Integer>> zipWithIndex()
     {
-        return this.zipWithIndex(UnifiedSet.<Pair<T, Integer>>newSet()).toImmutable();
+        return this.zipWithIndex(UnifiedSet.newSet()).toImmutable();
     }
 
     protected Object writeReplace()

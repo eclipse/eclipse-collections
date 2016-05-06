@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -204,8 +204,8 @@ public class SingletonSetTest extends AbstractMemoryEfficientMutableSetTestCase
     @Test
     public void selectWith()
     {
-        Verify.assertContainsAll(this.intSet.selectWith(Predicates2.<Integer>lessThan(), 3), 1);
-        Verify.assertEmpty(this.intSet.selectWith(Predicates2.<Integer>greaterThan(), 3));
+        Verify.assertContainsAll(this.intSet.selectWith(Predicates2.lessThan(), 3), 1);
+        Verify.assertEmpty(this.intSet.selectWith(Predicates2.greaterThan(), 3));
     }
 
     @Test
@@ -214,19 +214,19 @@ public class SingletonSetTest extends AbstractMemoryEfficientMutableSetTestCase
         Verify.assertEmpty(this.intSet.reject(Predicates.lessThan(3)));
         Verify.assertContainsAll(this.intSet.reject(
                         Predicates.greaterThan(3),
-                        UnifiedSet.<Integer>newSet()),
+                UnifiedSet.newSet()),
                 1);
     }
 
     @Test
     public void rejectWith()
     {
-        Verify.assertEmpty(this.intSet.rejectWith(Predicates2.<Integer>lessThan(), 3));
+        Verify.assertEmpty(this.intSet.rejectWith(Predicates2.lessThan(), 3));
         Verify.assertContainsAll(
                 this.intSet.rejectWith(
-                        Predicates2.<Integer>greaterThan(),
+                        Predicates2.greaterThan(),
                         3,
-                        UnifiedSet.<Integer>newSet()),
+                        UnifiedSet.newSet()),
                 1);
     }
 
@@ -241,7 +241,7 @@ public class SingletonSetTest extends AbstractMemoryEfficientMutableSetTestCase
     @Test
     public void partitionWith()
     {
-        PartitionMutableSet<Integer> partition = this.intSet.partitionWith(Predicates2.<Integer>lessThan(), 3);
+        PartitionMutableSet<Integer> partition = this.intSet.partitionWith(Predicates2.lessThan(), 3);
         Assert.assertEquals(mSet(1), partition.getSelected());
         Assert.assertEquals(mSet(), partition.getRejected());
     }
@@ -249,7 +249,7 @@ public class SingletonSetTest extends AbstractMemoryEfficientMutableSetTestCase
     @Test
     public void selectInstancesOf()
     {
-        MutableSet<Number> numbers = Sets.fixedSize.<Number>of(1);
+        MutableSet<Number> numbers = Sets.fixedSize.of(1);
         Assert.assertEquals(iSet(1), numbers.selectInstancesOf(Integer.class));
         Verify.assertEmpty(numbers.selectInstancesOf(Double.class));
     }
@@ -258,7 +258,7 @@ public class SingletonSetTest extends AbstractMemoryEfficientMutableSetTestCase
     public void collect()
     {
         Verify.assertContainsAll(this.intSet.collect(String::valueOf), "1");
-        Verify.assertContainsAll(this.intSet.collect(String::valueOf, UnifiedSet.<String>newSet()),
+        Verify.assertContainsAll(this.intSet.collect(String::valueOf, UnifiedSet.newSet()),
                 "1");
     }
 
@@ -270,7 +270,7 @@ public class SingletonSetTest extends AbstractMemoryEfficientMutableSetTestCase
         Verify.assertSetsEqual(UnifiedSet.newSetWith("1"), this.intSet.flatCollect(function));
         Verify.assertListsEqual(
                 FastList.newListWith("1"),
-                this.intSet.flatCollect(function, FastList.<String>newList()));
+                this.intSet.flatCollect(function, FastList.newList()));
     }
 
     @Test
@@ -368,7 +368,7 @@ public class SingletonSetTest extends AbstractMemoryEfficientMutableSetTestCase
         Verify.assertContainsAll(this.intSet.collectIf(
                 Integer.class::isInstance,
                 String::valueOf,
-                FastList.<String>newList()), "1");
+                FastList.newList()), "1");
     }
 
     @Test
@@ -379,7 +379,7 @@ public class SingletonSetTest extends AbstractMemoryEfficientMutableSetTestCase
                 this.intSet.collectWith(AddFunction.INTEGER, 1));
         Assert.assertEquals(
                 FastList.newListWith(2),
-                this.intSet.collectWith(AddFunction.INTEGER, 1, FastList.<Integer>newList()));
+                this.intSet.collectWith(AddFunction.INTEGER, 1, FastList.newList()));
     }
 
     @Test
@@ -486,7 +486,7 @@ public class SingletonSetTest extends AbstractMemoryEfficientMutableSetTestCase
     @Test
     public void toSortedList()
     {
-        Assert.assertEquals(FastList.newListWith(1), this.intSet.toSortedList(Collections.<Integer>reverseOrder()));
+        Assert.assertEquals(FastList.newListWith(1), this.intSet.toSortedList(Collections.reverseOrder()));
     }
 
     @Test

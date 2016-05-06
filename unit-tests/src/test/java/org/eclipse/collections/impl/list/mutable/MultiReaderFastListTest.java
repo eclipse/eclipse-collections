@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -358,7 +358,7 @@ public class MultiReaderFastListTest extends AbstractListTestCase
                 MultiReaderFastList.newListWith(1, 2, 3).collectIf(
                         Integer.class::isInstance,
                         String::valueOf,
-                        FastList.<String>newList()));
+                        FastList.newList()));
     }
 
     @Override
@@ -371,7 +371,7 @@ public class MultiReaderFastListTest extends AbstractListTestCase
                 MultiReaderFastList.newListWith(1, 2, 3).collectWith(
                         addZeroFunction,
                         0,
-                        FastList.<Integer>newList()), 1, 2, 3);
+                        FastList.newList()), 1, 2, 3);
     }
 
     @Override
@@ -564,7 +564,7 @@ public class MultiReaderFastListTest extends AbstractListTestCase
         Verify.assertContainsAll(this.newWith(1, 2, 3, 4).reject(Predicates.lessThan(3)), 3, 4);
         Verify.assertContainsAll(this.newWith(1, 2, 3, 4).reject(
                 Predicates.lessThan(3),
-                UnifiedSet.<Integer>newSet()), 3, 4);
+                UnifiedSet.newSet()), 3, 4);
     }
 
     @Override
@@ -629,13 +629,13 @@ public class MultiReaderFastListTest extends AbstractListTestCase
     public void addAllEmpty()
     {
         MutableList<Integer> integers = MultiReaderFastList.newList();
-        integers.addAll(Lists.fixedSize.<Integer>of());
+        integers.addAll(Lists.fixedSize.of());
         Verify.assertEmpty(integers);
-        integers.addAll(Sets.fixedSize.<Integer>of());
+        integers.addAll(Sets.fixedSize.of());
         Verify.assertEmpty(integers);
-        integers.addAll(FastList.<Integer>newList());
+        integers.addAll(FastList.newList());
         Verify.assertEmpty(integers);
-        integers.addAll(ArrayAdapter.<Integer>newArray());
+        integers.addAll(ArrayAdapter.newArray());
         Verify.assertEmpty(integers);
     }
 
@@ -654,13 +654,13 @@ public class MultiReaderFastListTest extends AbstractListTestCase
     public void addAllAtIndexEmpty()
     {
         MutableList<Integer> integers = this.newWith(5);
-        integers.addAll(0, Lists.fixedSize.<Integer>of());
+        integers.addAll(0, Lists.fixedSize.of());
         Verify.assertSize(1, integers);
         Verify.assertStartsWith(integers, 5);
-        integers.addAll(0, FastList.<Integer>newList(4));
+        integers.addAll(0, FastList.newList(4));
         Verify.assertSize(1, integers);
         Verify.assertStartsWith(integers, 5);
-        integers.addAll(0, Sets.fixedSize.<Integer>of());
+        integers.addAll(0, Sets.fixedSize.of());
         Verify.assertSize(1, integers);
         Verify.assertStartsWith(integers, 5);
         FastList<String> zeroSizedList = FastList.newList(0);
@@ -723,7 +723,7 @@ public class MultiReaderFastListTest extends AbstractListTestCase
     @Test
     public void subListSort()
     {
-        MutableList<Integer> list = Interval.from(0).to(20).addAllTo(MultiReaderFastList.<Integer>newList()).subList(2, 18).sortThis();
+        MutableList<Integer> list = Interval.from(0).to(20).addAllTo(MultiReaderFastList.newList()).subList(2, 18).sortThis();
         Assert.assertEquals(FastList.newList(list), Interval.from(2).to(17));
     }
 
@@ -887,7 +887,7 @@ public class MultiReaderFastListTest extends AbstractListTestCase
         MutableList<Integer> integers = this.newWith(2, 3, 4, 1, 7, 9, 6, 8, 5);
         Verify.assertStartsWith(integers.sortThis(), 1, 2, 3, 4, 5, 6, 7, 8, 9);
         MutableList<Integer> integers2 = this.newWith(1, 2, 3, 4, 5, 6, 7, 8, 9);
-        Verify.assertStartsWith(integers2.sortThis(Collections.<Integer>reverseOrder()), 9, 8, 7, 6, 5, 4, 3, 2, 1);
+        Verify.assertStartsWith(integers2.sortThis(Collections.reverseOrder()), 9, 8, 7, 6, 5, 4, 3, 2, 1);
         MutableList<Integer> integers3 = this.newWith(1, 2, 3, 4, 5, 6, 7, 8, 9);
         Verify.assertStartsWith(integers3.sortThis(), 1, 2, 3, 4, 5, 6, 7, 8, 9);
         Verify.assertInstanceOf(MultiReaderFastList.class, integers3.sortThis());
@@ -899,7 +899,7 @@ public class MultiReaderFastListTest extends AbstractListTestCase
         MutableList<Integer> integers = this.newWith(2, 3, 4, 1, 5, 7, 6, 8, 10, 9);
         Verify.assertStartsWith(integers.sortThis(), 1, 2, 3, 4);
         MutableList<Integer> integers2 = this.newWith(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
-        Verify.assertStartsWith(integers2.sortThis(Collections.<Integer>reverseOrder()), 10, 9, 8, 7, 6, 5, 4, 3, 2, 1);
+        Verify.assertStartsWith(integers2.sortThis(Collections.reverseOrder()), 10, 9, 8, 7, 6, 5, 4, 3, 2, 1);
         MutableList<Integer> integers3 = this.newWith(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
         Verify.assertStartsWith(integers3.sortThis(), 1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
     }

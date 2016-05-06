@@ -308,7 +308,7 @@ public class UnmodifiableTreeMap<K, V>
 
     public RichIterable<Pair<K, V>> keyValuesView()
     {
-        return LazyIterate.adapt(this.entrySet()).collect(AbstractImmutableEntry.<K, V>getPairFunction());
+        return LazyIterate.adapt(this.entrySet()).collect(AbstractImmutableEntry.getPairFunction());
     }
 
     protected MutableSortedMap<K, V> getMutableSortedMap()

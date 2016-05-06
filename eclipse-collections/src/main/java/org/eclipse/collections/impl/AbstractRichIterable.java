@@ -165,7 +165,7 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
     public MutableList<T> toList()
     {
         MutableList<T> list = Lists.mutable.empty();
-        this.forEachWith(Procedures2.<T>addToCollection(), list);
+        this.forEachWith(Procedures2.addToCollection(), list);
         return list;
     }
 
@@ -187,14 +187,14 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
     public MutableSortedSet<T> toSortedSet()
     {
         MutableSortedSet<T> treeSet = SortedSets.mutable.empty();
-        this.forEachWith(Procedures2.<T>addToCollection(), treeSet);
+        this.forEachWith(Procedures2.addToCollection(), treeSet);
         return treeSet;
     }
 
     public MutableSortedSet<T> toSortedSet(Comparator<? super T> comparator)
     {
         MutableSortedSet<T> treeSet = SortedSets.mutable.with(comparator);
-        this.forEachWith(Procedures2.<T>addToCollection(), treeSet);
+        this.forEachWith(Procedures2.addToCollection(), treeSet);
         return treeSet;
     }
 
@@ -206,28 +206,28 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
     public MutableSet<T> toSet()
     {
         MutableSet<T> set = Sets.mutable.empty();
-        this.forEachWith(Procedures2.<T>addToCollection(), set);
+        this.forEachWith(Procedures2.addToCollection(), set);
         return set;
     }
 
     public MutableBag<T> toBag()
     {
         MutableBag<T> bag = Bags.mutable.empty();
-        this.forEachWith(Procedures2.<T>addToCollection(), bag);
+        this.forEachWith(Procedures2.addToCollection(), bag);
         return bag;
     }
 
     public MutableSortedBag<T> toSortedBag()
     {
         MutableSortedBag<T> sortedBag = TreeBag.newBag();
-        this.forEachWith(Procedures2.<T>addToCollection(), sortedBag);
+        this.forEachWith(Procedures2.addToCollection(), sortedBag);
         return sortedBag;
     }
 
     public MutableSortedBag<T> toSortedBag(Comparator<? super T> comparator)
     {
         MutableSortedBag<T> sortedBag = TreeBag.newBag(comparator);
-        this.forEachWith(Procedures2.<T>addToCollection(), sortedBag);
+        this.forEachWith(Procedures2.addToCollection(), sortedBag);
         return sortedBag;
     }
 

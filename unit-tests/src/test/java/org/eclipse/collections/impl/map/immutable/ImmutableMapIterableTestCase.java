@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -208,8 +208,8 @@ public abstract class ImmutableMapIterableTestCase
         Integer absentKey = this.size() + 1;
 
         ImmutableMapIterable<Integer, String> classUnderTest = this.classUnderTest();
-        Assert.assertNull(classUnderTest.ifPresentApply(absentKey, Functions.<String>getPassThru()));
-        Assert.assertEquals("1", classUnderTest.ifPresentApply(1, Functions.<String>getPassThru()));
+        Assert.assertNull(classUnderTest.ifPresentApply(absentKey, Functions.getPassThru()));
+        Assert.assertEquals("1", classUnderTest.ifPresentApply(1, Functions.getPassThru()));
     }
 
     @Test
@@ -393,7 +393,7 @@ public abstract class ImmutableMapIterableTestCase
     {
         ImmutableMapIterable<Integer, String> immutable = this.classUnderTest();
         ImmutableMapIterable<Integer, String> immutable2 = immutable.newWithoutAllKeys(immutable.keysView());
-        ImmutableMapIterable<Integer, String> immutable3 = immutable.newWithoutAllKeys(Lists.immutable.<Integer>of());
+        ImmutableMapIterable<Integer, String> immutable3 = immutable.newWithoutAllKeys(Lists.immutable.of());
         Assert.assertEquals(immutable, immutable3);
         Assert.assertEquals(Maps.immutable.of(), immutable2);
     }

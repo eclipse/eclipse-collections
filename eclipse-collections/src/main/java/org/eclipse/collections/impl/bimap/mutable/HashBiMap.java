@@ -27,12 +27,12 @@ public class HashBiMap<K, V> extends AbstractMutableBiMap<K, V> implements Exter
 
     public HashBiMap()
     {
-        super(UnifiedMap.<K, V>newMap(), UnifiedMap.<V, K>newMap());
+        super(UnifiedMap.newMap(), UnifiedMap.newMap());
     }
 
     public HashBiMap(int initialSize)
     {
-        super(UnifiedMap.<K, V>newMap(initialSize), UnifiedMap.<V, K>newMap(initialSize));
+        super(UnifiedMap.newMap(initialSize), UnifiedMap.newMap(initialSize));
     }
 
     public HashBiMap(Map<K, V> map)

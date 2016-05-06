@@ -98,7 +98,7 @@ public final class MultiReaderHashBagMultimap<K, V>
 
     public <V2> MultiReaderHashBagMultimap<K, V2> collectValues(Function<? super V, ? extends V2> function)
     {
-        return this.collectValues(function, MultiReaderHashBagMultimap.<K, V2>newMultimap());
+        return this.collectValues(function, MultiReaderHashBagMultimap.newMultimap());
     }
 
     public MultiReaderHashBagMultimap<K, V> selectKeysValues(Predicate2<? super K, ? super V> predicate)

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -220,7 +220,7 @@ public class EmptySetTest extends AbstractMemoryEfficientMutableSetTestCase
 
         Assert.assertEquals(
                 set.zip(nulls),
-                set.zip(nulls, UnifiedSet.<Pair<String, Object>>newSet()));
+                set.zip(nulls, UnifiedSet.newSet()));
     }
 
     @Override
@@ -239,7 +239,7 @@ public class EmptySetTest extends AbstractMemoryEfficientMutableSetTestCase
 
         Assert.assertEquals(
                 set.zipWithIndex(),
-                set.zipWithIndex(UnifiedSet.<Pair<String, Integer>>newSet()));
+                set.zipWithIndex(UnifiedSet.newSet()));
     }
 
     @Override
@@ -264,7 +264,7 @@ public class EmptySetTest extends AbstractMemoryEfficientMutableSetTestCase
     {
         Assert.assertEquals(
                 UnifiedSet.newSetWith("a", "b", "c"),
-                this.classUnderTest().unionInto(UnifiedSet.newSetWith("a", "b", "c"), UnifiedSet.<String>newSet()));
+                this.classUnderTest().unionInto(UnifiedSet.newSetWith("a", "b", "c"), UnifiedSet.newSet()));
     }
 
     @Override
@@ -282,7 +282,7 @@ public class EmptySetTest extends AbstractMemoryEfficientMutableSetTestCase
     {
         Assert.assertEquals(
                 UnifiedSet.<String>newSet(),
-                this.classUnderTest().intersectInto(UnifiedSet.newSetWith("1", "2", "3"), UnifiedSet.<String>newSet()));
+                this.classUnderTest().intersectInto(UnifiedSet.newSetWith("1", "2", "3"), UnifiedSet.newSet()));
     }
 
     @Override
@@ -300,9 +300,9 @@ public class EmptySetTest extends AbstractMemoryEfficientMutableSetTestCase
     public void differenceInto()
     {
         MutableSet<String> set = this.classUnderTest();
-        MutableSet<String> difference = set.differenceInto(UnifiedSet.newSetWith("2", "3", "4", "not present"), UnifiedSet.<String>newSet());
+        MutableSet<String> difference = set.differenceInto(UnifiedSet.newSetWith("2", "3", "4", "not present"), UnifiedSet.newSet());
         Assert.assertEquals(UnifiedSet.<String>newSet(), difference);
-        Assert.assertEquals(set, set.differenceInto(UnifiedSet.newSetWith("not present"), UnifiedSet.<String>newSet()));
+        Assert.assertEquals(set, set.differenceInto(UnifiedSet.newSetWith("not present"), UnifiedSet.newSet()));
     }
 
     @Override
@@ -320,6 +320,6 @@ public class EmptySetTest extends AbstractMemoryEfficientMutableSetTestCase
     {
         Assert.assertEquals(
                 UnifiedSet.newSetWith("not present"),
-                this.classUnderTest().symmetricDifferenceInto(UnifiedSet.newSetWith("not present"), UnifiedSet.<String>newSet()));
+                this.classUnderTest().symmetricDifferenceInto(UnifiedSet.newSetWith("not present"), UnifiedSet.newSet()));
     }
 }

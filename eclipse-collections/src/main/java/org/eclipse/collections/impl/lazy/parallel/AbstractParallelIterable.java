@@ -108,7 +108,7 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
             {
                 return completionService.submit(() -> batch.anySatisfy(predicate));
             }
-        }, UnifiedSet.<Future<Boolean>>newSet());
+        }, UnifiedSet.newSet());
 
         while (futures.notEmpty())
         {
@@ -147,7 +147,7 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
             {
                 return completionService.submit(() -> batch.allSatisfy(predicate));
             }
-        }, UnifiedSet.<Future<Boolean>>newSet());
+        }, UnifiedSet.newSet());
 
         while (futures.notEmpty())
         {

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -81,7 +81,7 @@ public class SetAdapterTest extends AbstractMutableSetTestCase
         super.select();
         Verify.assertContainsAll(this.newWith(1, 2, 3, 4, 5).select(Predicates.lessThan(3)), 1, 2);
         Verify.assertContainsAll(this.newWith(-1, 2, 3, 4, 5).select(Predicates.lessThan(3),
-                FastList.<Integer>newList()), -1, 2);
+                FastList.newList()), -1, 2);
     }
 
     @Override
@@ -91,7 +91,7 @@ public class SetAdapterTest extends AbstractMutableSetTestCase
         super.reject();
         Verify.assertContainsAll(this.newWith(1, 2, 3, 4).reject(Predicates.lessThan(3)), 3, 4);
         Verify.assertContainsAll(this.newWith(1, 2, 3, 4).reject(Predicates.lessThan(3),
-                FastList.<Integer>newList()), 3, 4);
+                FastList.newList()), 3, 4);
     }
 
     @Override
@@ -106,7 +106,7 @@ public class SetAdapterTest extends AbstractMutableSetTestCase
                 "4");
         Verify.assertContainsAll(this.newWith(1, 2, 3, 4).collect(
                 String::valueOf,
-                FastList.<String>newList()), "1", "2", "3", "4");
+                FastList.newList()), "1", "2", "3", "4");
     }
 
     @Override
@@ -183,7 +183,7 @@ public class SetAdapterTest extends AbstractMutableSetTestCase
             Integer integer = iterator.next();
             result.add(integer);
         }
-        Verify.assertStartsWith(result.sortThis(Collections.<Integer>reverseOrder()), 3, 2, 1);
+        Verify.assertStartsWith(result.sortThis(Collections.reverseOrder()), 3, 2, 1);
     }
 
     @Test

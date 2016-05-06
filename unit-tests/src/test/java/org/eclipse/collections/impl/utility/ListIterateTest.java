@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -195,7 +195,7 @@ public class ListIterateTest
     @Test
     public void flatten()
     {
-        MutableList<MutableList<Boolean>> list = Lists.fixedSize.<MutableList<Boolean>>of(
+        MutableList<MutableList<Boolean>> list = Lists.fixedSize.of(
                 Lists.fixedSize.of(true, false),
                 Lists.fixedSize.of(true, null));
         List<MutableList<Boolean>> linked = new LinkedList<>(list);
@@ -210,7 +210,7 @@ public class ListIterateTest
                 FastList.newListWith(true, false, true, null),
                 newList);
 
-        MutableSet<Boolean> newSet = ListIterate.flatCollect(list, RichIterable::toSet, UnifiedSet.<Boolean>newSet());
+        MutableSet<Boolean> newSet = ListIterate.flatCollect(list, RichIterable::toSet, UnifiedSet.newSet());
         Verify.assertSetsEqual(
                 UnifiedSet.newSetWith(true, false, null),
                 newSet);
@@ -692,7 +692,7 @@ public class ListIterateTest
     public void removeIfWith()
     {
         MutableList<Integer> objects = FastList.newListWith(1, 2, 3, 4);
-        ListIterate.removeIfWith(objects, Predicates2.<Integer>lessThan(), 3);
+        ListIterate.removeIfWith(objects, Predicates2.lessThan(), 3);
         Assert.assertEquals(FastList.newListWith(3, 4), objects);
     }
 

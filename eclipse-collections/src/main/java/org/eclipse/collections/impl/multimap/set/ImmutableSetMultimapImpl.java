@@ -61,7 +61,7 @@ public final class ImmutableSetMultimapImpl<K, V>
 
     public ImmutableSetMultimap<K, V> newEmpty()
     {
-        return new ImmutableSetMultimapImpl<>(Maps.immutable.<K, ImmutableSet<V>>with());
+        return new ImmutableSetMultimapImpl<>(Maps.immutable.with());
     }
 
     public MutableSetMultimap<K, V> toMutable()
@@ -134,27 +134,27 @@ public final class ImmutableSetMultimapImpl<K, V>
 
     public ImmutableSetMultimap<K, V> selectKeysValues(Predicate2<? super K, ? super V> predicate)
     {
-        return this.selectKeysValues(predicate, UnifiedSetMultimap.<K, V>newMultimap()).toImmutable();
+        return this.selectKeysValues(predicate, UnifiedSetMultimap.newMultimap()).toImmutable();
     }
 
     public ImmutableSetMultimap<K, V> rejectKeysValues(Predicate2<? super K, ? super V> predicate)
     {
-        return this.rejectKeysValues(predicate, UnifiedSetMultimap.<K, V>newMultimap()).toImmutable();
+        return this.rejectKeysValues(predicate, UnifiedSetMultimap.newMultimap()).toImmutable();
     }
 
     public ImmutableSetMultimap<K, V> selectKeysMultiValues(Predicate2<? super K, ? super Iterable<V>> predicate)
     {
-        return this.selectKeysMultiValues(predicate, UnifiedSetMultimap.<K, V>newMultimap()).toImmutable();
+        return this.selectKeysMultiValues(predicate, UnifiedSetMultimap.newMultimap()).toImmutable();
     }
 
     public ImmutableSetMultimap<K, V> rejectKeysMultiValues(Predicate2<? super K, ? super Iterable<V>> predicate)
     {
-        return this.rejectKeysMultiValues(predicate, UnifiedSetMultimap.<K, V>newMultimap()).toImmutable();
+        return this.rejectKeysMultiValues(predicate, UnifiedSetMultimap.newMultimap()).toImmutable();
     }
 
     public <K2, V2> ImmutableBagMultimap<K2, V2> collectKeysValues(Function2<? super K, ? super V, Pair<K2, V2>> function)
     {
-        return this.collectKeysValues(function, HashBagMultimap.<K2, V2>newMultimap()).toImmutable();
+        return this.collectKeysValues(function, HashBagMultimap.newMultimap()).toImmutable();
     }
 
     public <V2> ImmutableBagMultimap<K, V2> collectValues(Function<? super V, ? extends V2> function)

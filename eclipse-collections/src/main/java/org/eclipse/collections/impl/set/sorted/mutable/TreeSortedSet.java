@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -465,12 +465,12 @@ public class TreeSortedSet<T> extends AbstractMutableCollection<T>
 
     public <V> TreeSortedSetMultimap<V, T> groupBy(Function<? super T, ? extends V> function)
     {
-        return Iterate.groupBy(this.treeSet, function, TreeSortedSetMultimap.<V, T>newMultimap(this.comparator()));
+        return Iterate.groupBy(this.treeSet, function, TreeSortedSetMultimap.newMultimap(this.comparator()));
     }
 
     public <V> TreeSortedSetMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function)
     {
-        return Iterate.groupByEach(this.treeSet, function, TreeSortedSetMultimap.<V, T>newMultimap(this.comparator()));
+        return Iterate.groupByEach(this.treeSet, function, TreeSortedSetMultimap.newMultimap(this.comparator()));
     }
 
     public <P> TreeSortedSet<T> selectWith(Predicate2<? super T, ? super P> predicate, P parameter)
@@ -485,12 +485,12 @@ public class TreeSortedSet<T> extends AbstractMutableCollection<T>
 
     public <P, V> MutableList<V> collectWith(Function2<? super T, ? super P, ? extends V> function, P parameter)
     {
-        return Iterate.collectWith(this.treeSet, function, parameter, FastList.<V>newList());
+        return Iterate.collectWith(this.treeSet, function, parameter, FastList.newList());
     }
 
     public <S> MutableList<Pair<T, S>> zip(Iterable<S> that)
     {
-        return Iterate.zip(this, that, FastList.<Pair<T, S>>newList());
+        return Iterate.zip(this, that, FastList.newList());
     }
 
     public TreeSortedSet<Pair<T, Integer>> zipWithIndex()
@@ -498,10 +498,10 @@ public class TreeSortedSet<T> extends AbstractMutableCollection<T>
         Comparator<? super T> comparator = this.comparator();
         if (comparator == null)
         {
-            TreeSortedSet<Pair<T, Integer>> pairs = TreeSortedSet.newSet(Comparators.<Pair<T, Integer>, T>byFunction(Functions.<T>firstOfPair(), Comparators.<T>naturalOrder()));
+            TreeSortedSet<Pair<T, Integer>> pairs = TreeSortedSet.newSet(Comparators.byFunction(Functions.firstOfPair(), Comparators.naturalOrder()));
             return Iterate.zipWithIndex(this, pairs);
         }
-        return Iterate.zipWithIndex(this, TreeSortedSet.<Pair<T, Integer>>newSet(Comparators.byFirstOfPair(comparator)));
+        return Iterate.zipWithIndex(this, TreeSortedSet.newSet(Comparators.byFirstOfPair(comparator)));
     }
 
     public MutableSortedSet<T> takeWhile(Predicate<? super T> predicate)

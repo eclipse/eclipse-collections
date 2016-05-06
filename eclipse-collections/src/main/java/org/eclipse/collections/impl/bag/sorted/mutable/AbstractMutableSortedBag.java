@@ -166,22 +166,22 @@ public abstract class AbstractMutableSortedBag<T>
 
     public <V> MutableList<V> collect(Function<? super T, ? extends V> function)
     {
-        return this.collect(function, FastList.<V>newList(this.size()));
+        return this.collect(function, FastList.newList(this.size()));
     }
 
     public <P, V> MutableList<V> collectWith(Function2<? super T, ? super P, ? extends V> function, P parameter)
     {
-        return this.collectWith(function, parameter, FastList.<V>newList());
+        return this.collectWith(function, parameter, FastList.newList());
     }
 
     public <V> MutableList<V> collectIf(Predicate<? super T> predicate, Function<? super T, ? extends V> function)
     {
-        return this.collectIf(predicate, function, FastList.<V>newList());
+        return this.collectIf(predicate, function, FastList.newList());
     }
 
     public <V> MutableList<V> flatCollect(Function<? super T, ? extends Iterable<V>> function)
     {
-        return this.flatCollect(function, FastList.<V>newList());
+        return this.flatCollect(function, FastList.newList());
     }
 
     public MutableBooleanList collectBoolean(BooleanFunction<? super T> booleanFunction)
@@ -226,7 +226,7 @@ public abstract class AbstractMutableSortedBag<T>
 
     public <S> MutableList<Pair<T, S>> zip(Iterable<S> that)
     {
-        return this.zip(that, FastList.<Pair<T, S>>newList());
+        return this.zip(that, FastList.newList());
     }
 
     public MutableSortedBag<T> toReversed()

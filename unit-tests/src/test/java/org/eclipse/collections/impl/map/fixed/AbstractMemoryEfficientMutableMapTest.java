@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -467,7 +467,7 @@ public abstract class AbstractMemoryEfficientMutableMapTest
                 break;
         }
 
-        MutableList<Integer> reverse = map.toSortedList(Collections.<Integer>reverseOrder());
+        MutableList<Integer> reverse = map.toSortedList(Collections.reverseOrder());
         switch (map.size())
         {
             case 1:
@@ -539,7 +539,7 @@ public abstract class AbstractMemoryEfficientMutableMapTest
     {
         MutableMap<String, Integer> map = this.newMapWithKeysValues("1", 1, "2", 2, "3", 3);
         MutableSet<String> collect = map.collect(Functions.getToString()).toSet();
-        UnifiedSet<String> collectToTarget = map.collect(String::valueOf, UnifiedSet.<String>newSet());
+        UnifiedSet<String> collectToTarget = map.collect(String::valueOf, UnifiedSet.newSet());
 
         switch (map.size())
         {
@@ -567,7 +567,7 @@ public abstract class AbstractMemoryEfficientMutableMapTest
         MutableMap<String, Integer> map = this.newMapWithKeysValues("1", 1, "2", 2, "3", 3);
 
         MutableSet<String> collect = map.collectIf(Integer.class::isInstance, String::valueOf).toSet();
-        UnifiedSet<String> collectToTarget = map.collectIf(Integer.class::isInstance, String::valueOf, UnifiedSet.<String>newSet());
+        UnifiedSet<String> collectToTarget = map.collectIf(Integer.class::isInstance, String::valueOf, UnifiedSet.newSet());
 
         switch (map.size())
         {
@@ -594,7 +594,7 @@ public abstract class AbstractMemoryEfficientMutableMapTest
     {
         MutableMap<String, Integer> map = this.newMapWithKeysValues("1", 1, "2", 2, "3", 3);
 
-        MutableBag<Integer> collectWith = map.collectWith(AddFunction.INTEGER, 1, HashBag.<Integer>newBag());
+        MutableBag<Integer> collectWith = map.collectWith(AddFunction.INTEGER, 1, HashBag.newBag());
 
         switch (map.size())
         {
@@ -799,7 +799,7 @@ public abstract class AbstractMemoryEfficientMutableMapTest
         };
 
         RichIterable<Character> blob = map.flatCollect(function);
-        RichIterable<Character> blobFromTarget = map.flatCollect(function, FastList.<Character>newList());
+        RichIterable<Character> blobFromTarget = map.flatCollect(function, FastList.newList());
 
         switch (map.size())
         {
@@ -865,7 +865,7 @@ public abstract class AbstractMemoryEfficientMutableMapTest
         Multimap<Boolean, Integer> actual = map.groupBy(isOddFunction);
         Assert.assertEquals(HashBagMultimap.newMultimap(expected), HashBagMultimap.newMultimap(actual));
 
-        Multimap<Boolean, Integer> actualFromTarget = map.groupBy(isOddFunction, FastListMultimap.<Boolean, Integer>newMultimap());
+        Multimap<Boolean, Integer> actualFromTarget = map.groupBy(isOddFunction, FastListMultimap.newMultimap());
         Assert.assertEquals(HashBagMultimap.newMultimap(expected), HashBagMultimap.newMultimap(actualFromTarget));
     }
 
@@ -889,7 +889,7 @@ public abstract class AbstractMemoryEfficientMutableMapTest
             Assert.assertTrue(expected.get(each).containsAllIterable(values));
         });
 
-        Multimap<Integer, Integer> actualFromTarget = map.groupByEach(function, FastListMultimap.<Integer, Integer>newMultimap());
+        Multimap<Integer, Integer> actualFromTarget = map.groupByEach(function, FastListMultimap.newMultimap());
         expected.forEachKey(each -> {
             Assert.assertTrue(actualFromTarget.containsKey(each));
             MutableList<Integer> values = actualFromTarget.get(each).toList();
@@ -1032,7 +1032,7 @@ public abstract class AbstractMemoryEfficientMutableMapTest
         MutableMap<String, Integer> map = this.newMapWithKeysValues("1", 1, "2", 2, "3", 3);
 
         MutableSet<Integer> rejected = map.reject(IntegerPredicates.isEven()).toSet();
-        UnifiedSet<Integer> rejectedIntoTarget = map.reject(IntegerPredicates.isEven(), UnifiedSet.<Integer>newSet());
+        UnifiedSet<Integer> rejectedIntoTarget = map.reject(IntegerPredicates.isEven(), UnifiedSet.newSet());
 
         ImmutableSet<Integer> expected = this.expectReject(map.size());
         Assert.assertEquals(expected, rejected);
@@ -1063,13 +1063,13 @@ public abstract class AbstractMemoryEfficientMutableMapTest
         switch (map.size())
         {
             case 1:
-                Verify.assertEmpty(map.rejectWith(Predicates2.<Integer>lessThan(), 2, UnifiedSet.<Integer>newSet()));
+                Verify.assertEmpty(map.rejectWith(Predicates2.lessThan(), 2, UnifiedSet.newSet()));
                 break;
             case 2:
-                Verify.assertContainsAll(map.rejectWith(Predicates2.<Integer>lessThan(), 2, UnifiedSet.<Integer>newSet()), 2);
+                Verify.assertContainsAll(map.rejectWith(Predicates2.lessThan(), 2, UnifiedSet.newSet()), 2);
                 break;
             case 3:
-                Verify.assertContainsAll(map.rejectWith(Predicates2.<Integer>lessThan(), 2, UnifiedSet.<Integer>newSet()), 2, 3);
+                Verify.assertContainsAll(map.rejectWith(Predicates2.lessThan(), 2, UnifiedSet.newSet()), 2, 3);
                 break;
             default:
                 Verify.assertEmpty(map);
@@ -1084,7 +1084,7 @@ public abstract class AbstractMemoryEfficientMutableMapTest
         ImmutableSet<Integer> expected = this.expectSelect(map.size());
 
         Assert.assertEquals(expected, map.select(IntegerPredicates.isEven()).toSet());
-        Assert.assertEquals(expected, map.select(IntegerPredicates.isEven(), UnifiedSet.<Integer>newSet()));
+        Assert.assertEquals(expected, map.select(IntegerPredicates.isEven(), UnifiedSet.newSet()));
     }
 
     private ImmutableSet<Integer> expectSelect(int size)
@@ -1110,13 +1110,13 @@ public abstract class AbstractMemoryEfficientMutableMapTest
         switch (map.size())
         {
             case 1:
-                Verify.assertContainsAll(map.selectWith(Predicates2.<Integer>lessThan(), 3, UnifiedSet.<Integer>newSet()), 1);
+                Verify.assertContainsAll(map.selectWith(Predicates2.lessThan(), 3, UnifiedSet.newSet()), 1);
                 break;
             case 2:
-                Verify.assertContainsAll(map.selectWith(Predicates2.<Integer>lessThan(), 3, UnifiedSet.<Integer>newSet()), 1, 2);
+                Verify.assertContainsAll(map.selectWith(Predicates2.lessThan(), 3, UnifiedSet.newSet()), 1, 2);
                 break;
             case 3:
-                Verify.assertContainsAll(map.selectWith(Predicates2.<Integer>lessThan(), 3, UnifiedSet.<Integer>newSet()), 1, 2);
+                Verify.assertContainsAll(map.selectWith(Predicates2.lessThan(), 3, UnifiedSet.newSet()), 1, 2);
                 break;
             default:
                 Verify.assertEmpty(map);
@@ -1200,7 +1200,7 @@ public abstract class AbstractMemoryEfficientMutableMapTest
 
         Assert.assertEquals(
                 map.zip(nulls).toSet(),
-                map.zip(nulls, UnifiedSet.<Pair<String, Object>>newSet()));
+                map.zip(nulls, UnifiedSet.newSet()));
     }
 
     @Test
@@ -1217,12 +1217,12 @@ public abstract class AbstractMemoryEfficientMutableMapTest
         {
             Assert.assertEquals(
                     Interval.zeroTo(map.size() - 1).toSet(),
-                    pairs.collect((Function<Pair<?, Integer>, Integer>) Pair::getTwo, UnifiedSet.<Integer>newSet()));
+                    pairs.collect((Function<Pair<?, Integer>, Integer>) Pair::getTwo, UnifiedSet.newSet()));
         }
 
         Assert.assertEquals(
                 map.zipWithIndex().toSet(),
-                map.zipWithIndex(UnifiedSet.<Pair<String, Integer>>newSet()));
+                map.zipWithIndex(UnifiedSet.newSet()));
     }
 
     @Test

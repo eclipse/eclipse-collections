@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -150,7 +150,7 @@ public abstract class AbstractSortedSetTestCase extends AbstractCollectionTestCa
         super.tap();
 
         MutableList<Integer> tapRevResult = Lists.mutable.of();
-        MutableSortedSet<Integer> revInt = this.newWith(Collections.<Integer>reverseOrder(), 1, 2, 4, 3, 5);
+        MutableSortedSet<Integer> revInt = this.newWith(Collections.reverseOrder(), 1, 2, 4, 3, 5);
         Assert.assertSame(revInt, revInt.tap(tapRevResult::add));
         Assert.assertEquals(revInt.toList(), tapRevResult);
     }
@@ -177,8 +177,8 @@ public abstract class AbstractSortedSetTestCase extends AbstractCollectionTestCa
         MutableSortedSet<Integer> integers = this.newWith(3, 2, 1, 4, 5);
         Verify.assertSortedSetsEqual(TreeSortedSet.newSetWith(3, 2, 1), integers.select(Predicates.lessThanOrEqualTo(3)));
         Verify.assertEmpty(integers.select(Predicates.greaterThan(6)));
-        MutableSortedSet<Integer> revInt = this.newWith(Collections.<Integer>reverseOrder(), 1, 2, 4, 3, 5);
-        Verify.assertSortedSetsEqual(TreeSortedSet.newSetWith(Collections.<Integer>reverseOrder(), 3, 2, 1), revInt.select(Predicates.lessThan(4)));
+        MutableSortedSet<Integer> revInt = this.newWith(Collections.reverseOrder(), 1, 2, 4, 3, 5);
+        Verify.assertSortedSetsEqual(TreeSortedSet.newSetWith(Collections.reverseOrder(), 3, 2, 1), revInt.select(Predicates.lessThan(4)));
     }
 
     @Override
@@ -186,7 +186,7 @@ public abstract class AbstractSortedSetTestCase extends AbstractCollectionTestCa
     public void selectWith()
     {
         super.selectWith();
-        Verify.assertSortedSetsEqual(TreeSortedSet.newSetWith(1, 2, 3), this.newWith(3, 1, 2, 5, 3).selectWith(Predicates2.<Integer>lessThan(), 4));
+        Verify.assertSortedSetsEqual(TreeSortedSet.newSetWith(1, 2, 3), this.newWith(3, 1, 2, 5, 3).selectWith(Predicates2.lessThan(), 4));
     }
 
     @Override
@@ -196,7 +196,7 @@ public abstract class AbstractSortedSetTestCase extends AbstractCollectionTestCa
         super.selectWith_target();
         Verify.assertSortedSetsEqual(
                 TreeSortedSet.newSetWith(1, 2, 3),
-                this.newWith(3, 1, 2, 5, 3).selectWith(Predicates2.<Integer>lessThan(), 4, TreeSortedSet.<Integer>newSet()));
+                this.newWith(3, 1, 2, 5, 3).selectWith(Predicates2.lessThan(), 4, TreeSortedSet.newSet()));
     }
 
     @Override
@@ -207,8 +207,8 @@ public abstract class AbstractSortedSetTestCase extends AbstractCollectionTestCa
         MutableSortedSet<Integer> integers = this.newWith(4, 2, 1, 3, 5, 6);
         Verify.assertSortedSetsEqual(TreeSortedSet.newSetWith(1, 2, 3, 4), integers.reject(Predicates.greaterThan(4)));
         Verify.assertEmpty(integers.reject(Predicates.greaterThan(0)));
-        MutableSortedSet<Integer> revInt = this.newWith(Collections.<Integer>reverseOrder(), 1, 2, 4, 3, 5);
-        Verify.assertSortedSetsEqual(TreeSortedSet.newSetWith(Collections.<Integer>reverseOrder(), 3, 2, 1), revInt.reject(Predicates.greaterThan(3)));
+        MutableSortedSet<Integer> revInt = this.newWith(Collections.reverseOrder(), 1, 2, 4, 3, 5);
+        Verify.assertSortedSetsEqual(TreeSortedSet.newSetWith(Collections.reverseOrder(), 3, 2, 1), revInt.reject(Predicates.greaterThan(3)));
     }
 
     @Override
@@ -216,7 +216,7 @@ public abstract class AbstractSortedSetTestCase extends AbstractCollectionTestCa
     public void rejectWith()
     {
         super.rejectWith();
-        Verify.assertSortedSetsEqual(TreeSortedSet.newSetWith(1, 2, 3), this.newWith(3, 1, 2, 5, 4).rejectWith(Predicates2.<Integer>greaterThan(), 3));
+        Verify.assertSortedSetsEqual(TreeSortedSet.newSetWith(1, 2, 3), this.newWith(3, 1, 2, 5, 4).rejectWith(Predicates2.greaterThan(), 3));
     }
 
     @Override
@@ -226,14 +226,14 @@ public abstract class AbstractSortedSetTestCase extends AbstractCollectionTestCa
         super.rejectWith();
         Verify.assertSortedSetsEqual(
                 TreeSortedSet.newSetWith(1, 2, 3),
-                this.newWith(3, 1, 2, 5, 4).rejectWith(Predicates2.<Integer>greaterThan(), 3, TreeSortedSet.<Integer>newSet()));
+                this.newWith(3, 1, 2, 5, 4).rejectWith(Predicates2.greaterThan(), 3, TreeSortedSet.newSet()));
     }
 
     @Override
     @Test
     public void partition()
     {
-        MutableSortedSet<Integer> integers = this.newWith(Comparators.<Integer>reverseNaturalOrder(), 4, 2, 1, 3, 5, 6);
+        MutableSortedSet<Integer> integers = this.newWith(Comparators.reverseNaturalOrder(), 4, 2, 1, 3, 5, 6);
         PartitionMutableSortedSet<Integer> partition = integers.partition(IntegerPredicates.isEven());
         Verify.assertSortedSetsEqual(this.newWith(Comparators.reverseNaturalOrder(), 6, 4, 2), partition.getSelected());
         Verify.assertSortedSetsEqual(this.newWith(Comparators.reverseNaturalOrder(), 5, 3, 1), partition.getRejected());
@@ -245,7 +245,7 @@ public abstract class AbstractSortedSetTestCase extends AbstractCollectionTestCa
     @Test
     public void partitionWith()
     {
-        MutableSortedSet<Integer> integers = this.newWith(Comparators.<Integer>reverseNaturalOrder(), 4, 2, 1, 3, 5, 6);
+        MutableSortedSet<Integer> integers = this.newWith(Comparators.reverseNaturalOrder(), 4, 2, 1, 3, 5, 6);
         PartitionMutableSortedSet<Integer> partition = integers.partitionWith(Predicates2.in(), integers.select(IntegerPredicates.isEven()));
         Verify.assertSortedSetsEqual(this.newWith(Comparators.reverseNaturalOrder(), 6, 4, 2), partition.getSelected());
         Verify.assertSortedSetsEqual(this.newWith(Comparators.reverseNaturalOrder(), 5, 3, 1), partition.getRejected());
@@ -256,7 +256,7 @@ public abstract class AbstractSortedSetTestCase extends AbstractCollectionTestCa
     @Test
     public void partitionWhile()
     {
-        MutableSortedSet<Integer> integers = this.newWith(Comparators.<Integer>reverseNaturalOrder(), 4, 2, 1, 3, 5, 6);
+        MutableSortedSet<Integer> integers = this.newWith(Comparators.reverseNaturalOrder(), 4, 2, 1, 3, 5, 6);
         PartitionMutableSortedSet<Integer> partition = integers.partitionWhile(Predicates.greaterThan(3));
         Verify.assertSortedSetsEqual(this.newWith(Comparators.reverseNaturalOrder(), 6, 5, 4), partition.getSelected());
         Verify.assertSortedSetsEqual(this.newWith(Comparators.reverseNaturalOrder(), 3, 2, 1), partition.getRejected());
@@ -267,7 +267,7 @@ public abstract class AbstractSortedSetTestCase extends AbstractCollectionTestCa
     @Test
     public void takeWhile()
     {
-        MutableSortedSet<Integer> integers = this.newWith(Comparators.<Integer>reverseNaturalOrder(), 4, 2, 1, 3, 5, 6);
+        MutableSortedSet<Integer> integers = this.newWith(Comparators.reverseNaturalOrder(), 4, 2, 1, 3, 5, 6);
         MutableSortedSet<Integer> take = integers.takeWhile(Predicates.greaterThan(3));
         Verify.assertSortedSetsEqual(this.newWith(Comparators.reverseNaturalOrder(), 6, 5, 4), take);
         Assert.assertEquals(Comparators.<Integer>reverseNaturalOrder(), take.comparator());
@@ -276,7 +276,7 @@ public abstract class AbstractSortedSetTestCase extends AbstractCollectionTestCa
     @Test
     public void dropWhile()
     {
-        MutableSortedSet<Integer> integers = this.newWith(Comparators.<Integer>reverseNaturalOrder(), 4, 2, 1, 3, 5, 6);
+        MutableSortedSet<Integer> integers = this.newWith(Comparators.reverseNaturalOrder(), 4, 2, 1, 3, 5, 6);
         MutableSortedSet<Integer> drop = integers.dropWhile(Predicates.greaterThan(3));
         Verify.assertSortedSetsEqual(this.newWith(Comparators.reverseNaturalOrder(), 3, 2, 1), drop);
         Assert.assertEquals(Comparators.<Integer>reverseNaturalOrder(), drop.comparator());
@@ -285,7 +285,7 @@ public abstract class AbstractSortedSetTestCase extends AbstractCollectionTestCa
     @Test
     public void distinct()
     {
-        MutableSortedSet<Integer> integers = this.newWith(Comparators.<Integer>reverseNaturalOrder(), 4, 2, 1, 3, 5, 6);
+        MutableSortedSet<Integer> integers = this.newWith(Comparators.reverseNaturalOrder(), 4, 2, 1, 3, 5, 6);
         MutableSortedSet<Integer> distinct = integers.distinct();
         Assert.assertEquals(integers, distinct);
         Assert.assertNotSame(integers, distinct);
@@ -298,7 +298,7 @@ public abstract class AbstractSortedSetTestCase extends AbstractCollectionTestCa
         super.collect();
         MutableSortedSet<Integer> integers = this.newWith(4, 3, 1, 6, 5, 2);
         Verify.assertListsEqual(FastList.newListWith("1", "2", "3", "4", "5", "6"), integers.collect(String::valueOf));
-        MutableSortedSet<Integer> revInt = this.newWith(Collections.<Integer>reverseOrder(), 1, 2, 4, 3, 5);
+        MutableSortedSet<Integer> revInt = this.newWith(Collections.reverseOrder(), 1, 2, 4, 3, 5);
         Verify.assertListsEqual(FastList.newListWith("5", "4", "3", "2", "1"), revInt.collect(String::valueOf));
     }
 
@@ -307,7 +307,7 @@ public abstract class AbstractSortedSetTestCase extends AbstractCollectionTestCa
     public void collectWith()
     {
         super.collectWith();
-        MutableSortedSet<Integer> integers = this.newWith(Collections.<Integer>reverseOrder(), 1, 2, 3, 4, 5);
+        MutableSortedSet<Integer> integers = this.newWith(Collections.reverseOrder(), 1, 2, 3, 4, 5);
         Function2<Integer, Integer, String> addParamFunction =
                 (each, parameter) -> ((Integer) (each + parameter)).toString();
         Verify.assertListsEqual(FastList.newListWith("4", "3", "2", "1", "0"), integers.collectWith(addParamFunction, -1));
@@ -318,10 +318,10 @@ public abstract class AbstractSortedSetTestCase extends AbstractCollectionTestCa
     public void collectWith_target()
     {
         super.collectWith_target();
-        MutableSortedSet<Integer> integers = this.newWith(Collections.<Integer>reverseOrder(), 1, 2, 3, 4, 5);
+        MutableSortedSet<Integer> integers = this.newWith(Collections.reverseOrder(), 1, 2, 3, 4, 5);
         Function2<Integer, Integer, String> addParamFunction =
                 (each, parameter) -> ((Integer) (each + parameter)).toString();
-        Verify.assertIterablesEqual(TreeSortedSet.newSetWith("4", "3", "2", "1", "0"), integers.collectWith(addParamFunction, -1, TreeSortedSet.<String>newSet()));
+        Verify.assertIterablesEqual(TreeSortedSet.newSetWith("4", "3", "2", "1", "0"), integers.collectWith(addParamFunction, -1, TreeSortedSet.newSet()));
     }
 
     @Override
@@ -329,7 +329,7 @@ public abstract class AbstractSortedSetTestCase extends AbstractCollectionTestCa
     public void flatCollect()
     {
         super.flatCollect();
-        MutableSortedSet<Integer> collection = this.newWith(Collections.<Integer>reverseOrder(), 2, 4, 2, 1, 3);
+        MutableSortedSet<Integer> collection = this.newWith(Collections.reverseOrder(), 2, 4, 2, 1, 3);
         Function<Integer, MutableList<String>> function =
                 object -> FastList.newListWith(String.valueOf(object));
         Verify.assertListsEqual(
@@ -342,11 +342,11 @@ public abstract class AbstractSortedSetTestCase extends AbstractCollectionTestCa
     public void groupBy()
     {
         super.groupBy();
-        MutableSortedSet<Integer> integers = this.newWith(Collections.<Integer>reverseOrder(), 1, 2, 3, 4, 5, 6, 7, 8, 9);
+        MutableSortedSet<Integer> integers = this.newWith(Collections.reverseOrder(), 1, 2, 3, 4, 5, 6, 7, 8, 9);
         Function<Integer, Boolean> isOddFunction = object -> IntegerPredicates.isOdd().accept(object);
         MutableSortedSetMultimap<Boolean, Integer> map = integers.groupBy(isOddFunction);
-        Verify.assertSortedSetsEqual(TreeSortedSet.newSetWith(Collections.<Integer>reverseOrder(), 9, 7, 5, 3, 1), map.get(Boolean.TRUE));
-        Verify.assertSortedSetsEqual(TreeSortedSet.newSetWith(Collections.<Integer>reverseOrder(), 8, 6, 4, 2), map.get(Boolean.FALSE));
+        Verify.assertSortedSetsEqual(TreeSortedSet.newSetWith(Collections.reverseOrder(), 9, 7, 5, 3, 1), map.get(Boolean.TRUE));
+        Verify.assertSortedSetsEqual(TreeSortedSet.newSetWith(Collections.reverseOrder(), 8, 6, 4, 2), map.get(Boolean.FALSE));
         Verify.assertSize(2, map.keysView().toList());
     }
 
@@ -355,7 +355,7 @@ public abstract class AbstractSortedSetTestCase extends AbstractCollectionTestCa
     public void groupByEach()
     {
         super.groupByEach();
-        MutableSortedSet<Integer> set = this.newWith(Collections.<Integer>reverseOrder(), 1, 2, 3, 4, 5, 6, 7);
+        MutableSortedSet<Integer> set = this.newWith(Collections.reverseOrder(), 1, 2, 3, 4, 5, 6, 7);
         NegativeIntervalFunction function = new NegativeIntervalFunction();
         MutableSortedSetMultimap<Integer, Integer> expected = this.newWith(Collections.<Integer>reverseOrder()).groupByEach(function);
         for (int i = 1; i < 8; i++)
@@ -371,7 +371,7 @@ public abstract class AbstractSortedSetTestCase extends AbstractCollectionTestCa
         for (int i = 1; i < 8; ++i)
         {
             Verify.assertSortedSetsEqual(expected.get(-i), actual.get(-i));
-            Verify.assertSortedSetsEqual(expected.get(-i), actualWithTarget.get(-i).toSortedSet(Collections.<Integer>reverseOrder()));
+            Verify.assertSortedSetsEqual(expected.get(-i), actualWithTarget.get(-i).toSortedSet(Collections.reverseOrder()));
         }
         Verify.assertSize(7, actual.keysView().toList());
         Verify.assertSize(7, actualWithTarget.keysView().toList());
@@ -421,7 +421,7 @@ public abstract class AbstractSortedSetTestCase extends AbstractCollectionTestCa
     public void zip()
     {
         super.zip();
-        MutableSortedSet<Integer> revInt = this.newWith(Collections.<Integer>reverseOrder(), 2, 3, 5, 1, 4);
+        MutableSortedSet<Integer> revInt = this.newWith(Collections.reverseOrder(), 2, 3, 5, 1, 4);
         MutableSortedSet<Integer> integers = this.newWith(1, 3, 2, 4, 5);
         MutableList<Pair<Integer, Integer>> zip = integers.zip(revInt);
         MutableList<Pair<Integer, Integer>> revZip = revInt.zip(integers);
@@ -454,7 +454,7 @@ public abstract class AbstractSortedSetTestCase extends AbstractCollectionTestCa
     public void zipWithIndex()
     {
         super.zipWithIndex();
-        MutableSortedSet<Integer> integers = this.newWith(Collections.<Integer>reverseOrder(), 1, 3, 5, 2, 4);
+        MutableSortedSet<Integer> integers = this.newWith(Collections.reverseOrder(), 1, 3, 5, 2, 4);
         Iterator<Pair<Integer, Integer>> zip = integers.zipWithIndex().iterator();
         for (int i = 5; i > 0; --i)
         {
@@ -463,7 +463,7 @@ public abstract class AbstractSortedSetTestCase extends AbstractCollectionTestCa
         Person john = new Person("John", "Smith");
         Person jane = new Person("Jane", "Smith");
         Person johnDoe = new Person("John", "Doe");
-        MutableSortedSet<Person> people = this.newWith(Collections.<Person>reverseOrder(), john, johnDoe, jane);
+        MutableSortedSet<Person> people = this.newWith(Collections.reverseOrder(), john, johnDoe, jane);
         MutableSortedSet<Pair<Person, Integer>> pairs = people.zipWithIndex();
         Verify.assertListsEqual(FastList.newListWith(Tuples.pair(john, 0), Tuples.pair(johnDoe, 1)), pairs.toList());
     }
@@ -480,10 +480,10 @@ public abstract class AbstractSortedSetTestCase extends AbstractCollectionTestCa
     public void unionInto()
     {
         MutableSortedSet<String> set = this.newWith("1", "2", "3", "4");
-        MutableSet<String> union = set.unionInto(UnifiedSet.newSetWith("1", "2", "5", "3"), UnifiedSet.<String>newSet());
+        MutableSet<String> union = set.unionInto(UnifiedSet.newSetWith("1", "2", "5", "3"), UnifiedSet.newSet());
         Verify.assertSetsEqual(UnifiedSet.newSetWith("1", "2", "3", "4", "5"), union);
-        Assert.assertEquals(set, set.unionInto(UnifiedSet.newSetWith("1"), UnifiedSet.<String>newSet()));
-        MutableSortedSet<String> sortedUnion = set.unionInto(TreeSortedSet.newSetWith("5", "1", "6"), TreeSortedSet.<String>newSet());
+        Assert.assertEquals(set, set.unionInto(UnifiedSet.newSetWith("1"), UnifiedSet.newSet()));
+        MutableSortedSet<String> sortedUnion = set.unionInto(TreeSortedSet.newSetWith("5", "1", "6"), TreeSortedSet.newSet());
         Verify.assertSortedSetsEqual(TreeSortedSet.newSetWith("1", "2", "3", "4", "5", "6"), sortedUnion);
     }
 
@@ -499,9 +499,9 @@ public abstract class AbstractSortedSetTestCase extends AbstractCollectionTestCa
     public void intersectInto()
     {
         MutableSortedSet<String> set = this.newWith("2", "4", "3", "1");
-        MutableSet<String> intersect = set.intersectInto(UnifiedSet.newSetWith("a", "b", "4", "c", "1"), UnifiedSet.<String>newSet());
+        MutableSet<String> intersect = set.intersectInto(UnifiedSet.newSetWith("a", "b", "4", "c", "1"), UnifiedSet.newSet());
         Verify.assertSetsEqual(UnifiedSet.newSetWith("1", "4"), intersect);
-        Verify.assertEmpty(set.intersectInto(UnifiedSet.newSetWith("not present"), UnifiedSet.<String>newSet()));
+        Verify.assertEmpty(set.intersectInto(UnifiedSet.newSetWith("not present"), UnifiedSet.newSet()));
     }
 
     @Test
@@ -517,9 +517,9 @@ public abstract class AbstractSortedSetTestCase extends AbstractCollectionTestCa
     public void differenceInto()
     {
         MutableSortedSet<String> set = this.newWith("1", "2", "3", "4");
-        MutableSet<String> difference = set.differenceInto(UnifiedSet.newSetWith("2", "3", "4", "not present"), UnifiedSet.<String>newSet());
+        MutableSet<String> difference = set.differenceInto(UnifiedSet.newSetWith("2", "3", "4", "not present"), UnifiedSet.newSet());
         Assert.assertEquals(UnifiedSet.newSetWith("1"), difference);
-        Assert.assertEquals(set, set.differenceInto(UnifiedSet.newSetWith("not present"), UnifiedSet.<String>newSet()));
+        Assert.assertEquals(set, set.differenceInto(UnifiedSet.newSetWith("not present"), UnifiedSet.newSet()));
     }
 
     @Test
@@ -537,10 +537,10 @@ public abstract class AbstractSortedSetTestCase extends AbstractCollectionTestCa
         MutableSortedSet<String> set = this.newWith("2", "1", "3", "4");
         MutableSet<String> difference = set.symmetricDifferenceInto(
                 UnifiedSet.newSetWith("4", "2", "3", "5"),
-                UnifiedSet.<String>newSet());
+                UnifiedSet.newSet());
         Verify.assertSetsEqual(UnifiedSet.newSetWith("1", "5"), difference);
         Verify.assertSetsEqual(UnifiedSet.newSet(set).with("not present"),
-                set.symmetricDifferenceInto(UnifiedSet.newSetWith("not present"), UnifiedSet.<String>newSet()));
+                set.symmetricDifferenceInto(UnifiedSet.newSetWith("not present"), UnifiedSet.newSet()));
     }
 
     @Test
@@ -569,13 +569,13 @@ public abstract class AbstractSortedSetTestCase extends AbstractCollectionTestCa
         Verify.assertContains(set, powerSet);
 
         MutableSortedSet<SortedSetIterable<Integer>> intPowerSet = this.newWith(1, 2, 3).powerSet();
-        MutableSortedSet<SortedSetIterable<Integer>> revPowerSet = this.newWith(Collections.<Integer>reverseOrder(), 1, 2, 3, 4, 5, 6).powerSet();
+        MutableSortedSet<SortedSetIterable<Integer>> revPowerSet = this.newWith(Collections.reverseOrder(), 1, 2, 3, 4, 5, 6).powerSet();
 
-        FastList<TreeSortedSet<Integer>> expectedSortedSet = FastList.newListWith(TreeSortedSet.<Integer>newSet(), TreeSortedSet.newSetWith(1), TreeSortedSet.newSetWith(2),
+        FastList<TreeSortedSet<Integer>> expectedSortedSet = FastList.newListWith(TreeSortedSet.newSet(), TreeSortedSet.newSetWith(1), TreeSortedSet.newSetWith(2),
                 TreeSortedSet.newSetWith(3), TreeSortedSet.newSetWith(1, 2), TreeSortedSet.newSetWith(1, 3), TreeSortedSet.newSetWith(2, 3), TreeSortedSet.newSetWith(1, 2, 3));
 
         Verify.assertListsEqual(expectedSortedSet, intPowerSet.toList());
-        Verify.assertSortedSetsEqual(TreeSortedSet.newSetWith(Collections.<Integer>reverseOrder(), 1, 2, 3, 4, 5, 6), (SortedSet<Integer>) revPowerSet.getLast());
+        Verify.assertSortedSetsEqual(TreeSortedSet.newSetWith(Collections.reverseOrder(), 1, 2, 3, 4, 5, 6), (SortedSet<Integer>) revPowerSet.getLast());
         Verify.assertInstanceOf(TreeSortedSet.class, intPowerSet);
         Verify.assertInstanceOf(TreeSortedSet.class, intPowerSet.getFirst());
     }
@@ -599,7 +599,7 @@ public abstract class AbstractSortedSetTestCase extends AbstractCollectionTestCa
         MutableSortedSet<Integer> set = this.newWith(1, 2, 3, 4, 5);
         Assert.assertEquals(Integer.valueOf(1), set.first());
         Assert.assertEquals(Integer.valueOf(5), set.last());
-        MutableSortedSet<Integer> set2 = this.newWith(Collections.<Integer>reverseOrder(), 1, 2, 3, 4, 5);
+        MutableSortedSet<Integer> set2 = this.newWith(Collections.reverseOrder(), 1, 2, 3, 4, 5);
         Assert.assertEquals(Integer.valueOf(5), set2.first());
         Assert.assertEquals(Integer.valueOf(1), set2.last());
     }
@@ -618,7 +618,7 @@ public abstract class AbstractSortedSetTestCase extends AbstractCollectionTestCa
     public void toSortedSet_natural_ordering()
     {
         super.toSortedSet_natural_ordering();
-        MutableSortedSet<Integer> integers = this.newWith(Collections.<Integer>reverseOrder(), 1, 2, 3, 4, 5);
+        MutableSortedSet<Integer> integers = this.newWith(Collections.reverseOrder(), 1, 2, 3, 4, 5);
         Verify.assertSortedSetsEqual(TreeSortedSet.newSetWith(1, 2, 3, 4, 5), integers.toSortedSet());
     }
 
@@ -695,7 +695,7 @@ public abstract class AbstractSortedSetTestCase extends AbstractCollectionTestCa
     @Override
     public void selectInstancesOf()
     {
-        MutableSortedSet<Number> numbers = this.<Number>newWith((o1, o2) -> Double.compare(o1.doubleValue(), o2.doubleValue()), 1, 2.0, 3, 4.0, 5);
+        MutableSortedSet<Number> numbers = this.newWith((o1, o2) -> Double.compare(o1.doubleValue(), o2.doubleValue()), 1, 2.0, 3, 4.0, 5);
         MutableSortedSet<Integer> integers = numbers.selectInstancesOf(Integer.class);
         Assert.assertEquals(UnifiedSet.newSetWith(1, 3, 5), integers);
         Assert.assertEquals(FastList.newListWith(1, 3, 5), integers.toList());
@@ -704,7 +704,7 @@ public abstract class AbstractSortedSetTestCase extends AbstractCollectionTestCa
     @Test
     public void toStack()
     {
-        MutableSortedSet<Integer> integers = this.newWith(Comparators.<Integer>reverseNaturalOrder(), 4, 2, 1, 3, 5, 6);
+        MutableSortedSet<Integer> integers = this.newWith(Comparators.reverseNaturalOrder(), 4, 2, 1, 3, 5, 6);
         MutableStack<Integer> stack = integers.toStack();
         Assert.assertEquals(Stacks.immutable.with(6, 5, 4, 3, 2, 1), stack);
     }
@@ -723,8 +723,8 @@ public abstract class AbstractSortedSetTestCase extends AbstractCollectionTestCa
     public void toSortedBag_with_comparator()
     {
         RichIterable<Integer> integers = this.newWith(2, 4, 1, 3);
-        MutableSortedBag<Integer> bag = integers.toSortedBag(Collections.<Integer>reverseOrder());
-        Verify.assertSortedBagsEqual(TreeBag.newBagWith(Collections.<Integer>reverseOrder(), 4, 3, 2, 1), bag);
+        MutableSortedBag<Integer> bag = integers.toSortedBag(Collections.reverseOrder());
+        Verify.assertSortedBagsEqual(TreeBag.newBagWith(Collections.reverseOrder(), 4, 3, 2, 1), bag);
     }
 
     @Override

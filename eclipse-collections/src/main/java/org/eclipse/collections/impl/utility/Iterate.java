@@ -281,7 +281,7 @@ public final class Iterate
             return IterableIterate.select(
                     iterable,
                     predicate,
-                    DefaultSpeciesNewStrategy.INSTANCE.<T>speciesNew((Collection<T>) iterable));
+                    DefaultSpeciesNewStrategy.INSTANCE.speciesNew((Collection<T>) iterable));
         }
         if (iterable != null)
         {
@@ -334,11 +334,11 @@ public final class Iterate
                     iterable,
                     predicate,
                     parameter,
-                    DefaultSpeciesNewStrategy.INSTANCE.<T>speciesNew((Collection<T>) iterable));
+                    DefaultSpeciesNewStrategy.INSTANCE.speciesNew((Collection<T>) iterable));
         }
         if (iterable != null)
         {
-            return IterableIterate.selectWith(iterable, predicate, parameter, FastList.<T>newList());
+            return IterableIterate.selectWith(iterable, predicate, parameter, FastList.newList());
         }
         throw new IllegalArgumentException("Cannot perform a selectWith on null");
     }
@@ -496,7 +496,7 @@ public final class Iterate
             return IterableIterate.selectInstancesOf(
                     iterable,
                     clazz,
-                    DefaultSpeciesNewStrategy.INSTANCE.<T>speciesNew((Collection<?>) iterable));
+                    DefaultSpeciesNewStrategy.INSTANCE.speciesNew((Collection<?>) iterable));
         }
         if (iterable != null)
         {
@@ -602,7 +602,7 @@ public final class Iterate
                     iterable,
                     predicate,
                     function,
-                    DefaultSpeciesNewStrategy.INSTANCE.<V>speciesNew((Collection<T>) iterable));
+                    DefaultSpeciesNewStrategy.INSTANCE.speciesNew((Collection<T>) iterable));
         }
         if (iterable != null)
         {
@@ -742,7 +742,7 @@ public final class Iterate
             return IterableIterate.take(
                     iterable,
                     count,
-                    DefaultSpeciesNewStrategy.INSTANCE.<T>speciesNew((Collection<T>) iterable, count));
+                    DefaultSpeciesNewStrategy.INSTANCE.speciesNew((Collection<T>) iterable, count));
         }
         if (iterable != null)
         {
@@ -775,7 +775,7 @@ public final class Iterate
             return IterableIterate.drop(
                     iterable,
                     count,
-                    DefaultSpeciesNewStrategy.INSTANCE.<T>speciesNew((Collection<T>) iterable, count));
+                    DefaultSpeciesNewStrategy.INSTANCE.speciesNew((Collection<T>) iterable, count));
         }
         if (iterable != null)
         {
@@ -831,7 +831,7 @@ public final class Iterate
             return IterableIterate.reject(
                     iterable,
                     predicate,
-                    DefaultSpeciesNewStrategy.INSTANCE.<T>speciesNew((Collection<T>) iterable));
+                    DefaultSpeciesNewStrategy.INSTANCE.speciesNew((Collection<T>) iterable));
         }
         if (iterable != null)
         {
@@ -1008,11 +1008,11 @@ public final class Iterate
                     iterable,
                     predicate,
                     parameter,
-                    DefaultSpeciesNewStrategy.INSTANCE.<T>speciesNew((Collection<T>) iterable));
+                    DefaultSpeciesNewStrategy.INSTANCE.speciesNew((Collection<T>) iterable));
         }
         if (iterable != null)
         {
-            return IterableIterate.rejectWith(iterable, predicate, parameter, FastList.<T>newList());
+            return IterableIterate.rejectWith(iterable, predicate, parameter, FastList.newList());
         }
         throw new IllegalArgumentException("Cannot perform a rejectWith on null");
     }
@@ -1124,7 +1124,7 @@ public final class Iterate
             return targetCollection.addAll((Collection<T>) iterable);
         }
         int oldSize = targetCollection.size();
-        Iterate.forEachWith(iterable, Procedures2.<T>addToCollection(), targetCollection);
+        Iterate.forEachWith(iterable, Procedures2.addToCollection(), targetCollection);
         return targetCollection.size() != oldSize;
     }
 
@@ -1151,7 +1151,7 @@ public final class Iterate
             return targetCollection.removeAll((Collection<T>) iterable);
         }
         int oldSize = targetCollection.size();
-        Iterate.forEachWith(iterable, Procedures2.<T>removeFromCollection(), targetCollection);
+        Iterate.forEachWith(iterable, Procedures2.removeFromCollection(), targetCollection);
         return targetCollection.size() != oldSize;
     }
 
@@ -1198,7 +1198,7 @@ public final class Iterate
             return IterableIterate.collect(
                     iterable,
                     function,
-                    DefaultSpeciesNewStrategy.INSTANCE.<V>speciesNew(
+                    DefaultSpeciesNewStrategy.INSTANCE.speciesNew(
                             (Collection<T>) iterable,
                             ((Collection<T>) iterable).size()));
         }
@@ -2014,7 +2014,7 @@ public final class Iterate
             return IterableIterate.flatCollect(
                     iterable,
                     function,
-                    DefaultSpeciesNewStrategy.INSTANCE.<V>speciesNew(
+                    DefaultSpeciesNewStrategy.INSTANCE.speciesNew(
                             (Collection<T>) iterable,
                             ((Collection<T>) iterable).size()));
         }
@@ -2078,7 +2078,7 @@ public final class Iterate
                     iterable,
                     function,
                     parameter,
-                    DefaultSpeciesNewStrategy.INSTANCE.<A>speciesNew(
+                    DefaultSpeciesNewStrategy.INSTANCE.speciesNew(
                             (Collection<T>) iterable,
                             ((Collection<T>) iterable).size()));
         }
@@ -2961,7 +2961,7 @@ public final class Iterate
             Function<? super T, ? extends K> keyFunction,
             Function<? super T, ? extends V> valueFunction)
     {
-        return Iterate.addToMap(iterable, keyFunction, valueFunction, UnifiedMap.<K, V>newMap());
+        return Iterate.addToMap(iterable, keyFunction, valueFunction, UnifiedMap.newMap());
     }
 
     /**
@@ -3152,7 +3152,7 @@ public final class Iterate
         }
         if (iterable instanceof Collection)
         {
-            return IterableIterate.groupBy(iterable, function, FastListMultimap.<V, T>newMultimap());
+            return IterableIterate.groupBy(iterable, function, FastListMultimap.newMultimap());
         }
         if (iterable != null)
         {
@@ -3271,7 +3271,7 @@ public final class Iterate
         }
         if (iterable instanceof Collection)
         {
-            return IterableIterate.groupByEach(iterable, function, FastListMultimap.<V, T>newMultimap());
+            return IterableIterate.groupByEach(iterable, function, FastListMultimap.newMultimap());
         }
         if (iterable != null)
         {
@@ -3507,7 +3507,7 @@ public final class Iterate
         {
             return IterableIterate.zipWithIndex(
                     iterable,
-                    DefaultSpeciesNewStrategy.INSTANCE.<Pair<T, Integer>>speciesNew(
+                    DefaultSpeciesNewStrategy.INSTANCE.speciesNew(
                             (Collection<T>) iterable,
                             ((Collection<T>) iterable).size()));
         }

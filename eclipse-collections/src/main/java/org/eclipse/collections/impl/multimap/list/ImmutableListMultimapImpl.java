@@ -61,7 +61,7 @@ public final class ImmutableListMultimapImpl<K, V>
 
     public ImmutableListMultimap<K, V> newEmpty()
     {
-        return new ImmutableListMultimapImpl<>(Maps.immutable.<K, ImmutableList<V>>of());
+        return new ImmutableListMultimapImpl<>(Maps.immutable.of());
     }
 
     public MutableListMultimap<K, V> toMutable()
@@ -134,27 +134,27 @@ public final class ImmutableListMultimapImpl<K, V>
 
     public ImmutableListMultimap<K, V> selectKeysValues(Predicate2<? super K, ? super V> predicate)
     {
-        return this.selectKeysValues(predicate, FastListMultimap.<K, V>newMultimap()).toImmutable();
+        return this.selectKeysValues(predicate, FastListMultimap.newMultimap()).toImmutable();
     }
 
     public ImmutableListMultimap<K, V> rejectKeysValues(Predicate2<? super K, ? super V> predicate)
     {
-        return this.rejectKeysValues(predicate, FastListMultimap.<K, V>newMultimap()).toImmutable();
+        return this.rejectKeysValues(predicate, FastListMultimap.newMultimap()).toImmutable();
     }
 
     public ImmutableListMultimap<K, V> selectKeysMultiValues(Predicate2<? super K, ? super Iterable<V>> predicate)
     {
-        return this.selectKeysMultiValues(predicate, FastListMultimap.<K, V>newMultimap()).toImmutable();
+        return this.selectKeysMultiValues(predicate, FastListMultimap.newMultimap()).toImmutable();
     }
 
     public ImmutableListMultimap<K, V> rejectKeysMultiValues(Predicate2<? super K, ? super Iterable<V>> predicate)
     {
-        return this.rejectKeysMultiValues(predicate, FastListMultimap.<K, V>newMultimap()).toImmutable();
+        return this.rejectKeysMultiValues(predicate, FastListMultimap.newMultimap()).toImmutable();
     }
 
     public <K2, V2> ImmutableBagMultimap<K2, V2> collectKeysValues(Function2<? super K, ? super V, Pair<K2, V2>> function)
     {
-        return this.collectKeysValues(function, HashBagMultimap.<K2, V2>newMultimap()).toImmutable();
+        return this.collectKeysValues(function, HashBagMultimap.newMultimap()).toImmutable();
     }
 
     public <V2> ImmutableListMultimap<K, V2> collectValues(Function<? super V, ? extends V2> function)

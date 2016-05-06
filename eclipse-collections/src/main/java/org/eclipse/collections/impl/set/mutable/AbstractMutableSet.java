@@ -107,17 +107,17 @@ public abstract class AbstractMutableSet<T>
 
     public <P> MutableSet<T> selectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
-        return this.selectWith(predicate, parameter, this.<T>newEmptySameSize());
+        return this.selectWith(predicate, parameter, this.newEmptySameSize());
     }
 
     public MutableSet<T> reject(Predicate<? super T> predicate)
     {
-        return this.reject(predicate, this.<T>newEmptySameSize());
+        return this.reject(predicate, this.newEmptySameSize());
     }
 
     public <P> MutableSet<T> rejectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
-        return this.rejectWith(predicate, parameter, this.<T>newEmptySameSize());
+        return this.rejectWith(predicate, parameter, this.newEmptySameSize());
     }
 
     public PartitionMutableSet<T> partition(Predicate<? super T> predicate)
@@ -143,7 +143,7 @@ public abstract class AbstractMutableSet<T>
 
     public <V> MutableSet<V> collect(Function<? super T, ? extends V> function)
     {
-        return this.collect(function, this.<V>newEmptySameSize());
+        return this.collect(function, this.newEmptySameSize());
     }
 
     public MutableBooleanSet collectBoolean(BooleanFunction<? super T> booleanFunction)
@@ -204,27 +204,27 @@ public abstract class AbstractMutableSet<T>
 
     public <V> MutableSet<V> flatCollect(Function<? super T, ? extends Iterable<V>> function)
     {
-        return this.flatCollect(function, this.<V>newEmptySameSize());
+        return this.flatCollect(function, this.newEmptySameSize());
     }
 
     public <P, V> MutableSet<V> collectWith(Function2<? super T, ? super P, ? extends V> function, P parameter)
     {
-        return this.collectWith(function, parameter, this.<V>newEmptySameSize());
+        return this.collectWith(function, parameter, this.newEmptySameSize());
     }
 
     public <V> MutableSet<V> collectIf(Predicate<? super T> predicate, Function<? super T, ? extends V> function)
     {
-        return this.collectIf(predicate, function, this.<V>newEmptySameSize());
+        return this.collectIf(predicate, function, this.newEmptySameSize());
     }
 
     public <V> UnifiedSetMultimap<V, T> groupBy(Function<? super T, ? extends V> function)
     {
-        return this.groupBy(function, UnifiedSetMultimap.<V, T>newMultimap());
+        return this.groupBy(function, UnifiedSetMultimap.newMultimap());
     }
 
     public <V> UnifiedSetMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function)
     {
-        return this.groupByEach(function, UnifiedSetMultimap.<V, T>newMultimap());
+        return this.groupByEach(function, UnifiedSetMultimap.newMultimap());
     }
 
     public MutableSet<T> asUnmodifiable()
@@ -248,7 +248,7 @@ public abstract class AbstractMutableSet<T>
     @Deprecated
     public <S> MutableSet<Pair<T, S>> zip(Iterable<S> that)
     {
-        return this.zip(that, this.<Pair<T, S>>newEmptySameSize());
+        return this.zip(that, this.newEmptySameSize());
     }
 
     /**
@@ -257,7 +257,7 @@ public abstract class AbstractMutableSet<T>
     @Deprecated
     public MutableSet<Pair<T, Integer>> zipWithIndex()
     {
-        return this.zipWithIndex(this.<Pair<T, Integer>>newEmptySameSize());
+        return this.zipWithIndex(this.newEmptySameSize());
     }
 
     @Override

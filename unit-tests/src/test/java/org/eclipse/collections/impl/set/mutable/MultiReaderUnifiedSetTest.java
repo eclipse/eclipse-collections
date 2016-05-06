@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -56,7 +56,7 @@ public class MultiReaderUnifiedSetTest extends MultiReaderMutableCollectionTestC
         super.select();
         Verify.assertContainsAll(MultiReaderUnifiedSet.newSetWith(1, 2, 3, 4, 5).select(Predicates.lessThan(3)), 1, 2);
         Verify.assertContainsAll(MultiReaderUnifiedSet.newSetWith(-1, 2, 3, 4, 5).select(Predicates.lessThan(3),
-                FastList.<Integer>newList()), -1, 2);
+                FastList.newList()), -1, 2);
     }
 
     @Override
@@ -66,7 +66,7 @@ public class MultiReaderUnifiedSetTest extends MultiReaderMutableCollectionTestC
         super.reject();
         Verify.assertContainsAll(MultiReaderUnifiedSet.newSetWith(1, 2, 3, 4).reject(Predicates.lessThan(3)), 3, 4);
         Verify.assertContainsAll(MultiReaderUnifiedSet.newSetWith(1, 2, 3, 4).reject(Predicates.lessThan(3),
-                FastList.<Integer>newList()), 3, 4);
+                FastList.newList()), 3, 4);
     }
 
     @Override
@@ -179,12 +179,12 @@ public class MultiReaderUnifiedSetTest extends MultiReaderMutableCollectionTestC
     public void unionInto()
     {
         MutableSet<String> set = MultiReaderUnifiedSet.newSetWith("1", "2", "3", "4");
-        MutableSet<String> union = set.unionInto(UnifiedSet.newSetWith("a", "b", "c", "1"), UnifiedSet.<String>newSet());
+        MutableSet<String> union = set.unionInto(UnifiedSet.newSetWith("a", "b", "c", "1"), UnifiedSet.newSet());
         Verify.assertSize(set.size() + 3, union);
         Assert.assertTrue(union.containsAllIterable(Interval.oneTo(set.size()).collect(String::valueOf)));
         Verify.assertContainsAll(union, "a", "b", "c");
 
-        Assert.assertEquals(set, set.unionInto(UnifiedSet.newSetWith("1"), UnifiedSet.<String>newSet()));
+        Assert.assertEquals(set, set.unionInto(UnifiedSet.newSetWith("1"), UnifiedSet.newSet()));
     }
 
     @Test
@@ -202,11 +202,11 @@ public class MultiReaderUnifiedSetTest extends MultiReaderMutableCollectionTestC
     public void intersectInto()
     {
         MutableSet<String> set = MultiReaderUnifiedSet.newSetWith("1", "2", "3", "4");
-        MutableSet<String> intersect = set.intersectInto(UnifiedSet.newSetWith("a", "b", "c", "1"), UnifiedSet.<String>newSet());
+        MutableSet<String> intersect = set.intersectInto(UnifiedSet.newSetWith("a", "b", "c", "1"), UnifiedSet.newSet());
         Verify.assertSize(1, intersect);
         Assert.assertEquals(UnifiedSet.newSetWith("1"), intersect);
 
-        Verify.assertEmpty(set.intersectInto(UnifiedSet.newSetWith("not present"), UnifiedSet.<String>newSet()));
+        Verify.assertEmpty(set.intersectInto(UnifiedSet.newSetWith("not present"), UnifiedSet.newSet()));
     }
 
     @Test
@@ -222,9 +222,9 @@ public class MultiReaderUnifiedSetTest extends MultiReaderMutableCollectionTestC
     public void differenceInto()
     {
         MutableSet<String> set = MultiReaderUnifiedSet.newSetWith("1", "2", "3", "4");
-        MutableSet<String> difference = set.differenceInto(UnifiedSet.newSetWith("2", "3", "4", "not present"), UnifiedSet.<String>newSet());
+        MutableSet<String> difference = set.differenceInto(UnifiedSet.newSetWith("2", "3", "4", "not present"), UnifiedSet.newSet());
         Assert.assertEquals(UnifiedSet.newSetWith("1"), difference);
-        Assert.assertEquals(set, set.differenceInto(UnifiedSet.newSetWith("not present"), UnifiedSet.<String>newSet()));
+        Assert.assertEquals(set, set.differenceInto(UnifiedSet.newSetWith("not present"), UnifiedSet.newSet()));
     }
 
     @Test
@@ -248,7 +248,7 @@ public class MultiReaderUnifiedSetTest extends MultiReaderMutableCollectionTestC
         MutableSet<String> set = MultiReaderUnifiedSet.newSetWith("1", "2", "3", "4");
         MutableSet<String> difference = set.symmetricDifferenceInto(
                 UnifiedSet.newSetWith("2", "3", "4", "5", "not present"),
-                UnifiedSet.<String>newSet());
+                UnifiedSet.newSet());
         Verify.assertContains("1", difference);
         Assert.assertTrue(difference.containsAllIterable(Interval.fromTo(set.size() + 1, 5).collect(String::valueOf)));
         for (int i = 2; i <= set.size(); i++)
@@ -258,7 +258,7 @@ public class MultiReaderUnifiedSetTest extends MultiReaderMutableCollectionTestC
 
         Verify.assertSize(
                 set.size() + 1,
-                set.symmetricDifferenceInto(UnifiedSet.newSetWith("not present"), UnifiedSet.<String>newSet()));
+                set.symmetricDifferenceInto(UnifiedSet.newSetWith("not present"), UnifiedSet.newSet()));
     }
 
     @Test
@@ -377,8 +377,8 @@ public class MultiReaderUnifiedSetTest extends MultiReaderMutableCollectionTestC
     public void toSortedBag_with_comparator()
     {
         RichIterable<Integer> integers = this.newWith(2, 4, 1, 3);
-        MutableSortedBag<Integer> bag = integers.toSortedBag(Collections.<Integer>reverseOrder());
-        Verify.assertSortedBagsEqual(TreeBag.newBagWith(Collections.<Integer>reverseOrder(), 4, 3, 2, 1), bag);
+        MutableSortedBag<Integer> bag = integers.toSortedBag(Collections.reverseOrder());
+        Verify.assertSortedBagsEqual(TreeBag.newBagWith(Collections.reverseOrder(), 4, 3, 2, 1), bag);
     }
 
     @Override

@@ -30,6 +30,6 @@ public class UnifiedSetWithHashingStrategyMultimapSerializationTest
     @Override
     protected MutableMultimap<String, String> createEmpty()
     {
-        return new UnifiedSetWithHashingStrategyMultimap<>(HashingStrategies.<String>defaultStrategy());
+        return new UnifiedSetWithHashingStrategyMultimap<>(HashingStrategies.defaultStrategy());
     }
 }

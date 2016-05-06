@@ -12,8 +12,6 @@ package org.eclipse.collections.impl.factory;
 
 import java.util.Comparator;
 
-import org.eclipse.collections.api.bag.ImmutableBag;
-import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.multimap.bag.ImmutableBagMultimap;
 import org.eclipse.collections.api.multimap.bag.MutableBagMultimap;
 import org.eclipse.collections.api.multimap.list.ImmutableListMultimap;
@@ -22,8 +20,6 @@ import org.eclipse.collections.api.multimap.set.ImmutableSetMultimap;
 import org.eclipse.collections.api.multimap.set.MutableSetMultimap;
 import org.eclipse.collections.api.multimap.sortedset.ImmutableSortedSetMultimap;
 import org.eclipse.collections.api.multimap.sortedset.MutableSortedSetMultimap;
-import org.eclipse.collections.api.set.ImmutableSet;
-import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 import org.eclipse.collections.impl.multimap.bag.HashBagMultimap;
 import org.eclipse.collections.impl.multimap.bag.ImmutableBagMultimapImpl;
 import org.eclipse.collections.impl.multimap.list.FastListMultimap;
@@ -58,7 +54,7 @@ public final class Multimaps
 
         public static final class ImmutableListMultimapFactory
         {
-            public static final ImmutableListMultimap<Object, Object> EMPTY = new ImmutableListMultimapImpl<>(Maps.immutable.<Object, ImmutableList<Object>>with());
+            public static final ImmutableListMultimap<Object, Object> EMPTY = new ImmutableListMultimapImpl<>(Maps.immutable.with());
 
             private ImmutableListMultimapFactory()
             {
@@ -99,7 +95,7 @@ public final class Multimaps
 
         public static final class ImmutableSetMultimapFactory
         {
-            public static final ImmutableSetMultimap<Object, Object> EMPTY = new ImmutableSetMultimapImpl<>(Maps.immutable.<Object, ImmutableSet<Object>>with());
+            public static final ImmutableSetMultimap<Object, Object> EMPTY = new ImmutableSetMultimapImpl<>(Maps.immutable.with());
 
             private ImmutableSetMultimapFactory()
             {
@@ -146,7 +142,7 @@ public final class Multimaps
 
             public <K, V> ImmutableSortedSetMultimap<K, V> with(Comparator<V> comparator)
             {
-                return new ImmutableSortedSetMultimapImpl<>(Maps.immutable.<K, ImmutableSortedSet<V>>with(), comparator);
+                return new ImmutableSortedSetMultimapImpl<>(Maps.immutable.with(), comparator);
             }
 
             public <K, V> ImmutableSortedSetMultimap<K, V> with(Comparator<V> comparator, K key, V value)
@@ -174,7 +170,7 @@ public final class Multimaps
 
         public static final class ImmutableBagMultimapFactory
         {
-            public static final ImmutableBagMultimap<Object, Object> EMPTY = new ImmutableBagMultimapImpl<>(Maps.immutable.<Object, ImmutableBag<Object>>with());
+            public static final ImmutableBagMultimap<Object, Object> EMPTY = new ImmutableBagMultimapImpl<>(Maps.immutable.with());
 
             private ImmutableBagMultimapFactory()
             {

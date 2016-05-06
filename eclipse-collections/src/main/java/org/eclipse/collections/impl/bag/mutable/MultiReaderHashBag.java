@@ -108,12 +108,12 @@ public final class MultiReaderHashBag<T>
 
     public static <T> MultiReaderHashBag<T> newBag()
     {
-        return new MultiReaderHashBag<>(HashBag.<T>newBag());
+        return new MultiReaderHashBag<>(HashBag.newBag());
     }
 
     public static <T> MultiReaderHashBag<T> newBag(int capacity)
     {
-        return new MultiReaderHashBag<>(HashBag.<T>newBag(capacity));
+        return new MultiReaderHashBag<>(HashBag.newBag(capacity));
     }
 
     public static <T> MultiReaderHashBag<T> newBag(Iterable<T> iterable)
@@ -800,7 +800,7 @@ public final class MultiReaderHashBag<T>
         public void becomeUseless()
         {
             this.delegate = null;
-            this.requestedIterators.each(UntouchableIterator<T>::becomeUseless);
+            this.requestedIterators.each(UntouchableIterator::becomeUseless);
         }
 
         public MutableBag<T> with(T element)

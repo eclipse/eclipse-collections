@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -237,7 +237,7 @@ abstract class AbstractImmutableList<T>
 
     public <P> ImmutableList<T> selectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
-        return ListIterate.selectWith(this, predicate, parameter, FastList.<T>newList()).toImmutable();
+        return ListIterate.selectWith(this, predicate, parameter, FastList.newList()).toImmutable();
     }
 
     @Override
@@ -258,7 +258,7 @@ abstract class AbstractImmutableList<T>
 
     public <P> ImmutableList<T> rejectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
-        return ListIterate.rejectWith(this, predicate, parameter, FastList.<T>newList()).toImmutable();
+        return ListIterate.rejectWith(this, predicate, parameter, FastList.newList()).toImmutable();
     }
 
     @Override
@@ -675,7 +675,7 @@ abstract class AbstractImmutableList<T>
 
     public <V> ImmutableListMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function)
     {
-        return this.groupByEach(function, FastListMultimap.<V, T>newMultimap()).toImmutable();
+        return this.groupByEach(function, FastListMultimap.newMultimap()).toImmutable();
     }
 
     @Override
@@ -724,12 +724,12 @@ abstract class AbstractImmutableList<T>
 
     public <S> ImmutableList<Pair<T, S>> zip(Iterable<S> that)
     {
-        return this.zip(that, FastList.<Pair<T, S>>newList()).toImmutable();
+        return this.zip(that, FastList.newList()).toImmutable();
     }
 
     public ImmutableList<Pair<T, Integer>> zipWithIndex()
     {
-        return this.zipWithIndex(FastList.<Pair<T, Integer>>newList()).toImmutable();
+        return this.zipWithIndex(FastList.newList()).toImmutable();
     }
 
     public ImmutableList<T> take(int count)

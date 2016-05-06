@@ -157,7 +157,7 @@ final class DoubletonMap<K, V>
 
     public MutableSet<Entry<K, V>> entrySet()
     {
-        return Sets.fixedSize.<Map.Entry<K, V>>of(
+        return Sets.fixedSize.of(
                 new ImmutableEntry<>(this.key1, this.value1),
                 new ImmutableEntry<>(this.key2, this.value2));
     }

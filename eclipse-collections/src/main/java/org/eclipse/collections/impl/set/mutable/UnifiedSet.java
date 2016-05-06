@@ -174,9 +174,9 @@ public class UnifiedSet<T>
             throw new NullPointerException();
         }
         UnifiedSet<K> result = source instanceof RichIterable
-                ? UnifiedSet.<K>newSet(((RichIterable<?>) source).size())
-                : UnifiedSet.<K>newSet();
-        Iterate.forEachWith(source, Procedures2.<K>addToCollection(), result);
+                ? UnifiedSet.newSet(((RichIterable<?>) source).size())
+                : UnifiedSet.newSet();
+        Iterate.forEachWith(source, Procedures2.addToCollection(), result);
         return result;
     }
 
@@ -1014,7 +1014,7 @@ public class UnifiedSet<T>
         }
         else
         {
-            Iterate.forEachWith(iterable, Procedures2.<T>addToCollection(), this);
+            Iterate.forEachWith(iterable, Procedures2.addToCollection(), this);
         }
         return this.size() != oldSize;
     }
@@ -1850,7 +1850,7 @@ public class UnifiedSet<T>
     public <V> UnifiedSetMultimap<V, T> groupBy(
             Function<? super T, ? extends V> function)
     {
-        return this.groupBy(function, UnifiedSetMultimap.<V, T>newMultimap());
+        return this.groupBy(function, UnifiedSetMultimap.newMultimap());
     }
 
     public <V> UnifiedSetMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function)

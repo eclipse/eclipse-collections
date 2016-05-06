@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -181,25 +181,25 @@ public abstract class AbstractMutableBagMultimapTestCase extends AbstractMutable
 
         multimap.putOccurrences("2", "b", 1);
         Verify.assertSize(1, multimap);
-        Verify.assertBagsEqual(HashBag.<String>newBagWith("b"), multimap.get("2"));
+        Verify.assertBagsEqual(HashBag.newBagWith("b"), multimap.get("2"));
 
         multimap.putOccurrences("2", "b", 2);
         Verify.assertSize(3, multimap);
-        Verify.assertBagsEqual(HashBag.<String>newBagWith("b", "b", "b"), multimap.get("2"));
+        Verify.assertBagsEqual(HashBag.newBagWith("b", "b", "b"), multimap.get("2"));
 
         multimap.putOccurrences("2", "b", 0);
         Verify.assertSize(3, multimap);
-        Verify.assertBagsEqual(HashBag.<String>newBagWith("b", "b", "b"), multimap.get("2"));
+        Verify.assertBagsEqual(HashBag.newBagWith("b", "b", "b"), multimap.get("2"));
 
         Verify.assertThrows(IllegalArgumentException.class, () -> multimap.putOccurrences("2", "b", -1));
 
         multimap.putOccurrences("2", "c", 2);
         Verify.assertSize(5, multimap);
-        Verify.assertBagsEqual(HashBag.<String>newBagWith("b", "b", "b", "c", "c"), multimap.get("2"));
+        Verify.assertBagsEqual(HashBag.newBagWith("b", "b", "b", "c", "c"), multimap.get("2"));
 
         multimap.putOccurrences("3", "d", 3);
         Verify.assertSize(8, multimap);
-        Verify.assertBagsEqual(HashBag.<String>newBagWith("b", "b", "b", "c", "c"), multimap.get("2"));
-        Verify.assertBagsEqual(HashBag.<String>newBagWith("d", "d", "d"), multimap.get("3"));
+        Verify.assertBagsEqual(HashBag.newBagWith("b", "b", "b", "c", "c"), multimap.get("2"));
+        Verify.assertBagsEqual(HashBag.newBagWith("d", "d", "d"), multimap.get("3"));
     }
 }

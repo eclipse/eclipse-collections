@@ -35,7 +35,7 @@ public final class SortedSetIterables
     {
         Comparator<? super T> comparator = set.comparator();
         MutableSortedSet<T> innerTree = TreeSortedSet.newSet(comparator);
-        TreeSortedSet<MutableSortedSet<T>> sortedSetIterables = TreeSortedSet.newSet(Comparators.<T>powerSet());
+        TreeSortedSet<MutableSortedSet<T>> sortedSetIterables = TreeSortedSet.newSet(Comparators.powerSet());
         MutableSortedSet<MutableSortedSet<T>> seed = sortedSetIterables.with(innerTree);
 
         return Iterate.injectInto(seed, set, (accumulator, element) -> accumulator.union(accumulator.collect(set1 -> {
@@ -50,7 +50,7 @@ public final class SortedSetIterables
      */
     public static <T> ImmutableSortedSet<ImmutableSortedSet<T>> immutablePowerSet(SortedSet<T> set)
     {
-        return powerSet(set).collect(MutableSortedSet<T>::toImmutable, TreeSortedSet.<ImmutableSortedSet<T>>newSet(Comparators.<T>powerSet())).toImmutable();
+        return powerSet(set).collect(MutableSortedSet<T>::toImmutable, TreeSortedSet.newSet(Comparators.powerSet())).toImmutable();
     }
 
     public static <T> int compare(SortedSetIterable<T> setA, SortedSetIterable<T> setB)
