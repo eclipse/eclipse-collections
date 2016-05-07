@@ -472,4 +472,10 @@ public class EmptyMapTest extends AbstractMemoryEfficientMutableMapTest
         }
         Assert.assertEquals(FastList.newListWith(), collection);
     }
+
+    @Test
+    public void getOnly()
+    {
+        Verify.assertThrows(IllegalStateException.class, () -> new EmptyMap<>().getOnly());
+    }
 }

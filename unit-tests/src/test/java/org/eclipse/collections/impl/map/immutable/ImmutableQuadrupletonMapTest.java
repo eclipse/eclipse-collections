@@ -188,6 +188,12 @@ public class ImmutableQuadrupletonMapTest extends ImmutableMemoryEfficientMapTes
         Assert.assertEquals("{1=One, 2=Two, 3=Three, 4=Four}", map.toString());
     }
 
+    @Test
+    public void getOnly()
+    {
+        Verify.assertThrows(IllegalStateException.class, () -> this.classUnderTest().getOnly());
+    }
+
     @Override
     public void select()
     {

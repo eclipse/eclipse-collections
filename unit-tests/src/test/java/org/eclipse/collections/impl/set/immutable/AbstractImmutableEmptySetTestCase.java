@@ -122,6 +122,12 @@ public abstract class AbstractImmutableEmptySetTestCase extends AbstractImmutabl
         Assert.assertNull(integers.getLast());
     }
 
+    @Test
+    public void getOnly()
+    {
+        Verify.assertThrows(IllegalStateException.class, () -> this.classUnderTest().getOnly());
+    }
+
     @Override
     @Test
     public void isEmpty()

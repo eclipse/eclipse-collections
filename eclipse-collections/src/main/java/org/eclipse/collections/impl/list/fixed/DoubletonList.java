@@ -73,6 +73,12 @@ final class DoubletonList<T>
     }
 
     @Override
+    public T getOnly()
+    {
+        throw new IllegalStateException("Size must be 1 but was " + this.size());
+    }
+
+    @Override
     public int size()
     {
         return 2;

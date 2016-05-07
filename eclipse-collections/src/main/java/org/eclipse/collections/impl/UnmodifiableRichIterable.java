@@ -272,6 +272,12 @@ public class UnmodifiableRichIterable<T>
     }
 
     @Override
+    public T getOnly()
+    {
+        return this.iterable.getOnly();
+    }
+
+    @Override
     public RichIterable<T> select(Predicate<? super T> predicate)
     {
         return this.iterable.select(predicate);

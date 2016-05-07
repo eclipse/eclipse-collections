@@ -277,6 +277,12 @@ final class ImmutableQuadrupletonMap<K, V>
         return this.filter(Predicates2.not(predicate));
     }
 
+    @Override
+    public V getOnly()
+    {
+        throw new IllegalStateException("Size must be 1 but was " + this.size());
+    }
+
     private ImmutableMap<K, V> filter(Predicate2<? super K, ? super V> predicate)
     {
         int result = 0;

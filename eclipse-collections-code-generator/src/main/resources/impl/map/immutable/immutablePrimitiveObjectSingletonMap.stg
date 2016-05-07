@@ -308,6 +308,11 @@ final class Immutable<name>ObjectSingletonMap\<V> extends AbstractImmutable<name
         return this.value1;
     }
 
+    public V getOnly()
+    {
+        return this.value1;
+    }
+
     public boolean contains(Object object)
     {
         return this.containsValue(object);

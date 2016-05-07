@@ -44,4 +44,11 @@ public class ImmutableDecapletonListTest extends AbstractImmutableListTestCase
                 iList(1, 3, 5, 7, 9),
                 numbers.selectInstancesOf(Integer.class));
     }
+
+    @Test(expected = IllegalStateException.class)
+    public void getOnly()
+    {
+        ImmutableList<Integer> list = this.classUnderTest();
+        list.getOnly();
+    }
 }

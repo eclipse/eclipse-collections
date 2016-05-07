@@ -736,6 +736,12 @@ public class UnmodifiableTreeMap<K, V>
     }
 
     @Override
+    public V getOnly()
+    {
+        return this.getMutableSortedMap().getOnly();
+    }
+
+    @Override
     public <R> MutableListMultimap<R, V> groupBy(Function<? super V, ? extends R> function)
     {
         return this.getMutableSortedMap().groupBy(function);

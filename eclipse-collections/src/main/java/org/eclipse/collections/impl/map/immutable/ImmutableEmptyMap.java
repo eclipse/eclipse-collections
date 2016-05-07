@@ -225,6 +225,12 @@ final class ImmutableEmptyMap<K, V>
         return this;
     }
 
+    @Override
+    public V getOnly()
+    {
+        throw new IllegalStateException("Size must be 1 but was " + this.size());
+    }
+
     private Object writeReplace()
     {
         return new ImmutableMapSerializationProxy<>(this);

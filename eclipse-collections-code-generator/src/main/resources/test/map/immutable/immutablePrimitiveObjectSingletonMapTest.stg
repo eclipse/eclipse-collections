@@ -194,6 +194,13 @@ public class Immutable<name>ObjectSingletonMapTest extends AbstractImmutable<nam
 
     @Override
     @Test
+    public void getOnly()
+    {
+        Assert.assertEquals("zero", this.classUnderTest().getOnly());
+    }
+
+    @Override
+    @Test
     public void tap()
     {
         StringBuilder concat = new StringBuilder();

@@ -1188,6 +1188,26 @@ public abstract class Abstract<name>ObjectMapTestCase
     }
 
     @Test
+    public void getOnly()
+    {
+        Assert.assertEquals("zero", this.newWithKeysValues(<(literal.(type))("0")>, "zero").getOnly());
+        Assert.assertEquals("one", this.newWithKeysValues(<(literal.(type))("1")>, "one").getOnly());
+        Assert.assertEquals("two", this.newWithKeysValues(<(literal.(type))("2")>, "two").getOnly());
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void getOnly_empty_throws()
+    {
+        this.getEmptyMap().getOnly();
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void getOnly_not_only_one_throws()
+    {
+        this.newWithKeysValues(<(literal.(type))("1")>, "one", <(literal.(type))("5")>, "five").getOnly();
+    }
+
+    @Test
     public void contains()
     {
         Assert.assertFalse(this.classUnderTest().contains(null));

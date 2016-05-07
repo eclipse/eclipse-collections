@@ -211,6 +211,12 @@ public abstract class AbstractMapIterable<K, V> extends AbstractRichIterable<V> 
     }
 
     @Override
+    public V getOnly()
+    {
+        return this.valuesView().getOnly();
+    }
+
+    @Override
     public Object[] toArray()
     {
         return this.valuesView().toArray();

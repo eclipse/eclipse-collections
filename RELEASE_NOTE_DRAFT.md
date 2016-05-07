@@ -10,6 +10,7 @@ New Functionality
 * Implemented MutableMultimap.putAllPairs(Iterable<Pair<K, V>> keyValuePairs).
 * Implemented LazyIterable.takeWhile(Predicate<? super T> predicate) and LazyIterable.dropWhile(Predicate<? super T> predicate).
 * Implemented unmodifiable BiMaps.
+* Implemented RichIterable.getOnly().
 * Pull up into() from LazyIterable to RichIterable.
 * Made StackIterable implement OrderedIterable.
 * Implemented summarizeInt/Float/Long/Double({Int/Float/Long/Double}Function) on RichIterable

@@ -395,6 +395,12 @@ public class SingletonSetTest extends AbstractMemoryEfficientMutableSetTestCase
     }
 
     @Test
+    public void getOnly()
+    {
+        Assert.assertEquals(Integer.valueOf(1), this.intSet.getOnly());
+    }
+
+    @Test
     public void isEmpty()
     {
         Verify.assertNotEmpty(this.intSet);

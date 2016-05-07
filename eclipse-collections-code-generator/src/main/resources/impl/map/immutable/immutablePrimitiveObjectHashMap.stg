@@ -203,6 +203,11 @@ final class Immutable<name>ObjectHashMap\<V> extends AbstractImmutable<name>Obje
         return this.delegate.getLast();
     }
 
+    public V getOnly()
+    {
+        return this.delegate.getOnly();
+    }
+
     public boolean contains(Object object)
     {
         return this.delegate.contains(object);

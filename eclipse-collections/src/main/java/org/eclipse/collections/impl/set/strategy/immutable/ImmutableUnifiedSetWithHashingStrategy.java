@@ -91,6 +91,12 @@ final class ImmutableUnifiedSetWithHashingStrategy<T>
     }
 
     @Override
+    public T getOnly()
+    {
+        return this.delegate.getOnly();
+    }
+
+    @Override
     public void each(Procedure<? super T> procedure)
     {
         this.delegate.forEach(procedure);

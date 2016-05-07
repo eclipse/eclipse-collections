@@ -138,6 +138,12 @@ final class ImmutableEmptySet<T>
     }
 
     @Override
+    public T getOnly()
+    {
+        throw new IllegalStateException("Size must be 1 but was " + this.size());
+    }
+
+    @Override
     public Iterator<T> iterator()
     {
         return EmptyIterator.getInstance();

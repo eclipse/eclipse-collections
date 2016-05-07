@@ -335,6 +335,12 @@ final class ImmutableEmptyList<T>
     }
 
     @Override
+    public T getOnly()
+    {
+        throw new IllegalStateException("Size must be 1 but was " + this.size());
+    }
+
+    @Override
     public int indexOf(Object object)
     {
         return -1;

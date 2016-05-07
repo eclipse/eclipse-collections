@@ -495,4 +495,10 @@ public class TripletonMapTest extends AbstractMemoryEfficientMutableMapTest
     {
         Assert.assertEquals(Bags.mutable.of("One", "Two", "Three"), this.classUnderTest().valuesView().toBag());
     }
+
+    @Test
+    public void getOnly()
+    {
+        Verify.assertThrows(IllegalStateException.class, () -> this.classUnderTest().getOnly());
+    }
 }

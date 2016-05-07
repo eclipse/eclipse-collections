@@ -203,4 +203,10 @@ public class SextupletonListTest extends AbstractMemoryEfficientMutableListTestC
         Verify.assertListsEqual(FastList.newListWith(1, 3, 2, 3, 4), list);
         Verify.assertInstanceOf(QuintupletonList.class, list);
     }
+
+    @Test
+    public void testGetOnly()
+    {
+        Verify.assertThrows(IllegalStateException.class, () -> this.list.getOnly());
+    }
 }

@@ -172,6 +172,12 @@ public class ImmutableEmptySortedSetTest extends AbstractImmutableSortedSetTestC
         this.classUnderTest().getLast();
     }
 
+    @Test(expected = IllegalStateException.class)
+    public void getOnly()
+    {
+        this.classUnderTest().getOnly();
+    }
+
     @Override
     @Test
     public void isEmpty()

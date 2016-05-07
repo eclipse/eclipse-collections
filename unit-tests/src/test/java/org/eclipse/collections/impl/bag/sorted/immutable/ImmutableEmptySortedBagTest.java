@@ -546,6 +546,12 @@ public class ImmutableEmptySortedBagTest extends AbstractImmutableSortedBagTestC
         Assert.assertNull(this.classUnderTest(Comparators.reverseNaturalOrder()).getFirst());
     }
 
+    @Test
+    public void getOnly()
+    {
+        Verify.assertThrows(IllegalStateException.class, () -> this.classUnderTest().getOnly());
+    }
+
     @Override
     public void detectIndex()
     {

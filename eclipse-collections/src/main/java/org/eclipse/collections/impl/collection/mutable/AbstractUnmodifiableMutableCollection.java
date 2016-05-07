@@ -277,6 +277,12 @@ public class AbstractUnmodifiableMutableCollection<T> implements MutableCollecti
     }
 
     @Override
+    public T getOnly()
+    {
+        return this.getMutableCollection().getOnly();
+    }
+
+    @Override
     public MutableCollection<T> select(Predicate<? super T> predicate)
     {
         return this.getMutableCollection().select(predicate);

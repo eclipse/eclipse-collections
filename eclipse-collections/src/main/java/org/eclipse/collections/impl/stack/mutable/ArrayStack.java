@@ -313,6 +313,12 @@ public class ArrayStack<T> implements MutableStack<T>, Externalizable
     }
 
     @Override
+    public T getOnly()
+    {
+        return this.delegate.getOnly();
+    }
+
+    @Override
     public boolean contains(Object object)
     {
         return this.delegate.asReversed().contains(object);

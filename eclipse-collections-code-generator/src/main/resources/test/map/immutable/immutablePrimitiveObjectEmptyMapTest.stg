@@ -203,6 +203,13 @@ public class Immutable<name>ObjectEmptyMapTest extends AbstractImmutable<name>Ob
     }
 
     @Override
+    @Test(expected = IllegalStateException.class)
+    public void getOnly()
+    {
+        this.classUnderTest().getOnly();
+    }
+
+    @Override
     @Test
     public void tap()
     {

@@ -224,6 +224,12 @@ public class UnmodifiableBiMap<K, V> implements MutableBiMap<K, V>, Serializable
     }
 
     @Override
+    public V getOnly()
+    {
+        return this.delegate.getOnly();
+    }
+
+    @Override
     public boolean isEmpty()
     {
         return this.delegate.isEmpty();

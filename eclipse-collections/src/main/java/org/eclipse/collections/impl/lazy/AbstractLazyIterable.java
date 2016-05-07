@@ -11,6 +11,7 @@
 package org.eclipse.collections.impl.lazy;
 
 import java.util.Collection;
+import java.util.Iterator;
 
 import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.LazyBooleanIterable;
@@ -124,6 +125,25 @@ public abstract class AbstractLazyIterable<T>
         T[] result = (T[]) new Object[1];
         this.each(each -> result[0] = each);
         return result[0];
+    }
+
+    @Override
+    public T getOnly()
+    {
+        Iterator<T> iterator = this.iterator();
+
+        if (!iterator.hasNext())
+        {
+            throw new IllegalStateException("Size must be 1 but was 0");
+        }
+
+        T result = iterator.next();
+        if (iterator.hasNext())
+        {
+            throw new IllegalStateException("Size must be 1 but was greater than 1");
+        }
+
+        return result;
     }
 
     @Override

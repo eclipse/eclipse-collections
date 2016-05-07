@@ -763,4 +763,15 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
         this.forEach(new GroupByUniqueKeyProcedure<>(target, function));
         return target;
     }
+
+    @Override
+    public T getOnly()
+    {
+        if (this.size() == 1)
+        {
+            return this.getFirst();
+        }
+
+        throw new IllegalStateException("Size must be 1 but was " + this.size());
+    }
 }

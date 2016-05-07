@@ -64,4 +64,25 @@ public class ImmutableSubListTest extends AbstractImmutableListTestCase
         ListIterator<Integer> iterator = subList.listIterator();
         iterator.add(4);
     }
+
+    @Test
+    public void getOnly()
+    {
+        ImmutableList<Integer> list = Lists.immutable.of(1, 2, 3, 4, 5).subList(1, 2);
+        Assert.assertEquals(Integer.valueOf(2), list.getOnly());
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void getOnly_exception_when_empty()
+    {
+        ImmutableList<Integer> list = Lists.immutable.of(1, 2, 3, 4, 5).subList(1, 1);
+        list.getOnly();
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void getOnly_exception_when_multiple_items()
+    {
+        ImmutableList<Integer> list = Lists.immutable.of(1, 2, 3, 4, 5).subList(1, 3);
+        list.getOnly();
+    }
 }

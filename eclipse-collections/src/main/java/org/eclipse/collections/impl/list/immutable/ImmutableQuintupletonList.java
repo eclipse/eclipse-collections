@@ -81,6 +81,12 @@ final class ImmutableQuintupletonList<T>
     }
 
     @Override
+    public T getOnly()
+    {
+        throw new IllegalStateException("Size must be 1 but was " + this.size());
+    }
+
+    @Override
     public ImmutableList<T> newWith(T newItem)
     {
         return Lists.immutable.with(

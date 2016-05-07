@@ -120,6 +120,12 @@ class SingletonSet<T>
     }
 
     @Override
+    public T getOnly()
+    {
+        return this.element1;
+    }
+
+    @Override
     public void each(Procedure<? super T> procedure)
     {
         procedure.value(this.element1);

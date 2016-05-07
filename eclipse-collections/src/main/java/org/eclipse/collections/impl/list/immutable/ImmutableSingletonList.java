@@ -78,6 +78,12 @@ final class ImmutableSingletonList<T>
     }
 
     @Override
+    public T getOnly()
+    {
+        return this.element1;
+    }
+
+    @Override
     public ImmutableList<T> toReversed()
     {
         return this;

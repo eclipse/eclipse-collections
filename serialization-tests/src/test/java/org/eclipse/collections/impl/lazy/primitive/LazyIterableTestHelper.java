@@ -109,6 +109,12 @@ public class LazyIterableTestHelper<T> implements LazyIterable<T>
     }
 
     @Override
+    public T getOnly()
+    {
+        return null;
+    }
+
+    @Override
     public boolean contains(Object object)
     {
         return false;

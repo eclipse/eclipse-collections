@@ -46,4 +46,10 @@ public class ImmutableQuadrupletonSetTest
                 iSet(1, 3),
                 numbers.selectInstancesOf(Integer.class));
     }
+
+    @Test
+    public void getOnly()
+    {
+        Verify.assertThrows(IllegalStateException.class, () -> this.classUnderTest().getOnly());
+    }
 }

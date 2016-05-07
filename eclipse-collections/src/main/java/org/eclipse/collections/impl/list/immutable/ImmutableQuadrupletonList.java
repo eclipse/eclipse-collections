@@ -76,6 +76,12 @@ final class ImmutableQuadrupletonList<T>
     }
 
     @Override
+    public T getOnly()
+    {
+        throw new IllegalStateException("Size must be 1 but was " + this.size());
+    }
+
+    @Override
     public ImmutableList<T> newWith(T newItem)
     {
         return Lists.immutable.with(this.element1, this.element2, this.element3, this.element4, newItem);

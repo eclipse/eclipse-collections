@@ -228,6 +228,11 @@ final class Immutable<name>ObjectEmptyMap\<V> implements Immutable<name>ObjectMa
         return null;
     }
 
+    public V getOnly()
+    {
+        throw new IllegalStateException("Size must be 1 but was " + this.size());
+    }
+
     public boolean contains(Object object)
     {
         return false;

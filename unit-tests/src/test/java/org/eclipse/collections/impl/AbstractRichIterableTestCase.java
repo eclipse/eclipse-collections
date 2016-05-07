@@ -741,6 +741,25 @@ public abstract class AbstractRichIterableTestCase
     }
 
     @Test
+    public void getOnly()
+    {
+        Assert.assertEquals(Integer.valueOf(2), this.newWith(2).getOnly());
+        Assert.assertNotEquals(Integer.valueOf(2), this.newWith(1).getOnly());
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void getOnly_not_only_one_throws()
+    {
+        this.newWith(1, 2).getOnly();
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void getOnly_empty_throws()
+    {
+        this.newWith().getOnly();
+    }
+
+    @Test
     public void isEmpty()
     {
         Verify.assertIterableEmpty(this.newWith());

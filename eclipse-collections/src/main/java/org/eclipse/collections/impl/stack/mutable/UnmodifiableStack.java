@@ -344,6 +344,12 @@ public final class UnmodifiableStack<T> implements MutableStack<T>, Serializable
     }
 
     @Override
+    public T getOnly()
+    {
+        return this.mutableStack.getOnly();
+    }
+
+    @Override
     public boolean contains(Object object)
     {
         return this.mutableStack.contains(object);
