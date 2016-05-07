@@ -116,16 +116,19 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
     /**
      * Must be called in a synchronized block.
      */
+    @Override
     public Iterator<T> iterator()
     {
         return this.delegate.iterator();
     }
 
+    @Override
     public void forEach(Procedure<? super T> procedure)
     {
         this.each(procedure);
     }
 
+    @Override
     public void forEachWithIndex(ObjectIntProcedure<? super T> objectIntProcedure)
     {
         synchronized (this.lock)
@@ -134,6 +137,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    @Override
     public <P> void forEachWith(Procedure2<? super T, ? super P> procedure, P parameter)
     {
         synchronized (this.lock)
@@ -142,6 +146,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    @Override
     public int size()
     {
         synchronized (this.lock)
@@ -150,6 +155,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    @Override
     public boolean isEmpty()
     {
         synchronized (this.lock)
@@ -158,6 +164,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    @Override
     public boolean notEmpty()
     {
         synchronized (this.lock)
@@ -166,6 +173,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    @Override
     public T getFirst()
     {
         synchronized (this.lock)
@@ -174,6 +182,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    @Override
     public T getLast()
     {
         synchronized (this.lock)
@@ -182,6 +191,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    @Override
     public boolean contains(Object o)
     {
         synchronized (this.lock)
@@ -190,6 +200,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    @Override
     public boolean containsAllIterable(Iterable<?> source)
     {
         synchronized (this.lock)
@@ -198,6 +209,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    @Override
     public boolean containsAll(Collection<?> coll)
     {
         synchronized (this.lock)
@@ -206,6 +218,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    @Override
     public boolean containsAllArguments(Object... elements)
     {
         synchronized (this.lock)
@@ -214,6 +227,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    @Override
     public void each(Procedure<? super T> procedure)
     {
         synchronized (this.lock)
@@ -222,6 +236,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    @Override
     public <R extends Collection<T>> R select(Predicate<? super T> predicate, R target)
     {
         synchronized (this.lock)
@@ -230,6 +245,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    @Override
     public <P, R extends Collection<T>> R selectWith(
             Predicate2<? super T, ? super P> predicate,
             P parameter,
@@ -241,6 +257,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    @Override
     public <R extends Collection<T>> R reject(Predicate<? super T> predicate, R target)
     {
         synchronized (this.lock)
@@ -249,6 +266,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    @Override
     public <P, R extends Collection<T>> R rejectWith(
             Predicate2<? super T, ? super P> predicate,
             P parameter,
@@ -260,6 +278,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    @Override
     public <R extends MutableBooleanCollection> R collectBoolean(BooleanFunction<? super T> booleanFunction, R target)
     {
         synchronized (this.lock)
@@ -268,6 +287,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    @Override
     public <R extends MutableByteCollection> R collectByte(ByteFunction<? super T> byteFunction, R target)
     {
         synchronized (this.lock)
@@ -276,6 +296,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    @Override
     public <R extends MutableCharCollection> R collectChar(CharFunction<? super T> charFunction, R target)
     {
         synchronized (this.lock)
@@ -284,6 +305,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    @Override
     public <R extends MutableDoubleCollection> R collectDouble(DoubleFunction<? super T> doubleFunction, R target)
     {
         synchronized (this.lock)
@@ -292,6 +314,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    @Override
     public <R extends MutableFloatCollection> R collectFloat(FloatFunction<? super T> floatFunction, R target)
     {
         synchronized (this.lock)
@@ -300,6 +323,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    @Override
     public <R extends MutableIntCollection> R collectInt(IntFunction<? super T> intFunction, R target)
     {
         synchronized (this.lock)
@@ -308,6 +332,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    @Override
     public <R extends MutableLongCollection> R collectLong(LongFunction<? super T> longFunction, R target)
     {
         synchronized (this.lock)
@@ -316,6 +341,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    @Override
     public <R extends MutableShortCollection> R collectShort(ShortFunction<? super T> shortFunction, R target)
     {
         synchronized (this.lock)
@@ -324,6 +350,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    @Override
     public <V, R extends Collection<V>> R collect(Function<? super T, ? extends V> function, R target)
     {
         synchronized (this.lock)
@@ -332,6 +359,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    @Override
     public <P, A, R extends Collection<A>> R collectWith(
             Function2<? super T, ? super P, ? extends A> function,
             P parameter,
@@ -343,6 +371,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    @Override
     public <V, R extends Collection<V>> R collectIf(
             Predicate<? super T> predicate,
             Function<? super T, ? extends V> function,
@@ -354,6 +383,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    @Override
     public <V, R extends Collection<V>> R flatCollect(Function<? super T, ? extends Iterable<V>> function, R target)
     {
         synchronized (this.lock)
@@ -362,6 +392,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    @Override
     public T detect(Predicate<? super T> predicate)
     {
         synchronized (this.lock)
@@ -370,6 +401,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    @Override
     public <P> T detectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         synchronized (this.lock)
@@ -378,6 +410,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    @Override
     public T detectIfNone(Predicate<? super T> predicate, Function0<? extends T> function)
     {
         synchronized (this.lock)
@@ -386,6 +419,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    @Override
     public <P> T detectWithIfNone(
             Predicate2<? super T, ? super P> predicate,
             P parameter,
@@ -397,6 +431,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    @Override
     public int count(Predicate<? super T> predicate)
     {
         synchronized (this.lock)
@@ -405,6 +440,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    @Override
     public <P> int countWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         synchronized (this.lock)
@@ -413,6 +449,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    @Override
     public boolean anySatisfy(Predicate<? super T> predicate)
     {
         synchronized (this.lock)
@@ -421,6 +458,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    @Override
     public <P> boolean anySatisfyWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         synchronized (this.lock)
@@ -429,6 +467,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    @Override
     public boolean allSatisfy(Predicate<? super T> predicate)
     {
         synchronized (this.lock)
@@ -437,6 +476,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    @Override
     public <P> boolean allSatisfyWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         synchronized (this.lock)
@@ -445,6 +485,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    @Override
     public boolean noneSatisfy(Predicate<? super T> predicate)
     {
         synchronized (this.lock)
@@ -453,6 +494,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    @Override
     public <P> boolean noneSatisfyWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         synchronized (this.lock)
@@ -461,6 +503,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    @Override
     public <IV> IV injectInto(IV injectedValue, Function2<? super IV, ? super T, ? extends IV> function)
     {
         synchronized (this.lock)
@@ -469,6 +512,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    @Override
     public int injectInto(int injectedValue, IntObjectToIntFunction<? super T> function)
     {
         synchronized (this.lock)
@@ -477,6 +521,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    @Override
     public long injectInto(long injectedValue, LongObjectToLongFunction<? super T> function)
     {
         synchronized (this.lock)
@@ -485,6 +530,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    @Override
     public float injectInto(float injectedValue, FloatObjectToFloatFunction<? super T> function)
     {
         synchronized (this.lock)
@@ -493,6 +539,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    @Override
     public double injectInto(double injectedValue, DoubleObjectToDoubleFunction<? super T> function)
     {
         synchronized (this.lock)
@@ -501,6 +548,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    @Override
     public <R extends Collection<T>> R into(R target)
     {
         synchronized (this.lock)
@@ -509,6 +557,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    @Override
     public MutableList<T> toList()
     {
         synchronized (this.lock)
@@ -517,6 +566,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    @Override
     public MutableList<T> toSortedList()
     {
         synchronized (this.lock)
@@ -525,6 +575,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    @Override
     public MutableList<T> toSortedList(Comparator<? super T> comparator)
     {
         synchronized (this.lock)
@@ -533,6 +584,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    @Override
     public <V extends Comparable<? super V>> MutableList<T> toSortedListBy(Function<? super T, ? extends V> function)
     {
         synchronized (this.lock)
@@ -541,6 +593,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    @Override
     public MutableSet<T> toSet()
     {
         synchronized (this.lock)
@@ -549,6 +602,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    @Override
     public MutableSortedSet<T> toSortedSet()
     {
         synchronized (this.lock)
@@ -557,6 +611,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    @Override
     public MutableSortedSet<T> toSortedSet(Comparator<? super T> comparator)
     {
         synchronized (this.lock)
@@ -565,6 +620,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    @Override
     public <V extends Comparable<? super V>> MutableSortedSet<T> toSortedSetBy(Function<? super T, ? extends V> function)
     {
         synchronized (this.lock)
@@ -573,6 +629,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    @Override
     public MutableBag<T> toBag()
     {
         synchronized (this.lock)
@@ -581,6 +638,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    @Override
     public MutableSortedBag<T> toSortedBag()
     {
         synchronized (this.lock)
@@ -589,6 +647,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    @Override
     public MutableSortedBag<T> toSortedBag(Comparator<? super T> comparator)
     {
         synchronized (this.lock)
@@ -597,6 +656,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    @Override
     public <V extends Comparable<? super V>> MutableSortedBag<T> toSortedBagBy(Function<? super T, ? extends V> function)
     {
         synchronized (this.lock)
@@ -605,6 +665,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    @Override
     public <NK, NV> MutableMap<NK, NV> toMap(
             Function<? super T, ? extends NK> keyFunction,
             Function<? super T, ? extends NV> valueFunction)
@@ -615,6 +676,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    @Override
     public <NK, NV> MutableSortedMap<NK, NV> toSortedMap(
             Function<? super T, ? extends NK> keyFunction,
             Function<? super T, ? extends NV> valueFunction)
@@ -625,6 +687,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    @Override
     public <NK, NV> MutableSortedMap<NK, NV> toSortedMap(Comparator<? super NK> comparator,
             Function<? super T, ? extends NK> keyFunction,
             Function<? super T, ? extends NV> valueFunction)
@@ -635,11 +698,13 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    @Override
     public LazyIterable<T> asLazy()
     {
         return LazyIterate.adapt(this);
     }
 
+    @Override
     public Object[] toArray()
     {
         synchronized (this.lock)
@@ -648,6 +713,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    @Override
     public <T> T[] toArray(T[] a)
     {
         synchronized (this.lock)
@@ -656,6 +722,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    @Override
     public T min(Comparator<? super T> comparator)
     {
         synchronized (this.lock)
@@ -664,6 +731,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    @Override
     public T max(Comparator<? super T> comparator)
     {
         synchronized (this.lock)
@@ -672,6 +740,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    @Override
     public T min()
     {
         synchronized (this.lock)
@@ -680,6 +749,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    @Override
     public T max()
     {
         synchronized (this.lock)
@@ -688,6 +758,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    @Override
     public <V extends Comparable<? super V>> T minBy(Function<? super T, ? extends V> function)
     {
         synchronized (this.lock)
@@ -696,6 +767,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    @Override
     public <V extends Comparable<? super V>> T maxBy(Function<? super T, ? extends V> function)
     {
         synchronized (this.lock)
@@ -704,6 +776,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    @Override
     public long sumOfInt(IntFunction<? super T> function)
     {
         synchronized (this.lock)
@@ -712,6 +785,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    @Override
     public double sumOfFloat(FloatFunction<? super T> function)
     {
         synchronized (this.lock)
@@ -720,6 +794,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    @Override
     public long sumOfLong(LongFunction<? super T> function)
     {
         synchronized (this.lock)
@@ -728,6 +803,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    @Override
     public double sumOfDouble(DoubleFunction<? super T> function)
     {
         synchronized (this.lock)
@@ -736,6 +812,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    @Override
     public String makeString()
     {
         synchronized (this.lock)
@@ -744,6 +821,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    @Override
     public String makeString(String separator)
     {
         synchronized (this.lock)
@@ -752,6 +830,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    @Override
     public String makeString(String start, String separator, String end)
     {
         synchronized (this.lock)
@@ -760,6 +839,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    @Override
     public void appendString(Appendable appendable)
     {
         synchronized (this.lock)
@@ -768,6 +848,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    @Override
     public void appendString(Appendable appendable, String separator)
     {
         synchronized (this.lock)
@@ -776,6 +857,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    @Override
     public void appendString(Appendable appendable, String start, String separator, String end)
     {
         synchronized (this.lock)
@@ -784,6 +866,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    @Override
     public <V, R extends MutableMultimap<V, T>> R groupBy(
             Function<? super T, ? extends V> function,
             R target)
@@ -794,6 +877,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    @Override
     public <V, R extends MutableMultimap<V, T>> R groupByEach(
             Function<? super T, ? extends Iterable<V>> function,
             R target)
@@ -804,14 +888,16 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    @Override
     public <V> MapIterable<V, T> groupByUniqueKey(Function<? super T, ? extends V> function)
     {
         synchronized (this.lock)
         {
-            return this.delegate.groupByUniqueKey(function, UnifiedMap.<V, T>newMap());
+            return this.delegate.groupByUniqueKey(function, UnifiedMap.newMap());
         }
     }
 
+    @Override
     public <V, R extends MutableMap<V, T>> R groupByUniqueKey(
             Function<? super T, ? extends V> function,
             R target)
@@ -822,6 +908,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    @Override
     public <S, R extends Collection<Pair<T, S>>> R zip(Iterable<S> that, R target)
     {
         synchronized (this.lock)
@@ -830,6 +917,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    @Override
     public <R extends Collection<Pair<T, Integer>>> R zipWithIndex(R target)
     {
         synchronized (this.lock)
@@ -838,6 +926,7 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    @Override
     public RichIterable<RichIterable<T>> chunk(int size)
     {
         synchronized (this.lock)

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -68,19 +68,20 @@ final class ImmutableTreeSet<T>
 
     public static <T> ImmutableSortedSet<T> newSetWith(T... elements)
     {
-        return new ImmutableTreeSet<T>(TreeSortedSet.newSetWith(elements));
+        return new ImmutableTreeSet<>(TreeSortedSet.newSetWith(elements));
     }
 
     public static <T> ImmutableSortedSet<T> newSetWith(Comparator<? super T> comparator, T... elements)
     {
-        return new ImmutableTreeSet<T>(TreeSortedSet.newSetWith(comparator, elements));
+        return new ImmutableTreeSet<>(TreeSortedSet.newSetWith(comparator, elements));
     }
 
     public static <T> ImmutableSortedSet<T> newSet(SortedSet<T> set)
     {
-        return new ImmutableTreeSet<T>(TreeSortedSet.newSet(set));
+        return new ImmutableTreeSet<>(TreeSortedSet.newSet(set));
     }
 
+    @Override
     public int size()
     {
         return this.delegate.length;
@@ -88,7 +89,7 @@ final class ImmutableTreeSet<T>
 
     private Object writeReplace()
     {
-        return new ImmutableSortedSetSerializationProxy<T>(this);
+        return new ImmutableSortedSetSerializationProxy<>(this);
     }
 
     @Override
@@ -136,11 +137,13 @@ final class ImmutableTreeSet<T>
         return Arrays.binarySearch(this.delegate, (T) object, this.comparator) >= 0;
     }
 
+    @Override
     public Iterator<T> iterator()
     {
         return FastList.newListWith(this.delegate).asUnmodifiable().iterator();
     }
 
+    @Override
     public void each(Procedure<? super T> procedure)
     {
         for (T t : this.delegate)
@@ -149,21 +152,25 @@ final class ImmutableTreeSet<T>
         }
     }
 
+    @Override
     public T first()
     {
         return this.delegate[0];
     }
 
+    @Override
     public T last()
     {
         return this.delegate[this.delegate.length - 1];
     }
 
+    @Override
     public Comparator<? super T> comparator()
     {
         return this.comparator;
     }
 
+    @Override
     public int compareTo(SortedSetIterable<T> otherSet)
     {
         Iterator<T> iterator = otherSet.iterator();
@@ -219,6 +226,7 @@ final class ImmutableTreeSet<T>
             this.batchSize = batchSize;
         }
 
+        @Override
         public Comparator<? super T> comparator()
         {
             return ImmutableTreeSet.this.comparator;
@@ -236,21 +244,25 @@ final class ImmutableTreeSet<T>
             return new SortedSetIterableParallelBatchLazyIterable();
         }
 
+        @Override
         public void forEach(Procedure<? super T> procedure)
         {
             AbstractParallelIterable.forEach(this, procedure);
         }
 
+        @Override
         public boolean anySatisfy(Predicate<? super T> predicate)
         {
             return AbstractParallelIterable.anySatisfy(this, predicate);
         }
 
+        @Override
         public boolean allSatisfy(Predicate<? super T> predicate)
         {
             return AbstractParallelIterable.allSatisfy(this, predicate);
         }
 
+        @Override
         public T detect(Predicate<? super T> predicate)
         {
             return AbstractParallelIterable.detect(this, predicate);
@@ -301,11 +313,13 @@ final class ImmutableTreeSet<T>
         {
             protected int chunkIndex;
 
+            @Override
             public boolean hasNext()
             {
                 return this.chunkIndex * SortedSetIterableParallelIterable.this.getBatchSize() < ImmutableTreeSet.this.size();
             }
 
+            @Override
             public RootSortedSetBatch<T> next()
             {
                 int chunkStartIndex = this.chunkIndex * SortedSetIterableParallelIterable.this.getBatchSize();
@@ -315,6 +329,7 @@ final class ImmutableTreeSet<T>
                 return new ImmutableTreeSetBatch(chunkStartIndex, truncatedChunkEndIndex);
             }
 
+            @Override
             public void remove()
             {
                 throw new UnsupportedOperationException("Cannot call remove() on " + ImmutableTreeSet.this.getClass().getSimpleName());
@@ -324,6 +339,7 @@ final class ImmutableTreeSet<T>
         private class SortedSetIterableParallelBatchLazyIterable
                 extends AbstractLazyIterable<RootSortedSetBatch<T>>
         {
+            @Override
             public void each(Procedure<? super RootSortedSetBatch<T>> procedure)
             {
                 for (RootSortedSetBatch<T> chunk : this)
@@ -332,6 +348,7 @@ final class ImmutableTreeSet<T>
                 }
             }
 
+            @Override
             public Iterator<RootSortedSetBatch<T>> iterator()
             {
                 return new SortedSetIterableParallelBatchIterator();
@@ -350,6 +367,7 @@ final class ImmutableTreeSet<T>
             this.chunkEndIndex = chunkEndIndex;
         }
 
+        @Override
         public void forEach(Procedure<? super T> procedure)
         {
             for (int i = this.chunkStartIndex; i < this.chunkEndIndex; i++)
@@ -372,6 +390,7 @@ final class ImmutableTreeSet<T>
             return count;
         }
 
+        @Override
         public boolean anySatisfy(Predicate<? super T> predicate)
         {
             for (int i = this.chunkStartIndex; i < this.chunkEndIndex; i++)
@@ -384,6 +403,7 @@ final class ImmutableTreeSet<T>
             return false;
         }
 
+        @Override
         public boolean allSatisfy(Predicate<? super T> predicate)
         {
             for (int i = this.chunkStartIndex; i < this.chunkEndIndex; i++)
@@ -396,6 +416,7 @@ final class ImmutableTreeSet<T>
             return true;
         }
 
+        @Override
         public T detect(Predicate<? super T> predicate)
         {
             for (int i = this.chunkStartIndex; i < this.chunkEndIndex; i++)
@@ -408,21 +429,25 @@ final class ImmutableTreeSet<T>
             return null;
         }
 
+        @Override
         public SortedSetBatch<T> select(Predicate<? super T> predicate)
         {
-            return new SelectSortedSetBatch<T>(this, predicate);
+            return new SelectSortedSetBatch<>(this, predicate);
         }
 
+        @Override
         public <V> ListBatch<V> collect(Function<? super T, ? extends V> function)
         {
-            return new CollectSortedSetBatch<T, V>(this, function);
+            return new CollectSortedSetBatch<>(this, function);
         }
 
+        @Override
         public <V> ListBatch<V> flatCollect(Function<? super T, ? extends Iterable<V>> function)
         {
-            return new FlatCollectSortedSetBatch<T, V>(this, function);
+            return new FlatCollectSortedSetBatch<>(this, function);
         }
 
+        @Override
         public SortedSetBatch<T> distinct(ConcurrentHashMap<T, Boolean> distinct)
         {
             return this;
@@ -441,6 +466,7 @@ final class ImmutableTreeSet<T>
         return InternalArrayIterate.corresponds(this.delegate, this.size(), other, predicate);
     }
 
+    @Override
     public void forEach(int fromIndex, int toIndex, Procedure<? super T> procedure)
     {
         ListIterate.rangeCheck(fromIndex, toIndex, this.size());
@@ -456,6 +482,7 @@ final class ImmutableTreeSet<T>
         }
     }
 
+    @Override
     public void forEachWithIndex(int fromIndex, int toIndex, ObjectIntProcedure<? super T> objectIntProcedure)
     {
         ListIterate.rangeCheck(fromIndex, toIndex, this.size());
@@ -471,11 +498,13 @@ final class ImmutableTreeSet<T>
         }
     }
 
+    @Override
     public int indexOf(Object object)
     {
         return ArrayIterate.indexOf(this.delegate, object);
     }
 
+    @Override
     public ImmutableSortedSet<T> take(int count)
     {
         if (count < 0)
@@ -501,6 +530,7 @@ final class ImmutableTreeSet<T>
         return output.toImmutable();
     }
 
+    @Override
     public ImmutableSortedSet<T> drop(int count)
     {
         if (count < 0)

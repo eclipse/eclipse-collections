@@ -95,6 +95,7 @@ public interface ReversibleIterable<T> extends OrderedIterable<T>
      * Returns the initial elements that satisfy the Predicate. Short circuits at the first element which does not
      * satisfy the Predicate.
      */
+    @Override
     ReversibleIterable<T> takeWhile(Predicate<? super T> predicate);
 
     /**
@@ -111,57 +112,84 @@ public interface ReversibleIterable<T> extends OrderedIterable<T>
      * Returns the final elements that do not satisfy the Predicate. Short circuits at the first element which does
      * satisfy the Predicate.
      */
+    @Override
     ReversibleIterable<T> dropWhile(Predicate<? super T> predicate);
 
+    @Override
     PartitionReversibleIterable<T> partitionWhile(Predicate<? super T> predicate);
 
+    @Override
     ReversibleIterable<T> distinct();
 
+    @Override
     ReversibleIterable<T> tap(Procedure<? super T> procedure);
 
+    @Override
     ReversibleIterable<T> select(Predicate<? super T> predicate);
 
+    @Override
     <P> ReversibleIterable<T> selectWith(Predicate2<? super T, ? super P> predicate, P parameter);
 
+    @Override
     ReversibleIterable<T> reject(Predicate<? super T> predicate);
 
+    @Override
     <P> ReversibleIterable<T> rejectWith(Predicate2<? super T, ? super P> predicate, P parameter);
 
+    @Override
     PartitionReversibleIterable<T> partition(Predicate<? super T> predicate);
 
+    @Override
     <P> PartitionReversibleIterable<T> partitionWith(Predicate2<? super T, ? super P> predicate, P parameter);
 
+    @Override
     <S> ReversibleIterable<S> selectInstancesOf(Class<S> clazz);
 
+    @Override
     <V> ReversibleIterable<V> collect(Function<? super T, ? extends V> function);
 
+    @Override
     <P, V> ReversibleIterable<V> collectWith(Function2<? super T, ? super P, ? extends V> function, P parameter);
 
+    @Override
     <V> ReversibleIterable<V> collectIf(Predicate<? super T> predicate, Function<? super T, ? extends V> function);
 
+    @Override
     <V> ReversibleIterable<V> flatCollect(Function<? super T, ? extends Iterable<V>> function);
 
+    @Override
     ReversibleBooleanIterable collectBoolean(BooleanFunction<? super T> booleanFunction);
 
+    @Override
     ReversibleByteIterable collectByte(ByteFunction<? super T> byteFunction);
 
+    @Override
     ReversibleCharIterable collectChar(CharFunction<? super T> charFunction);
 
+    @Override
     ReversibleDoubleIterable collectDouble(DoubleFunction<? super T> doubleFunction);
 
+    @Override
     ReversibleFloatIterable collectFloat(FloatFunction<? super T> floatFunction);
 
+    @Override
     ReversibleIntIterable collectInt(IntFunction<? super T> intFunction);
 
+    @Override
     ReversibleLongIterable collectLong(LongFunction<? super T> longFunction);
 
+    @Override
     ReversibleShortIterable collectShort(ShortFunction<? super T> shortFunction);
 
+    @Override
     <V> ReversibleIterableMultimap<V, T> groupBy(Function<? super T, ? extends V> function);
 
+    @Override
     <V> ReversibleIterableMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function);
 
+    @Override
     <S> ReversibleIterable<Pair<T, S>> zip(Iterable<S> that);
 
+    @Override
     ReversibleIterable<Pair<T, Integer>> zipWithIndex();
 }

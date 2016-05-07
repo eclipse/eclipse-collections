@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -112,22 +112,22 @@ public final class MultiReaderUnifiedSet<T>
 
     public static <T> MultiReaderUnifiedSet<T> newSet()
     {
-        return new MultiReaderUnifiedSet<T>(UnifiedSet.<T>newSet());
+        return new MultiReaderUnifiedSet<>(UnifiedSet.newSet());
     }
 
     public static <T> MultiReaderUnifiedSet<T> newSet(int capacity)
     {
-        return new MultiReaderUnifiedSet<T>(UnifiedSet.<T>newSet(capacity));
+        return new MultiReaderUnifiedSet<>(UnifiedSet.newSet(capacity));
     }
 
     public static <T> MultiReaderUnifiedSet<T> newSet(Iterable<T> iterable)
     {
-        return new MultiReaderUnifiedSet<T>(UnifiedSet.newSet(iterable));
+        return new MultiReaderUnifiedSet<>(UnifiedSet.newSet(iterable));
     }
 
     public static <T> MultiReaderUnifiedSet<T> newSetWith(T... elements)
     {
-        return new MultiReaderUnifiedSet<T>(UnifiedSet.newSetWith(elements));
+        return new MultiReaderUnifiedSet<>(UnifiedSet.newSetWith(elements));
     }
 
     @Override
@@ -146,14 +146,14 @@ public final class MultiReaderUnifiedSet<T>
 
     UntouchableMutableSet<T> asReadUntouchable()
     {
-        return new UntouchableMutableSet<T>(this.delegate.asUnmodifiable());
+        return new UntouchableMutableSet<>(this.delegate.asUnmodifiable());
     }
 
     // Exposed for testing
 
     UntouchableMutableSet<T> asWriteUntouchable()
     {
-        return new UntouchableMutableSet<T>(this.delegate);
+        return new UntouchableMutableSet<>(this.delegate);
     }
 
     public void withReadLockAndDelegate(Procedure<MutableSet<T>> procedure)
@@ -186,6 +186,7 @@ public final class MultiReaderUnifiedSet<T>
         }
     }
 
+    @Override
     public MutableSet<T> asSynchronized()
     {
         this.acquireReadLock();
@@ -199,6 +200,7 @@ public final class MultiReaderUnifiedSet<T>
         }
     }
 
+    @Override
     public ImmutableSet<T> toImmutable()
     {
         this.acquireReadLock();
@@ -212,6 +214,7 @@ public final class MultiReaderUnifiedSet<T>
         }
     }
 
+    @Override
     public MutableSet<T> asUnmodifiable()
     {
         this.acquireReadLock();
@@ -231,7 +234,7 @@ public final class MultiReaderUnifiedSet<T>
         this.acquireReadLock();
         try
         {
-            return new MultiReaderUnifiedSet<T>(this.delegate.clone());
+            return new MultiReaderUnifiedSet<>(this.delegate.clone());
         }
         finally
         {
@@ -239,6 +242,7 @@ public final class MultiReaderUnifiedSet<T>
         }
     }
 
+    @Override
     public <V> MutableSet<V> collect(Function<? super T, ? extends V> function)
     {
         this.acquireReadLock();
@@ -252,6 +256,7 @@ public final class MultiReaderUnifiedSet<T>
         }
     }
 
+    @Override
     public MutableBooleanSet collectBoolean(BooleanFunction<? super T> booleanFunction)
     {
         this.acquireReadLock();
@@ -265,6 +270,7 @@ public final class MultiReaderUnifiedSet<T>
         }
     }
 
+    @Override
     public MutableByteSet collectByte(ByteFunction<? super T> byteFunction)
     {
         this.acquireReadLock();
@@ -278,6 +284,7 @@ public final class MultiReaderUnifiedSet<T>
         }
     }
 
+    @Override
     public MutableCharSet collectChar(CharFunction<? super T> charFunction)
     {
         this.acquireReadLock();
@@ -291,6 +298,7 @@ public final class MultiReaderUnifiedSet<T>
         }
     }
 
+    @Override
     public MutableDoubleSet collectDouble(DoubleFunction<? super T> doubleFunction)
     {
         this.acquireReadLock();
@@ -304,6 +312,7 @@ public final class MultiReaderUnifiedSet<T>
         }
     }
 
+    @Override
     public MutableFloatSet collectFloat(FloatFunction<? super T> floatFunction)
     {
         this.acquireReadLock();
@@ -317,6 +326,7 @@ public final class MultiReaderUnifiedSet<T>
         }
     }
 
+    @Override
     public MutableIntSet collectInt(IntFunction<? super T> intFunction)
     {
         this.acquireReadLock();
@@ -330,6 +340,7 @@ public final class MultiReaderUnifiedSet<T>
         }
     }
 
+    @Override
     public MutableLongSet collectLong(LongFunction<? super T> longFunction)
     {
         this.acquireReadLock();
@@ -343,6 +354,7 @@ public final class MultiReaderUnifiedSet<T>
         }
     }
 
+    @Override
     public MutableShortSet collectShort(ShortFunction<? super T> shortFunction)
     {
         this.acquireReadLock();
@@ -356,6 +368,7 @@ public final class MultiReaderUnifiedSet<T>
         }
     }
 
+    @Override
     public <V> MutableSet<V> flatCollect(Function<? super T, ? extends Iterable<V>> function)
     {
         this.acquireReadLock();
@@ -369,6 +382,7 @@ public final class MultiReaderUnifiedSet<T>
         }
     }
 
+    @Override
     public <V> MutableSet<V> collectIf(
             Predicate<? super T> predicate,
             Function<? super T, ? extends V> function)
@@ -384,6 +398,7 @@ public final class MultiReaderUnifiedSet<T>
         }
     }
 
+    @Override
     public <P, V> MutableSet<V> collectWith(
             Function2<? super T, ? super P, ? extends V> function,
             P parameter)
@@ -399,11 +414,13 @@ public final class MultiReaderUnifiedSet<T>
         }
     }
 
+    @Override
     public MutableSet<T> newEmpty()
     {
         return MultiReaderUnifiedSet.newSet();
     }
 
+    @Override
     public MutableSet<T> reject(Predicate<? super T> predicate)
     {
         this.acquireReadLock();
@@ -417,6 +434,7 @@ public final class MultiReaderUnifiedSet<T>
         }
     }
 
+    @Override
     public <P> MutableSet<T> rejectWith(
             Predicate2<? super T, ? super P> predicate,
             P parameter)
@@ -432,6 +450,7 @@ public final class MultiReaderUnifiedSet<T>
         }
     }
 
+    @Override
     public MutableSet<T> tap(Procedure<? super T> procedure)
     {
         this.acquireReadLock();
@@ -446,6 +465,7 @@ public final class MultiReaderUnifiedSet<T>
         }
     }
 
+    @Override
     public MutableSet<T> select(Predicate<? super T> predicate)
     {
         this.acquireReadLock();
@@ -459,6 +479,7 @@ public final class MultiReaderUnifiedSet<T>
         }
     }
 
+    @Override
     public <P> MutableSet<T> selectWith(
             Predicate2<? super T, ? super P> predicate,
             P parameter)
@@ -474,6 +495,7 @@ public final class MultiReaderUnifiedSet<T>
         }
     }
 
+    @Override
     public PartitionMutableSet<T> partition(Predicate<? super T> predicate)
     {
         this.acquireReadLock();
@@ -487,6 +509,7 @@ public final class MultiReaderUnifiedSet<T>
         }
     }
 
+    @Override
     public <P> PartitionMutableSet<T> partitionWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         this.acquireReadLock();
@@ -500,6 +523,7 @@ public final class MultiReaderUnifiedSet<T>
         }
     }
 
+    @Override
     public <S> MutableSet<S> selectInstancesOf(Class<S> clazz)
     {
         this.acquireReadLock();
@@ -513,24 +537,28 @@ public final class MultiReaderUnifiedSet<T>
         }
     }
 
+    @Override
     public MutableSet<T> with(T element)
     {
         this.add(element);
         return this;
     }
 
+    @Override
     public MutableSet<T> without(T element)
     {
         this.remove(element);
         return this;
     }
 
+    @Override
     public MutableSet<T> withAll(Iterable<? extends T> elements)
     {
         this.addAllIterable(elements);
         return this;
     }
 
+    @Override
     public MutableSet<T> withoutAll(Iterable<? extends T> elements)
     {
         this.removeAllIterable(elements);
@@ -565,11 +593,13 @@ public final class MultiReaderUnifiedSet<T>
         }
     }
 
+    @Override
     public void writeExternal(ObjectOutput out) throws IOException
     {
         out.writeObject(this.delegate);
     }
 
+    @Override
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
     {
         this.delegate = (MutableSet<T>) in.readObject();
@@ -592,57 +622,59 @@ public final class MultiReaderUnifiedSet<T>
         public void becomeUseless()
         {
             this.delegate = null;
-            this.requestedIterators.forEach(new Procedure<UntouchableIterator<T>>()
-            {
-                public void value(UntouchableIterator<T> each)
-                {
-                    each.becomeUseless();
-                }
-            });
+            this.requestedIterators.each(UntouchableIterator::becomeUseless);
         }
 
         /**
          * This must be implemented this way to guarantee a reference to the delegate doesn't escape.
          */
+        @Override
         public MutableSet<T> with(T element)
         {
             this.add(element);
             return this;
         }
 
+        @Override
         public MutableSet<T> without(T element)
         {
             this.remove(element);
             return this;
         }
 
+        @Override
         public MutableSet<T> withAll(Iterable<? extends T> elements)
         {
             this.addAllIterable(elements);
             return this;
         }
 
+        @Override
         public MutableSet<T> withoutAll(Iterable<? extends T> elements)
         {
             this.removeAllIterable(elements);
             return this;
         }
 
+        @Override
         public MutableSet<T> asSynchronized()
         {
             throw new UnsupportedOperationException("Cannot call asSynchronized() on " + this.getClass().getSimpleName());
         }
 
+        @Override
         public MutableSet<T> asUnmodifiable()
         {
             throw new UnsupportedOperationException("Cannot call asUnmodifiable() on " + this.getClass().getSimpleName());
         }
 
+        @Override
         public ImmutableSet<T> toImmutable()
         {
             return Sets.immutable.withAll(this.getDelegate());
         }
 
+        @Override
         public LazyIterable<T> asLazy()
         {
             return LazyIterate.adapt(this);
@@ -654,96 +686,115 @@ public final class MultiReaderUnifiedSet<T>
             return this.getDelegate().clone();
         }
 
+        @Override
         public <V> MutableSet<V> collect(Function<? super T, ? extends V> function)
         {
             return this.getDelegate().collect(function);
         }
 
+        @Override
         public MutableBooleanSet collectBoolean(BooleanFunction<? super T> booleanFunction)
         {
             return this.getDelegate().collectBoolean(booleanFunction);
         }
 
+        @Override
         public <R extends MutableBooleanCollection> R collectBoolean(BooleanFunction<? super T> booleanFunction, R target)
         {
             return this.getDelegate().collectBoolean(booleanFunction, target);
         }
 
+        @Override
         public MutableByteSet collectByte(ByteFunction<? super T> byteFunction)
         {
             return this.getDelegate().collectByte(byteFunction);
         }
 
+        @Override
         public <R extends MutableByteCollection> R collectByte(ByteFunction<? super T> byteFunction, R target)
         {
             return this.getDelegate().collectByte(byteFunction, target);
         }
 
+        @Override
         public MutableCharSet collectChar(CharFunction<? super T> charFunction)
         {
             return this.getDelegate().collectChar(charFunction);
         }
 
+        @Override
         public <R extends MutableCharCollection> R collectChar(CharFunction<? super T> charFunction, R target)
         {
             return this.getDelegate().collectChar(charFunction, target);
         }
 
+        @Override
         public MutableDoubleSet collectDouble(DoubleFunction<? super T> doubleFunction)
         {
             return this.getDelegate().collectDouble(doubleFunction);
         }
 
+        @Override
         public <R extends MutableDoubleCollection> R collectDouble(DoubleFunction<? super T> doubleFunction, R target)
         {
             return this.getDelegate().collectDouble(doubleFunction, target);
         }
 
+        @Override
         public MutableFloatSet collectFloat(FloatFunction<? super T> floatFunction)
         {
             return this.getDelegate().collectFloat(floatFunction);
         }
 
+        @Override
         public <R extends MutableFloatCollection> R collectFloat(FloatFunction<? super T> floatFunction, R target)
         {
             return this.getDelegate().collectFloat(floatFunction, target);
         }
 
+        @Override
         public MutableIntSet collectInt(IntFunction<? super T> intFunction)
         {
             return this.getDelegate().collectInt(intFunction);
         }
 
+        @Override
         public <R extends MutableIntCollection> R collectInt(IntFunction<? super T> intFunction, R target)
         {
             return this.getDelegate().collectInt(intFunction, target);
         }
 
+        @Override
         public MutableLongSet collectLong(LongFunction<? super T> longFunction)
         {
             return this.getDelegate().collectLong(longFunction);
         }
 
+        @Override
         public <R extends MutableLongCollection> R collectLong(LongFunction<? super T> longFunction, R target)
         {
             return this.getDelegate().collectLong(longFunction, target);
         }
 
+        @Override
         public MutableShortSet collectShort(ShortFunction<? super T> shortFunction)
         {
             return this.getDelegate().collectShort(shortFunction);
         }
 
+        @Override
         public <R extends MutableShortCollection> R collectShort(ShortFunction<? super T> shortFunction, R target)
         {
             return this.getDelegate().collectShort(shortFunction, target);
         }
 
+        @Override
         public <V> MutableSet<V> flatCollect(Function<? super T, ? extends Iterable<V>> function)
         {
             return this.getDelegate().flatCollect(function);
         }
 
+        @Override
         public <V> MutableSet<V> collectIf(
                 Predicate<? super T> predicate,
                 Function<? super T, ? extends V> function)
@@ -751,6 +802,7 @@ public final class MultiReaderUnifiedSet<T>
             return this.getDelegate().collectIf(predicate, function);
         }
 
+        @Override
         public <P, V> MutableSet<V> collectWith(
                 Function2<? super T, ? super P, ? extends V> function,
                 P parameter)
@@ -758,33 +810,39 @@ public final class MultiReaderUnifiedSet<T>
             return this.getDelegate().collectWith(function, parameter);
         }
 
+        @Override
         public <V> MutableSetMultimap<V, T> groupBy(
                 Function<? super T, ? extends V> function)
         {
             return this.getDelegate().groupBy(function);
         }
 
+        @Override
         public <V> MutableSetMultimap<V, T> groupByEach(
                 Function<? super T, ? extends Iterable<V>> function)
         {
             return this.getDelegate().groupByEach(function);
         }
 
+        @Override
         public <V> MutableMap<V, T> groupByUniqueKey(Function<? super T, ? extends V> function)
         {
             return this.getDelegate().groupByUniqueKey(function);
         }
 
+        @Override
         public MutableSet<T> newEmpty()
         {
             return this.getDelegate().newEmpty();
         }
 
+        @Override
         public MutableSet<T> reject(Predicate<? super T> predicate)
         {
             return this.getDelegate().reject(predicate);
         }
 
+        @Override
         public <P> MutableSet<T> rejectWith(
                 Predicate2<? super T, ? super P> predicate,
                 P parameter)
@@ -792,17 +850,20 @@ public final class MultiReaderUnifiedSet<T>
             return this.getDelegate().rejectWith(predicate, parameter);
         }
 
+        @Override
         public MutableSet<T> tap(Procedure<? super T> procedure)
         {
             this.forEach(procedure);
             return this;
         }
 
+        @Override
         public MutableSet<T> select(Predicate<? super T> predicate)
         {
             return this.getDelegate().select(predicate);
         }
 
+        @Override
         public <P> MutableSet<T> selectWith(
                 Predicate2<? super T, ? super P> predicate,
                 P parameter)
@@ -810,24 +871,28 @@ public final class MultiReaderUnifiedSet<T>
             return this.getDelegate().selectWith(predicate, parameter);
         }
 
+        @Override
         public PartitionMutableSet<T> partition(Predicate<? super T> predicate)
         {
             return this.getDelegate().partition(predicate);
         }
 
+        @Override
         public <P> PartitionMutableSet<T> partitionWith(Predicate2<? super T, ? super P> predicate, P parameter)
         {
             return this.getDelegate().partitionWith(predicate, parameter);
         }
 
+        @Override
         public <S> MutableSet<S> selectInstancesOf(Class<S> clazz)
         {
             return this.getDelegate().selectInstancesOf(clazz);
         }
 
+        @Override
         public Iterator<T> iterator()
         {
-            UntouchableIterator<T> iterator = new UntouchableIterator<T>(this.delegate.iterator());
+            UntouchableIterator<T> iterator = new UntouchableIterator<>(this.delegate.iterator());
             this.requestedIterators.add(iterator);
             return iterator;
         }
@@ -835,6 +900,7 @@ public final class MultiReaderUnifiedSet<T>
         /**
          * @deprecated in 6.0. Use {@link OrderedIterable#zip(Iterable)} instead.
          */
+        @Override
         @Deprecated
         public <S> MutableSet<Pair<T, S>> zip(Iterable<S> that)
         {
@@ -844,72 +910,86 @@ public final class MultiReaderUnifiedSet<T>
         /**
          * @deprecated in 6.0. Use {@link OrderedIterable#zipWithIndex()} instead.
          */
+        @Override
         @Deprecated
         public MutableSet<Pair<T, Integer>> zipWithIndex()
         {
             return this.getDelegate().zipWithIndex();
         }
 
+        @Override
         public MutableSet<T> union(SetIterable<? extends T> set)
         {
             return this.getDelegate().union(set);
         }
 
+        @Override
         public <R extends Set<T>> R unionInto(SetIterable<? extends T> set, R targetSet)
         {
             return this.getDelegate().unionInto(set, targetSet);
         }
 
+        @Override
         public MutableSet<T> intersect(SetIterable<? extends T> set)
         {
             return this.getDelegate().intersect(set);
         }
 
+        @Override
         public <R extends Set<T>> R intersectInto(SetIterable<? extends T> set, R targetSet)
         {
             return this.getDelegate().intersectInto(set, targetSet);
         }
 
+        @Override
         public MutableSet<T> difference(SetIterable<? extends T> subtrahendSet)
         {
             return this.getDelegate().difference(subtrahendSet);
         }
 
+        @Override
         public <R extends Set<T>> R differenceInto(SetIterable<? extends T> subtrahendSet, R targetSet)
         {
             return this.getDelegate().differenceInto(subtrahendSet, targetSet);
         }
 
+        @Override
         public MutableSet<T> symmetricDifference(SetIterable<? extends T> setB)
         {
             return this.getDelegate().symmetricDifference(setB);
         }
 
+        @Override
         public <R extends Set<T>> R symmetricDifferenceInto(SetIterable<? extends T> set, R targetSet)
         {
             return this.getDelegate().symmetricDifferenceInto(set, targetSet);
         }
 
+        @Override
         public boolean isSubsetOf(SetIterable<? extends T> candidateSuperset)
         {
             return this.getDelegate().isSubsetOf(candidateSuperset);
         }
 
+        @Override
         public boolean isProperSubsetOf(SetIterable<? extends T> candidateSuperset)
         {
             return this.getDelegate().isProperSubsetOf(candidateSuperset);
         }
 
+        @Override
         public MutableSet<UnsortedSetIterable<T>> powerSet()
         {
             return this.getDelegate().powerSet();
         }
 
+        @Override
         public <B> LazyIterable<Pair<T, B>> cartesianProduct(SetIterable<B> set)
         {
             return this.getDelegate().cartesianProduct(set);
         }
 
+        @Override
         public ParallelUnsortedSetIterable<T> asParallel(ExecutorService executorService, int batchSize)
         {
             return this.getDelegate().asParallel(executorService, batchSize);
@@ -931,16 +1011,19 @@ public final class MultiReaderUnifiedSet<T>
             this.delegate = newDelegate;
         }
 
+        @Override
         public boolean hasNext()
         {
             return this.delegate.hasNext();
         }
 
+        @Override
         public T next()
         {
             return this.delegate.next();
         }
 
+        @Override
         public void remove()
         {
             this.delegate.remove();
@@ -952,6 +1035,7 @@ public final class MultiReaderUnifiedSet<T>
         }
     }
 
+    @Override
     public <V> MutableSetMultimap<V, T> groupBy(Function<? super T, ? extends V> function)
     {
         this.acquireReadLock();
@@ -965,6 +1049,7 @@ public final class MultiReaderUnifiedSet<T>
         }
     }
 
+    @Override
     public <V> MutableSetMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function)
     {
         this.acquireReadLock();
@@ -978,6 +1063,7 @@ public final class MultiReaderUnifiedSet<T>
         }
     }
 
+    @Override
     public <V> MutableMap<V, T> groupByUniqueKey(Function<? super T, ? extends V> function)
     {
         this.acquireReadLock();
@@ -994,6 +1080,7 @@ public final class MultiReaderUnifiedSet<T>
     /**
      * @deprecated in 6.0. Use {@link OrderedIterable#zip(Iterable)} instead.
      */
+    @Override
     @Deprecated
     public <S> MutableSet<Pair<T, S>> zip(Iterable<S> that)
     {
@@ -1011,6 +1098,7 @@ public final class MultiReaderUnifiedSet<T>
     /**
      * @deprecated in 6.0. Use {@link OrderedIterable#zipWithIndex()} instead.
      */
+    @Override
     @Deprecated
     public MutableSet<Pair<T, Integer>> zipWithIndex()
     {
@@ -1025,6 +1113,7 @@ public final class MultiReaderUnifiedSet<T>
         }
     }
 
+    @Override
     public RichIterable<RichIterable<T>> chunk(int size)
     {
         this.acquireReadLock();
@@ -1038,6 +1127,7 @@ public final class MultiReaderUnifiedSet<T>
         }
     }
 
+    @Override
     public MutableSet<T> union(SetIterable<? extends T> set)
     {
         this.acquireReadLock();
@@ -1051,6 +1141,7 @@ public final class MultiReaderUnifiedSet<T>
         }
     }
 
+    @Override
     public <R extends Set<T>> R unionInto(SetIterable<? extends T> set, R targetSet)
     {
         this.acquireReadLock();
@@ -1064,6 +1155,7 @@ public final class MultiReaderUnifiedSet<T>
         }
     }
 
+    @Override
     public MutableSet<T> intersect(SetIterable<? extends T> set)
     {
         this.acquireReadLock();
@@ -1077,6 +1169,7 @@ public final class MultiReaderUnifiedSet<T>
         }
     }
 
+    @Override
     public <R extends Set<T>> R intersectInto(SetIterable<? extends T> set, R targetSet)
     {
         this.acquireReadLock();
@@ -1090,6 +1183,7 @@ public final class MultiReaderUnifiedSet<T>
         }
     }
 
+    @Override
     public MutableSet<T> difference(SetIterable<? extends T> subtrahendSet)
     {
         this.acquireReadLock();
@@ -1103,6 +1197,7 @@ public final class MultiReaderUnifiedSet<T>
         }
     }
 
+    @Override
     public <R extends Set<T>> R differenceInto(SetIterable<? extends T> subtrahendSet, R targetSet)
     {
         this.acquireReadLock();
@@ -1116,6 +1211,7 @@ public final class MultiReaderUnifiedSet<T>
         }
     }
 
+    @Override
     public MutableSet<T> symmetricDifference(SetIterable<? extends T> setB)
     {
         this.acquireReadLock();
@@ -1129,6 +1225,7 @@ public final class MultiReaderUnifiedSet<T>
         }
     }
 
+    @Override
     public <R extends Set<T>> R symmetricDifferenceInto(SetIterable<? extends T> set, R targetSet)
     {
         this.acquireReadLock();
@@ -1142,6 +1239,7 @@ public final class MultiReaderUnifiedSet<T>
         }
     }
 
+    @Override
     public boolean isSubsetOf(SetIterable<? extends T> candidateSuperset)
     {
         this.acquireReadLock();
@@ -1155,6 +1253,7 @@ public final class MultiReaderUnifiedSet<T>
         }
     }
 
+    @Override
     public boolean isProperSubsetOf(SetIterable<? extends T> candidateSuperset)
     {
         this.acquireReadLock();
@@ -1168,6 +1267,7 @@ public final class MultiReaderUnifiedSet<T>
         }
     }
 
+    @Override
     public MutableSet<UnsortedSetIterable<T>> powerSet()
     {
         this.acquireReadLock();
@@ -1181,6 +1281,7 @@ public final class MultiReaderUnifiedSet<T>
         }
     }
 
+    @Override
     public <B> LazyIterable<Pair<T, B>> cartesianProduct(SetIterable<B> set)
     {
         this.acquireReadLock();
@@ -1194,8 +1295,9 @@ public final class MultiReaderUnifiedSet<T>
         }
     }
 
+    @Override
     public ParallelUnsortedSetIterable<T> asParallel(ExecutorService executorService, int batchSize)
     {
-        return new MultiReaderParallelUnsortedSetIterable<T>(this.delegate.asParallel(executorService, batchSize), this.lock);
+        return new MultiReaderParallelUnsortedSetIterable<>(this.delegate.asParallel(executorService, batchSize), this.lock);
     }
 }

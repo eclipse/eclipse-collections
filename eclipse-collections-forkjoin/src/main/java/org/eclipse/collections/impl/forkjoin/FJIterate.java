@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -230,7 +230,7 @@ public final class FJIterate
         else
         {
             int threadCount = Math.min(size, taskCount);
-            new FJListObjectIntProcedureRunner<T, PT>(combiner, threadCount).executeAndCombine(executor, procedureFactory, list);
+            new FJListObjectIntProcedureRunner<>(combiner, threadCount).executeAndCombine(executor, procedureFactory, list);
         }
     }
 
@@ -451,7 +451,7 @@ public final class FJIterate
         else
         {
             int newTaskCount = Math.min(size, taskCount);
-            new FJListProcedureRunner<T, PT>(combiner, newTaskCount).executeAndCombine(executor, procedureFactory, list);
+            new FJListProcedureRunner<>(combiner, newTaskCount).executeAndCombine(executor, procedureFactory, list);
         }
     }
 
@@ -477,7 +477,7 @@ public final class FJIterate
         else
         {
             int newTaskCount = Math.min(size, Math.min(taskCount, batchIterable.getBatchCount((int) Math.ceil((double) size / (double) taskCount))));
-            new FJBatchIterableProcedureRunner<T, PT>(combiner, newTaskCount).executeAndCombine(executor, procedureFactory, batchIterable);
+            new FJBatchIterableProcedureRunner<>(combiner, newTaskCount).executeAndCombine(executor, procedureFactory, batchIterable);
         }
     }
 
@@ -948,7 +948,7 @@ public final class FJIterate
                 groupBy,
                 zeroValueFactory,
                 nonMutatingAggregator,
-                ConcurrentHashMap.<K, V>newMap(),
+                ConcurrentHashMap.newMap(),
                 batchSize,
                 executor);
     }
@@ -966,7 +966,7 @@ public final class FJIterate
                 new NonMutatingAggregationProcedure<>(mutableMap, groupBy, zeroValueFactory, nonMutatingAggregator);
         FJIterate.forEach(
                 iterable,
-                new PassThruProcedureFactory<Procedure<T>>(nonMutatingAggregationProcedure),
+                new PassThruProcedureFactory<>(nonMutatingAggregationProcedure),
                 Combiners.<Procedure<T>>passThru(),
                 batchSize,
                 executor);
@@ -1050,7 +1050,7 @@ public final class FJIterate
                 new MutatingAggregationProcedure<>(map, groupBy, zeroValueFactory, mutatingAggregator);
         FJIterate.forEach(
                 iterable,
-                new PassThruProcedureFactory<Procedure<T>>(mutatingAggregationProcedure),
+                new PassThruProcedureFactory<>(mutatingAggregationProcedure),
                 Combiners.<Procedure<T>>passThru(),
                 batchSize,
                 executor);
@@ -1070,7 +1070,7 @@ public final class FJIterate
                 new MutatingAggregationProcedure<>(mutableMap, groupBy, zeroValueFactory, mutatingAggregator);
         FJIterate.forEach(
                 iterable,
-                new PassThruProcedureFactory<Procedure<T>>(mutatingAggregationProcedure),
+                new PassThruProcedureFactory<>(mutatingAggregationProcedure),
                 Combiners.<Procedure<T>>passThru(),
                 batchSize,
                 executor);
@@ -1135,7 +1135,7 @@ public final class FJIterate
             int batchSize,
             ForkJoinPool executor)
     {
-        return FJIterate.groupBy(iterable, function, SynchronizedPutFastListMultimap.<K, V>newMultimap(), batchSize, executor);
+        return FJIterate.groupBy(iterable, function, SynchronizedPutFastListMultimap.newMultimap(), batchSize, executor);
     }
 
     /**
@@ -1151,7 +1151,7 @@ public final class FJIterate
     {
         FJIterate.forEach(
                 iterable,
-                new PassThruProcedureFactory<Procedure<V>>(new MultimapPutProcedure<>(concurrentMultimap, function)),
+                new PassThruProcedureFactory<>(new MultimapPutProcedure<>(concurrentMultimap, function)),
                 Combiners.<Procedure<V>>passThru(),
                 batchSize,
                 executor);

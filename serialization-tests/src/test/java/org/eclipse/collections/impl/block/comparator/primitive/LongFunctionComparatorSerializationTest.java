@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -24,6 +24,6 @@ public class LongFunctionComparatorSerializationTest
                         + "bWl0aXZlLkxvbmdGdW5jdGlvbkNvbXBhcmF0b3IAAAAAAAAAAQIAAUwACGZ1bmN0aW9udABDTG9y\n"
                         + "Zy9lY2xpcHNlL2NvbGxlY3Rpb25zL2FwaS9ibG9jay9mdW5jdGlvbi9wcmltaXRpdmUvTG9uZ0Z1\n"
                         + "bmN0aW9uO3hwcA==",
-                new LongFunctionComparator<Object>(null));
+                new LongFunctionComparator<>(null));
     }
 }

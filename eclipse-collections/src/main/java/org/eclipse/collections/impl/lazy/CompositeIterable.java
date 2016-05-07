@@ -37,91 +37,52 @@ public final class CompositeIterable<E>
 
     public CompositeIterable()
     {
-        this(FastList.<Iterable<E>>newList());
+        this(FastList.newList());
     }
 
     public static <T> CompositeIterable<T> with(Iterable<T>... iterables)
     {
-        return new CompositeIterable<T>(FastList.newListWith(iterables));
-    }
-
-    public void each(final Procedure<? super E> procedure)
-    {
-        this.iterables.forEach(new Procedure<Iterable<E>>()
-        {
-            public void value(Iterable<E> iterable)
-            {
-                Iterate.forEach(iterable, procedure);
-            }
-        });
+        return new CompositeIterable<>(FastList.newListWith(iterables));
     }
 
     @Override
-    public void forEachWithIndex(final ObjectIntProcedure<? super E> objectIntProcedure)
+    public void each(Procedure<? super E> procedure)
     {
-        final Counter index = new Counter();
-        this.iterables.forEach(new Procedure<Iterable<E>>()
-        {
-            public void value(Iterable<E> iterable)
-            {
-                Iterate.forEach(iterable, new Procedure<E>()
-                {
-                    public void value(E object)
-                    {
-                        objectIntProcedure.value(object, index.getCount());
-                        index.increment();
-                    }
-                });
-            }
-        });
+        this.iterables.each(iterable -> Iterate.forEach(iterable, procedure));
     }
 
     @Override
-    public <P> void forEachWith(final Procedure2<? super E, ? super P> procedure, final P parameter)
+    public void forEachWithIndex(ObjectIntProcedure<? super E> objectIntProcedure)
     {
-        this.iterables.forEach(new Procedure<Iterable<E>>()
-        {
-            public void value(Iterable<E> iterable)
-            {
-                Iterate.forEachWith(iterable, procedure, parameter);
-            }
-        });
+        Counter index = new Counter();
+        this.iterables.each(iterable -> Iterate.forEach(iterable, object -> {
+            objectIntProcedure.value(object, index.getCount());
+            index.increment();
+        }));
     }
 
     @Override
-    public boolean anySatisfy(final Predicate<? super E> predicate)
+    public <P> void forEachWith(Procedure2<? super E, ? super P> procedure, P parameter)
     {
-        return this.iterables.anySatisfy(new Predicate<Iterable<E>>()
-        {
-            public boolean accept(Iterable<E> each)
-            {
-                return Iterate.anySatisfy(each, predicate);
-            }
-        });
+        this.iterables.each(iterable -> Iterate.forEachWith(iterable, procedure, parameter));
     }
 
     @Override
-    public boolean allSatisfy(final Predicate<? super E> predicate)
+    public boolean anySatisfy(Predicate<? super E> predicate)
     {
-        return this.iterables.allSatisfy(new Predicate<Iterable<E>>()
-        {
-            public boolean accept(Iterable<E> each)
-            {
-                return Iterate.allSatisfy(each, predicate);
-            }
-        });
+        return this.iterables.anySatisfy(each -> Iterate.anySatisfy(each, predicate));
     }
 
     @Override
-    public boolean noneSatisfy(final Predicate<? super E> predicate)
+    public boolean allSatisfy(Predicate<? super E> predicate)
     {
-        return this.iterables.noneSatisfy(new Predicate<Iterable<E>>()
-        {
-            public boolean accept(Iterable<E> each)
-            {
-                return Iterate.anySatisfy(each, predicate);
-            }
-        });
+        return this.iterables.allSatisfy(each -> Iterate.allSatisfy(each, predicate));
+    }
+
+    @Override
+    public boolean noneSatisfy(Predicate<? super E> predicate)
+    {
+        return this.iterables.noneSatisfy(each -> Iterate.anySatisfy(each, predicate));
     }
 
     @Override
@@ -144,6 +105,7 @@ public final class CompositeIterable<E>
         this.iterables.add(iterable);
     }
 
+    @Override
     public Iterator<E> iterator()
     {
         return new CompositeIterator(this.iterables);
@@ -161,6 +123,7 @@ public final class CompositeIterable<E>
             this.innerIterator = EmptyIterator.getInstance();
         }
 
+        @Override
         public boolean hasNext()
         {
             while (true)
@@ -177,6 +140,7 @@ public final class CompositeIterable<E>
             }
         }
 
+        @Override
         public E next()
         {
             if (!this.hasNext())
@@ -186,6 +150,7 @@ public final class CompositeIterable<E>
             return this.innerIterator.next();
         }
 
+        @Override
         public void remove()
         {
             throw new UnsupportedOperationException("Cannot remove from a composite iterator");

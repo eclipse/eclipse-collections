@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -32,31 +32,37 @@ public class UnmodifiableSortedMap<K, V> extends UnmodifiableMap<K, V> implement
         return (SortedMap<K, V>) this.delegate;
     }
 
+    @Override
     public Comparator<? super K> comparator()
     {
         return this.getSortedMap().comparator();
     }
 
+    @Override
     public SortedMap<K, V> subMap(K fromKey, K toKey)
     {
         return UnmodifiableTreeMap.of(this.getSortedMap().subMap(fromKey, toKey));
     }
 
+    @Override
     public SortedMap<K, V> headMap(K toKey)
     {
         return UnmodifiableTreeMap.of(this.getSortedMap().headMap(toKey));
     }
 
+    @Override
     public SortedMap<K, V> tailMap(K fromKey)
     {
         return UnmodifiableTreeMap.of(this.getSortedMap().tailMap(fromKey));
     }
 
+    @Override
     public K firstKey()
     {
         return this.getSortedMap().firstKey();
     }
 
+    @Override
     public K lastKey()
     {
         return this.getSortedMap().lastKey();

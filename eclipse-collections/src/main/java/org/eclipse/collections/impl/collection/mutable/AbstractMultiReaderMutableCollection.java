@@ -109,6 +109,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public boolean contains(Object item)
     {
         this.acquireReadLock();
@@ -122,6 +123,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public boolean containsAll(Collection<?> collection)
     {
         this.acquireReadLock();
@@ -135,6 +137,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public boolean containsAllIterable(Iterable<?> source)
     {
         this.acquireReadLock();
@@ -148,6 +151,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public boolean containsAllArguments(Object... elements)
     {
         this.acquireReadLock();
@@ -161,6 +165,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public boolean noneSatisfy(Predicate<? super T> predicate)
     {
         this.acquireReadLock();
@@ -174,6 +179,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public <P> boolean noneSatisfyWith(
             Predicate2<? super T, ? super P> predicate,
             P parameter)
@@ -189,6 +195,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public boolean allSatisfy(Predicate<? super T> predicate)
     {
         this.acquireReadLock();
@@ -202,6 +209,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public <P> boolean allSatisfyWith(
             Predicate2<? super T, ? super P> predicate,
             P parameter)
@@ -217,6 +225,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public boolean anySatisfy(Predicate<? super T> predicate)
     {
         this.acquireReadLock();
@@ -230,6 +239,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public <P> boolean anySatisfyWith(
             Predicate2<? super T, ? super P> predicate,
             P parameter)
@@ -245,6 +255,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public <R extends Collection<T>> R into(R target)
     {
         this.acquireReadLock();
@@ -258,6 +269,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public MutableList<T> toList()
     {
         this.acquireReadLock();
@@ -271,6 +283,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public <NK, NV> MutableMap<NK, NV> toMap(
             Function<? super T, ? extends NK> keyFunction,
             Function<? super T, ? extends NV> valueFunction)
@@ -286,6 +299,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public <NK, NV> MutableSortedMap<NK, NV> toSortedMap(
             Function<? super T, ? extends NK> keyFunction,
             Function<? super T, ? extends NV> valueFunction)
@@ -301,6 +315,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public <NK, NV> MutableSortedMap<NK, NV> toSortedMap(Comparator<? super NK> comparator,
             Function<? super T, ? extends NK> keyFunction,
             Function<? super T, ? extends NV> valueFunction)
@@ -316,6 +331,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public LazyIterable<T> asLazy()
     {
         this.acquireReadLock();
@@ -329,6 +345,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public MutableSet<T> toSet()
     {
         this.acquireReadLock();
@@ -342,6 +359,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public MutableBag<T> toBag()
     {
         this.acquireReadLock();
@@ -355,6 +373,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public MutableSortedBag<T> toSortedBag()
     {
         this.acquireReadLock();
@@ -368,6 +387,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public MutableSortedBag<T> toSortedBag(Comparator<? super T> comparator)
     {
         this.acquireReadLock();
@@ -381,6 +401,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public <V extends Comparable<? super V>> MutableSortedBag<T> toSortedBagBy(
             Function<? super T, ? extends V> function)
     {
@@ -395,6 +416,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public MutableList<T> toSortedList()
     {
         this.acquireReadLock();
@@ -408,6 +430,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public MutableList<T> toSortedList(Comparator<? super T> comparator)
     {
         this.acquireReadLock();
@@ -421,6 +444,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public <V extends Comparable<? super V>> MutableList<T> toSortedListBy(
             Function<? super T, ? extends V> function)
     {
@@ -435,6 +459,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public MutableSortedSet<T> toSortedSet()
     {
         this.acquireReadLock();
@@ -448,6 +473,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public MutableSortedSet<T> toSortedSet(Comparator<? super T> comparator)
     {
         this.acquireReadLock();
@@ -461,6 +487,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public <V extends Comparable<? super V>> MutableSortedSet<T> toSortedSetBy(
             Function<? super T, ? extends V> function)
     {
@@ -475,6 +502,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public int count(Predicate<? super T> predicate)
     {
         this.acquireReadLock();
@@ -488,6 +516,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public <P> int countWith(
             Predicate2<? super T, ? super P> predicate,
             P parameter)
@@ -503,6 +532,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public T detect(Predicate<? super T> predicate)
     {
         this.acquireReadLock();
@@ -516,6 +546,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public T min(Comparator<? super T> comparator)
     {
         this.acquireReadLock();
@@ -529,6 +560,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public T max(Comparator<? super T> comparator)
     {
         this.acquireReadLock();
@@ -542,6 +574,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public T min()
     {
         this.acquireReadLock();
@@ -555,6 +588,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public T max()
     {
         this.acquireReadLock();
@@ -568,6 +602,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public <V extends Comparable<? super V>> T minBy(Function<? super T, ? extends V> function)
     {
         this.acquireReadLock();
@@ -581,6 +616,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public <V extends Comparable<? super V>> T maxBy(Function<? super T, ? extends V> function)
     {
         this.acquireReadLock();
@@ -594,6 +630,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public T detectIfNone(
             Predicate<? super T> predicate,
             Function0<? extends T> function)
@@ -609,6 +646,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public <P> T detectWith(
             Predicate2<? super T, ? super P> predicate,
             P parameter)
@@ -624,6 +662,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public <P> T detectWithIfNone(
             Predicate2<? super T, ? super P> predicate,
             P parameter,
@@ -640,6 +679,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public T getFirst()
     {
         this.acquireReadLock();
@@ -653,6 +693,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public T getLast()
     {
         this.acquireReadLock();
@@ -666,6 +707,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public boolean notEmpty()
     {
         this.acquireReadLock();
@@ -679,6 +721,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public <P> Twin<MutableList<T>> selectAndRejectWith(
             Predicate2<? super T, ? super P> predicate,
             P parameter)
@@ -694,6 +737,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public <V, R extends Collection<V>> R collect(
             Function<? super T, ? extends V> function,
             R target)
@@ -709,6 +753,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public <R extends MutableBooleanCollection> R collectBoolean(BooleanFunction<? super T> booleanFunction, R target)
     {
         this.acquireReadLock();
@@ -722,6 +767,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public <R extends MutableByteCollection> R collectByte(ByteFunction<? super T> byteFunction, R target)
     {
         this.acquireReadLock();
@@ -735,6 +781,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public <R extends MutableCharCollection> R collectChar(CharFunction<? super T> charFunction, R target)
     {
         this.acquireReadLock();
@@ -748,6 +795,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public <R extends MutableDoubleCollection> R collectDouble(DoubleFunction<? super T> doubleFunction, R target)
     {
         this.acquireReadLock();
@@ -761,6 +809,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public <R extends MutableFloatCollection> R collectFloat(FloatFunction<? super T> floatFunction, R target)
     {
         this.acquireReadLock();
@@ -774,6 +823,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public <R extends MutableIntCollection> R collectInt(IntFunction<? super T> intFunction, R target)
     {
         this.acquireReadLock();
@@ -787,6 +837,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public <R extends MutableLongCollection> R collectLong(LongFunction<? super T> longFunction, R target)
     {
         this.acquireReadLock();
@@ -800,6 +851,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public <R extends MutableShortCollection> R collectShort(ShortFunction<? super T> shortFunction, R target)
     {
         this.acquireReadLock();
@@ -813,6 +865,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public <V, R extends Collection<V>> R flatCollect(
             Function<? super T, ? extends Iterable<V>> function,
             R target)
@@ -828,6 +881,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public <V, R extends Collection<V>> R collectIf(
             Predicate<? super T> predicate,
             Function<? super T, ? extends V> function,
@@ -844,6 +898,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public <P, V, R extends Collection<V>> R collectWith(
             Function2<? super T, ? super P, ? extends V> function,
             P parameter,
@@ -860,6 +915,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public <P, R extends Collection<T>> R selectWith(
             Predicate2<? super T, ? super P> predicate,
             P parameter,
@@ -876,6 +932,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public <R extends Collection<T>> R reject(
             Predicate<? super T> predicate,
             R target)
@@ -891,6 +948,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public <P, R extends Collection<T>> R rejectWith(
             Predicate2<? super T, ? super P> predicate,
             P parameter,
@@ -907,6 +965,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public <R extends Collection<T>> R select(Predicate<? super T> predicate, R target)
     {
         this.acquireReadLock();
@@ -920,6 +979,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public <IV> IV injectInto(
             IV injectedValue,
             Function2<? super IV, ? super T, ? extends IV> function)
@@ -935,6 +995,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public int injectInto(int injectedValue, IntObjectToIntFunction<? super T> function)
     {
         this.acquireReadLock();
@@ -948,6 +1009,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public long injectInto(long injectedValue, LongObjectToLongFunction<? super T> function)
     {
         this.acquireReadLock();
@@ -961,6 +1023,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public double injectInto(double injectedValue, DoubleObjectToDoubleFunction<? super T> function)
     {
         this.acquireReadLock();
@@ -974,6 +1037,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public float injectInto(float injectedValue, FloatObjectToFloatFunction<? super T> function)
     {
         this.acquireReadLock();
@@ -987,6 +1051,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public long sumOfInt(IntFunction<? super T> function)
     {
         this.acquireReadLock();
@@ -1000,6 +1065,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public double sumOfFloat(FloatFunction<? super T> function)
     {
         this.acquireReadLock();
@@ -1013,6 +1079,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public long sumOfLong(LongFunction<? super T> function)
     {
         this.acquireReadLock();
@@ -1026,6 +1093,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public double sumOfDouble(DoubleFunction<? super T> function)
     {
         this.acquireReadLock();
@@ -1039,30 +1107,35 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public <V> MutableObjectLongMap<V> sumByInt(Function<? super T, ? extends V> groupBy, IntFunction<? super T> function)
     {
         MutableObjectLongMap<V> result = ObjectLongMaps.mutable.empty();
         return this.injectInto(result, PrimitiveFunctions.sumByIntFunction(groupBy, function));
     }
 
+    @Override
     public <V> MutableObjectDoubleMap<V> sumByFloat(Function<? super T, ? extends V> groupBy, FloatFunction<? super T> function)
     {
         MutableObjectDoubleMap<V> result = ObjectDoubleMaps.mutable.empty();
         return this.injectInto(result, PrimitiveFunctions.sumByFloatFunction(groupBy, function));
     }
 
+    @Override
     public <V> MutableObjectLongMap<V> sumByLong(Function<? super T, ? extends V> groupBy, LongFunction<? super T> function)
     {
         MutableObjectLongMap<V> result = ObjectLongMaps.mutable.empty();
         return this.injectInto(result, PrimitiveFunctions.sumByLongFunction(groupBy, function));
     }
 
+    @Override
     public <V> MutableObjectDoubleMap<V> sumByDouble(Function<? super T, ? extends V> groupBy, DoubleFunction<? super T> function)
     {
         MutableObjectDoubleMap<V> result = ObjectDoubleMaps.mutable.empty();
         return this.injectInto(result, PrimitiveFunctions.sumByDoubleFunction(groupBy, function));
     }
 
+    @Override
     public <IV, P> IV injectIntoWith(
             IV injectValue,
             Function3<? super IV, ? super T, ? super P, ? extends IV> function,
@@ -1079,6 +1152,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public boolean removeIf(Predicate<? super T> predicate)
     {
         this.acquireWriteLock();
@@ -1092,6 +1166,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public <P> boolean removeIfWith(
             Predicate2<? super T, ? super P> predicate,
             P parameter)
@@ -1107,6 +1182,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public boolean add(T item)
     {
         this.acquireWriteLock();
@@ -1120,6 +1196,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public boolean addAll(Collection<? extends T> collection)
     {
         this.acquireWriteLock();
@@ -1133,6 +1210,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public boolean addAllIterable(Iterable<? extends T> iterable)
     {
         this.acquireWriteLock();
@@ -1146,6 +1224,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public void clear()
     {
         this.acquireWriteLock();
@@ -1159,6 +1238,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public boolean isEmpty()
     {
         this.acquireReadLock();
@@ -1200,6 +1280,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
      * });
      * </pre>
      */
+    @Override
     public Iterator<T> iterator()
     {
         throw new UnsupportedOperationException(
@@ -1207,6 +1288,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
                         + "If you would like to use an iterator, you must either use withReadLockAndDelegate() or withWriteLockAndDelegate().");
     }
 
+    @Override
     public boolean remove(Object item)
     {
         this.acquireWriteLock();
@@ -1220,6 +1302,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public boolean removeAll(Collection<?> collection)
     {
         this.acquireWriteLock();
@@ -1233,6 +1316,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public boolean removeAllIterable(Iterable<?> iterable)
     {
         this.acquireWriteLock();
@@ -1246,6 +1330,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public boolean retainAll(Collection<?> collection)
     {
         this.acquireWriteLock();
@@ -1259,6 +1344,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public boolean retainAllIterable(Iterable<?> iterable)
     {
         this.acquireWriteLock();
@@ -1272,6 +1358,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public int size()
     {
         this.acquireReadLock();
@@ -1285,6 +1372,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public Object[] toArray()
     {
         this.acquireReadLock();
@@ -1298,6 +1386,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public <E> E[] toArray(E[] a)
     {
         this.acquireReadLock();
@@ -1311,11 +1400,13 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public void forEach(Procedure<? super T> procedure)
     {
         this.each(procedure);
     }
 
+    @Override
     public void each(Procedure<? super T> procedure)
     {
         this.acquireReadLock();
@@ -1329,6 +1420,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public <P> void forEachWith(Procedure2<? super T, ? super P> procedure, P parameter)
     {
         this.acquireReadLock();
@@ -1342,6 +1434,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public void forEachWithIndex(ObjectIntProcedure<? super T> objectIntProcedure)
     {
         this.acquireReadLock();
@@ -1369,6 +1462,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public String makeString()
     {
         this.acquireReadLock();
@@ -1382,6 +1476,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public String makeString(String separator)
     {
         this.acquireReadLock();
@@ -1395,6 +1490,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public String makeString(String start, String separator, String end)
     {
         this.acquireReadLock();
@@ -1408,6 +1504,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public void appendString(Appendable appendable)
     {
         this.acquireReadLock();
@@ -1421,6 +1518,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public void appendString(Appendable appendable, String separator)
     {
         this.acquireReadLock();
@@ -1434,6 +1532,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public void appendString(Appendable appendable, String start, String separator, String end)
     {
         this.acquireReadLock();
@@ -1447,6 +1546,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public <V, R extends MutableMultimap<V, T>> R groupBy(
             Function<? super T, ? extends V> function,
             R target)
@@ -1462,6 +1562,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public <V, R extends MutableMultimap<V, T>> R groupByEach(
             Function<? super T, ? extends Iterable<V>> function,
             R target)
@@ -1477,6 +1578,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public <V, R extends MutableMap<V, T>> R groupByUniqueKey(
             Function<? super T, ? extends V> function,
             R target)
@@ -1492,6 +1594,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public <S, R extends Collection<Pair<T, S>>> R zip(Iterable<S> that, R target)
     {
         this.acquireReadLock();
@@ -1505,6 +1608,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public <R extends Collection<Pair<T, Integer>>> R zipWithIndex(R target)
     {
         this.acquireReadLock();
@@ -1518,23 +1622,25 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
     }
 
+    @Override
     public <K, V> MutableMap<K, V> aggregateInPlaceBy(
             Function<? super T, ? extends K> groupBy,
             Function0<? extends V> zeroValueFactory,
             Procedure2<? super V, ? super T> mutatingAggregator)
     {
         MutableMap<K, V> map = UnifiedMap.newMap();
-        this.forEach(new MutatingAggregationProcedure<T, K, V>(map, groupBy, zeroValueFactory, mutatingAggregator));
+        this.forEach(new MutatingAggregationProcedure<>(map, groupBy, zeroValueFactory, mutatingAggregator));
         return map;
     }
 
+    @Override
     public <K, V> MutableMap<K, V> aggregateBy(
             Function<? super T, ? extends K> groupBy,
             Function0<? extends V> zeroValueFactory,
             Function2<? super V, ? super T, ? extends V> nonMutatingAggregator)
     {
         MutableMap<K, V> map = UnifiedMap.newMap();
-        this.forEach(new NonMutatingAggregationProcedure<T, K, V>(map, groupBy, zeroValueFactory, nonMutatingAggregator));
+        this.forEach(new NonMutatingAggregationProcedure<>(map, groupBy, zeroValueFactory, nonMutatingAggregator));
         return map;
     }
 
@@ -1543,11 +1649,13 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
     {
         protected MutableCollection<T> delegate;
 
+        @Override
         public boolean allSatisfy(Predicate<? super T> predicate)
         {
             return this.delegate.allSatisfy(predicate);
         }
 
+        @Override
         public <P> boolean allSatisfyWith(
                 Predicate2<? super T, ? super P> predicate,
                 P parameter)
@@ -1555,11 +1663,13 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
             return this.delegate.allSatisfyWith(predicate, parameter);
         }
 
+        @Override
         public boolean noneSatisfy(Predicate<? super T> predicate)
         {
             return this.delegate.noneSatisfy(predicate);
         }
 
+        @Override
         public <P> boolean noneSatisfyWith(
                 Predicate2<? super T, ? super P> predicate,
                 P parameter)
@@ -1567,11 +1677,13 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
             return this.delegate.noneSatisfyWith(predicate, parameter);
         }
 
+        @Override
         public boolean anySatisfy(Predicate<? super T> predicate)
         {
             return this.delegate.anySatisfy(predicate);
         }
 
+        @Override
         public <P> boolean anySatisfyWith(
                 Predicate2<? super T, ? super P> predicate,
                 P parameter)
@@ -1579,16 +1691,19 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
             return this.delegate.anySatisfyWith(predicate, parameter);
         }
 
+        @Override
         public <R extends Collection<T>> R into(R target)
         {
             return this.delegate.into(target);
         }
 
+        @Override
         public MutableList<T> toList()
         {
             return this.delegate.toList();
         }
 
+        @Override
         public <NK, NV> MutableMap<NK, NV> toMap(
                 Function<? super T, ? extends NK> keyFunction,
                 Function<? super T, ? extends NV> valueFunction)
@@ -1596,6 +1711,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
             return this.delegate.toMap(keyFunction, valueFunction);
         }
 
+        @Override
         public <NK, NV> MutableSortedMap<NK, NV> toSortedMap(
                 Function<? super T, ? extends NK> keyFunction,
                 Function<? super T, ? extends NV> valueFunction)
@@ -1603,6 +1719,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
             return this.delegate.toSortedMap(keyFunction, valueFunction);
         }
 
+        @Override
         public <NK, NV> MutableSortedMap<NK, NV> toSortedMap(Comparator<? super NK> comparator,
                 Function<? super T, ? extends NK> keyFunction,
                 Function<? super T, ? extends NV> valueFunction)
@@ -1610,61 +1727,73 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
             return this.delegate.toSortedMap(comparator, keyFunction, valueFunction);
         }
 
+        @Override
         public MutableSet<T> toSet()
         {
             return this.delegate.toSet();
         }
 
+        @Override
         public MutableBag<T> toBag()
         {
             return this.delegate.toBag();
         }
 
+        @Override
         public MutableSortedBag<T> toSortedBag()
         {
             return this.delegate.toSortedBag();
         }
 
+        @Override
         public MutableSortedBag<T> toSortedBag(Comparator<? super T> comparator)
         {
             return this.delegate.toSortedBag(comparator);
         }
 
+        @Override
         public <V extends Comparable<? super V>> MutableSortedBag<T> toSortedBagBy(Function<? super T, ? extends V> function)
         {
             return this.delegate.toSortedBagBy(function);
         }
 
+        @Override
         public MutableList<T> toSortedList()
         {
             return this.delegate.toSortedList();
         }
 
+        @Override
         public MutableList<T> toSortedList(Comparator<? super T> comparator)
         {
             return this.delegate.toSortedList(comparator);
         }
 
+        @Override
         public <V extends Comparable<? super V>> MutableList<T> toSortedListBy(Function<? super T, ? extends V> function)
         {
             return this.delegate.toSortedListBy(function);
         }
 
+        @Override
         public MutableSortedSet<T> toSortedSet()
         {
             return this.delegate.toSortedSet();
         }
 
+        @Override
         public MutableSortedSet<T> toSortedSet(Comparator<? super T> comparator)
         {
             return this.delegate.toSortedSet(comparator);
         }
 
+        @Override
         public <V extends Comparable<? super V>> MutableSortedSet<T> toSortedSetBy(Function<? super T, ? extends V> function)
         {
             return this.delegate.toSortedSetBy(function);
         }
 
+        @Override
         public <V, R extends Collection<V>> R collect(
                 Function<? super T, ? extends V> function,
                 R target)
@@ -1672,6 +1801,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
             return this.delegate.collect(function, target);
         }
 
+        @Override
         public <V, R extends Collection<V>> R flatCollect(
                 Function<? super T, ? extends Iterable<V>> function,
                 R target)
@@ -1679,6 +1809,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
             return this.delegate.flatCollect(function, target);
         }
 
+        @Override
         public <V, R extends Collection<V>> R collectIf(
                 Predicate<? super T> predicate,
                 Function<? super T, ? extends V> function,
@@ -1687,6 +1818,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
             return this.delegate.collectIf(predicate, function, target);
         }
 
+        @Override
         public <P, V, R extends Collection<V>> R collectWith(
                 Function2<? super T, ? super P, ? extends V> function,
                 P parameter,
@@ -1695,6 +1827,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
             return this.delegate.collectWith(function, parameter, targetCollection);
         }
 
+        @Override
         public <V, R extends MutableMultimap<V, T>> R groupBy(
                 Function<? super T, ? extends V> function,
                 R target)
@@ -1702,6 +1835,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
             return this.delegate.groupBy(function, target);
         }
 
+        @Override
         public <V, R extends MutableMultimap<V, T>> R groupByEach(
                 Function<? super T, ? extends Iterable<V>> function,
                 R target)
@@ -1709,6 +1843,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
             return this.delegate.groupByEach(function, target);
         }
 
+        @Override
         public <V, R extends MutableMap<V, T>> R groupByUniqueKey(
                 Function<? super T, ? extends V> function,
                 R target)
@@ -1716,61 +1851,73 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
             return this.delegate.groupByUniqueKey(function, target);
         }
 
+        @Override
         public int count(Predicate<? super T> predicate)
         {
             return this.delegate.count(predicate);
         }
 
+        @Override
         public <P> int countWith(Predicate2<? super T, ? super P> predicate, P parameter)
         {
             return this.delegate.countWith(predicate, parameter);
         }
 
+        @Override
         public T detect(Predicate<? super T> predicate)
         {
             return this.delegate.detect(predicate);
         }
 
+        @Override
         public T min(Comparator<? super T> comparator)
         {
             return this.delegate.min(comparator);
         }
 
+        @Override
         public T max(Comparator<? super T> comparator)
         {
             return this.delegate.max(comparator);
         }
 
+        @Override
         public T min()
         {
             return this.delegate.min();
         }
 
+        @Override
         public T max()
         {
             return this.delegate.max();
         }
 
+        @Override
         public <V extends Comparable<? super V>> T minBy(Function<? super T, ? extends V> function)
         {
             return this.delegate.minBy(function);
         }
 
+        @Override
         public <V extends Comparable<? super V>> T maxBy(Function<? super T, ? extends V> function)
         {
             return this.delegate.maxBy(function);
         }
 
+        @Override
         public T detectIfNone(Predicate<? super T> predicate, Function0<? extends T> function)
         {
             return this.delegate.detectIfNone(predicate, function);
         }
 
+        @Override
         public <P> T detectWith(Predicate2<? super T, ? super P> predicate, P parameter)
         {
             return this.delegate.detectWith(predicate, parameter);
         }
 
+        @Override
         public <P> T detectWithIfNone(
                 Predicate2<? super T, ? super P> predicate,
                 P parameter,
@@ -1779,16 +1926,19 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
             return this.delegate.detectWithIfNone(predicate, parameter, function);
         }
 
+        @Override
         public T getFirst()
         {
             return this.delegate.getFirst();
         }
 
+        @Override
         public T getLast()
         {
             return this.delegate.getLast();
         }
 
+        @Override
         public <IV> IV injectInto(
                 IV injectedValue,
                 Function2<? super IV, ? super T, ? extends IV> function)
@@ -1796,66 +1946,79 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
             return this.delegate.injectInto(injectedValue, function);
         }
 
+        @Override
         public int injectInto(int injectedValue, IntObjectToIntFunction<? super T> function)
         {
             return this.delegate.injectInto(injectedValue, function);
         }
 
+        @Override
         public long injectInto(long injectedValue, LongObjectToLongFunction<? super T> function)
         {
             return this.delegate.injectInto(injectedValue, function);
         }
 
+        @Override
         public double injectInto(double injectedValue, DoubleObjectToDoubleFunction<? super T> function)
         {
             return this.delegate.injectInto(injectedValue, function);
         }
 
+        @Override
         public float injectInto(float injectedValue, FloatObjectToFloatFunction<? super T> function)
         {
             return this.delegate.injectInto(injectedValue, function);
         }
 
+        @Override
         public long sumOfInt(IntFunction<? super T> function)
         {
             return this.delegate.sumOfInt(function);
         }
 
+        @Override
         public double sumOfFloat(FloatFunction<? super T> function)
         {
             return this.delegate.sumOfFloat(function);
         }
 
+        @Override
         public long sumOfLong(LongFunction<? super T> function)
         {
             return this.delegate.sumOfLong(function);
         }
 
+        @Override
         public double sumOfDouble(DoubleFunction<? super T> function)
         {
             return this.delegate.sumOfDouble(function);
         }
 
+        @Override
         public <V> MutableObjectLongMap<V> sumByInt(Function<? super T, ? extends V> groupBy, IntFunction<? super T> function)
         {
             return this.delegate.sumByInt(groupBy, function);
         }
 
+        @Override
         public <V> MutableObjectDoubleMap<V> sumByFloat(Function<? super T, ? extends V> groupBy, FloatFunction<? super T> function)
         {
             return this.delegate.sumByFloat(groupBy, function);
         }
 
+        @Override
         public <V> MutableObjectLongMap<V> sumByLong(Function<? super T, ? extends V> groupBy, LongFunction<? super T> function)
         {
             return this.delegate.sumByLong(groupBy, function);
         }
 
+        @Override
         public <V> MutableObjectDoubleMap<V> sumByDouble(Function<? super T, ? extends V> groupBy, DoubleFunction<? super T> function)
         {
             return this.delegate.sumByDouble(groupBy, function);
         }
 
+        @Override
         public <IV, P> IV injectIntoWith(
                 IV injectValue,
                 Function3<? super IV, ? super T, ? super P, ? extends IV> function,
@@ -1864,16 +2027,19 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
             return this.delegate.injectIntoWith(injectValue, function, parameter);
         }
 
+        @Override
         public boolean notEmpty()
         {
             return this.delegate.notEmpty();
         }
 
+        @Override
         public <R extends Collection<T>> R reject(Predicate<? super T> predicate, R target)
         {
             return this.delegate.reject(predicate, target);
         }
 
+        @Override
         public <P, R extends Collection<T>> R rejectWith(
                 Predicate2<? super T, ? super P> predicate,
                 P parameter,
@@ -1882,11 +2048,13 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
             return this.delegate.rejectWith(predicate, parameter, targetCollection);
         }
 
+        @Override
         public boolean removeIf(Predicate<? super T> predicate)
         {
             return this.delegate.removeIf(predicate);
         }
 
+        @Override
         public <P> boolean removeIfWith(
                 Predicate2<? super T, ? super P> predicate,
                 P parameter)
@@ -1894,11 +2062,13 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
             return this.delegate.removeIfWith(predicate, parameter);
         }
 
+        @Override
         public <R extends Collection<T>> R select(Predicate<? super T> predicate, R target)
         {
             return this.delegate.select(predicate, target);
         }
 
+        @Override
         public <P> Twin<MutableList<T>> selectAndRejectWith(
                 Predicate2<? super T, ? super P> predicate,
                 P parameter)
@@ -1906,6 +2076,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
             return this.delegate.selectAndRejectWith(predicate, parameter);
         }
 
+        @Override
         public <P, R extends Collection<T>> R selectWith(
                 Predicate2<? super T, ? super P> predicate,
                 P parameter,
@@ -1914,41 +2085,49 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
             return this.delegate.selectWith(predicate, parameter, targetCollection);
         }
 
+        @Override
         public boolean add(T o)
         {
             return this.delegate.add(o);
         }
 
+        @Override
         public boolean addAll(Collection<? extends T> collection)
         {
             return this.delegate.addAll(collection);
         }
 
+        @Override
         public boolean addAllIterable(Iterable<? extends T> iterable)
         {
             return this.delegate.addAllIterable(iterable);
         }
 
+        @Override
         public void clear()
         {
             this.delegate.clear();
         }
 
+        @Override
         public boolean contains(Object o)
         {
             return this.delegate.contains(o);
         }
 
+        @Override
         public boolean containsAll(Collection<?> collection)
         {
             return this.delegate.containsAll(collection);
         }
 
+        @Override
         public boolean containsAllIterable(Iterable<?> source)
         {
             return this.delegate.containsAllIterable(source);
         }
 
+        @Override
         public boolean containsAllArguments(Object... elements)
         {
             return this.delegate.containsAllArguments(elements);
@@ -1966,66 +2145,79 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
             return this.delegate.hashCode();
         }
 
+        @Override
         public boolean isEmpty()
         {
             return this.delegate.isEmpty();
         }
 
+        @Override
         public boolean remove(Object o)
         {
             return this.delegate.remove(o);
         }
 
+        @Override
         public boolean removeAll(Collection<?> collection)
         {
             return this.delegate.removeAll(collection);
         }
 
+        @Override
         public boolean removeAllIterable(Iterable<?> iterable)
         {
             return this.delegate.removeAllIterable(iterable);
         }
 
+        @Override
         public boolean retainAll(Collection<?> collection)
         {
             return this.delegate.retainAll(collection);
         }
 
+        @Override
         public boolean retainAllIterable(Iterable<?> iterable)
         {
             return this.delegate.retainAllIterable(iterable);
         }
 
+        @Override
         public int size()
         {
             return this.delegate.size();
         }
 
+        @Override
         public Object[] toArray()
         {
             return this.delegate.toArray();
         }
 
+        @Override
         public <T> T[] toArray(T[] a)
         {
             return this.delegate.toArray(a);
         }
 
+        @Override
         public void forEach(Procedure<? super T> procedure)
         {
             this.each(procedure);
         }
 
+        @Override
         public void each(Procedure<? super T> procedure)
         {
             this.delegate.forEach(procedure);
         }
 
+        @Override
         public <P> void forEachWith(Procedure2<? super T, ? super P> procedure, P parameter)
         {
             this.delegate.forEachWith(procedure, parameter);
         }
 
+        @Override
         public void forEachWithIndex(ObjectIntProcedure<? super T> objectIntProcedure)
         {
             this.delegate.forEachWithIndex(objectIntProcedure);
@@ -2037,83 +2229,86 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
             return this.delegate.toString();
         }
 
+        @Override
         public String makeString()
         {
             return this.delegate.makeString();
         }
 
+        @Override
         public String makeString(String separator)
         {
             return this.delegate.makeString(separator);
         }
 
+        @Override
         public String makeString(String start, String separator, String end)
         {
             return this.delegate.makeString(start, separator, end);
         }
 
+        @Override
         public void appendString(Appendable appendable)
         {
             this.delegate.appendString(appendable);
         }
 
+        @Override
         public void appendString(Appendable appendable, String separator)
         {
             this.delegate.appendString(appendable, separator);
         }
 
+        @Override
         public void appendString(Appendable appendable, String start, String separator, String end)
         {
             this.delegate.appendString(appendable, start, separator, end);
         }
 
+        @Override
         public <S, R extends Collection<Pair<T, S>>> R zip(Iterable<S> that, R target)
         {
             return this.delegate.zip(that, target);
         }
 
+        @Override
         public <R extends Collection<Pair<T, Integer>>> R zipWithIndex(R target)
         {
             return this.delegate.zipWithIndex(target);
         }
 
+        @Override
         public RichIterable<RichIterable<T>> chunk(int size)
         {
             return this.delegate.chunk(size);
         }
 
+        @Override
         public <K, V> MutableMap<K, V> aggregateInPlaceBy(
-                final Function<? super T, ? extends K> groupBy,
-                final Function0<? extends V> zeroValueFactory,
-                final Procedure2<? super V, ? super T> mutatingAggregator)
+                Function<? super T, ? extends K> groupBy,
+                Function0<? extends V> zeroValueFactory,
+                Procedure2<? super V, ? super T> mutatingAggregator)
         {
-            final MutableMap<K, V> map = UnifiedMap.newMap();
-            this.forEach(new Procedure<T>()
-            {
-                public void value(T each)
-                {
-                    K key = groupBy.valueOf(each);
-                    V value = map.getIfAbsentPut(key, zeroValueFactory);
-                    mutatingAggregator.value(value, each);
-                }
+            MutableMap<K, V> map = UnifiedMap.newMap();
+            this.each(each -> {
+                K key = groupBy.valueOf(each);
+                V value = map.getIfAbsentPut(key, zeroValueFactory);
+                mutatingAggregator.value(value, each);
             });
             return map;
         }
 
+        @Override
         public <K, V> MutableMap<K, V> aggregateBy(
-                final Function<? super T, ? extends K> groupBy,
-                final Function0<? extends V> zeroValueFactory,
-                final Function2<? super V, ? super T, ? extends V> nonMutatingAggregator)
+                Function<? super T, ? extends K> groupBy,
+                Function0<? extends V> zeroValueFactory,
+                Function2<? super V, ? super T, ? extends V> nonMutatingAggregator)
         {
-            final MutableMap<K, V> map = UnifiedMap.newMap();
-            this.forEach(new Procedure<T>()
-            {
-                public void value(T each)
-                {
-                    K key = groupBy.valueOf(each);
-                    V value = map.getIfAbsentPut(key, zeroValueFactory);
-                    map.put(key, nonMutatingAggregator.value(value, each));
-                }
+            MutableMap<K, V> map = UnifiedMap.newMap();
+            this.each(each -> {
+                K key = groupBy.valueOf(each);
+                V value = map.getIfAbsentPut(key, zeroValueFactory);
+                map.put(key, nonMutatingAggregator.value(value, each));
             });
             return map;
         }

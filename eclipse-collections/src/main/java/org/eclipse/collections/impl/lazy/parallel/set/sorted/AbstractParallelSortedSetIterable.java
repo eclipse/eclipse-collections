@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -15,7 +15,6 @@ import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
-import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.list.ParallelListIterable;
 import org.eclipse.collections.api.map.MapIterable;
 import org.eclipse.collections.api.multimap.sortedset.MutableSortedSetMultimap;
@@ -37,82 +36,86 @@ public abstract class AbstractParallelSortedSetIterable<T, B extends SortedSetBa
         return true;
     }
 
+    @Override
     public ParallelSortedSetIterable<T> asUnique()
     {
         return this;
     }
 
+    @Override
     public ParallelSortedSetIterable<T> select(Predicate<? super T> predicate)
     {
-        return new ParallelSelectSortedSetIterable<T>(this, predicate);
+        return new ParallelSelectSortedSetIterable<>(this, predicate);
     }
 
+    @Override
     public <P> ParallelSortedSetIterable<T> selectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         return this.select(Predicates.bind(predicate, parameter));
     }
 
+    @Override
     public <S> ParallelSortedSetIterable<S> selectInstancesOf(Class<S> clazz)
     {
         return (ParallelSortedSetIterable<S>) this.select(Predicates.instanceOf(clazz));
     }
 
+    @Override
     public ParallelSortedSetIterable<T> reject(Predicate<? super T> predicate)
     {
         return this.select(Predicates.not(predicate));
     }
 
+    @Override
     public <P> ParallelSortedSetIterable<T> rejectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         return this.reject(Predicates.bind(predicate, parameter));
     }
 
+    @Override
     public <V> ParallelListIterable<V> collect(Function<? super T, ? extends V> function)
     {
-        return new ParallelCollectListIterable<T, V>(this, function);
+        return new ParallelCollectListIterable<>(this, function);
     }
 
+    @Override
     public <P, V> ParallelListIterable<V> collectWith(Function2<? super T, ? super P, ? extends V> function, P parameter)
     {
         return this.collect(Functions.bind(function, parameter));
     }
 
+    @Override
     public <V> ParallelListIterable<V> collectIf(Predicate<? super T> predicate, Function<? super T, ? extends V> function)
     {
         return this.select(predicate).collect(function);
     }
 
+    @Override
     public <V> ParallelListIterable<V> flatCollect(Function<? super T, ? extends Iterable<V>> function)
     {
-        return new ParallelFlatCollectListIterable<T, V>(this, function);
+        return new ParallelFlatCollectListIterable<>(this, function);
     }
 
-    public <V> SortedSetMultimap<V, T> groupBy(final Function<? super T, ? extends V> function)
+    @Override
+    public <V> SortedSetMultimap<V, T> groupBy(Function<? super T, ? extends V> function)
     {
-        final MutableSortedSetMultimap<V, T> result = SynchronizedPutTreeSortedSetMultimap.newMultimap();
-        this.forEach(new Procedure<T>()
-        {
-            public void value(T each)
-            {
-                V key = function.valueOf(each);
-                result.put(key, each);
-            }
+        MutableSortedSetMultimap<V, T> result = SynchronizedPutTreeSortedSetMultimap.newMultimap();
+        this.forEach(each -> {
+            V key = function.valueOf(each);
+            result.put(key, each);
         });
         return result;
     }
 
-    public <V> SortedSetMultimap<V, T> groupByEach(final Function<? super T, ? extends Iterable<V>> function)
+    @Override
+    public <V> SortedSetMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function)
     {
-        final MutableSortedSetMultimap<V, T> result = SynchronizedPutTreeSortedSetMultimap.newMultimap();
-        this.forEach(new Procedure<T>()
-        {
-            public void value(T each)
+        MutableSortedSetMultimap<V, T> result = SynchronizedPutTreeSortedSetMultimap.newMultimap();
+        this.forEach(each -> {
+            Iterable<V> keys = function.valueOf(each);
+            for (V key : keys)
             {
-                Iterable<V> keys = function.valueOf(each);
-                for (V key : keys)
-                {
-                    result.put(key, each);
-                }
+                result.put(key, each);
             }
         });
         return result;

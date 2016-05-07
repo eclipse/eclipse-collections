@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -75,7 +75,7 @@ public class UnmodifiableMutableSet<T>
         {
             throw new IllegalArgumentException("cannot create an UnmodifiableMutableSet for null");
         }
-        return new UnmodifiableMutableSet<E>(SetAdapter.adapt(set));
+        return new UnmodifiableMutableSet<>(SetAdapter.adapt(set));
     }
 
     protected MutableSet<T> getMutableSet()
@@ -292,61 +292,73 @@ public class UnmodifiableMutableSet<T>
         return this.getMutableSet().zipWithIndex(target);
     }
 
+    @Override
     public MutableSet<T> union(SetIterable<? extends T> set)
     {
         return this.getMutableSet().union(set);
     }
 
+    @Override
     public <R extends Set<T>> R unionInto(SetIterable<? extends T> set, R targetSet)
     {
         return this.getMutableSet().unionInto(set, targetSet);
     }
 
+    @Override
     public MutableSet<T> intersect(SetIterable<? extends T> set)
     {
         return this.getMutableSet().intersect(set);
     }
 
+    @Override
     public <R extends Set<T>> R intersectInto(SetIterable<? extends T> set, R targetSet)
     {
         return this.getMutableSet().intersectInto(set, targetSet);
     }
 
+    @Override
     public MutableSet<T> difference(SetIterable<? extends T> subtrahendSet)
     {
         return this.getMutableSet().difference(subtrahendSet);
     }
 
+    @Override
     public <R extends Set<T>> R differenceInto(SetIterable<? extends T> subtrahendSet, R targetSet)
     {
         return this.getMutableSet().differenceInto(subtrahendSet, targetSet);
     }
 
+    @Override
     public MutableSet<T> symmetricDifference(SetIterable<? extends T> setB)
     {
         return this.getMutableSet().symmetricDifference(setB);
     }
 
+    @Override
     public <R extends Set<T>> R symmetricDifferenceInto(SetIterable<? extends T> set, R targetSet)
     {
         return this.getMutableSet().symmetricDifferenceInto(set, targetSet);
     }
 
+    @Override
     public boolean isSubsetOf(SetIterable<? extends T> candidateSuperset)
     {
         return this.getMutableSet().isSubsetOf(candidateSuperset);
     }
 
+    @Override
     public boolean isProperSubsetOf(SetIterable<? extends T> candidateSuperset)
     {
         return this.getMutableSet().isProperSubsetOf(candidateSuperset);
     }
 
+    @Override
     public MutableSet<UnsortedSetIterable<T>> powerSet()
     {
         return this.getMutableSet().powerSet();
     }
 
+    @Override
     public <B> LazyIterable<Pair<T, B>> cartesianProduct(SetIterable<B> set)
     {
         return this.getMutableSet().cartesianProduct(set);
@@ -378,9 +390,10 @@ public class UnmodifiableMutableSet<T>
 
     protected Object writeReplace()
     {
-        return new UnmodifiableCollectionSerializationProxy<T>(this.getMutableSet());
+        return new UnmodifiableCollectionSerializationProxy<>(this.getMutableSet());
     }
 
+    @Override
     public ParallelUnsortedSetIterable<T> asParallel(ExecutorService executorService, int batchSize)
     {
         return this.getMutableSet().asParallel(executorService, batchSize);

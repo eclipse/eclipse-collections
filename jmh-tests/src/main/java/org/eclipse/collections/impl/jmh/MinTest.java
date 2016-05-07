@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -58,25 +58,25 @@ public class MinTest extends AbstractJMHTestRunner
     @Benchmark
     public int serial_lazy_jdk()
     {
-        return this.integersJDK.stream().min(Comparator.<Integer>naturalOrder()).get();
+        return this.integersJDK.stream().min(Comparator.naturalOrder()).get();
     }
 
     @Benchmark
     public int serial_lazy_streams_ec()
     {
-        return this.integersEC.stream().min(Comparator.<Integer>naturalOrder()).get();
+        return this.integersEC.stream().min(Comparator.naturalOrder()).get();
     }
 
     @Benchmark
     public int serial_lazy_reverse_jdk()
     {
-        return this.integersJDK.stream().min(Comparator.<Integer>reverseOrder()).get();
+        return this.integersJDK.stream().min(Comparator.reverseOrder()).get();
     }
 
     @Benchmark
     public int serial_lazy_reverse_streams_ec()
     {
-        return this.integersEC.stream().min(Comparator.<Integer>reverseOrder()).get();
+        return this.integersEC.stream().min(Comparator.reverseOrder()).get();
     }
 
     @Benchmark
@@ -94,25 +94,25 @@ public class MinTest extends AbstractJMHTestRunner
     @Benchmark
     public int parallel_lazy_jdk()
     {
-        return this.integersJDK.parallelStream().min(Comparator.<Integer>naturalOrder()).get();
+        return this.integersJDK.parallelStream().min(Comparator.naturalOrder()).get();
     }
 
     @Benchmark
     public int parallel_lazy_streams_ec()
     {
-        return this.integersEC.parallelStream().min(Comparator.<Integer>naturalOrder()).get();
+        return this.integersEC.parallelStream().min(Comparator.naturalOrder()).get();
     }
 
     @Benchmark
     public int parallel_lazy_reverse_jdk()
     {
-        return this.integersJDK.parallelStream().min(Comparator.<Integer>reverseOrder()).get();
+        return this.integersJDK.parallelStream().min(Comparator.reverseOrder()).get();
     }
 
     @Benchmark
     public int parallel_lazy_reverse_streams_ec()
     {
-        return this.integersEC.parallelStream().min(Comparator.<Integer>reverseOrder()).get();
+        return this.integersEC.parallelStream().min(Comparator.reverseOrder()).get();
     }
 
     @Benchmark
@@ -130,36 +130,36 @@ public class MinTest extends AbstractJMHTestRunner
     @Benchmark
     public int serial_eager_ec()
     {
-        return this.integersEC.min(Comparator.<Integer>naturalOrder());
+        return this.integersEC.min(Comparator.naturalOrder());
     }
 
     @Benchmark
     public int serial_eager_reverse_ec()
     {
-        return this.integersEC.min(Comparator.<Integer>reverseOrder());
+        return this.integersEC.min(Comparator.reverseOrder());
     }
 
     @Benchmark
     public int serial_lazy_ec()
     {
-        return this.integersEC.asLazy().min(Comparator.<Integer>naturalOrder());
+        return this.integersEC.asLazy().min(Comparator.naturalOrder());
     }
 
     @Benchmark
     public int serial_lazy_reverse_ec()
     {
-        return this.integersEC.asLazy().min(Comparator.<Integer>reverseOrder());
+        return this.integersEC.asLazy().min(Comparator.reverseOrder());
     }
 
     @Benchmark
     public int parallel_lazy_ec()
     {
-        return this.integersEC.asParallel(this.executorService, BATCH_SIZE).min(Comparator.<Integer>naturalOrder());
+        return this.integersEC.asParallel(this.executorService, BATCH_SIZE).min(Comparator.naturalOrder());
     }
 
     @Benchmark
     public int parallel_lazy_reverse_ec()
     {
-        return this.integersEC.asParallel(this.executorService, BATCH_SIZE).min(Comparator.<Integer>reverseOrder());
+        return this.integersEC.asParallel(this.executorService, BATCH_SIZE).min(Comparator.reverseOrder());
     }
 }

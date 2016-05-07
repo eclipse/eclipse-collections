@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -21,7 +21,6 @@ import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.predicate.Predicate2;
-import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.multimap.Multimap;
 import org.eclipse.collections.api.multimap.bag.MutableBagMultimap;
@@ -72,22 +71,22 @@ public final class TreeBagMultimap<K, V>
 
     public static <K, V> TreeBagMultimap<K, V> newMultimap()
     {
-        return new TreeBagMultimap<K, V>();
+        return new TreeBagMultimap<>();
     }
 
     public static <K, V> TreeBagMultimap<K, V> newMultimap(Multimap<? extends K, ? extends V> multimap)
     {
-        return new TreeBagMultimap<K, V>(multimap);
+        return new TreeBagMultimap<>(multimap);
     }
 
     public static <K, V> TreeBagMultimap<K, V> newMultimap(Comparator<? super V> comparator)
     {
-        return new TreeBagMultimap<K, V>(comparator);
+        return new TreeBagMultimap<>(comparator);
     }
 
     public static <K, V> TreeBagMultimap<K, V> newMultimap(Pair<K, V>... pairs)
     {
-        return new TreeBagMultimap<K, V>(pairs);
+        return new TreeBagMultimap<>(pairs);
     }
 
     @Override
@@ -108,33 +107,31 @@ public final class TreeBagMultimap<K, V>
         return TreeBag.newBag(this.comparator);
     }
 
+    @Override
     public TreeBagMultimap<K, V> newEmpty()
     {
-        return new TreeBagMultimap<K, V>(this.comparator);
+        return new TreeBagMultimap<>(this.comparator);
     }
 
+    @Override
     public Comparator<? super V> comparator()
     {
         return this.comparator;
     }
 
+    @Override
     public MutableSortedBagMultimap<K, V> toMutable()
     {
-        return new TreeBagMultimap<K, V>(this);
+        return new TreeBagMultimap<>(this);
     }
 
+    @Override
     public ImmutableSortedBagMultimap<K, V> toImmutable()
     {
-        final MutableMap<K, ImmutableSortedBag<V>> map = UnifiedMap.newMap();
+        MutableMap<K, ImmutableSortedBag<V>> map = UnifiedMap.newMap();
 
-        this.map.forEachKeyValue(new Procedure2<K, MutableSortedBag<V>>()
-        {
-            public void value(K key, MutableSortedBag<V> bag)
-            {
-                map.put(key, bag.toImmutable());
-            }
-        });
-        return new ImmutableSortedBagMultimapImpl<K, V>(map, this.comparator());
+        this.map.forEachKeyValue((key, bag) -> map.put(key, bag.toImmutable()));
+        return new ImmutableSortedBagMultimapImpl<>(map, this.comparator());
     }
 
     @Override
@@ -151,38 +148,45 @@ public final class TreeBagMultimap<K, V>
         super.readExternal(in);
     }
 
+    @Override
     public MutableBagMultimap<V, K> flip()
     {
         return Iterate.flip(this);
     }
 
+    @Override
     public TreeBagMultimap<K, V> selectKeysValues(Predicate2<? super K, ? super V> predicate)
     {
         return this.selectKeysValues(predicate, this.newEmpty());
     }
 
+    @Override
     public TreeBagMultimap<K, V> rejectKeysValues(Predicate2<? super K, ? super V> predicate)
     {
         return this.rejectKeysValues(predicate, this.newEmpty());
     }
 
+    @Override
     public TreeBagMultimap<K, V> selectKeysMultiValues(Predicate2<? super K, ? super Iterable<V>> predicate)
     {
         return this.selectKeysMultiValues(predicate, this.newEmpty());
     }
 
+    @Override
     public TreeBagMultimap<K, V> rejectKeysMultiValues(Predicate2<? super K, ? super Iterable<V>> predicate)
     {
         return this.rejectKeysMultiValues(predicate, this.newEmpty());
     }
 
+    @Override
     public <K2, V2> HashBagMultimap<K2, V2> collectKeysValues(Function2<? super K, ? super V, Pair<K2, V2>> function)
     {
-        return this.collectKeysValues(function, HashBagMultimap.<K2, V2>newMultimap());
+        return this.collectKeysValues(function, HashBagMultimap.newMultimap());
     }
 
+    @Override
     public <V2> FastListMultimap<K, V2> collectValues(Function<? super V, ? extends V2> function)
     {
-        return this.collectValues(function, FastListMultimap.<K, V2>newMultimap());
+        return this.collectValues(function, FastListMultimap.newMultimap());
     }
 }

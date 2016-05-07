@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -50,6 +50,7 @@ public abstract class AbstractMutableCollection<T>
         extends AbstractRichIterable<T>
         implements MutableCollection<T>
 {
+    @Override
     public <P> Twin<MutableList<T>> selectAndRejectWith(
             Predicate2<? super T, ? super P> predicate,
             P parameter)
@@ -57,16 +58,19 @@ public abstract class AbstractMutableCollection<T>
         return IterableIterate.selectAndRejectWith(this, predicate, parameter);
     }
 
+    @Override
     public boolean removeIf(Predicate<? super T> predicate)
     {
         return IterableIterate.removeIf(this, predicate);
     }
 
+    @Override
     public <P> boolean removeIfWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         return IterableIterate.removeIfWith(this, predicate, parameter);
     }
 
+    @Override
     public <IV, P> IV injectIntoWith(
             IV injectValue,
             Function3<? super IV, ? super T, ? super P, ? extends IV> function,
@@ -75,6 +79,7 @@ public abstract class AbstractMutableCollection<T>
         return IterableIterate.injectIntoWith(injectValue, this, function, parameter);
     }
 
+    @Override
     public boolean addAllIterable(Iterable<? extends T> iterable)
     {
         int oldSize = this.size();
@@ -90,21 +95,24 @@ public abstract class AbstractMutableCollection<T>
         }
         else
         {
-            Iterate.forEachWith(iterable, Procedures2.<T>addToCollection(), this);
+            Iterate.forEachWith(iterable, Procedures2.addToCollection(), this);
         }
         return oldSize != this.size();
     }
 
+    @Override
     public boolean removeAllIterable(Iterable<?> iterable)
     {
         return this.removeAll(CollectionAdapter.wrapSet(iterable));
     }
 
+    @Override
     public boolean retainAllIterable(Iterable<?> iterable)
     {
         return this.retainAll(CollectionAdapter.wrapSet(iterable));
     }
 
+    @Override
     public RichIterable<RichIterable<T>> chunk(int size)
     {
         if (size <= 0)
@@ -126,55 +134,63 @@ public abstract class AbstractMutableCollection<T>
         return result;
     }
 
+    @Override
     public <K, V> MutableMap<K, V> aggregateInPlaceBy(
             Function<? super T, ? extends K> groupBy,
             Function0<? extends V> zeroValueFactory,
             Procedure2<? super V, ? super T> mutatingAggregator)
     {
         MutableMap<K, V> map = UnifiedMap.newMap();
-        this.forEach(new MutatingAggregationProcedure<T, K, V>(map, groupBy, zeroValueFactory, mutatingAggregator));
+        this.forEach(new MutatingAggregationProcedure<>(map, groupBy, zeroValueFactory, mutatingAggregator));
         return map;
     }
 
+    @Override
     public <K, V> MutableMap<K, V> aggregateBy(
             Function<? super T, ? extends K> groupBy,
             Function0<? extends V> zeroValueFactory,
             Function2<? super V, ? super T, ? extends V> nonMutatingAggregator)
     {
         MutableMap<K, V> map = UnifiedMap.newMap();
-        this.forEach(new NonMutatingAggregationProcedure<T, K, V>(map, groupBy, zeroValueFactory, nonMutatingAggregator));
+        this.forEach(new NonMutatingAggregationProcedure<>(map, groupBy, zeroValueFactory, nonMutatingAggregator));
         return map;
     }
 
+    @Override
     public <V> MutableObjectLongMap<V> sumByInt(Function<? super T, ? extends V> groupBy, IntFunction<? super T> function)
     {
         MutableObjectLongMap<V> result = ObjectLongMaps.mutable.empty();
         return this.injectInto(result, PrimitiveFunctions.sumByIntFunction(groupBy, function));
     }
 
+    @Override
     public <V> MutableObjectDoubleMap<V> sumByFloat(Function<? super T, ? extends V> groupBy, FloatFunction<? super T> function)
     {
         MutableObjectDoubleMap<V> result = ObjectDoubleMaps.mutable.empty();
         return this.injectInto(result, PrimitiveFunctions.sumByFloatFunction(groupBy, function));
     }
 
+    @Override
     public <V> MutableObjectLongMap<V> sumByLong(Function<? super T, ? extends V> groupBy, LongFunction<? super T> function)
     {
         MutableObjectLongMap<V> result = ObjectLongMaps.mutable.empty();
         return this.injectInto(result, PrimitiveFunctions.sumByLongFunction(groupBy, function));
     }
 
+    @Override
     public <V> MutableObjectDoubleMap<V> sumByDouble(Function<? super T, ? extends V> groupBy, DoubleFunction<? super T> function)
     {
         MutableObjectDoubleMap<V> result = ObjectDoubleMaps.mutable.empty();
         return this.injectInto(result, PrimitiveFunctions.sumByDoubleFunction(groupBy, function));
     }
 
+    @Override
     public boolean add(T element)
     {
         throw new UnsupportedOperationException("Cannot call add() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public boolean remove(Object o)
     {
         Iterator<T> iterator = this.iterator();
@@ -189,16 +205,19 @@ public abstract class AbstractMutableCollection<T>
         return false;
     }
 
+    @Override
     public boolean addAll(Collection<? extends T> source)
     {
         return this.addAllIterable(source);
     }
 
+    @Override
     public boolean removeAll(Collection<?> source)
     {
         return this.removeAllIterable(source);
     }
 
+    @Override
     public boolean retainAll(Collection<?> source)
     {
         int oldSize = this.size();
@@ -213,6 +232,7 @@ public abstract class AbstractMutableCollection<T>
         return this.size() != oldSize;
     }
 
+    @Override
     public <V> MutableMap<V, T> groupByUniqueKey(Function<? super T, ? extends V> function)
     {
         return Iterate.groupByUniqueKey(this, function);

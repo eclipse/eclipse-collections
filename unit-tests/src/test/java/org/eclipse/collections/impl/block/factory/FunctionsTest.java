@@ -158,10 +158,10 @@ public class FunctionsTest
     public void firstNotNullValue()
     {
         Function<Object, Integer> function1 =
-                Functions.firstNotNullValue(Functions.<Object, Integer>getFixedValue(null), Functions.getFixedValue(1), Functions.getFixedValue(2));
+                Functions.firstNotNullValue(Functions.getFixedValue(null), Functions.getFixedValue(1), Functions.getFixedValue(2));
         Assert.assertEquals(Integer.valueOf(1), function1.valueOf(null));
         Function<Object, Integer> function2 =
-                Functions.firstNotNullValue(Functions.<Object, Integer>getFixedValue(null), Functions.getFixedValue(null));
+                Functions.firstNotNullValue(Functions.getFixedValue(null), Functions.getFixedValue(null));
         Assert.assertNull(function2.valueOf(null));
     }
 
@@ -180,14 +180,14 @@ public class FunctionsTest
     public void firstNotEmptyCollectionValue()
     {
         Function<Object, ImmutableList<String>> function1 = Functions.firstNotEmptyCollectionValue(
-                Functions.getFixedValue(Lists.immutable.<String>of()),
+                Functions.getFixedValue(Lists.immutable.of()),
                 Functions.getFixedValue(Lists.immutable.of("hello")),
-                Functions.getFixedValue(Lists.immutable.<String>of()));
+                Functions.getFixedValue(Lists.immutable.of()));
         Assert.assertEquals(iList("hello"), function1.valueOf(null));
 
         Function<Object, ImmutableList<String>> function2 = Functions.firstNotEmptyCollectionValue(
-                Functions.getFixedValue(Lists.immutable.<String>of()),
-                Functions.getFixedValue(Lists.immutable.<String>of()));
+                Functions.getFixedValue(Lists.immutable.of()),
+                Functions.getFixedValue(Lists.immutable.of()));
         Assert.assertNull(function2.valueOf(null));
     }
 
@@ -481,7 +481,7 @@ public class FunctionsTest
     {
         MutableMap<String, Integer> map = UnifiedMap.newWithKeysValues("One", 1);
         MutableSet<Map.Entry<String, Integer>> entries = SetAdapter.adapt(map.entrySet());
-        MutableSet<String> keys = entries.collect(Functions.<String>getKeyFunction());
+        MutableSet<String> keys = entries.collect(Functions.getKeyFunction());
         Assert.assertEquals(UnifiedSet.newSetWith("One"), keys);
     }
 
@@ -490,7 +490,7 @@ public class FunctionsTest
     {
         MutableMap<String, Integer> map = UnifiedMap.newWithKeysValues("One", 1);
         MutableSet<Map.Entry<String, Integer>> entries = SetAdapter.adapt(map.entrySet());
-        MutableSet<Integer> values = entries.collect(Functions.<Integer>getValueFunction());
+        MutableSet<Integer> values = entries.collect(Functions.getValueFunction());
         Assert.assertEquals(UnifiedSet.newSetWith(1), values);
     }
 
@@ -551,10 +551,10 @@ public class FunctionsTest
         Pair<Integer, String> pair3 = Tuples.pair(3, "Three");
         Pair<Integer, String> pair4 = Tuples.pair(4, "Four");
 
-        MutableList<Pair<Integer, String>> testList = FastList.<Pair<Integer, String>>newListWith(pair1, pair2, pair3, pair4);
+        MutableList<Pair<Integer, String>> testList = FastList.newListWith(pair1, pair2, pair3, pair4);
         MutableList<Pair<String, Integer>> actual = testList.collect(Functions.swappedPair());
 
-        MutableList<Pair<String, Integer>> expected = FastList.<Pair<String, Integer>>newListWith(Tuples.pair("One", 1), Tuples.pair("Two", 2), Tuples.pair("Three", 3), Tuples.pair("Four", 4));
+        MutableList<Pair<String, Integer>> expected = FastList.newListWith(Tuples.pair("One", 1), Tuples.pair("Two", 2), Tuples.pair("Three", 3), Tuples.pair("Four", 4));
 
         Assert.assertEquals(expected, actual);
     }

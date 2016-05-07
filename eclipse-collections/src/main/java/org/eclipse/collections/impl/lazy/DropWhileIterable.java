@@ -46,49 +46,51 @@ public class DropWhileIterable<T> extends AbstractLazyIterable<T>
         this.predicate = predicate;
     }
 
+    @Override
     public void each(Procedure<? super T> procedure)
     {
-        Iterate.forEach(this.adapted, new IfProcedure<T>(new DropWhileIterablePredicate<T>(this.predicate), procedure));
+        Iterate.forEach(this.adapted, new IfProcedure<>(new DropWhileIterablePredicate<>(this.predicate), procedure));
     }
 
     @Override
     public void forEachWithIndex(ObjectIntProcedure<? super T> objectIntProcedure)
     {
-        Iterate.forEach(this.adapted, new IfObjectIntProcedure<T>(new DropWhileIterablePredicate<T>(this.predicate), objectIntProcedure));
+        Iterate.forEach(this.adapted, new IfObjectIntProcedure<>(new DropWhileIterablePredicate<>(this.predicate), objectIntProcedure));
     }
 
     @Override
     public <P> void forEachWith(Procedure2<? super T, ? super P> procedure, P parameter)
     {
-        Iterate.forEachWith(this.adapted, new IfProcedureWith<T, P>(new DropWhileIterablePredicate<T>(this.predicate), procedure), parameter);
+        Iterate.forEachWith(this.adapted, new IfProcedureWith<>(new DropWhileIterablePredicate<>(this.predicate), procedure), parameter);
     }
 
     @Override
     public boolean anySatisfy(Predicate<? super T> predicate)
     {
-        return Iterate.anySatisfy(this.adapted, Predicates.and(new DropWhileIterablePredicate<T>(this.predicate), predicate));
+        return Iterate.anySatisfy(this.adapted, Predicates.and(new DropWhileIterablePredicate<>(this.predicate), predicate));
     }
 
     @Override
     public boolean allSatisfy(Predicate<? super T> predicate)
     {
-        return Iterate.allSatisfy(this.adapted, Predicates.or(Predicates.not(new DropWhileIterablePredicate<T>(this.predicate)), predicate));
+        return Iterate.allSatisfy(this.adapted, Predicates.or(Predicates.not(new DropWhileIterablePredicate<>(this.predicate)), predicate));
     }
 
     @Override
     public boolean noneSatisfy(Predicate<? super T> predicate)
     {
-        return Iterate.noneSatisfy(this.adapted, Predicates.and(new DropWhileIterablePredicate<T>(this.predicate), predicate));
+        return Iterate.noneSatisfy(this.adapted, Predicates.and(new DropWhileIterablePredicate<>(this.predicate), predicate));
     }
 
     @Override
     public T detect(Predicate<? super T> predicate)
     {
-        return Iterate.detect(this.adapted, Predicates.and(new DropWhileIterablePredicate<T>(this.predicate), predicate));
+        return Iterate.detect(this.adapted, Predicates.and(new DropWhileIterablePredicate<>(this.predicate), predicate));
     }
 
+    @Override
     public Iterator<T> iterator()
     {
-        return new SelectIterator<T>(this.adapted.iterator(), new DropWhileIterablePredicate<T>(this.predicate));
+        return new SelectIterator<>(this.adapted.iterator(), new DropWhileIterablePredicate<>(this.predicate));
     }
 }

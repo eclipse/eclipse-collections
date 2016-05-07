@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -25,7 +25,6 @@ import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.function.primitive.DoubleFunction;
-import org.eclipse.collections.api.block.function.primitive.DoubleFunction0;
 import org.eclipse.collections.api.block.function.primitive.FloatFunction;
 import org.eclipse.collections.api.block.function.primitive.IntFunction;
 import org.eclipse.collections.api.block.function.primitive.LongFunction;
@@ -33,7 +32,6 @@ import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
-import org.eclipse.collections.api.block.procedure.primitive.ObjectLongProcedure;
 import org.eclipse.collections.api.list.ListIterable;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.primitive.ObjectDoubleMap;
@@ -137,8 +135,8 @@ public final class ParallelIterate
     {
         ParallelIterate.forEachWithIndex(
                 iterable,
-                new PassThruObjectIntProcedureFactory<BT>(procedure),
-                new PassThruCombiner<BT>(), executor);
+                new PassThruObjectIntProcedureFactory<>(procedure),
+                new PassThruCombiner<>(), executor);
     }
 
     /**
@@ -158,8 +156,8 @@ public final class ParallelIterate
     {
         ParallelIterate.forEachWithIndex(
                 iterable,
-                new PassThruObjectIntProcedureFactory<BT>(procedure),
-                new PassThruCombiner<BT>(),
+                new PassThruObjectIntProcedureFactory<>(procedure),
+                new PassThruCombiner<>(),
                 minForkSize,
                 taskCount);
     }
@@ -252,7 +250,7 @@ public final class ParallelIterate
         {
             int threadCount = Math.min(size, taskCount);
             ObjectIntProcedureFJTaskRunner<T, BT> runner =
-                    new ObjectIntProcedureFJTaskRunner<T, BT>(combiner, threadCount);
+                    new ObjectIntProcedureFJTaskRunner<>(combiner, threadCount);
             runner.executeAndCombine(executor, procedureFactory, list);
         }
     }
@@ -319,8 +317,8 @@ public final class ParallelIterate
     {
         ParallelIterate.forEach(
                 iterable,
-                new PassThruProcedureFactory<BT>(procedure),
-                new PassThruCombiner<BT>(),
+                new PassThruProcedureFactory<>(procedure),
+                new PassThruCombiner<>(),
                 executor);
     }
 
@@ -351,8 +349,8 @@ public final class ParallelIterate
     {
         ParallelIterate.forEach(
                 iterable,
-                new PassThruProcedureFactory<BT>(procedure),
-                new PassThruCombiner<BT>(),
+                new PassThruProcedureFactory<>(procedure),
+                new PassThruCombiner<>(),
                 minForkSize,
                 taskCount,
                 executor);
@@ -498,7 +496,7 @@ public final class ParallelIterate
         {
             int threadCount = Math.min(size, taskCount);
             ProcedureFJTaskRunner<T, BT> runner =
-                    new ProcedureFJTaskRunner<T, BT>(combiner, threadCount);
+                    new ProcedureFJTaskRunner<>(combiner, threadCount);
             runner.executeAndCombine(executor, procedureFactory, list);
         }
     }
@@ -529,7 +527,7 @@ public final class ParallelIterate
         {
             int threadCount = Math.min(size, Math.min(taskCount, set.getBatchCount((int) Math.ceil((double) size / (double) taskCount))));
             BatchIterableProcedureFJTaskRunner<T, BT> runner =
-                    new BatchIterableProcedureFJTaskRunner<T, BT>(combiner, threadCount);
+                    new BatchIterableProcedureFJTaskRunner<>(combiner, threadCount);
             runner.executeAndCombine(executor, procedureFactory, set);
         }
     }
@@ -605,8 +603,8 @@ public final class ParallelIterate
             Executor executor,
             boolean allowReorderedResult)
     {
-        FastListSelectProcedureCombiner<T> combiner = new FastListSelectProcedureCombiner<T>(iterable, target, 10, allowReorderedResult);
-        FastListSelectProcedureFactory<T> procedureFactory = new FastListSelectProcedureFactory<T>(predicate, batchSize);
+        FastListSelectProcedureCombiner<T> combiner = new FastListSelectProcedureCombiner<>(iterable, target, 10, allowReorderedResult);
+        FastListSelectProcedureFactory<T> procedureFactory = new FastListSelectProcedureFactory<>(predicate, batchSize);
         ParallelIterate.forEach(
                 iterable,
                 procedureFactory,
@@ -698,8 +696,8 @@ public final class ParallelIterate
             Executor executor,
             boolean allowReorderedResult)
     {
-        FastListRejectProcedureCombiner<T> combiner = new FastListRejectProcedureCombiner<T>(iterable, target, 10, allowReorderedResult);
-        FastListRejectProcedureFactory<T> procedureFactory = new FastListRejectProcedureFactory<T>(predicate, batchSize);
+        FastListRejectProcedureCombiner<T> combiner = new FastListRejectProcedureCombiner<>(iterable, target, 10, allowReorderedResult);
+        FastListRejectProcedureFactory<T> procedureFactory = new FastListRejectProcedureFactory<>(predicate, batchSize);
         ParallelIterate.forEach(
                 iterable,
                 procedureFactory,
@@ -727,8 +725,8 @@ public final class ParallelIterate
      */
     public static <T> int count(Iterable<T> iterable, Predicate<? super T> predicate, int batchSize, Executor executor)
     {
-        CountCombiner<T> combiner = new CountCombiner<T>();
-        CountProcedureFactory<T> procedureFactory = new CountProcedureFactory<T>(predicate);
+        CountCombiner<T> combiner = new CountCombiner<>();
+        CountProcedureFactory<T> procedureFactory = new CountProcedureFactory<>(predicate);
         ParallelIterate.forEach(
                 iterable,
                 procedureFactory,
@@ -803,9 +801,9 @@ public final class ParallelIterate
             boolean allowReorderedResult)
     {
         int size = Iterate.sizeOf(iterable);
-        FastListCollectProcedureCombiner<T, V> combiner = new FastListCollectProcedureCombiner<T, V>(iterable, target, size, allowReorderedResult);
+        FastListCollectProcedureCombiner<T, V> combiner = new FastListCollectProcedureCombiner<>(iterable, target, size, allowReorderedResult);
         int taskCount = ParallelIterate.calculateTaskCount(iterable, batchSize);
-        FastListCollectProcedureFactory<T, V> procedureFactory = new FastListCollectProcedureFactory<T, V>(function, size / taskCount);
+        FastListCollectProcedureFactory<T, V> procedureFactory = new FastListCollectProcedureFactory<>(function, size / taskCount);
         ParallelIterate.forEach(
                 iterable,
                 procedureFactory,
@@ -858,8 +856,8 @@ public final class ParallelIterate
         int taskCount = ParallelIterate.calculateTaskCount(iterable, batchSize);
         int taskSize = size / taskCount;
         FlatCollectProcedureCombiner<T, V> combiner =
-                new FlatCollectProcedureCombiner<T, V>(iterable, target, size, allowReorderedResult);
-        FlatCollectProcedureFactory<T, V> procedureFactory = new FlatCollectProcedureFactory<T, V>(function, taskSize);
+                new FlatCollectProcedureCombiner<>(iterable, target, size, allowReorderedResult);
+        FlatCollectProcedureFactory<T, V> procedureFactory = new FlatCollectProcedureFactory<>(function, taskSize);
         ParallelIterate.forEach(
                 iterable,
                 procedureFactory,
@@ -939,8 +937,8 @@ public final class ParallelIterate
             Executor executor,
             boolean allowReorderedResult)
     {
-        FastListCollectIfProcedureCombiner<T, V> combiner = new FastListCollectIfProcedureCombiner<T, V>(iterable, target, 10, allowReorderedResult);
-        FastListCollectIfProcedureFactory<T, V> procedureFactory = new FastListCollectIfProcedureFactory<T, V>(function, predicate, batchSize);
+        FastListCollectIfProcedureCombiner<T, V> combiner = new FastListCollectIfProcedureCombiner<>(iterable, target, 10, allowReorderedResult);
+        FastListCollectIfProcedureFactory<T, V> procedureFactory = new FastListCollectIfProcedureFactory<>(function, predicate, batchSize);
         ParallelIterate.forEach(
                 iterable,
                 procedureFactory,
@@ -1039,7 +1037,7 @@ public final class ParallelIterate
                 groupBy,
                 zeroValueFactory,
                 nonMutatingAggregator,
-                ConcurrentHashMap.<K, V>newMap(),
+                ConcurrentHashMap.newMap(),
                 batchSize,
                 executor);
     }
@@ -1054,10 +1052,10 @@ public final class ParallelIterate
             Executor executor)
     {
         NonMutatingAggregationProcedure<T, K, V> nonMutatingAggregationProcedure =
-                new NonMutatingAggregationProcedure<T, K, V>(mutableMap, groupBy, zeroValueFactory, nonMutatingAggregator);
+                new NonMutatingAggregationProcedure<>(mutableMap, groupBy, zeroValueFactory, nonMutatingAggregator);
         ParallelIterate.forEach(
                 iterable,
-                new PassThruProcedureFactory<Procedure<T>>(nonMutatingAggregationProcedure),
+                new PassThruProcedureFactory<>(nonMutatingAggregationProcedure),
                 Combiners.<Procedure<T>>passThru(),
                 batchSize,
                 executor);
@@ -1138,10 +1136,10 @@ public final class ParallelIterate
     {
         MutableMap<K, V> map = ConcurrentHashMap.newMap();
         MutatingAggregationProcedure<T, K, V> mutatingAggregationProcedure =
-                new MutatingAggregationProcedure<T, K, V>(map, groupBy, zeroValueFactory, mutatingAggregator);
+                new MutatingAggregationProcedure<>(map, groupBy, zeroValueFactory, mutatingAggregator);
         ParallelIterate.forEach(
                 iterable,
-                new PassThruProcedureFactory<Procedure<T>>(mutatingAggregationProcedure),
+                new PassThruProcedureFactory<>(mutatingAggregationProcedure),
                 Combiners.<Procedure<T>>passThru(),
                 batchSize,
                 executor);
@@ -1158,10 +1156,10 @@ public final class ParallelIterate
             Executor executor)
     {
         MutatingAggregationProcedure<T, K, V> mutatingAggregationProcedure =
-                new MutatingAggregationProcedure<T, K, V>(mutableMap, groupBy, zeroValueFactory, mutatingAggregator);
+                new MutatingAggregationProcedure<>(mutableMap, groupBy, zeroValueFactory, mutatingAggregator);
         ParallelIterate.forEach(
                 iterable,
-                new PassThruProcedureFactory<Procedure<T>>(mutatingAggregationProcedure),
+                new PassThruProcedureFactory<>(mutatingAggregationProcedure),
                 Combiners.<Procedure<T>>passThru(),
                 batchSize,
                 executor);
@@ -1215,7 +1213,7 @@ public final class ParallelIterate
             int batchSize,
             Executor executor)
     {
-        return ParallelIterate.groupBy(iterable, function, SynchronizedPutFastListMultimap.<K, V>newMultimap(), batchSize, executor);
+        return ParallelIterate.groupBy(iterable, function, SynchronizedPutFastListMultimap.newMultimap(), batchSize, executor);
     }
 
     /**
@@ -1231,7 +1229,7 @@ public final class ParallelIterate
     {
         ParallelIterate.forEach(
                 iterable,
-                new PassThruProcedureFactory<Procedure<V>>(new MultimapPutProcedure<K, V>(concurrentMultimap, function)),
+                new PassThruProcedureFactory<>(new MultimapPutProcedure<>(concurrentMultimap, function)),
                 Combiners.<Procedure<V>>passThru(),
                 batchSize,
                 executor);
@@ -1246,8 +1244,8 @@ public final class ParallelIterate
         ObjectDoubleHashMap<V> result = ObjectDoubleHashMap.newMap();
         ParallelIterate.forEach(
                 iterable,
-                new SumByDoubleProcedure<T, V>(groupBy, function),
-                new SumByDoubleCombiner<T, V>(result),
+                new SumByDoubleProcedure<>(groupBy, function),
+                new SumByDoubleCombiner<>(result),
                 ParallelIterate.DEFAULT_MIN_FORK_SIZE,
                 ParallelIterate.EXECUTOR_SERVICE);
         return result;
@@ -1261,8 +1259,8 @@ public final class ParallelIterate
         ObjectDoubleHashMap<V> result = ObjectDoubleHashMap.newMap();
         ParallelIterate.forEach(
                 iterable,
-                new SumByFloatProcedure<T, V>(groupBy, function),
-                new SumByFloatCombiner<T, V>(result),
+                new SumByFloatProcedure<>(groupBy, function),
+                new SumByFloatCombiner<>(result),
                 ParallelIterate.DEFAULT_MIN_FORK_SIZE,
                 ParallelIterate.EXECUTOR_SERVICE);
         return result;
@@ -1276,8 +1274,8 @@ public final class ParallelIterate
         ObjectLongHashMap<V> result = ObjectLongHashMap.newMap();
         ParallelIterate.forEach(
                 iterable,
-                new SumByLongProcedure<T, V>(groupBy, function),
-                new SumByLongCombiner<T, V>(result),
+                new SumByLongProcedure<>(groupBy, function),
+                new SumByLongCombiner<>(result),
                 ParallelIterate.DEFAULT_MIN_FORK_SIZE,
                 ParallelIterate.EXECUTOR_SERVICE);
         return result;
@@ -1291,8 +1289,8 @@ public final class ParallelIterate
         ObjectLongHashMap<V> result = ObjectLongHashMap.newMap();
         ParallelIterate.forEach(
                 iterable,
-                new SumByIntProcedure<T, V>(groupBy, function),
-                new SumByIntCombiner<T, V>(result),
+                new SumByIntProcedure<>(groupBy, function),
+                new SumByIntCombiner<>(result),
                 ParallelIterate.DEFAULT_MIN_FORK_SIZE,
                 ParallelIterate.EXECUTOR_SERVICE);
         return result;
@@ -1306,8 +1304,8 @@ public final class ParallelIterate
         MutableMap<V, BigDecimal> result = UnifiedMap.newMap();
         ParallelIterate.forEach(
                 iterable,
-                new SumByBigDecimalProcedure<T, V>(groupBy, function),
-                new SumByBigDecimalCombiner<T, V>(result),
+                new SumByBigDecimalProcedure<>(groupBy, function),
+                new SumByBigDecimalCombiner<>(result),
                 ParallelIterate.DEFAULT_MIN_FORK_SIZE,
                 ParallelIterate.EXECUTOR_SERVICE);
         return result;
@@ -1321,8 +1319,8 @@ public final class ParallelIterate
         MutableMap<V, BigInteger> result = UnifiedMap.newMap();
         ParallelIterate.forEach(
                 iterable,
-                new SumByBigIntegerProcedure<T, V>(groupBy, function),
-                new SumByBigIntegerCombiner<T, V>(result),
+                new SumByBigIntegerProcedure<>(groupBy, function),
+                new SumByBigIntegerCombiner<>(result),
                 ParallelIterate.DEFAULT_MIN_FORK_SIZE,
                 ParallelIterate.EXECUTOR_SERVICE);
         return result;
@@ -1342,7 +1340,7 @@ public final class ParallelIterate
                 newPoolSize,
                 0L,
                 TimeUnit.MILLISECONDS,
-                new SynchronousQueue<Runnable>(),
+                new SynchronousQueue<>(),
                 new CollectionsThreadFactory(poolName, useDaemonThreads),
                 new ThreadPoolExecutor.CallerRunsPolicy());
     }
@@ -1384,16 +1382,11 @@ public final class ParallelIterate
             this.function = function;
         }
 
+        @Override
         public void value(T each)
         {
             V groupKey = this.groupBy.valueOf(each);
-            DoubleDoublePair sumCompensation = this.map.getIfAbsentPut(groupKey, new Function0<DoubleDoublePair>()
-            {
-                public DoubleDoublePair value()
-                {
-                    return PrimitiveTuples.pair(0.0d, 0.0d);
-                }
-            });
+            DoubleDoublePair sumCompensation = this.map.getIfAbsentPut(groupKey, () -> PrimitiveTuples.pair(0.0d, 0.0d));
             double sum = sumCompensation.getOne();
             double compensation = sumCompensation.getTwo();
             double adjustedValue = this.function.doubleValueOf(each) - compensation;
@@ -1408,9 +1401,10 @@ public final class ParallelIterate
             return this.map;
         }
 
+        @Override
         public SumByDoubleProcedure<T, V> create()
         {
-            return new SumByDoubleProcedure<T, V>(this.groupBy, this.function);
+            return new SumByDoubleProcedure<>(this.groupBy, this.function);
         }
     }
 
@@ -1425,39 +1419,26 @@ public final class ParallelIterate
             this.result = result;
         }
 
+        @Override
         public void combineOne(SumByDoubleProcedure<T, V> thingToCombine)
         {
             if (this.result.isEmpty())
             {
-                thingToCombine.getResult().forEachKeyValue(new Procedure2<V, DoubleDoublePair>()
-                {
-                    public void value(V each, DoubleDoublePair sumCompensation)
-                    {
-                        SumByDoubleCombiner.this.result.put(each, sumCompensation.getOne());
-                        SumByDoubleCombiner.this.compensation.put(each, sumCompensation.getTwo());
-                    }
+                thingToCombine.getResult().forEachKeyValue((each, sumCompensation) -> {
+                    this.result.put(each, sumCompensation.getOne());
+                    this.compensation.put(each, sumCompensation.getTwo());
                 });
             }
             else
             {
-                thingToCombine.getResult().forEachKeyValue(new Procedure2<V, DoubleDoublePair>()
-                {
-                    public void value(V each, DoubleDoublePair sumCompensation)
-                    {
-                        double sum = SumByDoubleCombiner.this.result.get(each);
-                        double currentCompensation = SumByDoubleCombiner.this.compensation.getIfAbsentPut(each, new DoubleFunction0()
-                        {
-                            public double value()
-                            {
-                                return 0.0d;
-                            }
-                        }) + sumCompensation.getTwo();
+                thingToCombine.getResult().forEachKeyValue((each, sumCompensation) -> {
+                    double sum = this.result.get(each);
+                    double currentCompensation = this.compensation.getIfAbsentPut(each, () -> 0.0d) + sumCompensation.getTwo();
 
-                        double adjustedValue = sumCompensation.getOne() - currentCompensation;
-                        double nextSum = sum + adjustedValue;
-                        SumByDoubleCombiner.this.compensation.put(each, nextSum - sum - adjustedValue);
-                        SumByDoubleCombiner.this.result.put(each, nextSum);
-                    }
+                    double adjustedValue = sumCompensation.getOne() - currentCompensation;
+                    double nextSum = sum + adjustedValue;
+                    this.compensation.put(each, nextSum - sum - adjustedValue);
+                    this.result.put(each, nextSum);
                 });
             }
         }
@@ -1475,16 +1456,11 @@ public final class ParallelIterate
             this.function = function;
         }
 
+        @Override
         public void value(T each)
         {
             V groupKey = this.groupBy.valueOf(each);
-            DoubleDoublePair sumCompensation = this.map.getIfAbsentPut(groupKey, new Function0<DoubleDoublePair>()
-            {
-                public DoubleDoublePair value()
-                {
-                    return PrimitiveTuples.pair(0.0d, 0.0d);
-                }
-            });
+            DoubleDoublePair sumCompensation = this.map.getIfAbsentPut(groupKey, () -> PrimitiveTuples.pair(0.0d, 0.0d));
             double sum = sumCompensation.getOne();
             double compensation = sumCompensation.getTwo();
             double adjustedValue = this.function.floatValueOf(each) - compensation;
@@ -1499,9 +1475,10 @@ public final class ParallelIterate
             return this.map;
         }
 
+        @Override
         public SumByFloatProcedure<T, V> create()
         {
-            return new SumByFloatProcedure<T, V>(this.groupBy, this.function);
+            return new SumByFloatProcedure<>(this.groupBy, this.function);
         }
     }
 
@@ -1516,39 +1493,26 @@ public final class ParallelIterate
             this.result = result;
         }
 
+        @Override
         public void combineOne(SumByFloatProcedure<T, V> thingToCombine)
         {
             if (this.result.isEmpty())
             {
-                thingToCombine.getResult().forEachKeyValue(new Procedure2<V, DoubleDoublePair>()
-                {
-                    public void value(V each, DoubleDoublePair sumCompensation)
-                    {
-                        SumByFloatCombiner.this.result.put(each, sumCompensation.getOne());
-                        SumByFloatCombiner.this.compensation.put(each, sumCompensation.getTwo());
-                    }
+                thingToCombine.getResult().forEachKeyValue((each, sumCompensation) -> {
+                    this.result.put(each, sumCompensation.getOne());
+                    this.compensation.put(each, sumCompensation.getTwo());
                 });
             }
             else
             {
-                thingToCombine.getResult().forEachKeyValue(new Procedure2<V, DoubleDoublePair>()
-                {
-                    public void value(V each, DoubleDoublePair sumCompensation)
-                    {
-                        double sum = SumByFloatCombiner.this.result.get(each);
-                        double currentCompensation = SumByFloatCombiner.this.compensation.getIfAbsentPut(each, new DoubleFunction0()
-                        {
-                            public double value()
-                            {
-                                return 0.0d;
-                            }
-                        }) + sumCompensation.getTwo();
+                thingToCombine.getResult().forEachKeyValue((each, sumCompensation) -> {
+                    double sum = this.result.get(each);
+                    double currentCompensation = this.compensation.getIfAbsentPut(each, () -> 0.0d) + sumCompensation.getTwo();
 
-                        double adjustedValue = sumCompensation.getOne() - currentCompensation;
-                        double nextSum = sum + adjustedValue;
-                        SumByFloatCombiner.this.compensation.put(each, nextSum - sum - adjustedValue);
-                        SumByFloatCombiner.this.result.put(each, nextSum);
-                    }
+                    double adjustedValue = sumCompensation.getOne() - currentCompensation;
+                    double nextSum = sum + adjustedValue;
+                    this.compensation.put(each, nextSum - sum - adjustedValue);
+                    this.result.put(each, nextSum);
                 });
             }
         }
@@ -1566,6 +1530,7 @@ public final class ParallelIterate
             this.function = function;
         }
 
+        @Override
         public void value(T each)
         {
             this.map.addToValue(this.groupBy.valueOf(each), this.function.longValueOf(each));
@@ -1576,9 +1541,10 @@ public final class ParallelIterate
             return this.map;
         }
 
+        @Override
         public SumByLongProcedure<T, V> create()
         {
-            return new SumByLongProcedure<T, V>(this.groupBy, this.function);
+            return new SumByLongProcedure<>(this.groupBy, this.function);
         }
     }
 
@@ -1592,6 +1558,7 @@ public final class ParallelIterate
             this.result = result;
         }
 
+        @Override
         public void combineOne(SumByLongProcedure<T, V> thingToCombine)
         {
             if (this.result.isEmpty())
@@ -1600,13 +1567,7 @@ public final class ParallelIterate
             }
             else
             {
-                thingToCombine.getResult().forEachKeyValue(new ObjectLongProcedure<V>()
-                {
-                    public void value(V each, long value)
-                    {
-                        SumByLongCombiner.this.result.addToValue(each, value);
-                    }
-                });
+                thingToCombine.getResult().forEachKeyValue(this.result::addToValue);
             }
         }
     }
@@ -1623,6 +1584,7 @@ public final class ParallelIterate
             this.function = function;
         }
 
+        @Override
         public void value(T each)
         {
             this.map.addToValue(this.groupBy.valueOf(each), (long) this.function.intValueOf(each));
@@ -1633,9 +1595,10 @@ public final class ParallelIterate
             return this.map;
         }
 
+        @Override
         public SumByIntProcedure<T, V> create()
         {
-            return new SumByIntProcedure<T, V>(this.groupBy, this.function);
+            return new SumByIntProcedure<>(this.groupBy, this.function);
         }
     }
 
@@ -1649,6 +1612,7 @@ public final class ParallelIterate
             this.result = result;
         }
 
+        @Override
         public void combineOne(SumByIntProcedure<T, V> thingToCombine)
         {
             if (this.result.isEmpty())
@@ -1657,13 +1621,7 @@ public final class ParallelIterate
             }
             else
             {
-                thingToCombine.getResult().forEachKeyValue(new ObjectLongProcedure<V>()
-                {
-                    public void value(V each, long value)
-                    {
-                        SumByIntCombiner.this.result.addToValue(each, value);
-                    }
-                });
+                thingToCombine.getResult().forEachKeyValue(this.result::addToValue);
             }
         }
     }
@@ -1680,15 +1638,10 @@ public final class ParallelIterate
             this.function = function;
         }
 
-        public void value(final T each)
+        @Override
+        public void value(T each)
         {
-            this.map.updateValue(this.groupBy.valueOf(each), Functions0.zeroBigDecimal(), new Function<BigDecimal, BigDecimal>()
-            {
-                public BigDecimal valueOf(BigDecimal original)
-                {
-                    return original.add(SumByBigDecimalProcedure.this.function.valueOf(each));
-                }
-            });
+            this.map.updateValue(this.groupBy.valueOf(each), Functions0.zeroBigDecimal(), original -> original.add(this.function.valueOf(each)));
         }
 
         public MutableMap<V, BigDecimal> getResult()
@@ -1696,9 +1649,10 @@ public final class ParallelIterate
             return this.map;
         }
 
+        @Override
         public SumByBigDecimalProcedure<T, V> create()
         {
-            return new SumByBigDecimalProcedure<T, V>(this.groupBy, this.function);
+            return new SumByBigDecimalProcedure<>(this.groupBy, this.function);
         }
     }
 
@@ -1712,6 +1666,7 @@ public final class ParallelIterate
             this.result = result;
         }
 
+        @Override
         public void combineOne(SumByBigDecimalProcedure<T, V> thingToCombine)
         {
             if (this.result.isEmpty())
@@ -1720,19 +1675,7 @@ public final class ParallelIterate
             }
             else
             {
-                thingToCombine.getResult().forEachKeyValue(new Procedure2<V, BigDecimal>()
-                {
-                    public void value(V key, final BigDecimal value)
-                    {
-                        SumByBigDecimalCombiner.this.result.updateValue(key, Functions0.zeroBigDecimal(), new Function<BigDecimal, BigDecimal>()
-                        {
-                            public BigDecimal valueOf(BigDecimal original)
-                            {
-                                return original.add(value);
-                            }
-                        });
-                    }
-                });
+                thingToCombine.getResult().forEachKeyValue((key, value) -> this.result.updateValue(key, Functions0.zeroBigDecimal(), original -> original.add(value)));
             }
         }
     }
@@ -1749,15 +1692,10 @@ public final class ParallelIterate
             this.function = function;
         }
 
-        public void value(final T each)
+        @Override
+        public void value(T each)
         {
-            this.map.updateValue(this.groupBy.valueOf(each), Functions0.zeroBigInteger(), new Function<BigInteger, BigInteger>()
-            {
-                public BigInteger valueOf(BigInteger original)
-                {
-                    return original.add(SumByBigIntegerProcedure.this.function.valueOf(each));
-                }
-            });
+            this.map.updateValue(this.groupBy.valueOf(each), Functions0.zeroBigInteger(), original -> original.add(this.function.valueOf(each)));
         }
 
         public MutableMap<V, BigInteger> getResult()
@@ -1765,9 +1703,10 @@ public final class ParallelIterate
             return this.map;
         }
 
+        @Override
         public SumByBigIntegerProcedure<T, V> create()
         {
-            return new SumByBigIntegerProcedure<T, V>(this.groupBy, this.function);
+            return new SumByBigIntegerProcedure<>(this.groupBy, this.function);
         }
     }
 
@@ -1781,6 +1720,7 @@ public final class ParallelIterate
             this.result = result;
         }
 
+        @Override
         public void combineOne(SumByBigIntegerProcedure<T, V> thingToCombine)
         {
             if (this.result.isEmpty())
@@ -1789,19 +1729,7 @@ public final class ParallelIterate
             }
             else
             {
-                thingToCombine.getResult().forEachKeyValue(new Procedure2<V, BigInteger>()
-                {
-                    public void value(V key, final BigInteger value)
-                    {
-                        SumByBigIntegerCombiner.this.result.updateValue(key, Functions0.zeroBigInteger(), new Function<BigInteger, BigInteger>()
-                        {
-                            public BigInteger valueOf(BigInteger original)
-                            {
-                                return original.add(value);
-                            }
-                        });
-                    }
-                });
+                thingToCombine.getResult().forEachKeyValue((key, value) -> this.result.updateValue(key, Functions0.zeroBigInteger(), original -> original.add(value)));
             }
         }
     }

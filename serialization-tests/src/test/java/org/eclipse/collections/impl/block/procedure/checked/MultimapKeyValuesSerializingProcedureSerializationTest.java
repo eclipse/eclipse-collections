@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -24,6 +24,6 @@ public class MultimapKeyValuesSerializingProcedureSerializationTest
                         + "a2VkLk11bHRpbWFwS2V5VmFsdWVzU2VyaWFsaXppbmdQcm9jZWR1cmUAAAAAAAAAAQIAAUwAA291\n"
                         + "dHQAFkxqYXZhL2lvL09iamVjdE91dHB1dDt4cgBGb3JnLmVjbGlwc2UuY29sbGVjdGlvbnMuaW1w\n"
                         + "bC5ibG9jay5wcm9jZWR1cmUuY2hlY2tlZC5DaGVja2VkUHJvY2VkdXJlMgAAAAAAAAABAgAAeHBw\n",
-                new MultimapKeyValuesSerializingProcedure<Object, Object>(null));
+                new MultimapKeyValuesSerializingProcedure<>(null));
     }
 }

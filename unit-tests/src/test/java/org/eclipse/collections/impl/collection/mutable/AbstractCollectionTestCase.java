@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -255,7 +255,7 @@ public abstract class AbstractCollectionTestCase extends AbstractRichIterableTes
     public void removeIfWith()
     {
         MutableCollection<Integer> objects1 = this.newWith(1, 2, 3, 4);
-        Assert.assertTrue(objects1.removeIfWith(Predicates2.<Integer>lessThan(), 3));
+        Assert.assertTrue(objects1.removeIfWith(Predicates2.lessThan(), 3));
         Verify.assertSize(2, objects1);
         Verify.assertContainsAll(objects1, 3, 4);
         Assert.assertFalse(objects1.removeIfWith(Predicates2.greaterThan(), 6));

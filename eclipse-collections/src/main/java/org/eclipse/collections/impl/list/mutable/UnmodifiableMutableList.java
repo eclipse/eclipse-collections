@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -84,9 +84,9 @@ public class UnmodifiableMutableList<T>
         }
         if (list instanceof RandomAccess)
         {
-            return new RandomAccessUnmodifiableMutableList<E>(RandomAccessListAdapter.adapt(list));
+            return new RandomAccessUnmodifiableMutableList<>(RandomAccessListAdapter.adapt(list));
         }
-        return new UnmodifiableMutableList<E>(ListAdapter.adapt(list));
+        return new UnmodifiableMutableList<>(ListAdapter.adapt(list));
     }
 
     private MutableList<T> getMutableList()
@@ -143,151 +143,181 @@ public class UnmodifiableMutableList<T>
         return this;
     }
 
+    @Override
     public <S> boolean corresponds(OrderedIterable<S> other, Predicate2<? super T, ? super S> predicate)
     {
         return this.getMutableList().corresponds(other, predicate);
     }
 
+    @Override
     public void forEach(int fromIndex, int toIndex, Procedure<? super T> procedure)
     {
         this.getMutableList().forEach(fromIndex, toIndex, procedure);
     }
 
+    @Override
     public void reverseForEach(Procedure<? super T> procedure)
     {
         this.getMutableList().reverseForEach(procedure);
     }
 
+    @Override
     public void forEachWithIndex(int fromIndex, int toIndex, ObjectIntProcedure<? super T> objectIntProcedure)
     {
         this.getMutableList().forEachWithIndex(fromIndex, toIndex, objectIntProcedure);
     }
 
+    @Override
     public UnmodifiableMutableList<T> sortThis(Comparator<? super T> comparator)
     {
         throw new UnsupportedOperationException("Cannot call sortThis() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public UnmodifiableMutableList<T> sortThis()
     {
         throw new UnsupportedOperationException("Cannot call sortThis() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public MutableList<T> toReversed()
     {
         return this.getMutableList().toReversed();
     }
 
+    @Override
     public MutableList<T> reverseThis()
     {
         throw new UnsupportedOperationException("Cannot call reverseThis() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public MutableList<T> shuffleThis()
     {
         throw new UnsupportedOperationException("Cannot call shuffleThis() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public MutableList<T> shuffleThis(Random rnd)
     {
         throw new UnsupportedOperationException("Cannot call shuffleThis() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public MutableStack<T> toStack()
     {
         return ArrayStack.newStack(this.getMutableList());
     }
 
+    @Override
     public <V extends Comparable<? super V>> MutableList<T> sortThisBy(Function<? super T, ? extends V> function)
     {
         throw new UnsupportedOperationException("Cannot call sortThisBy() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public MutableList<T> sortThisByInt(IntFunction<? super T> function)
     {
         throw new UnsupportedOperationException("Cannot call sortThisByInt() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public MutableList<T> sortThisByBoolean(BooleanFunction<? super T> function)
     {
         throw new UnsupportedOperationException("Cannot call sortThisByBoolean() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public MutableList<T> sortThisByChar(CharFunction<? super T> function)
     {
         throw new UnsupportedOperationException("Cannot call sortThisByChar() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public MutableList<T> sortThisByByte(ByteFunction<? super T> function)
     {
         throw new UnsupportedOperationException("Cannot call sortThisByByte() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public MutableList<T> sortThisByShort(ShortFunction<? super T> function)
     {
         throw new UnsupportedOperationException("Cannot call sortThisByShort() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public MutableList<T> sortThisByFloat(FloatFunction<? super T> function)
     {
         throw new UnsupportedOperationException("Cannot call sortThisByFloat() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public MutableList<T> sortThisByLong(LongFunction<? super T> function)
     {
         throw new UnsupportedOperationException("Cannot call sortThisByLong() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public MutableList<T> sortThisByDouble(DoubleFunction<? super T> function)
     {
         throw new UnsupportedOperationException("Cannot call sortThisByDouble() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public boolean addAll(int index, Collection<? extends T> collection)
     {
         throw new UnsupportedOperationException("Cannot call addAll() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public T get(int index)
     {
         return this.getMutableList().get(index);
     }
 
+    @Override
     public T set(int index, T element)
     {
         throw new UnsupportedOperationException("Cannot call set() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public void add(int index, T element)
     {
         throw new UnsupportedOperationException("Cannot call add() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public T remove(int index)
     {
         throw new UnsupportedOperationException("Cannot call remove() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public int indexOf(Object o)
     {
         return this.getMutableList().indexOf(o);
     }
 
+    @Override
     public int lastIndexOf(Object o)
     {
         return this.getMutableList().lastIndexOf(o);
     }
 
+    @Override
     public ListIterator<T> listIterator()
     {
         return this.listIterator(0);
     }
 
+    @Override
     public ListIterator<T> listIterator(int index)
     {
-        return new UnmodifiableListIteratorAdapter<T>(this.getMutableList().listIterator(index));
+        return new UnmodifiableListIteratorAdapter<>(this.getMutableList().listIterator(index));
     }
 
+    @Override
     public UnmodifiableMutableList<T> subList(int fromIndex, int toIndex)
     {
         MutableList<T> subList = this.getMutableList().subList(fromIndex, toIndex);
@@ -368,11 +398,13 @@ public class UnmodifiableMutableList<T>
         return this.getMutableList().collectIf(predicate, function);
     }
 
+    @Override
     public int detectIndex(Predicate<? super T> predicate)
     {
         return this.getMutableList().detectIndex(predicate);
     }
 
+    @Override
     public int detectLastIndex(Predicate<? super T> predicate)
     {
         return this.getMutableList().detectLastIndex(predicate);
@@ -432,11 +464,13 @@ public class UnmodifiableMutableList<T>
         return this.getMutableList().selectInstancesOf(clazz);
     }
 
+    @Override
     public MutableList<T> distinct()
     {
         return this.getMutableList().distinct();
     }
 
+    @Override
     public MutableList<T> distinct(HashingStrategy<? super T> hashingStrategy)
     {
         return this.getMutableList().distinct(hashingStrategy);
@@ -454,46 +488,55 @@ public class UnmodifiableMutableList<T>
         return this.getMutableList().zipWithIndex();
     }
 
+    @Override
     public MutableList<T> take(int count)
     {
         return this.getMutableList().take(count);
     }
 
+    @Override
     public MutableList<T> takeWhile(Predicate<? super T> predicate)
     {
         return this.getMutableList().takeWhile(predicate);
     }
 
+    @Override
     public MutableList<T> drop(int count)
     {
         return this.getMutableList().drop(count);
     }
 
+    @Override
     public MutableList<T> dropWhile(Predicate<? super T> predicate)
     {
         return this.getMutableList().dropWhile(predicate);
     }
 
+    @Override
     public PartitionMutableList<T> partitionWhile(Predicate<? super T> predicate)
     {
         return this.getMutableList().partitionWhile(predicate);
     }
 
+    @Override
     public LazyIterable<T> asReversed()
     {
         return ReverseIterable.adapt(this);
     }
 
+    @Override
     public ParallelListIterable<T> asParallel(ExecutorService executorService, int batchSize)
     {
         return this.getMutableList().asParallel(executorService, batchSize);
     }
 
+    @Override
     public int binarySearch(T key, Comparator<? super T> comparator)
     {
         return Collections.binarySearch(this, key, comparator);
     }
 
+    @Override
     public int binarySearch(T key)
     {
         return Collections.binarySearch((List<? extends Comparable<? super T>>) this, key);
@@ -541,6 +584,6 @@ public class UnmodifiableMutableList<T>
 
     protected Object writeReplace()
     {
-        return new UnmodifiableCollectionSerializationProxy<T>(this.getMutableList());
+        return new UnmodifiableCollectionSerializationProxy<>(this.getMutableList());
     }
 }

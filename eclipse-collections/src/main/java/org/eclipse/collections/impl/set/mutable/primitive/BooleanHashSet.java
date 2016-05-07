@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -49,16 +49,19 @@ public class BooleanHashSet implements MutableBooleanSet, Externalizable
 
     private static class EmptyBooleanIterator implements MutableBooleanIterator
     {
+        @Override
         public boolean next()
         {
             throw new NoSuchElementException();
         }
 
+        @Override
         public boolean hasNext()
         {
             return false;
         }
 
+        @Override
         public void remove()
         {
             throw new IllegalStateException();
@@ -69,11 +72,13 @@ public class BooleanHashSet implements MutableBooleanSet, Externalizable
     {
         private int currentIndex;
 
+        @Override
         public boolean hasNext()
         {
             return this.currentIndex == 0;
         }
 
+        @Override
         public boolean next()
         {
             if (this.currentIndex == 0)
@@ -85,6 +90,7 @@ public class BooleanHashSet implements MutableBooleanSet, Externalizable
             throw new NoSuchElementException();
         }
 
+        @Override
         public void remove()
         {
             if (this.currentIndex == 0 || this.currentIndex == -1)
@@ -100,11 +106,13 @@ public class BooleanHashSet implements MutableBooleanSet, Externalizable
     {
         private int currentIndex;
 
+        @Override
         public boolean hasNext()
         {
             return this.currentIndex == 0;
         }
 
+        @Override
         public boolean next()
         {
             if (this.currentIndex == 0)
@@ -116,6 +124,7 @@ public class BooleanHashSet implements MutableBooleanSet, Externalizable
             throw new NoSuchElementException();
         }
 
+        @Override
         public void remove()
         {
             if (this.currentIndex == 0 || this.currentIndex == -1)
@@ -131,11 +140,13 @@ public class BooleanHashSet implements MutableBooleanSet, Externalizable
     {
         private int currentIndex;
 
+        @Override
         public boolean hasNext()
         {
             return this.currentIndex < 2;
         }
 
+        @Override
         public boolean next()
         {
             switch (this.currentIndex)
@@ -151,6 +162,7 @@ public class BooleanHashSet implements MutableBooleanSet, Externalizable
             }
         }
 
+        @Override
         public void remove()
         {
             switch (this.currentIndex)
@@ -202,6 +214,7 @@ public class BooleanHashSet implements MutableBooleanSet, Externalizable
         return BooleanHashSet.newSetWith(source.toArray());
     }
 
+    @Override
     public boolean add(boolean element)
     {
         if (this.contains(element))
@@ -212,6 +225,7 @@ public class BooleanHashSet implements MutableBooleanSet, Externalizable
         return true;
     }
 
+    @Override
     public boolean addAll(boolean... source)
     {
         int initialState = this.state;
@@ -226,11 +240,13 @@ public class BooleanHashSet implements MutableBooleanSet, Externalizable
         return this.state != initialState;
     }
 
+    @Override
     public boolean addAll(BooleanIterable source)
     {
         return this.addAll(source.toArray());
     }
 
+    @Override
     public boolean remove(boolean value)
     {
         if (!this.contains(value))
@@ -242,6 +258,7 @@ public class BooleanHashSet implements MutableBooleanSet, Externalizable
         return initialState != this.state;
     }
 
+    @Override
     public boolean removeAll(BooleanIterable source)
     {
         if (this.isEmpty() || source.isEmpty())
@@ -265,6 +282,7 @@ public class BooleanHashSet implements MutableBooleanSet, Externalizable
         return modified;
     }
 
+    @Override
     public boolean removeAll(boolean... source)
     {
         if (this.isEmpty() || source.length == 0)
@@ -286,6 +304,7 @@ public class BooleanHashSet implements MutableBooleanSet, Externalizable
         return modified;
     }
 
+    @Override
     public boolean retainAll(BooleanIterable source)
     {
         if (this.state == 0
@@ -310,16 +329,19 @@ public class BooleanHashSet implements MutableBooleanSet, Externalizable
         return true;
     }
 
+    @Override
     public boolean retainAll(boolean... source)
     {
         return this.retainAll(BooleanHashSet.newSetWith(source));
     }
 
+    @Override
     public void clear()
     {
         this.state = 0;
     }
 
+    @Override
     public MutableBooleanIterator booleanIterator()
     {
         switch (this.state)
@@ -337,6 +359,7 @@ public class BooleanHashSet implements MutableBooleanSet, Externalizable
         }
     }
 
+    @Override
     public void forEach(BooleanProcedure procedure)
     {
         this.each(procedure);
@@ -345,6 +368,7 @@ public class BooleanHashSet implements MutableBooleanSet, Externalizable
     /**
      * @since 7.0.
      */
+    @Override
     public void each(BooleanProcedure procedure)
     {
         switch (this.state)
@@ -366,6 +390,7 @@ public class BooleanHashSet implements MutableBooleanSet, Externalizable
         }
     }
 
+    @Override
     public <T> T injectInto(T injectedValue, ObjectBooleanToObjectFunction<? super T, ? extends T> function)
     {
         T result = injectedValue;
@@ -388,6 +413,7 @@ public class BooleanHashSet implements MutableBooleanSet, Externalizable
         }
     }
 
+    @Override
     public int count(BooleanPredicate predicate)
     {
         switch (this.state)
@@ -414,21 +440,25 @@ public class BooleanHashSet implements MutableBooleanSet, Externalizable
         }
     }
 
+    @Override
     public boolean anySatisfy(BooleanPredicate predicate)
     {
         return this.count(predicate) > 0;
     }
 
+    @Override
     public boolean allSatisfy(BooleanPredicate predicate)
     {
         return this.count(predicate) == this.size();
     }
 
+    @Override
     public boolean noneSatisfy(BooleanPredicate predicate)
     {
         return this.count(predicate) == 0;
     }
 
+    @Override
     public BooleanHashSet select(BooleanPredicate predicate)
     {
         BooleanHashSet set = new BooleanHashSet();
@@ -463,11 +493,13 @@ public class BooleanHashSet implements MutableBooleanSet, Externalizable
         }
     }
 
+    @Override
     public BooleanHashSet reject(BooleanPredicate predicate)
     {
         return this.select(BooleanPredicates.not(predicate));
     }
 
+    @Override
     public boolean detectIfNone(BooleanPredicate predicate, boolean ifNone)
     {
         switch (this.state)
@@ -493,6 +525,7 @@ public class BooleanHashSet implements MutableBooleanSet, Externalizable
         }
     }
 
+    @Override
     public <V> MutableSet<V> collect(BooleanToObjectFunction<? extends V> function)
     {
         UnifiedSet<V> target = UnifiedSet.newSet(this.size());
@@ -513,6 +546,7 @@ public class BooleanHashSet implements MutableBooleanSet, Externalizable
         }
     }
 
+    @Override
     public boolean[] toArray()
     {
         switch (this.state)
@@ -530,6 +564,7 @@ public class BooleanHashSet implements MutableBooleanSet, Externalizable
         }
     }
 
+    @Override
     public boolean contains(boolean value)
     {
         if (this.state == 3)
@@ -543,6 +578,7 @@ public class BooleanHashSet implements MutableBooleanSet, Externalizable
         return this.state == 1;
     }
 
+    @Override
     public boolean containsAll(boolean... source)
     {
         if (this.state == 3)
@@ -559,6 +595,7 @@ public class BooleanHashSet implements MutableBooleanSet, Externalizable
         return true;
     }
 
+    @Override
     public boolean containsAll(BooleanIterable source)
     {
         if (this.state == 3)
@@ -575,6 +612,7 @@ public class BooleanHashSet implements MutableBooleanSet, Externalizable
         return true;
     }
 
+    @Override
     public BooleanHashSet with(boolean element)
     {
         if (this.state == 3)
@@ -585,6 +623,7 @@ public class BooleanHashSet implements MutableBooleanSet, Externalizable
         return this;
     }
 
+    @Override
     public BooleanHashSet without(boolean element)
     {
         if (this.state == 0)
@@ -595,6 +634,7 @@ public class BooleanHashSet implements MutableBooleanSet, Externalizable
         return this;
     }
 
+    @Override
     public BooleanHashSet withAll(BooleanIterable elements)
     {
         if (this.state == 3)
@@ -605,6 +645,7 @@ public class BooleanHashSet implements MutableBooleanSet, Externalizable
         return this;
     }
 
+    @Override
     public BooleanHashSet withoutAll(BooleanIterable elements)
     {
         if (this.state == 0)
@@ -615,21 +656,25 @@ public class BooleanHashSet implements MutableBooleanSet, Externalizable
         return this;
     }
 
+    @Override
     public MutableBooleanSet asUnmodifiable()
     {
         return new UnmodifiableBooleanSet(this);
     }
 
+    @Override
     public MutableBooleanSet asSynchronized()
     {
         return new SynchronizedBooleanSet(this);
     }
 
+    @Override
     public BooleanSet freeze()
     {
         return this.toImmutable();
     }
 
+    @Override
     public ImmutableBooleanSet toImmutable()
     {
         switch (this.state)
@@ -647,6 +692,7 @@ public class BooleanHashSet implements MutableBooleanSet, Externalizable
         }
     }
 
+    @Override
     public int size()
     {
         switch (this.state)
@@ -663,11 +709,13 @@ public class BooleanHashSet implements MutableBooleanSet, Externalizable
         }
     }
 
+    @Override
     public boolean isEmpty()
     {
         return this.state == 0;
     }
 
+    @Override
     public boolean notEmpty()
     {
         return this.state != 0;
@@ -714,16 +762,19 @@ public class BooleanHashSet implements MutableBooleanSet, Externalizable
         return this.makeString("[", ", ", "]");
     }
 
+    @Override
     public String makeString()
     {
         return this.makeString(", ");
     }
 
+    @Override
     public String makeString(String separator)
     {
         return this.makeString("", separator, "");
     }
 
+    @Override
     public String makeString(String start, String separator, String end)
     {
         Appendable stringBuilder = new StringBuilder();
@@ -731,16 +782,19 @@ public class BooleanHashSet implements MutableBooleanSet, Externalizable
         return stringBuilder.toString();
     }
 
+    @Override
     public void appendString(Appendable appendable)
     {
         this.appendString(appendable, ", ");
     }
 
+    @Override
     public void appendString(Appendable appendable, String separator)
     {
         this.appendString(appendable, "", separator, "");
     }
 
+    @Override
     public void appendString(Appendable appendable, String start, String separator, String end)
     {
         try
@@ -772,26 +826,31 @@ public class BooleanHashSet implements MutableBooleanSet, Externalizable
         }
     }
 
+    @Override
     public MutableBooleanList toList()
     {
         return BooleanArrayList.newList(this);
     }
 
+    @Override
     public MutableBooleanSet toSet()
     {
         return BooleanHashSet.newSet(this);
     }
 
+    @Override
     public MutableBooleanBag toBag()
     {
         return BooleanHashBag.newBag(this);
     }
 
+    @Override
     public LazyBooleanIterable asLazy()
     {
         return new LazyBooleanIterableAdapter(this);
     }
 
+    @Override
     public void writeExternal(ObjectOutput out) throws IOException
     {
         out.writeInt(this.size());
@@ -814,6 +873,7 @@ public class BooleanHashSet implements MutableBooleanSet, Externalizable
         }
     }
 
+    @Override
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
     {
         int size = in.readInt();

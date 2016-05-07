@@ -52,8 +52,8 @@ import org.junit.Test;
 import static org.eclipse.collections.impl.test.Verify.assertPostSerializedEqualsAndHashCode;
 import static org.eclipse.collections.impl.test.Verify.assertThrows;
 import static org.eclipse.collections.test.IterableTestCase.assertEquals;
+import static org.eclipse.collections.test.IterableTestCase.assertNotEquals;
 import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.fail;
 
@@ -139,6 +139,7 @@ public interface RichIterableUniqueTestCase extends RichIterableTestCase
         assertEquals(3, this.newWith(3, 2, 1).size());
     }
 
+    @Override
     @Test
     default void RichIterable_toArray()
     {
@@ -442,7 +443,7 @@ public interface RichIterableUniqueTestCase extends RichIterableTestCase
     @Test
     default void RichIterable_selectInstancesOf()
     {
-        RichIterable<Number> iterable = this.<Number>newWith(1, 2.0, 3, 4.0);
+        RichIterable<Number> iterable = this.newWith(1, 2.0, 3, 4.0);
 
         assertEquals(this.getExpectedFiltered(), iterable.selectInstancesOf(String.class));
         assertEquals(this.getExpectedFiltered(1, 3), iterable.selectInstancesOf(Integer.class));

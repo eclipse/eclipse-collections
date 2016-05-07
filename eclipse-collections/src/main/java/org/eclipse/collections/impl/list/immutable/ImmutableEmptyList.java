@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -46,8 +46,8 @@ final class ImmutableEmptyList<T>
         extends AbstractImmutableList<T>
         implements Serializable, RandomAccess
 {
-    static final ImmutableList<?> INSTANCE = new ImmutableEmptyList<Object>();
-    private static final PartitionImmutableList<?> EMPTY = new PartitionFastList<Object>().toImmutable();
+    static final ImmutableList<?> INSTANCE = new ImmutableEmptyList<>();
+    private static final PartitionImmutableList<?> EMPTY = new PartitionFastList<>().toImmutable();
 
     private static final long serialVersionUID = 1L;
 
@@ -68,6 +68,7 @@ final class ImmutableEmptyList<T>
         return this;
     }
 
+    @Override
     public int size()
     {
         return 0;
@@ -79,6 +80,7 @@ final class ImmutableEmptyList<T>
         return false;
     }
 
+    @Override
     public T get(int index)
     {
         throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + this.size());
@@ -90,6 +92,7 @@ final class ImmutableEmptyList<T>
         return this;
     }
 
+    @Override
     public void each(Procedure<? super T> procedure)
     {
     }
@@ -109,6 +112,7 @@ final class ImmutableEmptyList<T>
     {
     }
 
+    @Override
     public ImmutableList<T> newWith(T newItem)
     {
         return Lists.immutable.with(newItem);

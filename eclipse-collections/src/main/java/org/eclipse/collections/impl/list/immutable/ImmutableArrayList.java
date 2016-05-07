@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -61,21 +61,22 @@ final class ImmutableArrayList<T>
 
     public static <E> ImmutableArrayList<E> newList(Iterable<? extends E> iterable)
     {
-        return new ImmutableArrayList<E>((E[]) Iterate.toArray(iterable));
+        return new ImmutableArrayList<>((E[]) Iterate.toArray(iterable));
     }
 
     public static <E> ImmutableArrayList<E> newListWith(E... elements)
     {
-        return new ImmutableArrayList<E>(elements.clone());
+        return new ImmutableArrayList<>(elements.clone());
     }
 
+    @Override
     public ImmutableList<T> newWith(T newItem)
     {
         int oldSize = this.size();
         T[] array = (T[]) new Object[oldSize + 1];
         this.toArray(array);
         array[oldSize] = newItem;
-        return new ImmutableArrayList<T>(array);
+        return new ImmutableArrayList<>(array);
     }
 
     @Override
@@ -125,6 +126,7 @@ final class ImmutableArrayList<T>
         return this.isEmpty() ? null : this.items[this.items.length - 1];
     }
 
+    @Override
     public void each(Procedure<? super T> procedure)
     {
         for (T each : this.items)
@@ -139,11 +141,13 @@ final class ImmutableArrayList<T>
         InternalArrayIterate.forEachWithIndex(this.items, this.items.length, objectIntProcedure);
     }
 
+    @Override
     public void batchForEach(Procedure<? super T> procedure, int sectionIndex, int sectionCount)
     {
         InternalArrayIterate.batchForEach(procedure, this.items, this.items.length, sectionIndex, sectionCount);
     }
 
+    @Override
     public int getBatchCount(int batchSize)
     {
         return Math.max(1, this.size() / batchSize);
@@ -159,13 +163,13 @@ final class ImmutableArrayList<T>
     @Override
     public ImmutableList<T> select(Predicate<? super T> predicate)
     {
-        return InternalArrayIterate.select(this.items, this.items.length, predicate, FastList.<T>newList()).toImmutable();
+        return InternalArrayIterate.select(this.items, this.items.length, predicate, FastList.newList()).toImmutable();
     }
 
     @Override
     public <P> ImmutableList<T> selectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
-        return InternalArrayIterate.selectWith(this.items, this.items.length, predicate, parameter, FastList.<T>newList()).toImmutable();
+        return InternalArrayIterate.selectWith(this.items, this.items.length, predicate, parameter, FastList.newList()).toImmutable();
     }
 
     @Override
@@ -180,13 +184,13 @@ final class ImmutableArrayList<T>
     @Override
     public ImmutableList<T> reject(Predicate<? super T> predicate)
     {
-        return InternalArrayIterate.reject(this.items, this.items.length, predicate, FastList.<T>newList()).toImmutable();
+        return InternalArrayIterate.reject(this.items, this.items.length, predicate, FastList.newList()).toImmutable();
     }
 
     @Override
     public <P> ImmutableList<T> rejectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
-        return InternalArrayIterate.rejectWith(this.items, this.items.length, predicate, parameter, FastList.<T>newList()).toImmutable();
+        return InternalArrayIterate.rejectWith(this.items, this.items.length, predicate, parameter, FastList.newList()).toImmutable();
     }
 
     @Override
@@ -248,7 +252,7 @@ final class ImmutableArrayList<T>
     @Override
     public <V> ImmutableList<V> flatCollect(Function<? super T, ? extends Iterable<V>> function)
     {
-        return InternalArrayIterate.flatCollect(this.items, this.items.length, function, FastList.<V>newList(this.items.length)).toImmutable();
+        return InternalArrayIterate.flatCollect(this.items, this.items.length, function, FastList.newList(this.items.length)).toImmutable();
     }
 
     @Override
@@ -311,6 +315,7 @@ final class ImmutableArrayList<T>
         return result;
     }
 
+    @Override
     public int size()
     {
         return this.items.length;
@@ -390,6 +395,7 @@ final class ImmutableArrayList<T>
         return Iterate.allSatisfy(collection, Predicates.in(this.items));
     }
 
+    @Override
     public T get(int index)
     {
         return this.items[index];
@@ -435,7 +441,7 @@ final class ImmutableArrayList<T>
         int endIndex = this.detectNotIndex(predicate);
         T[] result = (T[]) new Object[endIndex];
         System.arraycopy(this.items, 0, result, 0, endIndex);
-        return new ImmutableArrayList<T>(result);
+        return new ImmutableArrayList<>(result);
     }
 
     @Override
@@ -455,7 +461,7 @@ final class ImmutableArrayList<T>
         int resultSize = this.size() - startIndex;
         T[] result = (T[]) new Object[resultSize];
         System.arraycopy(this.items, startIndex, result, 0, resultSize);
-        return new ImmutableArrayList<T>(result);
+        return new ImmutableArrayList<>(result);
     }
 
     @Override
@@ -467,9 +473,9 @@ final class ImmutableArrayList<T>
         T[] rejectedArray = (T[]) new Object[rejectedSize];
         System.arraycopy(this.items, 0, selectedArray, 0, partitionIndex);
         System.arraycopy(this.items, partitionIndex, rejectedArray, 0, rejectedSize);
-        ImmutableArrayList<T> selected = new ImmutableArrayList<T>(selectedArray);
-        ImmutableArrayList<T> rejected = new ImmutableArrayList<T>(rejectedArray);
-        return new PartitionImmutableListImpl<T>(selected, rejected);
+        ImmutableArrayList<T> selected = new ImmutableArrayList<>(selectedArray);
+        ImmutableArrayList<T> rejected = new ImmutableArrayList<>(rejectedArray);
+        return new PartitionImmutableListImpl<>(selected, rejected);
     }
 
     private int detectNotIndex(Predicate<? super T> predicate)

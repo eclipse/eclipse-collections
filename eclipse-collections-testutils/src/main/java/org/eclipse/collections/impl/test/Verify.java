@@ -1630,7 +1630,7 @@ public final class Verify extends Assert
     {
         try
         {
-            MutableList<T> unnacceptable = Iterate.reject(iterable, predicate, Lists.mutable.<T>of());
+            MutableList<T> unnacceptable = Iterate.reject(iterable, predicate, Lists.mutable.of());
             if (unnacceptable.notEmpty())
             {
                 Assert.fail(message + " <" + unnacceptable + '>');
@@ -1706,7 +1706,7 @@ public final class Verify extends Assert
     {
         try
         {
-            MutableList<T> unnacceptable = Iterate.select(iterable, predicate, Lists.mutable.<T>empty());
+            MutableList<T> unnacceptable = Iterate.select(iterable, predicate, Lists.mutable.empty());
             if (unnacceptable.notEmpty())
             {
                 Assert.fail(message + " <" + unnacceptable + '>');
@@ -2002,7 +2002,7 @@ public final class Verify extends Assert
 
     public static void assertContainsAll(
             String collectionName,
-            final Iterable<?> iterable,
+            Iterable<?> iterable,
             Object... items)
     {
         try
@@ -2011,13 +2011,7 @@ public final class Verify extends Assert
 
             Verify.assertNotEmpty("Expected items in assertion", items);
 
-            Predicate<Object> containsPredicate = new Predicate<Object>()
-            {
-                public boolean accept(Object each)
-                {
-                    return Iterate.contains(iterable, each);
-                }
-            };
+            Predicate<Object> containsPredicate = each -> Iterate.contains(iterable, each);
 
             if (!ArrayIterate.allSatisfy(items, containsPredicate))
             {
@@ -2313,7 +2307,7 @@ public final class Verify extends Assert
         }
     }
 
-    public static void assertBagsEqual(String bagName, Bag<?> expectedBag, final Bag<?> actualBag)
+    public static void assertBagsEqual(String bagName, Bag<?> expectedBag, Bag<?> actualBag)
     {
         try
         {
@@ -2827,7 +2821,7 @@ public final class Verify extends Assert
 
                 if (!actualMultimap.containsKeyAndValue(expectedKey, expectedValue))
                 {
-                    missingEntries.add(new ImmutableEntry<Object, Object>(expectedKey, expectedValue));
+                    missingEntries.add(new ImmutableEntry<>(expectedKey, expectedValue));
                 }
             }
 
@@ -3747,17 +3741,13 @@ public final class Verify extends Assert
         return string;
     }
 
-    public static void assertNotSerializable(final Object actualObject)
+    public static void assertNotSerializable(Object actualObject)
     {
         try
         {
-            Verify.assertThrows(NotSerializableException.class, new Callable<Void>()
-            {
-                public Void call() throws IOException
-                {
-                    new ObjectOutputStream(new ByteArrayOutputStream()).writeObject(actualObject);
-                    return null;
-                }
+            Verify.assertThrows(NotSerializableException.class, () -> {
+                new ObjectOutputStream(new ByteArrayOutputStream()).writeObject(actualObject);
+                return null;
             });
         }
         catch (AssertionError e)

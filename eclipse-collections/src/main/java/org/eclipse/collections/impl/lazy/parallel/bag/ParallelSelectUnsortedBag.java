@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -45,33 +45,33 @@ class ParallelSelectUnsortedBag<T> extends AbstractParallelUnsortedBag<T, Unsort
         return this.parallelIterable.getBatchSize();
     }
 
+    @Override
     public void forEach(Procedure<? super T> procedure)
     {
-        this.parallelIterable.forEach(new IfProcedure<T>(this.predicate, procedure));
+        this.parallelIterable.forEach(new IfProcedure<>(this.predicate, procedure));
     }
 
-    public void forEachWithOccurrences(final ObjectIntProcedure<? super T> procedure)
+    @Override
+    public void forEachWithOccurrences(ObjectIntProcedure<? super T> procedure)
     {
-        this.parallelIterable.forEachWithOccurrences(new ObjectIntProcedure<T>()
-        {
-            public void value(T each, int parameter)
+        this.parallelIterable.forEachWithOccurrences((each, parameter) -> {
+            if (this.predicate.accept(each))
             {
-                if (ParallelSelectUnsortedBag.this.predicate.accept(each))
-                {
-                    procedure.value(each, parameter);
-                }
+                procedure.value(each, parameter);
             }
         });
     }
 
+    @Override
     public boolean anySatisfy(Predicate<? super T> predicate)
     {
         return this.parallelIterable.anySatisfy(Predicates.and(this.predicate, predicate));
     }
 
+    @Override
     public boolean allSatisfy(Predicate<? super T> predicate)
     {
-        return this.parallelIterable.allSatisfy(new SelectAllSatisfyPredicate<T>(this.predicate, predicate));
+        return this.parallelIterable.allSatisfy(new SelectAllSatisfyPredicate<>(this.predicate, predicate));
     }
 
     @Override
@@ -86,6 +86,7 @@ class ParallelSelectUnsortedBag<T> extends AbstractParallelUnsortedBag<T, Unsort
         });
     }
 
+    @Override
     public T detect(Predicate<? super T> predicate)
     {
         return this.parallelIterable.detect(Predicates.and(this.predicate, predicate));
@@ -102,6 +103,7 @@ class ParallelSelectUnsortedBag<T> extends AbstractParallelUnsortedBag<T, Unsort
             this.right = right;
         }
 
+        @Override
         public boolean accept(T each)
         {
             boolean leftResult = this.left.accept(each);

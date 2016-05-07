@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -47,6 +47,7 @@ final class DoubletonSet<T>
         this.element2 = obj2;
     }
 
+    @Override
     public int size()
     {
         return 2;
@@ -78,7 +79,7 @@ final class DoubletonSet<T>
     @Override
     public DoubletonSet<T> clone()
     {
-        return new DoubletonSet<T>(this.element1, this.element2);
+        return new DoubletonSet<>(this.element1, this.element2);
     }
 
     @Override
@@ -88,21 +89,25 @@ final class DoubletonSet<T>
                 || Comparators.nullSafeEquals(obj, this.element2);
     }
 
+    @Override
     public Iterator<T> iterator()
     {
         return new DoubletonSetIterator();
     }
 
+    @Override
     public T getFirst()
     {
         return this.element1;
     }
 
+    @Override
     public T getLast()
     {
         return this.element2;
     }
 
+    @Override
     public void each(Procedure<? super T> procedure)
     {
         procedure.value(this.element1);
@@ -123,12 +128,14 @@ final class DoubletonSet<T>
         procedure.value(this.element2, parameter);
     }
 
+    @Override
     public void writeExternal(ObjectOutput out) throws IOException
     {
         out.writeObject(this.element1);
         out.writeObject(this.element2);
     }
 
+    @Override
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
     {
         this.element1 = (T) in.readObject();
@@ -153,20 +160,22 @@ final class DoubletonSet<T>
         }
     }
 
+    @Override
     public MutableSet<T> with(T element)
     {
-        return this.contains(element) ? this : new TripletonSet<T>(this.element1, this.element2, element);
+        return this.contains(element) ? this : new TripletonSet<>(this.element1, this.element2, element);
     }
 
+    @Override
     public MutableSet<T> without(T element)
     {
         if (Comparators.nullSafeEquals(element, this.element1))
         {
-            return new SingletonSet<T>(this.element2);
+            return new SingletonSet<>(this.element2);
         }
         if (Comparators.nullSafeEquals(element, this.element2))
         {
-            return new SingletonSet<T>(this.element1);
+            return new SingletonSet<>(this.element1);
         }
         return this;
     }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -22,6 +22,6 @@ public class PassThruFunction0SerializationTest
                 1L,
                 "rO0ABXNyAD1vcmcuZWNsaXBzZS5jb2xsZWN0aW9ucy5pbXBsLmJsb2NrLmZ1bmN0aW9uLlBhc3NU\n"
                         + "aHJ1RnVuY3Rpb24wAAAAAAAAAAECAAFMAAZyZXN1bHR0ABJMamF2YS9sYW5nL09iamVjdDt4cHA=\n",
-                new PassThruFunction0<Object>(null));
+                new PassThruFunction0<>(null));
     }
 }

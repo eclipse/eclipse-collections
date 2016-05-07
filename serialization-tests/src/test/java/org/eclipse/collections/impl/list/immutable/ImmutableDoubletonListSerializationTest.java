@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -23,6 +23,6 @@ public class ImmutableDoubletonListSerializationTest
                         + "YWJsZURvdWJsZXRvbkxpc3QAAAAAAAAAAQIAAkwACGVsZW1lbnQxdAASTGphdmEvbGFuZy9PYmpl\n"
                         + "Y3Q7TAAIZWxlbWVudDJxAH4AAXhwc3IAEWphdmEubGFuZy5JbnRlZ2VyEuKgpPeBhzgCAAFJAAV2\n"
                         + "YWx1ZXhyABBqYXZhLmxhbmcuTnVtYmVyhqyVHQuU4IsCAAB4cAAAAAFzcQB+AAMAAAAC",
-                new ImmutableDoubletonList<Integer>(1, 2));
+                new ImmutableDoubletonList<>(1, 2));
     }
 }

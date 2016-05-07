@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -46,16 +46,19 @@ final class ImmutableBooleanEmptySet implements ImmutableBooleanSet, Serializabl
         // Singleton
     }
 
+    @Override
     public ImmutableBooleanSet newWith(boolean element)
     {
         return element ? ImmutableTrueSet.INSTANCE : ImmutableFalseSet.INSTANCE;
     }
 
+    @Override
     public ImmutableBooleanSet newWithout(boolean element)
     {
         return this;
     }
 
+    @Override
     public ImmutableBooleanSet newWithAll(BooleanIterable elements)
     {
         ImmutableBooleanSet result = this;
@@ -67,16 +70,19 @@ final class ImmutableBooleanEmptySet implements ImmutableBooleanSet, Serializabl
         return result;
     }
 
+    @Override
     public ImmutableBooleanSet newWithoutAll(BooleanIterable elements)
     {
         return this;
     }
 
+    @Override
     public BooleanIterator booleanIterator()
     {
         return ImmutableEmptyBooleanIterator.INSTANCE;
     }
 
+    @Override
     public void forEach(BooleanProcedure procedure)
     {
     }
@@ -84,96 +90,115 @@ final class ImmutableBooleanEmptySet implements ImmutableBooleanSet, Serializabl
     /**
      * @since 7.0.
      */
+    @Override
     public void each(BooleanProcedure procedure)
     {
     }
 
+    @Override
     public <T> T injectInto(T injectedValue, ObjectBooleanToObjectFunction<? super T, ? extends T> function)
     {
         return injectedValue;
     }
 
+    @Override
     public int count(BooleanPredicate predicate)
     {
         return 0;
     }
 
+    @Override
     public boolean anySatisfy(BooleanPredicate predicate)
     {
         return false;
     }
 
+    @Override
     public boolean allSatisfy(BooleanPredicate predicate)
     {
         return true;
     }
 
+    @Override
     public boolean noneSatisfy(BooleanPredicate predicate)
     {
         return false;
     }
 
+    @Override
     public ImmutableBooleanSet select(BooleanPredicate predicate)
     {
         return this;
     }
 
+    @Override
     public ImmutableBooleanSet reject(BooleanPredicate predicate)
     {
         return this;
     }
 
+    @Override
     public boolean detectIfNone(BooleanPredicate predicate, boolean ifNone)
     {
         return ifNone;
     }
 
+    @Override
     public <V> ImmutableSet<V> collect(BooleanToObjectFunction<? extends V> function)
     {
         return Sets.immutable.with();
     }
 
+    @Override
     public boolean[] toArray()
     {
         return TO_ARRAY;
     }
 
+    @Override
     public boolean contains(boolean value)
     {
         return false;
     }
 
+    @Override
     public boolean containsAll(boolean... source)
     {
         return source.length == 0;
     }
 
+    @Override
     public boolean containsAll(BooleanIterable source)
     {
         BooleanIterator iterator = source.booleanIterator();
         return !iterator.hasNext();
     }
 
+    @Override
     public BooleanSet freeze()
     {
         return this;
     }
 
+    @Override
     public ImmutableBooleanSet toImmutable()
     {
         return this;
     }
 
+    @Override
     public int size()
     {
         return 0;
     }
 
+    @Override
     public boolean isEmpty()
     {
         return true;
     }
 
+    @Override
     public boolean notEmpty()
     {
         return false;
@@ -208,29 +233,35 @@ final class ImmutableBooleanEmptySet implements ImmutableBooleanSet, Serializabl
         return "[]";
     }
 
+    @Override
     public String makeString()
     {
         return "";
     }
 
+    @Override
     public String makeString(String separator)
     {
         return "";
     }
 
+    @Override
     public String makeString(String start, String separator, String end)
     {
         return start + end;
     }
 
+    @Override
     public void appendString(Appendable appendable)
     {
     }
 
+    @Override
     public void appendString(Appendable appendable, String separator)
     {
     }
 
+    @Override
     public void appendString(Appendable appendable, String start, String separator, String end)
     {
         try
@@ -244,21 +275,25 @@ final class ImmutableBooleanEmptySet implements ImmutableBooleanSet, Serializabl
         }
     }
 
+    @Override
     public MutableBooleanList toList()
     {
         return BooleanArrayList.newList(this);
     }
 
+    @Override
     public MutableBooleanSet toSet()
     {
         return BooleanHashSet.newSet(this);
     }
 
+    @Override
     public MutableBooleanBag toBag()
     {
         return BooleanHashBag.newBag(this);
     }
 
+    @Override
     public LazyBooleanIterable asLazy()
     {
         return new LazyBooleanIterableAdapter(this);

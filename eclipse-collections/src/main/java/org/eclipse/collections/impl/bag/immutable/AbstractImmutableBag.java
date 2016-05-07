@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -36,7 +36,6 @@ import org.eclipse.collections.api.block.function.primitive.ShortFunction;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
-import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
 import org.eclipse.collections.api.collection.MutableCollection;
 import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
@@ -66,142 +65,143 @@ public abstract class AbstractImmutableBag<T>
         extends AbstractImmutableBagIterable<T>
         implements ImmutableBag<T>
 {
+    @Override
     public ImmutableBag<T> newWithoutAll(Iterable<? extends T> elements)
     {
         return this.reject(Predicates.in(elements));
     }
 
+    @Override
     public ImmutableBag<T> toImmutable()
     {
         return this;
     }
 
+    @Override
     public ImmutableBag<T> tap(Procedure<? super T> procedure)
     {
         this.forEach(procedure);
         return this;
     }
 
+    @Override
     public <P> ImmutableBag<T> selectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         return this.select(Predicates.bind(predicate, parameter));
     }
 
+    @Override
     public <P> ImmutableBag<T> rejectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         return this.reject(Predicates.bind(predicate, parameter));
     }
 
-    public PartitionImmutableBag<T> partition(final Predicate<? super T> predicate)
+    @Override
+    public PartitionImmutableBag<T> partition(Predicate<? super T> predicate)
     {
-        final PartitionMutableBag<T> partitionMutableBag = new PartitionHashBag<T>();
-        this.forEachWithOccurrences(new ObjectIntProcedure<T>()
-        {
-            public void value(T each, int occurrences)
-            {
-                MutableBag<T> bucket = predicate.accept(each)
-                        ? partitionMutableBag.getSelected()
-                        : partitionMutableBag.getRejected();
-                bucket.addOccurrences(each, occurrences);
-            }
+        PartitionMutableBag<T> partitionMutableBag = new PartitionHashBag<>();
+        this.forEachWithOccurrences((each, occurrences) -> {
+            MutableBag<T> bucket = predicate.accept(each)
+                    ? partitionMutableBag.getSelected()
+                    : partitionMutableBag.getRejected();
+            bucket.addOccurrences(each, occurrences);
         });
         return partitionMutableBag.toImmutable();
     }
 
-    public <P> PartitionImmutableBag<T> partitionWith(final Predicate2<? super T, ? super P> predicate, final P parameter)
+    @Override
+    public <P> PartitionImmutableBag<T> partitionWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
-        final PartitionMutableBag<T> partitionMutableBag = new PartitionHashBag<T>();
-        this.forEachWithOccurrences(new ObjectIntProcedure<T>()
-        {
-            public void value(T each, int occurrences)
-            {
-                MutableBag<T> bucket = predicate.accept(each, parameter)
-                        ? partitionMutableBag.getSelected()
-                        : partitionMutableBag.getRejected();
-                bucket.addOccurrences(each, occurrences);
-            }
+        PartitionMutableBag<T> partitionMutableBag = new PartitionHashBag<>();
+        this.forEachWithOccurrences((each, occurrences) -> {
+            MutableBag<T> bucket = predicate.accept(each, parameter)
+                    ? partitionMutableBag.getSelected()
+                    : partitionMutableBag.getRejected();
+            bucket.addOccurrences(each, occurrences);
         });
         return partitionMutableBag.toImmutable();
     }
 
+    @Override
     public <P, V> ImmutableBag<V> collectWith(Function2<? super T, ? super P, ? extends V> function, P parameter)
     {
         return this.collect(Functions.bind(function, parameter));
     }
 
+    @Override
     public ImmutableBooleanBag collectBoolean(BooleanFunction<? super T> booleanFunction)
     {
         return this.collectBoolean(booleanFunction, new BooleanHashBag()).toImmutable();
     }
 
+    @Override
     public ImmutableByteBag collectByte(ByteFunction<? super T> byteFunction)
     {
         return this.collectByte(byteFunction, new ByteHashBag()).toImmutable();
     }
 
+    @Override
     public ImmutableCharBag collectChar(CharFunction<? super T> charFunction)
     {
         return this.collectChar(charFunction, new CharHashBag()).toImmutable();
     }
 
+    @Override
     public ImmutableDoubleBag collectDouble(DoubleFunction<? super T> doubleFunction)
     {
         return this.collectDouble(doubleFunction, new DoubleHashBag()).toImmutable();
     }
 
+    @Override
     public ImmutableFloatBag collectFloat(FloatFunction<? super T> floatFunction)
     {
         return this.collectFloat(floatFunction, new FloatHashBag()).toImmutable();
     }
 
+    @Override
     public ImmutableIntBag collectInt(IntFunction<? super T> intFunction)
     {
         return this.collectInt(intFunction, new IntHashBag()).toImmutable();
     }
 
+    @Override
     public ImmutableLongBag collectLong(LongFunction<? super T> longFunction)
     {
         return this.collectLong(longFunction, new LongHashBag()).toImmutable();
     }
 
+    @Override
     public ImmutableShortBag collectShort(ShortFunction<? super T> shortFunction)
     {
         return this.collectShort(shortFunction, new ShortHashBag()).toImmutable();
     }
 
+    @Override
     public ImmutableList<ObjectIntPair<T>> topOccurrences(int n)
     {
         return this.occurrencesSortingBy(n,
-                new IntFunction<ObjectIntPair<T>>()
-                {
-                    public int intValueOf(ObjectIntPair<T> item)
-                    {
-                        return -item.getTwo();
-                    }
-                },
-                Lists.fixedSize.<ObjectIntPair<T>>empty()
+                item -> -item.getTwo(),
+                Lists.fixedSize.empty()
         ).toImmutable();
     }
 
+    @Override
     public ImmutableList<ObjectIntPair<T>> bottomOccurrences(int n)
     {
-        return this.occurrencesSortingBy(n,
-                new IntFunction<ObjectIntPair<T>>()
-                {
-                    public int intValueOf(ObjectIntPair<T> item)
-                    {
-                        return item.getTwo();
-                    }
-                },
-                Lists.fixedSize.<ObjectIntPair<T>>empty()
+        return this.occurrencesSortingBy(
+                n,
+                ObjectIntPair::getTwo,
+                Lists.fixedSize.empty()
         ).toImmutable();
     }
 
+    @Override
     public <V> ImmutableMap<V, T> groupByUniqueKey(Function<? super T, ? extends V> function)
     {
         return this.groupByUniqueKey(function, UnifiedMap.<V, T>newMap()).toImmutable();
     }
 
+    @Override
     public RichIterable<RichIterable<T>> chunk(int size)
     {
         if (size <= 0)

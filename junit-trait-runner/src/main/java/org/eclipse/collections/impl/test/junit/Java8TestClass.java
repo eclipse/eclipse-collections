@@ -63,13 +63,13 @@ public class Java8TestClass extends TestClass
 
     private static List<Class<?>> getInterfaces(Class<?> testClass)
     {
-        LinkedList<Class<?>> queue = new LinkedList<Class<?>>();
+        LinkedList<Class<?>> queue = new LinkedList<>();
         queue.add(testClass);
 
-        Set<Class<?>> visited = new HashSet<Class<?>>();
+        Set<Class<?>> visited = new HashSet<>();
         visited.add(testClass);
 
-        List<Class<?>> results = new ArrayList<Class<?>>();
+        List<Class<?>> results = new ArrayList<>();
         while (!queue.isEmpty())
         {
             Class<?> anInterface = queue.poll();

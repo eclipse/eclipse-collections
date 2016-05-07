@@ -52,17 +52,20 @@ final class ImmutableDoubletonList<T>
         return this.element2;
     }
 
+    @Override
     public int size()
     {
         return 2;
     }
 
+    @Override
     public void each(Procedure<? super T> procedure)
     {
         procedure.value(this.element1);
         procedure.value(this.element2);
     }
 
+    @Override
     public T get(int index)
     {
         switch (index)
@@ -82,6 +85,7 @@ final class ImmutableDoubletonList<T>
         return Comparators.nullSafeEquals(obj, this.element1) || Comparators.nullSafeEquals(obj, this.element2);
     }
 
+    @Override
     public ImmutableList<T> newWith(T newItem)
     {
         return Lists.immutable.with(this.element1, this.element2, newItem);

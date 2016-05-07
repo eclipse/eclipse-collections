@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -14,8 +14,6 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.SortedSet;
 
-import org.eclipse.collections.api.block.function.Function;
-import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 import org.eclipse.collections.api.set.sorted.SortedSetIterable;
@@ -37,24 +35,14 @@ public final class SortedSetIterables
     {
         Comparator<? super T> comparator = set.comparator();
         MutableSortedSet<T> innerTree = TreeSortedSet.newSet(comparator);
-        TreeSortedSet<MutableSortedSet<T>> sortedSetIterables = TreeSortedSet.newSet(Comparators.<T>powerSet());
+        TreeSortedSet<MutableSortedSet<T>> sortedSetIterables = TreeSortedSet.newSet(Comparators.powerSet());
         MutableSortedSet<MutableSortedSet<T>> seed = sortedSetIterables.with(innerTree);
 
-        return Iterate.injectInto(seed, set, new Function2<MutableSortedSet<MutableSortedSet<T>>, T, MutableSortedSet<MutableSortedSet<T>>>()
-        {
-            public MutableSortedSet<MutableSortedSet<T>> value(MutableSortedSet<MutableSortedSet<T>> accumulator, final T element)
-            {
-                return accumulator.union(accumulator.collect(new Function<MutableSortedSet<T>, MutableSortedSet<T>>()
-                {
-                    public MutableSortedSet<T> valueOf(MutableSortedSet<T> set)
-                    {
-                        MutableSortedSet<T> newSet = set.clone();
-                        newSet.add(element);
-                        return newSet;
-                    }
-                }).toSet());
-            }
-        });
+        return Iterate.injectInto(seed, set, (accumulator, element) -> accumulator.union(accumulator.collect(set1 -> {
+            MutableSortedSet<T> newSet = set1.clone();
+            newSet.add(element);
+            return newSet;
+        }).toSet()));
     }
 
     /**
@@ -62,13 +50,7 @@ public final class SortedSetIterables
      */
     public static <T> ImmutableSortedSet<ImmutableSortedSet<T>> immutablePowerSet(SortedSet<T> set)
     {
-        return powerSet(set).collect(new Function<MutableSortedSet<T>, ImmutableSortedSet<T>>()
-        {
-            public ImmutableSortedSet<T> valueOf(MutableSortedSet<T> set)
-            {
-                return set.toImmutable();
-            }
-        }, TreeSortedSet.<ImmutableSortedSet<T>>newSet(Comparators.<T>powerSet())).toImmutable();
+        return powerSet(set).collect(MutableSortedSet<T>::toImmutable, TreeSortedSet.newSet(Comparators.powerSet())).toImmutable();
     }
 
     public static <T> int compare(SortedSetIterable<T> setA, SortedSetIterable<T> setB)

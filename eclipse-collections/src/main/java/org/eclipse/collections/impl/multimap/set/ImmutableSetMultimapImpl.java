@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -59,14 +59,16 @@ public final class ImmutableSetMultimapImpl<K, V>
         return Sets.immutable.empty();
     }
 
+    @Override
     public ImmutableSetMultimap<K, V> newEmpty()
     {
-        return new ImmutableSetMultimapImpl<K, V>(Maps.immutable.<K, ImmutableSet<V>>with());
+        return new ImmutableSetMultimapImpl<>(Maps.immutable.with());
     }
 
+    @Override
     public MutableSetMultimap<K, V> toMutable()
     {
-        return new UnifiedSetMultimap<K, V>(this);
+        return new UnifiedSetMultimap<>(this);
     }
 
     @Override
@@ -77,7 +79,7 @@ public final class ImmutableSetMultimapImpl<K, V>
 
     private Object writeReplace()
     {
-        return new ImmutableSetMultimapSerializationProxy<K, V>(this.map);
+        return new ImmutableSetMultimapSerializationProxy<>(this.map);
     }
 
     private static final class ImmutableSetMultimapSerializationProxy<K, V>
@@ -99,7 +101,7 @@ public final class ImmutableSetMultimapImpl<K, V>
         @Override
         protected AbstractMutableMultimap<K, V, MutableSet<V>> createEmptyMutableMultimap()
         {
-            return new UnifiedSetMultimap<K, V>();
+            return new UnifiedSetMultimap<>();
         }
     }
 
@@ -127,36 +129,43 @@ public final class ImmutableSetMultimapImpl<K, V>
         return (ImmutableSetMultimap<K, V>) super.newWithoutAll(key);
     }
 
+    @Override
     public ImmutableSetMultimap<V, K> flip()
     {
         return Iterate.flip(this).toImmutable();
     }
 
+    @Override
     public ImmutableSetMultimap<K, V> selectKeysValues(Predicate2<? super K, ? super V> predicate)
     {
-        return this.selectKeysValues(predicate, UnifiedSetMultimap.<K, V>newMultimap()).toImmutable();
+        return this.selectKeysValues(predicate, UnifiedSetMultimap.newMultimap()).toImmutable();
     }
 
+    @Override
     public ImmutableSetMultimap<K, V> rejectKeysValues(Predicate2<? super K, ? super V> predicate)
     {
-        return this.rejectKeysValues(predicate, UnifiedSetMultimap.<K, V>newMultimap()).toImmutable();
+        return this.rejectKeysValues(predicate, UnifiedSetMultimap.newMultimap()).toImmutable();
     }
 
+    @Override
     public ImmutableSetMultimap<K, V> selectKeysMultiValues(Predicate2<? super K, ? super Iterable<V>> predicate)
     {
-        return this.selectKeysMultiValues(predicate, UnifiedSetMultimap.<K, V>newMultimap()).toImmutable();
+        return this.selectKeysMultiValues(predicate, UnifiedSetMultimap.newMultimap()).toImmutable();
     }
 
+    @Override
     public ImmutableSetMultimap<K, V> rejectKeysMultiValues(Predicate2<? super K, ? super Iterable<V>> predicate)
     {
-        return this.rejectKeysMultiValues(predicate, UnifiedSetMultimap.<K, V>newMultimap()).toImmutable();
+        return this.rejectKeysMultiValues(predicate, UnifiedSetMultimap.newMultimap()).toImmutable();
     }
 
+    @Override
     public <K2, V2> ImmutableBagMultimap<K2, V2> collectKeysValues(Function2<? super K, ? super V, Pair<K2, V2>> function)
     {
-        return this.collectKeysValues(function, HashBagMultimap.<K2, V2>newMultimap()).toImmutable();
+        return this.collectKeysValues(function, HashBagMultimap.newMultimap()).toImmutable();
     }
 
+    @Override
     public <V2> ImmutableBagMultimap<K, V2> collectValues(Function<? super V, ? extends V2> function)
     {
         return this.collectValues(function, HashBagMultimap.<K, V2>newMultimap()).toImmutable();

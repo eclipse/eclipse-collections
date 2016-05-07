@@ -27,6 +27,6 @@ public class DropWhileIterablePredicateSerializationTest
                         + "ZS9QcmVkaWNhdGU7eHAAc3IAQG9yZy5lY2xpcHNlLmNvbGxlY3Rpb25zLmltcGwuYmxvY2suZmFj\n"
                         + "dG9yeS5QcmVkaWNhdGVzJEFsd2F5c1RydWUAAAAAAAAAAQIAAHhyADVvcmcuZWNsaXBzZS5jb2xs\n"
                         + "ZWN0aW9ucy5pbXBsLmJsb2NrLmZhY3RvcnkuUHJlZGljYXRlcwAAAAAAAAABAgAAeHA=",
-                new DropWhileIterablePredicate<Object>(Predicates.alwaysTrue()));
+                new DropWhileIterablePredicate<>(Predicates.alwaysTrue()));
     }
 }

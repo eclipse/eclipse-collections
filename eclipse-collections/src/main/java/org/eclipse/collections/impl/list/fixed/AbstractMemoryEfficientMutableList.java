@@ -46,6 +46,7 @@ public abstract class AbstractMemoryEfficientMutableList<T>
         throw new UnsupportedOperationException("Cannot add to a fixed size list: " + this.getClass());
     }
 
+    @Override
     public void add(int index, T element)
     {
         throw new UnsupportedOperationException("Cannot add to a fixed size list: " + this.getClass());
@@ -57,6 +58,7 @@ public abstract class AbstractMemoryEfficientMutableList<T>
         throw new UnsupportedOperationException("Cannot add to a fixed size list: " + this.getClass());
     }
 
+    @Override
     public boolean addAll(int index, Collection<? extends T> collection)
     {
         throw new UnsupportedOperationException("Cannot add to a fixed size list: " + this.getClass());
@@ -74,6 +76,7 @@ public abstract class AbstractMemoryEfficientMutableList<T>
         throw new UnsupportedOperationException("Cannot remove from a fixed size list: " + this.getClass());
     }
 
+    @Override
     public T remove(int index)
     {
         throw new UnsupportedOperationException("Cannot remove from a fixed size list: " + this.getClass());
@@ -115,6 +118,7 @@ public abstract class AbstractMemoryEfficientMutableList<T>
         throw new UnsupportedOperationException("Cannot remove from a fixed size list: " + this.getClass());
     }
 
+    @Override
     public void clear()
     {
         throw new UnsupportedOperationException("Cannot clear a fixed size list: " + this.getClass());
@@ -131,7 +135,7 @@ public abstract class AbstractMemoryEfficientMutableList<T>
     @Override
     public MutableList<T> subList(int fromIndex, int toIndex)
     {
-        return new SubList<T>(this, fromIndex, toIndex);
+        return new SubList<>(this, fromIndex, toIndex);
     }
 
     @Override
@@ -233,12 +237,12 @@ public abstract class AbstractMemoryEfficientMutableList<T>
     @Override
     public ListIterator<T> listIterator(int index)
     {
-        return new FixedSizeListIteratorAdapter<T>(super.listIterator(index));
+        return new FixedSizeListIteratorAdapter<>(super.listIterator(index));
     }
 
     @Override
     public ListIterator<T> listIterator()
     {
-        return new FixedSizeListIteratorAdapter<T>(super.listIterator());
+        return new FixedSizeListIteratorAdapter<>(super.listIterator());
     }
 }

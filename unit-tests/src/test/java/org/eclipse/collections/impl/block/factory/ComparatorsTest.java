@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -66,7 +66,7 @@ public class ComparatorsTest
         MutableList<String> list = FastList.newListWith("1", "4", "2", "3");
         Assert.assertEquals(
                 FastList.newListWith("4", "3", "2", "1"),
-                list.sortThis(Comparators.<String>reverseNaturalOrder()));
+                list.sortThis(Comparators.reverseNaturalOrder()));
     }
 
     @Test
@@ -230,7 +230,7 @@ public class ComparatorsTest
     @Test
     public void descendingCollectionSizeCompare()
     {
-        MutableList<List<Integer>> list = FastList.<List<Integer>>newListWith(
+        MutableList<List<Integer>> list = FastList.newListWith(
                 Interval.oneTo(1),
                 Interval.oneTo(3),
                 Interval.oneTo(2));
@@ -246,7 +246,7 @@ public class ComparatorsTest
     @Test
     public void ascendingCollectionSizeCompare()
     {
-        MutableList<List<Integer>> list = FastList.<List<Integer>>newListWith(
+        MutableList<List<Integer>> list = FastList.newListWith(
                 Interval.oneTo(1),
                 Interval.oneTo(3),
                 Interval.oneTo(2));

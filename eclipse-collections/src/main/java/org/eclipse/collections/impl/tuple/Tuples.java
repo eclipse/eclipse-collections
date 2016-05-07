@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -33,11 +33,11 @@ public final class Tuples
 
     public static <T1, T2> Pair<T1, T2> pair(T1 one, T2 two)
     {
-        return new PairImpl<T1, T2>(one, two);
+        return new PairImpl<>(one, two);
     }
 
     public static <T> Twin<T> twin(T one, T two)
     {
-        return new TwinImpl<T>(one, two);
+        return new TwinImpl<>(one, two);
     }
 }

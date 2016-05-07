@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -53,28 +53,33 @@ public abstract class AbstractMutableBagIterable<T>
 {
     protected abstract RichIterable<T> getKeysView();
 
+    @Override
     public boolean addAll(Collection<? extends T> source)
     {
         return this.addAllIterable(source);
     }
 
+    @Override
     public boolean addAllIterable(Iterable<? extends T> iterable)
     {
         int oldSize = this.size();
-        Iterate.forEachWith(iterable, Procedures2.<T>addToCollection(), this);
+        Iterate.forEachWith(iterable, Procedures2.addToCollection(), this);
         return oldSize != this.size();
     }
 
+    @Override
     public boolean removeAll(Collection<?> collection)
     {
         return this.removeAllIterable(collection);
     }
 
+    @Override
     public boolean retainAll(Collection<?> collection)
     {
         return this.retainAllIterable(collection);
     }
 
+    @Override
     public boolean retainAllIterable(Iterable<?> iterable)
     {
         int oldSize = this.size();
@@ -82,26 +87,31 @@ public abstract class AbstractMutableBagIterable<T>
         return this.size() != oldSize;
     }
 
+    @Override
     public <P> Twin<MutableList<T>> selectAndRejectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         return IterableIterate.selectAndRejectWith(this, predicate, parameter);
     }
 
+    @Override
     public T getFirst()
     {
         return this.getKeysView().getFirst();
     }
 
+    @Override
     public T getLast()
     {
         return this.getKeysView().getLast();
     }
 
+    @Override
     public <V> MutableMap<V, T> groupByUniqueKey(Function<? super T, ? extends V> function)
     {
-        return this.groupByUniqueKey(function, UnifiedMap.<V, T>newMap());
+        return this.groupByUniqueKey(function, UnifiedMap.newMap());
     }
 
+    @Override
     public RichIterable<RichIterable<T>> chunk(int size)
     {
         if (size <= 0)
@@ -143,17 +153,11 @@ public abstract class AbstractMutableBagIterable<T>
 
     @Override
     public <P> T detectWithIfNone(
-            final Predicate2<? super T, ? super P> predicate,
-            final P parameter,
+            Predicate2<? super T, ? super P> predicate,
+            P parameter,
             Function0<? extends T> function)
     {
-        return this.getKeysView().detectIfNone(new Predicate<T>()
-        {
-            public boolean accept(T each)
-            {
-                return predicate.accept(each, parameter);
-            }
-        }, function);
+        return this.getKeysView().detectIfNone(each -> predicate.accept(each, parameter), function);
     }
 
     @Override
@@ -228,69 +232,65 @@ public abstract class AbstractMutableBagIterable<T>
         return this.getKeysView().maxBy(function);
     }
 
+    @Override
     public <K, V> MutableMap<K, V> aggregateInPlaceBy(
             Function<? super T, ? extends K> groupBy,
             Function0<? extends V> zeroValueFactory,
             Procedure2<? super V, ? super T> mutatingAggregator)
     {
         MutableMap<K, V> map = UnifiedMap.newMap();
-        this.forEach(new MutatingAggregationProcedure<T, K, V>(map, groupBy, zeroValueFactory, mutatingAggregator));
+        this.forEach(new MutatingAggregationProcedure<>(map, groupBy, zeroValueFactory, mutatingAggregator));
         return map;
     }
 
+    @Override
     public <K, V> MutableMap<K, V> aggregateBy(
             Function<? super T, ? extends K> groupBy,
             Function0<? extends V> zeroValueFactory,
             Function2<? super V, ? super T, ? extends V> nonMutatingAggregator)
     {
         MutableMap<K, V> map = UnifiedMap.newMap();
-        this.forEach(new NonMutatingAggregationProcedure<T, K, V>(map, groupBy, zeroValueFactory, nonMutatingAggregator));
+        this.forEach(new NonMutatingAggregationProcedure<>(map, groupBy, zeroValueFactory, nonMutatingAggregator));
         return map;
     }
 
+    @Override
     public <V> MutableObjectLongMap<V> sumByInt(Function<? super T, ? extends V> groupBy, IntFunction<? super T> function)
     {
         MutableObjectLongMap<V> result = ObjectLongHashMap.newMap();
         return this.injectInto(result, PrimitiveFunctions.sumByIntFunction(groupBy, function));
     }
 
+    @Override
     public <V> MutableObjectDoubleMap<V> sumByFloat(Function<? super T, ? extends V> groupBy, FloatFunction<? super T> function)
     {
         MutableObjectDoubleMap<V> result = ObjectDoubleHashMap.newMap();
         return this.injectInto(result, PrimitiveFunctions.sumByFloatFunction(groupBy, function));
     }
 
+    @Override
     public <V> MutableObjectLongMap<V> sumByLong(Function<? super T, ? extends V> groupBy, LongFunction<? super T> function)
     {
         MutableObjectLongMap<V> result = ObjectLongHashMap.newMap();
         return this.injectInto(result, PrimitiveFunctions.sumByLongFunction(groupBy, function));
     }
 
+    @Override
     public <V> MutableObjectDoubleMap<V> sumByDouble(Function<? super T, ? extends V> groupBy, DoubleFunction<? super T> function)
     {
         MutableObjectDoubleMap<V> result = ObjectDoubleHashMap.newMap();
         return this.injectInto(result, PrimitiveFunctions.sumByDoubleFunction(groupBy, function));
     }
 
+    @Override
     public MutableList<ObjectIntPair<T>> topOccurrences(int n)
     {
-        return this.occurrencesSortingBy(n, new IntFunction<ObjectIntPair<T>>()
-        {
-            public int intValueOf(ObjectIntPair<T> item)
-            {
-                return -item.getTwo();
-            }
-        }, Lists.mutable.<ObjectIntPair<T>>empty());
+        return this.occurrencesSortingBy(n, item -> -item.getTwo(), Lists.mutable.empty());
     }
 
+    @Override
     public MutableList<ObjectIntPair<T>> bottomOccurrences(int n)
     {
-        return this.occurrencesSortingBy(n, new IntFunction<ObjectIntPair<T>>()
-        {
-            public int intValueOf(ObjectIntPair<T> item)
-            {
-                return item.getTwo();
-            }
-        }, Lists.mutable.<ObjectIntPair<T>>empty());
+        return this.occurrencesSortingBy(n, ObjectIntPair::getTwo, Lists.mutable.empty());
     }
 }

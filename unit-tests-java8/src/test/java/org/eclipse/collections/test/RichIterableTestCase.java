@@ -10,7 +10,6 @@
 
 package org.eclipse.collections.test;
 
-import java.util.Comparator;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -81,11 +80,11 @@ import org.junit.Test;
 
 import static org.eclipse.collections.impl.test.Verify.assertThrows;
 import static org.eclipse.collections.test.IterableTestCase.assertEquals;
+import static org.eclipse.collections.test.IterableTestCase.assertNotEquals;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.isOneOf;
 import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertThat;
@@ -628,27 +627,17 @@ public interface RichIterableTestCase extends IterableTestCase
         assertEquals(expectedIterationOrder, collectLongTargetIterationOrder);
 
         MutableCollection<Integer> collectShortIterationOrder = this.newMutableForFilter();
-        this.getInstanceUnderTest().collectShort(new ShortFunction<Integer>()
-        {
-            @Override
-            public short shortValueOf(Integer each)
-            {
-                collectShortIterationOrder.add(each);
-                return 0;
-            }
+        this.getInstanceUnderTest().collectShort((ShortFunction<Integer>) each -> {
+            collectShortIterationOrder.add(each);
+            return (short) 0;
         }).forEach(each -> {
         });
         assertEquals(expectedIterationOrder, collectShortIterationOrder);
 
         MutableCollection<Integer> collectShortTargetIterationOrder = this.newMutableForFilter();
-        this.getInstanceUnderTest().collectShort(new ShortFunction<Integer>()
-        {
-            @Override
-            public short shortValueOf(Integer each)
-            {
-                collectShortTargetIterationOrder.add(each);
-                return 0;
-            }
+        this.getInstanceUnderTest().collectShort((ShortFunction<Integer>) each -> {
+            collectShortTargetIterationOrder.add(each);
+            return (short) 0;
         }, new ShortHashBag());
         assertEquals(expectedIterationOrder, collectShortTargetIterationOrder);
 
@@ -739,34 +728,24 @@ public interface RichIterableTestCase extends IterableTestCase
         assertEquals(expectedIterationOrder, detectWithIfNoneIterationOrder);
 
         MutableCollection<Integer> minComparatorIterationOrder = this.newMutableForFilter();
-        this.getInstanceUnderTest().min(new Comparator<Integer>()
-        {
-            @Override
-            public int compare(Integer o1, Integer o2)
+        this.getInstanceUnderTest().min((o1, o2) -> {
+            if (minComparatorIterationOrder.isEmpty())
             {
-                if (minComparatorIterationOrder.isEmpty())
-                {
-                    minComparatorIterationOrder.add(o2);
-                }
-                minComparatorIterationOrder.add(o1);
-                return 0;
+                minComparatorIterationOrder.add(o2);
             }
+            minComparatorIterationOrder.add(o1);
+            return 0;
         });
         assertEquals(expectedIterationOrder, minComparatorIterationOrder);
 
         MutableCollection<Integer> maxComparatorIterationOrder = this.newMutableForFilter();
-        this.getInstanceUnderTest().max(new Comparator<Integer>()
-        {
-            @Override
-            public int compare(Integer o1, Integer o2)
+        this.getInstanceUnderTest().max((o1, o2) -> {
+            if (maxComparatorIterationOrder.isEmpty())
             {
-                if (maxComparatorIterationOrder.isEmpty())
-                {
-                    maxComparatorIterationOrder.add(o2);
-                }
-                maxComparatorIterationOrder.add(o1);
-                return 0;
+                maxComparatorIterationOrder.add(o2);
             }
+            maxComparatorIterationOrder.add(o1);
+            return 0;
         });
         assertEquals(expectedIterationOrder, maxComparatorIterationOrder);
 
@@ -797,7 +776,7 @@ public interface RichIterableTestCase extends IterableTestCase
         this.getInstanceUnderTest().groupByEach(each -> {
             groupByEachTargetIterationOrder.add(each);
             return Lists.immutable.with(each);
-        }, new HashBagMultimap<Integer, Integer>());
+        }, new HashBagMultimap<>());
         assertEquals(expectedIterationOrder, groupByEachTargetIterationOrder);
 
         MutableCollection<Integer> sumOfFloatIterationOrder = this.newMutableForFilter();
@@ -833,57 +812,37 @@ public interface RichIterableTestCase extends IterableTestCase
                 : expectedIterationOrder;
 
         MutableCollection<Integer> injectIntoIterationOrder = this.newMutableForFilter();
-        this.getInstanceUnderTest().injectInto(0, new Function2<Integer, Integer, Integer>()
-        {
-            public Integer value(Integer argument1, Integer argument2)
-            {
-                injectIntoIterationOrder.add(argument2);
-                return argument1 + argument2;
-            }
+        this.getInstanceUnderTest().injectInto(0, (Function2<Integer, Integer, Integer>) (argument1, argument2) -> {
+            injectIntoIterationOrder.add(argument2);
+            return argument1 + argument2;
         });
         assertEquals(expectedInjectIntoIterationOrder, injectIntoIterationOrder);
 
         MutableCollection<Integer> injectIntoIntIterationOrder = this.newMutableForFilter();
-        this.getInstanceUnderTest().injectInto(0, new IntObjectToIntFunction<Integer>()
-        {
-            public int intValueOf(int intParameter, Integer objectParameter)
-            {
-                injectIntoIntIterationOrder.add(objectParameter);
-                return intParameter + objectParameter;
-            }
+        this.getInstanceUnderTest().injectInto(0, (IntObjectToIntFunction<Integer>) (intParameter, objectParameter) -> {
+            injectIntoIntIterationOrder.add(objectParameter);
+            return intParameter + objectParameter;
         });
         assertEquals(expectedInjectIntoIterationOrder, injectIntoIntIterationOrder);
 
         MutableCollection<Integer> injectIntoLongIterationOrder = this.newMutableForFilter();
-        this.getInstanceUnderTest().injectInto(0L, new LongObjectToLongFunction<Integer>()
-        {
-            public long longValueOf(long longParameter, Integer objectParameter)
-            {
-                injectIntoLongIterationOrder.add(objectParameter);
-                return longParameter + objectParameter;
-            }
+        this.getInstanceUnderTest().injectInto(0L, (LongObjectToLongFunction<Integer>) (longParameter, objectParameter) -> {
+            injectIntoLongIterationOrder.add(objectParameter);
+            return longParameter + objectParameter;
         });
         assertEquals(expectedInjectIntoIterationOrder, injectIntoLongIterationOrder);
 
         MutableCollection<Integer> injectIntoDoubleIterationOrder = this.newMutableForFilter();
-        this.getInstanceUnderTest().injectInto(0L, new DoubleObjectToDoubleFunction<Integer>()
-        {
-            public double doubleValueOf(double doubleParameter, Integer objectParameter)
-            {
-                injectIntoDoubleIterationOrder.add(objectParameter);
-                return doubleParameter + objectParameter;
-            }
+        this.getInstanceUnderTest().injectInto(0L, (DoubleObjectToDoubleFunction<Integer>) (doubleParameter, objectParameter) -> {
+            injectIntoDoubleIterationOrder.add(objectParameter);
+            return doubleParameter + objectParameter;
         });
         assertEquals(expectedInjectIntoIterationOrder, injectIntoDoubleIterationOrder);
 
         MutableCollection<Integer> injectIntoFloatIterationOrder = this.newMutableForFilter();
-        this.getInstanceUnderTest().injectInto(0L, new FloatObjectToFloatFunction<Integer>()
-        {
-            public float floatValueOf(float floatParameter, Integer objectParameter)
-            {
-                injectIntoFloatIterationOrder.add(objectParameter);
-                return floatParameter + objectParameter;
-            }
+        this.getInstanceUnderTest().injectInto(0L, (FloatObjectToFloatFunction<Integer>) (floatParameter, objectParameter) -> {
+            injectIntoFloatIterationOrder.add(objectParameter);
+            return floatParameter + objectParameter;
         });
         assertEquals(expectedInjectIntoIterationOrder, injectIntoFloatIterationOrder);
 
@@ -1006,7 +965,7 @@ public interface RichIterableTestCase extends IterableTestCase
     @Test
     default void RichIterable_selectInstancesOf()
     {
-        RichIterable<Number> iterable = this.<Number>newWith(1, 2.0, 2.0, 3, 3, 3, 4.0, 4.0, 4.0, 4.0);
+        RichIterable<Number> iterable = this.newWith(1, 2.0, 2.0, 3, 3, 3, 4.0, 4.0, 4.0, 4.0);
         assertEquals(this.getExpectedFiltered(1, 3, 3, 3), iterable.selectInstancesOf(Integer.class));
         assertEquals(this.getExpectedFiltered(1, 2.0, 2.0, 3, 3, 3, 4.0, 4.0, 4.0, 4.0), iterable.selectInstancesOf(Number.class));
     }

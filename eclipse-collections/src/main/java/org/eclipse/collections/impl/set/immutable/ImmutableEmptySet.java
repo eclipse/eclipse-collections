@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -47,8 +47,8 @@ final class ImmutableEmptySet<T>
         extends AbstractImmutableSet<T>
         implements Serializable
 {
-    static final ImmutableSet<?> INSTANCE = new ImmutableEmptySet<Object>();
-    private static final PartitionImmutableSet<?> EMPTY = new PartitionUnifiedSet<Object>().toImmutable();
+    static final ImmutableSet<?> INSTANCE = new ImmutableEmptySet<>();
+    private static final PartitionImmutableSet<?> EMPTY = new PartitionUnifiedSet<>().toImmutable();
 
     private static final long serialVersionUID = 1L;
 
@@ -92,6 +92,7 @@ final class ImmutableEmptySet<T>
         return this;
     }
 
+    @Override
     public int size()
     {
         return 0;
@@ -109,6 +110,7 @@ final class ImmutableEmptySet<T>
         return this;
     }
 
+    @Override
     public void each(Procedure<? super T> procedure)
     {
     }
@@ -123,16 +125,19 @@ final class ImmutableEmptySet<T>
     {
     }
 
+    @Override
     public T getFirst()
     {
         return null;
     }
 
+    @Override
     public T getLast()
     {
         return null;
     }
 
+    @Override
     public Iterator<T> iterator()
     {
         return EmptyIterator.getInstance();
@@ -448,6 +453,6 @@ final class ImmutableEmptySet<T>
 
     private Object writeReplace()
     {
-        return new ImmutableSetSerializationProxy<T>(this);
+        return new ImmutableSetSerializationProxy<>(this);
     }
 }

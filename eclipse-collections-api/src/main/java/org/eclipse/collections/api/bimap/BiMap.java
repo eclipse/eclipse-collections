@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -34,19 +34,25 @@ public interface BiMap<K, V> extends MapIterable<K, V>
      */
     BiMap<V, K> inverse();
 
+    @Override
     SetMultimap<V, K> flip();
 
+    @Override
     BiMap<V, K> flipUniqueValues();
 
     /**
      * Converts the BiMap to an ImmutableBiMap.  If the bimap is immutable, it returns itself.
      */
+    @Override
     ImmutableBiMap<K, V> toImmutable();
 
+    @Override
     BiMap<K, V> tap(Procedure<? super V> procedure);
 
+    @Override
     BiMap<K, V> select(Predicate2<? super K, ? super V> predicate);
 
+    @Override
     BiMap<K, V> reject(Predicate2<? super K, ? super V> predicate);
 
     /**
@@ -57,6 +63,7 @@ public interface BiMap<K, V> extends MapIterable<K, V>
      *
      * @throws RuntimeException when {@code function} returns colliding keys or values.
      */
+    @Override
     <K2, V2> BiMap<K2, V2> collect(Function2<? super K, ? super V, Pair<K2, V2>> function);
 
     /**
@@ -67,37 +74,50 @@ public interface BiMap<K, V> extends MapIterable<K, V>
      *
      * @throws RuntimeException when {@code function} returns colliding values.
      */
+    @Override
     <R> BiMap<K, R> collectValues(Function2<? super K, ? super V, ? extends R> function);
 
+    @Override
     SetIterable<V> select(Predicate<? super V> predicate);
 
+    @Override
     <P> SetIterable<V> selectWith(Predicate2<? super V, ? super P> predicate, P parameter);
 
+    @Override
     SetIterable<V> reject(Predicate<? super V> predicate);
 
+    @Override
     <P> SetIterable<V> rejectWith(Predicate2<? super V, ? super P> predicate, P parameter);
 
+    @Override
     PartitionUnsortedSet<V> partition(Predicate<? super V> predicate);
 
+    @Override
     <P> PartitionUnsortedSet<V> partitionWith(Predicate2<? super V, ? super P> predicate, P parameter);
 
+    @Override
     <S> SetIterable<S> selectInstancesOf(Class<S> clazz);
 
     /**
      * @deprecated in 8.0. Use {@link OrderedIterable#zip(Iterable)} instead.
      */
+    @Override
     @Deprecated
     <S> SetIterable<Pair<V, S>> zip(Iterable<S> that);
 
     /**
      * @deprecated in 8.0. Use {@link OrderedIterable#zipWithIndex()} instead.
      */
+    @Override
     @Deprecated
     SetIterable<Pair<V, Integer>> zipWithIndex();
 
+    @Override
     <V1> SetMultimap<V1, V> groupBy(Function<? super V, ? extends V1> function);
 
+    @Override
     <V1> SetMultimap<V1, V> groupByEach(Function<? super V, ? extends Iterable<V1>> function);
 
+    @Override
     <VV> BiMap<VV, V> groupByUniqueKey(Function<? super V, ? extends VV> function);
 }

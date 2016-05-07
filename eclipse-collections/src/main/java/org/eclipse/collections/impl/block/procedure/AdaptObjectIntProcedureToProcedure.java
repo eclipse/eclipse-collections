@@ -27,6 +27,7 @@ public final class AdaptObjectIntProcedureToProcedure<V> implements Procedure<V>
         this.index = new Counter();
     }
 
+    @Override
     public void value(V each)
     {
         this.objectIntProcedure.value(each, this.index.getCount());

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -18,8 +18,6 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 
 import org.eclipse.collections.api.LazyIterable;
-import org.eclipse.collections.api.block.function.Function;
-import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.factory.set.FixedSizeSetFactory;
@@ -83,21 +81,9 @@ public final class Sets
     public static final FixedSizeSetFactory fixedSize = new FixedSizeSetFactoryImpl();
     public static final MutableSetFactory mutable = new MutableSetFactoryImpl();
 
-    private static final Predicate<Set<?>> INSTANCE_OF_SORTED_SET_PREDICATE = new Predicate<Set<?>>()
-    {
-        public boolean accept(Set<?> set)
-        {
-            return set instanceof SortedSet;
-        }
-    };
+    private static final Predicate<Set<?>> INSTANCE_OF_SORTED_SET_PREDICATE = set -> set instanceof SortedSet;
 
-    private static final Predicate<Set<?>> HAS_NON_NULL_COMPARATOR = new Predicate<Set<?>>()
-    {
-        public boolean accept(Set<?> set)
-        {
-            return ((SortedSet<?>) set).comparator() != null;
-        }
-    };
+    private static final Predicate<Set<?>> HAS_NON_NULL_COMPARATOR = set -> ((SortedSet<?>) set).comparator() != null;
 
     private Sets()
     {
@@ -116,8 +102,8 @@ public final class Sets
             Set<? extends E> setA,
             Set<? extends E> setB)
     {
-        return setA.size() > setB.size() ? fillSet(targetSet, Sets.<E, R>addAllProcedure(), setA, setB)
-                : fillSet(targetSet, Sets.<E, R>addAllProcedure(), setB, setA);
+        return setA.size() > setB.size() ? fillSet(targetSet, Sets.addAllProcedure(), setA, setB)
+                : fillSet(targetSet, Sets.addAllProcedure(), setB, setA);
     }
 
     public static <E> MutableSet<E> unionAll(Set<? extends E>... sets)
@@ -130,7 +116,7 @@ public final class Sets
             Set<? extends E>... sets)
     {
         Arrays.sort(sets, 0, sets.length, Comparators.descendingCollectionSizeComparator());
-        return fillSet(targetSet, Sets.<E, R>addAllProcedure(), sets);
+        return fillSet(targetSet, Sets.addAllProcedure(), sets);
     }
 
     public static <E> MutableSet<E> intersect(
@@ -145,8 +131,8 @@ public final class Sets
             Set<? extends E> setA,
             Set<? extends E> setB)
     {
-        return setA.size() < setB.size() ? fillSet(targetSet, Sets.<E, R>retainAllProcedure(), setA, setB)
-                : fillSet(targetSet, Sets.<E, R>retainAllProcedure(), setB, setA);
+        return setA.size() < setB.size() ? fillSet(targetSet, Sets.retainAllProcedure(), setA, setB)
+                : fillSet(targetSet, Sets.retainAllProcedure(), setB, setA);
     }
 
     public static <E> MutableSet<E> intersectAll(Set<? extends E>... sets)
@@ -159,7 +145,7 @@ public final class Sets
             Set<? extends E>... sets)
     {
         Arrays.sort(sets, 0, sets.length, Comparators.ascendingCollectionSizeComparator());
-        return fillSet(targetSet, Sets.<E, R>retainAllProcedure(), sets);
+        return fillSet(targetSet, Sets.retainAllProcedure(), sets);
     }
 
     public static <E> MutableSet<E> difference(
@@ -174,7 +160,7 @@ public final class Sets
             Set<? extends E> minuendSet,
             Set<? extends E> subtrahendSet)
     {
-        return fillSet(targetSet, Sets.<E, R>removeAllProcedure(), minuendSet, subtrahendSet);
+        return fillSet(targetSet, Sets.removeAllProcedure(), minuendSet, subtrahendSet);
     }
 
     public static <E> MutableSet<E> differenceAll(Set<? extends E>... sets)
@@ -186,7 +172,7 @@ public final class Sets
             R targetSet,
             Set<? extends E>... sets)
     {
-        return fillSet(targetSet, Sets.<E, R>removeAllProcedure(), sets);
+        return fillSet(targetSet, Sets.removeAllProcedure(), sets);
     }
 
     public static <E> MutableSet<E> symmetricDifference(
@@ -229,7 +215,7 @@ public final class Sets
         if (comparator != null)
         {
             // TODO: this should return a SortedSetAdapter once implemented
-            return SetAdapter.adapt(new TreeSet<E>(comparator));
+            return SetAdapter.adapt(new TreeSet<>(comparator));
         }
         return UnifiedSet.newSet();
     }
@@ -264,69 +250,27 @@ public final class Sets
 
     private static <E, R extends Set<E>> Procedure2<Set<? extends E>, R> addAllProcedure()
     {
-        return new Procedure2<Set<? extends E>, R>()
-        {
-            public void value(Set<? extends E> argumentSet, R targetSet)
-            {
-                targetSet.addAll(argumentSet);
-            }
-        };
+        return (argumentSet, targetSet) -> targetSet.addAll(argumentSet);
     }
 
     private static <E, R extends Set<E>> Procedure2<Set<? extends E>, R> retainAllProcedure()
     {
-        return new Procedure2<Set<? extends E>, R>()
-        {
-            public void value(Set<? extends E> argumentSet, R targetSet)
-            {
-                targetSet.retainAll(argumentSet);
-            }
-        };
+        return (argumentSet, targetSet) -> targetSet.retainAll(argumentSet);
     }
 
     private static <E, R extends Set<E>> Procedure2<Set<? extends E>, R> removeAllProcedure()
     {
-        return new Procedure2<Set<? extends E>, R>()
-        {
-            public void value(Set<? extends E> argumentSet, R targetSet)
-            {
-                targetSet.removeAll(argumentSet);
-            }
-        };
+        return (argumentSet, targetSet) -> targetSet.removeAll(argumentSet);
     }
 
     public static <T> MutableSet<MutableSet<T>> powerSet(Set<T> set)
     {
-        MutableSet<MutableSet<T>> seed = UnifiedSet.<MutableSet<T>>newSetWith(UnifiedSet.<T>newSet());
-        return Iterate.injectInto(seed, set, new Function2<MutableSet<MutableSet<T>>, T, MutableSet<MutableSet<T>>>()
-        {
-            public MutableSet<MutableSet<T>> value(MutableSet<MutableSet<T>> accumulator, final T element)
-            {
-                return Sets.union(accumulator, accumulator.collect(new Function<MutableSet<T>, MutableSet<T>>()
-                {
-                    public MutableSet<T> valueOf(MutableSet<T> innerSet)
-                    {
-                        return innerSet.toSet().with(element);
-                    }
-                }));
-            }
-        });
+        MutableSet<MutableSet<T>> seed = UnifiedSet.newSetWith(UnifiedSet.newSet());
+        return Iterate.injectInto(seed, set, (accumulator, element) -> Sets.union(accumulator, accumulator.collect(innerSet -> innerSet.toSet().with(element))));
     }
 
-    public static <A, B> LazyIterable<Pair<A, B>> cartesianProduct(Set<A> set1, final Set<B> set2)
+    public static <A, B> LazyIterable<Pair<A, B>> cartesianProduct(Set<A> set1, Set<B> set2)
     {
-        return LazyIterate.flatCollect(set1, new Function<A, LazyIterable<Pair<A, B>>>()
-        {
-            public LazyIterable<Pair<A, B>> valueOf(final A first)
-            {
-                return LazyIterate.collect(set2, new Function<B, Pair<A, B>>()
-                {
-                    public Pair<A, B> valueOf(B second)
-                    {
-                        return Tuples.pair(first, second);
-                    }
-                });
-            }
-        });
+        return LazyIterate.flatCollect(set1, first -> LazyIterate.collect(set2, second -> Tuples.pair(first, second)));
     }
 }

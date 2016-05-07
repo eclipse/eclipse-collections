@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -232,56 +232,81 @@ public interface MutableMapIterable<K, V> extends MapIterable<K, V>, Map<K, V>
      * Returns an immutable copy of this map.
      * If the map is immutable, it returns itself.
      */
+    @Override
     ImmutableMapIterable<K, V> toImmutable();
 
     // TODO
     // MutableSetIterable<K> keySet();
 
+    @Override
     MutableMapIterable<K, V> tap(Procedure<? super V> procedure);
 
+    @Override
     MutableMapIterable<V, K> flipUniqueValues();
 
+    @Override
     MutableMultimap<V, K> flip();
 
+    @Override
     MutableMapIterable<K, V> select(Predicate2<? super K, ? super V> predicate);
 
+    @Override
     MutableMapIterable<K, V> reject(Predicate2<? super K, ? super V> predicate);
 
+    @Override
     <K2, V2> MutableMapIterable<K2, V2> collect(Function2<? super K, ? super V, Pair<K2, V2>> function);
 
+    @Override
     <R> MutableMapIterable<K, R> collectValues(Function2<? super K, ? super V, ? extends R> function);
 
+    @Override
     MutableCollection<V> select(Predicate<? super V> predicate);
 
+    @Override
     <P> MutableCollection<V> selectWith(Predicate2<? super V, ? super P> predicate, P parameter);
 
+    @Override
     MutableCollection<V> reject(Predicate<? super V> predicate);
 
+    @Override
     <P> MutableCollection<V> rejectWith(Predicate2<? super V, ? super P> predicate, P parameter);
 
+    @Override
     PartitionMutableCollection<V> partition(Predicate<? super V> predicate);
 
+    @Override
     <S> MutableCollection<S> selectInstancesOf(Class<S> clazz);
 
+    @Override
     <V1> MutableObjectLongMap<V1> sumByInt(Function<? super V, ? extends V1> groupBy, IntFunction<? super V> function);
 
+    @Override
     <V1> MutableObjectDoubleMap<V1> sumByFloat(Function<? super V, ? extends V1> groupBy, FloatFunction<? super V> function);
 
+    @Override
     <V1> MutableObjectLongMap<V1> sumByLong(Function<? super V, ? extends V1> groupBy, LongFunction<? super V> function);
 
+    @Override
     <V1> MutableObjectDoubleMap<V1> sumByDouble(Function<? super V, ? extends V1> groupBy, DoubleFunction<? super V> function);
 
+    @Override
     <V1> MutableMultimap<V1, V> groupBy(Function<? super V, ? extends V1> function);
 
+    @Override
     <V1> MutableMultimap<V1, V> groupByEach(Function<? super V, ? extends Iterable<V1>> function);
 
+    @Override
     <V1> MutableMapIterable<V1, V> groupByUniqueKey(Function<? super V, ? extends V1> function);
 
+    @Override
     <S> MutableCollection<Pair<V, S>> zip(Iterable<S> that);
 
+    @Override
     MutableCollection<Pair<V, Integer>> zipWithIndex();
 
+    @Override
     <KK, VV> MutableMap<KK, VV> aggregateInPlaceBy(Function<? super V, ? extends KK> groupBy, Function0<? extends VV> zeroValueFactory, Procedure2<? super VV, ? super V> mutatingAggregator);
 
+    @Override
     <KK, VV> MutableMap<KK, VV> aggregateBy(Function<? super V, ? extends KK> groupBy, Function0<? extends VV> zeroValueFactory, Function2<? super VV, ? super V, ? extends VV> nonMutatingAggregator);
 }

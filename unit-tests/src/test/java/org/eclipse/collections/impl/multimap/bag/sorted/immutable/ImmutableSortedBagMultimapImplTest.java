@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -49,7 +49,7 @@ public class ImmutableSortedBagMultimapImplTest extends AbstractImmutableMultima
     @Test
     public void flip()
     {
-        MutableSortedBagMultimap<String, Integer> mutableMap = TreeBagMultimap.<String, Integer>newMultimap();
+        MutableSortedBagMultimap<String, Integer> mutableMap = TreeBagMultimap.newMultimap();
         mutableMap.put("Less than 2", 1);
         mutableMap.put("Less than 3", 1);
         mutableMap.put("Less than 3", 2);
@@ -71,12 +71,12 @@ public class ImmutableSortedBagMultimapImplTest extends AbstractImmutableMultima
     @Test
     public void collectValues()
     {
-        MutableSortedBagMultimap<String, Integer> mutableMultimap = TreeBagMultimap.newMultimap(Comparators.<Integer>reverseNaturalOrder());
+        MutableSortedBagMultimap<String, Integer> mutableMultimap = TreeBagMultimap.newMultimap(Comparators.reverseNaturalOrder());
         mutableMultimap.putAll("1", FastList.newListWith(4, 3, 2, 1, 1));
         mutableMultimap.putAll("2", FastList.newListWith(5, 4, 3, 2, 2));
         ImmutableSortedBagMultimap<String, Integer> immutableMap = mutableMultimap.toImmutable();
         ImmutableListMultimap<String, String> collectedMultimap = immutableMap.collectValues(value -> value + "Value");
-        MutableListMultimap<String, String> expectedMultimap = FastListMultimap.<String, String>newMultimap();
+        MutableListMultimap<String, String> expectedMultimap = FastListMultimap.newMultimap();
         expectedMultimap.putAll("1", FastList.newListWith("4Value", "3Value", "2Value", "1Value", "1Value"));
         expectedMultimap.putAll("2", FastList.newListWith("5Value", "4Value", "3Value", "2Value", "2Value"));
         ImmutableListMultimap<String, String> expectedImmutableMultimap = expectedMultimap.toImmutable();
@@ -87,14 +87,14 @@ public class ImmutableSortedBagMultimapImplTest extends AbstractImmutableMultima
     @Test
     public void rejectKeysMultiValues()
     {
-        MutableSortedBagMultimap<Integer, Integer> multimap = TreeBagMultimap.newMultimap(Comparators.<Integer>reverseNaturalOrder());
+        MutableSortedBagMultimap<Integer, Integer> multimap = TreeBagMultimap.newMultimap(Comparators.reverseNaturalOrder());
         multimap.putAll(1, FastList.newListWith(4, 3, 2, 1, 1));
         multimap.putAll(2, FastList.newListWith(5, 4, 3, 2, 2));
         multimap.putAll(3, FastList.newListWith(4, 3, 1, 1));
         multimap.putAll(4, FastList.newListWith(4, 3, 1));
         ImmutableSortedBagMultimap<Integer, Integer> immutableMultimap = multimap.toImmutable();
         ImmutableSortedBagMultimap<Integer, Integer> selectedMultimap = immutableMultimap.rejectKeysMultiValues((key, values) -> (key % 2 == 0 || Iterate.sizeOf(values) > 4));
-        MutableSortedBagMultimap<Integer, Integer> expectedMultimap = TreeBagMultimap.newMultimap(Comparators.<Integer>reverseNaturalOrder());
+        MutableSortedBagMultimap<Integer, Integer> expectedMultimap = TreeBagMultimap.newMultimap(Comparators.reverseNaturalOrder());
         expectedMultimap.putAll(3, FastList.newListWith(4, 3, 1, 1));
         Verify.assertSortedBagMultimapsEqual(expectedMultimap, selectedMultimap);
         Assert.assertEquals(expectedMultimap.toImmutable().comparator(), selectedMultimap.comparator());

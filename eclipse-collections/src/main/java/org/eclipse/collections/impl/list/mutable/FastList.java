@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -147,19 +147,19 @@ public class FastList<T>
 
     public static <E> FastList<E> newList()
     {
-        return new FastList<E>();
+        return new FastList<>();
     }
 
     public static <E> FastList<E> wrapCopy(E... array)
     {
         E[] newArray = (E[]) new Object[array.length];
         System.arraycopy(array, 0, newArray, 0, array.length);
-        return new FastList<E>(newArray);
+        return new FastList<>(newArray);
     }
 
     public static <E> FastList<E> newList(int initialCapacity)
     {
-        return new FastList<E>(initialCapacity);
+        return new FastList<>(initialCapacity);
     }
 
     public static <E> FastList<E> newList(Iterable<? extends E> source)
@@ -175,7 +175,7 @@ public class FastList<T>
      */
     public static <E> FastList<E> newListWith(E... elements)
     {
-        return new FastList<E>(elements);
+        return new FastList<>(elements);
     }
 
     /**
@@ -204,6 +204,7 @@ public class FastList<T>
         return result;
     }
 
+    @Override
     public void clear()
     {
         Arrays.fill(this.items, null);
@@ -224,11 +225,13 @@ public class FastList<T>
         InternalArrayIterate.forEachWithIndexWithoutChecks(this.items, from, to, objectIntProcedure);
     }
 
+    @Override
     public void batchForEach(Procedure<? super T> procedure, int sectionIndex, int sectionCount)
     {
         InternalArrayIterate.batchForEach(procedure, this.items, this.size, sectionIndex, sectionCount);
     }
 
+    @Override
     public int getBatchCount(int batchSize)
     {
         return Math.max(1, this.size() / batchSize);
@@ -324,7 +327,7 @@ public class FastList<T>
     private void addAllCollection(Collection<? extends T> source)
     {
         this.ensureCapacity(this.size + source.size());
-        Iterate.forEachWith(source, Procedures2.<T>addToCollection(), this);
+        Iterate.forEachWith(source, Procedures2.addToCollection(), this);
     }
 
     @Override
@@ -372,6 +375,7 @@ public class FastList<T>
         throw this.newIndexOutOfBoundsException(index);
     }
 
+    @Override
     public T set(int index, T element)
     {
         T previous = this.get(index);
@@ -478,7 +482,7 @@ public class FastList<T>
     @Override
     public <V> FastListMultimap<V, T> groupBy(Function<? super T, ? extends V> function)
     {
-        return this.groupBy(function, FastListMultimap.<V, T>newMultimap());
+        return this.groupBy(function, FastListMultimap.newMultimap());
     }
 
     @Override
@@ -490,7 +494,7 @@ public class FastList<T>
     @Override
     public <V> FastListMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function)
     {
-        return this.groupByEach(function, FastListMultimap.<V, T>newMultimap());
+        return this.groupByEach(function, FastListMultimap.newMultimap());
     }
 
     @Override
@@ -504,7 +508,7 @@ public class FastList<T>
     @Override
     public <K> MutableMap<K, T> groupByUniqueKey(Function<? super T, ? extends K> function)
     {
-        return this.groupByUniqueKey(function, UnifiedMap.<K, T>newMap());
+        return this.groupByUniqueKey(function, UnifiedMap.newMap());
     }
 
     @Override
@@ -582,7 +586,7 @@ public class FastList<T>
     @Override
     public FastList<T> select(Predicate<? super T> predicate)
     {
-        return this.select(predicate, FastList.<T>newList());
+        return this.select(predicate, FastList.newList());
     }
 
     @Override
@@ -594,7 +598,7 @@ public class FastList<T>
     @Override
     public <P> FastList<T> selectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
-        return this.selectWith(predicate, parameter, FastList.<T>newList());
+        return this.selectWith(predicate, parameter, FastList.newList());
     }
 
     @Override
@@ -609,7 +613,7 @@ public class FastList<T>
     @Override
     public FastList<T> reject(Predicate<? super T> predicate)
     {
-        return this.reject(predicate, FastList.<T>newList());
+        return this.reject(predicate, FastList.newList());
     }
 
     @Override
@@ -621,7 +625,7 @@ public class FastList<T>
     @Override
     public <P> FastList<T> rejectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
-        return this.rejectWith(predicate, parameter, FastList.<T>newList());
+        return this.rejectWith(predicate, parameter, FastList.newList());
     }
 
     @Override
@@ -703,7 +707,7 @@ public class FastList<T>
     @Override
     public <V> FastList<V> collect(Function<? super T, ? extends V> function)
     {
-        return this.collect(function, FastList.<V>newList(this.size()));
+        return this.collect(function, FastList.newList(this.size()));
     }
 
     @Override
@@ -843,7 +847,7 @@ public class FastList<T>
     @Override
     public <V> FastList<V> flatCollect(Function<? super T, ? extends Iterable<V>> function)
     {
-        return this.flatCollect(function, FastList.<V>newList(this.size()));
+        return this.flatCollect(function, FastList.newList(this.size()));
     }
 
     @Override
@@ -857,7 +861,7 @@ public class FastList<T>
     @Override
     public <P, V> FastList<V> collectWith(Function2<? super T, ? super P, ? extends V> function, P parameter)
     {
-        return this.collectWith(function, parameter, FastList.<V>newList(this.size()));
+        return this.collectWith(function, parameter, FastList.newList(this.size()));
     }
 
     @Override
@@ -874,7 +878,7 @@ public class FastList<T>
             Predicate<? super T> predicate,
             Function<? super T, ? extends V> function)
     {
-        return this.collectIf(predicate, function, FastList.<V>newList());
+        return this.collectIf(predicate, function, FastList.newList());
     }
 
     @Override
@@ -963,6 +967,7 @@ public class FastList<T>
         return result == null ? defaultValueBlock.value() : result;
     }
 
+    @Override
     public T get(int index)
     {
         if (index < this.size)
@@ -1000,6 +1005,7 @@ public class FastList<T>
         }
     }
 
+    @Override
     public void add(int index, T element)
     {
         if (index > -1 && index < this.size)
@@ -1042,6 +1048,7 @@ public class FastList<T>
         return result < oldSize ? MAXIMUM_ARRAY_SIZE : result;
     }
 
+    @Override
     public T remove(int index)
     {
         T previous = this.get(index);
@@ -1066,6 +1073,7 @@ public class FastList<T>
         return false;
     }
 
+    @Override
     public boolean addAll(int index, Collection<? extends T> source)
     {
         if (index > this.size || index < 0)
@@ -1146,6 +1154,7 @@ public class FastList<T>
         }
     }
 
+    @Override
     public int size()
     {
         return this.size;
@@ -1374,7 +1383,7 @@ public class FastList<T>
     @Override
     public PartitionMutableList<T> partitionWhile(Predicate<? super T> predicate)
     {
-        PartitionMutableList<T> result = new PartitionFastList<T>();
+        PartitionMutableList<T> result = new PartitionFastList<>();
         FastList<T> selected = (FastList<T>) result.getSelected();
         FastList<T> rejected = (FastList<T>) result.getRejected();
         int partitionIndex = this.detectNotIndex(predicate);
@@ -1442,6 +1451,7 @@ public class FastList<T>
         return hashCode;
     }
 
+    @Override
     public void writeExternal(ObjectOutput out) throws IOException
     {
         out.writeInt(this.size());
@@ -1451,6 +1461,7 @@ public class FastList<T>
         }
     }
 
+    @Override
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
     {
         this.size = in.readInt();

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -27,35 +27,47 @@ import org.eclipse.collections.api.tuple.Pair;
  */
 public interface MutableSetIterable<T> extends SetIterable<T>, MutableCollection<T>, Set<T>
 {
+    @Override
     MutableSetIterable<T> tap(Procedure<? super T> procedure);
 
+    @Override
     MutableSetIterable<T> select(Predicate<? super T> predicate);
 
+    @Override
     <P> MutableSetIterable<T> selectWith(Predicate2<? super T, ? super P> predicate, P parameter);
 
+    @Override
     MutableSetIterable<T> reject(Predicate<? super T> predicate);
 
+    @Override
     <P> MutableSetIterable<T> rejectWith(Predicate2<? super T, ? super P> predicate, P parameter);
 
+    @Override
     PartitionMutableSetIterable<T> partition(Predicate<? super T> predicate);
 
+    @Override
     <P> PartitionMutableSetIterable<T> partitionWith(Predicate2<? super T, ? super P> predicate, P parameter);
 
+    @Override
     <S> MutableSetIterable<S> selectInstancesOf(Class<S> clazz);
 
+    @Override
     <V> MutableSetIterableMultimap<V, T> groupBy(Function<? super T, ? extends V> function);
 
+    @Override
     <V> MutableSetIterableMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function);
 
     /**
      * @deprecated in 6.0. Use {@link OrderedIterable#zip(Iterable)} instead.
      */
+    @Override
     @Deprecated
     <S> MutableCollection<Pair<T, S>> zip(Iterable<S> that);
 
     /**
      * @deprecated in 6.0. Use {@link OrderedIterable#zipWithIndex()} instead.
      */
+    @Override
     @Deprecated
     MutableSetIterable<Pair<T, Integer>> zipWithIndex();
 }

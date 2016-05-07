@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -21,26 +21,31 @@ import org.eclipse.collections.impl.map.strategy.mutable.UnifiedMapWithHashingSt
 @Immutable
 public final class ImmutableHashingStrategyMapFactoryImpl implements ImmutableHashingStrategyMapFactory
 {
+    @Override
     public <K, V> ImmutableMap<K, V> of(HashingStrategy<? super K> hashingStrategy)
     {
         return this.with(hashingStrategy);
     }
 
+    @Override
     public <K, V> ImmutableMap<K, V> with(HashingStrategy<? super K> hashingStrategy)
     {
-        return new ImmutableEmptyMapWithHashingStrategy<K, V>(hashingStrategy);
+        return new ImmutableEmptyMapWithHashingStrategy<>(hashingStrategy);
     }
 
+    @Override
     public <K, V> ImmutableMap<K, V> of(HashingStrategy<? super K> hashingStrategy, K key, V value)
     {
         return this.with(hashingStrategy, key, value);
     }
 
+    @Override
     public <K, V> ImmutableMap<K, V> with(HashingStrategy<? super K> hashingStrategy, K key, V value)
     {
         return UnifiedMapWithHashingStrategy.newWithKeysValues(hashingStrategy, key, value).toImmutable();
     }
 
+    @Override
     public <K, V> ImmutableMap<K, V> of(HashingStrategy<? super K> hashingStrategy, K key1, V value1, K key2, V value2)
     {
         return this.with(
@@ -49,6 +54,7 @@ public final class ImmutableHashingStrategyMapFactoryImpl implements ImmutableHa
                 key2, value2);
     }
 
+    @Override
     public <K, V> ImmutableMap<K, V> with(HashingStrategy<? super K> hashingStrategy, K key1, V value1, K key2, V value2)
     {
         return UnifiedMapWithHashingStrategy.newWithKeysValues(
@@ -57,6 +63,7 @@ public final class ImmutableHashingStrategyMapFactoryImpl implements ImmutableHa
                 key2, value2).toImmutable();
     }
 
+    @Override
     public <K, V> ImmutableMap<K, V> of(
             HashingStrategy<? super K> hashingStrategy,
             K key1, V value1,
@@ -70,6 +77,7 @@ public final class ImmutableHashingStrategyMapFactoryImpl implements ImmutableHa
                 key3, value3);
     }
 
+    @Override
     public <K, V> ImmutableMap<K, V> with(
             HashingStrategy<? super K> hashingStrategy,
             K key1, V value1,
@@ -83,6 +91,7 @@ public final class ImmutableHashingStrategyMapFactoryImpl implements ImmutableHa
                 key3, value3).toImmutable();
     }
 
+    @Override
     public <K, V> ImmutableMap<K, V> of(
             HashingStrategy<? super K> hashingStrategy,
             K key1, V value1,
@@ -98,6 +107,7 @@ public final class ImmutableHashingStrategyMapFactoryImpl implements ImmutableHa
                 key4, value4);
     }
 
+    @Override
     public <K, V> ImmutableMap<K, V> with(
             HashingStrategy<? super K> hashingStrategy,
             K key1, V value1,
@@ -116,17 +126,20 @@ public final class ImmutableHashingStrategyMapFactoryImpl implements ImmutableHa
     /**
      * @deprecated use {@link #ofAll(Map)} instead (inlineable)
      */
+    @Override
     @Deprecated
     public <K, V> ImmutableMap<K, V> ofMap(Map<K, V> map)
     {
         return this.ofAll(map);
     }
 
+    @Override
     public <K, V> ImmutableMap<K, V> ofAll(Map<K, V> map)
     {
         return this.withAll(map);
     }
 
+    @Override
     public <K, V> ImmutableMap<K, V> withAll(Map<K, V> map)
     {
         if (!(map instanceof UnifiedMapWithHashingStrategy<?, ?>))
@@ -141,6 +154,6 @@ public final class ImmutableHashingStrategyMapFactoryImpl implements ImmutableHa
             return this.of(mapWithHashingStrategy.hashingStrategy());
         }
 
-        return new ImmutableUnifiedMapWithHashingStrategy<K, V>(mapWithHashingStrategy);
+        return new ImmutableUnifiedMapWithHashingStrategy<>(mapWithHashingStrategy);
     }
 }

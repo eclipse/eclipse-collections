@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -15,8 +15,6 @@ import java.io.Externalizable;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.predicate.Predicate2;
-import org.eclipse.collections.api.block.procedure.Procedure;
-import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.multimap.Multimap;
 import org.eclipse.collections.api.multimap.bag.MutableBagMultimap;
@@ -47,7 +45,7 @@ public final class SynchronizedPutUnifiedSetMultimap<K, V>
 
     public SynchronizedPutUnifiedSetMultimap(int initialCapacity)
     {
-        super(ConcurrentHashMap.<K, MutableSet<V>>newMap(initialCapacity));
+        super(ConcurrentHashMap.newMap(initialCapacity));
     }
 
     public SynchronizedPutUnifiedSetMultimap(Multimap<? extends K, ? extends V> multimap)
@@ -58,50 +56,38 @@ public final class SynchronizedPutUnifiedSetMultimap<K, V>
     public SynchronizedPutUnifiedSetMultimap(Pair<K, V>... pairs)
     {
         this();
-        ArrayIterate.forEach(pairs, new Procedure<Pair<K, V>>()
-        {
-            public void value(Pair<K, V> pair)
-            {
-                SynchronizedPutUnifiedSetMultimap.this.put(pair.getOne(), pair.getTwo());
-            }
-        });
+        ArrayIterate.forEach(pairs, pair -> SynchronizedPutUnifiedSetMultimap.this.put(pair.getOne(), pair.getTwo()));
     }
 
     public SynchronizedPutUnifiedSetMultimap(Iterable<Pair<K, V>> inputIterable)
     {
         this();
-        Iterate.forEach(inputIterable, new Procedure<Pair<K, V>>()
-        {
-            public void value(Pair<K, V> pair)
-            {
-                SynchronizedPutUnifiedSetMultimap.this.add(pair);
-            }
-        });
+        Iterate.forEach(inputIterable, this::add);
     }
 
     public static <K, V> SynchronizedPutUnifiedSetMultimap<K, V> newMultimap()
     {
-        return new SynchronizedPutUnifiedSetMultimap<K, V>();
+        return new SynchronizedPutUnifiedSetMultimap<>();
     }
 
     public static <K, V> SynchronizedPutUnifiedSetMultimap<K, V> newMultimap(int initialCapacity, float loadFactor, int concurrencyLevel)
     {
-        return new SynchronizedPutUnifiedSetMultimap<K, V>(initialCapacity);
+        return new SynchronizedPutUnifiedSetMultimap<>(initialCapacity);
     }
 
     public static <K, V> SynchronizedPutUnifiedSetMultimap<K, V> newMultimap(Multimap<? extends K, ? extends V> multimap)
     {
-        return new SynchronizedPutUnifiedSetMultimap<K, V>(multimap);
+        return new SynchronizedPutUnifiedSetMultimap<>(multimap);
     }
 
     public static <K, V> SynchronizedPutUnifiedSetMultimap<K, V> newMultimap(Pair<K, V>... pairs)
     {
-        return new SynchronizedPutUnifiedSetMultimap<K, V>(pairs);
+        return new SynchronizedPutUnifiedSetMultimap<>(pairs);
     }
 
     public static <K, V> SynchronizedPutUnifiedSetMultimap<K, V> newMultimap(Iterable<Pair<K, V>> inputIterable)
     {
-        return new SynchronizedPutUnifiedSetMultimap<K, V>(inputIterable);
+        return new SynchronizedPutUnifiedSetMultimap<>(inputIterable);
     }
 
     @Override
@@ -110,61 +96,65 @@ public final class SynchronizedPutUnifiedSetMultimap<K, V>
         return UnifiedSet.newSet(1);
     }
 
+    @Override
     public SynchronizedPutUnifiedSetMultimap<K, V> newEmpty()
     {
-        return new SynchronizedPutUnifiedSetMultimap<K, V>();
+        return new SynchronizedPutUnifiedSetMultimap<>();
     }
 
+    @Override
     public MutableSetMultimap<K, V> toMutable()
     {
-        return new SynchronizedPutUnifiedSetMultimap<K, V>(this);
+        return new SynchronizedPutUnifiedSetMultimap<>(this);
     }
 
+    @Override
     public ImmutableSetMultimap<K, V> toImmutable()
     {
-        final MutableMap<K, ImmutableSet<V>> map = UnifiedMap.newMap();
+        MutableMap<K, ImmutableSet<V>> map = UnifiedMap.newMap();
 
-        this.map.forEachKeyValue(new Procedure2<K, MutableSet<V>>()
-        {
-            public void value(K key, MutableSet<V> set)
-            {
-                map.put(key, set.toImmutable());
-            }
-        });
+        this.map.forEachKeyValue((key, set) -> map.put(key, set.toImmutable()));
 
-        return new ImmutableSetMultimapImpl<K, V>(map);
+        return new ImmutableSetMultimapImpl<>(map);
     }
 
+    @Override
     public UnifiedSetMultimap<K, V> selectKeysValues(Predicate2<? super K, ? super V> predicate)
     {
-        return this.selectKeysValues(predicate, UnifiedSetMultimap.<K, V>newMultimap());
+        return this.selectKeysValues(predicate, UnifiedSetMultimap.newMultimap());
     }
 
+    @Override
     public UnifiedSetMultimap<K, V> rejectKeysValues(Predicate2<? super K, ? super V> predicate)
     {
-        return this.rejectKeysValues(predicate, UnifiedSetMultimap.<K, V>newMultimap());
+        return this.rejectKeysValues(predicate, UnifiedSetMultimap.newMultimap());
     }
 
+    @Override
     public UnifiedSetMultimap<K, V> selectKeysMultiValues(Predicate2<? super K, ? super Iterable<V>> predicate)
     {
-        return this.selectKeysMultiValues(predicate, UnifiedSetMultimap.<K, V>newMultimap());
+        return this.selectKeysMultiValues(predicate, UnifiedSetMultimap.newMultimap());
     }
 
+    @Override
     public UnifiedSetMultimap<K, V> rejectKeysMultiValues(Predicate2<? super K, ? super Iterable<V>> predicate)
     {
-        return this.rejectKeysMultiValues(predicate, UnifiedSetMultimap.<K, V>newMultimap());
+        return this.rejectKeysMultiValues(predicate, UnifiedSetMultimap.newMultimap());
     }
 
+    @Override
     public <K2, V2> MutableBagMultimap<K2, V2> collectKeysValues(Function2<? super K, ? super V, Pair<K2, V2>> function)
     {
-        return this.collectKeysValues(function, HashBagMultimap.<K2, V2>newMultimap());
+        return this.collectKeysValues(function, HashBagMultimap.newMultimap());
     }
 
+    @Override
     public <V2> MutableBagMultimap<K, V2> collectValues(Function<? super V, ? extends V2> function)
     {
-        return this.collectValues(function, HashBagMultimap.<K, V2>newMultimap());
+        return this.collectValues(function, HashBagMultimap.newMultimap());
     }
 
+    @Override
     public MutableSetMultimap<V, K> flip()
     {
         return Iterate.flip(this);

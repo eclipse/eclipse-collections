@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -72,7 +72,7 @@ public class AnagramListTest extends AbstractJMHTestRunner
         MutableListMultimap<Alphagram, String> groupBy = this.ecWords.groupBy(Alphagram::new);
         groupBy.multiValuesView()
                 .select(iterable -> iterable.size() >= SIZE_THRESHOLD)
-                .toSortedList(Comparators.<RichIterable<String>>byIntFunction(RichIterable::size))
+                .toSortedList(Comparators.byIntFunction(RichIterable::size))
                 .asReversed()
                 .collect(iterable -> iterable.size() + ": " + iterable)
                 .forEach(Procedures.cast(e -> Assert.assertFalse(e.isEmpty())));
@@ -84,7 +84,7 @@ public class AnagramListTest extends AbstractJMHTestRunner
         MutableMultimap<Alphagram, String> groupBy = ParallelIterate.groupBy(this.ecWords, Alphagram::new);
         groupBy.multiValuesView()
                 .select(iterable -> iterable.size() >= SIZE_THRESHOLD)
-                .toSortedList(Comparators.<RichIterable<String>>byIntFunction(RichIterable::size))
+                .toSortedList(Comparators.byIntFunction(RichIterable::size))
                 .asReversed()
                 .collect(iterable -> iterable.size() + ": " + iterable)
                 .forEach(Procedures.cast(e -> Assert.assertFalse(e.isEmpty())));
@@ -96,7 +96,7 @@ public class AnagramListTest extends AbstractJMHTestRunner
         MutableMultimap<Alphagram, String> groupBy = FJIterate.groupBy(this.ecWords, Alphagram::new);
         groupBy.multiValuesView()
                 .select(iterable -> iterable.size() >= SIZE_THRESHOLD)
-                .toSortedList(Comparators.<RichIterable<String>>byIntFunction(RichIterable::size))
+                .toSortedList(Comparators.byIntFunction(RichIterable::size))
                 .asReversed()
                 .collect(iterable -> iterable.size() + ": " + iterable)
                 .forEach(Procedures.cast(e -> Assert.assertFalse(e.isEmpty())));

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -88,41 +88,41 @@ public class UnmodifiableMutableCollectionTest
         Assert.assertEquals(this.mutableCollection.count(ignored6 -> true),
                 this.unmodifiableCollection.count(ignored5 -> true));
         Verify.assertSize(4, this.unmodifiableCollection.select(ignored4 -> true));
-        Verify.assertSize(4, this.unmodifiableCollection.select(ignored3 -> true, FastList.<String>newList()));
+        Verify.assertSize(4, this.unmodifiableCollection.select(ignored3 -> true, FastList.newList()));
         Verify.assertSize(1, this.unmodifiableCollection.selectWith(Object::equals, METALLICA));
         Verify.assertSize(
                 1,
                 this.unmodifiableCollection.selectWith(
                         Object::equals,
                         METALLICA,
-                        FastList.<String>newList()));
+                        FastList.newList()));
         Verify.assertSize(2, this.unmodifiableCollection.reject(StringPredicates.contains("p")));
         Verify.assertSize(
                 2,
-                this.unmodifiableCollection.reject(StringPredicates.contains("p"), FastList.<String>newList()));
+                this.unmodifiableCollection.reject(StringPredicates.contains("p"), FastList.newList()));
         Verify.assertSize(3, this.unmodifiableCollection.rejectWith(Object::equals, METALLICA));
         Verify.assertSize(
                 3,
                 this.unmodifiableCollection.rejectWith(
                         Object::equals,
                         METALLICA,
-                        FastList.<String>newList()));
+                        FastList.newList()));
         Verify.assertSize(4, this.unmodifiableCollection.collect(Functions.getStringPassThru()));
         Verify.assertSize(
                 4,
                 this.unmodifiableCollection.collect(Functions.getStringPassThru(),
-                        FastList.<String>newList()));
+                        FastList.newList()));
 
         Function<String, Collection<String>> flattenFunction = object -> FastList.newListWith(object, object);
         Verify.assertSize(8, this.unmodifiableCollection.flatCollect(flattenFunction));
-        Verify.assertSize(8, this.unmodifiableCollection.flatCollect(flattenFunction, FastList.<String>newList()));
+        Verify.assertSize(8, this.unmodifiableCollection.flatCollect(flattenFunction, FastList.newList()));
 
         Verify.assertSize(4, this.unmodifiableCollection.collectIf(ignored2 -> true, Functions.getStringPassThru()));
         Verify.assertSize(
                 4,
                 this.unmodifiableCollection.collectIf(ignored1 -> true,
                         Functions.getStringPassThru(),
-                        FastList.<String>newList()));
+                        FastList.newList()));
         Assert.assertEquals(METALLICA, this.unmodifiableCollection.detect(StringPredicates.contains("allic")));
         Assert.assertEquals("Not found", this.unmodifiableCollection.detectIfNone(StringPredicates.contains("donna"),
                 new PassThruFunction0<>("Not found")));
@@ -239,7 +239,7 @@ Verify.assertThrows(UnsupportedOperationException.class, () -> this.unmodifiable
         Assert.assertEquals(
                 FastList.newListWith(">M", ">B", ">E", ">S"),
                 this.unmodifiableCollection.collectWith(function, ">"));
-        Assert.assertEquals(FastList.newListWith("*M", "*B", "*E", "*S"), this.unmodifiableCollection.collectWith(function, "*", FastList.<String>newList()));
+        Assert.assertEquals(FastList.newListWith("*M", "*B", "*E", "*S"), this.unmodifiableCollection.collectWith(function, "*", FastList.newList()));
     }
 
     @Test
@@ -344,14 +344,14 @@ Verify.assertThrows(UnsupportedOperationException.class, () -> this.unmodifiable
         Function<Integer, Boolean> isOddFunction = object -> IntegerPredicates.isOdd().accept(object);
 
         MutableMap<Boolean, RichIterable<Integer>> expected =
-                UnifiedMap.<Boolean, RichIterable<Integer>>newWithKeysValues(
+                UnifiedMap.newWithKeysValues(
                         Boolean.TRUE, FastList.newListWith(1, 3, 5, 7),
                         Boolean.FALSE, FastList.newListWith(2, 4, 6));
 
         Multimap<Boolean, Integer> multimap = list.groupBy(isOddFunction);
         Assert.assertEquals(expected, multimap.toMap());
 
-        Multimap<Boolean, Integer> multimap2 = list.groupBy(isOddFunction, FastListMultimap.<Boolean, Integer>newMultimap());
+        Multimap<Boolean, Integer> multimap2 = list.groupBy(isOddFunction, FastListMultimap.newMultimap());
         Assert.assertEquals(expected, multimap2.toMap());
     }
 
@@ -372,8 +372,8 @@ Verify.assertThrows(UnsupportedOperationException.class, () -> this.unmodifiable
     public void toSortedSet_with_comparator()
     {
         this.unmodifiableCollection = this.newWith("2", "4", "4", "2", "1", "4", "1", "3");
-        MutableSortedSet<String> set = this.unmodifiableCollection.toSortedSet(Collections.<String>reverseOrder());
-        Verify.assertSortedSetsEqual(TreeSortedSet.newSetWith(Collections.<String>reverseOrder(), "1", "2", "3", "4"), set);
+        MutableSortedSet<String> set = this.unmodifiableCollection.toSortedSet(Collections.reverseOrder());
+        Verify.assertSortedSetsEqual(TreeSortedSet.newSetWith(Collections.reverseOrder(), "1", "2", "3", "4"), set);
     }
 
     @Test
@@ -387,7 +387,7 @@ Verify.assertThrows(UnsupportedOperationException.class, () -> this.unmodifiable
     @Test
     public void selectInstancesOf()
     {
-        MutableCollection<Number> numbers = UnmodifiableMutableCollection.of(FastList.<Number>newListWith(1, 2.0, 3, 4.0, 5));
+        MutableCollection<Number> numbers = UnmodifiableMutableCollection.of(FastList.newListWith(1, 2.0, 3, 4.0, 5));
         Assert.assertEquals(iList(1, 3, 5), numbers.selectInstancesOf(Integer.class));
         Assert.assertEquals(iList(1, 2.0, 3, 4.0, 5), numbers.selectInstancesOf(Number.class));
     }

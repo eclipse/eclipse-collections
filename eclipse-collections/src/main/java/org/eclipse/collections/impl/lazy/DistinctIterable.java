@@ -45,18 +45,15 @@ public class DistinctIterable<T>
         return this;
     }
 
-    public void each(final Procedure<? super T> procedure)
+    @Override
+    public void each(Procedure<? super T> procedure)
     {
-        final MutableSet<T> seenSoFar = UnifiedSet.newSet();
+        MutableSet<T> seenSoFar = UnifiedSet.newSet();
 
-        Iterate.forEach(this.adapted, new Procedure<T>()
-        {
-            public void value(T each)
+        Iterate.forEach(this.adapted, each -> {
+            if (seenSoFar.add(each))
             {
-                if (seenSoFar.add(each))
-                {
-                    procedure.value(each);
-                }
+                procedure.value(each);
             }
         });
     }
@@ -64,67 +61,44 @@ public class DistinctIterable<T>
     @Override
     public void forEachWithIndex(ObjectIntProcedure<? super T> objectIntProcedure)
     {
-        this.each(new AdaptObjectIntProcedureToProcedure<T>(objectIntProcedure));
+        this.each(new AdaptObjectIntProcedureToProcedure<>(objectIntProcedure));
     }
 
     @Override
-    public boolean anySatisfy(final Predicate<? super T> predicate)
+    public boolean anySatisfy(Predicate<? super T> predicate)
     {
-        final MutableSet<T> seenSoFar = UnifiedSet.newSet();
+        MutableSet<T> seenSoFar = UnifiedSet.newSet();
 
-        return Iterate.anySatisfy(this.adapted, new Predicate<T>()
-        {
-            public boolean accept(T each)
-            {
-                return seenSoFar.add(each) && predicate.accept(each);
-            }
-        });
+        return Iterate.anySatisfy(this.adapted, each -> seenSoFar.add(each) && predicate.accept(each));
     }
 
     @Override
-    public boolean allSatisfy(final Predicate<? super T> predicate)
+    public boolean allSatisfy(Predicate<? super T> predicate)
     {
-        final MutableSet<T> seenSoFar = UnifiedSet.newSet();
+        MutableSet<T> seenSoFar = UnifiedSet.newSet();
 
-        return Iterate.allSatisfy(this.adapted, new Predicate<T>()
-        {
-            public boolean accept(T each)
-            {
-                return !seenSoFar.add(each) || predicate.accept(each);
-            }
-        });
+        return Iterate.allSatisfy(this.adapted, each -> !seenSoFar.add(each) || predicate.accept(each));
     }
 
     @Override
-    public boolean noneSatisfy(final Predicate<? super T> predicate)
+    public boolean noneSatisfy(Predicate<? super T> predicate)
     {
-        final MutableSet<T> seenSoFar = UnifiedSet.newSet();
+        MutableSet<T> seenSoFar = UnifiedSet.newSet();
 
-        return Iterate.allSatisfy(this.adapted, new Predicate<T>()
-        {
-            public boolean accept(T each)
-            {
-                return !seenSoFar.add(each) || !predicate.accept(each);
-            }
-        });
+        return Iterate.allSatisfy(this.adapted, each -> !seenSoFar.add(each) || !predicate.accept(each));
     }
 
     @Override
-    public T detect(final Predicate<? super T> predicate)
+    public T detect(Predicate<? super T> predicate)
     {
-        final MutableSet<T> seenSoFar = UnifiedSet.newSet();
+        MutableSet<T> seenSoFar = UnifiedSet.newSet();
 
-        return Iterate.detect(this.adapted, new Predicate<T>()
-        {
-            public boolean accept(T each)
-            {
-                return seenSoFar.add(each) && predicate.accept(each);
-            }
-        });
+        return Iterate.detect(this.adapted, each -> seenSoFar.add(each) && predicate.accept(each));
     }
 
+    @Override
     public Iterator<T> iterator()
     {
-        return new DistinctIterator<T>(this.adapted);
+        return new DistinctIterator<>(this.adapted);
     }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -244,7 +244,7 @@ public final class MapIterate
      */
     public static <K, V> MutableList<V> select(Map<K, V> map, Predicate<? super V> predicate)
     {
-        return MapIterate.select(map, predicate, FastList.<V>newList());
+        return MapIterate.select(map, predicate, FastList.newList());
     }
 
     /**
@@ -255,7 +255,7 @@ public final class MapIterate
             Predicate<? super V> predicate,
             R targetCollection)
     {
-        Procedure<V> procedure = new SelectProcedure<V>(predicate, targetCollection);
+        Procedure<V> procedure = new SelectProcedure<>(predicate, targetCollection);
         MapIterate.forEachValue(map, procedure);
         return targetCollection;
     }
@@ -265,7 +265,7 @@ public final class MapIterate
      */
     public static <K, V> int count(Map<K, V> map, Predicate<? super V> predicate)
     {
-        CountProcedure<V> procedure = new CountProcedure<V>(predicate);
+        CountProcedure<V> procedure = new CountProcedure<>(predicate);
         MapIterate.forEachValue(map, procedure);
         return procedure.getCount();
     }
@@ -279,7 +279,7 @@ public final class MapIterate
             Map<K, V> map,
             Predicate2<? super K, ? super V> predicate)
     {
-        return MapIterate.selectMapOnEntry(map, predicate, UnifiedMap.<K, V>newMap());
+        return MapIterate.selectMapOnEntry(map, predicate, UnifiedMap.newMap());
     }
 
     /**
@@ -289,18 +289,14 @@ public final class MapIterate
      */
     public static <K, V, R extends Map<K, V>> R selectMapOnEntry(
             Map<K, V> map,
-            final Predicate2<? super K, ? super V> predicate,
+            Predicate2<? super K, ? super V> predicate,
             R target)
     {
-        final Procedure2<K, V> mapTransferProcedure = new MapPutProcedure<K, V>(target);
-        Procedure2<K, V> procedure = new Procedure2<K, V>()
-        {
-            public void value(K key, V value)
+        Procedure2<K, V> mapTransferProcedure = new MapPutProcedure<>(target);
+        Procedure2<K, V> procedure = (key, value) -> {
+            if (predicate.accept(key, value))
             {
-                if (predicate.accept(key, value))
-                {
-                    mapTransferProcedure.value(key, value);
-                }
+                mapTransferProcedure.value(key, value);
             }
         };
         MapIterate.forEachKeyValue(map, procedure);
@@ -313,18 +309,14 @@ public final class MapIterate
      * If the result of the evaluation is true, the map entry is moved to a result map.
      * The result map is returned containing all entries in the source map that evaluated to true.
      */
-    public static <K, V> MutableMap<K, V> selectMapOnKey(Map<K, V> map, final Predicate<? super K> predicate)
+    public static <K, V> MutableMap<K, V> selectMapOnKey(Map<K, V> map, Predicate<? super K> predicate)
     {
         MutableMap<K, V> resultMap = UnifiedMap.newMap();
-        final Procedure2<K, V> mapTransferProcedure = new MapPutProcedure<K, V>(resultMap);
-        Procedure2<K, V> procedure = new Procedure2<K, V>()
-        {
-            public void value(K key, V value)
+        Procedure2<K, V> mapTransferProcedure = new MapPutProcedure<>(resultMap);
+        Procedure2<K, V> procedure = (key, value) -> {
+            if (predicate.accept(key))
             {
-                if (predicate.accept(key))
-                {
-                    mapTransferProcedure.value(key, value);
-                }
+                mapTransferProcedure.value(key, value);
             }
         };
         MapIterate.forEachKeyValue(map, procedure);
@@ -336,18 +328,14 @@ public final class MapIterate
      * If the result of the evaluation is true, the map entry is moved to a result map.
      * The result map is returned containing all entries in the source map that evaluated to true.
      */
-    public static <K, V> MutableMap<K, V> selectMapOnValue(Map<K, V> map, final Predicate<? super V> predicate)
+    public static <K, V> MutableMap<K, V> selectMapOnValue(Map<K, V> map, Predicate<? super V> predicate)
     {
         MutableMap<K, V> resultMap = UnifiedMap.newMap();
-        final Procedure2<K, V> mapTransferProcedure = new MapPutProcedure<K, V>(resultMap);
-        Procedure2<K, V> procedure = new Procedure2<K, V>()
-        {
-            public void value(K key, V value)
+        Procedure2<K, V> mapTransferProcedure = new MapPutProcedure<>(resultMap);
+        Procedure2<K, V> procedure = (key, value) -> {
+            if (predicate.accept(value))
             {
-                if (predicate.accept(value))
-                {
-                    mapTransferProcedure.value(key, value);
-                }
+                mapTransferProcedure.value(key, value);
             }
         };
         MapIterate.forEachKeyValue(map, procedure);
@@ -359,7 +347,7 @@ public final class MapIterate
      */
     public static <K, V> MutableList<V> reject(Map<K, V> map, Predicate<? super V> predicate)
     {
-        return MapIterate.reject(map, predicate, FastList.<V>newList());
+        return MapIterate.reject(map, predicate, FastList.newList());
     }
 
     /**
@@ -370,7 +358,7 @@ public final class MapIterate
             Predicate<? super V> predicate,
             R targetCollection)
     {
-        Procedure<V> procedure = new RejectProcedure<V>(predicate, targetCollection);
+        Procedure<V> procedure = new RejectProcedure<>(predicate, targetCollection);
         MapIterate.forEachValue(map, procedure);
         return targetCollection;
     }
@@ -383,7 +371,7 @@ public final class MapIterate
             Map<K, V> map,
             Predicate2<? super K, ? super V> predicate)
     {
-        return MapIterate.rejectMapOnEntry(map, predicate, UnifiedMap.<K, V>newMap());
+        return MapIterate.rejectMapOnEntry(map, predicate, UnifiedMap.newMap());
     }
 
     /**
@@ -392,17 +380,13 @@ public final class MapIterate
      */
     public static <K, V, R extends Map<K, V>> R rejectMapOnEntry(
             Map<K, V> map,
-            final Predicate2<? super K, ? super V> predicate,
-            final R target)
+            Predicate2<? super K, ? super V> predicate,
+            R target)
     {
-        MapIterate.forEachKeyValue(map, new Procedure2<K, V>()
-        {
-            public void value(K argument1, V argument2)
+        MapIterate.forEachKeyValue(map, (argument1, argument2) -> {
+            if (!predicate.accept(argument1, argument2))
             {
-                if (!predicate.accept(argument1, argument2))
-                {
-                    target.put(argument1, argument2);
-                }
+                target.put(argument1, argument2);
             }
         });
 
@@ -434,7 +418,7 @@ public final class MapIterate
             Map<K, V> map,
             Function<? super V, ? extends A> function)
     {
-        return collect(map, function, FastList.<A>newList(map.size()));
+        return collect(map, function, FastList.newList(map.size()));
     }
 
     /**
@@ -455,7 +439,7 @@ public final class MapIterate
             BooleanFunction<? super V> booleanFunction,
             R target)
     {
-        MapIterate.forEachValue(map, new CollectBooleanProcedure<V>(booleanFunction, target));
+        MapIterate.forEachValue(map, new CollectBooleanProcedure<>(booleanFunction, target));
         return target;
     }
 
@@ -477,7 +461,7 @@ public final class MapIterate
             ByteFunction<? super V> byteFunction,
             R target)
     {
-        MapIterate.forEachValue(map, new CollectByteProcedure<V>(byteFunction, target));
+        MapIterate.forEachValue(map, new CollectByteProcedure<>(byteFunction, target));
         return target;
     }
 
@@ -499,7 +483,7 @@ public final class MapIterate
             CharFunction<? super V> charFunction,
             R target)
     {
-        MapIterate.forEachValue(map, new CollectCharProcedure<V>(charFunction, target));
+        MapIterate.forEachValue(map, new CollectCharProcedure<>(charFunction, target));
         return target;
     }
 
@@ -521,7 +505,7 @@ public final class MapIterate
             DoubleFunction<? super V> doubleFunction,
             R target)
     {
-        MapIterate.forEachValue(map, new CollectDoubleProcedure<V>(doubleFunction, target));
+        MapIterate.forEachValue(map, new CollectDoubleProcedure<>(doubleFunction, target));
         return target;
     }
 
@@ -543,7 +527,7 @@ public final class MapIterate
             FloatFunction<? super V> floatFunction,
             R target)
     {
-        MapIterate.forEachValue(map, new CollectFloatProcedure<V>(floatFunction, target));
+        MapIterate.forEachValue(map, new CollectFloatProcedure<>(floatFunction, target));
         return target;
     }
 
@@ -565,7 +549,7 @@ public final class MapIterate
             IntFunction<? super V> intFunction,
             R target)
     {
-        MapIterate.forEachValue(map, new CollectIntProcedure<V>(intFunction, target));
+        MapIterate.forEachValue(map, new CollectIntProcedure<>(intFunction, target));
         return target;
     }
 
@@ -587,7 +571,7 @@ public final class MapIterate
             LongFunction<? super V> longFunction,
             R target)
     {
-        MapIterate.forEachValue(map, new CollectLongProcedure<V>(longFunction, target));
+        MapIterate.forEachValue(map, new CollectLongProcedure<>(longFunction, target));
         return target;
     }
 
@@ -609,7 +593,7 @@ public final class MapIterate
             ShortFunction<? super V> shortFunction,
             R target)
     {
-        MapIterate.forEachValue(map, new CollectShortProcedure<V>(shortFunction, target));
+        MapIterate.forEachValue(map, new CollectShortProcedure<>(shortFunction, target));
         return target;
     }
 
@@ -621,7 +605,7 @@ public final class MapIterate
             Map<K, V> map,
             Function2<? super K, ? super V, Pair<K2, V2>> function)
     {
-        return MapIterate.collect(map, function, UnifiedMap.<K2, V2>newMap(map.size()));
+        return MapIterate.collect(map, function, UnifiedMap.newMap(map.size()));
     }
 
     /**
@@ -630,16 +614,12 @@ public final class MapIterate
      */
     public static <K1, V1, K2, V2, R extends Map<K2, V2>> R collect(
             Map<K1, V1> map,
-            final Function2<? super K1, ? super V1, Pair<K2, V2>> function,
-            final R target)
+            Function2<? super K1, ? super V1, Pair<K2, V2>> function,
+            R target)
     {
-        MapIterate.forEachKeyValue(map, new Procedure2<K1, V1>()
-        {
-            public void value(K1 key, V1 value)
-            {
-                Pair<K2, V2> pair = function.value(key, value);
-                target.put(pair.getOne(), pair.getTwo());
-            }
+        MapIterate.forEachKeyValue(map, (key, value) -> {
+            Pair<K2, V2> pair = function.value(key, value);
+            target.put(pair.getOne(), pair.getTwo());
         });
         return target;
     }
@@ -652,7 +632,7 @@ public final class MapIterate
             Map<K, V> map,
             Function2<? super K, ? super V, ? extends V2> function)
     {
-        return MapIterate.collectValues(map, function, UnifiedMap.<K, V2>newMap(map.size()));
+        return MapIterate.collectValues(map, function, UnifiedMap.newMap(map.size()));
     }
 
     /**
@@ -661,16 +641,10 @@ public final class MapIterate
      */
     public static <K, V, V2, R extends Map<K, V2>> R collectValues(
             Map<K, V> map,
-            final Function2<? super K, ? super V, ? extends V2> function,
-            final R target)
+            Function2<? super K, ? super V, ? extends V2> function,
+            R target)
     {
-        MapIterate.forEachKeyValue(map, new Procedure2<K, V>()
-        {
-            public void value(K key, V value)
-            {
-                target.put(key, function.value(key, value));
-            }
-        });
+        MapIterate.forEachKeyValue(map, (key, value) -> target.put(key, function.value(key, value)));
 
         return target;
     }
@@ -685,7 +659,7 @@ public final class MapIterate
             Function2<? super K1, ? super V1, Pair<K2, V2>> function,
             Predicate2<? super K1, ? super V1> predicate)
     {
-        return MapIterate.collectIf(map, function, predicate, UnifiedMap.<K2, V2>newMap());
+        return MapIterate.collectIf(map, function, predicate, UnifiedMap.newMap());
     }
 
     /**
@@ -695,21 +669,17 @@ public final class MapIterate
      */
     public static <K1, V1, K2, V2> MutableMap<K2, V2> collectIf(
             Map<K1, V1> map,
-            final Function2<? super K1, ? super V1, Pair<K2, V2>> function,
-            final Predicate2<? super K1, ? super V1> predicate,
+            Function2<? super K1, ? super V1, Pair<K2, V2>> function,
+            Predicate2<? super K1, ? super V1> predicate,
             Map<K2, V2> target)
     {
-        final MutableMap<K2, V2> result = MapAdapter.adapt(target);
+        MutableMap<K2, V2> result = MapAdapter.adapt(target);
 
-        MapIterate.forEachKeyValue(map, new Procedure2<K1, V1>()
-        {
-            public void value(K1 key, V1 value)
+        MapIterate.forEachKeyValue(map, (key, value) -> {
+            if (predicate.accept(key, value))
             {
-                if (predicate.accept(key, value))
-                {
-                    Pair<K2, V2> pair = function.value(key, value);
-                    result.put(pair.getOne(), pair.getTwo());
-                }
+                Pair<K2, V2> pair = function.value(key, value);
+                result.put(pair.getOne(), pair.getTwo());
             }
         });
 
@@ -724,7 +694,7 @@ public final class MapIterate
             Function<? super K1, ? extends K2> keyFunction,
             Function<? super V1, ? extends V2> valueFunction)
     {
-        return MapIterate.collect(map, keyFunction, valueFunction, UnifiedMap.<K2, V2>newMap());
+        return MapIterate.collect(map, keyFunction, valueFunction, UnifiedMap.newMap());
     }
 
     /**
@@ -732,17 +702,11 @@ public final class MapIterate
      */
     public static <K1, V1, K2, V2> MutableMap<K2, V2> collect(
             Map<K1, V1> map,
-            final Function<? super K1, ? extends K2> keyFunction,
-            final Function<? super V1, ? extends V2> valueFunction,
+            Function<? super K1, ? extends K2> keyFunction,
+            Function<? super V1, ? extends V2> valueFunction,
             Map<K2, V2> target)
     {
-        return MapIterate.collect(map, new Function2<K1, V1, Pair<K2, V2>>()
-        {
-            public Pair<K2, V2> value(K1 key, V1 value)
-            {
-                return Tuples.pair(keyFunction.valueOf(key), valueFunction.valueOf(value));
-            }
-        }, MapAdapter.adapt(target));
+        return MapIterate.collect(map, (key, value) -> Tuples.pair(keyFunction.valueOf(key), valueFunction.valueOf(value)), MapAdapter.adapt(target));
     }
 
     /**
@@ -753,7 +717,7 @@ public final class MapIterate
             Function<? super V, ? extends A> function,
             R targetCollection)
     {
-        Procedure<V> procedure = new CollectProcedure<V, A>(function, targetCollection);
+        Procedure<V> procedure = new CollectProcedure<>(function, targetCollection);
         MapIterate.forEachValue(map, procedure);
         return targetCollection;
     }
@@ -822,7 +786,7 @@ public final class MapIterate
             }
             else
             {
-                IterableIterate.forEach(map.entrySet(), new MapEntryToProcedure2<K, V>(procedure));
+                IterableIterate.forEach(map.entrySet(), new MapEntryToProcedure2<>(procedure));
             }
         }
     }
@@ -832,17 +796,13 @@ public final class MapIterate
      */
     public static <K, V> MutableMap<V, K> flipUniqueValues(MapIterable<K, V> mapIterable)
     {
-        final MutableMap<V, K> result = UnifiedMap.newMap();
+        MutableMap<V, K> result = UnifiedMap.newMap();
 
-        mapIterable.forEachKeyValue(new Procedure2<K, V>()
-        {
-            public void value(K key, V value)
+        mapIterable.forEachKeyValue((key, value) -> {
+            K oldKey = result.put(value, key);
+            if (oldKey != null)
             {
-                K oldKey = result.put(value, key);
-                if (oldKey != null)
-                {
-                    throw new IllegalStateException("Duplicate value: " + value + " found at key: " + oldKey + " and key: " + key);
-                }
+                throw new IllegalStateException("Duplicate value: " + value + " found at key: " + oldKey + " and key: " + key);
             }
         });
         return result;
@@ -850,7 +810,7 @@ public final class MapIterate
 
     public static <K, V> Pair<K, V> detect(
             Map<K, V> map,
-            final Predicate2<? super K, ? super V> predicate)
+            Predicate2<? super K, ? super V> predicate)
     {
         if (map == null)
         {
@@ -866,15 +826,9 @@ public final class MapIterate
             }
             else
             {
-                entries = LazyIterate.adapt(map.entrySet()).collect(AbstractImmutableEntry.<K, V>getPairFunction());
+                entries = LazyIterate.adapt(map.entrySet()).collect(AbstractImmutableEntry.getPairFunction());
             }
-            return entries.detect(new Predicate<Pair<K, V>>()
-            {
-                public boolean accept(Pair<K, V> each)
-                {
-                    return predicate.accept(each.getOne(), each.getTwo());
-                }
-            });
+            return entries.detect(each -> predicate.accept(each.getOne(), each.getTwo()));
         }
 
         for (Map.Entry<K, V> entry : map.entrySet())
@@ -923,19 +877,15 @@ public final class MapIterate
     public static <IV, K, V> IV injectIntoIf(
             IV initialValue,
             Map<K, V> map,
-            final Predicate<? super V> predicate,
-            final Function2<? super IV, ? super V, ? extends IV> function)
+            Predicate<? super V> predicate,
+            Function2<? super IV, ? super V, ? extends IV> function)
     {
-        Function2<IV, ? super V, IV> ifFunction = new Function2<IV, V, IV>()
-        {
-            public IV value(IV accumulator, V item)
+        Function2<IV, ? super V, IV> ifFunction = (accumulator, item) -> {
+            if (predicate.accept(item))
             {
-                if (predicate.accept(item))
-                {
-                    return function.value(accumulator, item);
-                }
-                return accumulator;
+                return function.value(accumulator, item);
             }
+            return accumulator;
         };
         return Iterate.injectInto(initialValue, map.values(), ifFunction);
     }
@@ -970,14 +920,8 @@ public final class MapIterate
      */
     public static <K, V> MutableList<Pair<K, V>> toListOfPairs(Map<K, V> map)
     {
-        final MutableList<Pair<K, V>> pairs = FastList.newList(map.size());
-        MapIterate.forEachKeyValue(map, new Procedure2<K, V>()
-        {
-            public void value(K key, V value)
-            {
-                pairs.add(Tuples.pair(key, value));
-            }
-        });
+        MutableList<Pair<K, V>> pairs = FastList.newList(map.size());
+        MapIterate.forEachKeyValue(map, (key, value) -> pairs.add(Tuples.pair(key, value)));
         return pairs;
     }
 
@@ -999,14 +943,8 @@ public final class MapIterate
      */
     public static <K, V> MutableMap<V, K> reverseMapping(Map<K, V> map)
     {
-        final MutableMap<V, K> reverseMap = UnifiedMap.newMap(map.size());
-        MapIterate.forEachKeyValue(map, new Procedure2<K, V>()
-        {
-            public void value(K sourceKey, V sourceValue)
-            {
-                reverseMap.put(sourceValue, sourceKey);
-            }
-        });
+        MutableMap<V, K> reverseMap = UnifiedMap.newMap(map.size());
+        MapIterate.forEachKeyValue(map, (sourceKey, sourceValue) -> reverseMap.put(sourceValue, sourceKey));
         return reverseMap;
     }
 
@@ -1031,27 +969,15 @@ public final class MapIterate
 
     public static <K, V> MutableSetMultimap<V, K> flip(MapIterable<K, V> iMap)
     {
-        final MutableSetMultimap<V, K> result = Multimaps.mutable.set.with();
-        iMap.forEachKeyValue(new Procedure2<K, V>()
-        {
-            public void value(K key, V val)
-            {
-                result.put(val, key);
-            }
-        });
+        MutableSetMultimap<V, K> result = Multimaps.mutable.set.with();
+        iMap.forEachKeyValue((key, val) -> result.put(val, key));
         return result;
     }
 
     public static <K, V> MutableSortedSetMultimap<V, K> flip(SortedMapIterable<K, V> iMap)
     {
-        final MutableSortedSetMultimap<V, K> result = new TreeSortedSetMultimap<V, K>(iMap.comparator());
-        iMap.forEachKeyValue(new Procedure2<K, V>()
-        {
-            public void value(K key, V val)
-            {
-                result.put(val, key);
-            }
-        });
+        MutableSortedSetMultimap<V, K> result = new TreeSortedSetMultimap<>(iMap.comparator());
+        iMap.forEachKeyValue((key, val) -> result.put(val, key));
         return result;
     }
 }

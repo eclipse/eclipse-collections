@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -24,6 +24,6 @@ public class ChainedProcedureSerializationTest
                         + "bmVkUHJvY2VkdXJlAAAAAAAAAAECAAFMAApwcm9jZWR1cmVzdAAQTGphdmEvdXRpbC9MaXN0O3hw\n"
                         + "c3IAMm9yZy5lY2xpcHNlLmNvbGxlY3Rpb25zLmltcGwubGlzdC5tdXRhYmxlLkZhc3RMaXN0AAAA\n"
                         + "AAAAAAEMAAB4cHcEAAAAAHg=",
-                new ChainedProcedure<Object>());
+                new ChainedProcedure<>());
     }
 }

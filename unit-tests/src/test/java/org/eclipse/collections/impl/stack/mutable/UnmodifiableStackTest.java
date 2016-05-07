@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -82,9 +82,9 @@ public class UnmodifiableStackTest extends StackIterableTestCase
 
         Verify.assertThrows(UnsupportedOperationException.class, () -> this.newStackFromTopToBottom(1, 2, 3).pop(3));
 
-        Verify.assertThrows(UnsupportedOperationException.class, () -> this.newStackFromTopToBottom(1, 2, 3).pop(3, FastList.<Integer>newList()));
+        Verify.assertThrows(UnsupportedOperationException.class, () -> this.newStackFromTopToBottom(1, 2, 3).pop(3, FastList.newList()));
 
-    Verify.assertThrows(UnsupportedOperationException.class, () -> this.newStackFromTopToBottom(1, 2, 3).pop(3, ArrayStack.<Integer>newStack()));
+        Verify.assertThrows(UnsupportedOperationException.class, () -> this.newStackFromTopToBottom(1, 2, 3).pop(3, ArrayStack.newStack()));
     }
 
     @Test
@@ -103,7 +103,7 @@ public class UnmodifiableStackTest extends StackIterableTestCase
     public void testSelect()
     {
         Assert.assertEquals(ArrayStack.newStackFromTopToBottom(2, 3), this.unmodifiableStack.select(Predicates.greaterThan(1)));
-        Verify.assertSize(3, this.unmodifiableStackString.select(ignored -> true, FastList.<String>newList()));
+        Verify.assertSize(3, this.unmodifiableStackString.select(ignored -> true, FastList.newList()));
     }
 
     @Test
@@ -114,7 +114,7 @@ public class UnmodifiableStackTest extends StackIterableTestCase
                 this.unmodifiableStackString.selectWith(
                         Object::equals,
                         "2",
-                        FastList.<String>newList()));
+                        FastList.newList()));
     }
 
     @Test
@@ -122,7 +122,7 @@ public class UnmodifiableStackTest extends StackIterableTestCase
     {
         Assert.assertEquals(ArrayStack.newStackFromTopToBottom("2", "3"), this.unmodifiableStackString.reject(StringPredicates.contains("1")));
         Assert.assertEquals(FastList.newListWith("2", "3"),
-                this.unmodifiableStackString.reject(StringPredicates.contains("1"), FastList.<String>newList()));
+                this.unmodifiableStackString.reject(StringPredicates.contains("1"), FastList.newList()));
     }
 
     @Test
@@ -133,7 +133,7 @@ public class UnmodifiableStackTest extends StackIterableTestCase
                 this.unmodifiableStackString.rejectWith(
                         Object::equals,
                         3,
-                        FastList.<String>newList()));
+                        FastList.newList()));
     }
 
     @Test

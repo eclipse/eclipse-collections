@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -31,11 +31,13 @@ public class CollectUnsortedBagBatch<T, V> extends AbstractBatch<V> implements U
         this.function = function;
     }
 
+    @Override
     public void forEach(Procedure<? super V> procedure)
     {
         this.unsortedBagBatch.forEach(Functions.bind(procedure, this.function));
     }
 
+    @Override
     public void forEachWithOccurrences(ObjectIntProcedure<? super V> procedure)
     {
         throw new UnsupportedOperationException("not implemented yet");
@@ -48,18 +50,21 @@ public class CollectUnsortedBagBatch<T, V> extends AbstractBatch<V> implements U
     }
     */
 
+    @Override
     public UnsortedBagBatch<V> select(Predicate<? super V> predicate)
     {
-        return new SelectUnsortedBagBatch<V>(this, predicate);
+        return new SelectUnsortedBagBatch<>(this, predicate);
     }
 
+    @Override
     public <VV> UnsortedBagBatch<VV> collect(Function<? super V, ? extends VV> function)
     {
-        return new CollectUnsortedBagBatch<V, VV>(this, function);
+        return new CollectUnsortedBagBatch<>(this, function);
     }
 
+    @Override
     public <V1> UnsortedBagBatch<V1> flatCollect(Function<? super V, ? extends Iterable<V1>> function)
     {
-        return new FlatCollectUnsortedBagBatch<V, V1>(this, function);
+        return new FlatCollectUnsortedBagBatch<>(this, function);
     }
 }

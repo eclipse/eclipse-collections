@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -28,31 +28,37 @@ abstract class AbstractMemoryEfficientMutableMap<K, V>
         extends AbstractMutableMap<K, V>
         implements FixedSizeMap<K, V>
 {
+    @Override
     public V put(K key, V value)
     {
         throw new UnsupportedOperationException("Cannot call put() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public V remove(Object key)
     {
         throw new UnsupportedOperationException("Cannot call remove() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public void putAll(Map<? extends K, ? extends V> map)
     {
         throw new UnsupportedOperationException("Cannot call putAll() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public void clear()
     {
         throw new UnsupportedOperationException("Cannot call clear() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public V removeKey(K key)
     {
         throw new UnsupportedOperationException("Cannot call removeKey() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public <E> MutableMap<K, V> collectKeysAndValues(
             Iterable<E> iterable,
             Function<? super E, ? extends K> keyFunction,
@@ -73,6 +79,7 @@ abstract class AbstractMemoryEfficientMutableMap<K, V>
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".updateValueWith() not implemented yet");
     }
 
+    @Override
     public MutableMap<K, V> newEmpty()
     {
         return UnifiedMap.newMap();

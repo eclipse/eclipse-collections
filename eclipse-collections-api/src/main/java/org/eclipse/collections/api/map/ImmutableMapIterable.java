@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -41,43 +41,63 @@ public interface ImmutableMapIterable<K, V> extends MapIterable<K, V>
     // TODO
     // ImmutableSetIterable<K> keySet();
 
+    @Override
     ImmutableMapIterable<K, V> tap(Procedure<? super V> procedure);
 
+    @Override
     ImmutableMapIterable<V, K> flipUniqueValues();
 
+    @Override
     ImmutableMultimap<V, K> flip();
 
+    @Override
     ImmutableMapIterable<K, V> select(Predicate2<? super K, ? super V> predicate);
 
+    @Override
     ImmutableMapIterable<K, V> reject(Predicate2<? super K, ? super V> predicate);
 
+    @Override
     <K2, V2> ImmutableMapIterable<K2, V2> collect(Function2<? super K, ? super V, Pair<K2, V2>> function);
 
+    @Override
     <R> ImmutableMapIterable<K, R> collectValues(Function2<? super K, ? super V, ? extends R> function);
 
+    @Override
     ImmutableCollection<V> select(Predicate<? super V> predicate);
 
+    @Override
     <P> ImmutableCollection<V> selectWith(Predicate2<? super V, ? super P> predicate, P parameter);
 
+    @Override
     ImmutableCollection<V> reject(Predicate<? super V> predicate);
 
+    @Override
     <P> ImmutableCollection<V> rejectWith(Predicate2<? super V, ? super P> predicate, P parameter);
 
+    @Override
     PartitionImmutableCollection<V> partition(Predicate<? super V> predicate);
 
+    @Override
     <S> ImmutableCollection<S> selectInstancesOf(Class<S> clazz);
 
+    @Override
     <V1> ImmutableMultimap<V1, V> groupBy(Function<? super V, ? extends V1> function);
 
+    @Override
     <V1> ImmutableMultimap<V1, V> groupByEach(Function<? super V, ? extends Iterable<V1>> function);
 
+    @Override
     <V1> ImmutableMapIterable<V1, V> groupByUniqueKey(Function<? super V, ? extends V1> function);
 
+    @Override
     <S> ImmutableCollection<Pair<V, S>> zip(Iterable<S> that);
 
+    @Override
     ImmutableCollection<Pair<V, Integer>> zipWithIndex();
 
+    @Override
     <KK, VV> ImmutableMapIterable<KK, VV> aggregateInPlaceBy(Function<? super V, ? extends KK> groupBy, Function0<? extends VV> zeroValueFactory, Procedure2<? super VV, ? super V> mutatingAggregator);
 
+    @Override
     <KK, VV> ImmutableMapIterable<KK, VV> aggregateBy(Function<? super V, ? extends KK> groupBy, Function0<? extends VV> zeroValueFactory, Function2<? super VV, ? super V, ? extends VV> nonMutatingAggregator);
 }

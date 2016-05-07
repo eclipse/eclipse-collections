@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -42,56 +42,81 @@ import org.eclipse.collections.api.tuple.Pair;
 public interface MutableSet<T>
         extends UnsortedSetIterable<T>, MutableSetIterable<T>, Cloneable
 {
+    @Override
     MutableSet<T> with(T element);
 
+    @Override
     MutableSet<T> without(T element);
 
+    @Override
     MutableSet<T> withAll(Iterable<? extends T> elements);
 
+    @Override
     MutableSet<T> withoutAll(Iterable<? extends T> elements);
 
+    @Override
     MutableSet<T> newEmpty();
 
     MutableSet<T> clone();
 
+    @Override
     MutableSet<T> tap(Procedure<? super T> procedure);
 
+    @Override
     MutableSet<T> select(Predicate<? super T> predicate);
 
+    @Override
     <P> MutableSet<T> selectWith(Predicate2<? super T, ? super P> predicate, P parameter);
 
+    @Override
     MutableSet<T> reject(Predicate<? super T> predicate);
 
+    @Override
     <P> MutableSet<T> rejectWith(Predicate2<? super T, ? super P> predicate, P parameter);
 
+    @Override
     PartitionMutableSet<T> partition(Predicate<? super T> predicate);
 
+    @Override
     <P> PartitionMutableSet<T> partitionWith(Predicate2<? super T, ? super P> predicate, P parameter);
 
+    @Override
     <S> MutableSet<S> selectInstancesOf(Class<S> clazz);
 
+    @Override
     <V> MutableSet<V> collect(Function<? super T, ? extends V> function);
 
+    @Override
     MutableBooleanSet collectBoolean(BooleanFunction<? super T> booleanFunction);
 
+    @Override
     MutableByteSet collectByte(ByteFunction<? super T> byteFunction);
 
+    @Override
     MutableCharSet collectChar(CharFunction<? super T> charFunction);
 
+    @Override
     MutableDoubleSet collectDouble(DoubleFunction<? super T> doubleFunction);
 
+    @Override
     MutableFloatSet collectFloat(FloatFunction<? super T> floatFunction);
 
+    @Override
     MutableIntSet collectInt(IntFunction<? super T> intFunction);
 
+    @Override
     MutableLongSet collectLong(LongFunction<? super T> longFunction);
 
+    @Override
     MutableShortSet collectShort(ShortFunction<? super T> shortFunction);
 
+    @Override
     <P, V> MutableSet<V> collectWith(Function2<? super T, ? super P, ? extends V> function, P parameter);
 
+    @Override
     <V> MutableSet<V> collectIf(Predicate<? super T> predicate, Function<? super T, ? extends V> function);
 
+    @Override
     <V> MutableSet<V> flatCollect(Function<? super T, ? extends Iterable<V>> function);
 
     /**
@@ -100,8 +125,10 @@ public interface MutableSet<T>
      *
      * @return an unmodifiable view of this set
      */
+    @Override
     MutableSet<T> asUnmodifiable();
 
+    @Override
     MutableSet<T> asSynchronized();
 
     /**
@@ -109,31 +136,41 @@ public interface MutableSet<T>
      * <p>
      * The returned set will be <tt>Serializable</tt> if this set is <tt>Serializable</tt>.
      */
+    @Override
     ImmutableSet<T> toImmutable();
 
+    @Override
     <V> MutableSetMultimap<V, T> groupBy(Function<? super T, ? extends V> function);
 
+    @Override
     <V> MutableSetMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function);
 
     /**
      * @deprecated in 6.0. Use {@link OrderedIterable#zip(Iterable)} instead.
      */
+    @Override
     @Deprecated
     <S> MutableSet<Pair<T, S>> zip(Iterable<S> that);
 
     /**
      * @deprecated in 6.0. Use {@link OrderedIterable#zipWithIndex()} instead.
      */
+    @Override
     @Deprecated
     MutableSet<Pair<T, Integer>> zipWithIndex();
 
+    @Override
     MutableSet<T> union(SetIterable<? extends T> set);
 
+    @Override
     MutableSet<T> intersect(SetIterable<? extends T> set);
 
+    @Override
     MutableSet<T> difference(SetIterable<? extends T> subtrahendSet);
 
+    @Override
     MutableSet<T> symmetricDifference(SetIterable<? extends T> setB);
 
+    @Override
     MutableSet<UnsortedSetIterable<T>> powerSet();
 }

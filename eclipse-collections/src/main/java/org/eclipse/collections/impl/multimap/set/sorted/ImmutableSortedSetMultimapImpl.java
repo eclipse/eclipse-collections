@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -81,19 +81,22 @@ public final class ImmutableSortedSetMultimapImpl<K, V>
         return SortedSets.immutable.with(this.comparator());
     }
 
+    @Override
     public ImmutableSortedSetMultimap<K, V> newEmpty()
     {
-        return new ImmutableSortedSetMultimapImpl<K, V>(Maps.immutable.<K, ImmutableSortedSet<V>>with(), this.comparator());
+        return new ImmutableSortedSetMultimapImpl<>(Maps.immutable.with(), this.comparator());
     }
 
+    @Override
     public Comparator<? super V> comparator()
     {
         return this.comparator;
     }
 
+    @Override
     public MutableSortedSetMultimap<K, V> toMutable()
     {
-        return new TreeSortedSetMultimap<K, V>(this);
+        return new TreeSortedSetMultimap<>(this);
     }
 
     @Override
@@ -104,7 +107,7 @@ public final class ImmutableSortedSetMultimapImpl<K, V>
 
     private Object writeReplace()
     {
-        return new ImmutableSortedSetMultimapSerializationProxy<K, V>(this.map, this.comparator());
+        return new ImmutableSortedSetMultimapSerializationProxy<>(this.map, this.comparator());
     }
 
     private static final class ImmutableSortedSetMultimapSerializationProxy<K, V>
@@ -142,7 +145,7 @@ public final class ImmutableSortedSetMultimapImpl<K, V>
         @Override
         protected AbstractMutableMultimap<K, V, MutableSortedSet<V>> createEmptyMutableMultimap()
         {
-            return new TreeSortedSetMultimap<K, V>(this.comparator);
+            return new TreeSortedSetMultimap<>(this.comparator);
         }
     }
 
@@ -170,36 +173,43 @@ public final class ImmutableSortedSetMultimapImpl<K, V>
         return (ImmutableSortedSetMultimap<K, V>) super.newWithoutAll(key);
     }
 
+    @Override
     public ImmutableSetMultimap<V, K> flip()
     {
         return Iterate.flip(this).toImmutable();
     }
 
+    @Override
     public ImmutableSortedSetMultimap<K, V> selectKeysValues(Predicate2<? super K, ? super V> predicate)
     {
-        return this.selectKeysValues(predicate, TreeSortedSetMultimap.<K, V>newMultimap(this.comparator())).toImmutable();
+        return this.selectKeysValues(predicate, TreeSortedSetMultimap.newMultimap(this.comparator())).toImmutable();
     }
 
+    @Override
     public ImmutableSortedSetMultimap<K, V> rejectKeysValues(Predicate2<? super K, ? super V> predicate)
     {
-        return this.rejectKeysValues(predicate, TreeSortedSetMultimap.<K, V>newMultimap(this.comparator())).toImmutable();
+        return this.rejectKeysValues(predicate, TreeSortedSetMultimap.newMultimap(this.comparator())).toImmutable();
     }
 
+    @Override
     public ImmutableSortedSetMultimap<K, V> selectKeysMultiValues(Predicate2<? super K, ? super Iterable<V>> predicate)
     {
-        return this.selectKeysMultiValues(predicate, TreeSortedSetMultimap.<K, V>newMultimap(this.comparator())).toImmutable();
+        return this.selectKeysMultiValues(predicate, TreeSortedSetMultimap.newMultimap(this.comparator())).toImmutable();
     }
 
+    @Override
     public ImmutableSortedSetMultimap<K, V> rejectKeysMultiValues(Predicate2<? super K, ? super Iterable<V>> predicate)
     {
-        return this.rejectKeysMultiValues(predicate, TreeSortedSetMultimap.<K, V>newMultimap(this.comparator())).toImmutable();
+        return this.rejectKeysMultiValues(predicate, TreeSortedSetMultimap.newMultimap(this.comparator())).toImmutable();
     }
 
+    @Override
     public <K2, V2> ImmutableBagMultimap<K2, V2> collectKeysValues(Function2<? super K, ? super V, Pair<K2, V2>> function)
     {
-        return this.collectKeysValues(function, HashBagMultimap.<K2, V2>newMultimap()).toImmutable();
+        return this.collectKeysValues(function, HashBagMultimap.newMultimap()).toImmutable();
     }
 
+    @Override
     public <V2> ImmutableListMultimap<K, V2> collectValues(Function<? super V, ? extends V2> function)
     {
         return this.collectValues(function, FastListMultimap.<K, V2>newMultimap()).toImmutable();

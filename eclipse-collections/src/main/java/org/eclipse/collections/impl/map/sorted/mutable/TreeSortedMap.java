@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -45,66 +45,66 @@ public class TreeSortedMap<K, V>
 
     public TreeSortedMap()
     {
-        this.treeMap = new TreeMap<K, V>();
+        this.treeMap = new TreeMap<>();
     }
 
     public TreeSortedMap(Comparator<? super K> comparator)
     {
-        this.treeMap = new TreeMap<K, V>(comparator);
+        this.treeMap = new TreeMap<>(comparator);
     }
 
     public TreeSortedMap(Map<? extends K, ? extends V> map)
     {
-        this.treeMap = new TreeMap<K, V>(map);
+        this.treeMap = new TreeMap<>(map);
     }
 
     public TreeSortedMap(Comparator<? super K> comparator, Map<? extends K, ? extends V> map)
     {
-        this.treeMap = new TreeMap<K, V>(comparator);
+        this.treeMap = new TreeMap<>(comparator);
         this.treeMap.putAll(map);
     }
 
     public TreeSortedMap(SortedMap<K, ? extends V> map)
     {
-        this.treeMap = new TreeMap<K, V>(map);
+        this.treeMap = new TreeMap<>(map);
     }
 
     public TreeSortedMap(Pair<K, V>... pairs)
     {
-        this.treeMap = new TreeMap<K, V>();
+        this.treeMap = new TreeMap<>();
         ArrayIterate.forEach(pairs, new MapCollectProcedure<Pair<K, V>, K, V>(
                 this.treeMap,
-                Functions.<K>firstOfPair(),
-                Functions.<V>secondOfPair()));
+                Functions.firstOfPair(),
+                Functions.secondOfPair()));
     }
 
     public static <K, V> TreeSortedMap<K, V> newMap()
     {
-        return new TreeSortedMap<K, V>();
+        return new TreeSortedMap<>();
     }
 
     public static <K, V> TreeSortedMap<K, V> newMap(Comparator<? super K> comparator)
     {
-        return new TreeSortedMap<K, V>(comparator);
+        return new TreeSortedMap<>(comparator);
     }
 
     public static <K, V> TreeSortedMap<K, V> newMap(Map<? extends K, ? extends V> map)
     {
         if (map instanceof SortedMap<?, ?>)
         {
-            return new TreeSortedMap<K, V>((SortedMap<K, V>) map);
+            return new TreeSortedMap<>((SortedMap<K, V>) map);
         }
-        return new TreeSortedMap<K, V>(map);
+        return new TreeSortedMap<>(map);
     }
 
     public static <K, V> TreeSortedMap<K, V> newMap(Comparator<? super K> comparator, Map<? extends K, ? extends V> map)
     {
-        return new TreeSortedMap<K, V>(comparator, map);
+        return new TreeSortedMap<>(comparator, map);
     }
 
     public static <K, V> TreeSortedMap<K, V> newMapWith(Pair<K, V>... pairs)
     {
-        return new TreeSortedMap<K, V>(pairs);
+        return new TreeSortedMap<>(pairs);
     }
 
     public static <K, V> TreeSortedMap<K, V> newMapWith(Comparator<? super K> comparator, Pair<K, V>... pairs)
@@ -193,20 +193,23 @@ public class TreeSortedMap<K, V>
     @Override
     public TreeSortedMap<K, V> with(Pair<K, V>... pairs)
     {
-        ArrayIterate.forEach(pairs, new MapCollectProcedure<Pair<K, V>, K, V>(this, Functions.<K>firstOfPair(), Functions.<V>secondOfPair()));
+        ArrayIterate.forEach(pairs, new MapCollectProcedure<Pair<K, V>, K, V>(this, Functions.firstOfPair(), Functions.secondOfPair()));
         return this;
     }
 
+    @Override
     public int size()
     {
         return this.treeMap.size();
     }
 
+    @Override
     public MutableSortedMap<K, V> newEmpty()
     {
-        return new TreeSortedMap<K, V>(this.comparator());
+        return new TreeSortedMap<>(this.comparator());
     }
 
+    @Override
     public V removeKey(K key)
     {
         return this.treeMap.remove(key);
@@ -215,7 +218,7 @@ public class TreeSortedMap<K, V>
     @Override
     public TreeSortedMap<K, V> clone()
     {
-        return new TreeSortedMap<K, V>(this);
+        return new TreeSortedMap<>(this);
     }
 
     @Override
@@ -230,96 +233,115 @@ public class TreeSortedMap<K, V>
         return this.treeMap.hashCode();
     }
 
+    @Override
     public void forEachKeyValue(Procedure2<? super K, ? super V> procedure2)
     {
         MapIterate.forEachKeyValue(this.treeMap, procedure2);
     }
 
+    @Override
     public K firstKey()
     {
         return this.treeMap.firstKey();
     }
 
+    @Override
     public K lastKey()
     {
         return this.treeMap.lastKey();
     }
 
+    @Override
     public MutableSet<Entry<K, V>> entrySet()
     {
         return SetAdapter.adapt(this.treeMap.entrySet());
     }
 
+    @Override
     public MutableSet<K> keySet()
     {
         return SetAdapter.adapt(this.treeMap.keySet());
     }
 
+    @Override
     public MutableCollection<V> values()
     {
         return CollectionAdapter.adapt(this.treeMap.values());
     }
 
+    @Override
     public Comparator<? super K> comparator()
     {
         return this.treeMap.comparator();
     }
 
+    @Override
     public V get(Object key)
     {
         return this.treeMap.get(key);
     }
 
+    @Override
     public V put(K key, V value)
     {
         return this.treeMap.put(key, value);
     }
 
+    @Override
     public V remove(Object key)
     {
         return this.treeMap.remove(key);
     }
 
+    @Override
     public void putAll(Map<? extends K, ? extends V> map)
     {
         this.treeMap.putAll(map);
     }
 
+    @Override
     public void clear()
     {
         this.treeMap.clear();
     }
 
+    @Override
     public boolean containsKey(Object key)
     {
         return this.treeMap.containsKey(key);
     }
 
+    @Override
     public MutableSortedMap<K, V> headMap(K toKey)
     {
         return SortedMapAdapter.adapt(this.treeMap.headMap(toKey));
     }
 
+    @Override
     public MutableSortedMap<K, V> tailMap(K fromKey)
     {
         return SortedMapAdapter.adapt(this.treeMap.tailMap(fromKey));
     }
 
+    @Override
     public MutableSortedMap<K, V> subMap(K fromKey, K toKey)
     {
         return SortedMapAdapter.adapt(this.treeMap.subMap(fromKey, toKey));
     }
 
+    @Override
     public boolean containsValue(Object value)
     {
         return this.treeMap.containsValue(value);
     }
 
+    @Override
     public MutableSortedMap<K, V> toReversed()
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".toReversed() not implemented yet");
     }
 
+    @Override
     public MutableSortedMap<K, V> take(int count)
     {
         if (count < 0)
@@ -338,11 +360,13 @@ public class TreeSortedMap<K, V>
         return output;
     }
 
+    @Override
     public MutableSortedMap<K, V> takeWhile(Predicate<? super V> predicate)
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".takeWhile() not implemented yet");
     }
 
+    @Override
     public MutableSortedMap<K, V> drop(int count)
     {
         if (count < 0)
@@ -374,16 +398,19 @@ public class TreeSortedMap<K, V>
         return output;
     }
 
+    @Override
     public MutableSortedMap<K, V> dropWhile(Predicate<? super V> predicate)
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".dropWhile() not implemented yet");
     }
 
+    @Override
     public PartitionMutableList<V> partitionWhile(Predicate<? super V> predicate)
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".partitionWhile() not implemented yet");
     }
 
+    @Override
     public MutableList<V> distinct()
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".distinct() not implemented yet");
@@ -395,6 +422,7 @@ public class TreeSortedMap<K, V>
         return this.treeMap.toString();
     }
 
+    @Override
     public void writeExternal(ObjectOutput out) throws IOException
     {
         out.writeObject(this.comparator());
@@ -406,9 +434,10 @@ public class TreeSortedMap<K, V>
         }
     }
 
+    @Override
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
     {
-        this.treeMap = new TreeMap<K, V>((Comparator<? super K>) in.readObject());
+        this.treeMap = new TreeMap<>((Comparator<? super K>) in.readObject());
         int size = in.readInt();
         for (int i = 0; i < size; ++i)
         {

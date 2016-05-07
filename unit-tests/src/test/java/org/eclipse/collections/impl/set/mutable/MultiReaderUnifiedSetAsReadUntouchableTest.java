@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -47,12 +47,12 @@ public class MultiReaderUnifiedSetAsReadUntouchableTest extends UnmodifiableMuta
     public void unionInto()
     {
         MutableSet<String> set = MultiReaderUnifiedSet.newSetWith("1", "2", "3", "4").asReadUntouchable();
-        MutableSet<String> union = set.unionInto(UnifiedSet.newSetWith("a", "b", "c", "1"), UnifiedSet.<String>newSet());
+        MutableSet<String> union = set.unionInto(UnifiedSet.newSetWith("a", "b", "c", "1"), UnifiedSet.newSet());
         Verify.assertSize(set.size() + 3, union);
         Assert.assertTrue(union.containsAllIterable(Interval.oneTo(set.size()).collect(String::valueOf)));
         Verify.assertContainsAll(union, "a", "b", "c");
 
-        Assert.assertEquals(set, set.unionInto(UnifiedSet.newSetWith("1"), UnifiedSet.<String>newSet()));
+        Assert.assertEquals(set, set.unionInto(UnifiedSet.newSetWith("1"), UnifiedSet.newSet()));
     }
 
     @Test
@@ -70,11 +70,11 @@ public class MultiReaderUnifiedSetAsReadUntouchableTest extends UnmodifiableMuta
     public void intersectInto()
     {
         MutableSet<String> set = MultiReaderUnifiedSet.newSetWith("1", "2", "3", "4").asReadUntouchable();
-        MutableSet<String> intersect = set.intersectInto(UnifiedSet.newSetWith("a", "b", "c", "1"), UnifiedSet.<String>newSet());
+        MutableSet<String> intersect = set.intersectInto(UnifiedSet.newSetWith("a", "b", "c", "1"), UnifiedSet.newSet());
         Verify.assertSize(1, intersect);
         Assert.assertEquals(UnifiedSet.newSetWith("1"), intersect);
 
-        Verify.assertEmpty(set.intersectInto(UnifiedSet.newSetWith("not present"), UnifiedSet.<String>newSet()));
+        Verify.assertEmpty(set.intersectInto(UnifiedSet.newSetWith("not present"), UnifiedSet.newSet()));
     }
 
     @Test
@@ -90,9 +90,9 @@ public class MultiReaderUnifiedSetAsReadUntouchableTest extends UnmodifiableMuta
     public void differenceInto()
     {
         MutableSet<String> set = MultiReaderUnifiedSet.newSetWith("1", "2", "3", "4").asReadUntouchable();
-        MutableSet<String> difference = set.differenceInto(UnifiedSet.newSetWith("2", "3", "4", "not present"), UnifiedSet.<String>newSet());
+        MutableSet<String> difference = set.differenceInto(UnifiedSet.newSetWith("2", "3", "4", "not present"), UnifiedSet.newSet());
         Assert.assertEquals(UnifiedSet.newSetWith("1"), difference);
-        Assert.assertEquals(set, set.differenceInto(UnifiedSet.newSetWith("not present"), UnifiedSet.<String>newSet()));
+        Assert.assertEquals(set, set.differenceInto(UnifiedSet.newSetWith("not present"), UnifiedSet.newSet()));
     }
 
     @Test
@@ -116,7 +116,7 @@ public class MultiReaderUnifiedSetAsReadUntouchableTest extends UnmodifiableMuta
         MutableSet<String> set = MultiReaderUnifiedSet.newSetWith("1", "2", "3", "4").asReadUntouchable();
         MutableSet<String> difference = set.symmetricDifferenceInto(
                 UnifiedSet.newSetWith("2", "3", "4", "5", "not present"),
-                UnifiedSet.<String>newSet());
+                UnifiedSet.newSet());
         Verify.assertContains("1", difference);
         Assert.assertTrue(difference.containsAllIterable(Interval.fromTo(set.size() + 1, 5).collect(String::valueOf)));
         for (int i = 2; i <= set.size(); i++)
@@ -126,7 +126,7 @@ public class MultiReaderUnifiedSetAsReadUntouchableTest extends UnmodifiableMuta
 
         Verify.assertSize(
                 set.size() + 1,
-                set.symmetricDifferenceInto(UnifiedSet.newSetWith("not present"), UnifiedSet.<String>newSet()));
+                set.symmetricDifferenceInto(UnifiedSet.newSetWith("not present"), UnifiedSet.newSet()));
     }
 
     @Test

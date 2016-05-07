@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -18,13 +18,13 @@ public class CollectIterableSerializationTest
     @Test
     public void intSerialization()
     {
-        LazyIterableTestHelper<Integer> integerLazyIterableTestHelper = new LazyIterableTestHelper<Integer>(
+        LazyIterableTestHelper<Integer> integerLazyIterableTestHelper = new LazyIterableTestHelper<>(
                 "rO0ABXNyAFVvcmcuZWNsaXBzZS5jb2xsZWN0aW9ucy5pbXBsLmxhenkucHJpbWl0aXZlLkNvbGxl\n"
                         + "Y3RJbnRJdGVyYWJsZSRJbnRGdW5jdGlvblRvUHJvY2VkdXJlAAAAAAAAAAECAAFMAAhmdW5jdGlv\n"
                         + "bnQAQkxvcmcvZWNsaXBzZS9jb2xsZWN0aW9ucy9hcGkvYmxvY2svZnVuY3Rpb24vcHJpbWl0aXZl\n"
                         + "L0ludEZ1bmN0aW9uO3hwc3IAT29yZy5lY2xpcHNlLmNvbGxlY3Rpb25zLmltcGwuYmxvY2suZmFj\n"
                         + "dG9yeS5QcmltaXRpdmVGdW5jdGlvbnMkVW5ib3hJbnRlZ2VyVG9JbnQAAAAAAAAAAQIAAHhw");
-        CollectIntIterable<Integer> collectIntIterable = new CollectIntIterable<Integer>(
+        CollectIntIterable<Integer> collectIntIterable = new CollectIntIterable<>(
                 integerLazyIterableTestHelper,
                 PrimitiveFunctions.unboxIntegerToInt());
 
@@ -34,14 +34,14 @@ public class CollectIterableSerializationTest
     @Test
     public void doubleSerialization()
     {
-        LazyIterableTestHelper<Integer> integerLazyIterableTestHelper = new LazyIterableTestHelper<Integer>(
+        LazyIterableTestHelper<Integer> integerLazyIterableTestHelper = new LazyIterableTestHelper<>(
                 "rO0ABXNyAFtvcmcuZWNsaXBzZS5jb2xsZWN0aW9ucy5pbXBsLmxhenkucHJpbWl0aXZlLkNvbGxl\n"
                         + "Y3REb3VibGVJdGVyYWJsZSREb3VibGVGdW5jdGlvblRvUHJvY2VkdXJlAAAAAAAAAAECAAFMAAhm\n"
                         + "dW5jdGlvbnQARUxvcmcvZWNsaXBzZS9jb2xsZWN0aW9ucy9hcGkvYmxvY2svZnVuY3Rpb24vcHJp\n"
                         + "bWl0aXZlL0RvdWJsZUZ1bmN0aW9uO3hwc3IAUm9yZy5lY2xpcHNlLmNvbGxlY3Rpb25zLmltcGwu\n"
                         + "YmxvY2suZmFjdG9yeS5QcmltaXRpdmVGdW5jdGlvbnMkVW5ib3hJbnRlZ2VyVG9Eb3VibGUAAAAA\n"
                         + "AAAAAQIAAHhw");
-        CollectDoubleIterable<Integer> collectDoubleIterable = new CollectDoubleIterable<Integer>(
+        CollectDoubleIterable<Integer> collectDoubleIterable = new CollectDoubleIterable<>(
                 integerLazyIterableTestHelper,
                 PrimitiveFunctions.unboxIntegerToDouble());
 
@@ -51,7 +51,7 @@ public class CollectIterableSerializationTest
     @Test
     public void floatSerialization()
     {
-        LazyIterableTestHelper<Integer> integerLazyIterableTestHelper = new LazyIterableTestHelper<Integer>(
+        LazyIterableTestHelper<Integer> integerLazyIterableTestHelper = new LazyIterableTestHelper<>(
                 "rO0ABXNyAFlvcmcuZWNsaXBzZS5jb2xsZWN0aW9ucy5pbXBsLmxhenkucHJpbWl0aXZlLkNvbGxl\n"
                         + "Y3RGbG9hdEl0ZXJhYmxlJEZsb2F0RnVuY3Rpb25Ub1Byb2NlZHVyZQAAAAAAAAABAgABTAAIZnVu\n"
                         + "Y3Rpb250AERMb3JnL2VjbGlwc2UvY29sbGVjdGlvbnMvYXBpL2Jsb2NrL2Z1bmN0aW9uL3ByaW1p\n"
@@ -59,7 +59,7 @@ public class CollectIterableSerializationTest
                         + "Y2suZmFjdG9yeS5QcmltaXRpdmVGdW5jdGlvbnMkVW5ib3hJbnRlZ2VyVG9GbG9hdAAAAAAAAAAB\n"
                         + "AgAAeHA=");
 
-        CollectFloatIterable<Integer> collectFloatIterable = new CollectFloatIterable<Integer>(
+        CollectFloatIterable<Integer> collectFloatIterable = new CollectFloatIterable<>(
                 integerLazyIterableTestHelper,
                 PrimitiveFunctions.unboxIntegerToFloat());
 
@@ -69,7 +69,7 @@ public class CollectIterableSerializationTest
     @Test
     public void longSerialization()
     {
-        LazyIterableTestHelper<Integer> integerLazyIterableTestHelper = new LazyIterableTestHelper<Integer>(
+        LazyIterableTestHelper<Integer> integerLazyIterableTestHelper = new LazyIterableTestHelper<>(
                 "rO0ABXNyAFdvcmcuZWNsaXBzZS5jb2xsZWN0aW9ucy5pbXBsLmxhenkucHJpbWl0aXZlLkNvbGxl\n"
                         + "Y3RMb25nSXRlcmFibGUkTG9uZ0Z1bmN0aW9uVG9Qcm9jZWR1cmUAAAAAAAAAAQIAAUwACGZ1bmN0\n"
                         + "aW9udABDTG9yZy9lY2xpcHNlL2NvbGxlY3Rpb25zL2FwaS9ibG9jay9mdW5jdGlvbi9wcmltaXRp\n"
@@ -77,7 +77,7 @@ public class CollectIterableSerializationTest
                         + "ZmFjdG9yeS5QcmltaXRpdmVGdW5jdGlvbnMkVW5ib3hJbnRlZ2VyVG9Mb25nAAAAAAAAAAECAAB4\n"
                         + "cA==");
 
-        CollectLongIterable<Integer> collectLongIterable = new CollectLongIterable<Integer>(
+        CollectLongIterable<Integer> collectLongIterable = new CollectLongIterable<>(
                 integerLazyIterableTestHelper,
                 PrimitiveFunctions.unboxIntegerToLong());
 
@@ -87,7 +87,7 @@ public class CollectIterableSerializationTest
     @Test
     public void shortSerialization()
     {
-        LazyIterableTestHelper<Integer> integerLazyIterableTestHelper = new LazyIterableTestHelper<Integer>(
+        LazyIterableTestHelper<Integer> integerLazyIterableTestHelper = new LazyIterableTestHelper<>(
                 "rO0ABXNyAFlvcmcuZWNsaXBzZS5jb2xsZWN0aW9ucy5pbXBsLmxhenkucHJpbWl0aXZlLkNvbGxl\n"
                         + "Y3RTaG9ydEl0ZXJhYmxlJFNob3J0RnVuY3Rpb25Ub1Byb2NlZHVyZQAAAAAAAAABAgABTAAIZnVu\n"
                         + "Y3Rpb250AERMb3JnL2VjbGlwc2UvY29sbGVjdGlvbnMvYXBpL2Jsb2NrL2Z1bmN0aW9uL3ByaW1p\n"
@@ -95,7 +95,7 @@ public class CollectIterableSerializationTest
                         + "Y2suZmFjdG9yeS5QcmltaXRpdmVGdW5jdGlvbnMkVW5ib3hJbnRlZ2VyVG9TaG9ydAAAAAAAAAAB\n"
                         + "AgAAeHA=");
 
-        CollectShortIterable<Integer> collectShortIterable = new CollectShortIterable<Integer>(
+        CollectShortIterable<Integer> collectShortIterable = new CollectShortIterable<>(
                 integerLazyIterableTestHelper,
                 PrimitiveFunctions.unboxIntegerToShort());
 
@@ -105,7 +105,7 @@ public class CollectIterableSerializationTest
     @Test
     public void byteSerialization()
     {
-        LazyIterableTestHelper<Integer> integerLazyIterableTestHelper = new LazyIterableTestHelper<Integer>(
+        LazyIterableTestHelper<Integer> integerLazyIterableTestHelper = new LazyIterableTestHelper<>(
                 "rO0ABXNyAFdvcmcuZWNsaXBzZS5jb2xsZWN0aW9ucy5pbXBsLmxhenkucHJpbWl0aXZlLkNvbGxl\n"
                         + "Y3RCeXRlSXRlcmFibGUkQnl0ZUZ1bmN0aW9uVG9Qcm9jZWR1cmUAAAAAAAAAAQIAAUwACGZ1bmN0\n"
                         + "aW9udABDTG9yZy9lY2xpcHNlL2NvbGxlY3Rpb25zL2FwaS9ibG9jay9mdW5jdGlvbi9wcmltaXRp\n"
@@ -113,7 +113,7 @@ public class CollectIterableSerializationTest
                         + "ZmFjdG9yeS5QcmltaXRpdmVGdW5jdGlvbnMkVW5ib3hJbnRlZ2VyVG9CeXRlAAAAAAAAAAECAAB4\n"
                         + "cA==");
 
-        CollectByteIterable<Integer> collectByteIterable = new CollectByteIterable<Integer>(
+        CollectByteIterable<Integer> collectByteIterable = new CollectByteIterable<>(
                 integerLazyIterableTestHelper,
                 PrimitiveFunctions.unboxIntegerToByte());
 
@@ -123,7 +123,7 @@ public class CollectIterableSerializationTest
     @Test
     public void charSerialization()
     {
-        LazyIterableTestHelper<Integer> integerLazyIterableTestHelper = new LazyIterableTestHelper<Integer>(
+        LazyIterableTestHelper<Integer> integerLazyIterableTestHelper = new LazyIterableTestHelper<>(
                 "rO0ABXNyAFdvcmcuZWNsaXBzZS5jb2xsZWN0aW9ucy5pbXBsLmxhenkucHJpbWl0aXZlLkNvbGxl\n"
                         + "Y3RDaGFySXRlcmFibGUkQ2hhckZ1bmN0aW9uVG9Qcm9jZWR1cmUAAAAAAAAAAQIAAUwACGZ1bmN0\n"
                         + "aW9udABDTG9yZy9lY2xpcHNlL2NvbGxlY3Rpb25zL2FwaS9ibG9jay9mdW5jdGlvbi9wcmltaXRp\n"
@@ -131,7 +131,7 @@ public class CollectIterableSerializationTest
                         + "ZmFjdG9yeS5QcmltaXRpdmVGdW5jdGlvbnMkVW5ib3hJbnRlZ2VyVG9DaGFyAAAAAAAAAAECAAB4\n"
                         + "cA==");
 
-        CollectCharIterable<Integer> collectCharIterable = new CollectCharIterable<Integer>(
+        CollectCharIterable<Integer> collectCharIterable = new CollectCharIterable<>(
                 integerLazyIterableTestHelper,
                 PrimitiveFunctions.unboxIntegerToChar());
 
@@ -141,7 +141,7 @@ public class CollectIterableSerializationTest
     @Test
     public void booleanSerialization()
     {
-        LazyIterableTestHelper<Integer> integerLazyIterableTestHelper = new LazyIterableTestHelper<Integer>(
+        LazyIterableTestHelper<Integer> integerLazyIterableTestHelper = new LazyIterableTestHelper<>(
                 "rO0ABXNyAF1vcmcuZWNsaXBzZS5jb2xsZWN0aW9ucy5pbXBsLmxhenkucHJpbWl0aXZlLkNvbGxl\n"
                         + "Y3RCb29sZWFuSXRlcmFibGUkQm9vbGVhbkZ1bmN0aW9uVG9Qcm9jZWR1cmUAAAAAAAAAAQIAAUwA\n"
                         + "CGZ1bmN0aW9udABGTG9yZy9lY2xpcHNlL2NvbGxlY3Rpb25zL2FwaS9ibG9jay9mdW5jdGlvbi9w\n"
@@ -149,7 +149,7 @@ public class CollectIterableSerializationTest
                         + "cGwuYmxvY2suZmFjdG9yeS5QcmltaXRpdmVGdW5jdGlvbnMkSW50ZWdlcklzUG9zaXRpdmUAAAAA\n"
                         + "AAAAAQIAAHhw");
 
-        CollectBooleanIterable<Integer> collectBooleanIterable = new CollectBooleanIterable<Integer>(
+        CollectBooleanIterable<Integer> collectBooleanIterable = new CollectBooleanIterable<>(
                 integerLazyIterableTestHelper,
                 PrimitiveFunctions.integerIsPositive());
 

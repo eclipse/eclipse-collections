@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -25,6 +25,6 @@ public class ImmutableEmptySetWithHashingStrategySerializationTest
                         + "bGUuSW1tdXRhYmxlU2V0V2l0aEhhc2hpbmdTdHJhdGVneVNlcmlhbGl6YXRpb25Qcm94eQAAAAAA\n"
                         + "AAABDAAAeHBzcgBMb3JnLmVjbGlwc2UuY29sbGVjdGlvbnMuaW1wbC5ibG9jay5mYWN0b3J5Lkhh\n"
                         + "c2hpbmdTdHJhdGVnaWVzJERlZmF1bHRTdHJhdGVneQAAAAAAAAABAgAAeHB3BAAAAAB4",
-                new ImmutableEmptySetWithHashingStrategy<Object>(HashingStrategies.defaultStrategy()));
+                new ImmutableEmptySetWithHashingStrategy<>(HashingStrategies.defaultStrategy()));
     }
 }

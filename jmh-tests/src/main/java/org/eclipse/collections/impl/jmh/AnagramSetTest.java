@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -97,7 +97,7 @@ public class AnagramSetTest extends AbstractJMHTestRunner
         MutableSetMultimap<Alphagram, String> groupBy = this.ecWords.groupBy(Alphagram::new);
         groupBy.multiValuesView()
                 .select(iterable -> iterable.size() >= SIZE_THRESHOLD)
-                .toSortedList(Comparators.<RichIterable<String>>byIntFunction(RichIterable::size))
+                .toSortedList(Comparators.byIntFunction(RichIterable::size))
                 .asReversed()
                 .collect(iterable -> iterable.size() + ": " + iterable)
                 .forEach(Procedures.cast(e -> Assert.assertFalse(e.isEmpty())));
@@ -109,7 +109,7 @@ public class AnagramSetTest extends AbstractJMHTestRunner
         MutableMultimap<Alphagram, String> groupBy = ParallelIterate.groupBy(this.ecWords, Alphagram::new);
         CompositeFastList<RichIterable<String>> select = ParallelIterate.select(groupBy.multiValuesView(), iterable -> iterable.size() >= SIZE_THRESHOLD, new CompositeFastList<>(), false);
         Collection<String> collect = ParallelIterate.collect(select
-                .toSortedList(Comparators.<RichIterable<String>>byIntFunction(RichIterable::size))
+                .toSortedList(Comparators.byIntFunction(RichIterable::size))
                 .asReversed(), iterable -> iterable.size() + ": " + iterable);
         ParallelIterate.forEach(collect, Procedures.cast(e -> Assert.assertFalse(e.isEmpty())));
     }
@@ -134,7 +134,7 @@ public class AnagramSetTest extends AbstractJMHTestRunner
         MutableMultimap<Alphagram, String> groupBy = FJIterate.groupBy(this.ecWords, Alphagram::new);
         CompositeFastList<RichIterable<String>> select = FJIterate.select(groupBy.multiValuesView(), iterable -> iterable.size() >= SIZE_THRESHOLD, new CompositeFastList<>(), false);
         Collection<String> collect = FJIterate.collect(select
-                .toSortedList(Comparators.<RichIterable<String>>byIntFunction(RichIterable::size))
+                .toSortedList(Comparators.byIntFunction(RichIterable::size))
                 .asReversed(), iterable -> iterable.size() + ": " + iterable);
         FJIterate.forEach(collect, Procedures.cast(e -> Assert.assertFalse(e.isEmpty())));
     }
@@ -142,7 +142,7 @@ public class AnagramSetTest extends AbstractJMHTestRunner
     @Benchmark
     public void serial_lazy_jdk()
     {
-        Map<Alphagram, Set<String>> groupBy = this.jdkWords.stream().collect(Collectors.groupingBy(Alphagram::new, Collectors.<String>toSet()));
+        Map<Alphagram, Set<String>> groupBy = this.jdkWords.stream().collect(Collectors.groupingBy(Alphagram::new, Collectors.toSet()));
         groupBy.entrySet()
                 .stream()
                 .map(Map.Entry::getValue)
@@ -155,7 +155,7 @@ public class AnagramSetTest extends AbstractJMHTestRunner
     @Benchmark
     public void serial_lazy_streams_ec()
     {
-        Map<Alphagram, Set<String>> groupBy = this.ecWords.stream().collect(Collectors.groupingBy(Alphagram::new, Collectors.<String>toSet()));
+        Map<Alphagram, Set<String>> groupBy = this.ecWords.stream().collect(Collectors.groupingBy(Alphagram::new, Collectors.toSet()));
         groupBy.entrySet()
                 .stream()
                 .map(Map.Entry::getValue)
@@ -168,7 +168,7 @@ public class AnagramSetTest extends AbstractJMHTestRunner
     @Benchmark
     public void parallel_lazy_jdk()
     {
-        Map<Alphagram, Set<String>> groupBy = this.jdkWords.parallelStream().collect(Collectors.groupingBy(Alphagram::new, Collectors.<String>toSet()));
+        Map<Alphagram, Set<String>> groupBy = this.jdkWords.parallelStream().collect(Collectors.groupingBy(Alphagram::new, Collectors.toSet()));
         groupBy.entrySet()
                 .parallelStream()
                 .map(Map.Entry::getValue)
@@ -182,7 +182,7 @@ public class AnagramSetTest extends AbstractJMHTestRunner
     @Benchmark
     public void parallel_lazy_streams_ec()
     {
-        Map<Alphagram, Set<String>> groupBy = this.ecWords.parallelStream().collect(Collectors.groupingBy(Alphagram::new, Collectors.<String>toSet()));
+        Map<Alphagram, Set<String>> groupBy = this.ecWords.parallelStream().collect(Collectors.groupingBy(Alphagram::new, Collectors.toSet()));
         groupBy.entrySet()
                 .parallelStream()
                 .map(Map.Entry::getValue)

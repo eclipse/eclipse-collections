@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -182,7 +182,7 @@ public abstract class AbstractArrayAdapter<T>
     @Override
     public MutableList<T> select(Predicate<? super T> predicate)
     {
-        return this.select(predicate, FastList.<T>newList());
+        return this.select(predicate, FastList.newList());
     }
 
     @Override
@@ -194,7 +194,7 @@ public abstract class AbstractArrayAdapter<T>
     @Override
     public MutableList<T> reject(Predicate<? super T> predicate)
     {
-        return this.reject(predicate, FastList.<T>newList());
+        return this.reject(predicate, FastList.newList());
     }
 
     @Override
@@ -206,7 +206,7 @@ public abstract class AbstractArrayAdapter<T>
     @Override
     public <V> MutableList<V> collect(Function<? super T, ? extends V> function)
     {
-        return this.collect(function, FastList.<V>newList(this.size()));
+        return this.collect(function, FastList.newList(this.size()));
     }
 
     @Override
@@ -220,7 +220,7 @@ public abstract class AbstractArrayAdapter<T>
             Predicate<? super T> predicate,
             Function<? super T, ? extends V> function)
     {
-        return this.collectIf(predicate, function, FastList.<V>newList());
+        return this.collectIf(predicate, function, FastList.newList());
     }
 
     @Override
@@ -233,7 +233,7 @@ public abstract class AbstractArrayAdapter<T>
     @Override
     public <V> MutableList<V> flatCollect(Function<? super T, ? extends Iterable<V>> function)
     {
-        return InternalArrayIterate.flatCollect(this.items, this.items.length, function, FastList.<V>newList(this.items.length));
+        return InternalArrayIterate.flatCollect(this.items, this.items.length, function, FastList.newList(this.items.length));
     }
 
     @Override
@@ -250,6 +250,7 @@ public abstract class AbstractArrayAdapter<T>
         return InternalArrayIterate.selectAndRejectWith(this.items, this.items.length, predicate, parameter);
     }
 
+    @Override
     public int size()
     {
         return this.items.length;
@@ -343,16 +344,19 @@ public abstract class AbstractArrayAdapter<T>
         throw new UnsupportedOperationException("Cannot call retainAllIterable() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public void clear()
     {
         throw new UnsupportedOperationException("Cannot call clear() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public boolean addAll(int index, Collection<? extends T> collection)
     {
         throw new UnsupportedOperationException("Cannot call addAll() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public T get(int index)
     {
         if (index >= this.size())
@@ -363,11 +367,13 @@ public abstract class AbstractArrayAdapter<T>
         return this.items[index];
     }
 
+    @Override
     public void add(int index, T element)
     {
         throw new UnsupportedOperationException("Cannot call add() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public T remove(int index)
     {
         throw new UnsupportedOperationException("Cannot call remove() on " + this.getClass().getSimpleName());
@@ -438,7 +444,7 @@ public abstract class AbstractArrayAdapter<T>
     @Override
     public <P> MutableList<T> selectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
-        return this.selectWith(predicate, parameter, FastList.<T>newList());
+        return this.selectWith(predicate, parameter, FastList.newList());
     }
 
     @Override
@@ -453,7 +459,7 @@ public abstract class AbstractArrayAdapter<T>
     @Override
     public <P> MutableList<T> rejectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
-        return this.rejectWith(predicate, parameter, FastList.<T>newList());
+        return this.rejectWith(predicate, parameter, FastList.newList());
     }
 
     @Override
@@ -468,7 +474,7 @@ public abstract class AbstractArrayAdapter<T>
     @Override
     public <P, A> MutableList<A> collectWith(Function2<? super T, ? super P, ? extends A> function, P parameter)
     {
-        return this.collectWith(function, parameter, FastList.<A>newList());
+        return this.collectWith(function, parameter, FastList.newList());
     }
 
     @Override

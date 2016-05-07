@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -70,6 +70,7 @@ public interface MapIterable<K, V> extends RichIterable<V>
      * @see #forEach(Procedure)
      * @since 6.0
      */
+    @Override
     MapIterable<K, V> tap(Procedure<? super V> procedure);
 
     /**
@@ -252,11 +253,13 @@ public interface MapIterable<K, V> extends RichIterable<V>
     /**
      * Follows the same general contract as {@link Map#equals(Object)}.
      */
+    @Override
     boolean equals(Object o);
 
     /**
      * Follows the same general contract as {@link Map#hashCode()}.
      */
+    @Override
     int hashCode();
 
     /**
@@ -268,6 +271,7 @@ public interface MapIterable<K, V> extends RichIterable<V>
      *
      * @return a string representation of this MapIterable
      */
+    @Override
     String toString();
 
     ImmutableMapIterable<K, V> toImmutable();

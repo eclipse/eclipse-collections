@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -120,22 +120,22 @@ public final class MultiReaderFastList<T>
 
     public static <T> MultiReaderFastList<T> newList()
     {
-        return new MultiReaderFastList<T>(FastList.<T>newList());
+        return new MultiReaderFastList<>(FastList.newList());
     }
 
     public static <T> MultiReaderFastList<T> newList(int capacity)
     {
-        return new MultiReaderFastList<T>(FastList.<T>newList(capacity));
+        return new MultiReaderFastList<>(FastList.newList(capacity));
     }
 
     public static <T> MultiReaderFastList<T> newList(Iterable<T> iterable)
     {
-        return new MultiReaderFastList<T>(FastList.newList(iterable));
+        return new MultiReaderFastList<>(FastList.newList(iterable));
     }
 
     public static <T> MultiReaderFastList<T> newListWith(T... elements)
     {
-        return new MultiReaderFastList<T>(FastList.newListWith(elements));
+        return new MultiReaderFastList<>(FastList.newListWith(elements));
     }
 
     @Override
@@ -152,12 +152,12 @@ public final class MultiReaderFastList<T>
 
     UntouchableMutableList<T> asReadUntouchable()
     {
-        return new UntouchableMutableList<T>(this.delegate.asUnmodifiable());
+        return new UntouchableMutableList<>(this.delegate.asUnmodifiable());
     }
 
     UntouchableMutableList<T> asWriteUntouchable()
     {
-        return new UntouchableMutableList<T>(this.delegate);
+        return new UntouchableMutableList<>(this.delegate);
     }
 
     public void withReadLockAndDelegate(Procedure<MutableList<T>> procedure)
@@ -190,6 +190,7 @@ public final class MultiReaderFastList<T>
         }
     }
 
+    @Override
     public MutableList<T> asSynchronized()
     {
         this.acquireReadLock();
@@ -203,6 +204,7 @@ public final class MultiReaderFastList<T>
         }
     }
 
+    @Override
     public MutableList<T> asUnmodifiable()
     {
         this.acquireReadLock();
@@ -216,6 +218,7 @@ public final class MultiReaderFastList<T>
         }
     }
 
+    @Override
     public ImmutableList<T> toImmutable()
     {
         this.acquireReadLock();
@@ -235,7 +238,7 @@ public final class MultiReaderFastList<T>
         this.acquireReadLock();
         try
         {
-            return new MultiReaderFastList<T>(this.delegate.clone());
+            return new MultiReaderFastList<>(this.delegate.clone());
         }
         finally
         {
@@ -243,6 +246,7 @@ public final class MultiReaderFastList<T>
         }
     }
 
+    @Override
     public <V> MutableList<V> collect(Function<? super T, ? extends V> function)
     {
         this.acquireReadLock();
@@ -256,6 +260,7 @@ public final class MultiReaderFastList<T>
         }
     }
 
+    @Override
     public MutableBooleanList collectBoolean(BooleanFunction<? super T> booleanFunction)
     {
         this.acquireReadLock();
@@ -269,6 +274,7 @@ public final class MultiReaderFastList<T>
         }
     }
 
+    @Override
     public MutableByteList collectByte(ByteFunction<? super T> byteFunction)
     {
         this.acquireReadLock();
@@ -282,6 +288,7 @@ public final class MultiReaderFastList<T>
         }
     }
 
+    @Override
     public MutableCharList collectChar(CharFunction<? super T> charFunction)
     {
         this.acquireReadLock();
@@ -295,6 +302,7 @@ public final class MultiReaderFastList<T>
         }
     }
 
+    @Override
     public MutableDoubleList collectDouble(DoubleFunction<? super T> doubleFunction)
     {
         this.acquireReadLock();
@@ -308,6 +316,7 @@ public final class MultiReaderFastList<T>
         }
     }
 
+    @Override
     public MutableFloatList collectFloat(FloatFunction<? super T> floatFunction)
     {
         this.acquireReadLock();
@@ -321,6 +330,7 @@ public final class MultiReaderFastList<T>
         }
     }
 
+    @Override
     public MutableIntList collectInt(IntFunction<? super T> intFunction)
     {
         this.acquireReadLock();
@@ -334,6 +344,7 @@ public final class MultiReaderFastList<T>
         }
     }
 
+    @Override
     public MutableLongList collectLong(LongFunction<? super T> longFunction)
     {
         this.acquireReadLock();
@@ -347,6 +358,7 @@ public final class MultiReaderFastList<T>
         }
     }
 
+    @Override
     public MutableShortList collectShort(ShortFunction<? super T> shortFunction)
     {
         this.acquireReadLock();
@@ -360,6 +372,7 @@ public final class MultiReaderFastList<T>
         }
     }
 
+    @Override
     public <V> MutableList<V> flatCollect(
             Function<? super T, ? extends Iterable<V>> function)
     {
@@ -374,6 +387,7 @@ public final class MultiReaderFastList<T>
         }
     }
 
+    @Override
     public <V> MutableList<V> collectIf(
             Predicate<? super T> predicate,
             Function<? super T, ? extends V> function)
@@ -389,6 +403,7 @@ public final class MultiReaderFastList<T>
         }
     }
 
+    @Override
     public <P, V> MutableList<V> collectWith(
             Function2<? super T, ? super P, ? extends V> function,
             P parameter)
@@ -404,11 +419,13 @@ public final class MultiReaderFastList<T>
         }
     }
 
+    @Override
     public MutableList<T> newEmpty()
     {
         return MultiReaderFastList.newList();
     }
 
+    @Override
     public MutableList<T> reject(Predicate<? super T> predicate)
     {
         this.acquireReadLock();
@@ -422,6 +439,7 @@ public final class MultiReaderFastList<T>
         }
     }
 
+    @Override
     public <P> MutableList<T> rejectWith(
             Predicate2<? super T, ? super P> predicate,
             P parameter)
@@ -437,6 +455,7 @@ public final class MultiReaderFastList<T>
         }
     }
 
+    @Override
     public MutableList<T> tap(Procedure<? super T> procedure)
     {
         this.acquireReadLock();
@@ -451,6 +470,7 @@ public final class MultiReaderFastList<T>
         }
     }
 
+    @Override
     public MutableList<T> select(Predicate<? super T> predicate)
     {
         this.acquireReadLock();
@@ -464,6 +484,7 @@ public final class MultiReaderFastList<T>
         }
     }
 
+    @Override
     public <P> MutableList<T> selectWith(
             Predicate2<? super T, ? super P> predicate,
             P parameter)
@@ -479,6 +500,7 @@ public final class MultiReaderFastList<T>
         }
     }
 
+    @Override
     public PartitionMutableList<T> partition(Predicate<? super T> predicate)
     {
         this.acquireReadLock();
@@ -492,6 +514,7 @@ public final class MultiReaderFastList<T>
         }
     }
 
+    @Override
     public <P> PartitionMutableList<T> partitionWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         this.acquireReadLock();
@@ -505,6 +528,7 @@ public final class MultiReaderFastList<T>
         }
     }
 
+    @Override
     public <S> MutableList<S> selectInstancesOf(Class<S> clazz)
     {
         this.acquireReadLock();
@@ -518,6 +542,7 @@ public final class MultiReaderFastList<T>
         }
     }
 
+    @Override
     public MutableList<T> distinct()
     {
         this.acquireReadLock();
@@ -531,6 +556,7 @@ public final class MultiReaderFastList<T>
         }
     }
 
+    @Override
     public MutableList<T> distinct(HashingStrategy<? super T> hashingStrategy)
     {
         this.acquireReadLock();
@@ -544,6 +570,7 @@ public final class MultiReaderFastList<T>
         }
     }
 
+    @Override
     public MutableList<T> sortThis()
     {
         this.acquireWriteLock();
@@ -558,6 +585,7 @@ public final class MultiReaderFastList<T>
         }
     }
 
+    @Override
     public MutableList<T> sortThis(Comparator<? super T> comparator)
     {
         this.acquireWriteLock();
@@ -572,6 +600,7 @@ public final class MultiReaderFastList<T>
         }
     }
 
+    @Override
     public <V extends Comparable<? super V>> MutableList<T> sortThisBy(
             Function<? super T, ? extends V> function)
     {
@@ -587,6 +616,7 @@ public final class MultiReaderFastList<T>
         }
     }
 
+    @Override
     public MutableList<T> sortThisByInt(IntFunction<? super T> function)
     {
         this.acquireWriteLock();
@@ -601,6 +631,7 @@ public final class MultiReaderFastList<T>
         }
     }
 
+    @Override
     public MutableList<T> sortThisByBoolean(BooleanFunction<? super T> function)
     {
         this.acquireWriteLock();
@@ -615,6 +646,7 @@ public final class MultiReaderFastList<T>
         }
     }
 
+    @Override
     public MutableList<T> sortThisByChar(CharFunction<? super T> function)
     {
         this.acquireWriteLock();
@@ -629,6 +661,7 @@ public final class MultiReaderFastList<T>
         }
     }
 
+    @Override
     public MutableList<T> sortThisByByte(ByteFunction<? super T> function)
     {
         this.acquireWriteLock();
@@ -643,6 +676,7 @@ public final class MultiReaderFastList<T>
         }
     }
 
+    @Override
     public MutableList<T> sortThisByShort(ShortFunction<? super T> function)
     {
         this.acquireWriteLock();
@@ -657,6 +691,7 @@ public final class MultiReaderFastList<T>
         }
     }
 
+    @Override
     public MutableList<T> sortThisByFloat(FloatFunction<? super T> function)
     {
         this.acquireWriteLock();
@@ -671,6 +706,7 @@ public final class MultiReaderFastList<T>
         }
     }
 
+    @Override
     public MutableList<T> sortThisByLong(LongFunction<? super T> function)
     {
         this.acquireWriteLock();
@@ -685,6 +721,7 @@ public final class MultiReaderFastList<T>
         }
     }
 
+    @Override
     public MutableList<T> sortThisByDouble(DoubleFunction<? super T> function)
     {
         this.acquireWriteLock();
@@ -699,12 +736,13 @@ public final class MultiReaderFastList<T>
         }
     }
 
+    @Override
     public MutableList<T> subList(int fromIndex, int toIndex)
     {
         this.acquireReadLock();
         try
         {
-            return new MultiReaderFastList<T>(this.delegate.subList(fromIndex, toIndex), this.lock);
+            return new MultiReaderFastList<>(this.delegate.subList(fromIndex, toIndex), this.lock);
         }
         finally
         {
@@ -740,6 +778,7 @@ public final class MultiReaderFastList<T>
         }
     }
 
+    @Override
     public T get(int index)
     {
         this.acquireReadLock();
@@ -753,6 +792,7 @@ public final class MultiReaderFastList<T>
         }
     }
 
+    @Override
     public int indexOf(Object o)
     {
         this.acquireReadLock();
@@ -766,6 +806,7 @@ public final class MultiReaderFastList<T>
         }
     }
 
+    @Override
     public int lastIndexOf(Object o)
     {
         this.acquireReadLock();
@@ -779,24 +820,28 @@ public final class MultiReaderFastList<T>
         }
     }
 
+    @Override
     public MutableList<T> with(T element)
     {
         this.add(element);
         return this;
     }
 
+    @Override
     public MutableList<T> without(T element)
     {
         this.remove(element);
         return this;
     }
 
+    @Override
     public MutableList<T> withAll(Iterable<? extends T> elements)
     {
         this.addAllIterable(elements);
         return this;
     }
 
+    @Override
     public MutableList<T> withoutAll(Iterable<? extends T> elements)
     {
         this.removeAllIterable(elements);
@@ -818,6 +863,7 @@ public final class MultiReaderFastList<T>
      * });
      * </pre>
      */
+    @Override
     public ListIterator<T> listIterator()
     {
         throw new UnsupportedOperationException(
@@ -840,6 +886,7 @@ public final class MultiReaderFastList<T>
      * });
      * </pre>
      */
+    @Override
     public ListIterator<T> listIterator(int index)
     {
         throw new UnsupportedOperationException(
@@ -847,6 +894,7 @@ public final class MultiReaderFastList<T>
                         + "If you would like to use a ListIterator, you must either use withReadLockAndDelegate() or withWriteLockAndDelegate().");
     }
 
+    @Override
     public T remove(int index)
     {
         this.acquireWriteLock();
@@ -860,6 +908,7 @@ public final class MultiReaderFastList<T>
         }
     }
 
+    @Override
     public T set(int index, T element)
     {
         this.acquireWriteLock();
@@ -873,6 +922,7 @@ public final class MultiReaderFastList<T>
         }
     }
 
+    @Override
     public boolean addAll(int index, Collection<? extends T> collection)
     {
         this.acquireWriteLock();
@@ -886,6 +936,7 @@ public final class MultiReaderFastList<T>
         }
     }
 
+    @Override
     public void add(int index, T element)
     {
         this.acquireWriteLock();
@@ -899,6 +950,7 @@ public final class MultiReaderFastList<T>
         }
     }
 
+    @Override
     public <S> boolean corresponds(OrderedIterable<S> other, Predicate2<? super T, ? super S> predicate)
     {
         this.acquireReadLock();
@@ -912,6 +964,7 @@ public final class MultiReaderFastList<T>
         }
     }
 
+    @Override
     public void forEach(int startIndex, int endIndex, Procedure<? super T> procedure)
     {
         this.acquireReadLock();
@@ -925,6 +978,7 @@ public final class MultiReaderFastList<T>
         }
     }
 
+    @Override
     public int binarySearch(T key, Comparator<? super T> comparator)
     {
         this.acquireReadLock();
@@ -938,6 +992,7 @@ public final class MultiReaderFastList<T>
         }
     }
 
+    @Override
     public int binarySearch(T key)
     {
         this.acquireReadLock();
@@ -951,33 +1006,25 @@ public final class MultiReaderFastList<T>
         }
     }
 
-    public void reverseForEach(final Procedure<? super T> procedure)
+    @Override
+    public void reverseForEach(Procedure<? super T> procedure)
     {
-        this.withReadLockRun(new Runnable()
-        {
-            public void run()
-            {
-                MultiReaderFastList.this.getDelegate().reverseForEach(procedure);
-            }
-        });
+        this.withReadLockRun(() -> this.getDelegate().reverseForEach(procedure));
     }
 
-    public void forEachWithIndex(final int fromIndex, final int toIndex, final ObjectIntProcedure<? super T> objectIntProcedure)
+    @Override
+    public void forEachWithIndex(int fromIndex, int toIndex, ObjectIntProcedure<? super T> objectIntProcedure)
     {
-        this.withReadLockRun(new Runnable()
-        {
-            public void run()
-            {
-                MultiReaderFastList.this.getDelegate().forEachWithIndex(fromIndex, toIndex, objectIntProcedure);
-            }
-        });
+        this.withReadLockRun(() -> this.getDelegate().forEachWithIndex(fromIndex, toIndex, objectIntProcedure));
     }
 
+    @Override
     public void writeExternal(ObjectOutput out) throws IOException
     {
         out.writeObject(this.delegate);
     }
 
+    @Override
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
     {
         this.delegate = (MutableList<T>) in.readObject();
@@ -998,45 +1045,53 @@ public final class MultiReaderFastList<T>
             this.delegate = delegate;
         }
 
+        @Override
         public MutableList<T> with(T element)
         {
             this.add(element);
             return this;
         }
 
+        @Override
         public MutableList<T> without(T element)
         {
             this.remove(element);
             return this;
         }
 
+        @Override
         public MutableList<T> withAll(Iterable<? extends T> elements)
         {
             this.addAllIterable(elements);
             return this;
         }
 
+        @Override
         public MutableList<T> withoutAll(Iterable<? extends T> elements)
         {
             this.removeAllIterable(elements);
             return this;
         }
 
+        @Override
         public MutableList<T> asSynchronized()
         {
             throw new UnsupportedOperationException("Cannot call asSynchronized() on " + this.getClass().getSimpleName());
         }
 
+        @Override
         public MutableList<T> asUnmodifiable()
         {
             throw new UnsupportedOperationException("Cannot call asUnmodifiable() on " + this.getClass().getSimpleName());
         }
 
+        @Override
         public LazyIterable<T> asLazy()
         {
             return LazyIterate.adapt(this);
         }
 
+        @Override
         public ImmutableList<T> toImmutable()
         {
             return this.getDelegate().toImmutable();
@@ -1048,96 +1103,115 @@ public final class MultiReaderFastList<T>
             return this.getDelegate().clone();
         }
 
+        @Override
         public <V> MutableList<V> collect(Function<? super T, ? extends V> function)
         {
             return this.getDelegate().collect(function);
         }
 
+        @Override
         public MutableBooleanList collectBoolean(BooleanFunction<? super T> booleanFunction)
         {
             return this.getDelegate().collectBoolean(booleanFunction);
         }
 
+        @Override
         public <R extends MutableBooleanCollection> R collectBoolean(BooleanFunction<? super T> booleanFunction, R target)
         {
             return this.getDelegate().collectBoolean(booleanFunction, target);
         }
 
+        @Override
         public MutableByteList collectByte(ByteFunction<? super T> byteFunction)
         {
             return this.getDelegate().collectByte(byteFunction);
         }
 
+        @Override
         public <R extends MutableByteCollection> R collectByte(ByteFunction<? super T> byteFunction, R target)
         {
             return this.getDelegate().collectByte(byteFunction, target);
         }
 
+        @Override
         public MutableCharList collectChar(CharFunction<? super T> charFunction)
         {
             return this.getDelegate().collectChar(charFunction);
         }
 
+        @Override
         public <R extends MutableCharCollection> R collectChar(CharFunction<? super T> charFunction, R target)
         {
             return this.getDelegate().collectChar(charFunction, target);
         }
 
+        @Override
         public MutableDoubleList collectDouble(DoubleFunction<? super T> doubleFunction)
         {
             return this.getDelegate().collectDouble(doubleFunction);
         }
 
+        @Override
         public <R extends MutableDoubleCollection> R collectDouble(DoubleFunction<? super T> doubleFunction, R target)
         {
             return this.getDelegate().collectDouble(doubleFunction, target);
         }
 
+        @Override
         public MutableFloatList collectFloat(FloatFunction<? super T> floatFunction)
         {
             return this.getDelegate().collectFloat(floatFunction);
         }
 
+        @Override
         public <R extends MutableFloatCollection> R collectFloat(FloatFunction<? super T> floatFunction, R target)
         {
             return this.getDelegate().collectFloat(floatFunction, target);
         }
 
+        @Override
         public MutableIntList collectInt(IntFunction<? super T> intFunction)
         {
             return this.getDelegate().collectInt(intFunction);
         }
 
+        @Override
         public <R extends MutableIntCollection> R collectInt(IntFunction<? super T> intFunction, R target)
         {
             return this.getDelegate().collectInt(intFunction, target);
         }
 
+        @Override
         public MutableLongList collectLong(LongFunction<? super T> longFunction)
         {
             return this.getDelegate().collectLong(longFunction);
         }
 
+        @Override
         public <R extends MutableLongCollection> R collectLong(LongFunction<? super T> longFunction, R target)
         {
             return this.getDelegate().collectLong(longFunction, target);
         }
 
+        @Override
         public MutableShortList collectShort(ShortFunction<? super T> shortFunction)
         {
             return this.getDelegate().collectShort(shortFunction);
         }
 
+        @Override
         public <R extends MutableShortCollection> R collectShort(ShortFunction<? super T> shortFunction, R target)
         {
             return this.getDelegate().collectShort(shortFunction, target);
         }
 
+        @Override
         public <V> MutableList<V> flatCollect(Function<? super T, ? extends Iterable<V>> function)
         {
             return this.getDelegate().flatCollect(function);
         }
 
+        @Override
         public <V> MutableList<V> collectIf(
                 Predicate<? super T> predicate,
                 Function<? super T, ? extends V> function)
@@ -1145,6 +1219,7 @@ public final class MultiReaderFastList<T>
             return this.getDelegate().collectIf(predicate, function);
         }
 
+        @Override
         public <P, V> MutableList<V> collectWith(
                 Function2<? super T, ? super P, ? extends V> function,
                 P parameter)
@@ -1152,71 +1227,85 @@ public final class MultiReaderFastList<T>
             return this.getDelegate().collectWith(function, parameter);
         }
 
+        @Override
         public int detectIndex(Predicate<? super T> predicate)
         {
             return this.getDelegate().detectIndex(predicate);
         }
 
+        @Override
         public int detectLastIndex(Predicate<? super T> predicate)
         {
             return this.getDelegate().detectLastIndex(predicate);
         }
 
+        @Override
         public <V> MutableListMultimap<V, T> groupBy(Function<? super T, ? extends V> function)
         {
             return this.getDelegate().groupBy(function);
         }
 
+        @Override
         public <V> MutableListMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function)
         {
             return this.getDelegate().groupByEach(function);
         }
 
+        @Override
         public <V> MutableMap<V, T> groupByUniqueKey(Function<? super T, ? extends V> function)
         {
             return this.getDelegate().groupByUniqueKey(function);
         }
 
+        @Override
         public <S> boolean corresponds(OrderedIterable<S> other, Predicate2<? super T, ? super S> predicate)
         {
             return this.getDelegate().corresponds(other, predicate);
         }
 
+        @Override
         public void forEach(int fromIndex, int toIndex, Procedure<? super T> procedure)
         {
             this.getDelegate().forEach(fromIndex, toIndex, procedure);
         }
 
+        @Override
         public void reverseForEach(Procedure<? super T> procedure)
         {
             this.getDelegate().reverseForEach(procedure);
         }
 
+        @Override
         public void forEachWithIndex(int fromIndex, int toIndex, ObjectIntProcedure<? super T> objectIntProcedure)
         {
             this.getDelegate().forEachWithIndex(fromIndex, toIndex, objectIntProcedure);
         }
 
+        @Override
         public MutableList<T> newEmpty()
         {
             return this.getDelegate().newEmpty();
         }
 
+        @Override
         public MutableList<T> reject(Predicate<? super T> predicate)
         {
             return this.getDelegate().reject(predicate);
         }
 
+        @Override
         public MutableList<T> distinct()
         {
             return this.getDelegate().distinct();
         }
 
+        @Override
         public MutableList<T> distinct(HashingStrategy<? super T> hashingStrategy)
         {
             return this.getDelegate().distinct(hashingStrategy);
         }
 
+        @Override
         public <P> MutableList<T> rejectWith(
                 Predicate2<? super T, ? super P> predicate,
                 P parameter)
@@ -1224,17 +1313,20 @@ public final class MultiReaderFastList<T>
             return this.getDelegate().rejectWith(predicate, parameter);
         }
 
+        @Override
         public MutableList<T> tap(Procedure<? super T> procedure)
         {
             this.forEach(procedure);
             return this;
         }
 
+        @Override
         public MutableList<T> select(Predicate<? super T> predicate)
         {
             return this.getDelegate().select(predicate);
         }
 
+        @Override
         public <P> MutableList<T> selectWith(
                 Predicate2<? super T, ? super P> predicate,
                 P parameter)
@@ -1242,229 +1334,270 @@ public final class MultiReaderFastList<T>
             return this.getDelegate().selectWith(predicate, parameter);
         }
 
+        @Override
         public PartitionMutableList<T> partition(Predicate<? super T> predicate)
         {
             return this.getDelegate().partition(predicate);
         }
 
+        @Override
         public <P> PartitionMutableList<T> partitionWith(Predicate2<? super T, ? super P> predicate, P parameter)
         {
             return this.getDelegate().partitionWith(predicate, parameter);
         }
 
+        @Override
         public <S> MutableList<S> selectInstancesOf(Class<S> clazz)
         {
             return this.getDelegate().selectInstancesOf(clazz);
         }
 
+        @Override
         public MutableList<T> sortThis()
         {
             this.getDelegate().sortThis();
             return this;
         }
 
+        @Override
         public MutableList<T> sortThis(Comparator<? super T> comparator)
         {
             this.getDelegate().sortThis(comparator);
             return this;
         }
 
+        @Override
         public MutableList<T> toReversed()
         {
             return this.getDelegate().toReversed();
         }
 
+        @Override
         public MutableList<T> reverseThis()
         {
             this.getDelegate().reverseThis();
             return this;
         }
 
+        @Override
         public MutableList<T> shuffleThis()
         {
             this.getDelegate().shuffleThis();
             return this;
         }
 
+        @Override
         public MutableList<T> shuffleThis(Random rnd)
         {
             this.getDelegate().shuffleThis(rnd);
             return this;
         }
 
+        @Override
         public MutableStack<T> toStack()
         {
             return ArrayStack.newStack(this.delegate);
         }
 
+        @Override
         public <V extends Comparable<? super V>> MutableList<T> sortThisBy(Function<? super T, ? extends V> function)
         {
             this.getDelegate().sortThisBy(function);
             return this;
         }
 
+        @Override
         public MutableList<T> sortThisByInt(IntFunction<? super T> function)
         {
             this.getDelegate().sortThisByInt(function);
             return this;
         }
 
+        @Override
         public MutableList<T> sortThisByBoolean(BooleanFunction<? super T> function)
         {
             this.getDelegate().sortThisByBoolean(function);
             return this;
         }
 
+        @Override
         public MutableList<T> sortThisByChar(CharFunction<? super T> function)
         {
             this.getDelegate().sortThisByChar(function);
             return this;
         }
 
+        @Override
         public MutableList<T> sortThisByByte(ByteFunction<? super T> function)
         {
             this.getDelegate().sortThisByByte(function);
             return this;
         }
 
+        @Override
         public MutableList<T> sortThisByShort(ShortFunction<? super T> function)
         {
             this.getDelegate().sortThisByShort(function);
             return this;
         }
 
+        @Override
         public MutableList<T> sortThisByFloat(FloatFunction<? super T> function)
         {
             this.getDelegate().sortThisByFloat(function);
             return this;
         }
 
+        @Override
         public MutableList<T> sortThisByLong(LongFunction<? super T> function)
         {
             this.getDelegate().sortThisByLong(function);
             return this;
         }
 
+        @Override
         public MutableList<T> sortThisByDouble(DoubleFunction<? super T> function)
         {
             this.getDelegate().sortThisByDouble(function);
             return this;
         }
 
+        @Override
         public MutableList<T> take(int count)
         {
             return this.getDelegate().take(count);
         }
 
+        @Override
         public MutableList<T> takeWhile(Predicate<? super T> predicate)
         {
             return this.getDelegate().takeWhile(predicate);
         }
 
+        @Override
         public MutableList<T> drop(int count)
         {
             return this.getDelegate().drop(count);
         }
 
+        @Override
         public MutableList<T> dropWhile(Predicate<? super T> predicate)
         {
             return this.getDelegate().dropWhile(predicate);
         }
 
+        @Override
         public PartitionMutableList<T> partitionWhile(Predicate<? super T> predicate)
         {
             return this.getDelegate().partitionWhile(predicate);
         }
 
+        @Override
         public MutableList<T> subList(int fromIndex, int toIndex)
         {
-            UntouchableMutableList<T> subList = new UntouchableMutableList<T>(
+            UntouchableMutableList<T> subList = new UntouchableMutableList<>(
                     this.getDelegate().subList(fromIndex, toIndex));
             this.requestedSubLists.add(subList);
             return subList;
         }
 
+        @Override
         public Iterator<T> iterator()
         {
-            UntouchableListIterator<T> iterator = new UntouchableListIterator<T>(this.delegate.iterator());
+            UntouchableListIterator<T> iterator = new UntouchableListIterator<>(this.delegate.iterator());
             this.requestedIterators.add(iterator);
             return iterator;
         }
 
+        @Override
         public void add(int index, T element)
         {
             this.getDelegate().add(index, element);
         }
 
+        @Override
         public boolean addAll(int index, Collection<? extends T> collection)
         {
             return this.getDelegate().addAll(index, collection);
         }
 
+        @Override
         public T get(int index)
         {
             return this.getDelegate().get(index);
         }
 
+        @Override
         public int indexOf(Object o)
         {
             return this.getDelegate().indexOf(o);
         }
 
+        @Override
         public int lastIndexOf(Object o)
         {
             return this.getDelegate().lastIndexOf(o);
         }
 
+        @Override
         public ListIterator<T> listIterator()
         {
-            UntouchableListIterator<T> iterator = new UntouchableListIterator<T>(this.getDelegate().listIterator());
+            UntouchableListIterator<T> iterator = new UntouchableListIterator<>(this.getDelegate().listIterator());
             this.requestedIterators.add(iterator);
             return iterator;
         }
 
+        @Override
         public ListIterator<T> listIterator(int index)
         {
-            UntouchableListIterator<T> iterator = new UntouchableListIterator<T>(this.getDelegate().listIterator(index));
+            UntouchableListIterator<T> iterator = new UntouchableListIterator<>(this.getDelegate().listIterator(index));
             this.requestedIterators.add(iterator);
             return iterator;
         }
 
+        @Override
         public T remove(int index)
         {
             return this.getDelegate().remove(index);
         }
 
+        @Override
         public T set(int index, T element)
         {
             return this.getDelegate().set(index, element);
         }
 
+        @Override
         public <S> MutableList<Pair<T, S>> zip(Iterable<S> that)
         {
             return this.getDelegate().zip(that);
         }
 
+        @Override
         public MutableList<Pair<T, Integer>> zipWithIndex()
         {
             return this.getDelegate().zipWithIndex();
         }
 
+        @Override
         public LazyIterable<T> asReversed()
         {
             return ReverseIterable.adapt(this);
         }
 
+        @Override
         public ParallelListIterable<T> asParallel(ExecutorService executorService, int batchSize)
         {
-            return new ListIterableParallelIterable<T>(this, executorService, batchSize);
+            return new ListIterableParallelIterable<>(this, executorService, batchSize);
         }
 
+        @Override
         public int binarySearch(T key, Comparator<? super T> comparator)
         {
             return Collections.binarySearch(this, key, comparator);
         }
 
+        @Override
         public int binarySearch(T key)
         {
             return Collections.binarySearch((List<? extends Comparable<? super T>>) this, key);
@@ -1473,20 +1606,8 @@ public final class MultiReaderFastList<T>
         public void becomeUseless()
         {
             this.delegate = null;
-            this.requestedSubLists.forEach(new Procedure<UntouchableMutableList<T>>()
-            {
-                public void value(UntouchableMutableList<T> each)
-                {
-                    each.becomeUseless();
-                }
-            });
-            this.requestedIterators.forEach(new Procedure<UntouchableListIterator<T>>()
-            {
-                public void value(UntouchableListIterator<T> each)
-                {
-                    each.becomeUseless();
-                }
-            });
+            this.requestedSubLists.each(UntouchableMutableList::becomeUseless);
+            this.requestedIterators.each(UntouchableListIterator::becomeUseless);
         }
 
         private MutableList<T> getDelegate()
@@ -1505,46 +1626,55 @@ public final class MultiReaderFastList<T>
             this.delegate = newDelegate;
         }
 
+        @Override
         public void add(T o)
         {
             ((ListIterator<T>) this.delegate).add(o);
         }
 
+        @Override
         public boolean hasNext()
         {
             return this.delegate.hasNext();
         }
 
+        @Override
         public boolean hasPrevious()
         {
             return ((ListIterator<T>) this.delegate).hasPrevious();
         }
 
+        @Override
         public T next()
         {
             return this.delegate.next();
         }
 
+        @Override
         public int nextIndex()
         {
             return ((ListIterator<T>) this.delegate).nextIndex();
         }
 
+        @Override
         public T previous()
         {
             return ((ListIterator<T>) this.delegate).previous();
         }
 
+        @Override
         public int previousIndex()
         {
             return ((ListIterator<T>) this.delegate).previousIndex();
         }
 
+        @Override
         public void remove()
         {
             this.delegate.remove();
         }
 
+        @Override
         public void set(T o)
         {
             ((ListIterator<T>) this.delegate).set(o);
@@ -1556,6 +1686,7 @@ public final class MultiReaderFastList<T>
         }
     }
 
+    @Override
     public int detectIndex(Predicate<? super T> predicate)
     {
         this.acquireReadLock();
@@ -1569,6 +1700,7 @@ public final class MultiReaderFastList<T>
         }
     }
 
+    @Override
     public int detectLastIndex(Predicate<? super T> predicate)
     {
         this.acquireReadLock();
@@ -1582,6 +1714,7 @@ public final class MultiReaderFastList<T>
         }
     }
 
+    @Override
     public <V> MutableListMultimap<V, T> groupBy(Function<? super T, ? extends V> function)
     {
         this.acquireReadLock();
@@ -1595,6 +1728,7 @@ public final class MultiReaderFastList<T>
         }
     }
 
+    @Override
     public <V> MutableListMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function)
     {
         this.acquireReadLock();
@@ -1608,6 +1742,7 @@ public final class MultiReaderFastList<T>
         }
     }
 
+    @Override
     public <V> MutableMap<V, T> groupByUniqueKey(Function<? super T, ? extends V> function)
     {
         this.acquireReadLock();
@@ -1621,6 +1756,7 @@ public final class MultiReaderFastList<T>
         }
     }
 
+    @Override
     public <S> MutableList<Pair<T, S>> zip(Iterable<S> that)
     {
         this.acquireReadLock();
@@ -1634,6 +1770,7 @@ public final class MultiReaderFastList<T>
         }
     }
 
+    @Override
     public MutableList<Pair<T, Integer>> zipWithIndex()
     {
         this.acquireReadLock();
@@ -1647,6 +1784,7 @@ public final class MultiReaderFastList<T>
         }
     }
 
+    @Override
     public MutableList<T> toReversed()
     {
         this.acquireReadLock();
@@ -1660,6 +1798,7 @@ public final class MultiReaderFastList<T>
         }
     }
 
+    @Override
     public MutableList<T> reverseThis()
     {
         this.acquireWriteLock();
@@ -1674,6 +1813,7 @@ public final class MultiReaderFastList<T>
         }
     }
 
+    @Override
     public MutableList<T> shuffleThis()
     {
         this.acquireWriteLock();
@@ -1688,6 +1828,7 @@ public final class MultiReaderFastList<T>
         }
     }
 
+    @Override
     public MutableList<T> shuffleThis(Random rnd)
     {
         this.acquireWriteLock();
@@ -1702,6 +1843,7 @@ public final class MultiReaderFastList<T>
         }
     }
 
+    @Override
     public MutableStack<T> toStack()
     {
         this.acquireReadLock();
@@ -1715,6 +1857,7 @@ public final class MultiReaderFastList<T>
         }
     }
 
+    @Override
     public RichIterable<RichIterable<T>> chunk(int size)
     {
         this.acquireReadLock();
@@ -1728,6 +1871,7 @@ public final class MultiReaderFastList<T>
         }
     }
 
+    @Override
     public MutableList<T> take(int count)
     {
         this.acquireReadLock();
@@ -1741,6 +1885,7 @@ public final class MultiReaderFastList<T>
         }
     }
 
+    @Override
     public MutableList<T> takeWhile(Predicate<? super T> predicate)
     {
         this.acquireReadLock();
@@ -1754,6 +1899,7 @@ public final class MultiReaderFastList<T>
         }
     }
 
+    @Override
     public MutableList<T> drop(int count)
     {
         this.acquireReadLock();
@@ -1767,6 +1913,7 @@ public final class MultiReaderFastList<T>
         }
     }
 
+    @Override
     public MutableList<T> dropWhile(Predicate<? super T> predicate)
     {
         this.acquireReadLock();
@@ -1780,6 +1927,7 @@ public final class MultiReaderFastList<T>
         }
     }
 
+    @Override
     public PartitionMutableList<T> partitionWhile(Predicate<? super T> predicate)
     {
         this.acquireReadLock();
@@ -1793,6 +1941,7 @@ public final class MultiReaderFastList<T>
         }
     }
 
+    @Override
     public LazyIterable<T> asReversed()
     {
         this.acquireReadLock();
@@ -1806,8 +1955,9 @@ public final class MultiReaderFastList<T>
         }
     }
 
+    @Override
     public ParallelListIterable<T> asParallel(ExecutorService executorService, int batchSize)
     {
-        return new MultiReaderParallelListIterable<T>(this.delegate.asParallel(executorService, batchSize), this.lock);
+        return new MultiReaderParallelListIterable<>(this.delegate.asParallel(executorService, batchSize), this.lock);
     }
 }

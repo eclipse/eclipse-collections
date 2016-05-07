@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -75,7 +75,7 @@ public class ImmutableTreeMap<K, V>
 
     public static <K, V> ImmutableSortedMap<K, V> newMap(SortedMap<K, V> sortedMap)
     {
-        return new ImmutableTreeMap<K, V>(sortedMap);
+        return new ImmutableTreeMap<>(sortedMap);
     }
 
     @Override
@@ -143,21 +143,25 @@ public class ImmutableTreeMap<K, V>
         return sb.append('}').toString();
     }
 
+    @Override
     public int size()
     {
         return this.keys.length;
     }
 
+    @Override
     public boolean containsKey(Object key)
     {
         return Arrays.binarySearch(this.keys, (K) key, this.comparator) >= 0;
     }
 
+    @Override
     public boolean containsValue(Object value)
     {
         return ArrayIterate.contains(this.values, value);
     }
 
+    @Override
     public V get(Object key)
     {
         int index = Arrays.binarySearch(this.keys, (K) key, this.comparator);
@@ -168,6 +172,7 @@ public class ImmutableTreeMap<K, V>
         return null;
     }
 
+    @Override
     public void forEachKeyValue(Procedure2<? super K, ? super V> procedure)
     {
         for (int index = 0; index < this.keys.length; index++)
@@ -176,31 +181,37 @@ public class ImmutableTreeMap<K, V>
         }
     }
 
+    @Override
     public ImmutableMap<V, K> flipUniqueValues()
     {
         return MapIterate.flipUniqueValues(this).toImmutable();
     }
 
+    @Override
     public RichIterable<K> keysView()
     {
         return FastList.newListWith(this.keys).asLazy();
     }
 
+    @Override
     public RichIterable<V> valuesView()
     {
         return FastList.newListWith(this.values).asLazy();
     }
 
+    @Override
     public RichIterable<Pair<K, V>> keyValuesView()
     {
         return FastList.newListWith(this.keys).asLazy().zip(FastList.newListWith(this.values));
     }
 
+    @Override
     public Comparator<? super K> comparator()
     {
         return this.comparator;
     }
 
+    @Override
     public K firstKey()
     {
         if (this.keys.length == 0)
@@ -210,6 +221,7 @@ public class ImmutableTreeMap<K, V>
         return this.keys[0];
     }
 
+    @Override
     public K lastKey()
     {
         if (this.keys.length == 0)
@@ -219,20 +231,23 @@ public class ImmutableTreeMap<K, V>
         return this.keys[this.keys.length - 1];
     }
 
+    @Override
     public Set<K> keySet()
     {
         return new ImmutableSortedMapKeySet();
     }
 
+    @Override
     public Collection<V> values()
     {
         return FastList.newListWith(this.values).asUnmodifiable();
     }
 
+    @Override
     public Set<Entry<K, V>> entrySet()
     {
         int length = this.keys.length;
-        MutableSortedSet<Entry<K, V>> entrySet = SortedSets.mutable.with(new EntryComparator<K, V>(this.comparator));
+        MutableSortedSet<Entry<K, V>> entrySet = SortedSets.mutable.with(new EntryComparator<>(this.comparator));
         for (int index = 0; index < length; index++)
         {
             entrySet.add(ImmutableEntry.of(this.keys[index], this.values[index]));
@@ -242,9 +257,10 @@ public class ImmutableTreeMap<K, V>
 
     protected Object writeReplace()
     {
-        return new ImmutableSortedMapSerializationProxy<K, V>(this);
+        return new ImmutableSortedMapSerializationProxy<>(this);
     }
 
+    @Override
     public ImmutableSortedMap<K, V> take(int count)
     {
         if (count < 0)
@@ -269,6 +285,7 @@ public class ImmutableTreeMap<K, V>
         return output.toImmutable();
     }
 
+    @Override
     public ImmutableSortedMap<K, V> drop(int count)
     {
         if (count < 0)
@@ -312,6 +329,7 @@ public class ImmutableTreeMap<K, V>
             }
         }
 
+        @Override
         public int compare(Entry<K, V> o1, Entry<K, V> o2)
         {
             return this.comparator.compare(o1.getKey(), o2.getKey());

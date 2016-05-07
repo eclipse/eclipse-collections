@@ -20,7 +20,6 @@ import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.list.ListIterable;
-import org.eclipse.collections.api.list.ParallelListIterable;
 import org.eclipse.collections.api.map.MapIterable;
 import org.eclipse.collections.api.multimap.list.ListMultimap;
 import org.eclipse.collections.impl.lazy.AbstractLazyIterable;
@@ -64,21 +63,25 @@ public final class ListIterableParallelIterable<T> extends AbstractParallelListI
         return new ListIterableParallelBatchLazyIterable();
     }
 
+    @Override
     public void forEach(Procedure<? super T> procedure)
     {
         AbstractParallelIterable.forEach(this, procedure);
     }
 
+    @Override
     public boolean anySatisfy(Predicate<? super T> predicate)
     {
         return AbstractParallelIterable.anySatisfy(this, predicate);
     }
 
+    @Override
     public boolean allSatisfy(Predicate<? super T> predicate)
     {
         return AbstractParallelIterable.allSatisfy(this, predicate);
     }
 
+    @Override
     public T detect(Predicate<? super T> predicate)
     {
         return AbstractParallelIterable.detect(this, predicate);
@@ -129,20 +132,23 @@ public final class ListIterableParallelIterable<T> extends AbstractParallelListI
     {
         protected int chunkIndex;
 
+        @Override
         public boolean hasNext()
         {
             return this.chunkIndex * ListIterableParallelIterable.this.getBatchSize() < ListIterableParallelIterable.this.delegate.size();
         }
 
+        @Override
         public RootListBatch<T> next()
         {
             int chunkStartIndex = this.chunkIndex * ListIterableParallelIterable.this.getBatchSize();
             int chunkEndIndex = (this.chunkIndex + 1) * ListIterableParallelIterable.this.getBatchSize();
             int truncatedChunkEndIndex = Math.min(chunkEndIndex, ListIterableParallelIterable.this.delegate.size());
             this.chunkIndex++;
-            return new ListIterableBatch<T>(ListIterableParallelIterable.this.delegate, chunkStartIndex, truncatedChunkEndIndex);
+            return new ListIterableBatch<>(ListIterableParallelIterable.this.delegate, chunkStartIndex, truncatedChunkEndIndex);
         }
 
+        @Override
         public void remove()
         {
             throw new UnsupportedOperationException("Cannot call remove() on " + ListIterableParallelIterable.this.delegate.getClass().getSimpleName());
@@ -152,6 +158,7 @@ public final class ListIterableParallelIterable<T> extends AbstractParallelListI
     private class ListIterableParallelBatchLazyIterable
             extends AbstractLazyIterable<RootListBatch<T>>
     {
+        @Override
         public void each(Procedure<? super RootListBatch<T>> procedure)
         {
             for (RootListBatch<T> chunk : this)
@@ -160,6 +167,7 @@ public final class ListIterableParallelIterable<T> extends AbstractParallelListI
             }
         }
 
+        @Override
         public Iterator<RootListBatch<T>> iterator()
         {
             return new ListIterableParallelBatchIterator();

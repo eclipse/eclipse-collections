@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -24,6 +24,6 @@ public class FlatCollectProcedureSerializationTest
                         + "Q29sbGVjdFByb2NlZHVyZQAAAAAAAAABAgACTAAKY29sbGVjdGlvbnQAFkxqYXZhL3V0aWwvQ29s\n"
                         + "bGVjdGlvbjtMAAhmdW5jdGlvbnQANUxvcmcvZWNsaXBzZS9jb2xsZWN0aW9ucy9hcGkvYmxvY2sv\n"
                         + "ZnVuY3Rpb24vRnVuY3Rpb247eHBwcA==",
-                new FlatCollectProcedure<Object, Object>(null, null));
+                new FlatCollectProcedure<>(null, null));
     }
 }

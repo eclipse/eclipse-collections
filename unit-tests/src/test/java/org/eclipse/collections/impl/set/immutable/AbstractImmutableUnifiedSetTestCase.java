@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -371,7 +371,7 @@ public abstract class AbstractImmutableUnifiedSetTestCase
     public void toSortedList()
     {
         ImmutableSet<Integer> integers = this.newSetWith(2, 4, 1, 3);
-        MutableList<Integer> list = integers.toSortedList(Collections.<Integer>reverseOrder());
+        MutableList<Integer> list = integers.toSortedList(Collections.reverseOrder());
         Assert.assertEquals(FastList.newListWith(4, 3, 2, 1), list);
     }
 
@@ -395,8 +395,8 @@ public abstract class AbstractImmutableUnifiedSetTestCase
     public void toSortedSet_with_comparator()
     {
         ImmutableSet<Integer> integers = this.newSetWith(2, 4, 1, 3);
-        MutableSortedSet<Integer> set = integers.toSortedSet(Collections.<Integer>reverseOrder());
-        Verify.assertSortedSetsEqual(TreeSortedSet.newSetWith(Collections.<Integer>reverseOrder(), 1, 2, 3, 4), set);
+        MutableSortedSet<Integer> set = integers.toSortedSet(Collections.reverseOrder());
+        Verify.assertSortedSetsEqual(TreeSortedSet.newSetWith(Collections.reverseOrder(), 1, 2, 3, 4), set);
     }
 
     @Test

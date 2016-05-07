@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -57,16 +57,19 @@ final class ImmutableQuadrupletonMap<K, V>
         this.value4 = value4;
     }
 
+    @Override
     public RichIterable<K> keysView()
     {
         return Lists.immutable.with(this.key1, this.key2, this.key3, this.key4).asLazy();
     }
 
+    @Override
     public RichIterable<V> valuesView()
     {
         return Lists.immutable.with(this.value1, this.value2, this.value3, this.value4).asLazy();
     }
 
+    @Override
     public RichIterable<Pair<K, V>> keyValuesView()
     {
         return Lists.immutable.with(
@@ -76,11 +79,13 @@ final class ImmutableQuadrupletonMap<K, V>
                 Tuples.pair(this.key4, this.value4)).asLazy();
     }
 
+    @Override
     public int size()
     {
         return 4;
     }
 
+    @Override
     public boolean containsKey(Object key)
     {
         return Comparators.nullSafeEquals(this.key4, key)
@@ -89,6 +94,7 @@ final class ImmutableQuadrupletonMap<K, V>
                 || Comparators.nullSafeEquals(this.key1, key);
     }
 
+    @Override
     public boolean containsValue(Object value)
     {
         return Comparators.nullSafeEquals(this.value4, value)
@@ -97,6 +103,7 @@ final class ImmutableQuadrupletonMap<K, V>
                 || Comparators.nullSafeEquals(this.value1, value);
     }
 
+    @Override
     public V get(Object key)
     {
         if (Comparators.nullSafeEquals(this.key4, key))
@@ -118,11 +125,13 @@ final class ImmutableQuadrupletonMap<K, V>
         return null;
     }
 
+    @Override
     public Set<K> keySet()
     {
         return Sets.immutable.with(this.key1, this.key2, this.key3, this.key4).castToSet();
     }
 
+    @Override
     public Collection<V> values()
     {
         return Lists.immutable.with(this.value1, this.value2, this.value3, this.value4).castToList();
@@ -168,6 +177,7 @@ final class ImmutableQuadrupletonMap<K, V>
         return Maps.immutable.with(this.value1, this.key1, this.value2, this.key2, this.value3, this.key3, this.value4, this.key4);
     }
 
+    @Override
     public void forEachKeyValue(Procedure2<? super K, ? super V> procedure)
     {
         procedure.value(this.key1, this.value1);
@@ -327,6 +337,6 @@ final class ImmutableQuadrupletonMap<K, V>
 
     private Object writeReplace()
     {
-        return new ImmutableMapSerializationProxy<K, V>(this);
+        return new ImmutableMapSerializationProxy<>(this);
     }
 }

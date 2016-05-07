@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -51,6 +51,7 @@ public abstract class AbstractSynchronizedMutableCollection<T> extends AbstractS
         return (MutableCollection<T>) super.getDelegate();
     }
 
+    @Override
     public boolean add(T o)
     {
         synchronized (this.getLock())
@@ -59,6 +60,7 @@ public abstract class AbstractSynchronizedMutableCollection<T> extends AbstractS
         }
     }
 
+    @Override
     public boolean remove(Object o)
     {
         synchronized (this.getLock())
@@ -67,6 +69,7 @@ public abstract class AbstractSynchronizedMutableCollection<T> extends AbstractS
         }
     }
 
+    @Override
     public boolean addAll(Collection<? extends T> coll)
     {
         synchronized (this.getLock())
@@ -75,6 +78,7 @@ public abstract class AbstractSynchronizedMutableCollection<T> extends AbstractS
         }
     }
 
+    @Override
     public boolean removeAll(Collection<?> coll)
     {
         synchronized (this.getLock())
@@ -83,6 +87,7 @@ public abstract class AbstractSynchronizedMutableCollection<T> extends AbstractS
         }
     }
 
+    @Override
     public boolean retainAll(Collection<?> coll)
     {
         synchronized (this.getLock())
@@ -91,6 +96,7 @@ public abstract class AbstractSynchronizedMutableCollection<T> extends AbstractS
         }
     }
 
+    @Override
     public void clear()
     {
         synchronized (this.getLock())
@@ -99,6 +105,7 @@ public abstract class AbstractSynchronizedMutableCollection<T> extends AbstractS
         }
     }
 
+    @Override
     public boolean removeIf(Predicate<? super T> predicate)
     {
         synchronized (this.lock)
@@ -107,6 +114,7 @@ public abstract class AbstractSynchronizedMutableCollection<T> extends AbstractS
         }
     }
 
+    @Override
     public <P> boolean removeIfWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         synchronized (this.lock)
@@ -115,6 +123,7 @@ public abstract class AbstractSynchronizedMutableCollection<T> extends AbstractS
         }
     }
 
+    @Override
     public boolean addAllIterable(Iterable<? extends T> iterable)
     {
         synchronized (this.getLock())
@@ -123,6 +132,7 @@ public abstract class AbstractSynchronizedMutableCollection<T> extends AbstractS
         }
     }
 
+    @Override
     public boolean removeAllIterable(Iterable<?> iterable)
     {
         synchronized (this.getLock())
@@ -131,6 +141,7 @@ public abstract class AbstractSynchronizedMutableCollection<T> extends AbstractS
         }
     }
 
+    @Override
     public boolean retainAllIterable(Iterable<?> iterable)
     {
         synchronized (this.getLock())
@@ -139,6 +150,7 @@ public abstract class AbstractSynchronizedMutableCollection<T> extends AbstractS
         }
     }
 
+    @Override
     public <P> Twin<MutableList<T>> selectAndRejectWith(
             Predicate2<? super T, ? super P> predicate,
             P parameter)
@@ -149,6 +161,7 @@ public abstract class AbstractSynchronizedMutableCollection<T> extends AbstractS
         }
     }
 
+    @Override
     public <IV, P> IV injectIntoWith(
             IV injectValue,
             Function3<? super IV, ? super T, ? super P, ? extends IV> function,
@@ -169,6 +182,7 @@ public abstract class AbstractSynchronizedMutableCollection<T> extends AbstractS
         }
     }
 
+    @Override
     public <K, V> MutableMap<K, V> aggregateInPlaceBy(
             Function<? super T, ? extends K> groupBy,
             Function0<? extends V> zeroValueFactory,
@@ -180,6 +194,7 @@ public abstract class AbstractSynchronizedMutableCollection<T> extends AbstractS
         }
     }
 
+    @Override
     public <K, V> MutableMap<K, V> aggregateBy(
             Function<? super T, ? extends K> groupBy,
             Function0<? extends V> zeroValueFactory,
@@ -191,6 +206,7 @@ public abstract class AbstractSynchronizedMutableCollection<T> extends AbstractS
         }
     }
 
+    @Override
     public <V> MutableObjectLongMap<V> sumByInt(Function<? super T, ? extends V> groupBy, IntFunction<? super T> function)
     {
         synchronized (this.lock)
@@ -199,6 +215,7 @@ public abstract class AbstractSynchronizedMutableCollection<T> extends AbstractS
         }
     }
 
+    @Override
     public <V> MutableObjectDoubleMap<V> sumByFloat(Function<? super T, ? extends V> groupBy, FloatFunction<? super T> function)
     {
         synchronized (this.lock)
@@ -207,6 +224,7 @@ public abstract class AbstractSynchronizedMutableCollection<T> extends AbstractS
         }
     }
 
+    @Override
     public <V> MutableObjectLongMap<V> sumByLong(Function<? super T, ? extends V> groupBy, LongFunction<? super T> function)
     {
         synchronized (this.lock)
@@ -215,6 +233,7 @@ public abstract class AbstractSynchronizedMutableCollection<T> extends AbstractS
         }
     }
 
+    @Override
     public <V> MutableObjectDoubleMap<V> sumByDouble(Function<? super T, ? extends V> groupBy, DoubleFunction<? super T> function)
     {
         synchronized (this.lock)

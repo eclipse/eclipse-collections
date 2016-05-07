@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -23,6 +23,6 @@ public class ImmutableQuadrupletonMapSerializationTest
                 "rO0ABXNyAElvcmcuZWNsaXBzZS5jb2xsZWN0aW9ucy5pbXBsLm1hcC5pbW11dGFibGUuSW1tdXRh\n"
                         + "YmxlTWFwU2VyaWFsaXphdGlvblByb3h5AAAAAAAAAAEMAAB4cHcEAAAABHQAAWFwdAABYnB0AAFj\n"
                         + "cHQAAWRweA==",
-                new ImmutableQuadrupletonMap<String, Object>("a", null, "b", null, "c", null, "d", null));
+                new ImmutableQuadrupletonMap<>("a", null, "b", null, "c", null, "d", null));
     }
 }

@@ -30,7 +30,7 @@ public class TreeSortedSetNoIteratorTest implements MutableSortedSetTestCase, No
     @Override
     public final <T> MutableSortedSet<T> newWith(T... elements)
     {
-        MutableSortedSet<T> result = new TreeSortedSetNoIterator<T>(Comparators.reverseNaturalOrder());
+        MutableSortedSet<T> result = new TreeSortedSetNoIterator<>(Comparators.reverseNaturalOrder());
         IterableTestCase.addAllTo(elements, result);
         return result;
     }

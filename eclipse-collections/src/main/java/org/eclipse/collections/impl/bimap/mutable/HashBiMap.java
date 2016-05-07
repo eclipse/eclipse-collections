@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -27,12 +27,12 @@ public class HashBiMap<K, V> extends AbstractMutableBiMap<K, V> implements Exter
 
     public HashBiMap()
     {
-        super(UnifiedMap.<K, V>newMap(), UnifiedMap.<V, K>newMap());
+        super(UnifiedMap.newMap(), UnifiedMap.newMap());
     }
 
     public HashBiMap(int initialSize)
     {
-        super(UnifiedMap.<K, V>newMap(initialSize), UnifiedMap.<V, K>newMap(initialSize));
+        super(UnifiedMap.newMap(initialSize), UnifiedMap.newMap(initialSize));
     }
 
     public HashBiMap(Map<K, V> map)
@@ -47,7 +47,7 @@ public class HashBiMap<K, V> extends AbstractMutableBiMap<K, V> implements Exter
 
     public static <K, V> HashBiMap<K, V> newMap()
     {
-        return new HashBiMap<K, V>();
+        return new HashBiMap<>();
     }
 
     public static <K, V> HashBiMap<K, V> newWithKeysValues(K key, V value)

@@ -324,15 +324,9 @@ public final class StringIterate
      * @deprecated since 3.0. Use {@link #forEach(String, CharProcedure)} instead.
      */
     @Deprecated
-    public static void forEach(String string, final org.eclipse.collections.impl.block.procedure.primitive.CharProcedure procedure)
+    public static void forEach(String string, org.eclipse.collections.impl.block.procedure.primitive.CharProcedure procedure)
     {
-        StringIterate.forEachChar(string, new CharProcedure()
-        {
-            public void value(char each)
-            {
-                procedure.value(each);
-            }
-        });
+        StringIterate.forEachChar(string, procedure::value);
     }
 
     /**
@@ -474,15 +468,9 @@ public final class StringIterate
      * @deprecated since 3.0.
      */
     @Deprecated
-    public static int count(String string, final org.eclipse.collections.impl.block.predicate.primitive.CharPredicate predicate)
+    public static int count(String string, org.eclipse.collections.impl.block.predicate.primitive.CharPredicate predicate)
     {
-        return StringIterate.countChar(string, new CharPredicate()
-        {
-            public boolean accept(char value)
-            {
-                return predicate.accept(value);
-            }
-        });
+        return StringIterate.countChar(string, predicate::accept);
     }
 
     /**
@@ -551,15 +539,9 @@ public final class StringIterate
      * @deprecated since 3.0. Use {@link #collect(String, CharToCharFunction)} instead.
      */
     @Deprecated
-    public static String collect(String string, final CharFunction function)
+    public static String collect(String string, CharFunction function)
     {
-        return StringIterate.collectChar(string, new CharToCharFunction()
-        {
-            public char valueOf(char charParameter)
-            {
-                return function.valueOf(charParameter);
-            }
-        });
+        return StringIterate.collectChar(string, function::valueOf);
     }
 
     /**
@@ -726,15 +708,9 @@ public final class StringIterate
      *
      * @since 7.0
      */
-    public static int occurrencesOfChar(String string, final char value)
+    public static int occurrencesOfChar(String string, char value)
     {
-        return StringIterate.countChar(string, new CharPredicate()
-        {
-            public boolean accept(char character)
-            {
-                return value == character;
-            }
-        });
+        return StringIterate.countChar(string, character -> value == character);
     }
 
     /**
@@ -753,15 +729,9 @@ public final class StringIterate
      *
      * @since 7.0
      */
-    public static int occurrencesOfCodePoint(String string, final int value)
+    public static int occurrencesOfCodePoint(String string, int value)
     {
-        return StringIterate.countCodePoint(string, new CodePointPredicate()
-        {
-            public boolean accept(int codePoint)
-            {
-                return value == codePoint;
-            }
-        });
+        return StringIterate.countCodePoint(string, codePoint -> value == codePoint);
     }
 
     /**
@@ -1289,6 +1259,7 @@ public final class StringIterate
             this.characters = characters;
         }
 
+        @Override
         public void value(char character)
         {
             this.characters.add(Character.valueOf(character));
@@ -1304,6 +1275,7 @@ public final class StringIterate
             this.characters = characters;
         }
 
+        @Override
         public void value(char character)
         {
             this.characters.add(Character.valueOf(Character.toLowerCase(character)));
@@ -1319,6 +1291,7 @@ public final class StringIterate
             this.characters = characters;
         }
 
+        @Override
         public void value(char character)
         {
             this.characters.add(Character.valueOf(Character.toUpperCase(character)));

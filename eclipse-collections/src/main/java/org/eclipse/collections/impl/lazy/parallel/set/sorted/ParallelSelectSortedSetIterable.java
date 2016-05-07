@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -33,6 +33,7 @@ class ParallelSelectSortedSetIterable<T> extends AbstractParallelSortedSetIterab
         this.predicate = predicate;
     }
 
+    @Override
     public Comparator<? super T> comparator()
     {
         return this.parallelIterable.comparator();
@@ -62,21 +63,25 @@ class ParallelSelectSortedSetIterable<T> extends AbstractParallelSortedSetIterab
         });
     }
 
+    @Override
     public void forEach(Procedure<? super T> procedure)
     {
-        this.parallelIterable.forEach(new IfProcedure<T>(this.predicate, procedure));
+        this.parallelIterable.forEach(new IfProcedure<>(this.predicate, procedure));
     }
 
+    @Override
     public boolean anySatisfy(Predicate<? super T> predicate)
     {
         return this.parallelIterable.anySatisfy(Predicates.and(this.predicate, predicate));
     }
 
+    @Override
     public boolean allSatisfy(Predicate<? super T> predicate)
     {
-        return this.parallelIterable.allSatisfy(new SelectAllSatisfyPredicate<T>(this.predicate, predicate));
+        return this.parallelIterable.allSatisfy(new SelectAllSatisfyPredicate<>(this.predicate, predicate));
     }
 
+    @Override
     public T detect(Predicate<? super T> predicate)
     {
         return this.parallelIterable.detect(Predicates.and(this.predicate, predicate));
@@ -93,6 +98,7 @@ class ParallelSelectSortedSetIterable<T> extends AbstractParallelSortedSetIterab
             this.right = right;
         }
 
+        @Override
         public boolean accept(T each)
         {
             boolean leftResult = this.left.accept(each);

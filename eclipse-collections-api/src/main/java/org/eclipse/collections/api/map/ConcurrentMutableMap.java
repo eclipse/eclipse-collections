@@ -20,5 +20,6 @@ import org.eclipse.collections.api.block.procedure.Procedure;
 public interface ConcurrentMutableMap<K, V>
         extends MutableMap<K, V>, ConcurrentMap<K, V>
 {
+    @Override
     ConcurrentMutableMap<K, V> tap(Procedure<? super V> procedure);
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -44,6 +44,7 @@ final class EmptyMap<K, V>
         return Maps.fixedSize.of();
     }
 
+    @Override
     public int size()
     {
         return 0;
@@ -52,7 +53,7 @@ final class EmptyMap<K, V>
     @Override
     public MutableMap<K, V> withKeyValue(K addKey, V addValue)
     {
-        return new SingletonMap<K, V>(addKey, addValue);
+        return new SingletonMap<>(addKey, addValue);
     }
 
     @Override
@@ -80,31 +81,37 @@ final class EmptyMap<K, V>
         return Multimaps.mutable.set.with();
     }
 
+    @Override
     public boolean containsKey(Object key)
     {
         return false;
     }
 
+    @Override
     public boolean containsValue(Object value)
     {
         return false;
     }
 
+    @Override
     public V get(Object key)
     {
         return null;
     }
 
+    @Override
     public Set<K> keySet()
     {
         return Sets.fixedSize.of();
     }
 
+    @Override
     public Collection<V> values()
     {
         return Lists.fixedSize.of();
     }
 
+    @Override
     public MutableSet<Entry<K, V>> entrySet()
     {
         return Sets.fixedSize.of();
@@ -145,6 +152,7 @@ final class EmptyMap<K, V>
         return this;
     }
 
+    @Override
     public void forEachKeyValue(Procedure2<? super K, ? super V> procedure)
     {
     }

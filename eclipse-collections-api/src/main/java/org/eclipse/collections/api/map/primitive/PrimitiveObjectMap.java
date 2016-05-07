@@ -73,63 +73,88 @@ public interface PrimitiveObjectMap<V> extends RichIterable<V>
      *
      * @return a string representation of this PrimitiveObjectMap
      */
+    @Override
     String toString();
 
     Collection<V> values();
 
+    @Override
     Bag<V> select(Predicate<? super V> predicate);
 
+    @Override
     <P> Bag<V> selectWith(Predicate2<? super V, ? super P> predicate, P parameter);
 
+    @Override
     Bag<V> reject(Predicate<? super V> predicate);
 
+    @Override
     <P> Bag<V> rejectWith(Predicate2<? super V, ? super P> predicate, P parameter);
 
+    @Override
     PartitionBag<V> partition(Predicate<? super V> predicate);
 
+    @Override
     <P> PartitionBag<V> partitionWith(Predicate2<? super V, ? super P> predicate, P parameter);
 
+    @Override
     <S> Bag<S> selectInstancesOf(Class<S> clazz);
 
+    @Override
     <VV> Bag<VV> collect(Function<? super V, ? extends VV> function);
 
+    @Override
     BooleanBag collectBoolean(BooleanFunction<? super V> booleanFunction);
 
+    @Override
     ByteBag collectByte(ByteFunction<? super V> byteFunction);
 
+    @Override
     CharBag collectChar(CharFunction<? super V> charFunction);
 
+    @Override
     DoubleBag collectDouble(DoubleFunction<? super V> doubleFunction);
 
+    @Override
     FloatBag collectFloat(FloatFunction<? super V> floatFunction);
 
+    @Override
     IntBag collectInt(IntFunction<? super V> intFunction);
 
+    @Override
     LongBag collectLong(LongFunction<? super V> longFunction);
 
+    @Override
     ShortBag collectShort(ShortFunction<? super V> shortFunction);
 
+    @Override
     <P, VV> Bag<VV> collectWith(Function2<? super V, ? super P, ? extends VV> function, P parameter);
 
+    @Override
     <VV> Bag<VV> collectIf(Predicate<? super V> predicate, Function<? super V, ? extends VV> function);
 
+    @Override
     <VV> Bag<VV> flatCollect(Function<? super V, ? extends Iterable<VV>> function);
 
+    @Override
     <VV> BagMultimap<VV, V> groupBy(Function<? super V, ? extends VV> function);
 
+    @Override
     <VV> BagMultimap<VV, V> groupByEach(Function<? super V, ? extends Iterable<VV>> function);
 
+    @Override
     <VV> UnsortedMapIterable<VV, V> groupByUniqueKey(Function<? super V, ? extends VV> function);
 
     /**
      * @deprecated in 6.0. Use {@link OrderedIterable#zip(Iterable)} instead.
      */
+    @Override
     @Deprecated
     <S> Bag<Pair<V, S>> zip(Iterable<S> that);
 
     /**
      * @deprecated in 6.0. Use {@link OrderedIterable#zipWithIndex()} instead.
      */
+    @Override
     @Deprecated
     UnsortedSetIterable<Pair<V, Integer>> zipWithIndex();
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -48,7 +48,7 @@ public class MapAdapter<K, V>
 
     public static <K, V> MutableMap<K, V> adapt(Map<K, V> map)
     {
-        return map instanceof MutableMap<?, ?> ? (MutableMap<K, V>) map : new MapAdapter<K, V>(map);
+        return map instanceof MutableMap<?, ?> ? (MutableMap<K, V>) map : new MapAdapter<>(map);
     }
 
     @Override
@@ -69,6 +69,7 @@ public class MapAdapter<K, V>
         return UnifiedMap.newMap(capacity);
     }
 
+    @Override
     public int size()
     {
         return this.delegate.size();
@@ -86,56 +87,67 @@ public class MapAdapter<K, V>
         return this.delegate.values().iterator();
     }
 
+    @Override
     public V remove(Object key)
     {
         return this.delegate.remove(key);
     }
 
+    @Override
     public Set<K> keySet()
     {
         return this.delegate.keySet();
     }
 
+    @Override
     public Collection<V> values()
     {
         return this.delegate.values();
     }
 
+    @Override
     public Set<Entry<K, V>> entrySet()
     {
         return this.delegate.entrySet();
     }
 
+    @Override
     public void clear()
     {
         this.delegate.clear();
     }
 
+    @Override
     public MutableMap<K, V> newEmpty()
     {
         return UnifiedMap.newMap();
     }
 
+    @Override
     public void forEachKeyValue(Procedure2<? super K, ? super V> procedure)
     {
         MapIterate.forEachKeyValue(this.delegate, procedure);
     }
 
+    @Override
     public V get(Object key)
     {
         return this.delegate.get(key);
     }
 
+    @Override
     public V put(K key, V value)
     {
         return this.delegate.put(key, value);
     }
 
+    @Override
     public void putAll(Map<? extends K, ? extends V> map)
     {
         this.delegate.putAll(map);
     }
 
+    @Override
     public <E> MutableMap<K, V> collectKeysAndValues(
             Iterable<E> iterable,
             Function<? super E, ? extends K> keyFunction,
@@ -145,16 +157,19 @@ public class MapAdapter<K, V>
         return this;
     }
 
+    @Override
     public V removeKey(K key)
     {
         return this.delegate.remove(key);
     }
 
+    @Override
     public boolean containsKey(Object key)
     {
         return this.delegate.containsKey(key);
     }
 
+    @Override
     public boolean containsValue(Object value)
     {
         return this.delegate.containsValue(value);

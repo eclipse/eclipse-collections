@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -281,9 +281,9 @@ public class CompositeFastListTest extends AbstractListTestCase
         super.toArray();
         MutableList<String> list = new CompositeFastList<>();
         list.addAll(FastList.newListWith("1", "2", "3", "4"));
-        list.addAll(Lists.mutable.<String>of());
+        list.addAll(Lists.mutable.of());
         list.addAll(FastList.newListWith("3", "B", "3", "B"));
-        list.addAll(Lists.mutable.<String>of());
+        list.addAll(Lists.mutable.of());
         Assert.assertArrayEquals(new String[]{"1", "2", "3", "4", "3", "B", "3", "B"}, list.toArray());
     }
 

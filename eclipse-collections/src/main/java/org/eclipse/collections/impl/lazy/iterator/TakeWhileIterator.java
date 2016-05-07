@@ -40,6 +40,7 @@ public final class TakeWhileIterator<T> implements Iterator<T>
         this.predicate = predicate;
     }
 
+    @Override
     public boolean hasNext()
     {
         if (this.next != NULL)
@@ -61,6 +62,7 @@ public final class TakeWhileIterator<T> implements Iterator<T>
         return false;
     }
 
+    @Override
     public T next()
     {
         if (this.hasNext())
@@ -72,6 +74,7 @@ public final class TakeWhileIterator<T> implements Iterator<T>
         throw new NoSuchElementException();
     }
 
+    @Override
     public void remove()
     {
         throw new UnsupportedOperationException("Cannot remove from a takeWhile iterator");

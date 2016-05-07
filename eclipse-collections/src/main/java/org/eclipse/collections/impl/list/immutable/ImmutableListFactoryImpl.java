@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -21,126 +21,151 @@ import org.eclipse.collections.impl.utility.Iterate;
 @Immutable
 public final class ImmutableListFactoryImpl implements ImmutableListFactory
 {
+    @Override
     public <T> ImmutableList<T> empty()
     {
         return (ImmutableList<T>) ImmutableEmptyList.INSTANCE;
     }
 
+    @Override
     public <T> ImmutableList<T> of()
     {
         return this.empty();
     }
 
+    @Override
     public <T> ImmutableList<T> with()
     {
         return this.empty();
     }
 
+    @Override
     public <T> ImmutableList<T> of(T one)
     {
         return this.with(one);
     }
 
+    @Override
     public <T> ImmutableList<T> with(T one)
     {
-        return new ImmutableSingletonList<T>(one);
+        return new ImmutableSingletonList<>(one);
     }
 
+    @Override
     public <T> ImmutableList<T> of(T one, T two)
     {
         return this.with(one, two);
     }
 
+    @Override
     public <T> ImmutableList<T> with(T one, T two)
     {
-        return new ImmutableDoubletonList<T>(one, two);
+        return new ImmutableDoubletonList<>(one, two);
     }
 
+    @Override
     public <T> ImmutableList<T> of(T one, T two, T three)
     {
         return this.with(one, two, three);
     }
 
+    @Override
     public <T> ImmutableList<T> with(T one, T two, T three)
     {
-        return new ImmutableTripletonList<T>(one, two, three);
+        return new ImmutableTripletonList<>(one, two, three);
     }
 
+    @Override
     public <T> ImmutableList<T> of(T one, T two, T three, T four)
     {
         return this.with(one, two, three, four);
     }
 
+    @Override
     public <T> ImmutableList<T> with(T one, T two, T three, T four)
     {
-        return new ImmutableQuadrupletonList<T>(one, two, three, four);
+        return new ImmutableQuadrupletonList<>(one, two, three, four);
     }
 
+    @Override
     public <T> ImmutableList<T> of(T one, T two, T three, T four, T five)
     {
         return this.with(one, two, three, four, five);
     }
 
+    @Override
     public <T> ImmutableList<T> with(T one, T two, T three, T four, T five)
     {
-        return new ImmutableQuintupletonList<T>(one, two, three, four, five);
+        return new ImmutableQuintupletonList<>(one, two, three, four, five);
     }
 
+    @Override
     public <T> ImmutableList<T> of(T one, T two, T three, T four, T five, T six)
     {
         return this.with(one, two, three, four, five, six);
     }
 
+    @Override
     public <T> ImmutableList<T> with(T one, T two, T three, T four, T five, T six)
     {
-        return new ImmutableSextupletonList<T>(one, two, three, four, five, six);
+        return new ImmutableSextupletonList<>(one, two, three, four, five, six);
     }
 
+    @Override
     public <T> ImmutableList<T> of(T one, T two, T three, T four, T five, T six, T seven)
     {
         return this.with(one, two, three, four, five, six, seven);
     }
 
+    @Override
     public <T> ImmutableList<T> with(T one, T two, T three, T four, T five, T six, T seven)
     {
-        return new ImmutableSeptupletonList<T>(one, two, three, four, five, six, seven);
+        return new ImmutableSeptupletonList<>(one, two, three, four, five, six, seven);
     }
 
+    @Override
     public <T> ImmutableList<T> of(T one, T two, T three, T four, T five, T six, T seven, T eight)
     {
         return this.with(one, two, three, four, five, six, seven, eight);
     }
 
+    @Override
     public <T> ImmutableList<T> with(T one, T two, T three, T four, T five, T six, T seven, T eight)
     {
-        return new ImmutableOctupletonList<T>(one, two, three, four, five, six, seven, eight);
+        return new ImmutableOctupletonList<>(one, two, three, four, five, six, seven, eight);
     }
 
+    @Override
     public <T> ImmutableList<T> of(T one, T two, T three, T four, T five, T six, T seven, T eight, T nine)
     {
         return this.with(one, two, three, four, five, six, seven, eight, nine);
     }
 
+    @Override
     public <T> ImmutableList<T> with(T one, T two, T three, T four, T five, T six, T seven, T eight, T nine)
     {
-        return new ImmutableNonupletonList<T>(one, two, three, four, five, six, seven, eight, nine);
+        return new ImmutableNonupletonList<>(one, two, three, four, five, six, seven, eight, nine);
     }
 
+    @Override
     public <T> ImmutableList<T> of(T one, T two, T three, T four, T five, T six, T seven, T eight, T nine, T ten)
     {
         return this.with(one, two, three, four, five, six, seven, eight, nine, ten);
     }
 
+    @Override
     public <T> ImmutableList<T> with(T one, T two, T three, T four, T five, T six, T seven, T eight, T nine, T ten)
     {
-        return new ImmutableDecapletonList<T>(one, two, three, four, five, six, seven, eight, nine, ten);
+        return new ImmutableDecapletonList<>(one, two, three, four, five, six, seven, eight, nine, ten);
     }
 
+    @Override
     public <T> ImmutableList<T> of(T... items)
     {
         return this.with(items);
     }
 
+    @Override
     public <T> ImmutableList<T> with(T... items)
     {
         if (items == null || items.length == 0)
@@ -208,11 +233,13 @@ public final class ImmutableListFactoryImpl implements ImmutableListFactory
         }
     }
 
+    @Override
     public <T> ImmutableList<T> ofAll(Iterable<? extends T> items)
     {
         return this.withAll(items);
     }
 
+    @Override
     public <T> ImmutableList<T> withAll(Iterable<? extends T> items)
     {
         if (items instanceof ImmutableList<?>)

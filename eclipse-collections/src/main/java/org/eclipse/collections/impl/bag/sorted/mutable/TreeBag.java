@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -25,7 +25,6 @@ import org.eclipse.collections.api.bag.Bag;
 import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
 import org.eclipse.collections.api.bag.sorted.SortedBag;
 import org.eclipse.collections.api.block.function.Function;
-import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.predicate.primitive.IntPredicate;
@@ -60,13 +59,6 @@ public class TreeBag<T>
         extends AbstractMutableSortedBag<T>
         implements Externalizable
 {
-    private static final Function0<Counter> NEW_COUNTER_BLOCK = new Function0<Counter>()
-    {
-        public Counter value()
-        {
-            return new Counter();
-        }
-    };
     private static final long serialVersionUID = 1L;
     private MutableSortedMap<T, Counter> items;
     private int size;
@@ -100,26 +92,26 @@ public class TreeBag<T>
 
     public static <E> TreeBag<E> newBag()
     {
-        return new TreeBag<E>();
+        return new TreeBag<>();
     }
 
     public static <E> TreeBag<E> newBag(Comparator<? super E> comparator)
     {
-        return new TreeBag<E>(comparator);
+        return new TreeBag<>(comparator);
     }
 
     public static <E> TreeBag<E> newBag(Iterable<? extends E> source)
     {
         if (source instanceof SortedBag<?>)
         {
-            return new TreeBag<E>((SortedBag<E>) source);
+            return new TreeBag<>((SortedBag<E>) source);
         }
-        return Iterate.addAllTo(source, TreeBag.<E>newBag());
+        return Iterate.addAllTo(source, TreeBag.newBag());
     }
 
     public static <E> TreeBag<E> newBag(Comparator<? super E> comparator, Iterable<? extends E> iterable)
     {
-        return new TreeBag<E>(comparator, iterable);
+        return new TreeBag<>(comparator, iterable);
     }
 
     public static <E> TreeBag<E> newBagWith(E... elements)
@@ -137,7 +129,7 @@ public class TreeBag<T>
     @Override
     public TreeBag<T> clone()
     {
-        return new TreeBag<T>(this);
+        return new TreeBag<>(this);
     }
 
     @Override
@@ -151,32 +143,20 @@ public class TreeBag<T>
         {
             return false;
         }
-        final Bag<?> bag = (Bag<?>) other;
+        Bag<?> bag = (Bag<?>) other;
         if (this.sizeDistinct() != bag.sizeDistinct())
         {
             return false;
         }
 
-        return this.items.keyValuesView().allSatisfy(new Predicate<Pair<T, Counter>>()
-        {
-            public boolean accept(Pair<T, Counter> each)
-            {
-                return bag.occurrencesOf(each.getOne()) == each.getTwo().getCount();
-            }
-        });
+        return this.items.keyValuesView().allSatisfy(each -> bag.occurrencesOf(each.getOne()) == each.getTwo().getCount());
     }
 
     @Override
     public int hashCode()
     {
-        final Counter counter = new Counter();
-        this.forEachWithOccurrences(new ObjectIntProcedure<T>()
-        {
-            public void value(T each, int count)
-            {
-                counter.add((each == null ? 0 : each.hashCode()) ^ count);
-            }
-        });
+        Counter counter = new Counter();
+        this.forEachWithOccurrences((each, count) -> counter.add((each == null ? 0 : each.hashCode()) ^ count));
         return counter.getCount();
     }
 
@@ -186,34 +166,28 @@ public class TreeBag<T>
         return this.items.keysView();
     }
 
+    @Override
     public int sizeDistinct()
     {
         return this.items.size();
     }
 
-    public void forEachWithOccurrences(final ObjectIntProcedure<? super T> procedure)
+    @Override
+    public void forEachWithOccurrences(ObjectIntProcedure<? super T> procedure)
     {
-        this.items.forEachKeyValue(new Procedure2<T, Counter>()
-        {
-            public void value(T item, Counter count)
-            {
-                procedure.value(item, count.getCount());
-            }
-        });
+        this.items.forEachKeyValue((item, count) -> procedure.value(item, count.getCount()));
     }
 
-    public MutableSortedBag<T> selectByOccurrences(final IntPredicate predicate)
+    @Override
+    public MutableSortedBag<T> selectByOccurrences(IntPredicate predicate)
     {
-        MutableSortedMap<T, Counter> map = this.items.select(new Predicate2<T, Counter>()
-        {
-            public boolean accept(T each, Counter occurrences)
-            {
-                return predicate.accept(occurrences.getCount());
-            }
+        MutableSortedMap<T, Counter> map = this.items.select((each, occurrences) -> {
+            return predicate.accept(occurrences.getCount());
         });
-        return new TreeBag<T>(map);
+        return new TreeBag<>(map);
     }
 
+    @Override
     public int occurrencesOf(Object item)
     {
         Counter counter = this.items.get(item);
@@ -226,6 +200,7 @@ public class TreeBag<T>
         return this.items.isEmpty();
     }
 
+    @Override
     public boolean remove(Object item)
     {
         Counter counter = this.items.get(item);
@@ -245,6 +220,7 @@ public class TreeBag<T>
         return false;
     }
 
+    @Override
     public void clear()
     {
         this.items.clear();
@@ -257,12 +233,14 @@ public class TreeBag<T>
         return this.items.containsKey(o);
     }
 
+    @Override
     public int compareTo(SortedBag<T> otherBag)
     {
         return SortedBagIterables.compare(this, otherBag);
     }
 
-    public void writeExternal(final ObjectOutput out) throws IOException
+    @Override
+    public void writeExternal(ObjectOutput out) throws IOException
     {
         out.writeObject(this.comparator());
         out.writeInt(this.items.size());
@@ -287,9 +265,10 @@ public class TreeBag<T>
         }
     }
 
+    @Override
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
     {
-        this.items = new TreeSortedMap<T, Counter>((Comparator<T>) in.readObject());
+        this.items = new TreeSortedMap<>((Comparator<T>) in.readObject());
         int size = in.readInt();
         for (int i = 0; i < size; i++)
         {
@@ -297,37 +276,31 @@ public class TreeBag<T>
         }
     }
 
-    public void each(final Procedure<? super T> procedure)
+    @Override
+    public void each(Procedure<? super T> procedure)
     {
-        this.items.forEachKeyValue(new Procedure2<T, Counter>()
-        {
-            public void value(T key, Counter value)
+        this.items.forEachKeyValue((key, value) -> {
+            for (int i = 0; i < value.getCount(); i++)
             {
-                for (int i = 0; i < value.getCount(); i++)
-                {
-                    procedure.value(key);
-                }
+                procedure.value(key);
             }
         });
     }
 
     @Override
-    public void forEachWithIndex(final ObjectIntProcedure<? super T> objectIntProcedure)
+    public void forEachWithIndex(ObjectIntProcedure<? super T> objectIntProcedure)
     {
-        final Counter index = new Counter();
-        this.items.forEachKeyValue(new Procedure2<T, Counter>()
-        {
-            public void value(T key, Counter value)
+        Counter index = new Counter();
+        this.items.forEachKeyValue((key, value) -> {
+            for (int i = 0; i < value.getCount(); i++)
             {
-                for (int i = 0; i < value.getCount(); i++)
-                {
-                    objectIntProcedure.value(key, index.getCount());
-                    index.increment();
-                }
+                objectIntProcedure.value(key, index.getCount());
+                index.increment();
             }
         });
     }
 
+    @Override
     public void forEach(int fromIndex, int toIndex, Procedure<? super T> procedure)
     {
         ListIterate.rangeCheck(fromIndex, toIndex, this.size);
@@ -376,6 +349,7 @@ public class TreeBag<T>
         }
     }
 
+    @Override
     public void forEachWithIndex(int fromIndex, int toIndex, ObjectIntProcedure<? super T> objectIntProcedure)
     {
         ListIterate.rangeCheck(fromIndex, toIndex, this.size);
@@ -425,25 +399,23 @@ public class TreeBag<T>
     }
 
     @Override
-    public <P> void forEachWith(final Procedure2<? super T, ? super P> procedure, final P parameter)
+    public <P> void forEachWith(Procedure2<? super T, ? super P> procedure, P parameter)
     {
-        this.items.forEachKeyValue(new Procedure2<T, Counter>()
-        {
-            public void value(T key, Counter value)
+        this.items.forEachKeyValue((key, value) -> {
+            for (int i = 0; i < value.getCount(); i++)
             {
-                for (int i = 0; i < value.getCount(); i++)
-                {
-                    procedure.value(key, parameter);
-                }
+                procedure.value(key, parameter);
             }
         });
     }
 
+    @Override
     public Iterator<T> iterator()
     {
         return new InternalIterator();
     }
 
+    @Override
     public int addOccurrences(T item, int occurrences)
     {
         if (occurrences < 0)
@@ -452,7 +424,7 @@ public class TreeBag<T>
         }
         if (occurrences > 0)
         {
-            Counter counter = this.items.getIfAbsentPut(item, NEW_COUNTER_BLOCK);
+            Counter counter = this.items.getIfAbsentPut(item, Counter::new);
             counter.add(occurrences);
             this.size += occurrences;
             return counter.getCount();
@@ -460,6 +432,7 @@ public class TreeBag<T>
         return this.occurrencesOf(item);
     }
 
+    @Override
     public boolean removeOccurrences(Object item, int occurrences)
     {
         if (occurrences < 0)
@@ -491,6 +464,7 @@ public class TreeBag<T>
         return true;
     }
 
+    @Override
     public boolean setOccurrences(T item, int occurrences)
     {
         if (occurrences < 0)
@@ -518,35 +492,41 @@ public class TreeBag<T>
         return true;
     }
 
+    @Override
     public TreeBag<T> without(T element)
     {
         this.remove(element);
         return this;
     }
 
+    @Override
     public TreeBag<T> withAll(Iterable<? extends T> iterable)
     {
         this.addAllIterable(iterable);
         return this;
     }
 
+    @Override
     public TreeBag<T> withoutAll(Iterable<? extends T> iterable)
     {
         this.removeAllIterable(iterable);
         return this;
     }
 
+    @Override
     public TreeBag<T> with(T element)
     {
         this.add(element);
         return this;
     }
 
+    @Override
     public MutableSortedBag<T> newEmpty()
     {
         return TreeBag.newBag(this.items.comparator());
     }
 
+    @Override
     public boolean removeIf(Predicate<? super T> predicate)
     {
         boolean changed = false;
@@ -564,6 +544,7 @@ public class TreeBag<T>
         return changed;
     }
 
+    @Override
     public <P> boolean removeIfWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         boolean changed = false;
@@ -581,6 +562,7 @@ public class TreeBag<T>
         return changed;
     }
 
+    @Override
     public boolean removeAllIterable(Iterable<?> iterable)
     {
         int oldSize = this.size;
@@ -595,11 +577,13 @@ public class TreeBag<T>
         return this.size != oldSize;
     }
 
+    @Override
     public int size()
     {
         return this.size;
     }
 
+    @Override
     public int indexOf(Object object)
     {
         if (this.items.containsKey(object))
@@ -614,9 +598,10 @@ public class TreeBag<T>
         return -1;
     }
 
+    @Override
     public MutableSortedSet<Pair<T, Integer>> zipWithIndex()
     {
-        final Comparator<? super T> comparator = this.items.comparator();
+        Comparator<? super T> comparator = this.items.comparator();
         return this.zipWithIndex(TreeSortedSet.newSet(new Comparator<Pair<T, Integer>>()
         {
             public int compare(Pair<T, Integer> o1, Pair<T, Integer> o2)
@@ -631,36 +616,43 @@ public class TreeBag<T>
         }));
     }
 
+    @Override
     public MutableSortedSet<T> distinct()
     {
         return TreeSortedSet.newSet(this.comparator(), this.items.keySet());
     }
 
+    @Override
     public <V> TreeBagMultimap<V, T> groupBy(Function<? super T, ? extends V> function)
     {
-        return this.groupBy(function, TreeBagMultimap.<V, T>newMultimap(this.comparator()));
+        return this.groupBy(function, TreeBagMultimap.newMultimap(this.comparator()));
     }
 
+    @Override
     public <V> TreeBagMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function)
     {
-        return this.groupByEach(function, TreeBagMultimap.<V, T>newMultimap(this.comparator()));
+        return this.groupByEach(function, TreeBagMultimap.newMultimap(this.comparator()));
     }
 
+    @Override
     public int detectIndex(Predicate<? super T> predicate)
     {
         return Iterate.detectIndex(this, predicate);
     }
 
+    @Override
     public <S> boolean corresponds(OrderedIterable<S> other, Predicate2<? super T, ? super S> predicate)
     {
         return OrderedIterate.corresponds(this, other, predicate);
     }
 
+    @Override
     public MutableStack<T> toStack()
     {
         return ArrayStack.newStack(this);
     }
 
+    @Override
     public MutableSortedBag<T> take(int count)
     {
         if (count < 0)
@@ -671,6 +663,7 @@ public class TreeBag<T>
         return IterableIterate.take(this, Math.min(this.size(), count), this.newEmpty());
     }
 
+    @Override
     public MutableSortedBag<T> drop(int count)
     {
         if (count < 0)
@@ -681,6 +674,7 @@ public class TreeBag<T>
         return IterableIterate.drop(this, count, this.newEmpty());
     }
 
+    @Override
     public Comparator<? super T> comparator()
     {
         return this.items.comparator();
@@ -699,9 +693,10 @@ public class TreeBag<T>
         return this;
     }
 
+    @Override
     public boolean add(T item)
     {
-        Counter counter = this.items.getIfAbsentPut(item, NEW_COUNTER_BLOCK);
+        Counter counter = this.items.getIfAbsentPut(item, Counter::new);
         counter.increment();
         this.size++;
         return true;
@@ -723,11 +718,13 @@ public class TreeBag<T>
         private int occurrences;
         private boolean canRemove;
 
+        @Override
         public boolean hasNext()
         {
             return this.occurrences > 0 || this.iterator.hasNext();
         }
 
+        @Override
         public T next()
         {
             if (this.occurrences == 0)
@@ -740,6 +737,7 @@ public class TreeBag<T>
             return this.currentItem;
         }
 
+        @Override
         public void remove()
         {
             if (!this.canRemove)

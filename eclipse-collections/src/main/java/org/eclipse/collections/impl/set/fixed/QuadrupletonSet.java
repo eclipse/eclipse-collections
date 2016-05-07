@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -52,6 +52,7 @@ final class QuadrupletonSet<T>
         this.element4 = obj4;
     }
 
+    @Override
     public int size()
     {
         return 4;
@@ -90,7 +91,7 @@ final class QuadrupletonSet<T>
     @Override
     public QuadrupletonSet<T> clone()
     {
-        return new QuadrupletonSet<T>(this.element1, this.element2, this.element3, this.element4);
+        return new QuadrupletonSet<>(this.element1, this.element2, this.element3, this.element4);
     }
 
     @Override
@@ -102,11 +103,13 @@ final class QuadrupletonSet<T>
                 || Comparators.nullSafeEquals(obj, this.element4);
     }
 
+    @Override
     public Iterator<T> iterator()
     {
         return new QuadrupletonSetIterator();
     }
 
+    @Override
     public T getFirst()
     {
         return this.element1;
@@ -122,11 +125,13 @@ final class QuadrupletonSet<T>
         return this.element3;
     }
 
+    @Override
     public T getLast()
     {
         return this.element4;
     }
 
+    @Override
     public void each(Procedure<? super T> procedure)
     {
         procedure.value(this.element1);
@@ -153,6 +158,7 @@ final class QuadrupletonSet<T>
         procedure.value(this.element4, parameter);
     }
 
+    @Override
     public void writeExternal(ObjectOutput out) throws IOException
     {
         out.writeObject(this.element1);
@@ -161,6 +167,7 @@ final class QuadrupletonSet<T>
         out.writeObject(this.element4);
     }
 
+    @Override
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
     {
         this.element1 = (T) in.readObject();
@@ -195,28 +202,30 @@ final class QuadrupletonSet<T>
         }
     }
 
+    @Override
     public MutableSet<T> with(T element)
     {
         return this.contains(element) ? this : UnifiedSet.newSet(this).with(element);
     }
 
+    @Override
     public MutableSet<T> without(T element)
     {
         if (Comparators.nullSafeEquals(element, this.element1))
         {
-            return new TripletonSet<T>(this.element2, this.element3, this.element4);
+            return new TripletonSet<>(this.element2, this.element3, this.element4);
         }
         if (Comparators.nullSafeEquals(element, this.element2))
         {
-            return new TripletonSet<T>(this.element1, this.element3, this.element4);
+            return new TripletonSet<>(this.element1, this.element3, this.element4);
         }
         if (Comparators.nullSafeEquals(element, this.element3))
         {
-            return new TripletonSet<T>(this.element1, this.element2, this.element4);
+            return new TripletonSet<>(this.element1, this.element2, this.element4);
         }
         if (Comparators.nullSafeEquals(element, this.element4))
         {
-            return new TripletonSet<T>(this.element1, this.element2, this.element3);
+            return new TripletonSet<>(this.element1, this.element2, this.element3);
         }
         return this;
     }

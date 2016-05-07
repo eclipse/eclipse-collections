@@ -83,8 +83,8 @@ public interface SortedSetIterableTestCase extends SetIterableTestCase, SortedIt
     {
         // Must test with two classes that are mutually Comparable
 
-        SortedSetIterable<A> numbers = this.<A>newWith(new C(4.0), new B(3), new C(2.0), new B(1));
-        assertEquals(this.<B>getExpectedFiltered(new B(3), new B(1)), numbers.selectInstancesOf(B.class));
+        SortedSetIterable<A> numbers = this.newWith(new C(4.0), new B(3), new C(2.0), new B(1));
+        assertEquals(this.getExpectedFiltered(new B(3), new B(1)), numbers.selectInstancesOf(B.class));
         assertEquals(this.getExpectedFiltered(new C(4.0), new B(3), new C(2.0), new B(1)), numbers.selectInstancesOf(A.class));
     }
 
@@ -136,6 +136,7 @@ public interface SortedSetIterableTestCase extends SetIterableTestCase, SortedIt
         // Cannot contain duplicates
     }
 
+    @Override
     @Test
     default void OrderedIterable_zipWithIndex()
     {
@@ -149,6 +150,7 @@ public interface SortedSetIterableTestCase extends SetIterableTestCase, SortedIt
                 iterable.zipWithIndex().toList());
     }
 
+    @Override
     @Test
     default void OrderedIterable_zipWithIndex_target()
     {

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -112,7 +112,7 @@ public final class IteratorIterate
      */
     public static <T> PartitionMutableList<T> partition(Iterator<T> iterator, Predicate<? super T> predicate)
     {
-        PartitionMutableList<T> result = new PartitionFastList<T>();
+        PartitionMutableList<T> result = new PartitionFastList<>();
         MutableList<T> selected = result.getSelected();
         MutableList<T> rejected = result.getRejected();
 
@@ -134,7 +134,7 @@ public final class IteratorIterate
             Predicate2<? super T, ? super P> predicate,
             P parameter)
     {
-        PartitionMutableList<T> result = new PartitionFastList<T>();
+        PartitionMutableList<T> result = new PartitionFastList<>();
         MutableList<T> selected = result.getSelected();
         MutableList<T> rejected = result.getRejected();
 
@@ -1091,7 +1091,7 @@ public final class IteratorIterate
      */
     public static <T> MutableList<T> distinct(Iterator<T> iterator)
     {
-        return IteratorIterate.distinct(iterator, FastList.<T>newList());
+        return IteratorIterate.distinct(iterator, FastList.newList());
     }
 
     /**
@@ -1275,36 +1275,24 @@ public final class IteratorIterate
         return result;
     }
 
-    public static <V, T> MutableMap<V, BigDecimal> sumByBigDecimal(Iterator<T> iterator, Function<T, V> groupBy, final Function<? super T, BigDecimal> function)
+    public static <V, T> MutableMap<V, BigDecimal> sumByBigDecimal(Iterator<T> iterator, Function<T, V> groupBy, Function<? super T, BigDecimal> function)
     {
         MutableMap<V, BigDecimal> result = UnifiedMap.newMap();
         while (iterator.hasNext())
         {
-            final T item = iterator.next();
-            result.updateValue(groupBy.valueOf(item), Functions0.zeroBigDecimal(), new Function<BigDecimal, BigDecimal>()
-            {
-                public BigDecimal valueOf(BigDecimal original)
-                {
-                    return original.add(function.valueOf(item));
-                }
-            });
+            T item = iterator.next();
+            result.updateValue(groupBy.valueOf(item), Functions0.zeroBigDecimal(), original -> original.add(function.valueOf(item)));
         }
         return result;
     }
 
-    public static <V, T> MutableMap<V, BigInteger> sumByBigInteger(Iterator<T> iterator, Function<T, V> groupBy, final Function<? super T, BigInteger> function)
+    public static <V, T> MutableMap<V, BigInteger> sumByBigInteger(Iterator<T> iterator, Function<T, V> groupBy, Function<? super T, BigInteger> function)
     {
         MutableMap<V, BigInteger> result = UnifiedMap.newMap();
         while (iterator.hasNext())
         {
-            final T item = iterator.next();
-            result.updateValue(groupBy.valueOf(item), Functions0.zeroBigInteger(), new Function<BigInteger, BigInteger>()
-            {
-                public BigInteger valueOf(BigInteger original)
-                {
-                    return original.add(function.valueOf(item));
-                }
-            });
+            T item = iterator.next();
+            result.updateValue(groupBy.valueOf(item), Functions0.zeroBigInteger(), original -> original.add(function.valueOf(item)));
         }
         return result;
     }
@@ -1316,7 +1304,7 @@ public final class IteratorIterate
             Procedure2<? super V, ? super T> mutatingAggregator)
     {
         MutableMap<K, V> map = UnifiedMap.newMap();
-        IteratorIterate.forEach(iterator, new MutatingAggregationProcedure<T, K, V>(map, groupBy, zeroValueFactory, mutatingAggregator));
+        IteratorIterate.forEach(iterator, new MutatingAggregationProcedure<>(map, groupBy, zeroValueFactory, mutatingAggregator));
         return map;
     }
 
@@ -1327,7 +1315,7 @@ public final class IteratorIterate
             Function2<? super V, ? super T, ? extends V> nonMutatingAggregator)
     {
         MutableMap<K, V> map = UnifiedMap.newMap();
-        IteratorIterate.forEach(iterator, new NonMutatingAggregationProcedure<T, K, V>(map, groupBy, zeroValueFactory, nonMutatingAggregator));
+        IteratorIterate.forEach(iterator, new NonMutatingAggregationProcedure<>(map, groupBy, zeroValueFactory, nonMutatingAggregator));
         return map;
     }
 

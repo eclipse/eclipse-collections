@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -248,7 +248,7 @@ public abstract class AbstractMemoryEfficientMutableSetTestCase
         Assert.assertEquals(expected, actual);
 
         Multimap<Integer, Integer> actualWithTarget =
-                set.groupByEach(new NegativeIntervalFunction(), UnifiedSetMultimap.<Integer, Integer>newMultimap());
+                set.groupByEach(new NegativeIntervalFunction(), UnifiedSetMultimap.newMultimap());
         Assert.assertEquals(expected, actualWithTarget);
     }
 
@@ -274,7 +274,7 @@ public abstract class AbstractMemoryEfficientMutableSetTestCase
 
         Assert.assertEquals(
                 set.zip(nulls),
-                set.zip(nulls, UnifiedSet.<Pair<String, Object>>newSet()));
+                set.zip(nulls, UnifiedSet.newSet()));
     }
 
     @Test
@@ -292,7 +292,7 @@ public abstract class AbstractMemoryEfficientMutableSetTestCase
 
         Assert.assertEquals(
                 set.zipWithIndex(),
-                set.zipWithIndex(UnifiedSet.<Pair<String, Integer>>newSet()));
+                set.zipWithIndex(UnifiedSet.newSet()));
     }
 
     @Test
@@ -357,7 +357,7 @@ public abstract class AbstractMemoryEfficientMutableSetTestCase
     {
         MutableSet<String> set = this.classUnderTest();
         RichIterable<RichIterable<String>> chunks = set.chunk(2);
-        MutableList<Integer> sizes = chunks.collect(RichIterable::size, FastList.<Integer>newList());
+        MutableList<Integer> sizes = chunks.collect(RichIterable::size, FastList.newList());
         MutableBag<Integer> hashBag = Bags.mutable.of();
         hashBag.addOccurrences(2, this.classUnderTest().size() / 2);
         if (this.classUnderTest().size() % 2 != 0)
@@ -396,12 +396,12 @@ public abstract class AbstractMemoryEfficientMutableSetTestCase
     public void unionInto()
     {
         MutableSet<String> set = this.classUnderTest();
-        MutableSet<String> union = set.unionInto(UnifiedSet.newSetWith("a", "b", "c", "1"), UnifiedSet.<String>newSet());
+        MutableSet<String> union = set.unionInto(UnifiedSet.newSetWith("a", "b", "c", "1"), UnifiedSet.newSet());
         Verify.assertSize(set.size() + 3, union);
         Assert.assertTrue(union.containsAllIterable(Interval.oneTo(set.size()).collect(String::valueOf)));
         Verify.assertContainsAll(union, "a", "b", "c");
 
-        Assert.assertEquals(set, set.unionInto(UnifiedSet.newSetWith("1"), UnifiedSet.<String>newSet()));
+        Assert.assertEquals(set, set.unionInto(UnifiedSet.newSetWith("1"), UnifiedSet.newSet()));
     }
 
     @Test
@@ -419,11 +419,11 @@ public abstract class AbstractMemoryEfficientMutableSetTestCase
     public void intersectInto()
     {
         MutableSet<String> set = this.classUnderTest();
-        MutableSet<String> intersect = set.intersectInto(UnifiedSet.newSetWith("a", "b", "c", "1"), UnifiedSet.<String>newSet());
+        MutableSet<String> intersect = set.intersectInto(UnifiedSet.newSetWith("a", "b", "c", "1"), UnifiedSet.newSet());
         Verify.assertSize(1, intersect);
         Assert.assertEquals(UnifiedSet.newSetWith("1"), intersect);
 
-        Verify.assertEmpty(set.intersectInto(UnifiedSet.newSetWith("not present"), UnifiedSet.<String>newSet()));
+        Verify.assertEmpty(set.intersectInto(UnifiedSet.newSetWith("not present"), UnifiedSet.newSet()));
     }
 
     @Test
@@ -439,9 +439,9 @@ public abstract class AbstractMemoryEfficientMutableSetTestCase
     public void differenceInto()
     {
         MutableSet<String> set = this.classUnderTest();
-        MutableSet<String> difference = set.differenceInto(UnifiedSet.newSetWith("2", "3", "4", "not present"), UnifiedSet.<String>newSet());
+        MutableSet<String> difference = set.differenceInto(UnifiedSet.newSetWith("2", "3", "4", "not present"), UnifiedSet.newSet());
         Assert.assertEquals(UnifiedSet.newSetWith("1"), difference);
-        Assert.assertEquals(set, set.differenceInto(UnifiedSet.newSetWith("not present"), UnifiedSet.<String>newSet()));
+        Assert.assertEquals(set, set.differenceInto(UnifiedSet.newSetWith("not present"), UnifiedSet.newSet()));
     }
 
     @Test
@@ -465,7 +465,7 @@ public abstract class AbstractMemoryEfficientMutableSetTestCase
         MutableSet<String> set = this.classUnderTest();
         MutableSet<String> difference = set.symmetricDifferenceInto(
                 UnifiedSet.newSetWith("2", "3", "4", "5", "not present"),
-                UnifiedSet.<String>newSet());
+                UnifiedSet.newSet());
         Verify.assertContains("1", difference);
         Assert.assertTrue(difference.containsAllIterable(Interval.fromTo(set.size() + 1, 5).collect(String::valueOf)));
         for (int i = 2; i <= set.size(); i++)
@@ -475,7 +475,7 @@ public abstract class AbstractMemoryEfficientMutableSetTestCase
 
         Verify.assertSize(
                 set.size() + 1,
-                set.symmetricDifferenceInto(UnifiedSet.newSetWith("not present"), UnifiedSet.<String>newSet()));
+                set.symmetricDifferenceInto(UnifiedSet.newSetWith("not present"), UnifiedSet.newSet()));
     }
 
     @Test
@@ -537,7 +537,7 @@ public abstract class AbstractMemoryEfficientMutableSetTestCase
         Assert.assertTrue(setWith.containsAll(set));
         Verify.assertContainsAll(setWith, "11", "12");
         assertSetType(set, setWith);
-        Assert.assertSame(setWith, setWith.withAll(FastList.<String>newList()));
+        Assert.assertSame(setWith, setWith.withAll(FastList.newList()));
     }
 
     @Test
@@ -561,7 +561,7 @@ public abstract class AbstractMemoryEfficientMutableSetTestCase
         Assert.assertTrue(setWithout.containsAll(this.classUnderTest()));
         Verify.assertContainsNone(setWithout, "11", "12");
         assertSetType(set, setWithout);
-        Assert.assertSame(setWithout, setWithout.withoutAll(FastList.<String>newList()));
+        Assert.assertSame(setWithout, setWithout.withoutAll(FastList.newList()));
     }
 
     protected static void assertSetType(MutableSet<?> original, MutableSet<?> modified)

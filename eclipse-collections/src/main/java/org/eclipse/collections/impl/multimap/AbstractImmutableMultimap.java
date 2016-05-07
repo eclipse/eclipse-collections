@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -17,7 +17,6 @@ import java.util.Collection;
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.block.procedure.Procedure;
-import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.collection.ImmutableCollection;
 import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.api.map.MutableMap;
@@ -62,6 +61,7 @@ public abstract class AbstractImmutableMultimap<K, V, C extends ImmutableCollect
 
 // Query Operations
 
+    @Override
     public int size()
     {
         class CountProcedure implements Procedure<C>
@@ -70,6 +70,7 @@ public abstract class AbstractImmutableMultimap<K, V, C extends ImmutableCollect
 
             private int totalSize;
 
+            @Override
             public void value(C collection)
             {
                 this.totalSize += collection.size();
@@ -86,11 +87,13 @@ public abstract class AbstractImmutableMultimap<K, V, C extends ImmutableCollect
         return procedure.getTotalSize();
     }
 
+    @Override
     public int sizeDistinct()
     {
         return this.map.size();
     }
 
+    @Override
     public boolean isEmpty()
     {
         return this.map.isEmpty();
@@ -98,37 +101,38 @@ public abstract class AbstractImmutableMultimap<K, V, C extends ImmutableCollect
 
     // Views
 
+    @Override
     public SetIterable<K> keySet()
     {
         return UnmodifiableMutableSet.of(this.getMap().castToMap().keySet());
     }
 
+    @Override
     public C get(K key)
     {
         return this.map.getIfAbsentWith(key, this.createCollectionBlock(), this);
     }
 
+    @Override
     public MutableMap<K, RichIterable<V>> toMap()
     {
         return (MutableMap<K, RichIterable<V>>) (MutableMap<?, ?>) this.map.toMap();
     }
 
-    public <R extends Collection<V>> MutableMap<K, R> toMap(final Function0<R> collectionFactory)
+    @Override
+    public <R extends Collection<V>> MutableMap<K, R> toMap(Function0<R> collectionFactory)
     {
-        final MutableMap<K, R> result = UnifiedMap.newMap();
-        this.map.forEachKeyValue(new Procedure2<K, C>()
-        {
-            public void value(K key, C iterable)
-            {
-                R newCollection = collectionFactory.value();
-                Iterate.addAllTo(iterable, newCollection);
-                result.put(key, newCollection);
-            }
+        MutableMap<K, R> result = UnifiedMap.newMap();
+        this.map.forEachKeyValue((key, iterable) -> {
+            R newCollection = collectionFactory.value();
+            Iterate.addAllTo(iterable, newCollection);
+            result.put(key, newCollection);
         });
 
         return result;
     }
 
+    @Override
     public ImmutableMultimap<K, V> newWith(K key, V value)
     {
         MutableMultimap<K, V> mutableMultimap = this.toMutable();
@@ -136,6 +140,7 @@ public abstract class AbstractImmutableMultimap<K, V, C extends ImmutableCollect
         return mutableMultimap.toImmutable();
     }
 
+    @Override
     public ImmutableMultimap<K, V> newWithout(Object key, Object value)
     {
         MutableMultimap<K, V> mutableMultimap = this.toMutable();
@@ -143,6 +148,7 @@ public abstract class AbstractImmutableMultimap<K, V, C extends ImmutableCollect
         return mutableMultimap.toImmutable();
     }
 
+    @Override
     public ImmutableMultimap<K, V> newWithAll(K key, Iterable<? extends V> values)
     {
         MutableMultimap<K, V> mutableMultimap = this.toMutable();
@@ -150,6 +156,7 @@ public abstract class AbstractImmutableMultimap<K, V, C extends ImmutableCollect
         return mutableMultimap.toImmutable();
     }
 
+    @Override
     public ImmutableMultimap<K, V> newWithoutAll(Object key)
     {
         MutableMultimap<K, V> mutableMultimap = this.toMutable();
@@ -157,6 +164,7 @@ public abstract class AbstractImmutableMultimap<K, V, C extends ImmutableCollect
         return mutableMultimap.toImmutable();
     }
 
+    @Override
     public ImmutableMultimap<K, V> toImmutable()
     {
         return this;

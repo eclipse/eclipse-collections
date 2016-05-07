@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -93,29 +93,32 @@ public final class ArrayListAdapter<T>
 
     public static <E> ArrayListAdapter<E> newList()
     {
-        return new ArrayListAdapter<E>(new ArrayList<E>());
+        return new ArrayListAdapter<>(new ArrayList<>());
     }
 
     public static <E> ArrayListAdapter<E> newList(int size)
     {
-        return new ArrayListAdapter<E>(new ArrayList<E>(size));
+        return new ArrayListAdapter<>(new ArrayList<>(size));
     }
 
     public static <E> ArrayListAdapter<E> adapt(ArrayList<E> newDelegate)
     {
-        return new ArrayListAdapter<E>(newDelegate);
+        return new ArrayListAdapter<>(newDelegate);
     }
 
+    @Override
     public MutableList<T> asUnmodifiable()
     {
         return UnmodifiableMutableList.of(this);
     }
 
+    @Override
     public MutableList<T> asSynchronized()
     {
         return SynchronizedMutableList.of(this);
     }
 
+    @Override
     public ImmutableList<T> toImmutable()
     {
         return Lists.immutable.withAll(this);
@@ -124,9 +127,10 @@ public final class ArrayListAdapter<T>
     @Override
     public ArrayListAdapter<T> clone()
     {
-        return new ArrayListAdapter<T>((ArrayList<T>) this.delegate.clone());
+        return new ArrayListAdapter<>((ArrayList<T>) this.delegate.clone());
     }
 
+    @Override
     public ArrayListAdapter<T> newEmpty()
     {
         return ArrayListAdapter.newList();
@@ -144,6 +148,7 @@ public final class ArrayListAdapter<T>
         ArrayListIterate.forEach(this.delegate, procedure);
     }
 
+    @Override
     public void reverseForEach(Procedure<? super T> procedure)
     {
         ArrayListIterate.reverseForEach(this.delegate, procedure);
@@ -155,6 +160,7 @@ public final class ArrayListAdapter<T>
         ArrayListIterate.forEachWithIndex(this.delegate, objectIntProcedure);
     }
 
+    @Override
     public void forEachWithIndex(int fromIndex, int toIndex, ObjectIntProcedure<? super T> objectIntProcedure)
     {
         ArrayListIterate.forEachWithIndex(this.delegate, fromIndex, toIndex, objectIntProcedure);
@@ -179,6 +185,7 @@ public final class ArrayListAdapter<T>
         return ArrayListIterate.count(this.delegate, predicate);
     }
 
+    @Override
     public <S> boolean corresponds(OrderedIterable<S> other, Predicate2<? super T, ? super S> predicate)
     {
         return RandomAccessListIterate.corresponds(this.delegate, other, predicate);
@@ -208,22 +215,26 @@ public final class ArrayListAdapter<T>
         return ArrayListIterate.injectInto(injectedValue, this.delegate, function);
     }
 
+    @Override
     public void forEach(int fromIndex, int toIndex, Procedure<? super T> procedure)
     {
         ArrayListIterate.forEach(this.delegate, fromIndex, toIndex, procedure);
     }
 
+    @Override
     public ArrayListAdapter<T> sortThis(Comparator<? super T> comparator)
     {
         Iterate.sortThis(this.delegate, comparator);
         return this;
     }
 
+    @Override
     public ArrayListAdapter<T> sortThis()
     {
         return this.sortThis(Comparators.naturalOrder());
     }
 
+    @Override
     public ArrayListAdapter<T> with(T element)
     {
         this.add(element);
@@ -251,18 +262,21 @@ public final class ArrayListAdapter<T>
         return this;
     }
 
+    @Override
     public ArrayListAdapter<T> without(T element)
     {
         this.remove(element);
         return this;
     }
 
+    @Override
     public ArrayListAdapter<T> withAll(Iterable<? extends T> elements)
     {
         this.addAllIterable(elements);
         return this;
     }
 
+    @Override
     public ArrayListAdapter<T> withoutAll(Iterable<? extends T> elements)
     {
         this.removeAllIterable(elements);
@@ -311,114 +325,66 @@ public final class ArrayListAdapter<T>
     }
 
     @Override
-    public MutableBooleanList collectBoolean(final BooleanFunction<? super T> booleanFunction)
+    public MutableBooleanList collectBoolean(BooleanFunction<? super T> booleanFunction)
     {
-        final BooleanArrayList result = new BooleanArrayList(this.size());
-        this.forEach(new Procedure<T>()
-        {
-            public void value(T each)
-            {
-                result.add(booleanFunction.booleanValueOf(each));
-            }
-        });
+        BooleanArrayList result = new BooleanArrayList(this.size());
+        this.each(each -> result.add(booleanFunction.booleanValueOf(each)));
         return result;
     }
 
     @Override
-    public MutableByteList collectByte(final ByteFunction<? super T> byteFunction)
+    public MutableByteList collectByte(ByteFunction<? super T> byteFunction)
     {
-        final ByteArrayList result = new ByteArrayList(this.size());
-        this.forEach(new Procedure<T>()
-        {
-            public void value(T each)
-            {
-                result.add(byteFunction.byteValueOf(each));
-            }
-        });
+        ByteArrayList result = new ByteArrayList(this.size());
+        this.each(each -> result.add(byteFunction.byteValueOf(each)));
         return result;
     }
 
     @Override
-    public MutableCharList collectChar(final CharFunction<? super T> charFunction)
+    public MutableCharList collectChar(CharFunction<? super T> charFunction)
     {
-        final CharArrayList result = new CharArrayList(this.size());
-        this.forEach(new Procedure<T>()
-        {
-            public void value(T each)
-            {
-                result.add(charFunction.charValueOf(each));
-            }
-        });
+        CharArrayList result = new CharArrayList(this.size());
+        this.each(each -> result.add(charFunction.charValueOf(each)));
         return result;
     }
 
     @Override
-    public MutableDoubleList collectDouble(final DoubleFunction<? super T> doubleFunction)
+    public MutableDoubleList collectDouble(DoubleFunction<? super T> doubleFunction)
     {
-        final DoubleArrayList result = new DoubleArrayList(this.size());
-        this.forEach(new Procedure<T>()
-        {
-            public void value(T each)
-            {
-                result.add(doubleFunction.doubleValueOf(each));
-            }
-        });
+        DoubleArrayList result = new DoubleArrayList(this.size());
+        this.each(each -> result.add(doubleFunction.doubleValueOf(each)));
         return result;
     }
 
     @Override
-    public MutableFloatList collectFloat(final FloatFunction<? super T> floatFunction)
+    public MutableFloatList collectFloat(FloatFunction<? super T> floatFunction)
     {
-        final FloatArrayList result = new FloatArrayList(this.size());
-        this.forEach(new Procedure<T>()
-        {
-            public void value(T each)
-            {
-                result.add(floatFunction.floatValueOf(each));
-            }
-        });
+        FloatArrayList result = new FloatArrayList(this.size());
+        this.each(each -> result.add(floatFunction.floatValueOf(each)));
         return result;
     }
 
     @Override
-    public MutableIntList collectInt(final IntFunction<? super T> intFunction)
+    public MutableIntList collectInt(IntFunction<? super T> intFunction)
     {
-        final IntArrayList result = new IntArrayList(this.size());
-        this.forEach(new Procedure<T>()
-        {
-            public void value(T each)
-            {
-                result.add(intFunction.intValueOf(each));
-            }
-        });
+        IntArrayList result = new IntArrayList(this.size());
+        this.each(each -> result.add(intFunction.intValueOf(each)));
         return result;
     }
 
     @Override
-    public MutableLongList collectLong(final LongFunction<? super T> longFunction)
+    public MutableLongList collectLong(LongFunction<? super T> longFunction)
     {
-        final LongArrayList result = new LongArrayList(this.size());
-        this.forEach(new Procedure<T>()
-        {
-            public void value(T each)
-            {
-                result.add(longFunction.longValueOf(each));
-            }
-        });
+        LongArrayList result = new LongArrayList(this.size());
+        this.each(each -> result.add(longFunction.longValueOf(each)));
         return result;
     }
 
     @Override
-    public MutableShortList collectShort(final ShortFunction<? super T> shortFunction)
+    public MutableShortList collectShort(ShortFunction<? super T> shortFunction)
     {
-        final ShortArrayList result = new ShortArrayList(this.size());
-        this.forEach(new Procedure<T>()
-        {
-            public void value(T each)
-            {
-                result.add(shortFunction.shortValueOf(each));
-            }
-        });
+        ShortArrayList result = new ShortArrayList(this.size());
+        this.each(each -> result.add(shortFunction.shortValueOf(each)));
         return result;
     }
 
@@ -434,11 +400,13 @@ public final class ArrayListAdapter<T>
         return this.wrap(ArrayListIterate.collectIf(this.delegate, predicate, function));
     }
 
+    @Override
     public int detectIndex(Predicate<? super T> predicate)
     {
         return ArrayListIterate.detectIndex(this.delegate, predicate);
     }
 
+    @Override
     public int detectLastIndex(Predicate<? super T> predicate)
     {
         return ArrayListIterate.detectLastIndex(this.delegate, predicate);
@@ -474,11 +442,13 @@ public final class ArrayListAdapter<T>
         return this.wrap(ArrayListIterate.collectWith(this.delegate, function, parameter));
     }
 
+    @Override
     public ArrayListAdapter<T> distinct()
     {
         return this.wrap(ArrayListIterate.distinct(this.delegate));
     }
 
+    @Override
     public ArrayListAdapter<T> distinct(HashingStrategy<? super T> hashingStrategy)
     {
         return this.wrap(ArrayListIterate.distinct(this.delegate, hashingStrategy));
@@ -496,34 +466,39 @@ public final class ArrayListAdapter<T>
         return ArrayListIterate.zipWithIndex(this.delegate);
     }
 
+    @Override
     public MutableList<T> take(int count)
     {
         if (count < 0)
         {
             throw new IllegalArgumentException("Count must be greater than zero, but was: " + count);
         }
-        return ArrayListIterate.take(this.delegate, count, FastList.<T>newList(Math.min(this.size(), count)));
+        return ArrayListIterate.take(this.delegate, count, FastList.newList(Math.min(this.size(), count)));
     }
 
+    @Override
     public MutableList<T> takeWhile(Predicate<? super T> predicate)
     {
         return ArrayListIterate.takeWhile(this.delegate, predicate);
     }
 
+    @Override
     public MutableList<T> drop(int count)
     {
         if (count < 0)
         {
             throw new IllegalArgumentException("Count must be greater than zero, but was: " + count);
         }
-        return ArrayListIterate.drop(this.delegate, count, FastList.<T>newList(this.size() - Math.min(this.size(), count)));
+        return ArrayListIterate.drop(this.delegate, count, FastList.newList(this.size() - Math.min(this.size(), count)));
     }
 
+    @Override
     public MutableList<T> dropWhile(Predicate<? super T> predicate)
     {
         return ArrayListIterate.dropWhile(this.delegate, predicate);
     }
 
+    @Override
     public PartitionMutableList<T> partitionWhile(Predicate<? super T> predicate)
     {
         return ArrayListIterate.partitionWhile(this.delegate, predicate);

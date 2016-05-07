@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -69,22 +69,22 @@ public final class MultiReaderFastListMultimap<K, V>
 
     public static <K, V> MultiReaderFastListMultimap<K, V> newMultimap()
     {
-        return new MultiReaderFastListMultimap<K, V>();
+        return new MultiReaderFastListMultimap<>();
     }
 
     public static <K, V> MultiReaderFastListMultimap<K, V> newMultimap(Multimap<? extends K, ? extends V> multimap)
     {
-        return new MultiReaderFastListMultimap<K, V>(multimap);
+        return new MultiReaderFastListMultimap<>(multimap);
     }
 
     public static <K, V> MultiReaderFastListMultimap<K, V> newMultimap(Pair<K, V>... pairs)
     {
-        return new MultiReaderFastListMultimap<K, V>(pairs);
+        return new MultiReaderFastListMultimap<>(pairs);
     }
 
     public static <K, V> MultiReaderFastListMultimap<K, V> newMultimap(Iterable<Pair<K, V>> inputIterable)
     {
-        return new MultiReaderFastListMultimap<K, V>(inputIterable);
+        return new MultiReaderFastListMultimap<>(inputIterable);
     }
 
     @Override
@@ -105,33 +105,39 @@ public final class MultiReaderFastListMultimap<K, V>
         return MultiReaderFastList.newList(this.initialListCapacity);
     }
 
+    @Override
     public MultiReaderFastListMultimap<K, V> newEmpty()
     {
-        return new MultiReaderFastListMultimap<K, V>();
+        return new MultiReaderFastListMultimap<>();
     }
 
+    @Override
     public MutableBagMultimap<V, K> flip()
     {
         return Iterate.flip(this);
     }
 
+    @Override
     public FastListMultimap<K, V> selectKeysValues(Predicate2<? super K, ? super V> predicate)
     {
-        return this.selectKeysValues(predicate, FastListMultimap.<K, V>newMultimap());
+        return this.selectKeysValues(predicate, FastListMultimap.newMultimap());
     }
 
+    @Override
     public FastListMultimap<K, V> rejectKeysValues(Predicate2<? super K, ? super V> predicate)
     {
-        return this.rejectKeysValues(predicate, FastListMultimap.<K, V>newMultimap());
+        return this.rejectKeysValues(predicate, FastListMultimap.newMultimap());
     }
 
+    @Override
     public FastListMultimap<K, V> selectKeysMultiValues(Predicate2<? super K, ? super Iterable<V>> predicate)
     {
-        return this.selectKeysMultiValues(predicate, FastListMultimap.<K, V>newMultimap());
+        return this.selectKeysMultiValues(predicate, FastListMultimap.newMultimap());
     }
 
+    @Override
     public FastListMultimap<K, V> rejectKeysMultiValues(Predicate2<? super K, ? super Iterable<V>> predicate)
     {
-        return this.rejectKeysMultiValues(predicate, FastListMultimap.<K, V>newMultimap());
+        return this.rejectKeysMultiValues(predicate, FastListMultimap.newMultimap());
     }
 }

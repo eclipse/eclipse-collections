@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -27,6 +27,6 @@ public class ImmutableNonupletonListSerializationTest
                         + "bHVleHIAEGphdmEubGFuZy5OdW1iZXKGrJUdC5TgiwIAAHhwAAAAAXNxAH4AAwAAAAJzcQB+AAMA\n"
                         + "AAADc3EAfgADAAAABHNxAH4AAwAAAAVzcQB+AAMAAAAGc3EAfgADAAAAB3NxAH4AAwAAAAhzcQB+\n"
                         + "AAMAAAAJ",
-                new ImmutableNonupletonList<Integer>(1, 2, 3, 4, 5, 6, 7, 8, 9));
+                new ImmutableNonupletonList<>(1, 2, 3, 4, 5, 6, 7, 8, 9));
     }
 }

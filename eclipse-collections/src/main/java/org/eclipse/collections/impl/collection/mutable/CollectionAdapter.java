@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -66,16 +66,19 @@ public final class CollectionAdapter<T>
         return this.delegate;
     }
 
+    @Override
     public MutableCollection<T> asUnmodifiable()
     {
         return UnmodifiableMutableCollection.of(this);
     }
 
+    @Override
     public MutableCollection<T> asSynchronized()
     {
         return SynchronizedMutableCollection.of(this);
     }
 
+    @Override
     public ImmutableCollection<T> toImmutable()
     {
         return this.delegate instanceof Set
@@ -131,7 +134,7 @@ public final class CollectionAdapter<T>
         {
             return SetAdapter.adapt((Set<E>) collection);
         }
-        return new CollectionAdapter<E>(collection);
+        return new CollectionAdapter<>(collection);
     }
 
     @Override
@@ -158,37 +161,42 @@ public final class CollectionAdapter<T>
 
     public CollectionAdapter<T> with(T... elements)
     {
-        ArrayIterate.forEach(elements, new CollectionAddProcedure<T>(this.delegate));
+        ArrayIterate.forEach(elements, new CollectionAddProcedure<>(this.delegate));
         return this;
     }
 
+    @Override
     public CollectionAdapter<T> with(T element)
     {
         this.delegate.add(element);
         return this;
     }
 
+    @Override
     public CollectionAdapter<T> without(T element)
     {
         this.delegate.remove(element);
         return this;
     }
 
+    @Override
     public CollectionAdapter<T> withAll(Iterable<? extends T> elements)
     {
-        Iterate.forEach(elements, new CollectionAddProcedure<T>(this.delegate));
+        Iterate.forEach(elements, new CollectionAddProcedure<>(this.delegate));
         return this;
     }
 
+    @Override
     public CollectionAdapter<T> withoutAll(Iterable<? extends T> elements)
     {
-        Iterate.forEach(elements, new CollectionRemoveProcedure<T>(this.delegate));
+        Iterate.forEach(elements, new CollectionRemoveProcedure<>(this.delegate));
         return this;
     }
 
     /**
      * @deprecated use {@link FastList#newList()} or {@link UnifiedSet#newSet()} instead
      */
+    @Override
     @Deprecated
     public MutableCollection<T> newEmpty()
     {

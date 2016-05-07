@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -33,7 +33,7 @@ public class UnmodifiableMapTest
     @Before
     public void setUp()
     {
-        this.mutableMap = Maps.mutable.<String, List<String>>of(
+        this.mutableMap = Maps.mutable.of(
                 ROCK_OUT, MASTERS_OF_ROCK,
                 NAP_TIME, Lists.mutable.of("Metallica", "Bon Jovi", "Europe", "Scorpions"));
         this.unmodifiableMap = new UnmodifiableMap<>(this.mutableMap);
@@ -78,7 +78,7 @@ public class UnmodifiableMapTest
     @Test
     public void testPut()
     {
-        Verify.assertThrows(UnsupportedOperationException.class, () -> this.unmodifiableMap.put("foo", Lists.mutable.<String>of()));
+        Verify.assertThrows(UnsupportedOperationException.class, () -> this.unmodifiableMap.put("foo", Lists.mutable.of()));
     }
 
     @Test
@@ -90,7 +90,7 @@ public class UnmodifiableMapTest
     @Test
     public void testPutAll()
     {
-        Verify.assertThrows(UnsupportedOperationException.class, () -> this.unmodifiableMap.putAll(Maps.mutable.<String, List<String>>of()));
+        Verify.assertThrows(UnsupportedOperationException.class, () -> this.unmodifiableMap.putAll(Maps.mutable.of()));
     }
 
     @Test

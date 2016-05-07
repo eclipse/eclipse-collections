@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -100,82 +100,82 @@ public final class PrimitiveTuples
 
     public static <T> ObjectBooleanPair<T> pair(T one, boolean two)
     {
-        return new ObjectBooleanPairImpl<T>(one, two);
+        return new ObjectBooleanPairImpl<>(one, two);
     }
 
     public static <T> ObjectBytePair<T> pair(T one, byte two)
     {
-        return new ObjectBytePairImpl<T>(one, two);
+        return new ObjectBytePairImpl<>(one, two);
     }
 
     public static <T> ObjectCharPair<T> pair(T one, char two)
     {
-        return new ObjectCharPairImpl<T>(one, two);
+        return new ObjectCharPairImpl<>(one, two);
     }
 
     public static <T> ObjectShortPair<T> pair(T one, short two)
     {
-        return new ObjectShortPairImpl<T>(one, two);
+        return new ObjectShortPairImpl<>(one, two);
     }
 
     public static <T> ObjectIntPair<T> pair(T one, int two)
     {
-        return new ObjectIntPairImpl<T>(one, two);
+        return new ObjectIntPairImpl<>(one, two);
     }
 
     public static <T> ObjectFloatPair<T> pair(T one, float two)
     {
-        return new ObjectFloatPairImpl<T>(one, two);
+        return new ObjectFloatPairImpl<>(one, two);
     }
 
     public static <T> ObjectLongPair<T> pair(T one, long two)
     {
-        return new ObjectLongPairImpl<T>(one, two);
+        return new ObjectLongPairImpl<>(one, two);
     }
 
     public static <T> ObjectDoublePair<T> pair(T one, double two)
     {
-        return new ObjectDoublePairImpl<T>(one, two);
+        return new ObjectDoublePairImpl<>(one, two);
     }
 
     public static <T> BooleanObjectPair<T> pair(boolean one, T two)
     {
-        return new BooleanObjectPairImpl<T>(one, two);
+        return new BooleanObjectPairImpl<>(one, two);
     }
 
     public static <T> ByteObjectPair<T> pair(byte one, T two)
     {
-        return new ByteObjectPairImpl<T>(one, two);
+        return new ByteObjectPairImpl<>(one, two);
     }
 
     public static <T> CharObjectPair<T> pair(char one, T two)
     {
-        return new CharObjectPairImpl<T>(one, two);
+        return new CharObjectPairImpl<>(one, two);
     }
 
     public static <T> ShortObjectPair<T> pair(short one, T two)
     {
-        return new ShortObjectPairImpl<T>(one, two);
+        return new ShortObjectPairImpl<>(one, two);
     }
 
     public static <T> IntObjectPair<T> pair(int one, T two)
     {
-        return new IntObjectPairImpl<T>(one, two);
+        return new IntObjectPairImpl<>(one, two);
     }
 
     public static <T> FloatObjectPair<T> pair(float one, T two)
     {
-        return new FloatObjectPairImpl<T>(one, two);
+        return new FloatObjectPairImpl<>(one, two);
     }
 
     public static <T> LongObjectPair<T> pair(long one, T two)
     {
-        return new LongObjectPairImpl<T>(one, two);
+        return new LongObjectPairImpl<>(one, two);
     }
 
     public static <T> DoubleObjectPair<T> pair(double one, T two)
     {
-        return new DoubleObjectPairImpl<T>(one, two);
+        return new DoubleObjectPairImpl<>(one, two);
     }
 
     public static IntIntPair pair(int one, int two)

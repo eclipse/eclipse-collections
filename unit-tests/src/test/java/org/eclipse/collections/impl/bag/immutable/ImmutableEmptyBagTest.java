@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -115,7 +115,7 @@ public class ImmutableEmptyBagTest extends ImmutableBagTestCase
     @Override
     public void partitionWith()
     {
-        PartitionImmutableBag<String> partition = this.newBag().partitionWith(Predicates2.<String>lessThan(), "0");
+        PartitionImmutableBag<String> partition = this.newBag().partitionWith(Predicates2.lessThan(), "0");
         Verify.assertIterableEmpty(partition.getSelected());
         Verify.assertIterableEmpty(partition.getRejected());
     }
@@ -169,7 +169,7 @@ public class ImmutableEmptyBagTest extends ImmutableBagTestCase
     @Test
     public void detectWith()
     {
-        Assert.assertNull(this.newBag().detectWith(Predicates2.<String>greaterThan(), "3"));
+        Assert.assertNull(this.newBag().detectWith(Predicates2.greaterThan(), "3"));
     }
 
     @Override
@@ -354,7 +354,7 @@ public class ImmutableEmptyBagTest extends ImmutableBagTestCase
                 HashBag.newBag(nulls),
                 pairsPlusOne.collect((Function<Pair<?, Object>, Object>) Pair::getTwo));
 
-        Assert.assertEquals(immutableBag.zip(nulls), immutableBag.zip(nulls, HashBag.<Pair<String, Object>>newBag()));
+        Assert.assertEquals(immutableBag.zip(nulls), immutableBag.zip(nulls, HashBag.newBag()));
     }
 
     @Override
@@ -367,7 +367,7 @@ public class ImmutableEmptyBagTest extends ImmutableBagTestCase
         Assert.assertEquals(UnifiedSet.<String>newSet(), pairs.collect((Function<Pair<String, ?>, String>) Pair::getOne));
         Assert.assertEquals(UnifiedSet.<Integer>newSet(), pairs.collect((Function<Pair<?, Integer>, Integer>) Pair::getTwo));
 
-        Assert.assertEquals(immutableBag.zipWithIndex(), immutableBag.zipWithIndex(UnifiedSet.<Pair<String, Integer>>newSet()));
+        Assert.assertEquals(immutableBag.zipWithIndex(), immutableBag.zipWithIndex(UnifiedSet.newSet()));
     }
 
     @Override
@@ -405,7 +405,7 @@ public class ImmutableEmptyBagTest extends ImmutableBagTestCase
     @Test
     public void toSortedMap_with_comparator()
     {
-        MutableSortedMap<String, String> map = this.newBag().toSortedMap(Comparators.<String>reverseNaturalOrder(),
+        MutableSortedMap<String, String> map = this.newBag().toSortedMap(Comparators.reverseNaturalOrder(),
                 Functions.getStringPassThru(), Functions.getStringPassThru());
         Verify.assertEmpty(map);
         Verify.assertInstanceOf(TreeSortedMap.class, map);
@@ -485,7 +485,7 @@ public class ImmutableEmptyBagTest extends ImmutableBagTestCase
     @Test
     public void groupByUniqueKey_target()
     {
-        Assert.assertEquals(UnifiedMap.newMap(), this.newBag().groupByUniqueKey(id -> id, UnifiedMap.<String, String>newMap()));
+        Assert.assertEquals(UnifiedMap.newMap(), this.newBag().groupByUniqueKey(id -> id, UnifiedMap.newMap()));
     }
 
     @Override
@@ -493,7 +493,7 @@ public class ImmutableEmptyBagTest extends ImmutableBagTestCase
     public void groupByUniqueKey_target_throws()
     {
         super.groupByUniqueKey_target_throws();
-        Assert.assertEquals(UnifiedMap.newMap(), this.newBag().groupByUniqueKey(id -> id, UnifiedMap.<String, String>newMap()));
+        Assert.assertEquals(UnifiedMap.newMap(), this.newBag().groupByUniqueKey(id -> id, UnifiedMap.newMap()));
     }
 
     @Override
@@ -505,7 +505,7 @@ public class ImmutableEmptyBagTest extends ImmutableBagTestCase
 
         Verify.assertSortedBagsEqual(TreeBag.newBag(), sortedBag);
 
-        MutableSortedBag<String> reverse = immutableBag.toSortedBag(Comparator.<String>reverseOrder());
+        MutableSortedBag<String> reverse = immutableBag.toSortedBag(Comparator.reverseOrder());
         Verify.assertSortedBagsEqual(TreeBag.newBag(Comparator.<String>reverseOrder()), reverse);
 
         ImmutableBag<String> immutableBag1 = this.newBag();

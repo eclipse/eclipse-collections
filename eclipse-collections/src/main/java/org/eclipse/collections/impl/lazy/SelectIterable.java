@@ -40,26 +40,28 @@ public class SelectIterable<T>
         this.predicate = newPredicate;
     }
 
+    @Override
     public void each(Procedure<? super T> procedure)
     {
-        Iterate.forEach(this.adapted, new IfProcedure<T>(this.predicate, procedure));
+        Iterate.forEach(this.adapted, new IfProcedure<>(this.predicate, procedure));
     }
 
     @Override
     public void forEachWithIndex(ObjectIntProcedure<? super T> objectIntProcedure)
     {
-        Iterate.forEach(this.adapted, new IfObjectIntProcedure<T>(this.predicate, objectIntProcedure));
+        Iterate.forEach(this.adapted, new IfObjectIntProcedure<>(this.predicate, objectIntProcedure));
     }
 
     @Override
     public <P> void forEachWith(Procedure2<? super T, ? super P> procedure, P parameter)
     {
-        Iterate.forEachWith(this.adapted, new IfProcedureWith<T, P>(this.predicate, procedure), parameter);
+        Iterate.forEachWith(this.adapted, new IfProcedureWith<>(this.predicate, procedure), parameter);
     }
 
+    @Override
     public Iterator<T> iterator()
     {
-        return new SelectIterator<T>(this.adapted.iterator(), this.predicate);
+        return new SelectIterator<>(this.adapted.iterator(), this.predicate);
     }
 
     @Override
@@ -71,13 +73,13 @@ public class SelectIterable<T>
     @Override
     public boolean allSatisfy(Predicate<? super T> predicate)
     {
-        return Iterate.allSatisfy(this.adapted, new AllSatisfyPredicate<T>(this.predicate, predicate));
+        return Iterate.allSatisfy(this.adapted, new AllSatisfyPredicate<>(this.predicate, predicate));
     }
 
     @Override
     public boolean noneSatisfy(Predicate<? super T> predicate)
     {
-        return Iterate.noneSatisfy(this.adapted, new AllSatisfyPredicate<T>(this.predicate, predicate));
+        return Iterate.noneSatisfy(this.adapted, new AllSatisfyPredicate<>(this.predicate, predicate));
     }
 
     @Override

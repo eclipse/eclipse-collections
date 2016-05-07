@@ -51,7 +51,7 @@ public final class ConcurrentMutableHashMap<K, V>
 
     private ConcurrentMutableHashMap()
     {
-        this(new ConcurrentHashMap<K, V>());
+        this(new ConcurrentHashMap<>());
     }
 
     public ConcurrentMutableHashMap(ConcurrentMap<K, V> delegate)
@@ -61,22 +61,22 @@ public final class ConcurrentMutableHashMap<K, V>
 
     public static <NK, NV> ConcurrentMutableHashMap<NK, NV> newMap()
     {
-        return new ConcurrentMutableHashMap<NK, NV>();
+        return new ConcurrentMutableHashMap<>();
     }
 
     public static <NK, NV> ConcurrentMutableHashMap<NK, NV> newMap(int initialCapacity)
     {
-        return new ConcurrentMutableHashMap<NK, NV>(new ConcurrentHashMap<NK, NV>(initialCapacity));
+        return new ConcurrentMutableHashMap<>(new ConcurrentHashMap<>(initialCapacity));
     }
 
     public static <NK, NV> ConcurrentMutableHashMap<NK, NV> newMap(int initialCapacity, float loadFactor, int concurrencyLevel)
     {
-        return new ConcurrentMutableHashMap<NK, NV>(new ConcurrentHashMap<NK, NV>(initialCapacity, loadFactor, concurrencyLevel));
+        return new ConcurrentMutableHashMap<>(new ConcurrentHashMap<>(initialCapacity, loadFactor, concurrencyLevel));
     }
 
     public static <NK, NV> ConcurrentMutableHashMap<NK, NV> newMap(Map<NK, NV> map)
     {
-        return new ConcurrentMutableHashMap<NK, NV>(new ConcurrentHashMap<NK, NV>(map));
+        return new ConcurrentMutableHashMap<>(new ConcurrentHashMap<>(map));
     }
 
     @Override
@@ -139,6 +139,7 @@ public final class ConcurrentMutableHashMap<K, V>
         Iterate.forEachWithIndex(this.delegate.values(), objectIntProcedure);
     }
 
+    @Override
     public int size()
     {
         return this.delegate.size();
@@ -156,31 +157,37 @@ public final class ConcurrentMutableHashMap<K, V>
         return this.delegate.values().iterator();
     }
 
+    @Override
     public V remove(Object key)
     {
         return this.delegate.remove(key);
     }
 
+    @Override
     public Set<K> keySet()
     {
         return this.delegate.keySet();
     }
 
+    @Override
     public Collection<V> values()
     {
         return this.delegate.values();
     }
 
+    @Override
     public Set<Entry<K, V>> entrySet()
     {
         return this.delegate.entrySet();
     }
 
+    @Override
     public void clear()
     {
         this.delegate.clear();
     }
 
+    @Override
     public MutableMap<K, V> newEmpty()
     {
         return ConcurrentMutableHashMap.newMap();
@@ -205,26 +212,31 @@ public final class ConcurrentMutableHashMap<K, V>
         IterableIterate.forEach(this.delegate.keySet(), procedure);
     }
 
+    @Override
     public void forEachKeyValue(Procedure2<? super K, ? super V> procedure)
     {
-        IterableIterate.forEach(this.delegate.entrySet(), new MapEntryToProcedure2<K, V>(procedure));
+        IterableIterate.forEach(this.delegate.entrySet(), new MapEntryToProcedure2<>(procedure));
     }
 
+    @Override
     public V get(Object key)
     {
         return this.delegate.get(key);
     }
 
+    @Override
     public V put(K key, V value)
     {
         return this.delegate.put(key, value);
     }
 
+    @Override
     public void putAll(Map<? extends K, ? extends V> map)
     {
         this.delegate.putAll(map);
     }
 
+    @Override
     public <E> MutableMap<K, V> collectKeysAndValues(
             Iterable<E> iterable,
             Function<? super E, ? extends K> keyFunction,
@@ -234,16 +246,19 @@ public final class ConcurrentMutableHashMap<K, V>
         return this;
     }
 
+    @Override
     public V removeKey(K key)
     {
         return this.delegate.remove(key);
     }
 
+    @Override
     public boolean containsKey(Object key)
     {
         return this.delegate.containsKey(key);
     }
 
+    @Override
     public boolean containsValue(Object value)
     {
         return this.delegate.containsValue(value);
@@ -353,21 +368,25 @@ public final class ConcurrentMutableHashMap<K, V>
         Iterate.forEachWith(this.delegate.values(), procedure, parameter);
     }
 
+    @Override
     public V putIfAbsent(K key, V value)
     {
         return this.delegate.putIfAbsent(key, value);
     }
 
+    @Override
     public boolean remove(Object key, Object value)
     {
         return this.delegate.remove(key, value);
     }
 
+    @Override
     public boolean replace(K key, V oldValue, V newValue)
     {
         return this.delegate.replace(key, oldValue, newValue);
     }
 
+    @Override
     public V replace(K key, V value)
     {
         return this.delegate.replace(key, value);

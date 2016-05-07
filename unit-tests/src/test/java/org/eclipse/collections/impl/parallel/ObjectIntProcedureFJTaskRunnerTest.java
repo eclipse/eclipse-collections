@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -49,7 +49,7 @@ public class ObjectIntProcedureFJTaskRunnerTest
                 () -> this.undertest.executeAndCombine(
                         new DoNothingExecutor(),
                         new PassThroughObjectIntProcedureFactory(),
-                        FastList.<Integer>newList()));
+                        FastList.newList()));
     }
 
     private static class DoNothingWithFalseCombineOneCombiner implements Combiner<ObjectIntProcedure<Integer>>

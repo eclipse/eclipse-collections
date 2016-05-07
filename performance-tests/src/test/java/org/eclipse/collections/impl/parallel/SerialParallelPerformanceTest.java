@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -183,9 +183,7 @@ public class SerialParallelPerformanceTest
     {
         Interval interval = Interval.fromTo(-(count / 2), count / 2 - 1);
         MutableList<Function0<Iterable<Integer>>> generators = FastList.newList();
-        generators.add(() -> {
-            return interval.toList().shuffleThis();
-        });
+        generators.add(() -> interval.toList().shuffleThis());
         generators.add(() -> {
             MutableList<Integer> integers = interval.toList().shuffleThis();
             return integers.toImmutable();
@@ -307,9 +305,9 @@ public class SerialParallelPerformanceTest
                 + this.getSimpleName(iterable)
                 + " size: "
                 + this.formatSizeOf(iterable), () -> {
-            Verify.assertNotEmpty(Iterate.select(iterable, predicateList.get(0), FastList.<Integer>newList()));
-            Verify.assertNotEmpty(Iterate.select(iterable, predicateList.get(1), FastList.<Integer>newList()));
-            Verify.assertNotEmpty(Iterate.select(iterable, predicateList.get(2), FastList.<Integer>newList()));
+            Verify.assertNotEmpty(Iterate.select(iterable, predicateList.get(0), FastList.newList()));
+            Verify.assertNotEmpty(Iterate.select(iterable, predicateList.get(1), FastList.newList()));
+            Verify.assertNotEmpty(Iterate.select(iterable, predicateList.get(2), FastList.newList()));
         }, count, WARM_UP_COUNT);
     }
 
@@ -431,9 +429,9 @@ public class SerialParallelPerformanceTest
                 + this.getSimpleName(iterable)
                 + " size: "
                 + this.formatSizeOf(iterable), () -> {
-            Verify.assertNotEmpty(Iterate.reject(iterable, predicateList.get(0), FastList.<Integer>newList()));
-            Verify.assertNotEmpty(Iterate.reject(iterable, predicateList.get(1), FastList.<Integer>newList()));
-            Verify.assertNotEmpty(Iterate.reject(iterable, predicateList.get(2), FastList.<Integer>newList()));
+            Verify.assertNotEmpty(Iterate.reject(iterable, predicateList.get(0), FastList.newList()));
+            Verify.assertNotEmpty(Iterate.reject(iterable, predicateList.get(1), FastList.newList()));
+            Verify.assertNotEmpty(Iterate.reject(iterable, predicateList.get(2), FastList.newList()));
         }, count, WARM_UP_COUNT);
     }
 
@@ -564,17 +562,17 @@ public class SerialParallelPerformanceTest
                     iterable,
                     predicates.get(0),
                     PAIR_FUNCTION,
-                    FastList.<Pair<Integer, Integer>>newList()));
+                    FastList.newList()));
             Verify.assertNotEmpty(Iterate.collectIf(
                     iterable,
                     predicates.get(1),
                     Integer::longValue,
-                    FastList.<Long>newList()));
+                    FastList.newList()));
             Verify.assertNotEmpty(Iterate.collectIf(
                     iterable,
                     predicates.get(2),
                     Integer::shortValue,
-                    FastList.<Short>newList()));
+                    FastList.newList()));
         }, count, WARM_UP_COUNT);
     }
 
@@ -590,15 +588,15 @@ public class SerialParallelPerformanceTest
             Verify.assertNotEmpty(Iterate.collect(
                     iterable,
                     PAIR_FUNCTION,
-                    FastList.<Pair<Integer, Integer>>newList(initialCapacity)));
+                    FastList.newList(initialCapacity)));
             Verify.assertNotEmpty(Iterate.collect(
                     iterable,
                     Integer::longValue,
-                    FastList.<Long>newList(initialCapacity)));
+                    FastList.newList(initialCapacity)));
             Verify.assertNotEmpty(Iterate.collect(
                     iterable,
                     Integer::shortValue,
-                    FastList.<Short>newList(initialCapacity)));
+                    FastList.newList(initialCapacity)));
         }, count, 10);
     }
 

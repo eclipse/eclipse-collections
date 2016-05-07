@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -80,21 +80,21 @@ public class UnifiedMapWithHashingStrategyTest extends UnifiedMapTestCase
     public <K, V> MutableMap<K, V> newMap()
     {
         return UnifiedMapWithHashingStrategy.newMap(
-                HashingStrategies.nullSafeHashingStrategy(HashingStrategies.<K>defaultStrategy()));
+                HashingStrategies.nullSafeHashingStrategy(HashingStrategies.defaultStrategy()));
     }
 
     @Override
     public <K, V> MutableMap<K, V> newMapWithKeyValue(K key, V value)
     {
         return UnifiedMapWithHashingStrategy.newWithKeysValues(
-                HashingStrategies.nullSafeHashingStrategy(HashingStrategies.<K>defaultStrategy()), key, value);
+                HashingStrategies.nullSafeHashingStrategy(HashingStrategies.defaultStrategy()), key, value);
     }
 
     @Override
     public <K, V> MutableMap<K, V> newMapWithKeysValues(K key1, V value1, K key2, V value2)
     {
         return UnifiedMapWithHashingStrategy.newWithKeysValues(
-                HashingStrategies.nullSafeHashingStrategy(HashingStrategies.<K>defaultStrategy()), key1, value1, key2, value2);
+                HashingStrategies.nullSafeHashingStrategy(HashingStrategies.defaultStrategy()), key1, value1, key2, value2);
     }
 
     @Override
@@ -103,7 +103,7 @@ public class UnifiedMapWithHashingStrategyTest extends UnifiedMapTestCase
             V value3)
     {
         return UnifiedMapWithHashingStrategy.newWithKeysValues(
-                HashingStrategies.nullSafeHashingStrategy(HashingStrategies.<K>defaultStrategy()), key1, value1, key2, value2, key3, value3);
+                HashingStrategies.nullSafeHashingStrategy(HashingStrategies.defaultStrategy()), key1, value1, key2, value2, key3, value3);
     }
 
     @Override
@@ -112,7 +112,7 @@ public class UnifiedMapWithHashingStrategyTest extends UnifiedMapTestCase
             V value3, K key4, V value4)
     {
         return UnifiedMapWithHashingStrategy.newWithKeysValues(
-                HashingStrategies.nullSafeHashingStrategy(HashingStrategies.<K>defaultStrategy()), key1, value1, key2, value2, key3, value3, key4, value4);
+                HashingStrategies.nullSafeHashingStrategy(HashingStrategies.defaultStrategy()), key1, value1, key2, value2, key3, value3, key4, value4);
     }
 
     @Test
@@ -131,11 +131,11 @@ public class UnifiedMapWithHashingStrategyTest extends UnifiedMapTestCase
         Pair<Integer, String> pair3 = Tuples.pair(3, "Three");
         Pair<Integer, String> pair4 = Tuples.pair(4, "Four");
         UnifiedMapWithHashingStrategy<Integer, String> expected = UnifiedMapWithHashingStrategy.newMapWith(INTEGER_HASHING_STRATEGY, pair1, pair2, pair3, pair4);
-        UnifiedMapWithHashingStrategy<Integer, String> actual1 = UnifiedMapWithHashingStrategy.newMapWith(INTEGER_HASHING_STRATEGY, FastList.<Pair<Integer, String>>newListWith(pair1, pair2, pair3, pair4));
+        UnifiedMapWithHashingStrategy<Integer, String> actual1 = UnifiedMapWithHashingStrategy.newMapWith(INTEGER_HASHING_STRATEGY, FastList.newListWith(pair1, pair2, pair3, pair4));
         Assert.assertEquals(expected, actual1);
         Assert.assertEquals(expected.hashingStrategy(), actual1.hashingStrategy());
 
-        UnifiedMapWithHashingStrategy<Integer, String> actual2 = UnifiedMapWithHashingStrategy.newMapWith(INTEGER_HASHING_STRATEGY, UnifiedSet.<Pair<Integer, String>>newSetWith(pair1, pair2, pair3, pair4));
+        UnifiedMapWithHashingStrategy<Integer, String> actual2 = UnifiedMapWithHashingStrategy.newMapWith(INTEGER_HASHING_STRATEGY, UnifiedSet.newSetWith(pair1, pair2, pair3, pair4));
         Assert.assertEquals(expected, actual2);
         Assert.assertEquals(expected.hashingStrategy(), actual2.hashingStrategy());
     }
@@ -345,7 +345,7 @@ public class UnifiedMapWithHashingStrategyTest extends UnifiedMapTestCase
                 INTEGER_HASHING_STRATEGY, 100).withKeysValues(null, 10, 1, null, 2, 11, 3, 12).withKeysValues(4, null, 5, null);
         this.batchForEachNullHandling(nulls, 36);
 
-        this.batchForEachEmptyBatchIterable(UnifiedMapWithHashingStrategy.<Integer, Integer>newMap(INTEGER_HASHING_STRATEGY));
+        this.batchForEachEmptyBatchIterable(UnifiedMapWithHashingStrategy.newMap(INTEGER_HASHING_STRATEGY));
     }
 
     @Test
@@ -532,7 +532,7 @@ public class UnifiedMapWithHashingStrategyTest extends UnifiedMapTestCase
                 INTEGER_HASHING_STRATEGY, 100).withKeysValues(null, 10, 1, null, 2, 11, 3, 12).withKeysValues(4, null, 5, null);
         this.batchIterable_forEachNullHandling(nulls, 33);
 
-        this.batchIterable_forEachEmptyBatchIterable(UnifiedMapWithHashingStrategy.<Integer, Integer>newMap(INTEGER_HASHING_STRATEGY));
+        this.batchIterable_forEachEmptyBatchIterable(UnifiedMapWithHashingStrategy.newMap(INTEGER_HASHING_STRATEGY));
     }
 
     @Test

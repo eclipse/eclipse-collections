@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -25,6 +25,6 @@ public class IfFunctionSerializationTest
                         + "cy9hcGkvYmxvY2svZnVuY3Rpb24vRnVuY3Rpb247TAAIZnVuY3Rpb25xAH4AAUwACXByZWRpY2F0\n"
                         + "ZXQAN0xvcmcvZWNsaXBzZS9jb2xsZWN0aW9ucy9hcGkvYmxvY2svcHJlZGljYXRlL1ByZWRpY2F0\n"
                         + "ZTt4cHBwcA==",
-                new IfFunction<Object, Object>(null, null));
+                new IfFunction<>(null, null));
     }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -95,7 +95,7 @@ public abstract class AbstractMutableMultimapTestCase extends AbstractMultimapTe
     public void testClear()
     {
         MutableMultimap<Integer, Object> multimap =
-                this.<Integer, Object>newMultimapWithKeysValues(1, "One", 2, "Two", 3, "Three");
+                this.newMultimapWithKeysValues(1, "One", 2, "Two", 3, "Three");
         Verify.assertNotEmpty(multimap);
         multimap.clear();
         Verify.assertEmpty(multimap);
@@ -177,7 +177,7 @@ public abstract class AbstractMutableMultimapTestCase extends AbstractMultimapTe
         MutableMultimap<Integer, String> multimap = this.newMultimapWithKeysValues(1, "One", 2, "Two");
         Assert.assertTrue(multimap.putAll(1, Lists.fixedSize.of("Three", "Four")));
         Assert.assertEquals(this.newMultimapWithKeysValues(1, "One", 2, "Two", 1, "Three", 1, "Four"), multimap);
-        Assert.assertFalse(multimap.putAll(1, UnifiedSet.<String>newSet()));
+        Assert.assertFalse(multimap.putAll(1, UnifiedSet.newSet()));
         Assert.assertEquals(this.newMultimapWithKeysValues(1, "One", 2, "Two", 1, "Three", 1, "Four"), multimap);
     }
 
@@ -243,7 +243,7 @@ public abstract class AbstractMutableMultimapTestCase extends AbstractMultimapTe
         Assert.assertEquals(Bags.mutable.of(2), oldValues2.toBag());
         Verify.assertEqualsAndHashCode(this.newMultimapWithKeysValues("One", 1, "Two", 4, "Three", 3), multimap);
 
-        RichIterable<Integer> oldValues3 = multimap.replaceValues("Three", UnifiedSet.<Integer>newSet());
+        RichIterable<Integer> oldValues3 = multimap.replaceValues("Three", UnifiedSet.newSet());
         Assert.assertEquals(Bags.mutable.of(3), oldValues3.toBag());
         Verify.assertEqualsAndHashCode(this.newMultimapWithKeysValues("One", 1, "Two", 4), multimap);
     }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -31,40 +31,33 @@ public class FlatCollectUnsortedBagBatch<T, V> extends AbstractBatch<V> implemen
         this.function = function;
     }
 
-    public void forEach(final Procedure<? super V> procedure)
+    @Override
+    public void forEach(Procedure<? super V> procedure)
     {
-        this.unsortedBagBatch.forEach(new Procedure<T>()
-        {
-            public void value(T each)
-            {
-                Iterate.forEach(FlatCollectUnsortedBagBatch.this.function.valueOf(each), new Procedure<V>()
-                {
-                    public void value(V each)
-                    {
-                        procedure.value(each);
-                    }
-                });
-            }
-        });
+        this.unsortedBagBatch.forEach(each -> Iterate.forEach(this.function.valueOf(each), procedure::value));
     }
 
+    @Override
     public void forEachWithOccurrences(ObjectIntProcedure<? super V> procedure)
     {
         throw new UnsupportedOperationException("not implemented yet");
     }
 
+    @Override
     public UnsortedBagBatch<V> select(Predicate<? super V> predicate)
     {
-        return new SelectUnsortedBagBatch<V>(this, predicate);
+        return new SelectUnsortedBagBatch<>(this, predicate);
     }
 
+    @Override
     public <VV> UnsortedBagBatch<VV> collect(Function<? super V, ? extends VV> function)
     {
-        return new CollectUnsortedBagBatch<V, VV>(this, function);
+        return new CollectUnsortedBagBatch<>(this, function);
     }
 
+    @Override
     public <V1> UnsortedBagBatch<V1> flatCollect(Function<? super V, ? extends Iterable<V1>> function)
     {
-        return new FlatCollectUnsortedBagBatch<V, V1>(this, function);
+        return new FlatCollectUnsortedBagBatch<>(this, function);
     }
 }

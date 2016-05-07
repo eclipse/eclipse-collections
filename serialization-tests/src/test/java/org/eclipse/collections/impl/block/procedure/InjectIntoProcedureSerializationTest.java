@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -24,6 +24,6 @@ public class InjectIntoProcedureSerializationTest
                         + "Y3RJbnRvUHJvY2VkdXJlAAAAAAAAAAECAAJMAAhmdW5jdGlvbnQANkxvcmcvZWNsaXBzZS9jb2xs\n"
                         + "ZWN0aW9ucy9hcGkvYmxvY2svZnVuY3Rpb24vRnVuY3Rpb24yO0wABnJlc3VsdHQAEkxqYXZhL2xh\n"
                         + "bmcvT2JqZWN0O3hwcHA=",
-                new InjectIntoProcedure<Object, Object>(null, null));
+                new InjectIntoProcedure<>(null, null));
     }
 }

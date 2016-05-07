@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -51,19 +51,20 @@ public abstract class AbstractMultiReaderParallelIterable<T, PI extends Parallel
 
     protected <A> ParallelListIterable<A> wrap(ParallelListIterable<A> wrapped)
     {
-        return new MultiReaderParallelListIterable<A>(wrapped, this.lock);
+        return new MultiReaderParallelListIterable<>(wrapped, this.lock);
     }
 
     protected <A> ParallelUnsortedSetIterable<A> wrap(ParallelUnsortedSetIterable<A> wrapped)
     {
-        return new MultiReaderParallelUnsortedSetIterable<A>(wrapped, this.lock);
+        return new MultiReaderParallelUnsortedSetIterable<>(wrapped, this.lock);
     }
 
     protected <A> ParallelIterable<A> wrap(ParallelIterable<A> wrapped)
     {
-        return new MultiReaderParallelIterable<A>(wrapped, this.lock);
+        return new MultiReaderParallelIterable<>(wrapped, this.lock);
     }
 
+    @Override
     public void forEach(Procedure<? super T> procedure)
     {
         this.lock.readLock().lock();
@@ -77,6 +78,7 @@ public abstract class AbstractMultiReaderParallelIterable<T, PI extends Parallel
         }
     }
 
+    @Override
     public <P> void forEachWith(Procedure2<? super T, ? super P> procedure, P parameter)
     {
         this.lock.readLock().lock();
@@ -90,6 +92,7 @@ public abstract class AbstractMultiReaderParallelIterable<T, PI extends Parallel
         }
     }
 
+    @Override
     public T detect(Predicate<? super T> predicate)
     {
         this.lock.readLock().lock();
@@ -103,6 +106,7 @@ public abstract class AbstractMultiReaderParallelIterable<T, PI extends Parallel
         }
     }
 
+    @Override
     public <P> T detectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         this.lock.readLock().lock();
@@ -116,6 +120,7 @@ public abstract class AbstractMultiReaderParallelIterable<T, PI extends Parallel
         }
     }
 
+    @Override
     public T detectIfNone(Predicate<? super T> predicate, Function0<? extends T> function)
     {
         this.lock.readLock().lock();
@@ -129,6 +134,7 @@ public abstract class AbstractMultiReaderParallelIterable<T, PI extends Parallel
         }
     }
 
+    @Override
     public <P> T detectWithIfNone(Predicate2<? super T, ? super P> predicate, P parameter, Function0<? extends T> function)
     {
         this.lock.readLock().lock();
@@ -142,6 +148,7 @@ public abstract class AbstractMultiReaderParallelIterable<T, PI extends Parallel
         }
     }
 
+    @Override
     public int count(Predicate<? super T> predicate)
     {
         this.lock.readLock().lock();
@@ -155,6 +162,7 @@ public abstract class AbstractMultiReaderParallelIterable<T, PI extends Parallel
         }
     }
 
+    @Override
     public <P> int countWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         this.lock.readLock().lock();
@@ -168,6 +176,7 @@ public abstract class AbstractMultiReaderParallelIterable<T, PI extends Parallel
         }
     }
 
+    @Override
     public boolean anySatisfy(Predicate<? super T> predicate)
     {
         this.lock.readLock().lock();
@@ -181,6 +190,7 @@ public abstract class AbstractMultiReaderParallelIterable<T, PI extends Parallel
         }
     }
 
+    @Override
     public <P> boolean anySatisfyWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         this.lock.readLock().lock();
@@ -194,6 +204,7 @@ public abstract class AbstractMultiReaderParallelIterable<T, PI extends Parallel
         }
     }
 
+    @Override
     public boolean allSatisfy(Predicate<? super T> predicate)
     {
         this.lock.readLock().lock();
@@ -207,6 +218,7 @@ public abstract class AbstractMultiReaderParallelIterable<T, PI extends Parallel
         }
     }
 
+    @Override
     public <P> boolean allSatisfyWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         this.lock.readLock().lock();
@@ -220,6 +232,7 @@ public abstract class AbstractMultiReaderParallelIterable<T, PI extends Parallel
         }
     }
 
+    @Override
     public boolean noneSatisfy(Predicate<? super T> predicate)
     {
         this.lock.readLock().lock();
@@ -233,6 +246,7 @@ public abstract class AbstractMultiReaderParallelIterable<T, PI extends Parallel
         }
     }
 
+    @Override
     public <P> boolean noneSatisfyWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         this.lock.readLock().lock();
@@ -246,6 +260,7 @@ public abstract class AbstractMultiReaderParallelIterable<T, PI extends Parallel
         }
     }
 
+    @Override
     public MutableList<T> toList()
     {
         this.lock.readLock().lock();
@@ -259,6 +274,7 @@ public abstract class AbstractMultiReaderParallelIterable<T, PI extends Parallel
         }
     }
 
+    @Override
     public MutableList<T> toSortedList()
     {
         this.lock.readLock().lock();
@@ -272,6 +288,7 @@ public abstract class AbstractMultiReaderParallelIterable<T, PI extends Parallel
         }
     }
 
+    @Override
     public MutableList<T> toSortedList(Comparator<? super T> comparator)
     {
         this.lock.readLock().lock();
@@ -285,6 +302,7 @@ public abstract class AbstractMultiReaderParallelIterable<T, PI extends Parallel
         }
     }
 
+    @Override
     public <V extends Comparable<? super V>> MutableList<T> toSortedListBy(Function<? super T, ? extends V> function)
     {
         this.lock.readLock().lock();
@@ -298,6 +316,7 @@ public abstract class AbstractMultiReaderParallelIterable<T, PI extends Parallel
         }
     }
 
+    @Override
     public MutableSet<T> toSet()
     {
         this.lock.readLock().lock();
@@ -311,6 +330,7 @@ public abstract class AbstractMultiReaderParallelIterable<T, PI extends Parallel
         }
     }
 
+    @Override
     public MutableSortedSet<T> toSortedSet()
     {
         this.lock.readLock().lock();
@@ -324,6 +344,7 @@ public abstract class AbstractMultiReaderParallelIterable<T, PI extends Parallel
         }
     }
 
+    @Override
     public MutableSortedSet<T> toSortedSet(Comparator<? super T> comparator)
     {
         this.lock.readLock().lock();
@@ -337,6 +358,7 @@ public abstract class AbstractMultiReaderParallelIterable<T, PI extends Parallel
         }
     }
 
+    @Override
     public <V extends Comparable<? super V>> MutableSortedSet<T> toSortedSetBy(Function<? super T, ? extends V> function)
     {
         this.lock.readLock().lock();
@@ -350,6 +372,7 @@ public abstract class AbstractMultiReaderParallelIterable<T, PI extends Parallel
         }
     }
 
+    @Override
     public MutableBag<T> toBag()
     {
         this.lock.readLock().lock();
@@ -363,6 +386,7 @@ public abstract class AbstractMultiReaderParallelIterable<T, PI extends Parallel
         }
     }
 
+    @Override
     public MutableSortedBag<T> toSortedBag()
     {
         this.lock.readLock().lock();
@@ -376,6 +400,7 @@ public abstract class AbstractMultiReaderParallelIterable<T, PI extends Parallel
         }
     }
 
+    @Override
     public MutableSortedBag<T> toSortedBag(Comparator<? super T> comparator)
     {
         this.lock.readLock().lock();
@@ -389,6 +414,7 @@ public abstract class AbstractMultiReaderParallelIterable<T, PI extends Parallel
         }
     }
 
+    @Override
     public <V extends Comparable<? super V>> MutableSortedBag<T> toSortedBagBy(Function<? super T, ? extends V> function)
     {
         this.lock.readLock().lock();
@@ -402,6 +428,7 @@ public abstract class AbstractMultiReaderParallelIterable<T, PI extends Parallel
         }
     }
 
+    @Override
     public <NK, NV> MutableMap<NK, NV> toMap(Function<? super T, ? extends NK> keyFunction, Function<? super T, ? extends NV> valueFunction)
     {
         this.lock.readLock().lock();
@@ -415,6 +442,7 @@ public abstract class AbstractMultiReaderParallelIterable<T, PI extends Parallel
         }
     }
 
+    @Override
     public <NK, NV> MutableSortedMap<NK, NV> toSortedMap(Function<? super T, ? extends NK> keyFunction, Function<? super T, ? extends NV> valueFunction)
     {
         this.lock.readLock().lock();
@@ -428,6 +456,7 @@ public abstract class AbstractMultiReaderParallelIterable<T, PI extends Parallel
         }
     }
 
+    @Override
     public <NK, NV> MutableSortedMap<NK, NV> toSortedMap(Comparator<? super NK> comparator, Function<? super T, ? extends NK> keyFunction, Function<? super T, ? extends NV> valueFunction)
     {
         this.lock.readLock().lock();
@@ -441,6 +470,7 @@ public abstract class AbstractMultiReaderParallelIterable<T, PI extends Parallel
         }
     }
 
+    @Override
     public Object[] toArray()
     {
         this.lock.readLock().lock();
@@ -454,6 +484,7 @@ public abstract class AbstractMultiReaderParallelIterable<T, PI extends Parallel
         }
     }
 
+    @Override
     public <T1> T1[] toArray(T1[] target)
     {
         this.lock.readLock().lock();
@@ -467,6 +498,7 @@ public abstract class AbstractMultiReaderParallelIterable<T, PI extends Parallel
         }
     }
 
+    @Override
     public T min(Comparator<? super T> comparator)
     {
         this.lock.readLock().lock();
@@ -480,6 +512,7 @@ public abstract class AbstractMultiReaderParallelIterable<T, PI extends Parallel
         }
     }
 
+    @Override
     public T max(Comparator<? super T> comparator)
     {
         this.lock.readLock().lock();
@@ -493,6 +526,7 @@ public abstract class AbstractMultiReaderParallelIterable<T, PI extends Parallel
         }
     }
 
+    @Override
     public T min()
     {
         this.lock.readLock().lock();
@@ -506,6 +540,7 @@ public abstract class AbstractMultiReaderParallelIterable<T, PI extends Parallel
         }
     }
 
+    @Override
     public T max()
     {
         this.lock.readLock().lock();
@@ -519,6 +554,7 @@ public abstract class AbstractMultiReaderParallelIterable<T, PI extends Parallel
         }
     }
 
+    @Override
     public <V extends Comparable<? super V>> T minBy(Function<? super T, ? extends V> function)
     {
         this.lock.readLock().lock();
@@ -532,6 +568,7 @@ public abstract class AbstractMultiReaderParallelIterable<T, PI extends Parallel
         }
     }
 
+    @Override
     public <V extends Comparable<? super V>> T maxBy(Function<? super T, ? extends V> function)
     {
         this.lock.readLock().lock();
@@ -545,6 +582,7 @@ public abstract class AbstractMultiReaderParallelIterable<T, PI extends Parallel
         }
     }
 
+    @Override
     public long sumOfInt(IntFunction<? super T> function)
     {
         this.lock.readLock().lock();
@@ -558,6 +596,7 @@ public abstract class AbstractMultiReaderParallelIterable<T, PI extends Parallel
         }
     }
 
+    @Override
     public double sumOfFloat(FloatFunction<? super T> function)
     {
         this.lock.readLock().lock();
@@ -571,6 +610,7 @@ public abstract class AbstractMultiReaderParallelIterable<T, PI extends Parallel
         }
     }
 
+    @Override
     public long sumOfLong(LongFunction<? super T> function)
     {
         this.lock.readLock().lock();
@@ -584,6 +624,7 @@ public abstract class AbstractMultiReaderParallelIterable<T, PI extends Parallel
         }
     }
 
+    @Override
     public double sumOfDouble(DoubleFunction<? super T> function)
     {
         this.lock.readLock().lock();
@@ -597,6 +638,7 @@ public abstract class AbstractMultiReaderParallelIterable<T, PI extends Parallel
         }
     }
 
+    @Override
     public String makeString()
     {
         this.lock.readLock().lock();
@@ -610,6 +652,7 @@ public abstract class AbstractMultiReaderParallelIterable<T, PI extends Parallel
         }
     }
 
+    @Override
     public String makeString(String separator)
     {
         this.lock.readLock().lock();
@@ -623,6 +666,7 @@ public abstract class AbstractMultiReaderParallelIterable<T, PI extends Parallel
         }
     }
 
+    @Override
     public String makeString(String start, String separator, String end)
     {
         this.lock.readLock().lock();
@@ -636,6 +680,7 @@ public abstract class AbstractMultiReaderParallelIterable<T, PI extends Parallel
         }
     }
 
+    @Override
     public void appendString(Appendable appendable)
     {
         this.lock.readLock().lock();
@@ -649,6 +694,7 @@ public abstract class AbstractMultiReaderParallelIterable<T, PI extends Parallel
         }
     }
 
+    @Override
     public void appendString(Appendable appendable, String separator)
     {
         this.lock.readLock().lock();
@@ -662,6 +708,7 @@ public abstract class AbstractMultiReaderParallelIterable<T, PI extends Parallel
         }
     }
 
+    @Override
     public void appendString(Appendable appendable, String start, String separator, String end)
     {
         this.lock.readLock().lock();
@@ -675,6 +722,7 @@ public abstract class AbstractMultiReaderParallelIterable<T, PI extends Parallel
         }
     }
 
+    @Override
     public <V> MapIterable<V, T> groupByUniqueKey(Function<? super T, ? extends V> function)
     {
         this.lock.readLock().lock();
@@ -688,6 +736,7 @@ public abstract class AbstractMultiReaderParallelIterable<T, PI extends Parallel
         }
     }
 
+    @Override
     public <K, V> MapIterable<K, V> aggregateInPlaceBy(Function<? super T, ? extends K> groupBy, Function0<? extends V> zeroValueFactory, Procedure2<? super V, ? super T> mutatingAggregator)
     {
         this.lock.readLock().lock();
@@ -701,6 +750,7 @@ public abstract class AbstractMultiReaderParallelIterable<T, PI extends Parallel
         }
     }
 
+    @Override
     public <K, V> MapIterable<K, V> aggregateBy(Function<? super T, ? extends K> groupBy, Function0<? extends V> zeroValueFactory, Function2<? super V, ? super T, ? extends V> nonMutatingAggregator)
     {
         this.lock.readLock().lock();

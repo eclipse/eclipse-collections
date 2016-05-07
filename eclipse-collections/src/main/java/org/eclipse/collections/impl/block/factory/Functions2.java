@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -31,12 +31,12 @@ public final class Functions2
 
     public static <T, V, P> Function2<T, P, V> fromFunction(Function<? super T, ? extends V> function)
     {
-        return new FunctionAdapter<T, P, V>(function);
+        return new FunctionAdapter<>(function);
     }
 
     public static <T, V, P> Function2<T, P, V> throwing(ThrowingFunction2<T, P, V> throwingFunction2)
     {
-        return new ThrowingFunction2Adapter<T, P, V>(throwingFunction2);
+        return new ThrowingFunction2Adapter<>(throwingFunction2);
     }
 
     public static Function2<Integer, Integer, Integer> integerAddition()
@@ -46,12 +46,12 @@ public final class Functions2
 
     public static <T> Function2<T, T, T> min(Comparator<? super T> comparator)
     {
-        return new MinFunction2<T>(comparator);
+        return new MinFunction2<>(comparator);
     }
 
     public static <T> Function2<T, T, T> max(Comparator<? super T> comparator)
     {
-        return new MaxFunction2<T>(comparator);
+        return new MaxFunction2<>(comparator);
     }
 
     public static <T, V extends Comparable<? super V>> Function2<T, T, T> minBy(Function<? super T, ? extends V> function)
@@ -74,6 +74,7 @@ public final class Functions2
             this.function = function;
         }
 
+        @Override
         public V value(T each, P parameter)
         {
             return this.function.valueOf(each);
@@ -84,6 +85,7 @@ public final class Functions2
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public Integer value(Integer aggregate, Integer value)
         {
             return aggregate + value;
@@ -100,6 +102,7 @@ public final class Functions2
             this.throwingFunction2 = throwingFunction2;
         }
 
+        @Override
         public V safeValue(T argument1, P argument2) throws Exception
         {
             return this.throwingFunction2.safeValue(argument1, argument2);
@@ -116,6 +119,7 @@ public final class Functions2
             this.comparator = comparator;
         }
 
+        @Override
         public T value(T argument1, T argument2)
         {
             return this.comparator.compare(argument1, argument2) > 0 ? argument2 : argument1;
@@ -132,6 +136,7 @@ public final class Functions2
             this.comparator = comparator;
         }
 
+        @Override
         public T value(T argument1, T argument2)
         {
             return this.comparator.compare(argument1, argument2) < 0 ? argument2 : argument1;
@@ -148,6 +153,7 @@ public final class Functions2
             this.function = function;
         }
 
+        @Override
         public T value(T argument1, T argument2)
         {
             V first = this.function.valueOf(argument1);
@@ -166,6 +172,7 @@ public final class Functions2
             this.function = function;
         }
 
+        @Override
         public T value(T argument1, T argument2)
         {
             V first = this.function.valueOf(argument1);

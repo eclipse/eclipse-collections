@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -41,7 +41,7 @@ public final class CaseProcedure<T> implements Procedure<T>
 
     public CaseProcedure<T> addCase(Predicate<? super T> predicate, Procedure<? super T> procedure)
     {
-        this.predicateProcedures.add(Tuples.<Predicate<? super T>, Procedure<? super T>>pair(predicate, procedure));
+        this.predicateProcedures.add(Tuples.pair(predicate, procedure));
         return this;
     }
 
@@ -51,6 +51,7 @@ public final class CaseProcedure<T> implements Procedure<T>
         return this;
     }
 
+    @Override
     public void value(T argument)
     {
         for (Pair<Predicate<? super T>, Procedure<? super T>> pair : this.predicateProcedures)

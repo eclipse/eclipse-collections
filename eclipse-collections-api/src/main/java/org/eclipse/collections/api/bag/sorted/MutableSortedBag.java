@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -49,18 +49,25 @@ import org.eclipse.collections.api.tuple.Pair;
 public interface MutableSortedBag<T>
         extends SortedBag<T>, MutableBagIterable<T>, Cloneable
 {
+    @Override
     MutableSortedBag<T> selectByOccurrences(IntPredicate predicate);
 
+    @Override
     MutableSortedMap<T, Integer> toMapOfItemToCount();
 
+    @Override
     MutableSortedBag<T> with(T element);
 
+    @Override
     MutableSortedBag<T> without(T element);
 
+    @Override
     MutableSortedBag<T> withAll(Iterable<? extends T> elements);
 
+    @Override
     MutableSortedBag<T> withoutAll(Iterable<? extends T> elements);
 
+    @Override
     MutableSortedBag<T> newEmpty();
 
     MutableSortedBag<T> clone();
@@ -70,65 +77,94 @@ public interface MutableSortedBag<T>
      *
      * @return an unmodifiable view of this set
      */
+    @Override
     MutableSortedBag<T> asUnmodifiable();
 
+    @Override
     MutableSortedBag<T> asSynchronized();
 
+    @Override
     MutableSortedBag<T> tap(Procedure<? super T> procedure);
 
+    @Override
     MutableSortedBag<T> select(Predicate<? super T> predicate);
 
+    @Override
     <P> MutableSortedBag<T> selectWith(Predicate2<? super T, ? super P> predicate, P parameter);
 
+    @Override
     MutableSortedBag<T> reject(Predicate<? super T> predicate);
 
+    @Override
     <P> MutableSortedBag<T> rejectWith(Predicate2<? super T, ? super P> predicate, P parameter);
 
+    @Override
     PartitionMutableSortedBag<T> partition(Predicate<? super T> predicate);
 
+    @Override
     <P> PartitionMutableSortedBag<T> partitionWith(Predicate2<? super T, ? super P> predicate, P parameter);
 
+    @Override
     PartitionMutableSortedBag<T> partitionWhile(Predicate<? super T> predicate);
 
+    @Override
     <S> MutableSortedBag<S> selectInstancesOf(Class<S> clazz);
 
+    @Override
     <V> MutableList<V> collect(Function<? super T, ? extends V> function);
 
+    @Override
     MutableBooleanList collectBoolean(BooleanFunction<? super T> booleanFunction);
 
+    @Override
     MutableByteList collectByte(ByteFunction<? super T> byteFunction);
 
+    @Override
     MutableCharList collectChar(CharFunction<? super T> charFunction);
 
+    @Override
     MutableDoubleList collectDouble(DoubleFunction<? super T> doubleFunction);
 
+    @Override
     MutableFloatList collectFloat(FloatFunction<? super T> floatFunction);
 
+    @Override
     MutableIntList collectInt(IntFunction<? super T> intFunction);
 
+    @Override
     MutableLongList collectLong(LongFunction<? super T> longFunction);
 
+    @Override
     MutableShortList collectShort(ShortFunction<? super T> shortFunction);
 
+    @Override
     <P, V> MutableList<V> collectWith(Function2<? super T, ? super P, ? extends V> function, P parameter);
 
+    @Override
     <V> MutableList<V> collectIf(Predicate<? super T> predicate, Function<? super T, ? extends V> function);
 
+    @Override
     <V> MutableList<V> flatCollect(Function<? super T, ? extends Iterable<V>> function);
 
+    @Override
     MutableSortedSet<T> distinct();
 
+    @Override
     MutableSortedBag<T> takeWhile(Predicate<? super T> predicate);
 
+    @Override
     MutableSortedBag<T> dropWhile(Predicate<? super T> predicate);
 
+    @Override
     <V> MutableSortedBagMultimap<V, T> groupBy(Function<? super T, ? extends V> function);
 
+    @Override
     <V> MutableSortedBagMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function);
 
     /**
      * Can return an MutableMap that's backed by a LinkedHashMap.
      */
+    @Override
     <K, V> MutableMap<K, V> aggregateBy(
             Function<? super T, ? extends K> groupBy,
             Function0<? extends V> zeroValueFactory,
@@ -137,18 +173,24 @@ public interface MutableSortedBag<T>
     /**
      * Can return an MutableMap that's backed by a LinkedHashMap.
      */
+    @Override
     <K, V> MutableMap<K, V> aggregateInPlaceBy(
             Function<? super T, ? extends K> groupBy,
             Function0<? extends V> zeroValueFactory,
             Procedure2<? super V, ? super T> mutatingAggregator);
 
+    @Override
     <S> MutableList<Pair<T, S>> zip(Iterable<S> that);
 
+    @Override
     MutableSortedSet<Pair<T, Integer>> zipWithIndex();
 
+    @Override
     MutableSortedBag<T> toReversed();
 
+    @Override
     MutableSortedBag<T> take(int count);
 
+    @Override
     MutableSortedBag<T> drop(int count);
 }

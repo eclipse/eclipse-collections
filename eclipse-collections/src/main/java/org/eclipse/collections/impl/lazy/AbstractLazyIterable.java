@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -87,9 +87,10 @@ public abstract class AbstractLazyIterable<T>
         return this;
     }
 
+    @Override
     public <R extends Collection<T>> R into(R target)
     {
-        this.forEachWith(Procedures2.<T>addToCollection(), target);
+        this.forEachWith(Procedures2.addToCollection(), target);
         return target;
     }
 
@@ -99,6 +100,7 @@ public abstract class AbstractLazyIterable<T>
         return this.toList().toArray(array);
     }
 
+    @Override
     public int size()
     {
         return this.count(Predicates.alwaysTrue());
@@ -110,146 +112,167 @@ public abstract class AbstractLazyIterable<T>
         return !this.anySatisfy(Predicates.alwaysTrue());
     }
 
+    @Override
     public T getFirst()
     {
         return this.detect(Predicates.alwaysTrue());
     }
 
+    @Override
     public T getLast()
     {
-        final T[] result = (T[]) new Object[1];
-        this.forEach(new Procedure<T>()
-        {
-            public void value(T each)
-            {
-                result[0] = each;
-            }
-        });
+        T[] result = (T[]) new Object[1];
+        this.each(each -> result[0] = each);
         return result[0];
     }
 
+    @Override
     public LazyIterable<T> select(Predicate<? super T> predicate)
     {
         return LazyIterate.select(this, predicate);
     }
 
+    @Override
     public <P> LazyIterable<T> selectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         return LazyIterate.select(this, Predicates.bind(predicate, parameter));
     }
 
+    @Override
     public LazyIterable<T> reject(Predicate<? super T> predicate)
     {
         return LazyIterate.reject(this, predicate);
     }
 
+    @Override
     public <P> LazyIterable<T> rejectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         return LazyIterate.reject(this, Predicates.bind(predicate, parameter));
     }
 
+    @Override
     public PartitionMutableList<T> partition(Predicate<? super T> predicate)
     {
-        PartitionMutableList<T> partitionMutableList = new PartitionFastList<T>();
-        this.forEach(new PartitionProcedure<T>(predicate, partitionMutableList));
+        PartitionMutableList<T> partitionMutableList = new PartitionFastList<>();
+        this.forEach(new PartitionProcedure<>(predicate, partitionMutableList));
         return partitionMutableList;
     }
 
+    @Override
     public <P> PartitionMutableList<T> partitionWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         return this.partition(Predicates.bind(predicate, parameter));
     }
 
+    @Override
     public <S> LazyIterable<S> selectInstancesOf(Class<S> clazz)
     {
         return LazyIterate.selectInstancesOf(this, clazz);
     }
 
+    @Override
     public <V> LazyIterable<V> collect(Function<? super T, ? extends V> function)
     {
         return LazyIterate.collect(this, function);
     }
 
+    @Override
     public LazyBooleanIterable collectBoolean(BooleanFunction<? super T> booleanFunction)
     {
-        return new CollectBooleanIterable<T>(this, booleanFunction);
+        return new CollectBooleanIterable<>(this, booleanFunction);
     }
 
+    @Override
     public LazyByteIterable collectByte(ByteFunction<? super T> byteFunction)
     {
-        return new CollectByteIterable<T>(this, byteFunction);
+        return new CollectByteIterable<>(this, byteFunction);
     }
 
+    @Override
     public LazyCharIterable collectChar(CharFunction<? super T> charFunction)
     {
-        return new CollectCharIterable<T>(this, charFunction);
+        return new CollectCharIterable<>(this, charFunction);
     }
 
+    @Override
     public LazyDoubleIterable collectDouble(DoubleFunction<? super T> doubleFunction)
     {
-        return new CollectDoubleIterable<T>(this, doubleFunction);
+        return new CollectDoubleIterable<>(this, doubleFunction);
     }
 
+    @Override
     public LazyFloatIterable collectFloat(FloatFunction<? super T> floatFunction)
     {
-        return new CollectFloatIterable<T>(this, floatFunction);
+        return new CollectFloatIterable<>(this, floatFunction);
     }
 
+    @Override
     public LazyIntIterable collectInt(IntFunction<? super T> intFunction)
     {
-        return new CollectIntIterable<T>(this, intFunction);
+        return new CollectIntIterable<>(this, intFunction);
     }
 
+    @Override
     public LazyLongIterable collectLong(LongFunction<? super T> longFunction)
     {
-        return new CollectLongIterable<T>(this, longFunction);
+        return new CollectLongIterable<>(this, longFunction);
     }
 
+    @Override
     public LazyShortIterable collectShort(ShortFunction<? super T> shortFunction)
     {
-        return new CollectShortIterable<T>(this, shortFunction);
+        return new CollectShortIterable<>(this, shortFunction);
     }
 
+    @Override
     public <P, V> LazyIterable<V> collectWith(Function2<? super T, ? super P, ? extends V> function, P parameter)
     {
         return LazyIterate.collect(this, Functions.bind(function, parameter));
     }
 
+    @Override
     public <V> LazyIterable<V> flatCollect(Function<? super T, ? extends Iterable<V>> function)
     {
         return LazyIterate.flatCollect(this, function);
     }
 
+    @Override
     public LazyIterable<T> concatenate(Iterable<T> iterable)
     {
         return LazyIterate.concatenate(this, iterable);
     }
 
+    @Override
     public <V> LazyIterable<V> collectIf(Predicate<? super T> predicate, Function<? super T, ? extends V> function)
     {
         return LazyIterate.collectIf(this, predicate, function);
     }
 
+    @Override
     public LazyIterable<T> take(int count)
     {
         return LazyIterate.take(this, count);
     }
 
+    @Override
     public LazyIterable<T> drop(int count)
     {
         return LazyIterate.drop(this, count);
     }
 
+    @Override
     public LazyIterable<T> takeWhile(Predicate<? super T> predicate)
     {
         return LazyIterate.takeWhile(this, predicate);
     }
 
+    @Override
     public LazyIterable<T> dropWhile(Predicate<? super T> predicate)
     {
         return LazyIterate.dropWhile(this, predicate);
     }
 
+    @Override
     public LazyIterable<T> distinct()
     {
         return LazyIterate.distinct(this);
@@ -260,79 +283,92 @@ public abstract class AbstractLazyIterable<T>
         return ArrayStack.newStack(this);
     }
 
+    @Override
     public <V> Multimap<V, T> groupBy(Function<? super T, ? extends V> function)
     {
-        return this.groupBy(function, FastListMultimap.<V, T>newMultimap());
+        return this.groupBy(function, FastListMultimap.newMultimap());
     }
 
+    @Override
     public <V> Multimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function)
     {
-        return this.groupByEach(function, FastListMultimap.<V, T>newMultimap());
+        return this.groupByEach(function, FastListMultimap.newMultimap());
     }
 
+    @Override
     public <V> MapIterable<V, T> groupByUniqueKey(Function<? super T, ? extends V> function)
     {
-        return this.groupByUniqueKey(function, UnifiedMap.<V, T>newMap());
+        return this.groupByUniqueKey(function, UnifiedMap.newMap());
     }
 
+    @Override
     public <S> LazyIterable<Pair<T, S>> zip(Iterable<S> that)
     {
         return LazyIterate.zip(this, that);
     }
 
+    @Override
     public LazyIterable<Pair<T, Integer>> zipWithIndex()
     {
         return LazyIterate.zipWithIndex(this);
     }
 
+    @Override
     public LazyIterable<RichIterable<T>> chunk(int size)
     {
         return LazyIterate.chunk(this, size);
     }
 
+    @Override
     public LazyIterable<T> tap(Procedure<? super T> procedure)
     {
         return LazyIterate.tap(this, procedure);
     }
 
+    @Override
     public <K, V> MapIterable<K, V> aggregateInPlaceBy(
             Function<? super T, ? extends K> groupBy,
             Function0<? extends V> zeroValueFactory,
             Procedure2<? super V, ? super T> mutatingAggregator)
     {
         MutableMap<K, V> map = UnifiedMap.newMap();
-        this.forEach(new MutatingAggregationProcedure<T, K, V>(map, groupBy, zeroValueFactory, mutatingAggregator));
+        this.forEach(new MutatingAggregationProcedure<>(map, groupBy, zeroValueFactory, mutatingAggregator));
         return map;
     }
 
+    @Override
     public <K, V> MapIterable<K, V> aggregateBy(
             Function<? super T, ? extends K> groupBy,
             Function0<? extends V> zeroValueFactory,
             Function2<? super V, ? super T, ? extends V> nonMutatingAggregator)
     {
         MutableMap<K, V> map = UnifiedMap.newMap();
-        this.forEach(new NonMutatingAggregationProcedure<T, K, V>(map, groupBy, zeroValueFactory, nonMutatingAggregator));
+        this.forEach(new NonMutatingAggregationProcedure<>(map, groupBy, zeroValueFactory, nonMutatingAggregator));
         return map;
     }
 
+    @Override
     public <V> ObjectLongMap<V> sumByInt(Function<? super T, ? extends V> groupBy, IntFunction<? super T> function)
     {
         MutableObjectLongMap<V> result = ObjectLongHashMap.newMap();
         return this.injectInto(result, PrimitiveFunctions.sumByIntFunction(groupBy, function));
     }
 
+    @Override
     public <V> ObjectDoubleMap<V> sumByFloat(Function<? super T, ? extends V> groupBy, FloatFunction<? super T> function)
     {
         MutableObjectDoubleMap<V> result = ObjectDoubleHashMap.newMap();
         return this.injectInto(result, PrimitiveFunctions.sumByFloatFunction(groupBy, function));
     }
 
+    @Override
     public <V> ObjectLongMap<V> sumByLong(Function<? super T, ? extends V> groupBy, LongFunction<? super T> function)
     {
         MutableObjectLongMap<V> result = ObjectLongHashMap.newMap();
         return this.injectInto(result, PrimitiveFunctions.sumByLongFunction(groupBy, function));
     }
 
+    @Override
     public <V> ObjectDoubleMap<V> sumByDouble(Function<? super T, ? extends V> groupBy, DoubleFunction<? super T> function)
     {
         MutableObjectDoubleMap<V> result = ObjectDoubleHashMap.newMap();

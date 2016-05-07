@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -114,7 +114,7 @@ public class IterableIterateTest
     public void collectWithTarget()
     {
         Iterable<Boolean> iterable = new IterableAdapter<>(iList(Boolean.TRUE, Boolean.FALSE, null));
-        Collection<String> result = Iterate.collect(iterable, String::valueOf, FastList.<String>newList());
+        Collection<String> result = Iterate.collect(iterable, String::valueOf, FastList.newList());
         Assert.assertEquals(iList("true", "false", "null"), result);
     }
 
@@ -221,7 +221,7 @@ public class IterableIterateTest
     {
         Iterable<Integer> iterable = new IterableAdapter<>(this.getIntegerList());
         Verify.assertSize(5, Iterate.select(iterable, Integer.class::isInstance));
-        Verify.assertSize(5, Iterate.select(iterable, Integer.class::isInstance, FastList.<Integer>newList()));
+        Verify.assertSize(5, Iterate.select(iterable, Integer.class::isInstance, FastList.newList()));
     }
 
     @Test
@@ -231,7 +231,7 @@ public class IterableIterateTest
         Verify.assertSize(5, Iterate.reject(iterable, String.class::isInstance));
         Verify.assertSize(
                 5,
-                Iterate.reject(iterable, String.class::isInstance, FastList.<Integer>newList()));
+                Iterate.reject(iterable, String.class::isInstance, FastList.newList()));
     }
 
     @Test
@@ -274,7 +274,7 @@ public class IterableIterateTest
         Verify.assertSize(5, Iterate.selectWith(iterable, Predicates2.instanceOf(), Integer.class));
         Verify.assertSize(
                 5,
-                Iterate.selectWith(iterable, Predicates2.instanceOf(), Integer.class, FastList.<Integer>newList()));
+                Iterate.selectWith(iterable, Predicates2.instanceOf(), Integer.class, FastList.newList()));
     }
 
     @Test
@@ -286,13 +286,13 @@ public class IterableIterateTest
                 iterable,
                 Predicates2.instanceOf(),
                 Integer.class,
-                FastList.<Integer>newList()));
+                FastList.newList()));
     }
 
     @Test
     public void selectInstancesOf()
     {
-        Iterable<Number> iterable = new IterableAdapter<>(FastList.<Number>newListWith(1, 2.0, 3, 4.0, 5));
+        Iterable<Number> iterable = new IterableAdapter<>(FastList.newListWith(1, 2.0, 3, 4.0, 5));
         Collection<Integer> result = Iterate.selectInstancesOf(iterable, Integer.class);
         Assert.assertEquals(iList(1, 3, 5), result);
     }
@@ -346,7 +346,7 @@ public class IterableIterateTest
     {
         Iterable<Integer> iterable = new IterableAdapter<>(this.getIntegerList());
         Assert.assertTrue(Iterate.allSatisfyWith(iterable, Predicates2.instanceOf(), Integer.class));
-        Assert.assertFalse(Iterate.allSatisfyWith(iterable, Predicates2.<Integer>greaterThan(), 2));
+        Assert.assertFalse(Iterate.allSatisfyWith(iterable, Predicates2.greaterThan(), 2));
     }
 
     @Test
@@ -370,7 +370,7 @@ public class IterableIterateTest
     {
         Iterable<Integer> iterable = new IterableAdapter<>(this.getIntegerList());
         Assert.assertTrue(Iterate.noneSatisfyWith(iterable, Predicates2.instanceOf(), String.class));
-        Assert.assertFalse(Iterate.noneSatisfyWith(iterable, Predicates2.<Integer>greaterThan(), 0));
+        Assert.assertFalse(Iterate.noneSatisfyWith(iterable, Predicates2.greaterThan(), 0));
     }
 
     @Test
@@ -395,7 +395,7 @@ public class IterableIterateTest
     {
         Iterable<Integer> iterable = new IterableAdapter<>(this.getIntegerList());
         MutableList<Integer> results =
-                Iterate.selectWith(iterable, Predicates2.instanceOf(), Integer.class, FastList.<Integer>newList());
+                Iterate.selectWith(iterable, Predicates2.instanceOf(), Integer.class, FastList.newList());
         Assert.assertEquals(iList(5, 4, 3, 2, 1), results);
         Verify.assertSize(5, results);
     }
@@ -413,7 +413,7 @@ public class IterableIterateTest
     {
         Iterable<Integer> iterable = new IterableAdapter<>(Interval.oneTo(31));
         Collection<Class<?>> result =
-                Iterate.collectIf(iterable, Integer.valueOf(31)::equals, Object::getClass, FastList.<Class<?>>newList());
+                Iterate.collectIf(iterable, Integer.valueOf(31)::equals, Object::getClass, FastList.newList());
         Assert.assertEquals(iList(Integer.class), result);
     }
 
@@ -586,7 +586,7 @@ public class IterableIterateTest
     @Test(expected = IllegalArgumentException.class)
     public void take_target_negative_throws()
     {
-        IterableIterate.take(new IterableAdapter<>(FastList.<Integer>newList()), -1, FastList.<Integer>newList());
+        IterableIterate.take(new IterableAdapter<>(FastList.newList()), -1, FastList.newList());
     }
 
     @Test
@@ -618,7 +618,7 @@ public class IterableIterateTest
     @Test(expected = IllegalArgumentException.class)
     public void drop_target_negative_throws()
     {
-        IterableIterate.drop(new IterableAdapter<>(FastList.<Integer>newList()), -1, FastList.<Integer>newList());
+        IterableIterate.drop(new IterableAdapter<>(FastList.newList()), -1, FastList.newList());
     }
 
     private static final class IterableAdapter<E>

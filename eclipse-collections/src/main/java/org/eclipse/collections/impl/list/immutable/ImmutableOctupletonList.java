@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -50,11 +50,13 @@ final class ImmutableOctupletonList<T>
         this.element8 = obj8;
     }
 
+    @Override
     public int size()
     {
         return 8;
     }
 
+    @Override
     public void each(Procedure<? super T> procedure)
     {
         procedure.value(this.element1);
@@ -67,6 +69,7 @@ final class ImmutableOctupletonList<T>
         procedure.value(this.element8);
     }
 
+    @Override
     public T get(int index)
     {
         switch (index)
@@ -92,6 +95,7 @@ final class ImmutableOctupletonList<T>
         }
     }
 
+    @Override
     public ImmutableList<T> newWith(T newItem)
     {
         return Lists.immutable.with(

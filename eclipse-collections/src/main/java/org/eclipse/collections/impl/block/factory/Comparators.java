@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -66,17 +66,17 @@ public final class Comparators
         {
             throw new NullPointerException();
         }
-        return new ReverseComparator<T>(comparator);
+        return new ReverseComparator<>(comparator);
     }
 
     public static <T> SerializableComparator<T> safeNullsLow(Comparator<T> notNullSafeComparator)
     {
-        return new SafeNullsLowComparator<T>(notNullSafeComparator);
+        return new SafeNullsLowComparator<>(notNullSafeComparator);
     }
 
     public static <T> SerializableComparator<T> safeNullsHigh(Comparator<T> notNullSafeComparator)
     {
-        return new SafeNullsHighComparator<T>(notNullSafeComparator);
+        return new SafeNullsHighComparator<>(notNullSafeComparator);
     }
 
     public static <T> SerializableComparator<T> chain(Comparator<T>... comparators)
@@ -86,7 +86,7 @@ public final class Comparators
             throw new IllegalArgumentException("Nothing to chain");
         }
 
-        return new ChainedComparator<T>(comparators);
+        return new ChainedComparator<>(comparators);
     }
 
     public static <T, V extends Comparable<? super V>> SerializableComparator<T> fromFunctions(
@@ -138,7 +138,7 @@ public final class Comparators
      */
     public static <T> SerializableComparator<Pair<T, ?>> byFirstOfPair(Comparator<? super T> comparator)
     {
-        return new ByFirstOfPairComparator<T>(comparator);
+        return new ByFirstOfPairComparator<>(comparator);
     }
 
     /**
@@ -149,13 +149,14 @@ public final class Comparators
      */
     public static <T> SerializableComparator<Pair<?, T>> bySecondOfPair(Comparator<? super T> comparator)
     {
-        return new BySecondOfPairComparator<T>(comparator);
+        return new BySecondOfPairComparator<>(comparator);
     }
 
     private static final class NaturalOrderComparator<T extends Comparable<T>> implements SerializableComparator<T>
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public int compare(T o1, T o2)
         {
             if (o1 == null || o2 == null)
@@ -177,6 +178,7 @@ public final class Comparators
             this.comparator = comparator;
         }
 
+        @Override
         public int compare(T o1, T o2)
         {
             return this.comparator.compare(o2, o1);
@@ -194,6 +196,7 @@ public final class Comparators
             this.notNullSafeComparator = newNotNullSafeComparator;
         }
 
+        @Override
         public int compare(T value1, T value2)
         {
             if (value1 != null && value2 != null)
@@ -221,6 +224,7 @@ public final class Comparators
             this.notNullSafeComparator = newNotNullSafeComparator;
         }
 
+        @Override
         public int compare(T value1, T value2)
         {
             if (value1 != null && value2 != null)
@@ -248,6 +252,7 @@ public final class Comparators
             this.comparators = comparators;
         }
 
+        @Override
         public int compare(T value1, T value2)
         {
             for (Comparator<T> comparator : this.comparators)
@@ -266,6 +271,7 @@ public final class Comparators
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public int compare(SortedSetIterable<T> setA, SortedSetIterable<T> setB)
         {
             int compareTo = Integer.compare(setA.size(), setB.size());
@@ -281,6 +287,7 @@ public final class Comparators
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public int compare(Collection<?> c1, Collection<?> c2)
         {
             return c1.size() - c2.size();
@@ -291,6 +298,7 @@ public final class Comparators
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public int compare(Collection<?> c1, Collection<?> c2)
         {
             return c2.size() - c1.size();
@@ -378,7 +386,7 @@ public final class Comparators
             Function<? super T, ? extends V> function,
             Comparator<V> comparator)
     {
-        return new FunctionComparator<T, V>(function, comparator);
+        return new FunctionComparator<>(function, comparator);
     }
 
     public static boolean nullSafeEquals(Object value1, Object value2)
@@ -412,6 +420,7 @@ public final class Comparators
             this.comparator = comparator;
         }
 
+        @Override
         public int compare(Pair<T, ?> p1, Pair<T, ?> p2)
         {
             return this.comparator.compare(p1.getOne(), p2.getOne());
@@ -429,6 +438,7 @@ public final class Comparators
             this.comparator = comparator;
         }
 
+        @Override
         public int compare(Pair<?, T> p1, Pair<?, T> p2)
         {
             return this.comparator.compare(p1.getTwo(), p2.getTwo());

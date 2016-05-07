@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -24,6 +24,6 @@ public class DoubleFunctionComparatorSerializationTest
                         + "bWl0aXZlLkRvdWJsZUZ1bmN0aW9uQ29tcGFyYXRvcgAAAAAAAAABAgABTAAIZnVuY3Rpb250AEVM\n"
                         + "b3JnL2VjbGlwc2UvY29sbGVjdGlvbnMvYXBpL2Jsb2NrL2Z1bmN0aW9uL3ByaW1pdGl2ZS9Eb3Vi\n"
                         + "bGVGdW5jdGlvbjt4cHA=",
-                new DoubleFunctionComparator<Object>(null));
+                new DoubleFunctionComparator<>(null));
     }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -142,9 +142,9 @@ public abstract class AbstractImmutableCollectionTestCase
     public void collect_target()
     {
         ImmutableCollection<Integer> integers = this.classUnderTest();
-        MutableCollection<String> strings = this.<String>newMutable();
+        MutableCollection<String> strings = this.newMutable();
         integers.forEach(Procedures.cast(each -> strings.add(each.toString())));
-        MutableCollection<String> target = this.<String>newMutable();
+        MutableCollection<String> target = this.newMutable();
         MutableCollection<String> actual = integers.collect(String::valueOf, target);
         Assert.assertEquals(strings, actual);
         Assert.assertSame(target, actual);
@@ -641,8 +641,8 @@ public abstract class AbstractImmutableCollectionTestCase
     {
         ImmutableCollection<Integer> integers = this.classUnderTest();
         MutableList<Integer> copy = FastList.newList(integers);
-        MutableList<Integer> list = integers.toSortedList(Collections.<Integer>reverseOrder());
-        Assert.assertEquals(copy.sortThis(Collections.<Integer>reverseOrder()), list);
+        MutableList<Integer> list = integers.toSortedList(Collections.reverseOrder());
+        Assert.assertEquals(copy.sortThis(Collections.reverseOrder()), list);
         MutableList<Integer> list2 = integers.toSortedList();
         Assert.assertEquals(copy.sortThis(), list2);
     }
@@ -659,9 +659,9 @@ public abstract class AbstractImmutableCollectionTestCase
     public void toSortedSetWithComparator()
     {
         ImmutableCollection<Integer> integers = this.classUnderTest();
-        MutableSortedSet<Integer> set = integers.toSortedSet(Comparators.<Integer>reverseNaturalOrder());
+        MutableSortedSet<Integer> set = integers.toSortedSet(Comparators.reverseNaturalOrder());
         Assert.assertEquals(integers.toSet(), set);
-        Assert.assertEquals(integers.toSortedList(Comparators.<Integer>reverseNaturalOrder()), set.toList());
+        Assert.assertEquals(integers.toSortedList(Comparators.reverseNaturalOrder()), set.toList());
     }
 
     @Test
@@ -786,7 +786,7 @@ public abstract class AbstractImmutableCollectionTestCase
     @Test
     public void addAll()
     {
-        Verify.assertThrows(UnsupportedOperationException.class, () -> ((Collection<Integer>) this.classUnderTest()).addAll(Lists.fixedSize.<Integer>of()));
+        Verify.assertThrows(UnsupportedOperationException.class, () -> ((Collection<Integer>) this.classUnderTest()).addAll(Lists.fixedSize.of()));
     }
 
     @Test

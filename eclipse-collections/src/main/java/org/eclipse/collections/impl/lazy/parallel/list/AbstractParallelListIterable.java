@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -32,62 +32,74 @@ public abstract class AbstractParallelListIterable<T, B extends ListBatch<T>> ex
         return true;
     }
 
+    @Override
     public ParallelUnsortedSetIterable<T> asUnique()
     {
-        return new ParallelDistinctListIterable<T>(this);
+        return new ParallelDistinctListIterable<>(this);
     }
 
+    @Override
     public ParallelListIterable<T> select(Predicate<? super T> predicate)
     {
-        return new ParallelSelectListIterable<T>(this, predicate);
+        return new ParallelSelectListIterable<>(this, predicate);
     }
 
+    @Override
     public <P> ParallelListIterable<T> selectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         return this.select(Predicates.bind(predicate, parameter));
     }
 
+    @Override
     public <S> ParallelListIterable<S> selectInstancesOf(Class<S> clazz)
     {
         return (ParallelListIterable<S>) this.select(Predicates.instanceOf(clazz));
     }
 
+    @Override
     public ParallelListIterable<T> reject(Predicate<? super T> predicate)
     {
         return this.select(Predicates.not(predicate));
     }
 
+    @Override
     public <P> ParallelListIterable<T> rejectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         return this.reject(Predicates.bind(predicate, parameter));
     }
 
+    @Override
     public <V> ParallelListIterable<V> collect(Function<? super T, ? extends V> function)
     {
-        return new ParallelCollectListIterable<T, V>(this, function);
+        return new ParallelCollectListIterable<>(this, function);
     }
 
+    @Override
     public <P, V> ParallelListIterable<V> collectWith(Function2<? super T, ? super P, ? extends V> function, P parameter)
     {
         return this.collect(Functions.bind(function, parameter));
     }
 
+    @Override
     public <V> ParallelListIterable<V> collectIf(Predicate<? super T> predicate, Function<? super T, ? extends V> function)
     {
         return this.select(predicate).collect(function);
     }
 
+    @Override
     public <V> ParallelListIterable<V> flatCollect(Function<? super T, ? extends Iterable<V>> function)
     {
-        return new ParallelFlatCollectListIterable<T, V>(this, function);
+        return new ParallelFlatCollectListIterable<>(this, function);
     }
 
+    @Override
     public <V> ListMultimap<V, T> groupBy(Function<? super T, ? extends V> function)
     {
         // TODO: Implement in parallel
         return this.toList().groupBy(function);
     }
 
+    @Override
     public <V> ListMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function)
     {
         // TODO: Implement in parallel

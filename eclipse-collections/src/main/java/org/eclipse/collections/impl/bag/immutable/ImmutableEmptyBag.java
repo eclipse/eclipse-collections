@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -92,13 +92,13 @@ final class ImmutableEmptyBag<T>
         extends AbstractImmutableBag<T>
         implements Serializable
 {
-    static final ImmutableBag<?> INSTANCE = new ImmutableEmptyBag<Object>();
+    static final ImmutableBag<?> INSTANCE = new ImmutableEmptyBag<>();
 
     private static final long serialVersionUID = 1L;
 
     private static final LazyIterable<?> LAZY_ITERABLE = LazyIterate.adapt(INSTANCE);
     private static final Object[] TO_ARRAY = new Object[0];
-    private static final PartitionImmutableBag<Object> IMMUTABLE_EMPTY_PARTITION = new PartitionHashBag<Object>().toImmutable();
+    private static final PartitionImmutableBag<Object> IMMUTABLE_EMPTY_PARTITION = new PartitionHashBag<>().toImmutable();
 
     @Override
     public boolean equals(Object obj)
@@ -110,20 +110,24 @@ final class ImmutableEmptyBag<T>
         return obj instanceof Bag && ((Bag<?>) obj).isEmpty();
     }
 
+    @Override
     public int sizeDistinct()
     {
         return 0;
     }
 
+    @Override
     public int occurrencesOf(Object item)
     {
         return 0;
     }
 
+    @Override
     public void forEachWithOccurrences(ObjectIntProcedure<? super T> objectIntProcedure)
     {
     }
 
+    @Override
     public MutableMap<T, Integer> toMapOfItemToCount()
     {
         return Maps.mutable.empty();
@@ -135,6 +139,7 @@ final class ImmutableEmptyBag<T>
         return 0;
     }
 
+    @Override
     public int size()
     {
         return 0;
@@ -176,6 +181,7 @@ final class ImmutableEmptyBag<T>
         return this;
     }
 
+    @Override
     public void each(Procedure<? super T> procedure)
     {
     }
@@ -190,41 +196,49 @@ final class ImmutableEmptyBag<T>
     {
     }
 
+    @Override
     public T getFirst()
     {
         return null;
     }
 
+    @Override
     public T getLast()
     {
         return null;
     }
 
+    @Override
     public Iterator<T> iterator()
     {
         return EmptyIterator.getInstance();
     }
 
+    @Override
     public ImmutableBag<T> newWith(T element)
     {
         return Bags.immutable.with(element);
     }
 
+    @Override
     public ImmutableBag<T> newWithout(T element)
     {
         return this;
     }
 
+    @Override
     public ImmutableBag<T> newWithAll(Iterable<? extends T> elements)
     {
         return HashBag.newBag(elements).toImmutable();
     }
 
+    @Override
     public ImmutableBag<T> selectByOccurrences(IntPredicate predicate)
     {
         return this;
     }
 
+    @Override
     public ImmutableBag<T> select(Predicate<? super T> predicate)
     {
         return this;
@@ -236,6 +250,7 @@ final class ImmutableEmptyBag<T>
         return this;
     }
 
+    @Override
     public ImmutableBag<T> reject(Predicate<? super T> predicate)
     {
         return this;
@@ -259,11 +274,13 @@ final class ImmutableEmptyBag<T>
         return (PartitionImmutableBag<T>) IMMUTABLE_EMPTY_PARTITION;
     }
 
+    @Override
     public <S> ImmutableBag<S> selectInstancesOf(Class<S> clazz)
     {
         return (ImmutableBag<S>) INSTANCE;
     }
 
+    @Override
     public <V> ImmutableBag<V> collect(Function<? super T, ? extends V> function)
     {
         return (ImmutableBag<V>) INSTANCE;
@@ -323,6 +340,7 @@ final class ImmutableEmptyBag<T>
         return (ImmutableBag<V>) INSTANCE;
     }
 
+    @Override
     public <V> ImmutableBag<V> collectIf(
             Predicate<? super T> predicate,
             Function<? super T, ? extends V> function)
@@ -330,17 +348,20 @@ final class ImmutableEmptyBag<T>
         return (ImmutableBag<V>) INSTANCE;
     }
 
+    @Override
     public <V> ImmutableBag<V> flatCollect(Function<? super T, ? extends Iterable<V>> function)
     {
         return (ImmutableBag<V>) INSTANCE;
     }
 
+    @Override
     public <V> ImmutableBagMultimap<V, T> groupBy(Function<? super T, ? extends V> function)
     {
         // TODO: Create a Singleton ImmutableEmptyBagMultimap for efficiency
         return HashBagMultimap.<V, T>newMultimap().toImmutable();
     }
 
+    @Override
     public <V> ImmutableBagMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function)
     {
         // TODO: Create a Singleton ImmutableEmptyBagMultimap for efficiency
@@ -618,6 +639,7 @@ final class ImmutableEmptyBag<T>
     /**
      * @deprecated in 6.0. Use {@link OrderedIterable#zip(Iterable)} instead.
      */
+    @Override
     @Deprecated
     public <S> ImmutableBag<Pair<T, S>> zip(Iterable<S> that)
     {
@@ -627,6 +649,7 @@ final class ImmutableEmptyBag<T>
     /**
      * @deprecated in 6.0. Use {@link OrderedIterable#zipWithIndex()} instead.
      */
+    @Override
     @Deprecated
     public ImmutableSet<Pair<T, Integer>> zipWithIndex()
     {
@@ -645,6 +668,6 @@ final class ImmutableEmptyBag<T>
 
     private Object writeReplace()
     {
-        return new ImmutableBagSerializationProxy<T>(this);
+        return new ImmutableBagSerializationProxy<>(this);
     }
 }

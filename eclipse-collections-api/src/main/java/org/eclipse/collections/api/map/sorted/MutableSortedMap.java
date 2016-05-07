@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -53,6 +53,7 @@ public interface MutableSortedMap<K, V>
     /**
      * Creates a new instance of the same type with the same internal Comparator.
      */
+    @Override
     MutableSortedMap<K, V> newEmpty();
 
     /**
@@ -70,81 +71,119 @@ public interface MutableSortedMap<K, V>
      * at the key, return the result of evaluating the specified one argument Function
      * using the specified parameter, and put that value in the map at the specified key.
      */
+    @Override
     <P> V getIfAbsentPutWith(K key, Function<? super P, ? extends V> function, P parameter);
 
+    @Override
     MutableSortedMap<K, V> asUnmodifiable();
 
+    @Override
     MutableSortedMap<K, V> asSynchronized();
 
     // TODO: Keys could be ordered
+    @Override
     MutableSortedSetMultimap<V, K> flip();
 
+    @Override
     MutableSortedMap<K, V> select(Predicate2<? super K, ? super V> predicate);
 
+    @Override
     MutableSortedMap<K, V> reject(Predicate2<? super K, ? super V> predicate);
 
+    @Override
     <K2, V2> MutableMap<K2, V2> collect(Function2<? super K, ? super V, Pair<K2, V2>> function);
 
+    @Override
     <R> MutableSortedMap<K, R> collectValues(Function2<? super K, ? super V, ? extends R> function);
 
+    @Override
     <R> MutableList<R> collect(Function<? super V, ? extends R> function);
 
+    @Override
     MutableBooleanList collectBoolean(BooleanFunction<? super V> booleanFunction);
 
+    @Override
     MutableByteList collectByte(ByteFunction<? super V> byteFunction);
 
+    @Override
     MutableCharList collectChar(CharFunction<? super V> charFunction);
 
+    @Override
     MutableDoubleList collectDouble(DoubleFunction<? super V> doubleFunction);
 
+    @Override
     MutableFloatList collectFloat(FloatFunction<? super V> floatFunction);
 
+    @Override
     MutableIntList collectInt(IntFunction<? super V> intFunction);
 
+    @Override
     MutableLongList collectLong(LongFunction<? super V> longFunction);
 
+    @Override
     MutableShortList collectShort(ShortFunction<? super V> shortFunction);
 
+    @Override
     <P, VV> MutableList<VV> collectWith(Function2<? super V, ? super P, ? extends VV> function, P parameter);
 
+    @Override
     <R> MutableList<R> collectIf(Predicate<? super V> predicate, Function<? super V, ? extends R> function);
 
+    @Override
     <R> MutableList<R> flatCollect(Function<? super V, ? extends Iterable<R>> function);
 
+    @Override
     MutableSortedMap<K, V> tap(Procedure<? super V> procedure);
 
+    @Override
     MutableList<V> select(Predicate<? super V> predicate);
 
+    @Override
     <P> MutableList<V> selectWith(Predicate2<? super V, ? super P> predicate, P parameter);
 
+    @Override
     MutableList<V> reject(Predicate<? super V> predicate);
 
+    @Override
     <P> MutableList<V> rejectWith(Predicate2<? super V, ? super P> predicate, P parameter);
 
+    @Override
     PartitionMutableList<V> partition(Predicate<? super V> predicate);
 
+    @Override
     <P> PartitionMutableList<V> partitionWith(Predicate2<? super V, ? super P> predicate, P parameter);
 
+    @Override
     <S> MutableList<S> selectInstancesOf(Class<S> clazz);
 
+    @Override
     <S> MutableList<Pair<V, S>> zip(Iterable<S> that);
 
+    @Override
     MutableList<Pair<V, Integer>> zipWithIndex();
 
+    @Override
     MutableSortedMap<K, V> toReversed();
 
+    @Override
     MutableSortedMap<K, V> take(int count);
 
+    @Override
     MutableSortedMap<K, V> takeWhile(Predicate<? super V> predicate);
 
+    @Override
     MutableSortedMap<K, V> drop(int count);
 
+    @Override
     MutableSortedMap<K, V> dropWhile(Predicate<? super V> predicate);
 
+    @Override
     PartitionMutableList<V> partitionWhile(Predicate<? super V> predicate);
 
+    @Override
     MutableList<V> distinct();
 
+    @Override
     MutableSet<Entry<K, V>> entrySet();
 
     /**
@@ -153,31 +192,42 @@ public interface MutableSortedMap<K, V>
      * return the keySet simply as a MutableSet to maintain Java 5 compatibility.
      */
     //todo: Change return type to MutableSortedSet when we move to Java 6
+    @Override
     MutableSet<K> keySet();
 
+    @Override
     MutableSortedMap<K, V> headMap(K toKey);
 
+    @Override
     MutableSortedMap<K, V> tailMap(K fromKey);
 
+    @Override
     MutableSortedMap<K, V> subMap(K fromKey, K toKey);
 
+    @Override
     MutableCollection<V> values();
 
     MutableSortedMap<K, V> clone();
 
+    @Override
     <VV> MutableListMultimap<VV, V> groupBy(Function<? super V, ? extends VV> function);
 
+    @Override
     <VV> MutableListMultimap<VV, V> groupByEach(Function<? super V, ? extends Iterable<VV>> function);
 
+    @Override
     <VV> MutableMap<VV, V> groupByUniqueKey(Function<? super V, ? extends VV> function);
 
     // TODO: When we have implementations of linked hash maps
     // MutableOrderedMap<V, K> flipUniqueValues();
 
+    @Override
     MutableSortedMap<K, V> withKeyValue(K key, V value);
 
+    @Override
     MutableSortedMap<K, V> withAllKeyValues(Iterable<? extends Pair<? extends K, ? extends V>> keyValues);
 
+    @Override
     MutableSortedMap<K, V> withAllKeyValueArguments(Pair<? extends K, ? extends V>... keyValuePairs);
 
     /**
@@ -186,7 +236,9 @@ public interface MutableSortedMap<K, V>
     @Deprecated
     MutableSortedMap<K, V> with(Pair<K, V>... pairs);
 
+    @Override
     MutableSortedMap<K, V> withoutKey(K key);
 
+    @Override
     MutableSortedMap<K, V> withoutAllKeys(Iterable<? extends K> keys);
 }

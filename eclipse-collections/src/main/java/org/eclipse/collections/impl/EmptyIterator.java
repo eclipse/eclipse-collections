@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -22,7 +22,7 @@ import net.jcip.annotations.Immutable;
 public final class EmptyIterator<T>
         implements ListIterator<T>
 {
-    private static final EmptyIterator<?> INSTANCE = new EmptyIterator<Object>();
+    private static final EmptyIterator<?> INSTANCE = new EmptyIterator<>();
 
     private EmptyIterator()
     {
@@ -33,46 +33,55 @@ public final class EmptyIterator<T>
         return (EmptyIterator<T>) INSTANCE;
     }
 
+    @Override
     public boolean hasNext()
     {
         return false;
     }
 
+    @Override
     public T next()
     {
         throw new NoSuchElementException();
     }
 
+    @Override
     public void remove()
     {
         throw new UnsupportedOperationException("Cannot call remove() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public boolean hasPrevious()
     {
         return false;
     }
 
+    @Override
     public T previous()
     {
         throw new NoSuchElementException();
     }
 
+    @Override
     public int nextIndex()
     {
         return 0;
     }
 
+    @Override
     public int previousIndex()
     {
         return -1;
     }
 
+    @Override
     public void set(T t)
     {
         throw new UnsupportedOperationException("Cannot call set() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public void add(T t)
     {
         throw new UnsupportedOperationException("Cannot call add() on " + this.getClass().getSimpleName());

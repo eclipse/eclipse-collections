@@ -23,7 +23,7 @@ public class FastListNoIteratorTest implements MutableListTestCase, NoIteratorTe
     @Override
     public final <T> MutableList<T> newWith(T... elements)
     {
-        MutableList<T> result = new FastListNoIterator<T>();
+        MutableList<T> result = new FastListNoIterator<>();
         IterableTestCase.addAllTo(elements, result);
         return result;
     }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -168,28 +168,28 @@ public class UnifiedSetWithHashingStrategy<T>
 
     public static <K> UnifiedSetWithHashingStrategy<K> newSet(HashingStrategy<? super K> hashingStrategy)
     {
-        return new UnifiedSetWithHashingStrategy<K>(hashingStrategy);
+        return new UnifiedSetWithHashingStrategy<>(hashingStrategy);
     }
 
     public static <K> UnifiedSetWithHashingStrategy<K> newSet(UnifiedSetWithHashingStrategy<K> set)
     {
-        return new UnifiedSetWithHashingStrategy<K>(set.hashingStrategy, set);
+        return new UnifiedSetWithHashingStrategy<>(set.hashingStrategy, set);
     }
 
     public static <K> UnifiedSetWithHashingStrategy<K> newSet(HashingStrategy<? super K> hashingStrategy, int size)
     {
-        return new UnifiedSetWithHashingStrategy<K>(hashingStrategy, size);
+        return new UnifiedSetWithHashingStrategy<>(hashingStrategy, size);
     }
 
     public static <K> UnifiedSetWithHashingStrategy<K> newSet(HashingStrategy<? super K> hashingStrategy, Iterable<? extends K> source)
     {
         if (source instanceof UnifiedSetWithHashingStrategy<?>)
         {
-            return new UnifiedSetWithHashingStrategy<K>(hashingStrategy, (UnifiedSetWithHashingStrategy<K>) source);
+            return new UnifiedSetWithHashingStrategy<>(hashingStrategy, (UnifiedSetWithHashingStrategy<K>) source);
         }
         if (source instanceof Collection<?>)
         {
-            return new UnifiedSetWithHashingStrategy<K>(hashingStrategy, (Collection<K>) source);
+            return new UnifiedSetWithHashingStrategy<>(hashingStrategy, (Collection<K>) source);
         }
         if (source == null)
         {
@@ -198,13 +198,13 @@ public class UnifiedSetWithHashingStrategy<T>
         UnifiedSetWithHashingStrategy<K> result = source instanceof RichIterable<?>
                 ? UnifiedSetWithHashingStrategy.newSet(hashingStrategy, ((RichIterable<?>) source).size())
                 : UnifiedSetWithHashingStrategy.newSet(hashingStrategy);
-        Iterate.forEachWith(source, Procedures2.<K>addToCollection(), result);
+        Iterate.forEachWith(source, Procedures2.addToCollection(), result);
         return result;
     }
 
     public static <K> UnifiedSetWithHashingStrategy<K> newSet(HashingStrategy<? super K> hashingStrategy, int size, float loadFactor)
     {
-        return new UnifiedSetWithHashingStrategy<K>(hashingStrategy, size, loadFactor);
+        return new UnifiedSetWithHashingStrategy<>(hashingStrategy, size, loadFactor);
     }
 
     public static <K> UnifiedSetWithHashingStrategy<K> newSetWith(HashingStrategy<? super K> hashingStrategy, K... elements)
@@ -250,6 +250,7 @@ public class UnifiedSetWithHashingStrategy<T>
         return h & this.table.length - 1;
     }
 
+    @Override
     public void clear()
     {
         if (this.occupied == 0)
@@ -265,6 +266,7 @@ public class UnifiedSetWithHashingStrategy<T>
         }
     }
 
+    @Override
     public boolean add(T key)
     {
         int index = this.index(key);
@@ -462,6 +464,7 @@ public class UnifiedSetWithHashingStrategy<T>
         while (true);
     }
 
+    @Override
     public void batchForEach(Procedure<? super T> procedure, int sectionIndex, int sectionCount)
     {
         Object[] set = this.table;
@@ -485,12 +488,14 @@ public class UnifiedSetWithHashingStrategy<T>
         }
     }
 
+    @Override
     public UnifiedSetWithHashingStrategy<T> tap(Procedure<? super T> procedure)
     {
         this.forEach(procedure);
         return this;
     }
 
+    @Override
     public void each(Procedure<? super T> procedure)
     {
         for (int i = 0; i < this.table.length; i++)
@@ -635,11 +640,13 @@ public class UnifiedSetWithHashingStrategy<T>
         while (true);
     }
 
+    @Override
     public UnifiedSetWithHashingStrategy<T> newEmpty()
     {
         return UnifiedSetWithHashingStrategy.newSet(this.hashingStrategy);
     }
 
+    @Override
     public T getFirst()
     {
         for (int i = 0; i < this.table.length; i++)
@@ -657,6 +664,7 @@ public class UnifiedSetWithHashingStrategy<T>
         return null;
     }
 
+    @Override
     public T getLast()
     {
         for (int i = this.table.length - 1; i >= 0; i--)
@@ -697,11 +705,13 @@ public class UnifiedSetWithHashingStrategy<T>
         return this.nonSentinel(bucket.zero);
     }
 
+    @Override
     public UnifiedSetWithHashingStrategy<T> select(Predicate<? super T> predicate)
     {
         return this.select(predicate, this.newEmpty());
     }
 
+    @Override
     public <P> UnifiedSetWithHashingStrategy<T> selectWith(
             Predicate2<? super T, ? super P> predicate,
             P parameter)
@@ -709,11 +719,13 @@ public class UnifiedSetWithHashingStrategy<T>
         return this.selectWith(predicate, parameter, this.newEmpty());
     }
 
+    @Override
     public UnifiedSetWithHashingStrategy<T> reject(Predicate<? super T> predicate)
     {
         return this.reject(predicate, this.newEmpty());
     }
 
+    @Override
     public <P> UnifiedSetWithHashingStrategy<T> rejectWith(
             Predicate2<? super T, ? super P> predicate,
             P parameter)
@@ -721,40 +733,38 @@ public class UnifiedSetWithHashingStrategy<T>
         return this.rejectWith(predicate, parameter, this.newEmpty());
     }
 
+    @Override
     public <P> Twin<MutableList<T>> selectAndRejectWith(
-            final Predicate2<? super T, ? super P> predicate,
+            Predicate2<? super T, ? super P> predicate,
             P parameter)
     {
-        final MutableList<T> positiveResult = Lists.mutable.empty();
-        final MutableList<T> negativeResult = Lists.mutable.empty();
-        this.forEachWith(new Procedure2<T, P>()
-        {
-            public void value(T each, P parm)
-            {
-                (predicate.accept(each, parm) ? positiveResult : negativeResult).add(each);
-            }
-        }, parameter);
+        MutableList<T> positiveResult = Lists.mutable.empty();
+        MutableList<T> negativeResult = Lists.mutable.empty();
+        this.forEachWith((each, parm) -> (predicate.accept(each, parm) ? positiveResult : negativeResult).add(each), parameter);
         return Tuples.twin(positiveResult, negativeResult);
     }
 
+    @Override
     public PartitionMutableSet<T> partition(Predicate<? super T> predicate)
     {
-        PartitionMutableSet<T> partitionMutableSet = new PartitionUnifiedSetWithHashingStrategy<T>(this.hashingStrategy);
-        this.forEach(new PartitionProcedure<T>(predicate, partitionMutableSet));
+        PartitionMutableSet<T> partitionMutableSet = new PartitionUnifiedSetWithHashingStrategy<>(this.hashingStrategy);
+        this.forEach(new PartitionProcedure<>(predicate, partitionMutableSet));
         return partitionMutableSet;
     }
 
+    @Override
     public <P> PartitionMutableSet<T> partitionWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
-        PartitionMutableSet<T> partitionMutableSet = new PartitionUnifiedSetWithHashingStrategy<T>(this.hashingStrategy);
-        this.forEach(new PartitionPredicate2Procedure<T, P>(predicate, parameter, partitionMutableSet));
+        PartitionMutableSet<T> partitionMutableSet = new PartitionUnifiedSetWithHashingStrategy<>(this.hashingStrategy);
+        this.forEach(new PartitionPredicate2Procedure<>(predicate, parameter, partitionMutableSet));
         return partitionMutableSet;
     }
 
+    @Override
     public <S> UnifiedSetWithHashingStrategy<S> selectInstancesOf(Class<S> clazz)
     {
         UnifiedSetWithHashingStrategy<S> result = (UnifiedSetWithHashingStrategy<S>) this.newEmpty();
-        this.forEach(new SelectInstancesOfProcedure<S>(clazz, result));
+        this.forEach(new SelectInstancesOfProcedure<>(clazz, result));
         return result;
     }
 
@@ -997,11 +1007,13 @@ public class UnifiedSetWithHashingStrategy<T>
         return this.asLazy().collect(function);
     }
 
+    @Override
     public ImmutableSet<T> toImmutable()
     {
         return HashingStrategySets.immutable.withAll(this.hashingStrategy, this);
     }
 
+    @Override
     public UnifiedSetWithHashingStrategy<T> with(T element)
     {
         this.add(element);
@@ -1029,24 +1041,28 @@ public class UnifiedSetWithHashingStrategy<T>
         return this;
     }
 
+    @Override
     public UnifiedSetWithHashingStrategy<T> withAll(Iterable<? extends T> iterable)
     {
         this.addAllIterable(iterable);
         return this;
     }
 
+    @Override
     public UnifiedSetWithHashingStrategy<T> without(T element)
     {
         this.remove(element);
         return this;
     }
 
+    @Override
     public UnifiedSetWithHashingStrategy<T> withoutAll(Iterable<? extends T> elements)
     {
         this.removeAllIterable(elements);
         return this;
     }
 
+    @Override
     public boolean addAllIterable(Iterable<? extends T> iterable)
     {
         if (iterable instanceof UnifiedSetWithHashingStrategy)
@@ -1056,7 +1072,7 @@ public class UnifiedSetWithHashingStrategy<T>
         int size = Iterate.sizeOf(iterable);
         this.ensureCapacity(size);
         int oldSize = this.size();
-        Iterate.forEachWith(iterable, Procedures2.<T>addToCollection(), this);
+        Iterate.forEachWith(iterable, Procedures2.addToCollection(), this);
         return this.size() != oldSize;
     }
 
@@ -1124,6 +1140,7 @@ public class UnifiedSetWithHashingStrategy<T>
         while (true);
     }
 
+    @Override
     public boolean remove(Object key)
     {
         int index = this.index((T) key);
@@ -1250,6 +1267,7 @@ public class UnifiedSetWithHashingStrategy<T>
         while (true);
     }
 
+    @Override
     public int size()
     {
         return this.occupied;
@@ -1322,6 +1340,7 @@ public class UnifiedSetWithHashingStrategy<T>
         while (true);
     }
 
+    @Override
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
     {
         this.hashingStrategy = (HashingStrategy<? super T>) in.readObject();
@@ -1334,6 +1353,7 @@ public class UnifiedSetWithHashingStrategy<T>
         }
     }
 
+    @Override
     public void writeExternal(ObjectOutput out) throws IOException
     {
         out.writeObject(this.hashingStrategy);
@@ -1452,6 +1472,7 @@ public class UnifiedSetWithHashingStrategy<T>
         while (true);
     }
 
+    @Override
     public boolean retainAllIterable(Iterable<?> iterable)
     {
         if (iterable instanceof Set)
@@ -1464,7 +1485,7 @@ public class UnifiedSetWithHashingStrategy<T>
     private boolean retainAllFromNonSet(Iterable<?> iterable)
     {
         int retainedSize = Iterate.sizeOf(iterable);
-        UnifiedSetWithHashingStrategy<T> retainedCopy = new UnifiedSetWithHashingStrategy<T>(this.hashingStrategy, retainedSize, this.loadFactor);
+        UnifiedSetWithHashingStrategy<T> retainedCopy = new UnifiedSetWithHashingStrategy<>(this.hashingStrategy, retainedSize, this.loadFactor);
         for (Object key : iterable)
         {
             this.addIfFound((T) key, retainedCopy);
@@ -1498,7 +1519,7 @@ public class UnifiedSetWithHashingStrategy<T>
     @Override
     public UnifiedSetWithHashingStrategy<T> clone()
     {
-        return new UnifiedSetWithHashingStrategy<T>(this.hashingStrategy, this);
+        return new UnifiedSetWithHashingStrategy<>(this.hashingStrategy, this);
     }
 
     @Override
@@ -1578,6 +1599,7 @@ public class UnifiedSetWithHashingStrategy<T>
         return result;
     }
 
+    @Override
     public Iterator<T> iterator()
     {
         return new PositionalIterator();
@@ -1590,11 +1612,13 @@ public class UnifiedSetWithHashingStrategy<T>
         protected int chainPosition;
         protected boolean lastReturned;
 
+        @Override
         public boolean hasNext()
         {
             return this.count < UnifiedSetWithHashingStrategy.this.size();
         }
 
+        @Override
         public void remove()
         {
             if (!this.lastReturned)
@@ -1653,6 +1677,7 @@ public class UnifiedSetWithHashingStrategy<T>
             return UnifiedSetWithHashingStrategy.this.nonSentinel(cur);
         }
 
+        @Override
         public T next()
         {
             if (!this.hasNext())
@@ -1890,17 +1915,20 @@ public class UnifiedSetWithHashingStrategy<T>
         }
     }
 
+    @Override
     public <V> UnifiedSetWithHashingStrategyMultimap<V, T> groupBy(
             Function<? super T, ? extends V> function)
     {
-        return this.groupBy(function, UnifiedSetWithHashingStrategyMultimap.<V, T>newMultimap(this.hashingStrategy));
+        return this.groupBy(function, UnifiedSetWithHashingStrategyMultimap.newMultimap(this.hashingStrategy));
     }
 
+    @Override
     public <V> UnifiedSetWithHashingStrategyMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function)
     {
-        return this.groupByEach(function, UnifiedSetWithHashingStrategyMultimap.<V, T>newMultimap(this.hashingStrategy));
+        return this.groupByEach(function, UnifiedSetWithHashingStrategyMultimap.newMultimap(this.hashingStrategy));
     }
 
+    @Override
     public T get(T key)
     {
         int index = this.index(key);
@@ -1963,6 +1991,7 @@ public class UnifiedSetWithHashingStrategy<T>
         while (true);
     }
 
+    @Override
     public T put(T key)
     {
         int index = this.index(key);
@@ -2058,6 +2087,7 @@ public class UnifiedSetWithHashingStrategy<T>
         return key;
     }
 
+    @Override
     public T removeFromPool(T key)
     {
         int index = this.index(key);
@@ -2210,6 +2240,7 @@ public class UnifiedSetWithHashingStrategy<T>
         return cur == key || (cur == NULL_KEY ? key == null : this.hashingStrategy.equals(this.nonSentinel(cur), key));
     }
 
+    @Override
     @Beta
     public ParallelUnsortedSetIterable<T> asParallel(ExecutorService executorService, int batchSize)
     {
@@ -2235,6 +2266,7 @@ public class UnifiedSetWithHashingStrategy<T>
             this.chunkEndIndex = chunkEndIndex;
         }
 
+        @Override
         public void forEach(Procedure<? super T> procedure)
         {
             for (int i = this.chunkStartIndex; i < this.chunkEndIndex; i++)
@@ -2251,34 +2283,40 @@ public class UnifiedSetWithHashingStrategy<T>
             }
         }
 
+        @Override
         public boolean anySatisfy(Predicate<? super T> predicate)
         {
             return UnifiedSetWithHashingStrategy.this.shortCircuit(predicate, true, true, false, this.chunkStartIndex, this.chunkEndIndex);
         }
 
+        @Override
         public boolean allSatisfy(Predicate<? super T> predicate)
         {
             return UnifiedSetWithHashingStrategy.this.shortCircuit(predicate, false, false, true, this.chunkStartIndex, this.chunkEndIndex);
         }
 
+        @Override
         public T detect(Predicate<? super T> predicate)
         {
             return UnifiedSetWithHashingStrategy.this.detect(predicate, this.chunkStartIndex, this.chunkEndIndex);
         }
 
+        @Override
         public UnsortedSetBatch<T> select(Predicate<? super T> predicate)
         {
-            return new SelectUnsortedSetBatch<T>(this, predicate);
+            return new SelectUnsortedSetBatch<>(this, predicate);
         }
 
+        @Override
         public <V> UnsortedBagBatch<V> collect(Function<? super T, ? extends V> function)
         {
-            return new CollectUnsortedBagBatch<T, V>(this, function);
+            return new CollectUnsortedBagBatch<>(this, function);
         }
 
+        @Override
         public <V> UnsortedBagBatch<V> flatCollect(Function<? super T, ? extends Iterable<V>> function)
         {
-            return new FlatCollectUnsortedBagBatch<T, V>(this, function);
+            return new FlatCollectUnsortedBagBatch<>(this, function);
         }
     }
 
@@ -2311,21 +2349,25 @@ public class UnifiedSetWithHashingStrategy<T>
             return new UnifiedSetParallelSplitLazyIterable();
         }
 
+        @Override
         public void forEach(Procedure<? super T> procedure)
         {
             AbstractParallelIterable.forEach(this, procedure);
         }
 
+        @Override
         public boolean anySatisfy(Predicate<? super T> predicate)
         {
             return AbstractParallelIterable.anySatisfy(this, predicate);
         }
 
+        @Override
         public boolean allSatisfy(Predicate<? super T> predicate)
         {
             return AbstractParallelIterable.allSatisfy(this, predicate);
         }
 
+        @Override
         public T detect(Predicate<? super T> predicate)
         {
             return AbstractParallelIterable.detect(this, predicate);
@@ -2349,11 +2391,13 @@ public class UnifiedSetWithHashingStrategy<T>
         {
             protected int chunkIndex;
 
+            @Override
             public boolean hasNext()
             {
                 return this.chunkIndex * UnifiedSetParallelUnsortedIterable.this.batchSize < UnifiedSetWithHashingStrategy.this.table.length;
             }
 
+            @Override
             public RootUnsortedSetBatch<T> next()
             {
                 int chunkStartIndex = this.chunkIndex * UnifiedSetParallelUnsortedIterable.this.batchSize;
@@ -2363,6 +2407,7 @@ public class UnifiedSetWithHashingStrategy<T>
                 return new UnifiedUnsortedSetBatch(chunkStartIndex, truncatedChunkEndIndex);
             }
 
+            @Override
             public void remove()
             {
                 throw new UnsupportedOperationException("Cannot call remove() on " + this.getClass().getSimpleName());
@@ -2372,6 +2417,7 @@ public class UnifiedSetWithHashingStrategy<T>
         private class UnifiedSetParallelSplitLazyIterable
                 extends AbstractLazyIterable<RootUnsortedSetBatch<T>>
         {
+            @Override
             public void each(Procedure<? super RootUnsortedSetBatch<T>> procedure)
             {
                 for (RootUnsortedSetBatch<T> chunk : this)
@@ -2380,6 +2426,7 @@ public class UnifiedSetWithHashingStrategy<T>
                 }
             }
 
+            @Override
             public Iterator<RootUnsortedSetBatch<T>> iterator()
             {
                 return new UnifiedSetParallelSplitIterator();

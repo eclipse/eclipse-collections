@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -54,7 +54,7 @@ public class UnifiedSetWithHashingStrategyMultimapTest extends AbstractMutableSe
     @Override
     public <K, V> UnifiedSetWithHashingStrategyMultimap<K, V> newMultimap()
     {
-        return UnifiedSetWithHashingStrategyMultimap.newMultimap(HashingStrategies.<V>defaultStrategy());
+        return UnifiedSetWithHashingStrategyMultimap.newMultimap(HashingStrategies.defaultStrategy());
     }
 
     @Override
@@ -105,19 +105,19 @@ public class UnifiedSetWithHashingStrategyMultimapTest extends AbstractMutableSe
     @Override
     protected final <K, V> UnifiedSetWithHashingStrategyMultimap<K, V> newMultimap(Pair<K, V>... pairs)
     {
-        return UnifiedSetWithHashingStrategyMultimap.newMultimap(HashingStrategies.<V>defaultStrategy(), pairs);
+        return UnifiedSetWithHashingStrategyMultimap.newMultimap(HashingStrategies.defaultStrategy(), pairs);
     }
 
     @Override
     protected <K, V> UnifiedSetWithHashingStrategyMultimap<K, V> newMultimapFromPairs(Iterable<Pair<K, V>> inputIterable)
     {
-        return UnifiedSetWithHashingStrategyMultimap.newMultimap(HashingStrategies.<V>defaultStrategy(), inputIterable);
+        return UnifiedSetWithHashingStrategyMultimap.newMultimap(HashingStrategies.defaultStrategy(), inputIterable);
     }
 
     @Override
     protected final <V> MutableSet<V> createCollection(V... args)
     {
-        return UnifiedSetWithHashingStrategy.newSetWith(HashingStrategies.<V>defaultStrategy(), args);
+        return UnifiedSetWithHashingStrategy.newSetWith(HashingStrategies.defaultStrategy(), args);
     }
 
     @Override
@@ -132,7 +132,7 @@ public class UnifiedSetWithHashingStrategyMultimapTest extends AbstractMutableSe
     @Test
     public void testHashingStrategyConstructors()
     {
-        UnifiedSetWithHashingStrategyMultimap<Integer, Person> peopleMap = UnifiedSetWithHashingStrategyMultimap.newMultimap(HashingStrategies.<Person>defaultStrategy());
+        UnifiedSetWithHashingStrategyMultimap<Integer, Person> peopleMap = UnifiedSetWithHashingStrategyMultimap.newMultimap(HashingStrategies.defaultStrategy());
         UnifiedSetWithHashingStrategyMultimap<Integer, Person> lastNameMap = UnifiedSetWithHashingStrategyMultimap.newMultimap(LAST_NAME_STRATEGY);
         UnifiedSetWithHashingStrategyMultimap<Integer, Person> firstNameMap = UnifiedSetWithHashingStrategyMultimap.newMultimap(FIRST_NAME_STRATEGY);
         peopleMap.putAll(1, PEOPLE);

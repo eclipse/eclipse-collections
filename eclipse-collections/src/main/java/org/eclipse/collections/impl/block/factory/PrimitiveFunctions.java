@@ -116,7 +116,7 @@ public final class PrimitiveFunctions
         return UNBOX_FLOAT_TO_FLOAT;
     }
 
-    public static <T, V> Function2<MutableObjectLongMap<V>, T, MutableObjectLongMap<V>> sumByIntFunction(final Function<? super T, ? extends V> groupBy, final IntFunction<? super T> function)
+    public static <T, V> Function2<MutableObjectLongMap<V>, T, MutableObjectLongMap<V>> sumByIntFunction(Function<? super T, ? extends V> groupBy, IntFunction<? super T> function)
     {
         return new Function2<MutableObjectLongMap<V>, T, MutableObjectLongMap<V>>()
         {
@@ -130,7 +130,7 @@ public final class PrimitiveFunctions
         };
     }
 
-    public static <T, V> Function2<MutableObjectDoubleMap<V>, T, MutableObjectDoubleMap<V>> sumByFloatFunction(final Function<? super T, ? extends V> groupBy, final FloatFunction<? super T> function)
+    public static <T, V> Function2<MutableObjectDoubleMap<V>, T, MutableObjectDoubleMap<V>> sumByFloatFunction(Function<? super T, ? extends V> groupBy, FloatFunction<? super T> function)
     {
         return new Function2<MutableObjectDoubleMap<V>, T, MutableObjectDoubleMap<V>>()
         {
@@ -150,7 +150,7 @@ public final class PrimitiveFunctions
         };
     }
 
-    public static <T, V> Function2<MutableObjectLongMap<V>, T, MutableObjectLongMap<V>> sumByLongFunction(final Function<? super T, ? extends V> groupBy, final LongFunction<? super T> function)
+    public static <T, V> Function2<MutableObjectLongMap<V>, T, MutableObjectLongMap<V>> sumByLongFunction(Function<? super T, ? extends V> groupBy, LongFunction<? super T> function)
     {
         return new Function2<MutableObjectLongMap<V>, T, MutableObjectLongMap<V>>()
         {
@@ -164,7 +164,7 @@ public final class PrimitiveFunctions
         };
     }
 
-    public static <T, V> Function2<MutableObjectDoubleMap<V>, T, MutableObjectDoubleMap<V>> sumByDoubleFunction(final Function<? super T, ? extends V> groupBy, final DoubleFunction<? super T> function)
+    public static <T, V> Function2<MutableObjectDoubleMap<V>, T, MutableObjectDoubleMap<V>> sumByDoubleFunction(Function<? super T, ? extends V> groupBy, DoubleFunction<? super T> function)
     {
         return new Function2<MutableObjectDoubleMap<V>, T, MutableObjectDoubleMap<V>>()
         {
@@ -189,6 +189,7 @@ public final class PrimitiveFunctions
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public boolean booleanValueOf(Integer integer)
         {
             return integer.intValue() > 0;
@@ -200,6 +201,7 @@ public final class PrimitiveFunctions
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public int intValueOf(Number number)
         {
             return number.intValue();
@@ -211,6 +213,7 @@ public final class PrimitiveFunctions
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public byte byteValueOf(Integer integer)
         {
             return integer.byteValue();
@@ -222,6 +225,7 @@ public final class PrimitiveFunctions
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public char charValueOf(Integer integer)
         {
             return (char) integer.intValue();
@@ -233,6 +237,7 @@ public final class PrimitiveFunctions
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public int intValueOf(Integer integer)
         {
             return integer;
@@ -244,6 +249,7 @@ public final class PrimitiveFunctions
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public float floatValueOf(Integer integer)
         {
             return integer;
@@ -255,6 +261,7 @@ public final class PrimitiveFunctions
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public long longValueOf(Integer integer)
         {
             return integer;
@@ -266,6 +273,7 @@ public final class PrimitiveFunctions
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public short shortValueOf(Integer integer)
         {
             return integer.shortValue();
@@ -277,6 +285,7 @@ public final class PrimitiveFunctions
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public double doubleValueOf(Integer integer)
         {
             return integer;
@@ -288,6 +297,7 @@ public final class PrimitiveFunctions
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public double doubleValueOf(Double aDouble)
         {
             return aDouble;
@@ -298,6 +308,7 @@ public final class PrimitiveFunctions
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public float floatValueOf(Float aFloat)
         {
             return aFloat;
@@ -309,6 +320,7 @@ public final class PrimitiveFunctions
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public float floatValueOf(Number number)
         {
             return number.floatValue();
@@ -320,6 +332,7 @@ public final class PrimitiveFunctions
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public long longValueOf(Number number)
         {
             return number.longValue();
@@ -331,6 +344,7 @@ public final class PrimitiveFunctions
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public double doubleValueOf(Number number)
         {
             return number.doubleValue();

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -165,8 +165,8 @@ public class MapIterateTest
     public void toSortedList_with_comparator()
     {
         MutableMap<String, Integer> integers = this.getIntegerMap();
-        MutableList<Integer> list = MapIterate.toSortedList(integers, Collections.<Integer>reverseOrder());
-        MutableList<Integer> expected = FastList.newList(integers.values()).sortThis(Collections.<Integer>reverseOrder());
+        MutableList<Integer> list = MapIterate.toSortedList(integers, Collections.reverseOrder());
+        MutableList<Integer> expected = FastList.newList(integers.values()).sortThis(Collections.reverseOrder());
         Assert.assertEquals(expected, list);
     }
 
@@ -198,7 +198,7 @@ public class MapIterateTest
     public void selectWithDifferentTargetCollection()
     {
         MutableMap<String, Integer> map = this.getIntegerMap();
-        Collection<Integer> results = MapIterate.select(map, Integer.class::isInstance, FastList.<Integer>newList());
+        Collection<Integer> results = MapIterate.select(map, Integer.class::isInstance, FastList.newList());
         Assert.assertEquals(Bags.mutable.of(1, 2, 3, 4, 5), HashBag.newBag(results));
     }
 
@@ -213,7 +213,7 @@ public class MapIterateTest
     public void rejectWithDifferentTargetCollection()
     {
         MutableMap<String, Integer> map = this.getIntegerMap();
-        MutableList<Integer> list = MapIterate.reject(map, Integer.class::isInstance, FastList.<Integer>newList());
+        MutableList<Integer> list = MapIterate.reject(map, Integer.class::isInstance, FastList.newList());
         Verify.assertEmpty(list);
     }
 

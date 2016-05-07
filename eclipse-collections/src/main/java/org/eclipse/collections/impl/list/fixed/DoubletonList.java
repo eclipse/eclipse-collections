@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -49,7 +49,7 @@ final class DoubletonList<T>
     @Override
     public TripletonList<T> with(T value)
     {
-        return new TripletonList<T>(this.element1, this.element2, value);
+        return new TripletonList<>(this.element1, this.element2, value);
     }
 
     // Weird implementation of clone() is ok on final classes
@@ -57,7 +57,7 @@ final class DoubletonList<T>
     @Override
     public DoubletonList<T> clone()
     {
-        return new DoubletonList<T>(this.element1, this.element2);
+        return new DoubletonList<>(this.element1, this.element2);
     }
 
     @Override
@@ -72,11 +72,13 @@ final class DoubletonList<T>
         return this.element2;
     }
 
+    @Override
     public int size()
     {
         return 2;
     }
 
+    @Override
     public T get(int index)
     {
         switch (index)
@@ -99,6 +101,7 @@ final class DoubletonList<T>
     /**
      * set is implemented purely to allow the List to be sorted, not because this List should be considered mutable.
      */
+    @Override
     public T set(int index, T element)
     {
         switch (index)
@@ -137,12 +140,14 @@ final class DoubletonList<T>
         procedure.value(this.element2, parameter);
     }
 
+    @Override
     public void writeExternal(ObjectOutput out) throws IOException
     {
         out.writeObject(this.element1);
         out.writeObject(this.element2);
     }
 
+    @Override
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
     {
         this.element1 = (T) in.readObject();

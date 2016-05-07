@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -17,56 +17,67 @@ import org.eclipse.collections.api.stack.MutableStack;
 @Immutable
 public final class MutableStackFactoryImpl implements MutableStackFactory
 {
+    @Override
     public <T> MutableStack<T> empty()
     {
         return ArrayStack.newStack();
     }
 
+    @Override
     public <T> MutableStack<T> of()
     {
         return this.empty();
     }
 
+    @Override
     public <T> MutableStack<T> with()
     {
         return this.empty();
     }
 
+    @Override
     public <T> MutableStack<T> of(T... elements)
     {
         return this.with(elements);
     }
 
+    @Override
     public <T> MutableStack<T> with(T... elements)
     {
         return ArrayStack.newStackWith(elements);
     }
 
+    @Override
     public <T> MutableStack<T> ofAll(Iterable<? extends T> elements)
     {
         return this.withAll(elements);
     }
 
+    @Override
     public <T> MutableStack<T> withAll(Iterable<? extends T> elements)
     {
         return ArrayStack.newStack(elements);
     }
 
+    @Override
     public <T> MutableStack<T> ofReversed(T... elements)
     {
         return this.withReversed(elements);
     }
 
+    @Override
     public <T> MutableStack<T> withReversed(T... elements)
     {
         return ArrayStack.newStackFromTopToBottom(elements);
     }
 
+    @Override
     public <T> MutableStack<T> ofAllReversed(Iterable<? extends T> items)
     {
         return this.withAllReversed(items);
     }
 
+    @Override
     public <T> MutableStack<T> withAllReversed(Iterable<? extends T> items)
     {
         return ArrayStack.newStackFromTopToBottom(items);

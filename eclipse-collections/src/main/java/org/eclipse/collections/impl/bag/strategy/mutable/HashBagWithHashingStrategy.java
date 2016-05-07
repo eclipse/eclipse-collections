@@ -16,7 +16,6 @@ import org.eclipse.collections.api.bag.Bag;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.block.HashingStrategy;
 import org.eclipse.collections.api.block.predicate.primitive.IntPredicate;
-import org.eclipse.collections.api.block.predicate.primitive.ObjectIntPredicate;
 import org.eclipse.collections.api.map.primitive.MutableObjectIntMap;
 import org.eclipse.collections.impl.bag.mutable.AbstractHashBag;
 import org.eclipse.collections.impl.map.mutable.primitive.ObjectIntHashMapWithHashingStrategy;
@@ -48,7 +47,7 @@ public class HashBagWithHashingStrategy<T>
             throw new IllegalArgumentException("Cannot Instantiate HashBagWithHashingStrategy with null HashingStrategy");
         }
         this.hashingStrategy = hashingStrategy;
-        this.items = new ObjectIntHashMapWithHashingStrategy<T>(hashingStrategy, size);
+        this.items = new ObjectIntHashMapWithHashingStrategy<>(hashingStrategy, size);
     }
 
     private HashBagWithHashingStrategy(HashingStrategy<? super T> hashingStrategy, MutableObjectIntMap<T> map)
@@ -60,12 +59,12 @@ public class HashBagWithHashingStrategy<T>
 
     public static <E> HashBagWithHashingStrategy<E> newBag(HashingStrategy<? super E> hashingStrategy)
     {
-        return new HashBagWithHashingStrategy<E>(hashingStrategy);
+        return new HashBagWithHashingStrategy<>(hashingStrategy);
     }
 
     public static <E> HashBagWithHashingStrategy<E> newBag(HashingStrategy<? super E> hashingStrategy, int size)
     {
-        return new HashBagWithHashingStrategy<E>(hashingStrategy, size);
+        return new HashBagWithHashingStrategy<>(hashingStrategy, size);
     }
 
     public static <E> HashBagWithHashingStrategy<E> newBag(HashingStrategy<? super E> hashingStrategy, Bag<? extends E> source)
@@ -103,47 +102,48 @@ public class HashBagWithHashingStrategy<T>
     }
 
     @Override
-    public MutableBag<T> selectByOccurrences(final IntPredicate predicate)
+    public MutableBag<T> selectByOccurrences(IntPredicate predicate)
     {
-        MutableObjectIntMap<T> map = this.items.select(new ObjectIntPredicate<T>()
-        {
-            public boolean accept(T each, int occurrences)
-            {
-                return predicate.accept(occurrences);
-            }
+        MutableObjectIntMap<T> map = this.items.select((each, occurrences) -> {
+            return predicate.accept(occurrences);
         });
-        return new HashBagWithHashingStrategy<T>(this.hashingStrategy, map);
+        return new HashBagWithHashingStrategy<>(this.hashingStrategy, map);
     }
 
     protected Object writeReplace()
     {
-        return new HashBagWithHashingStrategySerializationProxy<T>(this);
+        return new HashBagWithHashingStrategySerializationProxy<>(this);
     }
 
+    @Override
     public MutableBag<T> with(T element)
     {
         this.add(element);
         return this;
     }
 
+    @Override
     public MutableBag<T> without(T element)
     {
         this.remove(element);
         return this;
     }
 
+    @Override
     public MutableBag<T> withAll(Iterable<? extends T> elements)
     {
         this.addAllIterable(elements);
         return this;
     }
 
+    @Override
     public MutableBag<T> withoutAll(Iterable<? extends T> elements)
     {
         this.removeAllIterable(elements);
         return this;
     }
 
+    @Override
     public MutableBag<T> newEmpty()
     {
         return HashBagWithHashingStrategy.newBag(this.hashingStrategy);

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -59,14 +59,16 @@ public final class ImmutableListMultimapImpl<K, V>
         return Lists.immutable.empty();
     }
 
+    @Override
     public ImmutableListMultimap<K, V> newEmpty()
     {
-        return new ImmutableListMultimapImpl<K, V>(Maps.immutable.<K, ImmutableList<V>>of());
+        return new ImmutableListMultimapImpl<>(Maps.immutable.of());
     }
 
+    @Override
     public MutableListMultimap<K, V> toMutable()
     {
-        return new FastListMultimap<K, V>(this);
+        return new FastListMultimap<>(this);
     }
 
     @Override
@@ -77,7 +79,7 @@ public final class ImmutableListMultimapImpl<K, V>
 
     private Object writeReplace()
     {
-        return new ImmutableListMultimapSerializationProxy<K, V>(this.map);
+        return new ImmutableListMultimapSerializationProxy<>(this.map);
     }
 
     public static class ImmutableListMultimapSerializationProxy<K, V>
@@ -99,7 +101,7 @@ public final class ImmutableListMultimapImpl<K, V>
         @Override
         protected AbstractMutableMultimap<K, V, MutableList<V>> createEmptyMutableMultimap()
         {
-            return new FastListMultimap<K, V>();
+            return new FastListMultimap<>();
         }
     }
 
@@ -127,36 +129,43 @@ public final class ImmutableListMultimapImpl<K, V>
         return (ImmutableListMultimap<K, V>) super.newWithoutAll(key);
     }
 
+    @Override
     public ImmutableBagMultimap<V, K> flip()
     {
         return Iterate.flip(this).toImmutable();
     }
 
+    @Override
     public ImmutableListMultimap<K, V> selectKeysValues(Predicate2<? super K, ? super V> predicate)
     {
-        return this.selectKeysValues(predicate, FastListMultimap.<K, V>newMultimap()).toImmutable();
+        return this.selectKeysValues(predicate, FastListMultimap.newMultimap()).toImmutable();
     }
 
+    @Override
     public ImmutableListMultimap<K, V> rejectKeysValues(Predicate2<? super K, ? super V> predicate)
     {
-        return this.rejectKeysValues(predicate, FastListMultimap.<K, V>newMultimap()).toImmutable();
+        return this.rejectKeysValues(predicate, FastListMultimap.newMultimap()).toImmutable();
     }
 
+    @Override
     public ImmutableListMultimap<K, V> selectKeysMultiValues(Predicate2<? super K, ? super Iterable<V>> predicate)
     {
-        return this.selectKeysMultiValues(predicate, FastListMultimap.<K, V>newMultimap()).toImmutable();
+        return this.selectKeysMultiValues(predicate, FastListMultimap.newMultimap()).toImmutable();
     }
 
+    @Override
     public ImmutableListMultimap<K, V> rejectKeysMultiValues(Predicate2<? super K, ? super Iterable<V>> predicate)
     {
-        return this.rejectKeysMultiValues(predicate, FastListMultimap.<K, V>newMultimap()).toImmutable();
+        return this.rejectKeysMultiValues(predicate, FastListMultimap.newMultimap()).toImmutable();
     }
 
+    @Override
     public <K2, V2> ImmutableBagMultimap<K2, V2> collectKeysValues(Function2<? super K, ? super V, Pair<K2, V2>> function)
     {
-        return this.collectKeysValues(function, HashBagMultimap.<K2, V2>newMultimap()).toImmutable();
+        return this.collectKeysValues(function, HashBagMultimap.newMultimap()).toImmutable();
     }
 
+    @Override
     public <V2> ImmutableListMultimap<K, V2> collectValues(Function<? super V, ? extends V2> function)
     {
         return this.collectValues(function, FastListMultimap.<K, V2>newMultimap()).toImmutable();

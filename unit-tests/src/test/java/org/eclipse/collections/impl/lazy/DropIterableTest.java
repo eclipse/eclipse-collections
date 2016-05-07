@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -36,7 +36,7 @@ public class DropIterableTest extends AbstractLazyIterableTestCase
     public void setUp()
     {
         this.dropIterable = new DropIterable<>(Interval.oneTo(5), 2);
-        this.emptyListDropIterable = new DropIterable<>(FastList.<Integer>newList(), 2);
+        this.emptyListDropIterable = new DropIterable<>(FastList.newList(), 2);
         this.zeroCountDropIterable = new DropIterable<>(Interval.oneTo(5), 0);
         this.nearCountDropIterable = new DropIterable<>(Interval.oneTo(5), 4);
         this.sameCountDropIterable = new DropIterable<>(Interval.oneTo(5), 5);

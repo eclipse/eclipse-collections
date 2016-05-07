@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -152,6 +152,7 @@ public interface MutableCollection<T>
      */
     MutableCollection<T> newEmpty();
 
+    @Override
     MutableCollection<T> tap(Procedure<? super T> procedure);
 
     /**
@@ -167,6 +168,7 @@ public interface MutableCollection<T>
      * });
      * </pre>
      */
+    @Override
     MutableCollection<T> select(Predicate<? super T> predicate);
 
     /**
@@ -176,6 +178,7 @@ public interface MutableCollection<T>
      * return integers.<b>selectWith</b>(PredicatesLite.equal(), Integer.valueOf(5));
      * </pre>
      */
+    @Override
     <P> MutableCollection<T> selectWith(Predicate2<? super T, ? super P> predicate, P parameter);
 
     /**
@@ -195,6 +198,7 @@ public interface MutableCollection<T>
      * return people.reject(Predicates.attributeEqual("lastName", "Smith"));
      * </pre>
      */
+    @Override
     MutableCollection<T> reject(Predicate<? super T> predicate);
 
     /**
@@ -204,6 +208,7 @@ public interface MutableCollection<T>
      * return integers.<b>rejectWith</b>(PredicatesLite.equal(), Integer.valueOf(5));
      * </pre>
      */
+    @Override
     <P> MutableCollection<T> rejectWith(
             Predicate2<? super T, ? super P> predicate,
             P parameter);
@@ -222,10 +227,13 @@ public interface MutableCollection<T>
             Predicate2<? super T, ? super P> predicate,
             P parameter);
 
+    @Override
     PartitionMutableCollection<T> partition(Predicate<? super T> predicate);
 
+    @Override
     <P> PartitionMutableCollection<T> partitionWith(Predicate2<? super T, ? super P> predicate, P parameter);
 
+    @Override
     <S> MutableCollection<S> selectInstancesOf(Class<S> clazz);
 
     /**
@@ -260,24 +268,34 @@ public interface MutableCollection<T>
      * });
      * </pre>
      */
+    @Override
     <V> MutableCollection<V> collect(Function<? super T, ? extends V> function);
 
+    @Override
     MutableBooleanCollection collectBoolean(BooleanFunction<? super T> booleanFunction);
 
+    @Override
     MutableByteCollection collectByte(ByteFunction<? super T> byteFunction);
 
+    @Override
     MutableCharCollection collectChar(CharFunction<? super T> charFunction);
 
+    @Override
     MutableDoubleCollection collectDouble(DoubleFunction<? super T> doubleFunction);
 
+    @Override
     MutableFloatCollection collectFloat(FloatFunction<? super T> floatFunction);
 
+    @Override
     MutableIntCollection collectInt(IntFunction<? super T> intFunction);
 
+    @Override
     MutableLongCollection collectLong(LongFunction<? super T> longFunction);
 
+    @Override
     MutableShortCollection collectShort(ShortFunction<? super T> shortFunction);
 
+    @Override
     <P, V> MutableCollection<V> collectWith(Function2<? super T, ? super P, ? extends V> function, P parameter);
 
     /**
@@ -288,8 +306,10 @@ public interface MutableCollection<T>
      * Lists.mutable.of().with(1, 2, 3).collectIf(Predicates.notNull(), Functions.getToString())
      * </pre>
      */
+    @Override
     <V> MutableCollection<V> collectIf(Predicate<? super T> predicate, Function<? super T, ? extends V> function);
 
+    @Override
     <V> MutableCollection<V> flatCollect(Function<? super T, ? extends Iterable<V>> function);
 
     <IV, P> IV injectIntoWith(
@@ -365,29 +385,38 @@ public interface MutableCollection<T>
      */
     ImmutableCollection<T> toImmutable();
 
+    @Override
     <V> MutableObjectLongMap<V> sumByInt(Function<? super T, ? extends V> groupBy, IntFunction<? super T> function);
 
+    @Override
     <V> MutableObjectDoubleMap<V> sumByFloat(Function<? super T, ? extends V> groupBy, FloatFunction<? super T> function);
 
+    @Override
     <V> MutableObjectLongMap<V> sumByLong(Function<? super T, ? extends V> groupBy, LongFunction<? super T> function);
 
+    @Override
     <V> MutableObjectDoubleMap<V> sumByDouble(Function<? super T, ? extends V> groupBy, DoubleFunction<? super T> function);
 
+    @Override
     <V> MutableMultimap<V, T> groupBy(Function<? super T, ? extends V> function);
 
+    @Override
     <V> MutableMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function);
 
+    @Override
     <V> MutableMap<V, T> groupByUniqueKey(Function<? super T, ? extends V> function);
 
     /**
      * @deprecated in 6.0. Use {@link OrderedIterable#zip(Iterable)} instead.
      */
+    @Override
     @Deprecated
     <S> MutableCollection<Pair<T, S>> zip(Iterable<S> that);
 
     /**
      * @deprecated in 6.0. Use {@link OrderedIterable#zipWithIndex()} instead.
      */
+    @Override
     @Deprecated
     MutableCollection<Pair<T, Integer>> zipWithIndex();
 
@@ -409,11 +438,13 @@ public interface MutableCollection<T>
      */
     boolean retainAllIterable(Iterable<?> iterable);
 
+    @Override
     <K, V> MutableMap<K, V> aggregateInPlaceBy(
             Function<? super T, ? extends K> groupBy,
             Function0<? extends V> zeroValueFactory,
             Procedure2<? super V, ? super T> mutatingAggregator);
 
+    @Override
     <K, V> MutableMap<K, V> aggregateBy(
             Function<? super T, ? extends K> groupBy,
             Function0<? extends V> zeroValueFactory,

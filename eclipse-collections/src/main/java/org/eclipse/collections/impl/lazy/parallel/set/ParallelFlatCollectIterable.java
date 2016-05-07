@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -61,63 +61,39 @@ public class ParallelFlatCollectIterable<T, V> extends AbstractParallelIterableI
         });
     }
 
-    public void forEach(final Procedure<? super V> procedure)
+    @Override
+    public void forEach(Procedure<? super V> procedure)
     {
-        this.delegate.forEach(new Procedure<T>()
-        {
-            public void value(T each)
-            {
-                Iterate.forEach(ParallelFlatCollectIterable.this.function.valueOf(each), procedure);
-            }
-        });
+        this.delegate.forEach(each -> Iterate.forEach(this.function.valueOf(each), procedure));
     }
 
-    public V detect(final Predicate<? super V> predicate)
+    @Override
+    public V detect(Predicate<? super V> predicate)
     {
-        final AtomicReference<V> result = new AtomicReference<V>();
-        this.delegate.anySatisfy(new Predicate<T>()
-        {
-            public boolean accept(T each)
+        AtomicReference<V> result = new AtomicReference<>();
+        this.delegate.anySatisfy(each -> Iterate.anySatisfy(this.function.valueOf(each), each1 -> {
+            if (predicate.accept(each1))
             {
-                return Iterate.anySatisfy(ParallelFlatCollectIterable.this.function.valueOf(each), new Predicate<V>()
-                {
-                    public boolean accept(V each)
-                    {
-                        if (predicate.accept(each))
-                        {
-                            result.compareAndSet(null, each);
-                            return true;
-                        }
-
-                        return false;
-                    }
-                });
+                result.compareAndSet(null, each1);
+                return true;
             }
-        });
+
+            return false;
+        }));
 
         return result.get();
     }
 
-    public boolean anySatisfy(final Predicate<? super V> predicate)
+    @Override
+    public boolean anySatisfy(Predicate<? super V> predicate)
     {
-        return this.delegate.anySatisfy(new Predicate<T>()
-        {
-            public boolean accept(T each)
-            {
-                return Iterate.anySatisfy(ParallelFlatCollectIterable.this.function.valueOf(each), predicate);
-            }
-        });
+        return this.delegate.anySatisfy(each -> Iterate.anySatisfy(this.function.valueOf(each), predicate));
     }
 
-    public boolean allSatisfy(final Predicate<? super V> predicate)
+    @Override
+    public boolean allSatisfy(Predicate<? super V> predicate)
     {
-        return this.delegate.allSatisfy(new Predicate<T>()
-        {
-            public boolean accept(T each)
-            {
-                return Iterate.allSatisfy(ParallelFlatCollectIterable.this.function.valueOf(each), predicate);
-            }
-        });
+        return this.delegate.allSatisfy(each -> Iterate.allSatisfy(this.function.valueOf(each), predicate));
     }
 
     @Override

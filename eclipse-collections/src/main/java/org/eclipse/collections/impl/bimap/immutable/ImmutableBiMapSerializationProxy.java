@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -37,7 +37,8 @@ class ImmutableBiMapSerializationProxy<K, V> implements Externalizable
         this.biMap = biMap;
     }
 
-    public void writeExternal(final ObjectOutput out) throws IOException
+    @Override
+    public void writeExternal(ObjectOutput out) throws IOException
     {
         out.writeInt(this.biMap.size());
         try
@@ -61,10 +62,11 @@ class ImmutableBiMapSerializationProxy<K, V> implements Externalizable
         }
     }
 
+    @Override
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
     {
         int size = in.readInt();
-        MutableBiMap<K, V> deserializedBiMap = new HashBiMap<K, V>(size);
+        MutableBiMap<K, V> deserializedBiMap = new HashBiMap<>(size);
 
         for (int i = 0; i < size; i++)
         {

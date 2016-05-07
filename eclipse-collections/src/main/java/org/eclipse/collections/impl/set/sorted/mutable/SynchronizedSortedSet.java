@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -90,7 +90,7 @@ public class SynchronizedSortedSet<T>
      */
     public static <E, S extends SortedSet<E>> SynchronizedSortedSet<E> of(S set)
     {
-        return new SynchronizedSortedSet<E>(SortedSetAdapter.adapt(set));
+        return new SynchronizedSortedSet<>(SortedSetAdapter.adapt(set));
     }
 
     /**
@@ -101,7 +101,7 @@ public class SynchronizedSortedSet<T>
      */
     public static <E, S extends SortedSet<E>> MutableSortedSet<E> of(S set, Object lock)
     {
-        return new SynchronizedSortedSet<E>(SortedSetAdapter.adapt(set), lock);
+        return new SynchronizedSortedSet<>(SortedSetAdapter.adapt(set), lock);
     }
 
     @Override
@@ -111,30 +111,35 @@ public class SynchronizedSortedSet<T>
         return (MutableSortedSet<T>) super.getDelegate();
     }
 
+    @Override
     public MutableSortedSet<T> with(T element)
     {
         this.add(element);
         return this;
     }
 
+    @Override
     public MutableSortedSet<T> without(T element)
     {
         this.remove(element);
         return this;
     }
 
+    @Override
     public MutableSortedSet<T> withAll(Iterable<? extends T> elements)
     {
         this.addAllIterable(elements);
         return this;
     }
 
+    @Override
     public MutableSortedSet<T> withoutAll(Iterable<? extends T> elements)
     {
         this.removeAllIterable(elements);
         return this;
     }
 
+    @Override
     public MutableSortedSet<T> newEmpty()
     {
         synchronized (this.getLock())
@@ -154,9 +159,10 @@ public class SynchronizedSortedSet<T>
 
     protected Object writeReplace()
     {
-        return new SynchronizedCollectionSerializationProxy<T>(this.getDelegate());
+        return new SynchronizedCollectionSerializationProxy<>(this.getDelegate());
     }
 
+    @Override
     public Comparator<? super T> comparator()
     {
         synchronized (this.getLock())
@@ -165,6 +171,7 @@ public class SynchronizedSortedSet<T>
         }
     }
 
+    @Override
     public int compareTo(SortedSetIterable<T> o)
     {
         synchronized (this.getLock())
@@ -173,6 +180,7 @@ public class SynchronizedSortedSet<T>
         }
     }
 
+    @Override
     public T first()
     {
         synchronized (this.getLock())
@@ -181,6 +189,7 @@ public class SynchronizedSortedSet<T>
         }
     }
 
+    @Override
     public T last()
     {
         synchronized (this.getLock())
@@ -189,6 +198,7 @@ public class SynchronizedSortedSet<T>
         }
     }
 
+    @Override
     public int indexOf(Object object)
     {
         synchronized (this.getLock())
@@ -197,6 +207,7 @@ public class SynchronizedSortedSet<T>
         }
     }
 
+    @Override
     public MutableStack<T> toStack()
     {
         synchronized (this.getLock())
@@ -205,6 +216,7 @@ public class SynchronizedSortedSet<T>
         }
     }
 
+    @Override
     public PartitionMutableSortedSet<T> partitionWhile(Predicate<? super T> predicate)
     {
         synchronized (this.getLock())
@@ -213,6 +225,7 @@ public class SynchronizedSortedSet<T>
         }
     }
 
+    @Override
     public MutableSortedSet<T> distinct()
     {
         synchronized (this.getLock())
@@ -221,6 +234,7 @@ public class SynchronizedSortedSet<T>
         }
     }
 
+    @Override
     public MutableSortedSet<T> takeWhile(Predicate<? super T> predicate)
     {
         synchronized (this.getLock())
@@ -229,6 +243,7 @@ public class SynchronizedSortedSet<T>
         }
     }
 
+    @Override
     public MutableSortedSet<T> dropWhile(Predicate<? super T> predicate)
     {
         synchronized (this.getLock())
@@ -237,6 +252,7 @@ public class SynchronizedSortedSet<T>
         }
     }
 
+    @Override
     public <S> boolean corresponds(OrderedIterable<S> other, Predicate2<? super T, ? super S> predicate)
     {
         synchronized (this.getLock())
@@ -245,6 +261,7 @@ public class SynchronizedSortedSet<T>
         }
     }
 
+    @Override
     public void forEach(int startIndex, int endIndex, Procedure<? super T> procedure)
     {
         synchronized (this.getLock())
@@ -253,6 +270,7 @@ public class SynchronizedSortedSet<T>
         }
     }
 
+    @Override
     public void forEachWithIndex(int fromIndex, int toIndex, ObjectIntProcedure<? super T> objectIntProcedure)
     {
         synchronized (this.getLock())
@@ -261,6 +279,7 @@ public class SynchronizedSortedSet<T>
         }
     }
 
+    @Override
     public int detectIndex(Predicate<? super T> predicate)
     {
         synchronized (this.getLock())
@@ -269,6 +288,7 @@ public class SynchronizedSortedSet<T>
         }
     }
 
+    @Override
     public MutableSortedSet<T> tap(Procedure<? super T> procedure)
     {
         synchronized (this.getLock())
@@ -278,6 +298,7 @@ public class SynchronizedSortedSet<T>
         }
     }
 
+    @Override
     public MutableSortedSet<T> select(Predicate<? super T> predicate)
     {
         synchronized (this.getLock())
@@ -286,6 +307,7 @@ public class SynchronizedSortedSet<T>
         }
     }
 
+    @Override
     public <P> MutableSortedSet<T> selectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         synchronized (this.getLock())
@@ -294,6 +316,7 @@ public class SynchronizedSortedSet<T>
         }
     }
 
+    @Override
     public MutableSortedSet<T> reject(Predicate<? super T> predicate)
     {
         synchronized (this.getLock())
@@ -302,6 +325,7 @@ public class SynchronizedSortedSet<T>
         }
     }
 
+    @Override
     public <P> MutableSortedSet<T> rejectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         synchronized (this.getLock())
@@ -310,6 +334,7 @@ public class SynchronizedSortedSet<T>
         }
     }
 
+    @Override
     public PartitionMutableSortedSet<T> partition(Predicate<? super T> predicate)
     {
         synchronized (this.getLock())
@@ -318,6 +343,7 @@ public class SynchronizedSortedSet<T>
         }
     }
 
+    @Override
     public <P> PartitionMutableSortedSet<T> partitionWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         synchronized (this.getLock())
@@ -326,6 +352,7 @@ public class SynchronizedSortedSet<T>
         }
     }
 
+    @Override
     public <S> MutableSortedSet<S> selectInstancesOf(Class<S> clazz)
     {
         synchronized (this.getLock())
@@ -334,6 +361,7 @@ public class SynchronizedSortedSet<T>
         }
     }
 
+    @Override
     public <V> MutableList<V> collect(Function<? super T, ? extends V> function)
     {
         synchronized (this.getLock())
@@ -342,6 +370,7 @@ public class SynchronizedSortedSet<T>
         }
     }
 
+    @Override
     public MutableBooleanList collectBoolean(BooleanFunction<? super T> booleanFunction)
     {
         synchronized (this.getLock())
@@ -350,6 +379,7 @@ public class SynchronizedSortedSet<T>
         }
     }
 
+    @Override
     public MutableByteList collectByte(ByteFunction<? super T> byteFunction)
     {
         synchronized (this.getLock())
@@ -358,6 +388,7 @@ public class SynchronizedSortedSet<T>
         }
     }
 
+    @Override
     public MutableCharList collectChar(CharFunction<? super T> charFunction)
     {
         synchronized (this.getLock())
@@ -366,6 +397,7 @@ public class SynchronizedSortedSet<T>
         }
     }
 
+    @Override
     public MutableDoubleList collectDouble(DoubleFunction<? super T> doubleFunction)
     {
         synchronized (this.getLock())
@@ -374,6 +406,7 @@ public class SynchronizedSortedSet<T>
         }
     }
 
+    @Override
     public MutableFloatList collectFloat(FloatFunction<? super T> floatFunction)
     {
         synchronized (this.getLock())
@@ -382,6 +415,7 @@ public class SynchronizedSortedSet<T>
         }
     }
 
+    @Override
     public MutableIntList collectInt(IntFunction<? super T> intFunction)
     {
         synchronized (this.getLock())
@@ -390,6 +424,7 @@ public class SynchronizedSortedSet<T>
         }
     }
 
+    @Override
     public MutableLongList collectLong(LongFunction<? super T> longFunction)
     {
         synchronized (this.getLock())
@@ -398,6 +433,7 @@ public class SynchronizedSortedSet<T>
         }
     }
 
+    @Override
     public MutableShortList collectShort(ShortFunction<? super T> shortFunction)
     {
         synchronized (this.getLock())
@@ -406,6 +442,7 @@ public class SynchronizedSortedSet<T>
         }
     }
 
+    @Override
     public <P, V> MutableList<V> collectWith(Function2<? super T, ? super P, ? extends V> function, P parameter)
     {
         synchronized (this.getLock())
@@ -414,6 +451,7 @@ public class SynchronizedSortedSet<T>
         }
     }
 
+    @Override
     public <V> MutableList<V> collectIf(
             Predicate<? super T> predicate,
             Function<? super T, ? extends V> function)
@@ -424,6 +462,7 @@ public class SynchronizedSortedSet<T>
         }
     }
 
+    @Override
     public <V> MutableList<V> flatCollect(Function<? super T, ? extends Iterable<V>> function)
     {
         synchronized (this.getLock())
@@ -432,6 +471,7 @@ public class SynchronizedSortedSet<T>
         }
     }
 
+    @Override
     public <V> MutableSortedSetMultimap<V, T> groupBy(Function<? super T, ? extends V> function)
     {
         synchronized (this.getLock())
@@ -440,6 +480,7 @@ public class SynchronizedSortedSet<T>
         }
     }
 
+    @Override
     public <V> MutableSortedSetMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function)
     {
         synchronized (this.getLock())
@@ -448,6 +489,7 @@ public class SynchronizedSortedSet<T>
         }
     }
 
+    @Override
     public <S> MutableList<Pair<T, S>> zip(Iterable<S> that)
     {
         synchronized (this.getLock())
@@ -456,6 +498,7 @@ public class SynchronizedSortedSet<T>
         }
     }
 
+    @Override
     public MutableSortedSet<Pair<T, Integer>> zipWithIndex()
     {
         synchronized (this.getLock())
@@ -464,6 +507,7 @@ public class SynchronizedSortedSet<T>
         }
     }
 
+    @Override
     public <R extends Set<T>> R unionInto(SetIterable<? extends T> set, R targetSet)
     {
         synchronized (this.getLock())
@@ -472,6 +516,7 @@ public class SynchronizedSortedSet<T>
         }
     }
 
+    @Override
     public <R extends Set<T>> R intersectInto(SetIterable<? extends T> set, R targetSet)
     {
         synchronized (this.getLock())
@@ -480,6 +525,7 @@ public class SynchronizedSortedSet<T>
         }
     }
 
+    @Override
     public <R extends Set<T>> R differenceInto(SetIterable<? extends T> subtrahendSet, R targetSet)
     {
         synchronized (this.getLock())
@@ -488,6 +534,7 @@ public class SynchronizedSortedSet<T>
         }
     }
 
+    @Override
     public <R extends Set<T>> R symmetricDifferenceInto(SetIterable<? extends T> set, R targetSet)
     {
         synchronized (this.getLock())
@@ -496,6 +543,7 @@ public class SynchronizedSortedSet<T>
         }
     }
 
+    @Override
     public boolean isSubsetOf(SetIterable<? extends T> candidateSuperset)
     {
         synchronized (this.getLock())
@@ -504,6 +552,7 @@ public class SynchronizedSortedSet<T>
         }
     }
 
+    @Override
     public boolean isProperSubsetOf(SetIterable<? extends T> candidateSuperset)
     {
         synchronized (this.getLock())
@@ -512,6 +561,7 @@ public class SynchronizedSortedSet<T>
         }
     }
 
+    @Override
     public <B> LazyIterable<Pair<T, B>> cartesianProduct(SetIterable<B> set)
     {
         synchronized (this.getLock())
@@ -520,6 +570,7 @@ public class SynchronizedSortedSet<T>
         }
     }
 
+    @Override
     public MutableSortedSet<T> union(SetIterable<? extends T> set)
     {
         synchronized (this.getLock())
@@ -528,6 +579,7 @@ public class SynchronizedSortedSet<T>
         }
     }
 
+    @Override
     public MutableSortedSet<T> intersect(SetIterable<? extends T> set)
     {
         synchronized (this.getLock())
@@ -536,6 +588,7 @@ public class SynchronizedSortedSet<T>
         }
     }
 
+    @Override
     public MutableSortedSet<T> difference(SetIterable<? extends T> subtrahendSet)
     {
         synchronized (this.getLock())
@@ -544,6 +597,7 @@ public class SynchronizedSortedSet<T>
         }
     }
 
+    @Override
     public MutableSortedSet<T> symmetricDifference(SetIterable<? extends T> setB)
     {
         synchronized (this.getLock())
@@ -552,6 +606,7 @@ public class SynchronizedSortedSet<T>
         }
     }
 
+    @Override
     public MutableSortedSet<SortedSetIterable<T>> powerSet()
     {
         synchronized (this.getLock())
@@ -560,11 +615,13 @@ public class SynchronizedSortedSet<T>
         }
     }
 
+    @Override
     public ParallelSortedSetIterable<T> asParallel(ExecutorService executorService, int batchSize)
     {
-        return new SynchronizedParallelSortedSetIterable<T>(this.getDelegate().asParallel(executorService, batchSize), this);
+        return new SynchronizedParallelSortedSetIterable<>(this.getDelegate().asParallel(executorService, batchSize), this);
     }
 
+    @Override
     public ImmutableSortedSet<T> toImmutable()
     {
         synchronized (this.getLock())
@@ -573,6 +630,7 @@ public class SynchronizedSortedSet<T>
         }
     }
 
+    @Override
     public MutableSortedSet<T> asUnmodifiable()
     {
         synchronized (this.getLock())
@@ -581,11 +639,13 @@ public class SynchronizedSortedSet<T>
         }
     }
 
+    @Override
     public MutableSortedSet<T> asSynchronized()
     {
         return this;
     }
 
+    @Override
     public MutableSortedSet<T> subSet(T fromElement, T toElement)
     {
         synchronized (this.getLock())
@@ -594,6 +654,7 @@ public class SynchronizedSortedSet<T>
         }
     }
 
+    @Override
     public MutableSortedSet<T> headSet(T toElement)
     {
         synchronized (this.getLock())
@@ -602,6 +663,7 @@ public class SynchronizedSortedSet<T>
         }
     }
 
+    @Override
     public MutableSortedSet<T> tailSet(T fromElement)
     {
         synchronized (this.getLock())
@@ -610,6 +672,7 @@ public class SynchronizedSortedSet<T>
         }
     }
 
+    @Override
     public void reverseForEach(Procedure<? super T> procedure)
     {
         synchronized (this.getLock())
@@ -618,11 +681,13 @@ public class SynchronizedSortedSet<T>
         }
     }
 
+    @Override
     public LazyIterable<T> asReversed()
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".asReversed() not implemented yet");
     }
 
+    @Override
     public MutableSortedSet<T> toReversed()
     {
         synchronized (this.getLock())
@@ -631,6 +696,7 @@ public class SynchronizedSortedSet<T>
         }
     }
 
+    @Override
     public int detectLastIndex(Predicate<? super T> predicate)
     {
         synchronized (this.getLock())
@@ -639,6 +705,7 @@ public class SynchronizedSortedSet<T>
         }
     }
 
+    @Override
     public MutableSortedSet<T> take(int count)
     {
         synchronized (this.getLock())
@@ -647,6 +714,7 @@ public class SynchronizedSortedSet<T>
         }
     }
 
+    @Override
     public MutableSortedSet<T> drop(int count)
     {
         synchronized (this.getLock())

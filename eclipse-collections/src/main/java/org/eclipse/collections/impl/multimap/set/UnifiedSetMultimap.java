@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -49,22 +49,22 @@ public final class UnifiedSetMultimap<K, V>
 
     public static <K, V> UnifiedSetMultimap<K, V> newMultimap(Multimap<? extends K, ? extends V> multimap)
     {
-        return new UnifiedSetMultimap<K, V>(multimap);
+        return new UnifiedSetMultimap<>(multimap);
     }
 
     public static <K, V> UnifiedSetMultimap<K, V> newMultimap()
     {
-        return new UnifiedSetMultimap<K, V>();
+        return new UnifiedSetMultimap<>();
     }
 
     public static <K, V> UnifiedSetMultimap<K, V> newMultimap(Pair<K, V>... pairs)
     {
-        return new UnifiedSetMultimap<K, V>(pairs);
+        return new UnifiedSetMultimap<>(pairs);
     }
 
     public static <K, V> UnifiedSetMultimap<K, V> newMultimap(Iterable<Pair<K, V>> inputIterable)
     {
-        return new UnifiedSetMultimap<K, V>(inputIterable);
+        return new UnifiedSetMultimap<>(inputIterable);
     }
 
     @Override
@@ -82,34 +82,40 @@ public final class UnifiedSetMultimap<K, V>
     @Override
     protected MutableSet<V> createCollection()
     {
-        return new UnifiedSet<V>();
+        return new UnifiedSet<>();
     }
 
+    @Override
     public UnifiedSetMultimap<K, V> newEmpty()
     {
-        return new UnifiedSetMultimap<K, V>();
+        return new UnifiedSetMultimap<>();
     }
 
+    @Override
     public MutableSetMultimap<V, K> flip()
     {
         return Iterate.flip(this);
     }
 
+    @Override
     public UnifiedSetMultimap<K, V> selectKeysValues(Predicate2<? super K, ? super V> predicate)
     {
         return this.selectKeysValues(predicate, this.newEmpty());
     }
 
+    @Override
     public UnifiedSetMultimap<K, V> rejectKeysValues(Predicate2<? super K, ? super V> predicate)
     {
         return this.rejectKeysValues(predicate, this.newEmpty());
     }
 
+    @Override
     public UnifiedSetMultimap<K, V> selectKeysMultiValues(Predicate2<? super K, ? super Iterable<V>> predicate)
     {
         return this.selectKeysMultiValues(predicate, this.newEmpty());
     }
 
+    @Override
     public UnifiedSetMultimap<K, V> rejectKeysMultiValues(Predicate2<? super K, ? super Iterable<V>> predicate)
     {
         return this.rejectKeysMultiValues(predicate, this.newEmpty());

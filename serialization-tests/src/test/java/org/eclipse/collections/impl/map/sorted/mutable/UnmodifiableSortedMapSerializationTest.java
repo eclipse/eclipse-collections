@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -27,6 +27,6 @@ public class UnmodifiableSortedMapSerializationTest
                         + "cy5pbXBsLlVubW9kaWZpYWJsZU1hcAAAAAAAAAABAgABTAAIZGVsZWdhdGV0AA9MamF2YS91dGls\n"
                         + "L01hcDt4cHNyABFqYXZhLnV0aWwuVHJlZU1hcAzB9j4tJWrmAwABTAAKY29tcGFyYXRvcnQAFkxq\n"
                         + "YXZhL3V0aWwvQ29tcGFyYXRvcjt4cHB3BAAAAAB4",
-                new UnmodifiableSortedMap<Object, Object>(new TreeMap<Object, Object>()));
+                new UnmodifiableSortedMap<>(new TreeMap<>()));
     }
 }

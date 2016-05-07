@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -149,15 +149,15 @@ public class PredicatesTest
     public void collectionOr()
     {
         MutableList<Predicate<Object>> predicates =
-                Lists.fixedSize.<Predicate<Object>>of(Predicates.alwaysTrue(), Predicates.alwaysFalse(), null);
+                Lists.fixedSize.of(Predicates.alwaysTrue(), Predicates.alwaysFalse(), null);
         assertAccepts(Predicates.or(predicates), new Object());
 
         MutableList<Predicate<Object>> falsePredicates =
-                Lists.fixedSize.<Predicate<Object>>of(Predicates.alwaysFalse(), Predicates.alwaysFalse());
+                Lists.fixedSize.of(Predicates.alwaysFalse(), Predicates.alwaysFalse());
         assertRejects(Predicates.or(falsePredicates), new Object());
 
         MutableList<Predicate<Object>> truePredicates =
-                Lists.fixedSize.<Predicate<Object>>of(Predicates.alwaysTrue(), Predicates.alwaysTrue());
+                Lists.fixedSize.of(Predicates.alwaysTrue(), Predicates.alwaysTrue());
         assertAccepts(Predicates.or(truePredicates), new Object());
 
         assertToString(Predicates.or(truePredicates));
@@ -197,15 +197,15 @@ public class PredicatesTest
     public void collectionAnd()
     {
         MutableList<Predicate<Object>> predicates =
-                Lists.fixedSize.<Predicate<Object>>of(Predicates.alwaysTrue(), Predicates.alwaysTrue());
+                Lists.fixedSize.of(Predicates.alwaysTrue(), Predicates.alwaysTrue());
         assertAccepts(Predicates.and(predicates), new Object());
 
         MutableList<Predicate<Object>> tfPredicates =
-                Lists.fixedSize.<Predicate<Object>>of(Predicates.alwaysTrue(), Predicates.alwaysFalse());
+                Lists.fixedSize.of(Predicates.alwaysTrue(), Predicates.alwaysFalse());
         assertRejects(Predicates.and(tfPredicates), new Object());
 
         MutableList<Predicate<Object>> falsePredicates =
-                Lists.fixedSize.<Predicate<Object>>of(Predicates.alwaysFalse(), Predicates.alwaysFalse());
+                Lists.fixedSize.of(Predicates.alwaysFalse(), Predicates.alwaysFalse());
         assertRejects(Predicates.and(falsePredicates), new Object());
 
         assertToString(Predicates.and(predicates));
@@ -286,19 +286,19 @@ public class PredicatesTest
     @Test
     public void collectionNoneOf()
     {
-        MutableList<Predicate<Object>> trueNorTrue = Lists.fixedSize.<Predicate<Object>>of(
+        MutableList<Predicate<Object>> trueNorTrue = Lists.fixedSize.of(
                 Predicates.alwaysTrue(),
                 Predicates.alwaysTrue(),
                 Predicates.alwaysTrue());
         assertRejects(Predicates.noneOf(trueNorTrue), new Object());
 
-        MutableList<Predicate<Object>> trueNorFalse = Lists.fixedSize.<Predicate<Object>>of(
+        MutableList<Predicate<Object>> trueNorFalse = Lists.fixedSize.of(
                 Predicates.alwaysTrue(),
                 Predicates.alwaysTrue(),
                 Predicates.alwaysFalse());
         assertRejects(Predicates.noneOf(trueNorFalse), new Object());
 
-        MutableList<Predicate<Object>> falseNorFalse = Lists.fixedSize.<Predicate<Object>>of(
+        MutableList<Predicate<Object>> falseNorFalse = Lists.fixedSize.of(
                 Predicates.alwaysFalse(),
                 Predicates.alwaysFalse(),
                 Predicates.alwaysFalse());
@@ -391,16 +391,16 @@ public class PredicatesTest
     public void ifTrueWithClassAndFunctionName()
     {
         Twin<Boolean> target = Tuples.twin(true, false);
-        assertAccepts(Predicates.ifTrue(Functions.<Boolean>firstOfPair()), target);
-        assertRejects(Predicates.ifTrue(Functions.<Boolean>secondOfPair()), target);
+        assertAccepts(Predicates.ifTrue(Functions.firstOfPair()), target);
+        assertRejects(Predicates.ifTrue(Functions.secondOfPair()), target);
     }
 
     @Test
     public void ifFalseWithClassAndFunctionName()
     {
         Twin<Boolean> target = Tuples.twin(true, false);
-        assertRejects(Predicates.ifFalse(Functions.<Boolean>firstOfPair()), target);
-        assertAccepts(Predicates.ifFalse(Functions.<Boolean>secondOfPair()), target);
+        assertRejects(Predicates.ifFalse(Functions.firstOfPair()), target);
+        assertAccepts(Predicates.ifFalse(Functions.secondOfPair()), target);
     }
 
     @Test
@@ -522,8 +522,8 @@ public class PredicatesTest
     public void attributeIsNullWithFunctionName()
     {
         Twin<Integer> target = Tuples.twin(null, 1);
-        assertAccepts(Predicates.attributeIsNull(Functions.<Integer>firstOfPair()), target);
-        assertRejects(Predicates.attributeIsNull(Functions.<Integer>secondOfPair()), target);
+        assertAccepts(Predicates.attributeIsNull(Functions.firstOfPair()), target);
+        assertRejects(Predicates.attributeIsNull(Functions.secondOfPair()), target);
     }
 
     @Test
@@ -681,7 +681,7 @@ public class PredicatesTest
     @Test
     public void attributeBetweenExclusive()
     {
-        Predicate<Pair<Integer, ?>> predicate = Predicates.attributeBetweenExclusive(Functions.<Integer>firstOfPair(), 9, 11);
+        Predicate<Pair<Integer, ?>> predicate = Predicates.attributeBetweenExclusive(Functions.firstOfPair(), 9, 11);
         assertAccepts(predicate, Tuples.twin(10, 0));
         assertRejects(predicate, Tuples.twin(8, 0), Tuples.twin(9, 0), Tuples.twin(11, 0), Tuples.twin(12, 0));
     }
@@ -689,7 +689,7 @@ public class PredicatesTest
     @Test
     public void attributeBetweenInclusiveFrom()
     {
-        Predicate<Pair<Integer, ?>> predicate = Predicates.attributeBetweenInclusiveFrom(Functions.<Integer>firstOfPair(), 9, 11);
+        Predicate<Pair<Integer, ?>> predicate = Predicates.attributeBetweenInclusiveFrom(Functions.firstOfPair(), 9, 11);
         assertAccepts(predicate, Tuples.twin(9, 0), Tuples.twin(10, 0));
         assertRejects(predicate, Tuples.twin(8, 0), Tuples.twin(11, 0), Tuples.twin(12, 0));
     }
@@ -697,7 +697,7 @@ public class PredicatesTest
     @Test
     public void attributeBetweenInclusiveTo()
     {
-        Predicate<Pair<Integer, ?>> predicate = Predicates.attributeBetweenInclusiveTo(Functions.<Integer>firstOfPair(), 9, 11);
+        Predicate<Pair<Integer, ?>> predicate = Predicates.attributeBetweenInclusiveTo(Functions.firstOfPair(), 9, 11);
         assertAccepts(predicate, Tuples.twin(10, 0), Tuples.twin(11, 0));
         assertRejects(predicate, Tuples.twin(8, 0), Tuples.twin(9, 0), Tuples.twin(12, 0));
     }
@@ -705,7 +705,7 @@ public class PredicatesTest
     @Test
     public void attributeBetweenInclusive()
     {
-        Predicate<Pair<Integer, ?>> predicate = Predicates.attributeBetweenInclusive(Functions.<Integer>firstOfPair(), 9, 11);
+        Predicate<Pair<Integer, ?>> predicate = Predicates.attributeBetweenInclusive(Functions.firstOfPair(), 9, 11);
         assertAccepts(predicate, Tuples.twin(9, 0), Tuples.twin(10, 0), Tuples.twin(11, 0));
         assertRejects(predicate, Tuples.twin(8, 0), Tuples.twin(12, 0));
     }
@@ -773,7 +773,7 @@ public class PredicatesTest
     public void betweenInclusiveString()
     {
         assertStringBetweenInclusive(Predicates.betweenInclusive("1", "3"));
-        assertStringBetweenInclusive(Predicates.<String, String>attributeBetweenInclusive(String::valueOf, "1", "3"));
+        assertStringBetweenInclusive(Predicates.attributeBetweenInclusive(String::valueOf, "1", "3"));
     }
 
     private static void assertStringBetweenInclusive(Predicate<String> oneToThree)
@@ -799,7 +799,7 @@ public class PredicatesTest
     public void betweenInclusiveFromString()
     {
         assertStringBetweenInclusiveFrom(Predicates.betweenInclusiveFrom("1", "3"));
-        assertStringBetweenInclusiveFrom(Predicates.<String, String>attributeBetweenInclusiveFrom(String::valueOf, "1", "3"));
+        assertStringBetweenInclusiveFrom(Predicates.attributeBetweenInclusiveFrom(String::valueOf, "1", "3"));
     }
 
     private static void assertStringBetweenInclusiveFrom(Predicate<String> oneToThree)
@@ -825,7 +825,7 @@ public class PredicatesTest
     public void betweenInclusiveToString()
     {
         assertStringBetweenInclusiveTo(Predicates.betweenInclusiveTo("1", "3"));
-        assertStringBetweenInclusiveTo(Predicates.<String, String>attributeBetweenInclusiveTo(String::valueOf, "1", "3"));
+        assertStringBetweenInclusiveTo(Predicates.attributeBetweenInclusiveTo(String::valueOf, "1", "3"));
     }
 
     private static void assertStringBetweenInclusiveTo(Predicate<String> oneToThree)
@@ -851,7 +851,7 @@ public class PredicatesTest
     public void betweenExclusiveString()
     {
         assertStringBetweenExclusive(Predicates.betweenExclusive("1", "3"));
-        assertStringBetweenExclusive(Predicates.<String, String>attributeBetweenExclusive(String::valueOf, "1", "3"));
+        assertStringBetweenExclusive(Predicates.attributeBetweenExclusive(String::valueOf, "1", "3"));
     }
 
     private static void assertStringBetweenExclusive(Predicate<String> oneToThree)
@@ -864,8 +864,8 @@ public class PredicatesTest
     public void attributeNotNull()
     {
         Twin<String> testCandidate = Tuples.twin("Hello", null);
-        assertAccepts(Predicates.attributeNotNull(Functions.<String>firstOfPair()), testCandidate);
-        assertRejects(Predicates.attributeNotNull(Functions.<String>secondOfPair()), testCandidate);
+        assertAccepts(Predicates.attributeNotNull(Functions.firstOfPair()), testCandidate);
+        assertRejects(Predicates.attributeNotNull(Functions.secondOfPair()), testCandidate);
         assertToString(Predicates.attributeNotNull(Functions.<String>firstOfPair()));
     }
 
@@ -889,13 +889,7 @@ public class PredicatesTest
 
     public static final class Employee
     {
-        public static final Function<Employee, MutableList<Address>> TO_ADDRESSES = new Function<Employee, MutableList<Address>>()
-        {
-            public MutableList<Address> valueOf(Employee employee)
-            {
-                return employee.addresses;
-            }
-        };
+        public static final Function<Employee, MutableList<Address>> TO_ADDRESSES = employee -> employee.addresses;
         public static final Function<Employee, MutableList<Dependent>> TO_DEPENEDENTS = employee -> employee.dependents;
         private final MutableList<Address> addresses;
         private final MutableList<Dependent> dependents = Lists.mutable.of();

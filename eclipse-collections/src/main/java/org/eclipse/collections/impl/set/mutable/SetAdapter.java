@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -103,16 +103,19 @@ public final class SetAdapter<T>
         return this.delegate;
     }
 
+    @Override
     public MutableSet<T> asUnmodifiable()
     {
         return UnmodifiableMutableSet.of(this);
     }
 
+    @Override
     public MutableSet<T> asSynchronized()
     {
         return SynchronizedMutableSet.of(this);
     }
 
+    @Override
     public ImmutableSet<T> toImmutable()
     {
         return Sets.immutable.withAll(this.delegate);
@@ -124,7 +127,7 @@ public final class SetAdapter<T>
         {
             return (MutableSet<E>) set;
         }
-        return new SetAdapter<E>(set);
+        return new SetAdapter<>(set);
     }
 
     @Override
@@ -157,6 +160,7 @@ public final class SetAdapter<T>
         return this.delegate.hashCode();
     }
 
+    @Override
     public SetAdapter<T> with(T element)
     {
         this.add(element);
@@ -184,18 +188,21 @@ public final class SetAdapter<T>
         return this;
     }
 
+    @Override
     public SetAdapter<T> without(T element)
     {
         this.remove(element);
         return this;
     }
 
+    @Override
     public SetAdapter<T> withAll(Iterable<? extends T> elements)
     {
         this.addAllIterable(elements);
         return this;
     }
 
+    @Override
     public SetAdapter<T> withoutAll(Iterable<? extends T> elements)
     {
         this.removeAllIterable(elements);
@@ -205,6 +212,7 @@ public final class SetAdapter<T>
     /**
      * @deprecated use {@link UnifiedSet#newSet()} instead (inlineable)
      */
+    @Override
     @Deprecated
     public MutableSet<T> newEmpty()
     {
@@ -221,28 +229,28 @@ public final class SetAdapter<T>
     @Override
     public MutableSet<T> select(Predicate<? super T> predicate)
     {
-        return Iterate.select(this.delegate, predicate, UnifiedSet.<T>newSet());
+        return Iterate.select(this.delegate, predicate, UnifiedSet.newSet());
     }
 
     @Override
     public MutableSet<T> reject(Predicate<? super T> predicate)
     {
-        return Iterate.reject(this.delegate, predicate, UnifiedSet.<T>newSet());
+        return Iterate.reject(this.delegate, predicate, UnifiedSet.newSet());
     }
 
     @Override
     public PartitionMutableSet<T> partition(Predicate<? super T> predicate)
     {
-        PartitionMutableSet<T> partitionUnifiedSet = new PartitionUnifiedSet<T>();
-        this.forEach(new PartitionProcedure<T>(predicate, partitionUnifiedSet));
+        PartitionMutableSet<T> partitionUnifiedSet = new PartitionUnifiedSet<>();
+        this.forEach(new PartitionProcedure<>(predicate, partitionUnifiedSet));
         return partitionUnifiedSet;
     }
 
     @Override
     public <P> PartitionMutableSet<T> partitionWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
-        PartitionMutableSet<T> partitionUnifiedSet = new PartitionUnifiedSet<T>();
-        this.forEach(new PartitionPredicate2Procedure<T, P>(predicate, parameter, partitionUnifiedSet));
+        PartitionMutableSet<T> partitionUnifiedSet = new PartitionUnifiedSet<>();
+        this.forEach(new PartitionPredicate2Procedure<>(predicate, parameter, partitionUnifiedSet));
         return partitionUnifiedSet;
     }
 
@@ -250,21 +258,21 @@ public final class SetAdapter<T>
     public <S> MutableSet<S> selectInstancesOf(Class<S> clazz)
     {
         MutableSet<S> result = UnifiedSet.newSet();
-        this.forEach(new SelectInstancesOfProcedure<S>(clazz, result));
+        this.forEach(new SelectInstancesOfProcedure<>(clazz, result));
         return result;
     }
 
     @Override
     public <V> MutableSet<V> collect(Function<? super T, ? extends V> function)
     {
-        return Iterate.collect(this.delegate, function, UnifiedSet.<V>newSet());
+        return Iterate.collect(this.delegate, function, UnifiedSet.newSet());
     }
 
     @Override
     public MutableBooleanSet collectBoolean(BooleanFunction<? super T> booleanFunction)
     {
         BooleanHashSet result = new BooleanHashSet();
-        this.forEach(new CollectBooleanProcedure<T>(booleanFunction, result));
+        this.forEach(new CollectBooleanProcedure<>(booleanFunction, result));
         return result;
     }
 
@@ -272,7 +280,7 @@ public final class SetAdapter<T>
     public MutableByteSet collectByte(ByteFunction<? super T> byteFunction)
     {
         ByteHashSet result = new ByteHashSet(this.size());
-        this.forEach(new CollectByteProcedure<T>(byteFunction, result));
+        this.forEach(new CollectByteProcedure<>(byteFunction, result));
         return result;
     }
 
@@ -280,7 +288,7 @@ public final class SetAdapter<T>
     public MutableCharSet collectChar(CharFunction<? super T> charFunction)
     {
         CharHashSet result = new CharHashSet(this.size());
-        this.forEach(new CollectCharProcedure<T>(charFunction, result));
+        this.forEach(new CollectCharProcedure<>(charFunction, result));
         return result;
     }
 
@@ -288,7 +296,7 @@ public final class SetAdapter<T>
     public MutableDoubleSet collectDouble(DoubleFunction<? super T> doubleFunction)
     {
         DoubleHashSet result = new DoubleHashSet(this.size());
-        this.forEach(new CollectDoubleProcedure<T>(doubleFunction, result));
+        this.forEach(new CollectDoubleProcedure<>(doubleFunction, result));
         return result;
     }
 
@@ -296,7 +304,7 @@ public final class SetAdapter<T>
     public MutableFloatSet collectFloat(FloatFunction<? super T> floatFunction)
     {
         FloatHashSet result = new FloatHashSet(this.size());
-        this.forEach(new CollectFloatProcedure<T>(floatFunction, result));
+        this.forEach(new CollectFloatProcedure<>(floatFunction, result));
         return result;
     }
 
@@ -304,7 +312,7 @@ public final class SetAdapter<T>
     public MutableIntSet collectInt(IntFunction<? super T> intFunction)
     {
         IntHashSet result = new IntHashSet(this.size());
-        this.forEach(new CollectIntProcedure<T>(intFunction, result));
+        this.forEach(new CollectIntProcedure<>(intFunction, result));
         return result;
     }
 
@@ -312,7 +320,7 @@ public final class SetAdapter<T>
     public MutableLongSet collectLong(LongFunction<? super T> longFunction)
     {
         LongHashSet result = new LongHashSet(this.size());
-        this.forEach(new CollectLongProcedure<T>(longFunction, result));
+        this.forEach(new CollectLongProcedure<>(longFunction, result));
         return result;
     }
 
@@ -320,14 +328,14 @@ public final class SetAdapter<T>
     public MutableShortSet collectShort(ShortFunction<? super T> shortFunction)
     {
         ShortHashSet result = new ShortHashSet(this.size());
-        this.forEach(new CollectShortProcedure<T>(shortFunction, result));
+        this.forEach(new CollectShortProcedure<>(shortFunction, result));
         return result;
     }
 
     @Override
     public <V> MutableSet<V> flatCollect(Function<? super T, ? extends Iterable<V>> function)
     {
-        return Iterate.flatCollect(this.delegate, function, UnifiedSet.<V>newSet());
+        return Iterate.flatCollect(this.delegate, function, UnifiedSet.newSet());
     }
 
     @Override
@@ -335,37 +343,37 @@ public final class SetAdapter<T>
             Predicate<? super T> predicate,
             Function<? super T, ? extends V> function)
     {
-        return Iterate.collectIf(this.delegate, predicate, function, UnifiedSet.<V>newSet());
+        return Iterate.collectIf(this.delegate, predicate, function, UnifiedSet.newSet());
     }
 
     @Override
     public <V> UnifiedSetMultimap<V, T> groupBy(Function<? super T, ? extends V> function)
     {
-        return Iterate.groupBy(this.delegate, function, UnifiedSetMultimap.<V, T>newMultimap());
+        return Iterate.groupBy(this.delegate, function, UnifiedSetMultimap.newMultimap());
     }
 
     @Override
     public <V> UnifiedSetMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function)
     {
-        return Iterate.groupByEach(this.delegate, function, UnifiedSetMultimap.<V, T>newMultimap());
+        return Iterate.groupByEach(this.delegate, function, UnifiedSetMultimap.newMultimap());
     }
 
     @Override
     public <P> MutableSet<T> selectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
-        return Iterate.selectWith(this.delegate, predicate, parameter, UnifiedSet.<T>newSet());
+        return Iterate.selectWith(this.delegate, predicate, parameter, UnifiedSet.newSet());
     }
 
     @Override
     public <P> MutableSet<T> rejectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
-        return Iterate.rejectWith(this.delegate, predicate, parameter, UnifiedSet.<T>newSet());
+        return Iterate.rejectWith(this.delegate, predicate, parameter, UnifiedSet.newSet());
     }
 
     @Override
     public <P, V> MutableSet<V> collectWith(Function2<? super T, ? super P, ? extends V> function, P parameter)
     {
-        return Iterate.collectWith(this.delegate, function, parameter, UnifiedSet.<V>newSet());
+        return Iterate.collectWith(this.delegate, function, parameter, UnifiedSet.newSet());
     }
 
     /**
@@ -375,7 +383,7 @@ public final class SetAdapter<T>
     @Override
     public <S> MutableSet<Pair<T, S>> zip(Iterable<S> that)
     {
-        return Iterate.zip(this, that, UnifiedSet.<Pair<T, S>>newSet());
+        return Iterate.zip(this, that, UnifiedSet.newSet());
     }
 
     /**
@@ -385,7 +393,7 @@ public final class SetAdapter<T>
     @Override
     public MutableSet<Pair<T, Integer>> zipWithIndex()
     {
-        return Iterate.zipWithIndex(this, UnifiedSet.<Pair<T, Integer>>newSet());
+        return Iterate.zipWithIndex(this, UnifiedSet.newSet());
     }
 
     @Override
@@ -394,68 +402,81 @@ public final class SetAdapter<T>
         return SetIterate.removeAllIterable(this, iterable);
     }
 
+    @Override
     public MutableSet<T> union(SetIterable<? extends T> set)
     {
         return SetIterables.union(this, set);
     }
 
+    @Override
     public <R extends Set<T>> R unionInto(SetIterable<? extends T> set, R targetSet)
     {
         return SetIterables.unionInto(this, set, targetSet);
     }
 
+    @Override
     public MutableSet<T> intersect(SetIterable<? extends T> set)
     {
         return SetIterables.intersect(this, set);
     }
 
+    @Override
     public <R extends Set<T>> R intersectInto(SetIterable<? extends T> set, R targetSet)
     {
         return SetIterables.intersectInto(this, set, targetSet);
     }
 
+    @Override
     public MutableSet<T> difference(SetIterable<? extends T> subtrahendSet)
     {
         return SetIterables.difference(this, subtrahendSet);
     }
 
+    @Override
     public <R extends Set<T>> R differenceInto(SetIterable<? extends T> subtrahendSet, R targetSet)
     {
         return SetIterables.differenceInto(this, subtrahendSet, targetSet);
     }
 
+    @Override
     public MutableSet<T> symmetricDifference(SetIterable<? extends T> setB)
     {
         return SetIterables.symmetricDifference(this, setB);
     }
 
+    @Override
     public <R extends Set<T>> R symmetricDifferenceInto(SetIterable<? extends T> set, R targetSet)
     {
         return SetIterables.symmetricDifferenceInto(this, set, targetSet);
     }
 
+    @Override
     public boolean isSubsetOf(SetIterable<? extends T> candidateSuperset)
     {
         return SetIterables.isSubsetOf(this, candidateSuperset);
     }
 
+    @Override
     public boolean isProperSubsetOf(SetIterable<? extends T> candidateSuperset)
     {
         return SetIterables.isProperSubsetOf(this, candidateSuperset);
     }
 
+    @Override
     public MutableSet<UnsortedSetIterable<T>> powerSet()
     {
         return (MutableSet<UnsortedSetIterable<T>>) (MutableSet<?>) SetIterables.powerSet(this);
     }
 
+    @Override
     public <B> LazyIterable<Pair<T, B>> cartesianProduct(SetIterable<B> set)
     {
         return SetIterables.cartesianProduct(this, set);
     }
 
+    @Override
     public ParallelUnsortedSetIterable<T> asParallel(ExecutorService executorService, int batchSize)
     {
-        return new NonParallelUnsortedSetIterable<T>(this);
+        return new NonParallelUnsortedSetIterable<>(this);
     }
 }

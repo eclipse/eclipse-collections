@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -39,50 +39,59 @@ final class ImmutableEmptyMap<K, V>
         extends AbstractImmutableMap<K, V>
         implements Serializable
 {
-    static final ImmutableMap<?, ?> INSTANCE = new ImmutableEmptyMap<Object, Object>();
+    static final ImmutableMap<?, ?> INSTANCE = new ImmutableEmptyMap<>();
 
     private static final long serialVersionUID = 1L;
 
+    @Override
     public int size()
     {
         return 0;
     }
 
+    @Override
     public RichIterable<K> keysView()
     {
         return LazyIterate.empty();
     }
 
+    @Override
     public RichIterable<V> valuesView()
     {
         return LazyIterate.empty();
     }
 
+    @Override
     public RichIterable<Pair<K, V>> keyValuesView()
     {
         return LazyIterate.empty();
     }
 
+    @Override
     public boolean containsKey(Object key)
     {
         return false;
     }
 
+    @Override
     public boolean containsValue(Object value)
     {
         return false;
     }
 
+    @Override
     public V get(Object key)
     {
         return null;
     }
 
+    @Override
     public Set<K> keySet()
     {
         return Sets.immutable.<K>of().castToSet();
     }
 
+    @Override
     public Collection<V> values()
     {
         return Lists.immutable.<V>empty().castToList();
@@ -111,6 +120,7 @@ final class ImmutableEmptyMap<K, V>
         return 0;
     }
 
+    @Override
     public void forEachKeyValue(Procedure2<? super K, ? super V> procedure)
     {
     }
@@ -217,6 +227,6 @@ final class ImmutableEmptyMap<K, V>
 
     private Object writeReplace()
     {
-        return new ImmutableMapSerializationProxy<K, V>(this);
+        return new ImmutableMapSerializationProxy<>(this);
     }
 }

@@ -385,7 +385,7 @@ public interface SortedNaturalOrderTestCase extends OrderedIterableTestCase
     @Test
     default void SortedIterable_comparator()
     {
-        SortedIterable<Object> iterable = (SortedIterable<Object>) this.newWith();
+        SortedIterable<?> iterable = (SortedIterable<?>) this.newWith();
         assertNull(iterable.comparator());
     }
 }

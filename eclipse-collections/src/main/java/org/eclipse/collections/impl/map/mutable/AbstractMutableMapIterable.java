@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -39,11 +39,13 @@ import org.eclipse.collections.impl.utility.MapIterate;
 
 public abstract class AbstractMutableMapIterable<K, V> extends AbstractMapIterable<K, V> implements MutableMapIterable<K, V>
 {
+    @Override
     public Iterator<V> iterator()
     {
         return this.values().iterator();
     }
 
+    @Override
     public V getIfAbsentPut(K key, Function0<? extends V> function)
     {
         V result = this.get(key);
@@ -55,6 +57,7 @@ public abstract class AbstractMutableMapIterable<K, V> extends AbstractMapIterab
         return result;
     }
 
+    @Override
     public V getIfAbsentPut(K key, V value)
     {
         V result = this.get(key);
@@ -66,11 +69,13 @@ public abstract class AbstractMutableMapIterable<K, V> extends AbstractMapIterab
         return result;
     }
 
+    @Override
     public V getIfAbsentPutWithKey(K key, Function<? super K, ? extends V> function)
     {
         return this.getIfAbsentPutWith(key, function, key);
     }
 
+    @Override
     public <P> V getIfAbsentPutWith(K key, Function<? super P, ? extends V> function, P parameter)
     {
         V result = this.get(key);
@@ -82,11 +87,13 @@ public abstract class AbstractMutableMapIterable<K, V> extends AbstractMapIterab
         return result;
     }
 
+    @Override
     public V add(Pair<K, V> keyValuePair)
     {
         return this.put(keyValuePair.getOne(), keyValuePair.getTwo());
     }
 
+    @Override
     public V updateValue(K key, Function0<? extends V> factory, Function<? super V, ? extends V> function)
     {
         V oldValue = this.getIfAbsent(key, factory);
@@ -95,6 +102,7 @@ public abstract class AbstractMutableMapIterable<K, V> extends AbstractMapIterab
         return newValue;
     }
 
+    @Override
     public <P> V updateValueWith(K key, Function0<? extends V> factory, Function2<? super V, ? super P, ? extends V> function, P parameter)
     {
         V oldValue = this.getIfAbsent(key, factory);
@@ -103,79 +111,92 @@ public abstract class AbstractMutableMapIterable<K, V> extends AbstractMapIterab
         return newValue;
     }
 
+    @Override
     public <VV> MutableMapIterable<VV, V> groupByUniqueKey(Function<? super V, ? extends VV> function)
     {
-        return this.groupByUniqueKey(function, UnifiedMap.<VV, V>newMap());
+        return this.groupByUniqueKey(function, UnifiedMap.newMap());
     }
 
+    @Override
     public <K2, V2> MutableMap<K2, V2> aggregateInPlaceBy(
             Function<? super V, ? extends K2> groupBy,
             Function0<? extends V2> zeroValueFactory,
             Procedure2<? super V2, ? super V> mutatingAggregator)
     {
         MutableMap<K2, V2> map = UnifiedMap.newMap();
-        this.forEach(new MutatingAggregationProcedure<V, K2, V2>(map, groupBy, zeroValueFactory, mutatingAggregator));
+        this.forEach(new MutatingAggregationProcedure<>(map, groupBy, zeroValueFactory, mutatingAggregator));
         return map;
     }
 
+    @Override
     public <K2, V2> MutableMap<K2, V2> aggregateBy(
             Function<? super V, ? extends K2> groupBy,
             Function0<? extends V2> zeroValueFactory,
             Function2<? super V2, ? super V, ? extends V2> nonMutatingAggregator)
     {
         MutableMap<K2, V2> map = UnifiedMap.newMap();
-        this.forEach(new NonMutatingAggregationProcedure<V, K2, V2>(map, groupBy, zeroValueFactory, nonMutatingAggregator));
+        this.forEach(new NonMutatingAggregationProcedure<>(map, groupBy, zeroValueFactory, nonMutatingAggregator));
         return map;
     }
 
+    @Override
     public RichIterable<K> keysView()
     {
         return LazyIterate.adapt(this.keySet());
     }
 
+    @Override
     public RichIterable<V> valuesView()
     {
         return LazyIterate.adapt(this.values());
     }
 
+    @Override
     public RichIterable<Pair<K, V>> keyValuesView()
     {
-        return LazyIterate.adapt(this.entrySet()).collect(AbstractImmutableEntry.<K, V>getPairFunction());
+        return LazyIterate.adapt(this.entrySet()).collect(AbstractImmutableEntry.getPairFunction());
     }
 
+    @Override
     public <K2, V2> MutableMap<K2, V2> collect(Function2<? super K, ? super V, Pair<K2, V2>> function)
     {
-        return MapIterate.collect(this, function, UnifiedMap.<K2, V2>newMap(this.size()));
+        return MapIterate.collect(this, function, UnifiedMap.newMap(this.size()));
     }
 
+    @Override
     public MutableMap<V, K> flipUniqueValues()
     {
         return MapIterate.flipUniqueValues(this);
     }
 
+    @Override
     public Pair<K, V> detect(Predicate2<? super K, ? super V> predicate)
     {
         return MapIterate.detect(this, predicate);
     }
 
+    @Override
     public <V1> MutableObjectLongMap<V1> sumByInt(Function<? super V, ? extends V1> groupBy, IntFunction<? super V> function)
     {
         MutableObjectLongMap<V1> result = ObjectLongHashMap.newMap();
         return this.injectInto(result, PrimitiveFunctions.sumByIntFunction(groupBy, function));
     }
 
+    @Override
     public <V1> MutableObjectDoubleMap<V1> sumByFloat(Function<? super V, ? extends V1> groupBy, FloatFunction<? super V> function)
     {
         MutableObjectDoubleMap<V1> result = ObjectDoubleHashMap.newMap();
         return this.injectInto(result, PrimitiveFunctions.sumByFloatFunction(groupBy, function));
     }
 
+    @Override
     public <V1> MutableObjectLongMap<V1> sumByLong(Function<? super V, ? extends V1> groupBy, LongFunction<? super V> function)
     {
         MutableObjectLongMap<V1> result = ObjectLongHashMap.newMap();
         return this.injectInto(result, PrimitiveFunctions.sumByLongFunction(groupBy, function));
     }
 
+    @Override
     public <V1> MutableObjectDoubleMap<V1> sumByDouble(Function<? super V, ? extends V1> groupBy, DoubleFunction<? super V> function)
     {
         MutableObjectDoubleMap<V1> result = ObjectDoubleHashMap.newMap();

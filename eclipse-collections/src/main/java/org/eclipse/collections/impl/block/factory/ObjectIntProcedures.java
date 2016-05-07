@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -25,7 +25,7 @@ public final class ObjectIntProcedures
 
     public static <T> ObjectIntProcedure<T> fromProcedure(Procedure<? super T> procedure)
     {
-        return new ProcedureAdapter<T>(procedure);
+        return new ProcedureAdapter<>(procedure);
     }
 
     private static final class ProcedureAdapter<T> implements ObjectIntProcedure<T>
@@ -38,6 +38,7 @@ public final class ObjectIntProcedures
             this.procedure = procedure;
         }
 
+        @Override
         public void value(T each, int count)
         {
             this.procedure.value(each);

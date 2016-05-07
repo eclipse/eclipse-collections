@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -17,11 +17,9 @@ import org.eclipse.collections.api.BooleanIterable;
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.bag.primitive.MutableBooleanBag;
 import org.eclipse.collections.api.block.function.primitive.BooleanFunction;
-import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.primitive.BooleanPredicate;
 import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.block.procedure.primitive.BooleanProcedure;
-import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
 import org.eclipse.collections.api.iterator.BooleanIterator;
 import org.eclipse.collections.api.list.primitive.MutableBooleanList;
 import org.eclipse.collections.api.set.primitive.MutableBooleanSet;
@@ -44,9 +42,10 @@ public class CollectBooleanIterable<T>
     {
         this.iterable = adapted;
         this.function = function;
-        this.booleanFunctionToProcedure = new BooleanFunctionToProcedure<T>(function);
+        this.booleanFunctionToProcedure = new BooleanFunctionToProcedure<>(function);
     }
 
+    @Override
     public BooleanIterator booleanIterator()
     {
         return new BooleanIterator()
@@ -65,6 +64,7 @@ public class CollectBooleanIterable<T>
         };
     }
 
+    @Override
     public void forEach(BooleanProcedure procedure)
     {
         this.each(procedure);
@@ -73,6 +73,7 @@ public class CollectBooleanIterable<T>
     /**
      * @since 7.0.
      */
+    @Override
     public void each(BooleanProcedure procedure)
     {
         this.iterable.forEachWith(this.booleanFunctionToProcedure, procedure);
@@ -97,64 +98,34 @@ public class CollectBooleanIterable<T>
     }
 
     @Override
-    public int count(final BooleanPredicate predicate)
+    public int count(BooleanPredicate predicate)
     {
-        return this.iterable.count(new Predicate<T>()
-        {
-            public boolean accept(T each)
-            {
-                return predicate.accept(CollectBooleanIterable.this.function.booleanValueOf(each));
-            }
-        });
+        return this.iterable.count(each -> predicate.accept(this.function.booleanValueOf(each)));
     }
 
     @Override
-    public boolean anySatisfy(final BooleanPredicate predicate)
+    public boolean anySatisfy(BooleanPredicate predicate)
     {
-        return this.iterable.anySatisfy(new Predicate<T>()
-        {
-            public boolean accept(T each)
-            {
-                return predicate.accept(CollectBooleanIterable.this.function.booleanValueOf(each));
-            }
-        });
+        return this.iterable.anySatisfy(each -> predicate.accept(this.function.booleanValueOf(each)));
     }
 
     @Override
-    public boolean allSatisfy(final BooleanPredicate predicate)
+    public boolean allSatisfy(BooleanPredicate predicate)
     {
-        return this.iterable.allSatisfy(new Predicate<T>()
-        {
-            public boolean accept(T each)
-            {
-                return predicate.accept(CollectBooleanIterable.this.function.booleanValueOf(each));
-            }
-        });
+        return this.iterable.allSatisfy(each -> predicate.accept(this.function.booleanValueOf(each)));
     }
 
     @Override
-    public boolean noneSatisfy(final BooleanPredicate predicate)
+    public boolean noneSatisfy(BooleanPredicate predicate)
     {
-        return this.iterable.allSatisfy(new Predicate<T>()
-        {
-            public boolean accept(T each)
-            {
-                return !predicate.accept(CollectBooleanIterable.this.function.booleanValueOf(each));
-            }
-        });
+        return this.iterable.allSatisfy(each -> !predicate.accept(this.function.booleanValueOf(each)));
     }
 
     @Override
     public boolean[] toArray()
     {
-        final boolean[] array = new boolean[this.size()];
-        this.iterable.forEachWithIndex(new ObjectIntProcedure<T>()
-        {
-            public void value(T each, int index)
-            {
-                array[index] = CollectBooleanIterable.this.function.booleanValueOf(each);
-            }
-        });
+        boolean[] array = new boolean[this.size()];
+        this.iterable.forEachWithIndex((each, index) -> array[index] = this.function.booleanValueOf(each));
         return array;
     }
 
@@ -212,6 +183,7 @@ public class CollectBooleanIterable<T>
             this.function = function;
         }
 
+        @Override
         public void value(T each, BooleanProcedure procedure)
         {
             procedure.value(this.function.booleanValueOf(each));

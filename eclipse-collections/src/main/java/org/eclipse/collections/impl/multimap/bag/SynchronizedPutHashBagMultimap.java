@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -17,8 +17,6 @@ import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.predicate.Predicate2;
-import org.eclipse.collections.api.block.procedure.Procedure;
-import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.multimap.Multimap;
 import org.eclipse.collections.api.multimap.bag.ImmutableBagMultimap;
@@ -45,7 +43,7 @@ public final class SynchronizedPutHashBagMultimap<K, V>
 
     public SynchronizedPutHashBagMultimap(int initialCapacity)
     {
-        super(ConcurrentHashMap.<K, MutableBag<V>>newMap(initialCapacity));
+        super(ConcurrentHashMap.newMap(initialCapacity));
     }
 
     public SynchronizedPutHashBagMultimap(Multimap<? extends K, ? extends V> multimap)
@@ -55,49 +53,37 @@ public final class SynchronizedPutHashBagMultimap<K, V>
 
     public SynchronizedPutHashBagMultimap(Pair<K, V>... pairs)
     {
-        ArrayIterate.forEach(pairs, new Procedure<Pair<K, V>>()
-        {
-            public void value(Pair<K, V> pair)
-            {
-                SynchronizedPutHashBagMultimap.this.put(pair.getOne(), pair.getTwo());
-            }
-        });
+        ArrayIterate.forEach(pairs, pair -> SynchronizedPutHashBagMultimap.this.put(pair.getOne(), pair.getTwo()));
     }
 
     public SynchronizedPutHashBagMultimap(Iterable<Pair<K, V>> inputIterable)
     {
-        Iterate.forEach(inputIterable, new Procedure<Pair<K, V>>()
-        {
-            public void value(Pair<K, V> pair)
-            {
-                SynchronizedPutHashBagMultimap.this.add(pair);
-            }
-        });
+        Iterate.forEach(inputIterable, this::add);
     }
 
     public static <K, V> SynchronizedPutHashBagMultimap<K, V> newMultimap()
     {
-        return new SynchronizedPutHashBagMultimap<K, V>();
+        return new SynchronizedPutHashBagMultimap<>();
     }
 
     public static <K, V> SynchronizedPutHashBagMultimap<K, V> newMultimap(int initialCapacity, float loadFactor, int concurrencyLevel)
     {
-        return new SynchronizedPutHashBagMultimap<K, V>(initialCapacity);
+        return new SynchronizedPutHashBagMultimap<>(initialCapacity);
     }
 
     public static <K, V> SynchronizedPutHashBagMultimap<K, V> newMultimap(Multimap<? extends K, ? extends V> multimap)
     {
-        return new SynchronizedPutHashBagMultimap<K, V>(multimap);
+        return new SynchronizedPutHashBagMultimap<>(multimap);
     }
 
     public static <K, V> SynchronizedPutHashBagMultimap<K, V> newMultimap(Pair<K, V>... pairs)
     {
-        return new SynchronizedPutHashBagMultimap<K, V>(pairs);
+        return new SynchronizedPutHashBagMultimap<>(pairs);
     }
 
     public static <K, V> SynchronizedPutHashBagMultimap<K, V> newMultimap(Iterable<Pair<K, V>> inputIterable)
     {
-        return new SynchronizedPutHashBagMultimap<K, V>(inputIterable);
+        return new SynchronizedPutHashBagMultimap<>(inputIterable);
     }
 
     @Override
@@ -106,66 +92,71 @@ public final class SynchronizedPutHashBagMultimap<K, V>
         return HashBag.newBag(1);
     }
 
+    @Override
     public SynchronizedPutHashBagMultimap<K, V> newEmpty()
     {
-        return new SynchronizedPutHashBagMultimap<K, V>();
+        return new SynchronizedPutHashBagMultimap<>();
     }
 
+    @Override
     public MutableBagMultimap<K, V> toMutable()
     {
-        return new SynchronizedPutHashBagMultimap<K, V>(this);
+        return new SynchronizedPutHashBagMultimap<>(this);
     }
 
+    @Override
     public ImmutableBagMultimap<K, V> toImmutable()
     {
-        final MutableMap<K, ImmutableBag<V>> map = UnifiedMap.newMap();
+        MutableMap<K, ImmutableBag<V>> map = UnifiedMap.newMap();
 
-        this.map.forEachKeyValue(new Procedure2<K, MutableBag<V>>()
-        {
-            public void value(K key, MutableBag<V> bag)
-            {
-                map.put(key, bag.toImmutable());
-            }
-        });
+        this.map.forEachKeyValue((key, bag) -> map.put(key, bag.toImmutable()));
 
-        return new ImmutableBagMultimapImpl<K, V>(map);
+        return new ImmutableBagMultimapImpl<>(map);
     }
 
+    @Override
     public HashBagMultimap<K, V> selectKeysValues(Predicate2<? super K, ? super V> predicate)
     {
-        return this.selectKeysValues(predicate, HashBagMultimap.<K, V>newMultimap());
+        return this.selectKeysValues(predicate, HashBagMultimap.newMultimap());
     }
 
+    @Override
     public HashBagMultimap<K, V> rejectKeysValues(Predicate2<? super K, ? super V> predicate)
     {
-        return this.rejectKeysValues(predicate, HashBagMultimap.<K, V>newMultimap());
+        return this.rejectKeysValues(predicate, HashBagMultimap.newMultimap());
     }
 
+    @Override
     public HashBagMultimap<K, V> selectKeysMultiValues(Predicate2<? super K, ? super Iterable<V>> predicate)
     {
-        return this.selectKeysMultiValues(predicate, HashBagMultimap.<K, V>newMultimap());
+        return this.selectKeysMultiValues(predicate, HashBagMultimap.newMultimap());
     }
 
+    @Override
     public HashBagMultimap<K, V> rejectKeysMultiValues(Predicate2<? super K, ? super Iterable<V>> predicate)
     {
-        return this.rejectKeysMultiValues(predicate, HashBagMultimap.<K, V>newMultimap());
+        return this.rejectKeysMultiValues(predicate, HashBagMultimap.newMultimap());
     }
 
+    @Override
     public <K2, V2> HashBagMultimap<K2, V2> collectKeysValues(Function2<? super K, ? super V, Pair<K2, V2>> function)
     {
-        return this.collectKeysValues(function, HashBagMultimap.<K2, V2>newMultimap());
+        return this.collectKeysValues(function, HashBagMultimap.newMultimap());
     }
 
+    @Override
     public <V2> HashBagMultimap<K, V2> collectValues(Function<? super V, ? extends V2> function)
     {
-        return this.collectValues(function, HashBagMultimap.<K, V2>newMultimap());
+        return this.collectValues(function, HashBagMultimap.newMultimap());
     }
 
+    @Override
     public MutableBagMultimap<V, K> flip()
     {
         return Iterate.flip(this);
     }
 
+    @Override
     public void putOccurrences(K key, V value, int occurrences)
     {
         if (occurrences < 0)

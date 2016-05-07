@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -26,7 +26,7 @@ public final class ChainedProcedure<T> implements Procedure<T>
 
     public static <E> ChainedProcedure<E> with(Procedure<? super E> procedure1, Procedure<? super E> procedure2)
     {
-        ChainedProcedure<E> chainedProcedure = new ChainedProcedure<E>();
+        ChainedProcedure<E> chainedProcedure = new ChainedProcedure<>();
         chainedProcedure.addProcedure(procedure1);
         chainedProcedure.addProcedure(procedure2);
         return chainedProcedure;
@@ -37,6 +37,7 @@ public final class ChainedProcedure<T> implements Procedure<T>
         this.procedures.add(procedure);
     }
 
+    @Override
     public void value(T object)
     {
         int size = this.procedures.size();

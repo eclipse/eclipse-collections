@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -61,14 +61,16 @@ public final class ImmutableBagMultimapImpl<K, V>
         return Bags.immutable.empty();
     }
 
+    @Override
     public ImmutableBagMultimap<K, V> newEmpty()
     {
-        return new ImmutableBagMultimapImpl<K, V>(Maps.immutable.<K, ImmutableBag<V>>of());
+        return new ImmutableBagMultimapImpl<>(Maps.immutable.of());
     }
 
+    @Override
     public MutableBagMultimap<K, V> toMutable()
     {
-        return new HashBagMultimap<K, V>(this);
+        return new HashBagMultimap<>(this);
     }
 
     @Override
@@ -79,7 +81,7 @@ public final class ImmutableBagMultimapImpl<K, V>
 
     private Object writeReplace()
     {
-        return new ImmutableBagMultimapSerializationProxy<K, V>(this.map);
+        return new ImmutableBagMultimapSerializationProxy<>(this.map);
     }
 
     private static class ImmutableBagMultimapSerializationProxy<K, V>
@@ -106,9 +108,10 @@ public final class ImmutableBagMultimapImpl<K, V>
             return this.multimap.toImmutable();
         }
 
+        @Override
         public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
         {
-            this.multimap = new HashBagMultimap<K, V>();
+            this.multimap = new HashBagMultimap<>();
             int keyCount = in.readInt();
             for (int i = 0; i < keyCount; i++)
             {
@@ -126,7 +129,8 @@ public final class ImmutableBagMultimapImpl<K, V>
             }
         }
 
-        public void writeExternal(final ObjectOutput out) throws IOException
+        @Override
+        public void writeExternal(ObjectOutput out) throws IOException
         {
             int keysCount = this.map.size();
             out.writeInt(keysCount);
@@ -173,36 +177,43 @@ public final class ImmutableBagMultimapImpl<K, V>
         return (ImmutableBagMultimap<K, V>) super.newWithoutAll(key);
     }
 
+    @Override
     public ImmutableBagMultimap<V, K> flip()
     {
         return Iterate.flip(this).toImmutable();
     }
 
+    @Override
     public ImmutableBagMultimap<K, V> selectKeysValues(Predicate2<? super K, ? super V> predicate)
     {
-        return this.selectKeysValues(predicate, HashBagMultimap.<K, V>newMultimap()).toImmutable();
+        return this.selectKeysValues(predicate, HashBagMultimap.newMultimap()).toImmutable();
     }
 
+    @Override
     public ImmutableBagMultimap<K, V> rejectKeysValues(Predicate2<? super K, ? super V> predicate)
     {
-        return this.rejectKeysValues(predicate, HashBagMultimap.<K, V>newMultimap()).toImmutable();
+        return this.rejectKeysValues(predicate, HashBagMultimap.newMultimap()).toImmutable();
     }
 
+    @Override
     public ImmutableBagMultimap<K, V> selectKeysMultiValues(Predicate2<? super K, ? super Iterable<V>> predicate)
     {
-        return this.selectKeysMultiValues(predicate, HashBagMultimap.<K, V>newMultimap()).toImmutable();
+        return this.selectKeysMultiValues(predicate, HashBagMultimap.newMultimap()).toImmutable();
     }
 
+    @Override
     public ImmutableBagMultimap<K, V> rejectKeysMultiValues(Predicate2<? super K, ? super Iterable<V>> predicate)
     {
-        return this.rejectKeysMultiValues(predicate, HashBagMultimap.<K, V>newMultimap()).toImmutable();
+        return this.rejectKeysMultiValues(predicate, HashBagMultimap.newMultimap()).toImmutable();
     }
 
+    @Override
     public <K2, V2> ImmutableBagMultimap<K2, V2> collectKeysValues(Function2<? super K, ? super V, Pair<K2, V2>> function)
     {
-        return this.collectKeysValues(function, HashBagMultimap.<K2, V2>newMultimap()).toImmutable();
+        return this.collectKeysValues(function, HashBagMultimap.newMultimap()).toImmutable();
     }
 
+    @Override
     public <V2> ImmutableBagMultimap<K, V2> collectValues(Function<? super V, ? extends V2> function)
     {
         return this.collectValues(function, HashBagMultimap.<K, V2>newMultimap()).toImmutable();

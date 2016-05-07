@@ -17,7 +17,6 @@ import org.eclipse.collections.api.bag.Bag;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
-import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
@@ -63,22 +62,19 @@ public abstract class AbstractMultimap<K, V, C extends RichIterable<V>>
 
     // Query Operations
 
+    @Override
     public boolean containsKey(Object key)
     {
         return this.getMap().containsKey(key);
     }
 
-    public boolean containsValue(final Object value)
+    @Override
+    public boolean containsValue(Object value)
     {
-        return this.getMap().anySatisfy(new Predicate<C>()
-        {
-            public boolean accept(C collection)
-            {
-                return collection.contains(value);
-            }
-        });
+        return this.getMap().anySatisfy(collection -> collection.contains(value));
     }
 
+    @Override
     public boolean containsKeyAndValue(Object key, Object value)
     {
         C collection = this.getMap().get(key);
@@ -87,60 +83,42 @@ public abstract class AbstractMultimap<K, V, C extends RichIterable<V>>
 
     // Views
 
+    @Override
     public RichIterable<K> keysView()
     {
         return this.getMap().keysView();
     }
 
+    @Override
     public RichIterable<RichIterable<V>> multiValuesView()
     {
-        return this.getMap().valuesView().collect(new Function<C, RichIterable<V>>()
-        {
-            public RichIterable<V> valueOf(C multiValue)
-            {
-                return UnmodifiableRichIterable.of(multiValue);
-            }
-        });
+        return this.getMap().valuesView().collect(UnmodifiableRichIterable::of);
     }
 
+    @Override
     public Bag<K> keyBag()
     {
-        final MutableBag<K> bag = Bags.mutable.empty();
-        this.getMap().forEachKeyValue(new Procedure2<K, C>()
-        {
-            public void value(K key, C value)
-            {
-                bag.addOccurrences(key, value.size());
-            }
-        });
+        MutableBag<K> bag = Bags.mutable.empty();
+        this.getMap().forEachKeyValue((key, value) -> bag.addOccurrences(key, value.size()));
         return bag;
     }
 
+    @Override
     public RichIterable<V> valuesView()
     {
         return this.getMap().valuesView().flatCollect(Functions.<Iterable<V>>identity());
     }
 
+    @Override
     public RichIterable<Pair<K, RichIterable<V>>> keyMultiValuePairsView()
     {
-        return this.getMap().keyValuesView().collect(new Function<Pair<K, C>, Pair<K, RichIterable<V>>>()
-        {
-            public Pair<K, RichIterable<V>> valueOf(Pair<K, C> pair)
-            {
-                return Tuples.<K, RichIterable<V>>pair(pair.getOne(), UnmodifiableRichIterable.of(pair.getTwo()));
-            }
-        });
+        return this.getMap().keyValuesView().collect(pair -> Tuples.pair(pair.getOne(), UnmodifiableRichIterable.of(pair.getTwo())));
     }
 
+    @Override
     public RichIterable<Pair<K, V>> keyValuePairsView()
     {
-        return this.keyMultiValuePairsView().flatCollect(new Function<Pair<K, RichIterable<V>>, Iterable<Pair<K, V>>>()
-        {
-            public Iterable<Pair<K, V>> valueOf(Pair<K, RichIterable<V>> pair)
-            {
-                return pair.getTwo().collect(new KeyValuePairFunction<V, K>(pair.getOne()));
-            }
-        });
+        return this.keyMultiValuePairsView().flatCollect(pair -> pair.getTwo().collect(new KeyValuePairFunction<>(pair.getOne())));
     }
 
     // Comparison and hashing
@@ -186,114 +164,77 @@ public abstract class AbstractMultimap<K, V, C extends RichIterable<V>>
         return this.getMap().toString();
     }
 
+    @Override
     public boolean notEmpty()
     {
         return !this.isEmpty();
     }
 
-    public void forEachValue(final Procedure<? super V> procedure)
+    @Override
+    public void forEachValue(Procedure<? super V> procedure)
     {
-        this.getMap().forEachValue(new Procedure<C>()
-        {
-            public void value(C collection)
-            {
-                collection.forEach(procedure);
-            }
-        });
+        this.getMap().forEachValue(collection -> collection.forEach(procedure));
     }
 
+    @Override
     public void forEachKey(Procedure<? super K> procedure)
     {
         this.getMap().forEachKey(procedure);
     }
 
-    public void forEachKeyValue(final Procedure2<? super K, ? super V> procedure)
+    @Override
+    public void forEachKeyValue(Procedure2<? super K, ? super V> procedure)
     {
-        final Procedure2<V, K> innerProcedure = new Procedure2<V, K>()
-        {
-            public void value(V value, K key)
-            {
-                procedure.value(key, value);
-            }
-        };
+        Procedure2<V, K> innerProcedure = (value, key) -> procedure.value(key, value);
 
-        this.getMap().forEachKeyValue(new Procedure2<K, C>()
-        {
-            public void value(K key, C collection)
-            {
-                collection.forEachWith(innerProcedure, key);
-            }
-        });
+        this.getMap().forEachKeyValue((key, collection) -> collection.forEachWith(innerProcedure, key));
     }
 
+    @Override
     public void forEachKeyMultiValues(Procedure2<? super K, ? super Iterable<V>> procedure)
     {
         this.getMap().forEachKeyValue(procedure);
     }
 
-    public <R extends MutableMultimap<K, V>> R selectKeysValues(final Predicate2<? super K, ? super V> predicate, final R target)
+    @Override
+    public <R extends MutableMultimap<K, V>> R selectKeysValues(Predicate2<? super K, ? super V> predicate, R target)
     {
-        this.getMap().forEachKeyValue(new Procedure2<K, C>()
-        {
-            public void value(final K key, C collection)
+        this.getMap().forEachKeyValue((key, collection) -> {
+            RichIterable<V> selectedValues = collection.select(value -> predicate.accept(key, value));
+            target.putAll(key, selectedValues);
+        });
+        return target;
+    }
+
+    @Override
+    public <R extends MutableMultimap<K, V>> R rejectKeysValues(Predicate2<? super K, ? super V> predicate, R target)
+    {
+        this.getMap().forEachKeyValue((key, collection) -> {
+            RichIterable<V> selectedValues = collection.reject(value -> predicate.accept(key, value));
+            target.putAll(key, selectedValues);
+        });
+        return target;
+    }
+
+    @Override
+    public <R extends MutableMultimap<K, V>> R selectKeysMultiValues(Predicate2<? super K, ? super Iterable<V>> predicate, R target)
+    {
+        this.forEachKeyMultiValues((key, collection) -> {
+            if (predicate.accept(key, collection))
             {
-                RichIterable<V> selectedValues = collection.select(new Predicate<V>()
-                {
-                    public boolean accept(V value)
-                    {
-                        return predicate.accept(key, value);
-                    }
-                });
-                target.putAll(key, selectedValues);
+                target.putAll(key, collection);
             }
         });
         return target;
     }
 
-    public <R extends MutableMultimap<K, V>> R rejectKeysValues(final Predicate2<? super K, ? super V> predicate, final R target)
+    @Override
+    public <R extends MutableMultimap<K, V>> R rejectKeysMultiValues(Predicate2<? super K, ? super Iterable<V>> predicate, R target)
     {
-        this.getMap().forEachKeyValue(new Procedure2<K, C>()
-        {
-            public void value(final K key, C collection)
+        this.forEachKeyMultiValues((key, collection) -> {
+            if (!predicate.accept(key, collection))
             {
-                RichIterable<V> selectedValues = collection.reject(new Predicate<V>()
-                {
-                    public boolean accept(V value)
-                    {
-                        return predicate.accept(key, value);
-                    }
-                });
-                target.putAll(key, selectedValues);
-            }
-        });
-        return target;
-    }
-
-    public <R extends MutableMultimap<K, V>> R selectKeysMultiValues(final Predicate2<? super K, ? super Iterable<V>> predicate, final R target)
-    {
-        this.forEachKeyMultiValues(new Procedure2<K, Iterable<V>>()
-        {
-            public void value(K key, Iterable<V> collection)
-            {
-                if (predicate.accept(key, collection))
-                {
-                    target.putAll(key, collection);
-                }
-            }
-        });
-        return target;
-    }
-
-    public <R extends MutableMultimap<K, V>> R rejectKeysMultiValues(final Predicate2<? super K, ? super Iterable<V>> predicate, final R target)
-    {
-        this.forEachKeyMultiValues(new Procedure2<K, Iterable<V>>()
-        {
-            public void value(K key, Iterable<V> collection)
-            {
-                if (!predicate.accept(key, collection))
-                {
-                    target.putAll(key, collection);
-                }
+                target.putAll(key, collection);
             }
         });
         return target;
@@ -310,40 +251,24 @@ public abstract class AbstractMultimap<K, V, C extends RichIterable<V>>
             this.key = key;
         }
 
+        @Override
         public Pair<K, V> valueOf(V value)
         {
             return Tuples.pair(this.key, value);
         }
     }
 
-    public <K2, V2, R extends MutableMultimap<K2, V2>> R collectKeysValues(final Function2<? super K, ? super V, Pair<K2, V2>> function, final R target)
+    @Override
+    public <K2, V2, R extends MutableMultimap<K2, V2>> R collectKeysValues(Function2<? super K, ? super V, Pair<K2, V2>> function, R target)
     {
-        this.getMap().forEachKeyValue(new Procedure2<K, C>()
-        {
-            public void value(final K key, C collection)
-            {
-                collection.forEach(new Procedure<V>()
-                {
-                    public void value(V value)
-                    {
-                        Pair<K2, V2> pair = function.value(key, value);
-                        target.add(pair);
-                    }
-                });
-            }
-        });
+        this.getMap().forEachKeyValue((key, collection) -> collection.each(value -> target.add(function.value(key, value))));
         return target;
     }
 
-    public <V2, R extends MutableMultimap<K, V2>> R collectValues(final Function<? super V, ? extends V2> function, final R target)
+    @Override
+    public <V2, R extends MutableMultimap<K, V2>> R collectValues(Function<? super V, ? extends V2> function, R target)
     {
-        this.getMap().forEachKeyValue(new Procedure2<K, C>()
-        {
-            public void value(K key, C collection)
-            {
-                target.putAll(key, collection.collect(function));
-            }
-        });
+        this.getMap().forEachKeyValue((key, collection) -> target.putAll(key, collection.collect(function)));
         return target;
     }
 }

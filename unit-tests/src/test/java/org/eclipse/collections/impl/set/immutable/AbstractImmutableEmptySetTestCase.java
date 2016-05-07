@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -221,7 +221,7 @@ public abstract class AbstractImmutableEmptySetTestCase extends AbstractImmutabl
         Assert.assertEquals(immutableSet, pairsPlusOne.collect((Function<Pair<Integer, ?>, Integer>) Pair::getOne));
         Assert.assertEquals(UnifiedSet.newSet(nulls), pairsPlusOne.collect((Function<Pair<?, Object>, Object>) Pair::getTwo));
 
-        Assert.assertEquals(immutableSet.zip(nulls), immutableSet.zip(nulls, UnifiedSet.<Pair<Integer, Object>>newSet()));
+        Assert.assertEquals(immutableSet.zip(nulls), immutableSet.zip(nulls, UnifiedSet.newSet()));
     }
 
     @Override
@@ -238,7 +238,7 @@ public abstract class AbstractImmutableEmptySetTestCase extends AbstractImmutabl
 
         Assert.assertEquals(
                 immutableSet.zipWithIndex(),
-                immutableSet.zipWithIndex(UnifiedSet.<Pair<Integer, Integer>>newSet()));
+                immutableSet.zipWithIndex(UnifiedSet.newSet()));
     }
 
     @Test
@@ -276,7 +276,7 @@ public abstract class AbstractImmutableEmptySetTestCase extends AbstractImmutabl
     {
         Assert.assertEquals(
                 UnifiedSet.newSetWith(1, 2, 3),
-                this.classUnderTest().unionInto(UnifiedSet.newSetWith(1, 2, 3), UnifiedSet.<Integer>newSet()));
+                this.classUnderTest().unionInto(UnifiedSet.newSetWith(1, 2, 3), UnifiedSet.newSet()));
     }
 
     @Override
@@ -294,7 +294,7 @@ public abstract class AbstractImmutableEmptySetTestCase extends AbstractImmutabl
     {
         Assert.assertEquals(
                 UnifiedSet.<String>newSet(),
-                this.classUnderTest().intersectInto(UnifiedSet.newSetWith(1, 2, 3), UnifiedSet.<Integer>newSet()));
+                this.classUnderTest().intersectInto(UnifiedSet.newSetWith(1, 2, 3), UnifiedSet.newSet()));
     }
 
     @Override
@@ -312,9 +312,9 @@ public abstract class AbstractImmutableEmptySetTestCase extends AbstractImmutabl
     public void differenceInto()
     {
         ImmutableSet<Integer> set = this.classUnderTest();
-        MutableSet<Integer> difference = set.differenceInto(UnifiedSet.newSetWith(1, 2, 3, 999), UnifiedSet.<Integer>newSet());
+        MutableSet<Integer> difference = set.differenceInto(UnifiedSet.newSetWith(1, 2, 3, 999), UnifiedSet.newSet());
         Assert.assertEquals(UnifiedSet.<Integer>newSet(), difference);
-        Assert.assertEquals(set, set.differenceInto(UnifiedSet.newSetWith(99), UnifiedSet.<Integer>newSet()));
+        Assert.assertEquals(set, set.differenceInto(UnifiedSet.newSetWith(99), UnifiedSet.newSet()));
     }
 
     @Override
@@ -332,7 +332,7 @@ public abstract class AbstractImmutableEmptySetTestCase extends AbstractImmutabl
     {
         Assert.assertEquals(
                 UnifiedSet.newSetWith(999),
-                this.classUnderTest().symmetricDifferenceInto(UnifiedSet.newSetWith(999), UnifiedSet.<Integer>newSet()));
+                this.classUnderTest().symmetricDifferenceInto(UnifiedSet.newSetWith(999), UnifiedSet.newSet()));
     }
 
     @Override

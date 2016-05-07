@@ -55,7 +55,7 @@ public final class ArrayAdapter<T>
 
     public static <E> ArrayAdapter<E> adapt(E... array)
     {
-        return new ArrayAdapter<E>(array);
+        return new ArrayAdapter<>(array);
     }
 
     public static <E> ArrayAdapter<E> newArray()
@@ -65,7 +65,7 @@ public final class ArrayAdapter<T>
 
     public static <E> ArrayAdapter<E> newArray(Iterable<? extends E> source)
     {
-        return new ArrayAdapter<E>((E[]) Iterate.toArray(source));
+        return new ArrayAdapter<>((E[]) Iterate.toArray(source));
     }
 
     public static <E> ArrayAdapter<E> newArrayWithItem(Iterable<? extends E> iterable, E itemToAdd)
@@ -74,49 +74,50 @@ public final class ArrayAdapter<T>
         E[] array = (E[]) new Object[oldSize + 1];
         Iterate.toArray(iterable, array);
         array[oldSize] = itemToAdd;
-        return new ArrayAdapter<E>(array);
+        return new ArrayAdapter<>(array);
     }
 
     public static <E> ArrayAdapter<E> newArrayWith(E one)
     {
-        return new ArrayAdapter<E>((E[]) new Object[]{one});
+        return new ArrayAdapter<>((E[]) new Object[]{one});
     }
 
     public static <E> ArrayAdapter<E> newArrayWith(E one, E two)
     {
-        return new ArrayAdapter<E>((E[]) new Object[]{one, two});
+        return new ArrayAdapter<>((E[]) new Object[]{one, two});
     }
 
     public static <E> ArrayAdapter<E> newArrayWith(E one, E two, E three)
     {
-        return new ArrayAdapter<E>((E[]) new Object[]{one, two, three});
+        return new ArrayAdapter<>((E[]) new Object[]{one, two, three});
     }
 
     public static <E> ArrayAdapter<E> newArrayWith(E one, E two, E three, E four)
     {
-        return new ArrayAdapter<E>((E[]) new Object[]{one, two, three, four});
+        return new ArrayAdapter<>((E[]) new Object[]{one, two, three, four});
     }
 
     public static <E> ArrayAdapter<E> newArrayWith(E one, E two, E three, E four, E five)
     {
-        return new ArrayAdapter<E>((E[]) new Object[]{one, two, three, four, five});
+        return new ArrayAdapter<>((E[]) new Object[]{one, two, three, four, five});
     }
 
     public static <E> ArrayAdapter<E> newArrayWith(E one, E two, E three, E four, E five, E six)
     {
-        return new ArrayAdapter<E>((E[]) new Object[]{one, two, three, four, five, six});
+        return new ArrayAdapter<>((E[]) new Object[]{one, two, three, four, five, six});
     }
 
     public static <E> ArrayAdapter<E> newArrayWith(E one, E two, E three, E four, E five, E six, E seven)
     {
-        return new ArrayAdapter<E>((E[]) new Object[]{one, two, three, four, five, six, seven});
+        return new ArrayAdapter<>((E[]) new Object[]{one, two, three, four, five, six, seven});
     }
 
     public static <E> ArrayAdapter<E> newArrayWith(E... elements)
     {
-        return new ArrayAdapter<E>(elements.clone());
+        return new ArrayAdapter<>(elements.clone());
     }
 
+    @Override
     public T set(int index, T element)
     {
         T oldValue = this.items[index];
@@ -167,7 +168,7 @@ public final class ArrayAdapter<T>
     @Override
     public ArrayAdapter<T> clone()
     {
-        return new ArrayAdapter<T>(this.items.clone());
+        return new ArrayAdapter<>(this.items.clone());
     }
 
     @Override

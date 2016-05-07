@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -20,52 +20,61 @@ import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 @Immutable
 public class FixedSizeSetFactoryImpl implements FixedSizeSetFactory
 {
-    private static final FixedSizeSet<?> EMPTY_SET = new EmptySet<Object>();
+    private static final FixedSizeSet<?> EMPTY_SET = new EmptySet<>();
 
+    @Override
     public <T> FixedSizeSet<T> empty()
     {
         return (FixedSizeSet<T>) FixedSizeSetFactoryImpl.EMPTY_SET;
     }
 
+    @Override
     public <T> FixedSizeSet<T> of()
     {
         return this.empty();
     }
 
+    @Override
     public <T> FixedSizeSet<T> with()
     {
         return this.empty();
     }
 
+    @Override
     public <T> FixedSizeSet<T> of(T one)
     {
         return this.with(one);
     }
 
+    @Override
     public <T> FixedSizeSet<T> with(T one)
     {
-        return new SingletonSet<T>(one);
+        return new SingletonSet<>(one);
     }
 
+    @Override
     public <T> FixedSizeSet<T> of(T one, T two)
     {
         return this.with(one, two);
     }
 
+    @Override
     public <T> FixedSizeSet<T> with(T one, T two)
     {
         if (Comparators.nullSafeEquals(one, two))
         {
             return this.of(one);
         }
-        return new DoubletonSet<T>(one, two);
+        return new DoubletonSet<>(one, two);
     }
 
+    @Override
     public <T> FixedSizeSet<T> of(T one, T two, T three)
     {
         return this.with(one, two, three);
     }
 
+    @Override
     public <T> FixedSizeSet<T> with(T one, T two, T three)
     {
         if (Comparators.nullSafeEquals(one, two))
@@ -80,14 +89,16 @@ public class FixedSizeSetFactoryImpl implements FixedSizeSetFactory
         {
             return this.of(one, two);
         }
-        return new TripletonSet<T>(one, two, three);
+        return new TripletonSet<>(one, two, three);
     }
 
+    @Override
     public <T> FixedSizeSet<T> of(T one, T two, T three, T four)
     {
         return this.with(one, two, three, four);
     }
 
+    @Override
     public <T> FixedSizeSet<T> with(T one, T two, T three, T four)
     {
         if (Comparators.nullSafeEquals(one, two))
@@ -114,14 +125,16 @@ public class FixedSizeSetFactoryImpl implements FixedSizeSetFactory
         {
             return this.of(one, two, three);
         }
-        return new QuadrupletonSet<T>(one, two, three, four);
+        return new QuadrupletonSet<>(one, two, three, four);
     }
 
+    @Override
     public <T> MutableSet<T> ofAll(Iterable<? extends T> items)
     {
         return this.withAll(items);
     }
 
+    @Override
     public <T> MutableSet<T> withAll(Iterable<? extends T> items)
     {
         UnifiedSet<T> set = UnifiedSet.newSet(items);
@@ -129,19 +142,19 @@ public class FixedSizeSetFactoryImpl implements FixedSizeSetFactory
         switch (set.size())
         {
             case 0:
-                return new EmptySet<T>();
+                return new EmptySet<>();
             case 1:
                 itemArray = (T[]) set.toArray();
-                return new SingletonSet<T>(itemArray[0]);
+                return new SingletonSet<>(itemArray[0]);
             case 2:
                 itemArray = (T[]) set.toArray();
-                return new DoubletonSet<T>(itemArray[0], itemArray[1]);
+                return new DoubletonSet<>(itemArray[0], itemArray[1]);
             case 3:
                 itemArray = (T[]) set.toArray();
-                return new TripletonSet<T>(itemArray[0], itemArray[1], itemArray[2]);
+                return new TripletonSet<>(itemArray[0], itemArray[1], itemArray[2]);
             case 4:
                 itemArray = (T[]) set.toArray();
-                return new QuadrupletonSet<T>(itemArray[0], itemArray[1], itemArray[2], itemArray[3]);
+                return new QuadrupletonSet<>(itemArray[0], itemArray[1], itemArray[2], itemArray[3]);
             default:
                 return set;
         }

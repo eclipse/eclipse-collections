@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -38,7 +38,8 @@ class ImmutableSortedBagSerializationProxy<T> implements Externalizable
         this.bag = bag;
     }
 
-    public void writeExternal(final ObjectOutput out) throws IOException
+    @Override
+    public void writeExternal(ObjectOutput out) throws IOException
     {
         out.writeInt(this.bag.sizeDistinct());
         out.writeObject(this.bag.comparator());
@@ -63,11 +64,12 @@ class ImmutableSortedBagSerializationProxy<T> implements Externalizable
         }
     }
 
+    @Override
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
     {
         int size = in.readInt();
         Comparator<T> comparator = (Comparator<T>) in.readObject();
-        MutableSortedBag<T> deserializedBag = new TreeBag<T>(comparator);
+        MutableSortedBag<T> deserializedBag = new TreeBag<>(comparator);
 
         for (int i = 0; i < size; i++)
         {

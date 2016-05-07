@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -38,7 +38,8 @@ class ImmutableSortedSetSerializationProxy<T> implements Externalizable
         this.set = set;
     }
 
-    public void writeExternal(final ObjectOutput out) throws IOException
+    @Override
+    public void writeExternal(ObjectOutput out) throws IOException
     {
         out.writeObject(this.set.comparator());
         out.writeInt(this.set.size());
@@ -62,11 +63,12 @@ class ImmutableSortedSetSerializationProxy<T> implements Externalizable
         }
     }
 
+    @Override
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
     {
         Comparator<T> comparator = (Comparator<T>) in.readObject();
         int size = in.readInt();
-        MutableSortedSet<T> deserializedSet = new TreeSortedSet<T>(comparator);
+        MutableSortedSet<T> deserializedSet = new TreeSortedSet<>(comparator);
 
         for (int i = 0; i < size; i++)
         {

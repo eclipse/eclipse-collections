@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -36,6 +36,6 @@ public class ImmutableEmptySortedSetSerializationTest
                         + "LkltbXV0YWJsZVNvcnRlZFNldFNlcmlhbGl6YXRpb25Qcm94eQAAAAAAAAABDAAAeHBzcgBNb3Jn\n"
                         + "LmVjbGlwc2UuY29sbGVjdGlvbnMuaW1wbC5ibG9jay5mYWN0b3J5LkNvbXBhcmF0b3JzJE5hdHVy\n"
                         + "YWxPcmRlckNvbXBhcmF0b3IAAAAAAAAAAQIAAHhwdwQAAAAAeA==",
-                new ImmutableEmptySortedSet<Object>(Comparators.naturalOrder()));
+                new ImmutableEmptySortedSet<>(Comparators.naturalOrder()));
     }
 }

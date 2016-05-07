@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -117,7 +117,7 @@ public final class RandomAccessListIterate
      */
     public static <T> MutableList<T> select(List<T> list, Predicate<? super T> predicate)
     {
-        return RandomAccessListIterate.select(list, predicate, FastList.<T>newList());
+        return RandomAccessListIterate.select(list, predicate, FastList.newList());
     }
 
     /**
@@ -128,7 +128,7 @@ public final class RandomAccessListIterate
             Predicate2<? super T, ? super IV> predicate,
             IV injectedValue)
     {
-        return RandomAccessListIterate.selectWith(list, predicate, injectedValue, FastList.<T>newList());
+        return RandomAccessListIterate.selectWith(list, predicate, injectedValue, FastList.newList());
     }
 
     /**
@@ -238,7 +238,7 @@ public final class RandomAccessListIterate
             Predicate<? super T> predicate,
             Function<? super T, ? extends A> function)
     {
-        return RandomAccessListIterate.collectIf(list, predicate, function, FastList.<A>newList());
+        return RandomAccessListIterate.collectIf(list, predicate, function, FastList.newList());
     }
 
     /**
@@ -267,7 +267,7 @@ public final class RandomAccessListIterate
      */
     public static <T> MutableList<T> reject(List<T> list, Predicate<? super T> predicate)
     {
-        return RandomAccessListIterate.reject(list, predicate, FastList.<T>newList());
+        return RandomAccessListIterate.reject(list, predicate, FastList.newList());
     }
 
     /**
@@ -278,7 +278,7 @@ public final class RandomAccessListIterate
             Predicate2<? super T, ? super IV> predicate,
             IV injectedValue)
     {
-        return RandomAccessListIterate.rejectWith(list, predicate, injectedValue, FastList.<T>newList());
+        return RandomAccessListIterate.rejectWith(list, predicate, injectedValue, FastList.newList());
     }
 
     /**
@@ -329,7 +329,7 @@ public final class RandomAccessListIterate
             List<T> list,
             Function<? super T, ? extends A> function)
     {
-        return RandomAccessListIterate.collect(list, function, FastList.<A>newList(list.size()));
+        return RandomAccessListIterate.collect(list, function, FastList.newList(list.size()));
     }
 
     /**
@@ -563,7 +563,7 @@ public final class RandomAccessListIterate
             List<T> list,
             Function<? super T, ? extends Iterable<A>> function)
     {
-        return RandomAccessListIterate.flatCollect(list, function, FastList.<A>newList(list.size()));
+        return RandomAccessListIterate.flatCollect(list, function, FastList.newList(list.size()));
     }
 
     /**
@@ -845,38 +845,26 @@ public final class RandomAccessListIterate
         return result;
     }
 
-    public static <V, T> MutableMap<V, BigDecimal> sumByBigDecimal(List<T> list, Function<T, V> groupBy, final Function<? super T, BigDecimal> function)
+    public static <V, T> MutableMap<V, BigDecimal> sumByBigDecimal(List<T> list, Function<T, V> groupBy, Function<? super T, BigDecimal> function)
     {
         MutableMap<V, BigDecimal> result = UnifiedMap.newMap();
         int size = list.size();
         for (int i = 0; i < size; i++)
         {
-            final T item = list.get(i);
-            result.updateValue(groupBy.valueOf(item), Functions0.zeroBigDecimal(), new Function<BigDecimal, BigDecimal>()
-            {
-                public BigDecimal valueOf(BigDecimal original)
-                {
-                    return original.add(function.valueOf(item));
-                }
-            });
+            T item = list.get(i);
+            result.updateValue(groupBy.valueOf(item), Functions0.zeroBigDecimal(), original -> original.add(function.valueOf(item)));
         }
         return result;
     }
 
-    public static <V, T> MutableMap<V, BigInteger> sumByBigInteger(List<T> list, Function<T, V> groupBy, final Function<? super T, BigInteger> function)
+    public static <V, T> MutableMap<V, BigInteger> sumByBigInteger(List<T> list, Function<T, V> groupBy, Function<? super T, BigInteger> function)
     {
         MutableMap<V, BigInteger> result = UnifiedMap.newMap();
         int size = list.size();
         for (int i = 0; i < size; i++)
         {
-            final T item = list.get(i);
-            result.updateValue(groupBy.valueOf(item), Functions0.zeroBigInteger(), new Function<BigInteger, BigInteger>()
-            {
-                public BigInteger valueOf(BigInteger original)
-                {
-                    return original.add(function.valueOf(item));
-                }
-            });
+            T item = list.get(i);
+            result.updateValue(groupBy.valueOf(item), Functions0.zeroBigInteger(), original -> original.add(function.valueOf(item)));
         }
         return result;
     }
@@ -1031,7 +1019,7 @@ public final class RandomAccessListIterate
 
     public static <T> PartitionMutableList<T> partition(List<T> list, Predicate<? super T> predicate)
     {
-        PartitionFastList<T> partitionFastList = new PartitionFastList<T>();
+        PartitionFastList<T> partitionFastList = new PartitionFastList<>();
 
         int size = list.size();
         for (int i = 0; i < size; i++)
@@ -1045,7 +1033,7 @@ public final class RandomAccessListIterate
 
     public static <T, P> PartitionMutableList<T> partitionWith(List<T> list, Predicate2<? super T, ? super P> predicate, P parameter)
     {
-        PartitionFastList<T> partitionFastList = new PartitionFastList<T>();
+        PartitionFastList<T> partitionFastList = new PartitionFastList<>();
 
         int size = list.size();
         for (int i = 0; i < size; i++)
@@ -1230,7 +1218,7 @@ public final class RandomAccessListIterate
      */
     public static <T> MutableList<T> distinct(List<T> list)
     {
-        return RandomAccessListIterate.distinct(list, FastList.<T>newList());
+        return RandomAccessListIterate.distinct(list, FastList.newList());
     }
 
     /**
@@ -1261,7 +1249,7 @@ public final class RandomAccessListIterate
         {
             throw new IllegalArgumentException("Count must be greater than zero, but was: " + count);
         }
-        return RandomAccessListIterate.take(list, count, FastList.<T>newList(Math.min(list.size(), count)));
+        return RandomAccessListIterate.take(list, count, FastList.newList(Math.min(list.size(), count)));
     }
 
     /**
@@ -1290,7 +1278,7 @@ public final class RandomAccessListIterate
         {
             throw new IllegalArgumentException("Count must be greater than zero, but was: " + count);
         }
-        return RandomAccessListIterate.drop(list, count, FastList.<T>newList(list.size() - Math.min(list.size(), count)));
+        return RandomAccessListIterate.drop(list, count, FastList.newList(list.size() - Math.min(list.size(), count)));
     }
 
     /**
@@ -1352,7 +1340,7 @@ public final class RandomAccessListIterate
             List<T> list,
             Function<? super T, ? extends V> function)
     {
-        return RandomAccessListIterate.groupBy(list, function, FastListMultimap.<V, T>newMultimap());
+        return RandomAccessListIterate.groupBy(list, function, FastListMultimap.newMultimap());
     }
 
     /**
@@ -1376,7 +1364,7 @@ public final class RandomAccessListIterate
             List<T> list,
             Function<? super T, ? extends Iterable<V>> function)
     {
-        return RandomAccessListIterate.groupByEach(list, function, FastListMultimap.<V, T>newMultimap());
+        return RandomAccessListIterate.groupByEach(list, function, FastListMultimap.newMultimap());
     }
 
     public static <T, V, R extends MutableMultimap<V, T>> R groupByEach(
@@ -1401,7 +1389,7 @@ public final class RandomAccessListIterate
             List<T> list,
             Function<? super T, ? extends K> function)
     {
-        return RandomAccessListIterate.groupByUniqueKey(list, function, UnifiedMap.<K, T>newMap());
+        return RandomAccessListIterate.groupByUniqueKey(list, function, UnifiedMap.newMap());
     }
 
     public static <K, T, R extends MutableMap<K, T>> R groupByUniqueKey(
@@ -1552,7 +1540,7 @@ public final class RandomAccessListIterate
             List<X> list,
             Iterable<Y> iterable)
     {
-        return RandomAccessListIterate.zip(list, iterable, FastList.<Pair<X, Y>>newList());
+        return RandomAccessListIterate.zip(list, iterable, FastList.newList());
     }
 
     public static <X, Y, R extends Collection<Pair<X, Y>>> R zip(
@@ -1571,7 +1559,7 @@ public final class RandomAccessListIterate
 
     public static <T> MutableList<Pair<T, Integer>> zipWithIndex(List<T> list)
     {
-        return RandomAccessListIterate.zipWithIndex(list, FastList.<Pair<T, Integer>>newList());
+        return RandomAccessListIterate.zipWithIndex(list, FastList.newList());
     }
 
     public static <T, R extends Collection<Pair<T, Integer>>> R zipWithIndex(
@@ -1593,7 +1581,7 @@ public final class RandomAccessListIterate
             Procedure2<? super V, ? super T> mutatingAggregator)
     {
         MutableMap<K, V> map = UnifiedMap.newMap();
-        RandomAccessListIterate.forEach(list, new MutatingAggregationProcedure<T, K, V>(map, groupBy, zeroValueFactory, mutatingAggregator));
+        RandomAccessListIterate.forEach(list, new MutatingAggregationProcedure<>(map, groupBy, zeroValueFactory, mutatingAggregator));
         return map;
     }
 
@@ -1604,7 +1592,7 @@ public final class RandomAccessListIterate
             Function2<? super V, ? super T, ? extends V> nonMutatingAggregator)
     {
         MutableMap<K, V> map = UnifiedMap.newMap();
-        RandomAccessListIterate.forEach(list, new NonMutatingAggregationProcedure<T, K, V>(map, groupBy, zeroValueFactory, nonMutatingAggregator));
+        RandomAccessListIterate.forEach(list, new NonMutatingAggregationProcedure<>(map, groupBy, zeroValueFactory, nonMutatingAggregator));
         return map;
     }
 
@@ -1650,7 +1638,7 @@ public final class RandomAccessListIterate
 
     public static <T> PartitionMutableList<T> partitionWhile(List<T> list, Predicate<? super T> predicate)
     {
-        PartitionMutableList<T> result = new PartitionFastList<T>();
+        PartitionMutableList<T> result = new PartitionFastList<>();
         MutableList<T> selected = result.getSelected();
 
         int size = list.size();

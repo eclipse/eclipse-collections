@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -71,8 +71,8 @@ public class ImmutableArrayBag<T>
     public static <T> ImmutableArrayBag<T> copyFrom(Bag<T> bag)
     {
         int distinctItemCount = bag.sizeDistinct();
-        final T[] newKeys = (T[]) new Object[distinctItemCount];
-        final int[] newCounts = new int[distinctItemCount];
+        T[] newKeys = (T[]) new Object[distinctItemCount];
+        int[] newCounts = new int[distinctItemCount];
         bag.forEachWithOccurrences(new ObjectIntProcedure<T>()
         {
             private int index;
@@ -84,9 +84,10 @@ public class ImmutableArrayBag<T>
                 this.index++;
             }
         });
-        return new ImmutableArrayBag<T>(newKeys, newCounts);
+        return new ImmutableArrayBag<>(newKeys, newCounts);
     }
 
+    @Override
     public void forEachWithOccurrences(ObjectIntProcedure<? super T> objectIntProcedure)
     {
         for (int i = 0; i < this.keys.length; i++)
@@ -95,11 +96,13 @@ public class ImmutableArrayBag<T>
         }
     }
 
+    @Override
     public int sizeDistinct()
     {
         return this.keys.length;
     }
 
+    @Override
     public int size()
     {
         int sum = 0;
@@ -110,6 +113,7 @@ public class ImmutableArrayBag<T>
         return sum;
     }
 
+    @Override
     public int occurrencesOf(Object item)
     {
         int index = ArrayIterate.detectIndexWith(this.keys, Predicates2.equal(), item);
@@ -120,6 +124,7 @@ public class ImmutableArrayBag<T>
         return 0;
     }
 
+    @Override
     public ImmutableBag<T> newWith(T element)
     {
         int elementIndex = ArrayIterate.detectIndexWith(this.keys, Predicates2.equal(), element);
@@ -146,9 +151,10 @@ public class ImmutableArrayBag<T>
         {
             newCounts[elementIndex]++;
         }
-        return new ImmutableArrayBag<T>(newKeys, newCounts);
+        return new ImmutableArrayBag<>(newKeys, newCounts);
     }
 
+    @Override
     public ImmutableBag<T> newWithout(T element)
     {
         int elementIndex = ArrayIterate.detectIndexWith(this.keys, Predicates2.equal(), element);
@@ -170,108 +176,107 @@ public class ImmutableArrayBag<T>
                 System.arraycopy(this.keys, elementIndex + 1, newKeys, elementIndex, newKeys.length - elementIndex);
                 System.arraycopy(this.counts, elementIndex + 1, newCounts, elementIndex, newCounts.length - elementIndex);
             }
-            return new ImmutableArrayBag<T>(newKeys, newCounts);
+            return new ImmutableArrayBag<>(newKeys, newCounts);
         }
         return this;
     }
 
+    @Override
     public MutableMap<T, Integer> toMapOfItemToCount()
     {
-        final MutableMap<T, Integer> map = UnifiedMap.newMap(this.size());
-        this.forEachWithOccurrences(new ObjectIntProcedure<T>()
-        {
-            public void value(T item, int count)
-            {
-                map.put(item, count);
-            }
-        });
+        MutableMap<T, Integer> map = UnifiedMap.newMap(this.size());
+        this.forEachWithOccurrences(map::put);
         return map;
     }
 
+    @Override
     public ImmutableBag<T> newWithAll(Iterable<? extends T> elements)
     {
         return Bags.immutable.withAll(Iterate.addAllTo(elements, HashBag.newBag(this)));
     }
 
-    public ImmutableBag<T> selectByOccurrences(final IntPredicate predicate)
+    @Override
+    public ImmutableBag<T> selectByOccurrences(IntPredicate predicate)
     {
-        final MutableBag<T> result = HashBag.newBag();
-        this.forEachWithOccurrences(new ObjectIntProcedure<T>()
-        {
-            public void value(T each, int occurrences)
+        MutableBag<T> result = HashBag.newBag();
+        this.forEachWithOccurrences((each, occurrences) -> {
+            if (predicate.accept(occurrences))
             {
-                if (predicate.accept(occurrences))
-                {
-                    result.addOccurrences(each, occurrences);
-                }
+                result.addOccurrences(each, occurrences);
             }
         });
         return result.toImmutable();
     }
 
-    public <S> ImmutableBag<S> selectInstancesOf(final Class<S> clazz)
+    @Override
+    public <S> ImmutableBag<S> selectInstancesOf(Class<S> clazz)
     {
-        final MutableBag<S> result = HashBag.newBag();
-        this.forEachWithOccurrences(new ObjectIntProcedure<T>()
-        {
-            public void value(T each, int index)
+        MutableBag<S> result = HashBag.newBag();
+        this.forEachWithOccurrences((each, index) -> {
+            if (clazz.isInstance(each))
             {
-                if (clazz.isInstance(each))
-                {
-                    result.addOccurrences((S) each, index);
-                }
+                result.addOccurrences((S) each, index);
             }
         });
         return ImmutableArrayBag.copyFrom(result);
     }
 
+    @Override
     public <V> ImmutableBagMultimap<V, T> groupBy(Function<? super T, ? extends V> function)
     {
         return this.groupBy(function, HashBagMultimap.<V, T>newMultimap()).toImmutable();
     }
 
+    @Override
     public <V> ImmutableBagMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function)
     {
-        return this.groupByEach(function, HashBagMultimap.<V, T>newMultimap()).toImmutable();
+        return this.groupByEach(function, HashBagMultimap.newMultimap()).toImmutable();
     }
 
+    @Override
     public T getFirst()
     {
         return ArrayIterate.getFirst(this.keys);
     }
 
+    @Override
     public T getLast()
     {
         return ArrayIterate.getLast(this.keys);
     }
 
+    @Override
     public ImmutableBag<T> select(Predicate<? super T> predicate)
     {
-        return this.select(predicate, HashBag.<T>newBag()).toImmutable();
+        return this.select(predicate, HashBag.newBag()).toImmutable();
     }
 
+    @Override
     public ImmutableBag<T> reject(Predicate<? super T> predicate)
     {
-        return this.reject(predicate, HashBag.<T>newBag()).toImmutable();
+        return this.reject(predicate, HashBag.newBag()).toImmutable();
     }
 
+    @Override
     public <V> ImmutableBag<V> collect(Function<? super T, ? extends V> function)
     {
-        MutableBag<V> result = this.collect(function, HashBag.<V>newBag());
+        MutableBag<V> result = this.collect(function, HashBag.newBag());
         return ImmutableArrayBag.copyFrom(result);
     }
 
+    @Override
     public <V> ImmutableBag<V> collectIf(
             Predicate<? super T> predicate,
             Function<? super T, ? extends V> function)
     {
-        MutableBag<V> result = this.collectIf(predicate, function, HashBag.<V>newBag());
+        MutableBag<V> result = this.collectIf(predicate, function, HashBag.newBag());
         return ImmutableArrayBag.copyFrom(result);
     }
 
+    @Override
     public <V> ImmutableBag<V> flatCollect(Function<? super T, ? extends Iterable<V>> function)
     {
-        return this.flatCollect(function, HashBag.<V>newBag()).toImmutable();
+        return this.flatCollect(function, HashBag.newBag()).toImmutable();
     }
 
     @Override
@@ -312,6 +317,7 @@ public class ImmutableArrayBag<T>
         return sum;
     }
 
+    @Override
     public void each(Procedure<? super T> procedure)
     {
         for (int i = 0; i < this.keys.length; i++)
@@ -324,6 +330,7 @@ public class ImmutableArrayBag<T>
         }
     }
 
+    @Override
     public Iterator<T> iterator()
     {
         return new ArrayBagIterator();
@@ -416,24 +423,26 @@ public class ImmutableArrayBag<T>
     /**
      * @deprecated in 6.0. Use {@link OrderedIterable#zip(Iterable)} instead.
      */
+    @Override
     @Deprecated
     public <S> ImmutableBag<Pair<T, S>> zip(Iterable<S> that)
     {
-        return this.zip(that, HashBag.<Pair<T, S>>newBag()).toImmutable();
+        return this.zip(that, HashBag.newBag()).toImmutable();
     }
 
     /**
      * @deprecated in 6.0. Use {@link OrderedIterable#zipWithIndex()} instead.
      */
+    @Override
     @Deprecated
     public ImmutableSet<Pair<T, Integer>> zipWithIndex()
     {
-        return this.zipWithIndex(UnifiedSet.<Pair<T, Integer>>newSet()).toImmutable();
+        return this.zipWithIndex(UnifiedSet.newSet()).toImmutable();
     }
 
     protected Object writeReplace()
     {
-        return new ImmutableBagSerializationProxy<T>(this);
+        return new ImmutableBagSerializationProxy<>(this);
     }
 
     private final class ArrayBagIterator
@@ -447,12 +456,14 @@ public class ImmutableArrayBag<T>
             this.remainingOccurrences = ImmutableArrayBag.this.sizeDistinct() > 0 ? ImmutableArrayBag.this.counts[0] : 0;
         }
 
+        @Override
         public boolean hasNext()
         {
             return this.position != ImmutableArrayBag.this.keys.length
                     && !(this.position == ImmutableArrayBag.this.keys.length - 1 && this.remainingOccurrences == 0);
         }
 
+        @Override
         public T next()
         {
             if (!this.hasNext())
@@ -474,6 +485,7 @@ public class ImmutableArrayBag<T>
             return result;
         }
 
+        @Override
         public void remove()
         {
             throw new UnsupportedOperationException("Cannot remove from an ImmutableArrayBag");

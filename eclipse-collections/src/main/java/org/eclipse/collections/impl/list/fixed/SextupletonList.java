@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -72,7 +72,7 @@ final class SextupletonList<T>
     @Override
     public SextupletonList<T> clone()
     {
-        return new SextupletonList<T>(
+        return new SextupletonList<>(
                 this.element1,
                 this.element2,
                 this.element3,
@@ -81,11 +81,13 @@ final class SextupletonList<T>
                 this.element6);
     }
 
+    @Override
     public int size()
     {
         return 6;
     }
 
+    @Override
     public T get(int index)
     {
         switch (index)
@@ -121,6 +123,7 @@ final class SextupletonList<T>
     /**
      * set is implemented purely to allow the List to be sorted, not because this List should be considered mutable.
      */
+    @Override
     public T set(int index, T element)
     {
         switch (index)
@@ -199,6 +202,7 @@ final class SextupletonList<T>
         procedure.value(this.element6, parameter);
     }
 
+    @Override
     public void writeExternal(ObjectOutput out) throws IOException
     {
         out.writeObject(this.element1);
@@ -209,6 +213,7 @@ final class SextupletonList<T>
         out.writeObject(this.element6);
     }
 
+    @Override
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
     {
         this.element1 = (T) in.readObject();

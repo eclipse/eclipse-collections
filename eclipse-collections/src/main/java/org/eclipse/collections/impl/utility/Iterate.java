@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -281,7 +281,7 @@ public final class Iterate
             return IterableIterate.select(
                     iterable,
                     predicate,
-                    DefaultSpeciesNewStrategy.INSTANCE.<T>speciesNew((Collection<T>) iterable));
+                    DefaultSpeciesNewStrategy.INSTANCE.speciesNew((Collection<T>) iterable));
         }
         if (iterable != null)
         {
@@ -334,11 +334,11 @@ public final class Iterate
                     iterable,
                     predicate,
                     parameter,
-                    DefaultSpeciesNewStrategy.INSTANCE.<T>speciesNew((Collection<T>) iterable));
+                    DefaultSpeciesNewStrategy.INSTANCE.speciesNew((Collection<T>) iterable));
         }
         if (iterable != null)
         {
-            return IterableIterate.selectWith(iterable, predicate, parameter, FastList.<T>newList());
+            return IterableIterate.selectWith(iterable, predicate, parameter, FastList.newList());
         }
         throw new IllegalArgumentException("Cannot perform a selectWith on null");
     }
@@ -496,7 +496,7 @@ public final class Iterate
             return IterableIterate.selectInstancesOf(
                     iterable,
                     clazz,
-                    DefaultSpeciesNewStrategy.INSTANCE.<T>speciesNew((Collection<?>) iterable));
+                    DefaultSpeciesNewStrategy.INSTANCE.speciesNew((Collection<?>) iterable));
         }
         if (iterable != null)
         {
@@ -602,7 +602,7 @@ public final class Iterate
                     iterable,
                     predicate,
                     function,
-                    DefaultSpeciesNewStrategy.INSTANCE.<V>speciesNew((Collection<T>) iterable));
+                    DefaultSpeciesNewStrategy.INSTANCE.speciesNew((Collection<T>) iterable));
         }
         if (iterable != null)
         {
@@ -742,7 +742,7 @@ public final class Iterate
             return IterableIterate.take(
                     iterable,
                     count,
-                    DefaultSpeciesNewStrategy.INSTANCE.<T>speciesNew((Collection<T>) iterable, count));
+                    DefaultSpeciesNewStrategy.INSTANCE.speciesNew((Collection<T>) iterable, count));
         }
         if (iterable != null)
         {
@@ -775,7 +775,7 @@ public final class Iterate
             return IterableIterate.drop(
                     iterable,
                     count,
-                    DefaultSpeciesNewStrategy.INSTANCE.<T>speciesNew((Collection<T>) iterable, count));
+                    DefaultSpeciesNewStrategy.INSTANCE.speciesNew((Collection<T>) iterable, count));
         }
         if (iterable != null)
         {
@@ -831,7 +831,7 @@ public final class Iterate
             return IterableIterate.reject(
                     iterable,
                     predicate,
-                    DefaultSpeciesNewStrategy.INSTANCE.<T>speciesNew((Collection<T>) iterable));
+                    DefaultSpeciesNewStrategy.INSTANCE.speciesNew((Collection<T>) iterable));
         }
         if (iterable != null)
         {
@@ -889,22 +889,18 @@ public final class Iterate
     /**
      * SortThis is a mutating method.  The List passed in is also returned.
      */
-    public static <T, L extends List<T>> L sortThis(L list, final Predicate2<? super T, ? super T> predicate)
+    public static <T, L extends List<T>> L sortThis(L list, Predicate2<? super T, ? super T> predicate)
     {
-        return Iterate.sortThis(list, new Comparator<T>()
-        {
-            public int compare(T o1, T o2)
+        return Iterate.sortThis(list, (Comparator<T>) (o1, o2) -> {
+            if (predicate.accept(o1, o2))
             {
-                if (predicate.accept(o1, o2))
-                {
-                    return -1;
-                }
-                if (predicate.accept(o2, o1))
-                {
-                    return 1;
-                }
-                return 0;
+                return -1;
             }
+            if (predicate.accept(o2, o1))
+            {
+                return 1;
+            }
+            return 0;
         });
     }
 
@@ -1012,11 +1008,11 @@ public final class Iterate
                     iterable,
                     predicate,
                     parameter,
-                    DefaultSpeciesNewStrategy.INSTANCE.<T>speciesNew((Collection<T>) iterable));
+                    DefaultSpeciesNewStrategy.INSTANCE.speciesNew((Collection<T>) iterable));
         }
         if (iterable != null)
         {
-            return IterableIterate.rejectWith(iterable, predicate, parameter, FastList.<T>newList());
+            return IterableIterate.rejectWith(iterable, predicate, parameter, FastList.newList());
         }
         throw new IllegalArgumentException("Cannot perform a rejectWith on null");
     }
@@ -1128,7 +1124,7 @@ public final class Iterate
             return targetCollection.addAll((Collection<T>) iterable);
         }
         int oldSize = targetCollection.size();
-        Iterate.forEachWith(iterable, Procedures2.<T>addToCollection(), targetCollection);
+        Iterate.forEachWith(iterable, Procedures2.addToCollection(), targetCollection);
         return targetCollection.size() != oldSize;
     }
 
@@ -1155,7 +1151,7 @@ public final class Iterate
             return targetCollection.removeAll((Collection<T>) iterable);
         }
         int oldSize = targetCollection.size();
-        Iterate.forEachWith(iterable, Procedures2.<T>removeFromCollection(), targetCollection);
+        Iterate.forEachWith(iterable, Procedures2.removeFromCollection(), targetCollection);
         return targetCollection.size() != oldSize;
     }
 
@@ -1202,7 +1198,7 @@ public final class Iterate
             return IterableIterate.collect(
                     iterable,
                     function,
-                    DefaultSpeciesNewStrategy.INSTANCE.<V>speciesNew(
+                    DefaultSpeciesNewStrategy.INSTANCE.speciesNew(
                             (Collection<T>) iterable,
                             ((Collection<T>) iterable).size()));
         }
@@ -2018,7 +2014,7 @@ public final class Iterate
             return IterableIterate.flatCollect(
                     iterable,
                     function,
-                    DefaultSpeciesNewStrategy.INSTANCE.<V>speciesNew(
+                    DefaultSpeciesNewStrategy.INSTANCE.speciesNew(
                             (Collection<T>) iterable,
                             ((Collection<T>) iterable).size()));
         }
@@ -2082,7 +2078,7 @@ public final class Iterate
                     iterable,
                     function,
                     parameter,
-                    DefaultSpeciesNewStrategy.INSTANCE.<A>speciesNew(
+                    DefaultSpeciesNewStrategy.INSTANCE.speciesNew(
                             (Collection<T>) iterable,
                             ((Collection<T>) iterable).size()));
         }
@@ -2952,7 +2948,7 @@ public final class Iterate
             Function<? super T, ? extends K> keyFunction)
     {
         MutableMap<K, T> map = UnifiedMap.newMap();
-        Iterate.forEach(iterable, new MapCollectProcedure<T, K, T>(map, keyFunction));
+        Iterate.forEach(iterable, new MapCollectProcedure<>(map, keyFunction));
         return map;
     }
 
@@ -2965,7 +2961,7 @@ public final class Iterate
             Function<? super T, ? extends K> keyFunction,
             Function<? super T, ? extends V> valueFunction)
     {
-        return Iterate.addToMap(iterable, keyFunction, valueFunction, UnifiedMap.<K, V>newMap());
+        return Iterate.addToMap(iterable, keyFunction, valueFunction, UnifiedMap.newMap());
     }
 
     /**
@@ -2978,7 +2974,7 @@ public final class Iterate
             Function<? super T, ? extends K> keyFunction,
             M map)
     {
-        Iterate.forEach(iterable, new MapCollectProcedure<T, K, V>(map, keyFunction));
+        Iterate.forEach(iterable, new MapCollectProcedure<>(map, keyFunction));
         return map;
     }
 
@@ -2993,7 +2989,7 @@ public final class Iterate
             Function<? super T, ? extends V> valueFunction,
             M map)
     {
-        Iterate.forEach(iterable, new MapCollectProcedure<T, K, V>(map, keyFunction, valueFunction));
+        Iterate.forEach(iterable, new MapCollectProcedure<>(map, keyFunction, valueFunction));
         return map;
     }
 
@@ -3036,7 +3032,7 @@ public final class Iterate
             Function<? super T, ? extends Iterable<V>> valuesFunction,
             R targetMultimap)
     {
-        Iterate.forEach(iterable, new MultimapKeyValuePutAllProcedure<T, K, V>(targetMultimap, keyFunction, valuesFunction));
+        Iterate.forEach(iterable, new MultimapKeyValuePutAllProcedure<>(targetMultimap, keyFunction, valuesFunction));
         return targetMultimap;
     }
 
@@ -3156,7 +3152,7 @@ public final class Iterate
         }
         if (iterable instanceof Collection)
         {
-            return IterableIterate.groupBy(iterable, function, FastListMultimap.<V, T>newMultimap());
+            return IterableIterate.groupBy(iterable, function, FastListMultimap.newMultimap());
         }
         if (iterable != null)
         {
@@ -3275,7 +3271,7 @@ public final class Iterate
         }
         if (iterable instanceof Collection)
         {
-            return IterableIterate.groupByEach(iterable, function, FastListMultimap.<V, T>newMultimap());
+            return IterableIterate.groupByEach(iterable, function, FastListMultimap.newMultimap());
         }
         if (iterable != null)
         {
@@ -3353,7 +3349,7 @@ public final class Iterate
             Function<? super T, ? extends V> valueFunction,
             R targetMultimap)
     {
-        Iterate.forEach(iterable, new MultimapKeyValuePutProcedure<T, K, V>(targetMultimap, groupByFunction, valueFunction));
+        Iterate.forEach(iterable, new MultimapKeyValuePutProcedure<>(targetMultimap, groupByFunction, valueFunction));
         return targetMultimap;
     }
 
@@ -3399,7 +3395,7 @@ public final class Iterate
      */
     public static <T> T min(Iterable<T> iterable, Comparator<? super T> comparator)
     {
-        MinComparatorProcedure<T> procedure = new MinComparatorProcedure<T>(comparator);
+        MinComparatorProcedure<T> procedure = new MinComparatorProcedure<>(comparator);
         Iterate.forEach(iterable, procedure);
         return procedure.getResult();
     }
@@ -3409,7 +3405,7 @@ public final class Iterate
      */
     public static <T> T max(Iterable<T> iterable, Comparator<? super T> comparator)
     {
-        MaxComparatorProcedure<T> procedure = new MaxComparatorProcedure<T>(comparator);
+        MaxComparatorProcedure<T> procedure = new MaxComparatorProcedure<>(comparator);
         Iterate.forEach(iterable, procedure);
         return procedure.getResult();
     }
@@ -3511,7 +3507,7 @@ public final class Iterate
         {
             return IterableIterate.zipWithIndex(
                     iterable,
-                    DefaultSpeciesNewStrategy.INSTANCE.<Pair<T, Integer>>speciesNew(
+                    DefaultSpeciesNewStrategy.INSTANCE.speciesNew(
                             (Collection<T>) iterable,
                             ((Collection<T>) iterable).size()));
         }
@@ -3679,20 +3675,8 @@ public final class Iterate
      */
     public static <K, V> HashBagMultimap<V, K> flip(BagMultimap<K, V> bagMultimap)
     {
-        final HashBagMultimap<V, K> result = new HashBagMultimap<V, K>();
-        bagMultimap.forEachKeyMultiValues(new Procedure2<K, Iterable<V>>()
-        {
-            public void value(final K key, Iterable<V> values)
-            {
-                Iterate.forEach(values, new Procedure<V>()
-                {
-                    public void value(V value)
-                    {
-                        result.put(value, key);
-                    }
-                });
-            }
-        });
+        HashBagMultimap<V, K> result = new HashBagMultimap<>();
+        bagMultimap.forEachKeyMultiValues((key, values) -> Iterate.forEach(values, value -> result.put(value, key)));
         return result;
     }
 
@@ -3701,20 +3685,8 @@ public final class Iterate
      */
     public static <K, V> HashBagMultimap<V, K> flip(ListMultimap<K, V> listMultimap)
     {
-        final HashBagMultimap<V, K> result = new HashBagMultimap<V, K>();
-        listMultimap.forEachKeyMultiValues(new Procedure2<K, Iterable<V>>()
-        {
-            public void value(final K key, Iterable<V> values)
-            {
-                Iterate.forEach(values, new Procedure<V>()
-                {
-                    public void value(V value)
-                    {
-                        result.put(value, key);
-                    }
-                });
-            }
-        });
+        HashBagMultimap<V, K> result = new HashBagMultimap<>();
+        listMultimap.forEachKeyMultiValues((key, values) -> Iterate.forEach(values, value -> result.put(value, key)));
         return result;
     }
 
@@ -3723,20 +3695,8 @@ public final class Iterate
      */
     public static <K, V> UnifiedSetMultimap<V, K> flip(SetMultimap<K, V> setMultimap)
     {
-        final UnifiedSetMultimap<V, K> result = new UnifiedSetMultimap<V, K>();
-        setMultimap.forEachKeyMultiValues(new Procedure2<K, Iterable<V>>()
-        {
-            public void value(final K key, Iterable<V> values)
-            {
-                Iterate.forEach(values, new Procedure<V>()
-                {
-                    public void value(V value)
-                    {
-                        result.put(value, key);
-                    }
-                });
-            }
-        });
+        UnifiedSetMultimap<V, K> result = new UnifiedSetMultimap<>();
+        setMultimap.forEachKeyMultiValues((key, values) -> Iterate.forEach(values, value -> result.put(value, key)));
         return result;
     }
 }

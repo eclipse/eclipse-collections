@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -18,26 +18,31 @@ import org.eclipse.collections.api.map.MutableMap;
 @Immutable
 public final class MutableHashingStrategyMapFactoryImpl implements MutableHashingStrategyMapFactory
 {
+    @Override
     public <K, V> MutableMap<K, V> of(HashingStrategy<? super K> hashingStrategy)
     {
         return this.with(hashingStrategy);
     }
 
+    @Override
     public <K, V> MutableMap<K, V> with(HashingStrategy<? super K> hashingStrategy)
     {
-        return new UnifiedMapWithHashingStrategy<K, V>(hashingStrategy);
+        return new UnifiedMapWithHashingStrategy<>(hashingStrategy);
     }
 
+    @Override
     public <K, V> MutableMap<K, V> of(HashingStrategy<? super K> hashingStrategy, K key, V value)
     {
         return this.with(hashingStrategy, key, value);
     }
 
+    @Override
     public <K, V> MutableMap<K, V> with(HashingStrategy<? super K> hashingStrategy, K key, V value)
     {
         return UnifiedMapWithHashingStrategy.newWithKeysValues(hashingStrategy, key, value);
     }
 
+    @Override
     public <K, V> MutableMap<K, V> of(HashingStrategy<? super K> hashingStrategy, K key1, V value1, K key2, V value2)
     {
         return this.with(
@@ -46,6 +51,7 @@ public final class MutableHashingStrategyMapFactoryImpl implements MutableHashin
                 key2, value2);
     }
 
+    @Override
     public <K, V> MutableMap<K, V> with(HashingStrategy<? super K> hashingStrategy, K key1, V value1, K key2, V value2)
     {
         return UnifiedMapWithHashingStrategy.newWithKeysValues(
@@ -54,6 +60,7 @@ public final class MutableHashingStrategyMapFactoryImpl implements MutableHashin
                 key2, value2);
     }
 
+    @Override
     public <K, V> MutableMap<K, V> of(
             HashingStrategy<? super K> hashingStrategy,
             K key1, V value1,
@@ -67,6 +74,7 @@ public final class MutableHashingStrategyMapFactoryImpl implements MutableHashin
                 key3, value3);
     }
 
+    @Override
     public <K, V> MutableMap<K, V> with(
             HashingStrategy<? super K> hashingStrategy,
             K key1, V value1,
@@ -80,6 +88,7 @@ public final class MutableHashingStrategyMapFactoryImpl implements MutableHashin
                 key3, value3);
     }
 
+    @Override
     public <K, V> MutableMap<K, V> of(
             HashingStrategy<? super K> hashingStrategy,
             K key1, V value1,
@@ -95,6 +104,7 @@ public final class MutableHashingStrategyMapFactoryImpl implements MutableHashin
                 key4, value4);
     }
 
+    @Override
     public <K, V> MutableMap<K, V> with(
             HashingStrategy<? super K> hashingStrategy,
             K key1, V value1,

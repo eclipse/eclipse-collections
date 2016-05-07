@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs and others.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -19,7 +19,6 @@ import java.util.Arrays;
 import org.eclipse.collections.api.bag.Bag;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.block.predicate.primitive.IntPredicate;
-import org.eclipse.collections.api.block.predicate.primitive.ObjectIntPredicate;
 import org.eclipse.collections.api.map.primitive.MutableObjectIntMap;
 import org.eclipse.collections.impl.map.mutable.primitive.ObjectIntHashMap;
 import org.eclipse.collections.impl.utility.ArrayIterate;
@@ -44,7 +43,7 @@ public class HashBag<T>
 
     public HashBag(int size)
     {
-        this.items = new ObjectIntHashMap<T>(size);
+        this.items = new ObjectIntHashMap<>(size);
     }
 
     private HashBag(MutableObjectIntMap<T> map)
@@ -55,12 +54,12 @@ public class HashBag<T>
 
     public static <E> HashBag<E> newBag()
     {
-        return new HashBag<E>();
+        return new HashBag<>();
     }
 
     public static <E> HashBag<E> newBag(int size)
     {
-        return new HashBag<E>(size);
+        return new HashBag<>(size);
     }
 
     public static <E> HashBag<E> newBag(Bag<? extends E> source)
@@ -93,53 +92,56 @@ public class HashBag<T>
     }
 
     @Override
-    public MutableBag<T> selectByOccurrences(final IntPredicate predicate)
+    public MutableBag<T> selectByOccurrences(IntPredicate predicate)
     {
-        MutableObjectIntMap<T> map = this.items.select(new ObjectIntPredicate<T>()
-        {
-            public boolean accept(T each, int occurrences)
-            {
-                return predicate.accept(occurrences);
-            }
+        MutableObjectIntMap<T> map = this.items.select((each, occurrences) -> {
+            return predicate.accept(occurrences);
         });
-        return new HashBag<T>(map);
+        return new HashBag<>(map);
     }
 
+    @Override
     public void writeExternal(ObjectOutput out) throws IOException
     {
         ((ObjectIntHashMap<T>) this.items).writeExternal(out);
     }
 
+    @Override
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
     {
-        this.items = new ObjectIntHashMap<T>();
+        this.items = new ObjectIntHashMap<>();
         ((ObjectIntHashMap<T>) this.items).readExternal(in);
         this.size = (int) this.items.sum();
     }
 
+    @Override
     public HashBag<T> without(T element)
     {
         this.remove(element);
         return this;
     }
 
+    @Override
     public MutableBag<T> newEmpty()
     {
         return HashBag.newBag();
     }
 
+    @Override
     public HashBag<T> with(T element)
     {
         this.add(element);
         return this;
     }
 
+    @Override
     public HashBag<T> withAll(Iterable<? extends T> iterable)
     {
         this.addAllIterable(iterable);
         return this;
     }
 
+    @Override
     public HashBag<T> withoutAll(Iterable<? extends T> iterable)
     {
         this.removeAllIterable(iterable);

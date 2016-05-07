@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -50,74 +50,109 @@ import org.eclipse.collections.api.tuple.Pair;
 public interface ImmutableList<T>
         extends ImmutableCollection<T>, ListIterable<T>
 {
+    @Override
     ImmutableList<T> newWith(T element);
 
+    @Override
     ImmutableList<T> newWithout(T element);
 
+    @Override
     ImmutableList<T> newWithAll(Iterable<? extends T> elements);
 
+    @Override
     ImmutableList<T> newWithoutAll(Iterable<? extends T> elements);
 
+    @Override
     ImmutableList<T> tap(Procedure<? super T> procedure);
 
+    @Override
     ImmutableList<T> select(Predicate<? super T> predicate);
 
+    @Override
     <P> ImmutableList<T> selectWith(Predicate2<? super T, ? super P> predicate, P parameter);
 
+    @Override
     ImmutableList<T> reject(Predicate<? super T> predicate);
 
+    @Override
     <P> ImmutableList<T> rejectWith(Predicate2<? super T, ? super P> predicate, P parameter);
 
+    @Override
     PartitionImmutableList<T> partition(Predicate<? super T> predicate);
 
+    @Override
     <P> PartitionImmutableList<T> partitionWith(Predicate2<? super T, ? super P> predicate, P parameter);
 
+    @Override
     <S> ImmutableList<S> selectInstancesOf(Class<S> clazz);
 
+    @Override
     <V> ImmutableList<V> collect(Function<? super T, ? extends V> function);
 
+    @Override
     ImmutableBooleanList collectBoolean(BooleanFunction<? super T> booleanFunction);
 
+    @Override
     ImmutableByteList collectByte(ByteFunction<? super T> byteFunction);
 
+    @Override
     ImmutableCharList collectChar(CharFunction<? super T> charFunction);
 
+    @Override
     ImmutableDoubleList collectDouble(DoubleFunction<? super T> doubleFunction);
 
+    @Override
     ImmutableFloatList collectFloat(FloatFunction<? super T> floatFunction);
 
+    @Override
     ImmutableIntList collectInt(IntFunction<? super T> intFunction);
 
+    @Override
     ImmutableLongList collectLong(LongFunction<? super T> longFunction);
 
+    @Override
     ImmutableShortList collectShort(ShortFunction<? super T> shortFunction);
 
+    @Override
     <P, V> ImmutableList<V> collectWith(Function2<? super T, ? super P, ? extends V> function, P parameter);
 
+    @Override
     <V> ImmutableList<V> collectIf(Predicate<? super T> predicate, Function<? super T, ? extends V> function);
 
+    @Override
     <V> ImmutableList<V> flatCollect(Function<? super T, ? extends Iterable<V>> function);
 
+    @Override
     <V> ImmutableListMultimap<V, T> groupBy(Function<? super T, ? extends V> function);
 
+    @Override
     <V> ImmutableListMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function);
 
+    @Override
     ImmutableList<T> distinct();
 
+    @Override
     ImmutableList<T> distinct(HashingStrategy<? super T> hashingStrategy);
 
+    @Override
     <S> ImmutableList<Pair<T, S>> zip(Iterable<S> that);
 
+    @Override
     ImmutableList<Pair<T, Integer>> zipWithIndex();
 
+    @Override
     ImmutableList<T> take(int count);
 
+    @Override
     ImmutableList<T> takeWhile(Predicate<? super T> predicate);
 
+    @Override
     ImmutableList<T> drop(int count);
 
+    @Override
     ImmutableList<T> dropWhile(Predicate<? super T> predicate);
 
+    @Override
     PartitionImmutableList<T> partitionWhile(Predicate<? super T> predicate);
 
     List<T> castToList();
@@ -128,5 +163,6 @@ public interface ImmutableList<T>
      */
     ImmutableList<T> subList(int fromIndex, int toIndex);
 
+    @Override
     ImmutableList<T> toReversed();
 }

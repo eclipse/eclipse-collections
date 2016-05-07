@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -127,7 +127,7 @@ public class AnagramTest
         MutableMap<Alphagram, MutableList<String>> map = UnifiedMap.newMap();
         this.getWords().each(word -> map.getIfAbsentPut(new Alphagram(word), FastList::new).add(word));
         MutableList<MutableList<String>> results =
-                map.select(iterable -> iterable.size() >= SIZE_THRESHOLD, Lists.mutable.<MutableList<String>>of())
+                map.select(iterable -> iterable.size() >= SIZE_THRESHOLD, Lists.mutable.of())
                         .sortThisByInt(iterable -> -iterable.size());
         results.forEach(Functions.bind(Procedures.cast(LOGGER::info), iterable -> iterable.size() + ": " + iterable));
         Assert.assertTrue(this.listContainsTestGroupAtElementsOneOrTwo(results));

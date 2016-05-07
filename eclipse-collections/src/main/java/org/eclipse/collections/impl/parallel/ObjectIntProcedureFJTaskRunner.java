@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -52,7 +52,7 @@ public final class ObjectIntProcedureFJTaskRunner<T, BT extends ObjectIntProcedu
 
     private static <BT> ArrayBlockingQueue<BT> buildQueue(Combiner<BT> newCombiner, int taskCount)
     {
-        return newCombiner.useCombineOne() ? new ArrayBlockingQueue<BT>(taskCount) : null;
+        return newCombiner.useCombineOne() ? new ArrayBlockingQueue<>(taskCount) : null;
     }
 
     private void createAndExecuteTasks(Executor executor, ObjectIntProcedureFactory<BT> procedureFactory, List<T> list)
@@ -64,7 +64,7 @@ public final class ObjectIntProcedureFJTaskRunner<T, BT extends ObjectIntProcedu
         for (int index = 0; index < size; index++)
         {
             ObjectIntProcedureFJTask<T, BT> procedureFJTask =
-                    new ObjectIntProcedureFJTask<T, BT>(this, procedureFactory, list, index, sectionSize, index == this.taskCount - 1);
+                    new ObjectIntProcedureFJTask<>(this, procedureFactory, list, index, sectionSize, index == this.taskCount - 1);
             this.procedures[index] = procedureFJTask;
             executor.execute(procedureFJTask);
         }
@@ -135,6 +135,7 @@ public final class ObjectIntProcedureFJTaskRunner<T, BT extends ObjectIntProcedu
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public BT valueOf(ObjectIntProcedureFJTask<T, BT> object)
         {
             return object.getProcedure();

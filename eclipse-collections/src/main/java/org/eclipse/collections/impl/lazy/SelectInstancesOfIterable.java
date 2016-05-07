@@ -40,21 +40,22 @@ public class SelectInstancesOfIterable<T>
         this.clazz = clazz;
     }
 
+    @Override
     public void each(Procedure<? super T> procedure)
     {
-        Iterate.forEach((Iterable<T>) this.adapted, new IfProcedure<T>(Predicates.instanceOf(this.clazz), procedure));
+        Iterate.forEach((Iterable<T>) this.adapted, new IfProcedure<>(Predicates.instanceOf(this.clazz), procedure));
     }
 
     @Override
     public void forEachWithIndex(ObjectIntProcedure<? super T> objectIntProcedure)
     {
-        Iterate.forEach((Iterable<T>) this.adapted, new IfObjectIntProcedure<T>(Predicates.instanceOf(this.clazz), objectIntProcedure));
+        Iterate.forEach((Iterable<T>) this.adapted, new IfObjectIntProcedure<>(Predicates.instanceOf(this.clazz), objectIntProcedure));
     }
 
     @Override
     public <P> void forEachWith(Procedure2<? super T, ? super P> procedure, P parameter)
     {
-        Iterate.forEachWith((Iterable<T>) this.adapted, new IfProcedureWith<T, P>(Predicates.instanceOf(this.clazz), procedure), parameter);
+        Iterate.forEachWith((Iterable<T>) this.adapted, new IfProcedureWith<>(Predicates.instanceOf(this.clazz), procedure), parameter);
     }
 
     @Override
@@ -72,13 +73,13 @@ public class SelectInstancesOfIterable<T>
     @Override
     public boolean allSatisfy(Predicate<? super T> predicate)
     {
-        return Iterate.allSatisfy((Iterable<T>) this.adapted, new AllSatisfyPredicate<T>(Predicates.instanceOf(this.clazz), predicate));
+        return Iterate.allSatisfy((Iterable<T>) this.adapted, new AllSatisfyPredicate<>(Predicates.instanceOf(this.clazz), predicate));
     }
 
     @Override
     public boolean noneSatisfy(Predicate<? super T> predicate)
     {
-        return Iterate.noneSatisfy((Iterable<T>) this.adapted, new AllSatisfyPredicate<T>(Predicates.instanceOf(this.clazz), predicate));
+        return Iterate.noneSatisfy((Iterable<T>) this.adapted, new AllSatisfyPredicate<>(Predicates.instanceOf(this.clazz), predicate));
     }
 
     @Override
@@ -87,8 +88,9 @@ public class SelectInstancesOfIterable<T>
         return Iterate.detect((Iterable<T>) this.adapted, Predicates.and(Predicates.instanceOf(this.clazz), predicate));
     }
 
+    @Override
     public Iterator<T> iterator()
     {
-        return new SelectInstancesOfIterator<T>(this.adapted, this.clazz);
+        return new SelectInstancesOfIterator<>(this.adapted, this.clazz);
     }
 }

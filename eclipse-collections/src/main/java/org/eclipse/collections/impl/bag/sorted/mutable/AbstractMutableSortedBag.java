@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -31,7 +31,6 @@ import org.eclipse.collections.api.block.function.primitive.ShortFunction;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
-import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.list.primitive.MutableBooleanList;
 import org.eclipse.collections.api.list.primitive.MutableByteList;
@@ -63,206 +62,221 @@ public abstract class AbstractMutableSortedBag<T>
         extends AbstractMutableBagIterable<T>
         implements MutableSortedBag<T>
 {
+    @Override
     @SuppressWarnings("AbstractMethodOverridesAbstractMethod")
     public abstract MutableSortedBag<T> clone();
 
+    @Override
     public ImmutableSortedBag<T> toImmutable()
     {
         return SortedBags.immutable.ofSortedBag(this);
     }
 
+    @Override
     public UnmodifiableSortedBag<T> asUnmodifiable()
     {
         return UnmodifiableSortedBag.of(this);
     }
 
+    @Override
     public MutableSortedBag<T> asSynchronized()
     {
         return SynchronizedSortedBag.of(this);
     }
 
+    @Override
     public MutableSortedBag<T> tap(Procedure<? super T> procedure)
     {
         this.forEach(procedure);
         return this;
     }
 
+    @Override
     public MutableSortedMap<T, Integer> toMapOfItemToCount()
     {
-        final MutableSortedMap<T, Integer> map = TreeSortedMap.newMap(this.comparator());
-        this.forEachWithOccurrences(new ObjectIntProcedure<T>()
-        {
-            public void value(T item, int count)
-            {
-                map.put(item, count);
-            }
-        });
+        MutableSortedMap<T, Integer> map = TreeSortedMap.newMap(this.comparator());
+        this.forEachWithOccurrences(map::put);
         return map;
     }
 
-    public <S> MutableSortedBag<S> selectInstancesOf(final Class<S> clazz)
+    @Override
+    public <S> MutableSortedBag<S> selectInstancesOf(Class<S> clazz)
     {
         Comparator<? super S> comparator = (Comparator<? super S>) this.comparator();
-        final MutableSortedBag<S> result = TreeBag.newBag(comparator);
-        this.forEachWithOccurrences(new ObjectIntProcedure<T>()
-        {
-            public void value(T each, int occurrences)
+        MutableSortedBag<S> result = TreeBag.newBag(comparator);
+        this.forEachWithOccurrences((each, occurrences) -> {
+            if (clazz.isInstance(each))
             {
-                if (clazz.isInstance(each))
-                {
-                    result.addOccurrences(clazz.cast(each), occurrences);
-                }
+                result.addOccurrences(clazz.cast(each), occurrences);
             }
         });
         return result;
     }
 
+    @Override
     public MutableSortedBag<T> takeWhile(Predicate<? super T> predicate)
     {
         MutableSortedBag<T> result = TreeBag.newBag(this.comparator());
         return IterableIterate.takeWhile(this, predicate, result);
     }
 
+    @Override
     public MutableSortedBag<T> dropWhile(Predicate<? super T> predicate)
     {
         MutableSortedBag<T> result = TreeBag.newBag(this.comparator());
         return IterableIterate.dropWhile(this, predicate, result);
     }
 
+    @Override
     public MutableSortedBag<T> select(Predicate<? super T> predicate)
     {
         return this.select(predicate, TreeBag.newBag(this.comparator()));
     }
 
+    @Override
     public <P> MutableSortedBag<T> selectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         return this.selectWith(predicate, parameter, TreeBag.newBag(this.comparator()));
     }
 
+    @Override
     public MutableSortedBag<T> reject(Predicate<? super T> predicate)
     {
         return this.reject(predicate, TreeBag.newBag(this.comparator()));
     }
 
+    @Override
     public <P> MutableSortedBag<T> rejectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         return this.rejectWith(predicate, parameter, TreeBag.newBag(this.comparator()));
     }
 
-    public PartitionMutableSortedBag<T> partition(final Predicate<? super T> predicate)
+    @Override
+    public PartitionMutableSortedBag<T> partition(Predicate<? super T> predicate)
     {
-        final PartitionMutableSortedBag<T> result = new PartitionTreeBag<T>(this.comparator());
-        this.forEachWithOccurrences(new ObjectIntProcedure<T>()
-        {
-            public void value(T each, int index)
-            {
-                MutableSortedBag<T> bucket = predicate.accept(each) ? result.getSelected() : result.getRejected();
-                bucket.addOccurrences(each, index);
-            }
+        PartitionMutableSortedBag<T> result = new PartitionTreeBag<>(this.comparator());
+        this.forEachWithOccurrences((each, index) -> {
+            MutableSortedBag<T> bucket = predicate.accept(each) ? result.getSelected() : result.getRejected();
+            bucket.addOccurrences(each, index);
         });
         return result;
     }
 
-    public <P> PartitionMutableSortedBag<T> partitionWith(final Predicate2<? super T, ? super P> predicate, final P parameter)
+    @Override
+    public <P> PartitionMutableSortedBag<T> partitionWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
-        final PartitionMutableSortedBag<T> result = new PartitionTreeBag<T>(this.comparator());
-        this.forEachWithOccurrences(new ObjectIntProcedure<T>()
-        {
-            public void value(T each, int index)
-            {
-                MutableSortedBag<T> bucket = predicate.accept(each, parameter) ? result.getSelected() : result.getRejected();
-                bucket.addOccurrences(each, index);
-            }
+        PartitionMutableSortedBag<T> result = new PartitionTreeBag<>(this.comparator());
+        this.forEachWithOccurrences((each, index) -> {
+            MutableSortedBag<T> bucket = predicate.accept(each, parameter) ? result.getSelected() : result.getRejected();
+            bucket.addOccurrences(each, index);
         });
         return result;
     }
 
+    @Override
     public PartitionMutableSortedBag<T> partitionWhile(Predicate<? super T> predicate)
     {
-        PartitionTreeBag<T> result = new PartitionTreeBag<T>(this.comparator());
+        PartitionTreeBag<T> result = new PartitionTreeBag<>(this.comparator());
         return IterableIterate.partitionWhile(this, predicate, result);
     }
 
+    @Override
     public <V> MutableList<V> collect(Function<? super T, ? extends V> function)
     {
-        return this.collect(function, FastList.<V>newList(this.size()));
+        return this.collect(function, FastList.newList(this.size()));
     }
 
+    @Override
     public <P, V> MutableList<V> collectWith(Function2<? super T, ? super P, ? extends V> function, P parameter)
     {
-        return this.collectWith(function, parameter, FastList.<V>newList());
+        return this.collectWith(function, parameter, FastList.newList());
     }
 
+    @Override
     public <V> MutableList<V> collectIf(Predicate<? super T> predicate, Function<? super T, ? extends V> function)
     {
-        return this.collectIf(predicate, function, FastList.<V>newList());
+        return this.collectIf(predicate, function, FastList.newList());
     }
 
+    @Override
     public <V> MutableList<V> flatCollect(Function<? super T, ? extends Iterable<V>> function)
     {
-        return this.flatCollect(function, FastList.<V>newList());
+        return this.flatCollect(function, FastList.newList());
     }
 
+    @Override
     public MutableBooleanList collectBoolean(BooleanFunction<? super T> booleanFunction)
     {
         return this.collectBoolean(booleanFunction, new BooleanArrayList());
     }
 
+    @Override
     public MutableByteList collectByte(ByteFunction<? super T> byteFunction)
     {
         return this.collectByte(byteFunction, new ByteArrayList());
     }
 
+    @Override
     public MutableCharList collectChar(CharFunction<? super T> charFunction)
     {
         return this.collectChar(charFunction, new CharArrayList());
     }
 
+    @Override
     public MutableDoubleList collectDouble(DoubleFunction<? super T> doubleFunction)
     {
         return this.collectDouble(doubleFunction, new DoubleArrayList());
     }
 
+    @Override
     public MutableFloatList collectFloat(FloatFunction<? super T> floatFunction)
     {
         return this.collectFloat(floatFunction, new FloatArrayList());
     }
 
+    @Override
     public MutableIntList collectInt(IntFunction<? super T> intFunction)
     {
         return this.collectInt(intFunction, new IntArrayList());
     }
 
+    @Override
     public MutableLongList collectLong(LongFunction<? super T> longFunction)
     {
         return this.collectLong(longFunction, new LongArrayList());
     }
 
+    @Override
     public MutableShortList collectShort(ShortFunction<? super T> shortFunction)
     {
         return this.collectShort(shortFunction, new ShortArrayList());
     }
 
+    @Override
     public <S> MutableList<Pair<T, S>> zip(Iterable<S> that)
     {
-        return this.zip(that, FastList.<Pair<T, S>>newList());
+        return this.zip(that, FastList.newList());
     }
 
+    @Override
     public MutableSortedBag<T> toReversed()
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".toReversed() not implemented yet");
     }
 
+    @Override
     public void reverseForEach(Procedure<? super T> procedure)
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".reverseForEach() not implemented yet");
     }
 
+    @Override
     public LazyIterable<T> asReversed()
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".asReversed() not implemented yet");
     }
 
+    @Override
     public int detectLastIndex(Predicate<? super T> predicate)
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".detectLastIndex() not implemented yet");

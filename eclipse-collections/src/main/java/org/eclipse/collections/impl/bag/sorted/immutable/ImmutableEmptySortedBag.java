@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -54,7 +54,7 @@ class ImmutableEmptySortedBag<T>
         extends AbstractImmutableSortedBag<T>
         implements Serializable
 {
-    static final ImmutableSortedBag<?> INSTANCE = new ImmutableEmptySortedBag<Object>();
+    static final ImmutableSortedBag<?> INSTANCE = new ImmutableEmptySortedBag<>();
 
     private static final long serialVersionUID = 1L;
     private final Comparator<? super T> comparator;
@@ -69,21 +69,25 @@ class ImmutableEmptySortedBag<T>
         this.comparator = comparator;
     }
 
+    @Override
     public ImmutableSortedBag<T> newWith(T element)
     {
         return SortedBags.immutable.with(this.comparator, element);
     }
 
+    @Override
     public ImmutableSortedBag<T> newWithAll(Iterable<? extends T> elements)
     {
         return SortedBags.immutable.withAll(this.comparator, elements);
     }
 
+    @Override
     public ImmutableSortedBag<T> newWithout(T element)
     {
         return this;
     }
 
+    @Override
     public ImmutableSortedBag<T> newWithoutAll(Iterable<? extends T> elements)
     {
         return this;
@@ -105,15 +109,18 @@ class ImmutableEmptySortedBag<T>
         return 0;
     }
 
+    @Override
     public void forEachWithOccurrences(ObjectIntProcedure<? super T> procedure)
     {
     }
 
+    @Override
     public int sizeDistinct()
     {
         return 0;
     }
 
+    @Override
     public int size()
     {
         return 0;
@@ -155,16 +162,19 @@ class ImmutableEmptySortedBag<T>
         return (ImmutableSortedBag<S>) this;
     }
 
+    @Override
     public <V> ImmutableSortedBagMultimap<V, T> groupBy(Function<? super T, ? extends V> function)
     {
         return TreeBagMultimap.<V, T>newMultimap(this.comparator).toImmutable();
     }
 
+    @Override
     public <V> ImmutableSortedBagMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function)
     {
         return TreeBagMultimap.<V, T>newMultimap(this.comparator).toImmutable();
     }
 
+    @Override
     public <V> ImmutableMap<V, T> groupByUniqueKey(Function<? super T, ? extends V> function)
     {
         return Maps.immutable.empty();
@@ -192,19 +202,23 @@ class ImmutableEmptySortedBag<T>
         return this;
     }
 
+    @Override
     public <S> boolean corresponds(OrderedIterable<S> other, Predicate2<? super T, ? super S> predicate)
     {
         return OrderedIterate.corresponds(this, other, predicate);
     }
 
+    @Override
     public void forEach(int startIndex, int endIndex, Procedure<? super T> procedure)
     {
     }
 
+    @Override
     public void each(Procedure<? super T> procedure)
     {
     }
 
+    @Override
     public void forEachWithIndex(int fromIndex, int toIndex, ObjectIntProcedure<? super T> objectIntProcedure)
     {
     }
@@ -214,11 +228,13 @@ class ImmutableEmptySortedBag<T>
     {
     }
 
+    @Override
     public int occurrencesOf(Object item)
     {
         return 0;
     }
 
+    @Override
     public Iterator<T> iterator()
     {
         return EmptyIterator.getInstance();
@@ -260,6 +276,7 @@ class ImmutableEmptySortedBag<T>
         throw new NoSuchElementException();
     }
 
+    @Override
     public Comparator<? super T> comparator()
     {
         return this.comparator;
@@ -271,36 +288,43 @@ class ImmutableEmptySortedBag<T>
         return SortedSets.immutable.with((Comparator<? super Pair<T, Integer>>) this.comparator);
     }
 
+    @Override
     public PartitionImmutableSortedBag<T> partitionWhile(Predicate<? super T> predicate)
     {
-        return new PartitionImmutableSortedBagImpl<T>(new PartitionTreeBag<T>(this.comparator()));
+        return new PartitionImmutableSortedBagImpl<>(new PartitionTreeBag<>(this.comparator()));
     }
 
+    @Override
     public ImmutableSortedSet<T> distinct()
     {
         return SortedSets.immutable.with(this.comparator);
     }
 
+    @Override
     public T getFirst()
     {
         return null;
     }
 
+    @Override
     public T getLast()
     {
         return null;
     }
 
+    @Override
     public ImmutableSortedBag<T> takeWhile(Predicate<? super T> predicate)
     {
         return this;
     }
 
+    @Override
     public ImmutableSortedBag<T> dropWhile(Predicate<? super T> predicate)
     {
         return this;
     }
 
+    @Override
     public int detectIndex(Predicate<? super T> predicate)
     {
         return -1;
@@ -318,11 +342,13 @@ class ImmutableEmptySortedBag<T>
         return Stacks.mutable.empty();
     }
 
+    @Override
     public int indexOf(Object object)
     {
         return -1;
     }
 
+    @Override
     public int compareTo(SortedBag<T> o)
     {
         return o.size() * -1;
@@ -338,11 +364,13 @@ class ImmutableEmptySortedBag<T>
         return Lists.immutable.empty();
     }
 
+    @Override
     public MutableSortedMap<T, Integer> toMapOfItemToCount()
     {
         return SortedMaps.mutable.of(this.comparator);
     }
 
+    @Override
     public ImmutableSortedBag<T> take(int count)
     {
         if (count < 0)
@@ -352,6 +380,7 @@ class ImmutableEmptySortedBag<T>
         return this;
     }
 
+    @Override
     public ImmutableSortedBag<T> drop(int count)
     {
         if (count < 0)

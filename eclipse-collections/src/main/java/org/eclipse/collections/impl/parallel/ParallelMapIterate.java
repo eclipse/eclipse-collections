@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -72,8 +72,8 @@ public final class ParallelMapIterate
     {
         if (map.size() > minForkSize)
         {
-            Procedure<Pair<K, V>> pairProcedure = new PairProcedure<K, V>(procedure);
-            ParallelIterate.forEach(MapIterate.toListOfPairs(map), new PassThruProcedureFactory<Procedure<Pair<K, V>>>(pairProcedure), new PassThruCombiner<Procedure<Pair<K, V>>>(), minForkSize, taskCount);
+            Procedure<Pair<K, V>> pairProcedure = new PairProcedure<>(procedure);
+            ParallelIterate.forEach(MapIterate.toListOfPairs(map), new PassThruProcedureFactory<>(pairProcedure), new PassThruCombiner<>(), minForkSize, taskCount);
         }
         else
         {
@@ -96,11 +96,11 @@ public final class ParallelMapIterate
     {
         if (map.size() > minForkSize)
         {
-            Procedure<Pair<K, V>> pairProcedure = new PairProcedure<K, V>(procedure);
+            Procedure<Pair<K, V>> pairProcedure = new PairProcedure<>(procedure);
             ParallelIterate.forEachInListOnExecutor(
                     MapIterate.toListOfPairs(map),
-                    new PassThruProcedureFactory<Procedure<Pair<K, V>>>(pairProcedure),
-                    new PassThruCombiner<Procedure<Pair<K, V>>>(),
+                    new PassThruProcedureFactory<>(pairProcedure),
+                    new PassThruCombiner<>(),
                     minForkSize,
                     taskCount,
                     executor);
@@ -122,6 +122,7 @@ public final class ParallelMapIterate
             this.procedure = procedure;
         }
 
+        @Override
         public void value(Pair<T1, T2> pair)
         {
             this.procedure.value(pair.getOne(), pair.getTwo());

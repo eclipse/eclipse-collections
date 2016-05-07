@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -108,10 +108,10 @@ public class ParallelIterateTest
                 interval.toSortedSet().asUnmodifiable(),
                 interval.toSortedSet().asSynchronized(),
                 interval.toSortedSet().toImmutable(),
-                interval.toMap(Functions.<Integer>identity(), Functions.<Integer>identity()),
-                interval.toMap(Functions.<Integer>identity(), Functions.<Integer>identity()).asUnmodifiable(),
-                interval.toMap(Functions.<Integer>identity(), Functions.<Integer>identity()).asSynchronized(),
-                interval.toMap(Functions.<Integer>identity(), Functions.<Integer>identity()).toImmutable(),
+                interval.toMap(Functions.identity(), Functions.identity()),
+                interval.toMap(Functions.identity(), Functions.identity()).asUnmodifiable(),
+                interval.toMap(Functions.identity(), Functions.identity()).asSynchronized(),
+                interval.toMap(Functions.identity(), Functions.identity()).toImmutable(),
                 new CompositeFastList<Integer>().withAll(interval.toList()),
                 new CompositeFastList<Integer>().withAll(interval.toList()).asUnmodifiable(),
                 new CompositeFastList<Integer>().withAll(interval.toList()).asSynchronized(),
@@ -346,7 +346,7 @@ public class ParallelIterateTest
     private void basicSelect(RichIterable<Integer> iterable)
     {
         Collection<Integer> actual1 = ParallelIterate.select(iterable, Predicates.greaterThan(100));
-        Collection<Integer> actual2 = ParallelIterate.select(iterable, Predicates.greaterThan(100), HashBag.<Integer>newBag(), 3, this.executor, true);
+        Collection<Integer> actual2 = ParallelIterate.select(iterable, Predicates.greaterThan(100), HashBag.newBag(), 3, this.executor, true);
         Collection<Integer> actual3 = ParallelIterate.select(iterable, Predicates.greaterThan(100), true);
         RichIterable<Integer> expected = iterable.select(Predicates.greaterThan(100));
         Assert.assertEquals(expected.getClass().getSimpleName() + '/' + actual1.getClass().getSimpleName(), expected, actual1);
@@ -390,7 +390,7 @@ public class ParallelIterateTest
     private void basicReject(RichIterable<Integer> iterable)
     {
         Collection<Integer> actual1 = ParallelIterate.reject(iterable, Predicates.greaterThan(100));
-        Collection<Integer> actual2 = ParallelIterate.reject(iterable, Predicates.greaterThan(100), HashBag.<Integer>newBag(), 3, this.executor, true);
+        Collection<Integer> actual2 = ParallelIterate.reject(iterable, Predicates.greaterThan(100), HashBag.newBag(), 3, this.executor, true);
         Collection<Integer> actual3 = ParallelIterate.reject(iterable, Predicates.greaterThan(100), true);
         RichIterable<Integer> expected = iterable.reject(Predicates.greaterThan(100));
         Assert.assertEquals(expected.getClass().getSimpleName() + '/' + actual1.getClass().getSimpleName(), expected, actual1);
@@ -407,7 +407,7 @@ public class ParallelIterateTest
     private void basicCollect(RichIterable<Integer> iterable)
     {
         Collection<String> actual1 = ParallelIterate.collect(iterable, String::valueOf);
-        Collection<String> actual2 = ParallelIterate.collect(iterable, String::valueOf, HashBag.<String>newBag(), 3, this.executor, false);
+        Collection<String> actual2 = ParallelIterate.collect(iterable, String::valueOf, HashBag.newBag(), 3, this.executor, false);
         Collection<String> actual3 = ParallelIterate.collect(iterable, String::valueOf, true);
         RichIterable<String> expected = iterable.collect(String::valueOf);
         Verify.assertSize(200, actual1);
@@ -427,8 +427,8 @@ public class ParallelIterateTest
     {
         Predicate<Integer> greaterThan = Predicates.greaterThan(100);
         Collection<String> actual1 = ParallelIterate.collectIf(collection, greaterThan, String::valueOf);
-        Collection<String> actual2 = ParallelIterate.collectIf(collection, greaterThan, String::valueOf, HashBag.<String>newBag(), 3, this.executor, true);
-        Collection<String> actual3 = ParallelIterate.collectIf(collection, greaterThan, String::valueOf, HashBag.<String>newBag(), 3, this.executor, true);
+        Collection<String> actual2 = ParallelIterate.collectIf(collection, greaterThan, String::valueOf, HashBag.newBag(), 3, this.executor, true);
+        Collection<String> actual3 = ParallelIterate.collectIf(collection, greaterThan, String::valueOf, HashBag.newBag(), 3, this.executor, true);
         Bag<String> expected = collection.collectIf(greaterThan, String::valueOf).toBag();
         Verify.assertSize(100, actual1);
         Verify.assertNotContains(String.valueOf(90), actual1);
@@ -447,12 +447,12 @@ public class ParallelIterateTest
         Multimap<String, Integer> expectedAsSet = iterable.toSet().groupBy(String::valueOf);
         Multimap<String, Integer> result1 = ParallelIterate.groupBy(iterable.toList(), String::valueOf, 100);
         Multimap<String, Integer> result2 = ParallelIterate.groupBy(iterable.toList(), String::valueOf);
-        Multimap<String, Integer> result3 = ParallelIterate.groupBy(iterable.toSet(), String::valueOf, SynchronizedPutUnifiedSetMultimap.<String, Integer>newMultimap(), 100);
-        Multimap<String, Integer> result4 = ParallelIterate.groupBy(iterable.toSet(), String::valueOf, SynchronizedPutUnifiedSetMultimap.<String, Integer>newMultimap());
-        Multimap<String, Integer> result5 = ParallelIterate.groupBy(iterable.toSortedSet(), String::valueOf, SynchronizedPutUnifiedSetMultimap.<String, Integer>newMultimap(), 100);
-        Multimap<String, Integer> result6 = ParallelIterate.groupBy(iterable.toSortedSet(), String::valueOf, SynchronizedPutUnifiedSetMultimap.<String, Integer>newMultimap());
-        Multimap<String, Integer> result7 = ParallelIterate.groupBy(iterable.toBag(), String::valueOf, SynchronizedPutHashBagMultimap.<String, Integer>newMultimap(), 100);
-        Multimap<String, Integer> result8 = ParallelIterate.groupBy(iterable.toBag(), String::valueOf, SynchronizedPutHashBagMultimap.<String, Integer>newMultimap());
+        Multimap<String, Integer> result3 = ParallelIterate.groupBy(iterable.toSet(), String::valueOf, SynchronizedPutUnifiedSetMultimap.newMultimap(), 100);
+        Multimap<String, Integer> result4 = ParallelIterate.groupBy(iterable.toSet(), String::valueOf, SynchronizedPutUnifiedSetMultimap.newMultimap());
+        Multimap<String, Integer> result5 = ParallelIterate.groupBy(iterable.toSortedSet(), String::valueOf, SynchronizedPutUnifiedSetMultimap.newMultimap(), 100);
+        Multimap<String, Integer> result6 = ParallelIterate.groupBy(iterable.toSortedSet(), String::valueOf, SynchronizedPutUnifiedSetMultimap.newMultimap());
+        Multimap<String, Integer> result7 = ParallelIterate.groupBy(iterable.toBag(), String::valueOf, SynchronizedPutHashBagMultimap.newMultimap(), 100);
+        Multimap<String, Integer> result8 = ParallelIterate.groupBy(iterable.toBag(), String::valueOf, SynchronizedPutHashBagMultimap.newMultimap());
         Multimap<String, Integer> result9 = ParallelIterate.groupBy(iterable.toList().toImmutable(), String::valueOf);
         Assert.assertEquals(expected, HashBagMultimap.newMultimap(result1));
         Assert.assertEquals(expected, HashBagMultimap.newMultimap(result2));
@@ -568,7 +568,7 @@ public class ParallelIterateTest
         MutableList<Integer> group2 = Interval.fromTo(100_001, 200_000).toList().shuffleThis();
         MutableList<Integer> integers = Lists.mutable.withAll(group1);
         integers.addAll(group2);
-        ObjectDoubleMap<Integer> result = ParallelIterate.<Integer, Integer>sumByDouble(
+        ObjectDoubleMap<Integer> result = ParallelIterate.sumByDouble(
                 integers,
                 integer -> integer > 100_000 ? 2 : 1,
                 integer -> {
@@ -616,7 +616,7 @@ public class ParallelIterateTest
         MutableList<Integer> group2 = Interval.fromTo(100_001, 200_000).toList().shuffleThis();
         MutableList<Integer> integers = Lists.mutable.withAll(group1);
         integers.addAll(group2);
-        ObjectDoubleMap<Integer> result = ParallelIterate.<Integer, Integer>sumByFloat(
+        ObjectDoubleMap<Integer> result = ParallelIterate.sumByFloat(
                 integers,
                 integer -> integer > 100_000 ? 2 : 1,
                 integer -> {
@@ -755,10 +755,10 @@ public class ParallelIterateTest
     private void basicFlatCollect(RichIterable<Integer> iterable)
     {
         Collection<String> actual1 = ParallelIterate.flatCollect(iterable, INT_TO_TWO_STRINGS);
-        Collection<String> actual2 = ParallelIterate.flatCollect(iterable, INT_TO_TWO_STRINGS, HashBag.<String>newBag(), 3, this.executor, false);
+        Collection<String> actual2 = ParallelIterate.flatCollect(iterable, INT_TO_TWO_STRINGS, HashBag.newBag(), 3, this.executor, false);
         Collection<String> actual3 = ParallelIterate.flatCollect(iterable, INT_TO_TWO_STRINGS, true);
         RichIterable<String> expected1 = iterable.flatCollect(INT_TO_TWO_STRINGS);
-        RichIterable<String> expected2 = iterable.flatCollect(INT_TO_TWO_STRINGS, HashBag.<String>newBag());
+        RichIterable<String> expected2 = iterable.flatCollect(INT_TO_TWO_STRINGS, HashBag.newBag());
         Verify.assertContains(String.valueOf(200), actual1);
         Assert.assertEquals(expected1.getClass().getSimpleName() + '/' + actual1.getClass().getSimpleName(), expected1, actual1);
         Assert.assertEquals(expected2.getClass().getSimpleName() + '/' + actual2.getClass().getSimpleName(), expected2, actual2);

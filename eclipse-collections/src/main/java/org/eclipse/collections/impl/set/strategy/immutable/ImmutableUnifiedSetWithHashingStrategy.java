@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -40,14 +40,15 @@ final class ImmutableUnifiedSetWithHashingStrategy<T>
 
     public static <T> ImmutableSet<T> newSetWith(HashingStrategy<? super T> hashingStrategy, T... elements)
     {
-        return new ImmutableUnifiedSetWithHashingStrategy<T>(UnifiedSetWithHashingStrategy.newSetWith(hashingStrategy, elements));
+        return new ImmutableUnifiedSetWithHashingStrategy<>(UnifiedSetWithHashingStrategy.newSetWith(hashingStrategy, elements));
     }
 
     public static <T> ImmutableSet<T> newSet(HashingStrategy<? super T> hashingStrategy, Iterable<T> iterable)
     {
-        return new ImmutableUnifiedSetWithHashingStrategy<T>(UnifiedSetWithHashingStrategy.newSet(hashingStrategy, iterable));
+        return new ImmutableUnifiedSetWithHashingStrategy<>(UnifiedSetWithHashingStrategy.newSet(hashingStrategy, iterable));
     }
 
+    @Override
     public int size()
     {
         return this.delegate.size();
@@ -71,31 +72,37 @@ final class ImmutableUnifiedSetWithHashingStrategy<T>
         return this.delegate.contains(object);
     }
 
+    @Override
     public Iterator<T> iterator()
     {
-        return new UnmodifiableIteratorAdapter<T>(this.delegate.iterator());
+        return new UnmodifiableIteratorAdapter<>(this.delegate.iterator());
     }
 
+    @Override
     public T getFirst()
     {
         return this.delegate.getFirst();
     }
 
+    @Override
     public T getLast()
     {
         return this.delegate.getLast();
     }
 
+    @Override
     public void each(Procedure<? super T> procedure)
     {
         this.delegate.forEach(procedure);
     }
 
+    @Override
     public int getBatchCount(int batchSize)
     {
         return this.delegate.getBatchCount(batchSize);
     }
 
+    @Override
     public void batchForEach(Procedure<? super T> procedure, int sectionIndex, int sectionCount)
     {
         this.delegate.batchForEach(procedure, sectionIndex, sectionCount);
@@ -103,7 +110,7 @@ final class ImmutableUnifiedSetWithHashingStrategy<T>
 
     private Object writeReplace()
     {
-        return new ImmutableSetWithHashingStrategySerializationProxy<T>(this, this.delegate.hashingStrategy());
+        return new ImmutableSetWithHashingStrategySerializationProxy<>(this, this.delegate.hashingStrategy());
     }
 
     @Override

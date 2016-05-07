@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -84,15 +84,15 @@ public class UnifiedSetWithHashingStrategyTest extends AbstractUnifiedSetTestCas
     @Override
     protected <T> MutableSet<T> newWith(T... littleElements)
     {
-        return UnifiedSetWithHashingStrategy.newSetWith(HashingStrategies.nullSafeHashingStrategy(HashingStrategies.<T>defaultStrategy()), littleElements);
+        return UnifiedSetWithHashingStrategy.newSetWith(HashingStrategies.nullSafeHashingStrategy(HashingStrategies.defaultStrategy()), littleElements);
     }
 
     @Test
     public void newSet_throws()
     {
-        Verify.assertThrows(IllegalArgumentException.class, () -> new UnifiedSetWithHashingStrategy<Integer>(INTEGER_HASHING_STRATEGY, -1, 0.5f));
-        Verify.assertThrows(IllegalArgumentException.class, () -> new UnifiedSetWithHashingStrategy<Integer>(INTEGER_HASHING_STRATEGY, 1, -0.5f));
-        Verify.assertThrows(IllegalArgumentException.class, () -> new UnifiedSetWithHashingStrategy<Integer>(INTEGER_HASHING_STRATEGY, 1, 1.5f));
+        Verify.assertThrows(IllegalArgumentException.class, () -> new UnifiedSetWithHashingStrategy<>(INTEGER_HASHING_STRATEGY, -1, 0.5f));
+        Verify.assertThrows(IllegalArgumentException.class, () -> new UnifiedSetWithHashingStrategy<>(INTEGER_HASHING_STRATEGY, 1, -0.5f));
+        Verify.assertThrows(IllegalArgumentException.class, () -> new UnifiedSetWithHashingStrategy<>(INTEGER_HASHING_STRATEGY, 1, 1.5f));
     }
 
     @Override
@@ -197,7 +197,7 @@ public class UnifiedSetWithHashingStrategyTest extends AbstractUnifiedSetTestCas
 
         MutableSet<String> list = UnifiedSetWithHashingStrategy.newSet(STRING_HASHING_STRATEGY).with("A")
                 .withAll(Lists.fixedSize.of("1", "2"))
-                .withAll(Lists.fixedSize.<String>of())
+                .withAll(Lists.fixedSize.of())
                 .withAll(Sets.fixedSize.of("3", "4"));
         Verify.assertEqualsAndHashCode(UnifiedSetWithHashingStrategy.newSetWith(
                 STRING_HASHING_STRATEGY, "A", "1", "2", "3", "4"), list);

@@ -63,6 +63,7 @@ public interface OrderedIterable<T> extends RichIterable<T>
      * iterable is empty, null is returned.  If null is a valid element of the container, then a developer would need to
      * check to see if the iterable is empty to validate that a null result was not due to the container being empty.
      */
+    @Override
     T getFirst();
 
     /**
@@ -71,8 +72,10 @@ public interface OrderedIterable<T> extends RichIterable<T>
      * empty, null is returned.  If null is a valid element of the container, then a developer would need to check to
      * see if the iterable is empty to validate that a null result was not due to the container being empty.
      */
+    @Override
     T getLast();
 
+    @Override
     OrderedIterable<T> tap(Procedure<? super T> procedure);
 
     /**
@@ -147,6 +150,7 @@ public interface OrderedIterable<T> extends RichIterable<T>
      * });
      * </pre>
      */
+    @Override
     void forEachWithIndex(ObjectIntProcedure<? super T> objectIntProcedure);
 
     /**
@@ -181,6 +185,7 @@ public interface OrderedIterable<T> extends RichIterable<T>
      * @throws ClassCastException     if the elements are not {@link Comparable}
      * @throws NoSuchElementException if the OrderedIterable is empty
      */
+    @Override
     T min();
 
     /**
@@ -190,44 +195,64 @@ public interface OrderedIterable<T> extends RichIterable<T>
      * @throws ClassCastException     if the elements are not {@link Comparable}
      * @throws NoSuchElementException if the OrderedIterable is empty
      */
+    @Override
     T max();
 
+    @Override
     OrderedIterable<T> select(Predicate<? super T> predicate);
 
+    @Override
     <P> OrderedIterable<T> selectWith(Predicate2<? super T, ? super P> predicate, P parameter);
 
+    @Override
     OrderedIterable<T> reject(Predicate<? super T> predicate);
 
+    @Override
     <P> OrderedIterable<T> rejectWith(Predicate2<? super T, ? super P> predicate, P parameter);
 
+    @Override
     PartitionOrderedIterable<T> partition(Predicate<? super T> predicate);
 
+    @Override
     <P> PartitionOrderedIterable<T> partitionWith(Predicate2<? super T, ? super P> predicate, P parameter);
 
+    @Override
     <S> OrderedIterable<S> selectInstancesOf(Class<S> clazz);
 
+    @Override
     <V> OrderedIterable<V> collect(Function<? super T, ? extends V> function);
 
+    @Override
     <P, V> OrderedIterable<V> collectWith(Function2<? super T, ? super P, ? extends V> function, P parameter);
 
+    @Override
     <V> OrderedIterable<V> collectIf(Predicate<? super T> predicate, Function<? super T, ? extends V> function);
 
+    @Override
     <V> OrderedIterable<V> flatCollect(Function<? super T, ? extends Iterable<V>> function);
 
+    @Override
     OrderedBooleanIterable collectBoolean(BooleanFunction<? super T> booleanFunction);
 
+    @Override
     OrderedByteIterable collectByte(ByteFunction<? super T> byteFunction);
 
+    @Override
     OrderedCharIterable collectChar(CharFunction<? super T> charFunction);
 
+    @Override
     OrderedDoubleIterable collectDouble(DoubleFunction<? super T> doubleFunction);
 
+    @Override
     OrderedFloatIterable collectFloat(FloatFunction<? super T> floatFunction);
 
+    @Override
     OrderedIntIterable collectInt(IntFunction<? super T> intFunction);
 
+    @Override
     OrderedLongIterable collectLong(LongFunction<? super T> longFunction);
 
+    @Override
     OrderedShortIterable collectShort(ShortFunction<? super T> shortFunction);
 
     /**
@@ -238,8 +263,10 @@ public interface OrderedIterable<T> extends RichIterable<T>
      */
     int detectIndex(Predicate<? super T> predicate);
 
+    @Override
     <V> OrderedIterableMultimap<V, T> groupBy(Function<? super T, ? extends V> function);
 
+    @Override
     <V> OrderedIterableMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function);
 
     /**
@@ -254,17 +281,21 @@ public interface OrderedIterable<T> extends RichIterable<T>
      * OrderedIterable} and that. The length of the returned {@code OrderedIterable} is the minimum of the lengths of
      * this {@code OrderedIterable} and that.
      */
+    @Override
     <S> OrderedIterable<Pair<T, S>> zip(Iterable<S> that);
 
     /**
      * Same as {@link #zip(Iterable)} but uses {@code target} for output.
      */
+    @Override
     <S, R extends Collection<Pair<T, S>>> R zip(Iterable<S> that, R target);
 
+    @Override
     OrderedIterable<Pair<T, Integer>> zipWithIndex();
 
     /**
      * Same as {@link #zipWithIndex()} but uses {@code target} for output.
      */
+    @Override
     <R extends Collection<Pair<T, Integer>>> R zipWithIndex(R target);
 }

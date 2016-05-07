@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -24,6 +24,6 @@ public class ImmutableTripletonListSerializationTest
                         + "Y3Q7TAAIZWxlbWVudDJxAH4AAUwACGVsZW1lbnQzcQB+AAF4cHNyABFqYXZhLmxhbmcuSW50ZWdl\n"
                         + "chLioKT3gYc4AgABSQAFdmFsdWV4cgAQamF2YS5sYW5nLk51bWJlcoaslR0LlOCLAgAAeHAAAAAB\n"
                         + "c3EAfgADAAAAAnNxAH4AAwAAAAM=",
-                new ImmutableTripletonList<Integer>(1, 2, 3));
+                new ImmutableTripletonList<>(1, 2, 3));
     }
 }

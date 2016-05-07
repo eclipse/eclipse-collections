@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -25,6 +25,6 @@ public class ImmutableObjectDoubleHashMapSerializationTest
                         + "aXZlLkFic3RyYWN0SW1tdXRhYmxlT2JqZWN0RG91YmxlTWFwJEltbXV0YWJsZU9iamVjdERvdWJs\n"
                         + "ZU1hcFNlcmlhbGl6YXRpb25Qcm94eQAAAAAAAAABDAAAeHB3BAAAAAJ0AAEydwhAAAAAAAAAAHQA\n"
                         + "ATF3CD/wAAAAAAAAeA==",
-                new ImmutableObjectDoubleHashMap<String>(ObjectDoubleHashMap.newWithKeysValues("1", 1.0, "2", 2.0)));
+                new ImmutableObjectDoubleHashMap<>(ObjectDoubleHashMap.newWithKeysValues("1", 1.0, "2", 2.0)));
     }
 }

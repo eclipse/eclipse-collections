@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -28,6 +28,6 @@ public class ImmutableEntryWithHashingStrategySerializationTest
                         + "YWJsZUVudHJ5AAAAAAAAAAECAAJMAANrZXl0ABJMamF2YS9sYW5nL09iamVjdDtMAAV2YWx1ZXEA\n"
                         + "fgADeHBwcHNyAExvcmcuZWNsaXBzZS5jb2xsZWN0aW9ucy5pbXBsLmJsb2NrLmZhY3RvcnkuSGFz\n"
                         + "aGluZ1N0cmF0ZWdpZXMkRGVmYXVsdFN0cmF0ZWd5AAAAAAAAAAECAAB4cA==",
-                new ImmutableEntryWithHashingStrategy<Object, Object>(null, null, HashingStrategies.defaultStrategy()));
+                new ImmutableEntryWithHashingStrategy<>(null, null, HashingStrategies.defaultStrategy()));
     }
 }

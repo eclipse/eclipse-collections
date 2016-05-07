@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -21,36 +21,43 @@ import org.eclipse.collections.api.set.primitive.ImmutableBooleanSet;
  */
 public class ImmutableBooleanSetFactoryImpl implements ImmutableBooleanSetFactory
 {
+    @Override
     public ImmutableBooleanSet empty()
     {
         return ImmutableBooleanEmptySet.INSTANCE;
     }
 
+    @Override
     public ImmutableBooleanSet of()
     {
         return this.empty();
     }
 
+    @Override
     public ImmutableBooleanSet with()
     {
         return this.empty();
     }
 
+    @Override
     public ImmutableBooleanSet of(boolean one)
     {
         return this.with(one);
     }
 
+    @Override
     public ImmutableBooleanSet with(boolean one)
     {
         return one ? ImmutableTrueSet.INSTANCE : ImmutableFalseSet.INSTANCE;
     }
 
+    @Override
     public ImmutableBooleanSet of(boolean... items)
     {
         return this.with(items);
     }
 
+    @Override
     public ImmutableBooleanSet with(boolean... items)
     {
         if (items == null || items.length == 0)
@@ -69,11 +76,13 @@ public class ImmutableBooleanSetFactoryImpl implements ImmutableBooleanSetFactor
         return result;
     }
 
+    @Override
     public ImmutableBooleanSet ofAll(BooleanIterable items)
     {
         return this.withAll(items);
     }
 
+    @Override
     public ImmutableBooleanSet withAll(BooleanIterable items)
     {
         if (items instanceof ImmutableBooleanSet)

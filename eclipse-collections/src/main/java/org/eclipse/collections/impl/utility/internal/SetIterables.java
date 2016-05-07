@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -13,8 +13,6 @@ package org.eclipse.collections.impl.utility.internal;
 import java.util.Set;
 
 import org.eclipse.collections.api.LazyIterable;
-import org.eclipse.collections.api.block.function.Function;
-import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.set.SetIterable;
@@ -44,7 +42,7 @@ public final class SetIterables
             SetIterable<? extends E> setA,
             SetIterable<? extends E> setB)
     {
-        return SetIterables.unionInto(setA, setB, UnifiedSet.<E>newSet());
+        return SetIterables.unionInto(setA, setB, UnifiedSet.newSet());
     }
 
     public static <E, R extends Set<E>> R unionInto(
@@ -61,7 +59,7 @@ public final class SetIterables
             SetIterable<? extends E> setA,
             SetIterable<? extends E> setB)
     {
-        return SetIterables.intersectInto(setA, setB, UnifiedSet.<E>newSet());
+        return SetIterables.intersectInto(setA, setB, UnifiedSet.newSet());
     }
 
     public static <E, R extends Set<E>> R intersectInto(
@@ -79,7 +77,7 @@ public final class SetIterables
             SetIterable<? extends E> minuendSet,
             SetIterable<? extends E> subtrahendSet)
     {
-        return SetIterables.differenceInto(minuendSet, subtrahendSet, UnifiedSet.<E>newSet());
+        return SetIterables.differenceInto(minuendSet, subtrahendSet, UnifiedSet.newSet());
     }
 
     public static <E, R extends Set<E>> R differenceInto(
@@ -97,7 +95,7 @@ public final class SetIterables
             SetIterable<? extends E> setA,
             SetIterable<? extends E> setB)
     {
-        return SetIterables.symmetricDifferenceInto(setA, setB, UnifiedSet.<E>newSet());
+        return SetIterables.symmetricDifferenceInto(setA, setB, UnifiedSet.newSet());
     }
 
     public static <E, R extends Set<E>> R symmetricDifferenceInto(
@@ -129,31 +127,19 @@ public final class SetIterables
 
     public static <T> MutableSet<MutableSet<T>> powerSet(Set<T> set)
     {
-        MutableSet<MutableSet<T>> seed = UnifiedSet.<MutableSet<T>>newSetWith(UnifiedSet.<T>newSet());
+        MutableSet<MutableSet<T>> seed = UnifiedSet.newSetWith(UnifiedSet.newSet());
         return powerSetWithSeed(set, seed);
     }
 
     public static <T> MutableSet<MutableSet<T>> powerSet(UnifiedSetWithHashingStrategy<T> set)
     {
-        MutableSet<MutableSet<T>> seed = UnifiedSet.<MutableSet<T>>newSetWith(set.newEmpty());
+        MutableSet<MutableSet<T>> seed = UnifiedSet.newSetWith(set.newEmpty());
         return powerSetWithSeed(set, seed);
     }
 
     private static <T> MutableSet<MutableSet<T>> powerSetWithSeed(Set<T> set, MutableSet<MutableSet<T>> seed)
     {
-        return Iterate.injectInto(seed, set, new Function2<MutableSet<MutableSet<T>>, T, MutableSet<MutableSet<T>>>()
-        {
-            public MutableSet<MutableSet<T>> value(MutableSet<MutableSet<T>> accumulator, final T element)
-            {
-                return SetIterables.union(accumulator, accumulator.collect(new Function<MutableSet<T>, MutableSet<T>>()
-                {
-                    public MutableSet<T> valueOf(MutableSet<T> innerSet)
-                    {
-                        return innerSet.clone().with(element);
-                    }
-                }));
-            }
-        });
+        return Iterate.injectInto(seed, set, (accumulator, element) -> SetIterables.union(accumulator, accumulator.collect(innerSet -> innerSet.clone().with(element))));
     }
 
     /**
@@ -161,29 +147,11 @@ public final class SetIterables
      */
     public static <T> ImmutableSet<ImmutableSet<T>> immutablePowerSet(Set<T> set)
     {
-        return powerSet(set).collect(new Function<MutableSet<T>, ImmutableSet<T>>()
-        {
-            public ImmutableSet<T> valueOf(MutableSet<T> set)
-            {
-                return set.toImmutable();
-            }
-        }).toImmutable();
+        return powerSet(set).collect(MutableSet<T>::toImmutable).toImmutable();
     }
 
-    public static <A, B> LazyIterable<Pair<A, B>> cartesianProduct(SetIterable<A> set1, final SetIterable<B> set2)
+    public static <A, B> LazyIterable<Pair<A, B>> cartesianProduct(SetIterable<A> set1, SetIterable<B> set2)
     {
-        return LazyIterate.flatCollect(set1, new Function<A, LazyIterable<Pair<A, B>>>()
-        {
-            public LazyIterable<Pair<A, B>> valueOf(final A first)
-            {
-                return LazyIterate.collect(set2, new Function<B, Pair<A, B>>()
-                {
-                    public Pair<A, B> valueOf(B second)
-                    {
-                        return Tuples.pair(first, second);
-                    }
-                });
-            }
-        });
+        return LazyIterate.flatCollect(set1, first -> LazyIterate.collect(set2, second -> Tuples.pair(first, second)));
     }
 }

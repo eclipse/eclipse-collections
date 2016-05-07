@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -37,6 +37,7 @@ final class ImmutableSingletonList<T>
         this.element1 = obj1;
     }
 
+    @Override
     public int size()
     {
         return 1;
@@ -48,11 +49,13 @@ final class ImmutableSingletonList<T>
         return Comparators.nullSafeEquals(obj, this.element1);
     }
 
+    @Override
     public void each(Procedure<? super T> procedure)
     {
         procedure.value(this.element1);
     }
 
+    @Override
     public T get(int index)
     {
         if (index == 0)
@@ -80,6 +83,7 @@ final class ImmutableSingletonList<T>
         return this;
     }
 
+    @Override
     public ImmutableList<T> newWith(T newItem)
     {
         return Lists.immutable.with(this.element1, newItem);

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -17,7 +17,6 @@ import java.io.ObjectOutput;
 import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.block.function.Function2;
-import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.multimap.bag.ImmutableBagMultimap;
 import org.eclipse.collections.api.multimap.bag.MutableBagMultimap;
@@ -47,6 +46,7 @@ public abstract class AbstractMutableBagMultimap<K, V> extends AbstractMutableMu
         super(size);
     }
 
+    @Override
     public MutableBagMultimap<K, V> toMutable()
     {
         MutableBagMultimap<K, V> mutableBagMultimap = this.newEmpty();
@@ -54,28 +54,24 @@ public abstract class AbstractMutableBagMultimap<K, V> extends AbstractMutableMu
         return mutableBagMultimap;
     }
 
+    @Override
     public ImmutableBagMultimap<K, V> toImmutable()
     {
-        final MutableMap<K, ImmutableBag<V>> result = (MutableMap<K, ImmutableBag<V>>) (MutableMap<?, ?>) this.createMapWithKeyCount(this.map.size());
+        MutableMap<K, ImmutableBag<V>> result = (MutableMap<K, ImmutableBag<V>>) (MutableMap<?, ?>) this.createMapWithKeyCount(this.map.size());
 
-        this.map.forEachKeyValue(new Procedure2<K, MutableBag<V>>()
-        {
-            public void value(K key, MutableBag<V> bag)
-            {
-                result.put(key, bag.toImmutable());
-            }
-        });
+        this.map.forEachKeyValue((key, bag) -> result.put(key, bag.toImmutable()));
 
-        return new ImmutableBagMultimapImpl<K, V>(result);
-    }
-
-    public <K2, V2> HashBagMultimap<K2, V2> collectKeysValues(Function2<? super K, ? super V, Pair<K2, V2>> function)
-    {
-        return this.collectKeysValues(function, HashBagMultimap.<K2, V2>newMultimap());
+        return new ImmutableBagMultimapImpl<>(result);
     }
 
     @Override
-    public void writeExternal(final ObjectOutput out) throws IOException
+    public <K2, V2> HashBagMultimap<K2, V2> collectKeysValues(Function2<? super K, ? super V, Pair<K2, V2>> function)
+    {
+        return this.collectKeysValues(function, HashBagMultimap.newMultimap());
+    }
+
+    @Override
+    public void writeExternal(ObjectOutput out) throws IOException
     {
         int keysCount = this.map.size();
         out.writeInt(keysCount);
@@ -118,6 +114,7 @@ public abstract class AbstractMutableBagMultimap<K, V> extends AbstractMutableMu
         }
     }
 
+    @Override
     public void putOccurrences(K key, V value, int occurrences)
     {
         if (occurrences < 0)

@@ -49,6 +49,7 @@ public class GenerateMojo extends AbstractMojo
      */
     private MavenProject project;
 
+    @Override
     public void execute() throws MojoExecutionException, MojoFailureException
     {
         if (this.skipCodeGen)
@@ -62,7 +63,7 @@ public class GenerateMojo extends AbstractMojo
 
         List<URL> urls = Arrays.asList(((URLClassLoader) GenerateMojo.class.getClassLoader()).getURLs());
 
-        final boolean[] error = new boolean[1];
+        boolean[] error = new boolean[1];
         EclipseCollectionsCodeGenerator.ErrorListener errorListener = new EclipseCollectionsCodeGenerator.ErrorListener()
         {
             public void error(String string)

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -37,9 +37,10 @@ public final class MultimapPutProcedure<K, V> implements Procedure<V>
             MutableMultimap<K, V> multimap,
             Function<? super V, ? extends K> keyFunction)
     {
-        return new MultimapPutProcedure<K, V>(multimap, keyFunction);
+        return new MultimapPutProcedure<>(multimap, keyFunction);
     }
 
+    @Override
     public void value(V each)
     {
         K key = this.keyFunction.valueOf(each);

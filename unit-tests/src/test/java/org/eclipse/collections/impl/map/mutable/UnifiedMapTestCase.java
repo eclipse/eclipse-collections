@@ -672,7 +672,7 @@ public abstract class UnifiedMapTestCase extends MutableMapTestCase
                 ImmutableEntry.of(1, "One"),
                 ImmutableEntry.of(2, "Two"),
                 ImmutableEntry.of(3, "Three"),
-                ImmutableEntry.<Integer, String>of(null, null));
+                ImmutableEntry.of(null, null));
         Verify.assertEqualsAndHashCode(expected, map.entrySet());
     }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -25,6 +25,6 @@ public class ImmutableObjectLongHashMapSerializationTest
                         + "aXZlLkFic3RyYWN0SW1tdXRhYmxlT2JqZWN0TG9uZ01hcCRJbW11dGFibGVPYmplY3RMb25nTWFw\n"
                         + "U2VyaWFsaXphdGlvblByb3h5AAAAAAAAAAEMAAB4cHcEAAAAAnQAATJ3CAAAAAAAAAACdAABMXcI\n"
                         + "AAAAAAAAAAF4",
-                new ImmutableObjectLongHashMap<String>(ObjectLongHashMap.newWithKeysValues("1", 1L, "2", 2L)));
+                new ImmutableObjectLongHashMap<>(ObjectLongHashMap.newWithKeysValues("1", 1L, "2", 2L)));
     }
 }

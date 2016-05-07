@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -74,31 +74,37 @@ public class ImmutableUnifiedMapWithHashingStrategy<K, V>
         return this.delegate.toString();
     }
 
+    @Override
     public int size()
     {
         return this.delegate.size();
     }
 
+    @Override
     public boolean containsKey(Object key)
     {
         return this.delegate.containsKey(key);
     }
 
+    @Override
     public boolean containsValue(Object value)
     {
         return this.delegate.containsValue(value);
     }
 
+    @Override
     public V get(Object key)
     {
         return this.delegate.get(key);
     }
 
+    @Override
     public int getBatchCount(int batchSize)
     {
         return this.delegate.getBatchCount(batchSize);
     }
 
+    @Override
     public void batchForEach(Procedure<? super V> procedure, int sectionIndex, int sectionCount)
     {
         this.delegate.batchForEach(procedure, sectionIndex, sectionCount);
@@ -116,6 +122,7 @@ public class ImmutableUnifiedMapWithHashingStrategy<K, V>
         this.delegate.forEachKey(procedure);
     }
 
+    @Override
     public void forEachKeyValue(Procedure2<? super K, ? super V> procedure)
     {
         this.delegate.forEachKeyValue(procedure);
@@ -124,39 +131,38 @@ public class ImmutableUnifiedMapWithHashingStrategy<K, V>
     @Override
     public Set<Entry<K, V>> entrySet()
     {
-        final UnifiedSetWithHashingStrategy<Entry<K, V>> result = UnifiedSetWithHashingStrategy.newSet(
-                HashingStrategies.<Entry<K, V>>defaultStrategy(), this.delegate.size());
-        final HashingStrategy<? super K> hashingStrategy = this.delegate.hashingStrategy();
-        this.forEachKeyValue(new Procedure2<K, V>()
-        {
-            public void value(K argument1, V argument2)
-            {
-                result.put(ImmutableEntryWithHashingStrategy.of(argument1, argument2, hashingStrategy));
-            }
-        });
+        UnifiedSetWithHashingStrategy<Entry<K, V>> result = UnifiedSetWithHashingStrategy.newSet(
+                HashingStrategies.defaultStrategy(), this.delegate.size());
+        HashingStrategy<? super K> hashingStrategy = this.delegate.hashingStrategy();
+        this.forEachKeyValue((argument1, argument2) -> result.put(ImmutableEntryWithHashingStrategy.of(argument1, argument2, hashingStrategy)));
         return result.toImmutable().castToSet();
     }
 
+    @Override
     public Set<K> keySet()
     {
         return UnmodifiableMutableSet.of(this.delegate.keySet());
     }
 
+    @Override
     public Collection<V> values()
     {
         return UnmodifiableMutableCollection.of(this.delegate.values());
     }
 
+    @Override
     public RichIterable<K> keysView()
     {
         return this.delegate.keysView();
     }
 
+    @Override
     public RichIterable<V> valuesView()
     {
         return this.delegate.valuesView();
     }
 
+    @Override
     public RichIterable<Pair<K, V>> keyValuesView()
     {
         return this.delegate.keyValuesView();
@@ -227,7 +233,7 @@ public class ImmutableUnifiedMapWithHashingStrategy<K, V>
     public <R> ImmutableMap<K, R> collectValues(Function2<? super K, ? super V, ? extends R> function)
     {
         MutableMap<K, R> result = MapIterate.collectValues(this, function,
-                UnifiedMapWithHashingStrategy.<K, R>newMap(this.delegate.hashingStrategy(), this.delegate.size()));
+                UnifiedMapWithHashingStrategy.newMap(this.delegate.hashingStrategy(), this.delegate.size()));
         return result.toImmutable();
     }
 
@@ -247,6 +253,6 @@ public class ImmutableUnifiedMapWithHashingStrategy<K, V>
 
     protected Object writeReplace()
     {
-        return new ImmutableMapWithHashingStrategySerializationProxy<K, V>(this, this.delegate.hashingStrategy());
+        return new ImmutableMapWithHashingStrategySerializationProxy<>(this, this.delegate.hashingStrategy());
     }
 }

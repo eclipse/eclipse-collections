@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -57,12 +57,8 @@ public class ExceptionThrownTest
             Verify.assertThrowsWithCause(
                     IllegalStateException.class,
                     IllegalArgumentException.class,
-                    new Runnable()
-                    {
-                        public void run()
-                        {
-                            throw new IllegalStateException();
-                        }
+                    (Runnable) () -> {
+                        throw new IllegalStateException();
                     });
             Assert.fail("AssertionError expected");
         }
@@ -74,6 +70,7 @@ public class ExceptionThrownTest
 
     private static final class EmptyRunnable implements Runnable
     {
+        @Override
         public void run()
         {
         }
@@ -81,6 +78,7 @@ public class ExceptionThrownTest
 
     private static final class EmptyCallable implements Callable<Void>
     {
+        @Override
         public Void call()
         {
             return null;

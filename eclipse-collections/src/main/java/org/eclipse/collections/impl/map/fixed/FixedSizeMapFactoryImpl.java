@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -18,52 +18,61 @@ import org.eclipse.collections.impl.block.factory.Comparators;
 @Immutable
 public class FixedSizeMapFactoryImpl implements FixedSizeMapFactory
 {
-    private static final FixedSizeMap<?, ?> EMPTY_MAP = new EmptyMap<Object, Object>();
+    private static final FixedSizeMap<?, ?> EMPTY_MAP = new EmptyMap<>();
 
+    @Override
     public <K, V> FixedSizeMap<K, V> empty()
     {
         return (FixedSizeMap<K, V>) EMPTY_MAP;
     }
 
+    @Override
     public <K, V> FixedSizeMap<K, V> of()
     {
         return this.empty();
     }
 
+    @Override
     public <K, V> FixedSizeMap<K, V> with()
     {
         return this.empty();
     }
 
+    @Override
     public <K, V> FixedSizeMap<K, V> of(K key, V value)
     {
         return this.with(key, value);
     }
 
+    @Override
     public <K, V> FixedSizeMap<K, V> with(K key, V value)
     {
-        return new SingletonMap<K, V>(key, value);
+        return new SingletonMap<>(key, value);
     }
 
+    @Override
     public <K, V> FixedSizeMap<K, V> of(K key1, V value1, K key2, V value2)
     {
         return this.with(key1, value1, key2, value2);
     }
 
+    @Override
     public <K, V> FixedSizeMap<K, V> with(K key1, V value1, K key2, V value2)
     {
         if (Comparators.nullSafeEquals(key1, key2))
         {
             return this.of(key1, value2);
         }
-        return new DoubletonMap<K, V>(key1, value1, key2, value2);
+        return new DoubletonMap<>(key1, value1, key2, value2);
     }
 
+    @Override
     public <K, V> FixedSizeMap<K, V> of(K key1, V value1, K key2, V value2, K key3, V value3)
     {
         return this.with(key1, value1, key2, value2, key3, value3);
     }
 
+    @Override
     public <K, V> FixedSizeMap<K, V> with(K key1, V value1, K key2, V value2, K key3, V value3)
     {
         if (Comparators.nullSafeEquals(key1, key2) && Comparators.nullSafeEquals(key2, key3))
@@ -82,6 +91,6 @@ public class FixedSizeMapFactoryImpl implements FixedSizeMapFactory
         {
             return this.of(key1, value1, key2, value3);
         }
-        return new TripletonMap<K, V>(key1, value1, key2, value2, key3, value3);
+        return new TripletonMap<>(key1, value1, key2, value2, key3, value3);
     }
 }

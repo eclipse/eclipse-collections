@@ -28,7 +28,6 @@ import org.eclipse.collections.api.multimap.set.SetMultimap;
 import org.eclipse.collections.api.multimap.sortedbag.ImmutableSortedBagMultimap;
 import org.eclipse.collections.api.multimap.sortedbag.MutableSortedBagMultimap;
 import org.eclipse.collections.api.multimap.sortedbag.SortedBagMultimap;
-import org.eclipse.collections.api.multimap.sortedset.ImmutableSortedSetMultimap;
 import org.eclipse.collections.api.multimap.sortedset.MutableSortedSetMultimap;
 import org.eclipse.collections.api.multimap.sortedset.SortedSetMultimap;
 import org.eclipse.collections.impl.bag.mutable.HashBag;
@@ -60,104 +59,52 @@ public class VerifyTest
     @Test
     public void assertThrowsWithCause()
     {
-        Verify.assertThrowsWithCause(RuntimeException.class, NullPointerException.class, new Callable<Void>()
-        {
-            public Void call() throws Exception
-            {
-                throw new RuntimeException(new NullPointerException());
-            }
+        Verify.assertThrowsWithCause(RuntimeException.class, NullPointerException.class, (Callable<Void>) () -> {
+            throw new RuntimeException(new NullPointerException());
         });
-        Verify.assertError(AssertionError.class, new Runnable()
-        {
-            public void run()
-            {
-                Verify.assertThrowsWithCause(RuntimeException.class, NullPointerException.class, new Callable<Void>()
-                {
-                    public Void call() throws Exception
-                    {
-                        return null;
-                    }
-                });
-            }
-        });
+        Verify.assertError(AssertionError.class, () -> Verify.assertThrowsWithCause(RuntimeException.class, NullPointerException.class, (Callable<Void>) () -> null));
     }
 
     @Test
     public void assertBefore()
     {
         Verify.assertBefore("numbers", Integer.valueOf(1), Integer.valueOf(2), FastList.newListWith(1, 2));
-        Verify.assertError(AssertionError.class, new Runnable()
-        {
-            public void run()
-            {
-                Verify.assertBefore("numbers", Integer.valueOf(2), Integer.valueOf(1), FastList.newListWith(1, 2));
-            }
-        });
+        Verify.assertError(AssertionError.class, () -> Verify.assertBefore("numbers", Integer.valueOf(2), Integer.valueOf(1), FastList.newListWith(1, 2)));
     }
 
     @Test
     public void assertEndsWithArray()
     {
         Verify.assertEndsWith(new Integer[]{1, 2, 3, 4}, 3, 4);
-        Verify.assertError(AssertionError.class, new Runnable()
-        {
-            public void run()
-            {
-                Verify.assertEndsWith(new Integer[]{1, 2, 3, 4}, 3, 2);
-            }
-        });
+        Verify.assertError(AssertionError.class, () -> Verify.assertEndsWith(new Integer[]{1, 2, 3, 4}, 3, 2));
     }
 
     @Test
     public void assertStartsWithArray()
     {
         Verify.assertStartsWith(new Integer[]{1, 2, 3, 4}, 1, 2);
-        Verify.assertError(AssertionError.class, new Runnable()
-        {
-            public void run()
-            {
-                Verify.assertStartsWith(new Integer[]{1, 2, 3, 4}, 3, 2);
-            }
-        });
+        Verify.assertError(AssertionError.class, () -> Verify.assertStartsWith(new Integer[]{1, 2, 3, 4}, 3, 2));
     }
 
     @Test
     public void assertStartsWithList()
     {
         Verify.assertStartsWith(FastList.newListWith(1, 2, 3, 4), 1, 2);
-        Verify.assertError(AssertionError.class, new Runnable()
-        {
-            public void run()
-            {
-                Verify.assertStartsWith(FastList.newListWith(1, 2, 3, 4), 3, 2);
-            }
-        });
+        Verify.assertError(AssertionError.class, () -> Verify.assertStartsWith(FastList.newListWith(1, 2, 3, 4), 3, 2));
     }
 
     @Test
     public void assertEndsWithList()
     {
         Verify.assertEndsWith(FastList.newListWith(1, 2, 3, 4), 3, 4);
-        Verify.assertError(AssertionError.class, new Runnable()
-        {
-            public void run()
-            {
-                Verify.assertEndsWith(FastList.newListWith(1, 2, 3, 4), 3, 2);
-            }
-        });
+        Verify.assertError(AssertionError.class, () -> Verify.assertEndsWith(FastList.newListWith(1, 2, 3, 4), 3, 2));
     }
 
     @Test
     public void assertNotEqualsString()
     {
         Verify.assertNotEquals("yes", "no");
-        Verify.assertError(AssertionError.class, new Runnable()
-        {
-            public void run()
-            {
-                Verify.assertNotEquals("yes", "yes");
-            }
-        });
+        Verify.assertError(AssertionError.class, () -> Verify.assertNotEquals("yes", "yes"));
     }
 
     @Test
@@ -165,20 +112,8 @@ public class VerifyTest
     {
         Verify.assertNotEquals(0.5d, 0.6d, 0.0001);
         Verify.assertNotEquals("message", 0.5d, 0.6d, 0.0001);
-        Verify.assertError(AssertionError.class, new Runnable()
-        {
-            public void run()
-            {
-                Verify.assertNotEquals(0.5d, 0.5d, 0.0001);
-            }
-        });
-        Verify.assertError(AssertionError.class, new Runnable()
-        {
-            public void run()
-            {
-                Verify.assertNotEquals("message", 0.5d, 0.5d, 0.0001);
-            }
-        });
+        Verify.assertError(AssertionError.class, () -> Verify.assertNotEquals(0.5d, 0.5d, 0.0001));
+        Verify.assertError(AssertionError.class, () -> Verify.assertNotEquals("message", 0.5d, 0.5d, 0.0001));
     }
 
     @Test
@@ -186,20 +121,8 @@ public class VerifyTest
     {
         Verify.assertNotEquals(0.5f, 0.6f, 0.0001f);
         Verify.assertNotEquals("message", 0.5f, 0.6f, 0.0001f);
-        Verify.assertError(AssertionError.class, new Runnable()
-        {
-            public void run()
-            {
-                Verify.assertNotEquals(0.5f, 0.5f, 0.0001f);
-            }
-        });
-        Verify.assertError(AssertionError.class, new Runnable()
-        {
-            public void run()
-            {
-                Verify.assertNotEquals("message", 0.5f, 0.5f, 0.0001f);
-            }
-        });
+        Verify.assertError(AssertionError.class, () -> Verify.assertNotEquals(0.5f, 0.5f, 0.0001f));
+        Verify.assertError(AssertionError.class, () -> Verify.assertNotEquals("message", 0.5f, 0.5f, 0.0001f));
     }
 
     @Test
@@ -207,20 +130,8 @@ public class VerifyTest
     {
         Verify.assertNotEquals(5L, 6L);
         Verify.assertNotEquals("message", 5L, 6L);
-        Verify.assertError(AssertionError.class, new Runnable()
-        {
-            public void run()
-            {
-                Verify.assertNotEquals(5L, 5L);
-            }
-        });
-        Verify.assertError(AssertionError.class, new Runnable()
-        {
-            public void run()
-            {
-                Verify.assertNotEquals("message", 5L, 5L);
-            }
-        });
+        Verify.assertError(AssertionError.class, () -> Verify.assertNotEquals(5L, 5L));
+        Verify.assertError(AssertionError.class, () -> Verify.assertNotEquals("message", 5L, 5L));
     }
 
     @Test
@@ -228,20 +139,8 @@ public class VerifyTest
     {
         Verify.assertNotEquals(true, false);
         Verify.assertNotEquals("message", true, false);
-        Verify.assertError(AssertionError.class, new Runnable()
-        {
-            public void run()
-            {
-                Verify.assertNotEquals(true, true);
-            }
-        });
-        Verify.assertError(AssertionError.class, new Runnable()
-        {
-            public void run()
-            {
-                Verify.assertNotEquals("message", true, true);
-            }
-        });
+        Verify.assertError(AssertionError.class, () -> Verify.assertNotEquals(true, true));
+        Verify.assertError(AssertionError.class, () -> Verify.assertNotEquals("message", true, true));
     }
 
     @Test
@@ -249,20 +148,8 @@ public class VerifyTest
     {
         Verify.assertNotEquals((byte) 1, (byte) 2);
         Verify.assertNotEquals("message", (byte) 1, (byte) 2);
-        Verify.assertError(AssertionError.class, new Runnable()
-        {
-            public void run()
-            {
-                Verify.assertNotEquals((byte) 1, (byte) 1);
-            }
-        });
-        Verify.assertError(AssertionError.class, new Runnable()
-        {
-            public void run()
-            {
-                Verify.assertNotEquals("message", (byte) 1, (byte) 1);
-            }
-        });
+        Verify.assertError(AssertionError.class, () -> Verify.assertNotEquals((byte) 1, (byte) 1));
+        Verify.assertError(AssertionError.class, () -> Verify.assertNotEquals("message", (byte) 1, (byte) 1));
     }
 
     @Test
@@ -270,20 +157,8 @@ public class VerifyTest
     {
         Verify.assertNotEquals((char) 1, (char) 2);
         Verify.assertNotEquals("message", (char) 1, (char) 2);
-        Verify.assertError(AssertionError.class, new Runnable()
-        {
-            public void run()
-            {
-                Verify.assertNotEquals((char) 1, (char) 1);
-            }
-        });
-        Verify.assertError(AssertionError.class, new Runnable()
-        {
-            public void run()
-            {
-                Verify.assertNotEquals("message", (char) 1, (byte) 1);
-            }
-        });
+        Verify.assertError(AssertionError.class, () -> Verify.assertNotEquals((char) 1, (char) 1));
+        Verify.assertError(AssertionError.class, () -> Verify.assertNotEquals("message", (char) 1, (byte) 1));
     }
 
     @Test
@@ -291,20 +166,8 @@ public class VerifyTest
     {
         Verify.assertNotEquals((short) 1, (short) 2);
         Verify.assertNotEquals("message", (short) 1, (short) 2);
-        Verify.assertError(AssertionError.class, new Runnable()
-        {
-            public void run()
-            {
-                Verify.assertNotEquals((short) 1, (short) 1);
-            }
-        });
-        Verify.assertError(AssertionError.class, new Runnable()
-        {
-            public void run()
-            {
-                Verify.assertNotEquals("message", (short) 1, (short) 1);
-            }
-        });
+        Verify.assertError(AssertionError.class, () -> Verify.assertNotEquals((short) 1, (short) 1));
+        Verify.assertError(AssertionError.class, () -> Verify.assertNotEquals("message", (short) 1, (short) 1));
     }
 
     @Test
@@ -312,20 +175,8 @@ public class VerifyTest
     {
         Verify.assertNotEquals(1, 2);
         Verify.assertNotEquals("message", 1, 2);
-        Verify.assertError(AssertionError.class, new Runnable()
-        {
-            public void run()
-            {
-                Verify.assertNotEquals(1, 1);
-            }
-        });
-        Verify.assertError(AssertionError.class, new Runnable()
-        {
-            public void run()
-            {
-                Verify.assertNotEquals("message", 1, 1);
-            }
-        });
+        Verify.assertError(AssertionError.class, () -> Verify.assertNotEquals(1, 1));
+        Verify.assertError(AssertionError.class, () -> Verify.assertNotEquals("message", 1, 1));
     }
 
     @Test
@@ -333,20 +184,8 @@ public class VerifyTest
     {
         Verify.assertNotContains("1", "0");
         Verify.assertNotContains("message", "1", "0");
-        Verify.assertError(AssertionError.class, new Runnable()
-        {
-            public void run()
-            {
-                Verify.assertNotContains("1", "1");
-            }
-        });
-        Verify.assertError(AssertionError.class, new Runnable()
-        {
-            public void run()
-            {
-                Verify.assertNotContains("message", "1", "1");
-            }
-        });
+        Verify.assertError(AssertionError.class, () -> Verify.assertNotContains("1", "1"));
+        Verify.assertError(AssertionError.class, () -> Verify.assertNotContains("message", "1", "1"));
     }
 
     @Test
@@ -354,20 +193,8 @@ public class VerifyTest
     {
         Verify.assertListsEqual(FastList.newListWith(1, 2, 3), FastList.newListWith(1, 2, 3));
         Verify.assertListsEqual("message", FastList.newListWith(1, 2, 3), FastList.newListWith(1, 2, 3));
-        Verify.assertError(AssertionError.class, new Runnable()
-        {
-            public void run()
-            {
-                Verify.assertListsEqual(FastList.newListWith(1, 2, 3), FastList.newListWith(1, 2));
-            }
-        });
-        Verify.assertError(AssertionError.class, new Runnable()
-        {
-            public void run()
-            {
-                Verify.assertListsEqual("message", FastList.newListWith(1, 2, 3), FastList.newListWith(1, 2));
-            }
-        });
+        Verify.assertError(AssertionError.class, () -> Verify.assertListsEqual(FastList.newListWith(1, 2, 3), FastList.newListWith(1, 2)));
+        Verify.assertError(AssertionError.class, () -> Verify.assertListsEqual("message", FastList.newListWith(1, 2, 3), FastList.newListWith(1, 2)));
     }
 
     @Test
@@ -375,27 +202,9 @@ public class VerifyTest
     {
         Verify.assertBagsEqual(HashBag.newBagWith(1, 1, 2, 2), HashBag.newBagWith(1, 2, 2, 1));
         Verify.assertBagsEqual("message", HashBag.newBagWith(1, 1, 2, 2), HashBag.newBagWith(1, 1, 2, 2));
-        Verify.assertError(AssertionError.class, new Runnable()
-        {
-            public void run()
-            {
-                Verify.assertBagsEqual(HashBag.newBagWith(1, 1, 2, 2), HashBag.newBagWith(1, 1, 2, 2, 3, 3));
-            }
-        });
-        Verify.assertError(AssertionError.class, new Runnable()
-        {
-            public void run()
-            {
-                Verify.assertBagsEqual("message", HashBag.newBagWith(1, 1, 2, 2, 3, 3), HashBag.newBagWith(1, 1, 2, 2));
-            }
-        });
-        Verify.assertError(AssertionError.class, new Runnable()
-        {
-            public void run()
-            {
-                Verify.assertBagsEqual("message", HashBag.newBagWith(1, 1, 2, 2, 4, 4), HashBag.newBagWith(1, 1, 2, 2, 3, 3));
-            }
-        });
+        Verify.assertError(AssertionError.class, () -> Verify.assertBagsEqual(HashBag.newBagWith(1, 1, 2, 2), HashBag.newBagWith(1, 1, 2, 2, 3, 3)));
+        Verify.assertError(AssertionError.class, () -> Verify.assertBagsEqual("message", HashBag.newBagWith(1, 1, 2, 2, 3, 3), HashBag.newBagWith(1, 1, 2, 2)));
+        Verify.assertError(AssertionError.class, () -> Verify.assertBagsEqual("message", HashBag.newBagWith(1, 1, 2, 2, 4, 4), HashBag.newBagWith(1, 1, 2, 2, 3, 3)));
     }
 
     @Test
@@ -404,11 +213,11 @@ public class VerifyTest
         ListMultimap<Integer, String> nullMultimap = null;
         Verify.assertListMultimapsEqual(null, nullMultimap);
         ListMultimap<Integer, String> emptyMultimap = FastListMultimap.newMultimap();
-        Verify.assertListMultimapsEqual(FastListMultimap.<Integer, String>newMultimap(), emptyMultimap);
-        final ListMultimap<Integer, String> multimap1 = FastListMultimap.newMultimap(Tuples.pair(1, "One"), Tuples.pair(2, "Two"), Tuples.pair(2, "TwoTwo"));
+        Verify.assertListMultimapsEqual(FastListMultimap.newMultimap(), emptyMultimap);
+        ListMultimap<Integer, String> multimap1 = FastListMultimap.newMultimap(Tuples.pair(1, "One"), Tuples.pair(2, "Two"), Tuples.pair(2, "TwoTwo"));
         MutableListMultimap<Integer, String> multimap2 = FastListMultimap.newMultimap(Tuples.pair(2, "Two"), Tuples.pair(1, "One"), Tuples.pair(2, "TwoTwo"));
         Verify.assertListMultimapsEqual(multimap1, multimap2);
-        final MutableListMultimap<Integer, String> multimap3 = FastListMultimap.newMultimap(Tuples.pair(1, "One"), Tuples.pair(2, "Two"), Tuples.pair(2, "TwoTwo"));
+        MutableListMultimap<Integer, String> multimap3 = FastListMultimap.newMultimap(Tuples.pair(1, "One"), Tuples.pair(2, "Two"), Tuples.pair(2, "TwoTwo"));
         Verify.assertListMultimapsEqual(multimap1, multimap3);
         multimap2.put(2, "TwoTwo");
         multimap3.put(2, "TwoTwo");
@@ -417,62 +226,14 @@ public class VerifyTest
         Verify.assertListMultimapsEqual(multimap3, multimap4);
         Verify.assertListMultimapsEqual("message", multimap3.toImmutable(), multimap4);
 
-        Verify.assertError(AssertionError.class, new Runnable()
-        {
-            public void run()
-            {
-                Verify.assertListMultimapsEqual(multimap1, null);
-            }
-        });
-        Verify.assertError(AssertionError.class, new Runnable()
-        {
-            public void run()
-            {
-                Verify.assertListMultimapsEqual(multimap1, multimap3);
-            }
-        });
-        Verify.assertError(AssertionError.class, new Runnable()
-        {
-            public void run()
-            {
-                Verify.assertListMultimapsEqual(multimap1, FastListMultimap.<Integer, String>newMultimap());
-            }
-        });
-        Verify.assertError(AssertionFailedError.class, new Runnable()
-        {
-            public void run()
-            {
-                Verify.assertListMultimapsEqual("message", multimap1, FastListMultimap.newMultimap(Tuples.pair(1, "One"), Tuples.pair(2, "TwoTwo"), Tuples.pair(2, "Two")));
-            }
-        });
-        Verify.assertError(AssertionFailedError.class, new Runnable()
-        {
-            public void run()
-            {
-                Verify.assertListMultimapsEqual(multimap1, FastListMultimap.newMultimap(Tuples.pair(1, "OneOne"), Tuples.pair(2, "Two"), Tuples.pair(2, "TwoTwo")));
-            }
-        });
-        Verify.assertError(AssertionError.class, new Runnable()
-        {
-            public void run()
-            {
-                Verify.assertListMultimapsEqual(multimap1, FastListMultimap.newMultimap(Tuples.pair(3, "One"), Tuples.pair(2, "Two"), Tuples.pair(2, "TwoTwo")));
-            }
-        });
-        Verify.assertError(AssertionFailedError.class, new Runnable()
-        {
-            public void run()
-            {
-                Verify.assertListMultimapsEqual(multimap1, FastListMultimap.newMultimap(Tuples.pair(1, "OneOne"), Tuples.pair(2, "One"), Tuples.pair(2, "TwoTwo")));
-            }
-        });
-        Verify.assertError(AssertionError.class, new Runnable()
-        {
-            public void run()
-            {
-                Verify.assertListMultimapsEqual(multimap1, FastListMultimap.newMultimap(Tuples.pair(1, "One"), Tuples.pair(2, "Two"), Tuples.pair(2, "TwoTwo"), Tuples.pair(3, "Three")));
-            }
-        });
+        Verify.assertError(AssertionError.class, () -> Verify.assertListMultimapsEqual(multimap1, null));
+        Verify.assertError(AssertionError.class, () -> Verify.assertListMultimapsEqual(multimap1, multimap3));
+        Verify.assertError(AssertionError.class, () -> Verify.assertListMultimapsEqual(multimap1, FastListMultimap.newMultimap()));
+        Verify.assertError(AssertionFailedError.class, () -> Verify.assertListMultimapsEqual("message", multimap1, FastListMultimap.newMultimap(Tuples.pair(1, "One"), Tuples.pair(2, "TwoTwo"), Tuples.pair(2, "Two"))));
+        Verify.assertError(AssertionFailedError.class, () -> Verify.assertListMultimapsEqual(multimap1, FastListMultimap.newMultimap(Tuples.pair(1, "OneOne"), Tuples.pair(2, "Two"), Tuples.pair(2, "TwoTwo"))));
+        Verify.assertError(AssertionError.class, () -> Verify.assertListMultimapsEqual(multimap1, FastListMultimap.newMultimap(Tuples.pair(3, "One"), Tuples.pair(2, "Two"), Tuples.pair(2, "TwoTwo"))));
+        Verify.assertError(AssertionFailedError.class, () -> Verify.assertListMultimapsEqual(multimap1, FastListMultimap.newMultimap(Tuples.pair(1, "OneOne"), Tuples.pair(2, "One"), Tuples.pair(2, "TwoTwo"))));
+        Verify.assertError(AssertionError.class, () -> Verify.assertListMultimapsEqual(multimap1, FastListMultimap.newMultimap(Tuples.pair(1, "One"), Tuples.pair(2, "Two"), Tuples.pair(2, "TwoTwo"), Tuples.pair(3, "Three"))));
     }
 
     @Test
@@ -481,11 +242,11 @@ public class VerifyTest
         SetMultimap<Integer, String> nullMultimap = null;
         Verify.assertSetMultimapsEqual(null, nullMultimap);
         SetMultimap<Integer, String> emptyMultimap = UnifiedSetMultimap.newMultimap();
-        Verify.assertSetMultimapsEqual(UnifiedSetMultimap.<Integer, String>newMultimap(), emptyMultimap);
-        final SetMultimap<Integer, String> multimap1 = UnifiedSetMultimap.newMultimap(Tuples.pair(1, "One"), Tuples.pair(2, "Two"), Tuples.pair(2, "TwoTwo"));
+        Verify.assertSetMultimapsEqual(UnifiedSetMultimap.newMultimap(), emptyMultimap);
+        SetMultimap<Integer, String> multimap1 = UnifiedSetMultimap.newMultimap(Tuples.pair(1, "One"), Tuples.pair(2, "Two"), Tuples.pair(2, "TwoTwo"));
         MutableSetMultimap<Integer, String> multimap2 = UnifiedSetMultimap.newMultimap(Tuples.pair(2, "Two"), Tuples.pair(1, "One"), Tuples.pair(2, "TwoTwo"));
         Verify.assertSetMultimapsEqual(multimap1, multimap2);
-        final MutableSetMultimap<Integer, String> multimap3 = UnifiedSetMultimap.newMultimap(Tuples.pair(1, "One"), Tuples.pair(2, "Two"), Tuples.pair(2, "TwoTwo"), Tuples.pair(2, "TwoTwo"));
+        MutableSetMultimap<Integer, String> multimap3 = UnifiedSetMultimap.newMultimap(Tuples.pair(1, "One"), Tuples.pair(2, "Two"), Tuples.pair(2, "TwoTwo"), Tuples.pair(2, "TwoTwo"));
         Verify.assertSetMultimapsEqual(multimap1, multimap3);
         Verify.assertSetMultimapsEqual(multimap3, multimap2);
         ImmutableSetMultimap<Integer, String> multimap4 = UnifiedSetMultimap.newMultimap(Tuples.pair(2, "Two"), Tuples.pair(1, "One"), Tuples.pair(2, "TwoTwo")).toImmutable();
@@ -493,55 +254,13 @@ public class VerifyTest
         Verify.assertSetMultimapsEqual("message", multimap3.toImmutable(), multimap4);
 
         multimap3.put(2, "TwoTwoTwo");
-        Verify.assertError(AssertionError.class, new Runnable()
-        {
-            public void run()
-            {
-                Verify.assertSetMultimapsEqual(multimap1, null);
-            }
-        });
-        Verify.assertError(AssertionError.class, new Runnable()
-        {
-            public void run()
-            {
-                Verify.assertSetMultimapsEqual(multimap1, multimap3);
-            }
-        });
-        Verify.assertError(AssertionError.class, new Runnable()
-        {
-            public void run()
-            {
-                Verify.assertSetMultimapsEqual(multimap1, UnifiedSetMultimap.<Integer, String>newMultimap());
-            }
-        });
-        Verify.assertError(AssertionFailedError.class, new Runnable()
-        {
-            public void run()
-            {
-                Verify.assertSetMultimapsEqual("message", multimap1, UnifiedSetMultimap.newMultimap(Tuples.pair(1, "OneOne"), Tuples.pair(2, "Two"), Tuples.pair(2, "TwoTwo")));
-            }
-        });
-        Verify.assertError(AssertionError.class, new Runnable()
-        {
-            public void run()
-            {
-                Verify.assertSetMultimapsEqual(multimap1, UnifiedSetMultimap.newMultimap(Tuples.pair(3, "One"), Tuples.pair(2, "Two"), Tuples.pair(2, "TwoTwo")));
-            }
-        });
-        Verify.assertError(AssertionFailedError.class, new Runnable()
-        {
-            public void run()
-            {
-                Verify.assertSetMultimapsEqual(multimap1, UnifiedSetMultimap.newMultimap(Tuples.pair(1, "One"), Tuples.pair(2, "One"), Tuples.pair(2, "TwoTwo")));
-            }
-        });
-        Verify.assertError(AssertionError.class, new Runnable()
-        {
-            public void run()
-            {
-                Verify.assertSetMultimapsEqual(multimap1, UnifiedSetMultimap.newMultimap(Tuples.pair(1, "One"), Tuples.pair(2, "Two"), Tuples.pair(2, "TwoTwo"), Tuples.pair(3, "Three")));
-            }
-        });
+        Verify.assertError(AssertionError.class, () -> Verify.assertSetMultimapsEqual(multimap1, null));
+        Verify.assertError(AssertionError.class, () -> Verify.assertSetMultimapsEqual(multimap1, multimap3));
+        Verify.assertError(AssertionError.class, () -> Verify.assertSetMultimapsEqual(multimap1, UnifiedSetMultimap.newMultimap()));
+        Verify.assertError(AssertionFailedError.class, () -> Verify.assertSetMultimapsEqual("message", multimap1, UnifiedSetMultimap.newMultimap(Tuples.pair(1, "OneOne"), Tuples.pair(2, "Two"), Tuples.pair(2, "TwoTwo"))));
+        Verify.assertError(AssertionError.class, () -> Verify.assertSetMultimapsEqual(multimap1, UnifiedSetMultimap.newMultimap(Tuples.pair(3, "One"), Tuples.pair(2, "Two"), Tuples.pair(2, "TwoTwo"))));
+        Verify.assertError(AssertionFailedError.class, () -> Verify.assertSetMultimapsEqual(multimap1, UnifiedSetMultimap.newMultimap(Tuples.pair(1, "One"), Tuples.pair(2, "One"), Tuples.pair(2, "TwoTwo"))));
+        Verify.assertError(AssertionError.class, () -> Verify.assertSetMultimapsEqual(multimap1, UnifiedSetMultimap.newMultimap(Tuples.pair(1, "One"), Tuples.pair(2, "Two"), Tuples.pair(2, "TwoTwo"), Tuples.pair(3, "Three"))));
     }
 
     @Test
@@ -550,77 +269,29 @@ public class VerifyTest
         BagMultimap<Integer, String> nullMultimap = null;
         Verify.assertBagMultimapsEqual(null, nullMultimap);
         BagMultimap<Integer, String> emptyMultimap = HashBagMultimap.newMultimap();
-        Verify.assertBagMultimapsEqual(HashBagMultimap.<Integer, String>newMultimap(), emptyMultimap);
-        final BagMultimap<Integer, String> multimap1 = HashBagMultimap.newMultimap(Tuples.pair(1, "One"), Tuples.pair(2, "Two"), Tuples.pair(2, "TwoTwo"));
+        Verify.assertBagMultimapsEqual(HashBagMultimap.newMultimap(), emptyMultimap);
+        BagMultimap<Integer, String> multimap1 = HashBagMultimap.newMultimap(Tuples.pair(1, "One"), Tuples.pair(2, "Two"), Tuples.pair(2, "TwoTwo"));
         MutableBagMultimap<Integer, String> multimap2 = HashBagMultimap.newMultimap(Tuples.pair(2, "Two"), Tuples.pair(1, "One"), Tuples.pair(2, "TwoTwo"));
         Verify.assertBagMultimapsEqual(multimap1, multimap2);
-        final MutableBagMultimap<Integer, String> multimap3 = HashBagMultimap.newMultimap(Tuples.pair(1, "One"), Tuples.pair(2, "Two"), Tuples.pair(2, "TwoTwo"));
+        MutableBagMultimap<Integer, String> multimap3 = HashBagMultimap.newMultimap(Tuples.pair(1, "One"), Tuples.pair(2, "Two"), Tuples.pair(2, "TwoTwo"));
         Verify.assertBagMultimapsEqual(multimap1, multimap3);
         multimap2.put(2, "TwoTwo");
         multimap3.put(2, "TwoTwo");
         Verify.assertBagMultimapsEqual(multimap3, multimap2);
-        final ImmutableBagMultimap<Integer, String> multimap4 = HashBagMultimap.newMultimap(Tuples.pair(2, "Two"), Tuples.pair(1, "One"), Tuples.pair(2, "TwoTwo"), Tuples.pair(2, "TwoTwo")).toImmutable();
+        ImmutableBagMultimap<Integer, String> multimap4 = HashBagMultimap.newMultimap(Tuples.pair(2, "Two"), Tuples.pair(1, "One"), Tuples.pair(2, "TwoTwo"), Tuples.pair(2, "TwoTwo")).toImmutable();
         Verify.assertBagMultimapsEqual(multimap3, multimap4);
         Verify.assertBagMultimapsEqual("message", multimap3.toImmutable(), multimap4);
 
-        Verify.assertError(AssertionError.class, new Runnable()
-        {
-            public void run()
-            {
-                Verify.assertBagMultimapsEqual(multimap1, null);
-            }
-        });
-        Verify.assertError(AssertionError.class, new Runnable()
-        {
-            public void run()
-            {
-                Verify.assertBagMultimapsEqual(multimap1, multimap3);
-            }
-        });
-        Verify.assertError(AssertionError.class, new Runnable()
-        {
-            public void run()
-            {
-                Verify.assertBagMultimapsEqual(multimap1, HashBagMultimap.<Integer, String>newMultimap());
-            }
-        });
+        Verify.assertError(AssertionError.class, () -> Verify.assertBagMultimapsEqual(multimap1, null));
+        Verify.assertError(AssertionError.class, () -> Verify.assertBagMultimapsEqual(multimap1, multimap3));
+        Verify.assertError(AssertionError.class, () -> Verify.assertBagMultimapsEqual(multimap1, HashBagMultimap.newMultimap()));
 
         multimap3.put(2, "TwoTwoTwo");
-        Verify.assertError(AssertionError.class, new Runnable()
-        {
-            public void run()
-            {
-                Verify.assertBagMultimapsEqual(multimap3, multimap4);
-            }
-        });
-        Verify.assertError(AssertionError.class, new Runnable()
-        {
-            public void run()
-            {
-                Verify.assertBagMultimapsEqual("message", multimap1, HashBagMultimap.newMultimap(Tuples.pair(1, "OneOne"), Tuples.pair(2, "Two"), Tuples.pair(2, "TwoTwo")));
-            }
-        });
-        Verify.assertError(AssertionError.class, new Runnable()
-        {
-            public void run()
-            {
-                Verify.assertBagMultimapsEqual(multimap1, HashBagMultimap.newMultimap(Tuples.pair(3, "One"), Tuples.pair(2, "Two"), Tuples.pair(2, "TwoTwo")));
-            }
-        });
-        Verify.assertError(AssertionError.class, new Runnable()
-        {
-            public void run()
-            {
-                Verify.assertBagMultimapsEqual(multimap1, HashBagMultimap.newMultimap(Tuples.pair(1, "One"), Tuples.pair(2, "One"), Tuples.pair(2, "TwoTwo")));
-            }
-        });
-        Verify.assertError(AssertionError.class, new Runnable()
-        {
-            public void run()
-            {
-                Verify.assertBagMultimapsEqual(multimap1, HashBagMultimap.newMultimap(Tuples.pair(1, "One"), Tuples.pair(2, "Two"), Tuples.pair(2, "TwoTwo"), Tuples.pair(3, "Three")));
-            }
-        });
+        Verify.assertError(AssertionError.class, () -> Verify.assertBagMultimapsEqual(multimap3, multimap4));
+        Verify.assertError(AssertionError.class, () -> Verify.assertBagMultimapsEqual("message", multimap1, HashBagMultimap.newMultimap(Tuples.pair(1, "OneOne"), Tuples.pair(2, "Two"), Tuples.pair(2, "TwoTwo"))));
+        Verify.assertError(AssertionError.class, () -> Verify.assertBagMultimapsEqual(multimap1, HashBagMultimap.newMultimap(Tuples.pair(3, "One"), Tuples.pair(2, "Two"), Tuples.pair(2, "TwoTwo"))));
+        Verify.assertError(AssertionError.class, () -> Verify.assertBagMultimapsEqual(multimap1, HashBagMultimap.newMultimap(Tuples.pair(1, "One"), Tuples.pair(2, "One"), Tuples.pair(2, "TwoTwo"))));
+        Verify.assertError(AssertionError.class, () -> Verify.assertBagMultimapsEqual(multimap1, HashBagMultimap.newMultimap(Tuples.pair(1, "One"), Tuples.pair(2, "Two"), Tuples.pair(2, "TwoTwo"), Tuples.pair(3, "Three"))));
     }
 
     @Test
@@ -629,17 +300,17 @@ public class VerifyTest
         SortedSetMultimap<Integer, Integer> nullMultimap = null;
         Verify.assertSortedSetMultimapsEqual(null, nullMultimap);
         SortedSetMultimap<Integer, Integer> emptyMultimap = TreeSortedSetMultimap.newMultimap();
-        Verify.assertSortedSetMultimapsEqual(TreeSortedSetMultimap.<Integer, Integer>newMultimap(), emptyMultimap);
-        final SortedSetMultimap<Integer, Integer> multimap1 = TreeSortedSetMultimap.newMultimap(Tuples.pair(1, 1), Tuples.pair(2, 1), Tuples.pair(2, 2));
+        Verify.assertSortedSetMultimapsEqual(TreeSortedSetMultimap.newMultimap(), emptyMultimap);
+        SortedSetMultimap<Integer, Integer> multimap1 = TreeSortedSetMultimap.newMultimap(Tuples.pair(1, 1), Tuples.pair(2, 1), Tuples.pair(2, 2));
         SortedSetMultimap<Integer, Integer> multimap2 = TreeSortedSetMultimap.newMultimap(Tuples.pair(2, 1), Tuples.pair(1, 1), Tuples.pair(2, 2));
         Verify.assertSortedSetMultimapsEqual(multimap1, multimap2);
-        final MutableSortedSetMultimap<Integer, Integer> multimap3 = TreeSortedSetMultimap.newMultimap(Tuples.pair(1, 1), Tuples.pair(2, 1), Tuples.pair(2, 2), Tuples.pair(2, 2));
+        MutableSortedSetMultimap<Integer, Integer> multimap3 = TreeSortedSetMultimap.newMultimap(Tuples.pair(1, 1), Tuples.pair(2, 1), Tuples.pair(2, 2), Tuples.pair(2, 2));
         Verify.assertSortedSetMultimapsEqual(multimap1, multimap3);
         Verify.assertSortedSetMultimapsEqual(multimap3, multimap2);
         SortedSetMultimap<Integer, Integer> multimap4 = TreeSortedSetMultimap.newMultimap(Tuples.pair(2, 1), Tuples.pair(1, 1), Tuples.pair(2, 2)).toImmutable();
         Verify.assertSortedSetMultimapsEqual(multimap3, multimap4);
         Verify.assertSortedSetMultimapsEqual("message", multimap3.toImmutable(), multimap4);
-        final MutableSortedSetMultimap<Integer, Integer> multimap5 = TreeSortedSetMultimap.newMultimap(Comparators.reverseNaturalOrder());
+        MutableSortedSetMultimap<Integer, Integer> multimap5 = TreeSortedSetMultimap.newMultimap(Comparators.reverseNaturalOrder());
         multimap5.putAllPairs(Tuples.pair(2, 1), Tuples.pair(1, 1), Tuples.pair(2, 2));
         MutableSortedSetMultimap<Integer, Integer> multimap6 = TreeSortedSetMultimap.newMultimap(Comparators.reverseNaturalOrder());
         multimap6.putAllPairs(Tuples.pair(2, 1), Tuples.pair(1, 1), Tuples.pair(2, 2));
@@ -648,62 +319,14 @@ public class VerifyTest
         Verify.assertSortedSetMultimapsEqual(multimap5.toImmutable(), multimap6.toImmutable());
 
         multimap3.put(2, 3);
-        Verify.assertError(AssertionError.class, new Runnable()
-        {
-            public void run()
-            {
-                Verify.assertSortedSetMultimapsEqual(multimap1, null);
-            }
-        });
-        Verify.assertError(AssertionError.class, new Runnable()
-        {
-            public void run()
-            {
-                Verify.assertSortedSetMultimapsEqual(multimap1, multimap3);
-            }
-        });
-        Verify.assertError(AssertionFailedError.class, new Runnable()
-        {
-            public void run()
-            {
-                Verify.assertSortedSetMultimapsEqual(multimap1, multimap5);
-            }
-        });
-        Verify.assertError(AssertionError.class, new Runnable()
-        {
-            public void run()
-            {
-                Verify.assertSortedSetMultimapsEqual(multimap1, TreeSortedSetMultimap.<Integer, Integer>newMultimap());
-            }
-        });
-        Verify.assertError(AssertionError.class, new Runnable()
-        {
-            public void run()
-            {
-                Verify.assertSortedSetMultimapsEqual("message", multimap1, TreeSortedSetMultimap.newMultimap(Tuples.pair(1, 2), Tuples.pair(2, 1), Tuples.pair(2, 2)));
-            }
-        });
-        Verify.assertError(AssertionError.class, new Runnable()
-        {
-            public void run()
-            {
-                Verify.assertSortedSetMultimapsEqual(multimap1, TreeSortedSetMultimap.newMultimap(Tuples.pair(3, 1), Tuples.pair(2, 1), Tuples.pair(2, 2)));
-            }
-        });
-        Verify.assertError(AssertionError.class, new Runnable()
-        {
-            public void run()
-            {
-                Verify.assertSortedSetMultimapsEqual(multimap1, TreeSortedSetMultimap.newMultimap(Tuples.pair(1, 1), Tuples.pair(2, 2), Tuples.pair(2, 3)));
-            }
-        });
-        Verify.assertError(AssertionError.class, new Runnable()
-        {
-            public void run()
-            {
-                Verify.assertSortedSetMultimapsEqual(multimap1, TreeSortedSetMultimap.newMultimap(Tuples.pair(1, 1), Tuples.pair(2, 1), Tuples.pair(2, 2), Tuples.pair(3, 1)));
-            }
-        });
+        Verify.assertError(AssertionError.class, () -> Verify.assertSortedSetMultimapsEqual(multimap1, null));
+        Verify.assertError(AssertionError.class, () -> Verify.assertSortedSetMultimapsEqual(multimap1, multimap3));
+        Verify.assertError(AssertionFailedError.class, () -> Verify.assertSortedSetMultimapsEqual(multimap1, multimap5));
+        Verify.assertError(AssertionError.class, () -> Verify.assertSortedSetMultimapsEqual(multimap1, TreeSortedSetMultimap.newMultimap()));
+        Verify.assertError(AssertionError.class, () -> Verify.assertSortedSetMultimapsEqual("message", multimap1, TreeSortedSetMultimap.newMultimap(Tuples.pair(1, 2), Tuples.pair(2, 1), Tuples.pair(2, 2))));
+        Verify.assertError(AssertionError.class, () -> Verify.assertSortedSetMultimapsEqual(multimap1, TreeSortedSetMultimap.newMultimap(Tuples.pair(3, 1), Tuples.pair(2, 1), Tuples.pair(2, 2))));
+        Verify.assertError(AssertionError.class, () -> Verify.assertSortedSetMultimapsEqual(multimap1, TreeSortedSetMultimap.newMultimap(Tuples.pair(1, 1), Tuples.pair(2, 2), Tuples.pair(2, 3))));
+        Verify.assertError(AssertionError.class, () -> Verify.assertSortedSetMultimapsEqual(multimap1, TreeSortedSetMultimap.newMultimap(Tuples.pair(1, 1), Tuples.pair(2, 1), Tuples.pair(2, 2), Tuples.pair(3, 1))));
     }
 
     @Test
@@ -712,19 +335,19 @@ public class VerifyTest
         SortedBagMultimap<Integer, Integer> nullMultimap = null;
         Verify.assertSortedBagMultimapsEqual(null, nullMultimap);
         SortedBagMultimap<Integer, Integer> blankMultimap = TreeBagMultimap.newMultimap();
-        Verify.assertSortedBagMultimapsEqual(TreeBagMultimap.<Integer, Integer>newMultimap(), blankMultimap);
-        final SortedBagMultimap<Integer, Integer> multimap1 = TreeBagMultimap.newMultimap(Tuples.pair(1, 1), Tuples.pair(2, 1), Tuples.pair(2, 2));
+        Verify.assertSortedBagMultimapsEqual(TreeBagMultimap.newMultimap(), blankMultimap);
+        SortedBagMultimap<Integer, Integer> multimap1 = TreeBagMultimap.newMultimap(Tuples.pair(1, 1), Tuples.pair(2, 1), Tuples.pair(2, 2));
         MutableSortedBagMultimap<Integer, Integer> multimap2 = TreeBagMultimap.newMultimap(Tuples.pair(2, 1), Tuples.pair(1, 1), Tuples.pair(2, 2));
         Verify.assertSortedBagMultimapsEqual(multimap1, multimap2);
-        final MutableSortedBagMultimap<Integer, Integer> multimap3 = TreeBagMultimap.newMultimap(Tuples.pair(1, 1), Tuples.pair(2, 1), Tuples.pair(2, 2));
+        MutableSortedBagMultimap<Integer, Integer> multimap3 = TreeBagMultimap.newMultimap(Tuples.pair(1, 1), Tuples.pair(2, 1), Tuples.pair(2, 2));
         Verify.assertSortedBagMultimapsEqual(multimap1, multimap3);
         multimap2.put(2, 2);
         multimap3.put(2, 2);
         Verify.assertSortedBagMultimapsEqual(multimap3, multimap2);
-        final ImmutableSortedBagMultimap<Integer, Integer> multimap4 = TreeBagMultimap.newMultimap(Tuples.pair(2, 1), Tuples.pair(1, 1), Tuples.pair(2, 2), Tuples.pair(2, 2)).toImmutable();
+        ImmutableSortedBagMultimap<Integer, Integer> multimap4 = TreeBagMultimap.newMultimap(Tuples.pair(2, 1), Tuples.pair(1, 1), Tuples.pair(2, 2), Tuples.pair(2, 2)).toImmutable();
         Verify.assertSortedBagMultimapsEqual(multimap3, multimap4);
         Verify.assertSortedBagMultimapsEqual("message", multimap3.toImmutable(), multimap4);
-        final MutableSortedBagMultimap<Integer, Integer> multimap5 = TreeBagMultimap.newMultimap(Comparators.reverseNaturalOrder());
+        MutableSortedBagMultimap<Integer, Integer> multimap5 = TreeBagMultimap.newMultimap(Comparators.reverseNaturalOrder());
         multimap5.putAllPairs(Tuples.pair(2, 1), Tuples.pair(1, 1), Tuples.pair(2, 2));
         MutableSortedBagMultimap<Integer, Integer> multimap6 = TreeBagMultimap.newMultimap(Comparators.reverseNaturalOrder());
         multimap6.putAllPairs(Tuples.pair(2, 1), Tuples.pair(1, 1), Tuples.pair(2, 2));
@@ -732,70 +355,16 @@ public class VerifyTest
         Verify.assertSortedBagMultimapsEqual(multimap5, multimap6.toImmutable());
         Verify.assertSortedBagMultimapsEqual(multimap5.toImmutable(), multimap6.toImmutable());
 
-        Verify.assertError(AssertionError.class, new Runnable()
-        {
-            public void run()
-            {
-                Verify.assertSortedBagMultimapsEqual(multimap1, null);
-            }
-        });
-        Verify.assertError(AssertionError.class, new Runnable()
-        {
-            public void run()
-            {
-                Verify.assertSortedBagMultimapsEqual(multimap1, multimap3);
-            }
-        });
-        Verify.assertError(AssertionFailedError.class, new Runnable()
-        {
-            public void run()
-            {
-                Verify.assertSortedBagMultimapsEqual(multimap1, multimap5);
-            }
-        });
-        Verify.assertError(AssertionError.class, new Runnable()
-        {
-            public void run()
-            {
-                Verify.assertSortedBagMultimapsEqual(multimap1, TreeBagMultimap.<Integer, Integer>newMultimap());
-            }
-        });
+        Verify.assertError(AssertionError.class, () -> Verify.assertSortedBagMultimapsEqual(multimap1, null));
+        Verify.assertError(AssertionError.class, () -> Verify.assertSortedBagMultimapsEqual(multimap1, multimap3));
+        Verify.assertError(AssertionFailedError.class, () -> Verify.assertSortedBagMultimapsEqual(multimap1, multimap5));
+        Verify.assertError(AssertionError.class, () -> Verify.assertSortedBagMultimapsEqual(multimap1, TreeBagMultimap.newMultimap()));
         multimap3.put(2, 3);
-        Verify.assertError(AssertionError.class, new Runnable()
-        {
-            public void run()
-            {
-                Verify.assertSortedBagMultimapsEqual(multimap3, multimap4);
-            }
-        });
-        Verify.assertError(AssertionError.class, new Runnable()
-        {
-            public void run()
-            {
-                Verify.assertSortedBagMultimapsEqual("message", multimap1, TreeBagMultimap.newMultimap(Tuples.pair(1, 2), Tuples.pair(2, 1), Tuples.pair(2, 2)));
-            }
-        });
-        Verify.assertError(AssertionError.class, new Runnable()
-        {
-            public void run()
-            {
-                Verify.assertSortedBagMultimapsEqual(multimap1, TreeBagMultimap.newMultimap(Tuples.pair(3, 1), Tuples.pair(2, 1), Tuples.pair(2, 2)));
-            }
-        });
-        Verify.assertError(AssertionError.class, new Runnable()
-        {
-            public void run()
-            {
-                Verify.assertSortedBagMultimapsEqual(multimap1, TreeBagMultimap.newMultimap(Tuples.pair(1, 1), Tuples.pair(2, 2), Tuples.pair(2, 2)));
-            }
-        });
-        Verify.assertError(AssertionError.class, new Runnable()
-        {
-            public void run()
-            {
-                Verify.assertSortedBagMultimapsEqual(multimap1, TreeBagMultimap.newMultimap(Tuples.pair(1, 1), Tuples.pair(2, 1), Tuples.pair(2, 2), Tuples.pair(3, 1)));
-            }
-        });
+        Verify.assertError(AssertionError.class, () -> Verify.assertSortedBagMultimapsEqual(multimap3, multimap4));
+        Verify.assertError(AssertionError.class, () -> Verify.assertSortedBagMultimapsEqual("message", multimap1, TreeBagMultimap.newMultimap(Tuples.pair(1, 2), Tuples.pair(2, 1), Tuples.pair(2, 2))));
+        Verify.assertError(AssertionError.class, () -> Verify.assertSortedBagMultimapsEqual(multimap1, TreeBagMultimap.newMultimap(Tuples.pair(3, 1), Tuples.pair(2, 1), Tuples.pair(2, 2))));
+        Verify.assertError(AssertionError.class, () -> Verify.assertSortedBagMultimapsEqual(multimap1, TreeBagMultimap.newMultimap(Tuples.pair(1, 1), Tuples.pair(2, 2), Tuples.pair(2, 2))));
+        Verify.assertError(AssertionError.class, () -> Verify.assertSortedBagMultimapsEqual(multimap1, TreeBagMultimap.newMultimap(Tuples.pair(1, 1), Tuples.pair(2, 1), Tuples.pair(2, 2), Tuples.pair(3, 1))));
     }
 
     @Test
@@ -803,20 +372,8 @@ public class VerifyTest
     {
         Verify.assertSetsEqual(UnifiedSet.newSetWith(1, 2, 3), UnifiedSet.newSetWith(1, 2, 3));
         Verify.assertSetsEqual("message", UnifiedSet.newSetWith(1, 2, 3), UnifiedSet.newSetWith(1, 2, 3));
-        Verify.assertError(AssertionError.class, new Runnable()
-        {
-            public void run()
-            {
-                Verify.assertSetsEqual(UnifiedSet.newSetWith(1, 2, 3), UnifiedSet.newSetWith(1, 2));
-            }
-        });
-        Verify.assertError(AssertionError.class, new Runnable()
-        {
-            public void run()
-            {
-                Verify.assertSetsEqual("message", UnifiedSet.newSetWith(1, 2, 3), UnifiedSet.newSetWith(1, 2));
-            }
-        });
+        Verify.assertError(AssertionError.class, () -> Verify.assertSetsEqual(UnifiedSet.newSetWith(1, 2, 3), UnifiedSet.newSetWith(1, 2)));
+        Verify.assertError(AssertionError.class, () -> Verify.assertSetsEqual("message", UnifiedSet.newSetWith(1, 2, 3), UnifiedSet.newSetWith(1, 2)));
     }
 
     @Test
@@ -824,20 +381,8 @@ public class VerifyTest
     {
         Verify.assertMapsEqual(UnifiedMap.newWithKeysValues(1, 1, 2, 2), UnifiedMap.newWithKeysValues(1, 1, 2, 2));
         Verify.assertMapsEqual("message", UnifiedMap.newWithKeysValues(1, 1, 2, 2), UnifiedMap.newWithKeysValues(1, 1, 2, 2));
-        Verify.assertError(AssertionError.class, new Runnable()
-        {
-            public void run()
-            {
-                Verify.assertMapsEqual(UnifiedMap.newWithKeysValues(1, 1, 2, 2), UnifiedMap.newWithKeysValues(1, 1, 2, 2, 3, 3));
-            }
-        });
-        Verify.assertError(AssertionError.class, new Runnable()
-        {
-            public void run()
-            {
-                Verify.assertMapsEqual("message", UnifiedMap.newWithKeysValues(1, 1, 2, 2), UnifiedMap.newWithKeysValues(1, 1, 2, 2, 3, 3));
-            }
-        });
+        Verify.assertError(AssertionError.class, () -> Verify.assertMapsEqual(UnifiedMap.newWithKeysValues(1, 1, 2, 2), UnifiedMap.newWithKeysValues(1, 1, 2, 2, 3, 3)));
+        Verify.assertError(AssertionError.class, () -> Verify.assertMapsEqual("message", UnifiedMap.newWithKeysValues(1, 1, 2, 2), UnifiedMap.newWithKeysValues(1, 1, 2, 2, 3, 3)));
     }
 
     @Test
@@ -845,45 +390,19 @@ public class VerifyTest
     {
         Verify.assertIterablesEqual(FastList.newListWith(1, 2, 3), TreeSortedSet.newSetWith(1, 2, 3));
         Verify.assertIterablesEqual("message", FastList.newListWith(1, 2, 3), TreeSortedSet.newSetWith(1, 2, 3));
-        Verify.assertError(AssertionError.class, new Runnable()
-        {
-            public void run()
-            {
-                Verify.assertIterablesEqual(FastList.newListWith(1, 2, 3), FastList.newListWith(1, 2));
-            }
-        });
-        Verify.assertError(AssertionError.class, new Runnable()
-        {
-            public void run()
-            {
-                Verify.assertIterablesEqual("message", FastList.newListWith(1, 2, 3), FastList.newListWith(1, 2));
-            }
-        });
+        Verify.assertError(AssertionError.class, () -> Verify.assertIterablesEqual(FastList.newListWith(1, 2, 3), FastList.newListWith(1, 2)));
+        Verify.assertError(AssertionError.class, () -> Verify.assertIterablesEqual("message", FastList.newListWith(1, 2, 3), FastList.newListWith(1, 2)));
     }
 
     @Test
     public void assertError()
     {
-        Verify.assertError(AssertionError.class, new Runnable()
-        {
-            public void run()
-            {
-                throw new AssertionError();
-            }
+        Verify.assertError(AssertionError.class, () -> {
+            throw new AssertionError();
         });
-        Verify.assertError(AssertionError.class, new Runnable()
-        {
-            public void run()
-            {
-                Verify.assertError(AssertionError.class, new Runnable()
-                {
-                    public void run()
-                    {
-                        // do nothing
-                    }
-                });
-            }
-        });
+        Verify.assertError(AssertionError.class, () -> Verify.assertError(AssertionError.class, () -> {
+            // do nothing
+        }));
     }
 
     @Test
@@ -1110,16 +629,16 @@ public class VerifyTest
     @Test
     public void assertSortedSetsEqual()
     {
-        TreeSortedSet<Integer> integers = TreeSortedSet.newSetWith(Comparators.<Integer>reverseNaturalOrder(), 1, 2, 3, 4);
+        TreeSortedSet<Integer> integers = TreeSortedSet.newSetWith(Comparators.reverseNaturalOrder(), 1, 2, 3, 4);
         Verify.assertSortedSetsEqual(null, null);
-        Verify.assertSortedSetsEqual(TreeSortedSet.newSet(), new TreeSet<Object>());
-        Verify.assertSortedSetsEqual(TreeSortedSet.newSetWith(1, 2, 3), new TreeSet<Integer>(FastList.newListWith(1, 2, 3)));
-        Verify.assertSortedSetsEqual(new TreeSet<Integer>(integers), integers);
+        Verify.assertSortedSetsEqual(TreeSortedSet.newSet(), new TreeSet<>());
+        Verify.assertSortedSetsEqual(TreeSortedSet.newSetWith(1, 2, 3), new TreeSet<>(FastList.newListWith(1, 2, 3)));
+        Verify.assertSortedSetsEqual(new TreeSet<>(integers), integers);
         Verify.assertSortedSetsEqual(TreeSortedSet.newSet(integers), integers);
 
         try
         {
-            Verify.assertSortedSetsEqual(TreeSortedSet.newSetWith(1, 2, 3), new TreeSet<Object>(FastList.newListWith()));
+            Verify.assertSortedSetsEqual(TreeSortedSet.newSetWith(1, 2, 3), new TreeSet<>(FastList.newListWith()));
             Assert.fail();
         }
         catch (AssertionError e)
@@ -1139,7 +658,7 @@ public class VerifyTest
 
         try
         {
-            Verify.assertSortedSetsEqual(TreeSortedSet.newSetWith(Comparators.<Integer>reverseNaturalOrder(), 1, 2, 3, 4, 5), integers);
+            Verify.assertSortedSetsEqual(TreeSortedSet.newSetWith(Comparators.reverseNaturalOrder(), 1, 2, 3, 4, 5), integers);
             Assert.fail();
         }
         catch (AssertionError e)
@@ -1149,7 +668,7 @@ public class VerifyTest
 
         try
         {
-            Verify.assertSortedSetsEqual(TreeSortedSet.newSetWith(Comparators.<Integer>reverseNaturalOrder(), 3, 4), integers);
+            Verify.assertSortedSetsEqual(TreeSortedSet.newSetWith(Comparators.reverseNaturalOrder(), 3, 4), integers);
             Assert.fail();
         }
         catch (AssertionError e)

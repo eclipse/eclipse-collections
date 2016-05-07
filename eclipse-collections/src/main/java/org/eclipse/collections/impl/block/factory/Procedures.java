@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -42,17 +42,17 @@ public final class Procedures
 
     public static <T> Procedure<T> println(PrintStream stream)
     {
-        return new PrintlnProcedure<T>(stream);
+        return new PrintlnProcedure<>(stream);
     }
 
     public static <T> Procedure<T> append(Appendable appendable)
     {
-        return new AppendProcedure<T>(appendable);
+        return new AppendProcedure<>(appendable);
     }
 
     public static <T> Procedure<T> throwing(ThrowingProcedure<T> throwingProcedure)
     {
-        return new ThrowingProcedureAdapter<T>(throwingProcedure);
+        return new ThrowingProcedureAdapter<>(throwingProcedure);
     }
 
     /**
@@ -66,12 +66,12 @@ public final class Procedures
 
     public static <T> Procedure<T> fromObjectIntProcedure(ObjectIntProcedure<? super T> objectIntProcedure)
     {
-        return new ObjectIntProcedureAdapter<T>(objectIntProcedure);
+        return new ObjectIntProcedureAdapter<>(objectIntProcedure);
     }
 
     public static <T> Procedure<T> ifTrue(Predicate<? super T> predicate, Procedure<? super T> block)
     {
-        return new IfProcedure<T>(predicate, block);
+        return new IfProcedure<>(predicate, block);
     }
 
     public static <T> Procedure<T> ifElse(
@@ -79,12 +79,12 @@ public final class Procedures
             Procedure<? super T> trueProcedure,
             Procedure<? super T> falseProcedure)
     {
-        return new IfProcedure<T>(predicate, trueProcedure, falseProcedure);
+        return new IfProcedure<>(predicate, trueProcedure, falseProcedure);
     }
 
     public static <T> CaseProcedure<T> caseDefault(Procedure<? super T> defaultProcedure)
     {
-        return new CaseProcedure<T>(defaultProcedure);
+        return new CaseProcedure<>(defaultProcedure);
     }
 
     public static <T> CaseProcedure<T> caseDefault(
@@ -97,12 +97,12 @@ public final class Procedures
 
     public static <T> Procedure<T> synchronizedEach(Procedure<T> procedure)
     {
-        return new Procedures.SynchronizedProcedure<T>(procedure);
+        return new Procedures.SynchronizedProcedure<>(procedure);
     }
 
     public static <T, P> Procedure<T> bind(Procedure2<? super T, ? super P> procedure, P parameter)
     {
-        return new BindProcedure<T, P>(procedure, parameter);
+        return new BindProcedure<>(procedure, parameter);
     }
 
     private static final class PrintlnProcedure<T> implements Procedure<T>
@@ -116,6 +116,7 @@ public final class Procedures
             this.stream = stream;
         }
 
+        @Override
         public void value(T each)
         {
             this.stream.println(each);
@@ -133,6 +134,7 @@ public final class Procedures
             this.appendable = appendable;
         }
 
+        @Override
         public void value(T each)
         {
             try
@@ -163,6 +165,7 @@ public final class Procedures
             this.objectIntProcedure = objectIntProcedure;
         }
 
+        @Override
         public void value(T each)
         {
             this.objectIntProcedure.value(each, this.count);
@@ -180,6 +183,7 @@ public final class Procedures
             this.procedure = procedure;
         }
 
+        @Override
         public void value(T each)
         {
             if (each == null)
@@ -208,6 +212,7 @@ public final class Procedures
             this.parameter = parameter;
         }
 
+        @Override
         public void value(T each)
         {
             this.procedure.value(each, this.parameter);
@@ -224,6 +229,7 @@ public final class Procedures
             this.throwingProcedure = throwingProcedure;
         }
 
+        @Override
         public void safeValue(T object) throws Exception
         {
             this.throwingProcedure.safeValue(object);

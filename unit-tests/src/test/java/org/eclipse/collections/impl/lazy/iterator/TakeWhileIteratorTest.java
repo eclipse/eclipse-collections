@@ -42,7 +42,7 @@ public class TakeWhileIteratorTest
         Iterator<Integer> iterator4 = new TakeWhileIterator<>(list, Predicates.alwaysFalse());
         assertElements(iterator4, 0);
 
-        Iterator<Integer> iterator5 = new TakeWhileIterator<>(Lists.fixedSize.<Integer>of(), Predicates.alwaysFalse());
+        Iterator<Integer> iterator5 = new TakeWhileIterator<>(Lists.fixedSize.of(), Predicates.alwaysFalse());
         assertElements(iterator5, 0);
     }
 

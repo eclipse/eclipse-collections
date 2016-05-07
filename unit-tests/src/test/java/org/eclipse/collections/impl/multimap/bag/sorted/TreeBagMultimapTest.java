@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -128,28 +128,28 @@ public class TreeBagMultimapTest extends AbstractMutableSortedBagMultimapTestCas
     @Test
     public void testComparatorConstructors()
     {
-        MutableSortedBagMultimap<Boolean, Integer> revMap = TreeBagMultimap.newMultimap(Collections.<Integer>reverseOrder());
+        MutableSortedBagMultimap<Boolean, Integer> revMap = TreeBagMultimap.newMultimap(Collections.reverseOrder());
         for (int i = 1; i < 10; ++i)
         {
             revMap.put(IntegerPredicates.isOdd().accept(i), i);
         }
         Verify.assertSize(2, revMap.keysView().toList());
-        Verify.assertSortedBagsEqual(TreeBag.newBagWith(Collections.<Integer>reverseOrder(), 9, 7, 5, 3, 1), revMap.get(Boolean.TRUE));
-        Verify.assertSortedBagsEqual(TreeBag.newBagWith(Collections.<Integer>reverseOrder(), 8, 6, 4, 2), revMap.get(Boolean.FALSE));
+        Verify.assertSortedBagsEqual(TreeBag.newBagWith(Collections.reverseOrder(), 9, 7, 5, 3, 1), revMap.get(Boolean.TRUE));
+        Verify.assertSortedBagsEqual(TreeBag.newBagWith(Collections.reverseOrder(), 8, 6, 4, 2), revMap.get(Boolean.FALSE));
         MutableSortedBagMultimap<Boolean, Integer> revMap2 = TreeBagMultimap.newMultimap(revMap);
         Verify.assertMapsEqual(revMap2.toMap(), revMap.toMap());
-        Verify.assertSortedBagsEqual(TreeBag.newBagWith(Collections.<Integer>reverseOrder(), 9, 7, 5, 3, 1), revMap2.get(Boolean.TRUE));
+        Verify.assertSortedBagsEqual(TreeBag.newBagWith(Collections.reverseOrder(), 9, 7, 5, 3, 1), revMap2.get(Boolean.TRUE));
     }
 
     @Test
     public void testCollection()
     {
-        TreeBagMultimap<Integer, Integer> bagMultimap = TreeBagMultimap.newMultimap(Collections.<Integer>reverseOrder());
+        TreeBagMultimap<Integer, Integer> bagMultimap = TreeBagMultimap.newMultimap(Collections.reverseOrder());
         MutableSortedBag<Integer> collection = bagMultimap.createCollection();
         collection.addAll(FastList.newListWith(1, 4, 2, 3, 5, 5));
-        Verify.assertSortedBagsEqual(TreeBag.newBagWith(Collections.<Integer>reverseOrder(), 5, 5, 4, 3, 2, 1), collection);
+        Verify.assertSortedBagsEqual(TreeBag.newBagWith(Collections.reverseOrder(), 5, 5, 4, 3, 2, 1), collection);
         bagMultimap.putAll(1, collection);
-        Verify.assertSortedBagsEqual(TreeBag.newBagWith(Collections.<Integer>reverseOrder(), 5, 5, 4, 3, 2, 1), collection);
+        Verify.assertSortedBagsEqual(TreeBag.newBagWith(Collections.reverseOrder(), 5, 5, 4, 3, 2, 1), collection);
         bagMultimap.put(1, 0);
         Assert.assertEquals(Integer.valueOf(0), bagMultimap.get(1).getLast());
         bagMultimap.putAll(2, FastList.newListWith(0, 1, 2, 3, 4, 5, 5));
@@ -159,7 +159,7 @@ public class TreeBagMultimapTest extends AbstractMutableSortedBagMultimapTestCas
     @Test
     public void testNewEmpty()
     {
-        TreeBagMultimap<Object, Integer> expected = TreeBagMultimap.newMultimap(Collections.<Integer>reverseOrder());
+        TreeBagMultimap<Object, Integer> expected = TreeBagMultimap.newMultimap(Collections.reverseOrder());
         TreeBagMultimap<Object, Integer> actual = expected.newEmpty();
         expected.putAll(1, FastList.newListWith(4, 3, 1, 2));
         expected.putAll(2, FastList.newListWith(5, 7, 6, 8));

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -12,7 +12,6 @@ package org.eclipse.collections.impl.multimap.set;
 
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
-import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.multimap.bag.MutableBagMultimap;
 import org.eclipse.collections.api.multimap.set.ImmutableSetMultimap;
@@ -45,33 +44,31 @@ public abstract class AbstractMutableSetMultimap<K, V> extends AbstractMutableMu
         super(size);
     }
 
+    @Override
     public MutableSetMultimap<K, V> toMutable()
     {
-        return new UnifiedSetMultimap<K, V>(this);
+        return new UnifiedSetMultimap<>(this);
     }
 
+    @Override
     public ImmutableSetMultimap<K, V> toImmutable()
     {
-        final MutableMap<K, ImmutableSet<V>> map = UnifiedMap.newMap();
+        MutableMap<K, ImmutableSet<V>> map = UnifiedMap.newMap();
 
-        this.map.forEachKeyValue(new Procedure2<K, MutableSet<V>>()
-        {
-            public void value(K key, MutableSet<V> set)
-            {
-                map.put(key, set.toImmutable());
-            }
-        });
+        this.map.forEachKeyValue((key, set) -> map.put(key, set.toImmutable()));
 
-        return new ImmutableSetMultimapImpl<K, V>(map);
+        return new ImmutableSetMultimapImpl<>(map);
     }
 
+    @Override
     public <K2, V2> MutableBagMultimap<K2, V2> collectKeysValues(Function2<? super K, ? super V, Pair<K2, V2>> function)
     {
-        return this.collectKeysValues(function, HashBagMultimap.<K2, V2>newMultimap());
+        return this.collectKeysValues(function, HashBagMultimap.newMultimap());
     }
 
+    @Override
     public <V2> MutableBagMultimap<K, V2> collectValues(Function<? super V, ? extends V2> function)
     {
-        return this.collectValues(function, HashBagMultimap.<K, V2>newMultimap());
+        return this.collectValues(function, HashBagMultimap.newMultimap());
     }
 }

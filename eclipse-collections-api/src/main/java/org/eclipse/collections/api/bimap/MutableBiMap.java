@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -31,12 +31,16 @@ import org.eclipse.collections.api.tuple.Pair;
  */
 public interface MutableBiMap<K, V> extends BiMap<K, V>, MutableMapIterable<K, V>, Cloneable
 {
+    @Override
     MutableBiMap<K, V> newEmpty();
 
+    @Override
     MutableBiMap<V, K> inverse();
 
+    @Override
     MutableBiMap<V, K> flipUniqueValues();
 
+    @Override
     MutableSetMultimap<V, K> flip();
 
     /**
@@ -44,6 +48,7 @@ public interface MutableBiMap<K, V> extends BiMap<K, V>, MutableMapIterable<K, V
      *
      * @throws IllegalArgumentException if the value already exists in the bimap.
      */
+    @Override
     V put(K key, V value);
 
     /**
@@ -52,61 +57,85 @@ public interface MutableBiMap<K, V> extends BiMap<K, V>, MutableMapIterable<K, V
      */
     V forcePut(K key, V value);
 
+    @Override
     MutableBiMap<K, V> asSynchronized();
 
+    @Override
     MutableBiMap<K, V> asUnmodifiable();
 
     MutableBiMap<K, V> clone();
 
+    @Override
     MutableBiMap<K, V> tap(Procedure<? super V> procedure);
 
+    @Override
     MutableBiMap<K, V> select(Predicate2<? super K, ? super V> predicate);
 
+    @Override
     MutableBiMap<K, V> reject(Predicate2<? super K, ? super V> predicate);
 
+    @Override
     <K2, V2> MutableBiMap<K2, V2> collect(Function2<? super K, ? super V, Pair<K2, V2>> function);
 
+    @Override
     <R> MutableBiMap<K, R> collectValues(Function2<? super K, ? super V, ? extends R> function);
 
+    @Override
     MutableSet<V> select(Predicate<? super V> predicate);
 
+    @Override
     <P> MutableSet<V> selectWith(Predicate2<? super V, ? super P> predicate, P parameter);
 
+    @Override
     MutableSet<V> reject(Predicate<? super V> predicate);
 
+    @Override
     <P> MutableSet<V> rejectWith(Predicate2<? super V, ? super P> predicate, P parameter);
 
+    @Override
     PartitionMutableSet<V> partition(Predicate<? super V> predicate);
 
+    @Override
     <P> PartitionMutableSet<V> partitionWith(Predicate2<? super V, ? super P> predicate, P parameter);
 
+    @Override
     <S> MutableSet<S> selectInstancesOf(Class<S> clazz);
 
     /**
      * @deprecated in 8.0. Use {@link OrderedIterable#zip(Iterable)} instead.
      */
+    @Override
     @Deprecated
     <S> MutableSet<Pair<V, S>> zip(Iterable<S> that);
 
     /**
      * @deprecated in 8.0. Use {@link OrderedIterable#zipWithIndex()} instead.
      */
+    @Override
     @Deprecated
     MutableSet<Pair<V, Integer>> zipWithIndex();
 
+    @Override
     <V1> MutableSetMultimap<V1, V> groupBy(Function<? super V, ? extends V1> function);
 
+    @Override
     <V1> MutableSetMultimap<V1, V> groupByEach(Function<? super V, ? extends Iterable<V1>> function);
 
+    @Override
     <VV> MutableBiMap<VV, V> groupByUniqueKey(Function<? super V, ? extends VV> function);
 
+    @Override
     MutableBiMap<K, V> withKeyValue(K key, V value);
 
+    @Override
     MutableBiMap<K, V> withAllKeyValues(Iterable<? extends Pair<? extends K, ? extends V>> keyValues);
 
+    @Override
     MutableBiMap<K, V> withAllKeyValueArguments(Pair<? extends K, ? extends V>... keyValuePairs);
 
+    @Override
     MutableBiMap<K, V> withoutKey(K key);
 
+    @Override
     MutableBiMap<K, V> withoutAllKeys(Iterable<? extends K> keys);
 }

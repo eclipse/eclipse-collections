@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -266,7 +266,7 @@ public class UnmodifiableMutableListTest
     @Test
     public void selectInstancesOf()
     {
-        MutableList<Number> numbers = UnmodifiableMutableList.of(FastList.<Number>newListWith(1, 2.0, 3, 4.0, 5));
+        MutableList<Number> numbers = UnmodifiableMutableList.of(FastList.newListWith(1, 2.0, 3, 4.0, 5));
         Assert.assertEquals(iList(1, 3, 5), numbers.selectInstancesOf(Integer.class));
         Assert.assertEquals(iList(1, 2.0, 3, 4.0, 5), numbers.selectInstancesOf(Number.class));
     }
@@ -281,8 +281,8 @@ public class UnmodifiableMutableListTest
     @Test
     public void distinctWithHashingStrategy()
     {
-        MutableList<String> letters = UnmodifiableMutableList.of(FastList.<String>newListWith("a", "A", "b", "C", "b", "D", "E", "e"));
-        MutableList<String> expectedLetters = UnmodifiableMutableList.of(FastList.<String>newListWith("a", "b", "C", "D", "E"));
+        MutableList<String> letters = UnmodifiableMutableList.of(FastList.newListWith("a", "A", "b", "C", "b", "D", "E", "e"));
+        MutableList<String> expectedLetters = UnmodifiableMutableList.of(FastList.newListWith("a", "b", "C", "D", "E"));
         Verify.assertListsEqual(letters.distinct(HashingStrategies.fromFunction(String::toLowerCase)), expectedLetters);
     }
 

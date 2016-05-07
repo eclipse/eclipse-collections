@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -49,80 +49,117 @@ public interface ImmutableStack<T> extends StackIterable<T>
 
     ImmutableStack<T> pop(int count);
 
+    @Override
     ImmutableStack<T> takeWhile(Predicate<? super T> predicate);
 
+    @Override
     ImmutableStack<T> dropWhile(Predicate<? super T> predicate);
 
+    @Override
     PartitionImmutableStack<T> partitionWhile(Predicate<? super T> predicate);
 
+    @Override
     ImmutableStack<T> distinct();
 
+    @Override
     ImmutableStack<T> tap(Procedure<? super T> procedure);
 
+    @Override
     ImmutableStack<T> select(Predicate<? super T> predicate);
 
+    @Override
     <P> ImmutableStack<T> selectWith(Predicate2<? super T, ? super P> predicate, P parameter);
 
+    @Override
     ImmutableStack<T> reject(Predicate<? super T> predicate);
 
+    @Override
     <P> ImmutableStack<T> rejectWith(Predicate2<? super T, ? super P> predicate, P parameter);
 
+    @Override
     <S> ImmutableStack<S> selectInstancesOf(Class<S> clazz);
 
+    @Override
     PartitionImmutableStack<T> partition(Predicate<? super T> predicate);
 
+    @Override
     <P> PartitionImmutableStack<T> partitionWith(Predicate2<? super T, ? super P> predicate, P parameter);
 
+    @Override
     <V> ImmutableStack<V> collect(Function<? super T, ? extends V> function);
 
+    @Override
     ImmutableBooleanStack collectBoolean(BooleanFunction<? super T> booleanFunction);
 
+    @Override
     ImmutableByteStack collectByte(ByteFunction<? super T> byteFunction);
 
+    @Override
     ImmutableCharStack collectChar(CharFunction<? super T> charFunction);
 
+    @Override
     ImmutableDoubleStack collectDouble(DoubleFunction<? super T> doubleFunction);
 
+    @Override
     ImmutableFloatStack collectFloat(FloatFunction<? super T> floatFunction);
 
+    @Override
     ImmutableIntStack collectInt(IntFunction<? super T> intFunction);
 
+    @Override
     ImmutableLongStack collectLong(LongFunction<? super T> longFunction);
 
+    @Override
     ImmutableShortStack collectShort(ShortFunction<? super T> shortFunction);
 
+    @Override
     <P, V> ImmutableStack<V> collectWith(Function2<? super T, ? super P, ? extends V> function, P parameter);
 
+    @Override
     <V> ImmutableStack<V> collectIf(Predicate<? super T> predicate, Function<? super T, ? extends V> function);
 
+    @Override
     <V> ImmutableStack<V> collectWithIndex(ObjectIntToObjectFunction<? super T, ? extends V> function);
 
+    @Override
     <V> ImmutableStack<V> flatCollect(Function<? super T, ? extends Iterable<V>> function);
 
+    @Override
     <V> ImmutableListMultimap<V, T> groupBy(Function<? super T, ? extends V> function);
 
+    @Override
     <V> ImmutableListMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function);
 
+    @Override
     <V> ImmutableMap<V, T> groupByUniqueKey(Function<? super T, ? extends V> function);
 
+    @Override
     <S> ImmutableStack<Pair<T, S>> zip(Iterable<S> that);
 
+    @Override
     ImmutableStack<Pair<T, Integer>> zipWithIndex();
 
+    @Override
     <K, V> ImmutableMap<K, V> aggregateInPlaceBy(Function<? super T, ? extends K> groupBy, Function0<? extends V> zeroValueFactory, Procedure2<? super V, ? super T> mutatingAggregator);
 
+    @Override
     <K, V> ImmutableMap<K, V> aggregateBy(Function<? super T, ? extends K> groupBy, Function0<? extends V> zeroValueFactory, Function2<? super V, ? super T, ? extends V> nonMutatingAggregator);
 
+    @Override
     <V> ImmutableObjectLongMap<V> sumByInt(Function<? super T, ? extends V> groupBy, IntFunction<? super T> function);
 
+    @Override
     <V> ImmutableObjectDoubleMap<V> sumByFloat(Function<? super T, ? extends V> groupBy, FloatFunction<? super T> function);
 
+    @Override
     <V> ImmutableObjectLongMap<V> sumByLong(Function<? super T, ? extends V> groupBy, LongFunction<? super T> function);
 
+    @Override
     <V> ImmutableObjectDoubleMap<V> sumByDouble(Function<? super T, ? extends V> groupBy, DoubleFunction<? super T> function);
 
     /**
      * Size takes linear time on ImmutableStacks.
      */
+    @Override
     int size();
 }

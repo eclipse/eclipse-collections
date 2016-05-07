@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -22,7 +22,7 @@ public class SynchronizedSortedMapTest extends MutableSortedMapTestCase
     @Override
     public <K, V> MutableSortedMap<K, V> newMap(Comparator<? super K> comparator)
     {
-        return new SynchronizedSortedMap<>(TreeSortedMap.<K, V>newMap(comparator));
+        return new SynchronizedSortedMap<>(TreeSortedMap.newMap(comparator));
     }
 
     @Override
@@ -52,7 +52,7 @@ public class SynchronizedSortedMapTest extends MutableSortedMapTestCase
     @Override
     public <K, V> MutableSortedMap<K, V> newMap()
     {
-        return new SynchronizedSortedMap<>(TreeSortedMap.<K, V>newMap());
+        return new SynchronizedSortedMap<>(TreeSortedMap.newMap());
     }
 
     @Override

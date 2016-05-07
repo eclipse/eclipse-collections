@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -45,13 +45,7 @@ import static org.eclipse.collections.impl.factory.Iterables.iSet;
  */
 public class ConcurrentHashMapUnsafeTest extends ConcurrentHashMapTestCase
 {
-    public static final MutableMap<Integer, MutableBag<Integer>> SMALL_BAG_MUTABLE_MAP = Interval.oneTo(100).groupBy(new Function<Integer, Integer>()
-    {
-        public Integer valueOf(Integer each)
-        {
-            return each % 10;
-        }
-    }).toMap(Bags.mutable::of);
+    public static final MutableMap<Integer, MutableBag<Integer>> SMALL_BAG_MUTABLE_MAP = Interval.oneTo(100).groupBy(each -> each % 10).toMap(Bags.mutable::of);
 
     @Override
     public <K, V> ConcurrentMutableMap<K, V> newMap()

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -84,6 +84,7 @@ public abstract class AbstractMutableSet<T>
         }
     }
 
+    @Override
     public MutableSet<T> newEmpty()
     {
         return UnifiedSet.newSet();
@@ -94,149 +95,174 @@ public abstract class AbstractMutableSet<T>
         return UnifiedSet.newSet(this.size());
     }
 
+    @Override
     public MutableSet<T> tap(Procedure<? super T> procedure)
     {
         this.forEach(procedure);
         return this;
     }
 
+    @Override
     public MutableSet<T> select(Predicate<? super T> predicate)
     {
         return this.select(predicate, this.newEmpty());
     }
 
+    @Override
     public <P> MutableSet<T> selectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
-        return this.selectWith(predicate, parameter, this.<T>newEmptySameSize());
+        return this.selectWith(predicate, parameter, this.newEmptySameSize());
     }
 
+    @Override
     public MutableSet<T> reject(Predicate<? super T> predicate)
     {
-        return this.reject(predicate, this.<T>newEmptySameSize());
+        return this.reject(predicate, this.newEmptySameSize());
     }
 
+    @Override
     public <P> MutableSet<T> rejectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
-        return this.rejectWith(predicate, parameter, this.<T>newEmptySameSize());
+        return this.rejectWith(predicate, parameter, this.newEmptySameSize());
     }
 
+    @Override
     public PartitionMutableSet<T> partition(Predicate<? super T> predicate)
     {
-        PartitionMutableSet<T> partitionMutableSet = new PartitionUnifiedSet<T>();
-        this.forEach(new PartitionProcedure<T>(predicate, partitionMutableSet));
+        PartitionMutableSet<T> partitionMutableSet = new PartitionUnifiedSet<>();
+        this.forEach(new PartitionProcedure<>(predicate, partitionMutableSet));
         return partitionMutableSet;
     }
 
+    @Override
     public <P> PartitionMutableSet<T> partitionWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
-        PartitionMutableSet<T> partitionMutableSet = new PartitionUnifiedSet<T>();
-        this.forEach(new PartitionPredicate2Procedure<T, P>(predicate, parameter, partitionMutableSet));
+        PartitionMutableSet<T> partitionMutableSet = new PartitionUnifiedSet<>();
+        this.forEach(new PartitionPredicate2Procedure<>(predicate, parameter, partitionMutableSet));
         return partitionMutableSet;
     }
 
+    @Override
     public <S> MutableSet<S> selectInstancesOf(Class<S> clazz)
     {
         MutableSet<S> result = (MutableSet<S>) this.newEmpty();
-        this.forEach(new SelectInstancesOfProcedure<S>(clazz, result));
+        this.forEach(new SelectInstancesOfProcedure<>(clazz, result));
         return result;
     }
 
+    @Override
     public <V> MutableSet<V> collect(Function<? super T, ? extends V> function)
     {
-        return this.collect(function, this.<V>newEmptySameSize());
+        return this.collect(function, this.newEmptySameSize());
     }
 
+    @Override
     public MutableBooleanSet collectBoolean(BooleanFunction<? super T> booleanFunction)
     {
         MutableBooleanSet result = new BooleanHashSet();
-        this.forEach(new CollectBooleanProcedure<T>(booleanFunction, result));
+        this.forEach(new CollectBooleanProcedure<>(booleanFunction, result));
         return result;
     }
 
+    @Override
     public MutableByteSet collectByte(ByteFunction<? super T> byteFunction)
     {
         MutableByteSet result = new ByteHashSet();
-        this.forEach(new CollectByteProcedure<T>(byteFunction, result));
+        this.forEach(new CollectByteProcedure<>(byteFunction, result));
         return result;
     }
 
+    @Override
     public MutableCharSet collectChar(CharFunction<? super T> charFunction)
     {
         MutableCharSet result = new CharHashSet(this.size());
-        this.forEach(new CollectCharProcedure<T>(charFunction, result));
+        this.forEach(new CollectCharProcedure<>(charFunction, result));
         return result;
     }
 
+    @Override
     public MutableDoubleSet collectDouble(DoubleFunction<? super T> doubleFunction)
     {
         MutableDoubleSet result = new DoubleHashSet(this.size());
-        this.forEach(new CollectDoubleProcedure<T>(doubleFunction, result));
+        this.forEach(new CollectDoubleProcedure<>(doubleFunction, result));
         return result;
     }
 
+    @Override
     public MutableFloatSet collectFloat(FloatFunction<? super T> floatFunction)
     {
         MutableFloatSet result = new FloatHashSet(this.size());
-        this.forEach(new CollectFloatProcedure<T>(floatFunction, result));
+        this.forEach(new CollectFloatProcedure<>(floatFunction, result));
         return result;
     }
 
+    @Override
     public MutableIntSet collectInt(IntFunction<? super T> intFunction)
     {
         MutableIntSet result = new IntHashSet(this.size());
-        this.forEach(new CollectIntProcedure<T>(intFunction, result));
+        this.forEach(new CollectIntProcedure<>(intFunction, result));
         return result;
     }
 
+    @Override
     public MutableLongSet collectLong(LongFunction<? super T> longFunction)
     {
         MutableLongSet result = new LongHashSet(this.size());
-        this.forEach(new CollectLongProcedure<T>(longFunction, result));
+        this.forEach(new CollectLongProcedure<>(longFunction, result));
         return result;
     }
 
+    @Override
     public MutableShortSet collectShort(ShortFunction<? super T> shortFunction)
     {
         MutableShortSet result = new ShortHashSet(this.size());
-        this.forEach(new CollectShortProcedure<T>(shortFunction, result));
+        this.forEach(new CollectShortProcedure<>(shortFunction, result));
         return result;
     }
 
+    @Override
     public <V> MutableSet<V> flatCollect(Function<? super T, ? extends Iterable<V>> function)
     {
-        return this.flatCollect(function, this.<V>newEmptySameSize());
+        return this.flatCollect(function, this.newEmptySameSize());
     }
 
+    @Override
     public <P, V> MutableSet<V> collectWith(Function2<? super T, ? super P, ? extends V> function, P parameter)
     {
-        return this.collectWith(function, parameter, this.<V>newEmptySameSize());
+        return this.collectWith(function, parameter, this.newEmptySameSize());
     }
 
+    @Override
     public <V> MutableSet<V> collectIf(Predicate<? super T> predicate, Function<? super T, ? extends V> function)
     {
-        return this.collectIf(predicate, function, this.<V>newEmptySameSize());
+        return this.collectIf(predicate, function, this.newEmptySameSize());
     }
 
+    @Override
     public <V> UnifiedSetMultimap<V, T> groupBy(Function<? super T, ? extends V> function)
     {
-        return this.groupBy(function, UnifiedSetMultimap.<V, T>newMultimap());
+        return this.groupBy(function, UnifiedSetMultimap.newMultimap());
     }
 
+    @Override
     public <V> UnifiedSetMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function)
     {
-        return this.groupByEach(function, UnifiedSetMultimap.<V, T>newMultimap());
+        return this.groupByEach(function, UnifiedSetMultimap.newMultimap());
     }
 
+    @Override
     public MutableSet<T> asUnmodifiable()
     {
         return UnmodifiableMutableSet.of(this);
     }
 
+    @Override
     public MutableSet<T> asSynchronized()
     {
         return SynchronizedMutableSet.of(this);
     }
 
+    @Override
     public ImmutableSet<T> toImmutable()
     {
         return Sets.immutable.withAll(this);
@@ -245,19 +271,21 @@ public abstract class AbstractMutableSet<T>
     /**
      * @deprecated in 6.0. Use {@link OrderedIterable#zip(Iterable)} instead.
      */
+    @Override
     @Deprecated
     public <S> MutableSet<Pair<T, S>> zip(Iterable<S> that)
     {
-        return this.zip(that, this.<Pair<T, S>>newEmptySameSize());
+        return this.zip(that, this.newEmptySameSize());
     }
 
     /**
      * @deprecated in 6.0. Use {@link OrderedIterable#zipWithIndex()} instead.
      */
+    @Override
     @Deprecated
     public MutableSet<Pair<T, Integer>> zipWithIndex()
     {
-        return this.zipWithIndex(this.<Pair<T, Integer>>newEmptySameSize());
+        return this.zipWithIndex(this.newEmptySameSize());
     }
 
     @Override
@@ -266,61 +294,73 @@ public abstract class AbstractMutableSet<T>
         return SetIterate.removeAllIterable(this, iterable);
     }
 
+    @Override
     public MutableSet<T> union(SetIterable<? extends T> set)
     {
         return SetIterables.union(this, set);
     }
 
+    @Override
     public <R extends Set<T>> R unionInto(SetIterable<? extends T> set, R targetSet)
     {
         return SetIterables.unionInto(this, set, targetSet);
     }
 
+    @Override
     public MutableSet<T> intersect(SetIterable<? extends T> set)
     {
         return SetIterables.intersect(this, set);
     }
 
+    @Override
     public <R extends Set<T>> R intersectInto(SetIterable<? extends T> set, R targetSet)
     {
         return SetIterables.intersectInto(this, set, targetSet);
     }
 
+    @Override
     public MutableSet<T> difference(SetIterable<? extends T> subtrahendSet)
     {
         return SetIterables.difference(this, subtrahendSet);
     }
 
+    @Override
     public <R extends Set<T>> R differenceInto(SetIterable<? extends T> subtrahendSet, R targetSet)
     {
         return SetIterables.differenceInto(this, subtrahendSet, targetSet);
     }
 
+    @Override
     public MutableSet<T> symmetricDifference(SetIterable<? extends T> setB)
     {
         return SetIterables.symmetricDifference(this, setB);
     }
 
+    @Override
     public <R extends Set<T>> R symmetricDifferenceInto(SetIterable<? extends T> set, R targetSet)
     {
         return SetIterables.symmetricDifferenceInto(this, set, targetSet);
     }
 
+    @Override
     public boolean isSubsetOf(SetIterable<? extends T> candidateSuperset)
     {
         return SetIterables.isSubsetOf(this, candidateSuperset);
     }
 
+    @Override
     public boolean isProperSubsetOf(SetIterable<? extends T> candidateSuperset)
     {
         return SetIterables.isProperSubsetOf(this, candidateSuperset);
     }
 
+    @Override
     public MutableSet<UnsortedSetIterable<T>> powerSet()
     {
         return (MutableSet<UnsortedSetIterable<T>>) (MutableSet<?>) SetIterables.powerSet(this);
     }
 
+    @Override
     public <B> LazyIterable<Pair<T, B>> cartesianProduct(SetIterable<B> set)
     {
         return SetIterables.cartesianProduct(this, set);

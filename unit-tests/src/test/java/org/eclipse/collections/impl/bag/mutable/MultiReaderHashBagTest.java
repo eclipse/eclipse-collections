@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -192,7 +192,7 @@ public class MultiReaderHashBagTest extends MultiReaderMutableCollectionTestCase
                 MultiReaderHashBag.newBagWith(1, 1, 2, 3).collectWith(
                         addZeroFunction,
                         0,
-                        HashBag.<Integer>newBag()), 1, 2, 3);
+                        HashBag.newBag()), 1, 2, 3);
     }
 
     @Override
@@ -202,7 +202,7 @@ public class MultiReaderHashBagTest extends MultiReaderMutableCollectionTestCase
         Verify.assertContainsAll(MultiReaderHashBag.newBagWith(1, 1, 2, 3, 4).reject(Predicates.lessThan(3)), 3, 4);
         Verify.assertContainsAll(MultiReaderHashBag.newBagWith(1, 2, 3, 3, 4).reject(
                 Predicates.lessThan(3),
-                HashBag.<Integer>newBag()), 3, 4);
+                HashBag.newBag()), 3, 4);
     }
 
     @Override

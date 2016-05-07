@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -95,21 +95,25 @@ public final class BooleanArrayList
         return new BooleanArrayList(source);
     }
 
+    @Override
     public int size()
     {
         return this.size;
     }
 
+    @Override
     public boolean isEmpty()
     {
         return this.size == 0;
     }
 
+    @Override
     public boolean notEmpty()
     {
         return this.size > 0;
     }
 
+    @Override
     public void clear()
     {
         if (this.items != null)
@@ -119,6 +123,7 @@ public final class BooleanArrayList
         }
     }
 
+    @Override
     public boolean contains(boolean value)
     {
         for (int i = 0; i < this.size; i++)
@@ -131,6 +136,7 @@ public final class BooleanArrayList
         return false;
     }
 
+    @Override
     public boolean containsAll(boolean... source)
     {
         for (boolean value : source)
@@ -143,6 +149,7 @@ public final class BooleanArrayList
         return true;
     }
 
+    @Override
     public boolean containsAll(BooleanIterable source)
     {
         for (BooleanIterator iterator = source.booleanIterator(); iterator.hasNext(); )
@@ -155,6 +162,7 @@ public final class BooleanArrayList
         return true;
     }
 
+    @Override
     public boolean get(int index)
     {
         if (index < this.size)
@@ -169,12 +177,14 @@ public final class BooleanArrayList
         return new IndexOutOfBoundsException("Index: " + index + " Size: " + this.size);
     }
 
+    @Override
     public boolean getFirst()
     {
         this.checkEmpty();
         return this.items.get(0);
     }
 
+    @Override
     public boolean getLast()
     {
         this.checkEmpty();
@@ -189,6 +199,7 @@ public final class BooleanArrayList
         }
     }
 
+    @Override
     public int indexOf(boolean object)
     {
         for (int i = 0; i < this.size; i++)
@@ -201,6 +212,7 @@ public final class BooleanArrayList
         return -1;
     }
 
+    @Override
     public int lastIndexOf(boolean object)
     {
         for (int i = this.size - 1; i >= 0; i--)
@@ -213,6 +225,7 @@ public final class BooleanArrayList
         return -1;
     }
 
+    @Override
     public boolean add(boolean newItem)
     {
         if (this.size == 0)
@@ -227,6 +240,7 @@ public final class BooleanArrayList
         return true;
     }
 
+    @Override
     public boolean addAll(boolean... source)
     {
         if (source.length < 1)
@@ -241,11 +255,13 @@ public final class BooleanArrayList
         return true;
     }
 
+    @Override
     public boolean addAll(BooleanIterable source)
     {
         return this.addAll(source.toArray());
     }
 
+    @Override
     public void addAtIndex(int index, boolean element)
     {
         if (index > -1 && index < this.size)
@@ -272,6 +288,7 @@ public final class BooleanArrayList
         this.size++;
     }
 
+    @Override
     public boolean addAllAtIndex(int index, boolean... source)
     {
         if (index > this.size || index < 0)
@@ -299,11 +316,13 @@ public final class BooleanArrayList
         return true;
     }
 
+    @Override
     public boolean addAllAtIndex(int index, BooleanIterable source)
     {
         return this.addAllAtIndex(index, source.toArray());
     }
 
+    @Override
     public boolean remove(boolean value)
     {
         int index = this.indexOf(value);
@@ -315,6 +334,7 @@ public final class BooleanArrayList
         return false;
     }
 
+    @Override
     public boolean removeAll(BooleanIterable source)
     {
         boolean modified = false;
@@ -330,6 +350,7 @@ public final class BooleanArrayList
         return modified;
     }
 
+    @Override
     public boolean removeAll(boolean... source)
     {
         if (this.isEmpty() || source.length == 0)
@@ -358,23 +379,19 @@ public final class BooleanArrayList
         return oldSize != this.size;
     }
 
+    @Override
     public boolean retainAll(BooleanIterable source)
     {
         int oldSize = this.size();
-        final BooleanSet sourceSet = source instanceof BooleanSet ? (BooleanSet) source : source.toSet();
-        BooleanArrayList retained = this.select(new BooleanPredicate()
-        {
-            public boolean accept(boolean value)
-            {
-                return sourceSet.contains(value);
-            }
-        });
+        BooleanSet sourceSet = source instanceof BooleanSet ? (BooleanSet) source : source.toSet();
+        BooleanArrayList retained = this.select(sourceSet::contains);
 
         this.size = retained.size;
         this.items = retained.items;
         return oldSize != this.size();
     }
 
+    @Override
     public boolean retainAll(boolean... source)
     {
         return this.retainAll(BooleanHashSet.newSetWith(source));
@@ -393,6 +410,7 @@ public final class BooleanArrayList
         return count;
     }
 
+    @Override
     public boolean removeAtIndex(int index)
     {
         boolean previous = this.get(index);
@@ -408,6 +426,7 @@ public final class BooleanArrayList
         return previous;
     }
 
+    @Override
     public boolean set(int index, boolean element)
     {
         boolean previous = this.get(index);
@@ -415,24 +434,28 @@ public final class BooleanArrayList
         return previous;
     }
 
+    @Override
     public BooleanArrayList with(boolean element)
     {
         this.add(element);
         return this;
     }
 
+    @Override
     public BooleanArrayList without(boolean element)
     {
         this.remove(element);
         return this;
     }
 
+    @Override
     public BooleanArrayList withAll(BooleanIterable elements)
     {
         this.addAll(elements.toArray());
         return this;
     }
 
+    @Override
     public BooleanArrayList withoutAll(BooleanIterable elements)
     {
         this.removeAll(elements);
@@ -463,11 +486,13 @@ public final class BooleanArrayList
         return this;
     }
 
+    @Override
     public MutableBooleanIterator booleanIterator()
     {
         return new InternalBooleanIterator();
     }
 
+    @Override
     public void forEach(BooleanProcedure procedure)
     {
         this.each(procedure);
@@ -476,6 +501,7 @@ public final class BooleanArrayList
     /**
      * @since 7.0.
      */
+    @Override
     public void each(BooleanProcedure procedure)
     {
         for (int i = 0; i < this.size; i++)
@@ -484,6 +510,7 @@ public final class BooleanArrayList
         }
     }
 
+    @Override
     public void forEachWithIndex(BooleanIntProcedure procedure)
     {
         for (int i = 0; i < this.size; i++)
@@ -492,6 +519,7 @@ public final class BooleanArrayList
         }
     }
 
+    @Override
     public <T> T injectInto(T injectedValue, ObjectBooleanToObjectFunction<? super T, ? extends T> function)
     {
         T result = injectedValue;
@@ -502,6 +530,7 @@ public final class BooleanArrayList
         return result;
     }
 
+    @Override
     public <T> T injectIntoWithIndex(T injectedValue, ObjectBooleanIntToObjectFunction<? super T, ? extends T> function)
     {
         T result = injectedValue;
@@ -512,6 +541,7 @@ public final class BooleanArrayList
         return result;
     }
 
+    @Override
     public int count(BooleanPredicate predicate)
     {
         int count = 0;
@@ -525,6 +555,7 @@ public final class BooleanArrayList
         return count;
     }
 
+    @Override
     public boolean anySatisfy(BooleanPredicate predicate)
     {
         for (int i = 0; i < this.size; i++)
@@ -537,6 +568,7 @@ public final class BooleanArrayList
         return false;
     }
 
+    @Override
     public boolean allSatisfy(BooleanPredicate predicate)
     {
         for (int i = 0; i < this.size; i++)
@@ -549,6 +581,7 @@ public final class BooleanArrayList
         return true;
     }
 
+    @Override
     public boolean noneSatisfy(BooleanPredicate predicate)
     {
         for (int i = 0; i < this.size; i++)
@@ -561,6 +594,7 @@ public final class BooleanArrayList
         return true;
     }
 
+    @Override
     public BooleanArrayList select(BooleanPredicate predicate)
     {
         BooleanArrayList result = new BooleanArrayList();
@@ -575,6 +609,7 @@ public final class BooleanArrayList
         return result;
     }
 
+    @Override
     public BooleanArrayList reject(BooleanPredicate predicate)
     {
         BooleanArrayList result = new BooleanArrayList();
@@ -589,11 +624,13 @@ public final class BooleanArrayList
         return result;
     }
 
+    @Override
     public LazyBooleanIterable asReversed()
     {
         return new ReverseBooleanIterable(this);
     }
 
+    @Override
     public BooleanArrayList reverseThis()
     {
         int endIndex = this.size - 1;
@@ -606,16 +643,19 @@ public final class BooleanArrayList
         return this;
     }
 
+    @Override
     public MutableBooleanList asUnmodifiable()
     {
         return new UnmodifiableBooleanList(this);
     }
 
+    @Override
     public MutableBooleanList asSynchronized()
     {
         return new SynchronizedBooleanList(this);
     }
 
+    @Override
     public ImmutableBooleanList toImmutable()
     {
         if (this.size == 0)
@@ -629,11 +669,13 @@ public final class BooleanArrayList
         return BooleanLists.immutable.with(this.toArray());
     }
 
+    @Override
     public MutableBooleanList subList(int fromIndex, int toIndex)
     {
         throw new UnsupportedOperationException("subList not yet implemented!");
     }
 
+    @Override
     public BooleanArrayList toReversed()
     {
         return new BooleanArrayList(this.asReversed());
@@ -642,6 +684,7 @@ public final class BooleanArrayList
     /**
      * @since 6.0
      */
+    @Override
     public MutableBooleanList distinct()
     {
         BooleanArrayList target = new BooleanArrayList();
@@ -657,6 +700,7 @@ public final class BooleanArrayList
         return target;
     }
 
+    @Override
     public boolean detectIfNone(BooleanPredicate predicate, boolean ifNone)
     {
         for (int i = 0; i < this.size; i++)
@@ -670,6 +714,7 @@ public final class BooleanArrayList
         return ifNone;
     }
 
+    @Override
     public <V> MutableList<V> collect(BooleanToObjectFunction<? extends V> function)
     {
         FastList<V> target = FastList.newList(this.size);
@@ -680,6 +725,7 @@ public final class BooleanArrayList
         return target;
     }
 
+    @Override
     public boolean[] toArray()
     {
         boolean[] newItems = new boolean[this.size];
@@ -734,16 +780,19 @@ public final class BooleanArrayList
         return this.makeString("[", ", ", "]");
     }
 
+    @Override
     public String makeString()
     {
         return this.makeString(", ");
     }
 
+    @Override
     public String makeString(String separator)
     {
         return this.makeString("", separator, "");
     }
 
+    @Override
     public String makeString(String start, String separator, String end)
     {
         Appendable stringBuilder = new StringBuilder();
@@ -751,16 +800,19 @@ public final class BooleanArrayList
         return stringBuilder.toString();
     }
 
+    @Override
     public void appendString(Appendable appendable)
     {
         this.appendString(appendable, ", ");
     }
 
+    @Override
     public void appendString(Appendable appendable, String separator)
     {
         this.appendString(appendable, "", separator, "");
     }
 
+    @Override
     public void appendString(
             Appendable appendable,
             String start,
@@ -787,26 +839,31 @@ public final class BooleanArrayList
         }
     }
 
+    @Override
     public MutableBooleanList toList()
     {
         return BooleanArrayList.newList(this);
     }
 
+    @Override
     public MutableBooleanSet toSet()
     {
         return BooleanHashSet.newSet(this);
     }
 
+    @Override
     public MutableBooleanBag toBag()
     {
         return BooleanHashBag.newBag(this);
     }
 
+    @Override
     public LazyBooleanIterable asLazy()
     {
         return new LazyBooleanIterableAdapter(this);
     }
 
+    @Override
     public void writeExternal(ObjectOutput out) throws IOException
     {
         out.writeInt(this.size());
@@ -816,6 +873,7 @@ public final class BooleanArrayList
         }
     }
 
+    @Override
     public void readExternal(ObjectInput in) throws IOException
     {
         this.size = in.readInt();
@@ -837,11 +895,13 @@ public final class BooleanArrayList
         private int currentIndex;
         private int lastIndex = -1;
 
+        @Override
         public boolean hasNext()
         {
             return this.currentIndex != BooleanArrayList.this.size();
         }
 
+        @Override
         public boolean next()
         {
             if (!this.hasNext())
@@ -853,6 +913,7 @@ public final class BooleanArrayList
             return next;
         }
 
+        @Override
         public void remove()
         {
             if (this.lastIndex == -1)

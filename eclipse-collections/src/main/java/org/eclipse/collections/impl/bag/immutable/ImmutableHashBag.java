@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -78,12 +78,12 @@ public class ImmutableHashBag<T>
 
     public static <T> ImmutableHashBag<T> newBag()
     {
-        return new ImmutableHashBag<T>();
+        return new ImmutableHashBag<>();
     }
 
     public static <T> ImmutableHashBag<T> newBag(Iterable<? extends T> source)
     {
-        return new ImmutableHashBag<T>(source);
+        return new ImmutableHashBag<>(source);
     }
 
     public static <T> ImmutableHashBag<T> newBagWith(T... elements)
@@ -93,14 +93,16 @@ public class ImmutableHashBag<T>
 
     public static <T> ImmutableHashBag<T> newBagWith(Bag<? extends T> bag)
     {
-        return new ImmutableHashBag<T>(bag);
+        return new ImmutableHashBag<>(bag);
     }
 
+    @Override
     public ImmutableBag<T> newWith(T element)
     {
         return HashBag.newBag(this.delegate).with(element).toImmutable();
     }
 
+    @Override
     public ImmutableBag<T> newWithout(T element)
     {
         HashBag<T> hashBag = HashBag.newBag(this.delegate);
@@ -108,16 +110,19 @@ public class ImmutableHashBag<T>
         return hashBag.toImmutable();
     }
 
+    @Override
     public ImmutableBag<T> newWithAll(Iterable<? extends T> elements)
     {
         return Iterate.addAllTo(elements, HashBag.newBag(this.delegate)).toImmutable();
     }
 
+    @Override
     public int size()
     {
         return this.delegate.size();
     }
 
+    @Override
     public <V> ImmutableBagMultimap<V, T> groupBy(Function<? super T, ? extends V> function)
     {
         return this.delegate.groupBy(function).toImmutable();
@@ -131,6 +136,7 @@ public class ImmutableHashBag<T>
         return this.delegate.groupBy(function, target);
     }
 
+    @Override
     public <V> ImmutableBagMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function)
     {
         return this.delegate.groupByEach(function).toImmutable();
@@ -162,11 +168,13 @@ public class ImmutableHashBag<T>
         return this.delegate.notEmpty();
     }
 
+    @Override
     public T getFirst()
     {
         return this.delegate.getFirst();
     }
 
+    @Override
     public T getLast()
     {
         return this.delegate.getLast();
@@ -234,6 +242,7 @@ public class ImmutableHashBag<T>
         return this.delegate.toMap(keyFunction, valueFunction);
     }
 
+    @Override
     public void each(Procedure<? super T> procedure)
     {
         this.delegate.forEach(procedure);
@@ -245,26 +254,31 @@ public class ImmutableHashBag<T>
         this.delegate.forEachWithIndex(objectIntProcedure);
     }
 
+    @Override
     public <S> ImmutableBag<S> selectInstancesOf(Class<S> clazz)
     {
         return this.delegate.selectInstancesOf(clazz).toImmutable();
     }
 
+    @Override
     public ImmutableBag<T> selectByOccurrences(IntPredicate predicate)
     {
         return this.delegate.selectByOccurrences(predicate).toImmutable();
     }
 
+    @Override
     public void forEachWithOccurrences(ObjectIntProcedure<? super T> objectIntProcedure)
     {
         this.delegate.forEachWithOccurrences(objectIntProcedure);
     }
 
+    @Override
     public int sizeDistinct()
     {
         return this.delegate.sizeDistinct();
     }
 
+    @Override
     public int occurrencesOf(Object item)
     {
         return this.delegate.occurrencesOf(item);
@@ -312,6 +326,7 @@ public class ImmutableHashBag<T>
         return this.delegate.toSortedMap(comparator, keyFunction, valueFunction);
     }
 
+    @Override
     public ImmutableBag<T> select(Predicate<? super T> predicate)
     {
         return this.delegate.select(predicate).toImmutable();
@@ -323,6 +338,7 @@ public class ImmutableHashBag<T>
         return this.delegate.select(predicate, target);
     }
 
+    @Override
     public ImmutableBag<T> reject(Predicate<? super T> predicate)
     {
         return this.delegate.reject(predicate).toImmutable();
@@ -340,6 +356,7 @@ public class ImmutableHashBag<T>
         return this.delegate.partition(predicate).toImmutable();
     }
 
+    @Override
     public <V> ImmutableBag<V> collect(Function<? super T, ? extends V> function)
     {
         return this.delegate.collect(function).toImmutable();
@@ -351,6 +368,7 @@ public class ImmutableHashBag<T>
         return this.delegate.collect(function, target);
     }
 
+    @Override
     public <V> ImmutableBag<V> collectIf(
             Predicate<? super T> predicate,
             Function<? super T, ? extends V> function)
@@ -367,6 +385,7 @@ public class ImmutableHashBag<T>
         return this.delegate.collectIf(predicate, function, target);
     }
 
+    @Override
     public <V> ImmutableBag<V> flatCollect(Function<? super T, ? extends Iterable<V>> function)
     {
         return this.delegate.flatCollect(function).toImmutable();
@@ -480,6 +499,7 @@ public class ImmutableHashBag<T>
         return this.delegate.hashCode();
     }
 
+    @Override
     public MutableMap<T, Integer> toMapOfItemToCount()
     {
         return this.delegate.toMapOfItemToCount();
@@ -578,6 +598,7 @@ public class ImmutableHashBag<T>
     /**
      * @deprecated in 6.0. Use {@link OrderedIterable#zip(Iterable)} instead.
      */
+    @Override
     @Deprecated
     public <S> ImmutableBag<Pair<T, S>> zip(Iterable<S> that)
     {
@@ -593,6 +614,7 @@ public class ImmutableHashBag<T>
     /**
      * @deprecated in 6.0. Use {@link OrderedIterable#zipWithIndex()} instead.
      */
+    @Override
     @Deprecated
     public ImmutableSet<Pair<T, Integer>> zipWithIndex()
     {
@@ -605,13 +627,14 @@ public class ImmutableHashBag<T>
         return this.delegate.zipWithIndex(target);
     }
 
+    @Override
     public Iterator<T> iterator()
     {
-        return new UnmodifiableIteratorAdapter<T>(this.delegate.iterator());
+        return new UnmodifiableIteratorAdapter<>(this.delegate.iterator());
     }
 
     protected Object writeReplace()
     {
-        return new ImmutableBagSerializationProxy<T>(this);
+        return new ImmutableBagSerializationProxy<>(this);
     }
 }

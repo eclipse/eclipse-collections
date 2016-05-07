@@ -70,6 +70,7 @@ public interface ListIterable<T>
      * is a valid item of the container, then a developer will need to check to see if the container is
      * empty first.
      */
+    @Override
     T getFirst();
 
     /**
@@ -77,6 +78,7 @@ public interface ListIterable<T>
      * is a valid item of the container, then a developer will need to check to see if the container is
      * empty first.
      */
+    @Override
     T getLast();
 
     /**
@@ -96,6 +98,7 @@ public interface ListIterable<T>
      *
      * @since 2.0
      */
+    @Override
     MutableStack<T> toStack();
 
     /**
@@ -105,48 +108,70 @@ public interface ListIterable<T>
      */
     ImmutableList<T> toImmutable();
 
+    @Override
     ListIterable<T> tap(Procedure<? super T> procedure);
 
+    @Override
     ListIterable<T> select(Predicate<? super T> predicate);
 
+    @Override
     <P> ListIterable<T> selectWith(Predicate2<? super T, ? super P> predicate, P parameter);
 
+    @Override
     ListIterable<T> reject(Predicate<? super T> predicate);
 
+    @Override
     <P> ListIterable<T> rejectWith(Predicate2<? super T, ? super P> predicate, P parameter);
 
+    @Override
     PartitionList<T> partition(Predicate<? super T> predicate);
 
+    @Override
     <P> PartitionList<T> partitionWith(Predicate2<? super T, ? super P> predicate, P parameter);
 
+    @Override
     <S> ListIterable<S> selectInstancesOf(Class<S> clazz);
 
+    @Override
     <V> ListIterable<V> collect(Function<? super T, ? extends V> function);
 
+    @Override
     BooleanList collectBoolean(BooleanFunction<? super T> booleanFunction);
 
+    @Override
     ByteList collectByte(ByteFunction<? super T> byteFunction);
 
+    @Override
     CharList collectChar(CharFunction<? super T> charFunction);
 
+    @Override
     DoubleList collectDouble(DoubleFunction<? super T> doubleFunction);
 
+    @Override
     FloatList collectFloat(FloatFunction<? super T> floatFunction);
 
+    @Override
     IntList collectInt(IntFunction<? super T> intFunction);
 
+    @Override
     LongList collectLong(LongFunction<? super T> longFunction);
 
+    @Override
     ShortList collectShort(ShortFunction<? super T> shortFunction);
 
+    @Override
     <P, V> ListIterable<V> collectWith(Function2<? super T, ? super P, ? extends V> function, P parameter);
 
+    @Override
     <V> ListIterable<V> collectIf(Predicate<? super T> predicate, Function<? super T, ? extends V> function);
 
+    @Override
     <V> ListIterable<V> flatCollect(Function<? super T, ? extends Iterable<V>> function);
 
+    @Override
     <V> ListMultimap<V, T> groupBy(Function<? super T, ? extends V> function);
 
+    @Override
     <V> ListMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function);
 
     /**
@@ -158,6 +183,7 @@ public interface ListIterable<T>
      * @return {@code ListIterable} of distinct elements
      * @since 3.0
      */
+    @Override
     ListIterable<T> distinct();
 
     /**
@@ -168,10 +194,13 @@ public interface ListIterable<T>
      */
     ListIterable<T> distinct(HashingStrategy<? super T> hashingStrategy);
 
+    @Override
     <S> ListIterable<Pair<T, S>> zip(Iterable<S> that);
 
+    @Override
     ListIterable<Pair<T, Integer>> zipWithIndex();
 
+    @Override
     ListIterable<T> take(int count);
 
     /**
@@ -180,8 +209,10 @@ public interface ListIterable<T>
      *
      * @since 3.0
      */
+    @Override
     ListIterable<T> takeWhile(Predicate<? super T> predicate);
 
+    @Override
     ListIterable<T> drop(int count);
 
     /**
@@ -190,6 +221,7 @@ public interface ListIterable<T>
      *
      * @since 3.0
      */
+    @Override
     ListIterable<T> dropWhile(Predicate<? super T> predicate);
 
     /**
@@ -198,8 +230,10 @@ public interface ListIterable<T>
      *
      * @since 3.0
      */
+    @Override
     PartitionList<T> partitionWhile(Predicate<? super T> predicate);
 
+    @Override
     ListIterable<T> toReversed();
 
     /**
@@ -229,10 +263,12 @@ public interface ListIterable<T>
     /**
      * Follows the same general contract as {@link List#equals(Object)}.
      */
+    @Override
     boolean equals(Object o);
 
     /**
      * Follows the same general contract as {@link List#hashCode()}.
      */
+    @Override
     int hashCode();
 }

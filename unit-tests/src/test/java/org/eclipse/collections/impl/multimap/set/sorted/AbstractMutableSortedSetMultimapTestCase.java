@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -82,7 +82,7 @@ public abstract class AbstractMutableSortedSetMultimapTestCase extends AbstractM
     @Test
     public void serialization()
     {
-        MutableSortedSetMultimap<Integer, Integer> map = this.newMultimap(Comparators.<Integer>reverseNaturalOrder());
+        MutableSortedSetMultimap<Integer, Integer> map = this.newMultimap(Comparators.reverseNaturalOrder());
         map.putAll(1, FastList.newListWith(4, 3, 2, 1));
         map.putAll(2, FastList.newListWith(5, 4, 3, 2));
         Verify.assertPostSerializedEqualsAndHashCode(map);
@@ -90,7 +90,7 @@ public abstract class AbstractMutableSortedSetMultimapTestCase extends AbstractM
         MutableSortedSetMultimap<Integer, Integer> deserialized = SerializeTestHelper.serializeDeserialize(map);
 
         Verify.assertSortedSetsEqual(
-                TreeSortedSet.newSetWith(Comparators.<Integer>reverseNaturalOrder(), 4, 3, 2, 1),
+                TreeSortedSet.newSetWith(Comparators.reverseNaturalOrder(), 4, 3, 2, 1),
                 deserialized.get(1));
 
         deserialized.putAll(3, FastList.newListWith(10, 9, 8));
@@ -101,11 +101,11 @@ public abstract class AbstractMutableSortedSetMultimapTestCase extends AbstractM
     @Test
     public void selectKeysValues()
     {
-        MutableSortedSetMultimap<String, Integer> multimap = this.newMultimap(Comparators.<Integer>reverseNaturalOrder());
+        MutableSortedSetMultimap<String, Integer> multimap = this.newMultimap(Comparators.reverseNaturalOrder());
         multimap.putAll("One", FastList.newListWith(4, 3, 2, 1, 1));
         multimap.putAll("Two", FastList.newListWith(5, 4, 3, 2, 2));
         MutableSortedSetMultimap<String, Integer> selectedMultimap = multimap.selectKeysValues((key, value) -> ("Two".equals(key) && (value % 2 == 0)));
-        MutableSortedSetMultimap<String, Integer> expectedMultimap = TreeSortedSetMultimap.newMultimap(Comparators.<Integer>reverseNaturalOrder());
+        MutableSortedSetMultimap<String, Integer> expectedMultimap = TreeSortedSetMultimap.newMultimap(Comparators.reverseNaturalOrder());
         expectedMultimap.putAll("Two", FastList.newListWith(4, 2));
         Verify.assertSortedSetMultimapsEqual(expectedMultimap, selectedMultimap);
         Assert.assertSame(expectedMultimap.comparator(), selectedMultimap.comparator());
@@ -115,11 +115,11 @@ public abstract class AbstractMutableSortedSetMultimapTestCase extends AbstractM
     @Test
     public void rejectKeysValues()
     {
-        MutableSortedSetMultimap<String, Integer> multimap = this.newMultimap(Comparators.<Integer>reverseNaturalOrder());
+        MutableSortedSetMultimap<String, Integer> multimap = this.newMultimap(Comparators.reverseNaturalOrder());
         multimap.putAll("One", FastList.newListWith(4, 3, 2, 1, 1));
         multimap.putAll("Two", FastList.newListWith(5, 4, 3, 2, 2));
         MutableSortedSetMultimap<String, Integer> rejectedMultimap = multimap.rejectKeysValues((key, value) -> ("Two".equals(key) || (value % 2 == 0)));
-        MutableSortedSetMultimap<String, Integer> expectedMultimap = TreeSortedSetMultimap.newMultimap(Comparators.<Integer>reverseNaturalOrder());
+        MutableSortedSetMultimap<String, Integer> expectedMultimap = TreeSortedSetMultimap.newMultimap(Comparators.reverseNaturalOrder());
         expectedMultimap.putAll("One", FastList.newListWith(3, 1));
         Verify.assertSortedSetMultimapsEqual(expectedMultimap, rejectedMultimap);
         Assert.assertEquals(expectedMultimap.comparator(), rejectedMultimap.comparator());
@@ -129,13 +129,13 @@ public abstract class AbstractMutableSortedSetMultimapTestCase extends AbstractM
     @Test
     public void selectKeysMultiValues()
     {
-        MutableSortedSetMultimap<Integer, Integer> multimap = this.newMultimap(Comparators.<Integer>reverseNaturalOrder());
+        MutableSortedSetMultimap<Integer, Integer> multimap = this.newMultimap(Comparators.reverseNaturalOrder());
         multimap.putAll(1, FastList.newListWith(4, 3, 1));
         multimap.putAll(2, FastList.newListWith(5, 4, 3, 2, 2));
         multimap.putAll(3, FastList.newListWith(5, 4, 3, 2, 2));
         multimap.putAll(4, FastList.newListWith(4, 3, 1));
         MutableSortedSetMultimap<Integer, Integer> selectedMultimap = multimap.selectKeysMultiValues((key, values) -> (key % 2 == 0 && Iterate.sizeOf(values) > 3));
-        MutableSortedSetMultimap<Integer, Integer> expectedMultimap = TreeSortedSetMultimap.newMultimap(Comparators.<Integer>reverseNaturalOrder());
+        MutableSortedSetMultimap<Integer, Integer> expectedMultimap = TreeSortedSetMultimap.newMultimap(Comparators.reverseNaturalOrder());
         expectedMultimap.putAll(2, FastList.newListWith(5, 4, 3, 2, 2));
         Verify.assertSortedSetMultimapsEqual(expectedMultimap, selectedMultimap);
         Assert.assertSame(expectedMultimap.comparator(), selectedMultimap.comparator());
@@ -145,13 +145,13 @@ public abstract class AbstractMutableSortedSetMultimapTestCase extends AbstractM
     @Test
     public void rejectKeysMultiValues()
     {
-        MutableSortedSetMultimap<Integer, Integer> multimap = this.newMultimap(Comparators.<Integer>reverseNaturalOrder());
+        MutableSortedSetMultimap<Integer, Integer> multimap = this.newMultimap(Comparators.reverseNaturalOrder());
         multimap.putAll(1, FastList.newListWith(4, 3, 2, 1));
         multimap.putAll(2, FastList.newListWith(5, 4, 3, 2, 2));
         multimap.putAll(3, FastList.newListWith(4, 3, 1, 1));
         multimap.putAll(4, FastList.newListWith(4, 3, 1));
         MutableSortedSetMultimap<Integer, Integer> selectedMultimap = multimap.rejectKeysMultiValues((key, values) -> (key % 2 == 0 || Iterate.sizeOf(values) > 3));
-        MutableSortedSetMultimap<Integer, Integer> expectedMultimap = TreeSortedSetMultimap.newMultimap(Comparators.<Integer>reverseNaturalOrder());
+        MutableSortedSetMultimap<Integer, Integer> expectedMultimap = TreeSortedSetMultimap.newMultimap(Comparators.reverseNaturalOrder());
         expectedMultimap.putAll(3, FastList.newListWith(4, 3, 1, 1));
         Verify.assertSortedSetMultimapsEqual(expectedMultimap, selectedMultimap);
         Assert.assertSame(expectedMultimap.comparator(), selectedMultimap.comparator());
@@ -161,7 +161,7 @@ public abstract class AbstractMutableSortedSetMultimapTestCase extends AbstractM
     @Test
     public void collectKeysValues()
     {
-        MutableSortedSetMultimap<String, Integer> multimap = this.newMultimap(Comparators.<Integer>reverseNaturalOrder());
+        MutableSortedSetMultimap<String, Integer> multimap = this.newMultimap(Comparators.reverseNaturalOrder());
         multimap.putAll("1", FastList.newListWith(4, 3, 2, 1, 1));
         multimap.putAll("2", FastList.newListWith(5, 4, 3, 2, 2));
         MutableBagMultimap<Integer, String> collectedMultimap1 = multimap.collectKeysValues((key, value) -> Tuples.pair(Integer.valueOf(key), value + "Value"));
@@ -181,7 +181,7 @@ public abstract class AbstractMutableSortedSetMultimapTestCase extends AbstractM
     @Test
     public void collectValues()
     {
-        MutableSortedSetMultimap<String, Integer> multimap = this.newMultimap(Comparators.<Integer>reverseNaturalOrder());
+        MutableSortedSetMultimap<String, Integer> multimap = this.newMultimap(Comparators.reverseNaturalOrder());
         multimap.putAll("1", FastList.newListWith(4, 3, 2, 1, 1));
         multimap.putAll("2", FastList.newListWith(5, 4, 3, 2, 2));
         MutableListMultimap<String, String> collectedMultimap = multimap.collectValues(value -> value + "Value");

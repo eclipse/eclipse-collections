@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -32,19 +32,14 @@ public class CollectBooleanToObjectIterable<V> extends AbstractLazyIterable<V>
         this.function = function;
     }
 
-    public void each(final Procedure<? super V> procedure)
+    @Override
+    public void each(Procedure<? super V> procedure)
     {
-        this.iterable.forEach(new BooleanProcedure()
-        {
-            public void value(boolean each)
-            {
-                procedure.value(CollectBooleanToObjectIterable.this.function.valueOf(each));
-            }
-        });
+        this.iterable.forEach(each -> procedure.value(this.function.valueOf(each)));
     }
 
     @Override
-    public void forEachWithIndex(final ObjectIntProcedure<? super V> objectIntProcedure)
+    public void forEachWithIndex(ObjectIntProcedure<? super V> objectIntProcedure)
     {
         this.iterable.forEach(new BooleanProcedure()
         {
@@ -58,17 +53,12 @@ public class CollectBooleanToObjectIterable<V> extends AbstractLazyIterable<V>
     }
 
     @Override
-    public <P> void forEachWith(final Procedure2<? super V, ? super P> procedure, final P parameter)
+    public <P> void forEachWith(Procedure2<? super V, ? super P> procedure, P parameter)
     {
-        this.iterable.forEach(new BooleanProcedure()
-        {
-            public void value(boolean each)
-            {
-                procedure.value(CollectBooleanToObjectIterable.this.function.valueOf(each), parameter);
-            }
-        });
+        this.iterable.forEach(each -> procedure.value(this.function.valueOf(each), parameter));
     }
 
+    @Override
     public Iterator<V> iterator()
     {
         return new Iterator<V>()

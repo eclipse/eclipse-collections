@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -32,11 +32,13 @@ public class ZipWithIndexIterable<T>
         this.iterable = iterable;
     }
 
+    @Override
     public Iterator<Pair<T, Integer>> iterator()
     {
-        return new ZipWithIndexIterator<T>(this.iterable);
+        return new ZipWithIndexIterator<>(this.iterable);
     }
 
+    @Override
     public void each(Procedure<? super Pair<T, Integer>> procedure)
     {
         IterableIterate.forEach(this, procedure);

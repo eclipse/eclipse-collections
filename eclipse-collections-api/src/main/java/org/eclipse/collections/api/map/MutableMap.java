@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -59,101 +59,142 @@ public interface MutableMap<K, V>
             Function<? super E, ? extends K> keyFunction,
             Function<? super E, ? extends V> valueFunction);
 
+    @Override
     MutableMap<K, V> newEmpty();
 
     MutableMap<K, V> clone();
 
+    @Override
     MutableMap<K, V> asUnmodifiable();
 
+    @Override
     MutableMap<K, V> asSynchronized();
 
+    @Override
     MutableSetMultimap<V, K> flip();
 
+    @Override
     MutableMap<K, V> select(Predicate2<? super K, ? super V> predicate);
 
+    @Override
     MutableMap<K, V> reject(Predicate2<? super K, ? super V> predicate);
 
+    @Override
     <R> MutableMap<K, R> collectValues(Function2<? super K, ? super V, ? extends R> function);
 
+    @Override
     <K2, V2> MutableMap<K2, V2> collect(Function2<? super K, ? super V, Pair<K2, V2>> function);
 
+    @Override
     MutableMap<K, V> tap(Procedure<? super V> procedure);
 
+    @Override
     MutableBag<V> select(Predicate<? super V> predicate);
 
+    @Override
     <P> MutableBag<V> selectWith(Predicate2<? super V, ? super P> predicate, P parameter);
 
+    @Override
     MutableBag<V> reject(Predicate<? super V> predicate);
 
+    @Override
     <P> MutableBag<V> rejectWith(Predicate2<? super V, ? super P> predicate, P parameter);
 
+    @Override
     PartitionMutableBag<V> partition(Predicate<? super V> predicate);
 
+    @Override
     <P> PartitionMutableBag<V> partitionWith(Predicate2<? super V, ? super P> predicate, P parameter);
 
+    @Override
     <S> MutableBag<S> selectInstancesOf(Class<S> clazz);
 
+    @Override
     <R> MutableBag<R> collect(Function<? super V, ? extends R> function);
 
+    @Override
     <P, V1> MutableBag<V1> collectWith(Function2<? super V, ? super P, ? extends V1> function, P parameter);
 
+    @Override
     MutableBooleanBag collectBoolean(BooleanFunction<? super V> booleanFunction);
 
+    @Override
     MutableByteBag collectByte(ByteFunction<? super V> byteFunction);
 
+    @Override
     MutableCharBag collectChar(CharFunction<? super V> charFunction);
 
+    @Override
     MutableDoubleBag collectDouble(DoubleFunction<? super V> doubleFunction);
 
+    @Override
     MutableFloatBag collectFloat(FloatFunction<? super V> floatFunction);
 
+    @Override
     MutableIntBag collectInt(IntFunction<? super V> intFunction);
 
+    @Override
     MutableLongBag collectLong(LongFunction<? super V> longFunction);
 
+    @Override
     MutableShortBag collectShort(ShortFunction<? super V> shortFunction);
 
+    @Override
     <R> MutableBag<R> collectIf(Predicate<? super V> predicate, Function<? super V, ? extends R> function);
 
+    @Override
     <R> MutableBag<R> flatCollect(Function<? super V, ? extends Iterable<R>> function);
 
     /**
      * @deprecated in 6.0. Use {@link OrderedIterable#zip(Iterable)} instead.
      */
+    @Override
     @Deprecated
     <S> MutableBag<Pair<V, S>> zip(Iterable<S> that);
 
     /**
      * @deprecated in 6.0. Use {@link OrderedIterable#zipWithIndex()} instead.
      */
+    @Override
     @Deprecated
     MutableSet<Pair<V, Integer>> zipWithIndex();
 
+    @Override
     <VV> MutableBagMultimap<VV, V> groupBy(Function<? super V, ? extends VV> function);
 
+    @Override
     <VV> MutableBagMultimap<VV, V> groupByEach(Function<? super V, ? extends Iterable<VV>> function);
 
+    @Override
     <V1> MutableMap<V1, V> groupByUniqueKey(Function<? super V, ? extends V1> function);
 
+    @Override
     <K2, V2> MutableMap<K2, V2> aggregateInPlaceBy(
             Function<? super V, ? extends K2> groupBy,
             Function0<? extends V2> zeroValueFactory,
             Procedure2<? super V2, ? super V> mutatingAggregator);
 
+    @Override
     <K2, V2> MutableMap<K2, V2> aggregateBy(
             Function<? super V, ? extends K2> groupBy,
             Function0<? extends V2> zeroValueFactory,
             Function2<? super V2, ? super V, ? extends V2> nonMutatingAggregator);
 
+    @Override
     MutableMap<V, K> flipUniqueValues();
 
+    @Override
     MutableMap<K, V> withKeyValue(K key, V value);
 
+    @Override
     MutableMap<K, V> withAllKeyValues(Iterable<? extends Pair<? extends K, ? extends V>> keyValues);
 
+    @Override
     MutableMap<K, V> withAllKeyValueArguments(Pair<? extends K, ? extends V>... keyValuePairs);
 
+    @Override
     MutableMap<K, V> withoutKey(K key);
 
+    @Override
     MutableMap<K, V> withoutAllKeys(Iterable<? extends K> keys);
 }

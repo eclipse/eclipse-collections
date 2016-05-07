@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -356,13 +356,7 @@ public final class Interval
      */
     private BigInteger bigIntegerProduct()
     {
-        return this.injectInto(BigInteger.valueOf(1L), new Function2<BigInteger, Integer, BigInteger>()
-        {
-            public BigInteger value(BigInteger result, Integer each)
-            {
-                return result.multiply(BigInteger.valueOf(each.longValue()));
-            }
-        });
+        return this.injectInto(BigInteger.valueOf(1L), (result, each) -> result.multiply(BigInteger.valueOf(each.longValue())));
     }
 
     private void failIfOutOfFactorialRange()
@@ -393,15 +387,9 @@ public final class Interval
     }
 
     @Override
-    public void forEachWithIndex(final ObjectIntProcedure<? super Integer> objectIntProcedure)
+    public void forEachWithIndex(ObjectIntProcedure<? super Integer> objectIntProcedure)
     {
-        this.forEachWithIndex(new IntIntProcedure()
-        {
-            public void value(int each, int index)
-            {
-                objectIntProcedure.value(each, index);
-            }
-        });
+        this.forEachWithIndex((IntIntProcedure) objectIntProcedure::value);
     }
 
     public <P> void forEachWith(IntObjectProcedure<? super P> procedure, P parameter)
@@ -428,15 +416,9 @@ public final class Interval
     }
 
     @Override
-    public <P> void forEachWith(final Procedure2<? super Integer, ? super P> procedure, P parameter)
+    public <P> void forEachWith(Procedure2<? super Integer, ? super P> procedure, P parameter)
     {
-        this.forEachWith(new IntObjectProcedure<P>()
-        {
-            public void value(int each, P parameter)
-            {
-                procedure.value(each, parameter);
-            }
-        }, parameter);
+        this.forEachWith((IntObjectProcedure<P>) procedure::value, parameter);
     }
 
     public void forEach(IntProcedure procedure)
@@ -457,15 +439,10 @@ public final class Interval
         }
     }
 
-    public void each(final Procedure<? super Integer> procedure)
+    @Override
+    public void each(Procedure<? super Integer> procedure)
     {
-        this.forEach(new IntProcedure()
-        {
-            public void value(int each)
-            {
-                procedure.value(each);
-            }
-        });
+        this.forEach((IntProcedure) procedure::value);
     }
 
     /**
@@ -502,23 +479,19 @@ public final class Interval
     }
 
     private void executeAndCountdown(
-            final Procedure<? super Integer> procedure,
+            Procedure<? super Integer> procedure,
             Executor executor,
-            final CountDownLatch latch,
-            final Integer integer)
+            CountDownLatch latch,
+            Integer integer)
     {
-        executor.execute(new Runnable()
-        {
-            public void run()
+        executor.execute(() -> {
+            try
             {
-                try
-                {
-                    procedure.value(integer);
-                }
-                finally
-                {
-                    latch.countDown();
-                }
+                procedure.value(integer);
+            }
+            finally
+            {
+                latch.countDown();
             }
         });
     }
@@ -671,7 +644,7 @@ public final class Interval
             Function<? super Integer, ? extends T> function,
             R target)
     {
-        CollectProcedure<Integer, T> procedure = new CollectProcedure<Integer, T>(function, target);
+        CollectProcedure<Integer, T> procedure = new CollectProcedure<>(function, target);
         this.forEach(procedure);
         return target;
     }
@@ -679,7 +652,7 @@ public final class Interval
     @Override
     public <R extends Collection<Integer>> R select(Predicate<? super Integer> predicate, R target)
     {
-        SelectProcedure<Integer> procedure = new SelectProcedure<Integer>(predicate, target);
+        SelectProcedure<Integer> procedure = new SelectProcedure<>(predicate, target);
         this.forEach(procedure);
         return target;
     }
@@ -687,7 +660,7 @@ public final class Interval
     @Override
     public <R extends Collection<Integer>> R reject(Predicate<? super Integer> predicate, R target)
     {
-        RejectProcedure<Integer> procedure = new RejectProcedure<Integer>(predicate, target);
+        RejectProcedure<Integer> procedure = new RejectProcedure<>(predicate, target);
         this.forEach(procedure);
         return target;
     }
@@ -785,14 +758,8 @@ public final class Interval
     @Override
     public Integer[] toArray()
     {
-        final Integer[] result = new Integer[this.size()];
-        this.forEachWithIndex(new ObjectIntProcedure<Integer>()
-        {
-            public void value(Integer each, int index)
-            {
-                result[index] = each;
-            }
-        });
+        Integer[] result = new Integer[this.size()];
+        this.forEachWithIndex((ObjectIntProcedure<Integer>) (each, index) -> result[index] = each);
         return result;
     }
 
@@ -801,14 +768,8 @@ public final class Interval
      */
     public int[] toIntArray()
     {
-        final int[] result = new int[this.size()];
-        this.forEachWithIndex(new IntIntProcedure()
-        {
-            public void value(int each, int index)
-            {
-                result[index] = each;
-            }
-        });
+        int[] result = new int[this.size()];
+        this.forEachWithIndex((IntIntProcedure) (each, index) -> result[index] = each);
         return result;
     }
 
@@ -818,6 +779,7 @@ public final class Interval
         return "Interval from: " + this.from + " to: " + this.to + " step: " + this.step + " size: " + this.size();
     }
 
+    @Override
     public Iterator<Integer> iterator()
     {
         return new IntegerIterator();
@@ -827,6 +789,7 @@ public final class Interval
     {
         private int current = Interval.this.from;
 
+        @Override
         public boolean hasNext()
         {
             if (Interval.this.from <= Interval.this.to)
@@ -836,6 +799,7 @@ public final class Interval
             return this.current >= Interval.this.to;
         }
 
+        @Override
         public Integer next()
         {
             if (this.hasNext())
@@ -847,6 +811,7 @@ public final class Interval
             throw new NoSuchElementException();
         }
 
+        @Override
         public void remove()
         {
             throw new UnsupportedOperationException("Cannot remove a value from an Interval");
@@ -907,6 +872,7 @@ public final class Interval
         }
     }
 
+    @Override
     public Integer get(int index)
     {
         this.checkBounds("index", index);
@@ -934,6 +900,7 @@ public final class Interval
         return (int) Math.max((long) this.from + (long) this.step * (long) index, this.to);
     }
 
+    @Override
     public int indexOf(Object object)
     {
         if (!(object instanceof Integer))
@@ -955,6 +922,7 @@ public final class Interval
         return -1;
     }
 
+    @Override
     public int lastIndexOf(Object object)
     {
         return this.indexOf(object);
@@ -984,68 +952,81 @@ public final class Interval
         return bag;
     }
 
+    @Override
     public boolean add(Integer integer)
     {
         throw new UnsupportedOperationException("Cannot call add() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public boolean remove(Object o)
     {
         throw new UnsupportedOperationException("Cannot call remove() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     @SuppressWarnings("TypeParameterExtendsFinalClass")
     public boolean addAll(Collection<? extends Integer> collection)
     {
         throw new UnsupportedOperationException("Cannot call addAll() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     @SuppressWarnings("TypeParameterExtendsFinalClass")
     public boolean addAll(int index, Collection<? extends Integer> collection)
     {
         throw new UnsupportedOperationException("Cannot call addAll() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public boolean removeAll(Collection<?> collection)
     {
         throw new UnsupportedOperationException("Cannot call removeAll() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public boolean retainAll(Collection<?> collection)
     {
         throw new UnsupportedOperationException("Cannot call retainAll() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public void clear()
     {
         throw new UnsupportedOperationException("Cannot call clear() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public Integer set(int index, Integer element)
     {
         throw new UnsupportedOperationException("Cannot call set() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public void add(int index, Integer element)
     {
         throw new UnsupportedOperationException("Cannot call add() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public Integer remove(int index)
     {
         throw new UnsupportedOperationException("Cannot call remove() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public ListIterator<Integer> listIterator()
     {
-        return new MutableListIterator<Integer>(this, 0);
+        return new MutableListIterator<>(this, 0);
     }
 
+    @Override
     public ListIterator<Integer> listIterator(int index)
     {
-        return new MutableListIterator<Integer>(this, index);
+        return new MutableListIterator<>(this, index);
     }
 
+    @Override
     public Interval subList(int fromIndex, int toIndex)
     {
         return Interval.fromToBy(this.get(fromIndex), this.get(toIndex - 1), this.step);

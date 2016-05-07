@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -41,7 +41,7 @@ final class ImmutableEmptySortedSet<T>
         extends AbstractImmutableSortedSet<T>
         implements Serializable
 {
-    static final ImmutableSortedSet<?> INSTANCE = new ImmutableEmptySortedSet<Object>();
+    static final ImmutableSortedSet<?> INSTANCE = new ImmutableEmptySortedSet<>();
 
     private static final long serialVersionUID = 2L;
 
@@ -59,7 +59,7 @@ final class ImmutableEmptySortedSet<T>
 
     private Object writeReplace()
     {
-        return new ImmutableSortedSetSerializationProxy<T>(this);
+        return new ImmutableSortedSetSerializationProxy<>(this);
     }
 
     @Override
@@ -102,6 +102,7 @@ final class ImmutableEmptySortedSet<T>
         return this;
     }
 
+    @Override
     public int size()
     {
         return 0;
@@ -123,10 +124,12 @@ final class ImmutableEmptySortedSet<T>
         return this;
     }
 
+    @Override
     public void each(Procedure<? super T> procedure)
     {
     }
 
+    @Override
     public void forEach(int startIndex, int endIndex, Procedure<? super T> procedure)
     {
         ListIterate.rangeCheck(startIndex, endIndex, 0);
@@ -137,6 +140,7 @@ final class ImmutableEmptySortedSet<T>
     {
     }
 
+    @Override
     public void forEachWithIndex(int fromIndex, int toIndex, ObjectIntProcedure<? super T> objectIntProcedure)
     {
         ListIterate.rangeCheck(fromIndex, toIndex, 0);
@@ -177,6 +181,7 @@ final class ImmutableEmptySortedSet<T>
         return (ImmutableSortedSet<S>) this;
     }
 
+    @Override
     public Iterator<T> iterator()
     {
         return EmptyIterator.getInstance();
@@ -236,31 +241,37 @@ final class ImmutableEmptySortedSet<T>
         return ArrayStack.newStack();
     }
 
+    @Override
     public T first()
     {
         throw new NoSuchElementException();
     }
 
+    @Override
     public T last()
     {
         throw new NoSuchElementException();
     }
 
+    @Override
     public int indexOf(Object object)
     {
         return -1;
     }
 
+    @Override
     public Comparator<? super T> comparator()
     {
         return this.comparator;
     }
 
+    @Override
     public int compareTo(SortedSetIterable<T> o)
     {
         return o.size() * -1;
     }
 
+    @Override
     public ImmutableSortedSet<T> take(int count)
     {
         if (count < 0)
@@ -270,6 +281,7 @@ final class ImmutableEmptySortedSet<T>
         return this;
     }
 
+    @Override
     public ImmutableSortedSet<T> drop(int count)
     {
         if (count < 0)

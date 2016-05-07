@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -312,7 +312,7 @@ public abstract class UnmodifiableMutableCollectionTestCase<T>
                 pairs.collect((Function<Pair<Object, ?>, Object>) Pair::getOne).toSet());
         Assert.assertEquals(
                 Interval.zeroTo(collection.size() - 1).toSet(),
-                pairs.collect((Function<Pair<?, Integer>, Integer>) Pair::getTwo, UnifiedSet.<Integer>newSet()));
+                pairs.collect((Function<Pair<?, Integer>, Integer>) Pair::getTwo, UnifiedSet.newSet()));
 
         Assert.assertEquals(
                 collection.zipWithIndex().toSet(),
@@ -337,7 +337,7 @@ public abstract class UnmodifiableMutableCollectionTestCase<T>
     @Test(expected = UnsupportedOperationException.class)
     public void withAll()
     {
-        this.getCollection().withAll(FastList.<T>newList());
+        this.getCollection().withAll(FastList.newList());
     }
 
     @Test(expected = UnsupportedOperationException.class)
@@ -349,7 +349,7 @@ public abstract class UnmodifiableMutableCollectionTestCase<T>
     @Test(expected = UnsupportedOperationException.class)
     public void withoutAll()
     {
-        this.getCollection().withoutAll(FastList.<T>newList());
+        this.getCollection().withoutAll(FastList.newList());
     }
 
     @Test

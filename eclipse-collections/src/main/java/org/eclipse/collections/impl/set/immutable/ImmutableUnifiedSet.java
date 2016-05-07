@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -36,6 +36,7 @@ final class ImmutableUnifiedSet<T>
         this.delegate = delegate;
     }
 
+    @Override
     public int size()
     {
         return this.delegate.size();
@@ -59,16 +60,19 @@ final class ImmutableUnifiedSet<T>
         return this.delegate.contains(object);
     }
 
+    @Override
     public Iterator<T> iterator()
     {
-        return new UnmodifiableIteratorAdapter<T>(this.delegate.iterator());
+        return new UnmodifiableIteratorAdapter<>(this.delegate.iterator());
     }
 
+    @Override
     public T getFirst()
     {
         return this.delegate.getFirst();
     }
 
+    @Override
     public T getLast()
     {
         return this.delegate.getLast();
@@ -76,24 +80,27 @@ final class ImmutableUnifiedSet<T>
 
     public static <T> ImmutableSet<T> newSetWith(T... elements)
     {
-        return new ImmutableUnifiedSet<T>(UnifiedSet.newSetWith(elements));
+        return new ImmutableUnifiedSet<>(UnifiedSet.newSetWith(elements));
     }
 
     public static <T> ImmutableSet<T> newSet(Iterable<T> iterable)
     {
-        return new ImmutableUnifiedSet<T>(UnifiedSet.newSet(iterable));
+        return new ImmutableUnifiedSet<>(UnifiedSet.newSet(iterable));
     }
 
+    @Override
     public void each(Procedure<? super T> procedure)
     {
         this.delegate.forEach(procedure);
     }
 
+    @Override
     public int getBatchCount(int batchSize)
     {
         return this.delegate.getBatchCount(batchSize);
     }
 
+    @Override
     public void batchForEach(Procedure<? super T> procedure, int sectionIndex, int sectionCount)
     {
         this.delegate.batchForEach(procedure, sectionIndex, sectionCount);
@@ -101,7 +108,7 @@ final class ImmutableUnifiedSet<T>
 
     private Object writeReplace()
     {
-        return new ImmutableSetSerializationProxy<T>(this);
+        return new ImmutableSetSerializationProxy<>(this);
     }
 
     @Override

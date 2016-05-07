@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -78,28 +78,28 @@ public final class UnifiedSetWithHashingStrategyMultimap<K, V>
 
     public static <K, V> UnifiedSetWithHashingStrategyMultimap<K, V> newMultimap(UnifiedSetWithHashingStrategyMultimap<K, V> multimap)
     {
-        return new UnifiedSetWithHashingStrategyMultimap<K, V>(multimap);
+        return new UnifiedSetWithHashingStrategyMultimap<>(multimap);
     }
 
     public static <K, V> UnifiedSetWithHashingStrategyMultimap<K, V> newMultimap(HashingStrategy<? super V> hashingStrategy,
             Multimap<? extends K, ? extends V> multimap)
     {
-        return new UnifiedSetWithHashingStrategyMultimap<K, V>(hashingStrategy, multimap);
+        return new UnifiedSetWithHashingStrategyMultimap<>(hashingStrategy, multimap);
     }
 
     public static <K, V> UnifiedSetWithHashingStrategyMultimap<K, V> newMultimap(HashingStrategy<? super V> hashingStrategy)
     {
-        return new UnifiedSetWithHashingStrategyMultimap<K, V>(hashingStrategy);
+        return new UnifiedSetWithHashingStrategyMultimap<>(hashingStrategy);
     }
 
     public static <K, V> UnifiedSetWithHashingStrategyMultimap<K, V> newMultimap(HashingStrategy<? super V> hashingStrategy, Pair<K, V>... pairs)
     {
-        return new UnifiedSetWithHashingStrategyMultimap<K, V>(hashingStrategy, pairs);
+        return new UnifiedSetWithHashingStrategyMultimap<>(hashingStrategy, pairs);
     }
 
     public static <K, V> UnifiedSetWithHashingStrategyMultimap<K, V> newMultimap(HashingStrategy<? super V> hashingStrategy, Iterable<Pair<K, V>> inputIterable)
     {
-        return new UnifiedSetWithHashingStrategyMultimap<K, V>(hashingStrategy, inputIterable);
+        return new UnifiedSetWithHashingStrategyMultimap<>(hashingStrategy, inputIterable);
     }
 
     @Override
@@ -120,9 +120,10 @@ public final class UnifiedSetWithHashingStrategyMultimap<K, V>
         return UnifiedSetWithHashingStrategy.newSet(this.hashingStrategy);
     }
 
+    @Override
     public UnifiedSetWithHashingStrategyMultimap<K, V> newEmpty()
     {
-        return new UnifiedSetWithHashingStrategyMultimap<K, V>(this.hashingStrategy);
+        return new UnifiedSetWithHashingStrategyMultimap<>(this.hashingStrategy);
     }
 
     public HashingStrategy<? super V> getValueHashingStrategy()
@@ -144,26 +145,31 @@ public final class UnifiedSetWithHashingStrategyMultimap<K, V>
         super.readExternal(in);
     }
 
+    @Override
     public MutableSetMultimap<V, K> flip()
     {
         return Iterate.flip(this);
     }
 
+    @Override
     public UnifiedSetWithHashingStrategyMultimap<K, V> selectKeysValues(Predicate2<? super K, ? super V> predicate)
     {
         return this.selectKeysValues(predicate, this.newEmpty());
     }
 
+    @Override
     public UnifiedSetWithHashingStrategyMultimap<K, V> rejectKeysValues(Predicate2<? super K, ? super V> predicate)
     {
         return this.rejectKeysValues(predicate, this.newEmpty());
     }
 
+    @Override
     public UnifiedSetWithHashingStrategyMultimap<K, V> selectKeysMultiValues(Predicate2<? super K, ? super Iterable<V>> predicate)
     {
         return this.selectKeysMultiValues(predicate, this.newEmpty());
     }
 
+    @Override
     public UnifiedSetWithHashingStrategyMultimap<K, V> rejectKeysMultiValues(Predicate2<? super K, ? super Iterable<V>> predicate)
     {
         return this.rejectKeysMultiValues(predicate, this.newEmpty());

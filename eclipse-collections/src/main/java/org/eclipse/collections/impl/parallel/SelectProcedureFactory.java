@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -25,8 +25,9 @@ public final class SelectProcedureFactory<T> implements ProcedureFactory<SelectP
         this.collectionSize = newInitialCapacity;
     }
 
+    @Override
     public SelectProcedure<T> create()
     {
-        return new SelectProcedure<T>(this.predicate, FastList.<T>newList(this.collectionSize));
+        return new SelectProcedure<>(this.predicate, FastList.newList(this.collectionSize));
     }
 }

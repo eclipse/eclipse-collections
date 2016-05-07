@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -32,34 +32,33 @@ public class FlatCollectListBatch<T, V> extends AbstractBatch<V> implements List
         this.function = function;
     }
 
-    public void forEach(final Procedure<? super V> procedure)
+    @Override
+    public void forEach(Procedure<? super V> procedure)
     {
-        this.batch.forEach(new Procedure<T>()
-        {
-            public void value(T each)
-            {
-                Iterate.forEach(FlatCollectListBatch.this.function.valueOf(each), procedure);
-            }
-        });
+        this.batch.forEach(each -> Iterate.forEach(this.function.valueOf(each), procedure));
     }
 
+    @Override
     public ListBatch<V> select(Predicate<? super V> predicate)
     {
-        return new SelectListBatch<V>(this, predicate);
+        return new SelectListBatch<>(this, predicate);
     }
 
+    @Override
     public <VV> ListBatch<VV> collect(Function<? super V, ? extends VV> function)
     {
-        return new CollectListBatch<V, VV>(this, function);
+        return new CollectListBatch<>(this, function);
     }
 
+    @Override
     public <VV> ListBatch<VV> flatCollect(Function<? super V, ? extends Iterable<VV>> function)
     {
-        return new FlatCollectListBatch<V, VV>(this, function);
+        return new FlatCollectListBatch<>(this, function);
     }
 
+    @Override
     public UnsortedSetBatch<V> distinct(ConcurrentHashMap<V, Boolean> distinct)
     {
-        return new DistinctBatch<V>(this, distinct);
+        return new DistinctBatch<>(this, distinct);
     }
 }

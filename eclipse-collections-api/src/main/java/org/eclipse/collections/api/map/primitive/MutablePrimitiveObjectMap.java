@@ -44,71 +44,101 @@ public interface MutablePrimitiveObjectMap<V> extends PrimitiveObjectMap<V>
 {
     void clear();
 
+    @Override
     <K, VV> MutableMap<K, VV> aggregateInPlaceBy(Function<? super V, ? extends K> groupBy, Function0<? extends VV> zeroValueFactory, Procedure2<? super VV, ? super V> mutatingAggregator);
 
+    @Override
     <K, VV> MutableMap<K, VV> aggregateBy(Function<? super V, ? extends K> groupBy, Function0<? extends VV> zeroValueFactory, Function2<? super VV, ? super V, ? extends VV> nonMutatingAggregator);
 
+    @Override
     <VV> MutableBagMultimap<VV, V> groupByEach(Function<? super V, ? extends Iterable<VV>> function);
 
+    @Override
     <VV> MutableBagMultimap<VV, V> groupBy(Function<? super V, ? extends VV> function);
 
+    @Override
     <VV> MutableMap<VV, V> groupByUniqueKey(Function<? super V, ? extends VV> function);
 
+    @Override
     <VV> MutableBag<VV> collectIf(Predicate<? super V> predicate, Function<? super V, ? extends VV> function);
 
+    @Override
     <VV> MutableBag<VV> collect(Function<? super V, ? extends VV> function);
 
+    @Override
     MutableBooleanBag collectBoolean(BooleanFunction<? super V> booleanFunction);
 
+    @Override
     MutableByteBag collectByte(ByteFunction<? super V> byteFunction);
 
+    @Override
     MutableCharBag collectChar(CharFunction<? super V> charFunction);
 
+    @Override
     MutableDoubleBag collectDouble(DoubleFunction<? super V> doubleFunction);
 
+    @Override
     MutableFloatBag collectFloat(FloatFunction<? super V> floatFunction);
 
+    @Override
     MutableIntBag collectInt(IntFunction<? super V> intFunction);
 
+    @Override
     MutableLongBag collectLong(LongFunction<? super V> longFunction);
 
+    @Override
     MutableShortBag collectShort(ShortFunction<? super V> shortFunction);
 
+    @Override
     <P, VV> MutableBag<VV> collectWith(Function2<? super V, ? super P, ? extends VV> function, P parameter);
 
+    @Override
     <VV> MutableBag<VV> flatCollect(Function<? super V, ? extends Iterable<VV>> function);
 
+    @Override
     <S> MutableBag<S> selectInstancesOf(Class<S> clazz);
 
+    @Override
     MutableBag<V> select(Predicate<? super V> predicate);
 
+    @Override
     <P> MutableBag<V> selectWith(Predicate2<? super V, ? super P> predicate, P parameter);
 
+    @Override
     MutableBag<V> reject(Predicate<? super V> predicate);
 
+    @Override
     <P> MutableBag<V> rejectWith(Predicate2<? super V, ? super P> predicate, P parameter);
 
+    @Override
     PartitionMutableBag<V> partition(Predicate<? super V> predicate);
 
+    @Override
     <P> PartitionMutableBag<V> partitionWith(Predicate2<? super V, ? super P> predicate, P parameter);
 
     /**
      * @deprecated in 7.0. Use {@link OrderedIterable#zip(Iterable)} instead.
      */
+    @Override
     @Deprecated
     <S> MutableBag<Pair<V, S>> zip(Iterable<S> that);
 
     /**
      * @deprecated in 7.0. Use {@link OrderedIterable#zipWithIndex()} instead.
      */
+    @Override
     @Deprecated
     MutableSet<Pair<V, Integer>> zipWithIndex();
 
+    @Override
     <VV> MutableObjectLongMap<VV> sumByInt(Function<? super V, ? extends VV> groupBy, IntFunction<? super V> function);
 
+    @Override
     <VV> MutableObjectDoubleMap<VV> sumByFloat(Function<? super V, ? extends VV> groupBy, FloatFunction<? super V> function);
 
+    @Override
     <VV> MutableObjectLongMap<VV> sumByLong(Function<? super V, ? extends VV> groupBy, LongFunction<? super V> function);
 
+    @Override
     <VV> MutableObjectDoubleMap<VV> sumByDouble(Function<? super V, ? extends VV> groupBy, DoubleFunction<? super V> function);
 }

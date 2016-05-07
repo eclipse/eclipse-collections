@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -85,7 +85,7 @@ public final class IterableIterate
      */
     public static <T> MutableList<T> select(Iterable<T> iterable, Predicate<? super T> predicate)
     {
-        return IterableIterate.select(iterable, predicate, FastList.<T>newList());
+        return IterableIterate.select(iterable, predicate, FastList.newList());
     }
 
     /**
@@ -158,7 +158,7 @@ public final class IterableIterate
             Predicate<? super T> predicate,
             Function<? super T, ? extends V> function)
     {
-        return IterableIterate.collectIf(iterable, predicate, function, FastList.<V>newList());
+        return IterableIterate.collectIf(iterable, predicate, function, FastList.newList());
     }
 
     public static boolean isEmpty(Iterable<?> iterable)
@@ -256,7 +256,7 @@ public final class IterableIterate
      */
     public static <T> MutableList<T> reject(Iterable<T> iterable, Predicate<? super T> predicate)
     {
-        return IterableIterate.reject(iterable, predicate, FastList.<T>newList());
+        return IterableIterate.reject(iterable, predicate, FastList.newList());
     }
 
     /**
@@ -289,7 +289,7 @@ public final class IterableIterate
             Iterable<T> iterable,
             Function<? super T, ? extends V> function)
     {
-        return IterableIterate.collect(iterable, function, FastList.<V>newList());
+        return IterableIterate.collect(iterable, function, FastList.newList());
     }
 
     /**
@@ -461,7 +461,7 @@ public final class IterableIterate
             Iterable<T> iterable,
             Function<? super T, ? extends Iterable<V>> function)
     {
-        return IterableIterate.flatCollect(iterable, function, FastList.<V>newList());
+        return IterableIterate.flatCollect(iterable, function, FastList.newList());
     }
 
     /**
@@ -775,7 +775,7 @@ public final class IterableIterate
             Function2<? super T, ? super P, ? extends V> function,
             P parameter)
     {
-        return IterableIterate.collectWith(iterable, function, parameter, FastList.<V>newList());
+        return IterableIterate.collectWith(iterable, function, parameter, FastList.newList());
     }
 
     /**
@@ -799,7 +799,7 @@ public final class IterableIterate
         {
             throw new IllegalArgumentException("Count must be greater than zero, but was: " + count);
         }
-        return IterableIterate.take(iterable, count, FastList.<T>newList());
+        return IterableIterate.take(iterable, count, FastList.newList());
     }
 
     /**
@@ -830,7 +830,7 @@ public final class IterableIterate
         {
             throw new IllegalArgumentException("Count must be greater than zero, but was: " + count);
         }
-        return IterableIterate.drop(list, count, FastList.<T>newList());
+        return IterableIterate.drop(list, count, FastList.newList());
     }
 
     /**
@@ -894,7 +894,7 @@ public final class IterableIterate
             Iterable<T> iterable,
             Function<? super T, ? extends V> function)
     {
-        return IterableIterate.groupBy(iterable, function, new FastListMultimap<V, T>());
+        return IterableIterate.groupBy(iterable, function, new FastListMultimap<>());
     }
 
     /**
@@ -915,7 +915,7 @@ public final class IterableIterate
             Iterable<T> iterable,
             Function<? super T, ? extends Iterable<V>> function)
     {
-        return IterableIterate.groupByEach(iterable, function, new FastListMultimap<V, T>());
+        return IterableIterate.groupByEach(iterable, function, new FastListMultimap<>());
     }
 
     /**
@@ -936,7 +936,7 @@ public final class IterableIterate
             Iterable<T> iterable,
             Function<? super T, ? extends K> function)
     {
-        return IterableIterate.groupByUniqueKey(iterable, function, UnifiedMap.<K, T>newMap());
+        return IterableIterate.groupByUniqueKey(iterable, function, UnifiedMap.newMap());
     }
 
     /**
@@ -974,7 +974,7 @@ public final class IterableIterate
             Iterable<X> xs,
             Iterable<Y> ys)
     {
-        return IterableIterate.zip(xs, ys, FastList.<Pair<X, Y>>newList());
+        return IterableIterate.zip(xs, ys, FastList.newList());
     }
 
     /**
@@ -993,7 +993,7 @@ public final class IterableIterate
      */
     public static <T> MutableList<Pair<T, Integer>> zipWithIndex(Iterable<T> iterable)
     {
-        return IterableIterate.zipWithIndex(iterable, FastList.<Pair<T, Integer>>newList());
+        return IterableIterate.zipWithIndex(iterable, FastList.newList());
     }
 
     /**

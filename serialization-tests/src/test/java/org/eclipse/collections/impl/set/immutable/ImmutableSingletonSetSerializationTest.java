@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -24,6 +24,6 @@ public class ImmutableSingletonSetSerializationTest
                         + "YmxlU2V0U2VyaWFsaXphdGlvblByb3h5AAAAAAAAAAEMAAB4cHcEAAAAAXNyABFqYXZhLmxhbmcu\n"
                         + "SW50ZWdlchLioKT3gYc4AgABSQAFdmFsdWV4cgAQamF2YS5sYW5nLk51bWJlcoaslR0LlOCLAgAA\n"
                         + "eHAAAAABeA==",
-                new ImmutableSingletonSet<Integer>(1));
+                new ImmutableSingletonSet<>(1));
     }
 }

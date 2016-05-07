@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -85,6 +85,7 @@ final class ImmutableEmptySetWithHashingStrategy<T>
         return this;
     }
 
+    @Override
     public int size()
     {
         return 0;
@@ -96,6 +97,7 @@ final class ImmutableEmptySetWithHashingStrategy<T>
         return false;
     }
 
+    @Override
     public void each(Procedure<? super T> procedure)
     {
     }
@@ -110,6 +112,7 @@ final class ImmutableEmptySetWithHashingStrategy<T>
     {
     }
 
+    @Override
     public Iterator<T> iterator()
     {
         return EmptyIterator.getInstance();
@@ -163,11 +166,13 @@ final class ImmutableEmptySetWithHashingStrategy<T>
         return target;
     }
 
+    @Override
     public T getFirst()
     {
         return null;
     }
 
+    @Override
     public T getLast()
     {
         return null;
@@ -175,6 +180,6 @@ final class ImmutableEmptySetWithHashingStrategy<T>
 
     private Object writeReplace()
     {
-        return new ImmutableSetWithHashingStrategySerializationProxy<T>(this, this.hashingStrategy);
+        return new ImmutableSetWithHashingStrategySerializationProxy<>(this, this.hashingStrategy);
     }
 }

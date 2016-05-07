@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -12,7 +12,6 @@ package org.eclipse.collections.impl.block.procedure;
 
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.procedure.Procedure;
-import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.multimap.MutableMultimap;
 import org.eclipse.collections.impl.utility.Iterate;
 
@@ -22,16 +21,9 @@ import org.eclipse.collections.impl.utility.Iterate;
  */
 public final class MultimapEachPutProcedure<K, V> implements Procedure<V>
 {
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 2L;
     private final MutableMultimap<K, V> multimap;
     private final Function<? super V, ? extends Iterable<K>> keyFunction;
-    private final Procedure2<K, V> eachProcedure = new Procedure2<K, V>()
-    {
-        public void value(K key, V value)
-        {
-            MultimapEachPutProcedure.this.multimap.put(key, value);
-        }
-    };
 
     public MultimapEachPutProcedure(
             MutableMultimap<K, V> multimap,
@@ -45,11 +37,12 @@ public final class MultimapEachPutProcedure<K, V> implements Procedure<V>
             MutableMultimap<K, V> multimap,
             Function<? super V, ? extends Iterable<K>> keyFunction)
     {
-        return new MultimapEachPutProcedure<K, V>(multimap, keyFunction);
+        return new MultimapEachPutProcedure<>(multimap, keyFunction);
     }
 
+    @Override
     public void value(V each)
     {
-        Iterate.forEachWith(this.keyFunction.valueOf(each), this.eachProcedure, each);
+        Iterate.forEachWith(this.keyFunction.valueOf(each), this.multimap::put, each);
     }
 }

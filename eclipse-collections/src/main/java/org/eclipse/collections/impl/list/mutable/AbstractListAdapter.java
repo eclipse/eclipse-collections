@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -74,119 +74,142 @@ public abstract class AbstractListAdapter<T>
     @Override
     protected abstract List<T> getDelegate();
 
+    @Override
     public boolean addAll(int index, Collection<? extends T> collection)
     {
         return this.getDelegate().addAll(index, collection);
     }
 
+    @Override
     public MutableList<T> toReversed()
     {
         return FastList.newList(this).reverseThis();
     }
 
+    @Override
     public MutableList<T> reverseThis()
     {
         Collections.reverse(this);
         return this;
     }
 
+    @Override
     public MutableList<T> shuffleThis()
     {
         Collections.shuffle(this);
         return this;
     }
 
+    @Override
     public MutableList<T> shuffleThis(Random rnd)
     {
         Collections.shuffle(this, rnd);
         return this;
     }
 
+    @Override
     public T get(int index)
     {
         return this.getDelegate().get(index);
     }
 
+    @Override
     public T set(int index, T element)
     {
         return this.getDelegate().set(index, element);
     }
 
+    @Override
     public void add(int index, T element)
     {
         this.getDelegate().add(index, element);
     }
 
+    @Override
     public T remove(int index)
     {
         return this.getDelegate().remove(index);
     }
 
+    @Override
     public int indexOf(Object o)
     {
         return this.getDelegate().indexOf(o);
     }
 
+    @Override
     public int lastIndexOf(Object o)
     {
         return this.getDelegate().lastIndexOf(o);
     }
 
+    @Override
     public ListIterator<T> listIterator()
     {
         return this.getDelegate().listIterator();
     }
 
+    @Override
     public ListIterator<T> listIterator(int index)
     {
         return this.getDelegate().listIterator(index);
     }
 
+    @Override
     public <V extends Comparable<? super V>> MutableList<T> sortThisBy(Function<? super T, ? extends V> function)
     {
         return this.sortThis(Comparators.byFunction(function));
     }
 
+    @Override
     public MutableList<T> sortThisByInt(IntFunction<? super T> function)
     {
         return this.sortThis(Functions.toIntComparator(function));
     }
 
+    @Override
     public MutableList<T> sortThisByBoolean(BooleanFunction<? super T> function)
     {
         return this.sortThis(Functions.toBooleanComparator(function));
     }
 
+    @Override
     public MutableList<T> sortThisByChar(CharFunction<? super T> function)
     {
         return this.sortThis(Functions.toCharComparator(function));
     }
 
+    @Override
     public MutableList<T> sortThisByByte(ByteFunction<? super T> function)
     {
         return this.sortThis(Functions.toByteComparator(function));
     }
 
+    @Override
     public MutableList<T> sortThisByShort(ShortFunction<? super T> function)
     {
         return this.sortThis(Functions.toShortComparator(function));
     }
 
+    @Override
     public MutableList<T> sortThisByFloat(FloatFunction<? super T> function)
     {
         return this.sortThis(Functions.toFloatComparator(function));
     }
 
+    @Override
     public MutableList<T> sortThisByLong(LongFunction<? super T> function)
     {
         return this.sortThis(Functions.toLongComparator(function));
     }
 
+    @Override
     public MutableList<T> sortThisByDouble(DoubleFunction<? super T> function)
     {
         return this.sortThis(Functions.toDoubleComparator(function));
     }
 
+    @Override
     public MutableList<T> subList(int fromIndex, int toIndex)
     {
         return ListAdapter.adapt(this.getDelegate().subList(fromIndex, toIndex));
@@ -204,26 +227,31 @@ public abstract class AbstractListAdapter<T>
         return this.getDelegate().hashCode();
     }
 
+    @Override
     public MutableStack<T> toStack()
     {
         return ArrayStack.newStack(this.getDelegate());
     }
 
+    @Override
     public ReverseIterable<T> asReversed()
     {
         return ReverseIterable.adapt(this);
     }
 
+    @Override
     public ParallelListIterable<T> asParallel(ExecutorService executorService, int batchSize)
     {
-        return new ListIterableParallelIterable<T>(this, executorService, batchSize);
+        return new ListIterableParallelIterable<>(this, executorService, batchSize);
     }
 
+    @Override
     public int binarySearch(T key, Comparator<? super T> comparator)
     {
         return Collections.binarySearch(this, key, comparator);
     }
 
+    @Override
     public int binarySearch(T key)
     {
         return Collections.binarySearch((List<? extends Comparable<? super T>>) this, key);

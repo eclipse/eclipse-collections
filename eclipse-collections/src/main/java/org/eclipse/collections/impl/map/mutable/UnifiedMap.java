@@ -164,33 +164,33 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
         this(Math.max(pairs.length, DEFAULT_INITIAL_CAPACITY), DEFAULT_LOAD_FACTOR);
         ArrayIterate.forEach(pairs, new MapCollectProcedure<Pair<K, V>, K, V>(
                 this,
-                Functions.<K>firstOfPair(),
-                Functions.<V>secondOfPair()));
+                Functions.firstOfPair(),
+                Functions.secondOfPair()));
     }
 
     public static <K, V> UnifiedMap<K, V> newMap()
     {
-        return new UnifiedMap<K, V>();
+        return new UnifiedMap<>();
     }
 
     public static <K, V> UnifiedMap<K, V> newMap(int size)
     {
-        return new UnifiedMap<K, V>(size);
+        return new UnifiedMap<>(size);
     }
 
     public static <K, V> UnifiedMap<K, V> newMap(int size, float loadFactor)
     {
-        return new UnifiedMap<K, V>(size, loadFactor);
+        return new UnifiedMap<>(size, loadFactor);
     }
 
     public static <K, V> UnifiedMap<K, V> newMap(Map<? extends K, ? extends V> map)
     {
-        return new UnifiedMap<K, V>(map);
+        return new UnifiedMap<>(map);
     }
 
     public static <K, V> UnifiedMap<K, V> newMapWith(Pair<K, V>... pairs)
     {
-        return new UnifiedMap<K, V>(pairs);
+        return new UnifiedMap<>(pairs);
     }
 
     public static <K, V> UnifiedMap<K, V> newMapWith(Iterable<Pair<K, V>> inputIterable)
@@ -260,12 +260,13 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
     @Override
     public UnifiedMap<K, V> clone()
     {
-        return new UnifiedMap<K, V>(this);
+        return new UnifiedMap<>(this);
     }
 
+    @Override
     public MutableMap<K, V> newEmpty()
     {
-        return new UnifiedMap<K, V>();
+        return new UnifiedMap<>();
     }
 
     @Override
@@ -325,6 +326,7 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
         return (h & (this.table.length >> 1) - 1) << 1;
     }
 
+    @Override
     public void clear()
     {
         if (this.occupied == 0)
@@ -340,6 +342,7 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
         }
     }
 
+    @Override
     public V put(K key, V value)
     {
         int index = this.index(key);
@@ -873,6 +876,7 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
         }
     }
 
+    @Override
     public V get(Object key)
     {
         int index = this.index(key);
@@ -909,6 +913,7 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
         return null;
     }
 
+    @Override
     public boolean containsKey(Object key)
     {
         int index = this.index(key);
@@ -941,6 +946,7 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
         return false;
     }
 
+    @Override
     public boolean containsValue(Object value)
     {
         for (int i = 0; i < this.table.length; i += 2)
@@ -979,6 +985,7 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
         return false;
     }
 
+    @Override
     public void forEachKeyValue(Procedure2<? super K, ? super V> procedure)
     {
         for (int i = 0; i < this.table.length; i += 2)
@@ -1014,15 +1021,17 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
         return null;
     }
 
+    @Override
     public <E> MutableMap<K, V> collectKeysAndValues(
             Iterable<E> iterable,
             Function<? super E, ? extends K> keyFunction,
             Function<? super E, ? extends V> valueFunction)
     {
-        Iterate.forEach(iterable, new MapCollectProcedure<E, K, V>(this, keyFunction, valueFunction));
+        Iterate.forEach(iterable, new MapCollectProcedure<>(this, keyFunction, valueFunction));
         return this;
     }
 
+    @Override
     public V removeKey(K key)
     {
         return this.remove(key);
@@ -1041,11 +1050,13 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
         }
     }
 
+    @Override
     public int getBatchCount(int batchSize)
     {
         return Math.max(1, this.table.length / 2 / batchSize);
     }
 
+    @Override
     public void batchForEach(Procedure<? super V> procedure, int sectionIndex, int sectionCount)
     {
         int sectionSize = this.table.length / sectionCount;
@@ -1135,6 +1146,7 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
         return this.occupied == 0;
     }
 
+    @Override
     public void putAll(Map<? extends K, ? extends V> map)
     {
         if (map instanceof UnifiedMap<?, ?>)
@@ -1144,13 +1156,7 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
         else if (map instanceof UnsortedMapIterable)
         {
             MapIterable<K, V> mapIterable = (MapIterable<K, V>) map;
-            mapIterable.forEachKeyValue(new Procedure2<K, V>()
-            {
-                public void value(K key, V value)
-                {
-                    UnifiedMap.this.put(key, value);
-                }
-            });
+            mapIterable.forEachKeyValue(this::put);
         }
         else
         {
@@ -1206,6 +1212,7 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
         }
     }
 
+    @Override
     public V remove(Object key)
     {
         int index = this.index(key);
@@ -1269,21 +1276,25 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
         this.occupied--;
     }
 
+    @Override
     public int size()
     {
         return this.occupied;
     }
 
+    @Override
     public Set<Entry<K, V>> entrySet()
     {
         return new EntrySet();
     }
 
+    @Override
     public Set<K> keySet()
     {
         return new KeySet();
     }
 
+    @Override
     public Collection<V> values()
     {
         return new ValuesCollection();
@@ -1392,7 +1403,7 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
     @Override
     public String toString()
     {
-        final StringBuilder builder = new StringBuilder();
+        StringBuilder builder = new StringBuilder();
         builder.append('{');
 
         this.forEachKeyValue(new Procedure2<K, V>()
@@ -1420,6 +1431,7 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
         return builder.toString();
     }
 
+    @Override
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
     {
         int size = in.readInt();
@@ -1432,6 +1444,7 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
         }
     }
 
+    @Override
     public void writeExternal(ObjectOutput out) throws IOException
     {
         out.writeInt(this.size());
@@ -1858,26 +1871,31 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public boolean add(K key)
         {
             throw new UnsupportedOperationException("Cannot call add() on " + this.getClass().getSimpleName());
         }
 
+        @Override
         public boolean addAll(Collection<? extends K> collection)
         {
             throw new UnsupportedOperationException("Cannot call addAll() on " + this.getClass().getSimpleName());
         }
 
+        @Override
         public void clear()
         {
             UnifiedMap.this.clear();
         }
 
+        @Override
         public boolean contains(Object o)
         {
             return UnifiedMap.this.containsKey(o);
         }
 
+        @Override
         public boolean containsAll(Collection<?> collection)
         {
             for (Object aCollection : collection)
@@ -1890,16 +1908,19 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
             return true;
         }
 
+        @Override
         public boolean isEmpty()
         {
             return UnifiedMap.this.isEmpty();
         }
 
+        @Override
         public Iterator<K> iterator()
         {
             return new KeySetIterator();
         }
 
+        @Override
         public boolean remove(Object key)
         {
             int oldSize = UnifiedMap.this.occupied;
@@ -1907,6 +1928,7 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
             return UnifiedMap.this.occupied != oldSize;
         }
 
+        @Override
         public boolean removeAll(Collection<?> collection)
         {
             int oldSize = UnifiedMap.this.occupied;
@@ -1952,10 +1974,11 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
             }
         }
 
+        @Override
         public boolean retainAll(Collection<?> collection)
         {
             int retainedSize = collection.size();
-            UnifiedMap<K, V> retainedCopy = new UnifiedMap<K, V>(retainedSize, UnifiedMap.this.loadFactor);
+            UnifiedMap<K, V> retainedCopy = new UnifiedMap<>(retainedSize, UnifiedMap.this.loadFactor);
             for (Object key : collection)
             {
                 this.putIfFound(key, retainedCopy);
@@ -1970,21 +1993,25 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
             return false;
         }
 
+        @Override
         public int size()
         {
             return UnifiedMap.this.size();
         }
 
+        @Override
         public void forEach(Procedure<? super K> procedure)
         {
             UnifiedMap.this.forEachKey(procedure);
         }
 
+        @Override
         public int getBatchCount(int batchSize)
         {
             return UnifiedMap.this.getBatchCount(batchSize);
         }
 
+        @Override
         public void batchForEach(Procedure<? super K> procedure, int sectionIndex, int sectionCount)
         {
             Object[] map = UnifiedMap.this.table;
@@ -2091,6 +2118,7 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
             return Iterate.makeString(this, "[", ", ", "]");
         }
 
+        @Override
         public Object[] toArray()
         {
             int size = UnifiedMap.this.size();
@@ -2099,6 +2127,7 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
             return result;
         }
 
+        @Override
         public <T> T[] toArray(T[] result)
         {
             int size = UnifiedMap.this.size();
@@ -2153,11 +2182,13 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
         protected int chainPosition;
         protected boolean lastReturned;
 
+        @Override
         public boolean hasNext()
         {
             return this.count < UnifiedMap.this.size();
         }
 
+        @Override
         public void remove()
         {
             if (!this.lastReturned)
@@ -2241,6 +2272,7 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
             return UnifiedMap.this.nonSentinel(cur);
         }
 
+        @Override
         public K next()
         {
             if (!this.hasNext())
@@ -2287,18 +2319,21 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
     protected class EntrySet implements Set<Entry<K, V>>, Serializable, BatchIterable<Entry<K, V>>
     {
         private static final long serialVersionUID = 1L;
-        private transient WeakReference<UnifiedMap<K, V>> holder = new WeakReference<UnifiedMap<K, V>>(UnifiedMap.this);
+        private transient WeakReference<UnifiedMap<K, V>> holder = new WeakReference<>(UnifiedMap.this);
 
+        @Override
         public boolean add(Entry<K, V> entry)
         {
             throw new UnsupportedOperationException("Cannot call add() on " + this.getClass().getSimpleName());
         }
 
+        @Override
         public boolean addAll(Collection<? extends Entry<K, V>> collection)
         {
             throw new UnsupportedOperationException("Cannot call addAll() on " + this.getClass().getSimpleName());
         }
 
+        @Override
         public void clear()
         {
             UnifiedMap.this.clear();
@@ -2356,11 +2391,13 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
             return null;
         }
 
+        @Override
         public boolean contains(Object o)
         {
             return o instanceof Entry && this.containsEntry((Entry<?, ?>) o);
         }
 
+        @Override
         public boolean containsAll(Collection<?> collection)
         {
             for (Object obj : collection)
@@ -2373,16 +2410,19 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
             return true;
         }
 
+        @Override
         public boolean isEmpty()
         {
             return UnifiedMap.this.isEmpty();
         }
 
+        @Override
         public Iterator<Entry<K, V>> iterator()
         {
             return new EntrySetIterator(this.holder);
         }
 
+        @Override
         public boolean remove(Object e)
         {
             if (!(e instanceof Entry))
@@ -2436,6 +2476,7 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
             return false;
         }
 
+        @Override
         public boolean removeAll(Collection<?> collection)
         {
             boolean changed = false;
@@ -2449,10 +2490,11 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
             return changed;
         }
 
+        @Override
         public boolean retainAll(Collection<?> collection)
         {
             int retainedSize = collection.size();
-            UnifiedMap<K, V> retainedCopy = new UnifiedMap<K, V>(retainedSize, UnifiedMap.this.loadFactor);
+            UnifiedMap<K, V> retainedCopy = new UnifiedMap<>(retainedSize, UnifiedMap.this.loadFactor);
 
             for (Object obj : collection)
             {
@@ -2476,11 +2518,13 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
             return false;
         }
 
+        @Override
         public int size()
         {
             return UnifiedMap.this.size();
         }
 
+        @Override
         public void forEach(Procedure<? super Entry<K, V>> procedure)
         {
             for (int i = 0; i < UnifiedMap.this.table.length; i += 2)
@@ -2510,11 +2554,13 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
             }
         }
 
+        @Override
         public int getBatchCount(int batchSize)
         {
             return UnifiedMap.this.getBatchCount(batchSize);
         }
 
+        @Override
         public void batchForEach(Procedure<? super Entry<K, V>> procedure, int sectionIndex, int sectionCount)
         {
             Object[] map = UnifiedMap.this.table;
@@ -2559,17 +2605,18 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
                                 break;
                             }
                             result[count++] =
-                                    new WeakBoundEntry<K, V>(UnifiedMap.this.nonSentinel(cur), (V) chain[j + 1], this.holder);
+                                    new WeakBoundEntry<>(UnifiedMap.this.nonSentinel(cur), (V) chain[j + 1], this.holder);
                         }
                     }
                     else
                     {
-                        result[count++] = new WeakBoundEntry<K, V>(UnifiedMap.this.nonSentinel(x), (V) table[i + 1], this.holder);
+                        result[count++] = new WeakBoundEntry<>(UnifiedMap.this.nonSentinel(x), (V) table[i + 1], this.holder);
                     }
                 }
             }
         }
 
+        @Override
         public Object[] toArray()
         {
             Object[] result = new Object[UnifiedMap.this.size()];
@@ -2577,6 +2624,7 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
             return result;
         }
 
+        @Override
         public <T> T[] toArray(T[] result)
         {
             int size = UnifiedMap.this.size();
@@ -2596,7 +2644,7 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
                 throws IOException, ClassNotFoundException
         {
             in.defaultReadObject();
-            this.holder = new WeakReference<UnifiedMap<K, V>>(UnifiedMap.this);
+            this.holder = new WeakReference<>(UnifiedMap.this);
         }
 
         @Override
@@ -2642,9 +2690,10 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
                 this.position += 2;
             }
             this.lastReturned = true;
-            return new WeakBoundEntry<K, V>(UnifiedMap.this.nonSentinel(cur), (V) value, this.holder);
+            return new WeakBoundEntry<>(UnifiedMap.this.nonSentinel(cur), (V) value, this.holder);
         }
 
+        @Override
         public Entry<K, V> next()
         {
             if (!this.hasNext())
@@ -2669,7 +2718,7 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
             }
             this.position += 2;
             this.lastReturned = true;
-            return new WeakBoundEntry<K, V>(UnifiedMap.this.nonSentinel(cur), (V) value, this.holder);
+            return new WeakBoundEntry<>(UnifiedMap.this.nonSentinel(cur), (V) value, this.holder);
         }
     }
 
@@ -2686,16 +2735,19 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
             this.holder = holder;
         }
 
+        @Override
         public K getKey()
         {
             return this.key;
         }
 
+        @Override
         public V getValue()
         {
             return this.value;
         }
 
+        @Override
         public V setValue(V value)
         {
             this.value = value;
@@ -2740,32 +2792,38 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public void clear()
         {
             UnifiedMap.this.clear();
         }
 
+        @Override
         public boolean contains(Object o)
         {
             return UnifiedMap.this.containsValue(o);
         }
 
+        @Override
         public boolean containsAll(Collection<?> collection)
         {
             // todo: this is N^2. if c is large, we should copy the values to a set.
             return Iterate.allSatisfy(collection, Predicates.in(this));
         }
 
+        @Override
         public boolean isEmpty()
         {
             return UnifiedMap.this.isEmpty();
         }
 
+        @Override
         public Iterator<V> iterator()
         {
             return new ValuesIterator();
         }
 
+        @Override
         public boolean remove(Object o)
         {
             // this is so slow that the extra overhead of the iterator won't be noticeable
@@ -2795,6 +2853,7 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
             return false;
         }
 
+        @Override
         public boolean removeAll(Collection<?> collection)
         {
             // todo: this is N^2. if c is large, we should copy the values to a set.
@@ -2810,6 +2869,7 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
             return changed;
         }
 
+        @Override
         public boolean retainAll(Collection<?> collection)
         {
             boolean modified = false;
@@ -2825,21 +2885,25 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
             return modified;
         }
 
+        @Override
         public int size()
         {
             return UnifiedMap.this.size();
         }
 
+        @Override
         public void forEach(Procedure<? super V> procedure)
         {
             UnifiedMap.this.forEachValue(procedure);
         }
 
+        @Override
         public int getBatchCount(int batchSize)
         {
             return UnifiedMap.this.getBatchCount(batchSize);
         }
 
+        @Override
         public void batchForEach(Procedure<? super V> procedure, int sectionIndex, int sectionCount)
         {
             UnifiedMap.this.batchForEach(procedure, sectionIndex, sectionCount);
@@ -2874,6 +2938,7 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
             }
         }
 
+        @Override
         public Object[] toArray()
         {
             int size = UnifiedMap.this.size();
@@ -2882,6 +2947,7 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
             return result;
         }
 
+        @Override
         public <T> T[] toArray(T[] result)
         {
             int size = UnifiedMap.this.size();
@@ -2952,6 +3018,7 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
             return val;
         }
 
+        @Override
         public V next()
         {
             if (!this.hasNext())

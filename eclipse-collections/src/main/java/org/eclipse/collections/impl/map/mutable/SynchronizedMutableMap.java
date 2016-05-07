@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs and others.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -86,7 +86,7 @@ public class SynchronizedMutableMap<K, V>
         {
             throw new IllegalArgumentException("cannot create a SynchronizedMutableMap for null");
         }
-        return new SynchronizedMutableMap<K, V>(MapAdapter.adapt(map));
+        return new SynchronizedMutableMap<>(MapAdapter.adapt(map));
     }
 
     /**
@@ -101,9 +101,10 @@ public class SynchronizedMutableMap<K, V>
         {
             throw new IllegalArgumentException("cannot create a SynchronizedMutableMap for null");
         }
-        return new SynchronizedMutableMap<K, V>(MapAdapter.adapt(map), lock);
+        return new SynchronizedMutableMap<>(MapAdapter.adapt(map), lock);
     }
 
+    @Override
     public MutableMap<K, V> withKeyValue(K key, V value)
     {
         synchronized (this.lock)
@@ -113,11 +114,13 @@ public class SynchronizedMutableMap<K, V>
         }
     }
 
+    @Override
     public MutableMap<K, V> withAllKeyValueArguments(Pair<? extends K, ? extends V>... keyValuePairs)
     {
         return this.withAllKeyValues(ArrayAdapter.adapt(keyValuePairs));
     }
 
+    @Override
     public MutableMap<K, V> withAllKeyValues(Iterable<? extends Pair<? extends K, ? extends V>> keyValues)
     {
         synchronized (this.lock)
@@ -130,6 +133,7 @@ public class SynchronizedMutableMap<K, V>
         }
     }
 
+    @Override
     public MutableMap<K, V> withoutKey(K key)
     {
         synchronized (this.lock)
@@ -139,6 +143,7 @@ public class SynchronizedMutableMap<K, V>
         }
     }
 
+    @Override
     public MutableMap<K, V> withoutAllKeys(Iterable<? extends K> keys)
     {
         synchronized (this.lock)
@@ -151,6 +156,7 @@ public class SynchronizedMutableMap<K, V>
         }
     }
 
+    @Override
     public MutableMap<K, V> newEmpty()
     {
         synchronized (this.lock)
@@ -170,7 +176,7 @@ public class SynchronizedMutableMap<K, V>
 
     protected Object writeReplace()
     {
-        return new SynchronizedMapSerializationProxy<K, V>(this.getDelegate());
+        return new SynchronizedMapSerializationProxy<>(this.getDelegate());
     }
 
     @Override
@@ -179,6 +185,7 @@ public class SynchronizedMutableMap<K, V>
         return (MutableMap<K, V>) super.getDelegate();
     }
 
+    @Override
     public <E> MutableMap<K, V> collectKeysAndValues(
             Iterable<E> iterable,
             Function<? super E, ? extends K> keyFunction,
@@ -190,6 +197,7 @@ public class SynchronizedMutableMap<K, V>
         }
     }
 
+    @Override
     public MutableMap<K, V> select(Predicate2<? super K, ? super V> predicate)
     {
         synchronized (this.lock)
@@ -198,6 +206,7 @@ public class SynchronizedMutableMap<K, V>
         }
     }
 
+    @Override
     public MutableMap<K, V> reject(Predicate2<? super K, ? super V> predicate)
     {
         synchronized (this.lock)
@@ -206,6 +215,7 @@ public class SynchronizedMutableMap<K, V>
         }
     }
 
+    @Override
     public <K2, V2> MutableMap<K2, V2> collect(Function2<? super K, ? super V, Pair<K2, V2>> pairFunction)
     {
         synchronized (this.lock)
@@ -214,6 +224,7 @@ public class SynchronizedMutableMap<K, V>
         }
     }
 
+    @Override
     public <R> MutableMap<K, R> collectValues(Function2<? super K, ? super V, ? extends R> function)
     {
         synchronized (this.lock)
@@ -222,6 +233,7 @@ public class SynchronizedMutableMap<K, V>
         }
     }
 
+    @Override
     public MutableMap<K, V> tap(Procedure<? super V> procedure)
     {
         synchronized (this.lock)
@@ -231,6 +243,7 @@ public class SynchronizedMutableMap<K, V>
         }
     }
 
+    @Override
     public MutableBag<V> select(Predicate<? super V> predicate)
     {
         synchronized (this.lock)
@@ -239,6 +252,7 @@ public class SynchronizedMutableMap<K, V>
         }
     }
 
+    @Override
     public <P> MutableBag<V> selectWith(Predicate2<? super V, ? super P> predicate, P parameter)
     {
         synchronized (this.lock)
@@ -247,6 +261,7 @@ public class SynchronizedMutableMap<K, V>
         }
     }
 
+    @Override
     public MutableBag<V> reject(Predicate<? super V> predicate)
     {
         synchronized (this.lock)
@@ -255,6 +270,7 @@ public class SynchronizedMutableMap<K, V>
         }
     }
 
+    @Override
     public <P> MutableBag<V> rejectWith(Predicate2<? super V, ? super P> predicate, P parameter)
     {
         synchronized (this.lock)
@@ -263,6 +279,7 @@ public class SynchronizedMutableMap<K, V>
         }
     }
 
+    @Override
     public PartitionMutableBag<V> partition(Predicate<? super V> predicate)
     {
         synchronized (this.lock)
@@ -274,6 +291,7 @@ public class SynchronizedMutableMap<K, V>
     /**
      * @deprecated in 6.0. Use {@link OrderedIterable#zipWithIndex()} instead.
      */
+    @Override
     @Deprecated
     public MutableSet<Pair<V, Integer>> zipWithIndex()
     {
@@ -283,6 +301,7 @@ public class SynchronizedMutableMap<K, V>
         }
     }
 
+    @Override
     public <P> PartitionMutableBag<V> partitionWith(Predicate2<? super V, ? super P> predicate, P parameter)
     {
         synchronized (this.lock)
@@ -291,6 +310,7 @@ public class SynchronizedMutableMap<K, V>
         }
     }
 
+    @Override
     public <S> MutableBag<S> selectInstancesOf(Class<S> clazz)
     {
         synchronized (this.lock)
@@ -299,6 +319,7 @@ public class SynchronizedMutableMap<K, V>
         }
     }
 
+    @Override
     public <A> MutableBag<A> collect(Function<? super V, ? extends A> function)
     {
         synchronized (this.lock)
@@ -307,6 +328,7 @@ public class SynchronizedMutableMap<K, V>
         }
     }
 
+    @Override
     public MutableBooleanBag collectBoolean(BooleanFunction<? super V> booleanFunction)
     {
         synchronized (this.lock)
@@ -315,6 +337,7 @@ public class SynchronizedMutableMap<K, V>
         }
     }
 
+    @Override
     public MutableByteBag collectByte(ByteFunction<? super V> byteFunction)
     {
         synchronized (this.lock)
@@ -323,6 +346,7 @@ public class SynchronizedMutableMap<K, V>
         }
     }
 
+    @Override
     public MutableCharBag collectChar(CharFunction<? super V> charFunction)
     {
         synchronized (this.lock)
@@ -331,6 +355,7 @@ public class SynchronizedMutableMap<K, V>
         }
     }
 
+    @Override
     public MutableDoubleBag collectDouble(DoubleFunction<? super V> doubleFunction)
     {
         synchronized (this.lock)
@@ -339,6 +364,7 @@ public class SynchronizedMutableMap<K, V>
         }
     }
 
+    @Override
     public MutableFloatBag collectFloat(FloatFunction<? super V> floatFunction)
     {
         synchronized (this.lock)
@@ -347,6 +373,7 @@ public class SynchronizedMutableMap<K, V>
         }
     }
 
+    @Override
     public MutableIntBag collectInt(IntFunction<? super V> intFunction)
     {
         synchronized (this.lock)
@@ -355,6 +382,7 @@ public class SynchronizedMutableMap<K, V>
         }
     }
 
+    @Override
     public MutableLongBag collectLong(LongFunction<? super V> longFunction)
     {
         synchronized (this.lock)
@@ -363,6 +391,7 @@ public class SynchronizedMutableMap<K, V>
         }
     }
 
+    @Override
     public MutableShortBag collectShort(ShortFunction<? super V> shortFunction)
     {
         synchronized (this.lock)
@@ -371,6 +400,7 @@ public class SynchronizedMutableMap<K, V>
         }
     }
 
+    @Override
     public <P, A> MutableBag<A> collectWith(Function2<? super V, ? super P, ? extends A> function, P parameter)
     {
         synchronized (this.lock)
@@ -379,6 +409,7 @@ public class SynchronizedMutableMap<K, V>
         }
     }
 
+    @Override
     public <A> MutableBag<A> collectIf(Predicate<? super V> predicate, Function<? super V, ? extends A> function)
     {
         synchronized (this.lock)
@@ -387,6 +418,7 @@ public class SynchronizedMutableMap<K, V>
         }
     }
 
+    @Override
     public <A> MutableBag<A> flatCollect(Function<? super V, ? extends Iterable<A>> function)
     {
         synchronized (this.lock)
@@ -395,6 +427,7 @@ public class SynchronizedMutableMap<K, V>
         }
     }
 
+    @Override
     public <KK> MutableBagMultimap<KK, V> groupBy(Function<? super V, ? extends KK> function)
     {
         synchronized (this.lock)
@@ -403,6 +436,7 @@ public class SynchronizedMutableMap<K, V>
         }
     }
 
+    @Override
     public <KK> MutableBagMultimap<KK, V> groupByEach(Function<? super V, ? extends Iterable<KK>> function)
     {
         synchronized (this.lock)
@@ -414,6 +448,7 @@ public class SynchronizedMutableMap<K, V>
     /**
      * @deprecated in 6.0. Use {@link OrderedIterable#zip(Iterable)} instead.
      */
+    @Override
     @Deprecated
     public <S> MutableBag<Pair<V, S>> zip(Iterable<S> that)
     {
@@ -432,6 +467,7 @@ public class SynchronizedMutableMap<K, V>
         }
     }
 
+    @Override
     public MutableMap<V, K> flipUniqueValues()
     {
         synchronized (this.lock)
@@ -440,6 +476,7 @@ public class SynchronizedMutableMap<K, V>
         }
     }
 
+    @Override
     public MutableSetMultimap<V, K> flip()
     {
         synchronized (this.lock)
@@ -448,6 +485,7 @@ public class SynchronizedMutableMap<K, V>
         }
     }
 
+    @Override
     public Set<K> keySet()
     {
         synchronized (this.lock)
@@ -456,6 +494,7 @@ public class SynchronizedMutableMap<K, V>
         }
     }
 
+    @Override
     public Collection<V> values()
     {
         synchronized (this.lock)
@@ -464,6 +503,7 @@ public class SynchronizedMutableMap<K, V>
         }
     }
 
+    @Override
     public Set<Entry<K, V>> entrySet()
     {
         synchronized (this.lock)
@@ -472,16 +512,19 @@ public class SynchronizedMutableMap<K, V>
         }
     }
 
+    @Override
     public RichIterable<K> keysView()
     {
         return LazyIterate.adapt(this.keySet());
     }
 
+    @Override
     public RichIterable<V> valuesView()
     {
         return LazyIterate.adapt(this.values());
     }
 
+    @Override
     public MutableMap<K, V> asUnmodifiable()
     {
         synchronized (this.lock)
@@ -490,11 +533,13 @@ public class SynchronizedMutableMap<K, V>
         }
     }
 
+    @Override
     public MutableMap<K, V> asSynchronized()
     {
         return this;
     }
 
+    @Override
     public ImmutableMap<K, V> toImmutable()
     {
         synchronized (this.lock)

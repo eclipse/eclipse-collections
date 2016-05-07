@@ -38,6 +38,7 @@ public class TakeWhileIterable<T> extends AbstractLazyIterable<T>
         this.predicate = predicate;
     }
 
+    @Override
     public void each(Procedure<? super T> procedure)
     {
         for (T each : this.adapted)
@@ -78,8 +79,9 @@ public class TakeWhileIterable<T> extends AbstractLazyIterable<T>
         }
     }
 
+    @Override
     public Iterator<T> iterator()
     {
-        return new TakeWhileIterator<T>(this.adapted, this.predicate);
+        return new TakeWhileIterator<>(this.adapted, this.predicate);
     }
 }

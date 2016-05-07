@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -25,7 +25,7 @@ public class UnmodifiableMapSerializationTest
                         + "AAABAgABTAAIZGVsZWdhdGV0AA9MamF2YS91dGlsL01hcDt4cHNyADNvcmcuZWNsaXBzZS5jb2xs\n"
                         + "ZWN0aW9ucy5pbXBsLm1hcC5tdXRhYmxlLlVuaWZpZWRNYXAAAAAAAAAAAQwAAHhwdwgAAAAAP0AA\n"
                         + "AHg=",
-                new UnmodifiableMap<Object, Object>(Maps.mutable.of()));
+                new UnmodifiableMap<>(Maps.mutable.of()));
     }
 
     @Test
@@ -37,7 +37,7 @@ public class UnmodifiableMapSerializationTest
                         + "cgAsamF2YS51dGlsLkNvbGxlY3Rpb25zJFVubW9kaWZpYWJsZUNvbGxlY3Rpb24ZQgCAy173HgIA\n"
                         + "AUwAAWN0ABZMamF2YS91dGlsL0NvbGxlY3Rpb247eHBzcgAzb3JnLmVjbGlwc2UuY29sbGVjdGlv\n"
                         + "bnMuaW1wbC5zZXQubXV0YWJsZS5VbmlmaWVkU2V0AAAAAAAAAAEMAAB4cHcIAAAAAD9AAAB4",
-                new UnmodifiableMap<Object, Object>(Maps.mutable.of()).keySet());
+                new UnmodifiableMap<>(Maps.mutable.of()).keySet());
     }
 
     @Test
@@ -53,7 +53,7 @@ public class UnmodifiableMapSerializationTest
                         + "AAAAAAABAgABTAAGdGhpcyQwdAA1TG9yZy9lY2xpcHNlL2NvbGxlY3Rpb25zL2ltcGwvbWFwL211\n"
                         + "dGFibGUvVW5pZmllZE1hcDt4cHNyADNvcmcuZWNsaXBzZS5jb2xsZWN0aW9ucy5pbXBsLm1hcC5t\n"
                         + "dXRhYmxlLlVuaWZpZWRNYXAAAAAAAAAAAQwAAHhwdwgAAAAAP0AAAHg=",
-                new UnmodifiableMap<Object, Object>(Maps.mutable.of()).entrySet());
+                new UnmodifiableMap<>(Maps.mutable.of()).entrySet());
     }
 
     @Test
@@ -64,6 +64,6 @@ public class UnmodifiableMapSerializationTest
                 "rO0ABXNyACxqYXZhLnV0aWwuQ29sbGVjdGlvbnMkVW5tb2RpZmlhYmxlQ29sbGVjdGlvbhlCAIDL\n"
                         + "XvceAgABTAABY3QAFkxqYXZhL3V0aWwvQ29sbGVjdGlvbjt4cHNyADJvcmcuZWNsaXBzZS5jb2xs\n"
                         + "ZWN0aW9ucy5pbXBsLmxpc3QubXV0YWJsZS5GYXN0TGlzdAAAAAAAAAABDAAAeHB3BAAAAAB4",
-                new UnmodifiableMap<Object, Object>(Maps.mutable.of()).values());
+                new UnmodifiableMap<>(Maps.mutable.of()).values());
     }
 }

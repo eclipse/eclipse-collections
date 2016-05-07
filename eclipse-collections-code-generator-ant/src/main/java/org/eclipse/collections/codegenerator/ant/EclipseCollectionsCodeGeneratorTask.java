@@ -32,7 +32,7 @@ public class EclipseCollectionsCodeGeneratorTask extends Task
     {
         this.log("Scanning all template files from " + this.templateDirectory);
 
-        final boolean[] error = new boolean[1];
+        boolean[] error = new boolean[1];
         EclipseCollectionsCodeGenerator.ErrorListener errorListener = new EclipseCollectionsCodeGenerator.ErrorListener()
         {
             public void error(String string)
@@ -58,7 +58,7 @@ public class EclipseCollectionsCodeGeneratorTask extends Task
 
     private List<URL> getClassPathURLs()
     {
-        List<URL> urls = new ArrayList<URL>();
+        List<URL> urls = new ArrayList<>();
         String[] classPathStrings = ((AntClassLoader) this.getClass().getClassLoader()).getClasspath().split(CLASSPATH_SEPARATOR);
 
         for (String classPathString : classPathStrings)

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -27,7 +27,7 @@ public final class ChunkIterator<T>
     private final int size;
     private final Function0<MutableCollection<T>> speciesNewStrategy;
 
-    public ChunkIterator(final Iterable<T> iterable, int size)
+    public ChunkIterator(Iterable<T> iterable, int size)
     {
         if (size <= 0)
         {
@@ -37,38 +37,24 @@ public final class ChunkIterator<T>
         this.size = size;
         this.iterator = iterable.iterator();
 
-        if (iterable instanceof MutableCollection)
-        {
-            this.speciesNewStrategy = new Function0<MutableCollection<T>>()
-            {
-                public MutableCollection<T> value()
-                {
-                    return ((MutableCollection<T>) iterable).newEmpty();
-                }
-            };
-        }
-        else
-        {
-            this.speciesNewStrategy = new Function0<MutableCollection<T>>()
-            {
-                public MutableCollection<T> value()
-                {
-                    return Lists.mutable.empty();
-                }
-            };
-        }
+        this.speciesNewStrategy = iterable instanceof MutableCollection
+                ? ((MutableCollection<T>) iterable)::newEmpty
+                : Lists.mutable::empty;
     }
 
+    @Override
     public void remove()
     {
         throw new UnsupportedOperationException("Cannot call remove() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public boolean hasNext()
     {
         return this.iterator.hasNext();
     }
 
+    @Override
     public RichIterable<T> next()
     {
         if (!this.iterator.hasNext())

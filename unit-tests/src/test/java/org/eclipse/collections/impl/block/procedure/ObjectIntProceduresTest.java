@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -23,7 +23,7 @@ public class ObjectIntProceduresTest
     @Test
     public void fromObjectIntProcedure()
     {
-        MutableList<Integer> result = FastList.<Integer>newList();
+        MutableList<Integer> result = FastList.newList();
         ObjectIntProcedure<Integer> objectIntProcedure = ObjectIntProcedures.fromProcedure(result::add);
         objectIntProcedure.value(1, 0);
         Assert.assertEquals(FastList.newListWith(1), result);

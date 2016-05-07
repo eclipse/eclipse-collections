@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -71,7 +71,7 @@ public class SynchronizedMutableCollection<T>
      */
     public static <E, C extends Collection<E>> SynchronizedMutableCollection<E> of(C collection)
     {
-        return new SynchronizedMutableCollection<E>(CollectionAdapter.adapt(collection));
+        return new SynchronizedMutableCollection<>(CollectionAdapter.adapt(collection));
     }
 
     /**
@@ -82,51 +82,58 @@ public class SynchronizedMutableCollection<T>
      */
     public static <E, C extends Collection<E>> SynchronizedMutableCollection<E> of(C collection, Object lock)
     {
-        return new SynchronizedMutableCollection<E>(CollectionAdapter.adapt(collection), lock);
+        return new SynchronizedMutableCollection<>(CollectionAdapter.adapt(collection), lock);
     }
 
     protected Object writeReplace()
     {
-        return new SynchronizedCollectionSerializationProxy<T>(this.getDelegate());
+        return new SynchronizedCollectionSerializationProxy<>(this.getDelegate());
     }
 
+    @Override
     public MutableCollection<T> with(T element)
     {
         this.add(element);
         return this;
     }
 
+    @Override
     public MutableCollection<T> without(T element)
     {
         this.remove(element);
         return this;
     }
 
+    @Override
     public MutableCollection<T> withAll(Iterable<? extends T> elements)
     {
         this.addAllIterable(elements);
         return this;
     }
 
+    @Override
     public MutableCollection<T> withoutAll(Iterable<? extends T> elements)
     {
         this.removeAllIterable(elements);
         return this;
     }
 
+    @Override
     public MutableCollection<T> asUnmodifiable()
     {
         synchronized (this.lock)
         {
-            return new UnmodifiableMutableCollection<T>(this);
+            return new UnmodifiableMutableCollection<>(this);
         }
     }
 
+    @Override
     public MutableCollection<T> asSynchronized()
     {
         return this;
     }
 
+    @Override
     public ImmutableCollection<T> toImmutable()
     {
         synchronized (this.lock)
@@ -135,6 +142,7 @@ public class SynchronizedMutableCollection<T>
         }
     }
 
+    @Override
     public MutableCollection<T> newEmpty()
     {
         synchronized (this.getLock())
@@ -143,6 +151,7 @@ public class SynchronizedMutableCollection<T>
         }
     }
 
+    @Override
     public MutableCollection<T> tap(Procedure<? super T> procedure)
     {
         synchronized (this.getLock())
@@ -152,6 +161,7 @@ public class SynchronizedMutableCollection<T>
         }
     }
 
+    @Override
     public MutableCollection<T> select(Predicate<? super T> predicate)
     {
         synchronized (this.getLock())
@@ -160,6 +170,7 @@ public class SynchronizedMutableCollection<T>
         }
     }
 
+    @Override
     public <P> MutableCollection<T> selectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         synchronized (this.getLock())
@@ -168,6 +179,7 @@ public class SynchronizedMutableCollection<T>
         }
     }
 
+    @Override
     public MutableCollection<T> reject(Predicate<? super T> predicate)
     {
         synchronized (this.getLock())
@@ -176,6 +188,7 @@ public class SynchronizedMutableCollection<T>
         }
     }
 
+    @Override
     public <P> MutableCollection<T> rejectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         synchronized (this.getLock())
@@ -184,6 +197,7 @@ public class SynchronizedMutableCollection<T>
         }
     }
 
+    @Override
     public PartitionMutableCollection<T> partition(Predicate<? super T> predicate)
     {
         synchronized (this.getLock())
@@ -192,6 +206,7 @@ public class SynchronizedMutableCollection<T>
         }
     }
 
+    @Override
     public <P> PartitionMutableCollection<T> partitionWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         synchronized (this.getLock())
@@ -200,6 +215,7 @@ public class SynchronizedMutableCollection<T>
         }
     }
 
+    @Override
     public MutableBooleanCollection collectBoolean(BooleanFunction<? super T> booleanFunction)
     {
         synchronized (this.getLock())
@@ -208,6 +224,7 @@ public class SynchronizedMutableCollection<T>
         }
     }
 
+    @Override
     public MutableByteCollection collectByte(ByteFunction<? super T> byteFunction)
     {
         synchronized (this.getLock())
@@ -216,6 +233,7 @@ public class SynchronizedMutableCollection<T>
         }
     }
 
+    @Override
     public MutableCharCollection collectChar(CharFunction<? super T> charFunction)
     {
         synchronized (this.getLock())
@@ -224,6 +242,7 @@ public class SynchronizedMutableCollection<T>
         }
     }
 
+    @Override
     public MutableDoubleCollection collectDouble(DoubleFunction<? super T> doubleFunction)
     {
         synchronized (this.getLock())
@@ -232,6 +251,7 @@ public class SynchronizedMutableCollection<T>
         }
     }
 
+    @Override
     public MutableFloatCollection collectFloat(FloatFunction<? super T> floatFunction)
     {
         synchronized (this.getLock())
@@ -240,6 +260,7 @@ public class SynchronizedMutableCollection<T>
         }
     }
 
+    @Override
     public MutableIntCollection collectInt(IntFunction<? super T> intFunction)
     {
         synchronized (this.getLock())
@@ -248,6 +269,7 @@ public class SynchronizedMutableCollection<T>
         }
     }
 
+    @Override
     public MutableLongCollection collectLong(LongFunction<? super T> longFunction)
     {
         synchronized (this.getLock())
@@ -256,6 +278,7 @@ public class SynchronizedMutableCollection<T>
         }
     }
 
+    @Override
     public MutableShortCollection collectShort(ShortFunction<? super T> shortFunction)
     {
         synchronized (this.getLock())
@@ -264,6 +287,7 @@ public class SynchronizedMutableCollection<T>
         }
     }
 
+    @Override
     public MutableCollection<Pair<T, Integer>> zipWithIndex()
     {
         synchronized (this.getLock())
@@ -272,6 +296,7 @@ public class SynchronizedMutableCollection<T>
         }
     }
 
+    @Override
     public <S> MutableCollection<S> selectInstancesOf(Class<S> clazz)
     {
         synchronized (this.getLock())
@@ -280,6 +305,7 @@ public class SynchronizedMutableCollection<T>
         }
     }
 
+    @Override
     public <V> MutableCollection<V> collect(Function<? super T, ? extends V> function)
     {
         synchronized (this.getLock())
@@ -288,6 +314,7 @@ public class SynchronizedMutableCollection<T>
         }
     }
 
+    @Override
     public <P, V> MutableCollection<V> collectWith(Function2<? super T, ? super P, ? extends V> function, P parameter)
     {
         synchronized (this.getLock())
@@ -296,6 +323,7 @@ public class SynchronizedMutableCollection<T>
         }
     }
 
+    @Override
     public <V> MutableCollection<V> collectIf(Predicate<? super T> predicate, Function<? super T, ? extends V> function)
     {
         synchronized (this.getLock())
@@ -304,6 +332,7 @@ public class SynchronizedMutableCollection<T>
         }
     }
 
+    @Override
     public <V> MutableCollection<V> flatCollect(Function<? super T, ? extends Iterable<V>> function)
     {
         synchronized (this.getLock())
@@ -312,6 +341,7 @@ public class SynchronizedMutableCollection<T>
         }
     }
 
+    @Override
     public <V> MutableMultimap<V, T> groupBy(Function<? super T, ? extends V> function)
     {
         synchronized (this.getLock())
@@ -320,6 +350,7 @@ public class SynchronizedMutableCollection<T>
         }
     }
 
+    @Override
     public <V> MutableMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function)
     {
         synchronized (this.getLock())
@@ -328,6 +359,7 @@ public class SynchronizedMutableCollection<T>
         }
     }
 
+    @Override
     public <S> MutableCollection<Pair<T, S>> zip(Iterable<S> that)
     {
         synchronized (this.getLock())

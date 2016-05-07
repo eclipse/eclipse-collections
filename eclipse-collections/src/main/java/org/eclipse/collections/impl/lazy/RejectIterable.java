@@ -40,29 +40,31 @@ public class RejectIterable<T>
         this.predicate = Predicates.not(newPredicate);
     }
 
+    @Override
     public void each(Procedure<? super T> procedure)
     {
-        Iterate.forEach(this.adapted, new IfProcedure<T>(this.predicate, procedure));
+        Iterate.forEach(this.adapted, new IfProcedure<>(this.predicate, procedure));
     }
 
     @Override
     public void forEachWithIndex(ObjectIntProcedure<? super T> objectIntProcedure)
     {
-        Iterate.forEach(this.adapted, new IfObjectIntProcedure<T>(this.predicate, objectIntProcedure));
+        Iterate.forEach(this.adapted, new IfObjectIntProcedure<>(this.predicate, objectIntProcedure));
     }
 
     @Override
     public <P> void forEachWith(Procedure2<? super T, ? super P> procedure, P parameter)
     {
-        Iterate.forEachWith(this.adapted, new IfProcedureWith<T, P>(this.predicate, procedure), parameter);
+        Iterate.forEachWith(this.adapted, new IfProcedureWith<>(this.predicate, procedure), parameter);
     }
 
     /**
      * We use a SelectIterator, since we have already negated the predicate
      */
+    @Override
     public Iterator<T> iterator()
     {
-        return new SelectIterator<T>(this.adapted, this.predicate);
+        return new SelectIterator<>(this.adapted, this.predicate);
     }
 
     @Override
@@ -74,13 +76,13 @@ public class RejectIterable<T>
     @Override
     public boolean allSatisfy(Predicate<? super T> predicate)
     {
-        return Iterate.allSatisfy(this.adapted, new AllSatisfyPredicate<T>(this.predicate, predicate));
+        return Iterate.allSatisfy(this.adapted, new AllSatisfyPredicate<>(this.predicate, predicate));
     }
 
     @Override
     public boolean noneSatisfy(Predicate<? super T> predicate)
     {
-        return Iterate.noneSatisfy(this.adapted, new AllSatisfyPredicate<T>(this.predicate, predicate));
+        return Iterate.noneSatisfy(this.adapted, new AllSatisfyPredicate<>(this.predicate, predicate));
     }
 
     @Override

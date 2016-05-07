@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -53,7 +53,7 @@ final class QuadrupletonList<T>
     @Override
     public QuintupletonList<T> with(T value)
     {
-        return new QuintupletonList<T>(this.element1, this.element2, this.element3, this.element4, value);
+        return new QuintupletonList<>(this.element1, this.element2, this.element3, this.element4, value);
     }
 
     // Weird implementation of clone() is ok on final classes
@@ -61,14 +61,16 @@ final class QuadrupletonList<T>
     @Override
     public QuadrupletonList<T> clone()
     {
-        return new QuadrupletonList<T>(this.element1, this.element2, this.element3, this.element4);
+        return new QuadrupletonList<>(this.element1, this.element2, this.element3, this.element4);
     }
 
+    @Override
     public int size()
     {
         return 4;
     }
 
+    @Override
     public T get(int index)
     {
         switch (index)
@@ -98,6 +100,7 @@ final class QuadrupletonList<T>
     /**
      * set is implemented purely to allow the List to be sorted, not because this List should be considered mutable.
      */
+    @Override
     public T set(int index, T element)
     {
         switch (index)
@@ -162,6 +165,7 @@ final class QuadrupletonList<T>
         procedure.value(this.element4, parameter);
     }
 
+    @Override
     public void writeExternal(ObjectOutput out) throws IOException
     {
         out.writeObject(this.element1);
@@ -170,6 +174,7 @@ final class QuadrupletonList<T>
         out.writeObject(this.element4);
     }
 
+    @Override
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
     {
         this.element1 = (T) in.readObject();

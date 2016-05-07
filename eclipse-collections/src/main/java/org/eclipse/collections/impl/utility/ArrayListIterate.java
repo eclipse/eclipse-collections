@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -131,7 +131,7 @@ public final class ArrayListIterate
      */
     public static <T> ArrayList<T> select(ArrayList<T> list, Predicate<? super T> predicate)
     {
-        return ArrayListIterate.select(list, predicate, new ArrayList<T>());
+        return ArrayListIterate.select(list, predicate, new ArrayList<>());
     }
 
     /**
@@ -142,7 +142,7 @@ public final class ArrayListIterate
             Predicate2<? super T, ? super IV> predicate,
             IV injectedValue)
     {
-        return ArrayListIterate.selectWith(list, predicate, injectedValue, new ArrayList<T>());
+        return ArrayListIterate.selectWith(list, predicate, injectedValue, new ArrayList<>());
     }
 
     /**
@@ -275,7 +275,7 @@ public final class ArrayListIterate
             Predicate<? super T> predicate,
             Function<? super T, ? extends A> function)
     {
-        return ArrayListIterate.collectIf(list, predicate, function, new ArrayList<A>());
+        return ArrayListIterate.collectIf(list, predicate, function, new ArrayList<>());
     }
 
     /**
@@ -308,7 +308,7 @@ public final class ArrayListIterate
      */
     public static <T> ArrayList<T> reject(ArrayList<T> list, Predicate<? super T> predicate)
     {
-        return ArrayListIterate.reject(list, predicate, new ArrayList<T>());
+        return ArrayListIterate.reject(list, predicate, new ArrayList<>());
     }
 
     /**
@@ -319,7 +319,7 @@ public final class ArrayListIterate
             Predicate2<? super T, ? super IV> predicate,
             IV injectedValue)
     {
-        return ArrayListIterate.rejectWith(list, predicate, injectedValue, new ArrayList<T>());
+        return ArrayListIterate.rejectWith(list, predicate, injectedValue, new ArrayList<>());
     }
 
     /**
@@ -378,7 +378,7 @@ public final class ArrayListIterate
             ArrayList<T> list,
             Function<? super T, ? extends A> function)
     {
-        return ArrayListIterate.collect(list, function, new ArrayList<A>(list.size()));
+        return ArrayListIterate.collect(list, function, new ArrayList<>(list.size()));
     }
 
     /**
@@ -727,7 +727,7 @@ public final class ArrayListIterate
             ArrayList<T> list,
             Function<? super T, ? extends Iterable<A>> function)
     {
-        return ArrayListIterate.flatCollect(list, function, new ArrayList<A>(list.size()));
+        return ArrayListIterate.flatCollect(list, function, new ArrayList<>(list.size()));
     }
 
     /**
@@ -1229,7 +1229,7 @@ public final class ArrayListIterate
         int size = list.size();
         if (ArrayListIterate.isOptimizableArrayList(list, size))
         {
-            PartitionFastList<T> partitionFastList = new PartitionFastList<T>();
+            PartitionFastList<T> partitionFastList = new PartitionFastList<>();
             MutableList<T> selected = partitionFastList.getSelected();
             MutableList<T> rejected = partitionFastList.getRejected();
 
@@ -1250,7 +1250,7 @@ public final class ArrayListIterate
         int size = list.size();
         if (ArrayListIterate.isOptimizableArrayList(list, size))
         {
-            PartitionFastList<T> partitionFastList = new PartitionFastList<T>();
+            PartitionFastList<T> partitionFastList = new PartitionFastList<>();
             MutableList<T> selected = partitionFastList.getSelected();
             MutableList<T> rejected = partitionFastList.getRejected();
 
@@ -1386,7 +1386,7 @@ public final class ArrayListIterate
             Function2<? super T, ? super P, ? extends A> function,
             P parameter)
     {
-        return ArrayListIterate.collectWith(list, function, parameter, new ArrayList<A>(list.size()));
+        return ArrayListIterate.collectWith(list, function, parameter, new ArrayList<>(list.size()));
     }
 
     /**
@@ -1482,7 +1482,7 @@ public final class ArrayListIterate
 
     public static <T> ArrayList<T> distinct(ArrayList<T> list)
     {
-        return ArrayListIterate.distinct(list, new ArrayList<T>());
+        return ArrayListIterate.distinct(list, new ArrayList<>());
     }
 
     /**
@@ -1515,7 +1515,7 @@ public final class ArrayListIterate
     {
         int size = list.size();
         MutableSet<T> seenSoFar = UnifiedSetWithHashingStrategy.newSet(hashingStrategy);
-        ArrayList<T> result = new ArrayList<T>();
+        ArrayList<T> result = new ArrayList<>();
         if (ArrayListIterate.isOptimizableArrayList(list, size))
         {
             T[] elements = ArrayListIterate.getInternalArray(list);
@@ -1609,7 +1609,7 @@ public final class ArrayListIterate
         {
             throw new IllegalArgumentException("Count must be greater than zero, but was: " + count);
         }
-        return ArrayListIterate.take(list, count, new ArrayList<T>(Math.min(list.size(), count)));
+        return ArrayListIterate.take(list, count, new ArrayList<>(Math.min(list.size(), count)));
     }
 
     /**
@@ -1646,7 +1646,7 @@ public final class ArrayListIterate
         {
             throw new IllegalArgumentException("Count must be greater than zero, but was: " + count);
         }
-        return ArrayListIterate.drop(list, count, new ArrayList<T>(list.size() - Math.min(list.size(), count)));
+        return ArrayListIterate.drop(list, count, new ArrayList<>(list.size() - Math.min(list.size(), count)));
     }
 
     /**
@@ -1683,7 +1683,7 @@ public final class ArrayListIterate
             ArrayList<T> list,
             Function<? super T, ? extends V> function)
     {
-        return ArrayListIterate.groupBy(list, function, FastListMultimap.<V, T>newMultimap());
+        return ArrayListIterate.groupBy(list, function, FastListMultimap.newMultimap());
     }
 
     /**
@@ -1714,7 +1714,7 @@ public final class ArrayListIterate
             ArrayList<T> list,
             Function<? super T, ? extends Iterable<V>> function)
     {
-        return ArrayListIterate.groupByEach(list, function, FastListMultimap.<V, T>newMultimap());
+        return ArrayListIterate.groupByEach(list, function, FastListMultimap.newMultimap());
     }
 
     /**
@@ -1749,7 +1749,7 @@ public final class ArrayListIterate
             ArrayList<T> list,
             Function<? super T, ? extends V> function)
     {
-        return ArrayListIterate.groupByUniqueKey(list, function, UnifiedMap.<V, T>newMap());
+        return ArrayListIterate.groupByUniqueKey(list, function, UnifiedMap.newMap());
     }
 
     /**
@@ -1787,7 +1787,7 @@ public final class ArrayListIterate
      */
     public static <X, Y> MutableList<Pair<X, Y>> zip(ArrayList<X> xs, Iterable<Y> ys)
     {
-        return ArrayListIterate.zip(xs, ys, FastList.<Pair<X, Y>>newList());
+        return ArrayListIterate.zip(xs, ys, FastList.newList());
     }
 
     /**
@@ -1814,7 +1814,7 @@ public final class ArrayListIterate
      */
     public static <T> MutableList<Pair<T, Integer>> zipWithIndex(ArrayList<T> list)
     {
-        return ArrayListIterate.zipWithIndex(list, FastList.<Pair<T, Integer>>newList());
+        return ArrayListIterate.zipWithIndex(list, FastList.newList());
     }
 
     /**
@@ -1890,7 +1890,7 @@ public final class ArrayListIterate
         int size = list.size();
         if (ArrayListIterate.isOptimizableArrayList(list, size))
         {
-            PartitionMutableList<T> result = new PartitionFastList<T>();
+            PartitionMutableList<T> result = new PartitionFastList<>();
             MutableList<T> selected = result.getSelected();
 
             T[] elements = ArrayListIterate.getInternalArray(list);
@@ -1948,7 +1948,7 @@ public final class ArrayListIterate
             Procedure2<? super V, ? super T> mutatingAggregator)
     {
         MutableMap<K, V> map = UnifiedMap.newMap();
-        ArrayListIterate.forEach(list, new MutatingAggregationProcedure<T, K, V>(map, groupBy, zeroValueFactory, mutatingAggregator));
+        ArrayListIterate.forEach(list, new MutatingAggregationProcedure<>(map, groupBy, zeroValueFactory, mutatingAggregator));
         return map;
     }
 
@@ -1959,7 +1959,7 @@ public final class ArrayListIterate
             Function2<? super V, ? super T, ? extends V> nonMutatingAggregator)
     {
         MutableMap<K, V> map = UnifiedMap.newMap();
-        ArrayListIterate.forEach(list, new NonMutatingAggregationProcedure<T, K, V>(map, groupBy, zeroValueFactory, nonMutatingAggregator));
+        ArrayListIterate.forEach(list, new NonMutatingAggregationProcedure<>(map, groupBy, zeroValueFactory, nonMutatingAggregator));
         return map;
     }
 }

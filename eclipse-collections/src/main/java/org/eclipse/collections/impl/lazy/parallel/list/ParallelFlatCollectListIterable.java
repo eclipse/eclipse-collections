@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -58,64 +58,40 @@ public class ParallelFlatCollectListIterable<T, V> extends AbstractParallelListI
         });
     }
 
-    public void forEach(final Procedure<? super V> procedure)
+    @Override
+    public void forEach(Procedure<? super V> procedure)
     {
-        this.parallelIterable.forEach(new Procedure<T>()
-        {
-            public void value(T each)
-            {
-                Iterate.forEach(ParallelFlatCollectListIterable.this.function.valueOf(each), procedure);
-            }
-        });
+        this.parallelIterable.forEach(each -> Iterate.forEach(this.function.valueOf(each), procedure));
     }
 
-    public V detect(final Predicate<? super V> predicate)
+    @Override
+    public V detect(Predicate<? super V> predicate)
     {
         // Some predicates are stateful, so they cannot be called more than once pre element,
         // that's why we use an AtomicReference to return the accepted element
-        final AtomicReference<V> result = new AtomicReference<V>();
-        this.parallelIterable.anySatisfy(new Predicate<T>()
-        {
-            public boolean accept(T each)
+        AtomicReference<V> result = new AtomicReference<>();
+        this.parallelIterable.anySatisfy(each -> Iterate.anySatisfy(this.function.valueOf(each), each1 -> {
+            if (predicate.accept(each1))
             {
-                return Iterate.anySatisfy(ParallelFlatCollectListIterable.this.function.valueOf(each), new Predicate<V>()
-                {
-                    public boolean accept(V each)
-                    {
-                        if (predicate.accept(each))
-                        {
-                            result.compareAndSet(null, each);
-                            return true;
-                        }
-
-                        return false;
-                    }
-                });
+                result.compareAndSet(null, each1);
+                return true;
             }
-        });
+
+            return false;
+        }));
 
         return result.get();
     }
 
-    public boolean anySatisfy(final Predicate<? super V> predicate)
+    @Override
+    public boolean anySatisfy(Predicate<? super V> predicate)
     {
-        return this.parallelIterable.anySatisfy(new Predicate<T>()
-        {
-            public boolean accept(T each)
-            {
-                return Iterate.anySatisfy(ParallelFlatCollectListIterable.this.function.valueOf(each), predicate);
-            }
-        });
+        return this.parallelIterable.anySatisfy(each -> Iterate.anySatisfy(this.function.valueOf(each), predicate));
     }
 
-    public boolean allSatisfy(final Predicate<? super V> predicate)
+    @Override
+    public boolean allSatisfy(Predicate<? super V> predicate)
     {
-        return this.parallelIterable.allSatisfy(new Predicate<T>()
-        {
-            public boolean accept(T each)
-            {
-                return Iterate.allSatisfy(ParallelFlatCollectListIterable.this.function.valueOf(each), predicate);
-            }
-        });
+        return this.parallelIterable.allSatisfy(each -> Iterate.allSatisfy(this.function.valueOf(each), predicate));
     }
 }

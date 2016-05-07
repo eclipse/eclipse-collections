@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -39,7 +39,8 @@ class ImmutableMapWithHashingStrategySerializationProxy<K, V> implements Externa
         this.hashingStrategy = hashingStrategy;
     }
 
-    public void writeExternal(final ObjectOutput out) throws IOException
+    @Override
+    public void writeExternal(ObjectOutput out) throws IOException
     {
         out.writeObject(this.hashingStrategy);
         out.writeInt(this.map.size());
@@ -64,6 +65,7 @@ class ImmutableMapWithHashingStrategySerializationProxy<K, V> implements Externa
         }
     }
 
+    @Override
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
     {
         HashingStrategy<? super K> strategy = (HashingStrategy<? super K>) in.readObject();

@@ -202,20 +202,20 @@ public abstract class AbstractRichIterableTestCase
         Verify.assertNotContains(3, result);
         Verify.assertNotContains(4, result);
         Verify.assertNotContains(5, result);
-        Verify.assertContainsAll(this.newWith(1, 2, 3, 4, 5).select(Predicates.lessThan(3), UnifiedSet.<Integer>newSet()), 1, 2);
+        Verify.assertContainsAll(this.newWith(1, 2, 3, 4, 5).select(Predicates.lessThan(3), UnifiedSet.newSet()), 1, 2);
     }
 
     @Test
     public void selectWith()
     {
-        Verify.assertContainsAll(this.newWith(1, 2, 3, 4, 5).selectWith(Predicates2.<Integer>lessThan(), 3), 1, 2);
-        RichIterable<Integer> result = this.newWith(-1, 2, 3, 4, 5).selectWith(Predicates2.<Integer>lessThan(), 3);
+        Verify.assertContainsAll(this.newWith(1, 2, 3, 4, 5).selectWith(Predicates2.lessThan(), 3), 1, 2);
+        RichIterable<Integer> result = this.newWith(-1, 2, 3, 4, 5).selectWith(Predicates2.lessThan(), 3);
         Verify.assertNotContains(3, result);
         Verify.assertNotContains(4, result);
         Verify.assertNotContains(5, result);
         Verify.assertContainsAll(
                 this.newWith(1, 2, 3, 4, 5).selectWith(
-                        Predicates2.<Integer>lessThan(),
+                        Predicates2.lessThan(),
                         3),
                 1, 2);
     }
@@ -223,10 +223,10 @@ public abstract class AbstractRichIterableTestCase
     @Test
     public void selectWith_target()
     {
-        Verify.assertContainsAll(this.newWith(1, 2, 3, 4, 5).selectWith(Predicates2.<Integer>lessThan(), 3, HashBag.<Integer>newBag()), 1, 2);
-        Verify.denyContainsAny(this.newWith(-1, 2, 3, 4, 5).selectWith(Predicates2.<Integer>lessThan(), 3, HashBag.<Integer>newBag()), 3, 4, 5);
+        Verify.assertContainsAll(this.newWith(1, 2, 3, 4, 5).selectWith(Predicates2.lessThan(), 3, HashBag.newBag()), 1, 2);
+        Verify.denyContainsAny(this.newWith(-1, 2, 3, 4, 5).selectWith(Predicates2.lessThan(), 3, HashBag.newBag()), 3, 4, 5);
         Verify.assertContainsAll(
-                this.newWith(1, 2, 3, 4, 5).selectWith(Predicates2.<Integer>lessThan(), 3, HashBag.<Integer>newBag()),
+                this.newWith(1, 2, 3, 4, 5).selectWith(Predicates2.lessThan(), 3, HashBag.newBag()),
                 1, 2);
     }
 
@@ -235,31 +235,31 @@ public abstract class AbstractRichIterableTestCase
     {
         Verify.assertContainsAll(this.newWith(1, 2, 3, 4).reject(Predicates.lessThan(3)), 3, 4);
         Verify.assertContainsAll(
-                this.newWith(1, 2, 3, 4).reject(Predicates.lessThan(3), UnifiedSet.<Integer>newSet()), 3, 4);
+                this.newWith(1, 2, 3, 4).reject(Predicates.lessThan(3), UnifiedSet.newSet()), 3, 4);
     }
 
     @Test
     public void rejectWith()
     {
-        Verify.assertContainsAll(this.newWith(1, 2, 3, 4).rejectWith(Predicates2.<Integer>lessThan(), 3), 3, 4);
+        Verify.assertContainsAll(this.newWith(1, 2, 3, 4).rejectWith(Predicates2.lessThan(), 3), 3, 4);
         Verify.assertContainsAll(
-                this.newWith(1, 2, 3, 4).rejectWith(Predicates2.<Integer>lessThan(), 3, UnifiedSet.<Integer>newSet()),
+                this.newWith(1, 2, 3, 4).rejectWith(Predicates2.lessThan(), 3, UnifiedSet.newSet()),
                 3, 4);
     }
 
     @Test
     public void rejectWith_target()
     {
-        Verify.assertContainsAll(this.newWith(1, 2, 3, 4).rejectWith(Predicates2.<Integer>lessThan(), 3, HashBag.<Integer>newBag()), 3, 4);
+        Verify.assertContainsAll(this.newWith(1, 2, 3, 4).rejectWith(Predicates2.lessThan(), 3, HashBag.newBag()), 3, 4);
         Verify.assertContainsAll(
-                this.newWith(1, 2, 3, 4).rejectWith(Predicates2.<Integer>lessThan(), 3, UnifiedSet.<Integer>newSet()),
+                this.newWith(1, 2, 3, 4).rejectWith(Predicates2.lessThan(), 3, UnifiedSet.newSet()),
                 3, 4);
     }
 
     @Test
     public void selectInstancesOf()
     {
-        RichIterable<Number> numbers = this.<Number>newWith(1, 2.0, 3, 4.0, 5);
+        RichIterable<Number> numbers = this.newWith(1, 2.0, 3, 4.0, 5);
         Assert.assertEquals(HashBag.newBagWith(1, 3, 5), numbers.selectInstancesOf(Integer.class).toBag());
         Assert.assertEquals(HashBag.newBagWith(1, 2.0, 3, 4.0, 5), numbers.selectInstancesOf(Number.class).toBag());
     }
@@ -268,7 +268,7 @@ public abstract class AbstractRichIterableTestCase
     public void collect()
     {
         Verify.assertContainsAll(this.newWith(1, 2, 3, 4).collect(String::valueOf), "1", "2", "3", "4");
-        Verify.assertContainsAll(this.newWith(1, 2, 3, 4).collect(String::valueOf, UnifiedSet.<String>newSet()), "1", "2", "3", "4");
+        Verify.assertContainsAll(this.newWith(1, 2, 3, 4).collect(String::valueOf, UnifiedSet.newSet()), "1", "2", "3", "4");
     }
 
     @Test
@@ -491,7 +491,7 @@ public abstract class AbstractRichIterableTestCase
 
         Verify.assertSetsEqual(
                 UnifiedSet.newSetWith("1", "2", "3", "4"),
-                collection.flatCollect(function, UnifiedSet.<String>newSet()));
+                collection.flatCollect(function, UnifiedSet.newSet()));
     }
 
     @Test
@@ -622,13 +622,13 @@ public abstract class AbstractRichIterableTestCase
         Assert.assertEquals(
                 Integer.valueOf(5),
                 this.newWith(1, 2, 3, 4, 5).detectWithIfNone(
-                        Predicates2.<Integer>greaterThan(),
+                        Predicates2.greaterThan(),
                         4,
                         function));
         Assert.assertEquals(
                 Integer.valueOf(-42),
                 this.newWith(1, 2, 3, 4, 5).detectWithIfNone(
-                        Predicates2.<Integer>lessThan(),
+                        Predicates2.lessThan(),
                         0,
                         function));
     }
@@ -700,7 +700,7 @@ public abstract class AbstractRichIterableTestCase
                 this.newWith(1, 2, 3).collectIf(
                         Integer.class::isInstance,
                         Object::toString,
-                        UnifiedSet.<String>newSet()),
+                        UnifiedSet.newSet()),
                 "1", "2", "3");
     }
 
@@ -1057,7 +1057,7 @@ public abstract class AbstractRichIterableTestCase
     public void toSortedList_with_comparator()
     {
         RichIterable<Integer> integers = this.newWith(2, 4, 1, 3);
-        MutableList<Integer> list = integers.toSortedList(Collections.<Integer>reverseOrder());
+        MutableList<Integer> list = integers.toSortedList(Collections.reverseOrder());
         Assert.assertEquals(FastList.newListWith(4, 3, 2, 1), list);
     }
 
@@ -1079,8 +1079,8 @@ public abstract class AbstractRichIterableTestCase
     public void toSortedBag_with_comparator()
     {
         RichIterable<Integer> integers = this.newWith(2, 4, 2, 3);
-        MutableSortedBag<Integer> bag = integers.toSortedBag(Collections.<Integer>reverseOrder());
-        Verify.assertSortedBagsEqual(TreeBag.newBagWith(Collections.<Integer>reverseOrder(), 4, 3, 2, 2), bag);
+        MutableSortedBag<Integer> bag = integers.toSortedBag(Collections.reverseOrder());
+        Verify.assertSortedBagsEqual(TreeBag.newBagWith(Collections.reverseOrder(), 4, 3, 2, 2), bag);
     }
 
     @Test(expected = NullPointerException.class)
@@ -1117,8 +1117,8 @@ public abstract class AbstractRichIterableTestCase
     public void toSortedSet_with_comparator()
     {
         RichIterable<Integer> integers = this.newWith(2, 4, 4, 2, 1, 4, 1, 3);
-        MutableSortedSet<Integer> set = integers.toSortedSet(Collections.<Integer>reverseOrder());
-        Verify.assertSortedSetsEqual(TreeSortedSet.newSetWith(Collections.<Integer>reverseOrder(), 1, 2, 3, 4), set);
+        MutableSortedSet<Integer> set = integers.toSortedSet(Collections.reverseOrder());
+        Verify.assertSortedSetsEqual(TreeSortedSet.newSetWith(Collections.reverseOrder(), 1, 2, 3, 4), set);
     }
 
     @Test
@@ -1165,9 +1165,9 @@ public abstract class AbstractRichIterableTestCase
     public void toSortedMap_with_comparator()
     {
         RichIterable<Integer> integers = this.newWith(1, 2, 3);
-        MutableSortedMap<Integer, String> map = integers.toSortedMap(Comparators.<Integer>reverseNaturalOrder(),
+        MutableSortedMap<Integer, String> map = integers.toSortedMap(Comparators.reverseNaturalOrder(),
                 Functions.getIntegerPassThru(), Object::toString);
-        Verify.assertMapsEqual(TreeSortedMap.newMapWith(Comparators.<Integer>reverseNaturalOrder(), 1, "1", 2, "2", 3, "3"), map);
+        Verify.assertMapsEqual(TreeSortedMap.newMapWith(Comparators.reverseNaturalOrder(), 1, "1", 2, "2", 3, "3"), map);
         Verify.assertListsEqual(FastList.newListWith(3, 2, 1), map.keySet().toList());
     }
 
@@ -1328,7 +1328,7 @@ public abstract class AbstractRichIterableTestCase
 
         Assert.assertEquals(
                 collection.zip(nulls).toSet(),
-                collection.zip(nulls, UnifiedSet.<Pair<String, Object>>newSet()));
+                collection.zip(nulls, UnifiedSet.newSet()));
     }
 
     @Test
@@ -1342,11 +1342,11 @@ public abstract class AbstractRichIterableTestCase
                 pairs.collect((Function<Pair<String, ?>, String>) Pair::getOne).toSet());
         Assert.assertEquals(
                 Interval.zeroTo(collection.size() - 1).toSet(),
-                pairs.collect((Function<Pair<?, Integer>, Integer>) Pair::getTwo, UnifiedSet.<Integer>newSet()));
+                pairs.collect((Function<Pair<?, Integer>, Integer>) Pair::getTwo, UnifiedSet.newSet()));
 
         Assert.assertEquals(
                 collection.zipWithIndex().toSet(),
-                collection.zipWithIndex(UnifiedSet.<Pair<String, Integer>>newSet()));
+                collection.zipWithIndex(UnifiedSet.newSet()));
     }
 
     @Test

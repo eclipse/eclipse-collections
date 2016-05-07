@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -45,6 +45,7 @@ public final class AddFunction
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public int intValueOf(int intParameter, Integer objectParameter)
         {
             return intParameter + objectParameter;
@@ -55,6 +56,7 @@ public final class AddFunction
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public long longValueOf(long longParameter, Integer objectParameter)
         {
             return longParameter + objectParameter.longValue();
@@ -65,6 +67,7 @@ public final class AddFunction
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public double doubleValueOf(double doubleParameter, Integer objectParameter)
         {
             return doubleParameter + objectParameter;
@@ -75,6 +78,7 @@ public final class AddFunction
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public float floatValueOf(float floatParameter, Integer objectParameter)
         {
             return floatParameter + objectParameter;
@@ -85,6 +89,7 @@ public final class AddFunction
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public double doubleValueOf(double doubleParameter, Double objectParameter)
         {
             return doubleParameter + objectParameter;
@@ -95,6 +100,7 @@ public final class AddFunction
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public float floatValueOf(float floatParameter, Float objectParameter)
         {
             return floatParameter + objectParameter;
@@ -105,6 +111,7 @@ public final class AddFunction
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public Integer value(Integer argument1, Integer argument2)
         {
             return argument1 + argument2;
@@ -115,6 +122,7 @@ public final class AddFunction
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public Double value(Double argument1, Double argument2)
         {
             return argument1 + argument2;
@@ -125,6 +133,7 @@ public final class AddFunction
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public Float value(Float argument1, Float argument2)
         {
             return argument1 + argument2;
@@ -135,6 +144,7 @@ public final class AddFunction
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public Long value(Long argument1, Long argument2)
         {
             return argument1 + argument2;
@@ -145,6 +155,7 @@ public final class AddFunction
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public String value(String argument1, String argument2)
         {
             if (argument1 != null && argument2 != null)
@@ -160,6 +171,7 @@ public final class AddFunction
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public Collection<T> value(Collection<T> collection, T addElement)
         {
             collection.add(addElement);
