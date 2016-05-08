@@ -95,6 +95,9 @@ public final class BooleanArrayList
         return new BooleanArrayList(source);
     }
 
+    /**
+     * @since 8.0
+     */
     public static BooleanArrayList newWithNValues(int size, boolean value)
     {
         BooleanArrayList newList = new BooleanArrayList(size);
