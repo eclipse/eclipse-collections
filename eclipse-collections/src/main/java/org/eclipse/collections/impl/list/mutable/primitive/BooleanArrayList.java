@@ -95,6 +95,20 @@ public final class BooleanArrayList
         return new BooleanArrayList(source);
     }
 
+    /**
+     * @since 8.0
+     */
+    public static BooleanArrayList newWithNValues(int size, boolean value)
+    {
+        BooleanArrayList newList = new BooleanArrayList(size);
+        newList.size = size;
+        if (newList.items != null)
+        {
+            newList.items.set(0, size, value);
+        }
+        return newList;
+    }
+
     @Override
     public int size()
     {

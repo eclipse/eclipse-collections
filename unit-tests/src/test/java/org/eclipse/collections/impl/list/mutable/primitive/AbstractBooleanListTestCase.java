@@ -367,6 +367,21 @@ public abstract class AbstractBooleanListTestCase extends AbstractMutableBoolean
         Assert.assertEquals("", this.newWith().makeString());
     }
 
+    @Test
+    public void newWithNValues()
+    {
+        Assert.assertEquals(this.newWith(true, true, true), BooleanArrayList.newWithNValues(3, true));
+        Assert.assertEquals(this.newWith(false, false), BooleanArrayList.newWithNValues(2, false));
+        Assert.assertEquals(this.newWith(), BooleanArrayList.newWithNValues(0, false));
+        Assert.assertEquals(this.newWith(), BooleanArrayList.newWithNValues(0, true));
+    }
+
+    @Test(expected = NegativeArraySizeException.class)
+    public void newWithNValues_throws_negative_size()
+    {
+        BooleanArrayList.newWithNValues(-1, true);
+    }
+
     @Override
     @Test
     public void appendString()

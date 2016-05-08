@@ -3,7 +3,7 @@
 
 New Functionality
 -----------------
-
+* Added static method BooleanArrayList.newWithNValues, following other primitive ArrayLists.
 * Changed MutableBagIterable.addOccurrences(T item, int occurrences) to return the updated number of occurrences instead of void.
 * Implemented Bags.mutable.ofAll(Iterable<? extends T> items) and Bags.mutable.withAll(Iterable<? extends T> items).
 * Implemented Multimap.keySet() to return an unmodifiable SetIterable of keys.
