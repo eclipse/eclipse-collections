@@ -97,10 +97,8 @@ public class <name>ArrayList extends Abstract<name>Iterable
     public static <name>ArrayList newWithNValues(int size, <type> value)
     {
         <name>ArrayList newList = new <name>ArrayList(size);
-        for (int i = 0; i \< size; i++)
-        {
-            newList.add(value);
-        }
+        newList.size = size;
+        Arrays.fill(newList.items, value);
         return newList;
     }
 

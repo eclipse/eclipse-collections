@@ -15,6 +15,7 @@ New Functionality
 Optimizations
 -------------
 
+* In <primitive>ArrayList.newWithNValues, replace loop with Arrays.fill.
 * Optimize MutableList.chunk() for RandomAccess lists to use the backing array instead of an iterator.
 
 Bug fixes
