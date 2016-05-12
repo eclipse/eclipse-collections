@@ -11,8 +11,12 @@
 package org.eclipse.collections.test;
 
 import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 import org.eclipse.collections.api.BooleanIterable;
 import org.eclipse.collections.api.ByteIterable;
@@ -23,6 +27,8 @@ import org.eclipse.collections.api.IntIterable;
 import org.eclipse.collections.api.LongIterable;
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.ShortIterable;
+import org.eclipse.collections.api.bag.ImmutableBag;
+import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.function.primitive.DoubleObjectToDoubleFunction;
@@ -886,12 +892,40 @@ public interface RichIterableTestCase extends IterableTestCase
         this.getInstanceUnderTest().toSortedBagBy(toSortedBagByIterationOrder::add);
         assertEquals(expectedIterationOrder.size(), toSortedBagByIterationOrder.size());
 */
+
+        MutableCollection<Integer> summarizeIntOrder = this.newMutableForFilter();
+        this.getInstanceUnderTest().summarizeInt(each -> {
+            summarizeIntOrder.add(each);
+            return 0;
+        });
+        assertEquals(expectedIterationOrder, summarizeIntOrder);
+
+        MutableCollection<Integer> summarizeFloatOrder = this.newMutableForFilter();
+        this.getInstanceUnderTest().summarizeFloat(each -> {
+            summarizeFloatOrder.add(each);
+            return 0;
+        });
+        assertEquals(expectedIterationOrder, summarizeFloatOrder);
+
+        MutableCollection<Integer> summarizeLongOrder = this.newMutableForFilter();
+        this.getInstanceUnderTest().summarizeLong(each -> {
+            summarizeLongOrder.add(each);
+            return 0;
+        });
+        assertEquals(expectedIterationOrder, summarizeLongOrder);
+
+        MutableCollection<Integer> summarizeDoubleOrder = this.newMutableForFilter();
+        this.getInstanceUnderTest().summarizeDouble(each -> {
+            summarizeDoubleOrder.add(each);
+            return 0;
+        });
+        assertEquals(expectedIterationOrder, summarizeDoubleOrder);
     }
 
     default MutableCollection<Integer> expectedIterationOrder()
     {
         MutableCollection<Integer> forEach = this.newMutableForFilter();
-        this.getInstanceUnderTest().forEach(Procedures.cast(forEach::add));
+        this.getInstanceUnderTest().each(forEach::add);
         return forEach;
     }
 
@@ -1403,8 +1437,122 @@ public interface RichIterableTestCase extends IterableTestCase
 
         Assert.assertEquals(30.0f, iterable.sumOfFloat(Integer::floatValue), 0.001);
         Assert.assertEquals(30.0, iterable.sumOfDouble(Integer::doubleValue), 0.001);
-        Assert.assertEquals(30, iterable.sumOfInt(integer -> integer));
+        Assert.assertEquals(30, iterable.sumOfInt(Integer::intValue));
         Assert.assertEquals(30L, iterable.sumOfLong(Integer::longValue));
+    }
+
+    @Test
+    default void RichIterable_summarizePrimitive()
+    {
+        RichIterable<Integer> bigIterable = this.newWith(5, 5, 5, 5, 5, 4, 4, 4, 4, 3, 3, 3, 2, 2, 1);
+
+        Assert.assertEquals(55.0f, bigIterable.summarizeFloat(Integer::floatValue).getSum(), 0.001);
+        Assert.assertEquals(55.0, bigIterable.summarizeDouble(Integer::doubleValue).getSum(), 0.001);
+        Assert.assertEquals(55, bigIterable.summarizeInt(Integer::intValue).getSum());
+        Assert.assertEquals(55L, bigIterable.summarizeLong(Integer::longValue).getSum());
+
+        RichIterable<Integer> littleIterable = this.newWith(5, 4, 3, 2, 1);
+
+        Assert.assertEquals(15.0f, littleIterable.summarizeFloat(Integer::floatValue).getSum(), 0.001);
+        Assert.assertEquals(15.0, littleIterable.summarizeDouble(Integer::doubleValue).getSum(), 0.001);
+        Assert.assertEquals(15, littleIterable.summarizeInt(Integer::intValue).getSum());
+        Assert.assertEquals(15L, littleIterable.summarizeLong(Integer::longValue).getSum());
+    }
+
+    @Test
+    default void RichIterable_reduceInPlaceCollector()
+    {
+        RichIterable<Integer> littleIterable = this.newWith(1, 2, 3, 1, 2, 3);
+        MutableBag<Integer> result =
+                littleIterable.reduceInPlace(Collectors.toCollection(Bags.mutable::empty));
+        Assert.assertEquals(Bags.immutable.with(1, 1, 2, 2, 3, 3), result);
+
+        RichIterable<Integer> bigIterable = this.newWith(Interval.oneTo(20).toArray());
+        MutableBag<Integer> bigResult =
+                bigIterable.reduceInPlace(Collectors.toCollection(Bags.mutable::empty));
+        Assert.assertEquals(Interval.oneTo(20).toBag(), bigResult);
+
+        String joining =
+                result.collect(Object::toString).reduceInPlace(Collectors.joining(","));
+        Assert.assertEquals(result.collect(Object::toString).makeString(","), joining);
+
+        ImmutableBag<Integer> immutableBag = result.toImmutable();
+        String joining2 =
+                immutableBag.collect(Object::toString).reduceInPlace(Collectors.joining(","));
+        Assert.assertEquals(immutableBag.collect(Object::toString).makeString(","), joining2);
+
+        String joining3 =
+                result.asLazy().collect(Object::toString).reduceInPlace(Collectors.joining(","));
+        Assert.assertEquals(result.asLazy().collect(Object::toString).makeString(","), joining3);
+
+        Map<Boolean, List<Integer>> expected =
+                littleIterable.toList().stream().collect(Collectors.partitioningBy(each -> each % 2 == 0));
+        Map<Boolean, List<Integer>> actual =
+                littleIterable.reduceInPlace(Collectors.partitioningBy(each -> each % 2 == 0));
+        Assert.assertEquals(expected, actual);
+
+        Map<String, List<Integer>> groupByJDK =
+                littleIterable.toList().stream().collect(Collectors.groupingBy(Object::toString));
+        Map<String, List<Integer>> groupByEC =
+                result.reduceInPlace(Collectors.groupingBy(Object::toString));
+        Assert.assertEquals(groupByJDK, groupByEC);
+    }
+
+    @Test
+    default void RichIterable_reduceInPlace()
+    {
+        RichIterable<Integer> littleIterable = this.newWith(1, 2, 3, 1, 2, 3);
+        MutableBag<Integer> result =
+                littleIterable.reduceInPlace(Bags.mutable::empty, MutableBag::add);
+        Assert.assertEquals(Bags.immutable.with(1, 1, 2, 2, 3, 3), result);
+
+        RichIterable<Integer> bigIterable = this.newWith(Interval.oneTo(20).toArray());
+        MutableBag<Integer> bigResult =
+                bigIterable.reduceInPlace(Bags.mutable::empty, MutableBag::add);
+        Assert.assertEquals(Interval.oneTo(20).toBag(), bigResult);
+
+        String joining =
+                result.collect(Object::toString).reduceInPlace(StringBuilder::new, StringBuilder::append).toString();
+        Assert.assertEquals(result.collect(Object::toString).makeString(""), joining);
+
+        ImmutableBag<Integer> immutableBag = result.toImmutable();
+        String joining2 =
+                immutableBag.collect(Object::toString).reduceInPlace(StringBuilder::new, StringBuilder::append).toString();
+        Assert.assertEquals(immutableBag.collect(Object::toString).makeString(""), joining2);
+
+        String joining3 =
+                result.asLazy().collect(Object::toString).reduceInPlace(StringBuilder::new, StringBuilder::append).toString();
+        Assert.assertEquals(result.asLazy().collect(Object::toString).makeString(""), joining3);
+
+        int atomicAdd = littleIterable.reduceInPlace(AtomicInteger::new, AtomicInteger::addAndGet).get();
+        Assert.assertEquals(12, atomicAdd);
+    }
+
+    @Test
+    default void RichIterable_reduceOptional()
+    {
+        RichIterable<Integer> littleIterable = this.newWith(1, 2, 3, 1, 2, 3);
+        Optional<Integer> result =
+                littleIterable.reduce(Integer::sum);
+        Assert.assertEquals(12, result.get().intValue());
+
+        RichIterable<Integer> bigIterable = this.newWith(Interval.oneTo(20).toArray());
+        Optional<Integer> bigResult =
+                bigIterable.reduce(Integer::max);
+        Assert.assertEquals(20, bigResult.get().intValue());
+
+        Optional<Integer> max =
+                littleIterable.reduce(Integer::max);
+        Assert.assertEquals(3, max.get().intValue());
+
+        Optional<Integer> min =
+                littleIterable.reduce(Integer::min);
+        Assert.assertEquals(1, min.get().intValue());
+
+        RichIterable<Integer> iterableEmpty = this.newWith();
+        Optional<Integer> resultEmpty =
+                iterableEmpty.reduce(Integer::sum);
+        Assert.assertFalse(resultEmpty.isPresent());
     }
 
     @Test

@@ -11,6 +11,9 @@ New Functionality
 * Implemented LazyIterable.takeWhile(Predicate<? super T> predicate) and LazyIterable.dropWhile(Predicate<? super T> predicate).
 * Pull up into() from LazyIterable to RichIterable.
 * Made StackIterable implement OrderedIterable.
+* Implemented summarizeInt/Float/Long/Double({Int/Float/Long/Double}Function) on RichIterable
+* Implemented summaryStatistics() on Primitive Iterables.
+* Implemented reduce(BinaryOperator), reduceInPlace(Collector) and reduceInPlace(Supplier, BiConsumer) on RichIterable.
 
 Optimizations
 -------------

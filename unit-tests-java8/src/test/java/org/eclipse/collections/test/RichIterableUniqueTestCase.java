@@ -10,9 +10,15 @@
 
 package org.eclipse.collections.test;
 
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 import org.eclipse.collections.api.RichIterable;
+import org.eclipse.collections.api.bag.ImmutableBag;
+import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.collection.MutableCollection;
@@ -691,6 +697,97 @@ public interface RichIterableUniqueTestCase extends RichIterableTestCase
         Assert.assertEquals(10.0, iterable.sumOfDouble(Integer::doubleValue), 0.001);
         Assert.assertEquals(10, iterable.sumOfInt(integer -> integer));
         Assert.assertEquals(10L, iterable.sumOfLong(Integer::longValue));
+    }
+
+    @Override
+    @Test
+    default void RichIterable_summarizePrimitive()
+    {
+        RichIterable<Integer> iterable = this.newWith(4, 3, 2, 1);
+
+        Assert.assertEquals(10.0f, iterable.summarizeFloat(Integer::floatValue).getSum(), 0.001);
+        Assert.assertEquals(10.0, iterable.summarizeDouble(Integer::doubleValue).getSum(), 0.001);
+        Assert.assertEquals(10, iterable.summarizeInt(Integer::intValue).getSum());
+        Assert.assertEquals(10L, iterable.summarizeLong(Integer::longValue).getSum());
+    }
+
+    @Override
+    @Test
+    default void RichIterable_reduceInPlaceCollector()
+    {
+        RichIterable<Integer> iterable = this.newWith(1, 2, 3);
+        MutableBag<Integer> result = iterable.reduceInPlace(Collectors.toCollection(Bags.mutable::empty));
+        Assert.assertEquals(Bags.immutable.with(1, 2, 3), result);
+
+        String joining = result.collect(Object::toString).reduceInPlace(Collectors.joining(","));
+        Assert.assertEquals(result.collect(Object::toString).makeString(","), joining);
+
+        String joining2 = result.toImmutable().collect(Object::toString).reduceInPlace(Collectors.joining(","));
+        Assert.assertEquals(result.toImmutable().collect(Object::toString).makeString(","), joining2);
+
+        String joining3 = result.asLazy().collect(Object::toString).reduceInPlace(Collectors.joining(","));
+        Assert.assertEquals(result.asLazy().collect(Object::toString).makeString(","), joining3);
+
+        Map<Boolean, List<Integer>> expected =
+                iterable.toList().stream().collect(Collectors.partitioningBy(each -> each % 2 == 0));
+        Map<Boolean, List<Integer>> actual =
+                iterable.reduceInPlace(Collectors.partitioningBy(each -> each % 2 == 0));
+        Assert.assertEquals(expected, actual);
+
+        Map<String, List<Integer>> groupByJDK =
+                iterable.toList().stream().collect(Collectors.groupingBy(Object::toString));
+        Map<String, List<Integer>> groupByEC =
+                result.reduceInPlace(Collectors.groupingBy(Object::toString));
+        Assert.assertEquals(groupByJDK, groupByEC);
+    }
+
+    @Override
+    @Test
+    default void RichIterable_reduceInPlace()
+    {
+        RichIterable<Integer> iterable = this.newWith(1, 2, 3);
+        MutableBag<Integer> result =
+                iterable.reduceInPlace(Bags.mutable::empty, MutableBag::add);
+        Assert.assertEquals(Bags.immutable.with(1, 2, 3), result);
+
+        String joining =
+                result.collect(Object::toString).reduceInPlace(StringBuilder::new, StringBuilder::append).toString();
+        Assert.assertEquals(result.collect(Object::toString).makeString(""), joining);
+
+        ImmutableBag<Integer> immutableBag = result.toImmutable();
+        String joining2 =
+                immutableBag.collect(Object::toString).reduceInPlace(StringBuilder::new, StringBuilder::append).toString();
+        Assert.assertEquals(immutableBag.collect(Object::toString).makeString(""), joining2);
+
+        String joining3 =
+                result.asLazy().collect(Object::toString).reduceInPlace(StringBuilder::new, StringBuilder::append).toString();
+        Assert.assertEquals(result.asLazy().collect(Object::toString).makeString(""), joining3);
+
+        int atomicAdd = iterable.reduceInPlace(AtomicInteger::new, AtomicInteger::addAndGet).get();
+        Assert.assertEquals(6, atomicAdd);
+    }
+
+    @Override
+    @Test
+    default void RichIterable_reduceOptional()
+    {
+        RichIterable<Integer> iterable = this.newWith(1, 2, 3);
+        Optional<Integer> result =
+                iterable.reduce(Integer::sum);
+        Assert.assertEquals(6, result.get().intValue());
+
+        Optional<Integer> max =
+                iterable.reduce(Integer::max);
+        Assert.assertEquals(3, max.get().intValue());
+
+        Optional<Integer> min =
+                iterable.reduce(Integer::min);
+        Assert.assertEquals(1, min.get().intValue());
+
+        RichIterable<Integer> iterableEmpty = this.newWith();
+        Optional<Integer> resultEmpty =
+                iterableEmpty.reduce(Integer::sum);
+        Assert.assertFalse(resultEmpty.isPresent());
     }
 
     @Override

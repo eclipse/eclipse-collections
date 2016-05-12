@@ -11,10 +11,23 @@
 package org.eclipse.collections.api.bag;
 
 import java.util.AbstractMap;
+import java.util.DoubleSummaryStatistics;
+import java.util.IntSummaryStatistics;
+import java.util.LongSummaryStatistics;
 import java.util.Map;
+import java.util.Optional;
+import java.util.function.BiConsumer;
+import java.util.function.BinaryOperator;
+import java.util.function.Supplier;
+import java.util.stream.Collector;
+import java.util.stream.Stream;
 
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.block.function.Function;
+import org.eclipse.collections.api.block.function.primitive.DoubleFunction;
+import org.eclipse.collections.api.block.function.primitive.FloatFunction;
+import org.eclipse.collections.api.block.function.primitive.IntFunction;
+import org.eclipse.collections.api.block.function.primitive.LongFunction;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.predicate.primitive.IntPredicate;
@@ -150,4 +163,111 @@ public interface Bag<T>
     String toStringOfItemToCount();
 
     ImmutableBagIterable<T> toImmutable();
+
+    /**
+     * @since 8.0
+     */
+    default IntSummaryStatistics summarizeInt(IntFunction<? super T> function)
+    {
+        IntSummaryStatistics stats = new IntSummaryStatistics();
+        this.forEachWithOccurrences((each, occurrences) ->
+        {
+            int result = function.intValueOf(each);
+            for (int i = 0; i < occurrences; i++)
+            {
+                stats.accept(result);
+            }
+        });
+        return stats;
+    }
+
+    /**
+     * @since 8.0
+     */
+    default DoubleSummaryStatistics summarizeFloat(FloatFunction<? super T> function)
+    {
+        DoubleSummaryStatistics stats = new DoubleSummaryStatistics();
+        this.forEachWithOccurrences((each, occurrences) ->
+        {
+            float result = function.floatValueOf(each);
+            for (int i = 0; i < occurrences; i++)
+            {
+                stats.accept(result);
+            }
+        });
+        return stats;
+    }
+
+    /**
+     * @since 8.0
+     */
+    default LongSummaryStatistics summarizeLong(LongFunction<? super T> function)
+    {
+        LongSummaryStatistics stats = new LongSummaryStatistics();
+        this.forEachWithOccurrences((each, occurrences) ->
+        {
+            long result = function.longValueOf(each);
+            for (int i = 0; i < occurrences; i++)
+            {
+                stats.accept(result);
+            }
+        });
+        return stats;
+    }
+
+    /**
+     * @since 8.0
+     */
+    default DoubleSummaryStatistics summarizeDouble(DoubleFunction<? super T> function)
+    {
+        DoubleSummaryStatistics stats = new DoubleSummaryStatistics();
+        this.forEachWithOccurrences((each, occurrences) ->
+        {
+            double result = function.doubleValueOf(each);
+            for (int i = 0; i < occurrences; i++)
+            {
+                stats.accept(result);
+            }
+        });
+        return stats;
+    }
+
+    /**
+     * This method produces the equivalent result as {@link Stream#collect(Collector)}.
+     *
+     * @since 8.0
+     */
+    @Override
+    default <R, A> R reduceInPlace(Collector<? super T, A, R> collector)
+    {
+        A mutableResult = collector.supplier().get();
+        BiConsumer<A, ? super T> accumulator = collector.accumulator();
+        this.forEachWithOccurrences((each, occurrences) ->
+        {
+            for (int i = 0; i < occurrences; i++)
+            {
+                accumulator.accept(mutableResult, each);
+            }
+        });
+        return collector.finisher().apply(mutableResult);
+    }
+
+    /**
+     * This method produces the equivalent result as {@link Stream#collect(Supplier, BiConsumer, BiConsumer)}.
+     *
+     * @since 8.0
+     */
+    @Override
+    default <R> R reduceInPlace(Supplier<R> supplier, BiConsumer<R, ? super T> accumulator)
+    {
+        R mutableResult = supplier.get();
+        this.forEachWithOccurrences((each, occurrences) ->
+        {
+            for (int i = 0; i < occurrences; i++)
+            {
+                accumulator.accept(mutableResult, each);
+            }
+        });
+        return mutableResult;
+    }
 }

@@ -13,7 +13,9 @@ package org.eclipse.collections.impl.collection.mutable;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 import java.util.RandomAccess;
+import java.util.function.BinaryOperator;
 
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.block.function.Function;
@@ -77,6 +79,17 @@ public abstract class AbstractMutableCollection<T>
             P parameter)
     {
         return IterableIterate.injectIntoWith(injectValue, this, function, parameter);
+    }
+
+    @Override
+    public Optional<T> reduce(BinaryOperator<T> accumulator)
+    {
+        if (this.isEmpty())
+        {
+            return Optional.empty();
+        }
+        return Optional.of(this.injectInto(null, (result, each) ->
+                result == null ? each : accumulator.apply(result, each)));
     }
 
     @Override

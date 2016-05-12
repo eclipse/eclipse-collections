@@ -423,6 +423,16 @@ public abstract class Abstract<name>IterableTestCase
         Assert.assertEquals(<(wideLiteral.(type))("93")>, this.newWith(<["30", "31", "32"]:(literal.(type))(); separator=", ">).sum()<wideDelta.(type)>);
     }
 
+    @Test
+    public void summaryStatistics()
+    {
+        int size = this.classUnderTest().size();
+        long sum = (long) ((size * (size + 1)) / 2);
+        Assert.assertEquals(sum, this.classUnderTest().summaryStatistics().getSum()<(wideDelta.(type))>);
+        Assert.assertEquals(<(wideLiteral.(type))("10")>, this.newWith(<["0", "1", "2", "3", "4"]:(literal.(type))(); separator=", ">).summaryStatistics().getSum()<(wideDelta.(type))>);
+        Assert.assertEquals(<(wideLiteral.(type))("93")>, this.newWith(<["30", "31", "32"]:(literal.(type))(); separator=", ">).summaryStatistics().getSum()<wideDelta.(type)>);
+    }
+
     <if(primitive.floatPrimitive)>@Test
 public void sumConsistentRounding()
 {

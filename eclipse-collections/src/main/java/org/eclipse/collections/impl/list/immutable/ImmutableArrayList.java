@@ -14,19 +14,33 @@ import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.DoubleSummaryStatistics;
+import java.util.IntSummaryStatistics;
 import java.util.Iterator;
 import java.util.List;
+import java.util.LongSummaryStatistics;
+import java.util.Optional;
 import java.util.RandomAccess;
+import java.util.function.BiConsumer;
+import java.util.function.BinaryOperator;
+import java.util.function.Supplier;
+import java.util.stream.Collector;
 
 import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.block.function.Function2;
+import org.eclipse.collections.api.block.function.primitive.DoubleFunction;
+import org.eclipse.collections.api.block.function.primitive.FloatFunction;
+import org.eclipse.collections.api.block.function.primitive.IntFunction;
+import org.eclipse.collections.api.block.function.primitive.LongFunction;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
 import org.eclipse.collections.api.list.ImmutableList;
+import org.eclipse.collections.api.map.primitive.ObjectDoubleMap;
+import org.eclipse.collections.api.map.primitive.ObjectLongMap;
 import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.partition.list.PartitionImmutableList;
 import org.eclipse.collections.impl.block.factory.Predicates;
@@ -302,6 +316,93 @@ final class ImmutableArrayList<T>
     public boolean noneSatisfy(Predicate<? super T> predicate)
     {
         return InternalArrayIterate.noneSatisfy(this.items, this.items.length, predicate);
+    }
+
+    /**
+     * @since 8.0
+     */
+    @Override
+    public IntSummaryStatistics summarizeInt(IntFunction<? super T> function)
+    {
+        return InternalArrayIterate.summarizeInt(this.items, this.items.length, function);
+    }
+
+    /**
+     * @since 8.0
+     */
+    @Override
+    public DoubleSummaryStatistics summarizeFloat(FloatFunction<? super T> function)
+    {
+        return InternalArrayIterate.summarizeFloat(this.items, this.items.length, function);
+    }
+
+    /**
+     * @since 8.0
+     */
+    @Override
+    public LongSummaryStatistics summarizeLong(LongFunction<? super T> function)
+    {
+        return InternalArrayIterate.summarizeLong(this.items, this.items.length, function);
+    }
+
+    /**
+     * @since 8.0
+     */
+    @Override
+    public DoubleSummaryStatistics summarizeDouble(DoubleFunction<? super T> function)
+    {
+        return InternalArrayIterate.summarizeDouble(this.items, this.items.length, function);
+    }
+
+    /**
+     * @since 8.0
+     */
+    @Override
+    public Optional<T> reduce(BinaryOperator<T> accumulator)
+    {
+        return InternalArrayIterate.reduce(this.items, this.items.length, accumulator);
+    }
+
+    /**
+     * @since 8.0
+     */
+    @Override
+    public <R, A> R reduceInPlace(Collector<? super T, A, R> collector)
+    {
+        return InternalArrayIterate.reduceInPlace(this.items, this.items.length, collector);
+    }
+
+    /**
+     * @since 8.0
+     */
+    @Override
+    public <R> R reduceInPlace(Supplier<R> supplier, BiConsumer<R, ? super T> accumulator)
+    {
+        return InternalArrayIterate.reduceInPlace(this.items, this.items.length, supplier, accumulator);
+    }
+
+    @Override
+    public long sumOfInt(IntFunction<? super T> function)
+    {
+        return InternalArrayIterate.sumOfInt(this.items, this.items.length, function);
+    }
+
+    @Override
+    public long sumOfLong(LongFunction<? super T> function)
+    {
+        return InternalArrayIterate.sumOfLong(this.items, this.items.length, function);
+    }
+
+    @Override
+    public double sumOfFloat(FloatFunction<? super T> function)
+    {
+        return InternalArrayIterate.sumOfFloat(this.items, this.items.length, function);
+    }
+
+    @Override
+    public double sumOfDouble(DoubleFunction<? super T> function)
+    {
+        return InternalArrayIterate.sumOfDouble(this.items, this.items.length, function);
     }
 
     @Override
