@@ -73,6 +73,7 @@ import org.eclipse.collections.impl.block.factory.Predicates;
 import org.eclipse.collections.impl.block.factory.Predicates2;
 import org.eclipse.collections.impl.block.factory.Procedures;
 import org.eclipse.collections.impl.block.function.AddFunction;
+import org.eclipse.collections.impl.collector.Collectors2;
 import org.eclipse.collections.impl.factory.Bags;
 import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.Sets;
@@ -1552,7 +1553,7 @@ public interface RichIterableTestCase extends IterableTestCase
         RichIterable<Integer> iterableEmpty = this.newWith();
         Optional<Integer> resultEmpty =
                 iterableEmpty.reduce(Integer::sum);
-        Assert.assertFalse(resultEmpty.isPresent());
+        assertFalse(resultEmpty.isPresent());
     }
 
     @Test
@@ -1591,12 +1592,24 @@ public interface RichIterableTestCase extends IterableTestCase
                 iterable.makeString());
 
         assertEquals(
+                iterable.makeString(),
+                iterable.reduceInPlace(Collectors2.makeString()));
+
+        assertEquals(
                 "4/4/4/4/3/3/3/2/2/1",
                 iterable.makeString("/"));
 
         assertEquals(
+                iterable.makeString("/"),
+                iterable.reduceInPlace(Collectors2.makeString("/")));
+
+        assertEquals(
                 "[4/4/4/4/3/3/3/2/2/1]",
                 iterable.makeString("[", "/", "]"));
+
+        assertEquals(
+                iterable.makeString("[", "/", "]"),
+                iterable.reduceInPlace(Collectors2.makeString("[", "/", "]")));
 
         StringBuilder builder1 = new StringBuilder();
         iterable.appendString(builder1);

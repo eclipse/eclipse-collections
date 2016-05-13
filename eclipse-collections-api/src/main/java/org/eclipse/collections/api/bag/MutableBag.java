@@ -155,4 +155,10 @@ public interface MutableBag<T>
 
     @Override
     <V> MutableBag<V> flatCollect(Function<? super T, ? extends Iterable<V>> function);
+
+    /**
+     * @since 8.0
+     */
+    @Override
+    ImmutableBag<T> toImmutable();
 }

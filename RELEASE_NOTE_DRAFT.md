@@ -14,6 +14,7 @@ New Functionality
 * Implemented summarizeInt/Float/Long/Double({Int/Float/Long/Double}Function) on RichIterable
 * Implemented summaryStatistics() on Primitive Iterables.
 * Implemented reduce(BinaryOperator), reduceInPlace(Collector) and reduceInPlace(Supplier, BiConsumer) on RichIterable.
+* Implemented Collectors2 with makeString, toList, toSet, toBag, toStack, toMap, toBiMap, groupBy, to{List/Set/Bag}Multimap.
 
 Optimizations
 -------------
