@@ -24,8 +24,10 @@ import org.eclipse.collections.api.bag.primitive.Mutable<name>Bag;
  *
  * @since 6.0.
  */
-public class Mutable<name>BagFactoryImpl implements Mutable<name>BagFactory
+public enum Mutable<name>BagFactoryImpl implements Mutable<name>BagFactory
 {
+    INSTANCE;
+
     @Override
     public Mutable<name>Bag empty()
     {

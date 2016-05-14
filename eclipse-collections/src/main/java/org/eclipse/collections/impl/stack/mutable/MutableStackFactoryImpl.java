@@ -13,8 +13,10 @@ package org.eclipse.collections.impl.stack.mutable;
 import org.eclipse.collections.api.factory.stack.MutableStackFactory;
 import org.eclipse.collections.api.stack.MutableStack;
 
-public final class MutableStackFactoryImpl implements MutableStackFactory
+public enum MutableStackFactoryImpl implements MutableStackFactory
 {
+    INSTANCE;
+
     @Override
     public <T> MutableStack<T> empty()
     {

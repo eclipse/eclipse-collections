@@ -78,9 +78,9 @@ import org.eclipse.collections.impl.utility.LazyIterate;
 @SuppressWarnings("ConstantNamingConvention")
 public final class Sets
 {
-    public static final ImmutableSetFactory immutable = new ImmutableSetFactoryImpl();
-    public static final FixedSizeSetFactory fixedSize = new FixedSizeSetFactoryImpl();
-    public static final MutableSetFactory mutable = new MutableSetFactoryImpl();
+    public static final ImmutableSetFactory immutable = ImmutableSetFactoryImpl.INSTANCE;
+    public static final FixedSizeSetFactory fixedSize = FixedSizeSetFactoryImpl.INSTANCE;
+    public static final MutableSetFactory mutable = MutableSetFactoryImpl.INSTANCE;
 
     private static final Predicate<Set<?>> INSTANCE_OF_SORTED_SET_PREDICATE = set -> set instanceof SortedSet;
 

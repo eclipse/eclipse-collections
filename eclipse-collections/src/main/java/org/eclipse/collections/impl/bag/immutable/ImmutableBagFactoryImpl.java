@@ -15,8 +15,10 @@ import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.api.factory.bag.ImmutableBagFactory;
 import org.eclipse.collections.impl.utility.Iterate;
 
-public final class ImmutableBagFactoryImpl implements ImmutableBagFactory
+public enum ImmutableBagFactoryImpl implements ImmutableBagFactory
 {
+    INSTANCE;
+
     @Override
     public <T> ImmutableBag<T> empty()
     {

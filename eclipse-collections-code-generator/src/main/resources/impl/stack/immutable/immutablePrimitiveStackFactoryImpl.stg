@@ -24,8 +24,10 @@ import org.eclipse.collections.api.stack.primitive.Immutable<name>Stack;
  *
  * @since 4.0.
  */
-public class Immutable<name>StackFactoryImpl implements Immutable<name>StackFactory
+public enum Immutable<name>StackFactoryImpl implements Immutable<name>StackFactory
 {
+    INSTANCE;
+
     @Override
     public Immutable<name>Stack empty()
     {
