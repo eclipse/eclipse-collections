@@ -19,8 +19,10 @@ import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.impl.factory.Maps;
 import org.eclipse.collections.impl.utility.MapIterate;
 
-public class ImmutableBiMapFactoryImpl implements ImmutableBiMapFactory
+public enum ImmutableBiMapFactoryImpl implements ImmutableBiMapFactory
 {
+    INSTANCE;
+
     /**
      * @deprecated in 8.2.0 Will be removed in 9.0.0.
      */

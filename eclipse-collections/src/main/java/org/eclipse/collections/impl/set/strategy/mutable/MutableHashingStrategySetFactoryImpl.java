@@ -17,8 +17,10 @@ import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.impl.utility.Iterate;
 
 @Immutable
-public final class MutableHashingStrategySetFactoryImpl implements MutableHashingStrategySetFactory
+public enum MutableHashingStrategySetFactoryImpl implements MutableHashingStrategySetFactory
 {
+    INSTANCE;
+
     @Override
     public <T> MutableSet<T> of(HashingStrategy<? super T> hashingStrategy)
     {

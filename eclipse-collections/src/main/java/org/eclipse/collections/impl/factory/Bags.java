@@ -38,8 +38,8 @@ import org.eclipse.collections.impl.bag.mutable.MutableBagFactoryImpl;
 @SuppressWarnings("ConstantNamingConvention")
 public final class Bags
 {
-    public static final ImmutableBagFactory immutable = new ImmutableBagFactoryImpl();
-    public static final MutableBagFactory mutable = new MutableBagFactoryImpl();
+    public static final ImmutableBagFactory immutable = ImmutableBagFactoryImpl.INSTANCE;
+    public static final MutableBagFactory mutable = MutableBagFactoryImpl.INSTANCE;
 
     private Bags()
     {

@@ -18,8 +18,8 @@ import org.eclipse.collections.impl.bag.sorted.mutable.MutableSortedBagFactoryIm
 @SuppressWarnings("ConstantNamingConvention")
 public final class SortedBags
 {
-    public static final MutableSortedBagFactory mutable = new MutableSortedBagFactoryImpl();
-    public static final ImmutableSortedBagFactory immutable = new ImmutableSortedBagFactoryImpl();
+    public static final MutableSortedBagFactory mutable = MutableSortedBagFactoryImpl.INSTANCE;
+    public static final ImmutableSortedBagFactory immutable = ImmutableSortedBagFactoryImpl.INSTANCE;
 
     private SortedBags()
     {

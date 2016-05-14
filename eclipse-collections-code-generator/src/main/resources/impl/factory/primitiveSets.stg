@@ -27,8 +27,8 @@ import org.eclipse.collections.impl.set.mutable.primitive.Mutable<name>SetFactor
 @SuppressWarnings("ConstantNamingConvention")
 public final class <name>Sets
 {
-    public static final Immutable<name>SetFactory immutable = new Immutable<name>SetFactoryImpl();
-    public static final Mutable<name>SetFactory mutable = new Mutable<name>SetFactoryImpl();
+    public static final Immutable<name>SetFactory immutable = Immutable<name>SetFactoryImpl.INSTANCE;
+    public static final Mutable<name>SetFactory mutable = Mutable<name>SetFactoryImpl.INSTANCE;
 
     private <name>Sets()
     {

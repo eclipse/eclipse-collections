@@ -23,8 +23,10 @@ import org.eclipse.collections.api.list.primitive.Mutable<name>List;
  *
  * @since 6.0.
  */
-public class Mutable<name>ListFactoryImpl implements Mutable<name>ListFactory
+public enum Mutable<name>ListFactoryImpl implements Mutable<name>ListFactory
 {
+    INSTANCE;
+
     @Override
     public Mutable<name>List empty()
     {

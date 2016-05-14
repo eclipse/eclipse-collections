@@ -27,8 +27,8 @@ import org.eclipse.collections.impl.stack.mutable.primitive.Mutable<name>StackFa
 @SuppressWarnings("ConstantNamingConvention")
 public final class <name>Stacks
 {
-    public static final Immutable<name>StackFactory immutable = new Immutable<name>StackFactoryImpl();
-    public static final Mutable<name>StackFactory mutable = new Mutable<name>StackFactoryImpl();
+    public static final Immutable<name>StackFactory immutable = Immutable<name>StackFactoryImpl.INSTANCE;
+    public static final Mutable<name>StackFactory mutable = Mutable<name>StackFactoryImpl.INSTANCE;
 
     private <name>Stacks()
     {

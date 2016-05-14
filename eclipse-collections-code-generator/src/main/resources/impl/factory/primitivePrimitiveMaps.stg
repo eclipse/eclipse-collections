@@ -31,8 +31,8 @@ import org.eclipse.collections.impl.map.mutable.primitive.Mutable<name1><name2>M
 @SuppressWarnings("ConstantNamingConvention")
 public final class <name1><name2>Maps
 {
-    public static final Immutable<name1><name2>MapFactory immutable = new Immutable<name1><name2>MapFactoryImpl();
-    public static final Mutable<name1><name2>MapFactory mutable = new Mutable<name1><name2>MapFactoryImpl();
+    public static final Immutable<name1><name2>MapFactory immutable = Immutable<name1><name2>MapFactoryImpl.INSTANCE;
+    public static final Mutable<name1><name2>MapFactory mutable = Mutable<name1><name2>MapFactoryImpl.INSTANCE;
 
     private <name1><name2>Maps()
     {

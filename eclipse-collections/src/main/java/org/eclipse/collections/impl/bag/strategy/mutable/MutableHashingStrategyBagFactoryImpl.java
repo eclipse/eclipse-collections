@@ -17,8 +17,10 @@ import org.eclipse.collections.api.factory.bag.strategy.MutableHashingStrategyBa
 import org.eclipse.collections.impl.utility.Iterate;
 
 @Immutable
-public class MutableHashingStrategyBagFactoryImpl implements MutableHashingStrategyBagFactory
+public enum MutableHashingStrategyBagFactoryImpl implements MutableHashingStrategyBagFactory
 {
+    INSTANCE;
+
     @Override
     public <T> MutableBag<T> of(HashingStrategy<? super T> hashingStrategy)
     {

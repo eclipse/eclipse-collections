@@ -19,8 +19,10 @@ import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 import org.eclipse.collections.impl.utility.Iterate;
 
 @Immutable
-public final class ImmutableSortedSetFactoryImpl implements ImmutableSortedSetFactory
+public enum ImmutableSortedSetFactoryImpl implements ImmutableSortedSetFactory
 {
+    INSTANCE;
+
     @Override
     public <T> ImmutableSortedSet<T> empty()
     {

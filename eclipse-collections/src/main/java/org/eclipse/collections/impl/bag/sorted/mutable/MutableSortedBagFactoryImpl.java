@@ -15,8 +15,10 @@ import java.util.Comparator;
 import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
 import org.eclipse.collections.api.factory.bag.sorted.MutableSortedBagFactory;
 
-public final class MutableSortedBagFactoryImpl implements MutableSortedBagFactory
+public enum MutableSortedBagFactoryImpl implements MutableSortedBagFactory
 {
+    INSTANCE;
+
     @Override
     public <T> MutableSortedBag<T> empty()
     {

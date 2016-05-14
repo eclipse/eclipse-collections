@@ -47,9 +47,9 @@ import org.eclipse.collections.impl.list.mutable.MutableListFactoryImpl;
 @SuppressWarnings("ConstantNamingConvention")
 public final class Lists
 {
-    public static final ImmutableListFactory immutable = new ImmutableListFactoryImpl();
-    public static final MutableListFactory mutable = new MutableListFactoryImpl();
-    public static final FixedSizeListFactory fixedSize = new FixedSizeListFactoryImpl();
+    public static final ImmutableListFactory immutable = ImmutableListFactoryImpl.INSTANCE;
+    public static final MutableListFactory mutable = MutableListFactoryImpl.INSTANCE;
+    public static final FixedSizeListFactory fixedSize = FixedSizeListFactoryImpl.INSTANCE;
 
     private Lists()
     {

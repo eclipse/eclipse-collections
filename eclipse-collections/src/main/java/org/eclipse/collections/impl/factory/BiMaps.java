@@ -21,8 +21,8 @@ import org.eclipse.collections.impl.bimap.mutable.MutableBiMapFactoryImpl;
 @SuppressWarnings("ConstantNamingConvention")
 public final class BiMaps
 {
-    public static final ImmutableBiMapFactory immutable = new ImmutableBiMapFactoryImpl();
-    public static final MutableBiMapFactory mutable = new MutableBiMapFactoryImpl();
+    public static final ImmutableBiMapFactory immutable = ImmutableBiMapFactoryImpl.INSTANCE;
+    public static final MutableBiMapFactory mutable = MutableBiMapFactoryImpl.INSTANCE;
 
     private BiMaps()
     {

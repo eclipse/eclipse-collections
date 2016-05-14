@@ -17,8 +17,10 @@ import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.impl.utility.Iterate;
 
 @Immutable
-public final class ImmutableHashingStrategySetFactoryImpl implements ImmutableHashingStrategySetFactory
+public enum ImmutableHashingStrategySetFactoryImpl implements ImmutableHashingStrategySetFactory
 {
+    INSTANCE;
+
     @Override
     public <T> ImmutableSet<T> of(HashingStrategy<? super T> hashingStrategy)
     {

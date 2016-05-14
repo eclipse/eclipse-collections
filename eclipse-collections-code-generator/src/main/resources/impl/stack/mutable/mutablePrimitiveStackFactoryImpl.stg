@@ -23,8 +23,10 @@ import org.eclipse.collections.api.stack.primitive.Mutable<name>Stack;
  *
  * @since 6.0.
  */
-public class Mutable<name>StackFactoryImpl implements Mutable<name>StackFactory
+public enum Mutable<name>StackFactoryImpl implements Mutable<name>StackFactory
 {
+    INSTANCE;
+
     @Override
     public Mutable<name>Stack empty()
     {

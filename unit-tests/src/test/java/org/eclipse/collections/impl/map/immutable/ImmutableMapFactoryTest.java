@@ -97,7 +97,7 @@ public class ImmutableMapFactoryTest
     {
         Key key = new Key("key");
         Key duplicateKey = new Key("key");
-        ImmutableMap<Key, Integer> map4 = new ImmutableMapFactoryImpl().of(key, 1, new Key("still not a dupe"), 2, new Key("me neither"), 3, duplicateKey, 4);
+        ImmutableMap<Key, Integer> map4 = ImmutableMapFactoryImpl.INSTANCE.of(key, 1, new Key("still not a dupe"), 2, new Key("me neither"), 3, duplicateKey, 4);
         Verify.assertSize(3, map4);
         Verify.assertContainsAllKeyValues(map4, key, 4, new Key("still not a dupe"), 2, new Key("me neither"), 3);
         Assert.assertSame(key, map4.keysView().detect(key::equals));
