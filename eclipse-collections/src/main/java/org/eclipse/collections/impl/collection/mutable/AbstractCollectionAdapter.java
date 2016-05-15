@@ -50,8 +50,6 @@ import org.eclipse.collections.api.collection.primitive.MutableLongCollection;
 import org.eclipse.collections.api.collection.primitive.MutableShortCollection;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MutableMap;
-import org.eclipse.collections.api.map.primitive.MutableObjectDoubleMap;
-import org.eclipse.collections.api.map.primitive.MutableObjectLongMap;
 import org.eclipse.collections.api.map.sorted.MutableSortedMap;
 import org.eclipse.collections.api.multimap.MutableMultimap;
 import org.eclipse.collections.api.partition.PartitionMutableCollection;
@@ -63,13 +61,10 @@ import org.eclipse.collections.impl.bag.mutable.HashBag;
 import org.eclipse.collections.impl.bag.sorted.mutable.TreeBag;
 import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.block.factory.Predicates2;
-import org.eclipse.collections.impl.block.factory.PrimitiveFunctions;
 import org.eclipse.collections.impl.block.procedure.MutatingAggregationProcedure;
 import org.eclipse.collections.impl.block.procedure.NonMutatingAggregationProcedure;
 import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
-import org.eclipse.collections.impl.map.mutable.primitive.ObjectDoubleHashMap;
-import org.eclipse.collections.impl.map.mutable.primitive.ObjectLongHashMap;
 import org.eclipse.collections.impl.map.sorted.mutable.TreeSortedMap;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.set.sorted.mutable.TreeSortedSet;
@@ -80,7 +75,7 @@ import org.eclipse.collections.impl.utility.internal.IterableIterate;
 import org.eclipse.collections.impl.utility.internal.MutableCollectionIterate;
 
 public abstract class AbstractCollectionAdapter<T>
-        implements MutableCollection<T>
+        implements MutableCollection<T>, AbstractMutableIterable<T>
 {
     protected abstract Collection<T> getDelegate();
 
@@ -269,34 +264,6 @@ public abstract class AbstractCollectionAdapter<T>
     public double sumOfDouble(DoubleFunction<? super T> function)
     {
         return Iterate.sumOfDouble(this.getDelegate(), function);
-    }
-
-    @Override
-    public <V> MutableObjectLongMap<V> sumByInt(Function<? super T, ? extends V> groupBy, IntFunction<? super T> function)
-    {
-        ObjectLongHashMap<V> result = ObjectLongHashMap.newMap();
-        return this.injectInto(result, PrimitiveFunctions.sumByIntFunction(groupBy, function));
-    }
-
-    @Override
-    public <V> MutableObjectDoubleMap<V> sumByFloat(Function<? super T, ? extends V> groupBy, FloatFunction<? super T> function)
-    {
-        ObjectDoubleHashMap<V> result = ObjectDoubleHashMap.newMap();
-        return this.injectInto(result, PrimitiveFunctions.sumByFloatFunction(groupBy, function));
-    }
-
-    @Override
-    public <V> MutableObjectLongMap<V> sumByLong(Function<? super T, ? extends V> groupBy, LongFunction<? super T> function)
-    {
-        ObjectLongHashMap<V> result = ObjectLongHashMap.newMap();
-        return this.injectInto(result, PrimitiveFunctions.sumByLongFunction(groupBy, function));
-    }
-
-    @Override
-    public <V> MutableObjectDoubleMap<V> sumByDouble(Function<? super T, ? extends V> groupBy, DoubleFunction<? super T> function)
-    {
-        ObjectDoubleHashMap<V> result = ObjectDoubleHashMap.newMap();
-        return this.injectInto(result, PrimitiveFunctions.sumByDoubleFunction(groupBy, function));
     }
 
     @Override

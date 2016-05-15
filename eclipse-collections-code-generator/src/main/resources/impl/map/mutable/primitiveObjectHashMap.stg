@@ -98,11 +98,7 @@ import org.eclipse.collections.api.list.primitive.Mutable<name>List;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.primitive.<name>ObjectMap;
 import org.eclipse.collections.api.map.primitive.Immutable<name>ObjectMap;
-import org.eclipse.collections.api.map.primitive.MutableObjectDoubleMap;
-import org.eclipse.collections.api.map.primitive.MutableObjectLongMap;
 import org.eclipse.collections.api.map.primitive.Mutable<name>ObjectMap;
-import org.eclipse.collections.api.map.primitive.ObjectDoubleMap;
-import org.eclipse.collections.api.map.primitive.ObjectLongMap;
 import org.eclipse.collections.api.map.sorted.MutableSortedMap;
 import org.eclipse.collections.api.multimap.MutableMultimap;
 import org.eclipse.collections.api.multimap.bag.MutableBagMultimap;
@@ -114,6 +110,7 @@ import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.api.tuple.primitive.<name>ObjectPair;
+import org.eclipse.collections.impl.AbstractRichIterable;
 import org.eclipse.collections.impl.SpreadFunctions;
 import org.eclipse.collections.impl.bag.mutable.HashBag;
 import org.eclipse.collections.impl.bag.mutable.primitive.BooleanHashBag;
@@ -129,11 +126,8 @@ import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.block.factory.Functions;
 import org.eclipse.collections.impl.block.factory.Functions0;
 import org.eclipse.collections.impl.block.factory.Predicates;
-import org.eclipse.collections.impl.block.factory.PrimitiveFunctions;
 import org.eclipse.collections.impl.block.factory.Procedures2;
 import org.eclipse.collections.impl.block.procedure.MapCollectProcedure;
-import org.eclipse.collections.impl.block.procedure.MutatingAggregationProcedure;
-import org.eclipse.collections.impl.block.procedure.NonMutatingAggregationProcedure;
 import org.eclipse.collections.impl.block.procedure.PartitionProcedure;
 import org.eclipse.collections.impl.block.procedure.SelectInstancesOfProcedure;
 import org.eclipse.collections.impl.block.procedure.primitive.CollectBooleanProcedure;
@@ -144,13 +138,12 @@ import org.eclipse.collections.impl.block.procedure.primitive.CollectFloatProced
 import org.eclipse.collections.impl.block.procedure.primitive.CollectIntProcedure;
 import org.eclipse.collections.impl.block.procedure.primitive.CollectLongProcedure;
 import org.eclipse.collections.impl.block.procedure.primitive.CollectShortProcedure;
+import org.eclipse.collections.impl.collection.mutable.AbstractMutableIterable;
 import org.eclipse.collections.impl.factory.Bags;
 import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.factory.primitive.<name>ObjectMaps;
 import org.eclipse.collections.impl.factory.primitive.<name>Sets;
-import org.eclipse.collections.impl.factory.primitive.ObjectDoubleMaps;
-import org.eclipse.collections.impl.factory.primitive.ObjectLongMaps;
 import org.eclipse.collections.impl.iterator.Unmodifiable<name>Iterator;
 import org.eclipse.collections.impl.lazy.AbstractLazyIterable;
 import org.eclipse.collections.impl.lazy.primitive.AbstractLazy<name>Iterable;
@@ -176,7 +169,9 @@ import org.eclipse.collections.impl.utility.internal.IterableIterate;
  *
  * @since 3.0.
  */
-public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Externalizable
+public class <name>ObjectHashMap\<V>
+        extends AbstractRichIterable\<V>
+        implements AbstractMutableIterable\<V>, Mutable<name>ObjectMap\<V>, Externalizable
 {
     private static final long serialVersionUID = 1L;
     private static final int DEFAULT_INITIAL_CAPACITY = 8;
@@ -560,11 +555,6 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
     {
         this.forEachValue(procedure);
         return this;
-    }
-
-    public void forEach(Procedure\<? super V> procedure)
-    {
-        this.each(procedure);
     }
 
     public void each(Procedure\<? super V> procedure)
@@ -1472,20 +1462,6 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         return result;
     }
 
-    public \<K, VV> MutableMap\<K, VV> aggregateInPlaceBy(Function\<? super V, ? extends K> groupBy, Function0\<? extends VV> zeroValueFactory, Procedure2\<? super VV, ? super V> mutatingAggregator)
-    {
-        MutableMap\<K, VV> map = UnifiedMap.newMap();
-        this.forEach(new MutatingAggregationProcedure\<V, K, VV>(map, groupBy, zeroValueFactory, mutatingAggregator));
-        return map;
-    }
-
-    public \<K, VV> MutableMap\<K, VV> aggregateBy(Function\<? super V, ? extends K> groupBy, Function0\<? extends VV> zeroValueFactory, Function2\<? super VV, ? super V, ? extends VV> nonMutatingAggregator)
-    {
-        MutableMap\<K, VV> map = UnifiedMap.newMap();
-        this.forEach(new NonMutatingAggregationProcedure\<V, K, VV>(map, groupBy, zeroValueFactory, nonMutatingAggregator));
-        return map;
-    }
-
     public \<VV> MutableBagMultimap\<VV, V> groupBy(Function\<? super V, ? extends VV> function)
     {
         return this.groupBy(function, HashBagMultimap.\<VV, V>newMultimap());
@@ -2036,30 +2012,6 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
             }
         }
         return sum;
-    }
-
-    public \<V1> MutableObjectLongMap\<V1> sumByInt(Function\<? super V, ? extends V1> groupBy, IntFunction\<? super V> function)
-    {
-        MutableObjectLongMap\<V1> result = ObjectLongMaps.mutable.empty();
-        return this.injectInto(result, PrimitiveFunctions.sumByIntFunction(groupBy, function));
-    }
-
-    public \<V1> MutableObjectDoubleMap\<V1> sumByFloat(Function\<? super V, ? extends V1> groupBy, FloatFunction\<? super V> function)
-    {
-        MutableObjectDoubleMap\<V1> result = ObjectDoubleMaps.mutable.empty();
-        return this.injectInto(result, PrimitiveFunctions.sumByFloatFunction(groupBy, function));
-    }
-
-    public \<V1> MutableObjectLongMap\<V1> sumByLong(Function\<? super V, ? extends V1> groupBy, LongFunction\<? super V> function)
-    {
-        MutableObjectLongMap\<V1> result = ObjectLongMaps.mutable.empty();
-        return this.injectInto(result, PrimitiveFunctions.sumByLongFunction(groupBy, function));
-    }
-
-    public \<V1> MutableObjectDoubleMap\<V1> sumByDouble(Function\<? super V, ? extends V1> groupBy, DoubleFunction\<? super V> function)
-    {
-        MutableObjectDoubleMap\<V1> result = ObjectDoubleMaps.mutable.empty();
-        return this.injectInto(result, PrimitiveFunctions.sumByDoubleFunction(groupBy, function));
     }
 
     public void clear()

@@ -842,11 +842,6 @@ final class Immutable<name>ObjectSingletonMap\<V> extends AbstractImmutable<name
         return keys.contains(this.key1) ? (Immutable<name>ObjectMap\<V>) Immutable<name>ObjectEmptyMap.INSTANCE : this;
     }
 
-    public void forEach(Procedure\<? super V> procedure)
-    {
-        this.each(procedure);
-    }
-
     public void each(Procedure\<? super V> procedure)
     {
         procedure.value(this.value1);

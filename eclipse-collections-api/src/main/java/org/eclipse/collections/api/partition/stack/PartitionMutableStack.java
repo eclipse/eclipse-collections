@@ -10,6 +10,7 @@
 
 package org.eclipse.collections.api.partition.stack;
 
+import org.eclipse.collections.api.partition.PartitionMutableIterable;
 import org.eclipse.collections.api.stack.MutableStack;
 
 /**
@@ -17,7 +18,7 @@ import org.eclipse.collections.api.stack.MutableStack;
  * The results that answer true for the Predicate will be returned from the getSelected() method and the results
  * that answer false for the predicate will be returned from the getRejected() method.
  */
-public interface PartitionMutableStack<T> extends PartitionStack<T>
+public interface PartitionMutableStack<T> extends PartitionStack<T>, PartitionMutableIterable<T>
 {
     @Override
     MutableStack<T> getSelected();
@@ -25,6 +26,7 @@ public interface PartitionMutableStack<T> extends PartitionStack<T>
     @Override
     MutableStack<T> getRejected();
 
+    @Override
     PartitionImmutableStack<T> toImmutable();
 
     /**

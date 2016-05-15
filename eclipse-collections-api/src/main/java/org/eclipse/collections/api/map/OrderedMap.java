@@ -157,6 +157,8 @@ public interface OrderedMap<K, V>
     @Override
     <V1> ListMultimap<V1, V> groupByEach(Function<? super V, ? extends Iterable<V1>> function);
 
+    /* TODO
     @Override
     <V1> OrderedMap<V1, V> groupByUniqueKey(Function<? super V, ? extends V1> function);
+    */
 }

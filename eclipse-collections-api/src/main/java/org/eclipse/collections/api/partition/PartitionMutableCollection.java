@@ -17,7 +17,7 @@ import org.eclipse.collections.api.collection.MutableCollection;
  * The results that answer true for the Predicate will be returned from the getSelected() method and the results that answer false
  * for the predicate will be returned from the getRejected() method.
  */
-public interface PartitionMutableCollection<T> extends PartitionIterable<T>
+public interface PartitionMutableCollection<T> extends PartitionMutableIterable<T>
 {
     @Override
     MutableCollection<T> getSelected();
@@ -25,5 +25,6 @@ public interface PartitionMutableCollection<T> extends PartitionIterable<T>
     @Override
     MutableCollection<T> getRejected();
 
+    @Override
     PartitionImmutableCollection<T> toImmutable();
 }
