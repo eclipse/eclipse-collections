@@ -24,4 +24,23 @@ public abstract class PairPredicate<T1, T2>
     {
         return this.accept(pair.getOne(), pair.getTwo());
     }
+
+    @Override
+    public PairPredicate<T1, T2> negate()
+    {
+        return new PairPredicate<T1, T2>()
+        {
+            @Override
+            public boolean accept(T1 argument1, T2 argument2)
+            {
+                return !PairPredicate.this.accept(argument1, argument2);
+            }
+
+            @Override
+            public boolean accept(Pair<T1, T2> pair)
+            {
+                return !PairPredicate.this.accept(pair);
+            }
+        };
+    }
 }

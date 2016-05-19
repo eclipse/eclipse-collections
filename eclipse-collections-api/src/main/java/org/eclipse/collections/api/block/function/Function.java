@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -17,8 +17,15 @@ import java.io.Serializable;
  * passed to the valueOf() method.  This transformation can return the value of calling a getter, or perform
  * some more elaborate logic to calculate a value, of type {@code V}.
  */
+@FunctionalInterface
 public interface Function<T, V>
-        extends Serializable
+        extends java.util.function.Function<T, V>, Serializable
 {
-    V valueOf(T object);
+    V valueOf(T each);
+
+    @Override
+    default V apply(T each)
+    {
+        return this.valueOf(each);
+    }
 }
