@@ -42,6 +42,7 @@ import org.eclipse.collections.api.collection.primitive.MutableFloatCollection;
 import org.eclipse.collections.api.collection.primitive.MutableIntCollection;
 import org.eclipse.collections.api.collection.primitive.MutableLongCollection;
 import org.eclipse.collections.api.collection.primitive.MutableShortCollection;
+import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MapIterable;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.multimap.Multimap;
@@ -1480,9 +1481,16 @@ public interface RichIterableTestCase extends IterableTestCase
     @Test
     default void RichIterable_toList()
     {
+        RichIterable<Integer> iterable = this.newWith(4, 4, 4, 4, 3, 3, 3, 2, 2, 1);
         assertEquals(
                 Lists.immutable.with(4, 4, 4, 4, 3, 3, 3, 2, 2, 1),
-                this.newWith(4, 4, 4, 4, 3, 3, 3, 2, 2, 1).toList());
+                iterable.toList());
+
+        MutableList<Integer> target = Lists.mutable.empty();
+        iterable.each(target::add);
+        assertEquals(
+                target,
+                iterable.toList());
     }
 
     @Test
