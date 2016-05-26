@@ -14,6 +14,8 @@ body(type, name) ::= <<
 
 package org.eclipse.collections.api;
 
+<(wideStatisticsImport.(type))>
+
 import org.eclipse.collections.api.bag.primitive.Mutable<name>Bag;
 import org.eclipse.collections.api.block.function.primitive.Object<name>ToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
@@ -93,6 +95,16 @@ allMethods() ::= <<
 <\n>
 <(wideType.(type))> sum();
 
+/**
+ * @since 8.0
+ */
+default <(wideStatistics.(type))> summaryStatistics()
+{
+    <(wideStatistics.(type))> stats = new <(wideStatistics.(type))>();
+    this.forEach(stats::accept);
+    return stats;
+}
+
 <type> max();
 
 <type> maxIfEmpty(<type> defaultValue);
@@ -111,3 +123,26 @@ Mutable<name>List toSortedList();
 >>
 
 noMethods() ::= ""
+
+wideStatistics ::= [
+    "byte": "IntSummaryStatistics",
+    "short": "IntSummaryStatistics",
+    "char": "IntSummaryStatistics",
+    "int": "IntSummaryStatistics",
+    "long": "LongSummaryStatistics",
+    "float": "DoubleSummaryStatistics",
+    "double": "DoubleSummaryStatistics",
+    default: "no matching wide type"
+]
+
+wideStatisticsImport ::= [
+    "boolean": "",
+    "byte": "import java.util.IntSummaryStatistics;",
+    "short": "import java.util.IntSummaryStatistics;",
+    "char": "import java.util.IntSummaryStatistics;",
+    "int": "import java.util.IntSummaryStatistics;",
+    "long": "import java.util.LongSummaryStatistics;",
+    "float": "import java.util.DoubleSummaryStatistics;",
+    "double": "import java.util.DoubleSummaryStatistics;",
+    default: "no matching wide type"
+]

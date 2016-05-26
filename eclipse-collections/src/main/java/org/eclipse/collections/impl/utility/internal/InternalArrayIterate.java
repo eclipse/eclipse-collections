@@ -13,10 +13,18 @@ package org.eclipse.collections.impl.utility.internal;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Comparator;
+import java.util.DoubleSummaryStatistics;
+import java.util.IntSummaryStatistics;
 import java.util.Iterator;
 import java.util.List;
+import java.util.LongSummaryStatistics;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.RandomAccess;
+import java.util.function.BiConsumer;
+import java.util.function.BinaryOperator;
+import java.util.function.Supplier;
+import java.util.stream.Collector;
 
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.block.HashingStrategy;
@@ -979,5 +987,107 @@ public final class InternalArrayIterate
             result.put(groupByKey, nextSum);
         }
         return result;
+    }
+
+    /**
+     * @since 8.0
+     */
+    public static <T> IntSummaryStatistics summarizeInt(T[] items, int size, IntFunction<? super T> function)
+    {
+        IntSummaryStatistics stats = new IntSummaryStatistics();
+        for (int i = 0; i < size; i++)
+        {
+            T item = items[i];
+            stats.accept(function.intValueOf(item));
+        }
+        return stats;
+    }
+
+    /**
+     * @since 8.0
+     */
+    public static <T> DoubleSummaryStatistics summarizeFloat(T[] items, int size, FloatFunction<? super T> function)
+    {
+        DoubleSummaryStatistics stats = new DoubleSummaryStatistics();
+        for (int i = 0; i < size; i++)
+        {
+            T item = items[i];
+            stats.accept((double) function.floatValueOf(item));
+        }
+        return stats;
+    }
+
+    /**
+     * @since 8.0
+     */
+    public static <T> LongSummaryStatistics summarizeLong(T[] items, int size, LongFunction<? super T> function)
+    {
+        LongSummaryStatistics stats = new LongSummaryStatistics();
+        for (int i = 0; i < size; i++)
+        {
+            T item = items[i];
+            stats.accept(function.longValueOf(item));
+        }
+        return stats;
+    }
+
+    /**
+     * @since 8.0
+     */
+    public static <T> DoubleSummaryStatistics summarizeDouble(T[] items, int size, DoubleFunction<? super T> function)
+    {
+        DoubleSummaryStatistics stats = new DoubleSummaryStatistics();
+        for (int i = 0; i < size; i++)
+        {
+            T item = items[i];
+            stats.accept(function.doubleValueOf(item));
+        }
+        return stats;
+    }
+
+    /**
+     * @since 8.0
+     */
+    public static <T> Optional<T> reduce(T[] items, int size, BinaryOperator<T> accumulator)
+    {
+        if (size == 0)
+        {
+            return Optional.empty();
+        }
+        T result = items[0];
+        for (int i = 1; i < size; i++)
+        {
+            result = accumulator.apply(result, items[i]);
+        }
+        return Optional.of(result);
+    }
+
+    /**
+     * @since 8.0
+     */
+    public static <R, A, T> R reduceInPlace(T[] items, int size, Collector<? super T, A, R> collector)
+    {
+        A mutableResult = collector.supplier().get();
+        BiConsumer<A, ? super T> accumulator = collector.accumulator();
+        for (int i = 0; i < size; i++)
+        {
+            T item = items[i];
+            accumulator.accept(mutableResult, item);
+        }
+        return collector.finisher().apply(mutableResult);
+    }
+
+    /**
+     * @since 8.0
+     */
+    public static <R, T> R reduceInPlace(T[] items, int size, Supplier<R> supplier, BiConsumer<R, ? super T> accumulator)
+    {
+        R mutableResult = supplier.get();
+        for (int i = 0; i < size; i++)
+        {
+            T item = items[i];
+            accumulator.accept(mutableResult, item);
+        }
+        return mutableResult;
     }
 }

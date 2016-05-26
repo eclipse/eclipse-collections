@@ -19,8 +19,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Comparator;
+import java.util.DoubleSummaryStatistics;
+import java.util.IntSummaryStatistics;
 import java.util.List;
+import java.util.LongSummaryStatistics;
+import java.util.Optional;
 import java.util.RandomAccess;
+import java.util.function.BiConsumer;
+import java.util.function.BinaryOperator;
+import java.util.function.Supplier;
+import java.util.stream.Collector;
 
 import net.jcip.annotations.NotThreadSafe;
 import org.eclipse.collections.api.block.HashingStrategy;
@@ -1279,6 +1287,69 @@ public class FastList<T>
     public MutableList<T> distinct(HashingStrategy<? super T> hashingStrategy)
     {
         return InternalArrayIterate.distinct(this.items, this.size, hashingStrategy);
+    }
+
+    /**
+     * @since 8.0
+     */
+    @Override
+    public IntSummaryStatistics summarizeInt(IntFunction<? super T> function)
+    {
+        return InternalArrayIterate.summarizeInt(this.items, this.size, function);
+    }
+
+    /**
+     * @since 8.0
+     */
+    @Override
+    public DoubleSummaryStatistics summarizeFloat(FloatFunction<? super T> function)
+    {
+        return InternalArrayIterate.summarizeFloat(this.items, this.size, function);
+    }
+
+    /**
+     * @since 8.0
+     */
+    @Override
+    public LongSummaryStatistics summarizeLong(LongFunction<? super T> function)
+    {
+        return InternalArrayIterate.summarizeLong(this.items, this.size, function);
+    }
+
+    /**
+     * @since 8.0
+     */
+    @Override
+    public DoubleSummaryStatistics summarizeDouble(DoubleFunction<? super T> function)
+    {
+        return InternalArrayIterate.summarizeDouble(this.items, this.size, function);
+    }
+
+    /**
+     * @since 8.0
+     */
+    @Override
+    public Optional<T> reduce(BinaryOperator<T> accumulator)
+    {
+        return InternalArrayIterate.reduce(this.items, this.size, accumulator);
+    }
+
+    /**
+     * @since 8.0
+     */
+    @Override
+    public <R, A> R reduceInPlace(Collector<? super T, A, R> collector)
+    {
+        return InternalArrayIterate.reduceInPlace(this.items, this.size, collector);
+    }
+
+    /**
+     * @since 8.0
+     */
+    @Override
+    public <R> R reduceInPlace(Supplier<R> supplier, BiConsumer<R, ? super T> accumulator)
+    {
+        return InternalArrayIterate.reduceInPlace(this.items, this.size, supplier, accumulator);
     }
 
     @Override

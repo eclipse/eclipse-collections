@@ -119,10 +119,4 @@ public interface UnsortedBag<T> extends Bag<T>
 
     @Override
     <V> UnsortedBagMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function);
-
-    /**
-     * Converts the UnsortedBag to an ImmutableBag. If the bag is immutable, it returns itself.
-     */
-    @Override
-    ImmutableBag<T> toImmutable();
 }
