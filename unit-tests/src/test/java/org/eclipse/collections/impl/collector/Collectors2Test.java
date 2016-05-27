@@ -16,7 +16,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.eclipse.collections.impl.factory.BiMaps;
-import org.eclipse.collections.impl.factory.Multimaps;
 import org.eclipse.collections.impl.factory.Stacks;
 import org.eclipse.collections.impl.list.Interval;
 import org.junit.Assert;
@@ -393,28 +392,6 @@ public class Collectors2Test
         Assert.assertEquals(
                 LARGE_INTERVAL.reduceInPlace(Collectors2.toBagMultimap(Object::toString, Object::toString)),
                 this.bigData.parallelStream().collect(Collectors2.toBagMultimap(Object::toString, Object::toString)));
-    }
-
-    @Test
-    public void groupBy()
-    {
-        Assert.assertEquals(
-                SMALL_INTERVAL.toBag().groupBy(Object::toString, Multimaps.mutable.list.empty()),
-                this.smallData.stream().collect(Collectors2.groupBy(Object::toString, Multimaps.mutable.list::empty)));
-        Assert.assertEquals(
-                SMALL_INTERVAL.reduceInPlace(Collectors2.groupBy(Object::toString, Multimaps.mutable.list::empty)),
-                this.smallData.stream().collect(Collectors2.groupBy(Object::toString, Multimaps.mutable.list::empty)));
-    }
-
-    @Test
-    public void groupByParallel()
-    {
-        Assert.assertEquals(
-                LARGE_INTERVAL.toBag().groupBy(Object::toString, Multimaps.mutable.list.empty()),
-                this.bigData.parallelStream().collect(Collectors2.groupBy(Object::toString, Multimaps.mutable.list::empty)));
-        Assert.assertEquals(
-                LARGE_INTERVAL.reduceInPlace(Collectors2.groupBy(Object::toString, Multimaps.mutable.list::empty)),
-                this.bigData.parallelStream().collect(Collectors2.groupBy(Object::toString, Multimaps.mutable.list::empty)));
     }
 
     @Test
