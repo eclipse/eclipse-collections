@@ -19,6 +19,7 @@ import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.partition.bag.PartitionMutableBag;
 import org.eclipse.collections.api.partition.list.PartitionMutableList;
 import org.eclipse.collections.api.partition.set.PartitionMutableSet;
+import org.eclipse.collections.impl.block.factory.Functions;
 import org.eclipse.collections.impl.block.factory.IntegerPredicates;
 import org.eclipse.collections.impl.block.factory.Predicates2;
 import org.eclipse.collections.impl.factory.Bags;
@@ -39,7 +40,7 @@ public class Collectors2Test
 {
     public static final Interval SMALL_INTERVAL = Interval.oneTo(5);
     public static final Interval LARGE_INTERVAL = Interval.oneTo(20000);
-    public static final int HALF_SIZE = LARGE_INTERVAL.size() / 2;
+    public static final Integer HALF_SIZE = Integer.valueOf(LARGE_INTERVAL.size() / 2);
     private final List<Integer> smallData = new ArrayList<Integer>(SMALL_INTERVAL);
     private final List<Integer> bigData = new ArrayList<Integer>(LARGE_INTERVAL);
 
@@ -1389,17 +1390,20 @@ public class Collectors2Test
     @Test
     public void partitionWith()
     {
-        PartitionMutableList<Integer> expectedList = LARGE_INTERVAL.toList().partitionWith(Predicates2.greaterThan(), HALF_SIZE);
+        PartitionMutableList<Integer> expectedList = LARGE_INTERVAL.toList()
+                .partitionWith(Predicates2.greaterThan(), HALF_SIZE);
         PartitionMutableList<Integer> actualList = this.bigData.stream()
                 .collect(Collectors2.partitionWith(Predicates2.greaterThan(), HALF_SIZE, PartitionFastList::new));
         Assert.assertEquals(expectedList.getSelected(), actualList.getSelected());
         Assert.assertEquals(expectedList.getRejected(), actualList.getRejected());
-        PartitionMutableSet<Integer> expectedSet = LARGE_INTERVAL.toSet().partitionWith(Predicates2.greaterThan(), HALF_SIZE);
+        PartitionMutableSet<Integer> expectedSet = LARGE_INTERVAL.toSet()
+                .partitionWith(Predicates2.greaterThan(), HALF_SIZE);
         PartitionMutableSet<Integer> actualSet = this.bigData.stream()
                 .collect(Collectors2.partitionWith(Predicates2.greaterThan(), HALF_SIZE, PartitionUnifiedSet::new));
         Assert.assertEquals(expectedSet.getSelected(), actualSet.getSelected());
         Assert.assertEquals(expectedSet.getRejected(), actualSet.getRejected());
-        PartitionMutableBag<Integer> expectedBag = LARGE_INTERVAL.toBag().partitionWith(Predicates2.greaterThan(), HALF_SIZE);
+        PartitionMutableBag<Integer> expectedBag = LARGE_INTERVAL.toBag()
+                .partitionWith(Predicates2.greaterThan(), HALF_SIZE);
         PartitionMutableBag<Integer> actualBag = this.bigData.stream()
                 .collect(Collectors2.partitionWith(Predicates2.greaterThan(), HALF_SIZE, PartitionHashBag::new));
         Assert.assertEquals(expectedBag.getSelected(), actualBag.getSelected());
@@ -1409,20 +1413,97 @@ public class Collectors2Test
     @Test
     public void partitionWithParallel()
     {
-        PartitionMutableList<Integer> expectedList = LARGE_INTERVAL.toList().partitionWith(Predicates2.greaterThan(), HALF_SIZE);
+        PartitionMutableList<Integer> expectedList = LARGE_INTERVAL.toList()
+                .partitionWith(Predicates2.greaterThan(), HALF_SIZE);
         PartitionMutableList<Integer> actualList = this.bigData.parallelStream()
                 .collect(Collectors2.partitionWith(Predicates2.greaterThan(), HALF_SIZE, PartitionFastList::new));
         Assert.assertEquals(expectedList.getSelected(), actualList.getSelected());
         Assert.assertEquals(expectedList.getRejected(), actualList.getRejected());
-        PartitionMutableSet<Integer> expectedSet = LARGE_INTERVAL.toSet().partitionWith(Predicates2.greaterThan(), HALF_SIZE);
+        PartitionMutableSet<Integer> expectedSet = LARGE_INTERVAL.toSet()
+                .partitionWith(Predicates2.greaterThan(), HALF_SIZE);
         PartitionMutableSet<Integer> actualSet = this.bigData.parallelStream()
                 .collect(Collectors2.partitionWith(Predicates2.greaterThan(), HALF_SIZE, PartitionUnifiedSet::new));
         Assert.assertEquals(expectedSet.getSelected(), actualSet.getSelected());
         Assert.assertEquals(expectedSet.getRejected(), actualSet.getRejected());
-        PartitionMutableBag<Integer> expectedBag = LARGE_INTERVAL.toBag().partitionWith(Predicates2.greaterThan(), HALF_SIZE);
+        PartitionMutableBag<Integer> expectedBag = LARGE_INTERVAL.toBag()
+                .partitionWith(Predicates2.greaterThan(), HALF_SIZE);
         PartitionMutableBag<Integer> actualBag = this.bigData.parallelStream()
                 .collect(Collectors2.partitionWith(Predicates2.greaterThan(), HALF_SIZE, PartitionHashBag::new));
         Assert.assertEquals(expectedBag.getSelected(), actualBag.getSelected());
         Assert.assertEquals(expectedBag.getRejected(), actualBag.getRejected());
+    }
+
+    @Test
+    public void collect()
+    {
+        Assert.assertEquals(
+                LARGE_INTERVAL.toList().collect(Functions.getToString()),
+                this.bigData.stream().collect(Collectors2.collect(Functions.getToString(), Lists.mutable::empty))
+        );
+        Assert.assertEquals(
+                LARGE_INTERVAL.toSet().collect(Functions.getToString()),
+                this.bigData.stream().collect(Collectors2.collect(Functions.getToString(), Sets.mutable::empty))
+        );
+        Assert.assertEquals(
+                LARGE_INTERVAL.toBag().collect(Functions.getToString()),
+                this.bigData.stream().collect(Collectors2.collect(Functions.getToString(), Bags.mutable::empty))
+        );
+    }
+
+    @Test
+    public void collectParallel()
+    {
+        Assert.assertEquals(
+                LARGE_INTERVAL.toList().collect(Functions.getToString()),
+                this.bigData.parallelStream().collect(Collectors2.collect(Functions.getToString(), Lists.mutable::empty))
+        );
+        Assert.assertEquals(
+                LARGE_INTERVAL.toSet().collect(Functions.getToString()),
+                this.bigData.parallelStream().collect(Collectors2.collect(Functions.getToString(), Sets.mutable::empty))
+        );
+        Assert.assertEquals(
+                LARGE_INTERVAL.toBag().collect(Functions.getToString()),
+                this.bigData.parallelStream().collect(Collectors2.collect(Functions.getToString(), Bags.mutable::empty))
+        );
+    }
+
+    @Test
+    public void collectWith()
+    {
+        Assert.assertEquals(
+                LARGE_INTERVAL.toList().collectWith(Integer::sum, Integer.valueOf(10)),
+                this.bigData.stream()
+                        .collect(Collectors2.collectWith(Integer::sum, Integer.valueOf(10), Lists.mutable::empty))
+        );
+        Assert.assertEquals(
+                LARGE_INTERVAL.toSet().collectWith(Integer::sum, Integer.valueOf(10)),
+                this.bigData.stream()
+                        .collect(Collectors2.collectWith(Integer::sum, Integer.valueOf(10), Sets.mutable::empty))
+        );
+        Assert.assertEquals(
+                LARGE_INTERVAL.toBag().collectWith(Integer::sum, Integer.valueOf(10)),
+                this.bigData.stream()
+                        .collect(Collectors2.collectWith(Integer::sum, Integer.valueOf(10), Bags.mutable::empty))
+        );
+    }
+
+    @Test
+    public void collectWithParallel()
+    {
+        Assert.assertEquals(
+                LARGE_INTERVAL.toList().collectWith(Integer::sum, Integer.valueOf(10)),
+                this.bigData.parallelStream()
+                        .collect(Collectors2.collectWith(Integer::sum, Integer.valueOf(10), Lists.mutable::empty))
+        );
+        Assert.assertEquals(
+                LARGE_INTERVAL.toSet().collectWith(Integer::sum, Integer.valueOf(10)),
+                this.bigData.parallelStream()
+                        .collect(Collectors2.collectWith(Integer::sum, Integer.valueOf(10), Sets.mutable::empty))
+        );
+        Assert.assertEquals(
+                LARGE_INTERVAL.toBag().collectWith(Integer::sum, Integer.valueOf(10)),
+                this.bigData.parallelStream()
+                        .collect(Collectors2.collectWith(Integer::sum, Integer.valueOf(10), Bags.mutable::empty))
+        );
     }
 }

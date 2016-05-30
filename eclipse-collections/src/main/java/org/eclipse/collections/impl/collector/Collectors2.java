@@ -15,6 +15,7 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.StringJoiner;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.BinaryOperator;
 import java.util.function.Supplier;
 import java.util.stream.Collector;
 
@@ -655,11 +656,7 @@ public final class Collectors2
                         collection.add(each);
                     }
                 },
-                (collection1, collection2) ->
-                {
-                    collection1.addAll(collection2);
-                    return collection1;
-                },
+                Collectors2.mergeCollections(),
                 EMPTY_CHARACTERISTICS);
     }
 
@@ -677,11 +674,7 @@ public final class Collectors2
                         collection.add(each);
                     }
                 },
-                (collection1, collection2) ->
-                {
-                    collection1.addAll(collection2);
-                    return collection1;
-                },
+                Collectors2.mergeCollections(),
                 EMPTY_CHARACTERISTICS);
     }
 
@@ -696,11 +689,7 @@ public final class Collectors2
                         collection.add(each);
                     }
                 },
-                (collection1, collection2) ->
-                {
-                    collection1.addAll(collection2);
-                    return collection1;
-                },
+                Collectors2.mergeCollections(),
                 EMPTY_CHARACTERISTICS);
     }
 
@@ -718,11 +707,7 @@ public final class Collectors2
                         collection.add(each);
                     }
                 },
-                (collection1, collection2) ->
-                {
-                    collection1.addAll(collection2);
-                    return collection1;
-                },
+                Collectors2.mergeCollections(),
                 EMPTY_CHARACTERISTICS);
     }
 
@@ -737,12 +722,7 @@ public final class Collectors2
                     MutableCollection<T> bucket = predicate.accept(each) ? partition.getSelected() : partition.getRejected();
                     bucket.add(each);
                 },
-                (partition1, partition2) ->
-                {
-                    partition1.getSelected().addAll(partition2.getSelected());
-                    partition1.getRejected().addAll(partition2.getRejected());
-                    return partition1;
-                },
+                Collectors2.mergePartitions(),
                 EMPTY_CHARACTERISTICS);
     }
 
@@ -759,13 +739,49 @@ public final class Collectors2
                             predicate.accept(each, parameter) ? partition.getSelected() : partition.getRejected();
                     bucket.add(each);
                 },
-                (partition1, partition2) ->
-                {
-                    partition1.getSelected().addAll(partition2.getSelected());
-                    partition1.getRejected().addAll(partition2.getRejected());
-                    return partition1;
-                },
+                Collectors2.mergePartitions(),
                 EMPTY_CHARACTERISTICS);
+    }
+
+    public static <T, V, R extends Collection<V>> Collector<T, ?, R> collect(
+            Function<? super T, ? extends V> function, Supplier<R> supplier)
+    {
+        return Collector.of(
+                supplier,
+                (collection, each) -> collection.add(function.valueOf(each)),
+                Collectors2.mergeCollections(),
+                EMPTY_CHARACTERISTICS);
+    }
+
+    public static <T, P, V, R extends Collection<V>> Collector<T, ?, R> collectWith(
+            Function2<? super T, ? super P, ? extends V> function,
+            P parameter,
+            Supplier<R> supplier)
+    {
+        return Collector.of(
+                supplier,
+                (collection, each) -> collection.add(function.value(each, parameter)),
+                Collectors2.mergeCollections(),
+                EMPTY_CHARACTERISTICS);
+    }
+
+    private static <T, R extends Collection<T>> BinaryOperator<R> mergeCollections()
+    {
+        return (collection1, collection2) ->
+        {
+            collection1.addAll(collection2);
+            return collection1;
+        };
+    }
+
+    private static <T, R extends PartitionMutableCollection<T>> BinaryOperator<R> mergePartitions()
+    {
+        return (partition1, partition2) ->
+        {
+            partition1.getSelected().addAll(partition2.getSelected());
+            partition1.getRejected().addAll(partition2.getRejected());
+            return partition1;
+        };
     }
 }
 
