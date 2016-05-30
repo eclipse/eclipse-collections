@@ -16,9 +16,20 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.eclipse.collections.api.list.MutableList;
+import org.eclipse.collections.api.partition.bag.PartitionMutableBag;
+import org.eclipse.collections.api.partition.list.PartitionMutableList;
+import org.eclipse.collections.api.partition.set.PartitionMutableSet;
+import org.eclipse.collections.impl.block.factory.IntegerPredicates;
+import org.eclipse.collections.impl.block.factory.Predicates2;
+import org.eclipse.collections.impl.factory.Bags;
 import org.eclipse.collections.impl.factory.BiMaps;
+import org.eclipse.collections.impl.factory.Lists;
+import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.factory.Stacks;
 import org.eclipse.collections.impl.list.Interval;
+import org.eclipse.collections.impl.partition.bag.PartitionHashBag;
+import org.eclipse.collections.impl.partition.list.PartitionFastList;
+import org.eclipse.collections.impl.partition.set.PartitionUnifiedSet;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.junit.Assert;
@@ -28,6 +39,7 @@ public class Collectors2Test
 {
     public static final Interval SMALL_INTERVAL = Interval.oneTo(5);
     public static final Interval LARGE_INTERVAL = Interval.oneTo(20000);
+    public static final int HALF_SIZE = LARGE_INTERVAL.size() / 2;
     private final List<Integer> smallData = new ArrayList<Integer>(SMALL_INTERVAL);
     private final List<Integer> bigData = new ArrayList<Integer>(LARGE_INTERVAL);
 
@@ -1184,5 +1196,233 @@ public class Collectors2Test
                 largeLongs.sumByDouble(each -> Double.valueOf(each % 2), Double::doubleValue),
                 largeLongs.parallelStream().collect(Collectors2.sumByDouble(each -> Double.valueOf(each % 2), Double::doubleValue))
         );
+    }
+
+    @Test
+    public void select()
+    {
+        Assert.assertEquals(
+                LARGE_INTERVAL.toList().select(IntegerPredicates.isEven()),
+                this.bigData.stream().collect(Collectors2.select(IntegerPredicates.isEven(), Lists.mutable::empty))
+        );
+        Assert.assertEquals(
+                LARGE_INTERVAL.toSet().select(IntegerPredicates.isEven()),
+                this.bigData.stream().collect(Collectors2.select(IntegerPredicates.isEven(), Sets.mutable::empty))
+        );
+        Assert.assertEquals(
+                LARGE_INTERVAL.toBag().select(IntegerPredicates.isEven()),
+                this.bigData.stream().collect(Collectors2.select(IntegerPredicates.isEven(), Bags.mutable::empty))
+        );
+    }
+
+    @Test
+    public void selectParallel()
+    {
+        Assert.assertEquals(
+                LARGE_INTERVAL.toList().select(IntegerPredicates.isEven()),
+                this.bigData.parallelStream().collect(Collectors2.select(IntegerPredicates.isEven(), Lists.mutable::empty))
+        );
+        Assert.assertEquals(
+                LARGE_INTERVAL.toSet().select(IntegerPredicates.isEven()),
+                this.bigData.parallelStream().collect(Collectors2.select(IntegerPredicates.isEven(), Sets.mutable::empty))
+        );
+        Assert.assertEquals(
+                LARGE_INTERVAL.toBag().select(IntegerPredicates.isEven()),
+                this.bigData.parallelStream().collect(Collectors2.select(IntegerPredicates.isEven(), Bags.mutable::empty))
+        );
+    }
+
+    @Test
+    public void selectWith()
+    {
+        Assert.assertEquals(
+                LARGE_INTERVAL.toList().selectWith(Predicates2.greaterThan(), HALF_SIZE),
+                this.bigData.stream()
+                        .collect(Collectors2.selectWith(Predicates2.greaterThan(), HALF_SIZE, Lists.mutable::empty))
+        );
+        Assert.assertEquals(
+                LARGE_INTERVAL.toSet().selectWith(Predicates2.greaterThan(), HALF_SIZE),
+                this.bigData.stream()
+                        .collect(Collectors2.selectWith(Predicates2.greaterThan(), HALF_SIZE, Sets.mutable::empty))
+        );
+        Assert.assertEquals(
+                LARGE_INTERVAL.toBag().selectWith(Predicates2.greaterThan(), HALF_SIZE),
+                this.bigData.stream()
+                        .collect(Collectors2.selectWith(Predicates2.greaterThan(), HALF_SIZE, Bags.mutable::empty))
+        );
+    }
+
+    @Test
+    public void selectWithParallel()
+    {
+        Assert.assertEquals(
+                LARGE_INTERVAL.toList().selectWith(Predicates2.greaterThan(), HALF_SIZE),
+                this.bigData.parallelStream()
+                        .collect(Collectors2.selectWith(Predicates2.greaterThan(), HALF_SIZE, Lists.mutable::empty))
+        );
+        Assert.assertEquals(
+                LARGE_INTERVAL.toSet().selectWith(Predicates2.greaterThan(), HALF_SIZE),
+                this.bigData.parallelStream()
+                        .collect(Collectors2.selectWith(Predicates2.greaterThan(), HALF_SIZE, Sets.mutable::empty))
+        );
+        Assert.assertEquals(
+                LARGE_INTERVAL.toBag().selectWith(Predicates2.greaterThan(), HALF_SIZE),
+                this.bigData.parallelStream()
+                        .collect(Collectors2.selectWith(Predicates2.greaterThan(), HALF_SIZE, Bags.mutable::empty))
+        );
+    }
+
+    @Test
+    public void reject()
+    {
+        Assert.assertEquals(
+                LARGE_INTERVAL.toList().reject(IntegerPredicates.isEven()),
+                this.bigData.stream().collect(Collectors2.reject(IntegerPredicates.isEven(), Lists.mutable::empty))
+        );
+        Assert.assertEquals(
+                LARGE_INTERVAL.toSet().reject(IntegerPredicates.isEven()),
+                this.bigData.stream().collect(Collectors2.reject(IntegerPredicates.isEven(), Sets.mutable::empty))
+        );
+        Assert.assertEquals(
+                LARGE_INTERVAL.toBag().reject(IntegerPredicates.isEven()),
+                this.bigData.stream().collect(Collectors2.reject(IntegerPredicates.isEven(), Bags.mutable::empty))
+        );
+    }
+
+    @Test
+    public void rejectParallel()
+    {
+        Assert.assertEquals(
+                LARGE_INTERVAL.toList().reject(IntegerPredicates.isEven()),
+                this.bigData.parallelStream().collect(Collectors2.reject(IntegerPredicates.isEven(), Lists.mutable::empty))
+        );
+        Assert.assertEquals(
+                LARGE_INTERVAL.toSet().reject(IntegerPredicates.isEven()),
+                this.bigData.parallelStream().collect(Collectors2.reject(IntegerPredicates.isEven(), Sets.mutable::empty))
+        );
+        Assert.assertEquals(
+                LARGE_INTERVAL.toBag().reject(IntegerPredicates.isEven()),
+                this.bigData.parallelStream().collect(Collectors2.reject(IntegerPredicates.isEven(), Bags.mutable::empty))
+        );
+    }
+
+    @Test
+    public void rejectWith()
+    {
+        Assert.assertEquals(
+                LARGE_INTERVAL.toList().rejectWith(Predicates2.greaterThan(), HALF_SIZE),
+                this.bigData.stream()
+                        .collect(Collectors2.rejectWith(Predicates2.greaterThan(), HALF_SIZE, Lists.mutable::empty))
+        );
+        Assert.assertEquals(
+                LARGE_INTERVAL.toSet().rejectWith(Predicates2.greaterThan(), HALF_SIZE),
+                this.bigData.stream()
+                        .collect(Collectors2.rejectWith(Predicates2.greaterThan(), HALF_SIZE, Sets.mutable::empty))
+        );
+        Assert.assertEquals(
+                LARGE_INTERVAL.toBag().rejectWith(Predicates2.greaterThan(), HALF_SIZE),
+                this.bigData.stream()
+                        .collect(Collectors2.rejectWith(Predicates2.greaterThan(), HALF_SIZE, Bags.mutable::empty))
+        );
+    }
+
+    @Test
+    public void rejectWithParallel()
+    {
+        Assert.assertEquals(
+                LARGE_INTERVAL.toList().rejectWith(Predicates2.greaterThan(), HALF_SIZE),
+                this.bigData.parallelStream()
+                        .collect(Collectors2.rejectWith(Predicates2.greaterThan(), HALF_SIZE, Lists.mutable::empty))
+        );
+        Assert.assertEquals(
+                LARGE_INTERVAL.toSet().rejectWith(Predicates2.greaterThan(), HALF_SIZE),
+                this.bigData.parallelStream()
+                        .collect(Collectors2.rejectWith(Predicates2.greaterThan(), HALF_SIZE, Sets.mutable::empty))
+        );
+        Assert.assertEquals(
+                LARGE_INTERVAL.toBag().rejectWith(Predicates2.greaterThan(), HALF_SIZE),
+                this.bigData.parallelStream()
+                        .collect(Collectors2.rejectWith(Predicates2.greaterThan(), HALF_SIZE, Bags.mutable::empty))
+        );
+    }
+
+    @Test
+    public void partition()
+    {
+        PartitionMutableList<Integer> expectedList = LARGE_INTERVAL.toList().partition(IntegerPredicates.isEven());
+        PartitionMutableList<Integer> actualList = this.bigData.stream()
+                .collect(Collectors2.partition(IntegerPredicates.isEven(), PartitionFastList::new));
+        Assert.assertEquals(expectedList.getSelected(), actualList.getSelected());
+        Assert.assertEquals(expectedList.getRejected(), actualList.getRejected());
+        PartitionMutableSet<Integer> expectedSet = LARGE_INTERVAL.toSet().partition(IntegerPredicates.isEven());
+        PartitionMutableSet<Integer> actualSet = this.bigData.stream()
+                .collect(Collectors2.partition(IntegerPredicates.isEven(), PartitionUnifiedSet::new));
+        Assert.assertEquals(expectedSet.getSelected(), actualSet.getSelected());
+        Assert.assertEquals(expectedSet.getRejected(), actualSet.getRejected());
+        PartitionMutableBag<Integer> expectedBag = LARGE_INTERVAL.toBag().partition(IntegerPredicates.isEven());
+        PartitionMutableBag<Integer> actualBag = this.bigData.stream()
+                .collect(Collectors2.partition(IntegerPredicates.isEven(), PartitionHashBag::new));
+        Assert.assertEquals(expectedBag.getSelected(), actualBag.getSelected());
+        Assert.assertEquals(expectedBag.getRejected(), actualBag.getRejected());
+    }
+
+    @Test
+    public void partitionParallel()
+    {
+        PartitionMutableList<Integer> expectedList = LARGE_INTERVAL.toList().partition(IntegerPredicates.isEven());
+        PartitionMutableList<Integer> actualList = this.bigData.parallelStream()
+                .collect(Collectors2.partition(IntegerPredicates.isEven(), PartitionFastList::new));
+        Assert.assertEquals(expectedList.getSelected(), actualList.getSelected());
+        Assert.assertEquals(expectedList.getRejected(), actualList.getRejected());
+        PartitionMutableSet<Integer> expectedSet = LARGE_INTERVAL.toSet().partition(IntegerPredicates.isEven());
+        PartitionMutableSet<Integer> actualSet = this.bigData.parallelStream()
+                .collect(Collectors2.partition(IntegerPredicates.isEven(), PartitionUnifiedSet::new));
+        Assert.assertEquals(expectedSet.getSelected(), actualSet.getSelected());
+        Assert.assertEquals(expectedSet.getRejected(), actualSet.getRejected());
+        PartitionMutableBag<Integer> expectedBag = LARGE_INTERVAL.toBag().partition(IntegerPredicates.isEven());
+        PartitionMutableBag<Integer> actualBag = this.bigData.parallelStream()
+                .collect(Collectors2.partition(IntegerPredicates.isEven(), PartitionHashBag::new));
+        Assert.assertEquals(expectedBag.getSelected(), actualBag.getSelected());
+        Assert.assertEquals(expectedBag.getRejected(), actualBag.getRejected());
+    }
+
+    @Test
+    public void partitionWith()
+    {
+        PartitionMutableList<Integer> expectedList = LARGE_INTERVAL.toList().partitionWith(Predicates2.greaterThan(), HALF_SIZE);
+        PartitionMutableList<Integer> actualList = this.bigData.stream()
+                .collect(Collectors2.partitionWith(Predicates2.greaterThan(), HALF_SIZE, PartitionFastList::new));
+        Assert.assertEquals(expectedList.getSelected(), actualList.getSelected());
+        Assert.assertEquals(expectedList.getRejected(), actualList.getRejected());
+        PartitionMutableSet<Integer> expectedSet = LARGE_INTERVAL.toSet().partitionWith(Predicates2.greaterThan(), HALF_SIZE);
+        PartitionMutableSet<Integer> actualSet = this.bigData.stream()
+                .collect(Collectors2.partitionWith(Predicates2.greaterThan(), HALF_SIZE, PartitionUnifiedSet::new));
+        Assert.assertEquals(expectedSet.getSelected(), actualSet.getSelected());
+        Assert.assertEquals(expectedSet.getRejected(), actualSet.getRejected());
+        PartitionMutableBag<Integer> expectedBag = LARGE_INTERVAL.toBag().partitionWith(Predicates2.greaterThan(), HALF_SIZE);
+        PartitionMutableBag<Integer> actualBag = this.bigData.stream()
+                .collect(Collectors2.partitionWith(Predicates2.greaterThan(), HALF_SIZE, PartitionHashBag::new));
+        Assert.assertEquals(expectedBag.getSelected(), actualBag.getSelected());
+        Assert.assertEquals(expectedBag.getRejected(), actualBag.getRejected());
+    }
+
+    @Test
+    public void partitionWithParallel()
+    {
+        PartitionMutableList<Integer> expectedList = LARGE_INTERVAL.toList().partitionWith(Predicates2.greaterThan(), HALF_SIZE);
+        PartitionMutableList<Integer> actualList = this.bigData.parallelStream()
+                .collect(Collectors2.partitionWith(Predicates2.greaterThan(), HALF_SIZE, PartitionFastList::new));
+        Assert.assertEquals(expectedList.getSelected(), actualList.getSelected());
+        Assert.assertEquals(expectedList.getRejected(), actualList.getRejected());
+        PartitionMutableSet<Integer> expectedSet = LARGE_INTERVAL.toSet().partitionWith(Predicates2.greaterThan(), HALF_SIZE);
+        PartitionMutableSet<Integer> actualSet = this.bigData.parallelStream()
+                .collect(Collectors2.partitionWith(Predicates2.greaterThan(), HALF_SIZE, PartitionUnifiedSet::new));
+        Assert.assertEquals(expectedSet.getSelected(), actualSet.getSelected());
+        Assert.assertEquals(expectedSet.getRejected(), actualSet.getRejected());
+        PartitionMutableBag<Integer> expectedBag = LARGE_INTERVAL.toBag().partitionWith(Predicates2.greaterThan(), HALF_SIZE);
+        PartitionMutableBag<Integer> actualBag = this.bigData.parallelStream()
+                .collect(Collectors2.partitionWith(Predicates2.greaterThan(), HALF_SIZE, PartitionHashBag::new));
+        Assert.assertEquals(expectedBag.getSelected(), actualBag.getSelected());
+        Assert.assertEquals(expectedBag.getRejected(), actualBag.getRejected());
     }
 }

@@ -10,6 +10,7 @@
 
 package org.eclipse.collections.impl.collector;
 
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.StringJoiner;
@@ -29,6 +30,9 @@ import org.eclipse.collections.api.block.function.primitive.DoubleFunction;
 import org.eclipse.collections.api.block.function.primitive.FloatFunction;
 import org.eclipse.collections.api.block.function.primitive.IntFunction;
 import org.eclipse.collections.api.block.function.primitive.LongFunction;
+import org.eclipse.collections.api.block.predicate.Predicate;
+import org.eclipse.collections.api.block.predicate.Predicate2;
+import org.eclipse.collections.api.collection.MutableCollection;
 import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.ImmutableMap;
@@ -43,6 +47,7 @@ import org.eclipse.collections.api.multimap.list.ImmutableListMultimap;
 import org.eclipse.collections.api.multimap.list.MutableListMultimap;
 import org.eclipse.collections.api.multimap.set.ImmutableSetMultimap;
 import org.eclipse.collections.api.multimap.set.MutableSetMultimap;
+import org.eclipse.collections.api.partition.PartitionMutableCollection;
 import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
@@ -637,6 +642,130 @@ public final class Collectors2
                     return map1;
                 },
                 Collector.Characteristics.UNORDERED);
+    }
+
+    public static <T, R extends Collection<T>> Collector<T, ?, R> select(Predicate<? super T> predicate, Supplier<R> supplier)
+    {
+        return Collector.of(
+                supplier,
+                (collection, each) ->
+                {
+                    if (predicate.accept(each))
+                    {
+                        collection.add(each);
+                    }
+                },
+                (collection1, collection2) ->
+                {
+                    collection1.addAll(collection2);
+                    return collection1;
+                },
+                EMPTY_CHARACTERISTICS);
+    }
+
+    public static <T, P, R extends Collection<T>> Collector<T, ?, R> selectWith(
+            Predicate2<? super T, ? super P> predicate,
+            P parameter,
+            Supplier<R> supplier)
+    {
+        return Collector.of(
+                supplier,
+                (collection, each) ->
+                {
+                    if (predicate.accept(each, parameter))
+                    {
+                        collection.add(each);
+                    }
+                },
+                (collection1, collection2) ->
+                {
+                    collection1.addAll(collection2);
+                    return collection1;
+                },
+                EMPTY_CHARACTERISTICS);
+    }
+
+    public static <T, R extends Collection<T>> Collector<T, ?, R> reject(Predicate<? super T> predicate, Supplier<R> supplier)
+    {
+        return Collector.of(
+                supplier,
+                (collection, each) ->
+                {
+                    if (!predicate.accept(each))
+                    {
+                        collection.add(each);
+                    }
+                },
+                (collection1, collection2) ->
+                {
+                    collection1.addAll(collection2);
+                    return collection1;
+                },
+                EMPTY_CHARACTERISTICS);
+    }
+
+    public static <T, P, R extends Collection<T>> Collector<T, ?, R> rejectWith(
+            Predicate2<? super T, ? super P> predicate,
+            P parameter,
+            Supplier<R> supplier)
+    {
+        return Collector.of(
+                supplier,
+                (collection, each) ->
+                {
+                    if (!predicate.accept(each, parameter))
+                    {
+                        collection.add(each);
+                    }
+                },
+                (collection1, collection2) ->
+                {
+                    collection1.addAll(collection2);
+                    return collection1;
+                },
+                EMPTY_CHARACTERISTICS);
+    }
+
+    public static <T, R extends PartitionMutableCollection<T>> Collector<T, ?, R> partition(
+            Predicate<? super T> predicate,
+            Supplier<R> supplier)
+    {
+        return Collector.of(
+                supplier,
+                (partition, each) ->
+                {
+                    MutableCollection<T> bucket = predicate.accept(each) ? partition.getSelected() : partition.getRejected();
+                    bucket.add(each);
+                },
+                (partition1, partition2) ->
+                {
+                    partition1.getSelected().addAll(partition2.getSelected());
+                    partition1.getRejected().addAll(partition2.getRejected());
+                    return partition1;
+                },
+                EMPTY_CHARACTERISTICS);
+    }
+
+    public static <T, P, R extends PartitionMutableCollection<T>> Collector<T, ?, R> partitionWith(
+            Predicate2<? super T, ? super P> predicate,
+            P parameter,
+            Supplier<R> supplier)
+    {
+        return Collector.of(
+                supplier,
+                (partition, each) ->
+                {
+                    MutableCollection<T> bucket =
+                            predicate.accept(each, parameter) ? partition.getSelected() : partition.getRejected();
+                    bucket.add(each);
+                },
+                (partition1, partition2) ->
+                {
+                    partition1.getSelected().addAll(partition2.getSelected());
+                    partition1.getRejected().addAll(partition2.getRejected());
+                    return partition1;
+                },
+                EMPTY_CHARACTERISTICS);
     }
 }
 
