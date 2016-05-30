@@ -15,9 +15,12 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.impl.factory.BiMaps;
 import org.eclipse.collections.impl.factory.Stacks;
 import org.eclipse.collections.impl.list.Interval;
+import org.eclipse.collections.impl.test.Verify;
+import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -1014,5 +1017,172 @@ public class Collectors2Test
         Assert.assertEquals(
                 LARGE_INTERVAL.reduceInPlace(Collectors2.toImmutableBagMultimap(Object::toString, Object::toString)),
                 this.bigData.parallelStream().collect(Collectors2.toImmutableBagMultimap(Object::toString, Object::toString)));
+    }
+
+    @Test
+    public void chunk()
+    {
+        MutableList<MutableList<Integer>> chunked0 = this.bigData.stream().collect(Collectors2.chunk(100));
+        Assert.assertEquals(LARGE_INTERVAL.toList().chunk(100), chunked0);
+        MutableList<MutableList<Integer>> chunked1 = this.bigData.stream().collect(Collectors2.chunk(333));
+        Assert.assertEquals(LARGE_INTERVAL.toList().chunk(333), chunked1);
+        MutableList<MutableList<Integer>> chunked2 = this.bigData.stream().collect(Collectors2.chunk(654));
+        Assert.assertEquals(LARGE_INTERVAL.toList().chunk(654), chunked2);
+        MutableList<MutableList<Integer>> chunked3 = this.smallData.stream().collect(Collectors2.chunk(SMALL_INTERVAL.size()));
+        Assert.assertEquals(SMALL_INTERVAL.toList().chunk(SMALL_INTERVAL.size()), chunked3);
+        MutableList<MutableList<Integer>> chunked4 = this.smallData.stream().collect(Collectors2.chunk(SMALL_INTERVAL.size() - 1));
+        Assert.assertEquals(SMALL_INTERVAL.toList().chunk(SMALL_INTERVAL.size() - 1), chunked4);
+        Verify.assertThrows(IllegalArgumentException.class, () -> Collectors2.chunk(0));
+        Verify.assertThrows(IllegalArgumentException.class, () -> Collectors2.chunk(-10));
+    }
+
+    @Test
+    public void chunkParallel()
+    {
+        MutableList<MutableList<Integer>> chunked = this.bigData.parallelStream().collect(Collectors2.chunk(100));
+        Assert.assertTrue(chunked.size() > 1);
+        Verify.assertAllSatisfy(chunked, each -> each.size() > 1 && each.size() <= 100);
+    }
+
+    @Test
+    public void zip()
+    {
+        MutableList<Integer> integers1 = Interval.oneTo(10).toList();
+        MutableList<Integer> integers2 = Interval.oneTo(10).toList().toReversed();
+        Assert.assertEquals(
+                integers1.zip(integers2),
+                integers1.stream().collect(Collectors2.zip(integers2)));
+        MutableList<Integer> integers3 = Interval.oneTo(9).toList().toReversed();
+        Assert.assertEquals(
+                integers1.zip(integers3),
+                integers1.stream().collect(Collectors2.zip(integers3)));
+        Assert.assertEquals(
+                integers3.zip(integers1),
+                integers3.stream().collect(Collectors2.zip(integers1)));
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void zipParallel()
+    {
+        MutableList<Integer> integers1 = Interval.oneTo(10).toList();
+        MutableList<Integer> integers2 = Interval.oneTo(10).toList().toReversed();
+        Assert.assertEquals(
+                integers1.zip(integers2),
+                integers1.parallelStream().collect(Collectors2.zip(integers2)));
+    }
+
+    @Test
+    public void zipWithIndex()
+    {
+        MutableList<Integer> integers1 = Interval.oneTo(10).toList();
+        Assert.assertEquals(
+                integers1.zipWithIndex().collect(each -> PrimitiveTuples.pair(each.getOne(), each.getTwo().intValue())),
+                integers1.stream().collect(Collectors2.zipWithIndex()));
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void zipWithIndexParallel()
+    {
+        MutableList<Integer> integers1 = Interval.oneTo(10).toList();
+        Assert.assertEquals(
+                integers1.zipWithIndex().collect(each -> PrimitiveTuples.pair(each.getOne(), each.getTwo().intValue())),
+                integers1.parallelStream().collect(Collectors2.zipWithIndex()));
+    }
+
+    @Test
+    public void sumByInt()
+    {
+        Assert.assertEquals(
+                SMALL_INTERVAL.sumByInt(each -> Integer.valueOf(each % 2), Integer::intValue),
+                SMALL_INTERVAL.stream().collect(Collectors2.sumByInt(each -> Integer.valueOf(each % 2), Integer::intValue))
+        );
+        Assert.assertEquals(
+                LARGE_INTERVAL.sumByInt(each -> Integer.valueOf(each % 2), Integer::intValue),
+                LARGE_INTERVAL.stream().collect(Collectors2.sumByInt(each -> Integer.valueOf(each % 2), Integer::intValue))
+        );
+    }
+
+    @Test
+    public void sumByIntParallel()
+    {
+        Assert.assertEquals(
+                LARGE_INTERVAL.sumByInt(each -> Integer.valueOf(each % 2), Integer::intValue),
+                LARGE_INTERVAL.parallelStream().collect(Collectors2.sumByInt(each -> Integer.valueOf(each % 2), Integer::intValue))
+        );
+    }
+
+    @Test
+    public void sumByLong()
+    {
+        MutableList<Long> smallLongs = SMALL_INTERVAL.collect(Long::valueOf).toList();
+        MutableList<Long> largeLongs = LARGE_INTERVAL.collect(Long::valueOf).toList();
+        Assert.assertEquals(
+                smallLongs.sumByLong(each -> Long.valueOf(each % 2), Long::longValue),
+                smallLongs.stream().collect(Collectors2.sumByLong(each -> Long.valueOf(each % 2), Long::longValue))
+        );
+        Assert.assertEquals(
+                largeLongs.sumByLong(each -> Long.valueOf(each % 2), Long::longValue),
+                largeLongs.stream().collect(Collectors2.sumByLong(each -> Long.valueOf(each % 2), Long::longValue))
+        );
+    }
+
+    @Test
+    public void sumByLongParallel()
+    {
+        MutableList<Long> largeLongs = LARGE_INTERVAL.collect(Long::valueOf).toList();
+        Assert.assertEquals(
+                largeLongs.sumByLong(each -> Long.valueOf(each % 2), Long::longValue),
+                largeLongs.parallelStream().collect(Collectors2.sumByLong(each -> Long.valueOf(each % 2), Long::longValue))
+        );
+    }
+
+    @Test
+    public void sumByFloat()
+    {
+        MutableList<Float> smallLongs = SMALL_INTERVAL.collect(Float::valueOf).toList();
+        MutableList<Float> largeLongs = LARGE_INTERVAL.collect(Float::valueOf).toList();
+        Assert.assertEquals(
+                smallLongs.sumByFloat(each -> Float.valueOf(each % 2), Float::floatValue),
+                smallLongs.stream().collect(Collectors2.sumByFloat(each -> Float.valueOf(each % 2), Float::floatValue))
+        );
+        Assert.assertEquals(
+                largeLongs.sumByFloat(each -> Float.valueOf(each % 2), Float::floatValue),
+                largeLongs.stream().collect(Collectors2.sumByFloat(each -> Float.valueOf(each % 2), Float::floatValue))
+        );
+    }
+
+    @Test
+    public void sumByFloatParallel()
+    {
+        MutableList<Float> largeLongs = LARGE_INTERVAL.collect(Float::valueOf).toList();
+        Assert.assertEquals(
+                largeLongs.sumByFloat(each -> Float.valueOf(each % 2), Float::floatValue),
+                largeLongs.parallelStream().collect(Collectors2.sumByFloat(each -> Float.valueOf(each % 2), Float::floatValue))
+        );
+    }
+
+    @Test
+    public void sumByDouble()
+    {
+        MutableList<Double> smallLongs = SMALL_INTERVAL.collect(Double::valueOf).toList();
+        MutableList<Double> largeLongs = LARGE_INTERVAL.collect(Double::valueOf).toList();
+        Assert.assertEquals(
+                smallLongs.sumByDouble(each -> Double.valueOf(each % 2), Double::doubleValue),
+                smallLongs.stream().collect(Collectors2.sumByDouble(each -> Double.valueOf(each % 2), Double::doubleValue))
+        );
+        Assert.assertEquals(
+                largeLongs.sumByDouble(each -> Double.valueOf(each % 2), Double::doubleValue),
+                largeLongs.stream().collect(Collectors2.sumByDouble(each -> Double.valueOf(each % 2), Double::doubleValue))
+        );
+    }
+
+    @Test
+    public void sumByDoubleParallel()
+    {
+        MutableList<Double> largeLongs = LARGE_INTERVAL.collect(Double::valueOf).toList();
+        Assert.assertEquals(
+                largeLongs.sumByDouble(each -> Double.valueOf(each % 2), Double::doubleValue),
+                largeLongs.parallelStream().collect(Collectors2.sumByDouble(each -> Double.valueOf(each % 2), Double::doubleValue))
+        );
     }
 }

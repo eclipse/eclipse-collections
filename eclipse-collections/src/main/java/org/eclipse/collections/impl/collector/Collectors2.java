@@ -11,7 +11,9 @@
 package org.eclipse.collections.impl.collector;
 
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.StringJoiner;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Supplier;
 import java.util.stream.Collector;
 
@@ -22,10 +24,17 @@ import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
 import org.eclipse.collections.api.bimap.ImmutableBiMap;
 import org.eclipse.collections.api.bimap.MutableBiMap;
 import org.eclipse.collections.api.block.function.Function;
+import org.eclipse.collections.api.block.function.Function2;
+import org.eclipse.collections.api.block.function.primitive.DoubleFunction;
+import org.eclipse.collections.api.block.function.primitive.FloatFunction;
+import org.eclipse.collections.api.block.function.primitive.IntFunction;
+import org.eclipse.collections.api.block.function.primitive.LongFunction;
 import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.api.map.MutableMap;
+import org.eclipse.collections.api.map.primitive.MutableObjectDoubleMap;
+import org.eclipse.collections.api.map.primitive.MutableObjectLongMap;
 import org.eclipse.collections.api.multimap.ImmutableMultimap;
 import org.eclipse.collections.api.multimap.MutableMultimap;
 import org.eclipse.collections.api.multimap.bag.ImmutableBagMultimap;
@@ -40,7 +49,10 @@ import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 import org.eclipse.collections.api.stack.ImmutableStack;
 import org.eclipse.collections.api.stack.MutableStack;
+import org.eclipse.collections.api.tuple.Pair;
+import org.eclipse.collections.api.tuple.primitive.ObjectIntPair;
 import org.eclipse.collections.impl.block.factory.Comparators;
+import org.eclipse.collections.impl.block.factory.PrimitiveFunctions;
 import org.eclipse.collections.impl.factory.Bags;
 import org.eclipse.collections.impl.factory.BiMaps;
 import org.eclipse.collections.impl.factory.Lists;
@@ -50,6 +62,10 @@ import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.factory.SortedBags;
 import org.eclipse.collections.impl.factory.SortedSets;
 import org.eclipse.collections.impl.factory.Stacks;
+import org.eclipse.collections.impl.map.mutable.primitive.ObjectDoubleHashMap;
+import org.eclipse.collections.impl.map.mutable.primitive.ObjectLongHashMap;
+import org.eclipse.collections.impl.tuple.Tuples;
+import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 
 /**
  * A set of Collectors for Eclipse Collections types and algorithms.
@@ -499,6 +515,128 @@ public final class Collectors2
             Function<? super T, ? extends V> valueFunction)
     {
         return Collectors2.groupByImmutable(groupBy, valueFunction, Multimaps.mutable.bag::empty, MutableBagMultimap::toImmutable);
+    }
+
+    public static <T> Collector<T, ?, MutableList<MutableList<T>>> chunk(int size)
+    {
+        if (size <= 0)
+        {
+            throw new IllegalArgumentException("Size for groups must be positive but was: " + size);
+        }
+        return Collector.of(
+                Lists.mutable::empty,
+                (MutableList<MutableList<T>> batches, T each) ->
+                {
+                    MutableList<T> batch = batches.getLast();
+                    if (batch == null || batch.size() == size)
+                    {
+                        batch = Lists.mutable.empty();
+                        batches.add(batch);
+                    }
+                    batch.add(each);
+                },
+                MutableList::withAll,
+                EMPTY_CHARACTERISTICS);
+    }
+
+    public static <T, S> Collector<T, ?, MutableList<Pair<T, S>>> zip(Iterable<S> other)
+    {
+        Iterator<S> iterator = other.iterator();
+        return Collector.of(
+                Lists.mutable::empty,
+                (list, each) ->
+                {
+                    if (iterator.hasNext())
+                    {
+                        list.add(Tuples.pair(each, iterator.next()));
+                    }
+                },
+                (l, r) ->
+                {
+                    throw new UnsupportedOperationException("Zip not supported in parallel.");
+                },
+                EMPTY_CHARACTERISTICS);
+    }
+
+    public static <T> Collector<T, ?, MutableList<ObjectIntPair<T>>> zipWithIndex()
+    {
+        AtomicInteger index = new AtomicInteger(0);
+        return Collector.of(
+                Lists.mutable::empty,
+                (list, each) -> list.add(PrimitiveTuples.pair(each, index.getAndAdd(1))),
+                (l, r) ->
+                {
+                    throw new UnsupportedOperationException("ZipWithIndex not supported in parallel.");
+                },
+                EMPTY_CHARACTERISTICS);
+    }
+
+    public static <T, V> Collector<T, ?, MutableObjectLongMap<V>> sumByInt(
+            Function<? super T, ? extends V> groupBy,
+            IntFunction<? super T> function)
+    {
+        Function2<MutableObjectLongMap<V>, T, MutableObjectLongMap<V>> accumulator =
+                PrimitiveFunctions.sumByIntFunction(groupBy, function);
+        return Collector.of(
+                ObjectLongHashMap::newMap,
+                accumulator::value,
+                (map1, map2) ->
+                {
+                    map2.forEachKeyValue(map1::addToValue);
+                    return map1;
+                },
+                Collector.Characteristics.UNORDERED);
+    }
+
+    public static <T, V> Collector<T, ?, MutableObjectLongMap<V>> sumByLong(
+            Function<? super T, ? extends V> groupBy,
+            LongFunction<? super T> function)
+    {
+        Function2<MutableObjectLongMap<V>, T, MutableObjectLongMap<V>> accumulator =
+                PrimitiveFunctions.sumByLongFunction(groupBy, function);
+        return Collector.of(
+                ObjectLongHashMap::newMap,
+                accumulator::value,
+                (map1, map2) ->
+                {
+                    map2.forEachKeyValue(map1::addToValue);
+                    return map1;
+                },
+                Collector.Characteristics.UNORDERED);
+    }
+
+    public static <T, V> Collector<T, ?, MutableObjectDoubleMap<V>> sumByFloat(
+            Function<? super T, ? extends V> groupBy,
+            FloatFunction<? super T> function)
+    {
+        Function2<MutableObjectDoubleMap<V>, T, MutableObjectDoubleMap<V>> accumulator =
+                PrimitiveFunctions.sumByFloatFunction(groupBy, function);
+        return Collector.of(
+                ObjectDoubleHashMap::newMap,
+                accumulator::value,
+                (map1, map2) ->
+                {
+                    map2.forEachKeyValue(map1::addToValue);
+                    return map1;
+                },
+                Collector.Characteristics.UNORDERED);
+    }
+
+    public static <T, V> Collector<T, ?, MutableObjectDoubleMap<V>> sumByDouble(
+            Function<? super T, ? extends V> groupBy,
+            DoubleFunction<? super T> function)
+    {
+        Function2<MutableObjectDoubleMap<V>, T, MutableObjectDoubleMap<V>> accumulator =
+                PrimitiveFunctions.sumByDoubleFunction(groupBy, function);
+        return Collector.of(
+                ObjectDoubleHashMap::newMap,
+                accumulator::value,
+                (map1, map2) ->
+                {
+                    map2.forEachKeyValue(map1::addToValue);
+                    return map1;
+                },
+                Collector.Characteristics.UNORDERED);
     }
 }
 
