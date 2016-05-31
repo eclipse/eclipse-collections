@@ -15,9 +15,7 @@ import java.util.DoubleSummaryStatistics;
 import java.util.IntSummaryStatistics;
 import java.util.LongSummaryStatistics;
 import java.util.Map;
-import java.util.Optional;
 import java.util.function.BiConsumer;
-import java.util.function.BinaryOperator;
 import java.util.function.Supplier;
 import java.util.stream.Collector;
 import java.util.stream.Stream;
@@ -167,6 +165,7 @@ public interface Bag<T>
     /**
      * @since 8.0
      */
+    @Override
     default IntSummaryStatistics summarizeInt(IntFunction<? super T> function)
     {
         IntSummaryStatistics stats = new IntSummaryStatistics();
@@ -184,6 +183,7 @@ public interface Bag<T>
     /**
      * @since 8.0
      */
+    @Override
     default DoubleSummaryStatistics summarizeFloat(FloatFunction<? super T> function)
     {
         DoubleSummaryStatistics stats = new DoubleSummaryStatistics();
@@ -201,6 +201,7 @@ public interface Bag<T>
     /**
      * @since 8.0
      */
+    @Override
     default LongSummaryStatistics summarizeLong(LongFunction<? super T> function)
     {
         LongSummaryStatistics stats = new LongSummaryStatistics();
@@ -218,6 +219,7 @@ public interface Bag<T>
     /**
      * @since 8.0
      */
+    @Override
     default DoubleSummaryStatistics summarizeDouble(DoubleFunction<? super T> function)
     {
         DoubleSummaryStatistics stats = new DoubleSummaryStatistics();
