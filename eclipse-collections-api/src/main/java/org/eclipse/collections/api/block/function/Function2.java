@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -11,6 +11,7 @@
 package org.eclipse.collections.api.block.function;
 
 import java.io.Serializable;
+import java.util.function.BiFunction;
 
 /**
  * A Function2 is used by injectInto() methods. It takes the injected argument as the first argument, and the
@@ -19,8 +20,15 @@ import java.io.Serializable;
  *
  * @since 1.0
  */
+@FunctionalInterface
 public interface Function2<T1, T2, R>
-        extends Serializable
+        extends BiFunction<T1, T2, R>, Serializable
 {
     R value(T1 argument1, T2 argument2);
+
+    @Override
+    default R apply(T1 argument1, T2 argument2)
+    {
+        return this.value(argument1, argument2);
+    }
 }

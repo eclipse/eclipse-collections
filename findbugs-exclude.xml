@@ -361,6 +361,11 @@
         <Bug pattern="NM_SAME_SIMPLE_NAME_AS_INTERFACE" />
         <Or>
             <Class name="org.eclipse.collections.api.block.procedure.ObjectIntProcedure" />
+            <Class name="org.eclipse.collections.api.block.function.Function" />
+            <Class name="org.eclipse.collections.api.block.predicate.Predicate" />
+            <Class name="org.eclipse.collections.api.block.predicate.primitive.IntPredicate" />
+            <Class name="org.eclipse.collections.api.block.predicate.primitive.LongPredicate" />
+            <Class name="org.eclipse.collections.api.block.predicate.primitive.DoublePredicate" />
         </Or>
     </Match>
 </FindBugsFilter>

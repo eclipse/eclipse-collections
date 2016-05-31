@@ -25,4 +25,23 @@ public abstract class MapEntryPredicate<T1, T2>
     {
         return this.accept(entry.getKey(), entry.getValue());
     }
+
+    @Override
+    public MapEntryPredicate<T1, T2> negate()
+    {
+        return new MapEntryPredicate<T1, T2>()
+        {
+            @Override
+            public boolean accept(Map.Entry<T1, T2> entry)
+            {
+                return !MapEntryPredicate.this.accept(entry);
+            }
+
+            @Override
+            public boolean accept(T1 argument1, T2 argument2)
+            {
+                return !MapEntryPredicate.this.accept(argument1, argument2);
+            }
+        };
+    }
 }

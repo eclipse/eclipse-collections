@@ -108,7 +108,7 @@ public class EmptyMapTest extends AbstractMemoryEfficientMutableMapTest
         StubProcedure<Object> procedure = new StubProcedure<>();
         MutableMap<Object, Object> map = new EmptyMap<>();
 
-        map.forEach(procedure);
+        map.each(procedure);
         Assert.assertFalse(procedure.called);
 
         map.forEachKey(procedure);
@@ -237,7 +237,7 @@ public class EmptyMapTest extends AbstractMemoryEfficientMutableMapTest
             implements Procedure<T>, Procedure2<T, T>, ObjectIntProcedure<T>
     {
         private static final long serialVersionUID = 1L;
-        private boolean called = false;
+        private boolean called;
 
         @Override
         public void value(T each)

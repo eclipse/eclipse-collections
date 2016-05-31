@@ -22,10 +22,19 @@ import java.io.Serializable;
  *
  * @since 3.0.
  */
+<if(primitive.specializedStream)>@FunctionalInterface<endif>
 public interface <name>Predicate
-        extends Serializable
+        extends <if(primitive.specializedStream)>java.util.function.<name>Predicate, <endif>Serializable
 {
     boolean accept(<type> value);
+<if(primitive.specializedStream)>
+
+    @Override
+    default boolean test(<type> value)
+    {
+        return this.accept(value);
+    }
+<endif>
 }
 
 >>
