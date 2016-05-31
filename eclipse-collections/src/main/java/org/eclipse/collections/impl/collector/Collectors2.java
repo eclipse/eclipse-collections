@@ -27,13 +27,25 @@ import org.eclipse.collections.api.bimap.ImmutableBiMap;
 import org.eclipse.collections.api.bimap.MutableBiMap;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
+import org.eclipse.collections.api.block.function.primitive.BooleanFunction;
+import org.eclipse.collections.api.block.function.primitive.ByteFunction;
+import org.eclipse.collections.api.block.function.primitive.CharFunction;
 import org.eclipse.collections.api.block.function.primitive.DoubleFunction;
 import org.eclipse.collections.api.block.function.primitive.FloatFunction;
 import org.eclipse.collections.api.block.function.primitive.IntFunction;
 import org.eclipse.collections.api.block.function.primitive.LongFunction;
+import org.eclipse.collections.api.block.function.primitive.ShortFunction;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.collection.MutableCollection;
+import org.eclipse.collections.api.collection.primitive.MutableBooleanCollection;
+import org.eclipse.collections.api.collection.primitive.MutableByteCollection;
+import org.eclipse.collections.api.collection.primitive.MutableCharCollection;
+import org.eclipse.collections.api.collection.primitive.MutableDoubleCollection;
+import org.eclipse.collections.api.collection.primitive.MutableFloatCollection;
+import org.eclipse.collections.api.collection.primitive.MutableIntCollection;
+import org.eclipse.collections.api.collection.primitive.MutableLongCollection;
+import org.eclipse.collections.api.collection.primitive.MutableShortCollection;
 import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.ImmutableMap;
@@ -762,6 +774,118 @@ public final class Collectors2
                 supplier,
                 (collection, each) -> collection.add(function.value(each, parameter)),
                 Collectors2.mergeCollections(),
+                EMPTY_CHARACTERISTICS);
+    }
+
+    public static <T, R extends MutableBooleanCollection> Collector<T, ?, R> collectBoolean(
+            BooleanFunction<? super T> function, Supplier<R> supplier)
+    {
+        return Collector.of(
+                supplier,
+                (collection, each) -> collection.add(function.booleanValueOf(each)),
+                (collection1, collection2) ->
+                {
+                    collection1.addAll(collection2);
+                    return collection1;
+                },
+                EMPTY_CHARACTERISTICS);
+    }
+
+    public static <T, R extends MutableByteCollection> Collector<T, ?, R> collectByte(
+            ByteFunction<? super T> function, Supplier<R> supplier)
+    {
+        return Collector.of(
+                supplier,
+                (collection, each) -> collection.add(function.byteValueOf(each)),
+                (collection1, collection2) ->
+                {
+                    collection1.addAll(collection2);
+                    return collection1;
+                },
+                EMPTY_CHARACTERISTICS);
+    }
+
+    public static <T, R extends MutableCharCollection> Collector<T, ?, R> collectChar(
+            CharFunction<? super T> function, Supplier<R> supplier)
+    {
+        return Collector.of(
+                supplier,
+                (collection, each) -> collection.add(function.charValueOf(each)),
+                (collection1, collection2) ->
+                {
+                    collection1.addAll(collection2);
+                    return collection1;
+                },
+                EMPTY_CHARACTERISTICS);
+    }
+
+    public static <T, R extends MutableShortCollection> Collector<T, ?, R> collectShort(
+            ShortFunction<? super T> function, Supplier<R> supplier)
+    {
+        return Collector.of(
+                supplier,
+                (collection, each) -> collection.add(function.shortValueOf(each)),
+                (collection1, collection2) ->
+                {
+                    collection1.addAll(collection2);
+                    return collection1;
+                },
+                EMPTY_CHARACTERISTICS);
+    }
+
+    public static <T, R extends MutableIntCollection> Collector<T, ?, R> collectInt(
+            IntFunction<? super T> function, Supplier<R> supplier)
+    {
+        return Collector.of(
+                supplier,
+                (collection, each) -> collection.add(function.intValueOf(each)),
+                (collection1, collection2) ->
+                {
+                    collection1.addAll(collection2);
+                    return collection1;
+                },
+                EMPTY_CHARACTERISTICS);
+    }
+
+    public static <T, R extends MutableFloatCollection> Collector<T, ?, R> collectFloat(
+            FloatFunction<? super T> function, Supplier<R> supplier)
+    {
+        return Collector.of(
+                supplier,
+                (collection, each) -> collection.add(function.floatValueOf(each)),
+                (collection1, collection2) ->
+                {
+                    collection1.addAll(collection2);
+                    return collection1;
+                },
+                EMPTY_CHARACTERISTICS);
+    }
+
+    public static <T, R extends MutableLongCollection> Collector<T, ?, R> collectLong(
+            LongFunction<? super T> function, Supplier<R> supplier)
+    {
+        return Collector.of(
+                supplier,
+                (collection, each) -> collection.add(function.longValueOf(each)),
+                (collection1, collection2) ->
+                {
+                    collection1.addAll(collection2);
+                    return collection1;
+                },
+                EMPTY_CHARACTERISTICS);
+    }
+
+    public static <T, R extends MutableDoubleCollection> Collector<T, ?, R> collectDouble(
+            DoubleFunction<? super T> function, Supplier<R> supplier)
+    {
+        return Collector.of(
+                supplier,
+                (collection, each) -> collection.add(function.doubleValueOf(each)),
+                (collection1, collection2) ->
+                {
+                    collection1.addAll(collection2);
+                    return collection1;
+                },
                 EMPTY_CHARACTERISTICS);
     }
 

@@ -16,6 +16,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.eclipse.collections.api.list.MutableList;
+import org.eclipse.collections.api.list.primitive.BooleanList;
+import org.eclipse.collections.api.list.primitive.ByteList;
+import org.eclipse.collections.api.list.primitive.CharList;
+import org.eclipse.collections.api.list.primitive.DoubleList;
+import org.eclipse.collections.api.list.primitive.FloatList;
+import org.eclipse.collections.api.list.primitive.IntList;
+import org.eclipse.collections.api.list.primitive.LongList;
+import org.eclipse.collections.api.list.primitive.ShortList;
 import org.eclipse.collections.api.partition.bag.PartitionMutableBag;
 import org.eclipse.collections.api.partition.list.PartitionMutableList;
 import org.eclipse.collections.api.partition.set.PartitionMutableSet;
@@ -27,6 +35,14 @@ import org.eclipse.collections.impl.factory.BiMaps;
 import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.factory.Stacks;
+import org.eclipse.collections.impl.factory.primitive.BooleanLists;
+import org.eclipse.collections.impl.factory.primitive.ByteLists;
+import org.eclipse.collections.impl.factory.primitive.CharLists;
+import org.eclipse.collections.impl.factory.primitive.DoubleLists;
+import org.eclipse.collections.impl.factory.primitive.FloatLists;
+import org.eclipse.collections.impl.factory.primitive.IntLists;
+import org.eclipse.collections.impl.factory.primitive.LongLists;
+import org.eclipse.collections.impl.factory.primitive.ShortLists;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.partition.bag.PartitionHashBag;
 import org.eclipse.collections.impl.partition.list.PartitionFastList;
@@ -1505,5 +1521,165 @@ public class Collectors2Test
                 this.bigData.parallelStream()
                         .collect(Collectors2.collectWith(Integer::sum, Integer.valueOf(10), Bags.mutable::empty))
         );
+    }
+
+    @Test
+    public void collectBoolean()
+    {
+        BooleanList expected =
+                SMALL_INTERVAL.collectBoolean(each -> each % 2 == 0, BooleanLists.mutable.empty());
+        BooleanList actual =
+                this.smallData.stream().collect(Collectors2.collectBoolean(each -> each % 2 == 0, BooleanLists.mutable::empty));
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void collectBooleanParallel()
+    {
+        BooleanList expected =
+                LARGE_INTERVAL.collectBoolean(each -> each % 2 == 0, BooleanLists.mutable.empty());
+        BooleanList actual =
+                this.bigData.parallelStream().collect(Collectors2.collectBoolean(each -> each % 2 == 0, BooleanLists.mutable::empty));
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void collectByte()
+    {
+        ByteList expected =
+                SMALL_INTERVAL.collectByte(each -> (byte) (each % Byte.MAX_VALUE), ByteLists.mutable.empty());
+        ByteList actual =
+                this.smallData.stream().collect(Collectors2.collectByte(each -> (byte) (each % Byte.MAX_VALUE), ByteLists.mutable::empty));
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void collectByteParallel()
+    {
+        ByteList expected =
+                LARGE_INTERVAL.collectByte(each -> (byte) (each % Byte.MAX_VALUE), ByteLists.mutable.empty());
+        ByteList actual =
+                this.bigData.parallelStream().collect(Collectors2.collectByte(each -> (byte) (each % Byte.MAX_VALUE), ByteLists.mutable::empty));
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void collectChar()
+    {
+        CharList expected =
+                SMALL_INTERVAL.collectChar(each -> (char) (each % Character.MAX_VALUE), CharLists.mutable.empty());
+        CharList actual =
+                this.smallData.stream().collect(Collectors2.collectChar(each -> (char) (each % Character.MAX_VALUE), CharLists.mutable::empty));
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void collectCharParallel()
+    {
+        CharList expected =
+                LARGE_INTERVAL.collectChar(each -> (char) (each % Character.MAX_VALUE), CharLists.mutable.empty());
+        CharList actual =
+                this.bigData.parallelStream().collect(Collectors2.collectChar(each -> (char) (each % Character.MAX_VALUE), CharLists.mutable::empty));
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void collectShort()
+    {
+        ShortList expected =
+                SMALL_INTERVAL.collectShort(each -> (short) (each % Short.MAX_VALUE), ShortLists.mutable.empty());
+        ShortList actual =
+                this.smallData.stream().collect(Collectors2.collectShort(each -> (short) (each % Short.MAX_VALUE), ShortLists.mutable::empty));
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void collectShortParallel()
+    {
+        ShortList expected =
+                LARGE_INTERVAL.collectShort(each -> (short) (each % Short.MAX_VALUE), ShortLists.mutable.empty());
+        ShortList actual =
+                this.bigData.parallelStream().collect(Collectors2.collectShort(each -> (short) (each % Short.MAX_VALUE), ShortLists.mutable::empty));
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void collectInt()
+    {
+        IntList expected =
+                SMALL_INTERVAL.collectInt(each -> each, IntLists.mutable.empty());
+        IntList actual =
+                this.smallData.stream().collect(Collectors2.collectInt(each -> each, IntLists.mutable::empty));
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void collectIntParallel()
+    {
+        IntList expected =
+                LARGE_INTERVAL.collectInt(each -> each, IntLists.mutable.empty());
+        IntList actual =
+                this.bigData.parallelStream().collect(Collectors2.collectInt(each -> each, IntLists.mutable::empty));
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void collectFloat()
+    {
+        FloatList expected =
+                SMALL_INTERVAL.collectFloat(each -> (float) each, FloatLists.mutable.empty());
+        FloatList actual =
+                this.smallData.stream().collect(Collectors2.collectFloat(each -> (float) each, FloatLists.mutable::empty));
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void collectFloatParallel()
+    {
+        FloatList expected =
+                LARGE_INTERVAL.collectFloat(each -> (float) each, FloatLists.mutable.empty());
+        FloatList actual =
+                this.bigData.parallelStream().collect(Collectors2.collectFloat(each -> (float) each, FloatLists.mutable::empty));
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void collectLong()
+    {
+        LongList expected =
+                SMALL_INTERVAL.collectLong(each -> (long) each, LongLists.mutable.empty());
+        LongList actual =
+                this.smallData.stream().collect(Collectors2.collectLong(each -> (long) each, LongLists.mutable::empty));
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void collectLongParallel()
+    {
+        LongList expected =
+                LARGE_INTERVAL.collectLong(each -> (long) each, LongLists.mutable.empty());
+        LongList actual =
+                this.bigData.parallelStream().collect(Collectors2.collectLong(each -> (long) each, LongLists.mutable::empty));
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void collectDouble()
+    {
+        DoubleList expected =
+                SMALL_INTERVAL.collectDouble(each -> (double) each, DoubleLists.mutable.empty());
+        DoubleList actual =
+                this.smallData.stream().collect(Collectors2.collectDouble(each -> (double) each, DoubleLists.mutable::empty));
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void collectDoubleParallel()
+    {
+        DoubleList expected =
+                LARGE_INTERVAL.collectDouble(each -> (double) each, DoubleLists.mutable.empty());
+        DoubleList actual =
+                this.bigData.parallelStream().collect(Collectors2.collectDouble(each -> (double) each, DoubleLists.mutable::empty));
+        Assert.assertEquals(expected, actual);
     }
 }
