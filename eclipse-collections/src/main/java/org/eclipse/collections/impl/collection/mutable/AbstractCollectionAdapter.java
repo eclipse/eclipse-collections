@@ -151,6 +151,29 @@ public abstract class AbstractCollectionAdapter<T>
     }
 
     @Override
+    public <P> T detectWith(Predicate2<? super T, ? super P> predicate, P parameter)
+    {
+        return Iterate.detectWith(this.getDelegate(), predicate, parameter);
+    }
+
+    @Override
+    public T detectIfNone(Predicate<? super T> predicate, Function0<? extends T> function)
+    {
+        T result = this.detect(predicate);
+        return result == null ? function.value() : result;
+    }
+
+    @Override
+    public <P> T detectWithIfNone(
+            Predicate2<? super T, ? super P> predicate,
+            P parameter,
+            Function0<? extends T> function)
+    {
+        T result = this.detectWith(predicate, parameter);
+        return result == null ? function.value() : result;
+    }
+
+    @Override
     public T min(Comparator<? super T> comparator)
     {
         return Iterate.min(this, comparator);
@@ -184,13 +207,6 @@ public abstract class AbstractCollectionAdapter<T>
     public <V extends Comparable<? super V>> T maxBy(Function<? super T, ? extends V> function)
     {
         return IterableIterate.maxBy(this, function);
-    }
-
-    @Override
-    public T detectIfNone(Predicate<? super T> predicate, Function0<? extends T> function)
-    {
-        T result = this.detect(predicate);
-        return result == null ? function.value() : result;
     }
 
     @Override
@@ -781,22 +797,6 @@ public abstract class AbstractCollectionAdapter<T>
     public LazyIterable<T> asLazy()
     {
         return LazyIterate.adapt(this);
-    }
-
-    @Override
-    public <P> T detectWith(Predicate2<? super T, ? super P> predicate, P parameter)
-    {
-        return Iterate.detectWith(this.getDelegate(), predicate, parameter);
-    }
-
-    @Override
-    public <P> T detectWithIfNone(
-            Predicate2<? super T, ? super P> predicate,
-            P parameter,
-            Function0<? extends T> function)
-    {
-        T result = this.detectWith(predicate, parameter);
-        return result == null ? function.value() : result;
     }
 
     @Override

@@ -415,6 +415,18 @@ public class UnmodifiableRichIterable<T>
     }
 
     @Override
+    public T detectIfNone(Predicate<? super T> predicate, Function0<? extends T> function)
+    {
+        return this.iterable.detectIfNone(predicate, function);
+    }
+
+    @Override
+    public <P> T detectWithIfNone(Predicate2<? super T, ? super P> predicate, P parameter, Function0<? extends T> function)
+    {
+        return this.iterable.detectWithIfNone(predicate, parameter, function);
+    }
+
+    @Override
     public T min(Comparator<? super T> comparator)
     {
         return this.iterable.min(comparator);
@@ -448,18 +460,6 @@ public class UnmodifiableRichIterable<T>
     public <V extends Comparable<? super V>> T maxBy(Function<? super T, ? extends V> function)
     {
         return this.iterable.maxBy(function);
-    }
-
-    @Override
-    public T detectIfNone(Predicate<? super T> predicate, Function0<? extends T> function)
-    {
-        return this.iterable.detectIfNone(predicate, function);
-    }
-
-    @Override
-    public <P> T detectWithIfNone(Predicate2<? super T, ? super P> predicate, P parameter, Function0<? extends T> function)
-    {
-        return this.iterable.detectWithIfNone(predicate, parameter, function);
     }
 
     @Override

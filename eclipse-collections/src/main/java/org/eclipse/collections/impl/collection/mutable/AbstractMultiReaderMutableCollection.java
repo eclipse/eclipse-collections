@@ -547,6 +547,55 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
     }
 
     @Override
+    public <P> T detectWith(
+            Predicate2<? super T, ? super P> predicate,
+            P parameter)
+    {
+        this.acquireReadLock();
+        try
+        {
+            return this.getDelegate().detectWith(predicate, parameter);
+        }
+        finally
+        {
+            this.unlockReadLock();
+        }
+    }
+
+    @Override
+    public T detectIfNone(
+            Predicate<? super T> predicate,
+            Function0<? extends T> function)
+    {
+        this.acquireReadLock();
+        try
+        {
+            return this.getDelegate().detectIfNone(predicate, function);
+        }
+        finally
+        {
+            this.unlockReadLock();
+        }
+    }
+
+    @Override
+    public <P> T detectWithIfNone(
+            Predicate2<? super T, ? super P> predicate,
+            P parameter,
+            Function0<? extends T> function)
+    {
+        this.acquireReadLock();
+        try
+        {
+            return this.getDelegate().detectWithIfNone(predicate, parameter, function);
+        }
+        finally
+        {
+            this.unlockReadLock();
+        }
+    }
+
+    @Override
     public T min(Comparator<? super T> comparator)
     {
         this.acquireReadLock();
@@ -623,55 +672,6 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         try
         {
             return this.getDelegate().maxBy(function);
-        }
-        finally
-        {
-            this.unlockReadLock();
-        }
-    }
-
-    @Override
-    public T detectIfNone(
-            Predicate<? super T> predicate,
-            Function0<? extends T> function)
-    {
-        this.acquireReadLock();
-        try
-        {
-            return this.getDelegate().detectIfNone(predicate, function);
-        }
-        finally
-        {
-            this.unlockReadLock();
-        }
-    }
-
-    @Override
-    public <P> T detectWith(
-            Predicate2<? super T, ? super P> predicate,
-            P parameter)
-    {
-        this.acquireReadLock();
-        try
-        {
-            return this.getDelegate().detectWith(predicate, parameter);
-        }
-        finally
-        {
-            this.unlockReadLock();
-        }
-    }
-
-    @Override
-    public <P> T detectWithIfNone(
-            Predicate2<? super T, ? super P> predicate,
-            P parameter,
-            Function0<? extends T> function)
-    {
-        this.acquireReadLock();
-        try
-        {
-            return this.getDelegate().detectWithIfNone(predicate, parameter, function);
         }
         finally
         {
@@ -1870,6 +1870,27 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
 
         @Override
+        public <P> T detectWith(Predicate2<? super T, ? super P> predicate, P parameter)
+        {
+            return this.delegate.detectWith(predicate, parameter);
+        }
+
+        @Override
+        public T detectIfNone(Predicate<? super T> predicate, Function0<? extends T> function)
+        {
+            return this.delegate.detectIfNone(predicate, function);
+        }
+
+        @Override
+        public <P> T detectWithIfNone(
+                Predicate2<? super T, ? super P> predicate,
+                P parameter,
+                Function0<? extends T> function)
+        {
+            return this.delegate.detectWithIfNone(predicate, parameter, function);
+        }
+
+        @Override
         public T min(Comparator<? super T> comparator)
         {
             return this.delegate.min(comparator);
@@ -1903,27 +1924,6 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         public <V extends Comparable<? super V>> T maxBy(Function<? super T, ? extends V> function)
         {
             return this.delegate.maxBy(function);
-        }
-
-        @Override
-        public T detectIfNone(Predicate<? super T> predicate, Function0<? extends T> function)
-        {
-            return this.delegate.detectIfNone(predicate, function);
-        }
-
-        @Override
-        public <P> T detectWith(Predicate2<? super T, ? super P> predicate, P parameter)
-        {
-            return this.delegate.detectWith(predicate, parameter);
-        }
-
-        @Override
-        public <P> T detectWithIfNone(
-                Predicate2<? super T, ? super P> predicate,
-                P parameter,
-                Function0<? extends T> function)
-        {
-            return this.delegate.detectWithIfNone(predicate, parameter, function);
         }
 
         @Override
