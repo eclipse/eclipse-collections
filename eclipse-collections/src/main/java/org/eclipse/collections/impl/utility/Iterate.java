@@ -22,6 +22,10 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.RandomAccess;
 import java.util.SortedSet;
+import java.util.function.BiConsumer;
+import java.util.function.Supplier;
+import java.util.stream.Collector;
+import java.util.stream.Stream;
 
 import org.eclipse.collections.api.InternalIterable;
 import org.eclipse.collections.api.RichIterable;
@@ -135,7 +139,7 @@ public final class Iterate
         }
         else if (iterable != null)
         {
-            IterableIterate.forEach(iterable, procedure);
+            iterable.forEach(procedure);
         }
         else
         {
@@ -2421,6 +2425,40 @@ public final class Iterate
             return IterableIterate.detectIndexWith(iterable, predicate, parameter);
         }
         throw new IllegalArgumentException("Cannot perform detectIndexWith on null");
+    }
+
+    /**
+     * This method produces the equivalent result as {@link Stream#collect(Collector)}.
+     *
+     * @since 8.0
+     */
+    public static <T, A, R> R reduceInPlace(Iterable<T> iterable, Collector<? super T, A, R> collector)
+    {
+        if (iterable instanceof RichIterable)
+        {
+            return ((RichIterable<T>) iterable).reduceInPlace(collector);
+        }
+        A mutableResult = collector.supplier().get();
+        BiConsumer<A, ? super T> accumulator = collector.accumulator();
+        Iterate.forEach(iterable, each -> accumulator.accept(mutableResult, each));
+        return collector.finisher().apply(mutableResult);
+    }
+
+    /**
+     * This method produces the equivalent result as {@link Stream#collect(Supplier, BiConsumer, BiConsumer)}.
+     * The combiner used in collect is unnecessary in the serial case, so is not included in the API.
+     *
+     * @since 8.0
+     */
+    public static <T, R> R reduceInPlace(Iterable<T> iterable, Supplier<R> supplier, BiConsumer<R, ? super T> accumulator)
+    {
+        if (iterable instanceof RichIterable)
+        {
+            return ((RichIterable<T>) iterable).reduceInPlace(supplier, accumulator);
+        }
+        R result = supplier.get();
+        Iterate.forEach(iterable, each -> accumulator.accept(result, each));
+        return result;
     }
 
     /**
