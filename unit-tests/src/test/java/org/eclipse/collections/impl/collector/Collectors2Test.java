@@ -13,8 +13,10 @@ package org.eclipse.collections.impl.collector;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
+import org.eclipse.collections.api.collection.primitive.MutableIntCollection;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.list.primitive.BooleanList;
 import org.eclipse.collections.api.list.primitive.ByteList;
@@ -24,6 +26,9 @@ import org.eclipse.collections.api.list.primitive.FloatList;
 import org.eclipse.collections.api.list.primitive.IntList;
 import org.eclipse.collections.api.list.primitive.LongList;
 import org.eclipse.collections.api.list.primitive.ShortList;
+import org.eclipse.collections.api.map.primitive.MutableObjectLongMap;
+import org.eclipse.collections.api.multimap.bag.MutableBagMultimap;
+import org.eclipse.collections.api.partition.PartitionMutableCollection;
 import org.eclipse.collections.api.partition.bag.PartitionMutableBag;
 import org.eclipse.collections.api.partition.list.PartitionMutableList;
 import org.eclipse.collections.api.partition.set.PartitionMutableSet;
@@ -40,6 +45,7 @@ import org.eclipse.collections.impl.factory.primitive.ByteLists;
 import org.eclipse.collections.impl.factory.primitive.CharLists;
 import org.eclipse.collections.impl.factory.primitive.DoubleLists;
 import org.eclipse.collections.impl.factory.primitive.FloatLists;
+import org.eclipse.collections.impl.factory.primitive.IntBags;
 import org.eclipse.collections.impl.factory.primitive.IntLists;
 import org.eclipse.collections.impl.factory.primitive.LongLists;
 import org.eclipse.collections.impl.factory.primitive.ShortLists;
@@ -52,7 +58,7 @@ import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class Collectors2Test
+public final class Collectors2Test
 {
     public static final Interval SMALL_INTERVAL = Interval.oneTo(5);
     public static final Interval LARGE_INTERVAL = Interval.oneTo(20000);
@@ -424,6 +430,65 @@ public class Collectors2Test
         Assert.assertEquals(
                 LARGE_INTERVAL.reduceInPlace(Collectors2.toBagMultimap(Object::toString, Object::toString)),
                 this.bigData.parallelStream().collect(Collectors2.toBagMultimap(Object::toString, Object::toString)));
+    }
+
+    @Test
+    public void groupingByToBagMultimap()
+    {
+        Map<Integer, MutableBagMultimap<Integer, Integer>> expected = Interval.oneTo(100).stream().collect(
+                Collectors.groupingBy(each -> each % 2,
+                        Collectors2.toBagMultimap(each -> each % 5))
+        );
+        Map<Integer, MutableBagMultimap<Integer, Integer>> actual = Interval.oneTo(100).reduceInPlace(
+                Collectors.groupingBy(each -> each % 2,
+                        Collectors2.toBagMultimap(each -> each % 5))
+        );
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void groupingByPartition()
+    {
+        Map<Integer, PartitionMutableCollection<Integer>> expected = Interval.oneTo(100).stream().collect(
+                Collectors.groupingBy(each -> each % 2,
+                        Collectors2.partition(each -> each % 5 == 0, PartitionHashBag::new))
+        );
+        Map<Integer, PartitionMutableCollection<Integer>> actual = Interval.oneTo(100).reduceInPlace(
+                Collectors.groupingBy(each -> each % 2,
+                        Collectors2.partition(each -> each % 5 == 0, PartitionHashBag::new))
+        );
+        Assert.assertEquals(expected.get(0).getSelected(), actual.get(0).getSelected());
+        Assert.assertEquals(expected.get(0).getRejected(), actual.get(0).getRejected());
+    }
+
+    @Test
+    public void groupingByChunk()
+    {
+        Map<Integer, MutableList<MutableList<Integer>>> expected = Interval.oneTo(100).stream().collect(
+                Collectors.groupingBy(each -> each % 2, Collectors2.chunk(10)));
+        Map<Integer, MutableList<MutableList<Integer>>> actual = Interval.oneTo(100).reduceInPlace(
+                Collectors.groupingBy(each -> each % 2, Collectors2.chunk(10)));
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void groupingByCollectInt()
+    {
+        Map<Integer, MutableIntCollection> expected = Interval.oneTo(100).stream().collect(
+                Collectors.groupingBy(each -> each % 2, Collectors2.collectInt(Integer::intValue, IntBags.mutable::empty)));
+        Map<Integer, MutableIntCollection> actual = Interval.oneTo(100).reduceInPlace(
+                Collectors.groupingBy(each -> each % 2, Collectors2.collectInt(Integer::intValue, IntBags.mutable::empty)));
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void groupingBySumByInt()
+    {
+        Map<Integer, MutableObjectLongMap<Integer>> expected = Interval.oneTo(100).stream().collect(
+                Collectors.groupingBy(each -> each % 2, Collectors2.sumByInt(each -> each % 5, Integer::intValue)));
+        Map<Integer, MutableObjectLongMap<Integer>> actual = Interval.oneTo(100).reduceInPlace(
+                Collectors.groupingBy(each -> each % 2, Collectors2.sumByInt(each -> each % 5, Integer::intValue)));
+        Assert.assertEquals(expected, actual);
     }
 
     @Test
