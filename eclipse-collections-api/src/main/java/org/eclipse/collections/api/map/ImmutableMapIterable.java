@@ -12,19 +12,17 @@ package org.eclipse.collections.api.map;
 
 import java.util.Map;
 
-import org.eclipse.collections.api.block.function.Function;
-import org.eclipse.collections.api.block.function.Function0;
+import org.eclipse.collections.api.ImmutableIterable;
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
-import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.collection.ImmutableCollection;
 import org.eclipse.collections.api.multimap.ImmutableMultimap;
 import org.eclipse.collections.api.partition.PartitionImmutableCollection;
 import org.eclipse.collections.api.tuple.Pair;
 
-public interface ImmutableMapIterable<K, V> extends MapIterable<K, V>
+public interface ImmutableMapIterable<K, V> extends MapIterable<K, V>, ImmutableIterable<V>
 {
     Map<K, V> castToMap();
 
@@ -81,23 +79,8 @@ public interface ImmutableMapIterable<K, V> extends MapIterable<K, V>
     <S> ImmutableCollection<S> selectInstancesOf(Class<S> clazz);
 
     @Override
-    <V1> ImmutableMultimap<V1, V> groupBy(Function<? super V, ? extends V1> function);
-
-    @Override
-    <V1> ImmutableMultimap<V1, V> groupByEach(Function<? super V, ? extends Iterable<V1>> function);
-
-    @Override
-    <V1> ImmutableMapIterable<V1, V> groupByUniqueKey(Function<? super V, ? extends V1> function);
-
-    @Override
     <S> ImmutableCollection<Pair<V, S>> zip(Iterable<S> that);
 
     @Override
     ImmutableCollection<Pair<V, Integer>> zipWithIndex();
-
-    @Override
-    <KK, VV> ImmutableMapIterable<KK, VV> aggregateInPlaceBy(Function<? super V, ? extends KK> groupBy, Function0<? extends VV> zeroValueFactory, Procedure2<? super VV, ? super V> mutatingAggregator);
-
-    @Override
-    <KK, VV> ImmutableMapIterable<KK, VV> aggregateBy(Function<? super V, ? extends KK> groupBy, Function0<? extends VV> zeroValueFactory, Function2<? super VV, ? super V, ? extends VV> nonMutatingAggregator);
 }

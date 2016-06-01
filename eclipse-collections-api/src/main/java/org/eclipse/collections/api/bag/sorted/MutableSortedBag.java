@@ -12,7 +12,6 @@ package org.eclipse.collections.api.bag.sorted;
 
 import org.eclipse.collections.api.bag.MutableBagIterable;
 import org.eclipse.collections.api.block.function.Function;
-import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.function.primitive.BooleanFunction;
 import org.eclipse.collections.api.block.function.primitive.ByteFunction;
@@ -26,7 +25,6 @@ import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.predicate.primitive.IntPredicate;
 import org.eclipse.collections.api.block.procedure.Procedure;
-import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.list.primitive.MutableBooleanList;
 import org.eclipse.collections.api.list.primitive.MutableByteList;
@@ -36,7 +34,6 @@ import org.eclipse.collections.api.list.primitive.MutableFloatList;
 import org.eclipse.collections.api.list.primitive.MutableIntList;
 import org.eclipse.collections.api.list.primitive.MutableLongList;
 import org.eclipse.collections.api.list.primitive.MutableShortList;
-import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.sorted.MutableSortedMap;
 import org.eclipse.collections.api.multimap.sortedbag.MutableSortedBagMultimap;
 import org.eclipse.collections.api.partition.bag.sorted.PartitionMutableSortedBag;
@@ -162,22 +159,12 @@ public interface MutableSortedBag<T>
     <V> MutableSortedBagMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function);
 
     /**
-     * Can return an MutableMap that's backed by a LinkedHashMap.
+     * TODO: aggregateBy can return an MutableMap that's backed by a LinkedHashMap.
      */
-    @Override
-    <K, V> MutableMap<K, V> aggregateBy(
-            Function<? super T, ? extends K> groupBy,
-            Function0<? extends V> zeroValueFactory,
-            Function2<? super V, ? super T, ? extends V> nonMutatingAggregator);
 
     /**
-     * Can return an MutableMap that's backed by a LinkedHashMap.
+     * TODO: aggregateInPlaceBy can return an MutableMap that's backed by a LinkedHashMap.
      */
-    @Override
-    <K, V> MutableMap<K, V> aggregateInPlaceBy(
-            Function<? super T, ? extends K> groupBy,
-            Function0<? extends V> zeroValueFactory,
-            Procedure2<? super V, ? super T> mutatingAggregator);
 
     @Override
     <S> MutableList<Pair<T, S>> zip(Iterable<S> that);

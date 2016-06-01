@@ -149,6 +149,8 @@ public interface MutableOrderedMap<K, V> extends OrderedMap<K, V>, MutableMapIte
     @Override
     <V1> MutableListMultimap<V1, V> groupByEach(Function<? super V, ? extends Iterable<V1>> function);
 
+    /* TODO
     @Override
     <V1> MutableOrderedMap<V1, V> groupByUniqueKey(Function<? super V, ? extends V1> function);
+    */
 }

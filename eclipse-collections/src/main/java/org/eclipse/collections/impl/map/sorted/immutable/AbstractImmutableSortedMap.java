@@ -17,7 +17,6 @@ import java.util.SortedMap;
 import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.block.function.Function;
-import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.function.primitive.BooleanFunction;
 import org.eclipse.collections.api.block.function.primitive.ByteFunction;
@@ -30,7 +29,6 @@ import org.eclipse.collections.api.block.function.primitive.ShortFunction;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
-import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
 import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.primitive.ImmutableBooleanList;
@@ -43,10 +41,6 @@ import org.eclipse.collections.api.list.primitive.ImmutableLongList;
 import org.eclipse.collections.api.list.primitive.ImmutableShortList;
 import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.api.map.MutableMap;
-import org.eclipse.collections.api.map.primitive.ImmutableObjectDoubleMap;
-import org.eclipse.collections.api.map.primitive.ImmutableObjectLongMap;
-import org.eclipse.collections.api.map.primitive.MutableObjectDoubleMap;
-import org.eclipse.collections.api.map.primitive.MutableObjectLongMap;
 import org.eclipse.collections.api.map.sorted.ImmutableSortedMap;
 import org.eclipse.collections.api.map.sorted.MutableSortedMap;
 import org.eclipse.collections.api.multimap.list.ImmutableListMultimap;
@@ -58,9 +52,6 @@ import org.eclipse.collections.api.stack.MutableStack;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.block.factory.Functions;
 import org.eclipse.collections.impl.block.factory.Predicates;
-import org.eclipse.collections.impl.block.factory.PrimitiveFunctions;
-import org.eclipse.collections.impl.block.procedure.MutatingAggregationProcedure;
-import org.eclipse.collections.impl.block.procedure.NonMutatingAggregationProcedure;
 import org.eclipse.collections.impl.block.procedure.PartitionPredicate2Procedure;
 import org.eclipse.collections.impl.block.procedure.PartitionProcedure;
 import org.eclipse.collections.impl.block.procedure.SelectInstancesOfProcedure;
@@ -72,6 +63,7 @@ import org.eclipse.collections.impl.block.procedure.primitive.CollectFloatProced
 import org.eclipse.collections.impl.block.procedure.primitive.CollectIntProcedure;
 import org.eclipse.collections.impl.block.procedure.primitive.CollectLongProcedure;
 import org.eclipse.collections.impl.block.procedure.primitive.CollectShortProcedure;
+import org.eclipse.collections.impl.collection.immutable.AbstractImmutableIterable;
 import org.eclipse.collections.impl.factory.SortedMaps;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.list.mutable.primitive.BooleanArrayList;
@@ -84,8 +76,6 @@ import org.eclipse.collections.impl.list.mutable.primitive.LongArrayList;
 import org.eclipse.collections.impl.list.mutable.primitive.ShortArrayList;
 import org.eclipse.collections.impl.map.AbstractMapIterable;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
-import org.eclipse.collections.impl.map.mutable.primitive.ObjectDoubleHashMap;
-import org.eclipse.collections.impl.map.mutable.primitive.ObjectLongHashMap;
 import org.eclipse.collections.impl.map.sorted.mutable.TreeSortedMap;
 import org.eclipse.collections.impl.multimap.list.FastListMultimap;
 import org.eclipse.collections.impl.partition.list.PartitionFastList;
@@ -94,7 +84,7 @@ import org.eclipse.collections.impl.utility.MapIterate;
 @Immutable
 public abstract class AbstractImmutableSortedMap<K, V>
         extends AbstractMapIterable<K, V>
-        implements ImmutableSortedMap<K, V>, SortedMap<K, V>
+        implements ImmutableSortedMap<K, V>, SortedMap<K, V>, AbstractImmutableIterable<V>
 {
     @Override
     public SortedMap<K, V> castToMap()
@@ -442,56 +432,6 @@ public abstract class AbstractImmutableSortedMap<K, V>
     public <V1> ImmutableMap<V1, V> groupByUniqueKey(Function<? super V, ? extends V1> function)
     {
         return this.groupByUniqueKey(function, UnifiedMap.<V1, V>newMap()).toImmutable();
-    }
-
-    @Override
-    public <K2, V2> ImmutableMap<K2, V2> aggregateInPlaceBy(
-            Function<? super V, ? extends K2> groupBy,
-            Function0<? extends V2> zeroValueFactory,
-            Procedure2<? super V2, ? super V> mutatingAggregator)
-    {
-        MutableMap<K2, V2> map = UnifiedMap.newMap();
-        this.forEach(new MutatingAggregationProcedure<>(map, groupBy, zeroValueFactory, mutatingAggregator));
-        return map.toImmutable();
-    }
-
-    @Override
-    public <K2, V2> ImmutableMap<K2, V2> aggregateBy(
-            Function<? super V, ? extends K2> groupBy,
-            Function0<? extends V2> zeroValueFactory,
-            Function2<? super V2, ? super V, ? extends V2> nonMutatingAggregator)
-    {
-        MutableMap<K2, V2> map = UnifiedMap.newMap();
-        this.forEach(new NonMutatingAggregationProcedure<>(map, groupBy, zeroValueFactory, nonMutatingAggregator));
-        return map.toImmutable();
-    }
-
-    @Override
-    public <V1> ImmutableObjectLongMap<V1> sumByInt(Function<? super V, ? extends V1> groupBy, IntFunction<? super V> function)
-    {
-        MutableObjectLongMap<V1> result = ObjectLongHashMap.newMap();
-        return this.injectInto(result, PrimitiveFunctions.sumByIntFunction(groupBy, function)).toImmutable();
-    }
-
-    @Override
-    public <V1> ImmutableObjectDoubleMap<V1> sumByFloat(Function<? super V, ? extends V1> groupBy, FloatFunction<? super V> function)
-    {
-        MutableObjectDoubleMap<V1> result = ObjectDoubleHashMap.newMap();
-        return this.injectInto(result, PrimitiveFunctions.sumByFloatFunction(groupBy, function)).toImmutable();
-    }
-
-    @Override
-    public <V1> ImmutableObjectLongMap<V1> sumByLong(Function<? super V, ? extends V1> groupBy, LongFunction<? super V> function)
-    {
-        MutableObjectLongMap<V1> result = ObjectLongHashMap.newMap();
-        return this.injectInto(result, PrimitiveFunctions.sumByLongFunction(groupBy, function)).toImmutable();
-    }
-
-    @Override
-    public <V1> ImmutableObjectDoubleMap<V1> sumByDouble(Function<? super V, ? extends V1> groupBy, DoubleFunction<? super V> function)
-    {
-        MutableObjectDoubleMap<V1> result = ObjectDoubleHashMap.newMap();
-        return this.injectInto(result, PrimitiveFunctions.sumByDoubleFunction(groupBy, function)).toImmutable();
     }
 
     @Override

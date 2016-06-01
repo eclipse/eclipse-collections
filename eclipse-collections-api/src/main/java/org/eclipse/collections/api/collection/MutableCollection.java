@@ -12,6 +12,7 @@ package org.eclipse.collections.api.collection;
 
 import java.util.Collection;
 
+import org.eclipse.collections.api.MutableIterable;
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function0;
@@ -39,9 +40,6 @@ import org.eclipse.collections.api.collection.primitive.MutableLongCollection;
 import org.eclipse.collections.api.collection.primitive.MutableShortCollection;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MutableMap;
-import org.eclipse.collections.api.map.primitive.MutableObjectDoubleMap;
-import org.eclipse.collections.api.map.primitive.MutableObjectLongMap;
-import org.eclipse.collections.api.multimap.MutableMultimap;
 import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.partition.PartitionMutableCollection;
 import org.eclipse.collections.api.tuple.Pair;
@@ -57,7 +55,7 @@ import org.eclipse.collections.api.tuple.Twin;
  * There are several extensions to MutableCollection, including MutableList, MutableSet, and MutableBag.
  */
 public interface MutableCollection<T>
-        extends Collection<T>, RichIterable<T>
+        extends Collection<T>, MutableIterable<T>
 {
     /**
      * This method allows mutable and fixed size collections the ability to add elements to their existing elements.
@@ -332,6 +330,7 @@ public interface MutableCollection<T>
      * @return an unmodifiable view of this collection.
      * @since 1.0
      */
+    @Override
     MutableCollection<T> asUnmodifiable();
 
     /**
@@ -376,6 +375,7 @@ public interface MutableCollection<T>
      * @return a synchronized view of this collection.
      * @since 1.0
      */
+    @Override
     MutableCollection<T> asSynchronized();
 
     /**
@@ -383,25 +383,8 @@ public interface MutableCollection<T>
      *
      * @since 1.0
      */
+    @Override
     ImmutableCollection<T> toImmutable();
-
-    @Override
-    <V> MutableObjectLongMap<V> sumByInt(Function<? super T, ? extends V> groupBy, IntFunction<? super T> function);
-
-    @Override
-    <V> MutableObjectDoubleMap<V> sumByFloat(Function<? super T, ? extends V> groupBy, FloatFunction<? super T> function);
-
-    @Override
-    <V> MutableObjectLongMap<V> sumByLong(Function<? super T, ? extends V> groupBy, LongFunction<? super T> function);
-
-    @Override
-    <V> MutableObjectDoubleMap<V> sumByDouble(Function<? super T, ? extends V> groupBy, DoubleFunction<? super T> function);
-
-    @Override
-    <V> MutableMultimap<V, T> groupBy(Function<? super T, ? extends V> function);
-
-    @Override
-    <V> MutableMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function);
 
     @Override
     <V> MutableMap<V, T> groupByUniqueKey(Function<? super T, ? extends V> function);

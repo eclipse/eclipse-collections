@@ -21,7 +21,6 @@ import org.eclipse.collections.api.bag.primitive.ImmutableIntBag;
 import org.eclipse.collections.api.bag.primitive.ImmutableLongBag;
 import org.eclipse.collections.api.bag.primitive.ImmutableShortBag;
 import org.eclipse.collections.api.block.function.Function;
-import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.function.primitive.BooleanFunction;
 import org.eclipse.collections.api.block.function.primitive.ByteFunction;
@@ -34,7 +33,6 @@ import org.eclipse.collections.api.block.function.primitive.ShortFunction;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
-import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.multimap.bag.ImmutableBagMultimap;
 import org.eclipse.collections.api.multimap.set.ImmutableSetMultimap;
 import org.eclipse.collections.api.ordered.OrderedIterable;
@@ -164,18 +162,6 @@ public interface ImmutableMap<K, V>
 
     @Override
     <V1> ImmutableMap<V1, V> groupByUniqueKey(Function<? super V, ? extends V1> function);
-
-    @Override
-    <K2, V2> ImmutableMap<K2, V2> aggregateInPlaceBy(
-            Function<? super V, ? extends K2> groupBy,
-            Function0<? extends V2> zeroValueFactory,
-            Procedure2<? super V2, ? super V> mutatingAggregator);
-
-    @Override
-    <K2, V2> ImmutableMap<K2, V2> aggregateBy(
-            Function<? super V, ? extends K2> groupBy,
-            Function0<? extends V2> zeroValueFactory,
-            Function2<? super V2, ? super V, ? extends V2> nonMutatingAggregator);
 
     @Override
     ImmutableMap<V, K> flipUniqueValues();

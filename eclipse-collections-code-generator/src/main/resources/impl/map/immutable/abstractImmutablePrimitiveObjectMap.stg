@@ -23,22 +23,12 @@ import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
 
-import org.eclipse.collections.api.block.function.Function;
-import org.eclipse.collections.api.block.function.primitive.DoubleFunction;
-import org.eclipse.collections.api.block.function.primitive.FloatFunction;
-import org.eclipse.collections.api.block.function.primitive.IntFunction;
-import org.eclipse.collections.api.block.function.primitive.LongFunction;
 import org.eclipse.collections.api.map.primitive.Immutable<name>ObjectMap;
-import org.eclipse.collections.api.map.primitive.ImmutableObjectDoubleMap;
-import org.eclipse.collections.api.map.primitive.ImmutableObjectLongMap;
 import org.eclipse.collections.api.map.primitive.Mutable<name>ObjectMap;
-import org.eclipse.collections.api.map.primitive.MutableObjectDoubleMap;
-import org.eclipse.collections.api.map.primitive.MutableObjectLongMap;
 import org.eclipse.collections.api.map.primitive.<name>ObjectMap;
-import org.eclipse.collections.impl.block.factory.PrimitiveFunctions;
+import org.eclipse.collections.impl.AbstractRichIterable;
 import org.eclipse.collections.impl.block.procedure.checked.primitive.Checked<name>ObjectProcedure;
-import org.eclipse.collections.impl.factory.primitive.ObjectDoubleMaps;
-import org.eclipse.collections.impl.factory.primitive.ObjectLongMaps;
+import org.eclipse.collections.impl.collection.immutable.AbstractImmutableIterable;
 import org.eclipse.collections.impl.map.mutable.primitive.<name>ObjectHashMap;
 
 /**
@@ -46,7 +36,9 @@ import org.eclipse.collections.impl.map.mutable.primitive.<name>ObjectHashMap;
  *
  * @since 4.0.
  */
-public abstract class AbstractImmutable<name>ObjectMap\<V> implements Immutable<name>ObjectMap\<V>
+public abstract class AbstractImmutable<name>ObjectMap\<V>
+        extends AbstractRichIterable\<V>
+        implements AbstractImmutableIterable\<V>, Immutable<name>ObjectMap\<V>
 {
     protected static class Immutable<name>ObjectMapSerializationProxy\<V> implements Externalizable
     {
@@ -107,30 +99,6 @@ public abstract class AbstractImmutable<name>ObjectMap\<V> implements Immutable<
         {
             return this.map.toImmutable();
         }
-    }
-
-    public \<V1> ImmutableObjectLongMap\<V1> sumByInt(Function\<? super V, ? extends V1> groupBy, IntFunction\<? super V> function)
-    {
-        MutableObjectLongMap\<V1> result = ObjectLongMaps.mutable.empty();
-        return this.injectInto(result, PrimitiveFunctions.sumByIntFunction(groupBy, function)).toImmutable();
-    }
-
-    public \<V1> ImmutableObjectDoubleMap\<V1> sumByFloat(Function\<? super V, ? extends V1> groupBy, FloatFunction\<? super V> function)
-    {
-        MutableObjectDoubleMap\<V1> result = ObjectDoubleMaps.mutable.empty();
-        return this.injectInto(result, PrimitiveFunctions.sumByFloatFunction(groupBy, function)).toImmutable();
-    }
-
-    public \<V1> ImmutableObjectLongMap\<V1> sumByLong(Function\<? super V, ? extends V1> groupBy, LongFunction\<? super V> function)
-    {
-        MutableObjectLongMap\<V1> result = ObjectLongMaps.mutable.empty();
-        return this.injectInto(result, PrimitiveFunctions.sumByLongFunction(groupBy, function)).toImmutable();
-    }
-
-    public \<V1> ImmutableObjectDoubleMap\<V1> sumByDouble(Function\<? super V, ? extends V1> groupBy, DoubleFunction\<? super V> function)
-    {
-        MutableObjectDoubleMap\<V1> result = ObjectDoubleMaps.mutable.empty();
-        return this.injectInto(result, PrimitiveFunctions.sumByDoubleFunction(groupBy, function)).toImmutable();
     }
 }
 

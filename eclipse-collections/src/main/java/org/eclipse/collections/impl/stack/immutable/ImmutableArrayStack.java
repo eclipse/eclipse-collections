@@ -58,8 +58,6 @@ import org.eclipse.collections.api.list.ListIterable;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.api.map.MutableMap;
-import org.eclipse.collections.api.map.primitive.ImmutableObjectDoubleMap;
-import org.eclipse.collections.api.map.primitive.ImmutableObjectLongMap;
 import org.eclipse.collections.api.map.sorted.MutableSortedMap;
 import org.eclipse.collections.api.multimap.MutableMultimap;
 import org.eclipse.collections.api.multimap.list.ImmutableListMultimap;
@@ -81,9 +79,8 @@ import org.eclipse.collections.api.stack.primitive.ImmutableShortStack;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.block.factory.Predicates;
-import org.eclipse.collections.impl.block.procedure.MutatingAggregationProcedure;
-import org.eclipse.collections.impl.block.procedure.NonMutatingAggregationProcedure;
 import org.eclipse.collections.impl.block.procedure.checked.CheckedProcedure;
+import org.eclipse.collections.impl.collection.immutable.AbstractImmutableIterable;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
@@ -105,7 +102,7 @@ import org.eclipse.collections.impl.utility.LazyIterate;
  * The immutable equivalent of ArrayStack. Wraps a FastList.
  */
 @Immutable
-final class ImmutableArrayStack<T> implements ImmutableStack<T>, Serializable
+final class ImmutableArrayStack<T> implements ImmutableStack<T>, AbstractImmutableIterable<T>, Serializable
 {
     private static final long serialVersionUID = 1L;
     private final FastList<T> delegate;
@@ -780,30 +777,6 @@ final class ImmutableArrayStack<T> implements ImmutableStack<T>, Serializable
     }
 
     @Override
-    public <V> ImmutableObjectLongMap<V> sumByInt(Function<? super T, ? extends V> groupBy, IntFunction<? super T> function)
-    {
-        return this.delegate.asReversed().sumByInt(groupBy, function).toImmutable();
-    }
-
-    @Override
-    public <V> ImmutableObjectDoubleMap<V> sumByFloat(Function<? super T, ? extends V> groupBy, FloatFunction<? super T> function)
-    {
-        return this.delegate.asReversed().sumByFloat(groupBy, function).toImmutable();
-    }
-
-    @Override
-    public <V> ImmutableObjectLongMap<V> sumByLong(Function<? super T, ? extends V> groupBy, LongFunction<? super T> function)
-    {
-        return this.delegate.asReversed().sumByLong(groupBy, function).toImmutable();
-    }
-
-    @Override
-    public <V> ImmutableObjectDoubleMap<V> sumByDouble(Function<? super T, ? extends V> groupBy, DoubleFunction<? super T> function)
-    {
-        return this.delegate.asReversed().sumByDouble(groupBy, function).toImmutable();
-    }
-
-    @Override
     public String makeString()
     {
         return this.delegate.asReversed().makeString();
@@ -912,22 +885,6 @@ final class ImmutableArrayStack<T> implements ImmutableStack<T>, Serializable
     public RichIterable<RichIterable<T>> chunk(int size)
     {
         return this.delegate.asReversed().chunk(size);
-    }
-
-    @Override
-    public <K, V> ImmutableMap<K, V> aggregateInPlaceBy(Function<? super T, ? extends K> groupBy, Function0<? extends V> zeroValueFactory, Procedure2<? super V, ? super T> mutatingAggregator)
-    {
-        MutableMap<K, V> map = UnifiedMap.newMap();
-        this.forEach(new MutatingAggregationProcedure<>(map, groupBy, zeroValueFactory, mutatingAggregator));
-        return map.toImmutable();
-    }
-
-    @Override
-    public <K, V> ImmutableMap<K, V> aggregateBy(Function<? super T, ? extends K> groupBy, Function0<? extends V> zeroValueFactory, Function2<? super V, ? super T, ? extends V> nonMutatingAggregator)
-    {
-        MutableMap<K, V> map = UnifiedMap.newMap();
-        this.forEach(new NonMutatingAggregationProcedure<>(map, groupBy, zeroValueFactory, nonMutatingAggregator));
-        return map.toImmutable();
     }
 
     @Override

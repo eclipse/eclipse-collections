@@ -11,7 +11,7 @@
 package org.eclipse.collections.api.collection;
 
 import net.jcip.annotations.Immutable;
-import org.eclipse.collections.api.RichIterable;
+import org.eclipse.collections.api.ImmutableIterable;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.block.function.Function2;
@@ -36,9 +36,6 @@ import org.eclipse.collections.api.collection.primitive.ImmutableIntCollection;
 import org.eclipse.collections.api.collection.primitive.ImmutableLongCollection;
 import org.eclipse.collections.api.collection.primitive.ImmutableShortCollection;
 import org.eclipse.collections.api.map.ImmutableMap;
-import org.eclipse.collections.api.map.primitive.ImmutableObjectDoubleMap;
-import org.eclipse.collections.api.map.primitive.ImmutableObjectLongMap;
-import org.eclipse.collections.api.multimap.ImmutableMultimap;
 import org.eclipse.collections.api.partition.PartitionImmutableCollection;
 import org.eclipse.collections.api.tuple.Pair;
 
@@ -47,7 +44,7 @@ import org.eclipse.collections.api.tuple.Pair;
  */
 @Immutable
 public interface ImmutableCollection<T>
-        extends RichIterable<T>
+        extends ImmutableIterable<T>
 {
     ImmutableCollection<T> newWith(T element);
 
@@ -116,24 +113,6 @@ public interface ImmutableCollection<T>
 
     @Override
     <V> ImmutableCollection<V> flatCollect(Function<? super T, ? extends Iterable<V>> function);
-
-    @Override
-    <V> ImmutableObjectLongMap<V> sumByInt(Function<? super T, ? extends V> groupBy, IntFunction<? super T> function);
-
-    @Override
-    <V> ImmutableObjectDoubleMap<V> sumByFloat(Function<? super T, ? extends V> groupBy, FloatFunction<? super T> function);
-
-    @Override
-    <V> ImmutableObjectLongMap<V> sumByLong(Function<? super T, ? extends V> groupBy, LongFunction<? super T> function);
-
-    @Override
-    <V> ImmutableObjectDoubleMap<V> sumByDouble(Function<? super T, ? extends V> groupBy, DoubleFunction<? super T> function);
-
-    @Override
-    <V> ImmutableMultimap<V, T> groupBy(Function<? super T, ? extends V> function);
-
-    @Override
-    <V> ImmutableMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function);
 
     @Override
     <V> ImmutableMap<V, T> groupByUniqueKey(Function<? super T, ? extends V> function);

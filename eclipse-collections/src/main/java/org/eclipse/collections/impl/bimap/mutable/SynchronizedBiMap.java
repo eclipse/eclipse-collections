@@ -21,6 +21,7 @@ import org.eclipse.collections.api.DoubleIterable;
 import org.eclipse.collections.api.FloatIterable;
 import org.eclipse.collections.api.IntIterable;
 import org.eclipse.collections.api.LongIterable;
+import org.eclipse.collections.api.MutableIterable;
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.ShortIterable;
 import org.eclipse.collections.api.bimap.ImmutableBiMap;
@@ -222,7 +223,7 @@ public class SynchronizedBiMap<K, V> extends AbstractSynchronizedMapIterable<K, 
     }
 
     @Override
-    public <V1> RichIterable<V1> collect(Function<? super V, ? extends V1> function)
+    public <V1> MutableIterable<V1> collect(Function<? super V, ? extends V1> function)
     {
         synchronized (this.lock)
         {
@@ -303,7 +304,7 @@ public class SynchronizedBiMap<K, V> extends AbstractSynchronizedMapIterable<K, 
     }
 
     @Override
-    public <P, V1> RichIterable<V1> collectWith(Function2<? super V, ? super P, ? extends V1> function, P parameter)
+    public <P, V1> MutableIterable<V1> collectWith(Function2<? super V, ? super P, ? extends V1> function, P parameter)
     {
         synchronized (this.lock)
         {
@@ -312,7 +313,7 @@ public class SynchronizedBiMap<K, V> extends AbstractSynchronizedMapIterable<K, 
     }
 
     @Override
-    public <V1> RichIterable<V1> collectIf(Predicate<? super V> predicate, Function<? super V, ? extends V1> function)
+    public <V1> MutableIterable<V1> collectIf(Predicate<? super V> predicate, Function<? super V, ? extends V1> function)
     {
         synchronized (this.lock)
         {
@@ -321,7 +322,7 @@ public class SynchronizedBiMap<K, V> extends AbstractSynchronizedMapIterable<K, 
     }
 
     @Override
-    public <V1> RichIterable<V1> flatCollect(Function<? super V, ? extends Iterable<V1>> function)
+    public <V1> MutableIterable<V1> flatCollect(Function<? super V, ? extends Iterable<V1>> function)
     {
         synchronized (this.lock)
         {

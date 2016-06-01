@@ -12,8 +12,8 @@ package org.eclipse.collections.api.stack;
 
 import java.util.Collection;
 
+import org.eclipse.collections.api.MutableIterable;
 import org.eclipse.collections.api.block.function.Function;
-import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.function.primitive.BooleanFunction;
 import org.eclipse.collections.api.block.function.primitive.ByteFunction;
@@ -27,11 +27,8 @@ import org.eclipse.collections.api.block.function.primitive.ShortFunction;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
-import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.list.ListIterable;
 import org.eclipse.collections.api.map.MutableMap;
-import org.eclipse.collections.api.map.primitive.MutableObjectDoubleMap;
-import org.eclipse.collections.api.map.primitive.MutableObjectLongMap;
 import org.eclipse.collections.api.multimap.list.MutableListMultimap;
 import org.eclipse.collections.api.partition.stack.PartitionMutableStack;
 import org.eclipse.collections.api.stack.primitive.MutableBooleanStack;
@@ -44,7 +41,7 @@ import org.eclipse.collections.api.stack.primitive.MutableLongStack;
 import org.eclipse.collections.api.stack.primitive.MutableShortStack;
 import org.eclipse.collections.api.tuple.Pair;
 
-public interface MutableStack<T> extends StackIterable<T>
+public interface MutableStack<T> extends StackIterable<T>, MutableIterable<T>
 {
     /**
      * Adds an item to the top of the stack.
@@ -87,8 +84,10 @@ public interface MutableStack<T> extends StackIterable<T>
     @Override
     MutableStack<T> distinct();
 
+    @Override
     MutableStack<T> asUnmodifiable();
 
+    @Override
     MutableStack<T> asSynchronized();
 
     @Override
@@ -155,18 +154,6 @@ public interface MutableStack<T> extends StackIterable<T>
     <V> MutableStack<V> flatCollect(Function<? super T, ? extends Iterable<V>> function);
 
     @Override
-    <V> MutableObjectLongMap<V> sumByInt(Function<? super T, ? extends V> groupBy, IntFunction<? super T> function);
-
-    @Override
-    <V> MutableObjectDoubleMap<V> sumByFloat(Function<? super T, ? extends V> groupBy, FloatFunction<? super T> function);
-
-    @Override
-    <V> MutableObjectLongMap<V> sumByLong(Function<? super T, ? extends V> groupBy, LongFunction<? super T> function);
-
-    @Override
-    <V> MutableObjectDoubleMap<V> sumByDouble(Function<? super T, ? extends V> groupBy, DoubleFunction<? super T> function);
-
-    @Override
     <V> MutableListMultimap<V, T> groupBy(Function<? super T, ? extends V> function);
 
     @Override
@@ -180,10 +167,4 @@ public interface MutableStack<T> extends StackIterable<T>
 
     @Override
     MutableStack<Pair<T, Integer>> zipWithIndex();
-
-    @Override
-    <K, V> MutableMap<K, V> aggregateInPlaceBy(Function<? super T, ? extends K> groupBy, Function0<? extends V> zeroValueFactory, Procedure2<? super V, ? super T> mutatingAggregator);
-
-    @Override
-    <K, V> MutableMap<K, V> aggregateBy(Function<? super T, ? extends K> groupBy, Function0<? extends V> zeroValueFactory, Function2<? super V, ? super T, ? extends V> nonMutatingAggregator);
 }

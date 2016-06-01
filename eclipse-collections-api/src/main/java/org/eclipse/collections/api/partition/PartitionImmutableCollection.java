@@ -17,7 +17,7 @@ import org.eclipse.collections.api.collection.ImmutableCollection;
  * on a Predicate.  The results that answer true for the Predicate will be returned from the getSelected() method and the
  * results that answer false for the predicate will be returned from the getRejected() method.
  */
-public interface PartitionImmutableCollection<T> extends PartitionIterable<T>
+public interface PartitionImmutableCollection<T> extends PartitionImmutableIterable<T>
 {
     @Override
     ImmutableCollection<T> getSelected();

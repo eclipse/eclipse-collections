@@ -20,7 +20,6 @@ import org.eclipse.collections.api.bag.primitive.MutableIntBag;
 import org.eclipse.collections.api.bag.primitive.MutableLongBag;
 import org.eclipse.collections.api.bag.primitive.MutableShortBag;
 import org.eclipse.collections.api.block.function.Function;
-import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.function.primitive.BooleanFunction;
 import org.eclipse.collections.api.block.function.primitive.ByteFunction;
@@ -33,7 +32,6 @@ import org.eclipse.collections.api.block.function.primitive.ShortFunction;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
-import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.multimap.bag.MutableBagMultimap;
 import org.eclipse.collections.api.multimap.set.MutableSetMultimap;
 import org.eclipse.collections.api.ordered.OrderedIterable;
@@ -167,18 +165,6 @@ public interface MutableMap<K, V>
 
     @Override
     <V1> MutableMap<V1, V> groupByUniqueKey(Function<? super V, ? extends V1> function);
-
-    @Override
-    <K2, V2> MutableMap<K2, V2> aggregateInPlaceBy(
-            Function<? super V, ? extends K2> groupBy,
-            Function0<? extends V2> zeroValueFactory,
-            Procedure2<? super V2, ? super V> mutatingAggregator);
-
-    @Override
-    <K2, V2> MutableMap<K2, V2> aggregateBy(
-            Function<? super V, ? extends K2> groupBy,
-            Function0<? extends V2> zeroValueFactory,
-            Function2<? super V2, ? super V, ? extends V2> nonMutatingAggregator);
 
     @Override
     MutableMap<V, K> flipUniqueValues();

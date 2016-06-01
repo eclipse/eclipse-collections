@@ -10,8 +10,8 @@
 
 package org.eclipse.collections.api.stack;
 
+import org.eclipse.collections.api.ImmutableIterable;
 import org.eclipse.collections.api.block.function.Function;
-import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.function.primitive.BooleanFunction;
 import org.eclipse.collections.api.block.function.primitive.ByteFunction;
@@ -25,10 +25,7 @@ import org.eclipse.collections.api.block.function.primitive.ShortFunction;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
-import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.map.ImmutableMap;
-import org.eclipse.collections.api.map.primitive.ImmutableObjectDoubleMap;
-import org.eclipse.collections.api.map.primitive.ImmutableObjectLongMap;
 import org.eclipse.collections.api.multimap.list.ImmutableListMultimap;
 import org.eclipse.collections.api.partition.stack.PartitionImmutableStack;
 import org.eclipse.collections.api.stack.primitive.ImmutableBooleanStack;
@@ -41,7 +38,7 @@ import org.eclipse.collections.api.stack.primitive.ImmutableLongStack;
 import org.eclipse.collections.api.stack.primitive.ImmutableShortStack;
 import org.eclipse.collections.api.tuple.Pair;
 
-public interface ImmutableStack<T> extends StackIterable<T>
+public interface ImmutableStack<T> extends StackIterable<T>, ImmutableIterable<T>
 {
     ImmutableStack<T> push(T item);
 
@@ -138,24 +135,6 @@ public interface ImmutableStack<T> extends StackIterable<T>
 
     @Override
     ImmutableStack<Pair<T, Integer>> zipWithIndex();
-
-    @Override
-    <K, V> ImmutableMap<K, V> aggregateInPlaceBy(Function<? super T, ? extends K> groupBy, Function0<? extends V> zeroValueFactory, Procedure2<? super V, ? super T> mutatingAggregator);
-
-    @Override
-    <K, V> ImmutableMap<K, V> aggregateBy(Function<? super T, ? extends K> groupBy, Function0<? extends V> zeroValueFactory, Function2<? super V, ? super T, ? extends V> nonMutatingAggregator);
-
-    @Override
-    <V> ImmutableObjectLongMap<V> sumByInt(Function<? super T, ? extends V> groupBy, IntFunction<? super T> function);
-
-    @Override
-    <V> ImmutableObjectDoubleMap<V> sumByFloat(Function<? super T, ? extends V> groupBy, FloatFunction<? super T> function);
-
-    @Override
-    <V> ImmutableObjectLongMap<V> sumByLong(Function<? super T, ? extends V> groupBy, LongFunction<? super T> function);
-
-    @Override
-    <V> ImmutableObjectDoubleMap<V> sumByDouble(Function<? super T, ? extends V> groupBy, DoubleFunction<? super T> function);
 
     /**
      * Size takes linear time on ImmutableStacks.

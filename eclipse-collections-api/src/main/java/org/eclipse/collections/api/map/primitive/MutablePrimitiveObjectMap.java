@@ -10,6 +10,7 @@
 
 package org.eclipse.collections.api.map.primitive;
 
+import org.eclipse.collections.api.MutableIterable;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.bag.primitive.MutableBooleanBag;
 import org.eclipse.collections.api.bag.primitive.MutableByteBag;
@@ -40,7 +41,7 @@ import org.eclipse.collections.api.partition.bag.PartitionMutableBag;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.tuple.Pair;
 
-public interface MutablePrimitiveObjectMap<V> extends PrimitiveObjectMap<V>
+public interface MutablePrimitiveObjectMap<V> extends PrimitiveObjectMap<V>, MutableIterable<V>
 {
     void clear();
 
@@ -129,16 +130,4 @@ public interface MutablePrimitiveObjectMap<V> extends PrimitiveObjectMap<V>
     @Override
     @Deprecated
     MutableSet<Pair<V, Integer>> zipWithIndex();
-
-    @Override
-    <VV> MutableObjectLongMap<VV> sumByInt(Function<? super V, ? extends VV> groupBy, IntFunction<? super V> function);
-
-    @Override
-    <VV> MutableObjectDoubleMap<VV> sumByFloat(Function<? super V, ? extends VV> groupBy, FloatFunction<? super V> function);
-
-    @Override
-    <VV> MutableObjectLongMap<VV> sumByLong(Function<? super V, ? extends VV> groupBy, LongFunction<? super V> function);
-
-    @Override
-    <VV> MutableObjectDoubleMap<VV> sumByDouble(Function<? super V, ? extends VV> groupBy, DoubleFunction<? super V> function);
 }
