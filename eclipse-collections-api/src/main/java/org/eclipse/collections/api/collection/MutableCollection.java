@@ -15,6 +15,7 @@ import java.util.Collection;
 import org.eclipse.collections.api.MutableIterable;
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.block.function.Function;
+import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.function.Function3;
 import org.eclipse.collections.api.block.function.primitive.BooleanFunction;
@@ -28,6 +29,7 @@ import org.eclipse.collections.api.block.function.primitive.ShortFunction;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
+import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.collection.primitive.MutableBooleanCollection;
 import org.eclipse.collections.api.collection.primitive.MutableByteCollection;
 import org.eclipse.collections.api.collection.primitive.MutableCharCollection;
@@ -418,4 +420,16 @@ public interface MutableCollection<T>
      * @since 1.0
      */
     boolean retainAllIterable(Iterable<?> iterable);
+
+    @Override
+    <K, V> MutableMap<K, V> aggregateInPlaceBy(
+            Function<? super T, ? extends K> groupBy,
+            Function0<? extends V> zeroValueFactory,
+            Procedure2<? super V, ? super T> mutatingAggregator);
+
+    @Override
+    <K, V> MutableMap<K, V> aggregateBy(
+            Function<? super T, ? extends K> groupBy,
+            Function0<? extends V> zeroValueFactory,
+            Function2<? super V, ? super T, ? extends V> nonMutatingAggregator);
 }

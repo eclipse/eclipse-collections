@@ -21,7 +21,6 @@ import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
-import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.MutableMapIterable;
 import org.eclipse.collections.api.map.primitive.MutableObjectDoubleMap;
 import org.eclipse.collections.api.map.primitive.MutableObjectLongMap;
@@ -209,13 +208,13 @@ public interface MutableIterable<T> extends RichIterable<T>
     MutableIterable<Pair<T, Integer>> zipWithIndex();
 
     @Override
-    <K, V> MutableMap<K, V> aggregateInPlaceBy(
+    <K, V> MutableMapIterable<K, V> aggregateInPlaceBy(
             Function<? super T, ? extends K> groupBy,
             Function0<? extends V> zeroValueFactory,
             Procedure2<? super V, ? super T> mutatingAggregator);
 
     @Override
-    <K, V> MutableMap<K, V> aggregateBy(
+    <K, V> MutableMapIterable<K, V> aggregateBy(
             Function<? super T, ? extends K> groupBy,
             Function0<? extends V> zeroValueFactory,
             Function2<? super V, ? super T, ? extends V> nonMutatingAggregator);

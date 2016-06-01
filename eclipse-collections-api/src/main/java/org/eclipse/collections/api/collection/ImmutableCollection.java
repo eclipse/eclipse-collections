@@ -13,6 +13,7 @@ package org.eclipse.collections.api.collection;
 import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.ImmutableIterable;
 import org.eclipse.collections.api.block.function.Function;
+import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.function.primitive.BooleanFunction;
 import org.eclipse.collections.api.block.function.primitive.ByteFunction;
@@ -25,6 +26,7 @@ import org.eclipse.collections.api.block.function.primitive.ShortFunction;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
+import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.collection.primitive.ImmutableBooleanCollection;
 import org.eclipse.collections.api.collection.primitive.ImmutableByteCollection;
 import org.eclipse.collections.api.collection.primitive.ImmutableCharCollection;
@@ -33,6 +35,7 @@ import org.eclipse.collections.api.collection.primitive.ImmutableFloatCollection
 import org.eclipse.collections.api.collection.primitive.ImmutableIntCollection;
 import org.eclipse.collections.api.collection.primitive.ImmutableLongCollection;
 import org.eclipse.collections.api.collection.primitive.ImmutableShortCollection;
+import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.api.partition.PartitionImmutableCollection;
 import org.eclipse.collections.api.tuple.Pair;
 
@@ -112,8 +115,23 @@ public interface ImmutableCollection<T>
     <V> ImmutableCollection<V> flatCollect(Function<? super T, ? extends Iterable<V>> function);
 
     @Override
+    <V> ImmutableMap<V, T> groupByUniqueKey(Function<? super T, ? extends V> function);
+
+    @Override
     <S> ImmutableCollection<Pair<T, S>> zip(Iterable<S> that);
 
     @Override
     ImmutableCollection<Pair<T, Integer>> zipWithIndex();
+
+    @Override
+    <K, V> ImmutableMap<K, V> aggregateInPlaceBy(
+            Function<? super T, ? extends K> groupBy,
+            Function0<? extends V> zeroValueFactory,
+            Procedure2<? super V, ? super T> mutatingAggregator);
+
+    @Override
+    <K, V> ImmutableMap<K, V> aggregateBy(
+            Function<? super T, ? extends K> groupBy,
+            Function0<? extends V> zeroValueFactory,
+            Function2<? super V, ? super T, ? extends V> nonMutatingAggregator);
 }
