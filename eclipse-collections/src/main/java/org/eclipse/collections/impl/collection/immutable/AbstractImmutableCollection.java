@@ -19,6 +19,9 @@ import java.util.function.BinaryOperator;
 
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.block.function.Function;
+import org.eclipse.collections.api.block.function.Function0;
+import org.eclipse.collections.api.block.function.Function2;
+import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.collection.ImmutableCollection;
 import org.eclipse.collections.api.collection.MutableCollection;
 import org.eclipse.collections.api.list.MutableList;
@@ -31,6 +34,24 @@ import org.eclipse.collections.impl.utility.Iterate;
 public abstract class AbstractImmutableCollection<T> extends AbstractRichIterable<T> implements ImmutableCollection<T>, Collection<T>, AbstractImmutableIterable<T>
 {
     protected abstract MutableCollection<T> newMutable(int size);
+
+    @Override
+    public <K, V> ImmutableMap<K, V> aggregateInPlaceBy(
+            Function<? super T, ? extends K> groupBy,
+            Function0<? extends V> zeroValueFactory,
+            Procedure2<? super V, ? super T> mutatingAggregator)
+    {
+        return AbstractImmutableIterable.super.aggregateInPlaceBy(groupBy, zeroValueFactory, mutatingAggregator);
+    }
+
+    @Override
+    public <K, V> ImmutableMap<K, V> aggregateBy(
+            Function<? super T, ? extends K> groupBy,
+            Function0<? extends V> zeroValueFactory,
+            Function2<? super V, ? super T, ? extends V> nonMutatingAggregator)
+    {
+        return AbstractImmutableIterable.super.aggregateBy(groupBy, zeroValueFactory, nonMutatingAggregator);
+    }
 
     @Override
     public Optional<T> reduce(BinaryOperator<T> accumulator)

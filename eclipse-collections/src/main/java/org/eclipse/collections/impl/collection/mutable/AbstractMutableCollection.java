@@ -19,9 +19,12 @@ import java.util.function.BinaryOperator;
 
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.block.function.Function;
+import org.eclipse.collections.api.block.function.Function0;
+import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.function.Function3;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
+import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.collection.MutableCollection;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MutableMap;
@@ -129,6 +132,18 @@ public abstract class AbstractMutableCollection<T>
             result.add(batch);
         }
         return result;
+    }
+
+    @Override
+    public <K, V> MutableMap<K, V> aggregateInPlaceBy(Function<? super T, ? extends K> groupBy, Function0<? extends V> zeroValueFactory, Procedure2<? super V, ? super T> mutatingAggregator)
+    {
+        return AbstractMutableIterable.super.aggregateInPlaceBy(groupBy, zeroValueFactory, mutatingAggregator);
+    }
+
+    @Override
+    public <K, V> MutableMap<K, V> aggregateBy(Function<? super T, ? extends K> groupBy, Function0<? extends V> zeroValueFactory, Function2<? super V, ? super T, ? extends V> nonMutatingAggregator)
+    {
+        return AbstractMutableIterable.super.aggregateBy(groupBy, zeroValueFactory, nonMutatingAggregator);
     }
 
     @Override
