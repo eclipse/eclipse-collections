@@ -11,6 +11,7 @@
 package org.eclipse.collections.api.map;
 
 import java.util.Map;
+import java.util.Optional;
 
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.block.function.Function;
@@ -249,6 +250,19 @@ public interface MapIterable<K, V> extends RichIterable<V>
      * </pre>
      */
     Pair<K, V> detect(Predicate2<? super K, ? super V> predicate);
+
+    /**
+     * Return the first key and value of the map as an Optional for which the predicate evaluates to true when
+     * they are given as arguments. The predicate will only be evaluated until such pair is found or until all
+     * of the keys and values of the map have been used as arguments. That is, there may be keys and values of
+     * the map that are never used as arguments to the predicate.
+     * <p>
+     * <pre>e.g.
+     * peopleByCity.detectOptional((city, person)
+     *          -> city.getName().equals("Anytown") && person.getLastName().equals("Smith"));
+     * </pre>
+     */
+    Optional<Pair<K, V>> detectOptional(Predicate2<? super K, ? super V> predicate);
 
     /**
      * Follows the same general contract as {@link Map#equals(Object)}.

@@ -16,6 +16,7 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import org.eclipse.collections.api.RichIterable;
@@ -691,6 +692,22 @@ public final class IteratorIterate
             }
         }
         return null;
+    }
+
+    /**
+     * @see Iterate#detectOptional(Iterable, Predicate)
+     */
+    public static <T> Optional<T> detectOptional(Iterator<T> iterator, Predicate<? super T> predicate)
+    {
+        return Optional.ofNullable(IteratorIterate.detect(iterator, predicate));
+    }
+
+    /**
+     * @see Iterate#detectWithOptional(Iterable, Predicate2, Object)
+     */
+    public static <T, P> Optional<T> detectWithOptional(Iterator<T> iterator, Predicate2<? super T, ? super P> predicate, P parameter)
+    {
+        return Optional.ofNullable(IteratorIterate.detectWith(iterator, predicate, parameter));
     }
 
     /**

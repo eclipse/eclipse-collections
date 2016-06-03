@@ -13,6 +13,7 @@ package org.eclipse.collections.impl.collection.mutable;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.Optional;
 import java.util.concurrent.locks.ReadWriteLock;
 
 import org.eclipse.collections.api.LazyIterable;
@@ -555,6 +556,36 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         try
         {
             return this.getDelegate().detectWith(predicate, parameter);
+        }
+        finally
+        {
+            this.unlockReadLock();
+        }
+    }
+
+    @Override
+    public Optional<T> detectOptional(Predicate<? super T> predicate)
+    {
+        this.acquireReadLock();
+        try
+        {
+            return this.getDelegate().detectOptional(predicate);
+        }
+        finally
+        {
+            this.unlockReadLock();
+        }
+    }
+
+    @Override
+    public <P> Optional<T> detectWithOptional(
+            Predicate2<? super T, ? super P> predicate,
+            P parameter)
+    {
+        this.acquireReadLock();
+        try
+        {
+            return this.getDelegate().detectWithOptional(predicate, parameter);
         }
         finally
         {
@@ -1873,6 +1904,18 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         public <P> T detectWith(Predicate2<? super T, ? super P> predicate, P parameter)
         {
             return this.delegate.detectWith(predicate, parameter);
+        }
+
+        @Override
+        public Optional<T> detectOptional(Predicate<? super T> predicate)
+        {
+            return this.delegate.detectOptional(predicate);
+        }
+
+        @Override
+        public <P> Optional<T> detectWithOptional(Predicate2<? super T, ? super P> predicate, P parameter)
+        {
+            return this.delegate.detectWithOptional(predicate, parameter);
         }
 
         @Override

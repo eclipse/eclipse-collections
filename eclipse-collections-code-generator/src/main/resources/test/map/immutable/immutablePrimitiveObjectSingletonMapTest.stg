@@ -22,6 +22,7 @@ package org.eclipse.collections.impl.map.immutable.primitive;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.bag.primitive.MutableBooleanBag;
@@ -359,6 +360,22 @@ public class Immutable<name>ObjectSingletonMapTest extends AbstractImmutable<nam
     {
         Assert.assertEquals("zero", this.classUnderTest().detectWith(Object::equals, "zero"));
         Assert.assertNull(this.classUnderTest().detectWith(Object::equals, "one"));
+    }
+
+    @Override
+    @Test
+    public void detectOptional()
+    {
+        Assert.assertEquals(Optional.of("zero"), this.classUnderTest().detectOptional(Predicates.equal("zero")));
+        Assert.assertEquals(Optional.empty(), this.classUnderTest().detectOptional(Predicates.equal("one")));
+    }
+
+    @Override
+    @Test
+    public void detectWithOptional()
+    {
+        Assert.assertEquals(Optional.of("zero"), this.classUnderTest().detectWithOptional(Object::equals, "zero"));
+        Assert.assertEquals(Optional.empty(), this.classUnderTest().detectWithOptional(Object::equals, "one"));
     }
 
     @Override

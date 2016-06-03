@@ -22,6 +22,7 @@ package org.eclipse.collections.impl.map.immutable.primitive;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
 import org.eclipse.collections.api.block.function.Function;
@@ -326,6 +327,20 @@ public class Immutable<name>ObjectEmptyMapTest extends AbstractImmutable<name>Ob
     public void detectWith()
     {
         Assert.assertNull(this.classUnderTest().detectWith(Predicates2.alwaysTrue(), ""));
+    }
+
+    @Override
+    @Test
+    public void detectOptional()
+    {
+        Assert.assertEquals(Optional.empty(), this.classUnderTest().detectOptional(Predicates.alwaysTrue()));
+    }
+
+    @Override
+    @Test
+    public void detectWithOptional()
+    {
+        Assert.assertEquals(Optional.empty(), this.classUnderTest().detectWithOptional(Predicates2.alwaysTrue(), ""));
     }
 
     @Override

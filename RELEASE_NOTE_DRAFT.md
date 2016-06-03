@@ -15,6 +15,7 @@ New Functionality
 * Implemented summaryStatistics() on Primitive Iterables.
 * Implemented reduce(BinaryOperator), reduceInPlace(Collector) and reduceInPlace(Supplier, BiConsumer) on RichIterable.
 * Implemented Collectors2 with makeString, toList, toSet, toBag, toStack, toMap, toBiMap, groupBy, to{List/Set/Bag}Multimap.
+* Implemented detectOptional() and detectWithOptional() on RichIterable.
 
 Optimizations
 -------------

@@ -21,6 +21,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -923,6 +924,19 @@ public class IterateTest
     }
 
     @Test
+    public void detectOptional()
+    {
+        this.iterables.forEach(Procedures.cast(each -> {
+            Optional<Integer> result = Iterate.detectOptional(each, Predicates.instanceOf(Integer.class));
+            Assert.assertTrue(result.isPresent());
+            Verify.assertContains(result.get(), UnifiedSet.newSet(each));
+
+            Optional<Integer> emptyResult = Iterate.detectOptional(each, Predicates.instanceOf(String.class));
+            Assert.assertFalse(emptyResult.isPresent());
+        }));
+    }
+
+    @Test
     public void detectIndex()
     {
         MutableList<Integer> list = Interval.toReverseList(1, 5);
@@ -1130,6 +1144,21 @@ public class IterateTest
     {
         List<Integer> list = Collections.synchronizedList(Interval.oneTo(5));
         Assert.assertEquals(Integer.valueOf(1), Iterate.detectWith(list, Object::equals, 1));
+    }
+
+    @Test
+    public void detectWithOptionalSet()
+    {
+        Assert.assertEquals(Optional.of(Integer.valueOf(1)), Iterate.detectWithOptional(this.getIntegerSet(), Object::equals, 1));
+        Assert.assertEquals(Optional.empty(), Iterate.detectWithOptional(this.getIntegerSet(), Object::equals, 10));
+    }
+
+    @Test
+    public void detectWithOptionalRandomAccess()
+    {
+        List<Integer> list = Collections.synchronizedList(Interval.oneTo(5));
+        Assert.assertEquals(Optional.of(Integer.valueOf(1)), Iterate.detectWithOptional(list, Object::equals, 1));
+        Assert.assertEquals(Optional.empty(), Iterate.detectWithOptional(list, Object::equals, 10));
     }
 
     @Test

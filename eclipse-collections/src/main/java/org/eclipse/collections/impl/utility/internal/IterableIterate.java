@@ -17,6 +17,7 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.block.HashingStrategy;
@@ -699,6 +700,16 @@ public final class IterableIterate
     public static <T, P> T detectWith(Iterable<T> iterable, Predicate2<? super T, ? super P> predicate, P parameter)
     {
         return IteratorIterate.detectWith(iterable.iterator(), predicate, parameter);
+    }
+
+    public static <T> Optional<T> detectOptional(Iterable<T> iterable, Predicate<? super T> predicate)
+    {
+        return IteratorIterate.detectOptional(iterable.iterator(), predicate);
+    }
+
+    public static <T, P> Optional<T> detectWithOptional(Iterable<T> iterable, Predicate2<? super T, ? super P> predicate, P parameter)
+    {
+        return IteratorIterate.detectWithOptional(iterable.iterator(), predicate, parameter);
     }
 
     /**

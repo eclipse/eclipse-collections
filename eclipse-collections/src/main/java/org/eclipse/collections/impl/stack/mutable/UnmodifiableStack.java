@@ -14,6 +14,7 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.Optional;
 
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.RichIterable;
@@ -424,6 +425,18 @@ public final class UnmodifiableStack<T> implements MutableStack<T>, Serializable
     public <P> T detectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         return this.mutableStack.detectWith(predicate, parameter);
+    }
+
+    @Override
+    public Optional<T> detectOptional(Predicate<? super T> predicate)
+    {
+        return this.mutableStack.detectOptional(predicate);
+    }
+
+    @Override
+    public <P> Optional<T> detectWithOptional(Predicate2<? super T, ? super P> predicate, P parameter)
+    {
+        return this.mutableStack.detectWithOptional(predicate, parameter);
     }
 
     @Override

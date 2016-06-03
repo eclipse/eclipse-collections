@@ -42,6 +42,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.Optional;
 
 import net.jcip.annotations.GuardedBy;
 import org.eclipse.collections.api.<name>Iterable;
@@ -610,6 +611,22 @@ public final class Synchronized<name>ObjectMap\<V>
         synchronized (this.lock)
         {
             return this.map.detectWith(predicate, parameter);
+        }
+    }
+
+    public Optional\<V> detectOptional(Predicate\<? super V> predicate)
+    {
+        synchronized (this.lock)
+        {
+            return this.map.detectOptional(predicate);
+        }
+    }
+
+    public \<P> Optional\<V> detectWithOptional(Predicate2\<? super V, ? super P> predicate, P parameter)
+    {
+        synchronized (this.lock)
+        {
+            return this.map.detectWithOptional(predicate, parameter);
         }
     }
 

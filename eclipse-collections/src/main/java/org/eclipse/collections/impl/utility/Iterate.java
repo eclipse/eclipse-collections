@@ -19,6 +19,7 @@ import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.RandomAccess;
 import java.util.SortedSet;
 
@@ -2317,6 +2318,42 @@ public final class Iterate
             return IterableIterate.detectWith(iterable, predicate, parameter);
         }
         throw new IllegalArgumentException("Cannot perform detectWith on null");
+    }
+
+    /**
+     * Returns the first element of the iterable that evaluates to true for the specified predicate as an Optional.
+     * <p>
+     * Example using a Java 8 lambda expression:
+     * <pre>
+     * Optional&lt;Person&gt; person =
+     *      Iterate.<b>detectOptional</b>(people,
+     *          person -> person.getFirstName().equals("John") && person.getLastName().equals("Smith"));
+     * </pre>
+     * <p>
+     */
+    public static <T> Optional<T> detectOptional(Iterable<T> iterable, Predicate<? super T> predicate)
+    {
+        return Optional.ofNullable(detect(iterable, predicate));
+    }
+
+    /**
+     * Returns the first element of the iterable that evaluates to true for the specified predicate2 and parameter as
+     * an Optional.
+     * <p>
+     * Example using a Java 8 lambda expression:
+     * <pre>
+     * Optional&lt;Person&gt; person =
+     *      Iterate.<b>detectWithOptional</b>(people,
+     *          (person, fullName) -> person.getFullName().equals(fullName), "John Smith");
+     * </pre>
+     * <p>
+     */
+    public static <T, P> Optional<T> detectWithOptional(
+            Iterable<T> iterable,
+            Predicate2<? super T, ? super P> predicate,
+            P parameter)
+    {
+        return Optional.ofNullable(detectWith(iterable, predicate, parameter));
     }
 
     /**

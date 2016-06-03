@@ -13,6 +13,7 @@ package org.eclipse.collections.impl.lazy.primitive;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.Optional;
 
 import org.eclipse.collections.api.LazyBooleanIterable;
 import org.eclipse.collections.api.LazyByteIterable;
@@ -279,6 +280,18 @@ public class LazyIterableTestHelper<T> implements LazyIterable<T>
     public <P> T detectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         return null;
+    }
+
+    @Override
+    public Optional<T> detectOptional(Predicate<? super T> predicate)
+    {
+        return Optional.empty();
+    }
+
+    @Override
+    public <P> Optional<T> detectWithOptional(Predicate2<? super T, ? super P> predicate, P parameter)
+    {
+        return Optional.empty();
     }
 
     @Override

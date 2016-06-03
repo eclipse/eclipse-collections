@@ -13,6 +13,7 @@ package org.eclipse.collections.impl.utility;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.Map;
+import java.util.Optional;
 
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.block.function.Function;
@@ -847,6 +848,21 @@ public final class MapIterate
     public static <K, V> V detect(Map<K, V> map, Predicate<? super V> predicate)
     {
         return IterableIterate.detect(map.values(), predicate);
+    }
+
+    public static <K, V> Optional<Pair<K, V>> detectOptional(
+            Map<K, V> map,
+            Predicate2<? super K, ? super V> predicate)
+    {
+        return Optional.ofNullable(MapIterate.detect(map, predicate));
+    }
+
+    /**
+     * @see Iterate#detectOptional(Iterable, Predicate)
+     */
+    public static <K, V> Optional<V> detectOptional(Map<K, V> map, Predicate<? super V> predicate)
+    {
+        return IterableIterate.detectOptional(map.values(), predicate);
     }
 
     /**
