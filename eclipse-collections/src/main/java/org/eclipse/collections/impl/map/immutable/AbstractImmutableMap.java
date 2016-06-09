@@ -12,6 +12,7 @@ package org.eclipse.collections.impl.map.immutable;
 
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 
 import net.jcip.annotations.Immutable;
@@ -251,6 +252,12 @@ public abstract class AbstractImmutableMap<K, V>
     public Pair<K, V> detect(Predicate2<? super K, ? super V> predicate)
     {
         return MapIterate.detect(this, predicate);
+    }
+
+    @Override
+    public Optional<Pair<K, V>> detectOptional(Predicate2<? super K, ? super V> predicate)
+    {
+        return MapIterate.detectOptional(this, predicate);
     }
 
     @Override

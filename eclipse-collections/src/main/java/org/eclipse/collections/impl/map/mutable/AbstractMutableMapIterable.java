@@ -11,6 +11,7 @@
 package org.eclipse.collections.impl.map.mutable;
 
 import java.util.Iterator;
+import java.util.Optional;
 
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.block.function.Function;
@@ -173,6 +174,12 @@ public abstract class AbstractMutableMapIterable<K, V> extends AbstractMapIterab
     public Pair<K, V> detect(Predicate2<? super K, ? super V> predicate)
     {
         return MapIterate.detect(this, predicate);
+    }
+
+    @Override
+    public Optional<Pair<K, V>> detectOptional(Predicate2<? super K, ? super V> predicate)
+    {
+        return MapIterate.detectOptional(this, predicate);
     }
 
     @Override

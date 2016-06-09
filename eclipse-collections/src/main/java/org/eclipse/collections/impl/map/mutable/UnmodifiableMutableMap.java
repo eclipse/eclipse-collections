@@ -14,6 +14,7 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Optional;
 
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.RichIterable;
@@ -430,6 +431,12 @@ public class UnmodifiableMutableMap<K, V>
     }
 
     @Override
+    public Optional<Pair<K, V>> detectOptional(Predicate2<? super K, ? super V> predicate)
+    {
+        return this.getMutableMap().detectOptional(predicate);
+    }
+
+    @Override
     public boolean allSatisfy(Predicate<? super V> predicate)
     {
         return this.getMutableMap().allSatisfy(predicate);
@@ -668,6 +675,18 @@ public class UnmodifiableMutableMap<K, V>
     public <P> V detectWith(Predicate2<? super V, ? super P> predicate, P parameter)
     {
         return this.getMutableMap().detectWith(predicate, parameter);
+    }
+
+    @Override
+    public Optional<V> detectOptional(Predicate<? super V> predicate)
+    {
+        return this.getMutableMap().detectOptional(predicate);
+    }
+
+    @Override
+    public <P> Optional<V> detectWithOptional(Predicate2<? super V, ? super P> predicate, P parameter)
+    {
+        return this.getMutableMap().detectWithOptional(predicate, parameter);
     }
 
     @Override

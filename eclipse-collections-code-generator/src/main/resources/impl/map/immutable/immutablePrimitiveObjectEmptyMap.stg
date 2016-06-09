@@ -36,6 +36,7 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import org.eclipse.collections.api.<name>Iterable;
 import org.eclipse.collections.api.Lazy<name>Iterable;
@@ -346,6 +347,16 @@ final class Immutable<name>ObjectEmptyMap\<V> implements Immutable<name>ObjectMa
     public \<P> V detectWith(Predicate2\<? super V, ? super P> predicate, P parameter)
     {
         return null;
+    }
+
+    public Optional\<V> detectOptional(Predicate\<? super V> predicate)
+    {
+        return Optional.empty();
+    }
+
+    public \<P> Optional\<V> detectWithOptional(Predicate2\<? super V, ? super P> predicate, P parameter)
+    {
+        return Optional.empty();
     }
 
     public V detectIfNone(Predicate\<? super V> predicate, Function0\<? extends V> function)

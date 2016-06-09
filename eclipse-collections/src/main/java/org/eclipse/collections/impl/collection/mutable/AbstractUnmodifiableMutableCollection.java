@@ -13,6 +13,7 @@ package org.eclipse.collections.impl.collection.mutable;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.Optional;
 
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.RichIterable;
@@ -526,6 +527,39 @@ public class AbstractUnmodifiableMutableCollection<T> implements MutableCollecti
     }
 
     @Override
+    public <P> T detectWith(Predicate2<? super T, ? super P> predicate, P parameter)
+    {
+        return this.getMutableCollection().detectWith(predicate, parameter);
+    }
+
+    @Override
+    public Optional<T> detectOptional(Predicate<? super T> predicate)
+    {
+        return this.getMutableCollection().detectOptional(predicate);
+    }
+
+    @Override
+    public <P> Optional<T> detectWithOptional(Predicate2<? super T, ? super P> predicate, P parameter)
+    {
+        return this.getMutableCollection().detectWithOptional(predicate, parameter);
+    }
+
+    @Override
+    public T detectIfNone(Predicate<? super T> predicate, Function0<? extends T> function)
+    {
+        return this.getMutableCollection().detectIfNone(predicate, function);
+    }
+
+    @Override
+    public <P> T detectWithIfNone(
+            Predicate2<? super T, ? super P> predicate,
+            P parameter,
+            Function0<? extends T> function)
+    {
+        return this.getMutableCollection().detectWithIfNone(predicate, parameter, function);
+    }
+
+    @Override
     public T min(Comparator<? super T> comparator)
     {
         return this.getMutableCollection().min(comparator);
@@ -559,27 +593,6 @@ public class AbstractUnmodifiableMutableCollection<T> implements MutableCollecti
     public <V extends Comparable<? super V>> T maxBy(Function<? super T, ? extends V> function)
     {
         return this.getMutableCollection().maxBy(function);
-    }
-
-    @Override
-    public T detectIfNone(Predicate<? super T> predicate, Function0<? extends T> function)
-    {
-        return this.getMutableCollection().detectIfNone(predicate, function);
-    }
-
-    @Override
-    public <P> T detectWith(Predicate2<? super T, ? super P> predicate, P parameter)
-    {
-        return this.getMutableCollection().detectWith(predicate, parameter);
-    }
-
-    @Override
-    public <P> T detectWithIfNone(
-            Predicate2<? super T, ? super P> predicate,
-            P parameter,
-            Function0<? extends T> function)
-    {
-        return this.getMutableCollection().detectWithIfNone(predicate, parameter, function);
     }
 
     @Override

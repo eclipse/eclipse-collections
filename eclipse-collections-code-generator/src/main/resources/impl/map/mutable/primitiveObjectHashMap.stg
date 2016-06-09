@@ -42,6 +42,7 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import org.eclipse.collections.api.<name>Iterable;
 import org.eclipse.collections.api.Lazy<name>Iterable;
@@ -1069,6 +1070,16 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
             }
         }
         return null;
+    }
+
+    public Optional\<V> detectOptional(Predicate\<? super V> predicate)
+    {
+        return Optional.ofNullable(this.detect(predicate));
+    }
+
+    public \<P> Optional\<V> detectWithOptional(Predicate2\<? super V, ? super P> predicate, P parameter)
+    {
+        return Optional.ofNullable(this.detectWith(predicate, parameter));
     }
 
     public V detectIfNone(Predicate\<? super V> predicate, Function0\<? extends V> function)

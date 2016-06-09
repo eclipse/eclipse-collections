@@ -37,6 +37,7 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.Optional;
 
 import org.eclipse.collections.api.Lazy<name>Iterable;
 import org.eclipse.collections.api.LazyIterable;
@@ -447,6 +448,16 @@ final class Immutable<name>ObjectSingletonMap\<V> extends AbstractImmutable<name
     public \<P> V detectWith(Predicate2\<? super V, ? super P> predicate, P parameter)
     {
         return predicate.accept(this.value1, parameter) ? this.value1 : null;
+    }
+
+    public Optional\<V> detectOptional(Predicate\<? super V> predicate)
+    {
+        return predicate.accept(this.value1) ? Optional.of(this.value1) : Optional.empty();
+    }
+
+    public \<P> Optional\<V> detectWithOptional(Predicate2\<? super V, ? super P> predicate, P parameter)
+    {
+        return predicate.accept(this.value1, parameter) ? Optional.of(this.value1) : Optional.empty();
     }
 
     public V detectIfNone(Predicate\<? super V> predicate, Function0\<? extends V> function)

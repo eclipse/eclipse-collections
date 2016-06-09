@@ -1323,6 +1323,32 @@ public interface RichIterableTestCase extends IterableTestCase
     }
 
     @Test
+    default void RichIterable_detectOptional()
+    {
+        RichIterable<Integer> iterable = this.newWith(3, 2, 1);
+
+        assertThat(iterable.detectOptional(Predicates.greaterThan(0)), is(Optional.of(3)));
+        assertThat(iterable.detectOptional(Predicates.greaterThan(1)), is(Optional.of(3)));
+        assertThat(iterable.detectOptional(Predicates.greaterThan(2)), is(Optional.of(3)));
+        assertThat(iterable.detectOptional(Predicates.greaterThan(3)), is(Optional.empty()));
+
+        assertThat(iterable.detectOptional(Predicates.lessThan(1)), is(Optional.empty()));
+        assertThat(iterable.detectOptional(Predicates.lessThan(2)), is(Optional.of(1)));
+        assertThat(iterable.detectOptional(Predicates.lessThan(3)), is(Optional.of(2)));
+        assertThat(iterable.detectOptional(Predicates.lessThan(4)), is(Optional.of(3)));
+
+        assertThat(iterable.detectWithOptional(Predicates2.greaterThan(), 0), is(Optional.of(3)));
+        assertThat(iterable.detectWithOptional(Predicates2.greaterThan(), 1), is(Optional.of(3)));
+        assertThat(iterable.detectWithOptional(Predicates2.greaterThan(), 2), is(Optional.of(3)));
+        assertThat(iterable.detectWithOptional(Predicates2.greaterThan(), 3), is(Optional.empty()));
+
+        assertThat(iterable.detectWithOptional(Predicates2.lessThan(), 1), is(Optional.empty()));
+        assertThat(iterable.detectWithOptional(Predicates2.lessThan(), 2), is(Optional.of(1)));
+        assertThat(iterable.detectWithOptional(Predicates2.lessThan(), 3), is(Optional.of(2)));
+        assertThat(iterable.detectWithOptional(Predicates2.lessThan(), 4), is(Optional.of(3)));
+    }
+
+    @Test
     default void RichIterable_min_max()
     {
         assertEquals(Integer.valueOf(-1), this.newWith(-1, 0, 1).min());

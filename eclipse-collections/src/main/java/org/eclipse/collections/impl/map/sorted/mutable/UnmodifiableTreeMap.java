@@ -13,6 +13,7 @@ package org.eclipse.collections.impl.map.sorted.mutable;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.Optional;
 import java.util.SortedMap;
 
 import org.eclipse.collections.api.LazyIterable;
@@ -446,6 +447,12 @@ public class UnmodifiableTreeMap<K, V>
     }
 
     @Override
+    public Optional<Pair<K, V>> detectOptional(Predicate2<? super K, ? super V> predicate)
+    {
+        return this.getMutableSortedMap().detectOptional(predicate);
+    }
+
+    @Override
     public boolean anySatisfy(Predicate<? super V> predicate)
     {
         return this.getMutableSortedMap().anySatisfy(predicate);
@@ -684,6 +691,18 @@ public class UnmodifiableTreeMap<K, V>
     public <P> V detectWith(Predicate2<? super V, ? super P> predicate, P parameter)
     {
         return this.getMutableSortedMap().detectWith(predicate, parameter);
+    }
+
+    @Override
+    public Optional<V> detectOptional(Predicate<? super V> predicate)
+    {
+        return this.getMutableSortedMap().detectOptional(predicate);
+    }
+
+    @Override
+    public <P> Optional<V> detectWithOptional(Predicate2<? super V, ? super P> predicate, P parameter)
+    {
+        return this.getMutableSortedMap().detectWithOptional(predicate, parameter);
     }
 
     @Override

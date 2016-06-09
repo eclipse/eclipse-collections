@@ -13,6 +13,7 @@ package org.eclipse.collections.impl.bimap;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.Map;
+import java.util.Optional;
 
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.RichIterable;
@@ -462,6 +463,24 @@ public abstract class AbstractBiMap<K, V> implements BiMap<K, V>
     public <P> V detectWith(Predicate2<? super V, ? super P> predicate, P parameter)
     {
         return this.getDelegate().detectWith(predicate, parameter);
+    }
+
+    @Override
+    public Optional<Pair<K, V>> detectOptional(Predicate2<? super K, ? super V> predicate)
+    {
+        return this.getDelegate().detectOptional(predicate);
+    }
+
+    @Override
+    public Optional<V> detectOptional(Predicate<? super V> predicate)
+    {
+        return this.getDelegate().detectOptional(predicate);
+    }
+
+    @Override
+    public <P> Optional<V> detectWithOptional(Predicate2<? super V, ? super P> predicate, P parameter)
+    {
+        return this.getDelegate().detectWithOptional(predicate, parameter);
     }
 
     @Override

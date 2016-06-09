@@ -16,6 +16,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 import org.eclipse.collections.api.block.function.Function3;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
@@ -186,6 +187,57 @@ public class IterableIterateTest
     {
         Iterable<Integer> iterable = new IterableAdapter<>(Interval.oneTo(31));
         Assert.assertEquals(1, Iterate.detectWith(iterable, Object::equals, 1).intValue());
+    }
+
+    @Test
+    public void detectOptional()
+    {
+        Iterable<Integer> iterable = new IterableAdapter<>(this.getIntegerList());
+        Assert.assertEquals(Optional.of(1), Iterate.detectOptional(iterable, Integer.valueOf(1)::equals));
+        //noinspection CachedNumberConstructorCall,UnnecessaryBoxing
+        Integer firstInt = new Integer(2);
+        //noinspection CachedNumberConstructorCall,UnnecessaryBoxing
+        Integer secondInt = new Integer(2);
+        Assert.assertNotSame(firstInt, secondInt);
+        ImmutableList<Integer> list2 = iList(1, firstInt, secondInt);
+        Optional<Integer> result = Iterate.detectOptional(list2, Integer.valueOf(2)::equals);
+        Assert.assertTrue(result.isPresent());
+        Assert.assertSame(list2.get(1), result.get());
+        Assert.assertEquals(Optional.empty(), Iterate.detectOptional(list2, Integer.valueOf(3)::equals));
+    }
+
+    @Test
+    public void detectOptionalOver30()
+    {
+        List<Integer> list = Interval.oneTo(31);
+        Iterable<Integer> iterable = new IterableAdapter<>(list);
+        Assert.assertEquals(Optional.of(1), Iterate.detectOptional(iterable, Integer.valueOf(1)::equals));
+        Assert.assertEquals(Optional.empty(), Iterate.detectOptional(iterable, Integer.valueOf(32)::equals));
+    }
+
+    @Test
+    public void detectWithOptional()
+    {
+        Iterable<Integer> iterable = new IterableAdapter<>(this.getIntegerList());
+        Assert.assertEquals(1, Iterate.detectWith(iterable, Object::equals, 1).intValue());
+        //noinspection CachedNumberConstructorCall,UnnecessaryBoxing
+        Integer firstInt = new Integer(2);
+        //noinspection CachedNumberConstructorCall,UnnecessaryBoxing
+        Integer secondInt = new Integer(2);
+        Assert.assertNotSame(firstInt, secondInt);
+        ImmutableList<Integer> list2 = iList(1, firstInt, secondInt);
+        Optional<Integer> result = Iterate.detectWithOptional(list2, Object::equals, 2);
+        Assert.assertTrue(result.isPresent());
+        Assert.assertSame(list2.get(1), result.get());
+        Assert.assertEquals(Optional.empty(), Iterate.detectOptional(list2, Integer.valueOf(3)::equals));
+    }
+
+    @Test
+    public void detectWithOptionalOver30()
+    {
+        Iterable<Integer> iterable = new IterableAdapter<>(Interval.oneTo(31));
+        Assert.assertEquals(Optional.of(1), Iterate.detectWithOptional(iterable, Object::equals, 1));
+        Assert.assertEquals(Optional.empty(), Iterate.detectWithOptional(iterable, Object::equals, 32));
     }
 
     @Test

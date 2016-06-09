@@ -1195,6 +1195,34 @@ public interface RichIterable<T>
     <P> T detectWith(Predicate2<? super T, ? super P> predicate, P parameter);
 
     /**
+     * Returns the first element of the iterable for which the predicate evaluates to true as an Optional.  This method is commonly called find.
+     * <p>
+     * Example using a Java 8 lambda expression:
+     * <pre>
+     * Person person =
+     *     people.detectOptional(person -> person.getFirstName().equals("John") && person.getLastName().equals("Smith"));
+     * </pre>
+     * <p>
+     *
+     * @since 8.0
+     */
+    Optional<T> detectOptional(Predicate<? super T> predicate);
+
+    /**
+     * Returns the first element that evaluates to true for the specified predicate2 and parameter as an Optional.
+     * <p>
+     * Example using a Java 8 lambda expression:
+     * <pre>
+     * Optional&lt;Person&gt; person =
+     *     people.detectWithOptional((person, fullName) -> person.getFullName().equals(fullName), "John Smith");
+     * </pre>
+     * <p>
+     *
+     * @since 8.0
+     */
+    <P> Optional<T> detectWithOptional(Predicate2<? super T, ? super P> predicate, P parameter);
+
+    /**
      * Returns the first element of the iterable for which the predicate evaluates to true.  If no element matches
      * the predicate, then returns the value of applying the specified function.
      *

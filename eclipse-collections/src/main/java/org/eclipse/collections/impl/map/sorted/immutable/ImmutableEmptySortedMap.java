@@ -15,6 +15,7 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.Set;
 
 import net.jcip.annotations.Immutable;
@@ -215,6 +216,12 @@ final class ImmutableEmptySortedMap<K, V>
     public Pair<K, V> detect(Predicate2<? super K, ? super V> predicate)
     {
         return null;
+    }
+
+    @Override
+    public Optional<Pair<K, V>> detectOptional(Predicate2<? super K, ? super V> predicate)
+    {
+        return Optional.empty();
     }
 
     @Override

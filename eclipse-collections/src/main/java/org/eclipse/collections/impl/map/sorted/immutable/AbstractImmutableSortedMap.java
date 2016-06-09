@@ -12,6 +12,7 @@ package org.eclipse.collections.impl.map.sorted.immutable;
 
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Optional;
 import java.util.SortedMap;
 
 import net.jcip.annotations.Immutable;
@@ -388,6 +389,12 @@ public abstract class AbstractImmutableSortedMap<K, V>
     public Pair<K, V> detect(Predicate2<? super K, ? super V> predicate)
     {
         return this.keyValuesView().detect(each -> predicate.accept(each.getOne(), each.getTwo()));
+    }
+
+    @Override
+    public Optional<Pair<K, V>> detectOptional(Predicate2<? super K, ? super V> predicate)
+    {
+        return this.keyValuesView().detectOptional(each -> predicate.accept(each.getOne(), each.getTwo()));
     }
 
     @Override

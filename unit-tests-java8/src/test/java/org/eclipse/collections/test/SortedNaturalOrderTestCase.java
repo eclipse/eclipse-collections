@@ -12,6 +12,7 @@ package org.eclipse.collections.test;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.collection.MutableCollection;
@@ -238,6 +239,33 @@ public interface SortedNaturalOrderTestCase extends OrderedIterableTestCase
         assertThat(iterable.detectWithIfNone(Predicates2.lessThan(), 2, () -> 4), is(1));
         assertThat(iterable.detectWithIfNone(Predicates2.lessThan(), 3, () -> 4), is(1));
         assertThat(iterable.detectWithIfNone(Predicates2.lessThan(), 4, () -> 4), is(1));
+    }
+
+    @Override
+    @Test
+    default void RichIterable_detectOptional()
+    {
+        RichIterable<Integer> iterable = this.newWith(1, 2, 3);
+
+        assertThat(iterable.detectOptional(Predicates.greaterThan(0)), is(Optional.of(1)));
+        assertThat(iterable.detectOptional(Predicates.greaterThan(1)), is(Optional.of(2)));
+        assertThat(iterable.detectOptional(Predicates.greaterThan(2)), is(Optional.of(3)));
+        assertThat(iterable.detectOptional(Predicates.greaterThan(3)), is(Optional.empty()));
+
+        assertThat(iterable.detectOptional(Predicates.lessThan(1)), is(Optional.empty()));
+        assertThat(iterable.detectOptional(Predicates.lessThan(2)), is(Optional.of(1)));
+        assertThat(iterable.detectOptional(Predicates.lessThan(3)), is(Optional.of(1)));
+        assertThat(iterable.detectOptional(Predicates.lessThan(4)), is(Optional.of(1)));
+
+        assertThat(iterable.detectWithOptional(Predicates2.greaterThan(), 0), is(Optional.of(1)));
+        assertThat(iterable.detectWithOptional(Predicates2.greaterThan(), 1), is(Optional.of(2)));
+        assertThat(iterable.detectWithOptional(Predicates2.greaterThan(), 2), is(Optional.of(3)));
+        assertThat(iterable.detectWithOptional(Predicates2.greaterThan(), 3), is(Optional.empty()));
+
+        assertThat(iterable.detectWithOptional(Predicates2.lessThan(), 1), is(Optional.empty()));
+        assertThat(iterable.detectWithOptional(Predicates2.lessThan(), 2), is(Optional.of(1)));
+        assertThat(iterable.detectWithOptional(Predicates2.lessThan(), 3), is(Optional.of(1)));
+        assertThat(iterable.detectWithOptional(Predicates2.lessThan(), 4), is(Optional.of(1)));
     }
 
     @Override

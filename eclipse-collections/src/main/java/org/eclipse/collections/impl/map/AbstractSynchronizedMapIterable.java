@@ -11,6 +11,7 @@
 package org.eclipse.collections.impl.map;
 
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 
 import org.eclipse.collections.api.RichIterable;
@@ -153,6 +154,15 @@ public abstract class AbstractSynchronizedMapIterable<K, V>
         synchronized (this.lock)
         {
             return this.getDelegate().detect(predicate);
+        }
+    }
+
+    @Override
+    public Optional<Pair<K, V>> detectOptional(Predicate2<? super K, ? super V> predicate)
+    {
+        synchronized (this.lock)
+        {
+            return this.getDelegate().detectOptional(predicate);
         }
     }
 
