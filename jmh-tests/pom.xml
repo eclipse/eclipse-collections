@@ -26,7 +26,7 @@
 
     <properties>
         <maven.deploy.skip>true</maven.deploy.skip>
-        <jmh.version>1.11.3</jmh.version>
+        <jmh.version>1.12</jmh.version>
     </properties>
 
     <dependencies>
