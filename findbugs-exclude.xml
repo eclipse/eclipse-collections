@@ -22,6 +22,7 @@
             <Class name="org.eclipse.collections.impl.list.mutable.SynchronizedMutableList" />
             <Class name="org.eclipse.collections.impl.map.mutable.SynchronizedMutableMap" />
             <Class name="org.eclipse.collections.impl.bimap.mutable.SynchronizedBiMap" />
+            <Class name="org.eclipse.collections.impl.bimap.mutable.UnmodifiableBiMap" />
             <Class name="org.eclipse.collections.impl.map.sorted.mutable.SynchronizedSortedMap" />
             <Class name="org.eclipse.collections.impl.set.mutable.SynchronizedMutableSet" />
             <Class name="org.eclipse.collections.impl.map.mutable.UnifiedMap" />
