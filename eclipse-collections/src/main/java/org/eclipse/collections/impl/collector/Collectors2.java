@@ -10,8 +10,12 @@
 
 package org.eclipse.collections.impl.collector;
 
+import java.util.Collection;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.StringJoiner;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.BinaryOperator;
 import java.util.function.Supplier;
 import java.util.stream.Collector;
 
@@ -22,10 +26,32 @@ import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
 import org.eclipse.collections.api.bimap.ImmutableBiMap;
 import org.eclipse.collections.api.bimap.MutableBiMap;
 import org.eclipse.collections.api.block.function.Function;
+import org.eclipse.collections.api.block.function.Function2;
+import org.eclipse.collections.api.block.function.primitive.BooleanFunction;
+import org.eclipse.collections.api.block.function.primitive.ByteFunction;
+import org.eclipse.collections.api.block.function.primitive.CharFunction;
+import org.eclipse.collections.api.block.function.primitive.DoubleFunction;
+import org.eclipse.collections.api.block.function.primitive.FloatFunction;
+import org.eclipse.collections.api.block.function.primitive.IntFunction;
+import org.eclipse.collections.api.block.function.primitive.LongFunction;
+import org.eclipse.collections.api.block.function.primitive.ShortFunction;
+import org.eclipse.collections.api.block.predicate.Predicate;
+import org.eclipse.collections.api.block.predicate.Predicate2;
+import org.eclipse.collections.api.collection.MutableCollection;
+import org.eclipse.collections.api.collection.primitive.MutableBooleanCollection;
+import org.eclipse.collections.api.collection.primitive.MutableByteCollection;
+import org.eclipse.collections.api.collection.primitive.MutableCharCollection;
+import org.eclipse.collections.api.collection.primitive.MutableDoubleCollection;
+import org.eclipse.collections.api.collection.primitive.MutableFloatCollection;
+import org.eclipse.collections.api.collection.primitive.MutableIntCollection;
+import org.eclipse.collections.api.collection.primitive.MutableLongCollection;
+import org.eclipse.collections.api.collection.primitive.MutableShortCollection;
 import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.api.map.MutableMap;
+import org.eclipse.collections.api.map.primitive.MutableObjectDoubleMap;
+import org.eclipse.collections.api.map.primitive.MutableObjectLongMap;
 import org.eclipse.collections.api.multimap.ImmutableMultimap;
 import org.eclipse.collections.api.multimap.MutableMultimap;
 import org.eclipse.collections.api.multimap.bag.ImmutableBagMultimap;
@@ -34,13 +60,17 @@ import org.eclipse.collections.api.multimap.list.ImmutableListMultimap;
 import org.eclipse.collections.api.multimap.list.MutableListMultimap;
 import org.eclipse.collections.api.multimap.set.ImmutableSetMultimap;
 import org.eclipse.collections.api.multimap.set.MutableSetMultimap;
+import org.eclipse.collections.api.partition.PartitionMutableCollection;
 import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 import org.eclipse.collections.api.stack.ImmutableStack;
 import org.eclipse.collections.api.stack.MutableStack;
+import org.eclipse.collections.api.tuple.Pair;
+import org.eclipse.collections.api.tuple.primitive.ObjectIntPair;
 import org.eclipse.collections.impl.block.factory.Comparators;
+import org.eclipse.collections.impl.block.factory.PrimitiveFunctions;
 import org.eclipse.collections.impl.factory.Bags;
 import org.eclipse.collections.impl.factory.BiMaps;
 import org.eclipse.collections.impl.factory.Lists;
@@ -50,6 +80,10 @@ import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.factory.SortedBags;
 import org.eclipse.collections.impl.factory.SortedSets;
 import org.eclipse.collections.impl.factory.Stacks;
+import org.eclipse.collections.impl.map.mutable.primitive.ObjectDoubleHashMap;
+import org.eclipse.collections.impl.map.mutable.primitive.ObjectLongHashMap;
+import org.eclipse.collections.impl.tuple.Tuples;
+import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 
 /**
  * A set of Collectors for Eclipse Collections types and algorithms.
@@ -499,6 +533,379 @@ public final class Collectors2
             Function<? super T, ? extends V> valueFunction)
     {
         return Collectors2.groupByImmutable(groupBy, valueFunction, Multimaps.mutable.bag::empty, MutableBagMultimap::toImmutable);
+    }
+
+    public static <T> Collector<T, ?, MutableList<MutableList<T>>> chunk(int size)
+    {
+        if (size <= 0)
+        {
+            throw new IllegalArgumentException("Size for groups must be positive but was: " + size);
+        }
+        return Collector.of(
+                Lists.mutable::empty,
+                (MutableList<MutableList<T>> batches, T each) ->
+                {
+                    MutableList<T> batch = batches.getLast();
+                    if (batch == null || batch.size() == size)
+                    {
+                        batch = Lists.mutable.empty();
+                        batches.add(batch);
+                    }
+                    batch.add(each);
+                },
+                MutableList::withAll,
+                EMPTY_CHARACTERISTICS);
+    }
+
+    public static <T, S> Collector<T, ?, MutableList<Pair<T, S>>> zip(Iterable<S> other)
+    {
+        Iterator<S> iterator = other.iterator();
+        return Collector.of(
+                Lists.mutable::empty,
+                (list, each) ->
+                {
+                    if (iterator.hasNext())
+                    {
+                        list.add(Tuples.pair(each, iterator.next()));
+                    }
+                },
+                (l, r) ->
+                {
+                    throw new UnsupportedOperationException("Zip not supported in parallel.");
+                },
+                EMPTY_CHARACTERISTICS);
+    }
+
+    public static <T> Collector<T, ?, MutableList<ObjectIntPair<T>>> zipWithIndex()
+    {
+        AtomicInteger index = new AtomicInteger(0);
+        return Collector.of(
+                Lists.mutable::empty,
+                (list, each) -> list.add(PrimitiveTuples.pair(each, index.getAndAdd(1))),
+                (l, r) ->
+                {
+                    throw new UnsupportedOperationException("ZipWithIndex not supported in parallel.");
+                },
+                EMPTY_CHARACTERISTICS);
+    }
+
+    public static <T, V> Collector<T, ?, MutableObjectLongMap<V>> sumByInt(
+            Function<? super T, ? extends V> groupBy,
+            IntFunction<? super T> function)
+    {
+        Function2<MutableObjectLongMap<V>, T, MutableObjectLongMap<V>> accumulator =
+                PrimitiveFunctions.sumByIntFunction(groupBy, function);
+        return Collector.of(
+                ObjectLongHashMap::newMap,
+                accumulator::value,
+                (map1, map2) ->
+                {
+                    map2.forEachKeyValue(map1::addToValue);
+                    return map1;
+                },
+                Collector.Characteristics.UNORDERED);
+    }
+
+    public static <T, V> Collector<T, ?, MutableObjectLongMap<V>> sumByLong(
+            Function<? super T, ? extends V> groupBy,
+            LongFunction<? super T> function)
+    {
+        Function2<MutableObjectLongMap<V>, T, MutableObjectLongMap<V>> accumulator =
+                PrimitiveFunctions.sumByLongFunction(groupBy, function);
+        return Collector.of(
+                ObjectLongHashMap::newMap,
+                accumulator::value,
+                (map1, map2) ->
+                {
+                    map2.forEachKeyValue(map1::addToValue);
+                    return map1;
+                },
+                Collector.Characteristics.UNORDERED);
+    }
+
+    public static <T, V> Collector<T, ?, MutableObjectDoubleMap<V>> sumByFloat(
+            Function<? super T, ? extends V> groupBy,
+            FloatFunction<? super T> function)
+    {
+        Function2<MutableObjectDoubleMap<V>, T, MutableObjectDoubleMap<V>> accumulator =
+                PrimitiveFunctions.sumByFloatFunction(groupBy, function);
+        return Collector.of(
+                ObjectDoubleHashMap::newMap,
+                accumulator::value,
+                (map1, map2) ->
+                {
+                    map2.forEachKeyValue(map1::addToValue);
+                    return map1;
+                },
+                Collector.Characteristics.UNORDERED);
+    }
+
+    public static <T, V> Collector<T, ?, MutableObjectDoubleMap<V>> sumByDouble(
+            Function<? super T, ? extends V> groupBy,
+            DoubleFunction<? super T> function)
+    {
+        Function2<MutableObjectDoubleMap<V>, T, MutableObjectDoubleMap<V>> accumulator =
+                PrimitiveFunctions.sumByDoubleFunction(groupBy, function);
+        return Collector.of(
+                ObjectDoubleHashMap::newMap,
+                accumulator::value,
+                (map1, map2) ->
+                {
+                    map2.forEachKeyValue(map1::addToValue);
+                    return map1;
+                },
+                Collector.Characteristics.UNORDERED);
+    }
+
+    public static <T, R extends Collection<T>> Collector<T, ?, R> select(Predicate<? super T> predicate, Supplier<R> supplier)
+    {
+        return Collector.of(
+                supplier,
+                (collection, each) ->
+                {
+                    if (predicate.accept(each))
+                    {
+                        collection.add(each);
+                    }
+                },
+                Collectors2.mergeCollections(),
+                EMPTY_CHARACTERISTICS);
+    }
+
+    public static <T, P, R extends Collection<T>> Collector<T, ?, R> selectWith(
+            Predicate2<? super T, ? super P> predicate,
+            P parameter,
+            Supplier<R> supplier)
+    {
+        return Collector.of(
+                supplier,
+                (collection, each) ->
+                {
+                    if (predicate.accept(each, parameter))
+                    {
+                        collection.add(each);
+                    }
+                },
+                Collectors2.mergeCollections(),
+                EMPTY_CHARACTERISTICS);
+    }
+
+    public static <T, R extends Collection<T>> Collector<T, ?, R> reject(Predicate<? super T> predicate, Supplier<R> supplier)
+    {
+        return Collector.of(
+                supplier,
+                (collection, each) ->
+                {
+                    if (!predicate.accept(each))
+                    {
+                        collection.add(each);
+                    }
+                },
+                Collectors2.mergeCollections(),
+                EMPTY_CHARACTERISTICS);
+    }
+
+    public static <T, P, R extends Collection<T>> Collector<T, ?, R> rejectWith(
+            Predicate2<? super T, ? super P> predicate,
+            P parameter,
+            Supplier<R> supplier)
+    {
+        return Collector.of(
+                supplier,
+                (collection, each) ->
+                {
+                    if (!predicate.accept(each, parameter))
+                    {
+                        collection.add(each);
+                    }
+                },
+                Collectors2.mergeCollections(),
+                EMPTY_CHARACTERISTICS);
+    }
+
+    public static <T, R extends PartitionMutableCollection<T>> Collector<T, ?, R> partition(
+            Predicate<? super T> predicate,
+            Supplier<R> supplier)
+    {
+        return Collector.of(
+                supplier,
+                (partition, each) ->
+                {
+                    MutableCollection<T> bucket = predicate.accept(each) ? partition.getSelected() : partition.getRejected();
+                    bucket.add(each);
+                },
+                Collectors2.mergePartitions(),
+                EMPTY_CHARACTERISTICS);
+    }
+
+    public static <T, P, R extends PartitionMutableCollection<T>> Collector<T, ?, R> partitionWith(
+            Predicate2<? super T, ? super P> predicate,
+            P parameter,
+            Supplier<R> supplier)
+    {
+        return Collector.of(
+                supplier,
+                (partition, each) ->
+                {
+                    MutableCollection<T> bucket =
+                            predicate.accept(each, parameter) ? partition.getSelected() : partition.getRejected();
+                    bucket.add(each);
+                },
+                Collectors2.mergePartitions(),
+                EMPTY_CHARACTERISTICS);
+    }
+
+    public static <T, V, R extends Collection<V>> Collector<T, ?, R> collect(
+            Function<? super T, ? extends V> function, Supplier<R> supplier)
+    {
+        return Collector.of(
+                supplier,
+                (collection, each) -> collection.add(function.valueOf(each)),
+                Collectors2.mergeCollections(),
+                EMPTY_CHARACTERISTICS);
+    }
+
+    public static <T, P, V, R extends Collection<V>> Collector<T, ?, R> collectWith(
+            Function2<? super T, ? super P, ? extends V> function,
+            P parameter,
+            Supplier<R> supplier)
+    {
+        return Collector.of(
+                supplier,
+                (collection, each) -> collection.add(function.value(each, parameter)),
+                Collectors2.mergeCollections(),
+                EMPTY_CHARACTERISTICS);
+    }
+
+    public static <T, R extends MutableBooleanCollection> Collector<T, ?, R> collectBoolean(
+            BooleanFunction<? super T> function, Supplier<R> supplier)
+    {
+        return Collector.of(
+                supplier,
+                (collection, each) -> collection.add(function.booleanValueOf(each)),
+                (collection1, collection2) ->
+                {
+                    collection1.addAll(collection2);
+                    return collection1;
+                },
+                EMPTY_CHARACTERISTICS);
+    }
+
+    public static <T, R extends MutableByteCollection> Collector<T, ?, R> collectByte(
+            ByteFunction<? super T> function, Supplier<R> supplier)
+    {
+        return Collector.of(
+                supplier,
+                (collection, each) -> collection.add(function.byteValueOf(each)),
+                (collection1, collection2) ->
+                {
+                    collection1.addAll(collection2);
+                    return collection1;
+                },
+                EMPTY_CHARACTERISTICS);
+    }
+
+    public static <T, R extends MutableCharCollection> Collector<T, ?, R> collectChar(
+            CharFunction<? super T> function, Supplier<R> supplier)
+    {
+        return Collector.of(
+                supplier,
+                (collection, each) -> collection.add(function.charValueOf(each)),
+                (collection1, collection2) ->
+                {
+                    collection1.addAll(collection2);
+                    return collection1;
+                },
+                EMPTY_CHARACTERISTICS);
+    }
+
+    public static <T, R extends MutableShortCollection> Collector<T, ?, R> collectShort(
+            ShortFunction<? super T> function, Supplier<R> supplier)
+    {
+        return Collector.of(
+                supplier,
+                (collection, each) -> collection.add(function.shortValueOf(each)),
+                (collection1, collection2) ->
+                {
+                    collection1.addAll(collection2);
+                    return collection1;
+                },
+                EMPTY_CHARACTERISTICS);
+    }
+
+    public static <T, R extends MutableIntCollection> Collector<T, ?, R> collectInt(
+            IntFunction<? super T> function, Supplier<R> supplier)
+    {
+        return Collector.of(
+                supplier,
+                (collection, each) -> collection.add(function.intValueOf(each)),
+                (collection1, collection2) ->
+                {
+                    collection1.addAll(collection2);
+                    return collection1;
+                },
+                EMPTY_CHARACTERISTICS);
+    }
+
+    public static <T, R extends MutableFloatCollection> Collector<T, ?, R> collectFloat(
+            FloatFunction<? super T> function, Supplier<R> supplier)
+    {
+        return Collector.of(
+                supplier,
+                (collection, each) -> collection.add(function.floatValueOf(each)),
+                (collection1, collection2) ->
+                {
+                    collection1.addAll(collection2);
+                    return collection1;
+                },
+                EMPTY_CHARACTERISTICS);
+    }
+
+    public static <T, R extends MutableLongCollection> Collector<T, ?, R> collectLong(
+            LongFunction<? super T> function, Supplier<R> supplier)
+    {
+        return Collector.of(
+                supplier,
+                (collection, each) -> collection.add(function.longValueOf(each)),
+                (collection1, collection2) ->
+                {
+                    collection1.addAll(collection2);
+                    return collection1;
+                },
+                EMPTY_CHARACTERISTICS);
+    }
+
+    public static <T, R extends MutableDoubleCollection> Collector<T, ?, R> collectDouble(
+            DoubleFunction<? super T> function, Supplier<R> supplier)
+    {
+        return Collector.of(
+                supplier,
+                (collection, each) -> collection.add(function.doubleValueOf(each)),
+                (collection1, collection2) ->
+                {
+                    collection1.addAll(collection2);
+                    return collection1;
+                },
+                EMPTY_CHARACTERISTICS);
+    }
+
+    private static <T, R extends Collection<T>> BinaryOperator<R> mergeCollections()
+    {
+        return (collection1, collection2) ->
+        {
+            collection1.addAll(collection2);
+            return collection1;
+        };
+    }
+
+    private static <T, R extends PartitionMutableCollection<T>> BinaryOperator<R> mergePartitions()
+    {
+        return (partition1, partition2) ->
+        {
+            partition1.getSelected().addAll(partition2.getSelected());
+            partition1.getRejected().addAll(partition2.getRejected());
+            return partition1;
+        };
     }
 }
 
