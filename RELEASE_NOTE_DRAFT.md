@@ -1,5 +1,7 @@
-8.0.0
-=====
+8.0.0-M1 (July 2016)
+====================
+
+This is the 8.0.0 Milestone 1 release.   
 
 New Functionality
 -----------------
@@ -18,6 +20,8 @@ New Functionality
 * Implemented reduce(BinaryOperator), reduceInPlace(Collector) and reduceInPlace(Supplier, BiConsumer) on RichIterable.
 * Implemented Collectors2 with makeString, toList, toSet, toBag, toStack, toMap, toBiMap, groupBy, to{List/Set/Bag}Multimap.
 * Implemented detectOptional() and detectWithOptional() on RichIterable.
+* Changed the basic functional interface to extend the JDK ones and add default implementation of the JDK SAM so that our types still have a single abstract method.
+* Changed our IntPredicate, LongPredicate, and DoublePredicate to extend the JDK types with the same names.
 
 Optimizations
 -------------
@@ -49,44 +53,44 @@ Acquiring Eclipse Collections
 <dependency>
   <groupId>org.eclipse.collections</groupId>
   <artifactId>eclipse-collections-api</artifactId>
-  <version>8.0.0</version>
+  <version>8.0.0-M1</version>
 </dependency>
 
 <dependency>
   <groupId>org.eclipse.collections</groupId>
   <artifactId>eclipse-collections</artifactId>
-  <version>8.0.0</version>
+  <version>8.0.0-M1</version>
 </dependency>
 
 <dependency>
   <groupId>org.eclipse.collections</groupId>
   <artifactId>eclipse-collections-testutils</artifactId>
-  <version>8.0.0</version>
+  <version>8.0.0-M1</version>
   <scope>test</scope>
 </dependency>
 
 <dependency>
   <groupId>org.eclipse.collections</groupId>
   <artifactId>eclipse-collections-forkjoin</artifactId>
-  <version>8.0.0</version>
+  <version>8.0.0-M1</version>
 </dependency>
 ```
 
 ### Gradle
 
 ```groovy
-compile 'org.eclipse.collections:eclipse-collections-api:8.0.0'
-compile 'org.eclipse.collections:eclipse-collections:8.0.0'
-testCompile 'org.eclipse.collections:eclipse-collections-testutils:8.0.0'
-compile 'org.eclipse.collections:eclipse-collections-forkjoin:8.0.0'
+compile 'org.eclipse.collections:eclipse-collections-api:8.0.0-M1'
+compile 'org.eclipse.collections:eclipse-collections:8.0.0-M1'
+testCompile 'org.eclipse.collections:eclipse-collections-testutils:8.0.0-M1'
+compile 'org.eclipse.collections:eclipse-collections-forkjoin:8.0.0-M1'
 ```
 
 ### Ivy
 
 ```xml
-<dependency org="org.eclipse.collections" name="eclipse-collections-api" rev="8.0.0" />
-<dependency org="org.eclipse.collections" name="eclipse-collections" rev="8.0.0" />
-<dependency org="org.eclipse.collections" name="eclipse-collections-testutils" rev="8.0.0" />
-<dependency org="org.eclipse.collections" name="eclipse-collections-forkjoin" rev="8.0.0"/>
+<dependency org="org.eclipse.collections" name="eclipse-collections-api" rev="8.0.0-M1" />
+<dependency org="org.eclipse.collections" name="eclipse-collections" rev="8.0.0-M1" />
+<dependency org="org.eclipse.collections" name="eclipse-collections-testutils" rev="8.0.0-M1" />
+<dependency org="org.eclipse.collections" name="eclipse-collections-forkjoin" rev="8.0.0-M1"/>
 ```
 
