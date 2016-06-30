@@ -1652,6 +1652,35 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         return null;
     }
 
+    public V getOnly()
+    {
+        if (this.size() != 1)
+        {
+            throw new IllegalStateException("Size must be 1 but was " + this.size());
+        }
+
+        if (this.sentinelValues != null)
+        {
+            if (this.sentinelValues.containsZeroKey)
+            {
+                return this.sentinelValues.zeroValue;
+            }
+            if (this.sentinelValues.containsOneKey)
+            {
+                return this.sentinelValues.oneValue;
+            }
+        }
+        for (int i = 0; i \< this.keys.length; i++)
+        {
+            if (isNonSentinel(this.keys[i]))
+            {
+                return this.values[i];
+            }
+        }
+
+        return null;
+    }
+
     public MutableList\<V> toList()
     {
         MutableList\<V> list = Lists.mutable.of();

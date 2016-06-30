@@ -130,6 +130,12 @@ final class TripletonList<T>
     }
 
     @Override
+    public T getOnly()
+    {
+        throw new IllegalStateException("Size must be 1 but was " + this.size());
+    }
+
+    @Override
     public void each(Procedure<? super T> procedure)
     {
         procedure.value(this.element1);

@@ -609,6 +609,24 @@ public abstract class AbstractLazyIterableTestCase
     }
 
     @Test
+    public void getOnly()
+    {
+        Assert.assertEquals(Integer.valueOf(1), this.newWith(1).getOnly());
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void getOnly_throws_when_empty()
+    {
+        this.newWith().getOnly();
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void getOnly_throws_when_multiple_values()
+    {
+        this.newWith(1, 2, 3).getOnly();
+    }
+
+    @Test
     public void isEmpty()
     {
         Assert.assertTrue(this.newWith().isEmpty());

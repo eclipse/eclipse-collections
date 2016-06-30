@@ -739,6 +739,20 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
     }
 
     @Override
+    public T getOnly()
+    {
+        this.acquireReadLock();
+        try
+        {
+            return this.getDelegate().getOnly();
+        }
+        finally
+        {
+            this.unlockReadLock();
+        }
+    }
+
+    @Override
     public boolean notEmpty()
     {
         this.acquireReadLock();
@@ -1979,6 +1993,12 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         public T getLast()
         {
             return this.delegate.getLast();
+        }
+
+        @Override
+        public T getOnly()
+        {
+            return this.delegate.getOnly();
         }
 
         @Override

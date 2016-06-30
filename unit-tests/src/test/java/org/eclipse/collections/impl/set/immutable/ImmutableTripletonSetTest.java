@@ -33,4 +33,10 @@ public class ImmutableTripletonSetTest
         Verify.assertSize(2, immutable.newWithout(1).castToSet());
         Verify.assertSize(3, immutable.newWithout(0).castToSet());
     }
+
+    @Test
+    public void getOnly()
+    {
+        Verify.assertThrows(IllegalStateException.class, () -> this.classUnderTest().getOnly());
+    }
 }

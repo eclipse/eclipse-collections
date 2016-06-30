@@ -336,6 +336,12 @@ public class SingletonListTest extends AbstractMemoryEfficientMutableListTestCas
     }
 
     @Test
+    public void getOnly()
+    {
+        Assert.assertEquals(Integer.valueOf(1), SingletonListTest.newWith(1).getOnly());
+    }
+
+    @Test
     public void isEmpty()
     {
         Verify.assertNotEmpty(SingletonListTest.newWith(1));

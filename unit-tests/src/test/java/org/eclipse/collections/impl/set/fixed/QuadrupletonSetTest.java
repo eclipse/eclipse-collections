@@ -201,4 +201,10 @@ public class QuadrupletonSetTest extends AbstractMemoryEfficientMutableSetTestCa
         source.forEachWith(Procedures2.fromProcedure(CollectionAddProcedure.on(result)), null);
         Assert.assertEquals(FastList.newListWith("1", "2", "3", "4"), result);
     }
+
+    @Test
+    public void getOnly()
+    {
+        Verify.assertThrows(IllegalStateException.class, () -> this.set.getOnly());
+    }
 }

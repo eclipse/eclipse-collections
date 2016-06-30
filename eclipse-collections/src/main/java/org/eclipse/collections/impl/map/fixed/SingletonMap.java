@@ -260,4 +260,10 @@ final class SingletonMap<K, V>
         }
         return null;
     }
+
+    @Override
+    public V getOnly()
+    {
+        return this.value1;
+    }
 }

@@ -251,6 +251,13 @@ public class ImmutableEmptyBagTest extends ImmutableBagTestCase
 
     @Override
     @Test
+    public void getOnly()
+    {
+        Verify.assertThrows(IllegalStateException.class, () -> this.newBag().getOnly());
+    }
+
+    @Override
+    @Test
     public void isEmpty()
     {
         ImmutableBag<String> bag = this.newBag();

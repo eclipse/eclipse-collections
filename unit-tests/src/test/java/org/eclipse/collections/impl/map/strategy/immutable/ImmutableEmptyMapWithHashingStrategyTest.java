@@ -212,6 +212,12 @@ public class ImmutableEmptyMapWithHashingStrategyTest extends ImmutableMemoryEff
         map.minBy(Functions.getStringPassThru());
     }
 
+    @Test(expected = IllegalStateException.class)
+    public void getOnly()
+    {
+        this.classUnderTest().getOnly();
+    }
+
     @Override
     public void select()
     {

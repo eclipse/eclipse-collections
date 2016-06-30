@@ -214,6 +214,12 @@ public class ImmutableDoubletonMapTest extends ImmutableMemoryEfficientMapTestCa
         Assert.assertEquals(FastList.newListWith(Tuples.pair(1, 1), Tuples.pair(2, 2)), values);
     }
 
+    @Test
+    public void getOnly()
+    {
+        Verify.assertThrows(IllegalStateException.class, () -> this.classUnderTest().getOnly());
+    }
+
     @Override
     public void select()
     {

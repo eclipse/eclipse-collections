@@ -352,4 +352,10 @@ public class TripletonListTest extends AbstractMemoryEfficientMutableListTestCas
         Verify.assertListsEqual(FastList.newListWith(3, 2), list);
         Verify.assertInstanceOf(DoubletonList.class, list);
     }
+
+    @Test
+    public void testGetOnly()
+    {
+        Verify.assertThrows(IllegalStateException.class, () -> this.list.getOnly());
+    }
 }

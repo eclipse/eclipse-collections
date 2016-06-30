@@ -322,4 +322,10 @@ public class EmptySetTest extends AbstractMemoryEfficientMutableSetTestCase
                 UnifiedSet.newSetWith("not present"),
                 this.classUnderTest().symmetricDifferenceInto(UnifiedSet.newSetWith("not present"), UnifiedSet.newSet()));
     }
+
+    @Test
+    public void getOnly()
+    {
+        Verify.assertThrows(IllegalStateException.class, () -> this.emptySet.getOnly());
+    }
 }

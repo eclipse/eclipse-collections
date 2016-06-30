@@ -187,6 +187,12 @@ public class ImmutableTripletonMapTest extends ImmutableMemoryEfficientMapTestCa
         Assert.assertEquals("{1=One, 2=Two, 3=Three}", map.toString());
     }
 
+    @Test
+    public void getOnly()
+    {
+        Verify.assertThrows(IllegalStateException.class, () -> this.classUnderTest().getOnly());
+    }
+
     @Override
     public void select()
     {

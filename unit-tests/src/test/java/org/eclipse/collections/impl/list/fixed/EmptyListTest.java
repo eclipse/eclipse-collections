@@ -46,6 +46,12 @@ public class EmptyListTest
     }
 
     @Test
+    public void getOnly()
+    {
+        Verify.assertThrows(IllegalStateException.class, () -> new EmptyList<>().getOnly());
+    }
+
+    @Test
     public void readResolve()
     {
         Verify.assertInstanceOf(EmptyList.class, Lists.fixedSize.of());

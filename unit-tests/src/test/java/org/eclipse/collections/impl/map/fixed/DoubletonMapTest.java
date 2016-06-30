@@ -28,6 +28,7 @@ import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.Tuples;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.rules.Verifier;
 
 /**
  * JUnit test for {@link DoubletonMap}.
@@ -414,5 +415,11 @@ public class DoubletonMapTest extends AbstractMemoryEfficientMutableMapTest
             collection.add(eachValue);
         }
         Assert.assertEquals(FastList.newListWith("1", "2"), collection);
+    }
+
+    @Test
+    public void getOnly()
+    {
+        Verify.assertThrows(IllegalStateException.class, () -> this.classUnderTest().getOnly());
     }
 }

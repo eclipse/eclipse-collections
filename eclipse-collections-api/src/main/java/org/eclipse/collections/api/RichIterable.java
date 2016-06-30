@@ -129,6 +129,15 @@ public interface RichIterable<T>
     T getLast();
 
     /**
+     * Returns the element if the iterable has exactly one element. Otherwise, throw {@link IllegalStateException}.
+     *
+     * @return an element of an iterable.
+     * @throws IllegalStateException if iterable is empty or has multiple elements.
+     * @since 8.0
+     */
+    T getOnly();
+
+    /**
      * Returns true if the iterable has an element which responds true to element.equals(object).
      *
      * @since 1.0

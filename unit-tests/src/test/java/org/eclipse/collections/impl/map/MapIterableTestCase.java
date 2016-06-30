@@ -852,6 +852,26 @@ public abstract class MapIterableTestCase
     }
 
     @Test
+    public void getOnly()
+    {
+        MapIterable<String, String> map = this.newMapWithKeyValue("1", "One");
+
+        Assert.assertEquals("One", map.getOnly());
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void getOnly_throws_when_empty()
+    {
+        this.newMap().getOnly();
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void getOnly_throws_when_multiple_values()
+    {
+        this.newMapWithKeysValues("1", "One", "2", "Two").getOnly();
+    }
+
+    @Test
     public void containsAllIterable()
     {
         MapIterable<String, String> map = this.newMapWithKeysValues("1", "One", "2", "Two", "3", "Three");

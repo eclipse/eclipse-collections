@@ -218,6 +218,13 @@ public class ImmutableEmptyListTest extends AbstractImmutableListTestCase
         Assert.assertNull(integers.getLast());
     }
 
+    @Test(expected = IllegalStateException.class)
+    public void getOnly()
+    {
+        ImmutableList<Integer> list = this.classUnderTest();
+        list.getOnly();
+    }
+
     @Override
     @Test
     public void isEmpty()

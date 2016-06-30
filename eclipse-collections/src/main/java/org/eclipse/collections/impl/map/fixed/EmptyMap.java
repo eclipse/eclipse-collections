@@ -206,4 +206,10 @@ final class EmptyMap<K, V>
     {
         return null;
     }
+
+    @Override
+    public V getOnly()
+    {
+        throw new IllegalStateException("Size must be 1 but was " + this.size());
+    }
 }

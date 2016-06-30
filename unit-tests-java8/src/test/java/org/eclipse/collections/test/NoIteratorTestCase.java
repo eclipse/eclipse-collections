@@ -37,6 +37,13 @@ public interface NoIteratorTestCase extends RichIterableTestCase
 
     @Override
     @Test
+    default void RichIterable_getOnly()
+    {
+        // Not applicable
+    }
+
+    @Override
+    @Test
     default void RichIterable_iterator_iterationOrder()
     {
         // Not applicable

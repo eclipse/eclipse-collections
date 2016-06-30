@@ -174,6 +174,12 @@ final class ImmutableSingletonBag<T>
     }
 
     @Override
+    public T getOnly()
+    {
+        return this.value;
+    }
+
+    @Override
     public boolean contains(Object object)
     {
         return Comparators.nullSafeEquals(this.value, object);

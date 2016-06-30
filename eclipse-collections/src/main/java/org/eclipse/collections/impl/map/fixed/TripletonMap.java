@@ -398,4 +398,10 @@ final class TripletonMap<K, V>
                 return Maps.fixedSize.of();
         }
     }
+
+    @Override
+    public V getOnly()
+    {
+        throw new IllegalStateException("Size must be 1 but was " + this.size());
+    }
 }

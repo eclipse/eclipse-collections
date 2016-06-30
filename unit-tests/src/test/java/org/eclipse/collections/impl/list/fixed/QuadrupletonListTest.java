@@ -202,4 +202,10 @@ public class QuadrupletonListTest extends AbstractMemoryEfficientMutableListTest
         Verify.assertListsEqual(FastList.newListWith(1, 3, 2), list);
         Verify.assertInstanceOf(TripletonList.class, list);
     }
+
+    @Test
+    public void testGetOnly()
+    {
+        Verify.assertThrows(IllegalStateException.class, () -> this.list.getOnly());
+    }
 }

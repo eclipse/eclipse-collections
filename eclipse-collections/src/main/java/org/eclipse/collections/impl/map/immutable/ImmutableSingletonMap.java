@@ -205,6 +205,12 @@ final class ImmutableSingletonMap<K, V>
         return null;
     }
 
+    @Override
+    public V getOnly()
+    {
+        return this.value1;
+    }
+
     private Object writeReplace()
     {
         return new ImmutableMapSerializationProxy<>(this);

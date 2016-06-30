@@ -222,4 +222,10 @@ public class DoubletonSetTest extends AbstractMemoryEfficientMutableSetTestCase
                 set.groupByEach(new NegativeIntervalFunction(), UnifiedSetMultimap.newMultimap());
         Assert.assertEquals(expected, actualWithTarget);
     }
+
+    @Test
+    public void getOnly()
+    {
+        Verify.assertThrows(IllegalStateException.class, () -> this.set.getOnly());
+    }
 }

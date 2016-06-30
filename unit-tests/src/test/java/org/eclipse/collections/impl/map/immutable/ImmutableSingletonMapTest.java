@@ -248,6 +248,13 @@ public class ImmutableSingletonMapTest extends ImmutableMemoryEfficientMapTestCa
         Assert.assertEquals(FastList.newListWith(1), values);
     }
 
+    @Test
+    public void getOnly()
+    {
+        ImmutableSingletonMap<Integer, String> singletonMap = new ImmutableSingletonMap<>(1, "One");
+        Assert.assertEquals("One", singletonMap.getOnly());
+    }
+
     @Override
     public void select()
     {

@@ -112,6 +112,12 @@ public abstract class AbstractBiMap<K, V> implements BiMap<K, V>
     }
 
     @Override
+    public V getOnly()
+    {
+        return this.getDelegate().getOnly();
+    }
+
+    @Override
     public V getIfAbsent(K key, Function0<? extends V> function)
     {
         return this.getDelegate().getIfAbsent(key, function);

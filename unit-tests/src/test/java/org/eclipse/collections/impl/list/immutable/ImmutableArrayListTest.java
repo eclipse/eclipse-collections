@@ -217,4 +217,25 @@ public class ImmutableArrayListTest extends AbstractImmutableListTestCase
     {
         this.classUnderTest().groupByUniqueKey(id -> id, UnifiedMap.newWithKeysValues(2, 2));
     }
+
+    @Test
+    public void getOnly()
+    {
+        ImmutableList<Integer> list = this.newList(2);
+        Assert.assertEquals(Integer.valueOf(2), list.getOnly());
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void getOnly_exception_when_empty()
+    {
+        ImmutableList<Integer> list = this.newList();
+        list.getOnly();
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void getOnly_exception_when_multiple_items()
+    {
+        ImmutableList<Integer> list = this.newList(1, 2, 3);
+        list.getOnly();
+    }
 }

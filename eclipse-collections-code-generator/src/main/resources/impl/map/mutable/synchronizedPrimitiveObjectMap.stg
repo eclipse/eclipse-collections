@@ -353,6 +353,14 @@ public final class Synchronized<name>ObjectMap\<V>
         }
     }
 
+    public V getOnly()
+    {
+        synchronized (this.lock)
+        {
+            return this.map.getOnly();
+        }
+    }
+
     public boolean contains(Object object)
     {
         synchronized (this.lock)

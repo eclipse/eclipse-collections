@@ -10,7 +10,9 @@
 
 package org.eclipse.collections.impl.set.immutable;
 
+import org.eclipse.collections.api.collection.ImmutableCollection;
 import org.eclipse.collections.api.set.ImmutableSet;
+import org.junit.Assert;
 import org.junit.Test;
 
 public class ImmutableSingletonSetTest
@@ -52,5 +54,12 @@ public class ImmutableSingletonSetTest
     {
         // Collections with one element should not throw to emulate the JDK Collections behavior
         super.max_null_throws_without_comparator();
+    }
+
+    @Test
+    public void getOnly()
+    {
+        ImmutableCollection<Integer> integers = this.classUnderTest();
+        Assert.assertEquals(Integer.valueOf(1), integers.getOnly());
     }
 }

@@ -195,6 +195,12 @@ public class ImmutableEmptyMapTest extends ImmutableMemoryEfficientMapTestCase
         map.minBy(Functions.getStringPassThru());
     }
 
+    @Test(expected = IllegalStateException.class)
+    public void getOnly()
+    {
+        new ImmutableEmptyMap<>().getOnly();
+    }
+
     @Override
     public void select()
     {

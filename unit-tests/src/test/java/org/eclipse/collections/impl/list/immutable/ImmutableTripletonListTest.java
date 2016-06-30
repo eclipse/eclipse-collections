@@ -10,7 +10,9 @@
 
 package org.eclipse.collections.impl.list.immutable;
 
+import org.eclipse.collections.api.collection.ImmutableCollection;
 import org.eclipse.collections.api.list.ImmutableList;
+import org.junit.Test;
 
 public class ImmutableTripletonListTest extends AbstractImmutableListTestCase
 {
@@ -18,5 +20,12 @@ public class ImmutableTripletonListTest extends AbstractImmutableListTestCase
     protected ImmutableList<Integer> classUnderTest()
     {
         return new ImmutableTripletonList<>(1, 2, 3);
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void getOnly()
+    {
+        ImmutableList<Integer> list = this.classUnderTest();
+        list.getOnly();
     }
 }

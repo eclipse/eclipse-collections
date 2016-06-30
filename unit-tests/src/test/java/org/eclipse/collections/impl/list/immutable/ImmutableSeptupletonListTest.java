@@ -11,6 +11,7 @@
 package org.eclipse.collections.impl.list.immutable;
 
 import org.eclipse.collections.api.list.ImmutableList;
+import org.junit.Test;
 
 public class ImmutableSeptupletonListTest extends AbstractImmutableListTestCase
 {
@@ -18,5 +19,12 @@ public class ImmutableSeptupletonListTest extends AbstractImmutableListTestCase
     protected ImmutableList<Integer> classUnderTest()
     {
         return new ImmutableSeptupletonList<>(1, 2, 3, 4, 5, 6, 7);
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void getOnly()
+    {
+        ImmutableList<Integer> list = this.classUnderTest();
+        list.getOnly();
     }
 }

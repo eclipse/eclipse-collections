@@ -264,6 +264,11 @@ public final class Unmodifiable<name>ObjectMap\<V>
         return this.map.getLast();
     }
 
+    public V getOnly()
+    {
+        return this.map.getOnly();
+    }
+
     public boolean contains(Object object)
     {
         return this.map.contains(object);

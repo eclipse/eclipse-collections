@@ -212,4 +212,10 @@ public class TripletonSetTest extends AbstractMemoryEfficientMutableSetTestCase
         Assert.assertEquals("1", source.getFirst());
         Assert.assertEquals("3", source.getLast());
     }
+
+    @Test
+    public void getOnly()
+    {
+        Verify.assertThrows(IllegalStateException.class, () -> this.set.getOnly());
+    }
 }

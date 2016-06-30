@@ -45,4 +45,11 @@ public class ImmutableQuadrupletonListTest extends AbstractImmutableListTestCase
         Assert.assertFalse(distinctList.isEmpty());
         Assert.assertEquals(FastList.newListWith("a", "B", "c"), distinctList);
     }
+
+    @Test(expected = IllegalStateException.class)
+    public void getOnly()
+    {
+        ImmutableList<Integer> list = this.classUnderTest();
+        list.getOnly();
+    }
 }

@@ -233,6 +233,24 @@ public abstract class AbstractImmutableUnifiedSetTestCase
     }
 
     @Test
+    public void getOnly()
+    {
+        Assert.assertEquals(Integer.valueOf(1), this.newSetWith(1).getOnly());
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void getOnly_throws_when_empty()
+    {
+        this.newSet().getOnly();
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void getOnly_throws_when_multiple_values()
+    {
+        this.newSetWith(1, 2, 3).getOnly();
+    }
+
+    @Test
     public void isEmpty()
     {
         Assert.assertTrue(this.newSet().isEmpty());

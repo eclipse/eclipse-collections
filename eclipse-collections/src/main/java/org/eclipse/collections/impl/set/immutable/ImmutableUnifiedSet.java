@@ -78,6 +78,12 @@ final class ImmutableUnifiedSet<T>
         return this.delegate.getLast();
     }
 
+    @Override
+    public T getOnly()
+    {
+        return this.delegate.getOnly();
+    }
+
     public static <T> ImmutableSet<T> newSetWith(T... elements)
     {
         return new ImmutableUnifiedSet<>(UnifiedSet.newSetWith(elements));

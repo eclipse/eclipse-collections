@@ -76,6 +76,12 @@ public class ReverseIterable<T>
     }
 
     @Override
+    public T getOnly()
+    {
+        return this.adapted.getOnly();
+    }
+
+    @Override
     public boolean isEmpty()
     {
         return this.adapted.isEmpty();

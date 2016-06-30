@@ -271,6 +271,14 @@ public class ImmutableSingletonBagTest extends ImmutableBagTestCase
 
     @Override
     @Test
+    public void getOnly()
+    {
+        super.getOnly();
+        Assert.assertEquals(VAL, this.newBag().getOnly());
+    }
+
+    @Override
+    @Test
     public void contains()
     {
         super.contains();
