@@ -63,6 +63,8 @@
 
     <suppress checks="ImportOrder" files="((Boolean)|(Byte)|(Char)|(Double)|(Int)|(Float)|(Long)|(Short)).*.java" />
 
+    <suppress checks="Regexp" files="Collectors2.java" />
+
     <suppress checks="RedundantModifier" files="ImmutableBagSerializationProxy.java" />
     <suppress checks="RedundantModifier" files="HashBagWithHashingStrategySerializationProxy.java" />
     <suppress checks="RedundantModifier" files="UnmodifiableBag.java" />
