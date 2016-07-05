@@ -46,6 +46,8 @@ import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.partition.PartitionMutableCollection;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.api.tuple.Twin;
+import org.eclipse.collections.impl.collection.mutable.CollectionAdapter;
+import org.eclipse.collections.impl.utility.Iterate;
 
 /**
  * MutableCollection is an interface which extends the base java.util.Collection interface and adds several internal
@@ -424,19 +426,25 @@ public interface MutableCollection<T>
      * @see #addAll(Collection)
      * @since 1.0
      */
-    boolean addAllIterable(Iterable<? extends T> iterable);
+    default boolean addAllIterable(Iterable<? extends T> iterable) {
+	    return Iterate.addAllIterable(iterable, this);
+	}
 
     /**
      * @see #removeAll(Collection)
      * @since 1.0
      */
-    boolean removeAllIterable(Iterable<?> iterable);
+    default boolean removeAllIterable(Iterable<?> iterable) {
+	    return this.removeAll(CollectionAdapter.wrapSet(iterable));
+	}
 
     /**
      * @see #retainAll(Collection)
      * @since 1.0
      */
-    boolean retainAllIterable(Iterable<?> iterable);
+    default boolean retainAllIterable(Iterable<?> iterable) {
+	    return this.retainAll(CollectionAdapter.wrapSet(iterable));
+	}
 
     @Override
     <K, V> MutableMap<K, V> aggregateInPlaceBy(

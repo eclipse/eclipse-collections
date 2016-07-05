@@ -15,7 +15,6 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.Optional;
 
-import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
@@ -76,7 +75,6 @@ import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.set.sorted.mutable.TreeSortedSet;
 import org.eclipse.collections.impl.utility.ArrayIterate;
 import org.eclipse.collections.impl.utility.Iterate;
-import org.eclipse.collections.impl.utility.LazyIterate;
 import org.eclipse.collections.impl.utility.internal.IterableIterate;
 import org.eclipse.collections.impl.utility.internal.MutableCollectionIterate;
 
@@ -614,12 +612,6 @@ public abstract class AbstractCollectionAdapter<T>
     }
 
     @Override
-    public boolean addAllIterable(Iterable<? extends T> iterable)
-    {
-        return Iterate.addAllIterable(iterable, this);
-    }
-
-    @Override
     public boolean removeAll(Collection<?> collection)
     {
         int currentSize = this.size();
@@ -628,23 +620,11 @@ public abstract class AbstractCollectionAdapter<T>
     }
 
     @Override
-    public boolean removeAllIterable(Iterable<?> iterable)
-    {
-        return this.removeAll(CollectionAdapter.wrapSet(iterable));
-    }
-
-    @Override
     public boolean retainAll(Collection<?> collection)
     {
         int currentSize = this.size();
         this.removeIfWith(Predicates2.notIn(), collection);
         return currentSize != this.size();
-    }
-
-    @Override
-    public boolean retainAllIterable(Iterable<?> iterable)
-    {
-        return this.retainAll(CollectionAdapter.wrapSet(iterable));
     }
 
     @Override
@@ -732,12 +712,6 @@ public abstract class AbstractCollectionAdapter<T>
     }
 
     @Override
-    public MutableList<T> toSortedList()
-    {
-        return this.toList().sortThis();
-    }
-
-    @Override
     public MutableList<T> toSortedList(Comparator<? super T> comparator)
     {
         return this.toList().sortThis(comparator);
@@ -747,12 +721,6 @@ public abstract class AbstractCollectionAdapter<T>
     public <V extends Comparable<? super V>> MutableList<T> toSortedListBy(Function<? super T, ? extends V> function)
     {
         return this.toSortedList(Comparators.byFunction(function));
-    }
-
-    @Override
-    public MutableSortedSet<T> toSortedSet()
-    {
-        return TreeSortedSet.newSet(null, this);
     }
 
     @Override
@@ -826,12 +794,6 @@ public abstract class AbstractCollectionAdapter<T>
     }
 
     @Override
-    public LazyIterable<T> asLazy()
-    {
-        return LazyIterate.adapt(this);
-    }
-
-    @Override
     public <P> int countWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         return Iterate.countWith(this.getDelegate(), predicate, parameter);
@@ -859,38 +821,6 @@ public abstract class AbstractCollectionAdapter<T>
     public String toString()
     {
         return this.makeString("[", ", ", "]");
-    }
-
-    @Override
-    public String makeString()
-    {
-        return this.makeString(", ");
-    }
-
-    @Override
-    public String makeString(String separator)
-    {
-        return this.makeString("", separator, "");
-    }
-
-    @Override
-    public String makeString(String start, String separator, String end)
-    {
-        Appendable stringBuilder = new StringBuilder();
-        this.appendString(stringBuilder, start, separator, end);
-        return stringBuilder.toString();
-    }
-
-    @Override
-    public void appendString(Appendable appendable)
-    {
-        this.appendString(appendable, ", ");
-    }
-
-    @Override
-    public void appendString(Appendable appendable, String separator)
-    {
-        this.appendString(appendable, "", separator, "");
     }
 
     @Override

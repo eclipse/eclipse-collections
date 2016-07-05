@@ -10,8 +10,6 @@
 
 package org.eclipse.collections.impl.parallel;
 
-import org.eclipse.collections.impl.utility.Iterate;
-
 public abstract class AbstractProcedureCombiner<BT>
         implements Combiner<BT>
 {
@@ -22,12 +20,6 @@ public abstract class AbstractProcedureCombiner<BT>
     protected AbstractProcedureCombiner(boolean useCombineOne)
     {
         this.useCombineOne = useCombineOne;
-    }
-
-    @Override
-    public void combineAll(Iterable<BT> thingsToCombine)
-    {
-        Iterate.forEach(thingsToCombine, this::combineOne);
     }
 
     @Override

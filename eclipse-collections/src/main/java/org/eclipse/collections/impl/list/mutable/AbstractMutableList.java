@@ -646,12 +646,6 @@ public abstract class AbstractMutableList<T>
     }
 
     @Override
-    public MutableList<T> sortThis()
-    {
-        return this.sortThis(Comparators.naturalOrder());
-    }
-
-    @Override
     public <V extends Comparable<? super V>> MutableList<T> sortThisBy(Function<? super T, ? extends V> function)
     {
         return this.sortThis(Comparators.byFunction(function));
@@ -1179,12 +1173,6 @@ public abstract class AbstractMutableList<T>
     public int binarySearch(T key, Comparator<? super T> comparator)
     {
         return Collections.binarySearch(this, key, comparator);
-    }
-
-    @Override
-    public int binarySearch(T key)
-    {
-        return Collections.binarySearch((List<? extends Comparable<? super T>>) this, key);
     }
 
     @Override

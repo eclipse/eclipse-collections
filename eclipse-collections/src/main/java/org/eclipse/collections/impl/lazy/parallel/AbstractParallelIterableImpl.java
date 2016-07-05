@@ -53,12 +53,6 @@ public abstract class AbstractParallelIterableImpl<T, B extends Batch<T>> extend
     }
 
     @Override
-    public <S> ParallelIterable<S> selectInstancesOf(Class<S> clazz)
-    {
-        return (ParallelIterable<S>) this.select(Predicates.instanceOf(clazz));
-    }
-
-    @Override
     public ParallelIterable<T> reject(Predicate<? super T> predicate)
     {
         return this.select(Predicates.not(predicate));

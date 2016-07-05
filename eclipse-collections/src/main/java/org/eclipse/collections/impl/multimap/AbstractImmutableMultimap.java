@@ -21,7 +21,6 @@ import org.eclipse.collections.api.collection.ImmutableCollection;
 import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.multimap.ImmutableMultimap;
-import org.eclipse.collections.api.multimap.MutableMultimap;
 import org.eclipse.collections.api.set.SetIterable;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.set.mutable.UnmodifiableMutableSet;
@@ -130,38 +129,6 @@ public abstract class AbstractImmutableMultimap<K, V, C extends ImmutableCollect
         });
 
         return result;
-    }
-
-    @Override
-    public ImmutableMultimap<K, V> newWith(K key, V value)
-    {
-        MutableMultimap<K, V> mutableMultimap = this.toMutable();
-        mutableMultimap.put(key, value);
-        return mutableMultimap.toImmutable();
-    }
-
-    @Override
-    public ImmutableMultimap<K, V> newWithout(Object key, Object value)
-    {
-        MutableMultimap<K, V> mutableMultimap = this.toMutable();
-        mutableMultimap.remove(key, value);
-        return mutableMultimap.toImmutable();
-    }
-
-    @Override
-    public ImmutableMultimap<K, V> newWithAll(K key, Iterable<? extends V> values)
-    {
-        MutableMultimap<K, V> mutableMultimap = this.toMutable();
-        mutableMultimap.putAll(key, values);
-        return mutableMultimap.toImmutable();
-    }
-
-    @Override
-    public ImmutableMultimap<K, V> newWithoutAll(Object key)
-    {
-        MutableMultimap<K, V> mutableMultimap = this.toMutable();
-        mutableMultimap.removeAll(key);
-        return mutableMultimap.toImmutable();
     }
 
     @Override

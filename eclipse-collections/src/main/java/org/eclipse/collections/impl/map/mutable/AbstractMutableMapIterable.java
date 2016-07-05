@@ -89,12 +89,6 @@ public abstract class AbstractMutableMapIterable<K, V> extends AbstractMapIterab
     }
 
     @Override
-    public V add(Pair<K, V> keyValuePair)
-    {
-        return this.put(keyValuePair.getOne(), keyValuePair.getTwo());
-    }
-
-    @Override
     public V updateValue(K key, Function0<? extends V> factory, Function<? super V, ? extends V> function)
     {
         V oldValue = this.getIfAbsent(key, factory);

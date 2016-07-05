@@ -10,10 +10,12 @@
 
 package org.eclipse.collections.api;
 
+import java.io.IOException;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.DoubleSummaryStatistics;
 import java.util.IntSummaryStatistics;
+import java.util.Iterator;
 import java.util.LongSummaryStatistics;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -44,6 +46,7 @@ import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
+import org.eclipse.collections.api.collection.MutableCollection;
 import org.eclipse.collections.api.collection.primitive.MutableBooleanCollection;
 import org.eclipse.collections.api.collection.primitive.MutableByteCollection;
 import org.eclipse.collections.api.collection.primitive.MutableCharCollection;
@@ -65,6 +68,15 @@ import org.eclipse.collections.api.partition.PartitionIterable;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 import org.eclipse.collections.api.tuple.Pair;
+import org.eclipse.collections.impl.bag.sorted.mutable.TreeBag;
+import org.eclipse.collections.impl.block.factory.Procedures2;
+import org.eclipse.collections.impl.block.procedure.AppendStringProcedure;
+import org.eclipse.collections.impl.factory.Bags;
+import org.eclipse.collections.impl.factory.Lists;
+import org.eclipse.collections.impl.factory.Sets;
+import org.eclipse.collections.impl.set.sorted.mutable.TreeSortedSet;
+import org.eclipse.collections.impl.utility.Iterate;
+import org.eclipse.collections.impl.utility.LazyIterate;
 
 /**
  * RichIterable is an interface which extends the InternalIterable interface with several internal iterator methods, from
@@ -96,7 +108,9 @@ public interface RichIterable<T>
      *
      * @since 1.0
      */
-    boolean notEmpty();
+    default boolean notEmpty() {
+	    return !this.isEmpty();
+	}
 
     /**
      * Returns the first element of an iterable.  In the case of a List it is the element at the first index.  In the
@@ -135,7 +149,14 @@ public interface RichIterable<T>
      * @throws IllegalStateException if iterable is empty or has multiple elements.
      * @since 8.0
      */
-    T getOnly();
+    default T getOnly() {
+	    if (this.size() == 1)
+	    {
+	        return this.getFirst();
+	    }
+	
+	    throw new IllegalStateException("Size must be 1 but was " + this.size());
+	}
 
     /**
      * Returns true if the iterable has an element which responds true to element.equals(object).
@@ -1381,21 +1402,29 @@ public interface RichIterable<T>
      *
      * @since 8.0
      */
-    <R extends Collection<T>> R into(R target);
+    default <R extends Collection<T>> R into(R target) {
+	    return Iterate.addAllTo(this, target);
+	}
 
     /**
      * Converts the collection to a MutableList implementation.
      *
      * @since 1.0
      */
-    MutableList<T> toList();
+    default MutableList<T> toList() {
+	    MutableList<T> list = Lists.mutable.empty();
+	    this.forEachWith(Procedures2.addToCollection(), list);
+	    return list;
+	}
 
     /**
      * Converts the collection to a MutableList implementation and sorts it using the natural order of the elements.
      *
      * @since 1.0
      */
-    MutableList<T> toSortedList();
+    default MutableList<T> toSortedList() {
+	    return this.toList().sortThis();
+	}
 
     /**
      * Converts the collection to a MutableList implementation and sorts it using the specified comparator.
@@ -1417,7 +1446,11 @@ public interface RichIterable<T>
      *
      * @since 1.0
      */
-    MutableSet<T> toSet();
+    default MutableSet<T> toSet() {
+	    MutableSet<T> set = Sets.mutable.empty();
+	    this.forEachWith(Procedures2.addToCollection(), set);
+	    return set;
+	}
 
     /**
      * Converts the collection to a MutableSortedSet implementation and sorts it using the natural order of the
@@ -1425,7 +1458,9 @@ public interface RichIterable<T>
      *
      * @since 1.0
      */
-    MutableSortedSet<T> toSortedSet();
+    default MutableSortedSet<T> toSortedSet() {
+	    return TreeSortedSet.newSet(null, this);
+	}
 
     /**
      * Converts the collection to a MutableSortedSet implementation and sorts it using the specified comparator.
@@ -1447,7 +1482,11 @@ public interface RichIterable<T>
      *
      * @since 1.0
      */
-    MutableBag<T> toBag();
+    default MutableBag<T> toBag() {
+	    MutableBag<T> bag = Bags.mutable.empty();
+	    this.forEachWith(Procedures2.addToCollection(), bag);
+	    return bag;
+	}
 
     /**
      * Converts the collection to a MutableSortedBag implementation and sorts it using the natural order of the
@@ -1455,7 +1494,11 @@ public interface RichIterable<T>
      *
      * @since 6.0
      */
-    MutableSortedBag<T> toSortedBag();
+    default MutableSortedBag<T> toSortedBag() {
+	    MutableSortedBag<T> sortedBag = TreeBag.newBag();
+	    this.forEachWith(Procedures2.addToCollection(), sortedBag);
+	    return sortedBag;
+	}
 
     /**
      * Converts the collection to the MutableSortedBag implementation and sorts it using the specified comparator.
@@ -1507,7 +1550,9 @@ public interface RichIterable<T>
      *
      * @since 1.0.
      */
-    LazyIterable<T> asLazy();
+    default LazyIterable<T> asLazy() {
+	    return LazyIterate.adapt(this);
+	}
 
     /**
      * Converts this iterable to an array.
@@ -1733,7 +1778,9 @@ public interface RichIterable<T>
      * @return a string representation of this collection.
      * @since 1.0
      */
-    String makeString();
+    default String makeString() {
+	    return this.makeString(", ");
+	}
 
     /**
      * Returns a string representation of this collection by delegating to {@link #makeString(String, String, String)}
@@ -1742,7 +1789,9 @@ public interface RichIterable<T>
      * @return a string representation of this collection.
      * @since 1.0
      */
-    String makeString(String separator);
+    default String makeString(String separator) {
+	    return this.makeString("", separator, "");
+	}
 
     /**
      * Returns a string representation of this collection.  The string representation consists of a list of the
@@ -1753,7 +1802,11 @@ public interface RichIterable<T>
      * @return a string representation of this collection.
      * @since 1.0
      */
-    String makeString(String start, String separator, String end);
+    default String makeString(String start, String separator, String end) {
+	    Appendable stringBuilder = new StringBuilder();
+	    this.appendString(stringBuilder, start, separator, end);
+	    return stringBuilder.toString();
+	}
 
     /**
      * Prints a string representation of this collection onto the given {@code Appendable}.  Prints the string returned
@@ -1761,7 +1814,9 @@ public interface RichIterable<T>
      *
      * @since 1.0
      */
-    void appendString(Appendable appendable);
+    default void appendString(Appendable appendable) {
+	    this.appendString(appendable, ", ");
+	}
 
     /**
      * Prints a string representation of this collection onto the given {@code Appendable}.  Prints the string returned
@@ -1769,7 +1824,9 @@ public interface RichIterable<T>
      *
      * @since 1.0
      */
-    void appendString(Appendable appendable, String separator);
+    default void appendString(Appendable appendable, String separator) {
+	    this.appendString(appendable, "", separator, "");
+	}
 
     /**
      * Prints a string representation of this collection onto the given {@code Appendable}.  Prints the string returned
@@ -1777,7 +1834,19 @@ public interface RichIterable<T>
      *
      * @since 1.0
      */
-    void appendString(Appendable appendable, String start, String separator, String end);
+    default void appendString(Appendable appendable, String start, String separator, String end) {
+	    AppendStringProcedure<T> appendStringProcedure = new AppendStringProcedure<>(appendable, separator);
+	    try
+	    {
+	        appendable.append(start);
+	        this.forEach(appendStringProcedure);
+	        appendable.append(end);
+	    }
+	    catch (IOException e)
+	    {
+	        throw new RuntimeException(e);
+	    }
+	}
 
     /**
      * For each element of the iterable, the function is evaluated and the results of these evaluations are collected
@@ -1939,7 +2008,25 @@ public interface RichIterable<T>
      * truncated if the elements don't divide evenly.
      * @since 1.0
      */
-    RichIterable<RichIterable<T>> chunk(int size);
+    default RichIterable<RichIterable<T>> chunk(int size) {
+	    if (size <= 0)
+	    {
+	        throw new IllegalArgumentException("Size for groups must be positive but was: " + size);
+	    }
+	
+	    Iterator<T> iterator = this.iterator();
+	    MutableList<RichIterable<T>> result = Lists.mutable.empty();
+	    while (iterator.hasNext())
+	    {
+	        MutableCollection<T> batch = Bags.mutable.empty();
+	        for (int i = 0; i < size && iterator.hasNext(); i++)
+	        {
+	            batch.add(iterator.next());
+	        }
+	        result.add(batch.toImmutable());
+	    }
+	    return result.toImmutable();
+	}
 
     /**
      * Applies an aggregate procedure over the iterable grouping results into a Map based on the specific groupBy function.

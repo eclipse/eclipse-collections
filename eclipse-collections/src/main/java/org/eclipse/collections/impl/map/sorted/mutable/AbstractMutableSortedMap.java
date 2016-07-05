@@ -99,16 +99,6 @@ public abstract class AbstractMutableSortedMap<K, V> extends AbstractMutableMapI
         return this;
     }
 
-    /**
-     * @deprecated in 6.0 Use {@link #withAllKeyValueArguments(Pair[])} instead. Inlineable.
-     */
-    @Override
-    @Deprecated
-    public MutableSortedMap<K, V> with(Pair<K, V>... pairs)
-    {
-        return this.withAllKeyValueArguments(pairs);
-    }
-
     @Override
     public MutableSortedMap<K, V> withAllKeyValueArguments(Pair<? extends K, ? extends V>... keyValues)
     {
@@ -374,12 +364,6 @@ public abstract class AbstractMutableSortedMap<K, V> extends AbstractMutableMapI
     public int detectLastIndex(Predicate<? super V> predicate)
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".detectLastIndex() not implemented yet");
-    }
-
-    @Override
-    public int indexOf(Object object)
-    {
-        throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".indexOf() not implemented yet");
     }
 
     @Override

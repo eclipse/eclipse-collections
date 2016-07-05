@@ -40,6 +40,7 @@ import org.eclipse.collections.api.list.primitive.MutableShortList;
 import org.eclipse.collections.api.multimap.list.MutableListMultimap;
 import org.eclipse.collections.api.partition.list.PartitionMutableList;
 import org.eclipse.collections.api.tuple.Pair;
+import org.eclipse.collections.impl.block.factory.Comparators;
 
 /**
  * A MutableList is an implementation of a JCF List which provides methods matching the Smalltalk Collection protocol.
@@ -148,7 +149,9 @@ public interface MutableList<T>
     /**
      * Sorts the internal data structure of this list and returns the list itself as a convenience.
      */
-    MutableList<T> sortThis();
+    default MutableList<T> sortThis() {
+	    return this.sortThis(Comparators.naturalOrder());
+	}
 
     /**
      * Sorts the internal data structure of this list based on the natural order of the attribute returned by {@code

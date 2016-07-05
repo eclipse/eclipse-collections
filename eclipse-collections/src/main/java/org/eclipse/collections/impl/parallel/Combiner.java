@@ -12,9 +12,14 @@ package org.eclipse.collections.impl.parallel;
 
 import java.io.Serializable;
 
+import org.eclipse.collections.impl.utility.Iterate;
+
 public interface Combiner<T> extends Serializable
 {
-    void combineAll(Iterable<T> thingsToCombine);
+    default void combineAll(Iterable<T> thingsToCombine)
+    {
+        Iterate.forEach(thingsToCombine, this::combineOne);
+    }
 
     void combineOne(T thingToCombine);
 

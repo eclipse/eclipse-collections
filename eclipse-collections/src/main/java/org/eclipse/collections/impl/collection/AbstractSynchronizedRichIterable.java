@@ -16,7 +16,6 @@ import java.util.Iterator;
 import java.util.Optional;
 
 import net.jcip.annotations.GuardedBy;
-import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
@@ -58,7 +57,6 @@ import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
-import org.eclipse.collections.impl.utility.LazyIterate;
 
 public abstract class AbstractSynchronizedRichIterable<T> implements RichIterable<T>
 {
@@ -715,12 +713,6 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         {
             return this.delegate.toSortedMap(comparator, keyFunction, valueFunction);
         }
-    }
-
-    @Override
-    public LazyIterable<T> asLazy()
-    {
-        return LazyIterate.adapt(this);
     }
 
     @Override
