@@ -1358,6 +1358,22 @@ public abstract class AbstractRichIterableTestCase
         Assert.assertEquals(FastList.newListWith(2, 2, 2, 1), sizes);
     }
 
+    @Test
+    public void chunk_empty()
+    {
+        RichIterable<String> collection = this.newWith();
+        RichIterable<RichIterable<String>> groups = collection.chunk(2);
+        Assert.assertEquals(groups.size(), 0);
+    }
+
+    @Test
+    public void chunk_single()
+    {
+        RichIterable<String> collection = this.newWith("1");
+        RichIterable<RichIterable<String>> groups = collection.chunk(2);
+        Assert.assertEquals(FastList.newListWith(1), groups.collect(RichIterable::size));
+    }
+
     @Test(expected = IllegalArgumentException.class)
     public void chunk_zero_throws()
     {
