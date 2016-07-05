@@ -21,6 +21,7 @@ import java.util.RandomAccess;
 import java.util.concurrent.ExecutorService;
 
 import net.jcip.annotations.Immutable;
+import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.block.HashingStrategy;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
@@ -864,6 +865,36 @@ abstract class AbstractImmutableList<T>
     public ImmutableList<T> toImmutable()
     {
         return this;
+    }
+
+    @Override
+    public RichIterable<RichIterable<T>> chunk(int size)
+    {
+        if (size <= 0)
+        {
+            throw new IllegalArgumentException("Size for groups must be positive but was: " + size);
+        }
+
+        if (this.isEmpty())
+        {
+            return Lists.immutable.empty();
+        }
+        MutableList<RichIterable<T>> result = Lists.mutable.empty();
+        if (this.size() <= size)
+        {
+            result.add(this);
+        }
+        else
+        {
+            for (int startIndex = 0, endIndex = size;
+                 endIndex <= this.size() && startIndex < this.size(); startIndex += size, endIndex += Math
+                    .min(size, this.size() - endIndex))
+            {
+                result.add(new ImmutableSubList<>(this, startIndex, endIndex));
+            }
+        }
+
+        return result.toImmutable();
     }
 
     protected static class ImmutableSubList<T>
