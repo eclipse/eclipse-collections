@@ -10,12 +10,15 @@
 
 package org.eclipse.collections.impl;
 
+import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.Optional;
 
+import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.RichIterable;
+import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function0;
@@ -49,6 +52,7 @@ import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.sorted.MutableSortedMap;
 import org.eclipse.collections.api.multimap.MutableMultimap;
+import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.bag.sorted.mutable.TreeBag;
@@ -93,11 +97,15 @@ import org.eclipse.collections.impl.block.procedure.primitive.InjectIntoDoublePr
 import org.eclipse.collections.impl.block.procedure.primitive.InjectIntoFloatProcedure;
 import org.eclipse.collections.impl.block.procedure.primitive.InjectIntoIntProcedure;
 import org.eclipse.collections.impl.block.procedure.primitive.InjectIntoLongProcedure;
+import org.eclipse.collections.impl.factory.Bags;
+import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.Maps;
+import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.factory.SortedMaps;
 import org.eclipse.collections.impl.factory.SortedSets;
 import org.eclipse.collections.impl.utility.ArrayIterate;
 import org.eclipse.collections.impl.utility.Iterate;
+import org.eclipse.collections.impl.utility.LazyIterate;
 import org.eclipse.collections.impl.utility.internal.IterableIterate;
 
 public abstract class AbstractRichIterable<T> implements RichIterable<T>
@@ -157,6 +165,14 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
     }
 
     @Override
+    public MutableList<T> toList()
+    {
+        MutableList<T> list = Lists.mutable.empty();
+        this.forEachWith(Procedures2.addToCollection(), list);
+        return list;
+    }
+
+    @Override
     public MutableList<T> toSortedList(Comparator<? super T> comparator)
     {
         return this.toList().sortThis(comparator);
@@ -188,6 +204,30 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
     public <V extends Comparable<? super V>> MutableSortedSet<T> toSortedSetBy(Function<? super T, ? extends V> function)
     {
         return this.toSortedSet(Comparators.byFunction(function));
+    }
+
+    @Override
+    public MutableSet<T> toSet()
+    {
+        MutableSet<T> set = Sets.mutable.empty();
+        this.forEachWith(Procedures2.addToCollection(), set);
+        return set;
+    }
+
+    @Override
+    public MutableBag<T> toBag()
+    {
+        MutableBag<T> bag = Bags.mutable.empty();
+        this.forEachWith(Procedures2.addToCollection(), bag);
+        return bag;
+    }
+
+    @Override
+    public MutableSortedBag<T> toSortedBag()
+    {
+        MutableSortedBag<T> sortedBag = TreeBag.newBag();
+        this.forEachWith(Procedures2.addToCollection(), sortedBag);
+        return sortedBag;
     }
 
     @Override
@@ -358,6 +398,12 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
     }
 
     @Override
+    public LazyIterable<T> asLazy()
+    {
+        return LazyIterate.adapt(this);
+    }
+
+    @Override
     public <V, R extends Collection<V>> R flatCollect(
             Function<? super T, ? extends Iterable<V>> function,
             R target)
@@ -473,6 +519,12 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
     }
 
     @Override
+    public <R extends Collection<T>> R into(R target)
+    {
+        return Iterate.addAllTo(this, target);
+    }
+
+    @Override
     public float injectInto(float injectedValue, FloatObjectToFloatFunction<? super T> function)
     {
         InjectIntoFloatProcedure<T> procedure = new InjectIntoFloatProcedure<>(injectedValue, function);
@@ -567,6 +619,22 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
     {
         AppendStringProcedure<T> appendStringProcedure = new AppendStringProcedure<>(appendable, separator);
         this.forEach(appendStringProcedure);
+    }
+
+    @Override
+    public void appendString(Appendable appendable, String start, String separator, String end)
+    {
+        AppendStringProcedure<T> appendStringProcedure = new AppendStringProcedure<>(appendable, separator);
+        try
+        {
+            appendable.append(start);
+            this.forEach(appendStringProcedure);
+            appendable.append(end);
+        }
+        catch (IOException e)
+        {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override

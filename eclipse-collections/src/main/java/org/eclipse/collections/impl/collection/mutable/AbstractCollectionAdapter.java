@@ -15,6 +15,7 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.Optional;
 
+import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
@@ -75,6 +76,7 @@ import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.set.sorted.mutable.TreeSortedSet;
 import org.eclipse.collections.impl.utility.ArrayIterate;
 import org.eclipse.collections.impl.utility.Iterate;
+import org.eclipse.collections.impl.utility.LazyIterate;
 import org.eclipse.collections.impl.utility.internal.IterableIterate;
 import org.eclipse.collections.impl.utility.internal.MutableCollectionIterate;
 
@@ -612,6 +614,12 @@ public abstract class AbstractCollectionAdapter<T>
     }
 
     @Override
+    public boolean addAllIterable(Iterable<? extends T> iterable)
+    {
+        return Iterate.addAllIterable(iterable, this);
+    }
+
+    @Override
     public boolean removeAll(Collection<?> collection)
     {
         int currentSize = this.size();
@@ -620,11 +628,23 @@ public abstract class AbstractCollectionAdapter<T>
     }
 
     @Override
+    public boolean removeAllIterable(Iterable<?> iterable)
+    {
+        return this.removeAll(CollectionAdapter.wrapSet(iterable));
+    }
+
+    @Override
     public boolean retainAll(Collection<?> collection)
     {
         int currentSize = this.size();
         this.removeIfWith(Predicates2.notIn(), collection);
         return currentSize != this.size();
+    }
+
+    @Override
+    public boolean retainAllIterable(Iterable<?> iterable)
+    {
+        return this.retainAll(CollectionAdapter.wrapSet(iterable));
     }
 
     @Override
@@ -724,6 +744,12 @@ public abstract class AbstractCollectionAdapter<T>
     }
 
     @Override
+    public MutableSortedSet<T> toSortedSet()
+    {
+        return TreeSortedSet.newSet(null, this);
+    }
+
+    @Override
     public MutableSortedSet<T> toSortedSet(Comparator<? super T> comparator)
     {
         return TreeSortedSet.newSet(comparator, this);
@@ -791,6 +817,12 @@ public abstract class AbstractCollectionAdapter<T>
             Function<? super T, ? extends V> valueFunction)
     {
         return TreeSortedMap.<K, V>newMap(comparator).collectKeysAndValues(this.getDelegate(), keyFunction, valueFunction);
+    }
+
+    @Override
+    public LazyIterable<T> asLazy()
+    {
+        return LazyIterate.adapt(this);
     }
 
     @Override

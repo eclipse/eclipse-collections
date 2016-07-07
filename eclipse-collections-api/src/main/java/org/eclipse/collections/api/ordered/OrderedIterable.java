@@ -55,9 +55,7 @@ public interface OrderedIterable<T> extends RichIterable<T>
      *
      * @see List#indexOf(Object)
      */
-    default int indexOf(Object object) {
-	    throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".indexOf() not implemented yet");
-	}
+    int indexOf(Object object);
 
     /**
      * Returns the first element of an iterable.  In the case of a List it is the element at the first index.  In the

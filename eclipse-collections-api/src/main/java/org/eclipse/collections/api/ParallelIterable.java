@@ -10,9 +10,7 @@
 
 package org.eclipse.collections.api;
 
-import java.util.Collections;
 import java.util.Comparator;
-import java.util.Set;
 
 import org.eclipse.collections.api.annotation.Beta;
 import org.eclipse.collections.api.bag.MutableBag;
@@ -35,14 +33,6 @@ import org.eclipse.collections.api.map.sorted.MutableSortedMap;
 import org.eclipse.collections.api.multimap.Multimap;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
-import org.eclipse.collections.impl.bag.mutable.HashBag;
-import org.eclipse.collections.impl.bag.sorted.mutable.TreeBag;
-import org.eclipse.collections.impl.block.factory.Comparators;
-import org.eclipse.collections.impl.block.factory.Predicates;
-import org.eclipse.collections.impl.block.procedure.CollectionAddProcedure;
-import org.eclipse.collections.impl.map.mutable.ConcurrentHashMapUnsafe;
-import org.eclipse.collections.impl.set.mutable.SetAdapter;
-import org.eclipse.collections.impl.set.sorted.mutable.TreeSortedSet;
 
 /**
  * A ParallelIterable is RichIterable which will defer evaluation for certain methods like select, reject, collect, etc.
@@ -63,9 +53,7 @@ public interface ParallelIterable<T>
 
     <P> ParallelIterable<T> selectWith(Predicate2<? super T, ? super P> predicate, P parameter);
 
-    default <S> ParallelIterable<S> selectInstancesOf(Class<S> clazz) {
-	    return (ParallelIterable<S>) this.select(Predicates.instanceOf(clazz));
-	}
+    <S> ParallelIterable<S> selectInstancesOf(Class<S> clazz);
 
     /**
      * Creates a parallel iterable for rejecting elements from the current iterable.
@@ -169,34 +157,17 @@ public interface ParallelIterable<T>
 
     <V extends Comparable<? super V>> MutableList<T> toSortedListBy(Function<? super T, ? extends V> function);
 
-    default MutableSet<T> toSet() {
-	    ConcurrentHashMapUnsafe<T, Boolean> map = ConcurrentHashMapUnsafe.newMap();
-	    Set<T> result = Collections.newSetFromMap(map);
-	    this.forEach(CollectionAddProcedure.on(result));
-	    return SetAdapter.adapt(map.keySet());
-	}
+    MutableSet<T> toSet();
 
-    default MutableSortedSet<T> toSortedSet() {
-	    MutableSortedSet<T> result = TreeSortedSet.<T>newSet().asSynchronized();
-	    this.forEach(CollectionAddProcedure.on(result));
-	    return result;
-	}
+    MutableSortedSet<T> toSortedSet();
 
     MutableSortedSet<T> toSortedSet(Comparator<? super T> comparator);
 
     <V extends Comparable<? super V>> MutableSortedSet<T> toSortedSetBy(Function<? super T, ? extends V> function);
 
-    default MutableBag<T> toBag() {
-	    MutableBag<T> result = HashBag.<T>newBag().asSynchronized();
-	    this.forEach(CollectionAddProcedure.on(result));
-	    return result;
-	}
+    MutableBag<T> toBag();
 
-    default MutableSortedBag<T> toSortedBag() {
-	    MutableSortedBag<T> result = TreeBag.<T>newBag().asSynchronized();
-	    this.forEach(CollectionAddProcedure.on(result));
-	    return result;
-	}
+    MutableSortedBag<T> toSortedBag();
 
     MutableSortedBag<T> toSortedBag(Comparator<? super T> comparator);
 
@@ -218,13 +189,9 @@ public interface ParallelIterable<T>
 
     T max(Comparator<? super T> comparator);
 
-    default T min() {
-	    return this.min(Comparators.naturalOrder());
-	}
+    T min();
 
-    default T max() {
-	    return this.max(Comparators.naturalOrder());
-	}
+    T max();
 
     <V extends Comparable<? super V>> T minBy(Function<? super T, ? extends V> function);
 

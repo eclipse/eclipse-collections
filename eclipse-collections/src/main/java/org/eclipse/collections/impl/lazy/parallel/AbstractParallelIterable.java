@@ -11,8 +11,10 @@
 package org.eclipse.collections.impl.lazy.parallel;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.NoSuchElementException;
+import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.CompletionService;
 import java.util.concurrent.ExecutionException;
@@ -23,6 +25,7 @@ import java.util.concurrent.Future;
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.ParallelIterable;
 import org.eclipse.collections.api.annotation.Beta;
+import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function0;
@@ -42,6 +45,7 @@ import org.eclipse.collections.api.map.sorted.MutableSortedMap;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 import org.eclipse.collections.impl.Counter;
+import org.eclipse.collections.impl.bag.mutable.HashBag;
 import org.eclipse.collections.impl.bag.sorted.mutable.TreeBag;
 import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.block.factory.Functions2;
@@ -59,6 +63,7 @@ import org.eclipse.collections.impl.map.mutable.ConcurrentHashMap;
 import org.eclipse.collections.impl.map.mutable.ConcurrentHashMapUnsafe;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.map.sorted.mutable.TreeSortedMap;
+import org.eclipse.collections.impl.set.mutable.SetAdapter;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.set.sorted.mutable.TreeSortedSet;
 
@@ -534,9 +539,42 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
     }
 
     @Override
+    public MutableSet<T> toSet()
+    {
+        ConcurrentHashMapUnsafe<T, Boolean> map = ConcurrentHashMapUnsafe.newMap();
+        Set<T> result = Collections.newSetFromMap(map);
+        this.forEach(CollectionAddProcedure.on(result));
+        return SetAdapter.adapt(map.keySet());
+    }
+
+    @Override
+    public MutableSortedSet<T> toSortedSet()
+    {
+        MutableSortedSet<T> result = TreeSortedSet.<T>newSet().asSynchronized();
+        this.forEach(CollectionAddProcedure.on(result));
+        return result;
+    }
+
+    @Override
     public <V extends Comparable<? super V>> MutableSortedSet<T> toSortedSetBy(Function<? super T, ? extends V> function)
     {
         return this.toSortedSet(Comparators.byFunction(function));
+    }
+
+    @Override
+    public MutableBag<T> toBag()
+    {
+        MutableBag<T> result = HashBag.<T>newBag().asSynchronized();
+        this.forEach(CollectionAddProcedure.on(result));
+        return result;
+    }
+
+    @Override
+    public MutableSortedBag<T> toSortedBag()
+    {
+        MutableSortedBag<T> result = TreeBag.<T>newBag().asSynchronized();
+        this.forEach(CollectionAddProcedure.on(result));
+        return result;
     }
 
     @Override
@@ -641,6 +679,18 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
     {
         Function<Batch<T>, T> map = batch -> batch.max(comparator);
         return this.collectReduce(map, Functions2.max(comparator));
+    }
+
+    @Override
+    public T min()
+    {
+        return this.min(Comparators.naturalOrder());
+    }
+
+    @Override
+    public T max()
+    {
+        return this.max(Comparators.naturalOrder());
     }
 
     @Override

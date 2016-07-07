@@ -114,6 +114,18 @@ public abstract class AbstractMutableCollection<T>
     }
 
     @Override
+    public boolean removeAllIterable(Iterable<?> iterable)
+    {
+        return this.removeAll(CollectionAdapter.wrapSet(iterable));
+    }
+
+    @Override
+    public boolean retainAllIterable(Iterable<?> iterable)
+    {
+        return this.retainAll(CollectionAdapter.wrapSet(iterable));
+    }
+
+    @Override
     public RichIterable<RichIterable<T>> chunk(int size)
     {
         if (size <= 0)

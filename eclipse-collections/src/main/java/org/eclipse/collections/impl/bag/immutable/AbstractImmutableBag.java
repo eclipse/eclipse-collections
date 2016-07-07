@@ -10,6 +10,9 @@
 
 package org.eclipse.collections.impl.bag.immutable;
 
+import java.util.Iterator;
+
+import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.bag.primitive.ImmutableBooleanBag;
@@ -33,7 +36,9 @@ import org.eclipse.collections.api.block.function.primitive.ShortFunction;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
+import org.eclipse.collections.api.collection.MutableCollection;
 import org.eclipse.collections.api.list.ImmutableList;
+import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.api.partition.bag.PartitionImmutableBag;
 import org.eclipse.collections.api.partition.bag.PartitionMutableBag;
@@ -48,6 +53,7 @@ import org.eclipse.collections.impl.bag.mutable.primitive.LongHashBag;
 import org.eclipse.collections.impl.bag.mutable.primitive.ShortHashBag;
 import org.eclipse.collections.impl.block.factory.Functions;
 import org.eclipse.collections.impl.block.factory.Predicates;
+import org.eclipse.collections.impl.factory.Bags;
 import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.partition.bag.PartitionHashBag;
@@ -193,5 +199,27 @@ public abstract class AbstractImmutableBag<T>
     public <V> ImmutableMap<V, T> groupByUniqueKey(Function<? super T, ? extends V> function)
     {
         return this.groupByUniqueKey(function, UnifiedMap.<V, T>newMap()).toImmutable();
+    }
+
+    @Override
+    public RichIterable<RichIterable<T>> chunk(int size)
+    {
+        if (size <= 0)
+        {
+            throw new IllegalArgumentException("Size for groups must be positive but was: " + size);
+        }
+
+        Iterator<T> iterator = this.iterator();
+        MutableList<RichIterable<T>> result = Lists.mutable.empty();
+        while (iterator.hasNext())
+        {
+            MutableCollection<T> batch = Bags.mutable.empty();
+            for (int i = 0; i < size && iterator.hasNext(); i++)
+            {
+                batch.add(iterator.next());
+            }
+            result.add(batch.toImmutable());
+        }
+        return result.toImmutable();
     }
 }
