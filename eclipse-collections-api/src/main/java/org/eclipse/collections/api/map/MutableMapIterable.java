@@ -40,7 +40,8 @@ public interface MutableMapIterable<K, V> extends MapIterable<K, V>, Map<K, V>
      *
      * @see #put(Object, Object)
      */
-    default V add(Pair<K, V> keyValuePair) {
+    default V add(Pair<K, V> keyValuePair)
+    {
         return this.put(keyValuePair.getOne(), keyValuePair.getTwo());
     }
 

@@ -96,7 +96,8 @@ public interface RichIterable<T>
      *
      * @since 1.0
      */
-    default boolean notEmpty() {
+    default boolean notEmpty()
+    {
         return !this.isEmpty();
     }
 
@@ -137,7 +138,8 @@ public interface RichIterable<T>
      * @throws IllegalStateException if iterable is empty or has multiple elements.
      * @since 8.0
      */
-    default T getOnly() {
+    default T getOnly()
+    {
         if (this.size() == 1)
         {
             return this.getFirst();
@@ -1404,7 +1406,8 @@ public interface RichIterable<T>
      *
      * @since 1.0
      */
-    default MutableList<T> toSortedList() {
+    default MutableList<T> toSortedList()
+    {
         return this.toList().sortThis();
     }
 
@@ -1743,7 +1746,8 @@ public interface RichIterable<T>
      * @return a string representation of this collection.
      * @since 1.0
      */
-    default String makeString() {
+    default String makeString()
+    {
         return this.makeString(", ");
     }
 
@@ -1754,7 +1758,8 @@ public interface RichIterable<T>
      * @return a string representation of this collection.
      * @since 1.0
      */
-    default String makeString(String separator) {
+    default String makeString(String separator)
+    {
         return this.makeString("", separator, "");
     }
 
@@ -1767,7 +1772,8 @@ public interface RichIterable<T>
      * @return a string representation of this collection.
      * @since 1.0
      */
-    default String makeString(String start, String separator, String end) {
+    default String makeString(String start, String separator, String end)
+    {
         Appendable stringBuilder = new StringBuilder();
         this.appendString(stringBuilder, start, separator, end);
         return stringBuilder.toString();
@@ -1779,7 +1785,8 @@ public interface RichIterable<T>
      *
      * @since 1.0
      */
-    default void appendString(Appendable appendable) {
+    default void appendString(Appendable appendable)
+    {
         this.appendString(appendable, ", ");
     }
 
@@ -1789,7 +1796,8 @@ public interface RichIterable<T>
      *
      * @since 1.0
      */
-    default void appendString(Appendable appendable, String separator) {
+    default void appendString(Appendable appendable, String separator)
+    {
         this.appendString(appendable, "", separator, "");
     }
 

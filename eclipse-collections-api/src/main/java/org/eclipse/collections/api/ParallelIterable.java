@@ -149,7 +149,8 @@ public interface ParallelIterable<T>
 
     MutableList<T> toList();
 
-    default MutableList<T> toSortedList() {
+    default MutableList<T> toSortedList()
+    {
         return this.toList().toSortedList();
     }
 
@@ -179,7 +180,8 @@ public interface ParallelIterable<T>
 
     <NK, NV> MutableSortedMap<NK, NV> toSortedMap(Comparator<? super NK> comparator, Function<? super T, ? extends NK> keyFunction, Function<? super T, ? extends NV> valueFunction);
 
-    default Object[] toArray() {
+    default Object[] toArray()
+    {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".toArray() not implemented yet");
     }
 
@@ -229,25 +231,30 @@ public interface ParallelIterable<T>
      */
     double sumOfDouble(DoubleFunction<? super T> function);
 
-    default String makeString() {
+    default String makeString()
+    {
         return this.makeString(", ");
     }
 
-    default String makeString(String separator) {
+    default String makeString(String separator)
+    {
         return this.makeString("", separator, "");
     }
 
-    default String makeString(String start, String separator, String end) {
+    default String makeString(String start, String separator, String end)
+    {
         Appendable stringBuilder = new StringBuilder();
         this.appendString(stringBuilder, start, separator, end);
         return stringBuilder.toString();
     }
 
-    default void appendString(Appendable appendable) {
+    default void appendString(Appendable appendable)
+    {
         this.appendString(appendable, ", ");
     }
 
-    default void appendString(Appendable appendable, String separator) {
+    default void appendString(Appendable appendable, String separator)
+    {
         this.appendString(appendable, "", separator, "");
     }
 
