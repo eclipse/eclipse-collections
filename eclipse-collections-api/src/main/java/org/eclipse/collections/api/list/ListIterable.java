@@ -259,8 +259,8 @@ public interface ListIterable<T>
      * @see Collections#binarySearch(List, Object)
      */
     default int binarySearch(T key) {
-	    return Collections.binarySearch((List<? extends Comparable<? super T>>) this, key);
-	}
+        return Collections.binarySearch((List<? extends Comparable<? super T>>) this, key);
+    }
 
     /**
      * Follows the same general contract as {@link List#equals(Object)}.

@@ -29,28 +29,28 @@ public interface ImmutableMultimap<K, V>
     ImmutableCollection<V> get(K key);
 
     default ImmutableMultimap<K, V> newWith(K key, V value) {
-	    MutableMultimap<K, V> mutableMultimap = this.toMutable();
-	    mutableMultimap.put(key, value);
-	    return mutableMultimap.toImmutable();
-	}
+        MutableMultimap<K, V> mutableMultimap = this.toMutable();
+        mutableMultimap.put(key, value);
+        return mutableMultimap.toImmutable();
+    }
 
     default ImmutableMultimap<K, V> newWithout(Object key, Object value) {
-	    MutableMultimap<K, V> mutableMultimap = this.toMutable();
-	    mutableMultimap.remove(key, value);
-	    return mutableMultimap.toImmutable();
-	}
+        MutableMultimap<K, V> mutableMultimap = this.toMutable();
+        mutableMultimap.remove(key, value);
+        return mutableMultimap.toImmutable();
+    }
 
     default ImmutableMultimap<K, V> newWithAll(K key, Iterable<? extends V> values) {
-	    MutableMultimap<K, V> mutableMultimap = this.toMutable();
-	    mutableMultimap.putAll(key, values);
-	    return mutableMultimap.toImmutable();
-	}
+        MutableMultimap<K, V> mutableMultimap = this.toMutable();
+        mutableMultimap.putAll(key, values);
+        return mutableMultimap.toImmutable();
+    }
 
     default ImmutableMultimap<K, V> newWithoutAll(Object key) {
-	    MutableMultimap<K, V> mutableMultimap = this.toMutable();
-	    mutableMultimap.removeAll(key);
-	    return mutableMultimap.toImmutable();
-	}
+        MutableMultimap<K, V> mutableMultimap = this.toMutable();
+        mutableMultimap.removeAll(key);
+        return mutableMultimap.toImmutable();
+    }
 
     @Override
     ImmutableMultimap<V, K> flip();

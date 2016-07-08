@@ -64,8 +64,8 @@ public interface ReversibleIterable<T> extends OrderedIterable<T>
      * Returns a reversed view of this ReversibleIterable.
      */
     default LazyIterable<T> asReversed() {
-	    throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".asReversed() not implemented yet");
-	}
+        throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".asReversed() not implemented yet");
+    }
 
     /**
      * Returns a new ReversibleIterable in reverse order.

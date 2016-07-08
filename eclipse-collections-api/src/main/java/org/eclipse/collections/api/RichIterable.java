@@ -98,8 +98,8 @@ public interface RichIterable<T>
      * @since 1.0
      */
     default boolean notEmpty() {
-	    return !this.isEmpty();
-	}
+        return !this.isEmpty();
+    }
 
     /**
      * Returns the first element of an iterable.  In the case of a List it is the element at the first index.  In the
@@ -139,13 +139,13 @@ public interface RichIterable<T>
      * @since 8.0
      */
     default T getOnly() {
-	    if (this.size() == 1)
-	    {
-	        return this.getFirst();
-	    }
+        if (this.size() == 1)
+        {
+            return this.getFirst();
+        }
 
-	    throw new IllegalStateException("Size must be 1 but was " + this.size());
-	}
+        throw new IllegalStateException("Size must be 1 but was " + this.size());
+    }
 
     /**
      * Returns true if the iterable has an element which responds true to element.equals(object).
@@ -1406,8 +1406,8 @@ public interface RichIterable<T>
      * @since 1.0
      */
     default MutableList<T> toSortedList() {
-	    return this.toList().sortThis();
-	}
+        return this.toList().sortThis();
+    }
 
     /**
      * Converts the collection to a MutableList implementation and sorts it using the specified comparator.
@@ -1745,8 +1745,8 @@ public interface RichIterable<T>
      * @since 1.0
      */
     default String makeString() {
-	    return this.makeString(", ");
-	}
+        return this.makeString(", ");
+    }
 
     /**
      * Returns a string representation of this collection by delegating to {@link #makeString(String, String, String)}
@@ -1756,8 +1756,8 @@ public interface RichIterable<T>
      * @since 1.0
      */
     default String makeString(String separator) {
-	    return this.makeString("", separator, "");
-	}
+        return this.makeString("", separator, "");
+    }
 
     /**
      * Returns a string representation of this collection.  The string representation consists of a list of the
@@ -1769,10 +1769,10 @@ public interface RichIterable<T>
      * @since 1.0
      */
     default String makeString(String start, String separator, String end) {
-	    Appendable stringBuilder = new StringBuilder();
-	    this.appendString(stringBuilder, start, separator, end);
-	    return stringBuilder.toString();
-	}
+        Appendable stringBuilder = new StringBuilder();
+        this.appendString(stringBuilder, start, separator, end);
+        return stringBuilder.toString();
+    }
 
     /**
      * Prints a string representation of this collection onto the given {@code Appendable}.  Prints the string returned
@@ -1781,8 +1781,8 @@ public interface RichIterable<T>
      * @since 1.0
      */
     default void appendString(Appendable appendable) {
-	    this.appendString(appendable, ", ");
-	}
+        this.appendString(appendable, ", ");
+    }
 
     /**
      * Prints a string representation of this collection onto the given {@code Appendable}.  Prints the string returned
@@ -1791,8 +1791,8 @@ public interface RichIterable<T>
      * @since 1.0
      */
     default void appendString(Appendable appendable, String separator) {
-	    this.appendString(appendable, "", separator, "");
-	}
+        this.appendString(appendable, "", separator, "");
+    }
 
     /**
      * Prints a string representation of this collection onto the given {@code Appendable}.  Prints the string returned
@@ -1800,7 +1800,7 @@ public interface RichIterable<T>
      *
      * @since 1.0
      */
-    void appendString(Appendable appendable, String start, String separator, String end); 
+    void appendString(Appendable appendable, String start, String separator, String end);
 
     /**
      * For each element of the iterable, the function is evaluated and the results of these evaluations are collected

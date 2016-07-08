@@ -234,10 +234,9 @@ public interface MutableSortedMap<K, V>
      * @deprecated in 6.0 Use {@link #withAllKeyValueArguments(Pair[])} instead. Inlineable.
      */
     @Deprecated
-	default
-    MutableSortedMap<K, V> with(Pair<K, V>... pairs) {
-	    return this.withAllKeyValueArguments(pairs);
-	}
+    default MutableSortedMap<K, V> with(Pair<K, V>... pairs) {
+        return this.withAllKeyValueArguments(pairs);
+    }
 
     @Override
     MutableSortedMap<K, V> withoutKey(K key);

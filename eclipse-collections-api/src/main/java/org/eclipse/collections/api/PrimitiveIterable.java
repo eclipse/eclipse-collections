@@ -30,8 +30,8 @@ public interface PrimitiveIterable
      * @since 3.0
      */
     default boolean isEmpty() {
-	    return this.size() == 0;
-	}
+        return this.size() == 0;
+    }
 
     /**
      * The English equivalent of !this.isEmpty()
@@ -39,8 +39,8 @@ public interface PrimitiveIterable
      * @since 3.0
      */
     default boolean notEmpty() {
-	    return this.size() != 0;
-	}
+        return this.size() != 0;
+    }
 
     /**
      * Returns a string representation of this PrimitiveIterable.  The string representation consists of a list of the
@@ -61,8 +61,8 @@ public interface PrimitiveIterable
      * @since 3.0
      */
     default String makeString() {
-	    return this.makeString(", ");
-	}
+        return this.makeString(", ");
+    }
 
     /**
      * Returns a string representation of this collection by delegating to {@link #makeString(String, String, String)}
@@ -72,8 +72,8 @@ public interface PrimitiveIterable
      * @since 3.0
      */
     default String makeString(String separator) {
-	    return this.makeString("", separator, "");
-	}
+        return this.makeString("", separator, "");
+    }
 
     /**
      * Returns a string representation of this collection.  The string representation consists of a list of the
@@ -85,10 +85,10 @@ public interface PrimitiveIterable
      * @since 3.0
      */
     default String makeString(String start, String separator, String end) {
-	    Appendable stringBuilder = new StringBuilder();
-	    this.appendString(stringBuilder, start, separator, end);
-	    return stringBuilder.toString();
-	}
+        Appendable stringBuilder = new StringBuilder();
+        this.appendString(stringBuilder, start, separator, end);
+        return stringBuilder.toString();
+    }
 
     /**
      * Prints a string representation of this collection onto the given {@code Appendable}.  Prints the string returned
@@ -97,8 +97,8 @@ public interface PrimitiveIterable
      * @since 3.0
      */
     default void appendString(Appendable appendable) {
-	    this.appendString(appendable, ", ");
-	}
+        this.appendString(appendable, ", ");
+    }
 
     /**
      * Prints a string representation of this collection onto the given {@code Appendable}.  Prints the string returned
@@ -107,8 +107,8 @@ public interface PrimitiveIterable
      * @since 3.0
      */
     default void appendString(Appendable appendable, String separator) {
-	    this.appendString(appendable, "", separator, "");
-	}
+        this.appendString(appendable, "", separator, "");
+    }
 
     /**
      * Prints a string representation of this collection onto the given {@code Appendable}.  Prints the string returned
