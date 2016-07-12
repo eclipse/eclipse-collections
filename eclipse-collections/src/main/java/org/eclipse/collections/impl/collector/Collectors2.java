@@ -165,7 +165,7 @@ public final class Collectors2
      * <p>
      * Equivalent to using @{@link RichIterable#makeString(String, String, String)}}
      * </p>
-     * {@code System.out.println(Interval.oneTo(5).makeString(""));}
+     * {@code System.out.println(Interval.oneTo(5).makeString("[", ":", "]"));}
      */
     public static <T> Collector<T, ?, String> makeString(CharSequence start, CharSequence separator, CharSequence end)
     {
@@ -219,12 +219,12 @@ public final class Collectors2
     /**
      * <p>Returns the elements as a MutableSet.</p>
      * <p>Examples:</p>
-     * {@code Interval.oneTo(5).stream().collect(Collectors2.toSet());}<br>
-     * {@code Interval.oneTo(5).reduceInPlace(Collectors2.toSet());}
+     * {@code MutableSet<Integer> set1 = Interval.oneTo(5).stream().collect(Collectors2.toSet());}<br>
+     * {@code MutableSet<Integer> set2 =Interval.oneTo(5).reduceInPlace(Collectors2.toSet());}
      * <p>
      * Equivalent to using @{@link RichIterable#toSet()}}
      * </p>
-     * {@code Interval.oneTo(5).toSet();}
+     * {@code MutableSet<Integer> set = Interval.oneTo(5).toSet();}
      */
     public static <T> Collector<T, ?, MutableSet<T>> toSet()
     {
@@ -238,12 +238,12 @@ public final class Collectors2
     /**
      * <p>Returns the elements as an ImmutableSet.</p>
      * <p>Examples:</p>
-     * {@code Interval.oneTo(5).stream().collect(Collectors2.toImmutableSet());}<br>
-     * {@code Interval.oneTo(5).reduceInPlace(Collectors2.toImmutableSet());}
+     * {@code ImmutableSet<Integer> set1 = Interval.oneTo(5).stream().collect(Collectors2.toImmutableSet());}<br>
+     * {@code ImmutableSet<Integer> set2 = Interval.oneTo(5).reduceInPlace(Collectors2.toImmutableSet());}
      * <p>
      * Equivalent to using @{@link RichIterable#toSet()} followed by: @{@link MutableSet#toImmutable()}.
      * </p>
-     * {@code Interval.oneTo(5).toSet().toImmutable();}
+     * {@code ImmutableSet<Integer> set = Interval.oneTo(5).toSet().toImmutable();}
      */
     public static <T> Collector<T, ?, ImmutableSet<T>> toImmutableSet()
     {
@@ -258,12 +258,12 @@ public final class Collectors2
     /**
      * <p>Returns the elements as a MutableSortedSet.</p>
      * <p>Examples:</p>
-     * {@code Interval.oneTo(5).stream().collect(Collectors2.toSortedSet());}<br>
-     * {@code Interval.oneTo(5).reduceInPlace(Collectors2.toSortedSet());}
+     * {@code MutableSortedSet<Integer> set1 = Interval.oneTo(5).stream().collect(Collectors2.toSortedSet());}<br>
+     * {@code MutableSortedSet<Integer> set2 = Interval.oneTo(5).reduceInPlace(Collectors2.toSortedSet());}
      * <p>
      * Equivalent to using @{@link RichIterable#toSortedSet()}}.
      * </p>
-     * {@code Interval.oneTo(5).toSortedSet();}
+     * {@code MutableSortedSet<Integer> set = Interval.oneTo(5).toSortedSet();}
      */
     public static <T> Collector<T, ?, MutableSortedSet<T>> toSortedSet()
     {
@@ -277,12 +277,12 @@ public final class Collectors2
     /**
      * <p>Returns the elements as an ImmutableSortedSet.</p>
      * <p>Examples:</p>
-     * {@code Interval.oneTo(5).stream().collect(Collectors2.toImmutableSortedSet());}<br>
-     * {@code Interval.oneTo(5).reduceInPlace(Collectors2.toImmutableSortedSet());}
+     * {@code ImmutableSortedSet<Integer> set1 = Interval.oneTo(5).stream().collect(Collectors2.toImmutableSortedSet());}<br>
+     * {@code ImmutableSortedSet<Integer> set2 = Interval.oneTo(5).reduceInPlace(Collectors2.toImmutableSortedSet());}
      * <p>
      * Equivalent to using @{@link RichIterable#toSortedSet()} followed by: @{@link MutableSortedSet#toImmutable()}.
      * </p>
-     * {@code Interval.oneTo(5).toSortedSet().toImmutable();}
+     * {@code ImmutableSortedSet<Integer> set = Interval.oneTo(5).toSortedSet().toImmutable();}
      */
     public static <T> Collector<T, ?, ImmutableSortedSet<T>> toImmutableSortedSet()
     {
@@ -297,12 +297,12 @@ public final class Collectors2
     /**
      * <p>Returns the elements as a MutableSortedSet using the specified comparator.</p>
      * <p>Examples:</p>
-     * {@code Interval.oneTo(5).stream().collect(Collectors2.toSortedSet(Comparator.naturalOrder()));}<br>
-     * {@code Interval.oneTo(5).reduceInPlace(Collectors2.toSortedSet(Comparator.naturalOrder()));}
+     * {@code MutableSortedSet<Integer> set1 = Interval.oneTo(5).stream().collect(Collectors2.toSortedSet(Comparator.naturalOrder()));}<br>
+     * {@code MutableSortedSet<Integer> set2 = Interval.oneTo(5).reduceInPlace(Collectors2.toSortedSet(Comparator.naturalOrder()));}
      * <p>
      * Equivalent to using @{@link RichIterable#toSortedSet(Comparator)}.
      * </p>
-     * {@code Interval.oneTo(5).toSortedSet(Comparator.naturalOrder());}
+     * {@code MutableSortedSet<Integer> set = Interval.oneTo(5).toSortedSet(Comparator.naturalOrder());}
      */
     public static <T> Collector<T, ?, MutableSortedSet<T>> toSortedSet(Comparator<? super T> comparator)
     {
@@ -316,12 +316,12 @@ public final class Collectors2
     /**
      * <p>Returns the elements as a MutableSortedSet using the specified function to compare each element.</p>
      * <p>Examples:</p>
-     * {@code Interval.oneTo(5).stream().collect(Collectors2.toSortedSetBy(Object::toString));}<br>
-     * {@code Interval.oneTo(5).reduceInPlace(Collectors2.toSortedSetBy(Object::toString));}
+     * {@code MutableSortedSet<Integer> set1 = Interval.oneTo(5).stream().collect(Collectors2.toSortedSetBy(Object::toString));}<br>
+     * {@code MutableSortedSet<Integer> set2 = Interval.oneTo(5).reduceInPlace(Collectors2.toSortedSetBy(Object::toString));}
      * <p>
      * Equivalent to using @{@link RichIterable#toSortedSetBy(Function)}.
      * </p>
-     * {@code Interval.oneTo(5).toSortedSetBy(Object::toString);}
+     * {@code MutableSortedSet<Integer> set = Interval.oneTo(5).toSortedSetBy(Object::toString);}
      */
     public static <T, V extends Comparable<? super V>> Collector<T, ?, MutableSortedSet<T>> toSortedSetBy(Function<? super T, ? extends V> function)
     {
@@ -331,12 +331,12 @@ public final class Collectors2
     /**
      * <p>Returns the elements as an ImmutableSortedSet using the specified comparator.</p>
      * <p>Examples:</p>
-     * {@code Interval.oneTo(5).stream().collect(Collectors2.toImmutableSortedSet(Comparator.naturalOrder()));}<br>
-     * {@code Interval.oneTo(5).reduceInPlace(Collectors2.toImmutableSortedSet(Comparator.naturalOrder()));}
+     * {@code ImmutableSortedSet<Integer> set1 = Interval.oneTo(5).stream().collect(Collectors2.toImmutableSortedSet(Comparator.naturalOrder()));}<br>
+     * {@code ImmutableSortedSet<Integer> set2 = Interval.oneTo(5).reduceInPlace(Collectors2.toImmutableSortedSet(Comparator.naturalOrder()));}
      * <p>
      * Equivalent to using @{@link RichIterable#toSortedSet(Comparator)} followed by: @{@link MutableSortedSet#toImmutable()}.
      * </p>
-     * {@code Interval.oneTo(5).toSortedSet(Comparator.naturalOrder()).toImmutable();}
+     * {@code ImmutableSortedSet<Integer> set = Interval.oneTo(5).toSortedSet(Comparator.naturalOrder()).toImmutable();}
      */
     public static <T> Collector<T, ?, ImmutableSortedSet<T>> toImmutableSortedSet(Comparator<? super T> comparator)
     {
@@ -351,12 +351,12 @@ public final class Collectors2
     /**
      * <p>Returns the elements as a MutableBag.</p>
      * <p>Examples:</p>
-     * {@code Interval.oneTo(5).stream().collect(Collectors2.toBag());}<br>
-     * {@code Interval.oneTo(5).reduceInPlace(Collectors2.toBag());}
+     * {@code MutableBag<Integer> bag1 = Interval.oneTo(5).stream().collect(Collectors2.toBag());}<br>
+     * {@code MutableBag<Integer> bag2 = Interval.oneTo(5).reduceInPlace(Collectors2.toBag());}
      * <p>
      * Equivalent to using @{@link RichIterable#toBag()}}
      * </p>
-     * {@code Interval.oneTo(5).toBag();}
+     * {@code MutableBag<Integer> bag = Interval.oneTo(5).toBag();}
      */
     public static <T> Collector<T, ?, MutableBag<T>> toBag()
     {
@@ -370,12 +370,12 @@ public final class Collectors2
     /**
      * <p>Returns the elements as an ImmutableBag.</p>
      * <p>Examples:</p>
-     * {@code Interval.oneTo(5).stream().collect(Collectors2.toImmutableBag());}<br>
-     * {@code Interval.oneTo(5).reduceInPlace(Collectors2.toImmutableBag());}
+     * {@code ImmutableBag<Integer> bag1 = Interval.oneTo(5).stream().collect(Collectors2.toImmutableBag());}<br>
+     * {@code ImmutableBag<Integer> bag2 = Interval.oneTo(5).reduceInPlace(Collectors2.toImmutableBag());}
      * <p>
      * Equivalent to using @{@link RichIterable#toBag()} followed by: @{@link MutableBag#toImmutable()}.
      * </p>
-     * {@code Interval.oneTo(5).toBag().toImmutable();}
+     * {@code ImmutableBag<Integer> bag = Interval.oneTo(5).toBag().toImmutable();}
      */
     public static <T> Collector<T, ?, ImmutableBag<T>> toImmutableBag()
     {
@@ -390,12 +390,12 @@ public final class Collectors2
     /**
      * <p>Returns the elements as a MutableList that has been sorted.</p>
      * <p>Examples:</p>
-     * {@code Interval.oneTo(5).stream().collect(Collectors2.toSortedList());}<br>
-     * {@code Interval.oneTo(5).reduceInPlace(Collectors2.toSortedList());}
+     * {@code MutableList<Integer> list1 = Interval.oneTo(5).stream().collect(Collectors2.toSortedList());}<br>
+     * {@code MutableList<Integer> list2 = Interval.oneTo(5).reduceInPlace(Collectors2.toSortedList());}
      * <p>
      * Equivalent to using @{@link RichIterable#toSortedList()}}
      * </p>
-     * {@code Interval.oneTo(5).toSortedList();}
+     * {@code MutableList<Integer> list = Interval.oneTo(5).toSortedList();}
      */
     public static <T> Collector<T, ?, MutableList<T>> toSortedList()
     {
@@ -410,12 +410,12 @@ public final class Collectors2
     /**
      * <p>Returns the elements as an ImmutableList that has been sorted.</p>
      * <p>Examples:</p>
-     * {@code Interval.oneTo(5).stream().collect(Collectors2.toImmutableSortedList());}<br>
-     * {@code Interval.oneTo(5).reduceInPlace(Collectors2.toImmutableSortedList());}
+     * {@code ImmutableList<Integer> list1 = Interval.oneTo(5).stream().collect(Collectors2.toImmutableSortedList());}<br>
+     * {@code ImmutableList<Integer> list2 = Interval.oneTo(5).reduceInPlace(Collectors2.toImmutableSortedList());}
      * <p>
      * Equivalent to using @{@link RichIterable#toSortedList()} followed by: @{@link MutableList#toImmutable()}.
      * </p>
-     * {@code Interval.oneTo(5).toSortedList().toImmutable();}
+     * {@code ImmutableList<Integer> list = Interval.oneTo(5).toSortedList().toImmutable();}
      */
     public static <T> Collector<T, ?, ImmutableList<T>> toImmutableSortedList()
     {
@@ -430,12 +430,12 @@ public final class Collectors2
     /**
      * <p>Returns the elements as a MutableList that has been sorted using the specified comparator.</p>
      * <p>Examples:</p>
-     * {@code Interval.oneTo(5).stream().collect(Collectors2.toSortedList(Comparators.naturalOrder()));}<br>
-     * {@code Interval.oneTo(5).reduceInPlace(Collectors2.toSortedList(Comparators.naturalOrder()));}
+     * {@code MutableList<Integer> list1 = Interval.oneTo(5).stream().collect(Collectors2.toSortedList(Comparators.naturalOrder()));}<br>
+     * {@code MutableList<Integer> list2 = Interval.oneTo(5).reduceInPlace(Collectors2.toSortedList(Comparators.naturalOrder()));}
      * <p>
      * Equivalent to using @{@link RichIterable#toSortedList(Comparator)}}
      * </p>
-     * {@code Interval.oneTo(5).toSortedList(Comparators.naturalOrder());}
+     * {@code MutableList<Integer> list = Interval.oneTo(5).toSortedList(Comparators.naturalOrder());}
      */
     public static <T> Collector<T, ?, MutableList<T>> toSortedList(Comparator<? super T> comparator)
     {
@@ -450,12 +450,12 @@ public final class Collectors2
     /**
      * <p>Returns the elements as a MutableList that has been sorted using the specified comparator.</p>
      * <p>Examples:</p>
-     * {@code Interval.oneTo(5).stream().collect(Collectors2.toSortedListBy(Object::toString));}<br>
-     * {@code Interval.oneTo(5).reduceInPlace(Collectors2.toSortedListBy(Object::toString));}
+     * {@code MutableList<Integer> list1 = Interval.oneTo(5).stream().collect(Collectors2.toSortedListBy(Object::toString));}<br>
+     * {@code MutableList<Integer> list2 = Interval.oneTo(5).reduceInPlace(Collectors2.toSortedListBy(Object::toString));}
      * <p>
      * Equivalent to using @{@link RichIterable#toSortedListBy(Function)}}
      * </p>
-     * {@code Interval.oneTo(5).toSortedListBy(Object::toString);}
+     * {@code MutableList<Integer> list = Interval.oneTo(5).toSortedListBy(Object::toString);}
      */
     public static <T, V extends Comparable<? super V>> Collector<T, ?, MutableList<T>> toSortedListBy(Function<? super T, ? extends V> function)
     {
@@ -465,12 +465,12 @@ public final class Collectors2
     /**
      * <p>Returns the elements as an ImmutableList that has been sorted using the specified comparator.</p>
      * <p>Examples:</p>
-     * {@code Interval.oneTo(5).stream().collect(Collectors2.toImmutableSortedList(Comparator.naturalOrder()));}<br>
-     * {@code Interval.oneTo(5).reduceInPlace(Collectors2.toImmutableSortedList(Comparator.naturalOrder()));}
+     * {@code ImmutableList<Integer> list1 = Interval.oneTo(5).stream().collect(Collectors2.toImmutableSortedList(Comparator.naturalOrder()));}<br>
+     * {@code ImmutableList<Integer> list2 = Interval.oneTo(5).reduceInPlace(Collectors2.toImmutableSortedList(Comparator.naturalOrder()));}
      * <p>
      * Equivalent to using @{@link RichIterable#toSortedList(Comparator)} followed by: @{@link MutableList#toImmutable()}.
      * </p>
-     * {@code Interval.oneTo(5).toSortedList(Comparator.naturalOrder()).toImmutable();}
+     * {@code ImmutableList<Integer> list = Interval.oneTo(5).toSortedList(Comparator.naturalOrder()).toImmutable();}
      */
     public static <T> Collector<T, ?, ImmutableList<T>> toImmutableSortedList(Comparator<? super T> comparator)
     {
@@ -485,12 +485,12 @@ public final class Collectors2
     /**
      * <p>Returns the elements as a MutableSortedBag.</p>
      * <p>Examples:</p>
-     * {@code Interval.oneTo(5).stream().collect(Collectors2.toSortedBag());}<br>
-     * {@code Interval.oneTo(5).reduceInPlace(Collectors2.toSortedBag());}
+     * {@code MutableSortedBag<Integer> bag1 = Interval.oneTo(5).stream().collect(Collectors2.toSortedBag());}<br>
+     * {@code MutableSortedBag<Integer> bag2 = Interval.oneTo(5).reduceInPlace(Collectors2.toSortedBag());}
      * <p>
      * Equivalent to using @{@link RichIterable#toSortedBag()}}
      * </p>
-     * {@code Interval.oneTo(5).toSortedBag();}
+     * {@code MutableSortedBag<Integer> bag = Interval.oneTo(5).toSortedBag();}
      */
     public static <T> Collector<T, ?, MutableSortedBag<T>> toSortedBag()
     {
@@ -504,12 +504,12 @@ public final class Collectors2
     /**
      * <p>Returns the elements as an ImmutableSortedBag.</p>
      * <p>Examples:</p>
-     * {@code Interval.oneTo(5).stream().collect(Collectors2.toImmutableSortedBag());}<br>
-     * {@code Interval.oneTo(5).reduceInPlace(Collectors2.toImmutableSortedBag());}
+     * {@code ImmutableSortedBag<Integer> bag1 = Interval.oneTo(5).stream().collect(Collectors2.toImmutableSortedBag());}<br>
+     * {@code ImmutableSortedBag<Integer> bag2 = Interval.oneTo(5).reduceInPlace(Collectors2.toImmutableSortedBag());}
      * <p>
      * Equivalent to using @{@link RichIterable#toSortedBag()} followed by: @{@link MutableList#toImmutable()}.
      * </p>
-     * {@code Interval.oneTo(5).toSortedBag().toImmutable();}
+     * {@code ImmutableSortedBag<Integer> bag = Interval.oneTo(5).toSortedBag().toImmutable();}
      */
     public static <T> Collector<T, ?, ImmutableSortedBag<T>> toImmutableSortedBag()
     {
@@ -524,12 +524,12 @@ public final class Collectors2
     /**
      * <p>Returns the elements as a MutableSortedBag using the specified comparator.</p>
      * <p>Examples:</p>
-     * {@code Interval.oneTo(5).stream().collect(Collectors2.toSortedBag(Comparators.naturalOrder()));}<br>
-     * {@code Interval.oneTo(5).reduceInPlace(Collectors2.toSortedBag(Comparators.naturalOrder()));}
+     * {@code MutableSortedBag<Integer> bag1 = Interval.oneTo(5).stream().collect(Collectors2.toSortedBag(Comparators.naturalOrder()));}<br>
+     * {@code MutableSortedBag<Integer> bag2 = Interval.oneTo(5).reduceInPlace(Collectors2.toSortedBag(Comparators.naturalOrder()));}
      * <p>
      * Equivalent to using @{@link RichIterable#toSortedBag(Comparator)}
      * </p>
-     * {@code Interval.oneTo(5).toSortedBag(Comparators.naturalOrder());}
+     * {@code MutableSortedBag<Integer> bag = Interval.oneTo(5).toSortedBag(Comparators.naturalOrder());}
      */
     public static <T> Collector<T, ?, MutableSortedBag<T>> toSortedBag(Comparator<? super T> comparator)
     {
@@ -543,12 +543,12 @@ public final class Collectors2
     /**
      * <p>Returns the elements as a MutableSortedBag using the specified function.</p>
      * <p>Examples:</p>
-     * {@code Interval.oneTo(5).stream().collect(Collectors2.toSortedBagBy(Object::toString));}<br>
-     * {@code Interval.oneTo(5).reduceInPlace(Collectors2.toSortedBagBy(Object::toString));}
+     * {@code MutableSortedBag<Integer> bag1 = Interval.oneTo(5).stream().collect(Collectors2.toSortedBagBy(Object::toString));}<br>
+     * {@code MutableSortedBag<Integer> bag2 = Interval.oneTo(5).reduceInPlace(Collectors2.toSortedBagBy(Object::toString));}
      * <p>
      * Equivalent to using @{@link RichIterable#toSortedBagBy(Function)}}
      * </p>
-     * {@code Interval.oneTo(5).toSortedBagBy(Object::toString);}
+     * {@code MutableSortedBag<Integer> bag = Interval.oneTo(5).toSortedBagBy(Object::toString);}
      */
     public static <T, V extends Comparable<? super V>> Collector<T, ?, MutableSortedBag<T>> toSortedBagBy(Function<? super T, ? extends V> function)
     {
@@ -558,12 +558,12 @@ public final class Collectors2
     /**
      * <p>Returns the elements as an ImmutableSortedBag using the specified comparator.</p>
      * <p>Examples:</p>
-     * {@code Interval.oneTo(5).stream().collect(Collectors2.toImmutableSortedBag(Comparator.naturalOrder()));}<br>
-     * {@code Interval.oneTo(5).reduceInPlace(Collectors2.toImmutableSortedBag(Comparator.naturalOrder()));}
+     * {@code ImmutableSortedBag<Integer> bag1 = Interval.oneTo(5).stream().collect(Collectors2.toImmutableSortedBag(Comparator.naturalOrder()));}<br>
+     * {@code ImmutableSortedBag<Integer> bag1 = Interval.oneTo(5).reduceInPlace(Collectors2.toImmutableSortedBag(Comparator.naturalOrder()));}
      * <p>
      * Equivalent to using @{@link RichIterable#toSortedBag(Comparator)} followed by: @{@link MutableBag#toImmutable()}.
      * </p>
-     * {@code Interval.oneTo(5).toSortedBag(Comparator.naturalOrder()).toImmutable();}
+     * {@code ImmutableSortedBag<Integer> bag = Interval.oneTo(5).toSortedBag(Comparator.naturalOrder()).toImmutable();}
      */
     public static <T> Collector<T, ?, ImmutableSortedBag<T>> toImmutableSortedBag(Comparator<? super T> comparator)
     {
@@ -578,12 +578,12 @@ public final class Collectors2
     /**
      * <p>Returns the elements as a MutableStack.</p>
      * <p>Examples:</p>
-     * {@code Interval.oneTo(5).stream().collect(Collectors2.toStack());}<br>
-     * {@code Interval.oneTo(5).reduceInPlace(Collectors2.toStack());}
+     * {@code MutableStack<Integer> stack1 = Interval.oneTo(5).stream().collect(Collectors2.toStack());}<br>
+     * {@code MutableStack<Integer> stack2 = Interval.oneTo(5).reduceInPlace(Collectors2.toStack());}
      * <p>
      * Equivalent to using @{@link OrderedIterable#toStack()}}
      * </p>
-     * {@code Interval.oneTo(5).toList().toStack();}
+     * {@code MutableStack<Integer> stack = Interval.oneTo(5).toList().toStack();}
      */
     public static <T> Collector<T, ?, MutableStack<T>> toStack()
     {
@@ -598,12 +598,12 @@ public final class Collectors2
     /**
      * <p>Returns the elements as an ImmutableStack.</p>
      * <p>Examples:</p>
-     * {@code Interval.oneTo(5).stream().collect(Collectors2.toImmutableStack());}<br>
-     * {@code Interval.oneTo(5).reduceInPlace(Collectors2.toImmutableStack());}
+     * {@code ImmutableStack<Integer> stack1 = Interval.oneTo(5).stream().collect(Collectors2.toImmutableStack());}<br>
+     * {@code ImmutableStack<Integer> stack2 = Interval.oneTo(5).reduceInPlace(Collectors2.toImmutableStack());}
      * <p>
      * Equivalent to using @{@link OrderedIterable#toStack()} followed by: @{@link MutableStack#toImmutable()}}
      * </p>
-     * {@code Interval.oneTo(5).toList().toStack().toImmutable();}
+     * {@code ImmutableStack<Integer> stack = Interval.oneTo(5).toList().toStack().toImmutable();}
      */
     public static <T> Collector<T, ?, ImmutableStack<T>> toImmutableStack()
     {
@@ -672,7 +672,7 @@ public final class Collectors2
      * <p>
      * Equivalent to using @{@link RichIterable#toMap(Function, Function)}
      * </p>
-     * {@code Interval.oneTo(5).toMap(Functions.identity(), Object::toString);}
+     * {@code MutableMap<Integer, String> map = Interval.oneTo(5).toMap(Functions.identity(), Object::toString);}
      */
     public static <T, K, V> Collector<T, ?, MutableMap<K, V>> toMap(
             Function<? super T, ? extends K> keyFunction,
@@ -699,7 +699,7 @@ public final class Collectors2
      * <p>
      * Equivalent to using @{@link RichIterable#toMap(Function, Function)}
      * </p>
-     * {@code Interval.oneTo(5).toMap(Functions.identity(), Object::toString).toImmutable();}
+     * {@code ImmutableMap<Integer, String> map = Interval.oneTo(5).toMap(Functions.identity(), Object::toString).toImmutable();}
      */
     public static <T, K, V> Collector<T, ?, ImmutableMap<K, V>> toImmutableMap(
             Function<? super T, ? extends K> keyFunction,
@@ -720,14 +720,14 @@ public final class Collectors2
     /**
      * <p>Returns the elements as an MutableMultimap grouping each element using the specified groupBy Function.</p>
      * <p>Examples:</p>
-     * {@code MutableMultimap<String, Integer> multimap1 =
+     * {@code MutableListMultimap<String, Integer> multimap1 =
      * Interval.oneTo(5).stream().collect(Collectors2.groupBy(Object::toString, Multimaps.mutable.list::empty));}<br>
-     * {@code MutableMultimap<String, Integer> multimap2 =
+     * {@code MutableListMultimap<String, Integer> multimap2 =
      * Interval.oneTo(5).reduceInPlace(Collectors2.groupBy(Object::toString, Multimaps.mutable.list::empty));}
      * <p>
      * Equivalent to using @{@link RichIterable#groupBy(Function, MutableMultimap)}
      * </p>
-     * {@code Interval.oneTo(5).groupBy(Object::toString, Multimaps.mutable.list.empty());}
+     * {@code MutableListMultimap<String, Integer> multimap = Interval.oneTo(5).groupBy(Object::toString, Multimaps.mutable.list.empty());}
      */
     public static <T, K, R extends MutableMultimap<K, T>> Collector<T, ?, R> groupBy(
             Function<? super T, ? extends K> groupBy,
@@ -765,10 +765,10 @@ public final class Collectors2
      * <p>Returns the elements as an MutableMultimap grouping each element using the specified groupBy Function and
      * converting each element to the value returned by applying the specified Function valueFunction.</p>
      * <p>Examples:</p>
-     * {@code MutableMultimap<String, String> multimap1 =
-     * Interval.oneTo(5).stream().collect(Collectors2.groupBy(Object::toString, Object::toString, Multimaps.mutable.list::empty));}<br>
-     * {@code MutableMultimap<String, String> multimap2 =
-     * Interval.oneTo(5).reduceInPlace(Collectors2.groupBy(Object::toString, Object::toString, Multimaps.mutable.list::empty));}
+     * {@code MutableListMultimap<String, String> multimap1 =
+     * Interval.oneTo(5).stream().collect(Collectors2.groupByAndCollect(Object::toString, Object::toString, Multimaps.mutable.list::empty));}<br>
+     * {@code MutableListMultimap<String, String> multimap2 =
+     * Interval.oneTo(5).reduceInPlace(Collectors2.groupByAndCollect(Object::toString, Object::toString, Multimaps.mutable.list::empty));}
      */
     public static <T, K, V, R extends MutableMultimap<K, V>> Collector<T, ?, R> groupByAndCollect(
             Function<? super T, ? extends K> groupBy,
@@ -1395,14 +1395,14 @@ public final class Collectors2
      * collection with the specified parameter. This method is also commonly called transform or map. The new collection
      * is created as the result of evaluating the provided Supplier.</p>
      * <p>Examples:</p>
-     * {@code MutableList<String> collect =
-     * Interval.oneTo(10).stream().collect(Collectors2.collect(Object::toString, Lists.mutable::empty));}<br>
-     * {@code MutableList<String> collect =
-     * Interval.oneTo(10).reduceInPlace(Collectors2.collect(Object::toString, Lists.mutable::empty));}<br>
+     * {@code MutableList<Integer> collect1 =
+     * Interval.oneTo(10).stream().collect(Collectors2.collectWith(Integer::sum, Integer.valueOf(10), Lists.mutable::empty));}<br>
+     * {@code MutableList<Integer> collect2 =
+     * Interval.oneTo(10).reduceInPlace(Collectors2.collectWith(Integer::sum, Integer.valueOf(10), Lists.mutable::empty));}<br>
      * <p>
-     * Equivalent to using @{@link RichIterable#collect(Function, Collection)}
+     * Equivalent to using @{@link RichIterable#collectWith(Function2, Object, Collection)}
      * </p>
-     * {@code MutableList<String> collect = Interval.oneTo(10).collect(Object::toString, Lists.mutable.empty());}
+     * {@code MutableList<Integer> collect = Interval.oneTo(10).collectWith(Integer::sum, Integer.valueOf(10), Lists.mutable.empty());}
      */
     public static <T, P, V, R extends Collection<V>> Collector<T, ?, R> collectWith(
             Function2<? super T, ? super P, ? extends V> function,
