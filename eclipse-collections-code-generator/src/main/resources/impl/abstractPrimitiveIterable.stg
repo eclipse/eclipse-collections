@@ -41,33 +41,6 @@ public abstract class Abstract<name>Iterable implements <name>Iterable
         return this.makeString("[", ", ", "]");
     }
 
-    public String makeString()
-    {
-        return this.makeString(", ");
-    }
-
-    public String makeString(String separator)
-    {
-        return this.makeString("", separator, "");
-    }
-
-    public String makeString(String start, String separator, String end)
-    {
-        Appendable stringBuilder = new StringBuilder();
-        this.appendString(stringBuilder, start, separator, end);
-        return stringBuilder.toString();
-    }
-
-    public void appendString(Appendable appendable)
-    {
-        this.appendString(appendable, ", ");
-    }
-
-    public void appendString(Appendable appendable, String separator)
-    {
-        this.appendString(appendable, "", separator, "");
-    }
-
     <(arithmeticMethods.(type))()>
 
     public Mutable<name>List toList()
@@ -106,16 +79,6 @@ public abstract class Abstract<name>Iterable implements <name>Iterable
                 return Abstract<name>Iterable.this.contains(each);
             }
         });
-    }
-
-    public boolean isEmpty()
-    {
-        return this.size() == 0;
-    }
-
-    public boolean notEmpty()
-    {
-        return this.size() != 0;
     }
 }
 
