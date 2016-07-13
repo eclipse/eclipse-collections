@@ -165,23 +165,11 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
     }
 
     @Override
-    public boolean notEmpty()
-    {
-        return !this.isEmpty();
-    }
-
-    @Override
     public MutableList<T> toList()
     {
         MutableList<T> list = Lists.mutable.empty();
         this.forEachWith(Procedures2.addToCollection(), list);
         return list;
-    }
-
-    @Override
-    public MutableList<T> toSortedList()
-    {
-        return this.toList().sortThis();
     }
 
     @Override
@@ -627,32 +615,6 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
     }
 
     @Override
-    public String makeString()
-    {
-        return this.makeString(", ");
-    }
-
-    @Override
-    public String makeString(String separator)
-    {
-        return this.makeString("", separator, "");
-    }
-
-    @Override
-    public String makeString(String start, String separator, String end)
-    {
-        Appendable stringBuilder = new StringBuilder();
-        this.appendString(stringBuilder, start, separator, end);
-        return stringBuilder.toString();
-    }
-
-    @Override
-    public void appendString(Appendable appendable)
-    {
-        this.appendString(appendable, ", ");
-    }
-
-    @Override
     public void appendString(Appendable appendable, String separator)
     {
         AppendStringProcedure<T> appendStringProcedure = new AppendStringProcedure<>(appendable, separator);
@@ -762,16 +724,5 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
     {
         this.forEach(new GroupByUniqueKeyProcedure<>(target, function));
         return target;
-    }
-
-    @Override
-    public T getOnly()
-    {
-        if (this.size() == 1)
-        {
-            return this.getFirst();
-        }
-
-        throw new IllegalStateException("Size must be 1 but was " + this.size());
     }
 }

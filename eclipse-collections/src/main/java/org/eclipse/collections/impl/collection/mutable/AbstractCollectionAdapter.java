@@ -732,12 +732,6 @@ public abstract class AbstractCollectionAdapter<T>
     }
 
     @Override
-    public MutableList<T> toSortedList()
-    {
-        return this.toList().sortThis();
-    }
-
-    @Override
     public MutableList<T> toSortedList(Comparator<? super T> comparator)
     {
         return this.toList().sortThis(comparator);
@@ -859,38 +853,6 @@ public abstract class AbstractCollectionAdapter<T>
     public String toString()
     {
         return this.makeString("[", ", ", "]");
-    }
-
-    @Override
-    public String makeString()
-    {
-        return this.makeString(", ");
-    }
-
-    @Override
-    public String makeString(String separator)
-    {
-        return this.makeString("", separator, "");
-    }
-
-    @Override
-    public String makeString(String start, String separator, String end)
-    {
-        Appendable stringBuilder = new StringBuilder();
-        this.appendString(stringBuilder, start, separator, end);
-        return stringBuilder.toString();
-    }
-
-    @Override
-    public void appendString(Appendable appendable)
-    {
-        this.appendString(appendable, ", ");
-    }
-
-    @Override
-    public void appendString(Appendable appendable, String separator)
-    {
-        this.appendString(appendable, "", separator, "");
     }
 
     @Override

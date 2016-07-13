@@ -96,7 +96,10 @@ public interface RichIterable<T>
      *
      * @since 1.0
      */
-    boolean notEmpty();
+    default boolean notEmpty()
+    {
+        return !this.isEmpty();
+    }
 
     /**
      * Returns the first element of an iterable.  In the case of a List it is the element at the first index.  In the
@@ -135,7 +138,15 @@ public interface RichIterable<T>
      * @throws IllegalStateException if iterable is empty or has multiple elements.
      * @since 8.0
      */
-    T getOnly();
+    default T getOnly()
+    {
+        if (this.size() == 1)
+        {
+            return this.getFirst();
+        }
+
+        throw new IllegalStateException("Size must be 1 but was " + this.size());
+    }
 
     /**
      * Returns true if the iterable has an element which responds true to element.equals(object).
@@ -1395,7 +1406,10 @@ public interface RichIterable<T>
      *
      * @since 1.0
      */
-    MutableList<T> toSortedList();
+    default MutableList<T> toSortedList()
+    {
+        return this.toList().sortThis();
+    }
 
     /**
      * Converts the collection to a MutableList implementation and sorts it using the specified comparator.
@@ -1508,7 +1522,6 @@ public interface RichIterable<T>
      * @since 1.0.
      */
     LazyIterable<T> asLazy();
-
     /**
      * Converts this iterable to an array.
      *
@@ -1733,7 +1746,10 @@ public interface RichIterable<T>
      * @return a string representation of this collection.
      * @since 1.0
      */
-    String makeString();
+    default String makeString()
+    {
+        return this.makeString(", ");
+    }
 
     /**
      * Returns a string representation of this collection by delegating to {@link #makeString(String, String, String)}
@@ -1742,7 +1758,10 @@ public interface RichIterable<T>
      * @return a string representation of this collection.
      * @since 1.0
      */
-    String makeString(String separator);
+    default String makeString(String separator)
+    {
+        return this.makeString("", separator, "");
+    }
 
     /**
      * Returns a string representation of this collection.  The string representation consists of a list of the
@@ -1753,7 +1772,12 @@ public interface RichIterable<T>
      * @return a string representation of this collection.
      * @since 1.0
      */
-    String makeString(String start, String separator, String end);
+    default String makeString(String start, String separator, String end)
+    {
+        Appendable stringBuilder = new StringBuilder();
+        this.appendString(stringBuilder, start, separator, end);
+        return stringBuilder.toString();
+    }
 
     /**
      * Prints a string representation of this collection onto the given {@code Appendable}.  Prints the string returned
@@ -1761,7 +1785,10 @@ public interface RichIterable<T>
      *
      * @since 1.0
      */
-    void appendString(Appendable appendable);
+    default void appendString(Appendable appendable)
+    {
+        this.appendString(appendable, ", ");
+    }
 
     /**
      * Prints a string representation of this collection onto the given {@code Appendable}.  Prints the string returned
@@ -1769,7 +1796,10 @@ public interface RichIterable<T>
      *
      * @since 1.0
      */
-    void appendString(Appendable appendable, String separator);
+    default void appendString(Appendable appendable, String separator)
+    {
+        this.appendString(appendable, "", separator, "");
+    }
 
     /**
      * Prints a string representation of this collection onto the given {@code Appendable}.  Prints the string returned

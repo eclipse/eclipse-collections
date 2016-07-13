@@ -13,7 +13,6 @@ package org.eclipse.collections.impl.bag.sorted.mutable;
 import java.util.Comparator;
 import java.util.concurrent.ExecutorService;
 
-import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.annotation.Beta;
 import org.eclipse.collections.api.bag.sorted.ImmutableSortedBag;
 import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
@@ -268,12 +267,6 @@ public abstract class AbstractMutableSortedBag<T>
     public void reverseForEach(Procedure<? super T> procedure)
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".reverseForEach() not implemented yet");
-    }
-
-    @Override
-    public LazyIterable<T> asReversed()
-    {
-        throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".asReversed() not implemented yet");
     }
 
     @Override

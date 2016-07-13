@@ -1182,12 +1182,6 @@ public abstract class AbstractMutableList<T>
     }
 
     @Override
-    public int binarySearch(T key)
-    {
-        return Collections.binarySearch((List<? extends Comparable<? super T>>) this, key);
-    }
-
-    @Override
     public RichIterable<RichIterable<T>> chunk(int size)
     {
         if (size <= 0)

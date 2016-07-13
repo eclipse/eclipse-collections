@@ -99,16 +99,6 @@ public abstract class AbstractMutableSortedMap<K, V> extends AbstractMutableMapI
         return this;
     }
 
-    /**
-     * @deprecated in 6.0 Use {@link #withAllKeyValueArguments(Pair[])} instead. Inlineable.
-     */
-    @Override
-    @Deprecated
-    public MutableSortedMap<K, V> with(Pair<K, V>... pairs)
-    {
-        return this.withAllKeyValueArguments(pairs);
-    }
-
     @Override
     public MutableSortedMap<K, V> withAllKeyValueArguments(Pair<? extends K, ? extends V>... keyValues)
     {

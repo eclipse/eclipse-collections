@@ -171,12 +171,6 @@ public abstract class AbstractMutableMultimap<K, V, C extends MutableCollection<
     }
 
     @Override
-    public boolean add(Pair<K, V> keyValuePair)
-    {
-        return this.put(keyValuePair.getOne(), keyValuePair.getTwo());
-    }
-
-    @Override
     public boolean remove(Object key, Object value)
     {
         C collection = this.map.get(key);
@@ -193,29 +187,6 @@ public abstract class AbstractMutableMultimap<K, V, C extends MutableCollection<
             {
                 this.map.remove(key);
             }
-        }
-        return changed;
-    }
-
-    // Bulk Operations
-    @Override
-    public boolean putAllPairs(Pair<K, V>... pairs)
-    {
-        boolean changed = false;
-        for (Pair<K, V> pair : pairs)
-        {
-            changed |= this.put(pair.getOne(), pair.getTwo());
-        }
-        return changed;
-    }
-
-    @Override
-    public boolean putAllPairs(Iterable<Pair<K, V>> pairs)
-    {
-        boolean changed = false;
-        for (Pair<K, V> pair : pairs)
-        {
-            changed |= this.put(pair.getOne(), pair.getTwo());
         }
         return changed;
     }

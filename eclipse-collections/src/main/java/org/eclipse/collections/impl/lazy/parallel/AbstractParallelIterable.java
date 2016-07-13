@@ -421,38 +421,6 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
     }
 
     @Override
-    public String makeString()
-    {
-        return this.makeString(", ");
-    }
-
-    @Override
-    public String makeString(String separator)
-    {
-        return this.makeString("", separator, "");
-    }
-
-    @Override
-    public String makeString(String start, String separator, String end)
-    {
-        Appendable stringBuilder = new StringBuilder();
-        this.appendString(stringBuilder, start, separator, end);
-        return stringBuilder.toString();
-    }
-
-    @Override
-    public void appendString(Appendable appendable)
-    {
-        this.appendString(appendable, ", ");
-    }
-
-    @Override
-    public void appendString(Appendable appendable, String separator)
-    {
-        this.appendString(appendable, "", separator, "");
-    }
-
-    @Override
     public void appendString(Appendable appendable, String start, String separator, String end)
     {
         try
@@ -540,12 +508,6 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
     }
 
     @Override
-    public Object[] toArray()
-    {
-        throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".toArray() not implemented yet");
-    }
-
-    @Override
     public <E> E[] toArray(E[] array)
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".toArray() not implemented yet");
@@ -562,12 +524,6 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
         MutableList<T> state = new CompositeFastList<>();
         this.collectCombine(map, MutableList<T>::addAll, state);
         return state;
-    }
-
-    @Override
-    public MutableList<T> toSortedList()
-    {
-        return this.toList().toSortedList();
     }
 
     @Override
