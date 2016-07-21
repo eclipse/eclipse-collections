@@ -32,104 +32,120 @@ public class MultimapsTest
     @Test
     public void immutableList()
     {
-        ImmutableListMultimap<Integer, Integer> empty = Multimaps.immutable.list.with();
-        Assert.assertEquals(0, empty.size());
-        ImmutableListMultimap<Integer, Integer> one = Multimaps.immutable.list.with(1, 1);
+        ImmutableListMultimap<Integer, Integer> empty = Multimaps.immutable.list.of();
+        ImmutableListMultimap<Integer, Integer> emptyWith = Multimaps.immutable.list.with();
+        Verify.assertEmpty(empty);
+        Verify.assertEmpty(emptyWith);
+        ImmutableListMultimap<Integer, Integer> one = Multimaps.immutable.list.of(1, 1);
         Assert.assertEquals(FastListMultimap.newMultimap(Tuples.pair(1, 1)), one);
-        ImmutableListMultimap<Integer, Integer> two = Multimaps.immutable.list.with(1, 1, 2, 2);
+        ImmutableListMultimap<Integer, Integer> two = Multimaps.immutable.list.of(1, 1, 2, 2);
         Assert.assertEquals(FastListMultimap.newMultimap(Tuples.pair(1, 1), Tuples.pair(2, 2)), two);
-        ImmutableListMultimap<Integer, Integer> three = Multimaps.immutable.list.with(1, 1, 2, 2, 3, 3);
+        ImmutableListMultimap<Integer, Integer> three = Multimaps.immutable.list.of(1, 1, 2, 2, 3, 3);
         Assert.assertEquals(FastListMultimap.newMultimap(Tuples.pair(1, 1), Tuples.pair(2, 2), Tuples.pair(3, 3)), three);
     }
 
     @Test
     public void immutableSet()
     {
-        ImmutableSetMultimap<Integer, Integer> empty = Multimaps.immutable.set.with();
-        Assert.assertEquals(0, empty.size());
-        ImmutableSetMultimap<Integer, Integer> one = Multimaps.immutable.set.with(1, 1);
+        ImmutableSetMultimap<Integer, Integer> empty = Multimaps.immutable.set.of();
+        ImmutableSetMultimap<Integer, Integer> emptyWith = Multimaps.immutable.set.with();
+        Verify.assertEmpty(empty);
+        Verify.assertEmpty(emptyWith);
+        ImmutableSetMultimap<Integer, Integer> one = Multimaps.immutable.set.of(1, 1);
         Assert.assertEquals(UnifiedSetMultimap.newMultimap(Tuples.pair(1, 1)), one);
-        ImmutableSetMultimap<Integer, Integer> two = Multimaps.immutable.set.with(1, 1, 2, 2);
+        ImmutableSetMultimap<Integer, Integer> two = Multimaps.immutable.set.of(1, 1, 2, 2);
         Assert.assertEquals(UnifiedSetMultimap.newMultimap(Tuples.pair(1, 1), Tuples.pair(2, 2)), two);
-        ImmutableSetMultimap<Integer, Integer> three = Multimaps.immutable.set.with(1, 1, 2, 2, 3, 3);
+        ImmutableSetMultimap<Integer, Integer> three = Multimaps.immutable.set.of(1, 1, 2, 2, 3, 3);
         Assert.assertEquals(UnifiedSetMultimap.newMultimap(Tuples.pair(1, 1), Tuples.pair(2, 2), Tuples.pair(3, 3)), three);
     }
 
     @Test
     public void immutableSortedSet()
     {
-        ImmutableSortedSetMultimap<Integer, Integer> empty = Multimaps.immutable.sortedSet.with(Integer::compareTo);
-        Assert.assertEquals(0, empty.size());
-        ImmutableSortedSetMultimap<Integer, Integer> one = Multimaps.immutable.sortedSet.with(Integer::compareTo, 1, 1);
+        ImmutableSortedSetMultimap<Integer, Integer> empty = Multimaps.immutable.sortedSet.of(Integer::compareTo);
+        ImmutableSortedSetMultimap<Integer, Integer> emptyWith = Multimaps.immutable.sortedSet.with(Integer::compareTo);
+        Verify.assertEmpty(empty);
+        Verify.assertEmpty(emptyWith);
+        ImmutableSortedSetMultimap<Integer, Integer> one = Multimaps.immutable.sortedSet.of(Integer::compareTo, 1, 1);
         Assert.assertEquals(TreeSortedSetMultimap.newMultimap(Tuples.pair(1, 1)), one);
-        ImmutableSortedSetMultimap<Integer, Integer> two = Multimaps.immutable.sortedSet.with(Integer::compareTo, 1, 1, 2, 2);
+        ImmutableSortedSetMultimap<Integer, Integer> two = Multimaps.immutable.sortedSet.of(Integer::compareTo, 1, 1, 2, 2);
         Assert.assertEquals(TreeSortedSetMultimap.newMultimap(Tuples.pair(1, 1), Tuples.pair(2, 2)), two);
-        ImmutableSortedSetMultimap<Integer, Integer> three = Multimaps.immutable.sortedSet.with(Integer::compareTo, 1, 1, 2, 2, 3, 3);
+        ImmutableSortedSetMultimap<Integer, Integer> three = Multimaps.immutable.sortedSet.of(Integer::compareTo, 1, 1, 2, 2, 3, 3);
         Assert.assertEquals(TreeSortedSetMultimap.newMultimap(Tuples.pair(1, 1), Tuples.pair(2, 2), Tuples.pair(3, 3)), three);
     }
 
     @Test
     public void immutableBag()
     {
-        ImmutableBagMultimap<Integer, Integer> empty = Multimaps.immutable.bag.with();
-        Assert.assertEquals(0, empty.size());
-        ImmutableBagMultimap<Integer, Integer> one = Multimaps.immutable.bag.with(1, 1);
+        ImmutableBagMultimap<Integer, Integer> empty = Multimaps.immutable.bag.of();
+        ImmutableBagMultimap<Integer, Integer> emptyWith = Multimaps.immutable.bag.with();
+        Verify.assertEmpty(empty);
+        Verify.assertEmpty(emptyWith);
+        ImmutableBagMultimap<Integer, Integer> one = Multimaps.immutable.bag.of(1, 1);
         Assert.assertEquals(HashBagMultimap.newMultimap(Tuples.pair(1, 1)), one);
-        ImmutableBagMultimap<Integer, Integer> two = Multimaps.immutable.bag.with(1, 1, 2, 2);
+        ImmutableBagMultimap<Integer, Integer> two = Multimaps.immutable.bag.of(1, 1, 2, 2);
         Assert.assertEquals(HashBagMultimap.newMultimap(Tuples.pair(1, 1), Tuples.pair(2, 2)), two);
-        ImmutableBagMultimap<Integer, Integer> three = Multimaps.immutable.bag.with(1, 1, 2, 2, 3, 3);
+        ImmutableBagMultimap<Integer, Integer> three = Multimaps.immutable.bag.of(1, 1, 2, 2, 3, 3);
         Assert.assertEquals(HashBagMultimap.newMultimap(Tuples.pair(1, 1), Tuples.pair(2, 2), Tuples.pair(3, 3)), three);
     }
 
     @Test
     public void mutableList()
     {
-        MutableListMultimap<Integer, Integer> empty = Multimaps.mutable.list.with();
-        Assert.assertEquals(0, empty.size());
-        MutableListMultimap<Integer, Integer> one = Multimaps.mutable.list.with(1, 1);
+        MutableListMultimap<Integer, Integer> empty = Multimaps.mutable.list.of();
+        MutableListMultimap<Integer, Integer> emptyWith = Multimaps.mutable.list.with();
+        Verify.assertEmpty(empty);
+        Verify.assertEmpty(emptyWith);
+        MutableListMultimap<Integer, Integer> one = Multimaps.mutable.list.of(1, 1);
         Assert.assertEquals(FastListMultimap.newMultimap(Tuples.pair(1, 1)), one);
-        MutableListMultimap<Integer, Integer> two = Multimaps.mutable.list.with(1, 1, 2, 2);
+        MutableListMultimap<Integer, Integer> two = Multimaps.mutable.list.of(1, 1, 2, 2);
         Assert.assertEquals(FastListMultimap.newMultimap(Tuples.pair(1, 1), Tuples.pair(2, 2)), two);
-        MutableListMultimap<Integer, Integer> three = Multimaps.mutable.list.with(1, 1, 2, 2, 3, 3);
+        MutableListMultimap<Integer, Integer> three = Multimaps.mutable.list.of(1, 1, 2, 2, 3, 3);
         Assert.assertEquals(FastListMultimap.newMultimap(Tuples.pair(1, 1), Tuples.pair(2, 2), Tuples.pair(3, 3)), three);
     }
 
     @Test
     public void mutableSet()
     {
-        MutableSetMultimap<Integer, Integer> empty = Multimaps.mutable.set.with();
-        Assert.assertEquals(0, empty.size());
-        MutableSetMultimap<Integer, Integer> one = Multimaps.mutable.set.with(1, 1);
+        MutableSetMultimap<Integer, Integer> empty = Multimaps.mutable.set.of();
+        MutableSetMultimap<Integer, Integer> emptyWith = Multimaps.mutable.set.with();
+        Verify.assertEmpty(empty);
+        Verify.assertEmpty(emptyWith);
+        MutableSetMultimap<Integer, Integer> one = Multimaps.mutable.set.of(1, 1);
         Assert.assertEquals(UnifiedSetMultimap.newMultimap(Tuples.pair(1, 1)), one);
-        MutableSetMultimap<Integer, Integer> two = Multimaps.mutable.set.with(1, 1, 2, 2);
+        MutableSetMultimap<Integer, Integer> two = Multimaps.mutable.set.of(1, 1, 2, 2);
         Assert.assertEquals(UnifiedSetMultimap.newMultimap(Tuples.pair(1, 1), Tuples.pair(2, 2)), two);
-        MutableSetMultimap<Integer, Integer> three = Multimaps.mutable.set.with(1, 1, 2, 2, 3, 3);
+        MutableSetMultimap<Integer, Integer> three = Multimaps.mutable.set.of(1, 1, 2, 2, 3, 3);
         Assert.assertEquals(UnifiedSetMultimap.newMultimap(Tuples.pair(1, 1), Tuples.pair(2, 2), Tuples.pair(3, 3)), three);
     }
 
     @Test
     public void mutableSortedSet()
     {
-        MutableSortedSetMultimap<Integer, Integer> empty = Multimaps.mutable.sortedSet.with(Integer::compareTo);
-        Assert.assertEquals(0, empty.size());
-        MutableSortedSetMultimap<Integer, Integer> one = Multimaps.mutable.sortedSet.with(Integer::compareTo, 1, 1);
+        MutableSortedSetMultimap<Integer, Integer> empty = Multimaps.mutable.sortedSet.of(Integer::compareTo);
+        MutableSortedSetMultimap<Integer, Integer> emptyWith = Multimaps.mutable.sortedSet.with(Integer::compareTo);
+        Verify.assertEmpty(empty);
+        Verify.assertEmpty(emptyWith);
+        MutableSortedSetMultimap<Integer, Integer> one = Multimaps.mutable.sortedSet.of(Integer::compareTo, 1, 1);
         Assert.assertEquals(TreeSortedSetMultimap.newMultimap(Tuples.pair(1, 1)), one);
-        MutableSortedSetMultimap<Integer, Integer> two = Multimaps.mutable.sortedSet.with(Integer::compareTo, 1, 1, 2, 2);
+        MutableSortedSetMultimap<Integer, Integer> two = Multimaps.mutable.sortedSet.of(Integer::compareTo, 1, 1, 2, 2);
         Assert.assertEquals(TreeSortedSetMultimap.newMultimap(Tuples.pair(1, 1), Tuples.pair(2, 2)), two);
-        MutableSortedSetMultimap<Integer, Integer> three = Multimaps.mutable.sortedSet.with(Integer::compareTo, 1, 1, 2, 2, 3, 3);
+        MutableSortedSetMultimap<Integer, Integer> three = Multimaps.mutable.sortedSet.of(Integer::compareTo, 1, 1, 2, 2, 3, 3);
         Assert.assertEquals(TreeSortedSetMultimap.newMultimap(Tuples.pair(1, 1), Tuples.pair(2, 2), Tuples.pair(3, 3)), three);
     }
 
     @Test
     public void mutableBag()
     {
-        MutableBagMultimap<Integer, Integer> empty = Multimaps.mutable.bag.with();
-        Assert.assertEquals(0, empty.size());
-        MutableBagMultimap<Integer, Integer> one = Multimaps.mutable.bag.with(1, 1);
+        MutableBagMultimap<Integer, Integer> empty = Multimaps.mutable.bag.of();
+        MutableBagMultimap<Integer, Integer> emptyWith = Multimaps.mutable.bag.with();
+        Verify.assertEmpty(empty);
+        Verify.assertEmpty(emptyWith);
+        MutableBagMultimap<Integer, Integer> one = Multimaps.mutable.bag.of(1, 1);
         Assert.assertEquals(HashBagMultimap.newMultimap(Tuples.pair(1, 1)), one);
-        MutableBagMultimap<Integer, Integer> two = Multimaps.mutable.bag.with(1, 1, 2, 2);
+        MutableBagMultimap<Integer, Integer> two = Multimaps.mutable.bag.of(1, 1, 2, 2);
         Assert.assertEquals(HashBagMultimap.newMultimap(Tuples.pair(1, 1), Tuples.pair(2, 2)), two);
-        MutableBagMultimap<Integer, Integer> three = Multimaps.mutable.bag.with(1, 1, 2, 2, 3, 3);
+        MutableBagMultimap<Integer, Integer> three = Multimaps.mutable.bag.of(1, 1, 2, 2, 3, 3);
         Assert.assertEquals(HashBagMultimap.newMultimap(Tuples.pair(1, 1), Tuples.pair(2, 2), Tuples.pair(3, 3)), three);
     }
 

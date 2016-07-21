@@ -65,14 +65,29 @@ public final class Multimaps
                 return (ImmutableListMultimap<K, V>) EMPTY;
             }
 
+            public <K, V> ImmutableListMultimap<K, V> of()
+            {
+                return this.empty();
+            }
+
             public <K, V> ImmutableListMultimap<K, V> with()
             {
                 return this.empty();
             }
 
+            public <K, V> ImmutableListMultimap<K, V> of(K key, V value)
+            {
+                return this.with(key, value);
+            }
+
             public <K, V> ImmutableListMultimap<K, V> with(K key, V value)
             {
                 return new ImmutableListMultimapImpl<>(Maps.immutable.with(key, Lists.immutable.with(value)));
+            }
+
+            public <K, V> ImmutableListMultimap<K, V> of(K key1, V value1, K key2, V value2)
+            {
+                return this.with(key1, value1, key2, value2);
             }
 
             public <K, V> ImmutableListMultimap<K, V> with(K key1, V value1, K key2, V value2)
@@ -81,6 +96,11 @@ public final class Multimaps
                 fastListMultimap.put(key1, value1);
                 fastListMultimap.put(key2, value2);
                 return fastListMultimap.toImmutable();
+            }
+
+            public <K, V> ImmutableListMultimap<K, V> of(K key1, V value1, K key2, V value2, K key3, V value3)
+            {
+                return this.with(key1, value1, key2, value2, key3, value3);
             }
 
             public <K, V> ImmutableListMultimap<K, V> with(K key1, V value1, K key2, V value2, K key3, V value3)
@@ -106,14 +126,29 @@ public final class Multimaps
                 return (ImmutableSetMultimap<K, V>) EMPTY;
             }
 
+            public <K, V> ImmutableSetMultimap<K, V> of()
+            {
+                return this.empty();
+            }
+
             public <K, V> ImmutableSetMultimap<K, V> with()
             {
                 return this.empty();
             }
 
+            public <K, V> ImmutableSetMultimap<K, V> of(K key, V value)
+            {
+                return this.with(key, value);
+            }
+
             public <K, V> ImmutableSetMultimap<K, V> with(K key, V value)
             {
                 return new ImmutableSetMultimapImpl<>(Maps.immutable.with(key, Sets.immutable.with(value)));
+            }
+
+            public <K, V> ImmutableSetMultimap<K, V> of(K key1, V value1, K key2, V value2)
+            {
+                return this.with(key1, value1, key2, value2);
             }
 
             public <K, V> ImmutableSetMultimap<K, V> with(K key1, V value1, K key2, V value2)
@@ -122,6 +157,11 @@ public final class Multimaps
                 unifiedSetMultimap.put(key1, value1);
                 unifiedSetMultimap.put(key2, value2);
                 return unifiedSetMultimap.toImmutable();
+            }
+
+            public <K, V> ImmutableSetMultimap<K, V> of(K key1, V value1, K key2, V value2, K key3, V value3)
+            {
+                return this.with(key1, value1, key2, value2, key3, value3);
             }
 
             public <K, V> ImmutableSetMultimap<K, V> with(K key1, V value1, K key2, V value2, K key3, V value3)
@@ -140,14 +180,29 @@ public final class Multimaps
             {
             }
 
+            public <K, V> ImmutableSortedSetMultimap<K, V> of(Comparator<V> comparator)
+            {
+                return this.with(comparator);
+            }
+
             public <K, V> ImmutableSortedSetMultimap<K, V> with(Comparator<V> comparator)
             {
                 return new ImmutableSortedSetMultimapImpl<>(Maps.immutable.with(), comparator);
             }
 
+            public <K, V> ImmutableSortedSetMultimap<K, V> of(Comparator<V> comparator, K key, V value)
+            {
+                return this.with(comparator, key, value);
+            }
+
             public <K, V> ImmutableSortedSetMultimap<K, V> with(Comparator<V> comparator, K key, V value)
             {
                 return new ImmutableSortedSetMultimapImpl<>(Maps.immutable.with(key, SortedSets.immutable.with(comparator, value)), comparator);
+            }
+
+            public <K, V> ImmutableSortedSetMultimap<K, V> of(Comparator<V> comparator, K key1, V value1, K key2, V value2)
+            {
+                return this.with(comparator, key1, value1, key2, value2);
             }
 
             public <K, V> ImmutableSortedSetMultimap<K, V> with(Comparator<V> comparator, K key1, V value1, K key2, V value2)
@@ -156,6 +211,11 @@ public final class Multimaps
                 treeSortedSetMultimap.put(key1, value1);
                 treeSortedSetMultimap.put(key2, value2);
                 return treeSortedSetMultimap.toImmutable();
+            }
+
+            public <K, V> ImmutableSortedSetMultimap<K, V> of(Comparator<V> comparator, K key1, V value1, K key2, V value2, K key3, V value3)
+            {
+                return this.with(comparator, key1, value1, key2, value2, key3, value3);
             }
 
             public <K, V> ImmutableSortedSetMultimap<K, V> with(Comparator<V> comparator, K key1, V value1, K key2, V value2, K key3, V value3)
@@ -181,14 +241,29 @@ public final class Multimaps
                 return (ImmutableBagMultimap<K, V>) EMPTY;
             }
 
+            public <K, V> ImmutableBagMultimap<K, V> of()
+            {
+                return this.empty();
+            }
+
             public <K, V> ImmutableBagMultimap<K, V> with()
             {
                 return this.empty();
             }
 
+            public <K, V> ImmutableBagMultimap<K, V> of(K key, V value)
+            {
+                return this.with(key, value);
+            }
+
             public <K, V> ImmutableBagMultimap<K, V> with(K key, V value)
             {
                 return new ImmutableBagMultimapImpl<>(Maps.immutable.with(key, Bags.immutable.with(value)));
+            }
+
+            public <K, V> ImmutableBagMultimap<K, V> of(K key1, V value1, K key2, V value2)
+            {
+                return this.with(key1, value1, key2, value2);
             }
 
             public <K, V> ImmutableBagMultimap<K, V> with(K key1, V value1, K key2, V value2)
@@ -197,6 +272,11 @@ public final class Multimaps
                 hashBagMultimap.put(key1, value1);
                 hashBagMultimap.put(key2, value2);
                 return hashBagMultimap.toImmutable();
+            }
+
+            public <K, V> ImmutableBagMultimap<K, V> of(K key1, V value1, K key2, V value2, K key3, V value3)
+            {
+                return this.with(key1, value1, key2, value2, key3, value3);
             }
 
             public <K, V> ImmutableBagMultimap<K, V> with(K key1, V value1, K key2, V value2, K key3, V value3)
@@ -233,9 +313,19 @@ public final class Multimaps
                 return FastListMultimap.newMultimap();
             }
 
+            public <K, V> MutableListMultimap<K, V> of()
+            {
+                return this.empty();
+            }
+
             public <K, V> MutableListMultimap<K, V> with()
             {
                 return this.empty();
+            }
+
+            public <K, V> MutableListMultimap<K, V> of(K key, V value)
+            {
+                return this.with(key, value);
             }
 
             public <K, V> MutableListMultimap<K, V> with(K key, V value)
@@ -245,12 +335,22 @@ public final class Multimaps
                 return fastListMultimap;
             }
 
+            public <K, V> MutableListMultimap<K, V> of(K key1, V value1, K key2, V value2)
+            {
+                return this.with(key1, value1, key2, value2);
+            }
+
             public <K, V> MutableListMultimap<K, V> with(K key1, V value1, K key2, V value2)
             {
                 FastListMultimap<K, V> fastListMultimap = FastListMultimap.newMultimap();
                 fastListMultimap.put(key1, value1);
                 fastListMultimap.put(key2, value2);
                 return fastListMultimap;
+            }
+
+            public <K, V> MutableListMultimap<K, V> of(K key1, V value1, K key2, V value2, K key3, V value3)
+            {
+                return this.with(key1, value1, key2, value2, key3, value3);
             }
 
             public <K, V> MutableListMultimap<K, V> with(K key1, V value1, K key2, V value2, K key3, V value3)
@@ -274,9 +374,19 @@ public final class Multimaps
                 return UnifiedSetMultimap.newMultimap();
             }
 
+            public <K, V> MutableSetMultimap<K, V> of()
+            {
+                return this.empty();
+            }
+
             public <K, V> MutableSetMultimap<K, V> with()
             {
                 return this.empty();
+            }
+
+            public <K, V> MutableSetMultimap<K, V> of(K key, V value)
+            {
+                return this.with(key, value);
             }
 
             public <K, V> MutableSetMultimap<K, V> with(K key, V value)
@@ -286,12 +396,22 @@ public final class Multimaps
                 return unifiedSetMultimap;
             }
 
+            public <K, V> MutableSetMultimap<K, V> of(K key1, V value1, K key2, V value2)
+            {
+                return this.with(key1, value1, key2, value2);
+            }
+
             public <K, V> MutableSetMultimap<K, V> with(K key1, V value1, K key2, V value2)
             {
                 UnifiedSetMultimap<K, V> unifiedSetMultimap = UnifiedSetMultimap.newMultimap();
                 unifiedSetMultimap.put(key1, value1);
                 unifiedSetMultimap.put(key2, value2);
                 return unifiedSetMultimap;
+            }
+
+            public <K, V> MutableSetMultimap<K, V> of(K key1, V value1, K key2, V value2, K key3, V value3)
+            {
+                return this.with(key1, value1, key2, value2, key3, value3);
             }
 
             public <K, V> MutableSetMultimap<K, V> with(K key1, V value1, K key2, V value2, K key3, V value3)
@@ -310,9 +430,19 @@ public final class Multimaps
             {
             }
 
+            public <K, V> MutableSortedSetMultimap<K, V> of(Comparator<V> comparator)
+            {
+                return this.with(comparator);
+            }
+
             public <K, V> MutableSortedSetMultimap<K, V> with(Comparator<V> comparator)
             {
                 return TreeSortedSetMultimap.newMultimap(comparator);
+            }
+
+            public <K, V> MutableSortedSetMultimap<K, V> of(Comparator<V> comparator, K key, V value)
+            {
+                return this.with(comparator, key, value);
             }
 
             public <K, V> MutableSortedSetMultimap<K, V> with(Comparator<V> comparator, K key, V value)
@@ -322,12 +452,22 @@ public final class Multimaps
                 return treeSortedSetMultimap;
             }
 
+            public <K, V> MutableSortedSetMultimap<K, V> of(Comparator<V> comparator, K key1, V value1, K key2, V value2)
+            {
+                return this.with(comparator, key1, value1, key2, value2);
+            }
+
             public <K, V> MutableSortedSetMultimap<K, V> with(Comparator<V> comparator, K key1, V value1, K key2, V value2)
             {
                 TreeSortedSetMultimap<K, V> treeSortedSetMultimap = TreeSortedSetMultimap.newMultimap(comparator);
                 treeSortedSetMultimap.put(key1, value1);
                 treeSortedSetMultimap.put(key2, value2);
                 return treeSortedSetMultimap;
+            }
+
+            public <K, V> MutableSortedSetMultimap<K, V> of(Comparator<V> comparator, K key1, V value1, K key2, V value2, K key3, V value3)
+            {
+                return this.with(comparator, key1, value1, key2, value2, key3, value3);
             }
 
             public <K, V> MutableSortedSetMultimap<K, V> with(Comparator<V> comparator, K key1, V value1, K key2, V value2, K key3, V value3)
@@ -351,9 +491,19 @@ public final class Multimaps
                 return HashBagMultimap.newMultimap();
             }
 
+            public <K, V> MutableBagMultimap<K, V> of()
+            {
+                return this.empty();
+            }
+
             public <K, V> MutableBagMultimap<K, V> with()
             {
                 return this.empty();
+            }
+
+            public <K, V> MutableBagMultimap<K, V> of(K key, V value)
+            {
+                return this.with(key, value);
             }
 
             public <K, V> MutableBagMultimap<K, V> with(K key, V value)
@@ -363,12 +513,22 @@ public final class Multimaps
                 return hashBagMultimap;
             }
 
+            public <K, V> MutableBagMultimap<K, V> of(K key1, V value1, K key2, V value2)
+            {
+                return this.with(key1, value1, key2, value2);
+            }
+
             public <K, V> MutableBagMultimap<K, V> with(K key1, V value1, K key2, V value2)
             {
                 HashBagMultimap<K, V> hashBagMultimap = HashBagMultimap.newMultimap();
                 hashBagMultimap.put(key1, value1);
                 hashBagMultimap.put(key2, value2);
                 return hashBagMultimap;
+            }
+
+            public <K, V> MutableBagMultimap<K, V> of(K key1, V value1, K key2, V value2, K key3, V value3)
+            {
+                return this.with(key1, value1, key2, value2, key3, value3);
             }
 
             public <K, V> MutableBagMultimap<K, V> with(K key1, V value1, K key2, V value2, K key3, V value3)
