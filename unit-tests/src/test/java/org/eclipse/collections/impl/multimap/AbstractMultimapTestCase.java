@@ -10,6 +10,8 @@
 
 package org.eclipse.collections.impl.multimap;
 
+import java.util.Set;
+
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.collection.MutableCollection;
 import org.eclipse.collections.api.list.ListIterable;
@@ -282,8 +284,9 @@ public abstract class AbstractMultimapTestCase
     {
         Multimap<String, Integer> multimap =
                 this.newMultimapWithKeysValues("One", 1, "One", 1, "Two", 2, "Three", 3);
-        SetIterable<String> keySet = multimap.keySet();
-        Verify.assertInstanceOf(UnmodifiableMutableSet.class, keySet);
+        Set<String> keySet = (Set<String>) multimap.keySet();
+        Verify.assertThrows(UnsupportedOperationException.class, () -> keySet.add("Four"));
+        Verify.assertThrows(UnsupportedOperationException.class, () -> keySet.remove("Four"));
         Assert.assertEquals(Sets.mutable.of("One", "Two", "Three"), keySet);
     }
 

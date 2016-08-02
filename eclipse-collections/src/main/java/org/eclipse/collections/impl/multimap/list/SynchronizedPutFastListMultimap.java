@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -159,5 +159,11 @@ public final class SynchronizedPutFastListMultimap<K, V>
     public <V2> FastListMultimap<K, V2> collectValues(Function<? super V, ? extends V2> function)
     {
         return this.collectValues(function, FastListMultimap.newMultimap());
+    }
+
+    @Override
+    public MutableListMultimap<K, V> asSynchronized()
+    {
+        throw new UnsupportedOperationException("Cannot call asSynchronized() on " + this.getClass().getSimpleName());
     }
 }
