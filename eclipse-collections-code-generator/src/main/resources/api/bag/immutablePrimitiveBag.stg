@@ -17,6 +17,7 @@ package org.eclipse.collections.api.bag.primitive;
 import org.eclipse.collections.api.<name>Iterable;
 import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
+import org.eclipse.collections.api.block.predicate.primitive.IntPredicate;
 import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
 import org.eclipse.collections.api.collection.primitive.Immutable<name>Collection;
 
@@ -28,6 +29,13 @@ import org.eclipse.collections.api.collection.primitive.Immutable<name>Collectio
 public interface Immutable<name>Bag extends Immutable<name>Collection, <name>Bag
 {
     <sharedAPI(fileName(primitive), name)>
+
+    /**
+     * Returns all elements of the bag that have a number of occurrences that satisfy the predicate.
+     *
+     * @since 8.0
+     */
+    Immutable<name>Bag selectByOccurrences(IntPredicate predicate);
 
     \<V> ImmutableBag\<V> collect(<name>ToObjectFunction\<? extends V> function);
 

@@ -27,6 +27,7 @@ import org.eclipse.collections.api.bag.primitive.<name>Bag;
 import org.eclipse.collections.api.bag.primitive.Mutable<name>Bag;
 import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.Object<name>ToObjectFunction;
+import org.eclipse.collections.api.block.predicate.primitive.IntPredicate;
 import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
 import org.eclipse.collections.api.block.procedure.primitive.<name>IntProcedure;
 import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
@@ -139,14 +140,23 @@ final class Immutable<name>SingletonBag implements Immutable<name>Bag, Serializa
 
     public Immutable<name>Bag select(<name>Predicate predicate)
     {
-        return predicate.accept(this.element1) ? <name>HashBag.newBagWith(this.element1).toImmutable()
-                : new <name>HashBag().toImmutable();
+        return predicate.accept(this.element1) ?
+                <name>Bags.immutable.with(this.element1) :
+                <name>Bags.immutable.empty();
+    }
+
+    public Immutable<name>Bag selectByOccurrences(IntPredicate predicate)
+    {
+        return predicate.accept(1) ?
+                <name>Bags.immutable.with(this.element1) :
+                <name>Bags.immutable.empty();
     }
 
     public Immutable<name>Bag reject(<name>Predicate predicate)
     {
-        return predicate.accept(this.element1) ? new <name>HashBag().toImmutable()
-                : <name>HashBag.newBagWith(this.element1).toImmutable();
+        return predicate.accept(this.element1) ?
+                <name>Bags.immutable.empty() :
+                <name>Bags.immutable.with(this.element1);
     }
 
     public \<V> ImmutableBag\<V> collect(<name>ToObjectFunction\<? extends V> function)

@@ -72,6 +72,14 @@ public abstract class AbstractImmutable<name>BagTestCase extends AbstractImmutab
     }
 
     @Test
+    public void selectByOccurrences()
+    {
+        Immutable<name>Bag bag = this.newWith(<["1", "2", "2", "3", "3", "3"]:(literal.(type))(); separator=", ">);
+        Immutable<name>Bag filtered = bag.selectByOccurrences(i -> i > 2);
+        Assert.assertEquals(<name>HashBag.newBagWith(<["3", "3", "3"]:(literal.(type))(); separator=", ">), filtered);
+    }
+
+    @Test
     public void forEachWithOccurrences()
     {
         StringBuilder stringBuilder = new StringBuilder();

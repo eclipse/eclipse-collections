@@ -30,6 +30,7 @@ import org.eclipse.collections.api.bag.primitive.Mutable<name>Bag;
 import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.Object<name>ToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.IntToIntFunction;
+import org.eclipse.collections.api.block.predicate.primitive.IntPredicate;
 import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
 import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
 import org.eclipse.collections.api.block.procedure.primitive.<name>IntProcedure;
@@ -192,6 +193,19 @@ public final class <name>HashBag extends Abstract<name>Iterable implements Mutab
     public void forEachWithOccurrences(<name>IntProcedure procedure)
     {
         this.items.forEachKeyValue(procedure);
+    }
+
+    public <name>HashBag selectByOccurrences(IntPredicate predicate)
+    {
+        final <name>HashBag result = new <name>HashBag();
+        this.forEachWithOccurrences((each, occurrences) ->
+        {
+            if (predicate.accept(occurrences))
+            {
+                result.addOccurrences(each, occurrences);
+            }
+        });
+        return result;
     }
 
     public boolean add(<type> item)

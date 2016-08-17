@@ -26,6 +26,7 @@ import org.eclipse.collections.api.bag.primitive.MutableBooleanBag;
 import org.eclipse.collections.api.block.function.primitive.BooleanToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.ObjectBooleanToObjectFunction;
 import org.eclipse.collections.api.block.predicate.primitive.BooleanPredicate;
+import org.eclipse.collections.api.block.predicate.primitive.IntPredicate;
 import org.eclipse.collections.api.block.procedure.primitive.BooleanIntProcedure;
 import org.eclipse.collections.api.block.procedure.primitive.BooleanProcedure;
 import org.eclipse.collections.api.iterator.BooleanIterator;
@@ -485,6 +486,19 @@ public final class BooleanHashBag implements MutableBooleanBag, Externalizable
         MutableBooleanBag result = new BooleanHashBag();
         this.forEachWithOccurrences((each, occurrences) -> {
             if (predicate.accept(each))
+            {
+                result.addOccurrences(each, occurrences);
+            }
+        });
+        return result;
+    }
+
+    @Override
+    public MutableBooleanBag selectByOccurrences(IntPredicate predicate)
+    {
+        MutableBooleanBag result = new BooleanHashBag();
+        this.forEachWithOccurrences((each, occurrences) -> {
+            if (predicate.accept(occurrences))
             {
                 result.addOccurrences(each, occurrences);
             }

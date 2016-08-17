@@ -22,6 +22,7 @@ import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.bag.primitive.Immutable<name>Bag;
 import org.eclipse.collections.api.bag.primitive.Mutable<name>Bag;
 import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
+import org.eclipse.collections.api.block.predicate.primitive.IntPredicate;
 import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
 import org.eclipse.collections.api.block.procedure.primitive.<name>IntProcedure;
 import org.eclipse.collections.impl.collection.mutable.primitive.AbstractUnmodifiable<name>Collection;
@@ -98,6 +99,11 @@ public final class Unmodifiable<name>Bag
     public void forEachWithOccurrences(<name>IntProcedure procedure)
     {
         this.getMutable<name>Bag().forEachWithOccurrences(procedure);
+    }
+
+    public Mutable<name>Bag selectByOccurrences(IntPredicate predicate)
+    {
+        return this.getMutable<name>Bag().selectByOccurrences(predicate);
     }
 
     @Override

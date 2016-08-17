@@ -66,6 +66,16 @@ public abstract class AbstractMutable<name>BagTestCase extends AbstractMutable<n
     }
 
     @Test
+    public void selectByOccurrences()
+    {
+        Mutable<name>Bag bag = this.newWith();
+        bag.addOccurrences(<(literal.(type))("100")>, 3);
+        bag.addOccurrences(<(literal.(type))("50")>, 2);
+        Mutable<name>Bag filtered = bag.selectByOccurrences(i -> i > 2);
+        Assert.assertEquals(<name>HashBag.newBagWith(<["100", "100", "100"]:(literal.(type))(); separator=", ">), filtered);
+    }
+
+    @Test
     public void addOccurrences()
     {
         Mutable<name>Bag bag = this.newWith();

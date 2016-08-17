@@ -18,6 +18,7 @@ body(type, name, wrapperName) ::= <<
 package org.eclipse.collections.impl.bag.immutable.primitive;
 
 import org.eclipse.collections.api.bag.primitive.Immutable<name>Bag;
+import org.eclipse.collections.impl.bag.mutable.primitive.<name>HashBag;
 import org.eclipse.collections.impl.factory.primitive.<name>Bags;
 import org.eclipse.collections.impl.math.Mutable<wrapperName>;
 import org.junit.Assert;
@@ -43,6 +44,17 @@ public class Immutable<name>SingletonBagTest extends AbstractImmutable<name>BagT
         this.classUnderTest().forEachWithOccurrences((<type> argument1, int argument2) -> stringBuilder.append(argument1).append(argument2));
         String string = stringBuilder.toString();
         Assert.assertEquals("<(toStringLiteral.(type))("1")>1", string);
+    }
+
+    @Override
+    @Test
+    public void selectByOccurrences()
+    {
+        Immutable<name>SingletonBag bag = new Immutable<name>SingletonBag(<(literal.(type))("1")>);
+        Immutable<name>Bag filtered1 = bag.selectByOccurrences(i -> i > 0);
+        Assert.assertEquals(<name>HashBag.newBagWith(<["1"]:(literal.(type))(); separator=", ">), filtered1);
+        Immutable<name>Bag filtered2 = bag.selectByOccurrences(i -> i > 1);
+        Assert.assertEquals(<name>Bags.immutable.empty(), filtered2);
     }
 
     @Override
