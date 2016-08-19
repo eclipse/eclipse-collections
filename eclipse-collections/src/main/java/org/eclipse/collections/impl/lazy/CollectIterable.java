@@ -119,12 +119,6 @@ public class CollectIterable<T, V>
     }
 
     @Override
-    public <P> V detectWith(Predicate2<? super V, ? super P> predicate, P parameter)
-    {
-        return this.detect(Predicates.bind(predicate, parameter));
-    }
-
-    @Override
     public <IV> IV injectInto(IV injectedValue, Function2<? super IV, ? super V, ? extends IV> f)
     {
         return Iterate.injectInto(injectedValue, this.adapted, (argument1, argument2) -> f.value(argument1, this.function.valueOf(argument2)));
