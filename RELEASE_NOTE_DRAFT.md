@@ -5,7 +5,8 @@ This is the 8.0.0 Milestone 2 release.
 
 New Functionality
 -----------------
-* Placeholder.
+* Added a factory class for MutableSortedBagMultimap to Multimaps.
+* Implemented synchronized Multimaps.
 
 Optimizations
 -------------

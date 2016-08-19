@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -32,6 +32,7 @@ import org.eclipse.collections.impl.bag.sorted.mutable.TreeBag;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.multimap.AbstractMutableMultimap;
 import org.eclipse.collections.impl.multimap.bag.sorted.immutable.ImmutableSortedBagMultimapImpl;
+import org.eclipse.collections.impl.multimap.bag.sorted.mutable.SynchronizedSortedBagMultimap;
 import org.eclipse.collections.impl.multimap.list.FastListMultimap;
 import org.eclipse.collections.impl.utility.Iterate;
 
@@ -188,5 +189,11 @@ public final class TreeBagMultimap<K, V>
     public <V2> FastListMultimap<K, V2> collectValues(Function<? super V, ? extends V2> function)
     {
         return this.collectValues(function, FastListMultimap.newMultimap());
+    }
+
+    @Override
+    public MutableSortedBagMultimap<K, V> asSynchronized()
+    {
+        return SynchronizedSortedBagMultimap.of(this);
     }
 }

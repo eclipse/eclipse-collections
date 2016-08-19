@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -158,5 +158,11 @@ public final class SynchronizedPutUnifiedSetMultimap<K, V>
     public MutableSetMultimap<V, K> flip()
     {
         return Iterate.flip(this);
+    }
+
+    @Override
+    public MutableSetMultimap<K, V> asSynchronized()
+    {
+        throw new UnsupportedOperationException("Cannot call asSynchronized() on " + this.getClass().getSimpleName());
     }
 }

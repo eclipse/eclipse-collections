@@ -83,6 +83,15 @@ public class SynchronizedBag<T>
         return new SynchronizedBag<>(bag);
     }
 
+    /**
+     * This method will take a MutableBag and wrap it directly in a SynchronizedBag. Additionally,
+     * a developer specifies which lock to use with the collection.
+     */
+    public static <E, B extends MutableBag<E>> SynchronizedBag<E> of(B bag, Object lock)
+    {
+        return new SynchronizedBag<>(bag, lock);
+    }
+
     @Override
     @GuardedBy("getLock()")
     protected MutableBag<T> getDelegate()

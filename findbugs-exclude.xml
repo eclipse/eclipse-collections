@@ -238,6 +238,11 @@
             <Class name="org.eclipse.collections.impl.set.sorted.mutable.UnmodifiableSortedSet" />
             <Class name="org.eclipse.collections.impl.map.mutable.SynchronizedMutableMap" />
             <Class name="org.eclipse.collections.impl.map.sorted.mutable.SynchronizedSortedMap" />
+            <Class name="org.eclipse.collections.impl.multimap.bag.SynchronizedBagMultimap" />
+            <Class name="org.eclipse.collections.impl.multimap.bag.sorted.mutable.SynchronizedSortedBagMultimap" />
+            <Class name="org.eclipse.collections.impl.multimap.list.SynchronizedListMultimap" />
+            <Class name="org.eclipse.collections.impl.multimap.set.SynchronizedSetMultimap" />
+            <Class name="org.eclipse.collections.impl.multimap.set.sorted.SynchronizedSortedSetMultimap" />
         </Or>
     </Match>
 

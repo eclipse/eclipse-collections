@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -99,4 +99,20 @@ public interface MutableMultimap<K, V>
 
     @Override
     <V2> MutableMultimap<K, V2> collectValues(Function<? super V, ? extends V2> function);
+
+    /**
+     * Returns a synchronized (thread-safe) multimap backed by this multimap.  In order to guarantee serial access,
+     * it is critical that <strong>all</strong> access to the backing multimap is accomplished through the returned
+     * multimap.
+     * <p>
+     * The returned multimap does <i>not</i> pass the <tt>hashCode</tt> and <tt>equals</tt> operations through to the
+     * backing multimap, but relies on <tt>Object</tt>'s equals and hashCode methods.  This is necessary to preserve
+     * the contracts of these operations.
+     * <p>
+     * The returned multimap will be serializable if this multimap is serializable.
+     *
+     * @return a synchronized view of this multimap.
+     * @since 8.0
+     */
+    MutableMultimap<K, V> asSynchronized();
 }
