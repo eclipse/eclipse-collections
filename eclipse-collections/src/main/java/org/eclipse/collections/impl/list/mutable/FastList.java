@@ -905,10 +905,21 @@ public class FastList<T>
     }
 
     @Override
-    public T detectIfNone(Predicate<? super T> predicate, Function0<? extends T> defaultValueBlock)
+    public <P> T detectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
-        T result = this.detect(predicate);
-        return result == null ? defaultValueBlock.value() : result;
+        return InternalArrayIterate.detectWith(this.items, this.size, predicate, parameter);
+    }
+
+    @Override
+    public Optional<T> detectOptional(Predicate<? super T> predicate)
+    {
+        return InternalArrayIterate.detectOptional(this.items, this.size, predicate);
+    }
+
+    @Override
+    public <P> Optional<T> detectWithOptional(Predicate2<? super T, ? super P> predicate, P parameter)
+    {
+        return InternalArrayIterate.detectWithOptional(this.items, this.size, predicate, parameter);
     }
 
     @Override
@@ -957,22 +968,6 @@ public class FastList<T>
     public <V extends Comparable<? super V>> T maxBy(Function<? super T, ? extends V> function)
     {
         return InternalArrayIterate.maxBy(this.items, this.size, function);
-    }
-
-    @Override
-    public <P> T detectWith(Predicate2<? super T, ? super P> predicate, P parameter)
-    {
-        return InternalArrayIterate.detectWith(this.items, this.size, predicate, parameter);
-    }
-
-    @Override
-    public <P> T detectWithIfNone(
-            Predicate2<? super T, ? super P> predicate,
-            P parameter,
-            Function0<? extends T> defaultValueBlock)
-    {
-        T result = this.detectWith(predicate, parameter);
-        return result == null ? defaultValueBlock.value() : result;
     }
 
     @Override

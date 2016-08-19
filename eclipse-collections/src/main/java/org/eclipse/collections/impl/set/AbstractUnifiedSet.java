@@ -11,6 +11,7 @@
 package org.eclipse.collections.impl.set;
 
 import java.util.Collection;
+import java.util.Optional;
 import java.util.Set;
 
 import org.eclipse.collections.api.LazyIterable;
@@ -79,6 +80,8 @@ public abstract class AbstractUnifiedSet<T>
     protected abstract void rehash(int newCapacity);
 
     protected abstract T detect(Predicate<? super T> predicate, int start, int end);
+
+    protected abstract Optional<T> detectOptional(Predicate<? super T> predicate, int start, int end);
 
     @Override
     @SuppressWarnings("AbstractMethodOverridesAbstractMethod")
@@ -221,6 +224,12 @@ public abstract class AbstractUnifiedSet<T>
     public T detect(Predicate<? super T> predicate)
     {
         return this.detect(predicate, 0, this.getTable().length);
+    }
+
+    @Override
+    public Optional<T> detectOptional(Predicate<? super T> predicate)
+    {
+        return this.detectOptional(predicate, 0, this.getTable().length);
     }
 
     @Override

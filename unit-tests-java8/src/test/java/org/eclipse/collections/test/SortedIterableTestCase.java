@@ -17,7 +17,7 @@ import org.junit.Test;
 import static org.eclipse.collections.impl.test.Verify.assertThrows;
 import static org.junit.Assert.assertSame;
 
-public interface SortedIterableTestCase extends OrderedIterableTestCase
+public interface SortedIterableTestCase extends OrderedIterableTestCase, NoDetectOptionalNullTestCase
 {
     @Override
     <T> SortedIterable<T> newWith(T... elements);

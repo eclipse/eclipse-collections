@@ -12,6 +12,7 @@ package org.eclipse.collections.impl.lazy;
 
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.Optional;
 
 import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.LazyIterable;
@@ -206,5 +207,17 @@ public class LazyIterableAdapter<T>
     public <P> T detectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         return Iterate.detectWith(this.adapted, predicate, parameter);
+    }
+
+    @Override
+    public Optional<T> detectOptional(Predicate<? super T> predicate)
+    {
+        return Iterate.detectOptional(this.adapted, predicate);
+    }
+
+    @Override
+    public <P> Optional<T> detectWithOptional(Predicate2<? super T, ? super P> predicate, P parameter)
+    {
+        return Iterate.detectWithOptional(this.adapted, predicate, parameter);
     }
 }

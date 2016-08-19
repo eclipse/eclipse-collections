@@ -11,6 +11,7 @@
 package org.eclipse.collections.impl.lazy;
 
 import java.util.Iterator;
+import java.util.Optional;
 
 import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.LazyIterable;
@@ -94,6 +95,14 @@ public class DistinctIterable<T>
         MutableSet<T> seenSoFar = UnifiedSet.newSet();
 
         return Iterate.detect(this.adapted, each -> seenSoFar.add(each) && predicate.accept(each));
+    }
+
+    @Override
+    public Optional<T> detectOptional(Predicate<? super T> predicate)
+    {
+        MutableSet<T> seenSoFar = UnifiedSet.newSet();
+
+        return Iterate.detectOptional(this.adapted, each -> seenSoFar.add(each) && predicate.accept(each));
     }
 
     @Override

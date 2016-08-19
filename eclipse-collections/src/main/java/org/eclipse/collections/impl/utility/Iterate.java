@@ -2334,10 +2334,29 @@ public final class Iterate
      *          person -> person.getFirstName().equals("John") && person.getLastName().equals("Smith"));
      * </pre>
      * <p>
+     *
+     * @throws NullPointerException if the element selected is null
+     * @since 8.0
      */
     public static <T> Optional<T> detectOptional(Iterable<T> iterable, Predicate<? super T> predicate)
     {
-        return Optional.ofNullable(detect(iterable, predicate));
+        if (iterable instanceof RichIterable)
+        {
+            return ((RichIterable<T>) iterable).detectOptional(predicate);
+        }
+        if (iterable instanceof ArrayList)
+        {
+            return ArrayListIterate.detectOptional((ArrayList<T>) iterable, predicate);
+        }
+        if (iterable instanceof RandomAccess)
+        {
+            return RandomAccessListIterate.detectOptional((List<T>) iterable, predicate);
+        }
+        if (iterable != null)
+        {
+            return IterableIterate.detectOptional(iterable, predicate);
+        }
+        throw new IllegalArgumentException("Cannot perform detectOptional on null");
     }
 
     /**
@@ -2351,13 +2370,32 @@ public final class Iterate
      *          (person, fullName) -> person.getFullName().equals(fullName), "John Smith");
      * </pre>
      * <p>
+     *
+     * @throws NullPointerException if the element selected is null
+     * @since 8.0
      */
     public static <T, P> Optional<T> detectWithOptional(
             Iterable<T> iterable,
             Predicate2<? super T, ? super P> predicate,
             P parameter)
     {
-        return Optional.ofNullable(detectWith(iterable, predicate, parameter));
+        if (iterable instanceof MutableCollection)
+        {
+            return ((MutableCollection<T>) iterable).detectWithOptional(predicate, parameter);
+        }
+        if (iterable instanceof ArrayList)
+        {
+            return ArrayListIterate.detectWithOptional((ArrayList<T>) iterable, predicate, parameter);
+        }
+        if (iterable instanceof RandomAccess)
+        {
+            return RandomAccessListIterate.detectWithOptional((List<T>) iterable, predicate, parameter);
+        }
+        if (iterable != null)
+        {
+            return IterableIterate.detectWithOptional(iterable, predicate, parameter);
+        }
+        throw new IllegalArgumentException("Cannot perform detectWith on null");
     }
 
     /**

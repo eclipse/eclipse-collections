@@ -11,6 +11,7 @@
 package org.eclipse.collections.impl.map;
 
 import java.util.Map;
+import java.util.Optional;
 
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.RichIterable;
@@ -184,6 +185,18 @@ public abstract class AbstractMapIterable<K, V> extends AbstractRichIterable<V> 
     public <P> V detectWith(Predicate2<? super V, ? super P> predicate, P parameter)
     {
         return this.valuesView().detectWith(predicate, parameter);
+    }
+
+    @Override
+    public Optional<V> detectOptional(Predicate<? super V> predicate)
+    {
+        return this.valuesView().detectOptional(predicate);
+    }
+
+    @Override
+    public <P> Optional<V> detectWithOptional(Predicate2<? super V, ? super P> predicate, P parameter)
+    {
+        return this.valuesView().detectWithOptional(predicate, parameter);
     }
 
     @Override

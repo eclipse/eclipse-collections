@@ -20,6 +20,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.RandomAccess;
 import java.util.Set;
 import java.util.concurrent.ExecutorService;
@@ -771,6 +772,32 @@ public class UnifiedSet<T>
             }
         }
         return null;
+    }
+
+    @Override
+    protected Optional<T> detectOptional(Predicate<? super T> predicate, int start, int end)
+    {
+        for (int i = start; i < end; i++)
+        {
+            Object cur = this.table[i];
+            if (cur instanceof ChainedBucket)
+            {
+                Object chainedDetect = this.chainedDetect((ChainedBucket) cur, predicate);
+                if (chainedDetect != null)
+                {
+                    return Optional.of(this.nonSentinel(chainedDetect));
+                }
+            }
+            else if (cur != null)
+            {
+                T each = this.nonSentinel(cur);
+                if (predicate.accept(each))
+                {
+                    return Optional.of(each);
+                }
+            }
+        }
+        return Optional.empty();
     }
 
     private Object chainedDetect(ChainedBucket bucket, Predicate<? super T> predicate)

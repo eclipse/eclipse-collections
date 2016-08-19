@@ -288,6 +288,17 @@ final class ImmutableArrayList<T>
     }
 
     @Override
+    public Optional<T> detectOptional(Predicate<? super T> predicate)
+    {
+        return InternalArrayIterate.detectOptional(this.items, this.items.length, predicate);
+    }
+
+    @Override
+    public <P> Optional<T> detectWithOptional(Predicate2<? super T, ? super P> predicate, P parameter)
+    {
+        return InternalArrayIterate.detectWithOptional(this.items, this.items.length, predicate, parameter);
+    }
+
     public int count(Predicate<? super T> predicate)
     {
         return InternalArrayIterate.count(this.items, this.items.length, predicate);

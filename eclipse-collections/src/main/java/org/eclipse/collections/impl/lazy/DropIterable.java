@@ -11,6 +11,7 @@
 package org.eclipse.collections.impl.lazy;
 
 import java.util.Iterator;
+import java.util.Optional;
 
 import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.block.predicate.Predicate;
@@ -85,6 +86,12 @@ public class DropIterable<T> extends AbstractLazyIterable<T>
     public T detect(Predicate<? super T> predicate)
     {
         return Iterate.detect(this.adapted, Predicates.and(new DropIterablePredicate<>(this.count), predicate));
+    }
+
+    @Override
+    public Optional<T> detectOptional(Predicate<? super T> predicate)
+    {
+        return Iterate.detectOptional(this.adapted, Predicates.and(new DropIterablePredicate<>(this.count), predicate));
     }
 
     @Override

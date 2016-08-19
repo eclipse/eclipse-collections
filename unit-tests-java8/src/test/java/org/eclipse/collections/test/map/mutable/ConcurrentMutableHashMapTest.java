@@ -15,12 +15,13 @@ import java.util.Random;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.impl.map.mutable.ConcurrentMutableHashMap;
 import org.eclipse.collections.impl.test.junit.Java8Runner;
+import org.eclipse.collections.test.NoDetectOptionalNullTestCase;
 import org.junit.runner.RunWith;
 
 import static org.junit.Assert.assertNull;
 
 @RunWith(Java8Runner.class)
-public class ConcurrentMutableHashMapTest implements MutableMapTestCase
+public class ConcurrentMutableHashMapTest implements MutableMapTestCase, NoDetectOptionalNullTestCase
 {
     private static final long CURRENT_TIME_MILLIS = System.currentTimeMillis();
 

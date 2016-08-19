@@ -16,6 +16,7 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.Set;
 
 import net.jcip.annotations.Immutable;
@@ -335,6 +336,12 @@ final class ImmutableEmptySet<T>
     public T detect(Predicate<? super T> predicate)
     {
         return null;
+    }
+
+    @Override
+    public Optional<T> detectOptional(Predicate<? super T> predicate)
+    {
+        return Optional.empty();
     }
 
     @Override

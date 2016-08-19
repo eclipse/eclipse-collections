@@ -15,6 +15,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.Optional;
 
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.bag.Bag;
@@ -413,6 +414,18 @@ public class ImmutableHashBag<T>
     public <P> T detectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         return this.delegate.detectWith(predicate, parameter);
+    }
+
+    @Override
+    public Optional<T> detectOptional(Predicate<? super T> predicate)
+    {
+        return this.delegate.detectOptional(predicate);
+    }
+
+    @Override
+    public <P> Optional<T> detectWithOptional(Predicate2<? super T, ? super P> predicate, P parameter)
+    {
+        return this.delegate.detectWithOptional(predicate, parameter);
     }
 
     @Override

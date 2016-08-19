@@ -699,7 +699,15 @@ public final class IteratorIterate
      */
     public static <T> Optional<T> detectOptional(Iterator<T> iterator, Predicate<? super T> predicate)
     {
-        return Optional.ofNullable(IteratorIterate.detect(iterator, predicate));
+        while (iterator.hasNext())
+        {
+            T each = iterator.next();
+            if (predicate.accept(each))
+            {
+                return Optional.of(each);
+            }
+        }
+        return Optional.empty();
     }
 
     /**
@@ -707,7 +715,15 @@ public final class IteratorIterate
      */
     public static <T, P> Optional<T> detectWithOptional(Iterator<T> iterator, Predicate2<? super T, ? super P> predicate, P parameter)
     {
-        return Optional.ofNullable(IteratorIterate.detectWith(iterator, predicate, parameter));
+        while (iterator.hasNext())
+        {
+            T each = iterator.next();
+            if (predicate.accept(each, parameter))
+            {
+                return Optional.of(each);
+            }
+        }
+        return Optional.empty();
     }
 
     /**

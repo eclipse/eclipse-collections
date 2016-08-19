@@ -1224,6 +1224,7 @@ public interface RichIterable<T>
      * </pre>
      * <p>
      *
+     * @throws NullPointerException if the element selected is null
      * @since 8.0
      */
     Optional<T> detectOptional(Predicate<? super T> predicate);
@@ -1238,6 +1239,7 @@ public interface RichIterable<T>
      * </pre>
      * <p>
      *
+     * @throws NullPointerException if the element selected is null
      * @since 8.0
      */
     <P> Optional<T> detectWithOptional(Predicate2<? super T, ? super P> predicate, P parameter);

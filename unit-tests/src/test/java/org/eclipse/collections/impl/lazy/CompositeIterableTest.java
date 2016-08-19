@@ -11,6 +11,7 @@
 package org.eclipse.collections.impl.lazy;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.list.MutableList;
@@ -118,5 +119,49 @@ public class CompositeIterableTest extends AbstractLazyIterableTestCase
         Assert.assertEquals(
                 FastList.newListWith(3, 2, 4, 1, 5),
                 composite.distinct().toList());
+    }
+
+    @Override
+    public void detect()
+    {
+        CompositeIterable<Integer> composite = CompositeIterable.with(
+                FastList.newListWith(1, 2),
+                FastList.newList(),
+                FastList.newListWith(3, 4, 5, 6));
+        Assert.assertEquals(Integer.valueOf(3), composite.detect(Integer.valueOf(3)::equals));
+        Assert.assertNull(composite.detect(Integer.valueOf(8)::equals));
+    }
+
+    @Override
+    public void detectWith()
+    {
+        CompositeIterable<Integer> composite = CompositeIterable.with(
+                FastList.newListWith(1, 2),
+                FastList.newList(),
+                FastList.newListWith(3, 4, 5, 6));
+        Assert.assertEquals(Integer.valueOf(3), composite.detectWith(Object::equals, Integer.valueOf(3)));
+        Assert.assertNull(composite.detectWith(Object::equals, Integer.valueOf(8)));
+    }
+
+    @Override
+    public void detectOptional()
+    {
+        CompositeIterable<Integer> composite = CompositeIterable.with(
+                FastList.newListWith(1, 2),
+                FastList.newList(),
+                FastList.newListWith(3, 4, 5, 6));
+        Assert.assertEquals(Optional.of(Integer.valueOf(3)), composite.detectOptional(Integer.valueOf(3)::equals));
+        Assert.assertEquals(Optional.empty(), composite.detectOptional(Integer.valueOf(8)::equals));
+    }
+
+    @Override
+    public void detectWithOptional()
+    {
+        CompositeIterable<Integer> composite = CompositeIterable.with(
+                FastList.newListWith(1, 2),
+                FastList.newList(),
+                FastList.newListWith(3, 4, 5, 6));
+        Assert.assertEquals(Optional.of(Integer.valueOf(3)), composite.detectWithOptional(Object::equals, Integer.valueOf(3)));
+        Assert.assertEquals(Optional.empty(), composite.detectWithOptional(Object::equals, Integer.valueOf(8)));
     }
 }

@@ -11,6 +11,7 @@
 package org.eclipse.collections.impl.lazy;
 
 import java.util.Iterator;
+import java.util.Optional;
 
 import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.block.function.Function;
@@ -63,7 +64,7 @@ public class FlatCollectIterable<T, V>
     public V detect(Predicate<? super V> predicate)
     {
         V[] result = (V[]) new Object[1];
-        Iterate.detect(this.adapted, each -> {
+        Iterate.anySatisfy(this.adapted, each -> {
             Iterable<V> iterable = this.function.valueOf(each);
             return Iterate.anySatisfy(iterable, each1 -> {
                 if (predicate.accept(each1))
@@ -75,6 +76,36 @@ public class FlatCollectIterable<T, V>
             });
         });
         return result[0];
+    }
+
+    @Override
+    public Optional<V> detectOptional(Predicate<? super V> predicate)
+    {
+        V[] result = (V[]) new Object[1];
+        Iterate.anySatisfy(this.adapted, each -> {
+            if (each == null)
+            {
+                throw new NullPointerException();
+            }
+            Iterable<V> iterable = this.function.valueOf(each);
+            if (iterable == null)
+            {
+                throw new NullPointerException();
+            }
+            return Iterate.anySatisfy(iterable, each1 -> {
+                if (predicate.accept(each1))
+                {
+                    if (each1 == null)
+                    {
+                        throw new NullPointerException();
+                    }
+                    result[0] = each1;
+                    return true;
+                }
+                return false;
+            });
+        });
+        return Optional.ofNullable(result[0]);
     }
 
     @Override

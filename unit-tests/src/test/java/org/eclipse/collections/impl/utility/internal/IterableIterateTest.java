@@ -216,6 +216,15 @@ public class IterableIterateTest
     }
 
     @Test
+    public void detectOptionalNull()
+    {
+        MutableList<Integer> objects = mList(1, null, 3);
+        Iterable<Integer> iterable = new IterableAdapter<>(objects);
+
+        Verify.assertThrows(NullPointerException.class, () -> Iterate.detectOptional(iterable, i -> i == null));
+    }
+
+    @Test
     public void detectWithOptional()
     {
         Iterable<Integer> iterable = new IterableAdapter<>(this.getIntegerList());
@@ -234,6 +243,15 @@ public class IterableIterateTest
 
     @Test
     public void detectWithOptionalOver30()
+    {
+        MutableList<Integer> objects = mList(1, null, 3);
+        Iterable<Integer> iterable = new IterableAdapter<>(objects);
+
+        Verify.assertThrows(NullPointerException.class, () -> Iterate.detectWithOptional(iterable, (i, object) -> i == object, null));
+    }
+
+    @Test
+    public void detectWithOptionalNull()
     {
         Iterable<Integer> iterable = new IterableAdapter<>(Interval.oneTo(31));
         Assert.assertEquals(Optional.of(1), Iterate.detectWithOptional(iterable, Object::equals, 1));

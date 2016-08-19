@@ -16,6 +16,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Optional;
 import java.util.RandomAccess;
 
 import org.eclipse.collections.api.block.HashingStrategy;
@@ -125,10 +126,21 @@ public abstract class AbstractArrayAdapter<T>
     }
 
     @Override
-    public T detectIfNone(Predicate<? super T> predicate, Function0<? extends T> function)
+    public <P> T detectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
-        T result = this.detect(predicate);
-        return result == null ? function.value() : result;
+        return InternalArrayIterate.detectWith(this.items, this.items.length, predicate, parameter);
+    }
+
+    @Override
+    public Optional<T> detectOptional(Predicate<? super T> predicate)
+    {
+        return InternalArrayIterate.detectOptional(this.items, this.items.length, predicate);
+    }
+
+    @Override
+    public <P> Optional<T> detectWithOptional(Predicate2<? super T, ? super P> predicate, P parameter)
+    {
+        return InternalArrayIterate.detectWithOptional(this.items, this.items.length, predicate, parameter);
     }
 
     @Override
@@ -498,22 +510,6 @@ public abstract class AbstractArrayAdapter<T>
     {
         ListIterate.rangeCheck(fromIndex, toIndex, this.items.length);
         InternalArrayIterate.forEachWithoutChecks(this.items, fromIndex, toIndex, procedure);
-    }
-
-    @Override
-    public <P> T detectWith(Predicate2<? super T, ? super P> predicate, P parameter)
-    {
-        return InternalArrayIterate.detectWith(this.items, this.items.length, predicate, parameter);
-    }
-
-    @Override
-    public <P> T detectWithIfNone(
-            Predicate2<? super T, ? super P> predicate,
-            P parameter,
-            Function0<? extends T> function)
-    {
-        T result = this.detectWith(predicate, parameter);
-        return result == null ? function.value() : result;
     }
 
     @Override

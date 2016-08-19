@@ -18,6 +18,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.Random;
 import java.util.RandomAccess;
 import java.util.concurrent.ExecutorService;
@@ -355,10 +356,21 @@ public abstract class AbstractMutableList<T>
     }
 
     @Override
-    public T detectIfNone(Predicate<? super T> predicate, Function0<? extends T> function)
+    public <P> T detectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
-        T result = this.detect(predicate);
-        return result == null ? function.value() : result;
+        return ListIterate.detectWith(this, predicate, parameter);
+    }
+
+    @Override
+    public Optional<T> detectOptional(Predicate<? super T> predicate)
+    {
+        return ListIterate.detectOptional(this, predicate);
+    }
+
+    @Override
+    public <P> Optional<T> detectWithOptional(Predicate2<? super T, ? super P> predicate, P parameter)
+    {
+        return ListIterate.detectWithOptional(this, predicate, parameter);
     }
 
     @Override
@@ -407,22 +419,6 @@ public abstract class AbstractMutableList<T>
     public <V extends Comparable<? super V>> T maxBy(Function<? super T, ? extends V> function)
     {
         return ListIterate.maxBy(this, function);
-    }
-
-    @Override
-    public <P> T detectWith(Predicate2<? super T, ? super P> predicate, P parameter)
-    {
-        return ListIterate.detectWith(this, predicate, parameter);
-    }
-
-    @Override
-    public <P> T detectWithIfNone(
-            Predicate2<? super T, ? super P> predicate,
-            P parameter,
-            Function0<? extends T> function)
-    {
-        T result = ListIterate.detectWith(this, predicate, parameter);
-        return result == null ? function.value() : result;
     }
 
     @Override

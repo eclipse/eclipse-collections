@@ -18,6 +18,7 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.RandomAccess;
 
 import org.eclipse.collections.api.RichIterable;
@@ -999,6 +1000,34 @@ public final class RandomAccessListIterate
             }
         }
         return null;
+    }
+
+    public static <T> Optional<T> detectOptional(List<T> list, Predicate<? super T> predicate)
+    {
+        int size = list.size();
+        for (int i = 0; i < size; i++)
+        {
+            T each = list.get(i);
+            if (predicate.accept(each))
+            {
+                return Optional.of(each);
+            }
+        }
+        return Optional.empty();
+    }
+
+    public static <T, P> Optional<T> detectWithOptional(List<T> list, Predicate2<? super T, ? super P> predicate, P parameter)
+    {
+        int size = list.size();
+        for (int i = 0; i < size; i++)
+        {
+            T each = list.get(i);
+            if (predicate.accept(each, parameter))
+            {
+                return Optional.of(each);
+            }
+        }
+        return Optional.empty();
     }
 
     public static <T, IV> Twin<MutableList<T>> selectAndRejectWith(

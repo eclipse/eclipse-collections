@@ -15,6 +15,7 @@ import java.io.Serializable;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.LazyIterable;
@@ -390,6 +391,18 @@ final class ImmutableEmptyBag<T>
     public <P> T detectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         return null;
+    }
+
+    @Override
+    public Optional<T> detectOptional(Predicate<? super T> predicate)
+    {
+        return Optional.empty();
+    }
+
+    @Override
+    public <P> Optional<T> detectWithOptional(Predicate2<? super T, ? super P> predicate, P parameter)
+    {
+        return Optional.empty();
     }
 
     @Override

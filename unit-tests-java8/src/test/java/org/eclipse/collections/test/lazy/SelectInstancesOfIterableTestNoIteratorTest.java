@@ -14,11 +14,12 @@ import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.impl.lazy.SelectInstancesOfIterable;
 import org.eclipse.collections.impl.test.junit.Java8Runner;
 import org.eclipse.collections.test.LazyNoIteratorTestCase;
+import org.eclipse.collections.test.NoDetectOptionalNullTestCase;
 import org.eclipse.collections.test.list.mutable.FastListNoIterator;
 import org.junit.runner.RunWith;
 
 @RunWith(Java8Runner.class)
-public class SelectInstancesOfIterableTestNoIteratorTest implements LazyNoIteratorTestCase
+public class SelectInstancesOfIterableTestNoIteratorTest implements LazyNoIteratorTestCase, NoDetectOptionalNullTestCase
 {
     @Override
     public <T> LazyIterable<T> newWith(T... elements)

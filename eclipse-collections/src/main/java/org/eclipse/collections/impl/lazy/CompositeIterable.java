@@ -12,6 +12,7 @@ package org.eclipse.collections.impl.lazy;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.block.predicate.Predicate;
@@ -98,6 +99,21 @@ public final class CompositeIterable<E>
             }
         }
         return null;
+    }
+
+    @Override
+    public Optional<E> detectOptional(Predicate<? super E> predicate)
+    {
+        for (int i = 0; i < this.iterables.size(); i++)
+        {
+            Iterable<E> eachIterable = this.iterables.get(i);
+            Optional<E> result = Iterate.detectOptional(eachIterable, predicate);
+            if (result.isPresent())
+            {
+                return result;
+            }
+        }
+        return Optional.empty();
     }
 
     public void add(Iterable<E> iterable)
