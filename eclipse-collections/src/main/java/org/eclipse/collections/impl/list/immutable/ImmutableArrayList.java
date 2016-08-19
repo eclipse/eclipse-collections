@@ -282,10 +282,9 @@ final class ImmutableArrayList<T>
     }
 
     @Override
-    public T detectIfNone(Predicate<? super T> predicate, Function0<? extends T> function)
+    public <P> T detectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
-        T result = this.detect(predicate);
-        return result == null ? function.value() : result;
+        return InternalArrayIterate.detectWith(this.items, this.items.length, predicate, parameter);
     }
 
     @Override
