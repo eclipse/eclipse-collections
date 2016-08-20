@@ -22,10 +22,19 @@ import java.io.Serializable;
  *
  * @since 3.0.
  */
+<if(primitive.specializedStream)>@FunctionalInterface<endif>
 public interface <name>Function\<T>
-        extends Serializable
+        extends <if(primitive.specializedStream)>java.util.function.To<name>Function\<T>, <endif>Serializable
 {
     <type> <type>ValueOf(T anObject);
+<if(primitive.specializedStream)>
+
+    @Override
+    default <type> applyAs<name>(T value)
+    {
+        return this.<type>ValueOf(value);
+    }
+<endif>
 }
 
 >>

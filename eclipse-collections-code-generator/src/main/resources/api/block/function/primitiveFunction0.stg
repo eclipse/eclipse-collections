@@ -23,10 +23,19 @@ import java.io.Serializable;
  *
  * @since 3.0.
  */
+<if(primitive.specializedStream)>@FunctionalInterface<endif>
 public interface <name>Function0
-        extends Serializable
+        extends <if(primitive.specializedStream)>java.util.function.<name>Supplier, <endif>Serializable
 {
     <type> value();
+<if(primitive.specializedStream)>
+
+    @Override
+    default <type> getAs<name>()
+    {
+        return this.value();
+    }
+<endif>
 }
 
 >>
