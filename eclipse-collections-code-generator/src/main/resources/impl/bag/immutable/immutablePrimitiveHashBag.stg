@@ -38,6 +38,9 @@ import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
 import org.eclipse.collections.impl.bag.mutable.primitive.<name>HashBag;
 import org.eclipse.collections.impl.block.procedure.checked.primitive.Checked<name>IntProcedure;
 import org.eclipse.collections.impl.iterator.Unmodifiable<name>Iterator;
+import org.eclipse.collections.api.list.ImmutableList;
+import org.eclipse.collections.api.tuple.primitive.<name>IntPair;
+
 
 /**
  * Immutable<name>HashBag is the non-modifiable equivalent of {@link <name>HashBag}.
@@ -147,6 +150,16 @@ final class Immutable<name>HashBag implements Immutable<name>Bag, Serializable
     public Immutable<name>Bag selectByOccurrences(IntPredicate predicate)
     {
         return this.delegate.selectByOccurrences(predicate).toImmutable();
+    }
+
+    public ImmutableList\<<name>IntPair> topOccurrences(int count)
+    {
+        return this.delegate.topOccurrences(count).toImmutable();
+    }
+
+    public ImmutableList\<<name>IntPair> bottomOccurrences(int count)
+    {
+        return this.delegate.bottomOccurrences(count).toImmutable();
     }
 
     public Immutable<name>Bag reject(<name>Predicate predicate)

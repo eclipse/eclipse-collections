@@ -20,6 +20,8 @@ import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFuncti
 import org.eclipse.collections.api.block.predicate.primitive.IntPredicate;
 import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
 import org.eclipse.collections.api.block.procedure.primitive.<name>IntProcedure;
+import org.eclipse.collections.api.list.ListIterable;
+import org.eclipse.collections.api.tuple.primitive.<name>IntPair;
 
 /**
  * This file was automatically generated from template file primitiveBag.stg.
@@ -39,6 +41,26 @@ public interface <name>Bag extends <name>Iterable
      * @since 8.0
      */
     <name>Bag selectByOccurrences(IntPredicate predicate);
+
+    /**
+     * Returns the {@code count} most frequently occurring items.
+     *
+     * In the event of a tie, all of the items with the number of occurrences that match the occurrences of the last
+     * item will be returned.
+     *
+     * @since 8.0
+     */
+    ListIterable\<<name>IntPair> topOccurrences(int count);
+
+    /**
+     * Returns the {@code count} least frequently occurring items.
+     *
+     * In the event of a tie, all of the items with the number of occurrences that match the occurrences of the last
+     * item will be returned.
+     *
+     * @since 8.0
+     */
+    ListIterable\<<name>IntPair> bottomOccurrences(int count);
 
     /**
      * The occurrences of a distinct item in the bag.

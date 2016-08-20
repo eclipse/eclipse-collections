@@ -29,6 +29,8 @@ import org.eclipse.collections.api.block.predicate.primitive.IntPredicate;
 import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
 import org.eclipse.collections.api.block.procedure.primitive.<name>IntProcedure;
 import org.eclipse.collections.api.iterator.<name>Iterator;
+import org.eclipse.collections.api.list.MutableList;
+import org.eclipse.collections.api.tuple.primitive.<name>IntPair;
 import org.eclipse.collections.impl.collection.mutable.primitive.AbstractSynchronized<name>Collection;
 import org.eclipse.collections.impl.factory.primitive.<name>Bags;
 import org.eclipse.collections.impl.lazy.primitive.Lazy<name>IterableAdapter;
@@ -162,6 +164,22 @@ public final class Synchronized<name>Bag
         synchronized (this.getLock())
         {
             return this.getMutable<name>Bag().selectByOccurrences(predicate);
+        }
+    }
+
+    public MutableList\<<name>IntPair> topOccurrences(int count)
+    {
+        synchronized (this.getLock())
+        {
+            return this.getMutable<name>Bag().topOccurrences(count);
+        }
+    }
+
+    public MutableList\<<name>IntPair> bottomOccurrences(int count)
+    {
+        synchronized (this.getLock())
+        {
+            return this.getMutable<name>Bag().bottomOccurrences(count);
         }
     }
 

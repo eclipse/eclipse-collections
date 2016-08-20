@@ -25,6 +25,9 @@ import org.eclipse.collections.api.bag.primitive.Immutable<name>Bag;
 import org.eclipse.collections.api.bag.primitive.Mutable<name>Bag;
 import org.eclipse.collections.api.iterator.<name>Iterator;
 import org.eclipse.collections.api.iterator.Mutable<name>Iterator;
+import org.eclipse.collections.api.list.MutableList;
+import org.eclipse.collections.api.tuple.primitive.<name>IntPair;
+import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.eclipse.collections.impl.bag.mutable.HashBag;
 import org.eclipse.collections.impl.block.factory.primitive.<name>Predicates;
 import org.eclipse.collections.impl.collection.mutable.primitive.AbstractMutable<name>CollectionTestCase;
@@ -73,6 +76,77 @@ public abstract class AbstractMutable<name>BagTestCase extends AbstractMutable<n
         bag.addOccurrences(<(literal.(type))("50")>, 2);
         Mutable<name>Bag filtered = bag.selectByOccurrences(i -> i > 2);
         Assert.assertEquals(<name>HashBag.newBagWith(<["100", "100", "100"]:(literal.(type))(); separator=", ">), filtered);
+    }
+
+    protected Mutable<name>Bag newWithOccurrences(<name>IntPair... elementsWithOccurrences)
+    {
+        Mutable<name>Bag bag = this.newWith();
+        for (int i = 0; i \< elementsWithOccurrences.length; i++)
+        {
+            <name>IntPair itemToAdd = elementsWithOccurrences[i];
+            bag.addOccurrences(itemToAdd.getOne(), itemToAdd.getTwo());
+        }
+        return bag;
+    }
+
+    @Test
+    public void topOccurrences()
+    {
+        Mutable<name>Bag bag = this.newWithOccurrences(
+                PrimitiveTuples.pair(<(literal.(type))("1")>, 1),
+                PrimitiveTuples.pair(<(literal.(type))("2")>, 2),
+                PrimitiveTuples.pair(<(literal.(type))("3")>, 3),
+                PrimitiveTuples.pair(<(literal.(type))("4")>, 4),
+                PrimitiveTuples.pair(<(literal.(type))("5")>, 5),
+                PrimitiveTuples.pair(<(literal.(type))("6")>, 6),
+                PrimitiveTuples.pair(<(literal.(type))("7")>, 7),
+                PrimitiveTuples.pair(<(literal.(type))("8")>, 8),
+                PrimitiveTuples.pair(<(literal.(type))("9")>, 9),
+                PrimitiveTuples.pair(<(literal.(type))("10")>, 10));
+        MutableList\<<name>IntPair> top5 = bag.topOccurrences(5);
+        Verify.assertSize(5, top5);
+        Assert.assertEquals(10, top5.getFirst().getTwo());
+        Assert.assertEquals(6, top5.getLast().getTwo());
+        Verify.assertSize(0, this.newWith(<(literal.(type))("1")>).topOccurrences(0));
+        Verify.assertSize(0, this.newWith().topOccurrences(5));
+        Verify.assertSize(3, this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">).topOccurrences(5));
+        Verify.assertSize(3, this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">).topOccurrences(1));
+        Verify.assertSize(3, this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">).topOccurrences(2));
+        Verify.assertSize(3, this.newWith(<["1", "1", "2", "3"]:(literal.(type))(); separator=", ">).topOccurrences(2));
+        Verify.assertSize(2, this.newWith(<["1", "1", "2", "2", "3"]:(literal.(type))(); separator=", ">).topOccurrences(1));
+        Verify.assertSize(3, this.newWith(<["1", "1", "2", "2", "3", "3"]:(literal.(type))(); separator=", ">).topOccurrences(1));
+        Verify.assertSize(0, this.newWith().topOccurrences(0));
+        Verify.assertThrows(IllegalArgumentException.class, () -> this.newWith().topOccurrences(-1));
+    }
+
+    @Test
+    public void bottomOccurrences()
+    {
+        Mutable<name>Bag bag = this.newWithOccurrences(
+                PrimitiveTuples.pair(<(literal.(type))("1")>, 1),
+                PrimitiveTuples.pair(<(literal.(type))("2")>, 2),
+                PrimitiveTuples.pair(<(literal.(type))("3")>, 3),
+                PrimitiveTuples.pair(<(literal.(type))("4")>, 4),
+                PrimitiveTuples.pair(<(literal.(type))("5")>, 5),
+                PrimitiveTuples.pair(<(literal.(type))("6")>, 6),
+                PrimitiveTuples.pair(<(literal.(type))("7")>, 7),
+                PrimitiveTuples.pair(<(literal.(type))("8")>, 8),
+                PrimitiveTuples.pair(<(literal.(type))("9")>, 9),
+                PrimitiveTuples.pair(<(literal.(type))("10")>, 10));
+        MutableList\<<name>IntPair> bottom5 = bag.bottomOccurrences(5);
+        Verify.assertSize(5, bottom5);
+        Assert.assertEquals(1, bottom5.getFirst().getTwo());
+        Assert.assertEquals(5, bottom5.getLast().getTwo());
+        Verify.assertSize(0, this.newWith(<(literal.(type))("1")>).bottomOccurrences(0));
+        Verify.assertSize(0, this.newWith().bottomOccurrences(5));
+        Verify.assertSize(3, this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">).bottomOccurrences(5));
+        Verify.assertSize(3, this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">).bottomOccurrences(1));
+        Verify.assertSize(3, this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">).bottomOccurrences(2));
+        Verify.assertSize(2, this.newWith(<["1", "1", "2", "3"]:(literal.(type))(); separator=", ">).bottomOccurrences(2));
+        Verify.assertSize(3, this.newWith(<["1", "1", "2", "2", "3"]:(literal.(type))(); separator=", ">).bottomOccurrences(2));
+        Verify.assertSize(3, this.newWith(<["1", "1", "2", "2", "3", "3"]:(literal.(type))(); separator=", ">).bottomOccurrences(1));
+        Verify.assertSize(0, this.newWith().bottomOccurrences(0));
+        Verify.assertThrows(IllegalArgumentException.class, () -> this.newWith().bottomOccurrences(-1));
     }
 
     @Test

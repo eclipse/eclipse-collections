@@ -28,6 +28,7 @@ import org.eclipse.collections.api.bag.primitive.<name>Bag;
 import org.eclipse.collections.api.bag.primitive.Immutable<name>Bag;
 import org.eclipse.collections.api.bag.primitive.Mutable<name>Bag;
 import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
+import org.eclipse.collections.api.block.function.primitive.IntFunction;
 import org.eclipse.collections.api.block.function.primitive.Object<name>ToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.IntToIntFunction;
 import org.eclipse.collections.api.block.predicate.primitive.IntPredicate;
@@ -37,6 +38,10 @@ import org.eclipse.collections.api.block.procedure.primitive.<name>IntProcedure;
 import org.eclipse.collections.api.iterator.<name>Iterator;
 import org.eclipse.collections.api.iterator.Mutable<name>Iterator;
 import org.eclipse.collections.api.set.primitive.<name>Set;
+import org.eclipse.collections.api.tuple.primitive.<name>IntPair;
+import org.eclipse.collections.api.list.MutableList;
+import org.eclipse.collections.impl.factory.Lists;
+import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.Counter;
 import org.eclipse.collections.impl.bag.mutable.HashBag;
 import org.eclipse.collections.impl.block.factory.primitive.IntToIntFunctions;
@@ -44,6 +49,7 @@ import org.eclipse.collections.impl.factory.primitive.<name>Bags;
 import org.eclipse.collections.impl.map.mutable.primitive.<name>IntHashMap;
 import org.eclipse.collections.impl.primitive.Abstract<name>Iterable;
 import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
+import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import net.jcip.annotations.NotThreadSafe;
 
 /**
@@ -205,6 +211,44 @@ public final class <name>HashBag extends Abstract<name>Iterable implements Mutab
                 result.addOccurrences(each, occurrences);
             }
         });
+        return result;
+    }
+
+    public MutableList\<<name>IntPair> topOccurrences(int count)
+    {
+        return this.occurrencesSortingBy(count, item -> -item.getTwo(), Lists.mutable.empty());
+    }
+
+    public MutableList\<<name>IntPair> bottomOccurrences(int count)
+    {
+        return this.occurrencesSortingBy(count, <name>IntPair::getTwo, Lists.mutable.empty());
+    }
+
+    protected MutableList\<<name>IntPair> occurrencesSortingBy(int n, IntFunction\<<name>IntPair> function, MutableList\<<name>IntPair> returnWhenEmpty)
+    {
+        if (n \< 0)
+        {
+            throw new IllegalArgumentException("Cannot use a value of n \< 0");
+        }
+        if (n == 0)
+        {
+            return returnWhenEmpty;
+        }
+        int keySize = Math.min(n, this.sizeDistinct());
+        MutableList\<<name>IntPair> sorted = this.toListWithOccurrences().sortThisByInt(function);
+        MutableList\<<name>IntPair> results = sorted.subList(0, keySize).toList();
+        while (keySize \< sorted.size() && results.getLast().getTwo() == sorted.get(keySize).getTwo())
+        {
+            results.add(sorted.get(keySize));
+            keySize++;
+        }
+        return results;
+    }
+
+    protected MutableList\<<name>IntPair> toListWithOccurrences()
+    {
+        MutableList\<<name>IntPair> result = FastList.newList(this.sizeDistinct());
+        this.forEachWithOccurrences((each, count) -> result.add(PrimitiveTuples.pair(each, count)));
         return result;
     }
 

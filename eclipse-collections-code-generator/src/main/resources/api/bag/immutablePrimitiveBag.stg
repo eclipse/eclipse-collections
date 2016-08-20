@@ -20,6 +20,8 @@ import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFuncti
 import org.eclipse.collections.api.block.predicate.primitive.IntPredicate;
 import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
 import org.eclipse.collections.api.collection.primitive.Immutable<name>Collection;
+import org.eclipse.collections.api.list.ImmutableList;
+import org.eclipse.collections.api.tuple.primitive.<name>IntPair;
 
 /**
  * This file was automatically generated from template file immutablePrimitiveBag.stg.
@@ -36,6 +38,26 @@ public interface Immutable<name>Bag extends Immutable<name>Collection, <name>Bag
      * @since 8.0
      */
     Immutable<name>Bag selectByOccurrences(IntPredicate predicate);
+
+    /**
+     * Returns the {@code count} most frequently occurring items.
+     *
+     * In the event of a tie, all of the items with the number of occurrences that match the occurrences of the last
+     * item will be returned.
+     *
+     * @since 8.0
+     */
+    ImmutableList\<<name>IntPair> topOccurrences(int count);
+
+    /**
+     * Returns the {@code count} least frequently occurring items.
+     *
+     * In the event of a tie, all of the items with the number of occurrences that match the occurrences of the last
+     * item will be returned.
+     *
+     * @since 8.0
+     */
+    ImmutableList\<<name>IntPair> bottomOccurrences(int count);
 
     \<V> ImmutableBag\<V> collect(<name>ToObjectFunction\<? extends V> function);
 
