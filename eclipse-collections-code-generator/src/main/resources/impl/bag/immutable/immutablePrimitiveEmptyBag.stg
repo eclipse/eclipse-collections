@@ -26,6 +26,7 @@ import org.eclipse.collections.api.bag.primitive.<name>Bag;
 import org.eclipse.collections.api.bag.primitive.Mutable<name>Bag;
 import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.Object<name>ToObjectFunction;
+import org.eclipse.collections.api.block.predicate.primitive.IntPredicate;
 import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
 import org.eclipse.collections.api.block.procedure.primitive.<name>IntProcedure;
 import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
@@ -39,6 +40,9 @@ import org.eclipse.collections.impl.iterator.ImmutableEmpty<name>Iterator;
 import org.eclipse.collections.impl.lazy.primitive.Lazy<name>IterableAdapter;
 import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
 import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
+import org.eclipse.collections.api.list.ImmutableList;
+import org.eclipse.collections.api.tuple.primitive.<name>IntPair;
+import org.eclipse.collections.impl.factory.Lists;
 import net.jcip.annotations.Immutable;
 
 /**
@@ -152,6 +156,29 @@ final class Immutable<name>EmptyBag implements Immutable<name>Bag, Serializable
 
     public void forEachWithOccurrences(<name>IntProcedure <type>IntProcedure)
     {
+    }
+
+    public Immutable<name>Bag selectByOccurrences(IntPredicate predicate)
+    {
+        return this;
+    }
+
+    public ImmutableList\<<name>IntPair> topOccurrences(int count)
+    {
+        if (count \< 0)
+        {
+            throw new IllegalArgumentException("Cannot use a value of count \< 0");
+        }
+        return Lists.immutable.empty();
+    }
+
+    public ImmutableList\<<name>IntPair> bottomOccurrences(int count)
+    {
+        if (count \< 0)
+        {
+            throw new IllegalArgumentException("Cannot use a value of count \< 0");
+        }
+        return Lists.immutable.empty();
     }
 
     public <type> detectIfNone(<name>Predicate predicate, <type> ifNone)

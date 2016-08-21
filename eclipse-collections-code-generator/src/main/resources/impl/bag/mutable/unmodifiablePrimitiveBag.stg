@@ -22,8 +22,11 @@ import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.bag.primitive.Immutable<name>Bag;
 import org.eclipse.collections.api.bag.primitive.Mutable<name>Bag;
 import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
+import org.eclipse.collections.api.block.predicate.primitive.IntPredicate;
 import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
 import org.eclipse.collections.api.block.procedure.primitive.<name>IntProcedure;
+import org.eclipse.collections.api.list.MutableList;
+import org.eclipse.collections.api.tuple.primitive.<name>IntPair;
 import org.eclipse.collections.impl.collection.mutable.primitive.AbstractUnmodifiable<name>Collection;
 import org.eclipse.collections.impl.factory.primitive.<name>Bags;
 import org.eclipse.collections.impl.lazy.primitive.Lazy<name>IterableAdapter;
@@ -98,6 +101,21 @@ public final class Unmodifiable<name>Bag
     public void forEachWithOccurrences(<name>IntProcedure procedure)
     {
         this.getMutable<name>Bag().forEachWithOccurrences(procedure);
+    }
+
+    public Mutable<name>Bag selectByOccurrences(IntPredicate predicate)
+    {
+        return this.getMutable<name>Bag().selectByOccurrences(predicate);
+    }
+
+    public MutableList\<<name>IntPair> topOccurrences(int count)
+    {
+        return this.getMutable<name>Bag().topOccurrences(count);
+    }
+
+    public MutableList\<<name>IntPair> bottomOccurrences(int count)
+    {
+        return this.getMutable<name>Bag().bottomOccurrences(count);
     }
 
     @Override

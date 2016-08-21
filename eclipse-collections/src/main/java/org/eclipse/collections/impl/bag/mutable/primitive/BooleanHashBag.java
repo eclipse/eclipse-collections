@@ -26,18 +26,23 @@ import org.eclipse.collections.api.bag.primitive.MutableBooleanBag;
 import org.eclipse.collections.api.block.function.primitive.BooleanToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.ObjectBooleanToObjectFunction;
 import org.eclipse.collections.api.block.predicate.primitive.BooleanPredicate;
+import org.eclipse.collections.api.block.predicate.primitive.IntPredicate;
 import org.eclipse.collections.api.block.procedure.primitive.BooleanIntProcedure;
 import org.eclipse.collections.api.block.procedure.primitive.BooleanProcedure;
 import org.eclipse.collections.api.iterator.BooleanIterator;
 import org.eclipse.collections.api.iterator.MutableBooleanIterator;
+import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.list.primitive.MutableBooleanList;
 import org.eclipse.collections.api.set.primitive.BooleanSet;
 import org.eclipse.collections.api.set.primitive.MutableBooleanSet;
+import org.eclipse.collections.api.tuple.primitive.BooleanIntPair;
 import org.eclipse.collections.impl.bag.mutable.HashBag;
+import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.primitive.BooleanBags;
 import org.eclipse.collections.impl.lazy.primitive.LazyBooleanIterableAdapter;
 import org.eclipse.collections.impl.list.mutable.primitive.BooleanArrayList;
 import org.eclipse.collections.impl.set.mutable.primitive.BooleanHashSet;
+import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 
 /**
  * BooleanHashBag is similar to {@link HashBag}, and is memory-optimized for boolean primitives.
@@ -345,7 +350,8 @@ public final class BooleanHashBag implements MutableBooleanBag, Externalizable
         if (source instanceof BooleanBag)
         {
             BooleanBag otherBag = (BooleanBag) source;
-            otherBag.forEachWithOccurrences((each, occurrences) -> {
+            otherBag.forEachWithOccurrences((each, occurrences) ->
+            {
                 if (each)
                 {
                     BooleanHashBag.this.trueCount = 0;
@@ -483,7 +489,8 @@ public final class BooleanHashBag implements MutableBooleanBag, Externalizable
     public MutableBooleanBag select(BooleanPredicate predicate)
     {
         MutableBooleanBag result = new BooleanHashBag();
-        this.forEachWithOccurrences((each, occurrences) -> {
+        this.forEachWithOccurrences((each, occurrences) ->
+        {
             if (predicate.accept(each))
             {
                 result.addOccurrences(each, occurrences);
@@ -493,10 +500,85 @@ public final class BooleanHashBag implements MutableBooleanBag, Externalizable
     }
 
     @Override
+    public MutableBooleanBag selectByOccurrences(IntPredicate predicate)
+    {
+        MutableBooleanBag result = new BooleanHashBag();
+        this.forEachWithOccurrences((each, occurrences) ->
+        {
+            if (predicate.accept(occurrences))
+            {
+                result.addOccurrences(each, occurrences);
+            }
+        });
+        return result;
+    }
+
+    @Override
+    public MutableList<BooleanIntPair> topOccurrences(int count)
+    {
+        if (count < 0)
+        {
+            throw new IllegalArgumentException("Cannot use a value of count < 0");
+        }
+        if (count == 1)
+        {
+            if (this.trueCount == this.falseCount)
+            {
+                return Lists.mutable.with(PrimitiveTuples.pair(true, this.trueCount), PrimitiveTuples.pair(false, this.falseCount));
+            }
+            if (this.trueCount > this.falseCount)
+            {
+                return Lists.mutable.with(PrimitiveTuples.pair(true, this.trueCount));
+            }
+            return Lists.mutable.with(PrimitiveTuples.pair(false, this.falseCount));
+        }
+        if (count > 1)
+        {
+            if (this.trueCount > this.falseCount)
+            {
+                return Lists.mutable.with(PrimitiveTuples.pair(true, this.trueCount));
+            }
+            return Lists.mutable.with(PrimitiveTuples.pair(false, this.falseCount));
+        }
+        return Lists.mutable.empty();
+    }
+
+    @Override
+    public MutableList<BooleanIntPair> bottomOccurrences(int count)
+    {
+        if (count < 0)
+        {
+            throw new IllegalArgumentException("Cannot use a value of count < 0");
+        }
+        if (count == 1)
+        {
+            if (this.trueCount == this.falseCount)
+            {
+                return Lists.mutable.with(PrimitiveTuples.pair(true, this.trueCount), PrimitiveTuples.pair(false, this.falseCount));
+            }
+            if (this.trueCount < this.falseCount)
+            {
+                return Lists.mutable.with(PrimitiveTuples.pair(true, this.trueCount));
+            }
+            return Lists.mutable.with(PrimitiveTuples.pair(false, this.falseCount));
+        }
+        if (count > 1)
+        {
+            if (this.trueCount < this.falseCount)
+            {
+                return Lists.mutable.with(PrimitiveTuples.pair(true, this.trueCount), PrimitiveTuples.pair(false, this.falseCount));
+            }
+            return Lists.mutable.with(PrimitiveTuples.pair(false, this.falseCount), PrimitiveTuples.pair(true, this.trueCount));
+        }
+        return Lists.mutable.empty();
+    }
+
+    @Override
     public MutableBooleanBag reject(BooleanPredicate predicate)
     {
         MutableBooleanBag result = new BooleanHashBag();
-        this.forEachWithOccurrences((each, occurrences) -> {
+        this.forEachWithOccurrences((each, occurrences) ->
+        {
             if (!predicate.accept(each))
             {
                 result.addOccurrences(each, occurrences);
@@ -700,7 +782,8 @@ public final class BooleanHashBag implements MutableBooleanBag, Externalizable
         boolean[] array = new boolean[this.size()];
         int[] index = {0};
 
-        this.forEachWithOccurrences((each, occurrences) -> {
+        this.forEachWithOccurrences((each, occurrences) ->
+        {
             for (int i = 0; i < occurrences; i++)
             {
                 array[index[0]] = each;

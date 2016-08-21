@@ -21,6 +21,9 @@ import java.util.NoSuchElementException;
 
 import org.eclipse.collections.api.iterator.<name>Iterator;
 import org.eclipse.collections.api.iterator.Mutable<name>Iterator;
+import org.eclipse.collections.api.bag.primitive.Mutable<name>Bag;
+import org.eclipse.collections.api.tuple.primitive.<name>IntPair;
+import org.eclipse.collections.impl.factory.primitive.<name>Bags;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
 import org.junit.Test;
@@ -43,6 +46,27 @@ public class Unmodifiable<name>BagTest extends AbstractMutable<name>BagTestCase
     protected Unmodifiable<name>Bag newWith(<type>... elements)
     {
         return new Unmodifiable<name>Bag(<name>HashBag.newBagWith(elements));
+    }
+
+    @Override
+    protected Mutable<name>Bag newWithOccurrences(<name>IntPair... elementsWithOccurrences)
+    {
+        Mutable<name>Bag bag = <name>Bags.mutable.empty();
+        for (int i = 0; i \< elementsWithOccurrences.length; i++)
+        {
+            <name>IntPair itemToAdd = elementsWithOccurrences[i];
+            bag.addOccurrences(itemToAdd.getOne(), itemToAdd.getTwo());
+        }
+        return bag.asUnmodifiable();
+    }
+
+    @Override
+    @Test
+    public void selectByOccurrences()
+    {
+        Mutable<name>Bag bag = this.newWith(<["100", "100", "100", "50", "50"]:(literal.(type))(); separator=", ">);
+        Mutable<name>Bag filtered = bag.selectByOccurrences(i -> i > 2);
+        Assert.assertEquals(<name>HashBag.newBagWith(<["100", "100", "100"]:(literal.(type))(); separator=", ">), filtered);
     }
 
     @Override

@@ -7,6 +7,8 @@ New Functionality
 -----------------
 * Added a factory class for MutableSortedBagMultimap to Multimaps.
 * Implemented synchronized Multimaps.
+* Implemented selectByOccurrences on primitive Bags.
+* Implemented top/bottomOccurrences on primitive Bags.
 
 Optimizations
 -------------

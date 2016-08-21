@@ -17,8 +17,11 @@ package org.eclipse.collections.api.bag.primitive;
 import org.eclipse.collections.api.<name>Iterable;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
+import org.eclipse.collections.api.block.predicate.primitive.IntPredicate;
 import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
 import org.eclipse.collections.api.collection.primitive.Mutable<name>Collection;
+import org.eclipse.collections.api.list.MutableList;
+import org.eclipse.collections.api.tuple.primitive.<name>IntPair;
 
 /**
  * This file was automatically generated from template file mutablePrimitiveBag.stg.
@@ -30,6 +33,33 @@ public interface Mutable<name>Bag extends Mutable<name>Collection, <name>Bag
     void addOccurrences(<type> item, int occurrences);
 
     boolean removeOccurrences(<type> item, int occurrences);
+
+    /**
+     * Returns all elements of the bag that have a number of occurrences that satisfy the predicate.
+     *
+     * @since 8.0
+     */
+    Mutable<name>Bag selectByOccurrences(IntPredicate predicate);
+
+    /**
+     * Returns the {@code count} most frequently occurring items.
+     *
+     * In the event of a tie, all of the items with the number of occurrences that match the occurrences of the last
+     * item will be returned.
+     *
+     * @since 8.0
+     */
+    MutableList\<<name>IntPair> topOccurrences(int count);
+
+    /**
+     * Returns the {@code count} least frequently occurring items.
+     *
+     * In the event of a tie, all of the items with the number of occurrences that match the occurrences of the last
+     * item will be returned.
+     *
+     * @since 8.0
+     */
+    MutableList\<<name>IntPair> bottomOccurrences(int count);
 
     <sharedAPI(fileName(primitive), name)>
 

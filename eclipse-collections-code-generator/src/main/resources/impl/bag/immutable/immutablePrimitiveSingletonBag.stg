@@ -27,6 +27,7 @@ import org.eclipse.collections.api.bag.primitive.<name>Bag;
 import org.eclipse.collections.api.bag.primitive.Mutable<name>Bag;
 import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.Object<name>ToObjectFunction;
+import org.eclipse.collections.api.block.predicate.primitive.IntPredicate;
 import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
 import org.eclipse.collections.api.block.procedure.primitive.<name>IntProcedure;
 import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
@@ -40,7 +41,14 @@ import org.eclipse.collections.impl.iterator.Unmodifiable<name>Iterator;
 import org.eclipse.collections.impl.lazy.primitive.Lazy<name>IterableAdapter;
 import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
 import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
+import org.eclipse.collections.api.list.ImmutableList;
+import org.eclipse.collections.api.tuple.primitive.<name>IntPair;
+import org.eclipse.collections.impl.factory.Lists;
+import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
+
+
 import net.jcip.annotations.Immutable;
+
 
 /**
  * Immutable<name>SingletonBag is an optimization for {@link Immutable<name>Bag} of size 1.
@@ -139,14 +147,49 @@ final class Immutable<name>SingletonBag implements Immutable<name>Bag, Serializa
 
     public Immutable<name>Bag select(<name>Predicate predicate)
     {
-        return predicate.accept(this.element1) ? <name>HashBag.newBagWith(this.element1).toImmutable()
-                : new <name>HashBag().toImmutable();
+        return predicate.accept(this.element1) ?
+                <name>Bags.immutable.with(this.element1) :
+                <name>Bags.immutable.empty();
+    }
+
+    public Immutable<name>Bag selectByOccurrences(IntPredicate predicate)
+    {
+        return predicate.accept(1) ?
+                <name>Bags.immutable.with(this.element1) :
+                <name>Bags.immutable.empty();
+    }
+
+    public ImmutableList\<<name>IntPair> topOccurrences(int count)
+    {
+        if (count \< 0)
+        {
+            throw new IllegalArgumentException("Cannot use a value of count \< 0");
+        }
+        if (count == 0)
+        {
+            return Lists.immutable.empty();
+        }
+        return Lists.immutable.with(PrimitiveTuples.pair(this.element1, 1));
+    }
+
+    public ImmutableList\<<name>IntPair> bottomOccurrences(int count)
+    {
+        if (count \< 0)
+        {
+            throw new IllegalArgumentException("Cannot use a value of count \< 0");
+        }
+        if (count == 0)
+        {
+            return Lists.immutable.empty();
+        }
+        return Lists.immutable.with(PrimitiveTuples.pair(this.element1, 1));
     }
 
     public Immutable<name>Bag reject(<name>Predicate predicate)
     {
-        return predicate.accept(this.element1) ? new <name>HashBag().toImmutable()
-                : <name>HashBag.newBagWith(this.element1).toImmutable();
+        return predicate.accept(this.element1) ?
+                <name>Bags.immutable.empty() :
+                <name>Bags.immutable.with(this.element1);
     }
 
     public \<V> ImmutableBag\<V> collect(<name>ToObjectFunction\<? extends V> function)
