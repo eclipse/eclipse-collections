@@ -9,6 +9,7 @@ New Functionality
 * Implemented synchronized Multimaps.
 * Implemented selectByOccurrences on primitive Bags.
 * Implemented top/bottomOccurrences on primitive Bags.
+* Changed primitive functional interfaces to extend the corresponding JDK functional interfaces.
 
 Optimizations
 -------------

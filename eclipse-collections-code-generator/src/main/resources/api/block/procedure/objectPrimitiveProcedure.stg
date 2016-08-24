@@ -21,9 +21,19 @@ import java.io.Serializable;
  *
  * @since 3.0.
  */
-public interface Object<primitive.name>Procedure\<T> extends Serializable
+<if(primitive.specializedStream)>@FunctionalInterface<endif>
+public interface Object<primitive.name>Procedure\<T>
+        extends <if(primitive.specializedStream)>java.util.function.Obj<name>Consumer\<T>, <endif>Serializable
 {
     void value(T each, <type> parameter);
+<if(primitive.specializedStream)>
+
+    @Override
+    default void accept(T each, <type> parameter)
+    {
+        this.value(each, parameter);
+    }
+<endif>
 }
 
 >>

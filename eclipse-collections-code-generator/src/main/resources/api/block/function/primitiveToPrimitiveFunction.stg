@@ -22,10 +22,19 @@ import java.io.Serializable;
  *
  * @since 3.0.
  */
+<if(primitive1.specializedStream && primitive2.specializedStream)>@FunctionalInterface<endif>
 public interface <name1>To<name2>Function
-        extends Serializable
+        extends <if(primitive1.specializedStream && primitive2.specializedStream && !sameTwoPrimitives)>java.util.function.<name1>To<name2>Function, <elseif(primitive1.specializedStream && sameTwoPrimitives)>java.util.function.<name1>UnaryOperator, <endif>Serializable
 {
     <type2> valueOf(<type1> <type1>Parameter);
+<if(primitive1.specializedStream && primitive2.specializedStream)>
+
+    @Override
+    default <type2> applyAs<name2>(<type1> each)
+    {
+        return this.valueOf(each);
+    }
+<endif>
 }
 
 >>

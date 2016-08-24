@@ -372,6 +372,12 @@
             <Class name="org.eclipse.collections.api.block.predicate.primitive.IntPredicate" />
             <Class name="org.eclipse.collections.api.block.predicate.primitive.LongPredicate" />
             <Class name="org.eclipse.collections.api.block.predicate.primitive.DoublePredicate" />
+            <Class name="org.eclipse.collections.api.block.function.primitive.IntToLongFunction" />
+            <Class name="org.eclipse.collections.api.block.function.primitive.IntToDoubleFunction" />
+            <Class name="org.eclipse.collections.api.block.function.primitive.LongToIntFunction" />
+            <Class name="org.eclipse.collections.api.block.function.primitive.LongToDoubleFunction" />
+            <Class name="org.eclipse.collections.api.block.function.primitive.DoubleToIntFunction" />
+            <Class name="org.eclipse.collections.api.block.function.primitive.DoubleToLongFunction" />
         </Or>
     </Match>
 </FindBugsFilter>
