@@ -15,6 +15,7 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import org.eclipse.collections.api.bag.Bag;
 import org.eclipse.collections.api.bag.ImmutableBag;
@@ -322,6 +323,14 @@ final class ImmutableSingletonBag<T>
         return predicate.accept(this.value)
                 ? this.value
                 : null;
+    }
+
+    @Override
+    public Optional<T> detectOptional(Predicate<? super T> predicate)
+    {
+        return predicate.accept(this.value)
+                ? Optional.of(this.value)
+                : Optional.empty();
     }
 
     @Override

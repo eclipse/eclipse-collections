@@ -13,6 +13,7 @@ package org.eclipse.collections.impl.lazy;
 import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.RichIterable;
@@ -423,6 +424,20 @@ public abstract class AbstractLazyIterableTestCase
     {
         Assert.assertEquals(Integer.valueOf(3), this.lazyIterable.detectWith(Object::equals, Integer.valueOf(3)));
         Assert.assertNull(this.lazyIterable.detectWith(Object::equals, Integer.valueOf(8)));
+    }
+
+    @Test
+    public void detectOptional()
+    {
+        Assert.assertEquals(Optional.of(Integer.valueOf(3)), this.lazyIterable.detectOptional(Integer.valueOf(3)::equals));
+        Assert.assertEquals(Optional.empty(), this.lazyIterable.detectOptional(Integer.valueOf(8)::equals));
+    }
+
+    @Test
+    public void detectWithOptional()
+    {
+        Assert.assertEquals(Optional.of(Integer.valueOf(3)), this.lazyIterable.detectWithOptional(Object::equals, Integer.valueOf(3)));
+        Assert.assertEquals(Optional.empty(), this.lazyIterable.detectWithOptional(Object::equals, Integer.valueOf(8)));
     }
 
     @Test

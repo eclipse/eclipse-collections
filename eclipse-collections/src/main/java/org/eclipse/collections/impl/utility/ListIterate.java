@@ -18,6 +18,7 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Optional;
 import java.util.RandomAccess;
 
 import org.eclipse.collections.api.RichIterable;
@@ -867,6 +868,33 @@ public final class ListIterate
             return RandomAccessListIterate.detectWith(list, predicate, injectedValue);
         }
         return IterableIterate.detectWith(list, predicate, injectedValue);
+    }
+
+    /**
+     * @see Iterate#detectOptional(Iterable, Predicate)
+     */
+    public static <T> Optional<T> detectOptional(List<T> list, Predicate<? super T> predicate)
+    {
+        if (list instanceof RandomAccess)
+        {
+            return RandomAccessListIterate.detectOptional(list, predicate);
+        }
+        return IterableIterate.detectOptional(list, predicate);
+    }
+
+    /**
+     * @see Iterate#detectWithOptional(Iterable, Predicate2, Object)
+     */
+    public static <T, IV> Optional<T> detectWithOptional(
+            List<T> list,
+            Predicate2<? super T, ? super IV> predicate,
+            IV injectedValue)
+    {
+        if (list instanceof RandomAccess)
+        {
+            return RandomAccessListIterate.detectWithOptional(list, predicate, injectedValue);
+        }
+        return IterableIterate.detectWithOptional(list, predicate, injectedValue);
     }
 
     /**

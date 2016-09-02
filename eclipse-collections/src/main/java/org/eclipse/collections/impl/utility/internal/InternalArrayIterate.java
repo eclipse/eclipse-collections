@@ -775,6 +775,32 @@ public final class InternalArrayIterate
         return null;
     }
 
+    public static <T> Optional<T> detectOptional(T[] array, int size, Predicate<? super T> predicate)
+    {
+        for (int i = 0; i < size; i++)
+        {
+            T each = array[i];
+            if (predicate.accept(each))
+            {
+                return Optional.of(each);
+            }
+        }
+        return Optional.empty();
+    }
+
+    public static <T, P> Optional<T> detectWithOptional(T[] array, int size, Predicate2<? super T, ? super P> predicate, P parameter)
+    {
+        for (int i = 0; i < size; i++)
+        {
+            T each = array[i];
+            if (predicate.accept(each, parameter))
+            {
+                return Optional.of(each);
+            }
+        }
+        return Optional.empty();
+    }
+
     public static <T> void appendString(
             ListIterable<T> iterable,
             T[] array,

@@ -11,6 +11,7 @@
 package org.eclipse.collections.impl.lazy;
 
 import java.util.Iterator;
+import java.util.Optional;
 
 import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.block.predicate.Predicate;
@@ -103,6 +104,15 @@ public class TapIterable<T>
     public T detect(Predicate<? super T> predicate)
     {
         return Iterate.detect(this.adapted, each -> {
+            this.procedure.value(each);
+            return predicate.accept(each);
+        });
+    }
+
+    @Override
+    public Optional<T> detectOptional(Predicate<? super T> predicate)
+    {
+        return Iterate.detectOptional(this.adapted, each -> {
             this.procedure.value(each);
             return predicate.accept(each);
         });

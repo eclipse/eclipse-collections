@@ -11,6 +11,7 @@
 package org.eclipse.collections.impl.lazy;
 
 import java.util.Iterator;
+import java.util.Optional;
 
 import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.block.predicate.Predicate;
@@ -86,6 +87,12 @@ public class SelectInstancesOfIterable<T>
     public T detect(Predicate<? super T> predicate)
     {
         return Iterate.detect((Iterable<T>) this.adapted, Predicates.and(Predicates.instanceOf(this.clazz), predicate));
+    }
+
+    @Override
+    public Optional<T> detectOptional(Predicate<? super T> predicate)
+    {
+        return Iterate.detectOptional((Iterable<T>) this.adapted, Predicates.and(Predicates.instanceOf(this.clazz), predicate));
     }
 
     @Override

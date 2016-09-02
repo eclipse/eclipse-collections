@@ -10,6 +10,7 @@ New Functionality
 * Implemented selectByOccurrences on primitive Bags.
 * Implemented top/bottomOccurrences on primitive Bags.
 * Changed primitive functional interfaces to extend the corresponding JDK functional interfaces.
+* Made detectOptional methods throw NullPointerException when detecting null value.
 
 Optimizations
 -------------

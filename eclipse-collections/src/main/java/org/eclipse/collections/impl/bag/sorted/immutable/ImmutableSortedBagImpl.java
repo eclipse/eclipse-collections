@@ -17,6 +17,7 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.RandomAccess;
 
 import net.jcip.annotations.Immutable;
@@ -607,6 +608,12 @@ class ImmutableSortedBagImpl<T>
     public T detect(Predicate<? super T> predicate)
     {
         return ArrayIterate.detect(this.elements, predicate);
+    }
+
+    @Override
+    public Optional<T> detectOptional(Predicate<? super T> predicate)
+    {
+        return ArrayIterate.detectOptional(this.elements, predicate);
     }
 
     @Override

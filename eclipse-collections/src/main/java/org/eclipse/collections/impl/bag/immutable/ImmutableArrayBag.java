@@ -14,6 +14,7 @@ import java.io.Serializable;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import org.eclipse.collections.api.bag.Bag;
 import org.eclipse.collections.api.bag.ImmutableBag;
@@ -398,6 +399,18 @@ public class ImmutableArrayBag<T>
     public <P> T detectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         return ArrayIterate.detectWith(this.keys, predicate, parameter);
+    }
+
+    @Override
+    public Optional<T> detectOptional(Predicate<? super T> predicate)
+    {
+        return ArrayIterate.detectOptional(this.keys, predicate);
+    }
+
+    @Override
+    public <P> Optional<T> detectWithOptional(Predicate2<? super T, ? super P> predicate, P parameter)
+    {
+        return ArrayIterate.detectWithOptional(this.keys, predicate, parameter);
     }
 
     @Override

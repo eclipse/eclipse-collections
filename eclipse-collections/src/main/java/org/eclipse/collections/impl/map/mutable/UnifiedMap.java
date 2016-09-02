@@ -22,6 +22,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.Set;
 
 import net.jcip.annotations.NotThreadSafe;
@@ -1683,6 +1684,74 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
         }
 
         return null;
+    }
+
+    @Override
+    public Optional<V> detectOptional(Predicate<? super V> predicate)
+    {
+        for (int i = 0; i < this.table.length; i += 2)
+        {
+            if (this.table[i] == CHAINED_KEY)
+            {
+                Object[] chainedTable = (Object[]) this.table[i + 1];
+                for (int j = 0; j < chainedTable.length; j += 2)
+                {
+                    if (chainedTable[j] != null)
+                    {
+                        V value = (V) chainedTable[j + 1];
+                        if (predicate.accept(value))
+                        {
+                            return Optional.of(value);
+                        }
+                    }
+                }
+            }
+            else if (this.table[i] != null)
+            {
+                V value = (V) this.table[i + 1];
+
+                if (predicate.accept(value))
+                {
+                    return Optional.of(value);
+                }
+            }
+        }
+
+        return Optional.empty();
+    }
+
+    @Override
+    public <P> Optional<V> detectWithOptional(Predicate2<? super V, ? super P> predicate, P parameter)
+    {
+        for (int i = 0; i < this.table.length; i += 2)
+        {
+            if (this.table[i] == CHAINED_KEY)
+            {
+                Object[] chainedTable = (Object[]) this.table[i + 1];
+                for (int j = 0; j < chainedTable.length; j += 2)
+                {
+                    if (chainedTable[j] != null)
+                    {
+                        V value = (V) chainedTable[j + 1];
+                        if (predicate.accept(value, parameter))
+                        {
+                            return Optional.of(value);
+                        }
+                    }
+                }
+            }
+            else if (this.table[i] != null)
+            {
+                V value = (V) this.table[i + 1];
+
+                if (predicate.accept(value, parameter))
+                {
+                    return Optional.of(value);
+                }
+            }
+        }
+
+        return Optional.empty();
     }
 
     @Override

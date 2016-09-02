@@ -11,6 +11,7 @@
 package org.eclipse.collections.impl.lazy;
 
 import java.util.Iterator;
+import java.util.Optional;
 
 import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.block.function.Function;
@@ -119,9 +120,10 @@ public class CollectIterable<T, V>
     }
 
     @Override
-    public <P> V detectWith(Predicate2<? super V, ? super P> predicate, P parameter)
+    public Optional<V> detectOptional(Predicate<? super V> predicate)
     {
-        return this.detect(Predicates.bind(predicate, parameter));
+        Optional<T> resultItem = Iterate.detectOptional(this.adapted, Predicates.attributePredicate(this.function, predicate));
+        return resultItem.map(this.function::valueOf);
     }
 
     @Override

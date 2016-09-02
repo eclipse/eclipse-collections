@@ -17,6 +17,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.block.HashingStrategy;
@@ -858,6 +859,33 @@ public final class ArrayIterate
             throw new IllegalArgumentException("Cannot perform a detectWith on null");
         }
         return InternalArrayIterate.detectWith(objectArray, objectArray.length, predicate, parameter);
+    }
+
+    /**
+     * @see Iterate#detectOptional(Iterable, Predicate)
+     */
+    public static <T> Optional<T> detectOptional(T[] objectArray, Predicate<? super T> predicate)
+    {
+        if (objectArray == null)
+        {
+            throw new IllegalArgumentException("Cannot perform a detect on null");
+        }
+        return InternalArrayIterate.detectOptional(objectArray, objectArray.length, predicate);
+    }
+
+    /**
+     * @see Iterate#detectWithOptional(Iterable, Predicate2, Object)
+     */
+    public static <T, P> Optional<T> detectWithOptional(
+            T[] objectArray,
+            Predicate2<? super T, ? super P> predicate,
+            P parameter)
+    {
+        if (objectArray == null)
+        {
+            throw new IllegalArgumentException("Cannot perform a detectWith on null");
+        }
+        return InternalArrayIterate.detectWithOptional(objectArray, objectArray.length, predicate, parameter);
     }
 
     /**

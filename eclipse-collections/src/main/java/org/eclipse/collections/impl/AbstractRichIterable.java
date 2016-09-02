@@ -427,13 +427,13 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
     @Override
     public Optional<T> detectOptional(Predicate<? super T> predicate)
     {
-        return Optional.ofNullable(this.detect(predicate));
+        return IterableIterate.detectOptional(this, predicate);
     }
 
     @Override
     public <P> Optional<T> detectWithOptional(Predicate2<? super T, ? super P> predicate, P parameter)
     {
-        return Optional.ofNullable(this.detectWith(predicate, parameter));
+        return this.detectOptional(Predicates.bind(predicate, parameter));
     }
 
     @Override

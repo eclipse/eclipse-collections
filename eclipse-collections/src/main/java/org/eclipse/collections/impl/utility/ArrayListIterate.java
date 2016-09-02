@@ -18,6 +18,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 import org.eclipse.collections.api.block.HashingStrategy;
 import org.eclipse.collections.api.block.function.Function;
@@ -929,6 +930,53 @@ public final class ArrayListIterate
             return null;
         }
         return RandomAccessListIterate.detectWith(list, predicate, parameter);
+    }
+
+    /**
+     * @see Iterate#detectOptional(Iterable, Predicate)
+     */
+    public static <T> Optional<T> detectOptional(ArrayList<T> list, Predicate<? super T> predicate)
+    {
+        int size = list.size();
+        if (ArrayListIterate.isOptimizableArrayList(list, size))
+        {
+            T[] elements = ArrayListIterate.getInternalArray(list);
+            for (int i = 0; i < size; i++)
+            {
+                T item = elements[i];
+                if (predicate.accept(item))
+                {
+                    return Optional.of(item);
+                }
+            }
+            return Optional.empty();
+        }
+        return RandomAccessListIterate.detectOptional(list, predicate);
+    }
+
+    /**
+     * @see Iterate#detectWithOptional(Iterable, Predicate2, Object)
+     */
+    public static <T, P> Optional<T> detectWithOptional(
+            ArrayList<T> list,
+            Predicate2<? super T, ? super P> predicate,
+            P parameter)
+    {
+        int size = list.size();
+        if (ArrayListIterate.isOptimizableArrayList(list, size))
+        {
+            T[] elements = ArrayListIterate.getInternalArray(list);
+            for (int i = 0; i < size; i++)
+            {
+                T item = elements[i];
+                if (predicate.accept(item, parameter))
+                {
+                    return Optional.of(item);
+                }
+            }
+            return Optional.empty();
+        }
+        return RandomAccessListIterate.detectWithOptional(list, predicate, parameter);
     }
 
     /**

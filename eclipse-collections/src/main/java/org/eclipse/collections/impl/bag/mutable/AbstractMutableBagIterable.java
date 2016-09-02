@@ -13,6 +13,7 @@ package org.eclipse.collections.impl.bag.mutable;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.Optional;
 
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.MutableBagIterable;
@@ -143,6 +144,18 @@ public abstract class AbstractMutableBagIterable<T>
     public <P> T detectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         return this.getKeysView().detectWith(predicate, parameter);
+    }
+
+    @Override
+    public Optional<T> detectOptional(Predicate<? super T> predicate)
+    {
+        return this.getKeysView().detectOptional(predicate);
+    }
+
+    @Override
+    public <P> Optional<T> detectWithOptional(Predicate2<? super T, ? super P> predicate, P parameter)
+    {
+        return this.getKeysView().detectWithOptional(predicate, parameter);
     }
 
     @Override

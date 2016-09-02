@@ -1369,6 +1369,15 @@ public interface RichIterableTestCase extends IterableTestCase
     }
 
     @Test
+    default void RichIterable_detectOptionalNull()
+    {
+        RichIterable<Integer> iterable = this.newWith(1, null, 3);
+
+        assertThrows(NullPointerException.class, () -> iterable.detectOptional(i -> i == null));
+        assertThrows(NullPointerException.class, () -> iterable.detectWithOptional((i, object) -> i == object, null));
+    }
+
+    @Test
     default void RichIterable_min_max()
     {
         assertEquals(Integer.valueOf(-1), this.newWith(-1, 0, 1).min());
