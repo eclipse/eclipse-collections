@@ -225,11 +225,13 @@ public final class CompositeFastList<E>
     @Override
     public boolean addAll(Collection<? extends E> collection)
     {
-        if (!collection.isEmpty())
+        if (collection.isEmpty())
         {
-            Collection<? extends E> collectionToAdd = collection instanceof FastList ? collection : new FastList<E>(collection);
-            this.addComposited(collectionToAdd);
+            return false;
         }
+        Collection<? extends E> collectionToAdd =
+                collection instanceof FastList ? collection : FastList.newList(collection);
+        this.addComposited(collectionToAdd);
         return true;
     }
 
@@ -679,7 +681,8 @@ public final class CompositeFastList<E>
         @Override
         public void value(FastList<E> list)
         {
-            list.each(object -> {
+            list.each(object ->
+            {
                 this.objectIntProcedure.value(
                         object,
                         this.index);
