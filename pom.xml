@@ -18,7 +18,7 @@
 
     <groupId>org.eclipse.collections</groupId>
     <artifactId>eclipse-collections-parent</artifactId>
-    <version>8.0.0-RC</version>
+    <version>8.0.0</version>
 
     <packaging>pom</packaging>
 
