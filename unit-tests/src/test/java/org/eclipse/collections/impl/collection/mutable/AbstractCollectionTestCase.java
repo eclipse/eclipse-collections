@@ -10,6 +10,8 @@
 
 package org.eclipse.collections.impl.collection.mutable;
 
+import java.util.Collections;
+
 import org.eclipse.collections.api.collection.ImmutableCollection;
 import org.eclipse.collections.api.collection.MutableCollection;
 import org.eclipse.collections.api.list.MutableList;
@@ -93,6 +95,7 @@ public abstract class AbstractCollectionTestCase extends AbstractRichIterableTes
     {
         MutableCollection<Integer> collection = this.newWith();
         Assert.assertTrue(collection.addAll(FastList.newListWith(1, 2, 3)));
+        Assert.assertFalse(collection.addAll(Collections.emptyList()));
         Verify.assertContainsAll(collection, 1, 2, 3);
 
         boolean result = collection.addAll(FastList.newListWith(1, 2, 3));
