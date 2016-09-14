@@ -1,11 +1,11 @@
 Contributor License
 -------------------
 
-If this is your first time contributing to an Eclipse Foundation project, you'll need to sign the [Eclipse Foundation Contributor License Agreement][CLA].
+If this is your first time contributing to an Eclipse Foundation project, you'll need to sign the [Eclipse Contributor Agreement][ECA].
 
 - [Create an account](https://dev.eclipse.org/site_login/createaccount.php) on dev.eclipse.org
 - Open your [Account Settings tab](https://dev.eclipse.org/site_login/myaccount.php#open_tab_accountsettings), enter your GitHub ID and click Update Account
-- Read and [sign the CLA](https://projects.eclipse.org/user/sign/cla)
+- Read and [sign the ECA](https://dev.eclipse.org/site_login/myaccount.php#open_tab_cla)
 - Your git commits must be [signed off](https://wiki.eclipse.org/Development_Resources/Contributing_via_Git#Signing_off_on_a_commit)
 - Use the exact same email address for your Eclipse account, your commit author, and your commit sign-off.
 
@@ -98,7 +98,7 @@ Make sure all the checks pass. One of the committers will take a look and provid
 
 That's it! Thanks for contributing to Eclipse Collections!
 
-[CLA]:             https://www.eclipse.org/legal/CLA.php
+[ECA]:             https://www.eclipse.org/legal/ECA.php
 [jmh]:             http://openjdk.java.net/projects/code-tools/jmh/
 [semver]:          http://semver.org/
 [style-guide]:     https://google.github.io/styleguide/javaguide.html
