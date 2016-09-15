@@ -23,7 +23,7 @@ This Guide is an introduction to basic Eclipse Collections concepts and its comm
 []() Getting Started With Eclipse Collections
 =============================================
 
-It is recommended that first time users go through the EC Kata. The Kata is a fun way to help you learn idiomatic Eclipse Collections usage through coding exercises. The Kata can be found on our GitHub page: <https://github.com/goldmansachs/gs-collections-kata>. To run the Kata, please refer to the setup instructions found on page 24 of the [Kata document](http://www.goldmansachs.com/gs-collections/documents/GS%20Collections%20Training%20Session%20and%20Kata%202.0.0.pdf#page=24).
+It is recommended that first time users go through the [Eclipse Collections Kata](https://github.com/eclipse/eclipse-collections-kata). The Kata is a fun way to help you learn idiomatic Eclipse Collections usage through coding exercises.
 
 []()Iteration patterns
 ======================
@@ -2592,7 +2592,7 @@ Additional reference pages.
 
 A testing utility.
 
-Eclipse Collections includes a jar file called **gs-collections-testutils**. This utility helps with writing unit tests. There are many collection-specific assertions, such as
+Eclipse Collections includes a jar file called **eclipse-collections-testutils**. This utility helps with writing unit tests. There are many collection-specific assertions, such as
 
 ```java
 MutableList<Integer> list = FastList.newListWith(1, 2, 3);
