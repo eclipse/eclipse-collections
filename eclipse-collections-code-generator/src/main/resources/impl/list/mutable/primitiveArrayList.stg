@@ -109,7 +109,7 @@ public class <name>ArrayList extends Abstract<name>Iterable
 
     public void clear()
     {
-        Arrays.fill(this.items, <(zero.(type))>);
+        Arrays.fill(this.items, 0, size, <(zero.(type))>);
         this.size = 0;
     }
 

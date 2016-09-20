@@ -215,7 +215,7 @@ public class FastList<T>
     @Override
     public void clear()
     {
-        Arrays.fill(this.items, null);
+        Arrays.fill(this.items, 0, size, null);
         this.size = 0;
     }
 
