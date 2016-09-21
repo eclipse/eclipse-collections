@@ -1,0 +1,364 @@
+import "copyright.stg"
+import "primitiveEquals.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+
+targetPath() ::= "org/eclipse/collections/impl/stack/primitive"
+
+fileName(primitive) ::= "Abstract<primitive.name>Stack"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.stack.primitive;
+
+import java.util.EmptyStackException;
+
+import org.eclipse.collections.api.Lazy<name>Iterable;
+import org.eclipse.collections.api.<name>Iterable;
+import org.eclipse.collections.api.bag.primitive.Mutable<name>Bag;
+import org.eclipse.collections.api.block.function.primitive.Object<name>IntToObjectFunction;
+import org.eclipse.collections.api.block.function.primitive.Object<name>ToObjectFunction;
+import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
+import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
+import org.eclipse.collections.api.block.procedure.primitive.<name>IntProcedure;
+import org.eclipse.collections.api.iterator.<name>Iterator;
+import org.eclipse.collections.api.list.primitive.<name>List;
+import org.eclipse.collections.api.list.primitive.Mutable<name>List;
+import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
+import org.eclipse.collections.api.stack.primitive.<name>Stack;
+import org.eclipse.collections.impl.bag.mutable.primitive.<name>HashBag;
+import org.eclipse.collections.impl.iterator.Unmodifiable<name>Iterator;
+import org.eclipse.collections.impl.lazy.primitive.Lazy<name>IterableAdapter;
+import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
+import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
+
+/**
+ * This file was automatically generated from template file abstractPrimitiveStack.stg.
+ */
+public abstract class Abstract<name>Stack implements <name>Stack
+{
+    protected abstract <name>ArrayList getDelegate();
+
+    protected void checkEmptyStack()
+    {
+        if (this.getDelegate().isEmpty())
+        {
+            throw new EmptyStackException();
+        }
+    }
+
+    public <type> peek()
+    {
+        this.checkEmptyStack();
+        return this.getDelegate().getLast();
+    }
+
+    public <name>List peek(int count)
+    {
+        this.checkPositiveValueForCount(count);
+        this.checkSizeLessThanCount(count);
+        if (count == 0)
+        {
+            return new <name>ArrayList(0);
+        }
+        Mutable<name>List subList = new <name>ArrayList(count);
+        int index = this.getDelegate().size() - 1;
+        for (int i = 0; i \< count; i++)
+        {
+            subList.add(this.getDelegate().get(index - i));
+        }
+        return subList;
+    }
+
+    public <type> peekAt(int index)
+    {
+        this.rangeCheck(index);
+        return this.getDelegate().get(this.getDelegate().size() - 1 - index);
+    }
+
+    protected void rangeCheck(int index)
+    {
+        if (index \< 0 || index > this.getDelegate().size() - 1)
+        {
+            throw new IllegalArgumentException("Index " + index + " out of range.Should be between 0 and " + (this.getDelegate().size() - 1));
+        }
+    }
+
+    protected void checkPositiveValueForCount(int count)
+    {
+        if (count \< 0)
+        {
+            throw new IllegalArgumentException("Count must be positive but was " + count);
+        }
+    }
+
+    protected void checkSizeLessThanCount(int count)
+    {
+        if (this.getDelegate().size() \< count)
+        {
+            throw new IllegalArgumentException("Count must be less than size: Count = " + count + " Size = " + this.getDelegate().size());
+        }
+    }
+
+    public void forEach(<name>Procedure procedure)
+    {
+        this.each(procedure);
+    }
+
+    public <name>Iterator <type>Iterator()
+    {
+        return new Unmodifiable<name>Iterator(this.getDelegate().asReversed().<type>Iterator());
+    }
+
+    /**
+     * @since 7.0.
+     */
+    public void each(<name>Procedure procedure)
+    {
+        this.getDelegate().asReversed().forEach(procedure);
+    }
+
+    public int count(<name>Predicate predicate)
+    {
+        return this.getDelegate().asReversed().count(predicate);
+    }
+
+    public boolean anySatisfy(<name>Predicate predicate)
+    {
+        return this.getDelegate().asReversed().anySatisfy(predicate);
+    }
+
+    public boolean allSatisfy(<name>Predicate predicate)
+    {
+        return this.getDelegate().asReversed().allSatisfy(predicate);
+    }
+
+    public boolean noneSatisfy(<name>Predicate predicate)
+    {
+        return this.getDelegate().asReversed().noneSatisfy(predicate);
+    }
+
+    public <type> detectIfNone(<name>Predicate predicate, <type> ifNone)
+    {
+        return this.getDelegate().asReversed().detectIfNone(predicate, ifNone);
+    }
+
+    public <type>[] toArray()
+    {
+        return this.getDelegate().asReversed().toArray();
+    }
+
+    public boolean contains(<type> value)
+    {
+        return this.getDelegate().asReversed().contains(value);
+    }
+
+    public boolean containsAll(<type>... source)
+    {
+        return this.getDelegate().asReversed().containsAll(source);
+    }
+
+    public boolean containsAll(<name>Iterable source)
+    {
+        return this.getDelegate().asReversed().containsAll(source);
+    }
+
+    public Mutable<name>List toList()
+    {
+        return <name>ArrayList.newList(this);
+    }
+
+    public Mutable<name>Set toSet()
+    {
+        return <name>HashSet.newSet(this);
+    }
+
+    public Mutable<name>Bag toBag()
+    {
+        return <name>HashBag.newBag(this);
+    }
+
+    public \<V> V injectInto(V injectedValue, Object<name>ToObjectFunction\<? super V, ? extends V> function)
+    {
+        return this.getDelegate().toReversed().injectInto(injectedValue, function);
+    }
+
+    public Lazy<name>Iterable asLazy()
+    {
+        return new Lazy<name>IterableAdapter(this);
+    }
+
+    public int size()
+    {
+        return this.getDelegate().size();
+    }
+
+    @Override
+    public boolean equals(Object otherStack)
+    {
+        if (otherStack == this)
+        {
+            return true;
+        }
+        if (!(otherStack instanceof <name>Stack))
+        {
+            return false;
+        }
+        <name>Stack stack = (<name>Stack) otherStack;
+        if (this.size() != stack.size())
+        {
+            return false;
+        }
+        for (int i = 0; i \< this.size(); i++)
+        {
+            if (<(notEquals.(type))("this.peekAt(i)", "stack.peekAt(i)")>)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        int hashCode = 1;
+        <name>Iterable iterable = this.getDelegate().asReversed();
+        <name>Iterator iterator = iterable.<type>Iterator();
+        while (iterator.hasNext())
+        {
+            <type> item = iterator.next();
+            hashCode = 31 * hashCode + <(hashCode.(type))("item")>;
+        }
+        return hashCode;
+    }
+
+    @Override
+    public String toString()
+    {
+        return this.getDelegate().asReversed().toString();
+    }
+
+    public String makeString()
+    {
+        return this.getDelegate().asReversed().makeString();
+    }
+
+    public String makeString(String separator)
+    {
+        return this.getDelegate().asReversed().makeString(separator);
+    }
+
+    public String makeString(String start, String separator, String end)
+    {
+        return this.getDelegate().asReversed().makeString(start, separator, end);
+    }
+
+    public void appendString(Appendable appendable)
+    {
+        this.getDelegate().asReversed().appendString(appendable);
+    }
+
+    public void appendString(Appendable appendable, String separator)
+    {
+        this.getDelegate().asReversed().appendString(appendable, separator);
+    }
+
+    public void appendString(Appendable appendable, String start, String separator, String end)
+    {
+        this.getDelegate().asReversed().appendString(appendable, start, separator, end);
+    }
+
+    public <type> getFirst()
+    {
+        throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".getFirst() not implemented yet");
+    }
+
+    public int indexOf(<type> value)
+    {
+        throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".indexOf() not implemented yet");
+    }
+
+    public \<T> T injectIntoWithIndex(T injectedValue, Object<name>IntToObjectFunction\<? super T, ? extends T> function)
+    {
+        throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".injectIntoWithIndex() not implemented yet");
+    }
+
+    public void forEachWithIndex(<name>IntProcedure procedure)
+    {
+        throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".forEachWithIndex() not implemented yet");
+    }
+
+    <(arithmeticMethods.(type))(type)>
+}
+
+>>
+
+arithmeticMethods ::= [
+    "byte": "allMethods",
+    "short": "allMethods",
+    "char": "allMethods",
+    "int": "allMethods",
+    "long": "allMethods",
+    "float": "allMethods",
+    "double": "allMethods",
+    "boolean": "noMethods"
+    ]
+
+allMethods(type) ::= <<
+
+public <wideType.(type)> sum()
+{
+    return this.getDelegate().sum();
+}
+
+public <type> max()
+{
+    return this.getDelegate().max();
+}
+
+public <type> min()
+{
+    return this.getDelegate().min();
+}
+
+public <type> minIfEmpty(<type> defaultValue)
+{
+    if (this.isEmpty())
+    {
+        return defaultValue;
+    }
+    return this.min();
+}
+
+public <type> maxIfEmpty(<type> defaultValue)
+{
+    if (this.isEmpty())
+    {
+        return defaultValue;
+    }
+    return this.max();
+}
+
+public double average()
+{
+    return this.getDelegate().average();
+}
+
+public double median()
+{
+    return this.getDelegate().median();
+}
+
+public <type>[] toSortedArray()
+{
+    return this.getDelegate().toSortedArray();
+}
+>>
+
+noMethods(type) ::= ""
