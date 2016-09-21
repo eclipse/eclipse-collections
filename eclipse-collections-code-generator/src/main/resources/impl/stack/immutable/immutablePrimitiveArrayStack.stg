@@ -47,6 +47,7 @@ import org.eclipse.collections.impl.lazy.primitive.Lazy<name>IterableAdapter;
 import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
 import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
 import org.eclipse.collections.impl.stack.mutable.primitive.<name>ArrayStack;
+import org.eclipse.collections.impl.stack.primitive.Abstract<name>Stack;
 import net.jcip.annotations.Immutable;
 
 /**
@@ -56,7 +57,7 @@ import net.jcip.annotations.Immutable;
  * @since 4.0.
  */
 @Immutable
-final class Immutable<name>ArrayStack
+final class Immutable<name>ArrayStack extends Abstract<name>Stack
         implements Immutable<name>Stack, Serializable
 {
     private static final long serialVersionUID = 1L;
@@ -104,6 +105,12 @@ final class Immutable<name>ArrayStack
         return new Immutable<name>ArrayStack(<name>ArrayList.newList(items).reverseThis());
     }
 
+    @Override
+    protected <name>ArrayList getDelegate()
+    {
+        return this.delegate;
+    }
+
     public Immutable<name>Stack push(<type> item)
     {
         <name>ArrayList newDelegate = <name>ArrayList.newList(this.delegate);
@@ -143,80 +150,6 @@ final class Immutable<name>ArrayStack
         }
     }
 
-    public <type> peek()
-    {
-        return this.delegate.getLast();
-    }
-
-    public <name>List peek(int count)
-    {
-        this.checkNegativeCount(count);
-        this.checkSizeLessThanCount(count);
-        if (count == 0)
-        {
-            return new <name>ArrayList();
-        }
-        Mutable<name>List subList = new <name>ArrayList(count);
-        int index = this.delegate.size() - 1;
-        for (int i = 0; i \< count; i++)
-        {
-            subList.add(this.delegate.get(index - i));
-        }
-        return subList;
-    }
-
-    public <type> peekAt(int index)
-    {
-        this.rangeCheck(index);
-        return this.delegate.get(this.delegate.size() - 1 - index);
-    }
-
-    private void rangeCheck(int index)
-    {
-        if (index \< 0 || index > this.delegate.size() - 1)
-        {
-            throw new IllegalArgumentException("Index " + index + " out of range.Should be between 0 and " + (this.delegate.size() - 1));
-        }
-    }
-
-    public <name>Iterator <type>Iterator()
-    {
-        return new Unmodifiable<name>Iterator(this.delegate.asReversed().<type>Iterator());
-    }
-
-    public void forEach(<name>Procedure procedure)
-    {
-        this.each(procedure);
-    }
-
-    /**
-     * @since 7.0.
-     */
-    public void each(<name>Procedure procedure)
-    {
-        this.delegate.asReversed().forEach(procedure);
-    }
-
-    public int count(<name>Predicate predicate)
-    {
-        return this.delegate.asReversed().count(predicate);
-    }
-
-    public boolean anySatisfy(<name>Predicate predicate)
-    {
-        return this.delegate.asReversed().anySatisfy(predicate);
-    }
-
-    public boolean allSatisfy(<name>Predicate predicate)
-    {
-        return this.delegate.asReversed().allSatisfy(predicate);
-    }
-
-    public boolean noneSatisfy(<name>Predicate predicate)
-    {
-        return this.delegate.asReversed().noneSatisfy(predicate);
-    }
-
     public Immutable<name>Stack select(<name>Predicate predicate)
     {
         return <name>Stacks.immutable.withAllReversed(this.delegate.asReversed().select(predicate));
@@ -227,71 +160,14 @@ final class Immutable<name>ArrayStack
         return <name>Stacks.immutable.withAllReversed(this.delegate.asReversed().reject(predicate));
     }
 
-    public <type> detectIfNone(<name>Predicate predicate, <type> ifNone)
-    {
-        return this.delegate.asReversed().detectIfNone(predicate, ifNone);
-    }
-
     public \<V> ImmutableStack\<V> collect(<name>ToObjectFunction\<? extends V> function)
     {
         return Stacks.immutable.withAllReversed(this.delegate.asReversed().collect(function));
     }
 
-    <(arithmeticMethods.(type))(type)>
-
-    public <type>[] toArray()
-    {
-        return this.delegate.asReversed().toArray();
-    }
-
-    public boolean contains(<type> value)
-    {
-        return this.delegate.asReversed().contains(value);
-    }
-
-    public boolean containsAll(<type>... source)
-    {
-        return this.delegate.asReversed().containsAll(source);
-    }
-
-    public boolean containsAll(<name>Iterable source)
-    {
-        return this.delegate.asReversed().containsAll(source);
-    }
-
-    public Mutable<name>List toList()
-    {
-        return <name>ArrayList.newList(this);
-    }
-
-    public Mutable<name>Set toSet()
-    {
-        return <name>HashSet.newSet(this);
-    }
-
-    public Mutable<name>Bag toBag()
-    {
-        return <name>HashBag.newBag(this);
-    }
-
-    public \<V> V injectInto(V injectedValue, Object<name>ToObjectFunction\<? super V, ? extends V> function)
-    {
-        return this.delegate.toReversed().injectInto(injectedValue, function);
-    }
-
-    public Lazy<name>Iterable asLazy()
-    {
-        return new Lazy<name>IterableAdapter(this);
-    }
-
     public Immutable<name>Stack toImmutable()
     {
         return this;
-    }
-
-    public int size()
-    {
-        return this.delegate.size();
     }
 
     public boolean isEmpty()
@@ -304,109 +180,7 @@ final class Immutable<name>ArrayStack
         return true;
     }
 
-    @Override
-    public boolean equals(Object otherStack)
-    {
-        if (otherStack == this)
-        {
-            return true;
-        }
-        if (!(otherStack instanceof <name>Stack))
-        {
-            return false;
-        }
-        <name>Stack stack = (<name>Stack) otherStack;
-        if (this.size() != stack.size())
-        {
-            return false;
-        }
-        for (int i = 0; i \< this.size(); i++)
-        {
-            if (<(notEquals.(type))("this.peekAt(i)", "stack.peekAt(i)")>)
-            {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    @Override
-    public int hashCode()
-    {
-        int hashCode = 1;
-        <name>Iterable iterable = this.delegate.asReversed();
-        <name>Iterator iterator = iterable.<type>Iterator();
-        while (iterator.hasNext())
-        {
-            <type> item = iterator.next();
-            hashCode = 31 * hashCode + <(hashCode.(type))("item")>;
-        }
-        return hashCode;
-    }
-
-    @Override
-    public String toString()
-    {
-        return this.delegate.asReversed().toString();
-    }
-
-    public String makeString()
-    {
-        return this.delegate.asReversed().makeString();
-    }
-
-    public String makeString(String separator)
-    {
-        return this.delegate.asReversed().makeString(separator);
-    }
-
-    public String makeString(String start, String separator, String end)
-    {
-        return this.delegate.asReversed().makeString(start, separator, end);
-    }
-
-    public void appendString(Appendable appendable)
-    {
-        this.delegate.asReversed().appendString(appendable);
-    }
-
-    public void appendString(Appendable appendable, String separator)
-    {
-        this.delegate.asReversed().appendString(appendable, separator);
-    }
-
-    public void appendString(Appendable appendable, String start, String separator, String end)
-    {
-        this.delegate.asReversed().appendString(appendable, start, separator, end);
-    }
-
-    public <type> getFirst()
-    {
-        throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".getFirst() not implemented yet");
-    }
-
-    public int indexOf(<type> value)
-    {
-        throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".indexOf() not implemented yet");
-    }
-
-    public \<T> T injectIntoWithIndex(T injectedValue, Object<name>IntToObjectFunction\<? super T, ? extends T> function)
-    {
-        throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".injectIntoWithIndex() not implemented yet");
-    }
-
-    public void forEachWithIndex(<name>IntProcedure procedure)
-    {
-        throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".forEachWithIndex() not implemented yet");
-    }
-
-    private void checkSizeLessThanCount(int count)
-    {
-        if (this.delegate.size() \< count)
-        {
-            throw new IllegalArgumentException("Count must be less than size: Count = " + count + " Size = " + this.delegate.size());
-        }
-    }
+    <(arithmeticMethods.(type))(type)>
 
     private Object writeReplace()
     {
@@ -488,46 +262,6 @@ arithmeticMethods ::= [
     ]
 
 allMethods(type) ::= <<
-
-public <wideType.(type)> sum()
-{
-    return this.delegate.sum();
-}
-
-public <type> max()
-{
-    return this.delegate.max();
-}
-
-public <type> maxIfEmpty(<type> defaultValue)
-{
-    return this.max();
-}
-
-public <type> min()
-{
-    return this.delegate.min();
-}
-
-public <type> minIfEmpty(<type> defaultValue)
-{
-    return this.min();
-}
-
-public double average()
-{
-    return this.delegate.average();
-}
-
-public double median()
-{
-    return this.delegate.median();
-}
-
-public <type>[] toSortedArray()
-{
-    return this.delegate.toSortedArray();
-}
 
 public Mutable<name>List toSortedList()
 {
