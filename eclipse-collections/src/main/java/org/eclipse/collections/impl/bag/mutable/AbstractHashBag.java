@@ -36,28 +36,6 @@ public abstract class AbstractHashBag<T> extends AbstractMutableBag<T>
     protected int size;
 
     @Override
-    public boolean addAll(Collection<? extends T> source)
-    {
-        if (source instanceof Bag)
-        {
-            return this.addAllBag((Bag<T>) source);
-        }
-        return super.addAll(source);
-    }
-
-    protected boolean addAllBag(Bag<? extends T> source)
-    {
-        source.forEachWithOccurrences(new ObjectIntProcedure<T>()
-        {
-            public void value(T each, int occurrences)
-            {
-                AbstractHashBag.this.addOccurrences(each, occurrences);
-            }
-        });
-        return source.notEmpty();
-    }
-
-    @Override
     public int addOccurrences(T item, int occurrences)
     {
         if (occurrences < 0)
@@ -311,13 +289,10 @@ public abstract class AbstractHashBag<T> extends AbstractMutableBag<T>
         if (iterable instanceof Bag)
         {
             Bag<?> source = (Bag<?>) iterable;
-            source.forEachWithOccurrences(new ObjectIntProcedure<Object>()
+            source.forEachWithOccurrences((each, parameter) ->
             {
-                public void value(Object each, int parameter)
-                {
-                    int removed = AbstractHashBag.this.items.removeKeyIfAbsent((T) each, 0);
-                    AbstractHashBag.this.size -= removed;
-                }
+                int removed = this.items.removeKeyIfAbsent((T) each, 0);
+                this.size -= removed;
             });
         }
         else

@@ -298,13 +298,7 @@ public final class <name>HashBag extends Abstract<name>Iterable implements Mutab
         if (source instanceof <name>Bag)
         {
             <name>Bag otherBag = (<name>Bag) source;
-            otherBag.forEachWithOccurrences(new <name>IntProcedure()
-            {
-                public void value(<type> each, int occurrences)
-                {
-                    <name>HashBag.this.addOccurrences(each, occurrences);
-                }
-            });
+            otherBag.forEachWithOccurrences(this::addOccurrences);
         }
         else
         {
@@ -343,13 +337,10 @@ public final class <name>HashBag extends Abstract<name>Iterable implements Mutab
         if (source instanceof <name>Bag)
         {
             <name>Bag otherBag = (<name>Bag) source;
-            otherBag.forEachWithOccurrences(new <name>IntProcedure()
+            otherBag.forEachWithOccurrences((<type> each, int occurrences) ->
             {
-                public void value(<type> each, int occurrences)
-                {
-                    int oldOccurrences = <name>HashBag.this.items.removeKeyIfAbsent(each, 0);
-                    <name>HashBag.this.size -= oldOccurrences;
-                }
+                int oldOccurrences = <name>HashBag.this.items.removeKeyIfAbsent(each, 0);
+                <name>HashBag.this.size -= oldOccurrences;
             });
         }
         else
@@ -369,13 +360,7 @@ public final class <name>HashBag extends Abstract<name>Iterable implements Mutab
     {
         int oldSize = this.size();
         final <name>Set sourceSet = source instanceof <name>Set ? (<name>Set) source : source.toSet();
-        <name>HashBag retained = this.select(new <name>Predicate()
-        {
-            public boolean accept(<type> key)
-            {
-                return sourceSet.contains(key);
-            }
-        });
+        <name>HashBag retained = this.select(sourceSet::contains);
         if (retained.size() != oldSize)
         {
             this.items = retained.items;
@@ -398,13 +383,7 @@ public final class <name>HashBag extends Abstract<name>Iterable implements Mutab
         }
         if (occurrences > 0)
         {
-            this.items.updateValue(item, 0, new IntToIntFunction()
-            {
-                public int valueOf(int intParameter)
-                {
-                    return intParameter + occurrences;
-                }
-            });
+            this.items.updateValue(item, 0, (int intParameter) -> intParameter + occurrences);
             this.size += occurrences;
         }
     }
@@ -421,13 +400,7 @@ public final class <name>HashBag extends Abstract<name>Iterable implements Mutab
             return false;
         }
 
-        int newValue = this.items.updateValue(item, 0, new IntToIntFunction()
-        {
-            public int valueOf(int intParameter)
-            {
-                return intParameter - occurrences;
-            }
-        });
+        int newValue = this.items.updateValue(item, 0, (int intParameter) -> intParameter - occurrences);
 
         if (newValue \<= 0)
         {
@@ -450,14 +423,11 @@ public final class <name>HashBag extends Abstract<name>Iterable implements Mutab
      */
     public void each(final <name>Procedure procedure)
     {
-        this.items.forEachKeyValue(new <name>IntProcedure()
+        this.items.forEachKeyValue((<type> key, int occurrences) ->
         {
-            public void value(<type> key, int occurrences)
+            for (int i = 0; i \< occurrences; i++)
             {
-                for (int i = 0; i \< occurrences; i++)
-                {
-                    procedure.value(key);
-                }
+                procedure.value(key);
             }
         });
     }
@@ -465,14 +435,11 @@ public final class <name>HashBag extends Abstract<name>Iterable implements Mutab
     public <name>HashBag select(final <name>Predicate predicate)
     {
         final <name>HashBag result = new <name>HashBag();
-        this.forEachWithOccurrences(new <name>IntProcedure()
+        this.forEachWithOccurrences((<type> each, int occurrences) ->
         {
-            public void value(<type> each, int occurrences)
+            if (predicate.accept(each))
             {
-                if (predicate.accept(each))
-                {
-                    result.addOccurrences(each, occurrences);
-                }
+                result.addOccurrences(each, occurrences);
             }
         });
         return result;
@@ -481,14 +448,11 @@ public final class <name>HashBag extends Abstract<name>Iterable implements Mutab
     public <name>HashBag reject(final <name>Predicate predicate)
     {
         final <name>HashBag result = new <name>HashBag();
-        this.forEachWithOccurrences(new <name>IntProcedure()
+        this.forEachWithOccurrences((<type> each, int occurrences) ->
         {
-            public void value(<type> each, int occurrences)
+            if (!predicate.accept(each))
             {
-                if (!predicate.accept(each))
-                {
-                    result.addOccurrences(each, occurrences);
-                }
+                result.addOccurrences(each, occurrences);
             }
         });
         return result;
@@ -496,13 +460,16 @@ public final class <name>HashBag extends Abstract<name>Iterable implements Mutab
 
     public \<T> T injectInto(T injectedValue, Object<name>ToObjectFunction\<? super T, ? extends T> function)
     {
-        T result = injectedValue;
-        <name>Iterator it = this.<type>Iterator();
-        while (it.hasNext())
+        T[] result = (T[]) new Object[1];
+        result[0] = injectedValue;
+        this.forEachWithOccurrences((<type> each, int occurrences) ->
         {
-            result = function.valueOf(result, it.next());
-        }
-        return result;
+            for (int i = 0; i \< occurrences; i++)
+            {
+                result[0] = function.valueOf(result[0], each);
+            }
+        });
+        return result[0];
     }
 
     @Override
@@ -522,26 +489,16 @@ public final class <name>HashBag extends Abstract<name>Iterable implements Mutab
             return false;
         }
 
-        return this.items.keysView().allSatisfy(new <name>Predicate()
-        {
-            public boolean accept(<type> key)
-            {
-                return <name>HashBag.this.occurrencesOf(key) == bag.occurrencesOf(key);
-            }
-        });
+        return this.items.keysView().allSatisfy((<type> key) ->
+            <name>HashBag.this.occurrencesOf(key) == bag.occurrencesOf(key));
     }
 
     @Override
     public int hashCode()
     {
         final Counter result = new Counter();
-        this.forEachWithOccurrences(new <name>IntProcedure()
-        {
-            public void value(<type> eachItem, int occurrences)
-            {
-                result.add(<(hashCode.(type))("eachItem")> ^ occurrences);
-            }
-        });
+        this.forEachWithOccurrences((<type> eachItem, int occurrences) ->
+                result.add(<(hashCode.(type))("eachItem")> ^ occurrences));
         return result.getCount();
     }
 
@@ -555,26 +512,23 @@ public final class <name>HashBag extends Abstract<name>Iterable implements Mutab
         try
         {
             appendable.append(start);
-            this.items.forEachKeyValue(new <name>IntProcedure()
+            this.items.forEachKeyValue((<type> each, int occurrences) ->
             {
-                public void value(<type> each, int occurrences)
+                try
                 {
-                    try
+                    for (int i = 0; i \< occurrences; i++)
                     {
-                        for (int i = 0; i \< occurrences; i++)
+                        if (!firstItem[0])
                         {
-                            if (!firstItem[0])
-                            {
-                                appendable.append(separator);
-                            }
-                            appendable.append(String.valueOf(each));
-                            firstItem[0] = false;
+                            appendable.append(separator);
                         }
+                        appendable.append(String.valueOf(each));
+                        firstItem[0] = false;
                     }
-                    catch (IOException e)
-                    {
-                        throw new RuntimeException(e);
-                    }
+                }
+                catch (IOException e)
+                {
+                    throw new RuntimeException(e);
                 }
             });
             appendable.append(end);
@@ -588,14 +542,11 @@ public final class <name>HashBag extends Abstract<name>Iterable implements Mutab
     public int count(final <name>Predicate predicate)
     {
         final Counter result = new Counter();
-        this.forEachWithOccurrences(new <name>IntProcedure()
+        this.forEachWithOccurrences((<type> each, int occurrences) ->
         {
-            public void value(<type> each, int occurrences)
+            if (predicate.accept(each))
             {
-                if (predicate.accept(each))
-                {
-                    result.add(occurrences);
-                }
+                result.add(occurrences);
             }
         });
         return result.getCount();
@@ -624,13 +575,8 @@ public final class <name>HashBag extends Abstract<name>Iterable implements Mutab
     public \<V> MutableBag\<V> collect(final <name>ToObjectFunction\<? extends V> function)
     {
         final HashBag\<V> result = HashBag.newBag(this.items.size());
-        this.forEachWithOccurrences(new <name>IntProcedure()
-        {
-            public void value(<type> each, int occurrences)
-            {
-                result.addOccurrences(function.valueOf(each), occurrences);
-            }
-        });
+        this.forEachWithOccurrences((<type> each, int occurrences) ->
+            result.addOccurrences(function.valueOf(each), occurrences));
         return result;
     }
 
@@ -656,17 +602,14 @@ public final class <name>HashBag extends Abstract<name>Iterable implements Mutab
 {
     final <wideType.(type)>[] result = {<wideZero.(type)>};
     final <wideType.(type)>[] compensation = {<wideZero.(type)>};
-    this.forEachWithOccurrences(new <name>IntProcedure()
+    this.forEachWithOccurrences((<type> each, int occurrences) ->
     {
-        public void value(<type> each, int occurrences)
+        for(int i = 0; i \< occurrences; i++)
         {
-            for(int i = 0; i \< occurrences; i++)
-            {
-                <wideType.(type)> adjustedValue = (<wideType.(type)>) each - compensation[0];
-                <wideType.(type)> nextSum = result[0] + adjustedValue;
-                compensation[0] = nextSum - result[0] - adjustedValue;
-                result[0] = nextSum;
-            }
+            <wideType.(type)> adjustedValue = (<wideType.(type)>) each - compensation[0];
+            <wideType.(type)> nextSum = result[0] + adjustedValue;
+            compensation[0] = nextSum - result[0] - adjustedValue;
+            result[0] = nextSum;
         }
     });
     return result[0];
@@ -675,13 +618,8 @@ public final class <name>HashBag extends Abstract<name>Iterable implements Mutab
     <else>public <wideType.(type)> sum()
 {
     final <wideType.(type)>[] result = {<wideZero.(type)>};
-    this.forEachWithOccurrences(new <name>IntProcedure()
-    {
-        public void value(<type> each, int occurrences)
-        {
-            result[0] += (<wideType.(type)>) each * occurrences;
-        }
-    });
+    this.forEachWithOccurrences((<type> each, int occurrences) ->
+            result[0] += (<wideType.(type)>) each * occurrences);
     return result[0];
 }
 
@@ -691,15 +629,12 @@ public final class <name>HashBag extends Abstract<name>Iterable implements Mutab
         final <type>[] array = new <type>[this.size()];
         final int[] index = {0};
 
-        this.forEachWithOccurrences(new <name>IntProcedure()
+        this.forEachWithOccurrences((<type> each, int occurrences) ->
         {
-            public void value(<type> each, int occurrences)
+            for (int i = 0; i \< occurrences; i++)
             {
-                for (int i = 0; i \< occurrences; i++)
-                {
-                    array[index[0]] = each;
-                    index[0]++;
-                }
+                array[index[0]] = each;
+                index[0]++;
             }
         });
         return array;
@@ -730,19 +665,16 @@ public final class <name>HashBag extends Abstract<name>Iterable implements Mutab
         out.writeInt(this.items.size());
         try
         {
-            this.items.forEachKeyValue(new <name>IntProcedure()
+            this.items.forEachKeyValue((<type> each, int occurrences) ->
             {
-                public void value(<type> each, int occurrences)
+                try
                 {
-                    try
-                    {
-                        out.write<name>(each);
-                        out.writeInt(occurrences);
-                    }
-                    catch (IOException e)
-                    {
-                        throw new RuntimeException(e);
-                    }
+                    out.write<name>(each);
+                    out.writeInt(occurrences);
+                }
+                catch (IOException e)
+                {
+                    throw new RuntimeException(e);
                 }
             });
         }

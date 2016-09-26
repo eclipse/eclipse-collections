@@ -399,13 +399,7 @@ public class <name>ArrayList extends Abstract<name>Iterable
     {
         int oldSize = this.size();
         final <name>Set sourceSet = source instanceof <name>Set ? (<name>Set) source : source.toSet();
-        <name>ArrayList retained = this.select(new <name>Predicate()
-        {
-            public boolean accept(<type> value)
-            {
-                return sourceSet.contains(value);
-            }
-        });
+        <name>ArrayList retained = this.select(sourceSet::contains);
         this.size = retained.size;
         this.items = retained.items;
         return oldSize != this.size();
