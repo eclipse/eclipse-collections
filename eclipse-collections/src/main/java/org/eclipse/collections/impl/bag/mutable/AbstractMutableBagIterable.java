@@ -16,6 +16,7 @@ import java.util.Iterator;
 import java.util.Optional;
 
 import org.eclipse.collections.api.RichIterable;
+import org.eclipse.collections.api.bag.Bag;
 import org.eclipse.collections.api.bag.MutableBagIterable;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function0;
@@ -63,9 +64,19 @@ public abstract class AbstractMutableBagIterable<T>
     @Override
     public boolean addAllIterable(Iterable<? extends T> iterable)
     {
+        if (iterable instanceof Bag)
+        {
+            return this.addAllBag((Bag<T>) iterable);
+        }
         int oldSize = this.size();
         Iterate.forEachWith(iterable, Procedures2.addToCollection(), this);
         return oldSize != this.size();
+    }
+
+    protected boolean addAllBag(Bag<? extends T> source)
+    {
+        source.forEachWithOccurrences(this::addOccurrences);
+        return source.notEmpty();
     }
 
     @Override

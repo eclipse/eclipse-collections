@@ -72,13 +72,7 @@ public abstract class Abstract<name>Iterable implements <name>Iterable
 
     public boolean containsAll(<name>Iterable source)
     {
-        return source.allSatisfy(new <name>Predicate()
-        {
-            public boolean accept(<type> each)
-            {
-                return Abstract<name>Iterable.this.contains(each);
-            }
-        });
+        return source.allSatisfy(this::contains);
     }
 }
 
