@@ -419,6 +419,7 @@
                     </links>
                     <destDir>${project.version}</destDir>
                     <additionalparam>-Xdoclint:none</additionalparam>
+                    <excludePackageNames>org.openjdk,org.eclipse.collections.impl.jmh,org.eclipse.collections.codegenerator</excludePackageNames>
                 </configuration>
             </plugin>
 
