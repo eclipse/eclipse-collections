@@ -375,7 +375,7 @@ These Eclipse Collections methods implement the Collect pattern:
 
 ##### collect(Function): RichIterable
 
-For each element of the collection, the [**Function**](http://www.eclipse.org/collections/javadoc/8.0.0/org/eclipse/collections/api/block/function/Function.html) is evaluated with the current element as the argument; returns a new collection of the same size and the transformed type.
+For each element of the collection, the [**Function**](http://www.eclipse.org/collections/javadoc/8.0.0/org/eclipse/collections/api/block/function/Function.html) is evaluated with the current element as the argument; returns a new collection with the transformed type.
 
 ##### collectInt(IntFunction): IntIterable
 
@@ -551,8 +551,8 @@ for (int i = 0; i < list.size(); i++)
     {
         return v;
     }
-    return null;
 }
+return null;
 ```
 
 #### []()Detect methods
