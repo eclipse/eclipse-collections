@@ -504,24 +504,25 @@ public class PersonAndPetKataTest
     @Test
     public void getAgeStatisticsOfPets()
     {
-        IntList agesLazy = this.people.asLazy()
+        IntList ages = this.people.asLazy()
                 .flatCollect(Person::getPets)
                 .collectInt(Pet::getAge)
                 .toList();
-        IntSet uniqueAges = agesLazy.toSet();
-        IntSummaryStatistics stats = new IntSummaryStatistics();
-        agesLazy.forEach(stats::accept);
+        IntSet uniqueAges = ages.toSet();
+        IntSummaryStatistics stats = ages.summaryStatistics();
         Assert.assertEquals(IntHashSet.newSetWith(1, 2, 3, 4), uniqueAges);
-        Assert.assertEquals(stats.getMin(), agesLazy.min());
-        Assert.assertEquals(stats.getMax(), agesLazy.max());
-        Assert.assertEquals(stats.getSum(), agesLazy.sum());
-        Assert.assertEquals(stats.getAverage(), agesLazy.average(), 0.0);
-        Assert.assertEquals(stats.getCount(), agesLazy.size());
-        Assert.assertTrue(agesLazy.allSatisfy(IntPredicates.greaterThan(0)));
-        Assert.assertTrue(agesLazy.allSatisfy(i -> i > 0));
-        Assert.assertFalse(agesLazy.anySatisfy(i -> i == 0));
-        Assert.assertTrue(agesLazy.noneSatisfy(i -> i < 0));
-        Assert.assertEquals(2.0d, agesLazy.median(), 0.0);
+        Assert.assertEquals(stats.getMin(), ages.min());
+        Assert.assertEquals(stats.getMax(), ages.max());
+        Assert.assertEquals(stats.getSum(), ages.sum());
+        Assert.assertEquals(stats.getAverage(), ages.average(), 0.0);
+        Assert.assertEquals(stats.getCount(), ages.size());
+        Assert.assertTrue(ages.allSatisfy(IntPredicates.greaterThan(0)));
+        Assert.assertTrue(ages.allSatisfy(i -> i > 0));
+        Assert.assertFalse(ages.anySatisfy(IntPredicates.equal(0)));
+        Assert.assertFalse(ages.anySatisfy(i -> i == 0));
+        Assert.assertTrue(ages.noneSatisfy(IntPredicates.lessThan(0)));
+        Assert.assertTrue(ages.noneSatisfy(i -> i < 0));
+        Assert.assertEquals(2.0d, ages.median(), 0.0);
     }
 
     @Test
