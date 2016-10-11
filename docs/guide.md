@@ -1,5 +1,63 @@
-[]()About Eclipse Collections
-=============================
+# Eclipse Collections Reference Guide
+- [About Eclipse Collections](#-about-eclipse-collections)
+- [About this guide](#-about-this-guide)
+- [Getting Started With Eclipse Collections](#-getting-started-with-eclipse-collections)
+- [Iteration patterns](#-iteration-patterns)
+- [Common iteration patterns](#-common-iteration-patterns)
+    - [Select/Reject pattern](#-selectreject-pattern)
+    - [Collect pattern](#-collect-pattern)
+    - [Short-circuit patterns](#-short-circuit-patterns)
+    - [ForEach pattern](#-foreach-pattern)
+    - [InjectInto pattern](#-injectinto-pattern)
+- [RichIterable](#-richiterable)
+    - [Lazy iteration](#-lazy-iteration)
+    - [Parallel-lazy iteration](#-parallel-lazy-iteration)
+    - [RichIterable methods](#-richiterable-methods)
+- [Map iteration methods](#-map-iteration-methods)
+    - [Creating iterable views of maps](#-creating-iterable-views-of-maps)
+    - [Collecting entries](#-collecting-entries)
+    - [Finding, testing and putting values](#-finding-testing-and-putting-values)
+    - [Flipping maps](#-flipping-maps)
+- [Basic collection types](#-basic-collection-types)
+    - [ListIterable](#-listiterable)
+    - [SetIterable](#-setiterable)
+    - [MapIterable](#-mapiterable)
+    - [BiMap](#-bimap)
+    - [Bag](#-bag)
+    - [StackIterable](#-stackiterable)
+    - [Multimap](#-multimap)
+- [Primitive collections](#-primitive-collections)
+    - [Primitive Lists](#primitive-lists)
+    - [IntInterval](#intinterval)
+    - [Primitive Sets](#primitive-sets)
+    - [Primitive Stacks](#primitive-stacks)
+    - [Primitive Bags](#primitive-bags)
+    - [Primitive Maps](#primitive-maps)
+- [Immutable collections](#-immutable-collections)
+    - [Immutable Collection Factory Classes](#-immutable-collection-factory-classes)
+- [Creating collections containers](#-creating-collections-containers)
+    - [Creating mutable collections](#-creating-mutable-collections)
+    - [Creating immutable collections](#-creating-immutable-collections)
+    - [Creating primitive collections](#-creating-primitive-collections)
+- [Converting collections](#converting-collections)
+- [Protective wrappers](#-protective-wrappers)
+    - [Unmodifiable Collections](#-unmodifiable-collections)
+    - [Synchronized Collections](#-synchronized-collections)
+- [Code blocks](#-code-blocks)
+    - [Predicate](#-predicate)
+        - [Predicate Factories](#predicate-factories)
+    - [Function](#-function)
+        - [Function Factories](#function-factories)
+    - [Procedure](#-procedure)
+        - [Count and calculate](#-count-and-calculate)
+        - [Control execution](#-control-execution)
+        - [Modify collections and maps](#-modify-collections-and-maps)
+        - [Procedure Factories](#procedure-factories)
+- [Verify](#-verify)
+- [Eclipse Collections Cheat Sheet](#-eclipse-collections-cheat-sheet)
+
+[]() About Eclipse Collections
+-----------------------------
 
 > A collections framework for Java based on Smalltalk patterns.
 
@@ -10,7 +68,7 @@ Eclipse Collections implements the idea of *internal iteration* - putting collec
 ![Eclipse Collections diagram](EclipseCollectionDiagram.png)
 
 
-[]()About this guide
+[]() About this guide
 --------------------
 
 This Guide is an introduction to basic Eclipse Collections concepts and its commonly-used features. It provides a high-level survey of the Eclipse Collections library and its capabilities. The topics covered are:
@@ -21,12 +79,12 @@ This Guide is an introduction to basic Eclipse Collections concepts and its comm
 -   **Utilities**: factory classes, static methods, and other features of the library.
 
 []() Getting Started With Eclipse Collections
-=============================================
+---------------------------------------------
 
 It is recommended that first time users go through the [Eclipse Collections Kata](https://github.com/eclipse/eclipse-collections-kata). The Kata is a fun way to help you learn idiomatic Eclipse Collections usage through coding exercises.
 
-[]()Iteration patterns
-======================
+[]() Iteration patterns
+----------------------
 
 Eclipse Collections extends the Java Collections Framework with new interfaces and classes and provides additional methods. These new methods implement *iteration patterns* derived from the collection protocol of the Smalltalk language (e.g., *select*, *reject*, *collect*, *detect*, *injectInto*).
 
@@ -36,40 +94,40 @@ In Eclipse Collections, business logic is reified as a *code block*: a class tha
 
 The most important advantage of internal iteration patterns is that they increase readability by giving names to the structural iteration patterns and by reducing code duplication. Moreover, by encapsulating implementation within specialized collection types (e.g., list, sets, maps), iteration can be optimized for the particular type.
 
-[]()Common iteration patterns
+[]() Common iteration patterns
 -----------------------------
 
 The most commonly-used iteration patterns in Eclipse Collections are:
 
-##### []()Filtering patterns:
+##### Filtering patterns:
 
 -   Select
 -   Reject
 -   Partition
 
-##### []()Transforming patterns:
+##### Transforming patterns:
 
 -   Collect
 -   FlatCollect
 -   GroupBy
 
-##### []()Fused patterns:
+##### Fused patterns:
 
 -   CollectIf
 
-##### []()"Short-circuit" patterns:
+##### "Short-circuit" patterns:
 
 -   Detect
 -   AnySatisfy
 -   AllSatisfy
 -   NoneSatisfy
 
-##### []()Generic action patterns:
+##### Generic action patterns:
 
 -   ForEach
 -   InjectInto
 
-### []()Select/Reject pattern
+### []() Select/Reject pattern
 
 > Filter a collection to create a new collection: includes **select**, **reject**, and **partition**.
 
@@ -179,7 +237,7 @@ for (Integer each : list)
 }
 ```
 
-#### []()Select and Reject methods
+#### []() Select and Reject methods
 
 These Eclipse Collections methods implement the Select and Reject pattern:
 
@@ -207,7 +265,7 @@ For each element of the collection, [**Predicate2**](http://www.eclipse.org/coll
 
 Same as the **selectWith**/**rejectWith** methods, but results are added to the specified *targetCollection*.
 
-#### []()Partition pattern
+#### []() Partition pattern
 
 > Create two collections using **Select** and **Reject**.
 
@@ -248,7 +306,7 @@ List<Person> adults = partitionedFolks.get(Boolean.TRUE);
 List<Person> children = partitionedFolks.get(Boolean.FALSE);
 ```
 
-#### []()Partitioning methods
+#### []() Partitioning methods
 
 These Eclipse Collections methods implement the partition pattern:
 
@@ -260,7 +318,7 @@ Returns a **PartitionIterable**, a logical pair of containers. The first contain
 
 For each element of the collection, **Predicate2** is evaluated with the element as one argument, plus one additional argument; partitioned elements are returned in a new collection of type **PartitionIterable**.
 
-### []()Collect pattern
+### []() Collect pattern
 
 > Transform a collection's elements, creating a new collection: includes **collect**, **flatCollect**, and **groupBy**.
 
@@ -365,11 +423,11 @@ for (Person person : people)
 
 ```
 
-#### []()Other Collect-style patterns
+#### []() Other Collect-style patterns
 
 Eclipse Collections provides two specialized variations on the *Collect* pattern: [Flatten](#flatten-pattern "Create a single, linear collection from selected values of a collection's elements.") and [GroupBy](#groupby-pattern "Create a Multimap from a collection by grouping on a selected or generated key value."). Like *Collect*, both methods take a single **Function** as a parameter.
 
-#### []()Collect methods
+#### []() Collect methods
 
 These Eclipse Collections methods implement the Collect pattern:
 
@@ -405,7 +463,7 @@ Same as **collect**, but the [**Function2**](http://www.eclipse.org/collections/
 
 Same as **collectWith**, except that the results are added to a specified *targetCollection*. (On all **RichIterable**s since version 1.0)
 
-#### []()FlatCollect pattern
+#### []() FlatCollect pattern
 
 Create a single, linear collection from selected values of a collection's elements.
 
@@ -479,7 +537,7 @@ for (Person person : people)
 }
 ```
 
-#### []()GroupBy pattern
+#### []() GroupBy pattern
 
 Create a Multimap from a collection by grouping on a selected or generated key value.
 
@@ -500,13 +558,13 @@ Same as **groupBy** except that the **Function** transforms each value into mult
 **Related links**
 [Multimap](#multimap "A map-like container that can have multiple values for each key") [ForEach pattern](#forEach-pattern "Perform a calculation on each element of the current collection.")
 
-### []()Short-circuit patterns
+### []() Short-circuit patterns
 
 Methods that control processing by testing a collection for a logical condition: includes **detect**, **anySatisfy**, and **allSatisfy**.
 
 The "short-circuit" patterns - [*Detect*](#detect-pattern "Finds and returns the first element that satisfies a given logical expression."), [*AnySatisfy*](#anysatisfy-pattern "Determine if any collection element satisfies a given logical expression.") and [*AllSatisfy*](#allsatisfy-pattern "Determine if all collection elements satisfy a given logical expression.") - are so called because they describe methods that cease execution when a specific condition is met. With each iteration, the **Predicate** is evaluated. If the evaluation resolves as a specified boolean (*true*/*false*) value, then iteration halts and returns the appropriate value.
 
-#### []()Detect pattern
+#### []() Detect pattern
 
 Finds and returns the *first* element that satisfies a given logical expression.
 
@@ -555,7 +613,7 @@ for (int i = 0; i < list.size(); i++)
 return null;
 ```
 
-#### []()Detect methods
+#### []() Detect methods
 
 ##### detect(Predicate): element
 
@@ -573,7 +631,7 @@ Returns the first element that evaluates as *true* for the specified **Predicate
 
 Same as **detectWith**, but if no element causes [**Predicate2**](http://www.eclipse.org/collections/javadoc/8.0.0/org/eclipse/collections/api/block/predicate/Predicate2.html) to evaluate as *true*, return the result of evaluating [**Function0**](http://www.eclipse.org/collections/javadoc/8.0.0/org/eclipse/collections/api/block/function/Function0.html).
 
-#### []()AnySatisfy pattern
+#### []() AnySatisfy pattern
 
 Determine if *any* collection element satisfies a given logical expression.
 
@@ -623,7 +681,7 @@ for (int i = 0; i < list.size(); i++)
 return false;
 ```
 
-##### []()AnySatisfy methods
+##### []() AnySatisfy methods
 
 ##### anySatisfy(Predicate): boolean
 
@@ -633,7 +691,7 @@ Return true if the **Predicate** returns *true* for any element of the collectio
 
 Return true if the **Predicate2** returns *true* for any element of the collection. Otherwise (or if the collection is empty), return false.
 
-##### []()AllSatisfy pattern
+##### []() AllSatisfy pattern
 
 Determine if *all* collection elements satisfy a given logical expression.
 
@@ -686,7 +744,7 @@ return true;
 
 *NoneSatisfy* is similar to *AllSatisfy*, but negates the **Predicate**. It returns *true* only if *no* element satisfies the **Predicate**. If the container is empty it also returns true.
 
-##### []()AllSatisfy methods
+##### []() AllSatisfy methods
 
 ##### allSatisfy(Predicate): boolean
 
@@ -704,7 +762,7 @@ Return true if the **Predicate** returns *false* for all elements of the collect
 
 Return true if the **Predicate2** returns *false* for all elements of the collection or if the collection is empty. Otherwise, return *false*.
 
-### []()ForEach pattern
+### []() ForEach pattern
 
 Perform a calculation on each element of the current collection.
 
@@ -750,7 +808,7 @@ for (int i = 0; i < list.size(); i++)
 }
 ```
 
-#### []()Each / ForEach methods
+#### []() Each / ForEach methods
 
 ##### each(Procedure): void
 
@@ -780,7 +838,7 @@ Iterates over a collection passing each element and the current relative int ind
 
 Iterates over the section of the list covered by the specified indexes (inclusive).
 
-### []()InjectInto pattern
+### []() InjectInto pattern
 
 Calculate and maintain a *running value* during iteration; use each evaluated result as an argument in the next iteration.
 
@@ -840,7 +898,7 @@ for (int i = 0; i < list.size(); i++)
 }
 ```
 
-#### []()InjectInto methods
+#### []() InjectInto methods
 
 ##### injectInto(*injectedValue*, Function2): *(final result)*
 
@@ -862,7 +920,7 @@ Return the final result of all evaluations using as the arguments each element o
 
 Return the final result of all evaluations using as the arguments each element of the collection, and the result of the previous iteration's evaluation. The injected value and result are both primitive doubles.
 
-[]()RichIterable
+[]() RichIterable
 ----------------
 
 [**RichIterable**](http://www.eclipse.org/collections/javadoc/8.0.0/org/eclipse/collections/api/RichIterable.html) is the most important interface in Eclipse Collections. It provides the blueprint for all non-mutating iteration patterns. It represents an object made up of elements that can be individually and consecutively viewed or evaluated (an *iterable*), and it prescribes the actions that can be performed with each evaluation (the patterns). The most commonly used implementations include [**FastList**](http://www.eclipse.org/collections/javadoc/8.0.0/org/eclipse/collections/impl/list/mutable/FastList.html) and [**UnifiedSet**](http://www.eclipse.org/collections/javadoc/8.0.0/org/eclipse/collections/impl/set/mutable/UnifiedSet.html).
@@ -873,7 +931,7 @@ Return the final result of all evaluations using as the arguments each element o
 
 The subinterface [**LazyIterable**](#lazy-iteration "Deferring evaluation until necessary.") for the most part replicates **RichIterable**, but overrides some specific collection-returning methods - **collect**, **collectIf**, **select**, **reject**, and **flatCollect** - so that they delay their actual execution until the returned collection is needed, a technique called "lazy iteration."
 
-### []()Lazy iteration
+### []() Lazy iteration
 
 > Deferring evaluation until necessary.
 
@@ -966,7 +1024,7 @@ An unmodifiable view of each key's values, without the key.
 
 ------------------------------------------------------------------------
 
-### []()Parallel-lazy iteration
+### []() Parallel-lazy iteration
 
 An API that combines parallel iteration with lazy evaluation.
 
@@ -1000,19 +1058,19 @@ The two parameters to **asParallel(ExecutorService** *executorService*, **int** 
 | *executorService* | This code example set up a thread pool with one thread per core, which is appropriate for CPU bound tasks. A thread pool used for IO bound tasks should be infinite or should have one thread per IO-bound resource, for example, one thread per database connection. It often makes sense to share thread pools between multiple calls to **asParallel**. |
 | *batchSize*       | The batch size determines the number of elements from the backing collection (**FastList** or **UnifiedSet**) that get processed by each task submitted to the thread pool. Appropriate batch sizes for CPU-bound tasks are usually larger, in the 10,000 to 100,000 range.                                                                                |
 
-#### []()Performance
+#### []() Performance
 
 As with lazy evaluation, there is no guarantee that using parallel-lazy evaluation will yield better performance than simple serial-eager evaluation. Performance testing is required, using an appropriate thread pool and trying various batch sizes.
 
-#### []()Cancelability
+#### []() Cancelability
 
 It's possible to cancel a parallel-lazy computation in progress. It requires a thread pool that can be shut down, which means it usually won't be a thread pool shared between multiple computations. Cancelling also requires a runnable thread with access to the thread pool. Building on the previous example, we just need to change **evenStrings**.**toList()** to execute in a background thread. Then the main thread could call **threadPool.shutdownNow()** which would cause **toList()** to terminate relatively quickly by throwing an exception. Shutting down the thread pool won't stop any batches in progress. However, no new batches will be started.
 
-### []()RichIterable methods
+### []() RichIterable methods
 
 These methods are available on all implementations of [**RichIterable**](http://www.eclipse.org/collections/javadoc/8.0.0/org/eclipse/collections/api/RichIterable.html).
 
-#### []()Building strings
+#### []() Building strings
 
 Methods that convert collection elements to a string that can be appended to a stream or buffer.
 
@@ -1085,7 +1143,7 @@ Appendable myStringBuilder = new StringBuilder();
 list.appendString(myStringBuilder, "[", "/", "]"); //"[1/2/3]");
 ```
 
-#### []()Counting elements
+#### []() Counting elements
 
 Get the total number of elements that satisfy a condition.
 
@@ -1142,7 +1200,7 @@ Returns *true* if this iterable has zero items.
 
 Returns *true* if this iterable has greater than zero items.
 
-#### []()Finding elements
+#### []() Finding elements
 
 Locate elements by iteration position or highest/lowest value.
 
@@ -1254,7 +1312,7 @@ people.minBy(Person::getAge);
 people.min(Comparators.byFunction(Person::getAge));
 ```
 
-#### []()Aggregating elements
+#### []() Aggregating elements
 
 Methods that create maps of aggregated values by grouping them on a calculated key.
 
@@ -1363,7 +1421,7 @@ Assert.assertEquals(4, aggregation.get(0).intValue());
 Assert.assertEquals(6, aggregation.get(1).intValue());
 ```
 
-#### []()Using chunk and zip to create collections
+#### []() Using chunk and zip to create collections
 
 Grouping and pairing elements of one or more collections.
 
@@ -1552,7 +1610,7 @@ MutableList<Person> drinkers = people.selectWith(Person::isOlderThan, 21);
 
 This style encourages adding more behavior to the classes held in the containers. This style works with any "**...With**" method in Java 8 or higher.
 
-[]()Map iteration methods
+[]() Map iteration methods
 -------------------------
 
 Methods for iterating over Maps and Multimaps.
@@ -1561,7 +1619,7 @@ The [**MapIterable**](http://www.eclipse.org/collections/javadoc/8.0.0/org/eclip
 
 The **Multimap** interface does not extend MapIterable. **Multimap** has a number of subinterfaces, such as [**ListMultimap**](http://www.eclipse.org/collections/javadoc/8.0.0/org/eclipse/collections/api/multimap/list/ListMultimap.html), [**SetMultimap**](http://www.eclipse.org/collections/javadoc/8.0.0/org/eclipse/collections/api/multimap/set/SetMultimap.html), and [**BagMultimap**](http://www.eclipse.org/collections/javadoc/8.0.0/org/eclipse/collections/api/multimap/bag/BagMultimap.html), each with custom behavior for how to handle the collection of values associated with each key.
 
-### []()Creating iterable views of maps
+### []() Creating iterable views of maps
 
 Wrapper classes that return an iterable view of a map; ForEach patterns for Map containers.
 
@@ -1579,7 +1637,7 @@ These three methods each return an unmodifiable RichIterable view of a Map. They
 
 *(Maps only)* Returns an unmodifiable lazy iterable of key/value pairs.
 
-#### []()ForEach Iteration
+#### []() ForEach Iteration
 
 These three methods call a code block for each element on a Map (all return void).
 
@@ -1595,7 +1653,7 @@ Calls the **Procedure** on each value of the Map.
 
 Calls the **Procedure** on each key-value pair of the Map.
 
-### []()Collecting entries
+### []() Collecting entries
 
 Gather entries from another collection into a Map
 
@@ -1605,7 +1663,7 @@ Use the **collectKeysAndValues** method to add all the entries derived from anot
 
 *(Mutable maps only)* The key and value for each entry is determined by applying the *keyFunction* and *valueFunction* (in each case, a **Function**) to each item in *collection*. Each is converted into a key-value entry and inserted into the Map. If a new entry has the same key as an existing entry in the calling map, the new entry's value replaces that of the existing entry.
 
-### []()Finding, testing and putting values
+### []() Finding, testing and putting values
 
 Detect a value by its key and, optionally, insert or return other values.
 
@@ -1647,7 +1705,7 @@ Returns the value in the Map that corresponds to the specified *key*; if there i
 
 If there is a value in the Map that corresponds to the specified *key*, returns the result of evaluating the specified **Function** with the value, otherwise returns null.
 
-### []()Flipping maps
+### []() Flipping maps
 
 Return a new associative array where the position of the keys and values have been flipped
 
@@ -1659,14 +1717,14 @@ Since the values in the **MapIterable** are not necessarily unique, **flip()** r
 
 Similar to **MapIterable**.**flip()** but asserts that the values in the **MapIterable** are unique and thus returns **MapIterable** instead of **Multimap**. Throws **IllegalArgumentException** if the **MapIterable** contains duplicate values.
 
-[]()Collections and containers
+[]() Collections and containers
 ==============================
 
 What is perhaps most distinctive about the Eclipse Collections collection classes is what (quite properly) is hidden: their implementation of iteration patterns. Through this encapsulation, Eclipse Collections is able to provide optimized versions of each method on each container. For example, the first of the classes we'll discuss here, **FastList**, is array-based; it iterates using indexed access directly against its internal array.
 
 We'll begin with the Eclipse Collections implementations of types having analogs in the Java Collections Framework (JCF). We'll then discuss the new types **Bag** and **Multimap**, the Immutable collections, and protective wrappers.
 
-[]()Basic collection types
+[]() Basic collection types
 --------------------------
 
 The most commonly-used Eclipse Collections classes are [**FastList**](http://www.eclipse.org/collections/javadoc/8.0.0/org/eclipse/collections/impl/list/mutable/FastList.html), [**UnifiedSet**](http://www.eclipse.org/collections/javadoc/8.0.0/org/eclipse/collections/impl/set/mutable/UnifiedSet.html), and [**UnifiedMap**](http://www.eclipse.org/collections/javadoc/8.0.0/org/eclipse/collections/impl/map/mutable/UnifiedMap.html). These collections serve as drop-in replacements for their corresponding types in the Java Collections Framework (JCF). Note that these Eclipse Collections classes do not extend the JCF implementations; they are instead new implementations of both JCF and Eclipse Collections interfaces, as this (highly-simplified) diagram summarizes:
@@ -1675,7 +1733,7 @@ The most commonly-used Eclipse Collections classes are [**FastList**](http://www
 
 The methods of the JCF types are primarily focused on adding or removing elements and similar, non-iterative operations. Eclipse Collections interfaces provide methods for iteration patterns that for the most part, do not modify (mutate) the source collection, but rather return a new collection or information about the source collection.
 
-### []()ListIterable
+### []() ListIterable
 
 > An ordered collection that allows duplicate elements.
 
@@ -1685,7 +1743,7 @@ A **ListIterable** is a **RichIterable** which maintains its elements in inserti
 
 The **ListIterable** interface includes the **binarySearch** method, which is similar to the static method **binarySearch** on **java.util.Collections**, but available from the object-oriented API.
 
-#### []()MutableList
+#### []() MutableList
 
 > A mutable **ListIterable** that implements java.util.List; the most common implementation is **FastList**.
 
@@ -1828,7 +1886,7 @@ MutableList<String> stringsList = strings.toList();
  Assert.assertEquals(FastList.newListWith("3", "2", "1"), stringsList);
 ```
 
-#### []()Migrating ArrayList to FastList
+#### []() Migrating ArrayList to FastList
 
 Here are some additional JCF to Eclipse Collections refactoring examples.
 
@@ -1914,7 +1972,7 @@ MutableList<Integer> integers =
 
 These refactorings are analogous for **UnifiedSet** and **UnifiedMap**.
 
-### []()SetIterable
+### []() SetIterable
 
 > A collection that allows no duplicate elements.
 
@@ -1925,7 +1983,7 @@ A **SetIterable** is a **RichIterable** that allows no duplicate elements. It ca
 
 **UnsortedSetIterable** has two mutable subinterfaces (**MutableSet** and **FixedSizeSet**) and one [immutable](#immutable-collections "A read-only snapshot of a collection; once created, it can never be modified.") subinterface (**ImmutableSet**).
 
-#### []()MutableSet
+#### []() MutableSet
 
 > A mutable **SetIterable** that implements **java.util.Set**; the most common implementation is **UnifiedSet**.
 
@@ -1949,7 +2007,7 @@ comparison.add("Comcast");
 Set<String> comparison = UnifiedSet.newSetWith("IBM", "Microsoft", "Verizon", "Comcast");
 ```
 
-#### []()MutableSortedSet
+#### []() MutableSortedSet
 
 > Contains unique items that are sorted by some comparator or their natural ordering.
 
@@ -1966,7 +2024,7 @@ MutableSortedSet<Integer> sortedSetB =
     TreeSortedSet.newSet(sortedSetA.with(1).with(2, 3).with(4, 5, 6));
 ```
 
-### []()MapIterable
+### []() MapIterable
 
 > A collection of key/value pairs.
 
@@ -1974,7 +2032,7 @@ The **MapIterable** interface (extending **RichIterable**) is the top-level inte
 
 **MapIterable** has two mutable subinterfaces (**MutableMap** and **FixedSizeMap**), one [immutable](#immutable-collections "A read-only snapshot of a collection; once created, it can never be modified.") subinterface (**ImmutableMap**). It is also is extended in mutable and immutable versions of maps with sorted elements (**SortedMapIterable**) and maps that allow lookup keys by (unique) values as well as the reverse (**BiMap**).
 
-#### []()MutableMap
+#### []() MutableMap
 
 > A mutable **MapIterable** that implements java.util.Map; the most common implementation is **UnifiedMap**.
 
@@ -1997,7 +2055,7 @@ map.put(3, "3");
 MutableMap<Integer, String> map = UnifiedMap.newWithKeysValues(1, "1", 2, "2", 3, "3");
 ```
 
-#### []()MutableSortedMap
+#### []() MutableSortedMap
 
 > A sorted Map.
 
@@ -2012,7 +2070,7 @@ MutableSortedMap<String, Integer> sortedMap = TreeSortedMap.newMapWith(Comparato
                 "1", 1, "2", 3, "3", 2, "4", 1);
 ```
 
-#### []()BiMap
+### []() BiMap
 
 > A map that allows users to add key-value pairs and look up from either direction
 
@@ -2068,7 +2126,7 @@ Assert.assertTrue(inverse.containsKey("3"));
 Assert.assertEquals(Integer.valueOf(2), inverse.put("2", 4));
 ```
 
-### []()Bag
+### []() Bag
 
 > An unordered collection that allows duplicates.
 
@@ -2121,7 +2179,7 @@ The distinctive methods on **Bag** are:
 | **forEachWithOccurrences** | For each distinct item, with the number of occurrences, executes the specified procedure. |
 | **toMapOfItemToCount**     | Returns a map with the item type to its count as an Integer.                              |
 
-#### []()MutableBag
+#### []() MutableBag
 
 > A mutable unordered collection allowing duplicates; the most common implementation is [**HashBag**](http://www.eclipse.org/collections/javadoc/8.0.0/org/eclipse/collections/impl/bag/mutable/HashBag.html).
 
@@ -2145,7 +2203,7 @@ The distinctive methods on **MutableBag** are:
 | **removeOccurrences(**Object item, int occurrences**)** | Decrements the count of the item in the bag by a count specified by occurrences. |
 | **setOccurrences(**T item, int occurrences**)**         | Mutates the bag to contain the specified number of occurrences of the item.      |
 
-#### []()MutableSortedBag
+#### []() MutableSortedBag
 
 > A sorted collection that allows duplicates.
 
@@ -2165,7 +2223,7 @@ MutableSortedBag<Integer> revIntegers =
     SortedBags.mutable.with(Collections.reverseOrder(), 4, 3, 3, 2, 2, 2, 1, 1);
 ```
 
-### []()StackIterable
+### []() StackIterable
 
 > A collection that maintains "last-in, first-out" order, iterating over elements in reverse insertion order.
 
@@ -2173,7 +2231,7 @@ A [**StackIterable**](http://www.eclipse.org/collections/javadoc/8.0.0/org/eclip
 
 **StackIterable** has a mutable and an [immutable](#immutable-collections "A read-only snapshot of a collection; once created, it can never be modified.") subinterface [**MutableStack**](http://www.eclipse.org/collections/javadoc/8.0.0/org/eclipse/collections/api/stack/MutableStack.html) and [**ImmutableStack**](http://www.eclipse.org/collections/javadoc/8.0.0/org/eclipse/collections/api/stack/ImmutableStack.html), respectively.
 
-#### []()MutableStack
+#### []() MutableStack
 
 > A mutable collection that maintains "last-in, first-out" order, iterating over elements in reverse insertion order.
 
@@ -2213,7 +2271,7 @@ MutableStack mutableStack =
     Stacks.mutable.with(1, 2, 3);
 ```
 
-### []()Multimap
+### []() Multimap
 
 > A map-like container that can have multiple values for each key
 
@@ -2291,7 +2349,7 @@ MutableSetMultimap<Integer, String> multimap =
 **Related links**
 [groupBy()](#groupby-pattern "Create a Multimap from a collection by grouping on a selected or generated key value.")
 
-[]()Primitive collections
+[]() Primitive collections
 -------------------------
 
 > Containers for iterating over collections of Java primitives.
@@ -2308,7 +2366,7 @@ The interface hierarchies for primitive types correspond closely with the interf
 | **IntList**              | **ListIterable**      |
 | **MutableIntList**       | **MutableList**       |
 
-### **Primitive Lists**
+### Primitive Lists
 
 The primitive list implementations are backed by an array like **FastList**, but with a primitive array instead of an **Object\[\]**. They are named [**IntArrayList**](http://www.eclipse.org/collections/javadoc/8.0.0/org/eclipse/collections/impl/list/mutable/primitive/IntArrayList.html), [**FloatArrayList**](http://www.eclipse.org/collections/javadoc/8.0.0/org/eclipse/collections/impl/list/mutable/primitive/FloatArrayList.html) etc.
 
@@ -2323,7 +2381,7 @@ IntArrayList alternate = IntLists.mutable.with(1, 2, 3);
 IntArrayList listFromIntIterable = IntArrayList.newListWith(IntHashSet.newSetWith(1, 2, 3));              
 ```
 
-#### **IntInterval**
+### IntInterval
 
 An **IntInterval** is a range of **int**s that may be iterated over using a step value. (Similar to **Interval**, but uses primitive ints instead of the wrapper **Integers**.)
 
@@ -2332,19 +2390,19 @@ Assert.assertEquals(IntLists.mutable.with(1, 2, 3), IntInterval.oneTo(3));
 Assert.assertEquals(IntLists.mutable.with(1, 3, 5), IntInterval.oneToBy(5, 2));             
 ```
 
-#### **Primitive Sets**
+### Primitive Sets
 
 The primitive set implementations are hash-table backed. They are named [**IntHashSet**](http://www.eclipse.org/collections/javadoc/8.0.0/org/eclipse/collections/impl/set/mutable/primitive/IntHashSet.html), [**FloatHashSet**](http://www.eclipse.org/collections/javadoc/8.0.0/org/eclipse/collections/impl/set/mutable/primitive/FloatHashSet.html) etc. [**BooleanHashSet**](http://www.eclipse.org/collections/javadoc/8.0.0/org/eclipse/collections/impl/set/mutable/primitive/BooleanHashSet.html) is implemented using a single integer to hold one of four possible states: (\[\], \[F\], \[T\], or \[T, F\]). All other sets use open addressing and quadratic probing.
 
-#### **Primitive Stacks**
+### Primitive Stacks
 
 Similar to **ArrayStack** but optimized for primitives.
 
-#### **Primitive Bags**
+### Primitive Bags
 
 Similar to **HashBag**, but both item and count are primitives.
 
-#### **Primitive Maps**
+### Primitive Maps
 
 There are three types of primitive maps:
 
@@ -2385,7 +2443,7 @@ Assert.assertEquals(ByteIntHashMap.newWithKeysValues((byte) 0, 11), map);
 
 All primitive collections have immutable counterparts, and unmodifiable and synchronized wrappers. See the [Protecting collections](#protective-wrappers) topic for more information.
 
-[]()Immutable collections
+[]() Immutable collections
 -------------------------
 
 > A read-only snapshot of a collection; once created, it can never be modified.
@@ -2450,7 +2508,7 @@ Returns a new immutable copy of **ImmutableCollection** with the elements of **I
 
 Note that the iteration methods of an immutable container - such as **select**, **reject**, and **collect** - also produce new immutable collections.
 
-### []()Immutable Collection Factory Classes
+### []() Immutable Collection Factory Classes
 
 The factory classes **Lists**, **Sets**, **Bags**, and **Maps** create immutable collections. These factories also provide methods for creating fixed-size collections, which have been superseded by immutable collections.
 
@@ -2466,12 +2524,12 @@ ImmutableMap<Integer, String> immutableMap =
 
 These factories highlight yet another benefit of immutable collections: they let you create efficient containers that are sized according to their contents. In cases where there are many, even millions of collections, each with a size less than 10, this is an important advantage.
 
-[]()Creating collections containers
+[]() Creating collections containers
 -----------------------------------
 
 Eclipse Collections has many **iteration methods** that return new collection containers from existing ones. These include the **select** and **collect** methods, along with their specialized variants, such as **partition** and **groupBy**. There are also multiple ways to instantiate new containers, from scratch or **by conversion** from other container types.
 
-### []()To create mutable collections
+### []() Creating mutable collections
 
 If you know the implementation class of the container (for example, **FastList** or **UnifiedSet**), you can use either of these two techniques:
 
@@ -2515,7 +2573,7 @@ You can also create a mutable container from a instance of the same type:
 
 Creates a new, empty, and mutable container of the same collection type. For example, if this instance is a **FastList**, this method will return a new empty **FastList**. If the class of this instance is **immutable** or fixed size (for example, a singleton **List**) then a mutable alternative to the class is returned.
 
-### []()To create immutable collections
+### []() Creating immutable collections
 
 There are two ways to create an immutable **List**, **Set**, **Bag**, **Stack** or **Map**.
 
@@ -2533,7 +2591,7 @@ ImmutableList<String> list_c =
     Lists.immutable.of("a", "b", "c");  // creates a list of elements a,b,c
 ```
 
-### []()To create primitive collections
+### []() Creating primitive collections
 
 The techniques for creating mutable or immutable primitive containers are the same as those for object collections.
 
@@ -2595,12 +2653,12 @@ Converts the collection to the default **MutableList** implementation (**FastLis
 
 These methods always return new *mutable* copies: for example, calling **toList** on a **FastList**, returns a new **FastList**.
 
-[]()Protective wrappers
+[]() Protective wrappers
 -----------------------
 
 > Wrapper classes providing read-only or thread-safe views of a collection.
 
-### []()Unmodifiable Collections
+### []() Unmodifiable Collections
 
 In both the JCF and Eclipse Collections, a collection may be rendered *unmodifiable*. In Eclipse Collections, this is done by means of the **asUnmodifiable** method, which returns a read-only view of the calling collection. This means that the mutating methods of the collection (e.g., **add**, **remove**) are still present, but throw exceptions if called.
 
@@ -2612,7 +2670,7 @@ Returns a read-only view of the source collection.
 
 Returns a read-only view of the source primitive collection. There are similar methods for each primitive type (**MutableFloatCollection**.**asUnmodifiable()** etc.)
 
-### []()Synchronized Collections
+### []() Synchronized Collections
 
 Eclipse Collections provides a wrapper for rendering a modifiable but thread-safe view that holds a lock when a method is called and releases the lock upon completion.
 
@@ -2624,8 +2682,8 @@ Returns a synchronized copy of the source collection.
 
 Returns a synchronized copy of the source primitive collection. There are similar methods for each primitive type (**MutableFloatCollection**.**asSynchronized()** etc.)
 
-[]()Code blocks
-===============
+[]() Code blocks
+----------------
 
 A *code block*, in Eclipse Collections terms, is a single-abstract-method object that is passed as a parameter to an iteration method. It is an abstraction that represents the evaluation of each element in the course of iteration. It helps us to further separate *what* is being done from *how* it is done. This topic enumerates the basic code block types - the Eclipse Collections interfaces and classes - and the relevant methods to which they apply.
 
@@ -2659,12 +2717,12 @@ In each case, if the value of *state* field for any element in **people** equals
 
 This chapter introduces the most commonly-used code blocks and the Eclipse Collections methods that use them. Along with the code block types described here, the current version of Eclipse Collections offers a full suite of primitive code blocks (and corresponding code block factories like [**IntFunction**](http://www.eclipse.org/collections/javadoc/8.0.0/org/eclipse/collections/api/block/function/primitive/IntFunction.html), [**IntPredicate**](http://www.eclipse.org/collections/javadoc/8.0.0/org/eclipse/collections/api/block/predicate/primitive/IntPredicate.html), [**IntProcedure**](http://www.eclipse.org/collections/javadoc/8.0.0/org/eclipse/collections/api/block/procedure/primitive/IntProcedure.html) etc.) These code blocks are used by methods on primitive collections.
 
-##### []()About *parameter* and *argument*:
+##### []() About *parameter* and *argument*:
 
 These terms are often (if inaccurately) used interchangeably to refer to method or function inputs. (The usual distinction holds that *parameter* refers to a formal definition of the input, while argument denotes the actual values.) For the limited purposes of this guide - and in particular the scope of this topic - we use *parameter* to specify the input to an iteration method - in this example, **select**. These parameters can take the form of the code block (as described in this topic), which itself is an object with methods. The input for a code block we refer to here as the *argument* - in this example, the argument is **each** (the "current element" upon each iteration).
 
-[]()Predicate
--------------
+[]() Predicate
+--------------
 
 A **Predicate** is a single-argument code block that evaluates an element and returns a boolean value. Also known as a *discriminator* or *filter,* it is used with the filtering methods **select**, **reject**, **detect**, **anySatisfy**, **allSatisfy**, and **count**.
 
@@ -2721,8 +2779,8 @@ Supports isEven, isOdd, isPositive, isNegative, isZero.
 
 Supports isEven, isOdd, isPositive, isNegative, isZero.
 
-[]()Function
-------------
+[]() Function
+-------------
 
 The **Function** code block in its most common usage takes each element of a collection as the argument to the code-block logic. It selects an attribute from the element via a "getter" €“ its **valueOf** method. It then returns a computed value or, if no evaluation logic is performed, the attribute itself.
 
@@ -2781,19 +2839,19 @@ Supports if and else using a discriminator with Function.
 
 This allows for multi-conditional or rule based selector using **Predicate**s (use this with guidance).
 
-[]()Procedure
+[]() Procedure
 -------------
 
 A **Procedure** is a code block that performs an evaluation on its single argument and returns nothing. A **Procedure** is most commonly used with *ForEach* -pattern methods.
 
-### []()Count and calculate
+### []() Count and calculate
 
 |                      |                                                                               |
 |----------------------|-------------------------------------------------------------------------------|
 | **CountProcedure**   | Apply a **Predicate** to an object and increment a count if it returns true.  |
 | **CounterProcedure** | Wrap a specified block and keeps track of the number of times it is executed. |
 
-### []()Control execution
+### []() Control execution
 
 |                        |                                                                                                                                                                                                                                                                                              |
 |------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -2803,7 +2861,7 @@ A **Procedure** is a code block that performs an evaluation on its single argume
 | **IfProcedureWith**    | Same as **IfProcedure**, but with a second argument passed from the calling iteration method.                                                                                                                                                                                                |
 | **ObjectIntProcedure** | Takes an int as a second argument; this is usually the index of the current element of a collection.                                                                                                                                                                                         |
 
-### []()Modify collections and maps
+### []() Modify collections and maps
 
 |                               |                                                                                                                                                   |
 |-------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -2829,12 +2887,12 @@ A **Procedure** is a code block that performs an evaluation on its single argume
 |---------------------|-------------------|
 | **addToCollection** | **fromProcedure** |
 
-[]()Help
+[]() Help
 ========
 
 Additional reference pages.
 
-[]()Verify
+[]() Verify
 ----------
 
 A testing utility.
@@ -2856,41 +2914,6 @@ Verify.assertEmpty(Lists.mutable.empty());
 Verify.assertNotEmpty(Lists.mutable.with(1));
 Verify.assertContains(1, Lists.mutable.with(1));
 ```
-
-[]()Q & A
----------
-
-Here are some of the most commonly asked questions and answers regarding Eclipse Collections.
-
-#### **Why Eclipse Collections?**
-
--   Improves readability and reduces duplication of iteration code (enforces DRY/OAOO).
--   Implements several high-level iteration patterns (select, reject, collect, inject into, etc.) on "humane" container interfaces which are extensions of the JDK interface.
--   Provides a consistent mechanism for iterating over Collections, Arrays, Maps, and Strings.
--   Provides replacements for ArrayList, HashSet, and HashMap optimized for performance and memory usage.
--   Performs more "behind-the-scene" optimizations in utility classes.
--   Encapsulates a lot of the structural complexity of parallel iteration and lazy evaluation.
--   Adds new containers including Bag, Interval, Multimap, and immutable versions of all types.
--   Has been under active development since 2005 and is a mature library.
-
-#### **Why is Goldman Sachs open-sourcing Eclipse Collections?**
-
--   We believe that Eclipse Collections offers a significant advantage over existing solutions. We hope others will benefit from it.
--   We believe in the power of the technical community to help improve Eclipse Collections.
--   Technology is a huge part of what we do at Goldman Sachs. Eclipse Collections exemplifies our commitment to technology.
--   We use open source software in many of our operations. We have benefited from the work of others and we'd like to give something back.
-
-#### **Does Goldman Sachs use Eclipse Collections?**
-
-Yes, we use Eclipse Collections in many of our internal applications.
-
-#### **What makes Eclipse Collections different from other, similar frameworks?**
-
-The most obvious distinction for Java developers is the placement of collection-related iteration methods on the container class itself. This means we can implement methods that are common to all container types, and optimize them - in terms of memory and processor use - specifically for each type. The resulting code is easier (for humans) to read and understand.
-
-#### **When can I start using Java 8 lambdas and method references with Eclipse Collections?**
-
-Eclipse Collections is Java 8 ready today! All of our iteration patterns are able to fully function as seen in the code examples of the reference guide.
 
 []() Eclipse Collections Cheat Sheet
 ------------------------------------
@@ -2963,5 +2986,3 @@ Eclipse Collections is Java 8 ready today! All of our iteration patterns are abl
 | **ParallelIterate**        | Iterables for parallel iteration  |
 | **ParallelMapIterate**     | Maps for parallel iteration       |
 | **StringIterate**          | strings                           |
-
-
