@@ -11,6 +11,7 @@
 package org.eclipse.collections.impl.utility.internal;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.DoubleSummaryStatistics;
@@ -450,6 +451,14 @@ public final class InternalArrayIterate
             Function<? super T, ? extends V> function,
             R target)
     {
+        if (target instanceof FastList)
+        {
+            ((FastList) target).ensureCapacity(target.size() + size);
+        }
+        else if (target instanceof ArrayList)
+        {
+            ((ArrayList) target).ensureCapacity(target.size() + size);
+        }
         for (int i = 0; i < size; i++)
         {
             target.add(function.valueOf(array[i]));
@@ -475,13 +484,21 @@ public final class InternalArrayIterate
             int size,
             Function2<? super T, ? super P, ? extends V> function,
             P parameter,
-            R targetCollection)
+            R target)
     {
+        if (target instanceof FastList)
+        {
+            ((FastList) target).ensureCapacity(target.size() + size);
+        }
+        else if (target instanceof ArrayList)
+        {
+            ((ArrayList) target).ensureCapacity(target.size() + size);
+        }
         for (int i = 0; i < size; i++)
         {
-            targetCollection.add(function.value(array[i], parameter));
+            target.add(function.value(array[i], parameter));
         }
-        return targetCollection;
+        return target;
     }
 
     public static <T, V, R extends Collection<V>> R collectIf(
