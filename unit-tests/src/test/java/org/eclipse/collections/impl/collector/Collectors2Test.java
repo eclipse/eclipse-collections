@@ -1113,6 +1113,7 @@ public final class Collectors2Test
                 this.bigData.parallelStream().collect(Collectors2.toImmutableBagMultimap(Object::toString, Object::toString)));
     }
 
+    /*
     @Test
     public void chunk()
     {
@@ -1155,14 +1156,13 @@ public final class Collectors2Test
                 integers3.stream().collect(Collectors2.zip(integers1)));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void zipParallel()
     {
         MutableList<Integer> integers1 = Interval.oneTo(10).toList();
         MutableList<Integer> integers2 = Interval.oneTo(10).toList().toReversed();
-        Assert.assertEquals(
-                integers1.zip(integers2),
-                integers1.parallelStream().collect(Collectors2.zip(integers2)));
+
+        Verify.assertThrows(UnsupportedOperationException.class, () -> integers1.parallelStream().collect(Collectors2.zip(integers2)));
     }
 
     @Test
@@ -1174,13 +1174,11 @@ public final class Collectors2Test
                 integers1.stream().collect(Collectors2.zipWithIndex()));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void zipWithIndexParallel()
     {
         MutableList<Integer> integers1 = Interval.oneTo(10).toList();
-        Assert.assertEquals(
-                integers1.zipWithIndex().collect(each -> PrimitiveTuples.pair(each.getOne(), each.getTwo().intValue())),
-                integers1.parallelStream().collect(Collectors2.zipWithIndex()));
+        Verify.assertThrows(UnsupportedOperationException.class, () -> integers1.parallelStream().collect(Collectors2.zipWithIndex()));
     }
 
     @Test
@@ -1513,7 +1511,7 @@ public final class Collectors2Test
         Assert.assertEquals(expectedBag.getSelected(), actualBag.getSelected());
         Assert.assertEquals(expectedBag.getRejected(), actualBag.getRejected());
     }
-
+*/
     @Test
     public void collect()
     {

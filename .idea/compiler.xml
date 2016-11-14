@@ -33,6 +33,7 @@
         <module name="performance-tests" />
         <module name="scala-unit-tests" />
         <module name="serialization-tests" />
+        <module name="test-coverage" />
         <module name="unit-tests" />
         <module name="unit-tests-java8" />
       </profile>
@@ -53,6 +54,7 @@
       <module name="performance-tests" target="1.8" />
       <module name="scala-unit-tests" target="1.8" />
       <module name="serialization-tests" target="1.8" />
+      <module name="test-coverage" target="1.8" />
       <module name="unit-tests" target="1.8" />
       <module name="unit-tests-java8" target="1.8" />
     </bytecodeTargetLevel>
