@@ -132,6 +132,8 @@
         <maven.compiler.meminitial>2048m</maven.compiler.meminitial>
         <maven.compiler.maxmem>2048m</maven.compiler.maxmem>
 
+        <argLine></argLine>
+
         <!--Sonar settings-->
         <sonar.language>java</sonar.language>
         <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
@@ -348,7 +350,7 @@
                         <includes>
                             <include>**/*Test.java</include>
                         </includes>
-                        <argLine>-XX:-OmitStackTraceInFastThrow -Xms1024m -Xmx2048m</argLine>
+                        <argLine>-XX:-OmitStackTraceInFastThrow -Xms1024m -Xmx2048m @{argLine}</argLine>
                         <runOrder>random</runOrder>
                     </configuration>
                 </plugin>
