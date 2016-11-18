@@ -17,6 +17,7 @@
       <module fileurl="file://$PROJECT_DIR$/performance-tests/performance-tests.iml" filepath="$PROJECT_DIR$/performance-tests/performance-tests.iml" />
       <module fileurl="file://$PROJECT_DIR$/scala-unit-tests/scala-unit-tests.iml" filepath="$PROJECT_DIR$/scala-unit-tests/scala-unit-tests.iml" />
       <module fileurl="file://$PROJECT_DIR$/serialization-tests/serialization-tests.iml" filepath="$PROJECT_DIR$/serialization-tests/serialization-tests.iml" />
+      <module fileurl="file://$PROJECT_DIR$/test-coverage/test-coverage.iml" filepath="$PROJECT_DIR$/test-coverage/test-coverage.iml" />
       <module fileurl="file://$PROJECT_DIR$/unit-tests/unit-tests.iml" filepath="$PROJECT_DIR$/unit-tests/unit-tests.iml" />
       <module fileurl="file://$PROJECT_DIR$/unit-tests-java8/unit-tests-java8.iml" filepath="$PROJECT_DIR$/unit-tests-java8/unit-tests-java8.iml" />
     </modules>
