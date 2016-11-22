@@ -87,6 +87,7 @@ import org.eclipse.collections.impl.map.mutable.primitive.ObjectDoubleHashMap;
 import org.eclipse.collections.impl.map.mutable.primitive.ObjectLongHashMap;
 import org.eclipse.collections.impl.tuple.Tuples;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
+import org.eclipse.collections.impl.utility.Iterate;
 
 /**
  * <p>A set of Collectors for Eclipse Collections types and algorithms.</p>
@@ -1386,6 +1387,33 @@ public final class Collectors2
         return Collector.of(
                 supplier,
                 (collection, each) -> collection.add(function.valueOf(each)),
+                Collectors2.mergeCollections(),
+                EMPTY_CHARACTERISTICS);
+    }
+
+    /**
+     * The method {@code flatCollect} is a special case of {@link #collect(Function, Supplier)}. With {@code collect},
+     * when the {@link Function} returns a collection, the result is a collection of collections. {@code flatCollect} outputs
+     * a single "flattened" collection instead.  This method is commonly called flatMap.
+     * <p>Example:</p>
+     * <pre>{@code
+     * List<MutableList<String>> lists =
+     *     Lists.mutable.with(
+     *         Lists.mutable.with("a", "b"),
+     *         Lists.mutable.with("c", "d"),
+     *         Lists.mutable.with("e"));
+     *
+     * MutableList<String> flattened =
+     *     lists.stream().collect(Collectors2.flatCollect(l -> l, Lists.mutable::empty));
+     *
+     * Assert.assertEquals(Lists.mutable.with("a", "b", "c", "d", "e"), flattened);}</pre>
+     */
+    public static <T, V, R extends Collection<V>> Collector<T, ?, R> flatCollect(
+            Function<? super T, ? extends Iterable<V>> function, Supplier<R> supplier)
+    {
+        return Collector.of(
+                supplier,
+                (collection, each) -> Iterate.addAllTo(function.valueOf(each), collection),
                 Collectors2.mergeCollections(),
                 EMPTY_CHARACTERISTICS);
     }

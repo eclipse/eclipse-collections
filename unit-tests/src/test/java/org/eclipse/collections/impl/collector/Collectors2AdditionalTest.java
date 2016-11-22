@@ -40,6 +40,7 @@ import org.eclipse.collections.impl.factory.primitive.IntLists;
 import org.eclipse.collections.impl.factory.primitive.LongLists;
 import org.eclipse.collections.impl.factory.primitive.ShortLists;
 import org.eclipse.collections.impl.list.Interval;
+import org.eclipse.collections.impl.list.mutable.CompositeFastList;
 import org.eclipse.collections.impl.partition.bag.PartitionHashBag;
 import org.eclipse.collections.impl.partition.list.PartitionFastList;
 import org.eclipse.collections.impl.partition.set.PartitionUnifiedSet;
@@ -455,6 +456,58 @@ public class Collectors2AdditionalTest
         Assert.assertEquals(
                 LARGE_INTERVAL.toBag().collect(Functions.getToString()),
                 this.bigData.parallelStream().collect(Collectors2.collect(Functions.getToString(), Bags.mutable::empty)));
+    }
+
+    @Test
+    public void flatCollect()
+    {
+        MutableList<Interval> list = Lists.mutable.with(SMALL_INTERVAL, SMALL_INTERVAL, SMALL_INTERVAL);
+        Assert.assertEquals(
+                list.flatCollect(Functions.identity()),
+                list.stream().collect(Collectors2.flatCollect(Functions.identity(), Lists.mutable::empty))
+        );
+        Assert.assertEquals(
+                list.flatCollect(Functions.identity()),
+                list.stream().collect(Collectors2.flatCollect(Functions.identity(), CompositeFastList::new))
+        );
+        Assert.assertEquals(
+                list.toSet().flatCollect(Functions.identity()),
+                list.stream().collect(Collectors2.flatCollect(Functions.identity(), Sets.mutable::empty))
+        );
+        Assert.assertEquals(
+                list.toBag().flatCollect(Functions.identity()),
+                list.stream().collect(Collectors2.flatCollect(Functions.identity(), Bags.mutable::empty))
+        );
+        List<MutableList<String>> lists =
+                Lists.mutable.with(
+                        Lists.mutable.with("a", "b"),
+                        Lists.mutable.with("c", "d"),
+                        Lists.mutable.with("e"));
+        MutableList<String> flattened =
+                lists.stream().collect(Collectors2.flatCollect(l -> l, Lists.mutable::empty));
+        Assert.assertEquals(Lists.mutable.with("a", "b", "c", "d", "e"), flattened);
+    }
+
+    @Test
+    public void flatCollectParallel()
+    {
+        MutableList<Interval> list = Lists.mutable.withNValues(20000, () -> SMALL_INTERVAL);
+        Assert.assertEquals(
+                list.flatCollect(Functions.identity()),
+                list.parallelStream().collect(Collectors2.flatCollect(Functions.identity(), Lists.mutable::empty))
+        );
+        Assert.assertEquals(
+                list.flatCollect(Functions.identity()),
+                list.parallelStream().collect(Collectors2.flatCollect(Functions.identity(), CompositeFastList::new))
+        );
+        Assert.assertEquals(
+                list.toSet().flatCollect(Functions.identity()),
+                list.parallelStream().collect(Collectors2.flatCollect(Functions.identity(), Sets.mutable::empty))
+        );
+        Assert.assertEquals(
+                list.toBag().flatCollect(Functions.identity()),
+                list.parallelStream().collect(Collectors2.flatCollect(Functions.identity(), Bags.mutable::empty))
+        );
     }
 
     @Test
