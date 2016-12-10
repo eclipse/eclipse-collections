@@ -12,6 +12,8 @@ package org.eclipse.collections.impl.collector;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.list.primitive.BooleanList;
@@ -30,6 +32,7 @@ import org.eclipse.collections.impl.block.factory.IntegerPredicates;
 import org.eclipse.collections.impl.block.factory.Predicates2;
 import org.eclipse.collections.impl.factory.Bags;
 import org.eclipse.collections.impl.factory.Lists;
+import org.eclipse.collections.impl.factory.Maps;
 import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.factory.primitive.BooleanLists;
 import org.eclipse.collections.impl.factory.primitive.ByteLists;
@@ -702,5 +705,79 @@ public class Collectors2AdditionalTest
         DoubleList actual =
                 this.bigData.parallelStream().collect(Collectors2.collectDouble(each -> (double) each, DoubleLists.mutable::empty));
         Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void summarizeWithMaps()
+    {
+        SummaryStatistics<ValueHolder> summaryStatistics =
+                Lists.mutable.with(
+                        new ValueHolder(5, 100, 10.0),
+                        new ValueHolder(5, 100, 10.0),
+                        new ValueHolder(5, 100, 10.0))
+                        .stream()
+                        .collect(Collectors2.summarizing(
+                                Maps.mutable.with("int", ValueHolder::getIntValue),
+                                Maps.mutable.with("long", ValueHolder::getLongValue),
+                                Maps.mutable.with("double", ValueHolder::getDoubleValue)));
+        Assert.assertEquals(15, summaryStatistics.getIntStats("int").getSum());
+        Assert.assertEquals(300L, summaryStatistics.getLongStats("long").getSum());
+        Assert.assertEquals(30.0d, summaryStatistics.getDoubleStats("double").getSum(), 0.0);
+    }
+
+    @Test
+    public void summarizeWithLists()
+    {
+        SummaryStatistics<ValueHolder> summaryStatistics =
+                Lists.mutable.with(
+                        new ValueHolder(5, 100, 10.0),
+                        new ValueHolder(5, 100, 10.0),
+                        new ValueHolder(5, 100, 10.0))
+                        .stream()
+                        .collect(Collectors2.summarizing(
+                                Lists.mutable.with(ValueHolder::getIntValue),
+                                Lists.mutable.with(ValueHolder::getLongValue),
+                                Lists.mutable.with(ValueHolder::getDoubleValue)));
+        Assert.assertEquals(15, summaryStatistics.getIntStats("0").getSum());
+        Assert.assertEquals(300L, summaryStatistics.getLongStats("0").getSum());
+        Assert.assertEquals(30.0d, summaryStatistics.getDoubleStats("0").getSum(), 0.0);
+    }
+
+    @Test
+    public void summarizeDownstream()
+    {
+        Map<String, SummaryStatistics<ValueHolder>> map =
+                Lists.mutable.with(
+                        new ValueHolder("A",5, 100, 10.0),
+                        new ValueHolder("A",5, 100, 10.0),
+                        new ValueHolder("B",5, 100, 10.0))
+                        .stream()
+                        .collect(Collectors.groupingBy(ValueHolder::getGroupBy,
+                                Collectors2.summarizing(
+                                        Lists.mutable.with(ValueHolder::getIntValue),
+                                        Lists.mutable.with(ValueHolder::getLongValue),
+                                        Lists.mutable.with(ValueHolder::getDoubleValue))));
+        Assert.assertEquals(10, map.get("A").getIntStats("0").getSum());
+        Assert.assertEquals(5, map.get("B").getIntStats("0").getSum());
+        Assert.assertEquals(200L, map.get("A").getLongStats("0").getSum());
+        Assert.assertEquals(100L, map.get("B").getLongStats("0").getSum());
+        Assert.assertEquals(20.0d, map.get("A").getDoubleStats("0").getSum(), 0.0);
+        Assert.assertEquals(10.0d, map.get("B").getDoubleStats("0").getSum(), 0.0);
+    }
+
+    @Test
+    public void collectStatsParallel()
+    {
+        ValueHolder valueHolder = new ValueHolder(5, 100, 10.0);
+        SummaryStatistics<ValueHolder> summaryStatistics =
+                Lists.mutable.withNValues(25_000, () -> valueHolder)
+                        .parallelStream()
+                        .collect(Collectors2.summarizing(
+                                Maps.mutable.with("int", ValueHolder::getIntValue),
+                                Maps.mutable.with("long", ValueHolder::getLongValue),
+                                Maps.mutable.with("double", ValueHolder::getDoubleValue)));
+        Assert.assertEquals(125_000, summaryStatistics.getIntStats("int").getSum());
+        Assert.assertEquals(2_500_000L, summaryStatistics.getLongStats("long").getSum());
+        Assert.assertEquals(250000.0d, summaryStatistics.getDoubleStats("double").getSum(), 0.0);
     }
 }

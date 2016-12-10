@@ -13,6 +13,8 @@ package org.eclipse.collections.impl.collector;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 import java.util.StringJoiner;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.BinaryOperator;
@@ -1665,6 +1667,41 @@ public final class Collectors2
                     collection1.addAll(collection2);
                     return collection1;
                 },
+                EMPTY_CHARACTERISTICS);
+    }
+
+    /**
+     * Returns a SummaryStatistics with results for int, long and double functions calculated for
+     * each element in the Stream or Collection this Collector is applied to.  Three maps are
+     * passed in with the names and corresponding functions to apply.
+     */
+    public static <T> Collector<T, ?, SummaryStatistics<T>> summarizing(
+            Map<String, IntFunction<? super T>> intFunctions,
+            Map<String, LongFunction<? super T>> longFunctions,
+            Map<String, DoubleFunction<? super T>> doubleFunctions)
+    {
+        return Collector.of(
+                () -> new SummaryStatistics<>(intFunctions, longFunctions, doubleFunctions),
+                SummaryStatistics::value,
+                SummaryStatistics::merge,
+                EMPTY_CHARACTERISTICS);
+    }
+
+    /**
+     * Returns a SummaryStatistics with results for int, long and double functions calculated for
+     * each element in the Stream or Collection this Collector is applied to.  Three lists are
+     * passed in with the functions to apply.  Each function will be named according to the index
+     * in the List it is contained in.
+     */
+    public static <T> Collector<T, ?, SummaryStatistics<T>> summarizing(
+            List<IntFunction<? super T>> intFunctions,
+            List<LongFunction<? super T>> longFunctions,
+            List<DoubleFunction<? super T>> doubleFunctions)
+    {
+        return Collector.of(
+                () -> new SummaryStatistics<>(intFunctions, longFunctions, doubleFunctions),
+                SummaryStatistics::value,
+                SummaryStatistics::merge,
                 EMPTY_CHARACTERISTICS);
     }
 
