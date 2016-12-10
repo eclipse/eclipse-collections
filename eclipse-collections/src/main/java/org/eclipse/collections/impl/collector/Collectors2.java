@@ -13,6 +13,8 @@ package org.eclipse.collections.impl.collector;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 import java.util.StringJoiner;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.BinaryOperator;
@@ -88,6 +90,7 @@ import org.eclipse.collections.impl.map.mutable.primitive.ObjectLongHashMap;
 import org.eclipse.collections.impl.tuple.Tuples;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.eclipse.collections.impl.utility.Iterate;
+import org.eclipse.collections.impl.utility.ListIterate;
 
 /**
  * <p>A set of Collectors for Eclipse Collections types and algorithms.</p>
@@ -1666,6 +1669,22 @@ public final class Collectors2
                     return collection1;
                 },
                 EMPTY_CHARACTERISTICS);
+    }
+
+    /**
+     * Returns a SummaryStatistics with results for int, long and double functions calculated for
+     * each element in the Stream or Collection this Collector is applied to.
+     */
+    public static <T> Collector<T, ?, SummaryStatistics<T>> summarizing(
+            ImmutableList<IntFunction<? super T>> intFunctions,
+            ImmutableList<LongFunction<? super T>> longFunctions,
+            ImmutableList<DoubleFunction<? super T>> doubleFunctions)
+    {
+        SummaryStatistics<T> summaryStatistics = new SummaryStatistics<>();
+        intFunctions.forEachWithIndex((each, index) -> summaryStatistics.addIntFunction(Integer.valueOf(index), each));
+        longFunctions.forEachWithIndex((each, index) -> summaryStatistics.addLongFunction(Integer.valueOf(index), each));
+        doubleFunctions.forEachWithIndex((each, index) -> summaryStatistics.addDoubleFunction(Integer.valueOf(index), each));
+        return summaryStatistics.toCollector();
     }
 
     private static <T, R extends Collection<T>> BinaryOperator<R> mergeCollections()

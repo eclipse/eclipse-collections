@@ -11,8 +11,14 @@
 package org.eclipse.collections.impl.collector;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
+import org.eclipse.collections.api.block.function.primitive.DoubleFunction;
+import org.eclipse.collections.api.block.function.primitive.IntFunction;
+import org.eclipse.collections.api.block.function.primitive.LongFunction;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.list.primitive.BooleanList;
 import org.eclipse.collections.api.list.primitive.ByteList;
@@ -30,6 +36,7 @@ import org.eclipse.collections.impl.block.factory.IntegerPredicates;
 import org.eclipse.collections.impl.block.factory.Predicates2;
 import org.eclipse.collections.impl.factory.Bags;
 import org.eclipse.collections.impl.factory.Lists;
+import org.eclipse.collections.impl.factory.Maps;
 import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.factory.primitive.BooleanLists;
 import org.eclipse.collections.impl.factory.primitive.ByteLists;
@@ -628,7 +635,7 @@ public class Collectors2AdditionalTest
     public void collectInt()
     {
         IntList expected =
-                SMALL_INTERVAL.collectInt(each -> each, IntLists.mutable.empty());
+                SMALL_INTERVAL.collectInt(Integer::intValue, IntLists.mutable.empty());
         IntList actual =
                 this.smallData.stream().collect(Collectors2.collectInt(each -> each, IntLists.mutable::empty));
         Assert.assertEquals(expected, actual);
@@ -638,7 +645,7 @@ public class Collectors2AdditionalTest
     public void collectIntParallel()
     {
         IntList expected =
-                LARGE_INTERVAL.collectInt(each -> each, IntLists.mutable.empty());
+                LARGE_INTERVAL.collectInt(Integer::intValue, IntLists.mutable.empty());
         IntList actual =
                 this.bigData.parallelStream().collect(Collectors2.collectInt(each -> each, IntLists.mutable::empty));
         Assert.assertEquals(expected, actual);
@@ -648,7 +655,7 @@ public class Collectors2AdditionalTest
     public void collectFloat()
     {
         FloatList expected =
-                SMALL_INTERVAL.collectFloat(each -> (float) each, FloatLists.mutable.empty());
+                SMALL_INTERVAL.collectFloat(Integer::floatValue, FloatLists.mutable.empty());
         FloatList actual =
                 this.smallData.stream().collect(Collectors2.collectFloat(each -> (float) each, FloatLists.mutable::empty));
         Assert.assertEquals(expected, actual);
@@ -658,7 +665,7 @@ public class Collectors2AdditionalTest
     public void collectFloatParallel()
     {
         FloatList expected =
-                LARGE_INTERVAL.collectFloat(each -> (float) each, FloatLists.mutable.empty());
+                LARGE_INTERVAL.collectFloat(Integer::floatValue, FloatLists.mutable.empty());
         FloatList actual =
                 this.bigData.parallelStream().collect(Collectors2.collectFloat(each -> (float) each, FloatLists.mutable::empty));
         Assert.assertEquals(expected, actual);
@@ -668,7 +675,7 @@ public class Collectors2AdditionalTest
     public void collectLong()
     {
         LongList expected =
-                SMALL_INTERVAL.collectLong(each -> (long) each, LongLists.mutable.empty());
+                SMALL_INTERVAL.collectLong(Integer::longValue, LongLists.mutable.empty());
         LongList actual =
                 this.smallData.stream().collect(Collectors2.collectLong(each -> (long) each, LongLists.mutable::empty));
         Assert.assertEquals(expected, actual);
@@ -678,7 +685,7 @@ public class Collectors2AdditionalTest
     public void collectLongParallel()
     {
         LongList expected =
-                LARGE_INTERVAL.collectLong(each -> (long) each, LongLists.mutable.empty());
+                LARGE_INTERVAL.collectLong(Integer::longValue, LongLists.mutable.empty());
         LongList actual =
                 this.bigData.parallelStream().collect(Collectors2.collectLong(each -> (long) each, LongLists.mutable::empty));
         Assert.assertEquals(expected, actual);
@@ -688,7 +695,7 @@ public class Collectors2AdditionalTest
     public void collectDouble()
     {
         DoubleList expected =
-                SMALL_INTERVAL.collectDouble(each -> (double) each, DoubleLists.mutable.empty());
+                SMALL_INTERVAL.collectDouble(Integer::doubleValue, DoubleLists.mutable.empty());
         DoubleList actual =
                 this.smallData.stream().collect(Collectors2.collectDouble(each -> (double) each, DoubleLists.mutable::empty));
         Assert.assertEquals(expected, actual);
@@ -698,9 +705,77 @@ public class Collectors2AdditionalTest
     public void collectDoubleParallel()
     {
         DoubleList expected =
-                LARGE_INTERVAL.collectDouble(each -> (double) each, DoubleLists.mutable.empty());
+                LARGE_INTERVAL.collectDouble(Integer::doubleValue, DoubleLists.mutable.empty());
         DoubleList actual =
                 this.bigData.parallelStream().collect(Collectors2.collectDouble(each -> (double) each, DoubleLists.mutable::empty));
         Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void summarizeUsingStaticMethod()
+    {
+        SummaryStatistics<ValueHolder> summaryStatistics =
+                Lists.mutable.withNValues(3, () -> new ValueHolder(5, 100, 10.0))
+                        .stream()
+                        .collect(Collectors2.<ValueHolder>summarizing(
+                                Lists.immutable.with(ValueHolder::getIntValue),
+                                Lists.immutable.with(ValueHolder::getLongValue),
+                                Lists.immutable.with(ValueHolder::getDoubleValue)));
+        Assert.assertEquals(15, summaryStatistics.getIntStats(Integer.valueOf(0)).getSum());
+        Assert.assertEquals(300L, summaryStatistics.getLongStats(Integer.valueOf(0)).getSum());
+        Assert.assertEquals(30.0d, summaryStatistics.getDoubleStats(Integer.valueOf(0)).getSum(), 0.0);
+    }
+
+    @Test
+    public void summarizeUsingBuilder()
+    {
+        SummaryStatistics<ValueHolder> summaryStatistics =
+                Lists.mutable.withNValues(3, () -> new ValueHolder(5, 100L, 10.0))
+                        .stream()
+                        .collect(new SummaryStatistics<ValueHolder>()
+                                .addDoubleFunction(Integer.valueOf(0), ValueHolder::getDoubleValue)
+                                .addLongFunction(Integer.valueOf(0), ValueHolder::getLongValue)
+                                .addIntFunction(Integer.valueOf(0), ValueHolder::getIntValue).toCollector());
+        Assert.assertEquals(15, summaryStatistics.getIntStats(Integer.valueOf(0)).getSum());
+        Assert.assertEquals(300L, summaryStatistics.getLongStats(Integer.valueOf(0)).getSum());
+        Assert.assertEquals(30.0d, summaryStatistics.getDoubleStats(Integer.valueOf(0)).getSum(), 0.0);
+    }
+
+    @Test
+    public void summarizeDownstream()
+    {
+        Map<String, SummaryStatistics<ValueHolder>> map =
+                Lists.mutable.with(
+                        new ValueHolder("A", 5, 100L, 10.0),
+                        new ValueHolder("A", 5, 100L, 10.0),
+                        new ValueHolder("B", 5, 100L, 10.0))
+                        .stream()
+                        .collect(Collectors.groupingBy(ValueHolder::getGroupBy,
+                                new SummaryStatistics<ValueHolder>()
+                                        .addDoubleFunction(Integer.valueOf(0), ValueHolder::getDoubleValue)
+                                        .addLongFunction(Integer.valueOf(0), ValueHolder::getLongValue)
+                                        .addIntFunction(Integer.valueOf(0), ValueHolder::getIntValue).toCollector()));
+        Assert.assertEquals(10, map.get("A").getIntStats(Integer.valueOf(0)).getSum());
+        Assert.assertEquals(5, map.get("B").getIntStats(Integer.valueOf(0)).getSum());
+        Assert.assertEquals(200L, map.get("A").getLongStats(Integer.valueOf(0)).getSum());
+        Assert.assertEquals(100L, map.get("B").getLongStats(Integer.valueOf(0)).getSum());
+        Assert.assertEquals(20.0d, map.get("A").getDoubleStats(Integer.valueOf(0)).getSum(), 0.0);
+        Assert.assertEquals(10.0d, map.get("B").getDoubleStats(Integer.valueOf(0)).getSum(), 0.0);
+    }
+
+    @Test
+    public void collectStatsParallel()
+    {
+        ValueHolder valueHolder = new ValueHolder(5, 100, 10.0);
+        SummaryStatistics<ValueHolder> summaryStatistics =
+                Lists.mutable.withNValues(25_000, () -> valueHolder)
+                        .parallelStream()
+                        .collect(Collectors2.<ValueHolder>summarizing(
+                                Lists.immutable.with(ValueHolder::getIntValue),
+                                Lists.immutable.with(ValueHolder::getLongValue),
+                                Lists.immutable.with(ValueHolder::getDoubleValue)));
+        Assert.assertEquals(125_000, summaryStatistics.getIntStats(Integer.valueOf(0)).getSum());
+        Assert.assertEquals(2_500_000L, summaryStatistics.getLongStats(Integer.valueOf(0)).getSum());
+        Assert.assertEquals(250000.0d, summaryStatistics.getDoubleStats(Integer.valueOf(0)).getSum(), 0.0);
     }
 }
