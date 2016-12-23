@@ -10,11 +10,11 @@
 
 package org.eclipse.collections.impl.collector;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 import java.util.StringJoiner;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.BinaryOperator;
@@ -90,7 +90,6 @@ import org.eclipse.collections.impl.map.mutable.primitive.ObjectLongHashMap;
 import org.eclipse.collections.impl.tuple.Tuples;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.eclipse.collections.impl.utility.Iterate;
-import org.eclipse.collections.impl.utility.ListIterate;
 
 /**
  * <p>A set of Collectors for Eclipse Collections types and algorithms.</p>
@@ -1685,6 +1684,30 @@ public final class Collectors2
         longFunctions.forEachWithIndex((each, index) -> summaryStatistics.addLongFunction(Integer.valueOf(index), each));
         doubleFunctions.forEachWithIndex((each, index) -> summaryStatistics.addDoubleFunction(Integer.valueOf(index), each));
         return summaryStatistics.toCollector();
+    }
+
+    /**
+     * Returns a BigDecimalSummaryStatistics applying the specified function to each element of the stream or collection.
+     */
+    public static <T> Collector<T, ?, BigDecimalSummaryStatistics> summarizingBigDecimal(Function<? super T, BigDecimal> function)
+    {
+        return Collector.of(
+                BigDecimalSummaryStatistics::new,
+                (stats, each) -> stats.value(function.apply(each)),
+                BigDecimalSummaryStatistics::merge,
+                Collector.Characteristics.UNORDERED);
+    }
+
+    /**
+     * Returns a BigIntegerSummaryStatistics applying the specified function to each element of the stream or collection.
+     */
+    public static <T> Collector<T, ?, BigIntegerSummaryStatistics> summarizingBigInteger(Function<? super T, BigInteger> function)
+    {
+        return Collector.of(
+                BigIntegerSummaryStatistics::new,
+                (stats, each) -> stats.value(function.apply(each)),
+                BigIntegerSummaryStatistics::merge,
+                Collector.Characteristics.UNORDERED);
     }
 
     private static <T, R extends Collection<T>> BinaryOperator<R> mergeCollections()
