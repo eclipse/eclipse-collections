@@ -9,14 +9,6 @@ class(primitive) ::= <<
 <body(primitive.type, primitive.name, primitive.allPrimitives)>
 >>
 
-collectPrimitive(toName) ::= <<
-<\n>
-/**
- * @since 8.0
- */
-public Mutable<toName>List collect<toName>(<name>To<toName>Function function);
->>
-
 importPrimitiveFunction(toName) ::= <<
 import org.eclipse.collections.api.block.function.primitive.<name>To<toName>Function;
 >>

@@ -6,7 +6,17 @@ This is the 8.1.0 minor release.
 New Functionality
 -----------------
 
-* Placeholder.
+* Added collect<primitive>() methods to all implementations of the <primitive>List interface, i.e., <primitive>ArrayList, Synchronized<primitive>List and Unmodifiable<primitive>List.
+
+For example, IntArrayList now has:
+    * collectInt()
+    * collectFloat()
+    * collectDouble()
+    * collectLong()
+    * collectShort()
+    * collectByte()
+    * collectChar()
+    * collectBoolean()
 
 Optimizations
 -------------

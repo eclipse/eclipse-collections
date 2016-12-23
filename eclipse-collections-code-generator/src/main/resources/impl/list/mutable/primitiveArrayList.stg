@@ -14,7 +14,7 @@ class(primitive) ::= <<
 collectPrimitive(toName) ::= <<
 <\n>
 /**
- * @since 8.0
+ * @since 8.1.0
  */
 public Mutable<toName>List collect<toName>(<name>To<toName>Function function)
 {

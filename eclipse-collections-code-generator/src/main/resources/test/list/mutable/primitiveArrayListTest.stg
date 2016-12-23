@@ -12,6 +12,18 @@ class(primitive) ::= <<
 <body(primitive.type, primitive.wrapperName, primitive.name)>
 >>
 
+collectPrimitive(toName, toType) ::= <<
+@Test
+public void collect<toName>()
+{
+    <name>ArrayList list = this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">);
+
+    Mutable<toName>List mutable<toName>List =
+        list.collect<toName>(<type>Parameter -> (<toType>) (<type>Parameter + <(literal.(type))("1")>));
+
+    Assert.assertEquals(<toName>ArrayList.newListWith(<["2", "3", "4"]:(literal.(toType))(); separator=", ">), mutable<toName>List);
+}>>
+
 body(type, wrapperName, name) ::= <<
 <copyright()>
 
@@ -160,6 +172,30 @@ public class <name>ArrayListTest extends Abstract<name>ListTestCase
         list.add(<(literal.(type))("5")>);
         list.removeAtIndex(0);
         Assert.assertEquals(list, list.toImmutable());
+    }
+
+    <collectPrimitive("Byte", "byte")>
+
+    <collectPrimitive("Short", "short")>
+
+    <collectPrimitive("Char", "char")>
+
+    <collectPrimitive("Int", "int")>
+
+    <collectPrimitive("Long", "long")>
+
+    <collectPrimitive("Float", "float")>
+
+    <collectPrimitive("Double", "double")>
+
+    @Test
+    public void collectBoolean()
+    {
+        <name>ArrayList list = this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">);
+
+        MutableBooleanList mutableBooleanList = list.collectBoolean(each -> <(equals.(type))("each", {<(literal.(type))("1")>})>);
+
+        Assert.assertEquals(BooleanArrayList.newListWith(true, false, false), mutableBooleanList);
     }
 }
 

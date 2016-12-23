@@ -763,7 +763,7 @@ public final class BooleanArrayList
     }
 
     /**
-     * @since 8.0
+     * @since 8.1.0
      */
     public MutableIntList collectInt(BooleanToIntFunction function)
     {
@@ -776,7 +776,7 @@ public final class BooleanArrayList
     }
 
     /**
-     * @since 8.0
+     * @since 8.1.0
      */
     public MutableFloatList collectFloat(BooleanToFloatFunction function)
     {
@@ -789,7 +789,7 @@ public final class BooleanArrayList
     }
 
     /**
-     * @since 8.0
+     * @since 8.1.0
      */
     public MutableDoubleList collectDouble(BooleanToDoubleFunction function)
     {
@@ -802,7 +802,7 @@ public final class BooleanArrayList
     }
 
     /**
-     * @since 8.0
+     * @since 8.1.0
      */
     public MutableLongList collectLong(BooleanToLongFunction function)
     {
@@ -815,7 +815,7 @@ public final class BooleanArrayList
     }
 
     /**
-     * @since 8.0
+     * @since 8.1.0
      */
     public MutableShortList collectShort(BooleanToShortFunction function)
     {
@@ -828,7 +828,7 @@ public final class BooleanArrayList
     }
 
     /**
-     * @since 8.0
+     * @since 8.1.0
      */
     public MutableByteList collectByte(BooleanToByteFunction function)
     {
@@ -841,7 +841,7 @@ public final class BooleanArrayList
     }
 
     /**
-     * @since 8.0
+     * @since 8.1.0
      */
     public MutableCharList collectChar(BooleanToCharFunction function)
     {
@@ -854,7 +854,7 @@ public final class BooleanArrayList
     }
 
     /**
-     * @since 8.0
+     * @since 8.1.0
      */
     public MutableBooleanList collectBoolean(BooleanToBooleanFunction function)
     {
