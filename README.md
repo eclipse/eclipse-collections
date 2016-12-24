@@ -11,6 +11,7 @@ Eclipse Collections is a collections framework for Java. It has JDK-compatible L
 
 Learn Eclipse Collections
 ------------------------
+The [Eclipse Collections Reference Guide](https://github.com/eclipse/eclipse-collections/blob/master/docs/guide.md) is a great way to get an overview of the extensive features available in the framework.
 
 Check out the [Eclipse Collections Kata](https://github.com/eclipse/eclipse-collections-kata), a fun way to help you learn idiomatic Eclipse Collections usage.
 A [kata](https://en.wikipedia.org/wiki/Kata) is an exercise in martial arts.
@@ -21,37 +22,48 @@ Your task is to make them pass, using Eclipse Collections.
 Quick Example
 -------------
 
-Eclipse Collections puts iteration methods on the container types. Lambdas are simulated using anonymous inner classes. Here's a code example that demonstrates the usual style of programming with Eclipse Collections.
+Eclipse Collections puts iteration methods directly on the container types. Here's a code example that demonstrates the simple style of programming with Eclipse Collections.
 
 ```java
-MutableList<Person> people = FastList.newListWith(person1, person2, person3);
-MutableList<String> sortedLastNames = people.collect(Person.TO_LAST_NAME).sortThis();
-System.out.println("Comma separated, sorted last names: " + sortedLastNames.makeString());
+MutableList<Person> people = Lists.mutable.with(person1, person2, person3);
+MutableList<String> lastNames = people.collect(Person::getLastName);
+System.out.println("Comma separated last names: " + lastNames.makeString());
 ```
-
-Person.TO_LAST_NAME is defined as a constant Function in the Person class.
+The method reference in the example above can also be replaced with a lambda:
 
 ```java
-public static final Function<Person, String> TO_LAST_NAME = new Function<Person, String>()
-{
-    public String valueOf(Person person)
-    {
-        return person.lastName;
-    }
-};
-
+MutableList<String> lastNames = people.collect(person -> person.getLastName());
 ```
-In Java 8, the Function can be replaced with a lambda:
+Eclipse Collections has support for both [Mutable](http://www.eclipse.org/collections/javadoc/8.0.0/org/eclipse/collections/api/collection/MutableCollection.html) and [Immutable](http://www.eclipse.org/collections/javadoc/8.0.0/org/eclipse/collections/api/collection/ImmutableCollection.html) collections, and the return types of methods are covariant.
 
 ```java
-MutableList<String> sortedLastNames = people.collect(person -> person.getLastName()).sortThis();
+ImmutableList<Person> people = Lists.immutable.with(person1, person2, person3);
+ImmutableList<String> lastNames = people.collect(Person::getLastName);
+System.out.println("Comma separated last names: " + lastNames.makeString());
 ```
-
-Or, a method reference:
+Eclipse Collections has a [lazy API](http://www.eclipse.org/collections/javadoc/8.0.0/org/eclipse/collections/api/LazyIterable.html) as well, which is available by calling the method asLazy().
 
 ```java
-MutableList<String> sortedLastNames = people.collect(Person::getLastName).sortThis();
+ImmutableList<Person> people = Lists.immutable.with(person1, person2, person3);
+LazyIterable<String> lastNames = people.asLazy().collect(Person::getLastName);
+System.out.println("Comma separated last names: " + lastNames.makeString());
 ```
+The MutableCollections in Eclipse Collections also have the Stream API available in Java, since they extend their corresponding JDK types.
+
+```java
+MutableList<Person> people = Lists.mutable.with(person1, person2, person3);
+Stream<String> lastNames = people.stream().map(Person::getLastName);
+System.out.println("Comma separated last names: " + lastNames.collect(Collectors.joining(", "));
+```
+Eclipse Collections 8.0 also introduced a new set of Collectors in the class [Collectors2](http://www.eclipse.org/collections/javadoc/8.0.0/org/eclipse/collections/impl/collector/Collectors2.html).
+
+```java
+MutableList<Person> people = Lists.mutable.with(person1, person2, person3);
+Stream<String> lastNames = people.stream().map(Person::getLastName);
+System.out.println("Comma separated last names: " + lastNames.collect(Collectors2.makeString());
+```
+
+
 
 Why Eclipse Collections?
 ------------------------
