@@ -10,6 +10,8 @@
 
 package org.eclipse.collections.impl.collector;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -764,7 +766,7 @@ public class Collectors2AdditionalTest
     }
 
     @Test
-    public void collectStatsParallel()
+    public void summarizingParallel()
     {
         ValueHolder valueHolder = new ValueHolder(5, 100, 10.0);
         SummaryStatistics<ValueHolder> summaryStatistics =
@@ -777,5 +779,31 @@ public class Collectors2AdditionalTest
         Assert.assertEquals(125_000, summaryStatistics.getIntStats(Integer.valueOf(0)).getSum());
         Assert.assertEquals(2_500_000L, summaryStatistics.getLongStats(Integer.valueOf(0)).getSum());
         Assert.assertEquals(250000.0d, summaryStatistics.getDoubleStats(Integer.valueOf(0)).getSum(), 0.0);
+    }
+
+    @Test
+    public void summarizingBigDecimalParallel()
+    {
+        ValueHolder valueHolder = new ValueHolder(5, 100, 10.0);
+        BigDecimalSummaryStatistics summaryStatistics =
+                Lists.mutable.withNValues(25_000, () -> valueHolder)
+                        .parallelStream()
+                        .collect(Collectors2.<ValueHolder>summarizingBigDecimal(vh -> BigDecimal.valueOf(vh.getLongValue())));
+        Assert.assertEquals(BigDecimal.valueOf(2_500_000L), summaryStatistics.getSum());
+        Assert.assertEquals(BigDecimal.valueOf(100L), summaryStatistics.getMin());
+        Assert.assertEquals(BigDecimal.valueOf(100L), summaryStatistics.getMax());
+    }
+
+    @Test
+    public void summarizingBigIntegerParallel()
+    {
+        ValueHolder valueHolder = new ValueHolder(5, 100, 10.0);
+        BigIntegerSummaryStatistics summaryStatistics =
+                Lists.mutable.withNValues(25_000, () -> valueHolder)
+                        .parallelStream()
+                        .collect(Collectors2.<ValueHolder>summarizingBigInteger(vh -> BigInteger.valueOf(vh.getLongValue())));
+        Assert.assertEquals(BigInteger.valueOf(2_500_000L), summaryStatistics.getSum());
+        Assert.assertEquals(BigInteger.valueOf(100L), summaryStatistics.getMin());
+        Assert.assertEquals(BigInteger.valueOf(100L), summaryStatistics.getMax());
     }
 }

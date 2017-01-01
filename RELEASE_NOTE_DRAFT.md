@@ -1,4 +1,4 @@
-8.1.0 (July 2016)
+8.1.0 (TBD 2017)
 ====================
 
 This is the 8.1.0 minor release.   
@@ -6,27 +6,29 @@ This is the 8.1.0 minor release.
 New Functionality
 -----------------
 
-* Added collect<primitive>() methods to all implementations of the <primitive>List interface, i.e., <primitive>ArrayList, Synchronized<primitive>List and Unmodifiable<primitive>List.
 
-For example, IntArrayList now has:
-    * collectInt()
-    * collectFloat()
-    * collectDouble()
-    * collectLong()
-    * collectShort()
-    * collectByte()
-    * collectChar()
-    * collectBoolean()
+* Implement BigDecimalSummaryStatistics and BigIntegerSummaryStatistics.
+* Implement SummaryStatistics and Collectors2.summarizing.
+* Integrate JaCoCo for test coverage.
+* Implement flatCollect on Collectors2.
+* Modify PersonAndPetKataTest.getAgeStatisticsOfPets to use summaryStatistics.
+* Update reference guide.
+* Add Abstract primitive Stacks.
+* Add the Eclipse Collections reference guide.
+* Add collect<primitive>() methods to all implementations of the <primitive>List interface, i.e., <primitive>ArrayList, Synchronized<primitive>List and Unmodifiable<primitive>List.
+
 
 Optimizations
 -------------
 
-* Placeholder.
+* Change collect and collectWith with target collections on InternalArrayIterate to use ensureCapacity for FastLists and ArrayLists.
 
 Bug fixes
 ---------
 
-* Placeholder.
+* Remove JMH tests and generator codes from Javadoc output.
+* Update links to point to the Eclipse Collections Kata instead of the GS Collections Kata.
+* Fix addAll() method in CompositeFastList to return false on isEmpty().
 
 Acquiring Eclipse Collections
 -----------------------------
