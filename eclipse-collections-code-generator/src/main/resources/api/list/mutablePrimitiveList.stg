@@ -52,7 +52,6 @@ public interface Mutable<name>List extends Mutable<name>Collection, <name>List
     <mutableAPI(fileName(primitive), type, name)>
 
     \<V> MutableList\<V> collect(<name>ToObjectFunction\<? extends V> function);
-    <allPrimitives:collectPrimitive()>
 
     Mutable<name>List reverseThis();
 

@@ -14,13 +14,18 @@ class(primitive) ::= <<
 collectPrimitive(toName) ::= <<
 <\n>
 /**
- * @since 8.0
+ * @since 8.1.0
  */
 public Mutable<toName>List collect<toName>(<name>To<toName>Function function)
 {
     synchronized (this.getLock())
     {
-        return this.getMutable<name>List().collect<toName>(function);
+        Mutable<toName>List target = new <toName>ArrayList(this.size());
+        for (int i = 0; i \< this.size(); i++)
+        {
+            target.add(function.valueOf(this.get(i)));
+        }
+        return target;
     }
 }
 >>

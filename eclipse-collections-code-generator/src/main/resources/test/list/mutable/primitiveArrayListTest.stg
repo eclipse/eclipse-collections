@@ -1,6 +1,7 @@
 import "copyright.stg"
 import "primitiveHashCode.stg"
 import "primitiveLiteral.stg"
+import "primitiveEquals.stg"
 
 isTest() ::= "true"
 
@@ -9,7 +10,11 @@ targetPath() ::= "org/eclipse/collections/impl/list/mutable/primitive"
 fileName(primitive) ::= "<primitive.name>ArrayListTest"
 
 class(primitive) ::= <<
-<body(primitive.type, primitive.wrapperName, primitive.name)>
+<body(primitive.type, primitive.wrapperName, primitive.name, primitive.allPrimitives)>
+>>
+
+importMutablePrimitiveList(toName) ::= <<
+import org.eclipse.collections.api.list.primitive.Mutable<toName>List;
 >>
 
 collectPrimitive(toName, toType) ::= <<
@@ -24,7 +29,7 @@ public void collect<toName>()
     Assert.assertEquals(<toName>ArrayList.newListWith(<["2", "3", "4"]:(literal.(toType))(); separator=", ">), mutable<toName>List);
 }>>
 
-body(type, wrapperName, name) ::= <<
+body(type, wrapperName, name, allPrimitives) ::= <<
 <copyright()>
 
 package org.eclipse.collections.impl.list.mutable.primitive;
@@ -32,6 +37,7 @@ package org.eclipse.collections.impl.list.mutable.primitive;
 import java.lang.reflect.Field;
 
 import org.eclipse.collections.api.list.primitive.Immutable<name>List;
+<allPrimitives:importMutablePrimitiveList()>
 import org.eclipse.collections.impl.factory.primitive.<name>Lists;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.utility.internal.primitive.<name>IterableIterate;
