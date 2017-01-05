@@ -1,4 +1,4 @@
-8.1.0 (TBD 2017)
+8.1.0 (March 2017)
 ====================
 
 This is the 8.1.0 minor release.   
