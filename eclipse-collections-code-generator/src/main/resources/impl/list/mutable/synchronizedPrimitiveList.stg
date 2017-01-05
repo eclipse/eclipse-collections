@@ -8,10 +8,37 @@ targetPath() ::= "org/eclipse/collections/impl/list/mutable/primitive"
 fileName(primitive) ::= "Synchronized<primitive.name>List"
 
 class(primitive) ::= <<
-<body(primitive.type, primitive.name)>
+<body(primitive.type, primitive.name, primitive.allPrimitives)>
 >>
 
-body(type, name) ::= <<
+collectPrimitive(toName) ::= <<
+<\n>
+/**
+ * @since 8.1.0
+ */
+public Mutable<toName>List collect<toName>(<name>To<toName>Function function)
+{
+    synchronized (this.getLock())
+    {
+        Mutable<toName>List target = new <toName>ArrayList(this.size());
+        for (int i = 0; i \< this.size(); i++)
+        {
+            target.add(function.valueOf(this.get(i)));
+        }
+        return target;
+    }
+}
+>>
+
+importPrimitiveFunction(toName) ::= <<
+import org.eclipse.collections.api.block.function.primitive.<name>To<toName>Function;
+>>
+
+importMutablePrimitiveList(toName) ::= <<
+import org.eclipse.collections.api.list.primitive.Mutable<toName>List;
+>>
+
+body(type, name, allPrimitives) ::= <<
 <copyright()>
 
 package org.eclipse.collections.impl.list.mutable.primitive;
@@ -21,6 +48,7 @@ import java.util.Collections;
 
 import org.eclipse.collections.api.<name>Iterable;
 import org.eclipse.collections.api.Lazy<name>Iterable;
+<allPrimitives:importPrimitiveFunction()>
 import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.Object<name>IntToObjectFunction;
 import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
@@ -29,7 +57,7 @@ import org.eclipse.collections.api.iterator.<name>Iterator;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.list.primitive.<name>List;
 import org.eclipse.collections.api.list.primitive.Immutable<name>List;
-import org.eclipse.collections.api.list.primitive.Mutable<name>List;
+<allPrimitives:importMutablePrimitiveList()>
 import org.eclipse.collections.impl.collection.mutable.primitive.AbstractSynchronized<name>Collection;
 import org.eclipse.collections.impl.factory.primitive.<name>Lists;
 import org.eclipse.collections.impl.lazy.primitive.Lazy<name>IterableAdapter;
@@ -216,6 +244,7 @@ public final class Synchronized<name>List
             return this.getMutable<name>List().collect(function);
         }
     }
+    <allPrimitives:collectPrimitive()>
 
     <(arithmeticMethods.(type))(name, type)>
     @Override

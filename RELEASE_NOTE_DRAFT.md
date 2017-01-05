@@ -6,6 +6,7 @@ This is the 8.1.0 minor release.
 New Functionality
 -----------------
 
+
 * Implement BigDecimalSummaryStatistics and BigIntegerSummaryStatistics.
 * Implement SummaryStatistics and Collectors2.summarizing.
 * Integrate JaCoCo for test coverage.
@@ -14,6 +15,8 @@ New Functionality
 * Update reference guide.
 * Add Abstract primitive Stacks.
 * Add the Eclipse Collections reference guide.
+* Add collect<primitive>() methods to all implementations of the <primitive>List interface, i.e., <primitive>ArrayList, Synchronized<primitive>List and Unmodifiable<primitive>List.
+
 
 Optimizations
 -------------

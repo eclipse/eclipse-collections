@@ -8,10 +8,34 @@ targetPath() ::= "org/eclipse/collections/impl/list/mutable/primitive"
 fileName(primitive) ::= "<primitive.name>ArrayList"
 
 class(primitive) ::= <<
-<body(primitive.type, primitive.name)>
+<body(primitive.type, primitive.name, primitive.allPrimitives)>
 >>
 
-body(type, name) ::= <<
+collectPrimitive(toName) ::= <<
+<\n>
+/**
+ * @since 8.1.0
+ */
+public Mutable<toName>List collect<toName>(<name>To<toName>Function function)
+{
+    Mutable<toName>List target = new <toName>ArrayList(this.size);
+    for (int i = 0; i \< this.size; i++)
+    {
+        target.add(function.valueOf(this.items[i]));
+    }
+    return target;
+}
+>>
+
+importPrimitiveFunction(toName) ::= <<
+import org.eclipse.collections.api.block.function.primitive.<name>To<toName>Function;
+>>
+
+importMutablePrimitiveList(toName) ::= <<
+import org.eclipse.collections.api.list.primitive.Mutable<toName>List;
+>>
+
+body(type, name, allPrimitives) ::= <<
 <copyright()>
 
 package org.eclipse.collections.impl.list.mutable.primitive;
@@ -25,6 +49,7 @@ import java.util.NoSuchElementException;
 
 import org.eclipse.collections.api.<name>Iterable;
 import org.eclipse.collections.api.Lazy<name>Iterable;
+<allPrimitives:importPrimitiveFunction()>
 import org.eclipse.collections.api.block.function.primitive.Object<name>IntToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.Object<name>ToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
@@ -35,7 +60,7 @@ import org.eclipse.collections.api.iterator.Mutable<name>Iterator;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.list.primitive.<name>List;
 import org.eclipse.collections.api.list.primitive.Immutable<name>List;
-import org.eclipse.collections.api.list.primitive.Mutable<name>List;
+<allPrimitives:importMutablePrimitiveList()>
 import org.eclipse.collections.api.set.primitive.<name>Set;
 import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
 import org.eclipse.collections.impl.factory.primitive.<name>Lists;
@@ -633,6 +658,7 @@ public class <name>ArrayList extends Abstract<name>Iterable
         }
         return target;
     }
+    <allPrimitives:collectPrimitive()>
 
     public <type> max()
     {

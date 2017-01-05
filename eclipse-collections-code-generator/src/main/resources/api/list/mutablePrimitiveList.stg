@@ -6,18 +6,28 @@ targetPath() ::= "org/eclipse/collections/api/list/primitive"
 fileName(primitive) ::= "Mutable<primitive.name>List"
 
 class(primitive) ::= <<
-<body(primitive.type, primitive.name)>
+<body(primitive.type, primitive.name, primitive.allPrimitives)>
 >>
 
-body(type, name) ::= <<
+importPrimitiveFunction(toName) ::= <<
+import org.eclipse.collections.api.block.function.primitive.<name>To<toName>Function;
+>>
+
+importMutablePrimitiveList(toName) ::= <<
+import org.eclipse.collections.api.list.primitive.Mutable<toName>List;
+>>
+
+body(type, name, allPrimitives) ::= <<
 <copyright()>
 
 package org.eclipse.collections.api.list.primitive;
 
 import org.eclipse.collections.api.<name>Iterable;
+<allPrimitives:importPrimitiveFunction()>
 import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
 import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
 import org.eclipse.collections.api.collection.primitive.Mutable<name>Collection;
+<allPrimitives:importMutablePrimitiveList()>
 import org.eclipse.collections.api.list.MutableList;
 
 /**
