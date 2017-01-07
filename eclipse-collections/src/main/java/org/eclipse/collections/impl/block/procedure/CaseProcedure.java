@@ -54,8 +54,10 @@ public final class CaseProcedure<T> implements Procedure<T>
     @Override
     public void value(T argument)
     {
-        for (Pair<Predicate<? super T>, Procedure<? super T>> pair : this.predicateProcedures)
+        int localSize = this.predicateProcedures.size();
+        for (int i = 0; i < localSize; i++)
         {
+            Pair<Predicate<? super T>, Procedure<? super T>> pair = this.predicateProcedures.get(i);
             if (pair.getOne().accept(argument))
             {
                 pair.getTwo().value(argument);

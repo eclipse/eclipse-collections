@@ -50,8 +50,10 @@ public class CaseFunction<T extends Comparable<? super T>, V> implements Functio
     @Override
     public V valueOf(T argument)
     {
-        for (Pair<Predicate<? super T>, Function<? super T, ? extends V>> pair : this.predicateFunctions)
+        int localSize = this.predicateFunctions.size();
+        for (int i = 0; i < localSize; i++)
         {
+            Pair<Predicate<? super T>, Function<? super T, ? extends V>> pair = this.predicateFunctions.get(i);
             if (pair.getOne().accept(argument))
             {
                 return pair.getTwo().valueOf(argument);
