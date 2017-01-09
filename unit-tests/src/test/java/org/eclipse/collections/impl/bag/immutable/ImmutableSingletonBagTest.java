@@ -12,6 +12,7 @@ package org.eclipse.collections.impl.bag.immutable;
 
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 import org.eclipse.collections.api.bag.Bag;
 import org.eclipse.collections.api.bag.ImmutableBag;
@@ -401,11 +402,29 @@ public class ImmutableSingletonBagTest extends ImmutableBagTestCase
 
     @Override
     @Test
+    public void detectOptional()
+    {
+        Assert.assertEquals("1", this.newBag().detectOptional("1"::equals).get());
+        Assert.assertNotNull(this.newBag().detectOptional("2"::equals));
+        Verify.assertThrows(NoSuchElementException.class, () -> this.newBag().detectOptional("2"::equals).get());
+    }
+
+    @Override
+    @Test
     public void detectWith()
     {
         super.detectWith();
 
         Assert.assertEquals(VAL, this.newBag().detectWith(Object::equals, "1"));
+    }
+
+    @Override
+    @Test
+    public void detectWithOptional()
+    {
+        Assert.assertEquals("1", this.newBag().detectWithOptional(Object::equals, "1").get());
+        Assert.assertNotNull(this.newBag().detectWithOptional(Object::equals, "2"));
+        Verify.assertThrows(NoSuchElementException.class, () -> this.newBag().detectWithOptional(Object::equals, "2").get());
     }
 
     @Override
