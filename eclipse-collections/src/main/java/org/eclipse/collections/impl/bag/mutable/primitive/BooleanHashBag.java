@@ -520,25 +520,32 @@ public final class BooleanHashBag implements MutableBooleanBag, Externalizable
         {
             throw new IllegalArgumentException("Cannot use a value of count < 0");
         }
-        if (count == 1)
+        if (this.size() > 0)
         {
-            if (this.trueCount == this.falseCount)
+            if (count == 1)
             {
-                return Lists.mutable.with(PrimitiveTuples.pair(true, this.trueCount), PrimitiveTuples.pair(false, this.falseCount));
+                if (this.trueCount == this.falseCount)
+                {
+                    return Lists.mutable.with(PrimitiveTuples.pair(true, this.trueCount), PrimitiveTuples.pair(false, this.falseCount));
+                }
+                if (this.trueCount > this.falseCount)
+                {
+                    return Lists.mutable.with(PrimitiveTuples.pair(true, this.trueCount));
+                }
+                return Lists.mutable.with(PrimitiveTuples.pair(false, this.falseCount));
             }
-            if (this.trueCount > this.falseCount)
+            if (count > 1)
             {
-                return Lists.mutable.with(PrimitiveTuples.pair(true, this.trueCount));
+                if (this.trueCount >= this.falseCount)
+                {
+                    return Lists.mutable.with(
+                            PrimitiveTuples.pair(true, this.trueCount),
+                            PrimitiveTuples.pair(false, this.falseCount));
+                }
+                return Lists.mutable.with(
+                        PrimitiveTuples.pair(false, this.falseCount),
+                        PrimitiveTuples.pair(true, this.trueCount));
             }
-            return Lists.mutable.with(PrimitiveTuples.pair(false, this.falseCount));
-        }
-        if (count > 1)
-        {
-            if (this.trueCount > this.falseCount)
-            {
-                return Lists.mutable.with(PrimitiveTuples.pair(true, this.trueCount));
-            }
-            return Lists.mutable.with(PrimitiveTuples.pair(false, this.falseCount));
         }
         return Lists.mutable.empty();
     }
@@ -550,25 +557,32 @@ public final class BooleanHashBag implements MutableBooleanBag, Externalizable
         {
             throw new IllegalArgumentException("Cannot use a value of count < 0");
         }
-        if (count == 1)
+        if (this.size() > 0)
         {
-            if (this.trueCount == this.falseCount)
+            if (count == 1)
             {
-                return Lists.mutable.with(PrimitiveTuples.pair(true, this.trueCount), PrimitiveTuples.pair(false, this.falseCount));
+                if (this.trueCount == this.falseCount)
+                {
+                    return Lists.mutable.with(PrimitiveTuples.pair(true, this.trueCount), PrimitiveTuples.pair(false, this.falseCount));
+                }
+                if (this.trueCount < this.falseCount)
+                {
+                    return Lists.mutable.with(PrimitiveTuples.pair(true, this.trueCount));
+                }
+                return Lists.mutable.with(PrimitiveTuples.pair(false, this.falseCount));
             }
-            if (this.trueCount < this.falseCount)
+            if (count > 1)
             {
-                return Lists.mutable.with(PrimitiveTuples.pair(true, this.trueCount));
+                if (this.trueCount <= this.falseCount)
+                {
+                    return Lists.mutable.with(
+                            PrimitiveTuples.pair(true, this.trueCount),
+                            PrimitiveTuples.pair(false, this.falseCount));
+                }
+                return Lists.mutable.with(
+                        PrimitiveTuples.pair(false, this.falseCount),
+                        PrimitiveTuples.pair(true, this.trueCount));
             }
-            return Lists.mutable.with(PrimitiveTuples.pair(false, this.falseCount));
-        }
-        if (count > 1)
-        {
-            if (this.trueCount < this.falseCount)
-            {
-                return Lists.mutable.with(PrimitiveTuples.pair(true, this.trueCount), PrimitiveTuples.pair(false, this.falseCount));
-            }
-            return Lists.mutable.with(PrimitiveTuples.pair(false, this.falseCount), PrimitiveTuples.pair(true, this.trueCount));
         }
         return Lists.mutable.empty();
     }

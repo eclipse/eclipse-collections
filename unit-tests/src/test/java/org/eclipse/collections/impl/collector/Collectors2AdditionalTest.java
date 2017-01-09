@@ -68,7 +68,7 @@ Refer to links below for additional details:
 public class Collectors2AdditionalTest
 {
     public static final Interval SMALL_INTERVAL = Interval.oneTo(5);
-    public static final Interval LARGE_INTERVAL = Interval.oneTo(20000);
+    public static final Interval LARGE_INTERVAL = Interval.oneTo(200000);
     public static final Integer HALF_SIZE = Integer.valueOf(LARGE_INTERVAL.size() / 2);
     private final List<Integer> smallData = new ArrayList<Integer>(SMALL_INTERVAL);
     private final List<Integer> bigData = new ArrayList<Integer>(LARGE_INTERVAL);
@@ -144,20 +144,20 @@ public class Collectors2AdditionalTest
     public void sumByInt()
     {
         Assert.assertEquals(
-                SMALL_INTERVAL.sumByInt(each -> Integer.valueOf(each % 2), Integer::intValue),
-                SMALL_INTERVAL.stream().collect(Collectors2.sumByInt(each -> Integer.valueOf(each % 2), Integer::intValue)));
+                SMALL_INTERVAL.sumByInt(each -> Integer.valueOf(each.intValue() % 2), Integer::intValue),
+                SMALL_INTERVAL.stream().collect(Collectors2.sumByInt(each -> Integer.valueOf(each.intValue() % 2), Integer::intValue)));
 
         Assert.assertEquals(
-                LARGE_INTERVAL.sumByInt(each -> Integer.valueOf(each % 2), Integer::intValue),
-                LARGE_INTERVAL.stream().collect(Collectors2.sumByInt(each -> Integer.valueOf(each % 2), Integer::intValue)));
+                LARGE_INTERVAL.sumByInt(each -> Integer.valueOf(each.intValue() % 2), Integer::intValue),
+                LARGE_INTERVAL.stream().collect(Collectors2.sumByInt(each -> Integer.valueOf(each.intValue() % 2), Integer::intValue)));
     }
 
     @Test
     public void sumByIntParallel()
     {
         Assert.assertEquals(
-                LARGE_INTERVAL.sumByInt(each -> Integer.valueOf(each % 2), Integer::intValue),
-                LARGE_INTERVAL.parallelStream().collect(Collectors2.sumByInt(each -> Integer.valueOf(each % 2), Integer::intValue)));
+                LARGE_INTERVAL.sumByInt(each -> Integer.valueOf(each.intValue() % 2), Integer::intValue),
+                LARGE_INTERVAL.parallelStream().collect(Collectors2.sumByInt(each -> Integer.valueOf(each.intValue() % 2), Integer::intValue)));
     }
 
     @Test
@@ -166,12 +166,12 @@ public class Collectors2AdditionalTest
         MutableList<Long> smallLongs = SMALL_INTERVAL.collect(Long::valueOf).toList();
         MutableList<Long> largeLongs = LARGE_INTERVAL.collect(Long::valueOf).toList();
         Assert.assertEquals(
-                smallLongs.sumByLong(each -> Long.valueOf(each % 2), Long::longValue),
-                smallLongs.stream().collect(Collectors2.sumByLong(each -> Long.valueOf(each % 2), Long::longValue)));
+                smallLongs.sumByLong(each -> Integer.valueOf(each.intValue() % 2), Long::longValue),
+                smallLongs.stream().collect(Collectors2.sumByLong(each -> Integer.valueOf(each.intValue() % 2), Long::longValue)));
 
         Assert.assertEquals(
-                largeLongs.sumByLong(each -> Long.valueOf(each % 2), Long::longValue),
-                largeLongs.stream().collect(Collectors2.sumByLong(each -> Long.valueOf(each % 2), Long::longValue)));
+                largeLongs.sumByLong(each -> Integer.valueOf(each.intValue() % 2), Long::longValue),
+                largeLongs.stream().collect(Collectors2.sumByLong(each -> Integer.valueOf(each.intValue() % 2), Long::longValue)));
     }
 
     @Test
@@ -179,8 +179,8 @@ public class Collectors2AdditionalTest
     {
         MutableList<Long> largeLongs = LARGE_INTERVAL.collect(Long::valueOf).toList();
         Assert.assertEquals(
-                largeLongs.sumByLong(each -> Long.valueOf(each % 2), Long::longValue),
-                largeLongs.parallelStream().collect(Collectors2.sumByLong(each -> Long.valueOf(each % 2), Long::longValue)));
+                largeLongs.sumByLong(each -> Integer.valueOf(each.intValue() % 2), Long::longValue),
+                largeLongs.parallelStream().collect(Collectors2.sumByLong(each -> Integer.valueOf(each.intValue() % 2), Long::longValue)));
     }
 
     @Test
@@ -189,12 +189,12 @@ public class Collectors2AdditionalTest
         MutableList<Float> smallLongs = SMALL_INTERVAL.collect(Float::valueOf).toList();
         MutableList<Float> largeLongs = LARGE_INTERVAL.collect(Float::valueOf).toList();
         Assert.assertEquals(
-                smallLongs.sumByFloat(each -> Float.valueOf(each % 2), Float::floatValue),
-                smallLongs.stream().collect(Collectors2.sumByFloat(each -> Float.valueOf(each % 2), Float::floatValue)));
+                smallLongs.sumByFloat(each -> Integer.valueOf(each.intValue() % 2), Float::floatValue),
+                smallLongs.stream().collect(Collectors2.sumByFloat(each -> Integer.valueOf(each.intValue() % 2), Float::floatValue)));
 
         Assert.assertEquals(
-                largeLongs.sumByFloat(each -> Float.valueOf(each % 2), Float::floatValue),
-                largeLongs.stream().collect(Collectors2.sumByFloat(each -> Float.valueOf(each % 2), Float::floatValue)));
+                largeLongs.sumByFloat(each -> Integer.valueOf(each.intValue() % 2), Float::floatValue),
+                largeLongs.stream().collect(Collectors2.sumByFloat(each -> Integer.valueOf(each.intValue() % 2), Float::floatValue)));
     }
 
     @Test
@@ -202,8 +202,8 @@ public class Collectors2AdditionalTest
     {
         MutableList<Float> largeLongs = LARGE_INTERVAL.collect(Float::valueOf).toList();
         Assert.assertEquals(
-                largeLongs.sumByFloat(each -> Float.valueOf(each % 2), Float::floatValue),
-                largeLongs.parallelStream().collect(Collectors2.sumByFloat(each -> Float.valueOf(each % 2), Float::floatValue)));
+                largeLongs.sumByFloat(each -> Integer.valueOf(each.intValue() % 2), Float::floatValue),
+                largeLongs.parallelStream().collect(Collectors2.sumByFloat(each -> Integer.valueOf(each.intValue() % 2), Float::floatValue)));
     }
 
     @Test
@@ -212,12 +212,12 @@ public class Collectors2AdditionalTest
         MutableList<Double> smallLongs = SMALL_INTERVAL.collect(Double::valueOf).toList();
         MutableList<Double> largeLongs = LARGE_INTERVAL.collect(Double::valueOf).toList();
         Assert.assertEquals(
-                smallLongs.sumByDouble(each -> Double.valueOf(each % 2), Double::doubleValue),
-                smallLongs.stream().collect(Collectors2.sumByDouble(each -> Double.valueOf(each % 2), Double::doubleValue)));
+                smallLongs.sumByDouble(each -> Integer.valueOf(each.intValue() % 2), Double::doubleValue),
+                smallLongs.stream().collect(Collectors2.sumByDouble(each -> Integer.valueOf(each.intValue() % 2), Double::doubleValue)));
 
         Assert.assertEquals(
-                largeLongs.sumByDouble(each -> Double.valueOf(each % 2), Double::doubleValue),
-                largeLongs.stream().collect(Collectors2.sumByDouble(each -> Double.valueOf(each % 2), Double::doubleValue)));
+                largeLongs.sumByDouble(each -> Integer.valueOf(each.intValue() % 2), Double::doubleValue),
+                largeLongs.stream().collect(Collectors2.sumByDouble(each -> Integer.valueOf(each.intValue() % 2), Double::doubleValue)));
     }
 
     @Test
@@ -225,8 +225,8 @@ public class Collectors2AdditionalTest
     {
         MutableList<Double> largeLongs = LARGE_INTERVAL.collect(Double::valueOf).toList();
         Assert.assertEquals(
-                largeLongs.sumByDouble(each -> Double.valueOf(each % 2), Double::doubleValue),
-                largeLongs.parallelStream().collect(Collectors2.sumByDouble(each -> Double.valueOf(each % 2), Double::doubleValue)));
+                largeLongs.sumByDouble(each -> Integer.valueOf(each.intValue() % 2), Double::doubleValue),
+                largeLongs.parallelStream().collect(Collectors2.sumByDouble(each -> Integer.valueOf(each.intValue() % 2), Double::doubleValue)));
     }
 
     @Test

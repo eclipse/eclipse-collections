@@ -18,8 +18,11 @@ import org.eclipse.collections.api.collection.primitive.MutableBooleanCollection
 import org.eclipse.collections.api.list.primitive.MutableBooleanList;
 import org.eclipse.collections.impl.bag.mutable.HashBag;
 import org.eclipse.collections.impl.collection.mutable.primitive.AbstractMutableBooleanCollectionTestCase;
+import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.list.mutable.primitive.BooleanArrayList;
 import org.eclipse.collections.impl.test.Verify;
+import org.eclipse.collections.impl.tuple.Tuples;
+import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -149,7 +152,8 @@ public abstract class AbstractMutableBooleanBagTestCase extends AbstractMutableB
         super.anySatisfy();
         long[] count = {0};
         MutableBooleanBag bag = this.newWith(false, true, false);
-        Assert.assertTrue(bag.anySatisfy(value -> {
+        Assert.assertTrue(bag.anySatisfy(value ->
+        {
             count[0]++;
             return value;
         }));
@@ -163,7 +167,8 @@ public abstract class AbstractMutableBooleanBagTestCase extends AbstractMutableB
         super.allSatisfy();
         int[] count = {0};
         MutableBooleanBag bag = this.newWith(false, true, false);
-        Assert.assertFalse(bag.allSatisfy(value -> {
+        Assert.assertFalse(bag.allSatisfy(value ->
+        {
             count[0]++;
             return !value;
         }));
@@ -269,5 +274,49 @@ public abstract class AbstractMutableBooleanBagTestCase extends AbstractMutableB
         Assert.assertEquals(this.classUnderTest(), this.classUnderTest().toImmutable());
         Assert.assertNotSame(this.classUnderTest(), this.classUnderTest().toImmutable());
         Verify.assertInstanceOf(ImmutableBooleanBag.class, this.classUnderTest().toImmutable());
+    }
+
+    @Test
+    public void topOccurrences()
+    {
+        Verify.assertThrows(IllegalArgumentException.class, () -> this.newWith().topOccurrences(-1));
+        Assert.assertTrue(this.newWith().topOccurrences(1).isEmpty());
+        Assert.assertEquals(
+                Lists.mutable.with(PrimitiveTuples.pair(true, 2)),
+                this.newWith(true, true, false).topOccurrences(1));
+        Assert.assertEquals(
+                Lists.mutable.with(PrimitiveTuples.pair(false, 2)),
+                this.newWith(false, true, false).topOccurrences(1));
+        Assert.assertEquals(
+                Lists.mutable.with(PrimitiveTuples.pair(true, 2), PrimitiveTuples.pair(false, 1)),
+                this.newWith(true, true, false).topOccurrences(2));
+        Assert.assertEquals(
+                Lists.mutable.with(PrimitiveTuples.pair(true, 1), PrimitiveTuples.pair(false, 1)).toBag(),
+                this.newWith(true, false).topOccurrences(1).toBag());
+        Assert.assertEquals(
+                Lists.mutable.with(PrimitiveTuples.pair(false, 2), PrimitiveTuples.pair(true, 1)).toBag(),
+                this.newWith(true, false, false).topOccurrences(2).toBag());
+    }
+
+    @Test
+    public void bottomOccurrences()
+    {
+        Verify.assertThrows(IllegalArgumentException.class, () -> this.newWith().bottomOccurrences(-1));
+        Assert.assertTrue(this.newWith().bottomOccurrences(1).isEmpty());
+        Assert.assertEquals(
+                Lists.mutable.with(PrimitiveTuples.pair(false, 1)),
+                this.newWith(true, true, false).bottomOccurrences(1));
+        Assert.assertEquals(
+                Lists.mutable.with(PrimitiveTuples.pair(true, 1)),
+                this.newWith(false, true, false).bottomOccurrences(1));
+        Assert.assertEquals(
+                Lists.mutable.with(PrimitiveTuples.pair(true, 1), PrimitiveTuples.pair(false, 2)),
+                this.newWith(false, true, false).bottomOccurrences(2));
+        Assert.assertEquals(
+                Lists.mutable.with(PrimitiveTuples.pair(true, 1), PrimitiveTuples.pair(false, 1)),
+                this.newWith(true, false).bottomOccurrences(1));
+        Assert.assertEquals(
+                Lists.mutable.with(PrimitiveTuples.pair(false, 1), PrimitiveTuples.pair(true, 2)),
+                this.newWith(true, true, false).bottomOccurrences(2));
     }
 }
