@@ -538,6 +538,14 @@ public abstract class AbstractRichIterableTestCase
         Assert.assertNull(this.newWith(1, 2, 3, 4, 5).detect(Integer.valueOf(6)::equals));
     }
 
+    @Test
+    public void detectOptional()
+    {
+        Assert.assertEquals(Integer.valueOf(3), this.newWith(1, 2, 3, 4, 5).detectOptional(Integer.valueOf(3)::equals).get());
+        Assert.assertNotNull(this.newWith(1, 2, 3, 4, 5).detectOptional(Integer.valueOf(6)::equals));
+        Verify.assertThrows(NoSuchElementException.class, () -> this.newWith(1, 2, 3, 4, 5).detectOptional(Integer.valueOf(6)::equals).get());
+    }
+
     @Test(expected = NoSuchElementException.class)
     public void min_empty_throws()
     {
@@ -643,6 +651,14 @@ public abstract class AbstractRichIterableTestCase
     {
         Assert.assertEquals(Integer.valueOf(3), this.newWith(1, 2, 3, 4, 5).detectWith(Object::equals, 3));
         Assert.assertNull(this.newWith(1, 2, 3, 4, 5).detectWith(Object::equals, 6));
+    }
+
+    @Test
+    public void detectWithOptional()
+    {
+        Assert.assertEquals(Integer.valueOf(3), this.newWith(1, 2, 3, 4, 5).detectWithOptional(Object::equals, 3).get());
+        Assert.assertNotNull(this.newWith(1, 2, 3, 4, 5).detectWithOptional(Object::equals, 6));
+        Verify.assertThrows(NoSuchElementException.class, () -> this.newWith(1, 2, 3, 4, 5).detectWithOptional(Object::equals, 6).get());
     }
 
     @Test
