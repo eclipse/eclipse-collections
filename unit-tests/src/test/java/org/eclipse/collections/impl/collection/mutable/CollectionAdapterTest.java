@@ -284,7 +284,7 @@ public class CollectionAdapterTest extends AbstractCollectionTestCase
     public void chunk_large_size()
     {
         MutableCollection<String> collection = this.newWith("1", "2", "3", "4", "5", "6", "7");
-        Assert.assertEquals(collection.toList(), collection.chunk(10).getFirst());
+        Assert.assertEquals(collection.toList(), collection.chunk(10).getOnly());
     }
 
     @Override

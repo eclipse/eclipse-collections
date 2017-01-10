@@ -68,7 +68,7 @@ Refer to links below for additional details:
 public class Collectors2AdditionalTest
 {
     public static final Interval SMALL_INTERVAL = Interval.oneTo(5);
-    public static final Interval LARGE_INTERVAL = Interval.oneTo(200000);
+    public static final Interval LARGE_INTERVAL = Interval.oneTo(30000);
     public static final Integer HALF_SIZE = Integer.valueOf(LARGE_INTERVAL.size() / 2);
     private final List<Integer> smallData = new ArrayList<Integer>(SMALL_INTERVAL);
     private final List<Integer> bigData = new ArrayList<Integer>(LARGE_INTERVAL);
