@@ -822,8 +822,8 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
     public void chunk_large_size()
     {
         super.chunk_large_size();
-        Assert.assertEquals(this.newBag(), this.newBag().chunk(10).getFirst());
-        Verify.assertInstanceOf(ImmutableBag.class, this.newBag().chunk(10).getFirst());
+        Assert.assertEquals(this.newBag(), this.newBag().chunk(10).getOnly());
+        Verify.assertInstanceOf(ImmutableBag.class, this.newBag().chunk(10).getOnly());
     }
 
     private ImmutableBag<String> classUnderTestWithNull()

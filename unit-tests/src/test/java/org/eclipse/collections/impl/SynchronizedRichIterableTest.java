@@ -36,6 +36,14 @@ public class SynchronizedRichIterableTest extends AbstractRichIterableTestCase
 
     @Override
     @Test
+    public void chunk_large_size()
+    {
+        RichIterable<String> collection = this.newWith("1", "2", "3", "4", "5", "6", "7");
+        Verify.assertIterablesEqual(collection, collection.chunk(10).getOnly());
+    }
+
+    @Override
+    @Test
     public void partition()
     {
         RichIterable<Integer> integers = this.newWith(-3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9);

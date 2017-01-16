@@ -49,6 +49,14 @@ public class UnmodifiableRichIterableTest extends AbstractRichIterableTestCase
         this.unmodifiableCollection = UnmodifiableRichIterable.of(this.mutableCollection);
     }
 
+    @Override
+    @Test
+    public void chunk_large_size()
+    {
+        RichIterable<String> collection = this.newWith("1", "2", "3", "4", "5", "6", "7");
+        Verify.assertIterablesEqual(collection, collection.chunk(10).getOnly());
+    }
+
     @Test
     public void testDelegatingMethods()
     {
