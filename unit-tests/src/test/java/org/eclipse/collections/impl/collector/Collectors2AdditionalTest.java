@@ -13,14 +13,10 @@ package org.eclipse.collections.impl.collector;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import org.eclipse.collections.api.block.function.primitive.DoubleFunction;
-import org.eclipse.collections.api.block.function.primitive.IntFunction;
-import org.eclipse.collections.api.block.function.primitive.LongFunction;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.list.primitive.BooleanList;
 import org.eclipse.collections.api.list.primitive.ByteList;
@@ -38,7 +34,6 @@ import org.eclipse.collections.impl.block.factory.IntegerPredicates;
 import org.eclipse.collections.impl.block.factory.Predicates2;
 import org.eclipse.collections.impl.factory.Bags;
 import org.eclipse.collections.impl.factory.Lists;
-import org.eclipse.collections.impl.factory.Maps;
 import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.factory.primitive.BooleanLists;
 import org.eclipse.collections.impl.factory.primitive.ByteLists;
@@ -55,6 +50,7 @@ import org.eclipse.collections.impl.partition.list.PartitionFastList;
 import org.eclipse.collections.impl.partition.set.PartitionUnifiedSet;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
+import org.eclipse.collections.impl.utility.Iterate;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -227,6 +223,46 @@ public class Collectors2AdditionalTest
         Assert.assertEquals(
                 largeLongs.sumByDouble(each -> Integer.valueOf(each.intValue() % 2), Double::doubleValue),
                 largeLongs.parallelStream().collect(Collectors2.sumByDouble(each -> Integer.valueOf(each.intValue() % 2), Double::doubleValue)));
+    }
+
+    @Test
+    public void sumByBigInteger()
+    {
+        Assert.assertEquals(
+                Iterate.sumByBigInteger(SMALL_INTERVAL, each -> Integer.valueOf(each.intValue() % 2), each -> BigInteger.valueOf(each.longValue())),
+                SMALL_INTERVAL.stream().collect(Collectors2.sumByBigInteger(each -> Integer.valueOf(each.intValue() % 2), each -> BigInteger.valueOf(each.longValue()))));
+
+        Assert.assertEquals(
+                Iterate.sumByBigInteger(LARGE_INTERVAL, each -> Integer.valueOf(each.intValue() % 2), each -> BigInteger.valueOf(each.longValue())),
+                LARGE_INTERVAL.stream().collect(Collectors2.sumByBigInteger(each -> Integer.valueOf(each.intValue() % 2), each -> BigInteger.valueOf(each.longValue()))));
+    }
+
+    @Test
+    public void sumByBigIntegerParallel()
+    {
+        Assert.assertEquals(
+                Iterate.sumByBigInteger(LARGE_INTERVAL, each -> Integer.valueOf(each.intValue() % 2), each -> BigInteger.valueOf(each.longValue())),
+                LARGE_INTERVAL.parallelStream().collect(Collectors2.sumByBigInteger(each -> Integer.valueOf(each.intValue() % 2), each -> BigInteger.valueOf(each.longValue()))));
+    }
+
+    @Test
+    public void sumByBigDecimal()
+    {
+        Assert.assertEquals(
+                Iterate.sumByBigDecimal(SMALL_INTERVAL, each -> Integer.valueOf(each.intValue() % 2), BigDecimal::new),
+                SMALL_INTERVAL.stream().collect(Collectors2.sumByBigDecimal(each -> Integer.valueOf(each.intValue() % 2), BigDecimal::new)));
+
+        Assert.assertEquals(
+                Iterate.sumByBigDecimal(LARGE_INTERVAL, each -> Integer.valueOf(each.intValue() % 2), BigDecimal::new),
+                LARGE_INTERVAL.stream().collect(Collectors2.sumByBigDecimal(each -> Integer.valueOf(each.intValue() % 2), BigDecimal::new)));
+    }
+
+    @Test
+    public void sumByBigDecimalParallel()
+    {
+        Assert.assertEquals(
+                Iterate.sumByBigDecimal(LARGE_INTERVAL, each -> Integer.valueOf(each.intValue() % 2), BigDecimal::new),
+                LARGE_INTERVAL.parallelStream().collect(Collectors2.sumByBigDecimal(each -> Integer.valueOf(each.intValue() % 2), BigDecimal::new)));
     }
 
     @Test
@@ -782,6 +818,19 @@ public class Collectors2AdditionalTest
     }
 
     @Test
+    public void summarizingBigDecimal()
+    {
+        ValueHolder valueHolder = new ValueHolder(5, 100, 10.0);
+        BigDecimalSummaryStatistics summaryStatistics =
+                Lists.mutable.withNValues(25_000, () -> valueHolder)
+                        .stream()
+                        .collect(Collectors2.<ValueHolder>summarizingBigDecimal(vh -> BigDecimal.valueOf(vh.getLongValue())));
+        Assert.assertEquals(BigDecimal.valueOf(2_500_000L), summaryStatistics.getSum());
+        Assert.assertEquals(BigDecimal.valueOf(100L), summaryStatistics.getMin());
+        Assert.assertEquals(BigDecimal.valueOf(100L), summaryStatistics.getMax());
+    }
+
+    @Test
     public void summarizingBigDecimalParallel()
     {
         ValueHolder valueHolder = new ValueHolder(5, 100, 10.0);
@@ -795,6 +844,41 @@ public class Collectors2AdditionalTest
     }
 
     @Test
+    public void summingBigDecimal()
+    {
+        ValueHolder valueHolder = new ValueHolder(5, 100, 10.0);
+        BigDecimal sum =
+                Lists.mutable.withNValues(25_000, () -> valueHolder)
+                        .stream()
+                        .collect(Collectors2.<ValueHolder>summingBigDecimal(vh -> BigDecimal.valueOf(vh.getLongValue())));
+        Assert.assertEquals(BigDecimal.valueOf(2_500_000L), sum);
+    }
+
+    @Test
+    public void summingBigDecimalParallel()
+    {
+        ValueHolder valueHolder = new ValueHolder(5, 100, 10.0);
+        BigDecimal sum =
+                Lists.mutable.withNValues(25_000, () -> valueHolder)
+                        .parallelStream()
+                        .collect(Collectors2.<ValueHolder>summingBigDecimal(vh -> BigDecimal.valueOf(vh.getLongValue())));
+        Assert.assertEquals(BigDecimal.valueOf(2_500_000L), sum);
+    }
+
+    @Test
+    public void summarizingBigInteger()
+    {
+        ValueHolder valueHolder = new ValueHolder(5, 100, 10.0);
+        BigIntegerSummaryStatistics summaryStatistics =
+                Lists.mutable.withNValues(25_000, () -> valueHolder)
+                        .stream()
+                        .collect(Collectors2.<ValueHolder>summarizingBigInteger(vh -> BigInteger.valueOf(vh.getLongValue())));
+        Assert.assertEquals(BigInteger.valueOf(2_500_000L), summaryStatistics.getSum());
+        Assert.assertEquals(BigInteger.valueOf(100L), summaryStatistics.getMin());
+        Assert.assertEquals(BigInteger.valueOf(100L), summaryStatistics.getMax());
+    }
+
+    @Test
     public void summarizingBigIntegerParallel()
     {
         ValueHolder valueHolder = new ValueHolder(5, 100, 10.0);
@@ -805,5 +889,27 @@ public class Collectors2AdditionalTest
         Assert.assertEquals(BigInteger.valueOf(2_500_000L), summaryStatistics.getSum());
         Assert.assertEquals(BigInteger.valueOf(100L), summaryStatistics.getMin());
         Assert.assertEquals(BigInteger.valueOf(100L), summaryStatistics.getMax());
+    }
+
+    @Test
+    public void summingBigInteger()
+    {
+        ValueHolder valueHolder = new ValueHolder(5, 100, 10.0);
+        BigInteger sum =
+                Lists.mutable.withNValues(25_000, () -> valueHolder)
+                        .stream()
+                        .collect(Collectors2.<ValueHolder>summingBigInteger(vh -> BigInteger.valueOf(vh.getLongValue())));
+        Assert.assertEquals(BigInteger.valueOf(2_500_000L), sum);
+    }
+
+    @Test
+    public void summingBigIntegerParallel()
+    {
+        ValueHolder valueHolder = new ValueHolder(5, 100, 10.0);
+        BigInteger sum =
+                Lists.mutable.withNValues(25_000, () -> valueHolder)
+                        .parallelStream()
+                        .collect(Collectors2.<ValueHolder>summingBigInteger(vh -> BigInteger.valueOf(vh.getLongValue())));
+        Assert.assertEquals(BigInteger.valueOf(2_500_000L), sum);
     }
 }
