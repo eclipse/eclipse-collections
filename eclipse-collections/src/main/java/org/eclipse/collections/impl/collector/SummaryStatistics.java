@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2017 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -10,6 +10,10 @@
 
 package org.eclipse.collections.impl.collector;
 
+import java.io.Externalizable;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 import java.util.DoubleSummaryStatistics;
 import java.util.IntSummaryStatistics;
 import java.util.LongSummaryStatistics;
@@ -27,14 +31,16 @@ import org.eclipse.collections.impl.factory.Maps;
  *
  * @since 8.1
  */
-public class SummaryStatistics<T> implements Procedure<T>
+public class SummaryStatistics<T> implements Procedure<T>, Externalizable
 {
+    private static final long serialVersionUID = 1L;
+
     private ImmutableMap<Object, IntFunction<? super T>> intFunctionsMap = Maps.immutable.empty();
     private ImmutableMap<Object, LongFunction<? super T>> longFunctionsMap = Maps.immutable.empty();
     private ImmutableMap<Object, DoubleFunction<? super T>> doubleFunctionsMap = Maps.immutable.empty();
-    private ImmutableMap<Object, IntSummaryStatistics> intStatisticsMap = Maps.immutable.empty();
-    private ImmutableMap<Object, LongSummaryStatistics> longStatisticsMap = Maps.immutable.empty();
-    private ImmutableMap<Object, DoubleSummaryStatistics> doubleStatisticsMap = Maps.immutable.empty();
+    private ImmutableMap<Object, SerializableIntSummaryStatistics> intStatisticsMap = Maps.immutable.empty();
+    private ImmutableMap<Object, SerializableLongSummaryStatistics> longStatisticsMap = Maps.immutable.empty();
+    private ImmutableMap<Object, SerializableDoubleSummaryStatistics> doubleStatisticsMap = Maps.immutable.empty();
 
     public SummaryStatistics()
     {
@@ -46,31 +52,31 @@ public class SummaryStatistics<T> implements Procedure<T>
             ImmutableMap<Object, DoubleFunction<? super T>> doubleFunctions)
     {
         this.intFunctionsMap = intFunctions;
-        this.intStatisticsMap = intFunctions.collectValues((key, value) -> new IntSummaryStatistics());
+        this.intStatisticsMap = intFunctions.collectValues((key, value) -> new SerializableIntSummaryStatistics());
         this.longFunctionsMap = longFunctions;
-        this.longStatisticsMap = longFunctions.collectValues((key, value) -> new LongSummaryStatistics());
+        this.longStatisticsMap = longFunctions.collectValues((key, value) -> new SerializableLongSummaryStatistics());
         this.doubleFunctionsMap = doubleFunctions;
-        this.doubleStatisticsMap = doubleFunctions.collectValues((key, value) -> new DoubleSummaryStatistics());
+        this.doubleStatisticsMap = doubleFunctions.collectValues((key, value) -> new SerializableDoubleSummaryStatistics());
     }
 
     public SummaryStatistics<T> addIntFunction(Object key, IntFunction<? super T> function)
     {
         this.intFunctionsMap = this.intFunctionsMap.newWithKeyValue(key, function);
-        this.intStatisticsMap = this.intStatisticsMap.newWithKeyValue(key, new IntSummaryStatistics());
+        this.intStatisticsMap = this.intStatisticsMap.newWithKeyValue(key, new SerializableIntSummaryStatistics());
         return this;
     }
 
     public SummaryStatistics<T> addLongFunction(Object key, LongFunction<? super T> function)
     {
         this.longFunctionsMap = this.longFunctionsMap.newWithKeyValue(key, function);
-        this.longStatisticsMap = this.longStatisticsMap.newWithKeyValue(key, new LongSummaryStatistics());
+        this.longStatisticsMap = this.longStatisticsMap.newWithKeyValue(key, new SerializableLongSummaryStatistics());
         return this;
     }
 
     public SummaryStatistics<T> addDoubleFunction(Object key, DoubleFunction<? super T> function)
     {
         this.doubleFunctionsMap = this.doubleFunctionsMap.newWithKeyValue(key, function);
-        this.doubleStatisticsMap = this.doubleStatisticsMap.newWithKeyValue(key, new DoubleSummaryStatistics());
+        this.doubleStatisticsMap = this.doubleStatisticsMap.newWithKeyValue(key, new SerializableDoubleSummaryStatistics());
         return this;
     }
 
@@ -112,5 +118,27 @@ public class SummaryStatistics<T> implements Procedure<T>
                 SummaryStatistics::value,
                 SummaryStatistics::merge,
                 Collector.Characteristics.UNORDERED);
+    }
+
+    @Override
+    public void writeExternal(ObjectOutput out) throws IOException
+    {
+        out.writeObject(this.intFunctionsMap);
+        out.writeObject(this.longFunctionsMap);
+        out.writeObject(this.doubleFunctionsMap);
+        out.writeObject(this.intStatisticsMap);
+        out.writeObject(this.longStatisticsMap);
+        out.writeObject(this.doubleStatisticsMap);
+    }
+
+    @Override
+    public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
+    {
+        this.intFunctionsMap = (ImmutableMap<Object, IntFunction<? super T>>) in.readObject();
+        this.longFunctionsMap = (ImmutableMap<Object, LongFunction<? super T>>) in.readObject();
+        this.doubleFunctionsMap = (ImmutableMap<Object, DoubleFunction<? super T>>) in.readObject();
+        this.intStatisticsMap = (ImmutableMap<Object, SerializableIntSummaryStatistics>) in.readObject();
+        this.longStatisticsMap = (ImmutableMap<Object, SerializableLongSummaryStatistics>) in.readObject();
+        this.doubleStatisticsMap = (ImmutableMap<Object, SerializableDoubleSummaryStatistics>) in.readObject();
     }
 }

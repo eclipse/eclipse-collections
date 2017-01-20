@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2017 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -14,6 +14,7 @@ import java.util.List;
 
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.impl.factory.Lists;
+import org.eclipse.collections.impl.test.SerializeTestHelper;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -83,5 +84,14 @@ public class SummaryStatisticsTest
         Assert.assertEquals(100, summaryStatistics2.getIntStats("0").getSum());
         Assert.assertEquals(100L, summaryStatistics2.getLongStats("0").getSum());
         Assert.assertEquals(100.0d, summaryStatistics2.getDoubleStats("0").getSum(), 0.0);
+    }
+
+    @Test
+    public void serialization()
+    {
+        SummaryStatistics stats = new SummaryStatistics().addIntFunction("1", each -> 1);
+        SummaryStatistics deserialized = SerializeTestHelper.serializeDeserialize(stats);
+        Assert.assertNotSame(stats, deserialized);
+        Assert.assertNotNull(deserialized.getIntStats("1"));
     }
 }
