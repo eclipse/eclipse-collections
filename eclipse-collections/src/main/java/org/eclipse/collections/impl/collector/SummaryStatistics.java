@@ -21,10 +21,11 @@ import org.eclipse.collections.api.block.function.primitive.LongFunction;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.impl.factory.Maps;
-import org.eclipse.collections.impl.tuple.Tuples;
 
 /**
  * A Summarizer can be used to aggregate statistics for multiple primitive attributes.
+ *
+ * @since 8.1
  */
 public class SummaryStatistics<T> implements Procedure<T>
 {

@@ -6,6 +6,7 @@ This is the 8.1.0 minor release.
 New Functionality
 -----------------
 
+* Implement summingBigDecimal, sumByBigDecimal, summingBigInteger, sumByBigInteger on Collectors2. 
 * Implement BigDecimalSummaryStatistics and BigIntegerSummaryStatistics.
 * Implement SummaryStatistics and Collectors2.summarizing.
 * Integrate JaCoCo for test coverage.

@@ -21,6 +21,8 @@ import org.eclipse.collections.api.block.procedure.Procedure;
  * BigDecimalSummaryStatistics can be used to keep a rolling count, sum, min, max and average of BigDecimal values.
  *
  * @see Collectors2#summarizingBigDecimal(Function)
+ *
+ * @since 8.1
  */
 public class BigDecimalSummaryStatistics implements Procedure<BigDecimal>
 {
