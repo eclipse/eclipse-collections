@@ -17,10 +17,26 @@ package org.eclipse.collections.api;
 <(wideStatisticsImport.(type))>
 
 import org.eclipse.collections.api.bag.primitive.Mutable<name>Bag;
+import org.eclipse.collections.api.block.function.primitive.<name>ToBooleanFunction;
+import org.eclipse.collections.api.block.function.primitive.<name>ToByteFunction;
+import org.eclipse.collections.api.block.function.primitive.<name>ToShortFunction;
+import org.eclipse.collections.api.block.function.primitive.<name>ToCharFunction;
+import org.eclipse.collections.api.block.function.primitive.<name>ToDoubleFunction;
+import org.eclipse.collections.api.block.function.primitive.<name>ToFloatFunction;
+import org.eclipse.collections.api.block.function.primitive.<name>ToIntFunction;
+import org.eclipse.collections.api.block.function.primitive.<name>ToLongFunction;
 import org.eclipse.collections.api.block.function.primitive.Object<name>ToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
 import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
 import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
+import org.eclipse.collections.api.collection.primitive.MutableBooleanCollection;
+import org.eclipse.collections.api.collection.primitive.MutableByteCollection;
+import org.eclipse.collections.api.collection.primitive.MutableCharCollection;
+import org.eclipse.collections.api.collection.primitive.MutableDoubleCollection;
+import org.eclipse.collections.api.collection.primitive.MutableFloatCollection;
+import org.eclipse.collections.api.collection.primitive.MutableIntCollection;
+import org.eclipse.collections.api.collection.primitive.MutableLongCollection;
+import org.eclipse.collections.api.collection.primitive.MutableShortCollection;
 import org.eclipse.collections.api.iterator.<name>Iterator;
 import org.eclipse.collections.api.list.primitive.Mutable<name>List;
 import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
@@ -55,6 +71,78 @@ public interface <name>Iterable extends PrimitiveIterable
     <name>Iterable reject(<name>Predicate predicate);
 
     \<V> RichIterable\<V> collect(<name>ToObjectFunction\<? extends V> function);
+
+    /**
+     * @since 8.1.
+     */
+    default \<R extends MutableBooleanCollection> R collectBoolean(<name>ToBooleanFunction function, R target)
+    {
+        this.each(each ->  target.add(function.valueOf(each)));
+        return target;
+    }
+
+    /**
+     * @since 8.1.
+     */
+    default \<R extends MutableByteCollection> R collectByte(<name>ToByteFunction function, R target)
+    {
+        this.each(each ->  target.add(function.valueOf(each)));
+        return target;
+    }
+
+    /**
+     * @since 8.1.
+     */
+    default \<R extends MutableCharCollection> R collectChar(<name>ToCharFunction function, R target)
+    {
+        this.each(each ->  target.add(function.valueOf(each)));
+        return target;
+    }
+
+    /**
+     * @since 8.1.
+     */
+    default \<R extends MutableShortCollection> R collectShort(<name>ToShortFunction function, R target)
+    {
+        this.each(each ->  target.add(function.valueOf(each)));
+        return target;
+    }
+
+    /**
+     * @since 8.1.
+     */
+    default \<R extends MutableIntCollection> R collectInt(<name>ToIntFunction function, R target)
+    {
+        this.each(each ->  target.add(function.valueOf(each)));
+        return target;
+    }
+
+    /**
+     * @since 8.1.
+     */
+    default \<R extends MutableFloatCollection> R collectFloat(<name>ToFloatFunction function, R target)
+    {
+        this.each(each ->  target.add(function.valueOf(each)));
+        return target;
+    }
+
+    /**
+     * @since 8.1.
+     */
+    default \<R extends MutableLongCollection> R collectLong(<name>ToLongFunction function, R target)
+    {
+        this.each(each ->  target.add(function.valueOf(each)));
+        return target;
+    }
+
+    /**
+     * @since 8.1.
+     */
+    default \<R extends MutableDoubleCollection> R collectDouble(<name>ToDoubleFunction function, R target)
+    {
+        this.each(each ->  target.add(function.valueOf(each)));
+        return target;
+    }
 
     <type> detectIfNone(<name>Predicate predicate, <type> ifNone);
 
