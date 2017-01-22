@@ -30,6 +30,22 @@ import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFuncti
 import org.eclipse.collections.api.iterator.<name>Iterator;
 import org.eclipse.collections.impl.bag.mutable.primitive.<name>HashBag;
 import org.eclipse.collections.impl.block.factory.primitive.<name>Predicates;
+import org.eclipse.collections.impl.factory.primitive.BooleanLists;
+import org.eclipse.collections.impl.factory.primitive.BooleanSets;
+import org.eclipse.collections.impl.factory.primitive.ByteLists;
+import org.eclipse.collections.impl.factory.primitive.ByteSets;
+import org.eclipse.collections.impl.factory.primitive.CharLists;
+import org.eclipse.collections.impl.factory.primitive.CharSets;
+import org.eclipse.collections.impl.factory.primitive.DoubleLists;
+import org.eclipse.collections.impl.factory.primitive.DoubleSets;
+import org.eclipse.collections.impl.factory.primitive.FloatLists;
+import org.eclipse.collections.impl.factory.primitive.FloatSets;
+import org.eclipse.collections.impl.factory.primitive.IntLists;
+import org.eclipse.collections.impl.factory.primitive.IntSets;
+import org.eclipse.collections.impl.factory.primitive.LongLists;
+import org.eclipse.collections.impl.factory.primitive.LongSets;
+import org.eclipse.collections.impl.factory.primitive.ShortLists;
+import org.eclipse.collections.impl.factory.primitive.ShortSets;
 <if(primitive.floatingPoint)>import org.eclipse.collections.impl.list.Interval;<endif>
 import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
 import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
@@ -327,6 +343,66 @@ public abstract class Abstract<name>IterableTestCase
         Assert.assertEquals(this.newObjectCollectionWith(<["0", "1", "1", "2", "2", "2"]:(literal.(type))(); separator=", ">), iterable.collect(function));
         Assert.assertEquals(this.newObjectCollectionWith(), this.newWith().collect(function));
         Assert.assertEquals(this.newObjectCollectionWith(<(literal.(type))("2")>), this.newWith(<(literal.(type))("3")>).collect(function));
+    }
+
+    @Test
+    public void collectPrimitivesToLists()
+    {
+        <name>Iterable iterable = this.newWith(<["1", "2"]:(literal.(type))(); separator=", ">);
+        Assert.assertEquals(
+                BooleanLists.mutable.with(true, true),
+                iterable.collectBoolean(each -> true, BooleanLists.mutable.empty()));
+        Assert.assertEquals(
+                ByteLists.mutable.with((byte) 1, (byte) 1),
+                iterable.collectByte(each -> (byte) 1, ByteLists.mutable.empty()));
+        Assert.assertEquals(
+                CharLists.mutable.with('a', 'a'),
+                iterable.collectChar(each -> 'a', CharLists.mutable.empty()));
+        Assert.assertEquals(
+                ShortLists.mutable.with((short) 1, (short) 1),
+                iterable.collectShort(each -> (short) 1, ShortLists.mutable.empty()));
+        Assert.assertEquals(
+                IntLists.mutable.with(1, 1),
+                iterable.collectInt(each -> 1, IntLists.mutable.empty()));
+        Assert.assertEquals(
+                FloatLists.mutable.with(1.0f, 1.0f),
+                iterable.collectFloat(each -> 1.0f, FloatLists.mutable.empty()));
+        Assert.assertEquals(
+                LongLists.mutable.with(1L, 1L),
+                iterable.collectLong(each -> 1L, LongLists.mutable.empty()));
+        Assert.assertEquals(
+                DoubleLists.mutable.with(1.0d, 1.0d),
+                iterable.collectDouble(each -> 1.0d, DoubleLists.mutable.empty()));
+    }
+
+    @Test
+    public void collectPrimitivesToSets()
+    {
+        <name>Iterable iterable = this.newWith(<["1", "2"]:(literal.(type))(); separator=", ">);
+        Assert.assertEquals(
+                BooleanSets.mutable.with(false),
+                iterable.collectBoolean(each -> false, BooleanSets.mutable.empty()));
+        Assert.assertEquals(
+                ByteSets.mutable.with((byte) 2),
+                iterable.collectByte(each -> (byte) 2, ByteSets.mutable.empty()));
+        Assert.assertEquals(
+                CharSets.mutable.with('b'),
+                iterable.collectChar(each -> 'b', CharSets.mutable.empty()));
+        Assert.assertEquals(
+                ShortSets.mutable.with((short) 2),
+                iterable.collectShort(each -> (short) 2, ShortSets.mutable.empty()));
+        Assert.assertEquals(
+                IntSets.mutable.with(2),
+                iterable.collectInt(each -> 2, IntSets.mutable.empty()));
+        Assert.assertEquals(
+                FloatSets.mutable.with(2.0f),
+                iterable.collectFloat(each -> 2.0f, FloatSets.mutable.empty()));
+        Assert.assertEquals(
+                LongSets.mutable.with(2L),
+                iterable.collectLong(each -> 2L, LongSets.mutable.empty()));
+        Assert.assertEquals(
+                DoubleSets.mutable.with(2.0d),
+                iterable.collectDouble(each -> 2.0d, DoubleSets.mutable.empty()));
     }
 
     @Test
