@@ -14,6 +14,7 @@ body(type, name) ::= <<
 
 package org.eclipse.collections.api;
 
+import java.util.Collection;
 <(wideStatisticsImport.(type))>
 
 import org.eclipse.collections.api.bag.primitive.Mutable<name>Bag;
@@ -71,6 +72,35 @@ public interface <name>Iterable extends PrimitiveIterable
     <name>Iterable reject(<name>Predicate predicate);
 
     \<V> RichIterable\<V> collect(<name>ToObjectFunction\<? extends V> function);
+
+    /**
+     * @since 8.1.
+     */
+    default \<V, R extends Collection\<V>\> R collect(<name>ToObjectFunction\<? extends V> function, R target)
+    {
+        this.each(each -> target.add(function.valueOf(each)));
+        return target;
+    }
+
+    /**
+     * @since 8.1.
+     */
+    default \<V, R extends Collection\<V>\> R flatCollect(<name>ToObjectFunction\<? extends Iterable\<V>\> function, R target)
+    {
+        this.each(each ->
+        {
+            Iterable\<V> iterable = function.valueOf(each);
+            if (iterable instanceof Collection)
+            {
+                target.addAll((Collection\<V>) iterable);
+            }
+            else
+            {
+                iterable.forEach(target::add);
+            }
+        });
+        return target;
+    }
 
     /**
      * @since 8.1.
