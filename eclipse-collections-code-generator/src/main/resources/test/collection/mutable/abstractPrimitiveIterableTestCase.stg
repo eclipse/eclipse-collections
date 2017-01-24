@@ -19,6 +19,7 @@ body(type, wrapperName, name) ::= <<
 package org.eclipse.collections.impl.collection.mutable.primitive;
 
 import java.util.Arrays;
+import java.util.List;
 <if(primitive.floatingPoint)>import java.util.HashSet;<endif>
 import java.util.NoSuchElementException;
 <if(primitive.floatingPoint)>import java.util.Set;<endif>
@@ -30,6 +31,9 @@ import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFuncti
 import org.eclipse.collections.api.iterator.<name>Iterator;
 import org.eclipse.collections.impl.bag.mutable.primitive.<name>HashBag;
 import org.eclipse.collections.impl.block.factory.primitive.<name>Predicates;
+import org.eclipse.collections.impl.factory.Bags;
+import org.eclipse.collections.impl.factory.Lists;
+import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.factory.primitive.BooleanLists;
 import org.eclipse.collections.impl.factory.primitive.BooleanSets;
 import org.eclipse.collections.impl.factory.primitive.ByteLists;
@@ -343,6 +347,39 @@ public abstract class Abstract<name>IterableTestCase
         Assert.assertEquals(this.newObjectCollectionWith(<["0", "1", "1", "2", "2", "2"]:(literal.(type))(); separator=", ">), iterable.collect(function));
         Assert.assertEquals(this.newObjectCollectionWith(), this.newWith().collect(function));
         Assert.assertEquals(this.newObjectCollectionWith(<(literal.(type))("2")>), this.newWith(<(literal.(type))("3")>).collect(function));
+    }
+
+    @Test
+    public void collectWithTarget()
+    {
+        <name>ToObjectFunction\<<wrapperName>\> function = parameter -> <(castIntToNarrowTypeWithParens.(type))("parameter - 1")>;
+        Assert.assertEquals(Bags.mutable.with(<["0", "1", "2"]:(literal.(type))(); separator=", ">), this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">).collect(function, Bags.mutable.empty()));
+        <name>Iterable iterable = this.newWith(<["1", "2", "2", "3", "3", "3"]:(literal.(type))(); separator=", ">);
+        Assert.assertEquals(Sets.mutable.with(<["0", "1", "2"]:(literal.(type))(); separator=", ">), iterable.collect(function, Sets.mutable.empty()));
+        Assert.assertEquals(Lists.mutable.empty(), this.newWith().collect(function, Lists.mutable.empty()));
+        Assert.assertEquals(Lists.mutable.with(<(literal.(type))("2")>), this.newWith(<(literal.(type))("3")>).collect(function, Lists.mutable.empty()));
+    }
+
+    @Test
+    public void flatCollectWithTarget()
+    {
+        <name>ToObjectFunction\<List\<<wrapperName>\>> function = parameter -> Lists.mutable.with(<(castIntToNarrowTypeWithParens.(type))("parameter - 1")>);
+        Assert.assertEquals(Bags.mutable.with(<["0", "1", "2"]:(literal.(type))(); separator=", ">), this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">).flatCollect(function, Bags.mutable.empty()));
+        <name>Iterable iterable = this.newWith(<["1", "2", "2", "3", "3", "3"]:(literal.(type))(); separator=", ">);
+        Assert.assertEquals(Sets.mutable.with(<["0", "1", "2"]:(literal.(type))(); separator=", ">), iterable.flatCollect(function, Sets.mutable.empty()));
+        Assert.assertEquals(Lists.mutable.empty(), this.newWith().flatCollect(function, Lists.mutable.empty()));
+        Assert.assertEquals(Lists.mutable.with(<(literal.(type))("2")>), this.newWith(<(literal.(type))("3")>).flatCollect(function, Lists.mutable.empty()));
+    }
+
+    @Test
+    public void flatCollectIterableWithTarget()
+    {
+        <name>ToObjectFunction\<Iterable\<<wrapperName>\>> function = parameter -> Lists.mutable.with(<(castIntToNarrowTypeWithParens.(type))("parameter - 1")>).asLazy();
+        Assert.assertEquals(Bags.mutable.with(<["0", "1", "2"]:(literal.(type))(); separator=", ">), this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">).flatCollect(function, Bags.mutable.empty()));
+        <name>Iterable iterable = this.newWith(<["1", "2", "2", "3", "3", "3"]:(literal.(type))(); separator=", ">);
+        Assert.assertEquals(Sets.mutable.with(<["0", "1", "2"]:(literal.(type))(); separator=", ">), iterable.flatCollect(function, Sets.mutable.empty()));
+        Assert.assertEquals(Lists.mutable.empty(), this.newWith().flatCollect(function, Lists.mutable.empty()));
+        Assert.assertEquals(Lists.mutable.with(<(literal.(type))("2")>), this.newWith(<(literal.(type))("3")>).flatCollect(function, Lists.mutable.empty()));
     }
 
     @Test
