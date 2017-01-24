@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.NoSuchElementException;
 
 import org.eclipse.collections.api.<name>Iterable;
@@ -31,6 +32,7 @@ import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFuncti
 import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
 import org.eclipse.collections.api.block.procedure.primitive.<name>IntProcedure;
 import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
+import org.eclipse.collections.api.collection.primitive.Mutable<name>Collection;
 import org.eclipse.collections.api.iterator.Mutable<name>Iterator;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.list.primitive.<name>List;
@@ -573,42 +575,49 @@ public class <name>ArrayList extends Abstract<name>Iterable
 
     public boolean noneSatisfy(<name>Predicate predicate)
     {
-        for (int i = 0; i \< this.size; i++)
-        {
-            if (predicate.accept(this.items[i]))
-            {
-                return false;
-            }
-        }
-        return true;
+        return !this.anySatisfy(predicate);
     }
 
     public <name>ArrayList select(<name>Predicate predicate)
     {
-        <name>ArrayList result = new <name>ArrayList();
+        return this.select(predicate, new <name>ArrayList());
+    }
+
+    /**
+     * @since 8.1.
+     */
+    public \<R extends Mutable<name>Collection> R select(<name>Predicate predicate, R target)
+    {
         for (int i = 0; i \< this.size; i++)
         {
             <type> item = this.items[i];
             if (predicate.accept(item))
             {
-                result.add(item);
+                target.add(item);
             }
         }
-        return result;
+        return target;
     }
 
     public <name>ArrayList reject(<name>Predicate predicate)
     {
-        <name>ArrayList result = new <name>ArrayList();
+        return this.reject(predicate, new <name>ArrayList());
+    }
+
+    /**
+     * @since 8.1.
+     */
+    public \<R extends Mutable<name>Collection> R reject(<name>Predicate predicate, R target)
+    {
         for (int i = 0; i \< this.size; i++)
         {
             <type> item = this.items[i];
             if (!predicate.accept(item))
             {
-                result.add(item);
+                target.add(item);
             }
         }
-        return result;
+        return target;
     }
 
     public <type> detectIfNone(<name>Predicate predicate, <type> ifNone)
@@ -626,7 +635,14 @@ public class <name>ArrayList extends Abstract<name>Iterable
 
     public \<V> MutableList\<V> collect(<name>ToObjectFunction\<? extends V> function)
     {
-        FastList\<V> target = FastList.newList(this.size);
+        return this.collect(function, FastList.newList(this.size));
+    }
+
+    /**
+     * @since 8.1.
+     */
+    public \<V, R extends Collection\<V>\> R collect(<name>ToObjectFunction\<? extends V> function, R target)
+    {
         for (int i = 0; i \< this.size; i++)
         {
             target.add(function.valueOf(this.items[i]));

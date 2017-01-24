@@ -112,13 +112,7 @@ public abstract class AbstractMutable<name>ValuesMap extends Abstract<name>Itera
     @Override
     public boolean containsAll(<name>Iterable source)
     {
-        return source.allSatisfy(new <name>Predicate()
-        {
-            public boolean accept(<type> value)
-            {
-                return AbstractMutable<name>ValuesMap.this.contains(value);
-            }
-        });
+        return source.allSatisfy((<type> value) -> AbstractMutable<name>ValuesMap.this.contains(value));
     }
 
     public <type> max()
@@ -246,59 +240,17 @@ public abstract class AbstractMutable<name>ValuesMap extends Abstract<name>Itera
 
     public Mutable<name>Bag select(<name>Predicate predicate)
     {
-        Mutable<name>Bag result = new <name>HashBag();
-
-        <forEachValueSatisfying(template = {result.add(<value>)})>
-
-        return result;
+        return this.select(predicate, new <name>HashBag());
     }
 
     public Mutable<name>Bag reject(<name>Predicate predicate)
     {
-        Mutable<name>Bag result = new <name>HashBag();
-        if (this.getSentinelValues() != null)
-        {
-            if (this.getSentinelValues().containsZeroKey && !predicate.accept(this.getSentinelValues().zeroValue))
-            {
-                result.add(this.getSentinelValues().zeroValue);
-            }
-            if (this.getSentinelValues().containsOneKey && !predicate.accept(this.getSentinelValues().oneValue))
-            {
-                result.add(this.getSentinelValues().oneValue);
-            }
-        }
-        for (int i = 0; i \< this.getTableSize(); i++)
-        {
-            if (this.isNonSentinelAtIndex(i) && !predicate.accept(this.getValueAtIndex(i)))
-            {
-                result.add(this.getValueAtIndex(i));
-            }
-        }
-        return result;
+        return this.reject(predicate, new <name>HashBag());
     }
 
     public \<V> MutableBag\<V> collect(<name>ToObjectFunction\<? extends V> function)
     {
-        MutableBag\<V> target = HashBag.newBag(this.size());
-        if (this.getSentinelValues() != null)
-        {
-            if (this.getSentinelValues().containsZeroKey)
-            {
-                target.add(function.valueOf(this.getSentinelValues().zeroValue));
-            }
-            if (this.getSentinelValues().containsOneKey)
-            {
-                target.add(function.valueOf(this.getSentinelValues().oneValue));
-            }
-        }
-        for (int i = 0; i \< this.getTableSize(); i++)
-        {
-            if (this.isNonSentinelAtIndex(i))
-            {
-                target.add(function.valueOf(this.getValueAtIndex(i)));
-            }
-        }
-        return target;
+        return this.collect(function, HashBag.newBag(this.size()));
     }
 
     public <type> detectIfNone(<name>Predicate predicate, <type> value)
@@ -345,25 +297,7 @@ public abstract class AbstractMutable<name>ValuesMap extends Abstract<name>Itera
 
     public boolean noneSatisfy(<name>Predicate predicate)
     {
-        if (this.getSentinelValues() != null)
-        {
-            if (this.getSentinelValues().containsZeroKey && predicate.accept(this.getSentinelValues().zeroValue))
-            {
-                return false;
-            }
-            if (this.getSentinelValues().containsOneKey && predicate.accept(this.getSentinelValues().oneValue))
-            {
-                return false;
-            }
-        }
-        for (int i = 0; i \< this.getTableSize(); i++)
-        {
-            if (this.isNonSentinelAtIndex(i) && predicate.accept(this.getValueAtIndex(i)))
-            {
-                return false;
-            }
-        }
-        return true;
+        return !this.anySatisfy(predicate);
     }
 
     <if(primitive.floatingPoint)>public <wideType.(type)> sum()
