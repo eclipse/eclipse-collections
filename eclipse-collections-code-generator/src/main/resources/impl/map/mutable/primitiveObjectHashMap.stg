@@ -509,13 +509,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
                 ? (T[]) Array.newInstance(a.getClass().getComponentType(), size)
                 : a;
 
-        this.forEachWithIndex(new ObjectIntProcedure\<Object>()
-        {
-            public void value(Object each, int index)
-            {
-                result[index] = (T) each;
-            }
-        });
+        this.forEachWithIndex((Object each, int index) -> result[index] = (T) each);
         if (result.length > size)
         {
             result[size] = null;
@@ -1270,48 +1264,12 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
 
     public boolean noneSatisfy(Predicate\<? super V> predicate)
     {
-        if (this.sentinelValues != null)
-        {
-            if (this.sentinelValues.containsZeroKey && predicate.accept(this.sentinelValues.zeroValue))
-            {
-                return false;
-            }
-            if (this.sentinelValues.containsOneKey && predicate.accept(this.sentinelValues.oneValue))
-            {
-                return false;
-            }
-        }
-        for (int i = 0; i \< this.keys.length; i++)
-        {
-            if (isNonSentinel(this.keys[i]) && predicate.accept(this.values[i]))
-            {
-                return false;
-            }
-        }
-        return true;
+        return !this.anySatisfy(predicate);
     }
 
     public \<P> boolean noneSatisfyWith(Predicate2\<? super V, ? super P> predicate, P parameter)
     {
-        if (this.sentinelValues != null)
-        {
-            if (this.sentinelValues.containsZeroKey && predicate.accept(this.sentinelValues.zeroValue, parameter))
-            {
-                return false;
-            }
-            if (this.sentinelValues.containsOneKey && predicate.accept(this.sentinelValues.oneValue, parameter))
-            {
-                return false;
-            }
-        }
-        for (int i = 0; i \< this.keys.length; i++)
-        {
-            if (isNonSentinel(this.keys[i]) && predicate.accept(this.values[i], parameter))
-            {
-                return false;
-            }
-        }
-        return true;
+        return !this.anySatisfyWith(predicate, parameter);
     }
 
     public \<IV> IV injectInto(IV injectedValue, Function2\<? super IV, ? super V, ? extends IV> function)
@@ -2158,13 +2116,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
 
     public void putAll(<name>ObjectMap\<? extends V> map)
     {
-        map.forEachKeyValue(new <name>ObjectProcedure\<V>()
-        {
-            public void value(<type> key, V value)
-            {
-                <name>ObjectHashMap.this.put(key, value);
-            }
-        });
+        map.forEachKeyValue((<type> key, V value) -> <name>ObjectHashMap.this.put(key, value));
     }
 
     public boolean containsKey(<type> key)
@@ -3031,25 +2983,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
 
         public boolean noneSatisfy(<name>Predicate predicate)
         {
-            if (<name>ObjectHashMap.this.sentinelValues != null)
-            {
-                if (<name>ObjectHashMap.this.sentinelValues.containsZeroKey && predicate.accept(EMPTY_KEY))
-                {
-                    return false;
-                }
-                if (<name>ObjectHashMap.this.sentinelValues.containsOneKey && predicate.accept(REMOVED_KEY))
-                {
-                    return false;
-                }
-            }
-            for (<type> key : <name>ObjectHashMap.this.keys)
-            {
-                if (isNonSentinel(key) && predicate.accept(key))
-                {
-                    return false;
-                }
-            }
-            return true;
+            return !this.anySatisfy(predicate);
         }
 
         public boolean add(<type> element)
@@ -3099,13 +3033,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         {
             int oldSize = this.size();
             final <name>Set sourceSet = source instanceof <name>Set ? (<name>Set) source : source.toSet();
-            <name>ObjectHashMap\<V> retained = <name>ObjectHashMap.this.select(new <name>ObjectPredicate\<V>()
-            {
-                public boolean accept(<type> key, V value)
-                {
-                    return sourceSet.contains(key);
-                }
-            });
+            <name>ObjectHashMap\<V> retained = <name>ObjectHashMap.this.select((<type> key, V value) -> sourceSet.contains(key));
             if (retained.size() != oldSize)
             {
                 <name>ObjectHashMap.this.keys = retained.keys;

@@ -50,26 +50,87 @@ import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
  */
 public interface <name>Iterable extends PrimitiveIterable
 {
+    /**
+     * Returns a primitive iterator that can be used to iterate over the <name>Iterable in an
+     * imperative style.
+     */
     <name>Iterator <type>Iterator();
 
+    /**
+     * Converts the <name>Iterable to a primitive <type> array.
+     */
     <type>[] toArray();
 
+    /**
+     * Returns true if the value is contained in the <name>Iterable, and false if it is not.
+     */
     boolean contains(<type> value);
 
+    /**
+     * Returns true if the all of the values specified in the source array are contained
+     * in the <name>Iterable, and false if they are not.
+     */
     boolean containsAll(<type>... source);
 
+    /**
+     * Returns true if the all of the values specified in the source <name>Iterable are contained
+     * in the <name>Iterable, and false if they are not.
+     */
     boolean containsAll(<name>Iterable source);
 
+    /**
+     * Applies the <name>Procedure to each element in the <name>Iterable.
+     */
     void forEach(<name>Procedure procedure);
 
     /**
+     * A synonym for forEach.
+     *
      * @since 7.0.
      */
     void each(<name>Procedure procedure);
 
+    /**
+     * Returns a new <name>Iterable with all of the elements in the <name>Iterable that
+     * return true for the specified predicate.
+     */
     <name>Iterable select(<name>Predicate predicate);
 
+    /**
+     * Returns a new <name>Iterable with all of the elements in the <name>Iterable that
+     * return false for the specified predicate.
+     */
     <name>Iterable reject(<name>Predicate predicate);
+
+    /**
+     * @since 8.1.
+     */
+    default \<R extends Mutable<name>Collection> R select(<name>Predicate predicate, R target)
+    {
+        this.each(each ->
+        {
+            if (predicate.accept(each))
+            {
+                target.add(each);
+            }
+        });
+        return target;
+    }
+
+    /**
+     * @since 8.1.
+     */
+    default \<R extends Mutable<name>Collection> R reject(<name>Predicate predicate, R target)
+    {
+        this.each(each ->
+        {
+            if (!predicate.accept(each))
+            {
+                target.add(each);
+            }
+        });
+        return target;
+    }
 
     \<V> RichIterable\<V> collect(<name>ToObjectFunction\<? extends V> function);
 
@@ -176,20 +237,48 @@ public interface <name>Iterable extends PrimitiveIterable
 
     <type> detectIfNone(<name>Predicate predicate, <type> ifNone);
 
+    /**
+     * Returns a count of the number of elements in the <name>Iterable that return true for the
+     * specified predicate.
+     */
     int count(<name>Predicate predicate);
 
+    /**
+     * Returns true if any of the elements in the <name>Iterable return true for the
+     * specified predicate, otherwise returns false.
+     */
     boolean anySatisfy(<name>Predicate predicate);
 
+    /**
+     * Returns true if all of the elements in the <name>Iterable return true for the
+     * specified predicate, otherwise returns false.
+     */
     boolean allSatisfy(<name>Predicate predicate);
 
+    /**
+     * Returns true if none of the elements in the <name>Iterable return true for the
+     * specified predicate, otherwise returns false.
+     */
     boolean noneSatisfy(<name>Predicate predicate);
 
+    /**
+     * Converts the <name>Iterable to a new Mutable<name>List.
+     */
     Mutable<name>List toList();
 
+    /**
+     * Converts the <name>Iterable to a new Mutable<name>Set.
+     */
     Mutable<name>Set toSet();
 
+    /**
+     * Converts the <name>Iterable to a new Mutable<name>Bag.
+     */
     Mutable<name>Bag toBag();
 
+    /**
+     * Returns a Lazy<name>Iterable adapter wrapping the source <name>Iterable.
+     */
     Lazy<name>Iterable asLazy();
 
     \<T> T injectInto(T injectedValue, Object<name>ToObjectFunction\<? super T, ? extends T> function);

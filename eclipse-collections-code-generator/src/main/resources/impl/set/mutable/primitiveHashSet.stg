@@ -22,6 +22,7 @@ import java.io.ObjectInput;
 import java.io.ObjectOutput;
 import java.io.Serializable;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.NoSuchElementException;
 
 import org.eclipse.collections.api.<name>Iterable;
@@ -29,6 +30,7 @@ import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFuncti
 import org.eclipse.collections.api.block.function.primitive.Object<name>ToObjectFunction;
 import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
 import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
+import org.eclipse.collections.api.collection.primitive.Mutable<name>Collection;
 import org.eclipse.collections.api.iterator.<name>Iterator;
 import org.eclipse.collections.api.iterator.Mutable<name>Iterator;
 import org.eclipse.collections.api.set.ImmutableSet;
@@ -527,15 +529,21 @@ public final class <name>HashSet extends Abstract<name>Set implements Mutable<na
 
     public <name>HashSet select(<name>Predicate predicate)
     {
-        <name>HashSet result = new <name>HashSet();
+        return this.select(predicate, new <name>HashSet());
+    }
 
+    /**
+     * @since 8.1.
+     */
+    public \<R extends Mutable<name>Collection> R select(<name>Predicate predicate, R target)
+    {
         int zeroToThirtyOne = this.zeroToThirtyOne;
         while (zeroToThirtyOne != 0)
         {
             <type> value = <(castFromInt.(type))("Integer.numberOfTrailingZeros(zeroToThirtyOne)")>;
             if (predicate.accept(value))
             {
-                result.add(value);
+                target.add(value);
             }
             zeroToThirtyOne &= ~(1 \<\< <(castRealTypeToInt.(type))("value")>);
         }
@@ -546,24 +554,30 @@ public final class <name>HashSet extends Abstract<name>Set implements Mutable<na
             {
                 if (predicate.accept(value))
                 {
-                    result.add(value);
+                    target.add(value);
                 }
             }
         }
-        return result;
+        return target;
     }
 
-    public Mutable<name>Set reject(<name>Predicate predicate)
+    public <name>HashSet reject(<name>Predicate predicate)
     {
-        <name>HashSet result = new <name>HashSet();
+        return this.reject(predicate, new <name>HashSet());
+    }
 
+    /**
+     * @since 8.1.
+     */
+    public \<R extends Mutable<name>Collection> R reject(<name>Predicate predicate, R target)
+    {
         int zeroToThirtyOne = this.zeroToThirtyOne;
         while (zeroToThirtyOne != 0)
         {
             <type> value = <(castFromInt.(type))("Integer.numberOfTrailingZeros(zeroToThirtyOne)")>;
             if (!predicate.accept(value))
             {
-                result.add(value);
+                target.add(value);
             }
             zeroToThirtyOne &= ~(1 \<\< <(castRealTypeToInt.(type))("value")>);
         }
@@ -574,17 +588,23 @@ public final class <name>HashSet extends Abstract<name>Set implements Mutable<na
             {
                 if (!predicate.accept(value))
                 {
-                    result.add(value);
+                    target.add(value);
                 }
             }
         }
-        return result;
+        return target;
     }
 
     public \<V> MutableSet\<V> collect(<name>ToObjectFunction\<? extends V> function)
     {
-        MutableSet\<V> target = UnifiedSet.newSet(this.size());
+        return this.collect(function, UnifiedSet.newSet(this.size()));
+    }
 
+    /**
+     * @since 8.1.
+     */
+    public \<V, R extends Collection\<V>\> R collect(<name>ToObjectFunction\<? extends V> function, R target)
+    {
         int zeroToThirtyOne = this.zeroToThirtyOne;
         while (zeroToThirtyOne != 0)
         {
@@ -710,28 +730,7 @@ public final class <name>HashSet extends Abstract<name>Set implements Mutable<na
 
     public boolean noneSatisfy(<name>Predicate predicate)
     {
-        int zeroToThirtyOne = this.zeroToThirtyOne;
-        while (zeroToThirtyOne != 0)
-        {
-            <type> value = <(castFromInt.(type))("Integer.numberOfTrailingZeros(zeroToThirtyOne)")>;
-            if (predicate.accept(value))
-            {
-                return false;
-            }
-            zeroToThirtyOne &= ~(1 \<\< <(castRealTypeToInt.(type))("value")>);
-        }
-
-        for (<type> value : this.table)
-        {
-            if (isNonSentinel(value))
-            {
-                if (predicate.accept(value))
-                {
-                    return false;
-                }
-            }
-        }
-        return true;
+        return !this.anySatisfy(predicate);
     }
 
     <(sumMethod.(type))()>
@@ -1161,80 +1160,17 @@ public final class <name>HashSet extends Abstract<name>Set implements Mutable<na
 
         public Immutable<name>Set select(<name>Predicate predicate)
         {
-            <name>HashSet result = new <name>HashSet();
-
-            int zeroToThirtyOne = this.zeroToThirtyOne;
-            while (zeroToThirtyOne != 0)
-            {
-                <type> value = <(castFromInt.(type))("Integer.numberOfTrailingZeros(zeroToThirtyOne)")>;
-                if (predicate.accept(value))
-                {
-                    result.add(value);
-                }
-                zeroToThirtyOne &= ~(1 \<\< <(castRealTypeToInt.(type))("value")>);
-            }
-
-            for (<type> value : this.table)
-            {
-                if (isNonSentinel(value))
-                {
-                    if (predicate.accept(value))
-                    {
-                        result.add(value);
-                    }
-                }
-            }
-            return result.toImmutable();
+            return this.select(predicate, new <name>HashSet()).toImmutable();
         }
 
         public Immutable<name>Set reject(<name>Predicate predicate)
         {
-            <name>HashSet result = new <name>HashSet();
-
-            int zeroToThirtyOne = this.zeroToThirtyOne;
-            while (zeroToThirtyOne != 0)
-            {
-                <type> value = <(castFromInt.(type))("Integer.numberOfTrailingZeros(zeroToThirtyOne)")>;
-                if (!predicate.accept(value))
-                {
-                    result.add(value);
-                }
-                zeroToThirtyOne &= ~(1 \<\< <(castRealTypeToInt.(type))("value")>);
-            }
-
-            for (<type> value : this.table)
-            {
-                if (isNonSentinel(value))
-                {
-                    if (!predicate.accept(value))
-                    {
-                        result.add(value);
-                    }
-                }
-            }
-            return result.toImmutable();
+            return this.reject(predicate, new <name>HashSet()).toImmutable();
         }
 
         public \<V> ImmutableSet\<V> collect(<name>ToObjectFunction\<? extends V> function)
         {
-            MutableSet\<V> target = UnifiedSet.newSet(this.size());
-
-            int zeroToThirtyOne = this.zeroToThirtyOne;
-            while (zeroToThirtyOne != 0)
-            {
-                <type> value = <(castFromInt.(type))("Integer.numberOfTrailingZeros(zeroToThirtyOne)")>;
-                target.add(function.valueOf(value));
-                zeroToThirtyOne &= ~(1 \<\< <(castRealTypeToInt.(type))("value")>);
-            }
-
-            for (<type> value : this.table)
-            {
-                if (isNonSentinel(value))
-                {
-                    target.add(function.valueOf(value));
-                }
-            }
-            return target.toImmutable();
+            return this.collect(function, UnifiedSet.newSet(this.size())).toImmutable();
         }
 
         public <type> detectIfNone(<name>Predicate predicate, <type> ifNone)
@@ -1344,28 +1280,7 @@ public final class <name>HashSet extends Abstract<name>Set implements Mutable<na
 
         public boolean noneSatisfy(<name>Predicate predicate)
         {
-            int zeroToThirtyOne = this.zeroToThirtyOne;
-            while (zeroToThirtyOne != 0)
-            {
-                <type> value = <(castFromInt.(type))("Integer.numberOfTrailingZeros(zeroToThirtyOne)")>;
-                if (predicate.accept(value))
-                {
-                    return false;
-                }
-                zeroToThirtyOne &= ~(1 \<\< <(castRealTypeToInt.(type))("value")>);
-            }
-
-            for (<type> value : this.table)
-            {
-                if (isNonSentinel(value))
-                {
-                    if (predicate.accept(value))
-                    {
-                        return false;
-                    }
-                }
-            }
-            return true;
+            return !this.anySatisfy(predicate);
         }
 
         <(sumMethod.(type))()>

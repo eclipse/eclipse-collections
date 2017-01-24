@@ -455,6 +455,18 @@ public abstract class Abstract<name>IterableTestCase
     }
 
     @Test
+    public void selectWithTarget()
+    {
+        <name>Iterable iterable = this.classUnderTest();
+        int size = iterable.size();
+        Verify.assertSize(size >= 3 ? 3 : size, iterable.select(<name>Predicates.lessThan(<(literal.(type))("4")>), <name>Sets.mutable.empty()));
+        Verify.assertSize(size >= 2 ? 2 : size, iterable.select(<name>Predicates.lessThan(<(literal.(type))("3")>), <name>Sets.mutable.empty()));
+        <name>Iterable iterable1 = this.newWith(<["0", "1", "2", "2", "3", "3", "3"]:(literal.(type))(); separator=", ">);
+        Assert.assertEquals(<name>Sets.mutable.with(<["0", "1"]:(literal.(type))(); separator=", ">), iterable1.select(<name>Predicates.lessThan(<(literal.(type))("2")>), <name>Sets.mutable.empty()));
+        Assert.assertEquals(<name>Sets.mutable.with(<["2", "3"]:(literal.(type))(); separator=", ">), iterable1.select(<name>Predicates.greaterThan(<(literal.(type))("1")>), <name>Sets.mutable.empty()));
+    }
+
+    @Test
     public void reject()
     {
         <name>Iterable iterable = this.classUnderTest();
@@ -464,6 +476,18 @@ public abstract class Abstract<name>IterableTestCase
         <name>Iterable iterable1 = this.newWith(<["0", "1", "2", "2", "3", "3", "3"]:(literal.(type))(); separator=", ">);
         Assert.assertEquals(this.newMutableCollectionWith(<["2", "2", "3", "3", "3"]:(literal.(type))(); separator=", ">), iterable1.reject(<name>Predicates.lessThan(<(literal.(type))("2")>)));
         Assert.assertEquals(this.newMutableCollectionWith(<["0", "1"]:(literal.(type))(); separator=", ">), iterable1.reject(<name>Predicates.greaterThan(<(literal.(type))("1")>)));
+    }
+
+    @Test
+    public void rejectWithTarget()
+    {
+        <name>Iterable iterable = this.classUnderTest();
+        int size = iterable.size();
+        Verify.assertSize(size \<= 3 ? 0 : size - 3, iterable.reject(<name>Predicates.lessThan(<(literal.(type))("4")>), <name>Sets.mutable.empty()));
+        Verify.assertSize(size \<= 2 ? 0 : size - 2, iterable.reject(<name>Predicates.lessThan(<(literal.(type))("3")>), <name>Sets.mutable.empty()));
+        <name>Iterable iterable1 = this.newWith(<["0", "1", "2", "2", "3", "3", "3"]:(literal.(type))(); separator=", ">);
+        Assert.assertEquals(<name>Sets.mutable.with(<["2", "3"]:(literal.(type))(); separator=", ">), iterable1.reject(<name>Predicates.lessThan(<(literal.(type))("2")>), <name>Sets.mutable.empty()));
+        Assert.assertEquals(<name>Sets.mutable.with(<["0", "1"]:(literal.(type))(); separator=", ">), iterable1.reject(<name>Predicates.greaterThan(<(literal.(type))("1")>), <name>Sets.mutable.empty()));
     }
 
     @Test
