@@ -139,7 +139,7 @@ public interface MutableSortedSet<T>
     MutableSortedSet<T> dropWhile(Predicate<? super T> predicate);
 
     /**
-     * Returns an unmodifable view of the set. The returned set will be <tt>Serializable</tt> if this set is <tt>Serializable</tt>.
+     * Returns an unmodifable view of the set.
      *
      * @return an unmodifiable view of this set
      */
@@ -151,8 +151,6 @@ public interface MutableSortedSet<T>
 
     /**
      * Returns an immutable copy of this set. If the set is immutable, it returns itself.
-     * <p>
-     * The returned set will be <tt>Serializable</tt> if this set is <tt>Serializable</tt>.
      */
     @Override
     ImmutableSortedSet<T> toImmutable();

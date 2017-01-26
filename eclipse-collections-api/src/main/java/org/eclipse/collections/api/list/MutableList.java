@@ -42,7 +42,7 @@ import org.eclipse.collections.api.partition.list.PartitionMutableList;
 import org.eclipse.collections.api.tuple.Pair;
 
 /**
- * A MutableList is an implementation of a JCF List which provides methods matching the Smalltalk Collection protocol.
+ * A MutableList is an extension of java.util.List which provides methods matching the Smalltalk Collection protocol.
  */
 public interface MutableList<T>
         extends MutableCollection<T>, List<T>, Cloneable, ListIterable<T>
@@ -201,7 +201,6 @@ public interface MutableList<T>
 
     /**
      * Returns an unmodifable view of the list.
-     * The returned list will be <tt>Serializable</tt> if this list is <tt>Serializable</tt>.
      *
      * @return an unmodifiable view of this list
      */
@@ -213,7 +212,6 @@ public interface MutableList<T>
 
     /**
      * Returns an immutable copy of this list. If the list is immutable, it returns itself.
-     * The returned list will be <tt>Serializable</tt> if this list is <tt>Serializable</tt>.
      */
     @Override
     ImmutableList<T> toImmutable();
@@ -246,17 +244,23 @@ public interface MutableList<T>
     PartitionMutableList<T> partitionWhile(Predicate<? super T> predicate);
 
     /**
-     * Returns a new MutableList in reverse order
+     * Returns a new MutableList in reverse order.
      */
     @Override
     MutableList<T> toReversed();
 
     /**
-     * Mutates the current list by reversing its order and returns the current list as a result
+     * Mutates this list by reversing its order and returns the current list as a result.
      */
     MutableList<T> reverseThis();
 
+    /**
+     * Mutates this list by shuffling its elements.
+     */
     MutableList<T> shuffleThis();
 
-    MutableList<T> shuffleThis(Random rnd);
+    /**
+     * Mutates this list by shuffling its elements using the specified random.
+     */
+    MutableList<T> shuffleThis(Random random);
 }

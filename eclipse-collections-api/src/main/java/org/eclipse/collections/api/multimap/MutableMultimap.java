@@ -15,6 +15,7 @@ import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.collection.MutableCollection;
+import org.eclipse.collections.api.map.MutableMapIterable;
 import org.eclipse.collections.api.tuple.Pair;
 
 /**
@@ -101,15 +102,23 @@ public interface MutableMultimap<K, V>
     <V2> MutableMultimap<K, V2> collectValues(Function<? super V, ? extends V2> function);
 
     /**
-     * Returns a synchronized (thread-safe) multimap backed by this multimap.  In order to guarantee serial access,
-     * it is critical that <strong>all</strong> access to the backing multimap is accomplished through the returned
-     * multimap.
+     * Returns a synchronized wrapper backed by this multimap.
+     *
+     * The preferred way of iterating over a synchronized multimap is to use the forEachKey(), forEachValue(),
+     * forEachKeyValue() and forEachKeyMultiValues methods which are properly synchronized internally.
+     * <pre>
+     *  MutableMultimap synchedMultimap = multimap.asSynchronized();
+     *
+     *  synchedMultimap.forEachKey(key -> ... );
+     *  synchedMultimap.forEachValue(value -> ... );
+     *  synchedMultimap.forEachKeyValue((key, value) -> ... );
+     *  synchedMultimap.forEachKeyMultiValues((key, values) -> ... );
+     * </pre>
      * <p>
-     * The returned multimap does <i>not</i> pass the <tt>hashCode</tt> and <tt>equals</tt> operations through to the
-     * backing multimap, but relies on <tt>Object</tt>'s equals and hashCode methods.  This is necessary to preserve
-     * the contracts of these operations.
+     * If you want to iterate imperatively over the keySet(), keysView(), valuesView(), or other views, you will
+     * need to protect the iteration by wrapping the code in a synchronized block on the multimap.
      * <p>
-     * The returned multimap will be serializable if this multimap is serializable.
+     * @see MutableMapIterable#asSynchronized()
      *
      * @return a synchronized view of this multimap.
      * @since 8.0

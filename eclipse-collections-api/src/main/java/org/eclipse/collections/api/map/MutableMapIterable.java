@@ -182,52 +182,36 @@ public interface MutableMapIterable<K, V> extends MapIterable<K, V>, Map<K, V>
     MutableMapIterable<K, V> newEmpty();
 
     /**
-     * Returns an unmodifiable view of this map. This method allows modules to provide users with "read-only" access to
-     * internal maps. Any query operations on the returned map that "read through" to this map and attempt to modify the
-     * returned map, whether direct or via its iterator, result in an {@link UnsupportedOperationException}.
-     * The returned map will be <tt>Serializable</tt> if this map is <tt>Serializable</tt>.
+     * Returns an unmodifiable view of this map. This is the equivalent of using
+     * {@code Collections.unmodifiableMap(this)} only with a return type that supports the full
+     * iteration protocols available on {@code MutableMapIterable}.  Methods which would
+     * mutate the underlying map will throw UnsupportedOperationExceptions.
+     *
+     * @see java.util.Collections#unmodifiableMap(Map)
      *
      * @return an unmodifiable view of this map.
      */
     MutableMapIterable<K, V> asUnmodifiable();
 
     /**
-     * Returns a synchronized (thread-safe) map backed by the specified map.  In order to guarantee serial access, it is
-     * critical that <strong>all</strong> access to the backing map is accomplished through the returned map.<p>
+     * Returns a synchronized wrapper backed by this map.  This is the equivalent of calling
+     * {@code Collections.synchronizedMap(this)} only with the more feature rich return type of
+     * {@code MutableMapIterable}.
      * <p>
-     * It is imperative that the user manually synchronize on the returned map when iterating over any of its collection
-     * views:
+     * The preferred way of iterating over a synchronized map is to use the forEachKey(), forEachValue()
+     * and forEachKeyValue() methods which are properly synchronized internally.
      * <pre>
-     *  MutableMap map = myMutableMap.asSynchronized();
-     *      ...
-     *  Set set = map.keySet();  // Needn't be in synchronized block
-     *      ...
-     *  synchronized(map)
-     *  {  // Synchronizing on map, not set!
-     *      Iterator i = s.iterator(); // Must be in synchronized block
-     *      while (i.hasNext())
-     *          foo(i.next());
-     *  }
-     * </pre>
-     * Failure to follow this advice may result in non-deterministic behavior.
-     * <p>
-     * The preferred way of iterating over a synchronized collection is to use the collection.forEach() method which is
-     * properly synchronized internally.
-     * <pre>
-     *  MutableMap map = myMutableMap.asSynchronized();
-     *      ...
-     *  Set set = map.keySet();  // Needn't be in synchronized block
-     *     ...
-     *  Iterate.forEach(set, new Procedure()
-     *  {
-     *      public void value(Object each)
-     *      {
-     *          ...
-     *      }
-     *  });
+     *  MutableMap synchedMap = map.asSynchronized();
+     *
+     *  synchedMap.forEachKey(key -> ... );
+     *  synchedMap.forEachValue(value -> ... );
+     *  synchedMap.forEachKeyValue((key, value) -> ... );
      * </pre>
      * <p>
-     * The returned map will be serializable if the specified map is serializable.
+     * If you want to iterate imperatively over the keySet(), values(), or entrySet(), you will
+     * need to protect the iteration by wrapping the code in a synchronized block on the map.
+     *
+     * @see java.util.Collections#synchronizedMap(Map)
      */
     MutableMapIterable<K, V> asSynchronized();
 

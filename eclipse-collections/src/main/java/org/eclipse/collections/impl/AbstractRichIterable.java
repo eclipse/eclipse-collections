@@ -144,13 +144,7 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
                 ? (E[]) Array.newInstance(array.getClass().getComponentType(), size)
                 : array;
 
-        this.forEachWithIndex(new ObjectIntProcedure<Object>()
-        {
-            public void value(Object each, int index)
-            {
-                result[index] = (E) each;
-            }
-        });
+        this.forEachWithIndex((each, index) -> result[index] = (E) each);
         if (result.length > size)
         {
             result[size] = null;
@@ -596,15 +590,15 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
     }
 
     /**
-     * Returns a string representation of this collection.  The string representation consists of a list of the
-     * collection's elements in the order they are returned by its iterator, enclosed in square brackets
-     * (<tt>"[]"</tt>).  Adjacent elements are separated by the characters <tt>", "</tt> (comma and space).  Elements
-     * are converted to strings as by <tt>String.valueOf(Object)</tt>.<p>
+     * Returns a string with the elements of the iterable separated by commas with spaces and
+     * enclosed in square brackets.
      * <p>
-     * This implementation creates an empty string buffer, appends a left square bracket, and iterates over the
-     * collection appending the string representation of each element in turn.  After appending each element except the
-     * last, the string <tt>", "</tt> is appended.  Finally a right bracket is appended.  A string is obtained from the
-     * string buffer, and returned.
+     * <pre>
+     * Assert.assertEquals("[]", Lists.mutable.empty().toString());
+     * Assert.assertEquals("[1]", Lists.mutable.with(1).toString());
+     * Assert.assertEquals("[1, 2, 3]", Lists.mutable.with(1, 2, 3).toString());
+     * </pre>
+     * @see java.util.AbstractCollection#toString()
      *
      * @return a string representation of this collection.
      */

@@ -45,11 +45,16 @@ public interface PrimitiveIterable
     }
 
     /**
-     * Returns a string representation of this PrimitiveIterable.  The string representation consists of a list of the
-     * PrimitiveIterable's elements in the order they are returned by its iterator, enclosed in square brackets
-     * (<tt>"[]"</tt>).  Adjacent elements are separated by the characters <tt>", "</tt> (comma and space).  Elements
-     * are converted to strings as by String#valueOf().
+     * Returns a string with the elements of this iterable separated by commas with spaces and
+     * enclosed in square brackets.
+     * <p>
+     * <pre>
+     * Assert.assertEquals("[]", IntLists.mutable.empty().toString());
+     * Assert.assertEquals("[1]", IntLists.mutable.with(1).toString());
+     * Assert.assertEquals("[1, 2, 3]", IntLists.mutable.with(1, 2, 3).toString());
+     * </pre>
      *
+     * @see java.util.AbstractCollection#toString()
      * @return a string representation of this PrimitiveIterable
      */
     @Override
@@ -80,10 +85,8 @@ public interface PrimitiveIterable
     }
 
     /**
-     * Returns a string representation of this collection.  The string representation consists of a list of the
-     * collection's elements in the order they are returned by its iterator, enclosed in the start and end strings.
-     * Adjacent elements are separated by the separator string.  Elements are converted to strings using the appropriate
-     * version of <tt>String.valueOf()</tt>.
+     * Returns a string representation of this collection with the elements separated by the specified
+     * separator and enclosed between the start and end strings.
      *
      * @return a string representation of this collection.
      * @since 3.0

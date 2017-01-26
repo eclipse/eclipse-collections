@@ -43,7 +43,7 @@ import org.eclipse.collections.impl.utility.LazyIterate;
  * The exception is operations ending in "Into." These accept the target collection of
  * the final calculation as the first parameter.
  * <p>
- * Some effort is made to return a <tt>SortedSet</tt> if any input set is sorted, but
+ * Some effort is made to return a {@code SortedSet} if any input set is sorted, but
  * this is not guaranteed (e.g., this will not be the case for collections proxied by
  * Hibernate). When in doubt, specify the target collection explicitly with the "Into"
  * version.

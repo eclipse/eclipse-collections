@@ -10,7 +10,6 @@
 
 package org.eclipse.collections.api.stack;
 
-import java.util.AbstractCollection;
 import java.util.List;
 
 import org.eclipse.collections.api.block.function.Function;
@@ -51,12 +50,14 @@ import org.eclipse.collections.api.tuple.Pair;
  * <p>
  * {@link #getFirst()} returns the most recently added element, not the element that was added first
  * <p>
- * {@link #toString()} follows the same rules as {@link AbstractCollection#toString()} except it processes the elements
+ * {@link #toString()} follows the same rules as {@link java.util.AbstractCollection#toString()} except it processes the elements
  * in the same order as {@code forEach()}.
  */
 public interface StackIterable<T> extends OrderedIterable<T>
 {
     /**
+     * Returns the element at the top of the stack, without removing it from the stack.
+     *
      * @return the top of the stack.
      */
     T peek();
@@ -67,6 +68,8 @@ public interface StackIterable<T> extends OrderedIterable<T>
     ListIterable<T> peek(int count);
 
     /**
+     * Returns the element at a specific index, without removing it from the stack.
+     *
      * @param index the location to peek into
      * @return the element at the specified index
      */
@@ -85,8 +88,11 @@ public interface StackIterable<T> extends OrderedIterable<T>
     T getLast();
 
     /**
-     * Follows the same rules as {@link AbstractCollection#toString()} except it processes the elements
+     * Follows the same rules as {@link java.util.AbstractCollection#toString()} except it processes the elements
      * in the same order as {@code forEach()}.
+     * <pre>
+     * Assert.assertEquals("[3, 2, 1]", Stacks.mutable.with(1, 2, 3).toString());
+     * </pre>
      */
     @Override
     String toString();

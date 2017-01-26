@@ -70,11 +70,7 @@ public interface <name1><name2>Map extends <name2>ValuesMap
     int hashCode();
 
     /**
-     * Returns a string representation of this <name1><name2>Map. The string representation consists of a list of the
-     * map's key-value pairs in the order they are returned by its iterator. The key and value in each key-value pair are separated
-     * by a colon (\<tt>":"\</tt>) and each pair is enclosed in square brackets (\<tt>"[]"\</tt>). Adjacent key-value pairs
-     * are separated by the characters \<tt>", "\</tt> (comma and space). Keys and values are converted to strings as by
-     * String#valueOf().
+     * Follows the same general contract as {@link java.util.AbstractMap#toString()}
      *
      * @return a string representation of this <name1><name2>Map
      */

@@ -37,7 +37,7 @@ import org.eclipse.collections.api.set.primitive.MutableShortSet;
 import org.eclipse.collections.api.tuple.Pair;
 
 /**
- * A MutableSet is an implementation of a JCF Set which provides methods matching the Smalltalk Collection protocol.
+ * A MutableSet is an extenstion java.util.Set which provides methods matching the Smalltalk Collection protocol.
  */
 public interface MutableSet<T>
         extends UnsortedSetIterable<T>, MutableSetIterable<T>, Cloneable
@@ -121,7 +121,6 @@ public interface MutableSet<T>
 
     /**
      * Returns an unmodifable view of the set.
-     * The returned set will be <tt>Serializable</tt> if this set is <tt>Serializable</tt>.
      *
      * @return an unmodifiable view of this set
      */
@@ -133,8 +132,6 @@ public interface MutableSet<T>
 
     /**
      * Returns an immutable copy of this set. If the set is immutable, it returns itself.
-     * <p>
-     * The returned set will be <tt>Serializable</tt> if this set is <tt>Serializable</tt>.
      */
     @Override
     ImmutableSet<T> toImmutable();
