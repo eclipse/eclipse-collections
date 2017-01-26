@@ -65,11 +65,15 @@ public interface PrimitiveObjectMap<V> extends RichIterable<V>
     int hashCode();
 
     /**
-     * Returns a string representation of this PrimitiveObjectMap. The string representation consists of a list of the
-     * map's key-value pairs in the order they are returned by its iterator. The key and value in each key-value pair are separated
-     * by a colon (<tt>":"</tt>) and each pair is enclosed in square brackets (<tt>"[]"</tt>). Adjacent key-value pairs
-     * are separated by the characters <tt>", "</tt> (comma and space). Keys and values are converted to strings as by
-     * String#valueOf().
+     * Returns a string with the keys and values of this map separated by commas with spaces and
+     * enclosed in curly braces.  Each key and value is separated by an equals sign.
+     * <p>
+     * <pre>
+     * Assert.assertEquals(
+     *     "{1=1, 2=2, 3=3}",
+     *     IntObjectMaps.mutable.empty().withKeyValue(1, 1).withKeyValue(2, 2).withKeyValue(3, 3).toString());
+     * </pre>
+     * @see java.util.AbstractMap#toString()
      *
      * @return a string representation of this PrimitiveObjectMap
      */

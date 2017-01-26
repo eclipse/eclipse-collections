@@ -43,18 +43,36 @@ import org.eclipse.collections.api.partition.PartitionImmutableCollection;
 import org.eclipse.collections.api.tuple.Pair;
 
 /**
- * ImmutableCollection is the common interface between ImmutableList and ImmutableSet.
+ * ImmutableCollection is the common interface between ImmutableList, ImmutableSet and ImmutableBag.
+ * The ImmutableCollection interface is "contractually immutable" in that it does not have any mutating
+ * methods available on the public interface.
  */
 @Immutable
 public interface ImmutableCollection<T>
         extends RichIterable<T>
 {
+    /**
+     * This method is similar to the <code>with</code> method in <code>MutableCollection</code>
+     * with the difference that a new copy of this collection with the element appended will be returned.
+     */
     ImmutableCollection<T> newWith(T element);
 
+    /**
+     * This method is similar to the <code>without</code> method in <code>MutableCollection</code>
+     * with the difference that a new copy of this collection with the element removed will be returned.
+     */
     ImmutableCollection<T> newWithout(T element);
 
+    /**
+     * This method is similar to the <code>withAll</code> method in <code>MutableCollection</code>
+     * with the difference that a new copy of this collection with the elements appended will be returned.
+     */
     ImmutableCollection<T> newWithAll(Iterable<? extends T> elements);
 
+    /**
+     * This method is similar to the <code>withoutAll</code> method in <code>MutableCollection</code>
+     * with the difference that a new copy of this collection with the elements removed will be returned.
+     */
     ImmutableCollection<T> newWithoutAll(Iterable<? extends T> elements);
 
     @Override

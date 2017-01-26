@@ -1057,7 +1057,7 @@ public final class ArrayIterate
     }
 
     /**
-     * Returns <tt>true</tt> if the specified array contains the specified element.
+     * Returns {@code true} if the specified array contains the specified element.
      */
     public static <T> boolean contains(T[] objectArray, T value)
     {
@@ -1065,7 +1065,7 @@ public final class ArrayIterate
     }
 
     /**
-     * Returns <tt>true</tt> if the specified int array contains the specified int element.
+     * Returns {@code true} if the specified int array contains the specified int element.
      */
     public static boolean contains(int[] intArray, int value)
     {
@@ -1080,7 +1080,7 @@ public final class ArrayIterate
     }
 
     /**
-     * Returns <tt>true</tt> if the specified double array contains the specified double element.
+     * Returns {@code true} if the specified double array contains the specified double element.
      */
     public static boolean contains(double[] doubleArray, double value)
     {
@@ -1095,7 +1095,7 @@ public final class ArrayIterate
     }
 
     /**
-     * Returns <tt>true</tt> if the specified long array contains the specified long element.
+     * Returns {@code true} if the specified long array contains the specified long element.
      */
     public static boolean contains(long[] longArray, long value)
     {
@@ -1111,7 +1111,7 @@ public final class ArrayIterate
 
     /**
      * Searches for the first occurrence of the given argument, testing
-     * for equality using the <tt>equals</tt> method.
+     * for equality using the {@code equals} method.
      */
     public static <T> int indexOf(T[] objectArray, T elem)
     {
@@ -1119,7 +1119,7 @@ public final class ArrayIterate
     }
 
     /**
-     * Returns the first index where the predicate evaluates to true.  Returns -1 for no matches.
+     * Returns the first index where the predicate evaluates to {@code true}.  Returns -1 for no matches.
      */
     public static <T> int detectIndex(T[] objectArray, Predicate<? super T> predicate)
     {
@@ -1131,7 +1131,7 @@ public final class ArrayIterate
     }
 
     /**
-     * Searches for the first index where the predicate evaluates to true.  Returns -1 for no matches.
+     * Searches for the first index where the predicate evaluates to {@code true}.  Returns -1 for no matches.
      */
     public static <T, IV> int detectIndexWith(
             T[] objectArray,
@@ -1153,7 +1153,7 @@ public final class ArrayIterate
     }
 
     /**
-     * Returns the last index where the predicate evaluates to true.
+     * Returns the last index where the predicate evaluates to {@code true}.
      * Returns -1 for no matches.
      */
     public static <T> int detectLastIndex(T[] objectArray, Predicate<? super T> predicate)
@@ -1166,7 +1166,7 @@ public final class ArrayIterate
     }
 
     /**
-     * A null safe form of isEmpty.  Null or length of zero returns true.
+     * A null safe form of isEmpty.  Null or length of zero returns {@code true}.
      */
     public static boolean isEmpty(Object[] array)
     {

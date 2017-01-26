@@ -10,14 +10,11 @@
 
 package org.eclipse.collections.api.bag;
 
-import java.util.AbstractMap;
 import java.util.DoubleSummaryStatistics;
 import java.util.IntSummaryStatistics;
 import java.util.LongSummaryStatistics;
 import java.util.Map;
-import java.util.Optional;
 import java.util.function.BiConsumer;
-import java.util.function.BinaryOperator;
 import java.util.function.Supplier;
 import java.util.stream.Collector;
 import java.util.stream.Stream;
@@ -149,13 +146,12 @@ public interface Bag<T>
 
     /**
      * Returns a string representation of this bag. The string representation consists of a list of element-count mappings.
-     * The elements each appear once, in an order consistent with other methods like {@link #forEachWithOccurrences(ObjectIntProcedure)}
-     * and {@link #iterator()}. The element-count mappings are enclosed in braces (<tt>"{}"</tt>).  Adjacent mappings are
-     * separated by the characters <tt>", "</tt> (comma and space).  Each element-count mapping is rendered as the element
-     * followed by an equals sign (<tt>"="</tt>) followed by the number of ooccurrences. Elements and are converted to
-     * strings as by {@link String#valueOf(Object)}.
      * <p>
-     * The string representation is similar to {@link AbstractMap#toString()}, not {@link RichIterable#toString()}.
+     * <pre>
+     * Assert.assertEquals("{1=1, 2=2, 3=3}", Bags.mutable.with(1, 2, 2, 3, 3, 3).toStringOfItemToCount());
+     * </pre>
+     * This string representation is similar to {@link java.util.AbstractMap#toString()}, not {@link RichIterable#toString()},
+     * whereas the <code>toString()</code> implementation for a Bag is consistent with {@link RichIterable#toString()}.
      *
      * @return a string representation of this bag
      * @since 3.0

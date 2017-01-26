@@ -58,14 +58,8 @@ public interface MapIterable<K, V> extends RichIterable<V>
     /**
      * Executes the Procedure for each value of the map and returns {@code this}.
      * <p>
-     * <pre>e.g.
-     * return peopleByCity.<b>tap</b>(new Procedure<Person>()
-     * {
-     *     public void value(Person person)
-     *     {
-     *         LOGGER.info(person.getName());
-     *     }
-     * });
+     * <pre>
+     * return peopleByCity.<b>tap</b>(person -> LOGGER.info(person.getName()));
      * </pre>
      *
      * @see #forEach(Procedure)
@@ -90,13 +84,7 @@ public interface MapIterable<K, V> extends RichIterable<V>
      * <pre>
      *     final Collection&lt;String&gt; collection = new ArrayList&lt;String&gt;();
      *     MutableMap&lt;Integer, String&gt; map = this.newMapWithKeysValues(1, "One", 2, "Two", 3, "Three");
-     *     map.<b>forEachKeyValue</b>(new Procedure2&lt;Integer, String&gt;()
-     *     {
-     *         public void value(final Integer key, final String value)
-     *         {
-     *             collection.add(String.valueOf(key) + value);
-     *         }
-     *     });
+     *     map.<b>forEachKeyValue</b>((Integer key, String value) -> collection.add(String.valueOf(key) + value));
      *     Verify.assertContainsAll(collection, "1One", "2Two", "3Three");
      * </pre>
      */
@@ -140,17 +128,17 @@ public interface MapIterable<K, V> extends RichIterable<V>
     <A> A ifPresentApply(K key, Function<? super V, ? extends A> function);
 
     /**
-     * Returns an unmodifiable lazy iterable wrapped around the keySet for the map
+     * Returns an unmodifiable lazy iterable wrapped around the keySet for the map.
      */
     RichIterable<K> keysView();
 
     /**
-     * Returns an unmodifiable lazy iterable wrapped around the values for the map
+     * Returns an unmodifiable lazy iterable wrapped around the values for the map.
      */
     RichIterable<V> valuesView();
 
     /**
-     * Returns an unmodifiable lazy iterable of key/value pairs wrapped around the entrySet for the map
+     * Returns an unmodifiable lazy iterable of key/value pairs wrapped around the entrySet for the map.
      */
     RichIterable<Pair<K, V>> keyValuesView();
 
@@ -172,14 +160,9 @@ public interface MapIterable<K, V> extends RichIterable<V>
      * For each key and value of the map the predicate is evaluated, if the result of the evaluation is true,
      * that key and value are returned in a new map.
      * <p>
-     * <pre>e.g.
-     * peopleByCity.select(new Predicate2&lt;City, Person&gt;()
-     * {
-     *     public boolean accept(City city, Person person)
-     *     {
-     *         return city.getName().equals("Anytown") && person.getLastName().equals("Smith");
-     *     }
-     * });
+     * <pre>
+     * MapIterable&lt;City, Person&gt; selected =
+     *     peopleByCity.select((city, person) -> city.getName().equals("Anytown") && person.getLastName().equals("Smith"));
      * </pre>
      */
     MapIterable<K, V> select(Predicate2<? super K, ? super V> predicate);
@@ -188,14 +171,9 @@ public interface MapIterable<K, V> extends RichIterable<V>
      * For each key and value of the map the predicate is evaluated, if the result of the evaluation is false,
      * that key and value are returned in a new map.
      * <p>
-     * <pre>e.g.
-     * peopleByCity.reject(new Predicate2&lt;City, Person&gt;()
-     * {
-     *     public boolean accept(City city, Person person)
-     *     {
-     *         return city.getName().equals("Anytown") && person.getLastName().equals("Smith");
-     *     }
-     * });
+     * <pre>
+     * MapIterable&lt;City, Person&gt; rejected =
+     *     peopleByCity.reject((city, person) -> city.getName().equals("Anytown") && person.getLastName().equals("Smith"));
      * </pre>
      */
     MapIterable<K, V> reject(Predicate2<? super K, ? super V> predicate);
@@ -204,14 +182,9 @@ public interface MapIterable<K, V> extends RichIterable<V>
      * For each key and value of the map the function is evaluated.  The results of these evaluations are returned in
      * a new map.  The map returned will use the values projected from the function rather than the original values.
      * <p>
-     * <pre>e.g.
-     * peopleByCity.collect(new Function2&lt;City, Person, String&gt;()
-     * {
-     *     public String value(City city, Person person)
-     *     {
-     *         return Pair.of(city.getCountry(), person.getAddress().getCity());
-     *     }
-     * });
+     * <pre>
+     * MapIterable&lt;String, String&gt; collected =
+     *     peopleByCity.collect((City city, Person person) -> Pair.of(city.getCountry(), person.getAddress().getCity()));
      * </pre>
      */
     <K2, V2> MapIterable<K2, V2> collect(Function2<? super K, ? super V, Pair<K2, V2>> function);
@@ -220,14 +193,9 @@ public interface MapIterable<K, V> extends RichIterable<V>
      * For each key and value of the map the function is evaluated.  The results of these evaluations are returned in
      * a new map.  The map returned will use the values projected from the function rather than the original values.
      * <p>
-     * <pre>e.g.
-     * peopleByCity.collectValues(new Function2&lt;City, Person, String&gt;()
-     * {
-     *     public String value(City city, Person person)
-     *     {
-     *         return person.getFirstName() + " " + person.getLastName();
-     *     }
-     * });
+     * <pre>
+     * MapIterable&lt;City, String&gt; collected =
+     *     peopleByCity.collectValues((City city, Person person) -> person.getFirstName() + " " + person.getLastName());
      * </pre>
      */
     <R> MapIterable<K, R> collectValues(Function2<? super K, ? super V, ? extends R> function);
@@ -239,14 +207,9 @@ public interface MapIterable<K, V> extends RichIterable<V>
      * never used as arguments to the predicate. The result is null if predicate does not evaluate to true for
      * any key/value combination.
      * <p>
-     * <pre>e.g.
-     * peopleByCity.detect(new Predicate2&lt;City, Person&gt;()
-     * {
-     *     public boolean accept(City city, Person person)
-     *     {
-     *         return city.getName().equals("Anytown") && person.getLastName().equals("Smith");
-     *     }
-     * });
+     * <pre>
+     * Pair&lt;City, Person&gt; detected =
+     *     peopleByCity.detect((City city, Person person) -> city.getName().equals("Anytown") && person.getLastName().equals("Smith"));
      * </pre>
      */
     Pair<K, V> detect(Predicate2<? super K, ? super V> predicate);
@@ -257,8 +220,9 @@ public interface MapIterable<K, V> extends RichIterable<V>
      * of the keys and values of the map have been used as arguments. That is, there may be keys and values of
      * the map that are never used as arguments to the predicate.
      * <p>
-     * <pre>e.g.
-     * peopleByCity.detectOptional((city, person)
+     * <pre>
+     * Optional&lt;Pair&lt;City, Person&gt;&gt; detected =
+     *     peopleByCity.detectOptional((city, person)
      *          -> city.getName().equals("Anytown") && person.getLastName().equals("Smith"));
      * </pre>
      */
@@ -277,11 +241,13 @@ public interface MapIterable<K, V> extends RichIterable<V>
     int hashCode();
 
     /**
-     * Returns a string representation of this MapIterable. The string representation consists of a list of the
-     * map's key-value pairs in the order they are returned by its iterator. The key and value in each key-value pair are separated
-     * by a colon (<tt>":"</tt>) and each pair is enclosed in square brackets (<tt>"[]"</tt>). Adjacent key-value pairs
-     * are separated by the characters <tt>", "</tt> (comma and space). Keys and values are converted to strings as by
-     * {@link String#valueOf(Object)}.
+     * Returns a string with the keys and values of this map separated by commas with spaces and
+     * enclosed in curly braces.  Each key and value is separated by an equals sign.
+     * <p>
+     * <pre>
+     * Assert.assertEquals("{1=1, 2=2, 3=3}", Maps.mutable.with(1, 1, 2, 2, 3, 3).toString());
+     * </pre>
+     * @see java.util.AbstractMap#toString()
      *
      * @return a string representation of this MapIterable
      */

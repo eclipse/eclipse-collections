@@ -73,7 +73,7 @@ public interface MutableSortedBag<T>
     MutableSortedBag<T> clone();
 
     /**
-     * Returns an unmodifiable view of the set. The returned set will be <tt>Serializable</tt> if this set is <tt>Serializable</tt>.
+     * Returns an unmodifiable view of the set.
      *
      * @return an unmodifiable view of this set
      */

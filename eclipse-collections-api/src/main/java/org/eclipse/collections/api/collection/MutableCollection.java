@@ -67,8 +67,7 @@ public interface MutableCollection<T>
      * mutable and fixed size collections the following approach must be taken:
      * <p>
      * <pre>
-     * MutableCollection<String> list;
-     * list = list.with("1");
+     * MutableCollection&lt;String&gt; list = list.with("1");
      * list = list.with("2");
      * return list;
      * </pre>
@@ -89,8 +88,7 @@ public interface MutableCollection<T>
      * size collections the following approach must be taken:
      * <p>
      * <pre>
-     * MutableCollection<String> list;
-     * list = list.without("1");
+     * MutableCollection&lt;String&gt; list = list.without("1");
      * list = list.without("2");
      * return list;
      * </pre>
@@ -111,9 +109,7 @@ public interface MutableCollection<T>
      * with mutable and fixed size collections the following approach must be taken:
      * <p>
      * <pre>
-     * MutableCollection<String> list;
-     * list = list.withAll(FastList.newListWith("1", "2"));
-     * return list;
+     * MutableCollection&lt;String&gt; list = list.withAll(FastList.newListWith("1", "2"));
      * </pre>
      * In the case of {@link FixedSizeCollection} a new instance of MutableCollection will be returned by withAll, and
      * any variables that previously referenced the original collection will need to be redirected to reference the
@@ -132,9 +128,7 @@ public interface MutableCollection<T>
      * mutable and fixed size collections the following approach must be taken:
      * <p>
      * <pre>
-     * MutableCollection<String> list;
-     * list = list.withoutAll(FastList.newListWith("1", "2"));
-     * return list;
+     * MutableCollection&lt;String&gt; list = list.withoutAll(FastList.newListWith("1", "2"));
      * </pre>
      * In the case of {@link FixedSizeCollection} a new instance of MutableCollection will be returned by withoutAll,
      * and any variables that previously referenced the original collection will need to be redirected to reference the
@@ -158,14 +152,9 @@ public interface MutableCollection<T>
     /**
      * Returns a MutableCollection with all elements that evaluate to true for the specified predicate.
      * <p>
-     * <pre>e.g.
-     * return people.<b>select</b>(new Predicate&lt;Person&gt;()
-     * {
-     *     public boolean value(Person person)
-     *     {
-     *         return person.getAddress().getCity().equals("Metuchen");
-     *     }
-     * });
+     * <pre>
+     * MutableCollection&lt;Integer&gt; livesInLondon =
+     *     people.select(person -> person.getAddress().getCity().equals("London"));
      * </pre>
      */
     @Override
@@ -174,8 +163,9 @@ public interface MutableCollection<T>
     /**
      * Returns a MutableCollection with all elements that evaluate to true for the specified predicate2 and parameter.
      * <p>
-     * <pre>e.g.
-     * return integers.<b>selectWith</b>(PredicatesLite.equal(), Integer.valueOf(5));
+     * <pre>
+     * MutableCollection&lt;Integer&gt; fives =
+     *     integers.selectWith(Predicates2.equal(), Integer.valueOf(5));
      * </pre>
      */
     @Override
@@ -184,18 +174,14 @@ public interface MutableCollection<T>
     /**
      * Returns a MutableCollection with all elements that evaluate to false for the specified predicate.
      * <p>
-     * <pre>e.g.
-     * return people.reject(new Predicate&lt;Person&gt;()
-     * {
-     *     public boolean value(Person person)
-     *     {
-     *         return person.person.getLastName().equals("Smith");
-     *     }
-     * });
+     * <pre>
+     * MutableCollection&lt;Person&gt; notSmiths =
+     *     people.reject(person -> person.person.getLastName().equals("Smith"));
      * </pre>
+     * Using the <code>Predicates</code> factory:
      * <p>
-     * <pre>e.g.
-     * return people.reject(Predicates.attributeEqual("lastName", "Smith"));
+     * <pre>
+     * MutableCollection&lt;Person&gt; notSmiths = people.reject(Predicates.attributeEqual("lastName", "Smith"));
      * </pre>
      */
     @Override
@@ -205,34 +191,56 @@ public interface MutableCollection<T>
      * Returns a MutableCollection with all elements that evaluate to false for the specified predicate2 and parameter.
      * <p>
      * <pre>e.g.
-     * return integers.<b>rejectWith</b>(PredicatesLite.equal(), Integer.valueOf(5));
+     * MutableCollection&lt;Integer&gt; selected =
+     *     integers.rejectWith(Predicates2.equal(), Integer.valueOf(5));
      * </pre>
      */
     @Override
-    <P> MutableCollection<T> rejectWith(
-            Predicate2<? super T, ? super P> predicate,
-            P parameter);
+    <P> MutableCollection<T> rejectWith(Predicate2<? super T, ? super P> predicate, P parameter);
 
     /**
      * Filters a collection into two separate collections based on a predicate returned via a Pair.
      * <p>
      * <pre>e.g.
-     * return lastNames.<b>selectAndRejectWith</b>(PredicatesLite.lessThan(), "Mason");
+     * return lastNames.<b>selectAndRejectWith</b>(Predicates2.lessThan(), "Mason");
      * </pre>
      *
      * @deprecated since 6.0 use {@link RichIterable#partitionWith(Predicate2, Object)} instead.
      */
     @Deprecated
-    <P> Twin<MutableList<T>> selectAndRejectWith(
-            Predicate2<? super T, ? super P> predicate,
-            P parameter);
+    <P> Twin<MutableList<T>> selectAndRejectWith(Predicate2<? super T, ? super P> predicate, P parameter);
 
+    /**
+     * {@inheritDoc}
+     * Co-variant example for MutableCollection:
+     * <pre>
+     * PartitionMutableCollection&lt;Person&gt; newYorkersAndNonNewYorkers =
+     *     people.partition(person -> person.getAddress().getState().getName().equals("New York"));
+     * </pre>
+     */
     @Override
     PartitionMutableCollection<T> partition(Predicate<? super T> predicate);
 
+    /**
+     * {@inheritDoc}
+     * Co-variant example for MutableCollection:
+     * <pre>
+     * PartitionMutableCollection&lt;Person>&gt newYorkersAndNonNewYorkers =
+     *     people.partitionWith((Person person, String state) -> person.getAddress().getState().getName().equals(state), "New York");
+     * </pre>
+     */
     @Override
     <P> PartitionMutableCollection<T> partitionWith(Predicate2<? super T, ? super P> predicate, P parameter);
 
+    /**
+     * {@inheritDoc}
+     * Co-variant example for MutableCollection:
+     * <pre>
+     * MutableCollection&lt;Integer&gt; integers =
+     *     List.mutable.with(new Integer(0), new Long(0L), new Double(0.0)).selectInstancesOf(Integer.class);
+     * </pre>
+     * @since 2.0
+     */
     @Override
     <S> MutableCollection<S> selectInstancesOf(Class<S> clazz);
 
@@ -248,8 +256,8 @@ public interface MutableCollection<T>
     /**
      * Removes all elements in the collection that evaluate to true for the specified predicate2 and parameter.
      * <p>
-     * <pre>e.g.
-     * return lastNames.<b>removeIfWith</b>(PredicatesLite.isNull(), null);
+     * <pre>
+     * return lastNames.<b>removeIfWith</b>(Predicates2.isNull(), null);
      * </pre>
      */
     <P> boolean removeIfWith(Predicate2<? super T, ? super P> predicate, P parameter);
@@ -258,43 +266,111 @@ public interface MutableCollection<T>
      * Returns a new MutableCollection with the results of applying the specified function to each element of the source
      * collection.
      * <p>
-     * <pre>e.g.
-     * return people.collect(new Function&lt;Person, String&gt;()
-     * {
-     *     public String value(Person person)
-     *     {
-     *         return person.getFirstName() + " " + person.getLastName();
-     *     }
-     * });
+     * <pre>
+     * MutableCollection&lt;String&gt; names =
+     *     people.collect(person -> person.getFirstName() + " " + person.getLastName());
      * </pre>
      */
     @Override
     <V> MutableCollection<V> collect(Function<? super T, ? extends V> function);
 
+    /**
+     * {@inheritDoc}
+     * Co-variant example for MutableCollecton:
+     * <pre>
+     * MutableBooleanCollection licenses =
+     *     people.collectBoolean(person -> person.hasDrivingLicense());
+     * </pre>
+     */
     @Override
     MutableBooleanCollection collectBoolean(BooleanFunction<? super T> booleanFunction);
 
+    /**
+     * {@inheritDoc}
+     * Co-variant example for MutableCollection:
+     * <pre>
+     * MutableByteCollection bytes =
+     *     people.collectByte(person -> person.getCode());
+     * </pre>
+     */
     @Override
     MutableByteCollection collectByte(ByteFunction<? super T> byteFunction);
 
+    /**
+     * {@inheritDoc}
+     * Co-variant example for MutableCollection:
+     * <pre>
+     * MutableCharCollection chars =
+     *     people.collectChar(person -> person.getMiddleInitial());
+     * </pre>
+     */
     @Override
     MutableCharCollection collectChar(CharFunction<? super T> charFunction);
 
+    /**
+     * {@inheritDoc}
+     * Co-variant example for MutableCollection:
+     * <pre>
+     * MutableDoubleCollection doubles =
+     *     people.collectDouble(person -> person.getMilesFromNorthPole());
+     * </pre>
+     */
     @Override
     MutableDoubleCollection collectDouble(DoubleFunction<? super T> doubleFunction);
 
+    /**
+     * {@inheritDoc}
+     * Co-variant example for MutableCollection:
+     * <pre>
+     * MutableFloatCollection floats =
+     *     people.collectFloat(person -> person.getHeightInInches());
+     * </pre>
+     */
     @Override
     MutableFloatCollection collectFloat(FloatFunction<? super T> floatFunction);
 
+    /**
+     * {@inheritDoc}
+     * Co-variant example for MutableCollection:
+     * <pre>
+     * MutableIntCollection ints =
+     *     people.collectInt(person -> person.getAge());
+     * </pre>
+     */
     @Override
     MutableIntCollection collectInt(IntFunction<? super T> intFunction);
 
+    /**
+     * {@inheritDoc}
+     * Co-variant example for MutableCollection:
+     * <pre>
+     * MutableLongCollection longs =
+     *     people.collectLong(person -> person.getGuid());
+     * </pre>
+     */
     @Override
     MutableLongCollection collectLong(LongFunction<? super T> longFunction);
 
+    /**
+     * {@inheritDoc}
+     * Co-variant example for MutableCollection:
+     * <pre>
+     * MutableShortCollection shorts =
+     *     people.collectShort(person -> person.getNumberOfJunkMailItemsReceivedPerMonth());
+     * </pre>
+     */
     @Override
     MutableShortCollection collectShort(ShortFunction<? super T> shortFunction);
 
+    /**
+     * {@inheritDoc}
+     * Co-variant example for MutableCollection:
+     * <pre>
+     * MutableCollection&lt;Integer&gt; integers =
+     *     Lists.mutable.with(1, 2, 3).collectWith((each, parameter) -> each + parameter, Integer.valueOf(1));
+     * </pre>
+     * <p>
+     */
     @Override
     <P, V> MutableCollection<V> collectWith(Function2<? super T, ? super P, ? extends V> function, P parameter);
 
@@ -302,13 +378,28 @@ public interface MutableCollection<T>
      * Returns a new MutableCollection with the results of applying the specified function to each element of the source
      * collection, but only for elements that evaluate to true for the specified predicate.
      * <p>
-     * <pre>e.g.
-     * Lists.mutable.of().with(1, 2, 3).collectIf(Predicates.notNull(), Functions.getToString())
+     * <pre>
+     * MutableCollection&lt;String&gt; collected =
+     *     Lists.mutable.of().with(1, 2, 3).collectIf(Predicates.notNull(), Functions.getToString())
      * </pre>
      */
     @Override
     <V> MutableCollection<V> collectIf(Predicate<? super T> predicate, Function<? super T, ? extends V> function);
 
+    /**
+     * {@inheritDoc}
+     * Co-variant example for MutableCollection:
+     * <pre>
+     * Function&lt;Person, List&lt;Address&gt;&gt; addressFunction = Person::getAddresses;
+     * MutableCollection&lt;Person&gt; people = ...;
+     * MutableCollection&lt;List&lt;Address&gt;&gt; addresses = people.collect(addressFunction);
+     * MutableCollection&lt;Address&gt; addresses = people.flatCollect(addressFunction);
+     * </pre>
+     *
+     * @param function The {@link Function} to apply
+     * @return a new flattened collection produced by applying the given {@code function}
+     * @since 1.0
+     */
     @Override
     <V> MutableCollection<V> flatCollect(Function<? super T, ? extends Iterable<V>> function);
 
@@ -318,16 +409,12 @@ public interface MutableCollection<T>
             P parameter);
 
     /**
-     * Returns an unmodifiable view of this collection.  This method allows modules to provide users with "read-only"
-     * access to internal collections.  Query operations on the returned collection "read through" to this collection,
-     * and attempts to modify the returned collection, whether direct or via its iterator, result in an
-     * <tt>UnsupportedOperationException</tt>.
-     * <p>
-     * The returned collection does <i>not</i> pass the hashCode and equals operations through to the backing
-     * collection, but relies on <tt>Object</tt>'s <tt>equals</tt> and <tt>hashCode</tt> methods.  This is necessary to
-     * preserve the contracts of these operations in the case that the backing collection is a set or a list.<p>
-     * <p>
-     * The returned collection will be serializable if this collection is serializable.
+     * Returns an unmodifiable view of this collection.  This is the equivalent of using
+     * {@code Collections.unmodifiableCollection(this)} with a return type that supports the full
+     * iteration protocols available on {@code MutableCollection}.  Methods which would
+     * mutate the underlying collection will throw UnsupportedOperationExceptions.
+     *
+     * @see java.util.Collections#unmodifiableCollection(Collection)
      *
      * @return an unmodifiable view of this collection.
      * @since 1.0
@@ -335,43 +422,26 @@ public interface MutableCollection<T>
     MutableCollection<T> asUnmodifiable();
 
     /**
-     * Returns a synchronized (thread-safe) collection backed by this collection.  In order to guarantee serial access,
-     * it is critical that <strong>all</strong> access to the backing collection is accomplished through the returned
-     * collection.
-     * <p>
-     * It is imperative that the user manually synchronize on the returned collection when iterating over it using the
-     * standard JDK iterator or JDK 5 for loop.
+     * Returns a synchronized wrapper backed by this collection. This is the equivalent of using
+     * {@code Collections.synchronizedCollection(this)} only with a return type that supports the full
+     * iteration protocols available on {@code MutableCollection}.
+     *
+     * The preferred way of iterating over a synchronized collection is to use the internal iteration
+     * methods which are properly synchronized internally.
+     *
      * <pre>
-     *  MutableCollection collection = myCollection.asSynchronized();
+     *  MutableCollection synchedCollection = collection.asSynchronized();
      *     ...
-     *  synchronized(collection)
-     *  {
-     *      Iterator i = c.iterator(); // Must be in the synchronized block
-     *      while (i.hasNext())
-     *         foo(i.next());
-     *  }
+     *  synchedCollection.forEach(each -> ... );
+     *  synchedCollection.select(each -> ... );
+     *  synchedCollection.collect(each -> ... );
      * </pre>
-     * Failure to follow this advice may result in non-deterministic behavior.
+     *
+     * If you want to iterate using an imperative style, you must protect external iterators using
+     * a synchronized block.  This includes explicit iterators as well as JDK 5 style for loops.
      * <p>
-     * The preferred way of iterating over a synchronized collection is to use the collection.forEach() method which is
-     * properly synchronized internally.
-     * <pre>
-     *  MutableCollection collection = myCollection.asSynchronized();
-     *     ...
-     *  collection.forEach(new Procedure()
-     *  {
-     *      public void value(Object each)
-     *      {
-     *          ...
-     *      }
-     *  });
-     * </pre>
-     * <p>
-     * The returned collection does <i>not</i> pass the <tt>hashCode</tt> and <tt>equals</tt> operations through to the
-     * backing collection, but relies on <tt>Object</tt>'s equals and hashCode methods.  This is necessary to preserve
-     * the contracts of these operations in the case that the backing collection is a set or a list.
-     * <p>
-     * The returned collection will be serializable if this collection is serializable.
+     *
+     * @see java.util.Collections#synchronizedCollection(Collection)
      *
      * @return a synchronized view of this collection.
      * @since 1.0
@@ -379,7 +449,7 @@ public interface MutableCollection<T>
     MutableCollection<T> asSynchronized();
 
     /**
-     * Converts this MutableCollection to an ImmutableCollection.
+     * Converts this {@code MutableCollection} to an {@code ImmutableCollection}.
      *
      * @since 1.0
      */
@@ -397,6 +467,14 @@ public interface MutableCollection<T>
     @Override
     <V> MutableObjectDoubleMap<V> sumByDouble(Function<? super T, ? extends V> groupBy, DoubleFunction<? super T> function);
 
+    /**
+     * {@inheritDoc}
+     * Co-variant example for MutableCollection:
+     * <pre>
+     * MutableMultimap&lt;String, Person&gt; peopleByLastName =
+     *     people.groupBy(Person::getLastName);
+     * </pre>
+     */
     @Override
     <V> MutableMultimap<V, T> groupBy(Function<? super T, ? extends V> function);
 
