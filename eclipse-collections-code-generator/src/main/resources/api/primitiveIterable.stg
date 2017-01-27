@@ -103,6 +103,8 @@ public interface <name>Iterable extends PrimitiveIterable
     <name>Iterable reject(<name>Predicate predicate);
 
     /**
+     * Same as {@link #select(<name>Predicate)} , only the results are added to the target Mutable<name>Collection.
+     *
      * @since 8.1.
      */
     default \<R extends Mutable<name>Collection> R select(<name>Predicate predicate, R target)
@@ -118,6 +120,8 @@ public interface <name>Iterable extends PrimitiveIterable
     }
 
     /**
+     * Same as {@link #reject(<name>Predicate)} , only the results are added to the target Mutable<name>Collection.
+     *
      * @since 8.1.
      */
     default \<R extends Mutable<name>Collection> R reject(<name>Predicate predicate, R target)
@@ -132,9 +136,15 @@ public interface <name>Iterable extends PrimitiveIterable
         return target;
     }
 
+    /**
+     * Returns a new collection with the results of applying the specified function on each element of the source
+     * collection.  This method is also commonly called transform or map.
+     */
     \<V> RichIterable\<V> collect(<name>ToObjectFunction\<? extends V> function);
 
     /**
+     * Same as {@link #collect(<name>ToObjectFunction)} , only the results are added to the target Collection.
+     *
      * @since 8.1.
      */
     default \<V, R extends Collection\<V>\> R collect(<name>ToObjectFunction\<? extends V> function, R target)
@@ -144,6 +154,10 @@ public interface <name>Iterable extends PrimitiveIterable
     }
 
     /**
+     * {@code flatCollect} is a special case of {@link #collect(<name>ToObjectFunction)}. With {@code collect}, when the {@link <name>ToObjectFunction} returns
+     * a collection, the result is a collection of collections. {@code flatCollect} outputs a single "flattened" collection
+     * instead.  This method is commonly called flatMap.
+     *
      * @since 8.1.
      */
     default \<V, R extends Collection\<V>\> R flatCollect(<name>ToObjectFunction\<? extends Iterable\<V>\> function, R target)
@@ -164,6 +178,9 @@ public interface <name>Iterable extends PrimitiveIterable
     }
 
     /**
+     * Returns the target {@code MutableBooleanCollection} with the results of applying the specified function on each element
+     * of the source collection.
+     *
      * @since 8.1.
      */
     default \<R extends MutableBooleanCollection> R collectBoolean(<name>ToBooleanFunction function, R target)
@@ -173,6 +190,9 @@ public interface <name>Iterable extends PrimitiveIterable
     }
 
     /**
+     * Returns the target {@code MutableByteCollection} with the results of applying the specified function on each element
+     * of the source collection.
+     *
      * @since 8.1.
      */
     default \<R extends MutableByteCollection> R collectByte(<name>ToByteFunction function, R target)
@@ -182,6 +202,9 @@ public interface <name>Iterable extends PrimitiveIterable
     }
 
     /**
+     * Returns the target {@code MutableCharCollection} with the results of applying the specified function on each element
+     * of the source collection.
+     *
      * @since 8.1.
      */
     default \<R extends MutableCharCollection> R collectChar(<name>ToCharFunction function, R target)
@@ -191,6 +214,9 @@ public interface <name>Iterable extends PrimitiveIterable
     }
 
     /**
+     * Returns the target {@code MutableShortCollection} with the results of applying the specified function on each element
+     * of the source collection.
+     *
      * @since 8.1.
      */
     default \<R extends MutableShortCollection> R collectShort(<name>ToShortFunction function, R target)
@@ -200,6 +226,9 @@ public interface <name>Iterable extends PrimitiveIterable
     }
 
     /**
+     * Returns the target {@code MutableIntCollection} with the results of applying the specified function on each element
+     * of the source collection.
+     *
      * @since 8.1.
      */
     default \<R extends MutableIntCollection> R collectInt(<name>ToIntFunction function, R target)
@@ -209,6 +238,9 @@ public interface <name>Iterable extends PrimitiveIterable
     }
 
     /**
+     * Returns the target {@code MutableFloatCollection} with the results of applying the specified function on each element
+     * of the source collection.
+     *
      * @since 8.1.
      */
     default \<R extends MutableFloatCollection> R collectFloat(<name>ToFloatFunction function, R target)
@@ -218,6 +250,9 @@ public interface <name>Iterable extends PrimitiveIterable
     }
 
     /**
+     * Returns the target {@code MutableLongCollection} with the results of applying the specified function on each element
+     * of the source collection.
+     *
      * @since 8.1.
      */
     default \<R extends MutableLongCollection> R collectLong(<name>ToLongFunction function, R target)
@@ -227,6 +262,9 @@ public interface <name>Iterable extends PrimitiveIterable
     }
 
     /**
+     * Returns the target {@code MutableDoubleCollection} with the results of applying the specified function on each element
+     * of the source collection.
+     *
      * @since 8.1.
      */
     default \<R extends MutableDoubleCollection> R collectDouble(<name>ToDoubleFunction function, R target)
