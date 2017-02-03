@@ -1,0 +1,84 @@
+import "copyright.stg"
+
+skipBoolean() ::= "false"
+
+targetPath() ::= "org/eclipse/collections/impl/block/function/primitive"
+
+fileName(primitive) ::= "<primitive.name>CaseFunction"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.block.function.primitive;
+
+import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
+import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
+import org.eclipse.collections.api.list.MutableList;
+import org.eclipse.collections.api.tuple.Pair;
+import org.eclipse.collections.impl.factory.Lists;
+import org.eclipse.collections.impl.tuple.Tuples;
+
+/**
+ * This file was automatically generated from template file primitiveCaseFunction.stg.
+ */
+public class <name>CaseFunction\<V> implements <name>ToObjectFunction\<V>
+{
+    private static final long serialVersionUID = 1L;
+
+    private final MutableList\<Pair\<<name>Predicate, <name>ToObjectFunction\<? extends V>\>> predicateFunctions = Lists.mutable.empty();
+    private <name>ToObjectFunction\<? extends V> defaultFunction;
+
+    public <name>CaseFunction()
+    {
+    }
+
+    public <name>CaseFunction(<name>ToObjectFunction\<? extends V> newDefaultFunction)
+    {
+        this.setDefault(newDefaultFunction);
+    }
+
+    public <name>CaseFunction\<V> addCase(
+            <name>Predicate predicate,
+            <name>ToObjectFunction\<? extends V> function)
+    {
+        this.predicateFunctions.add(Tuples.pair(predicate, function));
+        return this;
+    }
+
+    public <name>CaseFunction\<V> setDefault(<name>ToObjectFunction\<? extends V> function)
+    {
+        this.defaultFunction = function;
+        return this;
+    }
+
+    @Override
+    public V valueOf(<type> argument)
+    {
+        int localSize = this.predicateFunctions.size();
+        for (int i = 0; i \< localSize; i++)
+        {
+            Pair\<<name>Predicate, <name>ToObjectFunction\<? extends V\>> pair = this.predicateFunctions.get(i);
+            if (pair.getOne().accept(argument))
+            {
+                return pair.getTwo().valueOf(argument);
+            }
+        }
+
+        if (this.defaultFunction != null)
+        {
+            return this.defaultFunction.valueOf(argument);
+        }
+        return null;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "new <name>CaseFunction(" + this.predicateFunctions + ')';
+    }
+}
+>>

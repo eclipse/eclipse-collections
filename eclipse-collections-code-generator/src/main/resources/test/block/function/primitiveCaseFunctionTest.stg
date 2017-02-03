@@ -1,0 +1,79 @@
+import "copyright.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+import "primitiveEquals.stg"
+
+skipBoolean() ::= "true"
+isTest() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/block/function/primitive"
+
+fileName(primitive) ::= "<primitive.name>CaseFunctionTest"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.wrapperName, primitive.name)>
+>>
+
+body(type, wrapperName, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.block.function.primitive;
+
+import org.eclipse.collections.impl.factory.primitive.<name>Lists;
+import org.eclipse.collections.impl.list.primitive.IntInterval;
+import org.eclipse.collections.impl.test.Verify;
+import org.junit.Assert;
+import org.junit.Test;
+
+/**
+ * This file was automatically generated from template file primitiveCaseFunctionTest.stg.
+ */
+public class <name>CaseFunctionTest
+{
+    @Test
+    public void noopCase()
+    {
+        <name>CaseFunction\<<wrapperName>\> function = new <name>CaseFunction\<<wrapperName>\>();
+        Assert.assertNull(function.valueOf(<(literal.(type))("0")>));
+    }
+
+    @Test
+    public void basicCase()
+    {
+        <name>CaseFunction\<<wrapperName>\> function = new <name>CaseFunction\<<wrapperName>\>();
+        function.addCase(ignored -> true, <wrapperName>::valueOf);
+        Assert.assertEquals(<wrapperName>.valueOf(<(literal.(type))("0")>), function.valueOf(<(literal.(type))("0")>));
+    }
+
+    @Test
+    public void defaultValue()
+    {
+        <name>CaseFunction\<String> function = new <name>CaseFunction\<String>(i -> "Yow!")
+                .addCase(i -> <(equals.(type))("i", "0")>, i -> "Patience, grasshopper");
+
+        Assert.assertEquals("Yow!", function.valueOf(<(literal.(type))("1")>));
+
+        function.setDefault(i -> "Patience, young grasshopper");
+        Assert.assertEquals("Patience, grasshopper", function.valueOf(<(literal.(type))("0")>));
+        Assert.assertEquals("Patience, young grasshopper", function.valueOf(<(literal.(type))("1")>));
+
+        Verify.assertContains("<name>CaseFunction", function.toString());
+    }
+
+    @Test
+    public void fizzBuzz()
+    {
+        String fizzBuzz = IntInterval.oneTo(20)
+                .collect<name>(i -> (<type>) i, <name>Lists.mutable.empty())
+                .collect(new <name>CaseFunction\<String>(e -> "")
+                        .addCase(e -> <(equals.(type))("e % 15", "0")>, e -> "FizzBuzz")
+                        .addCase(e -> <(equals.(type))("e % 3", "0")>, e -> "Fizz")
+                        .addCase(e -> <(equals.(type))("e % 5", "0")>, e -> "Buzz"))
+                .makeString(":");
+        Assert.assertEquals(
+                "::Fizz::Buzz:Fizz:::Fizz:Buzz::Fizz:::FizzBuzz:::Fizz::Buzz",
+                fizzBuzz);
+    }
+}
+
+>>
