@@ -6,6 +6,11 @@ This is the 8.1.0 minor release.
 New Functionality
 -----------------
 
+* Implement primitive case functions.
+* Implement select and reject with targets on primitive iterables.
+* Implement collect and flatCollect with target collections on primitiveIterable.stg.
+* Add collect<Primitives> with target collections as default methods in primitiveIterable.stg.
+* Make SummaryStatistics Serializable.
 * Implement summingBigDecimal, sumByBigDecimal, summingBigInteger, sumByBigInteger on Collectors2. 
 * Implement BigDecimalSummaryStatistics and BigIntegerSummaryStatistics.
 * Implement SummaryStatistics and Collectors2.summarizing.
