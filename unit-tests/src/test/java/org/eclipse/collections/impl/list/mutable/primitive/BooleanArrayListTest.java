@@ -13,6 +13,14 @@ package org.eclipse.collections.impl.list.mutable.primitive;
 import java.lang.reflect.Field;
 import java.util.BitSet;
 
+import org.eclipse.collections.api.list.primitive.MutableBooleanList;
+import org.eclipse.collections.api.list.primitive.MutableByteList;
+import org.eclipse.collections.api.list.primitive.MutableCharList;
+import org.eclipse.collections.api.list.primitive.MutableDoubleList;
+import org.eclipse.collections.api.list.primitive.MutableFloatList;
+import org.eclipse.collections.api.list.primitive.MutableIntList;
+import org.eclipse.collections.api.list.primitive.MutableLongList;
+import org.eclipse.collections.api.list.primitive.MutableShortList;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
 import org.junit.Test;
@@ -93,5 +101,92 @@ public class BooleanArrayListTest extends AbstractBooleanListTestCase
         Assert.assertEquals(BooleanArrayList.newListWith(true, true, false), arrayList1);
         Assert.assertEquals(BooleanArrayList.newListWith(true, true, false, true), arrayList2);
         Assert.assertEquals(BooleanArrayList.newListWith(true, true, false, true, false), arrayList3);
+    }
+
+    @Test
+    public void collectByte()
+    {
+        BooleanArrayList list = this.newWith(true, false, true);
+
+        MutableByteList mutableByteList =
+                list.collectByte(each -> each ? (byte) 1 : (byte) 0);
+
+        Assert.assertEquals(ByteArrayList.newListWith((byte) 1, (byte) 0, (byte) 1), mutableByteList);
+    }
+
+    @Test
+    public void collectShort()
+    {
+        BooleanArrayList list = this.newWith(true, false, true);
+
+        MutableShortList mutableShortList =
+                list.collectShort(each -> each ? (short) 1 : (short) 0);
+
+        Assert.assertEquals(ShortArrayList.newListWith((short) 1, (short) 0, (short) 1), mutableShortList);
+    }
+
+    @Test
+    public void collectChar()
+    {
+        BooleanArrayList list = this.newWith(true, false, true);
+
+        MutableCharList mutableCharList =
+                list.collectChar(each -> each ? (char) 1 : (char) 0);
+
+        Assert.assertEquals(CharArrayList.newListWith((char) 1, (char) 0, (char) 1), mutableCharList);
+    }
+
+    @Test
+    public void collectInt()
+    {
+        BooleanArrayList list = this.newWith(true, false, true);
+
+        MutableIntList mutableIntList =
+                list.collectInt(each -> each ? 1 : 0);
+
+        Assert.assertEquals(IntArrayList.newListWith(1, 0, 1), mutableIntList);
+    }
+
+    @Test
+    public void collectLong()
+    {
+        BooleanArrayList list = this.newWith(true, false, true);
+
+        MutableLongList mutableLongList =
+                list.collectLong(each -> each ? 1L : 0L);
+
+        Assert.assertEquals(LongArrayList.newListWith(1L, 0L, 1L), mutableLongList);
+    }
+
+    @Test
+    public void collectFloat()
+    {
+        BooleanArrayList list = this.newWith(true, false, true);
+
+        MutableFloatList mutableFloatList =
+                list.collectFloat(each -> each ? 1.0f : 0.0f);
+
+        Assert.assertEquals(FloatArrayList.newListWith(1.0f, 0.0f, 1.0f), mutableFloatList);
+    }
+
+    @Test
+    public void collectDouble()
+    {
+        BooleanArrayList list = this.newWith(true, false, true);
+
+        MutableDoubleList mutableDoubleList =
+                list.collectDouble(each -> each ? 1.0 : 0.0);
+
+        Assert.assertEquals(DoubleArrayList.newListWith(1.0, 0.0, 1.0), mutableDoubleList);
+    }
+
+    @Test
+    public void collectBoolean()
+    {
+        BooleanArrayList list = this.newWith(true, false, true);
+
+        MutableBooleanList mutableBooleanList = list.collectBoolean(each -> !each);
+
+        Assert.assertEquals(BooleanArrayList.newListWith(false, true, false), mutableBooleanList);
     }
 }

@@ -1,6 +1,7 @@
 import "copyright.stg"
 import "primitiveHashCode.stg"
 import "primitiveLiteral.stg"
+import "primitiveEquals.stg"
 
 isTest() ::= "true"
 
@@ -9,15 +10,31 @@ targetPath() ::= "org/eclipse/collections/impl/list/mutable/primitive"
 fileName(primitive) ::= "Synchronized<primitive.name>ListTest"
 
 class(primitive) ::= <<
-<body(primitive.type, primitive.wrapperName, primitive.name)>
+<body(primitive.type, primitive.wrapperName, primitive.name, primitive.allPrimitives)>
 >>
 
-body(type, wrapperName, name) ::= <<
+importMutablePrimitiveList(toName) ::= <<
+import org.eclipse.collections.api.list.primitive.Mutable<toName>List;<\n>
+>>
+
+collectPrimitive(toName, toType) ::= <<
+@Test
+public void collect<toName>()
+{
+    Synchronized<name>List list = this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">);
+
+    Mutable<toName>List mutable<toName>List =
+        list.collect<toName>(<type>Parameter -> (<toType>) (<type>Parameter + <(literal.(type))("1")>));
+
+    Assert.assertEquals(<toName>ArrayList.newListWith(<["2", "3", "4"]:(literal.(toType))(); separator=", ">), mutable<toName>List);
+}>>
+
+body(type, wrapperName, name, allPrimitives) ::= <<
 <copyright()>
 
 package org.eclipse.collections.impl.list.mutable.primitive;
 
-import org.eclipse.collections.api.list.primitive.Mutable<name>List;
+<allPrimitives:importMutablePrimitiveList()>
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -50,6 +67,30 @@ public class Synchronized<name>ListTest extends Abstract<name>ListTestCase
         Assert.assertSame(listWithLockObject, listWithLockObject.asSynchronized());
         Assert.assertSame(list, list.asSynchronized());
         Assert.assertEquals(list, list.asSynchronized());
+    }
+
+    <collectPrimitive("Byte", "byte")>
+
+    <collectPrimitive("Short", "short")>
+
+    <collectPrimitive("Char", "char")>
+
+    <collectPrimitive("Int", "int")>
+
+    <collectPrimitive("Long", "long")>
+
+    <collectPrimitive("Float", "float")>
+
+    <collectPrimitive("Double", "double")>
+
+    @Test
+    public void collectBoolean()
+    {
+        Synchronized<name>List list = this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">);
+
+        MutableBooleanList mutableBooleanList = list.collectBoolean(each -> <(equals.(type))("each", {<(literal.(type))("1")>})>);
+
+        Assert.assertEquals(BooleanArrayList.newListWith(true, false, false), mutableBooleanList);
     }
 }
 

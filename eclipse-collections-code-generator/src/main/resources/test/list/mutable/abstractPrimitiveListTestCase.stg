@@ -1,4 +1,5 @@
 import "copyright.stg"
+import "primitiveEquals.stg"
 import "primitiveHashCode.stg"
 import "primitiveLiteral.stg"
 
@@ -9,18 +10,27 @@ targetPath() ::= "org/eclipse/collections/impl/list/mutable/primitive"
 fileName(primitive) ::= "Abstract<primitive.name>ListTestCase"
 
 class(primitive) ::= <<
-<body(primitive.type, primitive.wrapperName, primitive.name)>
+<body(primitive.type, primitive.wrapperName, primitive.name, primitive.allPrimitives)>
 >>
 
-body(type, wrapperName, name) ::= <<
+importPrimitiveFunction(toName) ::= <<
+import org.eclipse.collections.api.block.function.primitive.<name>To<toName>Function;<\n>
+>>
+
+importMutablePrimitiveList(toName) ::= <<
+import org.eclipse.collections.api.list.primitive.Mutable<toName>List;<\n>
+>>
+
+body(type, wrapperName, name, allPrimitives) ::= <<
 <copyright()>
 
 package org.eclipse.collections.impl.list.mutable.primitive;
 
+<allPrimitives:importPrimitiveFunction()>
 import org.eclipse.collections.api.iterator.<name>Iterator;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.list.primitive.Immutable<name>List;
-import org.eclipse.collections.api.list.primitive.Mutable<name>List;
+<allPrimitives:importMutablePrimitiveList()>
 import org.eclipse.collections.impl.collection.mutable.primitive.AbstractMutable<name>CollectionTestCase;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.math.Mutable<wrapperName>;

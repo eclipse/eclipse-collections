@@ -20,6 +20,7 @@ New Functionality
 * Update reference guide.
 * Add Abstract primitive Stacks.
 * Add the Eclipse Collections reference guide.
+* Add collect<primitive>() methods to all implementations of the <primitive>List interface.
 
 Optimizations
 -------------
