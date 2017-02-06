@@ -915,13 +915,7 @@ public final class ConcurrentHashMap<K, V>
     @Override
     public void putAll(Map<? extends K, ? extends V> map)
     {
-        MapIterate.forEachKeyValue(map, new Procedure2<K, V>()
-        {
-            public void value(K key, V value)
-            {
-                ConcurrentHashMap.this.put(key, value);
-            }
-        });
+        MapIterate.forEachKeyValue(map, this::put);
     }
 
     @Override

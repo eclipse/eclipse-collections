@@ -25,7 +25,7 @@ public class FlatCollectIterableTest extends AbstractLazyIterableTestCase
     @Override
     protected <T> LazyIterable<T> newWith(T... elements)
     {
-        return LazyIterate.flatCollect(FastList.newListWith(elements), object -> FastList.newListWith(object));
+        return LazyIterate.flatCollect(FastList.newListWith(elements), FastList::newListWith);
     }
 
     @Test

@@ -32,14 +32,6 @@ import org.eclipse.collections.impl.tuple.Tuples;
 public abstract class AbstractMultimap<K, V, C extends RichIterable<V>>
         implements Multimap<K, V>
 {
-    private static final Function<AbstractMultimap<?, ?, ?>, ?> CREATE_COLLECTION_BLOCK = new Function<AbstractMultimap<?, ?, ?>, RichIterable<?>>()
-    {
-        public RichIterable<?> valueOf(AbstractMultimap<?, ?, ?> multimap)
-        {
-            return multimap.createCollection();
-        }
-    };
-
     protected abstract MapIterable<K, C> getMap();
 
     /**
@@ -57,7 +49,7 @@ public abstract class AbstractMultimap<K, V, C extends RichIterable<V>>
 
     protected Function<AbstractMultimap<K, V, C>, C> createCollectionBlock()
     {
-        return (Function<AbstractMultimap<K, V, C>, C>) (Function<?, ?>) CREATE_COLLECTION_BLOCK;
+        return AbstractMultimap::createCollection;
     }
 
     // Query Operations

@@ -259,13 +259,7 @@ public class <name>BooleanHashMap extends AbstractMutableBooleanValuesMap implem
 
     public <name>BooleanHashMap withoutAllKeys(<name>Iterable keys)
     {
-        keys.forEach(new <name>Procedure()
-        {
-            public void value(<type> key)
-            {
-                <name>BooleanHashMap.this.removeKey(key);
-            }
-        });
+        keys.forEach(this::removeKey);
         return this;
     }
 
@@ -395,13 +389,7 @@ public class <name>BooleanHashMap extends AbstractMutableBooleanValuesMap implem
 
     public void putAll(<name>BooleanMap map)
     {
-        map.forEachKeyValue(new <name>BooleanProcedure()
-        {
-            public void value(<type> key, boolean value)
-            {
-                <name>BooleanHashMap.this.put(key, value);
-            }
-        });
+        map.forEachKeyValue(this::put);
     }
 
     public boolean containsKey(<type> key)
@@ -1196,13 +1184,7 @@ public class <name>BooleanHashMap extends AbstractMutableBooleanValuesMap implem
 
         public boolean containsAll(<name>Iterable source)
         {
-            return source.allSatisfy(new <name>Predicate()
-            {
-                public boolean accept(<type> key)
-                {
-                    return <name>BooleanHashMap.this.containsKey(key);
-                }
-            });
+            return source.allSatisfy(<name>BooleanHashMap.this::containsKey);
         }
 
         public <name>Iterator <type>Iterator()
@@ -1527,13 +1509,7 @@ public class <name>BooleanHashMap extends AbstractMutableBooleanValuesMap implem
         {
             int oldSize = <name>BooleanHashMap.this.size();
             final <name>Set sourceSet = source instanceof <name>Set ? (<name>Set) source : source.toSet();
-            <name>BooleanHashMap retained = <name>BooleanHashMap.this.select(new <name>BooleanPredicate()
-            {
-                public boolean accept(<type> key, boolean value)
-                {
-                    return sourceSet.contains(key);
-                }
-            });
+            <name>BooleanHashMap retained = <name>BooleanHashMap.this.select((<type> key, boolean value) -> sourceSet.contains(key));
             if (retained.size() != oldSize)
             {
                 <name>BooleanHashMap.this.keys = retained.keys;
@@ -1643,13 +1619,7 @@ public class <name>BooleanHashMap extends AbstractMutableBooleanValuesMap implem
         {
             int oldSize = <name>BooleanHashMap.this.size();
             final BooleanSet sourceSet = source instanceof BooleanSet ? (BooleanSet) source : source.toSet();
-            <name>BooleanHashMap retained = <name>BooleanHashMap.this.select(new <name>BooleanPredicate()
-            {
-                public boolean accept(<type> key, boolean value)
-                {
-                    return sourceSet.contains(value);
-                }
-            });
+            <name>BooleanHashMap retained = <name>BooleanHashMap.this.select((<type> key, boolean value) -> sourceSet.contains(value));
             if (retained.size() != oldSize)
             {
                 <name>BooleanHashMap.this.keys = retained.keys;

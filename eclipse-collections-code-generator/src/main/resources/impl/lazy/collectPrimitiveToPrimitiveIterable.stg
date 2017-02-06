@@ -46,13 +46,7 @@ public class Collect<name1>To<name2>Iterable
 
     public void each(final <name2>Procedure procedure)
     {
-        this.iterable.forEach(new <name1>Procedure()
-        {
-            public void value(<type1> each)
-            {
-                procedure.value(Collect<name1>To<name2>Iterable.this.function.valueOf(each));
-            }
-        });
+        this.iterable.forEach((<type1> each) -> procedure.value(this.function.valueOf(each)));
     }
 
     public <name2>Iterator <type2>Iterator()

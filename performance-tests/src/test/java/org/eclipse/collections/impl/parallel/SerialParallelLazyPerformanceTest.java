@@ -84,75 +84,19 @@ public class SerialParallelLazyPerformanceTest
     public static final Predicate<Integer> PREDICATE_4 = Predicates.greaterThan(1000000);
     public static final MutableList<Predicate<Integer>> PREDICATES = FastList.newListWith(PREDICATE_1, PREDICATE_2, PREDICATE_3, PREDICATE_4);
 
-    public static final java.util.function.Predicate<Integer> JAVA_PREDICATE_1 = new java.util.function.Predicate<Integer>()
-    {
-        @Override
-        public boolean test(Integer item)
-        {
-            return item > 0 && (item & 1) != 0;
-        }
-    };
-    public static final java.util.function.Predicate<Integer> JAVA_PREDICATE_2 = new java.util.function.Predicate<Integer>()
-    {
-        @Override
-        public boolean test(Integer item)
-        {
-            return item > 0 && (item & 1) == 0;
-        }
-    };
-    public static final java.util.function.Predicate<Integer> JAVA_PREDICATE_3 = new java.util.function.Predicate<Integer>()
-    {
-        @Override
-        public boolean test(Integer item)
-        {
-            return item < 0 && (item & 1) != 0;
-        }
-    };
-    public static final java.util.function.Predicate<Integer> JAVA_PREDICATE_4 = new java.util.function.Predicate<Integer>()
-    {
-        @Override
-        public boolean test(Integer item)
-        {
-            return item > 1000000;
-        }
-    };
+    public static final java.util.function.Predicate<Integer> JAVA_PREDICATE_1 = item -> item > 0 && (item & 1) != 0;
+    public static final java.util.function.Predicate<Integer> JAVA_PREDICATE_2 = item -> item > 0 && (item & 1) == 0;
+    public static final java.util.function.Predicate<Integer> JAVA_PREDICATE_3 = item -> item < 0 && (item & 1) != 0;
+    public static final java.util.function.Predicate<Integer> JAVA_PREDICATE_4 = item -> item > 1000000;
     public static final MutableList<java.util.function.Predicate<Integer>> JAVA_PREDICATES = FastList.newListWith(JAVA_PREDICATE_1, JAVA_PREDICATE_2, JAVA_PREDICATE_3, JAVA_PREDICATE_4);
 
-    public static final Function<Integer, ?> LONG_FUNCTION = new Function<Integer, Long>()
-    {
-        @Override
-        public Long valueOf(Integer value)
-        {
-            return value.longValue();
-        }
-    };
+    public static final Function<Integer, ?> LONG_FUNCTION = value -> value.longValue();
 
-    public static final Function<Integer, ?> SHORT_FUNCTION = new Function<Integer, Short>()
-    {
-        @Override
-        public Short valueOf(Integer value)
-        {
-            return value.shortValue();
-        }
-    };
+    public static final Function<Integer, ?> SHORT_FUNCTION = value -> value.shortValue();
 
-    public static final java.util.function.Function<Integer, ?> JAVA_LONG_FUNCTION = new java.util.function.Function<Integer, Long>()
-    {
-        @Override
-        public Long apply(Integer value)
-        {
-            return value.longValue();
-        }
-    };
+    public static final java.util.function.Function<Integer, ?> JAVA_LONG_FUNCTION = value -> value.longValue();
 
-    public static final java.util.function.Function<Integer, ?> JAVA_SHORT_FUNCTION = new java.util.function.Function<Integer, Short>()
-    {
-        @Override
-        public Short apply(Integer value)
-        {
-            return value.shortValue();
-        }
-    };
+    public static final java.util.function.Function<Integer, ?> JAVA_SHORT_FUNCTION = value -> value.shortValue();
 
     public static final MutableList<Function<Integer, ?>> FUNCTIONS = FastList.newListWith(LONG_FUNCTION, SHORT_FUNCTION);
     public static final MutableList<java.util.function.Function<Integer, ?>> JAVA_FUNCTIONS = FastList.newListWith(JAVA_LONG_FUNCTION, JAVA_SHORT_FUNCTION);
@@ -172,22 +116,8 @@ public class SerialParallelLazyPerformanceTest
 
     private static final Function<String, Alphagram> ALPHAGRAM_LAMBDA = value -> new Alphagram(value);
     private static final java.util.function.Function<String, Alphagram> JAVA_ALPHAGRAM_LAMBDA = value -> new Alphagram(value);
-    private static final Function<String, Alphagram> ALPHAGRAM_FUNCTION = new Function<String, Alphagram>()
-    {
-        @Override
-        public Alphagram valueOf(String each)
-        {
-            return new Alphagram(each);
-        }
-    };
-    private static final java.util.function.Function<String, Alphagram> JAVA_ALPHAGRAM_FUNCTION = new java.util.function.Function<String, Alphagram>()
-    {
-        @Override
-        public Alphagram apply(String each)
-        {
-            return new Alphagram(each);
-        }
-    };
+    private static final Function<String, Alphagram> ALPHAGRAM_FUNCTION = (Function<String, Alphagram>) each -> new Alphagram(each);
+    private static final java.util.function.Function<String, Alphagram> JAVA_ALPHAGRAM_FUNCTION = each -> new Alphagram(each);
     private static final Function<String, Alphagram> ALPHAGRAM_METHOD_REF = Alphagram::new;
     private static final java.util.function.Function<String, Alphagram> JAVA_ALPHAGRAM_METHOD_REF = Alphagram::new;
 
@@ -444,14 +374,7 @@ public class SerialParallelLazyPerformanceTest
         });
         runnables.add(() -> {
             MutableMap<Integer, Boolean> map = new ConcurrentHashMap<>();
-            this.basicParallelLazyForEachPerformance(collection, "Procedure", new Procedure<Integer>()
-            {
-                @Override
-                public void value(Integer each)
-                {
-                    map.put(each, Boolean.TRUE);
-                }
-            }, PARALLEL_RUN_COUNT, cores, service);
+            this.basicParallelLazyForEachPerformance(collection, "Procedure", (Procedure<Integer>) each -> map.put(each, Boolean.TRUE), PARALLEL_RUN_COUNT, cores, service);
         });
         runnables.add(() -> {
             MutableMap<Integer, Boolean> map = new ConcurrentHashMap<>();
@@ -464,14 +387,7 @@ public class SerialParallelLazyPerformanceTest
         });
         runnables.add(() -> {
             MutableMap<Integer, Boolean> map = new ConcurrentHashMap<>();
-            this.basicJava8ParallelLazyForEachPerformance(arrayList, "Consumer", new Consumer<Integer>()
-            {
-                @Override
-                public void accept(Integer each)
-                {
-                    map.put(each, Boolean.TRUE);
-                }
-            }, PARALLEL_RUN_COUNT);
+            this.basicJava8ParallelLazyForEachPerformance(arrayList, "Consumer", each -> map.put(each, Boolean.TRUE), PARALLEL_RUN_COUNT);
         });
         this.shuffleAndRun(runnables);
         service.shutdown();

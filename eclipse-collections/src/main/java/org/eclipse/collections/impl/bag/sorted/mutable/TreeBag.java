@@ -602,17 +602,14 @@ public class TreeBag<T>
     public MutableSortedSet<Pair<T, Integer>> zipWithIndex()
     {
         Comparator<? super T> comparator = this.items.comparator();
-        return this.zipWithIndex(TreeSortedSet.newSet(new Comparator<Pair<T, Integer>>()
+        return this.zipWithIndex(TreeSortedSet.newSet((o1, o2) ->
         {
-            public int compare(Pair<T, Integer> o1, Pair<T, Integer> o2)
+            int compare = comparator == null ? Comparators.nullSafeCompare(o1, o2) : comparator.compare(o1.getOne(), o2.getOne());
+            if (compare != 0)
             {
-                int compare = comparator == null ? Comparators.nullSafeCompare(o1, o2) : comparator.compare(o1.getOne(), o2.getOne());
-                if (compare != 0)
-                {
-                    return compare;
-                }
-                return o1.getTwo().compareTo(o2.getTwo());
+                return compare;
             }
+            return o1.getTwo().compareTo(o2.getTwo());
         }));
     }
 

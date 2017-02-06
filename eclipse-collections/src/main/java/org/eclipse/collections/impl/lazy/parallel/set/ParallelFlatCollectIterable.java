@@ -52,13 +52,7 @@ public class ParallelFlatCollectIterable<T, V> extends AbstractParallelIterableI
     @Override
     public LazyIterable<Batch<V>> split()
     {
-        return this.delegate.split().collect(new Function<Batch<T>, Batch<V>>()
-        {
-            public Batch<V> valueOf(Batch<T> batch)
-            {
-                return batch.flatCollect(ParallelFlatCollectIterable.this.function);
-            }
-        });
+        return this.delegate.split().collect(batch -> batch.flatCollect(this.function));
     }
 
     @Override

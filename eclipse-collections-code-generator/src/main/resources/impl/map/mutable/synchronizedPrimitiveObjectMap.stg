@@ -158,13 +158,7 @@ public final class Synchronized<name>ObjectMap\<V>
     {
         synchronized (this.lock)
         {
-            map.forEachKeyValue(new <name>ObjectProcedure\<V>()
-            {
-                public void value(<type> key, V value)
-                {
-                    Synchronized<name>ObjectMap.this.map.put(key, value);
-                }
-            });
+            map.forEachKeyValue(this.map::put);
         }
     }
 

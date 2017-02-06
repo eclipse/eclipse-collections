@@ -613,13 +613,7 @@ public class ObjectBooleanHashMap<K> implements MutableObjectBooleanMap<K>, Exte
     @Override
     public void putAll(ObjectBooleanMap<? extends K> map)
     {
-        map.forEachKeyValue(new ObjectBooleanProcedure<K>()
-        {
-            public void value(K each, boolean parameter)
-            {
-                ObjectBooleanHashMap.this.put(each, parameter);
-            }
-        });
+        map.forEachKeyValue(this::put);
     }
 
     @Override

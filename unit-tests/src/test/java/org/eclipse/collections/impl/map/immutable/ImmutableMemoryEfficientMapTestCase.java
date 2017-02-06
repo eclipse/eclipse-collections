@@ -726,9 +726,9 @@ public abstract class ImmutableMemoryEfficientMapTestCase extends ImmutableMapTe
         }
         else
         {
-            MutableBag<Integer> expected = Interval.oneTo(map.size()).flatCollect(each -> Interval.oneTo(each)).toBag();
-            Assert.assertEquals(expected, map.flatCollect(each -> Interval.oneTo(each)));
-            Assert.assertEquals(expected, map.flatCollect(each -> Interval.oneTo(each), HashBag.newBag()));
+            MutableBag<Integer> expected = Interval.oneTo(map.size()).flatCollect(Interval::oneTo).toBag();
+            Assert.assertEquals(expected, map.flatCollect(Interval::oneTo));
+            Assert.assertEquals(expected, map.flatCollect(Interval::oneTo, HashBag.newBag()));
         }
     }
 
