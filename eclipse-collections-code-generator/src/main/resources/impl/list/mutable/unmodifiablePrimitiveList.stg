@@ -44,7 +44,7 @@ public final class Unmodifiable<name>List
 {
     private static final long serialVersionUID = 1L;
 
-    Unmodifiable<name>List(Mutable<name>List list)
+    public Unmodifiable<name>List(Mutable<name>List list)
     {
         super(list);
     }

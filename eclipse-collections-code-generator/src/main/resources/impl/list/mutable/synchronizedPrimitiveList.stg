@@ -54,12 +54,12 @@ public final class Synchronized<name>List
 {
     private static final long serialVersionUID = 1L;
 
-    Synchronized<name>List(Mutable<name>List list)
+    public Synchronized<name>List(Mutable<name>List list)
     {
         super(list);
     }
 
-    Synchronized<name>List(Mutable<name>List list, Object newLock)
+    public Synchronized<name>List(Mutable<name>List list, Object newLock)
     {
         super(list, newLock);
     }

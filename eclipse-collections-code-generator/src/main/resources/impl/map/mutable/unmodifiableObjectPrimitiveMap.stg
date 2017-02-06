@@ -59,7 +59,7 @@ public final class UnmodifiableObject<name>Map\<K>
     private static final long serialVersionUID = 1L;
     private final MutableObject<name>Map\<K> map;
 
-    UnmodifiableObject<name>Map(MutableObject<name>Map\<K> map)
+    public UnmodifiableObject<name>Map(MutableObject<name>Map\<K> map)
     {
         this.map = map;
     }

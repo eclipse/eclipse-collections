@@ -135,12 +135,12 @@ public final class Synchronized<name>ObjectMap\<V>
     @GuardedBy("this.lock")
     private final Mutable<name>ObjectMap\<V> map;
 
-    Synchronized<name>ObjectMap(Mutable<name>ObjectMap\<V> map)
+    public Synchronized<name>ObjectMap(Mutable<name>ObjectMap\<V> map)
     {
         this(map, null);
     }
 
-    Synchronized<name>ObjectMap(Mutable<name>ObjectMap\<V> map, Object newLock)
+    public Synchronized<name>ObjectMap(Mutable<name>ObjectMap\<V> map, Object newLock)
     {
         this.map = map;
         this.lock = newLock == null ? this : newLock;
