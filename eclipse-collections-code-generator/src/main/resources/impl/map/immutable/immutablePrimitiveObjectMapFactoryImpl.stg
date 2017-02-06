@@ -72,13 +72,7 @@ public class Immutable<name>ObjectMapFactoryImpl implements Immutable<name>Objec
         {
             //TODO use keysView() when available.
             final <type>[] array = new <type>[1];
-            map.forEachKey(new <name>Procedure()
-            {
-                public void value(<type> each)
-                {
-                    array[0] = each;
-                }
-            });
+            map.forEachKey((<type> each) -> array[0] = each);
             return new Immutable<name>ObjectSingletonMap\<V>(array[0], map.get(array[0]));
         }
         return new Immutable<name>ObjectHashMap\<V>(map);

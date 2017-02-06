@@ -46,13 +46,7 @@ public class Collect<name>ToObjectIterable\<V>
 
     public void each(final Procedure\<? super V> procedure)
     {
-        this.iterable.forEach(new <name>Procedure()
-        {
-            public void value(<type> each)
-            {
-                procedure.value(Collect<name>ToObjectIterable.this.function.valueOf(each));
-            }
-        });
+        this.iterable.forEach((<type> each) -> procedure.value(this.function.valueOf(each)));
     }
 
     public void forEachWithIndex(final ObjectIntProcedure\<? super V> objectIntProcedure)
@@ -70,13 +64,7 @@ public class Collect<name>ToObjectIterable\<V>
 
     public \<P> void forEachWith(final Procedure2\<? super V, ? super P> procedure, final P parameter)
     {
-        this.iterable.forEach(new <name>Procedure()
-        {
-            public void value(<type> each)
-            {
-                procedure.value(Collect<name>ToObjectIterable.this.function.valueOf(each), parameter);
-            }
-        });
+        this.iterable.forEach((<type> each) -> procedure.value(this.function.valueOf(each), parameter));
     }
 
     public Iterator\<V> iterator()

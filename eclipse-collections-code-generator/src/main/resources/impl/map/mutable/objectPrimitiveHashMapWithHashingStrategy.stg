@@ -423,13 +423,7 @@ public class Object<name>HashMapWithHashingStrategy\<K> implements MutableObject
 
     public void putAll(Object<name>Map\<? extends K> map)
     {
-        map.forEachKeyValue(new Object<name>Procedure\<K>()
-        {
-            public void value(K key, <type> value)
-            {
-                Object<name>HashMapWithHashingStrategy.this.put(key, value);
-            }
-        });
+        map.forEachKeyValue(this::put);
     }
 
     public void removeKey(K key)
@@ -1609,13 +1603,7 @@ public class Object<name>HashMapWithHashingStrategy\<K> implements MutableObject
         {
             int oldSize = Object<name>HashMapWithHashingStrategy.this.size();
             final <name>Set sourceSet = source instanceof <name>Set ? (<name>Set) source : source.toSet();
-            Object<name>HashMapWithHashingStrategy\<K> retained = Object<name>HashMapWithHashingStrategy.this.select(new Object<name>Predicate\<K>()
-            {
-                public boolean accept(K object, <type> value)
-                {
-                    return sourceSet.contains(value);
-                }
-            });
+            Object<name>HashMapWithHashingStrategy\<K> retained = Object<name>HashMapWithHashingStrategy.this.select((K object, <type> value) -> sourceSet.contains(value));
             if (retained.size() != oldSize)
             {
                 Object<name>HashMapWithHashingStrategy.this.keys = retained.keys;

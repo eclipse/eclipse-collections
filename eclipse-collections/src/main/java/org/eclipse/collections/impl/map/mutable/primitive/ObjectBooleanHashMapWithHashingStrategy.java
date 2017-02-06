@@ -625,13 +625,7 @@ public class ObjectBooleanHashMapWithHashingStrategy<K> implements MutableObject
     @Override
     public void putAll(ObjectBooleanMap<? extends K> map)
     {
-        map.forEachKeyValue(new ObjectBooleanProcedure<K>()
-        {
-            public void value(K each, boolean parameter)
-            {
-                ObjectBooleanHashMapWithHashingStrategy.this.put(each, parameter);
-            }
-        });
+        map.forEachKeyValue(this::put);
     }
 
     @Override

@@ -49,13 +49,7 @@ public class ParallelCollectListIterable<T, V> extends AbstractParallelListItera
     @Override
     public LazyIterable<ListBatch<V>> split()
     {
-        return this.parallelIterable.split().collect(new Function<OrderedBatch<T>, ListBatch<V>>()
-        {
-            public ListBatch<V> valueOf(OrderedBatch<T> eachBatch)
-            {
-                return eachBatch.collect(ParallelCollectListIterable.this.function);
-            }
-        });
+        return this.parallelIterable.split().collect(eachBatch -> eachBatch.collect(this.function));
     }
 
     @Override

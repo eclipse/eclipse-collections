@@ -108,62 +108,32 @@ public class Collect<name>Iterable\<T>
     @Override
     public int count(final <name>Predicate predicate)
     {
-        return this.iterable.count(new Predicate\<T>()
-        {
-            public boolean accept(T each)
-            {
-                return predicate.accept(Collect<name>Iterable.this.function.<type>ValueOf(each));
-            }
-        });
+        return this.iterable.count((T each) -> predicate.accept(this.function.<type>ValueOf(each)));
     }
 
     @Override
     public boolean anySatisfy(final <name>Predicate predicate)
     {
-        return this.iterable.anySatisfy(new Predicate\<T>()
-        {
-            public boolean accept(T each)
-            {
-                return predicate.accept(Collect<name>Iterable.this.function.<type>ValueOf(each));
-            }
-        });
+        return this.iterable.anySatisfy((T each) -> predicate.accept(this.function.<type>ValueOf(each)));
     }
 
     @Override
     public boolean allSatisfy(final <name>Predicate predicate)
     {
-        return this.iterable.allSatisfy(new Predicate\<T>()
-        {
-            public boolean accept(T each)
-            {
-                return predicate.accept(Collect<name>Iterable.this.function.<type>ValueOf(each));
-            }
-        });
+        return this.iterable.allSatisfy((T each) -> predicate.accept(this.function.<type>ValueOf(each)));
     }
 
     @Override
     public boolean noneSatisfy(final <name>Predicate predicate)
     {
-        return this.iterable.allSatisfy(new Predicate\<T>()
-        {
-            public boolean accept(T each)
-            {
-                return !predicate.accept(Collect<name>Iterable.this.function.<type>ValueOf(each));
-            }
-        });
+        return this.iterable.allSatisfy((T each) -> !predicate.accept(this.function.<type>ValueOf(each)));
     }
 
     @Override
     public <type>[] toArray()
     {
         final <type>[] array = new <type>[this.size()];
-        this.iterable.forEachWithIndex(new ObjectIntProcedure\<T>()
-        {
-            public void value(T each, int index)
-            {
-                array[index] = Collect<name>Iterable.this.function.<type>ValueOf(each);
-            }
-        });
+        this.iterable.forEachWithIndex((T each, int index) -> array[index] = this.function.<type>ValueOf(each));
         return array;
     }
 

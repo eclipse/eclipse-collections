@@ -38,13 +38,8 @@ import org.junit.Test;
  */
 public class ConcurrentHashMapUnsafeAcceptanceTest
 {
-    private static final MutableMap<Integer, MutableBag<Integer>> BAG_MUTABLE_MAP = Interval.oneTo(1000).groupBy(new Function<Integer, Integer>()
-    {
-        public Integer valueOf(Integer each)
-        {
-            return each % 100;
-        }
-    }).toMap(HashBag::new);
+    private static final MutableMap<Integer, MutableBag<Integer>> BAG_MUTABLE_MAP =
+            Interval.oneTo(1000).groupBy(each -> each % 100).toMap(HashBag::new);
 
     private ExecutorService executor;
 

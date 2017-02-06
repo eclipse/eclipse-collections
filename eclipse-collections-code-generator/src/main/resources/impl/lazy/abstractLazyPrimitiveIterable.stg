@@ -140,13 +140,7 @@ public abstract class AbstractLazy<name>Iterable implements Lazy<name>Iterable
 
     public boolean containsAll(<name>Iterable source)
     {
-        return source.allSatisfy(new <name>Predicate()
-        {
-            public boolean accept(<type> value)
-            {
-                return AbstractLazy<name>Iterable.this.contains(value);
-            }
-        });
+        return source.allSatisfy((<type> value) -> AbstractLazy<name>Iterable.this.contains(value));
     }
 
     public Lazy<name>Iterable select(<name>Predicate predicate)
@@ -218,39 +212,21 @@ public abstract class AbstractLazy<name>Iterable implements Lazy<name>Iterable
     public Mutable<name>List toList()
     {
         final Mutable<name>List list = new <name>ArrayList();
-        this.forEach(new <name>Procedure()
-        {
-            public void value(<type> each)
-            {
-                list.add(each);
-            }
-        });
+        this.forEach(list::add);
         return list;
     }
 
     public Mutable<name>Set toSet()
     {
         final Mutable<name>Set set = new <name>HashSet();
-        this.forEach(new <name>Procedure()
-        {
-            public void value(<type> each)
-            {
-                set.add(each);
-            }
-        });
+        this.forEach(set::add);
         return set;
     }
 
     public Mutable<name>Bag toBag()
     {
         final Mutable<name>Bag bag = new <name>HashBag();
-        this.forEach(new <name>Procedure()
-        {
-            public void value(<type> each)
-            {
-                bag.add(each);
-            }
-        });
+        this.forEach(bag::add);
         return bag;
     }
 

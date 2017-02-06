@@ -47,13 +47,7 @@ public class ParallelSelectIterable<T> extends AbstractParallelIterableImpl<T, B
     @Override
     public LazyIterable<Batch<T>> split()
     {
-        return this.parallelIterable.split().collect(new Function<Batch<T>, Batch<T>>()
-        {
-            public Batch<T> valueOf(Batch<T> eachBatch)
-            {
-                return eachBatch.select(ParallelSelectIterable.this.predicate);
-            }
-        });
+        return this.parallelIterable.split().collect(eachBatch -> eachBatch.select(this.predicate));
     }
 
     @Override

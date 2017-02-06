@@ -14,6 +14,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
@@ -1373,7 +1374,7 @@ public interface RichIterableTestCase extends IterableTestCase
     {
         RichIterable<Integer> iterable = this.newWith(1, null, 3);
 
-        assertThrows(NullPointerException.class, () -> iterable.detectOptional(i -> i == null));
+        assertThrows(NullPointerException.class, () -> iterable.detectOptional(Objects::isNull));
         assertThrows(NullPointerException.class, () -> iterable.detectWithOptional((i, object) -> i == object, null));
     }
 

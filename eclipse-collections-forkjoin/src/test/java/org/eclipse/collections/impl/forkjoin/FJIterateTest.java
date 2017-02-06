@@ -265,18 +265,12 @@ public class FJIterateTest
     @Test
     public void testForEachWithException()
     {
-        Verify.assertThrows(RuntimeException.class, new Runnable()
-        {
-            public void run()
-            {
-                FJIterate.forEach(
-                        FJIterateTest.createIntegerList(5),
-                        new PassThruProcedureFactory<>(EXCEPTION_PROCEDURE),
-                        new PassThruCombiner<>(),
-                        1,
-                        5);
-            }
-        });
+        Verify.assertThrows(RuntimeException.class, () -> FJIterate.forEach(
+                FJIterateTest.createIntegerList(5),
+                new PassThruProcedureFactory<>(EXCEPTION_PROCEDURE),
+                new PassThruCombiner<>(),
+                1,
+                5));
     }
 
     @Test
@@ -285,13 +279,7 @@ public class FJIterateTest
         Integer[] array = new Integer[200];
         FastList<Integer> list = (FastList<Integer>) Interval.oneTo(200).toList();
         Assert.assertTrue(ArrayIterate.allSatisfy(array, Predicates.isNull()));
-        FJIterate.forEachWithIndex(list, new ObjectIntProcedure<Integer>()
-        {
-            public void value(Integer each, int index)
-            {
-                array[index] = each;
-            }
-        });
+        FJIterate.forEachWithIndex(list, (each, index) -> array[index] = each);
         Assert.assertArrayEquals(array, list.toArray(new Integer[]{}));
     }
 
@@ -301,13 +289,7 @@ public class FJIterateTest
         Integer[] array = new Integer[200];
         FastList<Integer> list = (FastList<Integer>) Interval.oneTo(200).toList();
         Assert.assertTrue(ArrayIterate.allSatisfy(array, Predicates.isNull()));
-        FJIterate.forEachWithIndex(list, new ObjectIntProcedure<Integer>()
-        {
-            public void value(Integer each, int index)
-            {
-                array[index] = each;
-            }
-        }, 10, 10);
+        FJIterate.forEachWithIndex(list, (each, index) -> array[index] = each, 10, 10);
         Assert.assertArrayEquals(array, list.toArray(new Integer[]{}));
     }
 
@@ -317,13 +299,7 @@ public class FJIterateTest
         Integer[] array = new Integer[200];
         ImmutableList<Integer> list = Interval.oneTo(200).toList().toImmutable();
         Assert.assertTrue(ArrayIterate.allSatisfy(array, Predicates.isNull()));
-        FJIterate.forEachWithIndex(list, new ObjectIntProcedure<Integer>()
-        {
-            public void value(Integer each, int index)
-            {
-                array[index] = each;
-            }
-        }, 10, 10);
+        FJIterate.forEachWithIndex(list, (each, index) -> array[index] = each, 10, 10);
         Assert.assertArrayEquals(array, list.toArray(new Integer[]{}));
     }
 
@@ -333,13 +309,7 @@ public class FJIterateTest
         Integer[] array = new Integer[200];
         MutableList<Integer> list = FastList.newList(Interval.oneTo(200));
         Assert.assertTrue(ArrayIterate.allSatisfy(array, Predicates.isNull()));
-        FJIterate.forEachWithIndex(list, new ObjectIntProcedure<Integer>()
-        {
-            public void value(Integer each, int index)
-            {
-                array[index] = each;
-            }
-        }, 10, 10);
+        FJIterate.forEachWithIndex(list, (each, index) -> array[index] = each, 10, 10);
         Assert.assertArrayEquals(array, list.toArray(new Integer[]{}));
     }
 
@@ -349,31 +319,19 @@ public class FJIterateTest
         Integer[] array = new Integer[10];
         List<Integer> list = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
         Assert.assertTrue(ArrayIterate.allSatisfy(array, Predicates.isNull()));
-        FJIterate.forEachWithIndex(list, new ObjectIntProcedure<Integer>()
-        {
-            public void value(Integer each, int index)
-            {
-                array[index] = each;
-            }
-        }, 1, 2);
+        FJIterate.forEachWithIndex(list, (each, index) -> array[index] = each, 1, 2);
         Assert.assertArrayEquals(array, list.toArray(new Integer[list.size()]));
     }
 
     @Test
     public void testForEachWithIndexException()
     {
-        Verify.assertThrows(RuntimeException.class, new Runnable()
-        {
-            public void run()
-            {
-                FJIterate.forEachWithIndex(
-                        FJIterateTest.createIntegerList(5),
-                        new PassThruObjectIntProcedureFactory<>(EXCEPTION_OBJECT_INT_PROCEDURE),
-                        new PassThruCombiner<>(),
-                        1,
-                        5);
-            }
-        });
+        Verify.assertThrows(RuntimeException.class, () -> FJIterate.forEachWithIndex(
+                FJIterateTest.createIntegerList(5),
+                new PassThruObjectIntProcedureFactory<>(EXCEPTION_OBJECT_INT_PROCEDURE),
+                new PassThruCombiner<>(),
+                1,
+                5));
     }
 
     @Test
@@ -532,13 +490,7 @@ public class FJIterateTest
         Assert.assertEquals(expected, HashBagMultimap.newMultimap(result7));
         Assert.assertEquals(expected, HashBagMultimap.newMultimap(result8));
         Assert.assertEquals(expected, HashBagMultimap.newMultimap(result9));
-        Verify.assertThrows(IllegalArgumentException.class, new Runnable()
-        {
-            public void run()
-            {
-                FJIterate.groupBy(null, null, 1);
-            }
-        });
+        Verify.assertThrows(IllegalArgumentException.class, () -> FJIterate.groupBy(null, null, 1));
     }
 
     @Test
@@ -558,7 +510,7 @@ public class FJIterateTest
     @Test
     public void aggregateInPlaceByWithBatchSize()
     {
-        Procedure2<AtomicInteger, Integer> sumAggregator = (aggregate, value) -> aggregate.addAndGet(value);
+        Procedure2<AtomicInteger, Integer> sumAggregator = AtomicInteger::addAndGet;
         MutableList<Integer> list = LazyIterate.adapt(Collections.nCopies(100, 1))
                 .concatenate(Collections.nCopies(200, 2))
                 .concatenate(Collections.nCopies(300, 3))

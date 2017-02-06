@@ -2322,13 +2322,10 @@ public final class Verify extends Assert
             Assert.assertEquals(bagName + " size", expectedBag.size(), actualBag.size());
             Assert.assertEquals(bagName + " sizeDistinct", expectedBag.sizeDistinct(), actualBag.sizeDistinct());
 
-            expectedBag.forEachWithOccurrences(new ObjectIntProcedure<Object>()
+            expectedBag.forEachWithOccurrences((expectedKey, expectedValue) ->
             {
-                public void value(Object expectedKey, int expectedValue)
-                {
-                    int actualValue = actualBag.occurrencesOf(expectedKey);
-                    Assert.assertEquals("Occurrences of " + expectedKey, expectedValue, actualValue);
-                }
+                int actualValue = actualBag.occurrencesOf(expectedKey);
+                Assert.assertEquals("Occurrences of " + expectedKey, expectedValue, actualValue);
             });
         }
         catch (AssertionError e)

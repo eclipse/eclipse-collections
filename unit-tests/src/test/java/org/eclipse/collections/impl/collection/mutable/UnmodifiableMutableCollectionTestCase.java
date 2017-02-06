@@ -13,6 +13,7 @@ package org.eclipse.collections.impl.collection.mutable;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.primitive.BooleanFunction;
@@ -195,7 +196,7 @@ public abstract class UnmodifiableMutableCollectionTestCase<T>
     @Test
     public void collectBoolean()
     {
-        BooleanFunction<T> booleanFunction = anObject -> anObject == null;
+        BooleanFunction<T> booleanFunction = Objects::isNull;
         Verify.assertSize(this.getCollection().size(), this.getCollection().collectBoolean(booleanFunction));
     }
 

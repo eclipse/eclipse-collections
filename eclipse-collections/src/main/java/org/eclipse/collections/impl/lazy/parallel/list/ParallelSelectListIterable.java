@@ -14,7 +14,6 @@ import java.util.concurrent.ExecutorService;
 
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.annotation.Beta;
-import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.impl.block.factory.Predicates;
@@ -47,13 +46,7 @@ class ParallelSelectListIterable<T> extends AbstractParallelListIterable<T, List
     @Override
     public LazyIterable<ListBatch<T>> split()
     {
-        return this.parallelIterable.split().collect(new Function<ListBatch<T>, ListBatch<T>>()
-        {
-            public ListBatch<T> valueOf(ListBatch<T> eachBatch)
-            {
-                return eachBatch.select(ParallelSelectListIterable.this.predicate);
-            }
-        });
+        return this.parallelIterable.split().collect(eachBatch -> eachBatch.select(this.predicate));
     }
 
     @Override

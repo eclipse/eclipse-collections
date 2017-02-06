@@ -52,13 +52,7 @@ class ParallelDistinctListIterable<T> extends AbstractParallelUnsortedSetIterabl
     {
         // TODO: Replace the map with a concurrent set once it's implemented
         ConcurrentHashMap<T, Boolean> distinct = new ConcurrentHashMap<>();
-        return this.delegate.split().collect(new Function<ListBatch<T>, UnsortedSetBatch<T>>()
-        {
-            public UnsortedSetBatch<T> valueOf(ListBatch<T> listBatch)
-            {
-                return listBatch.distinct(distinct);
-            }
-        });
+        return this.delegate.split().collect(listBatch -> listBatch.distinct(distinct));
     }
 
     @Override

@@ -72,13 +72,8 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
 {
     protected static <T> void forEach(AbstractParallelIterable<T, ? extends RootBatch<T>> parallelIterable, Procedure<? super T> procedure)
     {
-        LazyIterable<Future<?>> futures = parallelIterable.split().collect(new Function<RootBatch<T>, Future<?>>()
-        {
-            public Future<?> valueOf(RootBatch<T> chunk)
-            {
-                return parallelIterable.getExecutorService().submit(() -> chunk.forEach(procedure));
-            }
-        });
+        LazyIterable<Future<?>> futures =
+                parallelIterable.split().collect(chunk -> parallelIterable.getExecutorService().submit(() -> chunk.forEach(procedure)));
         // The call to toList() is important to stop the lazy evaluation and force all the Runnables to start executing.
         MutableList<Future<?>> futuresList = futures.toList();
         for (Future<?> future : futuresList)
@@ -102,13 +97,8 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
     protected static <T> boolean anySatisfy(AbstractParallelIterable<T, ? extends RootBatch<T>> parallelIterable, Predicate<? super T> predicate)
     {
         CompletionService<Boolean> completionService = new ExecutorCompletionService<>(parallelIterable.getExecutorService());
-        MutableSet<Future<Boolean>> futures = parallelIterable.split().collect(new Function<RootBatch<T>, Future<Boolean>>()
-        {
-            public Future<Boolean> valueOf(RootBatch<T> batch)
-            {
-                return completionService.submit(() -> batch.anySatisfy(predicate));
-            }
-        }, UnifiedSet.newSet());
+        MutableSet<Future<Boolean>> futures =
+                parallelIterable.split().collect(batch -> completionService.submit(() -> batch.anySatisfy(predicate)), UnifiedSet.newSet());
 
         while (futures.notEmpty())
         {
@@ -141,13 +131,8 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
     protected static <T> boolean allSatisfy(AbstractParallelIterable<T, ? extends RootBatch<T>> parallelIterable, Predicate<? super T> predicate)
     {
         CompletionService<Boolean> completionService = new ExecutorCompletionService<>(parallelIterable.getExecutorService());
-        MutableSet<Future<Boolean>> futures = parallelIterable.split().collect(new Function<RootBatch<T>, Future<Boolean>>()
-        {
-            public Future<Boolean> valueOf(RootBatch<T> batch)
-            {
-                return completionService.submit(() -> batch.allSatisfy(predicate));
-            }
-        }, UnifiedSet.newSet());
+        MutableSet<Future<Boolean>> futures =
+                parallelIterable.split().collect(batch -> completionService.submit(() -> batch.allSatisfy(predicate)), UnifiedSet.newSet());
 
         while (futures.notEmpty())
         {
@@ -180,13 +165,8 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
     protected static <T> T detect(AbstractParallelIterable<T, ? extends RootBatch<T>> parallelIterable, Predicate<? super T> predicate)
     {
         LazyIterable<? extends RootBatch<T>> chunks = parallelIterable.split();
-        LazyIterable<Future<T>> futures = chunks.collect(new Function<RootBatch<T>, Future<T>>()
-        {
-            public Future<T> valueOf(RootBatch<T> chunk)
-            {
-                return parallelIterable.getExecutorService().submit(() -> chunk.detect(predicate));
-            }
-        });
+        LazyIterable<Future<T>> futures =
+                chunks.collect(chunk -> parallelIterable.getExecutorService().submit(() -> chunk.detect(predicate)));
         // The call to toList() is important to stop the lazy evaluation and force all the Runnables to start executing.
         MutableList<Future<T>> futuresList = futures.toList();
         for (Future<T> future : futuresList)
@@ -239,13 +219,8 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
     private <S, V> void collectCombineOrdered(Function<Batch<T>, V> function, Procedure2<S, V> combineProcedure, S state)
     {
         LazyIterable<? extends Batch<T>> chunks = this.split();
-        LazyIterable<Future<V>> futures = chunks.collect(new Function<Batch<T>, Future<V>>()
-        {
-            public Future<V> valueOf(Batch<T> chunk)
-            {
-                return AbstractParallelIterable.this.getExecutorService().submit(() -> function.valueOf(chunk));
-            }
-        });
+        LazyIterable<Future<V>> futures =
+                chunks.collect(chunk -> this.getExecutorService().submit(() -> function.valueOf(chunk)));
         // The call to toList() is important to stop the lazy evaluation and force all the Runnables to start executing.
         MutableList<Future<V>> futuresList = futures.toList();
         for (Future<V> future : futuresList)
@@ -269,13 +244,7 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
     private <S, V> void collectCombineUnordered(Function<Batch<T>, V> function, Procedure2<S, V> combineProcedure, S state)
     {
         LazyIterable<? extends Batch<T>> chunks = this.split();
-        MutableList<Callable<V>> callables = chunks.collect(new Function<Batch<T>, Callable<V>>()
-        {
-            public Callable<V> valueOf(Batch<T> chunk)
-            {
-                return () -> function.valueOf(chunk);
-            }
-        }).toList();
+        MutableList<Callable<V>> callables = chunks.collect((Function<Batch<T>, Callable<V>>) chunk -> () -> function.valueOf(chunk)).toList();
 
         ExecutorCompletionService<V> completionService = new ExecutorCompletionService<>(this.getExecutorService());
         callables.each(completionService::submit);
@@ -311,13 +280,7 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
     private T collectReduceOrdered(Function<Batch<T>, T> map, Function2<T, T, T> function2)
     {
         LazyIterable<? extends Batch<T>> chunks = this.split();
-        LazyIterable<Future<T>> futures = chunks.collect(new Function<Batch<T>, Future<T>>()
-        {
-            public Future<T> valueOf(Batch<T> chunk)
-            {
-                return AbstractParallelIterable.this.getExecutorService().submit(() -> map.valueOf(chunk));
-            }
-        });
+        LazyIterable<Future<T>> futures = chunks.collect(chunk -> this.getExecutorService().submit(() -> map.valueOf(chunk)));
         // The call to toList() is important to stop the lazy evaluation and force all the Runnables to start executing.
         MutableList<Future<T>> futuresList = futures.toList();
         try
@@ -362,13 +325,8 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
     private T collectReduceUnordered(Function<Batch<T>, T> map, Function2<T, T, T> function2)
     {
         LazyIterable<? extends Batch<T>> chunks = this.split();
-        MutableList<Callable<T>> callables = chunks.collect(new Function<Batch<T>, Callable<T>>()
-        {
-            public Callable<T> valueOf(Batch<T> chunk)
-            {
-                return () -> map.valueOf(chunk);
-            }
-        }).toList();
+        MutableList<Callable<T>> callables =
+                chunks.collect((Function<Batch<T>, Callable<T>>) chunk -> () -> map.valueOf(chunk)).toList();
 
         ExecutorCompletionService<T> completionService = new ExecutorCompletionService<>(this.getExecutorService());
         callables.each(completionService::submit);
@@ -734,13 +692,8 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
     private long sumOfLongOrdered(LongFunction<Batch<T>> map)
     {
         LazyIterable<? extends Batch<T>> chunks = this.split();
-        LazyIterable<Future<Long>> futures = chunks.collect(new Function<Batch<T>, Future<Long>>()
-        {
-            public Future<Long> valueOf(Batch<T> chunk)
-            {
-                return AbstractParallelIterable.this.getExecutorService().submit(() -> map.longValueOf(chunk));
-            }
-        });
+        LazyIterable<Future<Long>> futures =
+                chunks.collect(chunk -> this.getExecutorService().submit(() -> map.longValueOf(chunk)));
         // The call to toList() is important to stop the lazy evaluation and force all the Runnables to start executing.
         MutableList<Future<Long>> futuresList = futures.toList();
         try
@@ -766,13 +719,8 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
     private double sumOfDoubleOrdered(Function<Batch<T>, DoubleSumResultHolder> map)
     {
         LazyIterable<? extends Batch<T>> chunks = this.split();
-        LazyIterable<Future<DoubleSumResultHolder>> futures = chunks.collect(new Function<Batch<T>, Future<DoubleSumResultHolder>>()
-        {
-            public Future<DoubleSumResultHolder> valueOf(Batch<T> chunk)
-            {
-                return AbstractParallelIterable.this.getExecutorService().submit(() -> map.valueOf(chunk));
-            }
-        });
+        LazyIterable<Future<DoubleSumResultHolder>> futures =
+                chunks.collect(chunk -> this.getExecutorService().submit(() -> map.valueOf(chunk)));
         // The call to toList() is important to stop the lazy evaluation and force all the Runnables to start executing.
         MutableList<Future<DoubleSumResultHolder>> futuresList = futures.toList();
         try

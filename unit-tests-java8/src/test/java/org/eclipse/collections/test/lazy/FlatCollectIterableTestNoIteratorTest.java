@@ -10,6 +10,8 @@
 
 package org.eclipse.collections.test.lazy;
 
+import java.util.Objects;
+
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.impl.lazy.FlatCollectIterable;
@@ -34,19 +36,19 @@ public class FlatCollectIterableTestNoIteratorTest implements LazyNoIteratorTest
     public void RichIterable_detectOptionalNull()
     {
         RichIterable<Integer> iterable1 = this.newWith(1, null, 3);
-        assertThrows(NullPointerException.class, () -> iterable1.detectOptional(i -> i == null));
+        assertThrows(NullPointerException.class, () -> iterable1.detectOptional(Objects::isNull));
         assertThrows(NullPointerException.class, () -> iterable1.detectWithOptional((i, object) -> i == object, null));
 
         RichIterable<Integer> iterable2 =
                 new FlatCollectIterable<>(new FastListNoIterator<Integer>().with(1, null, 3),
                         each -> (each == null) ? null : FastList.newListWith(each));
-        assertThrows(NullPointerException.class, () -> iterable2.detectOptional(i -> i == null));
+        assertThrows(NullPointerException.class, () -> iterable2.detectOptional(Objects::isNull));
         assertThrows(NullPointerException.class, () -> iterable2.detectWithOptional((i, object) -> i == object, null));
 
         RichIterable<Integer> iterable3 =
                 new FlatCollectIterable<>(new FastListNoIterator<String>().with("1", "null", "3"),
                         each -> FastList.<Integer>newListWith("null".equals(each) ? null : Integer.valueOf(each)));
-        assertThrows(NullPointerException.class, () -> iterable3.detectOptional(i -> i == null));
+        assertThrows(NullPointerException.class, () -> iterable3.detectOptional(Objects::isNull));
         assertThrows(NullPointerException.class, () -> iterable3.detectWithOptional((i, object) -> i == object, null));
     }
 }

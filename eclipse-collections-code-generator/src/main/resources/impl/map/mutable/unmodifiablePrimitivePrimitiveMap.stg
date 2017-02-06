@@ -106,46 +106,22 @@ public final class Unmodifiable<name1><name2>Map
 
     public <type2> getIfAbsentPut(<type1> key, <type2> value)
     {
-        return this.map.getIfAbsentPut(key, new <name2>Function0()
-        {
-            public <type2> value()
-            {
-                throw new UnsupportedOperationException();
-            }
-        });
+        return this.map.getIfAbsentPut(key, () -> {throw new UnsupportedOperationException();});
     }
 
     public <type2> getIfAbsentPut(<type1> key, <name2>Function0 function)
     {
-        return this.map.getIfAbsentPut(key, new <name2>Function0()
-        {
-            public <type2> value()
-            {
-                throw new UnsupportedOperationException();
-            }
-        });
+        return this.map.getIfAbsentPut(key, () -> {throw new UnsupportedOperationException();});
     }
 
     public <type2> getIfAbsentPutWithKey(<type1> key, <name1>To<name2>Function function)
     {
-        return this.map.getIfAbsentPut(key, new <name2>Function0()
-        {
-            public <type2> value()
-            {
-                throw new UnsupportedOperationException();
-            }
-        });
+        return this.map.getIfAbsentPut(key, () -> {throw new UnsupportedOperationException();});
     }
 
     public \<P> <type2> getIfAbsentPutWith(<type1> key, <name2>Function\<? super P> function, P parameter)
     {
-        return this.map.getIfAbsentPut(key, new <name2>Function0()
-        {
-            public <type2> value()
-            {
-                throw new UnsupportedOperationException();
-            }
-        });
+        return this.map.getIfAbsentPut(key, () -> {throw new UnsupportedOperationException();});
     }
 
     public <type2> updateValue(<type1> key, <type2> initialValueIfAbsent, <name2>To<name2>Function function)

@@ -48,13 +48,7 @@ public class ParallelCollectUnsortedBag<T, V> extends AbstractParallelUnsortedBa
     @Override
     public LazyIterable<UnsortedBagBatch<V>> split()
     {
-        return this.parallelIterable.split().collect(new Function<UnsortedBagBatch<T>, UnsortedBagBatch<V>>()
-        {
-            public UnsortedBagBatch<V> valueOf(UnsortedBagBatch<T> eachBatch)
-            {
-                return eachBatch.collect(ParallelCollectUnsortedBag.this.function);
-            }
-        });
+        return this.parallelIterable.split().collect(eachBatch -> eachBatch.collect(this.function));
     }
 
     @Override

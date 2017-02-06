@@ -205,13 +205,7 @@ abstract class AbstractImmutableList<T>
         int newSize = Iterate.sizeOf(elements);
         T[] array = (T[]) new Object[oldSize + newSize];
         this.toArray(array);
-        Iterate.forEachWithIndex(elements, new ObjectIntProcedure<T>()
-        {
-            public void value(T each, int index)
-            {
-                array[oldSize + index] = each;
-            }
-        });
+        Iterate.forEachWithIndex(elements, (each, index) -> array[oldSize + index] = each);
         return Lists.immutable.with(array);
     }
 

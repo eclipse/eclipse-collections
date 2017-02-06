@@ -370,13 +370,7 @@ public final class <name>HashSet extends Abstract<name>Set implements Mutable<na
     {
         int oldSize = this.size();
         final <name>Set sourceSet = source instanceof <name>Set ? (<name>Set) source : source.toSet();
-        <name>HashSet retained = this.select(new <name>Predicate()
-        {
-            public boolean accept(<type> value)
-            {
-                return sourceSet.contains(value);
-            }
-        });
+        <name>HashSet retained = this.select(sourceSet::contains);
         if (retained.size() != oldSize)
         {
             this.zeroToThirtyOne = retained.zeroToThirtyOne;

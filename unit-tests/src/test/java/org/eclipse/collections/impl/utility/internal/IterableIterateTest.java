@@ -16,6 +16,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 import org.eclipse.collections.api.block.function.Function3;
@@ -221,7 +222,7 @@ public class IterableIterateTest
         MutableList<Integer> objects = mList(1, null, 3);
         Iterable<Integer> iterable = new IterableAdapter<>(objects);
 
-        Verify.assertThrows(NullPointerException.class, () -> Iterate.detectOptional(iterable, i -> i == null));
+        Verify.assertThrows(NullPointerException.class, () -> Iterate.detectOptional(iterable, Objects::isNull));
     }
 
     @Test

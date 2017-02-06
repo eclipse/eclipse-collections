@@ -390,13 +390,7 @@ public class <name1><name2>HashMap extends AbstractMutable<name2>ValuesMap imple
 
     public void putAll(<name1><name2>Map map)
     {
-        map.forEachKeyValue(new <name1><name2>Procedure()
-        {
-            public void value(<type1> key, <type2> value)
-            {
-                <name1><name2>HashMap.this.put(key, value);
-            }
-        });
+        map.forEachKeyValue(this::put);
     }
 
     public void removeKey(<type1> key)
@@ -635,13 +629,7 @@ public class <name1><name2>HashMap extends AbstractMutable<name2>ValuesMap imple
 
     public <name1><name2>HashMap withoutAllKeys(<name1>Iterable keys)
     {
-        keys.forEach(new <name1>Procedure()
-        {
-            public void value(<type1> key)
-            {
-                <name1><name2>HashMap.this.removeKey(key);
-            }
-        });
+        keys.forEach(this::removeKey);
         return this;
     }
 
@@ -1138,13 +1126,7 @@ public class <name1><name2>HashMap extends AbstractMutable<name2>ValuesMap imple
         {
             int oldSize = <name1><name2>HashMap.this.size();
             final <name1>Set sourceSet = source instanceof <name1>Set ? (<name1>Set) source : source.toSet();
-            <name1><name2>HashMap retained = <name1><name2>HashMap.this.select(new <name1><name2>Predicate()
-            {
-                public boolean accept(<type1> key, <type2> value)
-                {
-                    return sourceSet.contains(key);
-                }
-            });
+            <name1><name2>HashMap retained = <name1><name2>HashMap.this.select((<type1> key, <type2> value) -> sourceSet.contains(key));
             if (retained.size() != oldSize)
             {
                 <name1><name2>HashMap.this.<keyArray> = retained.<keyArray>;
@@ -1223,13 +1205,7 @@ public class <name1><name2>HashMap extends AbstractMutable<name2>ValuesMap imple
         {
             int oldSize = <name1><name2>HashMap.this.size();
             final <name2>Set sourceSet = source instanceof <name2>Set ? (<name2>Set) source : source.toSet();
-            <name1><name2>HashMap retained = <name1><name2>HashMap.this.select(new <name1><name2>Predicate()
-            {
-                public boolean accept(<type1> key, <type2> value)
-                {
-                    return sourceSet.contains(value);
-                }
-            });
+            <name1><name2>HashMap retained = <name1><name2>HashMap.this.select((<type1> key, <type2> value) -> sourceSet.contains(value));
             if (retained.size() != oldSize)
             {
                 <name1><name2>HashMap.this.<keyArray> = retained.<keyArray>;

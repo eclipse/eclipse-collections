@@ -14,6 +14,7 @@ import java.lang.ref.WeakReference;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicReference;
 
 import org.eclipse.collections.api.block.function.Function0;
@@ -397,7 +398,7 @@ public class MultiReaderFastListTest extends AbstractListTestCase
     public void removeIf()
     {
         MutableList<Integer> objects = MultiReaderFastList.newListWith(1, 2, 3, null);
-        Assert.assertTrue(objects.removeIf(Predicates.cast(each -> each == null)));
+        Assert.assertTrue(objects.removeIf(Predicates.cast(Objects::isNull)));
         Verify.assertSize(3, objects);
         Verify.assertContainsAll(objects, 1, 2, 3);
     }
