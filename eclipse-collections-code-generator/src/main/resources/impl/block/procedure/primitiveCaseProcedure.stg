@@ -1,0 +1,84 @@
+import "copyright.stg"
+
+skipBoolean() ::= "false"
+
+targetPath() ::= "org/eclipse/collections/impl/block/procedure/primitive"
+
+fileName(primitive) ::= "<primitive.name>CaseProcedure"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.block.procedure.primitive;
+
+import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
+import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
+import org.eclipse.collections.api.list.MutableList;
+import org.eclipse.collections.api.tuple.Pair;
+import org.eclipse.collections.impl.factory.Lists;
+import org.eclipse.collections.impl.tuple.Tuples;
+
+/**
+ * This file was automatically generated from template file primitiveCaseProcedure.stg.
+ */
+public class <name>CaseProcedure implements <name>Procedure
+{
+    private static final long serialVersionUID = 1L;
+
+    private final MutableList\<Pair\<<name>Predicate, <name>Procedure>\> predicateProcedures = Lists.mutable.empty();
+    private <name>Procedure defaultProcedure;
+
+    public <name>CaseProcedure()
+    {
+    }
+
+    public <name>CaseProcedure(<name>Procedure newDefaultProcedure)
+    {
+        this.setDefault(newDefaultProcedure);
+    }
+
+    public <name>CaseProcedure addCase(
+            <name>Predicate predicate,
+            <name>Procedure procedure)
+    {
+        this.predicateProcedures.add(Tuples.pair(predicate, procedure));
+        return this;
+    }
+
+    public <name>CaseProcedure setDefault(<name>Procedure procedure)
+    {
+        this.defaultProcedure = procedure;
+        return this;
+    }
+
+    @Override
+    public void value(<type> argument)
+    {
+        int localSize = this.predicateProcedures.size();
+        for (int i = 0; i \< localSize; i++)
+        {
+            Pair\<<name>Predicate, <name>Procedure> pair = this.predicateProcedures.get(i);
+            if (pair.getOne().accept(argument))
+            {
+                pair.getTwo().value(argument);
+                return;
+            }
+        }
+
+        if (this.defaultProcedure != null)
+        {
+            this.defaultProcedure.value(argument);
+        }
+    }
+
+    @Override
+    public String toString()
+    {
+        return "new <name>CaseProcedure(" + this.predicateProcedures + ')';
+    }
+}
+>>

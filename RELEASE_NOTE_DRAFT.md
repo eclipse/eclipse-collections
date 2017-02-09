@@ -6,32 +6,33 @@ This is the 8.1.0 minor release.
 New Functionality
 -----------------
 
-* Implement primitive case functions.
-* Implement select and reject with targets on primitive iterables.
-* Implement collect and flatCollect with target collections on primitiveIterable.stg.
-* Add collect<Primitives> with target collections as default methods in primitiveIterable.stg.
-* Make SummaryStatistics Serializable.
-* Implement summingBigDecimal, sumByBigDecimal, summingBigInteger, sumByBigInteger on Collectors2. 
-* Implement BigDecimalSummaryStatistics and BigIntegerSummaryStatistics.
-* Implement SummaryStatistics and Collectors2.summarizing.
-* Integrate JaCoCo for test coverage.
-* Implement flatCollect on Collectors2.
-* Modify PersonAndPetKataTest.getAgeStatisticsOfPets to use summaryStatistics.
-* Update reference guide.
-* Add Abstract primitive Stacks.
-* Add the Eclipse Collections reference guide.
+* Implemented primitive case procedures.
+* Implemented primitive case functions.
+* Implemented select and reject with targets on primitive iterables.
+* Implemented collect and flatCollect with target collections on primitiveIterable.stg.
+* Added collect<Primitives> with target collections as default methods in primitiveIterable.stg.
+* Made SummaryStatistics Serializable.
+* Implemented summingBigDecimal, sumByBigDecimal, summingBigInteger, sumByBigInteger on Collectors2. 
+* Implemented BigDecimalSummaryStatistics and BigIntegerSummaryStatistics.
+* Implemented SummaryStatistics and Collectors2.summarizing.
+* Integrated JaCoCo for test coverage.
+* Implemented flatCollect on Collectors2.
+* Modified PersonAndPetKataTest.getAgeStatisticsOfPets to use summaryStatistics.
+* Updated reference guide.
+* Added Abstract primitive Stacks.
+* Added the Eclipse Collections reference guide.
 
 Optimizations
 -------------
 
-* Change collect and collectWith with target collections on InternalArrayIterate to use ensureCapacity for FastLists and ArrayLists.
+* Changed collect and collectWith with target collections on InternalArrayIterate to use ensureCapacity for FastLists and ArrayLists.
 
 Bug fixes
 ---------
 
-* Remove JMH tests and generator codes from Javadoc output.
-* Update links to point to the Eclipse Collections Kata instead of the GS Collections Kata.
-* Fix addAll() method in CompositeFastList to return false on isEmpty().
+* Removed JMH tests and generator codes from Javadoc output.
+* Updated links to point to the Eclipse Collections Kata instead of the GS Collections Kata.
+* Fixed addAll() method in CompositeFastList to return false on isEmpty().
 
 Acquiring Eclipse Collections
 -----------------------------
