@@ -1,0 +1,96 @@
+import "copyright.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+import "primitiveEquals.stg"
+
+skipBoolean() ::= "true"
+isTest() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/block/procedure/primitive"
+
+fileName(primitive) ::= "<primitive.name>CaseProcedureTest"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.wrapperName, primitive.name)>
+>>
+
+body(type, wrapperName, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.block.procedure.primitive;
+
+import org.eclipse.collections.api.list.primitive.<name>List;
+import org.eclipse.collections.api.list.primitive.Mutable<name>List;
+import org.eclipse.collections.impl.factory.primitive.<name>Lists;
+import org.eclipse.collections.impl.test.Verify;
+import org.junit.Assert;
+import org.junit.Test;
+
+/**
+ * This file was automatically generated from template file primitiveCaseProcedureTest.stg.
+ */
+public class <name>CaseProcedureTest
+{
+    @Test
+    public void noopCaseAndThenDefault()
+    {
+        Mutable<name>List result = <name>Lists.mutable.empty();
+        <name>List source = <name>Lists.mutable.with(<["1", "2"]:(literal.(type))(); separator=", ">);
+        <name>CaseProcedure procedure = new <name>CaseProcedure();
+        source.each(procedure);
+        Verify.assertEmpty(result);
+        procedure.setDefault(result::add);
+        source.each(procedure);
+        Assert.assertEquals(result, source);
+        Verify.assertContains("<name>CaseProcedure", procedure.toString());
+    }
+
+    @Test
+    public void oneCaseWithDefault()
+    {
+        Mutable<name>List ifOneList = <name>Lists.mutable.empty();
+        Mutable<name>List defaultList = <name>Lists.mutable.empty();
+        Mutable<name>List list = <name>Lists.mutable.with(<["1", "2"]:(literal.(type))(); separator=", ">);
+        <name>CaseProcedure procedure =
+                new <name>CaseProcedure(defaultList::add)
+                        .addCase(value -> <(equals.(type))("value", "1")>, ifOneList::add);
+        list.each(procedure);
+        Assert.assertEquals(<name>Lists.mutable.with(<(literal.(type))("1")>), ifOneList);
+        Assert.assertEquals(<name>Lists.mutable.with(<(literal.(type))("2")>), defaultList);
+    }
+
+    @Test
+    public void twoCasesNoDefault()
+    {
+        Mutable<name>List ifOneList = <name>Lists.mutable.empty();
+        Mutable<name>List ifTwoList = <name>Lists.mutable.empty();
+        Mutable<name>List list = <name>Lists.mutable.with(<["1", "2", "3"]:(literal.(type))(); separator=", ">);
+        <name>CaseProcedure procedure =
+                new <name>CaseProcedure()
+                        .addCase(value -> <(equals.(type))("value", "1")>, ifOneList::add)
+                        .addCase(value -> <(equals.(type))("value", "2")>, ifTwoList::add);
+        list.each(procedure);
+        Assert.assertEquals(<name>Lists.mutable.with(<(literal.(type))("1")>), ifOneList);
+        Assert.assertEquals(<name>Lists.mutable.with(<(literal.(type))("2")>), ifTwoList);
+        Verify.assertContains("<name>CaseProcedure", procedure.toString());
+    }
+
+    @Test
+    public void twoCasesWithDefault()
+    {
+        Mutable<name>List ifOneList = <name>Lists.mutable.empty();
+        Mutable<name>List ifTwoList = <name>Lists.mutable.empty();
+        Mutable<name>List defaultList = <name>Lists.mutable.empty();
+        Mutable<name>List list = <name>Lists.mutable.with(<["1", "2", "3", "4"]:(literal.(type))(); separator=", ">);
+        <name>CaseProcedure procedure =
+                new <name>CaseProcedure(defaultList::add)
+                        .addCase(value -> <(equals.(type))("value", "1")>, ifOneList::add)
+                        .addCase(value -> <(equals.(type))("value", "2")>, ifTwoList::add);
+        list.each(procedure);
+        Assert.assertEquals(<name>Lists.mutable.with(<(literal.(type))("1")>), ifOneList);
+        Assert.assertEquals(<name>Lists.mutable.with(<(literal.(type))("2")>), ifTwoList);
+        Assert.assertEquals(<name>Lists.mutable.with(<["3", "4"]:(literal.(type))(); separator=", ">), defaultList);
+    }
+}
+
+>>
