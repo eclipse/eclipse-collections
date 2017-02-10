@@ -118,8 +118,13 @@ public final class Unmodifiable<name>ObjectMap\<V>
     private static final long serialVersionUID = 1L;
     private final Mutable<name>ObjectMap\<V> map;
 
-    Unmodifiable<name>ObjectMap(Mutable<name>ObjectMap\<V> map)
+    public Unmodifiable<name>ObjectMap(Mutable<name>ObjectMap\<V> map)
     {
+        if(map == null)
+        {
+            throw new IllegalArgumentException("Cannot create a Unmodifiable<name>ObjectMap on a null map");
+        }
+
         this.map = map;
     }
 

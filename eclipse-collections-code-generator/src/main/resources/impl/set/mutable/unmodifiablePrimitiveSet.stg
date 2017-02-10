@@ -40,7 +40,7 @@ public final class Unmodifiable<name>Set
 {
     private static final long serialVersionUID = 1L;
 
-    Unmodifiable<name>Set(Mutable<name>Set set)
+    public Unmodifiable<name>Set(Mutable<name>Set set)
     {
         super(set);
     }

@@ -71,13 +71,18 @@ public final class SynchronizedObject<name>Map\<K>
     @GuardedBy("this.lock")
     private final MutableObject<name>Map\<K> map;
 
-    SynchronizedObject<name>Map(MutableObject<name>Map\<K> map)
+    public SynchronizedObject<name>Map(MutableObject<name>Map\<K> map)
     {
         this(map, null);
     }
 
-    SynchronizedObject<name>Map(MutableObject<name>Map\<K> map, Object newLock)
+    public SynchronizedObject<name>Map(MutableObject<name>Map\<K> map, Object newLock)
     {
+        if(map == null)
+        {
+            throw new IllegalArgumentException("Cannot create a SynchronizedObject<name>Map on a null map");
+        }
+
         this.map = map;
         this.lock = newLock == null ? this : newLock;
     }

@@ -59,8 +59,13 @@ public final class UnmodifiableObject<name>Map\<K>
     private static final long serialVersionUID = 1L;
     private final MutableObject<name>Map\<K> map;
 
-    UnmodifiableObject<name>Map(MutableObject<name>Map\<K> map)
+    public UnmodifiableObject<name>Map(MutableObject<name>Map\<K> map)
     {
+        if(map == null)
+        {
+            throw new IllegalArgumentException("Cannot create a UnmodifiableObject<name>Map on a null map");
+        }
+
         this.map = map;
     }
 
