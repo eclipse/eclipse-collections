@@ -54,12 +54,12 @@ public final class Synchronized<name>Bag
 {
     private static final long serialVersionUID = 1L;
 
-    Synchronized<name>Bag(Mutable<name>Bag bag)
+    public Synchronized<name>Bag(Mutable<name>Bag bag)
     {
         super(bag);
     }
 
-    Synchronized<name>Bag(Mutable<name>Bag bag, Object newLock)
+    public Synchronized<name>Bag(Mutable<name>Bag bag, Object newLock)
     {
         super(bag, newLock);
     }

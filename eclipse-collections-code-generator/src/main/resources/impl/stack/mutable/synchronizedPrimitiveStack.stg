@@ -61,12 +61,12 @@ public final class Synchronized<name>Stack
     @GuardedBy("this.lock")
     private final Mutable<name>Stack stack;
 
-    Synchronized<name>Stack(Mutable<name>Stack stack)
+    public Synchronized<name>Stack(Mutable<name>Stack stack)
     {
         this(stack, null);
     }
 
-    Synchronized<name>Stack(Mutable<name>Stack stack, Object newLock)
+    public Synchronized<name>Stack(Mutable<name>Stack stack, Object newLock)
     {
         this.stack = stack;
         this.lock = newLock == null ? this : newLock;

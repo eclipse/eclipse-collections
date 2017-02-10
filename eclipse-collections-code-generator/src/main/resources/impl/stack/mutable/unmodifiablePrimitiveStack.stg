@@ -52,7 +52,7 @@ public final class Unmodifiable<name>Stack
 
     private final Mutable<name>Stack stack;
 
-    Unmodifiable<name>Stack(Mutable<name>Stack stack)
+    public Unmodifiable<name>Stack(Mutable<name>Stack stack)
     {
         this.stack = stack;
     }
