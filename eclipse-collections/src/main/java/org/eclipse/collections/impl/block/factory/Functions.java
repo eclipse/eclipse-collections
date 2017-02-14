@@ -191,9 +191,39 @@ public final class Functions
         }
     }
 
+    /**
+     * Allows a lambda or anonymous inner class that needs to throw a checked exception to be safely wrapped as a
+     * Function that will throw a RuntimeException, wrapping the checked exception that is the cause.
+     */
     public static <T, V> Function<T, V> throwing(ThrowingFunction<T, V> throwingFunction)
     {
         return new ThrowingFunctionAdapter<>(throwingFunction);
+    }
+
+    /**
+     * Allows a lambda or anonymous inner class that needs to throw a checked exception to be safely wrapped as a
+     * Function that will throw a user specified RuntimeException based on the provided function. The function
+     * is passed the current element and the checked exception that was thrown as context arguments.
+     */
+    public static <T, V> Function<T, V> throwing(
+            ThrowingFunction<T, V> throwingFunction,
+            Function2<T, ? super Throwable, ? extends RuntimeException> rethrow)
+    {
+        return each ->
+        {
+            try
+            {
+                return throwingFunction.safeValueOf(each);
+            }
+            catch (RuntimeException e)
+            {
+                throw e;
+            }
+            catch (Throwable t)
+            {
+                throw rethrow.value(each, t);
+            }
+        };
     }
 
     /**

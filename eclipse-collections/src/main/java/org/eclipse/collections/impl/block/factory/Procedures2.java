@@ -12,6 +12,7 @@ package org.eclipse.collections.impl.block.factory;
 
 import java.util.Collection;
 
+import org.eclipse.collections.api.block.function.Function3;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.impl.block.procedure.checked.CheckedProcedure2;
@@ -30,9 +31,39 @@ public final class Procedures2
         throw new AssertionError("Suppress default constructor for noninstantiability");
     }
 
+    /**
+     * Allows a lambda or anonymous inner class that needs to throw a checked exception to be safely wrapped as a
+     * Procedure2 that will throw a RuntimeException, wrapping the checked exception that is the cause.
+     */
     public static <T, P> Procedure2<T, P> throwing(ThrowingProcedure2<T, P> throwingProcedure2)
     {
         return new ThrowingProcedure2Adapter<>(throwingProcedure2);
+    }
+
+    /**
+     * Allows a lambda or anonymous inner class that needs to throw a checked exception to be safely wrapped as a
+     * Procedure2 that will throw a user specified RuntimeException based on the provided function. The function
+     * is passed the current element and the checked exception that was thrown as context arguments.
+     */
+    public static <T1, T2> Procedure2<T1, T2> throwing(
+            ThrowingProcedure2<T1, T2> throwingProcedure,
+            Function3<T1, T2, ? super Throwable, ? extends RuntimeException> rethrow)
+    {
+        return (one, two) ->
+        {
+            try
+            {
+                throwingProcedure.safeValue(one, two);
+            }
+            catch (RuntimeException e)
+            {
+                throw e;
+            }
+            catch (Throwable t)
+            {
+                throw rethrow.value(one, two, t);
+            }
+        };
     }
 
     public static <T, P> Procedure2<T, P> fromProcedure(Procedure<? super T> procedure)

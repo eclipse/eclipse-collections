@@ -54,9 +54,34 @@ public class FunctionsTest
         Verify.assertThrowsWithCause(
                 RuntimeException.class,
                 IOException.class,
-                () -> Functions.throwing(a -> {
-                    throw new IOException();
-                }).valueOf(null));
+                () -> { Functions.throwing(a -> { throw new IOException(); }).valueOf(null); });
+    }
+
+    @Test
+    public void throwingWithUserSpecifiedException()
+    {
+        Verify.assertThrowsWithCause(
+                RuntimeException.class,
+                IOException.class,
+                () -> { Functions.throwing(
+                        a -> { throw new IOException(); },
+                        (each, ce) -> new RuntimeException(ce)).valueOf(null); });
+        Verify.assertThrowsWithCause(
+                MyRuntimeException.class,
+                IOException.class,
+                () -> { Functions.throwing(
+                        a -> { throw new IOException(); },
+                        this::throwMyException).valueOf(null); });
+        Verify.assertThrows(
+                NullPointerException.class,
+                () -> { Functions.throwing(
+                        a -> { throw new NullPointerException(); },
+                        this::throwMyException).valueOf(null); });
+    }
+
+    private MyRuntimeException throwMyException(Object each, Throwable exception)
+    {
+        return new MyRuntimeException(String.valueOf(each), exception);
     }
 
     @Test
@@ -584,5 +609,13 @@ public class FunctionsTest
     public void classIsNonInstantiable()
     {
         Verify.assertClassNonInstantiable(Functions.class);
+    }
+
+    private static class MyRuntimeException extends RuntimeException
+    {
+        MyRuntimeException(String message, Throwable cause)
+        {
+            super(message, cause);
+        }
     }
 }
