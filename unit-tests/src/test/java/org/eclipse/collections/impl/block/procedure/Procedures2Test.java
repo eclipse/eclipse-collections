@@ -31,6 +31,33 @@ public class Procedures2Test
     }
 
     @Test
+    public void throwingWithUserSpecifiedException()
+    {
+        Verify.assertThrowsWithCause(
+                RuntimeException.class,
+                IOException.class,
+                () -> { Procedures2.throwing(
+                        (one, two) -> { throw new IOException(); },
+                        (one, two, ce) -> new RuntimeException(ce)).value(null, null); });
+        Verify.assertThrowsWithCause(
+                MyRuntimeException.class,
+                IOException.class,
+                () -> { Procedures2.throwing(
+                        (one, two) -> { throw new IOException(); },
+                        this::throwMyException).value(null, null); });
+        Verify.assertThrows(
+                NullPointerException.class,
+                () -> { Procedures2.throwing(
+                        (one, two) -> { throw new NullPointerException(); },
+                        this::throwMyException).value(null, null); });
+    }
+
+    private MyRuntimeException throwMyException(Object one, Object two, Throwable exception)
+    {
+        return new MyRuntimeException(String.valueOf(one) + String.valueOf(two), exception);
+    }
+
+    @Test
     public void asProcedure2()
     {
         CollectionAddProcedure<Integer> procedure = CollectionAddProcedure.on(FastList.newList());
@@ -43,5 +70,13 @@ public class Procedures2Test
     public void classIsNonInstantiable()
     {
         Verify.assertClassNonInstantiable(Procedures2.class);
+    }
+
+    private static class MyRuntimeException extends RuntimeException
+    {
+        MyRuntimeException(String message, Throwable cause)
+        {
+            super(message, cause);
+        }
     }
 }

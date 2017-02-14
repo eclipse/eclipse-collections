@@ -37,6 +37,33 @@ public class Predicates2Test
     }
 
     @Test
+    public void throwingWithUserSpecifiedException()
+    {
+        Verify.assertThrowsWithCause(
+                RuntimeException.class,
+                IOException.class,
+                () -> { Predicates2.throwing(
+                        (one, two) -> { throw new IOException(); },
+                        (one, two, ce) -> new RuntimeException(ce)).accept(null, null); });
+        Verify.assertThrowsWithCause(
+                MyRuntimeException.class,
+                IOException.class,
+                () -> { Predicates2.throwing(
+                        (one, two) -> { throw new IOException(); },
+                        this::throwMyException).accept(null, null); });
+        Verify.assertThrows(
+                NullPointerException.class,
+                () -> { Predicates2.throwing(
+                        (one, two) -> { throw new NullPointerException(); },
+                        this::throwMyException).accept(null, null); });
+    }
+
+    private MyRuntimeException throwMyException(Object one, Object two, Throwable exception)
+    {
+        return new MyRuntimeException(String.valueOf(one) + String.valueOf(two), exception);
+    }
+
+    @Test
     public void staticOr()
     {
         Assert.assertTrue(Predicates2.or(TRUE, FALSE).accept(OBJECT, OBJECT));
@@ -301,5 +328,13 @@ public class Predicates2Test
         Assert.assertTrue(Predicates2.<Double>greaterThanOrEqualTo().accept(-1.0, -1.0));
         Assert.assertTrue(Predicates2.<Double>greaterThanOrEqualTo().accept(0.0, -1.0));
         Assert.assertNotNull(Predicates2.<Integer>greaterThanOrEqualTo().toString());
+    }
+
+    private static class MyRuntimeException extends RuntimeException
+    {
+        MyRuntimeException(String message, Throwable cause)
+        {
+            super(message, cause);
+        }
     }
 }

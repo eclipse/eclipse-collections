@@ -11,6 +11,7 @@
 package org.eclipse.collections.impl.block.factory;
 
 import org.eclipse.collections.api.block.function.Function;
+import org.eclipse.collections.api.block.function.Function3;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.impl.block.predicate.checked.CheckedPredicate2;
 import org.eclipse.collections.impl.block.predicate.checked.ThrowingPredicate2;
@@ -52,9 +53,39 @@ public abstract class Predicates2<T, P>
         return Predicates2.or(this, op);
     }
 
+    /**
+     * Allows a lambda or anonymous inner class that needs to throw a checked exception to be safely wrapped as a
+     * Predicate2 that will throw a RuntimeException, wrapping the checked exception that is the cause.
+     */
     public static <T, P> Predicate2<T, P> throwing(ThrowingPredicate2<T, P> throwingPredicate2)
     {
         return new ThrowingPredicate2Adapter<>(throwingPredicate2);
+    }
+
+    /**
+     * Allows a lambda or anonymous inner class that needs to throw a checked exception to be safely wrapped as a
+     * Procedure2 that will throw a user specified RuntimeException based on the provided function. The function
+     * is passed the current element and the checked exception that was thrown as context arguments.
+     */
+    public static <T1, T2> Predicate2<T1, T2> throwing(
+            ThrowingPredicate2<T1, T2> throwingPredicate2,
+            Function3<T1, T2, ? super Throwable, ? extends RuntimeException> rethrow)
+    {
+        return (one, two) ->
+        {
+            try
+            {
+                return throwingPredicate2.safeAccept(one, two);
+            }
+            catch (RuntimeException e)
+            {
+                throw e;
+            }
+            catch (Throwable t)
+            {
+                throw rethrow.value(one, two, t);
+            }
+        };
     }
 
     public static <T, P> Predicates2<T, P> not(Predicate2<T, P> predicate)

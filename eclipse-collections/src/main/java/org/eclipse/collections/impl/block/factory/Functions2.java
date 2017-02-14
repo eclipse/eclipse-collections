@@ -14,6 +14,7 @@ import java.util.Comparator;
 
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
+import org.eclipse.collections.api.block.function.Function3;
 import org.eclipse.collections.impl.block.function.checked.CheckedFunction2;
 import org.eclipse.collections.impl.block.function.checked.ThrowingFunction2;
 
@@ -34,9 +35,39 @@ public final class Functions2
         return new FunctionAdapter<>(function);
     }
 
+    /**
+     * Allows a lambda or anonymous inner class that needs to throw a checked exception to be safely wrapped as a
+     * Function2 that will throw a RuntimeException, wrapping the checked exception that is the cause.
+     */
     public static <T, V, P> Function2<T, P, V> throwing(ThrowingFunction2<T, P, V> throwingFunction2)
     {
         return new ThrowingFunction2Adapter<>(throwingFunction2);
+    }
+
+    /**
+     * Allows a lambda or anonymous inner class that needs to throw a checked exception to be safely wrapped as a
+     * Function2 that will throw a user specified RuntimeException based on the provided function. The function
+     * is passed the current element and the checked exception that was thrown as context arguments.
+     */
+    public static <T1, T2, V> Function2<T1, T2, V> throwing(
+            ThrowingFunction2<T1, T2, V> throwingFunction2,
+            Function3<T1, T2, ? super Throwable, ? extends RuntimeException> rethrow)
+    {
+        return (one, two) ->
+        {
+            try
+            {
+                return throwingFunction2.safeValue(one, two);
+            }
+            catch (RuntimeException e)
+            {
+                throw e;
+            }
+            catch (Throwable t)
+            {
+                throw rethrow.value(one, two, t);
+            }
+        };
     }
 
     public static Function2<Integer, Integer, Integer> integerAddition()

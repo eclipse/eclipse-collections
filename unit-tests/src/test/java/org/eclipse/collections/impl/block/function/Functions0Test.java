@@ -49,6 +49,33 @@ public class Functions0Test
     }
 
     @Test
+    public void throwingWithUserSpecifiedException()
+    {
+        Verify.assertThrowsWithCause(
+                RuntimeException.class,
+                IOException.class,
+                () -> { Functions0.throwing(
+                        () -> { throw new IOException(); },
+                        (ce) -> new RuntimeException(ce)).value(); });
+        Verify.assertThrowsWithCause(
+                MyRuntimeException.class,
+                IOException.class,
+                () -> { Functions0.throwing(
+                        () -> { throw new IOException(); },
+                        this::throwMyException).value(); });
+        Verify.assertThrows(
+                NullPointerException.class,
+                () -> { Functions0.throwing(
+                        () -> { throw new NullPointerException(); },
+                        this::throwMyException).value(); });
+    }
+
+    private MyRuntimeException throwMyException(Throwable exception)
+    {
+        return new MyRuntimeException(exception);
+    }
+
+    @Test
     public void newFastList()
     {
         Assert.assertEquals(Lists.mutable.of(), Functions0.newFastList().value());
@@ -101,5 +128,13 @@ public class Functions0Test
     public void classIsNonInstantiable()
     {
         Verify.assertClassNonInstantiable(Functions0.class);
+    }
+
+    private static class MyRuntimeException extends RuntimeException
+    {
+        MyRuntimeException(Throwable cause)
+        {
+            super(cause);
+        }
     }
 }

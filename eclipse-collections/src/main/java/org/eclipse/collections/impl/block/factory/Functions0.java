@@ -16,6 +16,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.eclipse.collections.api.bag.MutableBag;
+import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MutableMap;
@@ -84,9 +85,39 @@ public final class Functions0
         return (Function0<MutableMap<K, V>>) (Function0<?>) NEW_UNIFIED_MAP_FUNCTION;
     }
 
+    /**
+     * Allows a lambda or anonymous inner class that needs to throw a checked exception to be safely wrapped as a
+     * Function that will throw a RuntimeException, wrapping the checked exception that is the cause.
+     */
     public static <T> Function0<T> throwing(ThrowingFunction0<T> throwingFunction0)
     {
         return new ThrowingFunction0Adapter<>(throwingFunction0);
+    }
+
+    /**
+     * Allows a lambda or anonymous inner class that needs to throw a checked exception to be safely wrapped as a
+     * Function0 that will throw a user specified RuntimeException based on the provided function. The function
+     * is passed the current element and the checked exception that was thrown as context arguments.
+     */
+    public static <T> Function0<T> throwing(
+            ThrowingFunction0<T> throwingFunction0,
+            Function<? super Throwable, ? extends RuntimeException> rethrow)
+    {
+        return () ->
+        {
+            try
+            {
+                return throwingFunction0.safeValue();
+            }
+            catch (RuntimeException e)
+            {
+                throw e;
+            }
+            catch (Throwable t)
+            {
+                throw rethrow.valueOf(t);
+            }
+        };
     }
 
     public static <T> Function0<T> nullValue()

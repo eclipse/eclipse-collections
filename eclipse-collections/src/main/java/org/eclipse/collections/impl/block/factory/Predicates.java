@@ -15,6 +15,7 @@ import java.util.Collection;
 import java.util.Set;
 
 import org.eclipse.collections.api.block.function.Function;
+import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.set.SetIterable;
@@ -54,9 +55,39 @@ public abstract class Predicates<T>
         return predicate;
     }
 
+    /**
+     * Allows a lambda or anonymous inner class that needs to throw a checked exception to be safely wrapped as a
+     * Predicate that will throw a RuntimeException, wrapping the checked exception that is the cause.
+     */
     public static <T> Predicate<T> throwing(ThrowingPredicate<T> throwingPredicate)
     {
         return new ThrowingPredicateAdapter<>(throwingPredicate);
+    }
+
+    /**
+     * Allows a lambda or anonymous inner class that needs to throw a checked exception to be safely wrapped as a
+     * Predicate that will throw a user specified RuntimeException based on the provided function. The function
+     * is passed the current element and the checked exception that was thrown as context arguments.
+     */
+    public static <T> Predicate<T> throwing(
+            ThrowingPredicate<T> throwingPredicate,
+            Function2<T, ? super Throwable, ? extends RuntimeException> rethrow)
+    {
+        return each ->
+        {
+            try
+            {
+                return throwingPredicate.safeAccept(each);
+            }
+            catch (RuntimeException e)
+            {
+                throw e;
+            }
+            catch (Throwable t)
+            {
+                throw rethrow.value(each, t);
+            }
+        };
     }
 
     public static <P, T> Predicate<T> bind(Predicate2<? super T, ? super P> predicate, P parameter)

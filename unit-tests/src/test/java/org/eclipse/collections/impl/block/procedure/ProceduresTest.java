@@ -43,18 +43,43 @@ public class ProceduresTest
     }
 
     @Test
+    public void throwingWithUserSpecifiedException()
+    {
+        Verify.assertThrowsWithCause(
+                RuntimeException.class,
+                IOException.class,
+                () -> Procedures.throwing(
+                        a -> { throw new IOException(); },
+                        (each, ce) -> new RuntimeException(ce))
+                        .value(null));
+        Verify.assertThrowsWithCause(
+                MyRuntimeException.class,
+                IOException.class,
+                () -> Procedures.throwing(
+                        a -> { throw new IOException(); },
+                        this::throwMyException)
+                        .value(null));
+        Verify.assertThrows(
+                NullPointerException.class,
+                () -> Procedures.throwing(
+                        a -> { throw new NullPointerException(); },
+                        this::throwMyException)
+                        .value(null));
+    }
+
+    private MyRuntimeException throwMyException(Object each, Throwable exception)
+    {
+        return new MyRuntimeException(String.valueOf(each), exception);
+    }
+
+    @Test
     public void println()
     {
-        TestPrintStream stream = new TestPrintStream(FastList.newListWith(1));
-        try
+        try (TestPrintStream stream = new TestPrintStream(FastList.newListWith(1)))
         {
             Procedure<Integer> result = Procedures.println(stream);
             result.value(1);
             stream.shutdown();
-        }
-        finally
-        {
-            stream.close();
         }
     }
 
@@ -132,7 +157,7 @@ public class ProceduresTest
 
         private TestPrintStream(List<Integer> newAssertValues)
         {
-            super(initOutputStream());
+            super(TestPrintStream.initOutputStream());
             this.assertValues = newAssertValues;
         }
 
@@ -172,5 +197,13 @@ public class ProceduresTest
     public void classIsNonInstantiable()
     {
         Verify.assertClassNonInstantiable(Procedures.class);
+    }
+
+    private static class MyRuntimeException extends RuntimeException
+    {
+        MyRuntimeException(String message, Throwable cause)
+        {
+            super(message, cause);
+        }
     }
 }

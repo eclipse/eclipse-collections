@@ -30,6 +30,33 @@ public class Functions2Test
     }
 
     @Test
+    public void throwingWithUserSpecifiedException()
+    {
+        Verify.assertThrowsWithCause(
+                RuntimeException.class,
+                IOException.class,
+                () -> { Functions2.throwing(
+                        (one, two) -> { throw new IOException(); },
+                        (one, two, ce) -> new RuntimeException(ce)).value(null, null); });
+        Verify.assertThrowsWithCause(
+                MyRuntimeException.class,
+                IOException.class,
+                () -> { Functions2.throwing(
+                        (one, two) -> { throw new IOException(); },
+                        this::throwMyException).value(null, null); });
+        Verify.assertThrows(
+                NullPointerException.class,
+                () -> { Functions2.throwing(
+                        (one, two) -> { throw new NullPointerException(); },
+                        this::throwMyException).value(null, null); });
+    }
+
+    private MyRuntimeException throwMyException(Object one, Object two, Throwable exception)
+    {
+        return new MyRuntimeException(String.valueOf(one) + String.valueOf(two), exception);
+    }
+
+    @Test
     public void asFunction2Function()
     {
         Function2<Integer, Object, String> block = Functions2.fromFunction(String::valueOf);
@@ -47,5 +74,13 @@ public class Functions2Test
     public void classIsNonInstantiable()
     {
         Verify.assertClassNonInstantiable(Functions2.class);
+    }
+
+    private static class MyRuntimeException extends RuntimeException
+    {
+        MyRuntimeException(String message, Throwable cause)
+        {
+            super(message, cause);
+        }
     }
 }

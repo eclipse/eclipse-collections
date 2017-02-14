@@ -75,9 +75,34 @@ public class PredicatesTest
         Verify.assertThrowsWithCause(
                 RuntimeException.class,
                 IOException.class,
-                () -> Predicates.throwing(e -> {
-                    throw new IOException();
-                }).accept(null));
+                () -> { Predicates.throwing(e -> { throw new IOException(); }).accept(null); });
+    }
+
+    @Test
+    public void throwingWithUserSpecifiedException()
+    {
+        Verify.assertThrowsWithCause(
+                RuntimeException.class,
+                IOException.class,
+                () -> { Predicates.throwing(
+                        a -> { throw new IOException(); },
+                        (each, ce) -> new RuntimeException(ce)).accept(null); });
+        Verify.assertThrowsWithCause(
+                MyRuntimeException.class,
+                IOException.class,
+                () -> { Predicates.throwing(
+                        a -> { throw new IOException(); },
+                        this::throwMyException).accept(null); });
+        Verify.assertThrows(
+                NullPointerException.class,
+                () -> { Predicates.throwing(
+                        a -> { throw new NullPointerException(); },
+                        this::throwMyException).accept(null); });
+    }
+
+    private MyRuntimeException throwMyException(Object each, Throwable exception)
+    {
+        return new MyRuntimeException(String.valueOf(each), exception);
     }
 
     @Test
@@ -87,62 +112,62 @@ public class PredicatesTest
 
         Predicate<Integer> predicate = Predicates.bind((element, parameter) -> (element + parameter) % 2 == 0, 1);
         Verify.assertListsEqual(Lists.mutable.of(1, 3), list.select(predicate));
-        assertToString(predicate);
+        PredicatesTest.assertToString(predicate);
     }
 
     @Test
     public void alwaysTrue()
     {
-        assertAccepts(Predicates.alwaysTrue(), (Object) null);
-        assertToString(Predicates.alwaysTrue());
+        PredicatesTest.assertAccepts(Predicates.alwaysTrue(), (Object) null);
+        PredicatesTest.assertToString(Predicates.alwaysTrue());
     }
 
     @Test
     public void alwaysFalse()
     {
-        assertRejects(Predicates.alwaysFalse(), (Object) null);
-        assertToString(Predicates.alwaysFalse());
+        PredicatesTest.assertRejects(Predicates.alwaysFalse(), (Object) null);
+        PredicatesTest.assertToString(Predicates.alwaysFalse());
     }
 
     @Test
     public void instanceNot()
     {
-        assertRejects(Predicates.alwaysTrue().not(), (Object) null);
-        assertToString(Predicates.alwaysTrue().not());
+        PredicatesTest.assertRejects(Predicates.alwaysTrue().not(), (Object) null);
+        PredicatesTest.assertToString(Predicates.alwaysTrue().not());
     }
 
     @Test
     public void synchronizedEach()
     {
         Predicate<Object> predicate = Predicates.synchronizedEach(Predicates.alwaysTrue());
-        assertAccepts(predicate, new Object());
+        PredicatesTest.assertAccepts(predicate, new Object());
     }
 
     @Test
     public void adapt()
     {
-        assertAccepts(Predicates.adapt(Predicates.alwaysTrue()), new Object());
-        assertToString(Predicates.adapt(Predicates.alwaysTrue()));
+        PredicatesTest.assertAccepts(Predicates.adapt(Predicates.alwaysTrue()), new Object());
+        PredicatesTest.assertToString(Predicates.adapt(Predicates.alwaysTrue()));
     }
 
     @Test
     public void staticOr()
     {
-        assertAccepts(Predicates.or(Predicates.alwaysTrue(), Predicates.alwaysFalse()), new Object());
-        assertRejects(Predicates.or(Predicates.alwaysFalse(), Predicates.alwaysFalse()), new Object());
-        assertAccepts(Predicates.or(Predicates.alwaysTrue(), Predicates.alwaysTrue()), new Object());
+        PredicatesTest.assertAccepts(Predicates.or(Predicates.alwaysTrue(), Predicates.alwaysFalse()), new Object());
+        PredicatesTest.assertRejects(Predicates.or(Predicates.alwaysFalse(), Predicates.alwaysFalse()), new Object());
+        PredicatesTest.assertAccepts(Predicates.or(Predicates.alwaysTrue(), Predicates.alwaysTrue()), new Object());
 
-        assertToString(Predicates.or(Predicates.alwaysTrue(), Predicates.alwaysTrue()));
+        PredicatesTest.assertToString(Predicates.or(Predicates.alwaysTrue(), Predicates.alwaysTrue()));
     }
 
     @Test
     public void instanceOr()
     {
-        assertAccepts(Predicates.alwaysTrue().or(Predicates.alwaysFalse()), new Object());
-        assertRejects(Predicates.alwaysFalse().or(Predicates.alwaysFalse()), new Object());
-        assertAccepts(Predicates.alwaysTrue().or(Predicates.alwaysTrue()), new Object());
+        PredicatesTest.assertAccepts(Predicates.alwaysTrue().or(Predicates.alwaysFalse()), new Object());
+        PredicatesTest.assertRejects(Predicates.alwaysFalse().or(Predicates.alwaysFalse()), new Object());
+        PredicatesTest.assertAccepts(Predicates.alwaysTrue().or(Predicates.alwaysTrue()), new Object());
 
-        assertToString(Predicates.alwaysTrue().or(Predicates.alwaysTrue()));
+        PredicatesTest.assertToString(Predicates.alwaysTrue().or(Predicates.alwaysTrue()));
     }
 
     @Test
@@ -150,47 +175,47 @@ public class PredicatesTest
     {
         MutableList<Predicate<Object>> predicates =
                 Lists.fixedSize.of(Predicates.alwaysTrue(), Predicates.alwaysFalse(), null);
-        assertAccepts(Predicates.or(predicates), new Object());
+        PredicatesTest.assertAccepts(Predicates.or(predicates), new Object());
 
         MutableList<Predicate<Object>> falsePredicates =
                 Lists.fixedSize.of(Predicates.alwaysFalse(), Predicates.alwaysFalse());
-        assertRejects(Predicates.or(falsePredicates), new Object());
+        PredicatesTest.assertRejects(Predicates.or(falsePredicates), new Object());
 
         MutableList<Predicate<Object>> truePredicates =
                 Lists.fixedSize.of(Predicates.alwaysTrue(), Predicates.alwaysTrue());
-        assertAccepts(Predicates.or(truePredicates), new Object());
+        PredicatesTest.assertAccepts(Predicates.or(truePredicates), new Object());
 
-        assertToString(Predicates.or(truePredicates));
+        PredicatesTest.assertToString(Predicates.or(truePredicates));
     }
 
     @Test
     public void varArgOr()
     {
-        assertAccepts(Predicates.or(Predicates.alwaysTrue(), Predicates.alwaysFalse(), null), new Object());
-        assertRejects(Predicates.or(Predicates.alwaysFalse(), Predicates.alwaysFalse(), Predicates.alwaysFalse()), new Object());
-        assertAccepts(Predicates.or(Predicates.alwaysTrue(), Predicates.alwaysTrue(), Predicates.alwaysTrue()), new Object());
+        PredicatesTest.assertAccepts(Predicates.or(Predicates.alwaysTrue(), Predicates.alwaysFalse(), null), new Object());
+        PredicatesTest.assertRejects(Predicates.or(Predicates.alwaysFalse(), Predicates.alwaysFalse(), Predicates.alwaysFalse()), new Object());
+        PredicatesTest.assertAccepts(Predicates.or(Predicates.alwaysTrue(), Predicates.alwaysTrue(), Predicates.alwaysTrue()), new Object());
 
-        assertToString(Predicates.or(Predicates.alwaysTrue(), Predicates.alwaysTrue(), Predicates.alwaysTrue()));
+        PredicatesTest.assertToString(Predicates.or(Predicates.alwaysTrue(), Predicates.alwaysTrue(), Predicates.alwaysTrue()));
     }
 
     @Test
     public void staticAnd()
     {
-        assertAccepts(Predicates.and(Predicates.alwaysTrue(), Predicates.alwaysTrue()), new Object());
-        assertRejects(Predicates.and(Predicates.alwaysTrue(), Predicates.alwaysFalse()), new Object());
-        assertRejects(Predicates.and(Predicates.alwaysFalse(), Predicates.alwaysFalse()), new Object());
+        PredicatesTest.assertAccepts(Predicates.and(Predicates.alwaysTrue(), Predicates.alwaysTrue()), new Object());
+        PredicatesTest.assertRejects(Predicates.and(Predicates.alwaysTrue(), Predicates.alwaysFalse()), new Object());
+        PredicatesTest.assertRejects(Predicates.and(Predicates.alwaysFalse(), Predicates.alwaysFalse()), new Object());
 
-        assertToString(Predicates.and(Predicates.alwaysTrue(), Predicates.alwaysTrue()));
+        PredicatesTest.assertToString(Predicates.and(Predicates.alwaysTrue(), Predicates.alwaysTrue()));
     }
 
     @Test
     public void instanceAnd()
     {
-        assertAccepts(Predicates.alwaysTrue().and(Predicates.alwaysTrue()), new Object());
-        assertRejects(Predicates.alwaysTrue().and(Predicates.alwaysFalse()), new Object());
-        assertRejects(Predicates.alwaysFalse().and(Predicates.alwaysFalse()), new Object());
+        PredicatesTest.assertAccepts(Predicates.alwaysTrue().and(Predicates.alwaysTrue()), new Object());
+        PredicatesTest.assertRejects(Predicates.alwaysTrue().and(Predicates.alwaysFalse()), new Object());
+        PredicatesTest.assertRejects(Predicates.alwaysFalse().and(Predicates.alwaysFalse()), new Object());
 
-        assertToString(Predicates.alwaysTrue().and(Predicates.alwaysTrue()));
+        PredicatesTest.assertToString(Predicates.alwaysTrue().and(Predicates.alwaysTrue()));
     }
 
     @Test
@@ -198,89 +223,89 @@ public class PredicatesTest
     {
         MutableList<Predicate<Object>> predicates =
                 Lists.fixedSize.of(Predicates.alwaysTrue(), Predicates.alwaysTrue());
-        assertAccepts(Predicates.and(predicates), new Object());
+        PredicatesTest.assertAccepts(Predicates.and(predicates), new Object());
 
         MutableList<Predicate<Object>> tfPredicates =
                 Lists.fixedSize.of(Predicates.alwaysTrue(), Predicates.alwaysFalse());
-        assertRejects(Predicates.and(tfPredicates), new Object());
+        PredicatesTest.assertRejects(Predicates.and(tfPredicates), new Object());
 
         MutableList<Predicate<Object>> falsePredicates =
                 Lists.fixedSize.of(Predicates.alwaysFalse(), Predicates.alwaysFalse());
-        assertRejects(Predicates.and(falsePredicates), new Object());
+        PredicatesTest.assertRejects(Predicates.and(falsePredicates), new Object());
 
-        assertToString(Predicates.and(predicates));
+        PredicatesTest.assertToString(Predicates.and(predicates));
     }
 
     @Test
     public void varArgAnd()
     {
-        assertAccepts(Predicates.and(Predicates.alwaysTrue(), Predicates.alwaysTrue()), new Object());
-        assertRejects(Predicates.and(Predicates.alwaysTrue(), Predicates.alwaysTrue(), Predicates.alwaysFalse()), new Object());
-        assertRejects(Predicates.and(Predicates.alwaysFalse(), Predicates.alwaysFalse(), Predicates.alwaysFalse()), new Object());
+        PredicatesTest.assertAccepts(Predicates.and(Predicates.alwaysTrue(), Predicates.alwaysTrue()), new Object());
+        PredicatesTest.assertRejects(Predicates.and(Predicates.alwaysTrue(), Predicates.alwaysTrue(), Predicates.alwaysFalse()), new Object());
+        PredicatesTest.assertRejects(Predicates.and(Predicates.alwaysFalse(), Predicates.alwaysFalse(), Predicates.alwaysFalse()), new Object());
 
-        assertToString(Predicates.and(Predicates.alwaysTrue(), Predicates.alwaysTrue(), null));
+        PredicatesTest.assertToString(Predicates.and(Predicates.alwaysTrue(), Predicates.alwaysTrue(), null));
     }
 
     @Test
     public void equal()
     {
-        assertAccepts(Integer.valueOf(1)::equals, 1);
-        assertRejects(Integer.valueOf(1)::equals, 2);
+        PredicatesTest.assertAccepts(Integer.valueOf(1)::equals, 1);
+        PredicatesTest.assertRejects(Integer.valueOf(1)::equals, 2);
 
-        assertAccepts("test"::equals, "test");
-        assertRejects("test"::equals, "production");
+        PredicatesTest.assertAccepts("test"::equals, "test");
+        PredicatesTest.assertRejects("test"::equals, "production");
     }
 
     @Test
     public void notEqual()
     {
-        assertRejects(Predicates.notEqual(1), 1);
-        assertAccepts(Predicates.notEqual(1), 2);
+        PredicatesTest.assertRejects(Predicates.notEqual(1), 1);
+        PredicatesTest.assertAccepts(Predicates.notEqual(1), 2);
 
-        assertRejects(Predicates.notEqual("test"), "test");
-        assertAccepts(Predicates.notEqual("test"), "production");
+        PredicatesTest.assertRejects(Predicates.notEqual("test"), "test");
+        PredicatesTest.assertAccepts(Predicates.notEqual("test"), "production");
 
-        assertAccepts(Predicates.notEqual(null), "test");
+        PredicatesTest.assertAccepts(Predicates.notEqual(null), "test");
 
-        assertToString(Predicates.notEqual(1));
+        PredicatesTest.assertToString(Predicates.notEqual(1));
     }
 
     @Test
     public void not()
     {
         Predicate<Object> notTrue = Predicates.not(Predicates.alwaysTrue());
-        assertRejects(notTrue, new Object());
-        assertToString(notTrue);
+        PredicatesTest.assertRejects(notTrue, new Object());
+        PredicatesTest.assertToString(notTrue);
 
         Predicate<Object> notFalse = Predicates.not(Predicates.alwaysFalse());
-        assertAccepts(notFalse, new Object());
-        assertToString(notFalse);
+        PredicatesTest.assertAccepts(notFalse, new Object());
+        PredicatesTest.assertToString(notFalse);
     }
 
     @Test
     public void testNull()
     {
-        assertAccepts(Predicates.isNull(), (Object) null);
-        assertRejects(Predicates.isNull(), new Object());
-        assertToString(Predicates.isNull());
+        PredicatesTest.assertAccepts(Predicates.isNull(), (Object) null);
+        PredicatesTest.assertRejects(Predicates.isNull(), new Object());
+        PredicatesTest.assertToString(Predicates.isNull());
     }
 
     @Test
     public void notNull()
     {
-        assertAccepts(Predicates.notNull(), new Object());
-        assertRejects(Predicates.notNull(), (Object) null);
-        assertToString(Predicates.notNull());
+        PredicatesTest.assertAccepts(Predicates.notNull(), new Object());
+        PredicatesTest.assertRejects(Predicates.notNull(), (Object) null);
+        PredicatesTest.assertToString(Predicates.notNull());
     }
 
     @Test
     public void neither()
     {
-        assertRejects(Predicates.neither(Predicates.alwaysTrue(), Predicates.alwaysTrue()), new Object());
-        assertRejects(Predicates.neither(Predicates.alwaysTrue(), Predicates.alwaysFalse()), new Object());
-        assertAccepts(Predicates.neither(Predicates.alwaysFalse(), Predicates.alwaysFalse()), new Object());
+        PredicatesTest.assertRejects(Predicates.neither(Predicates.alwaysTrue(), Predicates.alwaysTrue()), new Object());
+        PredicatesTest.assertRejects(Predicates.neither(Predicates.alwaysTrue(), Predicates.alwaysFalse()), new Object());
+        PredicatesTest.assertAccepts(Predicates.neither(Predicates.alwaysFalse(), Predicates.alwaysFalse()), new Object());
 
-        assertToString(Predicates.neither(Predicates.alwaysFalse(), Predicates.alwaysFalse()));
+        PredicatesTest.assertToString(Predicates.neither(Predicates.alwaysFalse(), Predicates.alwaysFalse()));
     }
 
     @Test
@@ -290,31 +315,31 @@ public class PredicatesTest
                 Predicates.alwaysTrue(),
                 Predicates.alwaysTrue(),
                 Predicates.alwaysTrue());
-        assertRejects(Predicates.noneOf(trueNorTrue), new Object());
+        PredicatesTest.assertRejects(Predicates.noneOf(trueNorTrue), new Object());
 
         MutableList<Predicate<Object>> trueNorFalse = Lists.fixedSize.of(
                 Predicates.alwaysTrue(),
                 Predicates.alwaysTrue(),
                 Predicates.alwaysFalse());
-        assertRejects(Predicates.noneOf(trueNorFalse), new Object());
+        PredicatesTest.assertRejects(Predicates.noneOf(trueNorFalse), new Object());
 
         MutableList<Predicate<Object>> falseNorFalse = Lists.fixedSize.of(
                 Predicates.alwaysFalse(),
                 Predicates.alwaysFalse(),
                 Predicates.alwaysFalse());
-        assertAccepts(Predicates.noneOf(falseNorFalse), new Object());
+        PredicatesTest.assertAccepts(Predicates.noneOf(falseNorFalse), new Object());
 
-        assertToString(Predicates.noneOf(falseNorFalse));
+        PredicatesTest.assertToString(Predicates.noneOf(falseNorFalse));
     }
 
     @Test
     public void noneOf()
     {
-        assertRejects(Predicates.noneOf(Predicates.alwaysTrue(), Predicates.alwaysTrue(), Predicates.alwaysTrue()), new Object());
-        assertRejects(Predicates.noneOf(Predicates.alwaysTrue(), Predicates.alwaysTrue(), Predicates.alwaysFalse()), new Object());
-        assertAccepts(Predicates.noneOf(Predicates.alwaysFalse(), Predicates.alwaysFalse(), Predicates.alwaysFalse()), new Object());
+        PredicatesTest.assertRejects(Predicates.noneOf(Predicates.alwaysTrue(), Predicates.alwaysTrue(), Predicates.alwaysTrue()), new Object());
+        PredicatesTest.assertRejects(Predicates.noneOf(Predicates.alwaysTrue(), Predicates.alwaysTrue(), Predicates.alwaysFalse()), new Object());
+        PredicatesTest.assertAccepts(Predicates.noneOf(Predicates.alwaysFalse(), Predicates.alwaysFalse(), Predicates.alwaysFalse()), new Object());
 
-        assertToString(Predicates.noneOf(Predicates.alwaysFalse(), Predicates.alwaysFalse(), Predicates.alwaysFalse()));
+        PredicatesTest.assertToString(Predicates.noneOf(Predicates.alwaysFalse(), Predicates.alwaysFalse(), Predicates.alwaysFalse()));
     }
 
     @Test
@@ -323,10 +348,10 @@ public class PredicatesTest
         Object object = new Object();
         Predicate<Object> sameAs = Predicates.sameAs(object);
 
-        assertAccepts(sameAs, object);
-        assertRejects(sameAs, new Object());
+        PredicatesTest.assertAccepts(sameAs, object);
+        PredicatesTest.assertRejects(sameAs, new Object());
 
-        assertToString(sameAs);
+        PredicatesTest.assertToString(sameAs);
     }
 
     @Test
@@ -335,10 +360,10 @@ public class PredicatesTest
         Object object = new Object();
         Predicate<Object> notSameAs = Predicates.notSameAs(object);
 
-        assertRejects(notSameAs, object);
-        assertAccepts(notSameAs, new Object());
+        PredicatesTest.assertRejects(notSameAs, object);
+        PredicatesTest.assertAccepts(notSameAs, new Object());
 
-        assertToString(notSameAs);
+        PredicatesTest.assertToString(notSameAs);
     }
 
     @Test
@@ -346,17 +371,17 @@ public class PredicatesTest
     {
         Assert.assertTrue(Predicates.instanceOf(Integer.class).accept(1));
         Assert.assertFalse(Predicates.instanceOf(Integer.class).accept(1.0));
-        assertToString(Predicates.instanceOf(Integer.class));
+        PredicatesTest.assertToString(Predicates.instanceOf(Integer.class));
     }
 
     @Test
     public void assignableFrom()
     {
-        assertAccepts(Predicates.assignableFrom(Number.class), 1);
-        assertAccepts(Predicates.assignableFrom(Integer.class), 1);
-        assertRejects(Predicates.assignableFrom(List.class), 1);
+        PredicatesTest.assertAccepts(Predicates.assignableFrom(Number.class), 1);
+        PredicatesTest.assertAccepts(Predicates.assignableFrom(Integer.class), 1);
+        PredicatesTest.assertRejects(Predicates.assignableFrom(List.class), 1);
 
-        assertToString(Predicates.assignableFrom(Number.class));
+        PredicatesTest.assertToString(Predicates.assignableFrom(Number.class));
     }
 
     @Test
@@ -365,96 +390,96 @@ public class PredicatesTest
         Assert.assertFalse(Predicates.notInstanceOf(Integer.class).accept(1));
         Assert.assertTrue(Predicates.notInstanceOf(Integer.class).accept(1.0));
 
-        assertToString(Predicates.notInstanceOf(Integer.class));
+        PredicatesTest.assertToString(Predicates.notInstanceOf(Integer.class));
     }
 
     @Test
     public void ifTrue()
     {
-        assertIf(Predicates.ifTrue(List::isEmpty), true);
+        PredicatesTest.assertIf(Predicates.ifTrue(List::isEmpty), true);
     }
 
     @Test
     public void ifFalse()
     {
-        assertIf(Predicates.ifFalse(List::isEmpty), false);
+        PredicatesTest.assertIf(Predicates.ifFalse(List::isEmpty), false);
     }
 
     private static void assertIf(Predicate<List<Object>> predicate, boolean bool)
     {
         Assert.assertEquals(bool, predicate.accept(Lists.fixedSize.of()));
         Assert.assertEquals(!bool, predicate.accept(FastList.newListWith((Object) null)));
-        assertToString(predicate);
+        PredicatesTest.assertToString(predicate);
     }
 
     @Test
     public void ifTrueWithClassAndFunctionName()
     {
         Twin<Boolean> target = Tuples.twin(true, false);
-        assertAccepts(Predicates.ifTrue(Functions.firstOfPair()), target);
-        assertRejects(Predicates.ifTrue(Functions.secondOfPair()), target);
+        PredicatesTest.assertAccepts(Predicates.ifTrue(Functions.firstOfPair()), target);
+        PredicatesTest.assertRejects(Predicates.ifTrue(Functions.secondOfPair()), target);
     }
 
     @Test
     public void ifFalseWithClassAndFunctionName()
     {
         Twin<Boolean> target = Tuples.twin(true, false);
-        assertRejects(Predicates.ifFalse(Functions.firstOfPair()), target);
-        assertAccepts(Predicates.ifFalse(Functions.secondOfPair()), target);
+        PredicatesTest.assertRejects(Predicates.ifFalse(Functions.firstOfPair()), target);
+        PredicatesTest.assertAccepts(Predicates.ifFalse(Functions.secondOfPair()), target);
     }
 
     @Test
     public void attributeEqual()
     {
         Predicate<String> predicate = Predicates.attributeEqual(String::valueOf, "1");
-        assertAccepts(predicate, "1");
-        assertRejects(predicate, "0");
-        assertToString(predicate);
+        PredicatesTest.assertAccepts(predicate, "1");
+        PredicatesTest.assertRejects(predicate, "0");
+        PredicatesTest.assertToString(predicate);
     }
 
     @Test
     public void attributeNotEqual()
     {
         Predicate<String> predicate = Predicates.attributeNotEqual(String::valueOf, "1");
-        assertAccepts(predicate, "0");
-        assertRejects(predicate, "1");
-        assertToString(predicate);
+        PredicatesTest.assertAccepts(predicate, "0");
+        PredicatesTest.assertRejects(predicate, "1");
+        PredicatesTest.assertToString(predicate);
     }
 
     @Test
     public void attributeLessThan()
     {
         Predicate<String> predicate = Predicates.attributeLessThan(String::valueOf, "1");
-        assertRejects(predicate, "1");
-        assertAccepts(predicate, "0");
-        assertToString(predicate);
+        PredicatesTest.assertRejects(predicate, "1");
+        PredicatesTest.assertAccepts(predicate, "0");
+        PredicatesTest.assertToString(predicate);
     }
 
     @Test
     public void attributeGreaterThan()
     {
         Predicate<String> predicate = Predicates.attributeGreaterThan(String::valueOf, "0");
-        assertAccepts(predicate, "1");
-        assertRejects(predicate, "0");
-        assertToString(predicate);
+        PredicatesTest.assertAccepts(predicate, "1");
+        PredicatesTest.assertRejects(predicate, "0");
+        PredicatesTest.assertToString(predicate);
     }
 
     @Test
     public void attributeGreaterThanOrEqualTo()
     {
         Predicate<String> predicate = Predicates.attributeGreaterThanOrEqualTo(String::valueOf, "1");
-        assertAccepts(predicate, "1", "2");
-        assertRejects(predicate, "0");
-        assertToString(predicate);
+        PredicatesTest.assertAccepts(predicate, "1", "2");
+        PredicatesTest.assertRejects(predicate, "0");
+        PredicatesTest.assertToString(predicate);
     }
 
     @Test
     public void attributeLessThanOrEqualTo()
     {
         Predicate<String> predicate = Predicates.attributeLessThanOrEqualTo(String::valueOf, "1");
-        assertAccepts(predicate, "1", "0");
-        assertRejects(predicate, "2");
-        assertToString(predicate);
+        PredicatesTest.assertAccepts(predicate, "1", "0");
+        PredicatesTest.assertRejects(predicate, "2");
+        PredicatesTest.assertToString(predicate);
     }
 
     @Test
@@ -468,7 +493,7 @@ public class PredicatesTest
         Predicates<Address> inAlaska = Predicates.attributeEqual(stateAbbreviation, "AK");
         MutableCollection<Employee> akResidents = this.employees.select(Predicates.attributeAnySatisfy(employee -> employee.addresses, inAlaska));
         Assert.assertEquals(FastList.newListWith(this.bob, this.diane), akResidents);
-        assertToString(inArizona);
+        PredicatesTest.assertToString(inArizona);
     }
 
     @Test
@@ -491,62 +516,62 @@ public class PredicatesTest
     public void allSatisfy()
     {
         Predicate<Iterable<Object>> allIntegers = Predicates.allSatisfy(Predicates.instanceOf(Integer.class));
-        assertAccepts(allIntegers, FastList.newListWith(1, 2, 3));
-        assertRejects(allIntegers, FastList.newListWith(Boolean.TRUE, Boolean.FALSE));
+        PredicatesTest.assertAccepts(allIntegers, FastList.newListWith(1, 2, 3));
+        PredicatesTest.assertRejects(allIntegers, FastList.newListWith(Boolean.TRUE, Boolean.FALSE));
     }
 
     @Test
     public void anySatisfy()
     {
         Predicates<Iterable<Object>> anyIntegers = Predicates.anySatisfy(Predicates.instanceOf(Integer.class));
-        assertAccepts(anyIntegers, FastList.newListWith(1, 2, 3));
-        assertRejects(anyIntegers, FastList.newListWith(Boolean.TRUE, Boolean.FALSE));
+        PredicatesTest.assertAccepts(anyIntegers, FastList.newListWith(1, 2, 3));
+        PredicatesTest.assertRejects(anyIntegers, FastList.newListWith(Boolean.TRUE, Boolean.FALSE));
     }
 
     @Test
     public void noneSatisfy()
     {
         Predicates<Iterable<Object>> anyIntegers = Predicates.noneSatisfy(Predicates.instanceOf(Integer.class));
-        assertRejects(anyIntegers, FastList.newListWith(1, 2, 3));
-        assertAccepts(anyIntegers, FastList.newListWith(Boolean.TRUE, Boolean.FALSE));
+        PredicatesTest.assertRejects(anyIntegers, FastList.newListWith(1, 2, 3));
+        PredicatesTest.assertAccepts(anyIntegers, FastList.newListWith(Boolean.TRUE, Boolean.FALSE));
     }
 
     @Test
     public void attributeIsNull()
     {
-        assertAccepts(Predicates.attributeIsNull(Functions.getPassThru()), (Object) null);
-        assertRejects(Predicates.attributeIsNull(Functions.getPassThru()), new Object());
+        PredicatesTest.assertAccepts(Predicates.attributeIsNull(Functions.getPassThru()), (Object) null);
+        PredicatesTest.assertRejects(Predicates.attributeIsNull(Functions.getPassThru()), new Object());
     }
 
     @Test
     public void attributeIsNullWithFunctionName()
     {
         Twin<Integer> target = Tuples.twin(null, 1);
-        assertAccepts(Predicates.attributeIsNull(Functions.firstOfPair()), target);
-        assertRejects(Predicates.attributeIsNull(Functions.secondOfPair()), target);
+        PredicatesTest.assertAccepts(Predicates.attributeIsNull(Functions.firstOfPair()), target);
+        PredicatesTest.assertRejects(Predicates.attributeIsNull(Functions.secondOfPair()), target);
     }
 
     @Test
     public void attributeNotNullWithFunction()
     {
-        assertRejects(Predicates.attributeNotNull(Functions.getPassThru()), (Object) null);
-        assertAccepts(Predicates.attributeNotNull(Functions.getPassThru()), new Object());
+        PredicatesTest.assertRejects(Predicates.attributeNotNull(Functions.getPassThru()), (Object) null);
+        PredicatesTest.assertAccepts(Predicates.attributeNotNull(Functions.getPassThru()), new Object());
     }
 
     @Test
     public void in_SetIterable()
     {
         Predicate<Object> predicate = Predicates.in(Sets.immutable.with(1, 2, 3));
-        assertAccepts(predicate, 1, 2, 3);
-        assertRejects(predicate, 0, 4, null);
+        PredicatesTest.assertAccepts(predicate, 1, 2, 3);
+        PredicatesTest.assertRejects(predicate, 0, 4, null);
     }
 
     @Test
     public void notIn_SetIterable()
     {
         Predicate<Object> predicate = Predicates.notIn(Sets.immutable.with(1, 2, 3));
-        assertAccepts(predicate, 0, 4, null);
-        assertRejects(predicate, 1, 2, 3);
+        PredicatesTest.assertAccepts(predicate, 0, 4, null);
+        PredicatesTest.assertRejects(predicate, 1, 2, 3);
     }
 
     @Test
@@ -554,9 +579,9 @@ public class PredicatesTest
     {
         Set<Integer> set = new HashSet<>(Arrays.asList(1, 2, 3));
         Predicate<Object> predicate = Predicates.in(set);
-        assertAccepts(predicate, 1, 2, 3);
-        assertRejects(predicate, 0, 4, null);
-        assertToString(predicate);
+        PredicatesTest.assertAccepts(predicate, 1, 2, 3);
+        PredicatesTest.assertRejects(predicate, 0, 4, null);
+        PredicatesTest.assertToString(predicate);
         Assert.assertTrue(predicate.toString().contains(set.toString()));
     }
 
@@ -565,9 +590,9 @@ public class PredicatesTest
     {
         Set<Integer> set = new HashSet<>(Arrays.asList(1, 2, 3));
         Predicate<Object> predicate = Predicates.notIn(set);
-        assertAccepts(predicate, 0, 4, null);
-        assertRejects(predicate, 1, 2, 3);
-        assertToString(predicate);
+        PredicatesTest.assertAccepts(predicate, 0, 4, null);
+        PredicatesTest.assertRejects(predicate, 1, 2, 3);
+        PredicatesTest.assertToString(predicate);
         Assert.assertTrue(predicate.toString().contains(set.toString()));
     }
 
@@ -575,16 +600,16 @@ public class PredicatesTest
     public void in_Collection()
     {
         Predicate<Object> predicate = Predicates.in(Lists.mutable.with(1, 2, 3));
-        assertAccepts(predicate, 1, 2, 3);
-        assertRejects(predicate, 0, 4, null);
+        PredicatesTest.assertAccepts(predicate, 1, 2, 3);
+        PredicatesTest.assertRejects(predicate, 0, 4, null);
     }
 
     @Test
     public void notIn_Collection()
     {
         Predicate<Object> predicate = Predicates.notIn(Lists.mutable.with(1, 2, 3));
-        assertAccepts(predicate, 0, 4, null);
-        assertRejects(predicate, 1, 2, 3);
+        PredicatesTest.assertAccepts(predicate, 0, 4, null);
+        PredicatesTest.assertRejects(predicate, 1, 2, 3);
     }
 
     @Test
@@ -592,26 +617,26 @@ public class PredicatesTest
     {
         MutableList<String> list1 = Lists.fixedSize.of("1", "3");
         Predicate<Object> inList = Predicates.in(list1);
-        assertAccepts(inList, "1");
-        assertRejects(inList, "2");
-        assertAccepts(Predicates.in(list1.toArray()), "1");
-        assertRejects(Predicates.in(list1.toArray()), "2");
+        PredicatesTest.assertAccepts(inList, "1");
+        PredicatesTest.assertRejects(inList, "2");
+        PredicatesTest.assertAccepts(Predicates.in(list1.toArray()), "1");
+        PredicatesTest.assertRejects(Predicates.in(list1.toArray()), "2");
         Object[] array = Lists.mutable.of("1", "2", "3", "4", "5", "6", "7", "8", "9", "10").toArray();
         Predicates<Object> predicate = Predicates.in(array);
-        assertAccepts(predicate, "1");
-        assertRejects(predicate, "0");
+        PredicatesTest.assertAccepts(predicate, "1");
+        PredicatesTest.assertRejects(predicate, "0");
 
         Assert.assertEquals(FastList.newListWith("1"), ListIterate.select(Lists.fixedSize.of("1", "2"), inList));
-        assertToString(inList);
+        PredicatesTest.assertToString(inList);
         Assert.assertTrue(inList.toString().contains(list1.toString()));
-        assertToString(predicate);
+        PredicatesTest.assertToString(predicate);
     }
 
     @Test
     public void inInterval()
     {
-        assertAccepts(Predicates.in(Interval.oneTo(3)), 2);
-        assertToString(Predicates.in(Interval.oneTo(3)));
+        PredicatesTest.assertAccepts(Predicates.in(Interval.oneTo(3)), 2);
+        PredicatesTest.assertToString(Predicates.in(Interval.oneTo(3)));
     }
 
     @Test
@@ -619,11 +644,11 @@ public class PredicatesTest
     {
         MutableList<String> upperList = Lists.fixedSize.of("A", "B");
         Predicate<String> in = Predicates.attributeIn(StringFunctions.toUpperCase(), upperList);
-        assertAccepts(in, "a");
-        assertRejects(in, "c");
+        PredicatesTest.assertAccepts(in, "a");
+        PredicatesTest.assertRejects(in, "c");
 
         Assert.assertEquals(FastList.newListWith("a"), ListIterate.select(Lists.fixedSize.of("a", "c"), in));
-        assertToString(in);
+        PredicatesTest.assertToString(in);
     }
 
     @Test
@@ -631,30 +656,30 @@ public class PredicatesTest
     {
         MutableList<String> odds = Lists.fixedSize.of("1", "3");
         Predicate<Object> predicate1 = Predicates.notIn(odds);
-        assertAccepts(predicate1, "2");
-        assertRejects(predicate1, "1");
-        assertAccepts(Predicates.notIn(odds.toArray()), "2");
-        assertRejects(Predicates.notIn(odds.toArray()), "1");
+        PredicatesTest.assertAccepts(predicate1, "2");
+        PredicatesTest.assertRejects(predicate1, "1");
+        PredicatesTest.assertAccepts(Predicates.notIn(odds.toArray()), "2");
+        PredicatesTest.assertRejects(Predicates.notIn(odds.toArray()), "1");
 
         MutableList<String> list = Lists.mutable.of("1", "2", "3", "4", "5", "6", "7", "8", "9", "10");
-        assertAccepts(Predicates.notIn(list), "0");
-        assertRejects(Predicates.notIn(list), "1");
+        PredicatesTest.assertAccepts(Predicates.notIn(list), "0");
+        PredicatesTest.assertRejects(Predicates.notIn(list), "1");
 
         Predicates<Object> predicate2 = Predicates.notIn(list.toArray());
-        assertAccepts(predicate2, "0");
-        assertRejects(predicate2, "1");
+        PredicatesTest.assertAccepts(predicate2, "0");
+        PredicatesTest.assertRejects(predicate2, "1");
 
         Assert.assertEquals(FastList.newListWith("2"), ListIterate.select(Lists.fixedSize.of("1", "2"), predicate1));
-        assertToString(predicate1);
-        assertToString(predicate2);
+        PredicatesTest.assertToString(predicate1);
+        PredicatesTest.assertToString(predicate2);
         Assert.assertTrue(predicate1.toString().contains(odds.toString()));
     }
 
     @Test
     public void notInInterval()
     {
-        assertAccepts(Predicates.notIn(Interval.oneTo(3)), 4);
-        assertToString(Predicates.notIn(Interval.oneTo(3)));
+        PredicatesTest.assertAccepts(Predicates.notIn(Interval.oneTo(3)), 4);
+        PredicatesTest.assertToString(Predicates.notIn(Interval.oneTo(3)));
     }
 
     @Test
@@ -662,76 +687,76 @@ public class PredicatesTest
     {
         MutableList<String> lowerList = Lists.fixedSize.of("a", "b");
         Predicate<String> out = Predicates.attributeNotIn(StringFunctions.toLowerCase(), lowerList);
-        assertAccepts(out, "C");
-        assertRejects(out, "A");
+        PredicatesTest.assertAccepts(out, "C");
+        PredicatesTest.assertRejects(out, "A");
 
         Assert.assertEquals(FastList.newListWith("A"), ListIterate.reject(Lists.fixedSize.of("A", "C"), out));
-        assertToString(out);
+        PredicatesTest.assertToString(out);
     }
 
     @Test
     public void lessThan()
     {
         Predicate<Integer> lessThan = Predicates.lessThan(0);
-        assertAccepts(lessThan, -1);
-        assertRejects(lessThan, 0, 1);
-        assertToString(lessThan);
+        PredicatesTest.assertAccepts(lessThan, -1);
+        PredicatesTest.assertRejects(lessThan, 0, 1);
+        PredicatesTest.assertToString(lessThan);
     }
 
     @Test
     public void attributeBetweenExclusive()
     {
         Predicate<Pair<Integer, ?>> predicate = Predicates.attributeBetweenExclusive(Functions.firstOfPair(), 9, 11);
-        assertAccepts(predicate, Tuples.twin(10, 0));
-        assertRejects(predicate, Tuples.twin(8, 0), Tuples.twin(9, 0), Tuples.twin(11, 0), Tuples.twin(12, 0));
+        PredicatesTest.assertAccepts(predicate, Tuples.twin(10, 0));
+        PredicatesTest.assertRejects(predicate, Tuples.twin(8, 0), Tuples.twin(9, 0), Tuples.twin(11, 0), Tuples.twin(12, 0));
     }
 
     @Test
     public void attributeBetweenInclusiveFrom()
     {
         Predicate<Pair<Integer, ?>> predicate = Predicates.attributeBetweenInclusiveFrom(Functions.firstOfPair(), 9, 11);
-        assertAccepts(predicate, Tuples.twin(9, 0), Tuples.twin(10, 0));
-        assertRejects(predicate, Tuples.twin(8, 0), Tuples.twin(11, 0), Tuples.twin(12, 0));
+        PredicatesTest.assertAccepts(predicate, Tuples.twin(9, 0), Tuples.twin(10, 0));
+        PredicatesTest.assertRejects(predicate, Tuples.twin(8, 0), Tuples.twin(11, 0), Tuples.twin(12, 0));
     }
 
     @Test
     public void attributeBetweenInclusiveTo()
     {
         Predicate<Pair<Integer, ?>> predicate = Predicates.attributeBetweenInclusiveTo(Functions.firstOfPair(), 9, 11);
-        assertAccepts(predicate, Tuples.twin(10, 0), Tuples.twin(11, 0));
-        assertRejects(predicate, Tuples.twin(8, 0), Tuples.twin(9, 0), Tuples.twin(12, 0));
+        PredicatesTest.assertAccepts(predicate, Tuples.twin(10, 0), Tuples.twin(11, 0));
+        PredicatesTest.assertRejects(predicate, Tuples.twin(8, 0), Tuples.twin(9, 0), Tuples.twin(12, 0));
     }
 
     @Test
     public void attributeBetweenInclusive()
     {
         Predicate<Pair<Integer, ?>> predicate = Predicates.attributeBetweenInclusive(Functions.firstOfPair(), 9, 11);
-        assertAccepts(predicate, Tuples.twin(9, 0), Tuples.twin(10, 0), Tuples.twin(11, 0));
-        assertRejects(predicate, Tuples.twin(8, 0), Tuples.twin(12, 0));
+        PredicatesTest.assertAccepts(predicate, Tuples.twin(9, 0), Tuples.twin(10, 0), Tuples.twin(11, 0));
+        PredicatesTest.assertRejects(predicate, Tuples.twin(8, 0), Tuples.twin(12, 0));
     }
 
     @Test
     public void lessThanOrEqualTo()
     {
-        assertAccepts(Predicates.lessThanOrEqualTo(0), 0, -1);
-        assertRejects(Predicates.lessThanOrEqualTo(0), 1);
-        assertToString(Predicates.lessThanOrEqualTo(0));
+        PredicatesTest.assertAccepts(Predicates.lessThanOrEqualTo(0), 0, -1);
+        PredicatesTest.assertRejects(Predicates.lessThanOrEqualTo(0), 1);
+        PredicatesTest.assertToString(Predicates.lessThanOrEqualTo(0));
     }
 
     @Test
     public void greaterThan()
     {
-        assertAccepts(Predicates.greaterThan(0), 1);
-        assertRejects(Predicates.greaterThan(0), 0, -1);
-        assertToString(Predicates.greaterThan(0));
+        PredicatesTest.assertAccepts(Predicates.greaterThan(0), 1);
+        PredicatesTest.assertRejects(Predicates.greaterThan(0), 0, -1);
+        PredicatesTest.assertToString(Predicates.greaterThan(0));
     }
 
     @Test
     public void greaterThanOrEqualTo()
     {
-        assertAccepts(Predicates.greaterThanOrEqualTo(0), 0, 1);
-        assertRejects(Predicates.greaterThanOrEqualTo(0), -1);
-        assertToString(Predicates.greaterThanOrEqualTo(0));
+        PredicatesTest.assertAccepts(Predicates.greaterThanOrEqualTo(0), 0, 1);
+        PredicatesTest.assertRejects(Predicates.greaterThanOrEqualTo(0), -1);
+        PredicatesTest.assertToString(Predicates.greaterThanOrEqualTo(0));
     }
 
     private static void assertToString(Predicate<?> predicate)
@@ -759,114 +784,114 @@ public class PredicatesTest
     @Test
     public void betweenInclusiveNumber()
     {
-        assertBetweenInclusive(Predicates.betweenInclusive(1, 3));
-        assertBetweenInclusive(Predicates.attributeBetweenInclusive(Functions.getIntegerPassThru(), 1, 3));
+        PredicatesTest.assertBetweenInclusive(Predicates.betweenInclusive(1, 3));
+        PredicatesTest.assertBetweenInclusive(Predicates.attributeBetweenInclusive(Functions.getIntegerPassThru(), 1, 3));
     }
 
     private static void assertBetweenInclusive(Predicate<Integer> oneToThree)
     {
-        assertRejects(oneToThree, 0, 4);
-        assertAccepts(oneToThree, 1, 2, 3);
+        PredicatesTest.assertRejects(oneToThree, 0, 4);
+        PredicatesTest.assertAccepts(oneToThree, 1, 2, 3);
     }
 
     @Test
     public void betweenInclusiveString()
     {
-        assertStringBetweenInclusive(Predicates.betweenInclusive("1", "3"));
-        assertStringBetweenInclusive(Predicates.attributeBetweenInclusive(String::valueOf, "1", "3"));
+        PredicatesTest.assertStringBetweenInclusive(Predicates.betweenInclusive("1", "3"));
+        PredicatesTest.assertStringBetweenInclusive(Predicates.attributeBetweenInclusive(String::valueOf, "1", "3"));
     }
 
     private static void assertStringBetweenInclusive(Predicate<String> oneToThree)
     {
-        assertRejects(oneToThree, "0", "4");
-        assertAccepts(oneToThree, "1", "2", "3");
+        PredicatesTest.assertRejects(oneToThree, "0", "4");
+        PredicatesTest.assertAccepts(oneToThree, "1", "2", "3");
     }
 
     @Test
     public void betweenInclusiveFromNumber()
     {
-        assertBetweenInclusiveFrom(Predicates.betweenInclusiveFrom(1, 3));
-        assertBetweenInclusiveFrom(Predicates.attributeBetweenInclusiveFrom(Functions.getIntegerPassThru(), 1, 3));
+        PredicatesTest.assertBetweenInclusiveFrom(Predicates.betweenInclusiveFrom(1, 3));
+        PredicatesTest.assertBetweenInclusiveFrom(Predicates.attributeBetweenInclusiveFrom(Functions.getIntegerPassThru(), 1, 3));
     }
 
     private static void assertBetweenInclusiveFrom(Predicate<Integer> oneToThree)
     {
-        assertRejects(oneToThree, 0, 3, 4);
-        assertAccepts(oneToThree, 1, 2);
+        PredicatesTest.assertRejects(oneToThree, 0, 3, 4);
+        PredicatesTest.assertAccepts(oneToThree, 1, 2);
     }
 
     @Test
     public void betweenInclusiveFromString()
     {
-        assertStringBetweenInclusiveFrom(Predicates.betweenInclusiveFrom("1", "3"));
-        assertStringBetweenInclusiveFrom(Predicates.attributeBetweenInclusiveFrom(String::valueOf, "1", "3"));
+        PredicatesTest.assertStringBetweenInclusiveFrom(Predicates.betweenInclusiveFrom("1", "3"));
+        PredicatesTest.assertStringBetweenInclusiveFrom(Predicates.attributeBetweenInclusiveFrom(String::valueOf, "1", "3"));
     }
 
     private static void assertStringBetweenInclusiveFrom(Predicate<String> oneToThree)
     {
-        assertRejects(oneToThree, "0", "3", "4");
-        assertAccepts(oneToThree, "1", "2");
+        PredicatesTest.assertRejects(oneToThree, "0", "3", "4");
+        PredicatesTest.assertAccepts(oneToThree, "1", "2");
     }
 
     @Test
     public void betweenInclusiveToNumber()
     {
-        assertBetweenInclusiveTo(Predicates.betweenInclusiveTo(1, 3));
-        assertBetweenInclusiveTo(Predicates.attributeBetweenInclusiveTo(Functions.getIntegerPassThru(), 1, 3));
+        PredicatesTest.assertBetweenInclusiveTo(Predicates.betweenInclusiveTo(1, 3));
+        PredicatesTest.assertBetweenInclusiveTo(Predicates.attributeBetweenInclusiveTo(Functions.getIntegerPassThru(), 1, 3));
     }
 
     private static void assertBetweenInclusiveTo(Predicate<Integer> oneToThree)
     {
-        assertRejects(oneToThree, 0, 1, 4);
-        assertAccepts(oneToThree, 2, 3);
+        PredicatesTest.assertRejects(oneToThree, 0, 1, 4);
+        PredicatesTest.assertAccepts(oneToThree, 2, 3);
     }
 
     @Test
     public void betweenInclusiveToString()
     {
-        assertStringBetweenInclusiveTo(Predicates.betweenInclusiveTo("1", "3"));
-        assertStringBetweenInclusiveTo(Predicates.attributeBetweenInclusiveTo(String::valueOf, "1", "3"));
+        PredicatesTest.assertStringBetweenInclusiveTo(Predicates.betweenInclusiveTo("1", "3"));
+        PredicatesTest.assertStringBetweenInclusiveTo(Predicates.attributeBetweenInclusiveTo(String::valueOf, "1", "3"));
     }
 
     private static void assertStringBetweenInclusiveTo(Predicate<String> oneToThree)
     {
-        assertRejects(oneToThree, "0", "1", "4");
-        assertAccepts(oneToThree, "2", "3");
+        PredicatesTest.assertRejects(oneToThree, "0", "1", "4");
+        PredicatesTest.assertAccepts(oneToThree, "2", "3");
     }
 
     @Test
     public void betweenExclusiveNumber()
     {
-        assertBetweenExclusive(Predicates.betweenExclusive(1, 3));
-        assertBetweenExclusive(Predicates.attributeBetweenExclusive(Functions.getIntegerPassThru(), 1, 3));
+        PredicatesTest.assertBetweenExclusive(Predicates.betweenExclusive(1, 3));
+        PredicatesTest.assertBetweenExclusive(Predicates.attributeBetweenExclusive(Functions.getIntegerPassThru(), 1, 3));
     }
 
     private static void assertBetweenExclusive(Predicate<Integer> oneToThree)
     {
-        assertRejects(oneToThree, 0, 1, 3, 4);
-        assertAccepts(oneToThree, 2);
+        PredicatesTest.assertRejects(oneToThree, 0, 1, 3, 4);
+        PredicatesTest.assertAccepts(oneToThree, 2);
     }
 
     @Test
     public void betweenExclusiveString()
     {
-        assertStringBetweenExclusive(Predicates.betweenExclusive("1", "3"));
-        assertStringBetweenExclusive(Predicates.attributeBetweenExclusive(String::valueOf, "1", "3"));
+        PredicatesTest.assertStringBetweenExclusive(Predicates.betweenExclusive("1", "3"));
+        PredicatesTest.assertStringBetweenExclusive(Predicates.attributeBetweenExclusive(String::valueOf, "1", "3"));
     }
 
     private static void assertStringBetweenExclusive(Predicate<String> oneToThree)
     {
-        assertRejects(oneToThree, "0", "1", "3", "4");
-        assertAccepts(oneToThree, "2");
+        PredicatesTest.assertRejects(oneToThree, "0", "1", "3", "4");
+        PredicatesTest.assertAccepts(oneToThree, "2");
     }
 
     @Test
     public void attributeNotNull()
     {
         Twin<String> testCandidate = Tuples.twin("Hello", null);
-        assertAccepts(Predicates.attributeNotNull(Functions.firstOfPair()), testCandidate);
-        assertRejects(Predicates.attributeNotNull(Functions.secondOfPair()), testCandidate);
-        assertToString(Predicates.attributeNotNull(Functions.<String>firstOfPair()));
+        PredicatesTest.assertAccepts(Predicates.attributeNotNull(Functions.firstOfPair()), testCandidate);
+        PredicatesTest.assertRejects(Predicates.attributeNotNull(Functions.secondOfPair()), testCandidate);
+        PredicatesTest.assertToString(Predicates.attributeNotNull(Functions.<String>firstOfPair()));
     }
 
     @Test
@@ -992,5 +1017,13 @@ public class PredicatesTest
                 };
 
         public abstract boolean isImmediate();
+    }
+
+    private static class MyRuntimeException extends RuntimeException
+    {
+        MyRuntimeException(String message, Throwable cause)
+        {
+            super(message, cause);
+        }
     }
 }

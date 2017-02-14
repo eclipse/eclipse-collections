@@ -13,6 +13,7 @@ package org.eclipse.collections.impl.block.factory;
 import java.io.IOException;
 import java.io.PrintStream;
 
+import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
@@ -50,9 +51,39 @@ public final class Procedures
         return new AppendProcedure<>(appendable);
     }
 
+    /**
+     * Allows a lambda or anonymous inner class that needs to throw a checked exception to be safely wrapped as a
+     * Procedure that will throw a RuntimeException, wrapping the checked exception that is the cause.
+     */
     public static <T> Procedure<T> throwing(ThrowingProcedure<T> throwingProcedure)
     {
         return new ThrowingProcedureAdapter<>(throwingProcedure);
+    }
+
+    /**
+     * Allows a lambda or anonymous inner class that needs to throw a checked exception to be safely wrapped as a
+     * Procedure that will throw a user specified RuntimeException based on the provided function. The function
+     * is passed the current element and the checked exception that was thrown as context arguments.
+     */
+    public static <T> Procedure<T> throwing(
+            ThrowingProcedure<T> throwingProcedure,
+            Function2<T, ? super Throwable, ? extends RuntimeException> rethrow)
+    {
+        return each ->
+        {
+            try
+            {
+                throwingProcedure.safeValue(each);
+            }
+            catch (RuntimeException e)
+            {
+                throw e;
+            }
+            catch (Throwable t)
+            {
+                throw rethrow.value(each, t);
+            }
+        };
     }
 
     /**
