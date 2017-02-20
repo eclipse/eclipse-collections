@@ -13,7 +13,10 @@ package org.eclipse.collections.impl.set.sorted.immutable;
 import java.util.Comparator;
 import java.util.Set;
 import java.util.SortedSet;
+import java.util.Spliterator;
+import java.util.Spliterators;
 import java.util.concurrent.ExecutorService;
+import java.util.function.Consumer;
 
 import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.LazyIterable;
@@ -98,13 +101,23 @@ import org.eclipse.collections.impl.utility.internal.SortedSetIterables;
  * interface so an TreeSet.equals(anImmutableSortedSet) can return true when the contents are the same.
  */
 @Immutable
-abstract class AbstractImmutableSortedSet<T> extends AbstractImmutableCollection<T>
+abstract class AbstractImmutableSortedSet<T>
+        extends AbstractImmutableCollection<T>
         implements ImmutableSortedSet<T>, SortedSet<T>
 {
     @Override
     public SortedSet<T> castToSortedSet()
     {
         return this;
+    }
+
+    /**
+     * @since 8.1
+     */
+    @Override
+    public Spliterator<T> spliterator()
+    {
+        return new ImmutableSortedSetSpliterator();
     }
 
     @Override
@@ -523,5 +536,64 @@ abstract class AbstractImmutableSortedSet<T> extends AbstractImmutableCollection
     public int detectLastIndex(Predicate<? super T> predicate)
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".detectLastIndex() not implemented yet");
+    }
+
+    /**
+     * @since 8.1
+     */
+    private class ImmutableSortedSetSpliterator implements Spliterator<T>
+    {
+        private final Spliterator<T> spliterator =
+                Spliterators.spliterator(
+                        AbstractImmutableSortedSet.this,
+                        Spliterator.IMMUTABLE | Spliterator.DISTINCT | Spliterator.SORTED | Spliterator.ORDERED);
+
+        @Override
+        public boolean tryAdvance(Consumer<? super T> action)
+        {
+            return this.spliterator.tryAdvance(action);
+        }
+
+        @Override
+        public Spliterator<T> trySplit()
+        {
+            return this.spliterator.trySplit();
+        }
+
+        @Override
+        public long estimateSize()
+        {
+            return this.spliterator.estimateSize();
+        }
+
+        @Override
+        public int characteristics()
+        {
+            return this.spliterator.characteristics();
+        }
+
+        @Override
+        public void forEachRemaining(Consumer<? super T> action)
+        {
+            this.spliterator.forEachRemaining(action);
+        }
+
+        @Override
+        public long getExactSizeIfKnown()
+        {
+            return this.spliterator.getExactSizeIfKnown();
+        }
+
+        @Override
+        public boolean hasCharacteristics(int characteristics)
+        {
+            return this.spliterator.hasCharacteristics(characteristics);
+        }
+
+        @Override
+        public Comparator<? super T> getComparator()
+        {
+            return AbstractImmutableSortedSet.this.comparator();
+        }
     }
 }

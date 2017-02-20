@@ -39,6 +39,7 @@ import org.eclipse.collections.impl.block.function.AddFunction;
 import org.eclipse.collections.impl.block.function.NegativeIntervalFunction;
 import org.eclipse.collections.impl.block.function.PassThruFunction0;
 import org.eclipse.collections.impl.block.procedure.CollectionAddProcedure;
+import org.eclipse.collections.impl.collection.immutable.AbstractImmutableCollectionTestCase;
 import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.factory.SortedSets;
@@ -56,10 +57,17 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public abstract class AbstractImmutableSortedSetTestCase
+    extends AbstractImmutableCollectionTestCase
 {
     protected abstract ImmutableSortedSet<Integer> classUnderTest();
 
     protected abstract ImmutableSortedSet<Integer> classUnderTest(Comparator<? super Integer> comparator);
+
+    @Override
+    protected <T> MutableSortedSet<T> newMutable()
+    {
+        return SortedSets.mutable.empty();
+    }
 
     @Test(expected = NullPointerException.class)
     public void noSupportForNull()

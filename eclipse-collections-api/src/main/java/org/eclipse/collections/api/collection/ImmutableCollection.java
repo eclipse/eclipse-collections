@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2017 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -9,6 +9,12 @@
  */
 
 package org.eclipse.collections.api.collection;
+
+import java.util.Collection;
+import java.util.Spliterator;
+import java.util.Spliterators;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.RichIterable;
@@ -173,4 +179,38 @@ public interface ImmutableCollection<T>
             Function<? super T, ? extends K> groupBy,
             Function0<? extends V> zeroValueFactory,
             Function2<? super V, ? super T, ? extends V> nonMutatingAggregator);
+
+    /**
+     * Override in subclass to just return this.
+     * @since 8.1
+     */
+    default Collection<T> castToCollection()
+    {
+        return (Collection<T>) this;
+    }
+
+    /**
+     * @since 8.1
+     */
+    @Override
+    default Spliterator<T> spliterator()
+    {
+        return Spliterators.spliterator(this.castToCollection(), Spliterator.IMMUTABLE);
+    }
+
+    /**
+     * @since 8.1
+     */
+    default Stream<T> stream()
+    {
+        return StreamSupport.stream(this.spliterator(), false);
+    }
+
+    /**
+     * @since 8.1
+     */
+    default Stream<T> parallelStream()
+    {
+        return StreamSupport.stream(this.spliterator(), true);
+    }
 }

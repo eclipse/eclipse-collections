@@ -311,7 +311,7 @@ public abstract class AbstractCollectionTestCase extends AbstractRichIterableTes
     @Test
     public void largeCollectionStreamToBagMultimap()
     {
-        MutableCollection<Integer> collection = this.newWith(Interval.oneTo(100000).toArray());
+        MutableCollection<Integer> collection = this.newWith(Interval.oneTo(25000).toArray());
         MutableBagMultimap<Integer, Integer> expected = collection.groupBy(each -> each % 100, Multimaps.mutable.bag.empty());
         Assert.assertEquals(expected, collection.stream().collect(Collectors2.toBagMultimap(each -> each % 100)));
         Assert.assertEquals(expected, collection.parallelStream().collect(Collectors2.toBagMultimap(each -> each % 100)));

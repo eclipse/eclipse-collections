@@ -56,13 +56,13 @@ public class ImmutableEmptySortedSetTest extends AbstractImmutableSortedSetTestC
     @Override
     protected ImmutableSortedSet<Integer> classUnderTest()
     {
-        return SortedSets.immutable.of();
+        return SortedSets.immutable.empty();
     }
 
     @Override
     protected ImmutableSortedSet<Integer> classUnderTest(Comparator<? super Integer> comparator)
     {
-        return SortedSets.immutable.of(comparator);
+        return SortedSets.immutable.empty(comparator);
     }
 
     @Test
@@ -156,6 +156,34 @@ public class ImmutableEmptySortedSetTest extends AbstractImmutableSortedSetTestC
     public void anySatisfy()
     {
         Assert.assertFalse(this.classUnderTest().anySatisfy(Integer.class::isInstance));
+    }
+
+    @Override
+    @Test
+    public void noneSatisfy()
+    {
+        Assert.assertTrue(this.classUnderTest().noneSatisfy(Integer.class::isInstance));
+    }
+
+    @Override
+    @Test
+    public void noneSatisfyWith()
+    {
+        Assert.assertTrue(this.classUnderTest().noneSatisfyWith(Predicates2.instanceOf(), Integer.class));
+    }
+
+    @Override
+    @Test
+    public void anySatisfyWith()
+    {
+        Assert.assertFalse(this.classUnderTest().anySatisfyWith(Predicates2.instanceOf(), Integer.class));
+    }
+
+    @Override
+    @Test
+    public void allSatisfyWith()
+    {
+        Assert.assertTrue(this.classUnderTest().allSatisfyWith(Predicates2.instanceOf(), Integer.class));
     }
 
     @Override

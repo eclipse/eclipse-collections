@@ -18,6 +18,8 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.RandomAccess;
+import java.util.Spliterator;
+import java.util.Spliterators;
 
 import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.block.function.Function;
@@ -351,6 +353,15 @@ final class ImmutableEmptyList<T>
     public int indexOf(Object object)
     {
         return -1;
+    }
+
+    /**
+     * @since 8.1
+     */
+    @Override
+    public Spliterator<T> spliterator()
+    {
+        return Spliterators.emptySpliterator();
     }
 
     @Override
