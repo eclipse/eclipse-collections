@@ -59,6 +59,13 @@ public class MultiReaderFastListTest extends AbstractListTestCase
     }
 
     @Override
+    @Test (expected = UnsupportedOperationException.class)
+    public void largeCollectionStreamToBagMultimap()
+    {
+        super.largeCollectionStreamToBagMultimap();
+    }
+
+    @Override
     @Test
     public void newEmpty()
     {

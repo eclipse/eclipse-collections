@@ -14,7 +14,9 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.Optional;
+import java.util.Spliterator;
 import java.util.concurrent.locks.ReadWriteLock;
+import java.util.stream.Stream;
 
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.RichIterable;
@@ -1302,27 +1304,21 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
      * to use an iterator with a MultiReader collection, then you must do the following:
      * <p>
      * <pre>
-     * multiReaderList.withReadLockAndDelegate(new Procedure<MutableList<Person>>()
-     * {
-     *     public void value(MutableList<Person> people)
+     * multiReaderList.withReadLockAndDelegate(MutableList<Person> ->
      *     {
      *         Iterator it = people.iterator();
      *         ....
-     *     }
-     * });
+     *     });
      * </pre>
      * <p>
      * <pre>
      * final Collection jdkSet = new HashSet();
      * final boolean containsAll = new boolean[1];
-     * multiReaderList.withReadLockAndDelegate(new Procedure<MutableList<Person>>()
-     * {
-     *     public void value(MutableList<Person> people)
+     * multiReaderList.withReadLockAndDelegate(MutableList<Person> people ->
      *     {
      *         set.addAll(people); // addAll uses iterator() in AbstractCollection
      *         containsAll[0] = set.containsAll(people); // containsAll uses iterator() in AbstractCollection
-     *     }
-     * });
+     *     });
      * </pre>
      */
     @Override
@@ -1331,6 +1327,45 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         throw new UnsupportedOperationException(
                 "Iterator is not supported directly on MultiReader collections.  "
                         + "If you would like to use an iterator, you must either use withReadLockAndDelegate() or withWriteLockAndDelegate().");
+    }
+
+    /**
+     * This method is not supported directly on MultiReader collections because it is not thread-safe. If you would like
+     * to use a spliterator with a MultiReader collection, then you must protect the calls by calling either
+     * withReadLockAndDelegate or withWriteLockAndDelegate.
+     */
+    @Override
+    public Spliterator<T> spliterator()
+    {
+        throw new UnsupportedOperationException(
+                "Spliterator is not supported directly on MultiReader collections.  "
+                        + "If you would like to use an spliterator, you must either use withReadLockAndDelegate() or withWriteLockAndDelegate().");
+    }
+
+    /**
+     * This method is not supported directly on MultiReader collections because it is not thread-safe. If you would like
+     * to use stream with a MultiReader collection, then you must protect the calls by calling either
+     * withReadLockAndDelegate or withWriteLockAndDelegate.
+     */
+    @Override
+    public Stream<T> stream()
+    {
+        throw new UnsupportedOperationException(
+                "Stream is not supported directly on MultiReader collections.  "
+                        + "If you would like to use stream, you must either use withReadLockAndDelegate() or withWriteLockAndDelegate().");
+    }
+
+    /**
+     * This method is not supported directly on MultiReader collections because it is not thread-safe. If you would like
+     * to use parallelStream with a MultiReader collection, then you must protect the calls by calling either
+     * withReadLockAndDelegate or withWriteLockAndDelegate.
+     */
+    @Override
+    public Stream<T> parallelStream()
+    {
+        throw new UnsupportedOperationException(
+                "parallelStream is not supported directly on MultiReader collections.  "
+                        + "If you would like to use parallelStream, you must either use withReadLockAndDelegate() or withWriteLockAndDelegate().");
     }
 
     @Override

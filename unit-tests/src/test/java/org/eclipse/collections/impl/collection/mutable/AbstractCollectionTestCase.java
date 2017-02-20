@@ -15,12 +15,16 @@ import java.util.Collections;
 import org.eclipse.collections.api.collection.ImmutableCollection;
 import org.eclipse.collections.api.collection.MutableCollection;
 import org.eclipse.collections.api.list.MutableList;
+import org.eclipse.collections.api.multimap.bag.MutableBagMultimap;
 import org.eclipse.collections.api.tuple.Twin;
 import org.eclipse.collections.impl.AbstractRichIterableTestCase;
 import org.eclipse.collections.impl.block.factory.Predicates;
 import org.eclipse.collections.impl.block.factory.Predicates2;
+import org.eclipse.collections.impl.collector.Collectors2;
 import org.eclipse.collections.impl.factory.Bags;
+import org.eclipse.collections.impl.factory.Multimaps;
 import org.eclipse.collections.impl.lazy.LazyIterableAdapter;
+import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.test.Verify;
@@ -302,6 +306,15 @@ public abstract class AbstractCollectionTestCase extends AbstractRichIterableTes
         MutableCollection<Integer> collWithout = coll.withoutAll(FastList.newListWith(2, 4));
         Assert.assertSame(coll, collWithout);
         Assert.assertEquals(this.newWith(1, 3, 5), collWithout);
+    }
+
+    @Test
+    public void largeCollectionStreamToBagMultimap()
+    {
+        MutableCollection<Integer> collection = this.newWith(Interval.oneTo(100000).toArray());
+        MutableBagMultimap<Integer, Integer> expected = collection.groupBy(each -> each % 100, Multimaps.mutable.bag.empty());
+        Assert.assertEquals(expected, collection.stream().collect(Collectors2.toBagMultimap(each -> each % 100)));
+        Assert.assertEquals(expected, collection.parallelStream().collect(Collectors2.toBagMultimap(each -> each % 100)));
     }
 
     @Test

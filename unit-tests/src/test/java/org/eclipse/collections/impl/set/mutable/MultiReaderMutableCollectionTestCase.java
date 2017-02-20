@@ -21,4 +21,22 @@ public abstract class MultiReaderMutableCollectionTestCase extends AbstractColle
     {
         this.newWith(1, 2, 3).iterator();
     }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void spliterator_throws()
+    {
+        this.newWith(1, 2, 3).spliterator();
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void stream_throws()
+    {
+        this.newWith(1, 2, 3).stream();
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void parallelStream_throws()
+    {
+        this.newWith(1, 2, 3).parallelStream();
+    }
 }
