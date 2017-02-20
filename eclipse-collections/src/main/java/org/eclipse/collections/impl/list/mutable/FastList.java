@@ -25,6 +25,8 @@ import java.util.List;
 import java.util.LongSummaryStatistics;
 import java.util.Optional;
 import java.util.RandomAccess;
+import java.util.Spliterator;
+import java.util.Spliterators;
 import java.util.function.BiConsumer;
 import java.util.function.BinaryOperator;
 import java.util.function.Supplier;
@@ -395,6 +397,15 @@ public class FastList<T>
     public int lastIndexOf(Object object)
     {
         return InternalArrayIterate.lastIndexOf(this.items, this.size, object);
+    }
+
+    /**
+     * @since 8.1
+     */
+    @Override
+    public Spliterator<T> spliterator()
+    {
+        return Spliterators.spliterator(this.items, 0, this.size, Spliterator.ORDERED);
     }
 
     public void trimToSize()
