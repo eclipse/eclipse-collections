@@ -17,6 +17,8 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Comparator;
+import java.util.Spliterator;
+import java.util.Spliterators;
 
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
@@ -66,6 +68,15 @@ public final class ArrayAdapter<T>
     public static <E> ArrayAdapter<E> newArray(Iterable<? extends E> source)
     {
         return new ArrayAdapter<>((E[]) Iterate.toArray(source));
+    }
+
+    /**
+     * @since 8.1
+     */
+    @Override
+    public Spliterator<T> spliterator()
+    {
+        return Spliterators.spliterator(this.items, Spliterator.ORDERED);
     }
 
     public static <E> ArrayAdapter<E> newArrayWithItem(Iterable<? extends E> iterable, E itemToAdd)
