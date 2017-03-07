@@ -18,14 +18,16 @@ New Functionality
 * Integrated JaCoCo for test coverage.
 * Implemented flatCollect on Collectors2.
 * Modified PersonAndPetKataTest.getAgeStatisticsOfPets to use summaryStatistics.
-* Updated reference guide.
 * Added Abstract primitive Stacks.
-* Added the Eclipse Collections reference guide.
+* Add public constructors to Unmodifiable and Synchronized collections.
+* Implement throwing method on functional interface factories which takes a user specified runtime exception function.
+* Implement spliterator on FastList and ArrayAdapter.
 
 Optimizations
 -------------
 
 * Changed collect and collectWith with target collections on InternalArrayIterate to use ensureCapacity for FastLists and ArrayLists.
+* Replaced anonymous inner classes with lambdas and method references.
 
 Bug fixes
 ---------
@@ -33,6 +35,13 @@ Bug fixes
 * Removed JMH tests and generator codes from Javadoc output.
 * Updated links to point to the Eclipse Collections Kata instead of the GS Collections Kata.
 * Fixed addAll() method in CompositeFastList to return false on isEmpty().
+* Fixed exporting all necessary packages in MANIFEST.MF.
+* Added sign jar step as part of deploy build.
+
+Documentation
+-------------
+* Added the Eclipse Collections reference guide.
+* Enriched README.md.
 
 Acquiring Eclipse Collections
 -----------------------------
