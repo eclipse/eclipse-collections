@@ -84,7 +84,7 @@
                 <artifactId>maven-bundle-plugin</artifactId>
                 <configuration>
                     <instructions>
-                        <Export-Package>org.eclipse.collections.impl</Export-Package>
+                        <Export-Package>org.eclipse.collections.impl.*</Export-Package>
                         <Bundle-RequiredExecutionEnvironment>J2SE-1.5,JavaSE-1.6</Bundle-RequiredExecutionEnvironment>
                         <Import-Package>
                             net.jcip.annotations;resolution:=optional,*
