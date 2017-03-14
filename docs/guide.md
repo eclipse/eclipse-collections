@@ -55,6 +55,7 @@
         - [Procedure Factories](#procedure-factories)
 - [Verify](#-verify)
 - [Eclipse Collections Cheat Sheet](#-eclipse-collections-cheat-sheet)
+- [Eclipse Collections Mind Map](#-eclipse-collections-mind-map)
 
 []() About Eclipse Collections
 -----------------------------
@@ -2986,3 +2987,7 @@ Verify.assertContains(1, Lists.mutable.with(1));
 | **ParallelIterate**        | Iterables for parallel iteration  |
 | **ParallelMapIterate**     | Maps for parallel iteration       |
 | **StringIterate**          | strings                           |
+
+[]() Eclipse Collections Mind Map
+------------------------------------
+![Eclipse Collections Mind Map](https://github.com/eclipse/eclipse-collections/blob/master/docs/EclipseCollectionsMindMap.png)
