@@ -16,7 +16,7 @@
     <parent>
         <artifactId>eclipse-collections-parent</artifactId>
         <groupId>org.eclipse.collections</groupId>
-        <version>7.1.0</version>
+        <version>7.1.1</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
