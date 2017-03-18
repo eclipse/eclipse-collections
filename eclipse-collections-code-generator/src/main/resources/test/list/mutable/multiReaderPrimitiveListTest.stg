@@ -1,0 +1,76 @@
+import "copyright.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+
+isTest() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/list/mutable/primitive"
+
+fileName(primitive) ::= "MultiReader<primitive.name>ListTest"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.wrapperName, primitive.name)>
+>>
+
+body(type, wrapperName, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.list.mutable.primitive;
+
+import org.eclipse.collections.api.list.primitive.Mutable<name>List;
+import org.junit.Assert;
+import org.junit.Test;
+
+/**
+ * JUnit test for {@link MultiReader<name>List}.
+ * This file was automatically generated from template file multiReaderPrimitiveListTest.stg.
+ */
+public class MultiReader<name>ListTest extends Abstract<name>ListTestCase
+{
+    @Override
+    protected MultiReader<name>List classUnderTest()
+    {
+        return new MultiReader<name>List(<name>ArrayList.newListWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">));
+    }
+
+    @Override
+    protected MultiReader<name>List newWith(<type>... elements)
+    {
+        return new MultiReader<name>List(<name>ArrayList.newListWith(elements));
+    }
+
+    @Override
+    @Test
+    public void asSynchronized()
+    {
+        super.asSynchronized();
+        MultiReader<name>List list = this.classUnderTest();
+        Mutable<name>List listWithLockObject = new MultiReader<name>List(<name>ArrayList.newListWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">));
+        Assert.assertEquals(list, listWithLockObject);
+        Assert.assertSame(listWithLockObject, listWithLockObject.asSynchronized());
+        Assert.assertSame(list, list.asSynchronized());
+        Assert.assertEquals(list, list.asSynchronized());
+    }
+
+
+    @Override
+    @Test
+    public void <type>Iterator_throws_for_consecutive_remove()
+    {
+    }
+
+    @Override
+    @Test
+    public void <type>Iterator_with_remove()
+    {
+    }
+
+    @Override
+    @Test
+    public void <type>Iterator_throws_for_remove_before_next()
+    {
+
+    }
+
+}
+>>

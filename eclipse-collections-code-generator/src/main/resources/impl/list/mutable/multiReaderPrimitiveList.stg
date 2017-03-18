@@ -1,0 +1,368 @@
+import "copyright.stg"
+import "primitiveEquals.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+
+targetPath() ::= "org/eclipse/collections/impl/list/mutable/primitive"
+
+fileName(primitive) ::= "MultiReader<primitive.name>List"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+readLock() ::= <<
+this.acquireReadLock();
+try
+{
+>>
+
+writeLock() ::= <<
+this.acquireWriteLock();
+try
+{
+>>
+
+readUnlock() ::= <<
+}
+finally
+{
+    this.unlockReadLock();
+}
+>>
+
+writeUnlock() ::= <<
+}
+finally
+{
+    this.unlockWriteLock();
+}
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.list.mutable.primitive;
+
+import java.util.Collection;
+import java.util.Collections;
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
+
+
+import org.eclipse.collections.api.<name>Iterable;
+import org.eclipse.collections.api.Lazy<name>Iterable;
+import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
+import org.eclipse.collections.api.block.function.primitive.Object<name>IntToObjectFunction;
+import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
+import org.eclipse.collections.api.block.procedure.primitive.<name>IntProcedure;
+import org.eclipse.collections.api.iterator.<name>Iterator;
+import org.eclipse.collections.api.list.MutableList;
+import org.eclipse.collections.api.list.primitive.<name>List;
+import org.eclipse.collections.api.list.primitive.Immutable<name>List;
+import org.eclipse.collections.api.list.primitive.Mutable<name>List;
+import org.eclipse.collections.impl.collection.mutable.primitive.AbstractMultiReader<name>Collection;
+import org.eclipse.collections.impl.factory.primitive.<name>Lists;
+import org.eclipse.collections.impl.lazy.primitive.Lazy<name>IterableAdapter;
+import org.eclipse.collections.impl.lazy.primitive.Reverse<name>Iterable;
+import net.jcip.annotations.ThreadSafe;
+
+/**
+ * Wraps primitive list into ReadWriteLock. Iterator creates copy of entire list, so its better to use foreach.
+ *
+ * @since 8.1.
+ */
+@ThreadSafe
+public final class MultiReader<name>List
+        extends AbstractMultiReader<name>Collection
+        implements Mutable<name>List
+{
+    private static final long serialVersionUID = 1L;
+
+
+    public MultiReader<name>List(Mutable<name>List list)
+    {
+        super(list);
+    }
+
+    public MultiReader<name>List(Mutable<name>List list, ReadWriteLock newLock)
+    {
+        super(list, newLock);
+    }
+
+    private Mutable<name>List getMutable<name>List()
+    {
+        return (Mutable<name>List) this.get<name>Collection();
+    }
+
+    public <type> get(int index)
+    {
+        <readLock()>
+            return this.getMutable<name>List().get(index);
+        <readUnlock()>
+    }
+
+    public <type> getFirst()
+    {
+        <readLock()>
+            return this.getMutable<name>List().getFirst();
+        <readUnlock()>
+    }
+
+    public <type> getLast()
+    {
+        <readLock()>
+            return this.getMutable<name>List().getLast();
+        <readUnlock()>
+    }
+
+    public int indexOf(<type> value)
+    {
+        <readLock()>
+            return this.getMutable<name>List().indexOf(value);
+        <readUnlock()>
+    }
+
+    public int lastIndexOf(<type> value)
+    {
+        <readLock()>
+            return this.getMutable<name>List().lastIndexOf(value);
+        <readUnlock()>
+    }
+
+    public void addAtIndex(int index, <type> element)
+    {
+        <writeLock()>
+            this.getMutable<name>List().addAtIndex(index, element);
+        <writeUnlock()>
+    }
+
+    public boolean addAllAtIndex(int index, <type>... source)
+    {
+        <writeLock()>
+            return this.getMutable<name>List().addAllAtIndex(index, source);
+        <writeUnlock()>
+    }
+
+    public boolean addAllAtIndex(int index, <name>Iterable source)
+    {
+        <writeLock()>
+            return this.getMutable<name>List().addAllAtIndex(index, source);
+        <writeUnlock()>
+    }
+
+    public <type> removeAtIndex(int index)
+    {
+        <writeLock()>
+            return this.getMutable<name>List().removeAtIndex(index);
+        <writeUnlock()>
+    }
+
+    public <type> set(int index, <type> element)
+    {
+        <writeLock()>
+            return this.getMutable<name>List().set(index, element);
+        <writeUnlock()>
+    }
+
+    @Override
+    public MultiReader<name>List with(<type> element)
+    {
+        <writeLock()>
+            this.getMutable<name>List().add(element);
+        <writeUnlock()>
+        return this;
+    }
+
+    @Override
+    public MultiReader<name>List without(<type> element)
+    {
+        <writeLock()>
+            this.getMutable<name>List().remove(element);
+        <writeUnlock()>
+        return this;
+    }
+
+    @Override
+    public MultiReader<name>List withAll(<name>Iterable elements)
+    {
+        <writeLock()>
+            this.getMutable<name>List().addAll(elements.toArray());
+        <writeUnlock()>
+        return this;
+    }
+
+    @Override
+    public MultiReader<name>List withoutAll(<name>Iterable elements)
+    {
+        <writeLock()>
+            this.getMutable<name>List().removeAll(elements);
+        <writeUnlock()>
+        return this;
+    }
+
+    @Override
+    public Mutable<name>List select(<name>Predicate predicate)
+    {
+        <readLock()>
+            return this.getMutable<name>List().select(predicate);
+        <readUnlock()>
+    }
+
+    @Override
+    public Mutable<name>List reject(<name>Predicate predicate)
+    {
+        <readLock()>
+            return this.getMutable<name>List().reject(predicate);
+        <readUnlock()>
+    }
+
+    @Override
+    public \<V> MutableList\<V> collect(<name>ToObjectFunction\<? extends V> function)
+    {
+        <readLock()>
+            return this.getMutable<name>List().collect(function);
+        <readUnlock()>
+    }
+
+    <(arithmeticMethods.(type))(name, type)>
+    @Override
+    public boolean equals(Object otherList)
+    {
+        <readLock()>
+            return this.getMutable<name>List().equals(otherList);
+        <readUnlock()>
+    }
+
+    @Override
+    public int hashCode()
+    {
+        <readLock()>
+            return this.getMutable<name>List().hashCode();
+        <readUnlock()>
+    }
+
+    @Override
+    public Lazy<name>Iterable asLazy()
+    {
+        return new Lazy<name>IterableAdapter(this);
+    }
+
+    @Override
+    public Mutable<name>List asUnmodifiable()
+    {
+        return new Unmodifiable<name>List(this);
+    }
+
+    @Override
+    public Mutable<name>List asSynchronized()
+    {
+        return this;
+    }
+
+    @Override
+    public Immutable<name>List toImmutable()
+    {
+        <readLock()>
+            int size = this.size();
+            if (size == 0)
+            {
+                return <name>Lists.immutable.with();
+            }
+            if (size == 1)
+            {
+                return <name>Lists.immutable.with(this.getFirst());
+            }
+            return <name>Lists.immutable.with(this.toArray());
+        <readUnlock()>
+    }
+
+    public Mutable<name>List reverseThis()
+    {
+        <writeLock()>
+            this.getMutable<name>List().reverseThis();
+        <writeUnlock()>
+        return this;
+    }
+
+    public Mutable<name>List toReversed()
+    {
+        <readLock()>
+            return this.getMutable<name>List().toReversed();
+        <readUnlock()>
+    }
+
+    public Lazy<name>Iterable asReversed()
+    {
+        return Reverse<name>Iterable.adapt(this);
+    }
+
+    public void forEachWithIndex(<name>IntProcedure procedure)
+    {
+        <readLock()>
+            this.getMutable<name>List().forEachWithIndex(procedure);
+        <readUnlock()>
+    }
+
+    public \<T> T injectIntoWithIndex(T injectedValue, Object<name>IntToObjectFunction\<? super T, ? extends T> function)
+    {
+        <readLock()>
+            return this.getMutable<name>List().injectIntoWithIndex(injectedValue, function);
+        <readUnlock()>
+    }
+
+    /**
+     * @since 6.0.
+     */
+    public Mutable<name>List distinct()
+    {
+        <readLock()>
+            return this.getMutable<name>List().distinct();
+        <readUnlock()>
+    }
+
+    public Mutable<name>List subList(int fromIndex, int toIndex)
+    {
+        throw new UnsupportedOperationException("subList not yet implemented!");
+    }
+}
+
+>>
+
+arithmeticMethods ::= [
+    "byte": "allMethods",
+    "short": "allMethods",
+    "char": "allMethods",
+    "int": "allMethods",
+    "long": "allMethods",
+    "float": "allMethods",
+    "double": "allMethods",
+    "boolean": "noMethods"
+    ]
+
+allMethods(name, type) ::=<<
+public Mutable<name>List sortThis()
+{
+    <writeLock()>
+        this.getMutable<name>List().sortThis();
+        return this;
+    <writeUnlock()>
+}
+
+public int binarySearch(<type> value)
+{
+    <readLock()>
+        return this.getMutable<name>List().binarySearch(value);
+    <readUnlock()>
+}
+
+public <wideType.(type)> dotProduct(<name>List list)
+{
+    <readLock()>
+        return this.getMutable<name>List().dotProduct(list);
+    <readUnlock()>
+}
+
+>>
+
+noMethods(name, type) ::= ""

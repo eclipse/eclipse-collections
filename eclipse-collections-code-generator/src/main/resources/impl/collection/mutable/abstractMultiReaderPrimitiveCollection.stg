@@ -1,0 +1,554 @@
+import "copyright.stg"
+import "primitiveEquals.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+
+targetPath() ::= "org/eclipse/collections/impl/collection/mutable/primitive"
+
+fileName(primitive) ::= "AbstractMultiReader<primitive.name>Collection"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+readLock() ::= <<
+this.acquireReadLock();
+try
+{
+>>
+
+writeLock() ::= <<
+this.acquireWriteLock();
+try
+{
+>>
+
+readUnlock() ::= <<
+}
+finally
+{
+    this.unlockReadLock();
+}
+>>
+
+writeUnlock() ::= <<
+}
+finally
+{
+    this.unlockWriteLock();
+}
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.collection.mutable.primitive;
+
+import java.io.Serializable;
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
+
+import org.eclipse.collections.api.<name>Iterable;
+import org.eclipse.collections.api.Lazy<name>Iterable;
+import org.eclipse.collections.api.bag.primitive.Mutable<name>Bag;
+import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
+import org.eclipse.collections.api.block.function.primitive.Object<name>ToObjectFunction;
+import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
+import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
+import org.eclipse.collections.api.collection.MutableCollection;
+import org.eclipse.collections.api.collection.primitive.Immutable<name>Collection;
+import org.eclipse.collections.api.collection.primitive.Mutable<name>Collection;
+import org.eclipse.collections.api.iterator.Mutable<name>Iterator;
+import org.eclipse.collections.api.iterator.<name>Iterator;
+import org.eclipse.collections.api.list.primitive.Mutable<name>List;
+import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
+import org.eclipse.collections.impl.lazy.primitive.Lazy<name>IterableAdapter;
+import net.jcip.annotations.ThreadSafe;
+
+/**
+ * This file was automatically generated from template file abstractMultiReaderPrimitiveCollection.stg.
+ *
+ * @since 8.1.
+ */
+@ThreadSafe
+public abstract class AbstractMultiReader<name>Collection
+        implements Mutable<name>Collection, Serializable
+{
+    private static final long serialVersionUID = 1L;
+
+    private final ReadWriteLock lock;
+
+    private final Mutable<name>Collection collection;
+
+    protected AbstractMultiReader<name>Collection(Mutable<name>Collection collection)
+    {
+        this(collection, null);
+    }
+
+    protected AbstractMultiReader<name>Collection(Mutable<name>Collection collection, ReadWriteLock newLock)
+    {
+        if(collection == null)
+        {
+            throw new IllegalArgumentException("Cannot create a AbstractMultiReader<name>Collection on a null collection");
+        }
+        this.collection = collection;
+        this.lock = newLock == null ? new ReentrantReadWriteLock() : newLock;
+    }
+
+    public ReadWriteLock getLock()
+    {
+        return this.lock;
+    }
+
+
+    protected void acquireWriteLock()
+    {
+        this.getLock().writeLock().lock();
+    }
+
+    protected void unlockWriteLock()
+    {
+        this.getLock().writeLock().unlock();
+    }
+
+    protected void acquireReadLock()
+    {
+        this.getLock().readLock().lock();
+    }
+
+    protected void unlockReadLock()
+    {
+        this.getLock().readLock().unlock();
+    }
+
+
+    protected Mutable<name>Collection get<name>Collection()
+    {
+        return this.collection;
+    }
+
+    public int size()
+    {
+        <readLock()>
+            return this.collection.size();
+        <readUnlock()>
+    }
+
+    public boolean isEmpty()
+    {
+        <readLock()>
+            return this.collection.isEmpty();
+        <readUnlock()>
+    }
+
+    public boolean notEmpty()
+    {
+        <readLock()>
+            return this.collection.notEmpty();
+        <readUnlock()>
+    }
+
+    public void clear()
+    {
+        <writeLock()>
+            this.collection.clear();
+        <writeUnlock()>
+    }
+
+    public Mutable<name>Collection select(<name>Predicate predicate)
+    {
+        <readLock()>
+            return this.collection.select(predicate);
+        <readUnlock()>
+    }
+
+    public Mutable<name>Collection reject(<name>Predicate predicate)
+    {
+        <readLock()>
+            return this.collection.reject(predicate);
+        <readUnlock()>
+    }
+
+    public \<V> MutableCollection\<V> collect(<name>ToObjectFunction\<? extends V> function)
+    {
+        <readLock()>
+            return this.collection.collect(function);
+        <readUnlock()>
+    }
+
+    public Mutable<name>Collection with(<type> element)
+    {
+        this.add(element);
+        return this;
+    }
+
+    public Mutable<name>Collection without(<type> element)
+    {
+        this.remove(element);
+        return this;
+    }
+
+    public Mutable<name>Collection withAll(<name>Iterable elements)
+    {
+        this.addAll(elements);
+        return this;
+    }
+
+    public Mutable<name>Collection withoutAll(<name>Iterable elements)
+    {
+        this.removeAll(elements);
+        return this;
+    }
+
+    public Mutable<name>Collection asUnmodifiable()
+    {
+        return new Unmodifiable<name>Collection(this);
+    }
+
+    public Mutable<name>Collection asSynchronized()
+    {
+        return this;
+    }
+
+    public Immutable<name>Collection toImmutable()
+    {
+        <readLock()>
+            return this.collection.toImmutable();
+        <readUnlock()>
+    }
+
+    public Lazy<name>Iterable asLazy()
+    {
+        return new Lazy<name>IterableAdapter(this);
+    }
+
+    public boolean contains(<type> value)
+    {
+        <readLock()>
+            return this.collection.contains(value);
+        <readUnlock()>
+    }
+
+    public boolean containsAll(<type>... source)
+    {
+        <readLock()>
+            return this.collection.containsAll(source);
+        <readUnlock()>
+    }
+
+    public boolean containsAll(<name>Iterable source)
+    {
+        <readLock()>
+            return this.collection.containsAll(source);
+        <readUnlock()>
+    }
+
+    public boolean add(<type> newItem)
+    {
+        <writeLock()>
+            return this.collection.add(newItem);
+        <writeUnlock()>
+    }
+
+    public boolean addAll(<type>... source)
+    {
+        <writeLock()>
+            return this.collection.addAll(source);
+        <writeUnlock()>
+    }
+
+    public boolean addAll(<name>Iterable source)
+    {
+        <writeLock()>
+            return this.collection.addAll(source);
+        <writeUnlock()>
+    }
+
+    public boolean remove(<type> value)
+    {
+        <writeLock()>
+            return this.collection.remove(value);
+        <writeUnlock()>
+    }
+
+    public boolean removeAll(<name>Iterable source)
+    {
+        <writeLock()>
+            return this.collection.removeAll(source);
+        <writeUnlock()>
+
+    }
+
+    public boolean removeAll(<type>... source)
+    {
+        <writeLock()>
+            return this.collection.removeAll(source);
+        <writeUnlock()>
+    }
+
+    public boolean retainAll(<name>Iterable source)
+    {
+        <writeLock()>
+            return this.collection.retainAll(source);
+        <writeUnlock()>
+    }
+
+    public boolean retainAll(<type>... source)
+    {
+        <writeLock()>
+            return this.collection.retainAll(source);
+        <writeUnlock()>
+    }
+
+    /**
+     * Makes copy of entire collection
+     */
+    public Mutable<name>Iterator <type>Iterator()
+    {
+        final <name>Iterator iter = toImmutable().<type>Iterator();
+
+        return new Mutable<name>Iterator() {
+            @Override
+            public void remove()
+            {
+                throw new UnsupportedOperationException("Can not remove from MultiReader iterator");
+            }
+
+            @Override
+            public <type> next()
+            {
+                return iter.next();
+            }
+
+            @Override
+            public boolean hasNext()
+            {
+                return iter.hasNext();
+            }
+        };
+
+    }
+
+    public void forEach(<name>Procedure procedure)
+    {
+        this.each(procedure);
+    }
+
+    /**
+     * @since 7.0.
+     */
+    public void each(<name>Procedure procedure)
+    {
+        <readLock()>
+            this.collection.forEach(procedure);
+        <readUnlock()>
+    }
+
+    public int count(<name>Predicate predicate)
+    {
+        <readLock()>
+            return this.collection.count(predicate);
+        <readUnlock()>
+    }
+
+    public boolean anySatisfy(<name>Predicate predicate)
+    {
+        <readLock()>
+            return this.collection.anySatisfy(predicate);
+        <readUnlock()>
+    }
+
+    public boolean allSatisfy(<name>Predicate predicate)
+    {
+        <readLock()>
+            return this.collection.allSatisfy(predicate);
+        <readUnlock()>
+    }
+
+    public boolean noneSatisfy(<name>Predicate predicate)
+    {
+        <readLock()>
+            return this.collection.noneSatisfy(predicate);
+        <readUnlock()>
+
+    }
+
+    public <type> detectIfNone(<name>Predicate predicate, <type> ifNone)
+    {
+        <readLock()>
+            return this.collection.detectIfNone(predicate, ifNone);
+        <readUnlock()>
+    }
+
+    <(arithmeticMethods.(type))(name, type)>
+    public <type>[] toArray()
+    {
+        <readLock()>
+            return this.collection.toArray();
+        <readUnlock()>
+    }
+
+    @Override
+    public String toString()
+    {
+        <readLock()>
+            return this.collection.toString();
+        <readUnlock()>
+    }
+
+    public String makeString()
+    {
+        <readLock()>
+            return this.collection.makeString();
+        <readUnlock()>
+    }
+
+    public String makeString(String separator)
+    {
+        <readLock()>
+            return this.collection.makeString(separator);
+        <readUnlock()>
+    }
+
+    public String makeString(String start, String separator, String end)
+    {
+        <readLock()>
+            return this.collection.makeString(start, separator, end);
+        <readUnlock()>
+    }
+
+    public void appendString(Appendable appendable)
+    {
+        <readLock()>
+            this.collection.appendString(appendable);
+        <readUnlock()>
+    }
+
+    public void appendString(Appendable appendable, String separator)
+    {
+        <readLock()>
+            this.collection.appendString(appendable, separator);
+        <readUnlock()>
+    }
+
+    public void appendString(
+            Appendable appendable,
+            String start,
+            String separator,
+            String end)
+    {
+        <readLock()>
+            this.collection.appendString(appendable, start, separator, end);
+        <readUnlock()>
+    }
+
+    public Mutable<name>List toList()
+    {
+        <readLock()>
+            return this.collection.toList();
+        <readUnlock()>
+
+    }
+
+    public Mutable<name>Set toSet()
+    {
+        <readLock()>
+            return this.collection.toSet();
+        <readUnlock()>
+    }
+
+    public Mutable<name>Bag toBag()
+    {
+        <readLock()>
+            return this.collection.toBag();
+        <readUnlock()>
+    }
+
+    public \<T> T injectInto(T injectedValue, Object<name>ToObjectFunction\<? super T, ? extends T> function)
+    {
+        <readLock()>
+            return this.collection.injectInto(injectedValue, function);
+        <readUnlock()>
+    }
+}
+
+>>
+
+arithmeticMethods ::= [
+    "byte": "allMethods",
+    "short": "allMethods",
+    "char": "allMethods",
+    "int": "allMethods",
+    "long": "allMethods",
+    "float": "allMethods",
+    "double": "allMethods",
+    "boolean": "noMethods"
+    ]
+
+allMethods(name, type) ::=<<
+public <wideType.(type)> sum()
+{
+    <readLock()>
+        return this.collection.sum();
+    <readUnlock()>
+}
+
+public <type> max()
+{
+    <readLock()>
+        return this.collection.max();
+    <readUnlock()>
+}
+
+public <type> min()
+{
+    <readLock()>
+        return this.collection.min();
+    <readUnlock()>
+}
+
+public <type> minIfEmpty(<type> defaultValue)
+{
+    <readLock()>
+        return this.collection.minIfEmpty(defaultValue);
+    <readUnlock()>
+}
+
+public <type> maxIfEmpty(<type> defaultValue)
+{
+    <readLock()>
+        return this.collection.maxIfEmpty(defaultValue);
+    <readUnlock()>
+}
+
+public double average()
+{
+    <readLock()>
+        return this.collection.average();
+    <readUnlock()>
+}
+
+public double median()
+{
+    <readLock()>
+        return this.collection.median();
+    <readUnlock()>
+}
+
+public Mutable<name>List toSortedList()
+{
+    <readLock()>
+        return this.collection.toSortedList();
+    <readUnlock()>
+}
+
+public <type>[] toSortedArray()
+{
+    <readLock()>
+        return this.collection.toSortedArray();
+    <readUnlock()>
+}
+
+>>
+
+noMethods(name, type) ::= ""
