@@ -115,6 +115,7 @@
         <module>junit-trait-runner</module>
         <module>unit-tests-java8</module>
         <module>test-coverage</module>
+        <module>p2-repository</module>
     </modules>
 
     <properties>
@@ -292,7 +293,9 @@
                                     </requireMavenVersion>
                                     <requirePluginVersions>
                                         <unCheckedPluginList>
-                                            org.eclipse.collections:eclipse-collections-code-generator-maven-plugin
+                                            org.eclipse.collections:eclipse-collections-code-generator-maven-plugin,
+                                            org.eclipse.ebr:ebr-maven-plugin,
+                                            org.eclipse.ebr:ebr-tycho-extras-plugin
                                         </unCheckedPluginList>
                                     </requirePluginVersions>
                                 </rules>
