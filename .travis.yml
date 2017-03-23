@@ -33,7 +33,11 @@ matrix:
         - DESC="compile jmh-tests and performance-tests"
         - CMD="mvn install --projects jmh-tests,performance-tests --also-make --activate-profiles all -DskipTests=true --batch-mode --show-version --errors"
 
-script: eval $CMD
+script:
+- if [[ "$TRAVIS_EVENT_TYPE" == "cron" && DESC="unit tests" ]];
+  then mvn install --batch-mode --show-version --errors sonar:sonar -Dsonar.host.url=https://sonarqube.com -Dsonar.login=${SONARQUBE_TOKEN} -Dsonar.organization=eclipse-collections ;
+  else eval $CMD;
+  fi
 
 cache:
   directories:

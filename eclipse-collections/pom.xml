@@ -28,6 +28,10 @@
 
     <name>Eclipse Collections Main Library</name>
 
+    <properties>
+        <sonar.jacoco.reportPaths>../unit-tests/target/jacoco.exec,../unit-tests-java8/target/jacoco.exec</sonar.jacoco.reportPaths>
+    </properties>
+
     <dependencies>
 
         <dependency>
