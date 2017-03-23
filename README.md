@@ -6,6 +6,7 @@ Eclipse Collections
 [![][release img]][release]
 [![][license-epl img]][license-epl]
 [![][license-edl img]][license-edl]
+[![][sonarqube img]][sonarqube]
 
 Eclipse Collections is a collections framework for Java. It has optimized List, Set and Map implementations with a rich and fluent API.  The library provides additional data structures not found in the JDK like Bags, Multimaps and BiMaps.  The framework also provides primitive versions of Lists, Sets, Bags, Stacks and Maps with a rich and fluent API.  There is support for both Mutable and Immutable versions of all containers in the library.  The iteration protocol was inspired by the Smalltalk collection framework, and the collections are compatible with the Java Collection Framework types.
 
@@ -218,4 +219,7 @@ Additional information
 
 [license-edl]:LICENSE-EDL-1.0.txt
 [license-edl img]:https://img.shields.io/badge/License-EDL-blue.svg
+
+[sonarqube]:https://sonarqube.com/dashboard?id=org.eclipse.collections%3Aeclipse-collections-parent
+[sonarqube img]:https://sonarqube.com/api/badges/gate?key=org.eclipse.collections:eclipse-collections-parent
 
