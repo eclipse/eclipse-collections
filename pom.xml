@@ -134,11 +134,6 @@
 
         <argLine></argLine>
 
-        <!--Sonar settings-->
-        <sonar.language>java</sonar.language>
-        <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
-        <sonar.core.codeCoveragePlugin>clover</sonar.core.codeCoveragePlugin>
-        <sonar.clover.version>${clover.version}</sonar.clover.version>
         <project.previous.version>7.0.0</project.previous.version>
     </properties>
 
