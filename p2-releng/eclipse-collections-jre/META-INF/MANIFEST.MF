@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Eclipse Collections JRE Fragment
+Bundle-SymbolicName: org.eclipse.collections.jre
+Bundle-Version: 8.2.0.qualifier
+Bundle-Vendor: Eclipse Collections
+Fragment-Host: system.bundle
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Export-Package: com.sun,
+ sun.misc

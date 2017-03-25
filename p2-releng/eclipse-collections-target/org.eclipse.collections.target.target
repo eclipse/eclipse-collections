@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?pde version="3.8"?>
+<target name="org.eclipse.collections.target" sequenceNumber="6">
+<locations>
+	<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="false" type="InstallableUnit">
+		<unit id="org.junit" version="0.0.0"/>
+		<unit id="org.eclipse.osgi" version="0.0.0"/>
+		<repository location="http://download.eclipse.org/releases/neon/201703231000/"/>
+	</location>
+</locations>
+</target>
