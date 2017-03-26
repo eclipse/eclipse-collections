@@ -53,7 +53,7 @@ public class Collect<name>Iterable\<T>
     {
         this.iterable = adapted;
         this.function = function;
-        this.<type>FunctionToProcedure = new <name>FunctionToProcedure\<T>(function);
+        this.<type>FunctionToProcedure = new <name>FunctionToProcedure\<>(function);
     }
 
     public <name>Iterator <type>Iterator()

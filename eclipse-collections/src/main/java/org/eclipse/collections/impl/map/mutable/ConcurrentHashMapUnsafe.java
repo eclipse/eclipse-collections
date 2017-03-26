@@ -992,7 +992,7 @@ public class ConcurrentHashMapUnsafe<K, V>
             {
                 int start = i * chunkSize;
                 int end = Math.min((i + 1) * chunkSize, currentArray.length);
-                futures[i] = new FutureTask<Void>(() -> this.sequentialPutAll(currentArray, start, end), null);
+                futures[i] = new FutureTask<>(() -> this.sequentialPutAll(currentArray, start, end), null);
                 executor.execute(futures[i]);
             }
             for (int i = 0; i < chunks; i++)
@@ -1328,7 +1328,7 @@ public class ConcurrentHashMapUnsafe<K, V>
                 int start = i * chunkSize;
                 int end = Math.min((i + 1) * chunkSize, currentArray.length);
                 Procedure2<K, V> block = blocks.get(i);
-                futures[i] = new FutureTask<Void>(() -> this.sequentialForEachKeyValue(block, currentArray, start, end), null);
+                futures[i] = new FutureTask<>(() -> this.sequentialForEachKeyValue(block, currentArray, start, end), null);
                 executor.execute(futures[i]);
             }
             for (int i = 0; i < chunks; i++)
@@ -1386,7 +1386,7 @@ public class ConcurrentHashMapUnsafe<K, V>
                 int start = i * chunkSize;
                 int end = Math.min((i + 1) * chunkSize, currentArray.length - 1);
                 Procedure<V> block = blocks.get(i);
-                futures[i] = new FutureTask<Void>(() -> this.sequentialForEachValue(block, currentArray, start, end), null);
+                futures[i] = new FutureTask<>(() -> this.sequentialForEachValue(block, currentArray, start, end), null);
                 executor.execute(futures[i]);
             }
             for (int i = 0; i < chunks; i++)

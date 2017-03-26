@@ -93,7 +93,7 @@ public abstract class AbstractImmutable<name>ObjectMap\<V> implements Immutable<
         public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
         {
             int size = in.readInt();
-            Mutable<name>ObjectMap\<V> deserializedMap = new <name>ObjectHashMap\<V>();
+            Mutable<name>ObjectMap\<V> deserializedMap = new <name>ObjectHashMap\<>();
 
             for (int i = 0; i \< size; i++)
             {

@@ -368,7 +368,7 @@ public final class Multimaps
 
             public <K, V> MutableListMultimap<K, V> withAll(Multimap<? extends K, ? extends V> multimap)
             {
-                return new FastListMultimap<K, V>(multimap);
+                return new FastListMultimap<>(multimap);
             }
         }
 
@@ -434,7 +434,7 @@ public final class Multimaps
 
             public <K, V> MutableSetMultimap<K, V> withAll(Multimap<? extends K, ? extends V> multimap)
             {
-                return new UnifiedSetMultimap<K, V>(multimap);
+                return new UnifiedSetMultimap<>(multimap);
             }
         }
 
@@ -495,7 +495,7 @@ public final class Multimaps
 
             public <K, V> MutableSortedSetMultimap<K, V> withAll(Multimap<? extends K, ? extends V> multimap)
             {
-                return new TreeSortedSetMultimap<K, V>(multimap);
+                return new TreeSortedSetMultimap<>(multimap);
             }
         }
 
@@ -561,7 +561,7 @@ public final class Multimaps
 
             public <K, V> MutableBagMultimap<K, V> withAll(Multimap<? extends K, ? extends V> multimap)
             {
-                return new HashBagMultimap<K, V>(multimap);
+                return new HashBagMultimap<>(multimap);
             }
         }
 
@@ -607,7 +607,7 @@ public final class Multimaps
 
             public <K, V> MutableSortedBagMultimap<K, V> withAll(Multimap<? extends K, ? extends V> multimap)
             {
-                return new TreeBagMultimap<K, V>(multimap);
+                return new TreeBagMultimap<>(multimap);
             }
         }
     }

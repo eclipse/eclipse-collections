@@ -119,7 +119,7 @@ final class Immutable<name>ObjectHashMap\<V> extends AbstractImmutable<name>Obje
 
     Immutable<name>ObjectHashMap(<name>ObjectMap\<? extends V> delegate)
     {
-        this.delegate = new <name>ObjectHashMap\<V>(delegate);
+        this.delegate = new <name>ObjectHashMap\<>(delegate);
     }
 
     @Override
@@ -776,7 +776,7 @@ final class Immutable<name>ObjectHashMap\<V> extends AbstractImmutable<name>Obje
     @Override
     public Immutable<name>ObjectMap\<V> newWithKeyValue(<type> key, V value)
     {
-        <name>ObjectHashMap\<V> map = new <name>ObjectHashMap\<V>(this);
+        <name>ObjectHashMap\<V> map = new <name>ObjectHashMap\<>(this);
         map.put(key, value);
         return map.toImmutable();
     }
@@ -784,7 +784,7 @@ final class Immutable<name>ObjectHashMap\<V> extends AbstractImmutable<name>Obje
     @Override
     public Immutable<name>ObjectMap\<V> newWithoutKey(<type> key)
     {
-        <name>ObjectHashMap\<V> map = new <name>ObjectHashMap\<V>(this);
+        <name>ObjectHashMap\<V> map = new <name>ObjectHashMap\<>(this);
         map.removeKey(key);
         return map.toImmutable();
     }
@@ -792,7 +792,7 @@ final class Immutable<name>ObjectHashMap\<V> extends AbstractImmutable<name>Obje
     @Override
     public Immutable<name>ObjectMap\<V> newWithoutAllKeys(<name>Iterable keys)
     {
-        <name>ObjectHashMap\<V> map = new <name>ObjectHashMap\<V>(this);
+        <name>ObjectHashMap\<V> map = new <name>ObjectHashMap\<>(this);
         <name>Iterator iterator = keys.<type>Iterator();
         while (iterator.hasNext())
         {
@@ -828,7 +828,7 @@ final class Immutable<name>ObjectHashMap\<V> extends AbstractImmutable<name>Obje
     @Override
     public Iterator\<V> iterator()
     {
-        return new UnmodifiableIteratorAdapter\<V>(this.delegate.iterator());
+        return new UnmodifiableIteratorAdapter\<>(this.delegate.iterator());
     }
 
     @Override

@@ -360,7 +360,7 @@ public final class UnmodifiableObject<name>Map\<K>
     @Override
     public MutableObject<name>Map\<K> asSynchronized()
     {
-        return new SynchronizedObject<name>Map\<K>(this);
+        return new SynchronizedObject<name>Map\<>(this);
     }
 
     @Override

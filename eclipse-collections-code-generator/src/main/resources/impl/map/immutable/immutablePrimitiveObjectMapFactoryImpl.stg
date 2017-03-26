@@ -50,7 +50,7 @@ public class Immutable<name>ObjectMapFactoryImpl implements Immutable<name>Objec
 
     public \<V> Immutable<name>ObjectMap\<V> with(<type> key, V value)
     {
-        return new Immutable<name>ObjectSingletonMap\<V>(key, value);
+        return new Immutable<name>ObjectSingletonMap\<>(key, value);
     }
 
     public \<V> Immutable<name>ObjectMap\<V> ofAll(<name>ObjectMap\<? extends V> map)
@@ -73,9 +73,9 @@ public class Immutable<name>ObjectMapFactoryImpl implements Immutable<name>Objec
             //TODO use keysView() when available.
             final <type>[] array = new <type>[1];
             map.forEachKey((<type> each) -> array[0] = each);
-            return new Immutable<name>ObjectSingletonMap\<V>(array[0], map.get(array[0]));
+            return new Immutable<name>ObjectSingletonMap\<>(array[0], map.get(array[0]));
         }
-        return new Immutable<name>ObjectHashMap\<V>(map);
+        return new Immutable<name>ObjectHashMap\<>(map);
     }
 }
 

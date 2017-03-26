@@ -236,12 +236,12 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
 
     public static \<V> <name>ObjectHashMap\<V> newMap()
     {
-        return new <name>ObjectHashMap\<V>();
+        return new <name>ObjectHashMap\<>();
     }
 
     public static \<V> <name>ObjectHashMap\<V> newMap(<name>ObjectMap\<? extends V> map)
     {
-        return new <name>ObjectHashMap\<V>(map);
+        return new <name>ObjectHashMap\<>(map);
     }
 
     public static \<V> <name>ObjectHashMap\<V> newWithKeysValues(<type> key, V value)
@@ -757,7 +757,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
     @Override
     public MutableBag\<V> select(Predicate\<? super V> predicate)
     {
-        MutableBag\<V> result = new HashBag\<V>();
+        MutableBag\<V> result = new HashBag\<>();
         if (this.sentinelValues != null)
         {
             if (this.sentinelValues.containsZeroKey && predicate.accept(this.sentinelValues.zeroValue))
@@ -836,7 +836,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
     @Override
     public MutableBag\<V> reject(Predicate\<? super V> predicate)
     {
-        MutableBag\<V> result = new HashBag\<V>();
+        MutableBag\<V> result = new HashBag\<>();
         if (this.sentinelValues != null)
         {
             if (this.sentinelValues.containsZeroKey && !predicate.accept(this.sentinelValues.zeroValue))
@@ -915,7 +915,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
     @Override
     public PartitionMutableBag\<V> partition(Predicate\<? super V> predicate)
     {
-        PartitionMutableBag\<V> partitionMutableBag = new PartitionHashBag\<V>();
+        PartitionMutableBag\<V> partitionMutableBag = new PartitionHashBag\<>();
         this.forEach(new PartitionProcedure\<V>(predicate, partitionMutableBag));
         return partitionMutableBag;
     }
@@ -923,7 +923,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
     @Override
     public \<P> PartitionMutableBag\<V> partitionWith(Predicate2\<? super V, ? super P> predicate, P parameter)
     {
-        PartitionMutableBag\<V> partitionMutableBag = new PartitionHashBag\<V>();
+        PartitionMutableBag\<V> partitionMutableBag = new PartitionHashBag\<>();
         this.forEach(new PartitionProcedure\<V>(Predicates.bind(predicate, parameter), partitionMutableBag));
         return partitionMutableBag;
     }
@@ -2193,7 +2193,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         {
             if (this.sentinelValues == null)
             {
-                this.sentinelValues = new SentinelValues\<V>();
+                this.sentinelValues = new SentinelValues\<>();
             }
             V oldValue = this.sentinelValues.zeroValue;
             this.sentinelValues.containsZeroKey = true;
@@ -2205,7 +2205,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         {
             if (this.sentinelValues == null)
             {
-                this.sentinelValues = new SentinelValues\<V>();
+                this.sentinelValues = new SentinelValues\<>();
             }
             V oldValue = this.sentinelValues.oneValue;
             this.sentinelValues.containsOneKey = true;
@@ -2304,7 +2304,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         {
             if (this.sentinelValues == null)
             {
-                this.sentinelValues = new SentinelValues\<V>();
+                this.sentinelValues = new SentinelValues\<>();
                 this.sentinelValues.containsZeroKey = true;
                 this.sentinelValues.zeroValue = value;
                 return value;
@@ -2321,7 +2321,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         {
             if (this.sentinelValues == null)
             {
-                this.sentinelValues = new SentinelValues\<V>();
+                this.sentinelValues = new SentinelValues\<>();
                 this.sentinelValues.containsOneKey = true;
                 this.sentinelValues.oneValue = value;
                 return value;
@@ -2351,7 +2351,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
             if (this.sentinelValues == null)
             {
                 V value = function.value();
-                this.sentinelValues = new SentinelValues\<V>();
+                this.sentinelValues = new SentinelValues\<>();
                 this.sentinelValues.containsZeroKey = true;
                 this.sentinelValues.zeroValue = value;
                 return value;
@@ -2370,7 +2370,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
             if (this.sentinelValues == null)
             {
                 V value = function.value();
-                this.sentinelValues = new SentinelValues\<V>();
+                this.sentinelValues = new SentinelValues\<>();
                 this.sentinelValues.containsOneKey = true;
                 this.sentinelValues.oneValue = value;
                 return value;
@@ -2402,7 +2402,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
             if (this.sentinelValues == null)
             {
                 V value = function.valueOf(parameter);
-                this.sentinelValues = new SentinelValues\<V>();
+                this.sentinelValues = new SentinelValues\<>();
                 this.sentinelValues.containsZeroKey = true;
                 this.sentinelValues.zeroValue = value;
                 return value;
@@ -2421,7 +2421,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
             if (this.sentinelValues == null)
             {
                 V value = function.valueOf(parameter);
-                this.sentinelValues = new SentinelValues\<V>();
+                this.sentinelValues = new SentinelValues\<>();
                 this.sentinelValues.containsOneKey = true;
                 this.sentinelValues.oneValue = value;
                 return value;
@@ -2453,7 +2453,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
             if (this.sentinelValues == null)
             {
                 V value = function.valueOf(key);
-                this.sentinelValues = new SentinelValues\<V>();
+                this.sentinelValues = new SentinelValues\<>();
                 this.sentinelValues.containsZeroKey = true;
                 this.sentinelValues.zeroValue = value;
                 return value;
@@ -2472,7 +2472,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
             if (this.sentinelValues == null)
             {
                 V value = function.valueOf(key);
-                this.sentinelValues = new SentinelValues\<V>();
+                this.sentinelValues = new SentinelValues\<>();
                 this.sentinelValues.containsOneKey = true;
                 this.sentinelValues.oneValue = value;
                 return value;
@@ -2503,7 +2503,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         {
             if (this.sentinelValues == null)
             {
-                this.sentinelValues = new SentinelValues\<V>();
+                this.sentinelValues = new SentinelValues\<>();
                 this.sentinelValues.containsZeroKey = true;
                 this.sentinelValues.zeroValue = function.valueOf(factory.value());
             }
@@ -2522,7 +2522,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         {
             if (this.sentinelValues == null)
             {
-                this.sentinelValues = new SentinelValues\<V>();
+                this.sentinelValues = new SentinelValues\<>();
                 this.sentinelValues.containsOneKey = true;
                 this.sentinelValues.oneValue = function.valueOf(factory.value());
             }
@@ -2555,7 +2555,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         {
             if (this.sentinelValues == null)
             {
-                this.sentinelValues = new SentinelValues\<V>();
+                this.sentinelValues = new SentinelValues\<>();
                 this.sentinelValues.containsZeroKey = true;
                 this.sentinelValues.zeroValue = function.value(factory.value(), parameter);
             }
@@ -2574,7 +2574,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         {
             if (this.sentinelValues == null)
             {
-                this.sentinelValues = new SentinelValues\<V>();
+                this.sentinelValues = new SentinelValues\<>();
                 this.sentinelValues.containsOneKey = true;
                 this.sentinelValues.oneValue = function.value(factory.value(), parameter);
             }
@@ -2708,13 +2708,13 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
     @Override
     public Mutable<name>ObjectMap\<V> asUnmodifiable()
     {
-        return new Unmodifiable<name>ObjectMap\<V>(this);
+        return new Unmodifiable<name>ObjectMap\<>(this);
     }
 
     @Override
     public Mutable<name>ObjectMap\<V> asSynchronized()
     {
-        return new Synchronized<name>ObjectMap\<V>(this);
+        return new Synchronized<name>ObjectMap\<>(this);
     }
 
     @Override

@@ -439,7 +439,7 @@ final class Immutable<name>ObjectSingletonMap\<V> extends AbstractImmutable<name
     @Override
     public PartitionImmutableBag\<V> partition(Predicate\<? super V> predicate)
     {
-        PartitionMutableBag\<V> partitionMutableBag = new PartitionHashBag\<V>();
+        PartitionMutableBag\<V> partitionMutableBag = new PartitionHashBag\<>();
         this.forEach(new PartitionProcedure\<V>(predicate, partitionMutableBag));
         return partitionMutableBag.toImmutable();
     }
@@ -447,7 +447,7 @@ final class Immutable<name>ObjectSingletonMap\<V> extends AbstractImmutable<name
     @Override
     public \<P> PartitionImmutableBag\<V> partitionWith(Predicate2\<? super V, ? super P> predicate, P parameter)
     {
-        PartitionMutableBag\<V> partitionMutableBag = new PartitionHashBag\<V>();
+        PartitionMutableBag\<V> partitionMutableBag = new PartitionHashBag\<>();
         this.forEach(new PartitionPredicate2Procedure\<V, P>(predicate, parameter, partitionMutableBag));
         return partitionMutableBag.toImmutable();
     }
@@ -685,7 +685,7 @@ final class Immutable<name>ObjectSingletonMap\<V> extends AbstractImmutable<name
     @Override
     public LazyIterable\<V> asLazy()
     {
-        return new LazyIterableAdapter\<V>(FastList.newListWith(this.value1));
+        return new LazyIterableAdapter\<>(FastList.newListWith(this.value1));
     }
 
     @Override
@@ -999,7 +999,7 @@ final class Immutable<name>ObjectSingletonMap\<V> extends AbstractImmutable<name
     @Override
     public Iterator\<V> iterator()
     {
-        return new UnmodifiableIteratorAdapter\<V>(<name>ObjectHashMap.newWithKeysValues(this.key1, this.value1).iterator());
+        return new UnmodifiableIteratorAdapter\<>(<name>ObjectHashMap.newWithKeysValues(this.key1, this.value1).iterator());
     }
 
     private Object writeReplace()

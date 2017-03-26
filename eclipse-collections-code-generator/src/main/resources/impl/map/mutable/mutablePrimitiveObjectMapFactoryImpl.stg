@@ -54,7 +54,7 @@ public class Mutable<name>ObjectMapFactoryImpl implements Mutable<name>ObjectMap
         {
             return this.empty();
         }
-        return new <name>ObjectHashMap\<V>(map);
+        return new <name>ObjectHashMap\<>(map);
     }
 }
 
