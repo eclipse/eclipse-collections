@@ -39,6 +39,7 @@ public interface Mutable<name>Bag extends Mutable<name>Collection, <name>Bag
      *
      * @since 8.0
      */
+    @Override
     Mutable<name>Bag selectByOccurrences(IntPredicate predicate);
 
     /**
@@ -59,21 +60,26 @@ public interface Mutable<name>Bag extends Mutable<name>Collection, <name>Bag
      *
      * @since 8.0
      */
+    @Override
     MutableList\<<name>IntPair> bottomOccurrences(int count);
 
     <sharedAPI(fileName(primitive), name)>
 
+    @Override
     \<V> MutableBag\<V> collect(<name>ToObjectFunction\<? extends V> function);
 
     <mutableAPI(fileName(primitive), type, name)>
 
+    @Override
     Mutable<name>Bag asUnmodifiable();
 
+    @Override
     Mutable<name>Bag asSynchronized();
 
     /**
      * Returns an immutable copy of this bag.
      */
+    @Override
     Immutable<name>Bag toImmutable();
 }
 

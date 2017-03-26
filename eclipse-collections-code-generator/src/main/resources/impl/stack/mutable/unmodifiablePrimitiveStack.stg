@@ -57,76 +57,91 @@ public final class Unmodifiable<name>Stack
         this.stack = stack;
     }
 
+    @Override
     public void push(<type> item)
     {
         throw new UnsupportedOperationException("Cannot call push() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public <type> pop()
     {
         throw new UnsupportedOperationException("Cannot call pop() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public <name>List pop(int count)
     {
         throw new UnsupportedOperationException("Cannot call pop() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public <type> peek()
     {
         return this.stack.peek();
     }
 
+    @Override
     public <name>List peek(int count)
     {
         return this.stack.peek(count);
     }
 
+    @Override
     public <type> peekAt(int index)
     {
         return this.stack.peekAt(index);
     }
 
+    @Override
     public int size()
     {
         return this.stack.size();
     }
 
+    @Override
     public boolean isEmpty()
     {
         return this.stack.isEmpty();
     }
 
+    @Override
     public boolean notEmpty()
     {
         return this.stack.notEmpty();
     }
 
+    @Override
     public void clear()
     {
         throw new UnsupportedOperationException("Cannot call clear() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public boolean contains(<type> value)
     {
         return this.stack.contains(value);
     }
 
+    @Override
     public boolean containsAll(<type>... source)
     {
         return this.stack.containsAll(source);
     }
 
+    @Override
     public boolean containsAll(<name>Iterable source)
     {
         return this.stack.containsAll(source);
     }
 
+    @Override
     public <name>Iterator <type>Iterator()
     {
         return new Unmodifiable<name>Iterator(this.stack.<type>Iterator());
     }
 
+    @Override
     public void forEach(<name>Procedure procedure)
     {
         this.each(procedure);
@@ -135,52 +150,62 @@ public final class Unmodifiable<name>Stack
     /**
      * @since 7.0.
      */
+    @Override
     public void each(<name>Procedure procedure)
     {
         this.stack.forEach(procedure);
     }
 
+    @Override
     public int count(<name>Predicate predicate)
     {
         return this.stack.count(predicate);
     }
 
+    @Override
     public boolean anySatisfy(<name>Predicate predicate)
     {
         return this.stack.anySatisfy(predicate);
     }
 
+    @Override
     public boolean allSatisfy(<name>Predicate predicate)
     {
         return this.stack.allSatisfy(predicate);
     }
 
+    @Override
     public boolean noneSatisfy(<name>Predicate predicate)
     {
         return this.stack.noneSatisfy(predicate);
     }
 
+    @Override
     public <type> detectIfNone(<name>Predicate predicate, <type> ifNone)
     {
         return this.stack.detectIfNone(predicate, ifNone);
     }
 
+    @Override
     public Mutable<name>Stack select(<name>Predicate predicate)
     {
         return this.stack.select(predicate);
     }
 
+    @Override
     public Mutable<name>Stack reject(<name>Predicate predicate)
     {
         return this.stack.reject(predicate);
     }
 
+    @Override
     public \<V> MutableStack\<V> collect(<name>ToObjectFunction\<? extends V> function)
     {
         return this.stack.collect(function);
     }
 
     <(arithmeticMethods.(type))(name, type)>
+    @Override
     public <type>[] toArray()
     {
         return this.stack.toArray();
@@ -192,31 +217,37 @@ public final class Unmodifiable<name>Stack
         return this.stack.toString();
     }
 
+    @Override
     public String makeString()
     {
         return this.stack.makeString();
     }
 
+    @Override
     public String makeString(String separator)
     {
         return this.stack.makeString(separator);
     }
 
+    @Override
     public String makeString(String start, String separator, String end)
     {
         return this.stack.makeString(start, separator, end);
     }
 
+    @Override
     public void appendString(Appendable appendable)
     {
         this.stack.appendString(appendable);
     }
 
+    @Override
     public void appendString(Appendable appendable, String separator)
     {
         this.stack.appendString(appendable, separator);
     }
 
+    @Override
     public void appendString(
             Appendable appendable,
             String start,
@@ -226,16 +257,19 @@ public final class Unmodifiable<name>Stack
         this.stack.appendString(appendable, start, separator, end);
     }
 
+    @Override
     public Mutable<name>List toList()
     {
         return this.stack.toList();
     }
 
+    @Override
     public Mutable<name>Set toSet()
     {
         return this.stack.toSet();
     }
 
+    @Override
     public Mutable<name>Bag toBag()
     {
         return this.stack.toBag();
@@ -258,41 +292,49 @@ public final class Unmodifiable<name>Stack
         return new Lazy<name>IterableAdapter(this);
     }
 
+    @Override
     public Mutable<name>Stack asUnmodifiable()
     {
         return this;
     }
 
+    @Override
     public Mutable<name>Stack asSynchronized()
     {
         return new Synchronized<name>Stack(this);
     }
 
+    @Override
     public Immutable<name>Stack toImmutable()
     {
         return <name>Stacks.immutable.withAllReversed(this);
     }
 
+    @Override
     public \<T> T injectInto(T injectedValue, Object<name>ToObjectFunction\<? super T, ? extends T> function)
     {
         return this.stack.injectInto(injectedValue, function);
     }
 
+    @Override
     public <type> getFirst()
     {
         return this.stack.getFirst();
     }
 
+    @Override
     public int indexOf(<type> value)
     {
         return this.stack.indexOf(value);
     }
 
+    @Override
     public \<T> T injectIntoWithIndex(T injectedValue, Object<name>IntToObjectFunction\<? super T, ? extends T> function)
     {
         return this.stack.injectIntoWithIndex(injectedValue, function);
     }
 
+    @Override
     public void forEachWithIndex(<name>IntProcedure procedure)
     {
         this.stack.forEachWithIndex(procedure);
@@ -313,46 +355,55 @@ arithmeticMethods ::= [
     ]
 
 allMethods(name, type) ::=<<
+@Override
 public <wideType.(type)> sum()
 {
     return this.stack.sum();
 }
 
+@Override
 public <type> max()
 {
     return this.stack.max();
 }
 
+@Override
 public <type> min()
 {
     return this.stack.min();
 }
 
+@Override
 public <type> minIfEmpty(<type> defaultValue)
 {
     return this.stack.minIfEmpty(defaultValue);
 }
 
+@Override
 public <type> maxIfEmpty(<type> defaultValue)
 {
     return this.stack.maxIfEmpty(defaultValue);
 }
 
+@Override
 public double average()
 {
     return this.stack.average();
 }
 
+@Override
 public double median()
 {
     return this.stack.median();
 }
 
+@Override
 public Mutable<name>List toSortedList()
 {
     return this.stack.toSortedList();
 }
 
+@Override
 public <type>[] toSortedArray()
 {
     return this.stack.toSortedArray();

@@ -83,36 +83,43 @@ final class Immutable<name>EmptyBag implements Immutable<name>Bag, Serializable
         return this;
     }
 
+    @Override
     public int size()
     {
         return 0;
     }
 
+    @Override
     public boolean isEmpty()
     {
         return true;
     }
 
+    @Override
     public boolean notEmpty()
     {
         return false;
     }
 
+    @Override
     public boolean contains(<type> value)
     {
         return false;
     }
 
+    @Override
     public boolean containsAll(<name>Iterable source)
     {
         return source.isEmpty();
     }
 
+    @Override
     public boolean containsAll(<type>... elements)
     {
         return elements.length == 0;
     }
 
+    @Override
     public void forEach(<name>Procedure procedure)
     {
     }
@@ -120,49 +127,59 @@ final class Immutable<name>EmptyBag implements Immutable<name>Bag, Serializable
     /**
      * @since 7.0.
      */
+    @Override
     public void each(<name>Procedure procedure)
     {
     }
 
+    @Override
     public Immutable<name>Bag select(<name>Predicate predicate)
     {
         return this;
     }
 
+    @Override
     public Immutable<name>Bag reject(<name>Predicate predicate)
     {
         return this;
     }
 
+    @Override
     public \<V> ImmutableBag\<V> collect(<name>ToObjectFunction\<? extends V> function)
     {
         return Bags.immutable.of();
     }
 
+    @Override
     public Mutable<name>List toList()
     {
         return new <name>ArrayList();
     }
 
+    @Override
     public int sizeDistinct()
     {
         return 0;
     }
 
+    @Override
     public int occurrencesOf(<type> item)
     {
         return 0;
     }
 
+    @Override
     public void forEachWithOccurrences(<name>IntProcedure <type>IntProcedure)
     {
     }
 
+    @Override
     public Immutable<name>Bag selectByOccurrences(IntPredicate predicate)
     {
         return this;
     }
 
+    @Override
     public ImmutableList\<<name>IntPair> topOccurrences(int count)
     {
         if (count \< 0)
@@ -172,6 +189,7 @@ final class Immutable<name>EmptyBag implements Immutable<name>Bag, Serializable
         return Lists.immutable.empty();
     }
 
+    @Override
     public ImmutableList\<<name>IntPair> bottomOccurrences(int count)
     {
         if (count \< 0)
@@ -181,32 +199,38 @@ final class Immutable<name>EmptyBag implements Immutable<name>Bag, Serializable
         return Lists.immutable.empty();
     }
 
+    @Override
     public <type> detectIfNone(<name>Predicate predicate, <type> ifNone)
     {
         return ifNone;
     }
 
+    @Override
     public int count(<name>Predicate predicate)
     {
         return 0;
     }
 
+    @Override
     public boolean anySatisfy(<name>Predicate predicate)
     {
         return false;
     }
 
     <(arithmeticMethods.(type))()>
+    @Override
     public boolean noneSatisfy(<name>Predicate predicate)
     {
         return true;
     }
 
+    @Override
     public boolean allSatisfy(<name>Predicate predicate)
     {
         return true;
     }
 
+    @Override
     public \<T> T injectInto(T injectedValue, Object<name>ToObjectFunction\<? super T, ? extends T> function)
     {
         return injectedValue;
@@ -233,26 +257,31 @@ final class Immutable<name>EmptyBag implements Immutable<name>Bag, Serializable
         return 0;
     }
 
+    @Override
     public Mutable<name>Set toSet()
     {
         return new <name>HashSet();
     }
 
+    @Override
     public Mutable<name>Bag toBag()
     {
         return new <name>HashBag();
     }
 
+    @Override
     public Immutable<name>Bag toImmutable()
     {
         return this;
     }
 
+    @Override
     public Lazy<name>Iterable asLazy()
     {
         return new Lazy<name>IterableAdapter(this);
     }
 
+    @Override
     public <type>[] toArray()
     {
         return new <type>[0];
@@ -264,29 +293,35 @@ final class Immutable<name>EmptyBag implements Immutable<name>Bag, Serializable
         return "[]";
     }
 
+    @Override
     public String makeString()
     {
         return "";
     }
 
+    @Override
     public String makeString(String separator)
     {
         return "";
     }
 
+    @Override
     public String makeString(String start, String separator, String end)
     {
         return start + end;
     }
 
+    @Override
     public void appendString(Appendable appendable)
     {
     }
 
+    @Override
     public void appendString(Appendable appendable, String separator)
     {
     }
 
+    @Override
     public void appendString(Appendable appendable, String start, String separator, String end)
     {
         try
@@ -300,6 +335,7 @@ final class Immutable<name>EmptyBag implements Immutable<name>Bag, Serializable
         }
     }
 
+    @Override
     public <name>Iterator <type>Iterator()
     {
         return ImmutableEmpty<name>Iterator.INSTANCE;
@@ -320,46 +356,55 @@ arithmeticMethods ::= [
     ]
 
 allMethods() ::= <<
+@Override
 public <wideType.(type)> sum()
 {
     return <wideZero.(type)>;
 }
 
+@Override
 public <type> min()
 {
     throw new NoSuchElementException();
 }
 
+@Override
 public <type> max()
 {
     throw new NoSuchElementException();
 }
 
+@Override
 public <type> maxIfEmpty(<type> defaultValue)
 {
     return defaultValue;
 }
 
+@Override
 public <type> minIfEmpty(<type> defaultValue)
 {
     return defaultValue;
 }
 
+@Override
 public double average()
 {
     throw new ArithmeticException();
 }
 
+@Override
 public double median()
 {
     throw new ArithmeticException();
 }
 
+@Override
 public <type>[] toSortedArray()
 {
     return new <type>[0];
 }
 
+@Override
 public Mutable<name>List toSortedList()
 {
     return new <name>ArrayList();

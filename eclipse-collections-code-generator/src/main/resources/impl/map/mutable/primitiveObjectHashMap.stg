@@ -382,31 +382,37 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         return appendable.toString();
     }
 
+    @Override
     public int size()
     {
         return this.occupiedWithData + (this.sentinelValues == null ? 0 : this.sentinelValues.size());
     }
 
+    @Override
     public boolean isEmpty()
     {
         return this.occupiedWithData == 0 && (this.sentinelValues == null || this.sentinelValues.size() == 0);
     }
 
+    @Override
     public boolean notEmpty()
     {
         return this.occupiedWithData != 0 || (this.sentinelValues != null && this.sentinelValues.size() != 0);
     }
 
+    @Override
     public String makeString()
     {
         return this.makeString(", ");
     }
 
+    @Override
     public String makeString(String separator)
     {
         return this.makeString("", separator, "");
     }
 
+    @Override
     public String makeString(String start, String separator, String end)
     {
         Appendable stringBuilder = new StringBuilder();
@@ -414,16 +420,19 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         return stringBuilder.toString();
     }
 
+    @Override
     public void appendString(Appendable appendable)
     {
         this.appendString(appendable, ", ");
     }
 
+    @Override
     public void appendString(Appendable appendable, String separator)
     {
         this.appendString(appendable, "", separator, "");
     }
 
+    @Override
     public void appendString(Appendable appendable, String start, String separator, String end)
     {
         try
@@ -470,11 +479,13 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         }
     }
 
+    @Override
     public Iterator\<V> iterator()
     {
         return new InternalIterator();
     }
 
+    @Override
     public Object[] toArray()
     {
         Object[] result = new Object[this.size()];
@@ -501,6 +512,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         return result;
     }
 
+    @Override
     public \<T> T[] toArray(T[] a)
     {
         int size = this.size();
@@ -517,11 +529,13 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         return result;
     }
 
+    @Override
     public boolean contains(Object object)
     {
         return this.containsValue(object);
     }
 
+    @Override
     public boolean containsAllIterable(Iterable\<?> source)
     {
         for (Object item : source)
@@ -534,11 +548,13 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         return true;
     }
 
+    @Override
     public boolean containsAll(Collection\<?> source)
     {
         return this.containsAllIterable(source);
     }
 
+    @Override
     public boolean containsAllArguments(Object... elements)
     {
         for (Object item : elements)
@@ -551,22 +567,26 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         return true;
     }
 
+    @Override
     public <name>ObjectHashMap\<V> tap(Procedure\<? super V> procedure)
     {
         this.forEachValue(procedure);
         return this;
     }
 
+    @Override
     public void forEach(Procedure\<? super V> procedure)
     {
         this.each(procedure);
     }
 
+    @Override
     public void each(Procedure\<? super V> procedure)
     {
         this.forEachValue(procedure);
     }
 
+    @Override
     public void forEachWithIndex(ObjectIntProcedure\<? super V> objectIntProcedure)
     {
         int index = 0;
@@ -590,6 +610,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         }
     }
 
+    @Override
     public \<P> void forEachWith(Procedure2\<? super V, ? super P> procedure, P parameter)
     {
         if (this.sentinelValues != null)
@@ -612,6 +633,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         }
     }
 
+    @Override
     public void forEachValue(Procedure\<? super V> procedure)
     {
         if (this.sentinelValues != null)
@@ -634,6 +656,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         }
     }
 
+    @Override
     public void forEachKey(<name>Procedure procedure)
     {
         if (this.sentinelValues != null)
@@ -656,6 +679,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         }
     }
 
+    @Override
     public void forEachKeyValue(<name>ObjectProcedure\<? super V> procedure)
     {
         if (this.sentinelValues != null)
@@ -678,6 +702,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         }
     }
 
+    @Override
     public <name>ObjectHashMap\<V> select(<name>ObjectPredicate\<? super V> predicate)
     {
         <name>ObjectHashMap\<V> result = <name>ObjectHashMap.newMap();
@@ -703,6 +728,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         return result;
     }
 
+    @Override
     public <name>ObjectHashMap\<V> reject(<name>ObjectPredicate\<? super V> predicate)
     {
         <name>ObjectHashMap\<V> result = <name>ObjectHashMap.newMap();
@@ -728,6 +754,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         return result;
     }
 
+    @Override
     public MutableBag\<V> select(Predicate\<? super V> predicate)
     {
         MutableBag\<V> result = new HashBag\<V>();
@@ -752,6 +779,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         return result;
     }
 
+    @Override
     public \<R extends Collection\<V>\> R select(Predicate\<? super V> predicate, R target)
     {
         if (this.sentinelValues != null)
@@ -775,11 +803,13 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         return target;
     }
 
+    @Override
     public \<P> MutableBag\<V> selectWith(Predicate2\<? super V, ? super P> predicate, P parameter)
     {
         return this.select(Predicates.bind(predicate, parameter));
     }
 
+    @Override
     public \<P, R extends Collection\<V>\> R selectWith(Predicate2\<? super V, ? super P> predicate, P parameter, R targetCollection)
     {
         if (this.sentinelValues != null)
@@ -803,6 +833,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         return targetCollection;
     }
 
+    @Override
     public MutableBag\<V> reject(Predicate\<? super V> predicate)
     {
         MutableBag\<V> result = new HashBag\<V>();
@@ -827,6 +858,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         return result;
     }
 
+    @Override
     public \<R extends Collection\<V>\> R reject(Predicate\<? super V> predicate, R target)
     {
         if (this.sentinelValues != null)
@@ -850,11 +882,13 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         return target;
     }
 
+    @Override
     public \<P> MutableBag\<V> rejectWith(Predicate2\<? super V, ? super P> predicate, P parameter)
     {
         return this.reject(Predicates.bind(predicate, parameter));
     }
 
+    @Override
     public \<P, R extends Collection\<V>\> R rejectWith(Predicate2\<? super V, ? super P> predicate, P parameter, R targetCollection)
     {
         if (this.sentinelValues != null)
@@ -878,6 +912,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         return targetCollection;
     }
 
+    @Override
     public PartitionMutableBag\<V> partition(Predicate\<? super V> predicate)
     {
         PartitionMutableBag\<V> partitionMutableBag = new PartitionHashBag\<V>();
@@ -885,6 +920,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         return partitionMutableBag;
     }
 
+    @Override
     public \<P> PartitionMutableBag\<V> partitionWith(Predicate2\<? super V, ? super P> predicate, P parameter)
     {
         PartitionMutableBag\<V> partitionMutableBag = new PartitionHashBag\<V>();
@@ -892,6 +928,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         return partitionMutableBag;
     }
 
+    @Override
     public \<S> MutableBag\<S> selectInstancesOf(Class\<S> clazz)
     {
         MutableBag\<S> result = HashBag.newBag(this.size());
@@ -899,6 +936,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         return result;
     }
 
+    @Override
     public \<VV> MutableBag\<VV> collect(Function\<? super V, ? extends VV> function)
     {
         return this.collect(function, new HashBag\<VV>());
@@ -913,11 +951,13 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
     <collectPrimitive("Long", "long")>
     <collectPrimitive("Short", "short")>
 
+    @Override
     public \<P, VV> MutableBag\<VV> collectWith(Function2\<? super V, ? super P, ? extends VV> function, P parameter)
     {
         return this.collect(Functions.bind(function, parameter));
     }
 
+    @Override
     public \<P, VV, R extends Collection\<VV>\> R collectWith(Function2\<? super V, ? super P, ? extends VV> function, P parameter, R targetCollection)
     {
         if (this.sentinelValues != null)
@@ -941,6 +981,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         return targetCollection;
     }
 
+    @Override
     public \<VV, R extends Collection\<VV>\> R collect(Function\<? super V, ? extends VV> function, R target)
     {
         if (this.sentinelValues != null)
@@ -964,11 +1005,13 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         return target;
     }
 
+    @Override
     public \<VV> MutableBag\<VV> collectIf(Predicate\<? super V> predicate, Function\<? super V, ? extends VV> function)
     {
         return this.collectIf(predicate, function, HashBag.\<VV>newBag());
     }
 
+    @Override
     public \<VV, R extends Collection\<VV>\> R collectIf(Predicate\<? super V> predicate, Function\<? super V, ? extends VV> function, R target)
     {
         if (this.sentinelValues != null)
@@ -992,11 +1035,13 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         return target;
     }
 
+    @Override
     public \<VV> MutableBag\<VV> flatCollect(Function\<? super V, ? extends Iterable\<VV>\> function)
     {
         return this.flatCollect(function, new HashBag\<VV>());
     }
 
+    @Override
     public \<VV, R extends Collection\<VV>\> R flatCollect(Function\<? super V, ? extends Iterable\<VV>\> function, R target)
     {
         if (this.sentinelValues != null)
@@ -1020,6 +1065,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         return target;
     }
 
+    @Override
     public V detect(Predicate\<? super V> predicate)
     {
         if (this.sentinelValues != null)
@@ -1043,6 +1089,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         return null;
     }
 
+    @Override
     public \<P> V detectWith(Predicate2\<? super V, ? super P> predicate, P parameter)
     {
         if (this.sentinelValues != null)
@@ -1066,16 +1113,19 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         return null;
     }
 
+    @Override
     public Optional\<V> detectOptional(Predicate\<? super V> predicate)
     {
         return Optional.ofNullable(this.detect(predicate));
     }
 
+    @Override
     public \<P> Optional\<V> detectWithOptional(Predicate2\<? super V, ? super P> predicate, P parameter)
     {
         return Optional.ofNullable(this.detectWith(predicate, parameter));
     }
 
+    @Override
     public V detectIfNone(Predicate\<? super V> predicate, Function0\<? extends V> function)
     {
         if (this.sentinelValues != null)
@@ -1099,6 +1149,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         return function.value();
     }
 
+    @Override
     public \<P> V detectWithIfNone(Predicate2\<? super V, ? super P> predicate, P parameter, Function0\<? extends V> function)
     {
         if (this.sentinelValues != null)
@@ -1122,6 +1173,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         return function.value();
     }
 
+    @Override
     public int count(Predicate\<? super V> predicate)
     {
         int count = 0;
@@ -1146,6 +1198,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         return count;
     }
 
+    @Override
     public \<P> int countWith(Predicate2\<? super V, ? super P> predicate, P parameter)
     {
         int count = 0;
@@ -1170,6 +1223,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         return count;
     }
 
+    @Override
     public boolean anySatisfy(Predicate\<? super V> predicate)
     {
         if (this.sentinelValues != null)
@@ -1193,6 +1247,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         return false;
     }
 
+    @Override
     public \<P> boolean anySatisfyWith(Predicate2\<? super V, ? super P> predicate, P parameter)
     {
         if (this.sentinelValues != null)
@@ -1216,6 +1271,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         return false;
     }
 
+    @Override
     public boolean allSatisfy(Predicate\<? super V> predicate)
     {
         if (this.sentinelValues != null)
@@ -1239,6 +1295,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         return true;
     }
 
+    @Override
     public \<P> boolean allSatisfyWith(Predicate2\<? super V, ? super P> predicate, P parameter)
     {
         if (this.sentinelValues != null)
@@ -1262,16 +1319,19 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         return true;
     }
 
+    @Override
     public boolean noneSatisfy(Predicate\<? super V> predicate)
     {
         return !this.anySatisfy(predicate);
     }
 
+    @Override
     public \<P> boolean noneSatisfyWith(Predicate2\<? super V, ? super P> predicate, P parameter)
     {
         return !this.anySatisfyWith(predicate, parameter);
     }
 
+    @Override
     public \<IV> IV injectInto(IV injectedValue, Function2\<? super IV, ? super V, ? extends IV> function)
     {
         IV result = injectedValue;
@@ -1296,6 +1356,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         return result;
     }
 
+    @Override
     public int injectInto(int injectedValue, IntObjectToIntFunction\<? super V> function)
     {
         int result = injectedValue;
@@ -1320,6 +1381,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         return result;
     }
 
+    @Override
     public long injectInto(long injectedValue, LongObjectToLongFunction\<? super V> function)
     {
         long result = injectedValue;
@@ -1344,6 +1406,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         return result;
     }
 
+    @Override
     public float injectInto(float injectedValue, FloatObjectToFloatFunction\<? super V> function)
     {
         float result = injectedValue;
@@ -1368,6 +1431,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         return result;
     }
 
+    @Override
     public double injectInto(double injectedValue, DoubleObjectToDoubleFunction\<? super V> function)
     {
         double result = injectedValue;
@@ -1396,11 +1460,13 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
      * @deprecated in 7.0. Use {@link OrderedIterable#zip(Iterable)} instead.
      */
     @Deprecated
+    @Override
     public \<S> MutableBag\<Pair\<V, S>\> zip(Iterable\<S> that)
     {
         return this.zip(that, HashBag.\<Pair\<V, S>\>newBag());
     }
 
+    @Override
     public \<S, R extends Collection\<Pair\<V, S>\>> R zip(Iterable\<S> that, R target)
     {
         return IterableIterate.zip(this, that, target);
@@ -1410,16 +1476,19 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
      * @deprecated in 7.0. Use {@link OrderedIterable#zipWithIndex()} instead.
      */
     @Deprecated
+    @Override
     public MutableSet\<Pair\<V, Integer>\> zipWithIndex()
     {
         return this.zipWithIndex(UnifiedSet.\<Pair\<V, Integer>\>newSet());
     }
 
+    @Override
     public \<R extends Collection\<Pair\<V, Integer>\>> R zipWithIndex(R target)
     {
         return IterableIterate.zipWithIndex(this, target);
     }
 
+    @Override
     public RichIterable\<RichIterable\<V>\> chunk(int size)
     {
         if (size \<= 0)
@@ -1441,6 +1510,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         return result;
     }
 
+    @Override
     public \<K, VV> MutableMap\<K, VV> aggregateInPlaceBy(Function\<? super V, ? extends K> groupBy, Function0\<? extends VV> zeroValueFactory, Procedure2\<? super VV, ? super V> mutatingAggregator)
     {
         MutableMap\<K, VV> map = UnifiedMap.newMap();
@@ -1448,6 +1518,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         return map;
     }
 
+    @Override
     public \<K, VV> MutableMap\<K, VV> aggregateBy(Function\<? super V, ? extends K> groupBy, Function0\<? extends VV> zeroValueFactory, Function2\<? super VV, ? super V, ? extends VV> nonMutatingAggregator)
     {
         MutableMap\<K, VV> map = UnifiedMap.newMap();
@@ -1455,11 +1526,13 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         return map;
     }
 
+    @Override
     public \<VV> MutableBagMultimap\<VV, V> groupBy(Function\<? super V, ? extends VV> function)
     {
         return this.groupBy(function, HashBagMultimap.\<VV, V>newMultimap());
     }
 
+    @Override
     public \<VV, R extends MutableMultimap\<VV, V>\> R groupBy(Function\<? super V, ? extends VV> function, R target)
     {
         if (this.sentinelValues != null)
@@ -1483,11 +1556,13 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         return target;
     }
 
+    @Override
     public \<VV> MutableBagMultimap\<VV, V> groupByEach(Function\<? super V, ? extends Iterable\<VV>\> function)
     {
         return this.groupByEach(function, HashBagMultimap.\<VV, V>newMultimap());
     }
 
+    @Override
     public \<VV, R extends MutableMultimap\<VV, V>\> R groupByEach(
             Function\<? super V, ? extends Iterable\<VV>\> function,
             R target)
@@ -1525,11 +1600,13 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         return target;
     }
 
+    @Override
     public \<VV> MutableMap\<VV, V> groupByUniqueKey(Function\<? super V, ? extends VV> function)
     {
         return this.groupByUniqueKey(function, UnifiedMap.\<VV, V>newMap());
     }
 
+    @Override
     public \<VV, R extends MutableMap\<VV, V>\> R groupByUniqueKey(
                 Function\<? super V, ? extends VV> function,
                 R target)
@@ -1564,6 +1641,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         return target;
     }
 
+    @Override
     public V getFirst()
     {
         if (this.sentinelValues != null)
@@ -1587,6 +1665,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         return null;
     }
 
+    @Override
     public V getLast()
     {
         for (int i = 0; i \< this.keys.length; i++)
@@ -1610,6 +1689,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         return null;
     }
 
+    @Override
     public V getOnly()
     {
         if (this.size() != 1)
@@ -1639,6 +1719,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         return null;
     }
 
+    @Override
     public MutableList\<V> toList()
     {
         MutableList\<V> list = Lists.mutable.of();
@@ -1646,26 +1727,31 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         return list;
     }
 
+    @Override
     public \<R extends Collection\<V>\> R into(R target)
     {
         return Iterate.addAllTo(this, target);
     }
 
+    @Override
     public MutableList\<V> toSortedList()
     {
         return this.toList().sortThis();
     }
 
+    @Override
     public MutableList\<V> toSortedList(Comparator\<? super V> comparator)
     {
         return this.toList().sortThis(comparator);
     }
 
+    @Override
     public \<VV extends Comparable\<? super VV>\> MutableList\<V> toSortedListBy(Function\<? super V, ? extends VV> function)
     {
         return this.toList().sortThis(Comparators.byFunction(function));
     }
 
+    @Override
     public MutableSet\<V> toSet()
     {
         MutableSet\<V> set = UnifiedSet.newSet();
@@ -1673,6 +1759,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         return set;
     }
 
+    @Override
     public MutableSortedSet\<V> toSortedSet()
     {
         MutableSortedSet\<V> set = TreeSortedSet.newSet();
@@ -1680,6 +1767,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         return set;
     }
 
+    @Override
     public MutableSortedSet\<V> toSortedSet(Comparator\<? super V> comparator)
     {
         MutableSortedSet\<V> set = TreeSortedSet.newSet(comparator);
@@ -1687,6 +1775,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         return set;
     }
 
+    @Override
     public \<VV extends Comparable\<? super VV>\> MutableSortedSet\<V> toSortedSetBy(Function\<? super V, ? extends VV> function)
     {
         MutableSortedSet\<V> set = TreeSortedSet.newSet(Comparators.byFunction(function));
@@ -1694,6 +1783,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         return set;
     }
 
+    @Override
     public MutableBag\<V> toBag()
     {
         MutableBag\<V> bag = Bags.mutable.of();
@@ -1701,6 +1791,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         return bag;
     }
 
+    @Override
     public MutableSortedBag\<V> toSortedBag()
     {
         MutableSortedBag\<V> sortedBag = TreeBag.newBag();
@@ -1708,6 +1799,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         return sortedBag;
     }
 
+    @Override
     public MutableSortedBag\<V> toSortedBag(Comparator\<? super V> comparator)
     {
         MutableSortedBag\<V> sortedBag = TreeBag.newBag(comparator);
@@ -1715,11 +1807,13 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         return sortedBag;
     }
 
+    @Override
     public \<VV extends Comparable\<? super VV>\> MutableSortedBag\<V> toSortedBagBy(Function\<? super V, ? extends VV> function)
     {
         return this.toSortedBag(Comparators.byFunction(function));
     }
 
+    @Override
     public \<NK, NV> MutableMap\<NK, NV> toMap(Function\<? super V, ? extends NK> keyFunction, Function\<? super V, ? extends NV> valueFunction)
     {
         UnifiedMap\<NK, NV> map = UnifiedMap.newMap();
@@ -1727,11 +1821,13 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         return map;
     }
 
+    @Override
     public \<NK, NV> MutableSortedMap\<NK, NV> toSortedMap(Function\<? super V, ? extends NK> keyFunction, Function\<? super V, ? extends NV> valueFunction)
     {
         return this.toSortedMap(Comparators.naturalOrder(), keyFunction, valueFunction);
     }
 
+    @Override
     public \<NK, NV> MutableSortedMap\<NK, NV> toSortedMap(Comparator\<? super NK> comparator, Function\<? super V, ? extends NK> keyFunction, Function\<? super V, ? extends NV> valueFunction)
     {
         TreeSortedMap\<NK, NV> sortedMap = TreeSortedMap.newMap(comparator);
@@ -1739,11 +1835,13 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         return sortedMap;
     }
 
+    @Override
     public LazyIterable\<V> asLazy()
     {
         return LazyIterate.adapt(this);
     }
 
+    @Override
     public V min(Comparator\<? super V> comparator)
     {
         if (this.isEmpty())
@@ -1778,6 +1876,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         return min;
     }
 
+    @Override
     public V max(Comparator\<? super V> comparator)
     {
         if (this.isEmpty())
@@ -1812,16 +1911,19 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         return max;
     }
 
+    @Override
     public V min()
     {
         return this.min(Comparators.naturalOrder());
     }
 
+    @Override
     public V max()
     {
         return this.max(Comparators.naturalOrder());
     }
 
+    @Override
     public \<VV extends Comparable\<? super VV>\> V maxBy(Function\<? super V, ? extends VV> function)
     {
         if (this.isEmpty())
@@ -1869,6 +1971,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         return max;
     }
 
+    @Override
     public \<VV extends Comparable\<? super VV>\> V minBy(Function\<? super V, ? extends VV> function)
     {
         if (this.isEmpty())
@@ -1916,6 +2019,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         return min;
     }
 
+    @Override
     public long sumOfInt(IntFunction\<? super V> function)
     {
         long sum = 0L;
@@ -1941,6 +2045,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         return sum;
     }
 
+    @Override
     public double sumOfFloat(FloatFunction\<? super V> function)
     {
         double sum = 0.0;
@@ -1976,6 +2081,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         return sum;
     }
 
+    @Override
     public long sumOfLong(LongFunction\<? super V> function)
     {
         long sum = 0L;
@@ -2001,6 +2107,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         return sum;
     }
 
+    @Override
     public double sumOfDouble(DoubleFunction\<? super V> function)
     {
         double sum = 0.0;
@@ -2036,30 +2143,35 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         return sum;
     }
 
+    @Override
     public \<V1> MutableObjectLongMap\<V1> sumByInt(Function\<? super V, ? extends V1> groupBy, IntFunction\<? super V> function)
     {
         MutableObjectLongMap\<V1> result = ObjectLongMaps.mutable.empty();
         return this.injectInto(result, PrimitiveFunctions.sumByIntFunction(groupBy, function));
     }
 
+    @Override
     public \<V1> MutableObjectDoubleMap\<V1> sumByFloat(Function\<? super V, ? extends V1> groupBy, FloatFunction\<? super V> function)
     {
         MutableObjectDoubleMap\<V1> result = ObjectDoubleMaps.mutable.empty();
         return this.injectInto(result, PrimitiveFunctions.sumByFloatFunction(groupBy, function));
     }
 
+    @Override
     public \<V1> MutableObjectLongMap\<V1> sumByLong(Function\<? super V, ? extends V1> groupBy, LongFunction\<? super V> function)
     {
         MutableObjectLongMap\<V1> result = ObjectLongMaps.mutable.empty();
         return this.injectInto(result, PrimitiveFunctions.sumByLongFunction(groupBy, function));
     }
 
+    @Override
     public \<V1> MutableObjectDoubleMap\<V1> sumByDouble(Function\<? super V, ? extends V1> groupBy, DoubleFunction\<? super V> function)
     {
         MutableObjectDoubleMap\<V1> result = ObjectDoubleMaps.mutable.empty();
         return this.injectInto(result, PrimitiveFunctions.sumByDoubleFunction(groupBy, function));
     }
 
+    @Override
     public void clear()
     {
         this.sentinelValues = null;
@@ -2074,6 +2186,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         Arrays.fill(this.values, null);
     }
 
+    @Override
     public V put(<type> key, V value)
     {
         if (isEmptyKey(key))
@@ -2114,11 +2227,13 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         return null;
     }
 
+    @Override
     public void putAll(<name>ObjectMap\<? extends V> map)
     {
         map.forEachKeyValue((<type> key, V value) -> <name>ObjectHashMap.this.put(key, value));
     }
 
+    @Override
     public boolean containsKey(<type> key)
     {
         if (isEmptyKey(key))
@@ -2132,6 +2247,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         return <(equals.(type))("this.keys[this.probe(key)]", "key")>;
     }
 
+    @Override
     public boolean containsValue(Object value)
     {
         if (this.sentinelValues != null && this.sentinelValues.containsValue((V) value))
@@ -2148,11 +2264,13 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         return false;
     }
 
+    @Override
     public V get(<type> key)
     {
         return this.getIfAbsent(key, Functions0.\<V>nullValue());
     }
 
+    @Override
     public V getIfAbsent(<type> key, Function0\<? extends V> ifAbsent)
     {
         if (isEmptyKey(key))
@@ -2179,6 +2297,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         return ifAbsent.value();
     }
 
+    @Override
     public V getIfAbsentPut(<type> key, V value)
     {
         if (isEmptyKey(key))
@@ -2224,6 +2343,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         return value;
     }
 
+    @Override
     public V getIfAbsentPut(<type> key, Function0\<? extends V> function)
     {
         if (isEmptyKey(key))
@@ -2274,6 +2394,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         return value;
     }
 
+    @Override
     public \<P> V getIfAbsentPutWith(<type> key, Function\<? super P, ? extends V> function, P parameter)
     {
         if (isEmptyKey(key))
@@ -2324,6 +2445,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         return value;
     }
 
+    @Override
     public V getIfAbsentPutWithKey(<type> key, <name>ToObjectFunction\<? extends V> function)
     {
         if (isEmptyKey(key))
@@ -2374,6 +2496,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         return value;
     }
 
+    @Override
     public V updateValue(<type> key, Function0\<? extends V> factory, Function\<? super V, ? extends V> function)
     {
         if (isEmptyKey(key))
@@ -2425,6 +2548,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         return value;
     }
 
+    @Override
     public \<P> V updateValueWith(<type> key, Function0\<? extends V> factory, Function2\<? super V, ? super P, ? extends V> function, P parameter)
     {
         if (isEmptyKey(key))
@@ -2476,6 +2600,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         return value;
     }
 
+    @Override
     public V removeKey(<type> key)
     {
         if (isEmptyKey(key))
@@ -2524,23 +2649,27 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         return null;
     }
 
+    @Override
     public V remove(<type> key)
     {
         return this.removeKey(key);
     }
 
+    @Override
     public <name>ObjectHashMap\<V> withKeyValue(<type> key, V value)
     {
         this.put(key, value);
         return this;
     }
 
+    @Override
     public Mutable<name>ObjectMap\<V> withoutKey(<type> key)
     {
         this.removeKey(key);
         return this;
     }
 
+    @Override
     public Mutable<name>ObjectMap\<V> withoutAllKeys(<name>Iterable keys)
     {
         <name>Iterator iterator = keys.<type>Iterator();
@@ -2576,21 +2705,25 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         return this;
     }
 
+    @Override
     public Mutable<name>ObjectMap\<V> asUnmodifiable()
     {
         return new Unmodifiable<name>ObjectMap\<V>(this);
     }
 
+    @Override
     public Mutable<name>ObjectMap\<V> asSynchronized()
     {
         return new Synchronized<name>ObjectMap\<V>(this);
     }
 
+    @Override
     public Immutable<name>ObjectMap\<V> toImmutable()
     {
         return <name>ObjectMaps.immutable.withAll(this);
     }
 
+    @Override
     public void writeExternal(ObjectOutput out) throws IOException
     {
         out.writeInt(this.size());
@@ -2617,6 +2750,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         }
     }
 
+    @Override
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
     {
         int size = in.readInt();
@@ -2714,11 +2848,13 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         private boolean handledZeroKey;
         private boolean handledOneKey;
 
+        @Override
         public boolean hasNext()
         {
             return this.count != <name>ObjectHashMap.this.size();
         }
 
+        @Override
         public V next()
         {
             if (!this.hasNext())
@@ -2758,6 +2894,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
             return result;
         }
 
+        @Override
         public void remove()
         {
             if (!this.isCurrentKeySet)
@@ -2780,6 +2917,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         }
     }
 
+    @Override
     public Mutable<name>Set keySet()
     {
         return new KeySet();
@@ -2869,11 +3007,13 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
 
     private class KeySet implements Mutable<name>Set
     {
+        @Override
         public Mutable<name>Iterator <type>Iterator()
         {
             return new KeysSetIterator();
         }
 
+        @Override
         public void forEach(<name>Procedure procedure)
         {
             this.each(procedure);
@@ -2882,11 +3022,13 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         /**
          * @since 7.0.
          */
+        @Override
         public void each(<name>Procedure procedure)
         {
             <name>ObjectHashMap.this.forEachKey(procedure);
         }
 
+        @Override
         public int count(<name>Predicate predicate)
         {
             int count = 0;
@@ -2911,6 +3053,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
             return count;
         }
 
+        @Override
         public boolean anySatisfy(<name>Predicate predicate)
         {
             if (<name>ObjectHashMap.this.sentinelValues != null)
@@ -2934,6 +3077,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
             return false;
         }
 
+        @Override
         public \<T> T injectInto(T injectedValue, Object<name>ToObjectFunction\<? super T, ? extends T> function)
         {
             T result = injectedValue;
@@ -2958,6 +3102,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
             return result;
         }
 
+        @Override
         public boolean allSatisfy(<name>Predicate predicate)
         {
             if (<name>ObjectHashMap.this.sentinelValues != null)
@@ -2981,26 +3126,31 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
             return true;
         }
 
+        @Override
         public boolean noneSatisfy(<name>Predicate predicate)
         {
             return !this.anySatisfy(predicate);
         }
 
+        @Override
         public boolean add(<type> element)
         {
             throw new UnsupportedOperationException("Cannot call add() on " + this.getClass().getSimpleName());
         }
 
+        @Override
         public boolean addAll(<type>... source)
         {
             throw new UnsupportedOperationException("Cannot call addAll() on " + this.getClass().getSimpleName());
         }
 
+        @Override
         public boolean addAll(<name>Iterable source)
         {
             throw new UnsupportedOperationException("Cannot call addAll() on " + this.getClass().getSimpleName());
         }
 
+        @Override
         public boolean remove(<type> key)
         {
             int oldSize = <name>ObjectHashMap.this.size();
@@ -3008,6 +3158,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
             return oldSize != <name>ObjectHashMap.this.size();
         }
 
+        @Override
         public boolean removeAll(<name>Iterable source)
         {
             int oldSize = <name>ObjectHashMap.this.size();
@@ -3019,6 +3170,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
             return oldSize != <name>ObjectHashMap.this.size();
         }
 
+        @Override
         public boolean removeAll(<type>... source)
         {
             int oldSize = <name>ObjectHashMap.this.size();
@@ -3029,6 +3181,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
             return oldSize != <name>ObjectHashMap.this.size();
         }
 
+        @Override
         public boolean retainAll(<name>Iterable source)
         {
             int oldSize = this.size();
@@ -3046,16 +3199,19 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
             return false;
         }
 
+        @Override
         public boolean retainAll(<type>... source)
         {
             return this.retainAll(<name>HashSet.newSetWith(source));
         }
 
+        @Override
         public void clear()
         {
             <name>ObjectHashMap.this.clear();
         }
 
+        @Override
         public Mutable<name>Set select(<name>Predicate predicate)
         {
             Mutable<name>Set result = new <name>HashSet();
@@ -3080,6 +3236,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
             return result;
         }
 
+        @Override
         public Mutable<name>Set reject(<name>Predicate predicate)
         {
             Mutable<name>Set result = new <name>HashSet();
@@ -3104,26 +3261,31 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
             return result;
         }
 
+        @Override
         public Mutable<name>Set with(<type> element)
         {
             throw new UnsupportedOperationException("Cannot call with() on " + this.getClass().getSimpleName());
         }
 
+        @Override
         public Mutable<name>Set without(<type> element)
         {
             throw new UnsupportedOperationException("Cannot call without() on " + this.getClass().getSimpleName());
         }
 
+        @Override
         public Mutable<name>Set withAll(<name>Iterable elements)
         {
             throw new UnsupportedOperationException("Cannot call withAll() on " + this.getClass().getSimpleName());
         }
 
+        @Override
         public Mutable<name>Set withoutAll(<name>Iterable elements)
         {
             throw new UnsupportedOperationException("Cannot call withoutAll() on " + this.getClass().getSimpleName());
         }
 
+        @Override
         public <type> detectIfNone(<name>Predicate predicate, <type> ifNone)
         {
             if (<name>ObjectHashMap.this.sentinelValues != null)
@@ -3147,6 +3309,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
             return ifNone;
         }
 
+        @Override
         public \<V> MutableSet\<V> collect(<name>ToObjectFunction\<? extends V> function)
         {
             MutableSet\<V> result = Sets.mutable.with();
@@ -3171,16 +3334,19 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
             return result;
         }
 
+        @Override
         public Mutable<name>Set asUnmodifiable()
         {
             return Unmodifiable<name>Set.of(this);
         }
 
+        @Override
         public Mutable<name>Set asSynchronized()
         {
             return Synchronized<name>Set.of(this);
         }
 
+        @Override
         <if(primitive.floatingPoint)>public <wideType.(type)> sum()
 {
     <wideType.(type)> result = <wideZero.(type)>;
@@ -3240,6 +3406,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
 }
 
         <endif>
+        @Override
         public <type> max()
         {
             if (<name>ObjectHashMap.this.isEmpty())
@@ -3274,6 +3441,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
             return max;
         }
 
+        @Override
         public <type> maxIfEmpty(<type> defaultValue)
         {
             if (<name>ObjectHashMap.this.isEmpty())
@@ -3284,6 +3452,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
             return this.max();
         }
 
+        @Override
         public <type> min()
         {
             if (<name>ObjectHashMap.this.isEmpty())
@@ -3318,6 +3487,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
             return min;
         }
 
+        @Override
         public <type> minIfEmpty(<type> defaultValue)
         {
             if (<name>ObjectHashMap.this.isEmpty())
@@ -3328,6 +3498,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
             return this.min();
         }
 
+        @Override
         public double average()
         {
             if (<name>ObjectHashMap.this.isEmpty())
@@ -3337,6 +3508,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
             return (double) this.sum() / (double) this.size();
         }
 
+        @Override
         public double median()
         {
             if (<name>ObjectHashMap.this.isEmpty())
@@ -3354,6 +3526,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
             return (double) sortedArray[middleIndex];
         }
 
+        @Override
         public <type>[] toSortedArray()
         {
             <type>[] array = this.toArray();
@@ -3361,11 +3534,13 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
             return array;
         }
 
+        @Override
         public Mutable<name>List toSortedList()
         {
             return <name>ArrayList.newList(this).sortThis();
         }
 
+        @Override
         public <type>[] toArray()
         {
             int size = <name>ObjectHashMap.this.size();
@@ -3374,6 +3549,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
             {
                 private int index;
 
+                @Override
                 public void value(<type> each)
                 {
                     result[this.index] = each;
@@ -3383,11 +3559,13 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
             return result;
         }
 
+        @Override
         public boolean contains(<type> value)
         {
             return <name>ObjectHashMap.this.containsKey(value);
         }
 
+        @Override
         public boolean containsAll(<type>... source)
         {
             for (<type> item : source)
@@ -3400,6 +3578,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
             return true;
         }
 
+        @Override
         public boolean containsAll(<name>Iterable source)
         {
             <name>Iterator iterator = source.<type>Iterator();
@@ -3413,26 +3592,31 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
             return true;
         }
 
+        @Override
         public Mutable<name>List toList()
         {
             return <name>ArrayList.newList(this);
         }
 
+        @Override
         public Mutable<name>Set toSet()
         {
             return <name>HashSet.newSet(this);
         }
 
+        @Override
         public Mutable<name>Bag toBag()
         {
             return <name>HashBag.newBag(this);
         }
 
+        @Override
         public Lazy<name>Iterable asLazy()
         {
             return new Lazy<name>IterableAdapter(this);
         }
 
+        @Override
         public <name>Set freeze()
         {
             <name>ObjectHashMap.this.copyKeysOnWrite = true;
@@ -3446,21 +3630,25 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
             return new Immutable<name>MapKeySet(<name>ObjectHashMap.this.keys, <name>ObjectHashMap.this.occupiedWithData, containsZeroKey, containsOneKey);
         }
 
+        @Override
         public Immutable<name>Set toImmutable()
         {
             return <name>Sets.immutable.withAll(this);
         }
 
+        @Override
         public int size()
         {
             return <name>ObjectHashMap.this.size();
         }
 
+        @Override
         public boolean isEmpty()
         {
             return <name>ObjectHashMap.this.isEmpty();
         }
 
+        @Override
         public boolean notEmpty()
         {
             return <name>ObjectHashMap.this.notEmpty();
@@ -3516,16 +3704,19 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
             return this.makeString("[", ", ", "]");
         }
 
+        @Override
         public String makeString()
         {
             return this.makeString(", ");
         }
 
+        @Override
         public String makeString(String separator)
         {
             return this.makeString("", separator, "");
         }
 
+        @Override
         public String makeString(String start, String separator, String end)
         {
             Appendable stringBuilder = new StringBuilder();
@@ -3533,16 +3724,19 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
             return stringBuilder.toString();
         }
 
+        @Override
         public void appendString(Appendable appendable)
         {
             this.appendString(appendable, ", ");
         }
 
+        @Override
         public void appendString(Appendable appendable, String separator)
         {
             this.appendString(appendable, "", separator, "");
         }
 
+        @Override
         public void appendString(Appendable appendable, String start, String separator, String end)
         {
             try
@@ -3596,11 +3790,13 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         private boolean handledOneKey;
         private boolean canRemove;
 
+        @Override
         public boolean hasNext()
         {
             return this.count != <name>ObjectHashMap.this.size();
         }
 
+        @Override
         public <type> next()
         {
             if (!this.hasNext())
@@ -3638,6 +3834,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
             return this.lastKey;
         }
 
+        @Override
         public void remove()
         {
             if (!this.canRemove)
@@ -3650,16 +3847,19 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         }
     }
 
+    @Override
     public Collection\<V> values()
     {
         return new ValuesCollection();
     }
 
+    @Override
     public Lazy<name>Iterable keysView()
     {
         return new KeysView();
     }
 
+    @Override
     public RichIterable\<<name>ObjectPair\<V>\> keyValuesView()
     {
         return new KeyValuesView();
@@ -3667,42 +3867,50 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
 
     protected class ValuesCollection implements Collection\<V>
     {
+        @Override
         public boolean add(V v)
         {
             throw new UnsupportedOperationException("Cannot call add() on " + this.getClass().getSimpleName());
         }
 
+        @Override
         public boolean addAll(Collection\<? extends V> collection)
         {
             throw new UnsupportedOperationException("Cannot call addAll() on " + this.getClass().getSimpleName());
         }
 
+        @Override
         public void clear()
         {
             <name>ObjectHashMap.this.clear();
         }
 
+        @Override
         public boolean contains(Object o)
         {
             return <name>ObjectHashMap.this.containsValue(o);
         }
 
+        @Override
         public boolean containsAll(Collection\<?> collection)
         {
             // todo: this is N^2. if c is large, we should copy the values to a set.
             return Iterate.allSatisfy(collection, Predicates.in(this));
         }
 
+        @Override
         public boolean isEmpty()
         {
             return <name>ObjectHashMap.this.isEmpty();
         }
 
+        @Override
         public Iterator\<V> iterator()
         {
             return <name>ObjectHashMap.this.iterator();
         }
 
+        @Override
         public boolean remove(Object o)
         {
             // this is so slow that the extra overhead of the iterator won't be noticeable
@@ -3732,6 +3940,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
             return false;
         }
 
+        @Override
         public boolean removeAll(Collection\<?> collection)
         {
             // todo: this is N^2. if c is large, we should copy the values to a set.
@@ -3747,6 +3956,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
             return changed;
         }
 
+        @Override
         public boolean retainAll(Collection\<?> collection)
         {
             boolean modified = false;
@@ -3762,16 +3972,19 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
             return modified;
         }
 
+        @Override
         public int size()
         {
             return <name>ObjectHashMap.this.size();
         }
 
+        @Override
         public Object[] toArray()
         {
             return <name>ObjectHashMap.this.toArray();
         }
 
+        @Override
         public \<T> T[] toArray(T[] result)
         {
             return <name>ObjectHashMap.this.toArray(result);
@@ -3780,16 +3993,19 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
 
     private class KeysView extends AbstractLazy<name>Iterable
     {
+        @Override
         public <name>Iterator <type>Iterator()
         {
             return new Unmodifiable<name>Iterator(new KeysSetIterator());
         }
 
+        @Override
         public void forEach(<name>Procedure procedure)
         {
             this.each(procedure);
         }
 
+        @Override
         public void each(<name>Procedure procedure)
         {
             <name>ObjectHashMap.this.forEachKey(procedure);
@@ -3798,6 +4014,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
 
     private class KeyValuesView extends AbstractLazyIterable\<<name>ObjectPair\<V>\>
     {
+        @Override
         public void each(Procedure\<? super <name>ObjectPair\<V>\> procedure)
         {
             if (<name>ObjectHashMap.this.sentinelValues != null)
@@ -3820,6 +4037,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
             }
         }
 
+        @Override
         public void forEachWithIndex(ObjectIntProcedure\<? super <name>ObjectPair\<V>\> objectIntProcedure)
         {
             int index = 0;
@@ -3846,6 +4064,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
             }
         }
 
+        @Override
         public \<P> void forEachWith(Procedure2\<? super <name>ObjectPair\<V>, ? super P> procedure, P parameter)
         {
             if (<name>ObjectHashMap.this.sentinelValues != null)
@@ -3868,6 +4087,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
             }
         }
 
+        @Override
         public Iterator\<<name>ObjectPair\<V>\> iterator()
         {
             return new InternalKeyValuesIterator();
@@ -3880,6 +4100,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
             private boolean handledZero;
             private boolean handledOne;
 
+            @Override
             public <name>ObjectPair\<V> next()
             {
                 if (!this.hasNext())
@@ -3915,11 +4136,13 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
                 return result;
             }
 
+            @Override
             public void remove()
             {
                 throw new UnsupportedOperationException("Cannot call remove() on " + this.getClass().getSimpleName());
             }
 
+            @Override
             public boolean hasNext()
             {
                 return this.count != <name>ObjectHashMap.this.size();

@@ -110,6 +110,7 @@ public final class Synchronized<name>Bag
         return this;
     }
 
+    @Override
     public void addOccurrences(<type> item, int occurrences)
     {
         synchronized (this.getLock())
@@ -118,6 +119,7 @@ public final class Synchronized<name>Bag
         }
     }
 
+    @Override
     public boolean removeOccurrences(<type> item, int occurrences)
     {
         synchronized (this.getLock())
@@ -126,6 +128,7 @@ public final class Synchronized<name>Bag
         }
     }
 
+    @Override
     public int sizeDistinct()
     {
         synchronized (this.getLock())
@@ -134,6 +137,7 @@ public final class Synchronized<name>Bag
         }
     }
 
+    @Override
     public int occurrencesOf(<type> item)
     {
         synchronized (this.getLock())
@@ -142,6 +146,7 @@ public final class Synchronized<name>Bag
         }
     }
 
+    @Override
     public void forEachWithOccurrences(<name>IntProcedure procedure)
     {
         synchronized (this.getLock())
@@ -159,6 +164,7 @@ public final class Synchronized<name>Bag
         }
     }
 
+    @Override
     public Mutable<name>Bag selectByOccurrences(IntPredicate predicate)
     {
         synchronized (this.getLock())
@@ -167,6 +173,7 @@ public final class Synchronized<name>Bag
         }
     }
 
+    @Override
     public MutableList\<<name>IntPair> topOccurrences(int count)
     {
         synchronized (this.getLock())
@@ -175,6 +182,7 @@ public final class Synchronized<name>Bag
         }
     }
 
+    @Override
     public MutableList\<<name>IntPair> bottomOccurrences(int count)
     {
         synchronized (this.getLock())

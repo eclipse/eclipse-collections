@@ -60,11 +60,13 @@ final class Immutable<name>SingletonStack implements Immutable<name>Stack, Seria
         this.element1 = element;
     }
 
+    @Override
     public <name>Iterator <type>Iterator()
     {
         return new Unmodifiable<name>Iterator(<name>ArrayStack.newStackWith(this.element1).<type>Iterator());
     }
 
+    @Override
     public void forEach(<name>Procedure procedure)
     {
         this.each(procedure);
@@ -73,36 +75,43 @@ final class Immutable<name>SingletonStack implements Immutable<name>Stack, Seria
     /**
      * @since 7.0.
      */
+    @Override
     public void each(<name>Procedure procedure)
     {
         procedure.value(this.element1);
     }
 
+    @Override
     public int count(<name>Predicate predicate)
     {
         return predicate.accept(this.element1) ? 1 : 0;
     }
 
+    @Override
     public boolean anySatisfy(<name>Predicate predicate)
     {
         return predicate.accept(this.element1);
     }
 
+    @Override
     public boolean allSatisfy(<name>Predicate predicate)
     {
         return predicate.accept(this.element1);
     }
 
+    @Override
     public boolean noneSatisfy(<name>Predicate predicate)
     {
         return !predicate.accept(this.element1);
     }
 
+    @Override
     public <type> peek()
     {
         return this.element1;
     }
 
+    @Override
     public <name>List peek(int count)
     {
         this.checkNegativeCount(count);
@@ -117,6 +126,7 @@ final class Immutable<name>SingletonStack implements Immutable<name>Stack, Seria
         throw new IllegalArgumentException("Count must be less than or equal to size: Count = " + count + " Size = 1");
     }
 
+    @Override
     public <type> peekAt(int index)
     {
         this.checkNegativeCount(index);
@@ -127,39 +137,46 @@ final class Immutable<name>SingletonStack implements Immutable<name>Stack, Seria
         throw new IllegalArgumentException("Index must be less than size: Index = " + index + " Size = 1");
     }
 
+    @Override
     public Immutable<name>Stack select(<name>Predicate predicate)
     {
         return predicate.accept(this.element1) ? <name>Stacks.immutable.with(this.element1)
                 : <name>Stacks.immutable.with();
     }
 
+    @Override
     public Immutable<name>Stack reject(<name>Predicate predicate)
     {
         return predicate.accept(this.element1) ? <name>Stacks.immutable.with()
                 : <name>Stacks.immutable.with(this.element1);
     }
 
+    @Override
     public <type> detectIfNone(<name>Predicate predicate, <type> ifNone)
     {
         return predicate.accept(this.element1) ? this.element1 : ifNone;
     }
 
+    @Override
     public \<V> ImmutableStack\<V> collect(<name>ToObjectFunction\<? extends V> function)
     {
         return Stacks.immutable.with(function.valueOf(this.element1));
     }
 
     <(arithmeticMethods.(type))(name, type)>
+    @Override
     public <type>[] toArray()
     {
         return new <type>[]{this.element1};
     }
 
+    @Override
     public boolean contains(<type> value)
     {
         return <(equals.(type))("this.element1", "value")>;
     }
 
+    @Override
     public boolean containsAll(<type>... source)
     {
         for (<type> value : source)
@@ -172,6 +189,7 @@ final class Immutable<name>SingletonStack implements Immutable<name>Stack, Seria
         return true;
     }
 
+    @Override
     public boolean containsAll(<name>Iterable source)
     {
         for (<name>Iterator iterator = source.<type>Iterator(); iterator.hasNext(); )
@@ -184,41 +202,49 @@ final class Immutable<name>SingletonStack implements Immutable<name>Stack, Seria
         return true;
     }
 
+    @Override
     public Mutable<name>List toList()
     {
         return <name>ArrayList.newListWith(this.element1);
     }
 
+    @Override
     public Mutable<name>Set toSet()
     {
         return <name>HashSet.newSetWith(this.element1);
     }
 
+    @Override
     public Mutable<name>Bag toBag()
     {
         return <name>HashBag.newBagWith(this.element1);
     }
 
+    @Override
     public Lazy<name>Iterable asLazy()
     {
         return new Lazy<name>IterableAdapter(this);
     }
 
+    @Override
     public Immutable<name>Stack toImmutable()
     {
         return this;
     }
 
+    @Override
     public Immutable<name>Stack push(<type> element)
     {
         return <name>Stacks.immutable.with(this.element1, element);
     }
 
+    @Override
     public Immutable<name>Stack pop()
     {
         return <name>Stacks.immutable.with();
     }
 
+    @Override
     public Immutable<name>Stack pop(int count)
     {
         this.checkNegativeCount(count);
@@ -241,41 +267,49 @@ final class Immutable<name>SingletonStack implements Immutable<name>Stack, Seria
         }
     }
 
+    @Override
     public int size()
     {
         return 1;
     }
 
+    @Override
     public boolean isEmpty()
     {
         return false;
     }
 
+    @Override
     public boolean notEmpty()
     {
         return true;
     }
 
+    @Override
     public \<T> T injectInto(T injectedValue, Object<name>ToObjectFunction\<? super T, ? extends T> function)
     {
         return function.valueOf(injectedValue, this.element1);
     }
 
+    @Override
     public <type> getFirst()
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".getFirst() not implemented yet");
     }
 
+    @Override
     public int indexOf(<type> value)
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".indexOf() not implemented yet");
     }
 
+    @Override
     public \<T> T injectIntoWithIndex(T injectedValue, Object<name>IntToObjectFunction\<? super T, ? extends T> function)
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".injectIntoWithIndex() not implemented yet");
     }
 
+    @Override
     public void forEachWithIndex(<name>IntProcedure procedure)
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".forEachWithIndex() not implemented yet");
@@ -312,16 +346,19 @@ final class Immutable<name>SingletonStack implements Immutable<name>Stack, Seria
         return "[" + this.element1 + ']';
     }
 
+    @Override
     public String makeString()
     {
         return this.makeString(", ");
     }
 
+    @Override
     public String makeString(String separator)
     {
         return this.makeString("", separator, "");
     }
 
+    @Override
     public String makeString(String start, String separator, String end)
     {
         Appendable stringBuilder = new StringBuilder();
@@ -329,16 +366,19 @@ final class Immutable<name>SingletonStack implements Immutable<name>Stack, Seria
         return stringBuilder.toString();
     }
 
+    @Override
     public void appendString(Appendable appendable)
     {
         this.appendString(appendable, ", ");
     }
 
+    @Override
     public void appendString(Appendable appendable, String separator)
     {
         this.appendString(appendable, "", separator, "");
     }
 
+    @Override
     public void appendString(Appendable appendable, String start, String separator, String end)
     {
         try
@@ -368,46 +408,55 @@ arithmeticMethods ::= [
     ]
 
 allMethods(name, type) ::=<<
+@Override
 public <wideType.(type)> sum()
 {
     return this.element1;
 }
 
+@Override
 public <type> max()
 {
     return this.element1;
 }
 
+@Override
 public <type> maxIfEmpty(<type> defaultValue)
 {
     return this.element1;
 }
 
+@Override
 public <type> min()
 {
     return this.element1;
 }
 
+@Override
 public <type> minIfEmpty(<type> defaultValue)
 {
     return this.element1;
 }
 
+@Override
 public double average()
 {
     return this.element1;
 }
 
+@Override
 public double median()
 {
     return this.element1;
 }
 
+@Override
 public <type>[] toSortedArray()
 {
     return new <type>[]{this.element1};
 }
 
+@Override
 public Mutable<name>List toSortedList()
 {
     return <name>ArrayList.newListWith(this.element1);

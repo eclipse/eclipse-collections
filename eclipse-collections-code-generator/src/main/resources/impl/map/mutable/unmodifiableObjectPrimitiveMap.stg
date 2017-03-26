@@ -84,56 +84,67 @@ public final class UnmodifiableObject<name>Map\<K>
         return result;
     }
 
+    @Override
     public void clear()
     {
         throw new UnsupportedOperationException("Cannot call clear() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public void put(K key, <type> value)
     {
         throw new UnsupportedOperationException("Cannot call put() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public void putAll(Object<name>Map\<? extends K> map)
     {
         throw new UnsupportedOperationException("Cannot call putAll() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public void removeKey(K key)
     {
         throw new UnsupportedOperationException("Cannot call removeKey() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public void remove(Object key)
     {
         throw new UnsupportedOperationException("Cannot call remove() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public <type> removeKeyIfAbsent(K key, <type> value)
     {
         throw new UnsupportedOperationException("Cannot call removeKeyIfAbsent() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public <type> getIfAbsentPut(K key, <type> value)
     {
         return this.getIfAbsentThrow(key);
     }
 
+    @Override
     public <type> getIfAbsentPut(K key, <name>Function0 function)
     {
         return this.getIfAbsentThrow(key);
     }
 
+    @Override
     public <type> getIfAbsentPutWithKey(K key, <name>Function\<? super K> function)
     {
         return this.getIfAbsentThrow(key);
     }
 
+    @Override
     public \<P> <type> getIfAbsentPutWith(K key, <name>Function\<? super P> function, P parameter)
     {
         return this.getIfAbsentThrow(key);
     }
 
+    @Override
     public <type> updateValue(K key, <type> initialValueIfAbsent, <name>To<name>Function function)
     {
         throw new UnsupportedOperationException("Cannot call updateValue() on " + this.getClass().getSimpleName());
@@ -144,61 +155,73 @@ public final class UnmodifiableObject<name>Map\<K>
         throw new UnsupportedOperationException("Cannot call addToValue() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public <type> get(Object key)
     {
         return this.map.get(key);
     }
 
+    @Override
     public <type> getOrThrow(Object key)
     {
         return this.map.getOrThrow(key);
     }
 
+    @Override
     public <type> getIfAbsent(Object key, <type> ifAbsent)
     {
         return this.map.getIfAbsent(key, ifAbsent);
     }
 
+    @Override
     public boolean containsKey(Object key)
     {
         return this.map.containsKey(key);
     }
 
+    @Override
     public boolean containsValue(<type> value)
     {
         return this.map.containsValue(value);
     }
 
+    @Override
     public void forEachValue(<name>Procedure procedure)
     {
         this.map.forEachValue(procedure);
     }
 
+    @Override
     public void forEachKey(Procedure\<? super K> procedure)
     {
         this.map.forEachKey(procedure);
     }
 
+    @Override
     public void forEachKeyValue(Object<name>Procedure\<? super K> procedure)
     {
         this.map.forEachKeyValue(procedure);
     }
 
+    @Override
     public MutableObject<name>Map\<K> select(Object<name>Predicate\<? super K> predicate)
     {
         return this.map.select(predicate);
     }
 
+    @Override
     public MutableObject<name>Map\<K> reject(Object<name>Predicate\<? super K> predicate)
     {
         return this.map.reject(predicate);
     }
 
+    @Override
     public Mutable<name>Iterator <type>Iterator()
     {
         return new Unmodifiable<name>Iterator(this.map.<type>Iterator());
     }
 
+    @Override
     public void forEach(<name>Procedure procedure)
     {
         this.each(procedure);
@@ -207,152 +230,182 @@ public final class UnmodifiableObject<name>Map\<K>
     /**
      * @since 7.0.
      */
+    @Override
     public void each(<name>Procedure procedure)
     {
         this.map.forEach(procedure);
     }
 
+    @Override
     public int count(<name>Predicate predicate)
     {
         return this.map.count(predicate);
     }
 
+    @Override
     public boolean anySatisfy(<name>Predicate predicate)
     {
         return this.map.anySatisfy(predicate);
     }
 
+    @Override
     public boolean allSatisfy(<name>Predicate predicate)
     {
         return this.map.allSatisfy(predicate);
     }
 
+    @Override
     public boolean noneSatisfy(<name>Predicate predicate)
     {
         return this.map.noneSatisfy(predicate);
     }
 
+    @Override
     public Mutable<name>Collection select(<name>Predicate predicate)
     {
         return this.map.select(predicate);
     }
 
+    @Override
     public Mutable<name>Collection reject(<name>Predicate predicate)
     {
         return this.map.reject(predicate);
     }
 
+    @Override
     public <type> detectIfNone(<name>Predicate predicate, <type> ifNone)
     {
         return this.map.detectIfNone(predicate, ifNone);
     }
 
+    @Override
     public \<V1> MutableCollection\<V1> collect(<name>ToObjectFunction\<? extends V1> function)
     {
         return this.map.collect(function);
     }
 
     <(arithmeticMethods.(type))(name, type)>
+    @Override
     public <type>[] toArray()
     {
         return this.map.toArray();
     }
 
+    @Override
     public boolean contains(<type> value)
     {
         return this.map.contains(value);
     }
 
+    @Override
     public boolean containsAll(<type>... source)
     {
         return this.map.containsAll(source);
     }
 
+    @Override
     public boolean containsAll(<name>Iterable source)
     {
         return this.map.containsAll(source);
     }
 
+    @Override
     public Mutable<name>List toList()
     {
         return this.map.toList();
     }
 
+    @Override
     public Mutable<name>Set toSet()
     {
         return this.map.toSet();
     }
 
+    @Override
     public Mutable<name>Bag toBag()
     {
         return this.map.toBag();
     }
 
+    @Override
     public Lazy<name>Iterable asLazy()
     {
         return this.map.asLazy();
     }
 
+    @Override
     public MutableObject<name>Map\<K> withKeyValue(K key, <type> value)
     {
         throw new UnsupportedOperationException("Cannot call withKeyValue() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public MutableObject<name>Map\<K> withoutKey(K key)
     {
         throw new UnsupportedOperationException("Cannot call withoutKey() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public MutableObject<name>Map\<K> withoutAllKeys(Iterable\<? extends K> keys)
     {
         throw new UnsupportedOperationException("Cannot call withoutAllKeys() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public MutableObject<name>Map\<K> asUnmodifiable()
     {
         return this;
     }
 
+    @Override
     public MutableObject<name>Map\<K> asSynchronized()
     {
         return new SynchronizedObject<name>Map\<K>(this);
     }
 
+    @Override
     public ImmutableObject<name>Map\<K> toImmutable()
     {
         return Object<name>Maps.immutable.withAll(this);
     }
 
+    @Override
     public int size()
     {
         return this.map.size();
     }
 
+    @Override
     public boolean isEmpty()
     {
         return this.map.isEmpty();
     }
 
+    @Override
     public boolean notEmpty()
     {
         return this.map.notEmpty();
     }
 
+    @Override
     public Set\<K> keySet()
     {
         return Collections.unmodifiableSet(this.map.keySet());
     }
 
+    @Override
     public Mutable<name>Collection values()
     {
         return Unmodifiable<name>Collection.of(this.map.values());
     }
 
+    @Override
     public LazyIterable\<K> keysView()
     {
         return this.map.keysView();
     }
 
+    @Override
     public RichIterable\<Object<name>Pair\<K>\> keyValuesView()
     {
         return this.map.keyValuesView();
@@ -376,36 +429,43 @@ public final class UnmodifiableObject<name>Map\<K>
         return this.map.toString();
     }
 
+    @Override
     public String makeString()
     {
         return this.map.makeString();
     }
 
+    @Override
     public String makeString(String separator)
     {
         return this.map.makeString(separator);
     }
 
+    @Override
     public String makeString(String start, String separator, String end)
     {
         return this.map.makeString(start, separator, end);
     }
 
+    @Override
     public void appendString(Appendable appendable)
     {
         this.map.appendString(appendable);
     }
 
+    @Override
     public void appendString(Appendable appendable, String separator)
     {
         this.map.appendString(appendable, separator);
     }
 
+    @Override
     public void appendString(Appendable appendable, String start, String separator, String end)
     {
         this.map.appendString(appendable, start, separator, end);
     }
 
+    @Override
     public \<T> T injectInto(T injectedValue, Object<name>ToObjectFunction\<? super T, ? extends T> function)
     {
         return this.map.injectInto(injectedValue, function);
@@ -426,46 +486,55 @@ arithmeticMethods ::= [
     ]
 
 allMethods(name, type) ::=<<
+@Override
 public <wideType.(type)> sum()
 {
     return this.map.sum();
 }
 
+@Override
 public <type> max()
 {
     return this.map.max();
 }
 
+@Override
 public <type> maxIfEmpty(<type> defaultValue)
 {
     return this.map.maxIfEmpty(defaultValue);
 }
 
+@Override
 public <type> min()
 {
     return this.map.min();
 }
 
+@Override
 public <type> minIfEmpty(<type> defaultValue)
 {
     return this.map.minIfEmpty(defaultValue);
 }
 
+@Override
 public double average()
 {
     return this.map.average();
 }
 
+@Override
 public double median()
 {
     return this.map.median();
 }
 
+@Override
 public <type>[] toSortedArray()
 {
     return this.map.toSortedArray();
 }
 
+@Override
 public Mutable<name>List toSortedList()
 {
     return this.map.toSortedList();

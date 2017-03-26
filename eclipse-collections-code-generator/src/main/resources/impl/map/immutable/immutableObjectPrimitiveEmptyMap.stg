@@ -71,11 +71,13 @@ final class ImmutableObject<name>EmptyMap\<K> implements ImmutableObject<name>Ma
         return INSTANCE;
     }
 
+    @Override
     public <name>Iterator <type>Iterator()
     {
         return ImmutableEmpty<name>Iterator.INSTANCE;
     }
 
+    @Override
     public void forEach(<name>Procedure procedure)
     {
     }
@@ -83,193 +85,232 @@ final class ImmutableObject<name>EmptyMap\<K> implements ImmutableObject<name>Ma
     /**
      * @since 7.0.
      */
+    @Override
     public void each(<name>Procedure procedure)
     {
     }
 
+    @Override
     public int count(<name>Predicate predicate)
     {
         return 0;
     }
 
+    @Override
     public boolean anySatisfy(<name>Predicate predicate)
     {
         return false;
     }
 
+    @Override
     public boolean allSatisfy(<name>Predicate predicate)
     {
         return true;
     }
 
+    @Override
     public boolean noneSatisfy(<name>Predicate predicate)
     {
         return true;
     }
 
+    @Override
     public Immutable<name>Collection select(<name>Predicate predicate)
     {
         return <name>Lists.immutable.with();
     }
 
+    @Override
     public Immutable<name>Collection reject(<name>Predicate predicate)
     {
         return <name>Lists.immutable.with();
     }
 
+    @Override
     public <type> detectIfNone(<name>Predicate predicate, <type> ifNone)
     {
         return ifNone;
     }
 
+    @Override
     public \<V> ImmutableCollection\<V> collect(<name>ToObjectFunction\<? extends V> function)
     {
         return Lists.immutable.of();
     }
 
     <(arithmeticMethods.(type))()>
+    @Override
     public <type>[] toArray()
     {
         return new <type>[0];
     }
 
+    @Override
     public boolean contains(<type> value)
     {
         return false;
     }
 
+    @Override
     public boolean containsAll(<type>... source)
     {
         return source.length == 0;
     }
 
+    @Override
     public boolean containsAll(<name>Iterable source)
     {
         return source.isEmpty();
     }
 
+    @Override
     public Mutable<name>List toList()
     {
         return new <name>ArrayList();
     }
 
+    @Override
     public Mutable<name>Set toSet()
     {
         return new <name>HashSet();
     }
 
+    @Override
     public Mutable<name>Bag toBag()
     {
         return new <name>HashBag();
     }
 
+    @Override
     public Lazy<name>Iterable asLazy()
     {
         return new Lazy<name>IterableAdapter(this);
     }
 
+    @Override
     public ImmutableObject<name>Map\<K> newWithKeyValue(K key, <type> value)
     {
         return new ImmutableObject<name>SingletonMap\<K>(key, value);
     }
 
+    @Override
     public ImmutableObject<name>Map\<K> newWithoutKey(K key)
     {
         return this;
     }
 
+    @Override
     public ImmutableObject<name>Map\<K> newWithoutAllKeys(Iterable\<? extends K> keys)
     {
         return this;
     }
 
+    @Override
     public <type> get(Object key)
     {
         return EMPTY_VALUE;
     }
 
+    @Override
     public <type> getOrThrow(Object key)
     {
         throw new IllegalStateException("Key " + key + " not present.");
     }
 
+    @Override
     public <type> getIfAbsent(Object key, <type> ifAbsent)
     {
         return ifAbsent;
     }
 
+    @Override
     public boolean containsKey(Object key)
     {
         return false;
     }
 
+    @Override
     public boolean containsValue(<type> value)
     {
         return false;
     }
 
+    @Override
     public void forEachValue(<name>Procedure procedure)
     {
     }
 
+    @Override
     public void forEachKey(Procedure\<? super K> procedure)
     {
     }
 
+    @Override
     public void forEachKeyValue(Object<name>Procedure\<? super K> object<name>Procedure)
     {
     }
 
+    @Override
     public ImmutableObject<name>Map\<K> select(Object<name>Predicate\<? super K> object<name>Predicate)
     {
         return this;
     }
 
+    @Override
     public ImmutableObject<name>Map\<K> reject(Object<name>Predicate\<? super K> object<name>Predicate)
     {
         return this;
     }
 
+    @Override
     public ImmutableObject<name>Map\<K> toImmutable()
     {
         return this;
     }
 
+    @Override
     public int size()
     {
         return 0;
     }
 
+    @Override
     public boolean isEmpty()
     {
         return true;
     }
 
+    @Override
     public boolean notEmpty()
     {
         return false;
     }
 
+    @Override
     public \<T> T injectInto(T injectedValue, Object<name>ToObjectFunction\<? super T, ? extends T> function)
     {
         return injectedValue;
     }
 
+    @Override
     public Set\<K> keySet()
     {
         return Sets.immutable.\<K>of().castToSet();
     }
 
+    @Override
     public Mutable<name>Collection values()
     {
         return Unmodifiable<name>Collection.of(new <name>ArrayList());
     }
 
+    @Override
     public LazyIterable\<K> keysView()
     {
         return LazyIterate.empty();
     }
 
+    @Override
     public RichIterable\<Object<name>Pair\<K>\> keyValuesView()
     {
         return LazyIterate.empty();
@@ -302,29 +343,35 @@ final class ImmutableObject<name>EmptyMap\<K> implements ImmutableObject<name>Ma
         return "{}";
     }
 
+    @Override
     public String makeString()
     {
         return "";
     }
 
+    @Override
     public String makeString(String separator)
     {
         return "";
     }
 
+    @Override
     public String makeString(String start, String separator, String end)
     {
         return start + end;
     }
 
+    @Override
     public void appendString(Appendable appendable)
     {
     }
 
+    @Override
     public void appendString(Appendable appendable, String separator)
     {
     }
 
+    @Override
     public void appendString(Appendable appendable, String start, String separator, String end)
     {
         try
@@ -353,46 +400,55 @@ arithmeticMethods ::= [
     ]
 
 allMethods() ::= <<
+@Override
 public <wideType.(type)> sum()
 {
     return <wideZero.(type)>;
 }
 
+@Override
 public <type> min()
 {
     throw new NoSuchElementException();
 }
 
+@Override
 public <type> max()
 {
     throw new NoSuchElementException();
 }
 
+@Override
 public <type> maxIfEmpty(<type> defaultValue)
 {
     return defaultValue;
 }
 
+@Override
 public <type> minIfEmpty(<type> defaultValue)
 {
     return defaultValue;
 }
 
+@Override
 public double average()
 {
     throw new ArithmeticException();
 }
 
+@Override
 public double median()
 {
     throw new ArithmeticException();
 }
 
+@Override
 public <type>[] toSortedArray()
 {
     return new <type>[0];
 }
 
+@Override
 public Mutable<name>List toSortedList()
 {
     return new <name>ArrayList();

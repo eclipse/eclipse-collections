@@ -82,21 +82,25 @@ final class Immutable<name>ArrayList
         return new Immutable<name>ArrayList(newArray);
     }
 
+    @Override
     public <type> get(int index)
     {
         return this.items[index];
     }
 
+    @Override
     public <type> getFirst()
     {
         return this.items[0];
     }
 
+    @Override
     public <type> getLast()
     {
         return this.items[this.items.length - 1];
     }
 
+    @Override
     public int indexOf(<type> value)
     {
         for (int i = 0; i \< this.items.length; i++)
@@ -109,6 +113,7 @@ final class Immutable<name>ArrayList
         return -1;
     }
 
+    @Override
     public int lastIndexOf(<type> value)
     {
         for (int i = this.items.length - 1; i >= 0; i--)
@@ -121,11 +126,13 @@ final class Immutable<name>ArrayList
         return -1;
     }
 
+    @Override
     public <name>Iterator <type>Iterator()
     {
         return new Internal<name>Iterator();
     }
 
+    @Override
     public void forEach(<name>Procedure procedure)
     {
         this.each(procedure);
@@ -134,6 +141,7 @@ final class Immutable<name>ArrayList
     /**
      * @since 7.0.
      */
+    @Override
     public void each(<name>Procedure procedure)
     {
         for (<type> item : this.items)
@@ -142,6 +150,7 @@ final class Immutable<name>ArrayList
         }
     }
 
+    @Override
     public void forEachWithIndex(<name>IntProcedure procedure)
     {
         for (int i = 0; i \< this.items.length; i++)
@@ -150,6 +159,7 @@ final class Immutable<name>ArrayList
         }
     }
 
+    @Override
     public int count(<name>Predicate predicate)
     {
         int count = 0;
@@ -163,6 +173,7 @@ final class Immutable<name>ArrayList
         return count;
     }
 
+    @Override
     public boolean anySatisfy(<name>Predicate predicate)
     {
         for (<type> item : this.items)
@@ -175,6 +186,7 @@ final class Immutable<name>ArrayList
         return false;
     }
 
+    @Override
     public boolean allSatisfy(<name>Predicate predicate)
     {
         for (<type> item : this.items)
@@ -187,11 +199,13 @@ final class Immutable<name>ArrayList
         return true;
     }
 
+    @Override
     public boolean noneSatisfy(<name>Predicate predicate)
     {
         return !this.anySatisfy(predicate);
     }
 
+    @Override
     public Immutable<name>List select(<name>Predicate predicate)
     {
         return this.select(predicate, new <name>ArrayList()).toImmutable();
@@ -200,6 +214,7 @@ final class Immutable<name>ArrayList
     /**
      * @since 8.1.
      */
+    @Override
     public \<R extends Mutable<name>Collection> R select(<name>Predicate predicate, R target)
     {
         for (<type> item : this.items)
@@ -212,6 +227,7 @@ final class Immutable<name>ArrayList
         return target;
     }
 
+    @Override
     public Immutable<name>List reject(<name>Predicate predicate)
     {
         return this.reject(predicate, new <name>ArrayList()).toImmutable();
@@ -220,6 +236,7 @@ final class Immutable<name>ArrayList
     /**
      * @since 8.1.
      */
+    @Override
     public \<R extends Mutable<name>Collection> R reject(<name>Predicate predicate, R target)
     {
         for (<type> item : this.items)
@@ -232,6 +249,7 @@ final class Immutable<name>ArrayList
         return target;
     }
 
+    @Override
     public <type> detectIfNone(<name>Predicate predicate, <type> ifNone)
     {
         for (<type> item : this.items)
@@ -244,6 +262,7 @@ final class Immutable<name>ArrayList
         return ifNone;
     }
 
+    @Override
     public \<V> ImmutableList\<V> collect(<name>ToObjectFunction\<? extends V> function)
     {
         return this.collect(function, FastList.newList(this.items.length)).toImmutable();
@@ -252,6 +271,7 @@ final class Immutable<name>ArrayList
     /**
      * @since 8.1.
      */
+    @Override
     public \<V, R extends Collection\<V>\> R collect(<name>ToObjectFunction\<? extends V> function, R target)
     {
         for (<type> item : this.items)
@@ -261,6 +281,7 @@ final class Immutable<name>ArrayList
         return target;
     }
 
+    @Override
     <if(primitive.floatingPoint)>public <wideType.(type)> sum()
 {
     <wideType.(type)> result = <wideZero.(type)>;
@@ -286,6 +307,7 @@ final class Immutable<name>ArrayList
 }
 
     <endif>
+    @Override
     public <type> max()
     {
         <type> max = this.items[0];
@@ -300,11 +322,13 @@ final class Immutable<name>ArrayList
         return max;
     }
 
+    @Override
     public <type> maxIfEmpty(<type> defaultValue)
     {
         return this.max();
     }
 
+    @Override
     public <type> min()
     {
         <type> min = this.items[0];
@@ -319,16 +343,19 @@ final class Immutable<name>ArrayList
         return min;
     }
 
+    @Override
     public <type> minIfEmpty(<type> defaultValue)
     {
         return this.min();
     }
 
+    @Override
     public double average()
     {
         return <castSum.(type)>this.sum() / (double) this.size();
     }
 
+    @Override
     public double median()
     {
         <type>[] sortedArray = this.toSortedArray();
@@ -342,6 +369,7 @@ final class Immutable<name>ArrayList
         return <castDouble.(type)>sortedArray[middleIndex];
     }
 
+    @Override
     public <type>[] toSortedArray()
     {
         <type>[] array = this.toArray();
@@ -349,6 +377,7 @@ final class Immutable<name>ArrayList
         return array;
     }
 
+    @Override
     public <wideType.(type)> dotProduct(<name>List list)
     {
         if (this.size() != list.size())
@@ -363,21 +392,25 @@ final class Immutable<name>ArrayList
         return sum;
     }
 
+    @Override
     public Lazy<name>Iterable asReversed()
     {
         return Reverse<name>Iterable.adapt(this);
     }
 
+    @Override
     public Mutable<name>List toSortedList()
     {
         return <name>ArrayList.newList(this).sortThis();
     }
 
+    @Override
     public int binarySearch(<type> value)
     {
         return Arrays.binarySearch(this.items, value);
     }
 
+    @Override
     public <type>[] toArray()
     {
         <type>[] newItems = new <type>[this.items.length];
@@ -385,6 +418,7 @@ final class Immutable<name>ArrayList
         return newItems;
     }
 
+    @Override
     public boolean contains(<type> value)
     {
         for (<type> item : this.items)
@@ -397,6 +431,7 @@ final class Immutable<name>ArrayList
         return false;
     }
 
+    @Override
     public boolean containsAll(<type>... source)
     {
         for (<type> value : source)
@@ -409,6 +444,7 @@ final class Immutable<name>ArrayList
         return true;
     }
 
+    @Override
     public boolean containsAll(<name>Iterable source)
     {
         for (<name>Iterator iterator = source.<type>Iterator(); iterator.hasNext(); )
@@ -421,36 +457,43 @@ final class Immutable<name>ArrayList
         return true;
     }
 
+    @Override
     public Mutable<name>List toList()
     {
         return <name>ArrayList.newList(this);
     }
 
+    @Override
     public Mutable<name>Set toSet()
     {
         return <name>HashSet.newSet(this);
     }
 
+    @Override
     public Mutable<name>Bag toBag()
     {
         return <name>HashBag.newBag(this);
     }
 
+    @Override
     public Lazy<name>Iterable asLazy()
     {
         return new Lazy<name>IterableAdapter(this);
     }
 
+    @Override
     public Immutable<name>List toImmutable()
     {
         return this;
     }
 
+    @Override
     public Immutable<name>ArrayList toReversed()
     {
         return Immutable<name>ArrayList.newList(this.asReversed());
     }
 
+    @Override
     public Immutable<name>List newWith(<type> element)
     {
         <type>[] newItems = new <type>[this.items.length + 1];
@@ -459,6 +502,7 @@ final class Immutable<name>ArrayList
         return new Immutable<name>ArrayList(newItems);
     }
 
+    @Override
     public Immutable<name>List newWithout(<type> element)
     {
         int index = this.indexOf(element);
@@ -472,6 +516,7 @@ final class Immutable<name>ArrayList
         return this;
     }
 
+    @Override
     public Immutable<name>List newWithAll(<name>Iterable elements)
     {
         <type>[] newItems = new <type>[this.items.length + elements.size()];
@@ -484,6 +529,7 @@ final class Immutable<name>ArrayList
         return new Immutable<name>ArrayList(newItems);
     }
 
+    @Override
     public Immutable<name>List newWithoutAll(<name>Iterable elements)
     {
         Mutable<name>List mutable<name>List = this.toList();
@@ -491,21 +537,25 @@ final class Immutable<name>ArrayList
         return mutable<name>List.toImmutable();
     }
 
+    @Override
     public int size()
     {
         return this.items.length;
     }
 
+    @Override
     public boolean isEmpty()
     {
         return false;
     }
 
+    @Override
     public boolean notEmpty()
     {
         return true;
     }
 
+    @Override
     public \<T> T injectInto(T injectedValue, Object<name>ToObjectFunction\<? super T, ? extends T> function)
     {
         T result = injectedValue;
@@ -516,6 +566,7 @@ final class Immutable<name>ArrayList
         return result;
     }
 
+    @Override
     public \<T> T injectIntoWithIndex(T injectedValue, Object<name>IntToObjectFunction\<? super T, ? extends T> function)
     {
         T result = injectedValue;
@@ -569,16 +620,19 @@ final class Immutable<name>ArrayList
         return this.makeString("[", ", ", "]");
     }
 
+    @Override
     public String makeString()
     {
         return this.makeString(", ");
     }
 
+    @Override
     public String makeString(String separator)
     {
         return this.makeString("", separator, "");
     }
 
+    @Override
     public String makeString(String start, String separator, String end)
     {
         Appendable stringBuilder = new StringBuilder();
@@ -586,16 +640,19 @@ final class Immutable<name>ArrayList
         return stringBuilder.toString();
     }
 
+    @Override
     public void appendString(Appendable appendable)
     {
         this.appendString(appendable, ", ");
     }
 
+    @Override
     public void appendString(Appendable appendable, String separator)
     {
         this.appendString(appendable, "", separator, "");
     }
 
+    @Override
     public void appendString(Appendable appendable, String start, String separator, String end)
     {
         try
@@ -621,6 +678,7 @@ final class Immutable<name>ArrayList
     /**
      * @since 6.0.
      */
+    @Override
     public Immutable<name>List distinct()
     {
         <name>ArrayList target = new <name>ArrayList();
@@ -636,6 +694,7 @@ final class Immutable<name>ArrayList
         return target.toImmutable();
     }
 
+    @Override
     public Immutable<name>List subList(int fromIndex, int toIndex)
     {
         throw new UnsupportedOperationException("subList not yet implemented!");
@@ -648,11 +707,13 @@ final class Immutable<name>ArrayList
          */
         private int currentIndex;
 
+        @Override
         public boolean hasNext()
         {
             return this.currentIndex != Immutable<name>ArrayList.this.items.length;
         }
 
+        @Override
         public <type> next()
         {
             if (!this.hasNext())

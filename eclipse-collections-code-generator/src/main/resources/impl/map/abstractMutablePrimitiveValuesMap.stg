@@ -104,6 +104,7 @@ public abstract class AbstractMutable<name>ValuesMap extends Abstract<name>Itera
         }
     }
 
+    @Override
     public boolean contains(<type> value)
     {
         return this.containsValue(value);
@@ -115,6 +116,7 @@ public abstract class AbstractMutable<name>ValuesMap extends Abstract<name>Itera
         return source.allSatisfy((<type> value) -> AbstractMutable<name>ValuesMap.this.contains(value));
     }
 
+    @Override
     public <type> max()
     {
         if (this.isEmpty())
@@ -134,6 +136,7 @@ public abstract class AbstractMutable<name>ValuesMap extends Abstract<name>Itera
         return max;
     }
 
+    @Override
     public <type> min()
     {
         if (this.isEmpty())
@@ -153,6 +156,7 @@ public abstract class AbstractMutable<name>ValuesMap extends Abstract<name>Itera
         return min;
     }
 
+    @Override
     public int size()
     {
         return this.getOccupiedWithData() + (this.getSentinelValues() == null ? 0 : this.getSentinelValues().size());
@@ -170,6 +174,7 @@ public abstract class AbstractMutable<name>ValuesMap extends Abstract<name>Itera
         return this.getOccupiedWithData() != 0 || (this.getSentinelValues() != null && this.getSentinelValues().size() != 0);
     }
 
+    @Override
     public void forEach(<name>Procedure procedure)
     {
         this.each(procedure);
@@ -178,11 +183,13 @@ public abstract class AbstractMutable<name>ValuesMap extends Abstract<name>Itera
     /**
      * @since 7.0.
      */
+    @Override
     public void each(<name>Procedure procedure)
     {
         this.forEachValue(procedure);
     }
 
+    @Override
     public void appendString(Appendable appendable, String start, String separator, String end)
     {
         try
@@ -228,6 +235,7 @@ public abstract class AbstractMutable<name>ValuesMap extends Abstract<name>Itera
         }
     }
 
+    @Override
     public <type>[] toArray()
     {
         <type>[] array = new <type>[this.size()];
@@ -238,27 +246,32 @@ public abstract class AbstractMutable<name>ValuesMap extends Abstract<name>Itera
         return array;
     }
 
+    @Override
     public Mutable<name>Bag select(<name>Predicate predicate)
     {
         return this.select(predicate, new <name>HashBag());
     }
 
+    @Override
     public Mutable<name>Bag reject(<name>Predicate predicate)
     {
         return this.reject(predicate, new <name>HashBag());
     }
 
+    @Override
     public \<V> MutableBag\<V> collect(<name>ToObjectFunction\<? extends V> function)
     {
         return this.collect(function, HashBag.newBag(this.size()));
     }
 
+    @Override
     public <type> detectIfNone(<name>Predicate predicate, <type> value)
     {
         <forEachValueSatisfying(template = {return <value>})>
         return value;
     }
 
+    @Override
     public int count(<name>Predicate predicate)
     {
         int count = 0;
@@ -266,12 +279,14 @@ public abstract class AbstractMutable<name>ValuesMap extends Abstract<name>Itera
         return count;
     }
 
+    @Override
     public boolean anySatisfy(<name>Predicate predicate)
     {
         <forEachValueSatisfying(template = {return true})>
         return false;
     }
 
+    @Override
     public boolean allSatisfy(<name>Predicate predicate)
     {
         if (this.getSentinelValues() != null)
@@ -295,11 +310,13 @@ public abstract class AbstractMutable<name>ValuesMap extends Abstract<name>Itera
         return true;
     }
 
+    @Override
     public boolean noneSatisfy(<name>Predicate predicate)
     {
         return !this.anySatisfy(predicate);
     }
 
+    @Override
     <if(primitive.floatingPoint)>public <wideType.(type)> sum()
 {
     <wideType.(type)> result = <wideZero.(type)>;
@@ -324,6 +341,7 @@ result = nextSum})>
 }
 
     <endif>
+    @Override
     public boolean containsValue(<type> value)
     {
         if (this.getSentinelValues() != null && this.getSentinelValues().containsValue(value))
@@ -340,6 +358,7 @@ result = nextSum})>
         return false;
     }
 
+    @Override
     public void forEachValue(<name>Procedure procedure)
     {
         <forEachValue(template = {procedure.value(<value>)})>

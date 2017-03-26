@@ -75,11 +75,13 @@ class <className> extends AbstractImmutable<name>Set implements Serializable
         return result;
     }
 
+    @Override
     public int size()
     {
         return this.occupiedWithData + (this.containsOneKey ? 1 : 0) + (this.containsZeroKey ? 1 : 0);
     }
 
+    @Override
     public void appendString(Appendable appendable, String start, String separator, String end)
     {
         try
@@ -120,11 +122,13 @@ class <className> extends AbstractImmutable<name>Set implements Serializable
         }
     }
 
+    @Override
     public <name>Iterator <type>Iterator()
     {
         return new Internal<name>Iterator();
     }
 
+    @Override
     public <type>[] toArray()
     {
         <type>[] array = new <type>[this.size()];
@@ -133,6 +137,7 @@ class <className> extends AbstractImmutable<name>Set implements Serializable
         return array;
     }
 
+    @Override
     public boolean contains(<type> value)
     {
         if (<(equals.(type))("value", "EMPTY_KEY")>)
@@ -146,6 +151,7 @@ class <className> extends AbstractImmutable<name>Set implements Serializable
         return <(equals.(type))({this.<keyArray>[this.probe(value)]}, "value")>;
     }
 
+    @Override
     public void forEach(<name>Procedure procedure)
     {
         this.each(procedure);
@@ -154,11 +160,13 @@ class <className> extends AbstractImmutable<name>Set implements Serializable
     /**
      * @since 7.0.
      */
+    @Override
     public void each(<name>Procedure procedure)
     {
         <forEachKey("executeProcedure")>
     }
 
+    @Override
     public Immutable<name>Set select(<name>Predicate predicate)
     {
         <name>HashSet result = new <name>HashSet();
@@ -166,6 +174,7 @@ class <className> extends AbstractImmutable<name>Set implements Serializable
         return result.toImmutable();
     }
 
+    @Override
     public Immutable<name>Set reject(<name>Predicate predicate)
     {
         <name>HashSet result = new <name>HashSet();
@@ -173,6 +182,7 @@ class <className> extends AbstractImmutable<name>Set implements Serializable
         return result.toImmutable();
     }
 
+    @Override
     public \<V> ImmutableSet\<V> collect(<name>ToObjectFunction\<? extends V> function)
     {
         MutableSet\<V> target = UnifiedSet.newSet(this.size());
@@ -180,12 +190,14 @@ class <className> extends AbstractImmutable<name>Set implements Serializable
         return target.toImmutable();
     }
 
+    @Override
     public <type> detectIfNone(<name>Predicate predicate, <type> ifNone)
     {
         <forEachKeySatisfying("predicate", "detectIfNone")>
         return ifNone;
     }
 
+    @Override
     public int count(<name>Predicate predicate)
     {
         int count = 0;
@@ -193,24 +205,28 @@ class <className> extends AbstractImmutable<name>Set implements Serializable
         return count;
     }
 
+    @Override
     public boolean anySatisfy(<name>Predicate predicate)
     {
         <forEachKeySatisfying("predicate", "returnTrue")>
         return false;
     }
 
+    @Override
     public boolean allSatisfy(<name>Predicate predicate)
     {
         <forEachKeySatisfying("!predicate", "returnFalse")>
         return true;
     }
 
+    @Override
     public boolean noneSatisfy(<name>Predicate predicate)
     {
         <forEachKeySatisfying("predicate", "returnFalse")>
         return true;
     }
 
+    @Override
     public <wideType.(type)> sum()
     {
         <wideType.(type)> result = <wideZero.(type)>;
@@ -219,6 +235,7 @@ class <className> extends AbstractImmutable<name>Set implements Serializable
         return result;
     }
 
+    @Override
     public <type> max()
     {
         if (this.isEmpty())
@@ -250,6 +267,7 @@ class <className> extends AbstractImmutable<name>Set implements Serializable
         return max;
     }
 
+    @Override
     public <type> min()
     {
         if (this.isEmpty())
@@ -282,6 +300,7 @@ class <className> extends AbstractImmutable<name>Set implements Serializable
         return min;
     }
 
+    @Override
     public \<T> T injectInto(T injectedValue, Object<name>ToObjectFunction\<? super T, ? extends T> function)
     {
         T result = injectedValue;
@@ -317,11 +336,13 @@ class <className> extends AbstractImmutable<name>Set implements Serializable
         private boolean handledZero;
         private boolean handledOne;
 
+        @Override
         public boolean hasNext()
         {
             return this.count \< <className>.this.size();
         }
 
+        @Override
         public <type> next()
         {
             if (!this.hasNext())

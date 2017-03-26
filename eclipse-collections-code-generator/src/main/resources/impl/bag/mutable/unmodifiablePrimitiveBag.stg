@@ -78,41 +78,49 @@ public final class Unmodifiable<name>Bag
         throw new UnsupportedOperationException("Cannot call withoutAll() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public void addOccurrences(<type> item, int occurrences)
     {
         throw new UnsupportedOperationException("Cannot call addOccurrences() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public boolean removeOccurrences(<type> item, int occurrences)
     {
         throw new UnsupportedOperationException("Cannot call removeOccurrences() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public int sizeDistinct()
     {
         return this.getMutable<name>Bag().sizeDistinct();
     }
 
+    @Override
     public int occurrencesOf(<type> item)
     {
         return this.getMutable<name>Bag().occurrencesOf(item);
     }
 
+    @Override
     public void forEachWithOccurrences(<name>IntProcedure procedure)
     {
         this.getMutable<name>Bag().forEachWithOccurrences(procedure);
     }
 
+    @Override
     public Mutable<name>Bag selectByOccurrences(IntPredicate predicate)
     {
         return this.getMutable<name>Bag().selectByOccurrences(predicate);
     }
 
+    @Override
     public MutableList\<<name>IntPair> topOccurrences(int count)
     {
         return this.getMutable<name>Bag().topOccurrences(count);
     }
 
+    @Override
     public MutableList\<<name>IntPair> bottomOccurrences(int count)
     {
         return this.getMutable<name>Bag().bottomOccurrences(count);

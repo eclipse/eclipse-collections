@@ -75,6 +75,7 @@ public abstract class AbstractSynchronized<name>Collection
         return this.collection;
     }
 
+    @Override
     public int size()
     {
         synchronized (this.lock)
@@ -83,6 +84,7 @@ public abstract class AbstractSynchronized<name>Collection
         }
     }
 
+    @Override
     public boolean isEmpty()
     {
         synchronized (this.lock)
@@ -91,6 +93,7 @@ public abstract class AbstractSynchronized<name>Collection
         }
     }
 
+    @Override
     public boolean notEmpty()
     {
         synchronized (this.lock)
@@ -99,6 +102,7 @@ public abstract class AbstractSynchronized<name>Collection
         }
     }
 
+    @Override
     public void clear()
     {
         synchronized (this.lock)
@@ -107,6 +111,7 @@ public abstract class AbstractSynchronized<name>Collection
         }
     }
 
+    @Override
     public Mutable<name>Collection select(<name>Predicate predicate)
     {
         synchronized (this.lock)
@@ -115,6 +120,7 @@ public abstract class AbstractSynchronized<name>Collection
         }
     }
 
+    @Override
     public Mutable<name>Collection reject(<name>Predicate predicate)
     {
         synchronized (this.lock)
@@ -123,6 +129,7 @@ public abstract class AbstractSynchronized<name>Collection
         }
     }
 
+    @Override
     public \<V> MutableCollection\<V> collect(<name>ToObjectFunction\<? extends V> function)
     {
         synchronized (this.lock)
@@ -131,6 +138,7 @@ public abstract class AbstractSynchronized<name>Collection
         }
     }
 
+    @Override
     public Mutable<name>Collection with(<type> element)
     {
         synchronized (this.lock)
@@ -140,6 +148,7 @@ public abstract class AbstractSynchronized<name>Collection
         return this;
     }
 
+    @Override
     public Mutable<name>Collection without(<type> element)
     {
         synchronized (this.lock)
@@ -149,6 +158,7 @@ public abstract class AbstractSynchronized<name>Collection
         return this;
     }
 
+    @Override
     public Mutable<name>Collection withAll(<name>Iterable elements)
     {
         synchronized (this.lock)
@@ -158,6 +168,7 @@ public abstract class AbstractSynchronized<name>Collection
         return this;
     }
 
+    @Override
     public Mutable<name>Collection withoutAll(<name>Iterable elements)
     {
         synchronized (this.lock)
@@ -167,16 +178,19 @@ public abstract class AbstractSynchronized<name>Collection
         return this;
     }
 
+    @Override
     public Mutable<name>Collection asUnmodifiable()
     {
         return new Unmodifiable<name>Collection(this);
     }
 
+    @Override
     public Mutable<name>Collection asSynchronized()
     {
         return this;
     }
 
+    @Override
     public Immutable<name>Collection toImmutable()
     {
         synchronized (this.lock)
@@ -185,11 +199,13 @@ public abstract class AbstractSynchronized<name>Collection
         }
     }
 
+    @Override
     public Lazy<name>Iterable asLazy()
     {
         return new Lazy<name>IterableAdapter(this);
     }
 
+    @Override
     public boolean contains(<type> value)
     {
         synchronized (this.lock)
@@ -198,6 +214,7 @@ public abstract class AbstractSynchronized<name>Collection
         }
     }
 
+    @Override
     public boolean containsAll(<type>... source)
     {
         synchronized (this.lock)
@@ -206,6 +223,7 @@ public abstract class AbstractSynchronized<name>Collection
         }
     }
 
+    @Override
     public boolean containsAll(<name>Iterable source)
     {
         synchronized (this.lock)
@@ -214,6 +232,7 @@ public abstract class AbstractSynchronized<name>Collection
         }
     }
 
+    @Override
     public boolean add(<type> newItem)
     {
         synchronized (this.lock)
@@ -222,6 +241,7 @@ public abstract class AbstractSynchronized<name>Collection
         }
     }
 
+    @Override
     public boolean addAll(<type>... source)
     {
         synchronized (this.lock)
@@ -230,6 +250,7 @@ public abstract class AbstractSynchronized<name>Collection
         }
     }
 
+    @Override
     public boolean addAll(<name>Iterable source)
     {
         synchronized (this.lock)
@@ -238,6 +259,7 @@ public abstract class AbstractSynchronized<name>Collection
         }
     }
 
+    @Override
     public boolean remove(<type> value)
     {
         synchronized (this.lock)
@@ -246,6 +268,7 @@ public abstract class AbstractSynchronized<name>Collection
         }
     }
 
+    @Override
     public boolean removeAll(<name>Iterable source)
     {
         synchronized (this.lock)
@@ -254,6 +277,7 @@ public abstract class AbstractSynchronized<name>Collection
         }
     }
 
+    @Override
     public boolean removeAll(<type>... source)
     {
         synchronized (this.lock)
@@ -262,6 +286,7 @@ public abstract class AbstractSynchronized<name>Collection
         }
     }
 
+    @Override
     public boolean retainAll(<name>Iterable source)
     {
         synchronized (this.lock)
@@ -270,6 +295,7 @@ public abstract class AbstractSynchronized<name>Collection
         }
     }
 
+    @Override
     public boolean retainAll(<type>... source)
     {
         synchronized (this.lock)
@@ -281,11 +307,13 @@ public abstract class AbstractSynchronized<name>Collection
     /**
      * Must be called in a synchronized block.
      */
+    @Override
     public Mutable<name>Iterator <type>Iterator()
     {
         return this.collection.<type>Iterator();
     }
 
+    @Override
     public void forEach(<name>Procedure procedure)
     {
         this.each(procedure);
@@ -294,6 +322,7 @@ public abstract class AbstractSynchronized<name>Collection
     /**
      * @since 7.0.
      */
+    @Override
     public void each(<name>Procedure procedure)
     {
         synchronized (this.lock)
@@ -302,6 +331,7 @@ public abstract class AbstractSynchronized<name>Collection
         }
     }
 
+    @Override
     public int count(<name>Predicate predicate)
     {
         synchronized (this.lock)
@@ -310,6 +340,7 @@ public abstract class AbstractSynchronized<name>Collection
         }
     }
 
+    @Override
     public boolean anySatisfy(<name>Predicate predicate)
     {
         synchronized (this.lock)
@@ -318,6 +349,7 @@ public abstract class AbstractSynchronized<name>Collection
         }
     }
 
+    @Override
     public boolean allSatisfy(<name>Predicate predicate)
     {
         synchronized (this.lock)
@@ -326,6 +358,7 @@ public abstract class AbstractSynchronized<name>Collection
         }
     }
 
+    @Override
     public boolean noneSatisfy(<name>Predicate predicate)
     {
         synchronized (this.lock)
@@ -334,6 +367,7 @@ public abstract class AbstractSynchronized<name>Collection
         }
     }
 
+    @Override
     public <type> detectIfNone(<name>Predicate predicate, <type> ifNone)
     {
         synchronized (this.lock)
@@ -343,6 +377,7 @@ public abstract class AbstractSynchronized<name>Collection
     }
 
     <(arithmeticMethods.(type))(name, type)>
+    @Override
     public <type>[] toArray()
     {
         synchronized (this.lock)
@@ -360,6 +395,7 @@ public abstract class AbstractSynchronized<name>Collection
         }
     }
 
+    @Override
     public String makeString()
     {
         synchronized (this.lock)
@@ -368,6 +404,7 @@ public abstract class AbstractSynchronized<name>Collection
         }
     }
 
+    @Override
     public String makeString(String separator)
     {
         synchronized (this.lock)
@@ -376,6 +413,7 @@ public abstract class AbstractSynchronized<name>Collection
         }
     }
 
+    @Override
     public String makeString(String start, String separator, String end)
     {
         synchronized (this.lock)
@@ -384,6 +422,7 @@ public abstract class AbstractSynchronized<name>Collection
         }
     }
 
+    @Override
     public void appendString(Appendable appendable)
     {
         synchronized (this.lock)
@@ -392,6 +431,7 @@ public abstract class AbstractSynchronized<name>Collection
         }
     }
 
+    @Override
     public void appendString(Appendable appendable, String separator)
     {
         synchronized (this.lock)
@@ -400,6 +440,7 @@ public abstract class AbstractSynchronized<name>Collection
         }
     }
 
+    @Override
     public void appendString(
             Appendable appendable,
             String start,
@@ -412,6 +453,7 @@ public abstract class AbstractSynchronized<name>Collection
         }
     }
 
+    @Override
     public Mutable<name>List toList()
     {
         synchronized (this.lock)
@@ -420,6 +462,7 @@ public abstract class AbstractSynchronized<name>Collection
         }
     }
 
+    @Override
     public Mutable<name>Set toSet()
     {
         synchronized (this.lock)
@@ -428,6 +471,7 @@ public abstract class AbstractSynchronized<name>Collection
         }
     }
 
+    @Override
     public Mutable<name>Bag toBag()
     {
         synchronized (this.lock)
@@ -436,6 +480,7 @@ public abstract class AbstractSynchronized<name>Collection
         }
     }
 
+    @Override
     public \<T> T injectInto(T injectedValue, Object<name>ToObjectFunction\<? super T, ? extends T> function)
     {
         synchronized (this.lock)
@@ -459,6 +504,7 @@ arithmeticMethods ::= [
     ]
 
 allMethods(name, type) ::=<<
+@Override
 public <wideType.(type)> sum()
 {
     synchronized (this.lock)
@@ -467,6 +513,7 @@ public <wideType.(type)> sum()
     }
 }
 
+@Override
 public <type> max()
 {
     synchronized (this.lock)
@@ -475,6 +522,7 @@ public <type> max()
     }
 }
 
+@Override
 public <type> min()
 {
     synchronized (this.lock)
@@ -483,6 +531,7 @@ public <type> min()
     }
 }
 
+@Override
 public <type> minIfEmpty(<type> defaultValue)
 {
     synchronized (this.lock)
@@ -491,6 +540,7 @@ public <type> minIfEmpty(<type> defaultValue)
     }
 }
 
+@Override
 public <type> maxIfEmpty(<type> defaultValue)
 {
     synchronized (this.lock)
@@ -499,6 +549,7 @@ public <type> maxIfEmpty(<type> defaultValue)
     }
 }
 
+@Override
 public double average()
 {
     synchronized (this.lock)
@@ -507,6 +558,7 @@ public double average()
     }
 }
 
+@Override
 public double median()
 {
     synchronized (this.lock)
@@ -515,6 +567,7 @@ public double median()
     }
 }
 
+@Override
 public Mutable<name>List toSortedList()
 {
     synchronized (this.lock)
@@ -523,6 +576,7 @@ public Mutable<name>List toSortedList()
     }
 }
 
+@Override
 public <type>[] toSortedArray()
 {
     synchronized (this.lock)

@@ -88,26 +88,31 @@ final class Immutable<name>SingletonBag implements Immutable<name>Bag, Serializa
         return elements.contains(this.element1) ? <name>Bags.immutable.with() : this;
     }
 
+    @Override
     public int size()
     {
         return 1;
     }
 
+    @Override
     public boolean isEmpty()
     {
         return false;
     }
 
+    @Override
     public boolean notEmpty()
     {
         return true;
     }
 
+    @Override
     public boolean contains(<type> value)
     {
         return <(equals.(type))("this.element1", "value")>;
     }
 
+    @Override
     public boolean containsAll(<name>Iterable source)
     {
         for (<name>Iterator iterator = source.<type>Iterator(); iterator.hasNext(); )
@@ -120,6 +125,7 @@ final class Immutable<name>SingletonBag implements Immutable<name>Bag, Serializa
         return true;
     }
 
+    @Override
     public boolean containsAll(<type>... source)
     {
         for (<type> value : source)
@@ -132,6 +138,7 @@ final class Immutable<name>SingletonBag implements Immutable<name>Bag, Serializa
         return true;
     }
 
+    @Override
     public void forEach(<name>Procedure procedure)
     {
         this.each(procedure);
@@ -140,11 +147,13 @@ final class Immutable<name>SingletonBag implements Immutable<name>Bag, Serializa
     /**
      * @since 7.0.
      */
+    @Override
     public void each(<name>Procedure procedure)
     {
         procedure.value(this.element1);
     }
 
+    @Override
     public Immutable<name>Bag select(<name>Predicate predicate)
     {
         return predicate.accept(this.element1) ?
@@ -152,6 +161,7 @@ final class Immutable<name>SingletonBag implements Immutable<name>Bag, Serializa
                 <name>Bags.immutable.empty();
     }
 
+    @Override
     public Immutable<name>Bag selectByOccurrences(IntPredicate predicate)
     {
         return predicate.accept(1) ?
@@ -159,6 +169,7 @@ final class Immutable<name>SingletonBag implements Immutable<name>Bag, Serializa
                 <name>Bags.immutable.empty();
     }
 
+    @Override
     public ImmutableList\<<name>IntPair> topOccurrences(int count)
     {
         if (count \< 0)
@@ -172,6 +183,7 @@ final class Immutable<name>SingletonBag implements Immutable<name>Bag, Serializa
         return Lists.immutable.with(PrimitiveTuples.pair(this.element1, 1));
     }
 
+    @Override
     public ImmutableList\<<name>IntPair> bottomOccurrences(int count)
     {
         if (count \< 0)
@@ -185,6 +197,7 @@ final class Immutable<name>SingletonBag implements Immutable<name>Bag, Serializa
         return Lists.immutable.with(PrimitiveTuples.pair(this.element1, 1));
     }
 
+    @Override
     public Immutable<name>Bag reject(<name>Predicate predicate)
     {
         return predicate.accept(this.element1) ?
@@ -192,57 +205,68 @@ final class Immutable<name>SingletonBag implements Immutable<name>Bag, Serializa
                 <name>Bags.immutable.with(this.element1);
     }
 
+    @Override
     public \<V> ImmutableBag\<V> collect(<name>ToObjectFunction\<? extends V> function)
     {
         return HashBag.newBagWith(function.valueOf(this.element1)).toImmutable();
     }
 
+    @Override
     public Mutable<name>List toList()
     {
         return <name>ArrayList.newListWith(this.element1);
     }
 
+    @Override
     public int sizeDistinct()
     {
         return 1;
     }
 
+    @Override
     public int occurrencesOf(<type> item)
     {
         return <(equals.(type))("this.element1", "item")> ? 1 : 0;
     }
 
+    @Override
     public void forEachWithOccurrences(<name>IntProcedure <type>IntProcedure)
     {
         <type>IntProcedure.value(this.element1, 1);
     }
 
+    @Override
     public <type> detectIfNone(<name>Predicate predicate, <type> ifNone)
     {
         return predicate.accept(this.element1) ? this.element1 : ifNone;
     }
 
+    @Override
     public int count(<name>Predicate predicate)
     {
         return predicate.accept(this.element1) ? 1 : 0;
     }
 
+    @Override
     public boolean anySatisfy(<name>Predicate predicate)
     {
         return predicate.accept(this.element1);
     }
 
     <(arithmeticMethods.(type))()>
+    @Override
     public boolean noneSatisfy(<name>Predicate predicate)
     {
         return !predicate.accept(this.element1);
     }
 
+    @Override
     public boolean allSatisfy(<name>Predicate predicate)
     {
         return predicate.accept(this.element1);
     }
 
+    @Override
     public \<T> T injectInto(T injectedValue, Object<name>ToObjectFunction\<? super T, ? extends T> function)
     {
         return function.valueOf(injectedValue, this.element1);
@@ -273,26 +297,31 @@ final class Immutable<name>SingletonBag implements Immutable<name>Bag, Serializa
         return <(hashCode.(type))("this.element1")> ^ 1;
     }
 
+    @Override
     public Mutable<name>Set toSet()
     {
         return <name>HashSet.newSetWith(this.element1);
     }
 
+    @Override
     public Mutable<name>Bag toBag()
     {
         return <name>HashBag.newBagWith(this.element1);
     }
 
+    @Override
     public Immutable<name>Bag toImmutable()
     {
         return this;
     }
 
+    @Override
     public Lazy<name>Iterable asLazy()
     {
         return new Lazy<name>IterableAdapter(this);
     }
 
+    @Override
     public <type>[] toArray()
     {
         return new <type>[]{this.element1};
@@ -304,16 +333,19 @@ final class Immutable<name>SingletonBag implements Immutable<name>Bag, Serializa
         return '[' + this.makeString() + ']';
     }
 
+    @Override
     public String makeString()
     {
         return this.makeString(", ");
     }
 
+    @Override
     public String makeString(String separator)
     {
         return this.makeString("", separator, "");
     }
 
+    @Override
     public String makeString(String start, String separator, String end)
     {
         Appendable stringBuilder = new StringBuilder();
@@ -321,16 +353,19 @@ final class Immutable<name>SingletonBag implements Immutable<name>Bag, Serializa
         return stringBuilder.toString();
     }
 
+    @Override
     public void appendString(Appendable appendable)
     {
         this.appendString(appendable, ", ");
     }
 
+    @Override
     public void appendString(Appendable appendable, String separator)
     {
         this.appendString(appendable, "", separator, "");
     }
 
+    @Override
     public void appendString(Appendable appendable, String start, String separator, String end)
     {
         try
@@ -345,6 +380,7 @@ final class Immutable<name>SingletonBag implements Immutable<name>Bag, Serializa
         }
     }
 
+    @Override
     public <name>Iterator <type>Iterator()
     {
         return new Unmodifiable<name>Iterator(<name>HashBag.newBagWith(this.element1).<type>Iterator());
@@ -365,46 +401,55 @@ arithmeticMethods ::= [
     ]
 
 allMethods() ::= <<
+@Override
 public <wideType.(type)> sum()
 {
     return this.element1;
 }
 
+@Override
 public <type> min()
 {
     return this.element1;
 }
 
+@Override
 public <type> max()
 {
     return this.element1;
 }
 
+@Override
 public <type> maxIfEmpty(<type> defaultValue)
 {
     return this.element1;
 }
 
+@Override
 public <type> minIfEmpty(<type> defaultValue)
 {
     return this.element1;
 }
 
+@Override
 public double average()
 {
     return this.element1;
 }
 
+@Override
 public double median()
 {
     return this.element1;
 }
 
+@Override
 public <type>[] toSortedArray()
 {
     return new <type>[]{this.element1};
 }
 
+@Override
 public Mutable<name>List toSortedList()
 {
     return <name>ArrayList.newListWith(this.element1);

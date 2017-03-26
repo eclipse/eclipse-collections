@@ -92,6 +92,7 @@ public final class Synchronized<name1><name2>Map
         this.lock = newLock == null ? this : newLock;
     }
 
+    @Override
     public void clear()
     {
         synchronized (this.lock)
@@ -100,6 +101,7 @@ public final class Synchronized<name1><name2>Map
         }
     }
 
+    @Override
     public void put(<type1> key, <type2> value)
     {
         synchronized (this.lock)
@@ -108,6 +110,7 @@ public final class Synchronized<name1><name2>Map
         }
     }
 
+    @Override
     public void putAll(<name1><name2>Map map)
     {
         synchronized (this.lock)
@@ -116,6 +119,7 @@ public final class Synchronized<name1><name2>Map
         }
     }
 
+    @Override
     public void removeKey(<type1> key)
     {
         synchronized (this.lock)
@@ -124,6 +128,7 @@ public final class Synchronized<name1><name2>Map
         }
     }
 
+    @Override
     public void remove(<type1> key)
     {
         synchronized (this.lock)
@@ -132,6 +137,7 @@ public final class Synchronized<name1><name2>Map
         }
     }
 
+    @Override
     public <type2> removeKeyIfAbsent(<type1> key, <type2> value)
     {
         synchronized (this.lock)
@@ -140,6 +146,7 @@ public final class Synchronized<name1><name2>Map
         }
     }
 
+    @Override
     public <type2> getIfAbsentPut(<type1> key, <type2> value)
     {
         synchronized (this.lock)
@@ -148,6 +155,7 @@ public final class Synchronized<name1><name2>Map
         }
     }
 
+    @Override
     public <type2> getIfAbsentPut(<type1> key, <name2>Function0 function)
     {
         synchronized (this.lock)
@@ -156,6 +164,7 @@ public final class Synchronized<name1><name2>Map
         }
     }
 
+    @Override
     public <type2> getIfAbsentPutWithKey(<type1> key, <name1>To<name2>Function function)
     {
         synchronized (this.lock)
@@ -164,6 +173,7 @@ public final class Synchronized<name1><name2>Map
         }
     }
 
+    @Override
     public \<P> <type2> getIfAbsentPutWith(<type1> key, <name2>Function\<? super P> function, P parameter)
     {
         synchronized (this.lock)
@@ -172,6 +182,7 @@ public final class Synchronized<name1><name2>Map
         }
     }
 
+    @Override
     public <type2> updateValue(<type1> key, <type2> initialValueIfAbsent, <name2>To<name2>Function function)
     {
         synchronized (this.lock)
@@ -180,6 +191,7 @@ public final class Synchronized<name1><name2>Map
         }
     }
 
+    @Override
     public <type2> get(<type1> key)
     {
         synchronized (this.lock)
@@ -188,6 +200,7 @@ public final class Synchronized<name1><name2>Map
         }
     }
 
+    @Override
     public <type2> getIfAbsent(<type1> key, <type2> ifAbsent)
     {
         synchronized (this.lock)
@@ -196,6 +209,7 @@ public final class Synchronized<name1><name2>Map
         }
     }
 
+    @Override
     public <type2> getOrThrow(<type1> key)
     {
         synchronized (this.lock)
@@ -204,6 +218,7 @@ public final class Synchronized<name1><name2>Map
         }
     }
 
+    @Override
     public boolean containsKey(<type1> key)
     {
         synchronized (this.lock)
@@ -212,6 +227,7 @@ public final class Synchronized<name1><name2>Map
         }
     }
 
+    @Override
     public boolean containsValue(<type2> value)
     {
         synchronized (this.lock)
@@ -220,6 +236,7 @@ public final class Synchronized<name1><name2>Map
         }
     }
 
+    @Override
     public void forEachValue(<name2>Procedure procedure)
     {
         synchronized (this.lock)
@@ -228,6 +245,7 @@ public final class Synchronized<name1><name2>Map
         }
     }
 
+    @Override
     public void forEachKey(<name1>Procedure procedure)
     {
         synchronized (this.lock)
@@ -236,6 +254,7 @@ public final class Synchronized<name1><name2>Map
         }
     }
 
+    @Override
     public void forEachKeyValue(<name1><name2>Procedure procedure)
     {
         synchronized (this.lock)
@@ -244,6 +263,7 @@ public final class Synchronized<name1><name2>Map
         }
     }
 
+    @Override
     public Lazy<name1>Iterable keysView()
     {
         synchronized (this.lock)
@@ -252,6 +272,7 @@ public final class Synchronized<name1><name2>Map
         }
     }
 
+    @Override
     public RichIterable\<<name1><name2>Pair> keyValuesView()
     {
         synchronized (this.lock)
@@ -260,6 +281,7 @@ public final class Synchronized<name1><name2>Map
         }
     }
 
+    @Override
     public Mutable<name1><name2>Map select(<name1><name2>Predicate predicate)
     {
         synchronized (this.lock)
@@ -268,6 +290,7 @@ public final class Synchronized<name1><name2>Map
         }
     }
 
+    @Override
     public Mutable<name1><name2>Map reject(<name1><name2>Predicate predicate)
     {
         synchronized (this.lock)
@@ -279,11 +302,13 @@ public final class Synchronized<name1><name2>Map
     /**
      * This must be manually synchronized by the developer.
      */
+    @Override
     public Mutable<name2>Iterator <type2>Iterator()
     {
         return this.map.<type2>Iterator();
     }
 
+    @Override
     public void forEach(<name2>Procedure procedure)
     {
         this.each(procedure);
@@ -292,6 +317,7 @@ public final class Synchronized<name1><name2>Map
     /**
      * @since 7.0.
      */
+    @Override
     public void each(<name2>Procedure procedure)
     {
         synchronized (this.lock)
@@ -300,6 +326,7 @@ public final class Synchronized<name1><name2>Map
         }
     }
 
+    @Override
     public int count(<name2>Predicate predicate)
     {
         synchronized (this.lock)
@@ -308,6 +335,7 @@ public final class Synchronized<name1><name2>Map
         }
     }
 
+    @Override
     public boolean anySatisfy(<name2>Predicate predicate)
     {
         synchronized (this.lock)
@@ -316,6 +344,7 @@ public final class Synchronized<name1><name2>Map
         }
     }
 
+    @Override
     public boolean allSatisfy(<name2>Predicate predicate)
     {
         synchronized (this.lock)
@@ -324,6 +353,7 @@ public final class Synchronized<name1><name2>Map
         }
     }
 
+    @Override
     public boolean noneSatisfy(<name2>Predicate predicate)
     {
         synchronized (this.lock)
@@ -332,6 +362,7 @@ public final class Synchronized<name1><name2>Map
         }
     }
 
+    @Override
     public Mutable<name2>Bag select(<name2>Predicate predicate)
     {
         synchronized (this.lock)
@@ -340,6 +371,7 @@ public final class Synchronized<name1><name2>Map
         }
     }
 
+    @Override
     public Mutable<name2>Bag reject(<name2>Predicate predicate)
     {
         synchronized (this.lock)
@@ -348,6 +380,7 @@ public final class Synchronized<name1><name2>Map
         }
     }
 
+    @Override
     public \<V> MutableBag\<V> collect(<name2>ToObjectFunction\<? extends V> function)
     {
         synchronized (this.lock)
@@ -356,6 +389,7 @@ public final class Synchronized<name1><name2>Map
         }
     }
 
+    @Override
     public <type2> detectIfNone(<name2>Predicate predicate, <type2> ifNone)
     {
         synchronized (this.lock)
@@ -365,6 +399,7 @@ public final class Synchronized<name1><name2>Map
     }
 
     <(arithmeticMethods.(type2))(name2, type2)>
+    @Override
     public <type2>[] toArray()
     {
         synchronized (this.lock)
@@ -373,6 +408,7 @@ public final class Synchronized<name1><name2>Map
         }
     }
 
+    @Override
     public boolean contains(<type2> value)
     {
         synchronized (this.lock)
@@ -381,6 +417,7 @@ public final class Synchronized<name1><name2>Map
         }
     }
 
+    @Override
     public boolean containsAll(<type2>... source)
     {
         synchronized (this.lock)
@@ -389,6 +426,7 @@ public final class Synchronized<name1><name2>Map
         }
     }
 
+    @Override
     public boolean containsAll(<name2>Iterable source)
     {
         synchronized (this.lock)
@@ -397,6 +435,7 @@ public final class Synchronized<name1><name2>Map
         }
     }
 
+    @Override
     public Mutable<name2>List toList()
     {
         synchronized (this.lock)
@@ -405,6 +444,7 @@ public final class Synchronized<name1><name2>Map
         }
     }
 
+    @Override
     public Mutable<name2>Set toSet()
     {
         synchronized (this.lock)
@@ -413,6 +453,7 @@ public final class Synchronized<name1><name2>Map
         }
     }
 
+    @Override
     public Mutable<name2>Bag toBag()
     {
         synchronized (this.lock)
@@ -421,6 +462,7 @@ public final class Synchronized<name1><name2>Map
         }
     }
 
+    @Override
     public Lazy<name2>Iterable asLazy()
     {
         synchronized (this.lock)
@@ -429,6 +471,7 @@ public final class Synchronized<name1><name2>Map
         }
     }
 
+    @Override
     public Mutable<name1><name2>Map withKeyValue(<type1> key, <type2> value)
     {
         synchronized (this.lock)
@@ -438,6 +481,7 @@ public final class Synchronized<name1><name2>Map
         return this;
     }
 
+    @Override
     public Mutable<name1><name2>Map withoutKey(<type1> key)
     {
         synchronized (this.lock)
@@ -447,6 +491,7 @@ public final class Synchronized<name1><name2>Map
         return this;
     }
 
+    @Override
     public Mutable<name1><name2>Map withoutAllKeys(<name1>Iterable keys)
     {
         synchronized (this.lock)
@@ -456,21 +501,25 @@ public final class Synchronized<name1><name2>Map
         return this;
     }
 
+    @Override
     public Mutable<name1><name2>Map asUnmodifiable()
     {
         return new Unmodifiable<name1><name2>Map(this);
     }
 
+    @Override
     public Mutable<name1><name2>Map asSynchronized()
     {
         return this;
     }
 
+    @Override
     public Immutable<name1><name2>Map toImmutable()
     {
         return <name1><name2>Maps.immutable.withAll(this);
     }
 
+    @Override
     public int size()
     {
         synchronized (this.lock)
@@ -479,6 +528,7 @@ public final class Synchronized<name1><name2>Map
         }
     }
 
+    @Override
     public boolean isEmpty()
     {
         synchronized (this.lock)
@@ -487,6 +537,7 @@ public final class Synchronized<name1><name2>Map
         }
     }
 
+    @Override
     public boolean notEmpty()
     {
         synchronized (this.lock)
@@ -495,6 +546,7 @@ public final class Synchronized<name1><name2>Map
         }
     }
 
+    @Override
     public Mutable<name1>Set keySet()
     {
         synchronized (this.lock)
@@ -503,6 +555,7 @@ public final class Synchronized<name1><name2>Map
         }
     }
 
+    @Override
     public Mutable<name2>Collection values()
     {
         synchronized (this.lock)
@@ -538,6 +591,7 @@ public final class Synchronized<name1><name2>Map
         }
     }
 
+    @Override
     public String makeString()
     {
         synchronized (this.lock)
@@ -546,6 +600,7 @@ public final class Synchronized<name1><name2>Map
         }
     }
 
+    @Override
     public String makeString(String separator)
     {
         synchronized (this.lock)
@@ -554,6 +609,7 @@ public final class Synchronized<name1><name2>Map
         }
     }
 
+    @Override
     public String makeString(String start, String separator, String end)
     {
         synchronized (this.lock)
@@ -562,6 +618,7 @@ public final class Synchronized<name1><name2>Map
         }
     }
 
+    @Override
     public void appendString(Appendable appendable)
     {
         synchronized (this.lock)
@@ -570,6 +627,7 @@ public final class Synchronized<name1><name2>Map
         }
     }
 
+    @Override
     public void appendString(Appendable appendable, String separator)
     {
         synchronized (this.lock)
@@ -578,6 +636,7 @@ public final class Synchronized<name1><name2>Map
         }
     }
 
+    @Override
     public void appendString(Appendable appendable, String start, String separator, String end)
     {
         synchronized (this.lock)
@@ -586,6 +645,7 @@ public final class Synchronized<name1><name2>Map
         }
     }
 
+    @Override
     public \<T> T injectInto(T injectedValue, Object<name2>ToObjectFunction\<? super T, ? extends T> function)
     {
         synchronized (this.lock)
@@ -609,6 +669,7 @@ arithmeticMethods ::= [
     ]
 
 allMethods(name, type) ::=<<
+@Override
 public <wideType.(type2)> sum()
 {
     synchronized (this.lock)
@@ -617,6 +678,7 @@ public <wideType.(type2)> sum()
     }
 }
 
+@Override
 public <type2> max()
 {
     synchronized (this.lock)
@@ -625,6 +687,7 @@ public <type2> max()
     }
 }
 
+@Override
 public <type2> maxIfEmpty(<type2> defaultValue)
 {
     synchronized (this.lock)
@@ -633,6 +696,7 @@ public <type2> maxIfEmpty(<type2> defaultValue)
     }
 }
 
+@Override
 public <type2> min()
 {
     synchronized (this.lock)
@@ -641,6 +705,7 @@ public <type2> min()
     }
 }
 
+@Override
 public <type2> minIfEmpty(<type2> defaultValue)
 {
     synchronized (this.lock)
@@ -649,6 +714,7 @@ public <type2> minIfEmpty(<type2> defaultValue)
     }
 }
 
+@Override
 public double average()
 {
     synchronized (this.lock)
@@ -657,6 +723,7 @@ public double average()
     }
 }
 
+@Override
 public double median()
 {
     synchronized (this.lock)
@@ -665,6 +732,7 @@ public double median()
     }
 }
 
+@Override
 public <type2> addToValue(<type1> key, <type2> toBeAdded)
 {
     synchronized (this.lock)
@@ -673,6 +741,7 @@ public <type2> addToValue(<type1> key, <type2> toBeAdded)
     }
 }
 
+@Override
 public <type2>[] toSortedArray()
 {
     synchronized (this.lock)
@@ -681,6 +750,7 @@ public <type2>[] toSortedArray()
     }
 }
 
+@Override
 public Mutable<name2>List toSortedList()
 {
     synchronized (this.lock)

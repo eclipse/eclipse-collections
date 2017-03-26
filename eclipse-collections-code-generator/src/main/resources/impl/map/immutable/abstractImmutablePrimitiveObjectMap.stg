@@ -109,24 +109,28 @@ public abstract class AbstractImmutable<name>ObjectMap\<V> implements Immutable<
         }
     }
 
+    @Override
     public \<V1> ImmutableObjectLongMap\<V1> sumByInt(Function\<? super V, ? extends V1> groupBy, IntFunction\<? super V> function)
     {
         MutableObjectLongMap\<V1> result = ObjectLongMaps.mutable.empty();
         return this.injectInto(result, PrimitiveFunctions.sumByIntFunction(groupBy, function)).toImmutable();
     }
 
+    @Override
     public \<V1> ImmutableObjectDoubleMap\<V1> sumByFloat(Function\<? super V, ? extends V1> groupBy, FloatFunction\<? super V> function)
     {
         MutableObjectDoubleMap\<V1> result = ObjectDoubleMaps.mutable.empty();
         return this.injectInto(result, PrimitiveFunctions.sumByFloatFunction(groupBy, function)).toImmutable();
     }
 
+    @Override
     public \<V1> ImmutableObjectLongMap\<V1> sumByLong(Function\<? super V, ? extends V1> groupBy, LongFunction\<? super V> function)
     {
         MutableObjectLongMap\<V1> result = ObjectLongMaps.mutable.empty();
         return this.injectInto(result, PrimitiveFunctions.sumByLongFunction(groupBy, function)).toImmutable();
     }
 
+    @Override
     public \<V1> ImmutableObjectDoubleMap\<V1> sumByDouble(Function\<? super V, ? extends V1> groupBy, DoubleFunction\<? super V> function)
     {
         MutableObjectDoubleMap\<V1> result = ObjectDoubleMaps.mutable.empty();

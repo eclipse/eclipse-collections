@@ -37,6 +37,7 @@ public interface Immutable<name>Bag extends Immutable<name>Collection, <name>Bag
      *
      * @since 8.0
      */
+    @Override
     Immutable<name>Bag selectByOccurrences(IntPredicate predicate);
 
     /**
@@ -47,6 +48,7 @@ public interface Immutable<name>Bag extends Immutable<name>Collection, <name>Bag
      *
      * @since 8.0
      */
+    @Override
     ImmutableList\<<name>IntPair> topOccurrences(int count);
 
     /**
@@ -57,8 +59,10 @@ public interface Immutable<name>Bag extends Immutable<name>Collection, <name>Bag
      *
      * @since 8.0
      */
+    @Override
     ImmutableList\<<name>IntPair> bottomOccurrences(int count);
 
+    @Override
     \<V> ImmutableBag\<V> collect(<name>ToObjectFunction\<? extends V> function);
 
     <immutableAPI(fileName(primitive), type, name)>

@@ -63,86 +63,103 @@ public abstract class AbstractUnmodifiable<name>Collection
         return this.collection;
     }
 
+    @Override
     public int size()
     {
         return this.collection.size();
     }
 
+    @Override
     public boolean isEmpty()
     {
         return this.collection.isEmpty();
     }
 
+    @Override
     public boolean notEmpty()
     {
         return this.collection.notEmpty();
     }
 
+    @Override
     public void clear()
     {
         throw new UnsupportedOperationException("Cannot call clear() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public boolean contains(<type> value)
     {
         return this.collection.contains(value);
     }
 
+    @Override
     public boolean containsAll(<type>... source)
     {
         return this.collection.containsAll(source);
     }
 
+    @Override
     public boolean containsAll(<name>Iterable source)
     {
         return this.collection.containsAll(source);
     }
 
+    @Override
     public boolean add(<type> newItem)
     {
         throw new UnsupportedOperationException("Cannot call add() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public boolean addAll(<type>... source)
     {
         throw new UnsupportedOperationException("Cannot call addAll() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public boolean addAll(<name>Iterable source)
     {
         throw new UnsupportedOperationException("Cannot call addAll() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public boolean remove(<type> value)
     {
         throw new UnsupportedOperationException("Cannot call remove() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public boolean removeAll(<name>Iterable source)
     {
         throw new UnsupportedOperationException("Cannot call removeAll() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public boolean removeAll(<type>... source)
     {
         throw new UnsupportedOperationException("Cannot call removeAll() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public boolean retainAll(<name>Iterable source)
     {
         throw new UnsupportedOperationException("Cannot call retainAll() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public boolean retainAll(<type>... source)
     {
         throw new UnsupportedOperationException("Cannot call retainAll() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public Mutable<name>Iterator <type>Iterator()
     {
         return new Unmodifiable<name>Iterator(this.collection.<type>Iterator());
     }
 
+    @Override
     public void forEach(<name>Procedure procedure)
     {
         this.each(procedure);
@@ -151,92 +168,110 @@ public abstract class AbstractUnmodifiable<name>Collection
     /**
      * @since 7.0.
      */
+    @Override
     public void each(<name>Procedure procedure)
     {
         this.collection.forEach(procedure);
     }
 
+    @Override
     public int count(<name>Predicate predicate)
     {
         return this.collection.count(predicate);
     }
 
+    @Override
     public boolean anySatisfy(<name>Predicate predicate)
     {
         return this.collection.anySatisfy(predicate);
     }
 
+    @Override
     public boolean allSatisfy(<name>Predicate predicate)
     {
         return this.collection.allSatisfy(predicate);
     }
 
+    @Override
     public boolean noneSatisfy(<name>Predicate predicate)
     {
         return this.collection.noneSatisfy(predicate);
     }
 
+    @Override
     public Mutable<name>Collection select(<name>Predicate predicate)
     {
         return this.collection.select(predicate);
     }
 
+    @Override
     public Mutable<name>Collection reject(<name>Predicate predicate)
     {
         return this.collection.reject(predicate);
     }
 
+    @Override
     public \<V> MutableCollection\<V> collect(<name>ToObjectFunction\<? extends V> function)
     {
         return this.collection.collect(function);
     }
 
+    @Override
     public Mutable<name>Collection with(<type> element)
     {
         throw new UnsupportedOperationException("Cannot call with() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public Mutable<name>Collection without(<type> element)
     {
         throw new UnsupportedOperationException("Cannot call without() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public Mutable<name>Collection withAll(<name>Iterable elements)
     {
         throw new UnsupportedOperationException("Cannot call withAll() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public Mutable<name>Collection withoutAll(<name>Iterable elements)
     {
         throw new UnsupportedOperationException("Cannot call withoutAll() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public Mutable<name>Collection asUnmodifiable()
     {
         return this;
     }
 
+    @Override
     public Mutable<name>Collection asSynchronized()
     {
         return new Synchronized<name>Collection(this);
     }
 
+    @Override
     public Immutable<name>Collection toImmutable()
     {
         return this.collection.toImmutable();
     }
 
+    @Override
     public Lazy<name>Iterable asLazy()
     {
         return new Lazy<name>IterableAdapter(this);
     }
 
+    @Override
     public <type> detectIfNone(<name>Predicate predicate, <type> ifNone)
     {
         return this.collection.detectIfNone(predicate, ifNone);
     }
 
     <(arithmeticMethods.(type))(name, type)>
+    @Override
     public <type>[] toArray()
     {
         return this.collection.toArray();
@@ -248,31 +283,37 @@ public abstract class AbstractUnmodifiable<name>Collection
         return this.collection.toString();
     }
 
+    @Override
     public String makeString()
     {
         return this.collection.makeString();
     }
 
+    @Override
     public String makeString(String separator)
     {
         return this.collection.makeString(separator);
     }
 
+    @Override
     public String makeString(String start, String separator, String end)
     {
         return this.collection.makeString(start, separator, end);
     }
 
+    @Override
     public void appendString(Appendable appendable)
     {
         this.collection.appendString(appendable);
     }
 
+    @Override
     public void appendString(Appendable appendable, String separator)
     {
         this.collection.appendString(appendable, separator);
     }
 
+    @Override
     public void appendString(
             Appendable appendable,
             String start,
@@ -282,21 +323,25 @@ public abstract class AbstractUnmodifiable<name>Collection
         this.collection.appendString(appendable, start, separator, end);
     }
 
+    @Override
     public Mutable<name>List toList()
     {
         return this.collection.toList();
     }
 
+    @Override
     public Mutable<name>Set toSet()
     {
         return this.collection.toSet();
     }
 
+    @Override
     public Mutable<name>Bag toBag()
     {
         return this.collection.toBag();
     }
 
+    @Override
     public \<T> T injectInto(T injectedValue, Object<name>ToObjectFunction\<? super T, ? extends T> function)
     {
         return this.collection.injectInto(injectedValue, function);
@@ -317,46 +362,55 @@ arithmeticMethods ::= [
     ]
 
 allMethods(name, type) ::=<<
+@Override
 public <wideType.(type)> sum()
 {
     return this.collection.sum();
 }
 
+@Override
 public <type> max()
 {
     return this.collection.max();
 }
 
+@Override
 public <type> min()
 {
     return this.collection.min();
 }
 
+@Override
 public <type> minIfEmpty(<type> defaultValue)
 {
     return this.collection.minIfEmpty(defaultValue);
 }
 
+@Override
 public <type> maxIfEmpty(<type> defaultValue)
 {
     return this.collection.maxIfEmpty(defaultValue);
 }
 
+@Override
 public double average()
 {
     return this.collection.average();
 }
 
+@Override
 public double median()
 {
     return this.collection.median();
 }
 
+@Override
 public Mutable<name>List toSortedList()
 {
     return this.collection.toSortedList();
 }
 
+@Override
 public <type>[] toSortedArray()
 {
     return this.collection.toSortedArray();

@@ -54,51 +54,61 @@ public final class Unmodifiable<name>List
         return (Mutable<name>List) this.get<name>Collection();
     }
 
+    @Override
     public <type> get(int index)
     {
         return this.getMutable<name>List().get(index);
     }
 
+    @Override
     public <type> getFirst()
     {
         return this.getMutable<name>List().getFirst();
     }
 
+    @Override
     public <type> getLast()
     {
         return this.getMutable<name>List().getLast();
     }
 
+    @Override
     public int indexOf(<type> value)
     {
         return this.getMutable<name>List().indexOf(value);
     }
 
+    @Override
     public int lastIndexOf(<type> value)
     {
         return this.getMutable<name>List().lastIndexOf(value);
     }
 
+    @Override
     public void addAtIndex(int index, <type> element)
     {
         throw new UnsupportedOperationException("Cannot call addAtIndex() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public boolean addAllAtIndex(int index, <type>... source)
     {
         throw new UnsupportedOperationException("Cannot call addAllAtIndex() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public boolean addAllAtIndex(int index, <name>Iterable source)
     {
         throw new UnsupportedOperationException("Cannot call addAllAtIndex() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public <type> removeAtIndex(int index)
     {
         throw new UnsupportedOperationException("Cannot call removeAtIndex() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public <type> set(int index, <type> element)
     {
         throw new UnsupportedOperationException("Cannot call set() on " + this.getClass().getSimpleName());
@@ -191,21 +201,25 @@ public final class Unmodifiable<name>List
         throw new UnsupportedOperationException("Cannot call reverseThis() on " + this.getClass().getSimpleName());
     }
 
+    @Override
     public Mutable<name>List toReversed()
     {
         return this.getMutable<name>List().toReversed();
     }
 
+    @Override
     public void forEachWithIndex(<name>IntProcedure procedure)
     {
         this.getMutable<name>List().forEachWithIndex(procedure);
     }
 
+    @Override
     public Lazy<name>Iterable asReversed()
     {
         return Reverse<name>Iterable.adapt(this);
     }
 
+    @Override
     public \<T> T injectIntoWithIndex(T injectedValue, Object<name>IntToObjectFunction\<? super T, ? extends T> function)
     {
         return this.getMutable<name>List().injectIntoWithIndex(injectedValue, function);
@@ -214,11 +228,13 @@ public final class Unmodifiable<name>List
     /**
      * @since 6.0.
      */
+    @Override
     public Mutable<name>List distinct()
     {
         return this.getMutable<name>List().distinct();
     }
 
+    @Override
     public Mutable<name>List subList(int fromIndex, int toIndex)
     {
         throw new UnsupportedOperationException("subList not yet implemented!");
@@ -239,16 +255,19 @@ arithmeticMethods ::= [
     ]
 
 allMethods(name, type) ::=<<
+@Override
 public Mutable<name>List sortThis()
 {
     throw new UnsupportedOperationException("Cannot call sortThis() on " + this.getClass().getSimpleName());
 }
 
+@Override
 public int binarySearch(<type> value)
 {
     return this.getMutable<name>List().binarySearch(value);
 }
 
+@Override
 public <wideType.(type)> dotProduct(<name>List list)
 {
     return this.getMutable<name>List().dotProduct(list);
