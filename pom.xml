@@ -230,7 +230,7 @@
 
                 <plugin>
                     <artifactId>maven-jar-plugin</artifactId>
-                    <version>2.6</version>
+                    <version>3.0.2</version>
                 </plugin>
 
                 <plugin>
@@ -255,7 +255,7 @@
 
                 <plugin>
                     <artifactId>maven-source-plugin</artifactId>
-                    <version>2.4</version>
+                    <version>3.0.1</version>
                     <executions>
                         <execution>
                             <phase>verify</phase>
