@@ -151,173 +151,208 @@ final class Immutable<name>ObjectEmptyMap\<V> implements Immutable<name>ObjectMa
         return INSTANCE;
     }
 
+    @Override
     public V get(<type> key)
     {
         return null;
     }
 
+    @Override
     public V getIfAbsent(<type> key, Function0\<? extends V> ifAbsent)
     {
         return ifAbsent.value();
     }
 
+    @Override
     public boolean containsKey(<type> key)
     {
         return false;
     }
 
+    @Override
     public boolean containsValue(Object value)
     {
         return false;
     }
 
+    @Override
     public Immutable<name>ObjectMap\<V> tap(Procedure\<? super V> procedure)
     {
         return this;
     }
 
+    @Override
     public void forEachValue(Procedure\<? super V> procedure)
     {
     }
 
+    @Override
     public void forEachKey(<name>Procedure procedure)
     {
     }
 
+    @Override
     public void forEachKeyValue(<name>ObjectProcedure\<? super V> procedure)
     {
     }
 
+    @Override
     public Immutable<name>ObjectMap\<V> select(<name>ObjectPredicate\<? super V> predicate)
     {
         return this;
     }
 
+    @Override
     public Immutable<name>ObjectMap\<V> reject(<name>ObjectPredicate\<? super V> predicate)
     {
         return this;
     }
 
+    @Override
     public Immutable<name>ObjectMap\<V> toImmutable()
     {
         return this;
     }
 
+    @Override
     public int size()
     {
         return 0;
     }
 
+    @Override
     public boolean isEmpty()
     {
         return true;
     }
 
+    @Override
     public boolean notEmpty()
     {
         return false;
     }
 
+    @Override
     public V getFirst()
     {
         return null;
     }
 
+    @Override
     public V getLast()
     {
         return null;
     }
 
+    @Override
     public V getOnly()
     {
         throw new IllegalStateException("Size must be 1 but was " + this.size());
     }
 
+    @Override
     public boolean contains(Object object)
     {
         return false;
     }
 
+    @Override
     public boolean containsAllIterable(Iterable\<?> source)
     {
         return !source.iterator().hasNext();
     }
 
+    @Override
     public boolean containsAll(Collection\<?> source)
     {
         return source.isEmpty();
     }
 
+    @Override
     public boolean containsAllArguments(Object... elements)
     {
         return elements.length == 0;
     }
 
+    @Override
     public ImmutableBag\<V> select(Predicate\<? super V> predicate)
     {
         return Bags.immutable.empty();
     }
 
+    @Override
     public \<P> ImmutableBag\<V> selectWith(Predicate2\<? super V, ? super P> predicate, P parameter)
     {
         return Bags.immutable.empty();
     }
 
+    @Override
     public ImmutableBag\<V> reject(Predicate\<? super V> predicate)
     {
         return Bags.immutable.empty();
     }
 
+    @Override
     public \<P> ImmutableBag\<V> rejectWith(Predicate2\<? super V, ? super P> predicate, P parameter)
     {
         return Bags.immutable.empty();
     }
 
+    @Override
     public \<R extends Collection\<V>\> R select(Predicate\<? super V> predicate, R target)
     {
         return target;
     }
 
+    @Override
     public \<P, R extends Collection\<V>\> R selectWith(Predicate2\<? super V, ? super P> predicate, P parameter, R target)
     {
         return target;
     }
 
+    @Override
     public \<R extends Collection\<V>\> R reject(Predicate\<? super V> predicate, R target)
     {
         return target;
     }
 
+    @Override
     public \<P, R extends Collection\<V>\> R rejectWith(Predicate2\<? super V, ? super P> predicate, P parameter, R target)
     {
         return target;
     }
 
+    @Override
     public PartitionImmutableBag\<V> partition(Predicate\<? super V> predicate)
     {
         return new PartitionHashBag\<V>().toImmutable();
     }
 
+    @Override
     public \<P> PartitionImmutableBag\<V> partitionWith(Predicate2\<? super V, ? super P> predicate, P parameter)
     {
         return new PartitionHashBag\<V>().toImmutable();
     }
 
+    @Override
     public \<S> ImmutableBag\<S> selectInstancesOf(Class\<S> clazz)
     {
         return Bags.immutable.empty();
     }
 
+    @Override
     public \<VV> ImmutableBag\<VV> collect(Function\<? super V, ? extends VV> function)
     {
         return Bags.immutable.empty();
     }
 
+    @Override
     public \<P, VV> ImmutableBag\<VV> collectWith(Function2\<? super V, ? super P, ? extends VV> function, P parameter)
     {
         return Bags.immutable.empty();
     }
 
+    @Override
     public \<VV> ImmutableBag\<VV> collectIf(Predicate\<? super V> predicate, Function\<? super V, ? extends VV> function)
     {
         return Bags.immutable.empty();
@@ -339,266 +374,319 @@ final class Immutable<name>ObjectEmptyMap\<V> implements Immutable<name>ObjectMa
 
     <collectPrimitive("Short", "short")>
 
+    @Override
     public \<VV> ImmutableBag\<VV> flatCollect(Function\<? super V, ? extends Iterable\<VV>\> function)
     {
         return Bags.immutable.empty();
     }
 
+    @Override
     public V detect(Predicate\<? super V> predicate)
     {
         return null;
     }
 
+    @Override
     public \<P> V detectWith(Predicate2\<? super V, ? super P> predicate, P parameter)
     {
         return null;
     }
 
+    @Override
     public Optional\<V> detectOptional(Predicate\<? super V> predicate)
     {
         return Optional.empty();
     }
 
+    @Override
     public \<P> Optional\<V> detectWithOptional(Predicate2\<? super V, ? super P> predicate, P parameter)
     {
         return Optional.empty();
     }
 
+    @Override
     public V detectIfNone(Predicate\<? super V> predicate, Function0\<? extends V> function)
     {
         return function.value();
     }
 
+    @Override
     public \<P> V detectWithIfNone(Predicate2\<? super V, ? super P> predicate, P parameter, Function0\<? extends V> function)
     {
         return function.value();
     }
 
+    @Override
     public int count(Predicate\<? super V> predicate)
     {
         return 0;
     }
 
+    @Override
     public \<P> int countWith(Predicate2\<? super V, ? super P> predicate, P parameter)
     {
         return 0;
     }
 
+    @Override
     public boolean anySatisfy(Predicate\<? super V> predicate)
     {
         return false;
     }
 
+    @Override
     public \<P> boolean anySatisfyWith(Predicate2\<? super V, ? super P> predicate, P parameter)
     {
         return false;
     }
 
+    @Override
     public boolean allSatisfy(Predicate\<? super V> predicate)
     {
         return true;
     }
 
+    @Override
     public \<P> boolean allSatisfyWith(Predicate2\<? super V, ? super P> predicate, P parameter)
     {
         return true;
     }
 
+    @Override
     public boolean noneSatisfy(Predicate\<? super V> predicate)
     {
         return true;
     }
 
+    @Override
     public \<P> boolean noneSatisfyWith(Predicate2\<? super V, ? super P> predicate, P parameter)
     {
         return true;
     }
 
+    @Override
     public \<IV> IV injectInto(IV injectedValue, Function2\<? super IV, ? super V, ? extends IV> function)
     {
         return injectedValue;
     }
 
+    @Override
     public int injectInto(int injectedValue, IntObjectToIntFunction\<? super V> function)
     {
         return injectedValue;
     }
 
+    @Override
     public long injectInto(long injectedValue, LongObjectToLongFunction\<? super V> function)
     {
         return injectedValue;
     }
 
+    @Override
     public float injectInto(float injectedValue, FloatObjectToFloatFunction\<? super V> function)
     {
         return injectedValue;
     }
 
+    @Override
     public double injectInto(double injectedValue, DoubleObjectToDoubleFunction\<? super V> function)
     {
         return injectedValue;
     }
 
+    @Override
     public \<R extends Collection\<V>\> R into(R target)
     {
         return target;
     }
 
+    @Override
     public MutableList\<V> toList()
     {
         return Lists.mutable.with();
     }
 
+    @Override
     public MutableList\<V> toSortedList()
     {
         return Lists.mutable.with();
     }
 
+    @Override
     public MutableList\<V> toSortedList(Comparator\<? super V> comparator)
     {
         return Lists.mutable.with();
     }
 
+    @Override
     public MutableSet\<V> toSet()
     {
         return Sets.mutable.with();
     }
 
+    @Override
     public MutableSortedSet\<V> toSortedSet()
     {
         return SortedSets.mutable.with();
     }
 
+    @Override
     public MutableSortedSet\<V> toSortedSet(Comparator\<? super V> comparator)
     {
         return SortedSets.mutable.with();
     }
 
+    @Override
     public MutableBag\<V> toBag()
     {
         return Bags.mutable.with();
     }
 
+    @Override
     public MutableSortedBag\<V> toSortedBag()
     {
         return TreeBag.newBag();
     }
 
+    @Override
     public MutableSortedBag\<V> toSortedBag(Comparator\<? super V> comparator)
     {
         return TreeBag.newBag(comparator);
     }
 
+    @Override
     public \<VV extends Comparable\<? super VV>\> MutableSortedBag\<V> toSortedBagBy(Function\<? super V, ? extends VV> function)
     {
         return TreeBag.newBag(Comparators.byFunction(function));
     }
 
+    @Override
     public \<NK, NV> MutableMap\<NK, NV> toMap(Function\<? super V, ? extends NK> keyFunction, Function\<? super V, ? extends NV> valueFunction)
     {
         return Maps.mutable.with();
     }
 
+    @Override
     public \<NK, NV> MutableSortedMap\<NK, NV> toSortedMap(Function\<? super V, ? extends NK> keyFunction, Function\<? super V, ? extends NV> valueFunction)
     {
         return SortedMaps.mutable.with();
     }
 
+    @Override
     public \<NK, NV> MutableSortedMap\<NK, NV> toSortedMap(Comparator\<? super NK> comparator, Function\<? super V, ? extends NK> keyFunction, Function\<? super V, ? extends NV> valueFunction)
     {
         return SortedMaps.mutable.with();
     }
 
+    @Override
     public LazyIterable\<V> asLazy()
     {
         return new LazyIterableAdapter\<V>(FastList.\<V>newListWith());
     }
 
+    @Override
     public Object[] toArray()
     {
         return new Object[0];
     }
 
+    @Override
     public \<T> T[] toArray(T[] a)
     {
         return (T[]) new Object[0];
     }
 
+    @Override
     public V min(Comparator\<? super V> comparator)
     {
         throw new NoSuchElementException();
     }
 
+    @Override
     public V max(Comparator\<? super V> comparator)
     {
         throw new NoSuchElementException();
     }
 
+    @Override
     public V min()
     {
         throw new NoSuchElementException();
     }
 
+    @Override
     public V max()
     {
         throw new NoSuchElementException();
     }
 
+    @Override
     public long sumOfInt(IntFunction\<? super V> function)
     {
         return 0L;
     }
 
+    @Override
     public double sumOfFloat(FloatFunction\<? super V> function)
     {
         return 0.0;
     }
 
+    @Override
     public long sumOfLong(LongFunction\<? super V> function)
     {
         return 0L;
     }
 
+    @Override
     public double sumOfDouble(DoubleFunction\<? super V> function)
     {
         return 0.0;
     }
 
+    @Override
     public \<V1> ImmutableObjectLongMap\<V1> sumByInt(Function\<? super V, ? extends V1> groupBy, IntFunction\<? super V> function)
     {
         return ObjectLongMaps.immutable.empty();
     }
 
+    @Override
     public \<V1> ImmutableObjectDoubleMap\<V1> sumByFloat(Function\<? super V, ? extends V1> groupBy, FloatFunction\<? super V> function)
     {
         return ObjectDoubleMaps.immutable.empty();
     }
 
+    @Override
     public \<V1> ImmutableObjectLongMap\<V1> sumByLong(Function\<? super V, ? extends V1> groupBy, LongFunction\<? super V> function)
     {
         return ObjectLongMaps.immutable.empty();
     }
 
+    @Override
     public \<V1> ImmutableObjectDoubleMap\<V1> sumByDouble(Function\<? super V, ? extends V1> groupBy, DoubleFunction\<? super V> function)
     {
         return ObjectDoubleMaps.immutable.empty();
     }
 
+    @Override
     public Mutable<name>Set keySet()
     {
         return Unmodifiable<name>Set.of(<name>HashSet.newSetWith());
     }
 
+    @Override
     public Collection\<V> values()
     {
         return Lists.immutable.\<V>of().castToList();
     }
 
+    @Override
     public Lazy<name>Iterable keysView()
     {
         return Lazy<name>Iterate.empty();
     }
 
+    @Override
     public RichIterable\<<name>ObjectPair\<V>\> keyValuesView()
     {
         return LazyIterate.empty();
@@ -631,29 +719,35 @@ final class Immutable<name>ObjectEmptyMap\<V> implements Immutable<name>ObjectMa
         return "{}";
     }
 
+    @Override
     public String makeString()
     {
         return "";
     }
 
+    @Override
     public String makeString(String separator)
     {
         return "";
     }
 
+    @Override
     public String makeString(String start, String separator, String end)
     {
         return start + end;
     }
 
+    @Override
     public void appendString(Appendable appendable)
     {
     }
 
+    @Override
     public void appendString(Appendable appendable, String separator)
     {
     }
 
+    @Override
     public void appendString(Appendable appendable, String start, String separator, String end)
     {
         try
@@ -667,111 +761,133 @@ final class Immutable<name>ObjectEmptyMap\<V> implements Immutable<name>ObjectMa
         }
     }
 
+    @Override
     public \<VV> ImmutableBagMultimap\<VV, V> groupBy(Function\<? super V, ? extends VV> function)
     {
         return Multimaps.immutable.bag.empty();
     }
 
+    @Override
     public \<VV, R extends MutableMultimap\<VV, V>\> R groupBy(Function\<? super V, ? extends VV> function, R target)
     {
         return target;
     }
 
+    @Override
     public \<VV> ImmutableBagMultimap\<VV, V> groupByEach(Function\<? super V, ? extends Iterable\<VV>\> function)
     {
         return Multimaps.immutable.bag.empty();
     }
 
+    @Override
     public \<VV, R extends MutableMultimap\<VV, V>\> R groupByEach(Function\<? super V, ? extends Iterable\<VV>\> function, R target)
     {
         return target;
     }
 
+    @Override
     public \<VV> ImmutableMap\<VV, V> groupByUniqueKey(Function\<? super V, ? extends VV> function)
     {
         return Maps.immutable.empty();
     }
 
+    @Override
     public \<VV, R extends MutableMap\<VV, V>\> R groupByUniqueKey(Function\<? super V, ? extends VV> function, R target)
     {
         return target;
     }
 
+    @Override
     public \<S> ImmutableBag\<Pair\<V, S>\> zip(Iterable\<S> that)
     {
         return Bags.immutable.empty();
     }
 
+    @Override
     public \<S, R extends Collection\<Pair\<V, S>\>> R zip(Iterable\<S> that, R target)
     {
         return target;
     }
 
+    @Override
     public ImmutableSet\<Pair\<V, Integer>\> zipWithIndex()
     {
         return Sets.immutable.empty();
     }
 
+    @Override
     public \<R extends Collection\<Pair\<V, Integer>\>> R zipWithIndex(R target)
     {
         return target;
     }
 
+    @Override
     public RichIterable\<RichIterable\<V>\> chunk(int size)
     {
         return Lists.immutable.of();
     }
 
+    @Override
     public \<K, VV> ImmutableMap\<K, VV> aggregateInPlaceBy(Function\<? super V, ? extends K> groupBy, Function0\<? extends VV> zeroValueFactory, Procedure2\<? super VV, ? super V> mutatingAggregator)
     {
         return Maps.immutable.empty();
     }
 
+    @Override
     public \<VV extends Comparable\<? super VV>\> V maxBy(Function\<? super V, ? extends VV> function)
     {
         throw new NoSuchElementException();
     }
 
+    @Override
     public \<VV extends Comparable\<? super VV>\> V minBy(Function\<? super V, ? extends VV> function)
     {
         throw new NoSuchElementException();
     }
 
+    @Override
     public \<VV extends Comparable\<? super VV>\> MutableSortedSet\<V> toSortedSetBy(Function\<? super V, ? extends VV> function)
     {
         return SortedSets.mutable.of();
     }
 
+    @Override
     public \<VV extends Comparable\<? super VV>\> MutableList\<V> toSortedListBy(Function\<? super V, ? extends VV> function)
     {
         return Lists.mutable.of();
     }
 
+    @Override
     public \<VV, R extends Collection\<VV>\> R flatCollect(Function\<? super V, ? extends Iterable\<VV>\> function, R target)
     {
         return target;
     }
 
+    @Override
     public \<VV, R extends Collection\<VV>\> R collectIf(Predicate\<? super V> predicate, Function\<? super V, ? extends VV> function, R target)
     {
         return target;
     }
 
+    @Override
     public \<K, VV> ImmutableMap\<K, VV> aggregateBy(Function\<? super V, ? extends K> groupBy, Function0\<? extends VV> zeroValueFactory, Function2\<? super VV, ? super V, ? extends VV> nonMutatingAggregator)
     {
         return Maps.immutable.empty();
     }
 
+    @Override
     public \<P, VV, R extends Collection\<VV>\> R collectWith(Function2\<? super V, ? super P, ? extends VV> function, P parameter, R targetCollection)
     {
         return targetCollection;
     }
 
+    @Override
     public \<VV, R extends Collection\<VV>\> R collect(Function\<? super V, ? extends VV> function, R target)
     {
         return target;
     }
 
+    @Override
     public Immutable<name>ObjectMap\<V> newWithKeyValue(<type> key, V value)
     {
         <name>ObjectHashMap\<V> map = new <name>ObjectHashMap\<V>();
@@ -779,32 +895,39 @@ final class Immutable<name>ObjectEmptyMap\<V> implements Immutable<name>ObjectMa
         return map.toImmutable();
     }
 
+    @Override
     public Immutable<name>ObjectMap\<V> newWithoutKey(<type> key)
     {
         return this;
     }
 
+    @Override
     public Immutable<name>ObjectMap\<V> newWithoutAllKeys(<name>Iterable keys)
     {
         return this;
     }
 
+    @Override
     public void forEach(Procedure\<? super V> procedure)
     {
     }
 
+    @Override
     public void each(Procedure\<? super V> procedure)
     {
     }
 
+    @Override
     public void forEachWithIndex(ObjectIntProcedure\<? super V> objectIntProcedure)
     {
     }
 
+    @Override
     public \<P> void forEachWith(Procedure2\<? super V, ? super P> procedure, P parameter)
     {
     }
 
+    @Override
     public Iterator\<V> iterator()
     {
         return new InternalIterator();
@@ -812,16 +935,19 @@ final class Immutable<name>ObjectEmptyMap\<V> implements Immutable<name>ObjectMa
 
     private class InternalIterator implements Iterator\<V>
     {
+        @Override
         public boolean hasNext()
         {
             return false;
         }
 
+        @Override
         public V next()
         {
             throw new NoSuchElementException();
         }
 
+        @Override
         public void remove()
         {
             throw new UnsupportedOperationException("Cannot call remove() on " + this.getClass().getSimpleName());

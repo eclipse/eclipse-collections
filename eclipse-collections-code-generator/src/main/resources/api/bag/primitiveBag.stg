@@ -74,6 +74,7 @@ public interface <name>Bag extends <name>Iterable
 
     <sharedAPI(fileName(primitive), name)>
 
+    @Override
     \<V> Bag\<V> collect(<name>ToObjectFunction\<? extends V> function);
 
     /**

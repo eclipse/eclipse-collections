@@ -111,6 +111,7 @@ final class Immutable<name>ArrayStack extends Abstract<name>Stack
         return this.delegate;
     }
 
+    @Override
     public Immutable<name>Stack push(<type> item)
     {
         <name>ArrayList newDelegate = <name>ArrayList.newList(this.delegate);
@@ -118,6 +119,7 @@ final class Immutable<name>ArrayStack extends Abstract<name>Stack
         return new Immutable<name>ArrayStack(newDelegate);
     }
 
+    @Override
     public Immutable<name>Stack pop()
     {
         <name>ArrayList newDelegate = <name>ArrayList.newList(this.delegate);
@@ -125,6 +127,7 @@ final class Immutable<name>ArrayStack extends Abstract<name>Stack
         return <name>Stacks.immutable.with(newDelegate.toArray());
     }
 
+    @Override
     public Immutable<name>Stack pop(int count)
     {
         this.checkNegativeCount(count);
@@ -150,31 +153,37 @@ final class Immutable<name>ArrayStack extends Abstract<name>Stack
         }
     }
 
+    @Override
     public Immutable<name>Stack select(<name>Predicate predicate)
     {
         return <name>Stacks.immutable.withAllReversed(this.delegate.asReversed().select(predicate));
     }
 
+    @Override
     public Immutable<name>Stack reject(<name>Predicate predicate)
     {
         return <name>Stacks.immutable.withAllReversed(this.delegate.asReversed().reject(predicate));
     }
 
+    @Override
     public \<V> ImmutableStack\<V> collect(<name>ToObjectFunction\<? extends V> function)
     {
         return Stacks.immutable.withAllReversed(this.delegate.asReversed().collect(function));
     }
 
+    @Override
     public Immutable<name>Stack toImmutable()
     {
         return this;
     }
 
+    @Override
     public boolean isEmpty()
     {
         return false;
     }
 
+    @Override
     public boolean notEmpty()
     {
         return true;
@@ -263,6 +272,7 @@ arithmeticMethods ::= [
 
 allMethods(type) ::= <<
 
+@Override
 public Mutable<name>List toSortedList()
 {
     return <name>ArrayList.newList(this).sortThis();

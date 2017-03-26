@@ -313,11 +313,13 @@ public class <name1><name2>HashMap extends AbstractMutable<name2>ValuesMap imple
         return appendable.toString();
     }
 
+    @Override
     public Mutable<name2>Iterator <type2>Iterator()
     {
         return new Internal<name2>Iterator();
     }
 
+    @Override
     public \<V> V injectInto(V injectedValue, Object<name2>ToObjectFunction\<? super V, ? extends V> function)
     {
         V result = injectedValue;
@@ -327,6 +329,7 @@ public class <name1><name2>HashMap extends AbstractMutable<name2>ValuesMap imple
         return result;
     }
 
+    @Override
     public void clear()
     {
         this.sentinelValues = null;
@@ -344,6 +347,7 @@ public class <name1><name2>HashMap extends AbstractMutable<name2>ValuesMap imple
         <endif>
     }
 
+    @Override
     public void put(<type1> key, <type2> value)
     {
         if (isEmptyKey(key))
@@ -388,11 +392,13 @@ public class <name1><name2>HashMap extends AbstractMutable<name2>ValuesMap imple
         this.addEmptyKeyValue(value);
     }
 
+    @Override
     public void putAll(<name1><name2>Map map)
     {
         map.forEachKeyValue(this::put);
     }
 
+    @Override
     public void removeKey(<type1> key)
     {
         if (isEmptyKey(key))
@@ -420,11 +426,13 @@ public class <name1><name2>HashMap extends AbstractMutable<name2>ValuesMap imple
         }
     }
 
+    @Override
     public void remove(<type1> key)
     {
         this.removeKey(key);
     }
 
+    @Override
     public <type2> removeKeyIfAbsent(<type1> key, <type2> value)
     {
         if (isEmptyKey(key))
@@ -457,26 +465,31 @@ public class <name1><name2>HashMap extends AbstractMutable<name2>ValuesMap imple
         return value;
     }
 
+    @Override
     public <type2> getIfAbsentPut(<type1> key, <type2> value)
     {
         <getIfAbsentPut("")>
     }
 
+    @Override
     public <type2> getIfAbsentPut(<type1> key, <name2>Function0 function)
     {
         <getIfAbsentPut({<type2> value = function.value();})>
     }
 
+    @Override
     public \<P> <type2> getIfAbsentPutWith(<type1> key, <name2>Function\<? super P> function, P parameter)
     {
         <getIfAbsentPut({<type2> value = function.<type2>ValueOf(parameter);})>
     }
 
+    @Override
     public <type2> getIfAbsentPutWithKey(<type1> key, <name1>To<name2>Function function)
     {
         <getIfAbsentPut({<type2> value = function.valueOf(key);})>
     }
 
+    @Override
     public <type2> addToValue(<type1> key, <type2> toBeAdded)
     {
         if (isEmptyKey(key))
@@ -562,6 +575,7 @@ public class <name1><name2>HashMap extends AbstractMutable<name2>ValuesMap imple
         this.copyKeysOnWrite = false;
     }
 
+    @Override
     public <type2> updateValue(<type1> key, <type2> initialValueIfAbsent, <name2>To<name2>Function function)
     {
         if (isEmptyKey(key))
@@ -609,6 +623,7 @@ public class <name1><name2>HashMap extends AbstractMutable<name2>ValuesMap imple
         return value;
     }
 
+    @Override
     public <name1><name2>HashMap withKeyValue(<type1> key1, <type2> value1)
     {
         this.put(key1, value1);
@@ -621,38 +636,45 @@ public class <name1><name2>HashMap extends AbstractMutable<name2>ValuesMap imple
 
     <withKeysValues(["1", "2", "3", "4"])>
 
+    @Override
     public <name1><name2>HashMap withoutKey(<type1> key)
     {
         this.removeKey(key);
         return this;
     }
 
+    @Override
     public <name1><name2>HashMap withoutAllKeys(<name1>Iterable keys)
     {
         keys.forEach(this::removeKey);
         return this;
     }
 
+    @Override
     public Mutable<name1><name2>Map asUnmodifiable()
     {
         return new Unmodifiable<name1><name2>Map(this);
     }
 
+    @Override
     public Mutable<name1><name2>Map asSynchronized()
     {
         return new Synchronized<name1><name2>Map(this);
     }
 
+    @Override
     public Immutable<name1><name2>Map toImmutable()
     {
         return <name1><name2>Maps.immutable.ofAll(this);
     }
 
+    @Override
     public <type2> get(<type1> key)
     {
         return this.getIfAbsent(key, EMPTY_VALUE);
     }
 
+    @Override
     public <type2> getIfAbsent(<type1> key, <type2> ifAbsent)
     {
         if (isEmptyKey(key) || isRemovedKey(key))
@@ -728,6 +750,7 @@ public class <name1><name2>HashMap extends AbstractMutable<name2>ValuesMap imple
 
 <endif>
 
+    @Override
     public <type2> getOrThrow(<type1> key)
     {
         if (isEmptyKey(key))
@@ -754,6 +777,7 @@ public class <name1><name2>HashMap extends AbstractMutable<name2>ValuesMap imple
         throw new IllegalStateException("Key " + key + " not present.");
     }
 
+    @Override
     public boolean containsKey(<type1> key)
     {
         if (isEmptyKey(key))
@@ -767,26 +791,31 @@ public class <name1><name2>HashMap extends AbstractMutable<name2>ValuesMap imple
         return <(equals.(type1))({this.<keyArray>[this.probe(key)]}, "key")>;
     }
 
+    @Override
     public void forEachKey(<name1>Procedure procedure)
     {
         <forEachKey(template = {procedure.value(<key>)})>
     }
 
+    @Override
     public void forEachKeyValue(<name1><name2>Procedure procedure)
     {
         <forEachKeyValue(template = {procedure.value(<key>, <value>)})>
     }
 
+    @Override
     public Lazy<name1>Iterable keysView()
     {
         return new KeysView();
     }
 
+    @Override
     public RichIterable\<<name1><name2>Pair> keyValuesView()
     {
         return new KeyValuesView();
     }
 
+    @Override
     public <name1><name2>HashMap select(<name1><name2>Predicate predicate)
     {
         <name1><name2>HashMap result = new <name1><name2>HashMap();
@@ -796,6 +825,7 @@ public class <name1><name2>HashMap extends AbstractMutable<name2>ValuesMap imple
         return result;
     }
 
+    @Override
     public <name1><name2>HashMap reject(<name1><name2>Predicate predicate)
     {
         <name1><name2>HashMap result = new <name1><name2>HashMap();
@@ -821,6 +851,7 @@ public class <name1><name2>HashMap extends AbstractMutable<name2>ValuesMap imple
         return result;
     }
 
+    @Override
     public void writeExternal(ObjectOutput out) throws IOException
     {
         out.writeInt(this.size());
@@ -847,6 +878,7 @@ public class <name1><name2>HashMap extends AbstractMutable<name2>ValuesMap imple
         }
     }
 
+    @Override
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
     {
         int size = in.readInt();
@@ -949,11 +981,13 @@ public class <name1><name2>HashMap extends AbstractMutable<name2>ValuesMap imple
         private boolean handledOne;
         private boolean canRemove;
 
+        @Override
         public boolean hasNext()
         {
             return this.count \< <name1><name2>HashMap.this.size();
         }
 
+        @Override
         public <type2> next()
         {
             if (!this.hasNext())
@@ -993,6 +1027,7 @@ public class <name1><name2>HashMap extends AbstractMutable<name2>ValuesMap imple
             return result;
         }
 
+        @Override
         public void remove()
         {
             if (!this.canRemove)
@@ -1007,6 +1042,7 @@ public class <name1><name2>HashMap extends AbstractMutable<name2>ValuesMap imple
 
     private class KeysView extends AbstractLazy<name1>Iterable
     {
+        @Override
         public <name1>Iterator <type1>Iterator()
         {
             return new Unmodifiable<name1>Iterator(new KeySetIterator());
@@ -1015,6 +1051,7 @@ public class <name1><name2>HashMap extends AbstractMutable<name2>ValuesMap imple
         /**
          * @since 7.0.
          */
+        @Override
         public void each(<name1>Procedure procedure)
         {
             <name1><name2>HashMap.this.forEachKey(procedure);
@@ -1030,11 +1067,13 @@ public class <name1><name2>HashMap extends AbstractMutable<name2>ValuesMap imple
         private boolean handledOne;
         private boolean canRemove;
 
+        @Override
         public boolean hasNext()
         {
             return this.count \< <name1><name2>HashMap.this.size();
         }
 
+        @Override
         public <type1> next()
         {
             if (!this.hasNext())
@@ -1074,6 +1113,7 @@ public class <name1><name2>HashMap extends AbstractMutable<name2>ValuesMap imple
             return this.lastKey;
         }
 
+        @Override
         public void remove()
         {
             if (!this.canRemove)
@@ -1086,6 +1126,7 @@ public class <name1><name2>HashMap extends AbstractMutable<name2>ValuesMap imple
         }
     }
 
+    @Override
     public Mutable<name1>Set keySet()
     {
         return new KeySet();
@@ -1117,11 +1158,13 @@ public class <name1><name2>HashMap extends AbstractMutable<name2>ValuesMap imple
             return <name1><name2>HashMap.this.<keyArray>.length<if(sameTwoPrimitives)> / 2<endif>;
         }
 
+        @Override
         public Mutable<name1>Iterator <type1>Iterator()
         {
             return new KeySetIterator();
         }
 
+        @Override
         public boolean retainAll(<name1>Iterable source)
         {
             int oldSize = <name1><name2>HashMap.this.size();
@@ -1141,11 +1184,13 @@ public class <name1><name2>HashMap extends AbstractMutable<name2>ValuesMap imple
             return false;
         }
 
+        @Override
         public boolean retainAll(<type1>... source)
         {
             return this.retainAll(<name1>HashSet.newSetWith(source));
         }
 
+        @Override
         public <name1>Set freeze()
         {
             <name1><name2>HashMap.this.copyKeysOnWrite = true;
@@ -1164,6 +1209,7 @@ public class <name1><name2>HashMap extends AbstractMutable<name2>ValuesMap imple
         }
     }
 
+    @Override
     public Mutable<name2>Collection values()
     {
         return new ValuesCollection();
@@ -1171,11 +1217,13 @@ public class <name1><name2>HashMap extends AbstractMutable<name2>ValuesMap imple
 
     private class ValuesCollection extends Abstract<name2>ValuesCollection
     {
+        @Override
         public Mutable<name2>Iterator <type2>Iterator()
         {
             return <name1><name2>HashMap.this.<type2>Iterator();
         }
 
+        @Override
         public boolean remove(<type2> item)
         {
             int oldSize = <name1><name2>HashMap.this.size();
@@ -1201,6 +1249,7 @@ public class <name1><name2>HashMap extends AbstractMutable<name2>ValuesMap imple
             return oldSize != <name1><name2>HashMap.this.size();
         }
 
+        @Override
         public boolean retainAll(<name2>Iterable source)
         {
             int oldSize = <name1><name2>HashMap.this.size();
@@ -1223,22 +1272,26 @@ public class <name1><name2>HashMap extends AbstractMutable<name2>ValuesMap imple
 
     private class KeyValuesView extends AbstractLazyIterable\<<name1><name2>Pair>
     {
+        @Override
         public void each(Procedure\<? super <name1><name2>Pair> procedure)
         {
             <forEachKeyValue(template = {procedure.value(PrimitiveTuples.pair(<key>, <value>))}, innerClass = true)>
         }
 
+        @Override
         public void forEachWithIndex(ObjectIntProcedure\<? super <name1><name2>Pair> objectIntProcedure)
         {
             int index = 0;
             <forEachKeyValue(template = {objectIntProcedure.value(PrimitiveTuples.pair(<key>, <value>), index);<\n>index++}, innerClass = true)>
         }
 
+        @Override
         public \<P> void forEachWith(Procedure2\<? super <name1><name2>Pair, ? super P> procedure, P parameter)
         {
             <forEachKeyValue(template = {procedure.value(PrimitiveTuples.pair(<key>, <value>), parameter)}, innerClass = true)>
         }
 
+        @Override
         public Iterator\<<name1><name2>Pair> iterator()
         {
             return new InternalKeyValuesIterator();
@@ -1251,6 +1304,7 @@ public class <name1><name2>HashMap extends AbstractMutable<name2>ValuesMap imple
             private boolean handledZero;
             private boolean handledOne;
 
+            @Override
             public <name1><name2>Pair next()
             {
                 if (!this.hasNext())
@@ -1286,11 +1340,13 @@ public class <name1><name2>HashMap extends AbstractMutable<name2>ValuesMap imple
                 return result;
             }
 
+            @Override
             public void remove()
             {
                 throw new UnsupportedOperationException("Cannot call remove() on " + this.getClass().getSimpleName());
             }
 
+            @Override
             public boolean hasNext()
             {
                 return this.count != <name1><name2>HashMap.this.size();

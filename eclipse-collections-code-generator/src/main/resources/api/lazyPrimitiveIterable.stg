@@ -38,10 +38,13 @@ import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
  */
 public interface Lazy<name>Iterable extends <name>Iterable
 {
+    @Override
     Lazy<name>Iterable select(<name>Predicate predicate);
 
+    @Override
     Lazy<name>Iterable reject(<name>Predicate predicate);
 
+    @Override
     \<V> LazyIterable\<V> collect(<name>ToObjectFunction\<? extends V> function);
 
     <collectPrimitive(name, type, "Boolean", "boolean")>

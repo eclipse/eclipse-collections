@@ -111,17 +111,20 @@ public final class <name>ArrayStack extends Abstract<name>Stack
         return this.delegate;
     }
 
+    @Override
     public void push(<type> item)
     {
         this.delegate.add(item);
     }
 
+    @Override
     public <type> pop()
     {
         this.checkEmptyStack();
         return this.delegate.removeAtIndex(this.delegate.size() - 1);
     }
 
+    @Override
     public <name>List pop(int count)
     {
         this.checkPositiveValueForCount(count);
@@ -139,46 +142,55 @@ public final class <name>ArrayStack extends Abstract<name>Stack
         return subList;
     }
 
+    @Override
     public Mutable<name>Stack select(<name>Predicate predicate)
     {
         return newStackFromTopToBottom(this.delegate.asReversed().select(predicate));
     }
 
+    @Override
     public Mutable<name>Stack reject(<name>Predicate predicate)
     {
         return newStackFromTopToBottom(this.delegate.asReversed().reject(predicate));
     }
 
+    @Override
     public \<V> MutableStack\<V> collect(<name>ToObjectFunction\<? extends V> function)
     {
         return ArrayStack.newStackFromTopToBottom(this.delegate.asReversed().collect(function));
     }
 
+    @Override
     public void clear()
     {
         this.delegate.clear();
     }
 
+    @Override
     public Mutable<name>List toSortedList()
     {
         return <name>ArrayList.newList(this).sortThis();
     }
 
+    @Override
     public Mutable<name>Stack asUnmodifiable()
     {
         return new Unmodifiable<name>Stack(this);
     }
 
+    @Override
     public Mutable<name>Stack asSynchronized()
     {
         return new Synchronized<name>Stack(this);
     }
 
+    @Override
     public Immutable<name>Stack toImmutable()
     {
         return <name>Stacks.immutable.withAll(this.delegate);
     }
 
+    @Override
     public void writeExternal(ObjectOutput out) throws IOException
     {
         out.writeInt(this.size());
@@ -190,6 +202,7 @@ public final class <name>ArrayStack extends Abstract<name>Stack
         }
     }
 
+    @Override
     public void readExternal(ObjectInput in) throws IOException
     {
         int size = in.readInt();

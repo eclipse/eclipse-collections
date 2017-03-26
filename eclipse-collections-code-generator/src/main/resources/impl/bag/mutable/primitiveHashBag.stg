@@ -136,11 +136,13 @@ public final class <name>HashBag extends Abstract<name>Iterable implements Mutab
         return this.size;
     }
 
+    @Override
     public int sizeDistinct()
     {
         return this.items.size();
     }
 
+    @Override
     public void clear()
     {
         this.items.clear();
@@ -168,39 +170,46 @@ public final class <name>HashBag extends Abstract<name>Iterable implements Mutab
         return this;
     }
 
+    @Override
     public <name>HashBag withAll(<name>Iterable iterable)
     {
         this.addAll(iterable);
         return this;
     }
 
+    @Override
     public <name>HashBag without(<type> element)
     {
         this.remove(element);
         return this;
     }
 
+    @Override
     public <name>HashBag withoutAll(<name>Iterable iterable)
     {
         this.removeAll(iterable);
         return this;
     }
 
+    @Override
     public boolean contains(<type> value)
     {
         return this.items.containsKey(value);
     }
 
+    @Override
     public int occurrencesOf(<type> item)
     {
         return this.items.get(item);
     }
 
+    @Override
     public void forEachWithOccurrences(<name>IntProcedure procedure)
     {
         this.items.forEachKeyValue(procedure);
     }
 
+    @Override
     public <name>HashBag selectByOccurrences(IntPredicate predicate)
     {
         final <name>HashBag result = new <name>HashBag();
@@ -214,11 +223,13 @@ public final class <name>HashBag extends Abstract<name>Iterable implements Mutab
         return result;
     }
 
+    @Override
     public MutableList\<<name>IntPair> topOccurrences(int count)
     {
         return this.occurrencesSortingBy(count, item -> -item.getTwo(), Lists.mutable.empty());
     }
 
+    @Override
     public MutableList\<<name>IntPair> bottomOccurrences(int count)
     {
         return this.occurrencesSortingBy(count, <name>IntPair::getTwo, Lists.mutable.empty());
@@ -252,6 +263,7 @@ public final class <name>HashBag extends Abstract<name>Iterable implements Mutab
         return result;
     }
 
+    @Override
     public boolean add(<type> item)
     {
         this.items.updateValue(item, 0, IntToIntFunctions.increment());
@@ -259,6 +271,7 @@ public final class <name>HashBag extends Abstract<name>Iterable implements Mutab
         return true;
     }
 
+    @Override
     public boolean remove(<type> item)
     {
         int newValue = this.items.updateValue(item, 0, IntToIntFunctions.decrement());
@@ -275,6 +288,7 @@ public final class <name>HashBag extends Abstract<name>Iterable implements Mutab
         return true;
     }
 
+    @Override
     public boolean addAll(<type>... source)
     {
         if (source.length == 0)
@@ -289,6 +303,7 @@ public final class <name>HashBag extends Abstract<name>Iterable implements Mutab
         return true;
     }
 
+    @Override
     public boolean addAll(<name>Iterable source)
     {
         if (source.isEmpty())
@@ -312,6 +327,7 @@ public final class <name>HashBag extends Abstract<name>Iterable implements Mutab
         return true;
     }
 
+    @Override
     public boolean removeAll(<type>... source)
     {
         if (source.length == 0)
@@ -327,6 +343,7 @@ public final class <name>HashBag extends Abstract<name>Iterable implements Mutab
         return this.size() != oldSize;
     }
 
+    @Override
     public boolean removeAll(<name>Iterable source)
     {
         if (source.isEmpty())
@@ -356,6 +373,7 @@ public final class <name>HashBag extends Abstract<name>Iterable implements Mutab
         return this.size() != oldSize;
     }
 
+    @Override
     public boolean retainAll(<name>Iterable source)
     {
         int oldSize = this.size();
@@ -370,11 +388,13 @@ public final class <name>HashBag extends Abstract<name>Iterable implements Mutab
         return false;
     }
 
+    @Override
     public boolean retainAll(<type>... source)
     {
         return this.retainAll(<name>HashSet.newSetWith(source));
     }
 
+    @Override
     public void addOccurrences(<type> item, final int occurrences)
     {
         if (occurrences \< 0)
@@ -388,6 +408,7 @@ public final class <name>HashBag extends Abstract<name>Iterable implements Mutab
         }
     }
 
+    @Override
     public boolean removeOccurrences(<type> item, final int occurrences)
     {
         if (occurrences \< 0)
@@ -413,6 +434,7 @@ public final class <name>HashBag extends Abstract<name>Iterable implements Mutab
         return true;
     }
 
+    @Override
     public void forEach(<name>Procedure procedure)
     {
         this.each(procedure);
@@ -421,6 +443,7 @@ public final class <name>HashBag extends Abstract<name>Iterable implements Mutab
     /**
      * @since 7.0.
      */
+    @Override
     public void each(final <name>Procedure procedure)
     {
         this.items.forEachKeyValue((<type> key, int occurrences) ->
@@ -432,6 +455,7 @@ public final class <name>HashBag extends Abstract<name>Iterable implements Mutab
         });
     }
 
+    @Override
     public <name>HashBag select(final <name>Predicate predicate)
     {
         final <name>HashBag result = new <name>HashBag();
@@ -445,6 +469,7 @@ public final class <name>HashBag extends Abstract<name>Iterable implements Mutab
         return result;
     }
 
+    @Override
     public <name>HashBag reject(final <name>Predicate predicate)
     {
         final <name>HashBag result = new <name>HashBag();
@@ -458,6 +483,7 @@ public final class <name>HashBag extends Abstract<name>Iterable implements Mutab
         return result;
     }
 
+    @Override
     public \<T> T injectInto(T injectedValue, Object<name>ToObjectFunction\<? super T, ? extends T> function)
     {
         T[] result = (T[]) new Object[1];
@@ -502,6 +528,7 @@ public final class <name>HashBag extends Abstract<name>Iterable implements Mutab
         return result.getCount();
     }
 
+    @Override
     public void appendString(
             final Appendable appendable,
             String start,
@@ -539,6 +566,7 @@ public final class <name>HashBag extends Abstract<name>Iterable implements Mutab
         }
     }
 
+    @Override
     public int count(final <name>Predicate predicate)
     {
         final Counter result = new Counter();
@@ -552,26 +580,31 @@ public final class <name>HashBag extends Abstract<name>Iterable implements Mutab
         return result.getCount();
     }
 
+    @Override
     public boolean anySatisfy(<name>Predicate predicate)
     {
         return this.items.keysView().anySatisfy(predicate);
     }
 
+    @Override
     public boolean allSatisfy(<name>Predicate predicate)
     {
         return this.items.keysView().allSatisfy(predicate);
     }
 
+    @Override
     public boolean noneSatisfy(<name>Predicate predicate)
     {
         return this.items.keysView().noneSatisfy(predicate);
     }
 
+    @Override
     public <type> detectIfNone(<name>Predicate predicate, <type> ifNone)
     {
         return this.items.keysView().detectIfNone(predicate, ifNone);
     }
 
+    @Override
     public \<V> MutableBag\<V> collect(final <name>ToObjectFunction\<? extends V> function)
     {
         final HashBag\<V> result = HashBag.newBag(this.items.size());
@@ -580,6 +613,7 @@ public final class <name>HashBag extends Abstract<name>Iterable implements Mutab
         return result;
     }
 
+    @Override
     public <type> max()
     {
         if (this.isEmpty())
@@ -589,6 +623,7 @@ public final class <name>HashBag extends Abstract<name>Iterable implements Mutab
         return this.items.keysView().max();
     }
 
+    @Override
     public <type> min()
     {
         if (this.isEmpty())
@@ -598,6 +633,7 @@ public final class <name>HashBag extends Abstract<name>Iterable implements Mutab
         return this.items.keysView().min();
     }
 
+    @Override
     <if(primitive.floatingPoint)>public <wideType.(type)> sum()
 {
     final <wideType.(type)>[] result = {<wideZero.(type)>};
@@ -624,6 +660,7 @@ public final class <name>HashBag extends Abstract<name>Iterable implements Mutab
 }
 
     <endif>
+    @Override
     public <type>[] toArray()
     {
         final <type>[] array = new <type>[this.size()];
@@ -640,26 +677,31 @@ public final class <name>HashBag extends Abstract<name>Iterable implements Mutab
         return array;
     }
 
+    @Override
     public Mutable<name>Bag asUnmodifiable()
     {
         return new Unmodifiable<name>Bag(this);
     }
 
+    @Override
     public Mutable<name>Bag asSynchronized()
     {
         return new Synchronized<name>Bag(this);
     }
 
+    @Override
     public Immutable<name>Bag toImmutable()
     {
         return <name>Bags.immutable.withAll(this);
     }
 
+    @Override
     public Mutable<name>Iterator <type>Iterator()
     {
         return new InternalIterator();
     }
 
+    @Override
     public void writeExternal(final ObjectOutput out) throws IOException
     {
         out.writeInt(this.items.size());
@@ -688,6 +730,7 @@ public final class <name>HashBag extends Abstract<name>Iterable implements Mutab
         }
     }
 
+    @Override
     public void readExternal(ObjectInput in) throws IOException
     {
         int size = in.readInt();
@@ -706,11 +749,13 @@ public final class <name>HashBag extends Abstract<name>Iterable implements Mutab
         private int occurrences;
         private boolean canRemove;
 
+        @Override
         public boolean hasNext()
         {
             return this.occurrences > 0 || this.<type>Iterator.hasNext();
         }
 
+        @Override
         public <type> next()
         {
             if (this.occurrences == 0)
@@ -723,6 +768,7 @@ public final class <name>HashBag extends Abstract<name>Iterable implements Mutab
             return this.currentItem;
         }
 
+        @Override
         public void remove()
         {
             if (!this.canRemove)

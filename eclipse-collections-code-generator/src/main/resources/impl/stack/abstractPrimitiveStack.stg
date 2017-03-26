@@ -52,12 +52,14 @@ public abstract class Abstract<name>Stack implements <name>Stack
         }
     }
 
+    @Override
     public <type> peek()
     {
         this.checkEmptyStack();
         return this.getDelegate().getLast();
     }
 
+    @Override
     public <name>List peek(int count)
     {
         this.checkPositiveValueForCount(count);
@@ -75,6 +77,7 @@ public abstract class Abstract<name>Stack implements <name>Stack
         return subList;
     }
 
+    @Override
     public <type> peekAt(int index)
     {
         this.rangeCheck(index);
@@ -105,11 +108,13 @@ public abstract class Abstract<name>Stack implements <name>Stack
         }
     }
 
+    @Override
     public void forEach(<name>Procedure procedure)
     {
         this.each(procedure);
     }
 
+    @Override
     public <name>Iterator <type>Iterator()
     {
         return new Unmodifiable<name>Iterator(this.getDelegate().asReversed().<type>Iterator());
@@ -118,81 +123,97 @@ public abstract class Abstract<name>Stack implements <name>Stack
     /**
      * @since 7.0.
      */
+    @Override
     public void each(<name>Procedure procedure)
     {
         this.getDelegate().asReversed().forEach(procedure);
     }
 
+    @Override
     public int count(<name>Predicate predicate)
     {
         return this.getDelegate().asReversed().count(predicate);
     }
 
+    @Override
     public boolean anySatisfy(<name>Predicate predicate)
     {
         return this.getDelegate().asReversed().anySatisfy(predicate);
     }
 
+    @Override
     public boolean allSatisfy(<name>Predicate predicate)
     {
         return this.getDelegate().asReversed().allSatisfy(predicate);
     }
 
+    @Override
     public boolean noneSatisfy(<name>Predicate predicate)
     {
         return this.getDelegate().asReversed().noneSatisfy(predicate);
     }
 
+    @Override
     public <type> detectIfNone(<name>Predicate predicate, <type> ifNone)
     {
         return this.getDelegate().asReversed().detectIfNone(predicate, ifNone);
     }
 
+    @Override
     public <type>[] toArray()
     {
         return this.getDelegate().asReversed().toArray();
     }
 
+    @Override
     public boolean contains(<type> value)
     {
         return this.getDelegate().asReversed().contains(value);
     }
 
+    @Override
     public boolean containsAll(<type>... source)
     {
         return this.getDelegate().asReversed().containsAll(source);
     }
 
+    @Override
     public boolean containsAll(<name>Iterable source)
     {
         return this.getDelegate().asReversed().containsAll(source);
     }
 
+    @Override
     public Mutable<name>List toList()
     {
         return <name>ArrayList.newList(this);
     }
 
+    @Override
     public Mutable<name>Set toSet()
     {
         return <name>HashSet.newSet(this);
     }
 
+    @Override
     public Mutable<name>Bag toBag()
     {
         return <name>HashBag.newBag(this);
     }
 
+    @Override
     public \<V> V injectInto(V injectedValue, Object<name>ToObjectFunction\<? super V, ? extends V> function)
     {
         return this.getDelegate().toReversed().injectInto(injectedValue, function);
     }
 
+    @Override
     public Lazy<name>Iterable asLazy()
     {
         return new Lazy<name>IterableAdapter(this);
     }
 
+    @Override
     public int size()
     {
         return this.getDelegate().size();
@@ -244,51 +265,61 @@ public abstract class Abstract<name>Stack implements <name>Stack
         return this.getDelegate().asReversed().toString();
     }
 
+    @Override
     public String makeString()
     {
         return this.getDelegate().asReversed().makeString();
     }
 
+    @Override
     public String makeString(String separator)
     {
         return this.getDelegate().asReversed().makeString(separator);
     }
 
+    @Override
     public String makeString(String start, String separator, String end)
     {
         return this.getDelegate().asReversed().makeString(start, separator, end);
     }
 
+    @Override
     public void appendString(Appendable appendable)
     {
         this.getDelegate().asReversed().appendString(appendable);
     }
 
+    @Override
     public void appendString(Appendable appendable, String separator)
     {
         this.getDelegate().asReversed().appendString(appendable, separator);
     }
 
+    @Override
     public void appendString(Appendable appendable, String start, String separator, String end)
     {
         this.getDelegate().asReversed().appendString(appendable, start, separator, end);
     }
 
+    @Override
     public <type> getFirst()
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".getFirst() not implemented yet");
     }
 
+    @Override
     public int indexOf(<type> value)
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".indexOf() not implemented yet");
     }
 
+    @Override
     public \<T> T injectIntoWithIndex(T injectedValue, Object<name>IntToObjectFunction\<? super T, ? extends T> function)
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".injectIntoWithIndex() not implemented yet");
     }
 
+    @Override
     public void forEachWithIndex(<name>IntProcedure procedure)
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".forEachWithIndex() not implemented yet");
@@ -312,21 +343,25 @@ arithmeticMethods ::= [
 
 allMethods(type) ::= <<
 
+@Override
 public <wideType.(type)> sum()
 {
     return this.getDelegate().sum();
 }
 
+@Override
 public <type> max()
 {
     return this.getDelegate().max();
 }
 
+@Override
 public <type> min()
 {
     return this.getDelegate().min();
 }
 
+@Override
 public <type> minIfEmpty(<type> defaultValue)
 {
     if (this.isEmpty())
@@ -336,6 +371,7 @@ public <type> minIfEmpty(<type> defaultValue)
     return this.min();
 }
 
+@Override
 public <type> maxIfEmpty(<type> defaultValue)
 {
     if (this.isEmpty())
@@ -345,16 +381,19 @@ public <type> maxIfEmpty(<type> defaultValue)
     return this.max();
 }
 
+@Override
 public double average()
 {
     return this.getDelegate().average();
 }
 
+@Override
 public double median()
 {
     return this.getDelegate().median();
 }
 
+@Override
 public <type>[] toSortedArray()
 {
     return this.getDelegate().toSortedArray();

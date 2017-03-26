@@ -83,16 +83,19 @@ final class Immutable<name1><name2>SingletonMap implements Immutable<name1><name
         this.value1 = value1;
     }
 
+    @Override
     public <type2> get(<type1> key)
     {
         return this.getIfAbsent(key, EMPTY_VALUE);
     }
 
+    @Override
     public <type2> getIfAbsent(<type1> key, <type2> ifAbsent)
     {
         return <(equals.(type1))("this.key1", "key")> ? this.value1 : ifAbsent;
     }
 
+    @Override
     public <type2> getOrThrow(<type1> key)
     {
         if (<(equals.(type1))("this.key1", "key")>)
@@ -102,68 +105,81 @@ final class Immutable<name1><name2>SingletonMap implements Immutable<name1><name
         throw new IllegalStateException("Key " + key + " not present.");
     }
 
+    @Override
     public boolean containsKey(<type1> key)
     {
         return <(equals.(type1))("this.key1", "key")>;
     }
 
+    @Override
     public boolean containsValue(<type2> value)
     {
         return <(equals.(type2))("this.value1", "value")>;
     }
 
+    @Override
     public void forEachValue(<name2>Procedure procedure)
     {
         procedure.value(this.value1);
     }
 
+    @Override
     public void forEachKey(<name1>Procedure procedure)
     {
         procedure.value(this.key1);
     }
 
+    @Override
     public void forEachKeyValue(<name1><name2>Procedure procedure)
     {
         procedure.value(this.key1, this.value1);
     }
 
+    @Override
     public Lazy<name1>Iterable keysView()
     {
         return <name1>Lists.immutable.of(this.key1).asLazy();
     }
 
+    @Override
     public RichIterable\<<name1><name2>Pair> keyValuesView()
     {
         return Lists.immutable.of(PrimitiveTuples.pair(this.key1, this.value1)).asLazy();
     }
 
+    @Override
     public Immutable<name1><name2>Map select(<name1><name2>Predicate predicate)
     {
         return predicate.accept(this.key1, this.value1) ? <name1><name2>HashMap.newWithKeysValues(this.key1, this.value1).toImmutable()
                 : new <name1><name2>HashMap().toImmutable();
     }
 
+    @Override
     public Immutable<name1><name2>Map reject(<name1><name2>Predicate predicate)
     {
         return predicate.accept(this.key1, this.value1) ? new <name1><name2>HashMap().toImmutable()
                 : <name1><name2>HashMap.newWithKeysValues(this.key1, this.value1).toImmutable();
     }
 
+    @Override
     public \<T> T injectInto(T injectedValue, Object<name2>ToObjectFunction\<? super T, ? extends T> function)
     {
         return function.valueOf(injectedValue, this.value1);
     }
 
+    @Override
     public Immutable<name1><name2>Map toImmutable()
     {
         return this;
     }
 
+    @Override
     public <name2>Iterator <type2>Iterator()
     {
         return new Unmodifiable<name2>Iterator(<name1><name2>HashMap.newWithKeysValues(this.key1, this.value1).<type2>Iterator());
     }
 
+    @Override
     public void forEach(<name2>Procedure procedure)
     {
         this.each(procedure);
@@ -172,62 +188,74 @@ final class Immutable<name1><name2>SingletonMap implements Immutable<name1><name
     /**
      * @since 7.0.
      */
+    @Override
     public void each(<name2>Procedure procedure)
     {
         procedure.value(this.value1);
     }
 
+    @Override
     public int count(<name2>Predicate predicate)
     {
         return predicate.accept(this.value1) ? 1 : 0;
     }
 
     <(arithmeticMethods.(type2))()>
+    @Override
     public boolean anySatisfy(<name2>Predicate predicate)
     {
         return predicate.accept(this.value1);
     }
 
+    @Override
     public boolean allSatisfy(<name2>Predicate predicate)
     {
         return predicate.accept(this.value1);
     }
 
+    @Override
     public boolean noneSatisfy(<name2>Predicate predicate)
     {
         return !predicate.accept(this.value1);
     }
 
+    @Override
     public Immutable<name2>Bag select(<name2>Predicate predicate)
     {
         return predicate.accept(this.value1) ? <name2>HashBag.newBagWith(this.value1).toImmutable() : <name2>Bags.immutable.empty();
     }
 
+    @Override
     public Immutable<name2>Bag reject(<name2>Predicate predicate)
     {
         return predicate.accept(this.value1) ? <name2>Bags.immutable.empty() : <name2>HashBag.newBagWith(this.value1).toImmutable();
     }
 
+    @Override
     public \<V> ImmutableBag\<V> collect(<name2>ToObjectFunction\<? extends V> function)
     {
         return Bags.immutable.of(function.valueOf(this.value1));
     }
 
+    @Override
     public <type2> detectIfNone(<name2>Predicate predicate, <type2> ifNone)
     {
         return predicate.accept(this.value1) ? this.value1 : ifNone;
     }
 
+    @Override
     public <type2>[] toArray()
     {
         return new <type2>[]{this.value1};
     }
 
+    @Override
     public boolean contains(<type2> value)
     {
         return <(equals.(type2))("this.value1", "value")>;
     }
 
+    @Override
     public boolean containsAll(<type2>... source)
     {
         for (<type2> value : source)
@@ -240,6 +268,7 @@ final class Immutable<name1><name2>SingletonMap implements Immutable<name1><name
         return true;
     }
 
+    @Override
     public boolean containsAll(<name2>Iterable source)
     {
         for (<name2>Iterator iterator = source.<type2>Iterator(); iterator.hasNext(); )
@@ -252,61 +281,73 @@ final class Immutable<name1><name2>SingletonMap implements Immutable<name1><name
         return true;
     }
 
+    @Override
     public Mutable<name2>List toList()
     {
         return <name2>ArrayList.newListWith(this.value1);
     }
 
+    @Override
     public Mutable<name2>Set toSet()
     {
         return <name2>HashSet.newSetWith(this.value1);
     }
 
+    @Override
     public Mutable<name2>Bag toBag()
     {
         return <name2>HashBag.newBagWith(this.value1);
     }
 
+    @Override
     public Lazy<name2>Iterable asLazy()
     {
         return new Lazy<name2>IterableAdapter(this);
     }
 
+    @Override
     public Immutable<name1><name2>Map newWithKeyValue(<type1> key, <type2> value)
     {
         return <name1><name2>Maps.immutable.withAll(<name1><name2>HashMap.newWithKeysValues(this.key1, this.value1, key, value));
     }
 
+    @Override
     public Immutable<name1><name2>Map newWithoutKey(<type1> key)
     {
         return <(equals.(type1))("this.key1", "key")> ? <name1><name2>Maps.immutable.with() : this;
     }
 
+    @Override
     public Immutable<name1><name2>Map newWithoutAllKeys(<name1>Iterable keys)
     {
         return keys.contains(this.key1) ? <name1><name2>Maps.immutable.with() : this;
     }
 
+    @Override
     public int size()
     {
         return 1;
     }
 
+    @Override
     public boolean isEmpty()
     {
         return false;
     }
 
+    @Override
     public boolean notEmpty()
     {
         return true;
     }
 
+    @Override
     public Mutable<name1>Set keySet()
     {
         return Unmodifiable<name1>Set.of(<name1>HashSet.newSetWith(this.key1));
     }
 
+    @Override
     public Mutable<name2>Collection values()
     {
         return Unmodifiable<name2>Collection.of(<name2>ArrayList.newListWith(this.value1));
@@ -343,16 +384,19 @@ final class Immutable<name1><name2>SingletonMap implements Immutable<name1><name
         return "{" + this.key1 + "=" + this.value1 + "}";
     }
 
+    @Override
     public String makeString()
     {
         return this.makeString(", ");
     }
 
+    @Override
     public String makeString(String separator)
     {
         return this.makeString("", separator, "");
     }
 
+    @Override
     public String makeString(String start, String separator, String end)
     {
         Appendable stringBuilder = new StringBuilder();
@@ -360,16 +404,19 @@ final class Immutable<name1><name2>SingletonMap implements Immutable<name1><name
         return stringBuilder.toString();
     }
 
+    @Override
     public void appendString(Appendable appendable)
     {
         this.appendString(appendable, ", ");
     }
 
+    @Override
     public void appendString(Appendable appendable, String separator)
     {
         this.appendString(appendable, "", separator, "");
     }
 
+    @Override
     public void appendString(Appendable appendable, String start, String separator, String end)
     {
         try
@@ -399,46 +446,55 @@ arithmeticMethods ::= [
     ]
 
 allMethods() ::= <<
+@Override
 public <wideType.(type2)> sum()
 {
     return this.value1;
 }
 
+@Override
 public <type2> min()
 {
     return this.value1;
 }
 
+@Override
 public <type2> max()
 {
     return this.value1;
 }
 
+@Override
 public <type2> maxIfEmpty(<type2> defaultValue)
 {
     return this.value1;
 }
 
+@Override
 public <type2> minIfEmpty(<type2> defaultValue)
 {
     return this.value1;
 }
 
+@Override
 public double average()
 {
     return this.value1;
 }
 
+@Override
 public double median()
 {
     return this.value1;
 }
 
+@Override
 public <type2>[] toSortedArray()
 {
     return new <type2>[]{this.value1};
 }
 
+@Override
 public Mutable<name2>List toSortedList()
 {
     return <name2>ArrayList.newListWith(this.value1);

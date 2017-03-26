@@ -161,11 +161,13 @@ public final class <name>HashSet extends Abstract<name>Set implements Mutable<na
         return result;
     }
 
+    @Override
     public int size()
     {
         return this.occupiedWithData + this.zeroToThirtyOneOccupied;
     }
 
+    @Override
     public void appendString(Appendable appendable, String start, String separator, String end)
     {
         try
@@ -206,6 +208,7 @@ public final class <name>HashSet extends Abstract<name>Set implements Mutable<na
         }
     }
 
+    @Override
     public boolean add(<type> element)
     {
         if (isBetweenZeroAndThirtyOne(element))
@@ -245,6 +248,7 @@ public final class <name>HashSet extends Abstract<name>Set implements Mutable<na
         return true;
     }
 
+    @Override
     public boolean addAll(<type>... source)
     {
         int oldSize = this.size();
@@ -255,6 +259,7 @@ public final class <name>HashSet extends Abstract<name>Set implements Mutable<na
         return this.size() != oldSize;
     }
 
+    @Override
     public boolean addAll(<name>Iterable source)
     {
         if (source.isEmpty())
@@ -287,6 +292,7 @@ public final class <name>HashSet extends Abstract<name>Set implements Mutable<na
         return this.size() != oldSize;
     }
 
+    @Override
     public boolean remove(<type> value)
     {
         if (isBetweenZeroAndThirtyOne(value))
@@ -320,6 +326,7 @@ public final class <name>HashSet extends Abstract<name>Set implements Mutable<na
         return false;
     }
 
+    @Override
     public boolean removeAll(<name>Iterable source)
     {
         if (source.isEmpty())
@@ -352,6 +359,7 @@ public final class <name>HashSet extends Abstract<name>Set implements Mutable<na
         return this.size() != oldSize;
     }
 
+    @Override
     public boolean removeAll(<type>... source)
     {
         if (source.length == 0)
@@ -366,6 +374,7 @@ public final class <name>HashSet extends Abstract<name>Set implements Mutable<na
         return this.size() != oldSize;
     }
 
+    @Override
     public boolean retainAll(<name>Iterable source)
     {
         int oldSize = this.size();
@@ -383,11 +392,13 @@ public final class <name>HashSet extends Abstract<name>Set implements Mutable<na
         return false;
     }
 
+    @Override
     public boolean retainAll(<type>... source)
     {
         return this.retainAll(<name>HashSet.newSetWith(source));
     }
 
+    @Override
     public void clear()
     {
         this.zeroToThirtyOneOccupied = 0;
@@ -406,40 +417,47 @@ public final class <name>HashSet extends Abstract<name>Set implements Mutable<na
         }
     }
 
+    @Override
     public <name>HashSet with(<type> element)
     {
         this.add(element);
         return this;
     }
 
+    @Override
     public <name>HashSet without(<type> element)
     {
         this.remove(element);
         return this;
     }
 
+    @Override
     public <name>HashSet withAll(<name>Iterable elements)
     {
         this.addAll(elements.toArray());
         return this;
     }
 
+    @Override
     public <name>HashSet withoutAll(<name>Iterable elements)
     {
         this.removeAll(elements);
         return this;
     }
 
+    @Override
     public Mutable<name>Set asUnmodifiable()
     {
         return new Unmodifiable<name>Set(this);
     }
 
+    @Override
     public Mutable<name>Set asSynchronized()
     {
         return new Synchronized<name>Set(this);
     }
 
+    @Override
     public Immutable<name>Set toImmutable()
     {
         if (this.size() == 0)
@@ -454,11 +472,13 @@ public final class <name>HashSet extends Abstract<name>Set implements Mutable<na
         return new Immutable<name>HashSet(mutableSet.table, mutableSet.occupiedWithData, mutableSet.zeroToThirtyOne, mutableSet.zeroToThirtyOneOccupied);
     }
 
+    @Override
     public Mutable<name>Iterator <type>Iterator()
     {
         return new Internal<name>Iterator();
     }
 
+    @Override
     public <type>[] toArray()
     {
         <type>[] array = new <type>[this.size()];
@@ -484,6 +504,7 @@ public final class <name>HashSet extends Abstract<name>Set implements Mutable<na
         return array;
     }
 
+    @Override
     public boolean contains(<type> value)
     {
         if (isBetweenZeroAndThirtyOne(value))
@@ -494,6 +515,7 @@ public final class <name>HashSet extends Abstract<name>Set implements Mutable<na
         return <(equals.(type))("this.table[this.probe(value)]", "value")>;
     }
 
+    @Override
     public void forEach(<name>Procedure procedure)
     {
         this.each(procedure);
@@ -502,6 +524,7 @@ public final class <name>HashSet extends Abstract<name>Set implements Mutable<na
     /**
      * @since 7.0.
      */
+    @Override
     public void each(<name>Procedure procedure)
     {
         int zeroToThirtyOne = this.zeroToThirtyOne;
@@ -521,6 +544,7 @@ public final class <name>HashSet extends Abstract<name>Set implements Mutable<na
         }
     }
 
+    @Override
     public <name>HashSet select(<name>Predicate predicate)
     {
         return this.select(predicate, new <name>HashSet());
@@ -529,6 +553,7 @@ public final class <name>HashSet extends Abstract<name>Set implements Mutable<na
     /**
      * @since 8.1.
      */
+    @Override
     public \<R extends Mutable<name>Collection> R select(<name>Predicate predicate, R target)
     {
         int zeroToThirtyOne = this.zeroToThirtyOne;
@@ -555,6 +580,7 @@ public final class <name>HashSet extends Abstract<name>Set implements Mutable<na
         return target;
     }
 
+    @Override
     public <name>HashSet reject(<name>Predicate predicate)
     {
         return this.reject(predicate, new <name>HashSet());
@@ -563,6 +589,7 @@ public final class <name>HashSet extends Abstract<name>Set implements Mutable<na
     /**
      * @since 8.1.
      */
+    @Override
     public \<R extends Mutable<name>Collection> R reject(<name>Predicate predicate, R target)
     {
         int zeroToThirtyOne = this.zeroToThirtyOne;
@@ -589,6 +616,7 @@ public final class <name>HashSet extends Abstract<name>Set implements Mutable<na
         return target;
     }
 
+    @Override
     public \<V> MutableSet\<V> collect(<name>ToObjectFunction\<? extends V> function)
     {
         return this.collect(function, UnifiedSet.newSet(this.size()));
@@ -597,6 +625,7 @@ public final class <name>HashSet extends Abstract<name>Set implements Mutable<na
     /**
      * @since 8.1.
      */
+    @Override
     public \<V, R extends Collection\<V>\> R collect(<name>ToObjectFunction\<? extends V> function, R target)
     {
         int zeroToThirtyOne = this.zeroToThirtyOne;
@@ -617,6 +646,7 @@ public final class <name>HashSet extends Abstract<name>Set implements Mutable<na
         return target;
     }
 
+    @Override
     public <type> detectIfNone(<name>Predicate predicate, <type> ifNone)
     {
         int zeroToThirtyOne = this.zeroToThirtyOne;
@@ -643,6 +673,7 @@ public final class <name>HashSet extends Abstract<name>Set implements Mutable<na
         return ifNone;
     }
 
+    @Override
     public int count(<name>Predicate predicate)
     {
         int count = 0;
@@ -670,6 +701,7 @@ public final class <name>HashSet extends Abstract<name>Set implements Mutable<na
         return count;
     }
 
+    @Override
     public boolean anySatisfy(<name>Predicate predicate)
     {
         int zeroToThirtyOne = this.zeroToThirtyOne;
@@ -696,6 +728,7 @@ public final class <name>HashSet extends Abstract<name>Set implements Mutable<na
         return false;
     }
 
+    @Override
     public boolean allSatisfy(<name>Predicate predicate)
     {
         int zeroToThirtyOne = this.zeroToThirtyOne;
@@ -722,12 +755,14 @@ public final class <name>HashSet extends Abstract<name>Set implements Mutable<na
         return true;
     }
 
+    @Override
     public boolean noneSatisfy(<name>Predicate predicate)
     {
         return !this.anySatisfy(predicate);
     }
 
     <(sumMethod.(type))()>
+    @Override
     public <type> max()
     {
         if (this.isEmpty())
@@ -748,6 +783,7 @@ public final class <name>HashSet extends Abstract<name>Set implements Mutable<na
         return max;
     }
 
+    @Override
     public <type> min()
     {
         if (this.isEmpty())
@@ -768,6 +804,7 @@ public final class <name>HashSet extends Abstract<name>Set implements Mutable<na
         return min;
     }
 
+    @Override
     public <name>Set freeze()
     {
         if (this.size() == 0)
@@ -782,6 +819,7 @@ public final class <name>HashSet extends Abstract<name>Set implements Mutable<na
         return new Immutable<name>HashSet(this.table, this.occupiedWithData, this.zeroToThirtyOne, this.zeroToThirtyOneOccupied);
     }
 
+    @Override
     public void writeExternal(ObjectOutput out) throws IOException
     {
         out.writeInt(this.size());
@@ -803,6 +841,7 @@ public final class <name>HashSet extends Abstract<name>Set implements Mutable<na
         }
     }
 
+    @Override
     public void readExternal(ObjectInput in) throws IOException
     {
         int size = in.readInt();
@@ -813,6 +852,7 @@ public final class <name>HashSet extends Abstract<name>Set implements Mutable<na
         }
     }
 
+    @Override
     public \<T> T injectInto(T injectedValue, Object<name>ToObjectFunction\<? super T, ? extends T> function)
     {
         T result = injectedValue;
@@ -1043,11 +1083,13 @@ public final class <name>HashSet extends Abstract<name>Set implements Mutable<na
             return result;
         }
 
+        @Override
         public int size()
         {
             return this.occupied + this.zeroToThirtyOneOccupied;
         }
 
+        @Override
         public void appendString(Appendable appendable, String start, String separator, String end)
         {
             try
@@ -1088,11 +1130,13 @@ public final class <name>HashSet extends Abstract<name>Set implements Mutable<na
             }
         }
 
+        @Override
         public <name>Iterator <type>Iterator()
         {
             return new Internal<name>Iterator();
         }
 
+        @Override
         public <type>[] toArray()
         {
             <type>[] array = new <type>[this.size()];
@@ -1118,6 +1162,7 @@ public final class <name>HashSet extends Abstract<name>Set implements Mutable<na
             return array;
         }
 
+        @Override
         public boolean contains(<type> value)
         {
             if (isBetweenZeroAndThirtyOne(value))
@@ -1128,11 +1173,13 @@ public final class <name>HashSet extends Abstract<name>Set implements Mutable<na
             return <(equals.(type))("this.table[this.probe(value)]", "value")>;
         }
 
+        @Override
         public void forEach(<name>Procedure procedure)
         {
             this.each(procedure);
         }
 
+        @Override
         public void each(<name>Procedure procedure)
         {
             int zeroToThirtyOne = this.zeroToThirtyOne;
@@ -1152,21 +1199,25 @@ public final class <name>HashSet extends Abstract<name>Set implements Mutable<na
             }
         }
 
+        @Override
         public Immutable<name>Set select(<name>Predicate predicate)
         {
             return this.select(predicate, new <name>HashSet()).toImmutable();
         }
 
+        @Override
         public Immutable<name>Set reject(<name>Predicate predicate)
         {
             return this.reject(predicate, new <name>HashSet()).toImmutable();
         }
 
+        @Override
         public \<V> ImmutableSet\<V> collect(<name>ToObjectFunction\<? extends V> function)
         {
             return this.collect(function, UnifiedSet.newSet(this.size())).toImmutable();
         }
 
+        @Override
         public <type> detectIfNone(<name>Predicate predicate, <type> ifNone)
         {
             int zeroToThirtyOne = this.zeroToThirtyOne;
@@ -1193,6 +1244,7 @@ public final class <name>HashSet extends Abstract<name>Set implements Mutable<na
             return ifNone;
         }
 
+        @Override
         public int count(<name>Predicate predicate)
         {
             int count = 0;
@@ -1220,6 +1272,7 @@ public final class <name>HashSet extends Abstract<name>Set implements Mutable<na
             return count;
         }
 
+        @Override
         public boolean anySatisfy(<name>Predicate predicate)
         {
             int zeroToThirtyOne = this.zeroToThirtyOne;
@@ -1246,6 +1299,7 @@ public final class <name>HashSet extends Abstract<name>Set implements Mutable<na
             return false;
         }
 
+        @Override
         public boolean allSatisfy(<name>Predicate predicate)
         {
             int zeroToThirtyOne = this.zeroToThirtyOne;
@@ -1272,12 +1326,14 @@ public final class <name>HashSet extends Abstract<name>Set implements Mutable<na
             return true;
         }
 
+        @Override
         public boolean noneSatisfy(<name>Predicate predicate)
         {
             return !this.anySatisfy(predicate);
         }
 
         <(sumMethod.(type))()>
+        @Override
         public <type> max()
         {
             if (this.isEmpty())
@@ -1298,6 +1354,7 @@ public final class <name>HashSet extends Abstract<name>Set implements Mutable<na
             return max;
         }
 
+        @Override
         public <type> min()
         {
             if (this.isEmpty())
@@ -1318,6 +1375,7 @@ public final class <name>HashSet extends Abstract<name>Set implements Mutable<na
             return min;
         }
 
+        @Override
         public \<T> T injectInto(T injectedValue, Object<name>ToObjectFunction\<? super T, ? extends T> function)
         {
             T result = injectedValue;
@@ -1481,11 +1539,13 @@ public final class <name>HashSet extends Abstract<name>Set implements Mutable<na
         private int position;
         private <type> zeroToThirtyOne;
 
+        @Override
         public boolean hasNext()
         {
             return this.count \< <name>HashSet.this.size();
         }
 
+        @Override
         public <type> next()
         {
             if (!this.hasNext())
@@ -1515,6 +1575,7 @@ public final class <name>HashSet extends Abstract<name>Set implements Mutable<na
             return result;
         }
 
+        @Override
         public void remove()
         {
             if (this.count == 0)
@@ -1571,6 +1632,7 @@ sumMethod ::= [
 ]
 
 sum() ::= <<
+@Override
 public <wideType.(type)> sum()
 {
     <wideType.(type)> result = <wideZero.(type)>;
@@ -1596,6 +1658,7 @@ public <wideType.(type)> sum()
 >>
 
 kahanSum() ::= <<
+@Override
 public <wideType.(type)> sum()
 {
     <wideType.(type)> result = <wideZero.(type)>;

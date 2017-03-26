@@ -353,46 +353,55 @@ arithmeticMethods ::= [
     ]
 
 allMethods() ::= <<
+@Override
 public <wideType.(type)> sum()
 {
     return this.delegate.sum();
 }
 
+@Override
 public <type> max()
 {
     return this.delegate.max();
 }
 
+@Override
 public <type> maxIfEmpty(<type> defaultValue)
 {
     return this.delegate.maxIfEmpty(defaultValue);
 }
 
+@Override
 public <type> min()
 {
     return this.delegate.min();
 }
 
+@Override
 public <type> minIfEmpty(<type> defaultValue)
 {
     return this.delegate.minIfEmpty(defaultValue);
 }
 
+@Override
 public double average()
 {
     return this.delegate.average();
 }
 
+@Override
 public double median()
 {
     return this.delegate.median();
 }
 
+@Override
 public <type>[] toSortedArray()
 {
     return this.delegate.toSortedArray();
 }
 
+@Override
 public Mutable<name>List toSortedList()
 {
     return this.delegate.toSortedList();
