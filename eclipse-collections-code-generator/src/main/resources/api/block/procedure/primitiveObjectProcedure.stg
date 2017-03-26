@@ -21,6 +21,7 @@ import java.io.Serializable;
  *
  * @since 3.0.
  */
+@FunctionalInterface
 public interface <name>ObjectProcedure\<T>
         extends Serializable
 {
