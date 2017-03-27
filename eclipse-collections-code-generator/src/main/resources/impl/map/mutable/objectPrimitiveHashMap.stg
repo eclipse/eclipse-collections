@@ -155,7 +155,7 @@ public class Object<name>HashMap\<K> implements MutableObject<name>Map\<K>, Exte
 
     public static \<K> Object<name>HashMap\<K> newMap()
     {
-        return new Object<name>HashMap\<K>();
+        return new Object<name>HashMap\<>();
     }
 
     public static \<K> Object<name>HashMap\<K> newWithKeysValues(K key1, <type> value1)
@@ -608,13 +608,13 @@ public class Object<name>HashMap\<K> implements MutableObject<name>Map\<K>, Exte
     @Override
     public MutableObject<name>Map\<K> asUnmodifiable()
     {
-        return new UnmodifiableObject<name>Map\<K>(this);
+        return new UnmodifiableObject<name>Map\<>(this);
     }
 
     @Override
     public MutableObject<name>Map\<K> asSynchronized()
     {
-        return new SynchronizedObject<name>Map\<K>(this);
+        return new SynchronizedObject<name>Map\<>(this);
     }
 
     @Override

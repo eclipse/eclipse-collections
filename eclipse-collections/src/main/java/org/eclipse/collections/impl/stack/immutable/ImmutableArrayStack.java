@@ -138,7 +138,7 @@ final class ImmutableArrayStack<T> implements ImmutableStack<T>, Serializable
 
     public static <T> ImmutableArrayStack<T> newStackFromTopToBottom(Iterable<? extends T> items)
     {
-        return new ImmutableArrayStack<T>(FastList.newList(items).reverseThis());
+        return new ImmutableArrayStack<>(FastList.<T>newList(items).reverseThis());
     }
 
     public static <T> ImmutableArrayStack<T> newStackFromTopToBottom(T... items)

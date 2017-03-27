@@ -17,7 +17,6 @@ import net.jcip.annotations.GuardedBy;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.predicate.Predicate2;
-import org.eclipse.collections.api.multimap.Multimap;
 import org.eclipse.collections.api.multimap.bag.MutableBagMultimap;
 import org.eclipse.collections.api.multimap.list.MutableListMultimap;
 import org.eclipse.collections.api.multimap.set.MutableSetMultimap;
@@ -25,7 +24,6 @@ import org.eclipse.collections.api.multimap.sortedset.ImmutableSortedSetMultimap
 import org.eclipse.collections.api.multimap.sortedset.MutableSortedSetMultimap;
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 import org.eclipse.collections.api.tuple.Pair;
-import org.eclipse.collections.impl.factory.Multimaps;
 import org.eclipse.collections.impl.multimap.AbstractSynchronizedMultimap;
 
 public class SynchronizedSortedSetMultimap<K, V>

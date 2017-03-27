@@ -122,12 +122,9 @@ import org.eclipse.collections.impl.factory.primitive.LongBags;
 import org.eclipse.collections.impl.factory.primitive.ShortBags;
 import org.eclipse.collections.impl.factory.primitive.ObjectDoubleMaps;
 import org.eclipse.collections.impl.factory.primitive.ObjectLongMaps;
-import org.eclipse.collections.impl.factory.primitive.ShortLists;
 import org.eclipse.collections.impl.lazy.LazyIterableAdapter;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.map.mutable.primitive.<name>ObjectHashMap;
-import org.eclipse.collections.impl.map.mutable.primitive.ObjectDoubleHashMap;
-import org.eclipse.collections.impl.map.mutable.primitive.ObjectLongHashMap;
 import org.eclipse.collections.impl.partition.bag.PartitionHashBag;
 import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
 import org.eclipse.collections.impl.set.mutable.primitive.Unmodifiable<name>Set;
@@ -142,7 +139,7 @@ import org.eclipse.collections.impl.utility.primitive.Lazy<name>Iterate;
  */
 final class Immutable<name>ObjectEmptyMap\<V> implements Immutable<name>ObjectMap\<V>, Serializable
 {
-    static final Immutable<name>ObjectMap\<?> INSTANCE = new Immutable<name>ObjectEmptyMap\<Object>();
+    static final Immutable<name>ObjectMap\<?> INSTANCE = new Immutable<name>ObjectEmptyMap\<>();
 
     private static final long serialVersionUID = 1L;
 
@@ -581,7 +578,7 @@ final class Immutable<name>ObjectEmptyMap\<V> implements Immutable<name>ObjectMa
     @Override
     public LazyIterable\<V> asLazy()
     {
-        return new LazyIterableAdapter\<V>(FastList.\<V>newListWith());
+        return new LazyIterableAdapter\<>(FastList.\<V>newListWith());
     }
 
     @Override
@@ -890,7 +887,7 @@ final class Immutable<name>ObjectEmptyMap\<V> implements Immutable<name>ObjectMa
     @Override
     public Immutable<name>ObjectMap\<V> newWithKeyValue(<type> key, V value)
     {
-        <name>ObjectHashMap\<V> map = new <name>ObjectHashMap\<V>();
+        <name>ObjectHashMap\<V> map = new <name>ObjectHashMap\<>();
         map.put(key, value);
         return map.toImmutable();
     }

@@ -24,8 +24,7 @@ import java.io.IOException;
 import java.io.Serializable;
 
 import org.eclipse.collections.api.<name1>Iterable;
-import org.eclipse.collections.api.<name2>Iterable;
-<if(!sameTwoPrimitives)>import org.eclipse.collections.api.<name1>Iterable;<endif>
+<if(!sameTwoPrimitives)>import org.eclipse.collections.api.<name2>Iterable;<endif>
 import org.eclipse.collections.api.Lazy<name2>Iterable;
 <if(!sameTwoPrimitives)>import org.eclipse.collections.api.Lazy<name1>Iterable;<endif>
 import org.eclipse.collections.api.RichIterable;
@@ -39,7 +38,7 @@ import org.eclipse.collections.api.block.predicate.primitive.<name1><name2>Predi
 import org.eclipse.collections.api.block.procedure.primitive.<name2>Procedure;
 import org.eclipse.collections.api.block.procedure.primitive.<name1><name2>Procedure;
 <if(!sameTwoPrimitives)>import org.eclipse.collections.api.block.procedure.primitive.<name1>Procedure;<endif>
-import org.eclipse.collections.api.collection.primitive.Immutable<name2>Collection;
+<if(!primitive2.booleanPrimitive)>import org.eclipse.collections.api.collection.primitive.Immutable<name2>Collection;<endif>
 import org.eclipse.collections.api.collection.primitive.Mutable<name2>Collection;
 import org.eclipse.collections.api.iterator.<name2>Iterator;
 import org.eclipse.collections.api.list.primitive.Mutable<name2>List;

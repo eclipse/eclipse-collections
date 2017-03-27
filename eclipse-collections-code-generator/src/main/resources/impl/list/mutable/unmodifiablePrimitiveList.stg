@@ -23,12 +23,11 @@ import org.eclipse.collections.api.block.function.primitive.Object<name>IntToObj
 import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
 import org.eclipse.collections.api.block.procedure.primitive.<name>IntProcedure;
 import org.eclipse.collections.api.list.MutableList;
-import org.eclipse.collections.api.list.primitive.<name>List;
+<if(!primitive.booleanPrimitive)>import org.eclipse.collections.api.list.primitive.<name>List;<endif>
 import org.eclipse.collections.api.list.primitive.Immutable<name>List;
 import org.eclipse.collections.api.list.primitive.Mutable<name>List;
 import org.eclipse.collections.impl.collection.mutable.primitive.AbstractUnmodifiable<name>Collection;
 import org.eclipse.collections.impl.factory.primitive.<name>Lists;
-import org.eclipse.collections.impl.lazy.primitive.Lazy<name>IterableAdapter;
 import org.eclipse.collections.impl.lazy.primitive.Reverse<name>Iterable;
 import net.jcip.annotations.NotThreadSafe;
 

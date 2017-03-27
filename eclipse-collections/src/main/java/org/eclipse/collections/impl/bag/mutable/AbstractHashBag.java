@@ -10,7 +10,6 @@
 
 package org.eclipse.collections.impl.bag.mutable;
 
-import java.util.Collection;
 import java.util.Iterator;
 
 import org.eclipse.collections.api.RichIterable;
@@ -156,7 +155,8 @@ public abstract class AbstractHashBag<T> extends AbstractMutableBag<T>
     @Override
     public void each(Procedure<? super T> procedure)
     {
-        this.items.forEachKeyValue((key, count) -> {
+        this.items.forEachKeyValue((key, count) ->
+        {
             for (int i = 0; i < count; i++)
             {
                 procedure.value(key);
@@ -168,7 +168,8 @@ public abstract class AbstractHashBag<T> extends AbstractMutableBag<T>
     public void forEachWithIndex(ObjectIntProcedure<? super T> objectIntProcedure)
     {
         Counter index = new Counter();
-        this.items.forEachKeyValue((key, count) -> {
+        this.items.forEachKeyValue((key, count) ->
+        {
             for (int i = 0; i < count; i++)
             {
                 objectIntProcedure.value(key, index.getCount());
@@ -180,7 +181,8 @@ public abstract class AbstractHashBag<T> extends AbstractMutableBag<T>
     @Override
     public <P> void forEachWith(Procedure2<? super T, ? super P> procedure, P parameter)
     {
-        this.items.forEachKeyValue((key, count) -> {
+        this.items.forEachKeyValue((key, count) ->
+        {
             for (int i = 0; i < count; i++)
             {
                 procedure.value(key, parameter);

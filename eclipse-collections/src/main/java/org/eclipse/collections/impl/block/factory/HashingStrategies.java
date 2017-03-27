@@ -43,7 +43,7 @@ public final class HashingStrategies
 
     public static <T, V> HashingStrategy<T> fromFunction(Function<? super T, ? extends V> function)
     {
-        return new FunctionHashingStrategy<T, V>(function);
+        return new FunctionHashingStrategy<>(function);
     }
 
     public static HashingStrategy<Object> identityStrategy()

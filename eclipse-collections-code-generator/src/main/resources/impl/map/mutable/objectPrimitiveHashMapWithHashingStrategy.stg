@@ -165,17 +165,17 @@ public class Object<name>HashMapWithHashingStrategy\<K> implements MutableObject
 
     public static \<K> Object<name>HashMapWithHashingStrategy\<K> newMap(HashingStrategy\<? super K> hashingStrategy)
     {
-        return new Object<name>HashMapWithHashingStrategy\<K>(hashingStrategy);
+        return new Object<name>HashMapWithHashingStrategy\<>(hashingStrategy);
     }
 
     public static \<K> Object<name>HashMapWithHashingStrategy\<K> newMap(HashingStrategy\<? super K> hashingStrategy, Object<name>Map\<K> map)
     {
-        return new Object<name>HashMapWithHashingStrategy\<K>(hashingStrategy, map);
+        return new Object<name>HashMapWithHashingStrategy\<>(hashingStrategy, map);
     }
 
     public static \<K> Object<name>HashMapWithHashingStrategy\<K> newMap(Object<name>HashMapWithHashingStrategy\<K> map)
     {
-        return new Object<name>HashMapWithHashingStrategy\<K>(map.hashingStrategy, map);
+        return new Object<name>HashMapWithHashingStrategy\<>(map.hashingStrategy, map);
     }
 
     public static \<K> Object<name>HashMapWithHashingStrategy\<K> newWithKeysValues(HashingStrategy\<? super K> hashingStrategy, K key1, <type> value1)
@@ -628,13 +628,13 @@ public class Object<name>HashMapWithHashingStrategy\<K> implements MutableObject
     @Override
     public MutableObject<name>Map\<K> asUnmodifiable()
     {
-        return new UnmodifiableObject<name>Map\<K>(this);
+        return new UnmodifiableObject<name>Map\<>(this);
     }
 
     @Override
     public MutableObject<name>Map\<K> asSynchronized()
     {
-        return new SynchronizedObject<name>Map\<K>(this);
+        return new SynchronizedObject<name>Map\<>(this);
     }
 
     @Override

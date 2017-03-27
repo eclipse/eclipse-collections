@@ -481,7 +481,7 @@ public final class SynchronizedObject<name>Map\<K>
     @Override
     public MutableObject<name>Map\<K> asUnmodifiable()
     {
-        return new UnmodifiableObject<name>Map\<K>(this);
+        return new UnmodifiableObject<name>Map\<>(this);
     }
 
     @Override

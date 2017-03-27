@@ -12,22 +12,20 @@ skipBoolean() ::= "false"
 fileName(primitive1, primitive2, sameTwoPrimitives) ::= "Collect<primitive1.name>To<primitive2.name>Iterable"
 
 class(primitive1, primitive2, sameTwoPrimitives) ::= <<
-<body(primitive1.type, primitive2.type, primitive1.name, primitive2.name)>
+<body(primitive1.type, primitive2.type, primitive1.name, primitive2.name, sameTwoPrimitives)>
 >>
 
-body(type1, type2, name1, name2) ::= <<
+body(type1, type2, name1, name2, sameTwoPrimitives) ::= <<
 <copyright()>
 
 package org.eclipse.collections.impl.lazy.primitive;
 
-import java.util.Iterator;
-
 import org.eclipse.collections.api.<name1>Iterable;
 import org.eclipse.collections.api.block.function.primitive.<name1>To<name2>Function;
 import org.eclipse.collections.api.block.procedure.primitive.<name1>Procedure;
-import org.eclipse.collections.api.block.procedure.primitive.<name2>Procedure;
+<if(!sameTwoPrimitives)>import org.eclipse.collections.api.block.procedure.primitive.<name2>Procedure;<endif>
 import org.eclipse.collections.api.iterator.<name1>Iterator;
-import org.eclipse.collections.api.iterator.<name2>Iterator;
+<if(!sameTwoPrimitives)>import org.eclipse.collections.api.iterator.<name2>Iterator;<endif>
 
 /**
  * This file was automatically generated from template file collectPrimitiveToPrimitiveIterable.stg.

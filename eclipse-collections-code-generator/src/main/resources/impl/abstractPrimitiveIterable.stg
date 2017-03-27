@@ -16,12 +16,12 @@ body(type, name) ::= <<
 
 package org.eclipse.collections.impl.primitive;
 
-import java.util.Arrays;
+<if(!primitive.booleanPrimitive)>import java.util.Arrays;
 
+<endif>
 import org.eclipse.collections.api.<name>Iterable;
 import org.eclipse.collections.api.Lazy<name>Iterable;
 import org.eclipse.collections.api.bag.primitive.Mutable<name>Bag;
-import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
 import org.eclipse.collections.api.list.primitive.Mutable<name>List;
 import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
 import org.eclipse.collections.impl.bag.mutable.primitive.<name>HashBag;

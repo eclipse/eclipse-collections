@@ -64,7 +64,7 @@ public final class Lazy<name>Iterate
             <name>Iterable iterable,
             <name>ToObjectFunction\<? extends V> function)
     {
-        return new Collect<name>ToObjectIterable\<V>(iterable, function);
+        return new Collect<name>ToObjectIterable\<>(iterable, function);
     }
 
     /**

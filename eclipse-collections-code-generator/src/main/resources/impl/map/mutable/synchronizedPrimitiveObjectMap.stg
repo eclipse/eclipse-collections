@@ -1356,7 +1356,7 @@ public final class Synchronized<name>ObjectMap\<V>
     @Override
     public Mutable<name>ObjectMap\<V> asUnmodifiable()
     {
-        return new Unmodifiable<name>ObjectMap\<V>(this);
+        return new Unmodifiable<name>ObjectMap\<>(this);
     }
 
     @Override

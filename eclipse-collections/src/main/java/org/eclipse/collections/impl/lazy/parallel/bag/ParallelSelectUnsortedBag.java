@@ -14,7 +14,6 @@ import java.util.concurrent.ExecutorService;
 
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.annotation.Beta;
-import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
@@ -54,7 +53,8 @@ class ParallelSelectUnsortedBag<T> extends AbstractParallelUnsortedBag<T, Unsort
     @Override
     public void forEachWithOccurrences(ObjectIntProcedure<? super T> procedure)
     {
-        this.parallelIterable.forEachWithOccurrences((each, parameter) -> {
+        this.parallelIterable.forEachWithOccurrences((each, parameter) ->
+        {
             if (this.predicate.accept(each))
             {
                 procedure.value(each, parameter);

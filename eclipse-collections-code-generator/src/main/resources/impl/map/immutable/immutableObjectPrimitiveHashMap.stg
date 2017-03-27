@@ -60,7 +60,7 @@ final class ImmutableObject<name>HashMap\<K> extends AbstractImmutableObject<nam
 
     ImmutableObject<name>HashMap(Object<name>Map\<? extends K> delegate)
     {
-        this.delegate = new Object<name>HashMap\<K>(delegate);
+        this.delegate = new Object<name>HashMap\<>(delegate);
     }
 
     public <name>Iterator <type>Iterator()

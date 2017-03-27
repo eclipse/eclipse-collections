@@ -21,7 +21,7 @@ import java.io.Serializable;
  *
  * @since 3.0.
  */
-<if(primitive.specializedStream)>@FunctionalInterface<endif>
+@FunctionalInterface
 public interface Object<primitive.name>Procedure\<T>
         extends <if(primitive.specializedStream)>java.util.function.Obj<name>Consumer\<T>, <endif>Serializable
 {

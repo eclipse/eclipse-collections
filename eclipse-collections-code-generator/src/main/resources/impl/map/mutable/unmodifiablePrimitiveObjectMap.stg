@@ -958,7 +958,7 @@ public final class Unmodifiable<name>ObjectMap\<V>
     @Override
     public Mutable<name>ObjectMap\<V> asSynchronized()
     {
-        return new Synchronized<name>ObjectMap\<V>(this);
+        return new Synchronized<name>ObjectMap\<>(this);
     }
 
     @Override
@@ -994,7 +994,7 @@ public final class Unmodifiable<name>ObjectMap\<V>
     @Override
     public Iterator\<V> iterator()
     {
-        return new UnmodifiableIteratorAdapter\<V>(this.map.iterator());
+        return new UnmodifiableIteratorAdapter\<>(this.map.iterator());
     }
 }
 

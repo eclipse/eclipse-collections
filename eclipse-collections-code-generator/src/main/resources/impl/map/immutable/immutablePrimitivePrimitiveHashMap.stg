@@ -41,8 +41,6 @@ import org.eclipse.collections.api.block.predicate.primitive.<name2>Predicate;
 import org.eclipse.collections.api.block.procedure.primitive.<name1><name2>Procedure;
 <if(!sameTwoPrimitives)>import org.eclipse.collections.api.block.procedure.primitive.<name1>Procedure;<endif>
 import org.eclipse.collections.api.block.procedure.primitive.<name2>Procedure;
-import org.eclipse.collections.api.collection.ImmutableCollection;
-import org.eclipse.collections.api.collection.primitive.Immutable<name2>Collection;
 import org.eclipse.collections.api.collection.primitive.Mutable<name2>Collection;
 import org.eclipse.collections.api.iterator.<name1>Iterator;
 <if(!sameTwoPrimitives)>import org.eclipse.collections.api.iterator.<name2>Iterator;<endif>

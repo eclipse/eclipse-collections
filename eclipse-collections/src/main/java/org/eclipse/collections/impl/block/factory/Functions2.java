@@ -87,12 +87,12 @@ public final class Functions2
 
     public static <T, V extends Comparable<? super V>> Function2<T, T, T> minBy(Function<? super T, ? extends V> function)
     {
-        return new MinByFunction2<T, V>(function);
+        return new MinByFunction2<>(function);
     }
 
     public static <T, V extends Comparable<? super V>> Function2<T, T, T> maxBy(Function<? super T, ? extends V> function)
     {
-        return new MaxByFunction2<T, V>(function);
+        return new MaxByFunction2<>(function);
     }
 
     private static final class FunctionAdapter<T, P, V> implements Function2<T, P, V>

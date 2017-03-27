@@ -22,7 +22,7 @@ import java.io.Serializable;
  *
  * @since 3.0.
  */
-<if(primitive1.specializedStream && primitive2.specializedStream)>@FunctionalInterface<endif>
+@FunctionalInterface
 public interface <name1>To<name2>Function
         extends <if(primitive1.specializedStream && primitive2.specializedStream && !sameTwoPrimitives)>java.util.function.<name1>To<name2>Function, <elseif(primitive1.specializedStream && sameTwoPrimitives)>java.util.function.<name1>UnaryOperator, <endif>Serializable
 {

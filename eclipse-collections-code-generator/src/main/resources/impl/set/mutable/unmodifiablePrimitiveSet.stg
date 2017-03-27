@@ -17,7 +17,6 @@ body(type, name) ::= <<
 package org.eclipse.collections.impl.set.mutable.primitive;
 
 import org.eclipse.collections.api.<name>Iterable;
-import org.eclipse.collections.api.Lazy<name>Iterable;
 import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
 import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
 import org.eclipse.collections.api.set.MutableSet;
@@ -25,7 +24,6 @@ import org.eclipse.collections.api.set.primitive.Immutable<name>Set;
 import org.eclipse.collections.api.set.primitive.<name>Set;
 import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
 import org.eclipse.collections.impl.collection.mutable.primitive.AbstractUnmodifiable<name>Collection;
-import org.eclipse.collections.impl.lazy.primitive.Lazy<name>IterableAdapter;
 import net.jcip.annotations.NotThreadSafe;
 
 /**

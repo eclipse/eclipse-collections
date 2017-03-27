@@ -16,7 +16,7 @@ package org.eclipse.collections.impl.list.immutable.primitive;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.NoSuchElementException;
+<if(!primitive.booleanPrimitive)>import java.util.NoSuchElementException;<endif>
 
 import org.eclipse.collections.api.<name>Iterable;
 import org.eclipse.collections.api.Lazy<name>Iterable;

@@ -15,7 +15,6 @@ body(type, name) ::= <<
 
 package org.eclipse.collections.impl.map.immutable.primitive;
 
-import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
 import org.eclipse.collections.api.factory.map.primitive.Immutable<name>ObjectMapFactory;
 import org.eclipse.collections.api.map.primitive.Immutable<name>ObjectMap;
 import org.eclipse.collections.api.map.primitive.<name>ObjectMap;
@@ -50,7 +49,7 @@ public class Immutable<name>ObjectMapFactoryImpl implements Immutable<name>Objec
 
     public \<V> Immutable<name>ObjectMap\<V> with(<type> key, V value)
     {
-        return new Immutable<name>ObjectSingletonMap\<V>(key, value);
+        return new Immutable<name>ObjectSingletonMap\<>(key, value);
     }
 
     public \<V> Immutable<name>ObjectMap\<V> ofAll(<name>ObjectMap\<? extends V> map)
@@ -73,9 +72,9 @@ public class Immutable<name>ObjectMapFactoryImpl implements Immutable<name>Objec
             //TODO use keysView() when available.
             final <type>[] array = new <type>[1];
             map.forEachKey((<type> each) -> array[0] = each);
-            return new Immutable<name>ObjectSingletonMap\<V>(array[0], map.get(array[0]));
+            return new Immutable<name>ObjectSingletonMap\<>(array[0], map.get(array[0]));
         }
-        return new Immutable<name>ObjectHashMap\<V>(map);
+        return new Immutable<name>ObjectHashMap\<>(map);
     }
 }
 

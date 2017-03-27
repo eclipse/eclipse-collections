@@ -52,7 +52,7 @@ public class MutableObject<name>MapFactoryImpl implements MutableObject<name>Map
         {
             return this.empty();
         }
-        return new Object<name>HashMap\<K>(map);
+        return new Object<name>HashMap\<>(map);
     }
 }
 

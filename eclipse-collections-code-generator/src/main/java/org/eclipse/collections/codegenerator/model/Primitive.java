@@ -46,6 +46,11 @@ public enum Primitive
         return this.getName();
     }
 
+    public boolean isIntPrimitive()
+    {
+        return this == INT;
+    }
+
     public boolean isFloatingPoint()
     {
         return this == FLOAT || this == DOUBLE;

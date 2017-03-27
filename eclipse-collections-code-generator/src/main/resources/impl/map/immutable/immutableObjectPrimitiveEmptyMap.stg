@@ -61,7 +61,7 @@ import org.eclipse.collections.impl.utility.LazyIterate;
  */
 final class ImmutableObject<name>EmptyMap\<K> implements ImmutableObject<name>Map\<K>, Serializable
 {
-    static final ImmutableObject<name>Map\<?> INSTANCE = new ImmutableObject<name>EmptyMap\<Object>();
+    static final ImmutableObject<name>Map\<?> INSTANCE = new ImmutableObject<name>EmptyMap\<>();
 
     private static final long serialVersionUID = 1L;
     private static final <type> EMPTY_VALUE = <zero.(type)>;
@@ -190,7 +190,7 @@ final class ImmutableObject<name>EmptyMap\<K> implements ImmutableObject<name>Ma
     @Override
     public ImmutableObject<name>Map\<K> newWithKeyValue(K key, <type> value)
     {
-        return new ImmutableObject<name>SingletonMap\<K>(key, value);
+        return new ImmutableObject<name>SingletonMap\<>(key, value);
     }
 
     @Override

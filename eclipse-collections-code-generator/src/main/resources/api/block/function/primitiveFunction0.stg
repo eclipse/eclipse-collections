@@ -23,7 +23,7 @@ import java.io.Serializable;
  *
  * @since 3.0.
  */
-<if(primitive.specializedStream)>@FunctionalInterface<endif>
+@FunctionalInterface
 public interface <name>Function0
         extends <if(primitive.specializedStream)>java.util.function.<name>Supplier, <endif>Serializable
 {

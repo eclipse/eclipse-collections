@@ -16,31 +16,8 @@ body(type, name) ::= <<
 package org.eclipse.collections.api.map.primitive;
 
 import org.eclipse.collections.api.<name>Iterable;
-import org.eclipse.collections.api.block.function.Function;
-import org.eclipse.collections.api.block.function.Function2;
-import org.eclipse.collections.api.block.function.primitive.BooleanFunction;
-import org.eclipse.collections.api.block.function.primitive.ByteFunction;
-import org.eclipse.collections.api.block.function.primitive.CharFunction;
-import org.eclipse.collections.api.block.function.primitive.DoubleFunction;
-import org.eclipse.collections.api.block.function.primitive.FloatFunction;
-import org.eclipse.collections.api.block.function.primitive.IntFunction;
-import org.eclipse.collections.api.block.function.primitive.LongFunction;
-import org.eclipse.collections.api.block.function.primitive.ShortFunction;
-import org.eclipse.collections.api.block.predicate.Predicate;
-import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.predicate.primitive.<name>ObjectPredicate;
-import org.eclipse.collections.api.collection.ImmutableCollection;
-import org.eclipse.collections.api.collection.primitive.ImmutableBooleanCollection;
-import org.eclipse.collections.api.collection.primitive.ImmutableByteCollection;
-import org.eclipse.collections.api.collection.primitive.ImmutableCharCollection;
-import org.eclipse.collections.api.collection.primitive.ImmutableDoubleCollection;
-import org.eclipse.collections.api.collection.primitive.ImmutableFloatCollection;
-import org.eclipse.collections.api.collection.primitive.ImmutableIntCollection;
-import org.eclipse.collections.api.collection.primitive.ImmutableLongCollection;
-import org.eclipse.collections.api.collection.primitive.ImmutableShortCollection;
-import org.eclipse.collections.api.map.primitive.ImmutableObjectDoubleMap;
-import org.eclipse.collections.api.map.primitive.ImmutableObjectLongMap;
 
 /**
  * This file was automatically generated from template file immutablePrimitiveObjectMap.stg.

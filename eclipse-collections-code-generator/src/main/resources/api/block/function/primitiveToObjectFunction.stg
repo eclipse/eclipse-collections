@@ -20,7 +20,7 @@ import java.io.Serializable;
  *
  * @since 3.0.
  */
-<if(primitive.specializedStream)>@FunctionalInterface<endif>
+@FunctionalInterface
 public interface <name>ToObjectFunction\<V>
         extends <if(primitive.specializedStream)>java.util.function.<name>Function\<V>, <endif>Serializable
 {
