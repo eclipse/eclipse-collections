@@ -18,7 +18,6 @@ body(type, name) ::= <<
 package org.eclipse.collections.api.ordered.primitive;
 
 import org.eclipse.collections.api.<name>Iterable;
-import org.eclipse.collections.api.Lazy<name>Iterable;
 import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.Object<name>IntToObjectFunction;
 import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;

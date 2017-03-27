@@ -30,7 +30,6 @@ import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.bag.mutable.SynchronizedBag;
 import org.eclipse.collections.impl.map.mutable.SynchronizedMutableMap;
 import org.eclipse.collections.impl.set.mutable.SynchronizedMutableSet;
-import org.eclipse.collections.impl.set.mutable.UnmodifiableMutableSet;
 import org.eclipse.collections.impl.utility.LazyIterate;
 
 public abstract class AbstractSynchronizedMultimap<K, V> implements MutableMultimap<K, V>

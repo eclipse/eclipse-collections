@@ -55,7 +55,6 @@ import org.eclipse.collections.api.RichIterable;
 <if(!sameTwoPrimitives)>import org.eclipse.collections.api.block.function.primitive.<name1>To<name2>Function;<endif>
 import org.eclipse.collections.api.block.function.primitive.<name2>Function;
 import org.eclipse.collections.api.block.function.primitive.<name2>Function0;
-<if(sameTwoPrimitives)>import org.eclipse.collections.api.block.predicate.primitive.<name1>Predicate;<endif>
 import org.eclipse.collections.api.block.function.primitive.<name2>To<name2>Function;
 <if(sameTwoPrimitives)>import org.eclipse.collections.api.block.function.primitive.<name2>ToObjectFunction;<endif>
 import org.eclipse.collections.api.block.function.primitive.Object<name2>ToObjectFunction;
@@ -73,12 +72,10 @@ import org.eclipse.collections.api.iterator.Mutable<name1>Iterator;
 import org.eclipse.collections.api.map.primitive.<name1><name2>Map;
 import org.eclipse.collections.api.map.primitive.Immutable<name1><name2>Map;
 import org.eclipse.collections.api.map.primitive.Mutable<name1><name2>Map;
-<if(sameTwoPrimitives)>import org.eclipse.collections.api.set.MutableSet;<endif>
 import org.eclipse.collections.api.set.primitive.<name1>Set;
 <if(!sameTwoPrimitives)>import org.eclipse.collections.api.set.primitive.<name2>Set;<endif>
 import org.eclipse.collections.api.set.primitive.Mutable<name1>Set;
 import org.eclipse.collections.api.tuple.primitive.<name1><name2>Pair;
-<if(sameTwoPrimitives)>import org.eclipse.collections.impl.factory.Sets;<endif>
 import org.eclipse.collections.impl.factory.primitive.<name1><name2>Maps;
 import org.eclipse.collections.impl.iterator.Unmodifiable<name1>Iterator;
 import org.eclipse.collections.impl.lazy.AbstractLazyIterable;

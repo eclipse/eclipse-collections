@@ -35,7 +35,6 @@ import org.eclipse.collections.api.PrimitiveIterable;
 import org.eclipse.collections.api.bag.Bag;
 import org.eclipse.collections.api.bag.sorted.SortedBag;
 import org.eclipse.collections.api.block.predicate.Predicate;
-import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
 import org.eclipse.collections.api.collection.ImmutableCollection;
 import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
@@ -3742,7 +3741,8 @@ public final class Verify extends Assert
     {
         try
         {
-            Verify.assertThrows(NotSerializableException.class, () -> {
+            Verify.assertThrows(NotSerializableException.class, () ->
+            {
                 new ObjectOutputStream(new ByteArrayOutputStream()).writeObject(actualObject);
                 return null;
             });

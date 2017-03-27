@@ -17,7 +17,6 @@ body(type, name) ::= <<
 package org.eclipse.collections.api.map.primitive;
 
 import org.eclipse.collections.api.<name>Iterable;
-import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.Bag;
 import org.eclipse.collections.api.bag.primitive.<name>Bag;
 import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
