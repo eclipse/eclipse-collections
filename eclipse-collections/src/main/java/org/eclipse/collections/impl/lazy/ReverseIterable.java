@@ -12,6 +12,7 @@ package org.eclipse.collections.impl.lazy;
 
 import java.util.Iterator;
 import java.util.ListIterator;
+import java.util.Optional;
 
 import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.block.procedure.Procedure;
@@ -79,6 +80,12 @@ public class ReverseIterable<T>
     public T getOnly()
     {
         return this.adapted.getOnly();
+    }
+
+    @Override
+    public Optional<T> getOnlyOptional()
+    {
+        return this.adapted.getOnlyOptional();
     }
 
     @Override

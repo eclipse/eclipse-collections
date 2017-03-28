@@ -16,6 +16,7 @@ import java.io.ObjectInput;
 import java.io.ObjectOutput;
 import java.util.Collection;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 
 import net.jcip.annotations.NotThreadSafe;
@@ -265,5 +266,11 @@ final class SingletonMap<K, V>
     public V getOnly()
     {
         return this.value1;
+    }
+
+    @Override
+    public Optional<V> getOnlyOptional()
+    {
+        return Optional.of(this.value1);
     }
 }

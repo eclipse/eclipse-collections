@@ -149,6 +149,31 @@ public interface RichIterable<T>
     }
 
     /**
+     * Returns the element as an optional if the iterable has exactly one element.
+     * If the iterable is empty {@link Optional#empty} is returned.
+     * Otherwise, throw {@link IllegalStateException}.
+     *
+     * @return an element of an iterable wrapped in an optional or an empty optional.
+     * @throws IllegalStateException if iterable has more than one element.
+     * @throws NullPointerException if the element is null
+     * @since 8.2
+     */
+    default Optional<T> getOnlyOptional()
+    {
+        if (this.isEmpty())
+        {
+            return Optional.empty();
+        }
+
+        if (this.size() == 1)
+        {
+            return Optional.of(this.getFirst());
+        }
+
+        throw new IllegalStateException("Size must be 0 or 1 but was " + this.size());
+    }
+
+    /**
      * Returns true if the iterable has an element which responds true to element.equals(object).
      *
      * @since 1.0

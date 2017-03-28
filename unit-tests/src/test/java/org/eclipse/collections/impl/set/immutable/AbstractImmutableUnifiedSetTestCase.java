@@ -13,6 +13,7 @@ package org.eclipse.collections.impl.set.immutable;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Optional;
 
 import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.list.MutableList;
@@ -248,6 +249,19 @@ public abstract class AbstractImmutableUnifiedSetTestCase
     public void getOnly_throws_when_multiple_values()
     {
         this.newSetWith(1, 2, 3).getOnly();
+    }
+
+    @Test
+    public void getOnlyOptional()
+    {
+        Assert.assertEquals(Optional.empty(), this.newSet().getOnlyOptional());
+        Assert.assertEquals(Optional.of(Integer.valueOf(1)), this.newSetWith(1).getOnlyOptional());
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void getOnlyOptional_throws_when_multiple_values()
+    {
+        this.newSetWith(1, 2, 3).getOnlyOptional();
     }
 
     @Test

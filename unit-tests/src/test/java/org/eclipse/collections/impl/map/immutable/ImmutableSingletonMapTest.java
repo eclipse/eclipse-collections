@@ -10,6 +10,8 @@
 
 package org.eclipse.collections.impl.map.immutable;
 
+import java.util.Optional;
+
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.api.map.MutableMap;
@@ -253,6 +255,13 @@ public class ImmutableSingletonMapTest extends ImmutableMemoryEfficientMapTestCa
     {
         ImmutableSingletonMap<Integer, String> singletonMap = new ImmutableSingletonMap<>(1, "One");
         Assert.assertEquals("One", singletonMap.getOnly());
+    }
+
+    @Test
+    public void getOnlyOptional()
+    {
+        ImmutableSingletonMap<Integer, String> singletonMap = new ImmutableSingletonMap<>(1, "One");
+        Assert.assertEquals(Optional.of("One"), singletonMap.getOnlyOptional());
     }
 
     @Override

@@ -2014,6 +2014,31 @@ public class IterateTest
         Iterate.getOnly(Lists.fixedSize.of(new Object(), new Object()));
     }
 
+    @Test
+    public void getOnlyOptionalSingleton()
+    {
+        Object value = new Object();
+        Assert.assertEquals(Optional.of(value), Iterate.getOnlyOptional(Lists.fixedSize.of(value)));
+    }
+
+    @Test
+    public void getOnlyOptionalEmpty()
+    {
+        Assert.assertEquals(Optional.empty(), Iterate.getOnlyOptional(Lists.fixedSize.<String>of()));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void getOnlyOptionalMultiple()
+    {
+        Iterate.getOnlyOptional(Lists.fixedSize.of(new Object(), new Object()));
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void getOnlyOptional_throws_when_only_element_null()
+    {
+        Iterate.getOnlyOptional(Lists.fixedSize.of(new Object[]{null}));
+    }
+
     private static final class IterableAdapter<E>
             implements Iterable<E>
     {

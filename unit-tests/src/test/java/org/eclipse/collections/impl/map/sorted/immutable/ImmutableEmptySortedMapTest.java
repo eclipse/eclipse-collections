@@ -12,6 +12,7 @@ package org.eclipse.collections.impl.map.sorted.immutable;
 
 import java.util.Comparator;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.map.ImmutableMap;
@@ -379,5 +380,11 @@ public class ImmutableEmptySortedMapTest extends ImmutableSortedMapTestCase
     public void getOnly()
     {
         Verify.assertThrows(IllegalStateException.class, () -> this.classUnderTest().getOnly());
+    }
+
+    @Test
+    public void getOnlyOptional()
+    {
+      Assert.assertEquals(Optional.empty(), this.classUnderTest().getOnlyOptional());
     }
 }

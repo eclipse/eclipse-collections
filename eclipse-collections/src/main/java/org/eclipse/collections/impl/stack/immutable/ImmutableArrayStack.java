@@ -269,6 +269,12 @@ final class ImmutableArrayStack<T> implements ImmutableStack<T>, Serializable
     }
 
     @Override
+    public Optional<T> getOnlyOptional()
+    {
+        return this.delegate.getOnlyOptional();
+    }
+
+    @Override
     public boolean contains(Object object)
     {
         return this.delegate.asReversed().contains(object);

@@ -14,6 +14,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.SortedMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -869,6 +870,30 @@ public abstract class MapIterableTestCase
     public void getOnly_throws_when_multiple_values()
     {
         this.newMapWithKeysValues("1", "One", "2", "Two").getOnly();
+    }
+
+    @Test
+    public void getOnlyOptional()
+    {
+        MapIterable<String, String> emptyMap = this.newMap();
+
+        Assert.assertEquals(Optional.empty(), emptyMap.getOnlyOptional());
+
+        MapIterable<String, String> map = this.newMapWithKeyValue("1", "One");
+
+        Assert.assertEquals(Optional.of("One"), map.getOnlyOptional());
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void getOnlyOptional_throws_when_multiple_values()
+    {
+        this.newMapWithKeysValues("1", "One", "2", "Two").getOnlyOptional();
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void getOnlyOptional_throws_when_only_element_null()
+    {
+        this.newMapWithKeyValue("1", null).getOnlyOptional();
     }
 
     @Test

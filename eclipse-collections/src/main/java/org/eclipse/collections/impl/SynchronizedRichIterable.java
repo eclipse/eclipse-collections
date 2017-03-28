@@ -171,6 +171,15 @@ public class SynchronizedRichIterable<T>
     }
 
     @Override
+    public Optional<T> getOnlyOptional()
+    {
+        synchronized (this.lock)
+        {
+            return this.iterable.getOnlyOptional();
+        }
+    }
+
+    @Override
     public boolean contains(Object object)
     {
         synchronized (this.lock)

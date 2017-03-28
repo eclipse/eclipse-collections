@@ -13,6 +13,7 @@ package org.eclipse.collections.impl.bag.sorted.immutable;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import org.eclipse.collections.api.bag.sorted.ImmutableSortedBag;
 import org.eclipse.collections.api.collection.MutableCollection;
@@ -550,6 +551,12 @@ public class ImmutableEmptySortedBagTest extends AbstractImmutableSortedBagTestC
     public void getOnly()
     {
         Verify.assertThrows(IllegalStateException.class, () -> this.classUnderTest().getOnly());
+    }
+
+    @Test
+    public void getOnlyOptional()
+    {
+      Assert.assertEquals(Optional.empty(), this.classUnderTest().getOnlyOptional());
     }
 
     @Override

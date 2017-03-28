@@ -962,4 +962,13 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
             return this.delegate.getOnly();
         }
     }
+
+    @Override
+    public Optional<T> getOnlyOptional()
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.getOnlyOptional();
+        }
+    }
 }

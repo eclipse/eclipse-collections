@@ -12,6 +12,7 @@ package org.eclipse.collections.impl.map.mutable.primitive;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.block.HashingStrategy;
@@ -21,6 +22,7 @@ import org.eclipse.collections.impl.lazy.AbstractLazyIterableTestCase;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * JUnit test for {@link ObjectBooleanHashMapWithHashingStrategy#keysView()}.
@@ -69,5 +71,12 @@ public class ObjectBooleanHashMapWithHashingStrategyKeysViewTest extends Abstrac
 
         Assert.assertEquals(expected, actual);
         Verify.assertThrows(NoSuchElementException.class, (Runnable) iterator::next);
+    }
+
+    @Override
+    @Test
+    public void getOnlyOptional_throws_when_only_element_null()
+    {
+        // not possible to distinguish between no keys and null key value
     }
 }

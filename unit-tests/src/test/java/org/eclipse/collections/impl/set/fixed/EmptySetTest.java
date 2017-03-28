@@ -14,6 +14,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.multimap.set.MutableSetMultimap;
@@ -327,5 +328,12 @@ public class EmptySetTest extends AbstractMemoryEfficientMutableSetTestCase
     public void getOnly()
     {
         Verify.assertThrows(IllegalStateException.class, () -> this.emptySet.getOnly());
+    }
+
+    @Override
+    @Test
+    public void getOnlyOptional()
+    {
+        Assert.assertEquals(Optional.empty(), this.emptySet.getOnlyOptional());
     }
 }

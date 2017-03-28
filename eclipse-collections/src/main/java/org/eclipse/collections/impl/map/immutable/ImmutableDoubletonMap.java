@@ -13,6 +13,7 @@ package org.eclipse.collections.impl.map.immutable;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 
 import org.eclipse.collections.api.RichIterable;
@@ -252,6 +253,12 @@ final class ImmutableDoubletonMap<K, V>
     public V getOnly()
     {
         throw new IllegalStateException("Size must be 1 but was " + this.size());
+    }
+
+    @Override
+    public Optional<V> getOnlyOptional()
+    {
+        throw new IllegalStateException("Size must be 0 or 1 but was " + this.size());
     }
 
     private Object writeReplace()

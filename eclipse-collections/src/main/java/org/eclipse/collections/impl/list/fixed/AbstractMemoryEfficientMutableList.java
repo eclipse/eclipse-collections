@@ -12,6 +12,7 @@ package org.eclipse.collections.impl.list.fixed;
 
 import java.util.Collection;
 import java.util.ListIterator;
+import java.util.Optional;
 import java.util.RandomAccess;
 
 import org.eclipse.collections.api.block.predicate.Predicate;
@@ -166,6 +167,12 @@ public abstract class AbstractMemoryEfficientMutableList<T>
             return this;
         }
         return Lists.fixedSize.ofAll(this.toList().withoutAll(elements));
+    }
+
+    @Override
+    public Optional<T> getOnlyOptional()
+    {
+        throw new IllegalStateException("Size must be 0 or 1 but was " + this.size());
     }
 
     private static class SubList<T>

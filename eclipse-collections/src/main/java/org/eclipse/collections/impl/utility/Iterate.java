@@ -3548,6 +3548,15 @@ public final class Iterate
         throw new IllegalArgumentException("Cannot perform getOnly on null");
     }
 
+    public static <T> Optional<T> getOnlyOptional(Iterable<T> iterable)
+    {
+        if (iterable != null)
+        {
+            return IterableIterate.getOnlyOptional(iterable);
+        }
+        throw new IllegalArgumentException("Cannot perform getOnlyOptional on null");
+    }
+
     /**
      * @see RichIterable#zip(Iterable)
      */

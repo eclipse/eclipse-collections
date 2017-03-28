@@ -348,6 +348,12 @@ final class ImmutableEmptyList<T>
     }
 
     @Override
+    public Optional<T> getOnlyOptional()
+    {
+        return Optional.empty();
+    }
+
+    @Override
     public int indexOf(Object object)
     {
         return -1;

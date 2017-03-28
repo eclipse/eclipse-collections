@@ -12,6 +12,7 @@ package org.eclipse.collections.impl.set.strategy.immutable;
 
 import java.io.Serializable;
 import java.util.Iterator;
+import java.util.Optional;
 import java.util.concurrent.ExecutorService;
 
 import net.jcip.annotations.Immutable;
@@ -94,6 +95,12 @@ final class ImmutableUnifiedSetWithHashingStrategy<T>
     public T getOnly()
     {
         return this.delegate.getOnly();
+    }
+
+    @Override
+    public Optional<T> getOnlyOptional()
+    {
+        return this.delegate.getOnlyOptional();
     }
 
     @Override

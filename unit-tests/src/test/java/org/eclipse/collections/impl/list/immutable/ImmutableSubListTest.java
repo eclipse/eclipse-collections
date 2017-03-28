@@ -11,6 +11,7 @@
 package org.eclipse.collections.impl.list.immutable;
 
 import java.util.ListIterator;
+import java.util.Optional;
 
 import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.impl.factory.Lists;
@@ -81,6 +82,23 @@ public class ImmutableSubListTest extends AbstractImmutableListTestCase
 
     @Test(expected = IllegalStateException.class)
     public void getOnly_exception_when_multiple_items()
+    {
+        ImmutableList<Integer> list = Lists.immutable.of(1, 2, 3, 4, 5).subList(1, 3);
+        list.getOnly();
+    }
+
+    @Test
+    public void getOnlyOptional()
+    {
+        ImmutableList<Integer> emptyList = Lists.immutable.of(1, 2, 3, 4, 5).subList(1, 1);
+        Assert.assertEquals(Optional.empty(), emptyList.getOnlyOptional());
+
+        ImmutableList<Integer> list = Lists.immutable.of(1, 2, 3, 4, 5).subList(1, 2);
+        Assert.assertEquals(Optional.of(Integer.valueOf(2)), list.getOnlyOptional());
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void getOnlyOptional_exception_when_multiple_items()
     {
         ImmutableList<Integer> list = Lists.immutable.of(1, 2, 3, 4, 5).subList(1, 3);
         list.getOnly();

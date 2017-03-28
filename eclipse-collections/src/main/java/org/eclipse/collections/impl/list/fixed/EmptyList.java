@@ -15,6 +15,7 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.block.function.Function;
@@ -165,6 +166,12 @@ final class EmptyList<T>
     public T getOnly()
     {
         throw new IllegalStateException("Size must be 1 but was " + this.size());
+    }
+
+    @Override
+    public Optional<T> getOnlyOptional()
+    {
+        return Optional.empty();
     }
 
     @Override

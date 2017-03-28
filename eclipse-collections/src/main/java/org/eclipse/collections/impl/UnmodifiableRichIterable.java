@@ -278,6 +278,12 @@ public class UnmodifiableRichIterable<T>
     }
 
     @Override
+    public Optional<T> getOnlyOptional()
+    {
+        return this.iterable.getOnlyOptional();
+    }
+
+    @Override
     public RichIterable<T> select(Predicate<? super T> predicate)
     {
         return this.iterable.select(predicate);

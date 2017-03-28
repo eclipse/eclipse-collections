@@ -304,4 +304,10 @@ final class ImmutableEmptySortedMap<K, V>
     {
         throw new IllegalStateException("Size must be 1 but was " + this.size());
     }
+
+    @Override
+    public Optional<V> getOnlyOptional()
+    {
+        return Optional.empty();
+    }
 }

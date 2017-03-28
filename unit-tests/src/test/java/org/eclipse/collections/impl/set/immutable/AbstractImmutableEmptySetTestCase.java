@@ -14,6 +14,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.list.MutableList;
@@ -126,6 +127,12 @@ public abstract class AbstractImmutableEmptySetTestCase extends AbstractImmutabl
     public void getOnly()
     {
         Verify.assertThrows(IllegalStateException.class, () -> this.classUnderTest().getOnly());
+    }
+
+    @Test
+    public void getOnlyOptional()
+    {
+        Assert.assertEquals(Optional.empty(), this.classUnderTest().getOnlyOptional());
     }
 
     @Override

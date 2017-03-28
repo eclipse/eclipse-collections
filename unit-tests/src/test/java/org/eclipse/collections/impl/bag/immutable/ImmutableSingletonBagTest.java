@@ -13,6 +13,7 @@ package org.eclipse.collections.impl.bag.immutable;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import org.eclipse.collections.api.bag.Bag;
 import org.eclipse.collections.api.bag.ImmutableBag;
@@ -276,6 +277,14 @@ public class ImmutableSingletonBagTest extends ImmutableBagTestCase
     {
         super.getOnly();
         Assert.assertEquals(VAL, this.newBag().getOnly());
+    }
+
+    @Override
+    @Test
+    public void getOnlyOptional()
+    {
+        super.getOnlyOptional();
+        Assert.assertEquals(Optional.of(VAL), this.newBag().getOnlyOptional());
     }
 
     @Override

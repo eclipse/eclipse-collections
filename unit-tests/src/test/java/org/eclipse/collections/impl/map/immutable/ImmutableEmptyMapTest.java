@@ -11,6 +11,7 @@
 package org.eclipse.collections.impl.map.immutable;
 
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.impl.block.factory.Functions;
@@ -199,6 +200,12 @@ public class ImmutableEmptyMapTest extends ImmutableMemoryEfficientMapTestCase
     public void getOnly()
     {
         new ImmutableEmptyMap<>().getOnly();
+    }
+
+    @Test
+    public void getOnlyOptional()
+    {
+        Assert.assertEquals(Optional.empty(), new ImmutableEmptyMap<>().getOnlyOptional());
     }
 
     @Override

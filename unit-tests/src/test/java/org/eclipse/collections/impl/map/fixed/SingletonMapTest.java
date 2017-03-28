@@ -11,6 +11,7 @@
 package org.eclipse.collections.impl.map.fixed;
 
 import java.util.Map;
+import java.util.Optional;
 
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.FixedSizeMap;
@@ -387,6 +388,14 @@ public class SingletonMapTest extends AbstractMemoryEfficientMutableMapTest
     {
         String only = this.classUnderTest().getOnly();
         Assert.assertEquals("One", only);
+    }
+
+    @Override
+    @Test
+    public void getOnlyOptional()
+    {
+        Optional<String> only = this.classUnderTest().getOnlyOptional();
+        Assert.assertEquals(Optional.of("One"), only);
     }
 
     @Override

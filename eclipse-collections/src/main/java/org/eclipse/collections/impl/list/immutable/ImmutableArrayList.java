@@ -138,6 +138,22 @@ final class ImmutableArrayList<T>
     }
 
     @Override
+    public Optional<T> getOnlyOptional()
+    {
+        if (this.isEmpty())
+        {
+            return Optional.empty();
+        }
+
+        if (this.size() == 1)
+        {
+            return Optional.of(this.getFirst());
+        }
+
+        throw new IllegalStateException("Size must be 0 or 1 but was " + this.size());
+    }
+
+    @Override
     public void each(Procedure<? super T> procedure)
     {
         for (T each : this.items)
@@ -296,6 +312,7 @@ final class ImmutableArrayList<T>
         return InternalArrayIterate.detectWithOptional(this.items, this.items.length, predicate, parameter);
     }
 
+    @Override
     public int count(Predicate<? super T> predicate)
     {
         return InternalArrayIterate.count(this.items, this.items.length, predicate);

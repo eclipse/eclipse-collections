@@ -17,6 +17,7 @@ import java.io.ObjectOutput;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.Set;
 
 import net.jcip.annotations.NotThreadSafe;
@@ -123,6 +124,12 @@ class SingletonSet<T>
     public T getOnly()
     {
         return this.element1;
+    }
+
+    @Override
+    public Optional<T> getOnlyOptional()
+    {
+        return Optional.of(this.element1);
     }
 
     @Override

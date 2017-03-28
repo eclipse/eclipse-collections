@@ -10,6 +10,8 @@
 
 package org.eclipse.collections.impl.list.immutable;
 
+import java.util.Optional;
+
 import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MutableMap;
@@ -237,5 +239,26 @@ public class ImmutableArrayListTest extends AbstractImmutableListTestCase
     {
         ImmutableList<Integer> list = this.newList(1, 2, 3);
         list.getOnly();
+    }
+
+    @Test
+    public void getOnlyOptional()
+    {
+        Assert.assertEquals(Optional.empty(), this.newList().getOnlyOptional());
+        Assert.assertEquals(Optional.of(Integer.valueOf(2)), this.newList(2).getOnlyOptional());
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void getOnlyOptional_exception_when_multiple_items()
+    {
+        ImmutableList<Integer> list = this.newList(1, 2, 3);
+        list.getOnlyOptional();
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void getOnlyOptional_throws_when_only_element_null()
+    {
+        ImmutableList<Integer> list = this.newList(new Integer[]{null});
+        list.getOnlyOptional();
     }
 }

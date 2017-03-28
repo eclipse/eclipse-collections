@@ -642,6 +642,25 @@ public abstract class AbstractLazyIterableTestCase
     }
 
     @Test
+    public void getOnlyOptional()
+    {
+        Assert.assertEquals(Optional.empty(), this.newWith().getOnlyOptional());
+        Assert.assertEquals(Optional.of(Integer.valueOf(1)), this.newWith(1).getOnlyOptional());
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void getOnlyOptional_throws_when_multiple_values()
+    {
+        this.newWith(1, 2, 3).getOnlyOptional();
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void getOnlyOptional_throws_when_only_element_null()
+    {
+        this.newWith(new Object[]{null}).getOnlyOptional();
+    }
+
+    @Test
     public void isEmpty()
     {
         Assert.assertTrue(this.newWith().isEmpty());

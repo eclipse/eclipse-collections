@@ -191,6 +191,12 @@ public class ImmutableHashBag<T>
     }
 
     @Override
+    public Optional<T> getOnlyOptional()
+    {
+        return this.delegate.getOnlyOptional();
+    }
+
+    @Override
     public T min(Comparator<? super T> comparator)
     {
         return this.delegate.min(comparator);

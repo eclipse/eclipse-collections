@@ -13,6 +13,7 @@ package org.eclipse.collections.impl.map.immutable;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 
 import org.eclipse.collections.api.RichIterable;
@@ -209,6 +210,12 @@ final class ImmutableSingletonMap<K, V>
     public V getOnly()
     {
         return this.value1;
+    }
+
+    @Override
+    public Optional<V> getOnlyOptional()
+    {
+        return Optional.of(this.value1);
     }
 
     private Object writeReplace()

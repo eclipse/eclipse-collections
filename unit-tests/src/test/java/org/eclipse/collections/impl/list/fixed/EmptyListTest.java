@@ -11,6 +11,7 @@
 package org.eclipse.collections.impl.list.fixed;
 
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.impl.block.factory.Comparators;
@@ -49,6 +50,12 @@ public class EmptyListTest
     public void getOnly()
     {
         Verify.assertThrows(IllegalStateException.class, () -> new EmptyList<>().getOnly());
+    }
+
+    @Test
+    public void getOnlyOptional()
+    {
+        Assert.assertEquals(Optional.empty(), new EmptyList<>().getOnlyOptional());
     }
 
     @Test

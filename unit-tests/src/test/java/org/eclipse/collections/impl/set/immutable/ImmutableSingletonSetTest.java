@@ -10,6 +10,8 @@
 
 package org.eclipse.collections.impl.set.immutable;
 
+import java.util.Optional;
+
 import org.eclipse.collections.api.collection.ImmutableCollection;
 import org.eclipse.collections.api.set.ImmutableSet;
 import org.junit.Assert;
@@ -61,5 +63,12 @@ public class ImmutableSingletonSetTest
     {
         ImmutableCollection<Integer> integers = this.classUnderTest();
         Assert.assertEquals(Integer.valueOf(1), integers.getOnly());
+    }
+
+    @Test
+    public void getOnlyOptional()
+    {
+        ImmutableCollection<Integer> integers = this.classUnderTest();
+        Assert.assertEquals(Optional.of(Integer.valueOf(1)), integers.getOnlyOptional());
     }
 }
