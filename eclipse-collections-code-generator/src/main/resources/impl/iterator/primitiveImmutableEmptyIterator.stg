@@ -29,11 +29,13 @@ public final class ImmutableEmpty<name>Iterator implements <name>Iterator
     {
     }
 
+    @Override
     public boolean hasNext()
     {
         return false;
     }
 
+    @Override
     public <type> next()
     {
         throw new NoSuchElementException();

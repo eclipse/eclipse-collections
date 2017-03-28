@@ -62,21 +62,25 @@ final class Immutable<name>SingletonSet implements Immutable<name>Set, Serializa
         this.element = element;
     }
 
+    @Override
     public Immutable<name>Set newWith(<type> element)
     {
         return <name>Sets.immutable.with(this.element, element);
     }
 
+    @Override
     public Immutable<name>Set newWithout(<type> element)
     {
         return <(equals.(type))("this.element", "element")> ? <name>Sets.immutable.with() : this;
     }
 
+    @Override
     public Immutable<name>Set newWithAll(<name>Iterable elements)
     {
         return <name>HashSet.newSet(elements).with(this.element).toImmutable();
     }
 
+    @Override
     public Immutable<name>Set newWithoutAll(<name>Iterable elements)
     {
         return elements.contains(this.element) ? <name>Sets.immutable.with() : this;
@@ -164,7 +168,7 @@ final class Immutable<name>SingletonSet implements Immutable<name>Set, Serializa
     @Override
     public \<V> ImmutableSet\<V> collect(<name>ToObjectFunction\<? extends V> function)
     {
-        return UnifiedSet.newSetWith(function.valueOf(this.element)).toImmutable();
+        return UnifiedSet.\<V>newSetWith(function.valueOf(this.element)).toImmutable();
     }
 
     @Override

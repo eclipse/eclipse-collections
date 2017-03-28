@@ -15,6 +15,7 @@ collectPrimitive(fromName, fromType, toName, toType) ::= <<
 /**
  * @since 7.0
  */
+@Override
 public Lazy<toName>Iterable collect<toName>(<fromName>To<toName>Function function)
 {
     return new Collect<fromName>To<toName>Iterable(this, function);
@@ -69,11 +70,13 @@ import org.eclipse.collections.impl.utility.primitive.Lazy<name>Iterate;
  */
 public abstract class AbstractLazy<name>Iterable implements Lazy<name>Iterable
 {
+    @Override
     public void forEach(<name>Procedure procedure)
     {
         this.each(procedure);
     }
 
+    @Override
     public int size()
     {
         return this.count(<name>Predicates.alwaysTrue());
@@ -85,26 +88,31 @@ public abstract class AbstractLazy<name>Iterable implements Lazy<name>Iterable
         return this.makeString("[", ", ", "]");
     }
 
+    @Override
     public boolean isEmpty()
     {
         return <name>IterableIterate.isEmpty(this);
     }
 
+    @Override
     public boolean notEmpty()
     {
         return <name>IterableIterate.notEmpty(this);
     }
 
+    @Override
     public String makeString()
     {
         return this.makeString(", ");
     }
 
+    @Override
     public String makeString(String separator)
     {
         return this.makeString("", separator, "");
     }
 
+    @Override
     public String makeString(String start, String separator, String end)
     {
         Appendable stringBuilder = new StringBuilder();
@@ -112,46 +120,55 @@ public abstract class AbstractLazy<name>Iterable implements Lazy<name>Iterable
         return stringBuilder.toString();
     }
 
+    @Override
     public void appendString(Appendable appendable)
     {
         this.appendString(appendable, ", ");
     }
 
+    @Override
     public void appendString(Appendable appendable, String separator)
     {
         this.appendString(appendable, "", separator, "");
     }
 
+    @Override
     public void appendString(Appendable appendable, String start, String separator, String end)
     {
         <name>IterableIterate.appendString(this, appendable, start, separator, end);
     }
 
+    @Override
     public boolean contains(<type> value)
     {
         return this.anySatisfy(<name>Predicates.equal(value));
     }
 
+    @Override
     public boolean containsAll(<type>... source)
     {
         return this.containsAll(<name>Sets.immutable.of(source));
     }
 
+    @Override
     public boolean containsAll(<name>Iterable source)
     {
         return source.allSatisfy((<type> value) -> AbstractLazy<name>Iterable.this.contains(value));
     }
 
+    @Override
     public Lazy<name>Iterable select(<name>Predicate predicate)
     {
         return Lazy<name>Iterate.select(this, predicate);
     }
 
+    @Override
     public Lazy<name>Iterable reject(<name>Predicate predicate)
     {
         return Lazy<name>Iterate.select(this, <name>Predicates.not(predicate));
     }
 
+    @Override
     public \<V> LazyIterable\<V> collect(<name>ToObjectFunction\<? extends V> function)
     {
         return Lazy<name>Iterate.collect(this, function);
@@ -173,41 +190,49 @@ public abstract class AbstractLazy<name>Iterable implements Lazy<name>Iterable
 
     <collectPrimitive(name, type, "Double", "double")>
 
+    @Override
     public <type> detectIfNone(<name>Predicate predicate, <type> ifNone)
     {
         return <name>IterableIterate.detectIfNone(this, predicate, ifNone);
     }
 
+    @Override
     public int count(<name>Predicate predicate)
     {
         return <name>IterableIterate.count(this, predicate);
     }
 
+    @Override
     public boolean anySatisfy(<name>Predicate predicate)
     {
         return <name>IterableIterate.anySatisfy(this, predicate);
     }
 
+    @Override
     public boolean allSatisfy(<name>Predicate predicate)
     {
         return <name>IterableIterate.allSatisfy(this, predicate);
     }
 
+    @Override
     public boolean noneSatisfy(<name>Predicate predicate)
     {
         return <name>IterableIterate.noneSatisfy(this, predicate);
     }
 
+    @Override
     public \<T> T injectInto(T injectedValue, Object<name>ToObjectFunction\<? super T, ? extends T> function)
     {
         return <name>IterableIterate.injectInto(this, injectedValue, function);
     }
 
+    @Override
     public <type>[] toArray()
     {
         return this.toList().toArray();
     }
 
+    @Override
     public Mutable<name>List toList()
     {
         final Mutable<name>List list = new <name>ArrayList();
@@ -215,6 +240,7 @@ public abstract class AbstractLazy<name>Iterable implements Lazy<name>Iterable
         return list;
     }
 
+    @Override
     public Mutable<name>Set toSet()
     {
         final Mutable<name>Set set = new <name>HashSet();
@@ -222,6 +248,7 @@ public abstract class AbstractLazy<name>Iterable implements Lazy<name>Iterable
         return set;
     }
 
+    @Override
     public Mutable<name>Bag toBag()
     {
         final Mutable<name>Bag bag = new <name>HashBag();
@@ -230,6 +257,7 @@ public abstract class AbstractLazy<name>Iterable implements Lazy<name>Iterable
     }
 
     <(arithmeticMethods.(type))()>
+    @Override
     public Lazy<name>Iterable asLazy()
     {
         return this;
@@ -244,6 +272,7 @@ arithmeticMethods ::= [
     ]
 
 allMethods() ::= <<
+@Override
 public <wideType.(type)> sum()
 {
     <name>SumProcedure procedure = new <name>SumProcedure();
@@ -251,6 +280,7 @@ public <wideType.(type)> sum()
     return procedure.getValue();
 }
 
+@Override
 public <type> max()
 {
     if (this.isEmpty())
@@ -262,6 +292,7 @@ public <type> max()
     return procedure.getValue();
 }
 
+@Override
 public <type> maxIfEmpty(<type> ifEmpty)
 {
     if (this.isEmpty())
@@ -271,6 +302,7 @@ public <type> maxIfEmpty(<type> ifEmpty)
     return this.max();
 }
 
+@Override
 public <type> min()
 {
     if (this.isEmpty())
@@ -282,6 +314,7 @@ public <type> min()
     return procedure.getValue();
 }
 
+@Override
 public <type> minIfEmpty(<type> ifEmpty)
 {
     if (this.isEmpty())
@@ -291,6 +324,7 @@ public <type> minIfEmpty(<type> ifEmpty)
     return this.min();
 }
 
+@Override
 public double average()
 {
     if (this.isEmpty())
@@ -300,6 +334,7 @@ public double average()
     return (double) this.sum() / (double) this.size();
 }
 
+@Override
 public double median()
 {
     if (this.isEmpty())
@@ -317,11 +352,13 @@ public double median()
     return (double) sortedArray[middleIndex];
 }
 
+@Override
 public <type>[] toSortedArray()
 {
     return this.toSortedList().toArray();
 }
 
+@Override
 public Mutable<name>List toSortedList()
 {
     return <name>ArrayList.newList(this).sortThis();
@@ -332,6 +369,7 @@ private static final class <name>MaxProcedure implements <name>Procedure
     private boolean visitedOnce;
     private <type> max;
 
+    @Override
     public void value(<type> each)
     {
         if (this.visitedOnce)
@@ -359,6 +397,7 @@ private static final class <name>MinProcedure implements <name>Procedure
     private boolean visitedOnce;
     private <type> min;
 
+    @Override
     public void value(<type> each)
     {
         if (this.visitedOnce)
@@ -386,6 +425,7 @@ private static final class <name>MinProcedure implements <name>Procedure
     private <wideType.(type)> sum = <wideZero.(type)>;
     private <wideType.(type)> compensation = <wideZero.(type)>;
 
+    @Override
     public void value(<type> each)
     {
         <wideType.(type)> adjustedValue = each - this.compensation;
@@ -404,6 +444,7 @@ private static final class <name>MinProcedure implements <name>Procedure
 {
     private <type> sum = 0;
 
+    @Override
     public void value(<type> each)
     {
         this.sum += each;

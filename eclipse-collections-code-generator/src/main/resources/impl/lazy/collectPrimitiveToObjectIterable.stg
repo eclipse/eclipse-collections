@@ -44,17 +44,20 @@ public class Collect<name>ToObjectIterable\<V>
         this.function = function;
     }
 
+    @Override
     public void each(final Procedure\<? super V> procedure)
     {
         this.iterable.forEach((<type> each) -> procedure.value(this.function.valueOf(each)));
     }
 
+    @Override
     public void forEachWithIndex(final ObjectIntProcedure\<? super V> objectIntProcedure)
     {
         this.iterable.forEach(new <name>Procedure()
         {
             private int index;
 
+            @Override
             public void value(<type> each)
             {
                 objectIntProcedure.value(Collect<name>ToObjectIterable.this.function.valueOf(each), this.index++);
@@ -62,27 +65,32 @@ public class Collect<name>ToObjectIterable\<V>
         });
     }
 
+    @Override
     public \<P> void forEachWith(final Procedure2\<? super V, ? super P> procedure, final P parameter)
     {
         this.iterable.forEach((<type> each) -> procedure.value(this.function.valueOf(each), parameter));
     }
 
+    @Override
     public Iterator\<V> iterator()
     {
         return new Iterator\<V>()
         {
             private final <name>Iterator iterator = Collect<name>ToObjectIterable.this.iterable.<type>Iterator();
 
+            @Override
             public boolean hasNext()
             {
                 return this.iterator.hasNext();
             }
 
+            @Override
             public V next()
             {
                 return Collect<name>ToObjectIterable.this.function.valueOf(this.iterator.next());
             }
 
+            @Override
             public void remove()
             {
                 throw new UnsupportedOperationException("Cannot call remove() on " + this.getClass().getSimpleName());

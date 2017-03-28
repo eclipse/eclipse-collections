@@ -25,26 +25,31 @@ import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
  */
 public class Mutable<name>SetFactoryImpl implements Mutable<name>SetFactory
 {
+    @Override
     public Mutable<name>Set empty()
     {
         return new <name>HashSet();
     }
 
+    @Override
     public Mutable<name>Set of()
     {
         return this.empty();
     }
 
+    @Override
     public Mutable<name>Set with()
     {
         return this.empty();
     }
 
+    @Override
     public Mutable<name>Set of(<type>... items)
     {
         return this.with(items);
     }
 
+    @Override
     public Mutable<name>Set with(<type>... items)
     {
         if (items == null || items.length == 0)
@@ -54,11 +59,13 @@ public class Mutable<name>SetFactoryImpl implements Mutable<name>SetFactory
         return <name>HashSet.newSetWith(items);
     }
 
+    @Override
     public Mutable<name>Set ofAll(<name>Iterable items)
     {
         return this.withAll(items);
     }
 
+    @Override
     public Mutable<name>Set withAll(<name>Iterable items)
     {
         return <name>HashSet.newSet(items);

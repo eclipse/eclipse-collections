@@ -14,11 +14,13 @@ class(primitive) ::= <<
 >>
 
 collectPrimitive(name, type) ::= <<
+@Override
 public Immutable<name>Bag collect<name>(<name>Function\<? super V> <type>Function)
 {
     return <name>Bags.immutable.empty();
 }
 
+@Override
 public \<R extends Mutable<name>Collection> R collect<name>(<name>Function\<? super V> <type>Function, R target)
 {
     return target;

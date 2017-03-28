@@ -29,6 +29,7 @@ public interface Immutable<name>Set extends Immutable<name>Collection, <name>Set
 {
     <sharedAPI(fileName(primitive), name)>
 
+    @Override
     \<V> ImmutableSet\<V> collect(<name>ToObjectFunction\<? extends V> function);
 
     <immutableAPI(fileName(primitive), type, name)>

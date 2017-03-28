@@ -26,11 +26,12 @@ import org.eclipse.collections.api.collection.ImmutableCollection;
  */
 public interface Immutable<name>Collection extends <name>Iterable
 {
+    @Override
     \<V> ImmutableCollection\<V> collect(<name>ToObjectFunction\<? extends V> function);
 
     <sharedAPI(fileName(primitive), name)>
 
-    <immutableAPI(fileName(primitive), type, name)>
+    <immutableAPINoOverride(fileName(primitive), type, name)>
 }
 
 >>

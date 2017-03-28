@@ -40,6 +40,7 @@ public class Lazy<name>IterableAdapter
         this.delegate = delegate;
     }
 
+    @Override
     public <name>Iterator <type>Iterator()
     {
         return this.delegate.<type>Iterator();
@@ -48,6 +49,7 @@ public class Lazy<name>IterableAdapter
     /**
      * @since 7.0.
      */
+    @Override
     public void each(<name>Procedure procedure)
     {
         this.delegate.forEach(procedure);

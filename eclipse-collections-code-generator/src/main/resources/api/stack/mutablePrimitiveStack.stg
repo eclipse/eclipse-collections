@@ -48,6 +48,7 @@ public interface Mutable<name>Stack extends <name>Stack
 
     <sharedAPI(fileName(primitive), name)>
 
+    @Override
     \<V> MutableStack\<V> collect(<name>ToObjectFunction\<? extends V> function);
 
     Mutable<name>Stack asUnmodifiable();

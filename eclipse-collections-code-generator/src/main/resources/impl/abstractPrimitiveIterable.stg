@@ -43,21 +43,25 @@ public abstract class Abstract<name>Iterable implements <name>Iterable
 
     <(arithmeticMethods.(type))()>
 
+    @Override
     public Mutable<name>List toList()
     {
         return <name>ArrayList.newList(this);
     }
 
+    @Override
     public Mutable<name>Set toSet()
     {
         return <name>HashSet.newSet(this);
     }
 
+    @Override
     public Mutable<name>Bag toBag()
     {
         return <name>HashBag.newBag(this);
     }
 
+    @Override
     public boolean containsAll(<type>... source)
     {
         for (<type> item : source)
@@ -70,6 +74,7 @@ public abstract class Abstract<name>Iterable implements <name>Iterable
         return true;
     }
 
+    @Override
     public boolean containsAll(<name>Iterable source)
     {
         return source.allSatisfy(this::contains);
@@ -85,6 +90,7 @@ arithmeticMethods ::= [
 
 allMethods() ::= <<
 
+@Override
 public <type> minIfEmpty(<type> defaultValue)
 {
     if (this.isEmpty())
@@ -94,6 +100,7 @@ public <type> minIfEmpty(<type> defaultValue)
     return this.min();
 }
 
+@Override
 public <type> maxIfEmpty(<type> defaultValue)
 {
     if (this.isEmpty())
@@ -103,6 +110,7 @@ public <type> maxIfEmpty(<type> defaultValue)
     return this.max();
 }
 
+@Override
 public double average()
 {
     if (this.isEmpty())
@@ -112,6 +120,7 @@ public double average()
     return (double) this.sum() / (double) this.size();
 }
 
+@Override
 public double median()
 {
     if (this.isEmpty())
@@ -129,6 +138,7 @@ public double median()
     return (double) sortedArray[middleIndex];
 }
 
+@Override
 public <type>[] toSortedArray()
 {
     <type>[] array = this.toArray();
@@ -136,11 +146,13 @@ public <type>[] toSortedArray()
     return array;
 }
 
+@Override
 public Mutable<name>List toSortedList()
 {
     return this.toList().sortThis();
 }
 
+@Override
 public Lazy<name>Iterable asLazy()
 {
     return new Lazy<name>IterableAdapter(this);
@@ -148,6 +160,7 @@ public Lazy<name>Iterable asLazy()
 >>
 
 noMethods() ::= <<
+@Override
 public Lazy<name>Iterable asLazy()
 {
     return new Lazy<name>IterableAdapter(this);

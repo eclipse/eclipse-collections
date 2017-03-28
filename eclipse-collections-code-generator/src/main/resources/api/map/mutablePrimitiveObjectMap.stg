@@ -61,10 +61,13 @@ public interface Mutable<name>ObjectMap\<V> extends <name>ObjectMap\<V>, Mutable
      */
     \<P> V updateValueWith(<type> key, Function0\<? extends V> factory, Function2\<? super V, ? super P, ? extends V> function, P parameter);
 
+    @Override
     Mutable<name>ObjectMap\<V> tap(Procedure\<? super V> procedure);
 
+    @Override
     Mutable<name>ObjectMap\<V> select(<name>ObjectPredicate\<? super V> predicate);
 
+    @Override
     Mutable<name>ObjectMap\<V> reject(<name>ObjectPredicate\<? super V> predicate);
 
     Mutable<name>ObjectMap\<V> withKeyValue(<type> key, V value);

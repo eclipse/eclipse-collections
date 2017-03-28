@@ -25,36 +25,43 @@ import org.eclipse.collections.api.stack.primitive.Immutable<name>Stack;
  */
 public class Immutable<name>StackFactoryImpl implements Immutable<name>StackFactory
 {
+    @Override
     public Immutable<name>Stack empty()
     {
         return Immutable<name>EmptyStack.INSTANCE;
     }
 
+    @Override
     public Immutable<name>Stack of()
     {
         return this.empty();
     }
 
+    @Override
     public Immutable<name>Stack with()
     {
         return this.empty();
     }
 
+    @Override
     public Immutable<name>Stack of(<type> one)
     {
         return this.with(one);
     }
 
+    @Override
     public Immutable<name>Stack with(<type> one)
     {
         return new Immutable<name>SingletonStack(one);
     }
 
+    @Override
     public Immutable<name>Stack of(<type>... items)
     {
         return this.with(items);
     }
 
+    @Override
     public Immutable<name>Stack with(<type>... items)
     {
         if (items == null || items.length == 0)
@@ -68,11 +75,13 @@ public class Immutable<name>StackFactoryImpl implements Immutable<name>StackFact
         return Immutable<name>ArrayStack.newStackWith(items);
     }
 
+    @Override
     public Immutable<name>Stack ofAll(<name>Iterable items)
     {
         return this.withAll(items);
     }
 
+    @Override
     public Immutable<name>Stack withAll(<name>Iterable items)
     {
         if (items instanceof Immutable<name>Stack)
@@ -82,11 +91,13 @@ public class Immutable<name>StackFactoryImpl implements Immutable<name>StackFact
         return this.with(items.toArray());
     }
 
+    @Override
     public Immutable<name>Stack ofAllReversed(<name>Iterable items)
     {
         return this.withAllReversed(items);
     }
 
+    @Override
     public Immutable<name>Stack withAllReversed(<name>Iterable items)
     {
         if (items == null || items.isEmpty())

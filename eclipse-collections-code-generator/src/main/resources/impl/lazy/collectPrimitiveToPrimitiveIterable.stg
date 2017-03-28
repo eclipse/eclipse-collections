@@ -42,22 +42,26 @@ public class Collect<name1>To<name2>Iterable
         this.function = function;
     }
 
+    @Override
     public void each(final <name2>Procedure procedure)
     {
         this.iterable.forEach((<type1> each) -> procedure.value(this.function.valueOf(each)));
     }
 
+    @Override
     public <name2>Iterator <type2>Iterator()
     {
         return new <name2>Iterator()
         {
             private final <name1>Iterator iterator = Collect<name1>To<name2>Iterable.this.iterable.<type1>Iterator();
 
+            @Override
             public boolean hasNext()
             {
                 return this.iterator.hasNext();
             }
 
+            @Override
             public <type2> next()
             {
                 return Collect<name1>To<name2>Iterable.this.function.valueOf(this.iterator.next());

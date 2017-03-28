@@ -389,236 +389,283 @@ result = nextSum})>
 
     protected abstract class Abstract<name>ValuesCollection implements Mutable<name>Collection
     {
+        @Override
         public void clear()
         {
             AbstractMutable<name>ValuesMap.this.clear();
         }
 
+        @Override
         public Mutable<name>Collection select(<name>Predicate predicate)
         {
             return AbstractMutable<name>ValuesMap.this.select(predicate);
         }
 
+        @Override
         public Mutable<name>Collection reject(<name>Predicate predicate)
         {
             return AbstractMutable<name>ValuesMap.this.reject(predicate);
         }
 
+        @Override
         public <type> detectIfNone(<name>Predicate predicate, <type> ifNone)
         {
             return AbstractMutable<name>ValuesMap.this.detectIfNone(predicate, ifNone);
         }
 
+        @Override
         public \<V> MutableCollection\<V> collect(<name>ToObjectFunction\<? extends V> function)
         {
             return AbstractMutable<name>ValuesMap.this.collect(function);
         }
 
+        @Override
         public \<T> T injectInto(T injectedValue, Object<name>ToObjectFunction\<? super T, ? extends T> function)
         {
             return AbstractMutable<name>ValuesMap.this.injectInto(injectedValue, function);
         }
 
+        @Override
         public <wideType.(type)> sum()
         {
             return AbstractMutable<name>ValuesMap.this.sum();
         }
 
+        @Override
         public <type> max()
         {
             return AbstractMutable<name>ValuesMap.this.max();
         }
 
+        @Override
         public <type> maxIfEmpty(<type> defaultValue)
         {
             return AbstractMutable<name>ValuesMap.this.maxIfEmpty(defaultValue);
         }
 
+        @Override
         public <type> min()
         {
             return AbstractMutable<name>ValuesMap.this.min();
         }
 
+        @Override
         public <type> minIfEmpty(<type> defaultValue)
         {
             return AbstractMutable<name>ValuesMap.this.minIfEmpty(defaultValue);
         }
 
+        @Override
         public double average()
         {
             return AbstractMutable<name>ValuesMap.this.average();
         }
 
+        @Override
         public double median()
         {
             return AbstractMutable<name>ValuesMap.this.median();
         }
 
+        @Override
         public <type>[] toSortedArray()
         {
             return AbstractMutable<name>ValuesMap.this.toSortedArray();
         }
 
+        @Override
         public Mutable<name>List toSortedList()
         {
             return AbstractMutable<name>ValuesMap.this.toSortedList();
         }
 
+        @Override
         public Mutable<name>Collection with(<type> element)
         {
             throw new UnsupportedOperationException("Cannot call with() on " + this.getClass().getSimpleName());
         }
 
+        @Override
         public Mutable<name>Collection without(<type> element)
         {
             throw new UnsupportedOperationException("Cannot call without() on " + this.getClass().getSimpleName());
         }
 
+        @Override
         public Mutable<name>Collection withAll(<name>Iterable elements)
         {
             throw new UnsupportedOperationException("Cannot call withAll() on " + this.getClass().getSimpleName());
         }
 
+        @Override
         public Mutable<name>Collection withoutAll(<name>Iterable elements)
         {
             throw new UnsupportedOperationException("Cannot call withoutAll() on " + this.getClass().getSimpleName());
         }
 
+        @Override
         public Mutable<name>Collection asUnmodifiable()
         {
             return Unmodifiable<name>Collection.of(this);
         }
 
+        @Override
         public Mutable<name>Collection asSynchronized()
         {
             return Synchronized<name>Collection.of(this);
         }
 
+        @Override
         public Immutable<name>Collection toImmutable()
         {
             return <name>Lists.immutable.withAll(this);
         }
 
+        @Override
         public boolean contains(<type> value)
         {
             return AbstractMutable<name>ValuesMap.this.containsValue(value);
         }
 
+        @Override
         public boolean containsAll(<type>... source)
         {
             return AbstractMutable<name>ValuesMap.this.containsAll(source);
         }
 
+        @Override
         public boolean containsAll(<name>Iterable source)
         {
             return AbstractMutable<name>ValuesMap.this.containsAll(source);
         }
 
+        @Override
         public Mutable<name>List toList()
         {
             return AbstractMutable<name>ValuesMap.this.toList();
         }
 
+        @Override
         public Mutable<name>Set toSet()
         {
             return AbstractMutable<name>ValuesMap.this.toSet();
         }
 
+        @Override
         public Mutable<name>Bag toBag()
         {
             return AbstractMutable<name>ValuesMap.this.toBag();
         }
 
+        @Override
         public Lazy<name>Iterable asLazy()
         {
             return new Lazy<name>IterableAdapter(this);
         }
 
+        @Override
         public boolean isEmpty()
         {
             return AbstractMutable<name>ValuesMap.this.isEmpty();
         }
 
+        @Override
         public boolean notEmpty()
         {
             return AbstractMutable<name>ValuesMap.this.notEmpty();
         }
 
+        @Override
         public String makeString()
         {
             return AbstractMutable<name>ValuesMap.this.makeString();
         }
 
+        @Override
         public String makeString(String separator)
         {
             return AbstractMutable<name>ValuesMap.this.makeString(separator);
         }
 
+        @Override
         public String makeString(String start, String separator, String end)
         {
             return AbstractMutable<name>ValuesMap.this.makeString(start, separator, end);
         }
 
+        @Override
         public void appendString(Appendable appendable)
         {
             AbstractMutable<name>ValuesMap.this.appendString(appendable);
         }
 
+        @Override
         public void appendString(Appendable appendable, String separator)
         {
             AbstractMutable<name>ValuesMap.this.appendString(appendable, separator);
         }
 
+        @Override
         public void appendString(Appendable appendable, String start, String separator, String end)
         {
             AbstractMutable<name>ValuesMap.this.appendString(appendable, start, separator, end);
         }
 
+        @Override
         public void forEach(<name>Procedure procedure)
         {
             this.each(procedure);
         }
 
+        @Override
         public void each(<name>Procedure procedure)
         {
             AbstractMutable<name>ValuesMap.this.each(procedure);
         }
 
+        @Override
         public int count(<name>Predicate predicate)
         {
             return AbstractMutable<name>ValuesMap.this.count(predicate);
         }
 
+        @Override
         public boolean anySatisfy(<name>Predicate predicate)
         {
             return AbstractMutable<name>ValuesMap.this.anySatisfy(predicate);
         }
 
+        @Override
         public boolean allSatisfy(<name>Predicate predicate)
         {
             return AbstractMutable<name>ValuesMap.this.allSatisfy(predicate);
         }
 
+        @Override
         public boolean noneSatisfy(<name>Predicate predicate)
         {
             return AbstractMutable<name>ValuesMap.this.noneSatisfy(predicate);
         }
 
+        @Override
         public boolean add(<type> element)
         {
             throw new UnsupportedOperationException("Cannot call add() on " + this.getClass().getSimpleName());
         }
 
+        @Override
         public boolean addAll(<type>... source)
         {
             throw new UnsupportedOperationException("Cannot call addAll() on " + this.getClass().getSimpleName());
         }
 
+        @Override
         public boolean addAll(<name>Iterable source)
         {
             throw new UnsupportedOperationException("Cannot call addAll() on " + this.getClass().getSimpleName());
         }
 
+        @Override
         public boolean removeAll(<name>Iterable source)
         {
             int oldSize = AbstractMutable<name>ValuesMap.this.size();
@@ -631,6 +678,7 @@ result = nextSum})>
             return oldSize != AbstractMutable<name>ValuesMap.this.size();
         }
 
+        @Override
         public boolean removeAll(<type>... source)
         {
             int oldSize = AbstractMutable<name>ValuesMap.this.size();
@@ -642,16 +690,19 @@ result = nextSum})>
             return oldSize != AbstractMutable<name>ValuesMap.this.size();
         }
 
+        @Override
         public boolean retainAll(<type>... source)
         {
             return this.retainAll(<name>HashSet.newSetWith(source));
         }
 
+        @Override
         public int size()
         {
             return AbstractMutable<name>ValuesMap.this.size();
         }
 
+        @Override
         public <type>[] toArray()
         {
             return AbstractMutable<name>ValuesMap.this.toArray();

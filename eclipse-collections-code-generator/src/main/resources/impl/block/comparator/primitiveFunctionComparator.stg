@@ -33,6 +33,7 @@ public class <name>FunctionComparator\<T>
         this.function = function;
     }
 
+    @Override
     public int compare(T o1, T o2)
     {
         <type> one = this.function.<type>ValueOf(o1);

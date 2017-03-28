@@ -37,6 +37,7 @@ public interface Ordered<name>Iterable extends <name>Iterable
 
     <sharedAPI(fileName(primitive), name)>
 
+    @Override
     \<V> OrderedIterable\<V> collect(<name>ToObjectFunction\<? extends V> function);
 
     \<T> T injectIntoWithIndex(T injectedValue, Object<name>IntToObjectFunction\<? super T, ? extends T> function);

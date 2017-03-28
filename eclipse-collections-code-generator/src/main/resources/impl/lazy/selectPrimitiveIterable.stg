@@ -45,6 +45,7 @@ public class Select<name>Iterable
         this.predicate = predicate;
     }
 
+    @Override
     public <name>Iterator <type>Iterator()
     {
         return new Select<name>Iterator(this.delegate, this.predicate);
@@ -53,6 +54,7 @@ public class Select<name>Iterable
     /**
      * @since 7.0.
      */
+    @Override
     public void each(<name>Procedure procedure)
     {
         this.delegate.forEach(new If<name>Procedure(procedure));
@@ -110,6 +112,8 @@ public class Select<name>Iterable
         {
             @SuppressWarnings("FieldMayBeFinal")
             private int index = 0;
+
+            @Override
             public void value(<type> each)
             {
                 array[this.index++] = each;
@@ -173,6 +177,7 @@ public class Select<name>Iterable
             this.predicate = predicate;
         }
 
+        @Override
         public void value(<type> each)
         {
             if (this.predicate.accept(each))
@@ -197,6 +202,7 @@ public class Select<name>Iterable
             this.procedure = procedure;
         }
 
+        @Override
         public void value(<type> each)
         {
             if (Select<name>Iterable.this.predicate.accept(each))
@@ -225,6 +231,7 @@ public class Select<name>Iterable
             this.predicate = predicate;
         }
 
+        @Override
         public boolean hasNext()
         {
             if (this.verifiedHasNext)
@@ -244,6 +251,7 @@ public class Select<name>Iterable
             return false;
         }
 
+        @Override
         public <type> next()
         {
             if (this.verifiedHasNext || this.hasNext())

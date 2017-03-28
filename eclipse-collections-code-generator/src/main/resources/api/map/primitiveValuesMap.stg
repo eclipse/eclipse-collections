@@ -37,10 +37,13 @@ public interface <name>ValuesMap extends <name>Iterable
 
     Mutable<name>Collection values();
 
+    @Override
     <name>Bag select(<name>Predicate predicate);
 
+    @Override
     <name>Bag reject(<name>Predicate predicate);
 
+    @Override
     \<V> Bag\<V> collect(<name>ToObjectFunction\<? extends V> function);
 }
 

@@ -730,6 +730,7 @@ public class <name>ArrayList extends Abstract<name>Iterable
         return min;
     }
 
+    @Override
     <if(primitive.floatingPoint)>public <wideType.(type)> sum()
 {
     <wideType.(type)> result = <wideZero.(type)>;

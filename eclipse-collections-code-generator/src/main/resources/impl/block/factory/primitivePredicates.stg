@@ -88,6 +88,7 @@ public final class <name>Predicates
             this.expected = expected;
         }
 
+        @Override
         public boolean accept(<type> actual)
         {
             return <(equals.(type))("actual", "this.expected")>;
@@ -106,6 +107,7 @@ public final class <name>Predicates
             this.expected = expected;
         }
 
+        @Override
         public boolean accept(<type> actual)
         {
             return actual \< this.expected;
@@ -123,6 +125,7 @@ public final class <name>Predicates
             this.expected = expected;
         }
 
+        @Override
         public boolean accept(<type> actual)
         {
             return actual > this.expected;
@@ -142,6 +145,7 @@ public final class <name>Predicates
             this.two = two;
         }
 
+        @Override
         public boolean accept(<type> actual)
         {
             return this.one.accept(actual) && this.two.accept(actual);
@@ -161,6 +165,7 @@ public final class <name>Predicates
             this.two = two;
         }
 
+        @Override
         public boolean accept(<type> actual)
         {
             return this.one.accept(actual) || this.two.accept(actual);
@@ -178,6 +183,7 @@ public final class <name>Predicates
             this.negate = negate;
         }
 
+        @Override
         public boolean accept(<type> actual)
         {
             return !this.negate.accept(actual);
@@ -191,6 +197,7 @@ public final class <name>Predicates
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public boolean accept(<type> value)
         {
             return true;
@@ -201,6 +208,7 @@ public final class <name>Predicates
     {
         private static final long serialVersionUID = 1L;
 
+        @Override
         public boolean accept(<type> value)
         {
             return false;

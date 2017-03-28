@@ -29,26 +29,31 @@ import org.eclipse.collections.api.map.primitive.<name1><name2>Map;
  */
 public class Mutable<name1><name2>MapFactoryImpl implements Mutable<name1><name2>MapFactory
 {
+    @Override
     public Mutable<name1><name2>Map empty()
     {
         return new <name1><name2>HashMap(0);
     }
 
+    @Override
     public Mutable<name1><name2>Map of()
     {
         return this.empty();
     }
 
+    @Override
     public Mutable<name1><name2>Map with()
     {
         return this.empty();
     }
 
+    @Override
     public Mutable<name1><name2>Map ofAll(<name1><name2>Map map)
     {
         return this.withAll(map);
     }
 
+    @Override
     public Mutable<name1><name2>Map withAll(<name1><name2>Map map)
     {
         if (map.isEmpty())

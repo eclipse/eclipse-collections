@@ -26,36 +26,43 @@ import org.eclipse.collections.api.map.primitive.Object<name>Map;
  */
 public class ImmutableObject<name>MapFactoryImpl implements ImmutableObject<name>MapFactory
 {
+    @Override
     public \<K> ImmutableObject<name>Map\<K> empty()
     {
         return (ImmutableObject<name>Map\<K>) ImmutableObject<name>EmptyMap.INSTANCE;
     }
 
+    @Override
     public \<K> ImmutableObject<name>Map\<K> of()
     {
         return this.empty();
     }
 
+    @Override
     public \<K> ImmutableObject<name>Map\<K> with()
     {
         return this.empty();
     }
 
+    @Override
     public \<K> ImmutableObject<name>Map\<K> of(K key, <type> value)
     {
         return this.with(key, value);
     }
 
+    @Override
     public \<K> ImmutableObject<name>Map\<K> with(K key, <type> value)
     {
         return new ImmutableObject<name>SingletonMap\<>(key, value);
     }
 
+    @Override
     public \<K> ImmutableObject<name>Map\<K> ofAll(Object<name>Map\<? extends K> map)
     {
         return this.withAll(map);
     }
 
+    @Override
     public \<K> ImmutableObject<name>Map\<K> withAll(Object<name>Map\<? extends K> map)
     {
         if (map instanceof ImmutableObject<name>Map)

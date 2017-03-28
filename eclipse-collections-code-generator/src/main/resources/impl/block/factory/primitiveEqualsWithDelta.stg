@@ -41,6 +41,7 @@ private static final class EqualsWithDelta<name>Predicate implements <name>Predi
         this.delta = delta;
     }
 
+    @Override
     public boolean accept(<type> actual)
     {
         return Math.abs(this.expected - actual) \<= this.delta;

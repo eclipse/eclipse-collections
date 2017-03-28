@@ -73,11 +73,13 @@ final class Immutable<name>HashBag implements Immutable<name>Bag, Serializable
         return new Immutable<name>HashBag(elements);
     }
 
+    @Override
     public Immutable<name>Bag newWith(<type> element)
     {
         return <name>HashBag.newBag(this.delegate).with(element).toImmutable();
     }
 
+    @Override
     public Immutable<name>Bag newWithout(<type> element)
     {
         <name>HashBag hashBag = <name>HashBag.newBag(this.delegate);
@@ -85,6 +87,7 @@ final class Immutable<name>HashBag implements Immutable<name>Bag, Serializable
         return hashBag.toImmutable();
     }
 
+    @Override
     public Immutable<name>Bag newWithAll(<name>Iterable elements)
     {
         <name>HashBag bag = <name>HashBag.newBag(this.delegate);
@@ -92,6 +95,7 @@ final class Immutable<name>HashBag implements Immutable<name>Bag, Serializable
         return bag.toImmutable();
     }
 
+    @Override
     public Immutable<name>Bag newWithoutAll(<name>Iterable elements)
     {
         <name>HashBag bag = <name>HashBag.newBag(this.delegate);

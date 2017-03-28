@@ -63,11 +63,13 @@ final class ImmutableObject<name>HashMap\<K> extends AbstractImmutableObject<nam
         this.delegate = new Object<name>HashMap\<>(delegate);
     }
 
+    @Override
     public <name>Iterator <type>Iterator()
     {
         return new Unmodifiable<name>Iterator(this.delegate.<type>Iterator());
     }
 
+    @Override
     public void forEach(<name>Procedure procedure)
     {
         this.each(procedure);
@@ -76,97 +78,116 @@ final class ImmutableObject<name>HashMap\<K> extends AbstractImmutableObject<nam
     /**
      * @since 7.0.
      */
+    @Override
     public void each(<name>Procedure procedure)
     {
         this.delegate.forEach(procedure);
     }
 
+    @Override
     public int count(<name>Predicate predicate)
     {
         return this.delegate.count(predicate);
     }
 
+    @Override
     public boolean anySatisfy(<name>Predicate predicate)
     {
         return this.delegate.anySatisfy(predicate);
     }
 
+    @Override
     public boolean allSatisfy(<name>Predicate predicate)
     {
         return this.delegate.allSatisfy(predicate);
     }
 
+    @Override
     public boolean noneSatisfy(<name>Predicate predicate)
     {
         return this.delegate.noneSatisfy(predicate);
     }
 
+    @Override
     public Immutable<name>Collection select(<name>Predicate predicate)
     {
         return this.delegate.select(predicate).toImmutable();
     }
 
+    @Override
     public Immutable<name>Collection reject(<name>Predicate predicate)
     {
         return this.delegate.reject(predicate).toImmutable();
     }
 
+    @Override
     public <type> detectIfNone(<name>Predicate predicate, <type> ifNone)
     {
         return this.delegate.detectIfNone(predicate, ifNone);
     }
 
+    @Override
     public \<T> T injectInto(T injectedValue, Object<name>ToObjectFunction\<? super T, ? extends T> function)
     {
         return this.delegate.injectInto(injectedValue, function);
     }
 
+    @Override
     public \<V> ImmutableCollection\<V> collect(<name>ToObjectFunction\<? extends V> function)
     {
         return this.delegate.collect(function).toImmutable();
     }
 
     <(arithmeticMethods.(type))()>
+    @Override
     public <type>[] toArray()
     {
         return this.delegate.toArray();
     }
 
+    @Override
     public boolean contains(<type> value)
     {
         return this.delegate.contains(value);
     }
 
+    @Override
     public boolean containsAll(<type>... source)
     {
         return this.delegate.containsAll(source);
     }
 
+    @Override
     public boolean containsAll(<name>Iterable source)
     {
         return this.delegate.containsAll(source);
     }
 
+    @Override
     public Mutable<name>List toList()
     {
         return this.delegate.toList();
     }
 
+    @Override
     public Mutable<name>Set toSet()
     {
         return this.delegate.toSet();
     }
 
+    @Override
     public Mutable<name>Bag toBag()
     {
         return this.delegate.toBag();
     }
 
+    @Override
     public Lazy<name>Iterable asLazy()
     {
         return this.delegate.asLazy();
     }
 
+    @Override
     public ImmutableObject<name>Map\<K> newWithKeyValue(K key, <type> value)
     {
         Object<name>HashMap\<K> map = Object<name>HashMap.newMap();
@@ -175,6 +196,7 @@ final class ImmutableObject<name>HashMap\<K> extends AbstractImmutableObject<nam
         return map.toImmutable();
     }
 
+    @Override
     public ImmutableObject<name>Map\<K> newWithoutKey(K key)
     {
         Object<name>HashMap\<K> map = Object<name>HashMap.newMap();
@@ -183,6 +205,7 @@ final class ImmutableObject<name>HashMap\<K> extends AbstractImmutableObject<nam
         return map.toImmutable();
     }
 
+    @Override
     public ImmutableObject<name>Map\<K> newWithoutAllKeys(Iterable\<? extends K> keys)
     {
         Object<name>HashMap\<K> map = Object<name>HashMap.newMap();
@@ -195,91 +218,109 @@ final class ImmutableObject<name>HashMap\<K> extends AbstractImmutableObject<nam
         return map.toImmutable();
     }
 
+    @Override
     public <type> get(Object key)
     {
         return this.delegate.get(key);
     }
 
+    @Override
     public <type> getOrThrow(Object key)
     {
         return this.delegate.getOrThrow(key);
     }
 
+    @Override
     public <type> getIfAbsent(Object key, <type> ifAbsent)
     {
         return this.delegate.getIfAbsent(key, ifAbsent);
     }
 
+    @Override
     public boolean containsKey(Object key)
     {
         return this.delegate.containsKey(key);
     }
 
+    @Override
     public boolean containsValue(<type> value)
     {
         return this.delegate.containsValue(value);
     }
 
+    @Override
     public void forEachValue(<name>Procedure procedure)
     {
         this.delegate.forEachValue(procedure);
     }
 
+    @Override
     public void forEachKey(Procedure\<? super K> procedure)
     {
         this.delegate.forEachKey(procedure);
     }
 
+    @Override
     public void forEachKeyValue(Object<name>Procedure\<? super K> object<name>Procedure)
     {
         this.delegate.forEachKeyValue(object<name>Procedure);
     }
 
+    @Override
     public ImmutableObject<name>Map\<K> select(Object<name>Predicate\<? super K> object<name>Predicate)
     {
         return this.delegate.select(object<name>Predicate).toImmutable();
     }
 
+    @Override
     public ImmutableObject<name>Map\<K> reject(Object<name>Predicate\<? super K> object<name>Predicate)
     {
         return this.delegate.reject(object<name>Predicate).toImmutable();
     }
 
+    @Override
     public ImmutableObject<name>Map\<K> toImmutable()
     {
         return this;
     }
 
+    @Override
     public int size()
     {
         return this.delegate.size();
     }
 
+    @Override
     public boolean isEmpty()
     {
         return this.delegate.isEmpty();
     }
 
+    @Override
     public boolean notEmpty()
     {
         return this.delegate.notEmpty();
     }
 
+    @Override
     public Set\<K> keySet()
     {
         return UnmodifiableMutableSet.of(this.delegate.keySet());
     }
 
+    @Override
     public Mutable<name>Collection values()
     {
         return Unmodifiable<name>Collection.of(this.delegate.values());
     }
 
+    @Override
     public LazyIterable\<K> keysView()
     {
         return this.delegate.keysView();
     }
 
+    @Override
     public RichIterable\<Object<name>Pair\<K>\> keyValuesView()
     {
         return this.delegate.keyValuesView();
@@ -303,31 +344,37 @@ final class ImmutableObject<name>HashMap\<K> extends AbstractImmutableObject<nam
         return this.delegate.toString();
     }
 
+    @Override
     public String makeString()
     {
         return this.delegate.makeString();
     }
 
+    @Override
     public String makeString(String separator)
     {
         return this.delegate.makeString(separator);
     }
 
+    @Override
     public String makeString(String start, String separator, String end)
     {
         return this.delegate.makeString(start, separator, end);
     }
 
+    @Override
     public void appendString(Appendable appendable)
     {
         this.delegate.appendString(appendable);
     }
 
+    @Override
     public void appendString(Appendable appendable, String separator)
     {
         this.delegate.appendString(appendable, separator);
     }
 
+    @Override
     public void appendString(Appendable appendable, String start, String separator, String end)
     {
         this.delegate.appendString(appendable, start, separator, end);

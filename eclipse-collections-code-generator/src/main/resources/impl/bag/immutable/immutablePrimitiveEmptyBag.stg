@@ -63,21 +63,25 @@ final class Immutable<name>EmptyBag implements Immutable<name>Bag, Serializable
         return INSTANCE;
     }
 
+    @Override
     public Immutable<name>Bag newWith(<type> element)
     {
         return new Immutable<name>SingletonBag(element);
     }
 
+    @Override
     public Immutable<name>Bag newWithout(<type> element)
     {
         return this;
     }
 
+    @Override
     public Immutable<name>Bag newWithAll(<name>Iterable elements)
     {
         return <name>Bags.immutable.withAll(elements);
     }
 
+    @Override
     public Immutable<name>Bag newWithoutAll(<name>Iterable elements)
     {
         return this;

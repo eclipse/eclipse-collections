@@ -29,17 +29,21 @@ public interface Immutable<name>List extends Immutable<name>Collection, <name>Li
 {
     <sharedAPI(fileName(primitive), name)>
 
+    @Override
     \<V> ImmutableList\<V> collect(<name>ToObjectFunction\<? extends V> function);
 
     <immutableAPI(fileName(primitive), type, name)>
 
+    @Override
     Immutable<name>List toReversed();
 
     /**
      * @since 6.0.
      */
+    @Override
     Immutable<name>List distinct();
 
+    @Override
     Immutable<name>List subList(int fromIndex, int toIndex);
 }
 

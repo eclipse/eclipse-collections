@@ -29,14 +29,18 @@ import org.eclipse.collections.api.iterator.Mutable<name>Iterator;
  */
 public interface Mutable<name>ValuesMap extends <name>ValuesMap
 {
+    @Override
     Mutable<name>Bag select(<name>Predicate predicate);
 
+    @Override
     Mutable<name>Bag reject(<name>Predicate predicate);
 
+    @Override
     \<V> MutableBag\<V> collect(<name>ToObjectFunction\<? extends V> function);
 
     void clear();
 
+    @Override
     Mutable<name>Iterator <type>Iterator();
 }
 

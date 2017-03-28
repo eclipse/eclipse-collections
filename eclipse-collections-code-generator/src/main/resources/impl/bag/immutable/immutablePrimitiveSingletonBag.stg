@@ -68,21 +68,25 @@ final class Immutable<name>SingletonBag implements Immutable<name>Bag, Serializa
         this.element1 = element;
     }
 
+    @Override
     public Immutable<name>Bag newWith(<type> element)
     {
         return <name>Bags.immutable.with(this.element1, element);
     }
 
+    @Override
     public Immutable<name>Bag newWithout(<type> element)
     {
         return <(equals.(type))("this.element1", "element")> ? <name>Bags.immutable.with() : this;
     }
 
+    @Override
     public Immutable<name>Bag newWithAll(<name>Iterable elements)
     {
         return <name>HashBag.newBag(elements).with(this.element1).toImmutable();
     }
 
+    @Override
     public Immutable<name>Bag newWithoutAll(<name>Iterable elements)
     {
         return elements.contains(this.element1) ? <name>Bags.immutable.with() : this;

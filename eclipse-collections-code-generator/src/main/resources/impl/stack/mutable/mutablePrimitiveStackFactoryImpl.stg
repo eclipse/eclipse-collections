@@ -25,26 +25,31 @@ import org.eclipse.collections.api.stack.primitive.Mutable<name>Stack;
  */
 public class Mutable<name>StackFactoryImpl implements Mutable<name>StackFactory
 {
+    @Override
     public Mutable<name>Stack empty()
     {
         return new <name>ArrayStack();
     }
 
+    @Override
     public Mutable<name>Stack of()
     {
         return this.empty();
     }
 
+    @Override
     public Mutable<name>Stack with()
     {
         return this.empty();
     }
 
+    @Override
     public Mutable<name>Stack of(<type>... items)
     {
         return this.with(items);
     }
 
+    @Override
     public Mutable<name>Stack with(<type>... items)
     {
         if (items.length == 0)
@@ -54,11 +59,13 @@ public class Mutable<name>StackFactoryImpl implements Mutable<name>StackFactory
         return <name>ArrayStack.newStackWith(items);
     }
 
+    @Override
     public Mutable<name>Stack ofAll(<name>Iterable items)
     {
         return this.withAll(items);
     }
 
+    @Override
     public Mutable<name>Stack withAll(<name>Iterable items)
     {
         if (items.isEmpty())
@@ -68,11 +75,13 @@ public class Mutable<name>StackFactoryImpl implements Mutable<name>StackFactory
         return <name>ArrayStack.newStack(items);
     }
 
+    @Override
     public Mutable<name>Stack ofAllReversed(<name>Iterable items)
     {
         return this.withAllReversed(items);
     }
 
+    @Override
     public Mutable<name>Stack withAllReversed(<name>Iterable items)
     {
         if (items.isEmpty())

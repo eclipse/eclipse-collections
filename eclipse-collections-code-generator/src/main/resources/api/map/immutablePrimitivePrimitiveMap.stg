@@ -31,14 +31,19 @@ import org.eclipse.collections.api.block.predicate.primitive.<name1><name2>Predi
  */
 public interface Immutable<name1><name2>Map extends <name1><name2>Map
 {
+    @Override
     Immutable<name1><name2>Map select(<name1><name2>Predicate predicate);
 
+    @Override
     Immutable<name1><name2>Map reject(<name1><name2>Predicate predicate);
 
+    @Override
     Immutable<name2>Bag select(<name2>Predicate predicate);
 
+    @Override
     Immutable<name2>Bag reject(<name2>Predicate predicate);
 
+    @Override
     \<V> ImmutableBag\<V> collect(<name2>ToObjectFunction\<? extends V> function);
 
     Immutable<name1><name2>Map newWithKeyValue(<type1> key, <type2> value);

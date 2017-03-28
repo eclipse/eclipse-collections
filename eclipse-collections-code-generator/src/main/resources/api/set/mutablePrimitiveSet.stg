@@ -29,22 +29,27 @@ public interface Mutable<name>Set extends Mutable<name>Collection, <name>Set
 {
     <sharedAPI(fileName(primitive), name)>
 
+    @Override
     \<V> MutableSet\<V> collect(<name>ToObjectFunction\<? extends V> function);
 
     <mutableAPI(fileName(primitive), type, name)>
 
+    @Override
     Mutable<name>Set asUnmodifiable();
 
+    @Override
     Mutable<name>Set asSynchronized();
 
     /**
      * Returns a frozen copy of this set. A frozen copy is the same thing as an immutable copy without safe-publish guarantees.
      */
+    @Override
     <name>Set freeze();
 
     /**
      * Returns an immutable copy of this set.
      */
+    @Override
     Immutable<name>Set toImmutable();
 }
 

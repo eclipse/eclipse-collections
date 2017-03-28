@@ -1,4 +1,4 @@
-mutableAPI(fileName, type, name) ::= <<
+mutableAPINoOverride(fileName, type, name) ::= <<
 <fileName> with(<type> element);
 
 <fileName> without(<type> element);
@@ -8,7 +8,35 @@ mutableAPI(fileName, type, name) ::= <<
 <fileName> withoutAll(<name>Iterable elements);
 >>
 
+mutableAPI(fileName, type, name) ::= <<
+@Override
+<fileName> with(<type> element);
+
+@Override
+<fileName> without(<type> element);
+
+@Override
+<fileName> withAll(<name>Iterable elements);
+
+@Override
+<fileName> withoutAll(<name>Iterable elements);
+>>
+
 immutableAPI(fileName, type, name) ::= <<
+@Override
+<fileName> newWith(<type> element);
+
+@Override
+<fileName> newWithout(<type> element);
+
+@Override
+<fileName> newWithAll(<name>Iterable elements);
+
+@Override
+<fileName> newWithoutAll(<name>Iterable elements);
+>>
+
+immutableAPINoOverride(fileName, type, name) ::= <<
 <fileName> newWith(<type> element);
 
 <fileName> newWithout(<type> element);
@@ -19,7 +47,9 @@ immutableAPI(fileName, type, name) ::= <<
 >>
 
 sharedAPI(fileName, name) ::= <<
+@Override
 <fileName> select(<name>Predicate predicate);
 
+@Override
 <fileName> reject(<name>Predicate predicate);
 >>

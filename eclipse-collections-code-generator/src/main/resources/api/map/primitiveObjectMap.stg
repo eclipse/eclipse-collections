@@ -40,6 +40,7 @@ public interface <name>ObjectMap\<V> extends PrimitiveObjectMap\<V>
 
     boolean containsKey(<type> key);
 
+    @Override
     <name>ObjectMap\<V> tap(Procedure\<? super V> procedure);
 
     void forEachKey(<name>Procedure procedure);

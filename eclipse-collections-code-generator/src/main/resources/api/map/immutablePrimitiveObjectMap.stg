@@ -26,10 +26,13 @@ import org.eclipse.collections.api.block.predicate.primitive.<name>ObjectPredica
  */
 public interface Immutable<name>ObjectMap\<V> extends <name>ObjectMap\<V>, ImmutablePrimitiveObjectMap\<V>
 {
+    @Override
     Immutable<name>ObjectMap\<V> tap(Procedure\<? super V> procedure);
 
+    @Override
     Immutable<name>ObjectMap\<V> select(<name>ObjectPredicate\<? super V> predicate);
 
+    @Override
     Immutable<name>ObjectMap\<V> reject(<name>ObjectPredicate\<? super V> predicate);
 
     Immutable<name>ObjectMap\<V> newWithKeyValue(<type> key, V value);
