@@ -50,6 +50,7 @@ public interface Mutable<name>Bag extends Mutable<name>Collection, <name>Bag
      *
      * @since 8.0
      */
+    @Override
     MutableList\<<name>IntPair> topOccurrences(int count);
 
     /**

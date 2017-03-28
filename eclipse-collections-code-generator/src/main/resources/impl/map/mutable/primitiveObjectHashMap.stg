@@ -14,11 +14,13 @@ class(primitive) ::= <<
 >>
 
 collectPrimitive(name, type) ::= <<
+@Override
 public Mutable<name>Bag collect<name>(<name>Function\<? super V> <type>Function)
 {
     return this.collect<name>(<type>Function, new <name>HashBag());
 }
 
+@Override
 public \<R extends Mutable<name>Collection> R collect<name>(<name>Function\<? super V> <type>Function, R target)
 {
     this.forEach(new Collect<name>Procedure\<V>(<type>Function, target));

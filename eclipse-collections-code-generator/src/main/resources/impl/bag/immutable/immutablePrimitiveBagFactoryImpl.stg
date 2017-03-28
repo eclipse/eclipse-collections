@@ -25,36 +25,43 @@ import org.eclipse.collections.api.factory.bag.primitive.Immutable<name>BagFacto
  */
 public class Immutable<name>BagFactoryImpl implements Immutable<name>BagFactory
 {
+    @Override
     public Immutable<name>Bag empty()
     {
         return Immutable<name>EmptyBag.INSTANCE;
     }
 
+    @Override
     public Immutable<name>Bag of()
     {
         return this.empty();
     }
 
+    @Override
     public Immutable<name>Bag with()
     {
         return this.empty();
     }
 
+    @Override
     public Immutable<name>Bag of(<type> one)
     {
         return this.with(one);
     }
 
+    @Override
     public Immutable<name>Bag with(<type> one)
     {
         return new Immutable<name>SingletonBag(one);
     }
 
+    @Override
     public Immutable<name>Bag of(<type>... items)
     {
         return this.with(items);
     }
 
+    @Override
     public Immutable<name>Bag with(<type>... items)
     {
         if (items == null || items.length == 0)
@@ -68,11 +75,13 @@ public class Immutable<name>BagFactoryImpl implements Immutable<name>BagFactory
         return Immutable<name>HashBag.newBagWith(items);
     }
 
+    @Override
     public Immutable<name>Bag ofAll(<name>Iterable items)
     {
         return this.withAll(items);
     }
 
+    @Override
     public Immutable<name>Bag withAll(<name>Iterable items)
     {
         if (items instanceof Immutable<name>Bag)

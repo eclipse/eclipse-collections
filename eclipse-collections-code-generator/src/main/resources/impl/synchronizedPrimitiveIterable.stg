@@ -75,6 +75,7 @@ public class Synchronized<name>Iterable implements <name>Iterable, Serializable
         return new Synchronized<name>Iterable(iterable, lock);
     }
 
+    @Override
     public <type>[] toArray()
     {
         synchronized (this.lock)
@@ -83,6 +84,7 @@ public class Synchronized<name>Iterable implements <name>Iterable, Serializable
         }
     }
 
+    @Override
     public boolean contains(<type> value)
     {
         synchronized (this.lock)
@@ -91,6 +93,7 @@ public class Synchronized<name>Iterable implements <name>Iterable, Serializable
         }
     }
 
+    @Override
     public boolean containsAll(<type>... source)
     {
         synchronized (this.lock)
@@ -99,6 +102,7 @@ public class Synchronized<name>Iterable implements <name>Iterable, Serializable
         }
     }
 
+    @Override
     public boolean containsAll(<name>Iterable source)
     {
         synchronized (this.lock)
@@ -107,6 +111,7 @@ public class Synchronized<name>Iterable implements <name>Iterable, Serializable
         }
     }
 
+    @Override
     public void forEach(<name>Procedure procedure)
     {
         this.each(procedure);
@@ -115,6 +120,7 @@ public class Synchronized<name>Iterable implements <name>Iterable, Serializable
     /**
      * @since 7.0.
      */
+    @Override
     public void each(<name>Procedure procedure)
     {
         synchronized (this.lock)
@@ -123,6 +129,7 @@ public class Synchronized<name>Iterable implements <name>Iterable, Serializable
         }
     }
 
+    @Override
     public <name>Iterable select(<name>Predicate predicate)
     {
         synchronized (this.lock)
@@ -131,6 +138,7 @@ public class Synchronized<name>Iterable implements <name>Iterable, Serializable
         }
     }
 
+    @Override
     public <name>Iterable reject(<name>Predicate predicate)
     {
         synchronized (this.lock)
@@ -139,6 +147,7 @@ public class Synchronized<name>Iterable implements <name>Iterable, Serializable
         }
     }
 
+    @Override
     public \<V> RichIterable\<V> collect(<name>ToObjectFunction\<? extends V> function)
     {
         synchronized (this.lock)
@@ -147,6 +156,7 @@ public class Synchronized<name>Iterable implements <name>Iterable, Serializable
         }
     }
 
+    @Override
     public <type> detectIfNone(<name>Predicate predicate, <type> ifNone)
     {
         synchronized (this.lock)
@@ -155,6 +165,7 @@ public class Synchronized<name>Iterable implements <name>Iterable, Serializable
         }
     }
 
+    @Override
     public int count(<name>Predicate predicate)
     {
         synchronized (this.lock)
@@ -163,6 +174,7 @@ public class Synchronized<name>Iterable implements <name>Iterable, Serializable
         }
     }
 
+    @Override
     public boolean anySatisfy(<name>Predicate predicate)
     {
         synchronized (this.lock)
@@ -171,6 +183,7 @@ public class Synchronized<name>Iterable implements <name>Iterable, Serializable
         }
     }
 
+    @Override
     public boolean allSatisfy(<name>Predicate predicate)
     {
         synchronized (this.lock)
@@ -179,6 +192,7 @@ public class Synchronized<name>Iterable implements <name>Iterable, Serializable
         }
     }
 
+    @Override
     public boolean noneSatisfy(<name>Predicate predicate)
     {
         synchronized (this.lock)
@@ -187,6 +201,7 @@ public class Synchronized<name>Iterable implements <name>Iterable, Serializable
         }
     }
 
+    @Override
     public Mutable<name>List toList()
     {
         synchronized (this.lock)
@@ -195,6 +210,7 @@ public class Synchronized<name>Iterable implements <name>Iterable, Serializable
         }
     }
 
+    @Override
     public Mutable<name>Set toSet()
     {
         synchronized (this.lock)
@@ -203,6 +219,7 @@ public class Synchronized<name>Iterable implements <name>Iterable, Serializable
         }
     }
 
+    @Override
     public Mutable<name>Bag toBag()
     {
         synchronized (this.lock)
@@ -211,6 +228,7 @@ public class Synchronized<name>Iterable implements <name>Iterable, Serializable
         }
     }
 
+    @Override
     public Lazy<name>Iterable asLazy()
     {
         synchronized (this.lock)
@@ -221,6 +239,7 @@ public class Synchronized<name>Iterable implements <name>Iterable, Serializable
 
     <(arithmeticMethods.(type))()>
 
+    @Override
     public int size()
     {
         synchronized (this.lock)
@@ -229,6 +248,7 @@ public class Synchronized<name>Iterable implements <name>Iterable, Serializable
         }
     }
 
+    @Override
     public boolean isEmpty()
     {
         synchronized (this.lock)
@@ -237,6 +257,7 @@ public class Synchronized<name>Iterable implements <name>Iterable, Serializable
         }
     }
 
+    @Override
     public boolean notEmpty()
     {
         synchronized (this.lock)
@@ -245,6 +266,7 @@ public class Synchronized<name>Iterable implements <name>Iterable, Serializable
         }
     }
 
+    @Override
     public \<T> T injectInto(T injectedValue, Object<name>ToObjectFunction\<? super T, ? extends T> function)
     {
         synchronized (this.lock)
@@ -262,6 +284,7 @@ public class Synchronized<name>Iterable implements <name>Iterable, Serializable
         }
     }
 
+    @Override
     public String makeString()
     {
         synchronized (this.lock)
@@ -270,6 +293,7 @@ public class Synchronized<name>Iterable implements <name>Iterable, Serializable
         }
     }
 
+    @Override
     public String makeString(String separator)
     {
         synchronized (this.lock)
@@ -278,6 +302,7 @@ public class Synchronized<name>Iterable implements <name>Iterable, Serializable
         }
     }
 
+    @Override
     public String makeString(String start, String separator, String end)
     {
         synchronized (this.lock)
@@ -286,6 +311,7 @@ public class Synchronized<name>Iterable implements <name>Iterable, Serializable
         }
     }
 
+    @Override
     public void appendString(Appendable appendable)
     {
         synchronized (this.lock)
@@ -294,6 +320,7 @@ public class Synchronized<name>Iterable implements <name>Iterable, Serializable
         }
     }
 
+    @Override
     public void appendString(Appendable appendable, String separator)
     {
         synchronized (this.lock)
@@ -302,6 +329,7 @@ public class Synchronized<name>Iterable implements <name>Iterable, Serializable
         }
     }
 
+    @Override
     public void appendString(Appendable appendable, String start, String separator, String end)
     {
         synchronized (this.lock)
@@ -313,6 +341,7 @@ public class Synchronized<name>Iterable implements <name>Iterable, Serializable
     /**
      * Must be called in a synchronized block.
      */
+    @Override
     public <name>Iterator <type>Iterator()
     {
         return this.iterable.<type>Iterator();
@@ -333,6 +362,7 @@ arithmeticMethods ::= [
     ]
 
 allMethods() ::= <<
+@Override
 public <wideType.(type)> sum()
 {
     synchronized (this.lock)
@@ -341,6 +371,7 @@ public <wideType.(type)> sum()
     }
 }
 
+@Override
 public <type> max()
 {
     synchronized (this.lock)
@@ -349,6 +380,7 @@ public <type> max()
     }
 }
 
+@Override
 public <type> maxIfEmpty(<type> defaultValue)
 {
     synchronized (this.lock)
@@ -357,6 +389,7 @@ public <type> maxIfEmpty(<type> defaultValue)
     }
 }
 
+@Override
 public <type> min()
 {
     synchronized (this.lock)
@@ -365,6 +398,7 @@ public <type> min()
     }
 }
 
+@Override
 public <type> minIfEmpty(<type> defaultValue)
 {
     synchronized (this.lock)
@@ -373,6 +407,7 @@ public <type> minIfEmpty(<type> defaultValue)
     }
 }
 
+@Override
 public double average()
 {
     synchronized (this.lock)
@@ -381,6 +416,7 @@ public double average()
     }
 }
 
+@Override
 public double median()
 {
     synchronized (this.lock)
@@ -389,6 +425,7 @@ public double median()
     }
 }
 
+@Override
 public <type>[] toSortedArray()
 {
     synchronized (this.lock)
@@ -397,6 +434,7 @@ public <type>[] toSortedArray()
     }
 }
 
+@Override
 public Mutable<name>List toSortedList()
 {
     synchronized (this.lock)

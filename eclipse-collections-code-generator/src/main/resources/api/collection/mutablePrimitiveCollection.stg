@@ -29,6 +29,7 @@ import org.eclipse.collections.api.collection.MutableCollection;
  */
 public interface Mutable<name>Collection extends <name>Iterable
 {
+    @Override
     Mutable<name>Iterator <type>Iterator();
 
     boolean add(<type> element);
@@ -61,7 +62,7 @@ public interface Mutable<name>Collection extends <name>Iterable
 
     \<V> MutableCollection\<V> collect(<name>ToObjectFunction\<? extends V> function);
 
-    <mutableAPI(fileName(primitive), type, name)>
+    <mutableAPINoOverride(fileName(primitive), type, name)>
 
     Mutable<name>Collection asUnmodifiable();
 

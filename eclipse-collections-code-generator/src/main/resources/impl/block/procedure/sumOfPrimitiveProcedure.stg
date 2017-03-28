@@ -42,6 +42,7 @@ public class SumOf<name>Procedure\<T> implements Procedure\<T>
         return this.result;
     }
 
+    @Override
     public void value(T each)
     {
         this.result += this.function.<type>ValueOf(each);

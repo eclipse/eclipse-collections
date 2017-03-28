@@ -38,6 +38,7 @@ public interface <name>List extends Reversible<name>Iterable
 
     <sharedAPI(fileName(primitive), name)>
 
+    @Override
     \<V> ListIterable\<V> collect(<name>ToObjectFunction\<? extends V> function);
 
     /**
@@ -60,11 +61,13 @@ public interface <name>List extends Reversible<name>Iterable
     /**
      * @since 6.0.
      */
+    @Override
     <name>List distinct();
 
     /**
      * @since 5.0.
      */
+    @Override
     <name>List toReversed();
 
     /**

@@ -36,6 +36,7 @@ public interface Reversible<name>Iterable extends Ordered<name>Iterable
 
     <sharedAPI(fileName(primitive), name)>
 
+    @Override
     \<V> ReversibleIterable\<V> collect(<name>ToObjectFunction\<? extends V> function);
 
     Reversible<name>Iterable toReversed();
@@ -45,6 +46,7 @@ public interface Reversible<name>Iterable extends Ordered<name>Iterable
      */
     Reversible<name>Iterable distinct();
 
+    @Override
     \<T> T injectIntoWithIndex(T injectedValue, Object<name>IntToObjectFunction\<? super T, ? extends T> function);
 }
 

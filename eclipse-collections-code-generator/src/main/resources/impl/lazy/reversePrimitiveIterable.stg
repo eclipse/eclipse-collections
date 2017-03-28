@@ -51,6 +51,7 @@ public class Reverse<name>Iterable extends AbstractLazy<name>Iterable
         return new Reverse<name>Iterable(<type>List);
     }
 
+    @Override
     public <name>Iterator <type>Iterator()
     {
         return new Reverse<name>Iterator();
@@ -59,6 +60,7 @@ public class Reverse<name>Iterable extends AbstractLazy<name>Iterable
     /**
      * @since 7.0.
      */
+    @Override
     public void each(<name>Procedure procedure)
     {
         <name>Iterator iterator = this.<type>Iterator();
@@ -150,11 +152,13 @@ public class Reverse<name>Iterable extends AbstractLazy<name>Iterable
          */
         private int currentIndex = Reverse<name>Iterable.this.adapted.size() - 1;
 
+        @Override
         public boolean hasNext()
         {
             return this.currentIndex != -1;
         }
 
+        @Override
         public <type> next()
         {
             if (!this.hasNext())

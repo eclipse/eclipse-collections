@@ -25,36 +25,43 @@ import org.eclipse.collections.api.list.primitive.Immutable<name>List;
  */
 public class Immutable<name>ListFactoryImpl implements Immutable<name>ListFactory
 {
+    @Override
     public Immutable<name>List empty()
     {
         return Immutable<name>EmptyList.INSTANCE;
     }
 
+    @Override
     public Immutable<name>List of()
     {
         return this.empty();
     }
 
+    @Override
     public Immutable<name>List with()
     {
         return this.empty();
     }
 
+    @Override
     public Immutable<name>List of(<type> one)
     {
         return this.with(one);
     }
 
+    @Override
     public Immutable<name>List with(<type> one)
     {
         return new Immutable<name>SingletonList(one);
     }
 
+    @Override
     public Immutable<name>List of(<type>... items)
     {
         return this.with(items);
     }
 
+    @Override
     public Immutable<name>List with(<type>... items)
     {
         if (items == null || items.length == 0)
@@ -68,11 +75,13 @@ public class Immutable<name>ListFactoryImpl implements Immutable<name>ListFactor
         return Immutable<name>ArrayList.newListWith(items);
     }
 
+    @Override
     public Immutable<name>List ofAll(<name>Iterable items)
     {
         return this.withAll(items);
     }
 
+    @Override
     public Immutable<name>List withAll(<name>Iterable items)
     {
         if (items instanceof Immutable<name>List)

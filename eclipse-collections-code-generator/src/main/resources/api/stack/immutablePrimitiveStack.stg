@@ -33,6 +33,7 @@ public interface Immutable<name>Stack extends <name>Stack
 
     <sharedAPI(fileName(primitive), name)>
 
+    @Override
     \<V> ImmutableStack\<V> collect(<name>ToObjectFunction\<? extends V> function);
 }
 

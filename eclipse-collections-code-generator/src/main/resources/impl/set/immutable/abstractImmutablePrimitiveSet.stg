@@ -28,31 +28,37 @@ import org.eclipse.collections.impl.set.primitive.Abstract<name>Set;
  */
 public abstract class AbstractImmutable<name>Set extends Abstract<name>Set implements Immutable<name>Set
 {
+    @Override
     public Immutable<name>Set newWith(<type> element)
     {
         return <name>HashSet.newSet(this).with(element).toImmutable();
     }
 
+    @Override
     public Immutable<name>Set newWithout(<type> element)
     {
         return <name>HashSet.newSet(this).without(element).toImmutable();
     }
 
+    @Override
     public Immutable<name>Set newWithAll(<name>Iterable elements)
     {
         return <name>HashSet.newSet(this).withAll(elements).toImmutable();
     }
 
+    @Override
     public Immutable<name>Set newWithoutAll(<name>Iterable elements)
     {
         return <name>HashSet.newSet(this).withoutAll(elements).toImmutable();
     }
 
+    @Override
     public <name>Set freeze()
     {
         return this;
     }
 
+    @Override
     public Immutable<name>Set toImmutable()
     {
         return this;

@@ -200,6 +200,7 @@ final class Immutable<name>ArrayStack extends Abstract<name>Stack
             this.stack = stack;
         }
 
+        @Override
         public void writeExternal(final ObjectOutput out) throws IOException
         {
             out.writeInt(this.stack.size());
@@ -224,6 +225,7 @@ final class Immutable<name>ArrayStack extends Abstract<name>Stack
             }
         }
 
+        @Override
         public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
         {
             int size = in.readInt();

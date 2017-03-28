@@ -54,17 +54,20 @@ public class Collect<name>Iterable\<T>
         this.<type>FunctionToProcedure = new <name>FunctionToProcedure\<>(function);
     }
 
+    @Override
     public <name>Iterator <type>Iterator()
     {
         return new <name>Iterator()
         {
             private final Iterator\<T> iterator = Collect<name>Iterable.this.iterable.iterator();
 
+            @Override
             public <type> next()
             {
                 return Collect<name>Iterable.this.function.<type>ValueOf(this.iterator.next());
             }
 
+            @Override
             public boolean hasNext()
             {
                 return this.iterator.hasNext();
@@ -72,6 +75,7 @@ public class Collect<name>Iterable\<T>
         };
     }
 
+    @Override
     public void forEach(<name>Procedure procedure)
     {
         this.each(procedure);
@@ -80,6 +84,7 @@ public class Collect<name>Iterable\<T>
     /**
      * @since 7.0.
      */
+    @Override
     public void each(<name>Procedure procedure)
     {
         this.iterable.forEachWith(this.<type>FunctionToProcedure, procedure);
@@ -197,6 +202,7 @@ public class Collect<name>Iterable\<T>
             this.function = function;
         }
 
+        @Override
         public void value(T each, <name>Procedure procedure)
         {
             procedure.value(this.function.<type>ValueOf(each));

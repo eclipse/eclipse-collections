@@ -26,36 +26,43 @@ import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
  */
 public class Immutable<name>SetFactoryImpl implements Immutable<name>SetFactory
 {
+    @Override
     public Immutable<name>Set empty()
     {
         return Immutable<name>EmptySet.INSTANCE;
     }
 
+    @Override
     public Immutable<name>Set of()
     {
         return this.empty();
     }
 
+    @Override
     public Immutable<name>Set with()
     {
         return this.empty();
     }
 
+    @Override
     public Immutable<name>Set of(<type> one)
     {
         return this.with(one);
     }
 
+    @Override
     public Immutable<name>Set with(<type> one)
     {
         return new Immutable<name>SingletonSet(one);
     }
 
+    @Override
     public Immutable<name>Set of(<type>... items)
     {
         return this.with(items);
     }
 
+    @Override
     public Immutable<name>Set with(<type>... items)
     {
         if (items == null || items.length == 0)
@@ -69,11 +76,13 @@ public class Immutable<name>SetFactoryImpl implements Immutable<name>SetFactory
         return <name>HashSet.newSetWith(items).toImmutable();
     }
 
+    @Override
     public Immutable<name>Set ofAll(<name>Iterable items)
     {
         return this.withAll(items);
     }
 
+    @Override
     public Immutable<name>Set withAll(<name>Iterable items)
     {
         if (items instanceof Immutable<name>Set)

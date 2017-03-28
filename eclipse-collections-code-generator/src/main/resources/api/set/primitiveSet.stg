@@ -42,6 +42,7 @@ public interface <name>Set extends <name>Iterable
 
     <sharedAPI(fileName(primitive), name)>
 
+    @Override
     \<V> SetIterable\<V> collect(<name>ToObjectFunction\<? extends V> function);
 
     /**

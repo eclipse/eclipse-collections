@@ -25,26 +25,31 @@ import org.eclipse.collections.api.bag.primitive.Mutable<name>Bag;
  */
 public class Mutable<name>BagFactoryImpl implements Mutable<name>BagFactory
 {
+    @Override
     public Mutable<name>Bag empty()
     {
         return new <name>HashBag();
     }
 
+    @Override
     public Mutable<name>Bag of()
     {
         return this.empty();
     }
 
+    @Override
     public Mutable<name>Bag with()
     {
         return this.empty();
     }
 
+    @Override
     public Mutable<name>Bag of(<type>... items)
     {
         return this.with(items);
     }
 
+    @Override
     public Mutable<name>Bag with(<type>... items)
     {
         if (items == null || items.length == 0)
@@ -54,11 +59,13 @@ public class Mutable<name>BagFactoryImpl implements Mutable<name>BagFactory
         return <name>HashBag.newBagWith(items);
     }
 
+    @Override
     public Mutable<name>Bag ofAll(<name>Iterable items)
     {
         return this.withAll(items);
     }
 
+    @Override
     public Mutable<name>Bag withAll(<name>Iterable items)
     {
         return <name>HashBag.newBag(items);

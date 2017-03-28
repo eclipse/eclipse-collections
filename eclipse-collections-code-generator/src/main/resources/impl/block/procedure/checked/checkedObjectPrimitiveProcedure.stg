@@ -26,6 +26,7 @@ public abstract class CheckedObject<name>Procedure\<V> implements Object<name>Pr
 {
     private static final long serialVersionUID = 1L;
 
+    @Override
     public final void value(V item1, <type> item2)
     {
         try

@@ -36,11 +36,13 @@ public class <name1><name2>PairImpl implements <name1><name2>Pair
         this.two = newTwo;
     }
 
+    @Override
     public <type1> getOne()
     {
         return this.one;
     }
 
+    @Override
     public <type2> getTwo()
     {
         return this.two;
@@ -76,6 +78,7 @@ public class <name1><name2>PairImpl implements <name1><name2>Pair
         return this.one + ":" + this.two;
     }
 
+    @Override
     public int compareTo(<name1><name2>Pair that)
     {
         int i = <(compare.(type1))("this.one", "that.getOne()", wrapperName1)>;

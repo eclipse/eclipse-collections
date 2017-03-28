@@ -35,11 +35,13 @@ public class Object<name>PairImpl\<T> implements Object<name>Pair\<T>
         this.two = newTwo;
     }
 
+    @Override
     public T getOne()
     {
         return this.one;
     }
 
+    @Override
     public <type> getTwo()
     {
         return this.two;
@@ -77,6 +79,7 @@ public class Object<name>PairImpl\<T> implements Object<name>Pair\<T>
         return this.one + ":" + this.two;
     }
 
+    @Override
     public int compareTo(Object<name>Pair\<T> that)
     {
         int i = ((Comparable\<T>) this.one).compareTo(that.getOne());

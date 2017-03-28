@@ -51,6 +51,7 @@ public abstract class AbstractImmutableObject<name>Map\<V> implements ImmutableO
             this.map = map;
         }
 
+        @Override
         public void writeExternal(final ObjectOutput out) throws IOException
         {
             out.writeInt(this.map.size());
@@ -76,6 +77,7 @@ public abstract class AbstractImmutableObject<name>Map\<V> implements ImmutableO
             }
         }
 
+        @Override
         public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
         {
             int size = in.readInt();

@@ -30,6 +30,7 @@ import org.eclipse.collections.api.iterator.Mutable<name>Iterator;
  */
 public interface MutableObject<name>Map\<K> extends Object<name>Map\<K>
 {
+    @Override
     Mutable<name>Iterator <type>Iterator();
 
     void clear();
@@ -54,14 +55,19 @@ public interface MutableObject<name>Map\<K> extends Object<name>Map\<K>
 
     <type> updateValue(K key, <type> initialValueIfAbsent, <name>To<name>Function function);
 
+    @Override
     MutableObject<name>Map\<K> select(Object<name>Predicate\<? super K> predicate);
 
+    @Override
     MutableObject<name>Map\<K> reject(Object<name>Predicate\<? super K> predicate);
 
+    @Override
     Mutable<name>Collection select(<name>Predicate predicate);
 
+    @Override
     Mutable<name>Collection reject(<name>Predicate predicate);
 
+    @Override
     \<V> MutableCollection\<V> collect(<name>ToObjectFunction\<? extends V> function);
 
     MutableObject<name>Map\<K> withKeyValue(K key, <type> value);

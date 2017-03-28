@@ -30,16 +30,19 @@ public class Unmodifiable<name>Iterator implements Mutable<name>Iterator
         this.<type>Iterator = <type>Iterator;
     }
 
+    @Override
     public boolean hasNext()
     {
         return this.<type>Iterator.hasNext();
     }
 
+    @Override
     public <type> next()
     {
         return this.<type>Iterator.next();
     }
 
+    @Override
     public void remove()
     {
         throw new UnsupportedOperationException("Cannot call remove() on " + this.getClass().getSimpleName());

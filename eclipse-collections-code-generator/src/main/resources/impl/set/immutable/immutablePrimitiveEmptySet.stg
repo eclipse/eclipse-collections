@@ -60,21 +60,25 @@ final class Immutable<name>EmptySet implements Immutable<name>Set, Serializable
         return INSTANCE;
     }
 
+    @Override
     public Immutable<name>Set newWith(<type> element)
     {
         return new Immutable<name>SingletonSet(element);
     }
 
+    @Override
     public Immutable<name>Set newWithout(<type> element)
     {
         return this;
     }
 
+    @Override
     public Immutable<name>Set newWithAll(<name>Iterable elements)
     {
         return <name>Sets.immutable.withAll(elements);
     }
 
+    @Override
     public Immutable<name>Set newWithoutAll(<name>Iterable elements)
     {
         return this;

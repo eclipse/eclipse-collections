@@ -48,6 +48,7 @@ private static final class <name>IsEvenPredicate implements <name>Predicate
 {
     private static final long serialVersionUID = 1L;
 
+    @Override
     public boolean accept(<type> integral)
     {
         return integral % 2 == 0;
@@ -58,6 +59,7 @@ private static final class <name>IsOddPredicate implements <name>Predicate
 {
     private static final long serialVersionUID = 1L;
 
+    @Override
     public boolean accept(<type> integral)
     {
         return integral % 2 != 0;
@@ -141,6 +143,7 @@ private static class IsUpperCaseCharPredicate implements CharPredicate
 {
     private static final long serialVersionUID = 1L;
 
+    @Override
     public boolean accept(char value)
     {
         return Character.isUpperCase(value);
@@ -151,6 +154,7 @@ private static class IsLowerCaseCharPredicate implements CharPredicate
 {
     private static final long serialVersionUID = 1L;
 
+    @Override
     public boolean accept(char value)
     {
         return Character.isLowerCase(value);
@@ -161,6 +165,7 @@ private static class IsDigitCharPredicate implements CharPredicate
 {
     private static final long serialVersionUID = 1L;
 
+    @Override
     public boolean accept(char value)
     {
         return Character.isDigit(value);
@@ -171,6 +176,7 @@ private static class IsDigitOrDotCharPredicate implements CharPredicate
 {
     private static final long serialVersionUID = 1L;
 
+    @Override
     public boolean accept(char value)
     {
         return Character.isDigit(value) || value == '.';
@@ -181,6 +187,7 @@ private static class IsLetterCharPredicate implements CharPredicate
 {
     private static final long serialVersionUID = 1L;
 
+    @Override
     public boolean accept(char value)
     {
         return Character.isLetter(value);
@@ -191,6 +198,7 @@ private static class IsLetterOrDigitCharPredicate implements CharPredicate
 {
     private static final long serialVersionUID = 1L;
 
+    @Override
     public boolean accept(char value)
     {
         return Character.isLetterOrDigit(value);
@@ -201,6 +209,7 @@ private static class IsWhiteSpaceCharPredicate implements CharPredicate
 {
     private static final long serialVersionUID = 1L;
 
+    @Override
     public boolean accept(char value)
     {
         return Character.isWhitespace(value);
@@ -211,6 +220,7 @@ private static class IsUndefinedCharPredicate implements CharPredicate
 {
     private static final long serialVersionUID = 1L;
 
+    @Override
     public boolean accept(char value)
     {
         return !Character.isDefined(value);

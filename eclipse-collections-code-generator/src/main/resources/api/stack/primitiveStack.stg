@@ -48,6 +48,7 @@ public interface <name>Stack extends Ordered<name>Iterable
 
     <sharedAPI(fileName(primitive), name)>
 
+    @Override
     \<V> StackIterable\<V> collect(<name>ToObjectFunction\<? extends V> function);
 
     /**
