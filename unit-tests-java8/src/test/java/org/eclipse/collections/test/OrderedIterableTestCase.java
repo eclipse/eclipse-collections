@@ -11,9 +11,11 @@
 package org.eclipse.collections.test;
 
 import java.util.Iterator;
+import java.util.Optional;
 
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.list.MutableList;
+import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.factory.Lists;
@@ -33,9 +35,45 @@ public interface OrderedIterableTestCase extends RichIterableTestCase
     }
 
     @Test
+    default void OrderedIterable_getFirstOptional_empty()
+    {
+        assertSame(Optional.empty(), ((OrderedIterable<?>) this.newWith()).getFirstOptional());
+    }
+
+    @Test
+    default void OrderedIterable_getFirstOptional()
+    {
+        assertEquals(Optional.of(Integer.valueOf(3)), ((OrderedIterable<?>) this.newWith(3, 3, 3, 2, 2, 1)).getFirstOptional());
+    }
+
+    @Test(expected = NullPointerException.class)
+    default void OrderedIterable_getFirstOptional_null_element()
+    {
+        ((OrderedIterable<?>) this.newWith(new Object[]{null})).getFirstOptional();
+    }
+
+    @Test
     default void OrderedIterable_getLast()
     {
         assertEquals(Integer.valueOf(1), this.newWith(3, 3, 3, 2, 2, 1).getLast());
+    }
+
+    @Test
+    default void OrderedIterable_getLastOptional_empty()
+    {
+        assertSame(Optional.empty(), ((OrderedIterable<?>) this.newWith()).getLastOptional());
+    }
+
+    @Test
+    default void OrderedIterable_getLastOptional()
+    {
+        assertEquals(Optional.of(Integer.valueOf(1)), ((OrderedIterable<?>) this.newWith(3, 3, 3, 2, 2, 1)).getLastOptional());
+    }
+
+    @Test(expected = NullPointerException.class)
+    default void OrderedIterable_getLastOptional_null_element()
+    {
+       ((OrderedIterable<?>) this.newWith(new Object[]{null})).getLastOptional();
     }
 
     @Test

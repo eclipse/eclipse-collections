@@ -13,6 +13,7 @@ package org.eclipse.collections.api.ordered;
 import java.util.Collection;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.block.function.Function;
@@ -67,6 +68,23 @@ public interface OrderedIterable<T> extends RichIterable<T>
     T getFirst();
 
     /**
+     * Returns the first element of an iterable as an Optional. In the case of a List it is the element at the first index.
+     * In the case of any other Collection, it is the first element that would be returned during an iteration. If the
+     * iterable is empty, {@link Optional#empty} is returned.
+     *
+     * @throws NullPointerException if the element is null
+     * @since 9.0
+     */
+    default Optional<T> getFirstOptional()
+    {
+        if (this.isEmpty())
+        {
+            return Optional.empty();
+        }
+        return Optional.of(this.getFirst());
+    }
+
+    /**
      * Returns the last element of an iterable.  In the case of a List it is the element at the last index.  In the case
      * of any other Collection, it is the last element that would be returned during an iteration.  If the iterable is
      * empty, null is returned.  If null is a valid element of the container, then a developer would need to check to
@@ -74,6 +92,23 @@ public interface OrderedIterable<T> extends RichIterable<T>
      */
     @Override
     T getLast();
+
+    /**
+     * Returns the last element of an iterable as an Optional. In the case of a List it is the element at the last index.
+     * In the case of any other Collection, it is the last element that would be returned during an iteration. If the
+     * iterable is empty, {@link Optional#empty} is returned.
+     *
+     * @throws NullPointerException if the element is null
+     * @since 9.0
+     */
+    default Optional<T> getLastOptional()
+    {
+        if (this.isEmpty())
+        {
+            return Optional.empty();
+        }
+        return Optional.of(this.getLast());
+    }
 
     @Override
     OrderedIterable<T> tap(Procedure<? super T> procedure);

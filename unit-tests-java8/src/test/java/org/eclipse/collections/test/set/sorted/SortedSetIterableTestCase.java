@@ -11,9 +11,11 @@
 package org.eclipse.collections.test.set.sorted;
 
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.list.MutableList;
+import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.ordered.SortedIterable;
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 import org.eclipse.collections.api.set.sorted.SortedSetIterable;
@@ -32,6 +34,7 @@ import org.junit.Test;
 
 import static org.eclipse.collections.impl.test.Verify.assertThrows;
 import static org.eclipse.collections.test.IterableTestCase.assertEquals;
+import static org.junit.Assert.assertSame;
 
 public interface SortedSetIterableTestCase extends SetIterableTestCase, SortedIterableTestCase, TransformsToListTrait
 {
@@ -95,9 +98,23 @@ public interface SortedSetIterableTestCase extends SetIterableTestCase, SortedIt
     }
 
     @Override
+    @Test
+    default void OrderedIterable_getFirstOptional()
+    {
+        assertEquals(Optional.of(Integer.valueOf(3)), ((OrderedIterable<?>) this.newWith(3, 2, 1)).getFirstOptional());
+    }
+
+    @Override
     default void OrderedIterable_getLast()
     {
         assertEquals(Integer.valueOf(1), this.newWith(3, 2, 1).getLast());
+    }
+
+    @Override
+    @Test
+    default void OrderedIterable_getLastOptional()
+    {
+        assertEquals(Optional.of(Integer.valueOf(1)), ((OrderedIterable<?>) this.newWith(3, 2, 1)).getLastOptional());
     }
 
     @Override
