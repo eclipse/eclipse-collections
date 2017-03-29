@@ -57,6 +57,10 @@ public final class Multimaps
 
         public static final class ImmutableListMultimapFactory
         {
+            /**
+             * @deprecated in 8.2.0 Will be removed in 9.0.0.
+             */
+            @Deprecated
             public static final ImmutableListMultimap<Object, Object> EMPTY = new ImmutableListMultimapImpl<>(Maps.immutable.with());
 
             private ImmutableListMultimapFactory()
@@ -118,6 +122,10 @@ public final class Multimaps
 
         public static final class ImmutableSetMultimapFactory
         {
+            /**
+             * @deprecated in 8.2.0 Will be removed in 9.0.0.
+             */
+            @Deprecated
             public static final ImmutableSetMultimap<Object, Object> EMPTY = new ImmutableSetMultimapImpl<>(Maps.immutable.with());
 
             private ImmutableSetMultimapFactory()
@@ -233,6 +241,10 @@ public final class Multimaps
 
         public static final class ImmutableBagMultimapFactory
         {
+            /**
+             * @deprecated in 8.2.0 Will be removed in 9.0.0.
+             */
+            @Deprecated
             public static final ImmutableBagMultimap<Object, Object> EMPTY = new ImmutableBagMultimapImpl<>(Maps.immutable.with());
 
             private ImmutableBagMultimapFactory()
