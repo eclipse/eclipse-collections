@@ -538,7 +538,8 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
     @Override
     public MutableSortedBag<T> toSortedBag(Comparator<? super T> comparator)
     {
-        MutableSortedBag<T> result = TreeBag.newBag(comparator).asSynchronized();
+        MutableSortedBag<T> result = TreeBag.newBag(comparator);
+        result = result.asSynchronized();
         this.forEach(CollectionAddProcedure.on(result));
         return result;
     }
@@ -552,7 +553,8 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
     @Override
     public MutableSortedSet<T> toSortedSet(Comparator<? super T> comparator)
     {
-        MutableSortedSet<T> result = TreeSortedSet.newSet(comparator).asSynchronized();
+        MutableSortedSet<T> result = TreeSortedSet.newSet(comparator);
+        result = result.asSynchronized();
         this.forEach(CollectionAddProcedure.on(result));
         return result;
     }

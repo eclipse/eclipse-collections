@@ -32,6 +32,7 @@ import org.eclipse.collections.api.Lazy<name1>Iterable;
 <if(!sameTwoPrimitives)>import org.eclipse.collections.api.Lazy<name2>Iterable;<endif>
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.ImmutableBag;
+import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.bag.primitive.Mutable<name2>Bag;
 import org.eclipse.collections.api.bag.primitive.Immutable<name2>Bag;
 import org.eclipse.collections.api.block.function.primitive.<name2>ToObjectFunction;
@@ -217,7 +218,8 @@ final class Immutable<name1><name2>HashMap implements Immutable<name1><name2>Map
     @Override
     public \<V> ImmutableBag\<V> collect(<name2>ToObjectFunction\<? extends V> function)
     {
-        return this.delegate.collect(function).toImmutable();
+        MutableBag\<V> bag = this.delegate.collect(function);
+        return bag.toImmutable();
     }
 
     @Override

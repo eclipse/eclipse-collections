@@ -156,7 +156,8 @@ public class ArrayStack<T> implements MutableStack<T>, Externalizable
     public static <T> ArrayStack<T> newStackFromTopToBottom(Iterable<? extends T> items)
     {
         ArrayStack<T> stack = ArrayStack.newStack();
-        stack.delegate = FastList.newList(items).reverseThis();
+        FastList<T> list = FastList.newList(items);
+        stack.delegate = list.reverseThis();
         return stack;
     }
 

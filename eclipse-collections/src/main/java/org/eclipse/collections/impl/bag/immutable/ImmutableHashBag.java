@@ -40,6 +40,7 @@ import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.sorted.MutableSortedMap;
 import org.eclipse.collections.api.multimap.MutableMultimap;
 import org.eclipse.collections.api.multimap.bag.ImmutableBagMultimap;
+import org.eclipse.collections.api.multimap.bag.MutableBagMultimap;
 import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.partition.bag.PartitionImmutableBag;
 import org.eclipse.collections.api.set.ImmutableSet;
@@ -126,7 +127,8 @@ public class ImmutableHashBag<T>
     @Override
     public <V> ImmutableBagMultimap<V, T> groupBy(Function<? super T, ? extends V> function)
     {
-        return this.delegate.groupBy(function).toImmutable();
+        MutableBagMultimap<V, T> bagMultimap = this.delegate.groupBy(function);
+        return bagMultimap.toImmutable();
     }
 
     @Override
@@ -154,7 +156,8 @@ public class ImmutableHashBag<T>
     @Override
     public <V> ImmutableMap<V, T> groupByUniqueKey(Function<? super T, ? extends V> function)
     {
-        return this.delegate.groupByUniqueKey(function).toImmutable();
+        MutableMap<V, T> map = this.delegate.groupByUniqueKey(function);
+        return map.toImmutable();
     }
 
     @Override
@@ -366,7 +369,8 @@ public class ImmutableHashBag<T>
     @Override
     public <V> ImmutableBag<V> collect(Function<? super T, ? extends V> function)
     {
-        return this.delegate.collect(function).toImmutable();
+        MutableBag<V> bag = this.delegate.collect(function);
+        return bag.toImmutable();
     }
 
     @Override
@@ -380,7 +384,8 @@ public class ImmutableHashBag<T>
             Predicate<? super T> predicate,
             Function<? super T, ? extends V> function)
     {
-        return this.delegate.collectIf(predicate, function).toImmutable();
+        MutableBag<V> bag = this.delegate.collectIf(predicate, function);
+        return bag.toImmutable();
     }
 
     @Override

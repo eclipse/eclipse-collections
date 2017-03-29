@@ -114,7 +114,8 @@ public abstract class AbstractImmutableCollection<T> extends AbstractRichIterabl
     @Override
     public <V> ImmutableMap<V, T> groupByUniqueKey(Function<? super T, ? extends V> function)
     {
-        return Iterate.groupByUniqueKey(this, function).toImmutable();
+        MutableMap<V, T> map = Iterate.groupByUniqueKey(this, function);
+        return map.toImmutable();
     }
 
     @Override

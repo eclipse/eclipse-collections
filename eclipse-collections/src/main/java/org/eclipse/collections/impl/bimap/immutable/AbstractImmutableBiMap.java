@@ -45,6 +45,8 @@ import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.primitive.ImmutableObjectDoubleMap;
 import org.eclipse.collections.api.map.primitive.ImmutableObjectLongMap;
+import org.eclipse.collections.api.map.primitive.ObjectDoubleMap;
+import org.eclipse.collections.api.map.primitive.ObjectLongMap;
 import org.eclipse.collections.api.multimap.set.ImmutableSetMultimap;
 import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.partition.set.PartitionImmutableSet;
@@ -388,25 +390,29 @@ public abstract class AbstractImmutableBiMap<K, V> extends AbstractBiMap<K, V> i
     @Override
     public <V1> ImmutableObjectLongMap<V1> sumByInt(Function<? super V, ? extends V1> groupBy, IntFunction<? super V> function)
     {
-        return this.delegate.sumByInt(groupBy, function).toImmutable();
+        ObjectLongMap<V1> map = this.delegate.sumByInt(groupBy, function);
+        return map.toImmutable();
     }
 
     @Override
     public <V1> ImmutableObjectDoubleMap<V1> sumByFloat(Function<? super V, ? extends V1> groupBy, FloatFunction<? super V> function)
     {
-        return this.delegate.sumByFloat(groupBy, function).toImmutable();
+        ObjectDoubleMap<V1> map = this.delegate.sumByFloat(groupBy, function);
+        return map.toImmutable();
     }
 
     @Override
     public <V1> ImmutableObjectLongMap<V1> sumByLong(Function<? super V, ? extends V1> groupBy, LongFunction<? super V> function)
     {
-        return this.delegate.sumByLong(groupBy, function).toImmutable();
+        ObjectLongMap<V1> map = this.delegate.sumByLong(groupBy, function);
+        return map.toImmutable();
     }
 
     @Override
     public <V1> ImmutableObjectDoubleMap<V1> sumByDouble(Function<? super V, ? extends V1> groupBy, DoubleFunction<? super V> function)
     {
-        return this.delegate.sumByDouble(groupBy, function).toImmutable();
+        ObjectDoubleMap<V1> map = this.delegate.sumByDouble(groupBy, function);
+        return map.toImmutable();
     }
 
     @Override

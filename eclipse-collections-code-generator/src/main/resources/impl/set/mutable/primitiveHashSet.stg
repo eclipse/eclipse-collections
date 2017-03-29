@@ -1214,7 +1214,8 @@ public final class <name>HashSet extends Abstract<name>Set implements Mutable<na
         @Override
         public \<V> ImmutableSet\<V> collect(<name>ToObjectFunction\<? extends V> function)
         {
-            return this.collect(function, UnifiedSet.newSet(this.size())).toImmutable();
+            MutableSet\<V> set = this.collect(function, UnifiedSet.newSet(this.size()));
+            return set.toImmutable();
         }
 
         @Override
