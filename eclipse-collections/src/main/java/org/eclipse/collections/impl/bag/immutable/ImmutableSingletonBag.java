@@ -19,6 +19,7 @@ import java.util.Optional;
 
 import org.eclipse.collections.api.bag.Bag;
 import org.eclipse.collections.api.bag.ImmutableBag;
+import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.block.function.Function2;
@@ -135,7 +136,8 @@ final class ImmutableSingletonBag<T>
     @Override
     public ImmutableBag<T> newWithAll(Iterable<? extends T> elements)
     {
-        return HashBag.newBag(elements).with(this.value).toImmutable();
+        MutableBag<T> bag = HashBag.newBag(elements);
+        return bag.with(this.value).toImmutable();
     }
 
     @Override

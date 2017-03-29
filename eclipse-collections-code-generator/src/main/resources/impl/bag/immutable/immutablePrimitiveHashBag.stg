@@ -23,6 +23,7 @@ import java.io.Serializable;
 import org.eclipse.collections.api.<name>Iterable;
 import org.eclipse.collections.api.Lazy<name>Iterable;
 import org.eclipse.collections.api.bag.ImmutableBag;
+import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.bag.primitive.<name>Bag;
 import org.eclipse.collections.api.bag.primitive.Immutable<name>Bag;
 import org.eclipse.collections.api.bag.primitive.Mutable<name>Bag;
@@ -40,7 +41,6 @@ import org.eclipse.collections.impl.block.procedure.checked.primitive.Checked<na
 import org.eclipse.collections.impl.iterator.Unmodifiable<name>Iterator;
 import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.tuple.primitive.<name>IntPair;
-
 
 /**
  * Immutable<name>HashBag is the non-modifiable equivalent of {@link <name>HashBag}.
@@ -187,7 +187,8 @@ final class Immutable<name>HashBag implements Immutable<name>Bag, Serializable
     @Override
     public \<V> ImmutableBag\<V> collect(<name>ToObjectFunction\<? extends V> function)
     {
-        return this.delegate.collect(function).toImmutable();
+        MutableBag\<V> bag = this.delegate.collect(function);
+        return bag.toImmutable();
     }
 
     @Override

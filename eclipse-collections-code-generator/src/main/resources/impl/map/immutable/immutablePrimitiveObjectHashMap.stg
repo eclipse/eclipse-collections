@@ -96,6 +96,7 @@ import org.eclipse.collections.api.map.primitive.Mutable<name>ObjectMap;
 import org.eclipse.collections.api.map.sorted.MutableSortedMap;
 import org.eclipse.collections.api.multimap.MutableMultimap;
 import org.eclipse.collections.api.multimap.bag.ImmutableBagMultimap;
+import org.eclipse.collections.api.multimap.bag.MutableBagMultimap;
 import org.eclipse.collections.api.partition.bag.PartitionImmutableBag;
 import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.api.set.MutableSet;
@@ -320,7 +321,8 @@ final class Immutable<name>ObjectHashMap\<V> extends AbstractImmutable<name>Obje
     @Override
     public \<VV> ImmutableBag\<VV> collect(Function\<? super V, ? extends VV> function)
     {
-        return this.delegate.collect(function).toImmutable();
+        MutableBag\<VV> bag = this.delegate.collect(function);
+        return bag.toImmutable();
     }
 
     <collectPrimitive("Boolean", "boolean")>
@@ -334,13 +336,15 @@ final class Immutable<name>ObjectHashMap\<V> extends AbstractImmutable<name>Obje
     @Override
     public \<P, VV> ImmutableBag\<VV> collectWith(Function2\<? super V, ? super P, ? extends VV> function, P parameter)
     {
-        return this.delegate.collectWith(function, parameter).toImmutable();
+        MutableBag\<VV> bag = this.delegate.collectWith(function, parameter);
+        return bag.toImmutable();
     }
 
     @Override
     public \<VV> ImmutableBag\<VV> collectIf(Predicate\<? super V> predicate, Function\<? super V, ? extends VV> function)
     {
-        return this.delegate.collectIf(predicate, function).toImmutable();
+        MutableBag\<VV> bag = this.delegate.collectIf(predicate, function);
+        return bag.toImmutable();
     }
 
     @Override
@@ -652,7 +656,8 @@ final class Immutable<name>ObjectHashMap\<V> extends AbstractImmutable<name>Obje
     @Override
     public \<VV> ImmutableBagMultimap\<VV, V> groupBy(Function\<? super V, ? extends VV> function)
     {
-        return this.delegate.groupBy(function).toImmutable();
+        MutableBagMultimap\<VV, V> bagMultimap = this.delegate.groupBy(function);
+        return bagMultimap.toImmutable();
     }
 
     @Override
@@ -676,7 +681,8 @@ final class Immutable<name>ObjectHashMap\<V> extends AbstractImmutable<name>Obje
     @Override
     public \<VV> ImmutableMap\<VV, V> groupByUniqueKey(Function\<? super V, ? extends VV> function)
     {
-        return this.delegate.groupByUniqueKey(function).toImmutable();
+        MutableMap\<VV, V> map = this.delegate.groupByUniqueKey(function);
+        return map.toImmutable();
     }
 
     @Override
@@ -718,13 +724,15 @@ final class Immutable<name>ObjectHashMap\<V> extends AbstractImmutable<name>Obje
     @Override
     public \<K, VV> ImmutableMap\<K, VV> aggregateInPlaceBy(Function\<? super V, ? extends K> groupBy, Function0\<? extends VV> zeroValueFactory, Procedure2\<? super VV, ? super V> mutatingAggregator)
     {
-        return this.delegate.aggregateInPlaceBy(groupBy, zeroValueFactory, mutatingAggregator).toImmutable();
+        MutableMap\<K, VV> map = this.delegate.aggregateInPlaceBy(groupBy, zeroValueFactory, mutatingAggregator);
+        return map.toImmutable();
     }
 
     @Override
     public \<K, VV> ImmutableMap\<K, VV> aggregateBy(Function\<? super V, ? extends K> groupBy, Function0\<? extends VV> zeroValueFactory, Function2\<? super VV, ? super V, ? extends VV> nonMutatingAggregator)
     {
-        return this.delegate.aggregateBy(groupBy, zeroValueFactory, nonMutatingAggregator).toImmutable();
+        MutableMap\<K, VV> map = this.delegate.aggregateBy(groupBy, zeroValueFactory, nonMutatingAggregator);
+        return map.toImmutable();
     }
 
     @Override
