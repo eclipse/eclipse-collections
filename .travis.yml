@@ -36,9 +36,9 @@ matrix:
 
 script:
   if ["$TRAVIS_EVENT_TYPE" == "cron"]; then
-      eval $CMD $SONAR_COMMAND;
+      eval travis_wait 35 $CMD $SONAR_COMMAND;
   else
-      eval $CMD;
+      eval travis_wait 35 $CMD;
   fi
 
 cache:
