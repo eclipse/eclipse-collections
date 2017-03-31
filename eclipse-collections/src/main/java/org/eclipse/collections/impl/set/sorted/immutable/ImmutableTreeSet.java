@@ -13,6 +13,7 @@ package org.eclipse.collections.impl.set.sorted.immutable;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.SortedSet;
@@ -32,6 +33,7 @@ import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 import org.eclipse.collections.api.set.sorted.ParallelSortedSetIterable;
 import org.eclipse.collections.api.set.sorted.SortedSetIterable;
+import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.factory.SortedSets;
 import org.eclipse.collections.impl.lazy.AbstractLazyIterable;
 import org.eclipse.collections.impl.lazy.parallel.AbstractBatch;
@@ -66,6 +68,23 @@ final class ImmutableTreeSet<T>
         this.comparator = sortedSet.comparator();
     }
 
+    private ImmutableTreeSet(T[] delegate, Comparator<? super T> comparator)
+    {
+        if (comparator == null)
+        {
+            comparator = Comparators.naturalOrder();
+        }
+        for (int i = delegate.length - 1; i > 0; i--)
+        {
+            if (comparator.compare(delegate[i - 1], delegate[i]) >= 0)
+            {
+                throw new ConcurrentModificationException("Input Array expected to be sorted, but was not!");
+            }
+        }
+        this.delegate = delegate;
+        this.comparator = comparator;
+    }
+
     public static <T> ImmutableSortedSet<T> newSetWith(T... elements)
     {
         return new ImmutableTreeSet<>(TreeSortedSet.newSetWith(elements));
@@ -78,7 +97,7 @@ final class ImmutableTreeSet<T>
 
     public static <T> ImmutableSortedSet<T> newSet(SortedSet<T> set)
     {
-        return new ImmutableTreeSet<>(TreeSortedSet.newSet(set));
+        return new ImmutableTreeSet<>((T[]) set.toArray(), set.comparator());
     }
 
     @Override
