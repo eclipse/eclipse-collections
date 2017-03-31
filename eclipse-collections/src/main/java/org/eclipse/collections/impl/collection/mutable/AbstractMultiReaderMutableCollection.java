@@ -657,6 +657,34 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
     }
 
     @Override
+    public Optional<T> minOptional(Comparator<? super T> comparator)
+    {
+        this.acquireReadLock();
+        try
+        {
+            return this.getDelegate().minOptional(comparator);
+        }
+        finally
+        {
+            this.unlockReadLock();
+        }
+    }
+
+    @Override
+    public Optional<T> maxOptional(Comparator<? super T> comparator)
+    {
+        this.acquireReadLock();
+        try
+        {
+            return this.getDelegate().maxOptional(comparator);
+        }
+        finally
+        {
+            this.unlockReadLock();
+        }
+    }
+
+    @Override
     public T min()
     {
         this.acquireReadLock();
@@ -685,6 +713,34 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
     }
 
     @Override
+    public Optional<T> minOptional()
+    {
+        this.acquireReadLock();
+        try
+        {
+            return this.getDelegate().minOptional();
+        }
+        finally
+        {
+            this.unlockReadLock();
+        }
+    }
+
+    @Override
+    public Optional<T> maxOptional()
+    {
+        this.acquireReadLock();
+        try
+        {
+            return this.getDelegate().maxOptional();
+        }
+        finally
+        {
+            this.unlockReadLock();
+        }
+    }
+
+    @Override
     public <V extends Comparable<? super V>> T minBy(Function<? super T, ? extends V> function)
     {
         this.acquireReadLock();
@@ -705,6 +761,34 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         try
         {
             return this.getDelegate().maxBy(function);
+        }
+        finally
+        {
+            this.unlockReadLock();
+        }
+    }
+
+    @Override
+    public <V extends Comparable<? super V>> Optional<T> minByOptional(Function<? super T, ? extends V> function)
+    {
+        this.acquireReadLock();
+        try
+        {
+            return this.getDelegate().minByOptional(function);
+        }
+        finally
+        {
+            this.unlockReadLock();
+        }
+    }
+
+    @Override
+    public <V extends Comparable<? super V>> Optional<T> maxByOptional(Function<? super T, ? extends V> function)
+    {
+        this.acquireReadLock();
+        try
+        {
+            return this.getDelegate().maxByOptional(function);
         }
         finally
         {

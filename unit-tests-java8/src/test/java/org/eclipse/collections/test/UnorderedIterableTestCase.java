@@ -170,4 +170,25 @@ public interface UnorderedIterableTestCase extends RichIterableTestCase
 
         assertThrows(NoSuchElementException.class, () -> this.<String>newWith().maxBy(string -> string.charAt(string.length() - 1)));
     }
+
+    @Override
+    @Test
+    default void RichIterable_minByOptional_maxByOptional()
+    {
+        // Without an ordering, min can be either ca or da
+        RichIterable<String> minIterable = this.newWith("ed", "da", "ca", "bc", "ab");
+        String actualMin = minIterable.minByOptional(string -> string.charAt(string.length() - 1)).get();
+        assertThat(actualMin, isOneOf("ca", "da"));
+        IterableTestCase.assertEquals(minIterable.detect(each -> each.equals("ca") || each.equals("da")), actualMin);
+
+        assertThat(this.<String>newWith().minByOptional(string -> string.charAt(string.length() - 1)), is(Optional.empty()));
+
+        // Without an ordering, max can be either ca or da
+        RichIterable<String> maxIterable = this.newWith("ew", "dz", "cz", "bx", "ay");
+        String actualMax = maxIterable.maxByOptional(string -> string.charAt(string.length() - 1)).get();
+        assertThat(actualMax, isOneOf("cz", "dz"));
+        IterableTestCase.assertEquals(maxIterable.detect(each -> each.equals("cz") || each.equals("dz")), actualMax);
+
+        assertThat(this.<String>newWith().maxByOptional(string -> string.charAt(string.length() - 1)), is(Optional.empty()));
+    }
 }
