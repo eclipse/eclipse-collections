@@ -882,6 +882,24 @@ public class SynchronizedRichIterable<T>
     }
 
     @Override
+    public Optional<T> minOptional(Comparator<? super T> comparator)
+    {
+        synchronized (this.lock)
+        {
+            return this.iterable.minOptional(comparator);
+        }
+    }
+
+    @Override
+    public Optional<T> maxOptional(Comparator<? super T> comparator)
+    {
+        synchronized (this.lock)
+        {
+            return this.iterable.maxOptional(comparator);
+        }
+    }
+
+    @Override
     public T min()
     {
         synchronized (this.lock)
@@ -900,6 +918,24 @@ public class SynchronizedRichIterable<T>
     }
 
     @Override
+    public Optional<T> minOptional()
+    {
+        synchronized (this.lock)
+        {
+            return this.iterable.minOptional();
+        }
+    }
+
+    @Override
+    public Optional<T> maxOptional()
+    {
+        synchronized (this.lock)
+        {
+            return this.iterable.maxOptional();
+        }
+    }
+
+    @Override
     public <V extends Comparable<? super V>> T minBy(Function<? super T, ? extends V> function)
     {
         synchronized (this.lock)
@@ -914,6 +950,24 @@ public class SynchronizedRichIterable<T>
         synchronized (this.lock)
         {
             return this.iterable.maxBy(function);
+        }
+    }
+
+    @Override
+    public <V extends Comparable<? super V>> Optional<T> minByOptional(Function<? super T, ? extends V> function)
+    {
+        synchronized (this.lock)
+        {
+            return this.iterable.minByOptional(function);
+        }
+    }
+
+    @Override
+    public <V extends Comparable<? super V>> Optional<T> maxByOptional(Function<? super T, ? extends V> function)
+    {
+        synchronized (this.lock)
+        {
+            return this.iterable.maxByOptional(function);
         }
     }
 

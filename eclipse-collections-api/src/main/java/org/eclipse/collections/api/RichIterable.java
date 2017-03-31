@@ -1562,6 +1562,38 @@ public interface RichIterable<T>
     T max(Comparator<? super T> comparator);
 
     /**
+     * Returns the minimum element out of this container based on the comparator as an Optional.
+     * If the container is empty {@link Optional#empty()} is returned.
+     *
+     * @throws NullPointerException if the minimum element is null
+     * @since 8.2
+     */
+    default Optional<T> minOptional(Comparator<? super T> comparator)
+    {
+        if (this.isEmpty())
+        {
+            return Optional.empty();
+        }
+        return Optional.of(this.min(comparator));
+    }
+
+    /**
+     * Returns the maximum element out of this container based on the comparator as an Optional.
+     * If the container is empty {@link Optional#empty()} is returned.
+     *
+     * @throws NullPointerException if the maximum element is null
+     * @since 8.2
+     */
+    default Optional<T> maxOptional(Comparator<? super T> comparator)
+    {
+        if (this.isEmpty())
+        {
+            return Optional.empty();
+        }
+        return Optional.of(this.max(comparator));
+    }
+
+    /**
      * Returns the minimum element out of this container based on the natural order.
      *
      * @throws ClassCastException     if the elements are not {@link Comparable}
@@ -1580,6 +1612,40 @@ public interface RichIterable<T>
     T max();
 
     /**
+     * Returns the minimum element out of this container based on the natural order as an Optional.
+     * If the container is empty {@link Optional#empty()} is returned.
+     *
+     * @throws ClassCastException   if the elements are not {@link Comparable}
+     * @throws NullPointerException if the minimum element is null
+     * @since 8.2
+     */
+    default Optional<T> minOptional()
+    {
+        if (this.isEmpty())
+        {
+            return Optional.empty();
+        }
+        return Optional.of(this.min());
+    }
+
+    /**
+     * Returns the maximum element out of this container based on the natural order as an Optional.
+     * If the container is empty {@link Optional#empty()} is returned.
+     *
+     * @throws ClassCastException   if the elements are not {@link Comparable}
+     * @throws NullPointerException if the maximum element is null
+     * @since 8.2
+     */
+    default Optional<T> maxOptional()
+    {
+        if (this.isEmpty())
+        {
+            return Optional.empty();
+        }
+        return Optional.of(this.max());
+    }
+
+    /**
      * Returns the minimum elements out of this container based on the natural order of the attribute returned by Function.
      *
      * @throws NoSuchElementException if the RichIterable is empty
@@ -1594,6 +1660,38 @@ public interface RichIterable<T>
      * @since 1.0
      */
     <V extends Comparable<? super V>> T maxBy(Function<? super T, ? extends V> function);
+
+    /**
+     * Returns the minimum elements out of this container based on the natural order of the attribute returned by Function as an Optional.
+     * If the container is empty {@link Optional#empty()} is returned.
+     *
+     * @throws NullPointerException if the minimum element is null
+     * @since 8.2
+     */
+    default <V extends Comparable<? super V>> Optional<T> minByOptional(Function<? super T, ? extends V> function)
+    {
+        if (this.isEmpty())
+        {
+            return Optional.empty();
+        }
+        return Optional.of(this.minBy(function));
+    }
+
+    /**
+     * Returns the maximum elements out of this container based on the natural order of the attribute returned by Function as an Optional.
+     * If the container is empty {@link Optional#empty()} is returned.
+     *
+     * @throws NullPointerException if the maximum element is null
+     * @since 8.2
+     */
+    default <V extends Comparable<? super V>> Optional<T> maxByOptional(Function<? super T, ? extends V> function)
+    {
+        if (this.isEmpty())
+        {
+            return Optional.empty();
+        }
+        return Optional.of(this.maxBy(function));
+    }
 
     /**
      * Returns the final long result of evaluating function for each element of the iterable and adding the results

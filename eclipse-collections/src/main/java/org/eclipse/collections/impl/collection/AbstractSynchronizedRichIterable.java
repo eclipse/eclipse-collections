@@ -760,6 +760,24 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
     }
 
     @Override
+    public Optional<T> minOptional(Comparator<? super T> comparator)
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.minOptional(comparator);
+        }
+    }
+
+    @Override
+    public Optional<T> maxOptional(Comparator<? super T> comparator)
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.maxOptional(comparator);
+        }
+    }
+
+    @Override
     public T min()
     {
         synchronized (this.lock)
@@ -778,6 +796,24 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
     }
 
     @Override
+    public Optional<T> minOptional()
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.minOptional();
+        }
+    }
+
+    @Override
+    public Optional<T> maxOptional()
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.maxOptional();
+        }
+    }
+
+    @Override
     public <V extends Comparable<? super V>> T minBy(Function<? super T, ? extends V> function)
     {
         synchronized (this.lock)
@@ -792,6 +828,24 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         synchronized (this.lock)
         {
             return this.delegate.maxBy(function);
+        }
+    }
+
+    @Override
+    public <V extends Comparable<? super V>> Optional<T> minByOptional(Function<? super T, ? extends V> function)
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.minByOptional(function);
+        }
+    }
+
+    @Override
+    public <V extends Comparable<? super V>> Optional<T> maxByOptional(Function<? super T, ? extends V> function)
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.maxByOptional(function);
         }
     }
 
