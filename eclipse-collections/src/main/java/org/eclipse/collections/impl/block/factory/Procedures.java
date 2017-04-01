@@ -123,7 +123,7 @@ public final class Procedures
             Predicate<? super T> predicate,
             Procedure<? super T> procedure)
     {
-        return Procedures.caseDefault(defaultProcedure).addCase(predicate, procedure);
+        return Procedures.<T>caseDefault(defaultProcedure).addCase(predicate, procedure);
     }
 
     public static <T> Procedure<T> synchronizedEach(Procedure<T> procedure)

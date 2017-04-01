@@ -14,6 +14,7 @@ import java.util.concurrent.ExecutorService;
 
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.annotation.Beta;
+import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.procedure.Procedure;
@@ -98,20 +99,23 @@ public class ParallelCollectIterable<T, V> extends AbstractParallelIterableImpl<
     public <V1> UnsortedBagMultimap<V1, V> groupBy(Function<? super V, ? extends V1> function)
     {
         // TODO: Implement in parallel
-        return this.delegate.toBag().collect(this.function).groupBy(function);
+        MutableBag<V> mutableBag = this.delegate.toBag().collect(this.function);
+        return mutableBag.groupBy(function);
     }
 
     @Override
     public <V1> UnsortedBagMultimap<V1, V> groupByEach(Function<? super V, ? extends Iterable<V1>> function)
     {
         // TODO: Implement in parallel
-        return this.delegate.toBag().collect(this.function).groupByEach(function);
+        MutableBag<V> mutableBag = this.delegate.toBag().collect(this.function);
+        return mutableBag.groupByEach(function);
     }
 
     @Override
     public <V1> MapIterable<V1, V> groupByUniqueKey(Function<? super V, ? extends V1> function)
     {
         // TODO: Implement in parallel
-        return this.delegate.toBag().collect(this.function).groupByUniqueKey(function);
+        MutableBag<V> mutableBag = this.delegate.toBag().collect(this.function);
+        return mutableBag.groupByUniqueKey(function);
     }
 }
