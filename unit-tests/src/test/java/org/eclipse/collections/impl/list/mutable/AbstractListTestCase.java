@@ -827,7 +827,15 @@ public abstract class AbstractListTestCase
     {
         Object item = new Object();
 
-        Verify.assertThrows(ArrayIndexOutOfBoundsException.class, () -> this.newWith(item).get(-1));
+        try
+        {
+            this.newWith(item).get(-1);
+            Assert.fail("Should not reach here! Exception should be thrown on previous line.");
+        }
+        catch (Exception e)
+        {
+            Assert.assertTrue((e instanceof ArrayIndexOutOfBoundsException) || (e instanceof IndexOutOfBoundsException));
+        }
     }
 
     @Test
@@ -1016,7 +1024,8 @@ public abstract class AbstractListTestCase
         MutableList<Integer> elements = FastList.newList();
         IntArrayList indexes = new IntArrayList();
         MutableList<Integer> collection = this.newWith(1, 2, 3, 4);
-        collection.forEachWithIndex((Integer object, int index) -> {
+        collection.forEachWithIndex((Integer object, int index) ->
+        {
             elements.add(object);
             indexes.add(index);
         });
