@@ -16,6 +16,8 @@ import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.test.SerializeTestHelper;
 import org.junit.Assert;
+import org.junit.Assume;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class SummaryStatisticsTest
@@ -89,6 +91,8 @@ public class SummaryStatisticsTest
     @Test
     public void serialization()
     {
+        Assume.assumeTrue(System.getProperty("java.version").startsWith("1.8."));
+
         SummaryStatistics stats = new SummaryStatistics().addIntFunction("1", each -> 1);
         SummaryStatistics deserialized = SerializeTestHelper.serializeDeserialize(stats);
         Assert.assertNotSame(stats, deserialized);

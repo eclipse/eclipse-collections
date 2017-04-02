@@ -24,7 +24,9 @@ import org.eclipse.collections.api.block.procedure.primitive.LongProcedure;
  * Provides a serializable version of LongSummaryStatistics.
  *
  * @since 8.1
+ * @deprecated since 8.2 since it will not work with Java 9 natively. Will be removed in 9.0.0.
  */
+@Deprecated
 public class SerializableLongSummaryStatistics
         extends LongSummaryStatistics
         implements LongProcedure, Externalizable
@@ -38,10 +40,10 @@ public class SerializableLongSummaryStatistics
 
     static
     {
-        Field count;
-        Field sum;
-        Field min;
-        Field max;
+        Field count = null;
+        Field sum = null;
+        Field min = null;
+        Field max = null;
         try
         {
             count = LongSummaryStatistics.class.getDeclaredField("count");
@@ -53,12 +55,8 @@ public class SerializableLongSummaryStatistics
             max = LongSummaryStatistics.class.getDeclaredField("max");
             max.setAccessible(true);
         }
-        catch (SecurityException | NoSuchFieldException ignored)
+        catch (Exception e)
         {
-            count = null;
-            sum = null;
-            min = null;
-            max = null;
         }
         COUNT = count;
         SUM = sum;
