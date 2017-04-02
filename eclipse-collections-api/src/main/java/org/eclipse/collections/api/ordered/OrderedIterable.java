@@ -73,7 +73,7 @@ public interface OrderedIterable<T> extends RichIterable<T>
      * iterable is empty, {@link Optional#empty} is returned.
      *
      * @throws NullPointerException if the element is null
-     * @since 9.0
+     * @since 8.2
      */
     default Optional<T> getFirstOptional()
     {
@@ -99,7 +99,7 @@ public interface OrderedIterable<T> extends RichIterable<T>
      * iterable is empty, {@link Optional#empty} is returned.
      *
      * @throws NullPointerException if the element is null
-     * @since 9.0
+     * @since 8.2
      */
     default Optional<T> getLastOptional()
     {
