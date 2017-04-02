@@ -28,6 +28,12 @@
 
     <name>Eclipse Collections Test Utilities</name>
 
+    <properties>
+        <sonar.jacoco.reportPaths>
+            ../unit-tests/target/jacoco.exec,../unit-tests-java8/target/jacoco.exec,../eclipse-collections-testutils/target/jacoco.exec,../serialization-tests/target/jacoco.exec
+        </sonar.jacoco.reportPaths>
+    </properties>
+
     <dependencies>
 
         <dependency>
