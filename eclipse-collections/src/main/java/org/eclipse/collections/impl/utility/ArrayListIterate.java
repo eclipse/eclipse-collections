@@ -104,18 +104,10 @@ public final class ArrayListIterate
         {
             data = ArrayList.class.getDeclaredField("elementData");
             size = ArrayList.class.getDeclaredField("size");
-            try
-            {
-                data.setAccessible(true);
-                size.setAccessible(true);
-            }
-            catch (SecurityException ignored)
-            {
-                data = null;
-                size = null;
-            }
+            data.setAccessible(true);
+            size.setAccessible(true);
         }
-        catch (NoSuchFieldException ignored)
+        catch (Exception ignored)
         {
         }
         ELEMENT_DATA_FIELD = data;

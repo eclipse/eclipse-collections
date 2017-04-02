@@ -387,6 +387,7 @@
             <Class name="org.eclipse.collections.impl.collector.SerializableDoubleSummaryStatistics" />
             <Class name="org.eclipse.collections.impl.collector.SerializableIntSummaryStatistics" />
             <Class name="org.eclipse.collections.impl.collector.SerializableLongSummaryStatistics" />
+            <Class name="org.eclipse.collections.impl.utility.ArrayListIterate" />
         </Or>
     </Match>
     <Match>
@@ -395,6 +396,7 @@
             <Class name="org.eclipse.collections.impl.collector.SerializableDoubleSummaryStatistics" />
             <Class name="org.eclipse.collections.impl.collector.SerializableIntSummaryStatistics" />
             <Class name="org.eclipse.collections.impl.collector.SerializableLongSummaryStatistics" />
+            <Class name="org.eclipse.collections.impl.utility.ArrayListIterate" />
         </Or>
     </Match>
 </FindBugsFilter>
