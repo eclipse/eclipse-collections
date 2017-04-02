@@ -192,7 +192,18 @@ public abstract class AbstractListTestCase
         MutableList<Integer> list = this.newWith(1, 2, 3);
         MutableList<Integer> list2 = list.clone();
         Verify.assertListsEqual(list, list2);
-        Verify.assertShallowClone(list);
+        try
+        {
+            Verify.assertShallowClone(list);
+        }
+        catch (Exception e)
+        {
+            // Suppress if a Java 9 specific exception related to reflection is thrown.
+            if (!e.getClass().getCanonicalName().equals("java.lang.reflect.InaccessibleObjectException"))
+            {
+                throw e;
+            }
+        }
     }
 
     @Override

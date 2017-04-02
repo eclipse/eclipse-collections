@@ -213,7 +213,7 @@ public class SingletonSetTest extends AbstractMemoryEfficientMutableSetTestCase
     {
         Verify.assertEmpty(this.intSet.reject(Predicates.lessThan(3)));
         Verify.assertContainsAll(this.intSet.reject(
-                        Predicates.greaterThan(3),
+                Predicates.greaterThan(3),
                 UnifiedSet.newSet()),
                 1);
     }
@@ -521,7 +521,18 @@ public class SingletonSetTest extends AbstractMemoryEfficientMutableSetTestCase
     @Test
     public void testClone()
     {
-        Verify.assertShallowClone(this.set);
+        try
+        {
+            Verify.assertShallowClone(this.set);
+        }
+        catch (Exception e)
+        {
+            // Suppress if a Java 9 specific exception related to reflection is thrown.
+            if (!e.getClass().getCanonicalName().equals("java.lang.reflect.InaccessibleObjectException"))
+            {
+                throw e;
+            }
+        }
         MutableSet<String> cloneSet = this.set.clone();
         Assert.assertNotSame(cloneSet, this.set);
         Verify.assertEqualsAndHashCode(UnifiedSet.newSetWith("1"), cloneSet);
