@@ -853,9 +853,9 @@ public final class MultiReaderFastList<T>
      * MultiReaderFastList, then you must do the following:
      * <p>
      * <pre>
-     * multiReaderList.withReadLockAndDelegate(new Procedure<MutableList<Person>>()
+     * multiReaderList.withReadLockAndDelegate(new Procedure&lt;MutableList&lt;Person&gt;&gt;()
      * {
-     *     public void value(MutableList<Person> people)
+     *     public void value(MutableList&lt;Person&gt; people)
      *     {
      *         Iterator it = people.listIterator();
      *         ....
@@ -876,9 +876,9 @@ public final class MultiReaderFastList<T>
      * MultiReaderFastList, then you must do the following:
      * <p>
      * <pre>
-     * multiReaderList.withReadLockAndDelegate(new Procedure<MutableList<Person>>()
+     * multiReaderList.withReadLockAndDelegate(new Procedure&lt;MutableList&lt;Person&gt;&gt;()
      * {
-     *     public void value(MutableList<Person> people)
+     *     public void value(MutableList&lt;Person&gt; people)
      *     {
      *         Iterator it = people.listIterator(0);
      *         ....

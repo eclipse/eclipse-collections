@@ -32,7 +32,7 @@ public interface InternalIterable<T>
      * <p>
      * Example using an anonymous inner class:
      * <pre>
-     * people.forEach(new Procedure<Person>()
+     * people.forEach(new Procedure&lt;Person&gt;()
      * {
      *     public void value(Person person)
      *     {
@@ -60,7 +60,7 @@ public interface InternalIterable<T>
      * <p>
      * Example using an anonymous inner class:
      * <pre>
-     * people.forEachWithIndex(new ObjectIntProcedure<Person>()
+     * people.forEachWithIndex(new ObjectIntProcedure&lt;Person&gt;()
      * {
      *     public void value(Person person, int index)
      *     {
@@ -91,7 +91,7 @@ public interface InternalIterable<T>
      * <p>
      * Example using an anonymous inner class:
      * <pre>
-     * people.forEachWith(new Procedure2<Person, Person>()
+     * people.forEachWith(new Procedure2&lt;Person, Person&gt;()
      * {
      *     public void value(Person person, Person other)
      *     {

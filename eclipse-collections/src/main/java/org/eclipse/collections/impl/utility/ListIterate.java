@@ -685,8 +685,8 @@ public final class ListIterate
      * list is iterated in the reverse order.
      * <p>
      * <pre>e.g.
-     * MutableList<People> people = FastList.newListWith(ted, mary, bob, sally);
-     * ListIterate.forEach(people, 0, 1, new Procedure<Person>()
+     * MutableList&lt;People&gt; people = FastList.newListWith(ted, mary, bob, sally);
+     * ListIterate.forEach(people, 0, 1, new Procedure&lt;Person&gt;()
      * {
      *     public void value(Person person)
      *     {
@@ -733,8 +733,8 @@ public final class ListIterate
      * range.
      * <p>
      * <pre>e.g.
-     * MutableList<People> people = FastList.newListWith(ted, mary, bob, sally);
-     * ListIterate.forEachWithIndex(people, 0, 1, new ObjectIntProcedure<Person>()
+     * MutableList&lt;People&gt; people = FastList.newListWith(ted, mary, bob, sally);
+     * ListIterate.forEachWithIndex(people, 0, 1, new ObjectIntProcedure&lt;Person&gt;()
      * {
      *     public void value(Person person, int index)
      *     {
@@ -1368,7 +1368,7 @@ public final class ListIterate
     /**
      * Reverses the order of the items in the list.
      * <pre>
-     *     List<Integer> integers = Lists.fixedSize.of(1, 3, 2);
+     *     List&lt;Integer&gt; integers = Lists.fixedSize.of(1, 3, 2);
      *     Verify.assertListsEqual(FastList.newListWith(2, 3, 1), ListIterate.reverse(integers));
      * </pre>
      *

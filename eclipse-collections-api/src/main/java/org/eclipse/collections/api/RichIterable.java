@@ -189,7 +189,7 @@ public interface RichIterable<T>
      * Example using an anonymous inner class:
      * <pre>
      * RichIterable&lt;Person&gt; tapped =
-     *     people.<b>tap</b>(new Procedure<Person>()
+     *     people.<b>tap</b>(new Procedure&lt;Person&gt;()
      *     {
      *         public void value(Person person)
      *         {
@@ -214,7 +214,7 @@ public interface RichIterable<T>
      * <p>
      * Example using an anonymous inner class:
      * <pre>
-     * people.each(new Procedure<Person>()
+     * people.each(new Procedure&lt;Person&gt;()
      * {
      *     public void value(Person person)
      *     {
@@ -1074,8 +1074,8 @@ public interface RichIterable<T>
      * <p>
      * Example using an anonymous inner class:
      * <pre>
-     * Function2<Integer, Integer, Integer> addParameterFunction =
-     *     new Function2<Integer, Integer, Integer>()
+     * Function2&lt;Integer, Integer, Integer&gt; addParameterFunction =
+     *     new Function2&lt;Integer, Integer, Integer&gt;()
      *     {
      *         public Integer value(final Integer each, final Integer parameter)
      *         {
@@ -1703,7 +1703,7 @@ public interface RichIterable<T>
      * This method produces the equivalent result as {@link Stream#collect(Collector)}.
      * <p>
      * <pre>
-     * MutableObjectLongMap<Integer> map2 =
+     * MutableObjectLongMap&lt;Integer&gt; map2 =
      *     Lists.mutable.with(1, 2, 3, 4, 5).reduceInPlace(Collectors2.sumByInt(i -> Integer.valueOf(i % 2), Integer::intValue));
      * </pre>
      * @since 8.0

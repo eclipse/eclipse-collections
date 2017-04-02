@@ -30,7 +30,7 @@ public interface FixedSizeCollection<T>
      * use this method properly with mutable and fixed size collections the following approach must be taken:
      * <p>
      * <pre>
-     * MutableCollection<String> list;
+     * MutableCollection&lt;String&gt; list;
      * list = list.with("1");
      * list = list.with("2");
      * return list;
@@ -49,7 +49,7 @@ public interface FixedSizeCollection<T>
      * taken:
      * <p>
      * <pre>
-     * MutableCollection<String> list;
+     * MutableCollection&lt;String&gt; list;
      * list = list.without("1");
      * list = list.without("2");
      * return list;
@@ -68,7 +68,7 @@ public interface FixedSizeCollection<T>
      * must be taken:
      * <p>
      * <pre>
-     * MutableCollection<String> list;
+     * MutableCollection&lt;String&gt; list;
      * list = list.withAll(FastList.newListWith("1", "2"));
      * return list;
      * </pre>
@@ -86,7 +86,7 @@ public interface FixedSizeCollection<T>
      * approach must be taken:
      * <p>
      * <pre>
-     * MutableCollection<String> list;
+     * MutableCollection&lt;String&gt; list;
      * list = list.withoutAll(FastList.newListWith("1", "2"));
      * return list;
      * </pre>

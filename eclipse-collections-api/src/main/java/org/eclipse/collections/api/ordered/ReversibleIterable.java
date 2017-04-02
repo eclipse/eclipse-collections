@@ -49,7 +49,7 @@ public interface ReversibleIterable<T> extends OrderedIterable<T>
      * Evaluates the procedure for each element of the list iterating in reverse order.
      * <p>
      * <pre>e.g.
-     * people.reverseForEach(new Procedure<Person>()
+     * people.reverseForEach(new Procedure&lt;Person&gt;()
      * {
      *     public void value(Person person)
      *     {

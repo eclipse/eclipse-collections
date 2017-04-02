@@ -114,7 +114,7 @@ public final class Iterate
      * <p>
      * Example using an anonymous inner class:
      * <pre>
-     * Iterate.<b>forEach</b>(people, new Procedure<Person>()
+     * Iterate.<b>forEach</b>(people, new Procedure&lt;Person&gt;()
      * {
      *     public void value(Person person)
      *     {
@@ -163,7 +163,7 @@ public final class Iterate
      * </pre>
      * <p>
      * <pre>e.g.
-     * Iterate.<b>forEachWith</b>(people, new Procedure2<Person, Person>()
+     * Iterate.<b>forEachWith</b>(people, new Procedure2&lt;Person, Person&gt;()
      * {
      *     public void value(Person person, Person other)
      *     {
@@ -213,7 +213,7 @@ public final class Iterate
      * <p>
      * Example using anonymous inner class:
      * <pre>
-     * Iterate.<b>forEachWithIndex</b>(people, new ObjectIntProcedure<Person>()
+     * Iterate.<b>forEachWithIndex</b>(people, new ObjectIntProcedure&lt;Person&gt;()
      * {
      *     public void value(Person person, int index)
      *     {

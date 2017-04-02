@@ -609,8 +609,8 @@ public final class RandomAccessListIterate
      * list is iterated in the reverse order.
      * <p>
      * <pre>e.g.
-     * MutableList<People> people = FastList.newListWith(ted, mary, bob, sally);
-     * ListIterate.forEach(people, 0, 1, new Procedure<Person>()
+     * MutableList&lt;People&gt; people = FastList.newListWith(ted, mary, bob, sally);
+     * ListIterate.forEach(people, 0, 1, new Procedure&lt;Person&gt;()
      * {
      *     public void value(Person person)
      *     {
@@ -647,8 +647,8 @@ public final class RandomAccessListIterate
      * range.
      * <p>
      * <pre>e.g.
-     * MutableList<People> people = FastList.newListWith(ted, mary, bob, sally);
-     * ListIterate.forEachWithIndex(people, 0, 1, new ObjectIntProcedure<Person>()
+     * MutableList&lt;People&gt; people = FastList.newListWith(ted, mary, bob, sally);
+     * ListIterate.forEachWithIndex(people, 0, 1, new ObjectIntProcedure&lt;Person&gt;()
      * {
      *     public void value(Person person, int index)
      *     {
