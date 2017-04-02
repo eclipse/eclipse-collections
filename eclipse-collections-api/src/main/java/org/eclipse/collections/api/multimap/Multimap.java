@@ -452,13 +452,13 @@ public interface Multimap<K, V>
      * Same as the collect method but uses the specified target multimap for the results.
      * <p>
      * <pre>e.g.
-     * return multimap.collectKeysValues(new Function2&lt;Integer, Person, Pair&lt;String, String&gt&gt;()
+     * return multimap.collectKeysValues(new Function2&lt;Integer, Person, Pair&lt;String, String&gt;&gt;()
      * {
      *     public Pair&lt;String, String&gt; valueOf(Integer age, Person person)
      *     {
      *         return Tuples.pair(age.toString(), person.getLastName());
      *     }
-     * }, HashBagMultimap.<String, String>newMultimap());
+     * }, HashBagMultimap.&lt;String, String&gt;newMultimap());
      * </pre>
      *
      * @param function a {@link Function2} to use for transformation
@@ -498,7 +498,7 @@ public interface Multimap<K, V>
      *     {
      *         return person.getLastName();
      *     }
-     * }, FastListMultimap.<Integer, String>newMultimap());
+     * }, FastListMultimap.&lt;Integer, String&gt;newMultimap());
      * </pre>
      *
      * @param function a {@link Function} to use for transformation

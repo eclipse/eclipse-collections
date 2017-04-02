@@ -94,8 +94,8 @@ public interface MapIterable<K, V> extends RichIterable<V>
      * Return the MapIterable that is obtained by flipping the direction of this map and making the associations
      * from value to key.
      * <pre>
-     *     MapIterable<Integer, String> map = this.newMapWithKeysValues(1, "1", 2, "2", 3, "3");
-     *     MapIterable<String, Integer> result = map.flipUniqueValues();
+     *     MapIterable&lt;Integer, String&gt; map = this.newMapWithKeysValues(1, "1", 2, "2", 3, "3");
+     *     MapIterable&lt;String, Integer&gt; result = map.flipUniqueValues();
      *     Assert.assertTrue(result.equals(UnifiedMap.newWithKeysValues("1", 1, "2", 2, "3", 3)));
      * </pre>
      *

@@ -789,8 +789,8 @@ public final class ArrayListIterate
      * list is iterated in the reverse order.
      * <p>
      * <pre>e.g.
-     * ArrayList<People> people = new ArrayList<People>(FastList.newListWith(ted, mary, bob, sally));
-     * ArrayListIterate.forEach(people, 0, 1, new Procedure<Person>()
+     * ArrayList<People> people = new ArrayList&lt;People&gt;(FastList.newListWith(ted, mary, bob, sally));
+     * ArrayListIterate.forEach(people, 0, 1, new Procedure&lt;Person&gt;()
      * {
      *     public void value(Person person)
      *     {
@@ -823,8 +823,8 @@ public final class ArrayListIterate
      * range.
      * <p>
      * <pre>e.g.
-     * ArrayList<People> people = new ArrayList<People>(FastList.newListWith(ted, mary, bob, sally));
-     * ArrayListIterate.forEachWithIndex(people, 0, 1, new ObjectIntProcedure<Person>()
+     * ArrayList<People> people = new ArrayList&lt;People&gt;(FastList.newListWith(ted, mary, bob, sally));
+     * ArrayListIterate.forEachWithIndex(people, 0, 1, new ObjectIntProcedure&lt;Person&gt;()
      * {
      *     public void value(Person person, int index)
      *     {

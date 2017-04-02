@@ -123,8 +123,8 @@ public interface OrderedIterable<T> extends RichIterable<T>
      * <p>
      * <p>
      * <pre>e.g.
-     * OrderedIterable<People> people = FastList.newListWith(ted, mary, bob, sally)
-     * people.forEach(0, 1, new Procedure<Person>()
+     * OrderedIterable&lt;People&gt; people = FastList.newListWith(ted, mary, bob, sally)
+     * people.forEach(0, 1, new Procedure&lt;Person&gt;()
      * {
      *     public void value(Person person)
      *     {
@@ -141,7 +141,7 @@ public interface OrderedIterable<T> extends RichIterable<T>
      * Iterates over the iterable passing each element and the current relative int index to the specified instance of
      * ObjectIntProcedure
      * <pre>e.g.
-     * people.forEachWithIndex(new ObjectIntProcedure<Person>()
+     * people.forEachWithIndex(new ObjectIntProcedure&lt;Person&gt;()
      * {
      *     public void value(Person person, int index)
      *     {
@@ -159,8 +159,8 @@ public interface OrderedIterable<T> extends RichIterable<T>
      * <p>
      * <p>
      * <pre>e.g.
-     * OrderedIterable<People> people = FastList.newListWith(ted, mary, bob, sally)
-     * people.forEachWithIndex(0, 1, new ObjectIntProcedure<Person>()
+     * OrderedIterable&lt;People&gt; people = FastList.newListWith(ted, mary, bob, sally)
+     * people.forEachWithIndex(0, 1, new ObjectIntProcedure&lt;Person&gt;()
      * {
      *     public void value(Person person, int index)
      *     {
