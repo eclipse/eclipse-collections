@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2017 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -12,7 +12,6 @@ package org.eclipse.collections.test.lazy;
 
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.list.MutableList;
-import org.eclipse.collections.impl.block.factory.Predicates;
 import org.eclipse.collections.impl.lazy.DropWhileIterable;
 import org.eclipse.collections.impl.test.junit.Java8Runner;
 import org.eclipse.collections.test.IterableTestCase;
