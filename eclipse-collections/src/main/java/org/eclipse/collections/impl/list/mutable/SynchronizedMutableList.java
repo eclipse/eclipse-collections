@@ -16,6 +16,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Optional;
 import java.util.Random;
 import java.util.concurrent.ExecutorService;
 
@@ -213,6 +214,24 @@ public class SynchronizedMutableList<T>
         synchronized (this.getLock())
         {
             return this.getDelegate().get(index);
+        }
+    }
+
+    @Override
+    public Optional<T> getFirstOptional()
+    {
+        synchronized (this.getLock())
+        {
+            return this.getDelegate().getFirstOptional();
+        }
+    }
+
+    @Override
+    public Optional<T> getLastOptional()
+    {
+        synchronized (this.getLock())
+        {
+            return this.getDelegate().getLastOptional();
         }
     }
 

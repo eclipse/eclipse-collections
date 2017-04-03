@@ -20,6 +20,7 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Optional;
 import java.util.Random;
 import java.util.RandomAccess;
 import java.util.concurrent.ExecutorService;
@@ -785,6 +786,34 @@ public final class MultiReaderFastList<T>
         try
         {
             return this.delegate.get(index);
+        }
+        finally
+        {
+            this.unlockReadLock();
+        }
+    }
+
+    @Override
+    public Optional<T> getFirstOptional()
+    {
+        this.acquireReadLock();
+        try
+        {
+            return this.getDelegate().getFirstOptional();
+        }
+        finally
+        {
+            this.unlockReadLock();
+        }
+    }
+
+    @Override
+    public Optional<T> getLastOptional()
+    {
+        this.acquireReadLock();
+        try
+        {
+            return this.getDelegate().getLastOptional();
         }
         finally
         {
