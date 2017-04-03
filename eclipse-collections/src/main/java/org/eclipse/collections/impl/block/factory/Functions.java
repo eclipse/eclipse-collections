@@ -497,7 +497,7 @@ public final class Functions
     public static <T extends Comparable<? super T>, V> CaseFunction<T, V> caseDefault(
             Function<? super T, ? extends V> defaultFunction)
     {
-        return new CaseFunction<>(defaultFunction);
+        return new CaseFunction<T, V>(defaultFunction);
     }
 
     public static <T extends Comparable<? super T>, V> CaseFunction<T, V> caseDefault(
@@ -505,7 +505,7 @@ public final class Functions
             Predicate<? super T> predicate,
             Function<? super T, ? extends V> function)
     {
-        CaseFunction<T, V> caseFunction = Functions.caseDefault(defaultFunction);
+        CaseFunction<T, V> caseFunction = Functions.<T, V>caseDefault(defaultFunction);
         return caseFunction.addCase(predicate, function);
     }
 

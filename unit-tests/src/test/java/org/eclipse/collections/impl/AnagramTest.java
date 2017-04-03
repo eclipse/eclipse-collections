@@ -13,6 +13,7 @@ package org.eclipse.collections.impl;
 import java.util.Arrays;
 
 import org.eclipse.collections.api.RichIterable;
+import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.impl.block.factory.Functions;
@@ -116,8 +117,9 @@ public class AnagramTest
         MutableList<RichIterable<String>> results = Lists.mutable.of();
         this.getWords().groupBy(Alphagram::new)
                 .multiValuesView().forEach(Procedures.ifTrue(iterable -> iterable.size() >= SIZE_THRESHOLD, results::add));
+        Procedure<String> procedure = Procedures.cast(LOGGER::info);
         results.sortThisByInt(iterable -> -iterable.size())
-                .forEach(Functions.bind(Procedures.cast(LOGGER::info), iterable -> iterable.size() + ": " + iterable));
+                .forEach(Functions.bind(procedure, iterable -> iterable.size() + ": " + iterable));
         Verify.assertIterableSize(SIZE_THRESHOLD, results.getLast());
     }
 
@@ -129,7 +131,8 @@ public class AnagramTest
         MutableList<MutableList<String>> results =
                 map.select(iterable -> iterable.size() >= SIZE_THRESHOLD, Lists.mutable.of())
                         .sortThisByInt(iterable -> -iterable.size());
-        results.forEach(Functions.bind(Procedures.cast(LOGGER::info), iterable -> iterable.size() + ": " + iterable));
+        Procedure<String> procedure = Procedures.cast(LOGGER::info);
+        results.forEach(Functions.bind(procedure, iterable -> iterable.size() + ": " + iterable));
         Assert.assertTrue(this.listContainsTestGroupAtElementsOneOrTwo(results));
         Verify.assertSize(SIZE_THRESHOLD, results.getLast());
     }

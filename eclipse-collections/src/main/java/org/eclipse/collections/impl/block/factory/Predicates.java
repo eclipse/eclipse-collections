@@ -112,7 +112,7 @@ public abstract class Predicates<T>
 
     public static <T> Predicates<T> or(Predicate<? super T>... predicates)
     {
-        return new OrIterablePredicate<>(Arrays.asList(predicates));
+        return new OrIterablePredicate<T>(Arrays.asList(predicates));
     }
 
     public static <T> Predicates<T> and(Iterable<? extends Predicate<? super T>> predicates)
@@ -127,7 +127,7 @@ public abstract class Predicates<T>
 
     public static <T> Predicates<T> and(Predicate<? super T>... predicates)
     {
-        return new AndIterablePredicate<>(Arrays.asList(predicates));
+        return new AndIterablePredicate<T>(Arrays.asList(predicates));
     }
 
     public static <T> Predicates<T> not(Predicate<T> predicate)
@@ -147,7 +147,7 @@ public abstract class Predicates<T>
 
     public static <T> Predicates<T> noneOf(Predicate<? super T>... operations)
     {
-        return new NoneOfIterablePredicate<>(Arrays.asList(operations));
+        return new NoneOfIterablePredicate<T>(Arrays.asList(operations));
     }
 
     public static <T> Predicates<T> noneOf(Iterable<? extends Predicate<? super T>> operations)
