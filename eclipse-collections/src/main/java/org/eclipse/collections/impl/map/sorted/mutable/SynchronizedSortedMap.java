@@ -12,6 +12,7 @@ package org.eclipse.collections.impl.map.sorted.mutable;
 
 import java.io.Serializable;
 import java.util.Comparator;
+import java.util.Optional;
 import java.util.SortedMap;
 
 import org.eclipse.collections.api.LazyIterable;
@@ -758,6 +759,24 @@ public class SynchronizedSortedMap<K, V>
         synchronized (this.lock)
         {
             return this.getDelegate().distinct();
+        }
+    }
+
+    @Override
+    public Optional<V> getFirstOptional()
+    {
+        synchronized (this.lock)
+        {
+            return this.getDelegate().getFirstOptional();
+        }
+    }
+
+    @Override
+    public Optional<V> getLastOptional()
+    {
+        synchronized (this.lock)
+        {
+            return this.getDelegate().getLastOptional();
         }
     }
 }

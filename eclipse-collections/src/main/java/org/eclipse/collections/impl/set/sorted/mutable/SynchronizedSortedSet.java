@@ -14,6 +14,7 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Optional;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.concurrent.ExecutorService;
@@ -195,6 +196,24 @@ public class SynchronizedSortedSet<T>
         synchronized (this.getLock())
         {
             return this.getDelegate().last();
+        }
+    }
+
+    @Override
+    public Optional<T> getFirstOptional()
+    {
+        synchronized (this.getLock())
+        {
+            return this.getDelegate().getFirstOptional();
+        }
+    }
+
+    @Override
+    public Optional<T> getLastOptional()
+    {
+        synchronized (this.getLock())
+        {
+            return this.getDelegate().getLastOptional();
         }
     }
 
