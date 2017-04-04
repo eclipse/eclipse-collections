@@ -92,7 +92,7 @@
             <name>Hiroshi Ito</name>
             <email>itohro@gmail.com</email>
         </developer>
-      
+
         <developer>
             <name>Nikhil J. Nanivadekar</name>
             <email>nikhil.nanivadekar@gs.com</email>
@@ -133,7 +133,6 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <maven.compiler.fork>true</maven.compiler.fork>
-        <maven.compiler.verbose>true</maven.compiler.verbose>
         <maven.compiler.meminitial>2048m</maven.compiler.meminitial>
         <maven.compiler.maxmem>2048m</maven.compiler.maxmem>
 
@@ -215,7 +214,7 @@
 
                 <plugin>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.3</version>
+                    <version>3.6.1</version>
                 </plugin>
 
                 <plugin>
@@ -240,7 +239,12 @@
 
                 <plugin>
                     <artifactId>maven-javadoc-plugin</artifactId>
-                    <version>2.10.3</version>
+                    <version>2.10.4</version>
+                </plugin>
+
+                <plugin>
+                    <artifactId>maven-plugin-plugin</artifactId>
+                    <version>3.5</version>
                 </plugin>
 
                 <plugin>
@@ -448,7 +452,9 @@
                     </links>
                     <destDir>${project.version}</destDir>
                     <additionalparam>-Xdoclint:none</additionalparam>
-                    <excludePackageNames>org.openjdk,org.eclipse.collections.impl.jmh,org.eclipse.collections.codegenerator</excludePackageNames>
+                    <excludePackageNames>
+                        org.openjdk,org.eclipse.collections.impl.jmh,org.eclipse.collections.codegenerator
+                    </excludePackageNames>
                 </configuration>
             </plugin>
 

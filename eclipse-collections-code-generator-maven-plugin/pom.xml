@@ -97,6 +97,9 @@
                 <artifactId>maven-enforcer-plugin</artifactId>
             </plugin>
 
+            <plugin>
+                <artifactId>maven-plugin-plugin</artifactId>
+            </plugin>
         </plugins>
         <pluginManagement>
             <plugins>
@@ -118,7 +121,7 @@
                                             maven-plugin-plugin
                                         </artifactId>
                                         <versionRange>
-                                            [3.2,)
+                                            [3.5,)
                                         </versionRange>
                                         <goals>
                                             <goal>descriptor</goal>
@@ -139,9 +142,7 @@
     <reporting>
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-plugin-plugin</artifactId>
-                <version>3.3</version>
             </plugin>
         </plugins>
     </reporting>
