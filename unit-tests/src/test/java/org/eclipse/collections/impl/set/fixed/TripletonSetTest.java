@@ -153,7 +153,18 @@ public class TripletonSetTest extends AbstractMemoryEfficientMutableSetTestCase
     @Test
     public void testClone()
     {
-        Verify.assertShallowClone(this.set);
+        try
+        {
+            Verify.assertShallowClone(this.set);
+        }
+        catch (Exception e)
+        {
+            // Suppress if a Java 9 specific exception related to reflection is thrown.
+            if (!e.getClass().getCanonicalName().equals("java.lang.reflect.InaccessibleObjectException"))
+            {
+                throw e;
+            }
+        }
         MutableSet<String> cloneSet = this.set.clone();
         Assert.assertNotSame(cloneSet, this.set);
         Verify.assertEqualsAndHashCode(UnifiedSet.newSetWith("1", "2", "3"), cloneSet);
@@ -188,7 +199,8 @@ public class TripletonSetTest extends AbstractMemoryEfficientMutableSetTestCase
         int[] indexSum = new int[1];
         MutableList<String> result = Lists.mutable.of();
         MutableSet<String> source = Sets.fixedSize.of("1", "2", "3");
-        source.forEachWithIndex((each, index) -> {
+        source.forEachWithIndex((each, index) ->
+        {
             result.add(each);
             indexSum[0] += index;
         });

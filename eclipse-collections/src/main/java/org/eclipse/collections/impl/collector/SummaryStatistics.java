@@ -30,7 +30,9 @@ import org.eclipse.collections.impl.factory.Maps;
  * A Summarizer can be used to aggregate statistics for multiple primitive attributes.
  *
  * @since 8.1
+ * @deprecated since 8.2 since it will not work with Java 9 natively. Will be removed in 9.0.0.
  */
+@Deprecated
 public class SummaryStatistics<T> implements Procedure<T>, Externalizable
 {
     private static final long serialVersionUID = 1L;

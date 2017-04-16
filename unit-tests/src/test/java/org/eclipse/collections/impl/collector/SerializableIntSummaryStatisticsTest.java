@@ -14,6 +14,8 @@ import java.util.IntSummaryStatistics;
 
 import org.eclipse.collections.impl.test.SerializeTestHelper;
 import org.junit.Assert;
+import org.junit.Assume;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class SerializableIntSummaryStatisticsTest
@@ -32,6 +34,8 @@ public class SerializableIntSummaryStatisticsTest
     @Test
     public void serialization()
     {
+        Assume.assumeTrue(System.getProperty("java.version").startsWith("1.8."));
+
         SerializableIntSummaryStatistics stats = SerializableIntSummaryStatistics.with(1, 2, 3);
         SerializableIntSummaryStatistics deserialized = SerializeTestHelper.serializeDeserialize(stats);
         Assert.assertTrue(stats.valuesEqual(deserialized));

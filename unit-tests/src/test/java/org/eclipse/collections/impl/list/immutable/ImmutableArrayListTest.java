@@ -186,11 +186,19 @@ public class ImmutableArrayListTest extends AbstractImmutableListTestCase
         Verify.assertThrows(ArrayIndexOutOfBoundsException.class, () -> list.get(-1));
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     @Override
     public void iteratorRemove()
     {
-        this.classUnderTest().iterator().remove();
+        try
+        {
+            this.classUnderTest().iterator().remove();
+            Assert.fail("Should not reach here! Exception should be thrown on previous line.");
+        }
+        catch (Exception e)
+        {
+            Assert.assertTrue(e instanceof IllegalStateException || e instanceof UnsupportedOperationException);
+        }
     }
 
     @Test

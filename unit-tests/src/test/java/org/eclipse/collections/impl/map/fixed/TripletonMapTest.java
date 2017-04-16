@@ -224,7 +224,7 @@ public class TripletonMapTest extends AbstractMemoryEfficientMutableMapTest
     public void getIfAbsentPutWith()
     {
         MutableMap<Integer, String> map = new TripletonMap<>(1, "1", 2, "2", 3, "3");
-    Verify.assertThrows(UnsupportedOperationException.class, () -> map.getIfAbsentPutWith(4, String::valueOf, 4));
+        Verify.assertThrows(UnsupportedOperationException.class, () -> map.getIfAbsentPutWith(4, String::valueOf, 4));
         Assert.assertEquals("1", map.getIfAbsentPutWith(1, String::valueOf, 1));
     }
 
@@ -292,7 +292,8 @@ public class TripletonMapTest extends AbstractMemoryEfficientMutableMapTest
     {
         MutableList<String> result = Lists.mutable.of();
         MutableMap<Integer, String> map = new TripletonMap<>(1, "One", 2, "Two", 3, "Three");
-        map.forEachWithIndex((value, index) -> {
+        map.forEachWithIndex((value, index) ->
+        {
             result.add(value);
             result.add(String.valueOf(index));
         });
@@ -360,7 +361,18 @@ public class TripletonMapTest extends AbstractMemoryEfficientMutableMapTest
     public void testClone()
     {
         MutableMap<Integer, String> map = new TripletonMap<>(1, "One", 2, "Two", 3, "Three");
-        Verify.assertShallowClone(map);
+        try
+        {
+            Verify.assertShallowClone(map);
+        }
+        catch (Exception e)
+        {
+            // Suppress if a Java 9 specific exception related to reflection is thrown.
+            if (!e.getClass().getCanonicalName().equals("java.lang.reflect.InaccessibleObjectException"))
+            {
+                throw e;
+            }
+        }
     }
 
     @Override

@@ -24,7 +24,9 @@ import org.eclipse.collections.api.block.procedure.primitive.DoubleProcedure;
  * Provides a serializable version of DoubleSummaryStatistics.
  *
  * @since 8.1
+ * @deprecated since 8.2 since it will not work with Java 9 natively. Will be removed in 9.0.0.
  */
+@Deprecated
 public class SerializableDoubleSummaryStatistics
         extends DoubleSummaryStatistics
         implements DoubleProcedure, Externalizable
@@ -40,12 +42,12 @@ public class SerializableDoubleSummaryStatistics
 
     static
     {
-        Field count;
-        Field sum;
-        Field sumCompensation;
-        Field simpleSum;
-        Field min;
-        Field max;
+        Field count = null;
+        Field sum = null;
+        Field sumCompensation = null;
+        Field simpleSum = null;
+        Field min = null;
+        Field max = null;
         try
         {
             count = DoubleSummaryStatistics.class.getDeclaredField("count");
@@ -61,14 +63,8 @@ public class SerializableDoubleSummaryStatistics
             max = DoubleSummaryStatistics.class.getDeclaredField("max");
             max.setAccessible(true);
         }
-        catch (SecurityException | NoSuchFieldException ignored)
+        catch (Exception ignored)
         {
-            count = null;
-            sum = null;
-            sumCompensation = null;
-            simpleSum = null;
-            min = null;
-            max = null;
         }
         COUNT = count;
         SUM = sum;

@@ -14,6 +14,8 @@ import java.util.DoubleSummaryStatistics;
 
 import org.eclipse.collections.impl.test.SerializeTestHelper;
 import org.junit.Assert;
+import org.junit.Assume;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class SerializableDoubleSummaryStatisticsTest
@@ -32,6 +34,8 @@ public class SerializableDoubleSummaryStatisticsTest
     @Test
     public void serialization()
     {
+        Assume.assumeTrue(System.getProperty("java.version").startsWith("1.8."));
+
         SerializableDoubleSummaryStatistics stats = SerializableDoubleSummaryStatistics.with(1.0, 2.0, 3.0);
         SerializableDoubleSummaryStatistics deserialized = SerializeTestHelper.serializeDeserialize(stats);
         Assert.assertTrue(stats.valuesEqual(deserialized));
