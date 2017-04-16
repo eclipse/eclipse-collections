@@ -13,7 +13,9 @@ package org.eclipse.collections.impl.set.sorted.immutable;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.ConcurrentModificationException;
 import java.util.Iterator;
+import java.util.Objects;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.concurrent.ExecutorService;
@@ -45,7 +47,6 @@ import org.eclipse.collections.impl.lazy.parallel.set.sorted.SelectSortedSetBatc
 import org.eclipse.collections.impl.lazy.parallel.set.sorted.SortedSetBatch;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.map.mutable.ConcurrentHashMap;
-import org.eclipse.collections.impl.set.sorted.mutable.TreeSortedSet;
 import org.eclipse.collections.impl.utility.ArrayIterate;
 import org.eclipse.collections.impl.utility.ListIterate;
 import org.eclipse.collections.impl.utility.internal.InternalArrayIterate;
@@ -60,25 +61,75 @@ final class ImmutableTreeSet<T>
     private final T[] delegate;
     private final Comparator<? super T> comparator;
 
-    private ImmutableTreeSet(SortedSet<T> sortedSet)
+    private ImmutableTreeSet(T[] input, Comparator<? super T> inputComparator, boolean isSortedAndUnique)
     {
-        this.delegate = (T[]) sortedSet.toArray();
-        this.comparator = sortedSet.comparator();
+        if (ArrayIterate.contains(input, null))
+        {
+            throw new NullPointerException("Input array contains nulls!");
+        }
+
+        if (isSortedAndUnique)
+        {
+            for (int i = input.length - 1; i > 0; i--)
+            {
+                int compare = inputComparator == null
+                        ? ((Comparable<? super T>) input[i - 1]).compareTo(input[i])
+                        : inputComparator.compare(input[i - 1], input[i]);
+                if (compare >= 0)
+                {
+                    throw new ConcurrentModificationException("Input Array expected to be sorted, but was not!");
+                }
+            }
+        }
+        else
+        {
+            if (input.length > 0)
+            {
+                Arrays.sort(input, inputComparator);
+                T[] unique = (T[]) new Object[input.length];
+                unique[0] = input[0];
+
+                if (inputComparator == null && !(input[0] instanceof Comparable))
+                {
+                    throw new ClassCastException("Comparator is null and input does not implement Comparable!");
+                }
+
+                int uniqueCount = 1;
+                for (int i = 1; i < input.length; i++)
+                {
+                    int compare = inputComparator == null
+                            ? ((Comparable<? super T>) unique[uniqueCount - 1]).compareTo(input[i])
+                            : inputComparator.compare(unique[uniqueCount - 1], input[i]);
+                    if (compare < 0)
+                    {
+                        unique[uniqueCount] = input[i];
+                        uniqueCount++;
+                    }
+                }
+                if (uniqueCount < input.length)
+                {
+                    input = Arrays.copyOf(unique, uniqueCount);
+                }
+            }
+        }
+
+        this.delegate = input;
+        this.comparator = inputComparator;
     }
 
     public static <T> ImmutableSortedSet<T> newSetWith(T... elements)
     {
-        return new ImmutableTreeSet<>(TreeSortedSet.newSetWith(elements));
+        return new ImmutableTreeSet<>(elements.clone(), null, false);
     }
 
     public static <T> ImmutableSortedSet<T> newSetWith(Comparator<? super T> comparator, T... elements)
     {
-        return new ImmutableTreeSet<>(TreeSortedSet.newSetWith(comparator, elements));
+        return new ImmutableTreeSet<>(elements.clone(), comparator, false);
     }
 
     public static <T> ImmutableSortedSet<T> newSet(SortedSet<T> set)
     {
-        return new ImmutableTreeSet<>(TreeSortedSet.newSet(set));
+        return new ImmutableTreeSet<>((T[]) set.toArray(), set.comparator(), true);
     }
 
     @Override
