@@ -12,6 +12,7 @@ package org.eclipse.collections.impl.block.procedure;
 
 import java.util.Comparator;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import org.eclipse.collections.api.block.procedure.Procedure;
 
@@ -40,5 +41,14 @@ public abstract class ComparatorProcedure<T> implements Procedure<T>
             throw new NoSuchElementException();
         }
         return this.result;
+    }
+
+    public Optional<T> getResultOptional()
+    {
+        if (!this.visitedAtLeastOnce)
+        {
+            return Optional.empty();
+        }
+        return Optional.of(this.result);
     }
 }

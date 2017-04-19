@@ -11,6 +11,7 @@
 package org.eclipse.collections.impl.block.procedure;
 
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.procedure.Procedure;
@@ -33,6 +34,15 @@ public class MinProcedure<T> implements Procedure<T>
             throw new NoSuchElementException();
         }
         return this.result;
+    }
+
+    public Optional<T> getResultOptional()
+    {
+        if (!this.visitedAtLeastOnce)
+        {
+            return Optional.empty();
+        }
+        return Optional.of(this.result);
     }
 
     @Override

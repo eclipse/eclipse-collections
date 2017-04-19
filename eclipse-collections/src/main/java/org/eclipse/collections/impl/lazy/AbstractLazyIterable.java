@@ -11,7 +11,9 @@
 package org.eclipse.collections.impl.lazy;
 
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.Iterator;
+import java.util.Optional;
 
 import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.LazyBooleanIterable;
@@ -54,6 +56,12 @@ import org.eclipse.collections.impl.block.factory.Functions;
 import org.eclipse.collections.impl.block.factory.Predicates;
 import org.eclipse.collections.impl.block.factory.PrimitiveFunctions;
 import org.eclipse.collections.impl.block.factory.Procedures2;
+import org.eclipse.collections.impl.block.procedure.MaxByProcedure;
+import org.eclipse.collections.impl.block.procedure.MaxComparatorProcedure;
+import org.eclipse.collections.impl.block.procedure.MaxProcedure;
+import org.eclipse.collections.impl.block.procedure.MinByProcedure;
+import org.eclipse.collections.impl.block.procedure.MinComparatorProcedure;
+import org.eclipse.collections.impl.block.procedure.MinProcedure;
 import org.eclipse.collections.impl.block.procedure.MutatingAggregationProcedure;
 import org.eclipse.collections.impl.block.procedure.NonMutatingAggregationProcedure;
 import org.eclipse.collections.impl.block.procedure.PartitionProcedure;
@@ -393,5 +401,53 @@ public abstract class AbstractLazyIterable<T>
     {
         MutableObjectDoubleMap<V> result = ObjectDoubleHashMap.newMap();
         return this.injectInto(result, PrimitiveFunctions.sumByDoubleFunction(groupBy, function));
+    }
+
+    @Override
+    public Optional<T> minOptional(Comparator<? super T> comparator)
+    {
+        MinComparatorProcedure<T> minComparatorProcedure = new MinComparatorProcedure<>(comparator);
+        this.forEach(minComparatorProcedure);
+        return minComparatorProcedure.getResultOptional();
+    }
+
+    @Override
+    public Optional<T> maxOptional(Comparator<? super T> comparator)
+    {
+        MaxComparatorProcedure<T> maxComparatorProcedure = new MaxComparatorProcedure<>(comparator);
+        this.forEach(maxComparatorProcedure);
+        return maxComparatorProcedure.getResultOptional();
+    }
+
+    @Override
+    public Optional<T> minOptional()
+    {
+        MinProcedure<T> minProcedure = new MinProcedure<>();
+        this.forEach(minProcedure);
+        return minProcedure.getResultOptional();
+    }
+
+    @Override
+    public Optional<T> maxOptional()
+    {
+        MaxProcedure<T> maxProcedure = new MaxProcedure<>();
+        this.forEach(maxProcedure);
+        return maxProcedure.getResultOptional();
+    }
+
+    @Override
+    public <V extends Comparable<? super V>> Optional<T> minByOptional(Function<? super T, ? extends V> function)
+    {
+        MinByProcedure<T, V> minByProcedure = new MinByProcedure<>(function);
+        this.forEach(minByProcedure);
+        return minByProcedure.getResultOptional();
+    }
+
+    @Override
+    public <V extends Comparable<? super V>> Optional<T> maxByOptional(Function<? super T, ? extends V> function)
+    {
+        MaxByProcedure<T, V> maxByProcedure = new MaxByProcedure<>(function);
+        this.forEach(maxByProcedure);
+        return maxByProcedure.getResultOptional();
     }
 }
