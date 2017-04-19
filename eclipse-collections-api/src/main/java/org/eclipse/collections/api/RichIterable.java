@@ -1254,7 +1254,11 @@ public interface RichIterable<T>
      *
      * @since 1.0
      */
-    T detectIfNone(Predicate<? super T> predicate, Function0<? extends T> function);
+    default T detectIfNone(Predicate<? super T> predicate, Function0<? extends T> function)
+    {
+        T result = this.detect(predicate);
+        return result == null ? function.value() : result;
+    }
 
     /**
      * Returns the first element of the iterable that evaluates to true for the specified predicate2 and parameter, or
@@ -1422,7 +1426,10 @@ public interface RichIterable<T>
      *
      * @since 1.0
      */
-    MutableList<T> toSortedList(Comparator<? super T> comparator);
+    default MutableList<T> toSortedList(Comparator<? super T> comparator)
+    {
+        return this.toList().sortThis(comparator);
+    }
 
     /**
      * Converts the collection to a MutableList implementation and sorts it based on the natural order of the
@@ -1528,6 +1535,7 @@ public interface RichIterable<T>
      * @since 1.0.
      */
     LazyIterable<T> asLazy();
+
     /**
      * Converts this iterable to an array.
      *
