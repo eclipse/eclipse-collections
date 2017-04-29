@@ -167,12 +167,6 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
     }
 
     @Override
-    public MutableList<T> toSortedList(Comparator<? super T> comparator)
-    {
-        return this.toList().sortThis(comparator);
-    }
-
-    @Override
     public <V extends Comparable<? super V>> MutableList<T> toSortedListBy(Function<? super T, ? extends V> function)
     {
         return this.toSortedList(Comparators.byFunction(function));
@@ -325,13 +319,6 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
     {
         this.forEach(new CollectIfProcedure<>(target, function, predicate));
         return target;
-    }
-
-    @Override
-    public T detectIfNone(Predicate<? super T> predicate, Function0<? extends T> function)
-    {
-        T result = this.detect(predicate);
-        return result == null ? function.value() : result;
     }
 
     @Override
