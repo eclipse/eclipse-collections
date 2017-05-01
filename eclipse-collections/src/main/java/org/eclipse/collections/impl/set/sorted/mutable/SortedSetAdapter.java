@@ -437,6 +437,12 @@ public final class SortedSetAdapter<T>
     }
 
     @Override
+    public <S, Z> MutableList<Z> zipWith(Iterable<S> that, Function2<T, S, Z> function)
+    {
+        return Iterate.zipWith(this.delegate, that, function, FastList.newList());
+    }
+
+    @Override
     public MutableSortedSet<Pair<T, Integer>> zipWithIndex()
     {
         Comparator<? super T> comparator = this.comparator();

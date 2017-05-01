@@ -38,6 +38,7 @@ import org.eclipse.collections.api.list.primitive.MutableIntList;
 import org.eclipse.collections.api.list.primitive.MutableLongList;
 import org.eclipse.collections.api.list.primitive.MutableShortList;
 import org.eclipse.collections.api.multimap.list.MutableListMultimap;
+import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.partition.list.PartitionMutableList;
 import org.eclipse.collections.api.tuple.Pair;
 
@@ -224,6 +225,9 @@ public interface MutableList<T>
 
     @Override
     <S> MutableList<Pair<T, S>> zip(Iterable<S> that);
+
+    @Override
+    <S, Z> MutableList<Z> zipWith(Iterable<S> that, Function2<T, S, Z> function);
 
     @Override
     MutableList<Pair<T, Integer>> zipWithIndex();

@@ -1659,6 +1659,33 @@ public final class ListIterate
     }
 
     /**
+     * @see Iterate#zipWith(Iterable, Iterable, Function2)
+     */
+    public static <X, Y, Z> MutableList<Z> zipWith(
+            List<X> list,
+            Iterable<Y> iterable,
+            Function2<X, Y, Z> function)
+    {
+        return ListIterate.zipWith(list, iterable, function, FastList.newList());
+    }
+
+    /**
+     * @see Iterate#zipWith(Iterable, Iterable, Function2, Collection)
+     */
+    public static <X, Y, Z, R extends Collection<Z>> R zipWith(
+            List<X> list,
+            Iterable<Y> iterable,
+            Function2<X, Y, Z> function,
+            R target)
+    {
+        if (list instanceof RandomAccess)
+        {
+            return RandomAccessListIterate.zipWith(list, iterable, function, target);
+        }
+        return IterableIterate.zip(list, iterable, function, target);
+    }
+
+    /**
      * @see Iterate#zipWithIndex(Iterable)
      */
     public static <T> MutableList<Pair<T, Integer>> zipWithIndex(List<T> list)

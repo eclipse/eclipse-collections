@@ -483,6 +483,18 @@ public class UnmodifiableMutableList<T>
     }
 
     @Override
+    public <S, Z> MutableList<Z> zipWith(Iterable<S> that, Function2<T, S, Z> function)
+    {
+        return this.getMutableList().zipWith(that, function);
+    }
+
+    @Override
+    public <S, Z, R extends Collection<Z>> R zipWith(Iterable<S> that, Function2<T, S, Z> function, R target)
+    {
+        return this.getMutableList().zipWith(that, function, target);
+    }
+
+    @Override
     public MutableList<Pair<T, Integer>> zipWithIndex()
     {
         return this.getMutableList().zipWithIndex();

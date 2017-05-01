@@ -606,6 +606,18 @@ public class ArrayStack<T> implements MutableStack<T>, Externalizable
     }
 
     @Override
+    public <S, Z> OrderedIterable<Z> zipWith(Iterable<S> that, Function2<T, S, Z> function)
+    {
+        return ArrayStack.newStackFromTopToBottom(this.delegate.asReversed().zipWith(that, function, FastList.newList()));
+    }
+
+    @Override
+    public <S, Z, R extends Collection<Z>> R zipWith(Iterable<S> that, Function2<T, S, Z> function, R target)
+    {
+        return this.delegate.asReversed().zipWith(that, function, target);
+    }
+
+    @Override
     public ArrayStack<Pair<T, Integer>> zipWithIndex()
     {
         int maxIndex = this.delegate.size() - 1;

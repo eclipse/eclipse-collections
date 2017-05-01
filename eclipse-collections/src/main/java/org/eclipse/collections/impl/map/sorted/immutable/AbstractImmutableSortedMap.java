@@ -410,6 +410,12 @@ public abstract class AbstractImmutableSortedMap<K, V>
     }
 
     @Override
+    public <S, Z> OrderedIterable<Z> zipWith(Iterable<S> that, Function2<V, S, Z> function)
+    {
+        return this.zipWith(that, function, FastList.newList(this.size())).toImmutable();
+    }
+
+    @Override
     public ImmutableList<Pair<V, Integer>> zipWithIndex()
     {
         return this.zipWithIndex(FastList.newList(this.size())).toImmutable();

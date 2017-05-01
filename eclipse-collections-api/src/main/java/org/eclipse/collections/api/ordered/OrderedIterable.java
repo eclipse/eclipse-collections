@@ -11,6 +11,7 @@
 package org.eclipse.collections.api.ordered;
 
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -324,6 +325,26 @@ public interface OrderedIterable<T> extends RichIterable<T>
      */
     @Override
     <S, R extends Collection<Pair<T, S>>> R zip(Iterable<S> that, R target);
+
+    /**
+     * Returns a {@code OrderedIterable} formed from this {@code OrderedIterable} and another {@code Iterable} by
+     * applying the {@code Function2}. The second {@code Iterable} should also be ordered.
+     * If one of the two {@code Iterable}s is longer than the other, its
+     * remaining elements are ignored.
+     *
+     * @param that The {@code Iterable} providing the second half of each result pair
+     * @param <S>  The type of the second half of the returned pairs
+     * @param function The function to be applied to each iteration
+     * @return A new {@code OrderedIterable} containing the result of applying the function on each corresponding
+     * element of this {@code OrderedIterable} and that. The length of the returned {@code OrderedIterable} is the
+     * minimum of the lengths of this {@code OrderedIterable} and that.
+     */
+    <S, Z> OrderedIterable<Z> zipWith(Iterable<S> that, Function2<T, S, Z> function);
+
+    /**
+     * Same as {@link #zipWith(Iterable, Function2)} but uses {@code target} for output.
+     */
+    <S, Z, R extends Collection<Z>> R zipWith(Iterable<S> that, Function2<T, S, Z> function, R target);
 
     @Override
     OrderedIterable<Pair<T, Integer>> zipWithIndex();

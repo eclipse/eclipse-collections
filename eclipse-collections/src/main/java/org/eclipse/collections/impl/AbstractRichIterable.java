@@ -103,6 +103,7 @@ import org.eclipse.collections.impl.factory.Maps;
 import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.factory.SortedMaps;
 import org.eclipse.collections.impl.factory.SortedSets;
+import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.utility.ArrayIterate;
 import org.eclipse.collections.impl.utility.Iterate;
 import org.eclipse.collections.impl.utility.LazyIterate;
@@ -567,6 +568,14 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
     public <S, R extends Collection<Pair<T, S>>> R zip(Iterable<S> that, R target)
     {
         return IterableIterate.zip(this, that, target);
+    }
+
+    public <S, Z, R extends Collection<Z>> R zipWith(
+            Iterable<S> that,
+            Function2<T, S, Z> function,
+            R target)
+    {
+        return IterableIterate.zipWith(this, that, function, target);
     }
 
     @Override

@@ -999,6 +999,32 @@ public final class IterableIterate
         return IteratorIterate.zip(xs.iterator(), ys.iterator(), target);
     }
 
+    public static <X, Y, Z> MutableList<Z> zipWith(
+            Iterable<X> xs,
+            Iterable<Y> ys,
+            Function2<X, Y, Z> function)
+    {
+        return IterableIterate.zipWith(xs, ys, function, FastList.newList());
+    }
+
+    public static <X, Y, Z, R extends Collection<Z>> R zipWith(
+            Iterable<X> xs,
+            Iterable<Y> ys,
+            Function2<X, Y, Z> function,
+            R target)
+    {
+        return IteratorIterate.zipWith(xs.iterator(), ys.iterator(), function, target);
+    }
+
+    public static <X, Y, Z, R extends Collection<Z>> R zip(
+            Iterable<X> xs,
+            Iterable<Y> ys,
+            Function2<X, Y, Z> function,
+            R target)
+    {
+        return IteratorIterate.zipWith(xs.iterator(), ys.iterator(), function, target);
+    }
+
     /**
      * @see Iterate#zipWithIndex(Iterable)
      */

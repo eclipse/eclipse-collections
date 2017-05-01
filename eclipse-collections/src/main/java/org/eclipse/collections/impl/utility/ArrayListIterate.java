@@ -1850,6 +1850,40 @@ public final class ArrayListIterate
     }
 
     /**
+     * @see Iterate#zipWith(Iterable, Iterable, Function2)
+     */
+    public static <X, Y, Z> MutableList<Z> zipWith(
+            ArrayList<X> xs,
+            Iterable<Y> ys,
+            Function2<X, Y, Z> function)
+    {
+        return ArrayListIterate.zipWith(xs, ys, function, FastList.newList());
+    }
+
+    /**
+     * @see Iterate#zipWith(Iterable, Iterable, Function2, Collection)
+     */
+    public static <X, Y, Z, R extends Collection<Z>> R zipWith(
+            ArrayList<X> xs,
+            Iterable<Y> ys,
+            Function2<X, Y, Z> function,
+            R targetCollection)
+    {
+        int size = xs.size();
+        if (ArrayListIterate.isOptimizableArrayList(xs, size))
+        {
+            Iterator<Y> yIterator = ys.iterator();
+            X[] elements = ArrayListIterate.getInternalArray(xs);
+            for (int i = 0; i < size && yIterator.hasNext(); i++)
+            {
+                targetCollection.add(function.apply(elements[i], yIterator.next()));
+            }
+            return targetCollection;
+        }
+        return RandomAccessListIterate.zipWith(xs, ys, function, targetCollection);
+    }
+
+    /**
      * @see Iterate#zipWithIndex(Iterable)
      */
     public static <T> MutableList<Pair<T, Integer>> zipWithIndex(ArrayList<T> list)

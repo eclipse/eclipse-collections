@@ -47,6 +47,7 @@ import org.eclipse.collections.api.list.primitive.ImmutableLongList;
 import org.eclipse.collections.api.list.primitive.ImmutableShortList;
 import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.api.multimap.sortedbag.ImmutableSortedBagMultimap;
+import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.partition.bag.sorted.PartitionImmutableSortedBag;
 import org.eclipse.collections.api.partition.bag.sorted.PartitionMutableSortedBag;
 import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
@@ -314,6 +315,54 @@ abstract class AbstractImmutableSortedBag<T>
                     if (iterator.hasNext())
                     {
                         target.add(Tuples.pair(each, iterator.next()));
+                    }
+                }
+            });
+        }
+        return target;
+    }
+
+    @Override
+    public <S, Z> OrderedIterable<Z> zipWith(Iterable<S> that, Function2<T, S, Z> function)
+    {
+        MutableList<Z> list = FastList.newList();
+        Iterator<S> iterator = that.iterator();
+
+        this.forEachWithOccurrences((each, parameter) -> {
+            for (int i = 0; i < parameter; i++)
+            {
+                if (iterator.hasNext())
+                {
+                    list.add(function.apply(each, iterator.next()));
+                }
+            }
+        });
+        return list.toImmutable();
+    }
+
+    @Override
+    public <S, Z, R extends Collection<Z>> R zipWith(Iterable<S> that, Function2<T, S, Z> function, R target)
+    {
+        Iterator<S> iterator = that.iterator();
+
+        if (target instanceof MutableBag)
+        {
+            MutableBag<Z> targetBag = (MutableBag<Z>) target;
+            this.forEachWithOccurrences((each, occurrences) -> {
+                if (iterator.hasNext())
+                {
+                    targetBag.addOccurrences(function.apply(each, iterator.next()), occurrences);
+                }
+            });
+        }
+        else
+        {
+            this.forEachWithOccurrences((each, occurrences) -> {
+                for (int i = 0; i < occurrences; i++)
+                {
+                    if (iterator.hasNext())
+                    {
+                        target.add(function.apply(each, iterator.next()));
                     }
                 }
             });

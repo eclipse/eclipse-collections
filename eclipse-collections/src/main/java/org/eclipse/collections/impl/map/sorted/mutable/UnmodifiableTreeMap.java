@@ -980,6 +980,12 @@ public class UnmodifiableTreeMap<K, V>
     }
 
     @Override
+    public <S, Z, R extends Collection<Z>> R zipWith(Iterable<S> that, Function2<V, S, Z> function, R target)
+    {
+        return this.getMutableSortedMap().zipWith(that, function, target);
+    }
+
+    @Override
     public <R extends Collection<Pair<V, Integer>>> R zipWithIndex(R target)
     {
         return this.getMutableSortedMap().zipWithIndex(target);
@@ -1121,6 +1127,12 @@ public class UnmodifiableTreeMap<K, V>
     public <S> MutableList<Pair<V, S>> zip(Iterable<S> that)
     {
         return this.getMutableSortedMap().zip(that);
+    }
+
+    @Override
+    public <S, Z> OrderedIterable<Z> zipWith(Iterable<S> that, Function2<V, S, Z> function)
+    {
+        return this.getMutableSortedMap().zipWith(that, function);
     }
 
     @Override

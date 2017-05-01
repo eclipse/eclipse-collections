@@ -913,6 +913,18 @@ final class ImmutableArrayStack<T> implements ImmutableStack<T>, Serializable
     }
 
     @Override
+    public <S, Z> OrderedIterable<Z> zipWith(Iterable<S> that, Function2<T, S, Z> function)
+    {
+        return ImmutableArrayStack.newStackFromTopToBottom(this.delegate.asReversed().zipWith(that, function, FastList.newList()).toList());
+    }
+
+    @Override
+    public <S, Z, R extends Collection<Z>> R zipWith(Iterable<S> that, Function2<T, S, Z> function, R target)
+    {
+        return this.delegate.asReversed().zipWith(that, function, target);
+    }
+
+    @Override
     public ImmutableStack<Pair<T, Integer>> zipWithIndex()
     {
         int maxIndex = this.delegate.size() - 1;

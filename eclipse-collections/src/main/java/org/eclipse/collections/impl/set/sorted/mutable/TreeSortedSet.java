@@ -531,6 +531,12 @@ public class TreeSortedSet<T> extends AbstractMutableCollection<T>
     }
 
     @Override
+    public <S, Z> OrderedIterable<Z> zipWith(Iterable<S> that, Function2<T, S, Z> function)
+    {
+        return Iterate.zipWith(this, that, function, FastList.newList());
+    }
+
+    @Override
     public TreeSortedSet<Pair<T, Integer>> zipWithIndex()
     {
         Comparator<? super T> comparator = this.comparator();

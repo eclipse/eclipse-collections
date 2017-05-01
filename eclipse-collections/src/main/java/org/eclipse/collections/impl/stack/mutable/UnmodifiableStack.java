@@ -308,6 +308,12 @@ public final class UnmodifiableStack<T> implements MutableStack<T>, Serializable
     }
 
     @Override
+    public <S, Z> OrderedIterable<Z> zipWith(Iterable<S> that, Function2<T, S, Z> function)
+    {
+        return this.mutableStack.zipWith(that, function);
+    }
+
+    @Override
     public MutableStack<Pair<T, Integer>> zipWithIndex()
     {
         return this.mutableStack.zipWithIndex();
@@ -831,6 +837,12 @@ public final class UnmodifiableStack<T> implements MutableStack<T>, Serializable
     public <S, R extends Collection<Pair<T, S>>> R zip(Iterable<S> that, R target)
     {
         return this.mutableStack.zip(that, target);
+    }
+
+    @Override
+    public <S, Z, R extends Collection<Z>> R zipWith(Iterable<S> that, Function2<T, S, Z> function, R target)
+    {
+        return this.mutableStack.zipWith(that, function, target);
     }
 
     @Override

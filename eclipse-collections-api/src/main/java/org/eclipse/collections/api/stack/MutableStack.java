@@ -33,6 +33,7 @@ import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.primitive.MutableObjectDoubleMap;
 import org.eclipse.collections.api.map.primitive.MutableObjectLongMap;
 import org.eclipse.collections.api.multimap.list.MutableListMultimap;
+import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.partition.stack.PartitionMutableStack;
 import org.eclipse.collections.api.stack.primitive.MutableBooleanStack;
 import org.eclipse.collections.api.stack.primitive.MutableByteStack;
@@ -177,6 +178,9 @@ public interface MutableStack<T> extends StackIterable<T>
 
     @Override
     <S> MutableStack<Pair<T, S>> zip(Iterable<S> that);
+
+    @Override
+    <S, Z> OrderedIterable<Z> zipWith(Iterable<S> that, Function2<T, S, Z> function);
 
     @Override
     MutableStack<Pair<T, Integer>> zipWithIndex();

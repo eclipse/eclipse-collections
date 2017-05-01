@@ -35,6 +35,7 @@ import org.eclipse.collections.api.list.primitive.MutableIntList;
 import org.eclipse.collections.api.list.primitive.MutableLongList;
 import org.eclipse.collections.api.list.primitive.MutableShortList;
 import org.eclipse.collections.api.multimap.sortedset.MutableSortedSetMultimap;
+import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.partition.set.sorted.PartitionMutableSortedSet;
 import org.eclipse.collections.api.set.MutableSetIterable;
 import org.eclipse.collections.api.set.SetIterable;
@@ -164,6 +165,9 @@ public interface MutableSortedSet<T>
     // TODO Return linked set
     @Override
     <S> MutableList<Pair<T, S>> zip(Iterable<S> that);
+
+    @Override
+    <S, Z> OrderedIterable<Z> zipWith(Iterable<S> that, Function2<T, S, Z> function);
 
     @Override
     MutableSortedSet<Pair<T, Integer>> zipWithIndex();

@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.Map;
@@ -25,6 +26,7 @@ import org.eclipse.collections.api.bag.Bag;
 import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
 import org.eclipse.collections.api.bag.sorted.SortedBag;
 import org.eclipse.collections.api.block.function.Function;
+import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.predicate.primitive.IntPredicate;
@@ -596,6 +598,18 @@ public class TreeBag<T>
             return (int) result;
         }
         return -1;
+    }
+
+    @Override
+    public <S, Z> MutableSortedSet<Z> zipWith(Iterable<S> that, Function2<T, S, Z> function)
+    {
+        return this.zipWith(that, function, TreeSortedSet.newSet());
+    }
+
+    @Override
+    public <S, Z, R extends Collection<Z>> R zipWith(Iterable<S> that, Function2<T, S, Z> function, R target)
+    {
+        return super.zipWith(that, function, target);
     }
 
     @Override

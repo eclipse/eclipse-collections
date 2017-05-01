@@ -19,6 +19,7 @@ import java.util.Set;
 
 import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.block.function.Function;
+import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
@@ -225,6 +226,12 @@ final class ImmutableEmptySortedSet<T>
 
     @Override
     public <S, R extends Collection<Pair<T, S>>> R zip(Iterable<S> that, R target)
+    {
+        return target;
+    }
+
+    @Override
+    public <S, Z, R extends Collection<Z>> R zipWith(Iterable<S> that, Function2<T, S, Z> function, R target)
     {
         return target;
     }

@@ -45,6 +45,7 @@ import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
 import org.eclipse.collections.api.list.ImmutableList;
+import org.eclipse.collections.api.list.ListIterable;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.list.ParallelListIterable;
 import org.eclipse.collections.api.list.primitive.MutableBooleanList;
@@ -1122,6 +1123,18 @@ public abstract class AbstractMutableList<T>
     public <S> MutableList<Pair<T, S>> zip(Iterable<S> that)
     {
         return ListIterate.zip(this, that);
+    }
+
+    @Override
+    public <S, Z> MutableList<Z> zipWith(Iterable<S> that, Function2<T, S, Z> function)
+    {
+        return ListIterate.zipWith(this, that, function);
+    }
+
+    @Override
+    public <S, Z, R extends Collection<Z>> R zipWith(Iterable<S> that, Function2<T, S, Z> function, R target)
+    {
+        return ListIterate.zipWith(this, that, function, target);
     }
 
     @Override

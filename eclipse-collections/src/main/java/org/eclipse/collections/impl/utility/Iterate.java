@@ -67,6 +67,7 @@ import org.eclipse.collections.api.multimap.MutableMultimap;
 import org.eclipse.collections.api.multimap.bag.BagMultimap;
 import org.eclipse.collections.api.multimap.list.ListMultimap;
 import org.eclipse.collections.api.multimap.set.SetMultimap;
+import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.partition.PartitionIterable;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.api.tuple.Twin;
@@ -3597,6 +3598,53 @@ public final class Iterate
             return IterableIterate.zip(xs, ys, targetCollection);
         }
         throw new IllegalArgumentException("Cannot perform a zip on null");
+    }
+
+    /**
+     * @see OrderedIterable#zipWith(Iterable, Function2)
+     */
+    public static <X, Y, Z> Collection<Z> zipWith(
+            Iterable<X> xs, 
+            Iterable<Y> ys,
+            Function2<X, Y, Z> function)
+    {
+        if (xs instanceof ArrayList)
+        {
+            return ArrayListIterate.zipWith((ArrayList<X>) xs, ys, function);
+        }
+        if (xs instanceof RandomAccess)
+        {
+            return RandomAccessListIterate.zipWith((List<X>) xs, ys, function);
+        }
+        if (xs != null)
+        {
+            return IterableIterate.zipWith(xs, ys, function);
+        }
+        throw new IllegalArgumentException("Cannot perform a zipWith on null");
+    }
+
+    /**
+     * @see OrderedIterable#zipWith(Iterable, Function2, Collection)
+     */
+    public static <X, Y, Z, R extends Collection<Z>> R zipWith(
+            Iterable<X> xs,
+            Iterable<Y> ys,
+            Function2<X, Y, Z> function,
+            R targetCollection)
+    {
+        if (xs instanceof ArrayList)
+        {
+            return ArrayListIterate.zipWith((ArrayList<X>) xs, ys, function, targetCollection);
+        }
+        if (xs instanceof RandomAccess)
+        {
+            return RandomAccessListIterate.zipWith((List<X>) xs, ys, function, targetCollection);
+        }
+        if (xs != null)
+        {
+            return IterableIterate.zipWith(xs, ys, function, targetCollection);
+        }
+        throw new IllegalArgumentException("Cannot perform a zipWith on null");
     }
 
     /**

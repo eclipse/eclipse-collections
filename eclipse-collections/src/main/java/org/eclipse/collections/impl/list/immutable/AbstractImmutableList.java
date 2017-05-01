@@ -770,6 +770,12 @@ abstract class AbstractImmutableList<T>
     }
 
     @Override
+    public <S, Z> OrderedIterable<Z> zipWith(Iterable<S> that, Function2<T, S, Z> function)
+    {
+        return this.zipWith(that, function, FastList.newList()).toImmutable();
+    }
+
+    @Override
     public ImmutableList<Pair<T, Integer>> zipWithIndex()
     {
         return this.zipWithIndex(FastList.newList()).toImmutable();

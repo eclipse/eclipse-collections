@@ -1603,6 +1603,18 @@ public final class MultiReaderFastList<T>
         }
 
         @Override
+        public <S, Z> MutableList<Z> zipWith(Iterable<S> that, Function2<T, S, Z> function)
+        {
+            return this.getDelegate().zipWith(that, function);
+        }
+
+        @Override
+        public <S, Z, R extends Collection<Z>> R zipWith(Iterable<S> that, Function2<T, S, Z> function, R target)
+        {
+            return this.getDelegate().zipWith(that, function, target);
+        }
+
+        @Override
         public MutableList<Pair<T, Integer>> zipWithIndex()
         {
             return this.getDelegate().zipWithIndex();
@@ -1792,6 +1804,35 @@ public final class MultiReaderFastList<T>
         try
         {
             return this.delegate.zip(that);
+        }
+        finally
+        {
+            this.unlockReadLock();
+        }
+    }
+
+    @Override
+    public <S, Z> MutableList<Z> zipWith(Iterable<S> that, Function2<T, S, Z> function)
+    {
+        this.acquireReadLock();
+        try
+        {
+            return this.delegate.zipWith(that, function);
+        }
+        finally
+        {
+            this.unlockReadLock();
+        }
+
+    }
+
+    @Override
+    public <S, Z, R extends Collection<Z>> R zipWith(Iterable<S> that, Function2<T, S, Z> function, R target)
+    {
+        this.acquireReadLock();
+        try
+        {
+            return this.delegate.zipWith(that, function, target);
         }
         finally
         {

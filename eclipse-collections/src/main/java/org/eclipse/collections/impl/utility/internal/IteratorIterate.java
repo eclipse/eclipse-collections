@@ -1161,6 +1161,22 @@ public final class IteratorIterate
     }
 
     /**
+     * @see Iterate#zipWith(Iterable, Iterable, Function2, Collection)
+     */
+    public static <X, Y, Z, R extends Collection<Z>> R zipWith(
+            Iterator<X> xs,
+            Iterator<Y> ys,
+            Function2<X, Y, Z> function,
+            R target)
+    {
+        while (xs.hasNext() && ys.hasNext())
+        {
+            target.add(function.apply(xs.next(), ys.next()));
+        }
+        return target;
+    }
+
+    /**
      * @see Iterate#zipWithIndex(Iterable, Collection)
      */
     public static <T, R extends Collection<Pair<T, Integer>>> R zipWithIndex(Iterator<T> iterator, R target)

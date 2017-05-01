@@ -2056,6 +2056,35 @@ public class IterateTest
     }
 
     @Test
+    public void zipWith() {
+        this.zipWith(FastList.newListWith("1", "2", "3", "4", "5", "6", "7"));
+        this.zipWith(Arrays.asList("1", "2", "3", "4", "5", "6", "7"));
+        this.zipWith(new HashSet<>(FastList.newListWith("1", "2", "3", "4", "5", "6", "7")));
+        this.zipWith(FastList.newListWith("1", "2", "3", "4", "5", "6", "7").asLazy());
+        this.zipWith(new ArrayList<>(Interval.oneTo(101).collect(String::valueOf).toList()));
+        Verify.assertThrows(IllegalArgumentException.class, () -> Iterate.zipWith(
+                null,
+                null,
+                (Function2<Object, Object, Object>) (argument1, argument2) -> null));
+        Verify.assertThrows(IllegalArgumentException.class, () -> Iterate.zipWith(
+                null,
+                null,
+                null,
+                null));
+    }
+
+    private void zipWith(Iterable<String> iterable) {
+        List<Object> nulls = Collections.nCopies(Iterate.sizeOf(iterable), null);
+        Collection<Pair<String, Object>> pairs = Iterate.zipWith(iterable, nulls, (Function2<String, Object, Pair<String, Object>>) (argument1, argument2) -> Tuples.pair(argument1, argument2));
+        Assert.assertEquals(
+                UnifiedSet.newSet(iterable),
+                Iterate.collect(pairs, (Function<Pair<String, ?>, String>) Pair::getOne, UnifiedSet.newSet()));
+        Assert.assertEquals(
+                nulls,
+                Iterate.collect(pairs, (Function<Pair<?, Object>, Object>) Pair::getTwo, Lists.mutable.of()));
+    }
+
+    @Test
     public void zipWithIndex()
     {
         this.zipWithIndex(FastList.newListWith("1", "2", "3", "4", "5", "6", "7"));

@@ -1586,6 +1586,29 @@ public final class RandomAccessListIterate
         return target;
     }
 
+    public static <X, Y, Z> MutableList<Z> zipWith(
+            List<X> list,
+            Iterable<Y> iterable,
+            Function2<X, Y, Z> function)
+    {
+        return RandomAccessListIterate.zipWith(list, iterable, function, FastList.newList());
+    }
+
+    public static <X, Y, Z, R extends Collection<Z>> R zipWith(
+            List<X> list,
+            Iterable<Y> iterable,
+            Function2<X, Y, Z> function,
+            R target)
+    {
+        Iterator<Y> yIterator = iterable.iterator();
+        int size = list.size();
+        for (int i = 0; i < size && yIterator.hasNext(); i++)
+        {
+            target.add(function.apply(list.get(i), yIterator.next()));
+        }
+        return target;
+    }
+
     public static <T> MutableList<Pair<T, Integer>> zipWithIndex(List<T> list)
     {
         return RandomAccessListIterate.zipWithIndex(list, FastList.newList());

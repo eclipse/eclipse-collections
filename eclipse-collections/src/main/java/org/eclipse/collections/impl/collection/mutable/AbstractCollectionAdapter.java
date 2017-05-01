@@ -917,6 +917,14 @@ public abstract class AbstractCollectionAdapter<T>
         return Iterate.zip(this.getDelegate(), that, target);
     }
 
+    public <S, Z, R extends Collection<Z>> R zipWith(
+            Iterable<S> that,
+            Function2<T, S, Z> function,
+            R target)
+    {
+        return Iterate.zipWith(this.getDelegate(), that, function, target);
+    }
+
     @Override
     public MutableCollection<Pair<T, Integer>> zipWithIndex()
     {

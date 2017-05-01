@@ -11,6 +11,7 @@
 package org.eclipse.collections.impl.map.sorted.mutable;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.Optional;
 import java.util.SortedMap;
@@ -465,6 +466,24 @@ public class SynchronizedSortedMap<K, V>
         synchronized (this.lock)
         {
             return this.getDelegate().zip(that);
+        }
+    }
+
+    @Override
+    public <S, Z> OrderedIterable<Z> zipWith(Iterable<S> that, Function2<V, S, Z> function)
+    {
+        synchronized (this.lock)
+        {
+            return this.getDelegate().zipWith(that, function);
+        }
+    }
+
+    @Override
+    public <S, Z, R extends Collection<Z>> R zipWith(Iterable<S> that, Function2<V, S, Z> function, R target)
+    {
+        synchronized (this.lock)
+        {
+            return this.getDelegate().zipWith(that, function, target);
         }
     }
 

@@ -308,6 +308,18 @@ public class UnmodifiableSortedSet<T>
     }
 
     @Override
+    public <S, Z> OrderedIterable<Z> zipWith(Iterable<S> that, Function2<T, S, Z> function)
+    {
+        return this.getSortedSet().zipWith(that, function);
+    }
+
+    @Override
+    public <S, Z, R extends Collection<Z>> R zipWith(Iterable<S> that, Function2<T, S, Z> function, R target)
+    {
+        return this.getSortedSet().zipWith(that, function, target);
+    }
+
+    @Override
     public MutableSortedSet<Pair<T, Integer>> zipWithIndex()
     {
         return this.getSortedSet().zipWithIndex();
