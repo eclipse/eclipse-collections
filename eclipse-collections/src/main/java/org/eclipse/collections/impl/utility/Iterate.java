@@ -3604,7 +3604,7 @@ public final class Iterate
      * @see OrderedIterable#zipWith(Iterable, Function2)
      */
     public static <X, Y, Z> Collection<Z> zipWith(
-            Iterable<X> xs, 
+            Iterable<X> xs,
             Iterable<Y> ys,
             Function2<X, Y, Z> function)
     {

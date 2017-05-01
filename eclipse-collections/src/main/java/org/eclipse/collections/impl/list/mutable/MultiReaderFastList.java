@@ -1823,7 +1823,6 @@ public final class MultiReaderFastList<T>
         {
             this.unlockReadLock();
         }
-
     }
 
     @Override
