@@ -2056,7 +2056,8 @@ public class IterateTest
     }
 
     @Test
-    public void zipWith() {
+    public void zipWith()
+    {
         this.zipWith(FastList.newListWith("1", "2", "3", "4", "5", "6", "7"));
         this.zipWith(Arrays.asList("1", "2", "3", "4", "5", "6", "7"));
         this.zipWith(new HashSet<>(FastList.newListWith("1", "2", "3", "4", "5", "6", "7")));
@@ -2073,7 +2074,8 @@ public class IterateTest
                 null));
     }
 
-    private void zipWith(Iterable<String> iterable) {
+    private void zipWith(Iterable<String> iterable)
+    {
         List<Object> nulls = Collections.nCopies(Iterate.sizeOf(iterable), null);
         Collection<Pair<String, Object>> pairs = Iterate.zipWith(iterable, nulls, (Function2<String, Object, Pair<String, Object>>) (argument1, argument2) -> Tuples.pair(argument1, argument2));
         Assert.assertEquals(
