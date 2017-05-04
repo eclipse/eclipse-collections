@@ -11,6 +11,7 @@
 package org.eclipse.collections.impl.block;
 
 import java.io.IOException;
+import java.util.function.BiFunction;
 
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function0;
@@ -32,6 +33,7 @@ import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.utility.ListIterate;
 import org.eclipse.collections.impl.utility.MapIterate;
+import org.junit.Assert;
 import org.junit.Test;
 
 import static org.eclipse.collections.impl.factory.Iterables.iList;
@@ -604,5 +606,19 @@ public class CheckedBlocksTest
             }
         };
         mList("test").selectWith(block, null);
+    }
+
+    @Test
+    public void checkedFunction2SafeValue() throws Exception
+    {
+        CheckedFunction2<Integer, Integer, Integer> checkedFunction2 = new CheckedFunction2<Integer, Integer, Integer>()
+        {
+            @Override
+            public Integer safeValue(Integer argument1, Integer argument2) throws Exception
+            {
+                return argument1 + argument2;
+            }
+        };
+        Assert.assertEquals(Integer.valueOf(5), checkedFunction2.safeValue(2, 3));
     }
 }
