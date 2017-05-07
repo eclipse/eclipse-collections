@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2017 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -833,6 +833,39 @@ public abstract class AbstractSortedSetTestCase extends AbstractCollectionTestCa
     }
 
     @Test
+    public void detectLastIndex()
+    {
+        MutableSortedSet<Integer> integers1 = this.newWith(1, 2, 3, 4);
+        Assert.assertEquals(3, integers1.detectLastIndex(integer -> integer % 2 == 0));
+        Assert.assertEquals(2, integers1.detectLastIndex(integer -> integer % 2 != 0));
+        Assert.assertEquals(-1, integers1.detectLastIndex(integer -> integer % 5 == 0));
+
+        MutableSortedSet<Integer> integers2 = this.newWith(Comparators.reverseNaturalOrder(), 4, 3, 2, 1);
+        Assert.assertEquals(3, integers2.detectLastIndex(integer -> integer % 2 == 0));
+        Assert.assertEquals(2, integers2.detectLastIndex(integer -> integer % 2 != 0));
+        Assert.assertEquals(-1, integers2.detectLastIndex(integer -> integer % 5 == 0));
+    }
+
+    @Test
+    public void toReversed()
+    {
+        MutableSortedSet<Integer> integers = this.newWith(1, 2, 3, 4);
+        MutableSortedSet<Integer> reversed = integers.toReversed();
+        Assert.assertEquals(
+                SortedSets.mutable.with(Comparators.reverseNaturalOrder(), 3, 2, 1),
+                reversed);
+    }
+
+    @Test
+    public void reverseForEach()
+    {
+        MutableList<Integer> list = Lists.mutable.empty();
+        MutableSortedSet<Integer> integers = this.newWith(1, 2, 3, 4);
+        integers.reverseForEach(list::add);
+        Assert.assertEquals(Lists.mutable.with(4, 3, 2, 1), list);
+    }
+
+    @Test
     public void take()
     {
         MutableSortedSet<Integer> integers1 = this.newWith(1, 2, 3, 4);
@@ -877,5 +910,21 @@ public abstract class AbstractSortedSetTestCase extends AbstractCollectionTestCa
     public void drop_throws()
     {
         this.newWith(1, 2, 3).drop(-1);
+    }
+
+    @Test
+    public void getFirstOptional()
+    {
+        Assert.assertEquals(Integer.valueOf(1), this.newWith(1, 2).getFirstOptional().get());
+        Assert.assertTrue(this.newWith(1, 2).getFirstOptional().isPresent());
+        Assert.assertFalse(this.newWith().getFirstOptional().isPresent());
+    }
+
+    @Test
+    public void getLastOptional()
+    {
+        Assert.assertEquals(Integer.valueOf(2), this.newWith(1, 2).getLastOptional().get());
+        Assert.assertTrue(this.newWith(1, 2).getLastOptional().isPresent());
+        Assert.assertFalse(this.newWith().getLastOptional().isPresent());
     }
 }

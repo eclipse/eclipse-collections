@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2017 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -12,6 +12,7 @@ package org.eclipse.collections.api.map;
 
 import java.util.Map;
 
+import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.block.function.Function2;
@@ -79,6 +80,24 @@ public interface ImmutableMapIterable<K, V> extends MapIterable<K, V>
 
     @Override
     <S> ImmutableCollection<S> selectInstancesOf(Class<S> clazz);
+
+    /**
+     * @since 9.0
+     */
+    @Override
+    default <V1> ImmutableBag<V1> countBy(Function<? super V, ? extends V1> function)
+    {
+        return this.asLazy().<V1>collect(function).toBag().toImmutable();
+    }
+
+    /**
+     * @since 9.0
+     */
+    @Override
+    default <V1, P> ImmutableBag<V1> countByWith(Function2<? super V, ? super P, ? extends V1> function, P parameter)
+    {
+        return this.asLazy().<P, V1>collectWith(function, parameter).toBag().toImmutable();
+    }
 
     @Override
     <V1> ImmutableMultimap<V1, V> groupBy(Function<? super V, ? extends V1> function);

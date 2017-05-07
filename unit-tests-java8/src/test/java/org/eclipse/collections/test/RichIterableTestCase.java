@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2017 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -28,6 +28,7 @@ import org.eclipse.collections.api.IntIterable;
 import org.eclipse.collections.api.LongIterable;
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.ShortIterable;
+import org.eclipse.collections.api.bag.Bag;
 import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.block.function.Function;
@@ -1514,6 +1515,36 @@ public interface RichIterableTestCase extends IterableTestCase
         Multimap<Integer, Integer> actualWithTarget = iterable.groupByEach(groupByEachFunction, target2);
         assertEquals(expectedGroupByEach, actualWithTarget.toMap());
         assertSame(target2, actualWithTarget);
+    }
+
+    /**
+     * @since 9.0
+     */
+    @Test
+    default void RichIterable_countBy()
+    {
+        RichIterable<Integer> integers = this.newWith(1, 2, 3, 4, 5, 6);
+        Bag<Integer> evensAndOdds = integers.countBy(each -> Integer.valueOf(each % 2));
+        Assert.assertEquals(3, evensAndOdds.occurrencesOf(1));
+        Assert.assertEquals(3, evensAndOdds.occurrencesOf(0));
+        Bag<Integer> evensAndOdds2 = integers.countBy(each -> Integer.valueOf(each % 2), Bags.mutable.empty());
+        Assert.assertEquals(3, evensAndOdds2.occurrencesOf(1));
+        Assert.assertEquals(3, evensAndOdds2.occurrencesOf(0));
+    }
+
+    /**
+     * @since 9.0
+     */
+    @Test
+    default void RichIterable_countByWith()
+    {
+        RichIterable<Integer> integers = this.newWith(1, 2, 3, 4, 5, 6);
+        Bag<Integer> evensAndOdds = integers.countByWith((each, parm) -> Integer.valueOf(each % parm), 2);
+        Assert.assertEquals(3, evensAndOdds.occurrencesOf(1));
+        Assert.assertEquals(3, evensAndOdds.occurrencesOf(0));
+        Bag<Integer> evensAndOdds2 = integers.countByWith((each, parm) -> Integer.valueOf(each % parm), 2, Bags.mutable.empty());
+        Assert.assertEquals(3, evensAndOdds2.occurrencesOf(1));
+        Assert.assertEquals(3, evensAndOdds2.occurrencesOf(0));
     }
 
     @Test

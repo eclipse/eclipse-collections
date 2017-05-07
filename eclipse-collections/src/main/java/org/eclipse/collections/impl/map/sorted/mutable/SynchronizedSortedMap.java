@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2017 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -225,173 +225,115 @@ public class SynchronizedSortedMap<K, V>
     @Override
     public MutableSortedMap<K, V> tap(Procedure<? super V> procedure)
     {
-        synchronized (this.lock)
-        {
-            this.forEach(procedure);
-            return this;
-        }
+        return (MutableSortedMap<K, V>) super.tap(procedure);
     }
 
     @Override
     public MutableList<V> select(Predicate<? super V> predicate)
     {
-        synchronized (this.lock)
-        {
-            return this.getDelegate().select(predicate);
-        }
+        return (MutableList<V>) super.select(predicate);
     }
 
     @Override
     public <P> MutableList<V> selectWith(Predicate2<? super V, ? super P> predicate, P parameter)
     {
-        synchronized (this.lock)
-        {
-            return this.getDelegate().selectWith(predicate, parameter);
-        }
+        return (MutableList<V>) super.selectWith(predicate, parameter);
     }
 
     @Override
     public MutableList<V> reject(Predicate<? super V> predicate)
     {
-        synchronized (this.lock)
-        {
-            return this.getDelegate().reject(predicate);
-        }
+        return (MutableList<V>) super.reject(predicate);
     }
 
     @Override
     public <P> MutableList<V> rejectWith(Predicate2<? super V, ? super P> predicate, P parameter)
     {
-        synchronized (this.lock)
-        {
-            return this.getDelegate().rejectWith(predicate, parameter);
-        }
+        return (MutableList<V>) super.rejectWith(predicate, parameter);
     }
 
     @Override
     public PartitionMutableList<V> partition(Predicate<? super V> predicate)
     {
-        synchronized (this.lock)
-        {
-            return this.getDelegate().partition(predicate);
-        }
+        return (PartitionMutableList<V>) super.partition(predicate);
     }
 
     @Override
     public MutableList<Pair<V, Integer>> zipWithIndex()
     {
-        synchronized (this.lock)
-        {
-            return this.getDelegate().zipWithIndex();
-        }
+        return (MutableList<Pair<V, Integer>>) super.zipWithIndex();
     }
 
     @Override
     public <P> PartitionMutableList<V> partitionWith(Predicate2<? super V, ? super P> predicate, P parameter)
     {
-        synchronized (this.lock)
-        {
-            return this.getDelegate().partitionWith(predicate, parameter);
-        }
+        return (PartitionMutableList<V>) super.partitionWith(predicate, parameter);
     }
 
     @Override
     public <S> MutableList<S> selectInstancesOf(Class<S> clazz)
     {
-        synchronized (this.lock)
-        {
-            return this.getDelegate().selectInstancesOf(clazz);
-        }
+        return (MutableList<S>) super.selectInstancesOf(clazz);
     }
 
     @Override
     public <R> MutableList<R> collect(Function<? super V, ? extends R> function)
     {
-        synchronized (this.lock)
-        {
-            return this.getDelegate().collect(function);
-        }
+        return (MutableList<R>) super.collect(function);
     }
 
     @Override
     public MutableBooleanList collectBoolean(BooleanFunction<? super V> booleanFunction)
     {
-        synchronized (this.lock)
-        {
-            return this.getDelegate().collectBoolean(booleanFunction);
-        }
+        return (MutableBooleanList) super.collectBoolean(booleanFunction);
     }
 
     @Override
     public MutableByteList collectByte(ByteFunction<? super V> byteFunction)
     {
-        synchronized (this.lock)
-        {
-            return this.getDelegate().collectByte(byteFunction);
-        }
+        return (MutableByteList) super.collectByte(byteFunction);
     }
 
     @Override
     public MutableCharList collectChar(CharFunction<? super V> charFunction)
     {
-        synchronized (this.lock)
-        {
-            return this.getDelegate().collectChar(charFunction);
-        }
+        return (MutableCharList) super.collectChar(charFunction);
     }
 
     @Override
     public MutableDoubleList collectDouble(DoubleFunction<? super V> doubleFunction)
     {
-        synchronized (this.lock)
-        {
-            return this.getDelegate().collectDouble(doubleFunction);
-        }
+        return (MutableDoubleList) super.collectDouble(doubleFunction);
     }
 
     @Override
     public MutableFloatList collectFloat(FloatFunction<? super V> floatFunction)
     {
-        synchronized (this.lock)
-        {
-            return this.getDelegate().collectFloat(floatFunction);
-        }
+        return (MutableFloatList) super.collectFloat(floatFunction);
     }
 
     @Override
     public MutableIntList collectInt(IntFunction<? super V> intFunction)
     {
-        synchronized (this.lock)
-        {
-            return this.getDelegate().collectInt(intFunction);
-        }
+        return (MutableIntList) super.collectInt(intFunction);
     }
 
     @Override
     public MutableLongList collectLong(LongFunction<? super V> longFunction)
     {
-        synchronized (this.lock)
-        {
-            return this.getDelegate().collectLong(longFunction);
-        }
+        return (MutableLongList) super.collectLong(longFunction);
     }
 
     @Override
     public MutableShortList collectShort(ShortFunction<? super V> shortFunction)
     {
-        synchronized (this.lock)
-        {
-            return this.getDelegate().collectShort(shortFunction);
-        }
+        return (MutableShortList) super.collectShort(shortFunction);
     }
 
     @Override
     public <P, VV> MutableList<VV> collectWith(Function2<? super V, ? super P, ? extends VV> function, P parameter)
     {
-        synchronized (this.lock)
-        {
-            return this.getDelegate().collectWith(function, parameter);
-        }
+        return (MutableList<VV>) super.<P, VV>collectWith(function, parameter);
     }
 
     @Override
@@ -399,82 +341,37 @@ public class SynchronizedSortedMap<K, V>
             Predicate<? super V> predicate,
             Function<? super V, ? extends R> function)
     {
-        synchronized (this.lock)
-        {
-            return this.getDelegate().collectIf(predicate, function);
-        }
+        return (MutableList<R>) super.collectIf(predicate, function);
     }
 
     @Override
     public <R> MutableList<R> flatCollect(Function<? super V, ? extends Iterable<R>> function)
     {
-        synchronized (this.lock)
-        {
-            return this.getDelegate().flatCollect(function);
-        }
-    }
-
-    @Override
-    public String makeString()
-    {
-        synchronized (this.lock)
-        {
-            return this.getDelegate().makeString();
-        }
-    }
-
-    @Override
-    public String makeString(String separator)
-    {
-        synchronized (this.lock)
-        {
-            return this.getDelegate().makeString(separator);
-        }
-    }
-
-    @Override
-    public String makeString(String start, String separator, String end)
-    {
-        synchronized (this.lock)
-        {
-            return this.getDelegate().makeString(start, separator, end);
-        }
+        return (MutableList<R>) super.flatCollect(function);
     }
 
     @Override
     public <KK> MutableListMultimap<KK, V> groupBy(Function<? super V, ? extends KK> function)
     {
-        synchronized (this.lock)
-        {
-            return this.getDelegate().groupBy(function);
-        }
+        return (MutableListMultimap<KK, V>) super.<KK>groupBy(function);
     }
 
     @Override
     public <KK> MutableListMultimap<KK, V> groupByEach(Function<? super V, ? extends Iterable<KK>> function)
     {
-        synchronized (this.lock)
-        {
-            return this.getDelegate().groupByEach(function);
-        }
+        return (MutableListMultimap<KK, V>) super.groupByEach(function);
     }
 
     @Override
     public <S> MutableList<Pair<V, S>> zip(Iterable<S> that)
     {
-        synchronized (this.lock)
-        {
-            return this.getDelegate().zip(that);
-        }
+        return (MutableList<Pair<V, S>>) super.zip(that);
     }
 
     @Override
     public <VV> MutableMap<VV, V> groupByUniqueKey(Function<? super V, ? extends VV> function)
     {
-        synchronized (this.lock)
-        {
-            return this.getDelegate().groupByUniqueKey(function);
-        }
+        return (MutableMap<VV, V>) super.groupByUniqueKey(function);
     }
 
     @Override

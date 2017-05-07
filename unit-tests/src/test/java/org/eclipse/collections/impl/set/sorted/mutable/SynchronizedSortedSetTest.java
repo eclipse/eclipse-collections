@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2017 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -35,7 +35,7 @@ import org.junit.Test;
 public class SynchronizedSortedSetTest extends AbstractSynchronizedCollectionTestCase
 {
     @Override
-    protected <T> MutableCollection<T> newWith(T... littleElements)
+    protected <T> MutableSortedSet<T> newWith(T... littleElements)
     {
         return new SynchronizedSortedSet<>(SortedSetAdapter.adapt(new TreeSet<>(FastList.newListWith(littleElements))));
     }
@@ -144,5 +144,21 @@ public class SynchronizedSortedSetTest extends AbstractSynchronizedCollectionTes
     public void max_null_safe()
     {
         super.max_null_safe();
+    }
+
+    @Test
+    public void getFirstOptional()
+    {
+        Assert.assertEquals(Integer.valueOf(1), this.newWith(1, 2).getFirstOptional().get());
+        Assert.assertTrue(this.newWith(1, 2).getFirstOptional().isPresent());
+        Assert.assertFalse(this.newWith().getFirstOptional().isPresent());
+    }
+
+    @Test
+    public void getLastOptional()
+    {
+        Assert.assertEquals(Integer.valueOf(2), this.newWith(1, 2).getLastOptional().get());
+        Assert.assertTrue(this.newWith(1, 2).getLastOptional().isPresent());
+        Assert.assertFalse(this.newWith().getLastOptional().isPresent());
     }
 }

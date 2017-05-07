@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2017 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -19,9 +19,12 @@ import java.util.NoSuchElementException;
 import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.Bag;
+import org.eclipse.collections.api.bag.ImmutableBag;
+import org.eclipse.collections.api.bag.MutableBagIterable;
 import org.eclipse.collections.api.bag.sorted.ImmutableSortedBag;
 import org.eclipse.collections.api.bag.sorted.SortedBag;
 import org.eclipse.collections.api.block.function.Function;
+import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.predicate.primitive.IntPredicate;
@@ -38,6 +41,7 @@ import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 import org.eclipse.collections.api.stack.MutableStack;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.EmptyIterator;
+import org.eclipse.collections.impl.factory.Bags;
 import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.Maps;
 import org.eclipse.collections.impl.factory.SortedBags;
@@ -194,6 +198,42 @@ class ImmutableEmptySortedBag<T>
     public ImmutableSortedBag<T> tap(Procedure<? super T> procedure)
     {
         return this;
+    }
+
+    /**
+     * @since 9.0
+     */
+    @Override
+    public <V> ImmutableBag<V> countBy(Function<? super T, ? extends V> function)
+    {
+        return Bags.immutable.empty();
+    }
+
+    /**
+     * @since 9.0
+     */
+    @Override
+    public <V, R extends MutableBagIterable<V>> R countBy(Function<? super T, ? extends V> function, R target)
+    {
+        return target;
+    }
+
+    /**
+     * @since 9.0
+     */
+    @Override
+    public <V, P> ImmutableBag<V> countByWith(Function2<? super T, ? super P, ? extends V> function, P parameter)
+    {
+        return Bags.immutable.empty();
+    }
+
+    /**
+     * @since 9.0
+     */
+    @Override
+    public <V, P, R extends MutableBagIterable<V>> R countByWith(Function2<? super T, ? super P, ? extends V> function, P parameter, R target)
+    {
+        return target;
     }
 
     @Override

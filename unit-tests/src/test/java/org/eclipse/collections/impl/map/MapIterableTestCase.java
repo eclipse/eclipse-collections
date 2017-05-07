@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2017 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -989,6 +989,36 @@ public abstract class MapIterableTestCase
                 Character.valueOf('T'),
                 Character.valueOf('w'),
                 Character.valueOf('o')));
+    }
+
+    /**
+     * @since 9.0
+     */
+    @Test
+    public void countBy()
+    {
+        MapIterable<String, Integer> map = this.newMapWithKeysValues("1", 1, "2", 2, "3", 3, "4", 4);
+        Bag<Integer> evensAndOdds = map.countBy(each -> Integer.valueOf(each % 2));
+        Assert.assertEquals(2, evensAndOdds.occurrencesOf(1));
+        Assert.assertEquals(2, evensAndOdds.occurrencesOf(0));
+        Bag<Integer> evensAndOdds2 = map.countBy(each -> Integer.valueOf(each % 2), Bags.mutable.empty());
+        Assert.assertEquals(2, evensAndOdds2.occurrencesOf(1));
+        Assert.assertEquals(2, evensAndOdds2.occurrencesOf(0));
+    }
+
+    /**
+     * @since 9.0
+     */
+    @Test
+    public void countByWith()
+    {
+        MapIterable<String, Integer> map = this.newMapWithKeysValues("1", 1, "2", 2, "3", 3, "4", 4);
+        Bag<Integer> evensAndOdds = map.countByWith((each, parm) -> Integer.valueOf(each % parm), 2);
+        Assert.assertEquals(2, evensAndOdds.occurrencesOf(1));
+        Assert.assertEquals(2, evensAndOdds.occurrencesOf(0));
+        Bag<Integer> evensAndOdds2 = map.countByWith((each, parm) -> Integer.valueOf(each % parm), 2, Bags.mutable.empty());
+        Assert.assertEquals(2, evensAndOdds2.occurrencesOf(1));
+        Assert.assertEquals(2, evensAndOdds2.occurrencesOf(0));
     }
 
     @Test

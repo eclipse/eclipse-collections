@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2017 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -119,6 +119,24 @@ public interface ImmutableBag<T> extends UnsortedBag<T>, ImmutableBagIterable<T>
 
     @Override
     <V> ImmutableBag<V> flatCollect(Function<? super T, ? extends Iterable<V>> function);
+
+    /**
+     * @since 9.0
+     */
+    @Override
+    default <V> ImmutableBag<V> countBy(Function<? super T, ? extends V> function)
+    {
+        return this.collect(function);
+    }
+
+    /**
+     * @since 9.0
+     */
+    @Override
+    default <V, P> ImmutableBag<V> countByWith(Function2<? super T, ? super P, ? extends V> function, P parameter)
+    {
+        return this.collectWith(function, parameter);
+    }
 
     @Override
     <V> ImmutableBagMultimap<V, T> groupBy(Function<? super T, ? extends V> function);

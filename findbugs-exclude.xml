@@ -230,6 +230,7 @@
             <Class name="org.eclipse.collections.impl.bag.sorted.mutable.UnmodifiableSortedBag" />
             <Class name="org.eclipse.collections.impl.collection.mutable.SynchronizedMutableCollection" />
             <Class name="org.eclipse.collections.impl.collection.mutable.UnmodifiableMutableCollection" />
+            <Class name="org.eclipse.collections.impl.SynchronizedRichIterable" />
             <Class name="org.eclipse.collections.impl.list.mutable.SynchronizedMutableList" />
             <Class name="org.eclipse.collections.impl.list.mutable.UnmodifiableMutableList" />
             <Class name="org.eclipse.collections.impl.set.mutable.SynchronizedMutableSet" />

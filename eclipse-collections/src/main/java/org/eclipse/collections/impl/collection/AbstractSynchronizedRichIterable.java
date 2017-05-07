@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2017 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -16,9 +16,19 @@ import java.util.Iterator;
 import java.util.Optional;
 
 import net.jcip.annotations.GuardedBy;
+import org.eclipse.collections.api.BooleanIterable;
+import org.eclipse.collections.api.ByteIterable;
+import org.eclipse.collections.api.CharIterable;
+import org.eclipse.collections.api.DoubleIterable;
+import org.eclipse.collections.api.FloatIterable;
+import org.eclipse.collections.api.IntIterable;
 import org.eclipse.collections.api.LazyIterable;
+import org.eclipse.collections.api.LongIterable;
 import org.eclipse.collections.api.RichIterable;
+import org.eclipse.collections.api.ShortIterable;
+import org.eclipse.collections.api.bag.Bag;
 import org.eclipse.collections.api.bag.MutableBag;
+import org.eclipse.collections.api.bag.MutableBagIterable;
 import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function0;
@@ -51,8 +61,12 @@ import org.eclipse.collections.api.collection.primitive.MutableShortCollection;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MapIterable;
 import org.eclipse.collections.api.map.MutableMap;
+import org.eclipse.collections.api.map.primitive.ObjectDoubleMap;
+import org.eclipse.collections.api.map.primitive.ObjectLongMap;
 import org.eclipse.collections.api.map.sorted.MutableSortedMap;
+import org.eclipse.collections.api.multimap.Multimap;
 import org.eclipse.collections.api.multimap.MutableMultimap;
+import org.eclipse.collections.api.partition.PartitionIterable;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 import org.eclipse.collections.api.tuple.Pair;
@@ -238,11 +252,29 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
     }
 
     @Override
+    public RichIterable<T> select(Predicate<? super T> predicate)
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.select(predicate);
+        }
+    }
+
+    @Override
     public <R extends Collection<T>> R select(Predicate<? super T> predicate, R target)
     {
         synchronized (this.lock)
         {
             return this.delegate.select(predicate, target);
+        }
+    }
+
+    @Override
+    public <P> RichIterable<T> selectWith(Predicate2<? super T, ? super P> predicate, P parameter)
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.selectWith(predicate, parameter);
         }
     }
 
@@ -255,6 +287,24 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         synchronized (this.lock)
         {
             return this.delegate.selectWith(predicate, parameter, targetCollection);
+        }
+    }
+
+    @Override
+    public RichIterable<T> reject(Predicate<? super T> predicate)
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.reject(predicate);
+        }
+    }
+
+    @Override
+    public <P> RichIterable<T> rejectWith(Predicate2<? super T, ? super P> predicate, P parameter)
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.rejectWith(predicate, parameter);
         }
     }
 
@@ -276,6 +326,51 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         synchronized (this.lock)
         {
             return this.delegate.rejectWith(predicate, parameter, targetCollection);
+        }
+    }
+
+    @Override
+    public PartitionIterable<T> partition(Predicate<? super T> predicate)
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.partition(predicate);
+        }
+    }
+
+    @Override
+    public <P> PartitionIterable<T> partitionWith(Predicate2<? super T, ? super P> predicate, P parameter)
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.partitionWith(predicate, parameter);
+        }
+    }
+
+    @Override
+    public <S> RichIterable<S> selectInstancesOf(Class<S> clazz)
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.selectInstancesOf(clazz);
+        }
+    }
+
+    @Override
+    public <V> RichIterable<V> collect(Function<? super T, ? extends V> function)
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.collect(function);
+        }
+    }
+
+    @Override
+    public BooleanIterable collectBoolean(BooleanFunction<? super T> booleanFunction)
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.collectBoolean(booleanFunction);
         }
     }
 
@@ -939,6 +1034,54 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    /**
+     * @since 9.0
+     */
+    @Override
+    public <V> Bag<V> countBy(Function<? super T, ? extends V> function)
+    {
+        synchronized (this.lock)
+        {
+            return this.getDelegate().countBy(function);
+        }
+    }
+
+    /**
+     * @since 9.0
+     */
+    @Override
+    public <V, R extends MutableBagIterable<V>> R countBy(Function<? super T, ? extends V> function, R target)
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.countBy(function, target);
+        }
+    }
+
+    /**
+     * @since 9.0
+     */
+    @Override
+    public <V, P> Bag<V> countByWith(Function2<? super T, ? super P, ? extends V> function, P parameter)
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.countByWith(function, parameter);
+        }
+    }
+
+    /**
+     * @since 9.0
+     */
+    @Override
+    public <V, P, R extends MutableBagIterable<V>> R countByWith(Function2<? super T, ? super P, ? extends V> function, P parameter, R target)
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.countByWith(function, parameter, target);
+        }
+    }
+
     @Override
     public <V, R extends MutableMultimap<V, T>> R groupBy(
             Function<? super T, ? extends V> function,
@@ -1014,6 +1157,196 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         synchronized (this.lock)
         {
             return this.delegate.getOnly();
+        }
+    }
+
+    @Override
+    public ByteIterable collectByte(ByteFunction<? super T> byteFunction)
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.collectByte(byteFunction);
+        }
+    }
+
+    @Override
+    public CharIterable collectChar(CharFunction<? super T> charFunction)
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.collectChar(charFunction);
+        }
+    }
+
+    @Override
+    public DoubleIterable collectDouble(DoubleFunction<? super T> doubleFunction)
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.collectDouble(doubleFunction);
+        }
+    }
+
+    @Override
+    public FloatIterable collectFloat(FloatFunction<? super T> floatFunction)
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.collectFloat(floatFunction);
+        }
+    }
+
+    @Override
+    public IntIterable collectInt(IntFunction<? super T> intFunction)
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.collectInt(intFunction);
+        }
+    }
+
+    @Override
+    public LongIterable collectLong(LongFunction<? super T> longFunction)
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.collectLong(longFunction);
+        }
+    }
+
+    @Override
+    public ShortIterable collectShort(ShortFunction<? super T> shortFunction)
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.collectShort(shortFunction);
+        }
+    }
+
+    @Override
+    public <P, V> RichIterable<V> collectWith(Function2<? super T, ? super P, ? extends V> function, P parameter)
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.collectWith(function, parameter);
+        }
+    }
+
+    @Override
+    public <V> RichIterable<V> collectIf(Predicate<? super T> predicate, Function<? super T, ? extends V> function)
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.collectIf(predicate, function);
+        }
+    }
+
+    @Override
+    public <V> RichIterable<V> flatCollect(Function<? super T, ? extends Iterable<V>> function)
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.flatCollect(function);
+        }
+    }
+
+    @Override
+    public <V> ObjectLongMap<V> sumByInt(Function<? super T, ? extends V> groupBy, IntFunction<? super T> function)
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.sumByInt(groupBy, function);
+        }
+    }
+
+    @Override
+    public <V> ObjectDoubleMap<V> sumByFloat(Function<? super T, ? extends V> groupBy, FloatFunction<? super T> function)
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.sumByFloat(groupBy, function);
+        }
+    }
+
+    @Override
+    public <V> ObjectLongMap<V> sumByLong(Function<? super T, ? extends V> groupBy, LongFunction<? super T> function)
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.sumByLong(groupBy, function);
+        }
+    }
+
+    @Override
+    public <V> ObjectDoubleMap<V> sumByDouble(Function<? super T, ? extends V> groupBy, DoubleFunction<? super T> function)
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.sumByDouble(groupBy, function);
+        }
+    }
+
+    @Override
+    public <V> Multimap<V, T> groupBy(Function<? super T, ? extends V> function)
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.groupBy(function);
+        }
+    }
+
+    @Override
+    public <V> Multimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function)
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.groupByEach(function);
+        }
+    }
+
+    @Override
+    public <S> RichIterable<Pair<T, S>> zip(Iterable<S> that)
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.zip(that);
+        }
+    }
+
+    @Override
+    public RichIterable<Pair<T, Integer>> zipWithIndex()
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.zipWithIndex();
+        }
+    }
+
+    @Override
+    public <K, V> MapIterable<K, V> aggregateInPlaceBy(Function<? super T, ? extends K> groupBy, Function0<? extends V> zeroValueFactory, Procedure2<? super V, ? super T> mutatingAggregator)
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.aggregateInPlaceBy(groupBy, zeroValueFactory, mutatingAggregator);
+        }
+    }
+
+    @Override
+    public <K, V> MapIterable<K, V> aggregateBy(Function<? super T, ? extends K> groupBy, Function0<? extends V> zeroValueFactory, Function2<? super V, ? super T, ? extends V> nonMutatingAggregator)
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.aggregateBy(groupBy, zeroValueFactory, nonMutatingAggregator);
+        }
+    }
+
+    @Override
+    public RichIterable<T> tap(Procedure<? super T> procedure)
+    {
+        synchronized (this.lock)
+        {
+            this.forEach(procedure);
+            return this;
         }
     }
 }

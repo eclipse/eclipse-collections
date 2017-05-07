@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2017 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -310,164 +310,109 @@ public class SynchronizedSortedSet<T>
     @Override
     public MutableSortedSet<T> tap(Procedure<? super T> procedure)
     {
-        synchronized (this.getLock())
-        {
-            this.forEach(procedure);
-            return this;
-        }
+        return (MutableSortedSet<T>) super.tap(procedure);
     }
 
     @Override
     public MutableSortedSet<T> select(Predicate<? super T> predicate)
     {
-        synchronized (this.getLock())
-        {
-            return this.getDelegate().select(predicate);
-        }
+        return (MutableSortedSet<T>) super.select(predicate);
     }
 
     @Override
     public <P> MutableSortedSet<T> selectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
-        synchronized (this.getLock())
-        {
-            return this.getDelegate().selectWith(predicate, parameter);
-        }
+        return (MutableSortedSet<T>) super.selectWith(predicate, parameter);
     }
 
     @Override
     public MutableSortedSet<T> reject(Predicate<? super T> predicate)
     {
-        synchronized (this.getLock())
-        {
-            return this.getDelegate().reject(predicate);
-        }
+        return (MutableSortedSet<T>) super.reject(predicate);
     }
 
     @Override
     public <P> MutableSortedSet<T> rejectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
-        synchronized (this.getLock())
-        {
-            return this.getDelegate().rejectWith(predicate, parameter);
-        }
+        return (MutableSortedSet<T>) super.rejectWith(predicate, parameter);
     }
 
     @Override
     public PartitionMutableSortedSet<T> partition(Predicate<? super T> predicate)
     {
-        synchronized (this.getLock())
-        {
-            return this.getDelegate().partition(predicate);
-        }
+        return (PartitionMutableSortedSet<T>) super.partition(predicate);
     }
 
     @Override
     public <P> PartitionMutableSortedSet<T> partitionWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
-        synchronized (this.getLock())
-        {
-            return this.getDelegate().partitionWith(predicate, parameter);
-        }
+        return (PartitionMutableSortedSet<T>) super.partitionWith(predicate, parameter);
     }
 
     @Override
     public <S> MutableSortedSet<S> selectInstancesOf(Class<S> clazz)
     {
-        synchronized (this.getLock())
-        {
-            return this.getDelegate().selectInstancesOf(clazz);
-        }
+        return (MutableSortedSet<S>) super.selectInstancesOf(clazz);
     }
 
     @Override
     public <V> MutableList<V> collect(Function<? super T, ? extends V> function)
     {
-        synchronized (this.getLock())
-        {
-            return this.getDelegate().collect(function);
-        }
+        return (MutableList<V>) super.<V>collect(function);
     }
 
     @Override
     public MutableBooleanList collectBoolean(BooleanFunction<? super T> booleanFunction)
     {
-        synchronized (this.getLock())
-        {
-            return this.getDelegate().collectBoolean(booleanFunction);
-        }
+        return (MutableBooleanList) super.collectBoolean(booleanFunction);
     }
 
     @Override
     public MutableByteList collectByte(ByteFunction<? super T> byteFunction)
     {
-        synchronized (this.getLock())
-        {
-            return this.getDelegate().collectByte(byteFunction);
-        }
+        return (MutableByteList) super.collectByte(byteFunction);
     }
 
     @Override
     public MutableCharList collectChar(CharFunction<? super T> charFunction)
     {
-        synchronized (this.getLock())
-        {
-            return this.getDelegate().collectChar(charFunction);
-        }
+        return (MutableCharList) super.collectChar(charFunction);
     }
 
     @Override
     public MutableDoubleList collectDouble(DoubleFunction<? super T> doubleFunction)
     {
-        synchronized (this.getLock())
-        {
-            return this.getDelegate().collectDouble(doubleFunction);
-        }
+        return (MutableDoubleList) super.collectDouble(doubleFunction);
     }
 
     @Override
     public MutableFloatList collectFloat(FloatFunction<? super T> floatFunction)
     {
-        synchronized (this.getLock())
-        {
-            return this.getDelegate().collectFloat(floatFunction);
-        }
+        return (MutableFloatList) super.collectFloat(floatFunction);
     }
 
     @Override
     public MutableIntList collectInt(IntFunction<? super T> intFunction)
     {
-        synchronized (this.getLock())
-        {
-            return this.getDelegate().collectInt(intFunction);
-        }
+        return (MutableIntList) super.collectInt(intFunction);
     }
 
     @Override
     public MutableLongList collectLong(LongFunction<? super T> longFunction)
     {
-        synchronized (this.getLock())
-        {
-            return this.getDelegate().collectLong(longFunction);
-        }
+        return (MutableLongList) super.collectLong(longFunction);
     }
 
     @Override
     public MutableShortList collectShort(ShortFunction<? super T> shortFunction)
     {
-        synchronized (this.getLock())
-        {
-            return this.getDelegate().collectShort(shortFunction);
-        }
+        return (MutableShortList) super.collectShort(shortFunction);
     }
 
     @Override
     public <P, V> MutableList<V> collectWith(Function2<? super T, ? super P, ? extends V> function, P parameter)
     {
-        synchronized (this.getLock())
-        {
-            return this.getDelegate().collectWith(function, parameter);
-        }
+        return (MutableList<V>) super.<P, V>collectWith(function, parameter);
     }
 
     @Override
@@ -475,55 +420,37 @@ public class SynchronizedSortedSet<T>
             Predicate<? super T> predicate,
             Function<? super T, ? extends V> function)
     {
-        synchronized (this.getLock())
-        {
-            return this.getDelegate().collectIf(predicate, function);
-        }
+        return (MutableList<V>) super.<V>collectIf(predicate, function);
     }
 
     @Override
     public <V> MutableList<V> flatCollect(Function<? super T, ? extends Iterable<V>> function)
     {
-        synchronized (this.getLock())
-        {
-            return this.getDelegate().flatCollect(function);
-        }
+        return (MutableList<V>) super.flatCollect(function);
     }
 
     @Override
     public <V> MutableSortedSetMultimap<V, T> groupBy(Function<? super T, ? extends V> function)
     {
-        synchronized (this.getLock())
-        {
-            return this.getDelegate().groupBy(function);
-        }
+        return (MutableSortedSetMultimap<V, T>) super.<V>groupBy(function);
     }
 
     @Override
     public <V> MutableSortedSetMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function)
     {
-        synchronized (this.getLock())
-        {
-            return this.getDelegate().groupByEach(function);
-        }
+        return (MutableSortedSetMultimap<V, T>) super.groupByEach(function);
     }
 
     @Override
     public <S> MutableList<Pair<T, S>> zip(Iterable<S> that)
     {
-        synchronized (this.getLock())
-        {
-            return this.getDelegate().zip(that);
-        }
+        return (MutableList<Pair<T, S>>) super.zip(that);
     }
 
     @Override
     public MutableSortedSet<Pair<T, Integer>> zipWithIndex()
     {
-        synchronized (this.getLock())
-        {
-            return this.getDelegate().zipWithIndex();
-        }
+        return (MutableSortedSet<Pair<T, Integer>>) super.zipWithIndex();
     }
 
     @Override
