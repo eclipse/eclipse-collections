@@ -154,4 +154,10 @@ public class ArrayListAdapterTest extends AbstractListTestCase
         Verify.assertEmpty(sublist);
         Verify.assertContainsAll(list, "A", "D");
     }
+
+    @Test
+    public void adapt_null()
+    {
+        Verify.assertThrows(NullPointerException.class, () -> ArrayListAdapter.adapt(null));
+    }
 }
