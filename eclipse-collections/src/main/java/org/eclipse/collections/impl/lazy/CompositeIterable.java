@@ -122,6 +122,12 @@ public final class CompositeIterable<E>
     }
 
     @Override
+    public int size()
+    {
+       return (int) this.iterables.sumOfInt(Iterate::sizeOf);
+    }
+
+    @Override
     public Iterator<E> iterator()
     {
         return new CompositeIterator(this.iterables);
