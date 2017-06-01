@@ -48,6 +48,7 @@ import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.set.sorted.mutable.TreeSortedSet;
 import org.eclipse.collections.impl.tuple.Tuples;
 import org.junit.Assert;
+import org.junit.Assume;
 import org.junit.Test;
 
 /**
@@ -408,6 +409,7 @@ public class VerifyTest
     @Test
     public void shallowClone1()
     {
+        Assume.assumeTrue(System.getProperty("java.version").startsWith("1.8."));
         try
         {
             Cloneable unclonable = new Cloneable()
@@ -425,6 +427,7 @@ public class VerifyTest
     @Test
     public void shallowClone2()
     {
+        Assume.assumeTrue(System.getProperty("java.version").startsWith("1.8."));
         Cloneable simpleCloneable = new SimpleCloneable();
         Verify.assertShallowClone(simpleCloneable);
     }

@@ -65,6 +65,12 @@ public class SerializableDoubleSummaryStatistics
         }
         catch (Exception ignored)
         {
+            count = null;
+            sum = null;
+            sumCompensation = null;
+            simpleSum = null;
+            min = null;
+            max = null;
         }
         COUNT = count;
         SUM = sum;
