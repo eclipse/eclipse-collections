@@ -3846,6 +3846,10 @@ public final class Verify extends Assert
         }
     }
 
+    /**
+     * @deprecated since 8.2.0 as will not work with Java 9
+     */
+    @Deprecated
     public static void assertShallowClone(Cloneable object)
     {
         try
@@ -3858,6 +3862,10 @@ public final class Verify extends Assert
         }
     }
 
+    /**
+     * @deprecated since 8.2.0 as will not work with Java 9
+     */
+    @Deprecated
     public static void assertShallowClone(String itemName, Cloneable object)
     {
         try

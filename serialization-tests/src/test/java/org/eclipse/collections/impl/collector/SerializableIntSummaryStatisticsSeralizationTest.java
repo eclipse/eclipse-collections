@@ -13,6 +13,7 @@ package org.eclipse.collections.impl.collector;
 import org.eclipse.collections.impl.test.SerializeTestHelper;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
+import org.junit.Assume;
 import org.junit.Test;
 
 public class SerializableIntSummaryStatisticsSeralizationTest
@@ -20,6 +21,8 @@ public class SerializableIntSummaryStatisticsSeralizationTest
     @Test
     public void serializedForm()
     {
+        Assume.assumeTrue(System.getProperty("java.version").startsWith("1.8."));
+
         Verify.assertSerializedForm(
                 1L,
                 "rO0ABXNyAEdvcmcuZWNsaXBzZS5jb2xsZWN0aW9ucy5pbXBsLmNvbGxlY3Rvci5TZXJpYWxpemFi\n"

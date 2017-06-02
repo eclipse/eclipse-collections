@@ -57,6 +57,10 @@ public class SerializableIntSummaryStatistics
         }
         catch (Exception ignored)
         {
+            count = null;
+            sum = null;
+            min = null;
+            max = null;
         }
         COUNT = count;
         SUM = sum;

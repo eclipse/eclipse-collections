@@ -57,6 +57,10 @@ public class SerializableLongSummaryStatistics
         }
         catch (Exception e)
         {
+            count = null;
+            sum = null;
+            min = null;
+            max = null;
         }
         COUNT = count;
         SUM = sum;

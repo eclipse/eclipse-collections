@@ -109,6 +109,8 @@ public final class ArrayListIterate
         }
         catch (Exception ignored)
         {
+            data = null;
+            size = null;
         }
         ELEMENT_DATA_FIELD = data;
         SIZE_FIELD = size;
