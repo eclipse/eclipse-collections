@@ -13,6 +13,10 @@ package org.eclipse.collections.impl.bag.immutable;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
+import java.util.Spliterator;
+import java.util.Spliterators;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.bag.ImmutableBagIterable;
@@ -45,6 +49,42 @@ public abstract class AbstractImmutableBagIterable<T>
         extends AbstractBag<T>
         implements ImmutableBagIterable<T>
 {
+    /**
+     * @since 8.1
+     */
+    @Override
+    public Collection<T> castToCollection()
+    {
+        return this;
+    }
+
+    /**
+     * @since 8.1
+     */
+    @Override
+    public Spliterator<T> spliterator()
+    {
+        return Spliterators.spliterator(this, Spliterator.IMMUTABLE);
+    }
+
+    /**
+     * @since 8.1
+     */
+    @Override
+    public Stream<T> stream()
+    {
+        return StreamSupport.stream(this.spliterator(), false);
+    }
+
+    /**
+     * @since 8.1
+     */
+    @Override
+    public Stream<T> parallelStream()
+    {
+        return StreamSupport.stream(this.spliterator(), true);
+    }
+
     @Override
     public <K, V> ImmutableMap<K, V> aggregateInPlaceBy(
             Function<? super T, ? extends K> groupBy,

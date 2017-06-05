@@ -46,7 +46,9 @@ import org.eclipse.collections.impl.block.factory.PrimitiveFunctions;
 import org.eclipse.collections.impl.block.factory.Procedures;
 import org.eclipse.collections.impl.block.function.AddFunction;
 import org.eclipse.collections.impl.block.function.PassThruFunction0;
+import org.eclipse.collections.impl.collector.Collectors2;
 import org.eclipse.collections.impl.factory.Lists;
+import org.eclipse.collections.impl.factory.Multimaps;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.set.sorted.mutable.TreeSortedSet;
@@ -58,7 +60,8 @@ import static org.eclipse.collections.impl.factory.Iterables.iList;
 
 public abstract class AbstractImmutableCollectionTestCase
 {
-    public static final Predicate<Integer> ERROR_THROWING_PREDICATE = each -> {
+    public static final Predicate<Integer> ERROR_THROWING_PREDICATE = each ->
+    {
         throw new AssertionError();
     };
 
@@ -73,6 +76,52 @@ public abstract class AbstractImmutableCollectionTestCase
     protected abstract ImmutableCollection<Integer> classUnderTest();
 
     protected abstract <T> MutableCollection<T> newMutable();
+
+    @Test
+    public void streamToBag()
+    {
+        ImmutableCollection<Integer> integers = this.classUnderTest();
+        Assert.assertEquals(integers.toBag(), integers.stream().collect(Collectors2.toBag()));
+        Assert.assertEquals(integers.toBag(), integers.parallelStream().collect(Collectors2.toBag()));
+        Assert.assertEquals(integers.toBag(), integers.castToCollection().stream().collect(Collectors2.toBag()));
+        Assert.assertEquals(integers.toBag(), integers.castToCollection().parallelStream().collect(Collectors2.toBag()));
+    }
+
+    @Test
+    public void streamToSet()
+    {
+        ImmutableCollection<Integer> integers = this.classUnderTest();
+        Assert.assertEquals(integers.toSet(), integers.stream().collect(Collectors2.toSet()));
+        Assert.assertEquals(integers.toSet(), integers.parallelStream().collect(Collectors2.toSet()));
+        Assert.assertEquals(integers.toSet(), integers.castToCollection().stream().collect(Collectors2.toSet()));
+        Assert.assertEquals(integers.toSet(), integers.castToCollection().parallelStream().collect(Collectors2.toSet()));
+    }
+
+    @Test
+    public void streamMakeString()
+    {
+        ImmutableCollection<Integer> integers = this.classUnderTest();
+        Assert.assertEquals(integers.makeString(), integers.stream().collect(Collectors2.makeString()));
+        Assert.assertEquals(integers.makeString(), integers.castToCollection().stream().collect(Collectors2.makeString()));
+    }
+
+    @Test
+    public void streamToBagMultimap()
+    {
+        ImmutableCollection<Integer> integers = this.classUnderTest();
+        Assert.assertEquals(
+                integers.groupBy(each -> each % 2, Multimaps.mutable.bag.empty()),
+                integers.stream().collect(Collectors2.toBagMultimap(each -> each % 2)));
+        Assert.assertEquals(
+                integers.groupBy(each -> each % 2, Multimaps.mutable.bag.empty()),
+                integers.parallelStream().collect(Collectors2.toBagMultimap(each -> each % 2)));
+        Assert.assertEquals(
+                integers.groupBy(each -> each % 2, Multimaps.mutable.bag.empty()),
+                integers.castToCollection().stream().collect(Collectors2.toBagMultimap(each -> each % 2)));
+        Assert.assertEquals(
+                integers.groupBy(each -> each % 2, Multimaps.mutable.bag.empty()),
+                integers.castToCollection().parallelStream().collect(Collectors2.toBagMultimap(each -> each % 2)));
+    }
 
     @Test
     public void selectWith()
@@ -271,7 +320,8 @@ public abstract class AbstractImmutableCollectionTestCase
 
         ImmutableObjectDoubleMap<Integer> result = values.sumByFloat(
                 integer -> integer > 100_000 ? 2 : 1,
-                integer -> {
+                integer ->
+                {
                     Integer i = integer > 100_000 ? integer - 100_000 : integer;
                     return 1.0f / (i.floatValue() * i.floatValue() * i.floatValue() * i.floatValue());
                 });
@@ -320,7 +370,8 @@ public abstract class AbstractImmutableCollectionTestCase
         ImmutableCollection<Integer> values = integers.toImmutable();
         ImmutableObjectDoubleMap<Integer> result = values.sumByDouble(
                 integer -> integer > 100_000 ? 2 : 1,
-                integer -> {
+                integer ->
+                {
                     Integer i = integer > 100_000 ? integer - 100_000 : integer;
                     return 1.0d / (i.doubleValue() * i.doubleValue() * i.doubleValue() * i.doubleValue());
                 });

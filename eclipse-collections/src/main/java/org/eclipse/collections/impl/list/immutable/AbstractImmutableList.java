@@ -18,6 +18,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.RandomAccess;
+import java.util.Spliterator;
+import java.util.Spliterators;
 import java.util.concurrent.ExecutorService;
 
 import net.jcip.annotations.Immutable;
@@ -108,6 +110,15 @@ abstract class AbstractImmutableList<T>
     public List<T> castToList()
     {
         return this;
+    }
+
+    /**
+     * @since 8.1
+     */
+    @Override
+    public Spliterator<T> spliterator()
+    {
+        return Spliterators.spliterator(this, Spliterator.IMMUTABLE | Spliterator.ORDERED);
     }
 
     @Override

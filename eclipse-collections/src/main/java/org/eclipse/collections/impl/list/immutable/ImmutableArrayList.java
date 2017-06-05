@@ -21,6 +21,8 @@ import java.util.List;
 import java.util.LongSummaryStatistics;
 import java.util.Optional;
 import java.util.RandomAccess;
+import java.util.Spliterator;
+import java.util.Spliterators;
 import java.util.function.BiConsumer;
 import java.util.function.BinaryOperator;
 import java.util.function.Supplier;
@@ -94,6 +96,15 @@ final class ImmutableArrayList<T>
     public int hashCode()
     {
         return Arrays.hashCode(this.items);
+    }
+
+    /**
+     * @since 8.1
+     */
+    @Override
+    public Spliterator<T> spliterator()
+    {
+        return Spliterators.spliterator(this.items, Spliterator.IMMUTABLE | Spliterator.ORDERED);
     }
 
     @Override

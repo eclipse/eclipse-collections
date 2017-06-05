@@ -16,6 +16,8 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.Spliterator;
+import java.util.Spliterators;
 
 import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.LazyIterable;
@@ -689,5 +691,14 @@ final class ImmutableEmptyBag<T>
     private Object writeReplace()
     {
         return new ImmutableBagSerializationProxy<>(this);
+    }
+
+    /**
+     * @since 8.1
+     */
+    @Override
+    public Spliterator<T> spliterator()
+    {
+        return Spliterators.emptySpliterator();
     }
 }

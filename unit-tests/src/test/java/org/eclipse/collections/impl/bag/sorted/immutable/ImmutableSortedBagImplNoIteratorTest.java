@@ -39,6 +39,30 @@ public class ImmutableSortedBagImplNoIteratorTest extends ImmutableSortedBagImpl
         return new ImmutableSortedBagImplNoIterator<>(SortedBags.immutable.with(comparator, 1, 1, 1, 2));
     }
 
+    @Test
+    @Override
+    public void streamToBag()
+    {
+    }
+
+    @Test
+    @Override
+    public void streamToSet()
+    {
+    }
+
+    @Test
+    @Override
+    public void streamMakeString()
+    {
+    }
+
+    @Test
+    @Override
+    public void streamToBagMultimap()
+    {
+    }
+
     @Override
     protected <T> ImmutableSortedBag<T> newWith(T... elements)
     {

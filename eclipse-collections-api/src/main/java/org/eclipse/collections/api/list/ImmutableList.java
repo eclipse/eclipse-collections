@@ -11,6 +11,8 @@
 package org.eclipse.collections.api.list;
 
 import java.util.List;
+import java.util.Spliterator;
+import java.util.Spliterators;
 
 import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.block.HashingStrategy;
@@ -165,4 +167,13 @@ public interface ImmutableList<T>
 
     @Override
     ImmutableList<T> toReversed();
+
+    /**
+     * @since 8.1
+     */
+    @Override
+    default Spliterator<T> spliterator()
+    {
+        return Spliterators.spliterator(this.castToList(), Spliterator.IMMUTABLE | Spliterator.ORDERED);
+    }
 }

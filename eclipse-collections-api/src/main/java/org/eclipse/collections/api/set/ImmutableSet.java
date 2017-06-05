@@ -11,6 +11,8 @@
 package org.eclipse.collections.api.set;
 
 import java.util.Set;
+import java.util.Spliterator;
+import java.util.Spliterators;
 
 import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.block.function.Function;
@@ -157,4 +159,13 @@ public interface ImmutableSet<T>
 
     @Override
     ImmutableSet<UnsortedSetIterable<T>> powerSet();
+
+    /**
+     * @since 8.1
+     */
+    @Override
+    default Spliterator<T> spliterator()
+    {
+        return Spliterators.spliterator(this.castToSet(), Spliterator.IMMUTABLE | Spliterator.DISTINCT);
+    }
 }

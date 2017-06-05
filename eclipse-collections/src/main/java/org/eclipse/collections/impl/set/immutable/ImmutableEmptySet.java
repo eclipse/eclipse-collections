@@ -18,6 +18,8 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.Set;
+import java.util.Spliterator;
+import java.util.Spliterators;
 
 import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.block.function.Function;
@@ -467,5 +469,14 @@ final class ImmutableEmptySet<T>
     private Object writeReplace()
     {
         return new ImmutableSetSerializationProxy<>(this);
+    }
+
+    /**
+     * @since 8.1
+     */
+    @Override
+    public Spliterator<T> spliterator()
+    {
+        return Spliterators.emptySpliterator();
     }
 }
