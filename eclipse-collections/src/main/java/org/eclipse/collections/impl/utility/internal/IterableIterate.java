@@ -978,6 +978,23 @@ public final class IterableIterate
         return result;
     }
 
+    public static <T> Optional<T> getOnlyOptional(Iterable<T> iterable)
+    {
+        Iterator<? extends T> iterator = iterable.iterator();
+        if (!iterator.hasNext())
+        {
+            return Optional.empty();
+        }
+
+        T result = iterator.next();
+        if (iterator.hasNext())
+        {
+            throw new IllegalArgumentException("Iterable has multiple values");
+        }
+
+        return Optional.of(result);
+    }
+
     /**
      * @see Iterate#zip(Iterable, Iterable)
      */

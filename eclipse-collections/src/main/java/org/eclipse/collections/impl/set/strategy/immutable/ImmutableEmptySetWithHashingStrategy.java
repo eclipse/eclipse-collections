@@ -15,6 +15,7 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.Set;
 
 import net.jcip.annotations.Immutable;
@@ -182,6 +183,12 @@ final class ImmutableEmptySetWithHashingStrategy<T>
     public T getOnly()
     {
         throw new IllegalStateException("Size must be 1 but was " + this.size());
+    }
+
+    @Override
+    public Optional<T> getOnlyOptional()
+    {
+        return Optional.empty();
     }
 
     private Object writeReplace()

@@ -14,6 +14,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.list.ImmutableList;
@@ -223,6 +224,13 @@ public class ImmutableEmptyListTest extends AbstractImmutableListTestCase
     {
         ImmutableList<Integer> list = this.classUnderTest();
         list.getOnly();
+    }
+
+    @Test
+    public void getOnlyOptional()
+    {
+        ImmutableList<Integer> list = this.classUnderTest();
+        Assert.assertEquals(Optional.empty(), list.getOnlyOptional());
     }
 
     @Override

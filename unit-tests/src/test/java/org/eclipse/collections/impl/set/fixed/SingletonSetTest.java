@@ -12,6 +12,7 @@ package org.eclipse.collections.impl.set.fixed;
 
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.Optional;
 
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function0;
@@ -398,6 +399,13 @@ public class SingletonSetTest extends AbstractMemoryEfficientMutableSetTestCase
     public void getOnly()
     {
         Assert.assertEquals(Integer.valueOf(1), this.intSet.getOnly());
+    }
+
+    @Override
+    @Test
+    public void getOnlyOptional()
+    {
+        Assert.assertEquals(Optional.of(Integer.valueOf(1)), this.intSet.getOnlyOptional());
     }
 
     @Test

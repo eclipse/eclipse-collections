@@ -79,4 +79,11 @@ public interface MultiReaderMutableCollectionTestCase extends MutableCollectionT
     {
         // Does not support iterator outside withReadLockAndDelegate
     }
+
+    @Test
+    @Override
+    default void RichIterable_getOnlyOptional()
+    {
+        // Does not support iterator outside withReadLockAndDelegate
+    }
 }

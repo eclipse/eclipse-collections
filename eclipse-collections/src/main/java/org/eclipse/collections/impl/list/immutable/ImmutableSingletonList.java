@@ -11,6 +11,7 @@
 package org.eclipse.collections.impl.list.immutable;
 
 import java.io.Serializable;
+import java.util.Optional;
 import java.util.RandomAccess;
 
 import net.jcip.annotations.Immutable;
@@ -81,6 +82,12 @@ final class ImmutableSingletonList<T>
     public T getOnly()
     {
         return this.element1;
+    }
+
+    @Override
+    public Optional<T> getOnlyOptional()
+    {
+        return Optional.of(this.element1);
     }
 
     @Override

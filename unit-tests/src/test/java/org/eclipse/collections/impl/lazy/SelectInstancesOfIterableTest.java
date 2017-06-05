@@ -111,6 +111,14 @@ public class SelectInstancesOfIterableTest extends AbstractLazyIterableTestCase
 
     @Override
     @Test
+    public void getOnlyOptional_throws_when_only_element_null()
+    {
+        // Impossible for SelectInstancesOfIterable to contain null
+        super.getOnlyOptional_throws_when_only_element_null();
+    }
+
+    @Override
+    @Test
     public void distinct()
     {
         super.distinct();

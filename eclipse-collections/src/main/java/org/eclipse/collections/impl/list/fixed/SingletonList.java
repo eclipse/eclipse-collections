@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
 import java.util.Comparator;
+import java.util.Optional;
 
 import net.jcip.annotations.NotThreadSafe;
 import org.eclipse.collections.api.block.function.Function;
@@ -183,6 +184,12 @@ final class SingletonList<T>
     public T getOnly()
     {
         return this.element1;
+    }
+
+    @Override
+    public Optional<T> getOnlyOptional()
+    {
+        return Optional.of(this.element1);
     }
 
     @Override

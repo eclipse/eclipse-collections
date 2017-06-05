@@ -14,6 +14,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.api.bag.primitive.ImmutableBooleanBag;
@@ -254,6 +255,13 @@ public class ImmutableEmptyBagTest extends ImmutableBagTestCase
     public void getOnly()
     {
         Verify.assertThrows(IllegalStateException.class, () -> this.newBag().getOnly());
+    }
+
+    @Override
+    @Test
+    public void getOnlyOptional()
+    {
+        Assert.assertEquals(Optional.empty(), this.newBag().getOnlyOptional());
     }
 
     @Override

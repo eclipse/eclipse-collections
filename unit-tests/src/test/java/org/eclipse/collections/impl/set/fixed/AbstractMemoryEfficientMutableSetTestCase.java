@@ -564,6 +564,12 @@ public abstract class AbstractMemoryEfficientMutableSetTestCase
         Assert.assertSame(setWithout, setWithout.withoutAll(FastList.newList()));
     }
 
+    @Test
+    public void getOnlyOptional()
+    {
+        Verify.assertThrows(IllegalStateException.class, () -> this.classUnderTest().getOnlyOptional());
+    }
+
     protected static void assertSetType(MutableSet<?> original, MutableSet<?> modified)
     {
         if (original instanceof FixedSizeSet && modified.size() < 5)

@@ -11,6 +11,7 @@
 package org.eclipse.collections.impl.map.fixed;
 
 import java.util.Map;
+import java.util.Optional;
 
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function0;
@@ -124,6 +125,12 @@ abstract class AbstractMemoryEfficientMutableMap<K, V>
     {
         this.forEach(procedure);
         return this;
+    }
+
+    @Override
+    public Optional<V> getOnlyOptional()
+    {
+        throw new IllegalStateException("Size must be 0 or 1 but was " + this.size());
     }
 
     @Override

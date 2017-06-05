@@ -13,6 +13,7 @@ package org.eclipse.collections.impl.map.fixed;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 
 import net.jcip.annotations.Immutable;
@@ -211,5 +212,11 @@ final class EmptyMap<K, V>
     public V getOnly()
     {
         throw new IllegalStateException("Size must be 1 but was " + this.size());
+    }
+
+    @Override
+    public Optional<V> getOnlyOptional()
+    {
+        return Optional.empty();
     }
 }

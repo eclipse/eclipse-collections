@@ -14,6 +14,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.list.ImmutableList;
@@ -176,6 +177,12 @@ public class ImmutableEmptySortedSetTest extends AbstractImmutableSortedSetTestC
     public void getOnly()
     {
         this.classUnderTest().getOnly();
+    }
+
+    @Test
+    public void getOnlyOptional()
+    {
+        Assert.assertEquals(Optional.empty(), this.classUnderTest().getOnlyOptional());
     }
 
     @Override

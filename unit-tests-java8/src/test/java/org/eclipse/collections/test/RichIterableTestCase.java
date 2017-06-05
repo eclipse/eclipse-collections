@@ -293,6 +293,29 @@ public interface RichIterableTestCase extends IterableTestCase
     }
 
     @Test
+    default void RichIterable_getOnlyOptional()
+    {
+        RichIterable<Integer> iterable = this.newWith(3);
+        Optional<Integer> only = iterable.getOnlyOptional();
+        assertThat(only.get(), is(3));
+
+        Iterator<Integer> iterator = iterable.iterator();
+        assertThat(iterator.next(), is(only.get()));
+        assertThat(iterator.hasNext(), is(false));
+
+        assertThat(this.newWith().getOnlyOptional(), is(Optional.empty()));
+
+        assertThrows(IllegalStateException.class, () -> this.newWith(1, 2).getOnlyOptional());
+
+        assertThrows(NullPointerException.class, () -> this.newWith(new Object[]{null}).getOnlyOptional());
+
+        if (this.allowsDuplicates())
+        {
+            assertThrows(IllegalStateException.class, () -> this.newWith(1, 1).getOnlyOptional());
+        }
+    }
+
+    @Test
     default void RichIterable_getFirst_and_getLast()
     {
         RichIterable<Integer> iterable = this.newWith(3, 2, 1);

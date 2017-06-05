@@ -11,6 +11,7 @@
 package org.eclipse.collections.impl.map.strategy.immutable;
 
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import org.eclipse.collections.api.block.HashingStrategy;
 import org.eclipse.collections.api.map.ImmutableMap;
@@ -216,6 +217,12 @@ public class ImmutableEmptyMapWithHashingStrategyTest extends ImmutableMemoryEff
     public void getOnly()
     {
         this.classUnderTest().getOnly();
+    }
+
+    @Test
+    public void getOnlyOptional()
+    {
+        Assert.assertEquals(Optional.empty(), this.classUnderTest().getOnlyOptional());
     }
 
     @Override

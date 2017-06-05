@@ -1319,4 +1319,10 @@ public abstract class AbstractMemoryEfficientMutableMapTest
 
     @Test
     public abstract void asLazyValues();
+
+    @Test
+    public void getOnlyOptional()
+    {
+        Verify.assertThrows(IllegalStateException.class, () -> this.classUnderTest().getOnlyOptional());
+    }
 }

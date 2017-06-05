@@ -263,6 +263,22 @@ public class ImmutableArrayBag<T>
     }
 
     @Override
+    public Optional<T> getOnlyOptional()
+    {
+        if (this.counts.length == 0)
+        {
+            return Optional.empty();
+        }
+
+        if (this.counts.length > 1 || this.counts[0] > 1)
+        {
+            throw new IllegalStateException("Size must be 0 or 1 but was greater than 1");
+        }
+
+        return Optional.of(this.getFirst());
+    }
+
+    @Override
     public ImmutableBag<T> select(Predicate<? super T> predicate)
     {
         return this.select(predicate, HashBag.newBag()).toImmutable();

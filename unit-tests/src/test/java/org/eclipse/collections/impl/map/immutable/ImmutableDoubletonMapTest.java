@@ -220,6 +220,12 @@ public class ImmutableDoubletonMapTest extends ImmutableMemoryEfficientMapTestCa
         Verify.assertThrows(IllegalStateException.class, () -> this.classUnderTest().getOnly());
     }
 
+    @Test
+    public void getOnlyOptional()
+    {
+        Verify.assertThrows(IllegalStateException.class, () -> this.classUnderTest().getOnlyOptional());
+    }
+
     @Override
     public void select()
     {

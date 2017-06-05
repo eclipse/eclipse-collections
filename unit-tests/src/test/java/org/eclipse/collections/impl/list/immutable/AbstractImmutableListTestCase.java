@@ -16,6 +16,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.block.function.Function;
@@ -614,5 +615,11 @@ public abstract class AbstractImmutableListTestCase extends AbstractImmutableCol
         ImmutableList<Integer> actual = integers.toImmutable();
         Assert.assertEquals(integers, actual);
         Assert.assertSame(integers, actual);
+    }
+
+    @Test
+    public void getOnlyOptional()
+    {
+        Verify.assertThrows(IllegalStateException.class, () -> this.classUnderTest().getOnlyOptional());
     }
 }

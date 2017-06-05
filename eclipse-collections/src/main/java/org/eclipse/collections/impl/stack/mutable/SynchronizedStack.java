@@ -612,6 +612,15 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
     }
 
     @Override
+    public Optional<T> getOnlyOptional()
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.getOnlyOptional();
+        }
+    }
+
+    @Override
     public boolean contains(Object object)
     {
         synchronized (this.lock)

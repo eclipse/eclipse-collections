@@ -39,4 +39,10 @@ public class ImmutableTripletonSetTest
     {
         Verify.assertThrows(IllegalStateException.class, () -> this.classUnderTest().getOnly());
     }
+
+    @Test
+    public void getOnlyOptional()
+    {
+        Verify.assertThrows(IllegalStateException.class, () -> this.classUnderTest().getOnlyOptional());
+    }
 }

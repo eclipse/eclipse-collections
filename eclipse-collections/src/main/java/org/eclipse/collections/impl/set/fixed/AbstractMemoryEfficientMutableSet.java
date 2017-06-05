@@ -12,6 +12,7 @@ package org.eclipse.collections.impl.set.fixed;
 
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.Optional;
 import java.util.concurrent.ExecutorService;
 
 import org.eclipse.collections.api.block.predicate.Predicate;
@@ -150,5 +151,11 @@ abstract class AbstractMemoryEfficientMutableSet<T>
     public ParallelUnsortedSetIterable<T> asParallel(ExecutorService executorService, int batchSize)
     {
         return this.toSet().asParallel(executorService, batchSize);
+    }
+
+    @Override
+    public Optional<T> getOnlyOptional()
+    {
+        throw new IllegalStateException("Size must be 0 or 1 but was " + this.size());
     }
 }

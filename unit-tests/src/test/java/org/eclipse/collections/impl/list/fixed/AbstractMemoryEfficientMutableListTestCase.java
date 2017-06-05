@@ -231,4 +231,10 @@ public abstract class AbstractMemoryEfficientMutableListTestCase
         MapIterable<String, Integer> expected = FastList.newList(this.classUnderTest()).aggregateBy(groupBy, () -> 0, sumAggregator);
         Assert.assertEquals(expected, actual);
     }
+
+    @Test
+    public void getOnlyOptional()
+    {
+        Verify.assertThrows(IllegalStateException.class, () -> this.list.getOnlyOptional());
+    }
 }

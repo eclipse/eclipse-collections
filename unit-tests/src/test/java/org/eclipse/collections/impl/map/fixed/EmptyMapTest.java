@@ -11,6 +11,7 @@
 package org.eclipse.collections.impl.map.fixed;
 
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
@@ -477,5 +478,12 @@ public class EmptyMapTest extends AbstractMemoryEfficientMutableMapTest
     public void getOnly()
     {
         Verify.assertThrows(IllegalStateException.class, () -> new EmptyMap<>().getOnly());
+    }
+
+    @Override
+    @Test
+    public void getOnlyOptional()
+    {
+       Assert.assertEquals(Optional.empty(), new EmptyMap<>().getOnlyOptional());
     }
 }
