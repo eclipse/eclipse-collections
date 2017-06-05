@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+	<feature id="org.eclipse.collections.feature" version="0.0.0">
+		<category name="General Purpose Tools"/>
+	</feature>
+	<category-def name="General Purpose Tools" label="General Purpose Tools"/>
+</site>
