@@ -85,6 +85,7 @@
                             net.jcip.annotations;resolution:=optional,*
                         </Import-Package>
                         <Bundle-Version>${project.version}</Bundle-Version>
+                        <Bundle-SymbolicName>org.eclipse.collections.api</Bundle-SymbolicName>
                     </instructions>
                 </configuration>
             </plugin>
