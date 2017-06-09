@@ -10,6 +10,8 @@
 
 package org.eclipse.collections.impl.list.immutable;
 
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 import java.util.RandomAccess;
 
@@ -254,6 +256,26 @@ public final class ImmutableListFactoryImpl implements ImmutableListFactory
         {
             return this.empty();
         }
-        return this.of((T[]) Iterate.toArray(items));
+        if (items instanceof Collection)
+        {
+            Collection<? extends T> collection = (Collection<? extends T>) items;
+            if (collection.size() < 11)
+            {
+                return this.of((T[]) collection.toArray());
+            }
+            return ImmutableArrayList.newList(collection);
+        }
+        Iterator<? extends T> iterator = items.iterator();
+        int size = 0;
+        while (size < 11 && iterator.hasNext())
+        {
+            iterator.next();
+            size++;
+        }
+        if (size < 11)
+        {
+            return this.of((T[]) Iterate.toArray(items));
+        }
+        return ImmutableArrayList.newList(items);
     }
 }

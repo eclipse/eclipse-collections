@@ -10,6 +10,8 @@
 
 package org.eclipse.collections.impl.list.fixed;
 
+import java.util.Collection;
+
 import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.factory.list.FixedSizeListFactory;
 import org.eclipse.collections.api.list.FixedSizeList;
@@ -149,6 +151,15 @@ public class FixedSizeListFactoryImpl implements FixedSizeListFactory
     @Override
     public <T> FixedSizeList<T> withAll(Iterable<? extends T> items)
     {
+        if (items instanceof Collection)
+        {
+            Collection<? extends T> collection = (Collection<? extends T>) items;
+            if (collection.size() <= 6)
+            {
+                return this.of((T[]) collection.toArray());
+            }
+            return ArrayAdapter.newArray(collection);
+        }
         return this.of((T[]) Iterate.toArray(items));
     }
 }

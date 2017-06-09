@@ -10,6 +10,7 @@
 
 package org.eclipse.collections.impl.factory;
 
+import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.collections.api.factory.list.FixedSizeListFactory;
@@ -17,6 +18,7 @@ import org.eclipse.collections.api.factory.list.ImmutableListFactory;
 import org.eclipse.collections.api.list.FixedSizeList;
 import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
+import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.test.Verify;
@@ -74,6 +76,8 @@ public class ListsTest
         FixedSizeListFactory listFactory = Lists.fixedSize;
         Assert.assertEquals(FastList.newList(), listFactory.of());
         Verify.assertInstanceOf(FixedSizeList.class, listFactory.of());
+        Assert.assertEquals(FastList.newList(), listFactory.with());
+        Verify.assertInstanceOf(FixedSizeList.class, listFactory.with());
         Assert.assertEquals(FastList.newListWith(1), listFactory.of(1));
         Verify.assertInstanceOf(FixedSizeList.class, listFactory.of(1));
         Assert.assertEquals(FastList.newListWith(1, 2), listFactory.of(1, 2));
@@ -131,7 +135,13 @@ public class ListsTest
     {
         Assert.assertTrue(Lists.immutable.of().isEmpty());
         Assert.assertSame(Lists.immutable.of(), Lists.immutable.of());
+        Assert.assertSame(Lists.immutable.of(), Lists.immutable.with());
+        Assert.assertSame(Lists.immutable.of(), Lists.immutable.ofAll(Lists.mutable.empty()));
         Verify.assertPostSerializedIdentity(Lists.immutable.of());
+        Verify.assertPostSerializedIdentity(Lists.immutable.with());
+
+        Assert.assertEquals(Lists.mutable.empty(), Lists.fixedSize.of());
+        Assert.assertEquals(Lists.mutable.empty(), Lists.fixedSize.ofAll(Lists.mutable.empty()));
     }
 
     @Test
@@ -196,6 +206,35 @@ public class ListsTest
         {
             List<Integer> list = Interval.fromTo(0, i);
             Assert.assertEquals(list, Lists.immutable.ofAll(list));
+            Assert.assertEquals(list, Lists.immutable.ofAll(Interval.fromTo(0, i).toList().toImmutable()));
+
+            Assert.assertEquals(list, Lists.fixedSize.ofAll(list));
+
+            Iterable<Integer> testIterable = new TestIterable<>(list);
+            Assert.assertEquals(list, Lists.immutable.ofAll(testIterable));
+            Assert.assertEquals(list, Lists.fixedSize.ofAll(testIterable));
+        }
+
+        Iterable<Integer> emptyTestIterable = new TestIterable<>(Lists.mutable.empty());
+        Assert.assertEquals(Lists.mutable.empty(), Lists.immutable.ofAll(emptyTestIterable));
+        Assert.assertEquals(Lists.mutable.empty(), Lists.fixedSize.ofAll(emptyTestIterable));
+    }
+
+    @Test
+    public void newListWithSet()
+    {
+        for (int i = 0; i < 12; i++)
+        {
+            MutableSet<Integer> set = Sets.mutable.withAll(Interval.fromTo(0, i));
+            Assert.assertEquals(Lists.mutable.withAll(set), Lists.immutable.ofAll(set));
+            Assert.assertEquals(Lists.mutable.withAll(set), Lists.immutable.ofAll(set.toImmutable()));
+        }
+
+        for (int i = 0; i < 12; i++)
+        {
+            MutableSet<Integer> set = Sets.mutable.withAll(Interval.fromTo(0, i));
+            Assert.assertEquals(Lists.mutable.withAll(set), Lists.fixedSize.ofAll(set));
+            Assert.assertEquals(Lists.mutable.withAll(set), Lists.fixedSize.ofAll(set.toImmutable()));
         }
     }
 
@@ -203,5 +242,21 @@ public class ListsTest
     public void classIsNonInstantiable()
     {
         Verify.assertClassNonInstantiable(Lists.class);
+    }
+
+    private class TestIterable<T> implements Iterable<T>
+    {
+        private final List<T> delegate;
+
+        TestIterable(List<T> delegate)
+        {
+            this.delegate = delegate;
+        }
+
+        @Override
+        public Iterator<T> iterator()
+        {
+            return this.delegate.iterator();
+        }
     }
 }
