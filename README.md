@@ -34,12 +34,19 @@ First, we will define a simple class named Person to hold the first and last nam
 public class Person
 {
     private final String firstName;
+    private final String middleName;
     private final String lastName;
 
     public Person(String firstName, String lastName)
     {
+        new Person(firstName, lastName, "");
+    }
+    
+    public Person(String firstName, String lastName, String middleName)
+    {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.middleName = middleName;
     }
 
     public String getFirstName()
@@ -50,6 +57,11 @@ public class Person
     public String getLastName()
     {
         return this.lastName;
+    }
+    
+    public String getMiddleName()
+    {
+        return this.middleName;
     }
 }
 ```
