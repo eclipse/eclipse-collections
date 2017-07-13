@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 Goldman Sachs.
+ * Copyright (c) 2017 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -34,6 +34,7 @@ import org.eclipse.collections.api.IntIterable;
 import org.eclipse.collections.api.LongIterable;
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.ShortIterable;
+import org.eclipse.collections.api.bag.Bag;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
 import org.eclipse.collections.api.block.function.Function;
@@ -625,9 +626,23 @@ public abstract class AbstractRichIterableTestCase
     }
 
     @Test
+    public void minByOptional()
+    {
+        Assert.assertEquals(Integer.valueOf(1), this.newWith(1, 3, 2).minByOptional(String::valueOf).get());
+        Assert.assertFalse(this.newWith().minByOptional(String::valueOf).isPresent());
+    }
+
+    @Test
     public void maxBy()
     {
         Assert.assertEquals(Integer.valueOf(3), this.newWith(1, 3, 2).maxBy(String::valueOf));
+    }
+
+    @Test
+    public void maxByOptional()
+    {
+        Assert.assertEquals(Integer.valueOf(3), this.newWith(1, 3, 2).maxByOptional(String::valueOf).get());
+        Assert.assertFalse(this.newWith().maxByOptional(String::valueOf).isPresent());
     }
 
     @Test(expected = NullPointerException.class)
@@ -1340,6 +1355,36 @@ public abstract class AbstractRichIterableTestCase
         Appendable builder = new StringBuilder();
         collection.appendString(builder, "[", ", ", "]");
         Assert.assertEquals(collection.toString(), builder.toString());
+    }
+
+    /**
+     * @since 9.0
+     */
+    @Test
+    public void countBy()
+    {
+        RichIterable<Integer> integers = this.newWith(1, 2, 3, 4, 5, 6);
+        Bag<Integer> evensAndOdds = integers.countBy(each -> Integer.valueOf(each % 2));
+        Assert.assertEquals(3, evensAndOdds.occurrencesOf(1));
+        Assert.assertEquals(3, evensAndOdds.occurrencesOf(0));
+        Bag<Integer> evensAndOdds2 = integers.countBy(each -> Integer.valueOf(each % 2), Bags.mutable.empty());
+        Assert.assertEquals(3, evensAndOdds2.occurrencesOf(1));
+        Assert.assertEquals(3, evensAndOdds2.occurrencesOf(0));
+    }
+
+    /**
+     * @since 9.0
+     */
+    @Test
+    public void countByWith()
+    {
+        RichIterable<Integer> integers = this.newWith(1, 2, 3, 4, 5, 6);
+        Bag<Integer> evensAndOdds = integers.countByWith((each, parm) -> Integer.valueOf(each % parm), 2);
+        Assert.assertEquals(3, evensAndOdds.occurrencesOf(1));
+        Assert.assertEquals(3, evensAndOdds.occurrencesOf(0));
+        Bag<Integer> evensAndOdds2 = integers.countByWith((each, parm) -> Integer.valueOf(each % parm), 2, Bags.mutable.empty());
+        Assert.assertEquals(3, evensAndOdds2.occurrencesOf(1));
+        Assert.assertEquals(3, evensAndOdds2.occurrencesOf(0));
     }
 
     @Test

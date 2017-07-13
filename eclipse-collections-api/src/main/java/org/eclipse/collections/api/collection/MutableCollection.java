@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2017 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -13,6 +13,7 @@ package org.eclipse.collections.api.collection;
 import java.util.Collection;
 
 import org.eclipse.collections.api.RichIterable;
+import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.block.function.Function2;
@@ -466,6 +467,24 @@ public interface MutableCollection<T>
 
     @Override
     <V> MutableObjectDoubleMap<V> sumByDouble(Function<? super T, ? extends V> groupBy, DoubleFunction<? super T> function);
+
+    /**
+     * @since 9.0
+     */
+    @Override
+    default <V> MutableBag<V> countBy(Function<? super T, ? extends V> function)
+    {
+        return this.asLazy().<V>collect(function).toBag();
+    }
+
+    /**
+     * @since 9.0
+     */
+    @Override
+    default <V, P> MutableBag<V> countByWith(Function2<? super T, ? super P, ? extends V> function, P parameter)
+    {
+        return this.asLazy().<P, V>collectWith(function, parameter).toBag();
+    }
 
     /**
      * {@inheritDoc}

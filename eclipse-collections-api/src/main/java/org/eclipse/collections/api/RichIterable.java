@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2017 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -23,7 +23,9 @@ import java.util.function.Supplier;
 import java.util.stream.Collector;
 import java.util.stream.Stream;
 
+import org.eclipse.collections.api.bag.Bag;
 import org.eclipse.collections.api.bag.MutableBag;
+import org.eclipse.collections.api.bag.MutableBagIterable;
 import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function0;
@@ -1981,6 +1983,50 @@ public interface RichIterable<T>
      * @since 1.0
      */
     <V> Multimap<V, T> groupBy(Function<? super T, ? extends V> function);
+
+    /**
+     * This method will count the number of occurrences of each value calculated by applying the
+     * function to each element of the collection.
+     *
+     * @since 9.0
+     */
+    default <V> Bag<V> countBy(Function<? super T, ? extends V> function)
+    {
+        return this.asLazy().<V>collect(function).toBag();
+    }
+
+    /**
+     * This method will count the number of occurrences of each value calculated by applying the
+     * function to each element of the collection.
+     *
+     * @since 9.0
+     */
+    default <V, R extends MutableBagIterable<V>> R countBy(Function<? super T, ? extends V> function, R target)
+    {
+        return this.collect(function, target);
+    }
+
+    /**
+     * This method will count the number of occurrences of each value calculated by applying the
+     * function to each element of the collection with the specified parameter as the second argument.
+     *
+     * @since 9.0
+     */
+    default <V, P> Bag<V> countByWith(Function2<? super T, ? super P, ? extends V> function, P parameter)
+    {
+        return this.asLazy().<P, V>collectWith(function, parameter).toBag();
+    }
+
+    /**
+     * This method will count the number of occurrences of each value calculated by applying the
+     * function to each element of the collection with the specified parameter as the second argument.
+     *
+     * @since 9.0
+     */
+    default <V, P, R extends MutableBagIterable<V>> R countByWith(Function2<? super T, ? super P, ? extends V> function, P parameter, R target)
+    {
+        return this.collectWith(function, parameter, target);
+    }
 
     /**
      * Same as {@link #groupBy(Function)}, except that the results are gathered into the specified {@code target}

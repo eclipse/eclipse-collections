@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2017 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -25,6 +25,7 @@ import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.api.tuple.Twin;
+import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.block.factory.Predicates;
 import org.eclipse.collections.impl.block.factory.Predicates2;
 import org.eclipse.collections.impl.block.function.AddFunction;
@@ -1076,5 +1077,23 @@ public class MultiReaderFastListTest extends AbstractListTestCase
     {
         MultiReaderFastList<Integer> multiReaderFastList = this.newWith(1, 2, 3, 4);
         multiReaderFastList.withReadLockAndDelegate(delegate -> Verify.assertIterablesEqual(iList(4, 3, 2, 1), delegate.asReversed()));
+    }
+
+    @Override
+    @Test
+    public void binarySearch()
+    {
+        MutableList<Integer> sortedList = this.newWith(1, 2, 3, 4, 5, 7);
+        Assert.assertEquals(1, sortedList.binarySearch(2));
+        Assert.assertEquals(-6, sortedList.binarySearch(6));
+    }
+
+    @Override
+    @Test
+    public void binarySearchWithComparator()
+    {
+        MutableList<Integer> sortedList = this.newWith(7, 5, 4, 3, 2, 1);
+        Assert.assertEquals(4, sortedList.binarySearch(2, Comparators.reverseNaturalOrder()));
+        Assert.assertEquals(-2, sortedList.binarySearch(6, Comparators.reverseNaturalOrder()));
     }
 }

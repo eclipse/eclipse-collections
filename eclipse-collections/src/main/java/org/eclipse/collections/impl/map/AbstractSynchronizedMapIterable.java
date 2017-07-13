@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2017 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -15,6 +15,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import org.eclipse.collections.api.RichIterable;
+import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.block.function.Function2;
@@ -22,13 +23,17 @@ import org.eclipse.collections.api.block.function.primitive.DoubleFunction;
 import org.eclipse.collections.api.block.function.primitive.FloatFunction;
 import org.eclipse.collections.api.block.function.primitive.IntFunction;
 import org.eclipse.collections.api.block.function.primitive.LongFunction;
+import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
+import org.eclipse.collections.api.collection.MutableCollection;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.MutableMapIterable;
 import org.eclipse.collections.api.map.primitive.MutableObjectDoubleMap;
 import org.eclipse.collections.api.map.primitive.MutableObjectLongMap;
+import org.eclipse.collections.api.multimap.MutableMultimap;
+import org.eclipse.collections.api.partition.PartitionMutableCollection;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.collection.AbstractSynchronizedRichIterable;
 import org.eclipse.collections.impl.tuple.AbstractImmutableEntry;
@@ -350,6 +355,123 @@ public abstract class AbstractSynchronizedMapIterable<K, V>
         {
             return this.getDelegate().sumByDouble(groupBy, function);
         }
+    }
+
+    /**
+     * @since 9.0
+     */
+    @Override
+    public <V1> MutableMultimap<V1, V> groupBy(Function<? super V, ? extends V1> function)
+    {
+        return (MutableMultimap<V1, V>) super.<V1>groupBy(function);
+    }
+
+    /**
+     * @since 9.0
+     */
+    @Override
+    public <V1> MutableMultimap<V1, V> groupByEach(Function<? super V, ? extends Iterable<V1>> function)
+    {
+        return (MutableMultimap<V1, V>) super.groupByEach(function);
+    }
+
+    /**
+     * @since 9.0
+     */
+    @Override
+    public <S> MutableCollection<Pair<V, S>> zip(Iterable<S> that)
+    {
+        return (MutableCollection<Pair<V, S>>) super.zip(that);
+    }
+
+    /**
+     * @since 9.0
+     */
+    @Override
+    public MutableCollection<Pair<V, Integer>> zipWithIndex()
+    {
+        return (MutableCollection<Pair<V, Integer>>) super.zipWithIndex();
+    }
+
+    /**
+     * @since 9.0
+     */
+    @Override
+    public MutableCollection<V> select(Predicate<? super V> predicate)
+    {
+        return (MutableCollection<V>) super.select(predicate);
+    }
+
+    /**
+     * @since 9.0
+     */
+    @Override
+    public <S> MutableCollection<S> selectInstancesOf(Class<S> clazz)
+    {
+        return (MutableCollection<S>) super.selectInstancesOf(clazz);
+    }
+
+    /**
+     * @since 9.0
+     */
+    @Override
+    public <P> MutableCollection<V> selectWith(Predicate2<? super V, ? super P> predicate, P parameter)
+    {
+        return (MutableCollection<V>) super.selectWith(predicate, parameter);
+    }
+
+    /**
+     * @since 9.0
+     */
+    @Override
+    public <P> MutableCollection<V> rejectWith(Predicate2<? super V, ? super P> predicate, P parameter)
+    {
+        return (MutableCollection<V>) super.rejectWith(predicate, parameter);
+    }
+
+    /**
+     * @since 9.0
+     */
+    @Override
+    public PartitionMutableCollection<V> partition(Predicate<? super V> predicate)
+    {
+        return (PartitionMutableCollection<V>) super.partition(predicate);
+    }
+
+    /**
+     * @since 9.0
+     */
+    @Override
+    public <V1> MutableBag<V1> countBy(Function<? super V, ? extends V1> function)
+    {
+        return (MutableBag<V1>) super.<V1>countBy(function);
+    }
+
+    /**
+     * @since 9.0
+     */
+    @Override
+    public <V1, P> MutableBag<V1> countByWith(Function2<? super V, ? super P, ? extends V1> function, P parameter)
+    {
+        return (MutableBag<V1>) super.<V1, P>countByWith(function, parameter);
+    }
+
+    /**
+     * @since 9.0
+     */
+    @Override
+    public MutableCollection<V> reject(Predicate<? super V> predicate)
+    {
+        return (MutableCollection<V>) super.reject(predicate);
+    }
+
+    /**
+     * @since 9.0
+     */
+    @Override
+    public MutableMapIterable<K, V> tap(Procedure<? super V> procedure)
+    {
+        return (MutableMapIterable<K, V>) super.tap(procedure);
     }
 }
 

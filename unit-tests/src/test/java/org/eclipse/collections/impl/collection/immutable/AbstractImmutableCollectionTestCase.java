@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2017 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -16,6 +16,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import org.eclipse.collections.api.RichIterable;
+import org.eclipse.collections.api.bag.Bag;
 import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.predicate.Predicate;
@@ -47,6 +48,7 @@ import org.eclipse.collections.impl.block.factory.Procedures;
 import org.eclipse.collections.impl.block.function.AddFunction;
 import org.eclipse.collections.impl.block.function.PassThruFunction0;
 import org.eclipse.collections.impl.factory.Lists;
+import org.eclipse.collections.impl.factory.SortedBags;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.set.sorted.mutable.TreeSortedSet;
@@ -73,6 +75,32 @@ public abstract class AbstractImmutableCollectionTestCase
     protected abstract ImmutableCollection<Integer> classUnderTest();
 
     protected abstract <T> MutableCollection<T> newMutable();
+
+    /**
+     * @since 9.0
+     */
+    @Test
+    public void countBy()
+    {
+        ImmutableCollection<Integer> integers = this.classUnderTest();
+        Bag<Integer> results = integers.countBy(each -> each);
+        Verify.assertSize(integers.size(), results);
+        Bag<Integer> results2 = integers.countBy(each -> each, SortedBags.mutable.empty());
+        Verify.assertSize(integers.size(), results2);
+    }
+
+    /**
+     * @since 9.0
+     */
+    @Test
+    public void countByWith()
+    {
+        ImmutableCollection<Integer> integers = this.classUnderTest();
+        Bag<Integer> results = integers.countByWith((each, parm) -> each, null);
+        Verify.assertSize(integers.size(), results);
+        Bag<Integer> results2 = integers.countByWith((each, parm) -> each, null, SortedBags.mutable.empty());
+        Verify.assertSize(integers.size(), results2);
+    }
 
     @Test
     public void selectWith()

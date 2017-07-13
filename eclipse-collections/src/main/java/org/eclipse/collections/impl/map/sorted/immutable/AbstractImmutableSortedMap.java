@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2017 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -17,6 +17,7 @@ import java.util.SortedMap;
 
 import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.LazyIterable;
+import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.block.function.Function2;
@@ -73,6 +74,7 @@ import org.eclipse.collections.impl.block.procedure.primitive.CollectFloatProced
 import org.eclipse.collections.impl.block.procedure.primitive.CollectIntProcedure;
 import org.eclipse.collections.impl.block.procedure.primitive.CollectLongProcedure;
 import org.eclipse.collections.impl.block.procedure.primitive.CollectShortProcedure;
+import org.eclipse.collections.impl.factory.Bags;
 import org.eclipse.collections.impl.factory.SortedMaps;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.list.mutable.primitive.BooleanArrayList;
@@ -583,5 +585,23 @@ public abstract class AbstractImmutableSortedMap<K, V>
     public int detectIndex(Predicate<? super V> predicate)
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".detectIndex() not implemented yet");
+    }
+
+    /**
+     * @since 9.0
+     */
+    @Override
+    public <V1> ImmutableBag<V1> countBy(Function<? super V, ? extends V1> function)
+    {
+        return this.collect(function, Bags.mutable.<V1>empty()).toImmutable();
+    }
+
+    /**
+     * @since 9.0
+     */
+    @Override
+    public <V1, P> ImmutableBag<V1> countByWith(Function2<? super V, ? super P, ? extends V1> function, P parameter)
+    {
+        return this.collectWith(function, parameter, Bags.mutable.<V1>empty()).toImmutable();
     }
 }

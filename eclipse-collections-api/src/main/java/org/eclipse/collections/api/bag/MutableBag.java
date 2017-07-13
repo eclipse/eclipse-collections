@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2017 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -87,6 +87,24 @@ public interface MutableBag<T>
 
     @Override
     <V> MutableBagMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function);
+
+    /**
+     * @since 9.0
+     */
+    @Override
+    default <V> MutableBag<V> countBy(Function<? super T, ? extends V> function)
+    {
+        return this.collect(function);
+    }
+
+    /**
+     * @since 9.0
+     */
+    @Override
+    default <V, P> MutableBag<V> countByWith(Function2<? super T, ? super P, ? extends V> function, P parameter)
+    {
+        return this.collectWith(function, parameter);
+    }
 
     /**
      * @deprecated in 6.0. Use {@link OrderedIterable#zip(Iterable)} instead.

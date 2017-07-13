@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2017 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -58,5 +58,26 @@ public class SynchronizedSortedSet2Test extends AbstractSortedSetTestCase
     public void max_empty_throws_without_comparator()
     {
         this.newWith().max();
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void detectLastIndex()
+    {
+        this.newWith(1, 2, 3).detectLastIndex(each -> each % 2 == 0);
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void reverseForEach()
+    {
+        this.newWith(1, 2, 3).reverseForEach(System.out::println);
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void toReversed()
+    {
+        this.newWith(1, 2, 3).toReversed();
     }
 }

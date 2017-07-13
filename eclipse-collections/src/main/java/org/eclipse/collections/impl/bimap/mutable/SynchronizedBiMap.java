@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Bhavana Hindupur.
+ * Copyright (c) 2017 Bhavana Hindupur and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -14,27 +14,11 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Set;
 
-import org.eclipse.collections.api.BooleanIterable;
-import org.eclipse.collections.api.ByteIterable;
-import org.eclipse.collections.api.CharIterable;
-import org.eclipse.collections.api.DoubleIterable;
-import org.eclipse.collections.api.FloatIterable;
-import org.eclipse.collections.api.IntIterable;
-import org.eclipse.collections.api.LongIterable;
 import org.eclipse.collections.api.RichIterable;
-import org.eclipse.collections.api.ShortIterable;
 import org.eclipse.collections.api.bimap.ImmutableBiMap;
 import org.eclipse.collections.api.bimap.MutableBiMap;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
-import org.eclipse.collections.api.block.function.primitive.BooleanFunction;
-import org.eclipse.collections.api.block.function.primitive.ByteFunction;
-import org.eclipse.collections.api.block.function.primitive.CharFunction;
-import org.eclipse.collections.api.block.function.primitive.DoubleFunction;
-import org.eclipse.collections.api.block.function.primitive.FloatFunction;
-import org.eclipse.collections.api.block.function.primitive.IntFunction;
-import org.eclipse.collections.api.block.function.primitive.LongFunction;
-import org.eclipse.collections.api.block.function.primitive.ShortFunction;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
@@ -115,11 +99,7 @@ public class SynchronizedBiMap<K, V> extends AbstractSynchronizedMapIterable<K, 
     @Override
     public MutableBiMap<K, V> tap(Procedure<? super V> procedure)
     {
-        synchronized (this.lock)
-        {
-            this.getDelegate().tap(procedure);
-            return this;
-        }
+        return (MutableBiMap<K, V>) super.tap(procedure);
     }
 
     @Override
@@ -143,10 +123,7 @@ public class SynchronizedBiMap<K, V> extends AbstractSynchronizedMapIterable<K, 
     @Override
     public MutableSet<V> select(Predicate<? super V> predicate)
     {
-        synchronized (this.lock)
-        {
-            return this.getDelegate().select(predicate);
-        }
+        return (MutableSet<V>) super.select(predicate);
     }
 
     @Override
@@ -161,28 +138,19 @@ public class SynchronizedBiMap<K, V> extends AbstractSynchronizedMapIterable<K, 
     @Override
     public <P> MutableSet<V> selectWith(Predicate2<? super V, ? super P> predicate, P parameter)
     {
-        synchronized (this.lock)
-        {
-            return this.getDelegate().selectWith(predicate, parameter);
-        }
+        return (MutableSet<V>) super.selectWith(predicate, parameter);
     }
 
     @Override
     public <S> MutableSet<S> selectInstancesOf(Class<S> clazz)
     {
-        synchronized (this.lock)
-        {
-            return this.getDelegate().selectInstancesOf(clazz);
-        }
+        return (MutableSet<S>) super.selectInstancesOf(clazz);
     }
 
     @Override
     public MutableSet<V> reject(Predicate<? super V> predicate)
     {
-        synchronized (this.lock)
-        {
-            return this.getDelegate().reject(predicate);
-        }
+        return (MutableSet<V>) super.reject(predicate);
     }
 
     @Override
@@ -197,136 +165,19 @@ public class SynchronizedBiMap<K, V> extends AbstractSynchronizedMapIterable<K, 
     @Override
     public <P> MutableSet<V> rejectWith(Predicate2<? super V, ? super P> predicate, P parameter)
     {
-        synchronized (this.lock)
-        {
-            return this.getDelegate().rejectWith(predicate, parameter);
-        }
+        return (MutableSet<V>) super.rejectWith(predicate, parameter);
     }
 
     @Override
     public PartitionMutableSet<V> partition(Predicate<? super V> predicate)
     {
-        synchronized (this.lock)
-        {
-            return this.getDelegate().partition(predicate);
-        }
+        return (PartitionMutableSet<V>) super.partition(predicate);
     }
 
     @Override
     public <P> PartitionMutableSet<V> partitionWith(Predicate2<? super V, ? super P> predicate, P parameter)
     {
-        synchronized (this.lock)
-        {
-            return this.getDelegate().partitionWith(predicate, parameter);
-        }
-    }
-
-    @Override
-    public <V1> RichIterable<V1> collect(Function<? super V, ? extends V1> function)
-    {
-        synchronized (this.lock)
-        {
-            return this.getDelegate().collect(function);
-        }
-    }
-
-    @Override
-    public BooleanIterable collectBoolean(BooleanFunction<? super V> booleanFunction)
-    {
-        synchronized (this.lock)
-        {
-            return this.getDelegate().collectBoolean(booleanFunction);
-        }
-    }
-
-    @Override
-    public ByteIterable collectByte(ByteFunction<? super V> byteFunction)
-    {
-        synchronized (this.lock)
-        {
-            return this.getDelegate().collectByte(byteFunction);
-        }
-    }
-
-    @Override
-    public CharIterable collectChar(CharFunction<? super V> charFunction)
-    {
-        synchronized (this.lock)
-        {
-            return this.getDelegate().collectChar(charFunction);
-        }
-    }
-
-    @Override
-    public DoubleIterable collectDouble(DoubleFunction<? super V> doubleFunction)
-    {
-        synchronized (this.lock)
-        {
-            return this.getDelegate().collectDouble(doubleFunction);
-        }
-    }
-
-    @Override
-    public FloatIterable collectFloat(FloatFunction<? super V> floatFunction)
-    {
-        synchronized (this.lock)
-        {
-            return this.getDelegate().collectFloat(floatFunction);
-        }
-    }
-
-    @Override
-    public IntIterable collectInt(IntFunction<? super V> intFunction)
-    {
-        synchronized (this.lock)
-        {
-            return this.getDelegate().collectInt(intFunction);
-        }
-    }
-
-    @Override
-    public LongIterable collectLong(LongFunction<? super V> longFunction)
-    {
-        synchronized (this.lock)
-        {
-            return this.getDelegate().collectLong(longFunction);
-        }
-    }
-
-    @Override
-    public ShortIterable collectShort(ShortFunction<? super V> shortFunction)
-    {
-        synchronized (this.lock)
-        {
-            return this.getDelegate().collectShort(shortFunction);
-        }
-    }
-
-    @Override
-    public <P, V1> RichIterable<V1> collectWith(Function2<? super V, ? super P, ? extends V1> function, P parameter)
-    {
-        synchronized (this.lock)
-        {
-            return this.getDelegate().collectWith(function, parameter);
-        }
-    }
-
-    @Override
-    public <V1> RichIterable<V1> collectIf(Predicate<? super V> predicate, Function<? super V, ? extends V1> function)
-    {
-        synchronized (this.lock)
-        {
-            return this.getDelegate().collectIf(predicate, function);
-        }
-    }
-
-    @Override
-    public <V1> RichIterable<V1> flatCollect(Function<? super V, ? extends Iterable<V1>> function)
-    {
-        synchronized (this.lock)
-        {
-            return this.getDelegate().flatCollect(function);
-        }
+        return (PartitionMutableSet<V>) super.partitionWith(predicate, parameter);
     }
 
     @Override
@@ -411,19 +262,13 @@ public class SynchronizedBiMap<K, V> extends AbstractSynchronizedMapIterable<K, 
     @Deprecated
     public MutableSet<Pair<V, Integer>> zipWithIndex()
     {
-        synchronized (this.lock)
-        {
-            return this.getDelegate().zipWithIndex();
-        }
+        return (MutableSet<Pair<V, Integer>>) super.zipWithIndex();
     }
 
     @Override
     public <VV> MutableBiMap<VV, V> groupByUniqueKey(Function<? super V, ? extends VV> function)
     {
-        synchronized (this.lock)
-        {
-            return this.getDelegate().groupByUniqueKey(function);
-        }
+        return (MutableBiMap<VV, V>) super.groupByUniqueKey(function);
     }
 
     /**
@@ -433,10 +278,7 @@ public class SynchronizedBiMap<K, V> extends AbstractSynchronizedMapIterable<K, 
     @Deprecated
     public <S> MutableSet<Pair<V, S>> zip(Iterable<S> that)
     {
-        synchronized (this.lock)
-        {
-            return this.getDelegate().zip(that);
-        }
+        return (MutableSet<Pair<V, S>>) super.zip(that);
     }
 
     @Override

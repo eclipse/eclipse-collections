@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2017 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -75,6 +75,22 @@ public abstract class AbstractListTestCase
     public void randomAccess_throws()
     {
         Verify.assertThrows(IllegalArgumentException.class, () -> new ListAdapter<>(FastList.newListWith(1, 2, 3)));
+    }
+
+    @Test
+    public void getFirstOptional()
+    {
+        Assert.assertEquals(Integer.valueOf(1), this.newWith(1, 2, 3).getFirstOptional().get());
+        Assert.assertTrue(this.newWith(1, 2, 3).getFirstOptional().isPresent());
+        Assert.assertFalse(this.newWith().getFirstOptional().isPresent());
+    }
+
+    @Test
+    public void getLastOptional()
+    {
+        Assert.assertEquals(Integer.valueOf(3), this.newWith(1, 2, 3).getLastOptional().get());
+        Assert.assertTrue(this.newWith(1, 2, 3).getLastOptional().isPresent());
+        Assert.assertFalse(this.newWith().getLastOptional().isPresent());
     }
 
     @Test
@@ -1002,7 +1018,7 @@ public abstract class AbstractListTestCase
     @Test
     public void binarySearch()
     {
-        MutableList<Integer> sortedList = this.newWith(1, 2, 3, 4, 5, 7).toList();
+        MutableList<Integer> sortedList = this.newWith(1, 2, 3, 4, 5, 7);
         Assert.assertEquals(1, sortedList.binarySearch(2));
         Assert.assertEquals(-6, sortedList.binarySearch(6));
         for (Integer integer : sortedList)
@@ -1016,7 +1032,7 @@ public abstract class AbstractListTestCase
     @Test
     public void binarySearchWithComparator()
     {
-        MutableList<Integer> sortedList = this.newWith(1, 2, 3, 4, 5, 7).toSortedList(Comparators.reverseNaturalOrder());
+        MutableList<Integer> sortedList = this.newWith(7, 5, 4, 3, 2, 1);
         Assert.assertEquals(4, sortedList.binarySearch(2, Comparators.reverseNaturalOrder()));
         Assert.assertEquals(-2, sortedList.binarySearch(6, Comparators.reverseNaturalOrder()));
         for (Integer integer : sortedList)

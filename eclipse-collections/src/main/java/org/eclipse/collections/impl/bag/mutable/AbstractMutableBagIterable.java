@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2017 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -17,6 +17,7 @@ import java.util.Optional;
 
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.Bag;
+import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.bag.MutableBagIterable;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function0;
@@ -41,6 +42,7 @@ import org.eclipse.collections.impl.block.factory.PrimitiveFunctions;
 import org.eclipse.collections.impl.block.factory.Procedures2;
 import org.eclipse.collections.impl.block.procedure.MutatingAggregationProcedure;
 import org.eclipse.collections.impl.block.procedure.NonMutatingAggregationProcedure;
+import org.eclipse.collections.impl.factory.Bags;
 import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.map.mutable.primitive.ObjectDoubleHashMap;
@@ -218,6 +220,24 @@ public abstract class AbstractMutableBagIterable<T>
     public <P> boolean noneSatisfyWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         return this.getKeysView().noneSatisfyWith(predicate, parameter);
+    }
+
+    /**
+     * @since 9.0
+     */
+    @Override
+    public <V> MutableBag<V> countBy(Function<? super T, ? extends V> function)
+    {
+        return this.countBy(function, Bags.mutable.empty());
+    }
+
+    /**
+     * @since 9.0
+     */
+    @Override
+    public <V, P> MutableBag<V> countByWith(Function2<? super T, ? super P, ? extends V> function, P parameter)
+    {
+        return this.countByWith(function, parameter, Bags.mutable.empty());
     }
 
     @Override

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2017 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -236,56 +236,37 @@ public class SynchronizedMutableMap<K, V>
     @Override
     public MutableMap<K, V> tap(Procedure<? super V> procedure)
     {
-        synchronized (this.lock)
-        {
-            this.forEach(procedure);
-            return this;
-        }
+        return (MutableMap<K, V>) super.tap(procedure);
     }
 
     @Override
     public MutableBag<V> select(Predicate<? super V> predicate)
     {
-        synchronized (this.lock)
-        {
-            return this.getDelegate().select(predicate);
-        }
+        return (MutableBag<V>) super.select(predicate);
     }
 
     @Override
     public <P> MutableBag<V> selectWith(Predicate2<? super V, ? super P> predicate, P parameter)
     {
-        synchronized (this.lock)
-        {
-            return this.getDelegate().selectWith(predicate, parameter);
-        }
+        return (MutableBag<V>) super.selectWith(predicate, parameter);
     }
 
     @Override
     public MutableBag<V> reject(Predicate<? super V> predicate)
     {
-        synchronized (this.lock)
-        {
-            return this.getDelegate().reject(predicate);
-        }
+        return (MutableBag<V>) super.reject(predicate);
     }
 
     @Override
     public <P> MutableBag<V> rejectWith(Predicate2<? super V, ? super P> predicate, P parameter)
     {
-        synchronized (this.lock)
-        {
-            return this.getDelegate().rejectWith(predicate, parameter);
-        }
+        return (MutableBag<V>) super.rejectWith(predicate, parameter);
     }
 
     @Override
     public PartitionMutableBag<V> partition(Predicate<? super V> predicate)
     {
-        synchronized (this.lock)
-        {
-            return this.getDelegate().partition(predicate);
-        }
+        return (PartitionMutableBag<V>) super.partition(predicate);
     }
 
     /**
@@ -295,154 +276,103 @@ public class SynchronizedMutableMap<K, V>
     @Deprecated
     public MutableSet<Pair<V, Integer>> zipWithIndex()
     {
-        synchronized (this.lock)
-        {
-            return this.getDelegate().zipWithIndex();
-        }
+        return (MutableSet<Pair<V, Integer>>) super.zipWithIndex();
     }
 
     @Override
     public <P> PartitionMutableBag<V> partitionWith(Predicate2<? super V, ? super P> predicate, P parameter)
     {
-        synchronized (this.lock)
-        {
-            return this.getDelegate().partitionWith(predicate, parameter);
-        }
+        return (PartitionMutableBag<V>) super.partitionWith(predicate, parameter);
     }
 
     @Override
     public <S> MutableBag<S> selectInstancesOf(Class<S> clazz)
     {
-        synchronized (this.lock)
-        {
-            return this.getDelegate().selectInstancesOf(clazz);
-        }
+        return (MutableBag<S>) super.selectInstancesOf(clazz);
     }
 
     @Override
     public <A> MutableBag<A> collect(Function<? super V, ? extends A> function)
     {
-        synchronized (this.lock)
-        {
-            return this.getDelegate().collect(function);
-        }
+        return (MutableBag<A>) super.collect(function);
     }
 
     @Override
     public MutableBooleanBag collectBoolean(BooleanFunction<? super V> booleanFunction)
     {
-        synchronized (this.lock)
-        {
-            return this.getDelegate().collectBoolean(booleanFunction);
-        }
+        return (MutableBooleanBag) super.collectBoolean(booleanFunction);
     }
 
     @Override
     public MutableByteBag collectByte(ByteFunction<? super V> byteFunction)
     {
-        synchronized (this.lock)
-        {
-            return this.getDelegate().collectByte(byteFunction);
-        }
+        return (MutableByteBag) super.collectByte(byteFunction);
     }
 
     @Override
     public MutableCharBag collectChar(CharFunction<? super V> charFunction)
     {
-        synchronized (this.lock)
-        {
-            return this.getDelegate().collectChar(charFunction);
-        }
+        return (MutableCharBag) super.collectChar(charFunction);
     }
 
     @Override
     public MutableDoubleBag collectDouble(DoubleFunction<? super V> doubleFunction)
     {
-        synchronized (this.lock)
-        {
-            return this.getDelegate().collectDouble(doubleFunction);
-        }
+        return (MutableDoubleBag) super.collectDouble(doubleFunction);
     }
 
     @Override
     public MutableFloatBag collectFloat(FloatFunction<? super V> floatFunction)
     {
-        synchronized (this.lock)
-        {
-            return this.getDelegate().collectFloat(floatFunction);
-        }
+        return (MutableFloatBag) super.collectFloat(floatFunction);
     }
 
     @Override
     public MutableIntBag collectInt(IntFunction<? super V> intFunction)
     {
-        synchronized (this.lock)
-        {
-            return this.getDelegate().collectInt(intFunction);
-        }
+        return (MutableIntBag) super.collectInt(intFunction);
     }
 
     @Override
     public MutableLongBag collectLong(LongFunction<? super V> longFunction)
     {
-        synchronized (this.lock)
-        {
-            return this.getDelegate().collectLong(longFunction);
-        }
+        return (MutableLongBag) super.collectLong(longFunction);
     }
 
     @Override
     public MutableShortBag collectShort(ShortFunction<? super V> shortFunction)
     {
-        synchronized (this.lock)
-        {
-            return this.getDelegate().collectShort(shortFunction);
-        }
+        return (MutableShortBag) super.collectShort(shortFunction);
     }
 
     @Override
     public <P, A> MutableBag<A> collectWith(Function2<? super V, ? super P, ? extends A> function, P parameter)
     {
-        synchronized (this.lock)
-        {
-            return this.getDelegate().collectWith(function, parameter);
-        }
+        return (MutableBag<A>) super.<P, A>collectWith(function, parameter);
     }
 
     @Override
     public <A> MutableBag<A> collectIf(Predicate<? super V> predicate, Function<? super V, ? extends A> function)
     {
-        synchronized (this.lock)
-        {
-            return this.getDelegate().collectIf(predicate, function);
-        }
+        return (MutableBag<A>) super.<A>collectIf(predicate, function);
     }
 
     @Override
     public <A> MutableBag<A> flatCollect(Function<? super V, ? extends Iterable<A>> function)
     {
-        synchronized (this.lock)
-        {
-            return this.getDelegate().flatCollect(function);
-        }
+        return (MutableBag<A>) super.flatCollect(function);
     }
 
     @Override
     public <KK> MutableBagMultimap<KK, V> groupBy(Function<? super V, ? extends KK> function)
     {
-        synchronized (this.lock)
-        {
-            return this.getDelegate().groupBy(function);
-        }
+        return (MutableBagMultimap<KK, V>) super.<KK>groupBy(function);
     }
 
     @Override
     public <KK> MutableBagMultimap<KK, V> groupByEach(Function<? super V, ? extends Iterable<KK>> function)
     {
-        synchronized (this.lock)
-        {
-            return this.getDelegate().groupByEach(function);
-        }
+        return (MutableBagMultimap<KK, V>) super.groupByEach(function);
     }
 
     /**
@@ -452,19 +382,13 @@ public class SynchronizedMutableMap<K, V>
     @Deprecated
     public <S> MutableBag<Pair<V, S>> zip(Iterable<S> that)
     {
-        synchronized (this.lock)
-        {
-            return this.getDelegate().zip(that);
-        }
+        return (MutableBag<Pair<V, S>>) super.zip(that);
     }
 
     @Override
     public <VV> MutableMap<VV, V> groupByUniqueKey(Function<? super V, ? extends VV> function)
     {
-        synchronized (this.lock)
-        {
-            return this.getDelegate().groupByUniqueKey(function);
-        }
+        return (MutableMap<VV, V>) super.groupByUniqueKey(function);
     }
 
     @Override
