@@ -19,8 +19,10 @@ import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.impl.map.strategy.mutable.UnifiedMapWithHashingStrategy;
 
 @Immutable
-public final class ImmutableHashingStrategyMapFactoryImpl implements ImmutableHashingStrategyMapFactory
+public enum ImmutableHashingStrategyMapFactoryImpl implements ImmutableHashingStrategyMapFactory
 {
+    INSTANCE;
+
     @Override
     public <K, V> ImmutableMap<K, V> of(HashingStrategy<? super K> hashingStrategy)
     {

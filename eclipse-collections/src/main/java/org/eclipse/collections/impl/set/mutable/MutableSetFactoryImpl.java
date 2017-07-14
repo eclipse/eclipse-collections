@@ -15,8 +15,10 @@ import org.eclipse.collections.api.factory.set.MutableSetFactory;
 import org.eclipse.collections.api.set.MutableSet;
 
 @Immutable
-public final class MutableSetFactoryImpl implements MutableSetFactory
+public enum MutableSetFactoryImpl implements MutableSetFactory
 {
+    INSTANCE;
+
     @Override
     public <T> MutableSet<T> empty()
     {

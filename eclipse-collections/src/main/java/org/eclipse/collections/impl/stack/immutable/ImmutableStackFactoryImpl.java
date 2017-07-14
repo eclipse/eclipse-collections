@@ -13,8 +13,10 @@ package org.eclipse.collections.impl.stack.immutable;
 import org.eclipse.collections.api.factory.stack.ImmutableStackFactory;
 import org.eclipse.collections.api.stack.ImmutableStack;
 
-public class ImmutableStackFactoryImpl implements ImmutableStackFactory
+public enum ImmutableStackFactoryImpl implements ImmutableStackFactory
 {
+    INSTANCE;
+
     @Override
     public <T> ImmutableStack<T> empty()
     {

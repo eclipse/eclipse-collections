@@ -15,8 +15,10 @@ import org.eclipse.collections.api.factory.map.MutableMapFactory;
 import org.eclipse.collections.api.map.MutableMap;
 
 @Immutable
-public final class MutableMapFactoryImpl implements MutableMapFactory
+public enum MutableMapFactoryImpl implements MutableMapFactory
 {
+    INSTANCE;
+
     @Override
     public <K, V> MutableMap<K, V> empty()
     {

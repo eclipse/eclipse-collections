@@ -16,8 +16,10 @@ import org.eclipse.collections.api.map.FixedSizeMap;
 import org.eclipse.collections.impl.block.factory.Comparators;
 
 @Immutable
-public class FixedSizeMapFactoryImpl implements FixedSizeMapFactory
+public enum FixedSizeMapFactoryImpl implements FixedSizeMapFactory
 {
+    INSTANCE;
+
     private static final FixedSizeMap<?, ?> EMPTY_MAP = new EmptyMap<>();
 
     @Override

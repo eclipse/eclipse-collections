@@ -16,7 +16,7 @@ import org.eclipse.collections.impl.bag.strategy.mutable.MutableHashingStrategyB
 @SuppressWarnings("ConstantNamingConvention")
 public final class HashingStrategyBags
 {
-    public static final MutableHashingStrategyBagFactory mutable = new MutableHashingStrategyBagFactoryImpl();
+    public static final MutableHashingStrategyBagFactory mutable = MutableHashingStrategyBagFactoryImpl.INSTANCE;
 
     private HashingStrategyBags()
     {

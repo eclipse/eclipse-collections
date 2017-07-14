@@ -18,8 +18,8 @@ import org.eclipse.collections.impl.set.sorted.mutable.MutableSortedSetFactoryIm
 @SuppressWarnings("ConstantNamingConvention")
 public final class SortedSets
 {
-    public static final ImmutableSortedSetFactory immutable = new ImmutableSortedSetFactoryImpl();
-    public static final MutableSortedSetFactory mutable = new MutableSortedSetFactoryImpl();
+    public static final ImmutableSortedSetFactory immutable = ImmutableSortedSetFactoryImpl.INSTANCE;
+    public static final MutableSortedSetFactory mutable = MutableSortedSetFactoryImpl.INSTANCE;
 
     private SortedSets()
     {

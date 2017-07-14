@@ -23,8 +23,10 @@ import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
  *
  * @since 6.0.
  */
-public class Mutable<name>SetFactoryImpl implements Mutable<name>SetFactory
+public enum Mutable<name>SetFactoryImpl implements Mutable<name>SetFactory
 {
+    INSTANCE;
+
     @Override
     public Mutable<name>Set empty()
     {

@@ -16,8 +16,10 @@ import org.eclipse.collections.api.factory.list.MutableListFactory;
 import org.eclipse.collections.api.list.MutableList;
 
 @Immutable
-public final class MutableListFactoryImpl implements MutableListFactory
+public enum MutableListFactoryImpl implements MutableListFactory
 {
+    INSTANCE;
+
     @Override
     public <T> MutableList<T> empty()
     {

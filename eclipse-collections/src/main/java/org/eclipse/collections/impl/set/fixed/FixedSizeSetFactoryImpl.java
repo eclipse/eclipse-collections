@@ -18,8 +18,9 @@ import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 
 @Immutable
-public class FixedSizeSetFactoryImpl implements FixedSizeSetFactory
+public enum FixedSizeSetFactoryImpl implements FixedSizeSetFactory
 {
+    INSTANCE;
     private static final FixedSizeSet<?> EMPTY_SET = new EmptySet<>();
 
     @Override

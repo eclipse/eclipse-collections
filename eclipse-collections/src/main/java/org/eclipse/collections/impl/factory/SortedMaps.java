@@ -18,8 +18,8 @@ import org.eclipse.collections.impl.map.sorted.mutable.MutableSortedMapFactoryIm
 @SuppressWarnings("ConstantNamingConvention")
 public final class SortedMaps
 {
-    public static final ImmutableSortedMapFactory immutable = new ImmutableSortedMapFactoryImpl();
-    public static final MutableSortedMapFactory mutable = new MutableSortedMapFactoryImpl();
+    public static final ImmutableSortedMapFactory immutable = ImmutableSortedMapFactoryImpl.INSTANCE;
+    public static final MutableSortedMapFactory mutable = MutableSortedMapFactoryImpl.INSTANCE;
 
     private SortedMaps()
     {

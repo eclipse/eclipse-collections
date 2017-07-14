@@ -16,8 +16,10 @@ import org.eclipse.collections.api.factory.map.strategy.MutableHashingStrategyMa
 import org.eclipse.collections.api.map.MutableMap;
 
 @Immutable
-public final class MutableHashingStrategyMapFactoryImpl implements MutableHashingStrategyMapFactory
+public enum MutableHashingStrategyMapFactoryImpl implements MutableHashingStrategyMapFactory
 {
+    INSTANCE;
+
     @Override
     public <K, V> MutableMap<K, V> of(HashingStrategy<? super K> hashingStrategy)
     {
