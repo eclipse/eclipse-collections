@@ -16,8 +16,6 @@ import java.util.Collections;
 import java.util.Set;
 import java.util.concurrent.ExecutorService;
 
-import net.jcip.annotations.GuardedBy;
-import net.jcip.annotations.ThreadSafe;
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
@@ -60,7 +58,6 @@ import org.eclipse.collections.impl.lazy.parallel.set.SynchronizedParallelUnsort
  *
  * @see MutableSet#asSynchronized()
  */
-@ThreadSafe
 public class SynchronizedMutableSet<T>
         extends AbstractSynchronizedMutableCollection<T>
         implements MutableSet<T>, Serializable
@@ -98,7 +95,6 @@ public class SynchronizedMutableSet<T>
         return new SynchronizedMutableSet<>(SetAdapter.adapt(set), lock);
     }
 
-    @GuardedBy("getLock()")
     private MutableSet<T> getMutableSet()
     {
         return (MutableSet<T>) this.getDelegate();

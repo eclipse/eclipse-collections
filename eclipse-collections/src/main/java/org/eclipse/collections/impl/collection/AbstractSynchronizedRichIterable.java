@@ -15,7 +15,6 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.Optional;
 
-import net.jcip.annotations.GuardedBy;
 import org.eclipse.collections.api.BooleanIterable;
 import org.eclipse.collections.api.ByteIterable;
 import org.eclipse.collections.api.CharIterable;
@@ -77,7 +76,6 @@ import org.eclipse.collections.impl.utility.LazyIterate;
 public abstract class AbstractSynchronizedRichIterable<T> implements RichIterable<T>
 {
     protected final Object lock;
-    @GuardedBy("this.lock")
     protected final RichIterable<T> delegate;
 
     protected AbstractSynchronizedRichIterable(RichIterable<T> delegate, Object lock)

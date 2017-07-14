@@ -13,7 +13,6 @@ package org.eclipse.collections.impl.multimap.set.sorted;
 import java.io.Serializable;
 import java.util.Comparator;
 
-import net.jcip.annotations.GuardedBy;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.predicate.Predicate2;
@@ -202,7 +201,6 @@ public class SynchronizedSortedSetMultimap<K, V>
     }
 
     @Override
-    @GuardedBy("getLock()")
     protected MutableSortedSetMultimap<K, V> getDelegate()
     {
         return (MutableSortedSetMultimap<K, V>) super.getDelegate();

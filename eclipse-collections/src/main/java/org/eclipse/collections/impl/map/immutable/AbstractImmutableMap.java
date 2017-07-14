@@ -15,7 +15,6 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
-import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.bag.primitive.ImmutableBooleanBag;
@@ -99,7 +98,6 @@ import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.tuple.ImmutableEntry;
 import org.eclipse.collections.impl.utility.MapIterate;
 
-@Immutable
 public abstract class AbstractImmutableMap<K, V>
         extends AbstractMapIterable<K, V>
         implements ImmutableMap<K, V>, Map<K, V>

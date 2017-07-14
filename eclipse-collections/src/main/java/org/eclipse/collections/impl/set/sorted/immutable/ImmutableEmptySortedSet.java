@@ -17,7 +17,6 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
-import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
@@ -36,7 +35,6 @@ import org.eclipse.collections.impl.utility.ListIterate;
 /**
  * This is a zero element {@link ImmutableSortedSet} which is created by calling the SortedSets.immutable.empty() method.
  */
-@Immutable
 final class ImmutableEmptySortedSet<T>
         extends AbstractImmutableSortedSet<T>
         implements Serializable

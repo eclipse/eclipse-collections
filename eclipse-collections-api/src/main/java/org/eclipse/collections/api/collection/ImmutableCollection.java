@@ -10,7 +10,6 @@
 
 package org.eclipse.collections.api.collection;
 
-import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.api.block.function.Function;
@@ -48,7 +47,6 @@ import org.eclipse.collections.api.tuple.Pair;
  * The ImmutableCollection interface is "contractually immutable" in that it does not have any mutating
  * methods available on the public interface.
  */
-@Immutable
 public interface ImmutableCollection<T>
         extends RichIterable<T>
 {

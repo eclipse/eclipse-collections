@@ -34,12 +34,10 @@ import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
 import org.eclipse.collections.impl.bag.mutable.primitive.<name>HashBag;
 import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
 import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
-import net.jcip.annotations.Immutable;
 
 /**
  * This file was automatically generated from template file collectPrimitiveIterable.stg.
  */
-@Immutable
 public class Collect<name>Iterable\<T>
         extends AbstractLazy<name>Iterable
 {

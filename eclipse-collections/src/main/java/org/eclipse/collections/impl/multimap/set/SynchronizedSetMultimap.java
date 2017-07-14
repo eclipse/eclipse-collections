@@ -12,7 +12,6 @@ package org.eclipse.collections.impl.multimap.set;
 
 import java.io.Serializable;
 
-import net.jcip.annotations.GuardedBy;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.predicate.Predicate2;
@@ -190,7 +189,6 @@ public class SynchronizedSetMultimap<K, V>
     }
 
     @Override
-    @GuardedBy("getLock()")
     protected MutableSetMultimap<K, V> getDelegate()
     {
         return (MutableSetMultimap<K, V>) super.getDelegate();

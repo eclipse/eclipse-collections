@@ -18,7 +18,6 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.Set;
 
-import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function0;
@@ -39,7 +38,6 @@ import org.eclipse.collections.impl.utility.LazyIterate;
 /**
  * This is a zero element {@link ImmutableSortedMap} which is created by calling SortedMaps.immutable.empty().
  */
-@Immutable
 final class ImmutableEmptySortedMap<K, V>
         extends AbstractImmutableSortedMap<K, V>
         implements Serializable

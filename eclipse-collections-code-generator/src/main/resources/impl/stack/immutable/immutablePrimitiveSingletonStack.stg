@@ -43,13 +43,11 @@ import org.eclipse.collections.impl.lazy.primitive.Lazy<name>IterableAdapter;
 import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
 import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
 import org.eclipse.collections.impl.stack.mutable.primitive.<name>ArrayStack;
-import net.jcip.annotations.Immutable;
 
 /**
  * Immutable<name>SingletonStack is an optimization for {@link Immutable<name>Stack} of size 1.
  * This file was automatically generated from template file immutablePrimitiveSingletonStack.stg.
  */
-@Immutable
 final class Immutable<name>SingletonStack implements Immutable<name>Stack, Serializable
 {
     private static final long serialVersionUID = 1L;

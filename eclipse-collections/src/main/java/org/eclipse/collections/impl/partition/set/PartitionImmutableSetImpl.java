@@ -10,12 +10,10 @@
 
 package org.eclipse.collections.impl.partition.set;
 
-import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.partition.set.PartitionImmutableSet;
 import org.eclipse.collections.api.partition.set.PartitionMutableSet;
 import org.eclipse.collections.api.set.ImmutableSet;
 
-@Immutable
 public class PartitionImmutableSetImpl<T> implements PartitionImmutableSet<T>
 {
     private final ImmutableSet<T> selected;

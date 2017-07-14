@@ -13,7 +13,6 @@ package org.eclipse.collections.impl.lazy;
 import java.util.Iterator;
 import java.util.Optional;
 
-import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
@@ -28,7 +27,6 @@ import org.eclipse.collections.impl.utility.Iterate;
 /**
  * A SelectIterable is an iterable that filters a source iterable for instances of a Class as it iterates.
  */
-@Immutable
 public class SelectInstancesOfIterable<T>
         extends AbstractLazyIterable<T>
 {

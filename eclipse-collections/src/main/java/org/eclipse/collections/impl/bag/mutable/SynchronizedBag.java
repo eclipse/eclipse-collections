@@ -14,7 +14,6 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Collections;
 
-import net.jcip.annotations.GuardedBy;
 import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.bag.primitive.MutableBooleanBag;
@@ -93,7 +92,6 @@ public class SynchronizedBag<T>
     }
 
     @Override
-    @GuardedBy("getLock()")
     protected MutableBag<T> getDelegate()
     {
         return (MutableBag<T>) super.getDelegate();

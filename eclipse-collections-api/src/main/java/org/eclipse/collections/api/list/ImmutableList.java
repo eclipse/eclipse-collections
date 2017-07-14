@@ -12,7 +12,6 @@ package org.eclipse.collections.api.list;
 
 import java.util.List;
 
-import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.block.HashingStrategy;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
@@ -46,7 +45,6 @@ import org.eclipse.collections.api.tuple.Pair;
  * implement the java.util.List interface so they can satisfy the equals() contract and be compared against other list
  * structures like FastList or ArrayList.
  */
-@Immutable
 public interface ImmutableList<T>
         extends ImmutableCollection<T>, ListIterable<T>
 {

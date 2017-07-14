@@ -13,7 +13,6 @@ package org.eclipse.collections.impl.lazy;
 import java.util.Iterator;
 import java.util.Optional;
 
-import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.function.primitive.DoubleObjectToDoubleFunction;
@@ -32,7 +31,6 @@ import org.eclipse.collections.impl.utility.Iterate;
 /**
  * A CollectIterable is an iterable that transforms a source iterable using a function as it iterates.
  */
-@Immutable
 public class CollectIterable<T, V>
         extends AbstractLazyIterable<V>
 {

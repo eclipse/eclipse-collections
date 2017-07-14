@@ -12,7 +12,6 @@ package org.eclipse.collections.impl.multimap.bag;
 
 import java.io.Serializable;
 
-import net.jcip.annotations.GuardedBy;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
@@ -198,7 +197,6 @@ public class SynchronizedBagMultimap<K, V>
     }
 
     @Override
-    @GuardedBy("getLock()")
     protected MutableBagMultimap<K, V> getDelegate()
     {
         return (MutableBagMultimap<K, V>) super.getDelegate();

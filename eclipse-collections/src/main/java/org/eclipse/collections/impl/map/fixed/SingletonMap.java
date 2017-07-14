@@ -18,7 +18,6 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 
-import net.jcip.annotations.NotThreadSafe;
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
@@ -36,7 +35,6 @@ import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.tuple.ImmutableEntry;
 import org.eclipse.collections.impl.tuple.Tuples;
 
-@NotThreadSafe
 final class SingletonMap<K, V>
         extends AbstractMemoryEfficientMutableMap<K, V>
         implements Externalizable

@@ -13,7 +13,6 @@ package org.eclipse.collections.api.set.sorted;
 import java.util.Set;
 import java.util.SortedSet;
 
-import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.function.primitive.BooleanFunction;
@@ -48,7 +47,6 @@ import org.eclipse.collections.api.tuple.Pair;
  * ImmutableSortedSet implementations must implement the {@link SortedSet} interface so they can satisfy the {@link
  * Set#equals(Object)} contract and be compared against other Sets.
  */
-@Immutable
 public interface ImmutableSortedSet<T>
         extends SortedSetIterable<T>, ImmutableSetIterable<T>
 {

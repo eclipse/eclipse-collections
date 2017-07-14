@@ -21,7 +21,6 @@ import java.util.EmptyStackException;
 import java.util.Iterator;
 import java.util.Optional;
 
-import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.MutableBag;
@@ -107,7 +106,6 @@ import org.eclipse.collections.impl.utility.LazyIterate;
 /**
  * The immutable equivalent of ArrayStack. Wraps a FastList.
  */
-@Immutable
 final class ImmutableArrayStack<T> implements ImmutableStack<T>, Serializable
 {
     private static final long serialVersionUID = 1L;

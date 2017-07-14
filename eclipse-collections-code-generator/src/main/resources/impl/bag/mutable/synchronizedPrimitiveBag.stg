@@ -34,8 +34,6 @@ import org.eclipse.collections.api.tuple.primitive.<name>IntPair;
 import org.eclipse.collections.impl.collection.mutable.primitive.AbstractSynchronized<name>Collection;
 import org.eclipse.collections.impl.factory.primitive.<name>Bags;
 import org.eclipse.collections.impl.lazy.primitive.Lazy<name>IterableAdapter;
-import net.jcip.annotations.GuardedBy;
-import net.jcip.annotations.ThreadSafe;
 
 /**
  * A synchronized view of a {@link Mutable<name>Bag}. It is imperative that the user manually synchronize on the collection when iterating over it using the
@@ -47,7 +45,6 @@ import net.jcip.annotations.ThreadSafe;
  * @see MutableBag#asSynchronized()
  * @since 3.1.
  */
-@ThreadSafe
 public final class Synchronized<name>Bag
         extends AbstractSynchronized<name>Collection
         implements Mutable<name>Bag
@@ -64,7 +61,6 @@ public final class Synchronized<name>Bag
         super(bag, newLock);
     }
 
-    @GuardedBy("getLock()")
     private Mutable<name>Bag getMutable<name>Bag()
     {
         return (Mutable<name>Bag) this.get<name>Collection();

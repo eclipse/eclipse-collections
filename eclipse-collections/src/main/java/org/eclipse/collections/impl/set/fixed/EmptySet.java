@@ -17,7 +17,6 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
-import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
@@ -32,7 +31,6 @@ import org.eclipse.collections.impl.factory.Sets;
  * This class is a memory efficient list with no elements.  It is created by calling Lists.fixedSize.of() which
  * actually returns a singleton instance.
  */
-@Immutable
 final class EmptySet<T>
         extends AbstractMemoryEfficientMutableSet<T>
         implements Serializable

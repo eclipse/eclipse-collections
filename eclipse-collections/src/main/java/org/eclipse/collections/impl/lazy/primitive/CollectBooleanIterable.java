@@ -12,7 +12,6 @@ package org.eclipse.collections.impl.lazy.primitive;
 
 import java.util.Iterator;
 
-import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.BooleanIterable;
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.bag.primitive.MutableBooleanBag;
@@ -30,7 +29,6 @@ import org.eclipse.collections.impl.set.mutable.primitive.BooleanHashSet;
 /**
  * A CollectIntIterable is an iterable that transforms a source iterable using an IntFunction as it iterates.
  */
-@Immutable
 public class CollectBooleanIterable<T>
         extends AbstractLazyBooleanIterable
 {

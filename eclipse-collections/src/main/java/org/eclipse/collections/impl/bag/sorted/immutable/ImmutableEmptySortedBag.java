@@ -16,7 +16,6 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.Bag;
 import org.eclipse.collections.api.bag.ImmutableBag;
@@ -53,7 +52,6 @@ import org.eclipse.collections.impl.partition.bag.sorted.PartitionImmutableSorte
 import org.eclipse.collections.impl.partition.bag.sorted.PartitionTreeBag;
 import org.eclipse.collections.impl.utility.OrderedIterate;
 
-@Immutable
 class ImmutableEmptySortedBag<T>
         extends AbstractImmutableSortedBag<T>
         implements Serializable

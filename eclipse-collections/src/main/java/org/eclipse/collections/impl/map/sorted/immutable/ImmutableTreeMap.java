@@ -22,7 +22,6 @@ import java.util.NoSuchElementException;
 import java.util.Set;
 import java.util.SortedMap;
 
-import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.map.ImmutableMap;
@@ -44,7 +43,6 @@ import org.eclipse.collections.impl.utility.MapIterate;
 /**
  * @see ImmutableSortedMap
  */
-@Immutable
 public class ImmutableTreeMap<K, V>
         extends AbstractImmutableSortedMap<K, V>
         implements Serializable

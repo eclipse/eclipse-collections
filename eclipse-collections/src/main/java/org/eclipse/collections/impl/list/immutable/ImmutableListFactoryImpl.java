@@ -13,12 +13,10 @@ package org.eclipse.collections.impl.list.immutable;
 import java.util.List;
 import java.util.RandomAccess;
 
-import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.factory.list.ImmutableListFactory;
 import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.impl.utility.Iterate;
 
-@Immutable
 public final class ImmutableListFactoryImpl implements ImmutableListFactory
 {
     @Override

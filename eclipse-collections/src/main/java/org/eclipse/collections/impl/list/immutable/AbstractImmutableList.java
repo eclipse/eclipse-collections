@@ -20,7 +20,6 @@ import java.util.ListIterator;
 import java.util.RandomAccess;
 import java.util.concurrent.ExecutorService;
 
-import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.block.HashingStrategy;
 import org.eclipse.collections.api.block.function.Function;
@@ -99,7 +98,6 @@ import org.eclipse.collections.impl.utility.OrderedIterate;
  * This class is the parent class for all ImmutableLists.  All implementations of ImmutableList must implement the List
  * interface so anArrayList.equals(anImmutableList) can return true when the contents and order are the same.
  */
-@Immutable
 abstract class AbstractImmutableList<T>
         extends AbstractImmutableCollection<T>
         implements ImmutableList<T>, List<T>

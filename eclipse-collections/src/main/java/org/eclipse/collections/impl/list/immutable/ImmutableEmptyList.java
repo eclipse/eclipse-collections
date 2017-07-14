@@ -19,7 +19,6 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.RandomAccess;
 
-import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.api.bag.MutableBagIterable;
 import org.eclipse.collections.api.block.function.Function;
@@ -45,7 +44,6 @@ import org.eclipse.collections.impl.partition.list.PartitionFastList;
 /**
  * This is a zero element {@link ImmutableList} which is created by calling the Lists.immutable.empty() method.
  */
-@Immutable
 final class ImmutableEmptyList<T>
         extends AbstractImmutableList<T>
         implements Serializable, RandomAccess

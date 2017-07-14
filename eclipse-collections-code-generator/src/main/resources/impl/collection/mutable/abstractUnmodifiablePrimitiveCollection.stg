@@ -33,14 +33,12 @@ import org.eclipse.collections.api.list.primitive.Mutable<name>List;
 import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
 import org.eclipse.collections.impl.iterator.Unmodifiable<name>Iterator;
 import org.eclipse.collections.impl.lazy.primitive.Lazy<name>IterableAdapter;
-import net.jcip.annotations.ThreadSafe;
 
 /**
  * This file was automatically generated from template file abstractUnmodifiablePrimitiveCollection.stg.
  *
  * @since 3.1.
  */
-@ThreadSafe
 public abstract class AbstractUnmodifiable<name>Collection
         implements Mutable<name>Collection, Serializable
 {

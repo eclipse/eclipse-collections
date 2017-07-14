@@ -10,7 +10,6 @@
 
 package org.eclipse.collections.api.bag.sorted;
 
-import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.api.bag.ImmutableBagIterable;
 import org.eclipse.collections.api.block.function.Function;
@@ -50,7 +49,6 @@ import org.eclipse.collections.api.tuple.Pair;
  *
  * @since 4.2
  */
-@Immutable
 public interface ImmutableSortedBag<T>
         extends ImmutableBagIterable<T>, SortedBag<T>
 {

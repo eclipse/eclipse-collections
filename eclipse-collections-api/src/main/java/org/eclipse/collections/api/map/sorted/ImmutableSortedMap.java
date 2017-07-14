@@ -12,7 +12,6 @@ package org.eclipse.collections.api.map.sorted;
 
 import java.util.SortedMap;
 
-import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.block.function.Function2;
@@ -48,7 +47,6 @@ import org.eclipse.collections.api.tuple.Pair;
  * An ImmutableSortedMap is different than a JCF SortedMap in that it has no mutating methods, but it shares
  * the read-only protocol of a SortedMap.
  */
-@Immutable
 public interface ImmutableSortedMap<K, V>
         extends SortedMapIterable<K, V>, ImmutableMapIterable<K, V>
 {

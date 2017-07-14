@@ -13,7 +13,6 @@ package org.eclipse.collections.impl.lazy;
 import java.util.Iterator;
 import java.util.Optional;
 
-import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
@@ -30,7 +29,6 @@ import org.eclipse.collections.impl.utility.Iterate;
  * Iterates over the elements of the adapted Iterable skipping the first count elements or the full adapted Iterable if
  * the count is non-positive.
  */
-@Immutable
 public class DropIterable<T> extends AbstractLazyIterable<T>
 {
     private final Iterable<T> adapted;

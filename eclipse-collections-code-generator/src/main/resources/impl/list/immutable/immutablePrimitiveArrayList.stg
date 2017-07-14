@@ -45,7 +45,6 @@ import org.eclipse.collections.impl.lazy.primitive.Reverse<name>Iterable;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
 import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
-import net.jcip.annotations.Immutable;
 
 /**
  * Immutable<name>ArrayList is the non-modifiable equivalent of {@link <name>ArrayList}.
@@ -54,7 +53,6 @@ import net.jcip.annotations.Immutable;
  *
  * @since 3.2.
  */
-@Immutable
 final class Immutable<name>ArrayList
         implements Immutable<name>List, Serializable
 {

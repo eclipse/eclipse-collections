@@ -45,7 +45,6 @@ import org.eclipse.collections.impl.lazy.primitive.Reverse<name>Iterable;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.primitive.Abstract<name>Iterable;
 import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
-import net.jcip.annotations.NotThreadSafe;
 
 /**
  * <name>ArrayList is similar to {@link FastList}, and is memory-optimized for <type> primitives.
@@ -53,7 +52,6 @@ import net.jcip.annotations.NotThreadSafe;
  *
  * @since 3.0.
  */
-@NotThreadSafe
 public class <name>ArrayList extends Abstract<name>Iterable
         implements Mutable<name>List, Externalizable
 {

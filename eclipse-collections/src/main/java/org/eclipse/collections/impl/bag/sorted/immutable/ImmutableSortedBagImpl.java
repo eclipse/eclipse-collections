@@ -20,7 +20,6 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.RandomAccess;
 
-import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.bag.Bag;
 import org.eclipse.collections.api.bag.sorted.ImmutableSortedBag;
 import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
@@ -48,7 +47,6 @@ import org.eclipse.collections.impl.utility.ArrayIterate;
 import org.eclipse.collections.impl.utility.ListIterate;
 import org.eclipse.collections.impl.utility.internal.SortedBagIterables;
 
-@Immutable
 class ImmutableSortedBagImpl<T>
         extends AbstractImmutableSortedBag<T>
         implements Serializable

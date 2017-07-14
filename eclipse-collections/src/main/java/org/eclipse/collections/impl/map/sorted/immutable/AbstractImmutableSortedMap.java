@@ -15,7 +15,6 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.SortedMap;
 
-import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.api.block.function.Function;
@@ -94,7 +93,6 @@ import org.eclipse.collections.impl.multimap.list.FastListMultimap;
 import org.eclipse.collections.impl.partition.list.PartitionFastList;
 import org.eclipse.collections.impl.utility.MapIterate;
 
-@Immutable
 public abstract class AbstractImmutableSortedMap<K, V>
         extends AbstractMapIterable<K, V>
         implements ImmutableSortedMap<K, V>, SortedMap<K, V>
@@ -231,7 +229,8 @@ public abstract class AbstractImmutableSortedMap<K, V>
     public ImmutableSortedMap<K, V> select(Predicate2<? super K, ? super V> predicate)
     {
         MutableSortedMap<K, V> selectedMap = SortedMaps.mutable.with(this.comparator());
-        this.forEachKeyValue((key, value) -> {
+        this.forEachKeyValue((key, value) ->
+        {
             if (predicate.accept(key, value))
             {
                 selectedMap.put(key, value);
@@ -256,7 +255,8 @@ public abstract class AbstractImmutableSortedMap<K, V>
     public ImmutableSortedMap<K, V> reject(Predicate2<? super K, ? super V> predicate)
     {
         MutableSortedMap<K, V> rejectedMap = SortedMaps.mutable.with(this.comparator());
-        this.forEachKeyValue((key, value) -> {
+        this.forEachKeyValue((key, value) ->
+        {
             if (!predicate.accept(key, value))
             {
                 rejectedMap.put(key, value);

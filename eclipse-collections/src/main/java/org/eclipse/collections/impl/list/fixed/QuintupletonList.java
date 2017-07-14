@@ -15,7 +15,6 @@ import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
 
-import net.jcip.annotations.NotThreadSafe;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
@@ -24,7 +23,6 @@ import org.eclipse.collections.impl.block.factory.Comparators;
 /**
  * This is a five element memory efficient List which is created by calling Lists.fixedSize.of(one, two, three, four, five).
  */
-@NotThreadSafe
 final class QuintupletonList<T>
         extends AbstractMemoryEfficientMutableList<T>
         implements Externalizable

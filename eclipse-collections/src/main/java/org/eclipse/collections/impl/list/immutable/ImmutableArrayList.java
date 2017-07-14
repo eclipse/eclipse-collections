@@ -26,7 +26,6 @@ import java.util.function.BinaryOperator;
 import java.util.function.Supplier;
 import java.util.stream.Collector;
 
-import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.function.primitive.DoubleFunction;
@@ -53,7 +52,6 @@ import org.eclipse.collections.impl.utility.internal.RandomAccessListIterate;
 /**
  * An ImmutableArrayList wraps a Java array but it cannot be modified after creation.
  */
-@Immutable
 final class ImmutableArrayList<T>
         extends AbstractImmutableList<T>
         implements Serializable, RandomAccess, BatchIterable<T>

@@ -24,7 +24,6 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
-import net.jcip.annotations.NotThreadSafe;
 import org.eclipse.collections.api.block.HashingStrategy;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function0;
@@ -61,7 +60,7 @@ import org.eclipse.collections.impl.utility.Iterate;
  * does not rely on the hashCode or equality of the object at the key, but instead relies on a HashingStrategy
  * implementation provided by a developer to compute the hashCode and equals for the objects stored in the map.
  */
-@NotThreadSafe
+
 @SuppressWarnings("ObjectEquality")
 public class UnifiedMapWithHashingStrategy<K, V> extends AbstractMutableMap<K, V>
         implements Externalizable, BatchIterable<V>

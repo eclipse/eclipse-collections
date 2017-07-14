@@ -15,7 +15,6 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 
-import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function0;
@@ -34,7 +33,6 @@ import org.eclipse.collections.impl.utility.LazyIterate;
 /**
  * This is a zero element {@link ImmutableMap} which is created by calling the Maps.immutable.empty() method.
  */
-@Immutable
 final class ImmutableEmptyMap<K, V>
         extends AbstractImmutableMap<K, V>
         implements Serializable

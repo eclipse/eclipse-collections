@@ -13,7 +13,6 @@ package org.eclipse.collections.impl.list.immutable;
 import java.io.Serializable;
 import java.util.RandomAccess;
 
-import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.impl.factory.Lists;
@@ -22,7 +21,6 @@ import org.eclipse.collections.impl.factory.Lists;
  * This is a nine element immutable List which is created by calling
  * Lists.immutable.with(one, two, three, four, five, six, seven, eight, nine) method.
  */
-@Immutable
 final class ImmutableNonupletonList<T>
         extends AbstractImmutableList<T>
         implements Serializable, RandomAccess

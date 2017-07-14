@@ -42,13 +42,11 @@ import org.eclipse.collections.impl.lazy.primitive.Reverse<name>Iterable;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
 import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
-import net.jcip.annotations.Immutable;
 
 /**
  * Immutable<name>SingletonList is an optimization for {@link Immutable<name>List} of size 1.
  * This file was automatically generated from template file immutablePrimitiveSingletonList.stg.
  */
-@Immutable
 final class Immutable<name>SingletonList implements Immutable<name>List, Serializable
 {
     private static final long serialVersionUID = 1L;

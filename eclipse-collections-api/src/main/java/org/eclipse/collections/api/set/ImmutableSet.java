@@ -12,7 +12,6 @@ package org.eclipse.collections.api.set;
 
 import java.util.Set;
 
-import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.function.primitive.BooleanFunction;
@@ -45,7 +44,6 @@ import org.eclipse.collections.api.tuple.Pair;
  * the java.util.Set interface so they can satisfy the equals() contract and be compared against other set structures
  * like UnifiedSet or HashSet.
  */
-@Immutable
 public interface ImmutableSet<T>
         extends UnsortedSetIterable<T>, ImmutableSetIterable<T>
 {

@@ -10,11 +10,9 @@
 
 package org.eclipse.collections.impl.stack.mutable;
 
-import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.factory.stack.MutableStackFactory;
 import org.eclipse.collections.api.stack.MutableStack;
 
-@Immutable
 public final class MutableStackFactoryImpl implements MutableStackFactory
 {
     @Override
