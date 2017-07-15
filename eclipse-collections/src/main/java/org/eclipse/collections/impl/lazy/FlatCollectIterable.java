@@ -13,7 +13,6 @@ package org.eclipse.collections.impl.lazy;
 import java.util.Iterator;
 import java.util.Optional;
 
-import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
@@ -25,7 +24,6 @@ import org.eclipse.collections.impl.block.procedure.AdaptObjectIntProcedureToPro
 import org.eclipse.collections.impl.lazy.iterator.FlatCollectIterator;
 import org.eclipse.collections.impl.utility.Iterate;
 
-@Immutable
 public class FlatCollectIterable<T, V>
         extends AbstractLazyIterable<V>
 {
@@ -48,7 +46,8 @@ public class FlatCollectIterable<T, V>
     public void forEachWithIndex(ObjectIntProcedure<? super V> objectIntProcedure)
     {
         Procedure<V> innerProcedure = new AdaptObjectIntProcedureToProcedure<>(objectIntProcedure);
-        Iterate.forEach(this.adapted, each -> {
+        Iterate.forEach(this.adapted, each ->
+        {
             Iterable<V> iterable = this.function.valueOf(each);
             Iterate.forEach(iterable, innerProcedure);
         });
@@ -64,9 +63,11 @@ public class FlatCollectIterable<T, V>
     public V detect(Predicate<? super V> predicate)
     {
         V[] result = (V[]) new Object[1];
-        Iterate.anySatisfy(this.adapted, each -> {
+        Iterate.anySatisfy(this.adapted, each ->
+        {
             Iterable<V> iterable = this.function.valueOf(each);
-            return Iterate.anySatisfy(iterable, each1 -> {
+            return Iterate.anySatisfy(iterable, each1 ->
+            {
                 if (predicate.accept(each1))
                 {
                     result[0] = each1;
@@ -82,7 +83,8 @@ public class FlatCollectIterable<T, V>
     public Optional<V> detectOptional(Predicate<? super V> predicate)
     {
         V[] result = (V[]) new Object[1];
-        Iterate.anySatisfy(this.adapted, each -> {
+        Iterate.anySatisfy(this.adapted, each ->
+        {
             if (each == null)
             {
                 throw new NullPointerException();
@@ -92,7 +94,8 @@ public class FlatCollectIterable<T, V>
             {
                 throw new NullPointerException();
             }
-            return Iterate.anySatisfy(iterable, each1 -> {
+            return Iterate.anySatisfy(iterable, each1 ->
+            {
                 if (predicate.accept(each1))
                 {
                     if (each1 == null)

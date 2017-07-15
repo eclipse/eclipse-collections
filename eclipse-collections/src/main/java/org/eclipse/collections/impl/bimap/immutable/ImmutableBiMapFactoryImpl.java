@@ -21,11 +21,7 @@ import org.eclipse.collections.impl.utility.MapIterate;
 
 public class ImmutableBiMapFactoryImpl implements ImmutableBiMapFactory
 {
-    /**
-     * @deprecated in 8.2.0 Will be removed in 9.0.0.
-     */
-    @Deprecated
-    public static final ImmutableHashBiMap<?, ?> EMPTY_INSTANCE = new ImmutableHashBiMap(Maps.immutable.empty(), Maps.immutable.empty());
+    private static final ImmutableHashBiMap<?, ?> EMPTY_INSTANCE = new ImmutableHashBiMap(Maps.immutable.empty(), Maps.immutable.empty());
 
     @Override
     public <K, V> ImmutableBiMap<K, V> empty()

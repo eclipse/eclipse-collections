@@ -13,7 +13,6 @@ package org.eclipse.collections.impl.lazy;
 import java.util.Iterator;
 import java.util.Optional;
 
-import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.procedure.Procedure;
@@ -29,7 +28,6 @@ import org.eclipse.collections.impl.utility.Iterate;
  *
  * @since 5.0
  */
-@Immutable
 public class DistinctIterable<T>
         extends AbstractLazyIterable<T>
 {
@@ -51,7 +49,8 @@ public class DistinctIterable<T>
     {
         MutableSet<T> seenSoFar = UnifiedSet.newSet();
 
-        Iterate.forEach(this.adapted, each -> {
+        Iterate.forEach(this.adapted, each ->
+        {
             if (seenSoFar.add(each))
             {
                 procedure.value(each);

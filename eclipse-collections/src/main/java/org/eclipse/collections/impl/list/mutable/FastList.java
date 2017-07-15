@@ -32,7 +32,6 @@ import java.util.function.BinaryOperator;
 import java.util.function.Supplier;
 import java.util.stream.Collector;
 
-import net.jcip.annotations.NotThreadSafe;
 import org.eclipse.collections.api.block.HashingStrategy;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function0;
@@ -116,7 +115,6 @@ import org.eclipse.collections.impl.utility.internal.RandomAccessListIterate;
  * with a shared reference to a static  empty array (ZERO_SIZED_ARRAY).  This makes FastLists presized to 0 very
  * memory efficient as well.  The first call to add will lazily create an array of size 1.
  */
-@NotThreadSafe
 public class FastList<T>
         extends AbstractMutableList<T>
         implements Externalizable, RandomAccess, BatchIterable<T>

@@ -16,7 +16,6 @@ import java.io.ObjectInput;
 import java.io.ObjectOutput;
 import java.util.Comparator;
 
-import net.jcip.annotations.NotThreadSafe;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.primitive.BooleanFunction;
 import org.eclipse.collections.api.block.function.primitive.ByteFunction;
@@ -36,7 +35,6 @@ import org.eclipse.collections.impl.block.factory.Comparators;
  * This class is a memory efficient list with one element.  Unlike Collections.singletonList(), it can be sorted.  It is
  * normally created by calling Lists.fixedSize.of(one).
  */
-@NotThreadSafe
 final class SingletonList<T>
         extends AbstractMemoryEfficientMutableList<T>
         implements Externalizable

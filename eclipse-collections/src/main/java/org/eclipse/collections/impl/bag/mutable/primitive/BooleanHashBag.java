@@ -16,7 +16,6 @@ import java.io.ObjectInput;
 import java.io.ObjectOutput;
 import java.util.NoSuchElementException;
 
-import net.jcip.annotations.NotThreadSafe;
 import org.eclipse.collections.api.BooleanIterable;
 import org.eclipse.collections.api.LazyBooleanIterable;
 import org.eclipse.collections.api.bag.MutableBag;
@@ -49,7 +48,6 @@ import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
  *
  * @since 3.0.
  */
-@NotThreadSafe
 public final class BooleanHashBag implements MutableBooleanBag, Externalizable
 {
     private static final long serialVersionUID = 1L;

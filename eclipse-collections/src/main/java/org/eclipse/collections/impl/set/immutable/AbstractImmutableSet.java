@@ -14,7 +14,6 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.concurrent.ExecutorService;
 
-import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
@@ -98,7 +97,6 @@ import org.eclipse.collections.impl.utility.internal.SetIterables;
  * This class is the parent class for all ImmutableSets.  All implementations of ImmutableSet must implement the Set
  * interface so anArraySet.equals(anImmutableSet) can return true when the contents and order are the same.
  */
-@Immutable
 public abstract class AbstractImmutableSet<T> extends AbstractImmutableCollection<T>
         implements ImmutableSet<T>, Set<T>
 {

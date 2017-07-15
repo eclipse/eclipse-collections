@@ -20,7 +20,6 @@ import java.util.Optional;
 import java.util.Random;
 import java.util.concurrent.ExecutorService;
 
-import net.jcip.annotations.GuardedBy;
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.block.HashingStrategy;
 import org.eclipse.collections.api.block.function.Function;
@@ -106,7 +105,6 @@ public class SynchronizedMutableList<T>
     }
 
     @Override
-    @GuardedBy("getLock()")
     protected MutableList<T> getDelegate()
     {
         return (MutableList<T>) super.getDelegate();

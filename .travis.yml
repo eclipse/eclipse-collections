@@ -45,11 +45,10 @@ matrix:
         - CMD="mvn install --projects jmh-tests,performance-tests --also-make --activate-profiles all -DskipTests=true --batch-mode --show-version --errors"
 
 script:
-  if ["$TRAVIS_EVENT_TYPE" == "cron"]; then
-      eval travis_wait 35 $CMD $SONAR_COMMAND;
-  else
-      eval travis_wait 35 $CMD;
-  fi
+  - if [[ "$TRAVIS_EVENT_TYPE" == "cron" ]];
+    then eval travis_wait 35 $CMD $SONAR_COMMAND;
+    else eval travis_wait 35 $CMD;
+    fi
 
 cache:
   directories:

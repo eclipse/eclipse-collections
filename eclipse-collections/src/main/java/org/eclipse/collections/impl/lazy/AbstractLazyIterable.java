@@ -15,7 +15,6 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.Optional;
 
-import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.LazyBooleanIterable;
 import org.eclipse.collections.api.LazyByteIterable;
 import org.eclipse.collections.api.LazyCharIterable;
@@ -85,7 +84,6 @@ import org.eclipse.collections.impl.utility.LazyIterate;
  * AbstractLazyIterable provides a base from which deferred iterables such as SelectIterable,
  * RejectIterable and CollectIterable can be derived.
  */
-@Immutable
 public abstract class AbstractLazyIterable<T>
         extends AbstractRichIterable<T>
         implements LazyIterable<T>

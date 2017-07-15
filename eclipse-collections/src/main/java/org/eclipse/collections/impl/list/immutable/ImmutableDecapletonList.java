@@ -13,7 +13,6 @@ package org.eclipse.collections.impl.list.immutable;
 import java.io.Serializable;
 import java.util.RandomAccess;
 
-import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.impl.factory.Lists;
@@ -22,7 +21,6 @@ import org.eclipse.collections.impl.factory.Lists;
  * This is a ten element immutable List which is created by calling
  * Immutable.newListWith(one, two, three, four, five, six, seven, eight, nine, ten) method.
  */
-@Immutable
 final class ImmutableDecapletonList<T>
         extends AbstractImmutableList<T>
         implements Serializable, RandomAccess

@@ -12,7 +12,6 @@ package org.eclipse.collections.impl.lazy;
 
 import java.util.Iterator;
 
-import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.impl.lazy.iterator.ChunkIterator;
@@ -21,7 +20,6 @@ import org.eclipse.collections.impl.utility.internal.IterableIterate;
 /**
  * A ChunkIterable is an iterable that partitions a source iterable into fixed size chunks as it iterates.
  */
-@Immutable
 public class ChunkIterable<T>
         extends AbstractLazyIterable<RichIterable<T>>
 {

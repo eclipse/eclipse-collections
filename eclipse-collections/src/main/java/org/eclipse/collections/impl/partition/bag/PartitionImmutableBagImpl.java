@@ -10,11 +10,9 @@
 
 package org.eclipse.collections.impl.partition.bag;
 
-import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.api.partition.bag.PartitionImmutableBag;
 
-@Immutable
 public class PartitionImmutableBagImpl<T> implements PartitionImmutableBag<T>
 {
     private final ImmutableBag<T> selected;

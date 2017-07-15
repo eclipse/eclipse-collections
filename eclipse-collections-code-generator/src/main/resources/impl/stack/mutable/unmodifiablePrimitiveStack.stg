@@ -37,14 +37,12 @@ import org.eclipse.collections.api.stack.primitive.Mutable<name>Stack;
 import org.eclipse.collections.impl.factory.primitive.<name>Stacks;
 import org.eclipse.collections.impl.iterator.Unmodifiable<name>Iterator;
 import org.eclipse.collections.impl.lazy.primitive.Lazy<name>IterableAdapter;
-import net.jcip.annotations.NotThreadSafe;
 
 /**
  * This file was automatically generated from template file unmodifiablePrimitiveStack.stg.
  *
  * @since 3.1.
  */
-@NotThreadSafe
 public final class Unmodifiable<name>Stack
         implements Mutable<name>Stack, Serializable
 {

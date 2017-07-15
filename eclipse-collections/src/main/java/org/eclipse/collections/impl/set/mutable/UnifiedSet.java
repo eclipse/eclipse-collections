@@ -25,7 +25,6 @@ import java.util.RandomAccess;
 import java.util.Set;
 import java.util.concurrent.ExecutorService;
 
-import net.jcip.annotations.NotThreadSafe;
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.annotation.Beta;
@@ -63,7 +62,6 @@ import org.eclipse.collections.impl.set.AbstractUnifiedSet;
 import org.eclipse.collections.impl.tuple.Tuples;
 import org.eclipse.collections.impl.utility.Iterate;
 
-@NotThreadSafe
 public class UnifiedSet<T>
         extends AbstractUnifiedSet<T>
         implements Externalizable

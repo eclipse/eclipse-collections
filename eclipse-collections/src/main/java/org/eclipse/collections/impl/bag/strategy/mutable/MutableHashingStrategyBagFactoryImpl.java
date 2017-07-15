@@ -10,13 +10,11 @@
 
 package org.eclipse.collections.impl.bag.strategy.mutable;
 
-import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.block.HashingStrategy;
 import org.eclipse.collections.api.factory.bag.strategy.MutableHashingStrategyBagFactory;
 import org.eclipse.collections.impl.utility.Iterate;
 
-@Immutable
 public class MutableHashingStrategyBagFactoryImpl implements MutableHashingStrategyBagFactory
 {
     @Override

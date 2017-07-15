@@ -10,11 +10,9 @@
 
 package org.eclipse.collections.impl.partition.list;
 
-import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.partition.list.PartitionImmutableList;
 
-@Immutable
 public class PartitionImmutableListImpl<T> implements PartitionImmutableList<T>
 {
     private final ImmutableList<T> selected;

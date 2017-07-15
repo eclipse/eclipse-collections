@@ -40,7 +40,6 @@ import org.eclipse.collections.impl.factory.primitive.<name>Sets;
 import org.eclipse.collections.impl.iterator.ImmutableEmpty<name>Iterator;
 import org.eclipse.collections.impl.lazy.primitive.Lazy<name>IterableAdapter;
 import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
-import net.jcip.annotations.Immutable;
 
 /**
  * Immutable<name>EmptySet is an optimization for {@link Immutable<name>Set} of size 0.
@@ -48,7 +47,6 @@ import net.jcip.annotations.Immutable;
  *
  * @since 4.0.
  */
-@Immutable
 final class Immutable<name>EmptySet implements Immutable<name>Set, Serializable
 {
     static final Immutable<name>Set INSTANCE = new Immutable<name>EmptySet();

@@ -35,7 +35,6 @@ import org.eclipse.collections.impl.factory.primitive.<name>Stacks;
 import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
 import org.eclipse.collections.impl.stack.mutable.primitive.<name>ArrayStack;
 import org.eclipse.collections.impl.stack.primitive.Abstract<name>Stack;
-import net.jcip.annotations.Immutable;
 
 /**
  * Immutable<name>ArrayStack is the non-modifiable equivalent of {@link <name>ArrayStack}.
@@ -43,7 +42,6 @@ import net.jcip.annotations.Immutable;
  *
  * @since 4.0.
  */
-@Immutable
 final class Immutable<name>ArrayStack extends Abstract<name>Stack
         implements Immutable<name>Stack, Serializable
 {

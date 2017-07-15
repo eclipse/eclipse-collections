@@ -13,7 +13,6 @@ package org.eclipse.collections.impl.lazy;
 import java.util.Iterator;
 import java.util.Optional;
 
-import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
@@ -31,7 +30,6 @@ import org.eclipse.collections.impl.utility.Iterate;
  *
  * @since 8.0
  */
-@Immutable
 public class DropWhileIterable<T> extends AbstractLazyIterable<T>
 {
     private final Iterable<T> adapted;

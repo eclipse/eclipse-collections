@@ -19,8 +19,6 @@ import java.util.Set;
 import java.util.SortedSet;
 import java.util.concurrent.ExecutorService;
 
-import net.jcip.annotations.GuardedBy;
-import net.jcip.annotations.ThreadSafe;
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
@@ -67,7 +65,6 @@ import org.eclipse.collections.impl.stack.mutable.ArrayStack;
  *
  * @see MutableSortedSet#asSynchronized()
  */
-@ThreadSafe
 public class SynchronizedSortedSet<T>
         extends AbstractSynchronizedMutableCollection<T>
         implements MutableSortedSet<T>, Serializable
@@ -106,7 +103,6 @@ public class SynchronizedSortedSet<T>
     }
 
     @Override
-    @GuardedBy("getLock()")
     protected MutableSortedSet<T> getDelegate()
     {
         return (MutableSortedSet<T>) super.getDelegate();

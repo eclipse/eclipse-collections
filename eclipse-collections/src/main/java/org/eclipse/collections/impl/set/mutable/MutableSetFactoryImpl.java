@@ -10,11 +10,9 @@
 
 package org.eclipse.collections.impl.set.mutable;
 
-import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.factory.set.MutableSetFactory;
 import org.eclipse.collections.api.set.MutableSet;
 
-@Immutable
 public final class MutableSetFactoryImpl implements MutableSetFactory
 {
     @Override

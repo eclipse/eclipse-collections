@@ -14,7 +14,6 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.Optional;
 
-import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.predicate.Predicate;
@@ -29,7 +28,6 @@ import org.eclipse.collections.impl.utility.LazyIterate;
 /**
  * A LazyIterableAdapter wraps any iterable with the LazyIterable interface.
  */
-@Immutable
 public class LazyIterableAdapter<T>
         extends AbstractLazyIterable<T>
 {

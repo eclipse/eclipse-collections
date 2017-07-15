@@ -14,7 +14,6 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
-import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
@@ -25,7 +24,6 @@ import org.eclipse.collections.impl.EmptyIterator;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.utility.Iterate;
 
-@Immutable
 public final class CompositeIterable<E>
         extends AbstractLazyIterable<E>
 {
@@ -56,7 +54,8 @@ public final class CompositeIterable<E>
     public void forEachWithIndex(ObjectIntProcedure<? super E> objectIntProcedure)
     {
         Counter index = new Counter();
-        this.iterables.each(iterable -> Iterate.forEach(iterable, object -> {
+        this.iterables.each(iterable -> Iterate.forEach(iterable, object ->
+        {
             objectIntProcedure.value(object, index.getCount());
             index.increment();
         }));
@@ -124,7 +123,7 @@ public final class CompositeIterable<E>
     @Override
     public int size()
     {
-       return (int) this.iterables.sumOfInt(Iterate::sizeOf);
+        return (int) this.iterables.sumOfInt(Iterate::sizeOf);
     }
 
     @Override

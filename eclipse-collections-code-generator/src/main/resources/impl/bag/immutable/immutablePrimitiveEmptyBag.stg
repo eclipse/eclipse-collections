@@ -43,7 +43,6 @@ import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
 import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.tuple.primitive.<name>IntPair;
 import org.eclipse.collections.impl.factory.Lists;
-import net.jcip.annotations.Immutable;
 
 /**
  * Immutable<name>EmptyBag is an optimization for {@link Immutable<name>Bag} of size 0.
@@ -51,7 +50,6 @@ import net.jcip.annotations.Immutable;
  *
  * @since 4.0.
  */
-@Immutable
 final class Immutable<name>EmptyBag implements Immutable<name>Bag, Serializable
 {
     static final Immutable<name>Bag INSTANCE = new Immutable<name>EmptyBag();

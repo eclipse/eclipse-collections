@@ -27,7 +27,6 @@ import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
 import org.eclipse.collections.api.iterator.<name>Iterator;
 import org.eclipse.collections.api.list.primitive.Mutable<name>List;
 import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
-import net.jcip.annotations.GuardedBy;
 
 /**
  * A synchronized view of a <name>Iterable.
@@ -40,7 +39,6 @@ public class Synchronized<name>Iterable implements <name>Iterable, Serializable
     private static final long serialVersionUID = 1L;
 
     private final Object lock;
-    @GuardedBy("this.lock")
     private final <name>Iterable iterable;
 
     protected Synchronized<name>Iterable(<name>Iterable iterable)

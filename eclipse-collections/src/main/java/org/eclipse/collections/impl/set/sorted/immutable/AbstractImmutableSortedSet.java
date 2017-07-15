@@ -15,7 +15,6 @@ import java.util.Set;
 import java.util.SortedSet;
 import java.util.concurrent.ExecutorService;
 
-import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
@@ -97,7 +96,6 @@ import org.eclipse.collections.impl.utility.internal.SortedSetIterables;
  * This class is the parent class for all ImmutableSortedSets.  All implementations of ImmutableSortedSet must implement the SortedSet
  * interface so an TreeSet.equals(anImmutableSortedSet) can return true when the contents are the same.
  */
-@Immutable
 abstract class AbstractImmutableSortedSet<T> extends AbstractImmutableCollection<T>
         implements ImmutableSortedSet<T>, SortedSet<T>
 {

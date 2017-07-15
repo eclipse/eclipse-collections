@@ -13,12 +13,9 @@ package org.eclipse.collections.impl;
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
 
-import net.jcip.annotations.Immutable;
-
 /**
  * A Singleton iterator which is empty and can be used by all empty collections.
  */
-@Immutable
 public final class EmptyIterator<T>
         implements ListIterator<T>
 {

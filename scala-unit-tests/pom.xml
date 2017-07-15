@@ -75,11 +75,6 @@
             <artifactId>slf4j-nop</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>net.jcip</groupId>
-            <artifactId>jcip-annotations</artifactId>
-        </dependency>
-
     </dependencies>
 
     <build>

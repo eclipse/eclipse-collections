@@ -19,7 +19,6 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.Set;
 
-import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.api.bag.MutableBagIterable;
 import org.eclipse.collections.api.block.function.Function;
@@ -46,7 +45,6 @@ import org.eclipse.collections.impl.partition.set.PartitionUnifiedSet;
 /**
  * This is a zero element {@link ImmutableSet} which is created by calling the Sets.immutable.empty() method.
  */
-@Immutable
 final class ImmutableEmptySet<T>
         extends AbstractImmutableSet<T>
         implements Serializable

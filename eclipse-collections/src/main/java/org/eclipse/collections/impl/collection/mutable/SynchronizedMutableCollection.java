@@ -14,7 +14,6 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Collections;
 
-import net.jcip.annotations.ThreadSafe;
 import org.eclipse.collections.api.collection.ImmutableCollection;
 import org.eclipse.collections.api.collection.MutableCollection;
 
@@ -24,7 +23,6 @@ import org.eclipse.collections.api.collection.MutableCollection;
  *
  * @see MutableCollection#asSynchronized()
  */
-@ThreadSafe
 public class SynchronizedMutableCollection<T>
         extends AbstractSynchronizedMutableCollection<T> implements Serializable
 {

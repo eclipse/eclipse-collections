@@ -18,7 +18,6 @@ import java.io.Serializable;
 import java.util.BitSet;
 import java.util.NoSuchElementException;
 
-import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.BooleanIterable;
 import org.eclipse.collections.api.LazyBooleanIterable;
 import org.eclipse.collections.api.bag.primitive.MutableBooleanBag;
@@ -48,7 +47,6 @@ import org.eclipse.collections.impl.set.mutable.primitive.BooleanHashSet;
  *
  * @since 3.2.
  */
-@Immutable
 final class ImmutableBooleanArrayList
         implements ImmutableBooleanList, Serializable
 {

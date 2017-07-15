@@ -13,11 +13,9 @@ package org.eclipse.collections.impl.map.sorted.mutable;
 import java.util.Comparator;
 import java.util.Map;
 
-import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.factory.map.sorted.MutableSortedMapFactory;
 import org.eclipse.collections.api.map.sorted.MutableSortedMap;
 
-@Immutable
 public final class MutableSortedMapFactoryImpl implements MutableSortedMapFactory
 {
     @Override

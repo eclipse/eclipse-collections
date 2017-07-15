@@ -17,7 +17,6 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
-import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.Bag;
@@ -89,7 +88,6 @@ import org.eclipse.collections.impl.utility.LazyIterate;
  *
  * @since 1.0
  */
-@Immutable
 final class ImmutableEmptyBag<T>
         extends AbstractImmutableBag<T>
         implements Serializable

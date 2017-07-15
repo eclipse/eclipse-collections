@@ -17,7 +17,6 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
-import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.block.HashingStrategy;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.procedure.Procedure;
@@ -32,7 +31,6 @@ import org.eclipse.collections.impl.set.immutable.AbstractImmutableSet;
 /**
  * This is a zero element {@link ImmutableUnifiedSetWithHashingStrategy} which is created by calling the HashingStrategySets.immutable.empty() method.
  */
-@Immutable
 final class ImmutableEmptySetWithHashingStrategy<T>
         extends AbstractImmutableSet<T>
         implements Serializable

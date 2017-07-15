@@ -16,7 +16,6 @@ import java.io.ObjectInput;
 import java.io.ObjectOutput;
 import java.util.EmptyStackException;
 
-import net.jcip.annotations.NotThreadSafe;
 import org.eclipse.collections.api.BooleanIterable;
 import org.eclipse.collections.api.LazyBooleanIterable;
 import org.eclipse.collections.api.bag.primitive.MutableBooleanBag;
@@ -46,7 +45,6 @@ import org.eclipse.collections.impl.stack.mutable.ArrayStack;
 /**
  * BooleanArrayStack is similar to {@link ArrayStack}, and is memory-optimized for boolean primitives.
  */
-@NotThreadSafe
 public final class BooleanArrayStack implements MutableBooleanStack, Externalizable
 {
     private static final long serialVersionUID = 1L;

@@ -12,13 +12,11 @@ package org.eclipse.collections.impl.map.strategy.immutable;
 
 import java.util.Map;
 
-import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.block.HashingStrategy;
 import org.eclipse.collections.api.factory.map.strategy.ImmutableHashingStrategyMapFactory;
 import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.impl.map.strategy.mutable.UnifiedMapWithHashingStrategy;
 
-@Immutable
 public final class ImmutableHashingStrategyMapFactoryImpl implements ImmutableHashingStrategyMapFactory
 {
     @Override

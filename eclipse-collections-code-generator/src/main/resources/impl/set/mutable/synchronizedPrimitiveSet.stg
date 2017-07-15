@@ -30,8 +30,6 @@ import org.eclipse.collections.api.set.primitive.<name>Set;
 import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
 import org.eclipse.collections.impl.collection.mutable.primitive.AbstractSynchronized<name>Collection;
 import org.eclipse.collections.impl.lazy.primitive.Lazy<name>IterableAdapter;
-import net.jcip.annotations.GuardedBy;
-import net.jcip.annotations.ThreadSafe;
 
 /**
  * A synchronized view of a {@link Mutable<name>Set}. It is imperative that the user manually synchronize on the collection when iterating over it using the
@@ -43,7 +41,6 @@ import net.jcip.annotations.ThreadSafe;
  * @see MutableSet#asSynchronized()
  * @since 3.1.
  */
-@ThreadSafe
 public final class Synchronized<name>Set
         extends AbstractSynchronized<name>Collection
         implements Mutable<name>Set
@@ -77,7 +74,6 @@ public final class Synchronized<name>Set
         return new Synchronized<name>Set(set, lock);
     }
 
-    @GuardedBy("getLock()")
     private Mutable<name>Set getMutable<name>Set()
     {
         return (Mutable<name>Set) this.get<name>Collection();

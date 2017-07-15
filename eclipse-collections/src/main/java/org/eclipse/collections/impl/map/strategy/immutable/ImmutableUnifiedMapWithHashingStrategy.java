@@ -14,7 +14,6 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Set;
 
-import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.block.HashingStrategy;
 import org.eclipse.collections.api.block.function.Function2;
@@ -34,7 +33,6 @@ import org.eclipse.collections.impl.set.mutable.UnmodifiableMutableSet;
 import org.eclipse.collections.impl.set.strategy.mutable.UnifiedSetWithHashingStrategy;
 import org.eclipse.collections.impl.utility.MapIterate;
 
-@Immutable
 /**
  * @see ImmutableMap
  */

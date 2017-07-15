@@ -13,7 +13,6 @@ package org.eclipse.collections.impl.multimap;
 import java.util.Collection;
 import java.util.Set;
 
-import net.jcip.annotations.GuardedBy;
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.Bag;
 import org.eclipse.collections.api.block.function.Function;
@@ -34,7 +33,6 @@ import org.eclipse.collections.impl.utility.LazyIterate;
 
 public abstract class AbstractSynchronizedMultimap<K, V> implements MutableMultimap<K, V>
 {
-    @GuardedBy("this.lock")
     protected final MutableMultimap<K, V> delegate;
     private final Object lock;
 

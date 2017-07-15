@@ -14,7 +14,6 @@ import java.io.Serializable;
 import java.util.Iterator;
 import java.util.concurrent.ExecutorService;
 
-import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.api.set.ParallelUnsortedSetIterable;
@@ -22,7 +21,6 @@ import org.eclipse.collections.impl.UnmodifiableIteratorAdapter;
 import org.eclipse.collections.impl.parallel.BatchIterable;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 
-@Immutable
 final class ImmutableUnifiedSet<T>
         extends AbstractImmutableSet<T>
         implements Serializable, BatchIterable<T>

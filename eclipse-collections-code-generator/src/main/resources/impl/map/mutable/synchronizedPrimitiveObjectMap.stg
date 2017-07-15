@@ -46,7 +46,6 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.Optional;
 
-import net.jcip.annotations.GuardedBy;
 import org.eclipse.collections.api.<name>Iterable;
 import org.eclipse.collections.api.Lazy<name>Iterable;
 import org.eclipse.collections.api.LazyIterable;
@@ -134,7 +133,6 @@ public final class Synchronized<name>ObjectMap\<V>
 {
     private static final long serialVersionUID = 1L;
     private final Object lock;
-    @GuardedBy("this.lock")
     private final Mutable<name>ObjectMap\<V> map;
 
     public Synchronized<name>ObjectMap(Mutable<name>ObjectMap\<V> map)

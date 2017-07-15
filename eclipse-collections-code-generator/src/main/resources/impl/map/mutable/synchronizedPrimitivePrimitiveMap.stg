@@ -56,7 +56,6 @@ import org.eclipse.collections.impl.SynchronizedRichIterable;
 import org.eclipse.collections.impl.factory.primitive.<name1><name2>Maps;
 import org.eclipse.collections.impl.set.mutable.primitive.Synchronized<name1>Set;
 import org.eclipse.collections.impl.collection.mutable.primitive.Synchronized<name2>Collection;
-import net.jcip.annotations.GuardedBy;
 
 /**
  * A synchronized view of a {@link Mutable<name1><name2>Map}. It is imperative that the user manually synchronize on the collection when iterating over it using the
@@ -73,7 +72,6 @@ public final class Synchronized<name1><name2>Map
 {
     private static final long serialVersionUID = 1L;
     private final Object lock;
-    @GuardedBy("this.lock")
     private final Mutable<name1><name2>Map map;
 
     public Synchronized<name1><name2>Map(Mutable<name1><name2>Map map)

@@ -34,17 +34,6 @@
         </sonar.jacoco.reportPaths>
     </properties>
 
-    <dependencies>
-
-        <!-- External dependencies -->
-
-        <dependency>
-            <groupId>net.jcip</groupId>
-            <artifactId>jcip-annotations</artifactId>
-        </dependency>
-
-    </dependencies>
-
     <build>
 
         <plugins>

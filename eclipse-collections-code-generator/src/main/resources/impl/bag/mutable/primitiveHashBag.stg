@@ -49,7 +49,6 @@ import org.eclipse.collections.impl.map.mutable.primitive.<name>IntHashMap;
 import org.eclipse.collections.impl.primitive.Abstract<name>Iterable;
 import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
-import net.jcip.annotations.NotThreadSafe;
 
 /**
  * <name>HashBag is similar to {@link HashBag}, and is memory-optimized for <type> primitives.
@@ -57,7 +56,6 @@ import net.jcip.annotations.NotThreadSafe;
  *
  * @since 3.0.
  */
-@NotThreadSafe
 public final class <name>HashBag extends Abstract<name>Iterable implements Mutable<name>Bag, Externalizable
 {
     private static final long serialVersionUID = 1L;

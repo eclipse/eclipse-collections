@@ -13,7 +13,6 @@ package org.eclipse.collections.impl.multimap.bag.sorted.mutable;
 import java.io.Serializable;
 import java.util.Comparator;
 
-import net.jcip.annotations.GuardedBy;
 import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
@@ -201,7 +200,6 @@ public class SynchronizedSortedBagMultimap<K, V>
     }
 
     @Override
-    @GuardedBy("getLock()")
     protected MutableSortedBagMultimap<K, V> getDelegate()
     {
         return (MutableSortedBagMultimap<K, V>) super.getDelegate();

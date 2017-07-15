@@ -39,8 +39,6 @@ import org.eclipse.collections.api.stack.primitive.Mutable<name>Stack;
 import org.eclipse.collections.impl.factory.primitive.<name>Stacks;
 import org.eclipse.collections.impl.iterator.Unmodifiable<name>Iterator;
 import org.eclipse.collections.impl.lazy.primitive.Lazy<name>IterableAdapter;
-import net.jcip.annotations.GuardedBy;
-import net.jcip.annotations.ThreadSafe;
 
 /**
  * A synchronized view of a {@link Mutable<name>Stack}. It is imperative that the user manually synchronize on the collection when iterating over it using the
@@ -52,13 +50,11 @@ import net.jcip.annotations.ThreadSafe;
  * @see MutableStack#asSynchronized()
  * @since 3.1.
  */
-@ThreadSafe
 public final class Synchronized<name>Stack
         implements Mutable<name>Stack, Serializable
 {
     private static final long serialVersionUID = 1L;
     private final Object lock;
-    @GuardedBy("this.lock")
     private final Mutable<name>Stack stack;
 
     public Synchronized<name>Stack(Mutable<name>Stack stack)

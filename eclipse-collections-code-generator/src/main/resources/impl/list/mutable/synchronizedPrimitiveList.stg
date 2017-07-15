@@ -34,8 +34,6 @@ import org.eclipse.collections.impl.collection.mutable.primitive.AbstractSynchro
 import org.eclipse.collections.impl.factory.primitive.<name>Lists;
 import org.eclipse.collections.impl.lazy.primitive.Lazy<name>IterableAdapter;
 import org.eclipse.collections.impl.lazy.primitive.Reverse<name>Iterable;
-import net.jcip.annotations.GuardedBy;
-import net.jcip.annotations.ThreadSafe;
 
 /**
  * A synchronized view of a {@link Mutable<name>List}. It is imperative that the user manually synchronize on the collection when iterating over it using the
@@ -47,7 +45,6 @@ import net.jcip.annotations.ThreadSafe;
  * @see MutableList#asSynchronized()
  * @since 3.1.
  */
-@ThreadSafe
 public final class Synchronized<name>List
         extends AbstractSynchronized<name>Collection
         implements Mutable<name>List
@@ -64,7 +61,6 @@ public final class Synchronized<name>List
         super(list, newLock);
     }
 
-    @GuardedBy("getLock()")
     private Mutable<name>List getMutable<name>List()
     {
         return (Mutable<name>List) this.get<name>Collection();

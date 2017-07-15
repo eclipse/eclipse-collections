@@ -12,7 +12,6 @@ package org.eclipse.collections.impl.lazy;
 
 import java.util.Iterator;
 
-import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.lazy.iterator.ZipIterator;
@@ -21,7 +20,6 @@ import org.eclipse.collections.impl.utility.internal.IterableIterate;
 /**
  * A ZipIterable is an iterable that transforms a source iterable on a condition as it iterates.
  */
-@Immutable
 public class ZipIterable<X, Y>
         extends AbstractLazyIterable<Pair<X, Y>>
 {

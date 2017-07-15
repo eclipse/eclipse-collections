@@ -42,13 +42,6 @@
             <version>${project.version}</version>
         </dependency>
 
-        <!-- External dependencies -->
-
-        <dependency>
-            <groupId>net.jcip</groupId>
-            <artifactId>jcip-annotations</artifactId>
-        </dependency>
-
     </dependencies>
 
     <build>

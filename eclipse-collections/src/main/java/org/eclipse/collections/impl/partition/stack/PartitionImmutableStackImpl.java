@@ -10,11 +10,9 @@
 
 package org.eclipse.collections.impl.partition.stack;
 
-import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.partition.stack.PartitionImmutableStack;
 import org.eclipse.collections.api.stack.ImmutableStack;
 
-@Immutable
 public class PartitionImmutableStackImpl<T> implements PartitionImmutableStack<T>
 {
     private final ImmutableStack<T> selected;

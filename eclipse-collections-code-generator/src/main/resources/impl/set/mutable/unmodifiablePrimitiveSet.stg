@@ -24,14 +24,12 @@ import org.eclipse.collections.api.set.primitive.Immutable<name>Set;
 import org.eclipse.collections.api.set.primitive.<name>Set;
 import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
 import org.eclipse.collections.impl.collection.mutable.primitive.AbstractUnmodifiable<name>Collection;
-import net.jcip.annotations.NotThreadSafe;
 
 /**
  * This file was automatically generated from template file unmodifiablePrimitiveSet.stg.
  *
  * @since 3.1.
  */
-@NotThreadSafe
 public final class Unmodifiable<name>Set
         extends AbstractUnmodifiable<name>Collection
         implements Mutable<name>Set

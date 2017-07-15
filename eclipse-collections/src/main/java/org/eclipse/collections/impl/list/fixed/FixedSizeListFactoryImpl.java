@@ -10,12 +10,10 @@
 
 package org.eclipse.collections.impl.list.fixed;
 
-import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.factory.list.FixedSizeListFactory;
 import org.eclipse.collections.api.list.FixedSizeList;
 import org.eclipse.collections.impl.utility.Iterate;
 
-@Immutable
 public class FixedSizeListFactoryImpl implements FixedSizeListFactory
 {
     private static final FixedSizeList<?> EMPTY_LIST = new EmptyList<>();

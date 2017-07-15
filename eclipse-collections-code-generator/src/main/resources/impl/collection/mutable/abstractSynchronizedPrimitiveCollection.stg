@@ -32,22 +32,18 @@ import org.eclipse.collections.api.iterator.Mutable<name>Iterator;
 import org.eclipse.collections.api.list.primitive.Mutable<name>List;
 import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
 import org.eclipse.collections.impl.lazy.primitive.Lazy<name>IterableAdapter;
-import net.jcip.annotations.GuardedBy;
-import net.jcip.annotations.ThreadSafe;
 
 /**
  * This file was automatically generated from template file abstractSynchronizedPrimitiveCollection.stg.
  *
  * @since 3.1.
  */
-@ThreadSafe
 public abstract class AbstractSynchronized<name>Collection
         implements Mutable<name>Collection, Serializable
 {
     private static final long serialVersionUID = 1L;
 
     private final Object lock;
-    @GuardedBy("this.lock")
     private final Mutable<name>Collection collection;
 
     protected AbstractSynchronized<name>Collection(Mutable<name>Collection collection)

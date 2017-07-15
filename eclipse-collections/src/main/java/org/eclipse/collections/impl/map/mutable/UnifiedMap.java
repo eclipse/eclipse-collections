@@ -25,7 +25,6 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.Set;
 
-import net.jcip.annotations.NotThreadSafe;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.block.function.Function2;
@@ -63,7 +62,6 @@ import org.eclipse.collections.impl.utility.Iterate;
  * The best of both approaches unified together, and thus the name UnifiedMap.
  */
 
-@NotThreadSafe
 @SuppressWarnings("ObjectEquality")
 public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
         implements Externalizable, BatchIterable<V>

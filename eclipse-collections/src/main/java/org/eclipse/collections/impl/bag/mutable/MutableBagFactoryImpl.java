@@ -10,11 +10,9 @@
 
 package org.eclipse.collections.impl.bag.mutable;
 
-import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.factory.bag.MutableBagFactory;
 
-@Immutable
 public final class MutableBagFactoryImpl implements MutableBagFactory
 {
     @Override

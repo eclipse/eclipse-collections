@@ -14,7 +14,6 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.Iterator;
 
-import net.jcip.annotations.Immutable;
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.ImmutableBag;
@@ -81,7 +80,6 @@ import org.eclipse.collections.impl.utility.Iterate;
 /**
  * @since 7.0
  */
-@Immutable
 abstract class AbstractImmutableSortedBag<T>
         extends AbstractImmutableBagIterable<T>
         implements ImmutableSortedBag<T>
@@ -174,7 +172,8 @@ abstract class AbstractImmutableSortedBag<T>
     public PartitionImmutableSortedBag<T> partition(Predicate<? super T> predicate)
     {
         PartitionMutableSortedBag<T> result = new PartitionTreeBag<>(this.comparator());
-        this.forEachWithOccurrences((each, index) -> {
+        this.forEachWithOccurrences((each, index) ->
+        {
             MutableSortedBag<T> bucket = predicate.accept(each) ? result.getSelected() : result.getRejected();
             bucket.addOccurrences(each, index);
         });
@@ -185,7 +184,8 @@ abstract class AbstractImmutableSortedBag<T>
     public <P> PartitionImmutableSortedBag<T> partitionWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         PartitionMutableSortedBag<T> result = new PartitionTreeBag<>(this.comparator());
-        this.forEachWithOccurrences((each, index) -> {
+        this.forEachWithOccurrences((each, index) ->
+        {
             MutableSortedBag<T> bucket = predicate.accept(each, parameter)
                     ? result.getSelected()
                     : result.getRejected();
@@ -270,7 +270,8 @@ abstract class AbstractImmutableSortedBag<T>
     public ImmutableSortedBag<T> selectByOccurrences(IntPredicate predicate)
     {
         MutableSortedBag<T> result = TreeBag.newBag(this.comparator());
-        this.forEachWithOccurrences((each, occurrences) -> {
+        this.forEachWithOccurrences((each, occurrences) ->
+        {
             if (predicate.accept(occurrences))
             {
                 result.addOccurrences(each, occurrences);
@@ -284,7 +285,8 @@ abstract class AbstractImmutableSortedBag<T>
     {
         Comparator<? super S> comparator = (Comparator<? super S>) this.comparator();
         MutableSortedBag<S> result = TreeBag.newBag(comparator);
-        this.forEachWithOccurrences((each, occurrences) -> {
+        this.forEachWithOccurrences((each, occurrences) ->
+        {
             if (clazz.isInstance(each))
             {
                 result.addOccurrences(clazz.cast(each), occurrences);
@@ -299,7 +301,8 @@ abstract class AbstractImmutableSortedBag<T>
         MutableList<Pair<T, S>> list = FastList.newList();
         Iterator<S> iterator = that.iterator();
 
-        this.forEachWithOccurrences((each, parameter) -> {
+        this.forEachWithOccurrences((each, parameter) ->
+        {
             for (int i = 0; i < parameter; i++)
             {
                 if (iterator.hasNext())
@@ -319,7 +322,8 @@ abstract class AbstractImmutableSortedBag<T>
         if (target instanceof MutableBag)
         {
             MutableBag<S> targetBag = (MutableBag<S>) target;
-            this.forEachWithOccurrences((each, occurrences) -> {
+            this.forEachWithOccurrences((each, occurrences) ->
+            {
                 if (iterator.hasNext())
                 {
                     targetBag.addOccurrences((S) Tuples.pair(each, iterator.next()), occurrences);
@@ -328,7 +332,8 @@ abstract class AbstractImmutableSortedBag<T>
         }
         else
         {
-            this.forEachWithOccurrences((each, occurrences) -> {
+            this.forEachWithOccurrences((each, occurrences) ->
+            {
                 for (int i = 0; i < occurrences; i++)
                 {
                     if (iterator.hasNext())

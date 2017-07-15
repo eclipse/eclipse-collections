@@ -42,13 +42,11 @@ import org.eclipse.collections.impl.iterator.ImmutableEmpty<name>Iterator;
 import org.eclipse.collections.impl.lazy.primitive.Lazy<name>IterableAdapter;
 import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
 import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
-import net.jcip.annotations.Immutable;
 
 /**
  * Immutable<name>EmptyStack is an optimization for {@link Immutable<name>Stack} of size 0.
  * This file was automatically generated from template file immutablePrimitiveEmptyStack.stg.
  */
-@Immutable
 final class Immutable<name>EmptyStack implements Immutable<name>Stack, Serializable
 {
     static final Immutable<name>Stack INSTANCE = new Immutable<name>EmptyStack();

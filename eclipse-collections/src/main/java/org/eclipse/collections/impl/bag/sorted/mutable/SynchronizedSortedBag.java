@@ -17,8 +17,6 @@ import java.util.Comparator;
 import java.util.Optional;
 import java.util.concurrent.ExecutorService;
 
-import net.jcip.annotations.GuardedBy;
-import net.jcip.annotations.ThreadSafe;
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.bag.ParallelBag;
 import org.eclipse.collections.api.bag.sorted.ImmutableSortedBag;
@@ -66,7 +64,6 @@ import org.eclipse.collections.impl.stack.mutable.ArrayStack;
  *
  * @see MutableSortedBag#asSynchronized()
  */
-@ThreadSafe
 public class SynchronizedSortedBag<T>
         extends AbstractSynchronizedMutableCollection<T>
         implements MutableSortedBag<T>, Serializable
@@ -94,7 +91,6 @@ public class SynchronizedSortedBag<T>
     }
 
     @Override
-    @GuardedBy("getLock()")
     protected MutableSortedBag<T> getDelegate()
     {
         return (MutableSortedBag<T>) super.getDelegate();

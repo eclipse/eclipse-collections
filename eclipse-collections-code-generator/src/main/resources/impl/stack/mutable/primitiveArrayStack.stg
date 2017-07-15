@@ -35,13 +35,11 @@ import org.eclipse.collections.impl.factory.primitive.<name>Stacks;
 import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
 import org.eclipse.collections.impl.stack.primitive.Abstract<name>Stack;
 import org.eclipse.collections.impl.stack.mutable.ArrayStack;
-import net.jcip.annotations.NotThreadSafe;
 
 /**
  * <name>ArrayStack is similar to {@link ArrayStack}, and is memory-optimized for <type> primitives.
  * This file was automatically generated from template file primitiveArrayStack.stg.
  */
-@NotThreadSafe
 public final class <name>ArrayStack extends Abstract<name>Stack
         implements Mutable<name>Stack, Externalizable
 {
