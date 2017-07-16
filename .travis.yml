@@ -22,29 +22,41 @@ matrix:
       env:
         - DESC="acceptance tests"
         - CMD="mvn install --projects acceptance-tests --also-make --activate-profiles all --batch-mode --show-version --errors"
+        - JDK=Java8
 
     - jdk: oraclejdk8
       env:
         - DESC="findbugs"
         - CMD="mvn install findbugs:check --projects '!scala-unit-tests,!jmh-scala-tests,!jmh-tests,!p2-repository' --activate-profiles all -DskipTests=true --batch-mode --show-version --errors"
+        - JDK=Java8
 
     - jdk: oraclejdk8
       env:
         - DESC="checkstyle"
         - CMD="mvn install checkstyle:check --activate-profiles all -DskipTests=true --batch-mode --show-version --errors"
+        - JDK=Java8
 
     - jdk: oraclejdk8
       env:
         - DESC="unit tests"
         - CMD="mvn install --batch-mode --show-version --errors"
         - SONAR_COMMAND="sonar:sonar -Dsonar.host.url=https://sonarqube.com -Dsonar.login=${SONARQUBE_TOKEN} -Dsonar.organization=eclipse-collections"
+        - JDK=Java8
 
     - jdk: oraclejdk8
       env:
         - DESC="compile jmh-tests and performance-tests"
         - CMD="mvn install --projects jmh-tests,performance-tests --also-make --activate-profiles all -DskipTests=true --batch-mode --show-version --errors"
+        - JDK=Java8
+
+    - jdk: oraclejdk8
+      env:
+        - DESC="Java 9 regression"
+        - JDK=Java9
+        - CMD="mvn install --batch-mode --show-version --errors -Dbytecode.version=1.9 -DargLine=-Djava.locale.providers=JRE,SPI"
 
 script:
+  - ./.travis-command-jdk9.sh
   - if [[ "$TRAVIS_EVENT_TYPE" == "cron" ]];
     then eval travis_wait 35 $CMD $SONAR_COMMAND;
     else eval travis_wait 35 $CMD;
