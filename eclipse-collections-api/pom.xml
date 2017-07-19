@@ -24,7 +24,7 @@
     </parent>
 
     <artifactId>eclipse-collections-api</artifactId>
-    <packaging>bundle</packaging>
+    <packaging>jar</packaging>
 
     <name>Eclipse Collections API</name>
 
@@ -61,21 +61,6 @@
 
             <plugin>
                 <artifactId>maven-source-plugin</artifactId>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.felix</groupId>
-                <artifactId>maven-bundle-plugin</artifactId>
-                <configuration>
-                    <instructions>
-                        <Export-Package>org.eclipse.collections.api.*</Export-Package>
-                        <Bundle-RequiredExecutionEnvironment>JavaSE-1.8</Bundle-RequiredExecutionEnvironment>
-                        <Import-Package>
-                            net.jcip.annotations;resolution:=optional,*
-                        </Import-Package>
-                        <Bundle-Version>${project.version}</Bundle-Version>
-                    </instructions>
-                </configuration>
             </plugin>
 
             <plugin>
