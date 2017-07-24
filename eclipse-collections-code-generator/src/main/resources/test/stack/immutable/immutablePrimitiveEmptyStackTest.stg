@@ -110,6 +110,27 @@ public class Immutable<name>EmptyStackTest extends AbstractImmutable<name>StackT
     }
 
     @Override
+    @Test
+    public void averageIfEmpty()
+    {
+        Assert.assertEquals(1.2, this.classUnderTest().averageIfEmpty(1.2), 0.0);
+    }
+
+    @Override
+    @Test(expected = ArithmeticException.class)
+    public void median()
+    {
+        this.classUnderTest().median();
+    }
+
+    @Override
+    @Test
+    public void medianIfEmpty()
+    {
+        Assert.assertEquals(1.2, this.classUnderTest().medianIfEmpty(1.2), 0.0);
+    }
+
+    @Override
     @Test(expected = NoSuchElementException.class)
     public void max()
     {
