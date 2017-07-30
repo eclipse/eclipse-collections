@@ -1,4 +1,4 @@
-import "copyright.stg"
+import "copyrightAndOthers.stg"
 import "primitiveLiteral.stg"
 
 isTest() ::= "true"
@@ -12,7 +12,7 @@ class(primitive) ::= <<
 >>
 
 body(type, wrapperName, name) ::= <<
-<copyright()>
+<copyrightAndOthers()>
 
 package org.eclipse.collections.impl.list.immutable.primitive;
 
@@ -126,6 +126,27 @@ public class Immutable<name>EmptyListTest extends AbstractImmutable<name>ListTes
     public void average()
     {
         this.classUnderTest().average();
+    }
+
+    @Override
+    @Test
+    public void averageIfEmpty()
+    {
+        Assert.assertEquals(1.2, this.classUnderTest().averageIfEmpty(1.2), 0.0);
+    }
+
+    @Override
+    @Test(expected = ArithmeticException.class)
+    public void median()
+    {
+        this.classUnderTest().median();
+    }
+
+    @Override
+    @Test
+    public void medianIfEmpty()
+    {
+        Assert.assertEquals(1.2, this.classUnderTest().medianIfEmpty(1.2), 0.0);
     }
 
     @Override

@@ -1,4 +1,4 @@
-import "copyright.stg"
+import "copyrightAndOthers.stg"
 import "primitiveLiteral.stg"
 
 targetPath() ::= "org/eclipse/collections/api"
@@ -10,7 +10,7 @@ class(primitive) ::= <<
 >>
 
 body(type, name) ::= <<
-<copyright()>
+<copyrightAndOthers()>
 
 package org.eclipse.collections.api;
 
@@ -360,7 +360,31 @@ default <(wideStatistics.(type))> summaryStatistics()
 
 double average();
 
+/**
+ * @since 9.0
+ */
+default double averageIfEmpty(double defaultValue)
+{
+    if (this.isEmpty())
+    {
+        return defaultValue;
+    }
+    return this.average();
+}
+
 double median();
+
+/**
+ * @since 9.0
+ */
+default double medianIfEmpty(double defaultValue)
+{
+    if (this.isEmpty())
+    {
+        return defaultValue;
+    }
+    return this.median();
+}
 
 <type>[] toSortedArray();
 

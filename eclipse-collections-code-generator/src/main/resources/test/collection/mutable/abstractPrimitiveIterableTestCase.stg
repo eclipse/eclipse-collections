@@ -1,4 +1,4 @@
-import "copyright.stg"
+import "copyrightAndOthers.stg"
 import "primitiveEquals.stg"
 import "primitiveHashCode.stg"
 import "primitiveLiteral.stg"
@@ -14,7 +14,7 @@ class(primitive) ::= <<
 >>
 
 body(type, wrapperName, name) ::= <<
-<copyright()>
+<copyrightAndOthers()>
 
 package org.eclipse.collections.impl.collection.mutable.primitive;
 
@@ -623,6 +623,22 @@ public void sumConsistentRounding()
         this.newWith().average();
     }
 
+    /**
+     * @since 9.0
+     */
+    @Test
+    public void averageIfEmpty()
+    {
+        Assert.assertEquals(2.5, this.newWith().averageIfEmpty(2.5), 0.0);
+        int size = this.classUnderTest().size();
+        long sum = (long) ((size * (size + 1)) / 2);
+        double average = sum / size;
+        Assert.assertEquals(average, this.classUnderTest().averageIfEmpty(0.0), 0.0);
+        Assert.assertEquals(2.5, this.newWith(<["1", "2", "3", "4"]:(literal.(type))(); separator=", ">).averageIfEmpty(0.0), 0.0);
+        Assert.assertEquals(2.5, this.newWith(<["1", "2", "3", "4"]:(literal.(type))(); separator=", ">).averageIfEmpty(0.0), 0.0);
+        Assert.assertEquals(31.0, this.newWith(<["30", "30", "31", "31", "32", "32"]:(literal.(type))(); separator=", ">).averageIfEmpty(0.0), 0.0);
+    }
+
     @Test
     public void median()
     {
@@ -637,6 +653,20 @@ public void sumConsistentRounding()
     public void medianThrowsOnEmpty()
     {
         this.newWith().median();
+    }
+
+    /**
+     * @since 9.0
+     */
+    @Test
+    public void medianIfEmpty()
+    {
+        Assert.assertEquals(2.5, this.newWith().medianIfEmpty(2.5), 0.0);
+        Assert.assertEquals(1.0, this.newWith(<["1"]:(literal.(type))(); separator=", ">).medianIfEmpty(0.0), 0.0);
+        Assert.assertEquals(2.5, this.newWith(<["1", "2", "3", "4"]:(literal.(type))(); separator=", ">).medianIfEmpty(0.0), 0.0);
+        Assert.assertEquals(3.0, this.newWith(<["1", "2", "3", "4", "5"]:(literal.(type))(); separator=", ">).medianIfEmpty(0.0), 0.0);
+        Assert.assertEquals(31.0, this.newWith(<["30", "30", "31", "31", "32"]:(literal.(type))(); separator=", ">).medianIfEmpty(0.0), 0.0);
+        Assert.assertEquals(30.5, this.newWith(<["1", "30", "30", "31", "31", "32"]:(literal.(type))(); separator=", ">).medianIfEmpty(0.0), 0.0);
     }
 
     @Test

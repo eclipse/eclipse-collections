@@ -1,0 +1,112 @@
+import "copyrightAndOthers.stg"
+import "primitiveEquals.stg"
+import "primitiveLiteral.stg"
+
+isTest() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/set/immutable/primitive"
+
+fileName(primitive) ::= "Immutable<primitive.name>EmptySetTest"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name, primitive.wrapperName)>
+>>
+
+body(type, name, wrapperName) ::= <<
+<copyrightAndOthers()>
+
+package org.eclipse.collections.impl.set.immutable.primitive;
+
+import java.util.NoSuchElementException;
+
+import org.eclipse.collections.api.set.primitive.Immutable<name>Set;
+import org.eclipse.collections.impl.factory.primitive.<name>Bags;
+import org.eclipse.collections.impl.factory.primitive.<name>Sets;
+import org.eclipse.collections.impl.set.mutable.primitive.AbstractImmutable<name>HashSetTestCase;
+import org.eclipse.collections.impl.test.Verify;
+import org.junit.Assert;
+import org.junit.Test;
+
+/**
+ * JUnit test for {@link Immutable<name>EmptySet}.
+ * This file was automatically generated from template file immutablePrimitiveEmptySetTest.stg.
+ */
+public class Immutable<name>EmptySetTest extends AbstractImmutable<name>HashSetTestCase
+{
+    @Override
+    protected final Immutable<name>Set classUnderTest()
+    {
+        return <name>Sets.immutable.empty();
+    }
+
+    @Override
+    protected Immutable<name>Set newWith(<type>... elements)
+    {
+        return <name>Sets.immutable.with(elements);
+    }
+
+    @Override
+    @Test(expected = ArithmeticException.class)
+    public void average()
+    {
+        this.classUnderTest().average();
+    }
+
+    @Override
+    @Test
+    public void averageIfEmpty()
+    {
+        Assert.assertEquals(1.2, this.classUnderTest().averageIfEmpty(1.2), 0.0);
+    }
+
+    @Override
+    @Test(expected = ArithmeticException.class)
+    public void median()
+    {
+        this.classUnderTest().median();
+    }
+
+    @Override
+    @Test
+    public void medianIfEmpty()
+    {
+        Assert.assertEquals(1.2, this.classUnderTest().medianIfEmpty(1.2), 0.0);
+    }
+
+    @Override
+    @Test(expected = NoSuchElementException.class)
+    public void max()
+    {
+        this.classUnderTest().max();
+    }
+
+    @Override
+    @Test(expected = NoSuchElementException.class)
+    public void min()
+    {
+        this.classUnderTest().min();
+    }
+
+    @Override
+    @Test
+    public void notEmpty()
+    {
+        Assert.assertFalse(this.classUnderTest().notEmpty());
+    }
+
+    @Override
+    @Test
+    public void isEmpty()
+    {
+        Verify.assertEmpty(this.newWith());
+    }
+
+    @Override
+    @Test
+    public void toBag()
+    {
+        Assert.assertEquals(<name>Bags.immutable.empty(), this.classUnderTest().toBag());
+    }
+}
+
+>>
