@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2017 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -13,6 +13,7 @@ package org.eclipse.collections.impl.utility.internal;
 import java.util.Set;
 
 import org.eclipse.collections.api.LazyIterable;
+import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.set.SetIterable;
@@ -152,6 +153,11 @@ public final class SetIterables
 
     public static <A, B> LazyIterable<Pair<A, B>> cartesianProduct(SetIterable<A> set1, SetIterable<B> set2)
     {
-        return LazyIterate.flatCollect(set1, first -> LazyIterate.collect(set2, second -> Tuples.pair(first, second)));
+        return SetIterables.cartesianProduct(set1, set2, Tuples::pair);
+    }
+
+    public static <A, B, C> LazyIterable<C> cartesianProduct(SetIterable<A> set1, SetIterable<B> set2, Function2<A, B, C> function)
+    {
+        return LazyIterate.flatCollect(set1, first -> LazyIterate.collect(set2, second -> function.value(first, second)));
     }
 }

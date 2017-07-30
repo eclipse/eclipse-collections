@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2017 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -23,6 +23,7 @@ import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.factory.set.FixedSizeSetFactory;
 import org.eclipse.collections.api.factory.set.ImmutableSetFactory;
 import org.eclipse.collections.api.factory.set.MutableSetFactory;
+import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.set.FixedSizeSet;
 import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.api.set.MutableSet;
@@ -41,48 +42,48 @@ import static org.eclipse.collections.impl.factory.Iterables.mSet;
 
 public class SetsTest
 {
-    private final List<UnifiedSet<String>> uniqueSets =
-            FastList.newListWith(this.newUnsortedSet("Tom", "Dick", "Harry", null),
+    private final MutableList<UnifiedSet<String>> uniqueSets =
+            Lists.mutable.with(this.newUnsortedSet("Tom", "Dick", "Harry", null),
                     this.newUnsortedSet("Jane", "Sarah", "Mary"),
                     this.newUnsortedSet("Fido", "Spike", "Spuds"));
 
-    private final List<UnifiedSet<String>> overlappingSets =
-            FastList.newListWith(this.newUnsortedSet("Tom", "Dick", "Harry"),
+    private final MutableList<UnifiedSet<String>> overlappingSets =
+            Lists.mutable.with(this.newUnsortedSet("Tom", "Dick", "Harry"),
                     this.newUnsortedSet("Larry", "Tom", "Dick"),
                     this.newUnsortedSet("Dick", "Larry", "Paul", null));
 
-    private final List<UnifiedSet<String>> identicalSets =
-            FastList.newListWith(this.newUnsortedSet("Tom", null, "Dick", "Harry"),
+    private final MutableList<UnifiedSet<String>> identicalSets =
+            Lists.mutable.with(this.newUnsortedSet("Tom", null, "Dick", "Harry"),
                     this.newUnsortedSet(null, "Harry", "Tom", "Dick"),
                     this.newUnsortedSet("Dick", "Harry", "Tom", null));
 
-    private final List<TreeSet<String>> uniqueSortedSets =
-            FastList.newListWith(this.newSortedSet("Tom", "Dick", "Harry"),
+    private final MutableList<TreeSet<String>> uniqueSortedSets =
+            Lists.mutable.with(this.newSortedSet("Tom", "Dick", "Harry"),
                     this.newSortedSet("Jane", "Sarah", "Mary"),
                     this.newSortedSet("Fido", "Spike", "Spuds"));
 
-    private final List<TreeSet<String>> overlappingSortedSets =
-            FastList.newListWith(this.newSortedSet("Tom", "Dick", "Harry"),
+    private final MutableList<TreeSet<String>> overlappingSortedSets =
+            Lists.mutable.with(this.newSortedSet("Tom", "Dick", "Harry"),
                     this.newSortedSet("Larry", "Tom", "Dick"),
                     this.newSortedSet("Dick", "Larry", "Paul"));
 
-    private final List<TreeSet<String>> identicalSortedSets =
-            FastList.newListWith(this.newSortedSet("Tom", "Dick", "Harry"),
+    private final MutableList<TreeSet<String>> identicalSortedSets =
+            Lists.mutable.with(this.newSortedSet("Tom", "Dick", "Harry"),
                     this.newSortedSet("Harry", "Tom", "Dick"),
                     this.newSortedSet("Dick", "Harry", "Tom"));
 
-    private final List<TreeSet<String>> uniqueReverseSortedSets =
-            FastList.newListWith(this.newReverseSortedSet("Tom", "Dick", "Harry"),
+    private final MutableList<TreeSet<String>> uniqueReverseSortedSets =
+            Lists.mutable.with(this.newReverseSortedSet("Tom", "Dick", "Harry"),
                     this.newReverseSortedSet("Jane", "Sarah", "Mary"),
                     this.newReverseSortedSet("Fido", "Spike", "Spuds"));
 
-    private final List<TreeSet<String>> overlappingReverseSortedSets =
-            FastList.newListWith(this.newReverseSortedSet("Tom", "Dick", "Harry"),
+    private final MutableList<TreeSet<String>> overlappingReverseSortedSets =
+            Lists.mutable.with(this.newReverseSortedSet("Tom", "Dick", "Harry"),
                     this.newReverseSortedSet("Larry", "Tom", "Dick"),
                     this.newReverseSortedSet("Dick", "Larry", "Paul"));
 
-    private final List<TreeSet<String>> identicalReverseSortedSets =
-            FastList.newListWith(this.newReverseSortedSet("Tom", "Dick", "Harry"),
+    private final MutableList<TreeSet<String>> identicalReverseSortedSets =
+            Lists.mutable.with(this.newReverseSortedSet("Tom", "Dick", "Harry"),
                     this.newReverseSortedSet("Harry", "Tom", "Dick"),
                     this.newReverseSortedSet("Dick", "Harry", "Tom"));
 
@@ -581,7 +582,7 @@ public class SetsTest
         Set<E> bXcXa = function.value(function.value(setB, setC), setA);
         Set<E> cXaXb = function.value(function.value(setC, setA), setB);
         Set<E> cXbXa = function.value(function.value(setC, setB), setA);
-        this.assertAllContainExactly(setContainsProcedure, FastList.newListWith(aXbXc, aXcXb, bXaXc, bXcXa, cXaXb, cXbXa), elements);
+        this.assertAllContainExactly(setContainsProcedure, Lists.mutable.with(aXbXc, aXcXb, bXaXc, bXcXa, cXaXb, cXbXa), elements);
     }
 
     private <E> void assertAssociativeProperty(
@@ -639,7 +640,7 @@ public class SetsTest
     {
         Verify.assertSetsEqual(setA, setB);
         Object[] expectedItems = setB.toArray((E[]) new Object[setB.size()]);
-        Assert.assertEquals(FastList.newListWith(expectedItems), FastList.newList(setA));
+        Assert.assertEquals(Lists.mutable.with(expectedItems), FastList.newList(setA));
     }
 
     private <E> void assertForwardAndBackward(
@@ -663,14 +664,16 @@ public class SetsTest
 
     private <E> Procedure2<Set<E>, E[]> containsExactlyInOrderProcedure()
     {
-        return (set, elements) -> Assert.assertEquals(FastList.newListWith((Object[]) elements), FastList.newList(set));
+        return (set, elements) -> Assert.assertEquals(Lists.mutable.with((Object[]) elements), FastList.newList(set));
     }
 
     @Test
     public void immutables()
     {
         ImmutableSetFactory setFactory = Sets.immutable;
+        Assert.assertEquals(UnifiedSet.newSet(), setFactory.empty());
         Assert.assertEquals(UnifiedSet.newSet(), setFactory.of());
+        Assert.assertEquals(UnifiedSet.newSet(), setFactory.with());
         Verify.assertInstanceOf(ImmutableSet.class, setFactory.of());
         Assert.assertEquals(UnifiedSet.newSetWith(1), setFactory.of(1));
         Verify.assertInstanceOf(ImmutableSet.class, setFactory.of(1));
@@ -690,7 +693,9 @@ public class SetsTest
     public void mutables()
     {
         MutableSetFactory setFactory = Sets.mutable;
+        Assert.assertEquals(UnifiedSet.newSet(), setFactory.empty());
         Assert.assertEquals(UnifiedSet.newSet(), setFactory.of());
+        Assert.assertEquals(UnifiedSet.newSet(), setFactory.with());
         Verify.assertInstanceOf(MutableSet.class, setFactory.of());
         Assert.assertEquals(UnifiedSet.newSetWith(1), setFactory.of(1));
         Verify.assertInstanceOf(MutableSet.class, setFactory.of(1));
@@ -749,8 +754,45 @@ public class SetsTest
     @Test
     public void cartesianProduct()
     {
-        MutableSet<Integer> set1 = UnifiedSet.newSetWith(1, 2);
-        MutableSet<Integer> set2 = UnifiedSet.newSetWith(2, 3, 4);
+        MutableSet<Integer> set1 = Sets.mutable.with(1, 2);
+        MutableSet<Integer> set2 = Sets.mutable.with(2, 3, 4);
+        MutableBag<Pair<Integer, Integer>> expectedCartesianProduct1 = Bags.mutable.of(
+                Tuples.pair(1, 2),
+                Tuples.pair(2, 2),
+                Tuples.pair(1, 3),
+                Tuples.pair(2, 3),
+                Tuples.pair(1, 4),
+                Tuples.pair(2, 4));
+        Assert.assertEquals(expectedCartesianProduct1, Sets.cartesianProduct(set1, set2).toBag());
+        MutableBag<Pair<Integer, Integer>> expectedCartesianProduct2 = Bags.mutable.of(
+                Tuples.pair(2, 1),
+                Tuples.pair(3, 1),
+                Tuples.pair(4, 1),
+                Tuples.pair(2, 2),
+                Tuples.pair(3, 2),
+                Tuples.pair(4, 2));
+        Assert.assertEquals(expectedCartesianProduct2, Sets.cartesianProduct(set2, set1).toBag());
+    }
+
+    @Test
+    public void cartesianProductSameElements()
+    {
+        MutableSet<Integer> set1 = Sets.mutable.with(1, 2);
+        MutableSet<Integer> set2 = Sets.mutable.with(1, 2);
+        MutableBag<Pair<Integer, Integer>> expectedCartesianProduct = Bags.mutable.of(
+                Tuples.pair(1, 1),
+                Tuples.pair(1, 2),
+                Tuples.pair(2, 1),
+                Tuples.pair(2, 2)
+        );
+        Assert.assertEquals(expectedCartesianProduct, Sets.cartesianProduct(set1, set2).toBag());
+    }
+
+    @Test
+    public void cartesianProductWithFunction()
+    {
+        MutableSet<Integer> set1 = Sets.mutable.with(1, 2);
+        MutableSet<Integer> set2 = Sets.mutable.with(2, 3, 4);
         MutableBag<Pair<Integer, Integer>> expectedCartesianProduct = Bags.mutable.of(
                 Tuples.pair(1, 2),
                 Tuples.pair(2, 2),
@@ -758,7 +800,17 @@ public class SetsTest
                 Tuples.pair(2, 3),
                 Tuples.pair(1, 4),
                 Tuples.pair(2, 4));
-        Assert.assertEquals(expectedCartesianProduct, Sets.cartesianProduct(set1, set2).toBag());
+        Assert.assertEquals(expectedCartesianProduct, Sets.cartesianProduct(set1, set2, Tuples::pair).toBag());
+        MutableBag<List<Integer>> expectedCartesianProduct2 = Bags.mutable.of(
+                Lists.mutable.with(2, 1),
+                Lists.mutable.with(3, 1),
+                Lists.mutable.with(4, 1),
+                Lists.mutable.with(2, 2),
+                Lists.mutable.with(3, 2),
+                Lists.mutable.with(4, 2));
+        Assert.assertEquals(
+                expectedCartesianProduct2,
+                Sets.cartesianProduct(set2, set1, (one, two) -> Lists.mutable.with(one, two)).toBag());
     }
 
     @Test
@@ -767,7 +819,7 @@ public class SetsTest
         Assert.assertEquals(
                 Bags.mutable.of(),
                 HashBag.newBag(Sets.cartesianProduct(
-                        UnifiedSet.newSetWith(1, 2),
+                        Sets.mutable.with(1, 2),
                         UnifiedSet.newSet())));
     }
 
@@ -786,7 +838,7 @@ public class SetsTest
         MutableSet<Integer> set = Sets.fixedSize.of(1);
         ImmutableSet<Integer> immutableSet = set.toImmutable();
         Verify.assertInstanceOf(ImmutableSet.class, Sets.immutable.ofAll(set));
-        Verify.assertInstanceOf(ImmutableSet.class, Sets.immutable.ofAll(UnifiedSet.newSetWith(1, 2, 3, 4, 5)));
+        Verify.assertInstanceOf(ImmutableSet.class, Sets.immutable.ofAll(Sets.mutable.with(1, 2, 3, 4, 5)));
         Assert.assertSame(Sets.immutable.ofAll(immutableSet.castToSet()), immutableSet);
     }
 
@@ -803,15 +855,15 @@ public class SetsTest
     @Test
     public void emptySet()
     {
-        Assert.assertTrue(Sets.immutable.of().isEmpty());
-        Assert.assertSame(Sets.immutable.of(), Sets.immutable.of());
-        Verify.assertPostSerializedIdentity(Sets.immutable.of());
+        Assert.assertTrue(Sets.immutable.empty().isEmpty());
+        Assert.assertSame(Sets.immutable.empty(), Sets.immutable.empty());
+        Verify.assertPostSerializedIdentity(Sets.immutable.empty());
     }
 
     @Test
     public void newSetWith()
     {
-        Assert.assertSame(Sets.immutable.of(), Sets.immutable.of(Sets.immutable.of().toArray()));
+        Assert.assertSame(Sets.immutable.empty(), Sets.immutable.of(Sets.immutable.empty().toArray()));
         Verify.assertSize(1, Sets.immutable.of(1).castToSet());
         Verify.assertSize(1, Sets.immutable.of(1, 1).castToSet());
         Verify.assertSize(1, Sets.immutable.of(1, 1, 1).castToSet());

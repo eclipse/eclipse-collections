@@ -1,4 +1,4 @@
-import "copyright.stg"
+import "copyrightAndOthers.stg"
 
 targetPath() ::= "org/eclipse/collections/impl/utility/primitive"
 
@@ -9,7 +9,7 @@ class(primitive) ::= <<
 >>
 
 body(type, name) ::= <<
-<copyright()>
+<copyrightAndOthers()>
 
 package org.eclipse.collections.impl.utility.primitive;
 
@@ -20,6 +20,7 @@ import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFuncti
 import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
 import org.eclipse.collections.impl.factory.primitive.<name>Lists;
 import org.eclipse.collections.impl.lazy.primitive.Collect<name>ToObjectIterable;
+import org.eclipse.collections.impl.lazy.primitive.FlatCollect<name>ToObjectIterable;
 import org.eclipse.collections.impl.lazy.primitive.Lazy<name>IterableAdapter;
 import org.eclipse.collections.impl.lazy.primitive.Select<name>Iterable;
 
@@ -34,7 +35,7 @@ import org.eclipse.collections.impl.lazy.primitive.Select<name>Iterable;
  */
 public final class Lazy<name>Iterate
 {
-    private static final Lazy<name>Iterable EMPTY_ITERABLE = <name>Lists.immutable.of().asLazy();
+    private static final Lazy<name>Iterable EMPTY_ITERABLE = <name>Lists.immutable.empty().asLazy();
 
     private Lazy<name>Iterate()
     {
@@ -65,6 +66,18 @@ public final class Lazy<name>Iterate
             <name>ToObjectFunction\<? extends V> function)
     {
         return new Collect<name>ToObjectIterable\<>(iterable, function);
+    }
+
+    /**
+     * Creates a deferred transforming and flattening <type> iterable for the specified <type> iterable.
+     *
+     * @since 9.0
+     */
+    public static \<V> LazyIterable\<V> flatCollect(
+            <name>Iterable iterable,
+            <name>ToObjectFunction\<? extends Iterable\<V>\> function)
+    {
+        return new FlatCollect<name>ToObjectIterable\<>(iterable, function);
     }
 
     /**

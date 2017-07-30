@@ -1,4 +1,4 @@
-import "copyright.stg"
+import "copyrightAndOthers.stg"
 
 targetPath() ::= "org/eclipse/collections/impl/factory/primitive"
 
@@ -9,14 +9,20 @@ class(primitive) ::= <<
 >>
 
 body(type, name) ::= <<
-<copyright()>
+<copyrightAndOthers()>
 
 package org.eclipse.collections.impl.factory.primitive;
 
+import org.eclipse.collections.api.LazyIterable;
+import org.eclipse.collections.api.block.function.primitive.<name><name>ToObjectFunction;
 import org.eclipse.collections.api.factory.set.primitive.Immutable<name>SetFactory;
 import org.eclipse.collections.api.factory.set.primitive.Mutable<name>SetFactory;
+import org.eclipse.collections.api.set.primitive.<name>Set;
 import org.eclipse.collections.impl.set.immutable.primitive.Immutable<name>SetFactoryImpl;
 import org.eclipse.collections.impl.set.mutable.primitive.Mutable<name>SetFactoryImpl;
+import org.eclipse.collections.api.tuple.primitive.<name><name>Pair;
+import org.eclipse.collections.impl.factory.Sets;
+import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 
 /**
  * <name>Sets is a static utility for creating {@link Immutable<name>SetFactory}.
@@ -33,6 +39,25 @@ public final class <name>Sets
     private <name>Sets()
     {
         throw new AssertionError("Suppress default constructor for noninstantiability");
+    }
+
+    /**
+     * @since 9.0
+     */
+    public static \<A, B> LazyIterable\<<name><name>Pair> cartesianProduct(<name>Set set1, <name>Set set2)
+    {
+        return <name>Sets.cartesianProduct(set1, set2, PrimitiveTuples::pair);
+    }
+
+    /**
+     * @since 9.0
+     */
+    public static \<A, B, C> LazyIterable\<C> cartesianProduct(<name>Set set1, <name>Set set2, <name><name>ToObjectFunction\<C> function)
+    {
+        return set1.asLazy()
+                .flatCollect(first ->
+                    set2.asLazy()
+                        .collect(second -> function.value(first, second)));
     }
 }
 
