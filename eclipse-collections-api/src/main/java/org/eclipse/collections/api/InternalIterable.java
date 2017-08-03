@@ -10,6 +10,8 @@
 
 package org.eclipse.collections.api;
 
+import java.util.function.Consumer;
+
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
@@ -48,6 +50,13 @@ public interface InternalIterable<T>
      */
     @SuppressWarnings("UnnecessaryFullyQualifiedName")
     void forEach(Procedure<? super T> procedure);
+
+    @Override
+    default void forEach(Consumer<? super T> consumer)
+    {
+        Procedure<? super T> procedure = consumer::accept;
+        this.forEach(procedure);
+    }
 
     /**
      * Iterates over the iterable passing each element and the current relative int index to the specified instance of

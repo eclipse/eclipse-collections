@@ -11,6 +11,7 @@
 package org.eclipse.collections.impl;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.DoubleSummaryStatistics;
 import java.util.HashSet;
@@ -24,6 +25,7 @@ import java.util.Set;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.Consumer;
 
 import org.eclipse.collections.api.BooleanIterable;
 import org.eclipse.collections.api.ByteIterable;
@@ -39,6 +41,7 @@ import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function0;
+import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.collection.primitive.MutableBooleanCollection;
 import org.eclipse.collections.api.collection.primitive.MutableByteCollection;
 import org.eclipse.collections.api.collection.primitive.MutableCharCollection;
@@ -168,14 +171,38 @@ public abstract class AbstractRichIterableTestCase
         Assert.assertEquals(collection.toList(), tapResult);
     }
 
+    private void forEach(Function<Collection<Integer>, Consumer<Integer>> adderProvider)
+    {
+        MutableList<Integer> result = Lists.mutable.of();
+        RichIterable<Integer> template = this.newWith(1, 2, 3, 4);
+        Consumer<Integer> adder = adderProvider.apply(result);
+        if (adder instanceof Procedure<?>)
+        {
+            template.forEach((Procedure<Integer>) adder);
+        }
+        else
+        {
+            template.forEach(adder);
+        }
+        Verify.assertSize(4, result);
+        Verify.assertContainsAll(result, 1, 2, 3, 4);
+    }
+
+    private void forEachProcedure()
+    {
+        this.forEach(CollectionAddProcedure::on);
+    }
+
+    private void forEachConsumer()
+    {
+        this.forEach(collection -> collection::add);
+    }
+
     @Test
     public void forEach()
     {
-        MutableList<Integer> result = Lists.mutable.of();
-        RichIterable<Integer> collection = this.newWith(1, 2, 3, 4);
-        collection.forEach(CollectionAddProcedure.on(result));
-        Verify.assertSize(4, result);
-        Verify.assertContainsAll(result, 1, 2, 3, 4);
+        this.forEachProcedure();
+        this.forEachConsumer();
     }
 
     @Test
