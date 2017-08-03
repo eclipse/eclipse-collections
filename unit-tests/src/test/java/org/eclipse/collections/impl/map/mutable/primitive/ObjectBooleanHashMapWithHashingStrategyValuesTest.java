@@ -27,7 +27,7 @@ public class ObjectBooleanHashMapWithHashingStrategyValuesTest extends ObjectBoo
 
         public boolean equals(Integer object1, Integer object2)
         {
-            return computeHashCode(object1) == computeHashCode(object2);
+            return this.computeHashCode(object1) == this.computeHashCode(object2);
         }
     });
 

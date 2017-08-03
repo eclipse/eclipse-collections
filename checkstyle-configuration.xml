@@ -37,6 +37,9 @@
     <module name="TreeWalker">
         <property name="tabWidth" value="4" />
 
+        <module name="RequireThis">
+            <property name="checkFields" value="false"/>
+        </module>
         <!-- Checks for Naming Conventions.                  -->
         <!-- See http://checkstyle.sf.net/config_naming.html -->
 
