@@ -274,4 +274,10 @@ public interface ListIterable<T>
      */
     @Override
     int hashCode();
+
+    /**
+     * @see List#subList(int, int)
+     * @since 6.0
+     */
+    ListIterable<T> subList(int fromIndex, int toIndex);
 }
