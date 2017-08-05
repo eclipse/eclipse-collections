@@ -1457,7 +1457,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
     }
 
     /**
-     * @deprecated in 7.0. Use {@link OrderedIterable#zip(Iterable)} instead.
+     * @deprecated in 7.0. Use {@link org.eclipse.collections.api.ordered.OrderedIterable#zip(Iterable)} instead.
      */
     @Deprecated
     @Override
@@ -1473,7 +1473,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
     }
 
     /**
-     * @deprecated in 7.0. Use {@link OrderedIterable#zipWithIndex()} instead.
+     * @deprecated in 7.0. Use {@link org.eclipse.collections.api.ordered.OrderedIterable#zipWithIndex()} instead.
      */
     @Deprecated
     @Override

@@ -53,7 +53,6 @@ import org.eclipse.collections.api.map.MapIterable;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.sorted.MutableSortedMap;
 import org.eclipse.collections.api.multimap.MutableMultimap;
-import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 import org.eclipse.collections.api.tuple.Pair;
@@ -634,7 +633,7 @@ public abstract class AbstractBiMap<K, V> implements BiMap<K, V>
     }
 
     /**
-     * @deprecated in 8.0. Use {@link OrderedIterable#zip(Iterable, R)} instead.
+     * @deprecated in 8.0. Use {@link org.eclipse.collections.api.ordered.OrderedIterable#zip(Iterable, Collection)} instead.
      */
     @Override
     @Deprecated
@@ -644,7 +643,7 @@ public abstract class AbstractBiMap<K, V> implements BiMap<K, V>
     }
 
     /**
-     * @deprecated in 8.0. Use {@link OrderedIterable#zipWithIndex(R)} instead.
+     * @deprecated in 8.0. Use {@link org.eclipse.collections.api.ordered.OrderedIterable#zipWithIndex(Collection)} instead.
      */
     @Override
     @Deprecated
