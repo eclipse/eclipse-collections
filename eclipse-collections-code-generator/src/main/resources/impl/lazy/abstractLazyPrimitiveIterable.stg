@@ -1,4 +1,4 @@
-import "copyright.stg"
+import "copyrightAndOthers.stg"
 import "primitiveLiteral.stg"
 import "primitiveEquals.stg"
 
@@ -23,7 +23,7 @@ public Lazy<toName>Iterable collect<toName>(<fromName>To<toName>Function functio
 >>
 
 body(type, name) ::= <<
-<copyright()>
+<copyrightAndOthers()>
 
 package org.eclipse.collections.impl.lazy.primitive;
 
@@ -172,6 +172,11 @@ public abstract class AbstractLazy<name>Iterable implements Lazy<name>Iterable
     public \<V> LazyIterable\<V> collect(<name>ToObjectFunction\<? extends V> function)
     {
         return Lazy<name>Iterate.collect(this, function);
+    }
+
+    public \<V> LazyIterable\<V> flatCollect(<name>ToObjectFunction\<? extends Iterable\<V>\> function)
+    {
+        return Lazy<name>Iterate.flatCollect(this, function);
     }
 
     <collectPrimitive(name, type, "Boolean", "boolean")>

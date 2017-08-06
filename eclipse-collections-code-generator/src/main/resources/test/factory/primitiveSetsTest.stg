@@ -1,0 +1,196 @@
+import "copyrightAndOthers.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+
+isTest() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/factory/primitive"
+
+fileName(primitive) ::= "<primitive.name>SetsTest"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.wrapperName, primitive.name)>
+>>
+
+body(type, wrapperName, name) ::= <<
+<copyrightAndOthers()>
+
+package org.eclipse.collections.impl.factory.primitive;
+
+import java.util.Set;
+
+import org.eclipse.collections.api.LazyIterable;
+import org.eclipse.collections.api.set.primitive.Immutable<name>Set;
+import org.eclipse.collections.api.factory.set.primitive.Immutable<name>SetFactory;
+import org.eclipse.collections.api.tuple.primitive.<name><name>Pair;
+import org.eclipse.collections.impl.factory.Sets;
+import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
+import org.eclipse.collections.impl.test.Verify;
+import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
+import org.junit.Assert;
+import org.junit.Test;
+
+/**
+ * Junit test for {@link <name>Sets}
+ * This file was automatically generated from template file primitiveSetsTest.stg
+ */
+public class <name>SetsTest
+{
+    @Test
+    public void immutables()
+    {
+        Immutable<name>SetFactory setFactory = <name>Sets.immutable;
+        Assert.assertEquals(<name>HashSet.newSetWith(), setFactory.empty());
+        Verify.assertInstanceOf(Immutable<name>Set.class, setFactory.empty());
+        Assert.assertEquals(<name>HashSet.newSetWith(<(literal.(type))("1")>), setFactory.with(<(literal.(type))("1")>));
+        Verify.assertInstanceOf(Immutable<name>Set.class, setFactory.with(<(literal.(type))("1")>));
+        Assert.assertEquals(<name>HashSet.newSetWith(<["1", "2"]:(literal.(type))(); separator=", ">), setFactory.with(<["1", "2"]:(literal.(type))(); separator=", ">));
+        Verify.assertInstanceOf(Immutable<name>Set.class, setFactory.with(<["1", "2"]:(literal.(type))(); separator=", ">));
+        Assert.assertEquals(<name>HashSet.newSetWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">), setFactory.with(<["1", "2", "3"]:(literal.(type))(); separator=", ">));
+        Verify.assertInstanceOf(Immutable<name>Set.class, setFactory.with(<["1", "2", "3"]:(literal.(type))(); separator=", ">));
+        Assert.assertEquals(<name>HashSet.newSetWith(<["1", "2", "3", "4"]:(literal.(type))(); separator=", ">), setFactory.with(<["1", "2", "3", "4"]:(literal.(type))(); separator=", ">));
+        Verify.assertInstanceOf(Immutable<name>Set.class, setFactory.with(<["1", "2", "3", "4"]:(literal.(type))(); separator=", ">));
+        Assert.assertEquals(<name>HashSet.newSetWith(<["1", "2", "3", "4", "5"]:(literal.(type))(); separator=", ">), setFactory.with(<["1", "2", "3", "4", "5"]:(literal.(type))(); separator=", ">));
+        Verify.assertInstanceOf(Immutable<name>Set.class, setFactory.with(<["1", "2", "3", "4", "5"]:(literal.(type))(); separator=", ">));
+        Assert.assertEquals(<name>HashSet.newSetWith(<["1", "2", "3", "4", "5", "6"]:(literal.(type))(); separator=", ">), setFactory.with(<["1", "2", "3", "4", "5", "6"]:(literal.(type))(); separator=", ">));
+        Verify.assertInstanceOf(Immutable<name>Set.class, setFactory.with(<["1", "2", "3", "4", "5", "6"]:(literal.(type))(); separator=", ">));
+        Assert.assertEquals(<name>HashSet.newSetWith(<["1", "2", "3", "4", "5", "6", "7"]:(literal.(type))(); separator=", ">), setFactory.with(<["1", "2", "3", "4", "5", "6", "7"]:(literal.(type))(); separator=", ">));
+        Verify.assertInstanceOf(Immutable<name>Set.class, setFactory.with(<["1", "2", "3", "4", "5", "6", "7"]:(literal.(type))(); separator=", ">));
+        Assert.assertEquals(<name>HashSet.newSetWith(<["1", "2", "3", "4", "5", "6", "7", "8"]:(literal.(type))(); separator=", ">), setFactory.with(<["1", "2", "3", "4", "5", "6", "7", "8"]:(literal.(type))(); separator=", ">));
+        Verify.assertInstanceOf(Immutable<name>Set.class, setFactory.with(<["1", "2", "3", "4", "5", "6", "7", "8"]:(literal.(type))(); separator=", ">));
+        Assert.assertEquals(<name>HashSet.newSetWith(<["1", "2", "3", "4", "5", "6", "7", "8", "9"]:(literal.(type))(); separator=", ">), setFactory.with(<["1", "2", "3", "4", "5", "6", "7", "8", "9"]:(literal.(type))(); separator=", ">));
+        Verify.assertInstanceOf(Immutable<name>Set.class, setFactory.with(<["1", "2", "3", "4", "5", "6", "7", "8", "9"]:(literal.(type))(); separator=", ">));
+        Assert.assertEquals(<name>HashSet.newSetWith(<["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]:(literal.(type))(); separator=", ">), setFactory.with(<["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]:(literal.(type))(); separator=", ">));
+        Verify.assertInstanceOf(Immutable<name>Set.class, setFactory.with(<["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]:(literal.(type))(); separator=", ">));
+        Assert.assertEquals(<name>HashSet.newSetWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">), setFactory.withAll(<name>HashSet.newSetWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">)));
+        Verify.assertInstanceOf(Immutable<name>Set.class, setFactory.withAll(<name>HashSet.newSetWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">)));
+    }
+
+    @Test
+    public void emptySet()
+    {
+        Assert.assertTrue(<name>Sets.immutable.empty().isEmpty());
+    }
+
+    @Test
+    public void newSetWith()
+    {
+        Immutable<name>Set set = <name>Sets.immutable.empty();
+        Assert.assertEquals(set, <name>Sets.immutable.of(set.toArray()));
+        Assert.assertEquals(set = set.newWith(<(literal.(type))("1")>), <name>Sets.immutable.with(<(literal.(type))("1")>));
+        Assert.assertEquals(set = set.newWith(<(literal.(type))("2")>), <name>Sets.immutable.with(<["1", "2"]:(literal.(type))(); separator=", ">));
+        Assert.assertEquals(set = set.newWith(<(literal.(type))("3")>), <name>Sets.immutable.with(<["1", "2", "3"]:(literal.(type))(); separator=", ">));
+        Assert.assertEquals(set = set.newWith(<(literal.(type))("4")>), <name>Sets.immutable.with(<["1", "2", "3", "4"]:(literal.(type))(); separator=", ">));
+        Assert.assertEquals(set = set.newWith(<(literal.(type))("5")>), <name>Sets.immutable.with(<["1", "2", "3", "4", "5"]:(literal.(type))(); separator=", ">));
+        Assert.assertEquals(set = set.newWith(<(literal.(type))("6")>), <name>Sets.immutable.with(<["1", "2", "3", "4", "5", "6"]:(literal.(type))(); separator=", ">));
+        Assert.assertEquals(set = set.newWith(<(literal.(type))("7")>), <name>Sets.immutable.with(<["1", "2", "3", "4", "5", "6", "7"]:(literal.(type))(); separator=", ">));
+        Assert.assertEquals(set = set.newWith(<(literal.(type))("8")>), <name>Sets.immutable.with(<["1", "2", "3", "4", "5", "6", "7", "8"]:(literal.(type))(); separator=", ">));
+        Assert.assertEquals(set = set.newWith(<(literal.(type))("9")>), <name>Sets.immutable.with(<["1", "2", "3", "4", "5", "6", "7", "8", "9"]:(literal.(type))(); separator=", ">));
+        Assert.assertEquals(set = set.newWith(<(literal.(type))("10")>), <name>Sets.immutable.with(<["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]:(literal.(type))(); separator=", ">));
+    }
+
+    @SuppressWarnings("RedundantArrayCreation")
+    @Test
+    public void newSetWithArray()
+    {
+        Immutable<name>Set set = <name>Sets.immutable.empty();
+        Assert.assertEquals(set = set.newWith(<(literal.(type))("1")>), <name>Sets.immutable.with(new <type>[]{<(literal.(type))("1")>}));
+        Assert.assertEquals(set = set.newWith(<(literal.(type))("2")>), <name>Sets.immutable.with(new <type>[]{<["1", "2"]:(literal.(type))(); separator=", ">}));
+        Assert.assertEquals(set = set.newWith(<(literal.(type))("3")>), <name>Sets.immutable.with(new <type>[]{<["1", "2", "3"]:(literal.(type))(); separator=", ">}));
+        Assert.assertEquals(set = set.newWith(<(literal.(type))("4")>), <name>Sets.immutable.with(new <type>[]{<["1", "2", "3", "4"]:(literal.(type))(); separator=", ">}));
+        Assert.assertEquals(set = set.newWith(<(literal.(type))("5")>), <name>Sets.immutable.with(new <type>[]{<["1", "2", "3", "4", "5"]:(literal.(type))(); separator=", ">}));
+        Assert.assertEquals(set = set.newWith(<(literal.(type))("6")>), <name>Sets.immutable.with(new <type>[]{<["1", "2", "3", "4", "5", "6"]:(literal.(type))(); separator=", ">}));
+        Assert.assertEquals(set = set.newWith(<(literal.(type))("7")>), <name>Sets.immutable.with(new <type>[]{<["1", "2", "3", "4", "5", "6", "7"]:(literal.(type))(); separator=", ">}));
+        Assert.assertEquals(set = set.newWith(<(literal.(type))("8")>), <name>Sets.immutable.with(new <type>[]{<["1", "2", "3", "4", "5", "6", "7", "8"]:(literal.(type))(); separator=", ">}));
+        Assert.assertEquals(set = set.newWith(<(literal.(type))("9")>), <name>Sets.immutable.with(new <type>[]{<["1", "2", "3", "4", "5", "6", "7", "8", "9"]:(literal.(type))(); separator=", ">}));
+        Assert.assertEquals(set = set.newWith(<(literal.(type))("10")>), <name>Sets.immutable.with(new <type>[]{<["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]:(literal.(type))(); separator=", ">}));
+    }
+
+    @Test
+    public void newSetWithSet()
+    {
+        Immutable<name>Set set = <name>Sets.immutable.empty();
+        <name>HashSet hashSet = <name>HashSet.newSetWith(<(literal.(type))("1")>);
+        Assert.assertEquals(set = set.newWith(<(literal.(type))("1")>), hashSet.toImmutable());
+        hashSet.add(<(literal.(type))("2")>);
+        Assert.assertEquals(set = set.newWith(<(literal.(type))("2")>), hashSet.toImmutable());
+        hashSet.add(<(literal.(type))("3")>);
+        Assert.assertEquals(set = set.newWith(<(literal.(type))("3")>), hashSet.toImmutable());
+        hashSet.add(<(literal.(type))("4")>);
+        Assert.assertEquals(set = set.newWith(<(literal.(type))("4")>), hashSet.toImmutable());
+        hashSet.add(<(literal.(type))("5")>);
+        Assert.assertEquals(set = set.newWith(<(literal.(type))("5")>), hashSet.toImmutable());
+        hashSet.add(<(literal.(type))("6")>);
+        Assert.assertEquals(set = set.newWith(<(literal.(type))("6")>), hashSet.toImmutable());
+        hashSet.add(<(literal.(type))("7")>);
+        Assert.assertEquals(set = set.newWith(<(literal.(type))("7")>), hashSet.toImmutable());
+        hashSet.add(<(literal.(type))("8")>);
+        Assert.assertEquals(set = set.newWith(<(literal.(type))("8")>), hashSet.toImmutable());
+        hashSet.add(<(literal.(type))("9")>);
+        Assert.assertEquals(set = set.newWith(<(literal.(type))("9")>), hashSet.toImmutable());
+        hashSet.add(<(literal.(type))("10")>);
+        Assert.assertEquals(set = set.newWith(<(literal.(type))("10")>), hashSet.toImmutable());
+    }
+
+    @Test
+    public void classIsNonInstantiable()
+    {
+        Verify.assertClassNonInstantiable(<name>Sets.class);
+    }
+
+    @Test
+    public void cartesianProduct()
+    {
+        LazyIterable\<<name><name>Pair> <type><name>Pairs1 =
+                <name>Sets.cartesianProduct(
+                        <name>Sets.mutable.with(<["1", "2"]:(literal.(type))(); separator=", ">),
+                        <name>Sets.mutable.with(<["3", "4", "5"]:(literal.(type))(); separator=", ">));
+
+        Set\<<name><name>Pair> expected1 = Sets.mutable.with(
+                PrimitiveTuples.pair(<["1", "3"]:(literal.(type))(); separator=", ">),
+                PrimitiveTuples.pair(<["1", "4"]:(literal.(type))(); separator=", ">),
+                PrimitiveTuples.pair(<["1", "5"]:(literal.(type))(); separator=", ">),
+                PrimitiveTuples.pair(<["2", "3"]:(literal.(type))(); separator=", ">),
+                PrimitiveTuples.pair(<["2", "4"]:(literal.(type))(); separator=", ">),
+                PrimitiveTuples.pair(<["2", "5"]:(literal.(type))(); separator=", ">)
+        );
+
+        Assert.assertEquals(expected1, <type><name>Pairs1.toSet());
+
+        LazyIterable\<<name><name>Pair> <type><name>Pairs2 =
+                <name>Sets.cartesianProduct(
+                        <name>Sets.mutable.with(<["3", "4", "5"]:(literal.(type))(); separator=", ">),
+                        <name>Sets.mutable.with(<["1", "2"]:(literal.(type))(); separator=", ">));
+
+        Set\<<name><name>Pair> expected2 = Sets.mutable.with(
+                PrimitiveTuples.pair(<["3", "1"]:(literal.(type))(); separator=", ">),
+                PrimitiveTuples.pair(<["3", "2"]:(literal.(type))(); separator=", ">),
+                PrimitiveTuples.pair(<["4", "1"]:(literal.(type))(); separator=", ">),
+                PrimitiveTuples.pair(<["4", "2"]:(literal.(type))(); separator=", ">),
+                PrimitiveTuples.pair(<["5", "1"]:(literal.(type))(); separator=", ">),
+                PrimitiveTuples.pair(<["5", "2"]:(literal.(type))(); separator=", ">)
+        );
+
+        Assert.assertEquals(expected2, <type><name>Pairs2.toSet());
+    }
+
+    @Test
+    public void cartesianProductSameElements()
+    {
+        LazyIterable\<<name><name>Pair> <type><name>Pairs =
+                <name>Sets.cartesianProduct(
+                        <name>Sets.mutable.with(<["1", "2"]:(literal.(type))(); separator=", ">),
+                        <name>Sets.mutable.with(<["1", "2"]:(literal.(type))(); separator=", ">));
+
+        Set\<<name><name>Pair> expected = Sets.mutable.with(
+                PrimitiveTuples.pair(<["1", "1"]:(literal.(type))(); separator=", ">),
+                PrimitiveTuples.pair(<["1", "2"]:(literal.(type))(); separator=", ">),
+                PrimitiveTuples.pair(<["2", "2"]:(literal.(type))(); separator=", ">),
+                PrimitiveTuples.pair(<["2", "1"]:(literal.(type))(); separator=", ">)
+        );
+
+        Assert.assertEquals(expected, <type><name>Pairs.toSet());
+    }
+}
+
+>>

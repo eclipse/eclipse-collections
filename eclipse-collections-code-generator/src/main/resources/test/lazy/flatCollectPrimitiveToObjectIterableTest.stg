@@ -1,0 +1,170 @@
+import "copyrightAndOthers.stg"
+import "primitiveEquals.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+
+isTest() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/lazy/primitive"
+
+skipBoolean() ::= "true"
+
+fileName(primitive) ::= "FlatCollect<primitive.name>ToObjectIterableTest"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.wrapperName, primitive.name)>
+>>
+
+body(type, wrapperName, name) ::= <<
+<copyrightAndOthers()>
+
+package org.eclipse.collections.impl.lazy.primitive;
+
+import org.eclipse.collections.api.InternalIterable;
+import org.eclipse.collections.api.LazyIterable;
+import org.eclipse.collections.api.list.MutableList;
+import org.eclipse.collections.impl.block.factory.Predicates;
+import org.eclipse.collections.impl.block.factory.Predicates2;
+import org.eclipse.collections.impl.block.procedure.CollectionAddProcedure;
+import org.eclipse.collections.impl.factory.Lists;
+import org.eclipse.collections.impl.list.mutable.FastList;
+import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
+import org.eclipse.collections.impl.test.Verify;
+import org.junit.Assert;
+import org.junit.Test;
+
+/**
+ * This file was automatically generated from template file flatCollectPrimitiveToObjectIterableTest.stg.
+ */
+public class FlatCollect<name>ToObjectIterableTest
+{
+    private LazyIterable\<<wrapperName>\> newPrimitiveWith(<type>... elements)
+    {
+        return new FlatCollect<name>ToObjectIterable\<>(<name>ArrayList.newListWith(elements), Lists.mutable::with);
+    }
+
+    @Test
+    public void forEach()
+    {
+        InternalIterable\<<wrapperName>\> collect = this.newPrimitiveWith(<["1", "2", "3", "4", "5", "5"]:(literal.(type))(); separator=", ">);
+        MutableList\<<wrapperName>\> result = Lists.mutable.empty();
+        collect.forEach(CollectionAddProcedure.on(result));
+        Assert.assertEquals(FastList.newListWith(<["1", "2", "3", "4", "5", "5"]:(literal.(type))(); separator=", ">), result);
+    }
+
+    @Test
+    public void forEachWithIndex()
+    {
+        InternalIterable\<<wrapperName>\> collect = this.newPrimitiveWith(<["1", "2", "3", "4", "5", "5"]:(literal.(type))(); separator=", ">);
+        MutableList\<<wrapperName>\> elements = FastList.newList();
+        MutableList\<Integer> indexes = FastList.newList();
+        collect.forEachWithIndex((object, index) -> {
+            elements.add(object);
+            indexes.add(index);
+        });
+        Assert.assertEquals(FastList.newListWith(<["1", "2", "3", "4", "5", "5"]:(literal.(type))(); separator=", ">), elements);
+        Assert.assertEquals(FastList.newListWith(0, 1, 2, 3, 4, 5), indexes);
+    }
+
+    @Test
+    public void iterator()
+    {
+        InternalIterable\<<wrapperName>\> collect = this.newPrimitiveWith(<["1", "2", "3", "4", "5", "5"]:(literal.(type))(); separator=", ">);
+        MutableList\<<wrapperName>\> result = FastList.newList();
+        for (<type> each : collect)
+        {
+            result.add(each);
+        }
+        Assert.assertEquals(FastList.newListWith(<["1", "2", "3", "4", "5", "5"]:(literal.(type))(); separator=", ">), result);
+    }
+
+    @Test
+    public void forEachWith()
+    {
+        InternalIterable\<<wrapperName>\> collect = this.newPrimitiveWith(<["1", "2", "3", "4", "5", "5"]:(literal.(type))(); separator=", ">);
+        MutableList\<<wrapperName>\> result = Lists.mutable.of();
+
+        collect.forEachWith((argument1, argument2) -> result.add((<type>) (argument1 + argument2)), 1);
+        Assert.assertEquals(FastList.newListWith(<["2", "3", "4", "5", "6", "6"]:(literal.(type))(); separator=", ">), result);
+    }
+
+    @Test
+    public void selectInstancesOf()
+    {
+        Assert.assertEquals(
+                FastList.newListWith(<["1", "2", "3", "4", "5"]:(literal.(type))(); separator=", ">),
+                this.newPrimitiveWith(<["1", "2", "3", "4", "5"]:(literal.(type))(); separator=", ">).selectInstancesOf(<wrapperName>.class).toList());
+    }
+
+    @Test
+    public void sizeEmptyNotEmpty()
+    {
+        Verify.assertIterableSize(2, this.newPrimitiveWith(<["1", "2"]:(literal.(type))(); separator=", ">));
+        Verify.assertIterableEmpty(this.newPrimitiveWith());
+        Assert.assertTrue(this.newPrimitiveWith(<["1", "2"]:(literal.(type))(); separator=", ">).notEmpty());
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void removeThrows()
+    {
+        this.newPrimitiveWith().iterator().remove();
+    }
+
+    @Test
+    public void detect()
+    {
+        Assert.assertEquals(<wrapperName>.valueOf(<(literal.(type))("2")>), this.newPrimitiveWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">).detect(Predicates.equal(<(literal.(type))("2")>)));
+        Assert.assertNull(this.newPrimitiveWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">).detect(Predicates.equal(<(literal.(type))("4")>)));
+    }
+
+    @Test
+    public void detectOptional()
+    {
+        Assert.assertEquals(<wrapperName>.valueOf(<(literal.(type))("2")>), this.newPrimitiveWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">).detectOptional(Predicates.equal(<(literal.(type))("2")>)).get());
+        Assert.assertFalse(this.newPrimitiveWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">).detectOptional(Predicates.equal(<(literal.(type))("4")>)).isPresent());
+    }
+
+    @Test
+    public void anySatisfy()
+    {
+        Assert.assertTrue(this.newPrimitiveWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">).anySatisfy(Predicates.equal(<(literal.(type))("2")>)));
+        Assert.assertFalse(this.newPrimitiveWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">).anySatisfy(Predicates.equal(<(literal.(type))("4")>)));
+    }
+
+    @Test
+    public void anySatisfyWith()
+    {
+        Assert.assertTrue(this.newPrimitiveWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">).anySatisfyWith(Predicates2.equal(), <(literal.(type))("2")>));
+        Assert.assertFalse(this.newPrimitiveWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">).anySatisfyWith(Predicates2.equal(), <(literal.(type))("4")>));
+    }
+
+    @Test
+    public void allSatisfy()
+    {
+        Assert.assertFalse(this.newPrimitiveWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">).allSatisfy(Predicates.equal(<(literal.(type))("2")>)));
+        Assert.assertTrue(this.newPrimitiveWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">).allSatisfy(Predicates.greaterThan(<(literal.(type))("0")>)));
+    }
+
+    @Test
+    public void allSatisfyWith()
+    {
+        Assert.assertFalse(this.newPrimitiveWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">).allSatisfyWith(Predicates2.equal(), <(literal.(type))("2")>));
+        Assert.assertTrue(this.newPrimitiveWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">).allSatisfyWith(Predicates2.greaterThan(), <(literal.(type))("0")>));
+    }
+
+    @Test
+    public void noneSatisfy()
+    {
+        Assert.assertFalse(this.newPrimitiveWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">).noneSatisfy(Predicates.equal(<(literal.(type))("2")>)));
+        Assert.assertTrue(this.newPrimitiveWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">).noneSatisfy(Predicates.lessThan(<(literal.(type))("0")>)));
+    }
+
+    @Test
+    public void noneSatisfyWith()
+    {
+        Assert.assertFalse(this.newPrimitiveWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">).noneSatisfyWith(Predicates2.equal(), <(literal.(type))("2")>));
+        Assert.assertTrue(this.newPrimitiveWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">).noneSatisfyWith(Predicates2.lessThan(), <(literal.(type))("0")>));
+    }
+}
+
+>>

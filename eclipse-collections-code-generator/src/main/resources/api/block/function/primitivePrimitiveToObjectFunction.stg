@@ -1,0 +1,34 @@
+import "copyrightAndOthers.stg"
+
+hasTwoPrimitives() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/api/block/function/primitive"
+
+fileName(primitive1, primitive2, sameTwoPrimitives) ::= "<primitive1.name><primitive2.name>ToObjectFunction"
+
+class(primitive1, primitive2, sameTwoPrimitives) ::= <<
+<body(primitive1.type, primitive2.type, primitive1.name, primitive2.name)>
+>>
+
+body(type1, type2, name1, name2) ::= <<
+<copyrightAndOthers()>
+
+package org.eclipse.collections.api.block.function.primitive;
+
+import java.io.Serializable;
+
+/**
+ * A <name1><name2>ToObjectFunction is a two argument lambda or closure which takes a primitive <type1> as the first and
+ * a primitive <type2> as the second argument and returns an Object as the result.
+ * This file was automatically generated from template file primitivePrimitiveToObjectFunction.stg.
+ *
+ * @since 9.0.
+ */
+@FunctionalInterface
+public interface <name1><name2>ToObjectFunction\<T>
+        extends Serializable
+{
+    T value(<type1> argument1, <type2> argument2);
+}
+
+>>

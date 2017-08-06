@@ -1,4 +1,4 @@
-import "copyright.stg"
+import "copyrightAndOthers.stg"
 import "primitiveLiteral.stg"
 
 targetPath() ::= "org/eclipse/collections/api"
@@ -18,7 +18,7 @@ Lazy<toName>Iterable collect<toName>(<fromName>To<toName>Function function);
 >>
 
 body(type, name) ::= <<
-<copyright()>
+<copyrightAndOthers()>
 
 package org.eclipse.collections.api;
 
@@ -46,6 +46,11 @@ public interface Lazy<name>Iterable extends <name>Iterable
 
     @Override
     \<V> LazyIterable\<V> collect(<name>ToObjectFunction\<? extends V> function);
+
+    /**
+     * @since 9.0
+     */
+    \<V> LazyIterable\<V> flatCollect(<name>ToObjectFunction\<? extends Iterable\<V>\> function);
 
     <collectPrimitive(name, type, "Boolean", "boolean")>
 
