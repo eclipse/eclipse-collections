@@ -17,8 +17,6 @@ body(type, name) ::= <<
 
 package org.eclipse.collections.api.list.primitive;
 
-import java.util.List;
-
 import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
 import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
 import org.eclipse.collections.api.list.ListIterable;
@@ -42,13 +40,13 @@ public interface <name>List extends Reversible<name>Iterable
     \<V> ListIterable\<V> collect(<name>ToObjectFunction\<? extends V> function);
 
     /**
-     * Follows the same general contract as {@link List#equals(Object)}.
+     * Follows the same general contract as {@link java.util.List#equals(Object)}.
      */
     @Override
     boolean equals(Object o);
 
     /**
-     * Follows the same general contract as {@link List#hashCode()}.
+     * Follows the same general contract as {@link java.util.List#hashCode()}.
      */
     @Override
     int hashCode();
@@ -71,7 +69,7 @@ public interface <name>List extends Reversible<name>Iterable
     <name>List toReversed();
 
     /**
-     * @see {@link List#subList(int fromIndex, int toIndex)}
+     * @see java.util.List#subList(int fromIndex, int toIndex)
      * @since 5.0.
      */
     <name>List subList(int fromIndex, int toIndex);
