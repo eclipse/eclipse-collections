@@ -36,7 +36,7 @@ public abstract class Object<name>HashMapTestCase extends AbstractMutableObject<
 {
     private final MutableObject<name>Map\<String> map = this.classUnderTest();
 
-    private Class targetClass = getTargetClass();
+    private Class targetClass = this.getTargetClass();
 
     protected abstract MutableObject<name>Map newMapWithInitialCapacity(int size);
 
