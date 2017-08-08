@@ -69,6 +69,18 @@ public class ImmutableSortedBagImplNoIteratorTest extends ImmutableSortedBagImpl
         //not applicable
     }
 
+    @Override
+    public void stream()
+    {
+        //not applicable
+    }
+
+    @Override
+    public void parallelStream()
+    {
+        //not applicable
+    }
+
     private static final class ImmutableSortedBagImplNoIterator<T> extends ImmutableSortedBagImpl<T>
     {
         ImmutableSortedBagImplNoIterator(SortedBag<T> sortedBag)

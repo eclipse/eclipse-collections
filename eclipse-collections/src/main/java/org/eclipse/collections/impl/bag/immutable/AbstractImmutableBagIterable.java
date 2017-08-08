@@ -13,6 +13,10 @@ package org.eclipse.collections.impl.bag.immutable;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
+import java.util.Spliterator;
+import java.util.Spliterators;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.api.bag.ImmutableBagIterable;
@@ -171,5 +175,41 @@ public abstract class AbstractImmutableBagIterable<T>
     public <V, P> ImmutableBag<V> countByWith(Function2<? super T, ? super P, ? extends V> function, P parameter)
     {
         return this.countByWith(function, parameter, Bags.mutable.<V>empty()).toImmutable();
+    }
+
+    /**
+     * @since 9.0
+     */
+    @Override
+    public Stream<T> stream()
+    {
+        return StreamSupport.stream(this.spliterator(), false);
+    }
+
+    /**
+     * @since 9.0
+     */
+    @Override
+    public Stream<T> parallelStream()
+    {
+        return StreamSupport.stream(this.spliterator(), true);
+    }
+
+    /**
+     * @since 9.0
+     */
+    @Override
+    public Spliterator<T> spliterator()
+    {
+        return Spliterators.spliterator(this, 0);
+    }
+
+    /**
+     * @since 9.0
+     */
+    @Override
+    public Collection<T> castToCollection()
+    {
+        return this;
     }
 }

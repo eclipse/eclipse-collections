@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2017 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -21,6 +21,8 @@ import java.util.List;
 import java.util.LongSummaryStatistics;
 import java.util.Optional;
 import java.util.RandomAccess;
+import java.util.Spliterator;
+import java.util.Spliterators;
 import java.util.function.BiConsumer;
 import java.util.function.BinaryOperator;
 import java.util.function.Supplier;
@@ -594,5 +596,14 @@ final class ImmutableArrayList<T>
             }
         }
         return this.size();
+    }
+
+    /**
+     * @since 9.0
+     */
+    @Override
+    public Spliterator<T> spliterator()
+    {
+        return Spliterators.spliterator(this.items, 0, this.items.length, Spliterator.ORDERED);
     }
 }

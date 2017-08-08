@@ -10,6 +10,12 @@
 
 package org.eclipse.collections.api.collection;
 
+import java.util.Collection;
+import java.util.Spliterator;
+import java.util.Spliterators;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
+
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.api.block.function.Function;
@@ -190,4 +196,36 @@ public interface ImmutableCollection<T>
             Function<? super T, ? extends K> groupBy,
             Function0<? extends V> zeroValueFactory,
             Function2<? super V, ? super T, ? extends V> nonMutatingAggregator);
+
+    /**
+     * @since 9.0
+     */
+    default Stream<T> stream()
+    {
+        return StreamSupport.stream(this.spliterator(), false);
+    }
+
+    /**
+     * @since 9.0
+     */
+    default Stream<T> parallelStream()
+    {
+        return StreamSupport.stream(this.spliterator(), true);
+    }
+
+    /**
+     * @since 9.0
+     */
+    @Override
+    default Spliterator<T> spliterator()
+    {
+        return Spliterators.spliterator(this.iterator(), (long) this.size(), 0);
+    }
+
+    /**
+     * This can be overridden in most implementations to just return this.
+     *
+     * @since 9.0
+     */
+    Collection<T> castToCollection();
 }
