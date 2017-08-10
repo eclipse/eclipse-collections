@@ -53,6 +53,36 @@ public class HashingStrategiesTest
     }
 
     @Test
+    public void nullSafeFromFunction()
+    {
+        Person john = new Person("John", "Smith");
+        Person jane = new Person("Jane", "Smith");
+        Person nullLast = new Person("Jane", null);
+        Person nullFirst = new Person(null, "Smith");
+
+        HashingStrategy<Person> lastHashingStrategy = HashingStrategies.nullSafeFromFunction(Person.TO_LAST);
+        HashingStrategy<Person> firstHashingStrategy = HashingStrategies.nullSafeFromFunction(Person.TO_FIRST);
+
+        Assert.assertEquals("John".hashCode(), firstHashingStrategy.computeHashCode(john));
+        Assert.assertEquals(0, firstHashingStrategy.computeHashCode(nullFirst));
+        Assert.assertEquals("Jane".hashCode(), firstHashingStrategy.computeHashCode(nullLast));
+        Assert.assertEquals(firstHashingStrategy.computeHashCode(jane), firstHashingStrategy.computeHashCode(nullLast));
+        Assert.assertNotEquals(john.hashCode(), firstHashingStrategy.computeHashCode(john));
+        Assert.assertFalse(firstHashingStrategy.equals(john, jane));
+
+        Assert.assertEquals("Smith".hashCode(), lastHashingStrategy.computeHashCode(john));
+        Assert.assertEquals(0, lastHashingStrategy.computeHashCode(nullLast));
+        Assert.assertEquals("Smith".hashCode(), lastHashingStrategy.computeHashCode(nullFirst));
+        Assert.assertEquals(lastHashingStrategy.computeHashCode(john), lastHashingStrategy.computeHashCode(nullFirst));
+        Assert.assertNotEquals(john.hashCode(), lastHashingStrategy.computeHashCode(john));
+        Assert.assertTrue(lastHashingStrategy.equals(john, jane));
+
+        Assert.assertNotEquals(lastHashingStrategy.computeHashCode(john), firstHashingStrategy.computeHashCode(john));
+        Assert.assertNotEquals(lastHashingStrategy.computeHashCode(john), firstHashingStrategy.computeHashCode(jane));
+        Assert.assertEquals(lastHashingStrategy.computeHashCode(john), lastHashingStrategy.computeHashCode(jane));
+    }
+
+    @Test
     public void fromFunction()
     {
         Person john = new Person("John", "Smith");
