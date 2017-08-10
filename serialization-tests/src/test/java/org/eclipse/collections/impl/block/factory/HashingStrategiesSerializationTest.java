@@ -39,6 +39,19 @@ public class HashingStrategiesSerializationTest
     }
 
     @Test
+    public void nullSafeFromFunction()
+    {
+        Verify.assertSerializedForm(
+                1L,
+                "rO0ABXNyAFxvcmcuZWNsaXBzZS5jb2xsZWN0aW9ucy5pbXBsLmJsb2NrLmZhY3RvcnkuSGFzaGlu\n"
+                        + "Z1N0cmF0ZWdpZXMkTnVsbFNhZmVGdW5jdGlvbkhhc2hpbmdTdHJhdGVneQAAAAAAAAABAgABTAAI\n"
+                        + "ZnVuY3Rpb250ADVMb3JnL2VjbGlwc2UvY29sbGVjdGlvbnMvYXBpL2Jsb2NrL2Z1bmN0aW9uL0Z1\n"
+                        + "bmN0aW9uO3hwc3IARW9yZy5lY2xpcHNlLmNvbGxlY3Rpb25zLmltcGwuYmxvY2suZmFjdG9yeS5G\n"
+                        + "dW5jdGlvbnMkVG9TdHJpbmdGdW5jdGlvbgAAAAAAAAABAgAAeHA=",
+                HashingStrategies.nullSafeFromFunction(Functions.getToString()));
+    }
+
+    @Test
     public void fromFunction()
     {
         Verify.assertSerializedForm(

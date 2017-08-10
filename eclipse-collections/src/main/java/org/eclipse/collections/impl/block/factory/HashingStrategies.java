@@ -10,6 +10,8 @@
 
 package org.eclipse.collections.impl.block.factory;
 
+import java.util.Objects;
+
 import org.eclipse.collections.api.block.HashingStrategy;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.primitive.BooleanFunction;
@@ -39,6 +41,11 @@ public final class HashingStrategies
     public static <T> HashingStrategy<T> nullSafeHashingStrategy(HashingStrategy<T> nonNullSafeStrategy)
     {
         return new NullSafeHashingStrategy<>(nonNullSafeStrategy);
+    }
+
+    public static <T, V> HashingStrategy<T> nullSafeFromFunction(Function<? super T, ? extends V> function)
+    {
+        return new NullSafeFunctionHashingStrategy<>(function);
     }
 
     public static <T, V> HashingStrategy<T> fromFunction(Function<? super T, ? extends V> function)
@@ -154,6 +161,32 @@ public final class HashingStrategies
         public boolean equals(T object1, T object2)
         {
             return object1 == null || object2 == null ? object1 == object2 : this.nonNullSafeStrategy.equals(object1, object2);
+        }
+    }
+
+    private static final class NullSafeFunctionHashingStrategy<T, V> implements HashingStrategy<T>
+    {
+        private static final long serialVersionUID = 1L;
+
+        private final Function<? super T, ? extends V> function;
+
+        private NullSafeFunctionHashingStrategy(Function<? super T, ? extends V> function)
+        {
+            this.function = function;
+        }
+
+        @Override
+        public int computeHashCode(T object)
+        {
+            return Objects.hashCode(this.function.valueOf(object));
+        }
+
+        @Override
+        public boolean equals(T object1, T object2)
+        {
+            return Objects.equals(
+                    this.function.valueOf(object1),
+                    this.function.valueOf(object2));
         }
     }
 
