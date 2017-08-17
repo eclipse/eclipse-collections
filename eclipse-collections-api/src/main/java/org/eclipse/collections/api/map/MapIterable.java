@@ -12,6 +12,10 @@ package org.eclipse.collections.api.map;
 
 import java.util.Map;
 import java.util.Optional;
+import java.util.Spliterator;
+import java.util.Spliterators;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.block.function.Function;
@@ -255,4 +259,29 @@ public interface MapIterable<K, V> extends RichIterable<V>
     String toString();
 
     ImmutableMapIterable<K, V> toImmutable();
+
+    /**
+     * @since 9.0
+     */
+    default Stream<V> stream()
+    {
+        return StreamSupport.stream(this.spliterator(), false);
+    }
+
+    /**
+     * @since 9.0
+     */
+    default Stream<V> parallelStream()
+    {
+        return StreamSupport.stream(this.spliterator(), true);
+    }
+
+    /**
+     * @since 9.0
+     */
+    @Override
+    default Spliterator<V> spliterator()
+    {
+        return Spliterators.spliterator(this.iterator(), (long) this.size(), 0);
+    }
 }

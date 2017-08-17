@@ -12,6 +12,10 @@ package org.eclipse.collections.api.map.primitive;
 
 import java.util.Collection;
 import java.util.Map;
+import java.util.Spliterator;
+import java.util.Spliterators;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.Bag;
@@ -161,4 +165,29 @@ public interface PrimitiveObjectMap<V> extends RichIterable<V>
     @Override
     @Deprecated
     UnsortedSetIterable<Pair<V, Integer>> zipWithIndex();
+
+    /**
+     * @since 9.0
+     */
+    default Stream<V> stream()
+    {
+        return StreamSupport.stream(this.spliterator(), false);
+    }
+
+    /**
+     * @since 9.0
+     */
+    default Stream<V> parallelStream()
+    {
+        return StreamSupport.stream(this.spliterator(), true);
+    }
+
+    /**
+     * @since 9.0
+     */
+    @Override
+    default Spliterator<V> spliterator()
+    {
+        return Spliterators.spliterator(this.iterator(), (long) this.size(), 0);
+    }
 }
