@@ -81,6 +81,7 @@ import org.eclipse.collections.impl.multimap.list.FastListMultimap;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
 import org.eclipse.collections.impl.set.sorted.mutable.TreeSortedSet;
+import org.eclipse.collections.impl.string.immutable.CharAdapter;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.Tuples;
 import org.junit.Assert;
@@ -1772,6 +1773,22 @@ public abstract class Abstract<name>ObjectMapTestCase
         <name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("5")>, "zero", <(literal.(type))("9")>, "nine");
 
         Verify.assertSortedBagsEqual(TreeBag.newBagWith(Comparators.byFunction(String::valueOf), "zero", "zero", "nine"), map1.toSortedBagBy(String::valueOf));
+    }
+
+    @Test
+    public void stream()
+    {
+        <name>ObjectMap\<String> map = this.newWithKeysValues(<(literal.(type))("1")>, "1", <(literal.(type))("2")>, "2", <(literal.(type))("9")>, "9");
+        Assert.assertEquals("129", CharAdapter.adapt(map.stream().reduce("", (r, s) -> r + s)).toSortedList().makeString(""));
+        Assert.assertEquals(map.reduce((r, s) -> r + s), map.stream().reduce((r, s) -> r + s));
+    }
+
+    @Test
+    public void parallelStream()
+    {
+        <name>ObjectMap\<String> map = this.newWithKeysValues(<(literal.(type))("1")>, "1", <(literal.(type))("2")>, "2", <(literal.(type))("9")>, "9");
+        Assert.assertEquals("129", CharAdapter.adapt(map.parallelStream().reduce("", (r, s) -> r + s)).toSortedList().makeString(""));
+        Assert.assertEquals(map.reduce((r, s) -> r + s), map.stream().reduce((r, s) -> r + s));
     }
 }
 
