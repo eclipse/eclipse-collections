@@ -4,6 +4,7 @@ jcip-annotations-version=${version;===;1.0}
 
 Export-Package: \
  !about.html,!about_files, \
+ *.factory*;version="${package-version}", \
  *.internal*;x-internal:=true;version="${package-version}", \
  *.impl*;x-internal:=true;version="${package-version}", \
  *;version="${package-version}"
