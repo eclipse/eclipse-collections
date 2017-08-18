@@ -3,9 +3,7 @@ eclipse-collections-api-version=${version;===;8.1.0}
 jcip-annotations-version=${version;===;1.0}
 
 Export-Package: \
- !about.html,!about_files, \
- *.internal*;x-internal:=true;version="${package-version}", \
- *.impl*;x-internal:=true;version="${package-version}", \
+ !about.html,!about_files, \ 
  *;version="${package-version}"
 
 Import-Package: \
