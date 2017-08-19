@@ -1,4 +1,4 @@
-import "copyright.stg"
+import "copyrightAndOthers.stg"
 
 targetPath() ::= "org/eclipse/collections/impl/bag/mutable/primitive"
 
@@ -9,13 +9,14 @@ class(primitive) ::= <<
 >>
 
 body(type, name) ::= <<
-<copyright()>
+<copyrightAndOthers()>
 
 package org.eclipse.collections.impl.bag.mutable.primitive;
 
 import org.eclipse.collections.api.<name>Iterable;
 import org.eclipse.collections.api.factory.bag.primitive.Mutable<name>BagFactory;
 import org.eclipse.collections.api.bag.primitive.Mutable<name>Bag;
+<(wideStreamImport.(type))>
 
 /**
  * Mutable<name>BagFactoryImpl is a factory implementation which creates instances of type {@link Mutable<name>Bag}.
@@ -70,6 +71,60 @@ public class Mutable<name>BagFactoryImpl implements Mutable<name>BagFactory
     {
         return <name>HashBag.newBag(items);
     }
+    <(streamMethods.(type))()>
 }
 
 >>
+
+streamMethods ::= [
+    "byte": "noMethods",
+    "short": "noMethods",
+    "char": "noMethods",
+    "int": "allMethods",
+    "long": "allMethods",
+    "float": "noMethods",
+    "double": "allMethods",
+    "boolean": "noMethods"
+    ]
+
+allMethods() ::= <<
+<\n>
+/**
+ * @since 9.0
+ */
+@Override
+public Mutable<name>Bag ofAll(<(wideStream.(type))> items)
+{
+    return this.withAll(items);
+}
+
+/**
+ * @since 9.0
+ */
+@Override
+public Mutable<name>Bag withAll(<(wideStream.(type))> items)
+{
+    return this.with(items.toArray());
+}
+>>
+
+noMethods() ::= ""
+
+wideStream ::= [
+    "int": "IntStream",
+    "long": "LongStream",
+    "double": "DoubleStream",
+    default: "no matching wide type"
+]
+
+wideStreamImport ::= [
+    "boolean": "",
+    "byte": "",
+    "short": "",
+    "char": "",
+    "int": "import java.util.stream.IntStream;",
+    "long": "import java.util.stream.LongStream;",
+    "float": "",
+    "double": "import java.util.stream.DoubleStream;",
+    default: "no matching wide type"
+]

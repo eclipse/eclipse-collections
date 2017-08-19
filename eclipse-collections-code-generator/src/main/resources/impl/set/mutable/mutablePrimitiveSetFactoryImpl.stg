@@ -1,4 +1,4 @@
-import "copyright.stg"
+import "copyrightAndOthers.stg"
 
 targetPath() ::= "org/eclipse/collections/impl/set/mutable/primitive"
 
@@ -9,13 +9,14 @@ class(primitive) ::= <<
 >>
 
 body(type, name) ::= <<
-<copyright()>
+<copyrightAndOthers()>
 
 package org.eclipse.collections.impl.set.mutable.primitive;
 
 import org.eclipse.collections.api.<name>Iterable;
 import org.eclipse.collections.api.factory.set.primitive.Mutable<name>SetFactory;
 import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
+<(wideStreamImport.(type))>
 
 /**
  * Mutable<name>SetFactoryImpl is a factory implementation which creates instances of type {@link Mutable<name>Set}.
@@ -70,6 +71,60 @@ public class Mutable<name>SetFactoryImpl implements Mutable<name>SetFactory
     {
         return <name>HashSet.newSet(items);
     }
+    <(streamMethods.(type))()>
 }
 
 >>
+
+streamMethods ::= [
+    "byte": "noMethods",
+    "short": "noMethods",
+    "char": "noMethods",
+    "int": "allMethods",
+    "long": "allMethods",
+    "float": "noMethods",
+    "double": "allMethods",
+    "boolean": "noMethods"
+    ]
+
+allMethods() ::= <<
+<\n>
+/**
+ * @since 9.0
+ */
+@Override
+public Mutable<name>Set ofAll(<(wideStream.(type))> items)
+{
+    return this.withAll(items);
+}
+
+/**
+ * @since 9.0
+ */
+@Override
+public Mutable<name>Set withAll(<(wideStream.(type))> items)
+{
+    return this.with(items.toArray());
+}
+>>
+
+noMethods() ::= ""
+
+wideStream ::= [
+    "int": "IntStream",
+    "long": "LongStream",
+    "double": "DoubleStream",
+    default: "no matching wide type"
+]
+
+wideStreamImport ::= [
+    "boolean": "",
+    "byte": "",
+    "short": "",
+    "char": "",
+    "int": "import java.util.stream.IntStream;",
+    "long": "import java.util.stream.LongStream;",
+    "float": "",
+    "double": "import java.util.stream.DoubleStream;",
+    default: "no matching wide type"
+]
