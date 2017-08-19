@@ -1,4 +1,4 @@
-import "copyright.stg"
+import "copyrightAndOthers.stg"
 
 targetPath() ::= "org/eclipse/collections/impl/stack/immutable/primitive"
 
@@ -9,13 +9,14 @@ class(primitive) ::= <<
 >>
 
 body(type, name) ::= <<
-<copyright()>
+<copyrightAndOthers()>
 
 package org.eclipse.collections.impl.stack.immutable.primitive;
 
 import org.eclipse.collections.api.<name>Iterable;
 import org.eclipse.collections.api.factory.stack.primitive.Immutable<name>StackFactory;
 import org.eclipse.collections.api.stack.primitive.Immutable<name>Stack;
+<(wideStreamImport.(type))>
 
 /**
  * Immutable<name>StackFactoryImpl is a factory implementation which creates instances of type {@link Immutable<name>Stack}.
@@ -110,6 +111,60 @@ public class Immutable<name>StackFactoryImpl implements Immutable<name>StackFact
         }
         return Immutable<name>ArrayStack.newStackFromTopToBottom(items);
     }
+    <(streamMethods.(type))()>
 }
 
 >>
+
+streamMethods ::= [
+    "byte": "noMethods",
+    "short": "noMethods",
+    "char": "noMethods",
+    "int": "allMethods",
+    "long": "allMethods",
+    "float": "noMethods",
+    "double": "allMethods",
+    "boolean": "noMethods"
+    ]
+
+allMethods() ::= <<
+<\n>
+/**
+ * @since 9.0
+ */
+@Override
+public Immutable<name>Stack ofAll(<(wideStream.(type))> items)
+{
+    return this.withAll(items);
+}
+
+/**
+ * @since 9.0
+ */
+@Override
+public Immutable<name>Stack withAll(<(wideStream.(type))> items)
+{
+    return this.with(items.toArray());
+}
+>>
+
+noMethods() ::= ""
+
+wideStream ::= [
+    "int": "IntStream",
+    "long": "LongStream",
+    "double": "DoubleStream",
+    default: "no matching wide type"
+]
+
+wideStreamImport ::= [
+    "boolean": "",
+    "byte": "",
+    "short": "",
+    "char": "",
+    "int": "import java.util.stream.IntStream;",
+    "long": "import java.util.stream.LongStream;",
+    "float": "",
+    "double": "import java.util.stream.DoubleStream;",
+    default: "no matching wide type"
+]

@@ -1,4 +1,4 @@
-import "copyright.stg"
+import "copyrightAndOthers.stg"
 
 targetPath() ::= "org/eclipse/collections/api/factory/list/primitive"
 
@@ -9,12 +9,13 @@ class(primitive) ::= <<
 >>
 
 body(type, name) ::= <<
-<copyright()>
+<copyrightAndOthers()>
 
 package org.eclipse.collections.api.factory.list.primitive;
 
 import org.eclipse.collections.api.<name>Iterable;
 import org.eclipse.collections.api.list.primitive.Mutable<name>List;
+<(wideStreamImport.(type))>
 
 /**
  * A factory which creates instances of type {@link Mutable<name>List}.
@@ -49,6 +50,52 @@ public interface Mutable<name>ListFactory
     Mutable<name>List ofAll(<name>Iterable items);
 
     Mutable<name>List withAll(<name>Iterable items);
+    <(streamMethods.(type))()>
 }
 
 >>
+
+streamMethods ::= [
+    "byte": "noMethods",
+    "short": "noMethods",
+    "char": "noMethods",
+    "int": "allMethods",
+    "long": "allMethods",
+    "float": "noMethods",
+    "double": "allMethods",
+    "boolean": "noMethods"
+    ]
+
+allMethods() ::= <<
+<\n>
+/**
+ * @since 9.0
+ */
+Mutable<name>List ofAll(<(wideStream.(type))> items);
+
+/**
+ * @since 9.0
+ */
+Mutable<name>List withAll(<(wideStream.(type))> items);
+>>
+
+noMethods() ::= ""
+
+wideStream ::= [
+    "int": "IntStream",
+    "long": "LongStream",
+    "double": "DoubleStream",
+    default: "no matching wide type"
+]
+
+wideStreamImport ::= [
+    "boolean": "",
+    "byte": "",
+    "short": "",
+    "char": "",
+    "int": "import java.util.stream.IntStream;",
+    "long": "import java.util.stream.LongStream;",
+    "float": "",
+    "double": "import java.util.stream.DoubleStream;",
+    default: "no matching wide type"
+]
