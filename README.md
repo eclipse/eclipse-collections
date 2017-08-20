@@ -1,4 +1,4 @@
-Eclipse Collections
+![logo]
 ===================
 
 [![][travis img]][travis]
@@ -203,6 +203,8 @@ Additional information
 * Mailing lists: https://dev.eclipse.org/mailman/listinfo/collections-dev
 * Eclipse PMI: https://projects.eclipse.org/projects/technology.collections
 * Forum: https://www.eclipse.org/forums/index.php?t=thread&frm_id=329
+
+[logo]:https://github.com/eclipse/eclipse-collections/blob/master/artwork/eclipse-collections-logo.png
 
 [travis]:https://travis-ci.org/eclipse/eclipse-collections
 [travis img]:https://travis-ci.org/eclipse/eclipse-collections.svg?branch=master
