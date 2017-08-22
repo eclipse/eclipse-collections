@@ -1,4 +1,5 @@
-# Eclipse Collections Reference Guide
+![logo](https://github.com/eclipse/eclipse-collections/blob/master/artwork/eclipse-collections-logo.png)
+# Reference Guide
 - [About Eclipse Collections](#-about-eclipse-collections)
 - [About this guide](#-about-this-guide)
 - [Getting Started With Eclipse Collections](#-getting-started-with-eclipse-collections)

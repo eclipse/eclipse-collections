@@ -1,338 +1,445 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-  <modelVersion>4.0.0</modelVersion>
+    <modelVersion>4.0.0</modelVersion>
 
-  <parent>
-    <groupId>org.eclipse.collections</groupId>
-    <artifactId>eclipse-collections-parent</artifactId>
-    <version>9.0.0-SNAPSHOT</version>
-  </parent>
+    <parent>
+        <groupId>org.eclipse.collections</groupId>
+        <artifactId>eclipse-collections-parent</artifactId>
+        <version>9.0.0-SNAPSHOT</version>
+    </parent>
 
-  <artifactId>p2-repository</artifactId>
-  <packaging>pom</packaging>
+    <artifactId>p2-repository</artifactId>
+    <packaging>pom</packaging>
 
-  <name>Eclipse Collections p2 Repository Build</name>
+    <name>Eclipse Collections p2 Repository Build</name>
 
-  <modules>
-	  <module>org.eclipse.collections</module>
-  </modules>
+    <modules>
+        <module>org.eclipse.collections</module>
+    </modules>
 
-  <properties>
+    <properties>
 
-    <!-- include everything from all dependencies by default -->
-    <recipe.includes>**/*</recipe.includes>
+        <!-- include everything from all dependencies by default -->
+        <recipe.includes>**/*</recipe.includes>
 
-    <!-- but filter out maven instructions, we'll generate new ones below -->
-    <recipe.excludes>META-INF/maven/**/*.*</recipe.excludes>
+        <!-- but filter out maven instructions, we'll generate new ones below -->
+        <recipe.excludes>META-INF/maven/**/*.*</recipe.excludes>
 
-    <!-- BND specific instructions which can be overridden by recipe -->
-    <recipe.Bundle-Name>%bundleName</recipe.Bundle-Name>
-    <recipe.Bundle-Description />
-    <recipe.Bundle-Vendor>%bundleVendor</recipe.Bundle-Vendor>
+        <!-- BND specific instructions which can be overridden by recipe -->
+        <recipe.Bundle-Name>%bundleName</recipe.Bundle-Name>
+        <recipe.Bundle-Description />
+        <recipe.Bundle-Vendor>%bundleVendor</recipe.Bundle-Vendor>
 
-    <!-- remove some clutter from the generated manifests -->
-    <recipe.removeheaders>Ignore-Package,Include-Resource,Private-Package,Embed-Dependency,Built-By,Build-Jdk,Bnd-*,Tool</recipe.removeheaders>
+        <!-- remove some clutter from the generated manifests -->
+        <recipe.removeheaders>
+            Ignore-Package,Include-Resource,Private-Package,Embed-Dependency,Built-By,Build-Jdk,Bnd-*,Tool
+        </recipe.removeheaders>
 
-    <!-- for Orbit, by default we'll also remove the Require-Bundle header; recipe poms may override if they need this header -->
-    <recipe.removeadditionalheaders>Require-Bundle</recipe.removeadditionalheaders>
+        <!-- for Orbit, by default we'll also remove the Require-Bundle header; recipe poms may override if they need this header -->
+        <recipe.removeadditionalheaders>Require-Bundle</recipe.removeadditionalheaders>
 
-    <!-- read BND settings from 'osgi.bnd' located next to pom.xml -->
-    <recipe.bndfile>osgi.bnd</recipe.bndfile>
+        <!-- read BND settings from 'osgi.bnd' located next to pom.xml -->
+        <recipe.bndfile>osgi.bnd</recipe.bndfile>
 
-    <!-- pattern/format used for the qualifier -->
-    <recipe.qualifier.format>'v'yyyyMMdd-HHmm</recipe.qualifier.format>
+        <!-- pattern/format used for the qualifier -->
+        <recipe.qualifier.format>'v'yyyyMMdd-HHmm</recipe.qualifier.format>
 
-    <!-- project defaults -->
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- project defaults -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-    <!-- versions used for plug-ins below -->
-    <tycho-version>1.0.0</tycho-version>
-    <tycho-extras-version>1.0.0</tycho-extras-version>
+        <!-- versions used for plug-ins below -->
+        <tycho-version>1.0.0</tycho-version>
+        <tycho-extras-version>1.0.0</tycho-extras-version>
 
-    <!-- versions of the EBR plug-in to use -->
-    <ebr-version>1.0.0-SNAPSHOT</ebr-version>
+        <!-- versions of the EBR plug-in to use -->
+        <ebr-version>1.0.0-SNAPSHOT</ebr-version>
 
-    <!-- property for generating Eclipse source reference bundle headers -->
-    <tycho.scmUrl>scm:git:https://github.com/eclipse/eclipse-collections.git</tycho.scmUrl>
+        <!-- property for generating Eclipse source reference bundle headers -->
+        <tycho.scmUrl>scm:git:https://github.com/eclipse/eclipse-collections.git</tycho.scmUrl>
 
-    <!-- by default complain if working tree is dirty (error|warning|ignore) -->
-    <dirtyWorkingTree>warning</dirtyWorkingTree>
+        <!-- by default complain if working tree is dirty (error|warning|ignore) -->
+        <dirtyWorkingTree>warning</dirtyWorkingTree>
 
-    <!-- set default vendor -->
-    <bundleVendor>Eclipse Collections</bundleVendor>
+        <!-- set default vendor -->
+        <bundleVendor>Eclipse Collections</bundleVendor>
 
-    <!-- values needed for generating repositories -->
-    <maven.build.timestamp.format>yyyyMMddHHmmss</maven.build.timestamp.format>
-    <buildTimestamp>${maven.build.timestamp}</buildTimestamp>
-    <buildType>I</buildType>
-    <buildId>${buildType}${buildTimestamp}</buildId>
-    <buildLabel>${buildType}-${buildId}-${buildTimestamp}</buildLabel>
+        <!-- values needed for generating repositories -->
+        <maven.build.timestamp.format>yyyyMMddHHmmss</maven.build.timestamp.format>
+        <buildTimestamp>${maven.build.timestamp}</buildTimestamp>
+        <buildType>I</buildType>
+        <buildId>${buildType}${buildTimestamp}</buildId>
+        <buildLabel>${buildType}-${buildId}-${buildTimestamp}</buildLabel>
 
-  </properties>
+    </properties>
 
-  <pluginRepositories>
-    <!-- configure the EBR plug-in repo -->
-    <pluginRepository>
-        <id>ebr-releases</id>
-        <url>https://repo.eclipse.org/content/repositories/ebr-releases/</url>
-        <snapshots>
-            <enabled>false</enabled>
-        </snapshots>
-    </pluginRepository>
-    <pluginRepository>
-        <id>ebr-snapshots</id>
-        <url>https://repo.eclipse.org/content/repositories/ebr-snapshots/</url>
-        <releases>
-            <enabled>false</enabled>
-        </releases>
-    </pluginRepository>
-    <pluginRepository>
-        <id>cbi-releases</id>
-        <url>https://repo.eclipse.org/content/repositories/cbi-releases/</url>
-        <snapshots>
-            <enabled>false</enabled>
-        </snapshots>
-    </pluginRepository>
-    <pluginRepository>
-        <id>cbi-snapshots</id>
-        <url>https://repo.eclipse.org/content/repositories/cbi-snapshots/</url>
-        <snapshots>
-            <enabled>true</enabled>
-        </snapshots>
-    </pluginRepository>
-  </pluginRepositories>
+    <pluginRepositories>
+        <!-- configure the EBR plug-in repo -->
+        <pluginRepository>
+            <id>ebr-releases</id>
+            <url>https://repo.eclipse.org/content/repositories/ebr-releases/</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+        <pluginRepository>
+            <id>ebr-snapshots</id>
+            <url>https://repo.eclipse.org/content/repositories/ebr-snapshots/</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+        </pluginRepository>
+        <pluginRepository>
+            <id>cbi-releases</id>
+            <url>https://repo.eclipse.org/content/repositories/cbi-releases/</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+        <pluginRepository>
+            <id>cbi-snapshots</id>
+            <url>https://repo.eclipse.org/content/repositories/cbi-snapshots/</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
 
-  <profiles>
-    <profile>
-      <id>release-artifacts</id>
-      <build>
+    <profiles>
+        <profile>
+            <id>eclipse-sign</id>
+            <activation>
+                <property>
+                    <name>performReleaseP2</name>
+                    <value>true</value>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.eclipse.tycho.extras</groupId>
+                        <artifactId>tycho-pack200a-plugin</artifactId>
+                        <version>${tycho-version}</version>
+                        <configuration>
+                            <supportedProjectTypes>
+                                <supportedProjectType>eclipse-bundle-recipe</supportedProjectType>
+                            </supportedProjectTypes>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>pack200-normalize</id>
+                                <goals>
+                                    <goal>normalize</goal>
+                                </goals>
+                                <phase>package</phase>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.eclipse.cbi.maven.plugins</groupId>
+                        <artifactId>eclipse-jarsigner-plugin</artifactId>
+                        <version>1.1.3</version>
+                        <configuration>
+                            <resigningStrategy>OVERWRITE</resigningStrategy>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>jarsign</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.eclipse.tycho.extras</groupId>
+                        <artifactId>tycho-pack200b-plugin</artifactId>
+                        <version>${tycho-extras-version}</version>
+                        <configuration>
+                            <supportedProjectTypes>
+                                <supportedProjectType>eclipse-bundle-recipe</supportedProjectType>
+                            </supportedProjectTypes>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>pack200-pack</id>
+                                <goals>
+                                    <goal>pack</goal>
+                                </goals>
+                                <phase>package</phase>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.eclipse.tycho</groupId>
+                        <artifactId>tycho-p2-plugin</artifactId>
+                        <version>${tycho-version}</version>
+                        <executions>
+                            <execution>
+                                <id>p2-metadata</id>
+                                <goals>
+                                    <goal>p2-metadata</goal>
+                                </goals>
+                                <phase>package</phase>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <supportedProjectTypes>
+                                <supportedProjectType>eclipse-bundle-recipe</supportedProjectType>
+                                <supportedProjectType>eclipse-feature</supportedProjectType>
+                            </supportedProjectTypes>
+                            <defaultP2Metadata>false</defaultP2Metadata>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+            <distributionManagement>
+                <snapshotRepository>
+                    <id>ossrh</id>
+                    <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+                </snapshotRepository>
+                <repository>
+                    <id>ossrh</id>
+                    <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+                </repository>
+            </distributionManagement>
+        </profile>
+        <profile>
+            <id>eclipse-sign-p2</id>
+            <activation>
+                <property>
+                    <name>publishP2</name>
+                    <value>true</value>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.eclipse.tycho.extras</groupId>
+                        <artifactId>tycho-pack200a-plugin</artifactId>
+                        <version>${tycho-version}</version>
+                        <configuration>
+                            <supportedProjectTypes>
+                                <supportedProjectType>eclipse-bundle-recipe</supportedProjectType>
+                            </supportedProjectTypes>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>pack200-normalize</id>
+                                <goals>
+                                    <goal>normalize</goal>
+                                </goals>
+                                <phase>package</phase>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.eclipse.cbi.maven.plugins</groupId>
+                        <artifactId>eclipse-jarsigner-plugin</artifactId>
+                        <version>1.1.3</version>
+                        <configuration>
+                            <resigningStrategy>OVERWRITE</resigningStrategy>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>jarsign</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.eclipse.tycho.extras</groupId>
+                        <artifactId>tycho-pack200b-plugin</artifactId>
+                        <version>${tycho-extras-version}</version>
+                        <configuration>
+                            <supportedProjectTypes>
+                                <supportedProjectType>eclipse-bundle-recipe</supportedProjectType>
+                            </supportedProjectTypes>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>pack200-pack</id>
+                                <goals>
+                                    <goal>pack</goal>
+                                </goals>
+                                <phase>package</phase>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.eclipse.tycho</groupId>
+                        <artifactId>tycho-p2-plugin</artifactId>
+                        <version>${tycho-version}</version>
+                        <executions>
+                            <execution>
+                                <id>p2-metadata</id>
+                                <goals>
+                                    <goal>p2-metadata</goal>
+                                </goals>
+                                <phase>package</phase>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <supportedProjectTypes>
+                                <supportedProjectType>eclipse-bundle-recipe</supportedProjectType>
+                                <supportedProjectType>eclipse-feature</supportedProjectType>
+                            </supportedProjectTypes>
+                            <defaultP2Metadata>false</defaultP2Metadata>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
+    <build>
         <plugins>
-          <plugin>
-            <groupId>org.eclipse.tycho.extras</groupId>
-            <artifactId>tycho-pack200a-plugin</artifactId>
-            <version>${tycho-version}</version>
-            <configuration>
-              <supportedProjectTypes>
-                <supportedProjectType>eclipse-bundle-recipe</supportedProjectType>
-              </supportedProjectTypes>
-            </configuration>
-            <executions>
-              <execution>
-                <id>pack200-normalize</id>
-                <goals>
-                  <goal>normalize</goal>
-                </goals>
-                <phase>package</phase>
-              </execution>
-            </executions>
-          </plugin>
-          <plugin>
-            <groupId>org.eclipse.cbi.maven.plugins</groupId>
-            <artifactId>eclipse-jarsigner-plugin</artifactId>
-            <version>1.1.3</version>
-            <configuration>
-                <resigningStrategy>OVERWRITE</resigningStrategy>
-            </configuration>
-            <executions>
-              <execution>
-                  <id>jarsign</id>
-                  <phase>package</phase>
-                  <goals>
-                      <goal>sign</goal>
-                  </goals>
-              </execution>
-            </executions>
-          </plugin>
-          <plugin>
-            <groupId>org.eclipse.tycho.extras</groupId>
-            <artifactId>tycho-pack200b-plugin</artifactId>
-            <version>${tycho-extras-version}</version>
-            <configuration>
-              <supportedProjectTypes>
-                <supportedProjectType>eclipse-bundle-recipe</supportedProjectType>
-              </supportedProjectTypes>
-            </configuration>
-            <executions>
-              <execution>
-                <id>pack200-pack</id>
-                <goals>
-                  <goal>pack</goal>
-                </goals>
-                <phase>package</phase>
-              </execution>
-            </executions>
-          </plugin>
-          <plugin>
-            <groupId>org.eclipse.tycho</groupId>
-            <artifactId>tycho-p2-plugin</artifactId>
-            <version>${tycho-version}</version>
-            <executions>
-              <execution>
-                <id>p2-metadata</id>
-                <goals>
-                  <goal>p2-metadata</goal>
-                </goals>
-                <phase>package</phase>
-              </execution>
-            </executions>
-            <configuration>
-              <supportedProjectTypes>
-                <supportedProjectType>eclipse-bundle-recipe</supportedProjectType>
-                <supportedProjectType>eclipse-feature</supportedProjectType>
-              </supportedProjectTypes>
-              <defaultP2Metadata>false</defaultP2Metadata>
-            </configuration>
-          </plugin>
+            <!-- configure default plug-ins -->
+
+            <!-- enable Tycho -->
+            <plugin>
+                <groupId>org.eclipse.tycho</groupId>
+                <artifactId>tycho-maven-plugin</artifactId>
+                <extensions>true</extensions>
+            </plugin>
+
+            <!-- target platform configuration -->
+            <plugin>
+                <groupId>org.eclipse.tycho</groupId>
+                <artifactId>target-platform-configuration</artifactId>
+                <configuration>
+                    <environments>
+                        <environment>
+                            <os>*</os>
+                            <ws>*</ws>
+                            <arch>*</arch>
+                        </environment>
+                    </environments>
+                    <includePackedArtifacts>true</includePackedArtifacts>
+                </configuration>
+            </plugin>
+
+            <!-- configure build qualifier generation as well as source reference headers -->
+            <plugin>
+                <groupId>org.eclipse.tycho</groupId>
+                <artifactId>tycho-packaging-plugin</artifactId>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.eclipse.tycho.extras</groupId>
+                        <artifactId>tycho-sourceref-jgit</artifactId>
+                        <version>${tycho-version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.eclipse.tycho.extras</groupId>
+                        <artifactId>tycho-buildtimestamp-jgit</artifactId>
+                        <version>${tycho-version}</version>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <!-- use qualifier from properties -->
+                    <format>${recipe.qualifier.format}</format>
+                    <!-- generate bundle .qualifier from Git tags/commits -->
+                    <timestampProvider>jgit</timestampProvider>
+                    <!-- allow to ignore dirty working trees -->
+                    <jgit.dirtyWorkingTree>${dirtyWorkingTree}</jgit.dirtyWorkingTree>
+                    <!-- generate source references -->
+                    <sourceReferences>
+                        <generate>true</generate>
+                    </sourceReferences>
+                </configuration>
+            </plugin>
+
+
+            <!-- configure bundle build so that properties defined above will be considered -->
+            <plugin>
+                <groupId>org.eclipse.ebr</groupId>
+                <artifactId>ebr-maven-plugin</artifactId>
+                <extensions>true</extensions>
+                <configuration>
+                    <includes>${recipe.includes}</includes>
+                    <excludes>${recipe.excludes}</excludes>
+                    <bndInstructions>
+                        <Bundle-Name>${recipe.Bundle-Name}</Bundle-Name>
+                        <Bundle-Vendor>${recipe.Bundle-Vendor}</Bundle-Vendor>
+                        <Bundle-Description>${recipe.Bundle-Description}</Bundle-Description>
+                        <_removeheaders>${recipe.removeheaders},${recipe.removeadditionalheaders}</_removeheaders>
+                        <_include>-${recipe.bndfile}</_include>
+                    </bndInstructions>
+                </configuration>
+            </plugin>
+
         </plugins>
-      </build>
-    </profile>
-  </profiles>
+        <pluginManagement>
+            <!-- define versions and defaults for plug-ins used in Maven -->
 
-  <build>
-    <plugins>
-      <!-- configure default plug-ins -->
+            <plugins>
+                <plugin>
+                    <groupId>org.eclipse.tycho</groupId>
+                    <artifactId>tycho-maven-plugin</artifactId>
+                    <version>${tycho-version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.eclipse.tycho</groupId>
+                    <artifactId>tycho-packaging-plugin</artifactId>
+                    <version>${tycho-version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.eclipse.tycho</groupId>
+                    <artifactId>tycho-p2-plugin</artifactId>
+                    <version>${tycho-version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.eclipse.tycho</groupId>
+                    <artifactId>tycho-p2-director-plugin</artifactId>
+                    <version>${tycho-version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.eclipse.tycho</groupId>
+                    <artifactId>tycho-p2-repository-plugin</artifactId>
+                    <version>${tycho-version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.eclipse.tycho</groupId>
+                    <artifactId>target-platform-configuration</artifactId>
+                    <version>${tycho-version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.eclipse.tycho</groupId>
+                    <artifactId>tycho-source-plugin</artifactId>
+                    <version>${tycho-version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.eclipse.tycho.extras</groupId>
+                    <artifactId>tycho-source-feature-plugin</artifactId>
+                    <version>${tycho-extras-version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.eclipse.tycho.extras</groupId>
+                    <artifactId>tycho-custom-bundle-plugin</artifactId>
+                    <version>${tycho-extras-version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.eclipse.tycho.extras</groupId>
+                    <artifactId>tycho-p2-extras-plugin</artifactId>
+                    <version>${tycho-extras-version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.eclipse.ebr</groupId>
+                    <artifactId>ebr-maven-plugin</artifactId>
+                    <version>${ebr-version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.eclipse.ebr</groupId>
+                    <artifactId>ebr-tycho-extras-plugin</artifactId>
+                    <version>${ebr-version}</version>
+                </plugin>
+            </plugins>
 
-      <!-- enable Tycho -->
-      <plugin>
-        <groupId>org.eclipse.tycho</groupId>
-        <artifactId>tycho-maven-plugin</artifactId>
-        <extensions>true</extensions>
-      </plugin>
-
-      <!-- target platform configuration -->
-      <plugin>
-        <groupId>org.eclipse.tycho</groupId>
-        <artifactId>target-platform-configuration</artifactId>
-        <configuration>
-          <environments>
-            <environment>
-              <os>*</os>
-              <ws>*</ws>
-              <arch>*</arch>
-            </environment>
-          </environments>
-          <includePackedArtifacts>true</includePackedArtifacts>
-        </configuration>
-      </plugin>
-
-      <!-- configure build qualifier generation as well as source reference headers -->
-      <plugin>
-        <groupId>org.eclipse.tycho</groupId>
-        <artifactId>tycho-packaging-plugin</artifactId>
-        <dependencies>
-          <dependency>
-            <groupId>org.eclipse.tycho.extras</groupId>
-            <artifactId>tycho-sourceref-jgit</artifactId>
-            <version>${tycho-version}</version>
-          </dependency>
-          <dependency>
-            <groupId>org.eclipse.tycho.extras</groupId>
-            <artifactId>tycho-buildtimestamp-jgit</artifactId>
-            <version>${tycho-version}</version>
-          </dependency>
-        </dependencies>
-        <configuration>
-          <!-- use qualifier from properties -->
-          <format>${recipe.qualifier.format}</format>
-          <!-- generate bundle .qualifier from Git tags/commits -->
-          <timestampProvider>jgit</timestampProvider>
-          <!-- allow to ignore dirty working trees -->
-          <jgit.dirtyWorkingTree>${dirtyWorkingTree}</jgit.dirtyWorkingTree>
-          <!-- generate source references -->
-          <sourceReferences>
-            <generate>true</generate>
-          </sourceReferences>
-        </configuration>
-      </plugin>
-
-
-      <!-- configure bundle build so that properties defined above will be considered -->
-      <plugin>
-        <groupId>org.eclipse.ebr</groupId>
-        <artifactId>ebr-maven-plugin</artifactId>
-        <extensions>true</extensions>
-        <configuration>
-          <includes>${recipe.includes}</includes>
-          <excludes>${recipe.excludes}</excludes>
-          <bndInstructions>
-            <Bundle-Name>${recipe.Bundle-Name}</Bundle-Name>
-            <Bundle-Vendor>${recipe.Bundle-Vendor}</Bundle-Vendor>
-            <Bundle-Description>${recipe.Bundle-Description}</Bundle-Description>
-            <_removeheaders>${recipe.removeheaders},${recipe.removeadditionalheaders}</_removeheaders>
-            <_include>-${recipe.bndfile}</_include>
-          </bndInstructions>
-        </configuration>
-      </plugin>
-
-    </plugins>
-    <pluginManagement>
-      <!-- define versions and defaults for plug-ins used in Maven -->
-
-      <plugins>
-        <plugin>
-          <groupId>org.eclipse.tycho</groupId>
-          <artifactId>tycho-maven-plugin</artifactId>
-          <version>${tycho-version}</version>
-        </plugin>
-        <plugin>
-          <groupId>org.eclipse.tycho</groupId>
-          <artifactId>tycho-packaging-plugin</artifactId>
-          <version>${tycho-version}</version>
-        </plugin>
-        <plugin>
-          <groupId>org.eclipse.tycho</groupId>
-          <artifactId>tycho-p2-plugin</artifactId>
-          <version>${tycho-version}</version>
-        </plugin>
-        <plugin>
-          <groupId>org.eclipse.tycho</groupId>
-          <artifactId>tycho-p2-director-plugin</artifactId>
-          <version>${tycho-version}</version>
-        </plugin>
-        <plugin>
-          <groupId>org.eclipse.tycho</groupId>
-          <artifactId>tycho-p2-repository-plugin</artifactId>
-          <version>${tycho-version}</version>
-        </plugin>
-        <plugin>
-          <groupId>org.eclipse.tycho</groupId>
-          <artifactId>target-platform-configuration</artifactId>
-          <version>${tycho-version}</version>
-        </plugin>
-        <plugin>
-          <groupId>org.eclipse.tycho</groupId>
-          <artifactId>tycho-source-plugin</artifactId>
-          <version>${tycho-version}</version>
-        </plugin>
-        <plugin>
-          <groupId>org.eclipse.tycho.extras</groupId>
-          <artifactId>tycho-source-feature-plugin</artifactId>
-          <version>${tycho-extras-version}</version>
-        </plugin>
-        <plugin>
-          <groupId>org.eclipse.tycho.extras</groupId>
-          <artifactId>tycho-custom-bundle-plugin</artifactId>
-          <version>${tycho-extras-version}</version>
-        </plugin>
-        <plugin>
-          <groupId>org.eclipse.tycho.extras</groupId>
-          <artifactId>tycho-p2-extras-plugin</artifactId>
-          <version>${tycho-extras-version}</version>
-        </plugin>
-        <plugin>
-          <groupId>org.eclipse.ebr</groupId>
-          <artifactId>ebr-maven-plugin</artifactId>
-          <version>${ebr-version}</version>
-        </plugin>
-        <plugin>
-          <groupId>org.eclipse.ebr</groupId>
-          <artifactId>ebr-tycho-extras-plugin</artifactId>
-          <version>${ebr-version}</version>
-        </plugin>
-      </plugins>
-
-    </pluginManagement>
-  </build>
+        </pluginManagement>
+    </build>
 
 </project>
