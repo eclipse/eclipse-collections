@@ -15,6 +15,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.concurrent.Executors;
 
+import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.set.Pool;
 import org.eclipse.collections.impl.block.factory.Comparators;
@@ -575,6 +576,7 @@ public class UnifiedSetTest extends AbstractMutableSetTestCase
     }
 
     @Override
+    @Test
     public void getFirst()
     {
         super.getFirst();
@@ -588,6 +590,7 @@ public class UnifiedSetTest extends AbstractMutableSetTestCase
     }
 
     @Override
+    @Test
     public void getLast()
     {
         super.getLast();
@@ -602,5 +605,82 @@ public class UnifiedSetTest extends AbstractMutableSetTestCase
         MutableSet<Integer> chainedWithOneSlot = UnifiedSet.newSetWith(COLLISION_1, COLLISION_2);
         chainedWithOneSlot.remove(COLLISION_2);
         Assert.assertSame(COLLISION_1, chainedWithOneSlot.getLast());
+    }
+
+    @Test
+    public void trimToSize()
+    {
+        UnifiedSet<String> set = UnifiedSet.newSet();
+        MutableSet<String> expected = Sets.mutable.empty();
+
+        Interval integers = Interval.fromTo(0, 250);
+        integers.each(each ->
+        {
+            set.add(each.toString());
+            expected.add(each.toString());
+        });
+        ArrayIterate.forEach(FREQUENT_COLLISIONS, each ->
+        {
+            set.add(each);
+            expected.add(each);
+        });
+
+        Assert.assertEquals(expected, set);
+        Assert.assertEquals(261, set.size());
+
+        MutableList<Integer> toRemove = Lists.mutable.withAll(Interval.evensFromTo(0, 20));
+
+        toRemove.addAll(Interval.oddsFromTo(35, 55));
+        toRemove.each(each ->
+        {
+            set.remove(each.toString());
+            expected.remove(each.toString());
+        });
+
+        // First assertion to verify that trim does not happen since, the table is already at the smallest required power of 2.
+        Assert.assertFalse(set.trimToSize());
+        Assert.assertEquals(239, set.size());
+        Assert.assertEquals(expected, set);
+
+        Interval.evensFromTo(0, 250).each(each ->
+        {
+            set.remove(each.toString());
+            expected.remove(each.toString());
+        });
+
+        // Second assertion to verify that trim happens since, the table length is less than smallest required power of 2.
+        Assert.assertTrue(set.trimToSize());
+        Assert.assertFalse(set.trimToSize());
+        Assert.assertEquals(expected, set);
+        Assert.assertEquals(124, set.size());
+        expected.each(each -> Assert.assertEquals(each, set.get(each)));
+
+        integers.each(each ->
+        {
+            set.remove(each.toString());
+            expected.remove(each.toString());
+        });
+        Assert.assertTrue(set.trimToSize());
+        Assert.assertFalse(set.trimToSize());
+        Assert.assertEquals(expected, set);
+        expected.each(each -> Assert.assertEquals(each, set.get(each)));
+
+        set.clear();
+        Assert.assertTrue(set.trimToSize());
+        Interval.oneTo(4).each(each -> set.add(each.toString()));
+        // Assert that trim does not happen after puts
+        Assert.assertFalse(set.trimToSize());
+        set.remove("1");
+        set.remove("2");
+        Assert.assertTrue(set.trimToSize());
+
+        set.add("1");
+        // Assert that the resized table due to put is the required size and no need to trim that.
+        Assert.assertFalse(set.trimToSize());
+
+        Interval.zeroTo(4).each(each -> set.add(each.toString()));
+        Interval.oneTo(3).each(each -> set.remove(each.toString()));
+        Assert.assertTrue(set.trimToSize());
+        Assert.assertEquals(2, set.size());
     }
 }
