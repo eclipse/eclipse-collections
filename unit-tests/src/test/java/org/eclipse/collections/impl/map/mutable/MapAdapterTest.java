@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2017 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -13,7 +13,9 @@ package org.eclipse.collections.impl.map.mutable;
 import java.util.HashMap;
 
 import org.eclipse.collections.api.map.MutableMap;
+import org.eclipse.collections.impl.factory.Maps;
 import org.eclipse.collections.impl.test.Verify;
+import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -56,6 +58,13 @@ public class MapAdapterTest extends MutableMapTestCase
                 .withKeyValue(key2, value2)
                 .withKeyValue(key3, value3)
                 .withKeyValue(key4, value4);
+    }
+
+    @Test
+    public void adapt()
+    {
+        MutableMap<Integer, Integer> map = Maps.mutable.with(1, 1, 2, 2, 3, 3);
+        Assert.assertEquals(MapAdapter.adapt(new HashMap<>(map)), Maps.adapt(new HashMap<>(map)));
     }
 
     @Test

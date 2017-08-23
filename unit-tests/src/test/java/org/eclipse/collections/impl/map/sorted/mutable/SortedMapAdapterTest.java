@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2017 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -15,6 +15,7 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 
 import org.eclipse.collections.api.map.sorted.MutableSortedMap;
+import org.eclipse.collections.impl.factory.SortedMaps;
 import org.eclipse.collections.impl.tuple.Tuples;
 import org.junit.Assert;
 import org.junit.Test;
@@ -98,7 +99,7 @@ public class SortedMapAdapterTest extends MutableSortedMapTestCase
         Assert.assertSame(sortedMap, adapt);
 
         SortedMap<Integer, String> treeMap = new TreeMap<>(sortedMap);
-        MutableSortedMap<Integer, String> treeAdapt = SortedMapAdapter.adapt(treeMap);
+        MutableSortedMap<Integer, String> treeAdapt = SortedMaps.adapt(treeMap);
         Assert.assertNotSame(treeMap, treeAdapt);
         Assert.assertEquals(treeMap, treeAdapt);
     }

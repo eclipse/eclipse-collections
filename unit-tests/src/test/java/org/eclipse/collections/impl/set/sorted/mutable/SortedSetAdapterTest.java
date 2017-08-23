@@ -23,6 +23,7 @@ import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.block.factory.Predicates;
 import org.eclipse.collections.impl.factory.Lists;
+import org.eclipse.collections.impl.factory.SortedSets;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.test.SerializeTestHelper;
@@ -98,7 +99,7 @@ public class SortedSetAdapterTest extends AbstractSortedSetTestCase
     public void adapt()
     {
         SortedSet<Integer> integers = new TreeSet<>(FastList.newListWith(1, 2, 3, 4));
-        MutableSortedSet<Integer> adapter1 = SortedSetAdapter.adapt(integers);
+        MutableSortedSet<Integer> adapter1 = SortedSets.adapt(integers);
         MutableSortedSet<Integer> adapter2 = new SortedSetAdapter<Integer>(new TreeSet<>()).with(1, 2, 3, 4);
         Verify.assertEqualsAndHashCode(adapter1, adapter2);
         Verify.assertSortedSetsEqual(adapter1, adapter2);
