@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2017 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -14,6 +14,7 @@ import java.util.Arrays;
 import java.util.LinkedList;
 
 import org.eclipse.collections.api.list.MutableList;
+import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
 import org.junit.Test;
@@ -42,6 +43,12 @@ public class ListAdapterTest extends AbstractListTestCase
         MutableList<Integer> list = this.newWith(1, 2, 3);
         MutableList<Integer> list2 = list.clone();
         Verify.assertListsEqual(list, list2);
+    }
+
+    @Test
+    public void adapt()
+    {
+        Assert.assertEquals(ListAdapter.adapt(Arrays.asList(1, 2, 3)), Lists.adapt(Arrays.asList(1, 2, 3)));
     }
 
     @Test

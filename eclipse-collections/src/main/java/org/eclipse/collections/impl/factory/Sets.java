@@ -18,7 +18,6 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 
 import org.eclipse.collections.api.LazyIterable;
-import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.procedure.Procedure2;
@@ -90,6 +89,14 @@ public final class Sets
     private Sets()
     {
         throw new AssertionError("Suppress default constructor for noninstantiability");
+    }
+
+    /**
+     * @since 9.0.
+     */
+    public static <T> MutableSet<T> adapt(Set<T> list)
+    {
+        return SetAdapter.adapt(list);
     }
 
     public static <E> MutableSet<E> union(

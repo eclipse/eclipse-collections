@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2017 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -10,11 +10,15 @@
 
 package org.eclipse.collections.impl.factory;
 
+import java.util.Map;
+
 import org.eclipse.collections.api.factory.map.FixedSizeMapFactory;
 import org.eclipse.collections.api.factory.map.ImmutableMapFactory;
 import org.eclipse.collections.api.factory.map.MutableMapFactory;
+import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.impl.map.fixed.FixedSizeMapFactoryImpl;
 import org.eclipse.collections.impl.map.immutable.ImmutableMapFactoryImpl;
+import org.eclipse.collections.impl.map.mutable.MapAdapter;
 import org.eclipse.collections.impl.map.mutable.MutableMapFactoryImpl;
 
 /**
@@ -54,5 +58,13 @@ public final class Maps
     private Maps()
     {
         throw new AssertionError("Suppress default constructor for noninstantiability");
+    }
+
+    /**
+     * @since 9.0.
+     */
+    public static <K, V> MutableMap<K, V> adapt(Map<K, V> list)
+    {
+        return MapAdapter.adapt(list);
     }
 }
