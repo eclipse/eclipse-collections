@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2017 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -66,6 +66,7 @@ import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.api.tuple.Twin;
 import org.eclipse.collections.impl.block.factory.Comparators;
+import org.eclipse.collections.impl.block.factory.HashingStrategies;
 import org.eclipse.collections.impl.block.procedure.MutatingAggregationProcedure;
 import org.eclipse.collections.impl.block.procedure.NonMutatingAggregationProcedure;
 import org.eclipse.collections.impl.factory.Lists;
@@ -1581,6 +1582,14 @@ public final class ArrayListIterate
             }
         }
         return result;
+    }
+
+    /**
+     * @since 9.0.
+     */
+    public static <T, V> ArrayList<T> distinctBy(ArrayList<T> list, Function<? super T, ? extends V> function)
+    {
+        return ArrayListIterate.distinct(list, HashingStrategies.fromFunction(function));
     }
 
     private static <T> void wipeAndResetTheEnd(

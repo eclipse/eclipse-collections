@@ -131,15 +131,6 @@ public class ImmutableEmptyListTest extends AbstractImmutableListTestCase
 
     @Override
     @Test
-    public void distinctWithHashingStrategy()
-    {
-        ImmutableList<Integer> integers = this.classUnderTest();
-        Assert.assertNotNull(integers.distinct(HashingStrategies.defaultStrategy()));
-        Assert.assertTrue(integers.isEmpty());
-    }
-
-    @Override
-    @Test
     public void countWith()
     {
         ImmutableList<Integer> integers = this.classUnderTest();

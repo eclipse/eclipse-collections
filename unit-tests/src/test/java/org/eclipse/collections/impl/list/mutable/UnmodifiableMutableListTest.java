@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2017 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -274,16 +274,27 @@ public class UnmodifiableMutableListTest
     @Test
     public void distinct()
     {
-        MutableList<Integer> list = UnmodifiableMutableList.of(FastList.newListWith(3, 1, 2, 2, 1, 3));
+        MutableList<Integer> list = UnmodifiableMutableList.of(Lists.mutable.with(3, 1, 2, 2, 1, 3));
         Verify.assertListsEqual(FastList.newListWith(3, 1, 2), list.distinct());
     }
 
     @Test
     public void distinctWithHashingStrategy()
     {
-        MutableList<String> letters = UnmodifiableMutableList.of(FastList.newListWith("a", "A", "b", "C", "b", "D", "E", "e"));
+        MutableList<String> letters = UnmodifiableMutableList.of(Lists.mutable.with("a", "A", "b", "C", "b", "D", "E", "e"));
         MutableList<String> expectedLetters = UnmodifiableMutableList.of(FastList.newListWith("a", "b", "C", "D", "E"));
         Verify.assertListsEqual(letters.distinct(HashingStrategies.fromFunction(String::toLowerCase)), expectedLetters);
+    }
+
+    /**
+     * @since 9.0.
+     */
+    @Test
+    public void distinctBy()
+    {
+        MutableList<String> letters = UnmodifiableMutableList.of(Lists.mutable.with("a", "A", "b", "C", "b", "D", "E", "e"));
+        MutableList<String> expectedLetters = UnmodifiableMutableList.of(Lists.mutable.with("a", "b", "C", "D", "E"));
+        Verify.assertListsEqual(letters.distinctBy(String::toLowerCase), expectedLetters);
     }
 
     @Test

@@ -305,6 +305,18 @@ public class SynchronizedMutableList<T>
         }
     }
 
+    /**
+     * @since 9.0.
+     */
+    @Override
+    public <V> MutableList<T> distinctBy(Function<? super T, ? extends V> function)
+    {
+        synchronized (this.getLock())
+        {
+            return this.getDelegate().distinctBy(function);
+        }
+    }
+
     @Override
     public <S> boolean corresponds(OrderedIterable<S> other, Predicate2<? super T, ? super S> predicate)
     {
