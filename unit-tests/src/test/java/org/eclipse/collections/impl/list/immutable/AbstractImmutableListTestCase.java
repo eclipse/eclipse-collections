@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2017 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -18,6 +18,7 @@ import java.util.ListIterator;
 import java.util.NoSuchElementException;
 
 import org.eclipse.collections.api.RichIterable;
+import org.eclipse.collections.api.block.HashingStrategy;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.collection.ImmutableCollection;
 import org.eclipse.collections.api.collection.MutableCollection;
@@ -305,12 +306,41 @@ public abstract class AbstractImmutableListTestCase extends AbstractImmutableCol
     @Test
     public void distinctWithHashingStrategy()
     {
-        FastList<String> strings = FastList.newListWith("A", "b", "a", "c", "B", "D", "e", "D", "e", "E");
         ImmutableList<Integer> integers = this.classUnderTest();
-        ImmutableList<String> letters =
-                strings.subList(0, integers.size()).toImmutable().distinct(HashingStrategies.fromFunction(String::toLowerCase));
-        List<String> expectedLetters = strings.subList(0, integers.size()).distinct(HashingStrategies.fromFunction(String::toLowerCase));
-        Assert.assertEquals(expectedLetters, letters);
+        HashingStrategy<Integer> hashingStrategy = HashingStrategies.fromFunction(e -> e % 2);
+        if (integers.size() > 1)
+        {
+            Assert.assertEquals(Lists.immutable.with(1, 2), integers.distinct(hashingStrategy));
+        }
+        else if (integers.size() == 1)
+        {
+            Assert.assertEquals(Lists.immutable.with(1), integers.distinct(hashingStrategy));
+        }
+        else
+        {
+            Assert.assertEquals(Lists.immutable.empty(), integers.distinct(hashingStrategy));
+        }
+    }
+
+    /**
+     * @since 9.0.
+     */
+    @Test
+    public void distinctBy()
+    {
+        ImmutableList<Integer> integers = this.classUnderTest();
+        if (integers.size() > 1)
+        {
+            Assert.assertEquals(Lists.immutable.with(1, 2), integers.distinctBy(e -> e % 2));
+        }
+        else if (integers.size() == 1)
+        {
+            Assert.assertEquals(Lists.immutable.with(1), integers.distinctBy(e -> e % 2));
+        }
+        else
+        {
+            Assert.assertEquals(Lists.immutable.empty(), integers.distinctBy(e -> e % 2));
+        }
     }
 
     @Test

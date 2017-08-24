@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2017 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -139,6 +139,12 @@ public interface MutableList<T>
      */
     @Override
     MutableList<T> distinct(HashingStrategy<? super T> hashingStrategy);
+
+    /**
+     * @since 9.0
+     */
+    @Override
+    <V> MutableList<T> distinctBy(Function<? super T, ? extends V> function);
 
     /**
      * Sorts the internal data structure of this list and returns the list itself as a convenience.

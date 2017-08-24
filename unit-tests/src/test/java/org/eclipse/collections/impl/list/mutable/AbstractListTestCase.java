@@ -369,7 +369,7 @@ public abstract class AbstractListTestCase
     {
         ListIterable<Integer> list = this.newWith(1, 4, 3, 2, 1, 4, 1);
         ListIterable<Integer> actual = list.distinct();
-        Verify.assertListsEqual(FastList.newListWith(1, 4, 3, 2), actual.toList());
+        Assert.assertEquals(Lists.mutable.with(1, 4, 3, 2), actual);
     }
 
     @Test
@@ -377,7 +377,18 @@ public abstract class AbstractListTestCase
     {
         ListIterable<String> list = this.newWith("a", "A", "b", "C", "b", "D", "E", "e");
         ListIterable<String> actual = list.distinct(HashingStrategies.fromFunction(String::toLowerCase));
-        Verify.assertListsEqual(FastList.newListWith("a", "b", "C", "D", "E"), actual.toList());
+        Assert.assertEquals(Lists.mutable.with("a", "b", "C", "D", "E"), actual);
+    }
+
+    /**
+     * @since 9.0.
+     */
+    @Test
+    public void distinctBy()
+    {
+        ListIterable<String> list = this.newWith("a", "A", "b", "C", "b", "D", "E", "e");
+        ListIterable<String> actual = list.distinctBy(String::toLowerCase);
+        Assert.assertEquals(Lists.mutable.with("a", "b", "C", "D", "E"), actual);
     }
 
     @Override
