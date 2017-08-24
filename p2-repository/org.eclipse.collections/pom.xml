@@ -6,7 +6,7 @@
   <parent>
     <groupId>org.eclipse.collections</groupId>
     <artifactId>p2-repository</artifactId>
-    <version>9.0.0-SNAPSHOT</version>
+    <version>9.0.0.M3</version>
   </parent>
 
   <artifactId>org.eclipse.collections</artifactId>
