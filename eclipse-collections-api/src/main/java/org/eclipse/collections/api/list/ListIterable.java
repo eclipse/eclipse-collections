@@ -195,6 +195,10 @@ public interface ListIterable<T>
     ListIterable<T> distinct(HashingStrategy<? super T> hashingStrategy);
 
     /**
+     * Returns a new {@code ListIterable} containing the distinct elements in this list.
+     * The specified function will be used to create a HashingStrategy to unique the elements.
+     *
+     * @see ListIterable#distinct(HashingStrategy)
      * @since 9.0
      */
     <V> ListIterable<T> distinctBy(Function<? super T, ? extends V> function);
