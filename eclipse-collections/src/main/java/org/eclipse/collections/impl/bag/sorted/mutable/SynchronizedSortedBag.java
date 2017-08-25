@@ -634,6 +634,15 @@ public class SynchronizedSortedBag<T>
     }
 
     @Override
+    public void reverseForEachWithIndex(ObjectIntProcedure<? super T> procedure)
+    {
+        synchronized (this.lock)
+        {
+            this.getDelegate().reverseForEachWithIndex(procedure);
+        }
+    }
+
+    @Override
     public LazyIterable<T> asReversed()
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".asReversed() not implemented yet");

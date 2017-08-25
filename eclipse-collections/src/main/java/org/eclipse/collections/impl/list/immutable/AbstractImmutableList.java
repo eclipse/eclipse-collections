@@ -574,6 +574,15 @@ abstract class AbstractImmutableList<T>
     }
 
     @Override
+    public void reverseForEachWithIndex(ObjectIntProcedure<? super T> procedure)
+    {
+        if (this.notEmpty())
+        {
+            this.forEachWithIndex(this.size() - 1, 0, procedure);
+        }
+    }
+
+    @Override
     public int indexOf(Object object)
     {
         int n = this.size();

@@ -162,6 +162,12 @@ public class UnmodifiableMutableList<T>
     }
 
     @Override
+    public void reverseForEachWithIndex(ObjectIntProcedure<? super T> procedure)
+    {
+        this.getMutableList().reverseForEachWithIndex(procedure);
+    }
+
+    @Override
     public void forEachWithIndex(int fromIndex, int toIndex, ObjectIntProcedure<? super T> objectIntProcedure)
     {
         this.getMutableList().forEachWithIndex(fromIndex, toIndex, objectIntProcedure);

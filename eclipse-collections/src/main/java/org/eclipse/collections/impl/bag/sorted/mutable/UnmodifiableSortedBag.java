@@ -437,6 +437,12 @@ public class UnmodifiableSortedBag<T>
     }
 
     @Override
+    public void reverseForEachWithIndex(ObjectIntProcedure<? super T> procedure)
+    {
+        this.getSortedBag().reverseForEachWithIndex(procedure);
+    }
+
+    @Override
     public LazyIterable<T> asReversed()
     {
         return this.getSortedBag().asReversed();

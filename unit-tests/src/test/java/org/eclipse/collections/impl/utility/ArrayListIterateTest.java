@@ -151,7 +151,7 @@ public class ArrayListIterateTest
         ArrayList<Integer> results = new ArrayList<>();
         ArrayListIterate.forEach(integers, 0, 4, results::add);
         Assert.assertEquals(integers, results);
-        MutableList<Integer> reverseResults = Lists.mutable.of();
+        MutableList<Integer> reverseResults = Lists.mutable.empty();
         ArrayListIterate.forEach(integers, 4, 0, reverseResults::add);
         Assert.assertEquals(ListIterate.reverseThis(integers), reverseResults);
         Verify.assertThrows(IndexOutOfBoundsException.class, () -> ArrayListIterate.forEach(integers, 4, -1, reverseResults::add));
@@ -166,7 +166,7 @@ public class ArrayListIterateTest
         ArrayList<Integer> results = new ArrayList<>();
         ArrayListIterate.forEach(optimisableList, 0, 4, results::add);
         Assert.assertEquals(expected, results);
-        MutableList<Integer> reverseResults = Lists.mutable.of();
+        MutableList<Integer> reverseResults = Lists.mutable.empty();
         ArrayListIterate.forEach(optimisableList, 4, 0, reverseResults::add);
         Assert.assertEquals(ListIterate.reverseThis(expected), reverseResults);
         Verify.assertThrows(IndexOutOfBoundsException.class, () -> ArrayListIterate.forEach(optimisableList, 104, -1, reverseResults::add));
@@ -180,7 +180,7 @@ public class ArrayListIterateTest
         ArrayList<Integer> results = new ArrayList<>();
         ArrayListIterate.forEachWithIndex(integers, 0, 4, ObjectIntProcedures.fromProcedure(results::add));
         Assert.assertEquals(integers, results);
-        MutableList<Integer> reverseResults = Lists.mutable.of();
+        MutableList<Integer> reverseResults = Lists.mutable.empty();
         ObjectIntProcedure<Integer> objectIntProcedure = ObjectIntProcedures.fromProcedure(reverseResults::add);
         ArrayListIterate.forEachWithIndex(integers, 4, 0, objectIntProcedure);
         Assert.assertEquals(ListIterate.reverseThis(integers), reverseResults);
@@ -196,7 +196,7 @@ public class ArrayListIterateTest
         ArrayList<Integer> results = new ArrayList<>();
         ArrayListIterate.forEachWithIndex(optimisableList, 0, 104, ObjectIntProcedures.fromProcedure(results::add));
         Assert.assertEquals(expected, results);
-        MutableList<Integer> reverseResults = Lists.mutable.of();
+        MutableList<Integer> reverseResults = Lists.mutable.empty();
         ObjectIntProcedure<Integer> objectIntProcedure = ObjectIntProcedures.fromProcedure(reverseResults::add);
         ArrayListIterate.forEachWithIndex(expected, 104, 0, objectIntProcedure);
         Assert.assertEquals(ListIterate.reverseThis(expected), reverseResults);
@@ -208,7 +208,7 @@ public class ArrayListIterateTest
     public void reverseForEach()
     {
         ArrayList<Integer> integers = Interval.oneTo(5).addAllTo(new ArrayList<>());
-        MutableList<Integer> reverseResults = Lists.mutable.of();
+        MutableList<Integer> reverseResults = Lists.mutable.empty();
         ArrayListIterate.reverseForEach(integers, reverseResults::add);
         Assert.assertEquals(ListIterate.reverseThis(integers), reverseResults);
     }
@@ -217,9 +217,25 @@ public class ArrayListIterateTest
     public void reverseForEach_emptyList()
     {
         ArrayList<Integer> integers = new ArrayList<>();
-        MutableList<Integer> results = Lists.mutable.of();
+        MutableList<Integer> results = Lists.mutable.empty();
         ArrayListIterate.reverseForEach(integers, results::add);
         Assert.assertEquals(integers, results);
+    }
+
+    @Test
+    public void reverseForEachWithIndex()
+    {
+        ArrayList<Integer> integers = Interval.oneTo(5).addAllTo(new ArrayList<>());
+        MutableList<Integer> reverseResults = Lists.mutable.empty();
+        ArrayListIterate.reverseForEachWithIndex(integers, (each, index) -> reverseResults.add(each + index));
+        Assert.assertEquals(Lists.mutable.with(9, 7, 5, 3, 1), reverseResults);
+    }
+
+    @Test
+    public void reverseForEachWithIndex_emptyList()
+    {
+        ArrayList<Integer> integers = new ArrayList<>();
+        ArrayListIterate.reverseForEachWithIndex(integers, (each, index) -> Assert.fail("Should not be evaluated"));
     }
 
     @Test
@@ -756,7 +772,7 @@ public class ArrayListIterateTest
     {
         ArrayList<Integer> list = this.getIntegerList();
         Iterate.sortThis(list);
-        MutableList<Integer> result = Lists.mutable.of();
+        MutableList<Integer> result = Lists.mutable.empty();
         ArrayListIterate.forEach(list, CollectionAddProcedure.on(result));
         Verify.assertListsEqual(list, result);
     }
@@ -776,7 +792,7 @@ public class ArrayListIterateTest
     {
         ArrayList<Integer> list = this.getIntegerList();
         Iterate.sortThis(list);
-        MutableList<Integer> result = Lists.mutable.of();
+        MutableList<Integer> result = Lists.mutable.empty();
         ArrayListIterate.forEachWith(
                 list,
                 Procedures2.fromProcedure(CollectionAddProcedure.on(result)),
@@ -800,7 +816,7 @@ public class ArrayListIterateTest
     @Test
     public void forEachInBoth()
     {
-        MutableList<Pair<String, String>> list = Lists.mutable.of();
+        MutableList<Pair<String, String>> list = Lists.mutable.empty();
         ArrayList<String> list1 = new ArrayList<>(mList("1", "2"));
         ArrayList<String> list2 = new ArrayList<>(mList("a", "b"));
         ArrayListIterate.forEachInBoth(list1, list2, (argument1, argument2) -> list.add(Tuples.twin(argument1, argument2)));
@@ -989,7 +1005,7 @@ public class ArrayListIterateTest
         List<Integer> results1 = ArrayListIterate.flatCollect(list, CollectionCreator::getCollection);
         Verify.assertListsEqual(FastList.newListWith(1, 1, 2, 2), results1);
 
-        MutableList<Integer> target1 = Lists.mutable.of();
+        MutableList<Integer> target1 = Lists.mutable.empty();
         MutableList<Integer> results2 = ArrayListIterate.flatCollect(list, CollectionCreator::getCollection, target1);
         Assert.assertSame(results2, target1);
 

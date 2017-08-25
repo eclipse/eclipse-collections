@@ -1236,6 +1236,12 @@ public class UnmodifiableTreeMap<K, V>
     }
 
     @Override
+    public void reverseForEachWithIndex(ObjectIntProcedure<? super V> procedure)
+    {
+        throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".reverseForEachWithIndex() not implemented yet");
+    }
+
+    @Override
     public LazyIterable<V> asReversed()
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".asReversed() not implemented yet");

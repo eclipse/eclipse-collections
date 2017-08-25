@@ -126,6 +126,15 @@ public abstract class AbstractMutableList<T>
     }
 
     @Override
+    public void reverseForEachWithIndex(ObjectIntProcedure<? super T> procedure)
+    {
+        if (this.notEmpty())
+        {
+            this.forEachWithIndex(this.size() - 1, 0, procedure);
+        }
+    }
+
+    @Override
     public void forEachWithIndex(ObjectIntProcedure<? super T> objectIntProcedure)
     {
         ListIterate.forEachWithIndex(this, objectIntProcedure);

@@ -12,6 +12,7 @@ package org.eclipse.collections.impl.list.mutable;
 
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 import java.util.ListIterator;
 import java.util.RandomAccess;
 
@@ -544,5 +545,24 @@ public class CompositeFastListTest extends AbstractListTestCase
     public void removingFromIteratorIsUncoolFromEmptyIterator()
     {
         new CompositeFastList<String>().iterator().remove();
+    }
+
+    @Test
+    @Override
+    public void reverseForEachWithIndex()
+    {
+        super.reverseForEachWithIndex();
+
+        MutableList<Integer> integers1 = Interval.oneTo(4).toList();
+        MutableList<Integer> integers2 = Interval.fromTo(5, 8).toList();
+        MutableList<Integer> integers3 = Interval.fromTo(9, 11).toList();
+        CompositeFastList<Integer> compositeFastList = new CompositeFastList<>();
+        compositeFastList.addAll(integers1);
+        compositeFastList.addAll(integers2);
+        compositeFastList.addAll(integers3);
+
+        List<Integer> result = Lists.mutable.empty();
+        compositeFastList.reverseForEachWithIndex((each, index) -> result.add(each + index));
+        Assert.assertEquals(Lists.mutable.with(21, 19, 17, 15, 13, 11, 9, 7, 5, 3, 1), result);
     }
 }

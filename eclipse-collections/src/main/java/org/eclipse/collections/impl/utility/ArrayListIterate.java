@@ -768,13 +768,24 @@ public final class ArrayListIterate
     }
 
     /**
-     * Reverses over the List in reverse order executing the Procedure for each element
+     * Reverses over the List in reverse order executing the Procedure for each element.
      */
     public static <T> void reverseForEach(ArrayList<T> list, Procedure<? super T> procedure)
     {
         if (!list.isEmpty())
         {
             ArrayListIterate.forEach(list, list.size() - 1, 0, procedure);
+        }
+    }
+
+    /**
+     * Reverses over the List in reverse order executing the Procedure with index for each element.
+     */
+    public static <T> void reverseForEachWithIndex(ArrayList<T> list, ObjectIntProcedure<? super T> procedure)
+    {
+        if (!list.isEmpty())
+        {
+            ArrayListIterate.forEachWithIndex(list, list.size() - 1, 0, procedure);
         }
     }
 

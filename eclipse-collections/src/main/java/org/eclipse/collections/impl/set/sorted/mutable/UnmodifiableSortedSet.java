@@ -488,6 +488,12 @@ public class UnmodifiableSortedSet<T>
     }
 
     @Override
+    public void reverseForEachWithIndex(ObjectIntProcedure<? super T> procedure)
+    {
+        this.getSortedSet().reverseForEachWithIndex(procedure);
+    }
+
+    @Override
     public LazyIterable<T> asReversed()
     {
         return this.getSortedSet().asReversed();

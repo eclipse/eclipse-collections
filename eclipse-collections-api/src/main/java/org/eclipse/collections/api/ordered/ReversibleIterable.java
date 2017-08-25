@@ -24,6 +24,7 @@ import org.eclipse.collections.api.block.function.primitive.ShortFunction;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
+import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
 import org.eclipse.collections.api.multimap.ordered.ReversibleIterableMultimap;
 import org.eclipse.collections.api.ordered.primitive.ReversibleBooleanIterable;
 import org.eclipse.collections.api.ordered.primitive.ReversibleByteIterable;
@@ -49,16 +50,21 @@ public interface ReversibleIterable<T> extends OrderedIterable<T>
      * Evaluates the procedure for each element of the list iterating in reverse order.
      * <p>
      * <pre>e.g.
-     * people.reverseForEach(new Procedure&lt;Person&gt;()
-     * {
-     *     public void value(Person person)
-     *     {
-     *         LOGGER.info(person.getName());
-     *     }
-     * });
+     * people.reverseForEach(person -> LOGGER.info(person.getName()));
      * </pre>
      */
     void reverseForEach(Procedure<? super T> procedure);
+
+    /**
+     * Evaluates the procedure for each element and it's index in reverse order.
+     * <pre>e.g.
+     * people.reverseForEachWithIndex((person, index) ->
+     *         LOGGER.info("Index: " + index + " person: " + person.getName()));
+     * </pre>
+     *
+     * @since 9.0.0
+     */
+    void reverseForEachWithIndex(ObjectIntProcedure<? super T> procedure);
 
     /**
      * Returns a reversed view of this ReversibleIterable.

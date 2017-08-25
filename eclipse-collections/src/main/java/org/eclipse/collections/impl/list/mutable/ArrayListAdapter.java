@@ -155,6 +155,12 @@ public final class ArrayListAdapter<T>
     }
 
     @Override
+    public void reverseForEachWithIndex(ObjectIntProcedure<? super T> procedure)
+    {
+        ArrayListIterate.reverseForEachWithIndex(this.delegate, procedure);
+    }
+
+    @Override
     public void forEachWithIndex(ObjectIntProcedure<? super T> objectIntProcedure)
     {
         ArrayListIterate.forEachWithIndex(this.delegate, objectIntProcedure);
