@@ -162,6 +162,12 @@ public final class CompositeFastList<E>
     }
 
     @Override
+    public void reverseForEachWithIndex(ObjectIntProcedure<? super E> procedure)
+    {
+        this.lists.reverseForEach(new ProcedureToReverseInnerListObjectIntProcedure<>(procedure, this.size - 1));
+    }
+
+    @Override
     public <P> void forEachWith(
             Procedure2<? super E, ? super P> procedure2,
             P parameter)
@@ -687,6 +693,32 @@ public final class CompositeFastList<E>
                         object,
                         this.index);
                 this.index++;
+            });
+        }
+    }
+
+    private static final class ProcedureToReverseInnerListObjectIntProcedure<E> implements Procedure<FastList<E>>
+    {
+        private static final long serialVersionUID = 1L;
+
+        private int index;
+        private final ObjectIntProcedure<? super E> objectIntProcedure;
+
+        private ProcedureToReverseInnerListObjectIntProcedure(ObjectIntProcedure<? super E> objectIntProcedure, int size)
+        {
+            this.objectIntProcedure = objectIntProcedure;
+            this.index = size;
+        }
+
+        @Override
+        public void value(FastList<E> list)
+        {
+            list.reverseForEach(object ->
+            {
+                this.objectIntProcedure.value(
+                        object,
+                        this.index);
+                this.index--;
             });
         }
     }

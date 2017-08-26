@@ -528,6 +528,15 @@ public class SynchronizedSortedMap<K, V>
     }
 
     @Override
+    public void reverseForEachWithIndex(ObjectIntProcedure<? super V> procedure)
+    {
+        synchronized (this.lock)
+        {
+            this.getDelegate().reverseForEachWithIndex(procedure);
+        }
+    }
+
+    @Override
     public LazyIterable<V> asReversed()
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".asReversed() not implemented yet");

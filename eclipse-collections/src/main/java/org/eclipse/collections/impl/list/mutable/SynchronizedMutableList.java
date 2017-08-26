@@ -417,6 +417,15 @@ public class SynchronizedMutableList<T>
     }
 
     @Override
+    public void reverseForEachWithIndex(ObjectIntProcedure<? super T> procedure)
+    {
+        synchronized (this.getLock())
+        {
+            this.getDelegate().reverseForEachWithIndex(procedure);
+        }
+    }
+
+    @Override
     public MutableList<T> sortThis(Comparator<? super T> comparator)
     {
         synchronized (this.getLock())

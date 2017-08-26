@@ -142,6 +142,12 @@ public final class ListAdapter<T>
     }
 
     @Override
+    public void reverseForEachWithIndex(ObjectIntProcedure<? super T> procedure)
+    {
+        ListIterate.reverseForEachWithIndex(this.delegate, procedure);
+    }
+
+    @Override
     public void forEachWithIndex(ObjectIntProcedure<? super T> objectIntProcedure)
     {
         ListIterate.forEachWithIndex(this.delegate, objectIntProcedure);

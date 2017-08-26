@@ -196,6 +196,18 @@ public abstract class AbstractImmutableListTestCase extends AbstractImmutableCol
     }
 
     @Test
+    public void reverseForEachWithIndex()
+    {
+        MutableList<Integer> expected = Lists.mutable.of();
+        MutableList<Integer> result = Lists.mutable.of();
+        ImmutableList<Integer> list = this.classUnderTest();
+        list.reverseForEachWithIndex((each, index) -> Assert.assertEquals(each - 1, index));
+        list.reverseForEachWithIndex((each, index) -> result.add(each + index));
+        list.forEachWithIndex((each, index) -> expected.add(each + index));
+        Assert.assertEquals(expected.reverseThis(), result);
+    }
+
+    @Test
     public void corresponds()
     {
         ImmutableList<Integer> integers1 = this.classUnderTest();

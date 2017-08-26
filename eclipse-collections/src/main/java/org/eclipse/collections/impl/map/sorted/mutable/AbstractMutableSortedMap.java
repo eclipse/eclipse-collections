@@ -355,6 +355,12 @@ public abstract class AbstractMutableSortedMap<K, V> extends AbstractMutableMapI
     }
 
     @Override
+    public void reverseForEachWithIndex(ObjectIntProcedure<? super V> procedure)
+    {
+        throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".reverseForEachWithIndex() not implemented yet");
+    }
+
+    @Override
     public LazyIterable<V> asReversed()
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".asReversed() not implemented yet");

@@ -94,7 +94,14 @@ public class TreeSortedSetTest extends AbstractSortedSetTestCase
     @Test(expected = UnsupportedOperationException.class)
     public void reverseForEach()
     {
-        this.newWith(1, 2, 3).reverseForEach(System.out::println);
+        this.newWith(1, 2, 3).reverseForEach(each -> Assert.fail("Should not be evaluated"));
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void reverseForEachWithIndex()
+    {
+        this.newWith(1, 2, 3).reverseForEachWithIndex((each, index) -> Assert.fail("Should not be evaluated"));
     }
 
     @Override

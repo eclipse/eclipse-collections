@@ -1059,6 +1059,12 @@ public final class MultiReaderFastList<T>
     }
 
     @Override
+    public void reverseForEachWithIndex(ObjectIntProcedure<? super T> procedure)
+    {
+        this.withReadLockRun(() -> this.getDelegate().reverseForEachWithIndex(procedure));
+    }
+
+    @Override
     public void forEachWithIndex(int fromIndex, int toIndex, ObjectIntProcedure<? super T> objectIntProcedure)
     {
         this.withReadLockRun(() -> this.getDelegate().forEachWithIndex(fromIndex, toIndex, objectIntProcedure));
@@ -1319,6 +1325,12 @@ public final class MultiReaderFastList<T>
         public void reverseForEach(Procedure<? super T> procedure)
         {
             this.getDelegate().reverseForEach(procedure);
+        }
+
+        @Override
+        public void reverseForEachWithIndex(ObjectIntProcedure<? super T> procedure)
+        {
+            this.getDelegate().reverseForEachWithIndex(procedure);
         }
 
         @Override

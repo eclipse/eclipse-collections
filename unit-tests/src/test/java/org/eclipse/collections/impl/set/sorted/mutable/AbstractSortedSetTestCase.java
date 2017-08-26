@@ -866,6 +866,15 @@ public abstract class AbstractSortedSetTestCase extends AbstractCollectionTestCa
     }
 
     @Test
+    public void reverseForEachWithIndex()
+    {
+        MutableList<Integer> list = Lists.mutable.empty();
+        MutableSortedSet<Integer> integers = this.newWith(1, 2, 3, 4);
+        integers.reverseForEachWithIndex((each, index) -> list.add(each + index));
+        Assert.assertEquals(Lists.mutable.with(7, 6, 5, 4), list);
+    }
+
+    @Test
     public void take()
     {
         MutableSortedSet<Integer> integers1 = this.newWith(1, 2, 3, 4);
