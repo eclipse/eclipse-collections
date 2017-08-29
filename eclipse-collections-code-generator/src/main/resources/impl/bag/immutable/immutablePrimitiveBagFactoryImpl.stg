@@ -24,8 +24,10 @@ import org.eclipse.collections.api.factory.bag.primitive.Immutable<name>BagFacto
  *
  * @since 4.0.
  */
-public class Immutable<name>BagFactoryImpl implements Immutable<name>BagFactory
+public enum Immutable<name>BagFactoryImpl implements Immutable<name>BagFactory
 {
+    INSTANCE;
+
     @Override
     public Immutable<name>Bag empty()
     {

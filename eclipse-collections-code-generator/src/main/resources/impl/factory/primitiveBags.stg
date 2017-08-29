@@ -27,8 +27,8 @@ import org.eclipse.collections.impl.bag.mutable.primitive.Mutable<name>BagFactor
 @SuppressWarnings("ConstantNamingConvention")
 public final class <name>Bags
 {
-    public static final Immutable<name>BagFactory immutable = new Immutable<name>BagFactoryImpl();
-    public static final Mutable<name>BagFactory mutable = new Mutable<name>BagFactoryImpl();
+    public static final Immutable<name>BagFactory immutable = Immutable<name>BagFactoryImpl.INSTANCE;
+    public static final Mutable<name>BagFactory mutable = Mutable<name>BagFactoryImpl.INSTANCE;
 
     private <name>Bags()
     {

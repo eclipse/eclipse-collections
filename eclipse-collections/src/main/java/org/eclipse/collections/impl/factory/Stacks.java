@@ -18,8 +18,8 @@ import org.eclipse.collections.impl.stack.mutable.MutableStackFactoryImpl;
 @SuppressWarnings("ConstantNamingConvention")
 public final class Stacks
 {
-    public static final ImmutableStackFactory immutable = new ImmutableStackFactoryImpl();
-    public static final MutableStackFactory mutable = new MutableStackFactoryImpl();
+    public static final ImmutableStackFactory immutable = ImmutableStackFactoryImpl.INSTANCE;
+    public static final MutableStackFactory mutable = MutableStackFactoryImpl.INSTANCE;
 
     private Stacks()
     {

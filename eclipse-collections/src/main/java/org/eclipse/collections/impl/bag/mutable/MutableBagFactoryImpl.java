@@ -13,8 +13,10 @@ package org.eclipse.collections.impl.bag.mutable;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.factory.bag.MutableBagFactory;
 
-public final class MutableBagFactoryImpl implements MutableBagFactory
+public enum MutableBagFactoryImpl implements MutableBagFactory
 {
+    INSTANCE;
+
     @Override
     public <T> MutableBag<T> empty()
     {

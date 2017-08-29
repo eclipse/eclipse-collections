@@ -18,8 +18,8 @@ import org.eclipse.collections.impl.map.strategy.mutable.MutableHashingStrategyM
 @SuppressWarnings("ConstantNamingConvention")
 public final class HashingStrategyMaps
 {
-    public static final ImmutableHashingStrategyMapFactory immutable = new ImmutableHashingStrategyMapFactoryImpl();
-    public static final MutableHashingStrategyMapFactory mutable = new MutableHashingStrategyMapFactoryImpl();
+    public static final ImmutableHashingStrategyMapFactory immutable = ImmutableHashingStrategyMapFactoryImpl.INSTANCE;
+    public static final MutableHashingStrategyMapFactory mutable = MutableHashingStrategyMapFactoryImpl.INSTANCE;
 
     private HashingStrategyMaps()
     {

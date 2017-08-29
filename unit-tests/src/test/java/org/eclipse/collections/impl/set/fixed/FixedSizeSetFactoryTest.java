@@ -33,7 +33,7 @@ public class FixedSizeSetFactoryTest
     @Before
     public void setUp()
     {
-        this.setFactory = new FixedSizeSetFactoryImpl();
+        this.setFactory = FixedSizeSetFactoryImpl.INSTANCE;
     }
 
     @Test

@@ -19,8 +19,10 @@ import org.eclipse.collections.api.set.primitive.ImmutableBooleanSet;
  *
  * @since 4.0.
  */
-public class ImmutableBooleanSetFactoryImpl implements ImmutableBooleanSetFactory
+public enum ImmutableBooleanSetFactoryImpl implements ImmutableBooleanSetFactory
 {
+    INSTANCE;
+
     @Override
     public ImmutableBooleanSet empty()
     {

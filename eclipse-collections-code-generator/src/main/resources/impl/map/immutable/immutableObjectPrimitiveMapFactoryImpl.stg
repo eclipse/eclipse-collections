@@ -24,8 +24,10 @@ import org.eclipse.collections.api.map.primitive.Object<name>Map;
  *
  * @since 4.0.
  */
-public class ImmutableObject<name>MapFactoryImpl implements ImmutableObject<name>MapFactory
+public enum ImmutableObject<name>MapFactoryImpl implements ImmutableObject<name>MapFactory
 {
+    INSTANCE;
+
     @Override
     public \<K> ImmutableObject<name>Map\<K> empty()
     {

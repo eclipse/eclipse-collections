@@ -27,8 +27,8 @@ import org.eclipse.collections.impl.list.mutable.primitive.Mutable<name>ListFact
 @SuppressWarnings("ConstantNamingConvention")
 public final class <name>Lists
 {
-    public static final Immutable<name>ListFactory immutable = new Immutable<name>ListFactoryImpl();
-    public static final Mutable<name>ListFactory mutable = new Mutable<name>ListFactoryImpl();
+    public static final Immutable<name>ListFactory immutable = Immutable<name>ListFactoryImpl.INSTANCE;
+    public static final Mutable<name>ListFactory mutable = Mutable<name>ListFactoryImpl.INSTANCE;
 
     private <name>Lists()
     {

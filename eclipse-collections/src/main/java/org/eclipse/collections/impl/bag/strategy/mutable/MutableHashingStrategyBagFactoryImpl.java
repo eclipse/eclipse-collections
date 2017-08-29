@@ -15,8 +15,10 @@ import org.eclipse.collections.api.block.HashingStrategy;
 import org.eclipse.collections.api.factory.bag.strategy.MutableHashingStrategyBagFactory;
 import org.eclipse.collections.impl.utility.Iterate;
 
-public class MutableHashingStrategyBagFactoryImpl implements MutableHashingStrategyBagFactory
+public enum MutableHashingStrategyBagFactoryImpl implements MutableHashingStrategyBagFactory
 {
+    INSTANCE;
+
     @Override
     public <T> MutableBag<T> of(HashingStrategy<? super T> hashingStrategy)
     {

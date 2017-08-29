@@ -15,8 +15,10 @@ import java.util.Comparator;
 import org.eclipse.collections.api.factory.set.sorted.MutableSortedSetFactory;
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 
-public final class MutableSortedSetFactoryImpl implements MutableSortedSetFactory
+public enum MutableSortedSetFactoryImpl implements MutableSortedSetFactory
 {
+    INSTANCE;
+
     @Override
     public <T> MutableSortedSet<T> empty()
     {

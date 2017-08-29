@@ -27,8 +27,10 @@ import org.eclipse.collections.api.map.primitive.<name1><name2>Map;
  *
  * @since 6.0.
  */
-public class Mutable<name1><name2>MapFactoryImpl implements Mutable<name1><name2>MapFactory
+public enum Mutable<name1><name2>MapFactoryImpl implements Mutable<name1><name2>MapFactory
 {
+    INSTANCE;
+
     @Override
     public Mutable<name1><name2>Map empty()
     {

@@ -51,9 +51,9 @@ import org.eclipse.collections.impl.map.mutable.MutableMapFactoryImpl;
 @SuppressWarnings("ConstantNamingConvention")
 public final class Maps
 {
-    public static final ImmutableMapFactory immutable = new ImmutableMapFactoryImpl();
-    public static final FixedSizeMapFactory fixedSize = new FixedSizeMapFactoryImpl();
-    public static final MutableMapFactory mutable = new MutableMapFactoryImpl();
+    public static final ImmutableMapFactory immutable = ImmutableMapFactoryImpl.INSTANCE;
+    public static final FixedSizeMapFactory fixedSize = FixedSizeMapFactoryImpl.INSTANCE;
+    public static final MutableMapFactory mutable = MutableMapFactoryImpl.INSTANCE;
 
     private Maps()
     {
