@@ -300,6 +300,15 @@ public class UnmodifiableObject<name>MapTest extends AbstractMutableObject<name>
         Verify.assertSize(3, this.newWithKeysValues(1, <(literal.(type))("1")>, 0, <(literal.(type))("0")>, 5, <(literal.(type))("5")>));
         Verify.assertSize(2, this.newWithKeysValues(6, <(literal.(type))("6")>, 5, <(literal.(type))("5")>));
     }
+
+    @Override
+    @Test
+    public void flipUniqueValues()
+    {
+        super.flipUniqueValues();
+
+        Verify.assertInstanceOf(Unmodifiable<name>ObjectMap.class, this.classUnderTest().flipUniqueValues());
+    }
 }
 
 >>

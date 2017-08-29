@@ -38,6 +38,7 @@ import org.eclipse.collections.api.collection.primitive.Mutable<name>Collection;
 import org.eclipse.collections.api.iterator.<name>Iterator;
 import org.eclipse.collections.api.list.primitive.Mutable<name>List;
 import org.eclipse.collections.api.map.primitive.ImmutableObject<name>Map;
+<if(!primitive.booleanPrimitive)>import org.eclipse.collections.api.map.primitive.Immutable<name>ObjectMap;<endif>
 import org.eclipse.collections.api.map.primitive.Object<name>Map;
 import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
 import org.eclipse.collections.api.tuple.primitive.Object<name>Pair;
@@ -47,6 +48,7 @@ import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.factory.primitive.<name>Lists;
 import org.eclipse.collections.impl.factory.primitive.Object<name>Maps;
+<if(!primitive.booleanPrimitive)>import org.eclipse.collections.impl.factory.primitive.<name>ObjectMaps;<endif>
 import org.eclipse.collections.impl.iterator.Unmodifiable<name>Iterator;
 import org.eclipse.collections.impl.lazy.primitive.Lazy<name>IterableAdapter;
 import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
@@ -363,6 +365,14 @@ final class ImmutableObject<name>SingletonMap\<K> extends AbstractImmutableObjec
     {
         return Lists.immutable.of(PrimitiveTuples.pair(this.key1, this.value1)).asLazy();
     }
+
+    <if(!primitive.booleanPrimitive)>
+    @Override
+    public Immutable<name>ObjectMap\<K> flipUniqueValues()
+    {
+        return <name>ObjectMaps.immutable.with(this.value1, this.key1);
+    }
+    <endif>
 
     @Override
     public boolean equals(Object obj)

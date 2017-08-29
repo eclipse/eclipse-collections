@@ -104,6 +104,7 @@ import org.eclipse.collections.api.map.primitive.Immutable<name>ObjectMap;
 import org.eclipse.collections.api.map.primitive.MutableObjectDoubleMap;
 import org.eclipse.collections.api.map.primitive.MutableObjectLongMap;
 import org.eclipse.collections.api.map.primitive.Mutable<name>ObjectMap;
+import org.eclipse.collections.api.map.primitive.MutableObject<name>Map;
 import org.eclipse.collections.api.map.sorted.MutableSortedMap;
 import org.eclipse.collections.api.multimap.MutableMultimap;
 import org.eclipse.collections.api.multimap.bag.MutableBagMultimap;
@@ -149,6 +150,7 @@ import org.eclipse.collections.impl.factory.Bags;
 import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.factory.primitive.<name>ObjectMaps;
+import org.eclipse.collections.impl.factory.primitive.Object<name>Maps;
 import org.eclipse.collections.impl.factory.primitive.<name>Sets;
 import org.eclipse.collections.impl.factory.primitive.ObjectDoubleMaps;
 import org.eclipse.collections.impl.factory.primitive.ObjectLongMaps;
@@ -3863,6 +3865,20 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
     public RichIterable\<<name>ObjectPair\<V>\> keyValuesView()
     {
         return new KeyValuesView();
+    }
+
+    @Override
+    public MutableObject<name>Map\<V> flipUniqueValues()
+    {
+        MutableObject<name>Map\<V> result = Object<name>Maps.mutable.empty();
+        this.forEachKeyValue((key, value) -> {
+            if (result.containsKey(value))
+            {
+                throw new IllegalStateException("Duplicate value: " + value + " found at key: " + result.get(value) + " and key: " + key);
+            }
+            result.put(value, key);
+        });
+        return result;
     }
 
     protected class ValuesCollection implements Collection\<V>

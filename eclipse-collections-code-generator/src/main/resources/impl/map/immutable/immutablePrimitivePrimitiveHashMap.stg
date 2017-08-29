@@ -47,8 +47,11 @@ import org.eclipse.collections.api.iterator.<name1>Iterator;
 <if(!sameTwoPrimitives)>import org.eclipse.collections.api.iterator.<name2>Iterator;<endif>
 import org.eclipse.collections.api.list.primitive.Mutable<name2>List;
 import org.eclipse.collections.api.map.primitive.<name1><name2>Map;
+<if(!primitive2.booleanPrimitive)>import org.eclipse.collections.impl.factory.primitive.<name2><name1>Maps;<endif>
 import org.eclipse.collections.api.map.primitive.Immutable<name1><name2>Map;
+<if(!primitive2.booleanPrimitive)>import org.eclipse.collections.api.map.primitive.Immutable<name2><name1>Map;<endif>
 import org.eclipse.collections.api.map.primitive.Mutable<name1><name2>Map;
+<if(!primitive2.booleanPrimitive)>import org.eclipse.collections.api.map.primitive.Mutable<name2><name1>Map;<endif>
 import org.eclipse.collections.api.set.primitive.Mutable<name1>Set;
 <if(!sameTwoPrimitives)>import org.eclipse.collections.api.set.primitive.Mutable<name2>Set;<endif>
 import org.eclipse.collections.api.tuple.primitive.<name1><name2>Pair;
@@ -133,6 +136,22 @@ final class Immutable<name1><name2>HashMap implements Immutable<name1><name2>Map
     {
         return this.delegate.keyValuesView();
     }
+
+    <if(!primitive2.booleanPrimitive)>
+    @Override
+    public Immutable<name2><name1>Map flipUniqueValues()
+    {
+        Mutable<name2><name1>Map result = <name2><name1>Maps.mutable.empty();
+         this.forEachKeyValue((key, value) -> {
+            if (result.containsKey(value))
+            {
+                throw new IllegalStateException("Duplicate value: " + value + " found at key: " + result.get(value) + " and key: " + key);
+            }
+            result.put(value, key);
+        });
+        return result.toImmutable();
+    }
+    <endif>
 
     @Override
     public Immutable<name1><name2>Map select(<name1><name2>Predicate predicate)

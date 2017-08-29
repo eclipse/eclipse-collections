@@ -56,6 +56,8 @@ public interface MutableObject<name>Map\<K> extends Object<name>Map\<K>
 
     <type> updateValue(K key, <type> initialValueIfAbsent, <name>To<name>Function function);
 
+    <(flipUniqueValues.(name))(name)>
+
     @Override
     MutableObject<name>Map\<K> select(Object<name>Predicate\<? super K> predicate);
 
@@ -111,3 +113,19 @@ allMethods(type) ::= <<
 >>
 
 noMethods(type) ::= ""
+
+flipUniqueValues ::= [
+    "Byte": "flipUniqueValues",
+    "Short": "flipUniqueValues",
+    "Char": "flipUniqueValues",
+    "Int": "flipUniqueValues",
+    "Long": "flipUniqueValues",
+    "Float": "flipUniqueValues",
+    "Double": "flipUniqueValues",
+    "Boolean": "noMethods"
+    ]
+
+flipUniqueValues(name) ::= <<
+@Override
+Mutable<name>ObjectMap\<K> flipUniqueValues();
+>>

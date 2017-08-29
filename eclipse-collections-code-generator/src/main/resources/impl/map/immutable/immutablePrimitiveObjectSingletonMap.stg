@@ -93,6 +93,7 @@ import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.primitive.<name>ObjectMap;
 import org.eclipse.collections.api.map.primitive.Immutable<name>ObjectMap;
+import org.eclipse.collections.api.map.primitive.ImmutableObject<name>Map;
 import org.eclipse.collections.api.map.sorted.MutableSortedMap;
 import org.eclipse.collections.api.multimap.MutableMultimap;
 import org.eclipse.collections.api.multimap.bag.ImmutableBagMultimap;
@@ -125,6 +126,7 @@ import org.eclipse.collections.impl.factory.primitive.DoubleBags;
 import org.eclipse.collections.impl.factory.primitive.FloatBags;
 import org.eclipse.collections.impl.factory.primitive.IntBags;
 import org.eclipse.collections.impl.factory.primitive.LongBags;
+import org.eclipse.collections.impl.factory.primitive.Object<name>Maps;
 import org.eclipse.collections.impl.factory.primitive.ShortBags;
 import org.eclipse.collections.impl.factory.primitive.<name>Lists;
 import org.eclipse.collections.impl.lazy.LazyIterableAdapter;
@@ -271,6 +273,12 @@ final class Immutable<name>ObjectSingletonMap\<V> extends AbstractImmutable<name
     public RichIterable\<<name>ObjectPair\<V>\> keyValuesView()
     {
         return Lists.immutable.of(PrimitiveTuples.pair(this.key1, this.value1)).asLazy();
+    }
+
+    @Override
+    public ImmutableObject<name>Map\<V> flipUniqueValues()
+    {
+        return Object<name>Maps.immutable.with(this.value1, this.key1);
     }
 
     @Override

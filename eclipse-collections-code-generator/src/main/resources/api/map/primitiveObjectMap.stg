@@ -64,6 +64,15 @@ public interface <name>ObjectMap\<V> extends PrimitiveObjectMap\<V>
      * @since 5.0
      */
     RichIterable\<<name>ObjectPair\<V>\> keyValuesView();
+
+    /**
+     * Return the Object<name>Map that is obtained by flipping the direction of this map and making the associations
+     * from value to key.
+     *
+     * @throws IllegalStateException if the Object<name>Map contains duplicate values.
+     * @since 9.0
+     */
+     Object<name>Map\<V> flipUniqueValues();
 }
 
 >>

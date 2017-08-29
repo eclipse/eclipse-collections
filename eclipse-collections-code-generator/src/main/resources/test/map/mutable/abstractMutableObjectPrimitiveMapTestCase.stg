@@ -576,6 +576,18 @@ public abstract class AbstractMutableObject<name>MapTestCase extends AbstractObj
         Verify.assertInstanceOf(SynchronizedObject<name>Map.class, this.map.asSynchronized());
         Assert.assertEquals(new SynchronizedObject<name>Map\<>(this.map), this.map.asSynchronized());
     }
+
+    @Test
+    public void flipUniqueValues()
+    {
+        MutableObject<name>Map\<String> map = this.newWithKeysValues("1", <(literal.(type))("2")>, "2", <(literal.(type))("3")>);
+        Assert.assertEquals(
+                <name>ObjectHashMap.newWithKeysValues(<(literal.(type))("2")>, "1", <(literal.(type))("3")>, "2"),
+                map.flipUniqueValues());
+         Verify.assertThrows(
+                IllegalStateException.class,
+                () -> this.newWithKeysValues("1", <(literal.(type))("1")>, "2", <(literal.(type))("1")>).flipUniqueValues());
+    }
 }
 
 >>

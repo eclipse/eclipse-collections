@@ -92,7 +92,9 @@ import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.primitive.<name>ObjectMap;
 import org.eclipse.collections.api.map.primitive.Immutable<name>ObjectMap;
+import org.eclipse.collections.api.map.primitive.ImmutableObject<name>Map;
 import org.eclipse.collections.api.map.primitive.Mutable<name>ObjectMap;
+import org.eclipse.collections.api.map.primitive.MutableObject<name>Map;
 import org.eclipse.collections.api.map.sorted.MutableSortedMap;
 import org.eclipse.collections.api.multimap.MutableMultimap;
 import org.eclipse.collections.api.multimap.bag.ImmutableBagMultimap;
@@ -107,6 +109,7 @@ import org.eclipse.collections.api.tuple.primitive.<name>ObjectPair;
 import org.eclipse.collections.impl.UnmodifiableIteratorAdapter;
 import org.eclipse.collections.impl.collection.mutable.UnmodifiableMutableCollection;
 import org.eclipse.collections.impl.map.mutable.primitive.<name>ObjectHashMap;
+import org.eclipse.collections.impl.factory.primitive.Object<name>Maps;
 import org.eclipse.collections.impl.set.mutable.primitive.Unmodifiable<name>Set;
 
 /**
@@ -863,6 +866,20 @@ final class Immutable<name>ObjectHashMap\<V> extends AbstractImmutable<name>Obje
     public RichIterable\<<name>ObjectPair\<V>\> keyValuesView()
     {
         return this.delegate.keyValuesView();
+    }
+
+    @Override
+    public ImmutableObject<name>Map\<V> flipUniqueValues()
+    {
+        MutableObject<name>Map\<V> result = Object<name>Maps.mutable.empty();
+        this.forEachKeyValue((key, value) -> {
+            if (result.containsKey(value))
+            {
+                throw new IllegalStateException("Duplicate value: " + value + " found at key: " + result.get(value) + " and key: " + key);
+            }
+            result.put(value, key);
+        });
+        return result.toImmutable();
     }
 
     @Override

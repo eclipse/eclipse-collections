@@ -39,6 +39,7 @@ import org.eclipse.collections.api.collection.primitive.Mutable<name>Collection;
 import org.eclipse.collections.api.iterator.<name>Iterator;
 import org.eclipse.collections.api.list.primitive.Mutable<name>List;
 import org.eclipse.collections.api.map.primitive.ImmutableObject<name>Map;
+<if(!primitive.booleanPrimitive)>import org.eclipse.collections.api.map.primitive.Immutable<name>ObjectMap;<endif>
 import org.eclipse.collections.api.map.primitive.Object<name>Map;
 import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
 import org.eclipse.collections.api.tuple.primitive.Object<name>Pair;
@@ -47,6 +48,7 @@ import org.eclipse.collections.impl.collection.mutable.primitive.Unmodifiable<na
 import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.factory.primitive.<name>Lists;
+<if(!primitive.booleanPrimitive)>import org.eclipse.collections.impl.factory.primitive.<name>ObjectMaps;<endif>
 import org.eclipse.collections.impl.iterator.ImmutableEmpty<name>Iterator;
 import org.eclipse.collections.impl.lazy.primitive.Lazy<name>IterableAdapter;
 import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
@@ -315,6 +317,14 @@ final class ImmutableObject<name>EmptyMap\<K> implements ImmutableObject<name>Ma
     {
         return LazyIterate.empty();
     }
+
+    <if(!primitive.booleanPrimitive)>
+    @Override
+    public Immutable<name>ObjectMap\<K> flipUniqueValues()
+    {
+        return <name>ObjectMaps.immutable.empty();
+    }
+    <endif>
 
     @Override
     public boolean equals(Object obj)

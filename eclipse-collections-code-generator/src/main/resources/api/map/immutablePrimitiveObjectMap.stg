@@ -40,6 +40,9 @@ public interface Immutable<name>ObjectMap\<V> extends <name>ObjectMap\<V>, Immut
     Immutable<name>ObjectMap\<V> newWithoutKey(<type> key);
 
     Immutable<name>ObjectMap\<V> newWithoutAllKeys(<name>Iterable keys);
+
+    @Override
+    ImmutableObject<name>Map\<V> flipUniqueValues();
 }
 
 >>

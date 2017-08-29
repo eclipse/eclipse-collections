@@ -728,6 +728,18 @@ public abstract class AbstractMutable<name1><name2>MapTestCase extends Abstract<
         iterator.remove();
         Verify.assertThrows(IllegalStateException.class, iterator::remove);
     }
+
+    @Test
+    public void flipUniqueValues()
+    {
+        Mutable<name1><name2>Map map = this.newWithKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("2")>, <(literal.(type1))("2")>, <(literal.(type2))("3")>, <(literal.(type1))("3")>, <(literal.(type2))("4")>, <(literal.(type1))("4")>, <(literal.(type2))("5")>);
+        Assert.assertEquals(
+                <name2><name1>HashMap.newWithKeysValues(<(literal.(type2))("2")>, <(literal.(type1))("1")>, <(literal.(type2))("3")>, <(literal.(type1))("2")>, <(literal.(type2))("4")>, <(literal.(type1))("3")>, <(literal.(type2))("5")>, <(literal.(type1))("4")>),
+                map.flipUniqueValues());
+         Verify.assertThrows(
+                IllegalStateException.class,
+                () -> this.newWithKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("1")>, <(literal.(type1))("2")>, <(literal.(type2))("1")>).flipUniqueValues());
+    }
 }
 
 >>
