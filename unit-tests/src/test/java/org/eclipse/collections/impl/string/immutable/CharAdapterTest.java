@@ -114,4 +114,11 @@ public class CharAdapterTest extends AbstractImmutableCharListTestCase
         }
         Assert.assertEquals(expectedString.toString(), this.classUnderTest().toString());
     }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void chunk()
+    {
+        this.classUnderTest().chunk(2);
+    }
 }

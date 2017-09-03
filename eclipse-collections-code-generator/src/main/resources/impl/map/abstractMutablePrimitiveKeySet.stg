@@ -23,6 +23,8 @@ import java.util.Arrays;
 import java.util.NoSuchElementException;
 
 import org.eclipse.collections.api.<name>Iterable;
+import org.eclipse.collections.api.RichIterable;
+import org.eclipse.collections.api.PrimitiveIterable;
 import org.eclipse.collections.api.Lazy<name>Iterable;
 import org.eclipse.collections.api.bag.primitive.Mutable<name>Bag;
 import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
@@ -822,6 +824,12 @@ public abstract class AbstractMutable<name>KeySet implements Mutable<name>Set
         {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public RichIterable\<PrimitiveIterable> chunk(int size)
+    {
+        throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".reverseForEachWithIndex() not implemented yet");
     }
 }
 

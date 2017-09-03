@@ -20,6 +20,8 @@ import java.util.EmptyStackException;
 
 import org.eclipse.collections.api.Lazy<name>Iterable;
 import org.eclipse.collections.api.<name>Iterable;
+import org.eclipse.collections.api.RichIterable;
+import org.eclipse.collections.api.PrimitiveIterable;
 import org.eclipse.collections.api.bag.primitive.Mutable<name>Bag;
 import org.eclipse.collections.api.block.function.primitive.Object<name>IntToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.Object<name>ToObjectFunction;
@@ -323,6 +325,12 @@ public abstract class Abstract<name>Stack implements <name>Stack
     public void forEachWithIndex(<name>IntProcedure procedure)
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".forEachWithIndex() not implemented yet");
+    }
+
+    @Override
+    public RichIterable\<PrimitiveIterable> chunk(int size)
+    {
+        return this.getDelegate().chunk(size);
     }
 
     <(arithmeticMethods.(type))(type)>

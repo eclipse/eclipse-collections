@@ -22,6 +22,8 @@ import java.io.IOException;
 import java.util.NoSuchElementException;
 
 import org.eclipse.collections.api.<name>Iterable;
+import org.eclipse.collections.api.RichIterable;
+import org.eclipse.collections.api.PrimitiveIterable;
 import org.eclipse.collections.api.Lazy<name>Iterable;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.bag.primitive.Mutable<name>Bag;
@@ -645,6 +647,12 @@ result = nextSum})>
         public boolean noneSatisfy(<name>Predicate predicate)
         {
             return AbstractMutable<name>ValuesMap.this.noneSatisfy(predicate);
+        }
+
+        @Override
+        public RichIterable\<PrimitiveIterable> chunk(int size)
+        {
+            return AbstractMutable<name>ValuesMap.this.chunk(size);
         }
 
         @Override

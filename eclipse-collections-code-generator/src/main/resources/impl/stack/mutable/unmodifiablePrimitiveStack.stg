@@ -19,6 +19,8 @@ package org.eclipse.collections.impl.stack.mutable.primitive;
 import java.io.Serializable;
 
 import org.eclipse.collections.api.<name>Iterable;
+import org.eclipse.collections.api.RichIterable;
+import org.eclipse.collections.api.PrimitiveIterable;
 import org.eclipse.collections.api.Lazy<name>Iterable;
 import org.eclipse.collections.api.bag.primitive.Mutable<name>Bag;
 import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
@@ -336,6 +338,12 @@ public final class Unmodifiable<name>Stack
     public void forEachWithIndex(<name>IntProcedure procedure)
     {
         this.stack.forEachWithIndex(procedure);
+    }
+
+    @Override
+    public RichIterable\<PrimitiveIterable> chunk(int size)
+    {
+        return this.stack.chunk(size);
     }
 }
 

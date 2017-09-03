@@ -225,6 +225,13 @@ public class Immutable<name>EmptyListTest extends AbstractImmutable<name>ListTes
         Assert.assertEquals(-1, this.classUnderTest().binarySearch(<(literal.(type))("100")>));
         Assert.assertEquals(-1, this.classUnderTest().binarySearch(<(literal.(type))("-1")>));
     }
+
+    @Override
+    @Test
+    public void chunk()
+    {
+        Verify.assertEmpty(this.classUnderTest().chunk(3));
+    }
 }
 
 >>

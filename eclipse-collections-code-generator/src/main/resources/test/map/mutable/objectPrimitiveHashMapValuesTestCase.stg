@@ -538,6 +538,13 @@ public abstract class Object<name>HashMapValuesTestCase extends AbstractMutable<
     {
         // Testing newCollection() is not applicable for Mutable<name>Collection.
     }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void chunk()
+    {
+        this.classUnderTest().chunk(2);
+    }
 }
 
 >>

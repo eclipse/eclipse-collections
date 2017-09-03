@@ -158,6 +158,13 @@ public class Synchronized<name>BooleanMapKeySetTest extends Abstract<name>SetTes
         Assert.assertEquals(set1.hashCode(), set2.hashCode());
         Assert.assertEquals(this.newObjectCollectionWith(<["0", "1", "31", "32"]:(literal.(type))(); separator=", ">).hashCode(), set1.hashCode());
     }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void chunk()
+    {
+        this.classUnderTest().chunk(2);
+    }
 }
 
 >>

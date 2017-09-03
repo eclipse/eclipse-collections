@@ -20,6 +20,8 @@ import java.util.NoSuchElementException;
 
 import org.eclipse.collections.api.ByteIterable;
 import org.eclipse.collections.api.LazyByteIterable;
+import org.eclipse.collections.api.PrimitiveIterable;
+import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.primitive.MutableByteBag;
 import org.eclipse.collections.api.block.function.primitive.ByteToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.ObjectByteToObjectFunction;
@@ -27,6 +29,7 @@ import org.eclipse.collections.api.block.predicate.primitive.BytePredicate;
 import org.eclipse.collections.api.block.procedure.primitive.ByteProcedure;
 import org.eclipse.collections.api.iterator.ByteIterator;
 import org.eclipse.collections.api.iterator.MutableByteIterator;
+import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.list.primitive.MutableByteList;
 import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.api.set.MutableSet;
@@ -35,6 +38,8 @@ import org.eclipse.collections.api.set.primitive.ImmutableByteSet;
 import org.eclipse.collections.api.set.primitive.MutableByteSet;
 import org.eclipse.collections.impl.bag.mutable.primitive.ByteHashBag;
 import org.eclipse.collections.impl.block.procedure.checked.primitive.CheckedByteProcedure;
+import org.eclipse.collections.impl.factory.Lists;
+import org.eclipse.collections.impl.factory.primitive.ByteLists;
 import org.eclipse.collections.impl.factory.primitive.ByteSets;
 import org.eclipse.collections.impl.lazy.primitive.LazyByteIterableAdapter;
 import org.eclipse.collections.impl.list.mutable.primitive.ByteArrayList;
@@ -328,6 +333,28 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
         {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public RichIterable<PrimitiveIterable> chunk(int size)
+    {
+        if (size <= 0)
+        {
+            throw new IllegalArgumentException("Size for groups must be positive but was: " + size);
+        }
+
+        ByteIterator iterator = this.byteIterator();
+        MutableList<PrimitiveIterable> result = Lists.mutable.empty();
+        while (iterator.hasNext())
+        {
+            MutableByteList batch = ByteLists.mutable.empty();
+            for (int i = 0; i < size && iterator.hasNext(); i++)
+            {
+                batch.add(iterator.next());
+            }
+            result.add(batch);
+        }
+        return result;
     }
 
     @Override
@@ -976,6 +1003,28 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
             this.bitGroup1 = bitGroup1;
             this.bitGroup2 = bitGroup2;
             this.size = size;
+        }
+
+        @Override
+        public RichIterable<PrimitiveIterable> chunk(int size)
+        {
+            if (size <= 0)
+            {
+                throw new IllegalArgumentException("Size for groups must be positive but was: " + size);
+            }
+
+            ByteIterator iterator = this.byteIterator();
+            MutableList<PrimitiveIterable> result = Lists.mutable.empty();
+            while (iterator.hasNext())
+            {
+                MutableByteList batch = ByteLists.mutable.empty();
+                for (int i = 0; i < size && iterator.hasNext(); i++)
+                {
+                    batch.add(iterator.next());
+                }
+                result.add(batch);
+            }
+            return result;
         }
 
         @Override

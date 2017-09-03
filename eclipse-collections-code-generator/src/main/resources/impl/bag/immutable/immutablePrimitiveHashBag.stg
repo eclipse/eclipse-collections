@@ -21,6 +21,8 @@ import java.io.ObjectOutput;
 import java.io.Serializable;
 
 import org.eclipse.collections.api.<name>Iterable;
+import org.eclipse.collections.api.PrimitiveIterable;
+import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.Lazy<name>Iterable;
 import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.api.bag.MutableBag;
@@ -408,6 +410,12 @@ final class Immutable<name>HashBag implements Immutable<name>Bag, Serializable
         {
             return this.bag.toImmutable();
         }
+    }
+
+    @Override
+    public RichIterable\<PrimitiveIterable> chunk(int size)
+    {
+        return this.delegate.chunk(size);
     }
 }
 

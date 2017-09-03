@@ -25,6 +25,7 @@ import java.util.Set;
 import org.eclipse.collections.api.BooleanIterable;
 import org.eclipse.collections.api.LazyBooleanIterable;
 import org.eclipse.collections.api.LazyIterable;
+import org.eclipse.collections.api.PrimitiveIterable;
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.primitive.MutableBooleanBag;
 import org.eclipse.collections.api.block.function.primitive.BooleanFunction;
@@ -625,7 +626,7 @@ public class ObjectBooleanHashMap<K> implements MutableObjectBooleanMap<K>, Exte
 
     private void removeKeyAtIndex(K key, int index)
     {
-        if (isNonSentinel(this.keys[index]) && nullSafeEquals(this.toNonSentinel(this.keys[index]), key))
+        if (ObjectBooleanHashMap.isNonSentinel(this.keys[index]) && ObjectBooleanHashMap.nullSafeEquals(this.toNonSentinel(this.keys[index]), key))
         {
             this.keys[index] = REMOVED_KEY;
             this.values.set(index, EMPTY_VALUE);
@@ -1652,6 +1653,12 @@ public class ObjectBooleanHashMap<K> implements MutableObjectBooleanMap<K>, Exte
             {
                 throw new RuntimeException(e);
             }
+        }
+
+        @Override
+        public RichIterable<PrimitiveIterable> chunk(int size)
+        {
+            return ObjectBooleanHashMap.this.chunk(size);
         }
     }
 

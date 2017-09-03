@@ -15,6 +15,8 @@ import java.io.Serializable;
 
 import org.eclipse.collections.api.IntIterable;
 import org.eclipse.collections.api.LazyIntIterable;
+import org.eclipse.collections.api.PrimitiveIterable;
+import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.primitive.MutableIntBag;
 import org.eclipse.collections.api.block.function.primitive.IntToIntFunction;
 import org.eclipse.collections.api.block.function.primitive.IntToObjectFunction;
@@ -362,6 +364,12 @@ public class CodePointList extends AbstractIntIterable implements CharSequence, 
     public MutableIntBag toBag()
     {
         return this.codePoints.toBag();
+    }
+
+    @Override
+    public RichIterable<PrimitiveIterable> chunk(int size)
+    {
+        throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".chunk() not implemented yet");
     }
 
     @Override

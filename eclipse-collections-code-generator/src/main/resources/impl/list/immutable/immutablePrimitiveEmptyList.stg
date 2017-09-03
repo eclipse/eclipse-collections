@@ -19,6 +19,8 @@ import java.io.Serializable;
 <if(!primitive.booleanPrimitive)>import java.util.NoSuchElementException;<endif>
 
 import org.eclipse.collections.api.<name>Iterable;
+import org.eclipse.collections.api.RichIterable;
+import org.eclipse.collections.api.PrimitiveIterable;
 import org.eclipse.collections.api.Lazy<name>Iterable;
 import org.eclipse.collections.api.bag.primitive.Mutable<name>Bag;
 import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
@@ -361,6 +363,12 @@ final class Immutable<name>EmptyList implements Immutable<name>List, Serializabl
     public Immutable<name>List subList(int fromIndex, int toIndex)
     {
         throw new UnsupportedOperationException("subList not yet implemented!");
+    }
+
+    @Override
+    public RichIterable\<PrimitiveIterable> chunk(int size)
+    {
+        return Lists.mutable.empty();
     }
 }
 

@@ -16,6 +16,8 @@ import java.util.NoSuchElementException;
 
 import org.eclipse.collections.api.CharIterable;
 import org.eclipse.collections.api.LazyCharIterable;
+import org.eclipse.collections.api.PrimitiveIterable;
+import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.primitive.MutableCharBag;
 import org.eclipse.collections.api.block.function.primitive.CharToCharFunction;
 import org.eclipse.collections.api.block.function.primitive.CharToObjectFunction;
@@ -397,6 +399,12 @@ public class CharAdapter extends AbstractCharIterable implements CharSequence, I
             bag.add(this.get(i));
         }
         return bag;
+    }
+
+    @Override
+    public RichIterable<PrimitiveIterable> chunk(int size)
+    {
+        throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".chunk() not implemented yet");
     }
 
     @Override

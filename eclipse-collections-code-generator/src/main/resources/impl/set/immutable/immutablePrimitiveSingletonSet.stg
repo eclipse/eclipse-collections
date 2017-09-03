@@ -22,6 +22,8 @@ import java.io.IOException;
 import java.io.Serializable;
 
 import org.eclipse.collections.api.<name>Iterable;
+import org.eclipse.collections.api.PrimitiveIterable;
+import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.Lazy<name>Iterable;
 import org.eclipse.collections.api.bag.primitive.Mutable<name>Bag;
 import org.eclipse.collections.api.set.ImmutableSet;
@@ -42,6 +44,8 @@ import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
 import org.eclipse.collections.impl.factory.primitive.<name>Sets;
 import org.eclipse.collections.impl.lazy.primitive.Lazy<name>IterableAdapter;
 import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
+import org.eclipse.collections.impl.factory.Lists;
+import org.eclipse.collections.impl.factory.primitive.DoubleLists;
 
 /**
  * Immutable<name>SingletonSet is an optimization for {@link Immutable<name>Set} of size 1.
@@ -345,6 +349,12 @@ final class Immutable<name>SingletonSet implements Immutable<name>Set, Serializa
     public <name>Iterator <type>Iterator()
     {
         return new Unmodifiable<name>Iterator(<name>HashSet.newSetWith(this.element).<type>Iterator());
+    }
+
+    @Override
+    public RichIterable\<PrimitiveIterable> chunk(int size)
+    {
+        return Lists.mutable.with(DoubleLists.mutable.with(this.element));
     }
 }
 

@@ -253,6 +253,13 @@ public void sumConsistentRounding()
     {
         // Not applicable for Unmodifiable
     }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void chunk()
+    {
+        this.classUnderTest().chunk(2);
+    }
 }
 
 >>

@@ -33,6 +33,7 @@ import org.eclipse.collections.api.<name>Iterable;
 import org.eclipse.collections.api.Lazy<name>Iterable;
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.RichIterable;
+import org.eclipse.collections.api.PrimitiveIterable;
 import org.eclipse.collections.api.bag.primitive.Mutable<name>Bag;
 import org.eclipse.collections.api.block.function.primitive.<name>Function;
 import org.eclipse.collections.api.block.function.primitive.<name>Function0;
@@ -1793,6 +1794,12 @@ public class Object<name>HashMap\<K> implements MutableObject<name>Map\<K>, Exte
         public void each(<name>Procedure procedure)
         {
             Object<name>HashMap.this.forEach(procedure);
+        }
+
+        @Override
+        public RichIterable\<PrimitiveIterable> chunk(int size)
+        {
+            return Object<name>HashMap.this.chunk(size);
         }
 
         @Override

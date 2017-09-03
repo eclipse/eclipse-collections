@@ -25,6 +25,7 @@ import java.util.Set;
 import org.eclipse.collections.api.BooleanIterable;
 import org.eclipse.collections.api.LazyBooleanIterable;
 import org.eclipse.collections.api.LazyIterable;
+import org.eclipse.collections.api.PrimitiveIterable;
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.primitive.MutableBooleanBag;
 import org.eclipse.collections.api.block.HashingStrategy;
@@ -1664,6 +1665,12 @@ public class ObjectBooleanHashMapWithHashingStrategy<K> implements MutableObject
             {
                 throw new RuntimeException(e);
             }
+        }
+
+        @Override
+        public RichIterable<PrimitiveIterable> chunk(int size)
+        {
+            return ObjectBooleanHashMapWithHashingStrategy.this.chunk(size);
         }
     }
 

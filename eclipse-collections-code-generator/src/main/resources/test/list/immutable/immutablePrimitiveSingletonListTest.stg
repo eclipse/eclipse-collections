@@ -19,6 +19,7 @@ package org.eclipse.collections.impl.list.immutable.primitive;
 import org.eclipse.collections.api.list.primitive.Immutable<name>List;
 import org.eclipse.collections.impl.factory.primitive.<name>Lists;
 import org.eclipse.collections.impl.math.Mutable<wrapperName>;
+import org.eclipse.collections.impl.factory.Lists;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -101,6 +102,13 @@ public class Immutable<name>SingletonListTest extends AbstractImmutable<name>Lis
         Assert.assertEquals(-1, this.classUnderTest().binarySearch(<(literal.(type))("0")>));
         Assert.assertEquals(0, this.classUnderTest().binarySearch(<(literal.(type))("1")>));
         Assert.assertEquals(-2, this.classUnderTest().binarySearch(<(literal.(type))("5")>));
+    }
+
+    @Override
+    @Test
+    public void chunk()
+    {
+        Assert.assertEquals(Lists.mutable.with(<name>Lists.mutable.with(<(literal.(type))("1")>)), this.classUnderTest().chunk(2));
     }
 }
 

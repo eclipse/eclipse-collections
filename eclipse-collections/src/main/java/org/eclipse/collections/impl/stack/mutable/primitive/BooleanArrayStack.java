@@ -18,6 +18,8 @@ import java.util.EmptyStackException;
 
 import org.eclipse.collections.api.BooleanIterable;
 import org.eclipse.collections.api.LazyBooleanIterable;
+import org.eclipse.collections.api.PrimitiveIterable;
+import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.primitive.MutableBooleanBag;
 import org.eclipse.collections.api.block.function.primitive.BooleanToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.ObjectBooleanIntToObjectFunction;
@@ -413,6 +415,12 @@ public final class BooleanArrayStack implements MutableBooleanStack, Externaliza
             String end)
     {
         this.delegate.asReversed().appendString(appendable, start, separator, end);
+    }
+
+    @Override
+    public RichIterable<PrimitiveIterable> chunk(int size)
+    {
+        return this.delegate.chunk(size);
     }
 
     @Override
