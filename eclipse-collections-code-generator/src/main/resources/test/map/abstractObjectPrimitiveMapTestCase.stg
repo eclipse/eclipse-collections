@@ -25,10 +25,12 @@ import java.util.NoSuchElementException;
 
 import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
 import org.eclipse.collections.api.iterator.<name>Iterator;
+import org.eclipse.collections.api.list.primitive.Mutable<name>List;
 import org.eclipse.collections.api.map.primitive.ImmutableObject<name>Map;
 import org.eclipse.collections.api.map.primitive.Object<name>Map;
 import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
 import org.eclipse.collections.impl.bag.mutable.primitive.<name>HashBag;
+import org.eclipse.collections.impl.factory.primitive.<name>Lists;
 import org.eclipse.collections.impl.factory.primitive.Object<name>Maps;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
@@ -416,6 +418,14 @@ public abstract class AbstractObject<name>MapTestCase
 
         Assert.assertEquals(<name>HashBag.newBagWith(<(literal.(type))("0")>, <(literal.(type))("1")>, <(literal.(type))("2")>),
             this.map.reject(value -> value > <(literal.(type))("2")>).toBag());
+    }
+
+    @Test
+    public void tap()
+    {
+        Mutable<name>List tapResult = <name>Lists.mutable.empty();
+        Assert.assertSame(this.map, this.map.tap(tapResult::add));
+        Assert.assertEquals(this.map.toList(), tapResult);
     }
 
     @Test

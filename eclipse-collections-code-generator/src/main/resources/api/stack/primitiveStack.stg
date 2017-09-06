@@ -1,4 +1,4 @@
-import "copyright.stg"
+import "copyrightAndOthers.stg"
 import "primitiveEquals.stg"
 import "primitiveHashCode.stg"
 import "primitiveAPI.stg"
@@ -12,12 +12,13 @@ class(primitive) ::= <<
 >>
 
 body(type, name) ::= <<
-<copyright()>
+<copyrightAndOthers()>
 
 package org.eclipse.collections.api.stack.primitive;
 
 import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
 import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
+import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
 import org.eclipse.collections.api.list.primitive.<name>List;
 import org.eclipse.collections.api.ordered.primitive.Ordered<name>Iterable;
 import org.eclipse.collections.api.stack.StackIterable;
@@ -47,6 +48,16 @@ public interface <name>Stack extends Ordered<name>Iterable
     <type> peekAt(int index);
 
     <sharedAPI(fileName(primitive), name)>
+
+    /**
+     * @since 9.0.
+     */
+    @Override
+    default <name>Stack tap(<name>Procedure procedure)
+    {
+        this.forEach(procedure);
+        return this;
+    }
 
     @Override
     \<V> StackIterable\<V> collect(<name>ToObjectFunction\<? extends V> function);

@@ -1,4 +1,4 @@
-import "copyright.stg"
+import "copyrightAndOthers.stg"
 import "primitiveAPI.stg"
 
 targetPath() ::= "org/eclipse/collections/api/set/primitive"
@@ -10,7 +10,7 @@ class(primitive) ::= <<
 >>
 
 body(type, name) ::= <<
-<copyright()>
+<copyrightAndOthers()>
 
 package org.eclipse.collections.api.set.primitive;
 
@@ -19,6 +19,7 @@ import java.util.Set;
 import org.eclipse.collections.api.<name>Iterable;
 import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
 import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
+import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
 import org.eclipse.collections.api.set.SetIterable;
 
 /**
@@ -28,6 +29,16 @@ import org.eclipse.collections.api.set.SetIterable;
  */
 public interface <name>Set extends <name>Iterable
 {
+    /**
+     * @since 9.0.
+     */
+    @Override
+    default <name>Set tap(<name>Procedure procedure)
+    {
+        this.forEach(procedure);
+        return this;
+    }
+
     /**
      * Follows the same general contract as {@link Set#equals(Object)}.
      */

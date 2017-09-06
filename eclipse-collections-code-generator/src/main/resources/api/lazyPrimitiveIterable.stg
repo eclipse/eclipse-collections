@@ -32,12 +32,19 @@ import org.eclipse.collections.api.block.function.primitive.<name>ToLongFunction
 import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.<name>ToShortFunction;
 import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
+import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
 
 /**
  * This file was automatically generated from template file lazyPrimitiveIterable.stg.
  */
 public interface Lazy<name>Iterable extends <name>Iterable
 {
+    /**
+     * @since 9.0.
+     */
+    @Override
+    Lazy<name>Iterable tap(<name>Procedure procedure);
+
     @Override
     Lazy<name>Iterable select(<name>Predicate predicate);
 

@@ -1,0 +1,136 @@
+import "copyrightAndOthers.stg"
+import "primitiveEquals.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+
+targetPath() ::= "org/eclipse/collections/impl/lazy/primitive"
+
+fileName(primitive) ::= "Tap<primitive.name>Iterable"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyrightAndOthers()>
+
+package org.eclipse.collections.impl.lazy.primitive;
+
+import java.util.NoSuchElementException;
+
+import org.eclipse.collections.api.<name>Iterable;
+import org.eclipse.collections.api.bag.primitive.Mutable<name>Bag;
+import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
+import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
+import org.eclipse.collections.api.iterator.<name>Iterator;
+import org.eclipse.collections.api.list.primitive.Mutable<name>List;
+import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
+import org.eclipse.collections.impl.bag.mutable.primitive.<name>HashBag;
+import org.eclipse.collections.impl.block.factory.primitive.<name>Predicates;
+import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
+import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
+
+/**
+ * This file was automatically generated from template file tapPrimitiveIterable.stg.
+ */
+public class Tap<name>Iterable
+        extends AbstractLazy<name>Iterable
+{
+    private final <name>Iterable adapted;
+    private final <name>Procedure procedure;
+
+    public Tap<name>Iterable(<name>Iterable delegate, <name>Procedure procedure)
+    {
+        this.adapted = delegate;
+        this.procedure = procedure;
+    }
+
+    @Override
+    public void each(<name>Procedure procedure)
+    {
+        this.adapted.forEach(each ->
+        {
+            this.procedure.value(each);
+            procedure.value(each);
+        });
+    }
+
+    @Override
+    public boolean anySatisfy(<name>Predicate predicate)
+    {
+        return this.adapted.anySatisfy(each ->
+        {
+            this.procedure.value(each);
+            return predicate.accept(each);
+        });
+    }
+
+    @Override
+    public boolean allSatisfy(<name>Predicate predicate)
+    {
+        return this.adapted.allSatisfy(each ->
+        {
+            this.procedure.value(each);
+            return predicate.accept(each);
+        });
+    }
+
+    @Override
+    public boolean noneSatisfy(<name>Predicate predicate)
+    {
+        return this.adapted.noneSatisfy(each ->
+        {
+            this.procedure.value(each);
+            return predicate.accept(each);
+        });
+    }
+
+    @Override
+    public <type> detectIfNone(<name>Predicate predicate, <type> ifNone)
+    {
+        return this.adapted.detectIfNone(each ->
+        {
+            this.procedure.value(each);
+            return predicate.accept(each);
+        }, ifNone);
+    }
+
+    @Override
+    public <name>Iterator <type>Iterator()
+    {
+        return new Tap<name>Iterator(this.adapted, this.procedure);
+    }
+
+    public static class Tap<name>Iterator implements <name>Iterator
+    {
+        private final <name>Iterator iterator;
+        private final <name>Procedure procedure;
+
+        public Tap<name>Iterator(<name>Iterable iterable, <name>Procedure procedure)
+        {
+            this(iterable.<type>Iterator(), procedure);
+        }
+
+        public Tap<name>Iterator(<name>Iterator iterator, <name>Procedure procedure)
+        {
+            this.iterator = iterator;
+            this.procedure = procedure;
+        }
+
+        @Override
+        public boolean hasNext()
+        {
+            return this.iterator.hasNext();
+        }
+
+        @Override
+        public <type> next()
+        {
+            <type> next = this.iterator.next();
+            this.procedure.value(next);
+            return next;
+        }
+    }
+}
+
+>>

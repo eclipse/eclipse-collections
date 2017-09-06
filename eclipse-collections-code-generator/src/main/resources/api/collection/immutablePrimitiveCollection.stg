@@ -1,4 +1,4 @@
-import "copyright.stg"
+import "copyrightAndOthers.stg"
 import "primitiveAPI.stg"
 
 targetPath() ::= "org/eclipse/collections/api/collection/primitive"
@@ -10,13 +10,14 @@ class(primitive) ::= <<
 >>
 
 body(type, name) ::= <<
-<copyright()>
+<copyrightAndOthers()>
 
 package org.eclipse.collections.api.collection.primitive;
 
 import org.eclipse.collections.api.<name>Iterable;
 import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
 import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
+import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
 import org.eclipse.collections.api.collection.ImmutableCollection;
 
 /**
@@ -28,6 +29,16 @@ public interface Immutable<name>Collection extends <name>Iterable
 {
     @Override
     \<V> ImmutableCollection\<V> collect(<name>ToObjectFunction\<? extends V> function);
+
+    /**
+     * @since 9.0.
+     */
+    @Override
+    default Immutable<name>Collection tap(<name>Procedure procedure)
+    {
+        this.forEach(procedure);
+        return this;
+    }
 
     <sharedAPI(fileName(primitive), name)>
 

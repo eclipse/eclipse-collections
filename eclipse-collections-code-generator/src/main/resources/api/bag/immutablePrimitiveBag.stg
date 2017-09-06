@@ -1,4 +1,4 @@
-import "copyright.stg"
+import "copyrightAndOthers.stg"
 import "primitiveAPI.stg"
 
 targetPath() ::= "org/eclipse/collections/api/bag/primitive"
@@ -10,7 +10,7 @@ class(primitive) ::= <<
 >>
 
 body(type, name) ::= <<
-<copyright()>
+<copyrightAndOthers()>
 
 package org.eclipse.collections.api.bag.primitive;
 
@@ -19,6 +19,7 @@ import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
 <if(!primitive.intPrimitive)>import org.eclipse.collections.api.block.predicate.primitive.IntPredicate;<endif>
 import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
+import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
 import org.eclipse.collections.api.collection.primitive.Immutable<name>Collection;
 import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.tuple.primitive.<name>IntPair;
@@ -31,6 +32,16 @@ import org.eclipse.collections.api.tuple.primitive.<name>IntPair;
 public interface Immutable<name>Bag extends Immutable<name>Collection, <name>Bag
 {
     <sharedAPI(fileName(primitive), name)>
+
+    /**
+     * @since 9.0.
+     */
+    @Override
+    default Immutable<name>Bag tap(<name>Procedure procedure)
+    {
+        this.forEach(procedure);
+        return this;
+    }
 
     /**
      * Returns all elements of the bag that have a number of occurrences that satisfy the predicate.
