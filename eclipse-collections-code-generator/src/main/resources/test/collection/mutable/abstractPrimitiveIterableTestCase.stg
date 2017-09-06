@@ -25,10 +25,13 @@ import java.util.NoSuchElementException;
 <if(primitive.floatingPoint)>import java.util.Set;<endif>
 
 import org.eclipse.collections.api.<name>Iterable;
+import org.eclipse.collections.api.PrimitiveIterable;
 import org.eclipse.collections.api.Lazy<name>Iterable;
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
 import org.eclipse.collections.api.iterator.<name>Iterator;
+import org.eclipse.collections.api.list.MutableList;
+import org.eclipse.collections.api.list.primitive.Mutable<name>List;
 import org.eclipse.collections.impl.bag.mutable.primitive.<name>HashBag;
 import org.eclipse.collections.impl.block.factory.primitive.<name>Predicates;
 import org.eclipse.collections.impl.factory.Bags;
@@ -983,6 +986,18 @@ public void sumConsistentRounding()
         <name>Iterable iterable3 = this.newWith(<["0", "1", "2", "31"]:(literal.(type))(); separator=", ">);
         <wrapperName> sum3 = iterable3.injectInto(<wrapperName>.valueOf(<(literal.(type))("0")>), (<wrapperName> result, <type> value) -> <wrapperName>.valueOf((<type>) (result + value + 1)));
         Assert.assertEquals(<wrapperName>.valueOf(<(literal.(type))("38")>), sum3);
+    }
+
+    @Test
+    public void chunk()
+    {
+        MutableList\<Mutable<name>List> expectedChunkedList = Lists.mutable.empty();
+        expectedChunkedList.add(<name>Lists.mutable.with(<[ "1", "2"]:(literal.(type))(); separator=", ">));
+        expectedChunkedList.add(<name>Lists.mutable.with(<[ "3", "4"]:(literal.(type))(); separator=", ">));
+        expectedChunkedList.add(<name>Lists.mutable.with(<[ "5"]:(literal.(type))(); separator=", ">));
+        <name>Iterable <type>Iterable = this.newWith(<[ "1", "2", "3", "4", "5"]:(literal.(type))(); separator=", ">);
+        RichIterable\<PrimitiveIterable> chunk = <type>Iterable.chunk(2);
+        Assert.assertEquals(expectedChunkedList, chunk);
     }
 }
 

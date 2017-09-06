@@ -21,10 +21,16 @@ package org.eclipse.collections.impl.primitive;
 <endif>
 import org.eclipse.collections.api.<name>Iterable;
 import org.eclipse.collections.api.Lazy<name>Iterable;
+import org.eclipse.collections.api.RichIterable;
+import org.eclipse.collections.api.PrimitiveIterable;
 import org.eclipse.collections.api.bag.primitive.Mutable<name>Bag;
+import org.eclipse.collections.api.iterator.<name>Iterator;
 import org.eclipse.collections.api.list.primitive.Mutable<name>List;
 import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
+import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.impl.bag.mutable.primitive.<name>HashBag;
+import org.eclipse.collections.impl.factory.Lists;
+import org.eclipse.collections.impl.factory.primitive.<name>Lists;
 import org.eclipse.collections.impl.lazy.primitive.Lazy<name>IterableAdapter;
 import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
 import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
@@ -78,6 +84,28 @@ public abstract class Abstract<name>Iterable implements <name>Iterable
     public boolean containsAll(<name>Iterable source)
     {
         return source.allSatisfy(this::contains);
+    }
+
+    @Override
+    public RichIterable\<PrimitiveIterable> chunk(int size)
+    {
+        if (size \<= 0)
+        {
+            throw new IllegalArgumentException("Size for groups must be positive but was: " + size);
+        }
+
+        <name>Iterator iterator = this.<type>Iterator();
+        MutableList\<PrimitiveIterable> result = Lists.mutable.empty();
+        while (iterator.hasNext())
+        {
+            Mutable<name>List batch = <name>Lists.mutable.empty();
+            for (int i = 0; i \< size && iterator.hasNext(); i++)
+            {
+                batch.add(iterator.next());
+            }
+            result.add(batch);
+        }
+        return result;
     }
 }
 

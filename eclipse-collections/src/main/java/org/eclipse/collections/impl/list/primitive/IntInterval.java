@@ -17,6 +17,8 @@ import java.util.NoSuchElementException;
 
 import org.eclipse.collections.api.IntIterable;
 import org.eclipse.collections.api.LazyIntIterable;
+import org.eclipse.collections.api.PrimitiveIterable;
+import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.primitive.MutableIntBag;
 import org.eclipse.collections.api.block.function.primitive.IntToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.ObjectIntIntToObjectFunction;
@@ -584,6 +586,12 @@ public final class IntInterval
     }
 
     @Override
+    public RichIterable<PrimitiveIterable> chunk(int size)
+    {
+        throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".chunk() not implemented yet");
+    }
+
+    @Override
     public int[] toArray()
     {
         int[] result = new int[this.size()];
@@ -672,7 +680,7 @@ public final class IntInterval
     {
         if (index < 0 || index >= this.size())
         {
-            throw new IndexOutOfBoundsException(name + ": " + index + ' ' + this.toString());
+            throw new IndexOutOfBoundsException(name + ": " + index + ' ' + this);
         }
     }
 

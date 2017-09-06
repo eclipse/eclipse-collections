@@ -18,6 +18,7 @@ import java.util.Set;
 import org.eclipse.collections.api.<name>Iterable;
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.RichIterable;
+import org.eclipse.collections.api.PrimitiveIterable;
 import org.eclipse.collections.api.block.predicate.primitive.Object<name>Predicate;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.primitive.Object<name>Procedure;
@@ -74,6 +75,12 @@ public interface Object<name>Map\<K> extends <name>Iterable
      * @since 5.0
      */
     RichIterable\<Object<name>Pair\<K>\> keyValuesView();
+
+    @Override
+    default RichIterable\<PrimitiveIterable> chunk(int size)
+    {
+        throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".chunk() not implemented yet");
+    }
 }
 
 >>

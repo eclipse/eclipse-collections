@@ -153,6 +153,13 @@ public class Synchronized<name1><name2>MapKeySetTest extends Abstract<name1>SetT
         Assert.assertEquals(set1.hashCode(), set2.hashCode());
         Assert.assertEquals(this.newObjectCollectionWith(<["0", "1", "31", "32"]:(literal.(type1))(); separator=", ">).hashCode(), set1.hashCode());
     }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void chunk()
+    {
+        this.classUnderTest().chunk(2);
+    }
 }
 
 >>

@@ -16,6 +16,8 @@ import java.util.NoSuchElementException;
 
 import org.eclipse.collections.api.BooleanIterable;
 import org.eclipse.collections.api.LazyBooleanIterable;
+import org.eclipse.collections.api.PrimitiveIterable;
+import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.primitive.MutableBooleanBag;
 import org.eclipse.collections.api.block.function.primitive.BooleanToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.ObjectBooleanToObjectFunction;
@@ -323,6 +325,12 @@ final class ImmutableTrueFalseSet implements ImmutableBooleanSet, Serializable
         {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public RichIterable<PrimitiveIterable> chunk(int size)
+    {
+        throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".chunk() not implemented yet");
     }
 
     @Override

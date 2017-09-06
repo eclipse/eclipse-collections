@@ -215,6 +215,13 @@ public class Unmodifiable<name>ObjectMapKeySetTest extends Abstract<name>SetTest
     {
         // Not applicable for Unmodifiable
     }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void chunk()
+    {
+        this.classUnderTest().chunk(2);
+    }
 }
 
 >>

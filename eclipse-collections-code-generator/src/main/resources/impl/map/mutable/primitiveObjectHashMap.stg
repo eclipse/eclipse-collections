@@ -50,6 +50,7 @@ import org.eclipse.collections.api.<name>Iterable;
 import org.eclipse.collections.api.Lazy<name>Iterable;
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.RichIterable;
+import org.eclipse.collections.api.PrimitiveIterable;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.bag.primitive.MutableBooleanBag;
 import org.eclipse.collections.api.bag.primitive.MutableByteBag;
@@ -3017,6 +3018,12 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         public void forEach(<name>Procedure procedure)
         {
             this.each(procedure);
+        }
+
+        @Override
+        public RichIterable\<PrimitiveIterable> chunk(int size)
+        {
+            throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".reverseForEachWithIndex() not implemented yet");
         }
 
         /**

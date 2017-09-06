@@ -18,6 +18,8 @@ import java.util.NoSuchElementException;
 
 import org.eclipse.collections.api.BooleanIterable;
 import org.eclipse.collections.api.LazyBooleanIterable;
+import org.eclipse.collections.api.PrimitiveIterable;
+import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.bag.primitive.BooleanBag;
 import org.eclipse.collections.api.bag.primitive.ImmutableBooleanBag;
@@ -352,11 +354,11 @@ public final class BooleanHashBag implements MutableBooleanBag, Externalizable
             {
                 if (each)
                 {
-                    BooleanHashBag.this.trueCount = 0;
+                    this.trueCount = 0;
                 }
                 else
                 {
-                    BooleanHashBag.this.falseCount = 0;
+                    this.falseCount = 0;
                 }
             });
         }
@@ -721,6 +723,12 @@ public final class BooleanHashBag implements MutableBooleanBag, Externalizable
         {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public RichIterable<PrimitiveIterable> chunk(int size)
+    {
+        throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".chunk() not implemented yet");
     }
 
     @Override

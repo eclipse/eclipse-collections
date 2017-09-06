@@ -52,6 +52,12 @@ public interface Lazy<name>Iterable extends <name>Iterable
      */
     \<V> LazyIterable\<V> flatCollect(<name>ToObjectFunction\<? extends Iterable\<V>\> function);
 
+    @Override
+    default RichIterable\<PrimitiveIterable> chunk(int size)
+    {
+        throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".chunk() not implemented yet");
+    }
+
     <collectPrimitive(name, type, "Boolean", "boolean")>
 
     <collectPrimitive(name, type, "Byte", "byte")>

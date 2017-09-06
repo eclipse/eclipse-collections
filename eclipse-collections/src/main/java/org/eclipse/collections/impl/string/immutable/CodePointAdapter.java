@@ -16,6 +16,8 @@ import java.util.NoSuchElementException;
 
 import org.eclipse.collections.api.IntIterable;
 import org.eclipse.collections.api.LazyIntIterable;
+import org.eclipse.collections.api.PrimitiveIterable;
+import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.primitive.MutableIntBag;
 import org.eclipse.collections.api.block.function.primitive.IntToIntFunction;
 import org.eclipse.collections.api.block.function.primitive.IntToObjectFunction;
@@ -57,6 +59,12 @@ public class CodePointAdapter extends AbstractIntIterable implements CharSequenc
     public static CodePointAdapter adapt(String value)
     {
         return new CodePointAdapter(value);
+    }
+
+    @Override
+    public RichIterable<PrimitiveIterable> chunk(int size)
+    {
+        throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".chunk() not implemented yet");
     }
 
     public static CodePointAdapter from(int... codePoints)
@@ -667,11 +675,7 @@ public class CodePointAdapter extends AbstractIntIterable implements CharSequenc
             }
             i += Character.charCount(codePoint);
         }
-        if (size < list.size())
-        {
-            return false;
-        }
-        return true;
+        return size >= list.size();
     }
 
     private boolean equalsCodePointAdapter(CodePointAdapter adapter)

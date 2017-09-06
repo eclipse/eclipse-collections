@@ -19,6 +19,8 @@ import java.io.Serializable;
 <if(!primitive.booleanPrimitive)>import java.util.NoSuchElementException;<endif>
 
 import org.eclipse.collections.api.<name>Iterable;
+import org.eclipse.collections.api.PrimitiveIterable;
+import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.Lazy<name>Iterable;
 import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.api.bag.primitive.Immutable<name>Bag;
@@ -341,6 +343,12 @@ final class Immutable<name>EmptyBag implements Immutable<name>Bag, Serializable
     public <name>Iterator <type>Iterator()
     {
         return ImmutableEmpty<name>Iterator.INSTANCE;
+    }
+
+    @Override
+    public RichIterable\<PrimitiveIterable> chunk(int size)
+    {
+        return Lists.immutable.empty();
     }
 }
 

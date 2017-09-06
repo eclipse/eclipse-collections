@@ -296,6 +296,7 @@ final class ImmutableArrayList<T>
         return InternalArrayIterate.detectWithOptional(this.items, this.items.length, predicate, parameter);
     }
 
+    @Override
     public int count(Predicate<? super T> predicate)
     {
         return InternalArrayIterate.count(this.items, this.items.length, predicate);

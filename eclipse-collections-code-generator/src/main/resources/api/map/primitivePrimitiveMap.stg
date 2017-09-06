@@ -21,6 +21,7 @@ import java.util.Map;
 
 import org.eclipse.collections.api.Lazy<name1>Iterable;
 import org.eclipse.collections.api.RichIterable;
+import org.eclipse.collections.api.PrimitiveIterable;
 import org.eclipse.collections.api.block.predicate.primitive.<name1><name2>Predicate;
 import org.eclipse.collections.api.block.procedure.primitive.<name1><name2>Procedure;
 import org.eclipse.collections.api.block.procedure.primitive.<name1>Procedure;
@@ -80,6 +81,12 @@ public interface <name1><name2>Map extends <name2>ValuesMap
     Immutable<name1><name2>Map toImmutable();
 
     Mutable<name1>Set keySet();
+
+    @Override
+    default RichIterable\<PrimitiveIterable> chunk(int size)
+    {
+        return this.values().chunk(size);
+    }
 }
 
 >>

@@ -389,6 +389,13 @@ public class CodePointListTest extends AbstractImmutableIntListTestCase
     }
 
     @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void chunk()
+    {
+        this.classUnderTest().chunk(2);
+    }
+
+    @Override
     public void toReversed()
     {
         super.toReversed();

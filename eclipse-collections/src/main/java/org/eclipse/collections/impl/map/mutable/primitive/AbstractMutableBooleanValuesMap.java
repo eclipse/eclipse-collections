@@ -14,6 +14,8 @@ import java.io.IOException;
 
 import org.eclipse.collections.api.BooleanIterable;
 import org.eclipse.collections.api.LazyBooleanIterable;
+import org.eclipse.collections.api.PrimitiveIterable;
+import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.bag.primitive.MutableBooleanBag;
 import org.eclipse.collections.api.block.function.primitive.BooleanToObjectFunction;
@@ -516,6 +518,12 @@ public abstract class AbstractMutableBooleanValuesMap extends AbstractBooleanIte
         public MutableBooleanCollection withoutAll(BooleanIterable elements)
         {
             throw new UnsupportedOperationException("Cannot call withoutAll() on " + this.getClass().getSimpleName());
+        }
+
+        @Override
+        public RichIterable<PrimitiveIterable> chunk(int size)
+        {
+            return AbstractMutableBooleanValuesMap.this.chunk(size);
         }
 
         @Override

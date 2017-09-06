@@ -19,6 +19,7 @@ import java.io.Serializable;
 import org.eclipse.collections.api.<name>Iterable;
 import org.eclipse.collections.api.Lazy<name>Iterable;
 import org.eclipse.collections.api.RichIterable;
+import org.eclipse.collections.api.PrimitiveIterable;
 import org.eclipse.collections.api.bag.primitive.Mutable<name>Bag;
 import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.Object<name>ToObjectFunction;
@@ -333,6 +334,15 @@ public class Synchronized<name>Iterable implements <name>Iterable, Serializable
         synchronized (this.lock)
         {
             this.iterable.appendString(appendable, start, separator, end);
+        }
+    }
+
+    @Override
+    public RichIterable\<PrimitiveIterable> chunk(int size)
+    {
+        synchronized (this.lock)
+        {
+            return this.iterable.chunk(size);
         }
     }
 

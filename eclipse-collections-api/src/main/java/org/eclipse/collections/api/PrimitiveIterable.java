@@ -127,4 +127,14 @@ public interface PrimitiveIterable
      * @since 3.0
      */
     void appendString(Appendable appendable, String start, String separator, String end);
+
+    /**
+     * Partitions elements in fixed size chunks.
+     *
+     * @param size the number of elements per chunk
+     * @return A {@code RichIterable} containing {@code PrimitiveIterable}s of size {@code size}, except the last will be
+     * truncated if the elements don't divide evenly.
+     * @since 9.0
+     */
+    RichIterable<PrimitiveIterable> chunk(int size);
 }

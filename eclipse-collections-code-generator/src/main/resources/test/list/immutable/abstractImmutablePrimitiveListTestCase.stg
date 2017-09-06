@@ -288,6 +288,13 @@ public abstract class AbstractImmutable<name>ListTestCase extends AbstractImmuta
         Verify.assertEqualsAndHashCode(immutableList, list);
         Assert.assertNotSame(immutableList, list);
     }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void chunk()
+    {
+        this.classUnderTest().chunk(2);
+    }
 }
 
 >>
