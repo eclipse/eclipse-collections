@@ -124,25 +124,4 @@
 
         </plugins>
     </build>
-    <profiles>
-        <profile>
-            <id>eclipse-sign</id>
-            <activation>
-                <property>
-                    <name>performReleaseP2</name>
-                    <value>true</value>
-                </property>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <artifactId>maven-deploy-plugin</artifactId>
-                        <configuration>
-                            <skip>true</skip>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
 </project>
