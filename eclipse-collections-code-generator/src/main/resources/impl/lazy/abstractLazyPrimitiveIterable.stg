@@ -169,6 +169,12 @@ public abstract class AbstractLazy<name>Iterable implements Lazy<name>Iterable
     }
 
     @Override
+    public Lazy<name>Iterable tap(<name>Procedure procedure)
+    {
+        return Lazy<name>Iterate.tap(this, procedure);
+    }
+
+    @Override
     public \<V> LazyIterable\<V> collect(<name>ToObjectFunction\<? extends V> function)
     {
         return Lazy<name>Iterate.collect(this, function);

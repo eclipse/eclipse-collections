@@ -29,6 +29,7 @@ import org.eclipse.collections.api.Lazy<name>Iterable;
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
 import org.eclipse.collections.api.iterator.<name>Iterator;
+import org.eclipse.collections.api.list.primitive.Mutable<name>List;
 import org.eclipse.collections.impl.bag.mutable.primitive.<name>HashBag;
 import org.eclipse.collections.impl.block.factory.primitive.<name>Predicates;
 import org.eclipse.collections.impl.factory.Bags;
@@ -118,6 +119,15 @@ public abstract class Abstract<name>IterableTestCase
         Assert.assertTrue(this.newWith(<["0", "31"]:(literal.(type))(); separator=", ">).notEmpty());
         Assert.assertTrue(this.newWith(<["31", "32"]:(literal.(type))(); separator=", ">).notEmpty());
         Assert.assertTrue(this.newWith(<["32", "33"]:(literal.(type))(); separator=", ">).notEmpty());
+    }
+
+    @Test
+    public void tap()
+    {
+        Mutable<name>List tapResult = <name>Lists.mutable.empty();
+        <name>Iterable collection = this.newWith(<["14", "2", "30", "31", "32", "35", "0", "1"]:(literal.(type))(); separator=", ">);
+        Assert.assertSame(collection, collection.tap(tapResult::add));
+        Assert.assertEquals(collection.toList(), tapResult);
     }
 
     @Test

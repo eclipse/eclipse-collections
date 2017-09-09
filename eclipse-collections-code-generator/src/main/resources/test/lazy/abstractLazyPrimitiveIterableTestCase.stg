@@ -38,6 +38,7 @@ import org.eclipse.collections.impl.factory.primitive.LongLists;
 import org.eclipse.collections.impl.factory.primitive.ShortLists;
 import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
 import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
+import org.eclipse.collections.impl.string.immutable.CharAdapter;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
 import org.junit.Test;
@@ -189,6 +190,17 @@ public abstract class AbstractLazy<name>IterableTestCase
     public void collect()
     {
         Verify.assertIterableSize(3, this.classUnderTest().collect(String::valueOf));
+    }
+
+    @Test
+    public void tap()
+    {
+        StringBuilder tapStringBuilder = new StringBuilder();
+        StringBuilder eachStringBuilder = new StringBuilder();
+        Lazy<name>Iterable lazy = this.classUnderTest().tap(tapStringBuilder::append);
+        Assert.assertEquals(lazy.makeString(""), tapStringBuilder.toString());
+        lazy.tap(eachStringBuilder::append).forEach(eachStringBuilder::append);
+        Assert.assertEquals(CharAdapter.adapt(eachStringBuilder.toString()).toBag(), CharAdapter.adapt(tapStringBuilder.toString()).toBag());
     }
 
     @Test

@@ -91,6 +91,15 @@ public interface <name>Iterable extends PrimitiveIterable
     void each(<name>Procedure procedure);
 
     /**
+     * @since 9.0.
+     */
+    default <name>Iterable tap(<name>Procedure procedure)
+    {
+        this.forEach(procedure);
+        return this;
+    }
+
+    /**
      * Returns a new <name>Iterable with all of the elements in the <name>Iterable that
      * return true for the specified predicate.
      */

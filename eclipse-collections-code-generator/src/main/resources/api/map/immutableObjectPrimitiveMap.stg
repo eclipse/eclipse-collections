@@ -1,4 +1,4 @@
-import "copyright.stg"
+import "copyrightAndOthers.stg"
 
 targetPath() ::= "org/eclipse/collections/api/map/primitive"
 
@@ -9,13 +9,14 @@ class(primitive) ::= <<
 >>
 
 body(type, name) ::= <<
-<copyright()>
+<copyrightAndOthers()>
 
 package org.eclipse.collections.api.map.primitive;
 
 import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
 import org.eclipse.collections.api.block.predicate.primitive.Object<name>Predicate;
 import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
+import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
 import org.eclipse.collections.api.collection.ImmutableCollection;
 import org.eclipse.collections.api.collection.primitive.Immutable<name>Collection;
 
@@ -37,6 +38,15 @@ public interface ImmutableObject<name>Map\<K> extends Object<name>Map\<K>
 
     @Override
     Immutable<name>Collection reject(<name>Predicate predicate);
+
+    /**
+     * @since 9.0.
+     */
+    default ImmutableObject<name>Map\<K> tap(<name>Procedure procedure)
+    {
+        this.forEach(procedure);
+        return this;
+    }
 
     @Override
     \<V> ImmutableCollection\<V> collect(<name>ToObjectFunction\<? extends V> function);

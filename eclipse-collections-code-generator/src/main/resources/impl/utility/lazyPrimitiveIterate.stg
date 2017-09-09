@@ -18,11 +18,13 @@ import org.eclipse.collections.api.Lazy<name>Iterable;
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
 import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
+import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
 import org.eclipse.collections.impl.factory.primitive.<name>Lists;
 import org.eclipse.collections.impl.lazy.primitive.Collect<name>ToObjectIterable;
 import org.eclipse.collections.impl.lazy.primitive.FlatCollect<name>ToObjectIterable;
 import org.eclipse.collections.impl.lazy.primitive.Lazy<name>IterableAdapter;
 import org.eclipse.collections.impl.lazy.primitive.Select<name>Iterable;
+import org.eclipse.collections.impl.lazy.primitive.Tap<name>Iterable;
 
 /**
  * Lazy<name>Iterate is a factory class which creates "deferred" <type> iterables around the specified <type> iterables. A "deferred"
@@ -94,6 +96,16 @@ public final class Lazy<name>Iterate
     public static Lazy<name>Iterable empty()
     {
         return EMPTY_ITERABLE;
+    }
+
+    /**
+     * Creates a deferred tap iterable for the specified iterable.
+     *
+     * @since 9.0
+     */
+    public static Lazy<name>Iterable tap(<name>Iterable iterable, <name>Procedure procedure)
+    {
+        return new Tap<name>Iterable(iterable, procedure);
     }
 }
 

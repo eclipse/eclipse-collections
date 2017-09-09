@@ -1,4 +1,4 @@
-import "copyright.stg"
+import "copyrightAndOthers.stg"
 import "primitiveEquals.stg"
 import "primitiveHashCode.stg"
 import "primitiveAPI.stg"
@@ -13,12 +13,13 @@ class(primitive) ::= <<
 >>
 
 body(type, name) ::= <<
-<copyright()>
+<copyrightAndOthers()>
 
 package org.eclipse.collections.api.list.primitive;
 
 import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
 import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
+import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
 import org.eclipse.collections.api.list.ListIterable;
 import org.eclipse.collections.api.ordered.primitive.Reversible<name>Iterable;
 
@@ -35,6 +36,16 @@ public interface <name>List extends Reversible<name>Iterable
     int lastIndexOf(<type> value);
 
     <sharedAPI(fileName(primitive), name)>
+
+    /**
+     * @since 9.0.
+     */
+    @Override
+    default <name>List tap(<name>Procedure procedure)
+    {
+        this.forEach(procedure);
+        return this;
+    }
 
     @Override
     \<V> ListIterable\<V> collect(<name>ToObjectFunction\<? extends V> function);
