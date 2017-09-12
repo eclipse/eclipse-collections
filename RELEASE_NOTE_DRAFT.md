@@ -6,44 +6,43 @@ This is the 9.0.0 major release.
 New Functionality
 -----------------
 
-* Implement distinctBy on ListIterable.
-* Implement adapt on factory classes.
-* Implement UnifiedSet.trimToSize().
-* Implement UnifiedMap.trimToSize().
-* Add new profiles for p2 releases.
-* Implement ofAll and withAll for Int, Long, Double collection factories with primitive streams.
-* Implement stream, parallelStream and spliterator on all object valued maps.
-* Sign p2 repository artifacts.
-* Implement HashingStrategies.nullSafeFromFunction(Function).
-* Implement spliterator, stream, parallelStream and castToCollection on ImmutableCollection.
-* Add an efficient default implementation of forEach.
-* Implement flatCollect on lazy primitive iterables and cartesianProduct on primitive sets factory.
-* Add covariant override for subList() in ListIterable hierarchy.
-* Implement averageIfEmpty and medianIfEmpty on primitive iterables.
-* Implement countBy and countBy with target as default methods on RichIterable.
-
-Java 9 Compatibility Fixes
---------------------------
-
-* For Java 9 add "Automatic-Module-Name" to manifests of JAR files.
-* Add a Java 9 regression build.
+* Implemented flipUniqueValues() on primitive maps.
+* Implemented tap on primitive iterables.
+* Implemented Implement ReversibleIterable.reverseForEachWithIndex().
+* Implemented distinctBy on ListIterable.
+* Implemented adapt on factory classes.
+* Implemented UnifiedSet.trimToSize().
+* Implemented UnifiedMap.trimToSize().
+* Implemented ofAll and withAll for Int, Long, Double collection factories with primitive streams.
+* Implemented stream, parallelStream and spliterator on all object valued maps.
+* Implemented HashingStrategies.nullSafeFromFunction(Function).
+* Implemented spliterator, stream, parallelStream and castToCollection on ImmutableCollection.
+* Added an efficient default implementation of forEach.
+* Implemented flatCollect on lazy primitive iterables and cartesianProduct on primitive sets factory.
+* Added covariant override for subList() in ListIterable hierarchy.
+* Implemented averageIfEmpty and medianIfEmpty on primitive iterables.
+* Implemented countBy and countBy with target as default methods on RichIterable.
+* For Java 9 added "Automatic-Module-Name" to manifests of JAR files.
 
 Tech Debt Reduction
 -------------------
 
-* Fix Travis build, remove Java 9 build, remove Sonar badge.
-* Activate Checkstyle RequireThis module.
-* Fix warnings generated during Javadoc build.
-* Remove Apache Felix plugin.
-* Fix build to run Sonar analysis.
-* Reduce scope of EMPTY_INSTANCE in ImmutableBiMapFactoryImpl.
+* Activated Checkstyle RequireThis module.
+* Fixed warnings generated during Javadoc build.
+
+Breaking Change
+---------------
+
+* Removed Apache Felix plugin.
+* Deprecated or hide collection factory constructors. 
+* Reduced scope of EMPTY_INSTANCE in ImmutableBiMapFactoryImpl.
 
 Miscellaneous
 -------------
 
-* Add logo in reference guide.
-* Add Eclipse Collections logo in README.
-* Add Eclipse Collections logo.
+* Added logo in reference guide.
+* Added Eclipse Collections logo in README.
+* Added Eclipse Collections logo.
 
 
 Acquiring Eclipse Collections
