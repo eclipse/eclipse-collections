@@ -341,6 +341,15 @@ public class Unmodifiable<name>ObjectMapTest extends AbstractMutable<name>Object
         iterator1.next();
         Verify.assertThrows(UnsupportedOperationException.class, iterator1::remove);
     }
+
+    @Override
+    @Test
+    public void flipUniqueValues()
+    {
+        super.flipUniqueValues();
+
+        Verify.assertInstanceOf(UnmodifiableObject<name>Map.class, this.classUnderTest().flipUniqueValues());
+    }
 }
 
 >>

@@ -357,6 +357,15 @@ public class Unmodifiable<name1><name2>MapTest extends AbstractMutable<name1><na
     {
         // Not applicable for Unmodifiable*
     }
+
+    @Override
+    @Test
+    public void flipUniqueValues()
+    {
+        super.flipUniqueValues();
+
+        Verify.assertInstanceOf(Unmodifiable<name2><name1>Map.class, this.classUnderTest().flipUniqueValues());
+    }
 }
 
 >>

@@ -21,7 +21,10 @@ body(type, name, wrapperName) ::= <<
 package org.eclipse.collections.impl.map.immutable.primitive;
 
 import org.eclipse.collections.api.map.primitive.ImmutableObject<name>Map;
+import org.eclipse.collections.impl.factory.primitive.<name>ObjectMaps;
+import org.eclipse.collections.impl.factory.primitive.Object<name>Maps;
 import org.eclipse.collections.impl.map.mutable.primitive.Object<name>HashMap;
+import org.eclipse.collections.impl.map.mutable.primitive.<name>ObjectHashMap;
 import org.eclipse.collections.impl.map.primitive.AbstractObject<name>MapTestCase;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
@@ -88,6 +91,21 @@ public abstract class AbstractImmutableObject<name>MapTestCase extends AbstractO
     {
         super.values();
         Verify.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().values().remove(<(literal.(type))("0")>));
+    }
+
+    @Test
+    public void flipUniqueValues()
+    {
+        Assert.assertEquals(<name>ObjectMaps.immutable.empty(), Object<name>Maps.immutable.empty().flipUniqueValues());
+        Verify.assertInstanceOf(Immutable<name>ObjectEmptyMap.class, Object<name>Maps.immutable.empty().flipUniqueValues());
+
+        Assert.assertEquals(<name>ObjectMaps.immutable.with(<(literal.(type))("2")>, "1"), this.newWithKeysValues("1", <(literal.(type))("2")>).flipUniqueValues());
+
+        Assert.assertEquals(
+                <name>ObjectHashMap.newWithKeysValues(<(literal.(type))("2")>, "1", <(literal.(type))("3")>, "2").toImmutable(),
+                this.newWithKeysValues("1", <(literal.(type))("2")>, "2", <(literal.(type))("3")>).flipUniqueValues());
+
+        Verify.assertThrows(IllegalStateException.class, () -> this.newWithKeysValues("1", <(literal.(type))("1")>, "2", <(literal.(type))("1")>).flipUniqueValues());
     }
 }
 

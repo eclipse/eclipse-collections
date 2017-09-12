@@ -96,6 +96,7 @@ import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.primitive.<name>ObjectMap;
 import org.eclipse.collections.api.map.primitive.Mutable<name>ObjectMap;
+import org.eclipse.collections.api.map.primitive.MutableObject<name>Map;
 import org.eclipse.collections.api.map.primitive.Immutable<name>ObjectMap;
 import org.eclipse.collections.api.map.primitive.MutableObjectDoubleMap;
 import org.eclipse.collections.api.map.primitive.MutableObjectLongMap;
@@ -1161,6 +1162,15 @@ public final class Synchronized<name>ObjectMap\<V>
         synchronized (this.lock)
         {
             return SynchronizedRichIterable.of(this.map.keyValuesView(), this.lock).asLazy();
+        }
+    }
+
+    @Override
+    public MutableObject<name>Map\<V> flipUniqueValues()
+    {
+        synchronized (this.lock)
+        {
+            return this.map.flipUniqueValues();
         }
     }
 

@@ -51,6 +51,8 @@ public interface Mutable<name1><name2>Map extends <name1><name2>Map, Mutable<nam
 
     <type2> updateValue(<type1> key, <type2> initialValueIfAbsent, <name2>To<name2>Function function);
 
+    <(flipUniqueValues.(name2))(name1, name2)>
+
     @Override
     Mutable<name1><name2>Map select(<name1><name2>Predicate predicate);
 
@@ -88,3 +90,20 @@ allMethods(type1, type2) ::= <<
 >>
 
 noMethods(type1, type2) ::= ""
+
+flipUniqueValues ::= [
+    "Byte": "flipUniqueValues",
+    "Short": "flipUniqueValues",
+    "Char": "flipUniqueValues",
+    "Int": "flipUniqueValues",
+    "Long": "flipUniqueValues",
+    "Float": "flipUniqueValues",
+    "Double": "flipUniqueValues",
+    "Boolean": "noMethods"
+    ]
+
+flipUniqueValues(name1, name2) ::= <<
+@Override
+Mutable<name2><name1>Map flipUniqueValues();
+>>
+

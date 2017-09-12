@@ -41,6 +41,7 @@ import org.eclipse.collections.api.iterator.Mutable<name>Iterator;
 import org.eclipse.collections.api.list.primitive.Mutable<name>List;
 import org.eclipse.collections.api.map.primitive.ImmutableObject<name>Map;
 import org.eclipse.collections.api.map.primitive.MutableObject<name>Map;
+<if(!primitive.booleanPrimitive)>import org.eclipse.collections.api.map.primitive.Mutable<name>ObjectMap;<endif>
 import org.eclipse.collections.api.map.primitive.Object<name>Map;
 import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
 import org.eclipse.collections.api.tuple.primitive.Object<name>Pair;
@@ -410,6 +411,14 @@ public final class UnmodifiableObject<name>Map\<K>
     {
         return this.map.keyValuesView();
     }
+
+    <if(!primitive.booleanPrimitive)>
+    @Override
+    public Mutable<name>ObjectMap\<K> flipUniqueValues()
+    {
+        return this.map.flipUniqueValues().asUnmodifiable();
+    }
+    <endif>
 
     @Override
     public boolean equals(Object obj)
