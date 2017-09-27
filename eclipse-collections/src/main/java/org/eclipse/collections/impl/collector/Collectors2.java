@@ -722,6 +722,21 @@ public final class Collectors2
     }
 
     /**
+     * Returns the counts of all of the values returned by applying the specified function to each
+     * item of the Stream.
+     *
+     * @since 9.1
+     */
+    public static <T, K> Collector<T, ?, MutableBag<K>> countBy(Function<? super T, ? extends K> function)
+    {
+        return Collector.of(
+                Bags.mutable::empty,
+                (bag, each) -> bag.with(function.valueOf(each)),
+                MutableBag::withAll,
+                EMPTY_CHARACTERISTICS);
+    }
+
+    /**
      * <p>Returns the elements as an MutableMultimap grouping each element using the specified groupBy Function.</p>
      * <p>Examples:</p>
      * {@code MutableListMultimap<String, Integer> multimap1 =
