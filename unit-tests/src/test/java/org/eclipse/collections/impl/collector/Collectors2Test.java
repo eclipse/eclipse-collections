@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.collection.primitive.MutableIntCollection;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.primitive.MutableObjectLongMap;
@@ -1082,5 +1083,25 @@ public final class Collectors2Test
         Assert.assertEquals(
                 LARGE_INTERVAL.reduceInPlace(Collectors2.toImmutableBagMultimap(Object::toString, Object::toString)),
                 this.bigData.parallelStream().collect(Collectors2.toImmutableBagMultimap(Object::toString, Object::toString)));
+    }
+
+    @Test
+    public void countBy()
+    {
+        Interval integers = Interval.oneTo(100);
+        MutableBag<Integer> counts = integers.stream().collect(Collectors2.countBy(i -> i % 2));
+        Assert.assertEquals(integers.countBy(i -> i % 2), counts);
+        Assert.assertEquals(50, counts.occurrencesOf(0));
+        Assert.assertEquals(50, counts.occurrencesOf(1));
+    }
+
+    @Test
+    public void countByParallel()
+    {
+        Interval integers = Interval.oneTo(100000);
+        MutableBag<Integer> counts = integers.parallelStream().collect(Collectors2.countBy(i -> i % 2));
+        Assert.assertEquals(integers.countBy(i -> i % 2), counts);
+        Assert.assertEquals(50000, counts.occurrencesOf(0));
+        Assert.assertEquals(50000, counts.occurrencesOf(1));
     }
 }
