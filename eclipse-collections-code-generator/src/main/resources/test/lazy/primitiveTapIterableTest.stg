@@ -26,7 +26,6 @@ import org.eclipse.collections.api.list.primitive.<name>List;
 import org.eclipse.collections.impl.bag.mutable.primitive.<name>HashBag;
 import org.eclipse.collections.impl.block.factory.primitive.<name>Predicates;
 import org.eclipse.collections.impl.factory.primitive.<name>Lists;
-<if(primitive.floatingPoint)>import org.eclipse.collections.impl.list.Interval;<endif>
 import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
 import org.eclipse.collections.impl.math.Mutable<wrapperName>;
 import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;

@@ -90,4 +90,14 @@ public enum Primitive
     {
         return this == INT || this == LONG || this == DOUBLE;
     }
+
+    public boolean isByteOrShortOrCharPrimitive()
+    {
+        return this == BYTE || this == SHORT || this == CHAR;
+    }
+
+    public boolean isFloatOrDoublePrimitive()
+    {
+        return this == FLOAT || this == DOUBLE;
+    }
 }

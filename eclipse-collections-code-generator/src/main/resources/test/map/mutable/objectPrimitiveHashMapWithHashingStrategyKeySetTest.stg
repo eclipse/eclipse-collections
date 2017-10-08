@@ -20,16 +20,11 @@ body(type, name, wrapperName) ::= <<
 
 package org.eclipse.collections.impl.map.mutable.primitive;
 
-import java.util.Iterator;
-import java.util.NoSuchElementException;
 import java.util.Set;
 
 import org.eclipse.collections.api.block.HashingStrategy;
 import org.eclipse.collections.api.map.primitive.MutableObject<name>Map;
-import org.eclipse.collections.impl.bag.mutable.HashBag;
 import org.eclipse.collections.impl.block.factory.HashingStrategies;
-import org.eclipse.collections.impl.list.mutable.FastList;
-import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.test.domain.Person;
 import org.junit.Assert;
@@ -37,7 +32,7 @@ import org.junit.Test;
 
 /**
  * JUnit test for {@link Object<name>HashMapWithHashingStrategy#keySet()}.
- * This file was automatically generated from template file objectPrimitiveHashMapKeySetTest.stg.
+ * This file was automatically generated from template file objectPrimitiveHashMapWithHashingStrategyKeySetTest.stg.
  */
 public class Object<name>HashMapWithHashingStrategyKeySetTest extends Object<name>HashMapKeySetTestCase
 {

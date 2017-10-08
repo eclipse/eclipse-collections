@@ -44,8 +44,8 @@ import org.eclipse.collections.api.tuple.Pair;
 /**
  * ImmutableSortedSet is the non-modifiable equivalent interface to {@link MutableSortedSet}. {@link
  * MutableSortedSet#toImmutable()} will give you an appropriately trimmed implementation of ImmutableSortedSet. All
- * ImmutableSortedSet implementations must implement the {@link SortedSet} interface so they can satisfy the {@link
- * Set#equals(Object)} contract and be compared against other Sets.
+ * ImmutableSortedSet implementations must implement the {@link SortedSet} interface so they can satisfy the
+ * {@link Set#equals(Object)} contract and be compared against other Sets.
  */
 public interface ImmutableSortedSet<T>
         extends SortedSetIterable<T>, ImmutableSetIterable<T>

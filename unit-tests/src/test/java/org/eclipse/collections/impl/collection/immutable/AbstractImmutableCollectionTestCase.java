@@ -16,7 +16,6 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.function.Supplier;
-import java.util.stream.StreamSupport;
 
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.Bag;
@@ -147,7 +146,7 @@ public abstract class AbstractImmutableCollectionTestCase
     /**
      * @since 9.0
      */
-    @Test (expected = UnsupportedOperationException.class)
+    @Test(expected = UnsupportedOperationException.class)
     public void castToCollection()
     {
         this.classUnderTest().castToCollection().add(0);

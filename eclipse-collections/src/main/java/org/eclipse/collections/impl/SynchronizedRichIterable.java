@@ -17,9 +17,7 @@ import java.io.ObjectOutput;
 import java.io.Serializable;
 
 import org.eclipse.collections.api.RichIterable;
-import org.eclipse.collections.api.collection.MutableCollection;
 import org.eclipse.collections.impl.collection.AbstractSynchronizedRichIterable;
-import org.eclipse.collections.impl.collection.mutable.SynchronizedCollectionSerializationProxy;
 
 /**
  * A synchronized view of a RichIterable.
