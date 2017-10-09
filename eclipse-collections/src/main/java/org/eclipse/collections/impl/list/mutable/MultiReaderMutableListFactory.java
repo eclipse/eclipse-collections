@@ -49,6 +49,23 @@ public enum MultiReaderMutableListFactory implements MutableListFactory
     }
 
     @Override
+    public <T> MutableList<T> ofInitialCapacity(int capacity)
+    {
+        return this.withInitialCapacity(capacity);
+    }
+
+    @Override
+    public <T> MutableList<T> withInitialCapacity(int capacity)
+    {
+        if (capacity < 0)
+        {
+            throw new IllegalArgumentException("initial capacity cannot be less than 0");
+        }
+
+        return MultiReaderFastList.newList(capacity);
+    }
+
+    @Override
     public <T> MutableList<T> ofAll(Iterable<? extends T> iterable)
     {
         return this.withAll(iterable);
