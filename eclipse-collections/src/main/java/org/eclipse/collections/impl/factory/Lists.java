@@ -19,6 +19,7 @@ import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.impl.list.fixed.FixedSizeListFactoryImpl;
 import org.eclipse.collections.impl.list.immutable.ImmutableListFactoryImpl;
 import org.eclipse.collections.impl.list.mutable.ListAdapter;
+import org.eclipse.collections.impl.list.mutable.MultiReaderMutableListFactory;
 import org.eclipse.collections.impl.list.mutable.MutableListFactoryImpl;
 
 /**
@@ -54,6 +55,7 @@ public final class Lists
     public static final ImmutableListFactory immutable = ImmutableListFactoryImpl.INSTANCE;
     public static final MutableListFactory mutable = MutableListFactoryImpl.INSTANCE;
     public static final FixedSizeListFactory fixedSize = FixedSizeListFactoryImpl.INSTANCE;
+    public static final MutableListFactory multiReader = MultiReaderMutableListFactory.INSTANCE;
 
     private Lists()
     {

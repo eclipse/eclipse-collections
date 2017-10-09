@@ -14,11 +14,13 @@ import java.util.List;
 
 import org.eclipse.collections.api.factory.list.FixedSizeListFactory;
 import org.eclipse.collections.api.factory.list.ImmutableListFactory;
+import org.eclipse.collections.api.factory.list.MutableListFactory;
 import org.eclipse.collections.api.list.FixedSizeList;
 import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.list.mutable.FastList;
+import org.eclipse.collections.impl.list.mutable.MultiReaderFastList;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
 import org.junit.Test;
@@ -96,6 +98,18 @@ public class ListsTest
         Verify.assertInstanceOf(FixedSizeList.class, listFactory.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
         Assert.assertEquals(FastList.newListWith(1, 2, 3), listFactory.ofAll(FastList.newListWith(1, 2, 3)));
         Verify.assertInstanceOf(FixedSizeList.class, listFactory.ofAll(FastList.newListWith(1, 2, 3)));
+    }
+
+    @Test
+    public void multiReader()
+    {
+        MutableListFactory listFactory = Lists.multiReader;
+        Assert.assertEquals(MultiReaderFastList.newList(), listFactory.of());
+        Verify.assertInstanceOf(MultiReaderFastList.class, listFactory.of());
+        Assert.assertEquals(MultiReaderFastList.newListWith(1), listFactory.of(1));
+        Verify.assertInstanceOf(MultiReaderFastList.class, listFactory.of(1));
+        Assert.assertEquals(MultiReaderFastList.newListWith(1, 2, 3), listFactory.ofAll(FastList.newListWith(1, 2, 3)));
+        Verify.assertInstanceOf(MultiReaderFastList.class, listFactory.ofAll(FastList.newListWith(1, 2, 3)));
     }
 
     @Test
