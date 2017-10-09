@@ -36,6 +36,7 @@ import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.test.domain.Key;
 import org.eclipse.collections.impl.tuple.Tuples;
 import org.junit.Assert;
+import org.junit.Assume;
 import org.junit.Test;
 
 import static org.eclipse.collections.impl.factory.Iterables.mSet;
@@ -980,11 +981,12 @@ public class SetsTest
         MutableSet<String> set5 = Sets.mutable.withInitialCapacity(32);
         this.assertPresizedSetSizeEquals(32, (UnifiedSet<String>) set5);
 
-        Verify.assertThrows(IllegalArgumentException.class, () -> Sets.mutable.ofInitialCapacity(-6));
+        Verify.assertThrows(IllegalArgumentException.class, () -> Sets.mutable.withInitialCapacity(-6));
     }
 
     private void assertPresizedSetSizeEquals(int initialCapacity, UnifiedSet<String> set)
     {
+        Assume.assumeTrue(System.getProperty("java.version").startsWith("1.8."));
         try
         {
             Field tableField = UnifiedSet.class.getDeclaredField("table");
@@ -1001,15 +1003,15 @@ public class SetsTest
         }
         catch (SecurityException ignored)
         {
-            Assert.fail("Unable to modify the visibility of the table on UnifiedSet");
+            Assert.fail("Unable to modify the visibility of the field 'table' on UnifiedSet");
         }
         catch (NoSuchFieldException ignored)
         {
-            Assert.fail("No field named table UnifiedSet");
+            Assert.fail("No field named 'table' in UnifiedSet");
         }
         catch (IllegalAccessException ignored)
         {
-            Assert.fail("No access the field table in UnifiedSet");
+            Assert.fail("No access to the field 'table' in UnifiedSet");
         }
     }
 }

@@ -38,6 +38,22 @@ public interface MutableListFactory
     <T> MutableList<T> with(T... items);
 
     /**
+     * Same as {@link #empty()}. but takes in initial capacity.
+     */
+    default <T> MutableList<T> ofInitialCapacity(int capacity)
+    {
+        throw new UnsupportedOperationException("Adding default implementation so as to not break compatibility");
+    }
+
+    /**
+     * Same as {@link #empty()}. but takes in initial capacity.
+     */
+    default <T> MutableList<T> withInitialCapacity(int capacity)
+    {
+        throw new UnsupportedOperationException("Adding default implementation so as to not break compatibility");
+    }
+
+    /**
      * Same as {@link #withAll(Iterable)}.
      */
     <T> MutableList<T> ofAll(Iterable<? extends T> iterable);
