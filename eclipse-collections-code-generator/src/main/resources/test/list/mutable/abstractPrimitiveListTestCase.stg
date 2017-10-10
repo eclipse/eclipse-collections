@@ -1,4 +1,4 @@
-import "copyright.stg"
+import "copyrightAndOthers.stg"
 import "primitiveHashCode.stg"
 import "primitiveLiteral.stg"
 
@@ -13,7 +13,7 @@ class(primitive) ::= <<
 >>
 
 body(type, wrapperName, name) ::= <<
-<copyright()>
+<copyrightAndOthers()>
 
 package org.eclipse.collections.impl.list.mutable.primitive;
 
@@ -21,10 +21,14 @@ import org.eclipse.collections.api.iterator.<name>Iterator;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.list.primitive.Immutable<name>List;
 import org.eclipse.collections.api.list.primitive.Mutable<name>List;
+import org.eclipse.collections.api.tuple.primitive.<name>ObjectPair;
+import org.eclipse.collections.api.tuple.primitive.<name><name>Pair;
 import org.eclipse.collections.impl.collection.mutable.primitive.AbstractMutable<name>CollectionTestCase;
+import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.math.Mutable<wrapperName>;
 import org.eclipse.collections.impl.stack.mutable.primitive.<name>ArrayStack;
+import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -430,6 +434,64 @@ public abstract class Abstract<name>ListTestCase extends AbstractMutable<name>Co
         Mutable<wrapperName> result = list1.injectIntoWithIndex(new Mutable<wrapperName>(<(literal.(type))("0")>),
             (Mutable<wrapperName> object, <type> value, int index) -> object.add(<(castIntToNarrowTypeWithParens.(type))("value * list2.get(index)")>));
         Assert.assertEquals(new Mutable<wrapperName>(<(literal.(type))("14")>), result);
+    }
+
+    @Test
+    public void zip<name>()
+    {
+        Mutable<name>List list1 = this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">);
+        Mutable<name>List list2 = this.newWith(<["1", "2"]:(literal.(type))(); separator=", ">);
+        MutableList\<<name><name>Pair> zipSame = list1.zip<name>(list1);
+        Assert.assertEquals(
+                Lists.mutable.with(
+                    PrimitiveTuples.pair(<["1", "1"]:(literal.(type))(); separator=", ">),
+                    PrimitiveTuples.pair(<["2", "2"]:(literal.(type))(); separator=", ">),
+                    PrimitiveTuples.pair(<["3", "3"]:(literal.(type))(); separator=", ">)),
+                zipSame);
+        MutableList\<<name><name>Pair> zipLess = list1.zip<name>(list2);
+        Assert.assertEquals(
+                Lists.mutable.with(
+                    PrimitiveTuples.pair(<["1", "1"]:(literal.(type))(); separator=", ">),
+                    PrimitiveTuples.pair(<["2", "2"]:(literal.(type))(); separator=", ">)),
+                zipLess);
+        MutableList\<<name><name>Pair> zipMore = list2.zip<name>(list1);
+        Assert.assertEquals(
+                Lists.mutable.with(
+                    PrimitiveTuples.pair(<["1", "1"]:(literal.(type))(); separator=", ">),
+                    PrimitiveTuples.pair(<["2", "2"]:(literal.(type))(); separator=", ">)),
+                zipMore);
+        MutableList\<<name><name>Pair> zipEmpty = list1.zip<name>(this.newWith());
+        Assert.assertTrue(zipEmpty.isEmpty());
+    }
+
+    @Test
+    public void zip()
+    {
+        Mutable<name>List list1 = this.newWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">);
+        Mutable<name>List list2 = this.newWith(<["1", "2"]:(literal.(type))(); separator=", ">);
+        MutableList\<String> list3 = Lists.mutable.with("1", "2", "3");
+        MutableList\<String> list4 = Lists.mutable.with("1", "2");
+        MutableList\<<name>ObjectPair\<String\>> zipSame = list1.zip(list3);
+        Assert.assertEquals(
+                Lists.mutable.with(
+                    PrimitiveTuples.pair(<(literal.(type))("1")>, "1"),
+                    PrimitiveTuples.pair(<(literal.(type))("2")>, "2"),
+                    PrimitiveTuples.pair(<(literal.(type))("3")>, "3")),
+                zipSame);
+        MutableList\<<name>ObjectPair\<String\>> zipLess = list1.zip(list4);
+        Assert.assertEquals(
+                Lists.mutable.with(
+                    PrimitiveTuples.pair(<(literal.(type))("1")>, "1"),
+                    PrimitiveTuples.pair(<(literal.(type))("2")>, "2")),
+                zipLess);
+        MutableList\<<name>ObjectPair\<String\>> zipMore = list2.zip(list3);
+        Assert.assertEquals(
+                Lists.mutable.with(
+                    PrimitiveTuples.pair(<(literal.(type))("1")>, "1"),
+                    PrimitiveTuples.pair(<(literal.(type))("2")>, "2")),
+                zipMore);
+        MutableList\<<name>ObjectPair\<String\>> zipEmpty = list1.zip(Lists.mutable.empty());
+        Assert.assertTrue(zipEmpty.isEmpty());
     }
 }
 

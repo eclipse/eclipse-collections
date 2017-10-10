@@ -20,6 +20,10 @@ import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
 import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
 import org.eclipse.collections.api.collection.primitive.Immutable<name>Collection;
 import org.eclipse.collections.api.list.ImmutableList;
+import org.eclipse.collections.api.list.ListIterable;
+import org.eclipse.collections.api.list.MutableList;
+import org.eclipse.collections.api.tuple.primitive.<name><name>Pair;
+import org.eclipse.collections.api.tuple.primitive.<name>ObjectPair;
 
 /**
  * This file was automatically generated from template file immutablePrimitiveList.stg.
@@ -56,6 +60,30 @@ public interface Immutable<name>List extends Immutable<name>Collection, <name>Li
 
     @Override
     Immutable<name>List subList(int fromIndex, int toIndex);
+
+    /**
+     * Returns an {@code ImmutableList} formed from this {@code Immutable<name>List} and another {@code <name>List} by
+     * combining corresponding elements in pairs. If one of the two {@code <name>List}s is longer than the other, its
+     * remaining elements are ignored.
+     *
+     * @since 9.1.
+     */
+    default ImmutableList\<<name><name>Pair> zip<name>(<name>List list)
+    {
+        throw new UnsupportedOperationException("Default method to prevent breaking backwards compatibility");
+    }
+
+    /**
+     * Returns an {@code ImmutableList} formed from this {@code Immutable<name>List} and a {@code ListIterable} by
+     * combining corresponding elements in pairs. If one of the two Lists is longer than the other, its
+     * remaining elements are ignored.
+     *
+     * @since 9.1.
+     */
+    default \<T> ImmutableList\<<name>ObjectPair\<T\>> zip(ListIterable\<T> list)
+    {
+        throw new UnsupportedOperationException("Default method to prevent breaking backwards compatibility");
+    }
 }
 
 >>

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2017 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -26,16 +26,22 @@ import org.eclipse.collections.api.block.procedure.primitive.CharIntProcedure;
 import org.eclipse.collections.api.block.procedure.primitive.CharProcedure;
 import org.eclipse.collections.api.iterator.CharIterator;
 import org.eclipse.collections.api.list.ImmutableList;
+import org.eclipse.collections.api.list.ListIterable;
+import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.list.primitive.CharList;
 import org.eclipse.collections.api.list.primitive.ImmutableCharList;
 import org.eclipse.collections.api.list.primitive.MutableCharList;
 import org.eclipse.collections.api.set.primitive.MutableCharSet;
+import org.eclipse.collections.api.tuple.primitive.CharCharPair;
+import org.eclipse.collections.api.tuple.primitive.CharObjectPair;
 import org.eclipse.collections.impl.bag.mutable.primitive.CharHashBag;
+import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.lazy.primitive.ReverseCharIterable;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.list.mutable.primitive.CharArrayList;
 import org.eclipse.collections.impl.primitive.AbstractCharIterable;
 import org.eclipse.collections.impl.set.mutable.primitive.CharHashSet;
+import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.eclipse.collections.impl.utility.StringIterate;
 
 /**
@@ -529,6 +535,38 @@ public class CharAdapter extends AbstractCharIterable implements CharSequence, I
             hashCode = 31 * hashCode + (int) item;
         }
         return hashCode;
+    }
+
+    /**
+     * @since 9.1.
+     */
+    @Override
+    public ImmutableList<CharCharPair> zipChar(CharList list)
+    {
+        MutableList<CharCharPair> target = Lists.mutable.empty();
+        int size = this.size();
+        int othersize = list.size();
+        for (int i = 0; i < size && i < othersize; i++)
+        {
+            target.add(PrimitiveTuples.pair(this.get(i), list.get(i)));
+        }
+        return target.toImmutable();
+    }
+
+    /**
+     * @since 9.1.
+     */
+    @Override
+    public <T> ImmutableList<CharObjectPair<T>> zip(ListIterable<T> list)
+    {
+        MutableList<CharObjectPair<T>> target = Lists.mutable.empty();
+        int size = this.size();
+        int othersize = list.size();
+        for (int i = 0; i < size && i < othersize; i++)
+        {
+            target.add(PrimitiveTuples.pair(this.get(i), list.get(i)));
+        }
+        return target.toImmutable();
     }
 
     private class InternalCharIterator implements CharIterator
