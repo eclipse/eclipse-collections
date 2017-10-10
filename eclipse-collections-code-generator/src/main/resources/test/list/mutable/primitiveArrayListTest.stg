@@ -19,7 +19,6 @@ package org.eclipse.collections.impl.list.mutable.primitive;
 
 import java.lang.reflect.Field;
 
-import org.eclipse.collections.api.list.primitive.Immutable<name>List;
 import org.eclipse.collections.impl.factory.primitive.<name>Lists;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.utility.internal.primitive.<name>IterableIterate;

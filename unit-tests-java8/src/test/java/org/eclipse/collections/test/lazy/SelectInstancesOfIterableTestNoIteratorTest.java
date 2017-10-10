@@ -22,7 +22,6 @@ import org.eclipse.collections.test.list.mutable.FastListNoIterator;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static org.eclipse.collections.impl.test.Verify.assertThrows;
 import static org.eclipse.collections.test.IterableTestCase.assertEquals;
 import static org.junit.Assert.assertSame;
 

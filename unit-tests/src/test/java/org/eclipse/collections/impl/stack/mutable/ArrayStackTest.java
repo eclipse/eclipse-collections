@@ -11,10 +11,8 @@
 package org.eclipse.collections.impl.stack.mutable;
 
 import org.eclipse.collections.api.stack.MutableStack;
-import org.eclipse.collections.impl.block.factory.Predicates;
 import org.eclipse.collections.impl.factory.Stacks;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
 import org.junit.Test;
 
 /**

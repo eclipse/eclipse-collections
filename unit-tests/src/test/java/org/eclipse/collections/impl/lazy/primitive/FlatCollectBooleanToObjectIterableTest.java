@@ -15,7 +15,6 @@ import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.impl.block.factory.Predicates;
 import org.eclipse.collections.impl.block.factory.Predicates2;
-import org.eclipse.collections.impl.block.factory.Predicates2Test;
 import org.eclipse.collections.impl.block.factory.Procedures;
 import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.list.mutable.FastList;

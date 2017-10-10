@@ -11,7 +11,6 @@
 package org.eclipse.collections.impl.block;
 
 import java.io.IOException;
-import java.util.function.BiFunction;
 
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function0;

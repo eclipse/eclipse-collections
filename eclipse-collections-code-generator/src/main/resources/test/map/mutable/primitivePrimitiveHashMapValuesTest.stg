@@ -34,7 +34,7 @@ import org.eclipse.collections.impl.block.factory.primitive.<name2>Predicates;
 import org.eclipse.collections.impl.collection.mutable.primitive.AbstractMutable<name2>CollectionTestCase;
 import org.eclipse.collections.impl.collection.mutable.primitive.Synchronized<name2>Collection;
 import org.eclipse.collections.impl.collection.mutable.primitive.Unmodifiable<name2>Collection;
-<if(primitive2.floatingPoint)>import org.eclipse.collections.impl.list.Interval;<endif>
+<if(primitive2.floatOrDoublePrimitive)><if(primitive1.byteOrShortOrCharPrimitive)>import org.eclipse.collections.impl.list.Interval;<endif><endif>
 import org.eclipse.collections.impl.list.mutable.primitive.<name2>ArrayList;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;

@@ -14,14 +14,12 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.Optional;
 
-import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.procedure.Procedure;
 
 /**
  * BigDecimalSummaryStatistics can be used to keep a rolling count, sum, min, max and average of BigDecimal values.
  *
- * @see Collectors2#summarizingBigDecimal(Function)
- *
+ * @see Collectors2#summarizingBigDecimal(org.eclipse.collections.api.block.function.Function)
  * @since 8.1
  */
 public class BigDecimalSummaryStatistics implements Procedure<BigDecimal>

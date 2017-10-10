@@ -15,13 +15,12 @@ import java.math.BigInteger;
 import java.math.MathContext;
 import java.util.Optional;
 
-import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.procedure.Procedure;
 
 /**
  * BigIntegerSummaryStatistics can be used to keep a rolling count, sum, min, max and average of BigInteger values.
  *
- * @see Collectors2#summarizingBigInteger(Function)
+ * @see Collectors2#summarizingBigInteger(org.eclipse.collections.api.block.function.Function)
  *
  * @since 8.1
  */

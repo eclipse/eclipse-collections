@@ -20,30 +20,13 @@ body(type, name, wrapperName) ::= <<
 
 package org.eclipse.collections.impl.map.mutable.primitive;
 
-import java.util.NoSuchElementException;
-
-import org.eclipse.collections.api.<name>Iterable;
 import org.eclipse.collections.api.block.HashingStrategy;
-import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
-import org.eclipse.collections.api.collection.primitive.Mutable<name>Collection;
-import org.eclipse.collections.api.iterator.<name>Iterator;
-import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.primitive.MutableObject<name>Map;
 import org.eclipse.collections.impl.block.factory.HashingStrategies;
-import org.eclipse.collections.impl.block.factory.primitive.<name>Predicates;
-import org.eclipse.collections.impl.collection.mutable.primitive.AbstractMutable<name>CollectionTestCase;
-import org.eclipse.collections.impl.collection.mutable.primitive.Synchronized<name>Collection;
-import org.eclipse.collections.impl.collection.mutable.primitive.Unmodifiable<name>Collection;
-import org.eclipse.collections.impl.list.mutable.FastList;
-import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
-import org.eclipse.collections.impl.test.Verify;
-import org.eclipse.collections.impl.test.domain.Person;
-import org.junit.Assert;
-import org.junit.Test;
 
 /**
  * JUnit test for {@link Object<name>HashMapWithHashingStrategyWithHashingStrategy#values()}.
- * This file was automatically generated from template file objectPrimitiveHashMapValuesTest.stg.
+ * This file was automatically generated from template file objectPrimitiveHashMapWithHashingStrategyValuesTest.stg.
  */
 public class Object<name>HashMapWithHashingStrategyValuesTest extends Object<name>HashMapValuesTestCase
 {

@@ -20,17 +20,7 @@ body(type, name, wrapperName) ::= <<
 
 package org.eclipse.collections.impl.map.mutable.primitive;
 
-import java.lang.reflect.Field;
-import java.util.Iterator;
-
-import org.eclipse.collections.api.block.function.primitive.<name>Function;
-import org.eclipse.collections.api.block.function.primitive.<name>Function0;
-import org.eclipse.collections.api.block.function.primitive.<name>To<name>Function;
 import org.eclipse.collections.api.map.primitive.MutableObject<name>Map;
-import org.eclipse.collections.impl.factory.primitive.Object<name>Maps;
-import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
-import org.junit.Test;
 
 /**
  * JUnit test for {@link Object<name>HashMap}.

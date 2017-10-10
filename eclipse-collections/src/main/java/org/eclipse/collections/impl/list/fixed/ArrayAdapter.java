@@ -20,8 +20,6 @@ import java.util.Comparator;
 import java.util.Spliterator;
 import java.util.Spliterators;
 
-import org.eclipse.collections.api.block.predicate.Predicate;
-import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.list.FixedSizeList;
 import org.eclipse.collections.impl.block.factory.Predicates2;
@@ -33,7 +31,7 @@ import org.eclipse.collections.impl.utility.Iterate;
  * semantics of an array are maintained and thus mutating List interface methods such as {@link #add(Object)}, {@link
  * #addAll(Collection)}, {@link #remove(Object)}, {@link #removeAll(Collection)}, etc. are not supported and will throw
  * an {@link UnsupportedOperationException}.  In addition, the mutating iteration methods {@link
- * #removeIf(Predicate)} and {@link #removeIfWith(Predicate2, Object)} are not supported and will also
+ * #removeIf(org.eclipse.collections.api.block.predicate.Predicate)} and {@link #removeIfWith(org.eclipse.collections.api.block.predicate.Predicate2, Object)} are not supported and will also
  * throw an {@link UnsupportedOperationException}.
  * <p>
  * The {@link #with(Object)} method is not an exception to the above restrictions, as it will create a new

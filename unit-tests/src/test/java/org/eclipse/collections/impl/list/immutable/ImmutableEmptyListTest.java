@@ -21,7 +21,6 @@ import org.eclipse.collections.api.list.ListIterable;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.partition.list.PartitionImmutableList;
 import org.eclipse.collections.api.tuple.Pair;
-import org.eclipse.collections.impl.block.factory.HashingStrategies;
 import org.eclipse.collections.impl.block.factory.ObjectIntProcedures;
 import org.eclipse.collections.impl.block.factory.Predicates;
 import org.eclipse.collections.impl.block.factory.Predicates2;

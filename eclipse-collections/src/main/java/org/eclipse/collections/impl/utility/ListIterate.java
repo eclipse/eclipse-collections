@@ -52,7 +52,6 @@ import org.eclipse.collections.api.collection.primitive.MutableFloatCollection;
 import org.eclipse.collections.api.collection.primitive.MutableIntCollection;
 import org.eclipse.collections.api.collection.primitive.MutableLongCollection;
 import org.eclipse.collections.api.collection.primitive.MutableShortCollection;
-import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.ListIterable;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.list.primitive.MutableBooleanList;
