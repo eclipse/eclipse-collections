@@ -220,6 +220,70 @@ public class ListsTest
     }
 
     @Test
+    public void multiReaderOfInitialCapacity()
+    {
+        MutableList<String> list1 = Lists.multiReader.ofInitialCapacity(0);
+        ListsTest.assertPresizedMultiReaderListEquals(0, (MultiReaderFastList<String>) list1);
+
+        MutableList<String> list2 = Lists.multiReader.ofInitialCapacity(5);
+        ListsTest.assertPresizedMultiReaderListEquals(5, (MultiReaderFastList<String>) list2);
+
+        MutableList<String> list3 = Lists.multiReader.ofInitialCapacity(20);
+        ListsTest.assertPresizedMultiReaderListEquals(20, (MultiReaderFastList<String>) list3);
+
+        MutableList<String> list4 = Lists.multiReader.ofInitialCapacity(60);
+        ListsTest.assertPresizedMultiReaderListEquals(60, (MultiReaderFastList<String>) list4);
+
+        MutableList<String> list5 = Lists.multiReader.ofInitialCapacity(64);
+        ListsTest.assertPresizedMultiReaderListEquals(64, (MultiReaderFastList<String>) list5);
+
+        MutableList<String> list6 = Lists.multiReader.ofInitialCapacity(65);
+        ListsTest.assertPresizedMultiReaderListEquals(65, (MultiReaderFastList<String>) list6);
+
+        Verify.assertThrows(IllegalArgumentException.class, () -> Lists.multiReader.ofInitialCapacity(-12));
+    }
+
+    @Test
+    public void multiReaderWithInitialCapacity()
+    {
+        MutableList<String> list1 = Lists.multiReader.withInitialCapacity(0);
+        ListsTest.assertPresizedMultiReaderListEquals(0, (MultiReaderFastList<String>) list1);
+
+        MutableList<String> list2 = Lists.multiReader.withInitialCapacity(14);
+        ListsTest.assertPresizedMultiReaderListEquals(14, (MultiReaderFastList<String>) list2);
+
+        MutableList<String> list3 = Lists.multiReader.withInitialCapacity(17);
+        ListsTest.assertPresizedMultiReaderListEquals(17, (MultiReaderFastList<String>) list3);
+
+        MutableList<String> list4 = Lists.multiReader.withInitialCapacity(25);
+        ListsTest.assertPresizedMultiReaderListEquals(25, (MultiReaderFastList<String>) list4);
+
+        MutableList<String> list5 = Lists.multiReader.withInitialCapacity(32);
+        ListsTest.assertPresizedMultiReaderListEquals(32, (MultiReaderFastList<String>) list5);
+
+        Verify.assertThrows(IllegalArgumentException.class, () -> Lists.multiReader.withInitialCapacity(-6));
+    }
+
+    private static void assertPresizedMultiReaderListEquals(int initialCapacity, MultiReaderFastList<String> list)
+    {
+        Assume.assumeTrue(System.getProperty("java.version").startsWith("1.8."));
+        try
+        {
+            Field delegateField = MultiReaderFastList.class.getDeclaredField("delegate");
+            delegateField.setAccessible(true);
+            FastList<String> delegate = (FastList<String>) delegateField.get(list);
+            Field itemsField = FastList.class.getDeclaredField("items");
+            itemsField.setAccessible(true);
+            Object[] items = (Object[]) itemsField.get(delegate);
+            Assert.assertEquals(initialCapacity, items.length);
+        }
+        catch (SecurityException | NoSuchFieldException | IllegalAccessException e)
+        {
+            throw new AssertionError(e);
+        }
+    }
+
+    @Test
     public void newListWith()
     {
         ImmutableList<String> list = Lists.immutable.of();
