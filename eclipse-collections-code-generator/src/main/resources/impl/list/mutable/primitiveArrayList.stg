@@ -1,4 +1,4 @@
-import "copyright.stg"
+import "copyrightAndOthers.stg"
 import "primitiveEquals.stg"
 import "primitiveHashCode.stg"
 import "primitiveLiteral.stg"
@@ -12,7 +12,7 @@ class(primitive) ::= <<
 >>
 
 body(type, name) ::= <<
-<copyright()>
+<copyrightAndOthers()>
 
 package org.eclipse.collections.impl.list.mutable.primitive;
 
@@ -34,17 +34,22 @@ import org.eclipse.collections.api.block.procedure.primitive.<name>IntProcedure;
 import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
 import org.eclipse.collections.api.collection.primitive.Mutable<name>Collection;
 import org.eclipse.collections.api.iterator.Mutable<name>Iterator;
+import org.eclipse.collections.api.list.ListIterable;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.list.primitive.<name>List;
 import org.eclipse.collections.api.list.primitive.Immutable<name>List;
 import org.eclipse.collections.api.list.primitive.Mutable<name>List;
 import org.eclipse.collections.api.set.primitive.<name>Set;
 import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
+import org.eclipse.collections.api.tuple.primitive.<name><name>Pair;
+import org.eclipse.collections.api.tuple.primitive.<name>ObjectPair;
+import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.primitive.<name>Lists;
 import org.eclipse.collections.impl.lazy.primitive.Reverse<name>Iterable;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.primitive.Abstract<name>Iterable;
 import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
+import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 
 /**
  * <name>ArrayList is similar to {@link FastList}, and is memory-optimized for <type> primitives.
@@ -949,6 +954,38 @@ public class <name>ArrayList extends Abstract<name>Iterable
     public Mutable<name>List subList(int fromIndex, int toIndex)
     {
         throw new UnsupportedOperationException("subList not yet implemented!");
+    }
+
+    /**
+     * @since 9.1.
+     */
+    @Override
+    public MutableList\<<name><name>Pair> zip<name>(<name>List list)
+    {
+        MutableList\<<name><name>Pair> target = Lists.mutable.empty();
+        int size = this.size();
+        int othersize = list.size();
+        for (int i = 0; i \< size && i \< othersize; i++)
+        {
+            target.add(PrimitiveTuples.pair(this.items[i], list.get(i)));
+        }
+        return target;
+    }
+
+    /**
+     * @since 9.1.
+     */
+    @Override
+    public \<T> MutableList\<<name>ObjectPair\<T\>> zip(ListIterable\<T> list)
+    {
+        MutableList\<<name>ObjectPair\<T\>> target = Lists.mutable.empty();
+        int size = this.size();
+        int othersize = list.size();
+        for (int i = 0; i \< size && i \< othersize; i++)
+        {
+            target.add(PrimitiveTuples.pair(this.items[i], list.get(i)));
+        }
+        return target;
     }
 
     private class Internal<name>Iterator implements Mutable<name>Iterator

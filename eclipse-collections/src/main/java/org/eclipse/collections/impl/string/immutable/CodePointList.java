@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2017 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -25,13 +25,19 @@ import org.eclipse.collections.api.block.procedure.primitive.IntIntProcedure;
 import org.eclipse.collections.api.block.procedure.primitive.IntProcedure;
 import org.eclipse.collections.api.iterator.IntIterator;
 import org.eclipse.collections.api.list.ImmutableList;
+import org.eclipse.collections.api.list.ListIterable;
+import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.list.primitive.ImmutableIntList;
 import org.eclipse.collections.api.list.primitive.IntList;
 import org.eclipse.collections.api.list.primitive.MutableIntList;
 import org.eclipse.collections.api.set.primitive.MutableIntSet;
+import org.eclipse.collections.api.tuple.primitive.IntIntPair;
+import org.eclipse.collections.api.tuple.primitive.IntObjectPair;
+import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.primitive.IntLists;
 import org.eclipse.collections.impl.list.mutable.primitive.IntArrayList;
 import org.eclipse.collections.impl.primitive.AbstractIntIterable;
+import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 
 /**
  * Calculates and provides the code points stored in a String as an ImmutableIntList.  This is a cleaner more OO way of
@@ -443,5 +449,37 @@ public class CodePointList extends AbstractIntIterable implements CharSequence, 
     public int hashCode()
     {
         return this.codePoints.hashCode();
+    }
+
+    /**
+     * @since 9.1.
+     */
+    @Override
+    public ImmutableList<IntIntPair> zipInt(IntList list)
+    {
+        MutableList<IntIntPair> target = Lists.mutable.empty();
+        int size = this.size();
+        int othersize = list.size();
+        for (int i = 0; i < size && i < othersize; i++)
+        {
+            target.add(PrimitiveTuples.pair(this.get(i), list.get(i)));
+        }
+        return target.toImmutable();
+    }
+
+    /**
+     * @since 9.1.
+     */
+    @Override
+    public <T> ImmutableList<IntObjectPair<T>> zip(ListIterable<T> list)
+    {
+        MutableList<IntObjectPair<T>> target = Lists.mutable.empty();
+        int size = this.size();
+        int othersize = list.size();
+        for (int i = 0; i < size && i < othersize; i++)
+        {
+            target.add(PrimitiveTuples.pair(this.get(i), list.get(i)));
+        }
+        return target.toImmutable();
     }
 }

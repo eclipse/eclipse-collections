@@ -19,7 +19,10 @@ import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFuncti
 import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
 import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
 import org.eclipse.collections.api.collection.primitive.Mutable<name>Collection;
+import org.eclipse.collections.api.list.ListIterable;
 import org.eclipse.collections.api.list.MutableList;
+import org.eclipse.collections.api.tuple.primitive.<name><name>Pair;
+import org.eclipse.collections.api.tuple.primitive.<name>ObjectPair;
 
 /**
  * This file was automatically generated from template file mutablePrimitiveList.stg.
@@ -80,6 +83,30 @@ public interface Mutable<name>List extends Mutable<name>Collection, <name>List
 
     @Override
     Mutable<name>List subList(int fromIndex, int toIndex);
+
+    /**
+     * Returns a {@code MutableList} formed from this {@code Mutable<name>List} and another {@code <name>List} by
+     * combining corresponding elements in pairs. If one of the two {@code <name>List}s is longer than the other, its
+     * remaining elements are ignored.
+     *
+     * @since 9.1.
+     */
+    default MutableList\<<name><name>Pair> zip<name>(<name>List list)
+    {
+        throw new UnsupportedOperationException("Default method to prevent breaking backwards compatibility");
+    }
+
+    /**
+     * Returns a {@code MutableList} formed from this {@code Mutable<name>List} and a {@code ListIterable} by
+     * combining corresponding elements in pairs. If one of the two Lists is longer than the other, its
+     * remaining elements are ignored.
+     *
+     * @since 9.1.
+     */
+    default \<T> MutableList\<<name>ObjectPair\<T\>> zip(ListIterable\<T> list)
+    {
+        throw new UnsupportedOperationException("Default method to prevent breaking backwards compatibility");
+    }
 }
 
 >>
