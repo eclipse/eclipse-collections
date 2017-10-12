@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import org.eclipse.collections.api.<name>Iterable;
@@ -51,6 +52,7 @@ import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
 import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
+import org.eclipse.collections.impl.utility.Iterate;
 
 /**
  * Immutable<name>ArrayList is the non-modifiable equivalent of {@link <name>ArrayList}.
@@ -709,14 +711,15 @@ final class Immutable<name>ArrayList
      * @since 9.1.
      */
     @Override
-    public ImmutableList\<<name><name>Pair> zip<name>(<name>List list)
+    public ImmutableList\<<name><name>Pair> zip<name>(<name>Iterable iterable)
     {
-        MutableList\<<name><name>Pair> target = Lists.mutable.empty();
         int size = this.size();
-        int othersize = list.size();
-        for (int i = 0; i \< size && i \< othersize; i++)
+        int otherSize = iterable.size();
+        MutableList\<<name><name>Pair> target = Lists.mutable.withInitialCapacity(Math.min(size, otherSize));
+        <name>Iterator iterator = iterable.<type>Iterator();
+        for (int i = 0; i \< size && iterator.hasNext(); i++)
         {
-            target.add(PrimitiveTuples.pair(this.items[i], list.get(i)));
+            target.add(PrimitiveTuples.pair(this.items[i], iterator.next()));
         }
         return target.toImmutable();
     }
@@ -725,14 +728,15 @@ final class Immutable<name>ArrayList
      * @since 9.1.
      */
     @Override
-    public \<T> ImmutableList\<<name>ObjectPair\<T\>> zip(ListIterable\<T> list)
+    public \<T> ImmutableList\<<name>ObjectPair\<T\>> zip(Iterable\<T> iterable)
     {
-        MutableList\<<name>ObjectPair\<T\>> target = Lists.mutable.empty();
         int size = this.size();
-        int othersize = list.size();
-        for (int i = 0; i \< size && i \< othersize; i++)
+        int otherSize = Iterate.sizeOf(iterable);
+        MutableList\<<name>ObjectPair\<T\>> target = Lists.mutable.withInitialCapacity(Math.min(size, otherSize));
+        Iterator\<T> iterator = iterable.iterator();
+        for (int i = 0; i \< size && iterator.hasNext(); i++)
         {
-            target.add(PrimitiveTuples.pair(this.items[i], list.get(i)));
+            target.add(PrimitiveTuples.pair(this.items[i], iterator.next()));
         }
         return target.toImmutable();
     }

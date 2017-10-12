@@ -448,7 +448,20 @@ public abstract class Abstract<name>ListTestCase extends AbstractMutable<name>Co
                     PrimitiveTuples.pair(<["2", "2"]:(literal.(type))(); separator=", ">),
                     PrimitiveTuples.pair(<["3", "3"]:(literal.(type))(); separator=", ">)),
                 zipSame);
+        MutableList\<<name><name>Pair> zipSameLazy = list1.zip<name>(list1.asLazy());
+        Assert.assertEquals(
+                Lists.mutable.with(
+                    PrimitiveTuples.pair(<["1", "1"]:(literal.(type))(); separator=", ">),
+                    PrimitiveTuples.pair(<["2", "2"]:(literal.(type))(); separator=", ">),
+                    PrimitiveTuples.pair(<["3", "3"]:(literal.(type))(); separator=", ">)),
+                zipSameLazy);
         MutableList\<<name><name>Pair> zipLess = list1.zip<name>(list2);
+        Assert.assertEquals(
+                Lists.mutable.with(
+                    PrimitiveTuples.pair(<["1", "1"]:(literal.(type))(); separator=", ">),
+                    PrimitiveTuples.pair(<["2", "2"]:(literal.(type))(); separator=", ">)),
+                zipLess);
+        MutableList\<<name><name>Pair> zipLessLazy = list1.zip<name>(list2.asLazy());
         Assert.assertEquals(
                 Lists.mutable.with(
                     PrimitiveTuples.pair(<["1", "1"]:(literal.(type))(); separator=", ">),
@@ -460,6 +473,12 @@ public abstract class Abstract<name>ListTestCase extends AbstractMutable<name>Co
                     PrimitiveTuples.pair(<["1", "1"]:(literal.(type))(); separator=", ">),
                     PrimitiveTuples.pair(<["2", "2"]:(literal.(type))(); separator=", ">)),
                 zipMore);
+        MutableList\<<name><name>Pair> zipMoreLazy = list2.zip<name>(list1.asLazy());
+        Assert.assertEquals(
+                Lists.mutable.with(
+                    PrimitiveTuples.pair(<["1", "1"]:(literal.(type))(); separator=", ">),
+                    PrimitiveTuples.pair(<["2", "2"]:(literal.(type))(); separator=", ">)),
+                zipMoreLazy);
         MutableList\<<name><name>Pair> zipEmpty = list1.zip<name>(this.newWith());
         Assert.assertTrue(zipEmpty.isEmpty());
     }
@@ -478,18 +497,37 @@ public abstract class Abstract<name>ListTestCase extends AbstractMutable<name>Co
                     PrimitiveTuples.pair(<(literal.(type))("2")>, "2"),
                     PrimitiveTuples.pair(<(literal.(type))("3")>, "3")),
                 zipSame);
+        MutableList\<<name>ObjectPair\<String\>> zipSameLazy = list1.zip(list3.asLazy());
+        Assert.assertEquals(
+                Lists.mutable.with(
+                    PrimitiveTuples.pair(<(literal.(type))("1")>, "1"),
+                    PrimitiveTuples.pair(<(literal.(type))("2")>, "2"),
+                    PrimitiveTuples.pair(<(literal.(type))("3")>, "3")),
+                zipSameLazy);
         MutableList\<<name>ObjectPair\<String\>> zipLess = list1.zip(list4);
         Assert.assertEquals(
                 Lists.mutable.with(
                     PrimitiveTuples.pair(<(literal.(type))("1")>, "1"),
                     PrimitiveTuples.pair(<(literal.(type))("2")>, "2")),
                 zipLess);
+        MutableList\<<name>ObjectPair\<String\>> zipLessLazy = list1.zip(list4.asLazy());
+        Assert.assertEquals(
+                Lists.mutable.with(
+                    PrimitiveTuples.pair(<(literal.(type))("1")>, "1"),
+                    PrimitiveTuples.pair(<(literal.(type))("2")>, "2")),
+                zipLessLazy);
         MutableList\<<name>ObjectPair\<String\>> zipMore = list2.zip(list3);
         Assert.assertEquals(
                 Lists.mutable.with(
                     PrimitiveTuples.pair(<(literal.(type))("1")>, "1"),
                     PrimitiveTuples.pair(<(literal.(type))("2")>, "2")),
                 zipMore);
+        MutableList\<<name>ObjectPair\<String\>> zipMoreLazy = list2.zip(list3.asLazy());
+        Assert.assertEquals(
+                Lists.mutable.with(
+                    PrimitiveTuples.pair(<(literal.(type))("1")>, "1"),
+                    PrimitiveTuples.pair(<(literal.(type))("2")>, "2")),
+                zipMoreLazy);
         MutableList\<<name>ObjectPair\<String\>> zipEmpty = list1.zip(Lists.mutable.empty());
         Assert.assertTrue(zipEmpty.isEmpty());
     }

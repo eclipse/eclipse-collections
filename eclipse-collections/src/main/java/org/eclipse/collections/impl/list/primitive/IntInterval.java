@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2017 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -13,6 +13,7 @@ package org.eclipse.collections.impl.list.primitive;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import org.eclipse.collections.api.IntIterable;
@@ -26,18 +27,24 @@ import org.eclipse.collections.api.block.procedure.primitive.IntIntProcedure;
 import org.eclipse.collections.api.block.procedure.primitive.IntProcedure;
 import org.eclipse.collections.api.iterator.IntIterator;
 import org.eclipse.collections.api.list.ImmutableList;
+import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.list.primitive.ImmutableIntList;
 import org.eclipse.collections.api.list.primitive.IntList;
 import org.eclipse.collections.api.list.primitive.MutableIntList;
 import org.eclipse.collections.api.set.primitive.MutableIntSet;
+import org.eclipse.collections.api.tuple.primitive.IntIntPair;
+import org.eclipse.collections.api.tuple.primitive.IntObjectPair;
 import org.eclipse.collections.impl.bag.mutable.primitive.IntHashBag;
 import org.eclipse.collections.impl.block.factory.primitive.IntPredicates;
+import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.lazy.primitive.CollectIntToObjectIterable;
 import org.eclipse.collections.impl.lazy.primitive.LazyIntIterableAdapter;
 import org.eclipse.collections.impl.lazy.primitive.ReverseIntIterable;
 import org.eclipse.collections.impl.lazy.primitive.SelectIntIterable;
 import org.eclipse.collections.impl.list.mutable.primitive.IntArrayList;
 import org.eclipse.collections.impl.set.mutable.primitive.IntHashSet;
+import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
+import org.eclipse.collections.impl.utility.Iterate;
 
 /**
  * An IntInterval is a range of ints that may be iterated over using a step value.
@@ -888,6 +895,36 @@ public final class IntInterval
     public ImmutableIntList newWithoutAll(IntIterable elements)
     {
         return IntArrayList.newList(this).withoutAll(elements).toImmutable();
+    }
+
+    @Override
+    public ImmutableList<IntIntPair> zipInt(IntIterable iterable)
+    {
+        int size = this.size();
+        int othersize = iterable.size();
+        MutableList<IntIntPair> target = Lists.mutable.withInitialCapacity(Math.min(size, othersize));
+        IntIterator iterator = this.intIterator();
+        IntIterator otherIterator = iterable.intIterator();
+        for (int i = 0; i < size && otherIterator.hasNext(); i++)
+        {
+            target.add(PrimitiveTuples.pair(iterator.next(), otherIterator.next()));
+        }
+        return target.toImmutable();
+    }
+
+    @Override
+    public <T> ImmutableList<IntObjectPair<T>> zip(Iterable<T> iterable)
+    {
+        int size = this.size();
+        int othersize = Iterate.sizeOf(iterable);
+        MutableList<IntObjectPair<T>> target = Lists.mutable.withInitialCapacity(Math.min(size, othersize));
+        IntIterator iterator = this.intIterator();
+        Iterator<T> otherIterator = iterable.iterator();
+        for (int i = 0; i < size && otherIterator.hasNext(); i++)
+        {
+            target.add(PrimitiveTuples.pair(iterator.next(), otherIterator.next()));
+        }
+        return target.toImmutable();
     }
 
     private class IntIntervalIterator implements IntIterator

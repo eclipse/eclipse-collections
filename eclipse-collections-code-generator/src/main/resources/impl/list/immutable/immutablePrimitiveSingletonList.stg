@@ -16,6 +16,7 @@ body(type, name) ::= <<
 
 package org.eclipse.collections.impl.list.immutable.primitive;
 
+import java.lang.Iterable;
 import java.io.IOException;
 import java.io.Serializable;
 
@@ -46,6 +47,7 @@ import org.eclipse.collections.impl.lazy.primitive.Reverse<name>Iterable;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
 import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
+import org.eclipse.collections.impl.utility.Iterate;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 
 /**
@@ -407,26 +409,26 @@ final class Immutable<name>SingletonList implements Immutable<name>List, Seriali
      * @since 9.1.
      */
     @Override
-    public ImmutableList\<<name><name>Pair> zip<name>(<name>List list)
+    public ImmutableList\<<name><name>Pair> zip<name>(<name>Iterable iterable)
     {
-        if (list.isEmpty())
+        if (iterable.isEmpty())
         {
             return Lists.immutable.empty();
         }
-        return Lists.immutable.with(PrimitiveTuples.pair(this.element1, list.get(0)));
+        return Lists.immutable.with(PrimitiveTuples.pair(this.element1, iterable.<type>Iterator().next()));
     }
 
     /**
      * @since 9.1.
      */
     @Override
-    public \<T> ImmutableList\<<name>ObjectPair\<T\>> zip(ListIterable\<T> list)
+    public \<T> ImmutableList\<<name>ObjectPair\<T\>> zip(Iterable\<T> iterable)
     {
-        if (list.isEmpty())
+        if (Iterate.isEmpty(iterable))
         {
             return Lists.immutable.empty();
         }
-        return Lists.immutable.with(PrimitiveTuples.pair(this.element1, list.get(0)));
+        return Lists.immutable.with(PrimitiveTuples.pair(this.element1, Iterate.getFirst(iterable)));
     }
 }
 
