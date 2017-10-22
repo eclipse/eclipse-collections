@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2017 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -14,8 +14,13 @@ import java.util.NoSuchElementException;
 
 import org.eclipse.collections.api.LazyIntIterable;
 import org.eclipse.collections.api.iterator.IntIterator;
+import org.eclipse.collections.api.list.ImmutableList;
+import org.eclipse.collections.api.list.primitive.MutableIntList;
+import org.eclipse.collections.api.tuple.primitive.IntIntPair;
+import org.eclipse.collections.api.tuple.primitive.IntObjectPair;
 import org.eclipse.collections.impl.bag.mutable.primitive.IntHashBag;
 import org.eclipse.collections.impl.block.factory.primitive.IntPredicates;
+import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.primitive.BooleanLists;
 import org.eclipse.collections.impl.factory.primitive.ByteLists;
 import org.eclipse.collections.impl.factory.primitive.CharLists;
@@ -30,6 +35,7 @@ import org.eclipse.collections.impl.math.IntegerSum;
 import org.eclipse.collections.impl.math.MutableInteger;
 import org.eclipse.collections.impl.set.mutable.primitive.IntHashSet;
 import org.eclipse.collections.impl.test.Verify;
+import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -52,6 +58,12 @@ public class IntIntervalTest
     public void fromToBy_throws_step_size_zero()
     {
         IntInterval.fromToBy(0, 0, 0);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void fromToBy_throws_on_illegal_step()
+    {
+        IntInterval.fromToBy(5, 0, 1);
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -136,20 +148,38 @@ public class IntIntervalTest
     }
 
     @Test
+    public void each()
+    {
+        MutableIntList list1 = IntLists.mutable.empty();
+        IntInterval interval1 = IntInterval.oneTo(5);
+        interval1.each(list1::add);
+        Assert.assertEquals(list1, interval1);
+        IntInterval interval2 = IntInterval.fromTo(5, 1);
+        MutableIntList list2 = IntLists.mutable.empty();
+        interval2.each(list2::add);
+        Assert.assertEquals(list2, interval2);
+    }
+
+    @Test
     public void injectInto()
     {
-        IntInterval intInterval = IntInterval.oneTo(3);
-        MutableInteger result = intInterval.injectInto(new MutableInteger(0), MutableInteger::add);
+        IntInterval intInterval1 = IntInterval.oneTo(3);
+        MutableInteger result = intInterval1.injectInto(new MutableInteger(0), MutableInteger::add);
         Assert.assertEquals(new MutableInteger(6), result);
+        IntInterval intInterval2 = IntInterval.fromTo(3, 1);
+        MutableInteger result2 = intInterval2.injectInto(new MutableInteger(0), MutableInteger::add);
+        Assert.assertEquals(new MutableInteger(6), result2);
     }
 
     @Test
     public void injectIntoWithIndex()
     {
-        IntInterval list1 = this.intInterval;
-        IntInterval list2 = IntInterval.oneTo(3);
-        MutableInteger result = list1.injectIntoWithIndex(new MutableInteger(0), (object, value, index) -> object.add(value * list2.get(index)));
-        Assert.assertEquals(new MutableInteger(14), result);
+        IntInterval interval1 = IntInterval.oneTo(3);
+        MutableInteger result1 = this.intInterval.injectIntoWithIndex(new MutableInteger(0), (object, value, index) -> object.add(value * interval1.get(index)));
+        Assert.assertEquals(new MutableInteger(14), result1);
+        IntInterval interval2 = IntInterval.fromTo(3, 1);
+        MutableInteger result2 = interval2.injectIntoWithIndex(new MutableInteger(0), (object, value, index) -> object.add(value * this.intInterval.get(index)));
+        Assert.assertEquals(new MutableInteger(10), result2);
     }
 
     @Test
@@ -167,17 +197,15 @@ public class IntIntervalTest
     @Test
     public void dotProduct()
     {
-        IntInterval list1 = this.intInterval;
-        IntInterval list2 = IntInterval.oneTo(3);
-        Assert.assertEquals(14, list1.dotProduct(list2));
+        IntInterval interval = IntInterval.oneTo(3);
+        Assert.assertEquals(14, this.intInterval.dotProduct(interval));
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void dotProduct_throwsOnListsOfDifferentSizes()
     {
-        IntInterval list1 = this.intInterval;
-        IntInterval list2 = IntInterval.oneTo(4);
-        list1.dotProduct(list2);
+        IntInterval interval = IntInterval.oneTo(4);
+        this.intInterval.dotProduct(interval);
     }
 
     @Test
@@ -336,12 +364,18 @@ public class IntIntervalTest
     public void max()
     {
         Assert.assertEquals(9, IntInterval.oneTo(9).max());
+        Assert.assertEquals(5, IntInterval.fromTo(5, 1).max());
+        Assert.assertEquals(1, IntInterval.fromTo(-5, 1).max());
+        Assert.assertEquals(1, IntInterval.fromTo(1, -5).max());
     }
 
     @Test
     public void min()
     {
         Assert.assertEquals(1, IntInterval.oneTo(9).min());
+        Assert.assertEquals(1, IntInterval.fromTo(5, 1).min());
+        Assert.assertEquals(-5, IntInterval.fromTo(-5, 1).min());
+        Assert.assertEquals(-5, IntInterval.fromTo(1, -5).min());
     }
 
     @Test
@@ -715,5 +749,58 @@ public class IntIntervalTest
     {
         Assert.assertTrue(IntInterval.fromTo(1, 3).containsAll(1, 2, 3));
         Assert.assertFalse(IntInterval.fromTo(1, 3).containsAll(1, 2, 4));
+    }
+
+    @Test
+    public void containsAllIterable()
+    {
+        Assert.assertTrue(IntInterval.fromTo(1, 3).containsAll(IntInterval.fromTo(1, 3)));
+        Assert.assertFalse(IntInterval.fromTo(1, 3).containsAll(IntInterval.fromTo(1, 4)));
+    }
+
+    @Test
+    public void distinct()
+    {
+        Assert.assertSame(this.intInterval, this.intInterval.distinct());
+    }
+
+    @Test
+    public void asReversed()
+    {
+        MutableIntList list = IntLists.mutable.empty();
+        list.addAll(this.intInterval.asReversed());
+        Assert.assertEquals(IntLists.mutable.with(3, 2, 1), list);
+    }
+
+    @Test
+    public void zip()
+    {
+        IntInterval interval = IntInterval.oneTo(3);
+        ImmutableList<IntObjectPair<String>> zipped = interval.zip(interval.collect(Integer::toString));
+        ImmutableList<IntObjectPair<String>> zippedLazy = interval.zip(interval.asLazy().collect(Integer::toString));
+        ImmutableList<IntObjectPair<String>> expected = Lists.immutable.with(
+                PrimitiveTuples.pair(1, "1"),
+                PrimitiveTuples.pair(2, "2"),
+                PrimitiveTuples.pair(3, "3"));
+        Assert.assertEquals(expected, zipped);
+        Assert.assertEquals(expected, zippedLazy);
+        Verify.assertEmpty(interval.zip(Lists.mutable.empty()));
+        Assert.assertEquals(Lists.immutable.with(PrimitiveTuples.pair(1, "1")), interval.zip(Lists.mutable.with("1")));
+    }
+
+    @Test
+    public void zipInt()
+    {
+        IntInterval interval = IntInterval.oneTo(3);
+        ImmutableList<IntIntPair> zipped = interval.zipInt(interval.toReversed());
+        ImmutableList<IntIntPair> zippedLazy = interval.zipInt(interval.asReversed());
+        ImmutableList<IntIntPair> expected = Lists.immutable.with(
+                PrimitiveTuples.pair(1, 3),
+                PrimitiveTuples.pair(2, 2),
+                PrimitiveTuples.pair(3, 1));
+        Assert.assertEquals(expected, zipped);
+        Assert.assertEquals(expected, zippedLazy);
+        Verify.assertEmpty(interval.zipInt(IntLists.mutable.empty()));
+        Assert.assertEquals(Lists.immutable.with(PrimitiveTuples.pair(1, 3)), interval.zipInt(IntLists.mutable.with(3)));
     }
 }

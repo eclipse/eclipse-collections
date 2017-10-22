@@ -17,6 +17,9 @@ body(type, name) ::= <<
 
 package org.eclipse.collections.api.list.primitive;
 
+import java.lang.Iterable;
+
+import org.eclipse.collections.api.<name>Iterable;
 import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
 import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
 import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
@@ -95,7 +98,7 @@ public interface <name>List extends Reversible<name>Iterable
      *
      * @since 9.1.
      */
-    default ListIterable\<<name><name>Pair> zip<name>(<name>List list)
+    default ListIterable\<<name><name>Pair> zip<name>(<name>Iterable iterable)
     {
         throw new UnsupportedOperationException("Default method to prevent breaking backwards compatibility");
     }
@@ -107,7 +110,7 @@ public interface <name>List extends Reversible<name>Iterable
      *
      * @since 9.1.
      */
-    default \<T> ListIterable\<<name>ObjectPair\<T\>> zip(ListIterable\<T> list)
+    default \<T> ListIterable\<<name>ObjectPair\<T\>> zip(Iterable\<T> iterable)
     {
         throw new UnsupportedOperationException("Default method to prevent breaking backwards compatibility");
     }

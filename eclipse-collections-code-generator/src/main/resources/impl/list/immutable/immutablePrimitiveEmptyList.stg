@@ -14,6 +14,7 @@ body(type, name) ::= <<
 
 package org.eclipse.collections.impl.list.immutable.primitive;
 
+import java.lang.Iterable;
 import java.io.IOException;
 import java.io.Serializable;
 <if(!primitive.booleanPrimitive)>import java.util.NoSuchElementException;<endif>
@@ -371,7 +372,7 @@ final class Immutable<name>EmptyList implements Immutable<name>List, Serializabl
      * @since 9.1.
      */
     @Override
-    public ImmutableList\<<name><name>Pair> zip<name>(<name>List list)
+    public ImmutableList\<<name><name>Pair> zip<name>(<name>Iterable iterable)
     {
         return Lists.immutable.empty();
     }
@@ -380,7 +381,7 @@ final class Immutable<name>EmptyList implements Immutable<name>List, Serializabl
      * @since 9.1.
      */
     @Override
-    public \<T> ImmutableList\<<name>ObjectPair\<T\>> zip(ListIterable\<T> list)
+    public \<T> ImmutableList\<<name>ObjectPair\<T\>> zip(Iterable\<T> iterable)
     {
         return Lists.immutable.empty();
     }

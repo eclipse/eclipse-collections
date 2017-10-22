@@ -16,6 +16,8 @@ body(type, name) ::= <<
 
 package org.eclipse.collections.impl.list.mutable.primitive;
 
+import java.lang.Iterable;
+
 import org.eclipse.collections.api.<name>Iterable;
 import org.eclipse.collections.api.Lazy<name>Iterable;
 import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
@@ -245,17 +247,17 @@ public final class Unmodifiable<name>List
     /**
      * @since 9.1.
      */
-    public MutableList\<<name><name>Pair> zip<name>(<name>List list)
+    public MutableList\<<name><name>Pair> zip<name>(<name>Iterable iterable)
     {
-        return this.getMutable<name>List().zip<name>(list);
+        return this.getMutable<name>List().zip<name>(iterable);
     }
 
     /**
      * @since 9.1.
      */
-    public \<T> MutableList\<<name>ObjectPair\<T\>> zip(ListIterable\<T> list)
+    public \<T> MutableList\<<name>ObjectPair\<T\>> zip(Iterable\<T> iterable)
     {
-        return this.getMutable<name>List().zip(list);
+        return this.getMutable<name>List().zip(iterable);
     }
 }
 

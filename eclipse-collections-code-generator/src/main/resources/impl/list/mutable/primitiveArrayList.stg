@@ -20,8 +20,10 @@ import java.io.Externalizable;
 import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
+import java.lang.Iterable;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import org.eclipse.collections.api.<name>Iterable;
@@ -34,6 +36,7 @@ import org.eclipse.collections.api.block.procedure.primitive.<name>IntProcedure;
 import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
 import org.eclipse.collections.api.collection.primitive.Mutable<name>Collection;
 import org.eclipse.collections.api.iterator.Mutable<name>Iterator;
+import org.eclipse.collections.api.iterator.<name>Iterator;
 import org.eclipse.collections.api.list.ListIterable;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.list.primitive.<name>List;
@@ -50,6 +53,7 @@ import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.primitive.Abstract<name>Iterable;
 import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
+import org.eclipse.collections.impl.utility.Iterate;
 
 /**
  * <name>ArrayList is similar to {@link FastList}, and is memory-optimized for <type> primitives.
@@ -960,14 +964,15 @@ public class <name>ArrayList extends Abstract<name>Iterable
      * @since 9.1.
      */
     @Override
-    public MutableList\<<name><name>Pair> zip<name>(<name>List list)
+    public MutableList\<<name><name>Pair> zip<name>(<name>Iterable iterable)
     {
-        MutableList\<<name><name>Pair> target = Lists.mutable.empty();
         int size = this.size();
-        int othersize = list.size();
-        for (int i = 0; i \< size && i \< othersize; i++)
+        int otherSize = iterable.size();
+        MutableList\<<name><name>Pair> target = Lists.mutable.withInitialCapacity(Math.min(size, otherSize));
+        <name>Iterator iterator = iterable.<type>Iterator();
+        for (int i = 0; i \< size && i \< otherSize; i++)
         {
-            target.add(PrimitiveTuples.pair(this.items[i], list.get(i)));
+            target.add(PrimitiveTuples.pair(this.items[i], iterator.next()));
         }
         return target;
     }
@@ -976,14 +981,15 @@ public class <name>ArrayList extends Abstract<name>Iterable
      * @since 9.1.
      */
     @Override
-    public \<T> MutableList\<<name>ObjectPair\<T\>> zip(ListIterable\<T> list)
+    public \<T> MutableList\<<name>ObjectPair\<T\>> zip(Iterable\<T> iterable)
     {
-        MutableList\<<name>ObjectPair\<T\>> target = Lists.mutable.empty();
         int size = this.size();
-        int othersize = list.size();
-        for (int i = 0; i \< size && i \< othersize; i++)
+        int otherSize = Iterate.sizeOf(iterable);
+        MutableList\<<name>ObjectPair\<T\>> target = Lists.mutable.withInitialCapacity(Math.min(size, otherSize));
+        Iterator\<T> iterator = iterable.iterator();
+        for (int i = 0; i \< size && iterator.hasNext(); i++)
         {
-            target.add(PrimitiveTuples.pair(this.items[i], list.get(i)));
+            target.add(PrimitiveTuples.pair(this.items[i], iterator.next()));
         }
         return target;
     }

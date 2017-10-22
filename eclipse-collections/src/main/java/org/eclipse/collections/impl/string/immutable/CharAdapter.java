@@ -12,6 +12,7 @@ package org.eclipse.collections.impl.string.immutable;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import org.eclipse.collections.api.CharIterable;
@@ -26,7 +27,6 @@ import org.eclipse.collections.api.block.procedure.primitive.CharIntProcedure;
 import org.eclipse.collections.api.block.procedure.primitive.CharProcedure;
 import org.eclipse.collections.api.iterator.CharIterator;
 import org.eclipse.collections.api.list.ImmutableList;
-import org.eclipse.collections.api.list.ListIterable;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.list.primitive.CharList;
 import org.eclipse.collections.api.list.primitive.ImmutableCharList;
@@ -42,6 +42,7 @@ import org.eclipse.collections.impl.list.mutable.primitive.CharArrayList;
 import org.eclipse.collections.impl.primitive.AbstractCharIterable;
 import org.eclipse.collections.impl.set.mutable.primitive.CharHashSet;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
+import org.eclipse.collections.impl.utility.Iterate;
 import org.eclipse.collections.impl.utility.StringIterate;
 
 /**
@@ -541,14 +542,15 @@ public class CharAdapter extends AbstractCharIterable implements CharSequence, I
      * @since 9.1.
      */
     @Override
-    public ImmutableList<CharCharPair> zipChar(CharList list)
+    public ImmutableList<CharCharPair> zipChar(CharIterable iterable)
     {
-        MutableList<CharCharPair> target = Lists.mutable.empty();
         int size = this.size();
-        int othersize = list.size();
+        int othersize = iterable.size();
+        MutableList<CharCharPair> target = Lists.mutable.withInitialCapacity(Math.min(size, othersize));
+        CharIterator iterator = iterable.charIterator();
         for (int i = 0; i < size && i < othersize; i++)
         {
-            target.add(PrimitiveTuples.pair(this.get(i), list.get(i)));
+            target.add(PrimitiveTuples.pair(this.get(i), iterator.next()));
         }
         return target.toImmutable();
     }
@@ -557,14 +559,15 @@ public class CharAdapter extends AbstractCharIterable implements CharSequence, I
      * @since 9.1.
      */
     @Override
-    public <T> ImmutableList<CharObjectPair<T>> zip(ListIterable<T> list)
+    public <T> ImmutableList<CharObjectPair<T>> zip(Iterable<T> iterable)
     {
-        MutableList<CharObjectPair<T>> target = Lists.mutable.empty();
         int size = this.size();
-        int othersize = list.size();
+        int othersize = Iterate.sizeOf(iterable);
+        MutableList<CharObjectPair<T>> target = Lists.mutable.withInitialCapacity(Math.min(size, othersize));
+        Iterator<T> iterator = iterable.iterator();
         for (int i = 0; i < size && i < othersize; i++)
         {
-            target.add(PrimitiveTuples.pair(this.get(i), list.get(i)));
+            target.add(PrimitiveTuples.pair(this.get(i), iterator.next()));
         }
         return target.toImmutable();
     }

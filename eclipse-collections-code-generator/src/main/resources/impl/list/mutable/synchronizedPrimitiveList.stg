@@ -16,6 +16,7 @@ body(type, name) ::= <<
 
 package org.eclipse.collections.impl.list.mutable.primitive;
 
+import java.lang.Iterable;
 import java.util.Collection;
 import java.util.Collections;
 
@@ -348,22 +349,22 @@ public final class Synchronized<name>List
     /**
      * @since 9.1.
      */
-    public MutableList\<<name><name>Pair> zip<name>(<name>List list)
+    public MutableList\<<name><name>Pair> zip<name>(<name>Iterable iterable)
     {
         synchronized (this.getLock())
         {
-            return this.getMutable<name>List().zip<name>(list);
+            return this.getMutable<name>List().zip<name>(iterable);
         }
     }
 
     /**
      * @since 9.1.
      */
-    public \<T> MutableList\<<name>ObjectPair\<T\>> zip(ListIterable\<T> list)
+    public \<T> MutableList\<<name>ObjectPair\<T\>> zip(Iterable\<T> iterable)
     {
         synchronized (this.getLock())
         {
-            return this.getMutable<name>List().zip(list);
+            return this.getMutable<name>List().zip(iterable);
         }
     }
 }

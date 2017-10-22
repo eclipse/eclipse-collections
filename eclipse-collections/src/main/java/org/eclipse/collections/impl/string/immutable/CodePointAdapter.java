@@ -12,6 +12,7 @@ package org.eclipse.collections.impl.string.immutable;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import org.eclipse.collections.api.IntIterable;
@@ -26,7 +27,6 @@ import org.eclipse.collections.api.block.procedure.primitive.IntIntProcedure;
 import org.eclipse.collections.api.block.procedure.primitive.IntProcedure;
 import org.eclipse.collections.api.iterator.IntIterator;
 import org.eclipse.collections.api.list.ImmutableList;
-import org.eclipse.collections.api.list.ListIterable;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.list.primitive.ImmutableIntList;
 import org.eclipse.collections.api.list.primitive.IntList;
@@ -42,6 +42,7 @@ import org.eclipse.collections.impl.list.mutable.primitive.IntArrayList;
 import org.eclipse.collections.impl.primitive.AbstractIntIterable;
 import org.eclipse.collections.impl.set.mutable.primitive.IntHashSet;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
+import org.eclipse.collections.impl.utility.Iterate;
 
 /**
  * Calculates and provides the code points stored in a String as an ImmutableIntList.  This is a cleaner more OO way of
@@ -715,14 +716,15 @@ public class CodePointAdapter extends AbstractIntIterable implements CharSequenc
      * @since 9.1.
      */
     @Override
-    public ImmutableList<IntIntPair> zipInt(IntList list)
+    public ImmutableList<IntIntPair> zipInt(IntIterable iterable)
     {
-        MutableList<IntIntPair> target = Lists.mutable.empty();
         int size = this.size();
-        int othersize = list.size();
+        int othersize = iterable.size();
+        MutableList<IntIntPair> target = Lists.mutable.withInitialCapacity(Math.min(size, othersize));
+        IntIterator iterator = iterable.intIterator();
         for (int i = 0; i < size && i < othersize; i++)
         {
-            target.add(PrimitiveTuples.pair(this.get(i), list.get(i)));
+            target.add(PrimitiveTuples.pair(this.get(i), iterator.next()));
         }
         return target.toImmutable();
     }
@@ -731,14 +733,15 @@ public class CodePointAdapter extends AbstractIntIterable implements CharSequenc
      * @since 9.1.
      */
     @Override
-    public <T> ImmutableList<IntObjectPair<T>> zip(ListIterable<T> list)
+    public <T> ImmutableList<IntObjectPair<T>> zip(Iterable<T> iterable)
     {
-        MutableList<IntObjectPair<T>> target = Lists.mutable.empty();
         int size = this.size();
-        int othersize = list.size();
-        for (int i = 0; i < size && i < othersize; i++)
+        int othersize = Iterate.sizeOf(iterable);
+        MutableList<IntObjectPair<T>> target = Lists.mutable.withInitialCapacity(Math.min(size, othersize));
+        Iterator<T> iterator = iterable.iterator();
+        for (int i = 0; i < size && iterator.hasNext(); i++)
         {
-            target.add(PrimitiveTuples.pair(this.get(i), list.get(i)));
+            target.add(PrimitiveTuples.pair(this.get(i), iterator.next()));
         }
         return target.toImmutable();
     }
