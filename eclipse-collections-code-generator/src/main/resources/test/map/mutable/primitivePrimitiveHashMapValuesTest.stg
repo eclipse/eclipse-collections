@@ -1,4 +1,4 @@
-import "copyright.stg"
+import "copyrightAndOthers.stg"
 import "primitiveEquals.stg"
 import "primitiveHashCode.stg"
 import "primitiveLiteral.stg"
@@ -18,7 +18,7 @@ class(primitive1, primitive2, sameTwoPrimitives) ::= <<
 >>
 
 body(type1, type2, name1, name2, wrapperName1, wrapperName2) ::= <<
-<copyright()>
+<copyrightAndOthers()>
 
 package org.eclipse.collections.impl.map.mutable.primitive;
 
@@ -156,6 +156,22 @@ public class <name1><name2>HashMapValuesTest extends AbstractMutable<name2>Colle
         Assert.assertFalse(map.contains(<(literal.(type2))("3")>));
         Assert.assertTrue(map.contains(<(literal.(type2))("1")>));
         Assert.assertTrue(map.contains(<(literal.(type2))("2")>));
+    }
+
+    @Override
+    @Test
+    public void removeIf()
+    {
+        <name1><name2>HashMap map = <name1><name2>HashMap.newWithKeysValues(<["1", "2", "3"]:keyValue(); separator=", ">);
+        Mutable<name2>Collection collection = map.values();
+        Assert.assertTrue(collection.removeIf(<name2>Predicates.equal(<(literal.(type2))("3")>)));
+        Assert.assertFalse(collection.contains(<(literal.(type2))("3")>));
+        Assert.assertTrue(collection.contains(<(literal.(type2))("1")>));
+        Assert.assertTrue(collection.contains(<(literal.(type2))("2")>));
+        Assert.assertFalse(map.contains(<(literal.(type2))("3")>));
+        Assert.assertTrue(map.contains(<(literal.(type2))("1")>));
+        Assert.assertTrue(map.contains(<(literal.(type2))("2")>));
+        Assert.assertFalse(collection.removeIf(<name2>Predicates.equal(<(literal.(type2))("3")>)));
     }
 
     <if(primitive2.floatPrimitive)><(sumMethodFloat.(type1))()>

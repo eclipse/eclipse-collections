@@ -1,4 +1,4 @@
-import "copyright.stg"
+import "copyrightAndOthers.stg"
 import "primitiveHashCode.stg"
 import "primitiveLiteral.stg"
 
@@ -13,7 +13,7 @@ class(primitive) ::= <<
 >>
 
 body(type, wrapperName, name) ::= <<
-<copyright()>
+<copyrightAndOthers()>
 
 package org.eclipse.collections.impl.set.mutable.primitive;
 
@@ -21,6 +21,7 @@ import java.util.NoSuchElementException;
 
 import org.eclipse.collections.api.iterator.<name>Iterator;
 import org.eclipse.collections.api.iterator.Mutable<name>Iterator;
+import org.eclipse.collections.impl.block.factory.primitive.<name>Predicates;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
 import org.junit.Test;
@@ -77,6 +78,13 @@ public class Unmodifiable<name>SetTest extends Abstract<name>SetTestCase
     public void remove()
     {
         this.classUnderTest().remove(<(literal.(type))("1")>);
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void removeIf()
+    {
+        this.classUnderTest().removeIf(<name>Predicates.equal(<(literal.(type))("1")>));
     }
 
     @Override

@@ -46,6 +46,23 @@ public interface Mutable<name>Collection extends <name>Iterable
     boolean removeAll(<type>... source);
 
     /**
+     * @since 9.1
+     */
+    default boolean removeIf(<name>Predicate predicate)
+    {
+        boolean changed = false;
+        for (Mutable<name>Iterator iterator = this.<type>Iterator(); iterator.hasNext();)
+        {
+            if (predicate.accept(iterator.next()))
+            {
+                iterator.remove();
+                changed = true;
+            }
+        }
+        return changed;
+    }
+
+    /**
      * @see Collection#retainAll(Collection)
      * @since 5.0
      */

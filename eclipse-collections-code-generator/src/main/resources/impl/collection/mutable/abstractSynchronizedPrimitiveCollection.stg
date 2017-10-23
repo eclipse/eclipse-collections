@@ -1,4 +1,4 @@
-import "copyright.stg"
+import "copyrightAndOthers.stg"
 import "primitiveEquals.stg"
 import "primitiveHashCode.stg"
 import "primitiveLiteral.stg"
@@ -12,7 +12,7 @@ class(primitive) ::= <<
 >>
 
 body(type, name) ::= <<
-<copyright()>
+<copyrightAndOthers()>
 
 package org.eclipse.collections.impl.collection.mutable.primitive;
 
@@ -261,6 +261,15 @@ public abstract class AbstractSynchronized<name>Collection
         synchronized (this.lock)
         {
             return this.collection.remove(value);
+        }
+    }
+
+    @Override
+    public boolean removeIf(<name>Predicate predicate)
+    {
+        synchronized (this.lock)
+        {
+            return this.collection.removeIf(predicate);
         }
     }
 

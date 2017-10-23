@@ -386,6 +386,37 @@ public class <name>ArrayList extends Abstract<name>Iterable
     }
 
     @Override
+    public boolean removeIf(<name>Predicate predicate)
+    {
+        int currentFilledIndex = 0;
+        for (int i = 0; i \< this.size; i++)
+        {
+            <type> item = this.items[i];
+            if (!predicate.accept(item))
+            {
+                // keep it
+                if (currentFilledIndex != i)
+                {
+                    this.items[currentFilledIndex] = item;
+                }
+                currentFilledIndex++;
+            }
+        }
+        boolean changed = currentFilledIndex \< this.size;
+        this.wipeAndResetTheEnd(currentFilledIndex);
+        return changed;
+    }
+
+    private void wipeAndResetTheEnd(int newCurrentFilledIndex)
+    {
+        for (int i = newCurrentFilledIndex; i \< this.size; i++)
+        {
+            this.items[i] = <zero.(type)>;
+        }
+        this.size = newCurrentFilledIndex;
+    }
+
+    @Override
     public boolean removeAll(<name>Iterable source)
     {
         boolean modified = false;
