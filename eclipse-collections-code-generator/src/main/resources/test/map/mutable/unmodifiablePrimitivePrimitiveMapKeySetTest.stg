@@ -1,4 +1,4 @@
-import "copyright.stg"
+import "copyrightAndOthers.stg"
 import "primitiveEquals.stg"
 import "primitiveHashCode.stg"
 import "primitiveLiteral.stg"
@@ -18,7 +18,7 @@ class(primitive1, primitive2, sameTwoPrimitives) ::= <<
 >>
 
 body(type1, type2, name1, name2, wrapperName1) ::= <<
-<copyright()>
+<copyrightAndOthers()>
 
 package org.eclipse.collections.impl.map.mutable.primitive;
 
@@ -111,6 +111,13 @@ public class Unmodifiable<name1><name2>MapKeySetTest extends Abstract<name1>SetT
     public void remove()
     {
         this.classUnderTest().remove(<(literal.(type1))("1")>);
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void removeIf()
+    {
+        this.classUnderTest().removeIf(<name1>Predicates.equal(<(literal.(type1))("1")>));
     }
 
     @Override

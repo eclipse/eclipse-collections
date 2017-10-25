@@ -1,4 +1,4 @@
-import "copyright.stg"
+import "copyrightAndOthers.stg"
 import "primitiveEquals.stg"
 import "primitiveHashCode.stg"
 import "primitiveLiteral.stg"
@@ -14,7 +14,7 @@ class(primitive) ::= <<
 >>
 
 body(type, wrapperName, name) ::= <<
-<copyright()>
+<copyrightAndOthers()>
 
 package org.eclipse.collections.impl.collection.mutable.primitive;
 
@@ -24,6 +24,7 @@ import org.eclipse.collections.api.collection.primitive.Mutable<name>Collection;
 import org.eclipse.collections.api.iterator.<name>Iterator;
 import org.eclipse.collections.api.iterator.Mutable<name>Iterator;
 import org.eclipse.collections.impl.bag.mutable.primitive.<name>HashBag;
+import org.eclipse.collections.impl.block.factory.primitive.<name>Predicates;
 import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
@@ -142,6 +143,60 @@ public abstract class AbstractMutable<name>CollectionTestCase extends Abstract<n
         Assert.assertEquals(this.newMutableCollectionWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">), collection);
         Assert.assertTrue(collection.remove(<(literal.(type))("3")>));
         Assert.assertEquals(this.newMutableCollectionWith(<["1", "2"]:(literal.(type))(); separator=", ">), collection);
+    }
+
+    @Test
+    public void removeIf()
+    {
+        Mutable<name>Collection collection = this.classUnderTest();
+        Assert.assertFalse(collection.removeIf(<name>Predicates.equal(<(literal.(type))("-1")>)));
+        Assert.assertEquals(this.newMutableCollectionWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">), collection);
+        Assert.assertTrue(collection.removeIf(<name>Predicates.equal(<(literal.(type))("2")>)));
+        Assert.assertEquals(this.newMutableCollectionWith(<["1", "3"]:(literal.(type))(); separator=", ">), collection);
+        Assert.assertTrue(collection.removeIf(<name>Predicates.greaterThan(<(literal.(type))("1")>)));
+        Assert.assertEquals(this.newMutableCollectionWith(<(literal.(type))("1")>), collection);
+        Assert.assertFalse(collection.removeIf(<name>Predicates.greaterThan(<(literal.(type))("1")>)));
+        Assert.assertEquals(this.newMutableCollectionWith(<(literal.(type))("1")>), collection);
+        Assert.assertTrue(collection.removeIf(<name>Predicates.alwaysTrue()));
+        Assert.assertTrue(collection.isEmpty());
+        Assert.assertFalse(collection.removeIf(<name>Predicates.alwaysTrue()));
+        Assert.assertTrue(collection.isEmpty());
+
+        collection = this.classUnderTest();
+        Assert.assertTrue(collection.removeIf(<name>Predicates.alwaysTrue()));
+        Assert.assertTrue(collection.isEmpty());
+
+        collection = this.classUnderTest();
+        Assert.assertFalse(collection.removeIf(<name>Predicates.alwaysFalse()));
+        Assert.assertEquals(this.newMutableCollectionWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">), collection);
+
+        collection = this.classUnderTest();
+        Assert.assertTrue(collection.removeIf(<name>Predicates.greaterThan(<(literal.(type))("1")>)));
+        Assert.assertEquals(this.newMutableCollectionWith(<["1"]:(literal.(type))(); separator=", ">), collection);
+
+        collection = this.classUnderTest();
+        Assert.assertTrue(collection.removeIf(<name>Predicates.lessThan(<(literal.(type))("3")>)));
+        Assert.assertEquals(this.newMutableCollectionWith(<["3"]:(literal.(type))(); separator=", ">), collection);
+
+        collection = this.classUnderTest();
+        Mutable<name>Collection remove = this.newMutableCollectionWith(<["1", "3"]:(literal.(type))(); separator=", ">);
+        Assert.assertTrue(collection.removeIf(remove::contains));
+        Assert.assertEquals(this.newMutableCollectionWith(<["2"]:(literal.(type))(); separator=", ">), collection);
+
+        collection = this.classUnderTest();
+        remove = this.newMutableCollectionWith(<["2"]:(literal.(type))(); separator=", ">);
+        Assert.assertTrue(collection.removeIf(remove::contains));
+        Assert.assertEquals(this.newMutableCollectionWith(<["1", "3"]:(literal.(type))(); separator=", ">), collection);
+
+        collection = this.newMutableCollectionWith(<["1", "3", "2", "5", "6", "4"]:(literal.(type))(); separator=", ">);
+        remove = this.newMutableCollectionWith(<["2", "4", "6"]:(literal.(type))(); separator=", ">);
+        Assert.assertTrue(collection.removeIf(remove::contains));
+        Assert.assertEquals(this.newMutableCollectionWith(<["1", "3", "5"]:(literal.(type))(); separator=", ">), collection);
+
+        collection = this.newMutableCollectionWith(<["1", "3", "2", "5", "6", "4"]:(literal.(type))(); separator=", ">);
+        remove = this.newMutableCollectionWith(<["1", "3", "5"]:(literal.(type))(); separator=", ">);
+        Assert.assertTrue(collection.removeIf(remove::contains));
+        Assert.assertEquals(this.newMutableCollectionWith(<["2", "6", "4"]:(literal.(type))(); separator=", ">), collection);
     }
 
     @Test

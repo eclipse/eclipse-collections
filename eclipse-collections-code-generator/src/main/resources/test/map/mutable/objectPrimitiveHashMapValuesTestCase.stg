@@ -1,4 +1,4 @@
-import "copyright.stg"
+import "copyrightAndOthers.stg"
 import "primitiveEquals.stg"
 import "primitiveHashCode.stg"
 import "primitiveLiteral.stg"
@@ -16,7 +16,7 @@ class(primitive) ::= <<
 >>
 
 body(type, name, wrapperName) ::= <<
-<copyright()>
+<copyrightAndOthers()>
 
 package org.eclipse.collections.impl.map.mutable.primitive;
 
@@ -39,6 +39,9 @@ import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
 import org.junit.Test;
 
+/**
+ * This file was automatically generated from template file objectPrimitiveHashMapValuesTestCase.stg.
+ */
 public abstract class Object<name>HashMapValuesTestCase extends AbstractMutable<name>CollectionTestCase
 {
     public abstract MutableObject<name>Map\<String> newMapWithKeysValues(String key1, <type> value1);
@@ -174,6 +177,22 @@ public abstract class Object<name>HashMapValuesTestCase extends AbstractMutable<
         Assert.assertFalse(map.contains(<(literal.(type))("3")>));
         Assert.assertTrue(map.contains(<(literal.(type))("1")>));
         Assert.assertTrue(map.contains(<(literal.(type))("2")>));
+    }
+
+    @Override
+    @Test
+    public void removeIf()
+    {
+        MutableObject<name>Map\<String> map = this.newMapWithKeysValues(<["1", "2", "3"]:keyValue(); separator=", ">);
+        Mutable<name>Collection collection = map.values();
+        Assert.assertTrue(collection.removeIf(<name>Predicates.equal(<(literal.(type))("3")>)));
+        Assert.assertFalse(collection.contains(<(literal.(type))("3")>));
+        Assert.assertTrue(collection.contains(<(literal.(type))("1")>));
+        Assert.assertTrue(collection.contains(<(literal.(type))("2")>));
+        Assert.assertFalse(map.contains(<(literal.(type))("3")>));
+        Assert.assertTrue(map.contains(<(literal.(type))("1")>));
+        Assert.assertTrue(map.contains(<(literal.(type))("2")>));
+        Assert.assertFalse(collection.removeIf(<name>Predicates.equal(<(literal.(type))("3")>)));
     }
 
     @Override

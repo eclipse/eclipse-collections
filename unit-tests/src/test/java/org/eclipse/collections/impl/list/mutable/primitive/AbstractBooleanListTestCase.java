@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2017 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -206,6 +206,15 @@ public abstract class AbstractBooleanListTestCase extends AbstractMutableBoolean
         MutableBooleanList list = this.classUnderTest();
         Assert.assertTrue(list.remove(true));
         Assert.assertEquals(BooleanArrayList.newListWith(false, true), list);
+    }
+
+    @Test
+    public void removeIf()
+    {
+        Assert.assertFalse(this.newWith(true, true).removeIf(b -> !b));
+        MutableBooleanList list = this.classUnderTest();
+        Assert.assertTrue(list.removeIf(b -> b));
+        Assert.assertEquals(BooleanArrayList.newListWith(false), list);
     }
 
     @Test
