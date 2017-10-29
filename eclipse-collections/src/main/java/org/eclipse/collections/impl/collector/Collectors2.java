@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2017 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -755,6 +755,27 @@ public final class Collectors2
         return Collector.of(
                 supplier,
                 (map, each) -> map.put(groupBy.valueOf(each), each),
+                (r1, r2) ->
+                {
+                    r1.putAll(r2);
+                    return r1;
+                },
+                EMPTY_CHARACTERISTICS);
+    }
+
+    /**
+     * <p>Same as {@link #groupBy(Function, Supplier)}, except the result of evaluating groupBy function will return a
+     * collection of keys for each value.</p>
+     *
+     * <p>Equivalent to using @{@link RichIterable#groupByEach(Function, MutableMultimap)}</p>
+     */
+    public static <T, K, R extends MutableMultimap<K, T>> Collector<T, ?, R> groupByEach(
+            Function<? super T, ? extends Iterable<K>> groupBy,
+            Supplier<R> supplier)
+    {
+        return Collector.of(
+                supplier,
+                (map, each) -> groupBy.valueOf(each).forEach(k -> map.put(k, each)),
                 (r1, r2) ->
                 {
                     r1.putAll(r2);
