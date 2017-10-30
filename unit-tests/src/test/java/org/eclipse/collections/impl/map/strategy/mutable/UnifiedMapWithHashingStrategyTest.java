@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -19,12 +19,16 @@ import java.util.Set;
 import org.eclipse.collections.api.block.HashingStrategy;
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.procedure.Procedure;
+import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.block.factory.Functions;
 import org.eclipse.collections.impl.block.factory.HashingStrategies;
 import org.eclipse.collections.impl.block.factory.Procedures;
 import org.eclipse.collections.impl.block.function.PassThruFunction0;
+import org.eclipse.collections.impl.factory.Lists;
+import org.eclipse.collections.impl.factory.Maps;
+import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.map.mutable.UnifiedMapTestCase;
@@ -37,6 +41,7 @@ import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.test.domain.Person;
 import org.eclipse.collections.impl.tuple.ImmutableEntry;
 import org.eclipse.collections.impl.tuple.Tuples;
+import org.eclipse.collections.impl.utility.ArrayIterate;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -883,6 +888,112 @@ public class UnifiedMapWithHashingStrategyTest extends UnifiedMapTestCase
     {
         UnifiedMapWithHashingStrategy<Integer, Integer> map = UnifiedMapWithHashingStrategy.newWithKeysValues(INTEGER_HASHING_STRATEGY, 1, 1, 2, 2);
         Assert.assertSame(INTEGER_HASHING_STRATEGY, map.hashingStrategy());
+    }
+
+    @Test
+    public void trimToSize()
+    {
+        UnifiedMapWithHashingStrategy<String, String> map = UnifiedMapWithHashingStrategy.newMap(STRING_HASHING_STRATEGY);
+        MutableMap<String, String> expected = Maps.mutable.empty();
+
+        Interval integers = Interval.fromTo(0,  250);
+        integers.each(each ->
+        {
+            map.put(each.toString(), each.toString());
+            expected.put(each.toString(),  each.toString());
+        });
+        ArrayIterate.forEach(FREQUENT_COLLISIONS,  each ->
+        {
+            map.put(each,  each);
+            expected.put(each,  each);
+        });
+
+        Assert.assertEquals(expected,  map);
+        Assert.assertEquals(261,  map.size());
+
+        MutableList<Integer> toRemove = Lists.mutable.withAll(Interval.evensFromTo(0, 20));
+
+        toRemove.addAll(Interval.oddsFromTo(35,  55));
+        toRemove.each(each ->
+        {
+            map.remove(each.toString());
+            expected.remove(each.toString());
+        });
+
+        // First assertion to verify that trim does not happen since, the table is already at the smallest required power of 2.
+        Assert.assertFalse(map.trimToSize());
+        Assert.assertEquals(expected, map);
+        Assert.assertEquals(239, map.size());
+
+        Interval.evensFromTo(0, 250).each(each ->
+        {
+            map.remove(each.toString());
+            expected.remove(each.toString());
+        });
+
+        // Second assertion to verify that trim happens since, the table length is less than smallest required power of 2.
+        Assert.assertTrue(map.trimToSize());
+        Assert.assertFalse(map.trimToSize());
+        Assert.assertEquals(expected, map);
+        Assert.assertEquals(124, map.size());
+        expected.forEachKey(each -> Assert.assertEquals(each, map.get(each)));
+
+        integers.each(each ->
+        {
+            map.remove(each.toString());
+            expected.remove(each.toString());
+        });
+        Assert.assertTrue(map.trimToSize());
+        Assert.assertFalse(map.trimToSize());
+        Assert.assertEquals(expected, map);
+        expected.forEachKey(each -> Assert.assertEquals(each, map.get(each)));
+
+        map.clear();
+        expected.clear();
+        Assert.assertTrue(map.trimToSize());
+
+        Interval.zeroTo(20).each(each ->
+        {
+            map.put(each.toString(), each.toString());
+            expected.put(each.toString(), each.toString());
+        });
+        Assert.assertFalse(map.trimToSize());
+        Interval.fromTo(9, 18).each(each ->
+        {
+            map.remove(each.toString());
+            expected.remove(each.toString());
+        });
+        Assert.assertTrue(map.trimToSize());
+        Assert.assertFalse(map.trimToSize());
+        Assert.assertEquals(expected, map);
+        expected.forEachKey(each -> Assert.assertEquals(each, map.get(each)));
+
+        map.clear();
+        Assert.assertTrue(map.trimToSize());
+        Assert.assertTrue(map.isEmpty());
+        Interval.zeroTo(6).each(each -> map.put(each.toString(), each.toString()));
+        // Assert that trim does not happen as long as table.size is already as smaller than required
+        Assert.assertFalse(map.trimToSize());
+        map.put("7", "7");
+
+        map.removeKey("2");
+        map.removeKey("3");
+        // Assert that trim does not happen as long as table.size is as smaller as required
+        Assert.assertFalse(map.trimToSize());
+        map.removeKey("5");
+        map.removeKey("7");
+        Assert.assertTrue(map.trimToSize());
+        // Inflate the map so that table.length increases to next power of 2 and check that trim does not happen
+        map.put("2", "2");
+        map.put("5", "5");
+        map.put("7", "7");
+        // Assert that the resized table due to put is the required size and no need to trim that.
+        Assert.assertFalse(map.trimToSize());
+
+        Interval.zeroTo(4).each(each -> map.put(each.toString(), each.toString()));
+        Interval.oneTo(3).each(each -> map.removeKey(each.toString()));
+        Assert.assertTrue(map.trimToSize());
+        Assert.assertEquals(5, map.size());
     }
 
     @Override

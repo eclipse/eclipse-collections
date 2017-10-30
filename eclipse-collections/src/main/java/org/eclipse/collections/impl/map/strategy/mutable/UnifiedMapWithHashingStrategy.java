@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2016 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -1470,6 +1470,87 @@ public class UnifiedMapWithHashingStrategy<K, V> extends AbstractMutableMap<K, V
 
         builder.append('}');
         return builder.toString();
+    }
+
+    public boolean trimToSize()
+    {
+        if (this.table.length <= this.fastCeil(this.occupied / this.loadFactor) << 2)
+        {
+            return false;
+        }
+
+        Object[] temp = this.table;
+        this.init(this.fastCeil(this.occupied / this.loadFactor));
+        if (this.isEmpty())
+        {
+            return true;
+        }
+
+        int mask = this.table.length - 1;
+        for (int j = 0; j < temp.length; j += 2)
+        {
+            Object key = temp[j];
+            if (key == CHAINED_KEY)
+            {
+                Object[] chain = (Object[]) temp[j + 1];
+                for (int i = 0; i < chain.length; i += 2)
+                {
+                    Object cur = chain[i];
+                    if (cur != null)
+                    {
+                        this.putForTrim((K) cur, (V) chain[i + 1], j, mask);
+                    }
+                }
+            }
+            else if (key != null)
+            {
+                this.putForTrim((K) key, (V) temp[j + 1], j, mask);
+            }
+        }
+        return true;
+    }
+
+    private void putForTrim(K key, V value, int oldIndex, int mask)
+    {
+        int index = oldIndex & mask;
+        Object cur = this.table[index];
+        if (cur == null)
+        {
+            this.table[index] = key;
+            this.table[index + 1] = value;
+            return;
+        }
+        this.chainedPutForTrim(key, index, value);
+    }
+
+    private void chainedPutForTrim(K key, int index, V value)
+    {
+        if (this.table[index] == CHAINED_KEY)
+        {
+            Object[] chain = (Object[]) this.table[index + 1];
+            for (int i = 0; i < chain.length; i += 2)
+            {
+                if (chain[i] == null)
+                {
+                    chain[i] = key;
+                    chain[i + 1] = value;
+                    return;
+                }
+            }
+            Object[] newChain = new Object[chain.length + 4];
+            System.arraycopy(chain,  0,  newChain,  0,  chain.length);
+            this.table[index + 1] = newChain;
+            newChain[chain.length] = UnifiedMapWithHashingStrategy.toSentinelIfNull(key);
+            newChain[chain.length + 1] = value;
+            return;
+        }
+        Object[] newChain = new Object[4];
+        newChain[0] = this.table[index];
+        newChain[1] = this.table[index + 1];
+        newChain[2] = key;
+        newChain[3] = value;
+        this.table[index] = CHAINED_KEY;
+        this.table[index + 1] = newChain;
     }
 
     @Override
