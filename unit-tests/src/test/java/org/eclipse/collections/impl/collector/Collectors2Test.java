@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2017 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -17,16 +17,20 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.eclipse.collections.api.bag.MutableBag;
+import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.collection.primitive.MutableIntCollection;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.primitive.MutableObjectLongMap;
 import org.eclipse.collections.api.multimap.bag.MutableBagMultimap;
+import org.eclipse.collections.api.multimap.list.MutableListMultimap;
 import org.eclipse.collections.api.partition.PartitionMutableCollection;
 import org.eclipse.collections.impl.factory.BiMaps;
+import org.eclipse.collections.impl.factory.Multimaps;
 import org.eclipse.collections.impl.factory.Stacks;
 import org.eclipse.collections.impl.factory.primitive.IntBags;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.partition.bag.PartitionHashBag;
+import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -1103,5 +1107,37 @@ public final class Collectors2Test
         Assert.assertEquals(integers.countBy(i -> i % 2), counts);
         Assert.assertEquals(50000, counts.occurrencesOf(0));
         Assert.assertEquals(50000, counts.occurrencesOf(1));
+    }
+
+    @Test
+    public void groupByEach()
+    {
+        Function<Integer, Iterable<Integer>> groupByFunction =
+                (Integer each) -> SMALL_INTERVAL.collect((Integer i) -> ((Integer) each * i));
+        MutableListMultimap<Integer, Integer> products = this.smallData.stream()
+                .collect(Collectors2.groupByEach(groupByFunction, Multimaps.mutable.list::empty));
+
+        Verify.assertIterableSize(1, products.get(1));
+        Verify.assertIterableSize(2, products.get(2));
+        Verify.assertIterableSize(2, products.get(3));
+        Verify.assertIterableSize(3, products.get(4));
+        Verify.assertIterableSize(2, products.get(5));
+        Assert.assertEquals(SMALL_INTERVAL.toList().groupByEach(groupByFunction), products);
+    }
+
+    @Test
+    public void groupByEachParallel()
+    {
+        Function<Integer, Iterable<Integer>> groupByFunction =
+                (Integer each) -> SMALL_INTERVAL.collect((Integer i) -> ((Integer) each * i));
+        MutableListMultimap<Integer, Integer> products = this.smallData.parallelStream()
+                .collect(Collectors2.groupByEach(groupByFunction, Multimaps.mutable.list::empty));
+
+        Verify.assertIterableSize(1, products.get(1));
+        Verify.assertIterableSize(2, products.get(2));
+        Verify.assertIterableSize(2, products.get(3));
+        Verify.assertIterableSize(3, products.get(4));
+        Verify.assertIterableSize(2, products.get(5));
+        Assert.assertEquals(SMALL_INTERVAL.toList().groupByEach(groupByFunction), products);
     }
 }
