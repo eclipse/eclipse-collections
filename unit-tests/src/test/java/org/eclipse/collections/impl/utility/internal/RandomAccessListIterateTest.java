@@ -22,6 +22,7 @@ import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.api.tuple.Twin;
+import org.eclipse.collections.api.tuple.primitive.ObjectIntPair;
 import org.eclipse.collections.impl.block.factory.Predicates;
 import org.eclipse.collections.impl.block.factory.Predicates2;
 import org.eclipse.collections.impl.block.factory.Procedures2;
@@ -36,6 +37,7 @@ import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.Tuples;
+import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.eclipse.collections.impl.utility.Iterate;
 import org.junit.Assert;
 import org.junit.Test;
@@ -146,6 +148,32 @@ public class RandomAccessListIterateTest
         Assert.assertEquals(
                 iList("true", "false", "null"),
                 RandomAccessListIterate.collect(mList(true, false, null), String::valueOf));
+    }
+
+    /**
+     * @since 9.1.
+     */
+    @Test
+    public void collectWithIndex()
+    {
+        MutableList<Boolean> list1 = Lists.fixedSize.of(true, false, null);
+        MutableList<Boolean> list2 = Lists.mutable.withAll(list1);
+        this.assertCollectWithIndex(list1);
+        this.assertCollectWithIndex(list2);
+        this.assertCollectWithIndex(list2.asSynchronized());
+        this.assertCollectWithIndex(list2.asUnmodifiable());
+    }
+
+    /**
+     * @since 9.1.
+     */
+    private void assertCollectWithIndex(List<Boolean> list)
+    {
+        MutableList<ObjectIntPair<Boolean>> newCollection = RandomAccessListIterate.collectWithIndex(list, PrimitiveTuples::pair);
+        Verify.assertListsEqual(newCollection, Lists.mutable.with(PrimitiveTuples.pair(Boolean.TRUE, 0), PrimitiveTuples.pair(Boolean.FALSE, 1), PrimitiveTuples.pair(null, 2)));
+
+        List<ObjectIntPair<Boolean>> newCollection2 = RandomAccessListIterate.collectWithIndex(list, PrimitiveTuples::pair, new ArrayList<>());
+        Verify.assertListsEqual(newCollection2, Lists.mutable.with(PrimitiveTuples.pair(Boolean.TRUE, 0), PrimitiveTuples.pair(Boolean.FALSE, 1), PrimitiveTuples.pair(null, 2)));
     }
 
     @Test

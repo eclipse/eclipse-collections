@@ -37,6 +37,7 @@ import org.eclipse.collections.api.block.function.primitive.IntFunction;
 import org.eclipse.collections.api.block.function.primitive.IntObjectToIntFunction;
 import org.eclipse.collections.api.block.function.primitive.LongFunction;
 import org.eclipse.collections.api.block.function.primitive.LongObjectToLongFunction;
+import org.eclipse.collections.api.block.function.primitive.ObjectIntToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.ShortFunction;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
@@ -354,6 +355,36 @@ public final class ListIterate
             return RandomAccessListIterate.collect(list, function, targetCollection);
         }
         return IterableIterate.collect(list, function, targetCollection);
+    }
+
+    /**
+     * @since 9.1
+     */
+    public static <T, A> MutableList<A> collectWithIndex(
+            List<T> list,
+            ObjectIntToObjectFunction<? super T, ? extends A> function)
+    {
+        return ListIterate.collectWithIndex(list, function, FastList.newList(list.size()));
+    }
+
+    /**
+     * @since 9.1
+     */
+    public static <T, A, R extends Collection<A>> R collectWithIndex(
+            List<T> list,
+            ObjectIntToObjectFunction<? super T, ? extends A> function,
+            R targetCollection)
+    {
+        if (list instanceof RandomAccess)
+        {
+            return RandomAccessListIterate.collectWithIndex(list, function, targetCollection);
+        }
+        int index = 0;
+        for (Iterator<T> iterator = list.iterator(); iterator.hasNext(); index++)
+        {
+            targetCollection.add(function.valueOf(iterator.next(), index));
+        }
+        return targetCollection;
     }
 
     /**
