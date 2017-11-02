@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.eclipse.collections.feature"
+      label="Eclipse Collections"
+      version="9.1.0.qualifier"
+      provider-name="Eclipse Collections"
+      license-feature="org.eclipse.license"
+      license-feature-version="0.0.0">
+
+   <plugin
+         id="org.eclipse.collections"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+</feature>
