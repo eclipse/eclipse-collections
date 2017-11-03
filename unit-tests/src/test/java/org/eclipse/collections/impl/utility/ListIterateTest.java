@@ -25,6 +25,7 @@ import org.eclipse.collections.api.partition.list.PartitionMutableList;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.api.tuple.Twin;
+import org.eclipse.collections.api.tuple.primitive.ObjectIntPair;
 import org.eclipse.collections.impl.Counter;
 import org.eclipse.collections.impl.block.factory.IntegerPredicates;
 import org.eclipse.collections.impl.block.factory.ObjectIntProcedures;
@@ -40,6 +41,7 @@ import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.Tuples;
+import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -180,6 +182,8 @@ public class ListIterateTest
         MutableList<Boolean> list = Lists.fixedSize.of(true, false, null);
         List<Boolean> linked = new LinkedList<>(list);
         this.assertCollect(list);
+        this.assertCollect(list.asSynchronized());
+        this.assertCollect(list.asUnmodifiable());
         this.assertCollect(linked);
     }
 
@@ -192,6 +196,30 @@ public class ListIterateTest
         Verify.assertListsEqual(newCollection2, FastList.newListWith("true", "false", "null"));
     }
 
+    /**
+     * @since 9.1.
+     */
+    @Test
+    public void collectWithIndex()
+    {
+        MutableList<Boolean> list = Lists.fixedSize.of(true, false, null);
+        List<Boolean> linked = new LinkedList<>(list);
+        this.assertCollectWithIndex(list);
+        this.assertCollectWithIndex(linked);
+    }
+
+    /**
+     * @since 9.1.
+     */
+    private void assertCollectWithIndex(List<Boolean> list)
+    {
+        MutableList<ObjectIntPair<Boolean>> newCollection = ListIterate.collectWithIndex(list, PrimitiveTuples::pair);
+        Verify.assertListsEqual(newCollection, Lists.mutable.with(PrimitiveTuples.pair(Boolean.TRUE, 0), PrimitiveTuples.pair(Boolean.FALSE, 1), PrimitiveTuples.pair(null, 2)));
+
+        List<ObjectIntPair<Boolean>> newCollection2 = ListIterate.collectWithIndex(list, PrimitiveTuples::pair, new ArrayList<>());
+        Verify.assertListsEqual(newCollection2, Lists.mutable.with(PrimitiveTuples.pair(Boolean.TRUE, 0), PrimitiveTuples.pair(Boolean.FALSE, 1), PrimitiveTuples.pair(null, 2)));
+    }
+
     @Test
     public void flatten()
     {
@@ -200,6 +228,8 @@ public class ListIterateTest
                 Lists.fixedSize.of(true, null));
         List<MutableList<Boolean>> linked = new LinkedList<>(list);
         this.assertFlatten(list);
+        this.assertFlatten(list.asSynchronized());
+        this.assertFlatten(list.asUnmodifiable());
         this.assertFlatten(linked);
     }
 
