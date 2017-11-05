@@ -22,6 +22,7 @@ import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
 import org.eclipse.collections.api.block.predicate.primitive.<name>ObjectPredicate;
 import org.eclipse.collections.api.block.procedure.Procedure;
+import org.eclipse.collections.api.tuple.primitive.<name>ObjectPair;
 
 /**
  * This file was automatically generated from template file mutablePrimitiveObjectMap.stg.
@@ -31,6 +32,17 @@ import org.eclipse.collections.api.block.procedure.Procedure;
 public interface Mutable<name>ObjectMap\<V> extends <name>ObjectMap\<V>, MutablePrimitiveObjectMap\<V>
 {
     V put(<type> key, V value);
+
+    /**
+     * This method allows Mutable<name>ObjectMap the ability to add an element in the form of <name>ObjectPair\<V>.
+     *
+     * @see #put(<type>, Object)
+     * @since 9.1.0
+     */
+    default V putPair(<name>ObjectPair\<V> keyValuePair)
+    {
+        return this.put(keyValuePair.getOne(), keyValuePair.getTwo());
+    }
 
     /**
      * @since 5.0.
