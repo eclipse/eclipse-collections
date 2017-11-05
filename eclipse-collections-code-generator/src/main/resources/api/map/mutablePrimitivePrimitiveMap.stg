@@ -23,6 +23,7 @@ import org.eclipse.collections.api.block.function.primitive.<name2>Function;
 import org.eclipse.collections.api.block.function.primitive.<name2>Function0;
 import org.eclipse.collections.api.block.function.primitive.<name2>To<name2>Function;
 import org.eclipse.collections.api.block.predicate.primitive.<name1><name2>Predicate;
+import org.eclipse.collections.api.tuple.primitive.<name1><name2>Pair;
 
 /**
  * This file was automatically generated from template file mutablePrimitivePrimitiveMap.stg.
@@ -32,6 +33,17 @@ import org.eclipse.collections.api.block.predicate.primitive.<name1><name2>Predi
 public interface Mutable<name1><name2>Map extends <name1><name2>Map, Mutable<name2>ValuesMap
 {
     void put(<type1> key, <type2> value);
+
+   /**
+     * This method allows Mutable<name1><name2>Map the ability to add an element in the form of <name1><name2>Pair.
+     *
+     * @see #put(<type1>, <type2>)
+     * @since 9.1.0
+     */
+    default void putPair(<name1><name2>Pair keyValuePair)
+    {
+        this.put(keyValuePair.getOne(), keyValuePair.getTwo());
+    }
 
     void putAll(<name1><name2>Map map);
 
