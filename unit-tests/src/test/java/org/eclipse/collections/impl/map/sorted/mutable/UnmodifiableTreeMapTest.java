@@ -319,6 +319,12 @@ public class UnmodifiableTreeMapTest extends MutableSortedMapTestCase
     }
 
     @Override
+    public void putPair()
+    {
+        Verify.assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeyValue("A", 1).putPair(Tuples.pair("A", 3)));
+    }
+
+    @Override
     @Test(expected = UnsupportedOperationException.class)
     public void withKeyValue()
     {

@@ -40,10 +40,22 @@ public interface MutableMapIterable<K, V> extends MapIterable<K, V>, Map<K, V>
      * This method allows mutable map the ability to add an element in the form of Pair<K,V>.
      *
      * @see #put(Object, Object)
+     * @since 9.1.0
+     */
+    default V putPair(Pair<K, V> keyValuePair)
+    {
+        return this.put(keyValuePair.getOne(), keyValuePair.getTwo());
+    }
+
+    /**
+     * This method allows mutable map the ability to add an element in the form of Pair<K,V>.
+     *
+     * @see #put(Object, Object)
+     * @return previous value in the map for the key, or null if no value exists for the key.
      */
     default V add(Pair<K, V> keyValuePair)
     {
-        return this.put(keyValuePair.getOne(), keyValuePair.getTwo());
+        return this.putPair(keyValuePair);
     }
 
     /**
@@ -188,9 +200,8 @@ public interface MutableMapIterable<K, V> extends MapIterable<K, V>, Map<K, V>
      * iteration protocols available on {@code MutableMapIterable}.  Methods which would
      * mutate the underlying map will throw UnsupportedOperationExceptions.
      *
-     * @see java.util.Collections#unmodifiableMap(Map)
-     *
      * @return an unmodifiable view of this map.
+     * @see java.util.Collections#unmodifiableMap(Map)
      */
     MutableMapIterable<K, V> asUnmodifiable();
 

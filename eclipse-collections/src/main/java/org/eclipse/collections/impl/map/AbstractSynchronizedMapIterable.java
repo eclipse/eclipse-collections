@@ -253,11 +253,20 @@ public abstract class AbstractSynchronizedMapIterable<K, V>
     }
 
     @Override
-    public V add(Pair<K, V> keyValuePair)
+    public V putPair(Pair<K, V> keyValuePair)
     {
         synchronized (this.lock)
         {
             return this.put(keyValuePair.getOne(), keyValuePair.getTwo());
+        }
+    }
+
+    @Override
+    public V add(Pair<K, V> keyValuePair)
+    {
+        synchronized (this.lock)
+        {
+            return this.putPair(keyValuePair);
         }
     }
 
