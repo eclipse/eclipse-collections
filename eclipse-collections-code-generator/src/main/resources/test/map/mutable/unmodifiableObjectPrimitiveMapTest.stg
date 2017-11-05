@@ -26,6 +26,7 @@ import org.eclipse.collections.api.block.function.primitive.<name>To<name>Functi
 import org.eclipse.collections.api.map.primitive.MutableObject<name>Map;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.test.Verify;
+import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -107,6 +108,13 @@ public class UnmodifiableObject<name>MapTest extends AbstractMutableObject<name>
     public void put()
     {
         this.map.put("0", <(literal.(type))("1")>);
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void putPair()
+    {
+        this.map.putPair(PrimitiveTuples.pair("0", <(literal.(type))("1")>));
     }
 
     @Override
