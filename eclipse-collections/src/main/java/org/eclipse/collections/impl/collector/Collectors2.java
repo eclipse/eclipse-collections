@@ -784,6 +784,40 @@ public final class Collectors2
                 EMPTY_CHARACTERISTICS);
     }
 
+    /**
+     * <p>Same as {@link #groupBy(Function, Supplier)}, except the result of evaluating groupBy function should return a
+     * unique key, or else an exception is thrown.</p>
+     *
+     * <p>Equivalent to using @{@link RichIterable#groupByUniqueKey(Function, MutableMap)}</p>
+     */
+    public static <T, K, R extends MutableMap<K, T>> Collector<T, ?, R> groupByUniqueKey(
+            Function<? super T, ? extends K> groupBy,
+            Supplier<R> supplier)
+    {
+        return Collector.of(
+                supplier,
+                (map, each) ->
+                {
+                    K key = groupBy.valueOf(each);
+                    if (map.put(key, each) != null)
+                    {
+                        throw new IllegalStateException("Key " + key + " already exists in map!");
+                    }
+                },
+                (r1, r2) ->
+                {
+                    r2.forEachKeyValue((key, value) ->
+                    {
+                        if (r1.put(key, value) != null)
+                        {
+                            throw new IllegalStateException("Key " + key + " already exists in map!");
+                        }
+                    });
+                    return r1;
+                },
+                EMPTY_CHARACTERISTICS);
+    }
+
     private static <T, K, A extends MutableMultimap<K, T>, R extends ImmutableMultimap<K, T>> Collector<T, ?, R> groupByImmutable(
             Function<? super T, ? extends K> groupBy,
             Supplier<A> supplier,

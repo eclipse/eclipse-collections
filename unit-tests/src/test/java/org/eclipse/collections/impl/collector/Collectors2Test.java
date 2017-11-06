@@ -20,11 +20,13 @@ import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.collection.primitive.MutableIntCollection;
 import org.eclipse.collections.api.list.MutableList;
+import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.primitive.MutableObjectLongMap;
 import org.eclipse.collections.api.multimap.bag.MutableBagMultimap;
 import org.eclipse.collections.api.multimap.list.MutableListMultimap;
 import org.eclipse.collections.api.partition.PartitionMutableCollection;
 import org.eclipse.collections.impl.factory.BiMaps;
+import org.eclipse.collections.impl.factory.Maps;
 import org.eclipse.collections.impl.factory.Multimaps;
 import org.eclipse.collections.impl.factory.Stacks;
 import org.eclipse.collections.impl.factory.primitive.IntBags;
@@ -1139,5 +1141,39 @@ public final class Collectors2Test
         Verify.assertIterableSize(3, products.get(4));
         Verify.assertIterableSize(2, products.get(5));
         Assert.assertEquals(SMALL_INTERVAL.toList().groupByEach(groupByFunction), products);
+    }
+
+    @Test
+    public void groupByUniqueKey()
+    {
+        MutableMap<Integer, Integer> expectedMap = SMALL_INTERVAL.groupByUniqueKey(id -> id, Maps.mutable.empty());
+        MutableMap<Integer, Integer> actualMap = SMALL_INTERVAL.stream().collect(Collectors2.groupByUniqueKey(id -> id, Maps.mutable::empty));
+        Assert.assertEquals(expectedMap, actualMap);
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void groupByUniqueKey_throws_for_duplicate()
+    {
+        SMALL_INTERVAL.stream().collect(Collectors2.groupByUniqueKey(id -> 1, Maps.mutable::empty));
+    }
+
+    @Test
+    public void groupByUniqueKey_parallelStream()
+    {
+        MutableMap<Integer, Integer> expectedMap = LARGE_INTERVAL.groupByUniqueKey(id -> id, Maps.mutable.empty());
+        MutableMap<Integer, Integer> actualMap = LARGE_INTERVAL.parallelStream().collect(Collectors2.groupByUniqueKey(id -> id, Maps.mutable::empty));
+        Assert.assertEquals(expectedMap, actualMap);
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void groupByUniqueKey_parallelStream_throws_for_duplicate()
+    {
+        LARGE_INTERVAL.parallelStream().collect(Collectors2.groupByUniqueKey(id -> 1, Maps.mutable::empty));
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void groupByUniqueKey_parallelStream_duplicate_from_combiner()
+    {
+        LARGE_INTERVAL.parallelStream().collect(Collectors2.groupByUniqueKey(id -> id == 15000 ? 1 : id, Maps.mutable::empty));
     }
 }
