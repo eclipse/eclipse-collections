@@ -36,6 +36,7 @@ import org.eclipse.collections.impl.block.function.AddFunction;
 import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
 import org.eclipse.collections.impl.map.primitive.Abstract<name>ObjectMapTestCase;
 import org.eclipse.collections.impl.test.Verify;
+import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -221,6 +222,46 @@ public abstract class AbstractMutable<name>ObjectMapTestCase extends Abstract<na
         Assert.assertNull(emptyMap1.put(<(literal.(type))("1")>, "one"));
         Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, "one"), emptyMap1);
         Assert.assertNull(emptyMap1.put(<(literal.(type))("0")>, "zero"));
+        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("1")>, "one"), emptyMap1);
+    }
+
+    @Test
+    public void putPair()
+    {
+        Assert.assertEquals("zero", this.map.putPair(PrimitiveTuples.pair(<(literal.(type))("0")>, "one")));
+        Assert.assertEquals("thirtyOne", this.map.putPair(PrimitiveTuples.pair(<(literal.(type))("31")>, "thirtyTwo")));
+        Assert.assertEquals("thirtyTwo", this.map.putPair(PrimitiveTuples.pair(<(literal.(type))("32")>, "thirtyThree")));
+        <name>ObjectHashMap\<String> expected = <name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "one", <(literal.(type))("31")>, "thirtyTwo", <(literal.(type))("32")>, "thirtyThree");
+        Assert.assertEquals(expected, this.map);
+
+        Assert.assertNull(this.map.putPair(PrimitiveTuples.pair(<(literal.(type))("1")>, "two")));
+        Assert.assertEquals("two", this.map.putPair(PrimitiveTuples.pair(<(literal.(type))("1")>, "two")));
+        expected.put(<(literal.(type))("1")>, "two");
+        Assert.assertEquals(expected, this.map);
+
+        Assert.assertNull(this.map.putPair(PrimitiveTuples.pair(<(literal.(type))("33")>, "thirtyFour")));
+        expected.put(<(literal.(type))("33")>, "thirtyFour");
+        Assert.assertEquals(expected, this.map);
+
+        Assert.assertNull(this.map.putPair(PrimitiveTuples.pair(<(literal.(type))("30")>, "thirtyOne")));
+        expected.put(<(literal.(type))("30")>, "thirtyOne");
+        Assert.assertEquals(expected, this.map);
+
+        Assert.assertNull(this.map.putPair(PrimitiveTuples.pair(<(literal.(type))("5")>, null)));
+        expected.put(<(literal.(type))("5")>, null);
+        Assert.assertEquals(expected, this.map);
+
+        Assert.assertNull(this.map.putPair(PrimitiveTuples.pair(<(literal.(type))("50")>, null)));
+        expected.put(<(literal.(type))("50")>, null);
+        Assert.assertEquals(expected, this.map);
+
+        Mutable<name>ObjectMap\<String> emptyMap = <name>ObjectHashMap.newMap();
+        Assert.assertNull(emptyMap.putPair(PrimitiveTuples.pair(<(literal.(type))("0")>, "zero")));
+        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "zero"), emptyMap);
+        Mutable<name>ObjectMap\<String> emptyMap1 = <name>ObjectHashMap.newMap();
+        Assert.assertNull(emptyMap1.putPair(PrimitiveTuples.pair(<(literal.(type))("1")>, "one")));
+        Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, "one"), emptyMap1);
+        Assert.assertNull(emptyMap1.putPair(PrimitiveTuples.pair(<(literal.(type))("0")>, "zero")));
         Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("1")>, "one"), emptyMap1);
     }
 

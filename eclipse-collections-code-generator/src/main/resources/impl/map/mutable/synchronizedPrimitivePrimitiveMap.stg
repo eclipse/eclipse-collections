@@ -57,6 +57,7 @@ import org.eclipse.collections.impl.SynchronizedRichIterable;
 import org.eclipse.collections.impl.factory.primitive.<name1><name2>Maps;
 import org.eclipse.collections.impl.set.mutable.primitive.Synchronized<name1>Set;
 import org.eclipse.collections.impl.collection.mutable.primitive.Synchronized<name2>Collection;
+import org.eclipse.collections.api.tuple.primitive.<name1><name2>Pair;
 
 /**
  * A synchronized view of a {@link Mutable<name1><name2>Map}. It is imperative that the user manually synchronize on the collection when iterating over it using the
@@ -106,6 +107,15 @@ public final class Synchronized<name1><name2>Map
         synchronized (this.lock)
         {
             this.map.put(key, value);
+        }
+    }
+
+    @Override
+    public void putPair(<name1><name2>Pair keyValuePair)
+    {
+        synchronized (this.lock)
+        {
+            this.map.put(keyValuePair.getOne(), keyValuePair.getTwo());
         }
     }
 

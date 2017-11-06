@@ -118,6 +118,7 @@ import org.eclipse.collections.impl.collection.mutable.SynchronizedMutableCollec
 import org.eclipse.collections.impl.factory.primitive.<name>ObjectMaps;
 import org.eclipse.collections.impl.primitive.Synchronized<name>Iterable;
 import org.eclipse.collections.impl.set.mutable.primitive.Synchronized<name>Set;
+import org.eclipse.collections.api.tuple.primitive.<name>ObjectPair;
 
 /**
  * A synchronized view of a {@link Mutable<name>ObjectMap}. It is imperative that the user manually synchronize on the collection when iterating over it using the
@@ -158,6 +159,15 @@ public final class Synchronized<name>ObjectMap\<V>
         synchronized (this.lock)
         {
             return this.map.put(key, value);
+        }
+    }
+
+    @Override
+    public V putPair(<name>ObjectPair\<V> keyValuePair)
+    {
+        synchronized (this.lock)
+        {
+            return this.map.put(keyValuePair.getOne(), keyValuePair.getTwo());
         }
     }
 

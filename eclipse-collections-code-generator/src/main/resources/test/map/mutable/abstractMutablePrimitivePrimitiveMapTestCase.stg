@@ -35,6 +35,7 @@ import org.eclipse.collections.impl.set.mutable.primitive.<name1>HashSet;
 import org.eclipse.collections.impl.list.mutable.primitive.<name1>ArrayList;
 import org.eclipse.collections.impl.map.primitive.Abstract<name1><name2>MapTestCase;
 import org.eclipse.collections.impl.test.Verify;
+import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -381,6 +382,29 @@ public abstract class AbstractMutable<name1><name2>MapTestCase extends Abstract<
         Assert.assertEquals(expected, map1);
 
         map1.put(<(literal.(type1))("30")>, <(literal.(type2))("31")>);
+        expected.put(<(literal.(type1))("30")>, <(literal.(type2))("31")>);
+        Assert.assertEquals(expected, map1);
+    }
+
+    @Test
+    public void putPair()
+    {
+        Mutable<name1><name2>Map map1 = this.classUnderTest();
+        map1.putPair(PrimitiveTuples.pair(<(literal.(type1))("0")>, <(literal.(type2))("1")>));
+        map1.putPair(PrimitiveTuples.pair(<(literal.(type1))("31")>, <(literal.(type2))("32")>));
+        map1.putPair(PrimitiveTuples.pair(<(literal.(type1))("32")>, <(literal.(type2))("33")>));
+        <name1><name2>HashMap expected = <name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("0")>, <(literal.(type2))("1")>, <(literal.(type1))("31")>, <(literal.(type2))("32")>, <(literal.(type1))("32")>, <(literal.(type2))("33")>);
+        Assert.assertEquals(expected, map1);
+
+        map1.putPair(PrimitiveTuples.pair(<(literal.(type1))("1")>, <(literal.(type2))("2")>));
+        expected.put(<(literal.(type1))("1")>, <(literal.(type2))("2")>);
+        Assert.assertEquals(expected, map1);
+
+        map1.putPair(PrimitiveTuples.pair(<(literal.(type1))("33")>, <(literal.(type2))("34")>));
+        expected.put(<(literal.(type1))("33")>, <(literal.(type2))("34")>);
+        Assert.assertEquals(expected, map1);
+
+        map1.putPair(PrimitiveTuples.pair(<(literal.(type1))("30")>, <(literal.(type2))("31")>));
         expected.put(<(literal.(type1))("30")>, <(literal.(type2))("31")>);
         Assert.assertEquals(expected, map1);
     }

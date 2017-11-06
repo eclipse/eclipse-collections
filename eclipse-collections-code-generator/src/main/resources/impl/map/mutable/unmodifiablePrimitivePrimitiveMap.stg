@@ -54,6 +54,7 @@ import org.eclipse.collections.impl.collection.mutable.primitive.Unmodifiable<na
 import org.eclipse.collections.impl.factory.primitive.<name1><name2>Maps;
 import org.eclipse.collections.impl.iterator.Unmodifiable<name2>Iterator;
 import org.eclipse.collections.impl.set.mutable.primitive.Unmodifiable<name1>Set;
+import org.eclipse.collections.api.tuple.primitive.<name1><name2>Pair;
 
 /**
  * This file was automatically generated from template file unmodifiablePrimitivePrimitiveMap.stg.
@@ -86,6 +87,12 @@ public final class Unmodifiable<name1><name2>Map
     public void put(<type1> key, <type2> value)
     {
         throw new UnsupportedOperationException("Cannot call put() on " + this.getClass().getSimpleName());
+    }
+
+    @Override
+    public void putPair(<name1><name2>Pair keyValuePair)
+    {
+        throw new UnsupportedOperationException("Cannot call putPair() on " + this.getClass().getSimpleName());
     }
 
     @Override

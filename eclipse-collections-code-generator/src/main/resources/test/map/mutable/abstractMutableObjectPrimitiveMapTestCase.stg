@@ -28,6 +28,7 @@ import org.eclipse.collections.api.map.primitive.MutableObject<name>Map;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.map.primitive.AbstractObject<name>MapTestCase;
 import org.eclipse.collections.impl.test.Verify;
+import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -193,6 +194,24 @@ public abstract class AbstractMutableObject<name>MapTestCase extends AbstractObj
         Assert.assertEquals(expected, this.map);
 
         this.map.put(null, <(literal.(type))("7")>);
+        expected.put(null, <(literal.(type))("7")>);
+        Assert.assertEquals(expected, this.map);
+    }
+
+    @Test
+    public void putPair()
+    {
+        this.map.putPair(PrimitiveTuples.pair("0", <(literal.(type))("1")>));
+        this.map.putPair(PrimitiveTuples.pair("1", <(literal.(type))("2")>));
+        this.map.putPair(PrimitiveTuples.pair("2", <(literal.(type))("3")>));
+        Object<name>HashMap\<String> expected = Object<name>HashMap.newWithKeysValues("0", <(literal.(type))("1")>, "1", <(literal.(type))("2")>, "2", <(literal.(type))("3")>);
+        Assert.assertEquals(expected, this.map);
+
+        this.map.putPair(PrimitiveTuples.pair("5", <(literal.(type))("6")>));
+        expected.put("5", <(literal.(type))("6")>);
+        Assert.assertEquals(expected, this.map);
+
+        this.map.putPair(PrimitiveTuples.pair(null, <(literal.(type))("7")>));
         expected.put(null, <(literal.(type))("7")>);
         Assert.assertEquals(expected, this.map);
     }

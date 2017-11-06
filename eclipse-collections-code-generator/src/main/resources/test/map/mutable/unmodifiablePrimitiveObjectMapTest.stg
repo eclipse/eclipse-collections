@@ -35,6 +35,7 @@ import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.api.set.primitive.<name>Set;
 import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
 import org.eclipse.collections.impl.test.Verify;
+import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -102,6 +103,13 @@ public class Unmodifiable<name>ObjectMapTest extends AbstractMutable<name>Object
     public void put()
     {
         this.map.put(<(literal.(type))("0")>, "one");
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void putPair()
+    {
+        this.map.putPair(PrimitiveTuples.pair(<(literal.(type))("0")>, "one"));
     }
 
     @Override

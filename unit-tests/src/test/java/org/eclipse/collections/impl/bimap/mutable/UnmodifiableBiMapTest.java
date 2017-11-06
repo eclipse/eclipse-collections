@@ -183,6 +183,13 @@ public class UnmodifiableBiMapTest extends AbstractMutableBiMapTestCase
 
     @Override
     @Test
+    public void putPair()
+    {
+        Verify.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().putPair(Tuples.pair(4, 'd')));
+    }
+
+    @Override
+    @Test
     public void putAll()
     {
         Verify.assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeysValues("key1", "value1", "key2", "value2").putAll(UnifiedMap.newMap()));

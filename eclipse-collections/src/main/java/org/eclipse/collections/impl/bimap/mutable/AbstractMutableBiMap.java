@@ -283,12 +283,6 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
     }
 
     @Override
-    public V add(Pair<K, V> keyValuePair)
-    {
-        return this.put(keyValuePair.getOne(), keyValuePair.getTwo());
-    }
-
-    @Override
     public V remove(Object key)
     {
         if (!this.delegate.containsKey(key))
