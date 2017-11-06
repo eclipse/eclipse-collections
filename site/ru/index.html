@@ -9,7 +9,7 @@
   ~ http://www.eclipse.org/org/documents/edl-v10.php.
   -->
 
-<html lang="en">
+<html lang="ru">
 
 <head>
 
@@ -20,7 +20,7 @@
     <meta name="author" content="">
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
 
-    <title>Eclipse Collections - Features you want with the collections you need. </title>
+    <title>Eclipse Collections - Функции, которые вы хотите, в коллекциях, которые вам нужны. </title>
 
     <!-- Bootstrap Core CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-7s5uDGW3AHqw6xtJmNNtr+OBRJUlgkNJEo78P4b0yRw= sha512-nNo+yCHEyn0smMxSswnf/OnX6/KwJuZTlNZBjauKhTK0c+zT+q5JOCx0UFhXQ6rJR9jg6Es8gPuD2uZcYDLqSw==" crossorigin="anonymous">
@@ -73,29 +73,29 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="#start">Get Started</a>
+                        <a href="#start">Обзор</a>
                     </li>
                     <li>
-                        <a href="#concept">Concept</a>
+                        <a href="#concept">Концепции</a>
                     </li>
                     <li>
-                        <a href="#learn">Learn</a>
+                        <a href="#learn">Учите</a>
                     </li>
                     <li>
-                        <a href="#history">History</a>
+                        <a href="#history">История</a>
                     </li>
                     <li>
-                        <a href="#refGuide">Reference Guide</a>
+                        <a href="#refGuide">Руководство</a>
                     </li>
                     <li>
-                        <a href="#sourceCode">Source Code</a>
+                        <a href="#sourceCode">Исходный код</a>
                     </li>
                     <li>
-                        <a href="#contribute">Contribute</a>
+                        <a href="#contribute">Участвуйте</a>
                     </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                           aria-expanded="false">Javadoc <span class="caret"></span></a>
+                           aria-expanded="false">Javadoc<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="javadoc/9.0.0">9.0.0</a></li>
                             <li><a href="javadoc/8.2.0">8.2.0</a></li>
@@ -106,11 +106,11 @@
                     </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                           aria-expanded="false">Language <span class="caret"></span></a>
+                           aria-expanded="false">Языки<span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="">English</a></li>
-                            <li><a href="ja/index.html">Japanese</a></li>
-                            <li><a href="ru/index.html">Русский</a></li>
+                            <li><a href="../index.html">English</a></li>
+                            <li><a href="../ja/index.html">Japanese</a></li>
+                            <li><a href="">Русский</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -130,7 +130,7 @@
                 <div class="col-lg-push-2 col-lg-8">
                     <div class="intro-message">
                         <h1>Eclipse <span style="font-weight: 400">Collections</span></h1>
-                        <h3>- Features you want with the collections you need -</h3>
+                        <h3>- Функции, которые вы хотите, в коллекциях, которые вам нужны -</h3>
                     </div>
                 </div>
             </div>
@@ -151,10 +151,12 @@
                 <div class="col-lg-5 col-sm-6">
                     <hr class="section-heading-spacer">
                     <div class="clearfix"></div>
-                    <h2 class="section-heading">Get started with <br>Eclipse Collections</h2>
-                    <p class="lead">Eclipse Collections is the best Java collections framework ever
-                        that brings happiness to your Java development.
-                        <br><br>Integrate it to your codebase today with your favorite build tools!</p>
+                    <h2 class="section-heading">Что такое<br>Eclipse Collections</h2>
+                    <p class="lead">Eclipse Collections - это самая лучшая библиотека коллекций для Java,
+                        доставляющая много удовольствия разработчикам программ на Java.
+ 
+                        <br><br>Добавьте её к коду вашего проекта, используя систему
+                        сборки предпочитаемую вами!</p>
                 </div>
                 <div class="col-lg-7 col-sm-6">
                     <ul class="nav nav-tabs">
@@ -213,16 +215,17 @@ compile 'org.eclipse.collections:eclipse-collections:9.0.0'</pre>
                 <div class="col-lg-push-7 col-lg-5 col-sm-push-6  col-sm-6">
                     <hr class="section-heading-spacer">
                     <div class="clearfix"></div>
-                    <h2 class="section-heading">Rich, Concise and Readable APIs</h2>
-                    <p class="lead">Maximize the power of Java 8 Lambda expressions and method references with
-                        rich APIs directly available on your collections.
+                    <h2 class="section-heading">Богатые, выразительные и легко читаемые интерфейсы (API)</h2>
+                    <p class="lead">
+                        Получите максимум эффективности от лямбда-выражений и ссылок на методы в Java 8,
+                        используя богатые интерфейсы, которые доступны прямо на ваших коллекциях.
                     </p>
                 </div>
                 <div class="col-lg-pull-5 col-lg-7 col-sm-pull-6  col-sm-6">
                     <ul class="nav nav-tabs">
-                        <li class="active"><a href="#method" data-toggle="tab">Eclipse Collections w/ Method Ref</a></li>
-                        <li><a href="#ec" data-toggle="tab">Eclipse Collections w/ Lambda expression</a></li>
-                        <li><a href="#streams" data-toggle="tab">Java 8 Streams</a></li>
+                        <li class="active"><a href="#method" data-toggle="tab">Eclipse Collections с ссылками на методы</a></li>
+                        <li><a href="#ec" data-toggle="tab">Eclipse Collections с лямбда-выражениями</a></li>
+                        <li><a href="#streams" data-toggle="tab">Java 8 Stream API</a></li>
                     </ul>
                     <div id="ec-vs-streams" class="tab-content">
                         <div class="tab-pane fade in active" id="method">
@@ -293,19 +296,24 @@ List&lt;Person&gt; peopleWithCats =
                 <div class="col-lg-5 col-sm-6">
                     <hr class="section-heading-spacer">
                     <div class="clearfix"></div>
-                    <h2 class="section-heading">Many container types including <br>immutable collections, primitive collections, bimaps, multimaps and bags</h2>
-                    <p class="lead">You can make use of various container types, leveraging handy factory methods for instantiation.</p>
+                    <h2 class="section-heading">Большое разнообразие структур данных, включая<br>
+                        неизменяемые коллекции, коллекции примитивных типов, Bimap, Multimap и Bag
+                    </h2>
+                    <p class="lead">
+                        Неизменяемые (immutable) коллекции, коллекции примитивных типов, Bimap ("инвертированный" словарь, можно найти ключ по значению),
+                        Multimap (мультисловари, словари с не уникальными ключами) и Bag (мультимножество, множество с повторяющимся элементами) -
+                        вы можете создать все эти разнообразные типы контейнеров, используя удбные и легко находимые фабрики.</p>
                 </div>
                 <div class="col-lg-7 col-sm-6">
                     <ul class="nav nav-tabs">
-                        <li class="active"><a href="#mutable" data-toggle="tab">Mutable collections</a></li>
-                        <li><a href="#immutable" data-toggle="tab">Immutable collections</a></li>
-                        <li><a href="#primitives" data-toggle="tab">Primitive collections</a></li>
+                        <li class="active"><a href="#mutable" data-toggle="tab">Изменяемые коллекции</a></li>
+                        <li><a href="#immutable" data-toggle="tab">Неизменяемые коллекции</a></li>
+                        <li><a href="#primitives" data-toggle="tab">Коллекции примитивных типов</a></li>
                     </ul>
                     <div id="container-types" class="tab-content">
                         <div class="tab-pane fade in active" id="mutable">
                             <pre  class="prettyprint lang-java">
-//Initializing mutable list with empty(), of(), with() method
+// Инициализируем изменяемый список при помощи методов with empty(), of(), with()
 MutableList&lt;String&gt; mutableListEmpty =
   Lists.mutable.empty();
 MutableList&lt;String&gt; mutableListOf =
@@ -313,7 +321,7 @@ MutableList&lt;String&gt; mutableListOf =
 MutableList&lt;String&gt; mutableListWith =
   Lists.mutable.with("One", "One", "Two", "Three");
 
-//Various container types available
+// Разнообразные типы контейнеров
 MutableSet&lt;String&gt; mutableSet =
   Sets.mutable.with("One", "One", "Two", "Three");
 MutableBag&lt;String&gt; mutableBag =
@@ -329,7 +337,7 @@ MutableBiMap&lt;String, String&gt; mutableBiMap =
                         </div>
                         <div class="tab-pane fade" id="immutable">
                             <pre  class="prettyprint lang-java">
-//Initializing immutable list with empty(), of(), with() method
+// Инициализируем неизменяемые списки при помощи методов with empty(), of(), with()
 ImmutableList&lt;String&gt; immutableListEmpty =
   Lists.immutable.empty();
 ImmutableList&lt;String&gt; immutableListOf =
@@ -337,7 +345,7 @@ ImmutableList&lt;String&gt; immutableListOf =
 ImmutableList&lt;String&gt; immutableListWith =
   Lists.immutable.with("One", "One", "Two", "Three");
 
-//Various container types available
+// Разнообразные типы контейнеров
 ImmutableSet&lt;String&gt; immutableSet =
   Sets.immutable.with("One", "One", "Two", "Three");
 ImmutableBag&lt;String&gt; immutableBag =
@@ -353,7 +361,7 @@ ImmutableBiMap&lt;String, String&gt; immutableBiMap =
                         </div>
                         <div class="tab-pane fade" id="primitives">
                             <pre  class="prettyprint lang-java">
-//Mutable and immutable Lists, Sets, Bags, Stacks and Maps are available for all 8 primitive types
+//Изменяемые и неизменяемые контейнеры List, Set, Bag, Stack и Map существуют для всех примитивных типов
 MutableIntList intList =
   IntLists.mutable.of(1, 2, 3);
 MutableLongList longList =
@@ -371,7 +379,7 @@ MutableFloatList floatList =
 MutableDoubleList doubleList =
   DoubleLists.mutable.of(1.0, 2.0, 3.0);
 
-//You can created a ranged ints with IntInterval
+//Вы можете создать диапазон типа int с помошью IntInterval
 IntInterval oneTo10 =
   IntInterval.fromTo(1, 10); // ints from 1 to 10
 // [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
@@ -407,14 +415,15 @@ IntInterval evensFrom1To10 =
                 <div class="col-lg-push-6 col-lg-6 col-sm-push-6 col-sm-6">
                     <hr class="section-heading-spacer">
                     <div class="clearfix"></div>
-                    <h2 class="section-heading">Reduce memory footprint <br>with memory efficient containers</h2>
-                    <p class="lead">Eclipse Collections provides memory efficient implementation of Sets and Maps as well as primitive collections. </p>
+                    <h2 class="section-heading">Уменьшите расход памяти<br>при помощи коллекций с эффекитвным использванием памяти</h2>
+                    <p class="lead">Eclipse Collections содержит оптимизированные по памяти реализации интерфейсов Set (множества) и Maps (словари),
+                        а также коллекции примитивных типов.</p>
                 </div>
                 <div class="col-lg-pull-6 col-lg-6 col-sm-pull-6 col-sm-6">
                     <ul class="nav nav-tabs">
                         <li class="active"><a href="#set" data-toggle="tab">Sets</a></li>
                         <li><a href="#map" data-toggle="tab">Maps</a></li>
-                        <li><a href="#ints" data-toggle="tab">Primitive Collections</a></li>
+                        <li><a href="#ints" data-toggle="tab">Примитвные Коллекции</a></li>
                     </ul>
                     <div id="memory" class="tab-content">
                         <div class="tab-pane fade in active" id="set">
@@ -445,17 +454,18 @@ IntInterval evensFrom1To10 =
                 <div class="col-lg-5 col-sm-6">
                     <hr class="section-heading-spacer">
                     <div class="clearfix"></div>
-                    <h2 class="section-heading">Learn Eclipse Collections with Kata</h2>
+                    <h2 class="section-heading">Выучите Eclipse Collections с помощью ката</h2>
                     <p class="lead">
-                        Check out the <a href="https://github.com/eclipse/eclipse-collections-kata">Eclipse Collections Kata</a>, a fun way to help you learn idiomatic Eclipse Collections usage.
-                        This particular kata is set up as a series of unit tests which fail.
-                        Your task is to make them pass, using Eclipse Collections.
+                        Ознакомьтесь с <a href="https://github.com/eclipse/eclipse-collections-kata">Eclipse Collections Ката</a> -
+                        это лёгкий и интересный способ выучить, как писать правильный, идиоматический код с Eclipse Collections.
+                        Эта ката состоит из последовательности тестов, которые изначально проваливаются.
+                        Ваша задача - сделать так, чтобы тесты проходили, используя Eclipse Collections.
                     </p>
                 </div>
                 <div class="col-lg-7 col-sm-6">
                     <ul class="nav nav-tabs">
-                        <li class="active"><a href="#exercise" data-toggle="tab">Sample Exercise</a></li>
-                        <li><a href="#solution" data-toggle="tab">Sample Solution</a></li>
+                        <li class="active"><a href="#exercise" data-toggle="tab">Пример упражнения</a></li>
+                        <li><a href="#solution" data-toggle="tab">Пример решения</a></li>
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane fade in active" id="exercise">
@@ -500,30 +510,30 @@ public void getFirstNamesOfAllPeople()
 
         <div class="container-fluid">
 
-            <h2 class="section-heading">History of Eclipse Collections</h2>
+            <h2 class="section-heading">История Eclipse Collections</h2>
             <p class="lead">
-                The origin of Eclipse Collections was started off as a collections framework named Caramel at Goldman Sachs in 2004.
-
-                Since then the framework has evolved, and in 2012, it was open sourced to GitHub as a project called
+                Eclipse Collections имеет свои корни в фреймворке Caramel созданым в компании Goldman Sachs в 2004 году.
+                С тех пор фреймворк развивался, и в 2012 году его исходный код был открыт на GitHub как проект под названием
                 <a href="https://github.com/goldmansachs/gs-collections">GS Collections</a>.
                 <br><br>
-                GS Collections has been presented at number of
-                <a href="https://github.com/eclipse/eclipse-collections/wiki/Conference-talks-and-meetups">conferences</a>
-                including JVM Summit in 2012 and JavaOne in 2014.
-                A performance comparison between the parallel lazy implementations of Java 8, Scala and GS Collections was presented at
-                <a href="http://www.infoq.com/presentations/java-streams-scala-parallel-collections">QCon New York</a> in 2014.
-                Also <a href="https://github.com/eclipse/eclipse-collections/wiki/Articles">articles</a> about GS Collections
-                (<a href="http://www.infoq.com/articles/GS-Collections-by-Example-1">Part1</a> /
-                <a href="http://www.infoq.com/articles/GS-Collections-by-Example-2">Part2</a>)
-                have published on InfoQ.com
-                showing some of the capabilities of the collections framework through examples, and also interviews to the creator of GS Collections.
+                О GS Collections было рассказано на множестве
+                <a href="https://github.com/eclipse/eclipse-collections/wiki/Conference-talks-and-meetups">конференций</a>,
+                включая JVM Summit в 2012 году и JavaOne в 2014 году.
+                Сравнение производительности параллельных ленивых реализаций коллекций в Java 8, Scala и GS Collections было представлено в
+                <a href="http://www.infoq.com/presentations/java-streams-scala-parallel-collections">QCon New York</a> в 2014 году.
+                <a href="https://github.com/eclipse/eclipse-collections/wiki/Articles">Статьи</a> о GS Collections
+                (<a href="http://www.infoq.com/articles/GS-Collections-by-Example-1">Часть 1</a> /
+                <a href="http://www.infoq.com/articles/GS-Collections-by-Example-2">Часть 2</a>)
+                были опубликованы на сайте InfoQ.com, демонстрируя возможности фреймворка
+                на моногчисленных примерах. Они также включали и интервью с создателем GS Collections.
                 <br><br>
 
-                Over the years, around 40 or so developers from the same company have contributed to the collections framework.
+                За зти годы около 40 разработчиков из одной компании внесли исправления и дополнения в этот фреймворк.
                 <br><br>
 
-                To maximize the best nature of open source project, GS Collections has been migrated to the Eclipse Foundation, re-branded as Eclipse Collections in 2015.
-                Now the framework is fully open to the community, accepting contributions!
+                Чтобы полностью реализовать потенциал открытого проекта, фреймворк GS Collections перешёл  в Eclipse Foundation,
+                и был соответсвено переиминован в Eclipse Collections в 2015 году. Теперь платформа Eclipse Collections доступна всем,
+                и любой разработчик может принять участие в её развитии!
             </p>
         </div>
     </div>
@@ -531,10 +541,10 @@ public void getFirstNamesOfAllPeople()
     <a class="anchor" name="refGuide"></a>
     <div class="content-section-a">
         <div class="container-fluid">
-            <h2 class="section-heading">Reference Guide</h2>
+            <h2 class="section-heading">Руководство</h2>
             <p class="lead">
-                A comprehensive reference guide of the library is available on GitHub:
-                <a href="https://github.com/eclipse/eclipse-collections/blob/master/docs/guide.md#eclipse-collections-reference-guide">Reference Guide</a>.
+                Полное руководство по библиотеке можно найти на GitHub здесь:
+                <a href="https://github.com/eclipse/eclipse-collections/blob/master/docs/guide.md#eclipse-collections-reference-guide">Reference Guide</a> (англ.)
             </p>
         </div>
         <!-- /.container -->
@@ -544,9 +554,9 @@ public void getFirstNamesOfAllPeople()
     <a class="anchor" name="sourceCode"></a>
     <div class="content-section-b">
         <div class="container-fluid">
-            <h2 class="section-heading">Source Code</h2>
+            <h2 class="section-heading">Исходный Код</h2>
             <p class="lead">
-                Source code can be found on GitHub: <a href="https://github.com/eclipse/eclipse-collections">Eclipse Collections</a></p>.
+                Исходный код находится на GitHub: <a href="https://github.com/eclipse/eclipse-collections">Eclipse Collections</a></p>.
             </p>
         </div>
         <!-- /.container -->
@@ -562,59 +572,61 @@ public void getFirstNamesOfAllPeople()
 
             <div class="row">
                 <div class="col-lg-4 col-sm-4">
-                    <h3>Contribute</h3>
+                    <h3>Участие</h3>
                     <p class="regular">
-                        We welcome contributions!
+                        Мы приветсвуем ваше участие!
                         <br><br>
-                        Eclipse Collections Project Roadmap can be found <a href="https://github.com/eclipse/eclipse-collections/wiki/Roadmap">here</a>.
+                        Вы можете ознакомиться с планом равития Eclipse Collections
+                        <a href="https://github.com/eclipse/eclipse-collections/wiki/Roadmap">здесь</a>.
                         <br><br>
-                        We accept contributions via pull requests in GitHub.
-                        Please see <a href="https://github.com/eclipse/eclipse-collections/blob/master/CONTRIBUTING.md">How To Contribute</a> to get started.
+                        Мы принимаем предложения на изменение кода через запросы на слияние ("pull request") в GitHub.
+                        Чтобы сделать свой вклад в проект, пожалуйста ознакомьтесь с этим документом:
+                        <a href="https://github.com/eclipse/eclipse-collections/blob/master/CONTRIBUTING.md">How To Contribute</a> (англ.)
                     </p>
                 </div>
                 <div class="col-lg-4 col-sm-4">
-                    <h3>Latest News</h3>
-                    <p class="regular">Eclipse Collections 9.0.0 <a href="https://github.com/eclipse/eclipse-collections/releases/tag/9.0.0">released</a> <a class="light">(Sep 21nd 2017)</a></p>
-                    <p class="regular">Eclipse Collections 8.2.0 <a href="https://github.com/eclipse/eclipse-collections/releases/tag/8.2.0">released</a> <a class="light">(Jun 22nd 2017)</a></p>
-                    <p class="regular">Eclipse Collections 8.1.0 <a href="https://github.com/eclipse/eclipse-collections/releases/tag/8.1.0">released</a> <a class="light">(Mar 16th 2017)</a></p>
-                    <p class="regular">Eclipse Collections 8.0.0 <a href="https://github.com/eclipse/eclipse-collections/releases/tag/8.0.0">released</a> <a class="light">(Sep 8th 2016)</a></p>
-                    <p class="regular">Eclipse Collections 8.0.0-M1 <a href="https://github.com/eclipse/eclipse-collections/releases/tag/8.0.0-M1">available</a> <a class="light">(Jul 6th 2016)</a></p>
-                    <p class="regular">Eclipse Collections 7.1.0 <a href="https://github.com/eclipse/eclipse-collections/releases/tag/7.1.0">released</a> <a class="light">(Apr 8th 2016)</a></p>
-                    <p class="regular"><a href="https://github.com/eclipse/eclipse-collections-kata">Eclipse Collections Kata</a> was presented at
+                    <h3>Новости проекта</h3>
+                    <p class="regular">Eclipse Collections 9.0.0 <a href="https://github.com/eclipse/eclipse-collections/releases/tag/9.0.0">выпущен</a> <a class="light">(Sep 21nd 2017)</a></p>
+                    <p class="regular">Eclipse Collections 8.2.0 <a href="https://github.com/eclipse/eclipse-collections/releases/tag/8.2.0">выпущен</a> <a class="light">(Jun 22nd 2017)</a></p>
+                    <p class="regular">Eclipse Collections 8.1.0 <a href="https://github.com/eclipse/eclipse-collections/releases/tag/8.1.0">выпущен</a> <a class="light">(Mar 16th 2017)</a></p>
+                    <p class="regular">Eclipse Collections 8.0.0 <a href="https://github.com/eclipse/eclipse-collections/releases/tag/8.0.0">выпущен</a> <a class="light">(Sep 8th 2016)</a></p>
+                    <p class="regular">Eclipse Collections 8.0.0-M1 <a href="https://github.com/eclipse/eclipse-collections/releases/tag/8.0.0-M1">доступен</a> <a class="light">(Jul 6th 2016)</a></p>
+                    <p class="regular">Eclipse Collections 7.1.0 <a href="https://github.com/eclipse/eclipse-collections/releases/tag/7.1.0">выпущен</a> <a class="light">(Apr 8th 2016)</a></p>
+                    <p class="regular"><a href="https://github.com/eclipse/eclipse-collections-kata">Eclipse Collections Ката</a> демонстрировалась на
                         <a href="https://www.eclipsecon.org/na2016/session/eclipse-collections-kata-fun-way-learn-feature-rich-collections-framework">
                             EclipseCon NA 2016
                         </a>
-                        <a class="light">(Mar 7th 2016)</a>
+                        <a class="light">(2016-03-07)</a>
                     </p>
                     <p class="regular">An <a href="http://www.infoq.com/news/2016/01/GS-Collections-Eclipse-Foundn">article</a> about Eclipse Collections published in InfoQ. <a class="light">(Jan 21th 2016)</a></p>
-                    <p class="regular">Eclipse Collections was presented at
+                    <p class="regular">Eclipse Collections представлен на
                         <a href="http://www.java-users.jp/?page_id=2064#GH-4">
                             JJUG CCC 2015 Fall
                         </a>
-                        <a class="light">(Nov 28th 2015)</a>
+                        <a class="light">(2015-11-28)</a>
                     </p>
-                    <p class="regular">Eclipse Collections was presented at
+                    <p class="regular">Eclipse Collections представлен на
                         <a href="https://www.eclipsecon.org/europe2015/session/eclipse-collections-example">
                             EclipseCon Europe 2015
                         </a>
-                        <a class="light">(Nov 5th 2015)</a>
+                        <a class="light">(2015-11-05)</a>
                     </p>
-                    <p class="regular">Eclipse Collections was presented at
+                    <p class="regular">Eclipse Collections представлен на
                         <a href="https://events.rainfocus.com/oow15/catalog/oracle.jsp?event=javaone&search=CON1091&search.event=javaoneEvent&search.day=20151029">
                             JavaOne 2015 San Francisco
                         </a>
-                        <a class="light">(Oct 28th 2015)</a>
+                        <a class="light">(2015-10-28)</a>
                     </p>
                 </div>
                 <div class="col-lg-4 col-sm-4">
-                    <h3>Community Links</h3>
-                        <p class="regular">Eclipse PMI: <a href="https://projects.eclipse.org/projects/technology.collections">eclipse project management infrastructure</a></p>
+                    <h3>Полезные ссылки</h3>
+                        <p class="regular">Eclipse PMI: <a href="https://projects.eclipse.org/projects/technology.collections">управление проектом на сайте eclipse</a></p>
                         <p class="regular">GitHub: <a href="https://github.com/eclipse/eclipse-collections">eclipse-collections</a></p>
-                        <p class="regular">Issues: <a href="https://github.com/eclipse/eclipse-collections/issues">GitHub issues</a></p>
-                        <p class="regular">Mailing lists: <a href="https://dev.eclipse.org/mailman/listinfo/collections-dev">collections-dev</a> mailing list</p>
+                        <p class="regular">Трекер заявок: <a href="https://github.com/eclipse/eclipse-collections/issues">отслеживание заявок на GitHub</a></p>
+                        <p class="regular">Список рассылки: <a href="https://dev.eclipse.org/mailman/listinfo/collections-dev">collections-dev</a> список рассылки</p>
                         <p class="regular">Wiki: <a href="https://github.com/eclipse/eclipse-collections/wiki">GitHub wiki</a></p>
-                        <p class="regular">Forum: <a href="https://www.eclipse.org/forums/index.php?t=thread&amp;frm_id=329">Eclipse Collections Forum</a></p>
-                        <p class="regular">StackOverflow: tag with <a href="http://stackoverflow.com/questions/tagged/eclipse-collections">eclipse-collections</a></p>
+                        <p class="regular">Форум: <a href="https://www.eclipse.org/forums/index.php?t=thread&amp;frm_id=329">Eclipse Collections Forum</a></p>
+                        <p class="regular">StackOverflow: с пометкой (тегом) <a href="http://stackoverflow.com/questions/tagged/eclipse-collections">eclipse-collections</a></p>
                 </div>
                 <!-- /.col -->
             </div>
@@ -633,7 +645,7 @@ public void getFirstNamesOfAllPeople()
 
             <div class="row">
                 <div class="col-lg-12">
-                    <h3>- More features, less waste -</h3>
+                    <h3>- Больше функций, меньше трат -</h3>
                 </div>
             </div>
 
