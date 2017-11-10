@@ -2292,7 +2292,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
             return this.sentinelValues.oneValue;
         }
         int index = this.probe(key);
-        if (<(equals.(type))("this.keys[this.probe(key)]", "key")>)
+        if (<(equals.(type))("this.keys[index]", "key")>)
         {
             return this.values[index];
         }
