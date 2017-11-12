@@ -1366,6 +1366,116 @@ public class UnifiedSetWithHashingStrategy<T>
         while (true);
     }
 
+    public boolean trimToSize()
+    {
+        if (this.table.length <= (this.fastCeil(this.occupied / this.loadFactor) << 1))
+        {
+            return false;
+        }
+
+        Object[] temp = this.table;
+        this.init(this.fastCeil(this.occupied / this.loadFactor));
+        if (this.isEmpty())
+        {
+            return true;
+        }
+
+        int mask = this.table.length - 1;
+        for (int j = 0; j < temp.length; j++)
+        {
+            Object cur = temp[j];
+            if (cur instanceof ChainedBucket)
+            {
+                ChainedBucket bucket = (ChainedBucket) cur;
+                this.chainedTrimToSize(bucket, j, mask);
+            }
+            else if (cur != null)
+            {
+                this.addForTrim((T) cur, j, mask);
+            }
+        }
+        return true;
+    }
+
+    private void chainedTrimToSize(ChainedBucket bucket, int oldIndex, int mask)
+    {
+        do
+        {
+            this.addForTrim((T) bucket.zero, oldIndex, mask);
+            if (bucket.one == null)
+            {
+                return;
+            }
+            this.addForTrim((T) bucket.one, oldIndex, mask);
+            if (bucket.two == null)
+            {
+                return;
+            }
+            this.addForTrim((T) bucket.two, oldIndex, mask);
+            if (bucket.three == null)
+            {
+                return;
+            }
+            if (bucket.three instanceof ChainedBucket)
+            {
+                bucket = (ChainedBucket) bucket.three;
+                continue;
+            }
+            this.addForTrim((T) bucket.three, oldIndex, mask);
+            return;
+        }
+        while (true);
+    }
+
+    private void addForTrim(T key, int oldIndex, int mask)
+    {
+        int index = oldIndex & mask;
+        Object cur = this.table[index];
+        if (cur == null)
+        {
+            this.table[index] = key;
+            return;
+        }
+        this.chainedAddForTrim(key, index);
+    }
+
+    private void chainedAddForTrim(T key, int index)
+    {
+        Object realKey = key;
+        if (this.table[index] instanceof ChainedBucket)
+        {
+            ChainedBucket bucket = (ChainedBucket) this.table[index];
+            do
+            {
+                if (bucket.one == null)
+                {
+                    bucket.one = realKey;
+                    return;
+                }
+                if (bucket.two == null)
+                {
+                    bucket.two = realKey;
+                    return;
+                }
+                if (bucket.three instanceof ChainedBucket)
+                {
+                    bucket = (ChainedBucket) bucket.three;
+                    continue;
+                }
+                if (bucket.three == null)
+                {
+                    bucket.three = realKey;
+                    return;
+                }
+                bucket.three = new ChainedBucket(bucket.three, realKey);
+                return;
+            }
+            while (true);
+        }
+        ChainedBucket newBucket = new ChainedBucket(this.table[index], realKey);
+        this.table[index] = newBucket;
+    }
+
     @Override
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
     {
