@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2017 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -18,16 +18,19 @@ import java.util.NoSuchElementException;
 import java.util.Set;
 
 import org.eclipse.collections.api.block.function.Function;
+import org.eclipse.collections.api.block.function.primitive.ObjectIntToObjectFunction;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
+import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 import org.eclipse.collections.api.set.sorted.SortedSetIterable;
 import org.eclipse.collections.api.stack.MutableStack;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.EmptyIterator;
+import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.SortedSets;
 import org.eclipse.collections.impl.stack.mutable.ArrayStack;
 import org.eclipse.collections.impl.utility.ListIterate;
@@ -177,6 +180,24 @@ final class ImmutableEmptySortedSet<T>
     public <S> ImmutableSortedSet<S> selectInstancesOf(Class<S> clazz)
     {
         return (ImmutableSortedSet<S>) this;
+    }
+
+    /**
+     * @since 9.1.
+     */
+    @Override
+    public <V> ImmutableList<V> collectWithIndex(ObjectIntToObjectFunction<? super T, ? extends V> function)
+    {
+        return Lists.immutable.empty();
+    }
+
+    /**
+     * @since 9.1.
+     */
+    @Override
+    public <V, R extends Collection<V>> R collectWithIndex(ObjectIntToObjectFunction<? super T, ? extends V> function, R target)
+    {
+        return target;
     }
 
     @Override

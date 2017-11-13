@@ -34,6 +34,7 @@ import org.eclipse.collections.api.block.function.primitive.DoubleFunction;
 import org.eclipse.collections.api.block.function.primitive.FloatFunction;
 import org.eclipse.collections.api.block.function.primitive.IntFunction;
 import org.eclipse.collections.api.block.function.primitive.LongFunction;
+import org.eclipse.collections.api.block.function.primitive.ObjectIntToObjectFunction;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
@@ -241,6 +242,24 @@ final class ImmutableArrayList<T>
     public <P, V> ImmutableList<V> collectWith(Function2<? super T, ? super P, ? extends V> function, P parameter)
     {
         return InternalArrayIterate.collectWith(this.items, this.items.length, function, parameter, FastList.<V>newList(this.items.length)).toImmutable();
+    }
+
+    /**
+     * @since 9.1.
+     */
+    @Override
+    public <V> ImmutableList<V> collectWithIndex(ObjectIntToObjectFunction<? super T, ? extends V> function)
+    {
+        return this.collectWithIndex(function, FastList.<V>newList(this.items.length)).toImmutable();
+    }
+
+    /**
+     * @since 9.1.
+     */
+    @Override
+    public <V, R extends Collection<V>> R collectWithIndex(ObjectIntToObjectFunction<? super T, ? extends V> function, R target)
+    {
+        return InternalArrayIterate.collectWithIndex(this.items, this.items.length, function, target);
     }
 
     @Override

@@ -29,6 +29,7 @@ import org.eclipse.collections.api.block.function.primitive.DoubleFunction;
 import org.eclipse.collections.api.block.function.primitive.FloatFunction;
 import org.eclipse.collections.api.block.function.primitive.IntFunction;
 import org.eclipse.collections.api.block.function.primitive.LongFunction;
+import org.eclipse.collections.api.block.function.primitive.ObjectIntToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.ShortFunction;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
@@ -355,6 +356,30 @@ public class SynchronizedSortedSet<T>
     public <V> MutableList<V> collect(Function<? super T, ? extends V> function)
     {
         return (MutableList<V>) super.<V>collect(function);
+    }
+
+    /**
+     * @since 9.1.
+     */
+    @Override
+    public <V> MutableList<V> collectWithIndex(ObjectIntToObjectFunction<? super T, ? extends V> function)
+    {
+        synchronized (this.getLock())
+        {
+            return this.getDelegate().collectWithIndex(function);
+        }
+    }
+
+    /**
+     * @since 9.1.
+     */
+    @Override
+    public <V, R extends Collection<V>> R collectWithIndex(ObjectIntToObjectFunction<? super T, ? extends V> function, R target)
+    {
+        synchronized (this.getLock())
+        {
+            return this.getDelegate().collectWithIndex(function, target);
+        }
     }
 
     @Override

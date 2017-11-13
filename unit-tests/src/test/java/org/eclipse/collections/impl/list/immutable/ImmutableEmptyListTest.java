@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2017 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -30,6 +30,7 @@ import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.test.Verify;
+import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -501,5 +502,25 @@ public class ImmutableEmptyListTest extends AbstractImmutableListTestCase
     {
         // any predicate will result in -1
         Assert.assertEquals(-1, this.classUnderTest().detectLastIndex(Predicates.alwaysTrue()));
+    }
+
+    /**
+     * @since 9.1.
+     */
+    @Override
+    @Test
+    public void collectWithIndex()
+    {
+        Verify.assertEmpty(this.classUnderTest().collectWithIndex(PrimitiveTuples::pair));
+    }
+
+    /**
+     * @since 9.1.
+     */
+    @Override
+    @Test
+    public void collectWithIndexWithTarget()
+    {
+        Verify.assertEmpty(this.classUnderTest().collectWithIndex(PrimitiveTuples::pair, Lists.mutable.empty()));
     }
 }

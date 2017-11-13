@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2017 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -48,6 +48,7 @@ import org.eclipse.collections.impl.test.SerializeTestHelper;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.ImmutableEntry;
 import org.eclipse.collections.impl.tuple.Tuples;
+import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -196,12 +197,12 @@ public abstract class MutableSortedMapTestCase extends MutableMapIterableTestCas
     @Test
     public void tap()
     {
-        MutableList<String> tapResult = Lists.mutable.of();
+        MutableList<String> tapResult = Lists.mutable.empty();
         MapIterable<Integer, String> map = this.newMapWithKeysValues(1, "One", 3, "Three", 2, "Two", 4, "Four");
         Assert.assertSame(map, map.tap(tapResult::add));
         Assert.assertEquals(map.toList(), tapResult);
 
-        MutableList<String> revTapResult = Lists.mutable.of();
+        MutableList<String> revTapResult = Lists.mutable.empty();
         MapIterable<Integer, String> revMap = this.newMapWithKeysValues(REV_INT_ORDER, 1, "One", 3, "Three", 2, "Two", 4, "Four");
         Assert.assertSame(revMap, revMap.tap(revTapResult::add));
         Assert.assertEquals(revMap.toList(), revTapResult);
@@ -213,12 +214,12 @@ public abstract class MutableSortedMapTestCase extends MutableMapIterableTestCas
     {
         super.forEach();
 
-        MutableList<String> list = Lists.mutable.of();
+        MutableList<String> list = Lists.mutable.empty();
         MutableSortedMap<Integer, String> map = this.newMapWithKeysValues(1, "One", 3, "Three", 2, "Two", 4, "Four");
         map.forEach(CollectionAddProcedure.on(list));
         Verify.assertListsEqual(FastList.newListWith("One", "Two", "Three", "Four"), list);
 
-        MutableList<String> list2 = Lists.mutable.of();
+        MutableList<String> list2 = Lists.mutable.empty();
         MutableSortedMap<Integer, String> revMap = this.newMapWithKeysValues(REV_INT_ORDER, 1, "One", 3, "Three", 2, "Two", 4, "Four");
         revMap.forEach(CollectionAddProcedure.on(list2));
         Verify.assertListsEqual(FastList.newListWith("Four", "Three", "Two", "One"), list2);
@@ -229,7 +230,7 @@ public abstract class MutableSortedMapTestCase extends MutableMapIterableTestCas
     public void forEachWith()
     {
         super.forEachWith();
-        MutableList<Integer> list = Lists.mutable.of();
+        MutableList<Integer> list = Lists.mutable.empty();
         MutableSortedMap<Integer, Integer> map = this.newMapWithKeysValues(-1, 1, -2, 2, -3, 3, -4, 4);
         map.forEachWith((argument1, argument2) -> list.add(argument1 + argument2), 10);
         Verify.assertListsEqual(FastList.newListWith(14, 13, 12, 11), list);
@@ -238,7 +239,7 @@ public abstract class MutableSortedMapTestCase extends MutableMapIterableTestCas
     @Test
     public void forEachWith_reverse()
     {
-        MutableList<Integer> list2 = Lists.mutable.of();
+        MutableList<Integer> list2 = Lists.mutable.empty();
         MutableSortedMap<Integer, Integer> revMap = this.newMapWithKeysValues(REV_INT_ORDER, -1, 1, -2, 2, -3, 3, -4, 4);
         revMap.forEachWith((argument1, argument2) -> list2.add(argument1 + argument2), 10);
         Verify.assertListsEqual(FastList.newListWith(11, 12, 13, 14), list2);
@@ -250,7 +251,7 @@ public abstract class MutableSortedMapTestCase extends MutableMapIterableTestCas
     {
         super.forEachWithIndex();
 
-        MutableList<String> list = Lists.mutable.of();
+        MutableList<String> list = Lists.mutable.empty();
         MutableSortedMap<Integer, String> map = this.newMapWithKeysValues(1, "One", 2, "Two", 3, "Three", 4, "Four");
         map.forEachWithIndex((value, index) -> {
             list.add(value);
@@ -262,7 +263,7 @@ public abstract class MutableSortedMapTestCase extends MutableMapIterableTestCas
     @Test
     public void forEachWithIndex_reverse()
     {
-        MutableList<String> list2 = Lists.mutable.of();
+        MutableList<String> list2 = Lists.mutable.empty();
         MutableSortedMap<Integer, String> revMap = this.newMapWithKeysValues(REV_INT_ORDER, 1, "One", 2, "Two", 3, "Three", 4, "Four");
         revMap.forEachWithIndex((value, index) -> {
             list2.add(value);
@@ -277,7 +278,7 @@ public abstract class MutableSortedMapTestCase extends MutableMapIterableTestCas
     {
         super.forEachKeyValue();
 
-        MutableList<String> result = Lists.mutable.of();
+        MutableList<String> result = Lists.mutable.empty();
         MutableSortedMap<Integer, String> map = this.newMapWithKeysValues(REV_INT_ORDER, 1, "One", 2, "Two", 3, "Three");
         map.forEachKeyValue((key, value) -> result.add(key + value));
         Verify.assertListsEqual(FastList.newListWith("3Three", "2Two", "1One"), result);
@@ -288,7 +289,7 @@ public abstract class MutableSortedMapTestCase extends MutableMapIterableTestCas
     public void forEachKey()
     {
         super.forEachKey();
-        MutableList<Integer> result = Lists.mutable.of();
+        MutableList<Integer> result = Lists.mutable.empty();
         MutableSortedMap<Integer, String> map = this.newMapWithKeysValues(REV_INT_ORDER, 1, "1", 2, "2", 3, "3");
         map.forEachKey(CollectionAddProcedure.on(result));
         Verify.assertListsEqual(FastList.newListWith(3, 2, 1), result);
@@ -398,6 +399,38 @@ public abstract class MutableSortedMapTestCase extends MutableMapIterableTestCas
         Verify.assertListsEqual(FastList.newListWith("3", "2", "1"), collect);
     }
 
+    /**
+     * @since 9.1.
+     */
+    @Test
+    public void collectWithIndex()
+    {
+        MutableSortedMap<Integer, String> integers = this.newMapWithKeysValues(1, "1", 2, "2", 3, "3", 4, "4");
+        Assert.assertEquals(
+                Lists.mutable.with(
+                        PrimitiveTuples.pair("1", 0),
+                        PrimitiveTuples.pair("2", 1),
+                        PrimitiveTuples.pair("3", 2),
+                        PrimitiveTuples.pair("4", 3)),
+                integers.collectWithIndex(PrimitiveTuples::pair));
+    }
+
+    /**
+     * @since 9.1.
+     */
+    @Test
+    public void collectWithIndexWithTarget()
+    {
+        MutableSortedMap<Integer, String> integers = this.newMapWithKeysValues(1, "1", 2, "2", 3, "3", 4, "4");
+        Assert.assertEquals(
+                Lists.mutable.with(
+                        PrimitiveTuples.pair("1", 0),
+                        PrimitiveTuples.pair("2", 1),
+                        PrimitiveTuples.pair("3", 2),
+                        PrimitiveTuples.pair("4", 3)),
+                integers.collectWithIndex(PrimitiveTuples::pair, Lists.mutable.empty()));
+    }
+
     @Override
     @Test
     public void flatten_value()
@@ -406,7 +439,7 @@ public abstract class MutableSortedMapTestCase extends MutableMapIterableTestCas
         MutableSortedMap<Integer, String> map = this.newMapWithKeysValues(REV_INT_ORDER, 1, "cd", 2, "ab");
 
         Function<String, Iterable<Character>> function = object -> {
-            MutableList<Character> result = Lists.mutable.of();
+            MutableList<Character> result = Lists.mutable.empty();
             char[] chars = object.toCharArray();
             for (char aChar : chars)
             {

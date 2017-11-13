@@ -33,6 +33,7 @@ import org.eclipse.collections.api.list.primitive.MutableLongList;
 import org.eclipse.collections.api.list.primitive.MutableShortList;
 import org.eclipse.collections.api.partition.list.PartitionMutableList;
 import org.eclipse.collections.api.stack.MutableStack;
+import org.eclipse.collections.api.tuple.primitive.ObjectIntPair;
 import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.block.factory.HashingStrategies;
 import org.eclipse.collections.impl.block.factory.Predicates;
@@ -41,6 +42,7 @@ import org.eclipse.collections.impl.block.factory.PrimitiveFunctions;
 import org.eclipse.collections.impl.block.procedure.CollectionAddProcedure;
 import org.eclipse.collections.impl.collection.mutable.AbstractCollectionTestCase;
 import org.eclipse.collections.impl.factory.Lists;
+import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.factory.Stacks;
 import org.eclipse.collections.impl.factory.primitive.BooleanLists;
 import org.eclipse.collections.impl.factory.primitive.ByteLists;
@@ -48,6 +50,7 @@ import org.eclipse.collections.impl.factory.primitive.CharLists;
 import org.eclipse.collections.impl.factory.primitive.DoubleLists;
 import org.eclipse.collections.impl.factory.primitive.FloatLists;
 import org.eclipse.collections.impl.factory.primitive.IntLists;
+import org.eclipse.collections.impl.factory.primitive.IntSets;
 import org.eclipse.collections.impl.factory.primitive.LongLists;
 import org.eclipse.collections.impl.factory.primitive.ShortLists;
 import org.eclipse.collections.impl.lazy.ReverseIterable;
@@ -57,6 +60,7 @@ import org.eclipse.collections.impl.list.mutable.primitive.IntArrayList;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.test.SerializeTestHelper;
 import org.eclipse.collections.impl.test.Verify;
+import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -113,6 +117,47 @@ public abstract class AbstractListTestCase
         Assert.assertEquals(8, this.newWith(1, 1, 2, 2, 3, 3, 3, 4, 2).detectLastIndex(integer -> integer == 2));
         Assert.assertEquals(7, this.newWith(1, 1, 2, 2, 3, 3, 3, 4, 2).detectLastIndex(integer -> integer != 2));
         Assert.assertEquals(-1, this.newWith(1, 1, 2, 2, 3, 3, 3, 4, 2).detectLastIndex(integer -> integer == 5));
+    }
+
+    /**
+     * @since 9.1.
+     */
+    @Test
+    public void collectWithIndex()
+    {
+        RichIterable<ObjectIntPair<Integer>> pairs =
+                this.newWith(3, 2, 1, 0).collectWithIndex(PrimitiveTuples::pair);
+        Assert.assertEquals(
+                IntLists.mutable.with(0, 1, 2, 3),
+                pairs.collectInt(ObjectIntPair::getTwo, IntLists.mutable.empty()));
+        Assert.assertEquals(
+                Lists.mutable.with(3, 2, 1, 0),
+                pairs.collect(ObjectIntPair::getOne, Lists.mutable.empty()));
+    }
+
+    /**
+     * @since 9.1.
+     */
+    @Test
+    public void collectWithIndexWithTarget()
+    {
+        RichIterable<ObjectIntPair<Integer>> pairs =
+                this.newWith(3, 2, 1, 0).collectWithIndex(PrimitiveTuples::pair, Lists.mutable.empty());
+        Assert.assertEquals(
+                IntLists.mutable.with(0, 1, 2, 3),
+                pairs.collectInt(ObjectIntPair::getTwo, IntLists.mutable.empty()));
+        Assert.assertEquals(
+                Lists.mutable.with(3, 2, 1, 0),
+                pairs.collect(ObjectIntPair::getOne, Lists.mutable.empty()));
+
+        RichIterable<ObjectIntPair<Integer>> setOfPairs =
+                this.newWith(3, 2, 1, 0).collectWithIndex(PrimitiveTuples::pair, Sets.mutable.empty());
+        Assert.assertEquals(
+                IntSets.mutable.with(0, 1, 2, 3),
+                setOfPairs.collectInt(ObjectIntPair::getTwo, IntSets.mutable.empty()));
+        Assert.assertEquals(
+                Sets.mutable.with(3, 2, 1, 0),
+                setOfPairs.collect(ObjectIntPair::getOne, Sets.mutable.empty()));
     }
 
     @Override

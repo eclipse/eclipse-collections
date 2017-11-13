@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 Goldman Sachs.
+ * Copyright (c) 2017 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -17,9 +17,14 @@ import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.tuple.Pair;
+import org.eclipse.collections.api.tuple.primitive.ObjectIntPair;
 import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.factory.Lists;
+import org.eclipse.collections.impl.factory.Sets;
+import org.eclipse.collections.impl.factory.primitive.IntLists;
+import org.eclipse.collections.impl.factory.primitive.IntSets;
 import org.eclipse.collections.impl.tuple.Tuples;
+import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -28,6 +33,47 @@ import static org.junit.Assert.assertSame;
 
 public interface OrderedIterableTestCase extends RichIterableTestCase
 {
+    /**
+     * @since 9.1.
+     */
+    @Test
+    default void OrderedIterable_collectWithIndex()
+    {
+        RichIterable<ObjectIntPair<Integer>> pairs = ((OrderedIterable<Integer>) this.newWith(3, 2, 1, 0))
+                .collectWithIndex(PrimitiveTuples::pair);
+        Assert.assertEquals(
+                IntLists.mutable.with(0, 1, 2, 3),
+                pairs.collectInt(ObjectIntPair::getTwo, IntLists.mutable.empty()));
+        Assert.assertEquals(
+                Lists.mutable.with(3, 2, 1, 0),
+                pairs.collect(ObjectIntPair::getOne, Lists.mutable.empty()));
+    }
+
+    /**
+     * @since 9.1.
+     */
+    @Test
+    default void OrderedIterable_collectWithIndexWithTarget()
+    {
+        RichIterable<ObjectIntPair<Integer>> pairs = ((OrderedIterable<Integer>) this.newWith(3, 2, 1, 0))
+                .collectWithIndex(PrimitiveTuples::pair, Lists.mutable.empty());
+        Assert.assertEquals(
+                IntLists.mutable.with(0, 1, 2, 3),
+                pairs.collectInt(ObjectIntPair::getTwo, IntLists.mutable.empty()));
+        Assert.assertEquals(
+                Lists.mutable.with(3, 2, 1, 0),
+                pairs.collect(ObjectIntPair::getOne, Lists.mutable.empty()));
+
+        RichIterable<ObjectIntPair<Integer>> setOfPairs = ((OrderedIterable<Integer>) this.newWith(3, 2, 1, 0))
+                .collectWithIndex(PrimitiveTuples::pair, Lists.mutable.empty());
+        Assert.assertEquals(
+                IntSets.mutable.with(0, 1, 2, 3),
+                setOfPairs.collectInt(ObjectIntPair::getTwo, IntSets.mutable.empty()));
+        Assert.assertEquals(
+                Sets.mutable.with(3, 2, 1, 0),
+                setOfPairs.collect(ObjectIntPair::getOne, Sets.mutable.empty()));
+    }
+
     @Test
     default void OrderedIterable_getFirst()
     {

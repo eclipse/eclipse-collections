@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2017 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -518,6 +518,39 @@ public abstract class AbstractImmutableSortedBagTestCase extends AbstractImmutab
     {
         ImmutableSortedBag<Integer> integers = this.classUnderTest(Collections.reverseOrder());
         Verify.assertListsEqual(integers.toList(), integers.collect(Functions.getIntegerPassThru()).castToList());
+    }
+
+    /**
+     * @since 9.1.
+     */
+    @Test
+    public void collectWithIndex()
+    {
+        ImmutableSortedBag<Integer> integers = this.classUnderTest(Collections.reverseOrder());
+        MutableList<ObjectIntPair<Integer>> expected = Lists.mutable.with(
+                PrimitiveTuples.pair(Integer.valueOf(2), 0),
+                PrimitiveTuples.pair(Integer.valueOf(1), 1),
+                PrimitiveTuples.pair(Integer.valueOf(1), 2),
+                PrimitiveTuples.pair(Integer.valueOf(1), 3));
+        ImmutableList<ObjectIntPair<Integer>> actual = integers.collectWithIndex(PrimitiveTuples::pair);
+        Assert.assertEquals(expected, actual);
+    }
+
+    /**
+     * @since 9.1.
+     */
+    @Test
+    public void collectWithIndexWithTarget()
+    {
+        ImmutableSortedBag<Integer> integers = this.classUnderTest(Collections.reverseOrder());
+        MutableList<ObjectIntPair<Integer>> expected = Lists.mutable.with(
+                PrimitiveTuples.pair(Integer.valueOf(2), 0),
+                PrimitiveTuples.pair(Integer.valueOf(1), 1),
+                PrimitiveTuples.pair(Integer.valueOf(1), 2),
+                PrimitiveTuples.pair(Integer.valueOf(1), 3));
+        MutableList<ObjectIntPair<Integer>> actual =
+                integers.collectWithIndex(PrimitiveTuples::pair, Lists.mutable.empty());
+        Assert.assertEquals(expected, actual);
     }
 
     @Override

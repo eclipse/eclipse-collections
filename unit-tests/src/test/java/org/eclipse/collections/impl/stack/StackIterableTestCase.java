@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2017 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -35,6 +35,7 @@ import org.eclipse.collections.api.set.SetIterable;
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 import org.eclipse.collections.api.stack.StackIterable;
 import org.eclipse.collections.api.tuple.Pair;
+import org.eclipse.collections.api.tuple.primitive.ObjectIntPair;
 import org.eclipse.collections.impl.AbstractRichIterableTestCase;
 import org.eclipse.collections.impl.bag.sorted.mutable.TreeBag;
 import org.eclipse.collections.impl.block.factory.Comparators;
@@ -76,6 +77,7 @@ import org.eclipse.collections.impl.stack.mutable.primitive.LongArrayStack;
 import org.eclipse.collections.impl.stack.mutable.primitive.ShortArrayStack;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.Tuples;
+import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -220,6 +222,38 @@ public abstract class StackIterableTestCase
         Assert.assertEquals(3, function.count);
 
         Assert.assertEquals(Lists.mutable.with("true", "false", "null"), stack.collect(String::valueOf, FastList.newList()));
+    }
+
+    /**
+     * @since 9.1.
+     */
+    @Test
+    public void collectWithIndex()
+    {
+        StackIterable<String> stack = this.newStackFromTopToBottom("4", "3", "2", "1");
+
+        StackIterable<ObjectIntPair<String>> expected = this.newStackFromTopToBottom(
+                PrimitiveTuples.pair("4", 0),
+                PrimitiveTuples.pair("3", 1),
+                PrimitiveTuples.pair("2", 2),
+                PrimitiveTuples.pair("1", 3));
+        Assert.assertEquals(expected, stack.collectWithIndex(PrimitiveTuples::pair));
+    }
+
+    /**
+     * @since 9.1.
+     */
+    @Test
+    public void collectWithIndexWithTarget()
+    {
+        StackIterable<String> stack = this.newStackFromTopToBottom("4", "3", "2", "1");
+
+        MutableList<ObjectIntPair<String>> expected = Lists.mutable.with(
+                PrimitiveTuples.pair("4", 0),
+                PrimitiveTuples.pair("3", 1),
+                PrimitiveTuples.pair("2", 2),
+                PrimitiveTuples.pair("1", 3));
+        Assert.assertEquals(expected, stack.collectWithIndex(PrimitiveTuples::pair, Lists.mutable.empty()));
     }
 
     @Override

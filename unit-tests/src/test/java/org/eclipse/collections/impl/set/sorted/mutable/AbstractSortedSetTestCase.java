@@ -30,6 +30,7 @@ import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 import org.eclipse.collections.api.set.sorted.SortedSetIterable;
 import org.eclipse.collections.api.stack.MutableStack;
 import org.eclipse.collections.api.tuple.Pair;
+import org.eclipse.collections.api.tuple.primitive.ObjectIntPair;
 import org.eclipse.collections.impl.bag.sorted.mutable.TreeBag;
 import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.block.factory.IntegerPredicates;
@@ -47,6 +48,7 @@ import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.test.domain.Person;
 import org.eclipse.collections.impl.tuple.Tuples;
+import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -74,13 +76,13 @@ public abstract class AbstractSortedSetTestCase extends AbstractCollectionTestCa
     {
         super.addAll();
 
-        TreeSortedSet<Integer> expected = TreeSortedSet.newSet(FastList.newListWith(1, 2, 3));
+        TreeSortedSet<Integer> expected = TreeSortedSet.newSet(Lists.mutable.with(1, 2, 3));
         MutableSortedSet<Integer> collection = this.newWith();
 
-        Assert.assertTrue(collection.addAll(FastList.newListWith(3, 2, 1)));
+        Assert.assertTrue(collection.addAll(Lists.mutable.with(3, 2, 1)));
         Assert.assertEquals(expected, collection);
 
-        Assert.assertFalse(collection.addAll(FastList.newListWith(1, 2, 3)));
+        Assert.assertFalse(collection.addAll(Lists.mutable.with(1, 2, 3)));
         Assert.assertEquals(expected, collection);
     }
 
@@ -90,13 +92,13 @@ public abstract class AbstractSortedSetTestCase extends AbstractCollectionTestCa
     {
         super.addAllIterable();
 
-        TreeSortedSet<Integer> expected = TreeSortedSet.newSet(FastList.newListWith(1, 2, 3));
+        TreeSortedSet<Integer> expected = TreeSortedSet.newSet(Lists.mutable.with(1, 2, 3));
         MutableSortedSet<Integer> collection = this.newWith();
 
-        Assert.assertTrue(collection.addAllIterable(FastList.newListWith(1, 2, 3)));
+        Assert.assertTrue(collection.addAllIterable(Lists.mutable.with(1, 2, 3)));
         Assert.assertEquals(expected, collection);
 
-        Assert.assertFalse(collection.addAllIterable(FastList.newListWith(1, 2, 3)));
+        Assert.assertFalse(collection.addAllIterable(Lists.mutable.with(1, 2, 3)));
         Assert.assertEquals(expected, collection);
     }
 
@@ -297,9 +299,43 @@ public abstract class AbstractSortedSetTestCase extends AbstractCollectionTestCa
     {
         super.collect();
         MutableSortedSet<Integer> integers = this.newWith(4, 3, 1, 6, 5, 2);
-        Verify.assertListsEqual(FastList.newListWith("1", "2", "3", "4", "5", "6"), integers.collect(String::valueOf));
+        Verify.assertListsEqual(Lists.mutable.with("1", "2", "3", "4", "5", "6"), integers.collect(String::valueOf));
         MutableSortedSet<Integer> revInt = this.newWith(Collections.reverseOrder(), 1, 2, 4, 3, 5);
-        Verify.assertListsEqual(FastList.newListWith("5", "4", "3", "2", "1"), revInt.collect(String::valueOf));
+        Verify.assertListsEqual(Lists.mutable.with("5", "4", "3", "2", "1"), revInt.collect(String::valueOf));
+    }
+
+    /**
+     * @since 9.1.
+     */
+    @Test
+    public void collectWithIndex()
+    {
+        MutableSortedSet<Integer> integers = this.newWith(4, 5, 6);
+        MutableList<ObjectIntPair<Integer>> expected =
+                Lists.mutable.with(
+                        PrimitiveTuples.pair(Integer.valueOf(4), 0),
+                        PrimitiveTuples.pair(Integer.valueOf(5), 1),
+                        PrimitiveTuples.pair(Integer.valueOf(6), 2));
+        Verify.assertListsEqual(
+                expected,
+                integers.collectWithIndex(PrimitiveTuples::pair));
+    }
+
+    /**
+     * @since 9.1.
+     */
+    @Test
+    public void collectWithIndexWithTarget()
+    {
+        MutableSortedSet<Integer> integers = this.newWith(4, 5, 6);
+        MutableList<ObjectIntPair<Integer>> expected =
+                Lists.mutable.with(
+                        PrimitiveTuples.pair(Integer.valueOf(4), 0),
+                        PrimitiveTuples.pair(Integer.valueOf(5), 1),
+                        PrimitiveTuples.pair(Integer.valueOf(6), 2));
+        Verify.assertListsEqual(
+                expected,
+                integers.collectWithIndex(PrimitiveTuples::pair, Lists.mutable.empty()));
     }
 
     @Override
@@ -310,7 +346,7 @@ public abstract class AbstractSortedSetTestCase extends AbstractCollectionTestCa
         MutableSortedSet<Integer> integers = this.newWith(Collections.reverseOrder(), 1, 2, 3, 4, 5);
         Function2<Integer, Integer, String> addParamFunction =
                 (each, parameter) -> ((Integer) (each + parameter)).toString();
-        Verify.assertListsEqual(FastList.newListWith("4", "3", "2", "1", "0"), integers.collectWith(addParamFunction, -1));
+        Verify.assertListsEqual(Lists.mutable.with("4", "3", "2", "1", "0"), integers.collectWith(addParamFunction, -1));
     }
 
     @Override
@@ -331,9 +367,9 @@ public abstract class AbstractSortedSetTestCase extends AbstractCollectionTestCa
         super.flatCollect();
         MutableSortedSet<Integer> collection = this.newWith(Collections.reverseOrder(), 2, 4, 2, 1, 3);
         Function<Integer, MutableList<String>> function =
-                object -> FastList.newListWith(String.valueOf(object));
+                object -> Lists.mutable.with(String.valueOf(object));
         Verify.assertListsEqual(
-                FastList.newListWith("4", "3", "2", "1"),
+                Lists.mutable.with("4", "3", "2", "1"),
                 collection.flatCollect(function));
     }
 
@@ -440,10 +476,10 @@ public abstract class AbstractSortedSetTestCase extends AbstractCollectionTestCa
         Person jane = new Person("Jane", "Smith");
         Person johnDoe = new Person("John", "Doe");
         MutableSortedSet<Person> people = this.newWith(john, johnDoe);
-        MutableList<Holder> list = FastList.newListWith(new Holder(1), new Holder(2), new Holder(3));
+        MutableList<Holder> list = Lists.mutable.with(new Holder(1), new Holder(2), new Holder(3));
         MutableList<Pair<Person, Holder>> pairs = people.zip(list);
         Assert.assertEquals(
-                FastList.newListWith(Tuples.pair(johnDoe, new Holder(1)), Tuples.pair(john, new Holder(2))),
+                Lists.mutable.with(Tuples.pair(johnDoe, new Holder(1)), Tuples.pair(john, new Holder(2))),
                 pairs.toList());
         Assert.assertTrue(pairs.add(Tuples.pair(new Person("Jack", "Baker"), new Holder(3))));
         Assert.assertEquals(Tuples.pair(new Person("Jack", "Baker"), new Holder(3)), pairs.getLast());
@@ -465,7 +501,7 @@ public abstract class AbstractSortedSetTestCase extends AbstractCollectionTestCa
         Person johnDoe = new Person("John", "Doe");
         MutableSortedSet<Person> people = this.newWith(Collections.reverseOrder(), john, johnDoe, jane);
         MutableSortedSet<Pair<Person, Integer>> pairs = people.zipWithIndex();
-        Verify.assertListsEqual(FastList.newListWith(Tuples.pair(john, 0), Tuples.pair(johnDoe, 1)), pairs.toList());
+        Verify.assertListsEqual(Lists.mutable.with(Tuples.pair(john, 0), Tuples.pair(johnDoe, 1)), pairs.toList());
     }
 
     @Test
@@ -571,8 +607,16 @@ public abstract class AbstractSortedSetTestCase extends AbstractCollectionTestCa
         MutableSortedSet<SortedSetIterable<Integer>> intPowerSet = this.newWith(1, 2, 3).powerSet();
         MutableSortedSet<SortedSetIterable<Integer>> revPowerSet = this.newWith(Collections.reverseOrder(), 1, 2, 3, 4, 5, 6).powerSet();
 
-        FastList<TreeSortedSet<Integer>> expectedSortedSet = FastList.newListWith(TreeSortedSet.newSet(), TreeSortedSet.newSetWith(1), TreeSortedSet.newSetWith(2),
-                TreeSortedSet.newSetWith(3), TreeSortedSet.newSetWith(1, 2), TreeSortedSet.newSetWith(1, 3), TreeSortedSet.newSetWith(2, 3), TreeSortedSet.newSetWith(1, 2, 3));
+        MutableList<TreeSortedSet<Integer>> expectedSortedSet =
+                Lists.mutable.with(
+                        TreeSortedSet.newSet(),
+                        TreeSortedSet.newSetWith(1),
+                        TreeSortedSet.newSetWith(2),
+                        TreeSortedSet.newSetWith(3),
+                        TreeSortedSet.newSetWith(1, 2),
+                        TreeSortedSet.newSetWith(1, 3),
+                        TreeSortedSet.newSetWith(2, 3),
+                        TreeSortedSet.newSetWith(1, 2, 3));
 
         Verify.assertListsEqual(expectedSortedSet, intPowerSet.toList());
         Verify.assertSortedSetsEqual(TreeSortedSet.newSetWith(Collections.reverseOrder(), 1, 2, 3, 4, 5, 6), (SortedSet<Integer>) revPowerSet.getLast());
@@ -633,7 +677,7 @@ public abstract class AbstractSortedSetTestCase extends AbstractCollectionTestCa
         subSet.clear();
         Verify.assertSortedSetsEqual(TreeSortedSet.newSetWith(4, 5), set);
 
-        subSet.addAll(FastList.newListWith(1, 2));
+        subSet.addAll(Lists.mutable.with(1, 2));
         Verify.assertSortedSetsEqual(TreeSortedSet.newSetWith(1, 2, 4, 5), set);
 
         subSet.remove(1);
@@ -656,7 +700,7 @@ public abstract class AbstractSortedSetTestCase extends AbstractCollectionTestCa
         subSet.clear();
         Verify.assertSortedSetsEqual(TreeSortedSet.newSetWith(4, 5), set);
 
-        subSet.addAll(FastList.newListWith(1, 2));
+        subSet.addAll(Lists.mutable.with(1, 2));
         Verify.assertSortedSetsEqual(TreeSortedSet.newSetWith(1, 2, 4, 5), set);
 
         subSet.remove(1);
@@ -679,7 +723,7 @@ public abstract class AbstractSortedSetTestCase extends AbstractCollectionTestCa
         subSet.clear();
         Verify.assertSortedSetsEqual(TreeSortedSet.newSetWith(1), set);
 
-        subSet.addAll(FastList.newListWith(2, 3));
+        subSet.addAll(Lists.mutable.with(2, 3));
         Verify.assertSortedSetsEqual(TreeSortedSet.newSetWith(1, 2, 3), set);
 
         subSet.remove(3);
@@ -698,7 +742,7 @@ public abstract class AbstractSortedSetTestCase extends AbstractCollectionTestCa
         MutableSortedSet<Number> numbers = this.newWith((o1, o2) -> Double.compare(o1.doubleValue(), o2.doubleValue()), 1, 2.0, 3, 4.0, 5);
         MutableSortedSet<Integer> integers = numbers.selectInstancesOf(Integer.class);
         Assert.assertEquals(UnifiedSet.newSetWith(1, 3, 5), integers);
-        Assert.assertEquals(FastList.newListWith(1, 3, 5), integers.toList());
+        Assert.assertEquals(Lists.mutable.with(1, 3, 5), integers.toList());
     }
 
     @Test

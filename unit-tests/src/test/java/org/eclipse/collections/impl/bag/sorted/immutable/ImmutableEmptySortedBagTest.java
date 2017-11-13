@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2017 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -16,6 +16,7 @@ import java.util.NoSuchElementException;
 
 import org.eclipse.collections.api.bag.sorted.ImmutableSortedBag;
 import org.eclipse.collections.api.collection.MutableCollection;
+import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.sorted.MutableSortedMap;
 import org.eclipse.collections.api.partition.bag.sorted.PartitionImmutableSortedBag;
@@ -23,6 +24,7 @@ import org.eclipse.collections.api.partition.bag.sorted.PartitionSortedBag;
 import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 import org.eclipse.collections.api.tuple.Pair;
+import org.eclipse.collections.api.tuple.primitive.ObjectIntPair;
 import org.eclipse.collections.impl.bag.mutable.HashBag;
 import org.eclipse.collections.impl.bag.mutable.primitive.BooleanHashBag;
 import org.eclipse.collections.impl.bag.mutable.primitive.ByteHashBag;
@@ -57,6 +59,7 @@ import org.eclipse.collections.impl.list.mutable.primitive.ShortArrayList;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.map.sorted.mutable.TreeSortedMap;
 import org.eclipse.collections.impl.test.Verify;
+import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -607,6 +610,30 @@ public class ImmutableEmptySortedBagTest extends AbstractImmutableSortedBagTestC
     public void bottomOccurrences()
     {
         Assert.assertEquals(0, this.newWith().bottomOccurrences(5).size());
+    }
+
+    /**
+     * @since 9.1.
+     */
+    @Override
+    @Test
+    public void collectWithIndex()
+    {
+        ImmutableSortedBag<Integer> integers = this.classUnderTest(Collections.reverseOrder());
+        ImmutableList<ObjectIntPair<Integer>> actual = integers.collectWithIndex(PrimitiveTuples::pair);
+        Assert.assertEquals(Lists.mutable.empty(), actual);
+    }
+
+    /**
+     * @since 9.1.
+     */
+    @Test
+    public void collectWithIndexWithTarget()
+    {
+        ImmutableSortedBag<Integer> integers = this.classUnderTest(Collections.reverseOrder());
+        MutableList<ObjectIntPair<Integer>> actual =
+                integers.collectWithIndex(PrimitiveTuples::pair, Lists.mutable.empty());
+        Assert.assertEquals(Lists.mutable.empty(), actual);
     }
 
     @Override

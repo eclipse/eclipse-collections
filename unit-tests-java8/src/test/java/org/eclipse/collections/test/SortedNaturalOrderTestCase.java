@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2017 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -25,6 +25,7 @@ import org.eclipse.collections.api.collection.primitive.MutableIntCollection;
 import org.eclipse.collections.api.collection.primitive.MutableLongCollection;
 import org.eclipse.collections.api.collection.primitive.MutableShortCollection;
 import org.eclipse.collections.api.list.MutableList;
+import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.ordered.SortedIterable;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.block.factory.Predicates;
@@ -32,6 +33,7 @@ import org.eclipse.collections.impl.block.factory.Predicates2;
 import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.tuple.Tuples;
+import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -372,6 +374,52 @@ public interface SortedNaturalOrderTestCase extends OrderedIterableTestCase
         assertEquals(Integer.valueOf(1), iterator.next());
         assertEquals(Integer.valueOf(2), iterator.next());
         assertEquals(Integer.valueOf(3), iterator.next());
+    }
+
+    /**
+     * @since 9.1.
+     */
+    @Override
+    @Test
+    default void OrderedIterable_collectWithIndex()
+    {
+        OrderedIterable<Integer> iterable = (OrderedIterable) this.newWith(1, 2, 2, 3, 3, 3, 4, 4, 4, 4);
+        Assert.assertEquals(
+                Lists.immutable.with(
+                        PrimitiveTuples.pair(Integer.valueOf(1), 0),
+                        PrimitiveTuples.pair(Integer.valueOf(2), 1),
+                        PrimitiveTuples.pair(Integer.valueOf(2), 2),
+                        PrimitiveTuples.pair(Integer.valueOf(3), 3),
+                        PrimitiveTuples.pair(Integer.valueOf(3), 4),
+                        PrimitiveTuples.pair(Integer.valueOf(3), 5),
+                        PrimitiveTuples.pair(Integer.valueOf(4), 6),
+                        PrimitiveTuples.pair(Integer.valueOf(4), 7),
+                        PrimitiveTuples.pair(Integer.valueOf(4), 8),
+                        PrimitiveTuples.pair(Integer.valueOf(4), 9)),
+                iterable.collectWithIndex(PrimitiveTuples::pair).toList());
+    }
+
+    /**
+     * @since 9.1.
+     */
+    @Override
+    @Test
+    default void OrderedIterable_collectWithIndexWithTarget()
+    {
+        OrderedIterable<Integer> iterable = (OrderedIterable) this.newWith(1, 2, 2, 3, 3, 3, 4, 4, 4, 4);
+        Assert.assertEquals(
+                Lists.immutable.with(
+                        PrimitiveTuples.pair(Integer.valueOf(1), 0),
+                        PrimitiveTuples.pair(Integer.valueOf(2), 1),
+                        PrimitiveTuples.pair(Integer.valueOf(2), 2),
+                        PrimitiveTuples.pair(Integer.valueOf(3), 3),
+                        PrimitiveTuples.pair(Integer.valueOf(3), 4),
+                        PrimitiveTuples.pair(Integer.valueOf(3), 5),
+                        PrimitiveTuples.pair(Integer.valueOf(4), 6),
+                        PrimitiveTuples.pair(Integer.valueOf(4), 7),
+                        PrimitiveTuples.pair(Integer.valueOf(4), 8),
+                        PrimitiveTuples.pair(Integer.valueOf(4), 9)),
+                iterable.collectWithIndex(PrimitiveTuples::pair, Lists.mutable.empty()));
     }
 
     @Override

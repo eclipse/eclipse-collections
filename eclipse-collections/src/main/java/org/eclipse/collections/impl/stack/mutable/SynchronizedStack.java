@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2017 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -1410,6 +1410,18 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         synchronized (this.lock)
         {
             return this.delegate.collectWithIndex(function);
+        }
+    }
+
+    /**
+     * @since 9.1
+     */
+    @Override
+    public <V, R extends Collection<V>> R collectWithIndex(ObjectIntToObjectFunction<? super T, ? extends V> function, R target)
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.collectWithIndex(function, target);
         }
     }
 

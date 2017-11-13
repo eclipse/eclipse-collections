@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2017 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -52,6 +52,7 @@ import org.eclipse.collections.impl.set.sorted.mutable.TreeSortedSet;
 import org.eclipse.collections.impl.stack.mutable.ArrayStack;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.Tuples;
+import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -351,6 +352,38 @@ public abstract class AbstractImmutableSortedSetTestCase
     {
         ImmutableSortedSet<Integer> integers = this.classUnderTest(Collections.reverseOrder());
         Verify.assertListsEqual(integers.toList(), integers.collectWith((value, parameter) -> value / parameter, 1).castToList());
+    }
+
+    /**
+     * @since 9.1.
+     */
+    @Test
+    public void collectWithIndex()
+    {
+        ImmutableSortedSet<Integer> integers = this.classUnderTest(Collections.reverseOrder());
+        Assert.assertEquals(
+                Lists.mutable.with(
+                        PrimitiveTuples.pair(Integer.valueOf(4), 0),
+                        PrimitiveTuples.pair(Integer.valueOf(3), 1),
+                        PrimitiveTuples.pair(Integer.valueOf(2), 2),
+                        PrimitiveTuples.pair(Integer.valueOf(1), 3)),
+                integers.collectWithIndex(PrimitiveTuples::pair));
+    }
+
+    /**
+     * @since 9.1.
+     */
+    @Test
+    public void collectWithIndexWithTarget()
+    {
+        ImmutableSortedSet<Integer> integers = this.classUnderTest(Collections.reverseOrder());
+        Assert.assertEquals(
+                Lists.mutable.with(
+                        PrimitiveTuples.pair(Integer.valueOf(4), 0),
+                        PrimitiveTuples.pair(Integer.valueOf(3), 1),
+                        PrimitiveTuples.pair(Integer.valueOf(2), 2),
+                        PrimitiveTuples.pair(Integer.valueOf(1), 3)),
+                integers.collectWithIndex(PrimitiveTuples::pair, Lists.mutable.empty()));
     }
 
     @Test

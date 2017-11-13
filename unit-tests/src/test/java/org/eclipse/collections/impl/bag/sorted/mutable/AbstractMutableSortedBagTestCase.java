@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2017 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -432,6 +432,40 @@ public abstract class AbstractMutableSortedBagTestCase extends MutableBagTestCas
         MutableSortedBag<Integer> integers = TreeBag.newBagWith(Comparators.reverseNaturalOrder(), 4, 3, 1, 1);
         MutableList<Holder> holders = integers.collect(Holder::new);
         Assert.assertEquals(FastList.newListWith(new Holder(4), new Holder(3), new Holder(1), new Holder(1)), holders);
+    }
+
+    /**
+     * @since 9.1.
+     */
+    @Test
+    public void collectWithIndex()
+    {
+        MutableSortedBag<Integer> integers = this.newWith(Collections.reverseOrder(), 1, 1, 2);
+        MutableList<ObjectIntPair<Integer>> expected =
+                Lists.mutable.with(
+                        PrimitiveTuples.pair(Integer.valueOf(2), 0),
+                        PrimitiveTuples.pair(Integer.valueOf(1), 1),
+                        PrimitiveTuples.pair(Integer.valueOf(1), 2));
+        Verify.assertListsEqual(
+                expected,
+                integers.collectWithIndex(PrimitiveTuples::pair));
+    }
+
+    /**
+     * @since 9.1.
+     */
+    @Test
+    public void collectWithIndexWithTarget()
+    {
+        MutableSortedBag<Integer> integers = this.newWith(Collections.reverseOrder(), 1, 1, 2);
+        MutableList<ObjectIntPair<Integer>> expected =
+                Lists.mutable.with(
+                        PrimitiveTuples.pair(Integer.valueOf(2), 0),
+                        PrimitiveTuples.pair(Integer.valueOf(1), 1),
+                        PrimitiveTuples.pair(Integer.valueOf(1), 2));
+        Verify.assertListsEqual(
+                expected,
+                integers.collectWithIndex(PrimitiveTuples::pair, Lists.mutable.empty()));
     }
 
     @Override
