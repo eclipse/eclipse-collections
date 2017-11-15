@@ -1104,7 +1104,7 @@ String defaultString = list.makeString(); //"1, 2, 3"
 ```java
 MutableList<Integer> list = Lists.mutable.with(1, 2, 3);
 String myDelim = 
-    list.stream().map(Object::toString).collect(Collectors.joining("[", "/", "]")); // "[1/2/3]"
+    list.stream().map(Object::toString).collect(Collectors.joining("/", "[", "]")); // "[1/2/3]"
 String mySeper = 
     list.stream().map(Object::toString).collect(Collectors.joining("/")); // "1/2/3"
 String defaultString = 
