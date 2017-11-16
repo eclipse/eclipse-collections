@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2017 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -48,6 +48,7 @@ import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.set.sorted.mutable.TreeSortedSet;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.Tuples;
+import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -482,6 +483,32 @@ public class ImmutableEmptySortedSetTest extends AbstractImmutableSortedSetTestC
     {
         ImmutableSortedSet<Integer> integers = this.classUnderTest(Collections.reverseOrder());
         Verify.assertIterableEmpty(integers.collect(Functions.getIntegerPassThru()));
+    }
+
+    /**
+     * @since 9.1.
+     */
+    @Override
+    @Test
+    public void collectWithIndex()
+    {
+        ImmutableSortedSet<Integer> integers = this.classUnderTest(Collections.reverseOrder());
+        Assert.assertEquals(
+                Lists.mutable.empty(),
+                integers.collectWithIndex(PrimitiveTuples::pair));
+    }
+
+    /**
+     * @since 9.1.
+     */
+    @Override
+    @Test
+    public void collectWithIndexWithTarget()
+    {
+        ImmutableSortedSet<Integer> integers = this.classUnderTest(Collections.reverseOrder());
+        Assert.assertEquals(
+                Lists.mutable.empty(),
+                integers.collectWithIndex(PrimitiveTuples::pair, Lists.mutable.empty()));
     }
 
     @Override

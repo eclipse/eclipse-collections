@@ -40,6 +40,7 @@ import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.map.sorted.mutable.TreeSortedMap;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.Tuples;
+import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -113,8 +114,8 @@ public abstract class ImmutableSortedMapTestCase extends MapIterableTestCase
     {
         super.forEachKeyValue();
 
-        MutableList<Integer> actualKeys = Lists.mutable.of();
-        MutableList<String> actualValues = Lists.mutable.of();
+        MutableList<Integer> actualKeys = Lists.mutable.empty();
+        MutableList<String> actualValues = Lists.mutable.empty();
 
         this.classUnderTest().forEachKeyValue((key, value) -> {
             actualKeys.add(key);
@@ -127,8 +128,8 @@ public abstract class ImmutableSortedMapTestCase extends MapIterableTestCase
         MutableList<String> expectedValues = expectedKeys.collect(String::valueOf);
         Verify.assertListsEqual(expectedValues, actualValues);
 
-        MutableList<Integer> revActualKeys = Lists.mutable.of();
-        MutableList<String> revActualValues = Lists.mutable.of();
+        MutableList<Integer> revActualKeys = Lists.mutable.empty();
+        MutableList<String> revActualValues = Lists.mutable.empty();
 
         this.classUnderTest(REV_INT_COMPARATOR).forEachKeyValue((key, value) -> {
             revActualKeys.add(key);
@@ -148,11 +149,11 @@ public abstract class ImmutableSortedMapTestCase extends MapIterableTestCase
     {
         super.forEachValue();
 
-        MutableList<String> actualValues = Lists.mutable.of();
+        MutableList<String> actualValues = Lists.mutable.empty();
         this.classUnderTest().forEachValue(CollectionAddProcedure.on(actualValues));
         Verify.assertListsEqual(this.expectedValues(), actualValues);
 
-        MutableList<String> revActualValues = Lists.mutable.of();
+        MutableList<String> revActualValues = Lists.mutable.empty();
         this.classUnderTest(REV_INT_COMPARATOR).forEachValue(CollectionAddProcedure.on(revActualValues));
         Verify.assertListsEqual(this.expectedValues().reverseThis(), revActualValues);
     }
@@ -163,12 +164,12 @@ public abstract class ImmutableSortedMapTestCase extends MapIterableTestCase
     {
         super.tap();
 
-        MutableList<String> tapResult = Lists.mutable.of();
+        MutableList<String> tapResult = Lists.mutable.empty();
         ImmutableSortedMap<Integer, String> map = this.classUnderTest();
         Assert.assertSame(map, map.tap(tapResult::add));
         Assert.assertEquals(map.toList(), tapResult);
 
-        MutableList<String> revTapResult = Lists.mutable.of();
+        MutableList<String> revTapResult = Lists.mutable.empty();
         ImmutableSortedMap<Integer, String> revMap = this.classUnderTest(REV_INT_COMPARATOR);
         Assert.assertSame(revMap, revMap.tap(revTapResult::add));
         Assert.assertEquals(revMap.toList(), revTapResult);
@@ -180,11 +181,11 @@ public abstract class ImmutableSortedMapTestCase extends MapIterableTestCase
     {
         super.forEach();
 
-        MutableList<String> actualValues = Lists.mutable.of();
+        MutableList<String> actualValues = Lists.mutable.empty();
         this.classUnderTest().forEach(CollectionAddProcedure.on(actualValues));
         Verify.assertListsEqual(this.expectedValues(), actualValues);
 
-        MutableList<String> revActualValues = Lists.mutable.of();
+        MutableList<String> revActualValues = Lists.mutable.empty();
         this.classUnderTest(REV_INT_COMPARATOR).forEach(CollectionAddProcedure.on(revActualValues));
         Verify.assertListsEqual(this.expectedValues().reverseThis(), revActualValues);
     }
@@ -195,14 +196,14 @@ public abstract class ImmutableSortedMapTestCase extends MapIterableTestCase
     {
         super.iterator();
 
-        MutableList<String> actualValues = Lists.mutable.of();
+        MutableList<String> actualValues = Lists.mutable.empty();
         for (String eachValue : this.classUnderTest())
         {
             actualValues.add(eachValue);
         }
         Verify.assertListsEqual(this.expectedValues(), actualValues);
 
-        MutableList<String> revActualValues = Lists.mutable.of();
+        MutableList<String> revActualValues = Lists.mutable.empty();
         for (String eachValue : this.classUnderTest(REV_INT_COMPARATOR))
         {
             revActualValues.add(eachValue);
@@ -225,11 +226,11 @@ public abstract class ImmutableSortedMapTestCase extends MapIterableTestCase
     {
         super.forEachKey();
 
-        MutableList<Integer> actualKeys = Lists.mutable.of();
+        MutableList<Integer> actualKeys = Lists.mutable.empty();
         this.classUnderTest().forEachKey(CollectionAddProcedure.on(actualKeys));
         Verify.assertListsEqual(this.expectedKeys(), actualKeys);
 
-        MutableList<Integer> revActualKeys = Lists.mutable.of();
+        MutableList<Integer> revActualKeys = Lists.mutable.empty();
         this.classUnderTest(REV_INT_COMPARATOR).forEachKey(CollectionAddProcedure.on(revActualKeys));
         Verify.assertListsEqual(this.expectedKeys().reverseThis(), revActualKeys);
     }
@@ -317,8 +318,8 @@ public abstract class ImmutableSortedMapTestCase extends MapIterableTestCase
 
         Object actualParameter = new Object();
 
-        MutableList<String> actualValues = Lists.mutable.of();
-        MutableList<Object> actualParameters = Lists.mutable.of();
+        MutableList<String> actualValues = Lists.mutable.empty();
+        MutableList<Object> actualParameters = Lists.mutable.empty();
 
         this.classUnderTest().forEachWith((eachValue, parameter) -> {
             actualValues.add(eachValue);
@@ -328,8 +329,8 @@ public abstract class ImmutableSortedMapTestCase extends MapIterableTestCase
         Verify.assertListsEqual(this.expectedKeys().collect(String::valueOf), actualValues);
         Verify.assertListsEqual(Collections.nCopies(this.size(), actualParameter), actualParameters);
 
-        MutableList<String> revActualValues = Lists.mutable.of();
-        MutableList<Object> revActualParameters = Lists.mutable.of();
+        MutableList<String> revActualValues = Lists.mutable.empty();
+        MutableList<Object> revActualParameters = Lists.mutable.empty();
 
         this.classUnderTest(REV_INT_COMPARATOR).forEachWith((eachValue, parameter) -> {
             revActualValues.add(eachValue);
@@ -346,8 +347,8 @@ public abstract class ImmutableSortedMapTestCase extends MapIterableTestCase
     {
         super.forEachWithIndex();
 
-        MutableList<String> actualValues = Lists.mutable.of();
-        MutableList<Integer> actualIndices = Lists.mutable.of();
+        MutableList<String> actualValues = Lists.mutable.empty();
+        MutableList<Integer> actualIndices = Lists.mutable.empty();
 
         this.classUnderTest().forEachWithIndex((eachValue, index) -> {
             actualValues.add(eachValue);
@@ -357,8 +358,8 @@ public abstract class ImmutableSortedMapTestCase extends MapIterableTestCase
         Verify.assertListsEqual(this.expectedKeys().collect(String::valueOf), actualValues);
         Verify.assertListsEqual(this.expectedIndices(), actualIndices);
 
-        MutableList<String> revActualValues = Lists.mutable.of();
-        MutableList<Integer> revActualIndices = Lists.mutable.of();
+        MutableList<String> revActualValues = Lists.mutable.empty();
+        MutableList<Integer> revActualIndices = Lists.mutable.empty();
 
         this.classUnderTest(REV_INT_COMPARATOR).forEachWithIndex((eachValue, index) -> {
             revActualValues.add(eachValue);
@@ -375,7 +376,7 @@ public abstract class ImmutableSortedMapTestCase extends MapIterableTestCase
     {
         super.valuesView();
 
-        MutableList<String> actualValues = Lists.mutable.of();
+        MutableList<String> actualValues = Lists.mutable.empty();
         for (String eachValue : this.classUnderTest().valuesView())
         {
             actualValues.add(eachValue);
@@ -383,7 +384,7 @@ public abstract class ImmutableSortedMapTestCase extends MapIterableTestCase
         MutableList<String> expectedValues = this.expectedValues();
         Verify.assertListsEqual(expectedValues, actualValues);
 
-        MutableList<String> revActualValues = Lists.mutable.of();
+        MutableList<String> revActualValues = Lists.mutable.empty();
         for (String eachValue : this.classUnderTest(REV_INT_COMPARATOR).valuesView())
         {
             revActualValues.add(eachValue);
@@ -397,14 +398,14 @@ public abstract class ImmutableSortedMapTestCase extends MapIterableTestCase
     {
         super.keysView();
 
-        MutableList<Integer> actualKeys = Lists.mutable.of();
+        MutableList<Integer> actualKeys = Lists.mutable.empty();
         for (Integer eachKey : this.classUnderTest().keysView())
         {
             actualKeys.add(eachKey);
         }
         Verify.assertListsEqual(this.expectedKeys(), actualKeys);
 
-        MutableList<Integer> revActualKeys = Lists.mutable.of();
+        MutableList<Integer> revActualKeys = Lists.mutable.empty();
         for (Integer eachKey : this.classUnderTest(REV_INT_COMPARATOR).keysView())
         {
             revActualKeys.add(eachKey);
@@ -507,6 +508,38 @@ public abstract class ImmutableSortedMapTestCase extends MapIterableTestCase
         ImmutableSortedMap<Integer, Integer> revResult = revMap.collectValues((argument1, argument2) -> argument1);
 
         Verify.assertListsEqual(revResult.keysView().toList(), revResult.valuesView().toList());
+    }
+
+    /**
+     * @since 9.1.
+     */
+    @Test
+    public void collectWithIndex()
+    {
+        ImmutableSortedMap<Integer, String> integers = this.classUnderTest();
+        Assert.assertEquals(
+                Lists.mutable.with(
+                        PrimitiveTuples.pair("1", 0),
+                        PrimitiveTuples.pair("2", 1),
+                        PrimitiveTuples.pair("3", 2),
+                        PrimitiveTuples.pair("4", 3)),
+                integers.collectWithIndex(PrimitiveTuples::pair));
+    }
+
+    /**
+     * @since 9.1.
+     */
+    @Test
+    public void collectWithIndexWithTarget()
+    {
+        ImmutableSortedMap<Integer, String> integers = this.classUnderTest();
+        Assert.assertEquals(
+                Lists.mutable.with(
+                        PrimitiveTuples.pair("1", 0),
+                        PrimitiveTuples.pair("2", 1),
+                        PrimitiveTuples.pair("3", 2),
+                        PrimitiveTuples.pair("4", 3)),
+                integers.collectWithIndex(PrimitiveTuples::pair, Lists.mutable.empty()));
     }
 
     @Test
@@ -651,7 +684,7 @@ public abstract class ImmutableSortedMapTestCase extends MapIterableTestCase
     {
         if (this.size() == 0)
         {
-            return Lists.mutable.of();
+            return Lists.mutable.empty();
         }
         return Interval.oneTo(this.size()).toList();
     }
@@ -660,7 +693,7 @@ public abstract class ImmutableSortedMapTestCase extends MapIterableTestCase
     {
         if (this.size() == 0)
         {
-            return Lists.mutable.of();
+            return Lists.mutable.empty();
         }
         return Interval.zeroTo(this.size() - 1).toList();
     }

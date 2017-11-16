@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2017 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -25,6 +25,7 @@ import org.eclipse.collections.api.block.function.primitive.DoubleFunction;
 import org.eclipse.collections.api.block.function.primitive.FloatFunction;
 import org.eclipse.collections.api.block.function.primitive.IntFunction;
 import org.eclipse.collections.api.block.function.primitive.LongFunction;
+import org.eclipse.collections.api.block.function.primitive.ObjectIntToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.ShortFunction;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
@@ -256,6 +257,30 @@ public interface OrderedIterable<T> extends RichIterable<T>
 
     @Override
     <V> OrderedIterable<V> collect(Function<? super T, ? extends V> function);
+
+    /**
+     * Returns a new OrderedIterable using results obtained by applying the specified function to each element
+     * and its corresponding index.
+     *
+     * @since 9.1.
+     */
+    default <V> OrderedIterable<V> collectWithIndex(ObjectIntToObjectFunction<? super T, ? extends V> function)
+    {
+        int[] index = { 0 };
+        return this.collect(each -> function.valueOf(each, index[0]++));
+    }
+
+    /**
+     * Adds elements to the target Collection using results obtained by applying the specified function to each element
+     * and its corresponding index.
+     *
+     * @since 9.1.
+     */
+    default <V, R extends Collection<V>> R collectWithIndex(ObjectIntToObjectFunction<? super T, ? extends V> function, R target)
+    {
+        int[] index = { 0 };
+        return this.collect(each -> function.valueOf(each, index[0]++), target);
+    }
 
     @Override
     <P, V> OrderedIterable<V> collectWith(Function2<? super T, ? super P, ? extends V> function, P parameter);

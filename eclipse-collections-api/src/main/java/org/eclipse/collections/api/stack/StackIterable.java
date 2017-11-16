@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2017 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -186,7 +186,14 @@ public interface StackIterable<T> extends OrderedIterable<T>
     @Override
     <V> StackIterable<V> collectIf(Predicate<? super T> predicate, Function<? super T, ? extends V> function);
 
-    <V> StackIterable<V> collectWithIndex(ObjectIntToObjectFunction<? super T, ? extends V> function);
+    /**
+     * @since 9.1.
+     */
+    default <V> StackIterable<V> collectWithIndex(ObjectIntToObjectFunction<? super T, ? extends V> function)
+    {
+        int[] index = { 0 };
+        return this.collect(each -> function.valueOf(each, index[0]++));
+    }
 
     @Override
     <V> StackIterable<V> flatCollect(Function<? super T, ? extends Iterable<V>> function);

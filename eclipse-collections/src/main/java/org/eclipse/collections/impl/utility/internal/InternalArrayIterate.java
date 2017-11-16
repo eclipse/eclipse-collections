@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2017 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -35,6 +35,7 @@ import org.eclipse.collections.api.block.function.primitive.DoubleFunction;
 import org.eclipse.collections.api.block.function.primitive.FloatFunction;
 import org.eclipse.collections.api.block.function.primitive.IntFunction;
 import org.eclipse.collections.api.block.function.primitive.LongFunction;
+import org.eclipse.collections.api.block.function.primitive.ObjectIntToObjectFunction;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
@@ -451,6 +452,34 @@ public final class InternalArrayIterate
             Function<? super T, ? extends V> function,
             R target)
     {
+        InternalArrayIterate.ensureCapacityForAdditionalSize(size, target);
+        for (int i = 0; i < size; i++)
+        {
+            target.add(function.valueOf(array[i]));
+        }
+        return target;
+    }
+
+    /**
+     * @since 9.1.
+     */
+    public static <T, V, R extends Collection<V>> R collectWithIndex(
+            T[] array,
+            int size,
+            ObjectIntToObjectFunction<? super T, ? extends V> function,
+            R target)
+    {
+        InternalArrayIterate.ensureCapacityForAdditionalSize(size, target);
+        int index = 0;
+        for (int i = 0; i < size; i++)
+        {
+            target.add(function.valueOf(array[i], index++));
+        }
+        return target;
+    }
+
+    private static void ensureCapacityForAdditionalSize(int size, Collection target)
+    {
         if (target instanceof FastList)
         {
             ((FastList) target).ensureCapacity(target.size() + size);
@@ -459,11 +488,6 @@ public final class InternalArrayIterate
         {
             ((ArrayList) target).ensureCapacity(target.size() + size);
         }
-        for (int i = 0; i < size; i++)
-        {
-            target.add(function.valueOf(array[i]));
-        }
-        return target;
     }
 
     public static <T, V, R extends Collection<V>> R flatCollect(
@@ -486,14 +510,7 @@ public final class InternalArrayIterate
             P parameter,
             R target)
     {
-        if (target instanceof FastList)
-        {
-            ((FastList) target).ensureCapacity(target.size() + size);
-        }
-        else if (target instanceof ArrayList)
-        {
-            ((ArrayList) target).ensureCapacity(target.size() + size);
-        }
+        InternalArrayIterate.ensureCapacityForAdditionalSize(size, target);
         for (int i = 0; i < size; i++)
         {
             target.add(function.value(array[i], parameter));

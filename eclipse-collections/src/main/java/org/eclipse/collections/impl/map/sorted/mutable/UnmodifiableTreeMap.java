@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2017 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -34,6 +34,7 @@ import org.eclipse.collections.api.block.function.primitive.IntFunction;
 import org.eclipse.collections.api.block.function.primitive.IntObjectToIntFunction;
 import org.eclipse.collections.api.block.function.primitive.LongFunction;
 import org.eclipse.collections.api.block.function.primitive.LongObjectToLongFunction;
+import org.eclipse.collections.api.block.function.primitive.ObjectIntToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.ShortFunction;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
@@ -649,6 +650,24 @@ public class UnmodifiableTreeMap<K, V>
     public <P, R, C extends Collection<R>> C collectWith(Function2<? super V, ? super P, ? extends R> function, P parameter, C targetCollection)
     {
         return this.getMutableSortedMap().collectWith(function, parameter, targetCollection);
+    }
+
+    /**
+     * @since 9.1
+     */
+    @Override
+    public <R> MutableList<R> collectWithIndex(ObjectIntToObjectFunction<? super V, ? extends R> function)
+    {
+        return this.getMutableSortedMap().collectWithIndex(function);
+    }
+
+    /**
+     * @since 9.1
+     */
+    @Override
+    public <V1, R extends Collection<V1>> R collectWithIndex(ObjectIntToObjectFunction<? super V, ? extends V1> function, R target)
+    {
+        return this.getMutableSortedMap().collectWithIndex(function, target);
     }
 
     @Override

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2017 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -22,6 +22,7 @@ import org.eclipse.collections.api.block.function.primitive.DoubleFunction;
 import org.eclipse.collections.api.block.function.primitive.FloatFunction;
 import org.eclipse.collections.api.block.function.primitive.IntFunction;
 import org.eclipse.collections.api.block.function.primitive.LongFunction;
+import org.eclipse.collections.api.block.function.primitive.ObjectIntToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.ShortFunction;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
@@ -91,6 +92,16 @@ public interface ImmutableSortedSet<T>
 
     @Override
     <V> ImmutableList<V> collect(Function<? super T, ? extends V> function);
+
+    /**
+     * @since 9.1.
+     */
+    @Override
+    default <V> ImmutableList<V> collectWithIndex(ObjectIntToObjectFunction<? super T, ? extends V> function)
+    {
+        int[] index = { 0 };
+        return this.collect(each -> function.valueOf(each, index[0]++));
+    }
 
     @Override
     ImmutableBooleanList collectBoolean(BooleanFunction<? super T> booleanFunction);

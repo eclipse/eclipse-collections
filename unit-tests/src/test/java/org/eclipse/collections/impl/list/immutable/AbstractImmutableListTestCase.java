@@ -32,6 +32,7 @@ import org.eclipse.collections.api.multimap.list.ImmutableListMultimap;
 import org.eclipse.collections.api.partition.list.PartitionImmutableList;
 import org.eclipse.collections.api.stack.MutableStack;
 import org.eclipse.collections.api.tuple.Pair;
+import org.eclipse.collections.api.tuple.primitive.ObjectIntPair;
 import org.eclipse.collections.impl.block.factory.Functions;
 import org.eclipse.collections.impl.block.factory.HashingStrategies;
 import org.eclipse.collections.impl.block.factory.IntegerPredicates;
@@ -44,11 +45,16 @@ import org.eclipse.collections.impl.block.function.NegativeIntervalFunction;
 import org.eclipse.collections.impl.block.procedure.CollectionAddProcedure;
 import org.eclipse.collections.impl.collection.immutable.AbstractImmutableCollectionTestCase;
 import org.eclipse.collections.impl.factory.Lists;
+import org.eclipse.collections.impl.factory.Sets;
+import org.eclipse.collections.impl.factory.primitive.IntLists;
+import org.eclipse.collections.impl.factory.primitive.IntSets;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.list.mutable.FastList;
+import org.eclipse.collections.impl.list.primitive.IntInterval;
 import org.eclipse.collections.impl.multimap.list.FastListMultimap;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.test.Verify;
+import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.eclipse.collections.impl.utility.Iterate;
 import org.eclipse.collections.impl.utility.ListIterate;
 import org.junit.Assert;
@@ -596,6 +602,47 @@ public abstract class AbstractImmutableListTestCase extends AbstractImmutableCol
         ImmutableCollection<Integer> integers = this.classUnderTest();
         ImmutableBooleanCollection immutableCollection = integers.collectBoolean(PrimitiveFunctions.integerIsPositive());
         Verify.assertSize(integers.size(), immutableCollection);
+    }
+
+    /**
+     * @since 9.1.
+     */
+    @Test
+    public void collectWithIndex()
+    {
+        RichIterable<ObjectIntPair<Integer>> pairs = this.classUnderTest()
+                .collectWithIndex(PrimitiveTuples::pair);
+        Assert.assertEquals(
+                IntLists.mutable.withAll(IntInterval.zeroTo(pairs.size() - 1)),
+                pairs.collectInt(ObjectIntPair::getTwo, IntLists.mutable.empty()));
+        Assert.assertEquals(
+                Lists.mutable.withAll(Interval.oneTo(pairs.size())),
+                pairs.collect(ObjectIntPair::getOne, Lists.mutable.empty()));
+    }
+
+    /**
+     * @since 9.1.
+     */
+    @Test
+    public void collectWithIndexWithTarget()
+    {
+        RichIterable<ObjectIntPair<Integer>> pairs =
+                this.classUnderTest().collectWithIndex(PrimitiveTuples::pair, Lists.mutable.empty());
+        Assert.assertEquals(
+                IntLists.mutable.withAll(IntInterval.zeroTo(pairs.size() - 1)),
+                pairs.collectInt(ObjectIntPair::getTwo, IntLists.mutable.empty()));
+        Assert.assertEquals(
+                Lists.mutable.withAll(Interval.oneTo(pairs.size())),
+                pairs.collect(ObjectIntPair::getOne, Lists.mutable.empty()));
+
+        RichIterable<ObjectIntPair<Integer>> setOfPairs =
+                this.classUnderTest().collectWithIndex(PrimitiveTuples::pair, Sets.mutable.empty());
+        Assert.assertEquals(
+                IntSets.mutable.withAll(IntInterval.zeroTo(pairs.size() - 1)),
+                setOfPairs.collectInt(ObjectIntPair::getTwo, IntSets.mutable.empty()));
+        Assert.assertEquals(
+                Sets.mutable.withAll(Interval.oneTo(pairs.size())),
+                setOfPairs.collect(ObjectIntPair::getOne, Sets.mutable.empty()));
     }
 
     @Test

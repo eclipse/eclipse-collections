@@ -24,6 +24,7 @@ import org.eclipse.collections.api.block.function.primitive.DoubleFunction;
 import org.eclipse.collections.api.block.function.primitive.FloatFunction;
 import org.eclipse.collections.api.block.function.primitive.IntFunction;
 import org.eclipse.collections.api.block.function.primitive.LongFunction;
+import org.eclipse.collections.api.block.function.primitive.ObjectIntToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.ShortFunction;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
@@ -90,6 +91,16 @@ public interface MutableList<T>
 
     @Override
     <V> MutableList<V> collect(Function<? super T, ? extends V> function);
+
+    /**
+     * @since 9.1.
+     */
+    @Override
+    default <V> MutableList<V> collectWithIndex(ObjectIntToObjectFunction<? super T, ? extends V> function)
+    {
+        int[] index = { 0 };
+        return this.collect(each -> function.valueOf(each, index[0]++));
+    }
 
     @Override
     MutableBooleanList collectBoolean(BooleanFunction<? super T> booleanFunction);

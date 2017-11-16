@@ -10,6 +10,7 @@
 
 package org.eclipse.collections.impl.bag.sorted.mutable;
 
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.concurrent.ExecutorService;
 
@@ -27,6 +28,7 @@ import org.eclipse.collections.api.block.function.primitive.DoubleFunction;
 import org.eclipse.collections.api.block.function.primitive.FloatFunction;
 import org.eclipse.collections.api.block.function.primitive.IntFunction;
 import org.eclipse.collections.api.block.function.primitive.LongFunction;
+import org.eclipse.collections.api.block.function.primitive.ObjectIntToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.ShortFunction;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
@@ -204,6 +206,33 @@ public abstract class AbstractMutableSortedBag<T>
     public <V> MutableList<V> collect(Function<? super T, ? extends V> function)
     {
         return this.collect(function, FastList.newList(this.size()));
+    }
+
+    /**
+     * @since 9.1.
+     */
+    @Override
+    public <V> MutableList<V> collectWithIndex(ObjectIntToObjectFunction<? super T, ? extends V> function)
+    {
+        return this.collectWithIndex(function, FastList.newList(this.size()));
+    }
+
+    /**
+     * @since 9.1.
+     */
+    @Override
+    public <V, R extends Collection<V>> R collectWithIndex(ObjectIntToObjectFunction<? super T, ? extends V> function, R target)
+    {
+        int[] count = new int[1];
+        this.forEachWithOccurrences((each, occurrences) ->
+        {
+            for (int i = 0; i < occurrences; i++)
+            {
+                V value = function.valueOf(each, count[0]++);
+                target.add(value);
+            }
+        });
+        return target;
     }
 
     @Override

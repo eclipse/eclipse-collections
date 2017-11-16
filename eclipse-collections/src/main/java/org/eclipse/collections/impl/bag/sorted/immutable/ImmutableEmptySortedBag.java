@@ -24,6 +24,7 @@ import org.eclipse.collections.api.bag.sorted.ImmutableSortedBag;
 import org.eclipse.collections.api.bag.sorted.SortedBag;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
+import org.eclipse.collections.api.block.function.primitive.ObjectIntToObjectFunction;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.predicate.primitive.IntPredicate;
@@ -324,6 +325,24 @@ class ImmutableEmptySortedBag<T>
     public ImmutableSortedSet<Pair<T, Integer>> zipWithIndex()
     {
         return SortedSets.immutable.with((Comparator<? super Pair<T, Integer>>) this.comparator);
+    }
+
+    /**
+     * @since 9.1.
+     */
+    @Override
+    public <V> ImmutableList<V> collectWithIndex(ObjectIntToObjectFunction<? super T, ? extends V> function)
+    {
+        return Lists.immutable.empty();
+    }
+
+    /**
+     * @since 9.1.
+     */
+    @Override
+    public <V, R extends Collection<V>> R collectWithIndex(ObjectIntToObjectFunction<? super T, ? extends V> function, R target)
+    {
+        return target;
     }
 
     @Override

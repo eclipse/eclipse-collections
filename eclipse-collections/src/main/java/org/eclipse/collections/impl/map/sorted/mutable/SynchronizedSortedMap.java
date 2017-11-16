@@ -11,6 +11,7 @@
 package org.eclipse.collections.impl.map.sorted.mutable;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.Optional;
 import java.util.SortedMap;
@@ -26,6 +27,7 @@ import org.eclipse.collections.api.block.function.primitive.DoubleFunction;
 import org.eclipse.collections.api.block.function.primitive.FloatFunction;
 import org.eclipse.collections.api.block.function.primitive.IntFunction;
 import org.eclipse.collections.api.block.function.primitive.LongFunction;
+import org.eclipse.collections.api.block.function.primitive.ObjectIntToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.ShortFunction;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
@@ -280,6 +282,30 @@ public class SynchronizedSortedMap<K, V>
     public <R> MutableList<R> collect(Function<? super V, ? extends R> function)
     {
         return (MutableList<R>) super.collect(function);
+    }
+
+    /**
+     * @since 9.1
+     */
+    @Override
+    public <R> MutableList<R> collectWithIndex(ObjectIntToObjectFunction<? super V, ? extends R> function)
+    {
+        synchronized (this.getLock())
+        {
+            return this.getDelegate().collectWithIndex(function);
+        }
+    }
+
+    /**
+     * @since 9.1
+     */
+    @Override
+    public <V1, R extends Collection<V1>> R collectWithIndex(ObjectIntToObjectFunction<? super V, ? extends V1> function, R target)
+    {
+        synchronized (this.getLock())
+        {
+            return this.getDelegate().collectWithIndex(function, target);
+        }
     }
 
     @Override

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2017 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -21,10 +21,12 @@ import java.util.concurrent.ExecutorService;
 
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.block.function.Function;
+import org.eclipse.collections.api.block.function.primitive.ObjectIntToObjectFunction;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
+import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.map.MapIterable;
 import org.eclipse.collections.api.multimap.sortedset.ImmutableSortedSetMultimap;
 import org.eclipse.collections.api.ordered.OrderedIterable;
@@ -198,6 +200,21 @@ final class ImmutableTreeSet<T>
         {
             procedure.value(t);
         }
+    }
+
+    /**
+     * @since 9.1.
+     */
+    @Override
+    public <V> ImmutableList<V> collectWithIndex(ObjectIntToObjectFunction<? super T, ? extends V> function)
+    {
+        FastList<V> result = FastList.newList(this.size());
+        int index = 0;
+        for (T t : this.delegate)
+        {
+            result.add(function.valueOf(t, index++));
+        }
+        return result.toImmutable();
     }
 
     @Override

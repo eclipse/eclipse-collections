@@ -119,8 +119,15 @@ public interface ImmutableStack<T> extends StackIterable<T>
     @Override
     <V> ImmutableStack<V> collectIf(Predicate<? super T> predicate, Function<? super T, ? extends V> function);
 
+    /**
+     * @since 9.1.
+     */
     @Override
-    <V> ImmutableStack<V> collectWithIndex(ObjectIntToObjectFunction<? super T, ? extends V> function);
+    default <V> ImmutableStack<V> collectWithIndex(ObjectIntToObjectFunction<? super T, ? extends V> function)
+    {
+        int[] index = { 0 };
+        return this.collect(each -> function.valueOf(each, index[0]++));
+    }
 
     @Override
     <V> ImmutableStack<V> flatCollect(Function<? super T, ? extends Iterable<V>> function);

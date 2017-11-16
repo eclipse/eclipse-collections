@@ -26,6 +26,7 @@ import org.eclipse.collections.impl.factory.SortedMaps;
 import org.eclipse.collections.impl.test.SerializeTestHelper;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.Tuples;
+import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -295,6 +296,32 @@ public class ImmutableEmptySortedMapTest extends ImmutableSortedMapTestCase
 
         Verify.assertEmpty(collect);
         Assert.assertSame(collect, revCollect);
+    }
+
+    /**
+     * @since 9.1.
+     */
+    @Override
+    @Test
+    public void collectWithIndex()
+    {
+        ImmutableSortedMap<Integer, String> integers = this.classUnderTest();
+        Assert.assertEquals(
+                Lists.mutable.empty(),
+                integers.collectWithIndex(PrimitiveTuples::pair));
+    }
+
+    /**
+     * @since 9.1.
+     */
+    @Override
+    @Test
+    public void collectWithIndexWithTarget()
+    {
+        ImmutableSortedMap<Integer, String> integers = this.classUnderTest();
+        Assert.assertEquals(
+                Lists.mutable.empty(),
+                integers.collectWithIndex(PrimitiveTuples::pair, Lists.mutable.empty()));
     }
 
     @Override
