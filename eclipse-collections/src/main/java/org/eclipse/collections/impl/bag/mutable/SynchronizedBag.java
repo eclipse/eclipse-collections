@@ -33,6 +33,7 @@ import org.eclipse.collections.api.block.function.primitive.DoubleFunction;
 import org.eclipse.collections.api.block.function.primitive.FloatFunction;
 import org.eclipse.collections.api.block.function.primitive.IntFunction;
 import org.eclipse.collections.api.block.function.primitive.LongFunction;
+import org.eclipse.collections.api.block.function.primitive.ObjectIntToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.ShortFunction;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
@@ -208,6 +209,18 @@ public class SynchronizedBag<T>
         synchronized (this.getLock())
         {
             this.getDelegate().forEachWithOccurrences(objectIntProcedure);
+        }
+    }
+
+    /**
+     * @since 9.1.
+     */
+    @Override
+    public <V, R extends Collection<V>> R collectWithOccurences(ObjectIntToObjectFunction<? super T, ? extends V> function, R target)
+    {
+        synchronized (this.getLock())
+        {
+            return this.getDelegate().collectWithOccurences(function, target);
         }
     }
 

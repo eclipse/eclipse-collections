@@ -238,6 +238,18 @@ public class SynchronizedSortedBag<T>
         }
     }
 
+    /**
+     * @since 9.1.
+     */
+    @Override
+    public <V, R extends Collection<V>> R collectWithOccurences(ObjectIntToObjectFunction<? super T, ? extends V> function, R target)
+    {
+        synchronized (this.getLock())
+        {
+            return this.getDelegate().collectWithOccurences(function, target);
+        }
+    }
+
     @Override
     public int occurrencesOf(Object item)
     {

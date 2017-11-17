@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2017 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -23,6 +23,7 @@ import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.block.function.Function2;
+import org.eclipse.collections.api.block.function.primitive.ObjectIntToObjectFunction;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.predicate.primitive.IntPredicate;
@@ -399,6 +400,13 @@ final class ImmutableSingletonBag<T>
     public void forEachWithOccurrences(ObjectIntProcedure<? super T> objectIntProcedure)
     {
         objectIntProcedure.value(this.value, 1);
+    }
+
+    @Override
+    public <V, R extends Collection<V>> R collectWithOccurences(ObjectIntToObjectFunction<? super T, ? extends V> function, R target)
+    {
+        target.add(function.valueOf(this.value, 1));
+        return target;
     }
 
     @Override

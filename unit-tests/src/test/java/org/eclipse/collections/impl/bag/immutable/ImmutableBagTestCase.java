@@ -16,8 +16,10 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Set;
 
 import org.eclipse.collections.api.LazyIterable;
+import org.eclipse.collections.api.bag.Bag;
 import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.bag.primitive.ImmutableBooleanBag;
@@ -44,6 +46,7 @@ import org.eclipse.collections.api.partition.bag.PartitionImmutableBag;
 import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.tuple.Pair;
+import org.eclipse.collections.api.tuple.primitive.ObjectIntPair;
 import org.eclipse.collections.impl.AbstractRichIterableTestCase;
 import org.eclipse.collections.impl.bag.mutable.HashBag;
 import org.eclipse.collections.impl.bag.mutable.primitive.BooleanHashBag;
@@ -68,12 +71,14 @@ import org.eclipse.collections.impl.block.function.PassThruFunction0;
 import org.eclipse.collections.impl.block.procedure.CollectionAddProcedure;
 import org.eclipse.collections.impl.factory.Bags;
 import org.eclipse.collections.impl.factory.Lists;
+import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.multimap.bag.HashBagMultimap;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.test.Verify;
+import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.eclipse.collections.impl.utility.StringIterate;
 import org.junit.Assert;
 import org.junit.Test;
@@ -296,6 +301,34 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
         ImmutableBag<String> strings = this.newBag();
         strings.forEachWithIndex(ObjectIntProcedures.fromProcedure(result::add));
         Assert.assertEquals(strings, result);
+    }
+
+    /**
+     * @since 9.1.
+     */
+    @Test
+    public void collectWithOccurrences()
+    {
+        Bag<String> bag = this.newBag();
+        Bag<ObjectIntPair<String>> actual =
+                bag.collectWithOccurences(PrimitiveTuples::pair, Bags.mutable.empty());
+        Bag<ObjectIntPair<String>> expected =
+                Bags.immutable.with(
+                        PrimitiveTuples.pair("4", 4),
+                        PrimitiveTuples.pair("3", 3),
+                        PrimitiveTuples.pair("2", 2),
+                        PrimitiveTuples.pair("1", 1));
+        Assert.assertEquals(expected, actual);
+
+        Set<ObjectIntPair<String>> actual2 =
+                bag.collectWithOccurences(PrimitiveTuples::pair, Sets.mutable.empty());
+        ImmutableSet<ObjectIntPair<String>> expected2 =
+                Sets.immutable.with(
+                        PrimitiveTuples.pair("4", 4),
+                        PrimitiveTuples.pair("3", 3),
+                        PrimitiveTuples.pair("2", 2),
+                        PrimitiveTuples.pair("1", 1));
+        Assert.assertEquals(expected2, actual2);
     }
 
     @Test

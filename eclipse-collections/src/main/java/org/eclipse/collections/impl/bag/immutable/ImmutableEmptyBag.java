@@ -12,6 +12,7 @@ package org.eclipse.collections.impl.bag.immutable;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -42,6 +43,7 @@ import org.eclipse.collections.api.block.function.primitive.DoubleFunction;
 import org.eclipse.collections.api.block.function.primitive.FloatFunction;
 import org.eclipse.collections.api.block.function.primitive.IntFunction;
 import org.eclipse.collections.api.block.function.primitive.LongFunction;
+import org.eclipse.collections.api.block.function.primitive.ObjectIntToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.ShortFunction;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
@@ -125,6 +127,15 @@ final class ImmutableEmptyBag<T>
     @Override
     public void forEachWithOccurrences(ObjectIntProcedure<? super T> objectIntProcedure)
     {
+    }
+
+    /**
+     * @since 9.1.
+     */
+    @Override
+    public <V, R extends Collection<V>> R collectWithOccurences(ObjectIntToObjectFunction<? super T, ? extends V> function, R target)
+    {
+        return target;
     }
 
     @Override
