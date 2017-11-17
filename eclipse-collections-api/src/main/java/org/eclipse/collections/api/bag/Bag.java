@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2017 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -10,6 +10,7 @@
 
 package org.eclipse.collections.api.bag;
 
+import java.util.Collection;
 import java.util.DoubleSummaryStatistics;
 import java.util.IntSummaryStatistics;
 import java.util.LongSummaryStatistics;
@@ -25,6 +26,7 @@ import org.eclipse.collections.api.block.function.primitive.DoubleFunction;
 import org.eclipse.collections.api.block.function.primitive.FloatFunction;
 import org.eclipse.collections.api.block.function.primitive.IntFunction;
 import org.eclipse.collections.api.block.function.primitive.LongFunction;
+import org.eclipse.collections.api.block.function.primitive.ObjectIntToObjectFunction;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.predicate.primitive.IntPredicate;
@@ -163,6 +165,7 @@ public interface Bag<T>
     /**
      * @since 8.0
      */
+    @Override
     default IntSummaryStatistics summarizeInt(IntFunction<? super T> function)
     {
         IntSummaryStatistics stats = new IntSummaryStatistics();
@@ -180,6 +183,7 @@ public interface Bag<T>
     /**
      * @since 8.0
      */
+    @Override
     default DoubleSummaryStatistics summarizeFloat(FloatFunction<? super T> function)
     {
         DoubleSummaryStatistics stats = new DoubleSummaryStatistics();
@@ -197,6 +201,7 @@ public interface Bag<T>
     /**
      * @since 8.0
      */
+    @Override
     default LongSummaryStatistics summarizeLong(LongFunction<? super T> function)
     {
         LongSummaryStatistics stats = new LongSummaryStatistics();
@@ -214,6 +219,7 @@ public interface Bag<T>
     /**
      * @since 8.0
      */
+    @Override
     default DoubleSummaryStatistics summarizeDouble(DoubleFunction<? super T> function)
     {
         DoubleSummaryStatistics stats = new DoubleSummaryStatistics();
@@ -265,5 +271,19 @@ public interface Bag<T>
             }
         });
         return mutableResult;
+    }
+
+    /**
+     * Iterates over the unique elements and their occurrences and collects the results of applying the
+     * specified function into the target collection.
+     *
+     * @since 9.1.
+     */
+    default <V, R extends Collection<V>> R collectWithOccurences(
+            ObjectIntToObjectFunction<? super T, ? extends V> function,
+            R target)
+    {
+        this.forEachWithOccurrences((each, occurrences) -> target.add(function.valueOf(each, occurrences)));
+        return target;
     }
 }

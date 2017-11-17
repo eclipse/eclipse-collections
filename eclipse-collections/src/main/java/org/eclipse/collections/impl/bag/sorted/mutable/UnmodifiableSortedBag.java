@@ -213,6 +213,15 @@ public class UnmodifiableSortedBag<T>
         this.getSortedBag().forEachWithOccurrences(procedure);
     }
 
+    /**
+     * @since 9.1.
+     */
+    @Override
+    public <V, R extends Collection<V>> R collectWithOccurences(ObjectIntToObjectFunction<? super T, ? extends V> function, R target)
+    {
+        return this.getSortedBag().collectWithOccurences(function, target);
+    }
+
     @Override
     public MutableSortedMap<T, Integer> toMapOfItemToCount()
     {

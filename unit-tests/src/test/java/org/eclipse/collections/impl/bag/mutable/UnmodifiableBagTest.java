@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2017 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -10,9 +10,13 @@
 
 package org.eclipse.collections.impl.bag.mutable;
 
+import java.util.Set;
+
+import org.eclipse.collections.api.bag.Bag;
 import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.list.MutableList;
+import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.api.tuple.primitive.ObjectIntPair;
 import org.eclipse.collections.impl.bag.mutable.primitive.BooleanHashBag;
@@ -28,11 +32,13 @@ import org.eclipse.collections.impl.block.factory.primitive.IntPredicates;
 import org.eclipse.collections.impl.collection.mutable.UnmodifiableMutableCollectionTestCase;
 import org.eclipse.collections.impl.factory.Bags;
 import org.eclipse.collections.impl.factory.Lists;
+import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.test.SerializeTestHelper;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.Tuples;
+import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -104,6 +110,32 @@ public class UnmodifiableBagTest
         MutableList<Pair<Object, Integer>> list = Lists.mutable.of();
         this.getCollection().forEachWithOccurrences((each, index) -> list.add(Tuples.pair(each, index)));
         Assert.assertEquals(FastList.newListWith(Tuples.pair("", 1)), list);
+    }
+
+    /**
+     * @since 9.1.
+     */
+    @Test
+    public void collectWithOccurrences()
+    {
+        Bag<Integer> bag = Bags.mutable.with(3, 3, 3, 2, 2, 1).asUnmodifiable();
+        Bag<ObjectIntPair<Integer>> actual =
+                bag.collectWithOccurences(PrimitiveTuples::pair, Bags.mutable.empty());
+        Bag<ObjectIntPair<Integer>> expected =
+                Bags.immutable.with(
+                        PrimitiveTuples.pair(Integer.valueOf(3), 3),
+                        PrimitiveTuples.pair(Integer.valueOf(2), 2),
+                        PrimitiveTuples.pair(Integer.valueOf(1), 1));
+        Assert.assertEquals(expected, actual);
+
+        Set<ObjectIntPair<Integer>> actual2 =
+                bag.collectWithOccurences(PrimitiveTuples::pair, Sets.mutable.empty());
+        ImmutableSet<ObjectIntPair<Integer>> expected2 =
+                Sets.immutable.with(
+                        PrimitiveTuples.pair(Integer.valueOf(3), 3),
+                        PrimitiveTuples.pair(Integer.valueOf(2), 2),
+                        PrimitiveTuples.pair(Integer.valueOf(1), 1));
+        Assert.assertEquals(expected2, actual2);
     }
 
     @Test

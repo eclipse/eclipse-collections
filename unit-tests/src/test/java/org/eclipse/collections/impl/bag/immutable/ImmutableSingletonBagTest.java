@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2017 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -13,6 +13,7 @@ package org.eclipse.collections.impl.bag.immutable;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.Set;
 
 import org.eclipse.collections.api.bag.Bag;
 import org.eclipse.collections.api.bag.ImmutableBag;
@@ -21,6 +22,8 @@ import org.eclipse.collections.api.bag.primitive.ImmutableBooleanBag;
 import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.multimap.bag.ImmutableBagMultimap;
+import org.eclipse.collections.api.set.ImmutableSet;
+import org.eclipse.collections.api.tuple.primitive.ObjectIntPair;
 import org.eclipse.collections.impl.bag.mutable.primitive.BooleanHashBag;
 import org.eclipse.collections.impl.bag.sorted.mutable.TreeBag;
 import org.eclipse.collections.impl.block.factory.Procedures;
@@ -29,11 +32,13 @@ import org.eclipse.collections.impl.block.function.PassThruFunction0;
 import org.eclipse.collections.impl.factory.Bags;
 import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.Maps;
+import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.multimap.bag.HashBagMultimap;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.test.Verify;
+import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -565,6 +570,27 @@ public class ImmutableSingletonBagTest extends ImmutableBagTestCase
         });
         Assert.assertEquals(VAL, results[0]);
         Assert.assertEquals(0, results[1]);
+    }
+
+    /**
+     * @since 9.1.
+     */
+    @Override
+    @Test
+    public void collectWithOccurrences()
+    {
+        Bag<String> bag = this.newBag();
+        Bag<ObjectIntPair<String>> actual =
+                bag.collectWithOccurences(PrimitiveTuples::pair, Bags.mutable.empty());
+        Bag<ObjectIntPair<String>> expected =
+                Bags.immutable.with(PrimitiveTuples.pair(VAL, 1));
+        Assert.assertEquals(expected, actual);
+
+        Set<ObjectIntPair<String>> actual2 =
+                bag.collectWithOccurences(PrimitiveTuples::pair, Sets.mutable.empty());
+        ImmutableSet<ObjectIntPair<String>> expected2 =
+                Sets.immutable.with(PrimitiveTuples.pair(VAL, 1));
+        Assert.assertEquals(expected2, actual2);
     }
 
     @Override
