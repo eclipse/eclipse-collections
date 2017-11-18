@@ -207,7 +207,7 @@ public class SynchronizedBagTest extends AbstractSynchronizedCollectionTestCase
     {
         Bag<Integer> bag = this.newWith(3, 3, 3, 2, 2, 1);
         Bag<ObjectIntPair<Integer>> actual =
-                bag.collectWithOccurences(PrimitiveTuples::pair, Bags.mutable.empty());
+                bag.collectWithOccurrences(PrimitiveTuples::pair, Bags.mutable.empty());
         Bag<ObjectIntPair<Integer>> expected =
                 Bags.immutable.with(
                         PrimitiveTuples.pair(Integer.valueOf(3), 3),
@@ -216,7 +216,7 @@ public class SynchronizedBagTest extends AbstractSynchronizedCollectionTestCase
         Assert.assertEquals(expected, actual);
 
         Set<ObjectIntPair<Integer>> actual2 =
-                bag.collectWithOccurences(PrimitiveTuples::pair, Sets.mutable.empty());
+                bag.collectWithOccurrences(PrimitiveTuples::pair, Sets.mutable.empty());
         ImmutableSet<ObjectIntPair<Integer>> expected2 =
                 Sets.immutable.with(
                         PrimitiveTuples.pair(Integer.valueOf(3), 3),

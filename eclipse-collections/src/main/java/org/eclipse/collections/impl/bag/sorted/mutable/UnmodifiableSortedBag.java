@@ -137,7 +137,7 @@ public class UnmodifiableSortedBag<T>
     @Override
     public boolean removeOccurrences(Object item, int occurrences)
     {
-        throw new UnsupportedOperationException("Cannot call removeOccurences() on " + this.getClass().getSimpleName());
+        throw new UnsupportedOperationException("Cannot call removeOccurrences() on " + this.getClass().getSimpleName());
     }
 
     @Override
@@ -217,9 +217,9 @@ public class UnmodifiableSortedBag<T>
      * @since 9.1.
      */
     @Override
-    public <V, R extends Collection<V>> R collectWithOccurences(ObjectIntToObjectFunction<? super T, ? extends V> function, R target)
+    public <V, R extends Collection<V>> R collectWithOccurrences(ObjectIntToObjectFunction<? super T, ? extends V> function, R target)
     {
-        return this.getSortedBag().collectWithOccurences(function, target);
+        return this.getSortedBag().collectWithOccurrences(function, target);
     }
 
     @Override

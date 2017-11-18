@@ -118,12 +118,12 @@ public class ImmutableEmptyBagTest extends ImmutableBagTestCase
     {
         Bag<String> bag = this.newBag();
         Bag<ObjectIntPair<String>> actual =
-                bag.collectWithOccurences(PrimitiveTuples::pair, Bags.mutable.empty());
+                bag.collectWithOccurrences(PrimitiveTuples::pair, Bags.mutable.empty());
         Bag<ObjectIntPair<String>> expected = Bags.immutable.empty();
         Assert.assertEquals(expected, actual);
 
         Set<ObjectIntPair<String>> actual2 =
-                bag.collectWithOccurences(PrimitiveTuples::pair, Sets.mutable.empty());
+                bag.collectWithOccurrences(PrimitiveTuples::pair, Sets.mutable.empty());
         ImmutableSet<ObjectIntPair<String>> expected2 = Sets.immutable.empty();
         Assert.assertEquals(expected2, actual2);
     }
