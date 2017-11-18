@@ -403,7 +403,7 @@ final class ImmutableSingletonBag<T>
     }
 
     @Override
-    public <V, R extends Collection<V>> R collectWithOccurences(ObjectIntToObjectFunction<? super T, ? extends V> function, R target)
+    public <V, R extends Collection<V>> R collectWithOccurrences(ObjectIntToObjectFunction<? super T, ? extends V> function, R target)
     {
         target.add(function.valueOf(this.value, 1));
         return target;

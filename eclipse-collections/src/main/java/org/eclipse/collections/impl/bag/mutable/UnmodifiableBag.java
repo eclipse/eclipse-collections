@@ -321,9 +321,9 @@ public class UnmodifiableBag<T>
      * @since 9.1.
      */
     @Override
-    public <V, R extends Collection<V>> R collectWithOccurences(ObjectIntToObjectFunction<? super T, ? extends V> function, R target)
+    public <V, R extends Collection<V>> R collectWithOccurrences(ObjectIntToObjectFunction<? super T, ? extends V> function, R target)
     {
-        return this.getMutableBag().collectWithOccurences(function, target);
+        return this.getMutableBag().collectWithOccurrences(function, target);
     }
 
     @Override

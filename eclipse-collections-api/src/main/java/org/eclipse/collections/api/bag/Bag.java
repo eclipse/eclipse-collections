@@ -279,7 +279,7 @@ public interface Bag<T>
      *
      * @since 9.1.
      */
-    default <V, R extends Collection<V>> R collectWithOccurences(
+    default <V, R extends Collection<V>> R collectWithOccurrences(
             ObjectIntToObjectFunction<? super T, ? extends V> function,
             R target)
     {
