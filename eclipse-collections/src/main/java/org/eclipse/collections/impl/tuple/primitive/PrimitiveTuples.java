@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2017 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -91,6 +91,9 @@ import org.eclipse.collections.api.tuple.primitive.ShortLongPair;
 import org.eclipse.collections.api.tuple.primitive.ShortObjectPair;
 import org.eclipse.collections.api.tuple.primitive.ShortShortPair;
 
+/**
+ * This class should be used to create instances of object/primitive, primitive/primitive and primitive/object pairs.
+ */
 public final class PrimitiveTuples
 {
     private PrimitiveTuples()
