@@ -83,7 +83,7 @@ public interface MutableCollection<T>
 
     /**
      * This method allows mutable and fixed size collections the ability to remove elements from their existing elements.
-     * In order to support fixed size a new instance of a collection would have to be returned contaning the elements
+     * In order to support fixed size a new instance of a collection would have to be returned containing the elements
      * that would be left from the original collection after calling remove.  In the case of mutable collections, the
      * original collection is modified, and is returned.  In order to use this method properly with mutable and fixed
      * size collections the following approach must be taken:
@@ -123,7 +123,7 @@ public interface MutableCollection<T>
 
     /**
      * This method allows mutable and fixed size collections the ability to remove multiple elements from their existing
-     * elements.  In order to support fixed size a new instance of a collection would have to be returned contaning the
+     * elements.  In order to support fixed size a new instance of a collection would have to be returned containing the
      * elements that would be left from the original collection after calling removeAll.  In the case of mutable
      * collections, the original collection is modified, and is returned.  In order to use this method properly with
      * mutable and fixed size collections the following approach must be taken:
@@ -277,7 +277,7 @@ public interface MutableCollection<T>
 
     /**
      * {@inheritDoc}
-     * Co-variant example for MutableCollecton:
+     * Co-variant example for MutableCollection:
      * <pre>
      * MutableBooleanCollection licenses =
      *     people.collectBoolean(person -> person.hasDrivingLicense());

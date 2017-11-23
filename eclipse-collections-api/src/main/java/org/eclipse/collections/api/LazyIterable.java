@@ -132,7 +132,7 @@ public interface LazyIterable<T>
     LazyIterable<Pair<T, Integer>> zipWithIndex();
 
     /**
-     * Creates a deferred chunking iterable.
+     * Creates a deferred chunk iterable.
      */
     @Override
     LazyIterable<RichIterable<T>> chunk(int size);

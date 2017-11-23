@@ -438,7 +438,7 @@ public final class CompositeFastList<E>
      * <p>
      * AFAIK list iterator is only commonly used in sorting.
      *
-     * @return a ListIterator for this, with internal state convertedto one list if needed.
+     * @return a ListIterator for this, with internal state converted to one list if needed.
      */
     @Override
     public ListIterator<E> listIterator()
@@ -454,7 +454,7 @@ public final class CompositeFastList<E>
      * <p>
      * AFAIK list iterator is only commonly used in sorting.
      *
-     * @return a ListIterator for this, with internal state convertedto one list if needed.
+     * @return a ListIterator for this, with internal state converted to one list if needed.
      */
     @Override
     public ListIterator<E> listIterator(int index)

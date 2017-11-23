@@ -913,9 +913,9 @@ final class ImmutableArrayStack<T> implements ImmutableStack<T>, Serializable
     public ImmutableStack<Pair<T, Integer>> zipWithIndex()
     {
         int maxIndex = this.delegate.size() - 1;
-        Interval indicies = Interval.fromTo(0, maxIndex);
+        Interval indices = Interval.fromTo(0, maxIndex);
 
-        return ImmutableArrayStack.newStackFromTopToBottom(this.delegate.asReversed().zip(indicies).toList());
+        return ImmutableArrayStack.newStackFromTopToBottom(this.delegate.asReversed().zip(indices).toList());
     }
 
     @Override

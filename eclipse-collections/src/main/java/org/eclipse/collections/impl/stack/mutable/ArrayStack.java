@@ -608,9 +608,9 @@ public class ArrayStack<T> implements MutableStack<T>, Externalizable
     public ArrayStack<Pair<T, Integer>> zipWithIndex()
     {
         int maxIndex = this.delegate.size() - 1;
-        Interval indicies = Interval.fromTo(0, maxIndex);
+        Interval indices = Interval.fromTo(0, maxIndex);
 
-        return ArrayStack.newStackFromTopToBottom(this.delegate.asReversed().zip(indicies).toList());
+        return ArrayStack.newStackFromTopToBottom(this.delegate.asReversed().zip(indices).toList());
     }
 
     @Override

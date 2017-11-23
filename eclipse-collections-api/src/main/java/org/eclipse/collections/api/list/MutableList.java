@@ -217,7 +217,7 @@ public interface MutableList<T>
     MutableList<T> subList(int fromIndex, int toIndex);
 
     /**
-     * Returns an unmodifable view of the list.
+     * Returns an unmodifiable view of the list.
      *
      * @return an unmodifiable view of this list
      */

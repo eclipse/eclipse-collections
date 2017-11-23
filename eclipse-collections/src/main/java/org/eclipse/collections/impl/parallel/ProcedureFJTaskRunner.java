@@ -95,11 +95,11 @@ public final class ProcedureFJTaskRunner<T, BT extends Procedure<? super T>>
         {
             if (this.combiner.useCombineOne())
             {
-                int remaingTaskCount = this.taskCount;
-                while (remaingTaskCount > 0)
+                int remainingTaskCount = this.taskCount;
+                while (remainingTaskCount > 0)
                 {
                     this.combiner.combineOne(this.outputQueue.take());
-                    remaingTaskCount--;
+                    remainingTaskCount--;
                 }
             }
             else

@@ -21,7 +21,7 @@ import org.eclipse.collections.impl.utility.MapIterate;
 /**
  * The ParallelMapIterate class contains parallel algorithms that work with Maps.
  * <p>
- * The forEachEtry algorithm employs a batching fork and join approach approach which does
+ * The forEachEntry algorithm employs a batching fork and join approach approach which does
  * not yet allow for specification of a Factory for the blocks or a Combiner for the results.
  * This means that forEachKeyValue can only support pure forking or forking with a shared
  * thread-safe data structure collecting results.
