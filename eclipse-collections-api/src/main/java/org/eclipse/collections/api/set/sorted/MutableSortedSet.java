@@ -150,7 +150,7 @@ public interface MutableSortedSet<T>
     MutableSortedSet<T> dropWhile(Predicate<? super T> predicate);
 
     /**
-     * Returns an unmodifable view of the set.
+     * Returns an unmodifiable view of the set.
      *
      * @return an unmodifiable view of this set
      */

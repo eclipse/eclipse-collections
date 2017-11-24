@@ -28,7 +28,7 @@ import org.eclipse.collections.api.tuple.Pair;
  * This collection is a type of {@code Map} that can associate multiple values for keys.
  * <p>
  * <p>Unlike {@code Map} however, this interface is read-only so the results of access methods such as {@link
- * #get(Object)} return a view onto the values associated with that key. The {@link MutableMultimap} subinterface
+ * #get(Object)} return a view onto the values associated with that key. The {@link MutableMultimap} sub-interface
  * provides methods to mutate the collection.
  * <p>
  * <p>The advantages to using this container over a {@code Map<K, Collection<V>>} is that all of the handling of the

@@ -1629,10 +1629,10 @@ public final class Verify extends Assert
     {
         try
         {
-            MutableList<T> unnacceptable = Iterate.reject(iterable, predicate, Lists.mutable.of());
-            if (unnacceptable.notEmpty())
+            MutableList<T> unacceptable = Iterate.reject(iterable, predicate, Lists.mutable.of());
+            if (unacceptable.notEmpty())
             {
-                Assert.fail(message + " <" + unnacceptable + '>');
+                Assert.fail(message + " <" + unacceptable + '>');
             }
         }
         catch (AssertionError e)
@@ -1705,10 +1705,10 @@ public final class Verify extends Assert
     {
         try
         {
-            MutableList<T> unnacceptable = Iterate.select(iterable, predicate, Lists.mutable.empty());
-            if (unnacceptable.notEmpty())
+            MutableList<T> unacceptable = Iterate.select(iterable, predicate, Lists.mutable.empty());
+            if (unacceptable.notEmpty())
             {
-                Assert.fail(message + " <" + unnacceptable + '>');
+                Assert.fail(message + " <" + unacceptable + '>');
             }
         }
         catch (AssertionError e)

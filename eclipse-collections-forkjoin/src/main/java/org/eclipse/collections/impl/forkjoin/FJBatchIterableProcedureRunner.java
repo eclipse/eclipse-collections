@@ -86,11 +86,11 @@ public class FJBatchIterableProcedureRunner<T, PT extends Procedure<? super T>> 
     {
         try
         {
-            int remaingTaskCount = this.taskCount;
-            while (remaingTaskCount > 0)
+            int remainingTaskCount = this.taskCount;
+            while (remainingTaskCount > 0)
             {
                 this.combiner.combineOne(this.outputQueue.take());
-                remaingTaskCount--;
+                remainingTaskCount--;
             }
         }
         catch (InterruptedException e)

@@ -37,7 +37,7 @@ import org.eclipse.collections.api.set.primitive.MutableShortSet;
 import org.eclipse.collections.api.tuple.Pair;
 
 /**
- * A MutableSet is an extenstion java.util.Set which provides methods matching the Smalltalk Collection protocol.
+ * A MutableSet is an extension java.util.Set which provides methods matching the Smalltalk Collection protocol.
  */
 public interface MutableSet<T>
         extends UnsortedSetIterable<T>, MutableSetIterable<T>, Cloneable
@@ -120,7 +120,7 @@ public interface MutableSet<T>
     <V> MutableSet<V> flatCollect(Function<? super T, ? extends Iterable<V>> function);
 
     /**
-     * Returns an unmodifable view of the set.
+     * Returns an unmodifiable view of the set.
      *
      * @return an unmodifiable view of this set
      */
