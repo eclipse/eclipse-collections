@@ -14,6 +14,7 @@ body(type, name) ::= <<
 
 package org.eclipse.collections.api.stack.primitive;
 
+import org.eclipse.collections.api.block.function.primitive.<name>IntToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
 import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
 import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
@@ -46,6 +47,19 @@ public interface Immutable<name>Stack extends <name>Stack
 
     @Override
     \<V> ImmutableStack\<V> collect(<name>ToObjectFunction\<? extends V> function);
+
+    /**
+     * Returns a new ImmutableStack using results obtained by applying the specified function to each element
+     * and its corresponding index.
+     *
+     * @since 9.1.
+     */
+    @Override
+    default \<V> ImmutableStack\<V> collectWithIndex(<name>IntToObjectFunction\<? extends V> function)
+    {
+        int[] index = { 0 };
+        return this.collect(each -> function.value(each, index[0]++));
+    }
 }
 
 >>

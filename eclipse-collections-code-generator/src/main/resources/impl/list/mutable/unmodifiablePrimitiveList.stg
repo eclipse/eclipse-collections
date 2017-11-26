@@ -17,9 +17,11 @@ body(type, name) ::= <<
 package org.eclipse.collections.impl.list.mutable.primitive;
 
 import java.lang.Iterable;
+import java.util.Collection;
 
 import org.eclipse.collections.api.<name>Iterable;
 import org.eclipse.collections.api.Lazy<name>Iterable;
+import org.eclipse.collections.api.block.function.primitive.<name>IntToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.Object<name>IntToObjectFunction;
 import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
@@ -258,6 +260,29 @@ public final class Unmodifiable<name>List
     public \<T> MutableList\<<name>ObjectPair\<T\>> zip(Iterable\<T> iterable)
     {
         return this.getMutable<name>List().zip(iterable);
+    }
+
+    /**
+     * Returns a new MutableList using results obtained by applying the specified function to each element
+     * and its corresponding index.
+     *
+     * @since 9.1.
+     */
+    @Override
+    public \<V> MutableList\<V> collectWithIndex(<name>IntToObjectFunction\<? extends V> function)
+    {
+        return this.getMutable<name>List().collectWithIndex(function);
+    }
+
+    /**
+     * Adds elements to the target Collection using results obtained by applying the specified function to each element
+     * and its corresponding index.
+     *
+     * @since 9.1.
+     */
+    public \<V, R extends Collection\<V\>> R collectWithIndex(<name>IntToObjectFunction\<? extends V> function, R target)
+    {
+        return this.getMutable<name>List().collectWithIndex(function, target);
     }
 }
 
