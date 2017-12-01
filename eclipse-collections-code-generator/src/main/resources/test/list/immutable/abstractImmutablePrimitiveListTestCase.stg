@@ -21,11 +21,17 @@ import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.list.primitive.Immutable<name>List;
 import org.eclipse.collections.api.list.primitive.Mutable<name>List;
+import org.eclipse.collections.api.set.MutableSet;
+<if(!primitive.intPrimitive)>import org.eclipse.collections.api.tuple.primitive.<name>IntPair;<endif>
 import org.eclipse.collections.api.tuple.primitive.<name><name>Pair;
 import org.eclipse.collections.api.tuple.primitive.<name>ObjectPair;
 import org.eclipse.collections.impl.collection.immutable.primitive.AbstractImmutable<name>CollectionTestCase;
 import org.eclipse.collections.impl.factory.Lists;
-import org.eclipse.collections.impl.factory.primitive.<name>Lists;
+import org.eclipse.collections.impl.factory.Sets;
+<if(!primitive.intPrimitive)>import org.eclipse.collections.impl.factory.primitive.<name>Lists;<endif>
+import org.eclipse.collections.impl.factory.primitive.IntLists;
+<if(!primitive.intPrimitive)>import org.eclipse.collections.impl.factory.primitive.<name>Sets;<endif>
+import org.eclipse.collections.impl.factory.primitive.IntSets;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
 import org.eclipse.collections.impl.math.Mutable<wrapperName>;
@@ -179,6 +185,47 @@ public abstract class AbstractImmutable<name>ListTestCase extends AbstractImmuta
         Mutable<wrapperName> result = list1.injectIntoWithIndex(new Mutable<wrapperName>(<(literal.(type))("0")>),
             (Mutable<wrapperName> object, <type> value, int index) -> object.add(<(castIntToNarrowTypeWithParens.(type))("value * list2.get(index)")>));
         Assert.assertEquals(new Mutable<wrapperName>(<(literal.(type))("14")>), result);
+    }
+
+    /**
+     * @since 9.1.
+     */
+    @Test
+    public void collectWithIndex()
+    {
+        ImmutableList\<<name>IntPair> pairs = this.newWith(<["3", "1", "9", "7"]:(literal.(type))(); separator=", ">)
+                .collectWithIndex(PrimitiveTuples::pair);
+        Assert.assertEquals(
+                IntLists.mutable.with(0, 1, 2, 3),
+                pairs.collectInt(<name>IntPair::getTwo, IntLists.mutable.empty()));
+        Assert.assertEquals(
+                <name>Lists.mutable.with(<["3", "1", "9", "7"]:(literal.(type))(); separator=", ">),
+                pairs.collect<name>(<name>IntPair::getOne, <name>Lists.mutable.empty()));
+    }
+
+    /**
+     * @since 9.1.
+     */
+    @Test
+    public void collectWithIndexWithTarget()
+    {
+        MutableList\<<name>IntPair> pairs = this.newWith(<["3", "1", "9", "7"]:(literal.(type))(); separator=", ">)
+                .collectWithIndex(PrimitiveTuples::pair, Lists.mutable.empty());
+        Assert.assertEquals(
+                IntLists.mutable.with(0, 1, 2, 3),
+                pairs.collectInt(<name>IntPair::getTwo, IntLists.mutable.empty()));
+        Assert.assertEquals(
+                <name>Lists.mutable.with(<["3", "1", "9", "7"]:(literal.(type))(); separator=", ">),
+                pairs.collect<name>(<name>IntPair::getOne, <name>Lists.mutable.empty()));
+
+        MutableSet\<<name>IntPair> set = this.newWith(<["3", "1", "9", "7"]:(literal.(type))(); separator=", ">)
+                .collectWithIndex(PrimitiveTuples::pair, Sets.mutable.empty());
+        Assert.assertEquals(
+                IntSets.mutable.with(0, 1, 2, 3),
+                pairs.collectInt(<name>IntPair::getTwo, IntSets.mutable.empty()));
+        Assert.assertEquals(
+                <name>Sets.mutable.with(<["3", "1", "9", "7"]:(literal.(type))(); separator=", ">),
+                pairs.collect<name>(<name>IntPair::getOne, <name>Sets.mutable.empty()));
     }
 
     @Test

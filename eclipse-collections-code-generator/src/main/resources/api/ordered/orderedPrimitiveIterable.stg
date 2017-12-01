@@ -1,4 +1,4 @@
-import "copyright.stg"
+import "copyrightAndOthers.stg"
 import "primitiveEquals.stg"
 import "primitiveHashCode.stg"
 import "primitiveAPI.stg"
@@ -13,11 +13,14 @@ class(primitive) ::= <<
 >>
 
 body(type, name) ::= <<
-<copyright()>
+<copyrightAndOthers()>
 
 package org.eclipse.collections.api.ordered.primitive;
 
+import java.util.Collection;
+
 import org.eclipse.collections.api.<name>Iterable;
+import org.eclipse.collections.api.block.function.primitive.<name>IntToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.Object<name>IntToObjectFunction;
 import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
@@ -39,6 +42,30 @@ public interface Ordered<name>Iterable extends <name>Iterable
 
     @Override
     \<V> OrderedIterable\<V> collect(<name>ToObjectFunction\<? extends V> function);
+
+    /**
+     * Returns a new OrderedIterable using results obtained by applying the specified function to each element
+     * and its corresponding index.
+     *
+     * @since 9.1.
+     */
+    default \<V> OrderedIterable\<V> collectWithIndex(<name>IntToObjectFunction\<? extends V> function)
+    {
+        int[] index = { 0 };
+        return this.collect(each -> function.value(each, index[0]++));
+    }
+
+    /**
+     * Adds elements to the target Collection using results obtained by applying the specified function to each element
+     * and its corresponding index.
+     *
+     * @since 9.1.
+     */
+    default \<V, R extends Collection\<V\>> R collectWithIndex(<name>IntToObjectFunction\<? extends V> function, R target)
+    {
+        int[] index = { 0 };
+        return this.collect(each -> function.value(each, index[0]++), target);
+    }
 
     \<T> T injectIntoWithIndex(T injectedValue, Object<name>IntToObjectFunction\<? super T, ? extends T> function);
 
