@@ -9,7 +9,7 @@
   ~ http://www.eclipse.org/org/documents/edl-v10.php.
   -->
 
-<html lang="ja">
+<html lang="fr">
 
 <head>
 
@@ -20,7 +20,7 @@
     <meta name="author" content="">
     <link rel="shortcut icon" type="image/x-icon" href="../favicon.ico" />
 
-    <title>Eclipse Collections - Features you want with the collections you need. (日本語ページ) </title>
+    <title>Eclipse Collections - Fonctionnalités dont vous rêvez avec les collections dont vous avez besoin. </title>
 
     <!-- Bootstrap Core CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-7s5uDGW3AHqw6xtJmNNtr+OBRJUlgkNJEo78P4b0yRw= sha512-nNo+yCHEyn0smMxSswnf/OnX6/KwJuZTlNZBjauKhTK0c+zT+q5JOCx0UFhXQ6rJR9jg6Es8gPuD2uZcYDLqSw==" crossorigin="anonymous">
@@ -30,7 +30,6 @@
 
     <!-- Custom Fonts -->
     <link href="//fonts.googleapis.com/css?family=Roboto+Condensed:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
-    <link href="//fonts.googleapis.com/earlyaccess/notosansjapanese.css" rel="stylesheet" type="text/css">
 
     <!-- Google Code Prettify -->
     <link href="../css/sunburst.css" rel="stylesheet" type="text/css">
@@ -55,7 +54,7 @@
 
 </head>
 
-<body onload="prettyPrint()">
+<body>
 
 <!-- Navigation -->
 <nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
@@ -74,25 +73,30 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a href="#start">始め方</a>
+                    <a href="#start">Premiers pas</a>
                 </li>
                 <li>
-                    <a href="#concept">コンセプト</a>
+                    <a href="#concept">Concepts</a>
                 </li>
                 <li>
-                    <a href="#learn">学ぶ</a>
+                    <a href="#learn">Découvrir</a>
                 </li>
                 <li>
-                    <a href="#history">歴史</a>
+                    <a href="#history">Origine</a>
                 </li>
                 <li>
-                    <a href="#contribute">コントリビュート</a>
+                    <a href="#refGuide">Guide de référence</a>
+                </li>
+                <li>
+                    <a href="#sourceCode">Code Source</a>
+                </li>
+                <li>
+                    <a href="#contribute">Contribuer</a>
                 </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false">Javadoc <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="../javadoc/9.1.0">9.1.0</a></li>
                         <li><a href="../javadoc/9.0.0">9.0.0</a></li>
                         <li><a href="../javadoc/8.2.0">8.2.0</a></li>
                         <li><a href="../javadoc/8.1.0">8.1.0</a></li>
@@ -102,12 +106,11 @@
                 </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false">言語 <span class="caret"></span></a>
+                       aria-expanded="false">Langage <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="../index.html">English</a></li>
-                        <li><a href="../cn/index.html">中文</a></li>
-                        <li><a href="../fr/index.html">Français</a></li>
-                        <li><a href="">日本語</a></li>
+                        <li><a href="">Français</a></li>
+                        <li><a href="../ja/index.html">日本語</a></li>
                         <li><a href="../pt-br/index.html">Português-Brasil</a></li>
                         <li><a href="../ru/index.html">Русский</a></li>
                     </ul>
@@ -129,7 +132,7 @@
             <div class="col-lg-push-2 col-lg-8">
                 <div class="intro-message">
                     <h1>Eclipse <span style="font-weight: 400">Collections</span></h1>
-                    <h3>- Features you want with the collections you need -</h3>
+                    <h3>- Fonctionnalités dont vous rêvez avec les collections dont vous avez besoin -</h3>
                 </div>
             </div>
         </div>
@@ -150,17 +153,17 @@
             <div class="col-lg-5 col-sm-6">
                 <hr class="section-heading-spacer">
                 <div class="clearfix"></div>
-                <h2 class="section-heading">Eclipse Collectionsを使ってみよう</h2>
-                <p class="lead">Eclipse CollectionsはあなたのJava開発を楽しくさせるような、
-                    最高のJavaコレクションフレームワークです。
-                    <br><br>今すぐお好みのビルドツールを使ってあなたのJavaプロジェクトに導入してみてください！</p>
+                <h2 class="section-heading">Premiers pas avec les <br>Eclipse Collections</h2>
+                <p class="lead">Eclipse Collections est la meilleure librairie Java de Collections.
+                    Elle va dynamiser tous vos projets Java.
+                    <br><br>Utilisez la dans vos projets dès aujourd'hui avec vos outils de développement favoris!</p>
             </div>
             <div class="col-lg-7 col-sm-6">
                 <ul class="nav nav-tabs">
                     <li class="active"><a href="#maven" data-toggle="tab">Maven</a></li>
                     <li><a href="#gradle" data-toggle="tab">Gradle</a></li>
                     <li><a href="#ivy" data-toggle="tab">Ivy</a></li>
-                    <li><a href="#download" data-toggle="tab">Download</a></li>
+                    <li><a href="#download" data-toggle="tab">Téléchargement</a></li>
                 </ul>
                 <div id="dependencies" class="tab-content">
                     <div class="tab-pane fade in active" id="maven">
@@ -168,29 +171,29 @@
 &lt;dependency&gt;
   &lt;groupId&gt;org.eclipse.collections&lt;/groupId&gt;
   &lt;artifactId&gt;eclipse-collections-api&lt;/artifactId&gt;
-  &lt;version&gt;9.1.0&lt;/version&gt;
+  &lt;version&gt;9.0.0&lt;/version&gt;
 &lt;/dependency&gt;
 
 &lt;dependency&gt;
   &lt;groupId&gt;org.eclipse.collections&lt;/groupId&gt;
   &lt;artifactId&gt;eclipse-collections&lt;/artifactId&gt;
-  &lt;version&gt;9.1.0&lt;/version>
+  &lt;version&gt;9.0.0&lt;/version>
 &lt;/dependency&gt;</pre>
-                    </div>
-                    <div class="tab-pane fade" id="gradle">
+                        </div>
+                        <div class="tab-pane fade" id="gradle">
                             <pre  class="prettyprint">
-compile 'org.eclipse.collections:eclipse-collections-api:9.1.0'
-compile 'org.eclipse.collections:eclipse-collections:9.1.0'</pre>
-                    </div>
-                    <div class="tab-pane fade" id="ivy">
+compile 'org.eclipse.collections:eclipse-collections-api:9.0.0'
+compile 'org.eclipse.collections:eclipse-collections:9.0.0'</pre>
+                        </div>
+                        <div class="tab-pane fade" id="ivy">
                             <pre  class="prettyprint">
-&lt;dependency org="org.eclipse.collections" name="eclipse-collections-api" rev="9.1.0" /&gt;
-&lt;dependency org="org.eclipse.collections" name="eclipse-collections" rev="9.1.0" /&gt;</pre>
-                    </div>
-                    <div class="tab-pane fade" id="download">
+&lt;dependency org="org.eclipse.collections" name="eclipse-collections-api" rev="9.0.0" /&gt;
+&lt;dependency org="org.eclipse.collections" name="eclipse-collections" rev="9.0.0" /&gt;</pre>
+                        </div>
+                        <div class="tab-pane fade" id="download">
                             <pre class="prettyprint">
-  <a target="_blank" href="http://mvnrepository.com/artifact/org.eclipse.collections/eclipse-collections-api/9.1.0">eclipse-collections-api-9.1.0.jar</a>
-  <a target="_blank" href="http://mvnrepository.com/artifact/org.eclipse.collections/eclipse-collections/9.1.0">eclipse-collections-9.1.0.jar</a></pre>
+<a target="_blank" href="http://mvnrepository.com/artifact/org.eclipse.collections/eclipse-collections-api/9.0.0">eclipse-collections-api-9.0.0.jar</a>
+<a target="_blank" href="http://mvnrepository.com/artifact/org.eclipse.collections/eclipse-collections/9.0.0">eclipse-collections-9.0.0.jar</a></pre>
                     </div>
 
                 </div>
@@ -212,15 +215,16 @@ compile 'org.eclipse.collections:eclipse-collections:9.1.0'</pre>
             <div class="col-lg-push-7 col-lg-5 col-sm-push-6  col-sm-6">
                 <hr class="section-heading-spacer">
                 <div class="clearfix"></div>
-                <h2 class="section-heading">簡単に使えて読み易い、豊富なAPI</h2>
-                <p class="lead">コレクションから直接呼び出せる豊富なAPIを使って、Java 8のラムダ式やメソッド参照の簡潔さを最大限に活用することができます。
+                <h2 class="section-heading">Une API claire, riche et concise.</h2>
+                <p class="lead">Multipliez la puissance des expressions lambda de Java 8 avec
+                    une API complète directement utilisable pour vos collections.
                 </p>
             </div>
             <div class="col-lg-pull-5 col-lg-7 col-sm-pull-6  col-sm-6">
                 <ul class="nav nav-tabs">
-                    <li class="active"><a href="#method" data-toggle="tab">メソッド参照を用いた例</a></li>
-                    <li><a href="#ec" data-toggle="tab">ラムダ式を用いた例</a></li>
-                    <li><a href="#streams" data-toggle="tab">Java 8 Stream APIを用いた例</a></li>
+                    <li class="active"><a href="#method" data-toggle="tab">Exemples d'utilisation des Eclipse Collections</a></li>
+                    <li><a href="#ec" data-toggle="tab">Exemples avec des expressions lambda</a></li>
+                    <li><a href="#streams" data-toggle="tab">Java 8 Streams</a></li>
                 </ul>
                 <div id="ec-vs-streams" class="tab-content">
                     <div class="tab-pane fade in active" id="method">
@@ -291,19 +295,19 @@ List&lt;Person&gt; peopleWithCats =
             <div class="col-lg-5 col-sm-6">
                 <hr class="section-heading-spacer">
                 <div class="clearfix"></div>
-                <h2 class="section-heading">可変、不変、プリミティブコレクションや、Bag、MutableBag、BiMapなど、より多くのコレクション型をサポート</h2>
-                <p class="lead">Eclipse Collectionsのファクトリメソッドを活用して、様々な種類のコレクション型を可変性やプリミティブ型を指定して簡単につくることができます。</p>
+                <h2 class="section-heading">De nombreux types de conteneurs, incluant les collections immuables et non-immuables, les collections primitives, les ensembles et les multiensembles</h2>
+                <p class="lead">Utilisez les nombreux types de conteneurs existants, en vous appuyant sur les méthodes d'instanciation faciles présentes dans les factories .</p>
             </div>
             <div class="col-lg-7 col-sm-6">
                 <ul class="nav nav-tabs">
-                    <li class="active"><a href="#mutable" data-toggle="tab">可変コレクション</a></li>
-                    <li><a href="#immutable" data-toggle="tab">不変コレクション</a></li>
-                    <li><a href="#primitives" data-toggle="tab">プリミティブコレクション</a></li>
+                    <li class="active"><a href="#mutable" data-toggle="tab">Collections Non-Immuables</a></li>
+                    <li><a href="#immutable" data-toggle="tab">Collections Immuables</a></li>
+                    <li><a href="#primitives" data-toggle="tab">Collections Primitives</a></li>
                 </ul>
                 <div id="container-types" class="tab-content">
                     <div class="tab-pane fade in active" id="mutable">
                             <pre  class="prettyprint lang-java">
-//可変Listをempty(), of(), with()メソッドを使用して初期化できます
+//Initialisation d'une liste non-immuable avec les méthodes empty(), of() et with()
 MutableList&lt;String&gt; mutableListEmpty =
   Lists.mutable.empty();
 MutableList&lt;String&gt; mutableListOf =
@@ -311,7 +315,7 @@ MutableList&lt;String&gt; mutableListOf =
 MutableList&lt;String&gt; mutableListWith =
   Lists.mutable.with("One", "One", "Two", "Three");
 
-//List以外にもSet、Bag、Stack、Map、Multimap等、様々なコンテナ型が利用できます
+//De nombreux types de conteneurs sont disponibles
 MutableSet&lt;String&gt; mutableSet =
   Sets.mutable.with("One", "One", "Two", "Three");
 MutableBag&lt;String&gt; mutableBag =
@@ -327,7 +331,7 @@ MutableBiMap&lt;String, String&gt; mutableBiMap =
                     </div>
                     <div class="tab-pane fade" id="immutable">
                             <pre  class="prettyprint lang-java">
-//不変Listをempty(), of(), with()メソッドを使用して初期化できます
+//Initialisation d'une liste immuable avec les méthodes empty(), of() et with()
 ImmutableList&lt;String&gt; immutableListEmpty =
   Lists.immutable.empty();
 ImmutableList&lt;String&gt; immutableListOf =
@@ -335,7 +339,7 @@ ImmutableList&lt;String&gt; immutableListOf =
 ImmutableList&lt;String&gt; immutableListWith =
   Lists.immutable.with("One", "One", "Two", "Three");
 
-//List以外にもSet、Bag、Stack、Map、Multimap等、様々なコンテナ型が利用できます
+//De nombreux types de conteneurs sont disponibles
 ImmutableSet&lt;String&gt; immutableSet =
   Sets.immutable.with("One", "One", "Two", "Three");
 ImmutableBag&lt;String&gt; immutableBag =
@@ -351,7 +355,7 @@ ImmutableBiMap&lt;String, String&gt; immutableBiMap =
                     </div>
                     <div class="tab-pane fade" id="primitives">
                             <pre  class="prettyprint lang-java">
-//不変、可変なList、Set、Bag、Stack、Mapが8個のプリミティブ型全てに対して利用できます
+//Listes (List) immuables ou non-immuables, Ensembles (Sets), Multiensemble (Bags), Piles (Stacks) et Tableaux associatifs (Maps) sont utilisables avec les 8 types primitifs
 MutableIntList intList =
   IntLists.mutable.of(1, 2, 3);
 MutableLongList longList =
@@ -369,18 +373,18 @@ MutableFloatList floatList =
 MutableDoubleList doubleList =
   DoubleLists.mutable.of(1.0, 2.0, 3.0);
 
-//IntIntervalを用いて範囲指定したintのコレクションをつくることができます
+//Vous pouvez créer une liste d'entier avec IntInterval
 IntInterval oneTo10 =
-  IntInterval.fromTo(1, 10); // 1から10までのint
+  IntInterval.fromTo(1, 10); // entiers de 1 à 10
 // [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 IntInterval oneTo10By3 =
-  IntInterval.fromToBy(1, 10, 3); // 1から10までの3つおきのint
+  IntInterval.fromToBy(1, 10, 3); // entier de 1 à 10 avec un incrément de 3
 // [1, 4, 7, 10]
 IntInterval oddsFrom1To10 =
-  IntInterval.oddsFromTo(1, 10); // 1から10までの奇数int
+  IntInterval.oddsFromTo(1, 10); // nombres impairs de 1 à 10
 // [1, 3, 5, 7, 9]
 IntInterval evensFrom1To10 =
-  IntInterval.evensFromTo(1, 10); // 1から10までの偶数int
+  IntInterval.evensFromTo(1, 10); // nombres pairs de 1 à 10
 // [2, 4, 6, 8, 10]</pre>
                     </div>
                 </div>
@@ -405,14 +409,14 @@ IntInterval evensFrom1To10 =
             <div class="col-lg-push-6 col-lg-6 col-sm-push-6 col-sm-6">
                 <hr class="section-heading-spacer">
                 <div class="clearfix"></div>
-                <h2 class="section-heading">メモリ効率の良いコレクションで、あなたのプロセスを軽量に</h2>
-                <p class="lead">Eclipse CollectionsはSet、Map、全てのプリミティブコレクションにおいて、メモリ効率の良い実装になっています。 </p>
+                <h2 class="section-heading">Reduisez votre utilisation de la mémoire <br>avec des conteneurs optimisés</h2>
+                <p class="lead">Eclipse Collections vous fournit une implémentation optimisée pour vos ensembles (Sets) et vos tableaux associatifs (Maps), ainsi que vos collections primitives. </p>
             </div>
             <div class="col-lg-pull-6 col-lg-6 col-sm-pull-6 col-sm-6">
                 <ul class="nav nav-tabs">
-                    <li class="active"><a href="#set" data-toggle="tab">Set</a></li>
-                    <li><a href="#map" data-toggle="tab">Map</a></li>
-                    <li><a href="#ints" data-toggle="tab">プリミティブコレクション</a></li>
+                    <li class="active"><a href="#set" data-toggle="tab">Ensembles (Sets)</a></li>
+                    <li><a href="#map" data-toggle="tab">Tableaux associatifs (Maps)</a></li>
+                    <li><a href="#ints" data-toggle="tab">Collections primitives</a></li>
                 </ul>
                 <div id="memory" class="tab-content">
                     <div class="tab-pane fade in active" id="set">
@@ -443,19 +447,17 @@ IntInterval evensFrom1To10 =
             <div class="col-lg-5 col-sm-6">
                 <hr class="section-heading-spacer">
                 <div class="clearfix"></div>
-                <h2 class="section-heading">Kataで学ぶEclipse Collections</h2>
+                <h2 class="section-heading">Apprendre les Eclipse Collections avec un Kata</h2>
                 <p class="lead">
-                    <a href="https://github.com/eclipse/eclipse-collections-kata">Eclipse Collections Kata</a>を使うと
-                    Eclipse Collectionsの使用法を楽しく学ぶことができます。
-                    Eclipse Collections Kataでは、Eclipse Collectionsを使って
-                    フェイルした状態のユニットテストをひとつひとつパスしていきます。
-                    日本の武道の「型（形）」のように繰り返し練習することで基本的な使用法を学んでみましょう。
+                    Faites un tour sur les  <a href="https://github.com/eclipse/eclipse-collections-kata">Eclipse Collections Kata</a>, une facon simple et amusante de découvrir le monde des Eclipse Collections.
+                    Ces kata ont été concu avec des tests unitaires défaillants.
+                    Votre objectif est de les faire réussir, en utilisant les Eclipse Collections.
                 </p>
             </div>
             <div class="col-lg-7 col-sm-6">
                 <ul class="nav nav-tabs">
-                    <li class="active"><a href="#exercise" data-toggle="tab">Sample Exercise</a></li>
-                    <li><a href="#solution" data-toggle="tab">Sample Solution</a></li>
+                    <li class="active"><a href="#exercise" data-toggle="tab">Exemple d'exercice</a></li>
+                    <li><a href="#solution" data-toggle="tab">Exemple de solution</a></li>
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane fade in active" id="exercise">
@@ -464,7 +466,7 @@ IntInterval evensFrom1To10 =
 public void getFirstNamesOfAllPeople()
 {
   MutableList&lt;Person&gt; people = this.people;
-  MutableList&lt;String&gt; firstNames = null; //Replace null, with a transformation method on MutableList.
+  MutableList&lt;String&gt; firstNames = null; //Remplacez null par une méthode sur MutableList.
   MutableList&lt;String&gt; expectedFirstNames =
     Lists.mutable.with("Mary", "Bob", "Ted", "Jake", "Barry", "Terry", "Harry", "John");
   Assert.assertEquals(expectedFirstNames, firstNames);
@@ -500,34 +502,58 @@ public void getFirstNamesOfAllPeople()
 
     <div class="container-fluid">
 
-        <h2 class="section-heading">Eclipse Collectionsの歴史</h2>
+        <h2 class="section-heading">Origine des Eclipse Collections</h2>
         <p class="lead">
-            Eclipse Collectionsは、2004年にゴールドマン・サックス社内製のCaramelと呼ばれるコレクションフレームワークから始まりました。
+            Les premières versions des Eclipse Collections ont été crée en tant qu'une librairie de collections nommée Caramel à Goldman Sachs en 2004.
 
-            このフレームワークは進化し、2012年に
-            <a href="https://github.com/goldmansachs/gs-collections">GS Collections</a>としてGitHub上にオープンソースで公開されました。
+            Depuis, la plateforme a évolué, et en 2012, elle a été partagé sur Github sous le nom de
+            <a href="https://github.com/goldmansachs/gs-collections">GS Collections</a>.
             <br><br>
-            GS Collectionsは2012年のJVM Summitや2014年のJavaOneなど、さまざまな
-            <a href="https://github.com/eclipse/eclipse-collections/wiki/Conference-talks-and-meetups">カンファレンス</a>
-            にて発表されました。
-            また、2014年にはJava 8、Scala、GS Collectionsそれぞれの実装における並列遅延実行処理のパフォーマンス比較が
-            <a href="http://www.infoq.com/presentations/java-streams-scala-parallel-collections">QCon New York</a>にて発表され、大きな注目を浴びました。
+            GS Collections a été présente durant plusieurs
+            <a href="https://github.com/eclipse/eclipse-collections/wiki/Conference-talks-and-meetups">évènements</a>
+            incluant le JVM Summit de 2012 et JavaOne de 2014.
+            Une comparaison des performances entre les implemtations des évaluations paresseuses de Java 8, Scala et de GS a été présenté au
+            <a href="http://www.infoq.com/presentations/java-streams-scala-parallel-collections">QCon New York</a> en 2014.
+            Aussi, un <a href="https://github.com/eclipse/eclipse-collections/wiki/Articles">article</a> sur les GS Collections
+            (<a href="http://www.infoq.com/articles/GS-Collections-by-Example-1">Partie 1</a> /
+            <a href="http://www.infoq.com/articles/GS-Collections-by-Example-2">Partie 2</a>)
+            a éte publié sur InfoQ.com
+            montrant les capacités de cette librairie à travers des exemples et des interviews des créateurs des GS Collections.
             <br><br>
-            メディアにおいては、GS Collections開発者の
-            <a href="https://www.jclarity.com/2013/11/26/stalwarts-in-tech-an-interview-with-donald-raab-gs-collections-lead/">インタビュー記事</a>
-            や、InfoQのGS Collections活用法を紹介した記事（日本語版<a href="http://www.infoq.com/jp/articles/GS-Collections-by-Example-1">Part1</a>
-            ・<a href="http://www.infoq.com/jp/articles/GS-Collections-by-Example-2">Part2</a>）などが掲載されています。
+
+            Au fil des années, environ 40 developpeurs provenant de la même société ont contribué à cette librairie.
             <br><br>
-            10余年にわたり、同コレクションフレームワークには同社の40人余りもの開発者が携わってきました。
-            <br><br>
-            2015年、オープンソースプロジェクトとしての特徴を最大限に活かすため、GS CollectionsはEclipse Foundationに移管され、Eclipse Collectionsとして生まれ変わりました。
-            コミュニティからのコントリビューションを受け付ける、完全にオープンなフレームワークになったのです。
+
+            Pour permettre une meilleure utilisation de la communauté Open Source, GS Collections a été migré dans la Fondation Eclipse et re-nommé en Eclipse Collections en 2015.
+            Maintenant, la librairie est totalement ouverte vers la communauté, n'attendant plus que votre contribution!
         </p>
-        <hr class="section-heading-spacer">
+    </div>
+</div>
 
+<a class="anchor" name="refGuide"></a>
+<div class="content-section-a">
+    <div class="container-fluid">
+        <h2 class="section-heading">Guide de référence</h2>
+        <p class="lead">
+            Un guide complet de référence sur la librairie est accessible sur GitHub:
+            <a href="https://github.com/eclipse/eclipse-collections/blob/master/docs/guide.md#eclipse-collections-reference-guide">Guide de Référence (en Anglais)</a>.
+        </p>
     </div>
     <!-- /.container -->
 
+</div>
+<!-- Reference Guide  -->
+<a class="anchor" name="sourceCode"></a>
+<div class="content-section-b">
+    <div class="container-fluid">
+        <h2 class="section-heading">Code Source</h2>
+        <p class="lead">
+            Le code source est accessible sur GitHub: <a href="https://github.com/eclipse/eclipse-collections">Eclipse Collections</a></p>.
+        </p>
+    </div>
+    <!-- /.container -->
+</div>
+<!-- Source Code  -->
 </div>
 <!-- Introduction  -->
 
@@ -538,33 +564,59 @@ public void getFirstNamesOfAllPeople()
 
         <div class="row">
             <div class="col-lg-4 col-sm-4">
-                <h3>コントリビュート</h3>
+                <h3>Contribuer</h3>
                 <p class="regular">
-                    Eclipse Collectionsプロジェクトではコミュニティからのコントリビューションを歓迎します!!
+                    Tout contributeur est le bienvenu !
                     <br><br>
-                    プロジェクトのロードマップは<a href="https://github.com/eclipse/eclipse-collections/wiki/Roadmap">こちら</a>をご覧ください。
+                    Le futur des Eclipse Collections est accessible <a href="https://github.com/eclipse/eclipse-collections/wiki/Roadmap">ici</a>.
                     <br><br>
-                    Eclipse CollectionsプロジェクトはコントリビューションをGitHub上でのプルリクエストで受け付けています。
-                    詳細は<a href="https://github.com/eclipse/eclipse-collections/blob/master/CONTRIBUTING.md">How To Contribute</a>をご覧ください。
+                    Pour contribuer, il vous suffit juste de faire un pull request sur GitHub.
+                    La section <a href="https://github.com/eclipse/eclipse-collections/blob/master/CONTRIBUTING.md">Contribuer </a> est le meilleur moyen de commencer.
                 </p>
             </div>
             <div class="col-lg-4 col-sm-4">
-                <h3>最新ニュース</h3>
-                <p class="regular">Eclipse Collections 9.1.0が<a href="https://github.com/eclipse/eclipse-collections/releases/tag/9.1.0">リリース</a>されました <a class="light">(Jan 1st 2018)</a></p>
-                <p class="regular">Eclipse Collections 9.0.0が<a href="https://github.com/eclipse/eclipse-collections/releases/tag/9.0.0">リリース</a>されました <a class="light">(Sep 21nd 2017)</a></p>
-                <p class="regular">Eclipse Collections 8.2.0が<a href="https://github.com/eclipse/eclipse-collections/releases/tag/8.2.0">リリース</a>されました <a class="light">(Jun 22nd 2017)</a></p>
-                <p class="regular">Eclipse Collections 8.1.0が<a href="https://github.com/eclipse/eclipse-collections/releases/tag/8.1.0">リリース</a>されました <a class="light">(Mar 16th 2017)</a></p>
-                <p class="regular">Eclipse Collections 8.0.0が<a href="https://github.com/eclipse/eclipse-collections/releases/tag/8.0.0">リリース</a>されました <a class="light">(Sep 8th 2016)</a></p>
+                <h3>Versions les plus récentes</h3>
+                <p class="regular">Eclipse Collections 9.0.0 <a href="https://github.com/eclipse/eclipse-collections/releases/tag/9.0.0">delivré le</a> <a class="light">(Sep 21 2017)</a></p>
+                <p class="regular">Eclipse Collections 8.2.0 <a href="https://github.com/eclipse/eclipse-collections/releases/tag/8.2.0">delivré le</a> <a class="light">(Jui 22 2017)</a></p>
+                <p class="regular">Eclipse Collections 8.1.0 <a href="https://github.com/eclipse/eclipse-collections/releases/tag/8.1.0">delivré le</a> <a class="light">(Mar 16 2017)</a></p>
+                <p class="regular">Eclipse Collections 8.0.0 <a href="https://github.com/eclipse/eclipse-collections/releases/tag/8.0.0">delivré le</a> <a class="light">(Sep 8 2016)</a></p>
+                <p class="regular">Eclipse Collections 8.0.0-M1 <a href="https://github.com/eclipse/eclipse-collections/releases/tag/8.0.0-M1">accessible le</a> <a class="light">(Jul 6 2016)</a></p>
+                <p class="regular">Eclipse Collections 7.1.0 <a href="https://github.com/eclipse/eclipse-collections/releases/tag/7.1.0">delivré le</a> <a class="light">(Avr 8 2016)</a></p>
+                <p class="regular"><a href="https://github.com/eclipse/eclipse-collections-kata">Eclipse Collections Kata</a> a été présenté à
+                    <a href="https://www.eclipsecon.org/na2016/session/eclipse-collections-kata-fun-way-learn-feature-rich-collections-framework">
+                        EclipseCon NA 2016
+                    </a>
+                    <a class="light">(Mar 7 2016)</a>
+                </p>
+                <p class="regular">Un <a href="http://www.infoq.com/news/2016/01/GS-Collections-Eclipse-Foundn">article</a> a propos des Eclipse Collections publiée sur InfoQ. <a class="light">(Jan 21 2016)</a></p>
+                <p class="regular">Eclipse Collections a été présenté à
+                    <a href="http://www.java-users.jp/?page_id=2064#GH-4">
+                        JJUG CCC 2015 Fall
+                    </a>
+                    <a class="light">(Nov 28 2015)</a>
+                </p>
+                <p class="regular">Eclipse Collections a été présenté à
+                    <a href="https://www.eclipsecon.org/europe2015/session/eclipse-collections-example">
+                        EclipseCon Europe 2015
+                    </a>
+                    <a class="light">(Nov 5 2015)</a>
+                </p>
+                <p class="regular">Eclipse Collections a été présenté à
+                    <a href="https://events.rainfocus.com/oow15/catalog/oracle.jsp?event=javaone&search=CON1091&search.event=javaoneEvent&search.day=20151029">
+                        JavaOne 2015 San Francisco
+                    </a>
+                    <a class="light">(Oct 28 2015)</a>
+                </p>
             </div>
             <div class="col-lg-4 col-sm-4">
-                <h3>コミュニティ リンク集</h3>
-                <p class="regular">Eclipse PMI: <a href="https://projects.eclipse.org/projects/technology.collections">eclipse project management infrastructure</a></p>
+                <h3>Liens</h3>
+                <p class="regular">Eclipse PMI: <a href="https://projects.eclipse.org/projects/technology.collections">Infraestrutura de gerenciamento de projetos Eclipse</a></p>
                 <p class="regular">GitHub: <a href="https://github.com/eclipse/eclipse-collections">eclipse-collections</a></p>
                 <p class="regular">Issues: <a href="https://github.com/eclipse/eclipse-collections/issues">GitHub issues</a></p>
-                <p class="regular">Mailing lists: <a href="https://dev.eclipse.org/mailman/listinfo/collections-dev">collections-dev</a></p>
+                <p class="regular">Liste de diffusion: <a href="https://dev.eclipse.org/mailman/listinfo/collections-dev">collections-dev</a> </p>
                 <p class="regular">Wiki: <a href="https://github.com/eclipse/eclipse-collections/wiki">GitHub wiki</a></p>
                 <p class="regular">Forum: <a href="https://www.eclipse.org/forums/index.php?t=thread&amp;frm_id=329">Eclipse Collections Forum</a></p>
-                <p class="regular">StackOverflow: <a href="http://stackoverflow.com/questions/tagged/eclipse-collections">eclipse-collections</a></p>
+                <p class="regular">StackOverflow: taggez avec <a href="http://stackoverflow.com/questions/tagged/eclipse-collections">eclipse-collections</a></p>
             </div>
             <!-- /.col -->
         </div>
@@ -583,7 +635,7 @@ public void getFirstNamesOfAllPeople()
 
         <div class="row">
             <div class="col-lg-12">
-                <h3>- More features, less waste -</h3>
+                <h3>- Plus de fonctionnalités, moins de soucis -</h3>
             </div>
         </div>
 
@@ -600,7 +652,7 @@ public void getFirstNamesOfAllPeople()
             <div class="col-lg-12">
                 <ul class="list-inline">
                     <li>
-                        <p class="copyright text-muted small">Copyright &copy; 2017 The Eclipse Foundation. All Rights Reserved. </p>
+                        <p class="copyright text-muted small">Copyright &copy; 2016 The Eclipse Foundation. All Rights Reserved. </p>
                     </li>
                     <li class="footer-menu-divider">&sdot;</li>
                     <li>
@@ -624,7 +676,6 @@ public void getFirstNamesOfAllPeople()
 
 <!-- Google Code Prettify -->
 <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?skin=sunburst"></script>
-
 </body>
 
 </html>
