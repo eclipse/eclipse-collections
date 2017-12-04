@@ -233,7 +233,7 @@
 
                 <plugin>
                     <artifactId>maven-javadoc-plugin</artifactId>
-                    <version>2.10.4</version>
+                    <version>3.0.0-M1</version>
                 </plugin>
 
                 <plugin>
@@ -271,7 +271,7 @@
 
                 <plugin>
                     <artifactId>maven-enforcer-plugin</artifactId>
-                    <version>1.4.1</version>
+                    <version>3.0.0-M1</version>
                     <executions>
                         <execution>
                             <id>enforce</id>
@@ -311,7 +311,7 @@
                     <artifactId>clirr-maven-plugin</artifactId>
                     <version>2.7</version>
                 </plugin>
-                
+
                 <plugin>
                     <groupId>net.alchim31.maven</groupId>
                     <artifactId>scala-maven-plugin</artifactId>

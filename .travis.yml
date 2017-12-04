@@ -5,6 +5,7 @@ addons:
   apt:
     packages:
       - oracle-java8-installer
+      - oracle-java9-installer
 
 before_install:
   - wget https://archive.apache.org/dist/maven/maven-3/3.5.0/binaries/apache-maven-3.5.0-bin.zip
@@ -43,6 +44,11 @@ matrix:
       env:
         - DESC="compile jmh-tests and performance-tests"
         - CMD="mvn install --projects jmh-tests,performance-tests --also-make --activate-profiles all -DskipTests=true --batch-mode --show-version --errors"
+
+    - jdk: oraclejdk9
+      env:
+        - DESC="unit tests Java 9"
+        - CMD="mvn install --projects '!scala-unit-tests,!jmh-scala-tests,!jmh-tests,!p2-repository' --batch-mode --show-version --errors"
 
 script: eval travis_wait 35 $CMD
 
