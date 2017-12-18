@@ -74,7 +74,7 @@ public enum MultiReaderMutableListFactory implements MutableListFactory
     @Override
     public <T> MutableList<T> withAll(Iterable<? extends T> iterable)
     {
-        return MultiReaderFastList.newList((Iterable<T>) iterable);
+        return MultiReaderFastList.newList(iterable);
     }
 
     @Override
