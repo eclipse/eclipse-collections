@@ -253,7 +253,7 @@ public abstract class AbstractSynchronizedMapIterable<K, V>
     }
 
     @Override
-    public V putPair(Pair<K, V> keyValuePair)
+    public V putPair(Pair<? extends K, ? extends V> keyValuePair)
     {
         synchronized (this.lock)
         {
@@ -262,7 +262,7 @@ public abstract class AbstractSynchronizedMapIterable<K, V>
     }
 
     @Override
-    public V add(Pair<K, V> keyValuePair)
+    public V add(Pair<? extends K, ? extends V> keyValuePair)
     {
         synchronized (this.lock)
         {

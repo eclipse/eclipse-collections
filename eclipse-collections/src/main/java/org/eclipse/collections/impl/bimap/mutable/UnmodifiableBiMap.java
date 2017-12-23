@@ -1059,13 +1059,13 @@ public class UnmodifiableBiMap<K, V> implements MutableBiMap<K, V>, Serializable
     }
 
     @Override
-    public V putPair(Pair<K, V> keyValuePair)
+    public V putPair(Pair<? extends K, ? extends V> keyValuePair)
     {
         throw new UnsupportedOperationException("Cannot call putPair() on " + this.getClass().getSimpleName());
     }
 
     @Override
-    public V add(Pair<K, V> keyValuePair)
+    public V add(Pair<? extends K, ? extends V> keyValuePair)
     {
         throw new UnsupportedOperationException("Cannot call add() on " + this.getClass().getSimpleName());
     }
