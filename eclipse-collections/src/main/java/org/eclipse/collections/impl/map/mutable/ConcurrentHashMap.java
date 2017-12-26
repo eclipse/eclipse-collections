@@ -1551,8 +1551,7 @@ public final class ConcurrentHashMap<K, V>
             return e;
         }
 
-        @Override
-        public void remove()
+        protected void removeByKey()
         {
             if (this.current == null)
             {
@@ -1562,10 +1561,28 @@ public final class ConcurrentHashMap<K, V>
             this.current = null;
             ConcurrentHashMap.this.remove(key);
         }
+
+        protected void removeByKeyValue()
+        {
+            if (this.current == null)
+            {
+                throw new IllegalStateException();
+            }
+            K key = this.current.key;
+            V val = this.current.value;
+            this.current = null;
+            ConcurrentHashMap.this.remove(key, val);
+        }
     }
 
     private final class ValueIterator extends HashIterator<V>
     {
+        @Override
+        public void remove()
+        {
+            this.removeByKeyValue();
+        }
+
         @Override
         public V next()
         {
@@ -1580,6 +1597,12 @@ public final class ConcurrentHashMap<K, V>
         {
             return this.nextEntry().getKey();
         }
+
+        @Override
+        public void remove()
+        {
+            this.removeByKey();
+        }
     }
 
     private final class EntryIterator extends HashIterator<Map.Entry<K, V>>
@@ -1588,6 +1611,12 @@ public final class ConcurrentHashMap<K, V>
         public Map.Entry<K, V> next()
         {
             return this.nextEntry();
+        }
+
+        @Override
+        public void remove()
+        {
+            this.removeByKeyValue();
         }
     }
 

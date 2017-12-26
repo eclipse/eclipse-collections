@@ -1672,8 +1672,7 @@ public class ConcurrentHashMapUnsafe<K, V>
             return e;
         }
 
-        @Override
-        public void remove()
+        protected void removeByKey()
         {
             if (this.current == null)
             {
@@ -1682,6 +1681,18 @@ public class ConcurrentHashMapUnsafe<K, V>
             K key = this.current.key;
             this.current = null;
             ConcurrentHashMapUnsafe.this.remove(key);
+        }
+
+        protected void removeByKeyValue()
+        {
+            if (this.current == null)
+            {
+                throw new IllegalStateException();
+            }
+            K key = this.current.key;
+            V val = this.current.value;
+            this.current = null;
+            ConcurrentHashMapUnsafe.this.remove(key, val);
         }
     }
 
@@ -1692,6 +1703,12 @@ public class ConcurrentHashMapUnsafe<K, V>
         {
             return this.nextEntry().value;
         }
+
+        @Override
+        public void remove()
+        {
+            this.removeByKeyValue();
+        }
     }
 
     private final class KeyIterator extends HashIterator<K>
@@ -1701,6 +1718,12 @@ public class ConcurrentHashMapUnsafe<K, V>
         {
             return this.nextEntry().getKey();
         }
+
+        @Override
+        public void remove()
+        {
+            this.removeByKeyValue();
+        }
     }
 
     private final class EntryIterator extends HashIterator<Map.Entry<K, V>>
@@ -1709,6 +1732,12 @@ public class ConcurrentHashMapUnsafe<K, V>
         public Map.Entry<K, V> next()
         {
             return this.nextEntry();
+        }
+
+        @Override
+        public void remove()
+        {
+            this.removeByKeyValue();
         }
     }
 
