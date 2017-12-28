@@ -1,21 +1,51 @@
-9.1.0 (September 2017)
+9.1.0 (January 2018)
 ====================
 
-This is the 9.1.0 minor release.
+This is the 9.1.0 minor release. Main theme of this release to converge the API of Primitive and Object Collections. 
+This release is also used to prepare for Eclipse Photon contribution and enhance OSGi support based on user feedback.
 
 New Functionality
 -----------------
 
-* Implemented a multi reader lists factory - Lists.multiReader
+* Implemented collectWithIndex() on OrderedIterable. 
+* Implemented collectWithIndex() on PrimitiveOrderedIterable. 
+* Implemented collectWithIndex() on ListIterate. 
+* Implemented collectWithIndex() on RandomAccessListIterate. 
+* Implemented zip() on primitive lists.
+* Implemented zip() on IntIterable.
+* Implemented zipInt() on IntIterable.
+* Implemented removeIf(PrimitivePredicate) for MutablePrimitiveCollections.
+* Implemented MutablePrimitivePrimitiveMap.putPair(PrimitivePrimitivePair). 
+* Implemented MutablePrimitiveObjectMap.putPair(PrimitiveObjectPair<V>). 
+* Implemented MutableObjectPrimitiveMap.putPair(ObjectPrimitivePair<K>).
+* Implemented MutableMapIterable.putPair(Pair<K, V> keyValue).
+* Implemented trimToSize() on UnifiedMapWithHashingStrategy.
+* Implemented countBy() on Collectors2.
+* Implemented groupByEach() on Collectors2.
+* Implemented groupByUniqueKey() on Collectors2.
+* Implemented MultiReaderList factory.
+* Added withInitialCapacity() and ofInitialCapacity() on MutableList factory.
+* Added withInitialCapacity() and ofInitialCapacity() on MultiReaderList factory.
+* Implemented a factory class for Strings.
+
+Bug Fixes
+-------------------
+
+* Fixed concurrency issues in EntrySet.removeIf() for ConcurrentHashMap and ConcurrentHashMapUnsafe.
 
 Tech Debt Reduction
 -------------------
 
-Breaking Change
+* Removed unnecessary probe() call in PrimitiveObjectHashMap.
+* Added Javadoc to Pair, Twin, Tuples, PrimitiveTuples, ObjectPrimitivePair, PrimitivePrimitivePair and PrimitiveObjectPair.
+* Upgraded Maven Enforcer and Maven Javadoc plugins.
+* Enabled unused import checkstyle configuration and fixed offenders.
+* Enabled Java 9 unit test build on Travis.
+
+OSGi
 ---------------
 
-Miscellaneous
--------------
+* Added a feature for Eclipse Collections
 
 Acquiring Eclipse Collections
 -----------------------------
