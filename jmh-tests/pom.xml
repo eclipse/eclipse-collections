@@ -27,7 +27,7 @@
     <properties>
         <maven.deploy.skip>true</maven.deploy.skip>
         <sonar.skip>true</sonar.skip>
-        <jmh.version>1.18</jmh.version>
+        <jmh.version>1.19</jmh.version>
     </properties>
 
     <dependencies>
@@ -121,7 +121,6 @@
             <artifactId>trove4j</artifactId>
             <version>${trove4j.version}</version>
         </dependency>
-
     </dependencies>
 
     <build>
