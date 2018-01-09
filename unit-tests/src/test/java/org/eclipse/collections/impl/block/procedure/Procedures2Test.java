@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2018 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -11,9 +11,15 @@
 package org.eclipse.collections.impl.block.procedure;
 
 import java.io.IOException;
+import java.util.DoubleSummaryStatistics;
+import java.util.IntSummaryStatistics;
+import java.util.LongSummaryStatistics;
 
 import org.eclipse.collections.api.block.procedure.Procedure2;
+import org.eclipse.collections.api.list.MutableList;
+import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.impl.block.factory.Procedures2;
+import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
@@ -78,5 +84,69 @@ public class Procedures2Test
         {
             super(message, cause);
         }
+    }
+
+    /**
+     * @since 9.2.
+     */
+    @Test
+    public void summarizeDouble()
+    {
+        MutableList<Double> list = Lists.mutable.with(2.0, 2.0, 2.0, 3.0, 3.0, 3.0);
+        MutableMap<String, DoubleSummaryStatistics> map = list.aggregateInPlaceBy(
+                Object::toString,
+                DoubleSummaryStatistics::new,
+                Procedures2.summarizeDouble(Double::doubleValue));
+        Verify.assertSize(2, map);
+        Assert.assertEquals(6.0, map.get("2.0").getSum(), 0.0);
+        Assert.assertEquals(9.0, map.get("3.0").getSum(), 0.0);
+    }
+
+    /**
+     * @since 9.2.
+     */
+    @Test
+    public void summarizeFloat()
+    {
+        MutableList<Float> list = Lists.mutable.with(2.0f, 2.0f, 2.0f, 3.0f, 3.0f, 3.0f);
+        MutableMap<String, DoubleSummaryStatistics> map = list.aggregateInPlaceBy(
+                Object::toString,
+                DoubleSummaryStatistics::new,
+                Procedures2.summarizeDouble(Float::floatValue));
+        Verify.assertSize(2, map);
+        Assert.assertEquals(6.0, map.get("2.0").getSum(), 0.0);
+        Assert.assertEquals(9.0, map.get("3.0").getSum(), 0.0);
+    }
+
+    /**
+     * @since 9.2.
+     */
+    @Test
+    public void summarizeLong()
+    {
+        MutableList<Long> list = Lists.mutable.with(2L, 2L, 2L, 3L, 3L, 3L);
+        MutableMap<String, LongSummaryStatistics> map = list.aggregateInPlaceBy(
+                Object::toString,
+                LongSummaryStatistics::new,
+                Procedures2.summarizeLong(Long::longValue));
+        Verify.assertSize(2, map);
+        Assert.assertEquals(6, map.get("2").getSum());
+        Assert.assertEquals(9, map.get("3").getSum());
+    }
+
+    /**
+     * @since 9.2.
+     */
+    @Test
+    public void summarizeInt()
+    {
+        MutableList<Integer> list = Lists.mutable.with(2, 2, 2, 3, 3, 3);
+        MutableMap<String, IntSummaryStatistics> map = list.aggregateInPlaceBy(
+                Object::toString,
+                IntSummaryStatistics::new,
+                Procedures2.summarizeInt(Integer::intValue));
+        Verify.assertSize(2, map);
+        Assert.assertEquals(6, map.get("2").getSum());
+        Assert.assertEquals(9, map.get("3").getSum());
     }
 }
