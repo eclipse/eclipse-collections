@@ -37,6 +37,7 @@ import org.eclipse.collections.api.LazyIntIterable;
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.LazyLongIterable;
 import org.eclipse.collections.api.LazyShortIterable;
+import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.primitive.Mutable<name>Bag;
 import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.<name>ToBooleanFunction;
@@ -235,6 +236,12 @@ public abstract class AbstractLazy<name>Iterable implements Lazy<name>Iterable
     public \<T> T injectInto(T injectedValue, Object<name>ToObjectFunction\<? super T, ? extends T> function)
     {
         return <name>IterableIterate.injectInto(this, injectedValue, function);
+    }
+
+    @Override
+    public RichIterable\<<name>Iterable> chunk(int size)
+    {
+        return new Chunk<name>Iterable(this, size);
     }
 
     @Override

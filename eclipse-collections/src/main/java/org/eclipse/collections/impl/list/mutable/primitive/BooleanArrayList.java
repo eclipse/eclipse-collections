@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 Goldman Sachs and others.
+ * Copyright (c) 2018 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -19,6 +19,7 @@ import java.util.NoSuchElementException;
 
 import org.eclipse.collections.api.BooleanIterable;
 import org.eclipse.collections.api.LazyBooleanIterable;
+import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.primitive.MutableBooleanBag;
 import org.eclipse.collections.api.block.function.primitive.BooleanToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.ObjectBooleanIntToObjectFunction;
@@ -35,6 +36,7 @@ import org.eclipse.collections.api.list.primitive.MutableBooleanList;
 import org.eclipse.collections.api.set.primitive.BooleanSet;
 import org.eclipse.collections.api.set.primitive.MutableBooleanSet;
 import org.eclipse.collections.impl.bag.mutable.primitive.BooleanHashBag;
+import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.primitive.BooleanLists;
 import org.eclipse.collections.impl.lazy.primitive.LazyBooleanIterableAdapter;
 import org.eclipse.collections.impl.lazy.primitive.ReverseBooleanIterable;
@@ -566,6 +568,37 @@ public final class BooleanArrayList
         for (int i = 0; i < this.size; i++)
         {
             result = function.valueOf(result, this.items.get(i), i);
+        }
+        return result;
+    }
+
+    @Override
+    public RichIterable<BooleanIterable> chunk(int size)
+    {
+        if (size <= 0)
+        {
+            throw new IllegalArgumentException("Size for groups must be positive but was: " + size);
+        }
+        MutableList<BooleanIterable> result = Lists.mutable.empty();
+        if (this.notEmpty())
+        {
+            if (this.size() <= size)
+            {
+                result.add(BooleanLists.mutable.withAll(this));
+            }
+            else
+            {
+                BooleanIterator iterator = this.booleanIterator();
+                while (iterator.hasNext())
+                {
+                    MutableBooleanList batch = BooleanLists.mutable.empty();
+                    for (int i = 0; i < size && iterator.hasNext(); i++)
+                    {
+                        batch.add(iterator.next());
+                    }
+                    result.add(batch);
+                }
+            }
         }
         return result;
     }

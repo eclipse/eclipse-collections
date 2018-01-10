@@ -64,6 +64,8 @@ import org.eclipse.collections.impl.bag.mutable.primitive.<name>HashBag;
 import org.eclipse.collections.impl.collection.mutable.primitive.Synchronized<name>Collection;
 import org.eclipse.collections.impl.collection.mutable.primitive.Unmodifiable<name>Collection;
 import org.eclipse.collections.impl.lazy.AbstractLazyIterable;
+import org.eclipse.collections.impl.factory.Lists;
+import org.eclipse.collections.impl.factory.primitive.<name>Bags;
 import org.eclipse.collections.impl.factory.primitive.<name>Lists;
 import org.eclipse.collections.impl.factory.primitive.Object<name>Maps;
 <if(!primitive.booleanPrimitive)>import org.eclipse.collections.impl.factory.primitive.<name>ObjectMaps;<endif>
@@ -895,6 +897,30 @@ public class Object<name>HashMapWithHashingStrategy\<K> implements MutableObject
             }
         }
 
+        return result;
+    }
+
+    @Override
+    public RichIterable\<<name>Iterable> chunk(int size)
+    {
+        if (size \<= 0)
+        {
+            throw new IllegalArgumentException("Size for groups must be positive but was: " + size);
+        }
+        MutableList\<<name>Iterable> result = Lists.mutable.empty();
+        if (this.notEmpty())
+        {
+            <name>Iterator iterator = this.<type>Iterator();
+            while (iterator.hasNext())
+            {
+                Mutable<name>Bag batch = <name>Bags.mutable.empty();
+                for (int i = 0; i \< size && iterator.hasNext(); i++)
+                {
+                    batch.add(iterator.next());
+                }
+                result.add(batch);
+            }
+        }
         return result;
     }
 
@@ -1859,6 +1885,12 @@ public class Object<name>HashMapWithHashingStrategy\<K> implements MutableObject
         public \<T> T injectInto(T injectedValue, Object<name>ToObjectFunction\<? super T, ? extends T> function)
         {
             return Object<name>HashMapWithHashingStrategy.this.injectInto(injectedValue, function);
+        }
+
+        @Override
+        public RichIterable\<<name>Iterable> chunk(int size)
+        {
+            return Object<name>HashMapWithHashingStrategy.this.chunk(size);
         }
 
         @Override

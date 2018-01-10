@@ -18,6 +18,7 @@ package org.eclipse.collections.impl.collection.mutable.primitive;
 
 import java.io.Serializable;
 
+import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.<name>Iterable;
 import org.eclipse.collections.api.Lazy<name>Iterable;
 import org.eclipse.collections.api.bag.primitive.Mutable<name>Bag;
@@ -491,6 +492,15 @@ public abstract class AbstractSynchronized<name>Collection
         synchronized (this.lock)
         {
             return this.collection.injectInto(injectedValue, function);
+        }
+    }
+
+    @Override
+    public RichIterable\<<name>Iterable> chunk(int size)
+    {
+        synchronized (this.lock)
+        {
+            return this.collection.chunk(size);
         }
     }
 }

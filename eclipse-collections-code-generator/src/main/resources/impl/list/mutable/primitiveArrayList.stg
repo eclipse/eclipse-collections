@@ -28,6 +28,7 @@ import java.util.NoSuchElementException;
 
 import org.eclipse.collections.api.<name>Iterable;
 import org.eclipse.collections.api.Lazy<name>Iterable;
+import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.block.function.primitive.Object<name>IntToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.Object<name>ToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
@@ -601,6 +602,37 @@ public class <name>ArrayList extends Abstract<name>Iterable
         for (int i = 0; i \< this.size; i++)
         {
             result = function.valueOf(result, this.items[i], i);
+        }
+        return result;
+    }
+
+    @Override
+    public RichIterable\<<name>Iterable> chunk(int size)
+    {
+        if (size \<= 0)
+        {
+            throw new IllegalArgumentException("Size for groups must be positive but was: " + size);
+        }
+        MutableList\<<name>Iterable> result = Lists.mutable.empty();
+        if (this.notEmpty())
+        {
+            if (this.size() \<= size)
+            {
+                result.add(<name>Lists.mutable.withAll(this));
+            }
+            else
+            {
+                <name>Iterator iterator = this.<type>Iterator();
+                while (iterator.hasNext())
+                {
+                    Mutable<name>List batch = <name>Lists.mutable.empty();
+                    for (int i = 0; i \< size && iterator.hasNext(); i++)
+                    {
+                        batch.add(iterator.next());
+                    }
+                    result.add(batch);
+                }
+            }
         }
         return result;
     }

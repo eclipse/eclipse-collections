@@ -329,6 +329,21 @@ public interface <name>Iterable extends PrimitiveIterable
     Lazy<name>Iterable asLazy();
 
     \<T> T injectInto(T injectedValue, Object<name>ToObjectFunction\<? super T, ? extends T> function);
+
+    /**
+     * Partitions elements in fixed size chunks.
+     *
+     * @param size the number of elements per chunk
+     *
+     * @return A {@code RichIterable} containing {@code <name>Iterable}s of size {@code size}, except the last will be
+     * truncated if the elements don't divide evenly.
+     *
+     * @since 9.2
+     */
+    default RichIterable\<<name>Iterable> chunk(int size)
+    {
+        throw new UnsupportedOperationException("Default method to prevent breaking backwards compatibility");
+    }
     <(arithmeticMethods.(type))()>
 }
 

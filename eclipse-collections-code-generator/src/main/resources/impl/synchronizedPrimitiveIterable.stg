@@ -274,6 +274,15 @@ public class Synchronized<name>Iterable implements <name>Iterable, Serializable
     }
 
     @Override
+    public RichIterable\<<name>Iterable> chunk(int size)
+    {
+        synchronized (this.lock)
+        {
+            return this.iterable.chunk(size);
+        }
+    }
+
+    @Override
     public String toString()
     {
         synchronized (this.lock)

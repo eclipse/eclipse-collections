@@ -55,6 +55,7 @@ import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.primitive.<name1><name2>Maps;
 <if(!primitive2.booleanPrimitive)>import org.eclipse.collections.impl.factory.primitive.<name2><name1>Maps;<endif>
 import org.eclipse.collections.impl.factory.primitive.<name1>Lists;
+<if(!sameTwoPrimitives)>import org.eclipse.collections.impl.factory.primitive.<name2>Lists;<endif>
 import org.eclipse.collections.impl.factory.primitive.<name2>Bags;
 import org.eclipse.collections.impl.iterator.Unmodifiable<name2>Iterator;
 import org.eclipse.collections.impl.lazy.primitive.Lazy<name2>IterableAdapter;
@@ -174,6 +175,16 @@ final class Immutable<name1><name2>SingletonMap implements Immutable<name1><name
     public \<T> T injectInto(T injectedValue, Object<name2>ToObjectFunction\<? super T, ? extends T> function)
     {
         return function.valueOf(injectedValue, this.value1);
+    }
+
+    @Override
+    public RichIterable\<<name2>Iterable> chunk(int size)
+    {
+        if (size \<= 0)
+        {
+            throw new IllegalArgumentException("Size for groups must be positive but was: " + size);
+        }
+        return Lists.mutable.with(<name2>Bags.immutable.with(this.value1));
     }
 
     @Override

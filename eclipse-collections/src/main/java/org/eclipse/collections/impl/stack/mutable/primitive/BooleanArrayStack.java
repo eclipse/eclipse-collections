@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2018 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -18,6 +18,7 @@ import java.util.EmptyStackException;
 
 import org.eclipse.collections.api.BooleanIterable;
 import org.eclipse.collections.api.LazyBooleanIterable;
+import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.primitive.MutableBooleanBag;
 import org.eclipse.collections.api.block.function.primitive.BooleanToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.ObjectBooleanIntToObjectFunction;
@@ -299,6 +300,12 @@ public final class BooleanArrayStack implements MutableBooleanStack, Externaliza
     public <V> V injectInto(V injectedValue, ObjectBooleanToObjectFunction<? super V, ? extends V> function)
     {
         return this.delegate.asReversed().injectInto(injectedValue, function);
+    }
+
+    @Override
+    public RichIterable<BooleanIterable> chunk(int size)
+    {
+        return this.delegate.asReversed().chunk(size);
     }
 
     @Override

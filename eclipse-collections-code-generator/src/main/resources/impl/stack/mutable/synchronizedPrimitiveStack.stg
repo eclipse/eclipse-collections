@@ -22,6 +22,7 @@ import java.util.Collections;
 
 import org.eclipse.collections.api.<name>Iterable;
 import org.eclipse.collections.api.Lazy<name>Iterable;
+import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.primitive.Mutable<name>Bag;
 import org.eclipse.collections.api.block.function.primitive.<name>IntToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
@@ -457,6 +458,15 @@ public class Synchronized<name>Stack
         synchronized (this.lock)
         {
             return this.stack.injectInto(injectedValue, function);
+        }
+    }
+
+    @Override
+    public RichIterable\<<name>Iterable> chunk(int size)
+    {
+        synchronized (this.lock)
+        {
+            return this.stack.chunk(size);
         }
     }
 

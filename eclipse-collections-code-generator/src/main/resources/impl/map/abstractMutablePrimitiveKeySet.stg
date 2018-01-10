@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.NoSuchElementException;
 
+import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.<name>Iterable;
 import org.eclipse.collections.api.Lazy<name>Iterable;
 import org.eclipse.collections.api.bag.primitive.Mutable<name>Bag;
@@ -30,9 +31,11 @@ import org.eclipse.collections.api.block.function.primitive.Object<name>ToObject
 import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
 import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
 import org.eclipse.collections.api.iterator.<name>Iterator;
+import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.list.primitive.Mutable<name>List;
 import org.eclipse.collections.api.set.primitive.Immutable<name>Set;
 import org.eclipse.collections.impl.bag.mutable.primitive.<name>HashBag;
+import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.primitive.<name>Sets;
 import org.eclipse.collections.impl.lazy.primitive.Lazy<name>IterableAdapter;
 import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
@@ -822,6 +825,37 @@ public abstract class AbstractMutable<name>KeySet implements Mutable<name>Set
         {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public RichIterable\<<name>Iterable> chunk(int size)
+    {
+        if (size \<= 0)
+        {
+            throw new IllegalArgumentException("Size for groups must be positive but was: " + size);
+        }
+        MutableList\<<name>Iterable> result = Lists.mutable.empty();
+        if (this.notEmpty())
+        {
+            if (this.size() \<= size)
+            {
+                result.add(<name>Sets.mutable.withAll(this));
+            }
+            else
+            {
+                <name>Iterator iterator = this.<type>Iterator();
+                while (iterator.hasNext())
+                {
+                    Mutable<name>Set batch = <name>Sets.mutable.empty();
+                    for (int i = 0; i \< size && iterator.hasNext(); i++)
+                    {
+                        batch.add(iterator.next());
+                    }
+                    result.add(batch);
+                }
+            }
+        }
+        return result;
     }
 }
 

@@ -25,6 +25,8 @@ import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.block.function.primitive.BooleanToObjectFunction;
 import org.eclipse.collections.api.collection.primitive.MutableBooleanCollection;
 import org.eclipse.collections.impl.bag.mutable.HashBag;
+import org.eclipse.collections.impl.factory.Lists;
+import org.eclipse.collections.impl.factory.primitive.BooleanBags;
 import org.eclipse.collections.impl.block.factory.primitive.BooleanPredicates;
 import org.eclipse.collections.impl.collection.mutable.primitive.AbstractMutableBooleanCollectionTestCase;
 import org.eclipse.collections.impl.collection.mutable.primitive.SynchronizedBooleanCollection;
@@ -393,6 +395,36 @@ public class Synchronized<name>BooleanMapValuesTest extends AbstractMutableBoole
         iterable.appendString(appendable3, "/");
         Assert.assertTrue("true/false".equals(appendable3.toString())
                 || "false/true".equals(appendable3.toString()));
+    }
+
+    @Override
+    @Test
+    public void chunk()
+    {
+        BooleanIterable iterable1 = this.newWith(true);
+        Verify.assertIterablesEqual(
+                Lists.mutable.with(BooleanBags.mutable.with(true)).toSet(),
+                iterable1.chunk(1).toSet());
+
+        BooleanIterable iterable2 = this.newWith(false);
+        Verify.assertIterablesEqual(
+                Lists.mutable.with(BooleanBags.mutable.with(false)).toSet(),
+                iterable2.chunk(1).toSet());
+
+        BooleanIterable iterable3 = this.newWith(false, true);
+        Verify.assertIterablesEqual(
+                Lists.mutable.with(BooleanBags.mutable.with(false), BooleanBags.mutable.with(true)).toSet(),
+                iterable3.chunk(1).toSet());
+
+        Verify.assertIterablesEqual(
+                Lists.mutable.with(BooleanBags.mutable.with(false, true)),
+                iterable3.chunk(2));
+        Verify.assertIterablesEqual(
+                Lists.mutable.with(BooleanBags.mutable.with(false, true)),
+                iterable3.chunk(3));
+
+        Verify.assertThrows(IllegalArgumentException.class, () -> this.classUnderTest().chunk(0));
+        Verify.assertThrows(IllegalArgumentException.class, () -> this.classUnderTest().chunk(-1));
     }
 
     @Override

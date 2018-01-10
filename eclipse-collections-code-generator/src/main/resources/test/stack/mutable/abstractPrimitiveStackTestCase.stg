@@ -32,6 +32,7 @@ import org.eclipse.collections.impl.block.factory.primitive.<name>Predicates;
 import org.eclipse.collections.impl.collection.mutable.primitive.Abstract<name>IterableTestCase;
 import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.Sets;
+import org.eclipse.collections.impl.factory.primitive.<name>Stacks;
 <if(!primitive.intPrimitive)>import org.eclipse.collections.impl.factory.primitive.<name>Lists;<endif>
 import org.eclipse.collections.impl.factory.primitive.IntLists;
 <if(!primitive.intPrimitive)>import org.eclipse.collections.impl.factory.primitive.<name>Sets;<endif>
@@ -248,6 +249,56 @@ public abstract class Abstract<name>StackTestCase extends Abstract<name>Iterable
         Assert.assertEquals(
                 <name>Sets.mutable.with(<["3", "1", "9", "7"]:(literal.(type))(); separator=", ">),
                 pairs.collect<name>(<name>IntPair::getOne, <name>Sets.mutable.empty()));
+    }
+
+    @Test
+    public void chunk()
+    {
+        <name>Iterable iterable = this.newWith(<["5", "4", "3", "2", "1", "0"]:(literal.(type))(); separator=", ">);
+        Verify.assertIterablesEqual(
+                Lists.mutable.with(
+                        <name>Lists.mutable.with(<["0"]:(literal.(type))(); separator=", ">),
+                        <name>Lists.mutable.with(<["1"]:(literal.(type))(); separator=", ">),
+                        <name>Lists.mutable.with(<["2"]:(literal.(type))(); separator=", ">),
+                        <name>Lists.mutable.with(<["3"]:(literal.(type))(); separator=", ">),
+                        <name>Lists.mutable.with(<["4"]:(literal.(type))(); separator=", ">),
+                        <name>Lists.mutable.with(<["5"]:(literal.(type))(); separator=", ">)).toSet(),
+                iterable.chunk(1).toSet());
+        Verify.assertIterablesEqual(
+                Lists.mutable.with(
+                        <name>Lists.mutable.with(<["0", "1"]:(literal.(type))(); separator=", ">),
+                        <name>Lists.mutable.with(<["2", "3"]:(literal.(type))(); separator=", ">),
+                        <name>Lists.mutable.with(<["4", "5"]:(literal.(type))(); separator=", ">)).toSet(),
+                iterable.chunk(2).toSet());
+        Verify.assertIterablesEqual(
+                Lists.mutable.with(
+                        <name>Lists.mutable.with(<["0", "1", "2"]:(literal.(type))(); separator=", ">),
+                        <name>Lists.mutable.with(<["3", "4", "5"]:(literal.(type))(); separator=", ">)).toSet(),
+                iterable.chunk(3).toSet());
+        Verify.assertIterablesEqual(
+                Lists.mutable.with(
+                        <name>Lists.mutable.with(<["0", "1", "2", "3"]:(literal.(type))(); separator=", ">),
+                        <name>Lists.mutable.with(<["4", "5"]:(literal.(type))(); separator=", ">)).toSet(),
+                iterable.chunk(4).toSet());
+        Verify.assertIterablesEqual(
+                Lists.mutable.with(<name>Lists.mutable.with(<["0", "1", "2", "3", "4", "5"]:(literal.(type))(); separator=", ">)).toSet(),
+                iterable.chunk(6).toSet());
+        Verify.assertIterablesEqual(
+                Lists.mutable.with(<name>Lists.mutable.with(<["0", "1", "2", "3", "4", "5"]:(literal.(type))(); separator=", ">)).toSet(),
+                iterable.chunk(7).toSet());
+        Verify.assertIterablesEqual(Lists.mutable.with(), this.newWith().chunk(1));
+
+        if (this.newWith() instanceof Immutable<name>Stack)
+        {
+            Verify.assertIterablesEqual(Lists.mutable.with(<name>Stacks.immutable.with(<["0"]:(literal.(type))(); separator=", ">)), this.newWith(<["0"]:(literal.(type))(); separator=", ">).chunk(1));
+        }
+        else
+        {
+            Verify.assertIterablesEqual(Lists.mutable.with(<name>Lists.mutable.with(<["0"]:(literal.(type))(); separator=", ">)), this.newWith(<["0"]:(literal.(type))(); separator=", ">).chunk(1));
+        }
+
+        Verify.assertThrows(IllegalArgumentException.class, () -> iterable.chunk(0));
+        Verify.assertThrows(IllegalArgumentException.class, () -> iterable.chunk(-1));
     }
 }
 

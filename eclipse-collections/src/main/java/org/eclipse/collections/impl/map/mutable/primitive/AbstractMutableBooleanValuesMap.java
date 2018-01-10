@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2018 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -14,6 +14,7 @@ import java.io.IOException;
 
 import org.eclipse.collections.api.BooleanIterable;
 import org.eclipse.collections.api.LazyBooleanIterable;
+import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.bag.primitive.MutableBooleanBag;
 import org.eclipse.collections.api.block.function.primitive.BooleanToObjectFunction;
@@ -24,12 +25,14 @@ import org.eclipse.collections.api.collection.MutableCollection;
 import org.eclipse.collections.api.collection.primitive.ImmutableBooleanCollection;
 import org.eclipse.collections.api.collection.primitive.MutableBooleanCollection;
 import org.eclipse.collections.api.iterator.BooleanIterator;
+import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.list.primitive.MutableBooleanList;
 import org.eclipse.collections.api.map.primitive.MutableBooleanValuesMap;
 import org.eclipse.collections.api.set.primitive.MutableBooleanSet;
 import org.eclipse.collections.impl.bag.mutable.HashBag;
 import org.eclipse.collections.impl.collection.mutable.primitive.SynchronizedBooleanCollection;
 import org.eclipse.collections.impl.collection.mutable.primitive.UnmodifiableBooleanCollection;
+import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.primitive.BooleanBags;
 import org.eclipse.collections.impl.factory.primitive.BooleanLists;
 import org.eclipse.collections.impl.lazy.primitive.LazyBooleanIterableAdapter;
@@ -183,6 +186,30 @@ public abstract class AbstractMutableBooleanValuesMap extends AbstractBooleanIte
             }
         }
 
+        return result;
+    }
+
+    @Override
+    public RichIterable<BooleanIterable> chunk(int size)
+    {
+        if (size <= 0)
+        {
+            throw new IllegalArgumentException("Size for groups must be positive but was: " + size);
+        }
+        MutableList<BooleanIterable> result = Lists.mutable.empty();
+        if (this.notEmpty())
+        {
+            BooleanIterator iterator = this.booleanIterator();
+            while (iterator.hasNext())
+            {
+                MutableBooleanBag batch = BooleanBags.mutable.empty();
+                for (int i = 0; i < size && iterator.hasNext(); i++)
+                {
+                    batch.add(iterator.next());
+                }
+                result.add(batch);
+            }
+        }
         return result;
     }
 
@@ -492,6 +519,12 @@ public abstract class AbstractMutableBooleanValuesMap extends AbstractBooleanIte
         public <T> T injectInto(T injectedValue, ObjectBooleanToObjectFunction<? super T, ? extends T> function)
         {
             return AbstractMutableBooleanValuesMap.this.injectInto(injectedValue, function);
+        }
+
+        @Override
+        public RichIterable<BooleanIterable> chunk(int size)
+        {
+            return AbstractMutableBooleanValuesMap.this.chunk(size);
         }
 
         @Override
