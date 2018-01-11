@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 Goldman Sachs and others.
+ * Copyright (c) 2018 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -783,13 +783,19 @@ abstract class AbstractImmutableList<T>
     @Override
     public <S> ImmutableList<Pair<T, S>> zip(Iterable<S> that)
     {
+        if (that instanceof Collection || that instanceof RichIterable)
+        {
+            int thatSize = Iterate.sizeOf(that);
+            FastList<Pair<T, S>> target = FastList.newList(Math.min(this.size(), thatSize));
+            return this.zip(that, target).toImmutable();
+        }
         return this.zip(that, FastList.newList()).toImmutable();
     }
 
     @Override
     public ImmutableList<Pair<T, Integer>> zipWithIndex()
     {
-        return this.zipWithIndex(FastList.newList()).toImmutable();
+        return this.zipWithIndex(FastList.newList(this.size())).toImmutable();
     }
 
     @Override

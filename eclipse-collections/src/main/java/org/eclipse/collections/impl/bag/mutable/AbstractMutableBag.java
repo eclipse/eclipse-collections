@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 Goldman Sachs and others.
+ * Copyright (c) 2018 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -10,8 +10,10 @@
 
 package org.eclipse.collections.impl.bag.mutable;
 
+import java.util.Collection;
 import java.util.concurrent.ExecutorService;
 
+import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.annotation.Beta;
 import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.api.bag.MutableBag;
@@ -53,6 +55,7 @@ import org.eclipse.collections.impl.factory.Bags;
 import org.eclipse.collections.impl.lazy.parallel.bag.NonParallelUnsortedBag;
 import org.eclipse.collections.impl.partition.bag.PartitionHashBag;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
+import org.eclipse.collections.impl.utility.Iterate;
 
 public abstract class AbstractMutableBag<T>
         extends AbstractMutableBagIterable<T>
@@ -239,6 +242,12 @@ public abstract class AbstractMutableBag<T>
     @Deprecated
     public <S> MutableBag<Pair<T, S>> zip(Iterable<S> that)
     {
+        if (that instanceof Collection || that instanceof RichIterable)
+        {
+            int thatSize = Iterate.sizeOf(that);
+            HashBag<Pair<T, S>> target = HashBag.newBag(Math.min(this.size(), thatSize));
+            return this.zip(that, target);
+        }
         return this.zip(that, HashBag.newBag());
     }
 

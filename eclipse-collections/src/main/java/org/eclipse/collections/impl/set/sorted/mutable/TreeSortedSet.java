@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2018 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -23,6 +23,7 @@ import java.util.TreeSet;
 import java.util.concurrent.ExecutorService;
 
 import org.eclipse.collections.api.LazyIterable;
+import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.annotation.Beta;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
@@ -527,6 +528,12 @@ public class TreeSortedSet<T> extends AbstractMutableCollection<T>
     @Override
     public <S> MutableList<Pair<T, S>> zip(Iterable<S> that)
     {
+        if (that instanceof Collection || that instanceof RichIterable)
+        {
+            int thatSize = Iterate.sizeOf(that);
+            FastList<Pair<T, S>> target = FastList.newList(Math.min(this.size(), thatSize));
+            return Iterate.zip(this, that, target);
+        }
         return Iterate.zip(this, that, FastList.newList());
     }
 

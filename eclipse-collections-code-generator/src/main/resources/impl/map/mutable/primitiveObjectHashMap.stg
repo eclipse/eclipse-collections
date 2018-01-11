@@ -1,4 +1,4 @@
-import "copyright.stg"
+import "copyrightAndOthers.stg"
 import "primitiveEquals.stg"
 import "primitiveHashCode.stg"
 import "primitiveLiteral.stg"
@@ -30,7 +30,7 @@ public \<R extends Mutable<name>Collection> R collect<name>(<name>Function\<? su
 >>
 
 body(type, name) ::= <<
-<copyright()>
+<copyrightAndOthers()>
 
 package org.eclipse.collections.impl.map.mutable.primitive;
 
@@ -1465,7 +1465,13 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
     @Override
     public \<S> MutableBag\<Pair\<V, S>\> zip(Iterable\<S> that)
     {
-        return this.zip(that, HashBag.\<Pair\<V, S>\>newBag());
+        if (that instanceof Collection || that instanceof RichIterable)
+        {
+            int thatSize = Iterate.sizeOf(that);
+            HashBag\<Pair\<V, S>\> target = HashBag.newBag(Math.min(this.size(), thatSize));
+            return this.zip(that, target);
+        }
+        return this.zip(that, HashBag.newBag());
     }
 
     @Override
@@ -1481,7 +1487,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
     @Override
     public MutableSet\<Pair\<V, Integer>\> zipWithIndex()
     {
-        return this.zipWithIndex(UnifiedSet.\<Pair\<V, Integer>\>newSet());
+        return this.zipWithIndex(UnifiedSet.\<Pair\<V, Integer>\>newSet(this.size()));
     }
 
     @Override

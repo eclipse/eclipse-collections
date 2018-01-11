@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2018 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -16,6 +16,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.api.bag.primitive.ImmutableBooleanBag;
 import org.eclipse.collections.api.bag.primitive.ImmutableByteBag;
@@ -65,6 +66,7 @@ import org.eclipse.collections.impl.list.fixed.ArrayAdapter;
 import org.eclipse.collections.impl.multimap.set.UnifiedSetMultimap;
 import org.eclipse.collections.impl.partition.set.PartitionUnifiedSet;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
+import org.eclipse.collections.impl.utility.Iterate;
 import org.eclipse.collections.impl.utility.MapIterate;
 
 public abstract class AbstractImmutableBiMap<K, V> extends AbstractBiMap<K, V> implements ImmutableBiMap<K, V>, Map<K, V>
@@ -374,7 +376,13 @@ public abstract class AbstractImmutableBiMap<K, V> extends AbstractBiMap<K, V> i
     @Deprecated
     public <S> ImmutableSet<Pair<V, S>> zip(Iterable<S> that)
     {
-        return this.delegate.zip(that, new UnifiedSet<>()).toImmutable();
+        if (that instanceof Collection || that instanceof RichIterable)
+        {
+            int thatSize = Iterate.sizeOf(that);
+            UnifiedSet<Pair<V, S>> target = UnifiedSet.newSet(Math.min(this.size(), thatSize));
+            return this.delegate.zip(that, target).toImmutable();
+        }
+        return this.delegate.zip(that, UnifiedSet.newSet()).toImmutable();
     }
 
     /**
@@ -384,7 +392,7 @@ public abstract class AbstractImmutableBiMap<K, V> extends AbstractBiMap<K, V> i
     @Deprecated
     public ImmutableSet<Pair<V, Integer>> zipWithIndex()
     {
-        return this.delegate.zipWithIndex(new UnifiedSet<>()).toImmutable();
+        return this.delegate.zipWithIndex(UnifiedSet.newSet(this.size())).toImmutable();
     }
 
     @Override

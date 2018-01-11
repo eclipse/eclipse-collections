@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 Goldman Sachs and others.
+ * Copyright (c) 2018 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -20,6 +20,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
+import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.block.HashingStrategy;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function0;
@@ -1849,6 +1850,13 @@ public final class ArrayListIterate
      */
     public static <X, Y> MutableList<Pair<X, Y>> zip(ArrayList<X> xs, Iterable<Y> ys)
     {
+        if (ys instanceof Collection || ys instanceof RichIterable)
+        {
+            int xSize = xs.size();
+            int ySize = Iterate.sizeOf(ys);
+            FastList<Pair<X, Y>> target = FastList.newList(Math.min(xSize, ySize));
+            return ArrayListIterate.zip(xs, ys, target);
+        }
         return ArrayListIterate.zip(xs, ys, FastList.newList());
     }
 
@@ -1876,7 +1884,7 @@ public final class ArrayListIterate
      */
     public static <T> MutableList<Pair<T, Integer>> zipWithIndex(ArrayList<T> list)
     {
-        return ArrayListIterate.zipWithIndex(list, FastList.newList());
+        return ArrayListIterate.zipWithIndex(list, FastList.newList(list.size()));
     }
 
     /**
