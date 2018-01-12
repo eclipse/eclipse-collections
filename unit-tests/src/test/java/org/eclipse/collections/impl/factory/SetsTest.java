@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 Goldman Sachs and others.
+ * Copyright (c) 2018 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -31,6 +31,7 @@ import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.bag.mutable.HashBag;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.list.mutable.FastList;
+import org.eclipse.collections.impl.set.mutable.MultiReaderUnifiedSet;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.test.domain.Key;
@@ -726,6 +727,23 @@ public class SetsTest
         Verify.assertInstanceOf(FixedSizeSet.class, setFactory.of(1, 2, 3));
         Assert.assertEquals(UnifiedSet.newSetWith(1, 2, 3, 4), setFactory.of(1, 2, 3, 4));
         Verify.assertInstanceOf(FixedSizeSet.class, setFactory.of(1, 2, 3, 4));
+    }
+
+    @Test
+    public void multiReader()
+    {
+        MutableSetFactory setFactory = Sets.multiReader;
+        Assert.assertEquals(MultiReaderUnifiedSet.newSet(), setFactory.of());
+        Verify.assertInstanceOf(MultiReaderUnifiedSet.class, setFactory.of());
+        Assert.assertEquals(MultiReaderUnifiedSet.newSet(), setFactory.with());
+        Verify.assertInstanceOf(MultiReaderUnifiedSet.class, setFactory.with());
+        Assert.assertEquals(MultiReaderUnifiedSet.newSet(), setFactory.ofInitialCapacity(1));
+        Verify.assertInstanceOf(MultiReaderUnifiedSet.class, setFactory.ofInitialCapacity(1));
+        Verify.assertThrows(IllegalArgumentException.class, () -> setFactory.ofInitialCapacity(-1));
+        Assert.assertEquals(MultiReaderUnifiedSet.newSetWith(1), setFactory.of(1));
+        Verify.assertInstanceOf(MultiReaderUnifiedSet.class, setFactory.of(1));
+        Assert.assertEquals(MultiReaderUnifiedSet.newSetWith(1, 2, 3), setFactory.ofAll(UnifiedSet.newSetWith(1, 2, 3)));
+        Verify.assertInstanceOf(MultiReaderUnifiedSet.class, setFactory.ofAll(UnifiedSet.newSetWith(1, 2, 3)));
     }
 
     @Test
