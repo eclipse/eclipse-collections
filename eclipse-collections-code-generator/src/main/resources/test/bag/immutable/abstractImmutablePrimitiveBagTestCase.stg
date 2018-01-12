@@ -1,4 +1,4 @@
-import "copyright.stg"
+import "copyrightAndOthers.stg"
 import "primitiveEquals.stg"
 import "primitiveHashCode.stg"
 import "primitiveLiteral.stg"
@@ -15,7 +15,7 @@ class(primitive) ::= <<
 >>
 
 body(type, name, wrapperName) ::= <<
-<copyright()>
+<copyrightAndOthers()>
 
 package org.eclipse.collections.impl.bag.immutable.primitive;
 
@@ -275,6 +275,16 @@ public abstract class AbstractImmutable<name>BagTestCase extends AbstractImmutab
         Assert.assertEquals(this.classUnderTest(), this.classUnderTest().toImmutable());
         Immutable<name>Bag expected = this.classUnderTest();
         Assert.assertSame(expected, expected.toImmutable());
+    }
+
+    @Test
+    public void toStringOfItemToCount()
+    {
+        Immutable<name>Bag empty = this.newWith();
+        Assert.assertEquals("{}", empty.toStringOfItemToCount());
+        Assert.assertEquals("{" + <(literal.(type))("100")> + "=3}", this.newWith(<["100", "100", "100"]:(literal.(type))(); separator=", ">).toStringOfItemToCount());
+        String actual = this.newWith(<["100", "101", "101"]:(literal.(type))(); separator=", ">).toStringOfItemToCount();
+        Assert.assertTrue(("{" + <(literal.(type))("100")> + "=1, " + <(literal.(type))("101")> + "=2}").equals(actual) || ("{" + <(literal.(type))("101")> + "=2, " + <(literal.(type))("100")> + "=1}").equals(actual));
     }
 }
 
