@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2018 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -58,6 +58,7 @@ import org.eclipse.collections.impl.set.mutable.primitive.FloatHashSet;
 import org.eclipse.collections.impl.set.mutable.primitive.IntHashSet;
 import org.eclipse.collections.impl.set.mutable.primitive.LongHashSet;
 import org.eclipse.collections.impl.set.mutable.primitive.ShortHashSet;
+import org.eclipse.collections.impl.utility.Iterate;
 import org.eclipse.collections.impl.utility.internal.MutableCollectionIterate;
 import org.eclipse.collections.impl.utility.internal.SetIterables;
 
@@ -326,6 +327,12 @@ public abstract class AbstractUnifiedSet<T>
     @Deprecated
     public <S> MutableSet<Pair<T, S>> zip(Iterable<S> that)
     {
+        if (that instanceof Collection || that instanceof RichIterable)
+        {
+            int thatSize = Iterate.sizeOf(that);
+            UnifiedSet<Pair<T, S>> target = UnifiedSet.newSet(Math.min(this.size(), thatSize));
+            return this.zip(that, target);
+        }
         return this.zip(that, UnifiedSet.newSet());
     }
 
@@ -336,7 +343,7 @@ public abstract class AbstractUnifiedSet<T>
     @Deprecated
     public MutableSet<Pair<T, Integer>> zipWithIndex()
     {
-        return this.zipWithIndex(UnifiedSet.newSet());
+        return this.zipWithIndex(UnifiedSet.newSet(this.size()));
     }
 
     @Override

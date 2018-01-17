@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2018 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -21,6 +21,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.bag.primitive.MutableBooleanBag;
 import org.eclipse.collections.api.bag.primitive.MutableByteBag;
@@ -575,7 +576,7 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
     @Deprecated
     public MutableSet<Pair<V, Integer>> zipWithIndex()
     {
-        return this.delegate.zipWithIndex(new UnifiedSet<>());
+        return this.delegate.zipWithIndex(UnifiedSet.newSet(this.size()));
     }
 
     @Override
@@ -597,7 +598,13 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
     @Deprecated
     public <S> MutableSet<Pair<V, S>> zip(Iterable<S> that)
     {
-        return this.delegate.zip(that, new UnifiedSet<>());
+        if (that instanceof Collection || that instanceof RichIterable)
+        {
+            int thatSize = Iterate.sizeOf(that);
+            UnifiedSet<Pair<V, S>> target = UnifiedSet.newSet(Math.min(this.size(), thatSize));
+            return this.delegate.zip(that, target);
+        }
+        return this.delegate.zip(that, UnifiedSet.newSet());
     }
 
     @Override

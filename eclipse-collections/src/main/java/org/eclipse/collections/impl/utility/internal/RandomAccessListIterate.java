@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2018 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -1590,6 +1590,13 @@ public final class RandomAccessListIterate
             List<X> list,
             Iterable<Y> iterable)
     {
+        if (iterable instanceof Collection || iterable instanceof RichIterable)
+        {
+            int listSize = list.size();
+            int iterableSize = Iterate.sizeOf(iterable);
+            FastList<Pair<X, Y>> target = FastList.newList(Math.min(listSize, iterableSize));
+            return RandomAccessListIterate.zip(list, iterable, target);
+        }
         return RandomAccessListIterate.zip(list, iterable, FastList.newList());
     }
 
@@ -1609,7 +1616,7 @@ public final class RandomAccessListIterate
 
     public static <T> MutableList<Pair<T, Integer>> zipWithIndex(List<T> list)
     {
-        return RandomAccessListIterate.zipWithIndex(list, FastList.newList());
+        return RandomAccessListIterate.zipWithIndex(list, FastList.newList(list.size()));
     }
 
     public static <T, R extends Collection<Pair<T, Integer>>> R zipWithIndex(

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 Goldman Sachs and others.
+ * Copyright (c) 2018 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -1680,6 +1680,13 @@ public final class ListIterate
             List<X> list,
             Iterable<Y> iterable)
     {
+        if (iterable instanceof Collection || iterable instanceof RichIterable)
+        {
+            int listSize = list.size();
+            int iterableSize = Iterate.sizeOf(iterable);
+            FastList<Pair<X, Y>> target = FastList.newList(Math.min(listSize, iterableSize));
+            return ListIterate.zip(list, iterable, target);
+        }
         return ListIterate.zip(list, iterable, FastList.newList());
     }
 

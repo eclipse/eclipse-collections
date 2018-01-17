@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 Goldman Sachs and others.
+ * Copyright (c) 2018 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -299,7 +299,17 @@ abstract class AbstractImmutableSortedBag<T>
     @Override
     public <S> ImmutableList<Pair<T, S>> zip(Iterable<S> that)
     {
-        MutableList<Pair<T, S>> list = FastList.newList();
+        MutableList<Pair<T, S>> list;
+        if (that instanceof Collection || that instanceof RichIterable)
+        {
+            int thatSize = Iterate.sizeOf(that);
+            list = FastList.newList(Math.min(this.size(), thatSize));
+        }
+        else
+        {
+            list = FastList.newList();
+        }
+
         Iterator<S> iterator = that.iterator();
 
         this.forEachWithOccurrences((each, parameter) ->
