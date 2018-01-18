@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2018 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -59,16 +59,14 @@ public class UnifiedMapTest extends UnifiedMapTestCase
 
     @Override
     public <K, V> MutableMap<K, V> newMapWithKeysValues(
-            K key1, V value1, K key2, V value2, K key3,
-            V value3)
+            K key1, V value1, K key2, V value2, K key3, V value3)
     {
         return UnifiedMap.newWithKeysValues(key1, value1, key2, value2, key3, value3);
     }
 
     @Override
     public <K, V> MutableMap<K, V> newMapWithKeysValues(
-            K key1, V value1, K key2, V value2, K key3,
-            V value3, K key4, V value4)
+            K key1, V value1, K key2, V value2, K key3, V value3, K key4, V value4)
     {
         return UnifiedMap.newWithKeysValues(key1, value1, key2, value2, key3, value3, key4, value4);
     }

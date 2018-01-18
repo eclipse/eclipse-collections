@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 Goldman Sachs and others.
+ * Copyright (c) 2018 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -154,12 +154,14 @@ public abstract class AbstractMutableMapIterable<K, V> extends AbstractMapIterab
         return LazyIterate.adapt(this.entrySet()).collect(AbstractImmutableEntry.getPairFunction());
     }
 
+    // TODO: push down in next major release. Return type of MutableMap prevents this from being a superclass of MutableOrderedMaps.
     @Override
     public <K2, V2> MutableMap<K2, V2> collect(Function2<? super K, ? super V, Pair<K2, V2>> function)
     {
         return MapIterate.collect(this, function, UnifiedMap.newMap(this.size()));
     }
 
+    // TODO: push down in next major release. Return type of MutableMap prevents this from being a superclass of MutableOrderedMaps.
     @Override
     public MutableMap<V, K> flipUniqueValues()
     {

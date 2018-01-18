@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2018 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -23,6 +23,7 @@ import org.junit.runner.RunWith;
 
 import static org.eclipse.collections.test.IterableTestCase.assertEquals;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.fail;
 
 @RunWith(Java8Runner.class)
 public class ImmutableUnifiedMapWithHashingStrategyTest implements ImmutableMapTestCase
@@ -40,6 +41,29 @@ public class ImmutableUnifiedMapWithHashingStrategyTest implements ImmutableMapT
             assertNull(result.put(random.nextDouble(), each));
         }
         return result.toImmutable();
+    }
+
+    @Override
+    public <K, V> ImmutableMap<K, V> newWithKeysValues(Object... elements)
+    {
+        if (elements.length % 2 != 0)
+        {
+            fail(String.valueOf(elements.length));
+        }
+
+        MutableMap<K, V> result = new UnifiedMapWithHashingStrategy<>(HashingStrategies.defaultStrategy());
+        for (int i = 0; i < elements.length; i += 2)
+        {
+            assertNull(result.put((K) elements[i], (V) elements[i + 1]));
+        }
+        return result.toImmutable();
+    }
+
+    @Override
+    public boolean supportsNullKeys()
+    {
+        // TODO: UnifiedMapWithHashingStrategy does support null, but we're using a hashing strategy in this test which does not.
+        return false;
     }
 
     @Test
