@@ -14,6 +14,8 @@ body(type, name) ::= <<
 
 package org.eclipse.collections.api.bag.primitive;
 
+import java.util.StringJoiner;
+
 import org.eclipse.collections.api.<name>Iterable;
 import org.eclipse.collections.api.bag.Bag;
 import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
@@ -104,6 +106,16 @@ public interface <name>Bag extends <name>Iterable
      * Returns an immutable copy of this bag. If the bag is immutable, it returns itself.
      */
     Immutable<name>Bag toImmutable();
+
+    /**
+     * @since 9.2
+     */
+    default String toStringOfItemToCount()
+    {
+        StringJoiner joiner = new StringJoiner(", ", "{", "}");
+        this.forEachWithOccurrences((each, occurrences) -> joiner.add(each + "=" + occurrences));
+        return joiner.toString();
+    }
 }
 
 >>
