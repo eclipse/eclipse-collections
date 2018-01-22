@@ -42,20 +42,20 @@ public class Procedures2Test
         Verify.assertThrowsWithCause(
                 RuntimeException.class,
                 IOException.class,
-                () -> { Procedures2.throwing(
+                () -> Procedures2.throwing(
                         (one, two) -> { throw new IOException(); },
-                        (one, two, ce) -> new RuntimeException(ce)).value(null, null); });
+                        (one, two, ce) -> new RuntimeException(ce)).value(null, null));
         Verify.assertThrowsWithCause(
                 MyRuntimeException.class,
                 IOException.class,
-                () -> { Procedures2.throwing(
+                () -> Procedures2.throwing(
                         (one, two) -> { throw new IOException(); },
-                        this::throwMyException).value(null, null); });
+                        this::throwMyException).value(null, null));
         Verify.assertThrows(
                 NullPointerException.class,
-                () -> { Procedures2.throwing(
+                () -> Procedures2.throwing(
                         (one, two) -> { throw new NullPointerException(); },
-                        this::throwMyException).value(null, null); });
+                        this::throwMyException).value(null, null));
     }
 
     private MyRuntimeException throwMyException(Object one, Object two, Throwable exception)
@@ -112,7 +112,7 @@ public class Procedures2Test
         MutableMap<String, DoubleSummaryStatistics> map = list.aggregateInPlaceBy(
                 Object::toString,
                 DoubleSummaryStatistics::new,
-                Procedures2.summarizeDouble(Float::floatValue));
+                Procedures2.summarizeFloat(Float::floatValue));
         Verify.assertSize(2, map);
         Assert.assertEquals(6.0, map.get("2.0").getSum(), 0.0);
         Assert.assertEquals(9.0, map.get("3.0").getSum(), 0.0);
