@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2018 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -21,6 +21,7 @@ import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
+import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.collection.MutableCollection;
 import org.eclipse.collections.api.collection.primitive.MutableBooleanCollection;
 import org.eclipse.collections.api.collection.primitive.MutableByteCollection;
@@ -48,6 +49,8 @@ import org.eclipse.collections.impl.factory.Bags;
 import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.factory.SortedSets;
+import org.eclipse.collections.impl.factory.primitive.ObjectDoubleMaps;
+import org.eclipse.collections.impl.factory.primitive.ObjectLongMaps;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.map.sorted.mutable.TreeSortedMap;
@@ -128,6 +131,20 @@ public interface RichIterableUniqueTestCase extends RichIterableTestCase
         assertEquals(this.newMutableForFilter(11), result);
 
         this.newWith().forEach(Procedures.cast(each -> fail()));
+    }
+
+    @Override
+    @Test
+    default void RichIterable_tap()
+    {
+        Procedure<Object> noop = each -> {
+        };
+
+        RichIterable<Integer> iterable = this.newWith(3, 2, 1);
+        MutableCollection<Integer> result = this.newMutableForFilter();
+        iterable.tap(result::add).forEach(noop);
+        assertEquals(this.newMutableForFilter(3, 2, 1), result);
+        this.newWith().tap(Procedures.cast(each -> fail()));
     }
 
     @Override
@@ -697,6 +714,28 @@ public interface RichIterableUniqueTestCase extends RichIterableTestCase
         Assert.assertEquals(10.0, iterable.sumOfDouble(Integer::doubleValue), 0.001);
         Assert.assertEquals(10, iterable.sumOfInt(integer -> integer));
         Assert.assertEquals(10L, iterable.sumOfLong(Integer::longValue));
+    }
+
+    @Override
+    default void RichIterable_sumByPrimitive()
+    {
+        RichIterable<String> iterable = this.newWith("4", "3", "2", "1");
+
+        assertEquals(
+                ObjectLongMaps.immutable.with(0, 6L).newWithKeyValue(1, 4L),
+                iterable.sumByInt(s -> Integer.parseInt(s) % 2, Integer::parseInt));
+
+        assertEquals(
+                ObjectLongMaps.immutable.with(0, 6L).newWithKeyValue(1, 4L),
+                iterable.sumByLong(s -> Integer.parseInt(s) % 2, Long::parseLong));
+
+        assertEquals(
+                ObjectDoubleMaps.immutable.with(0, 6.0d).newWithKeyValue(1, 4.0d),
+                iterable.sumByDouble(s -> Integer.parseInt(s) % 2, Double::parseDouble));
+
+        assertEquals(
+                ObjectDoubleMaps.immutable.with(0, 6.0d).newWithKeyValue(1, 4.0d),
+                iterable.sumByFloat(s -> Integer.parseInt(s) % 2, Float::parseFloat));
     }
 
     @Override

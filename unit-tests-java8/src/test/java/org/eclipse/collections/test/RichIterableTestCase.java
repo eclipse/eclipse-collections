@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 Goldman Sachs and others.
+ * Copyright (c) 2018 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -80,6 +80,8 @@ import org.eclipse.collections.impl.factory.Bags;
 import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.factory.SortedSets;
+import org.eclipse.collections.impl.factory.primitive.ObjectDoubleMaps;
+import org.eclipse.collections.impl.factory.primitive.ObjectLongMaps;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.map.sorted.mutable.TreeSortedMap;
@@ -206,6 +208,19 @@ public interface RichIterableTestCase extends IterableTestCase
         assertEquals(this.newMutableForFilter(11), result);
 
         this.newWith().forEach(Procedures.cast(each -> fail()));
+    }
+
+    @Test
+    default void RichIterable_tap()
+    {
+        Procedure<Object> noop = each -> {
+        };
+
+        RichIterable<Integer> iterable = this.newWith(3, 3, 3, 2, 2, 1);
+        MutableCollection<Integer> result = this.newMutableForFilter();
+        iterable.tap(result::add).forEach(noop);
+        assertEquals(this.newMutableForFilter(3, 3, 3, 2, 2, 1), result);
+        this.newWith().tap(Procedures.cast(each -> fail()));
     }
 
     @Test
@@ -836,6 +851,65 @@ public interface RichIterableTestCase extends IterableTestCase
             return each.longValue();
         });
         assertEquals(expectedIterationOrder, sumOfLongIterationOrder);
+
+        /*
+         * TODO: Fix sumByPrimitive methods for bags, to only iterate once per item, not per occurrence.
+        MutableCollection<Integer> sumByDoubleIterationOrder1 = this.newMutableForFilter();
+        MutableCollection<Integer> sumByDoubleIterationOrder2 = this.newMutableForFilter();
+        this.getInstanceUnderTest().sumByDouble(
+                each -> {
+                    sumByDoubleIterationOrder1.add(each);
+                    return each;
+                },
+                each -> {
+                    sumByDoubleIterationOrder2.add(each);
+                    return 0.0;
+                });
+        assertEquals(expectedIterationOrder, sumByDoubleIterationOrder1);
+        assertEquals(expectedIterationOrder, sumByDoubleIterationOrder2);
+
+        MutableCollection<Integer> sumByFloatIterationOrder1 = this.newMutableForFilter();
+        MutableCollection<Integer> sumByFloatIterationOrder2 = this.newMutableForFilter();
+        this.getInstanceUnderTest().sumByFloat(
+                each -> {
+                    sumByFloatIterationOrder1.add(each);
+                    return each;
+                },
+                each -> {
+                    sumByFloatIterationOrder2.add(each);
+                    return 0.0f;
+                });
+        assertEquals(expectedIterationOrder, sumByFloatIterationOrder1);
+        assertEquals(expectedIterationOrder, sumByFloatIterationOrder2);
+
+        MutableCollection<Integer> sumByIntIterationOrder1 = this.newMutableForFilter();
+        MutableCollection<Integer> sumByIntIterationOrder2 = this.newMutableForFilter();
+        this.getInstanceUnderTest().sumByInt(
+                each -> {
+                    sumByIntIterationOrder1.add(each);
+                    return each;
+                },
+                each -> {
+                    sumByIntIterationOrder2.add(each);
+                    return 0;
+                });
+        assertEquals(expectedIterationOrder, sumByIntIterationOrder1);
+        assertEquals(expectedIterationOrder, sumByIntIterationOrder2);
+
+        MutableCollection<Integer> sumByLongIterationOrder1 = this.newMutableForFilter();
+        MutableCollection<Integer> sumByLongIterationOrder2 = this.newMutableForFilter();
+        this.getInstanceUnderTest().sumByLong(
+                each -> {
+                    sumByLongIterationOrder1.add(each);
+                    return each;
+                },
+                each -> {
+                    sumByLongIterationOrder2.add(each);
+                    return 0L;
+                });
+        assertEquals(expectedIterationOrder, sumByLongIterationOrder1);
+        assertEquals(expectedIterationOrder, sumByLongIterationOrder2);
+        */
 
         MutableCollection<Integer> expectedInjectIntoIterationOrder = this.allowsDuplicates()
                 ? this.newMutableForFilter(4, 4, 4, 4, 3, 3, 3, 2, 2, 1)
@@ -1581,6 +1655,28 @@ public interface RichIterableTestCase extends IterableTestCase
         Assert.assertEquals(30.0, iterable.sumOfDouble(Integer::doubleValue), 0.001);
         Assert.assertEquals(30, iterable.sumOfInt(Integer::intValue));
         Assert.assertEquals(30L, iterable.sumOfLong(Integer::longValue));
+    }
+
+    @Test
+    default void RichIterable_sumByPrimitive()
+    {
+        RichIterable<String> iterable = this.newWith("4", "4", "4", "4", "3", "3", "3", "2", "2", "1");
+
+        assertEquals(
+                ObjectLongMaps.immutable.with(0, 20L).newWithKeyValue(1, 10L),
+                iterable.sumByInt(s -> Integer.parseInt(s) % 2, Integer::parseInt));
+
+        assertEquals(
+                ObjectLongMaps.immutable.with(0, 20L).newWithKeyValue(1, 10L),
+                iterable.sumByLong(s -> Integer.parseInt(s) % 2, Long::parseLong));
+
+        assertEquals(
+                ObjectDoubleMaps.immutable.with(0, 20.0d).newWithKeyValue(1, 10.0d),
+                iterable.sumByDouble(s -> Integer.parseInt(s) % 2, Double::parseDouble));
+
+        assertEquals(
+                ObjectDoubleMaps.immutable.with(0, 20.0d).newWithKeyValue(1, 10.0d),
+                iterable.sumByFloat(s -> Integer.parseInt(s) % 2, Float::parseFloat));
     }
 
     @Test

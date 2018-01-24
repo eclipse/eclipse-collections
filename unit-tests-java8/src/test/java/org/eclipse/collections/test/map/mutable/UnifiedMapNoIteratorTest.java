@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2018 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -19,8 +19,10 @@ import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.test.junit.Java8Runner;
 import org.eclipse.collections.test.NoIteratorTestCase;
-import org.junit.Assert;
 import org.junit.runner.RunWith;
+
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.fail;
 
 @RunWith(Java8Runner.class)
 public class UnifiedMapNoIteratorTest implements MutableMapTestCase, NoIteratorTestCase
@@ -35,7 +37,23 @@ public class UnifiedMapNoIteratorTest implements MutableMapTestCase, NoIteratorT
         MutableMap<Object, T> result = new UnifiedMapNoIterator<>();
         for (T each : elements)
         {
-            Assert.assertNull(result.put(random.nextDouble(), each));
+            assertNull(result.put(random.nextDouble(), each));
+        }
+        return result;
+    }
+
+    @Override
+    public <K, V> MutableMap<K, V> newWithKeysValues(Object... elements)
+    {
+        if (elements.length % 2 != 0)
+        {
+            fail(String.valueOf(elements.length));
+        }
+
+        MutableMap<K, V> result = new UnifiedMapNoIterator<>();
+        for (int i = 0; i < elements.length; i += 2)
+        {
+            assertNull(result.put((K) elements[i], (V) elements[i + 1]));
         }
         return result;
     }
@@ -74,6 +92,26 @@ public class UnifiedMapNoIteratorTest implements MutableMapTestCase, NoIteratorT
     public void RichIterable_getLast_empty_null()
     {
         // Not applicable
+    }
+
+    @Override
+    public void MapIterable_detectOptional()
+    {
+        /**
+         * TODO: {@link UnifiedMap#detectOptional(org.eclipse.collections.api.block.predicate.Predicate2)} should be optimized to not use an iterator
+         */
+    }
+
+    @Override
+    public void MutableMapIterable_updateValue()
+    {
+        /**
+         * TODO: {@link UnifiedMap#KeySet#equals)} should be optimized to not use an iterator
+         */
+
+        /**
+         * TODO: {@link org.eclipse.collections.impl.set.mutable.UnifiedSet#addAll(Collection)} should be optimized to not use an iterator when another UnifiedSet is passed in.
+         */
     }
 
     public static class UnifiedMapNoIterator<K, V> extends UnifiedMap<K, V>
