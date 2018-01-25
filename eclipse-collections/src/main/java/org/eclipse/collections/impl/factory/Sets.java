@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 Goldman Sachs and others.
+ * Copyright (c) 2018 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -29,6 +29,7 @@ import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.set.fixed.FixedSizeSetFactoryImpl;
 import org.eclipse.collections.impl.set.immutable.ImmutableSetFactoryImpl;
+import org.eclipse.collections.impl.set.mutable.MultiReaderMutableSetFactory;
 import org.eclipse.collections.impl.set.mutable.MutableSetFactoryImpl;
 import org.eclipse.collections.impl.set.mutable.SetAdapter;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
@@ -81,6 +82,7 @@ public final class Sets
     public static final ImmutableSetFactory immutable = ImmutableSetFactoryImpl.INSTANCE;
     public static final FixedSizeSetFactory fixedSize = FixedSizeSetFactoryImpl.INSTANCE;
     public static final MutableSetFactory mutable = MutableSetFactoryImpl.INSTANCE;
+    public static final MutableSetFactory multiReader = MultiReaderMutableSetFactory.INSTANCE;
 
     private static final Predicate<Set<?>> INSTANCE_OF_SORTED_SET_PREDICATE = set -> set instanceof SortedSet;
 
