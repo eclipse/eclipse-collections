@@ -425,7 +425,11 @@ public final class IntInterval
         {
             return false;
         }
-        if (this.from <= this.to)
+        if (this.from == this.to)
+        {
+            return this.from == list.get(0);
+        }
+        if (this.from < this.to)
         {
             int listIndex = 0;
             for (int i = this.from; i <= this.to; i += this.step)
@@ -454,7 +458,11 @@ public final class IntInterval
     public int hashCode()
     {
         int hashCode = 1;
-        if (this.from <= this.to)
+        if (this.from == this.to)
+        {
+            hashCode = 31 + this.from;
+        }
+        else if (this.from < this.to)
         {
             for (int i = this.from; i <= this.to; i += this.step)
             {
