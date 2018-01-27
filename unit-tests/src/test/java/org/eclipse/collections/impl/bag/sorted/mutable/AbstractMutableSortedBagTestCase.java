@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 Goldman Sachs and others.
+ * Copyright (c) 2018 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -1100,6 +1100,20 @@ public abstract class AbstractMutableSortedBagTestCase extends MutableBagTestCas
                 TreeSortedMap.newMapWith(Comparators.reverseNaturalOrder(), 3, "3", 2, "2", 1, "1"),
                 this.newWith(3, 2, 1, 1).toSortedMap(
                         Comparators.reverseNaturalOrder(),
+                        Functions.getIntegerPassThru(),
+                        String::valueOf));
+    }
+
+    @Override
+    @Test
+    public void toSortedMapBy()
+    {
+        super.toSortedMapBy();
+
+        Verify.assertSortedMapsEqual(
+                TreeSortedMap.newMapWith(Comparators.reverseNaturalOrder(), 3, "3", 2, "2", 1, "1"),
+                this.newWith(3, 2, 1, 1).toSortedMapBy(
+                        key -> -key,
                         Functions.getIntegerPassThru(),
                         String::valueOf));
     }

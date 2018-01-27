@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2018 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -327,6 +327,23 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         try
         {
             return this.getDelegate().toSortedMap(comparator, keyFunction, valueFunction);
+        }
+        finally
+        {
+            this.unlockReadLock();
+        }
+    }
+
+    @Override
+    public <KK extends Comparable<? super KK>, NK, NV> MutableSortedMap<NK, NV> toSortedMapBy(
+            Function<? super NK, KK> sortBy,
+            Function<? super T, ? extends NK> keyFunction,
+            Function<? super T, ? extends NV> valueFunction)
+    {
+        this.acquireReadLock();
+        try
+        {
+            return this.getDelegate().toSortedMapBy(sortBy, keyFunction, valueFunction);
         }
         finally
         {
@@ -1889,6 +1906,15 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
                 Function<? super T, ? extends NV> valueFunction)
         {
             return this.delegate.toSortedMap(comparator, keyFunction, valueFunction);
+        }
+
+        @Override
+        public <KK extends Comparable<? super KK>, NK, NV> MutableSortedMap<NK, NV> toSortedMapBy(
+                Function<? super NK, KK> sortBy,
+                Function<? super T, ? extends NK> keyFunction,
+                Function<? super T, ? extends NV> valueFunction)
+        {
+            return this.delegate.toSortedMapBy(sortBy, keyFunction, valueFunction);
         }
 
         @Override

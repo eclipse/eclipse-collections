@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 Goldman Sachs and others.
+ * Copyright (c) 2018 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -743,12 +743,15 @@ public abstract class MapIterableTestCase
 
         MapIterable<Integer, String> actualWithComparator = map.toSortedMap(Comparators.reverseNaturalOrder(), String::length, String::valueOf);
 
+        MapIterable<Integer, String> actualWithFunction = map.toSortedMapBy(key -> -key, String::length, String::valueOf);
+
         Verify.assertIterablesEqual(TreeSortedMap.newMapWith(3, "One", 5, "Three", 4, "Four"), actual);
         TreeSortedMap<Object, Object> expectedIterable = TreeSortedMap.newMap(Comparators.reverseNaturalOrder());
         expectedIterable.put(3, "One");
         expectedIterable.put(5, "Three");
         expectedIterable.put(4, "Four");
         Verify.assertIterablesEqual(expectedIterable, actualWithComparator);
+        Verify.assertIterablesEqual(expectedIterable, actualWithFunction);
     }
 
     @Test

@@ -1,4 +1,4 @@
-import "copyright.stg"
+import "copyrightAndOthers.stg"
 import "primitiveEquals.stg"
 import "primitiveHashCode.stg"
 import "primitiveLiteral.stg"
@@ -18,7 +18,7 @@ class(primitive1, primitive2, sameTwoPrimitives) ::= <<
 >>
 
 body(type1, type2, name1, name2, wrapper1, wrapper2) ::= <<
-<copyright()>
+<copyrightAndOthers()>
 
 package org.eclipse.collections.impl.map.primitive;
 
@@ -815,6 +815,15 @@ public abstract class Abstract<name1><name2>MapKeyValuesViewTestCase
         MutableSortedMap\<String, String> map =
                 pairs.toSortedMap(Comparators.reverseNaturalOrder(), String::valueOf, String::valueOf);
         Assert.assertEquals(TreeSortedMap.newMapWith(Comparators.reverseNaturalOrder(), "<(toStringLiteral.(type1))("1")>:<(toStringLiteral.(type2))("2")>", "<(toStringLiteral.(type1))("1")>:<(toStringLiteral.(type2))("2")>", "<(toStringLiteral.(type1))("2")>:<(toStringLiteral.(type2))("3")>", "<(toStringLiteral.(type1))("2")>:<(toStringLiteral.(type2))("3")>", "<(toStringLiteral.(type1))("3")>:<(toStringLiteral.(type2))("4")>", "<(toStringLiteral.(type1))("3")>:<(toStringLiteral.(type2))("4")>"), map);
+    }
+
+    @Test
+    public void toSortedMapBy()
+    {
+        RichIterable\<<name1><name2>Pair> pairs = this.newWith(<(literal.(type1))("1")>, <(literal.(type2))("2")>, <(literal.(type1))("2")>, <(literal.(type2))("3")>, <(literal.(type1))("3")>, <(literal.(type2))("4")>);
+        MutableSortedMap\<String, String> map =
+                pairs.toSortedMapBy(String::valueOf, String::valueOf, String::valueOf);
+        Assert.assertEquals(TreeSortedMap.newMapWith(Comparators.naturalOrder(), "<(toStringLiteral.(type1))("1")>:<(toStringLiteral.(type2))("2")>", "<(toStringLiteral.(type1))("1")>:<(toStringLiteral.(type2))("2")>", "<(toStringLiteral.(type1))("2")>:<(toStringLiteral.(type2))("3")>", "<(toStringLiteral.(type1))("2")>:<(toStringLiteral.(type2))("3")>", "<(toStringLiteral.(type1))("3")>:<(toStringLiteral.(type2))("4")>", "<(toStringLiteral.(type1))("3")>:<(toStringLiteral.(type2))("4")>"), map);
     }
 
     @Test

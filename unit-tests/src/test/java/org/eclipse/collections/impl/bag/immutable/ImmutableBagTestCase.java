@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 Goldman Sachs and others.
+ * Copyright (c) 2018 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -1474,6 +1474,19 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
         super.toSortedMap_with_comparator();
 
         MutableSortedMap<Integer, String> map = this.newBag().toSortedMap(Comparators.reverseNaturalOrder(),
+                Integer::valueOf, Functions.getPassThru());
+
+        Verify.assertMapsEqual(this.newBag().toMap(Integer::valueOf, Functions.getPassThru()), map);
+        Verify.assertListsEqual(Interval.fromTo(this.numKeys(), 1), map.keySet().toList());
+    }
+
+    @Override
+    @Test
+    public void toSortedMapBy()
+    {
+        super.toSortedMapBy();
+
+        MutableSortedMap<Integer, String> map = this.newBag().toSortedMapBy(key -> -key,
                 Integer::valueOf, Functions.getPassThru());
 
         Verify.assertMapsEqual(this.newBag().toMap(Integer::valueOf, Functions.getPassThru()), map);
