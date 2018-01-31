@@ -95,14 +95,6 @@ public class UnifiedMapNoIteratorTest implements MutableMapTestCase, NoIteratorT
     }
 
     @Override
-    public void MapIterable_detectOptional()
-    {
-        /**
-         * TODO: {@link UnifiedMap#detectOptional(org.eclipse.collections.api.block.predicate.Predicate2)} should be optimized to not use an iterator
-         */
-    }
-
-    @Override
     public void MutableMapIterable_updateValue()
     {
         /**

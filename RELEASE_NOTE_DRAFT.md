@@ -8,6 +8,11 @@ New Functionality
 
 * Implement OrderedMapAdapter, the first implementation of MutableOrderedMap.
 
+Optimizations
+-------------------
+
+* Optimize UnifiedMap#detectOptional(org.eclipse.collections.api.block.predicate.Predicate2) to not use an iterator. 
+
 Bug Fixes
 -------------------
 
