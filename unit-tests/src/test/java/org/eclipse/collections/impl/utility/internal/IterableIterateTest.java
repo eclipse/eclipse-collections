@@ -546,7 +546,7 @@ public class IterableIterateTest
         Iterate.removeIf(iterable3, Predicates.isNull());
         Verify.assertIterableSize(3, objects3);
         Verify.assertContainsAll(objects3, 1, 2, 3);
-        MutableList<Integer> objects2 = mList(null, null, null, (Integer) null);
+        MutableList<Integer> objects2 = mList(null, null, null, null);
         Iterable<Integer> iterable2 = new IterableAdapter<>(objects2);
         Iterate.removeIf(iterable2, Predicates.isNull());
         Verify.assertIterableEmpty(objects2);
@@ -575,7 +575,7 @@ public class IterableIterateTest
         Iterate.removeIfWith(iterable3, (each3, ignored3) -> each3 == null, null);
         Assert.assertEquals(iList(1, 2, 3), objects3);
 
-        MutableList<Integer> objects4 = mList(null, null, null, (Integer) null);
+        MutableList<Integer> objects4 = mList(null, null, null, null);
         Iterable<Integer> iterable2 = new IterableAdapter<>(objects4);
         Iterate.removeIfWith(iterable2, (each2, ignored2) -> each2 == null, null);
         Verify.assertIterableEmpty(objects4);

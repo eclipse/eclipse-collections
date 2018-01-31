@@ -32,11 +32,11 @@ public class FixedSizeMapFactoryTest
         Verify.assertSize(1, map1);
         Verify.assertContainsKeyValue("key1", "value1", map1);
 
-        MutableMap<String, String> map2 = Maps.fixedSize.of((String) null, (String) null);
+        MutableMap<String, String> map2 = Maps.fixedSize.of(null, null);
         Verify.assertSize(1, map2);
         Verify.assertContainsKeyValue(null, null, map2);
 
-        MutableMap<String, String> map3 = Maps.fixedSize.of((String) null, "value1");
+        MutableMap<String, String> map3 = Maps.fixedSize.of(null, "value1");
         Verify.assertSize(1, map3);
         Verify.assertContainsKeyValue(null, "value1", map3);
     }

@@ -2440,7 +2440,7 @@ public final class Verify extends Assert
 
             for (K key : expectedBagMultimap.keysView())
             {
-                Verify.assertBagsEqual(multimapName + " value bag for key:" + key, (Bag<V>) expectedBagMultimap.get(key), (Bag<V>) actualBagMultimap.get(key));
+                Verify.assertBagsEqual(multimapName + " value bag for key:" + key, expectedBagMultimap.get(key), actualBagMultimap.get(key));
             }
             Assert.assertEquals(multimapName, expectedBagMultimap, actualBagMultimap);
         }
@@ -2518,7 +2518,7 @@ public final class Verify extends Assert
 
             for (K key : expectedSortedBagMultimap.keysView())
             {
-                Verify.assertSortedBagsEqual(multimapName + " value set for key:" + key, (SortedBag<V>) expectedSortedBagMultimap.get(key), (SortedBag<V>) actualSortedBagMultimap.get(key));
+                Verify.assertSortedBagsEqual(multimapName + " value set for key:" + key, expectedSortedBagMultimap.get(key), actualSortedBagMultimap.get(key));
             }
             Assert.assertEquals(multimapName, expectedSortedBagMultimap, actualSortedBagMultimap);
         }
