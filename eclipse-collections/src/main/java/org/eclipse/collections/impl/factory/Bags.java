@@ -13,6 +13,7 @@ package org.eclipse.collections.impl.factory;
 import org.eclipse.collections.api.factory.bag.ImmutableBagFactory;
 import org.eclipse.collections.api.factory.bag.MutableBagFactory;
 import org.eclipse.collections.impl.bag.immutable.ImmutableBagFactoryImpl;
+import org.eclipse.collections.impl.bag.mutable.MultiReaderMutableBagFactory;
 import org.eclipse.collections.impl.bag.mutable.MutableBagFactoryImpl;
 
 /**
@@ -40,6 +41,7 @@ public final class Bags
 {
     public static final ImmutableBagFactory immutable = ImmutableBagFactoryImpl.INSTANCE;
     public static final MutableBagFactory mutable = MutableBagFactoryImpl.INSTANCE;
+    public static final MutableBagFactory multiReader = MultiReaderMutableBagFactory.INSTANCE;
 
     private Bags()
     {
