@@ -72,7 +72,7 @@ public abstract class AbstractHashBag<T> extends AbstractMutableBag<T>
     public int hashCode()
     {
         Counter counter = new Counter();
-        this.items.forEachKeyValue((item, count) -> counter.add((item == null ? 0 : AbstractHashBag.this.computeHashCode(item)) ^ count));
+        this.items.forEachKeyValue((item, count) -> counter.add((item == null ? 0 : this.computeHashCode(item)) ^ count));
         return counter.getCount();
     }
 

@@ -56,7 +56,7 @@ public final class SynchronizedPutUnifiedSetMultimap<K, V>
     public SynchronizedPutUnifiedSetMultimap(Pair<K, V>... pairs)
     {
         this();
-        ArrayIterate.forEach(pairs, pair -> SynchronizedPutUnifiedSetMultimap.this.put(pair.getOne(), pair.getTwo()));
+        ArrayIterate.forEach(pairs, pair -> this.put(pair.getOne(), pair.getTwo()));
     }
 
     public SynchronizedPutUnifiedSetMultimap(Iterable<Pair<K, V>> inputIterable)

@@ -64,7 +64,7 @@ public final class SynchronizedPutTreeSortedSetMultimap<K, V>
     public SynchronizedPutTreeSortedSetMultimap(Pair<K, V>... pairs)
     {
         this();
-        ArrayIterate.forEach(pairs, pair -> SynchronizedPutTreeSortedSetMultimap.this.put(pair.getOne(), pair.getTwo()));
+        ArrayIterate.forEach(pairs, pair -> this.put(pair.getOne(), pair.getTwo()));
     }
 
     public SynchronizedPutTreeSortedSetMultimap(Iterable<Pair<K, V>> inputIterable)

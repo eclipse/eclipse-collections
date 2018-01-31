@@ -352,11 +352,11 @@ public final class BooleanHashBag implements MutableBooleanBag, Externalizable
             {
                 if (each)
                 {
-                    BooleanHashBag.this.trueCount = 0;
+                    this.trueCount = 0;
                 }
                 else
                 {
-                    BooleanHashBag.this.falseCount = 0;
+                    this.falseCount = 0;
                 }
             });
         }

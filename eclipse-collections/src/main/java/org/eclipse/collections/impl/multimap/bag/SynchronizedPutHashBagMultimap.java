@@ -53,7 +53,7 @@ public final class SynchronizedPutHashBagMultimap<K, V>
 
     public SynchronizedPutHashBagMultimap(Pair<K, V>... pairs)
     {
-        ArrayIterate.forEach(pairs, pair -> SynchronizedPutHashBagMultimap.this.put(pair.getOne(), pair.getTwo()));
+        ArrayIterate.forEach(pairs, pair -> this.put(pair.getOne(), pair.getTwo()));
     }
 
     public SynchronizedPutHashBagMultimap(Iterable<Pair<K, V>> inputIterable)

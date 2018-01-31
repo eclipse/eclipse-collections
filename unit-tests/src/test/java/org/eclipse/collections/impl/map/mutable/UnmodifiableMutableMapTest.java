@@ -338,7 +338,7 @@ public class UnmodifiableMutableMapTest extends MutableMapTestCase
     @Test
     public void put()
     {
-        Verify.assertThrows(UnsupportedOperationException.class, UnmodifiableMutableMapTest.super::put);
+        Verify.assertThrows(UnsupportedOperationException.class, super::put);
     }
 
     @Override
