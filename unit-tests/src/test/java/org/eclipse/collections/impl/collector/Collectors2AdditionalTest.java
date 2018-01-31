@@ -755,7 +755,7 @@ public class Collectors2AdditionalTest
         SummaryStatistics<ValueHolder> summaryStatistics =
                 Lists.mutable.withNValues(3, () -> new ValueHolder(5, 100, 10.0))
                         .stream()
-                        .collect(Collectors2.<ValueHolder>summarizing(
+                        .collect(Collectors2.summarizing(
                                 Lists.immutable.with(ValueHolder::getIntValue),
                                 Lists.immutable.with(ValueHolder::getLongValue),
                                 Lists.immutable.with(ValueHolder::getDoubleValue)));
@@ -808,7 +808,7 @@ public class Collectors2AdditionalTest
         SummaryStatistics<ValueHolder> summaryStatistics =
                 Lists.mutable.withNValues(25_000, () -> valueHolder)
                         .parallelStream()
-                        .collect(Collectors2.<ValueHolder>summarizing(
+                        .collect(Collectors2.summarizing(
                                 Lists.immutable.with(ValueHolder::getIntValue),
                                 Lists.immutable.with(ValueHolder::getLongValue),
                                 Lists.immutable.with(ValueHolder::getDoubleValue)));
@@ -824,7 +824,7 @@ public class Collectors2AdditionalTest
         BigDecimalSummaryStatistics summaryStatistics =
                 Lists.mutable.withNValues(25_000, () -> valueHolder)
                         .stream()
-                        .collect(Collectors2.<ValueHolder>summarizingBigDecimal(vh -> BigDecimal.valueOf(vh.getLongValue())));
+                        .collect(Collectors2.summarizingBigDecimal(vh -> BigDecimal.valueOf(vh.getLongValue())));
         Assert.assertEquals(BigDecimal.valueOf(2_500_000L), summaryStatistics.getSum());
         Assert.assertEquals(BigDecimal.valueOf(100L), summaryStatistics.getMin());
         Assert.assertEquals(BigDecimal.valueOf(100L), summaryStatistics.getMax());
@@ -837,7 +837,7 @@ public class Collectors2AdditionalTest
         BigDecimalSummaryStatistics summaryStatistics =
                 Lists.mutable.withNValues(25_000, () -> valueHolder)
                         .parallelStream()
-                        .collect(Collectors2.<ValueHolder>summarizingBigDecimal(vh -> BigDecimal.valueOf(vh.getLongValue())));
+                        .collect(Collectors2.summarizingBigDecimal(vh -> BigDecimal.valueOf(vh.getLongValue())));
         Assert.assertEquals(BigDecimal.valueOf(2_500_000L), summaryStatistics.getSum());
         Assert.assertEquals(BigDecimal.valueOf(100L), summaryStatistics.getMin());
         Assert.assertEquals(BigDecimal.valueOf(100L), summaryStatistics.getMax());
@@ -850,7 +850,7 @@ public class Collectors2AdditionalTest
         BigDecimal sum =
                 Lists.mutable.withNValues(25_000, () -> valueHolder)
                         .stream()
-                        .collect(Collectors2.<ValueHolder>summingBigDecimal(vh -> BigDecimal.valueOf(vh.getLongValue())));
+                        .collect(Collectors2.summingBigDecimal(vh -> BigDecimal.valueOf(vh.getLongValue())));
         Assert.assertEquals(BigDecimal.valueOf(2_500_000L), sum);
     }
 
@@ -861,7 +861,7 @@ public class Collectors2AdditionalTest
         BigDecimal sum =
                 Lists.mutable.withNValues(25_000, () -> valueHolder)
                         .parallelStream()
-                        .collect(Collectors2.<ValueHolder>summingBigDecimal(vh -> BigDecimal.valueOf(vh.getLongValue())));
+                        .collect(Collectors2.summingBigDecimal(vh -> BigDecimal.valueOf(vh.getLongValue())));
         Assert.assertEquals(BigDecimal.valueOf(2_500_000L), sum);
     }
 
@@ -872,7 +872,7 @@ public class Collectors2AdditionalTest
         BigIntegerSummaryStatistics summaryStatistics =
                 Lists.mutable.withNValues(25_000, () -> valueHolder)
                         .stream()
-                        .collect(Collectors2.<ValueHolder>summarizingBigInteger(vh -> BigInteger.valueOf(vh.getLongValue())));
+                        .collect(Collectors2.summarizingBigInteger(vh -> BigInteger.valueOf(vh.getLongValue())));
         Assert.assertEquals(BigInteger.valueOf(2_500_000L), summaryStatistics.getSum());
         Assert.assertEquals(BigInteger.valueOf(100L), summaryStatistics.getMin());
         Assert.assertEquals(BigInteger.valueOf(100L), summaryStatistics.getMax());
@@ -885,7 +885,7 @@ public class Collectors2AdditionalTest
         BigIntegerSummaryStatistics summaryStatistics =
                 Lists.mutable.withNValues(25_000, () -> valueHolder)
                         .parallelStream()
-                        .collect(Collectors2.<ValueHolder>summarizingBigInteger(vh -> BigInteger.valueOf(vh.getLongValue())));
+                        .collect(Collectors2.summarizingBigInteger(vh -> BigInteger.valueOf(vh.getLongValue())));
         Assert.assertEquals(BigInteger.valueOf(2_500_000L), summaryStatistics.getSum());
         Assert.assertEquals(BigInteger.valueOf(100L), summaryStatistics.getMin());
         Assert.assertEquals(BigInteger.valueOf(100L), summaryStatistics.getMax());
@@ -898,7 +898,7 @@ public class Collectors2AdditionalTest
         BigInteger sum =
                 Lists.mutable.withNValues(25_000, () -> valueHolder)
                         .stream()
-                        .collect(Collectors2.<ValueHolder>summingBigInteger(vh -> BigInteger.valueOf(vh.getLongValue())));
+                        .collect(Collectors2.summingBigInteger(vh -> BigInteger.valueOf(vh.getLongValue())));
         Assert.assertEquals(BigInteger.valueOf(2_500_000L), sum);
     }
 
@@ -909,7 +909,7 @@ public class Collectors2AdditionalTest
         BigInteger sum =
                 Lists.mutable.withNValues(25_000, () -> valueHolder)
                         .parallelStream()
-                        .collect(Collectors2.<ValueHolder>summingBigInteger(vh -> BigInteger.valueOf(vh.getLongValue())));
+                        .collect(Collectors2.summingBigInteger(vh -> BigInteger.valueOf(vh.getLongValue())));
         Assert.assertEquals(BigInteger.valueOf(2_500_000L), sum);
     }
 }

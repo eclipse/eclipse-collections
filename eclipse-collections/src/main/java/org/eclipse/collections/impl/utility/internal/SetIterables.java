@@ -148,7 +148,7 @@ public final class SetIterables
      */
     public static <T> ImmutableSet<ImmutableSet<T>> immutablePowerSet(Set<T> set)
     {
-        return powerSet(set).collect(MutableSet<T>::toImmutable).toImmutable();
+        return powerSet(set).collect(MutableSet::toImmutable).toImmutable();
     }
 
     public static <A, B> LazyIterable<Pair<A, B>> cartesianProduct(SetIterable<A> set1, SetIterable<B> set2)

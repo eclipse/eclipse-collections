@@ -50,7 +50,7 @@ public final class SortedSetIterables
      */
     public static <T> ImmutableSortedSet<ImmutableSortedSet<T>> immutablePowerSet(SortedSet<T> set)
     {
-        return powerSet(set).collect(MutableSortedSet<T>::toImmutable, TreeSortedSet.newSet(Comparators.powerSet())).toImmutable();
+        return powerSet(set).collect(MutableSortedSet::toImmutable, TreeSortedSet.newSet(Comparators.powerSet())).toImmutable();
     }
 
     public static <T> int compare(SortedSetIterable<T> setA, SortedSetIterable<T> setB)

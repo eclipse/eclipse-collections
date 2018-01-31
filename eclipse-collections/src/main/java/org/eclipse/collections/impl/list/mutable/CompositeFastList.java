@@ -283,7 +283,7 @@ public final class CompositeFastList<E>
     @Override
     public void clear()
     {
-        this.lists.each(FastList<E>::clear);
+        this.lists.each(FastList::clear);
         this.size = 0;
     }
 
