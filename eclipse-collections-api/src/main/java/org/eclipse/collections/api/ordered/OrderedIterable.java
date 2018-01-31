@@ -266,7 +266,7 @@ public interface OrderedIterable<T> extends RichIterable<T>
      */
     default <V> OrderedIterable<V> collectWithIndex(ObjectIntToObjectFunction<? super T, ? extends V> function)
     {
-        int[] index = { 0 };
+        int[] index = {0};
         return this.collect(each -> function.valueOf(each, index[0]++));
     }
 
@@ -278,7 +278,7 @@ public interface OrderedIterable<T> extends RichIterable<T>
      */
     default <V, R extends Collection<V>> R collectWithIndex(ObjectIntToObjectFunction<? super T, ? extends V> function, R target)
     {
-        int[] index = { 0 };
+        int[] index = {0};
         return this.collect(each -> function.valueOf(each, index[0]++), target);
     }
 

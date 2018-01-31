@@ -65,7 +65,8 @@ public class MapEntryPredicateTest
         };
         Assert.assertFalse(mapEntryPredicate.negate().accept(this.entry));
         Assert.assertFalse(mapEntryPredicate.negate().accept("1", 1));
-        Assert.assertTrue(mapEntryPredicate.negate().accept(new Map.Entry<String, Integer>() {
+        Assert.assertTrue(mapEntryPredicate.negate().accept(new Map.Entry<String, Integer>()
+        {
             @Override
             public String getKey()
             {

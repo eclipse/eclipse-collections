@@ -189,7 +189,7 @@ public class SingletonListTest extends AbstractMemoryEfficientMutableListTestCas
     {
         Verify.assertEmpty(SingletonListTest.newWith(1).rejectWith(Predicates2.lessThan(), 3));
         Verify.assertContainsAll(SingletonListTest.newWith(1).rejectWith(Predicates2.greaterThan(),
-                        3,
+                3,
                 UnifiedSet.newSet()),
                 1);
     }
@@ -199,7 +199,7 @@ public class SingletonListTest extends AbstractMemoryEfficientMutableListTestCas
     {
         Verify.assertContainsAll(SingletonListTest.newWith(1).collect(String::valueOf), "1");
         Verify.assertContainsAll(SingletonListTest.newWith(1).collect(
-                        String::valueOf,
+                String::valueOf,
                 UnifiedSet.newSet()),
                 "1");
     }

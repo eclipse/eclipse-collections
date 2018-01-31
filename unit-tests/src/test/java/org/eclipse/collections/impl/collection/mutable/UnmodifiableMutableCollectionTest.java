@@ -215,8 +215,8 @@ public class UnmodifiableMutableCollectionTest
 
     @Test
     public void retainAll()
-{
-Verify.assertThrows(UnsupportedOperationException.class, () -> this.unmodifiableCollection.retainAll(FastList.<String>newList().with(METALLICA)));
+    {
+        Verify.assertThrows(UnsupportedOperationException.class, () -> this.unmodifiableCollection.retainAll(FastList.<String>newList().with(METALLICA)));
     }
 
     @Test
@@ -316,7 +316,7 @@ Verify.assertThrows(UnsupportedOperationException.class, () -> this.unmodifiable
     public void forEachWith()
     {
         StringBuilder buf = new StringBuilder();
-    this.unmodifiableCollection.forEachWith((band, param) -> buf.append(param).append('<').append(band).append('>'), "GreatBand");
+        this.unmodifiableCollection.forEachWith((band, param) -> buf.append(param).append('<').append(band).append('>'), "GreatBand");
         Assert.assertEquals("GreatBand<Metallica>GreatBand<Bon Jovi>GreatBand<Europe>GreatBand<Scorpions>", buf.toString());
     }
 

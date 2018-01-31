@@ -50,7 +50,7 @@ public class MultiReaderHashBagTest extends MultiReaderMutableCollectionTestCase
     }
 
     @Override
-    @Test (expected = UnsupportedOperationException.class)
+    @Test(expected = UnsupportedOperationException.class)
     public void largeCollectionStreamToBagMultimap()
     {
         super.largeCollectionStreamToBagMultimap();

@@ -25,13 +25,17 @@ public final class CollectIfProcedure<T, V>
     private final Predicate<? super T> predicate;
     private final Collection<V> collection;
 
-    public CollectIfProcedure(int taskSize, Function<? super T, ? extends V> function,
+    public CollectIfProcedure(
+            int taskSize,
+            Function<? super T, ? extends V> function,
             Predicate<? super T> predicate)
     {
         this(FastList.newList(taskSize), function, predicate);
     }
 
-    public CollectIfProcedure(Collection<V> targetCollection, Function<? super T, ? extends V> function,
+    public CollectIfProcedure(
+            Collection<V> targetCollection,
+            Function<? super T, ? extends V> function,
             Predicate<? super T> predicate)
     {
         this.function = function;

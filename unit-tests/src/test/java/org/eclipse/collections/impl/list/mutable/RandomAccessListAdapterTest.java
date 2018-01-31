@@ -233,7 +233,8 @@ public class RandomAccessListAdapterTest extends AbstractListTestCase
     public void adaptNull()
     {
         Verify.assertThrows(NullPointerException.class, () -> new RandomAccessListAdapter<>(null));
-        Verify.assertThrows(NullPointerException.class, () -> RandomAccessListAdapter.adapt(null)); }
+        Verify.assertThrows(NullPointerException.class, () -> RandomAccessListAdapter.adapt(null));
+    }
 
     @Test
     public void adapt()

@@ -54,20 +54,26 @@ public class Functions0Test
         Verify.assertThrowsWithCause(
                 RuntimeException.class,
                 IOException.class,
-                () -> { Functions0.throwing(
-                        () -> { throw new IOException(); },
-                        RuntimeException::new).value(); });
+                () -> {
+                    Functions0.throwing(
+                            () -> { throw new IOException(); },
+                            RuntimeException::new).value();
+                });
         Verify.assertThrowsWithCause(
                 MyRuntimeException.class,
                 IOException.class,
-                () -> { Functions0.throwing(
-                        () -> { throw new IOException(); },
-                        this::throwMyException).value(); });
+                () -> {
+                    Functions0.throwing(
+                            () -> { throw new IOException(); },
+                            this::throwMyException).value();
+                });
         Verify.assertThrows(
                 NullPointerException.class,
-                () -> { Functions0.throwing(
-                        () -> { throw new NullPointerException(); },
-                        this::throwMyException).value(); });
+                () -> {
+                    Functions0.throwing(
+                            () -> { throw new NullPointerException(); },
+                            this::throwMyException).value();
+                });
     }
 
     private MyRuntimeException throwMyException(Throwable exception)

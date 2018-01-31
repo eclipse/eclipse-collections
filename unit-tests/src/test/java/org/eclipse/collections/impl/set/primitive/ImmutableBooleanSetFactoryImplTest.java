@@ -31,7 +31,7 @@ public class ImmutableBooleanSetFactoryImplTest
     public void with()
     {
         Verify.assertEmpty(BooleanSets.immutable.with(null));
-        Assert.assertEquals(BooleanHashSet.newSetWith(false).toImmutable(), BooleanSets.immutable.with(new boolean[] {false}));
+        Assert.assertEquals(BooleanHashSet.newSetWith(false).toImmutable(), BooleanSets.immutable.with(new boolean[]{false}));
     }
 
     @Test

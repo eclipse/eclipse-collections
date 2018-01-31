@@ -1538,7 +1538,7 @@ public class UnifiedMapWithHashingStrategy<K, V> extends AbstractMutableMap<K, V
                 }
             }
             Object[] newChain = new Object[chain.length + 4];
-            System.arraycopy(chain,  0,  newChain,  0,  chain.length);
+            System.arraycopy(chain, 0, newChain, 0, chain.length);
             this.table[index + 1] = newChain;
             newChain[chain.length] = UnifiedMapWithHashingStrategy.toSentinelIfNull(key);
             newChain[chain.length + 1] = value;
@@ -2574,7 +2574,10 @@ public class UnifiedMapWithHashingStrategy<K, V> extends AbstractMutableMap<K, V
         protected final WeakReference<UnifiedMapWithHashingStrategy<K, V>> holder;
         protected final HashingStrategy<? super K> hashingStrategy;
 
-        protected WeakBoundEntry(K key, V value, WeakReference<UnifiedMapWithHashingStrategy<K, V>> holder,
+        protected WeakBoundEntry(
+                K key,
+                V value,
+                WeakReference<UnifiedMapWithHashingStrategy<K, V>> holder,
                 HashingStrategy<? super K> hashingStrategy)
         {
             this.key = key;

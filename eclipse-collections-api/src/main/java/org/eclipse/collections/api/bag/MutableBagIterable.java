@@ -37,7 +37,7 @@ public interface MutableBagIterable<T> extends Bag<T>, MutableCollection<T>
      * </pre>
      *
      * @return updated number of occurrences.
-     * @throws  IllegalArgumentException if {@code occurrences} are less than 0.
+     * @throws IllegalArgumentException if {@code occurrences} are less than 0.
      */
     int addOccurrences(T item, int occurrences);
 
