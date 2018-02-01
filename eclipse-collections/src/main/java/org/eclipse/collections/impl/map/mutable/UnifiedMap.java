@@ -1765,6 +1765,42 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
     }
 
     @Override
+    public Optional<Pair<K, V>> detectOptional(Predicate2<? super K, ? super V> predicate)
+    {
+        for (int i = 0; i < this.table.length; i += 2)
+        {
+            if (this.table[i] == CHAINED_KEY)
+            {
+                Object[] chainedTable = (Object[]) this.table[i + 1];
+                for (int j = 0; j < chainedTable.length; j += 2)
+                {
+                    if (chainedTable[j] != null)
+                    {
+                        K key = this.nonSentinel(chainedTable[j]);
+                        V value = (V) chainedTable[j + 1];
+                        if (predicate.accept(key, value))
+                        {
+                            return Optional.of(Tuples.pair(key, value));
+                        }
+                    }
+                }
+            }
+            else if (this.table[i] != null)
+            {
+                K key = this.nonSentinel(this.table[i]);
+                V value = (V) this.table[i + 1];
+
+                if (predicate.accept(key, value))
+                {
+                    return Optional.of(Tuples.pair(key, value));
+                }
+            }
+        }
+
+        return Optional.empty();
+    }
+
+    @Override
     public Optional<V> detectOptional(Predicate<? super V> predicate)
     {
         for (int i = 0; i < this.table.length; i += 2)
