@@ -56,7 +56,7 @@ public class Functions0Test
                 IOException.class,
                 () -> { Functions0.throwing(
                         () -> { throw new IOException(); },
-                        (ce) -> new RuntimeException(ce)).value(); });
+                        RuntimeException::new).value(); });
         Verify.assertThrowsWithCause(
                 MyRuntimeException.class,
                 IOException.class,
