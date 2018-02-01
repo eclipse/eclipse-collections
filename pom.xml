@@ -126,8 +126,8 @@
         <scala.version>2.11.7</scala.version>
         <guava.version>21.0</guava.version>
         <trove4j.version>3.0.3</trove4j.version>
-        <checkstyle.version>7.6.1</checkstyle.version>
-        <checkstyle.plugin.version>2.17</checkstyle.plugin.version>
+        <checkstyle.version>8.8</checkstyle.version>
+        <checkstyle.plugin.version>3.0.0</checkstyle.plugin.version>
         <findbugs.plugin.version>3.0.3</findbugs.plugin.version>
         <jacoco.plugin.version>0.7.9</jacoco.plugin.version>
 
