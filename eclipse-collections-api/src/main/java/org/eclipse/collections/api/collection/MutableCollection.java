@@ -240,6 +240,7 @@ public interface MutableCollection<T>
      * MutableCollection&lt;Integer&gt; integers =
      *     List.mutable.with(new Integer(0), new Long(0L), new Double(0.0)).selectInstancesOf(Integer.class);
      * </pre>
+     *
      * @since 2.0
      */
     @Override
@@ -415,9 +416,8 @@ public interface MutableCollection<T>
      * iteration protocols available on {@code MutableCollection}.  Methods which would
      * mutate the underlying collection will throw UnsupportedOperationExceptions.
      *
-     * @see java.util.Collections#unmodifiableCollection(Collection)
-     *
      * @return an unmodifiable view of this collection.
+     * @see java.util.Collections#unmodifiableCollection(Collection)
      * @since 1.0
      */
     MutableCollection<T> asUnmodifiable();
@@ -442,9 +442,8 @@ public interface MutableCollection<T>
      * a synchronized block.  This includes explicit iterators as well as JDK 5 style for loops.
      * <p>
      *
-     * @see java.util.Collections#synchronizedCollection(Collection)
-     *
      * @return a synchronized view of this collection.
+     * @see java.util.Collections#synchronizedCollection(Collection)
      * @since 1.0
      */
     MutableCollection<T> asSynchronized();

@@ -534,6 +534,7 @@ public interface RichIterable<T>
      * RichIterable&lt;Integer&gt; integers =
      *     List.mutable.with(new Integer(0), new Long(0L), new Double(0.0)).selectInstancesOf(Integer.class);
      * </pre>
+     *
      * @since 2.0
      */
     <S> RichIterable<S> selectInstancesOf(Class<S> clazz);
@@ -1814,6 +1815,7 @@ public interface RichIterable<T>
      * MutableObjectLongMap&lt;Integer&gt; map2 =
      *     Lists.mutable.with(1, 2, 3, 4, 5).reduceInPlace(Collectors2.sumByInt(i -> Integer.valueOf(i % 2), Integer::intValue));
      * </pre>
+     *
      * @since 8.0
      */
     default <R, A> R reduceInPlace(Collector<? super T, A, R> collector)
@@ -2104,9 +2106,9 @@ public interface RichIterable<T>
      * Assert.assertEquals("[1]", Lists.mutable.with(1).toString());
      * Assert.assertEquals("[1, 2, 3]", Lists.mutable.with(1, 2, 3).toString());
      * </pre>
-     * @see java.util.AbstractCollection#toString()
      *
      * @return a string representation of this RichIterable
+     * @see java.util.AbstractCollection#toString()
      * @since 1.0
      */
     @Override

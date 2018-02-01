@@ -21,7 +21,6 @@ import org.eclipse.collections.api.block.procedure.Procedure;
  * BigIntegerSummaryStatistics can be used to keep a rolling count, sum, min, max and average of BigInteger values.
  *
  * @see Collectors2#summarizingBigInteger(org.eclipse.collections.api.block.function.Function)
- *
  * @since 8.1
  */
 public class BigIntegerSummaryStatistics implements Procedure<BigInteger>

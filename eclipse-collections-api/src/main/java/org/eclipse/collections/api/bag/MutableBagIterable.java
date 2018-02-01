@@ -30,8 +30,8 @@ public interface MutableBagIterable<T> extends Bag<T>, MutableCollection<T>
      * Add number of {@code occurrences} for an {@code item}. If the {@code item} does not exist, then the {@code item} is added to the bag.
      *
      * <p>
-     *  For Example:
-     *  <pre>
+     * For Example:
+     * <pre>
      * MutableBagIterable&lt;String&gt; names = Bags.mutable.of("A", "B", "B");
      * Assert.assertEquals(4, names.<b>addOccurrences</b>("A", 3));
      * </pre>
