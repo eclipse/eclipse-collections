@@ -53,18 +53,18 @@ public class RejectTest extends AbstractJMHTestRunner
     @Benchmark
     public void serial_lazy_jdk_lambda_negate()
     {
-        Predicate<Integer> predicate1 = each -> (each % 2 == 1);
+        Predicate<Integer> predicate1 = each -> each % 2 == 1;
         List<Integer> evens = this.integersJDK.stream().filter(predicate1.negate()).collect(Collectors.toList());
-        Predicate<Integer> predicate2 = each -> (each % 2 == 0);
+        Predicate<Integer> predicate2 = each -> each % 2 == 0;
         List<Integer> odds = this.integersJDK.stream().filter(predicate2.negate()).collect(Collectors.toList());
     }
 
     @Benchmark
     public void serial_lazy_streams_ec_lambda_negate()
     {
-        Predicate<Integer> predicate1 = each -> (each % 2 == 1);
+        Predicate<Integer> predicate1 = each -> each % 2 == 1;
         List<Integer> evens = this.integersEC.stream().filter(predicate1.negate()).collect(Collectors.toList());
-        Predicate<Integer> predicate2 = each -> (each % 2 == 0);
+        Predicate<Integer> predicate2 = each -> each % 2 == 0;
         List<Integer> odds = this.integersEC.stream().filter(predicate2.negate()).collect(Collectors.toList());
     }
 

@@ -1115,7 +1115,7 @@ public final class Collectors2Test
     public void groupByEach()
     {
         Function<Integer, Iterable<Integer>> groupByFunction =
-                (Integer each) -> SMALL_INTERVAL.collect((Integer i) -> (each * i));
+                (Integer each) -> SMALL_INTERVAL.collect((Integer i) -> each * i);
         MutableListMultimap<Integer, Integer> products = this.smallData.stream()
                 .collect(Collectors2.groupByEach(groupByFunction, Multimaps.mutable.list::empty));
 
@@ -1131,7 +1131,7 @@ public final class Collectors2Test
     public void groupByEachParallel()
     {
         Function<Integer, Iterable<Integer>> groupByFunction =
-                (Integer each) -> SMALL_INTERVAL.collect((Integer i) -> (each * i));
+                (Integer each) -> SMALL_INTERVAL.collect((Integer i) -> each * i);
         MutableListMultimap<Integer, Integer> products = this.smallData.parallelStream()
                 .collect(Collectors2.groupByEach(groupByFunction, Multimaps.mutable.list::empty));
 

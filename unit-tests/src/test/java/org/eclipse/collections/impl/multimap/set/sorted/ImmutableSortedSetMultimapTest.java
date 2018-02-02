@@ -128,7 +128,7 @@ public class ImmutableSortedSetMultimapTest extends AbstractImmutableMultimapTes
         mutableMultimap.putAll("One", FastList.newListWith(4, 3, 2, 1, 1));
         mutableMultimap.putAll("Two", FastList.newListWith(5, 4, 3, 2, 2));
         ImmutableSortedSetMultimap<String, Integer> immutableMap = mutableMultimap.toImmutable();
-        ImmutableSortedSetMultimap<String, Integer> selectedMultimap = immutableMap.selectKeysValues((key, value) -> ("Two".equals(key) && (value % 2 == 0)));
+        ImmutableSortedSetMultimap<String, Integer> selectedMultimap = immutableMap.selectKeysValues((key, value) -> "Two".equals(key) && (value % 2 == 0));
         MutableSortedSetMultimap<String, Integer> expectedMultimap = TreeSortedSetMultimap.newMultimap(Comparators.reverseNaturalOrder());
         expectedMultimap.putAll("Two", FastList.newListWith(4, 2));
         ImmutableSortedSetMultimap<String, Integer> expectedImmutableMultimap = expectedMultimap.toImmutable();
@@ -144,7 +144,7 @@ public class ImmutableSortedSetMultimapTest extends AbstractImmutableMultimapTes
         mutableMultimap.putAll("One", FastList.newListWith(4, 3, 2, 1, 1));
         mutableMultimap.putAll("Two", FastList.newListWith(5, 4, 3, 2, 2));
         ImmutableSortedSetMultimap<String, Integer> immutableMap = mutableMultimap.toImmutable();
-        ImmutableSortedSetMultimap<String, Integer> rejectedMultimap = immutableMap.rejectKeysValues((key, value) -> ("Two".equals(key) || (value % 2 == 0)));
+        ImmutableSortedSetMultimap<String, Integer> rejectedMultimap = immutableMap.rejectKeysValues((key, value) -> "Two".equals(key) || (value % 2 == 0));
         MutableSortedSetMultimap<String, Integer> expectedMultimap = TreeSortedSetMultimap.newMultimap(Comparators.reverseNaturalOrder());
         expectedMultimap.putAll("One", FastList.newListWith(3, 1));
         ImmutableSortedSetMultimap<String, Integer> expectedImmutableMultimap = expectedMultimap.toImmutable();
@@ -162,7 +162,7 @@ public class ImmutableSortedSetMultimapTest extends AbstractImmutableMultimapTes
         mutableMultimap.putAll(3, FastList.newListWith(5, 4, 3, 2, 2));
         mutableMultimap.putAll(4, FastList.newListWith(4, 3, 1));
         ImmutableSortedSetMultimap<Integer, Integer> immutableMap = mutableMultimap.toImmutable();
-        ImmutableSortedSetMultimap<Integer, Integer> selectedMultimap = immutableMap.selectKeysMultiValues((key, values) -> (key % 2 == 0 && Iterate.sizeOf(values) > 3));
+        ImmutableSortedSetMultimap<Integer, Integer> selectedMultimap = immutableMap.selectKeysMultiValues((key, values) -> key % 2 == 0 && Iterate.sizeOf(values) > 3);
         MutableSortedSetMultimap<Integer, Integer> expectedMultimap = TreeSortedSetMultimap.newMultimap(Comparators.reverseNaturalOrder());
         expectedMultimap.putAll(2, FastList.newListWith(5, 4, 3, 2, 2));
         ImmutableSortedSetMultimap<Integer, Integer> expectedImmutableMultimap = expectedMultimap.toImmutable();
@@ -180,7 +180,7 @@ public class ImmutableSortedSetMultimapTest extends AbstractImmutableMultimapTes
         mutableMultimap.putAll(3, FastList.newListWith(5, 4, 2, 2));
         mutableMultimap.putAll(4, FastList.newListWith(4, 3, 1));
         ImmutableSortedSetMultimap<Integer, Integer> immutableMap = mutableMultimap.toImmutable();
-        ImmutableSortedSetMultimap<Integer, Integer> selectedMultimap = immutableMap.rejectKeysMultiValues((key, values) -> (key % 2 == 0 || Iterate.sizeOf(values) > 4));
+        ImmutableSortedSetMultimap<Integer, Integer> selectedMultimap = immutableMap.rejectKeysMultiValues((key, values) -> key % 2 == 0 || Iterate.sizeOf(values) > 4);
         MutableSortedSetMultimap<Integer, Integer> expectedMultimap = TreeSortedSetMultimap.newMultimap(Comparators.reverseNaturalOrder());
         expectedMultimap.putAll(3, FastList.newListWith(5, 4, 2, 2));
         ImmutableSortedSetMultimap<Integer, Integer> expectedImmutableMultimap = expectedMultimap.toImmutable();

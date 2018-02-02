@@ -161,7 +161,7 @@ public abstract class AbstractImmutableMultimapTestCase
     public void selectKeysValues()
     {
         ImmutableMultimap<String, String> multimap = this.<String, String>classUnderTest().newWith("One", "1").newWith("Two", "2");
-        ImmutableMultimap<String, String> selectedMultimap = multimap.selectKeysValues((key, value) -> ("Two".equals(key) && "2".equals(value)));
+        ImmutableMultimap<String, String> selectedMultimap = multimap.selectKeysValues((key, value) -> "Two".equals(key) && "2".equals(value));
         Assert.assertEquals(this.classUnderTest().newWith("Two", "2"), selectedMultimap);
     }
 
@@ -169,7 +169,7 @@ public abstract class AbstractImmutableMultimapTestCase
     public void rejectKeysValues()
     {
         ImmutableMultimap<String, String> multimap = this.<String, String>classUnderTest().newWith("One", "1").newWith("Two", "2");
-        ImmutableMultimap<String, String> rejectedMultimap = multimap.rejectKeysValues((key, value) -> ("Two".equals(key) && "2".equals(value)));
+        ImmutableMultimap<String, String> rejectedMultimap = multimap.rejectKeysValues((key, value) -> "Two".equals(key) && "2".equals(value));
         Assert.assertEquals(this.classUnderTest().newWith("One", "1"), rejectedMultimap);
     }
 

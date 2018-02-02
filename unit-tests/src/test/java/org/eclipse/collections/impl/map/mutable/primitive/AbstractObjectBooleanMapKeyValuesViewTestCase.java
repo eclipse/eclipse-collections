@@ -387,7 +387,7 @@ public abstract class AbstractObjectBooleanMapKeyValuesViewTestCase
     {
         Assert.assertEquals(
                 Bags.mutable.of(5L, 7L, 9L),
-                this.newWith(2, true, 3, false, 4, true).collectWith((argument1, argument2) -> (argument1.getOne() + argument1.getOne() + argument2), 1L).toBag());
+                this.newWith(2, true, 3, false, 4, true).collectWith((argument1, argument2) -> argument1.getOne() + argument1.getOne() + argument2, 1L).toBag());
     }
 
     @Test
@@ -395,7 +395,7 @@ public abstract class AbstractObjectBooleanMapKeyValuesViewTestCase
     {
         Assert.assertEquals(
                 Bags.mutable.of(5L, 7L, 9L),
-                this.newWith(2, true, 3, false, 4, true).collectWith((argument1, argument2) -> (argument1.getOne() + argument1.getOne() + argument2), 1L, HashBag.newBag()));
+                this.newWith(2, true, 3, false, 4, true).collectWith((argument1, argument2) -> argument1.getOne() + argument1.getOne() + argument2, 1L, HashBag.newBag()));
     }
 
     @Test

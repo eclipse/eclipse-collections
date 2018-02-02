@@ -117,7 +117,7 @@ public abstract class AbstractMutableSortedBagMultimapTestCase extends AbstractM
         MutableSortedBagMultimap<String, Integer> multimap = this.newMultimap(Comparators.reverseNaturalOrder());
         multimap.putAll("One", FastList.newListWith(4, 3, 2, 1, 1));
         multimap.putAll("Two", FastList.newListWith(5, 4, 3, 2, 2));
-        MutableSortedBagMultimap<String, Integer> selectedMultimap = multimap.selectKeysValues((key, value) -> ("Two".equals(key) && (value % 2 == 0)));
+        MutableSortedBagMultimap<String, Integer> selectedMultimap = multimap.selectKeysValues((key, value) -> "Two".equals(key) && (value % 2 == 0));
         MutableSortedBagMultimap<String, Integer> expectedMultimap = this.newMultimap(Comparators.reverseNaturalOrder());
         expectedMultimap.putAll("Two", FastList.newListWith(4, 2, 2));
         Verify.assertSortedBagMultimapsEqual(expectedMultimap, selectedMultimap);
@@ -131,7 +131,7 @@ public abstract class AbstractMutableSortedBagMultimapTestCase extends AbstractM
         MutableSortedBagMultimap<String, Integer> multimap = this.newMultimap(Comparators.reverseNaturalOrder());
         multimap.putAll("One", FastList.newListWith(4, 3, 2, 1, 1));
         multimap.putAll("Two", FastList.newListWith(5, 4, 3, 2, 2));
-        MutableSortedBagMultimap<String, Integer> rejectedMultimap = multimap.rejectKeysValues((key, value) -> ("Two".equals(key) || (value % 2 == 0)));
+        MutableSortedBagMultimap<String, Integer> rejectedMultimap = multimap.rejectKeysValues((key, value) -> "Two".equals(key) || (value % 2 == 0));
         MutableSortedBagMultimap<String, Integer> expectedMultimap = this.newMultimap(Comparators.reverseNaturalOrder());
         expectedMultimap.putAll("One", FastList.newListWith(3, 1, 1));
         Verify.assertSortedBagMultimapsEqual(expectedMultimap, rejectedMultimap);
@@ -147,7 +147,7 @@ public abstract class AbstractMutableSortedBagMultimapTestCase extends AbstractM
         multimap.putAll(2, FastList.newListWith(5, 4, 3, 2, 2));
         multimap.putAll(3, FastList.newListWith(5, 4, 3, 2, 2));
         multimap.putAll(4, FastList.newListWith(4, 3, 1));
-        MutableSortedBagMultimap<Integer, Integer> selectedMultimap = multimap.selectKeysMultiValues((key, values) -> (key % 2 == 0 && Iterate.sizeOf(values) > 3));
+        MutableSortedBagMultimap<Integer, Integer> selectedMultimap = multimap.selectKeysMultiValues((key, values) -> key % 2 == 0 && Iterate.sizeOf(values) > 3);
         MutableSortedBagMultimap<Integer, Integer> expectedMultimap = this.newMultimap(Comparators.reverseNaturalOrder());
         expectedMultimap.putAll(2, FastList.newListWith(5, 4, 3, 2, 2));
         Verify.assertSortedBagMultimapsEqual(expectedMultimap, selectedMultimap);
@@ -163,7 +163,7 @@ public abstract class AbstractMutableSortedBagMultimapTestCase extends AbstractM
         multimap.putAll(2, FastList.newListWith(5, 4, 3, 2, 2));
         multimap.putAll(3, FastList.newListWith(4, 3, 1, 1));
         multimap.putAll(4, FastList.newListWith(4, 3, 1));
-        MutableSortedBagMultimap<Integer, Integer> selectedMultimap = multimap.rejectKeysMultiValues((key, values) -> (key % 2 == 0 || Iterate.sizeOf(values) > 4));
+        MutableSortedBagMultimap<Integer, Integer> selectedMultimap = multimap.rejectKeysMultiValues((key, values) -> key % 2 == 0 || Iterate.sizeOf(values) > 4);
         MutableSortedBagMultimap<Integer, Integer> expectedMultimap = this.newMultimap(Comparators.reverseNaturalOrder());
         expectedMultimap.putAll(3, FastList.newListWith(4, 3, 1, 1));
         Verify.assertSortedBagMultimapsEqual(expectedMultimap, selectedMultimap);

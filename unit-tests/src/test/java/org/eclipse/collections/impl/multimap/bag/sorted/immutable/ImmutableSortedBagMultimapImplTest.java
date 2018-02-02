@@ -93,7 +93,7 @@ public class ImmutableSortedBagMultimapImplTest extends AbstractImmutableMultima
         multimap.putAll(3, FastList.newListWith(4, 3, 1, 1));
         multimap.putAll(4, FastList.newListWith(4, 3, 1));
         ImmutableSortedBagMultimap<Integer, Integer> immutableMultimap = multimap.toImmutable();
-        ImmutableSortedBagMultimap<Integer, Integer> selectedMultimap = immutableMultimap.rejectKeysMultiValues((key, values) -> (key % 2 == 0 || Iterate.sizeOf(values) > 4));
+        ImmutableSortedBagMultimap<Integer, Integer> selectedMultimap = immutableMultimap.rejectKeysMultiValues((key, values) -> key % 2 == 0 || Iterate.sizeOf(values) > 4);
         MutableSortedBagMultimap<Integer, Integer> expectedMultimap = TreeBagMultimap.newMultimap(Comparators.reverseNaturalOrder());
         expectedMultimap.putAll(3, FastList.newListWith(4, 3, 1, 1));
         Verify.assertSortedBagMultimapsEqual(expectedMultimap, selectedMultimap);
