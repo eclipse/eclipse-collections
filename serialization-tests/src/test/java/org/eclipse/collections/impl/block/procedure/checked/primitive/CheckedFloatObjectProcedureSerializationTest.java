@@ -20,7 +20,7 @@ public class CheckedFloatObjectProcedureSerializationTest
         private static final long serialVersionUID = 1L;
 
         @Override
-        public void safeValue(float value, Object object) throws Exception
+        public void safeValue(float value, Object object)
         {
         }
     };

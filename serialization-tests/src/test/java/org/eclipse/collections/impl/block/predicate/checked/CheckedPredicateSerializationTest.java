@@ -20,7 +20,7 @@ public class CheckedPredicateSerializationTest
         private static final long serialVersionUID = 1L;
 
         @Override
-        public boolean safeAccept(Object object) throws Exception
+        public boolean safeAccept(Object object)
         {
             return false;
         }

@@ -39,7 +39,7 @@ public class MapEntryPredicateTest
     };
 
     @Test
-    public void accept() throws Exception
+    public void accept()
     {
         MapEntryPredicate<String, Integer> mapEntryPredicate = new MapEntryPredicate<String, Integer>()
         {
@@ -53,7 +53,7 @@ public class MapEntryPredicateTest
     }
 
     @Test
-    public void negate() throws Exception
+    public void negate()
     {
         MapEntryPredicate<String, Integer> mapEntryPredicate = new MapEntryPredicate<String, Integer>()
         {

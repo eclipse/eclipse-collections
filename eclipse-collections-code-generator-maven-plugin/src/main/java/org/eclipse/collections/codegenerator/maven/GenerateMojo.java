@@ -17,7 +17,6 @@ import java.util.List;
 
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
-import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.project.MavenProject;
 import org.eclipse.collections.codegenerator.EclipseCollectionsCodeGenerator;
 
@@ -50,7 +49,7 @@ public class GenerateMojo extends AbstractMojo
     private MavenProject project;
 
     @Override
-    public void execute() throws MojoExecutionException, MojoFailureException
+    public void execute() throws MojoExecutionException
     {
         if (this.skipCodeGen)
         {

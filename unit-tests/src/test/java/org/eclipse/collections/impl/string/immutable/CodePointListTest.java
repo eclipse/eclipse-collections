@@ -10,7 +10,6 @@
 
 package org.eclipse.collections.impl.string.immutable;
 
-import java.io.IOException;
 import java.util.stream.Collectors;
 
 import org.eclipse.collections.api.IntIterable;
@@ -400,19 +399,19 @@ public class CodePointListTest extends AbstractImmutableIntListTestCase
         private final StringBuilder builder = new StringBuilder();
 
         @Override
-        public Appendable append(char c) throws IOException
+        public Appendable append(char c)
         {
             return this.builder.append(c);
         }
 
         @Override
-        public Appendable append(CharSequence csq) throws IOException
+        public Appendable append(CharSequence csq)
         {
             return this.builder.append(csq);
         }
 
         @Override
-        public Appendable append(CharSequence csq, int start, int end) throws IOException
+        public Appendable append(CharSequence csq, int start, int end)
         {
             return this.builder.append(csq, start, end);
         }

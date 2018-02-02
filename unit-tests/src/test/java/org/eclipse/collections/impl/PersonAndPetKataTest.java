@@ -59,7 +59,7 @@ public class PersonAndPetKataTest
     private MutableList<Person> people;
 
     @Before
-    public void setUp() throws Exception
+    public void setUp()
     {
         this.people = Lists.mutable.with(
                 new Person("Mary", "Smith").addPet(PetType.CAT, "Tabby", 2),

@@ -613,7 +613,7 @@ public class CheckedBlocksTest
         CheckedFunction2<Integer, Integer, Integer> checkedFunction2 = new CheckedFunction2<Integer, Integer, Integer>()
         {
             @Override
-            public Integer safeValue(Integer argument1, Integer argument2) throws Exception
+            public Integer safeValue(Integer argument1, Integer argument2)
             {
                 return argument1 + argument2;
             }
