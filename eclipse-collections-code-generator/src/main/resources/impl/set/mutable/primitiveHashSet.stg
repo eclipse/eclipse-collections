@@ -50,7 +50,7 @@ import org.eclipse.collections.impl.set.primitive.Abstract<name>Set;
  *
  * @since 3.0.
  */
-public final class <name>HashSet extends Abstract<name>Set implements Mutable<name>Set, Externalizable
+public class <name>HashSet extends Abstract<name>Set implements Mutable<name>Set, Externalizable
 {
     private static final long serialVersionUID = 1L;
     private static final int OCCUPIED_DATA_RATIO = 2;
