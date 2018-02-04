@@ -107,6 +107,7 @@
         <module>eclipse-collections</module>
         <module>eclipse-collections-testutils</module>
         <module>eclipse-collections-forkjoin</module>
+        <module>eclipse-collections-bean-validation</module>
         <module>unit-tests</module>
         <module>scala-unit-tests</module>
         <module>serialization-tests</module>
