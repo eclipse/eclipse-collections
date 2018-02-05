@@ -85,11 +85,7 @@ public final class SerializeTestHelper
         {
             return readOneObject(bais);
         }
-        catch (ClassNotFoundException e)
-        {
-            Verify.fail("Failed to unmarshal an object", e);
-        }
-        catch (IOException e)
+        catch (ClassNotFoundException | IOException e)
         {
             Verify.fail("Failed to unmarshal an object", e);
         }

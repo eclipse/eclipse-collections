@@ -97,15 +97,7 @@ public final class ReflectionHelper
         {
             return constructor.newInstance(constructorArguments);
         }
-        catch (InstantiationException e)
-        {
-            throw new RuntimeException(e);
-        }
-        catch (IllegalAccessException e)
-        {
-            throw new RuntimeException(e);
-        }
-        catch (InvocationTargetException e)
+        catch (InstantiationException | InvocationTargetException | IllegalAccessException e)
         {
             throw new RuntimeException(e);
         }
@@ -120,19 +112,7 @@ public final class ReflectionHelper
         {
             return aClass.getConstructor().newInstance();
         }
-        catch (InstantiationException e)
-        {
-            throw new RuntimeException(e);
-        }
-        catch (IllegalAccessException e)
-        {
-            throw new RuntimeException(e);
-        }
-        catch (NoSuchMethodException e)
-        {
-            throw new RuntimeException(e);
-        }
-        catch (InvocationTargetException e)
+        catch (InstantiationException | InvocationTargetException | NoSuchMethodException | IllegalAccessException e)
         {
             throw new RuntimeException(e);
         }

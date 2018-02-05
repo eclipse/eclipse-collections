@@ -3693,11 +3693,7 @@ public final class Verify extends Assert
             byte[] bytes = Base64.decodeBase64(expectedBase64Form);
             return new ObjectInputStream(new ByteArrayInputStream(bytes)).readObject();
         }
-        catch (IOException e)
-        {
-            throw new AssertionError(e);
-        }
-        catch (ClassNotFoundException e)
+        catch (IOException | ClassNotFoundException e)
         {
             throw new AssertionError(e);
         }
@@ -3877,23 +3873,7 @@ public final class Verify extends Assert
             Assert.assertNotSame(prefix, object, clone);
             Verify.assertEqualsAndHashCode(prefix, object, clone);
         }
-        catch (IllegalArgumentException e)
-        {
-            throw new AssertionError(e.getLocalizedMessage());
-        }
-        catch (InvocationTargetException e)
-        {
-            throw new AssertionError(e.getLocalizedMessage());
-        }
-        catch (SecurityException e)
-        {
-            throw new AssertionError(e.getLocalizedMessage());
-        }
-        catch (NoSuchMethodException e)
-        {
-            throw new AssertionError(e.getLocalizedMessage());
-        }
-        catch (IllegalAccessException e)
+        catch (IllegalArgumentException | IllegalAccessException | NoSuchMethodException | SecurityException | InvocationTargetException e)
         {
             throw new AssertionError(e.getLocalizedMessage());
         }
@@ -3939,23 +3919,7 @@ public final class Verify extends Assert
             declaredConstructor.newInstance();
             return true;
         }
-        catch (NoSuchMethodException e)
-        {
-            return false;
-        }
-        catch (InvocationTargetException e)
-        {
-            return false;
-        }
-        catch (InstantiationException e)
-        {
-            return false;
-        }
-        catch (IllegalAccessException e)
-        {
-            return false;
-        }
-        catch (AssertionError e)
+        catch (NoSuchMethodException | AssertionError | IllegalAccessException | InstantiationException | InvocationTargetException e)
         {
             return false;
         }

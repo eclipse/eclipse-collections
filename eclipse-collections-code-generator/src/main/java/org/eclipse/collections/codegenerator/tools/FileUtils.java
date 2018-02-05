@@ -87,11 +87,7 @@ public final class FileUtils
                 recurseURL(url, files, templateDirectory);
             }
         }
-        catch (IOException e)
-        {
-            throw new RuntimeException(e);
-        }
-        catch (URISyntaxException e)
+        catch (IOException | URISyntaxException e)
         {
             throw new RuntimeException(e);
         }

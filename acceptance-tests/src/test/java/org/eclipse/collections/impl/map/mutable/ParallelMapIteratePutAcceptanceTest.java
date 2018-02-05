@@ -125,11 +125,7 @@ public class ParallelMapIteratePutAcceptanceTest
                 {
                     future.get();
                 }
-                catch (ExecutionException e)
-                {
-                    throw new RuntimeException("unexpected", e);
-                }
-                catch (InterruptedException e)
+                catch (ExecutionException | InterruptedException e)
                 {
                     throw new RuntimeException("unexpected", e);
                 }
