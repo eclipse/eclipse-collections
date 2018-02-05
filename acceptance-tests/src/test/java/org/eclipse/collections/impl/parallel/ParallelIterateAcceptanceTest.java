@@ -337,8 +337,8 @@ public class ParallelIterateAcceptanceTest
     public void testForEachWithIndexToArrayUsingFixedArrayList()
     {
         Integer[] array = new Integer[10];
-        List<Integer> list = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
         Assert.assertTrue(ArrayIterate.allSatisfy(array, Predicates.isNull()));
+        List<Integer> list = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
         ParallelIterate.forEachWithIndex(list, (each, index) -> array[index] = each, 1, 2);
         Assert.assertArrayEquals(array, list.toArray(new Integer[list.size()]));
     }

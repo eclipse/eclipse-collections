@@ -144,8 +144,8 @@ public class CountTest extends AbstractJMHTestRunner
             Assert.assertEquals(
                     500003500000L,
                     this.integersJDK.stream().mapToLong(each -> each + 3).reduce(0, (accum, each) -> {
-                        long result = accum + each;
                         Assert.assertTrue(each >= 0);
+                        long result = accum + each;
                         return result;
                     }));
 
@@ -164,8 +164,8 @@ public class CountTest extends AbstractJMHTestRunner
             Assert.assertEquals(
                     500003500000L,
                     this.integersJDK.parallelStream().mapToLong(each -> each + 3).reduce(0, (accum, each) -> {
-                        long result = accum + each;
                         Assert.assertTrue(each >= 0);
+                        long result = accum + each;
                         return result;
                     }));
         }

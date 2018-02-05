@@ -238,12 +238,13 @@ public abstract class ImmutableSortedMapTestCase extends MapIterableTestCase
     @Test
     public void get()
     {
-        Integer absentKey = this.size() + 1;
-        String absentValue = String.valueOf(absentKey);
-
         // Absent key behavior
         ImmutableSortedMap<Integer, String> classUnderTest = this.classUnderTest();
+
+        Integer absentKey = this.size() + 1;
         Assert.assertNull(classUnderTest.get(absentKey));
+
+        String absentValue = String.valueOf(absentKey);
         Assert.assertFalse(classUnderTest.containsValue(absentValue));
 
         // Present key behavior

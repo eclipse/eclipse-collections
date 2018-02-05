@@ -44,11 +44,10 @@ public class HppcMutableMapGetTest extends AbstractJMHTestRunner
     @Setup
     public void setUp()
     {
-        Random random = new Random(123456789012345L);
-
         this.elements = new String[this.size];
         this.hppcMap = new ObjectObjectHashMap<>(this.size);
 
+        Random random = new Random(123456789012345L);
         for (int i = 0; i < this.size; i++)
         {
             String element = RandomStringUtils.random(RANDOM_COUNT, 0, 0, false, true, null, random);

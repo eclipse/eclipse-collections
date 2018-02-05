@@ -113,14 +113,15 @@ public class ImmutableEmptySortedMapTest extends ImmutableSortedMapTestCase
     @Test
     public void get()
     {
-        //Cannot call super.get() as map is empty and present key behavior does not exist.
-
-        Integer absentKey = this.size() + 1;
-        String absentValue = String.valueOf(absentKey);
+        // Cannot call super.get() as map is empty and present key behavior does not exist.
 
         // Absent key behavior
         ImmutableSortedMap<Integer, String> classUnderTest = this.classUnderTest();
+
+        Integer absentKey = this.size() + 1;
         Assert.assertNull(classUnderTest.get(absentKey));
+
+        String absentValue = String.valueOf(absentKey);
         Assert.assertFalse(classUnderTest.containsValue(absentValue));
 
         // Still unchanged

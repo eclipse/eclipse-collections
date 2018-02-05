@@ -192,7 +192,6 @@ public class CodePointAdapter extends AbstractIntIterable implements CharSequenc
     @Override
     public CodePointAdapter newWithout(int element)
     {
-        StringBuilder builder = new StringBuilder();
         int indexToRemove = this.indexOf(element);
         if (indexToRemove < 0)
         {
@@ -200,6 +199,7 @@ public class CodePointAdapter extends AbstractIntIterable implements CharSequenc
         }
         int currentIndex = 0;
         int length = this.adapted.length();
+        StringBuilder builder = new StringBuilder();
         for (int i = 0; i < length; )
         {
             int codePoint = this.adapted.codePointAt(i);
