@@ -33,12 +33,12 @@ public class ImmutableObjectBooleanMapFactoryImplTest
     @Test
     public void ofAll()
     {
-        Assert.assertEquals(new ObjectBooleanHashMap().toImmutable(), ObjectBooleanMaps.immutable.ofAll(ObjectBooleanMaps.immutable.of()));
+        Assert.assertEquals(new ObjectBooleanHashMap<>().toImmutable(), ObjectBooleanMaps.immutable.ofAll(ObjectBooleanMaps.immutable.of()));
     }
 
     @Test
     public void withAll()
     {
-        Assert.assertEquals(new ObjectBooleanHashMap().toImmutable(), ObjectBooleanMaps.immutable.withAll(ObjectBooleanMaps.immutable.of()));
+        Assert.assertEquals(new ObjectBooleanHashMap<>().toImmutable(), ObjectBooleanMaps.immutable.withAll(ObjectBooleanMaps.immutable.of()));
     }
 }

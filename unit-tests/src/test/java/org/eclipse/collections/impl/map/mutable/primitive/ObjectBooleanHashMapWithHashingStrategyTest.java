@@ -150,7 +150,7 @@ public class ObjectBooleanHashMapWithHashingStrategyTest extends ObjectBooleanHa
 
         ObjectBooleanHashMapWithHashingStrategy<Person> map = ObjectBooleanHashMapWithHashingStrategy.newWithKeysValues(
                 LAST_NAME_HASHING_STRATEGY, JOHNDOE, true, JANEDOE, false, JOHNSMITH, true, JANESMITH, false);
-        BooleanToObjectFunction f = argument1 -> argument1;
+        BooleanToObjectFunction<Boolean> f = argument1 -> argument1;
         Assert.assertEquals(FastList.newListWith(false, false), map.collect(f));
     }
 

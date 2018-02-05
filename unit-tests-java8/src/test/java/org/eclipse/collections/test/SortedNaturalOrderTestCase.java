@@ -383,7 +383,7 @@ public interface SortedNaturalOrderTestCase extends OrderedIterableTestCase
     @Test
     default void OrderedIterable_collectWithIndex()
     {
-        OrderedIterable<Integer> iterable = (OrderedIterable) this.newWith(1, 2, 2, 3, 3, 3, 4, 4, 4, 4);
+        OrderedIterable<Integer> iterable = (OrderedIterable<Integer>) this.newWith(1, 2, 2, 3, 3, 3, 4, 4, 4, 4);
         Assert.assertEquals(
                 Lists.immutable.with(
                         PrimitiveTuples.pair(Integer.valueOf(1), 0),
@@ -406,7 +406,7 @@ public interface SortedNaturalOrderTestCase extends OrderedIterableTestCase
     @Test
     default void OrderedIterable_collectWithIndexWithTarget()
     {
-        OrderedIterable<Integer> iterable = (OrderedIterable) this.newWith(1, 2, 2, 3, 3, 3, 4, 4, 4, 4);
+        OrderedIterable<Integer> iterable = (OrderedIterable<Integer>) this.newWith(1, 2, 2, 3, 3, 3, 4, 4, 4, 4);
         Assert.assertEquals(
                 Lists.immutable.with(
                         PrimitiveTuples.pair(Integer.valueOf(1), 0),

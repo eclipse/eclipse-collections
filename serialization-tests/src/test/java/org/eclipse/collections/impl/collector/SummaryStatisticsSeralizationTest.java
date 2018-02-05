@@ -54,7 +54,7 @@ public class SummaryStatisticsSeralizationTest
                         + "Sm9yZy5lY2xpcHNlLmNvbGxlY3Rpb25zLmltcGwuY29sbGVjdG9yLlNlcmlhbGl6YWJsZURvdWJs\n"
                         + "ZVN1bW1hcnlTdGF0aXN0aWNzAAAAAAAAAAEMAAB4cHcwAAAAAAAAAAB/8AAAAAAAAP/wAAAAAAAA\n"
                         + "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAeHh4",
-                new SummaryStatistics()
+                new SummaryStatistics<>()
                         .addIntFunction("1", each -> 1)
                         .addLongFunction("1", each -> 1L)
                         .addDoubleFunction("1", each -> 1.0d));
