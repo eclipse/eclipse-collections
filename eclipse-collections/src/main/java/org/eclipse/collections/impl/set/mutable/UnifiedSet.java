@@ -1355,7 +1355,7 @@ public class UnifiedSet<T>
             }
             else if (cur != null)
             {
-                this.addForTrim((T) cur, j, mask);
+                this.addForTrim(cur, j, mask);
             }
         }
         return true;
@@ -1391,7 +1391,7 @@ public class UnifiedSet<T>
         while (true);
     }
 
-    private void addForTrim(T key, int oldIndex, int mask)
+    private void addForTrim(Object key, int oldIndex, int mask)
     {
         int index = oldIndex & mask;
         Object cur = this.table[index];
@@ -1403,9 +1403,8 @@ public class UnifiedSet<T>
         this.chainedAddForTrim(key, index);
     }
 
-    private void chainedAddForTrim(T key, int index)
+    private void chainedAddForTrim(Object key, int index)
     {
-        Object realKey = key;
         if (this.table[index] instanceof ChainedBucket)
         {
             ChainedBucket bucket = (ChainedBucket) this.table[index];
@@ -1413,12 +1412,12 @@ public class UnifiedSet<T>
             {
                 if (bucket.one == null)
                 {
-                    bucket.one = realKey;
+                    bucket.one = key;
                     return;
                 }
                 if (bucket.two == null)
                 {
-                    bucket.two = realKey;
+                    bucket.two = key;
                     return;
                 }
                 if (bucket.three instanceof ChainedBucket)
@@ -1428,15 +1427,15 @@ public class UnifiedSet<T>
                 }
                 if (bucket.three == null)
                 {
-                    bucket.three = realKey;
+                    bucket.three = key;
                     return;
                 }
-                bucket.three = new ChainedBucket(bucket.three, realKey);
+                bucket.three = new ChainedBucket(bucket.three, key);
                 return;
             }
             while (true);
         }
-        ChainedBucket newBucket = new ChainedBucket(this.table[index], realKey);
+        ChainedBucket newBucket = new ChainedBucket(this.table[index], key);
         this.table[index] = newBucket;
     }
 
