@@ -687,7 +687,7 @@ public final class IntInterval
     {
         if (index < 0 || index >= this.size())
         {
-            throw new IndexOutOfBoundsException(name + ": " + index + ' ' + this.toString());
+            throw new IndexOutOfBoundsException(name + ": " + index + ' ' + this);
         }
     }
 
