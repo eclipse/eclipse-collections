@@ -14,11 +14,9 @@ import java.util.Iterator;
 
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.Bag;
-import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
-import org.eclipse.collections.api.block.predicate.primitive.IntPredicate;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
@@ -79,9 +77,6 @@ public abstract class AbstractHashBag<T> extends AbstractMutableBag<T>
     }
 
     protected abstract int computeHashCode(T item);
-
-    @Override
-    public abstract MutableBag<T> selectByOccurrences(IntPredicate predicate);
 
     @Override
     protected RichIterable<T> getKeysView()
