@@ -41,8 +41,8 @@ public final class Collectors2Test
     public static final Interval SMALL_INTERVAL = Interval.oneTo(5);
     public static final Interval LARGE_INTERVAL = Interval.oneTo(20000);
     public static final Integer HALF_SIZE = Integer.valueOf(LARGE_INTERVAL.size() / 2);
-    private final List<Integer> smallData = new ArrayList<Integer>(SMALL_INTERVAL);
-    private final List<Integer> bigData = new ArrayList<Integer>(LARGE_INTERVAL);
+    private final List<Integer> smallData = new ArrayList<>(SMALL_INTERVAL);
+    private final List<Integer> bigData = new ArrayList<>(LARGE_INTERVAL);
 
     @Test
     public void makeString0()

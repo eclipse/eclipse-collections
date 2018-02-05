@@ -19,14 +19,14 @@ public class BooleanCaseFunctionTest
     @Test
     public void noopCase()
     {
-        BooleanCaseFunction<Boolean> function = new BooleanCaseFunction<Boolean>();
+        BooleanCaseFunction<Boolean> function = new BooleanCaseFunction<>();
         Assert.assertNull(function.valueOf(true));
     }
 
     @Test
     public void basicCase()
     {
-        BooleanCaseFunction<Boolean> function = new BooleanCaseFunction<Boolean>();
+        BooleanCaseFunction<Boolean> function = new BooleanCaseFunction<>();
         function.addCase(value -> value, Boolean::valueOf);
         Assert.assertEquals(Boolean.valueOf(true), function.valueOf(true));
     }
@@ -34,7 +34,7 @@ public class BooleanCaseFunctionTest
     @Test
     public void defaultValue()
     {
-        BooleanCaseFunction<String> function = new BooleanCaseFunction<String>(e -> "Yow!")
+        BooleanCaseFunction<String> function = new BooleanCaseFunction<>(e -> "Yow!")
                 .addCase(e -> e, e -> "Patience, grasshopper");
 
         Assert.assertEquals("Yow!", function.valueOf(false));
