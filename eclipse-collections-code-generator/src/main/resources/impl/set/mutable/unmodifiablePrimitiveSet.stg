@@ -30,7 +30,7 @@ import org.eclipse.collections.impl.collection.mutable.primitive.AbstractUnmodif
  *
  * @since 3.1.
  */
-public final class Unmodifiable<name>Set
+public class Unmodifiable<name>Set
         extends AbstractUnmodifiable<name>Collection
         implements Mutable<name>Set
 {

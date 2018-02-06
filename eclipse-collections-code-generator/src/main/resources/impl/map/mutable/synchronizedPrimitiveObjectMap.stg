@@ -130,7 +130,7 @@ import org.eclipse.collections.api.tuple.primitive.<name>ObjectPair;
  * @see MutableMap#asSynchronized()
  * @since 3.1.
  */
-public final class Synchronized<name>ObjectMap\<V>
+public class Synchronized<name>ObjectMap\<V>
         implements Mutable<name>ObjectMap\<V>, Serializable
 {
     private static final long serialVersionUID = 1L;

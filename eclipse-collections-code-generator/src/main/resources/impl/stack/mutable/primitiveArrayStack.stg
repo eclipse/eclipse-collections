@@ -40,7 +40,7 @@ import org.eclipse.collections.impl.stack.mutable.ArrayStack;
  * <name>ArrayStack is similar to {@link ArrayStack}, and is memory-optimized for <type> primitives.
  * This file was automatically generated from template file primitiveArrayStack.stg.
  */
-public final class <name>ArrayStack extends Abstract<name>Stack
+public class <name>ArrayStack extends Abstract<name>Stack
         implements Mutable<name>Stack, Externalizable
 {
     private static final long serialVersionUID = 1L;

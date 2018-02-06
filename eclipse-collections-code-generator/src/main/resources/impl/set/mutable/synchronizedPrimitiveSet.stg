@@ -41,7 +41,7 @@ import org.eclipse.collections.impl.lazy.primitive.Lazy<name>IterableAdapter;
  * @see MutableSet#asSynchronized()
  * @since 3.1.
  */
-public final class Synchronized<name>Set
+public class Synchronized<name>Set
         extends AbstractSynchronized<name>Collection
         implements Mutable<name>Set
 {

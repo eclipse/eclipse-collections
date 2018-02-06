@@ -69,7 +69,7 @@ import org.eclipse.collections.api.tuple.primitive.<name1><name2>Pair;
  * @see MutableMap#asSynchronized()
  * @since 3.1.
  */
-public final class Synchronized<name1><name2>Map
+public class Synchronized<name1><name2>Map
         implements Mutable<name1><name2>Map, Serializable
 {
     private static final long serialVersionUID = 1L;
