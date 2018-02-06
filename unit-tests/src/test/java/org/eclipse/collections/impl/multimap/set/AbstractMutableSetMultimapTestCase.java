@@ -61,10 +61,11 @@ public abstract class AbstractMutableSetMultimapTestCase extends AbstractMutable
     @Override
     protected abstract <V> MutableSet<V> createCollection(V... args);
 
+    @Test
     @Override
-    public void testPutAllPairs()
+    public void putAllPairs()
     {
-        super.testPutAllPairs();
+        super.putAllPairs();
 
         MutableMultimap<Integer, String> multimap = this.newMultimapWithKeysValues(1, "One", 2, "2");
         MutableList<Pair<Integer, String>> pairs = Lists.mutable.of(Tuples.pair(1, "One"));

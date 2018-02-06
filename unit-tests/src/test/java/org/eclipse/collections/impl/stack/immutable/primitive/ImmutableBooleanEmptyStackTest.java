@@ -104,6 +104,7 @@ public class ImmutableBooleanEmptyStackTest extends AbstractImmutableBooleanStac
         Verify.assertEmpty(this.newWith());
     }
 
+    @Test
     @Override
     public void testEquals()
     {
