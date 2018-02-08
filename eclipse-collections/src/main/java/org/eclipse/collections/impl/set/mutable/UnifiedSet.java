@@ -1371,17 +1371,17 @@ public class UnifiedSet<T>
     {
         do
         {
-            this.addForTrim((T) bucket.zero, oldIndex, mask);
+            this.addForTrim(bucket.zero, oldIndex, mask);
             if (bucket.one == null)
             {
                 return;
             }
-            this.addForTrim((T) bucket.one, oldIndex, mask);
+            this.addForTrim(bucket.one, oldIndex, mask);
             if (bucket.two == null)
             {
                 return;
             }
-            this.addForTrim((T) bucket.two, oldIndex, mask);
+            this.addForTrim(bucket.two, oldIndex, mask);
             if (bucket.three == null)
             {
                 return;
@@ -1391,7 +1391,7 @@ public class UnifiedSet<T>
                 bucket = (ChainedBucket) bucket.three;
                 continue;
             }
-            this.addForTrim((T) bucket.three, oldIndex, mask);
+            this.addForTrim(bucket.three, oldIndex, mask);
             return;
         }
         while (true);
