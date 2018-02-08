@@ -387,7 +387,7 @@ public abstract class AbstractObjectBooleanMapKeyValuesViewTestCase
     {
         Assert.assertEquals(
                 Bags.mutable.of(5L, 7L, 9L),
-                this.newWith(2, true, 3, false, 4, true).collectWith((argument1, argument2) -> (argument1.getOne() + argument1.getOne() + argument2), 1L).toBag());
+                this.newWith(2, true, 3, false, 4, true).collectWith((argument1, argument2) -> argument1.getOne() + argument1.getOne() + argument2, 1L).toBag());
     }
 
     @Test
@@ -395,7 +395,7 @@ public abstract class AbstractObjectBooleanMapKeyValuesViewTestCase
     {
         Assert.assertEquals(
                 Bags.mutable.of(5L, 7L, 9L),
-                this.newWith(2, true, 3, false, 4, true).collectWith((argument1, argument2) -> (argument1.getOne() + argument1.getOne() + argument2), 1L, HashBag.newBag()));
+                this.newWith(2, true, 3, false, 4, true).collectWith((argument1, argument2) -> argument1.getOne() + argument1.getOne() + argument2, 1L, HashBag.newBag()));
     }
 
     @Test
@@ -626,9 +626,9 @@ public abstract class AbstractObjectBooleanMapKeyValuesViewTestCase
         RichIterable<ObjectBooleanPair<Integer>> pairs = this.newWith(5, false, 1, true, 2, true);
         MutableSortedSet<ObjectBooleanPair<Integer>> set = pairs.toSortedSet(Comparators.reverseNaturalOrder());
         Verify.assertSortedSetsEqual(TreeSortedSet.newSetWith(Comparators.reverseNaturalOrder(),
-                        PrimitiveTuples.pair(Integer.valueOf(5), false),
-                        PrimitiveTuples.pair(Integer.valueOf(2), true),
-                        PrimitiveTuples.pair(Integer.valueOf(1), true)),
+                PrimitiveTuples.pair(Integer.valueOf(5), false),
+                PrimitiveTuples.pair(Integer.valueOf(2), true),
+                PrimitiveTuples.pair(Integer.valueOf(1), true)),
                 set);
     }
 
@@ -781,8 +781,8 @@ public abstract class AbstractObjectBooleanMapKeyValuesViewTestCase
     {
         RichIterable<ObjectBooleanPair<Integer>> collection = this.newWith(1, true, 2, false, 3, true);
         Assert.assertEquals(Bags.immutable.of(FastList.newListWith(PrimitiveTuples.pair(Integer.valueOf(1), true)),
-                        FastList.newListWith(PrimitiveTuples.pair(Integer.valueOf(2), false)),
-                        FastList.newListWith(PrimitiveTuples.pair(Integer.valueOf(3), true))),
+                FastList.newListWith(PrimitiveTuples.pair(Integer.valueOf(2), false)),
+                FastList.newListWith(PrimitiveTuples.pair(Integer.valueOf(3), true))),
                 collection.chunk(1).toBag());
     }
 

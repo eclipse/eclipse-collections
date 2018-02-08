@@ -20,7 +20,7 @@ public class CheckedDoubleObjectProcedureSerializationTest
         private static final long serialVersionUID = 1L;
 
         @Override
-        public void safeValue(double value, Object object) throws Exception
+        public void safeValue(double value, Object object)
         {
         }
     };

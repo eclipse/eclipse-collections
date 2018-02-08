@@ -480,7 +480,7 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
             return list;
         };
         MutableList<T> state = new CompositeFastList<>();
-        this.collectCombine(map, MutableList<T>::addAll, state);
+        this.collectCombine(map, MutableList::addAll, state);
         return state;
     }
 

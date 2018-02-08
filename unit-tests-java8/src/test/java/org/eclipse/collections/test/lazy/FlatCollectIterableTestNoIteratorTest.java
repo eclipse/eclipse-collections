@@ -47,7 +47,7 @@ public class FlatCollectIterableTestNoIteratorTest implements LazyNoIteratorTest
 
         RichIterable<Integer> iterable3 =
                 new FlatCollectIterable<>(new FastListNoIterator<String>().with("1", "null", "3"),
-                        each -> FastList.<Integer>newListWith("null".equals(each) ? null : Integer.valueOf(each)));
+                        each -> FastList.newListWith("null".equals(each) ? null : Integer.valueOf(each)));
         assertThrows(NullPointerException.class, () -> iterable3.detectOptional(Objects::isNull));
         assertThrows(NullPointerException.class, () -> iterable3.detectWithOptional((i, object) -> i == object, null));
     }

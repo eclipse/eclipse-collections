@@ -125,7 +125,7 @@ public interface ImmutableStack<T> extends StackIterable<T>
     @Override
     default <V> ImmutableStack<V> collectWithIndex(ObjectIntToObjectFunction<? super T, ? extends V> function)
     {
-        int[] index = { 0 };
+        int[] index = {0};
         return this.collect(each -> function.valueOf(each, index[0]++));
     }
 

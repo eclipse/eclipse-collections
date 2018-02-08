@@ -360,11 +360,11 @@ abstract class AbstractImmutableSortedBag<T>
     @Override
     public ImmutableSortedSet<Pair<T, Integer>> zipWithIndex()
     {
-        Comparator<? super T> comparator = (Comparator<? super T>) (this.comparator() == null ? Comparators.naturalOrder() : this.comparator());
+        Comparator<? super T> comparator = this.comparator() == null ? Comparators.naturalOrder() : this.comparator();
         TreeSortedSet<Pair<T, Integer>> pairs = TreeSortedSet.newSet(
-                Comparators.chain(
-                        Comparators.<Pair<T, Integer>, T>byFunction(Functions.<T>firstOfPair(), (Comparator<T>) comparator),
-                        Comparators.<Pair<T, Integer>, Integer>byFunction(Functions.<Integer>secondOfPair())));
+                Comparators.<Pair<T, Integer>>chain(
+                        Comparators.byFunction(Functions.firstOfPair(), comparator),
+                        Comparators.byFunction(Functions.secondOfPair())));
         return Iterate.zipWithIndex(this, pairs).toImmutable();
     }
 

@@ -41,7 +41,7 @@ public class BooleanCaseProcedureTest
         MutableBooleanList list = BooleanLists.mutable.with(true, false);
         BooleanCaseProcedure procedure =
                 new BooleanCaseProcedure(defaultList::add)
-                        .addCase(value -> value , ifOneList::add);
+                        .addCase(value -> value, ifOneList::add);
         list.each(procedure);
         Assert.assertEquals(BooleanLists.mutable.with(true), ifOneList);
         Assert.assertEquals(BooleanLists.mutable.with(false), defaultList);

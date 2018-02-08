@@ -127,7 +127,7 @@ public class SerializableDoubleSummaryStatistics
     }
 
     @Override
-    public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
+    public void readExternal(ObjectInput in) throws IOException
     {
         if (COUNT == null)
         {

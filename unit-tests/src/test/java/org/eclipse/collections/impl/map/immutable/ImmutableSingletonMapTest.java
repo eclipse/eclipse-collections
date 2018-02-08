@@ -57,7 +57,7 @@ public class ImmutableSingletonMapTest extends ImmutableMemoryEfficientMapTestCa
     public void equalsAndHashCodeWithNulls()
     {
         ImmutableMap<Integer, String> map1 = new ImmutableSingletonMap<>(null, null);
-        MutableMap<Integer, String> map2 = Maps.fixedSize.of((Integer) null, (String) null);
+        MutableMap<Integer, String> map2 = Maps.fixedSize.of(null, null);
         Verify.assertEqualsAndHashCode(map1, map2);
     }
 

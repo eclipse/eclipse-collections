@@ -20,7 +20,7 @@ public class CheckedFunction2SerializationTest
         private static final long serialVersionUID = 1L;
 
         @Override
-        public Object safeValue(Object argument1, Object argument2) throws Exception
+        public Object safeValue(Object argument1, Object argument2)
         {
             return null;
         }

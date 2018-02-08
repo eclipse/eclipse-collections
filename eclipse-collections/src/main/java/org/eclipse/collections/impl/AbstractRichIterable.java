@@ -586,9 +586,9 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
      * Assert.assertEquals("[1]", Lists.mutable.with(1).toString());
      * Assert.assertEquals("[1, 2, 3]", Lists.mutable.with(1, 2, 3).toString());
      * </pre>
-     * @see java.util.AbstractCollection#toString()
      *
      * @return a string representation of this collection.
+     * @see java.util.AbstractCollection#toString()
      */
     @Override
     public String toString()

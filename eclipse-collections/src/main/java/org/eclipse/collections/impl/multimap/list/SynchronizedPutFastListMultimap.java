@@ -57,7 +57,7 @@ public final class SynchronizedPutFastListMultimap<K, V>
     public SynchronizedPutFastListMultimap(Pair<K, V>... pairs)
     {
         this();
-        ArrayIterate.forEach(pairs, pair -> SynchronizedPutFastListMultimap.this.put(pair.getOne(), pair.getTwo()));
+        ArrayIterate.forEach(pairs, pair -> this.put(pair.getOne(), pair.getTwo()));
     }
 
     public SynchronizedPutFastListMultimap(Iterable<Pair<K, V>> inputIterable)

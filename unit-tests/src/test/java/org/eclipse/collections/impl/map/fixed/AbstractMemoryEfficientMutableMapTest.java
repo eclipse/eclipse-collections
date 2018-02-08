@@ -886,13 +886,13 @@ public abstract class AbstractMemoryEfficientMutableMapTest
     {
         MutableMap<String, Integer> map = this.newMapWithKeysValues("1", 1, "2", 2, "3", 3);
 
-        NegativeIntervalFunction function = new NegativeIntervalFunction();
         MutableMultimap<Integer, Integer> expected = FastListMultimap.newMultimap();
         for (int i = 1; i < map.size(); i++)
         {
             expected.putAll(-i, Interval.fromTo(i, map.size()));
         }
 
+        NegativeIntervalFunction function = new NegativeIntervalFunction();
         Multimap<Integer, Integer> actual = map.groupByEach(function);
         expected.forEachKey(each ->
         {

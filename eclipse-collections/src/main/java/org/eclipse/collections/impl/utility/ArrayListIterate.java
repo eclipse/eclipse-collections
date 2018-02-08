@@ -446,8 +446,11 @@ public final class ArrayListIterate
         return RandomAccessListIterate.collectByte(list, byteFunction, target);
     }
 
-    private static <T, R extends MutableByteCollection> R collectByteFromInternalArray(ArrayList<T> source, ByteFunction<?
-            super T> byteFunction, int elementsToCollect, R target)
+    private static <T, R extends MutableByteCollection> R collectByteFromInternalArray(
+            ArrayList<T> source,
+            ByteFunction<? super T> byteFunction,
+            int elementsToCollect,
+            R target)
     {
         T[] elements = ArrayListIterate.getInternalArray(source);
         for (int i = 0; i < elementsToCollect; i++)
@@ -486,8 +489,11 @@ public final class ArrayListIterate
         return RandomAccessListIterate.collectChar(list, charFunction, target);
     }
 
-    private static <T, R extends MutableCharCollection> R collectCharFromInternalArray(ArrayList<T> source, CharFunction<?
-            super T> charFunction, int elementsToCollect, R target)
+    private static <T, R extends MutableCharCollection> R collectCharFromInternalArray(
+            ArrayList<T> source,
+            CharFunction<? super T> charFunction,
+            int elementsToCollect,
+            R target)
     {
         T[] elements = ArrayListIterate.getInternalArray(source);
         for (int i = 0; i < elementsToCollect; i++)
@@ -526,8 +532,11 @@ public final class ArrayListIterate
         return RandomAccessListIterate.collectDouble(list, doubleFunction, target);
     }
 
-    private static <T, R extends MutableDoubleCollection> R collectDoubleFromInternalArray(ArrayList<T> source, DoubleFunction<?
-            super T> doubleFunction, int elementsToCollect, R target)
+    private static <T, R extends MutableDoubleCollection> R collectDoubleFromInternalArray(
+            ArrayList<T> source,
+            DoubleFunction<? super T> doubleFunction,
+            int elementsToCollect,
+            R target)
     {
         T[] elements = ArrayListIterate.getInternalArray(source);
         for (int i = 0; i < elementsToCollect; i++)
@@ -566,8 +575,11 @@ public final class ArrayListIterate
         return RandomAccessListIterate.collectFloat(list, floatFunction, target);
     }
 
-    private static <T, R extends MutableFloatCollection> R collectFloatFromInternalArray(ArrayList<T> source, FloatFunction<?
-            super T> floatFunction, int elementsToCollect, R target)
+    private static <T, R extends MutableFloatCollection> R collectFloatFromInternalArray(
+            ArrayList<T> source,
+            FloatFunction<? super T> floatFunction,
+            int elementsToCollect,
+            R target)
     {
         T[] elements = ArrayListIterate.getInternalArray(source);
         for (int i = 0; i < elementsToCollect; i++)
@@ -645,8 +657,11 @@ public final class ArrayListIterate
         return RandomAccessListIterate.collectLong(list, longFunction, target);
     }
 
-    private static <T, R extends MutableLongCollection> R collectLongFromInternalArray(ArrayList<T> source, LongFunction<?
-            super T> longFunction, int elementsToCollect, R target)
+    private static <T, R extends MutableLongCollection> R collectLongFromInternalArray(
+            ArrayList<T> source,
+            LongFunction<? super T> longFunction,
+            int elementsToCollect,
+            R target)
     {
         T[] elements = ArrayListIterate.getInternalArray(source);
         for (int i = 0; i < elementsToCollect; i++)
@@ -685,8 +700,11 @@ public final class ArrayListIterate
         return RandomAccessListIterate.collectShort(list, shortFunction, target);
     }
 
-    private static <T, R extends MutableShortCollection> R collectShortFromInternalArray(ArrayList<T> source, ShortFunction<?
-            super T> shortFunction, int elementsToCollect, R target)
+    private static <T, R extends MutableShortCollection> R collectShortFromInternalArray(
+            ArrayList<T> source,
+            ShortFunction<? super T> shortFunction,
+            int elementsToCollect,
+            R target)
     {
         T[] elements = ArrayListIterate.getInternalArray(source);
         for (int i = 0; i < elementsToCollect; i++)

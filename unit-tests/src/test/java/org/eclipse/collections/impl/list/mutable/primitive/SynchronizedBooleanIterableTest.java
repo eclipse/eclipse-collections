@@ -82,6 +82,7 @@ public class SynchronizedBooleanIterableTest extends AbstractBooleanIterableTest
         //Testing equals() is not applicable.
     }
 
+    @Test
     @Override
     public void testHashCode()
     {

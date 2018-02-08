@@ -108,11 +108,7 @@ public class ConcurrentHashMapUnsafe<K, V>
             Class<?> mapClass = ConcurrentHashMapUnsafe.class;
             SIZE_OFFSET = UNSAFE.objectFieldOffset(mapClass.getDeclaredField("size"));
         }
-        catch (NoSuchFieldException e)
-        {
-            throw new AssertionError(e);
-        }
-        catch (SecurityException e)
+        catch (NoSuchFieldException | SecurityException e)
         {
             throw new AssertionError(e);
         }

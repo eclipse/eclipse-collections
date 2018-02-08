@@ -187,8 +187,9 @@ public class TreeBagMultimapTest extends AbstractMutableSortedBagMultimapTestCas
         Verify.assertListsEqual(FastList.newListWith(10, 9, 8), deserialized.get(3).toList());
     }
 
+    @Test
     @Override
-    public void testClear()
+    public void clear()
     {
         MutableMultimap<Integer, String> multimap = this.newMultimapWithKeysValues(1, "One", 2, "Two", 3, "Three");
         multimap.clear();

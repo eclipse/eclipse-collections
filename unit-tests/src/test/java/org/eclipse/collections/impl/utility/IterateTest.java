@@ -577,12 +577,14 @@ public class IterateTest
     {
         MutableList<Integer> list = Lists.mutable.of(1, 2, 2, 3, 3, 3);
 
-        Pair[] expectedPairs = {Tuples.pair("Key1", "1"),
+        Pair[] expectedPairs = {
+                Tuples.pair("Key1", "1"),
                 Tuples.pair("Key2", "2"),
                 Tuples.pair("Key2", "2"),
                 Tuples.pair("Key3", "3"),
                 Tuples.pair("Key3", "3"),
-                Tuples.pair("Key3", "3")};
+                Tuples.pair("Key3", "3")
+        };
         Function<Integer, String> keyFunction = each -> "Key" + each;
         Function<Integer, String> valueFunction = String::valueOf;
         MutableListMultimap<String, String> actualMultimap1 = Iterate.groupByAndCollect(list, keyFunction, valueFunction, Multimaps.mutable.list.empty());
@@ -824,7 +826,8 @@ public class IterateTest
     {
         MutableList<Integer> list = Lists.mutable.of(1, 2, 2, 3, 3, 3);
 
-        Pair[] expectedPairs = {Tuples.pair("Key1", "1"),
+        Pair[] expectedPairs = {
+                Tuples.pair("Key1", "1"),
                 Tuples.pair("Key1", "1"),
                 Tuples.pair("Key2", "1"),
                 Tuples.pair("Key2", "2"),
@@ -835,7 +838,8 @@ public class IterateTest
                 Tuples.pair("Key3", "1"),
                 Tuples.pair("Key3", "3"),
                 Tuples.pair("Key3", "1"),
-                Tuples.pair("Key3", "3")};
+                Tuples.pair("Key3", "3")
+        };
 
         Function<Integer, String> keyFunction = each -> "Key" + each;
         Function<Integer, Iterable<String>> valuesFunction = each -> Lists.mutable.of("1", String.valueOf(each));

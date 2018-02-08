@@ -63,7 +63,7 @@ public abstract class AbstractMutableMultimapTestCase extends AbstractMultimapTe
             K key4, V value4);
 
     @Test
-    public void testPutAndGrowMultimap()
+    public void putAndGrowMultimap()
     {
         MutableMultimap<Integer, Integer> multimap = this.newMultimap();
         multimap.put(1, 1);
@@ -73,7 +73,7 @@ public abstract class AbstractMutableMultimapTestCase extends AbstractMultimapTe
     }
 
     @Test
-    public void testAddAndGrowMultimap()
+    public void addAndGrowMultimap()
     {
         MutableMultimap<Integer, String> multimap = this.newMultimap();
         Pair<Integer, String> pair1 = Tuples.pair(1, "One");
@@ -92,7 +92,7 @@ public abstract class AbstractMutableMultimapTestCase extends AbstractMultimapTe
     }
 
     @Test
-    public void testClear()
+    public void clear()
     {
         MutableMultimap<Integer, Object> multimap =
                 this.newMultimapWithKeysValues(1, "One", 2, "Two", 3, "Three");
@@ -102,7 +102,7 @@ public abstract class AbstractMutableMultimapTestCase extends AbstractMultimapTe
     }
 
     @Test
-    public void testRemoveObject()
+    public void removeObject()
     {
         MutableMultimap<String, Integer> multimap =
                 this.newMultimapWithKeysValues("One", 1, "Two", 2, "Three", 3);
@@ -121,7 +121,7 @@ public abstract class AbstractMutableMultimapTestCase extends AbstractMultimapTe
     }
 
     @Test
-    public void testPutAll()
+    public void putAll()
     {
         MutableMultimap<Integer, String> multimap = this.newMultimapWithKeysValues(1, "One", 2, "2");
         Multimap<Integer, String> toAdd = this.newMultimapWithKeysValues(2, "Two", 3, "Three");
@@ -135,7 +135,7 @@ public abstract class AbstractMutableMultimapTestCase extends AbstractMultimapTe
     }
 
     @Test
-    public void testPutAllPairs()
+    public void putAllPairs()
     {
         MutableMultimap<Integer, String> multimap1 = this.newMultimapWithKeysValues(1, "One", 2, "2");
         MutableList<Pair<Integer, String>> pairs1 = Lists.mutable.of(Tuples.pair(1, "One"), Tuples.pair(2, "Two"), Tuples.pair(3, "Three"));
@@ -172,7 +172,7 @@ public abstract class AbstractMutableMultimapTestCase extends AbstractMultimapTe
     }
 
     @Test
-    public void testPutAllFromCollection()
+    public void putAllFromCollection()
     {
         MutableMultimap<Integer, String> multimap = this.newMultimapWithKeysValues(1, "One", 2, "Two");
         Assert.assertTrue(multimap.putAll(1, Lists.fixedSize.of("Three", "Four")));
@@ -182,7 +182,7 @@ public abstract class AbstractMutableMultimapTestCase extends AbstractMultimapTe
     }
 
     @Test
-    public void testPutAllFromIterable()
+    public void putAllFromIterable()
     {
         MutableMultimap<Integer, String> multimap = this.newMultimapWithKeysValues(1, "One", 2, "Two");
         Assert.assertTrue(multimap.putAll(1, Lists.fixedSize.of("Three", "Four").asLazy()));
@@ -190,7 +190,7 @@ public abstract class AbstractMutableMultimapTestCase extends AbstractMultimapTe
     }
 
     @Test
-    public void testRemoveKey()
+    public void removeKey()
     {
         MutableMultimap<Integer, String> multimap = this.newMultimapWithKeysValues(1, "1", 2, "Two");
 
@@ -206,7 +206,7 @@ public abstract class AbstractMutableMultimapTestCase extends AbstractMultimapTe
     }
 
     @Test
-    public void testContainsValue()
+    public void containsValue()
     {
         MutableMultimap<Integer, String> multimap = this.newMultimapWithKeysValues(1, "One", 2, "Two");
         Assert.assertTrue(multimap.containsValue("Two"));
@@ -214,7 +214,7 @@ public abstract class AbstractMutableMultimapTestCase extends AbstractMultimapTe
     }
 
     @Test
-    public void testGetIfAbsentPut()
+    public void getIfAbsentPut()
     {
         MutableMultimap<Integer, String> multimap = this.newMultimapWithKeysValues(1, "1", 2, "2", 3, "3");
         Verify.assertIterableEmpty(multimap.get(4));
@@ -223,7 +223,7 @@ public abstract class AbstractMutableMultimapTestCase extends AbstractMultimapTe
     }
 
     @Test
-    public void testRemove()
+    public void remove()
     {
         MutableMultimap<Integer, Integer> map = this.newMultimapWithKeysValues(1, 1, 1, 2, 3, 3, 4, 5);
         Assert.assertFalse(map.remove(4, 4));
@@ -235,7 +235,7 @@ public abstract class AbstractMutableMultimapTestCase extends AbstractMultimapTe
     }
 
     @Test
-    public void testReplaceValues()
+    public void replaceValues()
     {
         MutableMultimap<String, Integer> multimap =
                 this.newMultimapWithKeysValues("One", 1, "Two", 2, "Three", 3);
@@ -249,7 +249,7 @@ public abstract class AbstractMutableMultimapTestCase extends AbstractMultimapTe
     }
 
     @Test
-    public void testReplaceValues_absent_key()
+    public void replaceValues_absent_key()
     {
         MutableMultimap<String, Integer> multimap =
                 this.newMultimapWithKeysValues("One", 1, "Two", 2, "Three", 3);

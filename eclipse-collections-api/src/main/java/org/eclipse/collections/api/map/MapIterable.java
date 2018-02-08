@@ -251,9 +251,9 @@ public interface MapIterable<K, V> extends RichIterable<V>
      * <pre>
      * Assert.assertEquals("{1=1, 2=2, 3=3}", Maps.mutable.with(1, 1, 2, 2, 3, 3).toString());
      * </pre>
-     * @see java.util.AbstractMap#toString()
      *
      * @return a string representation of this MapIterable
+     * @see java.util.AbstractMap#toString()
      */
     @Override
     String toString();

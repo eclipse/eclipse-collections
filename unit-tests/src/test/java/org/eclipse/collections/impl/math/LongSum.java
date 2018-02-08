@@ -17,7 +17,7 @@ package org.eclipse.collections.impl.math;
  */
 @Deprecated
 public final class LongSum
-    implements Sum
+        implements Sum
 {
     private static final long serialVersionUID = 1L;
 

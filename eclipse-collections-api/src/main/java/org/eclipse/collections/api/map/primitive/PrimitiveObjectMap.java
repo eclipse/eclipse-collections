@@ -77,9 +77,9 @@ public interface PrimitiveObjectMap<V> extends RichIterable<V>
      *     "{1=1, 2=2, 3=3}",
      *     IntObjectMaps.mutable.empty().withKeyValue(1, 1).withKeyValue(2, 2).withKeyValue(3, 3).toString());
      * </pre>
-     * @see java.util.AbstractMap#toString()
      *
      * @return a string representation of this PrimitiveObjectMap
+     * @see java.util.AbstractMap#toString()
      */
     @Override
     String toString();

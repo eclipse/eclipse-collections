@@ -34,15 +34,15 @@ public final class ReflectionHelper
     /**
      * Mapping of iterator wrapper classes to iterator types
      */
-    private static final ImmutableMap<Class<?>, Class<?>> WRAPPER_TO_PRIMATIVES = UnifiedMap.newMapWith(
-            Tuples.<Class<?>>twin(Short.class, short.class),
-            Tuples.<Class<?>>twin(Boolean.class, boolean.class),
-            Tuples.<Class<?>>twin(Byte.class, byte.class),
-            Tuples.<Class<?>>twin(Character.class, char.class),
-            Tuples.<Class<?>>twin(Integer.class, int.class),
-            Tuples.<Class<?>>twin(Float.class, float.class),
-            Tuples.<Class<?>>twin(Long.class, long.class),
-            Tuples.<Class<?>>twin(Double.class, double.class)).toImmutable();
+    private static final ImmutableMap<Class<?>, Class<?>> WRAPPER_TO_PRIMATIVES = UnifiedMap.<Class<?>, Class<?>>newMapWith(
+            Tuples.twin(Short.class, short.class),
+            Tuples.twin(Boolean.class, boolean.class),
+            Tuples.twin(Byte.class, byte.class),
+            Tuples.twin(Character.class, char.class),
+            Tuples.twin(Integer.class, int.class),
+            Tuples.twin(Float.class, float.class),
+            Tuples.twin(Long.class, long.class),
+            Tuples.twin(Double.class, double.class)).toImmutable();
 
     private static final ImmutableMap<Class<?>, Class<?>> PRIMATIVES_TO_WRAPPERS = MapIterate.reverseMapping(WRAPPER_TO_PRIMATIVES.castToMap()).toImmutable();
 
@@ -97,15 +97,7 @@ public final class ReflectionHelper
         {
             return constructor.newInstance(constructorArguments);
         }
-        catch (InstantiationException e)
-        {
-            throw new RuntimeException(e);
-        }
-        catch (IllegalAccessException e)
-        {
-            throw new RuntimeException(e);
-        }
-        catch (InvocationTargetException e)
+        catch (InstantiationException | InvocationTargetException | IllegalAccessException e)
         {
             throw new RuntimeException(e);
         }
@@ -120,19 +112,7 @@ public final class ReflectionHelper
         {
             return aClass.getConstructor().newInstance();
         }
-        catch (InstantiationException e)
-        {
-            throw new RuntimeException(e);
-        }
-        catch (IllegalAccessException e)
-        {
-            throw new RuntimeException(e);
-        }
-        catch (NoSuchMethodException e)
-        {
-            throw new RuntimeException(e);
-        }
-        catch (InvocationTargetException e)
+        catch (InstantiationException | InvocationTargetException | NoSuchMethodException | IllegalAccessException e)
         {
             throw new RuntimeException(e);
         }

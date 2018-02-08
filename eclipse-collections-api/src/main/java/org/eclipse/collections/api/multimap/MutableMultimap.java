@@ -37,8 +37,7 @@ public interface MutableMultimap<K, V>
     /**
      * Modification operation similar to put, however, takes the key-value pair as the input.
      *
-     * @param keyValuePair
-     *         key value pair to add in the multimap
+     * @param keyValuePair key value pair to add in the multimap
      * @see #put(Object, Object)
      * @since 6.0
      */
@@ -118,9 +117,9 @@ public interface MutableMultimap<K, V>
      * If you want to iterate imperatively over the keySet(), keysView(), valuesView(), or other views, you will
      * need to protect the iteration by wrapping the code in a synchronized block on the multimap.
      * <p>
-     * @see MutableMapIterable#asSynchronized()
      *
      * @return a synchronized view of this multimap.
+     * @see MutableMapIterable#asSynchronized()
      * @since 8.0
      */
     MutableMultimap<K, V> asSynchronized();

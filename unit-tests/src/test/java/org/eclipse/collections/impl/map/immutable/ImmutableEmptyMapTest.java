@@ -55,12 +55,13 @@ public class ImmutableEmptyMapTest extends ImmutableMemoryEfficientMapTestCase
     @Test
     public void get()
     {
-        Integer absentKey = this.size() + 1;
-        String absentValue = String.valueOf(absentKey);
-
         // Absent key behavior
         ImmutableMap<Integer, String> classUnderTest = this.classUnderTest();
+
+        Integer absentKey = this.size() + 1;
         Assert.assertNull(classUnderTest.get(absentKey));
+
+        String absentValue = String.valueOf(absentKey);
         Assert.assertFalse(classUnderTest.containsValue(absentValue));
 
         // Still unchanged

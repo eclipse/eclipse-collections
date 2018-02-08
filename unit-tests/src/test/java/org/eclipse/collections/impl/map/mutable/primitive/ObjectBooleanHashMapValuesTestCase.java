@@ -385,16 +385,19 @@ public abstract class ObjectBooleanHashMapValuesTestCase extends AbstractMutable
         Assert.assertTrue(synch.containsAll(this.classUnderTest()));
     }
 
+    @Test
     @Override
     public void testEquals()
     {
     }
 
+    @Test
     @Override
     public void testToString()
     {
     }
 
+    @Test
     @Override
     public void testHashCode()
     {

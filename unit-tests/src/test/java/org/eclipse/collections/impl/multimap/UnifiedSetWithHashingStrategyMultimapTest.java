@@ -122,7 +122,7 @@ public class UnifiedSetWithHashingStrategyMultimapTest extends AbstractMutableSe
 
     @Override
     @Test
-    public void testClear()
+    public void clear()
     {
         UnifiedSetWithHashingStrategyMultimap<Integer, String> map = this.newMultimapWithKeysValues(1, "1", 1, "One", 2, "2", 2, "Two");
         map.clear();

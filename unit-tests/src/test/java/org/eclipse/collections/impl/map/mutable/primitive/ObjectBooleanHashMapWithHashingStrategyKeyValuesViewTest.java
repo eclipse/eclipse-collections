@@ -26,11 +26,11 @@ public class ObjectBooleanHashMapWithHashingStrategyKeyValuesViewTest extends Ab
             return object.hashCode();
         }
 
-    public boolean equals(Integer object1, Integer object2)
-    {
-        return object1.equals(object2);
-    }
-});
+        public boolean equals(Integer object1, Integer object2)
+        {
+            return object1.equals(object2);
+        }
+    });
 
     @Override
     public <T> ObjectBooleanMap<T> newWithKeysValues(T key1, boolean value1, T key2, boolean value2, T key3, boolean value3)

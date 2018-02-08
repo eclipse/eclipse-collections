@@ -237,7 +237,7 @@ public class ByteHashSetTest extends AbstractByteSetTestCase
     }
 
     @Test
-    public void addAndCheckField() throws NoSuchFieldException, IllegalAccessException
+    public void addAndCheckField()
     {
         ByteHashSet hashSet = new ByteHashSet();
         Assert.assertTrue(hashSet.add((byte) 14));
@@ -258,7 +258,7 @@ public class ByteHashSetTest extends AbstractByteSetTestCase
     }
 
     @Test
-    public void addWithRehash() throws NoSuchFieldException, IllegalAccessException
+    public void addWithRehash()
     {
         ByteHashSet hashSet = new ByteHashSet();
         Assert.assertTrue(hashSet.addAll((byte) 32, (byte) 33, (byte) 34, (byte) 35, (byte) 36, (byte) 37, (byte) 38, (byte) 39));

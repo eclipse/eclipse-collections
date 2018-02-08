@@ -88,7 +88,7 @@ public abstract class AbstractMutableListMultimapTestCase extends AbstractMutabl
         MutableListMultimap<String, Integer> multimap = this.newMultimap();
         multimap.putAll("One", FastList.newListWith(1, 2, 3, 4, 4));
         multimap.putAll("Two", FastList.newListWith(2, 3, 4, 5, 3, 2));
-        MutableListMultimap<String, Integer> selectedMultimap = multimap.selectKeysValues((key, value) -> ("Two".equals(key) && (value % 2 == 0)));
+        MutableListMultimap<String, Integer> selectedMultimap = multimap.selectKeysValues((key, value) -> "Two".equals(key) && (value % 2 == 0));
         MutableListMultimap<String, Integer> expectedMultimap = FastListMultimap.newMultimap();
         expectedMultimap.putAll("Two", FastList.newListWith(2, 4, 2));
         Assert.assertEquals(expectedMultimap, selectedMultimap);
@@ -104,7 +104,7 @@ public abstract class AbstractMutableListMultimapTestCase extends AbstractMutabl
         MutableListMultimap<String, Integer> multimap = this.newMultimap();
         multimap.putAll("One", FastList.newListWith(1, 2, 3, 4, 1));
         multimap.putAll("Two", FastList.newListWith(2, 3, 4, 5));
-        MutableListMultimap<String, Integer> rejectedMultimap = multimap.rejectKeysValues((key, value) -> ("Two".equals(key) || (value % 2 == 0)));
+        MutableListMultimap<String, Integer> rejectedMultimap = multimap.rejectKeysValues((key, value) -> "Two".equals(key) || (value % 2 == 0));
         MutableListMultimap<String, Integer> expectedMultimap = FastListMultimap.newMultimap();
         expectedMultimap.putAll("One", FastList.newListWith(1, 3, 1));
         Assert.assertEquals(expectedMultimap, rejectedMultimap);
@@ -122,7 +122,7 @@ public abstract class AbstractMutableListMultimapTestCase extends AbstractMutabl
         multimap.putAll(2, FastList.newListWith("2", "3", "4", "5", "2"));
         multimap.putAll(3, FastList.newListWith("2", "3", "4", "5", "2"));
         multimap.putAll(4, FastList.newListWith("1", "3", "4"));
-        MutableListMultimap<Integer, String> selectedMultimap = multimap.selectKeysMultiValues((key, values) -> (key % 2 == 0 && Iterate.sizeOf(values) > 3));
+        MutableListMultimap<Integer, String> selectedMultimap = multimap.selectKeysMultiValues((key, values) -> key % 2 == 0 && Iterate.sizeOf(values) > 3);
         MutableListMultimap<Integer, String> expectedMultimap = FastListMultimap.newMultimap();
         expectedMultimap.putAll(2, FastList.newListWith("2", "3", "4", "5", "2"));
         Verify.assertListMultimapsEqual(expectedMultimap, selectedMultimap);
@@ -139,7 +139,7 @@ public abstract class AbstractMutableListMultimapTestCase extends AbstractMutabl
         multimap.putAll(2, FastList.newListWith("2", "3", "4", "5", "1"));
         multimap.putAll(3, FastList.newListWith("2", "3", "4", "2"));
         multimap.putAll(4, FastList.newListWith("1", "3", "4", "5"));
-        MutableListMultimap<Integer, String> rejectedMultimap = multimap.rejectKeysMultiValues((key, values) -> (key % 2 == 0 || Iterate.sizeOf(values) > 4));
+        MutableListMultimap<Integer, String> rejectedMultimap = multimap.rejectKeysMultiValues((key, values) -> key % 2 == 0 || Iterate.sizeOf(values) > 4);
         MutableListMultimap<Integer, String> expectedMultimap = FastListMultimap.newMultimap();
         expectedMultimap.putAll(3, FastList.newListWith("2", "3", "4", "2"));
         Verify.assertListMultimapsEqual(expectedMultimap, rejectedMultimap);

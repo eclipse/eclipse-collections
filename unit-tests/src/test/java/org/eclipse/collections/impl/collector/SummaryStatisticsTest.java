@@ -92,8 +92,8 @@ public class SummaryStatisticsTest
     {
         Assume.assumeTrue(System.getProperty("java.version").startsWith("1.8."));
 
-        SummaryStatistics stats = new SummaryStatistics().addIntFunction("1", each -> 1);
-        SummaryStatistics deserialized = SerializeTestHelper.serializeDeserialize(stats);
+        SummaryStatistics<Object> stats = new SummaryStatistics<>().addIntFunction("1", each -> 1);
+        SummaryStatistics<Object> deserialized = SerializeTestHelper.serializeDeserialize(stats);
         Assert.assertNotSame(stats, deserialized);
         Assert.assertNotNull(deserialized.getIntStats("1"));
     }

@@ -50,8 +50,8 @@ public interface MutableMapIterable<K, V> extends MapIterable<K, V>, Map<K, V>
     /**
      * This method allows mutable map the ability to add an element in the form of Pair<K,V>.
      *
-     * @see #put(Object, Object)
      * @return previous value in the map for the key, or null if no value exists for the key.
+     * @see #put(Object, Object)
      */
     default V add(Pair<K, V> keyValuePair)
     {

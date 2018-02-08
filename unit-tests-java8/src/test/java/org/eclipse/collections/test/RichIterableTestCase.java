@@ -1548,11 +1548,11 @@ public interface RichIterableTestCase extends IterableTestCase
     {
         assertEquals(Optional.of("da"), this.newWith("ed", "da", "ca", "bc", "ab").minByOptional(string -> string.charAt(string.length() - 1)));
         assertSame(Optional.empty(), this.<String>newWith().minByOptional(string -> string.charAt(string.length() - 1)));
-        assertThrows(NullPointerException.class, () -> this.newWith(new Object[]{null}).minByOptional(object -> object == null));
+        assertThrows(NullPointerException.class, () -> this.newWith(new Object[]{null}).minByOptional(Objects::isNull));
 
         assertEquals(Optional.of("dz"), this.newWith("ew", "dz", "cz", "bx", "ay").maxByOptional(string -> string.charAt(string.length() - 1)));
         assertSame(Optional.empty(), this.<String>newWith().maxByOptional(string -> string.charAt(string.length() - 1)));
-        assertThrows(NullPointerException.class, () -> this.newWith(new Object[]{null}).maxByOptional(object -> object == null));
+        assertThrows(NullPointerException.class, () -> this.newWith(new Object[]{null}).maxByOptional(Objects::isNull));
     }
 
     @Test

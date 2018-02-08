@@ -23,7 +23,7 @@ public enum ImmutableBiMapFactoryImpl implements ImmutableBiMapFactory
 {
     INSTANCE;
 
-    private static final ImmutableHashBiMap<?, ?> EMPTY_INSTANCE = new ImmutableHashBiMap(Maps.immutable.empty(), Maps.immutable.empty());
+    private static final ImmutableHashBiMap<?, ?> EMPTY_INSTANCE = new ImmutableHashBiMap<>(Maps.immutable.empty(), Maps.immutable.empty());
 
     @Override
     public <K, V> ImmutableBiMap<K, V> empty()

@@ -896,24 +896,24 @@ public class UnifiedMapWithHashingStrategyTest extends UnifiedMapTestCase
         UnifiedMapWithHashingStrategy<String, String> map = UnifiedMapWithHashingStrategy.newMap(STRING_HASHING_STRATEGY);
         MutableMap<String, String> expected = Maps.mutable.empty();
 
-        Interval integers = Interval.fromTo(0,  250);
+        Interval integers = Interval.fromTo(0, 250);
         integers.each(each ->
         {
             map.put(each.toString(), each.toString());
-            expected.put(each.toString(),  each.toString());
+            expected.put(each.toString(), each.toString());
         });
-        ArrayIterate.forEach(FREQUENT_COLLISIONS,  each ->
+        ArrayIterate.forEach(FREQUENT_COLLISIONS, each ->
         {
-            map.put(each,  each);
-            expected.put(each,  each);
+            map.put(each, each);
+            expected.put(each, each);
         });
 
-        Assert.assertEquals(expected,  map);
-        Assert.assertEquals(261,  map.size());
+        Assert.assertEquals(expected, map);
+        Assert.assertEquals(261, map.size());
 
         MutableList<Integer> toRemove = Lists.mutable.withAll(Interval.evensFromTo(0, 20));
 
-        toRemove.addAll(Interval.oddsFromTo(35,  55));
+        toRemove.addAll(Interval.oddsFromTo(35, 55));
         toRemove.each(each ->
         {
             map.remove(each.toString());

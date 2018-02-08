@@ -968,8 +968,12 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
         private final long bitGroup4; // 64 to 127
         private final short size;
 
-        private ImmutableByteHashSet(long bitGroup3, long bitGroup4,
-                long bitGroup1, long bitGroup2, short size)
+        private ImmutableByteHashSet(
+                long bitGroup3,
+                long bitGroup4,
+                long bitGroup1,
+                long bitGroup2,
+                short size)
         {
             this.bitGroup3 = bitGroup3;
             this.bitGroup4 = bitGroup4;

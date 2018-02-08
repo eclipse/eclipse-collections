@@ -54,8 +54,8 @@ public interface PrimitiveIterable
      * Assert.assertEquals("[1, 2, 3]", IntLists.mutable.with(1, 2, 3).toString());
      * </pre>
      *
-     * @see java.util.AbstractCollection#toString()
      * @return a string representation of this PrimitiveIterable
+     * @see java.util.AbstractCollection#toString()
      */
     @Override
     String toString();

@@ -20,7 +20,7 @@ public class CheckedProcedureSerializationTest
         private static final long serialVersionUID = 1L;
 
         @Override
-        public void safeValue(Object object) throws Exception
+        public void safeValue(Object object)
         {
         }
     };

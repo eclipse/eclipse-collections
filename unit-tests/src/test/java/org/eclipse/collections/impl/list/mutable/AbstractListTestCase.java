@@ -65,6 +65,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import static org.eclipse.collections.impl.factory.Iterables.iList;
+import static org.junit.Assert.fail;
 
 /**
  * Abstract JUnit test for {@link MutableList}s.
@@ -402,8 +403,8 @@ public abstract class AbstractListTestCase
     @Test
     public void reverseForEachWithIndex_emptyList()
     {
-        MutableList<Integer> integers = Lists.mutable.empty();
-        integers.reverseForEachWithIndex((each, index) -> Assert.assertTrue("Should not be evaluated", false));
+        MutableList<Integer> list = Lists.mutable.empty();
+        list.reverseForEachWithIndex((each, index) -> fail());
     }
 
     @Test
@@ -929,7 +930,7 @@ public abstract class AbstractListTestCase
         try
         {
             this.newWith(item).get(-1);
-            Assert.fail("Should not reach here! Exception should be thrown on previous line.");
+            fail("Should not reach here! Exception should be thrown on previous line.");
         }
         catch (Exception e)
         {

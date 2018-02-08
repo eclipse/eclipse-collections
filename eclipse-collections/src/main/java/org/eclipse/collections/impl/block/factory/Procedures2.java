@@ -92,6 +92,7 @@ public final class Procedures2
 
     /**
      * Use with {@link org.eclipse.collections.api.RichIterable#aggregateInPlaceBy(Function, Function0, Procedure2)}
+     *
      * @since 9.2.
      */
     public static <T> Procedure2<DoubleSummaryStatistics, T> summarizeDouble(DoubleFunction<T> function)
@@ -101,6 +102,7 @@ public final class Procedures2
 
     /**
      * Use with {@link org.eclipse.collections.api.RichIterable#aggregateInPlaceBy(Function, Function0, Procedure2)}
+     *
      * @since 9.2.
      */
     public static <T> Procedure2<DoubleSummaryStatistics, T> summarizeFloat(FloatFunction<T> function)
@@ -110,6 +112,7 @@ public final class Procedures2
 
     /**
      * Use with {@link org.eclipse.collections.api.RichIterable#aggregateInPlaceBy(Function, Function0, Procedure2)}
+     *
      * @since 9.2.
      */
     public static <T> Procedure2<IntSummaryStatistics, T> summarizeInt(IntFunction<T> function)
@@ -119,6 +122,7 @@ public final class Procedures2
 
     /**
      * Use with {@link org.eclipse.collections.api.RichIterable#aggregateInPlaceBy(Function, Function0, Procedure2)}
+     *
      * @since 9.2.
      */
     public static <T> Procedure2<LongSummaryStatistics, T> summarizeLong(LongFunction<T> function)

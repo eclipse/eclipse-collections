@@ -33,11 +33,11 @@ public class ImmutableMapFactoryTest
         Verify.assertSize(1, map1);
         Verify.assertContainsKeyValue("key1", "value1", map1);
 
-        ImmutableMap<String, String> map2 = Maps.immutable.of((String) null, (String) null);
+        ImmutableMap<String, String> map2 = Maps.immutable.of(null, null);
         Verify.assertSize(1, map2);
         Verify.assertContainsKeyValue(null, null, map2);
 
-        ImmutableMap<String, String> map3 = Maps.immutable.of((String) null, "value1");
+        ImmutableMap<String, String> map3 = Maps.immutable.of(null, "value1");
         Verify.assertSize(1, map3);
         Verify.assertContainsKeyValue(null, "value1", map3);
     }

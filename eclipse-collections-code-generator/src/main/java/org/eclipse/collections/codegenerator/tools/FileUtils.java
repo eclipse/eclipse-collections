@@ -87,11 +87,7 @@ public final class FileUtils
                 recurseURL(url, files, templateDirectory);
             }
         }
-        catch (IOException e)
-        {
-            throw new RuntimeException(e);
-        }
-        catch (URISyntaxException e)
+        catch (IOException | URISyntaxException e)
         {
             throw new RuntimeException(e);
         }
@@ -130,7 +126,6 @@ public final class FileUtils
         }
         else
         {
-            String filePath = file.getAbsolutePath();
             if (file.getName().endsWith(".jar"))
             {
                 JarInputStream stream = new JarInputStream(new FileInputStream(file));
@@ -140,6 +135,7 @@ public final class FileUtils
             else
             {
                 String rootPath = rootDirectory.getAbsolutePath();
+                String filePath = file.getAbsolutePath();
                 if (filePath.contains(templateDirectory) && !rootPath.equals(filePath) && isTemplateFile(filePath))
                 {
                     files.add(new URL("file:" + filePath));

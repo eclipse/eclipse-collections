@@ -101,7 +101,6 @@ public interface Multimap<K, V>
      * The given procedure would be invoked with the parameters:
      * <p>
      * {@code [ ["key1", "val1"], ["key1", "val2"], ["key1", "val2"], ["key2", "val3"] ]}
-     * @param procedure
      */
     void forEachKeyValue(Procedure2<? super K, ? super V> procedure);
 
@@ -117,7 +116,6 @@ public interface Multimap<K, V>
      * {@code [ ["key1", {@link RichIterable["val1", "val2", "val2"]}], ["key2", {@link RichIterable["val3"]}] ]}
      *
      * @since 6.0
-     * @param procedure
      */
     void forEachKeyMultiValues(Procedure2<? super K, ? super Iterable<V>> procedure);
 

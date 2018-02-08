@@ -84,7 +84,7 @@ public final class Sets
     public static final MutableSetFactory mutable = MutableSetFactoryImpl.INSTANCE;
     public static final MutableSetFactory multiReader = MultiReaderMutableSetFactory.INSTANCE;
 
-    private static final Predicate<Set<?>> INSTANCE_OF_SORTED_SET_PREDICATE = set -> set instanceof SortedSet;
+    private static final Predicate<Set<?>> INSTANCE_OF_SORTED_SET_PREDICATE = SortedSet.class::isInstance;
 
     private static final Predicate<Set<?>> HAS_NON_NULL_COMPARATOR = set -> ((SortedSet<?>) set).comparator() != null;
 

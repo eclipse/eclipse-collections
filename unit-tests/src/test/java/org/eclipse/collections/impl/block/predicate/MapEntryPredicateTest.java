@@ -39,7 +39,7 @@ public class MapEntryPredicateTest
     };
 
     @Test
-    public void accept() throws Exception
+    public void accept()
     {
         MapEntryPredicate<String, Integer> mapEntryPredicate = new MapEntryPredicate<String, Integer>()
         {
@@ -53,7 +53,7 @@ public class MapEntryPredicateTest
     }
 
     @Test
-    public void negate() throws Exception
+    public void negate()
     {
         MapEntryPredicate<String, Integer> mapEntryPredicate = new MapEntryPredicate<String, Integer>()
         {
@@ -65,7 +65,8 @@ public class MapEntryPredicateTest
         };
         Assert.assertFalse(mapEntryPredicate.negate().accept(this.entry));
         Assert.assertFalse(mapEntryPredicate.negate().accept("1", 1));
-        Assert.assertTrue(mapEntryPredicate.negate().accept(new Map.Entry<String, Integer>() {
+        Assert.assertTrue(mapEntryPredicate.negate().accept(new Map.Entry<String, Integer>()
+        {
             @Override
             public String getKey()
             {

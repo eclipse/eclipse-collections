@@ -626,7 +626,7 @@ final class ImmutableBooleanArrayList
         }
 
         @Override
-        public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
+        public void readExternal(ObjectInput in) throws IOException
         {
             int inputSize = in.readInt();
             BitSet newItems = new BitSet(inputSize);

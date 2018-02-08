@@ -34,6 +34,8 @@ import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.junit.Assert;
 import org.junit.Test;
 
+import static org.junit.Assert.fail;
+
 public class ImmutableEmptyListTest extends AbstractImmutableListTestCase
 {
     @Override
@@ -86,9 +88,8 @@ public class ImmutableEmptyListTest extends AbstractImmutableListTestCase
     @Test
     public void reverseForEachWithIndex()
     {
-        Lists.immutable.empty()
-                .reverseForEachWithIndex((each, index) ->
-                        Assert.assertTrue("Should not be evaluated", false));
+        ImmutableList<Object> list = Lists.immutable.empty();
+        list.reverseForEachWithIndex((each, index) -> fail());
     }
 
     @Override

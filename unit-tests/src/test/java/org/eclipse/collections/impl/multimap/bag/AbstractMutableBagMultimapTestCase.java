@@ -76,7 +76,7 @@ public abstract class AbstractMutableBagMultimapTestCase extends AbstractMutable
         MutableBagMultimap<String, Integer> multimap = this.newMultimap();
         multimap.putAll("One", FastList.newListWith(1, 2, 3, 4, 4));
         multimap.putAll("Two", FastList.newListWith(2, 3, 4, 5, 3, 2));
-        MutableBagMultimap<String, Integer> selectedMultimap = multimap.selectKeysValues((key, value) -> ("Two".equals(key) && (value % 2 == 0)));
+        MutableBagMultimap<String, Integer> selectedMultimap = multimap.selectKeysValues((key, value) -> "Two".equals(key) && (value % 2 == 0));
         MutableBagMultimap<String, Integer> expectedMultimap = HashBagMultimap.newMultimap();
         expectedMultimap.putAll("Two", FastList.newListWith(2, 4, 2));
         Verify.assertBagMultimapsEqual(expectedMultimap, selectedMultimap);
@@ -91,7 +91,7 @@ public abstract class AbstractMutableBagMultimapTestCase extends AbstractMutable
         MutableBagMultimap<String, Integer> multimap = this.newMultimap();
         multimap.putAll("One", FastList.newListWith(1, 2, 3, 4, 1));
         multimap.putAll("Two", FastList.newListWith(2, 3, 4, 5));
-        MutableBagMultimap<String, Integer> rejectedMultimap = multimap.rejectKeysValues((key, value) -> ("Two".equals(key) || (value % 2 == 0)));
+        MutableBagMultimap<String, Integer> rejectedMultimap = multimap.rejectKeysValues((key, value) -> "Two".equals(key) || (value % 2 == 0));
         MutableBagMultimap<String, Integer> expectedMultimap = HashBagMultimap.newMultimap();
         expectedMultimap.putAll("One", FastList.newListWith(1, 3, 1));
         Verify.assertBagMultimapsEqual(expectedMultimap, rejectedMultimap);
@@ -108,7 +108,7 @@ public abstract class AbstractMutableBagMultimapTestCase extends AbstractMutable
         multimap.putAll(2, FastList.newListWith("2", "3", "4", "5", "2"));
         multimap.putAll(3, FastList.newListWith("2", "3", "4", "5", "2"));
         multimap.putAll(4, FastList.newListWith("1", "3", "4"));
-        MutableBagMultimap<Integer, String> selectedMultimap = multimap.selectKeysMultiValues((key, values) -> (key % 2 == 0 && Iterate.sizeOf(values) > 3));
+        MutableBagMultimap<Integer, String> selectedMultimap = multimap.selectKeysMultiValues((key, values) -> key % 2 == 0 && Iterate.sizeOf(values) > 3);
         MutableBagMultimap<Integer, String> expectedMultimap = HashBagMultimap.newMultimap();
         expectedMultimap.putAll(2, FastList.newListWith("2", "3", "4", "5", "2"));
         Verify.assertBagMultimapsEqual(expectedMultimap, selectedMultimap);
@@ -125,7 +125,7 @@ public abstract class AbstractMutableBagMultimapTestCase extends AbstractMutable
         multimap.putAll(2, FastList.newListWith("2", "3", "4", "5", "1"));
         multimap.putAll(3, FastList.newListWith("2", "3", "4", "2"));
         multimap.putAll(4, FastList.newListWith("1", "3", "4", "5"));
-        MutableBagMultimap<Integer, String> rejectedMultimap = multimap.rejectKeysMultiValues((key, values) -> (key % 2 == 0 || Iterate.sizeOf(values) > 4));
+        MutableBagMultimap<Integer, String> rejectedMultimap = multimap.rejectKeysMultiValues((key, values) -> key % 2 == 0 || Iterate.sizeOf(values) > 4);
         MutableBagMultimap<Integer, String> expectedMultimap = HashBagMultimap.newMultimap();
         expectedMultimap.putAll(3, FastList.newListWith("2", "3", "4", "2"));
         Verify.assertBagMultimapsEqual(expectedMultimap, rejectedMultimap);
