@@ -1401,17 +1401,17 @@ public class UnifiedSetWithHashingStrategy<T>
     {
         do
         {
-            this.addForTrim((T) bucket.zero, oldIndex, mask);
+            this.addForTrim(bucket.zero, oldIndex, mask);
             if (bucket.one == null)
             {
                 return;
             }
-            this.addForTrim((T) bucket.one, oldIndex, mask);
+            this.addForTrim(bucket.one, oldIndex, mask);
             if (bucket.two == null)
             {
                 return;
             }
-            this.addForTrim((T) bucket.two, oldIndex, mask);
+            this.addForTrim(bucket.two, oldIndex, mask);
             if (bucket.three == null)
             {
                 return;
@@ -1421,13 +1421,13 @@ public class UnifiedSetWithHashingStrategy<T>
                 bucket = (ChainedBucket) bucket.three;
                 continue;
             }
-            this.addForTrim((T) bucket.three, oldIndex, mask);
+            this.addForTrim(bucket.three, oldIndex, mask);
             return;
         }
         while (true);
     }
 
-    private void addForTrim(T key, int oldIndex, int mask)
+    private void addForTrim(Object key, int oldIndex, int mask)
     {
         int index = oldIndex & mask;
         Object cur = this.table[index];
@@ -1439,9 +1439,8 @@ public class UnifiedSetWithHashingStrategy<T>
         this.chainedAddForTrim(key, index);
     }
 
-    private void chainedAddForTrim(T key, int index)
+    private void chainedAddForTrim(Object key, int index)
     {
-        Object realKey = key;
         if (this.table[index] instanceof ChainedBucket)
         {
             ChainedBucket bucket = (ChainedBucket) this.table[index];
@@ -1449,12 +1448,12 @@ public class UnifiedSetWithHashingStrategy<T>
             {
                 if (bucket.one == null)
                 {
-                    bucket.one = realKey;
+                    bucket.one = key;
                     return;
                 }
                 if (bucket.two == null)
                 {
-                    bucket.two = realKey;
+                    bucket.two = key;
                     return;
                 }
                 if (bucket.three instanceof ChainedBucket)
@@ -1464,15 +1463,15 @@ public class UnifiedSetWithHashingStrategy<T>
                 }
                 if (bucket.three == null)
                 {
-                    bucket.three = realKey;
+                    bucket.three = key;
                     return;
                 }
-                bucket.three = new ChainedBucket(bucket.three, realKey);
+                bucket.three = new ChainedBucket(bucket.three, key);
                 return;
             }
             while (true);
         }
-        ChainedBucket newBucket = new ChainedBucket(this.table[index], realKey);
+        ChainedBucket newBucket = new ChainedBucket(this.table[index], key);
         this.table[index] = newBucket;
     }
 
