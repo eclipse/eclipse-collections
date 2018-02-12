@@ -45,7 +45,7 @@ import org.eclipse.collections.impl.lazy.primitive.Lazy<name>IterableAdapter;
  *
  * @since 3.1.
  */
-public final class Unmodifiable<name>Stack
+public class Unmodifiable<name>Stack
         implements Mutable<name>Stack, Serializable
 {
     private static final long serialVersionUID = 1L;

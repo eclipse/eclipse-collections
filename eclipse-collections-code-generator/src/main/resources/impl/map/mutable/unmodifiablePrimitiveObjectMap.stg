@@ -116,7 +116,7 @@ import org.eclipse.collections.api.tuple.primitive.<name>ObjectPair;
  *
  * @since 3.2.
  */
-public final class Unmodifiable<name>ObjectMap\<V>
+public class Unmodifiable<name>ObjectMap\<V>
         implements Mutable<name>ObjectMap\<V>, Serializable
 {
     private static final long serialVersionUID = 1L;

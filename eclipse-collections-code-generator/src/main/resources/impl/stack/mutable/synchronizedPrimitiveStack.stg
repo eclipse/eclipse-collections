@@ -51,7 +51,7 @@ import org.eclipse.collections.impl.lazy.primitive.Lazy<name>IterableAdapter;
  * @see MutableStack#asSynchronized()
  * @since 3.1.
  */
-public final class Synchronized<name>Stack
+public class Synchronized<name>Stack
         implements Mutable<name>Stack, Serializable
 {
     private static final long serialVersionUID = 1L;

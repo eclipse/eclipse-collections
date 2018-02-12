@@ -43,7 +43,7 @@ import org.eclipse.collections.impl.lazy.primitive.Reverse<name>Iterable;
  *
  * @since 3.1.
  */
-public final class Unmodifiable<name>List
+public class Unmodifiable<name>List
         extends AbstractUnmodifiable<name>Collection
         implements Mutable<name>List
 {

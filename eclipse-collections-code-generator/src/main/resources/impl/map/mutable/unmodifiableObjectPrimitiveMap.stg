@@ -55,7 +55,7 @@ import org.eclipse.collections.api.tuple.primitive.Object<name>Pair;
  *
  * @since 3.2
  */
-public final class UnmodifiableObject<name>Map\<K>
+public class UnmodifiableObject<name>Map\<K>
         implements MutableObject<name>Map\<K>, Serializable
 {
     private static final long serialVersionUID = 1L;

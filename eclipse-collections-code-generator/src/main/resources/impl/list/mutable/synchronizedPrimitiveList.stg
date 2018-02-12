@@ -50,7 +50,7 @@ import org.eclipse.collections.impl.lazy.primitive.Reverse<name>Iterable;
  * @see MutableList#asSynchronized()
  * @since 3.1.
  */
-public final class Synchronized<name>List
+public class Synchronized<name>List
         extends AbstractSynchronized<name>Collection
         implements Mutable<name>List
 {
