@@ -10,6 +10,7 @@
 
 package org.eclipse.collections.impl.test;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Map;
 import java.util.TreeSet;
@@ -1446,6 +1447,60 @@ public class VerifyTest
         {
             Assert.assertEquals("Block did not throw an exception of type java.io.NotSerializableException", ex.getMessage());
             Verify.assertContains(VerifyTest.class.getName(), ex.getStackTrace()[0].toString());
+        }
+    }
+
+    @Test
+    public void assertPostSerializedEqualsAndHashCode()
+    {
+        Verify.assertPostSerializedEqualsAndHashCode(Tuples.pair("1", "2"));
+        try
+        {
+            Verify.assertPostSerializedEqualsAndHashCode(new Object());
+        }
+        catch (AssertionError ex)
+        {
+            Assert.assertEquals("Failed to marshal an object", ex.getMessage());
+            Verify.assertContains(VerifyTest.class.getName(), ex.getStackTrace()[0].toString());
+        }
+    }
+
+    @Test
+    public void assertPostSerializedEqualsHashCodeAndToString()
+    {
+        Verify.assertPostSerializedEqualsHashCodeAndToString(Tuples.pair("1", "2"));
+        try
+        {
+            Verify.assertPostSerializedEqualsHashCodeAndToString(new Object());
+        }
+        catch (AssertionError ex)
+        {
+            Assert.assertEquals("Failed to marshal an object", ex.getMessage());
+            Verify.assertContains(VerifyTest.class.getName(), ex.getStackTrace()[0].toString());
+        }
+        try
+        {
+            Verify.assertPostSerializedEqualsHashCodeAndToString(new TestClass());
+        }
+        catch (AssertionError ex)
+        {
+            Assert.assertEquals("not same toString", ex.getMessage());
+            Verify.assertContains(VerifyTest.class.getName(), ex.getStackTrace()[0].toString());
+        }
+    }
+
+    private static class TestClass implements Serializable
+    {
+        @Override
+        public boolean equals(Object o)
+        {
+            return o != null;
+        }
+
+        @Override
+        public int hashCode()
+        {
+            return 0;
         }
     }
 }
