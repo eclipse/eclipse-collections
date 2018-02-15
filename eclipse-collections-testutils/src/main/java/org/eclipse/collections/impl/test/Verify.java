@@ -3614,6 +3614,21 @@ public final class Verify extends Assert
         }
     }
 
+    public static void assertPostSerializedEqualsHashCodeAndToString(Object object)
+    {
+        try
+        {
+            Object deserialized = SerializeTestHelper.serializeDeserialize(object);
+            Verify.assertEqualsAndHashCode("objects", object, deserialized);
+            Assert.assertNotSame("not same object", object, deserialized);
+            Assert.assertEquals("not same toString", object.toString(), deserialized.toString());
+        }
+        catch (AssertionError e)
+        {
+            Verify.throwMangledException(e);
+        }
+    }
+
     public static void assertPostSerializedIdentity(Object object)
     {
         try
