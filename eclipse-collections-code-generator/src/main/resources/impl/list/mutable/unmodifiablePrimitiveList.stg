@@ -201,6 +201,14 @@ public class Unmodifiable<name>List
         return <name>Lists.immutable.with(this.toArray());
     }
 
+    /**
+     * @since 9.2.
+     */
+    public Mutable<name>List newEmpty()
+    {
+        return this.getMutable<name>List().newEmpty();
+    }
+
     @Override
     public Mutable<name>List reverseThis()
     {

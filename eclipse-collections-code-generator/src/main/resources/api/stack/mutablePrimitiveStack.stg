@@ -79,6 +79,16 @@ public interface Mutable<name>Stack extends <name>Stack
     Mutable<name>Stack asUnmodifiable();
 
     Mutable<name>Stack asSynchronized();
+
+    /**
+     * Creates a new empty mutable version of the same stack type.
+     *
+     * @since 9.2.
+     */
+    default Mutable<name>Stack newEmpty()
+    {
+        throw new UnsupportedOperationException("Implement in concrete classes.");
+    }
 }
 
 >>

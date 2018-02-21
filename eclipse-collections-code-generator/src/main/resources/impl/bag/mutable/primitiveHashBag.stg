@@ -710,6 +710,16 @@ public class <name>HashBag extends Abstract<name>Iterable implements Mutable<nam
         return <name>Bags.immutable.withAll(this);
     }
 
+    /**
+     * Creates a new empty <name>HashBag.
+     *
+     * @since 9.2.
+     */
+    public <name>HashBag newEmpty()
+    {
+        return new <name>HashBag();
+    }
+
     @Override
     public Mutable<name>Iterator <type>Iterator()
     {

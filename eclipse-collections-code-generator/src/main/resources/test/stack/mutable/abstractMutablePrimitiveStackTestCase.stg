@@ -1,4 +1,4 @@
-import "copyright.stg"
+import "copyrightAndOthers.stg"
 import "primitiveHashCode.stg"
 import "primitiveLiteral.stg"
 
@@ -15,7 +15,7 @@ class(primitive) ::= <<
 >>
 
 body(type, wrapperName, name) ::= <<
-<copyright()>
+<copyrightAndOthers()>
 
 package org.eclipse.collections.impl.stack.mutable.primitive;
 
@@ -200,6 +200,16 @@ public abstract class AbstractMutable<name>StackTestCase extends Abstract<name>S
     {
         Verify.assertInstanceOf(Unmodifiable<name>Stack.class, this.classUnderTest().asUnmodifiable());
         Assert.assertEquals(this.classUnderTest(), this.classUnderTest().asUnmodifiable());
+    }
+
+    /**
+     * @since 9.2.
+     */
+    @Test
+    public void newEmpty()
+    {
+        Assert.assertTrue(this.classUnderTest().newEmpty().isEmpty());
+        Assert.assertNotSame(this.classUnderTest(), this.classUnderTest().newEmpty());
     }
 }
 

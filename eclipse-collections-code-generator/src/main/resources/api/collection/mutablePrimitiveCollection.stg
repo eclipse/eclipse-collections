@@ -97,6 +97,16 @@ public interface Mutable<name>Collection extends <name>Iterable
         this.forEach(procedure);
         return this;
     }
+
+    /**
+     * Creates a new empty mutable version of the same collection type.
+
+     * @since 9.2.
+     */
+    default Mutable<name>Collection newEmpty()
+    {
+        throw new UnsupportedOperationException("Implement in concrete classes.");
+    }
 }
 
 >>
