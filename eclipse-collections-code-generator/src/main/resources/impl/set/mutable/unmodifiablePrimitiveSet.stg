@@ -1,4 +1,4 @@
-import "copyright.stg"
+import "copyrightAndOthers.stg"
 import "primitiveEquals.stg"
 import "primitiveHashCode.stg"
 import "primitiveLiteral.stg"
@@ -12,7 +12,7 @@ class(primitive) ::= <<
 >>
 
 body(type, name) ::= <<
-<copyright()>
+<copyrightAndOthers()>
 
 package org.eclipse.collections.impl.set.mutable.primitive;
 
@@ -133,6 +133,14 @@ public class Unmodifiable<name>Set
     public Immutable<name>Set toImmutable()
     {
         return this.getMutable<name>Set().toImmutable();
+    }
+
+    /**
+     * @since 9.2.
+     */
+    public Mutable<name>Set newEmpty()
+    {
+        return this.getMutable<name>Set().newEmpty();
     }
 }
 

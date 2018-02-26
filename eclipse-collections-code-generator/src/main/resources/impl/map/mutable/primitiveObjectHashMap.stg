@@ -3354,6 +3354,15 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
             return Synchronized<name>Set.of(this);
         }
 
+        /**
+         * @since 9.2.
+         */
+        @Override
+        public Mutable<name>Set newEmpty()
+        {
+            return new <name>HashSet();
+        }
+
         @Override
         <if(primitive.floatingPoint)>public <wideType.(type)> sum()
 {

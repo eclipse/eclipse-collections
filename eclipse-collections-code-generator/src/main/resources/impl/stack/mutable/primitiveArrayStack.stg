@@ -1,4 +1,4 @@
-import "copyright.stg"
+import "copyrightAndOthers.stg"
 import "primitiveEquals.stg"
 import "primitiveHashCode.stg"
 import "primitiveLiteral.stg"
@@ -12,7 +12,7 @@ class(primitive) ::= <<
 >>
 
 body(type, name) ::= <<
-<copyright()>
+<copyrightAndOthers()>
 
 package org.eclipse.collections.impl.stack.mutable.primitive;
 
@@ -174,6 +174,16 @@ public class <name>ArrayStack extends Abstract<name>Stack
     public Immutable<name>Stack toImmutable()
     {
         return <name>Stacks.immutable.withAll(this.delegate);
+    }
+
+    /**
+     * Creates a new empty <name>ArrayStack.
+     *
+     * @since 9.2.
+     */
+    public <name>ArrayStack newEmpty()
+    {
+        return new <name>ArrayStack();
     }
 
     @Override

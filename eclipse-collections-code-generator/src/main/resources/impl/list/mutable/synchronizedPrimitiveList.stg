@@ -286,6 +286,17 @@ public class Synchronized<name>List
         }
     }
 
+    /**
+     * @since 9.2.
+     */
+    public Mutable<name>List newEmpty()
+    {
+        synchronized (this.getLock())
+        {
+            return this.getMutable<name>List().newEmpty();
+        }
+    }
+
     @Override
     public Mutable<name>List reverseThis()
     {

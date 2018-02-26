@@ -1009,6 +1009,16 @@ public class <name>ArrayList extends Abstract<name>Iterable
     }
 
     /**
+     * Creates a new empty <name>ArrayList.
+     *
+     * @since 9.2.
+     */
+    public <name>ArrayList newEmpty()
+    {
+        return new <name>ArrayList();
+    }
+
+    /**
      * @since 9.1.
      */
     @Override

@@ -1,4 +1,4 @@
-import "copyright.stg"
+import "copyrightAndOthers.stg"
 import "primitiveEquals.stg"
 import "primitiveHashCode.stg"
 import "primitiveLiteral.stg"
@@ -12,11 +12,12 @@ class(primitive) ::= <<
 >>
 
 body(type, name) ::= <<
-<copyright()>
+<copyrightAndOthers()>
 
 package org.eclipse.collections.impl.collection.mutable.primitive;
 
 import org.eclipse.collections.api.collection.primitive.Mutable<name>Collection;
+import org.eclipse.collections.impl.bag.mutable.primitive.<name>HashBag;
 
 /**
  * This file was automatically generated from template file unmodifiablePrimitiveCollection.stg.
@@ -43,6 +44,15 @@ public class Unmodifiable<name>Collection
             throw new IllegalArgumentException("cannot create a Unmodifiable<name>Collection for null");
         }
         return new Unmodifiable<name>Collection(collection);
+    }
+
+    /**
+     * @since 9.2.
+     */
+    @Override
+    public Mutable<name>Collection newEmpty()
+    {
+        return new <name>HashBag();
     }
 }
 

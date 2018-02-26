@@ -448,6 +448,16 @@ public abstract class AbstractMutable<name>CollectionTestCase extends Abstract<n
         iterator.remove();
         Verify.assertThrows(IllegalStateException.class, iterator::remove);
     }
+
+    /**
+     * @since 9.2.
+     */
+    @Test
+    public void newEmpty()
+    {
+        Assert.assertTrue(this.classUnderTest().newEmpty().isEmpty());
+        Assert.assertNotSame(this.classUnderTest(), this.classUnderTest().newEmpty());
+    }
 }
 
 >>

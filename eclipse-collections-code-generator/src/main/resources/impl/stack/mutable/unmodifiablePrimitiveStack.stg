@@ -310,6 +310,14 @@ public class Unmodifiable<name>Stack
         return <name>Stacks.immutable.withAllReversed(this);
     }
 
+    /**
+     * @since 9.2.
+     */
+    public Mutable<name>Stack newEmpty()
+    {
+        return this.stack.newEmpty();
+    }
+
     @Override
     public \<T> T injectInto(T injectedValue, Object<name>ToObjectFunction\<? super T, ? extends T> function)
     {

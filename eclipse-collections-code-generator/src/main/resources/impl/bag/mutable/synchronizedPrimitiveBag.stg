@@ -1,4 +1,4 @@
-import "copyright.stg"
+import "copyrightAndOthers.stg"
 import "primitiveEquals.stg"
 import "primitiveHashCode.stg"
 import "primitiveLiteral.stg"
@@ -12,7 +12,7 @@ class(primitive) ::= <<
 >>
 
 body(type, name) ::= <<
-<copyright()>
+<copyrightAndOthers()>
 
 package org.eclipse.collections.impl.bag.mutable.primitive;
 
@@ -248,6 +248,17 @@ public class Synchronized<name>Bag
     public Immutable<name>Bag toImmutable()
     {
         return <name>Bags.immutable.withAll(this);
+    }
+
+    /**
+     * @since 9.2.
+     */
+    public Mutable<name>Bag newEmpty()
+    {
+        synchronized (this.getLock())
+        {
+            return this.getMutable<name>Bag().newEmpty();
+        }
     }
 }
 

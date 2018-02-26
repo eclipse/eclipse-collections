@@ -62,6 +62,16 @@ public interface Mutable<name>Set extends Mutable<name>Collection, <name>Set
      */
     @Override
     Immutable<name>Set toImmutable();
+
+    /**
+     * Creates a new empty mutable version of the same Set type.
+     *
+     * @since 9.2.
+     */
+    default Mutable<name>Set newEmpty()
+    {
+        throw new UnsupportedOperationException("Implement in concrete classes.");
+    }
 }
 
 >>

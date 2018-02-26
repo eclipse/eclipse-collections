@@ -123,6 +123,16 @@ public interface Mutable<name>List extends Mutable<name>Collection, <name>List
     {
         throw new UnsupportedOperationException("Default method to prevent breaking backwards compatibility");
     }
+
+    /**
+     * Creates a new empty mutable version of the same List type.
+     *
+     * @since 9.2.
+     */
+    default Mutable<name>List newEmpty()
+    {
+        throw new UnsupportedOperationException("Implement in concrete classes.");
+    }
 }
 
 >>

@@ -1,4 +1,4 @@
-import "copyright.stg"
+import "copyrightAndOthers.stg"
 import "primitiveEquals.stg"
 import "primitiveHashCode.stg"
 import "primitiveLiteral.stg"
@@ -36,7 +36,7 @@ class(primitive1, primitive2, sameTwoPrimitives) ::= <<
 >>
 
 body(type1, type2, name1, name2, keyArray, valueArray, increment, valueIndex) ::= <<
-<copyright()>
+<copyrightAndOthers()>
 
 package org.eclipse.collections.impl.map.mutable.primitive;
 
@@ -77,6 +77,7 @@ import org.eclipse.collections.api.set.primitive.<name1>Set;
 <if(!sameTwoPrimitives)>import org.eclipse.collections.api.set.primitive.<name2>Set;<endif>
 import org.eclipse.collections.api.set.primitive.Mutable<name1>Set;
 import org.eclipse.collections.api.tuple.primitive.<name1><name2>Pair;
+import org.eclipse.collections.impl.bag.mutable.primitive.<name2>HashBag;
 import org.eclipse.collections.impl.factory.primitive.<name1><name2>Maps;
 <if(!primitive2.booleanPrimitive)>import org.eclipse.collections.impl.factory.primitive.<name2><name1>Maps;<endif>
 import org.eclipse.collections.impl.iterator.Unmodifiable<name1>Iterator;
@@ -1222,6 +1223,15 @@ public class <name1><name2>HashMap extends AbstractMutable<name2>ValuesMap imple
             return new Immutable<name1>MapKeySet(<name1><name2>HashMap.this.<keyArray>, <name1><name2>HashMap.this.occupiedWithData, containsZeroKey, containsOneKey);
             <endif>
         }
+
+        /**
+         * @since 9.2.
+         */
+        @Override
+        public Mutable<name1>Set newEmpty()
+        {
+            return new <name1>HashSet();
+        }
     }
 
     @Override
@@ -1282,6 +1292,15 @@ public class <name1><name2>HashMap extends AbstractMutable<name2>ValuesMap imple
                 return true;
             }
             return false;
+        }
+
+        /**
+         * @since 9.2.
+         */
+        @Override
+        public Mutable<name2>Collection newEmpty()
+        {
+            return new <name2>HashBag();
         }
     }
 
