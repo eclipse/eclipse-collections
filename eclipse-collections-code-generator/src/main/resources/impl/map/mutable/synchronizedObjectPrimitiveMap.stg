@@ -490,7 +490,10 @@ public class SynchronizedObject<name>Map\<K>
     @Override
     public MutableObject<name>Map\<K> asUnmodifiable()
     {
-        return new UnmodifiableObject<name>Map\<>(this);
+        synchronized (this.lock)
+        {
+            return new UnmodifiableObject<name>Map\<>(this);
+        }
     }
 
     @Override
@@ -502,7 +505,10 @@ public class SynchronizedObject<name>Map\<K>
     @Override
     public ImmutableObject<name>Map\<K> toImmutable()
     {
-        return Object<name>Maps.immutable.withAll(this);
+        synchronized (this.lock)
+        {
+            return Object<name>Maps.immutable.withAll(this);
+        }
     }
 
     @Override

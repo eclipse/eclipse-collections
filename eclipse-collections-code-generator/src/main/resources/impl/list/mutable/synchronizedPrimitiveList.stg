@@ -259,7 +259,10 @@ public class Synchronized<name>List
     @Override
     public Mutable<name>List asUnmodifiable()
     {
-        return new Unmodifiable<name>List(this);
+        synchronized (this.getLock())
+        {
+            return new Unmodifiable<name>List(this);
+        }
     }
 
     @Override
