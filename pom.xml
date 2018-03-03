@@ -129,7 +129,7 @@
         <checkstyle.version>8.8</checkstyle.version>
         <checkstyle.plugin.version>3.0.0</checkstyle.plugin.version>
         <findbugs.plugin.version>3.0.3</findbugs.plugin.version>
-        <jacoco.plugin.version>0.7.9</jacoco.plugin.version>
+        <jacoco.plugin.version>0.8.0</jacoco.plugin.version>
 
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
@@ -352,6 +352,7 @@
                         </includes>
                         <argLine>-XX:-OmitStackTraceInFastThrow -Xms1024m -Xmx2048m @{argLine}</argLine>
                         <runOrder>random</runOrder>
+                        <!--<forkCount>2C</forkCount>-->
                     </configuration>
                 </plugin>
 
