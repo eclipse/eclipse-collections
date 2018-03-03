@@ -21,6 +21,7 @@ env:
   -JDK=Java8
   -JDK=Java9
   -JDK=Java10-EA
+  -JDK=Java11-EA
 
 matrix:
   fast_finish: true
@@ -67,8 +68,15 @@ matrix:
         - JDK=Java10-EA
         - CMD=""
 
+    - jdk: oraclejdk8
+      env:
+        - DESC="Java 11 regression"
+        - JDK=Java11-EA
+        - CMD=""
+
   allow_failures:
     - env: JDK=Java10-EA
+    - env: JDK=Java11-EA
 
 script:
   - ./.travis-command-ea-builds.sh

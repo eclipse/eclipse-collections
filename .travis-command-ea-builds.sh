@@ -49,4 +49,7 @@ Java9)
 Java10-EA)
   install_jdk_and_run_ea_build "https://download.java.net/java/jdk10/archive/42/BCL/jdk-10-ea+42_linux-x64_bin.tar.gz"
   ;;
+Java11-EA)
+  install_jdk_and_run_ea_build "https://download.java.net/java/early_access/jdk11/3/BCL/jre-11-ea+3_linux-x64_bin.tar.gz"
+  ;;
 esac
