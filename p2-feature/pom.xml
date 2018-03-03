@@ -12,7 +12,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.eclipse.collections</groupId>
-    <version>9.1.0-SNAPSHOT</version>
+    <version>9.2.0-SNAPSHOT</version>
     <artifactId>p2-feature</artifactId>
     <packaging>pom</packaging>
 
@@ -36,7 +36,7 @@
 
         <!-- by default complain if working tree is dirty (error|warning|ignore) -->
         <dirtyWorkingTree>warning</dirtyWorkingTree>
-        
+
         <collections.repository.url>file://${project.basedir}/../p2-repository/org.eclipse.collections/target/repository</collections.repository.url>
     </properties>
 
