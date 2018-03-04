@@ -17,40 +17,70 @@ before_install:
 install:
   -
 
+env:
+  -JDK=Java8
+  -JDK=Java9
+  -JDK=Java10-EA
+  -JDK=Java11-EA
+
 matrix:
   fast_finish: true
   include:
     - jdk: oraclejdk8
       env:
         - DESC="acceptance tests"
+        - JDK=Java8
         - CMD="mvn install --projects acceptance-tests --also-make --activate-profiles all --batch-mode --show-version --errors"
 
     - jdk: oraclejdk8
       env:
         - DESC="findbugs"
+        - JDK=Java8
         - CMD="mvn install findbugs:check --projects '!scala-unit-tests,!jmh-scala-tests,!jmh-tests,!p2-repository' --activate-profiles all -DskipTests=true --batch-mode --show-version --errors"
 
     - jdk: oraclejdk8
       env:
         - DESC="checkstyle"
+        - JDK=Java8
         - CMD="mvn install checkstyle:check --activate-profiles all -DskipTests=true --batch-mode --show-version --errors"
 
     - jdk: oraclejdk8
       env:
         - DESC="unit tests"
+        - JDK=Java8
         - CMD="mvn install --batch-mode --show-version --errors"
 
     - jdk: oraclejdk8
       env:
         - DESC="compile jmh-tests and performance-tests"
+        - JDK=Java8
         - CMD="mvn install --projects jmh-tests,performance-tests --also-make --activate-profiles all -DskipTests=true --batch-mode --show-version --errors"
 
     - jdk: oraclejdk9
       env:
         - DESC="unit tests Java 9"
+        - JDK=Java9
         - CMD="mvn install --projects '!scala-unit-tests,!jmh-scala-tests,!jmh-tests,!p2-repository' --batch-mode --show-version --errors"
 
-script: eval travis_wait 35 $CMD
+    - jdk: oraclejdk8
+      env:
+        - DESC="Java 10 regression"
+        - JDK=Java10-EA
+        - CMD=""
+
+    - jdk: oraclejdk8
+      env:
+        - DESC="Java 11 regression"
+        - JDK=Java11-EA
+        - CMD=""
+
+  allow_failures:
+    - env: JDK=Java10-EA
+    - env: JDK=Java11-EA
+
+script:
+  - ./.travis-command-ea-builds.sh
+  - eval travis_wait 55 $CMD
 
 cache:
   directories:
