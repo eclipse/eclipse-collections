@@ -1057,5 +1057,11 @@ public interface RichIterableUniqueTestCase extends RichIterableTestCase
                         Comparators.reverseNaturalOrder(),
                         pairs),
                 iterable.toSortedMap(Comparators.reverseNaturalOrder(), Object::toString, each -> each % 10));
+
+        assertEquals(
+                TreeSortedMap.newMapWith(
+                        Comparators.naturalOrder(),
+                        pairs),
+                iterable.toSortedMapBy(Functions.getStringPassThru(), Object::toString, each -> each % 10));
     }
 }

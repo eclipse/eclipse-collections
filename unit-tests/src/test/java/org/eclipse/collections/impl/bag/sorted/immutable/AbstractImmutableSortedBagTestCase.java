@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 Goldman Sachs and others.
+ * Copyright (c) 2018 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -905,6 +905,16 @@ public abstract class AbstractImmutableSortedBagTestCase extends AbstractImmutab
     {
         ImmutableSortedBag<Integer> integers = this.classUnderTest();
         MutableSortedMap<Integer, String> map = integers.toSortedMap(Comparators.reverseNaturalOrder(),
+                Functions.getIntegerPassThru(), String::valueOf);
+        Verify.assertMapsEqual(integers.toMap(Functions.getIntegerPassThru(), String::valueOf), map);
+        Verify.assertListsEqual(FastList.newListWith(2, 1), map.keySet().toList());
+    }
+
+    @Test
+    public void toSortedMapBy()
+    {
+        ImmutableSortedBag<Integer> integers = this.classUnderTest();
+        MutableSortedMap<Integer, String> map = integers.toSortedMapBy(key -> -key,
                 Functions.getIntegerPassThru(), String::valueOf);
         Verify.assertMapsEqual(integers.toMap(Functions.getIntegerPassThru(), String::valueOf), map);
         Verify.assertListsEqual(FastList.newListWith(2, 1), map.keySet().toList());

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2018 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -673,6 +673,15 @@ public abstract class AbstractObjectBooleanMapKeyValuesViewTestCase
         MutableSortedMap<String, String> map =
                 pairs.toSortedMap(Comparators.reverseNaturalOrder(), String::valueOf, String::valueOf);
         Assert.assertEquals(TreeSortedMap.newMapWith(Comparators.reverseNaturalOrder(), "1:true", "1:true", "2:false", "2:false", "3:true", "3:true"), map);
+    }
+
+    @Test
+    public void toSortedMapBy()
+    {
+        RichIterable<ObjectBooleanPair<Integer>> pairs = this.newWith(1, true, 2, false, 3, true);
+        MutableSortedMap<String, String> map =
+                pairs.toSortedMapBy(String::valueOf, String::valueOf, String::valueOf);
+        Assert.assertEquals(TreeSortedMap.newMapWith(Comparators.naturalOrder(), "1:true", "1:true", "2:false", "2:false", "3:true", "3:true"), map);
     }
 
     @Test

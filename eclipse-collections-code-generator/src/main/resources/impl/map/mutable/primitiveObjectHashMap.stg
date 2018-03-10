@@ -1844,6 +1844,12 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
     }
 
     @Override
+    public \<KK extends Comparable\<? super KK>, NK, NV> MutableSortedMap\<NK, NV> toSortedMapBy(Function\<? super NK, KK> sortBy, Function\<? super V, ? extends NK> keyFunction, Function\<? super V, ? extends NV> valueFunction)
+    {
+        return this.toSortedMap(Comparators.byFunction(sortBy), keyFunction, valueFunction);
+    }
+
+    @Override
     public LazyIterable\<V> asLazy()
     {
         return LazyIterate.adapt(this);

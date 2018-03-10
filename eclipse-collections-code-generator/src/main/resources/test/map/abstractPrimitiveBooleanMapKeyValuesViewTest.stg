@@ -1,4 +1,4 @@
-import "copyright.stg"
+import "copyrightAndOthers.stg"
 import "primitiveHashCode.stg"
 import "primitiveLiteral.stg"
 import "primitiveEquals.stg"
@@ -16,7 +16,7 @@ class(primitive) ::= <<
 >>
 
 body(type, name, wrapperName) ::= <<
-<copyright()>
+<copyrightAndOthers()>
 
 package org.eclipse.collections.impl.map.primitive;
 
@@ -789,6 +789,15 @@ public abstract class Abstract<name>BooleanMapKeyValuesViewTestCase
         MutableSortedMap\<String, String> map =
                 pairs.toSortedMap(Comparators.reverseNaturalOrder(), String::valueOf, String::valueOf);
         Assert.assertEquals(TreeSortedMap.newMapWith(Comparators.reverseNaturalOrder(), "<(toStringLiteral.(type))("1")>:false", "<(toStringLiteral.(type))("1")>:false", "<(toStringLiteral.(type))("2")>:true", "<(toStringLiteral.(type))("2")>:true", "<(toStringLiteral.(type))("3")>:false", "<(toStringLiteral.(type))("3")>:false"), map);
+    }
+
+    @Test
+    public void toSortedMapBy()
+    {
+        RichIterable\<<name>BooleanPair> pairs = this.newWith(<(literal.(type))("1")>, false, <(literal.(type))("2")>, true, <(literal.(type))("3")>, false);
+        MutableSortedMap\<String, String> map =
+                pairs.toSortedMapBy(String::valueOf, String::valueOf, String::valueOf);
+        Assert.assertEquals(TreeSortedMap.newMapWith(Comparators.naturalOrder(), "<(toStringLiteral.(type))("1")>:false", "<(toStringLiteral.(type))("1")>:false", "<(toStringLiteral.(type))("2")>:true", "<(toStringLiteral.(type))("2")>:true", "<(toStringLiteral.(type))("3")>:false", "<(toStringLiteral.(type))("3")>:false"), map);
     }
 
     @Test

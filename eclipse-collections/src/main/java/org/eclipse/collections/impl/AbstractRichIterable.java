@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 Goldman Sachs and others.
+ * Copyright (c) 2018 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -262,6 +262,15 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
         MutableSortedMap<K, V> sortedMap = SortedMaps.mutable.with(comparator);
         this.forEach(new MapCollectProcedure<>(sortedMap, keyFunction, valueFunction));
         return sortedMap;
+    }
+
+    @Override
+    public <KK extends Comparable<? super KK>, K, V> MutableSortedMap<K, V> toSortedMapBy(
+            Function<? super K, KK> sortBy,
+            Function<? super T, ? extends K> keyFunction,
+            Function<? super T, ? extends V> valueFunction)
+    {
+        return this.toSortedMap(Comparators.byFunction(sortBy), keyFunction, valueFunction);
     }
 
     @Override

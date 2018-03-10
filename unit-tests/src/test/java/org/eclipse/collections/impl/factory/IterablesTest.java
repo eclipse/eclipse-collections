@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2018 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -258,6 +258,19 @@ public class IterablesTest
     }
 
     @Test
+    public void mutableSortedMapsWithFunction()
+    {
+        this.assertEqualsAndInstanceOf(Interval.oneTo(1).toSortedMapBy(key -> -key, Functions.getPassThru(), Functions.getPassThru()),
+                Iterables.mSortedMap(Comparators.reverseNaturalOrder(), 1, 1), MutableSortedMap.class);
+        this.assertEqualsAndInstanceOf(Interval.oneTo(2).toSortedMapBy(key -> -key, Functions.getPassThru(), Functions.getPassThru()),
+                Iterables.mSortedMap(Comparators.reverseNaturalOrder(), 1, 1, 2, 2), MutableSortedMap.class);
+        this.assertEqualsAndInstanceOf(Interval.oneTo(3).toSortedMapBy(key -> key, Functions.getPassThru(), Functions.getPassThru()),
+                Iterables.mSortedMap(Comparators.reverseNaturalOrder(), 1, 1, 2, 2, 3, 3), MutableSortedMap.class);
+        this.assertEqualsAndInstanceOf(Interval.oneTo(4).toSortedMapBy(key -> -key, Functions.getPassThru(), Functions.getPassThru()),
+                Iterables.mSortedMap(Comparators.reverseNaturalOrder(), 1, 1, 2, 2, 3, 3, 4, 4), MutableSortedMap.class);
+    }
+
+    @Test
     public void immutableSortedMaps()
     {
         this.assertEqualsAndInstanceOf(TreeSortedMap.newMap(), Iterables.iSortedMap(), ImmutableSortedMap.class);
@@ -282,6 +295,19 @@ public class IterablesTest
         this.assertEqualsAndInstanceOf(Interval.oneTo(3).toSortedMap(Comparators.reverseNaturalOrder(), Functions.getPassThru(), Functions.getPassThru()),
                 Iterables.iSortedMap(Comparators.reverseNaturalOrder(), 1, 1, 2, 2, 3, 3), ImmutableSortedMap.class);
         this.assertEqualsAndInstanceOf(Interval.oneTo(4).toSortedMap(Comparators.reverseNaturalOrder(), Functions.getPassThru(), Functions.getPassThru()),
+                Iterables.iSortedMap(Comparators.reverseNaturalOrder(), 1, 1, 2, 2, 3, 3, 4, 4), ImmutableSortedMap.class);
+    }
+
+    @Test
+    public void immutableSortedMapsWithFunction()
+    {
+        this.assertEqualsAndInstanceOf(Interval.oneTo(1).toSortedMapBy(key -> -key, Functions.getPassThru(), Functions.getPassThru()),
+                Iterables.iSortedMap(Comparators.reverseNaturalOrder(), 1, 1), ImmutableSortedMap.class);
+        this.assertEqualsAndInstanceOf(Interval.oneTo(2).toSortedMapBy(key -> -key, Functions.getPassThru(), Functions.getPassThru()),
+                Iterables.iSortedMap(Comparators.reverseNaturalOrder(), 1, 1, 2, 2), ImmutableSortedMap.class);
+        this.assertEqualsAndInstanceOf(Interval.oneTo(3).toSortedMapBy(key -> -key, Functions.getPassThru(), Functions.getPassThru()),
+                Iterables.iSortedMap(Comparators.reverseNaturalOrder(), 1, 1, 2, 2, 3, 3), ImmutableSortedMap.class);
+        this.assertEqualsAndInstanceOf(Interval.oneTo(4).toSortedMapBy(key -> -key, Functions.getPassThru(), Functions.getPassThru()),
                 Iterables.iSortedMap(Comparators.reverseNaturalOrder(), 1, 1, 2, 2, 3, 3, 4, 4), ImmutableSortedMap.class);
     }
 

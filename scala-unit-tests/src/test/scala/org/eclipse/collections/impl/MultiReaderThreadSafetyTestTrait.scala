@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2018 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -928,6 +928,13 @@ trait MultiReaderThreadSafetyTestTrait
         this.assert(readersBlocked = false, writersBlocked = true)
         {
             this.classUnderTest.toSortedMap[Int, Int]((_: Int, _: Int) => 0, (_: Int) => 0, (_: Int) => 0)
+        }
+
+    @Test
+    def toSortedMap_withFunction_safe(): Unit =
+        this.assert(readersBlocked = false, writersBlocked = true)
+        {
+            this.classUnderTest.toSortedMapBy[Integer, Int, Int]((_: Int) => Integer.valueOf(0), (_: Int) => 0, (_: Int) => 0)
         }
 
     @Test
