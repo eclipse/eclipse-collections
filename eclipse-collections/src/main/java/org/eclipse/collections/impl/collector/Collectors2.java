@@ -31,6 +31,7 @@ import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
 import org.eclipse.collections.api.bimap.ImmutableBiMap;
 import org.eclipse.collections.api.bimap.MutableBiMap;
 import org.eclipse.collections.api.block.function.Function;
+import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.function.primitive.BooleanFunction;
 import org.eclipse.collections.api.block.function.primitive.ByteFunction;
@@ -55,6 +56,7 @@ import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.api.map.MutableMap;
+import org.eclipse.collections.api.map.MutableMapIterable;
 import org.eclipse.collections.api.map.primitive.MutableObjectDoubleMap;
 import org.eclipse.collections.api.map.primitive.MutableObjectLongMap;
 import org.eclipse.collections.api.multimap.ImmutableMultimap;
@@ -875,6 +877,32 @@ public final class Collectors2
                     return r1;
                 },
                 finisher,
+                EMPTY_CHARACTERISTICS);
+    }
+
+    /**
+     * Groups the elements using the {@code groupBy} function and all the elements that map to the same key are
+     * aggregated together using the {@code aggregator} function. The second parameter, the {@code zeroValueFactory}
+     * function, creates the initial value in each aggregation. Aggregate results are allowed to be immutable as they
+     * will be replaced in the map.
+     */
+    public static <T, K, R extends MutableMapIterable<K, T>> Collector<T, ?, R> aggregateBy(
+            Function<? super T, ? extends K> groupBy,
+            Function0<? extends T> zeroValueFactory,
+            Function2<? super T, ? super T, ? extends T> aggregator,
+            Supplier<R> supplier)
+    {
+        return Collector.of(
+                supplier,
+                (map, each) ->
+                {
+                    map.updateValueWith(groupBy.valueOf(each), zeroValueFactory, aggregator, each);
+                },
+                (r1, r2) ->
+                {
+                    r2.forEachKeyValue((key, value) -> r1.updateValueWith(key, zeroValueFactory, aggregator, value));
+                    return r1;
+                },
                 EMPTY_CHARACTERISTICS);
     }
 
