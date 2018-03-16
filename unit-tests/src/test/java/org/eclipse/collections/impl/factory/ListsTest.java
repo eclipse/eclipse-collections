@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2018 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -24,7 +24,6 @@ import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.list.mutable.MultiReaderFastList;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
-import org.junit.Assume;
 import org.junit.Test;
 
 public class ListsTest
@@ -197,7 +196,6 @@ public class ListsTest
 
     private void assertPresizedListEquals(int initialCapacity, FastList<String> list)
     {
-        Assume.assumeTrue(System.getProperty("java.version").startsWith("1.8."));
         try
         {
             Field itemsField = FastList.class.getDeclaredField("items");
@@ -266,7 +264,6 @@ public class ListsTest
 
     private static void assertPresizedMultiReaderListEquals(int initialCapacity, MultiReaderFastList<String> list)
     {
-        Assume.assumeTrue(System.getProperty("java.version").startsWith("1.8."));
         try
         {
             Field delegateField = MultiReaderFastList.class.getDeclaredField("delegate");
