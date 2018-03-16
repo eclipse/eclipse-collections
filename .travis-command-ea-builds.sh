@@ -1,6 +1,7 @@
 #!/bin/bash
 
-set -euo pipefail
+set -e
+set +u
 
 # Prevent accidental execution outside of Travis:
 if [ -z "${TRAVIS+false}" ]
@@ -11,7 +12,14 @@ fi
 
 # Switch to desired JDK, download if required:
 function install_jdk_and_run_ea_build {
+  if [[ -z "$1" ]];
+  then
+    echo "JDK URL is not set. Exiting!"
+    exit 0
+  fi
+
   JDK_URL=$1
+  echo "Downloading JDK from $JDK_URL"
 
   FILENAME="${JDK_URL##*/}"
 
@@ -47,9 +55,9 @@ Java9)
   echo "Java 9 already exists in Travis!"
   ;;
 Java10-EA)
-  install_jdk_and_run_ea_build "https://download.java.net/java/jdk10/archive/42/BCL/jdk-10-ea+42_linux-x64_bin.tar.gz"
+  install_jdk_and_run_ea_build ${JDK10_EA_URL}
   ;;
 Java11-EA)
-  install_jdk_and_run_ea_build "https://download.java.net/java/early_access/jdk11/3/BCL/jre-11-ea+3_linux-x64_bin.tar.gz"
+  install_jdk_and_run_ea_build ${JDK11_EA_URL}
   ;;
 esac
