@@ -37,7 +37,6 @@ import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.test.domain.Key;
 import org.eclipse.collections.impl.tuple.Tuples;
 import org.junit.Assert;
-import org.junit.Assume;
 import org.junit.Test;
 
 import static org.eclipse.collections.impl.factory.Iterables.mSet;
@@ -1004,7 +1003,6 @@ public class SetsTest
 
     private void assertPresizedSetSizeEquals(int initialCapacity, UnifiedSet<String> set)
     {
-        Assume.assumeTrue(System.getProperty("java.version").startsWith("1.8."));
         try
         {
             Field tableField = UnifiedSet.class.getDeclaredField("table");
