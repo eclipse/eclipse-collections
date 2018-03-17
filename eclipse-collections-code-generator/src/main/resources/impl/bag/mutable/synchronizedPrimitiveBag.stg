@@ -235,7 +235,10 @@ public class Synchronized<name>Bag
     @Override
     public Mutable<name>Bag asUnmodifiable()
     {
-        return new Unmodifiable<name>Bag(this);
+        synchronized (this.getLock())
+        {
+            return new Unmodifiable<name>Bag(this);
+        }
     }
 
     @Override
@@ -247,7 +250,10 @@ public class Synchronized<name>Bag
     @Override
     public Immutable<name>Bag toImmutable()
     {
-        return <name>Bags.immutable.withAll(this);
+        synchronized (this.getLock())
+        {
+            return <name>Bags.immutable.withAll(this);
+        }
     }
 
     /**

@@ -524,7 +524,10 @@ public class Synchronized<name1><name2>Map
     @Override
     public Mutable<name1><name2>Map asUnmodifiable()
     {
-        return new Unmodifiable<name1><name2>Map(this);
+        synchronized (this.lock)
+        {
+            return new Unmodifiable<name1><name2>Map(this);
+        }
     }
 
     @Override
@@ -536,7 +539,10 @@ public class Synchronized<name1><name2>Map
     @Override
     public Immutable<name1><name2>Map toImmutable()
     {
-        return <name1><name2>Maps.immutable.withAll(this);
+        synchronized (this.lock)
+        {
+            return <name1><name2>Maps.immutable.withAll(this);
+        }
     }
 
     @Override

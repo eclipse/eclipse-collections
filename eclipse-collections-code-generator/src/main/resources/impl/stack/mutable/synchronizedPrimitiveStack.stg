@@ -419,7 +419,10 @@ public class Synchronized<name>Stack
     @Override
     public Mutable<name>Stack asUnmodifiable()
     {
-        return new Unmodifiable<name>Stack(this);
+        synchronized (this.lock)
+        {
+            return new Unmodifiable<name>Stack(this);
+        }
     }
 
     @Override
@@ -431,7 +434,10 @@ public class Synchronized<name>Stack
     @Override
     public Immutable<name>Stack toImmutable()
     {
-        return <name>Stacks.immutable.withAllReversed(this);
+        synchronized (this.lock)
+        {
+            return <name>Stacks.immutable.withAllReversed(this);
+        }
     }
 
     /**

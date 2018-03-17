@@ -176,7 +176,10 @@ public class Synchronized<name>Set
     @Override
     public Mutable<name>Set asUnmodifiable()
     {
-        return new Unmodifiable<name>Set(this);
+        synchronized (this.getLock())
+        {
+            return new Unmodifiable<name>Set(this);
+        }
     }
 
     @Override

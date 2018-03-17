@@ -1383,7 +1383,10 @@ public class Synchronized<name>ObjectMap\<V>
     @Override
     public Mutable<name>ObjectMap\<V> asUnmodifiable()
     {
-        return new Unmodifiable<name>ObjectMap\<>(this);
+        synchronized (this.lock)
+        {
+            return new Unmodifiable<name>ObjectMap\<>(this);
+        }
     }
 
     @Override
@@ -1395,7 +1398,10 @@ public class Synchronized<name>ObjectMap\<V>
     @Override
     public Immutable<name>ObjectMap\<V> toImmutable()
     {
-        return <name>ObjectMaps.immutable.withAll(this);
+        synchronized (this.lock)
+        {
+            return <name>ObjectMaps.immutable.withAll(this);
+        }
     }
 
     @Override
