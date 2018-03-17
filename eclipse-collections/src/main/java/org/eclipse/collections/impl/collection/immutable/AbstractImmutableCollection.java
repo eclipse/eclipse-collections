@@ -227,6 +227,15 @@ public abstract class AbstractImmutableCollection<T>
     }
 
     /**
+     * @since 10.0.0
+     */
+    @Override
+    public <V> ImmutableBag<V> countByEach(Function<? super T, ? extends Iterable<V>> function)
+    {
+        return this.countByEach(function, Bags.mutable.empty()).toImmutable();
+    }
+
+    /**
      * @since 9.0
      */
     @Override

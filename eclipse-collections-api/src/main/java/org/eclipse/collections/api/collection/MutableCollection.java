@@ -495,6 +495,15 @@ public interface MutableCollection<T>
     }
 
     /**
+     * @since 10.0.0
+     */
+    @Override
+    default <V> MutableBag<V> countByEach(Function<? super T, ? extends Iterable<V>> function)
+    {
+        return this.asLazy().flatCollect(function).toBag();
+    }
+
+    /**
      * {@inheritDoc}
      * Co-variant example for MutableCollection:
      * <pre>

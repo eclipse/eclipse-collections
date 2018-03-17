@@ -175,6 +175,15 @@ public interface ImmutableBag<T> extends UnsortedBag<T>, ImmutableBagIterable<T>
         return this.collectWith(function, parameter);
     }
 
+    /**
+     * @since 10.0.0
+     */
+    @Override
+    default <V> ImmutableBag<V> countByEach(Function<? super T, ? extends Iterable<V>> function)
+    {
+        return this.flatCollect(function);
+    }
+
     @Override
     <V> ImmutableBagMultimap<V, T> groupBy(Function<? super T, ? extends V> function);
 

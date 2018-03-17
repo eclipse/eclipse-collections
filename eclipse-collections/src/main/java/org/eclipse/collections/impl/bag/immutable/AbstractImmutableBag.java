@@ -140,6 +140,15 @@ public abstract class AbstractImmutableBag<T>
         return this.collectWith(function, parameter);
     }
 
+    /**
+     * @since 10.0.0
+     */
+    @Override
+    public <V> ImmutableBag<V> countByEach(Function<? super T, ? extends Iterable<V>> function)
+    {
+        return this.flatCollect(function);
+    }
+
     @Override
     public <P, V> ImmutableBag<V> collectWith(Function2<? super T, ? super P, ? extends V> function, P parameter)
     {

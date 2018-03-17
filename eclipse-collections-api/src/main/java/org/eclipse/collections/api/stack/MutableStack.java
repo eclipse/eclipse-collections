@@ -204,6 +204,15 @@ public interface MutableStack<T> extends StackIterable<T>
         return this.asLazy().<P, V>collectWith(function, parameter).toBag();
     }
 
+    /**
+     * @since 10.0.0
+     */
+    @Override
+    default <V> MutableBag<V> countByEach(Function<? super T, ? extends Iterable<V>> function)
+    {
+        return this.asLazy().flatCollect(function).toBag();
+    }
+
     @Override
     <V> MutableListMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function);
 

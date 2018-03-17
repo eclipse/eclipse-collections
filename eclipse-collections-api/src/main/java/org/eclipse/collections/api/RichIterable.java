@@ -2088,6 +2088,28 @@ public interface RichIterable<T>
     }
 
     /**
+     * This method will count the number of occurrences of each value calculated by applying the
+     * function to each element of the collection.
+     *
+     * @since 10.0.0
+     */
+    default <V> Bag<V> countByEach(Function<? super T, ? extends Iterable<V>> function)
+    {
+        return this.asLazy().flatCollect(function).toBag();
+    }
+
+    /**
+     * This method will count the number of occurrences of each value calculated by applying the
+     * function to each element of the collection.
+     *
+     * @since 10.0.0
+     */
+    default <V, R extends MutableBagIterable<V>> R countByEach(Function<? super T, ? extends Iterable<V>> function, R target)
+    {
+        return this.flatCollect(function, target);
+    }
+
+    /**
      * Same as {@link #groupBy(Function)}, except that the results are gathered into the specified {@code target}
      * multimap.
      * <p>

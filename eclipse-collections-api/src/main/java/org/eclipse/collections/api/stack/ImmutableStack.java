@@ -162,6 +162,15 @@ public interface ImmutableStack<T> extends StackIterable<T>
         return this.asLazy().<P, V>collectWith(function, parameter).toBag().toImmutable();
     }
 
+    /**
+     * @since 10.0.0
+     */
+    @Override
+    default <V> ImmutableBag<V> countByEach(Function<? super T, ? extends Iterable<V>> function)
+    {
+        return this.asLazy().flatCollect(function).toBag().toImmutable();
+    }
+
     @Override
     <V> ImmutableListMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function);
 

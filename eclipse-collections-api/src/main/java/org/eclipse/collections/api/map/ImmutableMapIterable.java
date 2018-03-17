@@ -99,6 +99,15 @@ public interface ImmutableMapIterable<K, V> extends MapIterable<K, V>
         return this.asLazy().<P, V1>collectWith(function, parameter).toBag().toImmutable();
     }
 
+    /**
+     * @since 10.0.0
+     */
+    @Override
+    default <V1> ImmutableBag<V1> countByEach(Function<? super V, ? extends Iterable<V1>> function)
+    {
+        return this.asLazy().flatCollect(function).toBag().toImmutable();
+    }
+
     @Override
     <V1> ImmutableMultimap<V1, V> groupBy(Function<? super V, ? extends V1> function);
 

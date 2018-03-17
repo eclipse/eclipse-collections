@@ -56,6 +56,7 @@ import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.SortedBags;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.list.mutable.FastList;
+import org.eclipse.collections.impl.list.primitive.IntInterval;
 import org.eclipse.collections.impl.set.sorted.mutable.TreeSortedSet;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
@@ -176,6 +177,19 @@ public abstract class AbstractImmutableCollectionTestCase
         Verify.assertSize(integers.size(), results);
         Bag<Integer> results2 = integers.countByWith((each, parm) -> each, null, SortedBags.mutable.empty());
         Verify.assertSize(integers.size(), results2);
+    }
+
+    /**
+     * @since 10.0.0
+     */
+    @Test
+    public void countByEach()
+    {
+        ImmutableCollection<Integer> integers = this.classUnderTest();
+        Bag<Integer> results = integers.countByEach(each -> IntInterval.oneTo(5).collect(i -> each * i));
+        Verify.assertSize(integers.size() * 5, results);
+        Bag<Integer> results2 = integers.countByEach(each -> IntInterval.oneTo(5).collect(i -> each * i), SortedBags.mutable.empty());
+        Verify.assertSize(integers.size() * 5, results2);
     }
 
     @Test

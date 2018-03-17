@@ -284,6 +284,15 @@ public abstract class AbstractSynchronizedMutableCollection<T>
     }
 
     /**
+     * @since 10.0.0
+     */
+    @Override
+    public <V> MutableBag<V> countByEach(Function<? super T, ? extends Iterable<V>> function)
+    {
+        return (MutableBag<V>) super.countByEach(function);
+    }
+
+    /**
      * @since 9.0
      */
     @Override

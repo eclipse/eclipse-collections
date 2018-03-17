@@ -228,6 +228,15 @@ public interface MutableSortedBag<T>
     }
 
     /**
+     * @since 10.0.0
+     */
+    @Override
+    default <V> MutableBag<V> countByEach(Function<? super T, ? extends Iterable<V>> function)
+    {
+        return this.asLazy().flatCollect(function).toBag();
+    }
+
+    /**
      * Can return an MutableMap that's backed by a LinkedHashMap.
      */
     @Override

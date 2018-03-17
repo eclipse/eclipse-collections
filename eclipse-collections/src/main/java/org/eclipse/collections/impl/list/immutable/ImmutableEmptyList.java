@@ -287,6 +287,24 @@ final class ImmutableEmptyList<T>
         return target;
     }
 
+    /**
+     * @since 10.0.0
+     */
+    @Override
+    public <V> ImmutableBag<V> countByEach(Function<? super T, ? extends Iterable<V>> function)
+    {
+        return Bags.immutable.empty();
+    }
+
+    /**
+     * @since 10.0.0
+     */
+    @Override
+    public <V, R extends MutableBagIterable<V>> R countByEach(Function<? super T, ? extends Iterable<V>> function, R target)
+    {
+        return target;
+    }
+
     @Override
     public T detect(Predicate<? super T> predicate)
     {

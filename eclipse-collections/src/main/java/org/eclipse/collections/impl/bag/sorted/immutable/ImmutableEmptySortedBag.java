@@ -235,6 +235,24 @@ class ImmutableEmptySortedBag<T>
         return target;
     }
 
+    /**
+     * @since 10.0.0
+     */
+    @Override
+    public <V> ImmutableBag<V> countByEach(Function<? super T, ? extends Iterable<V>> function)
+    {
+        return Bags.immutable.empty();
+    }
+
+    /**
+     * @since 10.0.0
+     */
+    @Override
+    public <V, R extends MutableBagIterable<V>> R countByEach(Function<? super T, ? extends Iterable<V>> function, R target)
+    {
+        return target;
+    }
+
     @Override
     public ImmutableSortedBag<T> selectByOccurrences(IntPredicate predicate)
     {

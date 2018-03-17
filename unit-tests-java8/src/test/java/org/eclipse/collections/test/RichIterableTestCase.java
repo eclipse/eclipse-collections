@@ -83,6 +83,7 @@ import org.eclipse.collections.impl.factory.SortedSets;
 import org.eclipse.collections.impl.factory.primitive.ObjectDoubleMaps;
 import org.eclipse.collections.impl.factory.primitive.ObjectLongMaps;
 import org.eclipse.collections.impl.list.Interval;
+import org.eclipse.collections.impl.list.primitive.IntInterval;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.map.sorted.mutable.TreeSortedMap;
 import org.eclipse.collections.impl.multimap.bag.HashBagMultimap;
@@ -1630,6 +1631,27 @@ public interface RichIterableTestCase extends IterableTestCase
         Bag<Integer> evensAndOdds2 = integers.countByWith((each, parm) -> Integer.valueOf(each % parm), 2, Bags.mutable.empty());
         Assert.assertEquals(3, evensAndOdds2.occurrencesOf(1));
         Assert.assertEquals(3, evensAndOdds2.occurrencesOf(0));
+    }
+
+    /**
+     * @since 10.0.0
+     */
+    @Test
+    default void RichIterable_countByEach()
+    {
+        RichIterable<Integer> integerList = this.newWith(1, 2, 4);
+        Bag<Integer> integerBag1 = integerList.countByEach(each -> IntInterval.oneTo(5).collect(i -> each * i));
+        assertEquals(1, integerBag1.occurrencesOf(1));
+        assertEquals(2, integerBag1.occurrencesOf(2));
+        assertEquals(3, integerBag1.occurrencesOf(4));
+        assertEquals(2, integerBag1.occurrencesOf(8));
+        assertEquals(1, integerBag1.occurrencesOf(12));
+        Bag<Integer> integerBag2 = integerList.countByEach(each -> IntInterval.oneTo(5).collect(i -> each * i), Bags.mutable.empty());
+        assertEquals(1, integerBag2.occurrencesOf(1));
+        assertEquals(2, integerBag2.occurrencesOf(2));
+        assertEquals(3, integerBag2.occurrencesOf(4));
+        assertEquals(2, integerBag2.occurrencesOf(8));
+        assertEquals(1, integerBag2.occurrencesOf(12));
     }
 
     @Test

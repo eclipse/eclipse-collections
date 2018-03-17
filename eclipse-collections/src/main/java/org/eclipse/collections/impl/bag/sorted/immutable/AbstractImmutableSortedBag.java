@@ -126,6 +126,15 @@ abstract class AbstractImmutableSortedBag<T>
         return this.collectWith(function, parameter, Bags.mutable.<V>empty()).toImmutable();
     }
 
+    /**
+     * @since 10.0.0
+     */
+    @Override
+    public <V> ImmutableBag<V> countByEach(Function<? super T, ? extends Iterable<V>> function)
+    {
+        return this.countByEach(function, Bags.mutable.empty()).toImmutable();
+    }
+
     @Override
     public <V> ImmutableSortedBagMultimap<V, T> groupBy(Function<? super T, ? extends V> function)
     {
