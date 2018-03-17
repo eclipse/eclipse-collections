@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 Goldman Sachs and others.
+ * Copyright (c) 2018 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -33,6 +33,7 @@ import org.eclipse.collections.impl.factory.SortedMaps;
 import org.eclipse.collections.impl.factory.Stacks;
 import org.eclipse.collections.impl.factory.primitive.IntBags;
 import org.eclipse.collections.impl.list.Interval;
+import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.partition.bag.PartitionHashBag;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
@@ -1109,6 +1110,34 @@ public final class Collectors2Test
         Interval integers = Interval.oneTo(100000);
         MutableBag<Integer> counts = integers.parallelStream().collect(Collectors2.countBy(i -> i % 2));
         Assert.assertEquals(integers.countBy(i -> i % 2), counts);
+        Assert.assertEquals(50000, counts.occurrencesOf(0));
+        Assert.assertEquals(50000, counts.occurrencesOf(1));
+    }
+
+    @Test
+    public void countByEach()
+    {
+        List<Interval> intervals = FastList.newListWith(
+                Interval.evensFromTo(1, 100),
+                Interval.oddsFromTo(1, 100));
+
+        MutableBag<Integer> counts = intervals.stream().collect(Collectors2.countByEach(iv -> iv.collect(i -> i % 2)));
+
+        Assert.assertEquals(Interval.oneTo(100).countBy(i -> i % 2), counts);
+        Assert.assertEquals(50, counts.occurrencesOf(0));
+        Assert.assertEquals(50, counts.occurrencesOf(1));
+    }
+
+    @Test
+    public void countByEachParallel()
+    {
+        List<Interval> intervals = FastList.newListWith(
+                Interval.evensFromTo(1, 100000),
+                Interval.oddsFromTo(1, 100000));
+
+        MutableBag<Integer> counts = intervals.parallelStream().collect(Collectors2.countByEach(iv -> iv.collect(i -> i % 2)));
+
+        Assert.assertEquals(Interval.oneTo(100000).countBy(i -> i % 2), counts);
         Assert.assertEquals(50000, counts.occurrencesOf(0));
         Assert.assertEquals(50000, counts.occurrencesOf(1));
     }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 Goldman Sachs and others.
+ * Copyright (c) 2018 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -734,6 +734,21 @@ public final class Collectors2
         return Collector.of(
                 Bags.mutable::empty,
                 (bag, each) -> bag.with(function.valueOf(each)),
+                MutableBag::withAll,
+                EMPTY_CHARACTERISTICS);
+    }
+
+    /**
+     * <p>Same as {@link #countBy(Function)}, except the result of applying the specified function will return a
+     * collection of keys for each value.</p>
+     *
+     * @since 9.2
+     */
+    public static <T, K> Collector<T, ?, MutableBag<K>> countByEach(Function<? super T, ? extends Iterable<K>> function)
+    {
+        return Collector.of(
+                Bags.mutable::empty,
+                (bag, each) -> bag.withAll(function.valueOf(each)),
                 MutableBag::withAll,
                 EMPTY_CHARACTERISTICS);
     }
