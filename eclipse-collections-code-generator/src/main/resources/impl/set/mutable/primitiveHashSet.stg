@@ -295,6 +295,11 @@ public class <name>HashSet extends Abstract<name>Set implements Mutable<name>Set
     @Override
     public boolean remove(<type> value)
     {
+        return this.remove(value, true);
+    }
+
+    private boolean remove(<type> value, boolean rehash)
+    {
         if (isBetweenZeroAndThirtyOne(value))
         {
             int initial = this.zeroToThirtyOne;
@@ -316,7 +321,7 @@ public class <name>HashSet extends Abstract<name>Set implements Mutable<name>Set
             this.table[index] = REMOVED;
             this.occupiedWithData--;
             this.occupiedWithSentinels++;
-            if (this.occupiedWithSentinels > this.maxOccupiedWithSentinels())
+            if (rehash && this.occupiedWithSentinels > this.maxOccupiedWithSentinels())
             {
                 this.rehash();
             }
@@ -1610,7 +1615,7 @@ public class <name>HashSet extends Abstract<name>Set implements Mutable<name>Set
             {
                 removeValue = <name>HashSet.this.table[this.position - 1];
             }
-            <name>HashSet.this.remove(removeValue);
+            <name>HashSet.this.remove(removeValue, false);
             this.count--;
         }
     }
