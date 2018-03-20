@@ -295,21 +295,9 @@ public class <name>HashSet extends Abstract<name>Set implements Mutable<name>Set
     @Override
     public boolean remove(<type> value)
     {
-        return this.remove(value, true);
-    }
-
-    private boolean remove(<type> value, boolean rehash)
-    {
         if (isBetweenZeroAndThirtyOne(value))
         {
-            int initial = this.zeroToThirtyOne;
-            this.zeroToThirtyOne &= ~(1 \<\< <(castRealTypeToInt.(type))("value")>);
-            if (this.zeroToThirtyOne == initial)
-            {
-                return false;
-            }
-            this.zeroToThirtyOneOccupied--;
-            return true;
+            return this.removeZeroToThirtyOne(value);
         }
         int index = this.probe(value);
         if (<(equals.(type))("this.table[index]", "value")>)
@@ -321,7 +309,7 @@ public class <name>HashSet extends Abstract<name>Set implements Mutable<name>Set
             this.table[index] = REMOVED;
             this.occupiedWithData--;
             this.occupiedWithSentinels++;
-            if (rehash && this.occupiedWithSentinels > this.maxOccupiedWithSentinels())
+            if (this.occupiedWithSentinels > this.maxOccupiedWithSentinels())
             {
                 this.rehash();
             }
@@ -329,6 +317,18 @@ public class <name>HashSet extends Abstract<name>Set implements Mutable<name>Set
             return true;
         }
         return false;
+    }
+
+    private boolean removeZeroToThirtyOne(<type> value)
+    {
+        int initial = this.zeroToThirtyOne;
+        this.zeroToThirtyOne &= ~(1 \<\< <(castRealTypeToInt.(type))("value")>);
+        if (this.zeroToThirtyOne == initial)
+        {
+            return false;
+        }
+        this.zeroToThirtyOneOccupied--;
+        return true;
     }
 
     @Override
@@ -1615,7 +1615,21 @@ public class <name>HashSet extends Abstract<name>Set implements Mutable<name>Set
             {
                 removeValue = <name>HashSet.this.table[this.position - 1];
             }
-            <name>HashSet.this.remove(removeValue, false);
+            if (<name>HashSet.isBetweenZeroAndThirtyOne(removeValue))
+            {
+                <name>HashSet.this.removeZeroToThirtyOne(removeValue);
+            }
+            else if (<(equals.(type))({<name>HashSet.this.table[this.position - 1]}, "removeValue")>)
+            {
+                if (<name>HashSet.this.copyOnWrite)
+                {
+                    <name>HashSet.this.copyTable();
+                }
+                <name>HashSet.this.table[position -1] = REMOVED;
+                <name>HashSet.this.occupiedWithData--;
+                <name>HashSet.this.occupiedWithSentinels++;
+            }
+
             this.count--;
         }
     }
