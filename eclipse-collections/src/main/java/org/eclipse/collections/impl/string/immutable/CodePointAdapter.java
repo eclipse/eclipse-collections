@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 Goldman Sachs and others.
+ * Copyright (c) 2018 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -17,6 +17,7 @@ import java.util.NoSuchElementException;
 
 import org.eclipse.collections.api.IntIterable;
 import org.eclipse.collections.api.LazyIntIterable;
+import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.primitive.MutableIntBag;
 import org.eclipse.collections.api.block.function.primitive.IntToIntFunction;
 import org.eclipse.collections.api.block.function.primitive.IntToObjectFunction;
@@ -36,6 +37,7 @@ import org.eclipse.collections.api.tuple.primitive.IntIntPair;
 import org.eclipse.collections.api.tuple.primitive.IntObjectPair;
 import org.eclipse.collections.impl.bag.mutable.primitive.IntHashBag;
 import org.eclipse.collections.impl.factory.Lists;
+import org.eclipse.collections.impl.factory.primitive.IntLists;
 import org.eclipse.collections.impl.lazy.primitive.ReverseIntIterable;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.list.mutable.primitive.IntArrayList;
@@ -50,7 +52,9 @@ import org.eclipse.collections.impl.utility.Iterate;
  *
  * @since 7.0
  */
-public class CodePointAdapter extends AbstractIntIterable implements CharSequence, ImmutableIntList, Serializable
+public class CodePointAdapter
+        extends AbstractIntIterable
+        implements CharSequence, ImmutableIntList, Serializable
 {
     private static final long serialVersionUID = 1L;
 
@@ -536,6 +540,37 @@ public class CodePointAdapter extends AbstractIntIterable implements CharSequenc
             i += Character.charCount(codePoint);
         }
         return result;
+    }
+
+    @Override
+    public RichIterable<IntIterable> chunk(int size)
+    {
+        if (size <= 0)
+        {
+            throw new IllegalArgumentException("Size for groups must be positive but was: " + size);
+        }
+        MutableList<IntIterable> result = Lists.mutable.empty();
+        if (this.notEmpty())
+        {
+            if (this.size() <= size)
+            {
+                result.add(IntLists.immutable.withAll(this));
+            }
+            else
+            {
+                IntIterator iterator = this.intIterator();
+                while (iterator.hasNext())
+                {
+                    MutableIntList batch = IntLists.mutable.empty();
+                    for (int i = 0; i < size && iterator.hasNext(); i++)
+                    {
+                        batch.add(iterator.next());
+                    }
+                    result.add(CodePointList.from(batch));
+                }
+            }
+        }
+        return result.toImmutable();
     }
 
     @Override

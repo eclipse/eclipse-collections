@@ -1,0 +1,112 @@
+import "copyright.stg"
+import "primitiveEquals.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+
+targetPath() ::= "org/eclipse/collections/impl/lazy/primitive"
+
+fileName(primitive) ::= "Chunk<primitive.name>Iterable"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.lazy.primitive;
+
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
+import org.eclipse.collections.api.<name>Iterable;
+import org.eclipse.collections.api.block.function.Function0;
+import org.eclipse.collections.api.block.procedure.Procedure;
+import org.eclipse.collections.api.collection.primitive.Mutable<name>Collection;
+import org.eclipse.collections.api.iterator.<name>Iterator;
+import org.eclipse.collections.impl.factory.primitive.<name>Lists;
+import org.eclipse.collections.impl.lazy.AbstractLazyIterable;
+import org.eclipse.collections.impl.utility.internal.IterableIterate;
+
+/**
+ * This file was automatically generated from template file chunkPrimitiveIterable.stg.
+ */
+public class Chunk<name>Iterable
+        extends AbstractLazyIterable\<<name>Iterable>
+{
+    private final <name>Iterable adapted;
+    private final int size;
+
+    public Chunk<name>Iterable(<name>Iterable delegate, int size)
+    {
+        if (size \<= 0)
+        {
+            throw new IllegalArgumentException("Size for groups must be positive but was: " + size);
+        }
+
+        this.adapted = delegate;
+        this.size = size;
+    }
+
+    @Override
+    public Iterator\<<name>Iterable> iterator()
+    {
+        return new Chunk<name>Iterator(this.adapted, this.size);
+    }
+
+    @Override
+    public void each(Procedure\<? super <name>Iterable> procedure)
+    {
+        IterableIterate.forEach(this, procedure);
+    }
+
+    public static class Chunk<name>Iterator implements Iterator\<<name>Iterable>
+    {
+        private final <name>Iterator iterator;
+        private final int size;
+        private final Function0\<Mutable<name>Collection> speciesNewStrategy;
+
+        public Chunk<name>Iterator(<name>Iterable iterable, int size)
+        {
+            if (size \<= 0)
+            {
+                throw new IllegalArgumentException("Size for groups must be positive but was: " + size);
+            }
+
+            this.size = size;
+            this.iterator = iterable.<type>Iterator();
+
+            this.speciesNewStrategy = iterable instanceof Mutable<name>Collection
+                    ? ((Mutable<name>Collection) iterable)::newEmpty
+                    : <name>Lists.mutable::empty;
+
+        }
+
+        @Override
+        public boolean hasNext()
+        {
+            return this.iterator.hasNext();
+        }
+
+        @Override
+        public <name>Iterable next()
+        {
+            if (!this.iterator.hasNext())
+            {
+                throw new NoSuchElementException();
+            }
+
+            int i = this.size;
+            Mutable<name>Collection result = this.speciesNewStrategy.value();
+            while (i > 0 && this.iterator.hasNext())
+            {
+                result.add(this.iterator.next());
+                i -= 1;
+            }
+
+            return result;
+        }
+    }
+}
+
+>>

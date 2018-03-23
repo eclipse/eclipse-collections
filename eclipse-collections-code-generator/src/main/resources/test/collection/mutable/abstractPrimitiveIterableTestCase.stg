@@ -994,6 +994,48 @@ public void sumConsistentRounding()
         <wrapperName> sum3 = iterable3.injectInto(<wrapperName>.valueOf(<(literal.(type))("0")>), (<wrapperName> result, <type> value) -> <wrapperName>.valueOf((<type>) (result + value + 1)));
         Assert.assertEquals(<wrapperName>.valueOf(<(literal.(type))("38")>), sum3);
     }
+
+    @Test
+    public void chunk()
+    {
+        <name>Iterable iterable = this.newWith(<["0", "1", "2", "3", "4", "5"]:(literal.(type))(); separator=", ">);
+        Assert.assertEquals(
+                Lists.mutable.with(
+                        this.newMutableCollectionWith(<["0"]:(literal.(type))(); separator=", ">),
+                        this.newMutableCollectionWith(<["1"]:(literal.(type))(); separator=", ">),
+                        this.newMutableCollectionWith(<["2"]:(literal.(type))(); separator=", ">),
+                        this.newMutableCollectionWith(<["3"]:(literal.(type))(); separator=", ">),
+                        this.newMutableCollectionWith(<["4"]:(literal.(type))(); separator=", ">),
+                        this.newMutableCollectionWith(<["5"]:(literal.(type))(); separator=", ">)).toSet(),
+                iterable.chunk(1).toSet());
+        Assert.assertEquals(
+                Lists.mutable.with(
+                        this.newMutableCollectionWith(<["0", "1"]:(literal.(type))(); separator=", ">),
+                        this.newMutableCollectionWith(<["2", "3"]:(literal.(type))(); separator=", ">),
+                        this.newMutableCollectionWith(<["4", "5"]:(literal.(type))(); separator=", ">)).toSet(),
+                iterable.chunk(2).toSet());
+        Assert.assertEquals(
+                Lists.mutable.with(
+                        this.newMutableCollectionWith(<["0", "1", "2"]:(literal.(type))(); separator=", ">),
+                        this.newMutableCollectionWith(<["3", "4", "5"]:(literal.(type))(); separator=", ">)).toSet(),
+                iterable.chunk(3).toSet());
+        Assert.assertEquals(
+                Lists.mutable.with(
+                        this.newMutableCollectionWith(<["0", "1", "2", "3"]:(literal.(type))(); separator=", ">),
+                        this.newMutableCollectionWith(<["4", "5"]:(literal.(type))(); separator=", ">)).toSet(),
+                iterable.chunk(4).toSet());
+        Assert.assertEquals(
+                Lists.mutable.with(this.newMutableCollectionWith(<["0", "1", "2", "3", "4", "5"]:(literal.(type))(); separator=", ">)).toSet(),
+                iterable.chunk(6).toSet());
+        Assert.assertEquals(
+                Lists.mutable.with(this.newMutableCollectionWith(<["0", "1", "2", "3", "4", "5"]:(literal.(type))(); separator=", ">)).toSet(),
+                iterable.chunk(7).toSet());
+        Assert.assertEquals(Lists.mutable.with(), this.newWith().chunk(1));
+        Assert.assertEquals(Lists.mutable.with(this.newMutableCollectionWith(<["0"]:(literal.(type))(); separator=", ">)), this.newWith(<["0"]:(literal.(type))(); separator=", ">).chunk(1));
+
+        Verify.assertThrows(IllegalArgumentException.class, () -> iterable.chunk(0));
+        Verify.assertThrows(IllegalArgumentException.class, () -> iterable.chunk(-1));
+    }
 }
 
 >>

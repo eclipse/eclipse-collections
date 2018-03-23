@@ -671,6 +671,15 @@ public class SynchronizedObject<name>Map\<K>
             return this.map.injectInto(injectedValue, function);
         }
     }
+
+    @Override
+    public RichIterable\<<name>Iterable> chunk(int size)
+    {
+        synchronized (this.lock)
+        {
+            return this.map.chunk(size);
+        }
+    }
 }
 
 >>

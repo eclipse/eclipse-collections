@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 Goldman Sachs and others.
+ * Copyright (c) 2018 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -18,6 +18,7 @@ import java.util.NoSuchElementException;
 
 import org.eclipse.collections.api.IntIterable;
 import org.eclipse.collections.api.LazyIntIterable;
+import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.primitive.MutableIntBag;
 import org.eclipse.collections.api.block.function.primitive.IntToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.ObjectIntIntToObjectFunction;
@@ -37,6 +38,7 @@ import org.eclipse.collections.api.tuple.primitive.IntObjectPair;
 import org.eclipse.collections.impl.bag.mutable.primitive.IntHashBag;
 import org.eclipse.collections.impl.block.factory.primitive.IntPredicates;
 import org.eclipse.collections.impl.factory.Lists;
+import org.eclipse.collections.impl.factory.primitive.IntLists;
 import org.eclipse.collections.impl.lazy.primitive.CollectIntToObjectIterable;
 import org.eclipse.collections.impl.lazy.primitive.LazyIntIterableAdapter;
 import org.eclipse.collections.impl.lazy.primitive.ReverseIntIterable;
@@ -647,6 +649,50 @@ public final class IntInterval
             {
                 result = function.valueOf(result, i, index);
                 index++;
+            }
+        }
+        return result;
+    }
+
+    @Override
+    public RichIterable<IntIterable> chunk(int size)
+    {
+        if (size <= 0)
+        {
+            throw new IllegalArgumentException("Size for groups must be positive but was: " + size);
+        }
+        MutableList<IntIterable> result = Lists.mutable.empty();
+        if (this.notEmpty())
+        {
+            int innerFrom = this.from;
+            int lastUpdated = this.from;
+            if (this.from <= this.to)
+            {
+                while ((lastUpdated + this.step) <= this.to)
+                {
+                    MutableIntList batch = IntLists.mutable.empty();
+                    for (int i = innerFrom; i <= this.to && batch.size() < size; i += this.step)
+                    {
+                        batch.add(i);
+                        lastUpdated = i;
+                    }
+                    result.add(batch);
+                    innerFrom = lastUpdated + this.step;
+                }
+            }
+            else
+            {
+                while ((lastUpdated + this.step) >= this.to)
+                {
+                    MutableIntList batch = IntLists.mutable.empty();
+                    for (int i = innerFrom; i >= this.to && batch.size() < size; i += this.step)
+                    {
+                        batch.add(i);
+                        lastUpdated = i;
+                    }
+                    result.add(batch);
+                    innerFrom = lastUpdated + this.step;
+                }
             }
         }
         return result;

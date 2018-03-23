@@ -37,6 +37,7 @@ import org.eclipse.collections.api.tuple.primitive.<name1><name2>Pair;
 import org.eclipse.collections.impl.bag.mutable.primitive.<name2>HashBag;
 import org.eclipse.collections.impl.block.factory.primitive.<name2>Predicates;
 import org.eclipse.collections.impl.factory.Bags;
+import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.primitive.<name2>Bags;
 import org.eclipse.collections.impl.factory.primitive.<name1><name2>Maps;
 import org.eclipse.collections.impl.list.mutable.primitive.<name1>ArrayList;
@@ -858,6 +859,38 @@ public abstract class Abstract<name1><name2>MapTestCase
     {
         Assert.assertEquals(this.classUnderTest(), this.classUnderTest().toImmutable());
         Verify.assertInstanceOf(Immutable<name1><name2>Map.class, this.classUnderTest().toImmutable());
+    }
+
+    @Test
+    public void chunk()
+    {
+        <name2>Iterable iterable = this.newWithKeysValues(<["1", "2", "3"]:keyValue(); separator=", ">);
+        Assert.assertEquals(
+                Lists.mutable.with(
+                        <name2>Bags.mutable.with(<["1"]:(literal.(type2))(); separator=", ">),
+                        <name2>Bags.mutable.with(<["2"]:(literal.(type2))(); separator=", ">),
+                        <name2>Bags.mutable.with(<["3"]:(literal.(type2))(); separator=", ">)).toSet(),
+                iterable.chunk(1).toSet());
+        Assert.assertTrue(
+                Lists.mutable.with(
+                        <name2>Bags.mutable.with(<["1", "2"]:(literal.(type2))(); separator=", ">),
+                        <name2>Bags.mutable.with(<["3"]:(literal.(type2))(); separator=", ">)).toSet().equals(iterable.chunk(2).toSet())
+                || Lists.mutable.with(
+                        <name2>Bags.mutable.with(<["2", "3"]:(literal.(type2))(); separator=", ">),
+                        <name2>Bags.mutable.with(<["1"]:(literal.(type2))(); separator=", ">)).toSet().equals(iterable.chunk(2).toSet())
+                || Lists.mutable.with(
+                        <name2>Bags.mutable.with(<["1", "3"]:(literal.(type2))(); separator=", ">),
+                        <name2>Bags.mutable.with(<["2"]:(literal.(type2))(); separator=", ">)).toSet().equals(iterable.chunk(2).toSet()));
+        Assert.assertEquals(
+                Lists.mutable.with(
+                        <name2>Bags.mutable.with(<["1", "2", "3"]:(literal.(type2))(); separator=", ">)).toSet(),
+                iterable.chunk(3).toSet());
+        Assert.assertEquals(
+                Lists.mutable.with(<name2>Bags.mutable.with(<["1", "2", "3"]:(literal.(type2))(); separator=", ">)).toSet(),
+                iterable.chunk(4).toSet());
+
+        Verify.assertThrows(IllegalArgumentException.class, () -> iterable.chunk(0));
+        Verify.assertThrows(IllegalArgumentException.class, () -> iterable.chunk(-1));
     }
 }
 

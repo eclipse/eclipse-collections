@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2018 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -56,6 +56,8 @@ import org.eclipse.collections.api.tuple.primitive.ObjectBooleanPair;
 import org.eclipse.collections.impl.bag.mutable.primitive.BooleanHashBag;
 import org.eclipse.collections.impl.collection.mutable.primitive.SynchronizedBooleanCollection;
 import org.eclipse.collections.impl.collection.mutable.primitive.UnmodifiableBooleanCollection;
+import org.eclipse.collections.impl.factory.Lists;
+import org.eclipse.collections.impl.factory.primitive.BooleanBags;
 import org.eclipse.collections.impl.factory.primitive.BooleanLists;
 import org.eclipse.collections.impl.factory.primitive.ObjectBooleanMaps;
 import org.eclipse.collections.impl.lazy.AbstractLazyIterable;
@@ -595,6 +597,30 @@ public class ObjectBooleanHashMapWithHashingStrategy<K> implements MutableObject
             }
         }
 
+        return result;
+    }
+
+    @Override
+    public RichIterable<BooleanIterable> chunk(int size)
+    {
+        if (size <= 0)
+        {
+            throw new IllegalArgumentException("Size for groups must be positive but was: " + size);
+        }
+        MutableList<BooleanIterable> result = Lists.mutable.empty();
+        if (this.notEmpty())
+        {
+            BooleanIterator iterator = this.booleanIterator();
+            while (iterator.hasNext())
+            {
+                MutableBooleanBag batch = BooleanBags.mutable.empty();
+                for (int i = 0; i < size && iterator.hasNext(); i++)
+                {
+                    batch.add(iterator.next());
+                }
+                result.add(batch);
+            }
+        }
         return result;
     }
 
@@ -1584,6 +1610,12 @@ public class ObjectBooleanHashMapWithHashingStrategy<K> implements MutableObject
         public <T> T injectInto(T injectedValue, ObjectBooleanToObjectFunction<? super T, ? extends T> function)
         {
             return ObjectBooleanHashMapWithHashingStrategy.this.injectInto(injectedValue, function);
+        }
+
+        @Override
+        public RichIterable<BooleanIterable> chunk(int size)
+        {
+            return ObjectBooleanHashMapWithHashingStrategy.this.chunk(size);
         }
 
         @Override

@@ -27,6 +27,7 @@ import java.io.Serializable;
 import org.eclipse.collections.api.<name1>Iterable;
 <if(!sameTwoPrimitives)>import org.eclipse.collections.api.<name2>Iterable;<endif>
 import org.eclipse.collections.api.Lazy<name1>Iterable;
+import org.eclipse.collections.api.RichIterable;
 <if(!sameTwoPrimitives)>import org.eclipse.collections.api.Lazy<name2>Iterable;<endif>
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.ImmutableBag;
@@ -52,6 +53,7 @@ import org.eclipse.collections.api.tuple.primitive.<name1><name2>Pair;
 import org.eclipse.collections.impl.bag.mutable.primitive.<name2>HashBag;
 import org.eclipse.collections.impl.collection.mutable.primitive.Unmodifiable<name2>Collection;
 import org.eclipse.collections.impl.factory.Bags;
+import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.primitive.<name2>Bags;
 <if(!primitive2.booleanPrimitive)>import org.eclipse.collections.impl.factory.primitive.<name2><name1>Maps;<endif>
 import org.eclipse.collections.impl.iterator.ImmutableEmpty<name2>Iterator;
@@ -236,6 +238,12 @@ final class Immutable<name1><name2>EmptyMap implements Immutable<name1><name2>Ma
     public \<T> T injectInto(T injectedValue, Object<name2>ToObjectFunction\<? super T, ? extends T> function)
     {
         return injectedValue;
+    }
+
+    @Override
+    public RichIterable\<<name2>Iterable> chunk(int size)
+    {
+        return Lists.immutable.empty();
     }
 
     @Override

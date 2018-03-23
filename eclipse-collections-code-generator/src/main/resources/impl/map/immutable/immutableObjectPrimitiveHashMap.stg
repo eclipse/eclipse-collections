@@ -32,6 +32,7 @@ import org.eclipse.collections.api.block.predicate.primitive.Object<name>Predica
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
 import org.eclipse.collections.api.block.procedure.primitive.Object<name>Procedure;
+import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.primitive.Object<name>Map;
 import org.eclipse.collections.api.collection.ImmutableCollection;
 import org.eclipse.collections.api.collection.MutableCollection;
@@ -46,6 +47,9 @@ import org.eclipse.collections.api.map.primitive.MutableObject<name>Map;
 import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
 import org.eclipse.collections.api.tuple.primitive.Object<name>Pair;
 import org.eclipse.collections.impl.collection.mutable.primitive.Unmodifiable<name>Collection;
+import org.eclipse.collections.impl.factory.Lists;
+import org.eclipse.collections.impl.factory.primitive.<name>Bags;
+import org.eclipse.collections.impl.factory.primitive.<name>Lists;
 import org.eclipse.collections.impl.iterator.Unmodifiable<name>Iterator;
 import org.eclipse.collections.impl.map.mutable.primitive.Object<name>HashMap;
 <if(!primitive.booleanPrimitive)>import org.eclipse.collections.impl.factory.primitive.<name>ObjectMaps;<endif>
@@ -134,6 +138,30 @@ final class ImmutableObject<name>HashMap\<K> extends AbstractImmutableObject<nam
     public \<T> T injectInto(T injectedValue, Object<name>ToObjectFunction\<? super T, ? extends T> function)
     {
         return this.delegate.injectInto(injectedValue, function);
+    }
+
+    @Override
+    public RichIterable\<<name>Iterable> chunk(int size)
+    {
+        if (size \<= 0)
+        {
+            throw new IllegalArgumentException("Size for groups must be positive but was: " + size);
+        }
+        MutableList\<<name>Iterable> result = Lists.mutable.empty();
+        if (this.notEmpty())
+        {
+            <name>Iterator iterator = this.<type>Iterator();
+            while (iterator.hasNext())
+            {
+                Mutable<name>Bag batch = <name>Bags.mutable.empty();
+                for (int i = 0; i \< size && iterator.hasNext(); i++)
+                {
+                    batch.add(iterator.next());
+                }
+                result.add(batch.toImmutable());
+            }
+        }
+        return result.toImmutable();
     }
 
     @Override

@@ -149,6 +149,7 @@ import org.eclipse.collections.impl.block.procedure.primitive.CollectShortProced
 import org.eclipse.collections.impl.factory.Bags;
 import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.Sets;
+import org.eclipse.collections.impl.factory.primitive.<name>Sets;
 import org.eclipse.collections.impl.factory.primitive.<name>ObjectMaps;
 import org.eclipse.collections.impl.factory.primitive.Object<name>Maps;
 import org.eclipse.collections.impl.factory.primitive.<name>Sets;
@@ -1503,17 +1504,19 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         {
             throw new IllegalArgumentException("Size for groups must be positive but was: " + size);
         }
-
-        Iterator\<V> iterator = this.iterator();
         MutableList\<RichIterable\<V>\> result = Lists.mutable.of();
-        while (iterator.hasNext())
+        if (this.notEmpty())
         {
-            MutableList\<V> batch = FastList.newList();
-            for (int i = 0; i \< size && iterator.hasNext(); i++)
+            Iterator\<V> iterator = this.iterator();
+            while (iterator.hasNext())
             {
-                batch.add(iterator.next());
+                MutableList\<V> batch = FastList.newList();
+                for (int i = 0; i \< size && iterator.hasNext(); i++)
+                {
+                    batch.add(iterator.next());
+                }
+                result.add(batch);
             }
-            result.add(batch);
         }
         return result;
     }
@@ -3112,6 +3115,32 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
                 {
                     result = function.valueOf(result, key);
                 }
+            }
+            return result;
+        }
+
+        @Override
+        public RichIterable\<<name>Iterable> chunk(int size)
+        {
+            if (size \<= 0)
+            {
+                throw new IllegalArgumentException("Size for groups must be positive but was: " + size);
+            }
+            if (this.isEmpty())
+            {
+                return Lists.mutable.empty();
+            }
+
+            <name>Iterator iterator = this.<type>Iterator();
+            MutableList\<<name>Iterable> result = Lists.mutable.empty();
+            while (iterator.hasNext())
+            {
+                Mutable<name>Set batch =  <name>Sets.mutable.empty();
+                for (int i = 0; i \< size && iterator.hasNext(); i++)
+                {
+                    batch.add(iterator.next());
+                }
+                result.add(batch);
             }
             return result;
         }

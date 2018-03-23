@@ -26,6 +26,7 @@ import java.util.Collection;
 import java.util.NoSuchElementException;
 
 import org.eclipse.collections.api.<name>Iterable;
+import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.Object<name>ToObjectFunction;
 import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
@@ -33,6 +34,8 @@ import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
 import org.eclipse.collections.api.collection.primitive.Mutable<name>Collection;
 import org.eclipse.collections.api.iterator.<name>Iterator;
 import org.eclipse.collections.api.iterator.Mutable<name>Iterator;
+import org.eclipse.collections.api.list.MutableList;
+import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.set.primitive.Immutable<name>Set;
@@ -874,6 +877,37 @@ public class <name>HashSet extends Abstract<name>Set implements Mutable<name>Set
             if (isNonSentinel(value))
             {
                 result = function.valueOf(result, value);
+            }
+        }
+        return result;
+    }
+
+    @Override
+    public RichIterable\<<name>Iterable> chunk(int size)
+    {
+        if (size \<= 0)
+        {
+            throw new IllegalArgumentException("Size for groups must be positive but was: " + size);
+        }
+        MutableList\<<name>Iterable> result = Lists.mutable.empty();
+        if (this.notEmpty())
+        {
+            if (this.size() \<= size)
+            {
+                result.add(<name>Sets.mutable.withAll(this));
+            }
+            else
+            {
+                <name>Iterator iterator = this.<type>Iterator();
+                while (iterator.hasNext())
+                {
+                    Mutable<name>Set batch = <name>Sets.mutable.empty();
+                    for (int i = 0; i \< size && iterator.hasNext(); i++)
+                    {
+                        batch.add(iterator.next());
+                    }
+                    result.add(batch);
+                }
             }
         }
         return result;

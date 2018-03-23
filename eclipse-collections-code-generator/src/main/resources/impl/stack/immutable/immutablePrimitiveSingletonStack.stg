@@ -21,6 +21,7 @@ import java.io.Serializable;
 
 import org.eclipse.collections.api.<name>Iterable;
 import org.eclipse.collections.api.Lazy<name>Iterable;
+import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.primitive.Mutable<name>Bag;
 import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.Object<name>IntToObjectFunction;
@@ -36,6 +37,7 @@ import org.eclipse.collections.api.stack.ImmutableStack;
 import org.eclipse.collections.api.stack.primitive.<name>Stack;
 import org.eclipse.collections.api.stack.primitive.Immutable<name>Stack;
 import org.eclipse.collections.impl.bag.mutable.primitive.<name>HashBag;
+import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.Stacks;
 import org.eclipse.collections.impl.factory.primitive.<name>Stacks;
 import org.eclipse.collections.impl.iterator.Unmodifiable<name>Iterator;
@@ -287,6 +289,17 @@ final class Immutable<name>SingletonStack implements Immutable<name>Stack, Seria
     public \<T> T injectInto(T injectedValue, Object<name>ToObjectFunction\<? super T, ? extends T> function)
     {
         return function.valueOf(injectedValue, this.element1);
+    }
+
+    @Override
+    public RichIterable\<<name>Iterable> chunk(int size)
+    {
+        if (size \<= 0)
+        {
+            throw new IllegalArgumentException("Size for groups must be positive but was: " + size);
+        }
+
+        return Lists.immutable.with(this);
     }
 
     @Override

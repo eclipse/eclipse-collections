@@ -30,8 +30,11 @@ import org.eclipse.collections.api.block.function.primitive.<name2>ToObjectFunct
 import org.eclipse.collections.api.collection.primitive.Mutable<name2>Collection;
 import org.eclipse.collections.api.iterator.<name2>Iterator;
 import org.eclipse.collections.api.iterator.Mutable<name2>Iterator;
+import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.impl.bag.mutable.HashBag;
+import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.block.factory.primitive.<name2>Predicates;
+import org.eclipse.collections.impl.factory.primitive.<name2>Bags;
 import org.eclipse.collections.impl.collection.mutable.primitive.AbstractMutable<name2>CollectionTestCase;
 import org.eclipse.collections.impl.collection.mutable.primitive.Synchronized<name2>Collection;
 import org.eclipse.collections.impl.collection.mutable.primitive.Unmodifiable<name2>Collection;
@@ -433,6 +436,42 @@ public class Unmodifiable<name1><name2>MapValuesTest extends AbstractMutable<nam
     public void newCollection()
     {
         //Testing newCollection() is not applicable for Mutable<name2>Collection.
+    }
+
+    @Override
+    @Test
+    public void chunk()
+    {
+        <name2>Iterable iterable = this.classUnderTest();
+        Assert.assertEquals(
+                Lists.mutable.with(
+                        <name2>Bags.mutable.with(<["1"]:(literal.(type2))(); separator=", ">),
+                        <name2>Bags.mutable.with(<["2"]:(literal.(type2))(); separator=", ">),
+                        <name2>Bags.mutable.with(<["3"]:(literal.(type2))(); separator=", ">)).toSet(),
+                iterable.chunk(1).toSet());
+
+        MutableSet\<<name2>Iterable> chunked = iterable.chunk(2).toSet();
+        Assert.assertTrue(
+                Lists.mutable.with(
+                        <name2>Bags.mutable.with(<["1", "2"]:(literal.(type2))(); separator=", ">),
+                        <name2>Bags.mutable.with(<["3"]:(literal.(type2))(); separator=", ">)).toSet().equals(chunked)
+                || Lists.mutable.with(
+                        <name2>Bags.mutable.with(<["2", "3"]:(literal.(type2))(); separator=", ">),
+                        <name2>Bags.mutable.with(<["1"]:(literal.(type2))(); separator=", ">)).toSet().equals(chunked)
+                || Lists.mutable.with(
+                        <name2>Bags.mutable.with(<["1", "3"]:(literal.(type2))(); separator=", ">),
+                        <name2>Bags.mutable.with(<["2"]:(literal.(type2))(); separator=", ">)).toSet().equals(chunked));
+
+        Assert.assertEquals(
+                Lists.mutable.with(
+                        <name2>Bags.mutable.with(<["1", "2", "3"]:(literal.(type2))(); separator=", ">)).toSet(),
+                iterable.chunk(3).toSet());
+        Assert.assertEquals(
+                Lists.mutable.with(<name2>Bags.mutable.with(<["1", "2", "3"]:(literal.(type2))(); separator=", ">)).toSet(),
+                iterable.chunk(4).toSet());
+
+        Verify.assertThrows(IllegalArgumentException.class, () -> iterable.chunk(0));
+        Verify.assertThrows(IllegalArgumentException.class, () -> iterable.chunk(-1));
     }
 }
 

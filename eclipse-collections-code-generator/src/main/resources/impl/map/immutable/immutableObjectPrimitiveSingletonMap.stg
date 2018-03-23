@@ -145,6 +145,16 @@ final class ImmutableObject<name>SingletonMap\<K> extends AbstractImmutableObjec
     }
 
     @Override
+    public RichIterable\<<name>Iterable> chunk(int size)
+    {
+        if (size \<= 0)
+        {
+            throw new IllegalArgumentException("Size for groups must be positive but was: " + size);
+        }
+        return Lists.immutable.with(<name>Lists.immutable.with(this.value1));
+    }
+
+    @Override
     public \<V> ImmutableCollection\<V> collect(<name>ToObjectFunction\<? extends V> function)
     {
         return Lists.immutable.of(function.valueOf(this.value1));
