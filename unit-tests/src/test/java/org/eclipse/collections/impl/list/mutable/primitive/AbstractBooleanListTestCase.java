@@ -326,6 +326,15 @@ public abstract class AbstractBooleanListTestCase extends AbstractMutableBoolean
     }
 
     @Test
+    public void distinct()
+    {
+        Assert.assertEquals(BooleanArrayList.newListWith(true, false), this.newWith(true, true, false, false).distinct());
+        Assert.assertEquals(BooleanArrayList.newListWith(false, true), this.newWith(false, false, true, true).distinct());
+        Assert.assertEquals(BooleanArrayList.newListWith(false), this.newWith(false).distinct());
+        Assert.assertEquals(BooleanArrayList.newListWith(true), this.newWith(true).distinct());
+    }
+
+    @Test
     public void injectIntoWithIndex()
     {
         MutableBooleanList list = this.newWith(true, false, true);

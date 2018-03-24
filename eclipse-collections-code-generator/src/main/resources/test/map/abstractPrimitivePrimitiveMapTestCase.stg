@@ -888,9 +888,15 @@ public abstract class Abstract<name1><name2>MapTestCase
         Assert.assertEquals(
                 Lists.mutable.with(<name2>Bags.mutable.with(<["1", "2", "3"]:(literal.(type2))(); separator=", ">)).toSet(),
                 iterable.chunk(4).toSet());
+        Assert.assertEquals(
+                Lists.mutable.with(<name2>Bags.mutable.with(<["1"]:(literal.(type2))(); separator=", ">)).toSet(),
+                this.newWithKeysValues(<["1"]:keyValue(); separator=", ">).chunk(1).toSet());
+
+        Verify.assertIterablesEqual(Lists.mutable.empty(), this.getEmptyMap().chunk(1));
 
         Verify.assertThrows(IllegalArgumentException.class, () -> iterable.chunk(0));
         Verify.assertThrows(IllegalArgumentException.class, () -> iterable.chunk(-1));
+        Verify.assertThrows(IllegalArgumentException.class, () -> this.newWithKeysValues(<["1"]:keyValue(); separator=", ">).chunk(-1));
     }
 }
 

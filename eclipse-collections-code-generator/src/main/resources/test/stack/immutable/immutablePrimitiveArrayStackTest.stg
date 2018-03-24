@@ -20,6 +20,7 @@ body(type, wrapperName, name) ::= <<
 package org.eclipse.collections.impl.stack.immutable.primitive;
 
 import org.eclipse.collections.api.stack.primitive.Immutable<name>Stack;
+import org.eclipse.collections.impl.factory.primitive.<name>Stacks;
 import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
 import org.eclipse.collections.impl.math.Mutable<wrapperName>;
 import org.eclipse.collections.impl.stack.mutable.primitive.<name>ArrayStack;
@@ -36,6 +37,12 @@ public class Immutable<name>ArrayStackTest extends AbstractImmutable<name>StackT
     protected Immutable<name>Stack classUnderTest()
     {
         return Immutable<name>ArrayStack.newStackWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testNewStack_throws()
+    {
+        Immutable<name>ArrayStack.newStack(<name>Stacks.mutable.with(<["1"]:(literal.(type))(); separator=", ">));
     }
 
     @Test

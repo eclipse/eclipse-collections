@@ -287,6 +287,9 @@ public abstract class Abstract<name>IterableTestCase
         int size = iterable.size();
         Assert.assertEquals(size >= 3 ? 3 : size, iterable.count(<name>Predicates.lessThan(<(literal.(type))("4")>)));
         Assert.assertEquals(2L, this.newWith(<["1", "0", "2"]:(literal.(type))(); separator=", ">).count(<name>Predicates.greaterThan(<zero.(type)>)));
+
+        Assert.assertEquals(1, this.newWith(<["1"]:(literal.(type))(); separator=", ">).count(<name>Predicates.alwaysTrue()));
+        Assert.assertEquals(0, this.newWith(<["1"]:(literal.(type))(); separator=", ">).count(<name>Predicates.alwaysFalse()));
     }
 
     @Test
@@ -462,6 +465,10 @@ public abstract class Abstract<name>IterableTestCase
         <name>Iterable iterable1 = this.newWith(<["0", "1", "2", "2", "3", "3", "3"]:(literal.(type))(); separator=", ">);
         Assert.assertEquals(this.newMutableCollectionWith(<["0", "1"]:(literal.(type))(); separator=", ">), iterable1.select(<name>Predicates.lessThan(<(literal.(type))("2")>)));
         Assert.assertEquals(this.newMutableCollectionWith(<["2", "2", "3", "3", "3"]:(literal.(type))(); separator=", ">), iterable1.select(<name>Predicates.greaterThan(<(literal.(type))("1")>)));
+
+        <name>Iterable iterable2 = this.newWith(<["0"]:(literal.(type))(); separator=", ">);
+        Verify.assertSize(iterable2.size() == 1 ? 1 : 0, iterable2.select(<name>Predicates.alwaysTrue()));
+        Verify.assertSize(0, iterable2.select(<name>Predicates.alwaysFalse()));
     }
 
     @Test
@@ -486,6 +493,10 @@ public abstract class Abstract<name>IterableTestCase
         <name>Iterable iterable1 = this.newWith(<["0", "1", "2", "2", "3", "3", "3"]:(literal.(type))(); separator=", ">);
         Assert.assertEquals(this.newMutableCollectionWith(<["2", "2", "3", "3", "3"]:(literal.(type))(); separator=", ">), iterable1.reject(<name>Predicates.lessThan(<(literal.(type))("2")>)));
         Assert.assertEquals(this.newMutableCollectionWith(<["0", "1"]:(literal.(type))(); separator=", ">), iterable1.reject(<name>Predicates.greaterThan(<(literal.(type))("1")>)));
+
+        <name>Iterable iterable2 = this.newWith(<["0"]:(literal.(type))(); separator=", ">);
+        Verify.assertSize(iterable2.size() == 1 ? 1 : 0, iterable2.reject(<name>Predicates.alwaysFalse()));
+        Verify.assertSize(0, iterable2.reject(<name>Predicates.alwaysTrue()));
     }
 
     @Test
@@ -1032,9 +1043,11 @@ public void sumConsistentRounding()
                 iterable.chunk(7).toSet());
         Assert.assertEquals(Lists.mutable.with(), this.newWith().chunk(1));
         Assert.assertEquals(Lists.mutable.with(this.newMutableCollectionWith(<["0"]:(literal.(type))(); separator=", ">)), this.newWith(<["0"]:(literal.(type))(); separator=", ">).chunk(1));
+        Assert.assertEquals(Lists.mutable.with(), this.newWith().chunk(1));
 
         Verify.assertThrows(IllegalArgumentException.class, () -> iterable.chunk(0));
         Verify.assertThrows(IllegalArgumentException.class, () -> iterable.chunk(-1));
+        Verify.assertThrows(IllegalArgumentException.class, () -> this.newMutableCollectionWith().chunk(-1));
     }
 }
 

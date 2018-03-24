@@ -297,8 +297,35 @@ public abstract class Abstract<name>StackTestCase extends Abstract<name>Iterable
             Verify.assertIterablesEqual(Lists.mutable.with(<name>Lists.mutable.with(<["0"]:(literal.(type))(); separator=", ">)), this.newWith(<["0"]:(literal.(type))(); separator=", ">).chunk(1));
         }
 
+        Verify.assertIterablesEqual(Lists.mutable.with(), this.newWith().chunk(1));
+
         Verify.assertThrows(IllegalArgumentException.class, () -> iterable.chunk(0));
         Verify.assertThrows(IllegalArgumentException.class, () -> iterable.chunk(-1));
+        Verify.assertThrows(IllegalArgumentException.class, () -> this.newWith(<["0"]:(literal.(type))(); separator=", ">).chunk(-1));
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void getFirst()
+    {
+        this.classUnderTest().getFirst();
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void indexOf()
+    {
+        this.classUnderTest().indexOf(<["0"]:(literal.(type))(); separator=", ">);
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void injectIntoWithIndex()
+    {
+        this.classUnderTest().injectIntoWithIndex(null, null);
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void forEachWithIndex()
+    {
+        this.classUnderTest().forEachWithIndex(null);
     }
 }
 
