@@ -8,16 +8,18 @@ targetPath() ::= "org/eclipse/collections/impl/set/mutable/primitive"
 fileName(primitive) ::= "<primitive.name>HashSetTest"
 
 class(primitive) ::= <<
-<body(primitive.type, primitive.wrapperName, primitive.name)>
+<body(primitive.type, primitive.wrapperName, primitive.name, primitive.charPrimitive, primitive.shortPrimitive)>
 >>
 
-body(type, wrapperName, name) ::= <<
+body(type, wrapperName, name, charPrimitive, shortPrimitive) ::= <<
 <copyright()>
 
 package org.eclipse.collections.impl.set.mutable.primitive;
 
 import java.lang.reflect.Field;
 
+import org.eclipse.collections.api.iterator.Mutable<name>Iterator;
+import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
 import org.eclipse.collections.impl.factory.primitive.<name>Sets;
 import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
 import org.eclipse.collections.impl.test.Verify;
@@ -175,6 +177,39 @@ public class <name>HashSetTest extends Abstract<name>SetTestCase
         Assert.assertFalse(hashSet.remove(<(literal.(type))("1")>));
         Assert.assertEquals(3, occupiedWithData.get(hashSet));
         Assert.assertEquals(0, occupiedWithSentinels.get(hashSet));
+    }
+
+    @Test
+    public void iterator_remove()
+    {
+        Mutable<name>Set set1 = <name>Sets.mutable.empty();
+
+        int <if(shortPrimitive)>max = 65_536<elseif(charPrimitive)>max = 10<else>max = 100_000<endif>;
+        for (Integer i = 0; i \< max; i++)
+        {
+            <if(charPrimitive)>set1.add(i.toString().charAt(0));<else>set1.add(i.<type>Value());<endif>
+        }
+
+        // set2 to verify copyTable()
+        Mutable<name>Set set2 = <name>Sets.mutable.withAll(set1);
+        set2.freeze();
+
+        this.assertIteratorRemove(set1, max);
+        this.assertIteratorRemove(set2, max);
+    }
+
+    private void assertIteratorRemove(Mutable<name>Set set, int max)
+    {
+        Verify.assertSize(max, set);
+        Mutable<name>Iterator iterator = set.<type>Iterator();
+        Verify.assertThrows(IllegalStateException.class, () -> iterator.remove());
+
+        while (iterator.hasNext())
+        {
+            iterator.next();
+            iterator.remove();
+            Verify.assertSize(--max, set);
+        }
     }
 
     @Test
