@@ -15,7 +15,6 @@ body(type, name) ::= <<
 
 package org.eclipse.collections.impl.map.mutable.primitive;
 
-import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
 import org.eclipse.collections.api.factory.map.primitive.Mutable<name>ObjectMapFactory;
 import org.eclipse.collections.api.map.primitive.Mutable<name>ObjectMap;
 import org.eclipse.collections.api.map.primitive.<name>ObjectMap;

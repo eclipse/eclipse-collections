@@ -1023,7 +1023,7 @@ public class <name>HashSet extends Abstract<name>Set implements Mutable<name>Set
         int nextIndex = <(reverseSpread.(type))()>(SpreadFunctions.<type>SpreadOne(element));
         int spreadTwo = <(reverseSpread.(type))()>(SpreadFunctions.<type>SpreadTwo(element)) | 1;
 
-        while(true)
+        while (true)
         {
             nextIndex = this.mask(nextIndex + spreadTwo);
             <type> valueAtIndex = this.table[nextIndex];
@@ -1044,9 +1044,7 @@ public class <name>HashSet extends Abstract<name>Set implements Mutable<name>Set
 
     // exposed for testing
     <(spread.(type))(type)>
-
     <(spread2.(type))(type)>
-
     private int mask(int spread)
     {
         return spread & (this.table.length - 1);
@@ -1512,7 +1510,7 @@ public class <name>HashSet extends Abstract<name>Set implements Mutable<name>Set
             int nextIndex = <(reverseSpread.(type))()>(SpreadFunctions.<type>SpreadOne(element));
             int spreadTwo = <(reverseSpread.(type))()>(SpreadFunctions.<type>SpreadTwo(element)) | 1;
 
-            while(true)
+            while (true)
             {
                 nextIndex = this.mask(nextIndex + spreadTwo);
                 <type> valueAtIndex = this.table[nextIndex];
@@ -1533,9 +1531,7 @@ public class <name>HashSet extends Abstract<name>Set implements Mutable<name>Set
 
         // exposed for testing
         <(spread.(type))(type)>
-
         <(spread2.(type))(type)>
-
         private int mask(int spread)
         {
             return spread & (this.table.length - 1);
@@ -1659,7 +1655,7 @@ public class <name>HashSet extends Abstract<name>Set implements Mutable<name>Set
                 {
                     <name>HashSet.this.copyTable();
                 }
-                <name>HashSet.this.table[position -1] = REMOVED;
+                <name>HashSet.this.table[position - 1] = REMOVED;
                 <name>HashSet.this.occupiedWithData--;
                 <name>HashSet.this.occupiedWithSentinels++;
             }

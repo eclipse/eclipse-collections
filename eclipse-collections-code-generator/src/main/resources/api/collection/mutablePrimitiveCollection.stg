@@ -51,7 +51,8 @@ public interface Mutable<name>Collection extends <name>Iterable
     default boolean removeIf(<name>Predicate predicate)
     {
         boolean changed = false;
-        for (Mutable<name>Iterator iterator = this.<type>Iterator(); iterator.hasNext();)
+        Mutable<name>Iterator iterator = this.<type>Iterator();
+        while (iterator.hasNext())
         {
             if (predicate.accept(iterator.next()))
             {

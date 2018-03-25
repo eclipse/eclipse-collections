@@ -41,25 +41,19 @@ import org.eclipse.collections.api.block.predicate.primitive.<name1><name2>Predi
 import org.eclipse.collections.api.block.procedure.primitive.<name1><name2>Procedure;
 import org.eclipse.collections.api.block.procedure.primitive.<name1>Procedure;
 import org.eclipse.collections.api.collection.primitive.Mutable<name2>Collection;
-import org.eclipse.collections.api.iterator.<name2>Iterator;
 import org.eclipse.collections.api.iterator.Mutable<name2>Iterator;
-import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.list.primitive.Mutable<name2>List;
 import org.eclipse.collections.api.map.primitive.Immutable<name1><name2>Map;
 import org.eclipse.collections.api.map.primitive.<name1><name2>Map;
 import org.eclipse.collections.api.map.primitive.Mutable<name1><name2>Map;
-<if(!primitive2.booleanPrimitive)>import org.eclipse.collections.api.map.primitive.Mutable<name2><name1>Map;<endif>
+<if(!primitive2.booleanPrimitive)><if(!sameTwoPrimitives)>import org.eclipse.collections.api.map.primitive.Mutable<name2><name1>Map;<endif><endif>
 <if(!sameTwoPrimitives)>import org.eclipse.collections.api.set.primitive.Mutable<name1>Set;<endif>
 import org.eclipse.collections.api.set.primitive.Mutable<name2>Set;
 import org.eclipse.collections.api.tuple.primitive.<name1><name2>Pair;
 import org.eclipse.collections.impl.collection.mutable.primitive.Unmodifiable<name2>Collection;
-import org.eclipse.collections.impl.factory.Lists;
-import org.eclipse.collections.impl.factory.primitive.<name2>Lists;
 import org.eclipse.collections.impl.factory.primitive.<name1><name2>Maps;
-import org.eclipse.collections.impl.factory.primitive.<name2>Bags;
 import org.eclipse.collections.impl.iterator.Unmodifiable<name2>Iterator;
 import org.eclipse.collections.impl.set.mutable.primitive.Unmodifiable<name1>Set;
-import org.eclipse.collections.api.tuple.primitive.<name1><name2>Pair;
 
 /**
  * This file was automatically generated from template file unmodifiablePrimitivePrimitiveMap.stg.
@@ -74,7 +68,7 @@ public class Unmodifiable<name1><name2>Map
 
     public Unmodifiable<name1><name2>Map(Mutable<name1><name2>Map map)
     {
-        if(map == null)
+        if (map == null)
         {
             throw new IllegalArgumentException("Cannot create a Unmodifiable<name1><name2>Map on a null map");
         }
@@ -131,25 +125,25 @@ public class Unmodifiable<name1><name2>Map
     @Override
     public <type2> getIfAbsentPut(<type1> key, <type2> value)
     {
-        return this.map.getIfAbsentPut(key, () -> {throw new UnsupportedOperationException();});
+        return this.map.getIfAbsentPut(key, () -> { throw new UnsupportedOperationException(); });
     }
 
     @Override
     public <type2> getIfAbsentPut(<type1> key, <name2>Function0 function)
     {
-        return this.map.getIfAbsentPut(key, () -> {throw new UnsupportedOperationException();});
+        return this.map.getIfAbsentPut(key, () -> { throw new UnsupportedOperationException(); });
     }
 
     @Override
     public <type2> getIfAbsentPutWithKey(<type1> key, <name1>To<name2>Function function)
     {
-        return this.map.getIfAbsentPut(key, () -> {throw new UnsupportedOperationException();});
+        return this.map.getIfAbsentPut(key, () -> { throw new UnsupportedOperationException(); });
     }
 
     @Override
     public \<P> <type2> getIfAbsentPutWith(<type1> key, <name2>Function\<? super P> function, P parameter)
     {
-        return this.map.getIfAbsentPut(key, () -> {throw new UnsupportedOperationException();});
+        return this.map.getIfAbsentPut(key, () -> { throw new UnsupportedOperationException(); });
     }
 
     @Override

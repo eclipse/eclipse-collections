@@ -81,4 +81,5 @@ public class <name>CaseFunction\<V> implements <name>ToObjectFunction\<V>
         return "new <name>CaseFunction(" + this.predicateFunctions + ')';
     }
 }
+
 >>

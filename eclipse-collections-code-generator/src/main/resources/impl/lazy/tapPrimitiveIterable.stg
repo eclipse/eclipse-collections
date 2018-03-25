@@ -16,19 +16,10 @@ body(type, name) ::= <<
 
 package org.eclipse.collections.impl.lazy.primitive;
 
-import java.util.NoSuchElementException;
-
 import org.eclipse.collections.api.<name>Iterable;
-import org.eclipse.collections.api.bag.primitive.Mutable<name>Bag;
 import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
 import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
 import org.eclipse.collections.api.iterator.<name>Iterator;
-import org.eclipse.collections.api.list.primitive.Mutable<name>List;
-import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
-import org.eclipse.collections.impl.bag.mutable.primitive.<name>HashBag;
-import org.eclipse.collections.impl.block.factory.primitive.<name>Predicates;
-import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
-import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
 
 /**
  * This file was automatically generated from template file tapPrimitiveIterable.stg.

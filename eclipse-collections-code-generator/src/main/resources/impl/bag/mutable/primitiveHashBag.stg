@@ -32,17 +32,15 @@ import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFuncti
 import org.eclipse.collections.api.block.function.primitive.IntFunction;
 import org.eclipse.collections.api.block.function.primitive.Object<name>ToObjectFunction;
 import org.eclipse.collections.api.block.predicate.primitive.IntPredicate;
-import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
+<if(!primitive.intPrimitive)>import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;<endif>
 import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
 import org.eclipse.collections.api.block.procedure.primitive.<name>IntProcedure;
 import org.eclipse.collections.api.iterator.<name>Iterator;
 import org.eclipse.collections.api.iterator.Mutable<name>Iterator;
-import org.eclipse.collections.api.list.primitive.Mutable<name>List;
 import org.eclipse.collections.api.set.primitive.<name>Set;
 import org.eclipse.collections.api.tuple.primitive.<name>IntPair;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.impl.factory.Lists;
-import org.eclipse.collections.impl.factory.primitive.<name>Lists;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.Counter;
 import org.eclipse.collections.impl.bag.mutable.HashBag;
@@ -691,7 +689,7 @@ public class <name>HashBag
     final <wideType.(type)>[] compensation = {<wideZero.(type)>};
     this.forEachWithOccurrences((<type> each, int occurrences) ->
     {
-        for(int i = 0; i \< occurrences; i++)
+        for (int i = 0; i \< occurrences; i++)
         {
             <wideType.(type)> adjustedValue = (<wideType.(type)>) each - compensation[0];
             <wideType.(type)> nextSum = result[0] + adjustedValue;

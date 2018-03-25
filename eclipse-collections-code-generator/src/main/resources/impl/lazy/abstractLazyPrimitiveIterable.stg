@@ -457,7 +457,6 @@ private static final class <name>MinProcedure implements <name>Procedure
         return this.sum;
     }
 }
-
 <elseif(!primitive.booleanPrimitive)>private static final class <name>SumProcedure implements <name>Procedure
 {
     private <type> sum = 0;
@@ -473,7 +472,6 @@ private static final class <name>MinProcedure implements <name>Procedure
         return this.sum;
     }
 }
-
 <endif>
 >>
 

@@ -234,8 +234,7 @@ public class Synchronized<name>Iterable implements <name>Iterable, Serializable
             return this.iterable.asLazy();
         }
     }
-
-    <(arithmeticMethods.(type))()>
+    <if(!primitive.booleanPrimitive)><(arithmeticMethods.(type))()><endif>
 
     @Override
     public int size()
@@ -369,6 +368,8 @@ arithmeticMethods ::= [
     ]
 
 allMethods() ::= <<
+
+
 @Override
 public <wideType.(type)> sum()
 {
@@ -449,7 +450,6 @@ public Mutable<name>List toSortedList()
         return this.iterable.toSortedList();
     }
 }
-
 >>
 
 noMethods() ::= ""

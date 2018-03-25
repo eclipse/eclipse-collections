@@ -52,7 +52,6 @@ import org.eclipse.collections.impl.collection.mutable.primitive.Synchronized<na
 import org.eclipse.collections.impl.factory.primitive.Object<name>Maps;
 import org.eclipse.collections.impl.set.mutable.SynchronizedMutableSet;
 import org.eclipse.collections.impl.utility.LazyIterate;
-import org.eclipse.collections.api.tuple.primitive.Object<name>Pair;
 
 /**
  * A synchronized view of a {@link MutableObject<name>Map}. It is imperative that the user manually synchronize on the collection when iterating over it using the
@@ -78,7 +77,7 @@ public class SynchronizedObject<name>Map\<K>
 
     public SynchronizedObject<name>Map(MutableObject<name>Map\<K> map, Object newLock)
     {
-        if(map == null)
+        if (map == null)
         {
             throw new IllegalArgumentException("Cannot create a SynchronizedObject<name>Map on a null map");
         }

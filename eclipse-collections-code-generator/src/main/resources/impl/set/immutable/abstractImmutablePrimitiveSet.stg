@@ -78,9 +78,9 @@ public abstract class AbstractImmutable<name>Set extends Abstract<name>Set imple
             throw new IllegalArgumentException("Size for groups must be positive but was: " + size);
         }
         MutableList\<<name>Iterable> result = Lists.mutable.empty();
-        if(this.notEmpty())
+        if (this.notEmpty())
         {
-            if(this.size() \<= size)
+            if (this.size() \<= size)
             {
                 result.add(this);
             }

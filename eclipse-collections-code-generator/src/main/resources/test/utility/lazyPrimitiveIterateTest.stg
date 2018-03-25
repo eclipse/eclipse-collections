@@ -1,0 +1,45 @@
+import "copyright.stg"
+import "primitiveLiteral.stg"
+
+isTest() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/utility/primitive"
+
+fileName(primitive) ::= "Lazy<primitive.name>IterateTest"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name, primitive.wrapperName)>
+>>
+
+body(type, name, wrapperName) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.utility.primitive;
+
+import org.eclipse.collections.api.<name>Iterable;
+import org.eclipse.collections.impl.factory.primitive.<name>Lists;
+import org.junit.Assert;
+import org.junit.Test;
+
+/**
+ * JUnit test for {@link Lazy<name>Iterate}.
+ * This file was automatically generated from template file lazyPrimitiveIterateTest.stg.
+ */
+public class Lazy<name>IterateTest
+{
+    private final <name>Iterable iterable = <name>Lists.mutable.with(<["1", "2", "3"]:(literal.(type))(); separator=", ">);
+
+    @Test
+    public void adapt()
+    {
+        Assert.assertEquals(this.iterable, Lazy<name>Iterate.adapt(this.iterable).toList());
+    }
+
+    @Test
+    public void collectIf()
+    {
+        Assert.assertEquals(this.iterable.collect(each -> each), Lazy<name>Iterate.collectIf(this.iterable, each -> true, each -> each).toList());
+    }
+}
+
+>>

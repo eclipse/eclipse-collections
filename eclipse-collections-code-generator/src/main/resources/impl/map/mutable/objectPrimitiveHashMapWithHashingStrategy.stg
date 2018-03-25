@@ -139,6 +139,9 @@ public class Object<name>HashMapWithHashingStrategy\<K> implements MutableObject
 
     private HashingStrategy\<? super K> hashingStrategy;
 
+    /**
+     * @deprecated Use Object<name>HashMapWithHashingStrategy(HashingStrategy) instead.
+     */
     @Deprecated
     public Object<name>HashMapWithHashingStrategy()
     {

@@ -24,7 +24,6 @@ import java.util.Optional;
 
 import org.eclipse.collections.api.<name>Iterable;
 import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
-import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
@@ -32,11 +31,9 @@ import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
 import org.eclipse.collections.impl.EmptyIterator;
 import org.eclipse.collections.impl.block.factory.Predicates;
-import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
 import org.eclipse.collections.api.iterator.<name>Iterator;
 import org.eclipse.collections.impl.block.procedure.AdaptObjectIntProcedureToProcedure;
 import org.eclipse.collections.impl.lazy.AbstractLazyIterable;
-import org.eclipse.collections.impl.lazy.iterator.FlatCollectIterator;
 import org.eclipse.collections.impl.utility.Iterate;
 
 /**

@@ -30,27 +30,20 @@ import java.util.NoSuchElementException;
 import org.eclipse.collections.api.BooleanIterable;
 import org.eclipse.collections.api.<name>Iterable;
 import org.eclipse.collections.api.Lazy<name>Iterable;
-import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.primitive.Mutable<name>Bag;
 import org.eclipse.collections.api.block.function.primitive.BooleanFunction;
 import org.eclipse.collections.api.block.function.primitive.BooleanFunction0;
 import org.eclipse.collections.api.block.function.primitive.BooleanToBooleanFunction;
-import org.eclipse.collections.api.block.function.primitive.BooleanToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.<name>ToBooleanFunction;
-import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.Object<name>ToObjectFunction;
-import org.eclipse.collections.api.block.function.primitive.ObjectBooleanToObjectFunction;
-import org.eclipse.collections.api.block.predicate.primitive.BooleanPredicate;
 import org.eclipse.collections.api.block.predicate.primitive.<name>BooleanPredicate;
 import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
-import org.eclipse.collections.api.block.procedure.primitive.BooleanProcedure;
 import org.eclipse.collections.api.block.procedure.primitive.<name>BooleanProcedure;
 import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
-import org.eclipse.collections.api.collection.MutableCollection;
 import org.eclipse.collections.api.collection.primitive.MutableBooleanCollection;
 import org.eclipse.collections.api.iterator.<name>Iterator;
 import org.eclipse.collections.api.iterator.MutableBooleanIterator;
@@ -63,17 +56,12 @@ import org.eclipse.collections.api.set.primitive.BooleanSet;
 import org.eclipse.collections.api.set.primitive.<name>Set;
 import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
 import org.eclipse.collections.api.tuple.primitive.<name>BooleanPair;
-import org.eclipse.collections.impl.SpreadFunctions;
+<if(!primitive.bytePrimitive)>import org.eclipse.collections.impl.SpreadFunctions;<endif>
 import org.eclipse.collections.impl.bag.mutable.primitive.<name>HashBag;
-import org.eclipse.collections.impl.block.factory.primitive.<name>Predicates;
 import org.eclipse.collections.impl.factory.primitive.<name>BooleanMaps;
 import org.eclipse.collections.impl.iterator.Unmodifiable<name>Iterator;
 import org.eclipse.collections.impl.lazy.AbstractLazyIterable;
 import org.eclipse.collections.impl.lazy.primitive.AbstractLazy<name>Iterable;
-import org.eclipse.collections.impl.lazy.primitive.Collect<name>ToObjectIterable;
-import org.eclipse.collections.impl.lazy.primitive.Select<name>Iterable;
-import org.eclipse.collections.impl.list.mutable.FastList;
-import org.eclipse.collections.impl.list.mutable.primitive.BooleanArrayList;
 import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
 import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
@@ -340,9 +328,7 @@ public class <name>BooleanHashMap extends AbstractMutableBooleanValuesMap implem
 
     // exposed for testing
     <(spread.(type))(type)>
-
     <(spread2.(type))(type)>
-
     private int mask(int spread)
     {
         return spread & (this.keys.length - 1);
@@ -2022,7 +2008,7 @@ int probeThree(<type> element, int removedIndex)
     int nextIndex = <(reverseSpread.(type))()>(SpreadFunctions.<type>SpreadOne(element));
     int spreadTwo = <(reverseSpread.(type))()>(SpreadFunctions.<type>SpreadTwo(element)) | 1;
 
-    while(true)
+    while (true)
     {
         nextIndex = this.mask(nextIndex + spreadTwo);
         <type> keyAtIndex = this.keys[nextIndex];

@@ -26,7 +26,6 @@ public \<R extends Mutable<name>Collection> R collect<name>(<name>Function\<? su
     this.forEach(new Collect<name>Procedure\<V>(<type>Function, target));
     return target;
 }
-
 >>
 
 body(type, name) ::= <<
@@ -104,7 +103,7 @@ import org.eclipse.collections.api.map.primitive.Immutable<name>ObjectMap;
 import org.eclipse.collections.api.map.primitive.MutableObjectDoubleMap;
 import org.eclipse.collections.api.map.primitive.MutableObjectLongMap;
 import org.eclipse.collections.api.map.primitive.Mutable<name>ObjectMap;
-import org.eclipse.collections.api.map.primitive.MutableObject<name>Map;
+<if(!primitive.longPrimitive)><if(!primitive.doublePrimitive)>import org.eclipse.collections.api.map.primitive.MutableObject<name>Map;<endif><endif>
 import org.eclipse.collections.api.map.sorted.MutableSortedMap;
 import org.eclipse.collections.api.multimap.MutableMultimap;
 import org.eclipse.collections.api.multimap.bag.MutableBagMultimap;
@@ -116,7 +115,7 @@ import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.api.tuple.primitive.<name>ObjectPair;
-import org.eclipse.collections.impl.SpreadFunctions;
+<if(!primitive.bytePrimitive)>import org.eclipse.collections.impl.SpreadFunctions;<endif>
 import org.eclipse.collections.impl.bag.mutable.HashBag;
 import org.eclipse.collections.impl.bag.mutable.primitive.BooleanHashBag;
 import org.eclipse.collections.impl.bag.mutable.primitive.ByteHashBag;
@@ -151,8 +150,7 @@ import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.factory.primitive.<name>Sets;
 import org.eclipse.collections.impl.factory.primitive.<name>ObjectMaps;
-import org.eclipse.collections.impl.factory.primitive.Object<name>Maps;
-import org.eclipse.collections.impl.factory.primitive.<name>Sets;
+<if(!primitive.longPrimitive)><if(!primitive.doublePrimitive)>import org.eclipse.collections.impl.factory.primitive.Object<name>Maps;<endif><endif>
 import org.eclipse.collections.impl.factory.primitive.ObjectDoubleMaps;
 import org.eclipse.collections.impl.factory.primitive.ObjectLongMaps;
 import org.eclipse.collections.impl.iterator.Unmodifiable<name>Iterator;
@@ -946,12 +944,19 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
     }
 
     <collectPrimitive("Boolean", "boolean")>
+
     <collectPrimitive("Byte", "byte")>
+
     <collectPrimitive("Char", "char")>
+
     <collectPrimitive("Double", "double")>
+
     <collectPrimitive("Float", "float")>
+
     <collectPrimitive("Int", "int")>
+
     <collectPrimitive("Long", "long")>
+
     <collectPrimitive("Short", "short")>
 
     @Override
@@ -2981,9 +2986,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
 
     // exposed for testing
     <(spread.(type))(type)>
-
     <(spread2.(type))(type)>
-
     private int mask(int spread)
     {
         return spread & (this.keys.length - 1);
@@ -4323,7 +4326,7 @@ int probeThree(<type> element, int removedIndex)
     int nextIndex = (int) SpreadFunctions.<type>SpreadOne(element);
     int spreadTwo = <(reverseSpread.(type))()>(SpreadFunctions.<type>SpreadTwo(element)) | 1;
 
-    while(true)
+    while (true)
     {
         nextIndex = this.mask(nextIndex + spreadTwo);
         <type> keyAtIndex = this.keys[nextIndex];

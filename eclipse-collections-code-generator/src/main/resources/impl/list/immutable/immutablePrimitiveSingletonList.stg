@@ -16,7 +16,6 @@ body(type, name) ::= <<
 
 package org.eclipse.collections.impl.list.immutable.primitive;
 
-import java.lang.Iterable;
 import java.io.IOException;
 import java.io.Serializable;
 
@@ -32,7 +31,6 @@ import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
 import org.eclipse.collections.api.block.procedure.primitive.<name>IntProcedure;
 import org.eclipse.collections.api.iterator.<name>Iterator;
 import org.eclipse.collections.api.list.ImmutableList;
-import org.eclipse.collections.api.list.ListIterable;
 import org.eclipse.collections.api.list.primitive.Immutable<name>List;
 import org.eclipse.collections.api.list.primitive.<name>List;
 import org.eclipse.collections.api.list.primitive.Mutable<name>List;

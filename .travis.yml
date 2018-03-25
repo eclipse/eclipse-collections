@@ -20,7 +20,7 @@ install:
 env:
   -JDK=Java8
   -JDK=Java9
-  -JDK=Java10-EA
+  -JDK=Java10
   -JDK=Java11-EA
 
 matrix:
@@ -65,7 +65,7 @@ matrix:
     - jdk: oraclejdk8
       env:
         - DESC="Java 10 regression"
-        - JDK=Java10-EA
+        - JDK=Java10
         - CMD=""
 
     - jdk: oraclejdk8
@@ -75,7 +75,6 @@ matrix:
         - CMD=""
 
   allow_failures:
-    - env: JDK=Java10-EA
     - env: JDK=Java11-EA
 
 script:

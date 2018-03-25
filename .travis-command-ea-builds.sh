@@ -54,8 +54,8 @@ Java8)
 Java9)
   echo "Java 9 already exists in Travis!"
   ;;
-Java10-EA)
-  install_jdk_and_run_ea_build ${JDK10_EA_URL}
+Java10)
+  install_jdk_and_run_ea_build "https://download.java.net/java/GA/jdk10/10/binaries/openjdk-10_linux-x64_bin.tar.gz"
   ;;
 Java11-EA)
   install_jdk_and_run_ea_build ${JDK11_EA_URL}

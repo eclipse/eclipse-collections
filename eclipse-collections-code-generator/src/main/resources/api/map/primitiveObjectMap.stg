@@ -15,8 +15,6 @@ body(type, name) ::= <<
 
 package org.eclipse.collections.api.map.primitive;
 
-import java.util.Map;
-
 import org.eclipse.collections.api.Lazy<name>Iterable;
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.block.function.Function0;

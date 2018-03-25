@@ -76,6 +76,12 @@ public class IntIntervalTest
     }
 
     @Test(expected = IllegalArgumentException.class)
+    public void oneToBy_throws_count_size_zero()
+    {
+        IntInterval.oneToBy(0, 1);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
     public void zeroToBy_throws_step_size_zero()
     {
         IntInterval.zeroToBy(0, 0);
@@ -259,6 +265,9 @@ public class IntIntervalTest
         IntInterval interval12 = IntInterval.fromToBy(0, -5, -3);
         MutableList<IntIterable> expected12 = Lists.mutable.with(IntLists.mutable.with(0, -3));
         Assert.assertEquals(expected12, interval12.chunk(3));
+
+        Verify.assertThrows(IllegalArgumentException.class, () -> interval12.chunk(0));
+        Verify.assertThrows(IllegalArgumentException.class, () -> interval12.chunk(-1));
     }
 
     @Test

@@ -14,7 +14,6 @@ body(type, name) ::= <<
 
 package org.eclipse.collections.impl.list.immutable.primitive;
 
-import java.lang.Iterable;
 import java.io.IOException;
 import java.io.Serializable;
 <if(!primitive.booleanPrimitive)>import java.util.NoSuchElementException;<endif>
@@ -31,7 +30,6 @@ import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
 import org.eclipse.collections.api.block.procedure.primitive.<name>IntProcedure;
 import org.eclipse.collections.api.iterator.<name>Iterator;
 import org.eclipse.collections.api.list.ImmutableList;
-import org.eclipse.collections.api.list.ListIterable;
 import org.eclipse.collections.api.list.primitive.Immutable<name>List;
 import org.eclipse.collections.api.list.primitive.<name>List;
 import org.eclipse.collections.api.list.primitive.Mutable<name>List;
@@ -46,7 +44,6 @@ import org.eclipse.collections.impl.lazy.primitive.Lazy<name>IterableAdapter;
 import org.eclipse.collections.impl.lazy.primitive.Reverse<name>Iterable;
 import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
 import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
-import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 
 /**
  * Immutable<name>EmptyList is an optimization for {@link Immutable<name>List} of size 0.

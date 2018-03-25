@@ -49,7 +49,6 @@ import org.eclipse.collections.api.tuple.primitive.Object<name>Pair;
 import org.eclipse.collections.impl.collection.mutable.primitive.Unmodifiable<name>Collection;
 import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.primitive.<name>Bags;
-import org.eclipse.collections.impl.factory.primitive.<name>Lists;
 import org.eclipse.collections.impl.iterator.Unmodifiable<name>Iterator;
 import org.eclipse.collections.impl.map.mutable.primitive.Object<name>HashMap;
 <if(!primitive.booleanPrimitive)>import org.eclipse.collections.impl.factory.primitive.<name>ObjectMaps;<endif>

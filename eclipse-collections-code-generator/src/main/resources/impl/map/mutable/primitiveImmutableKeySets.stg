@@ -11,7 +11,7 @@ package org.eclipse.collections.impl.map.mutable.primitive;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.NoSuchElementException;
-import org.eclipse.collections.impl.SpreadFunctions;
+<if(!primitive.bytePrimitive)>import org.eclipse.collections.impl.SpreadFunctions;<endif>
 import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.Object<name>ToObjectFunction;
 import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
@@ -317,9 +317,7 @@ class <className> extends AbstractImmutable<name>Set implements Serializable
 
     // exposed for testing
     <(spread.(type))(type)>
-
     <(spread2.(type))(type)>
-
     private int mask(int spread)
     {
         <if(!sameTwoPrimitiveMapKeySet)>
@@ -591,7 +589,7 @@ int probeThree(<type> element, int removedIndex)
     int nextIndex = (int) SpreadFunctions.<type>SpreadOne(element)<if(sameTwoPrimitiveMapKeySet)> \<\< 1<endif>;
     int spreadTwo = <(reverseSpread.(type))()>(SpreadFunctions.<type>SpreadTwo(element)) | 1;
 
-    while(true)
+    while (true)
     {
         nextIndex = this.mask(<if(sameTwoPrimitiveMapKeySet)>(<endif>nextIndex<if(sameTwoPrimitiveMapKeySet)> \>> 1)<endif> + spreadTwo)<if(sameTwoPrimitiveMapKeySet)> \<\< 1<endif>;
         <type> keyAtIndex = this.<keyArray>[nextIndex];

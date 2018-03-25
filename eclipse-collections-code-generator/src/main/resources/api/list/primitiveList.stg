@@ -17,15 +17,12 @@ body(type, name) ::= <<
 
 package org.eclipse.collections.api.list.primitive;
 
-import java.lang.Iterable;
-
 import org.eclipse.collections.api.<name>Iterable;
 import org.eclipse.collections.api.block.function.primitive.<name>IntToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
 import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
 import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
 import org.eclipse.collections.api.list.ListIterable;
-import org.eclipse.collections.api.tuple.primitive.<name>ObjectPair;
 import org.eclipse.collections.api.ordered.primitive.Reversible<name>Iterable;
 import org.eclipse.collections.api.tuple.primitive.<name><name>Pair;
 import org.eclipse.collections.api.tuple.primitive.<name>ObjectPair;

@@ -110,7 +110,8 @@ streamMethods ::= [
     ]
 
 allMethods() ::= <<
-<\n>
+
+
 /**
  * @since 9.0
  */
