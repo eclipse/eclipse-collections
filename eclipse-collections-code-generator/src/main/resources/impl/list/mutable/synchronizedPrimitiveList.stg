@@ -16,7 +16,6 @@ body(type, name) ::= <<
 
 package org.eclipse.collections.impl.list.mutable.primitive;
 
-import java.lang.Iterable;
 import java.util.Collection;
 import java.util.Collections;
 

@@ -96,7 +96,7 @@ import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.primitive.<name>ObjectMap;
 import org.eclipse.collections.api.map.primitive.Mutable<name>ObjectMap;
-import org.eclipse.collections.api.map.primitive.MutableObject<name>Map;
+<if(!primitive.longPrimitive)><if(!primitive.doublePrimitive)>import org.eclipse.collections.api.map.primitive.MutableObject<name>Map;<endif><endif>
 import org.eclipse.collections.api.map.primitive.Immutable<name>ObjectMap;
 import org.eclipse.collections.api.map.primitive.MutableObjectDoubleMap;
 import org.eclipse.collections.api.map.primitive.MutableObjectLongMap;
@@ -118,7 +118,6 @@ import org.eclipse.collections.impl.collection.mutable.SynchronizedMutableCollec
 import org.eclipse.collections.impl.factory.primitive.<name>ObjectMaps;
 import org.eclipse.collections.impl.primitive.Synchronized<name>Iterable;
 import org.eclipse.collections.impl.set.mutable.primitive.Synchronized<name>Set;
-import org.eclipse.collections.api.tuple.primitive.<name>ObjectPair;
 
 /**
  * A synchronized view of a {@link Mutable<name>ObjectMap}. It is imperative that the user manually synchronize on the collection when iterating over it using the

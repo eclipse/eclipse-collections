@@ -32,7 +32,7 @@ import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFuncti
 import org.eclipse.collections.api.block.function.primitive.IntFunction;
 import org.eclipse.collections.api.block.function.primitive.Object<name>ToObjectFunction;
 import org.eclipse.collections.api.block.predicate.primitive.IntPredicate;
-import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
+<if(!primitive.intPrimitive)>import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;<endif>
 import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
 import org.eclipse.collections.api.block.procedure.primitive.<name>IntProcedure;
 import org.eclipse.collections.api.iterator.<name>Iterator;

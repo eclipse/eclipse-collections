@@ -52,7 +52,6 @@ import org.eclipse.collections.impl.collection.mutable.primitive.Synchronized<na
 import org.eclipse.collections.impl.factory.primitive.Object<name>Maps;
 import org.eclipse.collections.impl.set.mutable.SynchronizedMutableSet;
 import org.eclipse.collections.impl.utility.LazyIterate;
-import org.eclipse.collections.api.tuple.primitive.Object<name>Pair;
 
 /**
  * A synchronized view of a {@link MutableObject<name>Map}. It is imperative that the user manually synchronize on the collection when iterating over it using the

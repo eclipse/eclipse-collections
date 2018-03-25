@@ -44,7 +44,7 @@ import org.eclipse.collections.api.iterator.<name2>Iterator;
 import org.eclipse.collections.api.list.primitive.Mutable<name2>List;
 import org.eclipse.collections.api.map.primitive.<name1><name2>Map;
 import org.eclipse.collections.api.map.primitive.Immutable<name1><name2>Map;
-<if(!primitive2.booleanPrimitive)>import org.eclipse.collections.api.map.primitive.Immutable<name2><name1>Map;<endif>
+<if(!primitive2.booleanPrimitive)><if(!sameTwoPrimitives)>import org.eclipse.collections.api.map.primitive.Immutable<name2><name1>Map;<endif><endif>
 <if(!sameTwoPrimitives)>import org.eclipse.collections.api.set.primitive.Mutable<name1>Set;<endif>
 import org.eclipse.collections.api.set.primitive.Mutable<name2>Set;
 import org.eclipse.collections.api.tuple.primitive.<name1><name2>Pair;
@@ -53,7 +53,7 @@ import org.eclipse.collections.impl.collection.mutable.primitive.Unmodifiable<na
 import org.eclipse.collections.impl.factory.Bags;
 import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.primitive.<name1><name2>Maps;
-<if(!primitive2.booleanPrimitive)>import org.eclipse.collections.impl.factory.primitive.<name2><name1>Maps;<endif>
+<if(!primitive2.booleanPrimitive)><if(!sameTwoPrimitives)>import org.eclipse.collections.impl.factory.primitive.<name2><name1>Maps;<endif><endif>
 import org.eclipse.collections.impl.factory.primitive.<name1>Lists;
 <if(!sameTwoPrimitives)>import org.eclipse.collections.impl.factory.primitive.<name2>Lists;<endif>
 import org.eclipse.collections.impl.factory.primitive.<name2>Bags;

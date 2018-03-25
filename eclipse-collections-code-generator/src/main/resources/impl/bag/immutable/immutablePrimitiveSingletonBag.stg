@@ -45,7 +45,6 @@ import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
 import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
 import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.tuple.primitive.<name>IntPair;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 
 /**

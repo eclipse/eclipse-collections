@@ -14,8 +14,6 @@ body(type, name) ::= <<
 
 package org.eclipse.collections.api.list.primitive;
 
-import java.lang.Iterable;
-
 import org.eclipse.collections.api.<name>Iterable;
 import org.eclipse.collections.api.block.function.primitive.<name>IntToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;

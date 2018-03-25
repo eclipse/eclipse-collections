@@ -53,7 +53,6 @@ import org.eclipse.collections.impl.factory.primitive.<name>Bags;
 import org.eclipse.collections.impl.factory.primitive.<name>Lists;
 import org.eclipse.collections.impl.factory.primitive.Object<name>Maps;
 import org.eclipse.collections.impl.iterator.Unmodifiable<name>Iterator;
-import org.eclipse.collections.api.tuple.primitive.Object<name>Pair;
 
 /**
  * This file was automatically generated from template file unmodifiableObjectPrimitiveMap.stg.

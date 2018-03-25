@@ -93,7 +93,7 @@ import org.eclipse.collections.api.map.primitive.Immutable<name>ObjectMap;
 import org.eclipse.collections.api.map.primitive.MutableObjectDoubleMap;
 import org.eclipse.collections.api.map.primitive.MutableObjectLongMap;
 import org.eclipse.collections.api.map.primitive.Mutable<name>ObjectMap;
-import org.eclipse.collections.api.map.primitive.MutableObject<name>Map;
+<if(!primitive.longPrimitive)><if(!primitive.doublePrimitive)>import org.eclipse.collections.api.map.primitive.MutableObject<name>Map;<endif><endif>
 import org.eclipse.collections.api.map.primitive.ObjectDoubleMap;
 import org.eclipse.collections.api.map.primitive.ObjectLongMap;
 import org.eclipse.collections.api.map.sorted.MutableSortedMap;
@@ -109,7 +109,6 @@ import org.eclipse.collections.api.tuple.primitive.<name>ObjectPair;
 import org.eclipse.collections.impl.UnmodifiableIteratorAdapter;
 import org.eclipse.collections.impl.factory.primitive.<name>ObjectMaps;
 import org.eclipse.collections.impl.set.mutable.primitive.Unmodifiable<name>Set;
-import org.eclipse.collections.api.tuple.primitive.<name>ObjectPair;
 
 /**
  * This file was automatically generated from template file unmodifiablePrimitiveObjectMap.stg.

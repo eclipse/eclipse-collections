@@ -104,7 +104,7 @@ import org.eclipse.collections.api.map.primitive.Immutable<name>ObjectMap;
 import org.eclipse.collections.api.map.primitive.MutableObjectDoubleMap;
 import org.eclipse.collections.api.map.primitive.MutableObjectLongMap;
 import org.eclipse.collections.api.map.primitive.Mutable<name>ObjectMap;
-import org.eclipse.collections.api.map.primitive.MutableObject<name>Map;
+<if(!primitive.longPrimitive)><if(!primitive.doublePrimitive)>import org.eclipse.collections.api.map.primitive.MutableObject<name>Map;<endif><endif>
 import org.eclipse.collections.api.map.sorted.MutableSortedMap;
 import org.eclipse.collections.api.multimap.MutableMultimap;
 import org.eclipse.collections.api.multimap.bag.MutableBagMultimap;
@@ -151,8 +151,7 @@ import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.factory.primitive.<name>Sets;
 import org.eclipse.collections.impl.factory.primitive.<name>ObjectMaps;
-import org.eclipse.collections.impl.factory.primitive.Object<name>Maps;
-import org.eclipse.collections.impl.factory.primitive.<name>Sets;
+<if(!primitive.longPrimitive)><if(!primitive.doublePrimitive)>import org.eclipse.collections.impl.factory.primitive.Object<name>Maps;<endif><endif>
 import org.eclipse.collections.impl.factory.primitive.ObjectDoubleMaps;
 import org.eclipse.collections.impl.factory.primitive.ObjectLongMaps;
 import org.eclipse.collections.impl.iterator.Unmodifiable<name>Iterator;

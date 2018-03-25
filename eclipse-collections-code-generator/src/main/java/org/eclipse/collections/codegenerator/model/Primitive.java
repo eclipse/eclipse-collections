@@ -86,6 +86,11 @@ public enum Primitive
         return this == DOUBLE;
     }
 
+    public boolean isLongPrimitive()
+    {
+        return this == LONG;
+    }
+
     public boolean hasSpecializedStream()
     {
         return this == INT || this == LONG || this == DOUBLE;

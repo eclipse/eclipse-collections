@@ -91,7 +91,7 @@ import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.primitive.<name>ObjectMap;
 import org.eclipse.collections.api.map.primitive.Immutable<name>ObjectMap;
-import org.eclipse.collections.api.map.primitive.ImmutableObject<name>Map;
+<if(!primitive.longPrimitive)><if(!primitive.doublePrimitive)>import org.eclipse.collections.api.map.primitive.ImmutableObject<name>Map;<endif><endif>
 import org.eclipse.collections.api.map.primitive.ImmutableObjectDoubleMap;
 import org.eclipse.collections.api.map.primitive.ImmutableObjectLongMap;
 import org.eclipse.collections.api.map.primitive.ObjectDoubleMap;
@@ -124,8 +124,8 @@ import org.eclipse.collections.impl.factory.primitive.IntBags;
 import org.eclipse.collections.impl.factory.primitive.LongBags;
 import org.eclipse.collections.impl.factory.primitive.ShortBags;
 import org.eclipse.collections.impl.factory.primitive.ObjectDoubleMaps;
-import org.eclipse.collections.impl.factory.primitive.Object<name>Maps;
 import org.eclipse.collections.impl.factory.primitive.ObjectLongMaps;
+<if(!primitive.longPrimitive)><if(!primitive.doublePrimitive)>import org.eclipse.collections.impl.factory.primitive.Object<name>Maps;<endif><endif>
 import org.eclipse.collections.impl.lazy.LazyIterableAdapter;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.map.mutable.primitive.<name>ObjectHashMap;

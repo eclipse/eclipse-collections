@@ -16,7 +16,6 @@ body(type, name) ::= <<
 
 package org.eclipse.collections.impl.list.immutable.primitive;
 
-import java.lang.Iterable;
 import java.io.IOException;
 import java.io.Serializable;
 

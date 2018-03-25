@@ -29,7 +29,6 @@ import org.eclipse.collections.api.<name1>Iterable;
 import org.eclipse.collections.api.Lazy<name1>Iterable;
 import org.eclipse.collections.api.RichIterable;
 <if(!sameTwoPrimitives)>import org.eclipse.collections.api.Lazy<name2>Iterable;<endif>
-import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.api.bag.primitive.Immutable<name2>Bag;
 import org.eclipse.collections.api.bag.primitive.Mutable<name2>Bag;
@@ -46,7 +45,7 @@ import org.eclipse.collections.api.iterator.<name2>Iterator;
 import org.eclipse.collections.api.list.primitive.Mutable<name2>List;
 import org.eclipse.collections.api.map.primitive.<name1><name2>Map;
 import org.eclipse.collections.api.map.primitive.Immutable<name1><name2>Map;
-<if(!primitive2.booleanPrimitive)>import org.eclipse.collections.api.map.primitive.Immutable<name2><name1>Map;<endif>
+<if(!primitive2.booleanPrimitive)><if(!sameTwoPrimitives)>import org.eclipse.collections.api.map.primitive.Immutable<name2><name1>Map;<endif><endif>
 <if(!sameTwoPrimitives)>import org.eclipse.collections.api.set.primitive.Mutable<name1>Set;<endif>
 import org.eclipse.collections.api.set.primitive.Mutable<name2>Set;
 import org.eclipse.collections.api.tuple.primitive.<name1><name2>Pair;
