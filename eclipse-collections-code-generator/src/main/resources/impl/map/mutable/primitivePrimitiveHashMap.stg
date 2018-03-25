@@ -945,7 +945,7 @@ public class <name1><name2>HashMap extends AbstractMutable<name2>ValuesMap imple
 
     private int mask(int spread)
     {
-        return spread & (<if(sameTwoPrimitives)>(<endif>this.<keyArray>.length <if(sameTwoPrimitives)>\>> 1)<endif>- 1);
+        return spread & (<if(sameTwoPrimitives)>(<endif>this.<keyArray>.length <if(sameTwoPrimitives)>\>> 1)<endif> - 1);
     }
 
     private void allocateTable(int sizeToAllocate)

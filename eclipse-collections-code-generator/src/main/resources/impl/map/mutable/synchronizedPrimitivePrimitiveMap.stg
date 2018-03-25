@@ -82,7 +82,7 @@ public class Synchronized<name1><name2>Map
 
     public Synchronized<name1><name2>Map(Mutable<name1><name2>Map map, Object newLock)
     {
-        if(map == null)
+        if (map == null)
         {
             throw new IllegalArgumentException("Cannot create a Synchronized<name1><name2>Map on a null map");
         }

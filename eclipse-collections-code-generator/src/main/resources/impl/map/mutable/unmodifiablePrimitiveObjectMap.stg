@@ -121,7 +121,7 @@ public class Unmodifiable<name>ObjectMap\<V>
 
     public Unmodifiable<name>ObjectMap(Mutable<name>ObjectMap\<V> map)
     {
-        if(map == null)
+        if (map == null)
         {
             throw new IllegalArgumentException("Cannot create a Unmodifiable<name>ObjectMap on a null map");
         }

@@ -2010,7 +2010,7 @@ int probeThree(<type> element, int removedIndex)
     int nextIndex = <(reverseSpread.(type))()>(SpreadFunctions.<type>SpreadOne(element));
     int spreadTwo = <(reverseSpread.(type))()>(SpreadFunctions.<type>SpreadTwo(element)) | 1;
 
-    while(true)
+    while (true)
     {
         nextIndex = this.mask(nextIndex + spreadTwo);
         <type> keyAtIndex = this.keys[nextIndex];

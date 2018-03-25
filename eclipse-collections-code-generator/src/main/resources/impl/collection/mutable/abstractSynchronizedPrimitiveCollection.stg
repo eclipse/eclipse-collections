@@ -54,7 +54,7 @@ public abstract class AbstractSynchronized<name>Collection
 
     protected AbstractSynchronized<name>Collection(Mutable<name>Collection collection, Object newLock)
     {
-        if(collection == null)
+        if (collection == null)
         {
             throw new IllegalArgumentException("Cannot create a AbstractSynchronized<name>Collection on a null collection");
         }

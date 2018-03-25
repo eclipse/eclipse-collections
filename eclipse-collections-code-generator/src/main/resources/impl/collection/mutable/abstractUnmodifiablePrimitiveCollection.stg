@@ -49,7 +49,7 @@ public abstract class AbstractUnmodifiable<name>Collection
 
     protected AbstractUnmodifiable<name>Collection(Mutable<name>Collection collection)
     {
-        if(collection == null)
+        if (collection == null)
         {
             throw new IllegalArgumentException("Cannot create a AbstractUnmodifiable<name>Collection on a null collection");
         }

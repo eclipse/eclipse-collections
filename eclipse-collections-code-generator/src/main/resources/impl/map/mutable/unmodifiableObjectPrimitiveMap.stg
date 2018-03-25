@@ -62,7 +62,7 @@ public class UnmodifiableObject<name>Map\<K>
 
     public UnmodifiableObject<name>Map(MutableObject<name>Map\<K> map)
     {
-        if(map == null)
+        if (map == null)
         {
             throw new IllegalArgumentException("Cannot create a UnmodifiableObject<name>Map on a null map");
         }

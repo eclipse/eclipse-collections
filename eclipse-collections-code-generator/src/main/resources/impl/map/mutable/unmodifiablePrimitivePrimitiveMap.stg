@@ -68,7 +68,7 @@ public class Unmodifiable<name1><name2>Map
 
     public Unmodifiable<name1><name2>Map(Mutable<name1><name2>Map map)
     {
-        if(map == null)
+        if (map == null)
         {
             throw new IllegalArgumentException("Cannot create a Unmodifiable<name1><name2>Map on a null map");
         }
@@ -125,25 +125,25 @@ public class Unmodifiable<name1><name2>Map
     @Override
     public <type2> getIfAbsentPut(<type1> key, <type2> value)
     {
-        return this.map.getIfAbsentPut(key, () -> {throw new UnsupportedOperationException();});
+        return this.map.getIfAbsentPut(key, () -> { throw new UnsupportedOperationException(); });
     }
 
     @Override
     public <type2> getIfAbsentPut(<type1> key, <name2>Function0 function)
     {
-        return this.map.getIfAbsentPut(key, () -> {throw new UnsupportedOperationException();});
+        return this.map.getIfAbsentPut(key, () -> { throw new UnsupportedOperationException(); });
     }
 
     @Override
     public <type2> getIfAbsentPutWithKey(<type1> key, <name1>To<name2>Function function)
     {
-        return this.map.getIfAbsentPut(key, () -> {throw new UnsupportedOperationException();});
+        return this.map.getIfAbsentPut(key, () -> { throw new UnsupportedOperationException(); });
     }
 
     @Override
     public \<P> <type2> getIfAbsentPutWith(<type1> key, <name2>Function\<? super P> function, P parameter)
     {
-        return this.map.getIfAbsentPut(key, () -> {throw new UnsupportedOperationException();});
+        return this.map.getIfAbsentPut(key, () -> { throw new UnsupportedOperationException(); });
     }
 
     @Override

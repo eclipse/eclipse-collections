@@ -141,7 +141,7 @@ public class Synchronized<name>ObjectMap\<V>
 
     public Synchronized<name>ObjectMap(Mutable<name>ObjectMap\<V> map, Object newLock)
     {
-        if(map == null)
+        if (map == null)
         {
             throw new IllegalArgumentException("Cannot create a Synchronized<name>ObjectMap on a null map");
         }

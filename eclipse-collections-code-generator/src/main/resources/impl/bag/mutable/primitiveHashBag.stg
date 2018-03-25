@@ -689,7 +689,7 @@ public class <name>HashBag
     final <wideType.(type)>[] compensation = {<wideZero.(type)>};
     this.forEachWithOccurrences((<type> each, int occurrences) ->
     {
-        for(int i = 0; i \< occurrences; i++)
+        for (int i = 0; i \< occurrences; i++)
         {
             <wideType.(type)> adjustedValue = (<wideType.(type)>) each - compensation[0];
             <wideType.(type)> nextSum = result[0] + adjustedValue;
