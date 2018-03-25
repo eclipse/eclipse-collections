@@ -51,8 +51,7 @@ public interface Immutable<name1><name2>Map extends <name1><name2>Map
     Immutable<name1><name2>Map newWithoutKey(<type1> key);
 
     Immutable<name1><name2>Map newWithoutAllKeys(<name1>Iterable keys);
-
-    <(flipUniqueValues.(name2))(name1, name2)>
+    <if(!primitive2.booleanPrimitive)><(flipUniqueValues.(name2))(name1, name2)><endif>
 }
 
 >>
@@ -71,6 +70,8 @@ flipUniqueValues ::= [
 noMethods(name1, name2) ::= ""
 
 flipUniqueValues(name1, name2) ::= <<
+
+
 @Override
 Immutable<name2><name1>Map flipUniqueValues();
 >>

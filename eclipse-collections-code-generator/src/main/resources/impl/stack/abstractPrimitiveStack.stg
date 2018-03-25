@@ -331,7 +331,6 @@ public abstract class Abstract<name>Stack implements <name>Stack
     {
         return this.getDelegate().asReversed().chunk(size);
     }
-
     <(arithmeticMethods.(type))(type)>
 }
 
@@ -349,6 +348,7 @@ arithmeticMethods ::= [
     ]
 
 allMethods(type) ::= <<
+
 
 @Override
 public <wideType.(type)> sum()

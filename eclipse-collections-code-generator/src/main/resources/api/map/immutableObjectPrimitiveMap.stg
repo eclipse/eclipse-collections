@@ -56,8 +56,7 @@ public interface ImmutableObject<name>Map\<K> extends Object<name>Map\<K>
     ImmutableObject<name>Map\<K> newWithoutKey(K key);
 
     ImmutableObject<name>Map\<K> newWithoutAllKeys(Iterable\<? extends K> keys);
-
-    <(flipUniqueValues.(name))(name)>
+    <if(!primitive.booleanPrimitive)><(flipUniqueValues.(name))(name)><endif>
 }
 
 >>
@@ -76,6 +75,8 @@ flipUniqueValues ::= [
 noMethods(type) ::= ""
 
 flipUniqueValues(name) ::= <<
+
+
 @Override
 Immutable<name>ObjectMap\<K> flipUniqueValues();
 >>

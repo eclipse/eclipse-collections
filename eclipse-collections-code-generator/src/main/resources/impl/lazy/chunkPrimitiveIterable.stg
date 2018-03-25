@@ -79,7 +79,6 @@ public class Chunk<name>Iterable
             this.speciesNewStrategy = iterable instanceof Mutable<name>Collection
                     ? ((Mutable<name>Collection) iterable)::newEmpty
                     : <name>Lists.mutable::empty;
-
         }
 
         @Override
