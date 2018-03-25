@@ -1044,9 +1044,7 @@ public class <name>HashSet extends Abstract<name>Set implements Mutable<name>Set
 
     // exposed for testing
     <(spread.(type))(type)>
-
     <(spread2.(type))(type)>
-
     private int mask(int spread)
     {
         return spread & (this.table.length - 1);
@@ -1533,9 +1531,7 @@ public class <name>HashSet extends Abstract<name>Set implements Mutable<name>Set
 
         // exposed for testing
         <(spread.(type))(type)>
-
         <(spread2.(type))(type)>
-
         private int mask(int spread)
         {
             return spread & (this.table.length - 1);

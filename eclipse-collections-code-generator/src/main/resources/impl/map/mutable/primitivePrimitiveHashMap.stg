@@ -748,7 +748,6 @@ public class <name1><name2>HashMap extends AbstractMutable<name2>ValuesMap imple
     }
 
 <endif>
-
     @Override
     public <type2> getOrThrow(<type1> key)
     {
@@ -940,9 +939,7 @@ public class <name1><name2>HashMap extends AbstractMutable<name2>ValuesMap imple
 
     // exposed for testing
     <(spread.(type1))(type1)>
-
     <(spread2.(type1))(type1)>
-
     private int mask(int spread)
     {
         return spread & (<if(sameTwoPrimitives)>(<endif>this.<keyArray>.length <if(sameTwoPrimitives)>\>> 1)<endif> - 1);

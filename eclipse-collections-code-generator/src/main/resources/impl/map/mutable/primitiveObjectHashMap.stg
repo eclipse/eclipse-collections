@@ -26,7 +26,6 @@ public \<R extends Mutable<name>Collection> R collect<name>(<name>Function\<? su
     this.forEach(new Collect<name>Procedure\<V>(<type>Function, target));
     return target;
 }
-
 >>
 
 body(type, name) ::= <<
@@ -945,12 +944,19 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
     }
 
     <collectPrimitive("Boolean", "boolean")>
+
     <collectPrimitive("Byte", "byte")>
+
     <collectPrimitive("Char", "char")>
+
     <collectPrimitive("Double", "double")>
+
     <collectPrimitive("Float", "float")>
+
     <collectPrimitive("Int", "int")>
+
     <collectPrimitive("Long", "long")>
+
     <collectPrimitive("Short", "short")>
 
     @Override
@@ -2980,9 +2986,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
 
     // exposed for testing
     <(spread.(type))(type)>
-
     <(spread2.(type))(type)>
-
     private int mask(int spread)
     {
         return spread & (this.keys.length - 1);

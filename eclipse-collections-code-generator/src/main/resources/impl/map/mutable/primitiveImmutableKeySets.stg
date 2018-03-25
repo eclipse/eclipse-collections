@@ -317,9 +317,7 @@ class <className> extends AbstractImmutable<name>Set implements Serializable
 
     // exposed for testing
     <(spread.(type))(type)>
-
     <(spread2.(type))(type)>
-
     private int mask(int spread)
     {
         <if(!sameTwoPrimitiveMapKeySet)>

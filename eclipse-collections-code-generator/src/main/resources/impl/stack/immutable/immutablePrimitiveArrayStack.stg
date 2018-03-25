@@ -175,7 +175,6 @@ final class Immutable<name>ArrayStack extends Abstract<name>Stack
     }
 
     <(arithmeticMethods.(type))(type)>
-
     private Object writeReplace()
     {
         return new Immutable<name>StackSerializationProxy(this);
@@ -264,6 +263,7 @@ public Mutable<name>List toSortedList()
 {
     return <name>ArrayList.newList(this).sortThis();
 }
+
 >>
 
 noMethods(type) ::= ""

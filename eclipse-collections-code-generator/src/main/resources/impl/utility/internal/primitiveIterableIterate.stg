@@ -96,7 +96,6 @@ public final class <name>IterableIterate
     }
 
     <(arithmeticMethods.(type))()>
-
     public static void appendString(
             <name>Iterable iterable,
             Appendable appendable,
@@ -180,6 +179,7 @@ public static <type> minIfEmpty(<name>Iterable iterable, <type> ifEmpty)
     }
     return <name>IteratorIterate.min(iterable.<type>Iterator());
 }
+
 >>
 
 noMethods() ::= ""

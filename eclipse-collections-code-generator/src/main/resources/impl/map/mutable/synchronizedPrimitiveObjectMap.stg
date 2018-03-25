@@ -31,7 +31,6 @@ public \<R extends Mutable<name>Collection> R collect<name>(<name>Function\<? su
         return this.map.collect<name>(<type>Function, target);
     }
 }
-
 >>
 
 body(type, name) ::= <<
@@ -597,12 +596,19 @@ public class Synchronized<name>ObjectMap\<V>
     }
 
     <collectPrimitive("Boolean", "boolean")>
+
     <collectPrimitive("Byte", "byte")>
+
     <collectPrimitive("Char", "char")>
+
     <collectPrimitive("Double", "double")>
+
     <collectPrimitive("Float", "float")>
+
     <collectPrimitive("Int", "int")>
+
     <collectPrimitive("Long", "long")>
+
     <collectPrimitive("Short", "short")>
 
     @Override

@@ -96,6 +96,7 @@ int spreadAndMask(<type> element)
     // No spreading necessary for 8-bit types
     return this.mask(element);
 }
+
 >>
 
 spread28(type) ::= <<
@@ -107,6 +108,7 @@ int spreadAndMask(<type> element)
     int code = SpreadFunctions.<type>SpreadOne(element);
     return this.mask(code);
 }
+
 >>
 
 spread232(type) ::= <<
@@ -115,6 +117,7 @@ int spreadTwoAndMask(<type> element)
     int code = SpreadFunctions.<type>SpreadTwo(element);
     return this.mask(code);
 }
+
 >>
 
 spread64(type) ::= <<
@@ -123,6 +126,7 @@ int spreadAndMask(<type> element)
     long code = SpreadFunctions.<type>SpreadOne(element);
     return this.mask((int) code);
 }
+
 >>
 
 spread264(type) ::= <<
@@ -131,6 +135,7 @@ int spreadTwoAndMask(<type> element)
     long code = SpreadFunctions.<type>SpreadTwo(element);
     return this.mask((int) code);
 }
+
 >>
 
 probe ::= [

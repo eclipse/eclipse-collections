@@ -172,7 +172,8 @@ arithmeticMethods ::= [
     ]
 
 allMethods() ::= <<
-<\n>
+
+
 public static <wideType.(type)> sum(<name>Iterator iterator)
 {
     <wideType.(type)> sum = <wideZero.(type)>;

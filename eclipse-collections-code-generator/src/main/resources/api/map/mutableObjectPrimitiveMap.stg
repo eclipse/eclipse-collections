@@ -67,8 +67,7 @@ public interface MutableObject<name>Map\<K> extends Object<name>Map\<K>
     \<P> <type> getIfAbsentPutWith(K key, <name>Function\<? super P> function, P parameter);
 
     <type> updateValue(K key, <type> initialValueIfAbsent, <name>To<name>Function function);
-
-    <(flipUniqueValues.(name))(name)>
+    <if(!primitive.booleanPrimitive)><(flipUniqueValues.(name))(name)><endif>
 
     @Override
     MutableObject<name>Map\<K> select(Object<name>Predicate\<? super K> predicate);
@@ -120,7 +119,8 @@ arithmeticMethods ::= [
     ]
 
 allMethods(type) ::= <<
-<\n>
+
+
 <type> addToValue(K key, <type> toBeAdded);
 >>
 
@@ -138,6 +138,7 @@ flipUniqueValues ::= [
     ]
 
 flipUniqueValues(name) ::= <<
+
 @Override
 Mutable<name>ObjectMap\<K> flipUniqueValues();
 >>

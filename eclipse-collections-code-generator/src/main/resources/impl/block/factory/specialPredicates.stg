@@ -65,6 +65,7 @@ private static final class <name>IsOddPredicate implements <name>Predicate
         return integral % 2 != 0;
     }
 }
+
 >>
 
 charPredicateConstants ::= [
@@ -226,4 +227,5 @@ private static class IsUndefinedCharPredicate implements CharPredicate
         return !Character.isDefined(value);
     }
 }
+
 >>

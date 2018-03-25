@@ -361,7 +361,8 @@ arithmeticMethods ::= [
     ]
 
 allMethods() ::= <<
-<\n>
+
+
 <(wideType.(type))> sum();
 
 /**
