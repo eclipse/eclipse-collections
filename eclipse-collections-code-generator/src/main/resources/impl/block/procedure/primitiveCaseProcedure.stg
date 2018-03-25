@@ -81,4 +81,5 @@ public class <name>CaseProcedure implements <name>Procedure
         return "new <name>CaseProcedure(" + this.predicateProcedures + ')';
     }
 }
+
 >>
