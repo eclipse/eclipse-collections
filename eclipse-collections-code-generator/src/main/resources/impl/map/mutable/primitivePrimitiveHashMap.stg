@@ -56,7 +56,6 @@ import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.block.function.primitive.<name2>Function;
 import org.eclipse.collections.api.block.function.primitive.<name2>Function0;
 import org.eclipse.collections.api.block.function.primitive.<name2>To<name2>Function;
-<if(sameTwoPrimitives)>import org.eclipse.collections.api.block.function.primitive.<name2>ToObjectFunction;<endif>
 import org.eclipse.collections.api.block.function.primitive.Object<name2>ToObjectFunction;
 import org.eclipse.collections.api.block.predicate.primitive.<name1><name2>Predicate;
 import org.eclipse.collections.api.block.procedure.Procedure;
@@ -64,7 +63,7 @@ import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.block.procedure.primitive.<name1>Procedure;
 import org.eclipse.collections.api.block.procedure.primitive.<name1><name2>Procedure;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
-import org.eclipse.collections.impl.SpreadFunctions;
+<if(!primitive1.bytePrimitive)>import org.eclipse.collections.impl.SpreadFunctions;<endif>
 import org.eclipse.collections.api.collection.primitive.Mutable<name2>Collection;
 import org.eclipse.collections.api.iterator.<name1>Iterator;
 import org.eclipse.collections.api.iterator.Mutable<name1>Iterator;

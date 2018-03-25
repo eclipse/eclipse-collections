@@ -28,7 +28,6 @@ import org.eclipse.collections.api.iterator.<name>Iterator;
 import org.eclipse.collections.api.list.primitive.<name>List;
 import org.eclipse.collections.api.list.primitive.Mutable<name>List;
 import org.eclipse.collections.api.stack.MutableStack;
-import org.eclipse.collections.api.stack.primitive.<name>Stack;
 import org.eclipse.collections.api.stack.primitive.Immutable<name>Stack;
 import org.eclipse.collections.api.stack.primitive.Mutable<name>Stack;
 import org.eclipse.collections.impl.factory.primitive.<name>Stacks;

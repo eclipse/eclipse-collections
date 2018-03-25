@@ -11,7 +11,7 @@ package org.eclipse.collections.impl.map.mutable.primitive;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.NoSuchElementException;
-import org.eclipse.collections.impl.SpreadFunctions;
+<if(!primitive.bytePrimitive)>import org.eclipse.collections.impl.SpreadFunctions;<endif>
 import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.Object<name>ToObjectFunction;
 import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;

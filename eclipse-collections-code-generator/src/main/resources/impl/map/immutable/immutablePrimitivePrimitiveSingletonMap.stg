@@ -38,7 +38,6 @@ import org.eclipse.collections.api.block.predicate.primitive.<name1><name2>Predi
 import org.eclipse.collections.api.block.procedure.primitive.<name2>Procedure;
 import org.eclipse.collections.api.block.procedure.primitive.<name1><name2>Procedure;
 <if(!sameTwoPrimitives)>import org.eclipse.collections.api.block.procedure.primitive.<name1>Procedure;<endif>
-<if(!primitive2.booleanPrimitive)>import org.eclipse.collections.api.collection.primitive.Immutable<name2>Collection;<endif>
 import org.eclipse.collections.api.collection.primitive.Mutable<name2>Collection;
 import org.eclipse.collections.api.iterator.<name2>Iterator;
 import org.eclipse.collections.api.list.primitive.Mutable<name2>List;
@@ -55,7 +54,6 @@ import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.primitive.<name1><name2>Maps;
 <if(!primitive2.booleanPrimitive)><if(!sameTwoPrimitives)>import org.eclipse.collections.impl.factory.primitive.<name2><name1>Maps;<endif><endif>
 import org.eclipse.collections.impl.factory.primitive.<name1>Lists;
-<if(!sameTwoPrimitives)>import org.eclipse.collections.impl.factory.primitive.<name2>Lists;<endif>
 import org.eclipse.collections.impl.factory.primitive.<name2>Bags;
 import org.eclipse.collections.impl.iterator.Unmodifiable<name2>Iterator;
 import org.eclipse.collections.impl.lazy.primitive.Lazy<name2>IterableAdapter;

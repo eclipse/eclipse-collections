@@ -13,7 +13,6 @@ body(type, name) ::= <<
 
 package org.eclipse.collections.impl.map.immutable.primitive;
 
-import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.factory.map.primitive.ImmutableObject<name>MapFactory;
 import org.eclipse.collections.api.map.primitive.ImmutableObject<name>Map;
 import org.eclipse.collections.api.map.primitive.Object<name>Map;

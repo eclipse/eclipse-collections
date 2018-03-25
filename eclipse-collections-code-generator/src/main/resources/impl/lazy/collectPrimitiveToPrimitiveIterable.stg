@@ -22,8 +22,7 @@ package org.eclipse.collections.impl.lazy.primitive;
 
 import org.eclipse.collections.api.<name1>Iterable;
 import org.eclipse.collections.api.block.function.primitive.<name1>To<name2>Function;
-import org.eclipse.collections.api.block.procedure.primitive.<name1>Procedure;
-<if(!sameTwoPrimitives)>import org.eclipse.collections.api.block.procedure.primitive.<name2>Procedure;<endif>
+import org.eclipse.collections.api.block.procedure.primitive.<name2>Procedure;
 import org.eclipse.collections.api.iterator.<name1>Iterator;
 <if(!sameTwoPrimitives)>import org.eclipse.collections.api.iterator.<name2>Iterator;<endif>
 

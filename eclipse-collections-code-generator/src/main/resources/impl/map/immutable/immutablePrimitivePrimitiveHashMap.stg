@@ -60,7 +60,6 @@ import org.eclipse.collections.api.tuple.primitive.<name1><name2>Pair;
 import org.eclipse.collections.impl.block.procedure.checked.primitive.Checked<name1><name2>Procedure;
 import org.eclipse.collections.impl.collection.mutable.primitive.Unmodifiable<name2>Collection;
 import org.eclipse.collections.impl.factory.primitive.<name2>Bags;
-import org.eclipse.collections.impl.factory.primitive.<name2>Lists;
 import org.eclipse.collections.impl.iterator.Unmodifiable<name2>Iterator;
 import org.eclipse.collections.impl.map.mutable.primitive.<name1><name2>HashMap;
 import org.eclipse.collections.impl.set.mutable.primitive.Unmodifiable<name1>Set;
