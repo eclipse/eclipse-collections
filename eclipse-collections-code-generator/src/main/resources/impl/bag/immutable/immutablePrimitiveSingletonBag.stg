@@ -156,17 +156,17 @@ final class Immutable<name>SingletonBag implements Immutable<name>Bag, Serializa
     @Override
     public Immutable<name>Bag select(<name>Predicate predicate)
     {
-        return predicate.accept(this.element1) ?
-                <name>Bags.immutable.with(this.element1) :
-                <name>Bags.immutable.empty();
+        return predicate.accept(this.element1)
+            ? <name>Bags.immutable.with(this.element1)
+            : <name>Bags.immutable.empty();
     }
 
     @Override
     public Immutable<name>Bag selectByOccurrences(IntPredicate predicate)
     {
-        return predicate.accept(1) ?
-                <name>Bags.immutable.with(this.element1) :
-                <name>Bags.immutable.empty();
+        return predicate.accept(1)
+            ? <name>Bags.immutable.with(this.element1)
+            : <name>Bags.immutable.empty();
     }
 
     @Override
@@ -200,9 +200,9 @@ final class Immutable<name>SingletonBag implements Immutable<name>Bag, Serializa
     @Override
     public Immutable<name>Bag reject(<name>Predicate predicate)
     {
-        return predicate.accept(this.element1) ?
-                <name>Bags.immutable.empty() :
-                <name>Bags.immutable.with(this.element1);
+        return predicate.accept(this.element1)
+            ? <name>Bags.immutable.empty()
+            : <name>Bags.immutable.with(this.element1);
     }
 
     @Override
