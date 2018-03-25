@@ -50,7 +50,7 @@
     <suppress checks="ConstantName" files="Multimaps.java" />
 
     <suppress checks="MethodName" files="EclipseCollectionsCodeGenerator.java" />
-    <suppress files="[\\/]generated-sources[\\/]" checks="[a-zA-Z0-9]*"/>
+    <suppress files="[\\/]annotations[\\/]" checks="[a-zA-Z0-9]*"/>
 
     <suppress checks="MethodName" files="[\\/]unit-tests-java8[\\/]" />
 
@@ -96,4 +96,21 @@
     <suppress checks="RedundantModifier" files="ImmutableSortedSetSerializationProxy.java" />
     <suppress checks="RedundantModifier" files="ImmutableSetWithHashingStrategySerializationProxy.java" />
     <suppress checks="RedundantModifier" files="ImmutableArrayStack.java" />
+    <suppress checks="RedundantModifier" files="FlatCollectBooleanToObjectIterable.java" />
+    <suppress checks="RedundantModifier" files="FlatCollectByteToObjectIterable.java" />
+    <suppress checks="RedundantModifier" files="FlatCollectCharToObjectIterable.java" />
+    <suppress checks="RedundantModifier" files="FlatCollectDoubleToObjectIterable.java" />
+    <suppress checks="RedundantModifier" files="FlatCollectFloatToObjectIterable.java" />
+    <suppress checks="RedundantModifier" files="FlatCollectIntToObjectIterable.java" />
+    <suppress checks="RedundantModifier" files="FlatCollectLongToObjectIterable.java" />
+    <suppress checks="RedundantModifier" files="FlatCollectShortToObjectIterable.java" />
+    <suppress checks="RedundantModifier" files="ImmutableBooleanArrayStack.java" />
+    <suppress checks="RedundantModifier" files="ImmutableByteArrayStack.java" />
+    <suppress checks="RedundantModifier" files="ImmutableCharArrayStack.java" />
+    <suppress checks="RedundantModifier" files="ImmutableDoubleArrayStack.java" />
+    <suppress checks="RedundantModifier" files="ImmutableFloatArrayStack.java" />
+    <suppress checks="RedundantModifier" files="ImmutableIntArrayStack.java" />
+    <suppress checks="RedundantModifier" files="ImmutableLongArrayStack.java" />
+    <suppress checks="RedundantModifier" files="ImmutableShortArrayStack.java" />
+
 </suppressions>
