@@ -558,7 +558,7 @@ public class Object<name>HashMap\<K> implements MutableObject<name>Map\<K>, Exte
             return this.values[index];
         }
         this.addKeyValueAtIndex(key, toBeAdded, index);
-        return this.values[index];
+        return toBeAdded;
     }
 
     @Override
