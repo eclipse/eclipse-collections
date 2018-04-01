@@ -2044,7 +2044,7 @@ public interface RichIterable<T>
      */
     default <V, W, X> MutableMap<V, MutableMap<W, Multimap<X, T>>> groupBy3(Function<? super T, ? extends V> function1, Function<? super T, ? extends W> function2, Function<? super T, ? extends X> function3)
     {
-    	return this.<V, W>groupBy2(function1, function2).collectValues((v, wt) -> wt.toMap().collectValues((w, t) -> t.groupBy(function3)));
+        return this.<V, W>groupBy2(function1, function2).collectValues((v, wt) -> wt.toMap().collectValues((w, t) -> t.groupBy(function3)));
     }
 
     /**
