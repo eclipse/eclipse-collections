@@ -1591,6 +1591,41 @@ public interface RichIterableTestCase extends IterableTestCase
         assertSame(target2, actualWithTarget);
     }
 
+    @Test
+    default void RichIterable_groupBy2()
+    {
+        RichIterable<Integer> iterable = this.newWith(4, 4, 4, 4, 3, 3, 3, 2, 2, 1);
+        Function<Integer, Boolean> isOdd = object -> IntegerPredicates.isOdd().accept(object);
+        Function<Integer, Boolean> inRange = object -> Predicates.betweenInclusive(1, 2).accept(object);
+
+        Map<Boolean, Multimap<Boolean, Integer>> expectedGroupBy =
+                UnifiedMap.newWithKeysValues(
+                        Boolean.TRUE, this.newWith(2, 2, 1).groupBy(isOdd),
+                        Boolean.FALSE, this.newWith(4, 4, 4, 4, 3, 3, 3).groupBy(isOdd));
+
+        assertEquals(expectedGroupBy, iterable.groupBy2(inRange, isOdd));
+    }
+
+    @Test
+    default void RichIterable_groupBy3()
+    {
+        RichIterable<Integer> iterable = this.newWith(4, 4, 4, 4, 3, 3, 3, 2, 2, 1, -1, -2, -2, -3, -3, -3, -4, -4, -4, -4);
+        Function<Integer, Boolean> isPositive = object -> IntegerPredicates.isPositive().accept(object);
+        Function<Integer, Boolean> isOdd = object -> IntegerPredicates.isOdd().accept(object);
+        Function<Integer, Boolean> inRange = object -> Predicates.betweenInclusive(-2, 2).accept(object);
+
+        Map<Boolean, Map<Boolean, Multimap<Boolean, Integer>>> expectedGroupBy =
+                UnifiedMap.newWithKeysValues(
+                        Boolean.TRUE, UnifiedMap.newWithKeysValues(
+                            Boolean.TRUE, this.newWith(2, 2, 1).groupBy(isOdd),
+                            Boolean.FALSE, this.newWith(4, 4, 4, 4, 3, 3, 3).groupBy(isOdd)),
+                        Boolean.FALSE,  UnifiedMap.newWithKeysValues(
+                            Boolean.TRUE, this.newWith(-2, -2, -1).groupBy(isOdd),
+                            Boolean.FALSE, this.newWith(-4, -4, -4, -4, -3, -3, -3).groupBy(isOdd)));
+
+        assertEquals(expectedGroupBy, iterable.groupBy3(isPositive, inRange, isOdd));
+    }
+
     /**
      * @since 9.0
      */

@@ -13,8 +13,10 @@ package org.eclipse.collections.api;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.DoubleSummaryStatistics;
+import java.util.HashMap;
 import java.util.IntSummaryStatistics;
 import java.util.LongSummaryStatistics;
+import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.function.BiConsumer;
@@ -1997,6 +1999,69 @@ public interface RichIterable<T>
      * @since 1.0
      */
     <V> Multimap<V, T> groupBy(Function<? super T, ? extends V> function);
+
+    /**
+     * For each element of the iterable, the functions are evaluated and the results of these valuations are collected
+     * into a new map of Multimap, where the first and second functions are evaluated to produce the keys to the map and the inner
+     * Multimap respectively, and the original values are added to the same (or similar) species of collection as the
+     * source iterable.
+     * <p>
+     * Example using a Java 8 method reference:
+     * <pre>
+     * Map&lt;String, Multimap&lt;String, Person&gt;&gt; peopleByCityAndLastName =
+     *     people.groupBy(Person::getCity, Person::getLastName);
+     * </pre>
+     * <p>
+     * Example using an anonymous inner class:
+     * <pre>
+     * Map&lt;String, Multimap&lt;String, Person&gt;&gt; peopleByCityAndLastName =
+     *     people.groupBy(new Function&lt;Person, String&gt;()
+     *     {
+     *         public String valueOf(Person person)
+     *         {
+     *             return person.getCity();
+     *         }
+     *     },
+     *     new Function&lt;Person, String&gt;()
+     *     {
+     *         public String valueOf(Person person)
+     *         {
+     *             return person.getLastName();
+     *         }
+     *     }
+     *     );
+     * </pre>
+     *
+     * @since 9.x
+     */
+    default <V, W> Map<V, Multimap<W, T>> groupBy2(Function<? super T, ? extends V> function1, Function<? super T, ? extends W> function2)
+    {
+        Map<V, Multimap<W, T>> result = new HashMap<>();
+        Multimap<V, T> map1 = this.groupBy(function1);
+        map1.forEachKey(v -> {
+            Multimap<W, T> multimap2 = map1.get(v).groupBy(function2);
+            result.put(v, multimap2);
+        });
+        return result;
+    }
+
+    /**
+     * Similar to {@link #groupBy2(Function, Function)}, except the third function evaluate the key to the innermost Multimap.
+     *
+     * @since 9.x
+     */
+    default <V, W, X> Map<V, Map<W, Multimap<X, T>>> groupBy3(Function<? super T, ? extends V> function1, Function<? super T, ? extends W> function2, Function<? super T, ? extends X> function3)
+    {
+        Map<V, Map<W, Multimap<X, T>>> result = new HashMap<>();
+        Map<V, Multimap<W, T>> map1 = this.groupBy2(function1, function2);
+        map1.forEach((v, map2) -> {
+            map2.forEachKey(w -> {
+                Multimap<X, T> multimap3 = map2.get(w).groupBy(function3);
+                result.computeIfAbsent(v, key -> new HashMap<>()).put(w, multimap3);
+            });
+        });
+        return result;
+    }
 
     /**
      * This method will count the number of occurrences of each value calculated by applying the
