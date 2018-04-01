@@ -13,10 +13,8 @@ package org.eclipse.collections.api;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.DoubleSummaryStatistics;
-import java.util.HashMap;
 import java.util.IntSummaryStatistics;
 import java.util.LongSummaryStatistics;
-import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.function.BiConsumer;
@@ -2034,15 +2032,9 @@ public interface RichIterable<T>
      *
      * @since 9.x
      */
-    default <V, W> Map<V, Multimap<W, T>> groupBy2(Function<? super T, ? extends V> function1, Function<? super T, ? extends W> function2)
+    default <V, W> MutableMap<V, Multimap<W, T>> groupBy2(Function<? super T, ? extends V> function1, Function<? super T, ? extends W> function2)
     {
-        Map<V, Multimap<W, T>> result = new HashMap<>();
-        Multimap<V, T> map1 = this.groupBy(function1);
-        map1.forEachKey(v -> {
-            Multimap<W, T> multimap2 = map1.get(v).groupBy(function2);
-            result.put(v, multimap2);
-        });
-        return result;
+        return this.<V>groupBy(function1).toMap().collectValues((v, t) -> t.groupBy(function2));
     }
 
     /**
@@ -2050,17 +2042,9 @@ public interface RichIterable<T>
      *
      * @since 9.x
      */
-    default <V, W, X> Map<V, Map<W, Multimap<X, T>>> groupBy3(Function<? super T, ? extends V> function1, Function<? super T, ? extends W> function2, Function<? super T, ? extends X> function3)
+    default <V, W, X> MutableMap<V, MutableMap<W, Multimap<X, T>>> groupBy3(Function<? super T, ? extends V> function1, Function<? super T, ? extends W> function2, Function<? super T, ? extends X> function3)
     {
-        Map<V, Map<W, Multimap<X, T>>> result = new HashMap<>();
-        Map<V, Multimap<W, T>> map1 = this.groupBy2(function1, function2);
-        map1.forEach((v, map2) -> {
-            map2.forEachKey(w -> {
-                Multimap<X, T> multimap3 = map2.get(w).groupBy(function3);
-                result.computeIfAbsent(v, key -> new HashMap<>()).put(w, multimap3);
-            });
-        });
-        return result;
+    	return this.<V, W>groupBy2(function1, function2).collectValues((v, wt) -> wt.toMap().collectValues((w, t) -> t.groupBy(function3)));
     }
 
     /**
