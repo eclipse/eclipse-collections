@@ -532,7 +532,7 @@ public class <name1><name2>HashMap extends AbstractMutable<name2>ValuesMap imple
             return this.<valueArray>[index<valueIndex>];
         }
         this.addKeyValueAtIndex(key, toBeAdded, index);
-        return this.<valueArray>[index<valueIndex>];
+        return toBeAdded;
     }
 
     private void addKeyValueAtIndex(<type1> key, <type2> value, int index)
