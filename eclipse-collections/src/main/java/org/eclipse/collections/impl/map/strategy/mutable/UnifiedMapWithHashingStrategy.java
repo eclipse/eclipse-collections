@@ -121,7 +121,7 @@ public class UnifiedMapWithHashingStrategy<K, V> extends AbstractMutableMap<K, V
 
     protected int maxSize;
 
-    private HashingStrategy<? super K> hashingStrategy;
+    protected HashingStrategy<? super K> hashingStrategy;
 
     /**
      * @deprecated No argument default constructor used for serialization. Instantiating an UnifiedMapWithHashingStrategyMultimap with
@@ -305,15 +305,15 @@ public class UnifiedMapWithHashingStrategy<K, V> extends AbstractMutableMap<K, V
     }
 
     @Override
-    public MutableMap<K, V> newEmpty()
+    public UnifiedMapWithHashingStrategy<K, V> newEmpty()
     {
         return new UnifiedMapWithHashingStrategy<>(this.hashingStrategy);
     }
 
     @Override
-    public MutableMap<K, V> newEmpty(int capacity)
+    public UnifiedMapWithHashingStrategy<K, V> newEmpty(int capacity)
     {
-        return UnifiedMapWithHashingStrategy.newMap(this.hashingStrategy, capacity);
+        return new UnifiedMapWithHashingStrategy<>(this.hashingStrategy, capacity, this.loadFactor);
     }
 
     private int fastCeil(float v)
@@ -356,7 +356,7 @@ public class UnifiedMapWithHashingStrategy<K, V> extends AbstractMutableMap<K, V
         this.maxSize = Math.min(capacity - 1, (int) (capacity * this.loadFactor));
     }
 
-    protected final int index(K key)
+    protected int index(K key)
     {
         // This function ensures that hashCodes that differ only by
         // constant multiples at each bit position have a bounded
@@ -1673,7 +1673,8 @@ public class UnifiedMapWithHashingStrategy<K, V> extends AbstractMutableMap<K, V
     @Override
     public <R> MutableMap<K, R> collectValues(Function2<? super K, ? super V, ? extends R> function)
     {
-        UnifiedMapWithHashingStrategy<K, R> target = UnifiedMapWithHashingStrategy.newMap(this.hashingStrategy);
+        @SuppressWarnings("unchecked")
+        UnifiedMapWithHashingStrategy<K, R> target = (UnifiedMapWithHashingStrategy<K, R>) this.newEmpty();
         target.loadFactor = this.loadFactor;
         target.occupied = this.occupied;
         target.allocate(this.table.length >> 1);
@@ -1816,8 +1817,7 @@ public class UnifiedMapWithHashingStrategy<K, V> extends AbstractMutableMap<K, V
         public boolean retainAll(Collection<?> collection)
         {
             int retainedSize = collection.size();
-            UnifiedMapWithHashingStrategy<K, V> retainedCopy = new UnifiedMapWithHashingStrategy<>(
-                    UnifiedMapWithHashingStrategy.this.hashingStrategy, retainedSize, UnifiedMapWithHashingStrategy.this.loadFactor);
+            UnifiedMapWithHashingStrategy<K, V> retainedCopy = UnifiedMapWithHashingStrategy.this.newEmpty(retainedSize);
             for (Object key : collection)
             {
                 this.putIfFound(key, retainedCopy);
@@ -2334,9 +2334,7 @@ public class UnifiedMapWithHashingStrategy<K, V> extends AbstractMutableMap<K, V
         public boolean retainAll(Collection<?> collection)
         {
             int retainedSize = collection.size();
-            UnifiedMapWithHashingStrategy<K, V> retainedCopy = new UnifiedMapWithHashingStrategy<>(
-                    UnifiedMapWithHashingStrategy.this.hashingStrategy, retainedSize, UnifiedMapWithHashingStrategy.this.loadFactor);
-
+            UnifiedMapWithHashingStrategy<K, V> retainedCopy = UnifiedMapWithHashingStrategy.this.newEmpty(retainedSize);
             for (Object obj : collection)
             {
                 if (obj instanceof Entry)
