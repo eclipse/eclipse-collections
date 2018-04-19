@@ -81,6 +81,15 @@ public interface MutableBagIterable<T> extends Bag<T>, MutableCollection<T>
     @Override
     MutableBagIterable<T> selectByOccurrences(IntPredicate predicate);
 
+    /**
+     * @since 9.2
+     */
+    @Override
+    default MutableBagIterable<T> selectDuplicates()
+    {
+        return this.selectByOccurrences(occurrences -> occurrences > 1);
+    }
+
     @Override
     MutableMapIterable<T, Integer> toMapOfItemToCount();
 

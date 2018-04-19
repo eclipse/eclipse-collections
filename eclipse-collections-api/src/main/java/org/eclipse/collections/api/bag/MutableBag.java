@@ -55,6 +55,15 @@ public interface MutableBag<T>
     @Override
     MutableBag<T> selectByOccurrences(IntPredicate predicate);
 
+    /**
+     * @since 9.2
+     */
+    @Override
+    default MutableBag<T> selectDuplicates()
+    {
+        return this.selectByOccurrences(occurrences -> occurrences > 1);
+    }
+
     @Override
     MutableBag<T> with(T element);
 

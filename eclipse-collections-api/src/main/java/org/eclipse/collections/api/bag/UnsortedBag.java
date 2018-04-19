@@ -46,6 +46,15 @@ public interface UnsortedBag<T> extends Bag<T>
     @Override
     UnsortedBag<T> selectByOccurrences(IntPredicate predicate);
 
+    /**
+     * @since 9.2
+     */
+    @Override
+    default UnsortedBag<T> selectDuplicates()
+    {
+        return this.selectByOccurrences(occurrences -> occurrences > 1);
+    }
+
     @Override
     UnsortedBag<T> select(Predicate<? super T> predicate);
 

@@ -152,6 +152,14 @@ public abstract class AbstractImmutableSortedBagTestCase extends AbstractImmutab
     }
 
     @Test
+    public void selectDuplicates()
+    {
+        Assert.assertEquals(
+                Bags.immutable.with(1, 1, 1),
+                this.classUnderTest().selectDuplicates());
+    }
+
+    @Test
     public void newWithTest()
     {
         ImmutableSortedBag<Integer> immutable = this.classUnderTest();

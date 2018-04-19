@@ -40,6 +40,7 @@ import org.eclipse.collections.impl.block.factory.Functions;
 import org.eclipse.collections.impl.block.factory.Predicates;
 import org.eclipse.collections.impl.block.factory.Predicates2;
 import org.eclipse.collections.impl.block.factory.PrimitiveFunctions;
+import org.eclipse.collections.impl.factory.Bags;
 import org.eclipse.collections.impl.factory.Iterables;
 import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.Maps;
@@ -119,6 +120,13 @@ public class ImmutableEmptySortedBagTest extends AbstractImmutableSortedBagTestC
         Assert.assertEquals(-5, this.classUnderTest().compareTo(TreeBag.newBagWith(1, 2, 2, 3, 4)));
         Assert.assertEquals(0, this.classUnderTest().compareTo(TreeBag.newBag()));
         Assert.assertEquals(0, this.classUnderTest().compareTo(TreeBag.newBag(Comparator.reverseOrder())));
+    }
+
+    @Override
+    @Test
+    public void selectDuplicates()
+    {
+        Assert.assertEquals(Bags.immutable.empty(), this.classUnderTest().selectDuplicates());
     }
 
     @Override

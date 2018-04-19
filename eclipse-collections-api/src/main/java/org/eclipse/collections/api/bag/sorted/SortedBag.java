@@ -60,6 +60,15 @@ public interface SortedBag<T>
     @Override
     SortedBag<T> selectByOccurrences(IntPredicate predicate);
 
+    /**
+     * @since 9.2
+     */
+    @Override
+    default SortedBag<T> selectDuplicates()
+    {
+        return this.selectByOccurrences(occurrences -> occurrences > 1);
+    }
+
     @Override
     SortedMapIterable<T, Integer> toMapOfItemToCount();
 

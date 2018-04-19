@@ -248,6 +248,15 @@ public class MultiReaderHashBagTest extends MultiReaderMutableCollectionTestCase
         MutableBagTestCase.assertBagsEqual(results, MultiReaderHashBag.newBagWith(1, 1));
     }
 
+    @Test
+    public void selectDuplicates()
+    {
+        MutableBag<Integer> bag = MultiReaderHashBag.newBagWith(0, 1, 1, 2, 2, 2, 3);
+        MutableBagTestCase.assertBagsEqual(
+                MultiReaderHashBag.newBagWith(1, 1, 2, 2, 2),
+                bag.selectDuplicates());
+    }
+
     @Override
     @Test
     public void selectInstancesOf()

@@ -339,6 +339,14 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
         Verify.assertAllSatisfy(collect, IntegerPredicates.isEven());
     }
 
+    @Test
+    public void selectDuplicates()
+    {
+        Verify.assertBagsEqual(
+                Bags.immutable.with("2", "2", "3", "3", "3", "4", "4", "4", "4"),
+                this.newBag().selectDuplicates());
+    }
+
     @Override
     @Test
     public void select()

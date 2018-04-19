@@ -433,6 +433,13 @@ public abstract class MutableBagTestCase extends AbstractCollectionTestCase
     }
 
     @Test
+    public void selectDuplicates()
+    {
+        MutableBagIterable<Integer> integers = this.newWith(0, 1, 1, 1, 1, 2, 2, 2, 3, 3, 4, 5);
+        Assert.assertEquals(Iterables.iBag(1, 1, 1, 1, 2, 2, 2, 3, 3), integers.selectDuplicates());
+    }
+
+    @Test
     public void topOccurrences()
     {
         MutableBagIterable<String> strings = this.newWithOccurrences(
