@@ -62,15 +62,6 @@ public class Unmodifiable<name>BagTest extends AbstractMutable<name>BagTestCase
     }
 
     @Override
-    @Test
-    public void selectByOccurrences()
-    {
-        Mutable<name>Bag bag = this.newWith(<["100", "100", "100", "50", "50"]:(literal.(type))(); separator=", ">);
-        Mutable<name>Bag filtered = bag.selectByOccurrences(i -> i > 2);
-        Assert.assertEquals(<name>HashBag.newBagWith(<["100", "100", "100"]:(literal.(type))(); separator=", ">), filtered);
-    }
-
-    @Override
     @Test(expected = UnsupportedOperationException.class)
     public void addOccurrences()
     {
