@@ -91,7 +91,7 @@ public class UnifiedSetWithHashingStrategy<T>
 
     protected transient int occupied;
 
-    private HashingStrategy<? super T> hashingStrategy;
+    protected HashingStrategy<? super T> hashingStrategy;
 
     /**
      * @deprecated No argument default constructor used for serialization. Instantiating an UnifiedSetWithHashingStrategyMultimap with
@@ -239,7 +239,7 @@ public class UnifiedSetWithHashingStrategy<T>
         this.table = new Object[sizeToAllocate];
     }
 
-    protected final int index(T key)
+    protected int index(T key)
     {
         // This function ensures that hashCodes that differ only by
         // constant multiples at each bit position have a bounded
@@ -644,6 +644,12 @@ public class UnifiedSetWithHashingStrategy<T>
     public UnifiedSetWithHashingStrategy<T> newEmpty()
     {
         return UnifiedSetWithHashingStrategy.newSet(this.hashingStrategy);
+    }
+
+    @Override
+    public UnifiedSetWithHashingStrategy<T> newEmpty(int size)
+    {
+        return UnifiedSetWithHashingStrategy.newSet(this.hashingStrategy, size, this.loadFactor);
     }
 
     @Override
@@ -1620,7 +1626,7 @@ public class UnifiedSetWithHashingStrategy<T>
     private boolean retainAllFromNonSet(Iterable<?> iterable)
     {
         int retainedSize = Iterate.sizeOf(iterable);
-        UnifiedSetWithHashingStrategy<T> retainedCopy = new UnifiedSetWithHashingStrategy<>(this.hashingStrategy, retainedSize, this.loadFactor);
+        UnifiedSetWithHashingStrategy<T> retainedCopy = this.newEmpty(retainedSize);
         for (Object key : iterable)
         {
             this.addIfFound((T) key, retainedCopy);
