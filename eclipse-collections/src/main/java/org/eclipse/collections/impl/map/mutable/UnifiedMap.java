@@ -271,7 +271,7 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
     @Override
     public MutableMap<K, V> newEmpty(int capacity)
     {
-        return UnifiedMap.newMap(capacity);
+        return new UnifiedMap<>(capacity, this.loadFactor);
     }
 
     private int fastCeil(float v)
@@ -313,7 +313,7 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
         this.maxSize = Math.min(capacity - 1, (int) (capacity * this.loadFactor));
     }
 
-    protected final int index(Object key)
+    protected int index(Object key)
     {
         // This function ensures that hashCodes that differ only by
         // constant multiples at each bit position have a bounded
@@ -1628,7 +1628,7 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
     @Override
     public <R> MutableMap<K, R> collectValues(Function2<? super K, ? super V, ? extends R> function)
     {
-        UnifiedMap<K, R> target = UnifiedMap.newMap();
+        UnifiedMap<K, R> target = (UnifiedMap<K, R>) this.newEmpty();
         target.loadFactor = this.loadFactor;
         target.occupied = this.occupied;
         target.allocate(this.table.length >> 1);
@@ -2161,7 +2161,7 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
         public boolean retainAll(Collection<?> collection)
         {
             int retainedSize = collection.size();
-            UnifiedMap<K, V> retainedCopy = new UnifiedMap<>(retainedSize, UnifiedMap.this.loadFactor);
+            UnifiedMap<K, V> retainedCopy = (UnifiedMap<K, V>) UnifiedMap.this.newEmpty(retainedSize);
             for (Object key : collection)
             {
                 this.putIfFound(key, retainedCopy);
@@ -2677,7 +2677,7 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
         public boolean retainAll(Collection<?> collection)
         {
             int retainedSize = collection.size();
-            UnifiedMap<K, V> retainedCopy = new UnifiedMap<>(retainedSize, UnifiedMap.this.loadFactor);
+            UnifiedMap<K, V> retainedCopy = (UnifiedMap<K, V>) UnifiedMap.this.newEmpty(retainedSize);
 
             for (Object obj : collection)
             {

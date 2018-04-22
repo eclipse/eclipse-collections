@@ -211,7 +211,7 @@ public class UnifiedSet<T>
         this.table = new Object[sizeToAllocate];
     }
 
-    protected final int index(Object key)
+    protected int index(Object key)
     {
         // This function ensures that hashCodes that differ only by
         // constant multiples at each bit position have a bounded
@@ -622,6 +622,12 @@ public class UnifiedSet<T>
     public UnifiedSet<T> newEmpty()
     {
         return UnifiedSet.newSet();
+    }
+
+    @Override
+    public UnifiedSet<T> newEmpty(int size)
+    {
+        return UnifiedSet.newSet(size, this.loadFactor);
     }
 
     @Override
@@ -1582,7 +1588,7 @@ public class UnifiedSet<T>
     private boolean retainAllFromNonSet(Iterable<?> iterable)
     {
         int retainedSize = Iterate.sizeOf(iterable);
-        UnifiedSet<T> retainedCopy = new UnifiedSet<>(retainedSize, this.loadFactor);
+        UnifiedSet<T> retainedCopy = this.newEmpty(retainedSize);
         for (Object key : iterable)
         {
             this.addIfFound((T) key, retainedCopy);

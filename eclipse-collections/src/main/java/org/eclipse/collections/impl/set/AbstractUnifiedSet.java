@@ -88,6 +88,8 @@ public abstract class AbstractUnifiedSet<T>
     @SuppressWarnings("AbstractMethodOverridesAbstractMethod")
     public abstract MutableSet<T> clone();
 
+    public abstract MutableSet<T> newEmpty(int size);
+
     protected abstract boolean shortCircuit(
             Predicate<? super T> predicate,
             boolean expected,
