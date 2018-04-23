@@ -179,6 +179,15 @@ public interface ListIterable<T>
     @Override
     <V> ListIterable<V> flatCollect(Function<? super T, ? extends Iterable<V>> function);
 
+    /**
+     * @since 9.2
+     */
+    @Override
+    default <P, V> ListIterable<V> flatCollectWith(Function2<? super T, ? super P, ? extends Iterable<V>> function, P parameter)
+    {
+        return this.flatCollect(each -> function.apply(each, parameter));
+    }
+
     @Override
     <V> ListMultimap<V, T> groupBy(Function<? super T, ? extends V> function);
 

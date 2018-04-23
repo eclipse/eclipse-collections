@@ -1248,6 +1248,18 @@ public interface RichIterableTestCase extends IterableTestCase
     }
 
     @Test
+    default void RichIterable_flatCollectWith()
+    {
+        assertEquals(
+                this.getExpectedTransformed(3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 1, 2, 3, 4, 5),
+                this.newWith(3, 2, 2, 1).flatCollectWith(Interval::fromTo, 5));
+
+        assertEquals(
+                this.newMutableForTransform(3, 2, 1, 2, 1, 2, 1, 1),
+                this.newWith(3, 2, 2, 1).flatCollectWith(Interval::fromTo, 1, this.newMutableForTransform()));
+    }
+
+    @Test
     default void RichIterable_count()
     {
         RichIterable<Integer> iterable = this.newWith(3, 3, 3, 2, 2, 1);

@@ -162,6 +162,15 @@ public interface MutableStack<T> extends StackIterable<T>
     @Override
     <V> MutableStack<V> flatCollect(Function<? super T, ? extends Iterable<V>> function);
 
+    /**
+     * @since 9.2
+     */
+    @Override
+    default <P, V> MutableStack<V> flatCollectWith(Function2<? super T, ? super P, ? extends Iterable<V>> function, P parameter)
+    {
+        return this.flatCollect(each -> function.apply(each, parameter));
+    }
+
     @Override
     <V> MutableObjectLongMap<V> sumByInt(Function<? super T, ? extends V> groupBy, IntFunction<? super T> function);
 

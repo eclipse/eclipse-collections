@@ -95,6 +95,15 @@ public interface MutablePrimitiveObjectMap<V> extends PrimitiveObjectMap<V>
     @Override
     <VV> MutableBag<VV> flatCollect(Function<? super V, ? extends Iterable<VV>> function);
 
+    /**
+     * @since 9.2
+     */
+    @Override
+    default <P, VV> MutableBag<VV> flatCollectWith(Function2<? super V, ? super P, ? extends Iterable<VV>> function, P parameter)
+    {
+        return this.flatCollect(each -> function.apply(each, parameter));
+    }
+
     @Override
     <S> MutableBag<S> selectInstancesOf(Class<S> clazz);
 

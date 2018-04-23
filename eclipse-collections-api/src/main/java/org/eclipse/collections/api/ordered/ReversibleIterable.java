@@ -177,6 +177,15 @@ public interface ReversibleIterable<T> extends OrderedIterable<T>
     @Override
     <V> ReversibleIterable<V> flatCollect(Function<? super T, ? extends Iterable<V>> function);
 
+    /**
+     * @since 9.2
+     */
+    @Override
+    default <P, V> ReversibleIterable<V> flatCollectWith(Function2<? super T, ? super P, ? extends Iterable<V>> function, P parameter)
+    {
+        return this.flatCollect(each -> function.apply(each, parameter));
+    }
+
     @Override
     ReversibleBooleanIterable collectBoolean(BooleanFunction<? super T> booleanFunction);
 

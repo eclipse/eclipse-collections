@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2018 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -144,6 +144,15 @@ public interface ImmutableOrderedMap<K, V> extends OrderedMap<K, V>, ImmutableMa
 
     @Override
     <V1> ImmutableList<V1> flatCollect(Function<? super V, ? extends Iterable<V1>> function);
+
+    /**
+     * @since 9.2
+     */
+    @Override
+    default <P, V1> ImmutableList<V1> flatCollectWith(Function2<? super V, ? super P, ? extends Iterable<V1>> function, P parameter)
+    {
+        return this.flatCollect(each -> function.apply(each, parameter));
+    }
 
     @Override
     <V1> ImmutableListMultimap<V1, V> groupBy(Function<? super V, ? extends V1> function);

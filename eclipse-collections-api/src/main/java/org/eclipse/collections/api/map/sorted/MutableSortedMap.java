@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 Goldman Sachs and others.
+ * Copyright (c) 2018 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -142,6 +142,15 @@ public interface MutableSortedMap<K, V>
 
     @Override
     <R> MutableList<R> flatCollect(Function<? super V, ? extends Iterable<R>> function);
+
+    /**
+     * @since 9.2
+     */
+    @Override
+    default <P, R> MutableList<R> flatCollectWith(Function2<? super V, ? super P, ? extends Iterable<R>> function, P parameter)
+    {
+        return this.flatCollect(each -> function.apply(each, parameter));
+    }
 
     @Override
     MutableSortedMap<K, V> tap(Procedure<? super V> procedure);

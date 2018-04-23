@@ -69,6 +69,15 @@ public interface ImmutablePrimitiveObjectMap<V> extends PrimitiveObjectMap<V>
     @Override
     <VV> ImmutableBag<VV> flatCollect(Function<? super V, ? extends Iterable<VV>> function);
 
+    /**
+     * @since 9.2
+     */
+    @Override
+    default <P, VV> ImmutableBag<VV> flatCollectWith(Function2<? super V, ? super P, ? extends Iterable<VV>> function, P parameter)
+    {
+        return this.flatCollect(each -> function.apply(each, parameter));
+    }
+
     @Override
     ImmutableBooleanBag collectBoolean(BooleanFunction<? super V> booleanFunction);
 
