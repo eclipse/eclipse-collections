@@ -36,8 +36,7 @@ matrix:
       env:
         - DESC="findbugs"
         - JDK=Java8
-        - CMD="mvn install findbugs:check --projects '!scala-unit-tests,!jmh-scala-tests,!jmh-tests,!p2-repository' --activate-profiles all -DskipTests=true --batch-mode --show-version --errors"
-
+        - CMD="mvn install findbugs:check --projects '!scala-unit-tests,!jmh-scala-tests,!jmh-tests,!jcstress-tests,!p2-repository' --activate-profiles all -DskipTests=true --batch-mode --show-version --errors"
     - jdk: oraclejdk8
       env:
         - DESC="checkstyle"

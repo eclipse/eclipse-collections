@@ -112,6 +112,7 @@
         <module>serialization-tests</module>
         <module>jmh-scala-tests</module>
         <module>jmh-tests</module>
+        <module>jcstress-tests</module>
         <module>junit-trait-runner</module>
         <module>unit-tests-java8</module>
         <module>test-coverage</module>
