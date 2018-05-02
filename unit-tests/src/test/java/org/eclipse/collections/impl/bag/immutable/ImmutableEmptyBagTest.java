@@ -93,6 +93,15 @@ public class ImmutableEmptyBagTest extends ImmutableBagTestCase
         Assert.assertEquals(1, newBag2.sizeDistinct());
     }
 
+    @Override
+    @Test
+    public void selectDuplicates()
+    {
+        Assert.assertEquals(
+                Bags.immutable.empty(),
+                this.newBag().selectDuplicates());
+    }
+
     @Test
     @Override
     public void select()

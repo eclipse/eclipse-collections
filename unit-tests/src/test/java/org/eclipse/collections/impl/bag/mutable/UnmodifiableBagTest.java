@@ -159,6 +159,14 @@ public class UnmodifiableBagTest
         Assert.assertEquals(iBag(1, 1, 1, 1, 3, 3), integers.selectByOccurrences(IntPredicates.isEven()));
     }
 
+    @Test
+    public void selectDuplicates()
+    {
+        Assert.assertEquals(
+                UnmodifiableBag.of(HashBag.newBagWith(1, 1, 1, 1, 2, 2, 2, 3, 3)),
+                UnmodifiableBag.of(HashBag.newBagWith(0, 1, 1, 1, 1, 2, 2, 2, 3, 3, 4, 5)).selectDuplicates());
+    }
+
     @Override
     @Test
     public void collectBoolean()

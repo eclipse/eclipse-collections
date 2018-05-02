@@ -139,6 +139,14 @@ public class SynchronizedBagTest extends AbstractSynchronizedCollectionTestCase
     }
 
     @Test
+    public void selectDuplicates()
+    {
+        Assert.assertEquals(
+                iBag(1, 1, 1, 1, 2, 2, 2, 3, 3),
+                this.newWith(0, 1, 1, 1, 1, 2, 2, 2, 3, 3, 4, 5).selectDuplicates());
+    }
+
+    @Test
     public void addOccurrences()
     {
         MutableBag<Integer> integers = this.newWith(1, 1, 1, 1, 2, 2, 2, 3, 3, 4);

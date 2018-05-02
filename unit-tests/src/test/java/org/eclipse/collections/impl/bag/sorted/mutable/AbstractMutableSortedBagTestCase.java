@@ -1151,6 +1151,18 @@ public abstract class AbstractMutableSortedBagTestCase extends MutableBagTestCas
 
     @Override
     @Test
+    public void selectDuplicates()
+    {
+        super.selectDuplicates();
+
+        MutableSortedBag<Integer> integers = this.newWith(Collections.reverseOrder(), 5, 4, 3, 3, 2, 2, 2, 1, 1, 1, 1, 0);
+        Verify.assertSortedBagsEqual(
+                TreeBag.newBagWith(Collections.reverseOrder(), 3, 3, 2, 2, 2, 1, 1, 1, 1),
+                integers.selectDuplicates());
+    }
+
+    @Override
+    @Test
     public void toMapOfItemToCount()
     {
         super.toMapOfItemToCount();

@@ -68,6 +68,15 @@ public interface ImmutableSortedBag<T>
     @Override
     ImmutableSortedBag<T> selectByOccurrences(IntPredicate predicate);
 
+    /**
+     * @since 9.2
+     */
+    @Override
+    default ImmutableSortedBag<T> selectDuplicates()
+    {
+        return this.selectByOccurrences(occurrences -> occurrences > 1);
+    }
+
     @Override
     ImmutableSortedBag<T> tap(Procedure<? super T> procedure);
 

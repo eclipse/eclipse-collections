@@ -117,6 +117,16 @@ public interface Bag<T>
     Bag<T> selectByOccurrences(IntPredicate predicate);
 
     /**
+     * Returns all elements of the bag that have more than one occurrence.
+     *
+     * @since 9.2
+     */
+    default Bag<T> selectDuplicates()
+    {
+        return this.selectByOccurrences(occurrences -> occurrences > 1);
+    }
+
+    /**
      * Returns the {@code count} most frequently occurring items.
      *
      * In the event of a tie, all of the items with the number of occurrences that match the occurrences of the last

@@ -74,6 +74,15 @@ public class ImmutableSingletonBagTest extends ImmutableBagTestCase
 
     @Override
     @Test
+    public void selectDuplicates()
+    {
+        Assert.assertEquals(
+                Bags.immutable.empty(),
+                this.newBag().selectDuplicates());
+    }
+
+    @Override
+    @Test
     public void equalsAndHashCode()
     {
         super.equalsAndHashCode();

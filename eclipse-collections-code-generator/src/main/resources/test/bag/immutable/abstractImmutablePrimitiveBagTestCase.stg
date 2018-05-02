@@ -82,6 +82,13 @@ public abstract class AbstractImmutable<name>BagTestCase extends AbstractImmutab
         Assert.assertEquals(<name>HashBag.newBagWith(<["3", "3", "3"]:(literal.(type))(); separator=", ">), filtered);
     }
 
+    @Test
+    public void selectDuplicates()
+    {
+        Immutable<name>Bag bag = this.newWith(<["1", "2", "2", "3", "3", "3"]:(literal.(type))(); separator=", ">);
+        Assert.assertEquals(<name>HashBag.newBagWith(<["2", "2", "3", "3", "3"]:(literal.(type))(); separator=", ">), bag.selectDuplicates());
+    }
+
     protected Immutable<name>Bag newWithOccurrences(<name>IntPair... elementsWithOccurrences)
     {
         Mutable<name>Bag bag = <name>Bags.mutable.empty();

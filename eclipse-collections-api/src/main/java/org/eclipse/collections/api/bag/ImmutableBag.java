@@ -60,6 +60,15 @@ public interface ImmutableBag<T> extends UnsortedBag<T>, ImmutableBagIterable<T>
     @Override
     ImmutableBag<T> selectByOccurrences(IntPredicate predicate);
 
+    /**
+     * @since 9.2
+     */
+    @Override
+    default ImmutableBag<T> selectDuplicates()
+    {
+        return this.selectByOccurrences(occurrences -> occurrences > 1);
+    }
+
     @Override
     ImmutableBag<T> tap(Procedure<? super T> procedure);
 

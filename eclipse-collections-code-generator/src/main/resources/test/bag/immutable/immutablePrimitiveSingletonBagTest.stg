@@ -59,6 +59,14 @@ public class Immutable<name>SingletonBagTest extends AbstractImmutable<name>BagT
 
     @Override
     @Test
+    public void selectDuplicates()
+    {
+        Immutable<name>SingletonBag bag = new Immutable<name>SingletonBag(<(literal.(type))("1")>);
+        Assert.assertEquals(<name>HashBag.newBagWith(), bag.selectDuplicates());
+    }
+
+    @Override
+    @Test
     public void injectInto()
     {
         super.injectInto();

@@ -54,6 +54,15 @@ public interface MutableSortedBag<T>
     @Override
     MutableSortedBag<T> selectByOccurrences(IntPredicate predicate);
 
+    /**
+     * @since 9.2
+     */
+    @Override
+    default MutableSortedBag<T> selectDuplicates()
+    {
+        return this.selectByOccurrences(occurrences -> occurrences > 1);
+    }
+
     @Override
     MutableSortedMap<T, Integer> toMapOfItemToCount();
 
