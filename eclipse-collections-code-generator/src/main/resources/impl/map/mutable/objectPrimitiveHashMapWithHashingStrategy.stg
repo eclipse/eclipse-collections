@@ -554,7 +554,7 @@ public class Object<name>HashMapWithHashingStrategy\<K> implements MutableObject
             return this.values[index];
         }
         this.addKeyValueAtIndex(key, toBeAdded, index);
-        return this.values[index];
+        return toBeAdded;
     }
 
     public Object<name>HashMapWithHashingStrategy\<K> withKeyValue(K key1, <type> value1)
