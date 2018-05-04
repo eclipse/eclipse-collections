@@ -71,6 +71,7 @@ import org.eclipse.collections.impl.block.procedure.CollectionAddProcedure;
 import org.eclipse.collections.impl.factory.Bags;
 import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.Maps;
+import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
@@ -492,6 +493,35 @@ public abstract class MapIterableTestCase
         MapIterable<String, String> map = this.newMapWithKeysValues("1", "One", "2", "Two", "3", "Three");
         RichIterable<String> actual = map.collect(StringFunctions.toLowerCase());
         Assert.assertEquals(HashBag.newBagWith("one", "two", "three"), actual.toBag());
+    }
+
+    @Test
+    public void flatCollect()
+    {
+        MapIterable<String, String> map = this.newMapWithKeysValues("1", "1", "2", "2", "3", "3", "4", "4");
+        Function<String, MutableList<String>> function = Lists.mutable::with;
+
+        Verify.assertListsEqual(
+                Lists.mutable.with("1", "2", "3", "4"),
+                map.flatCollect(function).toSortedList());
+
+        Verify.assertSetsEqual(
+                UnifiedSet.newSetWith("1", "2", "3", "4"),
+                map.flatCollect(function, UnifiedSet.newSet()));
+    }
+
+    @Test
+    public void flatCollectWith()
+    {
+        MapIterable<String, Integer> map = this.newMapWithKeysValues("4", 4, "5", 5, "6", 6, "7", 7);
+
+        Verify.assertSetsEqual(
+                Sets.mutable.with(1, 2, 3, 4, 5, 6, 7),
+                map.flatCollectWith(Interval::fromTo, 1).toSet());
+
+        Verify.assertBagsEqual(
+                Bags.mutable.with(4, 3, 2, 1, 5, 4, 3, 2, 1, 6, 5, 4, 3, 2, 1, 7, 6, 5, 4, 3, 2, 1),
+                map.flatCollectWith(Interval::fromTo, 1, Bags.mutable.empty()));
     }
 
     @Test

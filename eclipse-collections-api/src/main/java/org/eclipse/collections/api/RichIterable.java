@@ -1160,6 +1160,14 @@ public interface RichIterable<T>
     <V> RichIterable<V> flatCollect(Function<? super T, ? extends Iterable<V>> function);
 
     /**
+     * @since 9.2
+     */
+    default <P, V> RichIterable<V> flatCollectWith(Function2<? super T, ? super P, ? extends Iterable<V>> function, P parameter)
+    {
+        return this.flatCollect(each -> function.apply(each, parameter));
+    }
+
+    /**
      * Same as flatCollect, only the results are collected into the target collection.
      *
      * @param function The {@link Function} to apply
@@ -1168,6 +1176,14 @@ public interface RichIterable<T>
      * @see #flatCollect(Function)
      */
     <V, R extends Collection<V>> R flatCollect(Function<? super T, ? extends Iterable<V>> function, R target);
+
+    /**
+     * @since 9.2
+     */
+    default <P, V, R extends Collection<V>> R flatCollectWith(Function2<? super T, ? super P, ? extends Iterable<V>> function, P parameter, R target)
+    {
+        return this.flatCollect(each -> function.apply(each, parameter), target);
+    }
 
     /**
      * Returns the first element of the iterable for which the predicate evaluates to true or null in the case where no

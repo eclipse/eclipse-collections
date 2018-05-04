@@ -141,6 +141,15 @@ public interface ImmutableMap<K, V>
     <R> ImmutableBag<R> flatCollect(Function<? super V, ? extends Iterable<R>> function);
 
     /**
+     * @since 9.2
+     */
+    @Override
+    default <P, R> ImmutableBag<R> flatCollectWith(Function2<? super V, ? super P, ? extends Iterable<R>> function, P parameter)
+    {
+        return this.flatCollect(each -> function.apply(each, parameter));
+    }
+
+    /**
      * @deprecated in 6.0. Use {@link OrderedIterable#zip(Iterable)} instead.
      */
     @Override

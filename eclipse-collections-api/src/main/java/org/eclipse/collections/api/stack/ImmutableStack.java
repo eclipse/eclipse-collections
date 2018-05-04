@@ -132,6 +132,15 @@ public interface ImmutableStack<T> extends StackIterable<T>
     @Override
     <V> ImmutableStack<V> flatCollect(Function<? super T, ? extends Iterable<V>> function);
 
+    /**
+     * @since 9.2
+     */
+    @Override
+    default <P, V> ImmutableStack<V> flatCollectWith(Function2<? super T, ? super P, ? extends Iterable<V>> function, P parameter)
+    {
+        return this.flatCollect(each -> function.apply(each, parameter));
+    }
+
     @Override
     <V> ImmutableListMultimap<V, T> groupBy(Function<? super T, ? extends V> function);
 

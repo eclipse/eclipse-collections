@@ -581,6 +581,16 @@ public abstract class AbstractImmutableCollectionTestCase
         Assert.assertEquals(expected, actual);
     }
 
+    @Test
+    public void flatCollectWith()
+    {
+        RichIterable<String> actual = this.classUnderTest().flatCollectWith((integer, factory) -> factory.of(String.valueOf(integer)), Lists.fixedSize);
+
+        ImmutableCollection<String> expected = this.classUnderTest().collect(String::valueOf);
+
+        Assert.assertEquals(expected, actual);
+    }
+
     @Test(expected = IllegalArgumentException.class)
     public void chunk_zero_throws()
     {

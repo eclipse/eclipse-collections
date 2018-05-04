@@ -556,6 +556,20 @@ public abstract class AbstractRichIterableTestCase
     }
 
     @Test
+    public void flatCollectWith()
+    {
+        RichIterable<Integer> collection = this.newWith(4, 5, 6, 7);
+
+        Verify.assertSetsEqual(
+                Sets.mutable.with(1, 2, 3, 4, 5, 6, 7),
+                collection.flatCollectWith(Interval::fromTo, 1).toSet());
+
+        Verify.assertBagsEqual(
+                Bags.mutable.with(4, 3, 2, 1, 5, 4, 3, 2, 1, 6, 5, 4, 3, 2, 1, 7, 6, 5, 4, 3, 2, 1),
+                collection.flatCollectWith(Interval::fromTo, 1, Bags.mutable.empty()));
+    }
+
+    @Test
     public void detect()
     {
         Assert.assertEquals(Integer.valueOf(3), this.newWith(1, 2, 3, 4, 5).detect(Integer.valueOf(3)::equals));

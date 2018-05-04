@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2018 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -142,6 +142,15 @@ public interface PrimitiveObjectMap<V> extends RichIterable<V>
 
     @Override
     <VV> Bag<VV> flatCollect(Function<? super V, ? extends Iterable<VV>> function);
+
+    /**
+     * @since 9.2
+     */
+    @Override
+    default <P, VV> Bag<VV> flatCollectWith(Function2<? super V, ? super P, ? extends Iterable<VV>> function, P parameter)
+    {
+        return this.flatCollect(each -> function.apply(each, parameter));
+    }
 
     @Override
     <VV> BagMultimap<VV, V> groupBy(Function<? super V, ? extends VV> function);
