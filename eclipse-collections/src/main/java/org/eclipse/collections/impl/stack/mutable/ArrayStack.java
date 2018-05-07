@@ -844,7 +844,7 @@ public class ArrayStack<T> implements MutableStack<T>, Externalizable
     @Override
     public <V> MutableMap<V, T> groupByUniqueKey(Function<? super T, ? extends V> function)
     {
-        return this.groupByUniqueKey(function, UnifiedMap.newMap());
+        return this.groupByUniqueKey(function, UnifiedMap.newMap(this.size()));
     }
 
     @Override

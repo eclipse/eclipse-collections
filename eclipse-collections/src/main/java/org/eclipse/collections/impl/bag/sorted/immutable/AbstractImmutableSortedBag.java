@@ -142,7 +142,7 @@ abstract class AbstractImmutableSortedBag<T>
     @Override
     public <V> ImmutableMap<V, T> groupByUniqueKey(Function<? super T, ? extends V> function)
     {
-        return this.groupByUniqueKey(function, UnifiedMap.<V, T>newMap()).toImmutable();
+        return this.groupByUniqueKey(function, UnifiedMap.<V, T>newMap(this.size())).toImmutable();
     }
 
     @Override

@@ -1619,7 +1619,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
     @Override
     public \<VV> MutableMap\<VV, V> groupByUniqueKey(Function\<? super V, ? extends VV> function)
     {
-        return this.groupByUniqueKey(function, UnifiedMap.\<VV, V>newMap());
+        return this.groupByUniqueKey(function, UnifiedMap.\<VV, V>newMap(this.size()));
     }
 
     @Override

@@ -1439,7 +1439,7 @@ public final class RandomAccessListIterate
             List<T> list,
             Function<? super T, ? extends K> function)
     {
-        return RandomAccessListIterate.groupByUniqueKey(list, function, UnifiedMap.newMap());
+        return RandomAccessListIterate.groupByUniqueKey(list, function, UnifiedMap.newMap(list.size()));
     }
 
     public static <K, T, R extends MutableMap<K, T>> R groupByUniqueKey(
