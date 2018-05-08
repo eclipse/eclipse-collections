@@ -540,7 +540,7 @@ public class FastList<T>
     @Override
     public <K> MutableMap<K, T> groupByUniqueKey(Function<? super T, ? extends K> function)
     {
-        return this.groupByUniqueKey(function, UnifiedMap.newMap());
+        return this.groupByUniqueKey(function, UnifiedMap.newMap(this.size()));
     }
 
     @Override

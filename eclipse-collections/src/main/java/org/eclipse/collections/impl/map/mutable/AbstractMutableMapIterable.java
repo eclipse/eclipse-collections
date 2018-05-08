@@ -111,7 +111,7 @@ public abstract class AbstractMutableMapIterable<K, V> extends AbstractMapIterab
     @Override
     public <VV> MutableMapIterable<VV, V> groupByUniqueKey(Function<? super V, ? extends VV> function)
     {
-        return this.groupByUniqueKey(function, UnifiedMap.newMap());
+        return this.groupByUniqueKey(function, UnifiedMap.newMap(this.size()));
     }
 
     @Override

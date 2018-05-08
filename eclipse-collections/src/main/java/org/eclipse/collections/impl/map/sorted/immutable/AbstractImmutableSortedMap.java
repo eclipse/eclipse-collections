@@ -450,7 +450,7 @@ public abstract class AbstractImmutableSortedMap<K, V>
     @Override
     public <V1> ImmutableMap<V1, V> groupByUniqueKey(Function<? super V, ? extends V1> function)
     {
-        return this.groupByUniqueKey(function, UnifiedMap.<V1, V>newMap()).toImmutable();
+        return this.groupByUniqueKey(function, UnifiedMap.<V1, V>newMap(this.size())).toImmutable();
     }
 
     @Override

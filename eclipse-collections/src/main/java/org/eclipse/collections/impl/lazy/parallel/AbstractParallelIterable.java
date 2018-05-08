@@ -753,7 +753,7 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
     @Override
     public <V> MapIterable<V, T> groupByUniqueKey(Function<? super T, ? extends V> function)
     {
-        MutableMap<V, T> result = ConcurrentHashMap.newMap();
+        MutableMap<V, T> result = ConcurrentHashMap.newMap(this.getBatchSize());
         this.forEach(value -> {
             V key = function.valueOf(value);
             if (result.put(key, value) != null)
