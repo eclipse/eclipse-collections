@@ -26,6 +26,7 @@ import org.eclipse.collections.api.block.function.primitive.<name>To<name>Functi
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.primitive.MutableObject<name>Map;
 import org.eclipse.collections.impl.list.mutable.FastList;
+import org.eclipse.collections.impl.list.primitive.IntInterval;
 import org.eclipse.collections.impl.map.primitive.AbstractObject<name>MapTestCase;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
@@ -457,6 +458,12 @@ public abstract class AbstractMutableObject<name>MapTestCase extends AbstractObj
         Assert.assertEquals(Object<name>HashMap.newWithKeysValues(null, <(literal.(type))("1")>), map2);
         Assert.assertEquals(<(literal.(type))("5")>, map2.addToValue(null, <(literal.(type))("4")>)<delta.(type)>);
         Assert.assertEquals(Object<name>HashMap.newWithKeysValues(null, <(literal.(type))("5")>), map2);
+
+        MutableObject<name>Map\<String> map3 = this.getEmptyMap();
+        IntInterval.zeroTo(10).forEachWithIndex((each, index) -> {
+            <type> v = <(castIntToNarrowTypeWithParens.(type))("each + index")>;
+            Assert.assertEquals("Key:" + each, v, map3.addToValue(String.valueOf(each), v)<delta.(type)>);
+        });
     }
 
     @Override
