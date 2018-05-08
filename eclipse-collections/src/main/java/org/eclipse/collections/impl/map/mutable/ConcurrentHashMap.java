@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2018 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -785,11 +785,12 @@ public final class ConcurrentHashMap<K, V>
         if (o == null)
         {
             Entry<K, V> newEntry = new Entry<K, V>(key, value, null);
+            this.addToSize(1);
             if (currentArray.compareAndSet(index, null, newEntry))
             {
-                this.addToSize(1);
                 return null;
             }
+            this.addToSize(-1);
         }
         return this.slowPut(key, value, hash, currentArray);
     }
@@ -1479,11 +1480,8 @@ public final class ConcurrentHashMap<K, V>
 
         protected HashIterator()
         {
-            if (!ConcurrentHashMap.this.isEmpty())
-            {
-                this.currentState = new IteratorState(ConcurrentHashMap.this.table);
-                this.findNext();
-            }
+            this.currentState = new IteratorState(ConcurrentHashMap.this.table);
+            this.findNext();
         }
 
         private void findNext()

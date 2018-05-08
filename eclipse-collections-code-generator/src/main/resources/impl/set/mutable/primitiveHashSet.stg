@@ -289,14 +289,7 @@ public final class <name>HashSet extends Abstract<name>Set implements Mutable<na
     {
         if (isBetweenZeroAndThirtyOne(value))
         {
-            int initial = this.zeroToThirtyOne;
-            this.zeroToThirtyOne &= ~(1 \<\< <(castRealTypeToInt.(type))("value")>);
-            if (this.zeroToThirtyOne == initial)
-            {
-                return false;
-            }
-            this.zeroToThirtyOneOccupied--;
-            return true;
+            return this.removeZeroToThirtyOne(value);
         }
         int index = this.probe(value);
         if (<(equals.(type))("this.table[index]", "value")>)
@@ -316,6 +309,18 @@ public final class <name>HashSet extends Abstract<name>Set implements Mutable<na
             return true;
         }
         return false;
+    }
+
+    private boolean removeZeroToThirtyOne(<type> value)
+    {
+        int initial = this.zeroToThirtyOne;
+        this.zeroToThirtyOne &= ~(1 \<\< <(castRealTypeToInt.(type))("value")>);
+        if (this.zeroToThirtyOne == initial)
+        {
+            return false;
+        }
+        this.zeroToThirtyOneOccupied--;
+        return true;
     }
 
     public boolean removeAll(<name>Iterable source)
@@ -1606,32 +1611,46 @@ public final class <name>HashSet extends Abstract<name>Set implements Mutable<na
             return result;
         }
 
-        public void remove()
-        {
-            if (this.count == 0)
-            {
-                throw new IllegalStateException();
-            }
-            <type> removeValue;
-            if (this.zeroToThirtyOne \<= <(literal.(type))("32")> && this.position == 0)
-            {
-                if (<name>HashSet.this.zeroToThirtyOne != (<name>HashSet.this.zeroToThirtyOne | 1 \<\< (<(castRealTypeToInt.(type))("this.zeroToThirtyOne")> - 1)))
-                {
-                    throw new IllegalStateException();
-                }
-                removeValue = <(castIntToNarrowTypeWithParens.(type))("this.zeroToThirtyOne - 1")>;
-            }
-            else if (<(equals.(type))({<name>HashSet.this.table[this.position - 1]}, "REMOVED")>)
-            {
-                throw new IllegalStateException();
-            }
-            else
-            {
-                removeValue = <name>HashSet.this.table[this.position - 1];
-            }
-            <name>HashSet.this.remove(removeValue);
-            this.count--;
-        }
+         public void remove()
+         {
+             if (this.count == 0)
+             {
+                 throw new IllegalStateException();
+             }
+             <type> removeValue;
+             if (this.zeroToThirtyOne \<= <(literal.(type))("32")> && this.position == 0)
+             {
+                 if (<name>HashSet.this.zeroToThirtyOne != (<name>HashSet.this.zeroToThirtyOne | 1 \<\< (<(castRealTypeToInt.(type))("this.zeroToThirtyOne")> - 1)))
+                 {
+                     throw new IllegalStateException();
+                 }
+                 removeValue = <(castIntToNarrowTypeWithParens.(type))("this.zeroToThirtyOne - 1")>;
+             }
+             else if (<(equals.(type))({<name>HashSet.this.table[this.position - 1]}, "REMOVED")>)
+             {
+                 throw new IllegalStateException();
+             }
+             else
+             {
+                 removeValue = <name>HashSet.this.table[this.position - 1];
+             }
+             if (<name>HashSet.isBetweenZeroAndThirtyOne(removeValue))
+             {
+                 <name>HashSet.this.removeZeroToThirtyOne(removeValue);
+             }
+             else if (<(equals.(type))({<name>HashSet.this.table[this.position - 1]}, "removeValue")>)
+             {
+                 if (<name>HashSet.this.copyOnWrite)
+                 {
+                     <name>HashSet.this.copyTable();
+                 }
+                 <name>HashSet.this.table[position -1] = REMOVED;
+                 <name>HashSet.this.occupiedWithData--;
+                 <name>HashSet.this.occupiedWithSentinels++;
+             }
+
+             this.count--;
+         }
     }
 }
 
