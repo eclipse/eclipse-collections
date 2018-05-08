@@ -426,4 +426,10 @@ public class UnmodifiableBag<T>
             return this.mutableBag.asUnmodifiable();
         }
     }
+
+    @Override
+    public MutableSet<T> selectUnique()
+    {
+        return this.getMutableBag().selectUnique();
+    }
 }

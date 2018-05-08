@@ -69,6 +69,15 @@ public interface ImmutableBag<T> extends UnsortedBag<T>, ImmutableBagIterable<T>
         return this.selectByOccurrences(occurrences -> occurrences > 1);
     }
 
+    /**
+     * @since 9.2
+     */
+    @Override
+    default ImmutableSet<T> selectUnique()
+    {
+        throw new UnsupportedOperationException("Adding default implementation so as to not break compatibility");
+    }
+
     @Override
     ImmutableBag<T> tap(Procedure<? super T> procedure);
 

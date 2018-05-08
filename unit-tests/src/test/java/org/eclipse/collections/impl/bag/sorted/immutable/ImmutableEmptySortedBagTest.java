@@ -877,4 +877,18 @@ public class ImmutableEmptySortedBagTest extends AbstractImmutableSortedBagTestC
     {
         Assert.assertEquals(this.classUnderTest(), this.classUnderTest().drop(2));
     }
+
+    @Override
+    @Test
+    public void selectUnique()
+    {
+        super.selectUnique();
+
+        Comparator<Integer> comparator = Collections.reverseOrder();
+        ImmutableSortedBag<Integer> bag = this.classUnderTest(comparator);
+        ImmutableSortedSet<Integer> expected = SortedSets.immutable.empty(comparator);
+        ImmutableSortedSet<Integer> actual = bag.selectUnique();
+        Assert.assertEquals(expected, actual);
+        Assert.assertEquals(expected.comparator(), actual.comparator());
+    }
 }

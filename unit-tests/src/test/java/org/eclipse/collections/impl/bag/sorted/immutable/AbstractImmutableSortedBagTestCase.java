@@ -1481,6 +1481,17 @@ public abstract class AbstractImmutableSortedBagTestCase extends AbstractImmutab
         this.classUnderTest().drop(-1);
     }
 
+    @Test
+    public void selectUnique()
+    {
+        Comparator<Integer> comparator = Collections.reverseOrder();
+        ImmutableSortedBag<Integer> bag = SortedBags.immutable.with(comparator, 5, 4, 3, 3, 2, 2, 2, 1, 1, 1, 1, 0);
+        ImmutableSortedSet<Integer> expected = SortedSets.immutable.with(comparator, 5, 4, 0);
+        ImmutableSortedSet<Integer> actual = bag.selectUnique();
+        Assert.assertEquals(expected, actual);
+        Assert.assertEquals(expected.comparator(), actual.comparator());
+    }
+
     private static final class Holder
     {
         private final int number;

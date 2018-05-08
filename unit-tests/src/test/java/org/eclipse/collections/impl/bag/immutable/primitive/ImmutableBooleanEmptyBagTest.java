@@ -11,7 +11,9 @@
 package org.eclipse.collections.impl.bag.immutable.primitive;
 
 import org.eclipse.collections.api.bag.primitive.ImmutableBooleanBag;
+import org.eclipse.collections.api.set.primitive.ImmutableBooleanSet;
 import org.eclipse.collections.impl.factory.primitive.BooleanBags;
+import org.eclipse.collections.impl.factory.primitive.BooleanSets;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
 import org.junit.Test;
@@ -63,5 +65,17 @@ public class ImmutableBooleanEmptyBagTest extends AbstractImmutableBooleanBagTes
     {
         Assert.assertEquals(0, this.classUnderTest().occurrencesOf(true));
         Assert.assertEquals(0, this.classUnderTest().occurrencesOf(false));
+    }
+
+    @Override
+    @Test
+    public void selectUnique()
+    {
+        super.selectUnique();
+
+        ImmutableBooleanBag bag = this.classUnderTest();
+        ImmutableBooleanSet expected = BooleanSets.immutable.empty();
+        ImmutableBooleanSet actual = bag.selectUnique();
+        Assert.assertEquals(expected, actual);
     }
 }

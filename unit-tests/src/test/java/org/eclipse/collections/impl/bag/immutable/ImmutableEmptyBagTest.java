@@ -602,4 +602,16 @@ public class ImmutableEmptyBagTest extends ImmutableBagTestCase
 
         Verify.assertSortedBagsEqual(expectedBag, sortedBag);
     }
+
+    @Override
+    @Test
+    public void selectUnique()
+    {
+        super.selectUnique();
+
+        ImmutableBag<String> bag = this.newBag();
+        ImmutableSet<String> expected = Sets.immutable.empty();
+        ImmutableSet<String> actual = bag.selectUnique();
+        Assert.assertEquals(expected, actual);
+    }
 }

@@ -12,6 +12,8 @@ package org.eclipse.collections.impl.bag.mutable.primitive;
 
 import org.eclipse.collections.api.bag.primitive.MutableBooleanBag;
 import org.eclipse.collections.api.iterator.MutableBooleanIterator;
+import org.eclipse.collections.api.set.primitive.MutableBooleanSet;
+import org.eclipse.collections.impl.factory.primitive.BooleanSets;
 import org.eclipse.collections.impl.list.mutable.primitive.BooleanArrayList;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
@@ -233,5 +235,16 @@ public class UnmodifiableBooleanBagTest extends AbstractMutableBooleanBagTestCas
     public void iterator_throws_on_consecutive_invocation_of_remove()
     {
         // Not applicable for Unmodifiable*
+    }
+
+    @Override
+    public void selectUnique()
+    {
+        super.selectUnique();
+
+        MutableBooleanBag bag = this.classUnderTest();
+        MutableBooleanSet expected = BooleanSets.mutable.with(false);
+        MutableBooleanSet actual = bag.selectUnique();
+        Assert.assertEquals(expected, actual);
     }
 }

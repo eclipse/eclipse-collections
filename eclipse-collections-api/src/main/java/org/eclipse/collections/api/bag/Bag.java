@@ -127,6 +127,16 @@ public interface Bag<T>
     }
 
     /**
+     * Returns a set containing all elements of the bag that have exactly one occurrence.
+     *
+     * @since 9.2
+     */
+    default SetIterable<T> selectUnique()
+    {
+        throw new UnsupportedOperationException("Adding default implementation so as to not break compatibility");
+    }
+
+    /**
      * Returns the {@code count} most frequently occurring items.
      *
      * In the event of a tie, all of the items with the number of occurrences that match the occurrences of the last

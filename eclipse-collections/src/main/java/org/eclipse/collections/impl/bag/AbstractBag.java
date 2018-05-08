@@ -55,12 +55,14 @@ import org.eclipse.collections.api.collection.primitive.MutableShortCollection;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.multimap.MutableMultimap;
 import org.eclipse.collections.api.set.MutableSet;
+import org.eclipse.collections.api.set.SetIterable;
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 import org.eclipse.collections.api.tuple.primitive.ObjectIntPair;
 import org.eclipse.collections.impl.AbstractRichIterable;
 import org.eclipse.collections.impl.Counter;
 import org.eclipse.collections.impl.bag.mutable.HashBag;
 import org.eclipse.collections.impl.bag.sorted.mutable.TreeBag;
+import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.factory.SortedSets;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
@@ -753,5 +755,19 @@ public abstract class AbstractBag<T>
             keySize++;
         }
         return results;
+    }
+
+    @Override
+    public SetIterable<T> selectUnique()
+    {
+        MutableSet<T> result = Sets.mutable.empty();
+        this.forEachWithOccurrences((each, occurrences) ->
+            {
+                if (occurrences == 1)
+                {
+                    result.add(each);
+                }
+            });
+        return result;
     }
 }

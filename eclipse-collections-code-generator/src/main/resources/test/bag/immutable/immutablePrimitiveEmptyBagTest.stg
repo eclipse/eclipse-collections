@@ -25,6 +25,8 @@ import org.eclipse.collections.impl.math.Mutable<wrapperName>;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
 import org.junit.Test;
+import org.eclipse.collections.impl.factory.primitive.<name>Sets;
+import org.eclipse.collections.api.set.primitive.Immutable<name>Set;
 
 /**
  * JUnit test for {@link Immutable<name>EmptyBag}.
@@ -102,6 +104,18 @@ public class Immutable<name>EmptyBagTest extends AbstractImmutable<name>BagTestC
         this.classUnderTest().forEachWithOccurrences((<type> argument1, int argument2) -> stringBuilder.append(argument1).append(argument2));
         String string = stringBuilder.toString();
         Assert.assertEquals("", string);
+    }
+
+    @Override
+    @Test
+    public void selectUnique()
+    {
+        super.selectUnique();
+
+        Immutable<name>Bag bag = this.classUnderTest();
+        Immutable<name>Set expected = <name>Sets.immutable.empty();
+        Immutable<name>Set actual = bag.selectUnique();
+        Assert.assertEquals(expected, actual);
     }
 
     @Test

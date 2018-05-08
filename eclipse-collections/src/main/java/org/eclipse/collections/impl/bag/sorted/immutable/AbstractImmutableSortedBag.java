@@ -461,4 +461,10 @@ abstract class AbstractImmutableSortedBag<T>
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".asReversed() not implemented yet");
     }
+
+    @Override
+    public ImmutableSortedSet<T> selectUnique()
+    {
+        return super.selectUnique().toSortedSet(this.comparator()).toImmutable();
+    }
 }

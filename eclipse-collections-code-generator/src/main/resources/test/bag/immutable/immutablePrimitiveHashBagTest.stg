@@ -23,6 +23,8 @@ import org.eclipse.collections.impl.factory.primitive.<name>Bags;
 import org.eclipse.collections.impl.math.Mutable<wrapperName>;
 import org.junit.Assert;
 import org.junit.Test;
+import org.eclipse.collections.impl.factory.primitive.<name>Sets;
+import org.eclipse.collections.api.set.primitive.Immutable<name>Set;
 
 /**
  * JUnit test for {@link Immutable<name>HashBag}.
@@ -45,6 +47,18 @@ public class Immutable<name>HashBagTest extends AbstractImmutable<name>BagTestCa
         Immutable<name>HashBag iterable = Immutable<name>HashBag.newBagWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">);
         Mutable<wrapperName> result = iterable.injectInto(new Mutable<wrapperName>(<(literal.(type))("0")>), Mutable<wrapperName>::add);
         Assert.assertEquals(new Mutable<wrapperName>(<(literal.(type))("6")>), result);
+    }
+
+    @Override
+    @Test
+    public void selectUnique()
+    {
+        super.selectUnique();
+
+        Immutable<name>Bag bag = this.classUnderTest();
+        Immutable<name>Set expected = <name>Sets.immutable.with(<["1", "2", "3"]:(literal.(type))(); separator=", ">);
+        Immutable<name>Set actual = bag.selectUnique();
+        Assert.assertEquals(expected, actual);
     }
 }
 

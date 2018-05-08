@@ -10,11 +10,16 @@
 
 package org.eclipse.collections.impl.bag.sorted.immutable;
 
+import java.util.Collections;
 import java.util.Comparator;
 
 import org.eclipse.collections.api.bag.sorted.ImmutableSortedBag;
 import org.eclipse.collections.api.collection.MutableCollection;
+import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 import org.eclipse.collections.impl.factory.SortedBags;
+import org.eclipse.collections.impl.factory.SortedSets;
+import org.junit.Assert;
+import org.junit.Test;
 
 public class ImmutableSortedBagImplTest extends AbstractImmutableSortedBagTestCase
 {
@@ -46,5 +51,19 @@ public class ImmutableSortedBagImplTest extends AbstractImmutableSortedBagTestCa
     protected <T> ImmutableSortedBag<T> newWith(Comparator<? super T> comparator, T... elements)
     {
         return SortedBags.immutable.with(comparator, elements);
+    }
+
+    @Override
+    @Test
+    public void selectUnique()
+    {
+        super.selectUnique();
+
+        Comparator<Integer> comparator = Collections.reverseOrder();
+        ImmutableSortedBag<Integer> bag = this.classUnderTest(comparator);
+        ImmutableSortedSet<Integer> expected = SortedSets.immutable.with(comparator, 2);
+        ImmutableSortedSet<Integer> actual = bag.selectUnique();
+        Assert.assertEquals(expected, actual);
+        Assert.assertEquals(expected.comparator(), actual.comparator());
     }
 }

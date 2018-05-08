@@ -77,6 +77,15 @@ public interface ImmutableSortedBag<T>
         return this.selectByOccurrences(occurrences -> occurrences > 1);
     }
 
+    /**
+     * @since 9.2
+     */
+    @Override
+    default ImmutableSortedSet<T> selectUnique()
+    {
+        throw new UnsupportedOperationException("Adding default implementation so as to not break compatibility");
+    }
+
     @Override
     ImmutableSortedBag<T> tap(Procedure<? super T> procedure);
 

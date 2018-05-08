@@ -11,6 +11,8 @@
 package org.eclipse.collections.impl.bag.mutable.primitive;
 
 import org.eclipse.collections.api.bag.primitive.MutableBooleanBag;
+import org.eclipse.collections.api.set.primitive.MutableBooleanSet;
+import org.eclipse.collections.impl.factory.primitive.BooleanSets;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -42,5 +44,16 @@ public class SynchronizedBooleanBagTest extends AbstractMutableBooleanBagTestCas
         MutableBooleanBag bag = this.classUnderTest();
         Assert.assertSame(bag, bag.asSynchronized());
         Assert.assertEquals(bag, bag.asSynchronized());
+    }
+
+    @Override
+    public void selectUnique()
+    {
+        super.selectUnique();
+
+        MutableBooleanBag bag = this.classUnderTest();
+        MutableBooleanSet expected = BooleanSets.mutable.with(false);
+        MutableBooleanSet actual = bag.selectUnique();
+        Assert.assertEquals(expected, actual);
     }
 }

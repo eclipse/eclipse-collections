@@ -42,6 +42,7 @@ import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.api.partition.bag.PartitionImmutableBag;
 import org.eclipse.collections.api.partition.bag.PartitionMutableBag;
+import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.api.tuple.primitive.ObjectIntPair;
 import org.eclipse.collections.impl.bag.mutable.primitive.BooleanHashBag;
 import org.eclipse.collections.impl.bag.mutable.primitive.ByteHashBag;
@@ -239,5 +240,11 @@ public abstract class AbstractImmutableBag<T>
             result.add(batch.toImmutable());
         }
         return result.toImmutable();
+    }
+
+    @Override
+    public ImmutableSet<T> selectUnique()
+    {
+        return (ImmutableSet<T>) super.selectUnique();
     }
 }

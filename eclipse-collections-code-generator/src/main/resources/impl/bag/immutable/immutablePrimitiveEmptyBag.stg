@@ -44,6 +44,8 @@ import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
 import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.tuple.primitive.<name>IntPair;
 import org.eclipse.collections.impl.factory.Lists;
+import org.eclipse.collections.api.set.primitive.Immutable<name>Set;
+import org.eclipse.collections.impl.factory.primitive.<name>Sets;
 
 /**
  * Immutable<name>EmptyBag is an optimization for {@link Immutable<name>Bag} of size 0.
@@ -139,6 +141,12 @@ final class Immutable<name>EmptyBag implements Immutable<name>Bag, Serializable
     public Immutable<name>Bag select(<name>Predicate predicate)
     {
         return this;
+    }
+
+    @Override
+    public Immutable<name>Set selectUnique()
+    {
+        return <name>Sets.immutable.empty();
     }
 
     @Override

@@ -522,4 +522,10 @@ public class UnmodifiableSortedBag<T>
     {
         return new UnmodifiableCollectionSerializationProxy<>(this.getSortedBag());
     }
+
+    @Override
+    public MutableSortedSet<T> selectUnique()
+    {
+        return this.getSortedBag().selectUnique();
+    }
 }
