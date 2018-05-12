@@ -452,4 +452,10 @@ class ImmutableEmptySortedBag<T>
         }
         return this;
     }
+
+    @Override
+    public ImmutableSortedSet<T> selectUnique()
+    {
+        return SortedSets.immutable.of(this.comparator());
+    }
 }

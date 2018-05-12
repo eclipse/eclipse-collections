@@ -1201,6 +1201,12 @@ public final class MultiReaderHashBag<T>
         {
             return (MutableBag<T>) this.delegate;
         }
+
+        @Override
+        public MutableSet<T> selectUnique()
+        {
+            return this.getDelegate().selectUnique();
+        }
     }
 
     private static final class UntouchableIterator<T>
@@ -1234,6 +1240,20 @@ public final class MultiReaderHashBag<T>
         public void becomeUseless()
         {
             this.delegate = null;
+        }
+    }
+
+    @Override
+    public MutableSet<T> selectUnique()
+    {
+        this.acquireReadLock();
+        try
+        {
+            return this.getDelegate().selectUnique();
+        }
+        finally
+        {
+            this.unlockReadLock();
         }
     }
 }

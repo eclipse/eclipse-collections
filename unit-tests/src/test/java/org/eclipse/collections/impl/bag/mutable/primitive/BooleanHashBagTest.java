@@ -12,8 +12,11 @@ package org.eclipse.collections.impl.bag.mutable.primitive;
 
 import java.util.NoSuchElementException;
 
+import org.eclipse.collections.api.bag.primitive.MutableBooleanBag;
 import org.eclipse.collections.api.iterator.BooleanIterator;
 import org.eclipse.collections.api.list.primitive.MutableBooleanList;
+import org.eclipse.collections.api.set.primitive.MutableBooleanSet;
+import org.eclipse.collections.impl.factory.primitive.BooleanSets;
 import org.eclipse.collections.impl.list.mutable.primitive.BooleanArrayList;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
@@ -117,5 +120,17 @@ public class BooleanHashBagTest extends AbstractMutableBooleanBagTestCase
         super.toList();
         MutableBooleanList list = this.newWith(true, true, true, false).toList();
         Assert.assertEquals(list, BooleanArrayList.newListWith(false, true, true, true));
+    }
+
+    @Override
+    @Test
+    public void selectUnique()
+    {
+        super.selectUnique();
+
+        MutableBooleanBag bag = this.classUnderTest();
+        MutableBooleanSet expected = BooleanSets.mutable.with(false);
+        MutableBooleanSet actual = bag.selectUnique();
+        Assert.assertEquals(expected, actual);
     }
 }

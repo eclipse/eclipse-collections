@@ -716,4 +716,13 @@ public class SynchronizedSortedBag<T>
             return this.getDelegate().getLastOptional();
         }
     }
+
+    @Override
+    public MutableSortedSet<T> selectUnique()
+    {
+        synchronized (this.getLock())
+        {
+            return this.getDelegate().selectUnique();
+        }
+    }
 }

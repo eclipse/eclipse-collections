@@ -16,9 +16,12 @@ import org.eclipse.collections.api.bag.primitive.MutableBooleanBag;
 import org.eclipse.collections.api.block.function.primitive.BooleanToObjectFunction;
 import org.eclipse.collections.api.collection.primitive.MutableBooleanCollection;
 import org.eclipse.collections.api.list.primitive.MutableBooleanList;
+import org.eclipse.collections.api.set.primitive.MutableBooleanSet;
 import org.eclipse.collections.impl.bag.mutable.HashBag;
 import org.eclipse.collections.impl.collection.mutable.primitive.AbstractMutableBooleanCollectionTestCase;
 import org.eclipse.collections.impl.factory.Lists;
+import org.eclipse.collections.impl.factory.primitive.BooleanBags;
+import org.eclipse.collections.impl.factory.primitive.BooleanSets;
 import org.eclipse.collections.impl.list.mutable.primitive.BooleanArrayList;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
@@ -317,5 +320,19 @@ public abstract class AbstractMutableBooleanBagTestCase extends AbstractMutableB
         Assert.assertEquals(
                 Lists.mutable.with(PrimitiveTuples.pair(false, 1), PrimitiveTuples.pair(true, 2)),
                 this.newWith(true, true, false).bottomOccurrences(2));
+    }
+
+    @Test
+    public void selectUnique()
+    {
+        MutableBooleanBag bag = BooleanBags.mutable.with(false, false, true);
+        MutableBooleanSet expected = BooleanSets.mutable.with(true);
+        MutableBooleanSet actual = bag.selectUnique();
+        Assert.assertEquals(expected, actual);
+
+        MutableBooleanBag bag2 = BooleanBags.mutable.with(false, false, true, true);
+        MutableBooleanSet expected2 = BooleanSets.mutable.empty();
+        MutableBooleanSet actual2 = bag2.selectUnique();
+        Assert.assertEquals(expected2, actual2);
     }
 }

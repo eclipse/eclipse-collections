@@ -69,6 +69,15 @@ public interface SortedBag<T>
         return this.selectByOccurrences(occurrences -> occurrences > 1);
     }
 
+    /**
+     * @since 9.2
+     */
+    @Override
+    default SortedSetIterable<T> selectUnique()
+    {
+        throw new UnsupportedOperationException("Adding default implementation so as to not break compatibility");
+    }
+
     @Override
     SortedMapIterable<T, Integer> toMapOfItemToCount();
 

@@ -17,10 +17,12 @@ import org.eclipse.collections.api.block.function.primitive.BooleanToObjectFunct
 import org.eclipse.collections.api.collection.primitive.ImmutableBooleanCollection;
 import org.eclipse.collections.api.iterator.BooleanIterator;
 import org.eclipse.collections.api.list.primitive.MutableBooleanList;
+import org.eclipse.collections.api.set.primitive.ImmutableBooleanSet;
 import org.eclipse.collections.impl.bag.mutable.HashBag;
 import org.eclipse.collections.impl.bag.mutable.primitive.BooleanHashBag;
 import org.eclipse.collections.impl.collection.immutable.primitive.AbstractImmutableBooleanCollectionTestCase;
 import org.eclipse.collections.impl.factory.primitive.BooleanBags;
+import org.eclipse.collections.impl.factory.primitive.BooleanSets;
 import org.eclipse.collections.impl.list.mutable.primitive.BooleanArrayList;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
@@ -225,5 +227,19 @@ public abstract class AbstractImmutableBooleanBagTestCase extends AbstractImmuta
         Assert.assertEquals(this.classUnderTest(), this.classUnderTest().toImmutable());
         ImmutableBooleanBag expected = this.classUnderTest();
         Assert.assertSame(expected, expected.toImmutable());
+    }
+
+    @Test
+    public void selectUnique()
+    {
+        ImmutableBooleanBag bag = BooleanBags.immutable.with(false, false, true);
+        ImmutableBooleanSet expected = BooleanSets.immutable.with(true);
+        ImmutableBooleanSet actual = bag.selectUnique();
+        Assert.assertEquals(expected, actual);
+
+        ImmutableBooleanBag bag2 = BooleanBags.immutable.with(false, false, true, true);
+        ImmutableBooleanSet expected2 = BooleanSets.immutable.empty();
+        ImmutableBooleanSet actual2 = bag2.selectUnique();
+        Assert.assertEquals(expected2, actual2);
     }
 }

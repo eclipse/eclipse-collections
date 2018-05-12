@@ -20,6 +20,7 @@ import org.eclipse.collections.api.map.MapIterable;
 import org.eclipse.collections.api.multimap.Multimap;
 import org.eclipse.collections.api.partition.PartitionMutableCollection;
 import org.eclipse.collections.api.set.ImmutableSet;
+import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.tuple.primitive.ObjectIntPair;
 import org.eclipse.collections.impl.block.factory.IntegerPredicates;
 import org.eclipse.collections.impl.block.factory.Predicates2;
@@ -291,5 +292,14 @@ public class SynchronizedBagTest extends AbstractSynchronizedCollectionTestCase
         Verify.assertSize(2, this.newWith("one", "one", "two", "two", "three").topOccurrences(1));
         Verify.assertSize(3, this.newWith(null, "one", "two").topOccurrences(5));
         Verify.assertSize(3, this.newWith(null, "one", "two").topOccurrences(1));
+    }
+
+    @Test
+    public void selectUnique()
+    {
+        MutableBag<String> bag = Bags.mutable.with("0", "1", "1", "1", "1", "2", "2", "2", "3", "3", "4", "5").asSynchronized();
+        MutableSet<String> expected = Sets.mutable.with("0", "4", "5");
+        MutableSet<String> actual = bag.selectUnique();
+        Assert.assertEquals(expected, actual);
     }
 }

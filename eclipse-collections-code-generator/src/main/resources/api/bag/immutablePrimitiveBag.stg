@@ -23,6 +23,7 @@ import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
 import org.eclipse.collections.api.collection.primitive.Immutable<name>Collection;
 import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.tuple.primitive.<name>IntPair;
+import org.eclipse.collections.api.set.primitive.Immutable<name>Set;
 
 /**
  * This file was automatically generated from template file immutablePrimitiveBag.stg.
@@ -60,6 +61,17 @@ public interface Immutable<name>Bag extends Immutable<name>Collection, <name>Bag
     default Immutable<name>Bag selectDuplicates()
     {
         return this.selectByOccurrences(occurrences -> occurrences > 1);
+    }
+
+    /**
+     * Returns all elements of the bag that have exactly one occurrence.
+     *
+     * @since 9.2
+     */
+    @Override
+    default Immutable<name>Set selectUnique()
+    {
+        throw new UnsupportedOperationException("Adding default implementation so as to not break compatibility");
     }
 
     /**

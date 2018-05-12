@@ -17,6 +17,7 @@ import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.set.ImmutableSet;
+import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.api.tuple.primitive.ObjectIntPair;
 import org.eclipse.collections.impl.bag.mutable.primitive.BooleanHashBag;
@@ -283,5 +284,14 @@ public class UnmodifiableBagTest
         Assert.assertEquals(1, bottom5.getFirst().getTwo());
         Assert.assertEquals("five", bottom5.getLast().getOne());
         Assert.assertEquals(5, bottom5.getLast().getTwo());
+    }
+
+    @Test
+    public void selectUnique()
+    {
+        MutableBag<String> bag = Bags.mutable.with("0", "1", "1", "1", "1", "2", "2", "2", "3", "3", "4", "5").asUnmodifiable();
+        MutableSet<String> expected = Sets.mutable.with("0", "4", "5");
+        MutableSet<String> actual = bag.selectUnique();
+        Assert.assertEquals(expected, actual);
     }
 }

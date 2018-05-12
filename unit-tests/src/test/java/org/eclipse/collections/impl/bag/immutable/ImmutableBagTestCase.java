@@ -1586,4 +1586,13 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
 
         Verify.assertSortedBagsEqual(TreeBag.newBagWith("1", "2", "2", "3", "3", "3", "4", "4", "4", "4"), sortedBag);
     }
+
+    @Test
+    public void selectUnique()
+    {
+        ImmutableBag<String> bag = Bags.immutable.with("1", "2", "2", "3", "3", "3", "3", "4", "5", "5", "6");
+        ImmutableSet<String> expected = Sets.immutable.with("1", "4", "6");
+        ImmutableSet<String> actual = bag.selectUnique();
+        Assert.assertEquals(expected, actual);
+    }
 }

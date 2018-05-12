@@ -534,4 +534,10 @@ final class ImmutableSingletonBag<T>
     {
         return new ImmutableBagSerializationProxy<>(this);
     }
+
+    @Override
+    public ImmutableSet<T> selectUnique()
+    {
+        return Sets.immutable.of(this.value);
+    }
 }

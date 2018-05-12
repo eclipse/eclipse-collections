@@ -11,6 +11,10 @@
 package org.eclipse.collections.impl.bag.immutable.primitive;
 
 import org.eclipse.collections.api.bag.primitive.ImmutableBooleanBag;
+import org.eclipse.collections.api.set.primitive.ImmutableBooleanSet;
+import org.eclipse.collections.impl.factory.primitive.BooleanSets;
+import org.junit.Assert;
+import org.junit.Test;
 
 public class ImmutableBooleanHashBagTest extends AbstractImmutableBooleanBagTestCase
 {
@@ -18,5 +22,17 @@ public class ImmutableBooleanHashBagTest extends AbstractImmutableBooleanBagTest
     protected ImmutableBooleanBag classUnderTest()
     {
         return ImmutableBooleanHashBag.newBagWith(true, false, true);
+    }
+
+    @Override
+    @Test
+    public void selectUnique()
+    {
+        super.selectUnique();
+
+        ImmutableBooleanBag bag = this.classUnderTest();
+        ImmutableBooleanSet expected = BooleanSets.immutable.with(false);
+        ImmutableBooleanSet actual = bag.selectUnique();
+        Assert.assertEquals(expected, actual);
     }
 }

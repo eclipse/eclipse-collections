@@ -425,4 +425,13 @@ public class SynchronizedBag<T>
     {
         return Bags.immutable.withAll(this);
     }
+
+    @Override
+    public MutableSet<T> selectUnique()
+    {
+        synchronized (this.getLock())
+        {
+            return this.getDelegate().selectUnique();
+        }
+    }
 }

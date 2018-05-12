@@ -23,6 +23,7 @@ import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
 import org.eclipse.collections.api.collection.primitive.Mutable<name>Collection;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.tuple.primitive.<name>IntPair;
+import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
 
 /**
  * This file was automatically generated from template file mutablePrimitiveBag.stg.
@@ -62,6 +63,17 @@ public interface Mutable<name>Bag extends Mutable<name>Collection, <name>Bag
     default Mutable<name>Bag selectDuplicates()
     {
         return this.selectByOccurrences(occurrences -> occurrences > 1);
+    }
+
+    /**
+     * Returns all elements of the bag that have exactly one occurrence.
+     *
+     * @since 9.2
+     */
+    @Override
+    default Mutable<name>Set selectUnique()
+    {
+        throw new UnsupportedOperationException("Adding default implementation so as to not break compatibility");
     }
 
     /**

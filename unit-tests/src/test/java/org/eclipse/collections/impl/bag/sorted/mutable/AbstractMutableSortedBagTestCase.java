@@ -28,6 +28,7 @@ import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MapIterable;
 import org.eclipse.collections.api.multimap.sortedbag.MutableSortedBagMultimap;
 import org.eclipse.collections.api.partition.bag.sorted.PartitionMutableSortedBag;
+import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.api.tuple.Twin;
 import org.eclipse.collections.api.tuple.primitive.ObjectIntPair;
@@ -48,6 +49,7 @@ import org.eclipse.collections.impl.block.function.PassThruFunction0;
 import org.eclipse.collections.impl.factory.Bags;
 import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.SortedBags;
+import org.eclipse.collections.impl.factory.SortedSets;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.list.mutable.AddToList;
 import org.eclipse.collections.impl.list.mutable.FastList;
@@ -1931,6 +1933,20 @@ public abstract class AbstractMutableSortedBagTestCase extends MutableBagTestCas
     public void drop_throws()
     {
         this.newWith(1, 2, 3).drop(-1);
+    }
+
+    @Override
+    @Test
+    public void selectUnique()
+    {
+        super.selectUnique();
+
+        Comparator<Integer> comparator = Collections.reverseOrder();
+        MutableSortedBag<Integer> integers = this.newWith(comparator, 5, 4, 3, 3, 2, 2, 2, 1, 1, 1, 1, 0);
+        MutableSortedSet<Integer> expected = SortedSets.mutable.of(comparator, 5, 4, 0);
+        MutableSortedSet<Integer> actual = integers.selectUnique();
+        Assert.assertEquals(expected, actual);
+        Assert.assertEquals(expected.comparator(), actual.comparator());
     }
 
     // Like Integer, but not Comparable

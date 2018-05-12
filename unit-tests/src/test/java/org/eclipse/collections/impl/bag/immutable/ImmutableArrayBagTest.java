@@ -14,10 +14,12 @@ import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.map.MutableMap;
+import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.api.tuple.primitive.ObjectIntPair;
 import org.eclipse.collections.impl.bag.mutable.HashBag;
 import org.eclipse.collections.impl.factory.Bags;
 import org.eclipse.collections.impl.factory.Maps;
+import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.test.Verify;
@@ -221,5 +223,17 @@ public class ImmutableArrayBagTest extends ImmutableBagTestCase
         Verify.assertIterableSize(0, this.newWith("one").newWithout("one").bottomOccurrences(0));
         Verify.assertIterableSize(0, this.newWith("one").bottomOccurrences(0));
         Verify.assertThrows(IllegalArgumentException.class, () -> this.newWith("one").bottomOccurrences(-1));
+    }
+
+    @Override
+    @Test
+    public void selectUnique()
+    {
+        super.selectUnique();
+
+        ImmutableBag<String> bag = this.newBag();
+        ImmutableSet<String> expected = Sets.immutable.of("1");
+        ImmutableSet<String> actual = bag.selectUnique();
+        Assert.assertEquals(expected, actual);
     }
 }

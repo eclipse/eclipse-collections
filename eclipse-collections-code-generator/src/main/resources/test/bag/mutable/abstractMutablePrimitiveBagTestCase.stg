@@ -35,6 +35,8 @@ import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
 import org.junit.Test;
+import org.eclipse.collections.impl.factory.primitive.<name>Sets;
+import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
 
 /**
  * JUnit test for {@link Mutable<name>Bag}.
@@ -81,6 +83,15 @@ public abstract class AbstractMutable<name>BagTestCase extends AbstractMutable<n
     {
         Mutable<name>Bag bag = this.newWith(<["1", "2", "2", "3", "3", "3"]:(literal.(type))(); separator=", ">);
         Assert.assertEquals(<name>HashBag.newBagWith(<["2", "2", "3", "3", "3"]:(literal.(type))(); separator=", ">), bag.selectDuplicates());
+    }
+
+    @Test
+    public void selectUnique()
+    {
+        Mutable<name>Bag bag = this.newWith(<["1", "2", "2", "3", "3", "3", "3", "4", "5", "5", "6"]:(literal.(type))(); separator=", ">);
+        Mutable<name>Set expected = <name>Sets.mutable.with(<["1", "4", "6"]:(literal.(type))(); separator=", ">);
+        Mutable<name>Set actual = bag.selectUnique();
+        Assert.assertEquals(expected, actual);
     }
 
     protected Mutable<name>Bag newWithOccurrences(<name>IntPair... elementsWithOccurrences)

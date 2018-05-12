@@ -742,4 +742,10 @@ final class ImmutableEmptyBag<T>
     {
         return new ImmutableBagSerializationProxy<>(this);
     }
+
+    @Override
+    public ImmutableSet<T> selectUnique()
+    {
+        return Sets.immutable.empty();
+    }
 }

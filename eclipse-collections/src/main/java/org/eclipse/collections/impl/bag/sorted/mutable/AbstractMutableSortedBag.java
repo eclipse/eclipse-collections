@@ -46,6 +46,7 @@ import org.eclipse.collections.api.list.primitive.MutableLongList;
 import org.eclipse.collections.api.list.primitive.MutableShortList;
 import org.eclipse.collections.api.map.sorted.MutableSortedMap;
 import org.eclipse.collections.api.partition.bag.sorted.PartitionMutableSortedBag;
+import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.bag.mutable.AbstractMutableBagIterable;
 import org.eclipse.collections.impl.factory.Bags;
@@ -351,5 +352,11 @@ public abstract class AbstractMutableSortedBag<T>
             throw new IllegalArgumentException();
         }
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".asParallel() not implemented yet");
+    }
+
+    @Override
+    public MutableSortedSet<T> selectUnique()
+    {
+        return super.selectUnique().toSortedSet(this.comparator());
     }
 }

@@ -686,4 +686,16 @@ public class ImmutableSingletonBagTest extends ImmutableBagTestCase
 
         Verify.assertSortedBagsEqual(TreeBag.newBagWith("1"), sortedBag);
     }
+
+    @Override
+    @Test
+    public void selectUnique()
+    {
+        super.selectUnique();
+
+        ImmutableBag<String> bag = this.newBag();
+        ImmutableSet<String> expected = Sets.immutable.of(VAL);
+        ImmutableSet<String> actual = bag.selectUnique();
+        Assert.assertEquals(expected, actual);
+    }
 }

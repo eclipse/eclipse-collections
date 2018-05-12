@@ -18,6 +18,7 @@ import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.partition.PartitionMutableCollection;
+import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.impl.block.factory.IntegerPredicates;
 import org.eclipse.collections.impl.block.factory.Predicates;
 import org.eclipse.collections.impl.block.factory.Predicates2;
@@ -537,5 +538,14 @@ public class MultiReaderHashBagTest extends MultiReaderMutableCollectionTestCase
         Interval interval = Interval.oneTo(50000);
         ParallelIterate.collect(interval, String::valueOf, numbers, true);
         Assert.assertEquals(numbers, interval.collect(String::valueOf).toBag());
+    }
+
+    @Test
+    public void selectUnique()
+    {
+        MutableBag<String> bag = this.newWith("0", "1", "1", "1", "1", "2", "2", "2", "3", "3", "4", "5");
+        MutableSet<String> expected = Sets.mutable.with("0", "4", "5");
+        MutableSet<String> actual = bag.selectUnique();
+        Assert.assertEquals(expected, actual);
     }
 }

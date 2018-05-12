@@ -50,6 +50,8 @@ import org.eclipse.collections.impl.map.mutable.primitive.<name>IntHashMap;
 import org.eclipse.collections.impl.primitive.Abstract<name>Iterable;
 import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
+import org.eclipse.collections.impl.factory.primitive.<name>Sets;
+import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
 
 /**
  * <name>HashBag is similar to {@link HashBag}, and is memory-optimized for <type> primitives.
@@ -221,6 +223,20 @@ public class <name>HashBag
                 result.addOccurrences(each, occurrences);
             }
         });
+        return result;
+    }
+
+    @Override
+    public Mutable<name>Set selectUnique()
+    {
+        Mutable<name>Set result = <name>Sets.mutable.empty();
+        this.forEachWithOccurrences((each, occurrences) ->
+            {
+                if (occurrences == 1)
+                {
+                    result.add(each);
+                }
+            });
         return result;
     }
 

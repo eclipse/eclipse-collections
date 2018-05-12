@@ -64,6 +64,15 @@ public interface MutableBag<T>
         return this.selectByOccurrences(occurrences -> occurrences > 1);
     }
 
+    /**
+     * @since 9.2
+     */
+    @Override
+    default MutableSet<T> selectUnique()
+    {
+        throw new UnsupportedOperationException("Adding default implementation so as to not break compatibility");
+    }
+
     @Override
     MutableBag<T> with(T element);
 

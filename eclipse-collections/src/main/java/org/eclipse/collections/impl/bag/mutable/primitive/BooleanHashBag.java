@@ -39,6 +39,7 @@ import org.eclipse.collections.api.tuple.primitive.BooleanIntPair;
 import org.eclipse.collections.impl.bag.mutable.HashBag;
 import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.primitive.BooleanBags;
+import org.eclipse.collections.impl.factory.primitive.BooleanSets;
 import org.eclipse.collections.impl.lazy.primitive.LazyBooleanIterableAdapter;
 import org.eclipse.collections.impl.list.mutable.primitive.BooleanArrayList;
 import org.eclipse.collections.impl.set.mutable.primitive.BooleanHashSet;
@@ -936,5 +937,19 @@ public final class BooleanHashBag implements MutableBooleanBag, Externalizable
             }
             this.removedAlready = true;
         }
+    }
+
+    @Override
+    public MutableBooleanSet selectUnique()
+    {
+        MutableBooleanSet result = BooleanSets.mutable.empty();
+        this.forEachWithOccurrences((each, occurrences)->
+            {
+                if (occurrences == 1)
+                {
+                    result.add(each);
+                }
+            });
+        return result;
     }
 }
