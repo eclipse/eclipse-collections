@@ -30,10 +30,12 @@ import org.eclipse.collections.api.block.function.primitive.<name2>Function0;
 <if(!sameTwoPrimitives)>import org.eclipse.collections.api.block.function.primitive.<name2>To<name2>Function;<endif>
 import org.eclipse.collections.api.iterator.Mutable<name2>Iterator;
 import org.eclipse.collections.api.map.primitive.Mutable<name1><name2>Map;
+import org.eclipse.collections.api.list.primitive.MutableLongList;
 import org.eclipse.collections.api.set.primitive.<name1>Set;
-import org.eclipse.collections.impl.set.mutable.primitive.<name1>HashSet;
+import org.eclipse.collections.impl.factory.primitive.LongLists;
 import org.eclipse.collections.impl.list.mutable.primitive.<name1>ArrayList;
 import org.eclipse.collections.impl.map.primitive.Abstract<name1><name2>MapTestCase;
+import org.eclipse.collections.impl.set.mutable.primitive.<name1>HashSet;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
 import org.junit.Test;
@@ -411,6 +413,25 @@ public abstract class AbstractMutable<name1><name2>MapTestCase extends Abstract<
         Assert.assertEquals(<(wideLiteral.(type2))("12")>, map1.addToValue(<(literal.(type1))("1")>, <(literal.(type2))("9")>)<(wideDelta.(type2))>);
         Assert.assertEquals(<(wideLiteral.(type2))("11")>, map1.addToValue(<(literal.(type1))("0")>, <(literal.(type2))("10")>)<(wideDelta.(type2))>);
         Assert.assertEquals(expected, map1);
+
+        Mutable<name1><name2>Map map2 = this.getEmptyMap();
+        MutableLongList list = LongLists.mutable.with(
+            936628237L,
+            4889384619L,
+            8733915902L,
+            2377747912L,
+            277382636L,
+            593670575L,
+            296725141L,
+            7131901003L,
+            9986389012L
+        );
+
+        list.forEachWithIndex((each, index) -> {
+            <type1> k = <(castLongToNarrowTypeWithParens.(type1))("each")>;
+            <type2> v = <(castLongToNarrowTypeWithParens.(type2))("each + index")>;
+            Assert.assertEquals("Key:" + k, v, map2.addToValue(k, v)<(wideDelta.(type2))>);
+        });
     }
 
     @Test
