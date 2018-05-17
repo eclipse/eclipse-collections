@@ -19,7 +19,7 @@
     <parent>
         <groupId>org.eclipse.collections</groupId>
         <artifactId>eclipse-collections-parent</artifactId>
-        <version>7.0.3-SNAPSHOT</version>
+        <version>7.0.3</version>
     </parent>
 
     <artifactId>unit-tests-java8</artifactId>
