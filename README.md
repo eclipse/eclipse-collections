@@ -72,14 +72,14 @@ The method reference in the example above can also be replaced with a lambda:
 ```java
 MutableList<String> lastNames = people.collect(person -> person.getLastName());
 ```
-Eclipse Collections has support for both [Mutable](http://www.eclipse.org/collections/javadoc/8.0.0/org/eclipse/collections/api/collection/MutableCollection.html) and [Immutable](http://www.eclipse.org/collections/javadoc/8.0.0/org/eclipse/collections/api/collection/ImmutableCollection.html) collections, and the return types of methods are covariant.  While the collect method on a MutableList returned a MutableList, the collect method on an ImmutableList will return an ImmutableList.  Here we use the same Lists factory to create an ImmutableList.
+Eclipse Collections has support for both [Mutable](http://www.eclipse.org/collections/javadoc/9.2.0/org/eclipse/collections/api/collection/MutableCollection.html) and [Immutable](http://www.eclipse.org/collections/javadoc/9.2.0/org/eclipse/collections/api/collection/ImmutableCollection.html) collections, and the return types of methods are covariant.  While the collect method on a MutableList returned a MutableList, the collect method on an ImmutableList will return an ImmutableList.  Here we use the same Lists factory to create an ImmutableList.
 
 ```java
 ImmutableList<Person> people = Lists.immutable.with(person1, person2, person3);
 ImmutableList<String> lastNames = people.collect(Person::getLastName);
 Assert.assertEquals("Smith, Watson, Williams", lastNames.makeString());
 ```
-Eclipse Collections has a [lazy API](http://www.eclipse.org/collections/javadoc/8.0.0/org/eclipse/collections/api/LazyIterable.html) as well, which is available by calling the method asLazy().  The method collect will now return a LazyIterable.  The LazyIterable that is returned does not evaluate anything until the call to a terminal method is made.  In this case, the call to makeString() will force the LazyIterable to collect the last names. 
+Eclipse Collections has a [lazy API](http://www.eclipse.org/collections/javadoc/9.2.0/org/eclipse/collections/api/LazyIterable.html) as well, which is available by calling the method asLazy().  The method collect will now return a LazyIterable.  The LazyIterable that is returned does not evaluate anything until the call to a terminal method is made.  In this case, the call to makeString() will force the LazyIterable to collect the last names. 
 
 ```java
 ImmutableList<Person> people = Lists.immutable.with(person1, person2, person3);
@@ -93,7 +93,7 @@ MutableList<Person> people = Lists.mutable.with(person1, person2, person3);
 Stream<String> lastNames = people.stream().map(Person::getLastName);
 Assert.assertEquals("Smith, Watson, Williams", lastNames.collect(Collectors.joining(", "));
 ```
-Eclipse Collections 8.0 also introduced a new set of Collectors in the class [Collectors2](http://www.eclipse.org/collections/javadoc/8.0.0/org/eclipse/collections/impl/collector/Collectors2.html).  The Collectors2.makeString() is equivalent to Collectors2.joining(", "), but does not require the object in the Stream to be a String.
+Eclipse Collections 8.0 also introduced a new set of Collectors in the class [Collectors2](http://www.eclipse.org/collections/javadoc/9.2.0/org/eclipse/collections/impl/collector/Collectors2.html).  The Collectors2.makeString() is equivalent to Collectors2.joining(", "), but does not require the object in the Stream to be a String.
 
 ```java
 MutableList<Person> people = Lists.mutable.with(person1, person2, person3);
