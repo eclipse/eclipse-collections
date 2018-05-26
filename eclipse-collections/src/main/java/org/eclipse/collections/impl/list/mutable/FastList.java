@@ -134,6 +134,10 @@ public class FastList<T>
 
     public FastList(int initialCapacity)
     {
+        if (initialCapacity < 0)
+        {
+            throw new IllegalArgumentException("Expected initial capacity is greater than or equal to 0. Was: " + initialCapacity);
+        }
         this.items = initialCapacity == 0 ? (T[]) ZERO_SIZED_ARRAY : (T[]) new Object[initialCapacity];
     }
 

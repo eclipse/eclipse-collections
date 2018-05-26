@@ -1209,4 +1209,10 @@ public class FastListTest extends AbstractListTestCase
     {
         this.newWith().max();
     }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testNegativeInitialCapacity()
+    {
+        new FastList<>(-1);
+    }
 }
