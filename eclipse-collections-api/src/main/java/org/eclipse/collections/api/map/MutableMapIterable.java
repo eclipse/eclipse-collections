@@ -37,23 +37,23 @@ import org.eclipse.collections.api.tuple.Pair;
 public interface MutableMapIterable<K, V> extends MapIterable<K, V>, Map<K, V>
 {
     /**
-     * This method allows mutable map the ability to add an element in the form of Pair<K,V>.
+     * This method allows mutable map the ability to add an element in the form of Pair<? extends K, ? extends V>.
      *
      * @see #put(Object, Object)
      * @since 9.1.0
      */
-    default V putPair(Pair<K, V> keyValuePair)
+    default V putPair(Pair<? extends K, ? extends V> keyValuePair)
     {
         return this.put(keyValuePair.getOne(), keyValuePair.getTwo());
     }
 
     /**
-     * This method allows mutable map the ability to add an element in the form of Pair<K,V>.
+     * This method allows mutable map the ability to add an element in the form of Pair<? extends K, ? extends V>.
      *
      * @return previous value in the map for the key, or null if no value exists for the key.
      * @see #put(Object, Object)
      */
-    default V add(Pair<K, V> keyValuePair)
+    default V add(Pair<? extends K, ? extends V> keyValuePair)
     {
         return this.putPair(keyValuePair);
     }
