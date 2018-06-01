@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 BNY Mellon.
+ * Copyright (c) 2018 BNY Mellon.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -18,9 +18,11 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.list.primitive.IntList;
+import org.eclipse.collections.api.list.primitive.MutableIntList;
 import org.eclipse.collections.impl.factory.primitive.IntLists;
 import org.eclipse.collections.impl.list.mutable.CompositeFastList;
 import org.eclipse.collections.impl.list.mutable.FastList;
@@ -45,6 +47,7 @@ import org.openjdk.jmh.runner.options.OptionsBuilder;
 @Fork(2)
 public class IntListJMHTest
 {
+    private int[] ints;
     private List<Integer> jdkList;
     private MutableList<Integer> ecList;
     private IntList ecPrimitiveList;
@@ -59,6 +62,18 @@ public class IntListJMHTest
                 .warmupIterations(30)
                 .build();
         new Runner(options).run();
+    }
+
+    @Setup
+    public void setUp()
+    {
+        PrimitiveIterator.OfInt intGenerator = new Random(1L).ints(-1000, 1000).iterator();
+        this.ecList = FastList.newWithNValues(1_000_000, intGenerator::nextInt);
+        this.jdkList = new ArrayList<>(1_000_000);
+        this.jdkList.addAll(this.ecList);
+        this.ecPrimitiveList = this.ecList.collectInt(i -> i, new IntArrayList(1_000_000));
+        this.ints = this.ecPrimitiveList.toArray();
+        this.executorService = Executors.newWorkStealingPool();
     }
 
     @Benchmark
@@ -126,6 +141,43 @@ public class IntListJMHTest
                 .stream()
                 .filter(i -> i % 2 == 0)
                 .collect(Collectors.toList());
+    }
+
+    @Benchmark
+    public List<Integer> filterJDKIntStream()
+    {
+        return IntStream.of(this.ints)
+                .filter(i -> i % 2 == 0)
+                .boxed()
+                .collect(Collectors.toList());
+    }
+
+    @Benchmark
+    public List<Integer> filterJDKIntStreamParallel()
+    {
+        return IntStream.of(this.ints)
+                .parallel()
+                .filter(i -> i % 2 == 0)
+                .boxed()
+                .collect(Collectors.toList());
+    }
+
+    @Benchmark
+    public IntList filterJDKIntStreamToEC()
+    {
+        return IntLists.mutable.withAll(IntStream.of(this.ints)
+                .filter(i -> i % 2 == 0));
+    }
+
+    @Benchmark
+    public IntList filterJDKIntStreamParallelToEC()
+    {
+        return IntStream.of(this.ints)
+                .parallel()
+                .filter(i -> i % 2 == 0)
+                .collect(IntLists.mutable::empty,
+                        MutableIntList::add,
+                        MutableIntList::addAll);
     }
 
     @Benchmark
@@ -211,6 +263,25 @@ public class IntListJMHTest
     }
 
     @Benchmark
+    public long filterMapSumJDKIntStream()
+    {
+        return IntStream.of(this.ints)
+                .filter(i -> i % 2 == 0)
+                .mapToLong(i -> (long) (i * 2))
+                .sum();
+    }
+
+    @Benchmark
+    public long filterMapSumJDKIntStreamParallel()
+    {
+        return IntStream.of(this.ints)
+                .parallel()
+                .filter(i -> i % 2 == 0)
+                .mapToLong(i -> (long) (i * 2))
+                .sum();
+    }
+
+    @Benchmark
     public MutableList<Integer> mapECBoxedEager()
     {
         return this.ecList.collect(i -> i * 2);
@@ -276,15 +347,41 @@ public class IntListJMHTest
                 .collect(Collectors.toList());
     }
 
-    @Setup
-    public void setUp()
+    @Benchmark
+    public List<Integer> mapJDKIntStream()
     {
-        PrimitiveIterator.OfInt intGenerator = new Random(1L).ints(-1000, 1000).iterator();
-        this.ecList = FastList.newWithNValues(1_000_000, intGenerator::nextInt);
-        this.jdkList = new ArrayList<>(1_000_000);
-        this.jdkList.addAll(this.ecList);
-        this.ecPrimitiveList = this.ecList.collectInt(i -> i, new IntArrayList(1_000_000));
-        this.executorService = Executors.newWorkStealingPool();
+        return IntStream.of(this.ints)
+                .map(i -> i * 2)
+                .boxed()
+                .collect(Collectors.toList());
+    }
+
+    @Benchmark
+    public List<Integer> mapJDKIntStreamParallel()
+    {
+        return IntStream.of(this.ints)
+                .parallel()
+                .map(i -> i * 2)
+                .boxed()
+                .collect(Collectors.toList());
+    }
+
+    @Benchmark
+    public IntList mapJDKIntStreamToEC()
+    {
+        return IntLists.mutable.withAll(IntStream.of(this.ints)
+                .map(i -> i * 2));
+    }
+
+    @Benchmark
+    public IntList mapJDKIntStreamParallelToEC()
+    {
+        return IntStream.of(this.ints)
+                .parallel()
+                .map(i -> i * 2)
+                .collect(IntLists.mutable::empty,
+                        MutableIntList::add,
+                        MutableIntList::addAll);
     }
 
     @Benchmark
@@ -347,6 +444,23 @@ public class IntListJMHTest
         return this.jdkList
                 .stream()
                 .mapToLong(Integer::longValue)
+                .sum();
+    }
+
+    @Benchmark
+    public long sumJDKIntStreamParallel()
+    {
+        return IntStream.of(this.ints)
+                .parallel()
+                .mapToLong(i -> (long) i)
+                .sum();
+    }
+
+    @Benchmark
+    public long sumJDKIntStream()
+    {
+        return IntStream.of(this.ints)
+                .mapToLong(i -> (long) i)
                 .sum();
     }
 }
