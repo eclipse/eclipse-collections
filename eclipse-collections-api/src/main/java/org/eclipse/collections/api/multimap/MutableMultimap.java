@@ -41,7 +41,7 @@ public interface MutableMultimap<K, V>
      * @see #put(Object, Object)
      * @since 6.0
      */
-    default boolean add(Pair<K, V> keyValuePair)
+    default boolean add(Pair<? extends K, ? extends V> keyValuePair)
     {
         return this.put(keyValuePair.getOne(), keyValuePair.getTwo());
     }
@@ -49,20 +49,20 @@ public interface MutableMultimap<K, V>
     boolean remove(Object key, Object value);
 
     // Bulk Operations
-    default boolean putAllPairs(Pair<K, V>... pairs)
+    default boolean putAllPairs(Pair<? extends K, ? extends V>... pairs)
     {
         boolean changed = false;
-        for (Pair<K, V> pair : pairs)
+        for (Pair<? extends K, ? extends V> pair : pairs)
         {
             changed |= this.put(pair.getOne(), pair.getTwo());
         }
         return changed;
     }
 
-    default boolean putAllPairs(Iterable<Pair<K, V>> pairs)
+    default boolean putAllPairs(Iterable<? extends Pair<? extends K, ? extends V>> pairs)
     {
         boolean changed = false;
-        for (Pair<K, V> pair : pairs)
+        for (Pair<? extends K, ? extends V> pair : pairs)
         {
             changed |= this.put(pair.getOne(), pair.getTwo());
         }

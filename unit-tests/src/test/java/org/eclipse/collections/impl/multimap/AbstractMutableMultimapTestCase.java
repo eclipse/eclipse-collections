@@ -169,6 +169,14 @@ public abstract class AbstractMutableMultimapTestCase extends AbstractMultimapTe
         expected3.put("Two", 2);
         expected3.put("Three", 3);
         Assert.assertEquals(expected3, multimap3);
+
+        MutableMultimap<Number, String> multimap4 = this.newMultimap();
+        MutableList<Pair<Integer, String>> intPairs4 = Lists.mutable.of(Tuples.pair(1, "Integer1"), Tuples.pair(2, "Integer2"));
+        MutableList<Pair<Long, String>> longPairs4 = Lists.mutable.of(Tuples.pair(1L, "Long1"), Tuples.pair(2L, "Long2"));
+        multimap4.putAllPairs(intPairs4);
+        multimap4.putAllPairs(longPairs4);
+        MutableMultimap<Number, String> expected4 = this.newMultimapWithKeysValues(1, "Integer1", 2, "Integer2", 1L, "Long1", 2L, "Long2");
+        Assert.assertEquals(expected4, multimap4);
     }
 
     @Test

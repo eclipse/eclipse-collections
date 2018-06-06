@@ -104,7 +104,7 @@ public abstract class AbstractSynchronizedMultimap<K, V> implements MutableMulti
     }
 
     @Override
-    public boolean add(Pair<K, V> keyValuePair)
+    public boolean add(Pair<? extends K, ? extends V> keyValuePair)
     {
         synchronized (this.lock)
         {
@@ -122,7 +122,7 @@ public abstract class AbstractSynchronizedMultimap<K, V> implements MutableMulti
     }
 
     @Override
-    public boolean putAllPairs(Pair<K, V>... pairs)
+    public boolean putAllPairs(Pair<? extends K, ? extends V>... pairs)
     {
         synchronized (this.lock)
         {
@@ -131,7 +131,7 @@ public abstract class AbstractSynchronizedMultimap<K, V> implements MutableMulti
     }
 
     @Override
-    public boolean putAllPairs(Iterable<Pair<K, V>> pairs)
+    public boolean putAllPairs(Iterable<? extends Pair<? extends K, ? extends V>> pairs)
     {
         synchronized (this.lock)
         {
