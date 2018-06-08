@@ -19,11 +19,13 @@ import org.eclipse.collections.api.multimap.list.ImmutableListMultimap;
 import org.eclipse.collections.api.multimap.list.MutableListMultimap;
 import org.eclipse.collections.api.multimap.set.ImmutableSetMultimap;
 import org.eclipse.collections.api.multimap.set.MutableSetMultimap;
+import org.eclipse.collections.api.multimap.sortedbag.ImmutableSortedBagMultimap;
 import org.eclipse.collections.api.multimap.sortedbag.MutableSortedBagMultimap;
 import org.eclipse.collections.api.multimap.sortedset.ImmutableSortedSetMultimap;
 import org.eclipse.collections.api.multimap.sortedset.MutableSortedSetMultimap;
 import org.eclipse.collections.impl.multimap.bag.HashBagMultimap;
 import org.eclipse.collections.impl.multimap.bag.ImmutableBagMultimapImpl;
+import org.eclipse.collections.impl.multimap.bag.sorted.immutable.ImmutableSortedBagMultimapImpl;
 import org.eclipse.collections.impl.multimap.bag.sorted.mutable.TreeBagMultimap;
 import org.eclipse.collections.impl.multimap.list.FastListMultimap;
 import org.eclipse.collections.impl.multimap.list.ImmutableListMultimapImpl;
@@ -50,6 +52,7 @@ public final class Multimaps
         public final ImmutableSetMultimapFactory set = new ImmutableSetMultimapFactory();
         public final ImmutableSortedSetMultimapFactory sortedSet = new ImmutableSortedSetMultimapFactory();
         public final ImmutableBagMultimapFactory bag = new ImmutableBagMultimapFactory();
+        public final ImmutableSortedBagMultimapFactory multimap = new ImmutableSortedBagMultimapFactory();
 
         private ImmutableMultimaps()
         {
@@ -290,6 +293,62 @@ public final class Multimaps
                 hashBagMultimap.put(key3, value3);
                 return hashBagMultimap.toImmutable();
             }
+        }
+
+        public static final class ImmutableSortedBagMultimapFactory
+        {
+           private ImmutableSortedBagMultimapFactory()
+           {
+           }
+
+           public <K, V> ImmutableSortedBagMultimap<K, V> of(Comparator<? super V> comparator)
+           {
+               return new ImmutableSortedBagMultimapImpl<>(Maps.immutable.empty(), comparator);
+           }
+
+           public <K, V> ImmutableSortedBagMultimap<K, V> with(Comparator<? super V> comparator)
+           {
+               return this.of(comparator);
+           }
+
+           public <K, V> ImmutableSortedBagMultimap<K, V> of(Comparator<? super V> comparator, K key, V value)
+           {
+              TreeBagMultimap<K, V> treeBagMultimap = new TreeBagMultimap<>(comparator);
+              treeBagMultimap.put(key, value);
+              return treeBagMultimap.toImmutable();
+           }
+
+           public <K, V> ImmutableSortedBagMultimap<K, V> with(Comparator<? super V> comparator, K key, V value)
+           {
+               return this.of(comparator, key, value);
+           }
+
+           public <K, V> ImmutableSortedBagMultimap<K, V> of(Comparator<? super V> comparator, K key1, V value1, K key2, V value2)
+           {
+               TreeBagMultimap<K, V> treeBagMultimap = new TreeBagMultimap<>(comparator);
+               treeBagMultimap.put(key1, value1);
+               treeBagMultimap.put(key2, value2);
+               return treeBagMultimap.toImmutable();
+           }
+
+           public <K, V> ImmutableSortedBagMultimap<K, V> with(Comparator<? super V> comparator, K key1, V value1, K key2, V value2)
+           {
+               return this.of(comparator, key1, value1, key2, value2);
+           }
+
+           public <K, V> ImmutableSortedBagMultimap<K, V> of(Comparator<? super V> comparator, K key1, V value1, K key2, V value2, K key3, V value3)
+           {
+               TreeBagMultimap<K, V> treeBagMultimap = new TreeBagMultimap<>(comparator);
+               treeBagMultimap.put(key1, value1);
+               treeBagMultimap.put(key2, value2);
+               treeBagMultimap.put(key3, value3);
+               return treeBagMultimap.toImmutable();
+           }
+
+           public <K, V> ImmutableSortedBagMultimap<K, V> with(Comparator<? super V> comparator, K key1, V value1, K key2, V value2, K key3, V value3)
+           {
+               return this.of(comparator, key1, value1, key2, value2, key3, value3);
+           }
         }
     }
 
