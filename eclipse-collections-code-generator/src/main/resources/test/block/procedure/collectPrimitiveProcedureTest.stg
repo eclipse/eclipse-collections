@@ -1,0 +1,46 @@
+import "copyright.stg"
+import "primitiveLiteral.stg"
+
+skipBoolean() ::= "true"
+isTest() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/block/procedure/primitive"
+
+fileName(primitive) ::= "Collect<primitive.name>ProcedureTest"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.wrapperName, primitive.name)>
+>>
+
+body(type, wrapperName, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.block.procedure.primitive;
+
+import org.eclipse.collections.api.block.function.primitive.<name>Function;
+import org.eclipse.collections.api.list.primitive.Immutable<name>List;
+import org.eclipse.collections.api.list.primitive.Mutable<name>List;
+import org.eclipse.collections.impl.factory.primitive.<name>Lists;
+import org.junit.Assert;
+import org.junit.Test;
+/**
+ * This file was automatically generated from template file CollectPrimitiveProcedureTest.stg.
+ */
+public class Collect<name>ProcedureTest
+{
+    @Test
+    public void basicCase()
+    {
+        <name>Function\<String> stringToLengthFunction = (String string) -> <(castIntToNarrowType.(type))("string.length()")>;
+        Mutable<name>List targetList = <name>Lists.mutable.empty();
+        Collect<name>Procedure\<String> procedure = new Collect<name>Procedure(stringToLengthFunction, targetList);
+        procedure.value("");
+        procedure.value("0");
+        procedure.value("00");
+        
+        Immutable<name>List expected = <name>Lists.immutable.with(<["0", "1", "2"]:(literal.(type))(); separator=", ">);
+        Assert.assertEquals(expected, targetList);
+    }
+}
+
+>>

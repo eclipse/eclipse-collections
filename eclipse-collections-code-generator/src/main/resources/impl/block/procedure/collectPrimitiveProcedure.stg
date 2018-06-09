@@ -1,0 +1,54 @@
+import "copyright.stg"
+
+skipBoolean() ::= "false"
+
+targetPath() ::= "org/eclipse/collections/impl/block/procedure/primitive"
+
+fileName(primitive) ::= "Collect<primitive.name>Procedure"
+ 
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.block.procedure.primitive;
+
+import org.eclipse.collections.api.block.function.primitive.<name>Function;
+import org.eclipse.collections.api.block.procedure.Procedure;
+import org.eclipse.collections.api.collection.primitive.Mutable<name>Collection;
+
+/**
+ * Applies a <name>Function to an object and adds the result to a target <type> collection.
+ *
+ * This file was automatically generated from template file CollectPrimitiveProcedure.stg.
+ */
+
+public final class Collect<name>Procedure\<T> implements Procedure\<T>
+{
+    private static final long serialVersionUID = 1L;
+
+    private final <name>Function\<? super T> <type>Function;
+    private final Mutable<name>Collection <type>Collection;
+
+    public Collect<name>Procedure(<name>Function\<? super T> <type>Function, Mutable<name>Collection targetCollection)
+    {
+        this.<type>Function = <type>Function;
+        this.<type>Collection = targetCollection;
+    }
+
+    @Override
+    public void value(T object)
+    {
+        <type> value = this.<type>Function.<type>ValueOf(object);
+        this.<type>Collection.add(value);
+    }
+
+    public Mutable<name>Collection get<name>Collection()
+    {
+        return this.<type>Collection;
+    }
+}
+
+>>
