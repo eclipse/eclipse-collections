@@ -186,32 +186,32 @@ public final class Multimaps
             {
             }
 
-            public <K, V> ImmutableSortedSetMultimap<K, V> of(Comparator<V> comparator)
+            public <K, V> ImmutableSortedSetMultimap<K, V> of(Comparator<? super V> comparator)
             {
                 return this.with(comparator);
             }
 
-            public <K, V> ImmutableSortedSetMultimap<K, V> with(Comparator<V> comparator)
+            public <K, V> ImmutableSortedSetMultimap<K, V> with(Comparator<? super V> comparator)
             {
                 return new ImmutableSortedSetMultimapImpl<>(Maps.immutable.with(), comparator);
             }
 
-            public <K, V> ImmutableSortedSetMultimap<K, V> of(Comparator<V> comparator, K key, V value)
+            public <K, V> ImmutableSortedSetMultimap<K, V> of(Comparator<? super V> comparator, K key, V value)
             {
                 return this.with(comparator, key, value);
             }
 
-            public <K, V> ImmutableSortedSetMultimap<K, V> with(Comparator<V> comparator, K key, V value)
+            public <K, V> ImmutableSortedSetMultimap<K, V> with(Comparator<? super V> comparator, K key, V value)
             {
                 return new ImmutableSortedSetMultimapImpl<>(Maps.immutable.with(key, SortedSets.immutable.with(comparator, value)), comparator);
             }
 
-            public <K, V> ImmutableSortedSetMultimap<K, V> of(Comparator<V> comparator, K key1, V value1, K key2, V value2)
+            public <K, V> ImmutableSortedSetMultimap<K, V> of(Comparator<? super V> comparator, K key1, V value1, K key2, V value2)
             {
                 return this.with(comparator, key1, value1, key2, value2);
             }
 
-            public <K, V> ImmutableSortedSetMultimap<K, V> with(Comparator<V> comparator, K key1, V value1, K key2, V value2)
+            public <K, V> ImmutableSortedSetMultimap<K, V> with(Comparator<? super V> comparator, K key1, V value1, K key2, V value2)
             {
                 TreeSortedSetMultimap<K, V> treeSortedSetMultimap = TreeSortedSetMultimap.newMultimap(comparator);
                 treeSortedSetMultimap.put(key1, value1);
@@ -219,12 +219,12 @@ public final class Multimaps
                 return treeSortedSetMultimap.toImmutable();
             }
 
-            public <K, V> ImmutableSortedSetMultimap<K, V> of(Comparator<V> comparator, K key1, V value1, K key2, V value2, K key3, V value3)
+            public <K, V> ImmutableSortedSetMultimap<K, V> of(Comparator<? super V> comparator, K key1, V value1, K key2, V value2, K key3, V value3)
             {
                 return this.with(comparator, key1, value1, key2, value2, key3, value3);
             }
 
-            public <K, V> ImmutableSortedSetMultimap<K, V> with(Comparator<V> comparator, K key1, V value1, K key2, V value2, K key3, V value3)
+            public <K, V> ImmutableSortedSetMultimap<K, V> with(Comparator<? super V> comparator, K key1, V value1, K key2, V value2, K key3, V value3)
             {
                 TreeSortedSetMultimap<K, V> treeSortedSetMultimap = TreeSortedSetMultimap.newMultimap(comparator);
                 treeSortedSetMultimap.put(key1, value1);
