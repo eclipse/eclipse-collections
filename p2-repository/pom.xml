@@ -49,8 +49,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <!-- versions used for plug-ins below -->
-        <tycho-version>1.0.0</tycho-version>
-        <tycho-extras-version>1.0.0</tycho-extras-version>
+        <tycho-version>1.2.0</tycho-version>
+        <tycho-extras-version>1.2.0</tycho-extras-version>
 
         <!-- versions of the EBR plug-in to use -->
         <ebr-version>1.0.0-SNAPSHOT</ebr-version>
