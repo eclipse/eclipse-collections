@@ -10,8 +10,12 @@
 
 package org.eclipse.collections.impl.map.mutable;
 
+import java.util.Map;
+
 import org.eclipse.collections.api.factory.map.MutableMapFactory;
+import org.eclipse.collections.api.map.MapIterable;
 import org.eclipse.collections.api.map.MutableMap;
+import org.eclipse.collections.impl.factory.Maps;
 
 public enum MutableMapFactoryImpl implements MutableMapFactory
 {
@@ -93,5 +97,31 @@ public enum MutableMapFactoryImpl implements MutableMapFactory
     public <K, V> MutableMap<K, V> with(K key1, V value1, K key2, V value2, K key3, V value3, K key4, V value4)
     {
         return UnifiedMap.newWithKeysValues(key1, value1, key2, value2, key3, value3, key4, value4);
+    }
+
+    @Override
+    public <K, V> MutableMap<K, V> ofMap(Map<? extends K, ? extends V> map)
+    {
+        return this.withMap(map);
+    }
+
+    @Override
+    public <K, V> MutableMap<K, V> withMap(Map<? extends K, ? extends V> map)
+    {
+        return UnifiedMap.newMap(map);
+    }
+
+    @Override
+    public <K, V> MutableMap<K, V> ofMapIterable(MapIterable<? extends K, ? extends V> mapIterable)
+    {
+        return this.withMapIterable(mapIterable);
+    }
+
+    @Override
+    public <K, V> MutableMap<K, V> withMapIterable(MapIterable<? extends K, ? extends V> mapIterable)
+    {
+        MutableMap<K, V> output = Maps.mutable.withInitialCapacity(mapIterable.size());
+        mapIterable.forEachKeyValue(output::put);
+        return output;
     }
 }

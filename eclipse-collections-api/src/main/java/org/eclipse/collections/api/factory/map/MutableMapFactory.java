@@ -10,6 +10,9 @@
 
 package org.eclipse.collections.api.factory.map;
 
+import java.util.Map;
+
+import org.eclipse.collections.api.map.MapIterable;
 import org.eclipse.collections.api.map.MutableMap;
 
 public interface MutableMapFactory
@@ -68,4 +71,12 @@ public interface MutableMapFactory
     <K, V> MutableMap<K, V> of(K key1, V value1, K key2, V value2, K key3, V value3, K key4, V value4);
 
     <K, V> MutableMap<K, V> with(K key1, V value1, K key2, V value2, K key3, V value3, K key4, V value4);
+
+    <K, V> MutableMap<K, V> ofMap(Map<? extends K, ? extends V> map);
+
+    <K, V> MutableMap<K, V> withMap(Map<? extends K, ? extends V> map);
+
+    <K, V> MutableMap<K, V> ofMapIterable(MapIterable<? extends K, ? extends V> mapIterable);
+
+    <K, V> MutableMap<K, V> withMapIterable(MapIterable<? extends K, ? extends V> mapIterable);
 }

@@ -11,9 +11,11 @@
 package org.eclipse.collections.impl.factory;
 
 import java.lang.reflect.Field;
+import java.util.HashMap;
 
 import org.eclipse.collections.api.factory.map.FixedSizeMapFactory;
 import org.eclipse.collections.api.factory.map.ImmutableMapFactory;
+import org.eclipse.collections.api.factory.map.MutableMapFactory;
 import org.eclipse.collections.api.factory.map.sorted.MutableSortedMapFactory;
 import org.eclipse.collections.api.map.FixedSizeMap;
 import org.eclipse.collections.api.map.ImmutableMap;
@@ -21,6 +23,7 @@ import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.test.domain.Key;
+import org.eclipse.collections.impl.tuple.Tuples;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -246,5 +249,23 @@ public class MapsTest
         {
             Assert.fail("No access the field table in UnifiedMap");
         }
+    }
+
+    @Test
+    public void ofAll()
+    {
+        MutableMapFactory factory = Maps.mutable;
+
+        Assert.assertEquals(UnifiedMap.newMap(), factory.ofMap(new HashMap<>()));
+        Verify.assertInstanceOf(UnifiedMap.class, factory.ofMap(new HashMap<>()));
+
+        Assert.assertEquals(UnifiedMap.newMap(), factory.ofMapIterable(Maps.immutable.with()));
+        Verify.assertInstanceOf(UnifiedMap.class, factory.ofMapIterable(Maps.immutable.with()));
+
+        Assert.assertEquals(UnifiedMap.newMapWith(Tuples.pair(1, 1)), factory.ofMap(Maps.mutable.with(1, 1)));
+        Verify.assertInstanceOf(UnifiedMap.class, factory.ofMap(Maps.mutable.with(1, 1)));
+
+        Assert.assertEquals(UnifiedMap.newMapWith(Tuples.pair(1, 1)), factory.ofMapIterable(Maps.mutable.with(1, 1)));
+        Verify.assertInstanceOf(UnifiedMap.class, factory.ofMapIterable(Maps.mutable.with(1, 1)));
     }
 }
