@@ -16,9 +16,11 @@ import org.eclipse.collections.api.multimap.list.ImmutableListMultimap;
 import org.eclipse.collections.api.multimap.list.MutableListMultimap;
 import org.eclipse.collections.api.multimap.set.ImmutableSetMultimap;
 import org.eclipse.collections.api.multimap.set.MutableSetMultimap;
+import org.eclipse.collections.api.multimap.sortedbag.ImmutableSortedBagMultimap;
 import org.eclipse.collections.api.multimap.sortedset.ImmutableSortedSetMultimap;
 import org.eclipse.collections.api.multimap.sortedset.MutableSortedSetMultimap;
 import org.eclipse.collections.impl.multimap.bag.HashBagMultimap;
+import org.eclipse.collections.impl.multimap.bag.sorted.mutable.TreeBagMultimap;
 import org.eclipse.collections.impl.multimap.list.FastListMultimap;
 import org.eclipse.collections.impl.multimap.set.UnifiedSetMultimap;
 import org.eclipse.collections.impl.multimap.set.sorted.TreeSortedSetMultimap;
@@ -70,8 +72,27 @@ public class MultimapsTest
         Assert.assertEquals(TreeSortedSetMultimap.newMultimap(Tuples.pair(1, 1)), one);
         ImmutableSortedSetMultimap<Integer, Integer> two = Multimaps.immutable.sortedSet.of(Integer::compareTo, 1, 1, 2, 2);
         Assert.assertEquals(TreeSortedSetMultimap.newMultimap(Tuples.pair(1, 1), Tuples.pair(2, 2)), two);
+        ImmutableSortedSetMultimap<? extends Object, ? extends Object> toStringOffTwo = Multimaps.immutable.sortedSet.of(String::compareTo, "A" , "B");
+        Assert.assertEquals(TreeSortedSetMultimap.newMultimap(Tuples.pair("A", "B")), toStringOffTwo);
         ImmutableSortedSetMultimap<Integer, Integer> three = Multimaps.immutable.sortedSet.of(Integer::compareTo, 1, 1, 2, 2, 3, 3);
         Assert.assertEquals(TreeSortedSetMultimap.newMultimap(Tuples.pair(1, 1), Tuples.pair(2, 2), Tuples.pair(3, 3)), three);
+    }
+
+    @Test
+    public void immutableSortedBagMultimap()
+    {
+        ImmutableSortedBagMultimap<Integer, Integer> empty = Multimaps.immutable.multimap.of(Integer::compareTo);
+        ImmutableSortedBagMultimap<Integer, Integer> emptyWith = Multimaps.immutable.multimap.with(Integer::compareTo);
+        Verify.assertEmpty(empty);
+        Verify.assertEmpty(emptyWith);
+        ImmutableSortedBagMultimap<Integer, Integer> one = Multimaps.immutable.multimap.of(Integer::compareTo, 1, 1);
+        Assert.assertEquals(TreeBagMultimap.newMultimap(Tuples.pair(1, 1)), one);
+        ImmutableSortedBagMultimap<Integer, Integer> two = Multimaps.immutable.multimap.of(Integer::compareTo, 1, 1, 2, 2);
+        ImmutableSortedBagMultimap<? extends Object, ? extends Object> toStringOffTwo = Multimaps.immutable.multimap.of(String::compareTo, "A", "B");
+        Assert.assertEquals(TreeBagMultimap.newMultimap(Tuples.pair("A", "B")), toStringOffTwo);
+        Assert.assertEquals(TreeBagMultimap.newMultimap(Tuples.pair(1, 1), Tuples.pair(2, 2)), two);
+        ImmutableSortedBagMultimap<Integer, Integer> three = Multimaps.immutable.multimap.of(Integer::compareTo, 1, 1, 2, 2, 3, 3);
+        Assert.assertEquals(TreeBagMultimap.newMultimap(Tuples.pair(1, 1), Tuples.pair(2, 2), Tuples.pair(3, 3)), three);
     }
 
     @Test
