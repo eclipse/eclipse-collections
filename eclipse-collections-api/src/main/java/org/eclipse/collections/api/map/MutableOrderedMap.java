@@ -160,4 +160,19 @@ public interface MutableOrderedMap<K, V> extends OrderedMap<K, V>, MutableMapIte
 
     @Override
     <V1> MutableOrderedMap<V1, V> groupByUniqueKey(Function<? super V, ? extends V1> function);
+
+    @Override
+    MutableOrderedMap<K, V> withKeyValue(K key, V value);
+
+    @Override
+    MutableOrderedMap<K, V> withAllKeyValues(Iterable<? extends Pair<? extends K, ? extends V>> keyValues);
+
+    @Override
+    MutableOrderedMap<K, V> withAllKeyValueArguments(Pair<? extends K, ? extends V>... keyValuePairs);
+
+    @Override
+    MutableOrderedMap<K, V> withoutKey(K key);
+
+    @Override
+    MutableOrderedMap<K, V> withoutAllKeys(Iterable<? extends K> keys);
 }
