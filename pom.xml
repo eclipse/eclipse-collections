@@ -101,7 +101,6 @@
 
     <modules>
         <module>eclipse-collections-code-generator</module>
-        <module>eclipse-collections-code-generator-ant</module>
         <module>eclipse-collections-code-generator-maven-plugin</module>
         <module>eclipse-collections-api</module>
         <module>eclipse-collections</module>
@@ -573,7 +572,6 @@
 
             <modules>
                 <module>eclipse-collections-code-generator</module>
-                <module>eclipse-collections-code-generator-ant</module>
                 <module>eclipse-collections-code-generator-maven-plugin</module>
                 <module>eclipse-collections-api</module>
                 <module>eclipse-collections</module>
@@ -594,7 +592,6 @@
 
             <modules>
                 <module>eclipse-collections-code-generator</module>
-                <module>eclipse-collections-code-generator-ant</module>
                 <module>eclipse-collections-code-generator-maven-plugin</module>
                 <module>eclipse-collections-api</module>
                 <module>eclipse-collections</module>
