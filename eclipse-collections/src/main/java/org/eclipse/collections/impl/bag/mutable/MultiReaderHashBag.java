@@ -55,6 +55,7 @@ import org.eclipse.collections.api.collection.primitive.MutableLongCollection;
 import org.eclipse.collections.api.collection.primitive.MutableShortCollection;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MutableMap;
+import org.eclipse.collections.api.map.MutableMapIterable;
 import org.eclipse.collections.api.multimap.bag.MutableBagMultimap;
 import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.partition.bag.PartitionMutableBag;
@@ -713,7 +714,7 @@ public final class MultiReaderHashBag<T>
     }
 
     @Override
-    public <V> MutableMap<V, T> groupByUniqueKey(Function<? super T, ? extends V> function)
+    public <V> MutableMapIterable<V, T> groupByUniqueKey(Function<? super T, ? extends V> function)
     {
         this.acquireReadLock();
         try
@@ -1089,7 +1090,7 @@ public final class MultiReaderHashBag<T>
         }
 
         @Override
-        public <V> MutableMap<V, T> groupByUniqueKey(Function<? super T, ? extends V> function)
+        public <V> MutableMapIterable<V, T> groupByUniqueKey(Function<? super T, ? extends V> function)
         {
             return this.getDelegate().groupByUniqueKey(function);
         }

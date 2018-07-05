@@ -51,6 +51,7 @@ import org.eclipse.collections.api.collection.primitive.MutableLongCollection;
 import org.eclipse.collections.api.collection.primitive.MutableShortCollection;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MutableMap;
+import org.eclipse.collections.api.map.MutableMapIterable;
 import org.eclipse.collections.api.map.sorted.MutableSortedMap;
 import org.eclipse.collections.api.multimap.MutableMultimap;
 import org.eclipse.collections.api.set.MutableSet;
@@ -727,7 +728,7 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
     }
 
     @Override
-    public <V, R extends MutableMap<V, T>> R groupByUniqueKey(
+    public <V, R extends MutableMapIterable<V, T>> R groupByUniqueKey(
             Function<? super T, ? extends V> function,
             R target)
     {
