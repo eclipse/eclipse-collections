@@ -34,6 +34,7 @@ import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
 import org.eclipse.collections.api.list.ListIterable;
 import org.eclipse.collections.api.map.MutableMap;
+import org.eclipse.collections.api.map.MutableMapIterable;
 import org.eclipse.collections.api.map.primitive.ObjectDoubleMap;
 import org.eclipse.collections.api.map.primitive.ObjectLongMap;
 import org.eclipse.collections.api.multimap.MutableMultimap;
@@ -974,7 +975,7 @@ public final class ParallelIterate
                 ParallelIterate.DEFAULT_MIN_FORK_SIZE);
     }
 
-    public static <T, K, V, R extends MutableMap<K, V>> R aggregateBy(
+    public static <T, K, V, R extends MutableMapIterable<K, V>> R aggregateBy(
             Iterable<T> iterable,
             Function<? super T, ? extends K> groupBy,
             Function0<? extends V> zeroValueFactory,
@@ -1006,7 +1007,7 @@ public final class ParallelIterate
                 ParallelIterate.EXECUTOR_SERVICE);
     }
 
-    public static <T, K, V, R extends MutableMap<K, V>> R aggregateBy(
+    public static <T, K, V, R extends MutableMapIterable<K, V>> R aggregateBy(
             Iterable<T> iterable,
             Function<? super T, ? extends K> groupBy,
             Function0<? extends V> zeroValueFactory,
@@ -1042,7 +1043,7 @@ public final class ParallelIterate
                 executor);
     }
 
-    public static <T, K, V, R extends MutableMap<K, V>> R aggregateBy(
+    public static <T, K, V, R extends MutableMapIterable<K, V>> R aggregateBy(
             Iterable<T> iterable,
             Function<? super T, ? extends K> groupBy,
             Function0<? extends V> zeroValueFactory,
@@ -1076,7 +1077,7 @@ public final class ParallelIterate
                 ParallelIterate.DEFAULT_MIN_FORK_SIZE);
     }
 
-    public static <T, K, V, R extends MutableMap<K, V>> R aggregateInPlaceBy(
+    public static <T, K, V, R extends MutableMapIterable<K, V>> R aggregateInPlaceBy(
             Iterable<T> iterable,
             Function<? super T, ? extends K> groupBy,
             Function0<? extends V> zeroValueFactory,
@@ -1108,7 +1109,7 @@ public final class ParallelIterate
                 ParallelIterate.EXECUTOR_SERVICE);
     }
 
-    public static <T, K, V, R extends MutableMap<K, V>> R aggregateInPlaceBy(
+    public static <T, K, V, R extends MutableMapIterable<K, V>> R aggregateInPlaceBy(
             Iterable<T> iterable,
             Function<? super T, ? extends K> groupBy,
             Function0<? extends V> zeroValueFactory,
@@ -1146,7 +1147,7 @@ public final class ParallelIterate
         return map;
     }
 
-    public static <T, K, V, R extends MutableMap<K, V>> R aggregateInPlaceBy(
+    public static <T, K, V, R extends MutableMapIterable<K, V>> R aggregateInPlaceBy(
             Iterable<T> iterable,
             Function<? super T, ? extends K> groupBy,
             Function0<? extends V> zeroValueFactory,

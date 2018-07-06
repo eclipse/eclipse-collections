@@ -14,7 +14,7 @@ import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
-import org.eclipse.collections.api.map.MutableMap;
+import org.eclipse.collections.api.map.MutableMapIterable;
 
 /**
  * This procedure is used to apply an aggregate function like sum on a grouped set of data.  The values in the
@@ -24,12 +24,16 @@ import org.eclipse.collections.api.map.MutableMap;
 public final class MutatingAggregationProcedure<T, K, V> implements Procedure<T>
 {
     private static final long serialVersionUID = 1L;
-    private final MutableMap<K, V> map;
+    private final MutableMapIterable<K, V> map;
     private final Function<? super T, ? extends K> groupBy;
     private final Function0<? extends V> zeroValueFactory;
     private final Procedure2<? super V, ? super T> mutatingAggregator;
 
-    public MutatingAggregationProcedure(MutableMap<K, V> map, Function<? super T, ? extends K> groupBy, Function0<? extends V> zeroValueFactory, Procedure2<? super V, ? super T> mutatingAggregator)
+    public MutatingAggregationProcedure(
+            MutableMapIterable<K, V> map,
+            Function<? super T, ? extends K> groupBy,
+            Function0<? extends V> zeroValueFactory,
+            Procedure2<? super V, ? super T> mutatingAggregator)
     {
         this.map = map;
         this.groupBy = groupBy;

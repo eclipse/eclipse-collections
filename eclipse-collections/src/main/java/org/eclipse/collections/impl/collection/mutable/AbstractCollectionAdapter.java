@@ -52,6 +52,7 @@ import org.eclipse.collections.api.collection.primitive.MutableLongCollection;
 import org.eclipse.collections.api.collection.primitive.MutableShortCollection;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MutableMap;
+import org.eclipse.collections.api.map.MutableMapIterable;
 import org.eclipse.collections.api.map.primitive.MutableObjectDoubleMap;
 import org.eclipse.collections.api.map.primitive.MutableObjectLongMap;
 import org.eclipse.collections.api.map.sorted.MutableSortedMap;
@@ -909,7 +910,7 @@ public abstract class AbstractCollectionAdapter<T>
     }
 
     @Override
-    public <V, R extends MutableMap<V, T>> R groupByUniqueKey(
+    public <V, R extends MutableMapIterable<V, T>> R groupByUniqueKey(
             Function<? super T, ? extends V> function,
             R target)
     {

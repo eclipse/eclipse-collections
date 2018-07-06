@@ -93,6 +93,7 @@ import org.eclipse.collections.api.collection.primitive.MutableLongCollection;
 import org.eclipse.collections.api.collection.primitive.MutableShortCollection;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MutableMap;
+import org.eclipse.collections.api.map.MutableMapIterable;
 import org.eclipse.collections.api.map.primitive.<name>ObjectMap;
 import org.eclipse.collections.api.map.primitive.Mutable<name>ObjectMap;
 <if(!primitive.longPrimitive)><if(!primitive.doublePrimitive)>import org.eclipse.collections.api.map.primitive.MutableObject<name>Map;<endif><endif>
@@ -1323,7 +1324,7 @@ public class Synchronized<name>ObjectMap\<V>
     }
 
     @Override
-    public \<VV, R extends MutableMap\<VV, V>\> R groupByUniqueKey(Function\<? super V, ? extends VV> function, R target)
+    public \<VV, R extends MutableMapIterable\<VV, V>\> R groupByUniqueKey(Function\<? super V, ? extends VV> function, R target)
     {
         synchronized (this.lock)
         {

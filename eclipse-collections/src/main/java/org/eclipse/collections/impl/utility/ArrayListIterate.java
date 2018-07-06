@@ -61,6 +61,7 @@ import org.eclipse.collections.api.list.primitive.MutableIntList;
 import org.eclipse.collections.api.list.primitive.MutableLongList;
 import org.eclipse.collections.api.list.primitive.MutableShortList;
 import org.eclipse.collections.api.map.MutableMap;
+import org.eclipse.collections.api.map.MutableMapIterable;
 import org.eclipse.collections.api.multimap.MutableMultimap;
 import org.eclipse.collections.api.partition.list.PartitionMutableList;
 import org.eclipse.collections.api.set.MutableSet;
@@ -1834,9 +1835,9 @@ public final class ArrayListIterate
     }
 
     /**
-     * @see Iterate#groupByUniqueKey(Iterable, Function, MutableMap)
+     * @see Iterate#groupByUniqueKey(Iterable, Function, MutableMapIterable)
      */
-    public static <T, V, R extends MutableMap<V, T>> R groupByUniqueKey(
+    public static <T, V, R extends MutableMapIterable<V, T>> R groupByUniqueKey(
             ArrayList<T> list,
             Function<? super T, ? extends V> function,
             R target)

@@ -42,7 +42,7 @@ import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
 import org.eclipse.collections.api.list.ListIterable;
 import org.eclipse.collections.api.list.MutableList;
-import org.eclipse.collections.api.map.MutableMap;
+import org.eclipse.collections.api.map.MutableMapIterable;
 import org.eclipse.collections.api.map.primitive.MutableObjectDoubleMap;
 import org.eclipse.collections.api.map.primitive.MutableObjectLongMap;
 import org.eclipse.collections.api.multimap.MutableMultimap;
@@ -285,7 +285,7 @@ public final class InternalArrayIterate
         return target;
     }
 
-    public static <T, K, R extends MutableMap<K, T>> R groupByUniqueKey(
+    public static <T, K, R extends MutableMapIterable<K, T>> R groupByUniqueKey(
             T[] array,
             int size,
             Function<? super T, ? extends K> function,
