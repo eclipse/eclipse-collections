@@ -59,6 +59,7 @@ import org.eclipse.collections.api.collection.primitive.MutableShortCollection;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.api.map.MutableMap;
+import org.eclipse.collections.api.map.MutableMapIterable;
 import org.eclipse.collections.api.map.primitive.MutableObjectDoubleMap;
 import org.eclipse.collections.api.map.primitive.MutableObjectLongMap;
 import org.eclipse.collections.api.map.sorted.MutableSortedMap;
@@ -771,7 +772,7 @@ public class UnmodifiableMutableMap<K, V>
     }
 
     @Override
-    public <VV, R extends MutableMap<VV, V>> R groupByUniqueKey(Function<? super V, ? extends VV> function, R target)
+    public <VV, R extends MutableMapIterable<VV, V>> R groupByUniqueKey(Function<? super V, ? extends VV> function, R target)
     {
         return this.getMutableMap().groupByUniqueKey(function, target);
     }

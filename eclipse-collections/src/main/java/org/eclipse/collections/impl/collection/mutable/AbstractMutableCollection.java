@@ -33,6 +33,7 @@ import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.collection.MutableCollection;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MutableMap;
+import org.eclipse.collections.api.map.MutableMapIterable;
 import org.eclipse.collections.api.map.primitive.MutableObjectDoubleMap;
 import org.eclipse.collections.api.map.primitive.MutableObjectLongMap;
 import org.eclipse.collections.api.tuple.Twin;
@@ -248,7 +249,7 @@ public abstract class AbstractMutableCollection<T>
     }
 
     @Override
-    public <V> MutableMap<V, T> groupByUniqueKey(Function<? super T, ? extends V> function)
+    public <V> MutableMapIterable<V, T> groupByUniqueKey(Function<? super T, ? extends V> function)
     {
         return Iterate.groupByUniqueKey(this, function);
     }

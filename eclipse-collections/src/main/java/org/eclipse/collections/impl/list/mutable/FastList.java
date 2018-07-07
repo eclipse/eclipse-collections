@@ -72,7 +72,7 @@ import org.eclipse.collections.api.list.primitive.MutableFloatList;
 import org.eclipse.collections.api.list.primitive.MutableIntList;
 import org.eclipse.collections.api.list.primitive.MutableLongList;
 import org.eclipse.collections.api.list.primitive.MutableShortList;
-import org.eclipse.collections.api.map.MutableMap;
+import org.eclipse.collections.api.map.MutableMapIterable;
 import org.eclipse.collections.api.map.primitive.MutableObjectDoubleMap;
 import org.eclipse.collections.api.map.primitive.MutableObjectLongMap;
 import org.eclipse.collections.api.multimap.MutableMultimap;
@@ -542,13 +542,13 @@ public class FastList<T>
     }
 
     @Override
-    public <K> MutableMap<K, T> groupByUniqueKey(Function<? super T, ? extends K> function)
+    public <K> MutableMapIterable<K, T> groupByUniqueKey(Function<? super T, ? extends K> function)
     {
         return this.groupByUniqueKey(function, UnifiedMap.newMap(this.size()));
     }
 
     @Override
-    public <K, R extends MutableMap<K, T>> R groupByUniqueKey(Function<? super T, ? extends K> function, R target)
+    public <K, R extends MutableMapIterable<K, T>> R groupByUniqueKey(Function<? super T, ? extends K> function, R target)
     {
         return InternalArrayIterate.groupByUniqueKey(this.items, this.size, function, target);
     }

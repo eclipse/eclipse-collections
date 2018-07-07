@@ -40,6 +40,7 @@ import org.eclipse.collections.api.collection.primitive.MutableLongCollection;
 import org.eclipse.collections.api.collection.primitive.MutableShortCollection;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MutableMap;
+import org.eclipse.collections.api.map.MutableMapIterable;
 import org.eclipse.collections.api.map.primitive.MutableObjectDoubleMap;
 import org.eclipse.collections.api.map.primitive.MutableObjectLongMap;
 import org.eclipse.collections.api.multimap.MutableMultimap;
@@ -509,7 +510,7 @@ public interface MutableCollection<T>
     <V> MutableMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function);
 
     @Override
-    <V> MutableMap<V, T> groupByUniqueKey(Function<? super T, ? extends V> function);
+    <V> MutableMapIterable<V, T> groupByUniqueKey(Function<? super T, ? extends V> function);
 
     /**
      * @deprecated in 6.0. Use {@link OrderedIterable#zip(Iterable)} instead.

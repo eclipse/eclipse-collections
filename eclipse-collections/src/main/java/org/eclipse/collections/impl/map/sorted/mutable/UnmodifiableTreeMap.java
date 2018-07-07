@@ -806,7 +806,7 @@ public class UnmodifiableTreeMap<K, V>
     }
 
     @Override
-    public <VV, R extends MutableMap<VV, V>> R groupByUniqueKey(Function<? super V, ? extends VV> function, R target)
+    public <VV, R extends MutableMapIterable<VV, V>> R groupByUniqueKey(Function<? super V, ? extends VV> function, R target)
     {
         return this.getMutableSortedMap().groupByUniqueKey(function, target);
     }

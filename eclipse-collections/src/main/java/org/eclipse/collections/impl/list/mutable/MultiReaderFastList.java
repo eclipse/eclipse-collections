@@ -10,6 +10,8 @@
 
 package org.eclipse.collections.impl.list.mutable;
 
+import static org.eclipse.collections.impl.factory.Iterables.mList;
+
 import java.io.Externalizable;
 import java.io.IOException;
 import java.io.ObjectInput;
@@ -63,7 +65,7 @@ import org.eclipse.collections.api.list.primitive.MutableFloatList;
 import org.eclipse.collections.api.list.primitive.MutableIntList;
 import org.eclipse.collections.api.list.primitive.MutableLongList;
 import org.eclipse.collections.api.list.primitive.MutableShortList;
-import org.eclipse.collections.api.map.MutableMap;
+import org.eclipse.collections.api.map.MutableMapIterable;
 import org.eclipse.collections.api.multimap.list.MutableListMultimap;
 import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.partition.list.PartitionMutableList;
@@ -76,8 +78,6 @@ import org.eclipse.collections.impl.lazy.parallel.list.ListIterableParallelItera
 import org.eclipse.collections.impl.lazy.parallel.list.MultiReaderParallelListIterable;
 import org.eclipse.collections.impl.stack.mutable.ArrayStack;
 import org.eclipse.collections.impl.utility.LazyIterate;
-
-import static org.eclipse.collections.impl.factory.Iterables.mList;
 
 /**
  * MultiReadFastList provides a thread-safe wrapper around a FastList, using a ReentrantReadWriteLock.  In order to
@@ -1304,7 +1304,7 @@ public final class MultiReaderFastList<T>
         }
 
         @Override
-        public <V> MutableMap<V, T> groupByUniqueKey(Function<? super T, ? extends V> function)
+        public <V> MutableMapIterable<V, T> groupByUniqueKey(Function<? super T, ? extends V> function)
         {
             return this.getDelegate().groupByUniqueKey(function);
         }
@@ -1810,7 +1810,7 @@ public final class MultiReaderFastList<T>
     }
 
     @Override
-    public <V> MutableMap<V, T> groupByUniqueKey(Function<? super T, ? extends V> function)
+    public <V> MutableMapIterable<V, T> groupByUniqueKey(Function<? super T, ? extends V> function)
     {
         this.acquireReadLock();
         try

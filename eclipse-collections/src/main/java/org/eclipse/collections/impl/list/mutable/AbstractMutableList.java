@@ -55,7 +55,7 @@ import org.eclipse.collections.api.list.primitive.MutableFloatList;
 import org.eclipse.collections.api.list.primitive.MutableIntList;
 import org.eclipse.collections.api.list.primitive.MutableLongList;
 import org.eclipse.collections.api.list.primitive.MutableShortList;
-import org.eclipse.collections.api.map.MutableMap;
+import org.eclipse.collections.api.map.MutableMapIterable;
 import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.partition.list.PartitionMutableList;
 import org.eclipse.collections.api.set.MutableSet;
@@ -1132,7 +1132,7 @@ public abstract class AbstractMutableList<T>
     }
 
     @Override
-    public <K> MutableMap<K, T> groupByUniqueKey(Function<? super T, ? extends K> function)
+    public <K> MutableMapIterable<K, T> groupByUniqueKey(Function<? super T, ? extends K> function)
     {
         return ListIterate.groupByUniqueKey(this, function);
     }
