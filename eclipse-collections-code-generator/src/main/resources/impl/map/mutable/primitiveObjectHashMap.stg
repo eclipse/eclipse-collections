@@ -185,8 +185,6 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
     private static final int DEFAULT_INITIAL_CAPACITY = 8;
     private static final <type> EMPTY_KEY = <(literal.(type))("0")>;
     private static final <type> REMOVED_KEY = <(literal.(type))("1")>;
-    private static final int OCCUPIED_DATA_RATIO = 2;
-    private static final int OCCUPIED_SENTINEL_RATIO = 4;
     private static final int CACHE_LINE_SIZE = 64;
     private static final int KEY_SIZE = <keySize.(type)>;
     private static final int INITIAL_LINEAR_PROBE = CACHE_LINE_SIZE / KEY_SIZE / 2; /* half a cache line */
@@ -211,7 +209,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         {
             throw new IllegalArgumentException("initial capacity cannot be less than 0");
         }
-        int capacity = this.smallestPowerOfTwoGreaterThan(this.fastCeil(initialCapacity * OCCUPIED_DATA_RATIO));
+        int capacity = this.smallestPowerOfTwoGreaterThan(this.fastCeil(initialCapacity \<\< 1));
         this.allocateTable(capacity);
     }
 
@@ -2796,7 +2794,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         this.keys[index] = key;
         this.values[index] = value;
         ++this.occupiedWithData;
-        if (this.occupiedWithData > this.maxOccupiedWithData())
+        if (this.occupiedWithData + this.occupiedWithSentinels > this.maxOccupiedWithData())
         {
             this.rehashAndGrow();
         }
@@ -2812,10 +2810,6 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         this.values[index] = null;
         this.occupiedWithData--;
         this.occupiedWithSentinels++;
-        if (this.occupiedWithSentinels > this.maxOccupiedWithSentinels())
-        {
-            this.rehash();
-        }
     }
 
     private void copyKeys()
@@ -2954,14 +2948,15 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         this.rehash(this.smallestPowerOfTwoGreaterThan(this.size()));
     }
 
-    private void rehash()
-    {
-        this.rehash(this.keys.length);
-    }
-
     private void rehashAndGrow()
     {
-        this.rehash(this.keys.length \<\< 1);
+        int max = this.maxOccupiedWithData();
+        int newCapacity = Math.max(max, smallestPowerOfTwoGreaterThan((this.occupiedWithData + 1) \<\< 1));
+        if (this.occupiedWithSentinels > 0 && (max >\> 1) + (max >\> 2) \< this.occupiedWithData)
+        {
+            newCapacity \<\<= 1;
+        }
+        this.rehash(newCapacity);
     }
 
     private void rehash(int newCapacity)
@@ -3018,12 +3013,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
     {
         int capacity = this.keys.length;
         // need at least one free slot for open addressing
-        return Math.min(capacity - 1, capacity / OCCUPIED_DATA_RATIO);
-    }
-
-    private int maxOccupiedWithSentinels()
-    {
-        return this.keys.length / OCCUPIED_SENTINEL_RATIO;
+        return Math.min(capacity - 1, capacity >\> 1);
     }
 
     private class KeySet implements Mutable<name>Set

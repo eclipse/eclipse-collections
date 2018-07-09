@@ -913,7 +913,13 @@ public class <name1><name2>HashMap extends AbstractMutable<name2>ValuesMap imple
 
     private void rehashAndGrow()
     {
-        this.rehash(this.<keyArray>.length<if(!sameTwoPrimitives)> \<\< 1<endif>);
+        int max = this.maxOccupiedWithData();
+        int newCapacity = Math.max(max, smallestPowerOfTwoGreaterThan((this.occupiedWithData + 1) \<\< 1));
+        if (this.occupiedWithSentinels > 0 && (max >\> 1) + (max >\> 2) \< this.occupiedWithData)
+        {
+            newCapacity \<\<= 1;
+        }
+        this.rehash(newCapacity);
     }
 
     private void rehash(int newCapacity)

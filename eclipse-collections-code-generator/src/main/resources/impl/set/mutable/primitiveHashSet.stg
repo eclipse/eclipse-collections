@@ -56,8 +56,6 @@ import org.eclipse.collections.impl.set.primitive.Abstract<name>Set;
 public class <name>HashSet extends Abstract<name>Set implements Mutable<name>Set, Externalizable
 {
     private static final long serialVersionUID = 1L;
-    private static final int OCCUPIED_DATA_RATIO = 2;
-    private static final int OCCUPIED_SENTINEL_RATIO = 4;
     private static final int DEFAULT_INITIAL_CAPACITY = 16;
     private static final <type> EMPTY = <(literal.(type))("0")>;
     private static final <type> REMOVED = <(literal.(type))("1")>;
@@ -84,7 +82,7 @@ public class <name>HashSet extends Abstract<name>Set implements Mutable<name>Set
         {
             throw new IllegalArgumentException("initial capacity cannot be less than 0");
         }
-        int capacity = this.smallestPowerOfTwoGreaterThan(this.fastCeil(initialCapacity * OCCUPIED_DATA_RATIO));
+        int capacity = this.smallestPowerOfTwoGreaterThan(initialCapacity \<\< 1);
         this.allocateTable(capacity);
     }
 
@@ -108,16 +106,6 @@ public class <name>HashSet extends Abstract<name>Set implements Mutable<name>Set
     private int smallestPowerOfTwoGreaterThan(int n)
     {
         return n > 1 ? Integer.highestOneBit(n - 1) \<\< 1 : 1;
-    }
-
-    private int fastCeil(float v)
-    {
-        int possibleResult = (int) v;
-        if (v - possibleResult > 0.0F)
-        {
-            possibleResult++;
-        }
-        return possibleResult;
     }
 
     public static <name>HashSet newSet(<name>Iterable source)
@@ -244,7 +232,7 @@ public class <name>HashSet extends Abstract<name>Set implements Mutable<name>Set
         }
         this.table[index] = element;
         ++this.occupiedWithData;
-        if (this.occupiedWithData > this.maxOccupiedWithData())
+        if (this.occupiedWithData + this.occupiedWithSentinels > this.maxOccupiedWithData())
         {
             this.rehashAndGrow();
         }
@@ -302,6 +290,10 @@ public class <name>HashSet extends Abstract<name>Set implements Mutable<name>Set
         {
             return this.removeZeroToThirtyOne(value);
         }
+        if (this.occupiedWithData == 0)
+        {
+            return false;
+        }
         int index = this.probe(value);
         if (<(equals.(type))("this.table[index]", "value")>)
         {
@@ -312,11 +304,6 @@ public class <name>HashSet extends Abstract<name>Set implements Mutable<name>Set
             this.table[index] = REMOVED;
             this.occupiedWithData--;
             this.occupiedWithSentinels++;
-            if (this.occupiedWithSentinels > this.maxOccupiedWithSentinels())
-            {
-                this.rehash();
-            }
-
             return true;
         }
         return false;
@@ -931,14 +918,15 @@ public class <name>HashSet extends Abstract<name>Set implements Mutable<name>Set
         this.rehash(this.smallestPowerOfTwoGreaterThan(this.size()));
     }
 
-    private void rehash()
-    {
-        this.rehash(this.table.length);
-    }
-
     private void rehashAndGrow()
     {
-        this.rehash(this.table.length \<\< 1);
+        int max = this.maxOccupiedWithData();
+        int newCapacity = Math.max(max, smallestPowerOfTwoGreaterThan((this.occupiedWithData + 1) \<\< 1));
+        if (this.occupiedWithSentinels > 0 && (max >\> 1) + (max >\> 2) \< this.occupiedWithData)
+        {
+            newCapacity \<\<= 1;
+        }
+        this.rehash(newCapacity);
     }
 
     private void rehash(int newCapacity)
@@ -1060,14 +1048,7 @@ public class <name>HashSet extends Abstract<name>Set implements Mutable<name>Set
 
     private int maxOccupiedWithData()
     {
-        int capacity = this.table.length;
-        // need at least one free slot for open addressing
-        return Math.min(capacity - 1, capacity / OCCUPIED_DATA_RATIO);
-    }
-
-    private int maxOccupiedWithSentinels()
-    {
-        return this.table.length / OCCUPIED_SENTINEL_RATIO;
+        return this.table.length >\> 1;
     }
 
     private static boolean isNonSentinel(<type> value)

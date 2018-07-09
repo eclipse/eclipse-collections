@@ -168,15 +168,15 @@ public class <name>HashSetTest extends Abstract<name>SetTestCase
         Assert.assertTrue(hashSet.remove(<(literal.(type))("36")>));
         Assert.assertEquals(16L, ((<type>[]) table.get(hashSet)).length);
         Assert.assertEquals(3, occupiedWithData.get(hashSet));
-        Assert.assertEquals(0, occupiedWithSentinels.get(hashSet));
+        Assert.assertEquals(5, occupiedWithSentinels.get(hashSet));
 
         Assert.assertFalse(hashSet.remove(<(literal.(type))("36")>));
         Assert.assertEquals(3, occupiedWithData.get(hashSet));
-        Assert.assertEquals(0, occupiedWithSentinels.get(hashSet));
+        Assert.assertEquals(5, occupiedWithSentinels.get(hashSet));
 
         Assert.assertFalse(hashSet.remove(<(literal.(type))("1")>));
         Assert.assertEquals(3, occupiedWithData.get(hashSet));
-        Assert.assertEquals(0, occupiedWithSentinels.get(hashSet));
+        Assert.assertEquals(5, occupiedWithSentinels.get(hashSet));
 
         <name>HashSet setForCopyTable = <name>HashSet.newSetWith(<["36", "37", "38", "39"]:(literal.(type))(); separator=", ">);
         setForCopyTable.freeze();

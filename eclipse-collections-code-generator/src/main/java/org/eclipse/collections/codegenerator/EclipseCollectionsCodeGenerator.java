@@ -225,7 +225,7 @@ public class EclipseCollectionsCodeGenerator
         {
             String error = String.format("String template %s error while processing [%s]: %s", errorType, EclipseCollectionsCodeGenerator.this.url.getPath(), stMessage.toString());
             this.errorListener.error(error);
-            throw new RuntimeException();
+            throw new RuntimeException(error);
         }
 
         @Override
