@@ -95,7 +95,7 @@ public final class Procedures2
      *
      * @since 9.2.
      */
-    public static <T> Procedure2<DoubleSummaryStatistics, T> summarizeDouble(DoubleFunction<T> function)
+    public static <T> Procedure2<DoubleSummaryStatistics, T> summarizeDouble(DoubleFunction<? super T> function)
     {
         return (DoubleSummaryStatistics dss, T value) -> dss.accept(function.doubleValueOf(value));
     }
@@ -105,7 +105,7 @@ public final class Procedures2
      *
      * @since 9.2.
      */
-    public static <T> Procedure2<DoubleSummaryStatistics, T> summarizeFloat(FloatFunction<T> function)
+    public static <T> Procedure2<DoubleSummaryStatistics, T> summarizeFloat(FloatFunction<? super T> function)
     {
         return (DoubleSummaryStatistics dss, T value) -> dss.accept((double) function.floatValueOf(value));
     }
@@ -115,7 +115,7 @@ public final class Procedures2
      *
      * @since 9.2.
      */
-    public static <T> Procedure2<IntSummaryStatistics, T> summarizeInt(IntFunction<T> function)
+    public static <T> Procedure2<IntSummaryStatistics, T> summarizeInt(IntFunction<? super T> function)
     {
         return (IntSummaryStatistics iss, T value) -> iss.accept(function.intValueOf(value));
     }
@@ -125,7 +125,7 @@ public final class Procedures2
      *
      * @since 9.2.
      */
-    public static <T> Procedure2<LongSummaryStatistics, T> summarizeLong(LongFunction<T> function)
+    public static <T> Procedure2<LongSummaryStatistics, T> summarizeLong(LongFunction<? super T> function)
     {
         return (LongSummaryStatistics lss, T value) -> lss.accept(function.longValueOf(value));
     }

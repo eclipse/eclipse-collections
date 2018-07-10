@@ -628,7 +628,7 @@ public final class Interval
         this.reverseThis().forEach(procedure);
     }
 
-    public <R> R reverseInjectInto(R injectValue, Function2<R, Integer, R> function)
+    public <R> R reverseInjectInto(R injectValue, Function2<? super R, Integer, ? extends R> function)
     {
         return this.reverseThis().injectInto(injectValue, function);
     }

@@ -46,7 +46,7 @@ class PairImpl<T1, T2>
     }
 
     @Override
-    public void put(Map<T1, T2> map)
+    public void put(Map<? super T1, ? super T2> map)
     {
         map.put(this.one, this.two);
     }

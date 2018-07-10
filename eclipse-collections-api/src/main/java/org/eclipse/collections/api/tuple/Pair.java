@@ -26,7 +26,7 @@ public interface Pair<T1, T2>
 
     T2 getTwo();
 
-    void put(Map<T1, T2> map);
+    void put(Map<? super T1, ? super T2> map);
 
     Map.Entry<T1, T2> toEntry();
 

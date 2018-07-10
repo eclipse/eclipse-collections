@@ -78,7 +78,7 @@ public enum MultiReaderMutableListFactory implements MutableListFactory
     }
 
     @Override
-    public <T> MutableList<T> withNValues(int size, Function0<T> factory)
+    public <T> MutableList<T> withNValues(int size, Function0<? extends T> factory)
     {
         MultiReaderFastList<T> newFastList = MultiReaderFastList.newList(size);
         for (int i = 0; i < size; i++)

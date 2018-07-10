@@ -294,7 +294,7 @@ public final class StringIterate
             String string,
             String separator,
             R injectedValue,
-            Function2<R, String, R> function)
+            Function2<? super R, String, ? extends R> function)
     {
         R result = injectedValue;
         for (StringTokenizer stringTokenizer = new StringTokenizer(string, separator); stringTokenizer.hasMoreTokens(); )

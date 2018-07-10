@@ -197,34 +197,34 @@ public abstract class Predicates2<T, P>
         return (Predicates2<T, T>) GREATER_THAN_OR_EQUAL;
     }
 
-    public static <T> Predicates2<T, Object> attributeNotEqual(Function<T, ?> function)
+    public static <T> Predicates2<T, Object> attributeNotEqual(Function<? super T, ?> function)
     {
         return new AttributePredicates2<>(function, Predicates2.notEqual());
     }
 
-    public static <T, P extends Comparable<? super P>> Predicates2<T, P> attributeLessThan(Function<T, P> function)
+    public static <T, P extends Comparable<? super P>> Predicates2<T, P> attributeLessThan(Function<? super T, ? extends P> function)
     {
         return new AttributePredicates2<>(function, (Predicate2<P, P>) LESS_THAN);
     }
 
     public static <T, P extends Comparable<? super P>> Predicates2<T, P> attributeLessThanOrEqualTo(
-            Function<T, P> function)
+            Function<? super T, ? extends P> function)
     {
         return new AttributePredicates2<>(function, (Predicate2<P, P>) LESS_THAN_OR_EQUAL);
     }
 
-    public static <T, P extends Comparable<? super P>> Predicates2<T, P> attributeGreaterThan(Function<T, P> function)
+    public static <T, P extends Comparable<? super P>> Predicates2<T, P> attributeGreaterThan(Function<? super T, ? extends P> function)
     {
         return new AttributePredicates2<>(function, (Predicate2<P, P>) GREATER_THAN);
     }
 
     public static <T, P extends Comparable<? super P>> Predicates2<T, P> attributeGreaterThanOrEqualTo(
-            Function<T, P> function)
+            Function<? super T, ? extends P> function)
     {
         return new AttributePredicates2<>(function, (Predicate2<P, P>) GREATER_THAN_OR_EQUAL);
     }
 
-    public static <T> Predicates2<T, Object> attributeEqual(Function<T, ?> function)
+    public static <T> Predicates2<T, Object> attributeEqual(Function<? super T, ?> function)
     {
         return new AttributePredicates2<>(function, Predicates2.equal());
     }

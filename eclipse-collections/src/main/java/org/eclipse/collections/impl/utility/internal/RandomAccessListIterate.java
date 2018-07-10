@@ -868,7 +868,10 @@ public final class RandomAccessListIterate
         return result;
     }
 
-    public static <V, T> MutableMap<V, BigDecimal> sumByBigDecimal(List<T> list, Function<T, V> groupBy, Function<? super T, BigDecimal> function)
+    public static <V, T> MutableMap<V, BigDecimal> sumByBigDecimal(
+            List<T> list,
+            Function<? super T, ? extends V> groupBy,
+            Function<? super T, BigDecimal> function)
     {
         MutableMap<V, BigDecimal> result = UnifiedMap.newMap();
         int size = list.size();
@@ -880,7 +883,10 @@ public final class RandomAccessListIterate
         return result;
     }
 
-    public static <V, T> MutableMap<V, BigInteger> sumByBigInteger(List<T> list, Function<T, V> groupBy, Function<? super T, BigInteger> function)
+    public static <V, T> MutableMap<V, BigInteger> sumByBigInteger(
+            List<T> list,
+            Function<? super T, ? extends V> groupBy,
+            Function<? super T, BigInteger> function)
     {
         MutableMap<V, BigInteger> result = UnifiedMap.newMap();
         int size = list.size();
@@ -1722,7 +1728,10 @@ public final class RandomAccessListIterate
         return result;
     }
 
-    public static <V, T> ObjectLongMap<V> sumByInt(List<T> list, Function<T, V> groupBy, IntFunction<? super T> function)
+    public static <V, T> ObjectLongMap<V> sumByInt(
+            List<T> list,
+            Function<? super T, ? extends V> groupBy,
+            IntFunction<? super T> function)
     {
         ObjectLongHashMap<V> result = ObjectLongHashMap.newMap();
         for (int i = 0; i < list.size(); i++)
@@ -1733,7 +1742,10 @@ public final class RandomAccessListIterate
         return result;
     }
 
-    public static <V, T> ObjectLongMap<V> sumByLong(List<T> list, Function<T, V> groupBy, LongFunction<? super T> function)
+    public static <V, T> ObjectLongMap<V> sumByLong(
+            List<T> list,
+            Function<? super T, ? extends V> groupBy,
+            LongFunction<? super T> function)
     {
         ObjectLongHashMap<V> result = ObjectLongHashMap.newMap();
         for (int i = 0; i < list.size(); i++)
@@ -1744,7 +1756,10 @@ public final class RandomAccessListIterate
         return result;
     }
 
-    public static <V, T> ObjectDoubleMap<V> sumByFloat(List<T> list, Function<T, V> groupBy, FloatFunction<? super T> function)
+    public static <V, T> ObjectDoubleMap<V> sumByFloat(
+            List<T> list,
+            Function<? super T, ? extends V> groupBy,
+            FloatFunction<? super T> function)
     {
         ObjectDoubleHashMap<V> result = ObjectDoubleHashMap.newMap();
         for (int i = 0; i < list.size(); i++)
@@ -1755,7 +1770,10 @@ public final class RandomAccessListIterate
         return result;
     }
 
-    public static <V, T> ObjectDoubleMap<V> sumByDouble(List<T> list, Function<T, V> groupBy, DoubleFunction<? super T> function)
+    public static <V, T> ObjectDoubleMap<V> sumByDouble(
+            List<T> list,
+            Function<? super T, ? extends V> groupBy,
+            DoubleFunction<? super T> function)
     {
         ObjectDoubleHashMap<V> result = ObjectDoubleHashMap.newMap();
         for (int i = 0; i < list.size(); i++)

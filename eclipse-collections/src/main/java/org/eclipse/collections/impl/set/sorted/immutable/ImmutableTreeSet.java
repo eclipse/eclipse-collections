@@ -126,7 +126,7 @@ final class ImmutableTreeSet<T>
         return new ImmutableTreeSet<>(elements.clone(), comparator, false);
     }
 
-    public static <T> ImmutableSortedSet<T> newSet(SortedSet<T> set)
+    public static <T> ImmutableSortedSet<T> newSet(SortedSet<? super T> set)
     {
         return new ImmutableTreeSet<>((T[]) set.toArray(), set.comparator(), true);
     }

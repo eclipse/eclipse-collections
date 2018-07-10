@@ -78,7 +78,7 @@ public enum MutableListFactoryImpl implements MutableListFactory
     }
 
     @Override
-    public <T> MutableList<T> withNValues(int size, Function0<T> factory)
+    public <T> MutableList<T> withNValues(int size, Function0<? extends T> factory)
     {
         return FastList.newWithNValues(size, factory);
     }

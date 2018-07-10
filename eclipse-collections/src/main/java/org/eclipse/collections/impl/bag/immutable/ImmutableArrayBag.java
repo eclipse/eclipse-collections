@@ -71,7 +71,7 @@ public class ImmutableArrayBag<T>
         return ImmutableArrayBag.copyFrom(Bags.mutable.with(elements));
     }
 
-    public static <T> ImmutableArrayBag<T> copyFrom(Bag<T> bag)
+    public static <T> ImmutableArrayBag<T> copyFrom(Bag<? extends T> bag)
     {
         int distinctItemCount = bag.sizeDistinct();
         T[] newKeys = (T[]) new Object[distinctItemCount];

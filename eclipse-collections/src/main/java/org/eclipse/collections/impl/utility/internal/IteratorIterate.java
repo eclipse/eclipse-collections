@@ -1309,7 +1309,10 @@ public final class IteratorIterate
         return result;
     }
 
-    public static <V, T> MutableMap<V, BigDecimal> sumByBigDecimal(Iterator<T> iterator, Function<T, V> groupBy, Function<? super T, BigDecimal> function)
+    public static <V, T> MutableMap<V, BigDecimal> sumByBigDecimal(
+            Iterator<T> iterator,
+            Function<? super T, ? extends V> groupBy,
+            Function<? super T, BigDecimal> function)
     {
         MutableMap<V, BigDecimal> result = UnifiedMap.newMap();
         while (iterator.hasNext())
@@ -1320,7 +1323,10 @@ public final class IteratorIterate
         return result;
     }
 
-    public static <V, T> MutableMap<V, BigInteger> sumByBigInteger(Iterator<T> iterator, Function<T, V> groupBy, Function<? super T, BigInteger> function)
+    public static <V, T> MutableMap<V, BigInteger> sumByBigInteger(
+            Iterator<T> iterator,
+            Function<? super T, ? extends V> groupBy,
+            Function<? super T, BigInteger> function)
     {
         MutableMap<V, BigInteger> result = UnifiedMap.newMap();
         while (iterator.hasNext())

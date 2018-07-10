@@ -146,7 +146,8 @@ public final class FileUtils
 
     private static void processJar(
             JarInputStream stream,
-            List<URL> files, String templateDirectory) throws IOException
+            List<URL> files,
+            String templateDirectory) throws IOException
     {
         JarEntry entry;
         while ((entry = stream.getNextJarEntry()) != null)

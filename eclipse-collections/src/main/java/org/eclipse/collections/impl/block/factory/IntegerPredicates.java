@@ -50,27 +50,27 @@ public final class IntegerPredicates
         return IS_ZERO;
     }
 
-    public static <T> Predicates<T> attributeIsEven(Function<T, Integer> function)
+    public static <T> Predicates<T> attributeIsEven(Function<? super T, Integer> function)
     {
         return Predicates.attributePredicate(function, IntegerPredicates.isEven());
     }
 
-    public static <T> Predicates<T> attributeIsOdd(Function<T, Integer> function)
+    public static <T> Predicates<T> attributeIsOdd(Function<? super T, Integer> function)
     {
         return Predicates.attributePredicate(function, IntegerPredicates.isOdd());
     }
 
-    public static <T> Predicates<T> attributeIsZero(Function<T, Integer> function)
+    public static <T> Predicates<T> attributeIsZero(Function<? super T, Integer> function)
     {
         return Predicates.attributePredicate(function, IntegerPredicates.isZero());
     }
 
-    public static <T> Predicates<T> attributeIsPositive(Function<T, Integer> function)
+    public static <T> Predicates<T> attributeIsPositive(Function<? super T, Integer> function)
     {
         return Predicates.attributePredicate(function, IntegerPredicates.isPositive());
     }
 
-    public static <T> Predicates<T> attributeIsNegative(Function<T, Integer> function)
+    public static <T> Predicates<T> attributeIsNegative(Function<? super T, Integer> function)
     {
         return Predicates.attributePredicate(function, IntegerPredicates.isNegative());
     }
