@@ -24,6 +24,7 @@ import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
 import org.eclipse.collections.api.list.ListIterable;
 import org.eclipse.collections.api.map.MutableMap;
+import org.eclipse.collections.api.map.MutableMapIterable;
 import org.eclipse.collections.api.multimap.MutableMultimap;
 import org.eclipse.collections.impl.block.procedure.MultimapPutProcedure;
 import org.eclipse.collections.impl.block.procedure.MutatingAggregationProcedure;
@@ -885,7 +886,7 @@ public final class FJIterate
                 FJIterate.DEFAULT_MIN_FORK_SIZE);
     }
 
-    public static <T, K, V, R extends MutableMap<K, V>> R aggregateBy(
+    public static <T, K, V, R extends MutableMapIterable<K, V>> R aggregateBy(
             Iterable<T> iterable,
             Function<? super T, ? extends K> groupBy,
             Function0<? extends V> zeroValueFactory,
@@ -917,7 +918,7 @@ public final class FJIterate
                 FJIterate.FORK_JOIN_POOL);
     }
 
-    public static <T, K, V, R extends MutableMap<K, V>> R aggregateBy(
+    public static <T, K, V, R extends MutableMapIterable<K, V>> R aggregateBy(
             Iterable<T> iterable,
             Function<? super T, ? extends K> groupBy,
             Function0<? extends V> zeroValueFactory,
@@ -953,7 +954,7 @@ public final class FJIterate
                 executor);
     }
 
-    public static <T, K, V, R extends MutableMap<K, V>> R aggregateBy(
+    public static <T, K, V, R extends MutableMapIterable<K, V>> R aggregateBy(
             Iterable<T> iterable,
             Function<? super T, ? extends K> groupBy,
             Function0<? extends V> zeroValueFactory,
@@ -987,7 +988,7 @@ public final class FJIterate
                 FJIterate.DEFAULT_MIN_FORK_SIZE);
     }
 
-    public static <T, K, V, R extends MutableMap<K, V>> R aggregateInPlaceBy(
+    public static <T, K, V, R extends MutableMapIterable<K, V>> R aggregateInPlaceBy(
             Iterable<T> iterable,
             Function<? super T, ? extends K> groupBy,
             Function0<? extends V> zeroValueFactory,
@@ -1019,7 +1020,7 @@ public final class FJIterate
                 FJIterate.FORK_JOIN_POOL);
     }
 
-    public static <T, K, V, R extends MutableMap<K, V>> R aggregateInPlaceBy(
+    public static <T, K, V, R extends MutableMapIterable<K, V>> R aggregateInPlaceBy(
             Iterable<T> iterable,
             Function<? super T, ? extends K> groupBy,
             Function0<? extends V> zeroValueFactory,
@@ -1057,7 +1058,7 @@ public final class FJIterate
         return map;
     }
 
-    public static <T, K, V, R extends MutableMap<K, V>> R aggregateInPlaceBy(
+    public static <T, K, V, R extends MutableMapIterable<K, V>> R aggregateInPlaceBy(
             Iterable<T> iterable,
             Function<? super T, ? extends K> groupBy,
             Function0<? extends V> zeroValueFactory,

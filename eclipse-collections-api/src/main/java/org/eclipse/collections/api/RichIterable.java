@@ -57,6 +57,7 @@ import org.eclipse.collections.api.collection.primitive.MutableShortCollection;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MapIterable;
 import org.eclipse.collections.api.map.MutableMap;
+import org.eclipse.collections.api.map.MutableMapIterable;
 import org.eclipse.collections.api.map.primitive.ObjectDoubleMap;
 import org.eclipse.collections.api.map.primitive.ObjectLongMap;
 import org.eclipse.collections.api.map.sorted.MutableSortedMap;
@@ -2121,7 +2122,7 @@ public interface RichIterable<T>
      * @see #groupByUniqueKey(Function)
      * @since 6.0
      */
-    <V, R extends MutableMap<V, T>> R groupByUniqueKey(
+    <V, R extends MutableMapIterable<V, T>> R groupByUniqueKey(
             Function<? super T, ? extends V> function,
             R target);
 

@@ -807,7 +807,7 @@ public final class Collectors2
      *
      * <p>Equivalent to using @{@link RichIterable#groupByUniqueKey(Function, MutableMap)}</p>
      */
-    public static <T, K, R extends MutableMap<K, T>> Collector<T, ?, R> groupByUniqueKey(
+    public static <T, K, R extends MutableMapIterable<K, T>> Collector<T, ?, R> groupByUniqueKey(
             Function<? super T, ? extends K> groupBy,
             Supplier<R> supplier)
     {

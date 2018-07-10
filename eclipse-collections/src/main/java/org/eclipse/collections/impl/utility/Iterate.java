@@ -61,6 +61,7 @@ import org.eclipse.collections.api.collection.primitive.MutableLongCollection;
 import org.eclipse.collections.api.collection.primitive.MutableShortCollection;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MutableMap;
+import org.eclipse.collections.api.map.MutableMapIterable;
 import org.eclipse.collections.api.map.primitive.ObjectDoubleMap;
 import org.eclipse.collections.api.map.primitive.ObjectLongMap;
 import org.eclipse.collections.api.multimap.MutableMultimap;
@@ -3485,9 +3486,9 @@ public final class Iterate
     }
 
     /**
-     * @see RichIterable#groupByUniqueKey(Function, MutableMap)
+     * @see RichIterable#groupByUniqueKey(Function, MutableMapIterable)
      */
-    public static <V, T, R extends MutableMap<V, T>> R groupByUniqueKey(
+    public static <V, T, R extends MutableMapIterable<V, T>> R groupByUniqueKey(
             Iterable<T> iterable,
             Function<? super T, ? extends V> function,
             R target)
