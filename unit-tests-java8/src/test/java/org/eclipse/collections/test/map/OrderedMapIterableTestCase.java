@@ -12,6 +12,7 @@ package org.eclipse.collections.test.map;
 
 import org.eclipse.collections.api.list.ListIterable;
 import org.eclipse.collections.api.list.MutableList;
+import org.eclipse.collections.api.map.MapIterable;
 import org.eclipse.collections.api.map.OrderedMap;
 import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.test.OrderedIterableTestCase;
@@ -75,5 +76,12 @@ public interface OrderedMapIterableTestCase extends MapIterableTestCase, Ordered
         assertEquals(this.newWithKeysValues(), orderedMap.drop(4));
         assertEquals(this.newWithKeysValues(), orderedMap.drop(Integer.MAX_VALUE));
         assertThrows(IllegalArgumentException.class, () -> orderedMap.drop(-1));
+    }
+
+    @Override
+    default void MapIterable_flipUniqueValues()
+    {
+        MapIterable<String, Integer> map = this.newWithKeysValues("Three", 3, "Two", 2, "One", 1);
+        assertThrows(UnsupportedOperationException.class, map::flipUniqueValues);
     }
 }
