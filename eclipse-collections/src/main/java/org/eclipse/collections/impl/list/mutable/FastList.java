@@ -197,7 +197,7 @@ public class FastList<T>
      *
      * @since 3.0
      */
-    public static <E> FastList<E> newWithNValues(int size, Function0<E> factory)
+    public static <E> FastList<E> newWithNValues(int size, Function0<? extends E> factory)
     {
         FastList<E> newFastList = FastList.newList(size);
         for (int i = 0; i < size; i++)

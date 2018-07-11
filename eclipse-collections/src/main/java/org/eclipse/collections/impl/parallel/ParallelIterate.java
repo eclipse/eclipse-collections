@@ -1239,7 +1239,7 @@ public final class ParallelIterate
 
     public static <T, V> ObjectDoubleMap<V> sumByDouble(
             Iterable<T> iterable,
-            Function<T, V> groupBy,
+            Function<? super T, ? extends V> groupBy,
             DoubleFunction<? super T> function)
     {
         ObjectDoubleHashMap<V> result = ObjectDoubleHashMap.newMap();
@@ -1254,7 +1254,7 @@ public final class ParallelIterate
 
     public static <T, V> ObjectDoubleMap<V> sumByFloat(
             Iterable<T> iterable,
-            Function<T, V> groupBy,
+            Function<? super T, ? extends V> groupBy,
             FloatFunction<? super T> function)
     {
         ObjectDoubleHashMap<V> result = ObjectDoubleHashMap.newMap();
@@ -1269,7 +1269,7 @@ public final class ParallelIterate
 
     public static <T, V> ObjectLongMap<V> sumByLong(
             Iterable<T> iterable,
-            Function<T, V> groupBy,
+            Function<? super T, ? extends V> groupBy,
             LongFunction<? super T> function)
     {
         ObjectLongHashMap<V> result = ObjectLongHashMap.newMap();
@@ -1284,7 +1284,7 @@ public final class ParallelIterate
 
     public static <T, V> ObjectLongMap<V> sumByInt(
             Iterable<T> iterable,
-            Function<T, V> groupBy,
+            Function<? super T, ? extends V> groupBy,
             IntFunction<? super T> function)
     {
         ObjectLongHashMap<V> result = ObjectLongHashMap.newMap();
@@ -1300,7 +1300,10 @@ public final class ParallelIterate
     /**
      * @since 6.0
      */
-    public static <V, T> MutableMap<V, BigDecimal> sumByBigDecimal(Iterable<T> iterable, Function<T, V> groupBy, Function<? super T, BigDecimal> function)
+    public static <V, T> MutableMap<V, BigDecimal> sumByBigDecimal(
+            Iterable<T> iterable,
+            Function<? super T, ? extends V> groupBy,
+            Function<? super T, BigDecimal> function)
     {
         MutableMap<V, BigDecimal> result = UnifiedMap.newMap();
         ParallelIterate.forEach(
@@ -1315,7 +1318,10 @@ public final class ParallelIterate
     /**
      * @since 6.0
      */
-    public static <V, T> MutableMap<V, BigInteger> sumByBigInteger(Iterable<T> iterable, Function<T, V> groupBy, Function<? super T, BigInteger> function)
+    public static <V, T> MutableMap<V, BigInteger> sumByBigInteger(
+            Iterable<T> iterable,
+            Function<? super T, ? extends V> groupBy,
+            Function<? super T, BigInteger> function)
     {
         MutableMap<V, BigInteger> result = UnifiedMap.newMap();
         ParallelIterate.forEach(
@@ -1374,10 +1380,10 @@ public final class ParallelIterate
     private static final class SumByDoubleProcedure<T, V> implements Procedure<T>, ProcedureFactory<SumByDoubleProcedure<T, V>>
     {
         private final MutableMap<V, DoubleDoublePair> map = Maps.mutable.of();
-        private final Function<T, V> groupBy;
+        private final Function<? super T, ? extends V> groupBy;
         private final DoubleFunction<? super T> function;
 
-        private SumByDoubleProcedure(Function<T, V> groupBy, DoubleFunction<? super T> function)
+        private SumByDoubleProcedure(Function<? super T, ? extends V> groupBy, DoubleFunction<? super T> function)
         {
             this.groupBy = groupBy;
             this.function = function;
@@ -1448,10 +1454,10 @@ public final class ParallelIterate
     private static final class SumByFloatProcedure<T, V> implements Procedure<T>, ProcedureFactory<SumByFloatProcedure<T, V>>
     {
         private final MutableMap<V, DoubleDoublePair> map = Maps.mutable.of();
-        private final Function<T, V> groupBy;
+        private final Function<? super T, ? extends V> groupBy;
         private final FloatFunction<? super T> function;
 
-        private SumByFloatProcedure(Function<T, V> groupBy, FloatFunction<? super T> function)
+        private SumByFloatProcedure(Function<? super T, ? extends V> groupBy, FloatFunction<? super T> function)
         {
             this.groupBy = groupBy;
             this.function = function;
@@ -1522,10 +1528,10 @@ public final class ParallelIterate
     private static final class SumByLongProcedure<T, V> implements Procedure<T>, ProcedureFactory<SumByLongProcedure<T, V>>
     {
         private final ObjectLongHashMap<V> map = ObjectLongHashMap.newMap();
-        private final Function<T, V> groupBy;
+        private final Function<? super T, ? extends V> groupBy;
         private final LongFunction<? super T> function;
 
-        private SumByLongProcedure(Function<T, V> groupBy, LongFunction<? super T> function)
+        private SumByLongProcedure(Function<? super T, ? extends V> groupBy, LongFunction<? super T> function)
         {
             this.groupBy = groupBy;
             this.function = function;
@@ -1576,10 +1582,10 @@ public final class ParallelIterate
     private static final class SumByIntProcedure<T, V> implements Procedure<T>, ProcedureFactory<SumByIntProcedure<T, V>>
     {
         private final ObjectLongHashMap<V> map = ObjectLongHashMap.newMap();
-        private final Function<T, V> groupBy;
+        private final Function<? super T, ? extends V> groupBy;
         private final IntFunction<? super T> function;
 
-        private SumByIntProcedure(Function<T, V> groupBy, IntFunction<? super T> function)
+        private SumByIntProcedure(Function<? super T, ? extends V> groupBy, IntFunction<? super T> function)
         {
             this.groupBy = groupBy;
             this.function = function;
@@ -1630,10 +1636,10 @@ public final class ParallelIterate
     private static final class SumByBigDecimalProcedure<T, V> implements Procedure<T>, ProcedureFactory<SumByBigDecimalProcedure<T, V>>
     {
         private final MutableMap<V, BigDecimal> map = UnifiedMap.newMap();
-        private final Function<T, V> groupBy;
+        private final Function<? super T, ? extends V> groupBy;
         private final Function<? super T, BigDecimal> function;
 
-        private SumByBigDecimalProcedure(Function<T, V> groupBy, Function<? super T, BigDecimal> function)
+        private SumByBigDecimalProcedure(Function<? super T, ? extends V> groupBy, Function<? super T, BigDecimal> function)
         {
             this.groupBy = groupBy;
             this.function = function;
@@ -1684,10 +1690,10 @@ public final class ParallelIterate
     private static final class SumByBigIntegerProcedure<T, V> implements Procedure<T>, ProcedureFactory<SumByBigIntegerProcedure<T, V>>
     {
         private final MutableMap<V, BigInteger> map = UnifiedMap.newMap();
-        private final Function<T, V> groupBy;
+        private final Function<? super T, ? extends V> groupBy;
         private final Function<? super T, BigInteger> function;
 
-        private SumByBigIntegerProcedure(Function<T, V> groupBy, Function<? super T, BigInteger> function)
+        private SumByBigIntegerProcedure(Function<? super T, ? extends V> groupBy, Function<? super T, BigInteger> function)
         {
             this.groupBy = groupBy;
             this.function = function;

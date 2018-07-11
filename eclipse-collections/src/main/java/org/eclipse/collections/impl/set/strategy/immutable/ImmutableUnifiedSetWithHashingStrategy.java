@@ -41,7 +41,7 @@ final class ImmutableUnifiedSetWithHashingStrategy<T>
         return new ImmutableUnifiedSetWithHashingStrategy<>(UnifiedSetWithHashingStrategy.newSetWith(hashingStrategy, elements));
     }
 
-    public static <T> ImmutableSet<T> newSet(HashingStrategy<? super T> hashingStrategy, Iterable<T> iterable)
+    public static <T> ImmutableSet<T> newSet(HashingStrategy<? super T> hashingStrategy, Iterable<? extends T> iterable)
     {
         return new ImmutableUnifiedSetWithHashingStrategy<>(UnifiedSetWithHashingStrategy.newSet(hashingStrategy, iterable));
     }

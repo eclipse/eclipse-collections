@@ -614,7 +614,7 @@ public class ConcurrentHashMapUnsafe<K, V>
      *                       Note that the transformed key must have the same identity/hashcode as the original "mutable" key.
      * @param factory        It creates an object, if it is not present in the map already.
      */
-    public <P1, P2> V putIfAbsentGetIfPresent(K key, Function2<K, V, K> keyTransformer, Function3<P1, P2, K, V> factory, P1 param1, P2 param2)
+    public <P1, P2> V putIfAbsentGetIfPresent(K key, Function2<? super K, ? super V, ? extends K> keyTransformer, Function3<P1, P2, ? super K, ? extends V> factory, P1 param1, P2 param2)
     {
         int hash = this.hash(key);
         Object[] currentArray = this.table;
@@ -963,7 +963,7 @@ public class ConcurrentHashMapUnsafe<K, V>
         }
     }
 
-    public void putAllInParallel(Map<K, V> map, int chunks, Executor executor)
+    public void putAllInParallel(Map<? extends K, ? extends V> map, int chunks, Executor executor)
     {
         if (this.size() == 0)
         {
@@ -1348,7 +1348,7 @@ public class ConcurrentHashMapUnsafe<K, V>
         }
     }
 
-    private void sequentialForEachKeyValue(Procedure2<K, V> block, Object[] currentArray, int start, int end)
+    private void sequentialForEachKeyValue(Procedure2<? super K, ? super V> block, Object[] currentArray, int start, int end)
     {
         for (int i = start; i < end; i++)
         {
@@ -1406,7 +1406,7 @@ public class ConcurrentHashMapUnsafe<K, V>
         }
     }
 
-    private void sequentialForEachValue(Procedure<V> block, Object[] currentArray, int start, int end)
+    private void sequentialForEachValue(Procedure<? super V> block, Object[] currentArray, int start, int end)
     {
         for (int i = start; i < end; i++)
         {

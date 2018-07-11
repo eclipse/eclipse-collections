@@ -50,27 +50,27 @@ public final class LongPredicates
         return IS_ZERO;
     }
 
-    public static <T> Predicates<T> attributeIsEven(Function<T, Long> function)
+    public static <T> Predicates<T> attributeIsEven(Function<? super T, Long> function)
     {
         return Predicates.attributePredicate(function, LongPredicates.isEven());
     }
 
-    public static <T> Predicates<T> attributeIsOdd(Function<T, Long> function)
+    public static <T> Predicates<T> attributeIsOdd(Function<? super T, Long> function)
     {
         return Predicates.attributePredicate(function, LongPredicates.isOdd());
     }
 
-    public static <T> Predicates<T> attributeIsZero(Function<T, Long> function)
+    public static <T> Predicates<T> attributeIsZero(Function<? super T, Long> function)
     {
         return Predicates.attributePredicate(function, LongPredicates.isZero());
     }
 
-    public static <T> Predicates<T> attributeIsPositive(Function<T, Long> function)
+    public static <T> Predicates<T> attributeIsPositive(Function<? super T, Long> function)
     {
         return Predicates.attributePredicate(function, LongPredicates.isPositive());
     }
 
-    public static <T> Predicates<T> attributeIsNegative(Function<T, Long> function)
+    public static <T> Predicates<T> attributeIsNegative(Function<? super T, Long> function)
     {
         return Predicates.attributePredicate(function, LongPredicates.isNegative());
     }

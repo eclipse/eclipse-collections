@@ -617,35 +617,53 @@ public final class IterableIterate
         return IteratorIterate.sumOfBigInteger(iterable.iterator(), function);
     }
 
-    public static <V, T> MutableMap<V, BigDecimal> sumByBigDecimal(Iterable<T> iterable, Function<T, V> groupBy, Function<? super T, BigDecimal> function)
+    public static <V, T> MutableMap<V, BigDecimal> sumByBigDecimal(
+            Iterable<T> iterable,
+            Function<? super T, ? extends V> groupBy,
+            Function<? super T, BigDecimal> function)
     {
         return IteratorIterate.sumByBigDecimal(iterable.iterator(), groupBy, function);
     }
 
-    public static <V, T> MutableMap<V, BigInteger> sumByBigInteger(Iterable<T> iterable, Function<T, V> groupBy, Function<? super T, BigInteger> function)
+    public static <V, T> MutableMap<V, BigInteger> sumByBigInteger(
+            Iterable<T> iterable,
+            Function<? super T, ? extends V> groupBy,
+            Function<? super T, BigInteger> function)
     {
         return IteratorIterate.sumByBigInteger(iterable.iterator(), groupBy, function);
     }
 
-    public static <V, T> ObjectLongMap<V> sumByInt(Iterable<T> iterable, Function<T, V> groupBy, IntFunction<? super T> function)
+    public static <V, T> ObjectLongMap<V> sumByInt(
+            Iterable<T> iterable,
+            Function<? super T, ? extends V> groupBy,
+            IntFunction<? super T> function)
     {
         ObjectLongHashMap<V> result = ObjectLongHashMap.newMap();
         return IterableIterate.injectInto(result, iterable, PrimitiveFunctions.sumByIntFunction(groupBy, function));
     }
 
-    public static <V, T> ObjectLongMap<V> sumByLong(Iterable<T> iterable, Function<T, V> groupBy, LongFunction<? super T> function)
+    public static <V, T> ObjectLongMap<V> sumByLong(
+            Iterable<T> iterable,
+            Function<? super T, ? extends V> groupBy,
+            LongFunction<? super T> function)
     {
         ObjectLongHashMap<V> result = ObjectLongHashMap.newMap();
         return IterableIterate.injectInto(result, iterable, PrimitiveFunctions.sumByLongFunction(groupBy, function));
     }
 
-    public static <V, T> ObjectDoubleMap<V> sumByFloat(Iterable<T> iterable, Function<T, V> groupBy, FloatFunction<? super T> function)
+    public static <V, T> ObjectDoubleMap<V> sumByFloat(
+            Iterable<T> iterable,
+            Function<? super T, ? extends V> groupBy,
+            FloatFunction<? super T> function)
     {
         ObjectDoubleHashMap<V> result = ObjectDoubleHashMap.newMap();
         return IterableIterate.injectInto(result, iterable, PrimitiveFunctions.sumByFloatFunction(groupBy, function));
     }
 
-    public static <V, T> ObjectDoubleMap<V> sumByDouble(Iterable<T> iterable, Function<T, V> groupBy, DoubleFunction<? super T> function)
+    public static <V, T> ObjectDoubleMap<V> sumByDouble(
+            Iterable<T> iterable,
+            Function<? super T, ? extends V> groupBy,
+            DoubleFunction<? super T> function)
     {
         ObjectDoubleHashMap<V> result = ObjectDoubleHashMap.newMap();
         return IterableIterate.injectInto(result, iterable, PrimitiveFunctions.sumByDoubleFunction(groupBy, function));

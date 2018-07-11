@@ -60,5 +60,5 @@ public interface MutableListFactory
 
     <T> MutableList<T> withAll(Iterable<? extends T> iterable);
 
-    <T> MutableList<T> withNValues(int size, Function0<T> factory);
+    <T> MutableList<T> withNValues(int size, Function0<? extends T> factory);
 }
