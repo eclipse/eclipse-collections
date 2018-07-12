@@ -31,7 +31,7 @@ public class UnmodifiableMutableCollection<T>
 
     /**
      * This method will take a MutableCollection and wrap it directly in a UnmodifiableMutableCollection.  It will
-     * take any other non-GS-collection and first adapt it will a CollectionAdapter, and then return a
+     * take any other non-Eclipse-Collections collection and first adapt it will a CollectionAdapter, and then return a
      * UnmodifiableMutableCollection that wraps the adapter.
      */
     public static <E, C extends Collection<E>> UnmodifiableMutableCollection<E> of(C collection)

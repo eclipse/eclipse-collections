@@ -40,7 +40,7 @@ public class SynchronizedMutableCollection<T>
 
     /**
      * This method will take a MutableCollection and wrap it directly in a SynchronizedMutableCollection.  It will
-     * take any other non-GS-collection and first adapt it will a CollectionAdapter, and then return a
+     * take any other non-Eclipse-Collections collection and first adapt it will a CollectionAdapter, and then return a
      * SynchronizedMutableCollection that wraps the adapter.
      */
     public static <E, C extends Collection<E>> SynchronizedMutableCollection<E> of(C collection)
@@ -50,7 +50,7 @@ public class SynchronizedMutableCollection<T>
 
     /**
      * This method will take a MutableCollection and wrap it directly in a SynchronizedMutableCollection.  It will
-     * take any other non-GS-collection and first adapt it will a CollectionAdapter, and then return a
+     * take any other non-Eclipse-Collections collection and first adapt it will a CollectionAdapter, and then return a
      * SynchronizedMutableCollection that wraps the adapter.  Additionally, a developer specifies which lock to use
      * with the collection.
      */

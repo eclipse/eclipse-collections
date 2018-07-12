@@ -77,7 +77,7 @@ public class SynchronizedMutableMap<K, V>
 
     /**
      * This method will take a MutableMap and wrap it directly in a SynchronizedMutableMap.  It will
-     * take any other non-GS-map and first adapt it will a MapAdapter, and then return a
+     * take any other non-Eclipse-Collections map and first adapt it will a MapAdapter, and then return a
      * SynchronizedMutableMap that wraps the adapter.
      */
     public static <K, V, M extends Map<K, V>> SynchronizedMutableMap<K, V> of(M map)
@@ -91,7 +91,7 @@ public class SynchronizedMutableMap<K, V>
 
     /**
      * This method will take a MutableMap and wrap it directly in a SynchronizedMutableMap.  It will
-     * take any other non-GS-map and first adapt it will a MapAdapter, and then return a
+     * take any other non-Eclipse-Collections map and first adapt it will a MapAdapter, and then return a
      * SynchronizedMutableMap that wraps the adapter. Additionally, a developer specifies which lock to use
      * with the collection.
      */

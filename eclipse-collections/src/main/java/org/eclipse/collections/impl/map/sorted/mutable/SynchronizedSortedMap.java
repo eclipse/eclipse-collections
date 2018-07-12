@@ -84,7 +84,7 @@ public class SynchronizedSortedMap<K, V>
 
     /**
      * This method will take a MutableSortedMap and wrap it directly in a SynchronizedSortedMap.  It will
-     * take any other non-GS-SortedMap and first adapt it will a SortedMapAdapter, and then return a
+     * take any other non-Eclipse-Collections SortedMap and first adapt it will a SortedMapAdapter, and then return a
      * SynchronizedSortedMap that wraps the adapter.
      */
     public static <K, V, M extends SortedMap<K, V>> SynchronizedSortedMap<K, V> of(M map)

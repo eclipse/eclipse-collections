@@ -105,7 +105,7 @@ public class UnmodifiableTreeMap<K, V>
 
     /**
      * This method will take a MutableSortedMap and wrap it directly in a UnmodifiableMutableMap.  It will
-     * take any other non-GS-SortedMap and first adapt it will a SortedMapAdapter, and then return a
+     * take any other non-Eclipse-Collections SortedMap and first adapt it will a SortedMapAdapter, and then return a
      * UnmodifiableSortedMap that wraps the adapter.
      */
     public static <K, V, M extends SortedMap<K, V>> UnmodifiableTreeMap<K, V> of(M map)

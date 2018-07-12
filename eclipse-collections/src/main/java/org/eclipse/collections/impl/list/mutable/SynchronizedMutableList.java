@@ -82,7 +82,7 @@ public class SynchronizedMutableList<T>
 
     /**
      * This method will take a MutableList and wrap it directly in a SynchronizedMutableList.  It will
-     * take any other non-GS-collection and first adapt it will a ListAdapter, and then return a
+     * take any other non-Eclipse-Collections collection and first adapt it will a ListAdapter, and then return a
      * SynchronizedMutableList that wraps the adapter.
      */
     public static <E, L extends List<E>> SynchronizedMutableList<E> of(L list)
@@ -94,7 +94,7 @@ public class SynchronizedMutableList<T>
 
     /**
      * This method will take a MutableList and wrap it directly in a SynchronizedMutableList.  It will
-     * take any other non-GS-collection and first adapt it will a ListAdapter, and then return a
+     * take any other non-Eclipse-Collections collection and first adapt it will a ListAdapter, and then return a
      * SynchronizedMutableList that wraps the adapter.  Additionally, a developer specifies which lock to use
      * with the collection.
      */
