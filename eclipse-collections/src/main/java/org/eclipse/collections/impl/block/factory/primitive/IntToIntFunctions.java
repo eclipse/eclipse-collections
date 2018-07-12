@@ -50,7 +50,7 @@ public final class IntToIntFunctions
         @Override
         public int valueOf(int intParameter)
         {
-            return intParameter + 1;
+            return Math.addExact(intParameter, 1);
         }
     }
 
@@ -61,7 +61,7 @@ public final class IntToIntFunctions
         @Override
         public int valueOf(int intParameter)
         {
-            return intParameter - 1;
+            return Math.subtractExact(intParameter, 1);
         }
     }
 
@@ -78,7 +78,7 @@ public final class IntToIntFunctions
         @Override
         public int valueOf(int intParameter)
         {
-            return intParameter + this.intToAdd;
+            return Math.addExact(intParameter, this.intToAdd);
         }
     }
 
@@ -95,7 +95,7 @@ public final class IntToIntFunctions
         @Override
         public int valueOf(int intParameter)
         {
-            return intParameter - this.intToSubtract;
+            return Math.subtractExact(intParameter, this.intToSubtract);
         }
     }
 }
