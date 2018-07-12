@@ -48,7 +48,7 @@ public final class AddFunction
         @Override
         public int intValueOf(int intParameter, Integer objectParameter)
         {
-            return intParameter + objectParameter;
+            return Math.addExact(intParameter, objectParameter);
         }
     }
 
@@ -59,7 +59,7 @@ public final class AddFunction
         @Override
         public long longValueOf(long longParameter, Integer objectParameter)
         {
-            return longParameter + objectParameter.longValue();
+            return Math.addExact(longParameter, objectParameter.longValue());
         }
     }
 
@@ -114,7 +114,7 @@ public final class AddFunction
         @Override
         public Integer value(Integer argument1, Integer argument2)
         {
-            return argument1 + argument2;
+            return Math.addExact(argument1, argument2);
         }
     }
 
@@ -147,7 +147,7 @@ public final class AddFunction
         @Override
         public Long value(Long argument1, Long argument2)
         {
-            return argument1 + argument2;
+            return Math.addExact(argument1, argument2);
         }
     }
 

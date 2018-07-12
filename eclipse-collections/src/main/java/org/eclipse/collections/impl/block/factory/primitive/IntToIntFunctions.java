@@ -14,10 +14,6 @@ import org.eclipse.collections.api.block.function.primitive.IntToIntFunction;
 
 public final class IntToIntFunctions
 {
-    private static final IntToIntFunction INCREMENT = new IncrementIntToIntFunction();
-
-    private static final IntToIntFunction DECREMENT = new DecrementIntToIntFunction();
-
     private IntToIntFunctions()
     {
         throw new AssertionError("Suppress default constructor for noninstantiability");
@@ -25,77 +21,21 @@ public final class IntToIntFunctions
 
     public static IntToIntFunction increment()
     {
-        return INCREMENT;
+        return Math::incrementExact;
     }
 
     public static IntToIntFunction decrement()
     {
-        return DECREMENT;
+        return Math::decrementExact;
     }
 
     public static IntToIntFunction add(int intToAdd)
     {
-        return new AddIntToIntFunction(intToAdd);
+        return value -> Math.addExact(value, intToAdd);
     }
 
     public static IntToIntFunction subtract(int intToSubtract)
     {
-        return new SubtractIntToIntFunction(intToSubtract);
-    }
-
-    private static class IncrementIntToIntFunction implements IntToIntFunction
-    {
-        private static final long serialVersionUID = 1L;
-
-        @Override
-        public int valueOf(int intParameter)
-        {
-            return intParameter + 1;
-        }
-    }
-
-    private static class DecrementIntToIntFunction implements IntToIntFunction
-    {
-        private static final long serialVersionUID = 1L;
-
-        @Override
-        public int valueOf(int intParameter)
-        {
-            return intParameter - 1;
-        }
-    }
-
-    private static final class AddIntToIntFunction implements IntToIntFunction
-    {
-        private static final long serialVersionUID = 1L;
-        private final int intToAdd;
-
-        private AddIntToIntFunction(int intToAdd)
-        {
-            this.intToAdd = intToAdd;
-        }
-
-        @Override
-        public int valueOf(int intParameter)
-        {
-            return intParameter + this.intToAdd;
-        }
-    }
-
-    private static final class SubtractIntToIntFunction implements IntToIntFunction
-    {
-        private static final long serialVersionUID = 1L;
-        private final int intToSubtract;
-
-        private SubtractIntToIntFunction(int intToSubtract)
-        {
-            this.intToSubtract = intToSubtract;
-        }
-
-        @Override
-        public int valueOf(int intParameter)
-        {
-            return intParameter - this.intToSubtract;
-        }
+        return value -> Math.subtractExact(value, intToSubtract);
     }
 }
