@@ -66,7 +66,7 @@ public class UnmodifiableMutableSet<T>
 
     /**
      * This method will take a MutableSet and wrap it directly in a UnmodifiableMutableSet.  It will
-     * take any other non-GS-set and first adapt it will a SetAdapter, and then return a
+     * take any other non-Eclipse-Collections set and first adapt it will a SetAdapter, and then return a
      * UnmodifiableMutableSet that wraps the adapter.
      */
     public static <E, S extends Set<E>> UnmodifiableMutableSet<E> of(S set)

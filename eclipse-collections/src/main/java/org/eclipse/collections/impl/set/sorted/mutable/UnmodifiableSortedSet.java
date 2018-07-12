@@ -72,7 +72,7 @@ public class UnmodifiableSortedSet<T>
 
     /**
      * This method will take a MutableSortedSet and wrap it directly in a UnmodifiableSortedSet.  It will
-     * take any other non-GS-SortedSet and first adapt it will a SortedSetAdapter, and then return a
+     * take any other non-Eclipse-Collections SortedSet and first adapt it will a SortedSetAdapter, and then return a
      * UnmodifiableSortedSet that wraps the adapter.
      */
     public static <E, S extends SortedSet<E>> UnmodifiableSortedSet<E> of(S set)

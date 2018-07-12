@@ -73,7 +73,7 @@ public class UnmodifiableMutableList<T>
 
     /**
      * This method will take a MutableList and wrap it directly in a UnmodifiableMutableList.  It will
-     * take any other non-GS-list and first adapt it will a ListAdapter, and then return a
+     * take any other non-Eclipse-Collections list and first adapt it will a ListAdapter, and then return a
      * UnmodifiableMutableList that wraps the adapter.
      */
     public static <E, L extends List<E>> UnmodifiableMutableList<E> of(L list)
