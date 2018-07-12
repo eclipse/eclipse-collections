@@ -97,13 +97,11 @@ flipUniqueValues ::= [
     "Float": "flipUniqueValues",
     "Double": "flipUniqueValues",
     "Boolean": "noMethods"
-    ]
+]
 
 noMethods(name) ::= ""
 
-flipUniqueValues(name) ::= <<
-
-/**
+flipUniqueValues(name) ::= <<<\n>/**
  * Return the <name>ObjectMap that is obtained by flipping the direction of this map and making the associations
  * from value to key.
  *

@@ -957,12 +957,11 @@ public interface RichIterableTestCase extends IterableTestCase
         });
         assertEquals(expectedIterationOrder.size() - 1, toSortedListCount.getCount());
 
-/*
+        /*
         MutableCollection<Integer> toSortedListByIterationOrder = this.newMutableForFilter();
         this.getInstanceUnderTest().toSortedListBy(toSortedListByIterationOrder::add);
         assertEquals(expectedIterationOrder.size(), toSortedListByIterationOrder.size());
-
-*/
+        */
 
         Counter toSortedSetCount = new Counter();
         this.getInstanceUnderTest().toSortedSet((o1, o2) -> {
@@ -971,11 +970,11 @@ public interface RichIterableTestCase extends IterableTestCase
         });
         assertEquals(expectedIterationOrder.size(), toSortedSetCount.getCount());
 
-/*
+        /*
         MutableCollection<Integer> toSortedSetByIterationOrder = this.newMutableForFilter();
         this.getInstanceUnderTest().toSortedSetBy(toSortedSetByIterationOrder::add);
         assertEquals(expectedIterationOrder.size(), toSortedSetByIterationOrder.size());
-*/
+        */
 
         Counter toSortedBagCount = new Counter();
         this.getInstanceUnderTest().toSortedBag((o1, o2) -> {
@@ -984,11 +983,11 @@ public interface RichIterableTestCase extends IterableTestCase
         });
         assertEquals(expectedIterationOrder.size(), toSortedBagCount.getCount());
 
-/*
+        /*
         MutableCollection<Integer> toSortedBagByIterationOrder = this.newMutableForFilter();
         this.getInstanceUnderTest().toSortedBagBy(toSortedBagByIterationOrder::add);
         assertEquals(expectedIterationOrder.size(), toSortedBagByIterationOrder.size());
-*/
+        */
 
         MutableCollection<Integer> summarizeIntOrder = this.newMutableForFilter();
         this.getInstanceUnderTest().summarizeInt(each -> {

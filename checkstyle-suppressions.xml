@@ -25,6 +25,9 @@
     <suppress checks="IllegalImport" files="AlwaysTearDownUtilsTest.java" />
 
     <suppress checks="EqualsHashCode" files="VerifyTest.java" />
+    <suppress checks="EqualsHashCode" files="[\\/]Immutable.*MapKeySet.java" />
+    <suppress checks="EqualsHashCode" files="[\\/].*HashSet.java" />
+    <suppress checks="EqualsHashCode" files="[\\/]Abstract.*Set.java" />
 
     <suppress checks="RedundantThrows" files="FixedSizeCollection.java" />
     <suppress checks="RedundantThrows" files="FixedSizeMap.java" />

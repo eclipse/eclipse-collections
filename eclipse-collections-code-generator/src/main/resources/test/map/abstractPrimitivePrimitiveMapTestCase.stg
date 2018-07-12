@@ -598,7 +598,7 @@ public abstract class Abstract<name1><name2>MapTestCase
     {
         <name1><name2>Map map = this.newWithKeysValues(<["0", "1", "2", "3"]:keyValue(); separator=", ">);
 
-        <name2>ToObjectFunction\<<primitive2.wrapperName>\> function = (parameter) -> <(castIntToNarrowTypeWithParens.(type2))("parameter + 1")>;
+        <name2>ToObjectFunction\<<primitive2.wrapperName>\> function = parameter -> <(castIntToNarrowTypeWithParens.(type2))("parameter + 1")>;
         Assert.assertEquals(Bags.immutable.with(<["1", "2", "3", "4"]:(literal.(type2))(); separator=", ">), map.collect(function));
         Assert.assertEquals(Bags.immutable.empty(), this.getEmptyMap().collect(function));
         Assert.assertEquals(Bags.immutable.with(<(literal.(type2))("2")>), this.newWithKeysValues(<["1"]:keyValue(); separator=", ">).collect(function));

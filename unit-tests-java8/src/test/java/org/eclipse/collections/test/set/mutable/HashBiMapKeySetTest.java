@@ -31,7 +31,7 @@ public class HashBiMapKeySetTest implements SetTestCase
         {
             if (result.containsKey(element))
             {
-                // throw new IllegalStateException();
+                throw new IllegalStateException();
             }
             result.put(element, element);
         }

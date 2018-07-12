@@ -74,6 +74,7 @@ import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
 import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
 <(procedureImport.(type))()>
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
+
 /**
  * This file was automatically generated from template file objectPrimitiveHashMap.stg.
  *

@@ -437,7 +437,7 @@ public abstract class AbstractMutable<name1><name2>MapTestCase extends Abstract<
         Assert.assertEquals(<(wideLiteral.(type2))("12")>, map1.addToValue(<(literal.(type1))("1")>, <(literal.(type2))("9")>)<(wideDelta.(type2))>);
         Assert.assertEquals(<(wideLiteral.(type2))("11")>, map1.addToValue(<(literal.(type1))("0")>, <(literal.(type2))("10")>)<(wideDelta.(type2))>);
         Assert.assertEquals(expected, map1);
-        
+
         Mutable<name1><name2>Map map2 = this.getEmptyMap();
         MutableLongList list = LongLists.mutable.with(
             936628237L,
@@ -448,11 +448,10 @@ public abstract class AbstractMutable<name1><name2>MapTestCase extends Abstract<
             593670575L,
             296725141L,
             7131901003L,
-            9986389012L
-        );
-        
+            9986389012L);
+
         list.forEachWithIndex((each, index) -> {
-            <type1> k = <(castLongToNarrowTypeWithParens.(type1))("each")>;
+            <type1> k = <(castLongToNarrowType.(type1))("each")>;
             <type2> v = <(castLongToNarrowTypeWithParens.(type2))("each + index")>;
             Assert.assertEquals("Key:" + k, v, map2.addToValue(k, v)<(wideDelta.(type2))>);
         });

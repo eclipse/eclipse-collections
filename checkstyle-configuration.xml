@@ -50,6 +50,9 @@
         <module name="MethodName">
             <property name="format" value="^[a-z][a-zA-Z0-9_]*$" />
         </module>
+        <module name="ClassTypeParameterName">
+            <property name="format" value="^[A-Z0-9]+$" />
+        </module>
         <module name="MethodTypeParameterName">
             <property name="format" value="^[A-Z0-9]+$" />
         </module>
@@ -61,6 +64,7 @@
         <module name="ParameterName" />
         <module name="StaticVariableName" />
         <module name="TypeName" />
+        <module name="LambdaParameterName"/>
 
         <module name="AvoidStarImport">
             <property name="allowStaticMemberImports" value="true" />
@@ -81,7 +85,15 @@
 
         <module name="NoWhitespaceBefore" />
 
-        <module name="OperatorWrap" />
+        <module name="OperatorWrap">
+            <property name="tokens" value="ASSIGN, DIV_ASSIGN, PLUS_ASSIGN, MINUS_ASSIGN, STAR_ASSIGN, MOD_ASSIGN, SR_ASSIGN, BSR_ASSIGN, SL_ASSIGN, BXOR_ASSIGN, BOR_ASSIGN, BAND_ASSIGN" />
+            <property name="option" value="eol" />
+        </module>
+
+        <module name="OperatorWrap">
+            <property name="tokens" value="QUESTION, COLON, EQUAL, NOT_EQUAL, DIV, PLUS, MINUS, STAR, MOD, SR, BSR, GE, GT, SL, LE, LT, BXOR, BOR, LOR, BAND, LAND, LITERAL_INSTANCEOF, TYPE_EXTENSION_AND, METHOD_REF" />
+            <property name="option" value="nl" />
+        </module>
 
         <module name="ParenPad" />
 
@@ -93,6 +105,7 @@
             <property
                 name="tokens"
                 value="ASSIGN,BAND,BAND_ASSIGN,BOR,BOR_ASSIGN,BSR,BSR_ASSIGN,BXOR,BXOR_ASSIGN,COLON,DIV,DIV_ASSIGN,EQUAL,GE,GT,LAND,LCURLY,LE,LITERAL_ASSERT,LITERAL_CATCH,LITERAL_DO,LITERAL_ELSE,LITERAL_FINALLY,LITERAL_FOR,LITERAL_IF,LITERAL_RETURN,LITERAL_SYNCHRONIZED,LITERAL_TRY,LITERAL_WHILE,LOR,LT,MINUS,MINUS_ASSIGN,MOD,MOD_ASSIGN,NOT_EQUAL,PLUS,PLUS_ASSIGN,QUESTION,RCURLY,SL,SLIST,SL_ASSIGN,SR,SR_ASSIGN,STAR,STAR_ASSIGN,LITERAL_ASSERT,TYPE_EXTENSION_AND" />
+            <property name="allowEmptyTypes" value="true" />
         </module>
 
         <module name="EmptyLineSeparator">
@@ -109,6 +122,8 @@
             <property name="option" value="EOL" />
         </module>
 
+        <module name="CommentsIndentation" />
+
         <!-- Modifier Checks                                    -->
         <!-- See http://checkstyle.sf.net/config_modifiers.html -->
         <module name="ModifierOrder" />
@@ -116,6 +131,8 @@
 
         <module name="LeftCurly">
             <property name="option" value="nl" />
+            <!--TODO: Remove this, to include the LAMBDA token-->
+            <property name="tokens" value="INTERFACE_DEF, CLASS_DEF, ANNOTATION_DEF, ENUM_DEF, CTOR_DEF, METHOD_DEF, ENUM_CONSTANT_DEF, LITERAL_WHILE, LITERAL_TRY, LITERAL_CATCH, LITERAL_FINALLY, LITERAL_SYNCHRONIZED, LITERAL_SWITCH, LITERAL_DO, LITERAL_IF, LITERAL_ELSE, LITERAL_FOR, STATIC_INIT, OBJBLOCK"/>
         </module>
 
         <module name="NeedBraces" />
@@ -127,6 +144,7 @@
         <!-- Checks for common coding problems               -->
         <!-- See http://checkstyle.sf.net/config_coding.html -->
         <module name="EmptyStatement" />
+        <module name="EmptyBlock"/>
 
         <!-- Effective Java Item 8 - Always override hashCode when you override equals -->
         <module name="EqualsHashCode" />
@@ -174,8 +192,8 @@
             <property name="message" value="Line has trailing spaces." />
         </module>
 
-        <module name="Regexp">
-            <property name="illegalPattern" value="true" />
+        <module name="RegexpSinglelineJava">
+            <property name="ignoreComments" value="true" />
 
             <property
                 name="format"
@@ -186,8 +204,8 @@
                 value="System.out.println." />
         </module>
 
-        <module name="Regexp">
-            <property name="illegalPattern" value="true" />
+        <module name="RegexpSinglelineJava">
+            <property name="ignoreComments" value="true" />
 
             <property
                 name="format"
@@ -218,7 +236,7 @@
 
         <module name="AvoidStaticImport">
             <property name="excludes"
-                value="org.junit.Assert.*,org.hamcrest.CoreMatchers.*,org.hamcrest.Matchers.*,org.eclipse.collections.impl.test.Verify.*,org.eclipse.collections.impl.factory.Iterables.*,org.eclipse.collections.test.IterableTestCase.*" />
+                value="org.junit.Assert.*,org.junit.Assume.*,org.hamcrest.CoreMatchers.*,org.hamcrest.Matchers.*,org.eclipse.collections.impl.test.Verify.*,org.eclipse.collections.impl.factory.Iterables.*,org.eclipse.collections.test.IterableTestCase.*" />
         </module>
 
         <module name="MissingDeprecated" />
@@ -234,6 +252,8 @@
         <module name="ImportOrder">
             <property name="groups" value="java,javax" />
             <property name="separated" value="true" />
+            <property name="sortStaticImportsAlphabetically" value="true" />
+            <property name="option" value="bottom" />
         </module>
 
         <module name="MultipleVariableDeclarations" />
@@ -256,6 +276,8 @@
 
         <!-- Comment until the check handles lambda expression with throw statement. -->
         <!-- <module name="OneStatementPerLine" /> -->
+
+        <module name="UnnecessaryParentheses" />
 
     </module>
 
