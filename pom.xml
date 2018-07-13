@@ -143,10 +143,25 @@
     </properties>
 
     <pluginRepositories>
+
+        <pluginRepository>
+            <id>central</id>
+            <url>http://repo1.maven.org/maven2</url>
+            <name>Maven Plugin Repository</name>
+
+            <releases>
+                <updatePolicy>never</updatePolicy>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+
         <pluginRepository>
             <id>repo.eclipse.org</id>
             <url>https://repo.eclipse.org/content/repositories/cbi-releases/</url>
         </pluginRepository>
+
     </pluginRepositories>
 
     <dependencyManagement>
