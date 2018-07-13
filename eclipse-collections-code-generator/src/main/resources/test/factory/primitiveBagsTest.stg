@@ -20,6 +20,7 @@ package org.eclipse.collections.impl.factory.primitive;
 import org.eclipse.collections.api.bag.primitive.Immutable<name>Bag;
 import org.eclipse.collections.api.factory.bag.primitive.Immutable<name>BagFactory;
 import org.eclipse.collections.impl.bag.mutable.primitive.<name>HashBag;
+import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
 import org.junit.Test;
@@ -124,6 +125,20 @@ public class <name>BagsTest
         Assert.assertEquals(bag = bag.newWith(<(literal.(type))("9")>), hashBag.toImmutable());
         hashBag.add(<(literal.(type))("10")>);
         Assert.assertEquals(bag = bag.newWith(<(literal.(type))("10")>), hashBag.toImmutable());
+    }
+
+    @Test
+    public void ofAllIterable()
+    {
+        Assert.assertEquals(new <name>HashBag(), <name>Bags.immutable.ofAll(Lists.mutable.\<<wrapperName>\>empty()));
+        Assert.assertEquals(<name>HashBag.newBagWith(<(literal.(type))("1")>), <name>Bags.immutable.ofAll(Lists.mutable.\<<wrapperName>\>with(<(literal.(type))("1")>)));
+        Assert.assertEquals(<name>HashBag.newBagWith(<["1", "2"]:(literal.(type))(); separator=", ">), <name>Bags.immutable.ofAll(Lists.mutable.\<<wrapperName>\>with(<["1", "2"]:(literal.(type))(); separator=", ">)));
+        Assert.assertEquals(<name>HashBag.newBagWith(<["1", "2", "2", "3"]:(literal.(type))(); separator=", ">), <name>Bags.immutable.ofAll(Lists.mutable.\<<wrapperName>\>with(<["1", "2", "2", "3"]:(literal.(type))(); separator=", ">)));
+
+        Assert.assertEquals(new <name>HashBag(), <name>Bags.mutable.ofAll(Lists.mutable.\<<wrapperName>\>empty()));
+        Assert.assertEquals(<name>HashBag.newBagWith(<(literal.(type))("1")>), <name>Bags.mutable.ofAll(Lists.mutable.\<<wrapperName>\>with(<(literal.(type))("1")>)));
+        Assert.assertEquals(<name>HashBag.newBagWith(<["1", "2"]:(literal.(type))(); separator=", ">), <name>Bags.mutable.ofAll(Lists.mutable.\<<wrapperName>\>with(<["1", "2"]:(literal.(type))(); separator=", ">)));
+        Assert.assertEquals(<name>HashBag.newBagWith(<["1", "2", "2", "3"]:(literal.(type))(); separator=", ">), <name>Bags.mutable.ofAll(Lists.mutable.\<<wrapperName>\>with(<["1", "2", "2", "3"]:(literal.(type))(); separator=", ">)));
     }
 
     @Test

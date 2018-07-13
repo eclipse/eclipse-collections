@@ -5,10 +5,10 @@ targetPath() ::= "org/eclipse/collections/api/factory/bag/primitive"
 fileName(primitive) ::= "Mutable<primitive.name>BagFactory"
 
 class(primitive) ::= <<
-<body(primitive.type, primitive.name)>
+<body(primitive.type, primitive.name, primitive.wrapperName)>
 >>
 
-body(type, name) ::= <<
+body(type, name, wrapperName) ::= <<
 <copyrightAndOthers()>
 
 package org.eclipse.collections.api.factory.bag.primitive;
@@ -50,6 +50,13 @@ public interface Mutable<name>BagFactory
     Mutable<name>Bag ofAll(<name>Iterable items);
 
     Mutable<name>Bag withAll(<name>Iterable items);
+
+    /**
+     * Same as {@link #withAll(Iterable<wrapperName>)}.
+     */
+    Mutable<name>Bag ofAll(Iterable\<<wrapperName>\> iterable);
+
+    Mutable<name>Bag withAll(Iterable\<<wrapperName>\> iterable);
     <(streamMethods.(type))()>
 }
 
