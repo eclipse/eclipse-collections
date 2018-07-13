@@ -219,23 +219,13 @@ public class UnmodifiableMutableMap<K, V>
     @Override
     public V getIfAbsent(K key, Function0<? extends V> function)
     {
-        V result = this.get(key);
-        if (this.isAbsent(result, key))
-        {
-            return function.value();
-        }
-        return result;
+        return this.getMutableMap().getIfAbsent(key, function);
     }
 
     @Override
     public V getIfAbsentValue(K key, V value)
     {
-        V result = this.get(key);
-        if (this.isAbsent(result, key))
-        {
-            return value;
-        }
-        return result;
+        return this.getMutableMap().getIfAbsentValue(key, value);
     }
 
     @Override
@@ -244,12 +234,7 @@ public class UnmodifiableMutableMap<K, V>
             Function<? super P, ? extends V> function,
             P parameter)
     {
-        V result = this.get(key);
-        if (this.isAbsent(result, key))
-        {
-            return function.valueOf(parameter);
-        }
-        return result;
+        return this.getMutableMap().getIfAbsentWith(key, function, parameter);
     }
 
     private boolean isAbsent(V result, K key)
