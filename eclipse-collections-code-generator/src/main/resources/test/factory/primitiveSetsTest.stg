@@ -23,6 +23,7 @@ import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.set.primitive.Immutable<name>Set;
 import org.eclipse.collections.api.factory.set.primitive.Immutable<name>SetFactory;
 import org.eclipse.collections.api.tuple.primitive.<name><name>Pair;
+import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
 import org.eclipse.collections.impl.test.Verify;
@@ -130,6 +131,20 @@ public class <name>SetsTest
         Assert.assertEquals(set = set.newWith(<(literal.(type))("9")>), hashSet.toImmutable());
         hashSet.add(<(literal.(type))("10")>);
         Assert.assertEquals(set = set.newWith(<(literal.(type))("10")>), hashSet.toImmutable());
+    }
+
+    @Test
+    public void ofAllIterable()
+    {
+        Assert.assertEquals(new <name>HashSet(), <name>Sets.immutable.ofAll(Lists.mutable.\<<wrapperName>\>empty()));
+        Assert.assertEquals(<name>HashSet.newSetWith(<(literal.(type))("1")>), <name>Sets.immutable.ofAll(Lists.mutable.\<<wrapperName>\>with(<(literal.(type))("1")>)));
+        Assert.assertEquals(<name>HashSet.newSetWith(<["1", "2"]:(literal.(type))(); separator=", ">), <name>Sets.immutable.ofAll(Lists.mutable.\<<wrapperName>\>with(<["1", "2"]:(literal.(type))(); separator=", ">)));
+        Assert.assertEquals(<name>HashSet.newSetWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">), <name>Sets.immutable.ofAll(Lists.mutable.\<<wrapperName>\>with(<["1", "2", "2", "3"]:(literal.(type))(); separator=", ">)));
+
+        Assert.assertEquals(new <name>HashSet(), <name>Sets.mutable.ofAll(Lists.mutable.\<<wrapperName>\>empty()));
+        Assert.assertEquals(<name>HashSet.newSetWith(<(literal.(type))("1")>), <name>Sets.mutable.ofAll(Lists.mutable.\<<wrapperName>\>with(<(literal.(type))("1")>)));
+        Assert.assertEquals(<name>HashSet.newSetWith(<["1", "2"]:(literal.(type))(); separator=", ">), <name>Sets.mutable.ofAll(Lists.mutable.\<<wrapperName>\>with(<["1", "2"]:(literal.(type))(); separator=", ">)));
+        Assert.assertEquals(<name>HashSet.newSetWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">), <name>Sets.mutable.ofAll(Lists.mutable.\<<wrapperName>\>with(<["1", "2", "2", "3"]:(literal.(type))(); separator=", ">)));
     }
 
     @Test

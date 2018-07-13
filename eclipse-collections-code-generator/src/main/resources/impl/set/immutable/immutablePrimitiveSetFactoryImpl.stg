@@ -5,10 +5,10 @@ targetPath() ::= "org/eclipse/collections/impl/set/immutable/primitive"
 fileName(primitive) ::= "Immutable<primitive.name>SetFactoryImpl"
 
 class(primitive) ::= <<
-<body(primitive.type, primitive.name)>
+<body(primitive.type, primitive.name, primitive.wrapperName)>
 >>
 
-body(type, name) ::= <<
+body(type, name, wrapperName) ::= <<
 <copyrightAndOthers()>
 
 package org.eclipse.collections.impl.set.immutable.primitive;
@@ -17,6 +17,7 @@ import org.eclipse.collections.api.<name>Iterable;
 import org.eclipse.collections.api.factory.set.primitive.Immutable<name>SetFactory;
 import org.eclipse.collections.api.set.primitive.Immutable<name>Set;
 import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
+import org.eclipse.collections.impl.factory.primitive.<name>Sets;
 <(wideStreamImport.(type))>
 
 /**
@@ -93,6 +94,24 @@ public enum Immutable<name>SetFactoryImpl implements Immutable<name>SetFactory
             return (Immutable<name>Set) items;
         }
         return this.with(items.toArray());
+    }
+
+    /**
+     * @since 10.0
+     */
+    @Override
+    public Immutable<name>Set ofAll(Iterable\<<wrapperName>\> iterable)
+    {
+        return this.withAll(iterable);
+    }
+
+    /**
+     * @since 10.0
+     */
+    @Override
+    public Immutable<name>Set withAll(Iterable\<<wrapperName>\> iterable)
+    {
+        return <name>Sets.mutable.withAll(iterable).toImmutable();
     }
     <(streamMethods.(type))()>
 }

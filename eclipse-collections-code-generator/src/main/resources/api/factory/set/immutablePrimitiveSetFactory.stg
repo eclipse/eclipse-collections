@@ -5,10 +5,10 @@ targetPath() ::= "org/eclipse/collections/api/factory/set/primitive"
 fileName(primitive) ::= "Immutable<primitive.name>SetFactory"
 
 class(primitive) ::= <<
-<body(primitive.type, primitive.name)>
+<body(primitive.type, primitive.name, primitive.wrapperName)>
 >>
 
-body(type, name) ::= <<
+body(type, name, wrapperName) ::= <<
 <copyrightAndOthers()>
 
 package org.eclipse.collections.api.factory.set.primitive;
@@ -60,6 +60,13 @@ public interface Immutable<name>SetFactory
     Immutable<name>Set ofAll(<name>Iterable items);
 
     Immutable<name>Set withAll(<name>Iterable items);
+
+    /**
+     * Same as {@link #withAll(Iterable<wrapperName>)}.
+     */
+    Immutable<name>Set ofAll(Iterable\<<wrapperName>\> iterable);
+
+    Immutable<name>Set withAll(Iterable\<<wrapperName>\> iterable);
     <(streamMethods.(type))()>
 }
 
