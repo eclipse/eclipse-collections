@@ -5,10 +5,10 @@ targetPath() ::= "org/eclipse/collections/api/factory/stack/primitive"
 fileName(primitive) ::= "Mutable<primitive.name>StackFactory"
 
 class(primitive) ::= <<
-<body(primitive.type, primitive.name)>
+<body(primitive.type, primitive.name, primitive.wrapperName)>
 >>
 
-body(type, name) ::= <<
+body(type, name, wrapperName) ::= <<
 <copyrightAndOthers()>
 
 package org.eclipse.collections.api.factory.stack.primitive;
@@ -50,6 +50,13 @@ public interface Mutable<name>StackFactory
     Mutable<name>Stack ofAll(<name>Iterable items);
 
     Mutable<name>Stack withAll(<name>Iterable items);
+
+    /**
+     * Same as {@link #withAll(Iterable<wrapperName>)}.
+     */
+    Mutable<name>Stack ofAll(Iterable\<<wrapperName>\> iterable);
+
+    Mutable<name>Stack withAll(Iterable\<<wrapperName>\> iterable);
 
     /**
      * Same as {@link #withAllReversed(<name>Iterable)}.

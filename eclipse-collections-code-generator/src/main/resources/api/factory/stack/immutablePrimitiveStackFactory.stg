@@ -5,10 +5,10 @@ targetPath() ::= "org/eclipse/collections/api/factory/stack/primitive"
 fileName(primitive) ::= "Immutable<primitive.name>StackFactory"
 
 class(primitive) ::= <<
-<body(primitive.type, primitive.name)>
+<body(primitive.type, primitive.name, primitive.wrapperName)>
 >>
 
-body(type, name) ::= <<
+body(type, name, wrapperName) ::= <<
 <copyrightAndOthers()>
 
 package org.eclipse.collections.api.factory.stack.primitive;
@@ -60,6 +60,13 @@ public interface Immutable<name>StackFactory
     Immutable<name>Stack ofAll(<name>Iterable items);
 
     Immutable<name>Stack withAll(<name>Iterable items);
+
+    /**
+     * Same as {@link #withAll(Iterable<wrapperName>)}.
+     */
+    Immutable<name>Stack ofAll(Iterable\<<wrapperName>\> iterable);
+
+    Immutable<name>Stack withAll(Iterable\<<wrapperName>\> iterable);
 
     /**
      * Same as {@link #withAllReversed(<name>Iterable)}.

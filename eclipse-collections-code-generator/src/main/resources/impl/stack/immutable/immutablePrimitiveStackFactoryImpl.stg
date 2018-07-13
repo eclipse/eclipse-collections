@@ -5,10 +5,10 @@ targetPath() ::= "org/eclipse/collections/impl/stack/immutable/primitive"
 fileName(primitive) ::= "Immutable<primitive.name>StackFactoryImpl"
 
 class(primitive) ::= <<
-<body(primitive.type, primitive.name)>
+<body(primitive.type, primitive.name, primitive.wrapperName)>
 >>
 
-body(type, name) ::= <<
+body(type, name, wrapperName) ::= <<
 <copyrightAndOthers()>
 
 package org.eclipse.collections.impl.stack.immutable.primitive;
@@ -16,6 +16,7 @@ package org.eclipse.collections.impl.stack.immutable.primitive;
 import org.eclipse.collections.api.<name>Iterable;
 import org.eclipse.collections.api.factory.stack.primitive.Immutable<name>StackFactory;
 import org.eclipse.collections.api.stack.primitive.Immutable<name>Stack;
+import org.eclipse.collections.impl.factory.primitive.<name>Stacks;
 <(wideStreamImport.(type))>
 
 /**
@@ -92,6 +93,24 @@ public enum Immutable<name>StackFactoryImpl implements Immutable<name>StackFacto
             return (Immutable<name>Stack) items;
         }
         return this.with(items.toArray());
+    }
+
+    /**
+     * @since 10.0
+     */
+    @Override
+    public Immutable<name>Stack ofAll(Iterable\<<wrapperName>\> iterable)
+    {
+        return this.withAll(iterable);
+    }
+
+    /**
+     * @since 10.0
+     */
+    @Override
+    public Immutable<name>Stack withAll(Iterable\<<wrapperName>\> iterable)
+    {
+        return <name>Stacks.mutable.withAll(iterable).toImmutable();
     }
 
     @Override
