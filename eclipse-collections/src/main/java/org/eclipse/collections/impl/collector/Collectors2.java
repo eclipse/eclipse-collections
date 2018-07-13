@@ -805,7 +805,7 @@ public final class Collectors2
      * <p>Same as {@link #groupBy(Function, Supplier)}, except the result of evaluating groupBy function should return a
      * unique key, or else an exception is thrown.</p>
      *
-     * <p>Equivalent to using @{@link RichIterable#groupByUniqueKey(Function, MutableMap)}</p>
+     * <p>Equivalent to using {@link RichIterable#groupByUniqueKey(Function, MutableMapIterable)}</p>
      */
     public static <T, K, R extends MutableMapIterable<K, T>> Collector<T, ?, R> groupByUniqueKey(
             Function<? super T, ? extends K> groupBy,
@@ -1862,24 +1862,6 @@ public final class Collectors2
                     return collection1;
                 },
                 EMPTY_CHARACTERISTICS);
-    }
-
-    /**
-     * Returns a SummaryStatistics with results for int, long and double functions calculated for
-     * each element in the Stream or Collection this Collector is applied to.
-     *
-     * @since 8.1
-     */
-    public static <T> Collector<T, ?, SummaryStatistics<T>> summarizing(
-            ImmutableList<IntFunction<? super T>> intFunctions,
-            ImmutableList<LongFunction<? super T>> longFunctions,
-            ImmutableList<DoubleFunction<? super T>> doubleFunctions)
-    {
-        SummaryStatistics<T> summaryStatistics = new SummaryStatistics<>();
-        intFunctions.forEachWithIndex((each, index) -> summaryStatistics.addIntFunction(Integer.valueOf(index), each));
-        longFunctions.forEachWithIndex((each, index) -> summaryStatistics.addLongFunction(Integer.valueOf(index), each));
-        doubleFunctions.forEachWithIndex((each, index) -> summaryStatistics.addDoubleFunction(Integer.valueOf(index), each));
-        return summaryStatistics.toCollector();
     }
 
     /**
