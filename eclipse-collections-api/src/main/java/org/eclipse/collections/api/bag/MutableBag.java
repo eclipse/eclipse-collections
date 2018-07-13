@@ -68,10 +68,7 @@ public interface MutableBag<T>
      * @since 9.2
      */
     @Override
-    default MutableSet<T> selectUnique()
-    {
-        throw new UnsupportedOperationException("Adding default implementation so as to not break compatibility");
-    }
+    MutableSet<T> selectUnique();
 
     @Override
     MutableBag<T> with(T element);

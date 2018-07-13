@@ -81,10 +81,7 @@ public interface ImmutableSortedBag<T>
      * @since 9.2
      */
     @Override
-    default ImmutableSortedSet<T> selectUnique()
-    {
-        throw new UnsupportedOperationException("Adding default implementation so as to not break compatibility");
-    }
+    ImmutableSortedSet<T> selectUnique();
 
     @Override
     ImmutableSortedBag<T> tap(Procedure<? super T> procedure);

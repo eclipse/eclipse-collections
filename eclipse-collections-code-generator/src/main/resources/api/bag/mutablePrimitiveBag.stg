@@ -71,10 +71,7 @@ public interface Mutable<name>Bag extends Mutable<name>Collection, <name>Bag
      * @since 9.2
      */
     @Override
-    default Mutable<name>Set selectUnique()
-    {
-        throw new UnsupportedOperationException("Adding default implementation so as to not break compatibility");
-    }
+    Mutable<name>Set selectUnique();
 
     /**
      * Returns the {@code count} most frequently occurring items.
