@@ -5,10 +5,10 @@ targetPath() ::= "org/eclipse/collections/api/factory/list/primitive"
 fileName(primitive) ::= "Mutable<primitive.name>ListFactory"
 
 class(primitive) ::= <<
-<body(primitive.type, primitive.name)>
+<body(primitive.type, primitive.name, primitive.wrapperName)>
 >>
 
-body(type, name) ::= <<
+body(type, name, wrapperName) ::= <<
 <copyrightAndOthers()>
 
 package org.eclipse.collections.api.factory.list.primitive;
@@ -50,6 +50,13 @@ public interface Mutable<name>ListFactory
     Mutable<name>List ofAll(<name>Iterable items);
 
     Mutable<name>List withAll(<name>Iterable items);
+
+    /**
+     * Same as {@link #withAll(Iterable<wrapperName>)}.
+     */
+    Mutable<name>List ofAll(Iterable\<<wrapperName>\> iterable);
+
+    Mutable<name>List withAll(Iterable\<<wrapperName>\> iterable);
     <(streamMethods.(type))()>
 }
 

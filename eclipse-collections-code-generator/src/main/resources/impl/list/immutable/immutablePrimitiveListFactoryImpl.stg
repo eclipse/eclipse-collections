@@ -5,10 +5,10 @@ targetPath() ::= "org/eclipse/collections/impl/list/immutable/primitive"
 fileName(primitive) ::= "Immutable<primitive.name>ListFactoryImpl"
 
 class(primitive) ::= <<
-<body(primitive.type, primitive.name)>
+<body(primitive.type, primitive.name, primitive.wrapperName)>
 >>
 
-body(type, name) ::= <<
+body(type, name, wrapperName) ::= <<
 <copyrightAndOthers()>
 
 package org.eclipse.collections.impl.list.immutable.primitive;
@@ -16,6 +16,7 @@ package org.eclipse.collections.impl.list.immutable.primitive;
 import org.eclipse.collections.api.<name>Iterable;
 import org.eclipse.collections.api.factory.list.primitive.Immutable<name>ListFactory;
 import org.eclipse.collections.api.list.primitive.Immutable<name>List;
+import org.eclipse.collections.impl.factory.primitive.<name>Lists;
 <(wideStreamImport.(type))>
 
 /**
@@ -92,6 +93,24 @@ public enum Immutable<name>ListFactoryImpl implements Immutable<name>ListFactory
             return (Immutable<name>List) items;
         }
         return this.with(items.toArray());
+    }
+
+    /**
+     * @since 10.0
+     */
+    @Override
+    public Immutable<name>List ofAll(Iterable\<<wrapperName>\> iterable)
+    {
+        return this.withAll(iterable);
+    }
+
+    /**
+     * @since 10.0
+     */
+    @Override
+    public Immutable<name>List withAll(Iterable\<<wrapperName>\> iterable)
+    {
+        return <name>Lists.mutable.withAll(iterable).toImmutable();
     }
     <(streamMethods.(type))()>
 }

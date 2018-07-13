@@ -19,6 +19,7 @@ package org.eclipse.collections.impl.factory.primitive;
 
 import org.eclipse.collections.api.factory.list.primitive.Immutable<name>ListFactory;
 import org.eclipse.collections.api.list.primitive.Immutable<name>List;
+import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
@@ -136,6 +137,20 @@ public class <name>ListsTest
     public void classIsNonInstantiable()
     {
         Verify.assertClassNonInstantiable(<name>Lists.class);
+    }
+
+    @Test
+    public void ofAllIterable()
+    {
+        Assert.assertEquals(new <name>ArrayList(), <name>Lists.immutable.ofAll(Lists.mutable.\<<wrapperName>\>empty()));
+        Assert.assertEquals(<name>ArrayList.newListWith(<(literal.(type))("1")>), <name>Lists.immutable.ofAll(Lists.mutable.\<<wrapperName>\>with(<(literal.(type))("1")>)));
+        Assert.assertEquals(<name>ArrayList.newListWith(<["1", "2"]:(literal.(type))(); separator=", ">), <name>Lists.immutable.ofAll(Lists.mutable.\<<wrapperName>\>with(<["1", "2"]:(literal.(type))(); separator=", ">)));
+        Assert.assertEquals(<name>ArrayList.newListWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">), <name>Lists.immutable.ofAll(Lists.mutable.\<<wrapperName>\>with(<["1", "2", "3"]:(literal.(type))(); separator=", ">)));
+
+        Assert.assertEquals(new <name>ArrayList(), <name>Lists.mutable.ofAll(Lists.mutable.\<<wrapperName>\>empty()));
+        Assert.assertEquals(<name>ArrayList.newListWith(<(literal.(type))("1")>), <name>Lists.mutable.ofAll(Lists.mutable.\<<wrapperName>\>with(<(literal.(type))("1")>)));
+        Assert.assertEquals(<name>ArrayList.newListWith(<["1", "2"]:(literal.(type))(); separator=", ">), <name>Lists.mutable.ofAll(Lists.mutable.\<<wrapperName>\>with(<["1", "2"]:(literal.(type))(); separator=", ">)));
+        Assert.assertEquals(<name>ArrayList.newListWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">), <name>Lists.mutable.ofAll(Lists.mutable.\<<wrapperName>\>with(<["1", "2", "3"]:(literal.(type))(); separator=", ">)));
     }
 }
 
