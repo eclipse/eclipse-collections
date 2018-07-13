@@ -73,10 +73,7 @@ public interface ImmutableBag<T> extends UnsortedBag<T>, ImmutableBagIterable<T>
      * @since 9.2
      */
     @Override
-    default ImmutableSet<T> selectUnique()
-    {
-        throw new UnsupportedOperationException("Adding default implementation so as to not break compatibility");
-    }
+    ImmutableSet<T> selectUnique();
 
     @Override
     ImmutableBag<T> tap(Procedure<? super T> procedure);

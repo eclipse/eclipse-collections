@@ -94,10 +94,7 @@ public interface MutableBagIterable<T> extends Bag<T>, MutableCollection<T>
      * @since 9.2
      */
     @Override
-    default MutableSetIterable<T> selectUnique()
-    {
-        throw new UnsupportedOperationException("Adding default implementation so as to not break compatibility");
-    }
+    MutableSetIterable<T> selectUnique();
 
     @Override
     MutableMapIterable<T, Integer> toMapOfItemToCount();

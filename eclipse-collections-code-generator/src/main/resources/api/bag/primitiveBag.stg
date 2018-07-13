@@ -71,10 +71,7 @@ public interface <name>Bag extends <name>Iterable
      *
      * @since 9.2
      */
-    default <name>Set selectUnique()
-    {
-        throw new UnsupportedOperationException("Adding default implementation so as to not break compatibility");
-    }
+    <name>Set selectUnique();
 
     /**
      * Returns the {@code count} most frequently occurring items.

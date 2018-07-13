@@ -59,10 +59,7 @@ public interface UnsortedBag<T> extends Bag<T>
      * @since 9.2
      */
     @Override
-    default UnsortedSetIterable<T> selectUnique()
-    {
-        throw new UnsupportedOperationException("Adding default implementation so as to not break compatibility");
-    }
+    UnsortedSetIterable<T> selectUnique();
 
     @Override
     UnsortedBag<T> select(Predicate<? super T> predicate);
