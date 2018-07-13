@@ -47,50 +47,49 @@ import org.junit.Test;
 public class NonInstantiableTest
 {
     // TODO: Move the test for each of these classes into appropriate generated test classes
-    private static final Class<?>[] GENERATED_NON_INSTANTIABLE_CLASSES =
-            {
-                    BooleanStacks.class,
-                    ByteBooleanMaps.class,
-                    CharBooleanMaps.class,
-                    DoubleBooleanMaps.class,
-                    FloatBooleanMaps.class,
-                    IntBooleanMaps.class,
-                    LongBooleanMaps.class,
-                    ShortBooleanMaps.class,
-                    ObjectBooleanMaps.class,
-                    BooleanIterableIterate.class,
-                    BooleanIteratorIterate.class,
-                    LazyBooleanIterate.class,
-            };
+    private static final Class<?>[] GENERATED_NON_INSTANTIABLE_CLASSES = {
+            BooleanStacks.class,
+            ByteBooleanMaps.class,
+            CharBooleanMaps.class,
+            DoubleBooleanMaps.class,
+            FloatBooleanMaps.class,
+            IntBooleanMaps.class,
+            LongBooleanMaps.class,
+            ShortBooleanMaps.class,
+            ObjectBooleanMaps.class,
+            BooleanIterableIterate.class,
+            BooleanIteratorIterate.class,
+            LazyBooleanIterate.class,
+    };
 
-    private static final Class<?>[] HAND_CODED_NON_INSTANTIABLE_CLASSES = // With no dedicated test class
-            {
-                    PrimitiveFunctions.class,
+    // With no dedicated test class
+    private static final Class<?>[] HAND_CODED_NON_INSTANTIABLE_CLASSES = {
+            PrimitiveFunctions.class,
 
-                    CharToCharFunctions.class,
-                    IntToIntFunctions.class,
+            CharToCharFunctions.class,
+            IntToIntFunctions.class,
 
-                    MaxFunction.class,
-                    MaxSizeFunction.class,
-                    MinFunction.class,
-                    MinSizeFunction.class,
-                    SubtractFunction.class,
+            MaxFunction.class,
+            MaxSizeFunction.class,
+            MinFunction.class,
+            MinSizeFunction.class,
+            SubtractFunction.class,
 
-                    BooleanSets.class,
+            BooleanSets.class,
 
-                    Combiners.class,
+            Combiners.class,
 
-                    PrimitiveTuples.class,
+            PrimitiveTuples.class,
 
-                    InternalArrayIterate.class,
-                    IteratorIterate.class,
-                    MutableCollectionIterate.class,
-                    ReflectionHelper.class,
-                    SetIterables.class,
-                    SetIterate.class,
-                    SortedMaps.class,
-                    SortedSetIterables.class
-            };
+            InternalArrayIterate.class,
+            IteratorIterate.class,
+            MutableCollectionIterate.class,
+            ReflectionHelper.class,
+            SetIterables.class,
+            SetIterate.class,
+            SortedMaps.class,
+            SortedSetIterables.class
+    };
 
     @Test
     public void generatedNonInstantiableClassesThrow()
