@@ -14,8 +14,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.list.primitive.BooleanList;
@@ -738,74 +736,6 @@ public class Collectors2AdditionalTest
         DoubleList actual =
                 this.bigData.parallelStream().collect(Collectors2.collectDouble(each -> (double) each, DoubleLists.mutable::empty));
         Assert.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void summarizeUsingStaticMethod()
-    {
-        SummaryStatistics<ValueHolder> summaryStatistics =
-                Lists.mutable.withNValues(3, () -> new ValueHolder(5, 100, 10.0))
-                        .stream()
-                        .collect(Collectors2.summarizing(
-                                Lists.immutable.with(ValueHolder::getIntValue),
-                                Lists.immutable.with(ValueHolder::getLongValue),
-                                Lists.immutable.with(ValueHolder::getDoubleValue)));
-        Assert.assertEquals(15, summaryStatistics.getIntStats(Integer.valueOf(0)).getSum());
-        Assert.assertEquals(300L, summaryStatistics.getLongStats(Integer.valueOf(0)).getSum());
-        Assert.assertEquals(30.0d, summaryStatistics.getDoubleStats(Integer.valueOf(0)).getSum(), 0.0);
-    }
-
-    @Test
-    public void summarizeUsingBuilder()
-    {
-        SummaryStatistics<ValueHolder> summaryStatistics =
-                Lists.mutable.withNValues(3, () -> new ValueHolder(5, 100L, 10.0))
-                        .stream()
-                        .collect(new SummaryStatistics<ValueHolder>()
-                                .addDoubleFunction(Integer.valueOf(0), ValueHolder::getDoubleValue)
-                                .addLongFunction(Integer.valueOf(0), ValueHolder::getLongValue)
-                                .addIntFunction(Integer.valueOf(0), ValueHolder::getIntValue).toCollector());
-        Assert.assertEquals(15, summaryStatistics.getIntStats(Integer.valueOf(0)).getSum());
-        Assert.assertEquals(300L, summaryStatistics.getLongStats(Integer.valueOf(0)).getSum());
-        Assert.assertEquals(30.0d, summaryStatistics.getDoubleStats(Integer.valueOf(0)).getSum(), 0.0);
-    }
-
-    @Test
-    public void summarizeDownstream()
-    {
-        Map<String, SummaryStatistics<ValueHolder>> map =
-                Lists.mutable.with(
-                        new ValueHolder("A", 5, 100L, 10.0),
-                        new ValueHolder("A", 5, 100L, 10.0),
-                        new ValueHolder("B", 5, 100L, 10.0))
-                        .stream()
-                        .collect(Collectors.groupingBy(ValueHolder::getGroupBy,
-                                new SummaryStatistics<ValueHolder>()
-                                        .addDoubleFunction(Integer.valueOf(0), ValueHolder::getDoubleValue)
-                                        .addLongFunction(Integer.valueOf(0), ValueHolder::getLongValue)
-                                        .addIntFunction(Integer.valueOf(0), ValueHolder::getIntValue).toCollector()));
-        Assert.assertEquals(10, map.get("A").getIntStats(Integer.valueOf(0)).getSum());
-        Assert.assertEquals(5, map.get("B").getIntStats(Integer.valueOf(0)).getSum());
-        Assert.assertEquals(200L, map.get("A").getLongStats(Integer.valueOf(0)).getSum());
-        Assert.assertEquals(100L, map.get("B").getLongStats(Integer.valueOf(0)).getSum());
-        Assert.assertEquals(20.0d, map.get("A").getDoubleStats(Integer.valueOf(0)).getSum(), 0.0);
-        Assert.assertEquals(10.0d, map.get("B").getDoubleStats(Integer.valueOf(0)).getSum(), 0.0);
-    }
-
-    @Test
-    public void summarizingParallel()
-    {
-        ValueHolder valueHolder = new ValueHolder(5, 100, 10.0);
-        SummaryStatistics<ValueHolder> summaryStatistics =
-                Lists.mutable.withNValues(25_000, () -> valueHolder)
-                        .parallelStream()
-                        .collect(Collectors2.summarizing(
-                                Lists.immutable.with(ValueHolder::getIntValue),
-                                Lists.immutable.with(ValueHolder::getLongValue),
-                                Lists.immutable.with(ValueHolder::getDoubleValue)));
-        Assert.assertEquals(125_000, summaryStatistics.getIntStats(Integer.valueOf(0)).getSum());
-        Assert.assertEquals(2_500_000L, summaryStatistics.getLongStats(Integer.valueOf(0)).getSum());
-        Assert.assertEquals(250000.0d, summaryStatistics.getDoubleStats(Integer.valueOf(0)).getSum(), 0.0);
     }
 
     @Test
