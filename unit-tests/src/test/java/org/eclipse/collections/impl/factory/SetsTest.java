@@ -127,13 +127,14 @@ public class SetsTest
                 this.uniqueSortedSets.get(2),
                 "Dick", "Fido", "Harry", "Jane", "Mary", "Sarah", "Spike", "Spuds", "Tom");
 
-        //TODO: union operations on sorted sets will not pass identity test until SortedSetAdapter is implemented
-//        this.assertUnionProperties(this.<String>containsExactlyInOrderBlock(),
-//                                   this.<String>setsEqualAndSortedBlock(),
-//                                   this.uniqueReverseSortedSets.get(0),
-//                                   this.uniqueReverseSortedSets.get(1),
-//                                   this.uniqueReverseSortedSets.get(2),
-//                                   "Tom", "Spuds", "Spike", "Sarah", "Mary", "Jane", "Harry", "Fido", "Dick");
+        // TODO: union operations on sorted sets will not pass identity test until SortedSetAdapter is implemented
+        // this.assertUnionProperties(
+        //         this.<String>containsExactlyInOrderBlock(),
+        //         this.<String>setsEqualAndSortedBlock(),
+        //         this.uniqueReverseSortedSets.get(0),
+        //         this.uniqueReverseSortedSets.get(1),
+        //         this.uniqueReverseSortedSets.get(2),
+        //         "Tom", "Spuds", "Spike", "Sarah", "Mary", "Jane", "Harry", "Fido", "Dick");
     }
 
     @Test
@@ -157,13 +158,14 @@ public class SetsTest
                 this.overlappingSortedSets.get(2),
                 "Dick", "Harry", "Larry", "Paul", "Tom");
 
-        //TODO: union operations on sorted sets will not pass identity test until SortedSetAdapter is implemented
-//        this.assertUnionProperties(this.<String>containsExactlyInOrderBlock(),
-//                                   this.<String>setsEqualAndSortedBlock(),
-//                                   this.overlappingReverseSortedSets.get(0),
-//                                   this.overlappingReverseSortedSets.get(1),
-//                                   this.overlappingReverseSortedSets.get(2),
-//                                   "Tom", "Paul", "Larry", "Harry", "Dick");
+        // TODO: union operations on sorted sets will not pass identity test until SortedSetAdapter is implemented
+        // this.assertUnionProperties(
+        //         this.<String>containsExactlyInOrderBlock(),
+        //         this.<String>setsEqualAndSortedBlock(),
+        //         this.overlappingReverseSortedSets.get(0),
+        //         this.overlappingReverseSortedSets.get(1),
+        //         this.overlappingReverseSortedSets.get(2),
+        //         "Tom", "Paul", "Larry", "Harry", "Dick");
     }
 
     @Test
@@ -187,13 +189,14 @@ public class SetsTest
                 this.identicalSortedSets.get(2),
                 "Dick", "Harry", "Tom");
 
-        //TODO: union operations on sorted sets will not pass identity test until SortedSetAdapter is implemented
-//        this.assertUnionProperties(this.<String>containsExactlyInOrderBlock(),
-//                                   this.<String>setsEqualAndSortedBlock(),
-//                                   this.identicalReverseSortedSets.get(0),
-//                                   this.identicalReverseSortedSets.get(1),
-//                                   this.identicalReverseSortedSets.get(2),
-//                                   "Tom", "Harry", "Dick");
+        // TODO: union operations on sorted sets will not pass identity test until SortedSetAdapter is implemented
+        // this.assertUnionProperties(
+        //         this.<String>containsExactlyInOrderBlock(),
+        //         this.<String>setsEqualAndSortedBlock(),
+        //         this.identicalReverseSortedSets.get(0),
+        //         this.identicalReverseSortedSets.get(1),
+        //         this.identicalReverseSortedSets.get(2),
+        //         "Tom", "Harry", "Dick");
     }
 
     @Test
@@ -608,7 +611,7 @@ public class SetsTest
     {
         Set<E> set1 = function1.value(setA, function2.value(setB, setC));
         Set<E> set2 = function2.value(function1.value(setA, setB), function1.value(setA, setC));
-        //TODO: setsEqual will fail on some sorted sets until SortableSetAdapter is implemented
+        // TODO: setsEqual will fail on some sorted sets until SortableSetAdapter is implemented
         //setsEqualProcedure.value(set1, set2);
     }
 

@@ -193,6 +193,16 @@ castIntToNarrowType ::= [
     "double": "noCast"
 ]
 
+castLongToNarrowType ::= [
+    "byte": "byteCast",
+    "short": "shortCast",
+    "char": "charCast",
+    "int": "intCast",
+    "long": "noCast",
+    "float": "noCast",
+    "double": "noCast"
+]
+
 castLongToNarrowTypeWithParens ::= [
     "byte": "byteCastWithParens",
     "short": "shortCastWithParens",

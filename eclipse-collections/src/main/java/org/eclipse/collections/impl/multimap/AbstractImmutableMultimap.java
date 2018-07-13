@@ -58,7 +58,7 @@ public abstract class AbstractImmutableMultimap<K, V, C extends ImmutableCollect
         return this.map;
     }
 
-// Query Operations
+    // Query Operations
 
     @Override
     public int size()

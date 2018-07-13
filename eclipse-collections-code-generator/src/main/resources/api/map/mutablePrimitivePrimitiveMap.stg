@@ -34,7 +34,7 @@ public interface Mutable<name1><name2>Map extends <name1><name2>Map, Mutable<nam
 {
     void put(<type1> key, <type2> value);
 
-   /**
+    /**
      * This method allows Mutable<name1><name2>Map the ability to add an element in the form of <name1><name2>Pair.
      *
      * @see #put(<type1>, <type2>)

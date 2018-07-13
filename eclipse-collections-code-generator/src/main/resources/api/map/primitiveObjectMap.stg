@@ -70,7 +70,7 @@ public interface <name>ObjectMap\<V> extends PrimitiveObjectMap\<V>
      * @throws IllegalStateException if the Object<name>Map contains duplicate values.
      * @since 9.0
      */
-     Object<name>Map\<V> flipUniqueValues();
+    Object<name>Map\<V> flipUniqueValues();
 }
 
 >>

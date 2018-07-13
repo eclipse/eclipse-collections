@@ -603,8 +603,7 @@ sumOfMethodsSmall() ::= <<
 @Test
 public void sumOfFloatConsistentRounding()
 {
-    MutableList\<Integer> randomIntegers
-        = Interval.fromTo(<wrapperName>.MIN_VALUE, <wrapperName>.MAX_VALUE)
+    MutableList\<Integer> randomIntegers = Interval.fromTo(<wrapperName>.MIN_VALUE, <wrapperName>.MAX_VALUE)
             .toList()
             .shuffleThis()
             .reject(i -> i == 0);
@@ -623,8 +622,7 @@ public void sumOfFloatConsistentRounding()
 @Test
 public void sumOfDoubleConsistentRounding()
 {
-    MutableList\<Integer> randomIntegers
-        = Interval.fromTo(<wrapperName>.MIN_VALUE, <wrapperName>.MAX_VALUE)
+    MutableList\<Integer> randomIntegers = Interval.fromTo(<wrapperName>.MIN_VALUE, <wrapperName>.MAX_VALUE)
             .toList()
             .shuffleThis()
             .reject(i -> i == 0);
