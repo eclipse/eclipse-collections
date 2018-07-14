@@ -21,6 +21,7 @@ import java.util.Set;
 
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.set.primitive.Immutable<name>Set;
+import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
 import org.eclipse.collections.api.factory.set.primitive.Immutable<name>SetFactory;
 import org.eclipse.collections.api.tuple.primitive.<name><name>Pair;
 import org.eclipse.collections.impl.factory.Lists;
@@ -92,7 +93,7 @@ public class <name>SetsTest
 
     @SuppressWarnings("RedundantArrayCreation")
     @Test
-    public void newSetWithArray()
+    public void newSetWithArray_immutable()
     {
         Immutable<name>Set set = <name>Sets.immutable.empty();
         Assert.assertEquals(set = set.newWith(<(literal.(type))("1")>), <name>Sets.immutable.with(new <type>[]{<(literal.(type))("1")>}));
@@ -105,6 +106,35 @@ public class <name>SetsTest
         Assert.assertEquals(set = set.newWith(<(literal.(type))("8")>), <name>Sets.immutable.with(new <type>[]{<["1", "2", "3", "4", "5", "6", "7", "8"]:(literal.(type))(); separator=", ">}));
         Assert.assertEquals(set = set.newWith(<(literal.(type))("9")>), <name>Sets.immutable.with(new <type>[]{<["1", "2", "3", "4", "5", "6", "7", "8", "9"]:(literal.(type))(); separator=", ">}));
         Assert.assertEquals(set = set.newWith(<(literal.(type))("10")>), <name>Sets.immutable.with(new <type>[]{<["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]:(literal.(type))(); separator=", ">}));
+    }
+
+    @SuppressWarnings("RedundantArrayCreation")
+    @Test
+    public void newSetWithArray_mutable()
+    {
+        Mutable<name>Set set = <name>Sets.mutable.empty();
+        Assert.assertEquals(set, <name>Sets.mutable.with(null));
+        Assert.assertEquals(set, <name>Sets.mutable.with(new <type>[]{}));
+        set.add(<(literal.(type))("1")>);
+        Assert.assertEquals(set, <name>Sets.mutable.with(new <type>[]{<(literal.(type))("1")>}));
+        set.add(<(literal.(type))("2")>);
+        Assert.assertEquals(set, <name>Sets.mutable.with(new <type>[]{<["1", "2"]:(literal.(type))(); separator=", ">}));
+        set.add(<(literal.(type))("3")>);
+        Assert.assertEquals(set, <name>Sets.mutable.with(new <type>[]{<["1", "2", "3"]:(literal.(type))(); separator=", ">}));
+        set.add(<(literal.(type))("4")>);
+        Assert.assertEquals(set, <name>Sets.mutable.with(new <type>[]{<["1", "2", "3", "4"]:(literal.(type))(); separator=", ">}));
+        set.add(<(literal.(type))("5")>);
+        Assert.assertEquals(set, <name>Sets.mutable.with(new <type>[]{<["1", "2", "3", "4", "5"]:(literal.(type))(); separator=", ">}));
+        set.add(<(literal.(type))("6")>);
+        Assert.assertEquals(set, <name>Sets.mutable.with(new <type>[]{<["1", "2", "3", "4", "5", "6"]:(literal.(type))(); separator=", ">}));
+        set.add(<(literal.(type))("7")>);
+        Assert.assertEquals(set, <name>Sets.mutable.with(new <type>[]{<["1", "2", "3", "4", "5", "6", "7"]:(literal.(type))(); separator=", ">}));
+        set.add(<(literal.(type))("8")>);
+        Assert.assertEquals(set, <name>Sets.mutable.with(new <type>[]{<["1", "2", "3", "4", "5", "6", "7", "8"]:(literal.(type))(); separator=", ">}));
+        set.add(<(literal.(type))("9")>);
+        Assert.assertEquals(set, <name>Sets.mutable.with(new <type>[]{<["1", "2", "3", "4", "5", "6", "7", "8", "9"]:(literal.(type))(); separator=", ">}));
+        set.add(<(literal.(type))("10")>);
+        Assert.assertEquals(set, <name>Sets.mutable.with(new <type>[]{<["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]:(literal.(type))(); separator=", ">}));
     }
 
     @Test

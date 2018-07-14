@@ -135,6 +135,7 @@ public class <name>StacksTest
     public void newStackWithArray_mutable()
     {
         Mutable<name>Stack stack = <name>Stacks.mutable.of();
+        Assert.assertEquals(stack, <name>Stacks.mutable.of(new <type>[]{}));
         stack.push(<(literal.(type))("1")>);
         Assert.assertEquals(stack, <name>Stacks.mutable.of(new <type>[]{<(literal.(type))("1")>}));
         stack.push(<(literal.(type))("2")>);

@@ -19,6 +19,7 @@ package org.eclipse.collections.impl.factory.primitive;
 
 import org.eclipse.collections.api.factory.list.primitive.Immutable<name>ListFactory;
 import org.eclipse.collections.api.list.primitive.Immutable<name>List;
+import org.eclipse.collections.api.list.primitive.Mutable<name>List;
 import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
 import org.eclipse.collections.impl.test.Verify;
@@ -90,7 +91,7 @@ public class <name>ListsTest
 
     @SuppressWarnings("RedundantArrayCreation")
     @Test
-    public void newListWithArray()
+    public void newListWithArray_immutable()
     {
         Immutable<name>List list = <name>Lists.immutable.of();
         Assert.assertEquals(list = list.newWith(<(literal.(type))("1")>), <name>Lists.immutable.of(new <type>[]{1}));
@@ -104,6 +105,37 @@ public class <name>ListsTest
         Assert.assertEquals(list = list.newWith(<(literal.(type))("9")>), <name>Lists.immutable.of(new <type>[]{<["1", "2", "3", "4", "5", "6", "7", "8", "9"]:(literal.(type))(); separator=", ">}));
         Assert.assertEquals(list = list.newWith(<(literal.(type))("10")>), <name>Lists.immutable.of(new <type>[]{<["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]:(literal.(type))(); separator=", ">}));
         Assert.assertEquals(list = list.newWith(<(literal.(type))("11")>), <name>Lists.immutable.of(new <type>[]{<["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"]:(literal.(type))(); separator=", ">}));
+    }
+
+    @SuppressWarnings("RedundantArrayCreation")
+    @Test
+    public void newListWithArray_mutable()
+    {
+        Mutable<name>List list = <name>Lists.mutable.of();
+        Assert.assertEquals(list, <name>Lists.mutable.of(null));
+        Assert.assertEquals(list, <name>Lists.mutable.of(new <type>[]{}));
+        list.add(<(literal.(type))("1")>);
+        Assert.assertEquals(list, <name>Lists.immutable.of(new <type>[]{1}));
+        list.add(<(literal.(type))("2")>);
+        Assert.assertEquals(list, <name>Lists.immutable.of(new <type>[]{<["1", "2"]:(literal.(type))(); separator=", ">}));
+        list.add(<(literal.(type))("3")>);
+        Assert.assertEquals(list, <name>Lists.immutable.of(new <type>[]{<["1", "2", "3"]:(literal.(type))(); separator=", ">}));
+        list.add(<(literal.(type))("4")>);
+        Assert.assertEquals(list, <name>Lists.immutable.of(new <type>[]{<["1", "2", "3", "4"]:(literal.(type))(); separator=", ">}));
+        list.add(<(literal.(type))("5")>);
+        Assert.assertEquals(list, <name>Lists.immutable.of(new <type>[]{<["1", "2", "3", "4", "5"]:(literal.(type))(); separator=", ">}));
+        list.add(<(literal.(type))("6")>);
+        Assert.assertEquals(list, <name>Lists.immutable.of(new <type>[]{<["1", "2", "3", "4", "5", "6"]:(literal.(type))(); separator=", ">}));
+        list.add(<(literal.(type))("7")>);
+        Assert.assertEquals(list, <name>Lists.immutable.of(new <type>[]{<["1", "2", "3", "4", "5", "6", "7"]:(literal.(type))(); separator=", ">}));
+        list.add(<(literal.(type))("8")>);
+        Assert.assertEquals(list, <name>Lists.immutable.of(new <type>[]{<["1", "2", "3", "4", "5", "6", "7", "8"]:(literal.(type))(); separator=", ">}));
+        list.add(<(literal.(type))("9")>);
+        Assert.assertEquals(list, <name>Lists.immutable.of(new <type>[]{<["1", "2", "3", "4", "5", "6", "7", "8", "9"]:(literal.(type))(); separator=", ">}));
+        list.add(<(literal.(type))("10")>);
+        Assert.assertEquals(list, <name>Lists.immutable.of(new <type>[]{<["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]:(literal.(type))(); separator=", ">}));
+        list.add(<(literal.(type))("11")>);
+        Assert.assertEquals(list, <name>Lists.immutable.of(new <type>[]{<["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"]:(literal.(type))(); separator=", ">}));
     }
 
     @Test
