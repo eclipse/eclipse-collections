@@ -154,10 +154,10 @@ public abstract class Abstract<name1><name2>MapKeyValuesViewTestCase
         MutableBag\<Integer> result2 = Bags.mutable.of();
         RichIterable\<<name1><name2>Pair> collection = this.newWith(<(literal.(type1))("1")>, <(literal.(type2))("0")>, <(literal.(type1))("2")>, <(literal.(type2))("3")>, <(literal.(type1))("3")>, <(literal.(type2))("4")>);
         collection.forEachWith((<name1><name2>Pair argument1, Integer argument2) ->
-            {
-                result.add(argument1);
-                result2.add(argument2);
-            }, 0);
+        {
+            result.add(argument1);
+            result2.add(argument2);
+        }, 0);
 
         Assert.assertEquals(Bags.immutable.of(PrimitiveTuples.pair(<(literal.(type1))("1")>, <(literal.(type2))("0")>), PrimitiveTuples.pair(<(literal.(type1))("2")>, <(literal.(type2))("3")>), PrimitiveTuples.pair(<(literal.(type1))("3")>, <(literal.(type2))("4")>)), result);
         Assert.assertEquals(Bags.immutable.of(0, 0, 0), result2);
@@ -166,10 +166,10 @@ public abstract class Abstract<name1><name2>MapKeyValuesViewTestCase
         MutableBag\<Integer> result4 = Bags.mutable.of();
         RichIterable\<<name1><name2>Pair> collection2 = this.newWith(<(literal.(type1))("2")>, <(literal.(type2))("5")>, <(literal.(type1))("6")>, <(literal.(type2))("3")>, <(literal.(type1))("3")>, <(literal.(type2))("4")>);
         collection2.forEachWith((<name1><name2>Pair argument1, Integer argument2) ->
-            {
-                result3.add(argument1);
-                result4.add(argument2);
-            }, 0);
+        {
+            result3.add(argument1);
+            result4.add(argument2);
+        }, 0);
 
         Assert.assertEquals(Bags.immutable.of(PrimitiveTuples.pair(<(literal.(type1))("2")>, <(literal.(type2))("5")>), PrimitiveTuples.pair(<(literal.(type1))("6")>, <(literal.(type2))("3")>), PrimitiveTuples.pair(<(literal.(type1))("3")>, <(literal.(type2))("4")>)), result3);
         Assert.assertEquals(Bags.immutable.of(0, 0, 0), result4);
@@ -182,10 +182,10 @@ public abstract class Abstract<name1><name2>MapKeyValuesViewTestCase
         MutableBag\<Integer> indexes = Bags.mutable.of();
         RichIterable\<<name1><name2>Pair> collection = this.newWith(<(literal.(type1))("2")>, <(literal.(type2))("2")>, <(literal.(type1))("6")>, <(literal.(type2))("3")>, <(literal.(type1))("3")>, <(literal.(type2))("4")>);
         collection.forEachWithIndex((<name1><name2>Pair object, int index) ->
-            {
-                elements.add(object);
-                indexes.add(index);
-            });
+        {
+            elements.add(object);
+            indexes.add(index);
+        });
         Assert.assertEquals(Bags.mutable.of(PrimitiveTuples.pair(<(literal.(type1))("2")>, <(literal.(type2))("2")>), PrimitiveTuples.pair(<(literal.(type1))("6")>, <(literal.(type2))("3")>), PrimitiveTuples.pair(<(literal.(type1))("3")>, <(literal.(type2))("4")>)), elements);
         Assert.assertEquals(Bags.mutable.of(0, 1, 2), indexes);
 
@@ -193,10 +193,10 @@ public abstract class Abstract<name1><name2>MapKeyValuesViewTestCase
         MutableBag\<Integer> indexes2 = Bags.mutable.of();
         RichIterable\<<name1><name2>Pair> collection2 = this.newWith(<(literal.(type1))("0")>, <(literal.(type2))("1")>, <(literal.(type1))("2")>, <(literal.(type2))("3")>, <(literal.(type1))("3")>, <(literal.(type2))("4")>);
         collection2.forEachWithIndex((<name1><name2>Pair object, int index) ->
-            {
-                elements2.add(object);
-                indexes2.add(index);
-            });
+        {
+            elements2.add(object);
+            indexes2.add(index);
+        });
         Assert.assertEquals(Bags.mutable.of(PrimitiveTuples.pair(<(literal.(type1))("0")>, <(literal.(type2))("1")>), PrimitiveTuples.pair(<(literal.(type1))("2")>, <(literal.(type2))("3")>), PrimitiveTuples.pair(<(literal.(type1))("3")>, <(literal.(type2))("4")>)), elements2);
         Assert.assertEquals(Bags.mutable.of(0, 1, 2), indexes2);
     }
@@ -263,10 +263,10 @@ public abstract class Abstract<name1><name2>MapKeyValuesViewTestCase
     public void collect()
     {
         RichIterable\<Integer> result1 =
-            this.newWith(<(literal.(type1))("1")>, <(literal.(type2))("2")>, <(literal.(type1))("2")>, <(literal.(type2))("3")>, <(literal.(type1))("3")>, <(literal.(type2))("4")>).collect((<name1><name2>Pair object) -> (int) object.getOne());
+                this.newWith(<(literal.(type1))("1")>, <(literal.(type2))("2")>, <(literal.(type1))("2")>, <(literal.(type2))("3")>, <(literal.(type1))("3")>, <(literal.(type2))("4")>).collect((<name1><name2>Pair object) -> (int) object.getOne());
         Assert.assertEquals(Bags.immutable.of(1, 2, 3), result1.toBag());
         RichIterable\<Long> result2 =
-            this.newWith(<(literal.(type1))("1")>, <(literal.(type2))("2")>, <(literal.(type1))("2")>, <(literal.(type2))("3")>, <(literal.(type1))("3")>, <(literal.(type2))("4")>).collect((<name1><name2>Pair object) -> (long) object.getTwo());
+                this.newWith(<(literal.(type1))("1")>, <(literal.(type2))("2")>, <(literal.(type1))("2")>, <(literal.(type2))("3")>, <(literal.(type1))("3")>, <(literal.(type2))("4")>).collect((<name1><name2>Pair object) -> (long) object.getTwo());
         Assert.assertEquals(Bags.immutable.of(2L, 3L, 4L), result2.toBag());
     }
 
@@ -416,17 +416,17 @@ public abstract class Abstract<name1><name2>MapKeyValuesViewTestCase
     {
         Function0\<<name1><name2>Pair> function = Functions0.value(PrimitiveTuples.pair(<(literal.(type1))("5")>, <(literal.(type2))("6")>));
         Assert.assertEquals(
-            PrimitiveTuples.pair(<(literal.(type1))("2")>, <(literal.(type2))("3")>),
-            this.newWith(<(literal.(type1))("1")>, <(literal.(type2))("2")>, <(literal.(type1))("2")>, <(literal.(type2))("3")>, <(literal.(type1))("3")>, <(literal.(type2))("4")>).detectWithIfNone(
-                    Object::equals,
-                    PrimitiveTuples.pair(<(literal.(type1))("2")>, <(literal.(type2))("3")>),
-                    function));
+                PrimitiveTuples.pair(<(literal.(type1))("2")>, <(literal.(type2))("3")>),
+                this.newWith(<(literal.(type1))("1")>, <(literal.(type2))("2")>, <(literal.(type1))("2")>, <(literal.(type2))("3")>, <(literal.(type1))("3")>, <(literal.(type2))("4")>).detectWithIfNone(
+                        Object::equals,
+                        PrimitiveTuples.pair(<(literal.(type1))("2")>, <(literal.(type2))("3")>),
+                        function));
         Assert.assertEquals(
-            PrimitiveTuples.pair(<(literal.(type1))("5")>, <(literal.(type2))("6")>),
-            this.newWith(<(literal.(type1))("1")>, <(literal.(type2))("2")>, <(literal.(type1))("2")>, <(literal.(type2))("3")>, <(literal.(type1))("3")>, <(literal.(type2))("4")>).detectWithIfNone(
-                    Object::equals,
-                    PrimitiveTuples.pair(2, 4L),
-                    function));
+                PrimitiveTuples.pair(<(literal.(type1))("5")>, <(literal.(type2))("6")>),
+                this.newWith(<(literal.(type1))("1")>, <(literal.(type2))("2")>, <(literal.(type1))("2")>, <(literal.(type2))("3")>, <(literal.(type1))("3")>, <(literal.(type2))("4")>).detectWithIfNone(
+                        Object::equals,
+                        PrimitiveTuples.pair(2, 4L),
+                        function));
     }
 
     @Test

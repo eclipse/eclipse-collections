@@ -145,7 +145,8 @@ final class Immutable<name1><name2>HashMap implements Immutable<name1><name2>Map
     public Immutable<name2><name1>Map flipUniqueValues()
     {
         Mutable<name2><name1>Map result = <name2><name1>Maps.mutable.empty();
-         this.forEachKeyValue((key, value) -> {
+        this.forEachKeyValue((key, value) ->
+        {
             if (result.containsKey(value))
             {
                 throw new IllegalStateException("Duplicate value: " + value + " found at key: " + result.get(value) + " and key: " + key);

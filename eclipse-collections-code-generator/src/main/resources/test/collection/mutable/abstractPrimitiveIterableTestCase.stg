@@ -19,8 +19,8 @@ body(type, wrapperName, name) ::= <<
 package org.eclipse.collections.impl.collection.mutable.primitive;
 
 import java.util.Arrays;
-import java.util.List;
 <if(primitive.floatingPoint)>import java.util.HashSet;<endif>
+import java.util.List;
 import java.util.NoSuchElementException;
 <if(primitive.floatingPoint)>import java.util.Set;<endif>
 
@@ -161,7 +161,8 @@ public abstract class Abstract<name>IterableTestCase
         Assert.assertFalse(iterable2.contains(<(castIntToNarrowTypeWithParens.(type))("iterable2.size() + 1")>));
     }
 
-<if(primitive.floatingPoint)><NaNTests("NaN")>
+<if(primitive.floatingPoint)>
+    <NaNTests("NaN")>
     <NaNTests("NEGATIVE_INFINITY")>
     <NaNTests("POSITIVE_INFINITY")>
     <ZeroTests()>
@@ -594,12 +595,11 @@ public abstract class Abstract<name>IterableTestCase
     <if(primitive.floatPrimitive)>@Test
 public void sumConsistentRounding()
 {
-    <name>Iterable iterable = this.newWith(
-            Interval.oneTo(100_000)
-                    .toList()
-                    .shuffleThis()
-                    .collect<name>(i -> 1.0f / (i.floatValue() * i.floatValue() * i.floatValue() * i.floatValue()))
-                    .toArray());
+    <name>Iterable iterable = this.newWith(Interval.oneTo(100_000)
+            .toList()
+            .shuffleThis()
+            .collect<name>(i -> 1.0f / (i.floatValue() * i.floatValue() * i.floatValue() * i.floatValue()))
+            .toArray());
 
     // The test only ensures the consistency/stability of rounding. This is not meant to test the "correctness" of the float calculation result.
     // Indeed the lower bits of this calculation result are always incorrect due to the information loss of original float values.
@@ -612,12 +612,11 @@ public void sumConsistentRounding()
     <elseif(primitive.doublePrimitive)>@Test
 public void sumConsistentRounding()
 {
-    <name>Iterable iterable = this.newWith(
-            Interval.oneTo(100_000)
-                    .toList()
-                    .shuffleThis()
-                    .collect<name>(i -> <["1.0"]:(decimalLiteral.(type))()> / (i.<type>Value() * i.<type>Value() * i.<type>Value() * i.<type>Value()))
-                    .toArray());
+    <name>Iterable iterable = this.newWith(Interval.oneTo(100_000)
+            .toList()
+            .shuffleThis()
+            .collect<name>(i -> <["1.0"]:(decimalLiteral.(type))()> / (i.<type>Value() * i.<type>Value() * i.<type>Value() * i.<type>Value()))
+            .toArray());
 
     Assert.assertEquals(
             1.082323233711138,

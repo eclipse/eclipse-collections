@@ -319,10 +319,10 @@ public abstract class Abstract<name>BooleanMapTestCase
         <type>[] sumKey0 = new <type>[1];
         String[] sumValue0 = {""};
         map0.forEachKeyValue((<type> eachKey, boolean eachValue) ->
-            {
-                sumKey0[0] += eachKey;
-                sumValue0[0] += eachValue;
-            });
+        {
+            sumKey0[0] += eachKey;
+            sumValue0[0] += eachValue;
+        });
         Assert.assertEquals(<(literal.(type))("3")>, sumKey0[0]<delta.(type)>);
         Assert.assertEquals("truetrue", sumValue0[0]);
 
@@ -330,10 +330,10 @@ public abstract class Abstract<name>BooleanMapTestCase
         <type>[] sumKey1 = new <type>[1];
         String[] sumValue1 = {""};
         map1.forEachKeyValue((<type> eachKey, boolean eachValue) ->
-            {
-                sumKey1[0] += eachKey;
-                sumValue1[0] += eachValue;
-            });
+        {
+            sumKey1[0] += eachKey;
+            sumValue1[0] += eachValue;
+        });
         Assert.assertEquals(<(literal.(type))("4")>, sumKey1[0]<delta.(type)>);
         Assert.assertTrue("truefalse".equals(sumValue1[0]) || "falsetrue".equals(sumValue1[0]));
 
@@ -341,10 +341,10 @@ public abstract class Abstract<name>BooleanMapTestCase
         <type>[] sumKey01 = new <type>[1];
         String[] sumValue01 = {""};
         map01.forEachKeyValue((<type> eachKey, boolean eachValue) ->
-            {
-                sumKey01[0] += eachKey;
-                sumValue01[0] += eachValue;
-            });
+        {
+            sumKey01[0] += eachKey;
+            sumValue01[0] += eachValue;
+        });
         Assert.assertEquals(<(literal.(type))("1")>, sumKey01[0]<delta.(type)>);
         Assert.assertEquals("falsefalse", sumValue01[0]);
 
@@ -352,10 +352,10 @@ public abstract class Abstract<name>BooleanMapTestCase
         <type>[] sumKey = new <type>[1];
         String[] sumValue = {""};
         map.forEachKeyValue((<type> eachKey, boolean eachValue) ->
-            {
-                sumKey[0] += eachKey;
-                sumValue[0] += eachValue;
-            });
+        {
+            sumKey[0] += eachKey;
+            sumValue[0] += eachValue;
+        });
         Assert.assertEquals(7, sumKey[0]<delta.(type)>);
         Assert.assertTrue("truefalse".equals(sumValue[0]) || "falsetrue".equals(sumValue[0]));
     }
@@ -448,7 +448,7 @@ public abstract class Abstract<name>BooleanMapTestCase
     public void select()
     {
         <name>BooleanMap map = this.newWithKeysValues(<(literal.(type))("0")>, true, <(literal.(type))("1")>, false, <(literal.(type))("2")>, false, <(literal.(type))("3")>, true);
-        <name>BooleanMap actual1 = map.select((<type> key, boolean value)-> <(equals.(type))("key", {<(literal.(type))("1")>})> || value);
+        <name>BooleanMap actual1 = map.select((<type> key, boolean value) -> <(equals.(type))("key", {<(literal.(type))("1")>})> || value);
         Assert.assertEquals(<name>BooleanHashMap.newWithKeysValues(<(literal.(type))("1")>, false, <(literal.(type))("3")>, true, <(literal.(type))("0")>, true), actual1);
         <name>BooleanMap actual2 = map.select((<type> key, boolean value) -> <(equals.(type))("key", {<(literal.(type))("0")>})> || !value);
         Assert.assertEquals(<name>BooleanHashMap.newWithKeysValues(<(literal.(type))("0")>, true, <(literal.(type))("2")>, false, <(literal.(type))("1")>, false), actual2);

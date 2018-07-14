@@ -134,7 +134,7 @@ public abstract class Abstract<name>ObjectMapTestCase
         <name>ObjectMap\<String> map4 = this.newWithKeysValues(<(literal.(type))("5")>, "five", <(literal.(type))("9")>, "nine");
 
         Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, "one", <(literal.(type))("9")>, "nine"),
-            map1.select((<type> value, String object) -> (value % 2) != 0));
+                map1.select((<type> value, String object) -> (value % 2) != 0));
 
         <name>ObjectPredicate\<String> keyGreaterThanOrEqualToSeven = (<type> value, String object) -> value \<= 7;
 
@@ -147,7 +147,7 @@ public abstract class Abstract<name>ObjectMapTestCase
         Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("5")>, "five"), map4.select(keyGreaterThanOrEqualToSeven));
 
         Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, "one", <(literal.(type))("9")>, "nine"),
-            map1.select((<type> value, String object) -> object.endsWith("ne")));
+                map1.select((<type> value, String object) -> object.endsWith("ne")));
 
         RichIterable\<String> actual1 = map1.select(StringPredicates.endsWith("ne"));
         Assert.assertTrue(HashBag.newBagWith("one", "nine").equals(actual1));
@@ -347,7 +347,7 @@ public abstract class Abstract<name>ObjectMapTestCase
         <name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("1")>, "one", <(literal.(type))("9")>, "nine");
 
         Assert.assertEquals(HashBag.newBagWith("ZERO!", "ONE!", "NINE!"),
-            map1.collectWith((String argument1, String argument2) -> argument1.toUpperCase() + argument2, "!"));
+                map1.collectWith((String argument1, String argument2) -> argument1.toUpperCase() + argument2, "!"));
     }
 
     @Test
@@ -356,7 +356,7 @@ public abstract class Abstract<name>ObjectMapTestCase
         <name>ObjectMap\<String> map1 = this.newWithKeysValues(<(literal.(type))("0")>, "zero", <(literal.(type))("1")>, "one", <(literal.(type))("9")>, "nine");
 
         Assert.assertEquals(HashBag.newBagWith("ZERO!", "ONE!", "NINE!"),
-            map1.collectWith((String argument1, String argument2) -> argument1.toUpperCase() + argument2, "!", HashBag.\<String>newBag()));
+                map1.collectWith((String argument1, String argument2) -> argument1.toUpperCase() + argument2, "!", HashBag.\<String>newBag()));
     }
 
     @Test
@@ -377,15 +377,15 @@ public abstract class Abstract<name>ObjectMapTestCase
         <name>ObjectMap\<String> map3 = this.newWithKeysValues(<(literal.(type))("5")>, "five", <(literal.(type))("9")>, "nine");
 
         Function\<String, MutableList\<Character>\> toChars = (String object) ->
+        {
+            MutableList\<Character> list = FastList.newList();
+            char[] chars = object.toCharArray();
+            for (char aChar : chars)
             {
-                MutableList\<Character> list = FastList.newList();
-                char[] chars = object.toCharArray();
-                for (char aChar : chars)
-                {
-                    list.add(aChar);
-                }
-                return list;
-            };
+                list.add(aChar);
+            }
+            return list;
+        };
 
         Assert.assertEquals(UnifiedSet.newSetWith('z', 'e', 'r', 'o', 'n', 'i'), map1.flatCollect(toChars).toSet());
         Assert.assertEquals(UnifiedSet.newSetWith('o', 'n', 'e', 'i'), map2.flatCollect(toChars).toSet());
@@ -440,7 +440,7 @@ public abstract class Abstract<name>ObjectMapTestCase
 
         Function0\<String> ifNone = () -> "ifNone";
         Assert.assertTrue("one".equals(map1.detectIfNone(StringPredicates.endsWith("ne"), ifNone))
-            || "nine".equals(map1.detectIfNone(StringPredicates.endsWith("ne"), ifNone)));
+                || "nine".equals(map1.detectIfNone(StringPredicates.endsWith("ne"), ifNone)));
         Assert.assertEquals("zero", map1.detectIfNone(StringPredicates.endsWith("o"), ifNone));
         Assert.assertEquals("nine", map1.detectIfNone(Predicates.equal("nine"), ifNone));
         Assert.assertEquals("ifNone", map1.detectIfNone(Predicates.equal("ten"), ifNone));
@@ -453,7 +453,7 @@ public abstract class Abstract<name>ObjectMapTestCase
 
         Function0\<String> ifNone = () -> "ifNone";
         Assert.assertTrue("one".equals(map1.detectWithIfNone(StringPredicates2.endsWith(), "ne", ifNone))
-            || "nine".equals(map1.detectWithIfNone(StringPredicates2.endsWith(), "ne", ifNone)));
+                || "nine".equals(map1.detectWithIfNone(StringPredicates2.endsWith(), "ne", ifNone)));
         Assert.assertEquals("zero", map1.detectWithIfNone(StringPredicates2.endsWith(), "o", ifNone));
         Assert.assertEquals("nine", map1.detectWithIfNone(Object::equals, "nine", ifNone));
         Assert.assertEquals("ifNone", map1.detectWithIfNone(Object::equals, "ten", ifNone));
@@ -935,7 +935,7 @@ public abstract class Abstract<name>ObjectMapTestCase
         <name>ObjectMap\<String> map4 = this.newWithKeysValues(<(literal.(type))("5")>, "five", <(literal.(type))("9")>, "nine");
 
         Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, "one", <(literal.(type))("9")>, "nine"),
-            map1.reject((<type> value, String object) -> (value % 2) == 0));
+                map1.reject((<type> value, String object) -> (value % 2) == 0));
 
         <name>ObjectPredicate\<String> keyLessThanSeven = (<type> value, String object) -> value > 7;
 
@@ -945,7 +945,7 @@ public abstract class Abstract<name>ObjectMapTestCase
         Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("5")>, "five"), map4.reject(keyLessThanSeven));
 
         Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("1")>, "one", <(literal.(type))("9")>, "nine"),
-            map1.reject((<type> value, String object) -> !object.endsWith("ne")));
+                map1.reject((<type> value, String object) -> !object.endsWith("ne")));
 
         RichIterable\<String> actual1 = map1.reject(StringPredicates.endsWith("ne").not());
         Assert.assertTrue(HashBag.newBagWith("one", "nine").equals(actual1));
@@ -1451,15 +1451,15 @@ public abstract class Abstract<name>ObjectMapTestCase
         <name>ObjectMap\<String> map2 = this.newWithKeysValues(<(literal.(type))("1")>, "one");
 
         Function\<String, UnifiedSet\<Character>\> toChars = (String object) ->
+        {
+            UnifiedSet\<Character> list = UnifiedSet.newSet();
+            char[] chars = object.toCharArray();
+            for (char aChar : chars)
             {
-                UnifiedSet\<Character> list = UnifiedSet.newSet();
-                char[] chars = object.toCharArray();
-                for (char aChar : chars)
-                {
-                    list.add(aChar);
-                }
-                return list;
-            };
+                list.add(aChar);
+            }
+            return list;
+        };
 
         FastListMultimap\<Character, String> expected = FastListMultimap.newMultimap(Tuples.pair('z', "zero"), Tuples.pair('e', "zero"), Tuples.pair('r', "zero"), Tuples.pair('o', "zero"), Tuples.pair('n', "nine"), Tuples.pair('i', "nine"), Tuples.pair('e', "nine"));
         FastListMultimap\<Character, String> expected2 = FastListMultimap.newMultimap(Tuples.pair('o', "one"), Tuples.pair('n', "one"), Tuples.pair('e', "one"));
@@ -1706,25 +1706,25 @@ public abstract class Abstract<name>ObjectMapTestCase
         String[] concat = {"", "", "", ""};
 
         map1.forEachWith((String argument1, String argument2) ->
-            {
-                concat[0] += argument1;
-                concat[0] += argument2;
-            }, "-");
+        {
+            concat[0] += argument1;
+            concat[0] += argument2;
+        }, "-");
         map2.forEachWith((String argument1, String argument2) ->
-            {
-                concat[1] += argument1;
-                concat[1] += argument2;
-            }, "-");
+        {
+            concat[1] += argument1;
+            concat[1] += argument2;
+        }, "-");
         map3.forEachWith((String argument1, String argument2) ->
-            {
-                concat[2] += argument1;
-                concat[2] += argument2;
-            }, "-");
+        {
+            concat[2] += argument1;
+            concat[2] += argument2;
+        }, "-");
         map4.forEachWith((String argument1, String argument2) ->
-            {
-                concat[3] += argument1;
-                concat[3] += argument2;
-            }, "-");
+        {
+            concat[3] += argument1;
+            concat[3] += argument2;
+        }, "-");
 
         Assert.assertTrue(concat[0], "one-five-".equals(concat[0]) || "five-one-".equals(concat[0]));
         Assert.assertTrue(concat[1], "one-zero-".equals(concat[1]) || "zero-one-".equals(concat[1]));

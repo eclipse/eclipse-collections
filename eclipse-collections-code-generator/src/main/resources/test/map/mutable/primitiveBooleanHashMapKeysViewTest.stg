@@ -227,8 +227,8 @@ public class <name>BooleanHashMapKeysViewTest
     public void collect()
     {
         Assert.assertEquals(
-            UnifiedSet.newSetWith(<(literal.(type))("-1")>, <(literal.(type))("0")>, <(literal.(type))("30")>, <(castIntToNarrowTypeWithParens.(type))("generateCollisions1().getFirst() - 1")>, <(castIntToNarrowTypeWithParens.(type))("generateCollisions1().get(1) - 1")>),
-            this.iterable.collect((<type> parameter) -> <(castIntToNarrowTypeWithParens.(type))("parameter - 1")>).toSet());
+                UnifiedSet.newSetWith(<(literal.(type))("-1")>, <(literal.(type))("0")>, <(literal.(type))("30")>, <(castIntToNarrowTypeWithParens.(type))("generateCollisions1().getFirst() - 1")>, <(castIntToNarrowTypeWithParens.(type))("generateCollisions1().get(1) - 1")>),
+                this.iterable.collect((<type> parameter) -> <(castIntToNarrowTypeWithParens.(type))("parameter - 1")>).toSet());
     }
 
     @Test
