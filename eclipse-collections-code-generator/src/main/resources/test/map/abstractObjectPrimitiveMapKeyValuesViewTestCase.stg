@@ -144,10 +144,10 @@ public abstract class AbstractObject<name>MapKeyValuesViewTestCase
         MutableBag\<Integer> result2 = Bags.mutable.of();
         RichIterable\<Object<name>Pair\<Integer>\> collection = this.newWith(1, <(literal.(type))("2")>, 2, <(literal.(type))("3")>, 3, <(literal.(type))("4")>);
         collection.forEachWith((Object<name>Pair\<Integer> argument1, Integer argument2) ->
-            {
-                result.add(argument1);
-                result2.add(argument2);
-            }, 0);
+        {
+            result.add(argument1);
+            result2.add(argument2);
+        }, 0);
 
         Assert.assertEquals(Bags.immutable.of(PrimitiveTuples.pair(Integer.valueOf(1), <(literal.(type))("2")>), PrimitiveTuples.pair(Integer.valueOf(2), <(literal.(type))("3")>), PrimitiveTuples.pair(Integer.valueOf(3), <(literal.(type))("4")>)), result);
         Assert.assertEquals(Bags.immutable.of(0, 0, 0), result2);
@@ -160,10 +160,10 @@ public abstract class AbstractObject<name>MapKeyValuesViewTestCase
         MutableBag\<Integer> indexes = Bags.mutable.of();
         RichIterable\<Object<name>Pair\<Integer>\> collection = this.newWith(1, <(literal.(type))("2")>, 2, <(literal.(type))("3")>, 3, <(literal.(type))("4")>);
         collection.forEachWithIndex((Object<name>Pair\<Integer> object, int index) ->
-            {
-                elements.add(object);
-                indexes.add(index);
-            });
+        {
+            elements.add(object);
+            indexes.add(index);
+        });
         Assert.assertEquals(Bags.mutable.of(PrimitiveTuples.pair(Integer.valueOf(1), <(literal.(type))("2")>), PrimitiveTuples.pair(Integer.valueOf(2), <(literal.(type))("3")>), PrimitiveTuples.pair(Integer.valueOf(3), <(literal.(type))("4")>)), elements);
         Assert.assertEquals(Bags.mutable.of(0, 1, 2), indexes);
     }
@@ -230,7 +230,7 @@ public abstract class AbstractObject<name>MapKeyValuesViewTestCase
     public void collect()
     {
         RichIterable\<Integer> result1 =
-            this.newWith(1, <(literal.(type))("2")>, 2, <(literal.(type))("3")>, 3, <(literal.(type))("4")>).collect((Object<name>Pair\<Integer> object) -> (int) object.getTwo());
+                this.newWith(1, <(literal.(type))("2")>, 2, <(literal.(type))("3")>, 3, <(literal.(type))("4")>).collect((Object<name>Pair\<Integer> object) -> (int) object.getTwo());
 
         Assert.assertEquals(FastList.newListWith(2, 3, 4), result1.toList());
     }
@@ -238,21 +238,21 @@ public abstract class AbstractObject<name>MapKeyValuesViewTestCase
     @Test
     public void collectBoolean()
     {
-        BooleanIterable result = this.newWith(1, <(literal.(type))("2")>, 2, <(literal.(type))("3")>, 3, <(literal.(type))("4")>) .collectBoolean(pair -> (pair.getTwo() % 2) == 0);
+        BooleanIterable result = this.newWith(1, <(literal.(type))("2")>, 2, <(literal.(type))("3")>, 3, <(literal.(type))("4")>).collectBoolean(pair -> (pair.getTwo() % 2) == 0);
         Assert.assertEquals(BooleanHashBag.newBagWith(false, true, true), result.toBag());
     }
 
     @Test
     public void collectByte()
     {
-        ByteIterable result = this.newWith(1, <(literal.(type))("2")>, 2, <(literal.(type))("3")>, 3, <(literal.(type))("4")>) .collectByte(pair -> (byte) pair.getTwo());
+        ByteIterable result = this.newWith(1, <(literal.(type))("2")>, 2, <(literal.(type))("3")>, 3, <(literal.(type))("4")>).collectByte(pair -> (byte) pair.getTwo());
         Assert.assertEquals(ByteHashBag.newBagWith((byte) 2, (byte) 3, (byte) 4), result.toBag());
     }
 
     @Test
     public void collectChar()
     {
-        CharIterable result = this.newWith(1, <(literal.(type))("2")>, 2, <(literal.(type))("3")>, 3, <(literal.(type))("4")>) .collectChar(pair -> (char) pair.getTwo());
+        CharIterable result = this.newWith(1, <(literal.(type))("2")>, 2, <(literal.(type))("3")>, 3, <(literal.(type))("4")>).collectChar(pair -> (char) pair.getTwo());
         Assert.assertEquals(CharHashBag.newBagWith((char) 2, (char) 4, (char) 3), result.toBag());
     }
 
@@ -910,7 +910,10 @@ public abstract class AbstractObject<name>MapKeyValuesViewTestCase
     public void aggregateByMutating()
     {
         Function0\<AtomicInteger> valueCreator = Functions0.zeroAtomicInteger();
-        Procedure2\<AtomicInteger, Object<name>Pair\<Integer>\> sumAggregator = (aggregate, pair) -> { aggregate.addAndGet((int) pair.getTwo()); };
+        Procedure2\<AtomicInteger, Object<name>Pair\<Integer>\> sumAggregator = (aggregate, pair) ->
+        {
+            aggregate.addAndGet((int) pair.getTwo());
+        };
         RichIterable\<Object<name>Pair\<Integer>\> collection = this.newWith(1, <(literal.(type))("2")>, 2, <(literal.(type))("3")>, 3, <(literal.(type))("4")>);
         MapIterable\<String, AtomicInteger> aggregation = collection.aggregateInPlaceBy(String::valueOf, valueCreator, sumAggregator);
         Assert.assertEquals(4, aggregation.get("3:<(toStringLiteral.(type))("4")>").intValue());

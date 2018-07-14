@@ -149,7 +149,8 @@ public class Unmodifiable<name>ObjectMapTest extends AbstractMutable<name>Object
         this.getEmptyMap().put(collision1, "one");
     }
 
-<if(primitive.floatingPoint)><NaNTests("NaN")>
+<if(primitive.floatingPoint)>
+    <NaNTests("NaN")>
     <NaNTests("POSITIVE_INFINITY")>
     <NaNTests("NEGATIVE_INFINITY")>
     <ZeroTests()>

@@ -177,12 +177,12 @@ final class Immutable<name>HashBag implements Immutable<name>Bag, Serializable
     {
         Mutable<name>Set result = <name>Sets.mutable.empty();
         this.forEachWithOccurrences((each, occurrences) ->
+        {
+            if (occurrences == 1)
             {
-                if (occurrences == 1)
-                {
-                    result.add(each);
-                }
-            });
+                result.add(each);
+            }
+        });
         return result.toImmutable();
     }
 
@@ -417,7 +417,7 @@ final class Immutable<name>HashBag implements Immutable<name>Bag, Serializable
         }
 
         @Override
-        public void writeExternal(final ObjectOutput out) throws IOException
+        public void writeExternal(ObjectOutput out) throws IOException
         {
             out.writeInt(this.bag.sizeDistinct());
             try

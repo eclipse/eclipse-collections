@@ -244,7 +244,10 @@ public abstract class AbstractObject<name>MapTestCase
 
         Assert.assertEquals(expected, actual);
         Verify.assertThrows(NoSuchElementException.class, iterator::next);
-        Verify.assertThrows(NoSuchElementException.class, () -> { this.getEmptyMap().<type>Iterator().next(); });
+        Verify.assertThrows(NoSuchElementException.class, () ->
+        {
+            this.getEmptyMap().<type>Iterator().next();
+        });
     }
 
     @Test
@@ -252,17 +255,26 @@ public abstract class AbstractObject<name>MapTestCase
     {
         Object<name>Map\<Integer> map01 = this.newWithKeysValues(0, <(literal.(type))("1")>, 1, <(literal.(type))("2")>);
         <type>[] sum01 = new <type>[1];
-        map01.forEach(each -> { sum01[0] += each; });
+        map01.forEach(each ->
+        {
+            sum01[0] += each;
+        });
         Assert.assertEquals(<(literal.(type))("3")>, sum01[0]<delta.(type)>);
 
         Object<name>Map\<Integer> map = this.newWithKeysValues(3, <(literal.(type))("4")>, 4, <(literal.(type))("5")>);
         <type>[] sum = new <type>[1];
-        map.forEach(each -> { sum[0] += each; });
+        map.forEach(each ->
+        {
+            sum[0] += each;
+        });
         Assert.assertEquals(<(literal.(type))("9")>, sum[0]<delta.(type)>);
 
         Object<name>Map\<Integer> map1 = this.newWithKeysValues(3, <(literal.(type))("4")>, null, <(literal.(type))("5")>);
         <type>[] sum1 = new <type>[1];
-        map1.forEach(each -> { sum1[0] += each; });
+        map1.forEach(each ->
+        {
+            sum1[0] += each;
+        });
         Assert.assertEquals(<(literal.(type))("9")>, sum1[0]<delta.(type)>);
     }
 
@@ -302,10 +314,10 @@ public abstract class AbstractObject<name>MapTestCase
         int[] sumKey01 = new int[1];
         <type>[] sumValue01 = new <type>[1];
         map01.forEachKeyValue((Integer eachKey, <type> eachValue) ->
-            {
-                sumKey01[0] += eachKey;
-                sumValue01[0] += eachValue;
-            });
+        {
+            sumKey01[0] += eachKey;
+            sumValue01[0] += eachValue;
+        });
         Assert.assertEquals(1, sumKey01[0]);
         Assert.assertEquals(<(literal.(type))("3")>, sumValue01[0]<delta.(type)>);
 
@@ -314,10 +326,10 @@ public abstract class AbstractObject<name>MapTestCase
         sumKey[0] = "";
         <type>[] sumValue = new <type>[1];
         map.forEachKeyValue((Integer eachKey, <type> eachValue) ->
-            {
-                sumKey[0] += String.valueOf(eachKey);
-                sumValue[0] += eachValue;
-            });
+        {
+            sumKey[0] += String.valueOf(eachKey);
+            sumValue[0] += eachValue;
+        });
         Assert.assertTrue("3null".equals(sumKey[0]) || "null3".equals(sumKey[0]));
         Assert.assertEquals(<(literal.(type))("9")>, sumValue[0]<delta.(type)>);
     }
@@ -390,12 +402,12 @@ public abstract class AbstractObject<name>MapTestCase
         Assert.assertEquals(this.map, this.map.select((String object, <type> value) -> ((Integer.parseInt(object) + value) % 2) == 0));
 
         Assert.assertEquals(Object<name>HashMap.newWithKeysValues("0", <(literal.(type))("0")>, "1", <(literal.(type))("1")>),
-            this.map.select((String object, <type> value) -> <(lessThan.(type))("Integer.parseInt(object) + value", {<(literal.(type))("4")>})>));
+                this.map.select((String object, <type> value) -> <(lessThan.(type))("Integer.parseInt(object) + value", {<(literal.(type))("4")>})>));
 
         Assert.assertEquals(this.getEmptyMap(), this.map.select((String object, <type> value) -> ((Integer.parseInt(object) + value) % 2) != 0));
 
         Assert.assertEquals(<name>HashBag.newBagWith(<(literal.(type))("0")>, <(literal.(type))("1")>, <(literal.(type))("2")>),
-            this.map.select(value -> <(lessThan.(type))("value", {<(literal.(type))("3")>})>).toBag());
+                this.map.select(value -> <(lessThan.(type))("value", {<(literal.(type))("3")>})>).toBag());
 
         Assert.assertEquals(<name>HashBag.newBagWith(<(literal.(type))("0")>, <(literal.(type))("1")>), this.map.select(value -> <(lessThan.(type))("value", {<(literal.(type))("2")>})>).toBag());
 
@@ -408,7 +420,7 @@ public abstract class AbstractObject<name>MapTestCase
         Assert.assertEquals(this.getEmptyMap(), this.map.reject((String object, <type> value) -> ((Integer.parseInt(object) + value) % 2) == 0));
 
         Assert.assertEquals(Object<name>HashMap.newWithKeysValues("2", <(literal.(type))("2")>),
-            this.map.reject((String object, <type> value)-> <(lessThan.(type))("Integer.parseInt(object) + value", {<(literal.(type))("4")>})>));
+                this.map.reject((String object, <type> value)-> <(lessThan.(type))("Integer.parseInt(object) + value", {<(literal.(type))("4")>})>));
 
         Assert.assertEquals(this.map, this.map.reject((String object, <type> value) -> ((Integer.parseInt(object) + value) % 2) != 0));
 
@@ -417,7 +429,7 @@ public abstract class AbstractObject<name>MapTestCase
         Assert.assertEquals(<name>HashBag.newBagWith(<(literal.(type))("2")>), this.map.reject(value -> <(lessThan.(type))("value", {<(literal.(type))("2")>})>).toBag());
 
         Assert.assertEquals(<name>HashBag.newBagWith(<(literal.(type))("0")>, <(literal.(type))("1")>, <(literal.(type))("2")>),
-            this.map.reject(value -> value > <(literal.(type))("2")>).toBag());
+                this.map.reject(value -> value > <(literal.(type))("2")>).toBag());
     }
 
     @Test
