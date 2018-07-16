@@ -575,7 +575,8 @@ public abstract class AbstractSortedSetTestCase extends AbstractCollectionTestCa
                 UnifiedSet.newSetWith("4", "2", "3", "5"),
                 UnifiedSet.newSet());
         Verify.assertSetsEqual(UnifiedSet.newSetWith("1", "5"), difference);
-        Verify.assertSetsEqual(UnifiedSet.newSet(set).with("not present"),
+        Verify.assertSetsEqual(
+                UnifiedSet.newSet(set).with("not present"),
                 set.symmetricDifferenceInto(UnifiedSet.newSetWith("not present"), UnifiedSet.newSet()));
     }
 

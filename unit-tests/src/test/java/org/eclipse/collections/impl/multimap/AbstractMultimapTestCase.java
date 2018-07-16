@@ -184,7 +184,8 @@ public abstract class AbstractMultimapTestCase
     public void multiValuesView()
     {
         Multimap<Integer, String> multimap = this.newMultimapWithKeysValues(1, "1", 2, "2", 3, "3");
-        Assert.assertEquals(Bags.mutable.of("1", "2", "3"),
+        Assert.assertEquals(
+                Bags.mutable.of("1", "2", "3"),
                 multimap.multiValuesView().flatCollect(Functions.getPassThru()).toBag());
     }
 
@@ -209,7 +210,8 @@ public abstract class AbstractMultimapTestCase
     public void keysWithMultiValuesView()
     {
         Multimap<Integer, String> multimap = this.newMultimapWithKeysValues(1, "1", 2, "2", 3, "3");
-        Assert.assertEquals(Bags.mutable.of(1, 2, 3),
+        Assert.assertEquals(
+                Bags.mutable.of(1, 2, 3),
                 multimap.keyMultiValuePairsView().collect(Pair::getOne).toBag());
         Assert.assertEquals(
                 Bags.mutable.of("1", "2", "3"),
@@ -220,7 +222,8 @@ public abstract class AbstractMultimapTestCase
     public void keyValuePairsView()
     {
         Multimap<Integer, String> multimap = this.newMultimapWithKeysValues(1, "1", 2, "2", 3, "3");
-        Assert.assertEquals(Bags.mutable.of(Tuples.pair(1, "1"), Tuples.pair(2, "2"), Tuples.pair(3, "3")),
+        Assert.assertEquals(
+                Bags.mutable.of(Tuples.pair(1, "1"), Tuples.pair(2, "2"), Tuples.pair(3, "3")),
                 multimap.keyValuePairsView().toBag());
     }
 

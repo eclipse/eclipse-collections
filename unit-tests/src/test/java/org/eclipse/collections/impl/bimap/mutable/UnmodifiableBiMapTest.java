@@ -271,7 +271,8 @@ public class UnmodifiableBiMapTest extends AbstractMutableBiMapTestCase
     @Test
     public void withAllKeyValues()
     {
-        Verify.assertThrows(UnsupportedOperationException.class,
+        Verify.assertThrows(
+                UnsupportedOperationException.class,
                 () -> this.newMapWithKeysValues("A", 1, "B", 2).withAllKeyValues(
                         FastList.newListWith(Tuples.pair("B", 22), Tuples.pair("C", 3))));
     }

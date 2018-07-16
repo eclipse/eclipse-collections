@@ -417,13 +417,13 @@ public final class Collectors2Test
     public void groupingByToBagMultimap()
     {
         Map<Integer, MutableBagMultimap<Integer, Integer>> expected = Interval.oneTo(100).stream().collect(
-                Collectors.groupingBy(each -> each % 2,
-                        Collectors2.toBagMultimap(each -> each % 5))
-        );
+                Collectors.groupingBy(
+                        each -> each % 2,
+                        Collectors2.toBagMultimap(each -> each % 5)));
         Map<Integer, MutableBagMultimap<Integer, Integer>> actual = Interval.oneTo(100).reduceInPlace(
-                Collectors.groupingBy(each -> each % 2,
-                        Collectors2.toBagMultimap(each -> each % 5))
-        );
+                Collectors.groupingBy(
+                        each -> each % 2,
+                        Collectors2.toBagMultimap(each -> each % 5)));
         Assert.assertEquals(expected, actual);
     }
 
@@ -431,13 +431,13 @@ public final class Collectors2Test
     public void groupingByPartition()
     {
         Map<Integer, PartitionMutableCollection<Integer>> expected = Interval.oneTo(100).stream().collect(
-                Collectors.groupingBy(each -> each % 2,
-                        Collectors2.partition(each -> each % 5 == 0, PartitionHashBag::new))
-        );
+                Collectors.groupingBy(
+                        each -> each % 2,
+                        Collectors2.partition(each -> each % 5 == 0, PartitionHashBag::new)));
         Map<Integer, PartitionMutableCollection<Integer>> actual = Interval.oneTo(100).reduceInPlace(
-                Collectors.groupingBy(each -> each % 2,
-                        Collectors2.partition(each -> each % 5 == 0, PartitionHashBag::new))
-        );
+                Collectors.groupingBy(
+                        each -> each % 2,
+                        Collectors2.partition(each -> each % 5 == 0, PartitionHashBag::new)));
         Assert.assertEquals(expected.get(0).getSelected(), actual.get(0).getSelected());
         Assert.assertEquals(expected.get(0).getRejected(), actual.get(0).getRejected());
     }

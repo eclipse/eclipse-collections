@@ -65,7 +65,8 @@ public abstract class AbstractBooleanStackTestCase extends AbstractBooleanIterab
     {
         Assert.assertEquals((this.classUnderTest().size() & 1) != 0, this.classUnderTest().peek());
         Assert.assertEquals(BooleanArrayList.newListWith(), this.classUnderTest().peek(0));
-        Assert.assertEquals(BooleanArrayList.newListWith((this.classUnderTest().size() & 1) != 0, (this.classUnderTest().size() & 1) == 0),
+        Assert.assertEquals(
+                BooleanArrayList.newListWith((this.classUnderTest().size() & 1) != 0, (this.classUnderTest().size() & 1) == 0),
                 this.classUnderTest().peek(2));
     }
 

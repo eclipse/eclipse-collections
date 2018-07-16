@@ -81,7 +81,8 @@ public final class UnifiedSetWithHashingStrategyMultimap<K, V>
         return new UnifiedSetWithHashingStrategyMultimap<>(multimap);
     }
 
-    public static <K, V> UnifiedSetWithHashingStrategyMultimap<K, V> newMultimap(HashingStrategy<? super V> hashingStrategy,
+    public static <K, V> UnifiedSetWithHashingStrategyMultimap<K, V> newMultimap(
+            HashingStrategy<? super V> hashingStrategy,
             Multimap<? extends K, ? extends V> multimap)
     {
         return new UnifiedSetWithHashingStrategyMultimap<>(hashingStrategy, multimap);

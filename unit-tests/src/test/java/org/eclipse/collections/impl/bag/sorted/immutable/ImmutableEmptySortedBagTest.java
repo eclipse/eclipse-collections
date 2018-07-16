@@ -467,7 +467,8 @@ public class ImmutableEmptySortedBagTest extends AbstractImmutableSortedBagTestC
         ImmutableSortedBag<Integer> integers = this.classUnderTest();
         Verify.assertEmpty(
                 integers.reject(Predicates.lessThan(integers.size() + 1), FastList.newList()));
-        Verify.assertListsEqual(integers.toList(),
+        Verify.assertListsEqual(
+                integers.toList(),
                 integers.reject(Predicates.greaterThan(integers.size()), FastList.newList()));
 
         ImmutableSortedBag<Integer> integers2 = this.classUnderTest();

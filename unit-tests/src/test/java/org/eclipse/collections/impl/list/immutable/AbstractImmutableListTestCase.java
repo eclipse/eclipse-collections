@@ -456,7 +456,8 @@ public abstract class AbstractImmutableListTestCase extends AbstractImmutableCol
     @Test
     public void subList()
     {
-        Verify.assertListsEqual(Lists.immutable.of(1).castToList(),
+        Verify.assertListsEqual(
+                Lists.immutable.of(1).castToList(),
                 this.classUnderTest().castToList().subList(0, 1));
     }
 

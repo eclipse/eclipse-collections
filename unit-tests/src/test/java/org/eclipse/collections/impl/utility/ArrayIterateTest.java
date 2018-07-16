@@ -312,7 +312,8 @@ public class ArrayIterateTest
         Assert.assertEquals("0123", ArrayIterate.injectInto("0", objectArray1, AddFunction.STRING));
 
         String[] objectArray2 = {"A", "AB", "ABC", "ABCD"};
-        Assert.assertEquals(Integer.valueOf(4),
+        Assert.assertEquals(
+                Integer.valueOf(4),
                 ArrayIterate.injectInto(2, objectArray2, MaxSizeFunction.STRING));
 
         Assert.assertEquals(
@@ -333,7 +334,8 @@ public class ArrayIterateTest
     public void collectBoolean()
     {
         Integer[] objectArray = {-1, 0, 42};
-        Assert.assertEquals(this.getExpectedBooleanResults(),
+        Assert.assertEquals(
+                this.getExpectedBooleanResults(),
                 ArrayIterate.collectBoolean(objectArray, PrimitiveFunctions.integerIsPositive()));
     }
 
@@ -356,7 +358,8 @@ public class ArrayIterateTest
     public void collectByte()
     {
         Integer[] objectArray = {-1, 0, 42};
-        Assert.assertEquals(this.getExpectedByteResults(),
+        Assert.assertEquals(
+                this.getExpectedByteResults(),
                 ArrayIterate.collectByte(objectArray, PrimitiveFunctions.unboxIntegerToByte()));
     }
 
@@ -379,7 +382,8 @@ public class ArrayIterateTest
     public void collectChar()
     {
         Integer[] objectArray = {-1, 0, 42};
-        Assert.assertEquals(this.getExpectedCharResults(),
+        Assert.assertEquals(
+                this.getExpectedCharResults(),
                 ArrayIterate.collectChar(objectArray, PrimitiveFunctions.unboxIntegerToChar()));
     }
 
@@ -402,7 +406,8 @@ public class ArrayIterateTest
     public void collectDouble()
     {
         Integer[] objectArray = {-1, 0, 42};
-        Assert.assertEquals(this.getExpectedDoubleResults(),
+        Assert.assertEquals(
+                this.getExpectedDoubleResults(),
                 ArrayIterate.collectDouble(objectArray, PrimitiveFunctions.unboxIntegerToDouble()));
     }
 
@@ -425,7 +430,8 @@ public class ArrayIterateTest
     public void collectFloat()
     {
         Integer[] objectArray = {-1, 0, 42};
-        Assert.assertEquals(this.getExpectedFloatResults(),
+        Assert.assertEquals(
+                this.getExpectedFloatResults(),
                 ArrayIterate.collectFloat(objectArray, PrimitiveFunctions.unboxIntegerToFloat()));
     }
 
@@ -448,7 +454,8 @@ public class ArrayIterateTest
     public void collectInt()
     {
         Integer[] objectArray = {-1, 0, 42};
-        Assert.assertEquals(this.getExpectedIntResults(),
+        Assert.assertEquals(
+                this.getExpectedIntResults(),
                 ArrayIterate.collectInt(objectArray, PrimitiveFunctions.unboxIntegerToInt()));
     }
 
@@ -471,7 +478,8 @@ public class ArrayIterateTest
     public void collectLong()
     {
         Integer[] objectArray = {-1, 0, 42};
-        Assert.assertEquals(this.getExpectedLongResults(),
+        Assert.assertEquals(
+                this.getExpectedLongResults(),
                 ArrayIterate.collectLong(objectArray, PrimitiveFunctions.unboxIntegerToLong()));
     }
 
@@ -494,7 +502,8 @@ public class ArrayIterateTest
     public void collectShort()
     {
         Integer[] objectArray = {-1, 0, 42};
-        Assert.assertEquals(this.getExpectedShortResults(),
+        Assert.assertEquals(
+                this.getExpectedShortResults(),
                 ArrayIterate.collectShort(objectArray, PrimitiveFunctions.unboxIntegerToShort()));
     }
 
@@ -932,9 +941,11 @@ public class ArrayIterateTest
     public void detectWithIfNone()
     {
         Integer[] array = this.createIntegerArray(1);
-        Assert.assertEquals(Integer.valueOf(7),
+        Assert.assertEquals(
+                Integer.valueOf(7),
                 ArrayIterate.detectWithIfNone(array, Object::equals, 2, 7));
-        Assert.assertEquals(Integer.valueOf(1),
+        Assert.assertEquals(
+                Integer.valueOf(1),
                 ArrayIterate.detectWithIfNone(array, Object::equals, 1, 7));
     }
 
@@ -994,9 +1005,11 @@ public class ArrayIterateTest
         Assert.assertEquals(
                 ListIterate.take(Interval.zeroTo(10), 5),
                 ArrayIterate.take(Interval.zeroTo(10).toArray(), 5));
-        Assert.assertEquals(ListIterate.take(Interval.zeroTo(10), 15),
+        Assert.assertEquals(
+                ListIterate.take(Interval.zeroTo(10), 15),
                 ArrayIterate.take(Interval.zeroTo(10).toArray(), 15));
-        Assert.assertEquals(ListIterate.take(Interval.zeroTo(10), Integer.MAX_VALUE),
+        Assert.assertEquals(
+                ListIterate.take(Interval.zeroTo(10), Integer.MAX_VALUE),
                 ArrayIterate.take(Interval.zeroTo(10).toArray(), Integer.MAX_VALUE));
     }
 

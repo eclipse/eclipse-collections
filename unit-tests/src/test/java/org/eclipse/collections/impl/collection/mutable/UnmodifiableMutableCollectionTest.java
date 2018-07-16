@@ -85,7 +85,8 @@ public class UnmodifiableMutableCollectionTest
         Assert.assertEquals(this.mutableCollection.size(), this.unmodifiableCollection.size());
         Assert.assertEquals(this.mutableCollection.getFirst(), this.unmodifiableCollection.getFirst());
         Assert.assertEquals(this.mutableCollection.getLast(), this.unmodifiableCollection.getLast());
-        Assert.assertEquals(this.mutableCollection.count(ignored6 -> true),
+        Assert.assertEquals(
+                this.mutableCollection.count(ignored6 -> true),
                 this.unmodifiableCollection.count(ignored5 -> true));
         Verify.assertSize(4, this.unmodifiableCollection.select(ignored4 -> true));
         Verify.assertSize(4, this.unmodifiableCollection.select(ignored3 -> true, FastList.newList()));
@@ -110,7 +111,8 @@ public class UnmodifiableMutableCollectionTest
         Verify.assertSize(4, this.unmodifiableCollection.collect(Functions.getStringPassThru()));
         Verify.assertSize(
                 4,
-                this.unmodifiableCollection.collect(Functions.getStringPassThru(),
+                this.unmodifiableCollection.collect(
+                        Functions.getStringPassThru(),
                         FastList.newList()));
 
         Function<String, Collection<String>> flattenFunction = object -> FastList.newListWith(object, object);
@@ -120,12 +122,16 @@ public class UnmodifiableMutableCollectionTest
         Verify.assertSize(4, this.unmodifiableCollection.collectIf(ignored2 -> true, Functions.getStringPassThru()));
         Verify.assertSize(
                 4,
-                this.unmodifiableCollection.collectIf(ignored1 -> true,
+                this.unmodifiableCollection.collectIf(
+                        ignored1 -> true,
                         Functions.getStringPassThru(),
                         FastList.newList()));
         Assert.assertEquals(METALLICA, this.unmodifiableCollection.detect(StringPredicates.contains("allic")));
-        Assert.assertEquals("Not found", this.unmodifiableCollection.detectIfNone(StringPredicates.contains("donna"),
-                new PassThruFunction0<>("Not found")));
+        Assert.assertEquals(
+                "Not found",
+                this.unmodifiableCollection.detectIfNone(
+                        StringPredicates.contains("donna"),
+                        new PassThruFunction0<>("Not found")));
         Assert.assertEquals(METALLICA, this.unmodifiableCollection.detectWith(Object::equals, METALLICA));
         Assert.assertEquals("Not found", this.unmodifiableCollection.detectWithIfNone(Object::equals, "Madonna",
                 new PassThruFunction0<>("Not found")));
@@ -136,9 +142,11 @@ public class UnmodifiableMutableCollectionTest
         Assert.assertTrue(this.unmodifiableCollection.allSatisfy(Predicates.notNull()));
         Assert.assertTrue(this.unmodifiableCollection.allSatisfyWith((ignored1, ignored2) -> true, ""));
         Assert.assertEquals(this.mutableCollection, this.unmodifiableCollection.toList());
-        Verify.assertListsEqual(Lists.mutable.of("Bon Jovi", "Europe", METALLICA, "Scorpions"),
+        Verify.assertListsEqual(
+                Lists.mutable.of("Bon Jovi", "Europe", METALLICA, "Scorpions"),
                 this.unmodifiableCollection.toSortedList());
-        Verify.assertListsEqual(Lists.mutable.of("Scorpions", METALLICA, "Europe", "Bon Jovi"),
+        Verify.assertListsEqual(
+                Lists.mutable.of("Scorpions", METALLICA, "Europe", "Bon Jovi"),
                 this.unmodifiableCollection.toSortedList(Collections.reverseOrder()));
         Verify.assertSize(4, this.unmodifiableCollection.toSet());
         Verify.assertSize(4, this.unmodifiableCollection.toMap(Functions.getStringPassThru(), Functions.getStringPassThru()));

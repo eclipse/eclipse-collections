@@ -386,11 +386,14 @@ public abstract class AbstractBooleanIterableTestCase
     public void testHashCode()
     {
         Assert.assertEquals(this.newObjectCollectionWith().hashCode(), this.newWith().hashCode());
-        Assert.assertEquals(this.newObjectCollectionWith(true, false, true).hashCode(),
+        Assert.assertEquals(
+                this.newObjectCollectionWith(true, false, true).hashCode(),
                 this.newWith(true, false, true).hashCode());
-        Assert.assertEquals(this.newObjectCollectionWith(true).hashCode(),
+        Assert.assertEquals(
+                this.newObjectCollectionWith(true).hashCode(),
                 this.newWith(true).hashCode());
-        Assert.assertEquals(this.newObjectCollectionWith(false).hashCode(),
+        Assert.assertEquals(
+                this.newObjectCollectionWith(false).hashCode(),
                 this.newWith(false).hashCode());
     }
 

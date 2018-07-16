@@ -877,7 +877,8 @@ public class IterateTest
         Assert.assertSame(expectedMultimap7.comparator(), actualMultimap7.comparator());
 
         // Below tests are for examples only. They do not add any coverage.
-        BagMultimap<String, String> expectedMultimap8 = HashBagMultimap.newMultimap(Tuples.pair("Key1", "1"),
+        BagMultimap<String, String> expectedMultimap8 = HashBagMultimap.newMultimap(
+                Tuples.pair("Key1", "1"),
                 Tuples.pair("Key2", "1"),
                 Tuples.pair("Key2", "2"),
                 Tuples.pair("Key2", "1"),
@@ -891,7 +892,8 @@ public class IterateTest
         MutableBagMultimap<String, String> actualMultimap8 = Iterate.toMultimap(list, keyFunction, each -> Sets.mutable.of("1", "1", String.valueOf(each)), Multimaps.mutable.bag.empty());
         Verify.assertBagMultimapsEqual(expectedMultimap8, actualMultimap8);
 
-        MutableBagMultimap<String, String> expectedMultimap9 = HashBagMultimap.newMultimap(Tuples.pair("Key1", "1"),
+        MutableBagMultimap<String, String> expectedMultimap9 = HashBagMultimap.newMultimap(
+                Tuples.pair("Key1", "1"),
                 Tuples.pair("Key1", "1"),
                 Tuples.pair("Key1", "1"),
                 Tuples.pair("Key2", "1"),

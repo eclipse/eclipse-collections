@@ -1515,7 +1515,8 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
     {
         int size = in.readInt();
         this.loadFactor = in.readFloat();
-        this.init(Math.max((int) (size / this.loadFactor) + 1,
+        this.init(Math.max(
+                (int) (size / this.loadFactor) + 1,
                 DEFAULT_INITIAL_CAPACITY));
         for (int i = 0; i < size; i++)
         {

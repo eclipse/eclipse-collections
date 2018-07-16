@@ -101,7 +101,8 @@ public abstract class ImmutableMapIterableTestCase
     public void flipUniqueValues()
     {
         ImmutableMapIterable<Integer, String> immutableMap = this.classUnderTest();
-        Assert.assertEquals(Interval.oneTo(this.size()).toMap(String::valueOf, Functions.getIntegerPassThru()),
+        Assert.assertEquals(
+                Interval.oneTo(this.size()).toMap(String::valueOf, Functions.getIntegerPassThru()),
                 immutableMap.flipUniqueValues());
     }
 

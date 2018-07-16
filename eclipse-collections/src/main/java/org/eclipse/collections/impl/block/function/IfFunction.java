@@ -27,7 +27,8 @@ public class IfFunction<T, V> implements Function<T, V>
         this(newPredicate, function, null);
     }
 
-    public IfFunction(Predicate<? super T> predicate,
+    public IfFunction(
+            Predicate<? super T> predicate,
             Function<? super T, ? extends V> function,
             Function<? super T, ? extends V> elseFunction)
     {

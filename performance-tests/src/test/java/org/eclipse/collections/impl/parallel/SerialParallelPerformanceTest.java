@@ -604,7 +604,8 @@ public class SerialParallelPerformanceTest
             Iterable<String> iterable,
             int count)
     {
-        Assert.assertEquals(HashBagMultimap.newMultimap(ParallelIterate.groupBy(iterable, Alphagram::new)),
+        Assert.assertEquals(
+                HashBagMultimap.newMultimap(ParallelIterate.groupBy(iterable, Alphagram::new)),
                 HashBagMultimap.newMultimap(Iterate.groupBy(iterable, Alphagram::new)));
         return TimeKeeper.logAverageMillisecondsToRun("Serial** GroupBy: "
                 + this.getSimpleName(iterable)
@@ -700,7 +701,8 @@ public class SerialParallelPerformanceTest
 
     private double basicParallelGroupByPerformance(Iterable<String> iterable, int count)
     {
-        Assert.assertEquals(HashBagMultimap.newMultimap(ParallelIterate.groupBy(iterable, Alphagram::new)),
+        Assert.assertEquals(
+                HashBagMultimap.newMultimap(ParallelIterate.groupBy(iterable, Alphagram::new)),
                 HashBagMultimap.newMultimap(Iterate.groupBy(iterable, Alphagram::new)));
         return TimeKeeper.logAverageMillisecondsToRun("Parallel GroupBy: "
                 + this.getSimpleName(iterable)
@@ -712,7 +714,8 @@ public class SerialParallelPerformanceTest
 
     private double basicForkJoinGroupByPerformance(Iterable<String> iterable, int count)
     {
-        Assert.assertEquals(HashBagMultimap.newMultimap(FJIterate.groupBy(iterable, Alphagram::new)),
+        Assert.assertEquals(
+                HashBagMultimap.newMultimap(FJIterate.groupBy(iterable, Alphagram::new)),
                 HashBagMultimap.newMultimap(Iterate.groupBy(iterable, Alphagram::new)));
         return TimeKeeper.logAverageMillisecondsToRun("ForkJoin GroupBy: "
                 + this.getSimpleName(iterable)

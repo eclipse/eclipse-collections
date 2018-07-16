@@ -416,7 +416,8 @@ public class ArrayAdapterTest extends AbstractListTestCase
     @Test
     public void detectWith()
     {
-        Assert.assertEquals(Integer.valueOf(3),
+        Assert.assertEquals(
+                Integer.valueOf(3),
                 ArrayAdapter.newArrayWith(1, 2, 3, 4, 5).detectWith(Object::equals, 3));
         Assert.assertNull(ArrayAdapter.newArrayWith(1, 2, 3, 4, 5).detectWith(Object::equals, 6));
     }

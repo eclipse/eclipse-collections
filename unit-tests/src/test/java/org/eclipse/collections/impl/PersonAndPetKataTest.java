@@ -322,7 +322,8 @@ public class PersonAndPetKataTest
         MutableList<String> names =
                 personEager.getPets().collect(Pet::getName);
         Assert.assertEquals(Lists.mutable.with("Dolly", "Spot"), names);
-        Assert.assertEquals("Dolly & Spot",
+        Assert.assertEquals(
+                "Dolly & Spot",
                 names.makeString(" & "));
     }
 
@@ -349,29 +350,25 @@ public class PersonAndPetKataTest
                 this.people.flatCollect(Person::getPetTypes).toSet();
         Assert.assertEquals(
                 UnifiedSet.newSetWith(PetType.values()),
-                allPetTypesEager
-        );
+                allPetTypesEager);
 
         MutableSet<PetType> allPetTypesEagerTarget =
                 this.people.flatCollect(Person::getPetTypes, Sets.mutable.empty());
         Assert.assertEquals(
                 UnifiedSet.newSetWith(PetType.values()),
-                allPetTypesEagerTarget
-        );
+                allPetTypesEagerTarget);
 
         MutableSet<PetType> allPetTypesLazy =
                 this.people.asLazy().flatCollect(Person::getPetTypes).toSet();
         Assert.assertEquals(
                 UnifiedSet.newSetWith(PetType.values()),
-                allPetTypesLazy
-        );
+                allPetTypesLazy);
 
         MutableSet<PetType> allPetTypesLazyTarget =
                 this.people.asLazy().flatCollect(Person::getPetTypes, Sets.mutable.empty());
         Assert.assertEquals(
                 UnifiedSet.newSetWith(PetType.values()),
-                allPetTypesLazyTarget
-        );
+                allPetTypesLazyTarget);
     }
 
     @Test
@@ -383,8 +380,7 @@ public class PersonAndPetKataTest
                         .collect(Collectors.toSet());
         Assert.assertEquals(
                 new HashSet<>(Arrays.asList(PetType.values())),
-                allPetTypesStream
-        );
+                allPetTypesStream);
     }
 
     @Test
@@ -429,13 +425,11 @@ public class PersonAndPetKataTest
         RichIterable<Person> catPeople = peopleByPetsEager.get(PetType.CAT);
         Assert.assertEquals(
                 "Mary, Bob",
-                catPeople.collect(Person::getFirstName).makeString()
-        );
+                catPeople.collect(Person::getFirstName).makeString());
         RichIterable<Person> dogPeople = peopleByPetsEager.get(PetType.DOG);
         Assert.assertEquals(
                 "Bob, Ted",
-                dogPeople.collect(Person::getFirstName).makeString()
-        );
+                dogPeople.collect(Person::getFirstName).makeString());
     }
 
     @Test
@@ -448,13 +442,11 @@ public class PersonAndPetKataTest
         List<Person> catPeople = peopleByPetsStream.get(PetType.CAT);
         Assert.assertEquals(
                 "Mary, Bob",
-                catPeople.stream().map(Person::getFirstName).collect(Collectors.joining(", "))
-        );
+                catPeople.stream().map(Person::getFirstName).collect(Collectors.joining(", ")));
         List<Person> dogPeople = peopleByPetsStream.get(PetType.DOG);
         Assert.assertEquals(
                 "Bob, Ted",
-                dogPeople.stream().map(Person::getFirstName).collect(Collectors.joining(", "))
-        );
+                dogPeople.stream().map(Person::getFirstName).collect(Collectors.joining(", ")));
     }
 
     @Test
@@ -477,24 +469,28 @@ public class PersonAndPetKataTest
     @Test
     public void testStrings()
     {
-        Assert.assertEquals("HELLO",
+        Assert.assertEquals(
+                "HELLO",
                 "h1e2l3l4o"
                         .chars()
                         .filter(Character::isLetter)
                         .map(Character::toUpperCase)
                         .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append).toString());
-        Assert.assertEquals("HELLO",
+        Assert.assertEquals(
+                "HELLO",
                 "h1e2l3l4o"
                         .codePoints()
                         .filter(Character::isLetter)
                         .map(Character::toUpperCase)
                         .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append).toString());
-        Assert.assertEquals("HELLO",
+        Assert.assertEquals(
+                "HELLO",
                 StringIterate.asCharAdapter("h1e2l3l4o")
                         .select(Character::isLetter)
                         .collectChar(Character::toUpperCase)
                         .toString());
-        Assert.assertEquals("HELLO",
+        Assert.assertEquals(
+                "HELLO",
                 StringIterate.asCodePointAdapter("h1e2l3l4o")
                         .select(Character::isLetter)
                         .collectInt(Character::toUpperCase)
