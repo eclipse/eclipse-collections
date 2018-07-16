@@ -67,10 +67,7 @@ public interface MutableSortedBag<T>
      * @since 9.2
      */
     @Override
-    default MutableSortedSet<T> selectUnique()
-    {
-        throw new UnsupportedOperationException("Adding default implementation so as to not break compatibility");
-    }
+    MutableSortedSet<T> selectUnique();
 
     @Override
     MutableSortedMap<T, Integer> toMapOfItemToCount();

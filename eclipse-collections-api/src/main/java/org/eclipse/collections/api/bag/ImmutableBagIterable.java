@@ -73,10 +73,7 @@ public interface ImmutableBagIterable<T> extends Bag<T>, ImmutableCollection<T>
      * @since 9.2
      */
     @Override
-    default ImmutableSetIterable<T> selectUnique()
-    {
-        throw new UnsupportedOperationException("Adding default implementation so as to not break compatibility");
-    }
+    ImmutableSetIterable<T> selectUnique();
 
     @Override
     MutableMapIterable<T, Integer> toMapOfItemToCount();

@@ -69,10 +69,7 @@ public interface Immutable<name>Bag extends Immutable<name>Collection, <name>Bag
      * @since 9.2
      */
     @Override
-    default Immutable<name>Set selectUnique()
-    {
-        throw new UnsupportedOperationException("Adding default implementation so as to not break compatibility");
-    }
+    Immutable<name>Set selectUnique();
 
     /**
      * Returns the {@code count} most frequently occurring items.

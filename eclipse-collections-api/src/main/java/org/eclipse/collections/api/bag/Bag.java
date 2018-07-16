@@ -131,10 +131,7 @@ public interface Bag<T>
      *
      * @since 9.2
      */
-    default SetIterable<T> selectUnique()
-    {
-        throw new UnsupportedOperationException("Adding default implementation so as to not break compatibility");
-    }
+    SetIterable<T> selectUnique();
 
     /**
      * Returns the {@code count} most frequently occurring items.
