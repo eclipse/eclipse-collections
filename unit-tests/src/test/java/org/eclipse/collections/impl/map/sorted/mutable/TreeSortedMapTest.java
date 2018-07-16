@@ -76,7 +76,8 @@ public class TreeSortedMapTest extends MutableSortedMapTestCase
     }
 
     @Override
-    public <K, V> TreeSortedMap<K, V> newMapWithKeysValues(Comparator<? super K> comparator,
+    public <K, V> TreeSortedMap<K, V> newMapWithKeysValues(
+            Comparator<? super K> comparator,
             K key1, V value1, K key2, V value2, K key3,
             V value3)
     {
@@ -84,7 +85,8 @@ public class TreeSortedMapTest extends MutableSortedMapTestCase
     }
 
     @Override
-    public <K, V> TreeSortedMap<K, V> newMapWithKeysValues(Comparator<? super K> comparator,
+    public <K, V> TreeSortedMap<K, V> newMapWithKeysValues(
+            Comparator<? super K> comparator,
             K key1, V value1, K key2, V value2, K key3,
             V value3, K key4, V value4)
     {
@@ -96,7 +98,8 @@ public class TreeSortedMapTest extends MutableSortedMapTestCase
     {
         UnifiedMap<Integer, String> unifiedMap = UnifiedMap.newWithKeysValues(1, "One", 2, "Two", 3, "Three");
         TreeSortedMap<Integer, String> sortedMap = TreeSortedMap.newMap(unifiedMap);
-        TreeSortedMap<Integer, String> revSortedMap = TreeSortedMap.newMap(Comparators.reverseNaturalOrder(),
+        TreeSortedMap<Integer, String> revSortedMap = TreeSortedMap.newMap(
+                Comparators.reverseNaturalOrder(),
                 unifiedMap);
 
         Verify.assertMapsEqual(unifiedMap, sortedMap);
@@ -117,7 +120,8 @@ public class TreeSortedMapTest extends MutableSortedMapTestCase
 
         Verify.assertSize(4, revSortedMap);
 
-        Verify.assertMapsEqual(UnifiedMap.newMapWith(Tuples.pair(1, 4), Tuples.pair(2, 3), Tuples.pair(3, 2), Tuples.pair(4, 1)),
+        Verify.assertMapsEqual(
+                UnifiedMap.newMapWith(Tuples.pair(1, 4), Tuples.pair(2, 3), Tuples.pair(3, 2), Tuples.pair(4, 1)),
                 revSortedMap);
         Verify.assertListsEqual(FastList.newListWith(4, 3, 2, 1), revSortedMap.keySet().toList());
         Verify.assertListsEqual(FastList.newListWith(1, 2, 3, 4), revSortedMap.valuesView().toList());

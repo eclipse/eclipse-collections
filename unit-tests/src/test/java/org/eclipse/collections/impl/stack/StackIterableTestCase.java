@@ -1113,7 +1113,8 @@ public abstract class StackIterableTestCase
     @Test
     public void toSet()
     {
-        Assert.assertEquals(UnifiedSet.newSetWith(4, 3, 2, 1),
+        Assert.assertEquals(
+                UnifiedSet.newSetWith(4, 3, 2, 1),
                 this.newStackWith(1, 2, 3, 4).toSet());
     }
 
@@ -1152,7 +1153,8 @@ public abstract class StackIterableTestCase
     @Test
     public void toBag()
     {
-        Assert.assertEquals(Bags.mutable.of("C", "B", "A"),
+        Assert.assertEquals(
+                Bags.mutable.of("C", "B", "A"),
                 this.newStackFromTopToBottom("C", "B", "A").toBag());
     }
 
@@ -1188,7 +1190,8 @@ public abstract class StackIterableTestCase
     @Test
     public void toMap()
     {
-        Assert.assertEquals(UnifiedMap.newWithKeysValues("4", "4", "3", "3", "2", "2", "1", "1"),
+        Assert.assertEquals(
+                UnifiedMap.newWithKeysValues("4", "4", "3", "3", "2", "2", "1", "1"),
                 this.newStackFromTopToBottom(4, 3, 2, 1).toMap(String::valueOf, String::valueOf));
     }
 
@@ -1196,22 +1199,24 @@ public abstract class StackIterableTestCase
     @Test
     public void toSortedMap()
     {
-        Assert.assertEquals(UnifiedMap.newWithKeysValues(3, "3", 2, "2", 1, "1"),
+        Assert.assertEquals(
+                UnifiedMap.newWithKeysValues(3, "3", 2, "2", 1, "1"),
                 this.newStackFromTopToBottom(3, 2, 1).toSortedMap(Functions.getIntegerPassThru(), String::valueOf));
 
-        Assert.assertEquals(TreeSortedMap.newMapWith(Comparators.reverseNaturalOrder(), 3, "3", 2, "2", 1, "1"),
-                this.newStackFromTopToBottom(3, 2, 1).toSortedMap(Comparators.reverseNaturalOrder(),
-                        Functions.getIntegerPassThru(), String::valueOf));
+        Assert.assertEquals(
+                TreeSortedMap.newMapWith(Comparators.reverseNaturalOrder(), 3, "3", 2, "2", 1, "1"),
+                this.newStackFromTopToBottom(3, 2, 1).toSortedMap(Comparators.reverseNaturalOrder(), Functions.getIntegerPassThru(), String::valueOf));
 
-        Assert.assertEquals(TreeSortedMap.newMapWith(Comparators.reverseNaturalOrder(), 3, "3", 2, "2", 1, "1"),
-                this.newStackFromTopToBottom(3, 2, 1).toSortedMapBy(key -> -key,
-                        Functions.getIntegerPassThru(), String::valueOf));
+        Assert.assertEquals(
+                TreeSortedMap.newMapWith(Comparators.reverseNaturalOrder(), 3, "3", 2, "2", 1, "1"),
+                this.newStackFromTopToBottom(3, 2, 1).toSortedMapBy(key -> -key, Functions.getIntegerPassThru(), String::valueOf));
     }
 
     @Test
     public void asLazy()
     {
-        Assert.assertEquals(Lists.mutable.with("3", "2", "1"),
+        Assert.assertEquals(
+                Lists.mutable.with("3", "2", "1"),
                 this.newStackFromTopToBottom("3", "2", "1").asLazy().toList());
     }
 

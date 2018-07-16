@@ -768,7 +768,8 @@ public class UnifiedSetWithHashingStrategyTest extends AbstractUnifiedSetTestCas
     @Test
     public void constructor_from_UnifiedSet()
     {
-        Verify.assertEqualsAndHashCode(new HashSet<>(MORE_COLLISIONS),
+        Verify.assertEqualsAndHashCode(
+                new HashSet<>(MORE_COLLISIONS),
                 UnifiedSetWithHashingStrategy.newSet(
                         INTEGER_HASHING_STRATEGY,
                         MORE_COLLISIONS));

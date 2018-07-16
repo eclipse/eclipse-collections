@@ -110,18 +110,21 @@ public class StringIterateTest
     @Test
     public void asCharAdapterExtra()
     {
-        Assert.assertEquals(9,
+        Assert.assertEquals(
+                9,
                 StringIterate.asCharAdapter(THE_QUICK_BROWN_FOX_JUMPS_OVER_THE_LAZY_DOG)
                         .count(c -> !Character.isLetter(c)));
 
         Assert.assertTrue(
                 StringIterate.asCharAdapter(THE_QUICK_BROWN_FOX_JUMPS_OVER_THE_LAZY_DOG).anySatisfy(Character::isWhitespace));
 
-        Assert.assertEquals(8,
+        Assert.assertEquals(
+                8,
                 StringIterate.asCharAdapter(THE_QUICK_BROWN_FOX_JUMPS_OVER_THE_LAZY_DOG)
                         .count(Character::isWhitespace));
 
-        Verify.assertSize(26,
+        Verify.assertSize(
+                26,
                 StringIterate.asCharAdapter(THE_QUICK_BROWN_FOX_JUMPS_OVER_THE_LAZY_DOG)
                         .asLazy()
                         .select(Character::isLetter)
@@ -190,18 +193,21 @@ public class StringIterateTest
     @Test
     public void asCodePointAdapterExtra()
     {
-        Assert.assertEquals(9,
+        Assert.assertEquals(
+                9,
                 StringIterate.asCodePointAdapter(THE_QUICK_BROWN_FOX_JUMPS_OVER_THE_LAZY_DOG)
                         .count(i -> !Character.isLetter(i)));
 
         Assert.assertTrue(
                 StringIterate.asCodePointAdapter(THE_QUICK_BROWN_FOX_JUMPS_OVER_THE_LAZY_DOG).anySatisfy(Character::isWhitespace));
 
-        Assert.assertEquals(8,
+        Assert.assertEquals(
+                8,
                 StringIterate.asCodePointAdapter(THE_QUICK_BROWN_FOX_JUMPS_OVER_THE_LAZY_DOG)
                         .count(Character::isWhitespace));
 
-        Verify.assertSize(26,
+        Verify.assertSize(
+                26,
                 StringIterate.asCodePointAdapter(THE_QUICK_BROWN_FOX_JUMPS_OVER_THE_LAZY_DOG)
                         .asLazy()
                         .select(Character::isLetter)
@@ -259,18 +265,21 @@ public class StringIterateTest
     @Test
     public void toCodePointListExtra()
     {
-        Assert.assertEquals(9,
+        Assert.assertEquals(
+                9,
                 StringIterate.toCodePointList(THE_QUICK_BROWN_FOX_JUMPS_OVER_THE_LAZY_DOG)
                         .count(i -> !Character.isLetter(i)));
 
         Assert.assertTrue(
                 StringIterate.toCodePointList(THE_QUICK_BROWN_FOX_JUMPS_OVER_THE_LAZY_DOG).anySatisfy(Character::isWhitespace));
 
-        Assert.assertEquals(8,
+        Assert.assertEquals(
+                8,
                 StringIterate.toCodePointList(THE_QUICK_BROWN_FOX_JUMPS_OVER_THE_LAZY_DOG)
                         .count(Character::isWhitespace));
 
-        Verify.assertSize(26,
+        Verify.assertSize(
+                26,
                 StringIterate.toCodePointList(THE_QUICK_BROWN_FOX_JUMPS_OVER_THE_LAZY_DOG)
                         .asLazy()
                         .select(Character::isLetter)

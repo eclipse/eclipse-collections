@@ -40,13 +40,15 @@ public class FlatCollectIterableTestNoIteratorTest implements LazyNoIteratorTest
         assertThrows(NullPointerException.class, () -> iterable1.detectWithOptional((i, object) -> i == object, null));
 
         RichIterable<Integer> iterable2 =
-                new FlatCollectIterable<>(new FastListNoIterator<Integer>().with(1, null, 3),
+                new FlatCollectIterable<>(
+                        new FastListNoIterator<Integer>().with(1, null, 3),
                         each -> (each == null) ? null : FastList.newListWith(each));
         assertThrows(NullPointerException.class, () -> iterable2.detectOptional(Objects::isNull));
         assertThrows(NullPointerException.class, () -> iterable2.detectWithOptional((i, object) -> i == object, null));
 
         RichIterable<Integer> iterable3 =
-                new FlatCollectIterable<>(new FastListNoIterator<String>().with("1", "null", "3"),
+                new FlatCollectIterable<>(
+                        new FastListNoIterator<String>().with("1", "null", "3"),
                         each -> FastList.newListWith("null".equals(each) ? null : Integer.valueOf(each)));
         assertThrows(NullPointerException.class, () -> iterable3.detectOptional(Objects::isNull));
         assertThrows(NullPointerException.class, () -> iterable3.detectWithOptional((i, object) -> i == object, null));

@@ -107,7 +107,8 @@ final class ImmutableNonupletonList<T>
     @Override
     public ImmutableList<T> newWith(T newItem)
     {
-        return Lists.immutable.with(this.get(0),
+        return Lists.immutable.with(
+                this.get(0),
                 this.get(1),
                 this.get(2),
                 this.get(3),

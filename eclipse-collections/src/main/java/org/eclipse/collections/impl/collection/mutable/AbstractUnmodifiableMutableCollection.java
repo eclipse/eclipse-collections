@@ -836,7 +836,8 @@ public class AbstractUnmodifiableMutableCollection<T> implements MutableCollecti
     }
 
     @Override
-    public <NK, NV> MutableSortedMap<NK, NV> toSortedMap(Comparator<? super NK> comparator,
+    public <NK, NV> MutableSortedMap<NK, NV> toSortedMap(
+            Comparator<? super NK> comparator,
             Function<? super T, ? extends NK> keyFunction,
             Function<? super T, ? extends NV> valueFunction)
     {

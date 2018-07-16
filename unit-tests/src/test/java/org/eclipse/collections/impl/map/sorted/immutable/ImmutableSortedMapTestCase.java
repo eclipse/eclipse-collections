@@ -448,13 +448,15 @@ public abstract class ImmutableSortedMapTestCase extends MapIterableTestCase
         ImmutableSortedMap<Integer, String> map = this.classUnderTest();
         ImmutableSortedMap<Integer, String> select = map.select((argument1, argument2) -> argument1 < this.size());
         Verify.assertListsEqual(Interval.oneTo(this.size() - 1), select.keysView().toList());
-        Verify.assertListsEqual(Interval.oneTo(this.size() - 1).collect(String::valueOf).toList(),
+        Verify.assertListsEqual(
+                Interval.oneTo(this.size() - 1).collect(String::valueOf).toList(),
                 select.valuesView().toList());
 
         ImmutableSortedMap<Integer, String> revMap = this.classUnderTest(REV_INT_COMPARATOR);
         ImmutableSortedMap<Integer, String> revSelect = revMap.select((argument1, argument2) -> argument1 < this.size());
         Verify.assertListsEqual(Interval.oneTo(this.size() - 1).reverseThis(), revSelect.keysView().toList());
-        Verify.assertListsEqual(Interval.oneTo(this.size() - 1).collect(String::valueOf).toList().reverseThis(),
+        Verify.assertListsEqual(
+                Interval.oneTo(this.size() - 1).collect(String::valueOf).toList().reverseThis(),
                 revSelect.valuesView().toList());
     }
 
@@ -467,13 +469,15 @@ public abstract class ImmutableSortedMapTestCase extends MapIterableTestCase
         ImmutableSortedMap<Integer, String> map = this.classUnderTest();
         ImmutableSortedMap<Integer, String> reject = map.reject((argument1, argument2) -> argument1 == 1);
         Verify.assertListsEqual(Interval.fromTo(2, this.size()), reject.keysView().toList());
-        Verify.assertListsEqual(Interval.fromTo(2, this.size()).collect(String::valueOf).toList(),
+        Verify.assertListsEqual(
+                Interval.fromTo(2, this.size()).collect(String::valueOf).toList(),
                 reject.valuesView().toList());
 
         ImmutableSortedMap<Integer, String> revMap = this.classUnderTest(REV_INT_COMPARATOR);
         ImmutableSortedMap<Integer, String> revReject = revMap.reject((argument1, argument2) -> argument1 == 1);
         Verify.assertListsEqual(Interval.fromTo(2, this.size()).reverseThis(), revReject.keysView().toList());
-        Verify.assertListsEqual(Interval.fromTo(2, this.size()).collect(String::valueOf).toList().reverseThis(),
+        Verify.assertListsEqual(
+                Interval.fromTo(2, this.size()).collect(String::valueOf).toList().reverseThis(),
                 revReject.valuesView().toList());
     }
 

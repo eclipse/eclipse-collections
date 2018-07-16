@@ -151,7 +151,8 @@ public class TreeSortedMap<K, V>
         return new TreeSortedMap<K, V>(comparator).with(key1, value1, key2, value2, key3, value3);
     }
 
-    public static <K, V> TreeSortedMap<K, V> newMapWith(Comparator<? super K> comparator,
+    public static <K, V> TreeSortedMap<K, V> newMapWith(
+            Comparator<? super K> comparator,
             K key1, V value1,
             K key2, V value2,
             K key3, V value3,

@@ -121,7 +121,8 @@ public class UnmodifiableStackTest extends StackIterableTestCase
     public void testReject()
     {
         Assert.assertEquals(ArrayStack.newStackFromTopToBottom("2", "3"), this.unmodifiableStackString.reject(StringPredicates.contains("1")));
-        Assert.assertEquals(FastList.newListWith("2", "3"),
+        Assert.assertEquals(
+                FastList.newListWith("2", "3"),
                 this.unmodifiableStackString.reject(StringPredicates.contains("1"), FastList.newList()));
     }
 
@@ -163,7 +164,8 @@ public class UnmodifiableStackTest extends StackIterableTestCase
     @Test
     public void testCount()
     {
-        Assert.assertEquals(this.mutableStack.count(ignored1 -> true),
+        Assert.assertEquals(
+                this.mutableStack.count(ignored1 -> true),
                 this.unmodifiableStack.count(ignored -> true));
     }
 

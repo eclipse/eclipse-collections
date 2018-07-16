@@ -242,7 +242,8 @@ public class ArrayListIterateTest
     public void injectInto()
     {
         ArrayList<Integer> list = this.newArrayList(1, 2, 3);
-        Assert.assertEquals(Integer.valueOf(1 + 1 + 2 + 3),
+        Assert.assertEquals(
+                Integer.valueOf(1 + 1 + 2 + 3),
                 ArrayListIterate.injectInto(1, list, AddFunction.INTEGER));
     }
 

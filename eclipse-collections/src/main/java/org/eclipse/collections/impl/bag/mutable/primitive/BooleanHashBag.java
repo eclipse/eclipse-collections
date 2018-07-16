@@ -943,13 +943,13 @@ public final class BooleanHashBag implements MutableBooleanBag, Externalizable
     public MutableBooleanSet selectUnique()
     {
         MutableBooleanSet result = BooleanSets.mutable.empty();
-        this.forEachWithOccurrences((each, occurrences)->
+        this.forEachWithOccurrences((each, occurrences) ->
+        {
+            if (occurrences == 1)
             {
-                if (occurrences == 1)
-                {
-                    result.add(each);
-                }
-            });
+                result.add(each);
+            }
+        });
         return result;
     }
 }

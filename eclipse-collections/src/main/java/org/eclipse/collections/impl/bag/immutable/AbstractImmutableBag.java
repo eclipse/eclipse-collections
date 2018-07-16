@@ -198,7 +198,8 @@ public abstract class AbstractImmutableBag<T>
     @Override
     public ImmutableList<ObjectIntPair<T>> topOccurrences(int n)
     {
-        return this.occurrencesSortingBy(n,
+        return this.occurrencesSortingBy(
+                n,
                 item -> -item.getTwo(),
                 Lists.fixedSize.empty()
         ).toImmutable();

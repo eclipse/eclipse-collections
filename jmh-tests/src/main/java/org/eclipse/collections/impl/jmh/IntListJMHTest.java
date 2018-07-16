@@ -175,7 +175,8 @@ public class IntListJMHTest
         return IntStream.of(this.ints)
                 .parallel()
                 .filter(i -> i % 2 == 0)
-                .collect(IntLists.mutable::empty,
+                .collect(
+                        IntLists.mutable::empty,
                         MutableIntList::add,
                         MutableIntList::addAll);
     }
@@ -379,7 +380,8 @@ public class IntListJMHTest
         return IntStream.of(this.ints)
                 .parallel()
                 .map(i -> i * 2)
-                .collect(IntLists.mutable::empty,
+                .collect(
+                        IntLists.mutable::empty,
                         MutableIntList::add,
                         MutableIntList::addAll);
     }

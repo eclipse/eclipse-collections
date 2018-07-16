@@ -86,7 +86,8 @@ public abstract class AbstractImmutableSortedSetTestCase
         Assert.assertSame(immutable, immutable.newWith(immutable.size()));
 
         ImmutableSortedSet<Integer> set = this.classUnderTest(Comparators.reverseNaturalOrder());
-        Verify.assertSortedSetsEqual(TreeSortedSet.newSet(Comparators.reverseNaturalOrder(), Interval.oneTo(set.size() + 1)),
+        Verify.assertSortedSetsEqual(
+                TreeSortedSet.newSet(Comparators.reverseNaturalOrder(), Interval.oneTo(set.size() + 1)),
                 set.newWith(set.size() + 1).castToSortedSet());
     }
 
@@ -98,7 +99,8 @@ public abstract class AbstractImmutableSortedSetTestCase
         Assert.assertSame(immutable, immutable.newWithout(immutable.size() + 1));
 
         ImmutableSortedSet<Integer> set = this.classUnderTest(Comparators.reverseNaturalOrder());
-        Verify.assertSortedSetsEqual(TreeSortedSet.newSet(Comparators.reverseNaturalOrder(), Interval.oneTo(set.size() - 1)),
+        Verify.assertSortedSetsEqual(
+                TreeSortedSet.newSet(Comparators.reverseNaturalOrder(), Interval.oneTo(set.size() - 1)),
                 set.newWithout(set.size()).castToSortedSet());
     }
 
@@ -108,7 +110,8 @@ public abstract class AbstractImmutableSortedSetTestCase
         ImmutableSortedSet<Integer> set = this.classUnderTest(Collections.reverseOrder());
         ImmutableSortedSet<Integer> withAll = set.newWithAll(UnifiedSet.newSet(Interval.fromTo(1, set.size() + 1)));
         Assert.assertNotEquals(set, withAll);
-        Verify.assertSortedSetsEqual(TreeSortedSet.newSet(Comparators.reverseNaturalOrder(), Interval.fromTo(1, set.size() + 1)),
+        Verify.assertSortedSetsEqual(
+                TreeSortedSet.newSet(Comparators.reverseNaturalOrder(), Interval.fromTo(1, set.size() + 1)),
                 withAll.castToSortedSet());
     }
 
@@ -215,7 +218,8 @@ public abstract class AbstractImmutableSortedSetTestCase
     {
         ImmutableSortedSet<Integer> integers = this.classUnderTest(Collections.reverseOrder());
         Verify.assertIterableEmpty(integers.select(Predicates.greaterThan(integers.size())));
-        Verify.assertSortedSetsEqual(TreeSortedSet.newSet(Comparators.reverseNaturalOrder(), Interval.oneTo(integers.size() - 1)),
+        Verify.assertSortedSetsEqual(
+                TreeSortedSet.newSet(Comparators.reverseNaturalOrder(), Interval.oneTo(integers.size() - 1)),
                 integers.select(Predicates.lessThan(integers.size())).castToSortedSet());
     }
 
@@ -224,7 +228,8 @@ public abstract class AbstractImmutableSortedSetTestCase
     {
         ImmutableSortedSet<Integer> integers = this.classUnderTest(Collections.reverseOrder());
         Verify.assertIterableEmpty(integers.selectWith(Predicates2.greaterThan(), integers.size()));
-        Verify.assertSortedSetsEqual(TreeSortedSet.newSet(Comparators.reverseNaturalOrder(), Interval.oneTo(integers.size() - 1)),
+        Verify.assertSortedSetsEqual(
+                TreeSortedSet.newSet(Comparators.reverseNaturalOrder(), Interval.oneTo(integers.size() - 1)),
                 integers.selectWith(Predicates2.lessThan(), integers.size()).castToSortedSet());
     }
 
@@ -232,7 +237,8 @@ public abstract class AbstractImmutableSortedSetTestCase
     public void selectToTarget()
     {
         ImmutableSortedSet<Integer> integers = this.classUnderTest();
-        Verify.assertListsEqual(integers.toList(),
+        Verify.assertListsEqual(
+                integers.toList(),
                 integers.select(Predicates.lessThan(integers.size() + 1), FastList.newList()));
         Verify.assertEmpty(
                 integers.select(Predicates.greaterThan(integers.size()), FastList.newList()));
@@ -244,7 +250,8 @@ public abstract class AbstractImmutableSortedSetTestCase
         ImmutableSortedSet<Integer> integers = this.classUnderTest(Collections.reverseOrder());
         Verify.assertEmpty(
                 FastList.newList(integers.reject(Predicates.lessThan(integers.size() + 1))));
-        Verify.assertSortedSetsEqual(integers.castToSortedSet(),
+        Verify.assertSortedSetsEqual(
+                integers.castToSortedSet(),
                 integers.reject(Predicates.greaterThan(integers.size())).castToSortedSet());
     }
 
@@ -253,7 +260,8 @@ public abstract class AbstractImmutableSortedSetTestCase
     {
         ImmutableSortedSet<Integer> integers = this.classUnderTest(Collections.reverseOrder());
         Verify.assertIterableEmpty(integers.rejectWith(Predicates2.lessThanOrEqualTo(), integers.size()));
-        Verify.assertSortedSetsEqual(TreeSortedSet.newSet(Comparators.reverseNaturalOrder(), Interval.oneTo(integers.size() - 1)),
+        Verify.assertSortedSetsEqual(
+                TreeSortedSet.newSet(Comparators.reverseNaturalOrder(), Interval.oneTo(integers.size() - 1)),
                 integers.rejectWith(Predicates2.greaterThanOrEqualTo(), integers.size()).castToSortedSet());
     }
 
@@ -263,7 +271,8 @@ public abstract class AbstractImmutableSortedSetTestCase
         ImmutableSortedSet<Integer> integers = this.classUnderTest();
         Verify.assertEmpty(
                 integers.reject(Predicates.lessThan(integers.size() + 1), FastList.newList()));
-        Verify.assertListsEqual(integers.toList(),
+        Verify.assertListsEqual(
+                integers.toList(),
                 integers.reject(Predicates.greaterThan(integers.size()), FastList.newList()));
     }
 
@@ -391,7 +400,8 @@ public abstract class AbstractImmutableSortedSetTestCase
     {
         ImmutableSortedSet<Integer> integers = this.classUnderTest();
         Assert.assertEquals(integers, integers.collect(Functions.getIntegerPassThru(), UnifiedSet.newSet()));
-        Verify.assertListsEqual(integers.toList(),
+        Verify.assertListsEqual(
+                integers.toList(),
                 integers.collect(Functions.getIntegerPassThru(), FastList.newList()));
     }
 
@@ -428,12 +438,14 @@ public abstract class AbstractImmutableSortedSetTestCase
 
         ImmutableList<Pair<Integer, Object>> pairsPlusOne = immutableSet.zip(nullsPlusOne);
         Assert.assertEquals(immutableSet.toList(), pairsPlusOne.collect((Function<Pair<Integer, ?>, Integer>) Pair::getOne));
-        Verify.assertListsEqual(FastList.newList(Interval.fromTo(immutableSet.size(), 1)),
+        Verify.assertListsEqual(
+                FastList.newList(Interval.fromTo(immutableSet.size(), 1)),
                 pairsPlusOne.collect((Function<Pair<Integer, ?>, Integer>) Pair::getOne).castToList());
         Assert.assertEquals(FastList.newList(nulls), pairsPlusOne.collect((Function<Pair<?, Object>, Object>) Pair::getTwo));
 
         ImmutableList<Pair<Integer, Object>> pairsMinusOne = immutableSet.zip(nullsMinusOne);
-        Verify.assertListsEqual(FastList.newList(Interval.fromTo(immutableSet.size(), 2)),
+        Verify.assertListsEqual(
+                FastList.newList(Interval.fromTo(immutableSet.size(), 2)),
                 pairsMinusOne.collect((Function<Pair<Integer, ?>, Integer>) Pair::getOne).castToList());
         Assert.assertEquals(immutableSet.zip(nulls), immutableSet.zip(nulls, FastList.newList()));
 
@@ -459,7 +471,8 @@ public abstract class AbstractImmutableSortedSetTestCase
         Assert.assertEquals(
                 immutableSet.zipWithIndex(),
                 immutableSet.zipWithIndex(UnifiedSet.newSet()));
-        Verify.assertListsEqual(TreeSortedSet.newSet(Collections.reverseOrder(), Interval.oneTo(immutableSet.size())).toList(),
+        Verify.assertListsEqual(
+                TreeSortedSet.newSet(Collections.reverseOrder(), Interval.oneTo(immutableSet.size())).toList(),
                 pairs.collect((Function<Pair<Integer, ?>, Integer>) Pair::getOne).toList());
     }
 
@@ -952,7 +965,8 @@ public abstract class AbstractImmutableSortedSetTestCase
     {
         ImmutableSortedSet<Integer> set = this.classUnderTest(Collections.reverseOrder());
         ImmutableSortedSet<Integer> difference = set.symmetricDifference(UnifiedSet.newSet(Interval.fromTo(2, set.size() + 1)));
-        Verify.assertSortedSetsEqual(TreeSortedSet.newSetWith(Comparators.reverseNaturalOrder(), 1, set.size() + 1),
+        Verify.assertSortedSetsEqual(
+                TreeSortedSet.newSetWith(Comparators.reverseNaturalOrder(), 1, set.size() + 1),
                 difference.castToSortedSet());
     }
 

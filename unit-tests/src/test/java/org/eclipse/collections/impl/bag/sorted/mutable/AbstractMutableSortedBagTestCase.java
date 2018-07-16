@@ -627,14 +627,15 @@ public abstract class AbstractMutableSortedBagTestCase extends MutableBagTestCas
     {
         super.zipWithIndex();
         MutableSortedBag<Integer> integers = this.newWith(Collections.reverseOrder(), 1, 3, 5, 5, 5, 2, 4);
-        Assert.assertEquals(UnifiedSet.newSetWith(
-                Tuples.pair(5, 0),
-                Tuples.pair(5, 1),
-                Tuples.pair(5, 2),
-                Tuples.pair(4, 3),
-                Tuples.pair(3, 4),
-                Tuples.pair(2, 5),
-                Tuples.pair(1, 6)),
+        Assert.assertEquals(
+                UnifiedSet.newSetWith(
+                        Tuples.pair(5, 0),
+                        Tuples.pair(5, 1),
+                        Tuples.pair(5, 2),
+                        Tuples.pair(4, 3),
+                        Tuples.pair(3, 4),
+                        Tuples.pair(2, 5),
+                        Tuples.pair(1, 6)),
                 integers.zipWithIndex());
     }
 
@@ -989,7 +990,8 @@ public abstract class AbstractMutableSortedBagTestCase extends MutableBagTestCas
     {
         super.toBag();
 
-        Assert.assertEquals(Bags.mutable.of("C", "C", "B", "A"),
+        Assert.assertEquals(
+                Bags.mutable.of("C", "C", "B", "A"),
                 this.newWith(Comparators.reverseNaturalOrder(), "C", "C", "B", "A").toBag());
     }
 

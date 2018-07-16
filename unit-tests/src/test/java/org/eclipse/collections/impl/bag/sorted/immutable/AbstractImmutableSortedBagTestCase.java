@@ -216,7 +216,8 @@ public abstract class AbstractImmutableSortedBagTestCase extends AbstractImmutab
         ImmutableSortedBag<Integer> actualBag = bag.newWithAll(HashBag.newBagWith(3, 4));
         Assert.assertNotEquals(bag, actualBag);
         TreeBag<Integer> expectedBag = TreeBag.newBagWith(Comparators.reverseNaturalOrder(), 4, 3, 2, 1, 1, 1);
-        Verify.assertSortedBagsEqual(expectedBag,
+        Verify.assertSortedBagsEqual(
+                expectedBag,
                 actualBag);
         Assert.assertSame(expectedBag.comparator(), actualBag.comparator());
     }
@@ -386,7 +387,8 @@ public abstract class AbstractImmutableSortedBagTestCase extends AbstractImmutab
     public void selectToTarget()
     {
         ImmutableSortedBag<Integer> integers = this.classUnderTest();
-        Verify.assertListsEqual(integers.toList(),
+        Verify.assertListsEqual(
+                integers.toList(),
                 integers.select(Predicates.lessThan(integers.size() + 1), FastList.newList()));
         Verify.assertEmpty(
                 integers.select(Predicates.greaterThan(integers.size()), FastList.newList()));
@@ -399,7 +401,8 @@ public abstract class AbstractImmutableSortedBagTestCase extends AbstractImmutab
         ImmutableSortedBag<Integer> integers = this.classUnderTest(Collections.reverseOrder());
         Verify.assertEmpty(
                 FastList.newList(integers.reject(Predicates.lessThan(integers.size() + 1))));
-        Verify.assertSortedBagsEqual(integers,
+        Verify.assertSortedBagsEqual(
+                integers,
                 integers.reject(Predicates.greaterThan(integers.size())));
     }
 
@@ -411,7 +414,8 @@ public abstract class AbstractImmutableSortedBagTestCase extends AbstractImmutab
         Verify.assertIterableEmpty(integers.rejectWith(Predicates2.lessThanOrEqualTo(), integers.size()));
         TreeBag<Integer> expectedBag = TreeBag.newBagWith(Comparators.reverseNaturalOrder(), 1, 1, 1, 2);
         ImmutableSortedBag<Integer> actualBag = integers.rejectWith(Predicates2.greaterThanOrEqualTo(), integers.size());
-        Verify.assertSortedBagsEqual(expectedBag,
+        Verify.assertSortedBagsEqual(
+                expectedBag,
                 actualBag);
         Assert.assertSame(expectedBag.comparator(), actualBag.comparator());
     }
@@ -422,11 +426,13 @@ public abstract class AbstractImmutableSortedBagTestCase extends AbstractImmutab
         ImmutableSortedBag<Integer> integers = this.classUnderTest();
         Verify.assertEmpty(
                 integers.reject(Predicates.lessThan(integers.size() + 1), FastList.newList()));
-        Verify.assertListsEqual(integers.toList(),
+        Verify.assertListsEqual(
+                integers.toList(),
                 integers.reject(Predicates.greaterThan(integers.size()), FastList.newList()));
 
         ImmutableSortedBag<Integer> integers2 = this.classUnderTest();
-        Assert.assertEquals(HashBag.newBagWith(2),
+        Assert.assertEquals(
+                HashBag.newBagWith(2),
                 integers2.reject(each -> each == 1, new HashBag<>()));
     }
 
@@ -574,7 +580,8 @@ public abstract class AbstractImmutableSortedBagTestCase extends AbstractImmutab
     {
         ImmutableSortedBag<Integer> integers = this.classUnderTest();
         Assert.assertEquals(HashBag.newBag(integers), integers.collect(Functions.getIntegerPassThru(), HashBag.newBag()));
-        Verify.assertListsEqual(integers.toList(),
+        Verify.assertListsEqual(
+                integers.toList(),
                 integers.collect(Functions.getIntegerPassThru(), FastList.newList()));
     }
 
@@ -612,12 +619,14 @@ public abstract class AbstractImmutableSortedBagTestCase extends AbstractImmutab
 
         ImmutableList<Pair<Integer, Object>> pairsPlusOne = immutableBag.zip(nullsPlusOne);
         Assert.assertEquals(immutableBag.toList(), pairsPlusOne.collect((Function<Pair<Integer, ?>, Integer>) Pair::getOne));
-        Verify.assertListsEqual(FastList.newListWith(2, 1, 1, 1),
+        Verify.assertListsEqual(
+                FastList.newListWith(2, 1, 1, 1),
                 pairsPlusOne.collect((Function<Pair<Integer, ?>, Integer>) Pair::getOne).castToList());
         Assert.assertEquals(FastList.newList(nulls), pairsPlusOne.collect((Function<Pair<?, Object>, Object>) Pair::getTwo));
 
         ImmutableList<Pair<Integer, Object>> pairsMinusOne = immutableBag.zip(nullsMinusOne);
-        Verify.assertListsEqual(FastList.newListWith(2, 1, 1),
+        Verify.assertListsEqual(
+                FastList.newListWith(2, 1, 1),
                 pairsMinusOne.collect((Function<Pair<Integer, ?>, Integer>) Pair::getOne).castToList());
         Assert.assertEquals(immutableBag.zip(nulls), immutableBag.zip(nulls, FastList.newList()));
         Assert.assertEquals(immutableBag.zip(nulls).toBag(), immutableBag.zip(nulls, new HashBag<>()));

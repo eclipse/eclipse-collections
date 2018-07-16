@@ -885,7 +885,8 @@ public abstract class ParallelIterableTestCase
             this.batchSize = batchSize;
 
             ParallelIterable<Integer> testCollection = this.newWith(list.toArray(new Integer[]{}));
-            Assert.assertEquals("Batch size: " + this.batchSize,
+            Assert.assertEquals(
+                    "Batch size: " + this.batchSize,
                     baseline,
                     testCollection.sumOfFloat(roundingSensitiveElementFunction),
                     1.0e-15d);
@@ -915,7 +916,8 @@ public abstract class ParallelIterableTestCase
             this.batchSize = batchSize;
 
             ParallelIterable<Integer> testCollection = this.newWith(list.toArray(new Integer[]{}));
-            Assert.assertEquals("Batch size: " + this.batchSize,
+            Assert.assertEquals(
+                    "Batch size: " + this.batchSize,
                     baseline,
                     testCollection.sumOfDouble(roundingSensitiveElementFunction),
                     1.0e-15d);

@@ -899,7 +899,8 @@ public class SerialParallelLazyPerformanceTest
         }, count, 10);
     }
 
-    private double basicParallelLazyGroupByPerformance(UnifiedSet<String> iterable,
+    private double basicParallelLazyGroupByPerformance(
+            UnifiedSet<String> iterable,
             String parameterType,
             Function<String, Alphagram> function,
             int count,
@@ -915,7 +916,8 @@ public class SerialParallelLazyPerformanceTest
                 + this.formatSizeOf(iterable) + " cores: " + cores, () -> Verify.assertNotEmpty(iterable.asParallel(service, batchSize).groupBy(function)), count, WARM_UP_COUNT);
     }
 
-    private double basicParallelLazyJava8GroupByPerformance(Set<String> iterable,
+    private double basicParallelLazyJava8GroupByPerformance(
+            Set<String> iterable,
             String parameterType,
             java.util.function.Function<String, Alphagram> function,
             int count)

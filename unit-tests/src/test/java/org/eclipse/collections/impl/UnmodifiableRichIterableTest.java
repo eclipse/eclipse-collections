@@ -85,15 +85,15 @@ public class UnmodifiableRichIterableTest extends AbstractRichIterableTestCase
                 this.mutableCollection.toArray(EMPTY_STRING_ARRAY),
                 this.unmodifiableCollection.toArray(EMPTY_STRING_ARRAY));
         Assert.assertEquals(this.mutableCollection.toList(), this.unmodifiableCollection.toList());
-        Verify.assertListsEqual(Lists.mutable.of(BON_JOVI, EUROPE, METALLICA, SCORPIONS),
-                this.unmodifiableCollection
-                        .toSortedList());
-        Verify.assertListsEqual(Lists.mutable.of(SCORPIONS, METALLICA, EUROPE, BON_JOVI),
-                this.unmodifiableCollection
-                        .toSortedList(Collections.reverseOrder()));
-        Verify.assertListsEqual(Lists.mutable.of(BON_JOVI, EUROPE, METALLICA, SCORPIONS),
-                this.unmodifiableCollection
-                        .toSortedListBy(Functions.getStringPassThru()));
+        Verify.assertListsEqual(
+                Lists.mutable.of(BON_JOVI, EUROPE, METALLICA, SCORPIONS),
+                this.unmodifiableCollection.toSortedList());
+        Verify.assertListsEqual(
+                Lists.mutable.of(SCORPIONS, METALLICA, EUROPE, BON_JOVI),
+                this.unmodifiableCollection.toSortedList(Collections.reverseOrder()));
+        Verify.assertListsEqual(
+                Lists.mutable.of(BON_JOVI, EUROPE, METALLICA, SCORPIONS),
+                this.unmodifiableCollection.toSortedListBy(Functions.getStringPassThru()));
         Verify.assertSize(4, this.unmodifiableCollection.toSet());
         Verify.assertSize(4, this.unmodifiableCollection.toMap(Functions.getStringPassThru(), Functions.getStringPassThru()));
     }

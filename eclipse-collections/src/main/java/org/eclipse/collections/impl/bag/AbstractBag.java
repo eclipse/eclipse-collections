@@ -762,12 +762,12 @@ public abstract class AbstractBag<T>
     {
         MutableSet<T> result = Sets.mutable.empty();
         this.forEachWithOccurrences((each, occurrences) ->
+        {
+            if (occurrences == 1)
             {
-                if (occurrences == 1)
-                {
-                    result.add(each);
-                }
-            });
+                result.add(each);
+            }
+        });
         return result;
     }
 }

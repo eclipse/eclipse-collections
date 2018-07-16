@@ -625,10 +625,12 @@ public abstract class AbstractObjectBooleanMapKeyValuesViewTestCase
     {
         RichIterable<ObjectBooleanPair<Integer>> pairs = this.newWith(5, false, 1, true, 2, true);
         MutableSortedSet<ObjectBooleanPair<Integer>> set = pairs.toSortedSet(Comparators.reverseNaturalOrder());
-        Verify.assertSortedSetsEqual(TreeSortedSet.newSetWith(Comparators.reverseNaturalOrder(),
-                PrimitiveTuples.pair(Integer.valueOf(5), false),
-                PrimitiveTuples.pair(Integer.valueOf(2), true),
-                PrimitiveTuples.pair(Integer.valueOf(1), true)),
+        Verify.assertSortedSetsEqual(
+                TreeSortedSet.newSetWith(
+                        Comparators.reverseNaturalOrder(),
+                        PrimitiveTuples.pair(Integer.valueOf(5), false),
+                        PrimitiveTuples.pair(Integer.valueOf(2), true),
+                        PrimitiveTuples.pair(Integer.valueOf(1), true)),
                 set);
     }
 
@@ -789,9 +791,11 @@ public abstract class AbstractObjectBooleanMapKeyValuesViewTestCase
     public void chunk()
     {
         RichIterable<ObjectBooleanPair<Integer>> collection = this.newWith(1, true, 2, false, 3, true);
-        Assert.assertEquals(Bags.immutable.of(FastList.newListWith(PrimitiveTuples.pair(Integer.valueOf(1), true)),
-                FastList.newListWith(PrimitiveTuples.pair(Integer.valueOf(2), false)),
-                FastList.newListWith(PrimitiveTuples.pair(Integer.valueOf(3), true))),
+        Assert.assertEquals(
+                Bags.immutable.of(
+                        FastList.newListWith(PrimitiveTuples.pair(Integer.valueOf(1), true)),
+                        FastList.newListWith(PrimitiveTuples.pair(Integer.valueOf(2), false)),
+                        FastList.newListWith(PrimitiveTuples.pair(Integer.valueOf(3), true))),
                 collection.chunk(1).toBag());
     }
 
