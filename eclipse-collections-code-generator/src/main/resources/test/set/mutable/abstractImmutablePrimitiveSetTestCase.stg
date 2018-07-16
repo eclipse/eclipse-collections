@@ -207,7 +207,7 @@ public abstract class AbstractImmutable<name>HashSetTestCase extends AbstractImm
         super.collect();
         Immutable<name>Set set = this.newWith(<["0", "1", "31"]:(literal.(type))(); separator=", ">, AbstractImmutable<name>HashSetTestCase.generateCollisions().getFirst(), AbstractImmutable<name>HashSetTestCase.generateCollisions().get(1));
         Assert.assertEquals(UnifiedSet.newSetWith(<["-1", "0", "30"]:(literal.(type))(); separator=", ">, <(castIntToNarrowTypeWithParens.(type))({AbstractImmutable<name>HashSetTestCase.generateCollisions().getFirst() - 1})>, <(castIntToNarrowTypeWithParens.(type))({AbstractImmutable<name>HashSetTestCase.generateCollisions().get(1) - 1})>),
-            set.collect(byteParameter -> <(castIntToNarrowTypeWithParens.(type))("byteParameter - 1")>));
+                set.collect(byteParameter -> <(castIntToNarrowTypeWithParens.(type))("byteParameter - 1")>));
     }
 
     @Override

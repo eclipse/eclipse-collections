@@ -205,7 +205,7 @@ public class Immutable<name>ObjectSingletonMapTest extends AbstractImmutable<nam
     {
         StringBuilder concat = new StringBuilder();
         Immutable<name>ObjectMap\<String> map = this.classUnderTest();
-        Assert.assertSame(map,  map.tap(concat::append));
+        Assert.assertSame(map, map.tap(concat::append));
         Assert.assertEquals("zero", concat.toString());
     }
 
@@ -227,10 +227,10 @@ public class Immutable<name>ObjectSingletonMapTest extends AbstractImmutable<nam
         String[] concat = {""};
 
         this.classUnderTest().forEachWithIndex((String each, int parameter) ->
-            {
-                concat[0] += each;
-                concat[0] += parameter;
-            });
+        {
+            concat[0] += each;
+            concat[0] += parameter;
+        });
 
         Assert.assertEquals("zero0", concat[0]);
     }
@@ -242,10 +242,10 @@ public class Immutable<name>ObjectSingletonMapTest extends AbstractImmutable<nam
         String[] concat = {""};
 
         this.classUnderTest().forEachWith((String argument1, String argument2) ->
-            {
-                concat[0] += argument1;
-                concat[0] += argument2;
-            }, "-");
+        {
+            concat[0] += argument1;
+            concat[0] += argument2;
+        }, "-");
 
         Assert.assertEquals("zero-", concat[0]);
     }
@@ -279,10 +279,10 @@ public class Immutable<name>ObjectSingletonMapTest extends AbstractImmutable<nam
         String[] concat = {""};
 
         this.classUnderTest().forEachKeyValue((<type> each, String parameter) ->
-            {
-                concat[0] += each;
-                concat[0] += parameter;
-            });
+        {
+            concat[0] += each;
+            concat[0] += parameter;
+        });
 
         Assert.assertEquals("<(toStringLiteral.(type))("0")>zero", concat[0]);
     }

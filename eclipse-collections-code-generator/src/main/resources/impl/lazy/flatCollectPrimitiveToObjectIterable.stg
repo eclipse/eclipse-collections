@@ -45,7 +45,9 @@ public class FlatCollect<name>ToObjectIterable\<V>
     private final <name>Iterable iterable;
     private final <name>ToObjectFunction\<? extends Iterable\<V>\> function;
 
-    public FlatCollect<name>ToObjectIterable(<name>Iterable iterable, <name>ToObjectFunction\<? extends Iterable\<V>\> function)
+    public FlatCollect<name>ToObjectIterable(
+            <name>Iterable iterable,
+            <name>ToObjectFunction\<? extends Iterable\<V>\> function)
     {
         this.iterable = iterable;
         this.function = function;
@@ -63,8 +65,8 @@ public class FlatCollect<name>ToObjectIterable\<V>
         Procedure\<V> innerProcedure = new AdaptObjectIntProcedureToProcedure\<>(objectIntProcedure);
         this.iterable.forEach(each ->
         {
-          Iterable\<V> iterable = this.function.valueOf(each);
-          Iterate.forEach(iterable, innerProcedure);
+            Iterable\<V> iterable = this.function.valueOf(each);
+            Iterate.forEach(iterable, innerProcedure);
         });
     }
 

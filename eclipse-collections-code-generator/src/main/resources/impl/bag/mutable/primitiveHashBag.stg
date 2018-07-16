@@ -60,8 +60,8 @@ import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
  * @since 3.0.
  */
 public class <name>HashBag
-    extends Abstract<name>Iterable
-    implements Mutable<name>Bag, Externalizable
+        extends Abstract<name>Iterable
+        implements Mutable<name>Bag, Externalizable
 {
     private static final long serialVersionUID = 1L;
 
@@ -215,7 +215,7 @@ public class <name>HashBag
     @Override
     public <name>HashBag selectByOccurrences(IntPredicate predicate)
     {
-        final <name>HashBag result = new <name>HashBag();
+        <name>HashBag result = new <name>HashBag();
         this.forEachWithOccurrences((each, occurrences) ->
         {
             if (predicate.accept(occurrences))
@@ -231,12 +231,12 @@ public class <name>HashBag
     {
         Mutable<name>Set result = <name>Sets.mutable.empty();
         this.forEachWithOccurrences((each, occurrences) ->
+        {
+            if (occurrences == 1)
             {
-                if (occurrences == 1)
-                {
-                    result.add(each);
-                }
-            });
+                result.add(each);
+            }
+        });
         return result;
     }
 
@@ -252,7 +252,10 @@ public class <name>HashBag
         return this.occurrencesSortingBy(count, <name>IntPair::getTwo, Lists.mutable.empty());
     }
 
-    protected MutableList\<<name>IntPair> occurrencesSortingBy(int n, IntFunction\<<name>IntPair> function, MutableList\<<name>IntPair> returnWhenEmpty)
+    protected MutableList\<<name>IntPair> occurrencesSortingBy(
+            int n,
+            IntFunction\<<name>IntPair> function,
+            MutableList\<<name>IntPair> returnWhenEmpty)
     {
         if (n \< 0)
         {
@@ -309,7 +312,7 @@ public class <name>HashBag
     public boolean removeIf(<name>Predicate predicate)
     {
         boolean changed = false;
-        for (Mutable<name>Iterator iterator = <name>HashBag.this.items.keySet().<type>Iterator(); iterator.hasNext(); )
+        for (Mutable<name>Iterator iterator = this.items.keySet().<type>Iterator(); iterator.hasNext(); )
         {
             <type> key = iterator.next();
             if (predicate.accept(key))
@@ -390,7 +393,7 @@ public class <name>HashBag
             <name>Bag otherBag = (<name>Bag) source;
             otherBag.forEachWithOccurrences((<type> each, int occurrences) ->
             {
-                int oldOccurrences = <name>HashBag.this.items.removeKeyIfAbsent(each, 0);
+                int oldOccurrences = this.items.removeKeyIfAbsent(each, 0);
                 <name>HashBag.this.size -= oldOccurrences;
             });
         }
@@ -411,7 +414,7 @@ public class <name>HashBag
     public boolean retainAll(<name>Iterable source)
     {
         int oldSize = this.size();
-        final <name>Set sourceSet = source instanceof <name>Set ? (<name>Set) source : source.toSet();
+        <name>Set sourceSet = source instanceof <name>Set ? (<name>Set) source : source.toSet();
         <name>HashBag retained = this.select(sourceSet::contains);
         if (retained.size() != oldSize)
         {
@@ -429,7 +432,7 @@ public class <name>HashBag
     }
 
     @Override
-    public void addOccurrences(<type> item, final int occurrences)
+    public void addOccurrences(<type> item, int occurrences)
     {
         if (occurrences \< 0)
         {
@@ -443,7 +446,7 @@ public class <name>HashBag
     }
 
     @Override
-    public boolean removeOccurrences(<type> item, final int occurrences)
+    public boolean removeOccurrences(<type> item, int occurrences)
     {
         if (occurrences \< 0)
         {
@@ -478,7 +481,7 @@ public class <name>HashBag
      * @since 7.0.
      */
     @Override
-    public void each(final <name>Procedure procedure)
+    public void each(<name>Procedure procedure)
     {
         this.items.forEachKeyValue((<type> key, int occurrences) ->
         {
@@ -490,9 +493,9 @@ public class <name>HashBag
     }
 
     @Override
-    public <name>HashBag select(final <name>Predicate predicate)
+    public <name>HashBag select(<name>Predicate predicate)
     {
-        final <name>HashBag result = new <name>HashBag();
+        <name>HashBag result = new <name>HashBag();
         this.forEachWithOccurrences((<type> each, int occurrences) ->
         {
             if (predicate.accept(each))
@@ -504,9 +507,9 @@ public class <name>HashBag
     }
 
     @Override
-    public <name>HashBag reject(final <name>Predicate predicate)
+    public <name>HashBag reject(<name>Predicate predicate)
     {
-        final <name>HashBag result = new <name>HashBag();
+        <name>HashBag result = new <name>HashBag();
         this.forEachWithOccurrences((<type> each, int occurrences) ->
         {
             if (!predicate.accept(each))
@@ -574,20 +577,20 @@ public class <name>HashBag
         {
             return false;
         }
-        final <name>Bag bag = (<name>Bag) otherBag;
+        <name>Bag bag = (<name>Bag) otherBag;
         if (this.sizeDistinct() != bag.sizeDistinct())
         {
             return false;
         }
 
         return this.items.keysView().allSatisfy((<type> key) ->
-            <name>HashBag.this.occurrencesOf(key) == bag.occurrencesOf(key));
+                <name>HashBag.this.occurrencesOf(key) == bag.occurrencesOf(key));
     }
 
     @Override
     public int hashCode()
     {
-        final Counter result = new Counter();
+        Counter result = new Counter();
         this.forEachWithOccurrences((<type> eachItem, int occurrences) ->
                 result.add(<(hashCode.(type))("eachItem")> ^ occurrences));
         return result.getCount();
@@ -595,12 +598,12 @@ public class <name>HashBag
 
     @Override
     public void appendString(
-            final Appendable appendable,
+            Appendable appendable,
             String start,
-            final String separator,
+            String separator,
             String end)
     {
-        final boolean[] firstItem = {true};
+        boolean[] firstItem = {true};
         try
         {
             appendable.append(start);
@@ -632,9 +635,9 @@ public class <name>HashBag
     }
 
     @Override
-    public int count(final <name>Predicate predicate)
+    public int count(<name>Predicate predicate)
     {
-        final Counter result = new Counter();
+        Counter result = new Counter();
         this.forEachWithOccurrences((<type> each, int occurrences) ->
         {
             if (predicate.accept(each))
@@ -670,11 +673,11 @@ public class <name>HashBag
     }
 
     @Override
-    public \<V> MutableBag\<V> collect(final <name>ToObjectFunction\<? extends V> function)
+    public \<V> MutableBag\<V> collect(<name>ToObjectFunction\<? extends V> function)
     {
-        final HashBag\<V> result = HashBag.newBag(this.items.size());
+        HashBag\<V> result = HashBag.newBag(this.items.size());
         this.forEachWithOccurrences((<type> each, int occurrences) ->
-            result.addOccurrences(function.valueOf(each), occurrences));
+                result.addOccurrences(function.valueOf(each), occurrences));
         return result;
     }
 
@@ -701,8 +704,8 @@ public class <name>HashBag
     @Override
     <if(primitive.floatingPoint)>public <wideType.(type)> sum()
 {
-    final <wideType.(type)>[] result = {<wideZero.(type)>};
-    final <wideType.(type)>[] compensation = {<wideZero.(type)>};
+    <wideType.(type)>[] result = {<wideZero.(type)>};
+    <wideType.(type)>[] compensation = {<wideZero.(type)>};
     this.forEachWithOccurrences((<type> each, int occurrences) ->
     {
         for (int i = 0; i \< occurrences; i++)
@@ -718,7 +721,7 @@ public class <name>HashBag
 
     <else>public <wideType.(type)> sum()
 {
-    final <wideType.(type)>[] result = {<wideZero.(type)>};
+    <wideType.(type)>[] result = {<wideZero.(type)>};
     this.forEachWithOccurrences((<type> each, int occurrences) ->
             result[0] += (<wideType.(type)>) each * occurrences);
     return result[0];
@@ -728,8 +731,8 @@ public class <name>HashBag
     @Override
     public <type>[] toArray()
     {
-        final <type>[] array = new <type>[this.size()];
-        final int[] index = {0};
+        <type>[] array = new <type>[this.size()];
+        int[] index = {0};
 
         this.forEachWithOccurrences((<type> each, int occurrences) ->
         {
@@ -765,6 +768,7 @@ public class <name>HashBag
      *
      * @since 9.2.
      */
+    @Override
     public <name>HashBag newEmpty()
     {
         return new <name>HashBag();
@@ -777,7 +781,7 @@ public class <name>HashBag
     }
 
     @Override
-    public void writeExternal(final ObjectOutput out) throws IOException
+    public void writeExternal(ObjectOutput out) throws IOException
     {
         out.writeInt(this.items.size());
         try
@@ -818,7 +822,7 @@ public class <name>HashBag
 
     private class InternalIterator implements Mutable<name>Iterator
     {
-        private final Mutable<name>Iterator <type>Iterator = <name>HashBag.this.items.keySet().<type>Iterator();
+        private Mutable<name>Iterator <type>Iterator = <name>HashBag.this.items.keySet().<type>Iterator();
 
         private <type> currentItem;
         private int occurrences;
