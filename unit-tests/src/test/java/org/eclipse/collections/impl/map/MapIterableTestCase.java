@@ -1451,10 +1451,10 @@ public abstract class MapIterableTestCase
 
         Assert.assertEquals(
                 map.toSet(),
-                pairs.collect((Function<Pair<String, ?>, String>) Pair::getOne).toSet());
+                pairs.collect(Pair::getOne).toSet());
         Assert.assertEquals(
                 Interval.zeroTo(map.size() - 1).toSet(),
-                pairs.collect((Function<Pair<?, Integer>, Integer>) Pair::getTwo, UnifiedSet.newSet()));
+                pairs.collect(Pair::getTwo, UnifiedSet.newSet()));
 
         Assert.assertEquals(
                 map.zipWithIndex().toSet(),
