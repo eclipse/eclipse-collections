@@ -146,7 +146,7 @@ public abstract class Abstract<name>SetTestCase extends AbstractMutable<name>Col
         Assert.assertFalse(set.add(<(literal.(type))("1")>));
     }
 
-<if(primitive.floatingPoint)><\\>
+<if(primitive.floatingPoint)>
     <NaNTests("NaN")>
     <NaNTests("POSITIVE_INFINITY")>
     <NaNTests("NEGATIVE_INFINITY")>
@@ -179,8 +179,8 @@ public abstract class Abstract<name>SetTestCase extends AbstractMutable<name>Col
     public void testOfAllFactory()
     {
         Assert.assertEquals(
-            <name>HashSet.newSetWith(<["0", "1", "2", "5", "30", "31"]:(literal.(type))(); separator=", ">),
-            <name>Sets.mutable.ofAll(<name>HashBag.newBagWith(<["0", "1", "2", "5", "30", "31", "0", "1", "2", "5", "30", "31"]:(literal.(type))(); separator=", ">)));
+                <name>HashSet.newSetWith(<["0", "1", "2", "5", "30", "31"]:(literal.(type))(); separator=", ">),
+                <name>Sets.mutable.ofAll(<name>HashBag.newBagWith(<["0", "1", "2", "5", "30", "31", "0", "1", "2", "5", "30", "31"]:(literal.(type))(); separator=", ">)));
     }
 
     @Override
@@ -380,8 +380,8 @@ public abstract class Abstract<name>SetTestCase extends AbstractMutable<name>Col
         super.collect();
         Mutable<name>Set set = this.newWith(<["0", "1", "31"]:(literal.(type))(); separator=", ">, Abstract<name>SetTestCase.generateCollisions1().getFirst(), Abstract<name>SetTestCase.generateCollisions1().get(1));
         Assert.assertEquals(
-            UnifiedSet.newSetWith(<["-1", "0", "30"]:(literal.(type))(); separator=", ">, <(castIntToNarrowTypeWithParens.(type))({Abstract<name>SetTestCase.generateCollisions1().getFirst() - 1})>, <(castIntToNarrowTypeWithParens.(type))({Abstract<name>SetTestCase.generateCollisions1().get(1) - 1})>),
-            set.collect((<type> byteParameter) -> <(castIntToNarrowTypeWithParens.(type))("byteParameter - 1")>));
+                UnifiedSet.newSetWith(<["-1", "0", "30"]:(literal.(type))(); separator=", ">, <(castIntToNarrowTypeWithParens.(type))({Abstract<name>SetTestCase.generateCollisions1().getFirst() - 1})>, <(castIntToNarrowTypeWithParens.(type))({Abstract<name>SetTestCase.generateCollisions1().get(1) - 1})>),
+                set.collect((<type> byteParameter) -> <(castIntToNarrowTypeWithParens.(type))("byteParameter - 1")>));
     }
 
     @Override

@@ -39,7 +39,7 @@ import org.junit.Test;
 public class Select<name>IterableTest
 {
     private final Select<name>Iterable iterable =
-        new Select<name>Iterable(<name>ArrayList.newListWith(<["1", "2", "3", "4", "5"]:(literal.(type))(); separator=", ">), <name>Predicates.lessThan(<(literal.(type))("3")>));
+            new Select<name>Iterable(<name>ArrayList.newListWith(<["1", "2", "3", "4", "5"]:(literal.(type))(); separator=", ">), <name>Predicates.lessThan(<(literal.(type))("3")>));
 
     @Test
     public void <type>Iterator()
@@ -141,8 +141,7 @@ public class Select<name>IterableTest
     <if(primitive.floatPrimitive)>@Test
 public void sumConsistentRounding()
 {
-    Select<name>Iterable iterable =
-        new Select<name>Iterable(<name>ArrayList.newListWith(
+    Select<name>Iterable iterable = new Select<name>Iterable(<name>ArrayList.newListWith(
             Interval.oneTo(100_000)
                     .toList()
                     .shuffleThis()
@@ -161,8 +160,7 @@ public void sumConsistentRounding()
     <elseif(primitive.doublePrimitive)>@Test
 public void sumConsistentRounding()
 {
-    Select<name>Iterable iterable =
-        new Select<name>Iterable(<name>ArrayList.newListWith(
+    Select<name>Iterable iterable = new Select<name>Iterable(<name>ArrayList.newListWith(
             Interval.oneTo(100_000)
                     .toList()
                     .shuffleThis()

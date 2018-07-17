@@ -510,13 +510,12 @@ sumOverrideFloat() ::= <<
 @Test
 public void sumConsistentRounding()
 {
-    <name2>Iterable iterable = this.newWith(
-            Interval.fromTo(<wrapperName1>.MIN_VALUE, <wrapperName1>.MAX_VALUE)
-                    .toList()
-                    .shuffleThis()
-                    .reject(i -> i == 0)
-                    .collect<name2>(i -> <["1.0"]:(decimalLiteral.(type2))()> / (i.<type2>Value() * i.<type2>Value() * i.<type2>Value() * i.<type2>Value()))
-                    .toArray());
+    <name2>Iterable iterable = this.newWith(Interval.fromTo(<wrapperName1>.MIN_VALUE, <wrapperName1>.MAX_VALUE)
+            .toList()
+            .shuffleThis()
+            .reject(i -> i == 0)
+            .collect<name2>(i -> <["1.0"]:(decimalLiteral.(type2))()> / (i.<type2>Value() * i.<type2>Value() * i.<type2>Value() * i.<type2>Value()))
+            .toArray());
 
     Assert.assertEquals(
             <(floatResults.(type1))()>,
@@ -531,13 +530,12 @@ sumOverrideDouble() ::= <<
 @Test
 public void sumConsistentRounding()
 {
-    <name2>Iterable iterable = this.newWith(
-            Interval.fromTo(<wrapperName1>.MIN_VALUE, <wrapperName1>.MAX_VALUE)
-                    .toList()
-                    .shuffleThis()
-                    .reject(i -> i == 0)
-                    .collect<name2>(i -> <["1.0"]:(decimalLiteral.(type2))()> / (i.<type2>Value() * i.<type2>Value() * i.<type2>Value() * i.<type2>Value()))
-                    .toArray());
+    <name2>Iterable iterable = this.newWith(Interval.fromTo(<wrapperName1>.MIN_VALUE, <wrapperName1>.MAX_VALUE)
+            .toList()
+            .shuffleThis()
+            .reject(i -> i == 0)
+            .collect<name2>(i -> <["1.0"]:(decimalLiteral.(type2))()> / (i.<type2>Value() * i.<type2>Value() * i.<type2>Value() * i.<type2>Value()))
+            .toArray());
 
     Assert.assertEquals(
             <(doubleResults.(type1))()>,

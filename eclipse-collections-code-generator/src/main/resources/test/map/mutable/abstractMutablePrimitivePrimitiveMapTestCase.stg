@@ -440,17 +440,18 @@ public abstract class AbstractMutable<name1><name2>MapTestCase extends Abstract<
 
         Mutable<name1><name2>Map map2 = this.getEmptyMap();
         MutableLongList list = LongLists.mutable.with(
-            936628237L,
-            4889384619L,
-            8733915902L,
-            2377747912L,
-            277382636L,
-            593670575L,
-            296725141L,
-            7131901003L,
-            9986389012L);
+                936628237L,
+                4889384619L,
+                8733915902L,
+                2377747912L,
+                277382636L,
+                593670575L,
+                296725141L,
+                7131901003L,
+                9986389012L);
 
-        list.forEachWithIndex((each, index) -> {
+        list.forEachWithIndex((each, index) ->
+        {
             <type1> k = <(castLongToNarrowType.(type1))("each")>;
             <type2> v = <(castLongToNarrowTypeWithParens.(type2))("each + index")>;
             Assert.assertEquals("Key:" + k, v, map2.addToValue(k, v)<(wideDelta.(type2))>);
@@ -541,7 +542,10 @@ public abstract class AbstractMutable<name1><name2>MapTestCase extends Abstract<
     public void getIfAbsentPut_Function()
     {
         <name2>Function0 factory = () -> <(literal.(type2))("100")>;
-        <name2>Function0 factoryThrows = () -> { throw new AssertionError(); };
+        <name2>Function0 factoryThrows = () ->
+        {
+            throw new AssertionError();
+        };
 
         Mutable<name1><name2>Map map1 = this.getEmptyMap();
         Assert.assertEquals(<(wideLiteral.(type2))("100")>, map1.getIfAbsentPut(<(literal.(type1))("0")>, factory)<(wideDelta.(type2))>);
@@ -574,7 +578,10 @@ public abstract class AbstractMutable<name1><name2>MapTestCase extends Abstract<
     public void getIfAbsentPutWith()
     {
         <name2>Function\<String> functionLength = (String string) -> (<type2>) string.length();
-        <name2>Function\<String> functionThrows = (String string) -> { throw new AssertionError(); };
+        <name2>Function\<String> functionThrows = (String string) ->
+        {
+            throw new AssertionError();
+        };
 
         Mutable<name1><name2>Map map1 = this.getEmptyMap();
         Assert.assertEquals(<(literal.(type2))("9")>, map1.getIfAbsentPutWith(<(literal.(type1))("0")>, functionLength, "123456789")<wideDelta.(type2)>);
@@ -607,7 +614,10 @@ public abstract class AbstractMutable<name1><name2>MapTestCase extends Abstract<
     public void getIfAbsentPutWithKey()
     {
         <name1>To<name2>Function function = (<type1> <type1>Parameter) -> (<type2>) <type1>Parameter;
-        <name1>To<name2>Function functionThrows = (<type1> <type1>Parameter) -> { throw new AssertionError(); };
+        <name1>To<name2>Function functionThrows = (<type1> <type1>Parameter) ->
+        {
+            throw new AssertionError();
+        };
 
         Mutable<name1><name2>Map map1 = this.getEmptyMap();
         Assert.assertEquals(<(wideLiteral.(type2))("0")>, map1.getIfAbsentPutWithKey(<(literal.(type1))("0")>, function)<(wideDelta.(type2))>);
@@ -780,7 +790,7 @@ public abstract class AbstractMutable<name1><name2>MapTestCase extends Abstract<
         Assert.assertEquals(
                 <name2><name1>HashMap.newWithKeysValues(<(literal.(type2))("2")>, <(literal.(type1))("1")>, <(literal.(type2))("3")>, <(literal.(type1))("2")>, <(literal.(type2))("4")>, <(literal.(type1))("3")>, <(literal.(type2))("5")>, <(literal.(type1))("4")>),
                 map.flipUniqueValues());
-         Verify.assertThrows(
+        Verify.assertThrows(
                 IllegalStateException.class,
                 () -> this.newWithKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("1")>, <(literal.(type1))("2")>, <(literal.(type2))("1")>).flipUniqueValues());
     }

@@ -173,10 +173,10 @@ public class Synchronized<name>Bag
     @Override
     public Mutable<name>Set selectUnique()
     {
-       synchronized (this.getLock())
-       {
+        synchronized (this.getLock())
+        {
             return this.getMutable<name>Bag().selectUnique();
-       }
+        }
     }
 
     @Override
@@ -269,6 +269,7 @@ public class Synchronized<name>Bag
     /**
      * @since 9.2.
      */
+    @Override
     public Mutable<name>Bag newEmpty()
     {
         synchronized (this.getLock())

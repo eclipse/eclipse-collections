@@ -243,7 +243,8 @@ public class Object<name>HashMapWithHashingStrategyTest extends Object<name>Hash
         Verify.assertEqualsAndHashCode(map3, map4);
         Assert.assertTrue(map3.equals(hashMap) && hashMap.equals(map3) && map3.hashCode() != hashMap.hashCode());
 
-        Object<name>HashMap\<Person> objectMap = Object<name>HashMap.newWithKeysValues(<allPeople()>);
+        Object<name>HashMap\<Person> objectMap = Object<name>HashMap.newWithKeysValues(
+                <allPeople()>);
         Object<name>HashMapWithHashingStrategy\<Person> map5 = Object<name>HashMapWithHashingStrategy.newMap(LAST_NAME_HASHING_STRATEGY, objectMap);
         Assert.assertNotEquals(map5, objectMap);
     }

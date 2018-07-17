@@ -990,37 +990,37 @@ public class PredicatesTest
     public enum DependentType
     {
         SPOUSE
-                {
-                    @Override
-                    public boolean isImmediate()
-                    {
-                        return true;
-                    }
-                },
+        {
+            @Override
+            public boolean isImmediate()
+            {
+                return true;
+            }
+        },
         CHILD
-                {
-                    @Override
-                    public boolean isImmediate()
-                    {
-                        return true;
-                    }
-                },
+        {
+            @Override
+            public boolean isImmediate()
+            {
+                return true;
+            }
+        },
         PARENT
-                {
-                    @Override
-                    public boolean isImmediate()
-                    {
-                        return false;
-                    }
-                },
+        {
+            @Override
+            public boolean isImmediate()
+            {
+                return false;
+            }
+        },
         GRANDPARENT
-                {
-                    @Override
-                    public boolean isImmediate()
-                    {
-                        return false;
-                    }
-                };
+        {
+            @Override
+            public boolean isImmediate()
+            {
+                return false;
+            }
+        };
 
         public abstract boolean isImmediate();
     }

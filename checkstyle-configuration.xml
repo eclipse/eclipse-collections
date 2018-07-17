@@ -122,6 +122,9 @@
             <property name="option" value="EOL" />
         </module>
 
+        <module name="Indentation">
+            <property name="lineWrappingIndentation" value="8"/>
+        </module>
         <module name="CommentsIndentation" />
 
         <!-- Modifier Checks                                    -->

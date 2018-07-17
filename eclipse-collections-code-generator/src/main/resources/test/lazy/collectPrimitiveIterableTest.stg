@@ -73,7 +73,10 @@ public class Collect<name>IterableTest
     public void forEach()
     {
         <wideType.(type)>[] value = new <wideType.(type)>[1];
-        this.<type>Iterable.forEach(each -> { value[0] += each; });
+        this.<type>Iterable.forEach(each ->
+        {
+            value[0] += each;
+        });
         Assert.assertEquals(<(wideLiteral.(type))("6")>, value[0]<(delta.(type))>);
     }
 
@@ -137,8 +140,7 @@ public class Collect<name>IterableTest
     <if(primitive.floatPrimitive)>@Test
 public void sumConsistentRounding()
 {
-    <name>Iterable iterable =
-        Interval.oneTo(100_000)
+    <name>Iterable iterable = Interval.oneTo(100_000)
             .toList()
             .shuffleThis()
             .collect<name>(i -> 1.0f / (i.floatValue() * i.floatValue() * i.floatValue() * i.floatValue()));
@@ -154,8 +156,7 @@ public void sumConsistentRounding()
     <elseif(primitive.doublePrimitive)>@Test
 public void sumConsistentRounding()
 {
-    <name>Iterable iterable =
-        Interval.oneTo(100_000)
+    <name>Iterable iterable = Interval.oneTo(100_000)
             .toList()
             .shuffleThis()
             .collect<name>(i -> <["1.0"]:(decimalLiteral.(type))()> / (i.<type>Value() * i.<type>Value() * i.<type>Value() * i.<type>Value()));

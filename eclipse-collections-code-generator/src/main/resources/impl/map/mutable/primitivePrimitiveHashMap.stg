@@ -818,7 +818,8 @@ public class <name1><name2>HashMap extends AbstractMutable<name2>ValuesMap imple
     public Mutable<name2><name1>Map flipUniqueValues()
     {
         Mutable<name2><name1>Map result = <name2><name1>Maps.mutable.empty();
-         this.forEachKeyValue((key, value) -> {
+        this.forEachKeyValue((key, value) ->
+        {
             if (result.containsKey(value))
             {
                 throw new IllegalStateException("Duplicate value: " + value + " found at key: " + result.get(value) + " and key: " + key);
@@ -942,7 +943,7 @@ public class <name1><name2>HashMap extends AbstractMutable<name2>ValuesMap imple
     <(spread2.(type1))(type1)>
     private int mask(int spread)
     {
-        return spread & (<if(sameTwoPrimitives)>(<endif>this.<keyArray>.length <if(sameTwoPrimitives)>\>> 1)<endif> - 1);
+        return spread & (<if(sameTwoPrimitives)>(<endif>this.<keyArray>.length<if(sameTwoPrimitives)> \>> 1)<endif> - 1);
     }
 
     private void allocateTable(int sizeToAllocate)
@@ -977,11 +978,6 @@ public class <name1><name2>HashMap extends AbstractMutable<name2>ValuesMap imple
     private int maxOccupiedWithData()
     {
         return this.<keyArray>.length >\> <if(!sameTwoPrimitives)>1<else>2<endif>;
-    }
-
-    private int maxOccupiedWithSentinels()
-    {
-        return this.<keyArray>.length >\> <if(!sameTwoPrimitives)>2<else>3<endif>;
     }
 
     private class Internal<name2>Iterator implements Mutable<name2>Iterator
@@ -1180,7 +1176,7 @@ public class <name1><name2>HashMap extends AbstractMutable<name2>ValuesMap imple
         public boolean retainAll(<name1>Iterable source)
         {
             int oldSize = <name1><name2>HashMap.this.size();
-            final <name1>Set sourceSet = source instanceof <name1>Set ? (<name1>Set) source : source.toSet();
+            <name1>Set sourceSet = source instanceof <name1>Set ? (<name1>Set) source : source.toSet();
             <name1><name2>HashMap retained = <name1><name2>HashMap.this.select((<type1> key, <type2> value) -> sourceSet.contains(key));
             if (retained.size() != oldSize)
             {
@@ -1274,7 +1270,7 @@ public class <name1><name2>HashMap extends AbstractMutable<name2>ValuesMap imple
         public boolean retainAll(<name2>Iterable source)
         {
             int oldSize = <name1><name2>HashMap.this.size();
-            final <name2>Set sourceSet = source instanceof <name2>Set ? (<name2>Set) source : source.toSet();
+            <name2>Set sourceSet = source instanceof <name2>Set ? (<name2>Set) source : source.toSet();
             <name1><name2>HashMap retained = <name1><name2>HashMap.this.select((<type1> key, <type2> value) -> sourceSet.contains(value));
             if (retained.size() != oldSize)
             {

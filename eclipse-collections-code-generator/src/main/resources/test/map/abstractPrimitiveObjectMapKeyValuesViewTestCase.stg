@@ -150,10 +150,10 @@ public abstract class Abstract<name>ObjectMapKeyValuesViewTestCase
         MutableBag\<Integer> result2 = Bags.mutable.of();
         RichIterable\<<name>ObjectPair\<Integer>\> collection = this.newWith(<(literal.(type))("1")>, 2, <(literal.(type))("2")>, 3, <(literal.(type))("3")>, 4);
         collection.forEachWith((<name>ObjectPair\<Integer> argument1, Integer argument2) ->
-            {
-                result.add(argument1);
-                result2.add(argument2);
-            }, 0);
+        {
+            result.add(argument1);
+            result2.add(argument2);
+        }, 0);
 
         Assert.assertEquals(Bags.immutable.of(PrimitiveTuples.pair(<(literal.(type))("1")>, Integer.valueOf(2)), PrimitiveTuples.pair(<(literal.(type))("2")>, Integer.valueOf(3)), PrimitiveTuples.pair(<(literal.(type))("3")>, Integer.valueOf(4))), result);
         Assert.assertEquals(Bags.immutable.of(0, 0, 0), result2);
@@ -162,10 +162,10 @@ public abstract class Abstract<name>ObjectMapKeyValuesViewTestCase
         MutableBag\<Integer> result4 = Bags.mutable.of();
         RichIterable\<<name>ObjectPair\<Integer>\> collection2 = this.newWith(<(literal.(type))("4")>, 2, <(literal.(type))("2")>, 3, <(literal.(type))("3")>, 4);
         collection2.forEachWith((<name>ObjectPair\<Integer> argument1, Integer argument2) ->
-            {
-                result3.add(argument1);
-                result4.add(argument2);
-            }, 0);
+        {
+            result3.add(argument1);
+            result4.add(argument2);
+        }, 0);
 
         Assert.assertEquals(Bags.immutable.of(PrimitiveTuples.pair(<(literal.(type))("4")>, Integer.valueOf(2)), PrimitiveTuples.pair(<(literal.(type))("2")>, Integer.valueOf(3)), PrimitiveTuples.pair(<(literal.(type))("3")>, Integer.valueOf(4))), result3);
         Assert.assertEquals(Bags.immutable.of(0, 0, 0), result4);
@@ -178,10 +178,10 @@ public abstract class Abstract<name>ObjectMapKeyValuesViewTestCase
         MutableBag\<Integer> indexes = Bags.mutable.of();
         RichIterable\<<name>ObjectPair\<Integer>\> collection = this.newWith(<(literal.(type))("1")>, 2, <(literal.(type))("0")>, 3, <(literal.(type))("3")>, 4);
         collection.forEachWithIndex((<name>ObjectPair\<Integer> object, int index) ->
-            {
-                elements.add(object);
-                indexes.add(index);
-            });
+        {
+            elements.add(object);
+            indexes.add(index);
+        });
         Assert.assertEquals(Bags.mutable.of(PrimitiveTuples.pair(<(literal.(type))("1")>, Integer.valueOf(2)), PrimitiveTuples.pair(<(literal.(type))("0")>, Integer.valueOf(3)), PrimitiveTuples.pair(<(literal.(type))("3")>, Integer.valueOf(4))), elements);
         Assert.assertEquals(Bags.mutable.of(0, 1, 2), indexes);
 
@@ -189,10 +189,10 @@ public abstract class Abstract<name>ObjectMapKeyValuesViewTestCase
         MutableBag\<Integer> indexes2 = Bags.mutable.of();
         RichIterable\<<name>ObjectPair\<Integer>\> collection2 = this.newWith(<(literal.(type))("2")>, 2, <(literal.(type))("5")>, 3, <(literal.(type))("3")>, 4);
         collection2.forEachWithIndex((<name>ObjectPair\<Integer> object, int index) ->
-            {
-                elements2.add(object);
-                indexes2.add(index);
-            });
+        {
+            elements2.add(object);
+            indexes2.add(index);
+        });
         Assert.assertEquals(Bags.mutable.of(PrimitiveTuples.pair(<(literal.(type))("2")>, Integer.valueOf(2)), PrimitiveTuples.pair(<(literal.(type))("5")>, Integer.valueOf(3)), PrimitiveTuples.pair(<(literal.(type))("3")>, Integer.valueOf(4))), elements2);
         Assert.assertEquals(Bags.mutable.of(0, 1, 2), indexes2);
     }
@@ -513,7 +513,7 @@ public abstract class Abstract<name>ObjectMapKeyValuesViewTestCase
         Assert.assertEquals(
                 Bags.mutable.of(4L, 6L, 8L),
                 this.newWith(<(literal.(type))("1")>, 2, <(literal.(type))("2")>, 3, <(literal.(type))("3")>, 4)
-                    .collectWith((<name>ObjectPair\<Integer> argument1, Long argument2) -> (long) (argument1.getOne() + argument1.getTwo() + argument2), 1L).toBag());
+                      .collectWith((<name>ObjectPair\<Integer> argument1, Long argument2) -> (long) (argument1.getOne() + argument1.getTwo() + argument2), 1L).toBag());
     }
 
     @Test
@@ -522,7 +522,7 @@ public abstract class Abstract<name>ObjectMapKeyValuesViewTestCase
         Assert.assertEquals(
                 Bags.mutable.of(4L, 6L, 8L),
                 this.newWith(<(literal.(type))("1")>, 2, <(literal.(type))("2")>, 3, <(literal.(type))("3")>, 4)
-                    .collectWith((<name>ObjectPair\<Integer> argument1, Long argument2) -> (long) (argument1.getOne() + argument1.getTwo() + argument2), 1L, HashBag.\<Long>newBag()));
+                       .collectWith((<name>ObjectPair\<Integer> argument1, Long argument2) -> (long) (argument1.getOne() + argument1.getTwo() + argument2), 1L, HashBag.\<Long>newBag()));
     }
 
     @Test
