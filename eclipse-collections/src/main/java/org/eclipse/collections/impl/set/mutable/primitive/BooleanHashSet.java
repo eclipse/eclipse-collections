@@ -183,6 +183,9 @@ public class BooleanHashSet implements MutableBooleanSet, Externalizable
                     {
                         throw new IllegalStateException();
                     }
+                    return;
+                default:
+                    throw new AssertionError();
             }
         }
     }

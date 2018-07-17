@@ -3915,7 +3915,8 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
     public MutableObject<name>Map\<V> flipUniqueValues()
     {
         MutableObject<name>Map\<V> result = Object<name>Maps.mutable.empty();
-        this.forEachKeyValue((key, value) -> {
+        this.forEachKeyValue((key, value) ->
+        {
             if (result.containsKey(value))
             {
                 throw new IllegalStateException("Duplicate value: " + value + " found at key: " + result.get(value) + " and key: " + key);

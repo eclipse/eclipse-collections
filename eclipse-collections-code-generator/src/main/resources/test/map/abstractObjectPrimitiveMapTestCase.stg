@@ -420,7 +420,7 @@ public abstract class AbstractObject<name>MapTestCase
         Assert.assertEquals(this.getEmptyMap(), this.map.reject((String object, <type> value) -> ((Integer.parseInt(object) + value) % 2) == 0));
 
         Assert.assertEquals(Object<name>HashMap.newWithKeysValues("2", <(literal.(type))("2")>),
-                this.map.reject((String object, <type> value)-> <(lessThan.(type))("Integer.parseInt(object) + value", {<(literal.(type))("4")>})>));
+                this.map.reject((String object, <type> value) -> <(lessThan.(type))("Integer.parseInt(object) + value", {<(literal.(type))("4")>})>));
 
         Assert.assertEquals(this.map, this.map.reject((String object, <type> value) -> ((Integer.parseInt(object) + value) % 2) != 0));
 

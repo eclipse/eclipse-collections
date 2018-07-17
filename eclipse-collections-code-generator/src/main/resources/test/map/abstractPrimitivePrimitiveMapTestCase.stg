@@ -569,7 +569,7 @@ public abstract class Abstract<name1><name2>MapTestCase
         <name1><name2>Map map = this.newWithKeysValues(<["0", "1", "2", "3"]:keyValue(); separator=", ">);
         <name1><name2>Map actual1 = map.reject((<type1> key, <type2> value) -> <(equals.(type1))("key", {<(literal.(type1))("1")>})> || <(equals.(type2))("value", {<(literal.(type2))("3")>})>);
         Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(<keyValue("0")>, <(literal.(type1))("2")>, <(literal.(type2))("2")>), actual1);
-        <name1><name2>Map actual2 = map.reject((<type1> key, <type2> value)-> <(equals.(type1))("key", {<(literal.(type1))("0")>})> || <(equals.(type2))("value", {<(literal.(type2))("2")>})>);
+        <name1><name2>Map actual2 = map.reject((<type1> key, <type2> value) -> <(equals.(type1))("key", {<(literal.(type1))("0")>})> || <(equals.(type2))("value", {<(literal.(type2))("2")>})>);
         Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("1")>, <(literal.(type1))("3")>, <(literal.(type2))("3")>), actual2);
     }
 

@@ -363,7 +363,7 @@ final class ImmutableObject<name>HashMap\<K> extends AbstractImmutableObject<nam
     public Immutable<name>ObjectMap\<K> flipUniqueValues()
     {
         Mutable<name>ObjectMap\<K> result = <name>ObjectMaps.mutable.empty();
-        this.forEachKeyValue((key, value)->
+        this.forEachKeyValue((key, value) ->
         {
             K oldKey = result.put(value, key);
             if (oldKey != null)
