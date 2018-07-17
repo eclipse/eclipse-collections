@@ -197,8 +197,7 @@ public class <name>SetsTest
                 PrimitiveTuples.pair(<["1", "5"]:(literal.(type))(); separator=", ">),
                 PrimitiveTuples.pair(<["2", "3"]:(literal.(type))(); separator=", ">),
                 PrimitiveTuples.pair(<["2", "4"]:(literal.(type))(); separator=", ">),
-                PrimitiveTuples.pair(<["2", "5"]:(literal.(type))(); separator=", ">)
-        );
+                PrimitiveTuples.pair(<["2", "5"]:(literal.(type))(); separator=", ">));
 
         Assert.assertEquals(expected1, <type><name>Pairs1.toSet());
 
@@ -213,8 +212,7 @@ public class <name>SetsTest
                 PrimitiveTuples.pair(<["4", "1"]:(literal.(type))(); separator=", ">),
                 PrimitiveTuples.pair(<["4", "2"]:(literal.(type))(); separator=", ">),
                 PrimitiveTuples.pair(<["5", "1"]:(literal.(type))(); separator=", ">),
-                PrimitiveTuples.pair(<["5", "2"]:(literal.(type))(); separator=", ">)
-        );
+                PrimitiveTuples.pair(<["5", "2"]:(literal.(type))(); separator=", ">));
 
         Assert.assertEquals(expected2, <type><name>Pairs2.toSet());
     }
@@ -231,8 +229,7 @@ public class <name>SetsTest
                 PrimitiveTuples.pair(<["1", "1"]:(literal.(type))(); separator=", ">),
                 PrimitiveTuples.pair(<["1", "2"]:(literal.(type))(); separator=", ">),
                 PrimitiveTuples.pair(<["2", "2"]:(literal.(type))(); separator=", ">),
-                PrimitiveTuples.pair(<["2", "1"]:(literal.(type))(); separator=", ">)
-        );
+                PrimitiveTuples.pair(<["2", "1"]:(literal.(type))(); separator=", ">));
 
         Assert.assertEquals(expected, <type><name>Pairs.toSet());
     }

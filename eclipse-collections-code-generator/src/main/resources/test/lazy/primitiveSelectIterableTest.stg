@@ -141,13 +141,13 @@ public class Select<name>IterableTest
     <if(primitive.floatPrimitive)>@Test
 public void sumConsistentRounding()
 {
-    Select<name>Iterable iterable = new Select<name>Iterable(<name>ArrayList.newListWith(
+    <name>ArrayList list = <name>ArrayList.newListWith(
             Interval.oneTo(100_000)
                     .toList()
                     .shuffleThis()
                     .collect<name>(i -> 1.0f / (i.floatValue() * i.floatValue() * i.floatValue() * i.floatValue()))
-                    .toArray()
-        ), <name>Predicates.alwaysTrue());
+                    .toArray());
+    Select<name>Iterable iterable = new Select<name>Iterable(list, <name>Predicates.alwaysTrue());
 
     // The test only ensures the consistency/stability of rounding. This is not meant to test the "correctness" of the float calculation result.
     // Indeed the lower bits of this calculation result are always incorrect due to the information loss of original float values.
@@ -160,13 +160,13 @@ public void sumConsistentRounding()
     <elseif(primitive.doublePrimitive)>@Test
 public void sumConsistentRounding()
 {
-    Select<name>Iterable iterable = new Select<name>Iterable(<name>ArrayList.newListWith(
+    <name>ArrayList list = <name>ArrayList.newListWith(
             Interval.oneTo(100_000)
                     .toList()
                     .shuffleThis()
                     .collect<name>(i -> <["1.0"]:(decimalLiteral.(type))()> / (i.<type>Value() * i.<type>Value() * i.<type>Value() * i.<type>Value()))
-                    .toArray()
-        ), <name>Predicates.alwaysTrue());
+                    .toArray());
+    Select<name>Iterable iterable = new Select<name>Iterable(list, <name>Predicates.alwaysTrue());
 
     Assert.assertEquals(
             1.082323233711138,

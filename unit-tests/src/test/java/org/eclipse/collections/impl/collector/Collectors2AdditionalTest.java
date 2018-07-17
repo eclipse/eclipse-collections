@@ -509,25 +509,20 @@ public class Collectors2AdditionalTest
         MutableList<Interval> list = Lists.mutable.with(SMALL_INTERVAL, SMALL_INTERVAL, SMALL_INTERVAL);
         Assert.assertEquals(
                 list.flatCollect(Functions.identity()),
-                list.stream().collect(Collectors2.flatCollect(Functions.identity(), Lists.mutable::empty))
-        );
+                list.stream().collect(Collectors2.flatCollect(Functions.identity(), Lists.mutable::empty)));
         Assert.assertEquals(
                 list.flatCollect(Functions.identity()),
-                list.stream().collect(Collectors2.flatCollect(Functions.identity(), CompositeFastList::new))
-        );
+                list.stream().collect(Collectors2.flatCollect(Functions.identity(), CompositeFastList::new)));
         Assert.assertEquals(
                 list.toSet().flatCollect(Functions.identity()),
-                list.stream().collect(Collectors2.flatCollect(Functions.identity(), Sets.mutable::empty))
-        );
+                list.stream().collect(Collectors2.flatCollect(Functions.identity(), Sets.mutable::empty)));
         Assert.assertEquals(
                 list.toBag().flatCollect(Functions.identity()),
-                list.stream().collect(Collectors2.flatCollect(Functions.identity(), Bags.mutable::empty))
-        );
-        List<MutableList<String>> lists =
-                Lists.mutable.with(
-                        Lists.mutable.with("a", "b"),
-                        Lists.mutable.with("c", "d"),
-                        Lists.mutable.with("e"));
+                list.stream().collect(Collectors2.flatCollect(Functions.identity(), Bags.mutable::empty)));
+        List<MutableList<String>> lists = Lists.mutable.with(
+                Lists.mutable.with("a", "b"),
+                Lists.mutable.with("c", "d"),
+                Lists.mutable.with("e"));
         MutableList<String> flattened =
                 lists.stream().collect(Collectors2.flatCollect(l -> l, Lists.mutable::empty));
         Assert.assertEquals(Lists.mutable.with("a", "b", "c", "d", "e"), flattened);
@@ -539,20 +534,16 @@ public class Collectors2AdditionalTest
         MutableList<Interval> list = Lists.mutable.withNValues(20000, () -> SMALL_INTERVAL);
         Assert.assertEquals(
                 list.flatCollect(Functions.identity()),
-                list.parallelStream().collect(Collectors2.flatCollect(Functions.identity(), Lists.mutable::empty))
-        );
+                list.parallelStream().collect(Collectors2.flatCollect(Functions.identity(), Lists.mutable::empty)));
         Assert.assertEquals(
                 list.flatCollect(Functions.identity()),
-                list.parallelStream().collect(Collectors2.flatCollect(Functions.identity(), CompositeFastList::new))
-        );
+                list.parallelStream().collect(Collectors2.flatCollect(Functions.identity(), CompositeFastList::new)));
         Assert.assertEquals(
                 list.toSet().flatCollect(Functions.identity()),
-                list.parallelStream().collect(Collectors2.flatCollect(Functions.identity(), Sets.mutable::empty))
-        );
+                list.parallelStream().collect(Collectors2.flatCollect(Functions.identity(), Sets.mutable::empty)));
         Assert.assertEquals(
                 list.toBag().flatCollect(Functions.identity()),
-                list.parallelStream().collect(Collectors2.flatCollect(Functions.identity(), Bags.mutable::empty))
-        );
+                list.parallelStream().collect(Collectors2.flatCollect(Functions.identity(), Bags.mutable::empty)));
     }
 
     @Test

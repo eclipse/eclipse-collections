@@ -72,8 +72,7 @@ public class PersonAndPetKataTest
                 new Person("Terry", "Turtle").addPet(PetType.TURTLE, "Speedy", 1),
                 new Person("Harry", "Hamster")
                         .addPet(PetType.HAMSTER, "Fuzzy", 1)
-                        .addPet(PetType.HAMSTER, "Wuzzy", 1)
-        );
+                        .addPet(PetType.HAMSTER, "Wuzzy", 1));
     }
 
     @Test

@@ -831,8 +831,7 @@ public class SetsTest
                 Tuples.pair(1, 1),
                 Tuples.pair(1, 2),
                 Tuples.pair(2, 1),
-                Tuples.pair(2, 2)
-        );
+                Tuples.pair(2, 2));
         Assert.assertEquals(expectedCartesianProduct, Sets.cartesianProduct(set1, set2).toBag());
     }
 
