@@ -59,7 +59,7 @@ matrix:
       env:
         - DESC="unit tests Java 9"
         - JDK=Java9
-        - CMD="mvn install --projects '!scala-unit-tests,!jmh-scala-tests,!jmh-tests,!p2-repository' --show-version --errors"
+        - CMD="mvn install --show-version --errors"
 
     - jdk: oraclejdk8
       env:
