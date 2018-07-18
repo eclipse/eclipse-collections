@@ -629,7 +629,6 @@
                                 <exclude>**/FileUtils.java</exclude>
                                 <exclude>**/GenerateMojo.java</exclude>
                                 <exclude>**/EclipseCollectionsCodeGenerator.java</exclude>
-                                <exclude>**/EclipseCollectionsCodeGeneratorTask.java</exclude>
                                 <exclude>**/Primitive.java</exclude>
                                 <exclude>**/IntegerOrStringRenderer.java</exclude>
                                 <exclude>**/jmh/**/*.java</exclude>
