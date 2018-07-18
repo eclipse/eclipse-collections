@@ -111,8 +111,6 @@
         <module>jcstress-tests</module>
         <module>junit-trait-runner</module>
         <module>unit-tests-java8</module>
-        <module>test-coverage</module>
-        <module>p2-repository</module>
     </modules>
 
     <properties>
@@ -617,6 +615,8 @@
                 <module>serialization-tests</module>
                 <module>acceptance-tests</module>
                 <module>performance-tests</module>
+                <module>test-coverage</module>
+                <module>p2-repository</module>
             </modules>
         </profile>
 
