@@ -80,6 +80,9 @@ script:
   - ./.travis-command-ea-builds.sh
   - eval travis_wait 55 $CMD
 
+before_cache:
+  - rm -rf $HOME/.m2/repository/org/eclipse/collections/
+
 cache:
   directories:
-  - ~/.m2
+    - $HOME/.m2
