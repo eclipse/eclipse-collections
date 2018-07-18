@@ -51,9 +51,9 @@ matrix:
 
     - jdk: oraclejdk8
       env:
-        - DESC="compile jmh-tests and performance-tests"
+        - DESC="compile performance-tests"
         - JDK=Java8
-        - CMD="mvn install --projects jmh-tests,performance-tests --also-make --activate-profiles all -DskipTests=true"
+        - CMD="mvn install --projects performance-tests --also-make --activate-profiles all -DskipTests=true"
 
     - jdk: oraclejdk9
       env:
