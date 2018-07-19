@@ -5,10 +5,10 @@ targetPath() ::= "org/eclipse/collections/impl/stack/mutable/primitive"
 fileName(primitive) ::= "Mutable<primitive.name>StackFactoryImpl"
 
 class(primitive) ::= <<
-<body(primitive.type, primitive.name)>
+<body(primitive.type, primitive.name, primitive.wrapperName)>
 >>
 
-body(type, name) ::= <<
+body(type, name, wrapperName) ::= <<
 <copyrightAndOthers()>
 
 package org.eclipse.collections.impl.stack.mutable.primitive;
@@ -16,6 +16,8 @@ package org.eclipse.collections.impl.stack.mutable.primitive;
 import org.eclipse.collections.api.<name>Iterable;
 import org.eclipse.collections.api.factory.stack.primitive.Mutable<name>StackFactory;
 import org.eclipse.collections.api.stack.primitive.Mutable<name>Stack;
+import org.eclipse.collections.impl.factory.primitive.<name>Stacks;
+import org.eclipse.collections.impl.utility.Iterate;
 <(wideStreamImport.(type))>
 
 /**
@@ -76,6 +78,26 @@ public enum Mutable<name>StackFactoryImpl implements Mutable<name>StackFactory
             return this.empty();
         }
         return <name>ArrayStack.newStack(items);
+    }
+
+    /**
+     * @since 10.0
+     */
+    @Override
+    public Mutable<name>Stack ofAll(Iterable\<<wrapperName>\> iterable)
+    {
+        return this.withAll(iterable);
+    }
+
+    /**
+     * @since 10.0
+     */
+    @Override
+    public Mutable<name>Stack withAll(Iterable\<<wrapperName>\> iterable)
+    {
+        Mutable<name>Stack stack = <name>Stacks.mutable.empty();
+        Iterate.forEach(iterable, stack::push);
+        return stack;
     }
 
     @Override

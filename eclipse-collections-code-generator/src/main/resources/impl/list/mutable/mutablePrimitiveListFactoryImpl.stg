@@ -5,10 +5,10 @@ targetPath() ::= "org/eclipse/collections/impl/list/mutable/primitive"
 fileName(primitive) ::= "Mutable<primitive.name>ListFactoryImpl"
 
 class(primitive) ::= <<
-<body(primitive.type, primitive.name)>
+<body(primitive.type, primitive.name, primitive.wrapperName)>
 >>
 
-body(type, name) ::= <<
+body(type, name, wrapperName) ::= <<
 <copyrightAndOthers()>
 
 package org.eclipse.collections.impl.list.mutable.primitive;
@@ -16,6 +16,8 @@ package org.eclipse.collections.impl.list.mutable.primitive;
 import org.eclipse.collections.api.<name>Iterable;
 import org.eclipse.collections.api.factory.list.primitive.Mutable<name>ListFactory;
 import org.eclipse.collections.api.list.primitive.Mutable<name>List;
+import org.eclipse.collections.impl.factory.primitive.<name>Lists;
+import org.eclipse.collections.impl.utility.Iterate;
 <(wideStreamImport.(type))>
 
 /**
@@ -72,6 +74,24 @@ public enum Mutable<name>ListFactoryImpl implements Mutable<name>ListFactory
     public Mutable<name>List withAll(<name>Iterable items)
     {
         return <name>ArrayList.newList(items);
+    }
+
+    /**
+     * @since 10.0
+     */
+    @Override
+    public Mutable<name>List ofAll(Iterable\<<wrapperName>\> iterable)
+    {
+        return this.withAll(iterable);
+    }
+
+    /**
+     * @since 10.0
+     */
+    @Override
+    public Mutable<name>List withAll(Iterable\<<wrapperName>\> iterable)
+    {
+        return Iterate.collect<name>(iterable, <wrapperName>::<type>Value, <name>Lists.mutable.empty());
     }
     <(streamMethods.(type))()>
 }

@@ -13,6 +13,7 @@ package org.eclipse.collections.impl.set.immutable.primitive;
 import org.eclipse.collections.api.BooleanIterable;
 import org.eclipse.collections.api.factory.set.primitive.ImmutableBooleanSetFactory;
 import org.eclipse.collections.api.set.primitive.ImmutableBooleanSet;
+import org.eclipse.collections.impl.factory.primitive.BooleanSets;
 
 /**
  * ImmutableBooleanSetFactoryImpl is a factory implementation which creates instances of type {@link ImmutableBooleanSet}.
@@ -92,5 +93,23 @@ public enum ImmutableBooleanSetFactoryImpl implements ImmutableBooleanSetFactory
             return (ImmutableBooleanSet) items;
         }
         return this.with(items.toArray());
+    }
+
+    /**
+     * @since 10.0
+     */
+    @Override
+    public ImmutableBooleanSet ofAll(Iterable<Boolean> iterable)
+    {
+        return this.withAll(iterable);
+    }
+
+    /**
+     * @since 10.0
+     */
+    @Override
+    public ImmutableBooleanSet withAll(Iterable<Boolean> iterable)
+    {
+        return BooleanSets.mutable.withAll(iterable).toImmutable();
     }
 }

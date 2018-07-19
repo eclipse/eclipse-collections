@@ -1,0 +1,210 @@
+import "copyright.stg"
+import "primitiveHashCode.stg"
+import "primitiveLiteral.stg"
+
+isTest() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/factory/primitive"
+
+fileName(primitive) ::= "<primitive.name>StacksTest"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.wrapperName, primitive.name)>
+>>
+
+body(type, wrapperName, name) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.factory.primitive;
+
+import org.eclipse.collections.api.factory.stack.primitive.Immutable<name>StackFactory;
+import org.eclipse.collections.api.stack.primitive.Immutable<name>Stack;
+import org.eclipse.collections.api.stack.primitive.Mutable<name>Stack;
+import org.eclipse.collections.impl.stack.mutable.primitive.<name>ArrayStack;
+import org.eclipse.collections.impl.factory.Lists;
+import org.eclipse.collections.impl.test.Verify;
+import org.junit.Assert;
+import org.junit.Test;
+
+/**
+ * Junit test for {@link <name>Stacks}
+ * This file was automatically generated from template file primitiveStacksTest.stg
+ */
+public class <name>StacksTest
+{
+    @Test
+    public void immutables()
+    {
+        Immutable<name>StackFactory stackFactory = <name>Stacks.immutable;
+        Assert.assertEquals(<name>ArrayStack.newStackWith(), stackFactory.of());
+        Verify.assertInstanceOf(Immutable<name>Stack.class, stackFactory.of());
+        Assert.assertEquals(<name>ArrayStack.newStackWith(<(literal.(type))("1")>), stackFactory.of(<(literal.(type))("1")>));
+        Verify.assertInstanceOf(Immutable<name>Stack.class, stackFactory.of(<(literal.(type))("1")>));
+        Assert.assertEquals(<name>ArrayStack.newStackWith(<["1", "2"]:(literal.(type))(); separator=", ">), stackFactory.of(<["1", "2"]:(literal.(type))(); separator=", ">));
+        Verify.assertInstanceOf(Immutable<name>Stack.class, stackFactory.of(<["1", "2"]:(literal.(type))(); separator=", ">));
+        Assert.assertEquals(<name>ArrayStack.newStackWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">), stackFactory.of(<["1", "2", "3"]:(literal.(type))(); separator=", ">));
+        Verify.assertInstanceOf(Immutable<name>Stack.class, stackFactory.of(<["1", "2", "3"]:(literal.(type))(); separator=", ">));
+        Assert.assertEquals(<name>ArrayStack.newStackWith(<["1", "2", "3", "4"]:(literal.(type))(); separator=", ">), stackFactory.of(<["1", "2", "3", "4"]:(literal.(type))(); separator=", ">));
+        Verify.assertInstanceOf(Immutable<name>Stack.class, stackFactory.of(<["1", "2", "3", "4"]:(literal.(type))(); separator=", ">));
+        Assert.assertEquals(<name>ArrayStack.newStackWith(<["1", "2", "3", "4", "5"]:(literal.(type))(); separator=", ">), stackFactory.of(<["1", "2", "3", "4", "5"]:(literal.(type))(); separator=", ">));
+        Verify.assertInstanceOf(Immutable<name>Stack.class, stackFactory.of(<["1", "2", "3", "4", "5"]:(literal.(type))(); separator=", ">));
+        Assert.assertEquals(<name>ArrayStack.newStackWith(<["1", "2", "3", "4", "5", "6"]:(literal.(type))(); separator=", ">), stackFactory.of(<["1", "2", "3", "4", "5", "6"]:(literal.(type))(); separator=", ">));
+        Verify.assertInstanceOf(Immutable<name>Stack.class, stackFactory.of(<["1", "2", "3", "4", "5", "6"]:(literal.(type))(); separator=", ">));
+        Assert.assertEquals(<name>ArrayStack.newStackWith(<["1", "2", "3", "4", "5", "6", "7"]:(literal.(type))(); separator=", ">), stackFactory.of(<["1", "2", "3", "4", "5", "6", "7"]:(literal.(type))(); separator=", ">));
+        Verify.assertInstanceOf(Immutable<name>Stack.class, stackFactory.of(<["1", "2", "3", "4", "5", "6", "7"]:(literal.(type))(); separator=", ">));
+        Assert.assertEquals(<name>ArrayStack.newStackWith(<["1", "2", "3", "4", "5", "6", "7", "8"]:(literal.(type))(); separator=", ">), stackFactory.of(<["1", "2", "3", "4", "5", "6", "7", "8"]:(literal.(type))(); separator=", ">));
+        Verify.assertInstanceOf(Immutable<name>Stack.class, stackFactory.of(<["1", "2", "3", "4", "5", "6", "7", "8"]:(literal.(type))(); separator=", ">));
+        Assert.assertEquals(<name>ArrayStack.newStackWith(<["1", "2", "3", "4", "5", "6", "7", "8", "9"]:(literal.(type))(); separator=", ">), stackFactory.of(<["1", "2", "3", "4", "5", "6", "7", "8", "9"]:(literal.(type))(); separator=", ">));
+        Verify.assertInstanceOf(Immutable<name>Stack.class, stackFactory.of(<["1", "2", "3", "4", "5", "6", "7", "8", "9"]:(literal.(type))(); separator=", ">));
+        Assert.assertEquals(<name>ArrayStack.newStackWith(<["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]:(literal.(type))(); separator=", ">), stackFactory.of(<["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]:(literal.(type))(); separator=", ">));
+        Verify.assertInstanceOf(Immutable<name>Stack.class, stackFactory.of(<["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]:(literal.(type))(); separator=", ">));
+        Assert.assertEquals(<name>ArrayStack.newStackWith(<["3", "2", "1"]:(literal.(type))(); separator=", ">), stackFactory.ofAll(<name>ArrayStack.newStackWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">)));
+        Verify.assertInstanceOf(Immutable<name>Stack.class, stackFactory.ofAll(<name>ArrayStack.newStackWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">)));
+    }
+
+    @Test
+    public void empty()
+    {
+        Assert.assertTrue(<name>Stacks.immutable.of().isEmpty());
+        Assert.assertTrue(<name>Stacks.mutable.of().isEmpty());
+    }
+
+    @Test
+    public void newStackWith_immutable()
+    {
+        Immutable<name>Stack stack = <name>Stacks.immutable.of();
+        Assert.assertEquals(stack, <name>Stacks.immutable.of(stack.toArray()));
+        Assert.assertEquals(stack = stack.push(<(literal.(type))("1")>), <name>Stacks.immutable.of(<(literal.(type))("1")>));
+        Assert.assertEquals(stack = stack.push(<(literal.(type))("2")>), <name>Stacks.immutable.of(<["1", "2"]:(literal.(type))(); separator=", ">));
+        Assert.assertEquals(stack = stack.push(<(literal.(type))("3")>), <name>Stacks.immutable.of(<["1", "2", "3"]:(literal.(type))(); separator=", ">));
+        Assert.assertEquals(stack = stack.push(<(literal.(type))("4")>), <name>Stacks.immutable.of(<["1", "2", "3", "4"]:(literal.(type))(); separator=", ">));
+        Assert.assertEquals(stack = stack.push(<(literal.(type))("5")>), <name>Stacks.immutable.of(<["1", "2", "3", "4", "5"]:(literal.(type))(); separator=", ">));
+        Assert.assertEquals(stack = stack.push(<(literal.(type))("6")>), <name>Stacks.immutable.of(<["1", "2", "3", "4", "5", "6"]:(literal.(type))(); separator=", ">));
+        Assert.assertEquals(stack = stack.push(<(literal.(type))("7")>), <name>Stacks.immutable.of(<["1", "2", "3", "4", "5", "6", "7"]:(literal.(type))(); separator=", ">));
+        Assert.assertEquals(stack = stack.push(<(literal.(type))("8")>), <name>Stacks.immutable.of(<["1", "2", "3", "4", "5", "6", "7", "8"]:(literal.(type))(); separator=", ">));
+        Assert.assertEquals(stack = stack.push(<(literal.(type))("9")>), <name>Stacks.immutable.of(<["1", "2", "3", "4", "5", "6", "7", "8", "9"]:(literal.(type))(); separator=", ">));
+        Assert.assertEquals(stack = stack.push(<(literal.(type))("10")>), <name>Stacks.immutable.of(<["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]:(literal.(type))(); separator=", ">));
+    }
+
+    @Test
+    public void newStackWith_mutable()
+    {
+        Mutable<name>Stack stack = <name>Stacks.mutable.of();
+        Assert.assertEquals(stack, <name>Stacks.mutable.of(stack.toArray()));
+        stack.push(<(literal.(type))("1")>);
+        Assert.assertEquals(stack, <name>Stacks.mutable.of(<(literal.(type))("1")>));
+        stack.push(<(literal.(type))("2")>);
+        Assert.assertEquals(stack, <name>Stacks.mutable.of(<["1", "2"]:(literal.(type))(); separator=", ">));
+        stack.push(<(literal.(type))("3")>);
+        Assert.assertEquals(stack, <name>Stacks.mutable.of(<["1", "2", "3"]:(literal.(type))(); separator=", ">));
+        stack.push(<(literal.(type))("4")>);
+        Assert.assertEquals(stack, <name>Stacks.mutable.of(<["1", "2", "3", "4"]:(literal.(type))(); separator=", ">));
+        stack.push(<(literal.(type))("5")>);
+        Assert.assertEquals(stack, <name>Stacks.mutable.of(<["1", "2", "3", "4", "5"]:(literal.(type))(); separator=", ">));
+        stack.push(<(literal.(type))("6")>);
+        Assert.assertEquals(stack, <name>Stacks.mutable.of(<["1", "2", "3", "4", "5", "6"]:(literal.(type))(); separator=", ">));
+        stack.push(<(literal.(type))("7")>);
+        Assert.assertEquals(stack, <name>Stacks.mutable.of(<["1", "2", "3", "4", "5", "6", "7"]:(literal.(type))(); separator=", ">));
+        stack.push(<(literal.(type))("8")>);
+        Assert.assertEquals(stack, <name>Stacks.mutable.of(<["1", "2", "3", "4", "5", "6", "7", "8"]:(literal.(type))(); separator=", ">));
+        stack.push(<(literal.(type))("9")>);
+        Assert.assertEquals(stack, <name>Stacks.mutable.of(<["1", "2", "3", "4", "5", "6", "7", "8", "9"]:(literal.(type))(); separator=", ">));
+        stack.push(<(literal.(type))("10")>);
+        Assert.assertEquals(stack, <name>Stacks.mutable.of(<["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]:(literal.(type))(); separator=", ">));
+    }
+
+    @SuppressWarnings("RedundantArrayCreation")
+    @Test
+    public void newStackWithArray_immutable()
+    {
+        Immutable<name>Stack stack = <name>Stacks.immutable.of();
+        Assert.assertEquals(stack = stack.push(<(literal.(type))("1")>), <name>Stacks.immutable.of(new <type>[]{<(literal.(type))("1")>}));
+        Assert.assertEquals(stack = stack.push(<(literal.(type))("2")>), <name>Stacks.immutable.of(new <type>[]{<["1", "2"]:(literal.(type))(); separator=", ">}));
+        Assert.assertEquals(stack = stack.push(<(literal.(type))("3")>), <name>Stacks.immutable.of(new <type>[]{<["1", "2", "3"]:(literal.(type))(); separator=", ">}));
+        Assert.assertEquals(stack = stack.push(<(literal.(type))("4")>), <name>Stacks.immutable.of(new <type>[]{<["1", "2", "3", "4"]:(literal.(type))(); separator=", ">}));
+        Assert.assertEquals(stack = stack.push(<(literal.(type))("5")>), <name>Stacks.immutable.of(new <type>[]{<["1", "2", "3", "4", "5"]:(literal.(type))(); separator=", ">}));
+        Assert.assertEquals(stack = stack.push(<(literal.(type))("6")>), <name>Stacks.immutable.of(new <type>[]{<["1", "2", "3", "4", "5", "6"]:(literal.(type))(); separator=", ">}));
+        Assert.assertEquals(stack = stack.push(<(literal.(type))("7")>), <name>Stacks.immutable.of(new <type>[]{<["1", "2", "3", "4", "5", "6", "7"]:(literal.(type))(); separator=", ">}));
+        Assert.assertEquals(stack = stack.push(<(literal.(type))("8")>), <name>Stacks.immutable.of(new <type>[]{<["1", "2", "3", "4", "5", "6", "7", "8"]:(literal.(type))(); separator=", ">}));
+        Assert.assertEquals(stack = stack.push(<(literal.(type))("9")>), <name>Stacks.immutable.of(new <type>[]{<["1", "2", "3", "4", "5", "6", "7", "8", "9"]:(literal.(type))(); separator=", ">}));
+        Assert.assertEquals(stack = stack.push(<(literal.(type))("10")>), <name>Stacks.immutable.of(new <type>[]{<["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]:(literal.(type))(); separator=", ">}));
+    }
+
+    @SuppressWarnings("RedundantArrayCreation")
+    @Test
+    public void newStackWithArray_mutable()
+    {
+        Mutable<name>Stack stack = <name>Stacks.mutable.of();
+        Assert.assertEquals(stack, <name>Stacks.mutable.of(new <type>[]{}));
+        stack.push(<(literal.(type))("1")>);
+        Assert.assertEquals(stack, <name>Stacks.mutable.of(new <type>[]{<(literal.(type))("1")>}));
+        stack.push(<(literal.(type))("2")>);
+        Assert.assertEquals(stack, <name>Stacks.mutable.of(new <type>[]{<["1", "2"]:(literal.(type))(); separator=", ">}));
+        stack.push(<(literal.(type))("3")>);
+        Assert.assertEquals(stack, <name>Stacks.mutable.of(new <type>[]{<["1", "2", "3"]:(literal.(type))(); separator=", ">}));
+        stack.push(<(literal.(type))("4")>);
+        Assert.assertEquals(stack, <name>Stacks.mutable.of(new <type>[]{<["1", "2", "3", "4"]:(literal.(type))(); separator=", ">}));
+        stack.push(<(literal.(type))("5")>);
+        Assert.assertEquals(stack, <name>Stacks.mutable.of(new <type>[]{<["1", "2", "3", "4", "5"]:(literal.(type))(); separator=", ">}));
+        stack.push(<(literal.(type))("6")>);
+        Assert.assertEquals(stack, <name>Stacks.mutable.of(new <type>[]{<["1", "2", "3", "4", "5", "6"]:(literal.(type))(); separator=", ">}));
+        stack.push(<(literal.(type))("7")>);
+        Assert.assertEquals(stack, <name>Stacks.mutable.of(new <type>[]{<["1", "2", "3", "4", "5", "6", "7"]:(literal.(type))(); separator=", ">}));
+        stack.push(<(literal.(type))("8")>);
+        Assert.assertEquals(stack, <name>Stacks.mutable.of(new <type>[]{<["1", "2", "3", "4", "5", "6", "7", "8"]:(literal.(type))(); separator=", ">}));
+        stack.push(<(literal.(type))("9")>);
+        Assert.assertEquals(stack, <name>Stacks.mutable.of(new <type>[]{<["1", "2", "3", "4", "5", "6", "7", "8", "9"]:(literal.(type))(); separator=", ">}));
+        stack.push(<(literal.(type))("10")>);
+        Assert.assertEquals(stack, <name>Stacks.mutable.of(new <type>[]{<["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]:(literal.(type))(); separator=", ">}));
+    }
+
+    @Test
+    public void ofAll<name>Iterable()
+    {
+        Assert.assertEquals(new <name>ArrayStack(), <name>Stacks.immutable.ofAll(<name>Lists.mutable.\<<wrapperName>\>empty()));
+        Assert.assertEquals(<name>ArrayStack.newStackWith(<(literal.(type))("1")>), <name>Stacks.immutable.ofAll(<name>Lists.mutable.\<<wrapperName>\>with(<(literal.(type))("1")>)));
+        Assert.assertEquals(<name>ArrayStack.newStackWith(<["1", "2"]:(literal.(type))(); separator=", ">), <name>Stacks.immutable.ofAll(<name>Lists.mutable.\<<wrapperName>\>with(<["1", "2"]:(literal.(type))(); separator=", ">)));
+        Assert.assertEquals(<name>ArrayStack.newStackWith(<["1", "2", "2", "3"]:(literal.(type))(); separator=", ">), <name>Stacks.immutable.ofAll(<name>Lists.mutable.\<<wrapperName>\>with(<["1", "2", "2", "3"]:(literal.(type))(); separator=", ">)));
+
+        Assert.assertEquals(new <name>ArrayStack(), <name>Stacks.mutable.ofAll(<name>Lists.mutable.\<<wrapperName>\>empty()));
+        Assert.assertEquals(<name>ArrayStack.newStackWith(<(literal.(type))("1")>), <name>Stacks.mutable.ofAll(<name>Lists.mutable.\<<wrapperName>\>with(<(literal.(type))("1")>)));
+        Assert.assertEquals(<name>ArrayStack.newStackWith(<["1", "2"]:(literal.(type))(); separator=", ">), <name>Stacks.mutable.ofAll(<name>Lists.mutable.\<<wrapperName>\>with(<["1", "2"]:(literal.(type))(); separator=", ">)));
+        Assert.assertEquals(<name>ArrayStack.newStackWith(<["1", "2", "2", "3"]:(literal.(type))(); separator=", ">), <name>Stacks.mutable.ofAll(<name>Lists.mutable.\<<wrapperName>\>with(<["1", "2", "2", "3"]:(literal.(type))(); separator=", ">)));
+    }
+
+    @Test
+    public void ofAllIterable()
+    {
+        Assert.assertEquals(new <name>ArrayStack(), <name>Stacks.immutable.ofAll(Lists.mutable.\<<wrapperName>\>empty()));
+        Assert.assertEquals(<name>ArrayStack.newStackWith(<(literal.(type))("1")>), <name>Stacks.immutable.ofAll(Lists.mutable.\<<wrapperName>\>with(<(literal.(type))("1")>)));
+        Assert.assertEquals(<name>ArrayStack.newStackWith(<["1", "2"]:(literal.(type))(); separator=", ">), <name>Stacks.immutable.ofAll(Lists.mutable.\<<wrapperName>\>with(<["1", "2"]:(literal.(type))(); separator=", ">)));
+        Assert.assertEquals(<name>ArrayStack.newStackWith(<["1", "2", "2", "3"]:(literal.(type))(); separator=", ">), <name>Stacks.immutable.ofAll(Lists.mutable.\<<wrapperName>\>with(<["1", "2", "2", "3"]:(literal.(type))(); separator=", ">)));
+
+        Assert.assertEquals(new <name>ArrayStack(), <name>Stacks.mutable.ofAll(Lists.mutable.\<<wrapperName>\>empty()));
+        Assert.assertEquals(<name>ArrayStack.newStackWith(<(literal.(type))("1")>), <name>Stacks.mutable.ofAll(Lists.mutable.\<<wrapperName>\>with(<(literal.(type))("1")>)));
+        Assert.assertEquals(<name>ArrayStack.newStackWith(<["1", "2"]:(literal.(type))(); separator=", ">), <name>Stacks.mutable.ofAll(Lists.mutable.\<<wrapperName>\>with(<["1", "2"]:(literal.(type))(); separator=", ">)));
+        Assert.assertEquals(<name>ArrayStack.newStackWith(<["1", "2", "2", "3"]:(literal.(type))(); separator=", ">), <name>Stacks.mutable.ofAll(Lists.mutable.\<<wrapperName>\>with(<["1", "2", "2", "3"]:(literal.(type))(); separator=", ">)));
+    }
+
+    @Test
+    public void ofAllReversed()
+    {
+        Assert.assertEquals(new <name>ArrayStack(), <name>Stacks.immutable.ofAllReversed(<name>Lists.mutable.\<<wrapperName>\>empty()));
+        Assert.assertEquals(<name>ArrayStack.newStackFromTopToBottom(<(literal.(type))("1")>), <name>Stacks.immutable.ofAllReversed(<name>Lists.mutable.\<<wrapperName>\>with(<(literal.(type))("1")>)));
+        Assert.assertEquals(<name>ArrayStack.newStackFromTopToBottom(<["1", "2"]:(literal.(type))(); separator=", ">), <name>Stacks.immutable.ofAllReversed(<name>Lists.mutable.\<<wrapperName>\>with(<["1", "2"]:(literal.(type))(); separator=", ">)));
+        Assert.assertEquals(<name>ArrayStack.newStackFromTopToBottom(<["1", "2", "2", "3"]:(literal.(type))(); separator=", ">), <name>Stacks.immutable.ofAllReversed(<name>Lists.mutable.\<<wrapperName>\>with(<["1", "2", "2", "3"]:(literal.(type))(); separator=", ">)));
+
+        Assert.assertEquals(new <name>ArrayStack(), <name>Stacks.mutable.ofAllReversed(<name>Lists.mutable.\<<wrapperName>\>empty()));
+        Assert.assertEquals(<name>ArrayStack.newStackFromTopToBottom(<(literal.(type))("1")>), <name>Stacks.mutable.ofAllReversed(<name>Lists.mutable.\<<wrapperName>\>with(<(literal.(type))("1")>)));
+        Assert.assertEquals(<name>ArrayStack.newStackFromTopToBottom(<["1", "2"]:(literal.(type))(); separator=", ">), <name>Stacks.mutable.ofAllReversed(<name>Lists.mutable.\<<wrapperName>\>with(<["1", "2"]:(literal.(type))(); separator=", ">)));
+        Assert.assertEquals(<name>ArrayStack.newStackFromTopToBottom(<["1", "2", "2", "3"]:(literal.(type))(); separator=", ">), <name>Stacks.mutable.ofAllReversed(<name>Lists.mutable.\<<wrapperName>\>with(<["1", "2", "2", "3"]:(literal.(type))(); separator=", ">)));
+    }
+
+    @Test
+    public void classIsNonInstantiable()
+    {
+        Verify.assertClassNonInstantiable(<name>Stacks.class);
+    }
+}
+
+>>

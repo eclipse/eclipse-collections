@@ -5,10 +5,10 @@ targetPath() ::= "org/eclipse/collections/impl/bag/immutable/primitive"
 fileName(primitive) ::= "Immutable<primitive.name>BagFactoryImpl"
 
 class(primitive) ::= <<
-<body(primitive.type, primitive.name)>
+<body(primitive.type, primitive.name, primitive.wrapperName)>
 >>
 
-body(type, name) ::= <<
+body(type, name, wrapperName) ::= <<
 <copyrightAndOthers()>
 
 package org.eclipse.collections.impl.bag.immutable.primitive;
@@ -16,6 +16,7 @@ package org.eclipse.collections.impl.bag.immutable.primitive;
 import org.eclipse.collections.api.<name>Iterable;
 import org.eclipse.collections.api.bag.primitive.Immutable<name>Bag;
 import org.eclipse.collections.api.factory.bag.primitive.Immutable<name>BagFactory;
+import org.eclipse.collections.impl.factory.primitive.<name>Bags;
 <(wideStreamImport.(type))>
 
 /**
@@ -92,6 +93,24 @@ public enum Immutable<name>BagFactoryImpl implements Immutable<name>BagFactory
             return (Immutable<name>Bag) items;
         }
         return this.with(items.toArray());
+    }
+
+    /**
+     * @since 10.0
+     */
+    @Override
+    public Immutable<name>Bag ofAll(Iterable\<<wrapperName>\> iterable)
+    {
+        return this.withAll(iterable);
+    }
+
+    /**
+     * @since 10.0
+     */
+    @Override
+    public Immutable<name>Bag withAll(Iterable\<<wrapperName>\> iterable)
+    {
+        return <name>Bags.mutable.withAll(iterable).toImmutable();
     }
     <(streamMethods.(type))()>
 }
