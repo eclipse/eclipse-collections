@@ -59,4 +59,16 @@ public enum ImmutableHashingStrategySetFactoryImpl implements ImmutableHashingSt
     {
         return this.with(hashingStrategy, (T[]) Iterate.toArray(items));
     }
+
+    @Override
+    public <T> ImmutableSet<T> ofInitialCapacity(HashingStrategy<? super T> hashingStrategy, int capacity)
+    {
+        return this.withInitialCapacity(hashingStrategy, capacity);
+    }
+
+    @Override
+    public <T> ImmutableSet<T> withInitialCapacity(HashingStrategy<? super T> hashingStrategy, int capacity)
+    {
+        return ImmutableUnifiedSetWithHashingStrategy.newSet(hashingStrategy, capacity);
+    }
 }

@@ -35,4 +35,11 @@ public interface ImmutableHashingStrategySetFactory
     <T> ImmutableSet<T> ofAll(HashingStrategy<? super T> hashingStrategy, Iterable<? extends T> items);
 
     <T> ImmutableSet<T> withAll(HashingStrategy<? super T> hashingStrategy, Iterable<? extends T> items);
+
+    /**
+     * Same as {@link #ofInitialCapacity(HashingStrategy, int)}. of initial capacity.
+     */
+    <T> ImmutableSet<T> ofInitialCapacity(HashingStrategy<? super T> hashingStrategy, int capacity);
+
+    <T> ImmutableSet<T> withInitialCapacity(HashingStrategy<? super T> hashingStrategy, int capacity);
 }
