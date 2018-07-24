@@ -3,10 +3,7 @@ dist: trusty
 sudo: false
 
 before_install:
-  - wget https://archive.apache.org/dist/maven/maven-3/3.5.0/binaries/apache-maven-3.5.0-bin.zip
-  - unzip -qq apache-maven-3.5.0-bin.zip
-  - export M2_HOME=$PWD/apache-maven-3.5.0
-  - export PATH=$M2_HOME/bin:$PATH
+  - mvn -N io.takari:maven:wrapper -Dmaven=3.5.2
   - echo "MAVEN_OPTS='-Dmaven.repo.local=$HOME/.m2/repository -Xmx1g -Dorg.slf4j.simpleLogger.showDateTime=true -Dorg.slf4j.simpleLogger.dateTimeFormat=HH:mm:ss:SSS'" > ~/.mavenrc
 
 install:
@@ -18,52 +15,52 @@ jobs:
     - jdk: oraclejdk8
       env:
         - DESC="acceptance tests"
-        - CMD="mvn install --projects acceptance-tests --also-make --activate-profiles all"
+        - CMD="./mvnw install --projects acceptance-tests --also-make --activate-profiles all"
 
     - jdk: oraclejdk8
       env:
         - DESC="findbugs"
-        - CMD="mvn install findbugs:check --projects '!scala-unit-tests,!jmh-scala-tests,!jmh-tests,!jcstress-tests,!p2-repository' --activate-profiles all -DskipTests=true"
+        - CMD="./mvnw install findbugs:check --projects '!scala-unit-tests,!jmh-scala-tests,!jmh-tests,!jcstress-tests,!p2-repository' --activate-profiles all -DskipTests=true"
 
     - jdk: oraclejdk8
       env:
         - DESC="checkstyle"
-        - CMD="mvn install checkstyle:check --activate-profiles all -DskipTests=true"
+        - CMD="./mvnw install checkstyle:check --activate-profiles all -DskipTests=true"
 
     - jdk: oraclejdk8
       env:
         - DESC="unit tests"
-        - CMD="mvn install"
+        - CMD="./mvnw install"
 
     - jdk: oraclejdk8
       env:
         - DESC="compile performance-tests"
-        - CMD="mvn install --projects performance-tests --also-make --activate-profiles all -DskipTests=true"
+        - CMD="./mvnw install --projects performance-tests --also-make --activate-profiles all -DskipTests=true"
 
     - jdk: oraclejdk8
       env:
         - DESC="compile javadoc"
-        - CMD="mvn install javadoc:jar --projects '!unit-tests,!junit-trait-runner,!unit-tests-java8,!serialization-tests,!scala-unit-tests,!jmh-scala-tests,!jmh-tests,!jcstress-tests,!p2-repository,!test-coverage' --activate-profiles all -DskipTests=true"
+        - CMD="./mvnw install javadoc:jar --projects '!unit-tests,!junit-trait-runner,!unit-tests-java8,!serialization-tests,!scala-unit-tests,!jmh-scala-tests,!jmh-tests,!jcstress-tests,!p2-repository,!test-coverage' --activate-profiles all -DskipTests=true"
 
     - jdk: oraclejdk9
       env:
         - DESC="unit tests oraclejdk9"
-        - CMD="mvn install"
+        - CMD="./mvnw install"
 
     - jdk: openjdk10
       env:
         - DESC="unit tests openjdk10"
-        - CMD="mvn install"
+        - CMD="./mvnw install"
 
     - jdk: openjdk11
       env:
         - DESC="unit tests openjdk11"
-        - CMD="mvn install"
+        - CMD="./mvnw install"
 
     - jdk: oraclejdk11
       env:
         - DESC="unit tests oraclejdk11"
-        - CMD="mvn install"
+        - CMD="./mvnw install"
 
     - jdk: openjdk12
       env:
