@@ -200,6 +200,8 @@
     </dependencyManagement>
 
     <build>
+        <defaultGoal>clean install checkstyle:check</defaultGoal>
+
         <pluginManagement>
             <plugins>
 
