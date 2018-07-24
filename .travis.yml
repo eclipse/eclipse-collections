@@ -65,12 +65,12 @@ jobs:
     - jdk: openjdk12
       env:
         - DESC="unit tests openjdk12"
-        - CMD="mvn install"
+        - CMD="./mvnw install"
 
     - jdk: openjdk-ea
       env:
         - DESC="unit tests openjdk-ea"
-        - CMD="mvn install"
+        - CMD="./mvnw install"
 
     - jdk: oraclejdk8
       env:
@@ -82,7 +82,7 @@ jobs:
     - jdk: openjdk-ea
       env:
         - DESC="unit tests openjdk-ea"
-        - CMD="mvn install"
+        - CMD="./mvnw install"
     - jdk: oraclejdk8
       env:
         - DESC="unit tests Java12-EA"
