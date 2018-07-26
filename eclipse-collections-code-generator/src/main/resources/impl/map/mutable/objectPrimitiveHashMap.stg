@@ -85,8 +85,6 @@ public class Object<name>HashMap\<K> implements MutableObject<name>Map\<K>, Exte
     public static final <type> EMPTY_VALUE = <zero.(type)>;
 
     private static final long serialVersionUID = 1L;
-    private static final int OCCUPIED_DATA_RATIO = 2;
-    private static final int OCCUPIED_SENTINEL_RATIO = 4;
     private static final int DEFAULT_INITIAL_CAPACITY = 8;
 
     private static final Object NULL_KEY = new Object()
@@ -148,7 +146,7 @@ public class Object<name>HashMap\<K> implements MutableObject<name>Map\<K>, Exte
         {
             throw new IllegalArgumentException("initial capacity cannot be less than 0");
         }
-        int capacity = this.smallestPowerOfTwoGreaterThan(this.fastCeil(initialCapacity * OCCUPIED_DATA_RATIO));
+        int capacity = this.smallestPowerOfTwoGreaterThan(this.fastCeil(initialCapacity \<\< 1));
         this.allocateTable(capacity);
     }
 
@@ -1137,7 +1135,7 @@ public class Object<name>HashMap\<K> implements MutableObject<name>Map\<K>, Exte
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
     {
         int size = in.readInt();
-        int capacity = this.smallestPowerOfTwoGreaterThan(this.fastCeil(size * OCCUPIED_DATA_RATIO));
+        int capacity = this.smallestPowerOfTwoGreaterThan(this.fastCeil(size \<\< 1));
         this.allocateTable(capacity);
 
         for (int i = 0; i \< size; i++)
@@ -1185,7 +1183,13 @@ public class Object<name>HashMap\<K> implements MutableObject<name>Map\<K>, Exte
 
     private void rehashAndGrow()
     {
-        this.rehash(this.keys.length \<\< 1);
+        int max = this.maxOccupiedWithData();
+        int newCapacity = Math.max(max, smallestPowerOfTwoGreaterThan((this.occupiedWithData + 1) \<\< 1));
+        if (this.occupiedWithSentinels > 0 && (max >\> 1) + (max >\> 2) \< this.occupiedWithData)
+        {
+            newCapacity \<\<= 1;
+        }
+        this.rehash(newCapacity);
     }
 
     private void rehash(int newCapacity)
@@ -1309,12 +1313,7 @@ public class Object<name>HashMap\<K> implements MutableObject<name>Map\<K>, Exte
     {
         int capacity = this.keys.length;
         // need at least one free slot for open addressing
-        return Math.min(capacity - 1, capacity / OCCUPIED_DATA_RATIO);
-    }
-
-    private int maxOccupiedWithSentinels()
-    {
-        return this.keys.length / OCCUPIED_SENTINEL_RATIO;
+        return Math.min(capacity - 1, capacity >\> 1);
     }
 
     private class Internal<name>Iterator implements Mutable<name>Iterator
