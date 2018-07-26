@@ -30,36 +30,36 @@ matrix:
       env:
         - DESC="acceptance tests"
         - JDK=Java8
-        - CMD="mvn install --projects acceptance-tests --also-make --activate-profiles all --batch-mode --show-version --errors"
+        - CMD="mvn install --projects acceptance-tests --also-make --activate-profiles all --show-version --errors"
 
     - jdk: oraclejdk8
       env:
         - DESC="findbugs"
         - JDK=Java8
-        - CMD="mvn install findbugs:check --projects '!scala-unit-tests,!jmh-scala-tests,!jmh-tests,!jcstress-tests,!p2-repository' --activate-profiles all -DskipTests=true --batch-mode --show-version --errors"
+        - CMD="mvn install findbugs:check --projects '!scala-unit-tests,!jmh-scala-tests,!jmh-tests,!jcstress-tests,!p2-repository' --activate-profiles all -DskipTests=true --show-version --errors"
     - jdk: oraclejdk8
       env:
         - DESC="checkstyle"
         - JDK=Java8
-        - CMD="mvn install checkstyle:check --activate-profiles all -DskipTests=true --batch-mode --show-version --errors"
+        - CMD="mvn install checkstyle:check --activate-profiles all -DskipTests=true --show-version --errors"
 
     - jdk: oraclejdk8
       env:
         - DESC="unit tests"
         - JDK=Java8
-        - CMD="mvn install --batch-mode --show-version --errors"
+        - CMD="mvn install --show-version --errors"
 
     - jdk: oraclejdk8
       env:
         - DESC="compile jmh-tests and performance-tests"
         - JDK=Java8
-        - CMD="mvn install --projects jmh-tests,performance-tests --also-make --activate-profiles all -DskipTests=true --batch-mode --show-version --errors"
+        - CMD="mvn install --projects jmh-tests,performance-tests --also-make --activate-profiles all -DskipTests=true --show-version --errors"
 
     - jdk: oraclejdk9
       env:
         - DESC="unit tests Java 9"
         - JDK=Java9
-        - CMD="mvn install --projects '!scala-unit-tests,!jmh-scala-tests,!jmh-tests,!p2-repository' --batch-mode --show-version --errors"
+        - CMD="mvn install --projects '!scala-unit-tests,!jmh-scala-tests,!jmh-tests,!p2-repository' --show-version --errors"
 
     - jdk: oraclejdk8
       env:
