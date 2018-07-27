@@ -107,10 +107,7 @@
         <module>eclipse-collections-testutils</module>
         <module>eclipse-collections-forkjoin</module>
         <module>unit-tests</module>
-        <module>scala-unit-tests</module>
         <module>serialization-tests</module>
-        <module>jmh-scala-tests</module>
-        <module>jmh-tests</module>
         <module>jcstress-tests</module>
         <module>junit-trait-runner</module>
         <module>unit-tests-java8</module>
@@ -570,6 +567,37 @@
     <profiles>
 
         <profile>
+            <id>java-8</id>
+
+            <activation>
+                <jdk>1.8</jdk>
+            </activation>
+
+            <modules>
+                <module>scala-unit-tests</module>
+                <module>jmh-scala-tests</module>
+                <module>jmh-tests</module>
+            </modules>
+        </profile>
+
+        <profile>
+            <id>all</id>
+
+            <modules>
+                <module>eclipse-collections-code-generator</module>
+                <module>eclipse-collections-code-generator-maven-plugin</module>
+                <module>eclipse-collections-api</module>
+                <module>eclipse-collections</module>
+                <module>eclipse-collections-testutils</module>
+                <module>eclipse-collections-forkjoin</module>
+                <module>unit-tests</module>
+                <module>serialization-tests</module>
+                <module>acceptance-tests</module>
+                <module>performance-tests</module>
+            </modules>
+        </profile>
+
+        <profile>
             <id>clover-optimize</id>
             <build>
                 <plugins>
@@ -600,26 +628,6 @@
         </profile>
 
         <profile>
-            <id>all</id>
-
-            <modules>
-                <module>eclipse-collections-code-generator</module>
-                <module>eclipse-collections-code-generator-maven-plugin</module>
-                <module>eclipse-collections-api</module>
-                <module>eclipse-collections</module>
-                <module>eclipse-collections-testutils</module>
-                <module>eclipse-collections-forkjoin</module>
-                <module>unit-tests</module>
-                <module>scala-unit-tests</module>
-                <module>serialization-tests</module>
-                <module>acceptance-tests</module>
-                <module>performance-tests</module>
-                <module>jmh-scala-tests</module>
-                <module>jmh-tests</module>
-            </modules>
-        </profile>
-
-        <profile>
             <id>clover</id>
 
             <modules>
@@ -629,7 +637,6 @@
                 <module>eclipse-collections</module>
                 <module>eclipse-collections-testutils</module>
                 <module>unit-tests</module>
-                <module>scala-unit-tests</module>
                 <module>serialization-tests</module>
                 <module>acceptance-tests</module>
             </modules>
