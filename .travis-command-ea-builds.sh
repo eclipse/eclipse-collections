@@ -44,7 +44,7 @@ function install_jdk_and_run_ea_build {
   echo "export MAVEN_OPTS='-Dmaven.repo.local=$HOME/.m2/repository -Xmx2g -XX:MaxPermSize=2048m'\" > ~/.mavenrc"
   mvn -version
   echo "Completed setting environment"
-  mvn install --show-version --errors
+  mvn install
 }
 
 case "$JDK" in
