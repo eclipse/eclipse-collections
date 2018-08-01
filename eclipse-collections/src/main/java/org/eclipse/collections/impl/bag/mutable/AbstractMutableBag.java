@@ -274,10 +274,4 @@ public abstract class AbstractMutableBag<T>
         }
         return new NonParallelUnsortedBag<>(this);
     }
-
-    @Override
-    public MutableSet<T> selectUnique()
-    {
-        return (MutableSet<T>) super.selectUnique();
-    }
 }

@@ -34,7 +34,6 @@ import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.primitive.MutableObjectDoubleMap;
 import org.eclipse.collections.api.map.primitive.MutableObjectLongMap;
-import org.eclipse.collections.api.set.MutableSetIterable;
 import org.eclipse.collections.api.tuple.Twin;
 import org.eclipse.collections.api.tuple.primitive.ObjectIntPair;
 import org.eclipse.collections.impl.bag.AbstractBag;
@@ -337,11 +336,5 @@ public abstract class AbstractMutableBagIterable<T>
     public MutableList<ObjectIntPair<T>> bottomOccurrences(int n)
     {
         return this.occurrencesSortingBy(n, ObjectIntPair::getTwo, Lists.mutable.empty());
-    }
-
-    @Override
-    public MutableSetIterable<T> selectUnique()
-    {
-        return (MutableSetIterable<T>) super.selectUnique();
     }
 }

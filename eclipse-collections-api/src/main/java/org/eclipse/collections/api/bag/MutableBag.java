@@ -32,6 +32,7 @@ import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.predicate.primitive.IntPredicate;
 import org.eclipse.collections.api.block.procedure.Procedure;
+import org.eclipse.collections.api.factory.Sets;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.multimap.bag.MutableBagMultimap;
 import org.eclipse.collections.api.ordered.OrderedIterable;
@@ -68,7 +69,18 @@ public interface MutableBag<T>
      * @since 9.2
      */
     @Override
-    MutableSet<T> selectUnique();
+    default MutableSet<T> selectUnique()
+    {
+        MutableSet<T> result = Sets.mutable.empty();
+        this.forEachWithOccurrences((each, occurrences) ->
+        {
+            if (occurrences == 1)
+            {
+                result.add(each);
+            }
+        });
+        return result;
+    }
 
     @Override
     MutableBag<T> with(T element);

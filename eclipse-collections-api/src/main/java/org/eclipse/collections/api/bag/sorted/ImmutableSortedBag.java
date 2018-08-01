@@ -29,6 +29,7 @@ import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.predicate.primitive.IntPredicate;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
+import org.eclipse.collections.api.factory.SortedSets;
 import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.primitive.ImmutableBooleanList;
 import org.eclipse.collections.api.list.primitive.ImmutableByteList;
@@ -43,6 +44,7 @@ import org.eclipse.collections.api.map.sorted.MutableSortedMap;
 import org.eclipse.collections.api.multimap.sortedbag.ImmutableSortedBagMultimap;
 import org.eclipse.collections.api.partition.bag.sorted.PartitionImmutableSortedBag;
 import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
+import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 import org.eclipse.collections.api.tuple.Pair;
 
 /**
@@ -81,7 +83,18 @@ public interface ImmutableSortedBag<T>
      * @since 9.2
      */
     @Override
-    ImmutableSortedSet<T> selectUnique();
+    default ImmutableSortedSet<T> selectUnique()
+    {
+        MutableSortedSet<T> result = SortedSets.mutable.with(this.comparator());
+        this.forEachWithOccurrences((each, occurrences) ->
+        {
+            if (occurrences == 1)
+            {
+                result.add(each);
+            }
+        });
+        return result.toImmutable();
+    }
 
     @Override
     ImmutableSortedBag<T> tap(Procedure<? super T> procedure);
@@ -157,7 +170,9 @@ public interface ImmutableSortedBag<T>
      * @since 9.2
      */
     @Override
-    default <P, V> ImmutableList<V> flatCollectWith(Function2<? super T, ? super P, ? extends Iterable<V>> function, P parameter)
+    default <P, V> ImmutableList<V> flatCollectWith(
+            Function2<? super T, ? super P, ? extends Iterable<V>> function,
+            P parameter)
     {
         return this.flatCollect(each -> function.apply(each, parameter));
     }
