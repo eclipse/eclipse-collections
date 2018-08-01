@@ -16,9 +16,10 @@ import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 
-public enum FixedSizeSetFactoryImpl implements FixedSizeSetFactory
+public class FixedSizeSetFactoryImpl implements FixedSizeSetFactory
 {
-    INSTANCE;
+    public static final FixedSizeSetFactory INSTANCE = new FixedSizeSetFactoryImpl();
+
     private static final FixedSizeSet<?> EMPTY_SET = new EmptySet<>();
 
     @Override

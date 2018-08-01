@@ -19,9 +19,9 @@ import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.impl.factory.Maps;
 import org.eclipse.collections.impl.utility.MapIterate;
 
-public enum ImmutableBiMapFactoryImpl implements ImmutableBiMapFactory
+public class ImmutableBiMapFactoryImpl implements ImmutableBiMapFactory
 {
-    INSTANCE;
+    public static final ImmutableBiMapFactory INSTANCE = new ImmutableBiMapFactoryImpl();
 
     private static final ImmutableHashBiMap<?, ?> EMPTY_INSTANCE = new ImmutableHashBiMap<>(Maps.immutable.empty(), Maps.immutable.empty());
 

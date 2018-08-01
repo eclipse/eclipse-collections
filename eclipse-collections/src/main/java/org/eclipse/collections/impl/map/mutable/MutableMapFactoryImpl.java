@@ -17,9 +17,9 @@ import org.eclipse.collections.api.map.MapIterable;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.impl.factory.Maps;
 
-public enum MutableMapFactoryImpl implements MutableMapFactory
+public class MutableMapFactoryImpl implements MutableMapFactory
 {
-    INSTANCE;
+    public static final MutableMapFactory INSTANCE = new MutableMapFactoryImpl();
 
     @Override
     public <K, V> MutableMap<K, V> empty()

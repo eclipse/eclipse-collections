@@ -17,9 +17,9 @@ import org.eclipse.collections.api.factory.list.ImmutableListFactory;
 import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.impl.utility.Iterate;
 
-public enum ImmutableListFactoryImpl implements ImmutableListFactory
+public class ImmutableListFactoryImpl implements ImmutableListFactory
 {
-    INSTANCE;
+    public static final ImmutableListFactory INSTANCE = new ImmutableListFactoryImpl();
 
     @Override
     public <T> ImmutableList<T> empty()

@@ -16,9 +16,9 @@ import org.eclipse.collections.api.factory.map.ImmutableMapFactory;
 import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.impl.block.factory.Comparators;
 
-public enum ImmutableMapFactoryImpl implements ImmutableMapFactory
+public class ImmutableMapFactoryImpl implements ImmutableMapFactory
 {
-    INSTANCE;
+    public static final ImmutableMapFactory INSTANCE = new ImmutableMapFactoryImpl();
 
     @Override
     public <K, V> ImmutableMap<K, V> empty()

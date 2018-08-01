@@ -15,9 +15,9 @@ import java.util.Comparator;
 import org.eclipse.collections.api.factory.set.sorted.MutableSortedSetFactory;
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 
-public enum MutableSortedSetFactoryImpl implements MutableSortedSetFactory
+public class MutableSortedSetFactoryImpl implements MutableSortedSetFactory
 {
-    INSTANCE;
+    public static final MutableSortedSetFactory INSTANCE = new MutableSortedSetFactoryImpl();
 
     @Override
     public <T> MutableSortedSet<T> empty()

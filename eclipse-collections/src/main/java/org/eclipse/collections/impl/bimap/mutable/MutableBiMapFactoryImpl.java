@@ -13,9 +13,9 @@ package org.eclipse.collections.impl.bimap.mutable;
 import org.eclipse.collections.api.bimap.MutableBiMap;
 import org.eclipse.collections.api.factory.bimap.MutableBiMapFactory;
 
-public enum MutableBiMapFactoryImpl implements MutableBiMapFactory
+public class MutableBiMapFactoryImpl implements MutableBiMapFactory
 {
-    INSTANCE;
+    public static final MutableBiMapFactory INSTANCE = new MutableBiMapFactoryImpl();
 
     @Override
     public <K, V> MutableBiMap<K, V> empty()

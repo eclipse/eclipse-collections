@@ -13,9 +13,9 @@ package org.eclipse.collections.impl.set.mutable;
 import org.eclipse.collections.api.factory.set.MutableSetFactory;
 import org.eclipse.collections.api.set.MutableSet;
 
-public enum MutableSetFactoryImpl implements MutableSetFactory
+public class MutableSetFactoryImpl implements MutableSetFactory
 {
-    INSTANCE;
+    public static final MutableSetFactory INSTANCE = new MutableSetFactoryImpl();
 
     @Override
     public <T> MutableSet<T> empty()

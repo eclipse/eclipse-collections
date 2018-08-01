@@ -18,9 +18,9 @@ import org.eclipse.collections.api.factory.bag.sorted.ImmutableSortedBagFactory;
 import org.eclipse.collections.impl.bag.sorted.mutable.TreeBag;
 import org.eclipse.collections.impl.utility.Iterate;
 
-public enum ImmutableSortedBagFactoryImpl implements ImmutableSortedBagFactory
+public class ImmutableSortedBagFactoryImpl implements ImmutableSortedBagFactory
 {
-    INSTANCE;
+    public static final ImmutableSortedBagFactory INSTANCE = new ImmutableSortedBagFactoryImpl();
 
     @Override
     public <T> ImmutableSortedBag<T> empty()

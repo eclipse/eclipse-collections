@@ -15,9 +15,9 @@ import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.utility.Iterate;
 
-public enum ImmutableSetFactoryImpl implements ImmutableSetFactory
+public class ImmutableSetFactoryImpl implements ImmutableSetFactory
 {
-    INSTANCE;
+    public static final ImmutableSetFactory INSTANCE = new ImmutableSetFactoryImpl();
 
     @Override
     public <T> ImmutableSet<T> empty()

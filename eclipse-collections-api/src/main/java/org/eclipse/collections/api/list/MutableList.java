@@ -10,6 +10,7 @@
 
 package org.eclipse.collections.api.list;
 
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
@@ -30,6 +31,7 @@ import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.collection.MutableCollection;
+import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.list.primitive.MutableBooleanList;
 import org.eclipse.collections.api.list.primitive.MutableByteList;
 import org.eclipse.collections.api.list.primitive.MutableCharList;
@@ -66,19 +68,35 @@ public interface MutableList<T>
     MutableList<T> clone();
 
     @Override
-    MutableList<T> tap(Procedure<? super T> procedure);
+    default MutableList<T> tap(Procedure<? super T> procedure)
+    {
+        this.forEach(procedure);
+        return this;
+    }
 
     @Override
-    MutableList<T> select(Predicate<? super T> predicate);
+    default MutableList<T> select(Predicate<? super T> predicate)
+    {
+        return this.select(predicate, this.newEmpty());
+    }
 
     @Override
-    <P> MutableList<T> selectWith(Predicate2<? super T, ? super P> predicate, P parameter);
+    default <P> MutableList<T> selectWith(Predicate2<? super T, ? super P> predicate, P parameter)
+    {
+        return this.selectWith(predicate, parameter, this.newEmpty());
+    }
 
     @Override
-    MutableList<T> reject(Predicate<? super T> predicate);
+    default MutableList<T> reject(Predicate<? super T> predicate)
+    {
+        return this.reject(predicate, this.newEmpty());
+    }
 
     @Override
-    <P> MutableList<T> rejectWith(Predicate2<? super T, ? super P> predicate, P parameter);
+    default <P> MutableList<T> rejectWith(Predicate2<? super T, ? super P> predicate, P parameter)
+    {
+        return this.rejectWith(predicate, parameter, this.newEmpty());
+    }
 
     @Override
     PartitionMutableList<T> partition(Predicate<? super T> predicate);
@@ -90,7 +108,10 @@ public interface MutableList<T>
     <S> MutableList<S> selectInstancesOf(Class<S> clazz);
 
     @Override
-    <V> MutableList<V> collect(Function<? super T, ? extends V> function);
+    default <V> MutableList<V> collect(Function<? super T, ? extends V> function)
+    {
+        return this.collect(function, Lists.mutable.withInitialCapacity(this.size()));
+    }
 
     /**
      * @since 9.1.
@@ -127,13 +148,22 @@ public interface MutableList<T>
     MutableShortList collectShort(ShortFunction<? super T> shortFunction);
 
     @Override
-    <P, V> MutableList<V> collectWith(Function2<? super T, ? super P, ? extends V> function, P parameter);
+    default <P, V> MutableList<V> collectWith(Function2<? super T, ? super P, ? extends V> function, P parameter)
+    {
+        return this.collectWith(function, parameter, Lists.mutable.withInitialCapacity(this.size()));
+    }
 
     @Override
-    <V> MutableList<V> collectIf(Predicate<? super T> predicate, Function<? super T, ? extends V> function);
+    default <V> MutableList<V> collectIf(Predicate<? super T> predicate, Function<? super T, ? extends V> function)
+    {
+        return this.collectIf(predicate, function, Lists.mutable.empty());
+    }
 
     @Override
-    <V> MutableList<V> flatCollect(Function<? super T, ? extends Iterable<V>> function);
+    default <V> MutableList<V> flatCollect(Function<? super T, ? extends Iterable<V>> function)
+    {
+        return this.flatCollect(function, Lists.mutable.withInitialCapacity(this.size()));
+    }
 
     /**
      * @since 9.2
@@ -251,7 +281,10 @@ public interface MutableList<T>
      * Returns an immutable copy of this list. If the list is immutable, it returns itself.
      */
     @Override
-    ImmutableList<T> toImmutable();
+    default ImmutableList<T> toImmutable()
+    {
+        return Lists.immutable.withAll(this);
+    }
 
     @Override
     <V> MutableListMultimap<V, T> groupBy(Function<? super T, ? extends V> function);
@@ -284,20 +317,35 @@ public interface MutableList<T>
      * Returns a new MutableList in reverse order.
      */
     @Override
-    MutableList<T> toReversed();
+    default MutableList<T> toReversed()
+    {
+        return this.toList().reverseThis();
+    }
 
     /**
      * Mutates this list by reversing its order and returns the current list as a result.
      */
-    MutableList<T> reverseThis();
+    default MutableList<T> reverseThis()
+    {
+        Collections.reverse(this);
+        return this;
+    }
 
     /**
      * Mutates this list by shuffling its elements.
      */
-    MutableList<T> shuffleThis();
+    default MutableList<T> shuffleThis()
+    {
+        Collections.shuffle(this);
+        return this;
+    }
 
     /**
      * Mutates this list by shuffling its elements using the specified random.
      */
-    MutableList<T> shuffleThis(Random random);
+    default MutableList<T> shuffleThis(Random random)
+    {
+        Collections.shuffle(this, random);
+        return this;
+    }
 }

@@ -14,9 +14,9 @@ import org.eclipse.collections.api.factory.list.FixedSizeListFactory;
 import org.eclipse.collections.api.list.FixedSizeList;
 import org.eclipse.collections.impl.utility.Iterate;
 
-public enum FixedSizeListFactoryImpl implements FixedSizeListFactory
+public class FixedSizeListFactoryImpl implements FixedSizeListFactory
 {
-    INSTANCE;
+    public static final FixedSizeListFactory INSTANCE = new FixedSizeListFactoryImpl();
 
     private static final FixedSizeList<?> EMPTY_LIST = new EmptyList<>();
 

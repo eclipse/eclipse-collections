@@ -19,7 +19,6 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
 import java.util.Optional;
-import java.util.Random;
 import java.util.RandomAccess;
 import java.util.concurrent.ExecutorService;
 
@@ -44,7 +43,6 @@ import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
-import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.list.ParallelListIterable;
 import org.eclipse.collections.api.list.primitive.MutableBooleanList;
@@ -165,21 +163,9 @@ public abstract class AbstractMutableList<T>
     }
 
     @Override
-    public MutableList<T> select(Predicate<? super T> predicate)
-    {
-        return this.select(predicate, this.newEmpty());
-    }
-
-    @Override
     public <R extends Collection<T>> R select(Predicate<? super T> predicate, R target)
     {
         return ListIterate.select(this, predicate, target);
-    }
-
-    @Override
-    public <P> MutableList<T> selectWith(Predicate2<? super T, ? super P> predicate, P parameter)
-    {
-        return this.selectWith(predicate, parameter, this.newEmpty());
     }
 
     @Override
@@ -192,21 +178,9 @@ public abstract class AbstractMutableList<T>
     }
 
     @Override
-    public MutableList<T> reject(Predicate<? super T> predicate)
-    {
-        return this.reject(predicate, this.newEmpty());
-    }
-
-    @Override
     public <R extends Collection<T>> R reject(Predicate<? super T> predicate, R target)
     {
         return ListIterate.reject(this, predicate, target);
-    }
-
-    @Override
-    public <P> MutableList<T> rejectWith(Predicate2<? super T, ? super P> predicate, P parameter)
-    {
-        return this.rejectWith(predicate, parameter, this.newEmpty());
     }
 
     @Override
@@ -254,12 +228,6 @@ public abstract class AbstractMutableList<T>
     public <P> boolean removeIfWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         return ListIterate.removeIfWith(this, predicate, parameter);
-    }
-
-    @Override
-    public <V> MutableList<V> collect(Function<? super T, ? extends V> function)
-    {
-        return this.collect(function, FastList.newList());
     }
 
     @Override
@@ -317,12 +285,6 @@ public abstract class AbstractMutableList<T>
     }
 
     @Override
-    public <V> MutableList<V> flatCollect(Function<? super T, ? extends Iterable<V>> function)
-    {
-        return this.flatCollect(function, FastList.newList());
-    }
-
-    @Override
     public <V, R extends Collection<V>> R flatCollect(
             Function<? super T, ? extends Iterable<V>> function, R target)
     {
@@ -330,23 +292,10 @@ public abstract class AbstractMutableList<T>
     }
 
     @Override
-    public <P, V> MutableList<V> collectWith(Function2<? super T, ? super P, ? extends V> function, P parameter)
-    {
-        return this.collectWith(function, parameter, FastList.newList());
-    }
-
-    @Override
     public <P, A, R extends Collection<A>> R collectWith(
             Function2<? super T, ? super P, ? extends A> function, P parameter, R target)
     {
         return ListIterate.collectWith(this, function, parameter, target);
-    }
-
-    @Override
-    public <V> MutableList<V> collectIf(
-            Predicate<? super T> predicate, Function<? super T, ? extends V> function)
-    {
-        return this.collectIf(predicate, function, FastList.newList());
     }
 
     @Override
@@ -561,21 +510,9 @@ public abstract class AbstractMutableList<T>
     }
 
     @Override
-    public MutableList<T> toList()
-    {
-        return FastList.newList(this);
-    }
-
-    @Override
     public MutableList<T> toSortedList()
     {
         return this.toSortedList(Comparators.naturalOrder());
-    }
-
-    @Override
-    public MutableList<T> toSortedList(Comparator<? super T> comparator)
-    {
-        return this.toList().sortThis(comparator);
     }
 
     @Override
@@ -594,12 +531,6 @@ public abstract class AbstractMutableList<T>
     public MutableList<T> asUnmodifiable()
     {
         return UnmodifiableMutableList.of(this);
-    }
-
-    @Override
-    public ImmutableList<T> toImmutable()
-    {
-        return Lists.immutable.withAll(this);
     }
 
     @Override
@@ -728,33 +659,6 @@ public abstract class AbstractMutableList<T>
         }
 
         return new MutableListIterator<>(this, index);
-    }
-
-    @Override
-    public MutableList<T> toReversed()
-    {
-        return FastList.newList(this).reverseThis();
-    }
-
-    @Override
-    public MutableList<T> reverseThis()
-    {
-        Collections.reverse(this);
-        return this;
-    }
-
-    @Override
-    public MutableList<T> shuffleThis()
-    {
-        Collections.shuffle(this);
-        return this;
-    }
-
-    @Override
-    public MutableList<T> shuffleThis(Random rnd)
-    {
-        Collections.shuffle(this, rnd);
-        return this;
     }
 
     @Override

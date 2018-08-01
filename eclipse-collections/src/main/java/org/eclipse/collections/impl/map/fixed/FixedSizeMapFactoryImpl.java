@@ -14,9 +14,9 @@ import org.eclipse.collections.api.factory.map.FixedSizeMapFactory;
 import org.eclipse.collections.api.map.FixedSizeMap;
 import org.eclipse.collections.impl.block.factory.Comparators;
 
-public enum FixedSizeMapFactoryImpl implements FixedSizeMapFactory
+public class FixedSizeMapFactoryImpl implements FixedSizeMapFactory
 {
-    INSTANCE;
+    public static final FixedSizeMapFactory INSTANCE = new FixedSizeMapFactoryImpl();
 
     private static final FixedSizeMap<?, ?> EMPTY_MAP = new EmptyMap<>();
 
