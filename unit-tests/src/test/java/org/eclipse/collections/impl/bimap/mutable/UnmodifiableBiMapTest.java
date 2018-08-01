@@ -214,7 +214,9 @@ public class UnmodifiableBiMapTest extends AbstractMutableBiMapTestCase
     public void updateValueWith()
     {
         MutableBiMap<Integer, Character> biMap = this.classUnderTest();
-        Function2<Character, Boolean, Character> toUpperOrLowerCase = (character, parameter) -> parameter ? Character.toUpperCase(character) : Character.toLowerCase(character);
+        Function2<Character, Boolean, Character> toUpperOrLowerCase = (character, parameter) -> parameter
+                ? Character.toUpperCase(character)
+                : Character.toLowerCase(character);
         Verify.assertThrows(UnsupportedOperationException.class, () -> biMap.updateValueWith(4, () -> 'd', toUpperOrLowerCase, true));
     }
 

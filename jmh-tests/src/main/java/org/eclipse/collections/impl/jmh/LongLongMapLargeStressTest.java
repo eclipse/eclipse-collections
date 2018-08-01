@@ -78,8 +78,12 @@ public class LongLongMapLargeStressTest extends AbstractJMHTestRunner
 
         long[] randomNumbersForMap = this.getRandomKeys(random).toArray();
 
-        this.ecLongKeysForMap = this.fullyRandom ? randomNumbersForMap : this.getECArray(number, lower, upper, random);
-        this.kolobokeLongKeysForMap = this.fullyRandom ? randomNumbersForMap : this.getKolobokeArray(number, lower, upper, random);
+        this.ecLongKeysForMap = this.fullyRandom
+                ? randomNumbersForMap
+                : this.getECArray(number, lower, upper, random);
+        this.kolobokeLongKeysForMap = this.fullyRandom
+                ? randomNumbersForMap
+                : this.getKolobokeArray(number, lower, upper, random);
 
         for (int i = 0; i < KEY_COUNT; i++)
         {

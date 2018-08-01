@@ -448,7 +448,9 @@ public abstract class AbstractMutableBiMapTestCase extends MutableMapIterableTes
     public void updateValueWith()
     {
         MutableBiMap<Integer, Character> biMap = this.classUnderTest();
-        Function2<Character, Boolean, Character> toUpperOrLowerCase = (character, parameter) -> parameter ? Character.toUpperCase(character) : Character.toLowerCase(character);
+        Function2<Character, Boolean, Character> toUpperOrLowerCase = (character, parameter) -> parameter
+                ? Character.toUpperCase(character)
+                : Character.toLowerCase(character);
         Assert.assertEquals(Character.valueOf('D'), biMap.updateValueWith(4, () -> 'd', toUpperOrLowerCase, true));
         AbstractMutableBiMapTestCase.assertBiMapsEqual(HashBiMap.newWithKeysValues(1, null, null, 'b', 3, 'c', 4, 'D'), biMap);
         Assert.assertEquals(Character.valueOf('B'), biMap.updateValueWith(null, () -> 'd', toUpperOrLowerCase, true));

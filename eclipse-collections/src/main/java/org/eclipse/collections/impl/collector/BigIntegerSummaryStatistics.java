@@ -75,7 +75,9 @@ public class BigIntegerSummaryStatistics implements Procedure<BigInteger>
 
     public BigDecimal getAverage(MathContext context)
     {
-        return this.count == 0L ? BigDecimal.ZERO : new BigDecimal(this.getSum()).divide(BigDecimal.valueOf(this.count), context);
+        return this.count == 0L
+                ? BigDecimal.ZERO
+                : new BigDecimal(this.getSum()).divide(BigDecimal.valueOf(this.count), context);
     }
 
     public BigDecimal getAverage()

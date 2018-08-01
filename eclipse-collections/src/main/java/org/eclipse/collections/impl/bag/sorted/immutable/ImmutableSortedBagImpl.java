@@ -762,7 +762,9 @@ class ImmutableSortedBagImpl<T>
     private class InternalIterator implements Iterator<T>
     {
         private int position;
-        private int occurrencesRemaining = ImmutableSortedBagImpl.this.isEmpty() ? 0 : ImmutableSortedBagImpl.this.occurrences[0];
+        private int occurrencesRemaining = ImmutableSortedBagImpl.this.isEmpty()
+                ? 0
+                : ImmutableSortedBagImpl.this.occurrences[0];
 
         @Override
         public boolean hasNext()

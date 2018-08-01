@@ -190,7 +190,9 @@ final class TripletonSet<T>
     @Override
     public MutableSet<T> with(T element)
     {
-        return this.contains(element) ? this : new QuadrupletonSet<>(this.element1, this.element2, this.element3, element);
+        return this.contains(element)
+                ? this
+                : new QuadrupletonSet<>(this.element1, this.element2, this.element3, element);
     }
 
     @Override

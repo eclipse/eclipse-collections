@@ -101,9 +101,13 @@ public final class ListIterate
         }
         if (one instanceof RandomAccess)
         {
-            return two instanceof RandomAccess ? ListIterate.randomAccessEquals(one, two) : ListIterate.oneRandomAccessEquals(one, two);
+            return two instanceof RandomAccess
+                    ? ListIterate.randomAccessEquals(one, two)
+                    : ListIterate.oneRandomAccessEquals(one, two);
         }
-        return two instanceof RandomAccess ? ListIterate.oneRandomAccessEquals(two, one) : ListIterate.nonRandomAccessEquals(one, two);
+        return two instanceof RandomAccess
+                ? ListIterate.oneRandomAccessEquals(two, one)
+                : ListIterate.nonRandomAccessEquals(one, two);
     }
 
     private static boolean randomAccessEquals(List<?> one, List<?> two)

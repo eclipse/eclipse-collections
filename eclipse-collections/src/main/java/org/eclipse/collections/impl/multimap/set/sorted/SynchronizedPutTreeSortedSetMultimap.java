@@ -57,7 +57,9 @@ public final class SynchronizedPutTreeSortedSetMultimap<K, V>
 
     public SynchronizedPutTreeSortedSetMultimap(Multimap<? extends K, ? extends V> multimap)
     {
-        this.comparator = multimap instanceof SortedSetMultimap<?, ?> ? ((SortedSetMultimap<K, V>) multimap).comparator() : null;
+        this.comparator = multimap instanceof SortedSetMultimap<?, ?>
+                ? ((SortedSetMultimap<K, V>) multimap).comparator()
+                : null;
         this.putAll(multimap);
     }
 

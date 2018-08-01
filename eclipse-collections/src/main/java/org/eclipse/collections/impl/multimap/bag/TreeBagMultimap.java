@@ -60,7 +60,9 @@ public final class TreeBagMultimap<K, V>
     public TreeBagMultimap(Multimap<? extends K, ? extends V> multimap)
     {
         super(Math.max(multimap.keysView().size() * 2, 16));
-        this.comparator = multimap instanceof SortedBagMultimap<?, ?> ? ((SortedBagMultimap<K, V>) multimap).comparator() : null;
+        this.comparator = multimap instanceof SortedBagMultimap<?, ?>
+                ? ((SortedBagMultimap<K, V>) multimap).comparator()
+                : null;
         this.putAll(multimap);
     }
 

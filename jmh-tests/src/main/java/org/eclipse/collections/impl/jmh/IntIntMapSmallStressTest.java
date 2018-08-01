@@ -95,9 +95,15 @@ public class IntIntMapSmallStressTest extends AbstractJMHTestRunner
         int number = 23;
         int lower = Integer.MIN_VALUE;
         int upper = Integer.MAX_VALUE;
-        this.kolobokeIntKeysForMap = this.fullyRandom ? randomNumbersForMap : this.getKolobokeArray(number, lower, upper, random);
-        this.ecIntKeysForMap = this.fullyRandom ? randomNumbersForMap : this.getECArray(number, lower, upper, random);
-        this.jdkIntKeysForMap = this.fullyRandom ? IntIntMapSmallStressTest.boxIntArray(randomNumbersForMap) : this.getJDKArray(lower, upper, random);
+        this.kolobokeIntKeysForMap = this.fullyRandom
+                ? randomNumbersForMap
+                : this.getKolobokeArray(number, lower, upper, random);
+        this.ecIntKeysForMap = this.fullyRandom
+                ? randomNumbersForMap
+                : this.getECArray(number, lower, upper, random);
+        this.jdkIntKeysForMap = this.fullyRandom
+                ? IntIntMapSmallStressTest.boxIntArray(randomNumbersForMap)
+                : this.getJDKArray(lower, upper, random);
 
         for (int i = 0; i < KEY_COUNT; i++)
         {
