@@ -13,9 +13,13 @@ body(type, name) ::= <<
 
 package org.eclipse.collections.impl.map.mutable.primitive;
 
+import org.eclipse.collections.api.block.function.Function;
+import org.eclipse.collections.api.block.function.primitive.<name>Function;
 import org.eclipse.collections.api.factory.map.primitive.MutableObject<name>MapFactory;
 import org.eclipse.collections.api.map.primitive.MutableObject<name>Map;
 import org.eclipse.collections.api.map.primitive.Object<name>Map;
+import org.eclipse.collections.impl.factory.primitive.Object<name>Maps;
+import org.eclipse.collections.impl.utility.Iterate;
 
 /**
  * MutableObject<name>MapFactoryImpl is a factory implementation which creates instances of type {@link MutableObject<name>Map}.
@@ -59,6 +63,14 @@ public enum MutableObject<name>MapFactoryImpl implements MutableObject<name>MapF
             return this.empty();
         }
         return new Object<name>HashMap\<>(map);
+    }
+
+    @Override
+    public \<T, K> MutableObject<name>Map\<K> from(Iterable\<T> iterable, Function\<? super T, ? extends K> keyFunction, <name>Function\<? super T> valueFunction)
+    {
+        MutableObject<name>Map\<K> map = Object<name>Maps.mutable.empty();
+        Iterate.forEach(iterable, each -> map.put(keyFunction.valueOf(each), valueFunction.<type>ValueOf(each)));
+        return map;
     }
 }
 

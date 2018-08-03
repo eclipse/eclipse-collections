@@ -13,6 +13,8 @@ body(type, name) ::= <<
 
 package org.eclipse.collections.api.factory.map.primitive;
 
+import org.eclipse.collections.api.block.function.Function;
+import org.eclipse.collections.api.block.function.primitive.<name>Function;
 import org.eclipse.collections.api.map.primitive.MutableObject<name>Map;
 import org.eclipse.collections.api.map.primitive.Object<name>Map;
 
@@ -42,6 +44,13 @@ public interface MutableObject<name>MapFactory
     \<K> MutableObject<name>Map\<K> ofAll(Object<name>Map\<? extends K>  map);
 
     \<K> MutableObject<name>Map\<K> withAll(Object<name>Map\<? extends K>  map);
+
+    /**
+     * Creates an {@code MutableObject<name>Map} from an {@code Iterable\<T>} by applying {@code keyFunction} and {@code valueFunction}.
+     *
+     * @since 10.0
+     */
+    \<T, K> MutableObject<name>Map\<K> from(Iterable\<T> iterable, Function\<? super T, ? extends K> keyFunction, <name>Function\<? super T> valueFunction);
 }
 
 >>
