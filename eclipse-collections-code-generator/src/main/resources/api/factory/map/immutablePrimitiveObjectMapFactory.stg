@@ -15,6 +15,8 @@ body(type, name) ::= <<
 
 package org.eclipse.collections.api.factory.map.primitive;
 
+import org.eclipse.collections.api.block.function.Function;
+import org.eclipse.collections.api.block.function.primitive.<name>Function;
 import org.eclipse.collections.api.map.primitive.Immutable<name>ObjectMap;
 import org.eclipse.collections.api.map.primitive.<name>ObjectMap;
 
@@ -54,6 +56,13 @@ public interface Immutable<name>ObjectMapFactory
     \<V> Immutable<name>ObjectMap\<V> ofAll(<name>ObjectMap\<? extends V> map);
 
     \<V> Immutable<name>ObjectMap\<V> withAll(<name>ObjectMap\<? extends V> map);
+
+    /**
+     * Creates an {@code Immutable<name>ObjectMap} from an {@code Iterable\<T>} by applying {@code keyFunction} and {@code valueFunction}.
+     *
+     * @since 10.0
+     */
+    \<T, V> Immutable<name>ObjectMap\<V> from(Iterable\<T> iterable, <name>Function\<? super T> keyFunction, Function\<? super T, ? extends V> valueFunction);
 }
 
 >>
