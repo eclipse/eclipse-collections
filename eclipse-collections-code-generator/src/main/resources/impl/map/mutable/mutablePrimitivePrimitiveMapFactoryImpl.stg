@@ -17,9 +17,13 @@ body(type1, type2, name1, name2) ::= <<
 
 package org.eclipse.collections.impl.map.mutable.primitive;
 
+import org.eclipse.collections.api.block.function.primitive.<name1>Function;
+<if(!sameTwoPrimitives)>import org.eclipse.collections.api.block.function.primitive.<name2>Function;<endif>
 import org.eclipse.collections.api.factory.map.primitive.Mutable<name1><name2>MapFactory;
+import org.eclipse.collections.impl.factory.primitive.<name1><name2>Maps;
 import org.eclipse.collections.api.map.primitive.Mutable<name1><name2>Map;
 import org.eclipse.collections.api.map.primitive.<name1><name2>Map;
+import org.eclipse.collections.impl.utility.Iterate;
 
 /**
  * Mutable<name1><name2>MapFactoryImpl is a factory implementation which creates instances of type {@link Mutable<name1><name2>Map}.
@@ -63,6 +67,14 @@ public enum Mutable<name1><name2>MapFactoryImpl implements Mutable<name1><name2>
             return this.empty();
         }
         return new <name1><name2>HashMap(map);
+    }
+
+    @Override
+    public \<T> Mutable<name1><name2>Map from(Iterable\<T> iterable, <name1>Function\<? super T> keyFunction, <name2>Function\<? super T> valueFunction)
+    {
+        Mutable<name1><name2>Map map = <name1><name2>Maps.mutable.empty();
+        Iterate.forEach(iterable, each -> map.put(keyFunction.<type1>ValueOf(each), valueFunction.<type2>ValueOf(each)));
+        return map;
     }
 }
 

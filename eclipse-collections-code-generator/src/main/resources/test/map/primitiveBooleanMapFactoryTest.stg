@@ -1,0 +1,49 @@
+import "copyright.stg"
+import "primitiveLiteral.stg"
+
+isTest() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/map/primitive"
+
+fileName(primitive) ::= "Immutable<primitive.name>BooleanMapFactoryImplTest"
+
+skipBoolean() ::= "true"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name, primitive.charPrimitive)>
+>>
+
+body(type, name, charPrimitive) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.map.primitive;
+
+import org.eclipse.collections.api.map.primitive.Immutable<name>BooleanMap;
+import org.eclipse.collections.api.map.primitive.Mutable<name>BooleanMap;
+import org.eclipse.collections.impl.factory.Lists;
+import org.eclipse.collections.impl.factory.primitive.<name>BooleanMaps;
+import org.eclipse.collections.impl.map.mutable.primitive.<name>BooleanHashMap;
+import org.junit.Assert;
+import org.junit.Test;
+
+/**
+ * This file was automatically generated from template file primitiveBooleanMapFactoryTest.stg.
+ */
+public class <name>BooleanMapFactoryTest
+{
+    @Test
+    public void from()
+    {
+        Iterable\<String> iterable = Lists.mutable.with("1", "2", "3");
+        Assert.assertEquals(
+            <name>BooleanHashMap.newWithKeysValues(<(literal.(type))("1")>, false, <(literal.(type))("2")>, true, <(literal.(type))("3")>, false),
+            <name>BooleanMaps.mutable.from(iterable, <if(!charPrimitive1)><wrapperName>::valueOf<else>each -> each.charAt(0)<endif>, each -> Integer.valueOf(each) % 2 == 0);
+        Assert.assertTrue(<name>BooleanMaps.mutable.from(iterable, <if(!charPrimitive1)><wrapperName>::valueOf<else>each -> each.charAt(0)<endif>, each -> Integer.valueOf(each) % 2 == 0) instanceof Mutable<name>BooleanMap);
+        Assert.assertEquals(
+            <name>BooleanHashMap.newWithKeysValues(<(literal.(type))("1")>, false, <(literal.(type))("2")>, true, <(literal.(type))("3")>, false),
+            <name>BooleanMaps.immutable.from(iterable, <if(!charPrimitive1)><wrapperName>::valueOf<else>each -> each.charAt(0)<endif>, each -> Integer.valueOf(each) % 2 == 0));
+        Assert.assertTrue(<name>BooleanMaps.immutable.from(iterable, <if(!charPrimitive1)><wrapperName>::valueOf<else>each -> each.charAt(0)<endif>, each -> Integer.valueOf(each) % 2 == 0) instanceof Immutable<name>BooleanMap);
+    }
+}
+
+>>

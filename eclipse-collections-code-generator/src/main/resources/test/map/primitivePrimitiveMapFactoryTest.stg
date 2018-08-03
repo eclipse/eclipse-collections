@@ -1,0 +1,57 @@
+import "copyright.stg"
+import "primitiveLiteral.stg"
+
+hasTwoPrimitives() ::= "true"
+
+isTest() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/map/primitive"
+
+fileName(primitive1, primitive2, primitive1.charPrimitive, primitive2.charPrimitive) ::= "<primitive1.name><primitive2.name>MapFactoryTest"
+
+skipBoolean() ::= "true"
+
+class(primitive1, primitive2, charPrimitive1, charPrimitive2) ::= <<
+<body(
+    type1 = primitive1.type,
+    type2 = primitive2.type,
+    name1 = primitive1.name,
+    name2 = primitive2.name,
+    charPrimitive1 = primitive1.charPrimitive,
+    charPrimitive2 = primitive2.charPrimitive)>
+>>
+
+body(type1, type2, name1, name2, charPrimitive1, charPrimitive2) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.map.primitive;
+
+import org.eclipse.collections.api.map.primitive.Immutable<name1><name2>Map;
+import org.eclipse.collections.api.map.primitive.Mutable<name1><name2>Map;
+import org.eclipse.collections.impl.factory.Lists;
+import org.eclipse.collections.impl.factory.primitive.<name1><name2>Maps;
+import org.eclipse.collections.impl.map.mutable.primitive.<name1><name2>HashMap;
+import org.junit.Assert;
+import org.junit.Test;
+
+/**
+ * This file was automatically generated from template file primitivePrimitiveMapFactoryTest.stg.
+ */
+public class <name1><name2>MapFactoryTest
+{
+    @Test
+    public void from()
+    {
+        Iterable\<String> iterable = Lists.mutable.with("1", "2", "3");
+        Assert.assertEquals(
+            <name1><name2>HashMap.newWithKeysValues(<(literal.(type))("1")>, <(literal.(type))("1")>, <(literal.(type))("2")>, <(literal.(type))("2")>, <(literal.(type))("3")>, <(literal.(type))("3")>),
+            <name1><name2>Maps.mutable.from(iterable, <if(!charPrimitive1)><wrapperName>::valueOf<else>each -> each.charAt(0)<endif>, <if(!charPrimitive2)><wrapperName>::valueOf<else>each -> each.charAt(0)<endif>));
+        Assert.assertTrue(<name1><name2>Maps.mutable.from(iterable, <if(!charPrimitive1)><wrapperName>::valueOf<else>each -> each.charAt(0)<endif>, <if(!charPrimitive2)><wrapperName>::valueOf<else>each -> each.charAt(0)<endif>) instanceof Mutable<name1><name2>Map);
+        Assert.assertEquals(
+                    <name1><name2>HashMap.newWithKeysValues(<(literal.(type))("1")>, <(literal.(type))("1")>, <(literal.(type))("2")>, <(literal.(type))("2")>, <(literal.(type))("3")>, <(literal.(type))("3")>),
+                    <name1><name2>Maps.immutable.from(iterable, <if(!charPrimitive1)><wrapperName>::valueOf<else>each -> each.charAt(0)<endif>, <if(!charPrimitive2)><wrapperName>::valueOf<else>each -> each.charAt(0)<endif>));
+        Assert.assertTrue(<name1><name2>Maps.immutable.from(iterable, <if(!charPrimitive1)><wrapperName>::valueOf<else>each -> each.charAt(0)<endif>, <if(!charPrimitive2)><wrapperName>::valueOf<else>each -> each.charAt(0)<endif>) instanceof Immutable<name1><name2>Map);
+    }
+}
+
+>>

@@ -17,6 +17,8 @@ body(type1, type2, name1, name2) ::= <<
 
 package org.eclipse.collections.api.factory.map.primitive;
 
+import org.eclipse.collections.api.block.function.primitive.<name1>Function;
+<if(!sameTwoPrimitives)>import org.eclipse.collections.api.block.function.primitive.<name2>Function;<endif>
 import org.eclipse.collections.api.map.primitive.<name1><name2>Map;
 import org.eclipse.collections.api.map.primitive.Immutable<name1><name2>Map;
 
@@ -56,6 +58,13 @@ public interface Immutable<name1><name2>MapFactory
     Immutable<name1><name2>Map ofAll(<name1><name2>Map map);
 
     Immutable<name1><name2>Map withAll(<name1><name2>Map map);
+
+    /**
+     * Creates an {@code Immutable<name1><name2>Map} from an {@code Iterable\<T>} by applying {@code keyFunction} and {@code valueFunction}.
+     *
+     * @since 10.0
+     */
+    \<T> Immutable<name1><name2>Map from(Iterable\<T> iterable, <name1>Function\<? super T> keyFunction, <name2>Function\<? super T> valueFunction);
 }
 
 >>
