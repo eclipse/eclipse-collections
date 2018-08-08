@@ -27,7 +27,7 @@
     <properties>
         <maven.deploy.skip>true</maven.deploy.skip>
         <sonar.skip>true</sonar.skip>
-        <jmh.version>1.19</jmh.version>
+        <jmh.version>1.21</jmh.version>
     </properties>
 
     <dependencies>
@@ -94,7 +94,7 @@
         <dependency>
             <groupId>com.carrotsearch</groupId>
             <artifactId>hppc</artifactId>
-            <version>0.7.2</version>
+            <version>0.8.1</version>
         </dependency>
 
         <dependency>
