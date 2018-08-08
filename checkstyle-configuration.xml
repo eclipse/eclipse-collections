@@ -118,7 +118,7 @@
         </module>
 
         <module name="SeparatorWrap">
-            <property name="tokens" value="COMMA" />
+            <property name="tokens" value="COMMA, RPAREN" />
             <property name="option" value="EOL" />
         </module>
 

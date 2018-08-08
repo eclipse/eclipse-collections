@@ -174,8 +174,7 @@ public class BooleanSetsTest
                 PrimitiveTuples.pair(true, false),
                 PrimitiveTuples.pair(true, true),
                 PrimitiveTuples.pair(false, true),
-                PrimitiveTuples.pair(false, false)
-        );
+                PrimitiveTuples.pair(false, false));
 
         Assert.assertEquals(expected, booleanBooleanPairs.toSet());
     }
