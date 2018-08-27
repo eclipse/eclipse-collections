@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018 Goldman Sachs.
+ * Copyright (c) 2018 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -15,6 +15,7 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
+import java.util.function.UnaryOperator;
 
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.primitive.BooleanFunction;
@@ -85,6 +86,22 @@ final class EmptyList<T>
     public T set(int index, T element)
     {
         throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + this.size());
+    }
+
+    /**
+     * @since 10.0 - Overridden for efficiency
+     */
+    @Override
+    public void replaceAll(UnaryOperator<T> operator)
+    {
+    }
+
+    /**
+     * @since 10.0 - Overridden for efficiency
+     */
+    @Override
+    public void sort(Comparator<? super T> comparator)
+    {
     }
 
     @Override

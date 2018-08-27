@@ -44,7 +44,6 @@ import org.eclipse.collections.api.list.primitive.MutableShortList;
 import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.partition.list.PartitionMutableList;
 import org.eclipse.collections.api.tuple.Pair;
-import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.block.procedure.CollectionAddProcedure;
 import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.lazy.ReverseIterable;
@@ -59,7 +58,6 @@ import org.eclipse.collections.impl.list.mutable.primitive.ShortArrayList;
 import org.eclipse.collections.impl.multimap.list.FastListMultimap;
 import org.eclipse.collections.impl.utility.ArrayIterate;
 import org.eclipse.collections.impl.utility.ArrayListIterate;
-import org.eclipse.collections.impl.utility.Iterate;
 import org.eclipse.collections.impl.utility.internal.RandomAccessListIterate;
 
 /**
@@ -227,17 +225,31 @@ public final class ArrayListAdapter<T>
         ArrayListIterate.forEach(this.delegate, fromIndex, toIndex, procedure);
     }
 
+    /**
+     * @since 10.0 - Override for correctness
+     */
+    @Override
+    public void sort(Comparator<? super T> comparator)
+    {
+        this.delegate.sort(comparator);
+    }
+
+    /**
+     * @since 10.0 - Override for backwards compatibility
+     */
     @Override
     public ArrayListAdapter<T> sortThis(Comparator<? super T> comparator)
     {
-        Iterate.sortThis(this.delegate, comparator);
-        return this;
+        return (ArrayListAdapter<T>) super.sortThis(comparator);
     }
 
+    /**
+     * @since 10.0 - Override for backwards compatibility
+     */
     @Override
     public ArrayListAdapter<T> sortThis()
     {
-        return this.sortThis(Comparators.naturalOrder());
+        return (ArrayListAdapter<T>) super.sortThis();
     }
 
     @Override

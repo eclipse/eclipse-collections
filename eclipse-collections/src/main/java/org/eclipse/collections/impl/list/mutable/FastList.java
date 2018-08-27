@@ -30,6 +30,7 @@ import java.util.Spliterators;
 import java.util.function.BiConsumer;
 import java.util.function.BinaryOperator;
 import java.util.function.Supplier;
+import java.util.function.UnaryOperator;
 import java.util.stream.Collector;
 
 import org.eclipse.collections.api.block.HashingStrategy;
@@ -262,18 +263,27 @@ public class FastList<T>
         return this.toArray((E[]) new Object[sourceToIndex - sourceFromIndex + 1], sourceFromIndex, sourceToIndex, 0);
     }
 
+    /**
+     * Overrides default method from List.
+     *
+     * @since 10.0 - Overridden for efficiency
+     */
+    @Override
+    public void sort(Comparator<? super T> comparator)
+    {
+        Arrays.sort(this.items, 0, this.size, comparator);
+    }
+
     @Override
     public FastList<T> sortThis(Comparator<? super T> comparator)
     {
-        Arrays.sort(this.items, 0, this.size, comparator);
-        return this;
+        return (FastList<T>) super.sortThis(comparator);
     }
 
     @Override
     public FastList<T> sortThis()
     {
-        Arrays.sort(this.items, 0, this.size);
-        return this;
+        return (FastList<T>) super.sortThis();
     }
 
     @Override
@@ -1550,6 +1560,15 @@ public class FastList<T>
             hashCode = 31 * hashCode + (item == null ? 0 : item.hashCode());
         }
         return hashCode;
+    }
+
+    /**
+     * @since 10.0
+     */
+    @Override
+    public void replaceAll(UnaryOperator<T> operator)
+    {
+        InternalArrayIterate.replaceAll(this.items, this.size, operator);
     }
 
     @Override

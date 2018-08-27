@@ -19,6 +19,7 @@ import java.util.ListIterator;
 import java.util.Optional;
 import java.util.Random;
 import java.util.concurrent.ExecutorService;
+import java.util.function.UnaryOperator;
 
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.block.HashingStrategy;
@@ -213,6 +214,30 @@ public class SynchronizedMutableList<T>
         synchronized (this.getLock())
         {
             return this.getDelegate().get(index);
+        }
+    }
+
+    /**
+     * @since 10.0 - Overridden for correctness
+     */
+    @Override
+    public void replaceAll(UnaryOperator<T> operator)
+    {
+        synchronized (this.getLock())
+        {
+            this.getDelegate().replaceAll(operator);
+        }
+    }
+
+    /**
+     * @since 10.0 - Overridden for correctness
+     */
+    @Override
+    public void sort(Comparator<? super T> comparator)
+    {
+        synchronized (this.getLock())
+        {
+            this.getDelegate().sort(comparator);
         }
     }
 

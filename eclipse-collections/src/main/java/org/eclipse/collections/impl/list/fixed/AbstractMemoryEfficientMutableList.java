@@ -11,6 +11,8 @@
 package org.eclipse.collections.impl.list.fixed;
 
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.ListIterator;
 import java.util.RandomAccess;
 
@@ -19,6 +21,7 @@ import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.list.FixedSizeList;
 import org.eclipse.collections.api.list.MutableList;
+import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.list.mutable.AbstractMutableList;
 import org.eclipse.collections.impl.utility.Iterate;
@@ -122,6 +125,33 @@ public abstract class AbstractMemoryEfficientMutableList<T>
     public void clear()
     {
         throw new UnsupportedOperationException("Cannot clear a fixed size list: " + this.getClass());
+    }
+
+    /**
+     * This method checks if comparator is null and use a ComparableComparator if it is.
+     *
+     * @since 10.0
+     */
+    @Override
+    public void sort(Comparator<? super T> comparator)
+    {
+        this.insertionSort(Comparators.comparableComparatorIfNull(comparator));
+    }
+
+    private void insertionSort(Comparator<? super T> comparator)
+    {
+        for (int i = 0; i < this.size(); i++)
+        {
+            for (int j = i; this.isPreviousGreaterThanCurrent(comparator, j); j--)
+            {
+                Collections.swap(this, j - 1, j);
+            }
+        }
+    }
+
+    private boolean isPreviousGreaterThanCurrent(Comparator<? super T> comparator, int index)
+    {
+        return index > 0 && comparator.compare(this.get(index - 1), this.get(index)) > 0;
     }
 
     @Override

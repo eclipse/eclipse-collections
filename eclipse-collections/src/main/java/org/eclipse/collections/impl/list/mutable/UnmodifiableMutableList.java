@@ -19,6 +19,7 @@ import java.util.ListIterator;
 import java.util.Random;
 import java.util.RandomAccess;
 import java.util.concurrent.ExecutorService;
+import java.util.function.UnaryOperator;
 
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.block.HashingStrategy;
@@ -219,6 +220,24 @@ public class UnmodifiableMutableList<T>
     public <V extends Comparable<? super V>> MutableList<T> sortThisBy(Function<? super T, ? extends V> function)
     {
         throw new UnsupportedOperationException("Cannot call sortThisBy() on " + this.getClass().getSimpleName());
+    }
+
+    /**
+     * @since 10.0 - Overridden for correctness
+     */
+    @Override
+    public void replaceAll(UnaryOperator<T> operator)
+    {
+        throw new UnsupportedOperationException("Cannot call replaceAll() on " + this.getClass().getSimpleName());
+    }
+
+    /**
+     * @since 10.0 - Overridden for correctness
+     */
+    @Override
+    public void sort(Comparator<? super T> comparator)
+    {
+        throw new UnsupportedOperationException("Cannot call sort() on " + this.getClass().getSimpleName());
     }
 
     @Override

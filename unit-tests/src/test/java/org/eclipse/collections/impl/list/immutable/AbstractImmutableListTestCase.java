@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 Goldman Sachs and others.
+ * Copyright (c) 2018 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -12,6 +12,7 @@ package org.eclipse.collections.impl.list.immutable;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
@@ -450,7 +451,22 @@ public abstract class AbstractImmutableListTestCase extends AbstractImmutableCol
     @Test
     public void addAllAtIndex()
     {
-        Verify.assertThrows(UnsupportedOperationException.class, () -> this.classUnderTest().castToList().addAll(0, Lists.fixedSize.of()));
+        Verify.assertThrows(UnsupportedOperationException.class,
+                () -> this.classUnderTest().castToList().addAll(0, Lists.fixedSize.of()));
+    }
+
+    @Test
+    public void sort()
+    {
+        Verify.assertThrows(UnsupportedOperationException.class,
+                () -> this.classUnderTest().castToList().sort(Comparator.naturalOrder()));
+    }
+
+    @Test
+    public void replaceAll()
+    {
+        Verify.assertThrows(UnsupportedOperationException.class,
+                () -> this.classUnderTest().castToList().replaceAll(i -> i * 2));
     }
 
     @Test
@@ -461,22 +477,25 @@ public abstract class AbstractImmutableListTestCase extends AbstractImmutableCol
                 this.classUnderTest().castToList().subList(0, 1));
     }
 
-    @Test(expected = IndexOutOfBoundsException.class)
+    @Test
     public void subListFromNegative()
     {
-        this.classUnderTest().castToList().subList(-1, 1);
+        Verify.assertThrows(IndexOutOfBoundsException.class,
+                () -> this.classUnderTest().castToList().subList(-1, 1));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void subListFromGreaterThanTO()
     {
-        this.classUnderTest().castToList().subList(1, 0);
+        Verify.assertThrows(IllegalArgumentException.class,
+                () -> this.classUnderTest().castToList().subList(1, 0));
     }
 
-    @Test(expected = IndexOutOfBoundsException.class)
+    @Test
     public void subListToGreaterThanSize()
     {
-        this.classUnderTest().castToList().subList(0, 100);
+        Verify.assertThrows(IndexOutOfBoundsException.class,
+                () -> this.classUnderTest().castToList().subList(0, 100));
     }
 
     @Test
@@ -499,16 +518,18 @@ public abstract class AbstractImmutableListTestCase extends AbstractImmutableCol
         Verify.assertThrows(UnsupportedOperationException.class, () -> it.set(null));
     }
 
-    @Test(expected = IndexOutOfBoundsException.class)
+    @Test
     public void listIterator_throwsNegative()
     {
-        this.classUnderTest().listIterator(-1);
+        Verify.assertThrows(IndexOutOfBoundsException.class,
+                () -> this.classUnderTest().listIterator(-1));
     }
 
-    @Test(expected = IndexOutOfBoundsException.class)
+    @Test
     public void listIterator_throwsGreaterThanSize()
     {
-        this.classUnderTest().listIterator(100);
+        Verify.assertThrows(IndexOutOfBoundsException.class,
+                () -> this.classUnderTest().listIterator(100));
     }
 
     @Test
@@ -534,10 +555,10 @@ public abstract class AbstractImmutableListTestCase extends AbstractImmutableCol
         Assert.assertSame(immutableList, immutableList.take(Integer.MAX_VALUE));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void take_throws()
     {
-        this.classUnderTest().take(-1);
+        Verify.assertThrows(IllegalArgumentException.class, () -> this.classUnderTest().take(-1));
     }
 
     @Test
@@ -567,10 +588,10 @@ public abstract class AbstractImmutableListTestCase extends AbstractImmutableCol
         Assert.assertEquals(Lists.immutable.of(), immutableList.drop(Integer.MAX_VALUE));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void drop_throws()
     {
-        this.classUnderTest().drop(-1);
+        Verify.assertThrows(IllegalArgumentException.class, () -> this.classUnderTest().drop(-1));
     }
 
     @Test

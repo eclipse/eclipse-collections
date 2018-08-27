@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2018 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -14,6 +14,7 @@ import java.io.Externalizable;
 import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
+import java.util.function.UnaryOperator;
 
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
@@ -153,6 +154,20 @@ final class SextupletonList<T>
             default:
                 throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + this.size());
         }
+    }
+
+    /**
+     * @since 10.0 - Overridden for efficiency
+     */
+    @Override
+    public void replaceAll(UnaryOperator<T> operator)
+    {
+        this.element1 = operator.apply(this.element1);
+        this.element2 = operator.apply(this.element2);
+        this.element3 = operator.apply(this.element3);
+        this.element4 = operator.apply(this.element4);
+        this.element5 = operator.apply(this.element5);
+        this.element6 = operator.apply(this.element6);
     }
 
     @Override

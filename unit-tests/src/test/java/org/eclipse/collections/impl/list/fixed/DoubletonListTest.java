@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2018 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -11,6 +11,7 @@
 package org.eclipse.collections.impl.list.fixed;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import org.eclipse.collections.api.list.MutableList;
@@ -202,5 +203,18 @@ public class DoubletonListTest extends AbstractMemoryEfficientMutableListTestCas
     public void testGetOnly()
     {
         Verify.assertThrows(IllegalStateException.class, () -> this.list.getOnly());
+    }
+
+    @Override
+    @Test
+    public void sort()
+    {
+        super.sort();
+        MutableList<String> strings = this.classUnderTest().reverseThis();
+        strings.sort(Comparator.naturalOrder());
+        Assert.assertEquals(this.classUnderTest(), strings);
+        MutableList<String> strings2 = this.classUnderTest().reverseThis();
+        strings2.sort(null);
+        Assert.assertEquals(this.classUnderTest(), strings2);
     }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2018 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -13,11 +13,13 @@ package org.eclipse.collections.impl.list.fixed;
 import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Optional;
 import java.util.RandomAccess;
+import java.util.function.UnaryOperator;
 
 import org.eclipse.collections.api.block.HashingStrategy;
 import org.eclipse.collections.api.block.function.Function;
@@ -353,6 +355,24 @@ public abstract class AbstractArrayAdapter<T>
     public boolean retainAllIterable(Iterable<?> iterable)
     {
         throw new UnsupportedOperationException("Cannot call retainAllIterable() on " + this.getClass().getSimpleName());
+    }
+
+    /**
+     * @since 10.0 - Overridden for efficiency
+     */
+    @Override
+    public void replaceAll(UnaryOperator<T> operator)
+    {
+        InternalArrayIterate.replaceAll(this.items, this.items.length, operator);
+    }
+
+    /**
+     * @since 10.0
+     */
+    @Override
+    public void sort(Comparator<? super T> comparator)
+    {
+        Arrays.sort(this.items, 0, this.size(), comparator);
     }
 
     @Override

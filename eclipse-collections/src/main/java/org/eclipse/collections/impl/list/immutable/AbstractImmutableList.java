@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.RandomAccess;
 import java.util.concurrent.ExecutorService;
+import java.util.function.UnaryOperator;
 
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.block.HashingStrategy;
@@ -664,6 +665,24 @@ abstract class AbstractImmutableList<T>
     public T remove(int index)
     {
         throw new UnsupportedOperationException("Cannot call remove() on " + this.getClass().getSimpleName());
+    }
+
+    /**
+     * @since 10.0 - Override for correctness
+     */
+    @Override
+    public void replaceAll(UnaryOperator<T> operator)
+    {
+        throw new UnsupportedOperationException("Cannot call replaceAll() on " + this.getClass().getSimpleName());
+    }
+
+    /**
+     * @since 10.0 - Override for correctness
+     */
+    @Override
+    public void sort(Comparator<? super T> c)
+    {
+        throw new UnsupportedOperationException("Cannot call sort() on " + this.getClass().getSimpleName());
     }
 
     @Override
