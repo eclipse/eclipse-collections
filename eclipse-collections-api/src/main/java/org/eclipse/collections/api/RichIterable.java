@@ -105,6 +105,17 @@ public interface RichIterable<T>
     }
 
     /**
+     * Returns any element of an iterable.
+     *
+     * @return an element of an iterable.
+     * @since 10.0
+     */
+    default T getAny()
+    {
+        return this.getFirst();
+    }
+
+    /**
      * Returns the first element of an iterable.  In the case of a List it is the element at the first index.  In the
      * case of any other Collection, it is the first element that would be returned during an iteration.  If the
      * iterable is empty, null is returned.  If null is a valid element of the container, then a developer would need to

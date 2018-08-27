@@ -844,6 +844,15 @@ public abstract class AbstractRichIterableTestCase
     }
 
     @Test
+    public void getAny()
+    {
+        RichIterable<Integer> distinctElements = this.newWith(1, 2, 3);
+        Assert.assertTrue(distinctElements.contains(distinctElements.getAny()));
+        RichIterable<String> duplicateElements = this.newWith("a", "a", "b");
+        Assert.assertTrue(duplicateElements.contains(duplicateElements.getAny()));
+    }
+
+    @Test
     public void getFirst()
     {
         Assert.assertEquals(Integer.valueOf(1), this.newWith(1, 2, 3).getFirst());
