@@ -15,9 +15,12 @@ import org.eclipse.collections.api.block.function.primitive.BooleanFunction0;
 import org.eclipse.collections.api.iterator.MutableBooleanIterator;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.primitive.MutableObjectBooleanMap;
+import org.eclipse.collections.api.tuple.primitive.ObjectBooleanPair;
+import org.eclipse.collections.impl.factory.Iterables;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.list.mutable.primitive.BooleanArrayList;
 import org.eclipse.collections.impl.test.Verify;
+import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -472,6 +475,29 @@ public abstract class AbstractMutableObjectBooleanMapTestCase extends AbstractOb
         Assert.assertEquals(this.newWithKeysValues(1, true), hashMap.withoutAllKeys(FastList.newListWith(2)));
         Assert.assertEquals(ObjectBooleanHashMap.newMap(), hashMap.withoutAllKeys(FastList.newListWith(1)));
         Assert.assertEquals(ObjectBooleanHashMap.newMap(), hashMap.withoutAllKeys(FastList.newListWith(5, 6)));
+    }
+
+    @Test
+    public void withAllKeyValues()
+    {
+        MutableObjectBooleanMap<Integer> emptyMap = this.getEmptyMap();
+        MutableObjectBooleanMap<Integer> partialMap = this.newWithKeysValues(1, true, 3, false);
+        MutableObjectBooleanMap<Integer> completeMap = this.newWithKeysValues(1, true, 2, true, 3, false, 4, false);
+        Iterable<ObjectBooleanPair<Integer>> emptyIterable = Iterables.iList();
+        Iterable<ObjectBooleanPair<Integer>> partialIterable = Iterables.iList(
+                PrimitiveTuples.pair(Integer.valueOf(1), true), PrimitiveTuples.pair(Integer.valueOf(3), false));
+        Iterable<ObjectBooleanPair<Integer>> completeIterable = Iterables.iList(
+                PrimitiveTuples.pair(Integer.valueOf(1), true), PrimitiveTuples.pair(Integer.valueOf(2), true),
+                PrimitiveTuples.pair(Integer.valueOf(3), false), PrimitiveTuples.pair(Integer.valueOf(4), false));
+        Assert.assertEquals(emptyMap, emptyMap.withAllKeyValues(emptyIterable));
+        Assert.assertEquals(partialMap, emptyMap.withAllKeyValues(partialIterable));
+        Assert.assertEquals(completeMap, emptyMap.withAllKeyValues(completeIterable));
+        Assert.assertEquals(partialMap, partialMap.withAllKeyValues(emptyIterable));
+        Assert.assertEquals(partialMap, partialMap.withAllKeyValues(partialIterable));
+        Assert.assertEquals(completeMap, partialMap.withAllKeyValues(completeIterable));
+        Assert.assertEquals(completeMap, completeMap.withAllKeyValues(emptyIterable));
+        Assert.assertEquals(completeMap, completeMap.withAllKeyValues(partialIterable));
+        Assert.assertEquals(completeMap, completeMap.withAllKeyValues(completeIterable));
     }
 
     @Test

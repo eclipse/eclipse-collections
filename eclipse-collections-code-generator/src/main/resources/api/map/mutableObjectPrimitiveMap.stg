@@ -99,6 +99,15 @@ public interface MutableObject<name>Map\<K> extends Object<name>Map\<K>
 
     MutableObject<name>Map\<K> withoutAllKeys(Iterable\<? extends K> keys);
 
+    default MutableObject<name>Map\<K> withAllKeyValues(Iterable\<Object<name>Pair\<K>\> keyValuePairs)
+    {
+        for (Object<name>Pair\<K> keyValuePair : keyValuePairs)
+        {
+            this.putPair(keyValuePair);
+        }
+        return this;
+    }
+
     MutableObject<name>Map\<K> asUnmodifiable();
 
     MutableObject<name>Map\<K> asSynchronized();

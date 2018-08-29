@@ -27,6 +27,7 @@ import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
 import org.eclipse.collections.api.map.primitive.Mutable<name>ObjectMap;
+import org.eclipse.collections.impl.factory.Iterables;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.impl.block.factory.Functions0;
 import org.eclipse.collections.impl.block.function.AddFunction;
@@ -139,6 +140,13 @@ public class Unmodifiable<name>ObjectMapTest extends AbstractMutable<name>Object
     public void withoutAllKeys()
     {
         this.map.withoutAllKeys(<name>ArrayList.newListWith(<(literal.(type))("0")>, <(literal.(type))("32")>));
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void withAllKeyValues()
+    {
+        this.map.withAllKeyValues(Iterables.iList(PrimitiveTuples.pair(<(literal.(type))("1")>, "one")));
     }
 
     @Override

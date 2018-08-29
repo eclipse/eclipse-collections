@@ -30,6 +30,7 @@ import org.eclipse.collections.api.iterator.Mutable<name2>Iterator;
 import org.eclipse.collections.impl.list.mutable.primitive.<name1>ArrayList;
 import org.eclipse.collections.api.map.primitive.Mutable<name1><name2>Map;
 import org.eclipse.collections.api.set.primitive.<name1>Set;
+import org.eclipse.collections.impl.factory.Iterables;
 import org.eclipse.collections.impl.set.mutable.primitive.<name1>HashSet;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
@@ -155,6 +156,13 @@ public class Unmodifiable<name1><name2>MapTest extends AbstractMutable<name1><na
     public void withoutAllKeys()
     {
         this.map.withoutAllKeys(<name1>ArrayList.newListWith(<(literal.(type1))("0")>, <(literal.(type1))("32")>));
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void withAllKeyValues()
+    {
+        this.map.withAllKeyValues(Iterables.iList(PrimitiveTuples.pair(<(literal.(type1))("1")>, <(literal.(type2))("1")>)));
     }
 
     @Override
