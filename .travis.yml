@@ -24,6 +24,8 @@ env:
   -JDK=Java11-EA
 
 matrix:
+  allow_failures:
+    - env: JDK=Java11-EA
   fast_finish: true
   include:
     - jdk: oraclejdk8
