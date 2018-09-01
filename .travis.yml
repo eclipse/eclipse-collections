@@ -22,6 +22,7 @@ env:
   -JDK=Java9
   -JDK=Java10
   -JDK=Java11-EA
+  -JDK=Java12-EA
 
 matrix:
   fast_finish: true
@@ -71,6 +72,12 @@ matrix:
       env:
         - DESC="Java 11 regression"
         - JDK=Java11-EA
+        - CMD=""
+
+    - jdk: oraclejdk8
+      env:
+        - DESC="Java 12 regression"
+        - JDK=Java12-EA
         - CMD=""
 
   allow_failures:
