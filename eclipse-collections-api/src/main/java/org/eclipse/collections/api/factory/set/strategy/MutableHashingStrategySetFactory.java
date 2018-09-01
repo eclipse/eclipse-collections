@@ -35,4 +35,11 @@ public interface MutableHashingStrategySetFactory
     <T> MutableSet<T> ofAll(HashingStrategy<? super T> hashingStrategy, Iterable<? extends T> items);
 
     <T> MutableSet<T> withAll(HashingStrategy<? super T> hashingStrategy, Iterable<? extends T> items);
+
+    /**
+     * Same as {@link #ofInitialCapacity(HashingStrategy, int)}. of initial capacity.
+     */
+    <T> MutableSet<T> ofInitialCapacity(HashingStrategy<? super T> hashingStrategy, int capacity);
+
+    <T> MutableSet<T> withInitialCapacity(HashingStrategy<? super T> hashingStrategy, int capacity);
 }
