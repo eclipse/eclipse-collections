@@ -60,4 +60,7 @@ Java10)
 Java11-EA)
   install_jdk_and_run_ea_build ${JDK11_EA_URL}
   ;;
+Java12-EA)
+  install_jdk_and_run_ea_build ${JDK12_EA_URL}
+  ;;
 esac
