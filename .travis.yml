@@ -81,7 +81,17 @@ matrix:
         - CMD=""
 
   allow_failures:
-    - env: JDK=Java11-EA
+  - jdk: oraclejdk8
+    env:
+      - DESC="Java 11 regression"
+      - JDK=Java11-EA
+      - CMD=""
+
+  - jdk: oraclejdk8
+    env:
+      - DESC="Java 12 regression"
+      - JDK=Java12-EA
+      - CMD=""
 
 script:
   - ./.travis-command-ea-builds.sh
