@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-   <feature url="features/org.eclipse.collections.feature.source_9.2.0.qualifier.jar" id="org.eclipse.collections.feature.source" version="9.2.0.qualifier">
+   <feature url="features/org.eclipse.collections.feature.source_10.0.0.qualifier.jar" id="org.eclipse.collections.feature.source" version="10.0.0.qualifier">
       <category name="org.eclipse.collections.source"/>
    </feature>
    <category-def name="org.eclipse.collections" label="Eclipse Collections"/>
