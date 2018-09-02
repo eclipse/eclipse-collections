@@ -691,7 +691,7 @@ public final class Interval
             for (int i = this.from; i <= this.to && listIterator.hasNext(); i += this.step)
             {
                 Object object = listIterator.next();
-                if (this.intObjectEqual(i, object))
+                if (this.intObjectNotEqual(i, object))
                 {
                     return false;
                 }
@@ -702,7 +702,7 @@ public final class Interval
             for (int i = this.from; i >= this.to && listIterator.hasNext(); i += this.step)
             {
                 Object object = listIterator.next();
-                if (this.intObjectEqual(i, object))
+                if (this.intObjectNotEqual(i, object))
                 {
                     return false;
                 }
@@ -712,9 +712,9 @@ public final class Interval
         return !listIterator.hasNext();
     }
 
-    private boolean intObjectEqual(int i, Object object)
+    private boolean intObjectNotEqual(int i, Object object)
     {
-        return object == null || !(object instanceof Integer) || ((Integer) object).intValue() != i;
+        return !(object instanceof Integer) || ((Integer) object).intValue() != i;
     }
 
     @Override
