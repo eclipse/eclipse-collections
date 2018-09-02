@@ -34,6 +34,7 @@ import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.list.ParallelListIterable;
+import org.eclipse.collections.impl.AbstractRichIterable;
 import org.eclipse.collections.impl.block.factory.Predicates;
 import org.eclipse.collections.impl.lazy.parallel.list.NonParallelListIterable;
 import org.eclipse.collections.impl.parallel.BatchIterable;
@@ -178,7 +179,7 @@ public final class CompositeFastList<E>
     @Override
     public boolean isEmpty()
     {
-        return this.lists.allSatisfy(FastList<E>::isEmpty);
+        return this.lists.allSatisfy(AbstractRichIterable::isEmpty);
     }
 
     @Override

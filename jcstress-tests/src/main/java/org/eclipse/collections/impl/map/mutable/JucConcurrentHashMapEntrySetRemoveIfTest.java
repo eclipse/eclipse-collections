@@ -32,19 +32,19 @@ public class JucConcurrentHashMapEntrySetRemoveIfTest
     @Actor
     public void setFoo()
     {
-        map.put(1, false);
+        this.map.put(1, false);
     }
 
     @Actor
     public void removeIf()
     {
-        map.put(1, true);
-        map.entrySet().removeIf(Map.Entry::getValue);
+        this.map.put(1, true);
+        this.map.entrySet().removeIf(Map.Entry::getValue);
     }
 
     @Arbiter
     public void after(Z_Result r)
     {
-        r.r1 = map.containsKey(1) && map.get(1);
+        r.r1 = this.map.containsKey(1) && this.map.get(1);
     }
 }
