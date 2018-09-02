@@ -43,7 +43,7 @@ public class LongHashSetExtraTest
                     {
                         base = Math.pow((double) threshold[0], 1.0 / 128);
                         upperBound = threshold[0];
-                        threshold[0] = (long) (threshold[0] / base);
+                        threshold[0] /= base;
                     }
                 }
             }
