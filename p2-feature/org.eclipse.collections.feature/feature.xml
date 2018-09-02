@@ -2,7 +2,7 @@
 <feature
       id="org.eclipse.collections.feature"
       label="Eclipse Collections"
-      version="9.2.0.qualifier"
+      version="10.0.0.qualifier"
       provider-name="Eclipse Collections"
       license-feature="org.eclipse.license"
       license-feature-version="0.0.0">

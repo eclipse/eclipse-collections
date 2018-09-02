@@ -12,7 +12,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.eclipse.collections</groupId>
-    <version>9.2.0-SNAPSHOT</version>
+    <version>10.0.0-SNAPSHOT</version>
     <artifactId>p2-feature</artifactId>
     <packaging>pom</packaging>
 
@@ -28,8 +28,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <!-- versions used for plug-ins below -->
-        <tycho-version>1.0.0</tycho-version>
-        <tycho-extras-version>1.0.0</tycho-extras-version>
+        <tycho-version>1.2.0</tycho-version>
+        <tycho-extras-version>1.2.0</tycho-extras-version>
 
         <!-- pattern/format used for the qualifier -->
         <qualifier.format>'v'yyyyMMdd-HHmm</qualifier.format>
@@ -48,6 +48,18 @@
             <plugin>
                 <groupId>org.eclipse.tycho</groupId>
                 <artifactId>tycho-maven-plugin</artifactId>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.eclipse.tycho</groupId>
+                        <artifactId>tycho-core</artifactId>
+                        <version>${tycho-version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.eclipse.tycho</groupId>
+                        <artifactId>tycho-p2-facade</artifactId>
+                        <version>${tycho-version}</version>
+                    </dependency>
+                </dependencies>
                 <extensions>true</extensions>
             </plugin>
 
