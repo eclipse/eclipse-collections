@@ -1783,7 +1783,7 @@ public class ConcurrentHashMapUnsafe<K, V>
         {
             Objects.requireNonNull(col);
             boolean removed = false;
-            final ValueIterator itr = new ValueIterator();
+            ValueIterator itr = new ValueIterator();
             while (itr.hasNext())
             {
                 if (col.contains(itr.next()))
@@ -1799,7 +1799,7 @@ public class ConcurrentHashMapUnsafe<K, V>
         {
             Objects.requireNonNull(filter);
             boolean removed = false;
-            final ValueIterator itr = new ValueIterator();
+            ValueIterator itr = new ValueIterator();
             while (itr.hasNext())
             {
                 if (filter.test(itr.next()))
@@ -1868,7 +1868,7 @@ public class ConcurrentHashMapUnsafe<K, V>
         {
             Objects.requireNonNull(filter);
             boolean removed = false;
-            final EntryIterator itr = new EntryIterator();
+            EntryIterator itr = new EntryIterator();
             while (itr.hasNext())
             {
                 if (filter.test(itr.next()))
