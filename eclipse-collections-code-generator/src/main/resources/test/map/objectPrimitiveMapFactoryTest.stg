@@ -1,0 +1,70 @@
+import "copyright.stg"
+import "primitiveLiteral.stg"
+
+isTest() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/map/primitive"
+
+fileName(primitive) ::= "Object<primitive.name>MapFactoryTest"
+
+skipBoolean() ::= "true"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name, primitive.wrapperName, primitive.charPrimitive)>
+>>
+
+body(type, name, wrapperName, charPrimitive) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.map.primitive;
+
+import org.eclipse.collections.api.map.primitive.ImmutableObject<name>Map;
+import org.eclipse.collections.api.map.primitive.MutableObject<name>Map;
+import org.eclipse.collections.impl.factory.Lists;
+import org.eclipse.collections.impl.factory.primitive.Object<name>Maps;
+import org.eclipse.collections.impl.map.mutable.primitive.Object<name>HashMap;
+import org.junit.Assert;
+import org.junit.Test;
+
+/**
+ * This file was automatically generated from template file objectPrimitiveMapFactoryTest.stg.
+ */
+public class Object<name>MapFactoryTest
+{
+    @Test
+    public void of()
+    {
+        Assert.assertEquals(new Object<name>HashMap(), Object<name>Maps.mutable.of());
+        Assert.assertEquals(Object<name>Maps.mutable.of(), Object<name>Maps.mutable.empty());
+        Assert.assertEquals(Object<name>Maps.mutable.empty().toImmutable(), Object<name>Maps.immutable.empty());
+        Assert.assertEquals(Object<name>Maps.mutable.empty().toImmutable(), Object<name>Maps.immutable.of());
+        Assert.assertEquals(Object<name>HashMap.newWithKeysValues("2", <(literal.(type))("1")>).toImmutable(), Object<name>Maps.immutable.of("2", <(literal.(type))("1")>));
+    }
+
+    @Test
+    public void ofAll()
+    {
+        Assert.assertEquals(Object<name>Maps.mutable.empty(), Object<name>Maps.mutable.ofAll(Object<name>Maps.mutable.empty()));
+        Assert.assertEquals(Object<name>Maps.mutable.empty().toImmutable(), Object<name>Maps.immutable.ofAll(Object<name>Maps.mutable.empty()));
+        Assert.assertSame(Object<name>Maps.immutable.empty(), Object<name>Maps.immutable.ofAll(Object<name>Maps.immutable.empty()));
+        Assert.assertEquals(Object<name>HashMap.newWithKeysValues("2", <(literal.(type))("1")>), Object<name>Maps.mutable.ofAll(Object<name>HashMap.newWithKeysValues("2", <(literal.(type))("1")>)));
+        Assert.assertEquals(Object<name>HashMap.newWithKeysValues("2", <(literal.(type))("1")>).toImmutable(), Object<name>Maps.immutable.ofAll(Object<name>HashMap.newWithKeysValues("2", <(literal.(type))("1")>)));
+        Assert.assertEquals(Object<name>HashMap.newWithKeysValues("2", <(literal.(type))("1")>, "3", <(literal.(type))("3")>).toImmutable(), Object<name>Maps.immutable.ofAll(Object<name>HashMap.newWithKeysValues("2", <(literal.(type))("1")>, "3", <(literal.(type))("3")>)));
+    }
+
+    @Test
+    public void from()
+    {
+        Iterable\<String> iterable = Lists.mutable.with("1", "2", "3");
+        Assert.assertEquals(
+                Object<name>HashMap.newWithKeysValues("1", <if(!charPrimitive)><(literal.(type))("1")><else>'1'<endif>, "2", <if(!charPrimitive)><(literal.(type))("2")><else>'2'<endif>, "3", <if(!charPrimitive)><(literal.(type))("3")><else>'3'<endif>),
+                Object<name>Maps.mutable.from(iterable, each -> each, <if(!charPrimitive)><wrapperName>::valueOf<else>each -> each.charAt(0)<endif>));
+        Assert.assertTrue(Object<name>Maps.mutable.from(iterable, each -> each, <if(!charPrimitive)><wrapperName>::valueOf<else>each -> each.charAt(0)<endif>) instanceof MutableObject<name>Map);
+        Assert.assertEquals(
+                Object<name>HashMap.newWithKeysValues("1", <if(!charPrimitive)><(literal.(type))("1")><else>'1'<endif>, "2", <if(!charPrimitive)><(literal.(type))("2")><else>'2'<endif>, "3", <if(!charPrimitive)><(literal.(type))("3")><else>'3'<endif>),
+                Object<name>Maps.immutable.from(iterable, each -> each, <if(!charPrimitive)><wrapperName>::valueOf<else>each -> each.charAt(0)<endif>));
+        Assert.assertTrue(Object<name>Maps.immutable.from(iterable, each -> each, <if(!charPrimitive)><wrapperName>::valueOf<else>each -> each.charAt(0)<endif>) instanceof ImmutableObject<name>Map);
+    }
+}
+
+>>

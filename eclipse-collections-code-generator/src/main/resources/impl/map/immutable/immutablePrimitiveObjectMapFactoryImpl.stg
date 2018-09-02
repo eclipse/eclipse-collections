@@ -15,9 +15,12 @@ body(type, name) ::= <<
 
 package org.eclipse.collections.impl.map.immutable.primitive;
 
+import org.eclipse.collections.api.block.function.Function;
+import org.eclipse.collections.api.block.function.primitive.<name>Function;
 import org.eclipse.collections.api.factory.map.primitive.Immutable<name>ObjectMapFactory;
 import org.eclipse.collections.api.map.primitive.Immutable<name>ObjectMap;
 import org.eclipse.collections.api.map.primitive.<name>ObjectMap;
+import org.eclipse.collections.impl.factory.primitive.<name>ObjectMaps;
 
 /**
  * Immutable<name>ObjectMapFactoryImpl is a factory implementation which creates instances of type {@link Immutable<name>ObjectMap}.
@@ -84,6 +87,13 @@ public enum Immutable<name>ObjectMapFactoryImpl implements Immutable<name>Object
             return new Immutable<name>ObjectSingletonMap\<>(array[0], map.get(array[0]));
         }
         return new Immutable<name>ObjectHashMap\<>(map);
+    }
+
+    @Override
+    public \<T, V> Immutable<name>ObjectMap\<V> from(Iterable\<T> iterable, <name>Function\<? super T> keyFunction, Function\<? super T, ? extends V> valueFunction)
+    {
+        <name>ObjectMap\<V> map = <name>ObjectMaps.mutable.from(iterable, keyFunction, valueFunction);
+        return map.toImmutable();
     }
 }
 
