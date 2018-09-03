@@ -91,6 +91,15 @@ public interface Mutable<name>ObjectMap\<V> extends <name>ObjectMap\<V>, Mutable
 
     Mutable<name>ObjectMap\<V> withoutAllKeys(<name>Iterable keys);
 
+    default Mutable<name>ObjectMap\<V> withAllKeyValues(Iterable\<<name>ObjectPair\<V>\> keyValuePairs)
+    {
+        for (<name>ObjectPair\<V> keyValuePair : keyValuePairs)
+        {
+            this.putPair(keyValuePair);
+        }
+        return this;
+    }
+
     Mutable<name>ObjectMap\<V> asUnmodifiable();
 
     Mutable<name>ObjectMap\<V> asSynchronized();

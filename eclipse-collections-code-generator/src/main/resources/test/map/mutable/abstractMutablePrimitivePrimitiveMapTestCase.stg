@@ -32,6 +32,8 @@ import org.eclipse.collections.api.iterator.Mutable<name2>Iterator;
 import org.eclipse.collections.api.map.primitive.Mutable<name1><name2>Map;
 import org.eclipse.collections.api.list.primitive.MutableLongList;
 import org.eclipse.collections.api.set.primitive.<name1>Set;
+import org.eclipse.collections.api.tuple.primitive.<name1><name2>Pair;
+import org.eclipse.collections.impl.factory.Iterables;
 import org.eclipse.collections.impl.factory.primitive.LongLists;
 import org.eclipse.collections.impl.list.mutable.primitive.<name1>ArrayList;
 import org.eclipse.collections.impl.map.primitive.Abstract<name1><name2>MapTestCase;
@@ -733,6 +735,26 @@ public abstract class AbstractMutable<name1><name2>MapTestCase extends Abstract<
         Mutable<name1><name2>Map hashMap = this.getEmptyMap();
         Assert.assertSame(hashMap.withKeyValue(<(literal.(type1))("1")>, <(literal.(type2))("1")>), hashMap);
         Assert.assertEquals(<name1><name2>HashMap.newWithKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("1")>), hashMap);
+    }
+
+    @Test
+    public void withAllKeyValues()
+    {
+        Mutable<name1><name2>Map emptyMap = this.getEmptyMap();
+        Mutable<name1><name2>Map partialMap = this.newWithKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("1")>, <(literal.(type1))("3")>, <(literal.(type2))("3")>);
+        Mutable<name1><name2>Map completeMap = this.newWithKeysValues(<(literal.(type1))("1")>, <(literal.(type2))("1")>, <(literal.(type1))("2")>, <(literal.(type2))("2")>, <(literal.(type1))("3")>, <(literal.(type2))("3")>, <(literal.(type1))("4")>, <(literal.(type2))("4")>);
+        Iterable\<<name1><name2>Pair> emptyIterable = Iterables.iList();
+        Iterable\<<name1><name2>Pair> partialIterable = Iterables.iList(PrimitiveTuples.pair(<(literal.(type1))("1")>, <(literal.(type2))("1")>), PrimitiveTuples.pair(<(literal.(type1))("3")>, <(literal.(type2))("3")>));
+        Iterable\<<name1><name2>Pair> completeIterable = Iterables.iList(PrimitiveTuples.pair(<(literal.(type1))("1")>, <(literal.(type2))("1")>), PrimitiveTuples.pair(<(literal.(type1))("2")>, <(literal.(type2))("2")>), PrimitiveTuples.pair(<(literal.(type1))("3")>, <(literal.(type2))("3")>), PrimitiveTuples.pair(<(literal.(type1))("4")>, <(literal.(type2))("4")>));
+        Assert.assertEquals(emptyMap, emptyMap.withAllKeyValues(emptyIterable));
+        Assert.assertEquals(partialMap, emptyMap.withAllKeyValues(partialIterable));
+        Assert.assertEquals(completeMap, emptyMap.withAllKeyValues(completeIterable));
+        Assert.assertEquals(partialMap, partialMap.withAllKeyValues(emptyIterable));
+        Assert.assertEquals(partialMap, partialMap.withAllKeyValues(partialIterable));
+        Assert.assertEquals(completeMap, partialMap.withAllKeyValues(completeIterable));
+        Assert.assertEquals(completeMap, completeMap.withAllKeyValues(emptyIterable));
+        Assert.assertEquals(completeMap, completeMap.withAllKeyValues(partialIterable));
+        Assert.assertEquals(completeMap, completeMap.withAllKeyValues(completeIterable));
     }
 
     @Test

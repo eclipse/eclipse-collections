@@ -29,9 +29,11 @@ import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
 import org.eclipse.collections.api.map.primitive.Mutable<name>ObjectMap;
 import org.eclipse.collections.api.set.primitive.<name>Set;
+import org.eclipse.collections.api.tuple.primitive.<name>ObjectPair;
 import org.eclipse.collections.impl.block.factory.Functions0;
 import org.eclipse.collections.impl.block.factory.StringFunctions;
 import org.eclipse.collections.impl.block.function.AddFunction;
+import org.eclipse.collections.impl.factory.Iterables;
 import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
 import org.eclipse.collections.impl.map.primitive.Abstract<name>ObjectMapTestCase;
 import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
@@ -634,6 +636,26 @@ public abstract class AbstractMutable<name>ObjectMapTestCase extends Abstract<na
         Assert.assertEquals(<name>ObjectHashMap.newWithKeysValues(<(literal.(type))("32")>, "thirtyTwo"), this.map.withoutAllKeys(<name>ArrayList.newListWith(<(literal.(type))("0")>, <(literal.(type))("31")>)));
         Assert.assertEquals(<name>ObjectHashMap.newMap(), this.map.withoutAllKeys(<name>ArrayList.newListWith(<(literal.(type))("31")>, <(literal.(type))("32")>)));
         Assert.assertEquals(<name>ObjectHashMap.newMap(), this.map.withoutAllKeys(<name>ArrayList.newListWith(<(literal.(type))("1")>)));
+    }
+
+    @Test
+    public void withAllKeyValues()
+    {
+        Mutable<name>ObjectMap\<String> emptyMap = this.getEmptyMap();
+        Mutable<name>ObjectMap\<String> partialMap = this.newWithKeysValues(<(literal.(type))("1")>, "one", <(literal.(type))("3")>, "three");
+        Mutable<name>ObjectMap\<String> completeMap = this.newWithKeysValues(<(literal.(type))("1")>, "one", <(literal.(type))("2")>, "two", <(literal.(type))("3")>, "three");
+        Iterable\<<name>ObjectPair\<String>\> emptyIterable = Iterables.iList();
+        Iterable\<<name>ObjectPair\<String>\> partialIterable = Iterables.iList(PrimitiveTuples.pair(<(literal.(type))("1")>, "one"), PrimitiveTuples.pair(<(literal.(type))("3")>, "three"));
+        Iterable\<<name>ObjectPair\<String>\> completeIterable = Iterables.iList(PrimitiveTuples.pair(<(literal.(type))("1")>, "one"), PrimitiveTuples.pair(<(literal.(type))("2")>, "two"), PrimitiveTuples.pair(<(literal.(type))("3")>, "three"));
+        Assert.assertEquals(emptyMap, emptyMap.withAllKeyValues(emptyIterable));
+        Assert.assertEquals(partialMap, emptyMap.withAllKeyValues(partialIterable));
+        Assert.assertEquals(completeMap, emptyMap.withAllKeyValues(completeIterable));
+        Assert.assertEquals(partialMap, partialMap.withAllKeyValues(emptyIterable));
+        Assert.assertEquals(partialMap, partialMap.withAllKeyValues(partialIterable));
+        Assert.assertEquals(completeMap, partialMap.withAllKeyValues(completeIterable));
+        Assert.assertEquals(completeMap, completeMap.withAllKeyValues(emptyIterable));
+        Assert.assertEquals(completeMap, completeMap.withAllKeyValues(partialIterable));
+        Assert.assertEquals(completeMap, completeMap.withAllKeyValues(completeIterable));
     }
 
     @Override

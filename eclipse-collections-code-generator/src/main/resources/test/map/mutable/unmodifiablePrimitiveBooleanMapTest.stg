@@ -25,9 +25,11 @@ import org.eclipse.collections.api.block.function.primitive.BooleanFunction0;
 import org.eclipse.collections.api.block.function.primitive.BooleanToBooleanFunction;
 import org.eclipse.collections.api.block.function.primitive.<name>ToBooleanFunction;
 import org.eclipse.collections.api.iterator.MutableBooleanIterator;
+import org.eclipse.collections.impl.factory.Iterables;
 import org.eclipse.collections.impl.list.mutable.primitive.BooleanArrayList;
 import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
 import org.eclipse.collections.impl.test.Verify;
+import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -126,6 +128,13 @@ public class Unmodifiable<name>BooleanMapTest extends AbstractMutable<name>Boole
     public void withoutAllKeys()
     {
         this.classUnderTest().withoutAllKeys(<name>ArrayList.newListWith(<(literal.(type))("0")>, <(literal.(type))("32")>));
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void withAllKeyValues()
+    {
+        this.classUnderTest().withAllKeyValues(Iterables.iList(PrimitiveTuples.pair(<(literal.(type))("1")>, true)));
     }
 
     @Override

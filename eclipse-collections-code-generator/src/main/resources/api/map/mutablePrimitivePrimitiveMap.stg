@@ -76,6 +76,15 @@ public interface Mutable<name1><name2>Map extends <name1><name2>Map, Mutable<nam
 
     Mutable<name1><name2>Map withoutAllKeys(<name1>Iterable keys);
 
+    default Mutable<name1><name2>Map withAllKeyValues(Iterable\<<name1><name2>Pair> keyValuePairs)
+    {
+        for (<name1><name2>Pair keyValuePair : keyValuePairs)
+        {
+            this.putPair(keyValuePair);
+        }
+        return this;
+    }
+
     Mutable<name1><name2>Map asUnmodifiable();
 
     Mutable<name1><name2>Map asSynchronized();
