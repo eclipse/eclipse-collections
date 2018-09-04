@@ -60,8 +60,7 @@ public final class ObjectIntProcedureFJTaskRunner<T, BT extends ObjectIntProcedu
         this.procedures = new ObjectIntProcedureFJTask[this.taskCount];
 
         int sectionSize = list.size() / this.taskCount;
-        int size = this.taskCount;
-        for (int index = 0; index < size; index++)
+        for (int index = 0; index < this.taskCount; index++)
         {
             ObjectIntProcedureFJTask<T, BT> procedureFJTask =
                     new ObjectIntProcedureFJTask<>(this, procedureFactory, list, index, sectionSize, index == this.taskCount - 1);

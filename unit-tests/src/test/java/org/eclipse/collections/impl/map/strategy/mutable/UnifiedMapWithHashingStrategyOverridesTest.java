@@ -69,8 +69,7 @@ public class UnifiedMapWithHashingStrategyOverridesTest extends UnifiedMapWithHa
     public <K, V> UnifiedMapWithHashingStrategyOverrides<K, V> newMap()
     {
         HashingStrategy<K> nshs = HashingStrategies.nullSafeHashingStrategy(HashingStrategies.defaultStrategy());
-        UnifiedMapWithHashingStrategyOverrides<K, V> map = new UnifiedMapWithHashingStrategyOverrides<>(nshs);
-        return map;
+        return new UnifiedMapWithHashingStrategyOverrides<>(nshs);
     }
 
     @Override

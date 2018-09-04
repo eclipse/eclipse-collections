@@ -52,8 +52,7 @@ public final class ArrayProcedureFJTaskRunner<T, BT extends Procedure<? super T>
     {
         this.procedures = new ArrayProcedureFJTask[this.taskCount];
         int sectionSize = array.length / this.taskCount;
-        int size = this.taskCount;
-        for (int index = 0; index < size; index++)
+        for (int index = 0; index < this.taskCount; index++)
         {
             ArrayProcedureFJTask<T, BT> procedureFJTask = new ArrayProcedureFJTask<>(this, procedureFactory, array, index,
                     sectionSize, index == this.taskCount - 1);

@@ -48,8 +48,7 @@ public final class BatchIterableProcedureFJTaskRunner<T, BT extends Procedure<? 
     private void createAndExecuteTasks(Executor executor, ProcedureFactory<BT> procedureFactory, BatchIterable<T> batchIterable)
     {
         this.procedures = new BatchIterableProcedureFJTask[this.taskCount];
-        int size = this.taskCount;
-        for (int batchNumber = 0; batchNumber < size; batchNumber++)
+        for (int batchNumber = 0; batchNumber < this.taskCount; batchNumber++)
         {
             BatchIterableProcedureFJTask<T, BT> procedureFJTask =
                     new BatchIterableProcedureFJTask<>(this, procedureFactory, batchIterable, batchNumber, this.taskCount);

@@ -501,10 +501,9 @@ final class ImmutableArrayList<T>
         buf.append('[');
 
         int localSize = this.items.length;
-        T[] localItems = this.items;
         for (int i = 0; i < localSize; i++)
         {
-            T item = localItems[i];
+            T item = this.items[i];
             if (i > 0)
             {
                 buf.append(", ");
