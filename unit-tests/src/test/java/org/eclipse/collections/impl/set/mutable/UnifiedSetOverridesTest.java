@@ -36,7 +36,7 @@ public class UnifiedSetOverridesTest extends UnifiedSetTest
     @Override
     protected <T> UnifiedSet<T> newWith(T... littleElements)
     {
-        UnifiedSet<T> set = new UnifiedSetOverriddes<T>(littleElements.length);
+        UnifiedSet<T> set = new UnifiedSetOverriddes<>(littleElements.length);
         return set.with(littleElements);
     }
 }

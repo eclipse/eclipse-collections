@@ -34,13 +34,13 @@ public class UnifiedSetWithHashingStrategyOverridesTest extends UnifiedSetWithHa
         @Override
         public UnifiedSetWithHashingStrategyOverrides<T> newEmpty()
         {
-            return new UnifiedSetWithHashingStrategyOverrides<T>(this.hashingStrategy, 0);
+            return new UnifiedSetWithHashingStrategyOverrides<>(this.hashingStrategy, 0);
         }
 
         @Override
         public UnifiedSetWithHashingStrategyOverrides<T> newEmpty(int size)
         {
-            return new UnifiedSetWithHashingStrategyOverrides<T>(this.hashingStrategy, size);
+            return new UnifiedSetWithHashingStrategyOverrides<>(this.hashingStrategy, size);
         }
     }
 
