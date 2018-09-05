@@ -21,31 +21,31 @@ public interface FixedSizeMap<K, V>
         extends MutableMap<K, V>
 {
     /**
-     * @throws UnsupportedOperationException
+     * @throws UnsupportedOperationException the <tt>clear</tt> operation is not supported by this map.
      */
     @Override
     void clear();
 
     /**
-     * @throws UnsupportedOperationException
+     * @throws UnsupportedOperationException the <tt>put</tt> operation is not supported by this map.
      */
     @Override
     V put(K key, V value);
 
     /**
-     * @throws UnsupportedOperationException
+     * @throws UnsupportedOperationException the <tt>putAll</tt> operation is not supported by this map.
      */
     @Override
     void putAll(Map<? extends K, ? extends V> map);
 
     /**
-     * @throws UnsupportedOperationException
+     * @throws UnsupportedOperationException the <tt>remove</tt> operation is not supported by this map.
      */
     @Override
     V remove(Object key);
 
     /**
-     * @throws UnsupportedOperationException
+     * @throws UnsupportedOperationException the <tt>removeKey</tt> operation is not supported by this map.
      */
     @Override
     V removeKey(K key);

@@ -97,67 +97,67 @@ public interface FixedSizeCollection<T>
     MutableCollection<T> withoutAll(Iterable<? extends T> elements);
 
     /**
-     * @throws UnsupportedOperationException
+     * @throws UnsupportedOperationException the <tt>add</tt> operation is not supported by this collection.
      */
     @Override
     boolean add(T t);
 
     /**
-     * @throws UnsupportedOperationException
+     * @throws UnsupportedOperationException the <tt>addAllIterable</tt> operation is not supported by this collection.
      */
     @Override
     boolean addAllIterable(Iterable<? extends T> iterable);
 
     /**
-     * @throws UnsupportedOperationException
+     * @throws UnsupportedOperationException the <tt>addAll</tt> operation is not supported by this collection.
      */
     @Override
     boolean addAll(Collection<? extends T> collection);
 
     /**
-     * @throws UnsupportedOperationException
+     * @throws UnsupportedOperationException the <tt>remove</tt> operation is not supported by this collection.
      */
     @Override
     boolean remove(Object o);
 
     /**
-     * @throws UnsupportedOperationException
+     * @throws UnsupportedOperationException the <tt>removeAll</tt> method is not supported by this collection.
      */
     @Override
     boolean removeAll(Collection<?> collection);
 
     /**
-     * @throws UnsupportedOperationException
+     * @throws UnsupportedOperationException the <tt>removeAllIterable</tt> method is not supported by this collection.
      */
     @Override
     boolean removeAllIterable(Iterable<?> iterable);
 
     /**
-     * @throws UnsupportedOperationException
+     * @throws UnsupportedOperationException the <tt>removeIf</tt> method is not supported by this collection.
      */
     @Override
     boolean removeIf(Predicate<? super T> predicate);
 
     /**
-     * @throws UnsupportedOperationException
+     * @throws UnsupportedOperationException the <tt>removeIfWith</tt> method is not supported by this collection.
      */
     @Override
     <P> boolean removeIfWith(Predicate2<? super T, ? super P> predicate, P parameter);
 
     /**
-     * @throws UnsupportedOperationException
+     * @throws UnsupportedOperationException the <tt>retainAll</tt> method is not supported by this collection.
      */
     @Override
     boolean retainAll(Collection<?> collection);
 
     /**
-     * @throws UnsupportedOperationException
+     * @throws UnsupportedOperationException the <tt>retainAllIterable</tt> method is not supported by this collection.
      */
     @Override
     boolean retainAllIterable(Iterable<?> iterable);
 
     /**
-     * @throws UnsupportedOperationException
+     * @throws UnsupportedOperationException the <tt>clear</tt> method is not supported by this collection.
      */
     @Override
     void clear();
