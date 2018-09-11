@@ -173,7 +173,7 @@ public interface Bag<T>
      * Assert.assertEquals("{1=1, 2=2, 3=3}", Bags.mutable.with(1, 2, 2, 3, 3, 3).toStringOfItemToCount());
      * </pre>
      * This string representation is similar to {@link java.util.AbstractMap#toString()}, not {@link RichIterable#toString()},
-     * whereas the <code>toString()</code> implementation for a Bag is consistent with {@link RichIterable#toString()}.
+     * whereas the {@code toString()} implementation for a Bag is consistent with {@link RichIterable#toString()}.
      *
      * @return a string representation of this bag
      * @since 3.0

@@ -179,7 +179,7 @@ public interface MutableCollection<T>
      * MutableCollection&lt;Person&gt; notSmiths =
      *     people.reject(person -> person.person.getLastName().equals("Smith"));
      * </pre>
-     * Using the <code>Predicates</code> factory:
+     * Using the {@code Predicates} factory:
      * <p>
      * <pre>
      * MutableCollection&lt;Person&gt; notSmiths = people.reject(Predicates.attributeEqual("lastName", "Smith"));

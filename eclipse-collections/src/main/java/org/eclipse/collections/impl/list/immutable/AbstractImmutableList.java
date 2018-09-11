@@ -903,7 +903,8 @@ abstract class AbstractImmutableList<T>
         }
         else
         {
-            for (int startIndex = 0, endIndex = size;
+            int endIndex = size;
+            for (int startIndex = 0;
                     endIndex <= this.size() && startIndex < this.size();
                     startIndex += size, endIndex += Math.min(size, this.size() - endIndex))
             {
