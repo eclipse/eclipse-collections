@@ -65,7 +65,9 @@ public class TroveMapPutTest extends AbstractJMHTestRunner
         String[] localElements = this.elements;
         int defaultInitialCapacity = Constants.DEFAULT_CAPACITY;
 
-        TMap<String, String> trove = this.isPresized ? new THashMap<>(localSize, localLoadFactor) : new THashMap<>(defaultInitialCapacity, localLoadFactor);
+        TMap<String, String> trove = this.isPresized
+                ? new THashMap<>(localSize, localLoadFactor)
+                : new THashMap<>(defaultInitialCapacity, localLoadFactor);
 
         for (int i = 0; i < localSize; i++)
         {

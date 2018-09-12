@@ -55,7 +55,9 @@ public final class TreeSortedSetMultimap<K, V>
     public TreeSortedSetMultimap(Multimap<? extends K, ? extends V> multimap)
     {
         super(Math.max(multimap.sizeDistinct() * 2, 16));
-        this.comparator = multimap instanceof SortedSetMultimap<?, ?> ? ((SortedSetMultimap<K, V>) multimap).comparator() : null;
+        this.comparator = multimap instanceof SortedSetMultimap<?, ?>
+                ? ((SortedSetMultimap<K, V>) multimap).comparator()
+                : null;
         this.putAll(multimap);
     }
 

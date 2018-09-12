@@ -490,7 +490,9 @@ public class ImmutableArrayBag<T>
 
         private ArrayBagIterator()
         {
-            this.remainingOccurrences = ImmutableArrayBag.this.sizeDistinct() > 0 ? ImmutableArrayBag.this.counts[0] : 0;
+            this.remainingOccurrences = ImmutableArrayBag.this.sizeDistinct() > 0
+                    ? ImmutableArrayBag.this.counts[0]
+                    : 0;
         }
 
         @Override

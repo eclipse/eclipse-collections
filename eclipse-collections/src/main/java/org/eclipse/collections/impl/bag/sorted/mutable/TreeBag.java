@@ -604,7 +604,9 @@ public class TreeBag<T>
         Comparator<? super T> comparator = this.items.comparator();
         return this.zipWithIndex(TreeSortedSet.newSet((o1, o2) ->
         {
-            int compare = comparator == null ? Comparators.nullSafeCompare(o1, o2) : comparator.compare(o1.getOne(), o2.getOne());
+            int compare = comparator == null
+                    ? Comparators.nullSafeCompare(o1, o2)
+                    : comparator.compare(o1.getOne(), o2.getOne());
             if (compare != 0)
             {
                 return compare;

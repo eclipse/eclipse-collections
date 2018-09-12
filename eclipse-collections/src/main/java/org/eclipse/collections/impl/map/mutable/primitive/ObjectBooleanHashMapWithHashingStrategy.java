@@ -1171,7 +1171,9 @@ public class ObjectBooleanHashMapWithHashingStrategy<K> implements MutableObject
                 if (ObjectBooleanHashMapWithHashingStrategy.isNonSentinel(key))
                 {
                     K nonSentinelKey = ObjectBooleanHashMapWithHashingStrategy.this.toNonSentinel(key);
-                    hashCode += nonSentinelKey == null ? 0 : ObjectBooleanHashMapWithHashingStrategy.this.hashingStrategy.computeHashCode(nonSentinelKey);
+                    hashCode += nonSentinelKey == null
+                            ? 0
+                            : ObjectBooleanHashMapWithHashingStrategy.this.hashingStrategy.computeHashCode(nonSentinelKey);
                 }
             }
             return hashCode;

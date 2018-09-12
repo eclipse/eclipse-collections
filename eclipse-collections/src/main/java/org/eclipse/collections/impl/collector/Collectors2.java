@@ -1526,7 +1526,9 @@ public final class Collectors2
                 supplier,
                 (partition, each) ->
                 {
-                    MutableCollection<T> bucket = predicate.accept(each) ? partition.getSelected() : partition.getRejected();
+                    MutableCollection<T> bucket = predicate.accept(each)
+                            ? partition.getSelected()
+                            : partition.getRejected();
                     bucket.add(each);
                 },
                 Collectors2.mergePartitions(),

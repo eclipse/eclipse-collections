@@ -25,7 +25,9 @@ public final class CollectionsThreadFactory
     {
         this.isDaemon = useDaemonThreads;
         SecurityManager securityManager = System.getSecurityManager();
-        this.group = securityManager == null ? Thread.currentThread().getThreadGroup() : securityManager.getThreadGroup();
+        this.group = securityManager == null
+                ? Thread.currentThread().getThreadGroup()
+                : securityManager.getThreadGroup();
         this.namePrefix = poolPrefix + " pool- thread-";
     }
 

@@ -160,7 +160,9 @@ public final class HashingStrategies
         @Override
         public boolean equals(T object1, T object2)
         {
-            return object1 == null || object2 == null ? object1 == object2 : this.nonNullSafeStrategy.equals(object1, object2);
+            return object1 == null || object2 == null
+                    ? object1 == object2
+                    : this.nonNullSafeStrategy.equals(object1, object2);
         }
     }
 

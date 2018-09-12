@@ -1082,7 +1082,9 @@ public final class RandomAccessListIterate
         for (int i = 0; i < size; i++)
         {
             T each = list.get(i);
-            MutableList<T> bucket = predicate.accept(each) ? partitionFastList.getSelected() : partitionFastList.getRejected();
+            MutableList<T> bucket = predicate.accept(each)
+                    ? partitionFastList.getSelected()
+                    : partitionFastList.getRejected();
             bucket.add(each);
         }
         return partitionFastList;
@@ -1096,7 +1098,9 @@ public final class RandomAccessListIterate
         for (int i = 0; i < size; i++)
         {
             T each = list.get(i);
-            MutableList<T> bucket = predicate.accept(each, parameter) ? partitionFastList.getSelected() : partitionFastList.getRejected();
+            MutableList<T> bucket = predicate.accept(each, parameter)
+                    ? partitionFastList.getSelected()
+                    : partitionFastList.getRejected();
             bucket.add(each);
         }
         return partitionFastList;

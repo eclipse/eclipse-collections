@@ -183,7 +183,9 @@ public class EclipseCollectionsCodeGenerator
 
     private void setTest()
     {
-        this.isTest = this.templateFile.getInstanceOf("isTest") == null ? false : Boolean.valueOf(this.templateFile.getInstanceOf("isTest").render());
+        this.isTest = this.templateFile.getInstanceOf("isTest") == null
+                ? false
+                : Boolean.valueOf(this.templateFile.getInstanceOf("isTest").render());
     }
 
     private File constructTargetPath()

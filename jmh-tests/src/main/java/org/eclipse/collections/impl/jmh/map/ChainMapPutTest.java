@@ -73,7 +73,9 @@ public class ChainMapPutTest extends AbstractJMHTestRunner
          */
         int defaultInitialCapacity = 8;
 
-        MutableMap<String, String> ec = this.isPresized ? UnifiedMap.newMap(localSize, localLoadFactor) : UnifiedMap.newMap(defaultInitialCapacity, localLoadFactor);
+        MutableMap<String, String> ec = this.isPresized
+                ? UnifiedMap.newMap(localSize, localLoadFactor)
+                : UnifiedMap.newMap(defaultInitialCapacity, localLoadFactor);
 
         for (int i = 0; i < localSize; i++)
         {
@@ -90,7 +92,9 @@ public class ChainMapPutTest extends AbstractJMHTestRunner
         String[] localElements = this.elements;
         int defaultInitialCapacity = Containers.DEFAULT_EXPECTED_ELEMENTS;
 
-        ObjectObjectMap<String, String> hppc = this.isPresized ? new ObjectObjectHashMap<>(localSize, localLoadFactor) : new ObjectObjectHashMap<>(defaultInitialCapacity, localLoadFactor);
+        ObjectObjectMap<String, String> hppc = this.isPresized
+                ? new ObjectObjectHashMap<>(localSize, localLoadFactor)
+                : new ObjectObjectHashMap<>(defaultInitialCapacity, localLoadFactor);
 
         for (int i = 0; i < localSize; i++)
         {
@@ -111,7 +115,9 @@ public class ChainMapPutTest extends AbstractJMHTestRunner
          */
         int defaultInitialCapacity = 16;
 
-        Map<String, String> jdk = this.isPresized ? new HashMap<>(localSize, localLoadFactor) : new HashMap<>(defaultInitialCapacity, localLoadFactor);
+        Map<String, String> jdk = this.isPresized
+                ? new HashMap<>(localSize, localLoadFactor)
+                : new HashMap<>(defaultInitialCapacity, localLoadFactor);
 
         for (int i = 0; i < localSize; i++)
         {
@@ -135,7 +141,9 @@ public class ChainMapPutTest extends AbstractJMHTestRunner
          */
         int defaultInitialSize = 16;
 
-        scala.collection.mutable.HashMap<String, String> scala = this.isPresized ? new PresizableHashMap<>(localSize) : new PresizableHashMap<>(defaultInitialSize);
+        scala.collection.mutable.HashMap<String, String> scala = this.isPresized
+                ? new PresizableHashMap<>(localSize)
+                : new PresizableHashMap<>(defaultInitialSize);
 
         for (int i = 0; i < localSize; i++)
         {
