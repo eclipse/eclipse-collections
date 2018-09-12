@@ -360,7 +360,7 @@ public class OrderedMapAdapter<K, V>
     @Override
     public MutableOrderedMap<K, V> asUnmodifiable()
     {
-        throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".asUnmodifiable() not implemented yet");
+        return UnmodifiableMutableOrderedMap.of(this);
     }
 
     @Override

@@ -12,10 +12,8 @@ package org.eclipse.collections.test.map.mutable.ordered;
 
 import java.util.LinkedHashMap;
 
-import org.eclipse.collections.api.map.MapIterable;
 import org.eclipse.collections.api.map.MutableOrderedMap;
 import org.eclipse.collections.impl.map.ordered.mutable.OrderedMapAdapter;
-import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.test.junit.Java8Runner;
 import org.junit.runner.RunWith;
 
@@ -52,12 +50,5 @@ public class OrderedMapAdapterTest implements MutableOrderedMapTestCase
             assertNull(result.put((K) elements[i], (V) elements[i + 1]));
         }
         return result;
-    }
-
-    @Override
-    public void MapIterable_flipUniqueValues()
-    {
-        MapIterable<String, Integer> map = this.newWithKeysValues("Three", 3, "Two", 2, "One", 1);
-        Verify.assertThrows(UnsupportedOperationException.class, map::flipUniqueValues);
     }
 }

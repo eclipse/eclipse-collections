@@ -175,4 +175,7 @@ public interface MutableOrderedMap<K, V> extends OrderedMap<K, V>, MutableMapIte
 
     @Override
     MutableOrderedMap<K, V> withoutAllKeys(Iterable<? extends K> keys);
+
+    @Override
+    MutableOrderedMap<K, V> asUnmodifiable();
 }
