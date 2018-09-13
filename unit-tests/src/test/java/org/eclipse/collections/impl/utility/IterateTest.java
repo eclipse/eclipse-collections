@@ -577,7 +577,7 @@ public class IterateTest
     {
         MutableList<Integer> list = Lists.mutable.of(1, 2, 2, 3, 3, 3);
 
-        Pair[] expectedPairs = {
+        Pair<String, String>[] expectedPairs = new Pair[]{
                 Tuples.pair("Key1", "1"),
                 Tuples.pair("Key2", "2"),
                 Tuples.pair("Key2", "2"),
@@ -826,7 +826,7 @@ public class IterateTest
     {
         MutableList<Integer> list = Lists.mutable.of(1, 2, 2, 3, 3, 3);
 
-        Pair[] expectedPairs = {
+        Pair<String, String>[] expectedPairs = new Pair[]{
                 Tuples.pair("Key1", "1"),
                 Tuples.pair("Key1", "1"),
                 Tuples.pair("Key2", "1"),
