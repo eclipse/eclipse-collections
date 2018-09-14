@@ -96,7 +96,7 @@ public abstract class AbstractSynchronizedPutMultimap<K, V, C extends MutableCol
     public Iterable<? extends V> getIfAbsentPut(K key, Iterable<? extends V> value)
     {
         boolean hasKey = this.containsKey(key);
-        if (hasKey)
+        if (!hasKey)
         {
             synchronized (value)
             {

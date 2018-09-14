@@ -332,18 +332,14 @@ public abstract class AbstractMutableMultimapTestCase extends AbstractMultimapTe
     @Test
     public void testGetIfAbsentPut()
     {
-        ArrayList<String> tempArrayList1 = new ArrayList<>();
+        MutableMultimap<String, String> multimap =
+                this.newMultimapWithKeysValues("One", "Uno", "Two", "Dos");
+        ArrayList<String> tempArrayList1 = new ArrayList<String>();
         tempArrayList1.add("Uno");
-        tempArrayList1.add("Ichi");
+        ArrayList<String> tempArrayList3 = new ArrayList<String>();
+        tempArrayList3.add("Tres");
 
-        ArrayList<String> tempArrayList2 = new ArrayList<>();
-        tempArrayList2.add("Dos");
-        tempArrayList2.add("Ni");
-
-        FastListMultimap<String, ArrayList<String>> multimap = new FastListMultimap<>();
-        multimap.putAll("One", Collections.singleton(tempArrayList1));
-
-        Assert.assertEquals(Collections.singleton(tempArrayList2), multimap.getIfAbsentPut("Two", Collections.singleton(tempArrayList2)));
-        Assert.assertEquals(Collections.singleton(tempArrayList1), multimap.getIfAbsentPut("One", Collections.singleton(tempArrayList2)));
+        Assert.assertEquals(tempArrayList3, multimap.getIfAbsentPut("Three", tempArrayList3));
+        Assert.assertEquals("Uno", multimap.getIfAbsentPut("One", tempArrayList1));
     }
 }
