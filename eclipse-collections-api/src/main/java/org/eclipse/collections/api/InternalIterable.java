@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2018 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -18,7 +18,7 @@ import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
 import org.eclipse.collections.api.ordered.OrderedIterable;
 
 /**
- * The base interface for all Eclipse Collections.  All Eclipse Collections are internally iterable, and this interface provides
+ * The base interface for all Eclipse Collections. All Eclipse Collections are internally iterable, and this interface provides
  * the base set of internal iterators that every Eclipse collection should implement.
  */
 public interface InternalIterable<T>
@@ -29,7 +29,7 @@ public interface InternalIterable<T>
      * <p>
      * Example using a Java 8 lambda:
      * <pre>
-     * people.forEach(Procedures.cast(person -> LOGGER.info(person.getName())));
+     * people.forEach(Procedures.cast(person -&gt; LOGGER.info(person.getName())));
      * </pre>
      * <p>
      * Example using an anonymous inner class:
@@ -64,7 +64,7 @@ public interface InternalIterable<T>
      * <p>
      * Example using a Java 8 lambda:
      * <pre>
-     * people.forEachWithIndex((Person person, int index) -> LOGGER.info("Index: " + index + " person: " + person.getName()));
+     * people.forEachWithIndex((Person person, int index) -&gt; LOGGER.info("Index: " + index + " person: " + person.getName()));
      * </pre>
      * <p>
      * Example using an anonymous inner class:
@@ -89,7 +89,7 @@ public interface InternalIterable<T>
      * <p>
      * Example using a Java 8 lambda:
      * <pre>
-     * people.forEachWith((Person person, Person other) ->
+     * people.forEachWith((Person person, Person other) -&gt;
      *     {
      *         if (person.isRelatedTo(other))
      *         {

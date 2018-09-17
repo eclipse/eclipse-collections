@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2018 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -26,20 +26,20 @@ import org.eclipse.collections.impl.block.factory.Predicates2;
 import org.eclipse.collections.impl.utility.Iterate;
 
 /**
- * This class provides a MutableList wrapper around an array.  All of the internal iteration methods of the MutableList
- * interface as well as the JDK Collections List interface are provided.  However, the pre-determined fixed-sized
+ * This class provides a MutableList wrapper around an array. All of the internal iteration methods of the MutableList
+ * interface as well as the JDK Collections List interface are provided. However, the pre-determined fixed-sized
  * semantics of an array are maintained and thus mutating List interface methods such as {@link #add(Object)}, {@link
  * #addAll(Collection)}, {@link #remove(Object)}, {@link #removeAll(Collection)}, etc. are not supported and will throw
- * an {@link UnsupportedOperationException}.  In addition, the mutating iteration methods {@link
- * #removeIf(org.eclipse.collections.api.block.predicate.Predicate)} and {@link #removeIfWith(org.eclipse.collections.api.block.predicate.Predicate2, Object)} are not supported and will also
+ * an {@link UnsupportedOperationException}. In addition, the mutating iteration methods
+ * {@link #removeIf(org.eclipse.collections.api.block.predicate.Predicate)} and {@link #removeIfWith(org.eclipse.collections.api.block.predicate.Predicate2, Object)} are not supported and will also
  * throw an {@link UnsupportedOperationException}.
  * <p>
  * The {@link #with(Object)} method is not an exception to the above restrictions, as it will create a new
  * instance of this class with the existing contents plus the new item.
  * <p>
- * To create a wrapper around an existing array, use the {@link #adapt(Object[])} factory method.  To wrap the contents
+ * To create a wrapper around an existing array, use the {@link #adapt(Object[])} factory method. To wrap the contents
  * of an existing Collection instance, use the {@link #newArray(Iterable)} or {@link #newArrayWithItem(Iterable, Object)}
- * factory methods.  To wrap existing objects in a new array, use one of the {@link #newArrayWith(Object)} factory methods.
+ * factory methods. To wrap existing objects in a new array, use one of the {@link #newArrayWith(Object)} factory methods.
  */
 public final class ArrayAdapter<T>
         extends AbstractArrayAdapter<T>

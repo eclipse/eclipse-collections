@@ -34,7 +34,7 @@ public interface Mutable<name>ObjectMap\<V> extends <name>ObjectMap\<V>, Mutable
     V put(<type> key, V value);
 
     /**
-     * This method allows Mutable<name>ObjectMap the ability to add an element in the form of <name>ObjectPair\<V>.
+     * This method allows Mutable<name>ObjectMap the ability to add an element in the form of {@code <name>ObjectPair\<V>}.
      *
      * @see #put(<type>, Object)
      * @since 9.1.0

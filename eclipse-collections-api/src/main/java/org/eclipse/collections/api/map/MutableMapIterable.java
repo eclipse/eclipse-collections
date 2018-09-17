@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 Goldman Sachs and others.
+ * Copyright (c) 2018 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -37,7 +37,7 @@ import org.eclipse.collections.api.tuple.Pair;
 public interface MutableMapIterable<K, V> extends MapIterable<K, V>, Map<K, V>
 {
     /**
-     * This method allows mutable map the ability to add an element in the form of Pair<? extends K, ? extends V>.
+     * This method allows mutable map the ability to add an element in the form of {@code Pair<? extends K, ? extends V>}.
      *
      * @see #put(Object, Object)
      * @since 9.1.0
@@ -48,7 +48,7 @@ public interface MutableMapIterable<K, V> extends MapIterable<K, V>, Map<K, V>
     }
 
     /**
-     * This method allows mutable map the ability to add an element in the form of Pair<? extends K, ? extends V>.
+     * This method allows mutable map the ability to add an element in the form of {@code Pair<? extends K, ? extends V>}.
      *
      * @return previous value in the map for the key, or null if no value exists for the key.
      * @see #put(Object, Object)
@@ -67,13 +67,13 @@ public interface MutableMapIterable<K, V> extends MapIterable<K, V>, Map<K, V>
     V removeKey(K key);
 
     /**
-     * Get and return the value in the Map at the specified key.  Alternatively, if there is no value in the map at the key,
+     * Get and return the value in the Map at the specified key. Alternatively, if there is no value in the map at the key,
      * return the result of evaluating the specified Function0, and put that value in the map at the specified key.
      */
     V getIfAbsentPut(K key, Function0<? extends V> function);
 
     /**
-     * Get and return the value in the Map at the specified key.  Alternatively, if there is no value in the map at the key,
+     * Get and return the value in the Map at the specified key. Alternatively, if there is no value in the map at the key,
      * return the specified value, and put that value in the map at the specified key.
      *
      * @since 5.0
@@ -81,14 +81,14 @@ public interface MutableMapIterable<K, V> extends MapIterable<K, V>, Map<K, V>
     V getIfAbsentPut(K key, V value);
 
     /**
-     * Get and return the value in the Map at the specified key.  Alternatively, if there is no value in the map for that key
+     * Get and return the value in the Map at the specified key. Alternatively, if there is no value in the map for that key
      * return the result of evaluating the specified Function using the specified key, and put that value in the
      * map at the specified key.
      */
     V getIfAbsentPutWithKey(K key, Function<? super K, ? extends V> function);
 
     /**
-     * Get and return the value in the Map at the specified key.  Alternatively, if there is no value in the map for that key
+     * Get and return the value in the Map at the specified key. Alternatively, if there is no value in the map for that key
      * return the result of evaluating the specified Function using the specified parameter, and put that value in the
      * map at the specified key.
      */
@@ -108,16 +108,16 @@ public interface MutableMapIterable<K, V> extends MapIterable<K, V>, Map<K, V>
 
     /**
      * This method allows mutable, fixed size, and immutable maps the ability to add elements to their existing
-     * elements.  In order to support fixed size maps, a new instance of a map would have to be returned including the
-     * keys and values of the original plus the additional key and value.  In the case of mutable maps, the original map
-     * is modified and then returned.  In order to use this method properly with mutable and fixed size maps the
+     * elements. In order to support fixed size maps, a new instance of a map would have to be returned including the
+     * keys and values of the original plus the additional key and value. In the case of mutable maps, the original map
+     * is modified and then returned. In order to use this method properly with mutable and fixed size maps the
      * following approach must be taken:
      * <p>
      * <pre>
      * map = map.withKeyValue("new key", "new value");
      * </pre>
      * In the case of FixedSizeMap, a new instance will be returned by withKeyValue, and any variables that
-     * previously referenced the original map will need to be redirected to reference the new instance.  In the case
+     * previously referenced the original map will need to be redirected to reference the new instance. In the case
      * of a FastMap or UnifiedMap, you will be replacing the reference to map with map, since FastMap and UnifiedMap
      * will both return "this" after calling put on themselves.
      *
@@ -127,16 +127,16 @@ public interface MutableMapIterable<K, V> extends MapIterable<K, V>, Map<K, V>
 
     /**
      * This method allows mutable, fixed size, and immutable maps the ability to add elements to their existing
-     * elements.  In order to support fixed size maps, a new instance of a map would have to be returned including the
-     * keys and values of the original plus all of the additional keys and values.  In the case of mutable maps, the
-     * original map is modified and then returned.  In order to use this method properly with mutable and fixed size
+     * elements. In order to support fixed size maps, a new instance of a map would have to be returned including the
+     * keys and values of the original plus all of the additional keys and values. In the case of mutable maps, the
+     * original map is modified and then returned. In order to use this method properly with mutable and fixed size
      * maps the following approach must be taken:
      * <p>
      * <pre>
      * map = map.withAllKeyValues(FastList.newListWith(PairImpl.of("new key", "new value")));
      * </pre>
      * In the case of FixedSizeMap, a new instance will be returned by withAllKeyValues, and any variables that
-     * previously referenced the original map will need to be redirected to reference the new instance.  In the case
+     * previously referenced the original map will need to be redirected to reference the new instance. In the case
      * of a FastMap or UnifiedMap, you will be replacing the reference to map with map, since FastMap and UnifiedMap
      * will both return "this" after calling put on themselves.
      *
@@ -153,16 +153,16 @@ public interface MutableMapIterable<K, V> extends MapIterable<K, V>, Map<K, V>
 
     /**
      * This method allows mutable, fixed size, and immutable maps the ability to remove elements from their existing
-     * elements.  In order to support fixed size maps, a new instance of a map would have to be returned including the
-     * keys and values of the original minus the key and value to be removed.  In the case of mutable maps, the original
-     * map is modified and then returned.  In order to use this method properly with mutable and fixed size maps the
+     * elements. In order to support fixed size maps, a new instance of a map would have to be returned including the
+     * keys and values of the original minus the key and value to be removed. In the case of mutable maps, the original
+     * map is modified and then returned. In order to use this method properly with mutable and fixed size maps the
      * following approach must be taken:
      * <p>
      * <pre>
      * map = map.withoutKey("key");
      * </pre>
      * In the case of FixedSizeMap, a new instance will be returned by withoutKey, and any variables that previously
-     * referenced the original map will need to be redirected to reference the new instance.  In the case of a FastMap
+     * referenced the original map will need to be redirected to reference the new instance. In the case of a FastMap
      * or UnifiedMap, you will be replacing the reference to map with map, since FastMap and UnifiedMap will both return
      * "this" after calling remove on themselves.
      *
@@ -172,16 +172,16 @@ public interface MutableMapIterable<K, V> extends MapIterable<K, V>, Map<K, V>
 
     /**
      * This method allows mutable, fixed size, and immutable maps the ability to remove elements from their existing
-     * elements.  In order to support fixed size maps, a new instance of a map would have to be returned including the
-     * keys and values of the original minus all of the keys and values to be removed.  In the case of mutable maps, the
-     * original map is modified and then returned.  In order to use this method properly with mutable and fixed size
+     * elements. In order to support fixed size maps, a new instance of a map would have to be returned including the
+     * keys and values of the original minus all of the keys and values to be removed. In the case of mutable maps, the
+     * original map is modified and then returned. In order to use this method properly with mutable and fixed size
      * maps the following approach must be taken:
      * <p>
      * <pre>
      * map = map.withoutAllKeys(FastList.newListWith("key1", "key2"));
      * </pre>
      * In the case of FixedSizeMap, a new instance will be returned by withoutAllKeys, and any variables that previously
-     * referenced the original map will need to be redirected to reference the new instance.  In the case of a FastMap
+     * referenced the original map will need to be redirected to reference the new instance. In the case of a FastMap
      * or UnifiedMap, you will be replacing the reference to map with map, since FastMap and UnifiedMap will both return
      * "this" after calling remove on themselves.
      *
@@ -197,7 +197,7 @@ public interface MutableMapIterable<K, V> extends MapIterable<K, V>, Map<K, V>
     /**
      * Returns an unmodifiable view of this map. This is the equivalent of using
      * {@code Collections.unmodifiableMap(this)} only with a return type that supports the full
-     * iteration protocols available on {@code MutableMapIterable}.  Methods which would
+     * iteration protocols available on {@code MutableMapIterable}. Methods which would
      * mutate the underlying map will throw UnsupportedOperationExceptions.
      *
      * @return an unmodifiable view of this map.
@@ -206,7 +206,7 @@ public interface MutableMapIterable<K, V> extends MapIterable<K, V>, Map<K, V>
     MutableMapIterable<K, V> asUnmodifiable();
 
     /**
-     * Returns a synchronized wrapper backed by this map.  This is the equivalent of calling
+     * Returns a synchronized wrapper backed by this map. This is the equivalent of calling
      * {@code Collections.synchronizedMap(this)} only with the more feature rich return type of
      * {@code MutableMapIterable}.
      * <p>
@@ -215,9 +215,9 @@ public interface MutableMapIterable<K, V> extends MapIterable<K, V>, Map<K, V>
      * <pre>
      *  MutableMap synchedMap = map.asSynchronized();
      *
-     *  synchedMap.forEachKey(key -> ... );
-     *  synchedMap.forEachValue(value -> ... );
-     *  synchedMap.forEachKeyValue((key, value) -> ... );
+     *  synchedMap.forEachKey(key -&gt; ... );
+     *  synchedMap.forEachValue(value -&gt; ... );
+     *  synchedMap.forEachKeyValue((key, value) -&gt; ... );
      * </pre>
      * <p>
      * If you want to iterate imperatively over the keySet(), values(), or entrySet(), you will

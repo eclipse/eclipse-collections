@@ -50,8 +50,8 @@ import org.eclipse.collections.api.tuple.Twin;
 
 /**
  * MutableCollection is an interface which extends the base java.util.Collection interface and adds several internal
- * iterator methods, from the Smalltalk Collection protocol.  These include variations of forEach, select, reject,
- * detect, collect, injectInto, anySatisfy, allSatisfy. These include count, remove, partition, collectIf.  The API also
+ * iterator methods, from the Smalltalk Collection protocol. These include variations of forEach, select, reject,
+ * detect, collect, injectInto, anySatisfy, allSatisfy. These include count, remove, partition, collectIf. The API also
  * includes converter methods to convert a MutableCollection to a List (toList), to a sorted List (toSortedList), to a
  * Set (toSet), and to a Map (toMap).
  * <p>
@@ -63,8 +63,8 @@ public interface MutableCollection<T>
     /**
      * This method allows mutable and fixed size collections the ability to add elements to their existing elements.
      * In order to support fixed size a new instance of a collection would have to be returned taking the elements of
-     * the original collection and appending the new element to form the new collection.  In the case of mutable
-     * collections, the original collection is modified, and is returned.  In order to use this method properly with
+     * the original collection and appending the new element to form the new collection. In the case of mutable
+     * collections, the original collection is modified, and is returned. In order to use this method properly with
      * mutable and fixed size collections the following approach must be taken:
      * <p>
      * <pre>
@@ -74,7 +74,7 @@ public interface MutableCollection<T>
      * </pre>
      * In the case of {@link FixedSizeCollection} a new instance of MutableCollection will be returned by with, and any
      * variables that previously referenced the original collection will need to be redirected to reference the
-     * new instance.  For other MutableCollection types you will replace the reference to collection with the same
+     * new instance. For other MutableCollection types you will replace the reference to collection with the same
      * collection, since the instance will return "this" after calling add on itself.
      *
      * @see #add(Object)
@@ -84,8 +84,8 @@ public interface MutableCollection<T>
     /**
      * This method allows mutable and fixed size collections the ability to remove elements from their existing elements.
      * In order to support fixed size a new instance of a collection would have to be returned containing the elements
-     * that would be left from the original collection after calling remove.  In the case of mutable collections, the
-     * original collection is modified, and is returned.  In order to use this method properly with mutable and fixed
+     * that would be left from the original collection after calling remove. In the case of mutable collections, the
+     * original collection is modified, and is returned. In order to use this method properly with mutable and fixed
      * size collections the following approach must be taken:
      * <p>
      * <pre>
@@ -95,7 +95,7 @@ public interface MutableCollection<T>
      * </pre>
      * In the case of {@link FixedSizeCollection} a new instance of MutableCollection will be returned by without, and
      * any variables that previously referenced the original collection will need to be redirected to reference the
-     * new instance.  For other MutableCollection types you will replace the reference to collection with the same
+     * new instance. For other MutableCollection types you will replace the reference to collection with the same
      * collection, since the instance will return "this" after calling remove on itself.
      *
      * @see #remove(Object)
@@ -105,8 +105,8 @@ public interface MutableCollection<T>
     /**
      * This method allows mutable and fixed size collections the ability to add multiple elements to their existing
      * elements. In order to support fixed size a new instance of a collection would have to be returned taking the
-     * elements of  the original collection and appending the new elements to form the new collection.  In the case of
-     * mutable collections, the original collection is modified, and is returned.  In order to use this method properly
+     * elements of  the original collection and appending the new elements to form the new collection. In the case of
+     * mutable collections, the original collection is modified, and is returned. In order to use this method properly
      * with mutable and fixed size collections the following approach must be taken:
      * <p>
      * <pre>
@@ -114,7 +114,7 @@ public interface MutableCollection<T>
      * </pre>
      * In the case of {@link FixedSizeCollection} a new instance of MutableCollection will be returned by withAll, and
      * any variables that previously referenced the original collection will need to be redirected to reference the
-     * new instance.  For other MutableCollection types you will replace the reference to collection with the same
+     * new instance. For other MutableCollection types you will replace the reference to collection with the same
      * collection, since the instance will return "this" after calling addAll on itself.
      *
      * @see #addAll(Collection)
@@ -123,9 +123,9 @@ public interface MutableCollection<T>
 
     /**
      * This method allows mutable and fixed size collections the ability to remove multiple elements from their existing
-     * elements.  In order to support fixed size a new instance of a collection would have to be returned containing the
-     * elements that would be left from the original collection after calling removeAll.  In the case of mutable
-     * collections, the original collection is modified, and is returned.  In order to use this method properly with
+     * elements. In order to support fixed size a new instance of a collection would have to be returned containing the
+     * elements that would be left from the original collection after calling removeAll. In the case of mutable
+     * collections, the original collection is modified, and is returned. In order to use this method properly with
      * mutable and fixed size collections the following approach must be taken:
      * <p>
      * <pre>
@@ -133,7 +133,7 @@ public interface MutableCollection<T>
      * </pre>
      * In the case of {@link FixedSizeCollection} a new instance of MutableCollection will be returned by withoutAll,
      * and any variables that previously referenced the original collection will need to be redirected to reference the
-     * new instance.  For other MutableCollection types you will replace the reference to collection with the same
+     * new instance. For other MutableCollection types you will replace the reference to collection with the same
      * collection, since the instance will return "this" after calling removeAll on itself.
      *
      * @see #removeAll(Collection)
@@ -141,8 +141,8 @@ public interface MutableCollection<T>
     MutableCollection<T> withoutAll(Iterable<? extends T> elements);
 
     /**
-     * Creates a new empty mutable version of the same collection type.  For example, if this instance is a FastList,
-     * this method will return a new empty FastList.  If the class of this instance is immutable or fixed size (i.e.
+     * Creates a new empty mutable version of the same collection type. For example, if this instance is a FastList,
+     * this method will return a new empty FastList. If the class of this instance is immutable or fixed size (i.e.
      * SingletonList) then a mutable alternative to the class will be provided.
      */
     MutableCollection<T> newEmpty();
@@ -155,7 +155,7 @@ public interface MutableCollection<T>
      * <p>
      * <pre>
      * MutableCollection&lt;Integer&gt; livesInLondon =
-     *     people.select(person -> person.getAddress().getCity().equals("London"));
+     *     people.select(person -&gt; person.getAddress().getCity().equals("London"));
      * </pre>
      */
     @Override
@@ -177,7 +177,7 @@ public interface MutableCollection<T>
      * <p>
      * <pre>
      * MutableCollection&lt;Person&gt; notSmiths =
-     *     people.reject(person -> person.person.getLastName().equals("Smith"));
+     *     people.reject(person -&gt; person.person.getLastName().equals("Smith"));
      * </pre>
      * Using the {@code Predicates} factory:
      * <p>
@@ -216,7 +216,7 @@ public interface MutableCollection<T>
      * Co-variant example for MutableCollection:
      * <pre>
      * PartitionMutableCollection&lt;Person&gt; newYorkersAndNonNewYorkers =
-     *     people.partition(person -> person.getAddress().getState().getName().equals("New York"));
+     *     people.partition(person -&gt; person.getAddress().getState().getName().equals("New York"));
      * </pre>
      */
     @Override
@@ -226,8 +226,8 @@ public interface MutableCollection<T>
      * {@inheritDoc}
      * Co-variant example for MutableCollection:
      * <pre>
-     * PartitionMutableCollection&lt;Person>&gt newYorkersAndNonNewYorkers =
-     *     people.partitionWith((Person person, String state) -> person.getAddress().getState().getName().equals(state), "New York");
+     * PartitionMutableCollection&lt;Person&gt; newYorkersAndNonNewYorkers =
+     *     people.partitionWith((Person person, String state) -&gt; person.getAddress().getState().getName().equals(state), "New York");
      * </pre>
      */
     @Override
@@ -270,7 +270,7 @@ public interface MutableCollection<T>
      * <p>
      * <pre>
      * MutableCollection&lt;String&gt; names =
-     *     people.collect(person -> person.getFirstName() + " " + person.getLastName());
+     *     people.collect(person -&gt; person.getFirstName() + " " + person.getLastName());
      * </pre>
      */
     @Override
@@ -281,7 +281,7 @@ public interface MutableCollection<T>
      * Co-variant example for MutableCollection:
      * <pre>
      * MutableBooleanCollection licenses =
-     *     people.collectBoolean(person -> person.hasDrivingLicense());
+     *     people.collectBoolean(person -&gt; person.hasDrivingLicense());
      * </pre>
      */
     @Override
@@ -292,7 +292,7 @@ public interface MutableCollection<T>
      * Co-variant example for MutableCollection:
      * <pre>
      * MutableByteCollection bytes =
-     *     people.collectByte(person -> person.getCode());
+     *     people.collectByte(person -&gt; person.getCode());
      * </pre>
      */
     @Override
@@ -303,7 +303,7 @@ public interface MutableCollection<T>
      * Co-variant example for MutableCollection:
      * <pre>
      * MutableCharCollection chars =
-     *     people.collectChar(person -> person.getMiddleInitial());
+     *     people.collectChar(person -&gt; person.getMiddleInitial());
      * </pre>
      */
     @Override
@@ -314,7 +314,7 @@ public interface MutableCollection<T>
      * Co-variant example for MutableCollection:
      * <pre>
      * MutableDoubleCollection doubles =
-     *     people.collectDouble(person -> person.getMilesFromNorthPole());
+     *     people.collectDouble(person -&gt; person.getMilesFromNorthPole());
      * </pre>
      */
     @Override
@@ -325,7 +325,7 @@ public interface MutableCollection<T>
      * Co-variant example for MutableCollection:
      * <pre>
      * MutableFloatCollection floats =
-     *     people.collectFloat(person -> person.getHeightInInches());
+     *     people.collectFloat(person -&gt; person.getHeightInInches());
      * </pre>
      */
     @Override
@@ -336,7 +336,7 @@ public interface MutableCollection<T>
      * Co-variant example for MutableCollection:
      * <pre>
      * MutableIntCollection ints =
-     *     people.collectInt(person -> person.getAge());
+     *     people.collectInt(person -&gt; person.getAge());
      * </pre>
      */
     @Override
@@ -347,7 +347,7 @@ public interface MutableCollection<T>
      * Co-variant example for MutableCollection:
      * <pre>
      * MutableLongCollection longs =
-     *     people.collectLong(person -> person.getGuid());
+     *     people.collectLong(person -&gt; person.getGuid());
      * </pre>
      */
     @Override
@@ -358,7 +358,7 @@ public interface MutableCollection<T>
      * Co-variant example for MutableCollection:
      * <pre>
      * MutableShortCollection shorts =
-     *     people.collectShort(person -> person.getNumberOfJunkMailItemsReceivedPerMonth());
+     *     people.collectShort(person -&gt; person.getNumberOfJunkMailItemsReceivedPerMonth());
      * </pre>
      */
     @Override
@@ -369,7 +369,7 @@ public interface MutableCollection<T>
      * Co-variant example for MutableCollection:
      * <pre>
      * MutableCollection&lt;Integer&gt; integers =
-     *     Lists.mutable.with(1, 2, 3).collectWith((each, parameter) -> each + parameter, Integer.valueOf(1));
+     *     Lists.mutable.with(1, 2, 3).collectWith((each, parameter) -&gt; each + parameter, Integer.valueOf(1));
      * </pre>
      * <p>
      */
@@ -420,9 +420,9 @@ public interface MutableCollection<T>
             P parameter);
 
     /**
-     * Returns an unmodifiable view of this collection.  This is the equivalent of using
+     * Returns an unmodifiable view of this collection. This is the equivalent of using
      * {@code Collections.unmodifiableCollection(this)} with a return type that supports the full
-     * iteration protocols available on {@code MutableCollection}.  Methods which would
+     * iteration protocols available on {@code MutableCollection}. Methods which would
      * mutate the underlying collection will throw UnsupportedOperationExceptions.
      *
      * @return an unmodifiable view of this collection.
@@ -442,13 +442,13 @@ public interface MutableCollection<T>
      * <pre>
      *  MutableCollection synchedCollection = collection.asSynchronized();
      *     ...
-     *  synchedCollection.forEach(each -> ... );
-     *  synchedCollection.select(each -> ... );
-     *  synchedCollection.collect(each -> ... );
+     *  synchedCollection.forEach(each -&gt; ... );
+     *  synchedCollection.select(each -&gt; ... );
+     *  synchedCollection.collect(each -&gt; ... );
      * </pre>
      *
      * If you want to iterate using an imperative style, you must protect external iterators using
-     * a synchronized block.  This includes explicit iterators as well as JDK 5 style for loops.
+     * a synchronized block. This includes explicit iterators as well as JDK 5 style for loops.
      * <p>
      *
      * @return a synchronized view of this collection.

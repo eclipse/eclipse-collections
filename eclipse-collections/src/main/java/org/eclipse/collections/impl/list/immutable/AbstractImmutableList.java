@@ -96,7 +96,7 @@ import org.eclipse.collections.impl.utility.ListIterate;
 import org.eclipse.collections.impl.utility.OrderedIterate;
 
 /**
- * This class is the parent class for all ImmutableLists.  All implementations of ImmutableList must implement the List
+ * This class is the parent class for all ImmutableLists. All implementations of ImmutableList must implement the List
  * interface so anArrayList.equals(anImmutableList) can return true when the contents and order are the same.
  */
 abstract class AbstractImmutableList<T>

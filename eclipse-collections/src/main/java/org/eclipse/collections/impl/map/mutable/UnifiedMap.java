@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2018 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -52,8 +52,8 @@ import org.eclipse.collections.impl.utility.ArrayIterate;
 import org.eclipse.collections.impl.utility.Iterate;
 
 /**
- * UnifiedMap stores key/value pairs in a single array, where alternate slots are keys and values.  This is nicer to CPU caches as
- * consecutive memory addresses are very cheap to access.  Entry objects are not stored in the table like in java.util.HashMap.
+ * UnifiedMap stores key/value pairs in a single array, where alternate slots are keys and values. This is nicer to CPU caches as
+ * consecutive memory addresses are very cheap to access. Entry objects are not stored in the table like in java.util.HashMap.
  * Instead of trying to deal with collisions in the main array using Entry objects, we put a special object in
  * the key slot and put a regular Object[] in the value slot. The array contains the key value pairs in consecutive slots,
  * just like the main array, but it's a linear list with no hashing.
@@ -826,7 +826,7 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
     }
 
     /**
-     * Returns the number of JVM words that is used by this map.  A word is 4 bytes in a 32bit VM and 8 bytes in a 64bit
+     * Returns the number of JVM words that is used by this map. A word is 4 bytes in a 32bit VM and 8 bytes in a 64bit
      * VM. Each array has a 2 word header, thus the formula is:
      * words = (internal table length + 2) + sum (for all chains (chain length + 2))
      *

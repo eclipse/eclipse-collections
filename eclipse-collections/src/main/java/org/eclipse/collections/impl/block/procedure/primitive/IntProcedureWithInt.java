@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2018 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -14,7 +14,7 @@ import java.io.Serializable;
 
 /**
  * A IntProcedureWithInt is a two argument Closure which has no return argument and takes an int as a first and second
- * argument.  The second argument is usually the index of the current element of a collection.
+ * argument. The second argument is usually the index of the current element of a collection.
  *
  * @deprecated since 1.2 use {@link IntIntProcedure}
  */

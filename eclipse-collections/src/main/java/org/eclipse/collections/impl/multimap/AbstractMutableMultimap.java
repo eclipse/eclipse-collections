@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2018 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -99,7 +99,7 @@ public abstract class AbstractMutableMultimap<K, V, C extends MutableCollection<
     }
 
     /**
-     * This method is provided to allow for subclasses to provide the behavior.  It should add 1 to the value that is
+     * This method is provided to allow for subclasses to provide the behavior. It should add 1 to the value that is
      * returned by calling size().
      */
     protected void incrementTotalSize()
@@ -108,7 +108,7 @@ public abstract class AbstractMutableMultimap<K, V, C extends MutableCollection<
     }
 
     /**
-     * This method is provided to allow for subclasses to provide the behavior.  It should remove 1 from the value that is
+     * This method is provided to allow for subclasses to provide the behavior. It should remove 1 from the value that is
      * returned by calling size().
      */
     protected void decrementTotalSize()
@@ -117,7 +117,7 @@ public abstract class AbstractMutableMultimap<K, V, C extends MutableCollection<
     }
 
     /**
-     * This method is provided to allow for subclasses to provide the behavior.  It should add the specified amount to
+     * This method is provided to allow for subclasses to provide the behavior. It should add the specified amount to
      * the value that is returned by calling size().
      */
     protected void addToTotalSize(int value)
@@ -126,7 +126,7 @@ public abstract class AbstractMutableMultimap<K, V, C extends MutableCollection<
     }
 
     /**
-     * This method is provided to allow for subclasses to provide the behavior.  It should subtract the specified amount from
+     * This method is provided to allow for subclasses to provide the behavior. It should subtract the specified amount from
      * the value that is returned by calling size().
      */
     protected void subtractFromTotalSize(int value)
@@ -135,7 +135,7 @@ public abstract class AbstractMutableMultimap<K, V, C extends MutableCollection<
     }
 
     /**
-     * This method is provided to allow for subclasses to provide the behavior.  It should set the value returned by
+     * This method is provided to allow for subclasses to provide the behavior. It should set the value returned by
      * size() to 0.
      */
     protected void clearTotalSize()

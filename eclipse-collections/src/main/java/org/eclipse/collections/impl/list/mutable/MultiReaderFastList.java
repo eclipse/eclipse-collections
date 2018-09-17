@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 Goldman Sachs and others.
+ * Copyright (c) 2018 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -80,13 +80,13 @@ import org.eclipse.collections.impl.utility.LazyIterate;
 import static org.eclipse.collections.impl.factory.Iterables.mList;
 
 /**
- * MultiReadFastList provides a thread-safe wrapper around a FastList, using a ReentrantReadWriteLock.  In order to
- * provide true thread-safety, MultiReaderFastList does not implement iterator(), listIterator(), listIterator(int), or
- * get(int), as all of these methods require an external lock to be taken to provide thread-safe iteration.  All of
- * these methods are available however, if you use the withReadLockAndDelegate() or withWriteLockAndDelegate() methods.
- * Both of these methods take a parameter of type Procedure<MutableList>, and a wrapped version of the underlying
- * FastList is returned.  This wrapper guarantees that no external pointer can ever reference the underlying FastList
- * outside of a locked procedure.  In the case of the read lock method, an Unmodifiable version of the collection is
+ * MultiReadFastList provides a thread-safe wrapper around a FastList, using a ReentrantReadWriteLock. In order to
+ * provide true thread-safety, MultiReaderFastList does <em>not</em> implement {@code iterator()}, {@code listIterator()}, {@code listIterator(int)}, or
+ * {@code get(int)}, as all these methods require an external lock to be taken to provide thread-safe iteration. All of
+ * these methods are available however, if you use the {@code withReadLockAndDelegate()} or {@code withWriteLockAndDelegate()} methods.
+ * Both of these methods take a parameter of type {@code Procedure<MutableList>}, and a wrapped version of the underlying
+ * FastList is returned. This wrapper guarantees that no external pointer can ever reference the underlying FastList
+ * outside of a locked procedure. In the case of the read lock method, an Unmodifiable version of the collection is
  * offered, which will throw UnsupportedOperationExceptions on any write methods like add or remove.
  */
 public final class MultiReaderFastList<T>
@@ -895,7 +895,7 @@ public final class MultiReaderFastList<T>
     }
 
     /**
-     * This method is not supported directly on a MultiReaderFastList.  If you would like to use a ListIterator with
+     * This method is not supported directly on a MultiReaderFastList. If you would like to use a ListIterator with
      * MultiReaderFastList, then you must do the following:
      * <p>
      * <pre>
@@ -918,7 +918,7 @@ public final class MultiReaderFastList<T>
     }
 
     /**
-     * This method is not supported directly on a MultiReaderFastList.  If you would like to use a ListIterator with
+     * This method is not supported directly on a MultiReaderFastList. If you would like to use a ListIterator with
      * MultiReaderFastList, then you must do the following:
      * <p>
      * <pre>

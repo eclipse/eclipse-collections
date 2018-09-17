@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2018 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -65,7 +65,7 @@ public class UnmodifiableMutableSet<T>
     }
 
     /**
-     * This method will take a MutableSet and wrap it directly in a UnmodifiableMutableSet.  It will
+     * This method will take a MutableSet and wrap it directly in a UnmodifiableMutableSet. It will
      * take any other non-Eclipse-Collections set and first adapt it will a SetAdapter, and then return a
      * UnmodifiableMutableSet that wraps the adapter.
      */

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2018 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -14,7 +14,7 @@ import java.io.Serializable;
 
 /**
  * Function is a one-argument lambda which performs a transformation on the object of type {@code T}
- * passed to the valueOf() method.  This transformation can return the value of calling a getter, or perform
+ * passed to the valueOf() method. This transformation can return the value of calling a getter, or perform
  * some more elaborate logic to calculate a value, of type {@code V}.
  */
 @FunctionalInterface

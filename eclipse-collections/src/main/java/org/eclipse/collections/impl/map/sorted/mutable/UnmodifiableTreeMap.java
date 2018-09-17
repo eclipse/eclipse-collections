@@ -104,7 +104,7 @@ public class UnmodifiableTreeMap<K, V>
     }
 
     /**
-     * This method will take a MutableSortedMap and wrap it directly in a UnmodifiableMutableMap.  It will
+     * This method will take a MutableSortedMap and wrap it directly in a UnmodifiableMutableMap. It will
      * take any other non-Eclipse-Collections SortedMap and first adapt it will a SortedMapAdapter, and then return a
      * UnmodifiableSortedMap that wraps the adapter.
      */

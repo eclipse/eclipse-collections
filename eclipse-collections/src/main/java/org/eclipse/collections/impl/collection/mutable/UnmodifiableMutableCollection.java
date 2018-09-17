@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2018 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -30,7 +30,7 @@ public class UnmodifiableMutableCollection<T>
     }
 
     /**
-     * This method will take a MutableCollection and wrap it directly in a UnmodifiableMutableCollection.  It will
+     * This method will take a MutableCollection and wrap it directly in a UnmodifiableMutableCollection. It will
      * take any other non-Eclipse-Collections collection and first adapt it will a CollectionAdapter, and then return a
      * UnmodifiableMutableCollection that wraps the adapter.
      */

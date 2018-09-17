@@ -60,9 +60,9 @@ public interface OrderedIterable<T> extends RichIterable<T>
     int indexOf(Object object);
 
     /**
-     * Returns the first element of an iterable.  In the case of a List it is the element at the first index.  In the
-     * case of any other Collection, it is the first element that would be returned during an iteration.  If the
-     * iterable is empty, null is returned.  If null is a valid element of the container, then a developer would need to
+     * Returns the first element of an iterable. In the case of a List it is the element at the first index. In the
+     * case of any other Collection, it is the first element that would be returned during an iteration. If the
+     * iterable is empty, null is returned. If null is a valid element of the container, then a developer would need to
      * check to see if the iterable is empty to validate that a null result was not due to the container being empty.
      */
     @Override
@@ -86,9 +86,9 @@ public interface OrderedIterable<T> extends RichIterable<T>
     }
 
     /**
-     * Returns the last element of an iterable.  In the case of a List it is the element at the last index.  In the case
-     * of any other Collection, it is the last element that would be returned during an iteration.  If the iterable is
-     * empty, null is returned.  If null is a valid element of the container, then a developer would need to check to
+     * Returns the last element of an iterable. In the case of a List it is the element at the last index. In the case
+     * of any other Collection, it is the last element that would be returned during an iteration. If the iterable is
+     * empty, null is returned. If null is a valid element of the container, then a developer would need to check to
      * see if the iterable is empty to validate that a null result was not due to the container being empty.
      */
     @Override
@@ -154,7 +154,7 @@ public interface OrderedIterable<T> extends RichIterable<T>
     <S> boolean corresponds(OrderedIterable<S> other, Predicate2<? super T, ? super S> predicate);
 
     /**
-     * Iterates over the section of the iterable covered by the specified inclusive indexes.  The indexes are
+     * Iterates over the section of the iterable covered by the specified inclusive indexes. The indexes are
      * both inclusive.
      * <p>
      * <p>
@@ -190,7 +190,7 @@ public interface OrderedIterable<T> extends RichIterable<T>
     void forEachWithIndex(ObjectIntProcedure<? super T> objectIntProcedure);
 
     /**
-     * Iterates over the section of the iterable covered by the specified inclusive indexes.  The indexes are
+     * Iterates over the section of the iterable covered by the specified inclusive indexes. The indexes are
      * both inclusive.
      * <p>
      * <p>

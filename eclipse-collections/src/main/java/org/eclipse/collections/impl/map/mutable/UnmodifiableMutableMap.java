@@ -94,7 +94,7 @@ public class UnmodifiableMutableMap<K, V>
     }
 
     /**
-     * This method will take a MutableMap and wrap it directly in a UnmodifiableMutableMap.  It will
+     * This method will take a MutableMap and wrap it directly in a UnmodifiableMutableMap. It will
      * take any other non-Eclipse-Collections map and first adapt it will a MapAdapter, and then return a
      * UnmodifiableMutableMap that wraps the adapter.
      */

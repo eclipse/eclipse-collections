@@ -1567,7 +1567,7 @@ public final class Collectors2
 
     /**
      * <p>Returns a new collection with the results of applying the specified function on each element of the source
-     * collection.  This method is also commonly called transform or map. The new collection is created as the result
+     * collection. This method is also commonly called transform or map. The new collection is created as the result
      * of evaluating the provided Supplier.</p>
      * <p>Examples:</p>
      * {@code MutableList<String> collect1 =
@@ -1592,7 +1592,7 @@ public final class Collectors2
     /**
      * The method {@code flatCollect} is a special case of {@link #collect(Function, Supplier)}. With {@code collect},
      * when the {@link Function} returns a collection, the result is a collection of collections. {@code flatCollect} outputs
-     * a single "flattened" collection instead.  This method is commonly called flatMap.
+     * a single "flattened" collection instead. This method is commonly called flatMap.
      * <p>Example:</p>
      * <pre>{@code
      * List<MutableList<String>> lists =

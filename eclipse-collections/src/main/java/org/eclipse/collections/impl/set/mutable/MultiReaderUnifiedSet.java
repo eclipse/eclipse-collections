@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2018 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -71,12 +71,12 @@ import org.eclipse.collections.impl.utility.LazyIterate;
 import static org.eclipse.collections.impl.factory.Iterables.mList;
 
 /**
- * MultiReadUnifiedSet provides a thread-safe wrapper around a UnifiedSet, using a ReentrantReadWriteLock.  In order to
- * provide true thread-safety, MultiReaderFastList does not implement iterator() as all this method requires an external
- * lock to be taken to provide thread-safe iteration.  You can use an iterator() if you use the
- * withReadLockAndDelegate() or withWriteLockAndDelegate() methods.  Both of these methods take a parameter of type
- * Procedure<MutableSet>, and a wrapped version of the underlying Unified is returned.  This wrapper guarantees that no
- * external pointer can ever reference the underlying UnifiedSet outside of a locked procedure.  In the case of the read
+ * MultiReadUnifiedSet provides a thread-safe wrapper around a UnifiedSet, using a ReentrantReadWriteLock. In order to
+ * provide true thread-safety, MultiReaderUnifiedSet does <em>not</em> implement {@code iterator()} as this method requires an external
+ * lock to be taken to provide thread-safe iteration. You can use an {@code iterator()} if you use the
+ * {@code withReadLockAndDelegate()} or {@code withWriteLockAndDelegate()} methods. Both of these methods take a parameter of type
+ * {@code Procedure<MutableSet>}, and a wrapped version of the underlying Unified is returned. This wrapper guarantees that no
+ * external pointer can ever reference the underlying UnifiedSet outside of a locked procedure. In the case of the read
  * lock method, an Unmodifiable version of the collection is offered, which will throw UnsupportedOperationExceptions on
  * any write methods like add or remove.
  */

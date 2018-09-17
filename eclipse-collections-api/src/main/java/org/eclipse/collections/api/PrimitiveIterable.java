@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2018 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -62,7 +62,7 @@ public interface PrimitiveIterable
 
     /**
      * Returns a string representation of this collection by delegating to {@link #makeString(String)} and defaulting
-     * the separator parameter to the characters <tt>", "</tt> (comma and space).
+     * the separator parameter to the characters {@code ", "} (comma and space).
      *
      * @return a string representation of this collection.
      * @since 3.0
@@ -74,7 +74,7 @@ public interface PrimitiveIterable
 
     /**
      * Returns a string representation of this collection by delegating to {@link #makeString(String, String, String)}
-     * and defaulting the start and end parameters to <tt>""</tt> (the empty String).
+     * and defaulting the start and end parameters to {@code ""} (the empty String).
      *
      * @return a string representation of this collection.
      * @since 3.0
@@ -99,7 +99,7 @@ public interface PrimitiveIterable
     }
 
     /**
-     * Prints a string representation of this collection onto the given {@code Appendable}.  Prints the string returned
+     * Prints a string representation of this collection onto the given {@code Appendable}. Prints the string returned
      * by {@link #makeString()}.
      *
      * @since 3.0
@@ -110,7 +110,7 @@ public interface PrimitiveIterable
     }
 
     /**
-     * Prints a string representation of this collection onto the given {@code Appendable}.  Prints the string returned
+     * Prints a string representation of this collection onto the given {@code Appendable}. Prints the string returned
      * by {@link #makeString(String)}.
      *
      * @since 3.0
@@ -121,7 +121,7 @@ public interface PrimitiveIterable
     }
 
     /**
-     * Prints a string representation of this collection onto the given {@code Appendable}.  Prints the string returned
+     * Prints a string representation of this collection onto the given {@code Appendable}. Prints the string returned
      * by {@link #makeString(String, String, String)}.
      *
      * @since 3.0

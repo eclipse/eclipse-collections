@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 Goldman Sachs and others.
+ * Copyright (c) 2018 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -83,7 +83,7 @@ public class SynchronizedSortedMap<K, V>
     }
 
     /**
-     * This method will take a MutableSortedMap and wrap it directly in a SynchronizedSortedMap.  It will
+     * This method will take a MutableSortedMap and wrap it directly in a SynchronizedSortedMap. It will
      * take any other non-Eclipse-Collections SortedMap and first adapt it will a SortedMapAdapter, and then return a
      * SynchronizedSortedMap that wraps the adapter.
      */

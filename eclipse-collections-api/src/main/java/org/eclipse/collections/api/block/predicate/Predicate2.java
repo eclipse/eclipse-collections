@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2018 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -14,7 +14,7 @@ import java.io.Serializable;
 import java.util.function.BiPredicate;
 
 /**
- * A Predicate2 is primarily used in methods like selectWith, detectWith, rejectWith.  The first argument
+ * A Predicate2 is primarily used in methods like selectWith, detectWith, rejectWith. The first argument
  * is the element of the collection being iterated over, and the second argument is a parameter passed into
  * the predicate from the calling method.
  */

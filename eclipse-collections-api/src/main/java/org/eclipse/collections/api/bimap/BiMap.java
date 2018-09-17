@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2018 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -41,7 +41,7 @@ public interface BiMap<K, V> extends MapIterable<K, V>
     BiMap<V, K> flipUniqueValues();
 
     /**
-     * Converts the BiMap to an ImmutableBiMap.  If the bimap is immutable, it returns itself.
+     * Converts the BiMap to an ImmutableBiMap. If the bimap is immutable, it returns itself.
      */
     @Override
     ImmutableBiMap<K, V> toImmutable();

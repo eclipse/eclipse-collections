@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2018 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -82,7 +82,7 @@ import org.eclipse.collections.impl.tuple.Tuples;
 import org.eclipse.collections.impl.utility.internal.IterableIterate;
 
 /**
- * The MapIterate class provides a few of the methods from the Smalltalk Collection Protocol.  This includes:
+ * The MapIterate class provides a few of the methods from the Smalltalk Collection Protocol. This includes:
  * <ul>
  * <li>select: -- a.k.a. filter</li>
  * <li>reject: -- a.k.a. not-filter</li>
@@ -108,7 +108,7 @@ public final class MapIterate
     }
 
     /**
-     * A null-safe check on a map to see if it isEmpty.  A null collection results in {@code true}.
+     * A null-safe check on a map to see if it isEmpty. A null collection results in {@code true}.
      */
     public static boolean isEmpty(Map<?, ?> map)
     {
@@ -116,7 +116,7 @@ public final class MapIterate
     }
 
     /**
-     * A null-safe check on a map to see if it notEmpty.  A null collection results in {@code false}.
+     * A null-safe check on a map to see if it notEmpty. A null collection results in {@code false}.
      */
     public static boolean notEmpty(Map<?, ?> map)
     {

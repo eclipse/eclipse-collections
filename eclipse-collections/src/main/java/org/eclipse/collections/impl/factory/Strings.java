@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 BNY Mellon.
+ * Copyright (c) 2018 BNY Mellon and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -15,7 +15,7 @@ import org.eclipse.collections.impl.string.immutable.CodePointAdapter;
 
 /**
  * This class can be used to create instances of CharAdapter and CodePointAdapter.
- * <p/>
+ * <p>
  * <pre>
  * CharAdapter chars1 = Strings.asChars("Hello World!");
  * CharAdapter chars2 = Strings.toChars('a', 'b', 'c');

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  ~ Copyright (c) 2017 Goldman Sachs.
+  ~ Copyright (c) 2018 Goldman Sachs and others.
   ~ All rights reserved. This program and the accompanying materials
   ~ are made available under the terms of the Eclipse Public License v1.0
   ~ and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -454,12 +454,12 @@
                     <doctitle>Eclipse Collections - ${project.version}</doctitle>
                     <windowtitle>Eclipse Collections - ${project.version}</windowtitle>
                     <show>public</show>
+                    <detectJavaApiLink>true</detectJavaApiLink>
                     <links>
-                        <link>https://docs.oracle.com/javase/8/docs/api/</link>
                         <link>http://junit.sourceforge.net/javadoc/</link>
                     </links>
                     <destDir>${project.version}</destDir>
-                    <additionalparam>-Xdoclint:none</additionalparam>
+                    <doclint>html,syntax,accessibility</doclint>
                     <excludePackageNames>
                         org.openjdk,org.eclipse.collections.impl.jmh,org.eclipse.collections.codegenerator
                     </excludePackageNames>
@@ -501,11 +501,15 @@
                     <doctitle>Eclipse Collections - ${project.version}</doctitle>
                     <windowtitle>Eclipse Collections - ${project.version}</windowtitle>
                     <show>public</show>
+                    <detectJavaApiLink>true</detectJavaApiLink>
                     <links>
-                        <link>https://docs.oracle.com/javase/8/docs/api/</link>
                         <link>http://junit.sourceforge.net/javadoc/</link>
                     </links>
-                    <additionalparam>-Xdoclint:none</additionalparam>
+                    <destDir>${project.version}</destDir>
+                    <doclint>html,syntax,accessibility</doclint>
+                    <excludePackageNames>
+                        org.openjdk,org.eclipse.collections.impl.jmh,org.eclipse.collections.codegenerator
+                    </excludePackageNames>
                 </configuration>
             </plugin>
 

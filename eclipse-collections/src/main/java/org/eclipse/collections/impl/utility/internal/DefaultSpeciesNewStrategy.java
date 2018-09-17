@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2018 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -33,8 +33,8 @@ public class DefaultSpeciesNewStrategy
 
     /**
      * Creates a new instance of a collection based on the class type of collection, not on the type of objects the collections contains.
-     * e.g.  CollectionFactory.<Integer>speciesNew(hashSetOfString) returns a new HashSet<Integer>();
-     * e.g.  CollectionFactory.<Date>speciesNew(linkedListOfWombles) returns a new LinkedList<Date>();
+     * e.g. {@code CollectionFactory.<Integer>speciesNew(hashSetOfString)} returns a new {@code HashSet<Integer>()};
+     * e.g. {@code CollectionFactory.<Date>speciesNew(linkedListOfWombles)} returns a new {@code LinkedList<Date>()};
      */
     public <T> Collection<T> speciesNew(Collection<?> collection)
     {
@@ -56,8 +56,8 @@ public class DefaultSpeciesNewStrategy
     /**
      * Creates a new instance of a collection based on the class type of collection and specified initial capacity,
      * not on the type of objects the collections contains.
-     * e.g.  CollectionFactory.<Integer>speciesNew(hashSetOfString, 20) returns a new HashSet<Integer>(20);
-     * e.g.  CollectionFactory.<Date>speciesNew(linkedListOfWombles, 42) returns a new LinkedList<Date>(42);
+     * e.g. {@code CollectionFactory.<Integer>speciesNew(hashSetOfString, 20)} returns a new {@code HashSet<Integer>(20)};
+     * e.g. {@code CollectionFactory.<Date>speciesNew(linkedListOfWombles, 42)} returns a new {@code LinkedList<Date>(42)};
      */
     public <T> Collection<T> speciesNew(Collection<?> collection, int size)
     {

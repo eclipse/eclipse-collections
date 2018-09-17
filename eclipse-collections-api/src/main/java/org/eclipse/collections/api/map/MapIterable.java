@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2018 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -28,7 +28,7 @@ import org.eclipse.collections.api.multimap.Multimap;
 import org.eclipse.collections.api.tuple.Pair;
 
 /**
- * A Read-only Map API, with the minor exception inherited from java.lang.Iterable.  The method map.iterator().remove()
+ * A Read-only Map API, with the minor exception inherited from java.lang.Iterable. The method map.iterator().remove()
  * will throw an UnsupportedOperationException.
  */
 public interface MapIterable<K, V> extends RichIterable<V>
@@ -63,7 +63,7 @@ public interface MapIterable<K, V> extends RichIterable<V>
      * Executes the Procedure for each value of the map and returns {@code this}.
      * <p>
      * <pre>
-     * return peopleByCity.<b>tap</b>(person -> LOGGER.info(person.getName()));
+     * return peopleByCity.<b>tap</b>(person -&gt; LOGGER.info(person.getName()));
      * </pre>
      *
      * @see #forEach(Procedure)
@@ -88,7 +88,7 @@ public interface MapIterable<K, V> extends RichIterable<V>
      * <pre>
      *     final Collection&lt;String&gt; collection = new ArrayList&lt;String&gt;();
      *     MutableMap&lt;Integer, String&gt; map = this.newMapWithKeysValues(1, "One", 2, "Two", 3, "Three");
-     *     map.<b>forEachKeyValue</b>((Integer key, String value) -> collection.add(String.valueOf(key) + value));
+     *     map.<b>forEachKeyValue</b>((Integer key, String value) -&gt; collection.add(String.valueOf(key) + value));
      *     Verify.assertContainsAll(collection, "1One", "2Two", "3Three");
      * </pre>
      */
@@ -147,7 +147,7 @@ public interface MapIterable<K, V> extends RichIterable<V>
     RichIterable<Pair<K, V>> keyValuesView();
 
     /**
-     * Given a map from Domain -> Range return a multimap from Range -> Domain. We chose the name 'flip'
+     * Given a map from Domain {@code ->} Range return a multimap from Range {@code ->} Domain. We chose the name 'flip'
      * rather than 'invert' or 'transpose' since this method does not have the property of applying twice
      * returns the original.
      * <p>
@@ -166,7 +166,7 @@ public interface MapIterable<K, V> extends RichIterable<V>
      * <p>
      * <pre>
      * MapIterable&lt;City, Person&gt; selected =
-     *     peopleByCity.select((city, person) -> city.getName().equals("Anytown") && person.getLastName().equals("Smith"));
+     *     peopleByCity.select((city, person) -&gt; city.getName().equals("Anytown") &amp;&amp; person.getLastName().equals("Smith"));
      * </pre>
      */
     MapIterable<K, V> select(Predicate2<? super K, ? super V> predicate);
@@ -177,29 +177,29 @@ public interface MapIterable<K, V> extends RichIterable<V>
      * <p>
      * <pre>
      * MapIterable&lt;City, Person&gt; rejected =
-     *     peopleByCity.reject((city, person) -> city.getName().equals("Anytown") && person.getLastName().equals("Smith"));
+     *     peopleByCity.reject((city, person) -&gt; city.getName().equals("Anytown") &amp;&amp; person.getLastName().equals("Smith"));
      * </pre>
      */
     MapIterable<K, V> reject(Predicate2<? super K, ? super V> predicate);
 
     /**
-     * For each key and value of the map the function is evaluated.  The results of these evaluations are returned in
-     * a new map.  The map returned will use the values projected from the function rather than the original values.
+     * For each key and value of the map the function is evaluated. The results of these evaluations are returned in
+     * a new map. The map returned will use the values projected from the function rather than the original values.
      * <p>
      * <pre>
      * MapIterable&lt;String, String&gt; collected =
-     *     peopleByCity.collect((City city, Person person) -> Pair.of(city.getCountry(), person.getAddress().getCity()));
+     *     peopleByCity.collect((City city, Person person) -&gt; Pair.of(city.getCountry(), person.getAddress().getCity()));
      * </pre>
      */
     <K2, V2> MapIterable<K2, V2> collect(Function2<? super K, ? super V, Pair<K2, V2>> function);
 
     /**
-     * For each key and value of the map the function is evaluated.  The results of these evaluations are returned in
-     * a new map.  The map returned will use the values projected from the function rather than the original values.
+     * For each key and value of the map the function is evaluated. The results of these evaluations are returned in
+     * a new map. The map returned will use the values projected from the function rather than the original values.
      * <p>
      * <pre>
      * MapIterable&lt;City, String&gt; collected =
-     *     peopleByCity.collectValues((City city, Person person) -> person.getFirstName() + " " + person.getLastName());
+     *     peopleByCity.collectValues((City city, Person person) -&gt; person.getFirstName() + " " + person.getLastName());
      * </pre>
      */
     <R> MapIterable<K, R> collectValues(Function2<? super K, ? super V, ? extends R> function);
@@ -213,7 +213,7 @@ public interface MapIterable<K, V> extends RichIterable<V>
      * <p>
      * <pre>
      * Pair&lt;City, Person&gt; detected =
-     *     peopleByCity.detect((City city, Person person) -> city.getName().equals("Anytown") && person.getLastName().equals("Smith"));
+     *     peopleByCity.detect((City city, Person person) -&gt; city.getName().equals("Anytown") &amp;&amp; person.getLastName().equals("Smith"));
      * </pre>
      */
     Pair<K, V> detect(Predicate2<? super K, ? super V> predicate);
@@ -227,7 +227,7 @@ public interface MapIterable<K, V> extends RichIterable<V>
      * <pre>
      * Optional&lt;Pair&lt;City, Person&gt;&gt; detected =
      *     peopleByCity.detectOptional((city, person)
-     *          -> city.getName().equals("Anytown") && person.getLastName().equals("Smith"));
+     *          -&gt; city.getName().equals("Anytown") &amp;&amp; person.getLastName().equals("Smith"));
      * </pre>
      */
     Optional<Pair<K, V>> detectOptional(Predicate2<? super K, ? super V> predicate);
@@ -246,7 +246,7 @@ public interface MapIterable<K, V> extends RichIterable<V>
 
     /**
      * Returns a string with the keys and values of this map separated by commas with spaces and
-     * enclosed in curly braces.  Each key and value is separated by an equals sign.
+     * enclosed in curly braces. Each key and value is separated by an equals sign.
      * <p>
      * <pre>
      * Assert.assertEquals("{1=1, 2=2, 3=3}", Maps.mutable.with(1, 1, 2, 2, 3, 3).toString());

@@ -48,7 +48,7 @@ import org.eclipse.collections.impl.utility.Iterate;
 import org.eclipse.collections.impl.utility.StringIterate;
 
 /**
- * Provides a view into the char[] stored in a String as an ImmutableCharList.  This is a cleaner more OO way of
+ * Provides a view into the char[] stored in a String as an ImmutableCharList. This is a cleaner more OO way of
  * providing many of the iterable protocols available in StringIterate for char values.
  *
  * @since 7.0

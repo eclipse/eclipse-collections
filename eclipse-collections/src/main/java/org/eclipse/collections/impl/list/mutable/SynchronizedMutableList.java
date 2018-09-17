@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 Goldman Sachs and others.
+ * Copyright (c) 2018 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -81,7 +81,7 @@ public class SynchronizedMutableList<T>
     }
 
     /**
-     * This method will take a MutableList and wrap it directly in a SynchronizedMutableList.  It will
+     * This method will take a MutableList and wrap it directly in a SynchronizedMutableList. It will
      * take any other non-Eclipse-Collections collection and first adapt it will a ListAdapter, and then return a
      * SynchronizedMutableList that wraps the adapter.
      */
@@ -93,9 +93,9 @@ public class SynchronizedMutableList<T>
     }
 
     /**
-     * This method will take a MutableList and wrap it directly in a SynchronizedMutableList.  It will
+     * This method will take a MutableList and wrap it directly in a SynchronizedMutableList. It will
      * take any other non-Eclipse-Collections collection and first adapt it will a ListAdapter, and then return a
-     * SynchronizedMutableList that wraps the adapter.  Additionally, a developer specifies which lock to use
+     * SynchronizedMutableList that wraps the adapter. Additionally, a developer specifies which lock to use
      * with the collection.
      */
     public static <E, L extends List<E>> SynchronizedMutableList<E> of(L list, Object lock)

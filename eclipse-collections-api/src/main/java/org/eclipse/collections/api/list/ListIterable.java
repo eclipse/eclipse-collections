@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 Goldman Sachs and others.
+ * Copyright (c) 2018 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -47,9 +47,9 @@ import org.eclipse.collections.api.stack.MutableStack;
 import org.eclipse.collections.api.tuple.Pair;
 
 /**
- * An iterable whose items are ordered and may be accessed directly by index.  A reverseForEach
+ * An iterable whose items are ordered and may be accessed directly by index. A reverseForEach
  * internal iterator is available iterating over the indexed iterable in reverse, starting from
- * the end and going to the beginning.  Additionally, internal iterators are available for batching
+ * the end and going to the beginning. Additionally, internal iterators are available for batching
  * style iteration which is useful for parallel processing.
  */
 public interface ListIterable<T>
@@ -67,7 +67,7 @@ public interface ListIterable<T>
     int lastIndexOf(Object o);
 
     /**
-     * Returns the item at index 0 of the container.  If the container is empty, null is returned.  If null
+     * Returns the item at index 0 of the container. If the container is empty, null is returned. If null
      * is a valid item of the container, then a developer will need to check to see if the container is
      * empty first.
      */
@@ -75,7 +75,7 @@ public interface ListIterable<T>
     T getFirst();
 
     /**
-     * Returns the item at index (size() - 1) of the container.  If the container is empty, null is returned.  If null
+     * Returns the item at index (size() - 1) of the container. If the container is empty, null is returned. If null
      * is a valid item of the container, then a developer will need to check to see if the container is
      * empty first.
      */
