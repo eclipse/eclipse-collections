@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2018 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -17,8 +17,8 @@ import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.map.MutableMapIterable;
 
 /**
- * This procedure is used to apply an aggregate function like sum on a grouped set of data.  The values in the
- * grouping must be immutable using this procedure.  An example would be using an Integer which is immutable
+ * This procedure is used to apply an aggregate function like sum on a grouped set of data. The values in the
+ * grouping must be immutable using this procedure. An example would be using an Integer which is immutable
  * vs. an AtomicInteger which is not.
  */
 public final class NonMutatingAggregationProcedure<T, K, V> implements Procedure<T>

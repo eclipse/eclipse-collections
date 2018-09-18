@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2018 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -68,10 +68,10 @@ import org.eclipse.collections.impl.utility.LazyIterate;
 
 /**
  * MultiReaderHashBag provides a thread-safe wrapper around a HashBag, using a ReentrantReadWriteLock. In order to
- * provide true thread-safety, MultiReaderHashBag does not implement iterator() as this method requires an external lock
+ * provide true thread-safety, MultiReaderHashBag does <em>not</em> implement {@code iterator()} as this method requires an external lock
  * to be taken to provide thread-safe iteration. All of these methods are available however, if you use the
- * withReadLockAndDelegate() or withWriteLockAndDelegate() methods. Both of these methods take a parameter of type
- * Procedure<MutableBag>, and a wrapped version of the underlying HashBag is returned. This wrapper guarantees that
+ * {@code withReadLockAndDelegate()} or {@code withWriteLockAndDelegate()} methods. Both of these methods take a parameter of type
+ * {@code Procedure<MutableBag>}, and a wrapped version of the underlying HashBag is returned. This wrapper guarantees that
  * no external pointer can ever reference the underlying HashBag outside of a locked procedure. In the case of the
  * read lock method, an Unmodifiable version of the collection is offered, which will throw UnsupportedOperationExceptions
  * on any write methods like add or remove.

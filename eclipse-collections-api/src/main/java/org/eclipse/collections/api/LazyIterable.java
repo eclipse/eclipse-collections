@@ -37,9 +37,6 @@ import org.eclipse.collections.api.tuple.Pair;
 public interface LazyIterable<T>
         extends RichIterable<T>
 {
-    /**
-     * @inheritDoc
-     */
     @Override
     T getFirst();
 

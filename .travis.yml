@@ -40,6 +40,11 @@ jobs:
         - DESC="compile performance-tests"
         - CMD="mvn install --projects performance-tests --also-make --activate-profiles all -DskipTests=true"
 
+    - jdk: oraclejdk8
+      env:
+        - DESC="compile javadoc"
+        - CMD="mvn install javadoc:jar --projects '!unit-tests,!junit-trait-runner,!unit-tests-java8,!serialization-tests,!scala-unit-tests,!jmh-scala-tests,!jmh-tests,!jcstress-tests,!p2-repository,!test-coverage' --activate-profiles all -DskipTests=true"
+
     - jdk: oraclejdk9
       env:
         - DESC="unit tests oraclejdk9"

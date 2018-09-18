@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2018 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -17,7 +17,7 @@ import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
 
 /**
- * A FixedSizeCollection is a collection that may be mutated, but cannot grow or shrink in size.  It is up to
+ * A FixedSizeCollection is a collection that may be mutated, but cannot grow or shrink in size. It is up to
  * the underlying implementation to decide which mutations are allowable.
  */
 public interface FixedSizeCollection<T>
@@ -26,7 +26,7 @@ public interface FixedSizeCollection<T>
     /**
      * This method allows fixed size collections the ability to add elements to their existing elements. A new instance
      * of {@link MutableCollection} is returned containing the elements of the original collection with the new element
-     * {@link #add(Object) added}.  Implementations will return a new FixedSizeCollection where possible.  In order to
+     * {@link #add(Object) added}. Implementations will return a new FixedSizeCollection where possible. In order to
      * use this method properly with mutable and fixed size collections the following approach must be taken:
      * <p>
      * <pre>
@@ -44,7 +44,7 @@ public interface FixedSizeCollection<T>
     /**
      * This method allows fixed size collections the ability to remove elements from their existing elements. A new
      * instance of {@link MutableCollection} is returned containing the elements of the original collection with the
-     * element {@link #remove(Object) removed}.  Implementations will return a new FixedSizeCollection where possible.
+     * element {@link #remove(Object) removed}. Implementations will return a new FixedSizeCollection where possible.
      * In order to use this method properly with mutable and fixed size collections the following approach must be
      * taken:
      * <p>
@@ -63,8 +63,8 @@ public interface FixedSizeCollection<T>
     /**
      * This method allows fixed size collections the ability to add multiple elements to their existing elements. A new
      * instance of {@link MutableCollection} is returned containing the elements of the original collection with all of
-     * the new elements {@link #addAll(Collection) added}.  Implementations will return a new FixedSizeCollection where
-     * possible.  In order to use this method properly with mutable and fixed size collections the following approach
+     * the new elements {@link #addAll(Collection) added}. Implementations will return a new FixedSizeCollection where
+     * possible. In order to use this method properly with mutable and fixed size collections the following approach
      * must be taken:
      * <p>
      * <pre>
@@ -81,8 +81,8 @@ public interface FixedSizeCollection<T>
     /**
      * This method allows fixed size collections the ability to remove multiple elements from their existing elements.
      * A new instance of {@link MutableCollection} is returned containing the elements of the original collection with
-     * the given elements {@link #removeAll(Collection) removed}.  Implementations will return a new FixedSizeCollection
-     * where possible.  In order to use this method properly with mutable and fixed size collections the following
+     * the given elements {@link #removeAll(Collection) removed}. Implementations will return a new FixedSizeCollection
+     * where possible. In order to use this method properly with mutable and fixed size collections the following
      * approach must be taken:
      * <p>
      * <pre>
@@ -97,67 +97,67 @@ public interface FixedSizeCollection<T>
     MutableCollection<T> withoutAll(Iterable<? extends T> elements);
 
     /**
-     * @throws UnsupportedOperationException the <tt>add</tt> operation is not supported by this collection.
+     * @throws UnsupportedOperationException the {@code add} operation is not supported by this collection.
      */
     @Override
     boolean add(T t);
 
     /**
-     * @throws UnsupportedOperationException the <tt>addAllIterable</tt> operation is not supported by this collection.
+     * @throws UnsupportedOperationException the {@code addAllIterable} operation is not supported by this collection.
      */
     @Override
     boolean addAllIterable(Iterable<? extends T> iterable);
 
     /**
-     * @throws UnsupportedOperationException the <tt>addAll</tt> operation is not supported by this collection.
+     * @throws UnsupportedOperationException the {@code addAll} operation is not supported by this collection.
      */
     @Override
     boolean addAll(Collection<? extends T> collection);
 
     /**
-     * @throws UnsupportedOperationException the <tt>remove</tt> operation is not supported by this collection.
+     * @throws UnsupportedOperationException the {@code remove} operation is not supported by this collection.
      */
     @Override
     boolean remove(Object o);
 
     /**
-     * @throws UnsupportedOperationException the <tt>removeAll</tt> method is not supported by this collection.
+     * @throws UnsupportedOperationException the {@code removeAll} method is not supported by this collection.
      */
     @Override
     boolean removeAll(Collection<?> collection);
 
     /**
-     * @throws UnsupportedOperationException the <tt>removeAllIterable</tt> method is not supported by this collection.
+     * @throws UnsupportedOperationException the {@code removeAllIterable} method is not supported by this collection.
      */
     @Override
     boolean removeAllIterable(Iterable<?> iterable);
 
     /**
-     * @throws UnsupportedOperationException the <tt>removeIf</tt> method is not supported by this collection.
+     * @throws UnsupportedOperationException the {@code removeIf} method is not supported by this collection.
      */
     @Override
     boolean removeIf(Predicate<? super T> predicate);
 
     /**
-     * @throws UnsupportedOperationException the <tt>removeIfWith</tt> method is not supported by this collection.
+     * @throws UnsupportedOperationException the {@code removeIfWith} method is not supported by this collection.
      */
     @Override
     <P> boolean removeIfWith(Predicate2<? super T, ? super P> predicate, P parameter);
 
     /**
-     * @throws UnsupportedOperationException the <tt>retainAll</tt> method is not supported by this collection.
+     * @throws UnsupportedOperationException the {@code retainAll} method is not supported by this collection.
      */
     @Override
     boolean retainAll(Collection<?> collection);
 
     /**
-     * @throws UnsupportedOperationException the <tt>retainAllIterable</tt> method is not supported by this collection.
+     * @throws UnsupportedOperationException the {@code retainAllIterable} method is not supported by this collection.
      */
     @Override
     boolean retainAllIterable(Iterable<?> iterable);
 
     /**
-     * @throws UnsupportedOperationException the <tt>clear</tt> method is not supported by this collection.
+     * @throws UnsupportedOperationException the {@code clear} method is not supported by this collection.
      */
     @Override
     void clear();

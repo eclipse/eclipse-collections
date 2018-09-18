@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs and others.
+ * Copyright (c) 2018 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -108,10 +108,10 @@ public interface MutableMultimap<K, V>
      * <pre>
      *  MutableMultimap synchedMultimap = multimap.asSynchronized();
      *
-     *  synchedMultimap.forEachKey(key -> ... );
-     *  synchedMultimap.forEachValue(value -> ... );
-     *  synchedMultimap.forEachKeyValue((key, value) -> ... );
-     *  synchedMultimap.forEachKeyMultiValues((key, values) -> ... );
+     *  synchedMultimap.forEachKey(key -&gt; ... );
+     *  synchedMultimap.forEachValue(value -&gt; ... );
+     *  synchedMultimap.forEachKeyValue((key, value) -&gt; ... );
+     *  synchedMultimap.forEachKeyMultiValues((key, values) -&gt; ... );
      * </pre>
      * <p>
      * If you want to iterate imperatively over the keySet(), keysView(), valuesView(), or other views, you will

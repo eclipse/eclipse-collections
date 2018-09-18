@@ -82,7 +82,7 @@ public interface SortedBag<T>
     SortedMapIterable<T, Integer> toMapOfItemToCount();
 
     /**
-     * Convert the SortedBag to an ImmutableSortedBag.  If the bag is immutable, it returns itself.
+     * Convert the SortedBag to an ImmutableSortedBag. If the bag is immutable, it returns itself.
      * Not yet supported.
      */
     @Override

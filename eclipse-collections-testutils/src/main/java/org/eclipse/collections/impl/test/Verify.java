@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2018 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -4111,7 +4111,7 @@ public final class Verify extends Assert
      * <p>
      * e.g.
      * <pre>
-     * Verify.assertThrowsWithCause(RuntimeException.class, IOException.class, new Callable<Void>()
+     * Verify.assertThrowsWithCause(RuntimeException.class, IOException.class, new Callable&lt;Void&gt;()
      * {
      *    public Void call() throws Exception
      *    {

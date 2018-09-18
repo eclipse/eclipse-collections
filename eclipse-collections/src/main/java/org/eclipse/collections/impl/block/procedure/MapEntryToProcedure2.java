@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2018 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -17,7 +17,7 @@ import org.eclipse.collections.api.block.procedure.Procedure2;
 
 /**
  * MapEntryToProcedure2 translates the result of calling entrySet() on a Map, which results in a collection
- * of Map.Entry objects into corresponding Procedure2s.  This removes the need to deal with Map.Entry when
+ * of Map.Entry objects into corresponding Procedure2s. This removes the need to deal with Map.Entry when
  * iterating over an entrySet.
  */
 public final class MapEntryToProcedure2<K, V> implements Procedure<Map.Entry<K, V>>

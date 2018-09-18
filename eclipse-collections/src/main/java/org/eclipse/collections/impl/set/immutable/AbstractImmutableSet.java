@@ -97,7 +97,7 @@ import org.eclipse.collections.impl.utility.Iterate;
 import org.eclipse.collections.impl.utility.internal.SetIterables;
 
 /**
- * This class is the parent class for all ImmutableSets.  All implementations of ImmutableSet must implement the Set
+ * This class is the parent class for all ImmutableSets. All implementations of ImmutableSet must implement the Set
  * interface so anArraySet.equals(anImmutableSet) can return true when the contents and order are the same.
  */
 public abstract class AbstractImmutableSet<T> extends AbstractImmutableCollection<T>

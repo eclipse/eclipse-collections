@@ -40,7 +40,7 @@ import org.eclipse.collections.api.tuple.Pair;
 
 /**
  * ImmutableSet is the non-modifiable equivalent interface to {@link MutableSet}. {@link MutableSet#toImmutable()} will
- * give you an appropriately trimmed implementation of ImmutableSet.  All ImmutableSet implementations must implement
+ * give you an appropriately trimmed implementation of ImmutableSet. All ImmutableSet implementations must implement
  * the java.util.Set interface so they can satisfy the equals() contract and be compared against other set structures
  * like UnifiedSet or HashSet.
  */

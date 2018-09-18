@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2018 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -59,7 +59,7 @@ import org.eclipse.collections.impl.utility.Iterate;
 
 /**
  * The FJIterate class contains several parallel algorithms that work with Collections and make use of Java's fork-join
- * framework.  All of the higher level parallel algorithms depend on the basic parallel algorithm named {@code forEach}.
+ * framework. All of the higher level parallel algorithms depend on the basic parallel algorithm named {@code forEach}.
  * The forEach algorithm employs a batching fork and join approach.
  * <p>
  * All Collections that are not either a {@link RandomAccess} or {@link List} are first converted to a Java array
@@ -80,7 +80,7 @@ public final class FJIterate
     }
 
     /**
-     * Iterate over the collection specified, in parallel batches using default runtime parameter values.  The
+     * Iterate over the collection specified, in parallel batches using default runtime parameter values. The
      * {@code ObjectIntProcedure} used must be stateless, or use concurrent aware objects if they are to be shared.
      * <p>
      * e.g.
@@ -103,8 +103,8 @@ public final class FJIterate
     }
 
     /**
-     * Iterate over the collection specified in parallel batches using the default runtime parameters.  The
-     * ObjectIntProcedure used must be stateless, or use concurrent aware objects if they are to be shared.  The code
+     * Iterate over the collection specified in parallel batches using the default runtime parameters. The
+     * ObjectIntProcedure used must be stateless, or use concurrent aware objects if they are to be shared. The code
      * is executed against the specified executor.
      * <p>
      * <pre>e.g.
@@ -131,8 +131,8 @@ public final class FJIterate
     }
 
     /**
-     * Iterate over the collection specified in parallel batches.  The
-     * ObjectIntProcedure used must be stateless, or use concurrent aware objects if they are to be shared.  The
+     * Iterate over the collection specified in parallel batches. The
+     * ObjectIntProcedure used must be stateless, or use concurrent aware objects if they are to be shared. The
      * specified minimum fork size and task count are used instead of the default values.
      *
      * @param minForkSize Only run in parallel if input collection is longer than this.
@@ -236,7 +236,7 @@ public final class FJIterate
     }
 
     /**
-     * Iterate over the collection specified in parallel batches using default runtime parameter values.  The
+     * Iterate over the collection specified in parallel batches using default runtime parameter values. The
      * {@code Procedure} used must be stateless, or use concurrent aware objects if they are to be shared.
      * <p>
      * e.g.
@@ -257,7 +257,7 @@ public final class FJIterate
     }
 
     /**
-     * Iterate over the collection specified in parallel batches using default runtime parameter values.  The
+     * Iterate over the collection specified in parallel batches using default runtime parameter values. The
      * {@code Procedure} used must be stateless, or use concurrent aware objects if they are to be shared.
      * <p>
      * e.g.
@@ -347,7 +347,7 @@ public final class FJIterate
     }
 
     /**
-     * Iterate over the collection specified in parallel batches using the default values for the task size.  The
+     * Iterate over the collection specified in parallel batches using the default values for the task size. The
      * ProcedureFactory can create stateful closures that will be collected and combined using the specified Combiner.
      */
     public static <T, PT extends Procedure<? super T>> void forEach(
@@ -370,7 +370,7 @@ public final class FJIterate
     }
 
     /**
-     * Iterate over the collection specified in parallel batches using the default values for the task size.  The
+     * Iterate over the collection specified in parallel batches using the default values for the task size. The
      * ProcedureFactory can create stateful closures that will be collected and combined using the specified Combiner.
      */
     public static <T, PT extends Procedure<? super T>> void forEach(

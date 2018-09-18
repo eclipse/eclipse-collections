@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 Goldman Sachs and others.
+ * Copyright (c) 2018 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -51,7 +51,7 @@ public interface ReversibleIterable<T> extends OrderedIterable<T>
      * Evaluates the procedure for each element of the list iterating in reverse order.
      * <p>
      * <pre>e.g.
-     * people.reverseForEach(person -> LOGGER.info(person.getName()));
+     * people.reverseForEach(person -&gt; LOGGER.info(person.getName()));
      * </pre>
      */
     void reverseForEach(Procedure<? super T> procedure);
@@ -59,7 +59,7 @@ public interface ReversibleIterable<T> extends OrderedIterable<T>
     /**
      * Evaluates the procedure for each element and it's index in reverse order.
      * <pre>e.g.
-     * people.reverseForEachWithIndex((person, index) ->
+     * people.reverseForEachWithIndex((person, index) -&gt;
      *         LOGGER.info("Index: " + index + " person: " + person.getName()));
      * </pre>
      *

@@ -1407,7 +1407,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
      * to use an iterator with a MultiReader collection, then you must do the following:
      * <p>
      * <pre>
-     * multiReaderList.withReadLockAndDelegate(MutableList&lt;Person&gt; ->
+     * multiReaderList.withReadLockAndDelegate(MutableList&lt;Person&gt; -&gt;
      *     {
      *         Iterator it = people.iterator();
      *         ....
@@ -1417,7 +1417,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
      * <pre>
      * final Collection jdkSet = new HashSet();
      * final boolean containsAll = new boolean[1];
-     * multiReaderList.withReadLockAndDelegate(MutableList&lt;Person&gt; people ->
+     * multiReaderList.withReadLockAndDelegate(MutableList&lt;Person&gt; people -&gt;
      *     {
      *         set.addAll(people); // addAll uses iterator() in AbstractCollection
      *         containsAll[0] = set.containsAll(people); // containsAll uses iterator() in AbstractCollection

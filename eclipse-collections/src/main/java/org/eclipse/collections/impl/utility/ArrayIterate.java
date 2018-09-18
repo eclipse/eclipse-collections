@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2018 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -722,7 +722,7 @@ public final class ArrayIterate
     }
 
     /**
-     * Returns the first element of an array.  This method is null safe.
+     * Returns the first element of an array. This method is null safe.
      */
     public static <T> T getFirst(T[] objectArray)
     {
@@ -734,7 +734,7 @@ public final class ArrayIterate
     }
 
     /**
-     * Returns the last element of an Array.  This method is null safe.
+     * Returns the last element of an Array. This method is null safe.
      */
     public static <T> T getLast(T[] objectArray)
     {
@@ -764,7 +764,7 @@ public final class ArrayIterate
     }
 
     /**
-     * Iterates over the section of the list covered by the specified inclusive indexes.  The indexes are
+     * Iterates over the section of the list covered by the specified inclusive indexes. The indexes are
      * both inclusive.
      */
     public static <T> void forEach(T[] objectArray, int from, int to, Procedure<? super T> procedure)
@@ -818,7 +818,7 @@ public final class ArrayIterate
     }
 
     /**
-     * Iterates over the section of the list covered by the specified inclusive indexes.  The indexes are
+     * Iterates over the section of the list covered by the specified inclusive indexes. The indexes are
      * both inclusive.
      */
     public static <T> void forEachWithIndex(
@@ -1120,7 +1120,7 @@ public final class ArrayIterate
     }
 
     /**
-     * Returns the first index where the predicate evaluates to {@code true}.  Returns -1 for no matches.
+     * Returns the first index where the predicate evaluates to {@code true}. Returns -1 for no matches.
      */
     public static <T> int detectIndex(T[] objectArray, Predicate<? super T> predicate)
     {
@@ -1132,7 +1132,7 @@ public final class ArrayIterate
     }
 
     /**
-     * Searches for the first index where the predicate evaluates to {@code true}.  Returns -1 for no matches.
+     * Searches for the first index where the predicate evaluates to {@code true}. Returns -1 for no matches.
      */
     public static <T, IV> int detectIndexWith(
             T[] objectArray,
@@ -1167,7 +1167,7 @@ public final class ArrayIterate
     }
 
     /**
-     * A null safe form of isEmpty.  Null or length of zero returns {@code true}.
+     * A null safe form of isEmpty. Null or length of zero returns {@code true}.
      */
     public static boolean isEmpty(Object[] array)
     {
@@ -1175,7 +1175,7 @@ public final class ArrayIterate
     }
 
     /**
-     * A null safe form of notEmpty.  The opposite of isEmpty is returned.
+     * A null safe form of notEmpty. The opposite of isEmpty is returned.
      */
     public static boolean notEmpty(Object[] array)
     {

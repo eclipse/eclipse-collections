@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2018 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -83,7 +83,7 @@ public final class StringIterate
     /**
      * Converts a string of tokens separated by the specified separator to a sorted {@link MutableList}.
      *
-     * @deprecated in 3.0.  Inlineable.  Poorly named method.  Does not actually deal properly with CSV.  This is better handled in a separate library.
+     * @deprecated in 3.0. Inlineable. Poorly named method. Does not actually deal properly with CSV. This is better handled in a separate library.
      */
     @Deprecated
     public static MutableList<String> csvTokensToSortedList(String string)
@@ -94,7 +94,7 @@ public final class StringIterate
     /**
      * Converts a string of tokens separated by the specified separator to a sorted {@link MutableList}.
      *
-     * @deprecated in 3.0.  Inlineable.  Poorly named method.  Does not actually deal properly with CSV.  This is better handled in a separate library.
+     * @deprecated in 3.0. Inlineable. Poorly named method. Does not actually deal properly with CSV. This is better handled in a separate library.
      */
     @Deprecated
     public static MutableList<String> csvTrimmedTokensToSortedList(String string)
@@ -121,7 +121,7 @@ public final class StringIterate
     /**
      * Converts a string of tokens separated by commas to a {@link MutableList}.
      *
-     * @deprecated in 3.0.  Inlineable.  Poorly named method.  Does not actually deal properly with CSV.  This is better handled in a separate library.
+     * @deprecated in 3.0. Inlineable. Poorly named method. Does not actually deal properly with CSV. This is better handled in a separate library.
      */
     @Deprecated
     public static MutableList<String> csvTokensToList(String string)
@@ -132,7 +132,7 @@ public final class StringIterate
     /**
      * Converts a string of tokens separated by commas to a {@link MutableList}.
      *
-     * @deprecated in 3.0.  Inlineable.  Poorly named method.  Does not actually deal properly with CSV.  This is better handled in a separate library.
+     * @deprecated in 3.0. Inlineable. Poorly named method. Does not actually deal properly with CSV. This is better handled in a separate library.
      */
     @Deprecated
     public static MutableList<String> csvTrimmedTokensToList(String string)
@@ -180,7 +180,7 @@ public final class StringIterate
     /**
      * Converts a string of tokens separated by commas to a {@link MutableSet}.
      *
-     * @deprecated in 3.0.  Inlineable.  Poorly named method.  Does not actually deal properly with CSV.  This is better handled in a separate library.
+     * @deprecated in 3.0. Inlineable. Poorly named method. Does not actually deal properly with CSV. This is better handled in a separate library.
      */
     @Deprecated
     public static MutableSet<String> csvTokensToSet(String string)
@@ -256,7 +256,7 @@ public final class StringIterate
     /**
      * Converts a string of tokens separated by the specified separator to a reverse sorted {@link MutableList}.
      *
-     * @deprecated in 3.0.  Inlineable.  Poorly named method.  Does not actually deal properly with CSV.  This is better handled in a separate library.
+     * @deprecated in 3.0. Inlineable. Poorly named method. Does not actually deal properly with CSV. This is better handled in a separate library.
      */
     @Deprecated
     public static MutableList<String> csvTokensToReverseSortedList(String string)
@@ -649,7 +649,7 @@ public final class StringIterate
     }
 
     /**
-     * Find the first element that returns true for the specified {@code predicate}.  Return the default char if
+     * Find the first element that returns true for the specified {@code predicate}. Return the default char if
      * no value is found.
      *
      * @deprecated since 7.0. Use {@link #detectCharIfNone(String, CharPredicate, char)} instead.
@@ -661,7 +661,7 @@ public final class StringIterate
     }
 
     /**
-     * Find the first element that returns true for the specified {@code predicate}.  Return the default char if
+     * Find the first element that returns true for the specified {@code predicate}. Return the default char if
      * no value is found.
      */
     public static Character detectCharIfNone(String string, CharPredicate predicate, char resultIfNone)
@@ -671,7 +671,7 @@ public final class StringIterate
     }
 
     /**
-     * Find the first element that returns true for the specified {@code predicate}.  Return the first char of the
+     * Find the first element that returns true for the specified {@code predicate}. Return the first char of the
      * default string if no value is found.
      *
      * @deprecated since 7.0. Use {@link #detectCharIfNone(String, CharPredicate, String)} instead.
@@ -683,7 +683,7 @@ public final class StringIterate
     }
 
     /**
-     * Find the first element that returns true for the specified {@code predicate}.  Return the first char of the
+     * Find the first element that returns true for the specified {@code predicate}. Return the first char of the
      * default string if no value is found.
      */
     public static Character detectCharIfNone(String string, CharPredicate predicate, String resultIfNone)

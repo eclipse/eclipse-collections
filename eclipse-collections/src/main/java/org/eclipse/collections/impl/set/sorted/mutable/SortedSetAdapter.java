@@ -92,7 +92,7 @@ import org.eclipse.collections.impl.utility.internal.SetIterate;
 import org.eclipse.collections.impl.utility.internal.SortedSetIterables;
 
 /**
- * This class provides a MutableSortedSet wrapper around a JDK Collections SortedSet interface instance.  All of the MutableSortedSet
+ * This class provides a MutableSortedSet wrapper around a JDK Collections SortedSet interface instance. All of the MutableSortedSet
  * interface methods are supported in addition to the JDK SortedSet interface methods.
  * <p>
  * To create a new wrapper around an existing SortedSet instance, use the {@link #adapt(SortedSet)} factory method.

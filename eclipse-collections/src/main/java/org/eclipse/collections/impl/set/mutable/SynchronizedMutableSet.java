@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 Goldman Sachs and others.
+ * Copyright (c) 2018 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -75,7 +75,7 @@ public class SynchronizedMutableSet<T>
     }
 
     /**
-     * This method will take a MutableSet and wrap it directly in a SynchronizedMutableSet.  It will
+     * This method will take a MutableSet and wrap it directly in a SynchronizedMutableSet. It will
      * take any other non-Eclipse-Collections collection and first adapt it will a SetAdapter, and then return a
      * SynchronizedMutableSet that wraps the adapter.
      */
@@ -85,9 +85,9 @@ public class SynchronizedMutableSet<T>
     }
 
     /**
-     * This method will take a MutableSet and wrap it directly in a SynchronizedMutableSet.  It will
+     * This method will take a MutableSet and wrap it directly in a SynchronizedMutableSet. It will
      * take any other non-Eclipse-Collections collection and first adapt it will a SetAdapter, and then return a
-     * SynchronizedMutableSet that wraps the adapter.  Additionally, a developer specifies which lock to use
+     * SynchronizedMutableSet that wraps the adapter. Additionally, a developer specifies which lock to use
      * with the collection.
      */
     public static <E, S extends Set<E>> SynchronizedMutableSet<E> of(S set, Object lock)

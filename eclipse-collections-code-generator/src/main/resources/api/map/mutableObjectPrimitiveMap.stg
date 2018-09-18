@@ -40,7 +40,7 @@ public interface MutableObject<name>Map\<K> extends Object<name>Map\<K>
     void put(K key, <type> value);
 
     /**
-     * This method allows MutableObject<name>Map the ability to add an element in the form of Object<name>Pair\<K>.
+     * This method allows MutableObject<name>Map the ability to add an element in the form of {@code Object<name>Pair\<K>}.
      *
      * @see #put(Object, <type>)
      * @since 9.1.0

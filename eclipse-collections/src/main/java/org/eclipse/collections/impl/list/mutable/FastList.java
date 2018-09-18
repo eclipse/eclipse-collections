@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 Goldman Sachs and others.
+ * Copyright (c) 2018 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -104,18 +104,18 @@ import org.eclipse.collections.impl.utility.internal.RandomAccessListIterate;
 
 /**
  * FastList is an attempt to provide the same functionality as ArrayList without the support for concurrent
- * modification exceptions.  It also attempts to correct the problem with subclassing ArrayList
- * in that the data elements are protected, not private.  It is this issue that caused this class
- * to be created in the first place.  The intent was to provide optimized internal iterators which use direct access
+ * modification exceptions. It also attempts to correct the problem with subclassing ArrayList
+ * in that the data elements are protected, not private. It is this issue that caused this class
+ * to be created in the first place. The intent was to provide optimized internal iterators which use direct access
  * against the array of items, which is currently not possible by subclassing ArrayList.
  * <p>
  * An empty FastList created by calling the default constructor starts with a shared reference to a static
- * empty array (DEFAULT_SIZED_EMPTY_ARRAY).  This makes empty FastLists very memory efficient.  The
+ * empty array (DEFAULT_SIZED_EMPTY_ARRAY). This makes empty FastLists very memory efficient. The
  * first call to add will lazily create an array of size 10.
  * <p>
  * An empty FastList created by calling the pre-size constructor with a value of 0 (new FastList(0)) starts
- * with a shared reference to a static  empty array (ZERO_SIZED_ARRAY).  This makes FastLists presized to 0 very
- * memory efficient as well.  The first call to add will lazily create an array of size 1.
+ * with a shared reference to a static  empty array (ZERO_SIZED_ARRAY). This makes FastLists presized to 0 very
+ * memory efficient as well. The first call to add will lazily create an array of size 1.
  */
 public class FastList<T>
         extends AbstractMutableList<T>

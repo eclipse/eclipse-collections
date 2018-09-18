@@ -42,7 +42,7 @@ import org.eclipse.collections.api.tuple.Pair;
 
 /**
  * ImmutableList is the non-modifiable equivalent interface to {@link MutableList}. {@link MutableList#toImmutable()}
- * will give you an appropriately trimmed implementation of ImmutableList.  All ImmutableList implementations must
+ * will give you an appropriately trimmed implementation of ImmutableList. All ImmutableList implementations must
  * implement the java.util.List interface so they can satisfy the equals() contract and be compared against other list
  * structures like FastList or ArrayList.
  */

@@ -810,12 +810,12 @@ public final class ArrayListIterate
     }
 
     /**
-     * Iterates over the section of the list covered by the specified indexes.  The indexes are both inclusive.  If the
+     * Iterates over the section of the list covered by the specified indexes. The indexes are both inclusive. If the
      * from is less than the to, the list is iterated in forward order. If the from is greater than the to, then the
      * list is iterated in the reverse order.
      * <p>
      * <pre>e.g.
-     * ArrayList<People> people = new ArrayList&lt;People&gt;(FastList.newListWith(ted, mary, bob, sally));
+     * ArrayList&lt;People&gt; people = new ArrayList&lt;People&gt;(FastList.newListWith(ted, mary, bob, sally));
      * ArrayListIterate.forEach(people, 0, 1, new Procedure&lt;Person&gt;()
      * {
      *     public void value(Person person)
@@ -843,13 +843,13 @@ public final class ArrayListIterate
     }
 
     /**
-     * Iterates over the section of the list covered by the specified indexes.  The indexes are both inclusive.  If the
+     * Iterates over the section of the list covered by the specified indexes. The indexes are both inclusive. If the
      * from is less than the to, the list is iterated in forward order. If the from is greater than the to, then the
      * list is iterated in the reverse order. The index passed into the ObjectIntProcedure is the actual index of the
      * range.
      * <p>
      * <pre>e.g.
-     * ArrayList<People> people = new ArrayList&lt;People&gt;(FastList.newListWith(ted, mary, bob, sally));
+     * ArrayList&lt;People&gt; people = new ArrayList&lt;People&gt;(FastList.newListWith(ted, mary, bob, sally));
      * ArrayListIterate.forEachWithIndex(people, 0, 1, new ObjectIntProcedure&lt;Person&gt;()
      * {
      *     public void value(Person person, int index)

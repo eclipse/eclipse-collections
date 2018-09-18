@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2018 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -20,7 +20,7 @@ import org.eclipse.collections.impl.tuple.Tuples;
 
 /**
  * CaseProcedure allows developers to create an object form of a case statement, which instead of being based on
- * a single switch value is based on a list of predicate / procedure combinations.  For the first predicate
+ * a single switch value is based on a list of predicate / procedure combinations. For the first predicate
  * that returns true for a given value in the case statement, the corresponding procedure will be executed.
  */
 public final class CaseProcedure<T> implements Procedure<T>

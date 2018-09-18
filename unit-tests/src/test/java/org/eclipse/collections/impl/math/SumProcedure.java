@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2018 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -17,7 +17,7 @@ import org.eclipse.collections.impl.parallel.ProcedureFactory;
 
 /**
  * A multi-purpose code block factory which can be used to summarize the elements of a collection
- * either via a forEach() or injectInto() call.  SumProcedure returns optimized iterator blocks
+ * either via a forEach() or injectInto() call. SumProcedure returns optimized iterator blocks
  * for specialized iterator subclasses of Function which result in less garbage created for
  * summing iterator attributes of collections.
  *

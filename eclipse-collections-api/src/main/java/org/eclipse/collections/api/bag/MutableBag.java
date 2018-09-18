@@ -40,7 +40,7 @@ import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.tuple.Pair;
 
 /**
- * A MutableBag is a Collection whose elements are unordered and may contain duplicate entries.  It varies from
+ * A MutableBag is a Collection whose elements are unordered and may contain duplicate entries. It varies from
  * MutableCollection in that it adds a protocol for determining, adding, and removing the number of occurrences for an
  * item.
  *

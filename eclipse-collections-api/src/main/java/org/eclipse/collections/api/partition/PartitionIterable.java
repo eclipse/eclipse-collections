@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2018 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -13,7 +13,7 @@ package org.eclipse.collections.api.partition;
 import org.eclipse.collections.api.RichIterable;
 
 /**
- * A PartitionIterable is the result of splitting an iterable into two iterables based on a Predicate.  The results that
+ * A PartitionIterable is the result of splitting an iterable into two iterables based on a Predicate. The results that
  * answer true for the Predicate will be returned from the getSelected() method and the results that answer false for the
  * predicate will be returned from the getRejected() method.
  */

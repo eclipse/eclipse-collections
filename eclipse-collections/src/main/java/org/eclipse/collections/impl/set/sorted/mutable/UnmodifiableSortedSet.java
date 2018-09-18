@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 Goldman Sachs and others.
+ * Copyright (c) 2018 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -71,7 +71,7 @@ public class UnmodifiableSortedSet<T>
     }
 
     /**
-     * This method will take a MutableSortedSet and wrap it directly in a UnmodifiableSortedSet.  It will
+     * This method will take a MutableSortedSet and wrap it directly in a UnmodifiableSortedSet. It will
      * take any other non-Eclipse-Collections SortedSet and first adapt it will a SortedSetAdapter, and then return a
      * UnmodifiableSortedSet that wraps the adapter.
      */

@@ -70,7 +70,7 @@ public interface PrimitiveObjectMap<V> extends RichIterable<V>
 
     /**
      * Returns a string with the keys and values of this map separated by commas with spaces and
-     * enclosed in curly braces.  Each key and value is separated by an equals sign.
+     * enclosed in curly braces. Each key and value is separated by an equals sign.
      * <p>
      * <pre>
      * Assert.assertEquals(

@@ -47,7 +47,7 @@ import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.eclipse.collections.impl.utility.Iterate;
 
 /**
- * Calculates and provides the code points stored in a String as an ImmutableIntList.  This is a cleaner more OO way of
+ * Calculates and provides the code points stored in a String as an ImmutableIntList. This is a cleaner more OO way of
  * providing many of the iterable protocols available in StringIterate for code points.
  *
  * @since 7.0

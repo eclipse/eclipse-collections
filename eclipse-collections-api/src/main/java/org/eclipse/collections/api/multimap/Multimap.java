@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2018 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -29,19 +29,17 @@ import org.eclipse.collections.api.tuple.Pair;
  * <p>
  * <p>Unlike {@code Map} however, this interface is read-only so the results of access methods such as {@link
  * #get(Object)} return a view onto the values associated with that key. The {@link MutableMultimap} sub-interface
- * provides methods to mutate the collection.
+ * provides methods to mutate the collection.</p>
  * <p>
  * <p>The advantages to using this container over a {@code Map<K, Collection<V>>} is that all of the handling of the
- * value collection can be done automatically.  It also allows implementations to further specialize in how duplicate
- * values will be handled.  Value collections with list semantics would allow duplicate values for a key, while those
- * implementing set semantics would not. The value collections can never be empty.
+ * value collection can be done automatically. It also allows implementations to further specialize in how duplicate
+ * values will be handled. Value collections with list semantics would allow duplicate values for a key, while those
+ * implementing set semantics would not. The value collections can never be empty.</p>
  * <p>
- * <p>Internal iteration methods for keys and values (singly - {@link #forEachKey(Procedure)}, {@link
- * #forEachValue(Procedure)}, and together - {@link #forEachKeyValue(Procedure2)}), {@link #forEachKeyMultiValues(Procedure2)}) are provided to allow flexible
- * browsing of the collection's contents.  Similarly, views also are provided for keys ({@link #keysView()}), values
- * ({@link #valuesView()}) and the combination thereof ({@link #keyValuePairsView()}, {@link
- * #keyMultiValuePairsView()}).
- * <p>
+ * <p>Internal iteration methods for keys and values (singly - {@link #forEachKey(Procedure)}, {@link #forEachValue(Procedure)},
+ * and together - {@link #forEachKeyValue(Procedure2)}), {@link #forEachKeyMultiValues(Procedure2)}) are provided to allow flexible
+ * browsing of the collection's contents. Similarly, views also are provided for keys ({@link #keysView()}), values
+ * ({@link #valuesView()}) and the combination thereof ({@link #keyValuePairsView()}, {@link #keyMultiValuePairsView()}).</p>
  *
  * @param <K> the type of keys used
  * @param <V> the type of mapped values
@@ -67,53 +65,59 @@ public interface Multimap<K, V>
 
     /**
      * Calls the procedure with each <em>value</em>.
+     * <p>Given a Multimap with the contents:</p>
      * <p>
-     * Given a Multimap with the contents:
-     * <p>
-     * {@code { "key1" : ["val1", "val2", "val2"], "key2" : ["val3"] }}
-     * <p>
+     * {@code {"key1" : ["val1", "val2", "val2"], "key2" : ["val3"]}}
+     * </p>
      * The given procedure would be invoked with the parameters:
      * <p>
-     * {@code [ "val1", "val2", "val2", "val3" ]}
+     * {@code ["val1", "val2", "val2", "val3"]}
+     * </p>
      */
     void forEachValue(Procedure<? super V> procedure);
 
     /**
      * Calls the {@code procedure} with each <em>key</em>.
+     * <p>Given a Multimap with the contents:</p>
      * <p>
-     * Given a Multimap with the contents:
-     * <p>
-     * {@code { "key1" : ["val1", "val2", "val2"], "key2" : ["val3"] }}
+     * {@code {"key1" : ["val1", "val2", "val2"], "key2" : ["val3"]}}
+     * </p>
      * <p>
      * The given procedure would be invoked with the parameters:
+     * </p>
      * <p>
-     * {@code [ "key1", "key2" ]}
+     * {@code ["key1", "key2"]}
+     * </p>
      */
     void forEachKey(Procedure<? super K> procedure);
 
     /**
      * Calls the {@code procedure} with each <em>key-value</em> pair.
+     * <p>Given a Multimap with the contents:</p>
      * <p>
-     * Given a Multimap with the contents:
-     * <p>
-     * {@code { "key1" : ["val1", "val2", "val2"], "key2" : ["val3"] }}
+     * {@code {"key1" : ["val1", "val2", "val2"], "key2" : ["val3"]}}
+     * </p>
      * <p>
      * The given procedure would be invoked with the parameters:
+     * </p>
      * <p>
-     * {@code [ ["key1", "val1"], ["key1", "val2"], ["key1", "val2"], ["key2", "val3"] ]}
+     * {@code [["key1", "val1"], ["key1", "val2"], ["key1", "val2"], ["key2", "val3"]]}
+     * </p>
      */
     void forEachKeyValue(Procedure2<? super K, ? super V> procedure);
 
     /**
      * Calls the {@code procedure} with each <em>key-Iterable[value]</em>.
+     * <p>Given a Multimap with the contents:</p>
      * <p>
-     * Given a Multimap with the contents:
-     * <p>
-     * {@code { "key1" : ["val1", "val2", "val2"], "key2" : ["val3"] }}
+     * {@code {"key1" : ["val1", "val2", "val2"], "key2" : ["val3"]}}
+     * </p>
      * <p>
      * The given procedure would be invoked with the parameters:
+     * </p>
      * <p>
-     * {@code [ ["key1", {@link RichIterable["val1", "val2", "val2"]}], ["key2", {@link RichIterable["val3"]}] ]}
+     * {@code [["key1", {@link RichIterable["val1", "val2", "val2"]}], ["key2", {@link RichIterable["val3"]}]]}
+     * </p>
      *
      * @since 6.0
      */
@@ -121,8 +125,7 @@ public interface Multimap<K, V>
 
     /**
      * Returns the number of key-value entry pairs.
-     * <p>
-     * This method is implemented with O(1) (constant-time) performance.
+     * <p>This method is implemented with O(1) (constant-time) performance.</p>
      */
     int size();
 
@@ -155,8 +158,7 @@ public interface Multimap<K, V>
 
     /**
      * Returns a view of all values associated with the given key.
-     * <p>
-     * If the given key does not exist, an empty {@link RichIterable} is returned.
+     * <p>If the given key does not exist, an empty {@link RichIterable} is returned.</p>
      *
      * @param key the key to search for
      */
@@ -211,23 +213,19 @@ public interface Multimap<K, V>
 
     /**
      * Compares the specified object with this Multimap for equality.
-     * <p>
-     * Two Multimaps are equal when their map views (as returned by {@link #toMap}) are also equal.
-     * <p>
-     * In general, two Multimaps with identical key-value mappings may or may not be equal, depending on the type of
+     * <p>Two Multimaps are equal when their map views (as returned by {@link #toMap}) are also equal.</p>
+     * <p>In general, two Multimaps with identical key-value mappings may or may not be equal, depending on the type of
      * the collections holding the values. If the backing collections are Sets, then two instances with the same
      * key-value mappings are equal, but if the backing collections are Lists, equality depends on the ordering of the
-     * values for each key.
-     * <p>
-     * Any two empty Multimaps are equal, because they both have empty {@link #toMap} views.
+     * values for each key.</p>
+     * <p>Any two empty Multimaps are equal, because they both have empty {@link #toMap} views.</p>
      */
     @Override
     boolean equals(Object obj);
 
     /**
      * Returns the hash code for this Multimap.
-     * <p>
-     * The hash code of a Multimap is defined as the hash code of the map view, as returned by {@link #toMap}.
+     * <p>The hash code of a Multimap is defined as the hash code of the map view, as returned by {@link #toMap}.</p>
      */
     @Override
     int hashCode();
@@ -240,20 +238,19 @@ public interface Multimap<K, V>
     /**
      * Returns an immutable copy of this Multimap <em>if it is not already immutable</em>. If the Multimap is immutable,
      * it will return itself.
-     * <p>
-     * The returned Multimap will be {@code Serializable} if this Multimap is {@code Serializable}.
+     * <p> The returned Multimap will be {@code Serializable} if this Multimap is {@code Serializable}.</p>
      */
     ImmutableMultimap<K, V> toImmutable();
 
     /**
-     * Given a Multimap from Domain -> Range return a multimap from Range -> Domain.
+     * Given a Multimap from Domain {@code ->} Range return a multimap from Range {@code ->} Domain.
      *
      * @since 6.0
      */
     Multimap<V, K> flip();
 
     /**
-     * Returns all elements of the source multimap that satisfies the predicate.  This method is also
+     * Returns all elements of the source multimap that satisfies the predicate. This method is also
      * commonly called filter.
      * <p>
      * <pre>e.g.
@@ -261,12 +258,11 @@ public interface Multimap<K, V>
      * {
      *     public boolean accept(Integer age, Person person)
      *     {
-     *         return (age >= 18)
-     *                  && (person.getAddress().getCity().equals("Metuchen"));
+     *         return (age &gt;= 18)
+     *                  &amp;&amp; (person.getAddress().getCity().equals("Metuchen"));
      *     }
      * });
      * </pre>
-     * <p>
      *
      * @param predicate a {@link Predicate2} to use as the select criteria
      * @return {@code Multimap}, which contains elements as a result of the select criteria
@@ -282,12 +278,11 @@ public interface Multimap<K, V>
      * {
      *     public boolean accept(Integer age, Person person)
      *     {
-     *         return (age >= 18)
-     *                  && (person.getAddress().getCity().equals("Metuchen"));
+     *         return (age &gt;= 18)
+     *                  &amp;&amp; (person.getAddress().getCity().equals("Metuchen"));
      *     }
      * }, FastListMultimap.newMultimap());
      * </pre>
-     * <p>
      *
      * @param predicate a {@link Predicate2} to use as the select criteria
      * @param target    the Multimap to append to for all elements in this {@code Multimap} that satisfy the {@code predicate}
@@ -304,12 +299,11 @@ public interface Multimap<K, V>
      * {
      *     public boolean accept(Integer age, Person person)
      *     {
-     *         return (age >= 18)
-     *                  && (person.getAddress().getCity().equals("Metuchen"));
+     *         return (age &gt;= 18)
+     *                  &amp;&amp; (person.getAddress().getCity().equals("Metuchen"));
      *     }
      * });
      * </pre>
-     * <p>
      *
      * @param predicate a {@link Predicate2} to use as the reject criteria
      * @return {@code Multimap}, which contains elements that don't satisfy the {@code predicate}
@@ -325,12 +319,11 @@ public interface Multimap<K, V>
      * {
      *     public boolean accept(Integer age, Person person)
      *     {
-     *         return (age >= 18)
-     *                  && (person.getAddress().getCity().equals("Metuchen"));
+     *         return (age &gt;= 18)
+     *                  &amp;&amp; (person.getAddress().getCity().equals("Metuchen"));
      *     }
      * }, FastListMultimap.newMultimap());
      * </pre>
-     * <p>
      *
      * @param predicate a {@link Predicate2} to use as the reject criteria
      * @param target    the Multimap to append to for all elements in this {@code Multimap} that don't satisfy the {@code predicate}
@@ -340,20 +333,19 @@ public interface Multimap<K, V>
     <R extends MutableMultimap<K, V>> R rejectKeysValues(Predicate2<? super K, ? super V> predicate, R target);
 
     /**
-     * Returns all elements of the source multimap that satisfies the predicate.  This method is also
+     * Returns all elements of the source multimap that satisfies the predicate. This method is also
      * commonly called filter.
      * <p>
      * <pre>e.g.
-     * return multimap.<b>selectKeysMultiValues</b>(new Predicate2&lt;Integer, Iterable&lt;Person&gt&gt;()
+     * return multimap.<b>selectKeysMultiValues</b>(new Predicate2&lt;Integer, Iterable&lt;Person&gt;&gt;()
      * {
      *     public boolean accept(Integer age, Iterable&lt;Person&gt; values)
      *     {
-     *         return (age >= 18)
-     *                  && ((RichIterable&lt;Person&gt;)values.size() >= 2);
+     *         return (age &gt;= 18)
+     *                  &amp;&amp; ((RichIterable&lt;Person&gt;)values.size() &gt;= 2);
      *     }
      * });
      * </pre>
-     * <p>
      *
      * @param predicate a {@link Predicate2} to use as the select criteria
      * @return {@code Multimap}, which contains elements as a result of the select criteria
@@ -365,16 +357,15 @@ public interface Multimap<K, V>
      * Same as the select method but uses the specified target multimap for the results.
      * <p>
      * <pre>e.g.
-     * return multimap.<b>selectKeysMultiValues</b>(new Predicate2&lt;Integer, Iterable&lt;Person&gt&gt;()
+     * return multimap.<b>selectKeysMultiValues</b>(new Predicate2&lt;Integer, Iterable&lt;Person&gt;&gt;()
      * {
      *     public boolean accept(Integer age, Iterable&lt;Person&gt; values)
      *     {
-     *         return (age >= 18)
-     *                  && ((RichIterable&lt;Person&gt;)values.size() >= 2);
+     *         return (age &gt;= 18)
+     *                  &amp;&amp; ((RichIterable&lt;Person&gt;)values.size() &gt;= 2);
      *     }
      * }, FastListMultimap.newMultimap());
      * </pre>
-     * <p>
      *
      * @param predicate a {@link Predicate2} to use as the select criteria
      * @param target    the Multimap to append to for all elements in this {@code Multimap} that satisfy the {@code predicate}
@@ -387,16 +378,15 @@ public interface Multimap<K, V>
      * Returns all elements of the source multimap that don't satisfy the predicate.
      * <p>
      * <pre>e.g.
-     * return multimap.<b>rejectKeysMultiValues</b>(new Predicate2&lt;Integer, Iterable&lt;Person&gt&gt;()
+     * return multimap.<b>rejectKeysMultiValues</b>(new Predicate2&lt;Integer, Iterable&lt;Person&gt;&gt;()
      * {
      *     public boolean accept(Integer age, Iterable&lt;Person&gt; values)
      *     {
-     *         return (age >= 18)
-     *                  && ((RichIterable&lt;Person&gt;)values.size() >= 2);
+     *         return (age &gt;= 18)
+     *                  &amp;&amp; ((RichIterable&lt;Person&gt;)values.size() &gt;= 2);
      *     }
      * });
      * </pre>
-     * <p>
      *
      * @param predicate a {@link Predicate2} to use as the reject criteria
      * @return {@code Multimap}, which contains elements that don't satisfy the {@code predicate}
@@ -408,16 +398,15 @@ public interface Multimap<K, V>
      * Same as the reject method but uses the specified target multimap for the results.
      * <p>
      * <pre>e.g.
-     * return multimap.<b>rejectKeysMultiValues</b>(new Predicate2&lt;Integer, Iterable&lt;Person&gt&gt;()
+     * return multimap.<b>rejectKeysMultiValues</b>(new Predicate2&lt;Integer, Iterable&lt;Person&gt;&gt;()
      * {
      *     public boolean accept(Integer age, Iterable&lt;Person&gt; values)
      *     {
-     *         return (age >= 18)
-     *                  && ((RichIterable&lt;Person&gt;)values.size() >= 2);
+     *         return (age &gt;= 18)
+     *                  &amp;&amp; ((RichIterable&lt;Person&gt;)values.size() &gt;= 2);
      *     }
      * }, FastListMultimap.newMultimap());
      * </pre>
-     * <p>
      *
      * @param predicate a {@link Predicate2} to use as the reject criteria
      * @param target    the Multimap to append to for all elements in this {@code Multimap} that don't satisfy the {@code predicate}
@@ -428,10 +417,10 @@ public interface Multimap<K, V>
 
     /**
      * Returns a new multimap with the results of applying the specified function on each key and value of the source
-     * multimap.  This method is also commonly called transform or map.
+     * multimap. This method is also commonly called transform or map.
      * <p>
      * <pre>e.g.
-     * return multimap.collectKeysValues(new Function2&lt;Integer, Person, Pair&lt;String, String&gt&gt;()
+     * return multimap.collectKeysValues(new Function2&lt;Integer, Person, Pair&lt;String, String&gt;&gt;()
      * {
      *     public Pair&lt;String, String&gt; valueOf(Integer age, Person person)
      *     {
@@ -468,7 +457,7 @@ public interface Multimap<K, V>
 
     /**
      * Returns a new multimap with the results of applying the specified function on each value of the source
-     * multimap.  This method is also commonly called transform or map.
+     * multimap. This method is also commonly called transform or map.
      * <p>
      * <pre>e.g.
      * return multimap.collectValues(new Function&lt;Person, String&gt;()

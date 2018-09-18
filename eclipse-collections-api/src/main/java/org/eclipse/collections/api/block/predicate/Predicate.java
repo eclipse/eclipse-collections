@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2018 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -13,8 +13,8 @@ package org.eclipse.collections.api.block.predicate;
 import java.io.Serializable;
 
 /**
- * A Predicate is a lambda or closure with a boolean result.  The method accept should be implemented to indicate the object
- * passed to the method meets the criteria of this Predicate.  A Predicate is also known as a Discriminator or Filter.
+ * A Predicate is a lambda or closure with a boolean result. The method accept should be implemented to indicate the object
+ * passed to the method meets the criteria of this Predicate. A Predicate is also known as a Discriminator or Filter.
  */
 @FunctionalInterface
 public interface Predicate<T>

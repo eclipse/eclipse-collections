@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2018 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -32,7 +32,7 @@ import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.impl.block.factory.Comparators;
 
 /**
- * This class is a memory efficient list with one element.  Unlike Collections.singletonList(), it can be sorted.  It is
+ * This class is a memory efficient list with one element. Unlike Collections.singletonList(), it can be sorted. It is
  * normally created by calling Lists.fixedSize.of(one).
  */
 final class SingletonList<T>

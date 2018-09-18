@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2018 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -22,7 +22,7 @@ public class MutableIterator<T> implements Iterator<T>
     protected int currentIndex;
 
     /**
-     * Index of element returned by most recent call to next or previous.  Reset to -1 if this element is deleted by
+     * Index of element returned by most recent call to next or previous. Reset to -1 if this element is deleted by
      * a call to remove.
      */
     protected int lastIndex = -1;
