@@ -69,6 +69,17 @@ public interface MutableMultimap<K, V>
         return changed;
     }
 
+    default Iterable<? extends V> getIfAbsentPut(K key, Iterable<? extends V> value)
+    {
+        boolean hasKey = this.containsKey(key);
+        if (hasKey)
+        {
+            this.putAll(key, value);
+            return value;
+        }
+        return this.get(key);
+    }
+
     boolean putAll(K key, Iterable<? extends V> values);
 
     <KK extends K, VV extends V> boolean putAll(Multimap<KK, VV> multimap);
