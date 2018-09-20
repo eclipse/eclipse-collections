@@ -10,6 +10,11 @@
 
 package org.eclipse.collections.impl.multimap;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.list.ImmutableList;
@@ -26,6 +31,7 @@ import org.eclipse.collections.impl.factory.Bags;
 import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
+import org.eclipse.collections.impl.multimap.list.FastListMultimap;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.Tuples;
@@ -321,5 +327,19 @@ public abstract class AbstractMutableMultimapTestCase extends AbstractMultimapTe
         Assert.assertTrue(
                 "{One=[1], Two=[2]}".equals(multimap.toString())
                         || "{Two=[2], One=[1]}".equals(multimap.toString()));
+    }
+
+    @Test
+    public void testGetIfAbsentPut()
+    {
+        MutableMultimap<String, String> multimap =
+                this.newMultimapWithKeysValues("One", "Uno", "Two", "Dos");
+        ArrayList<String> tempArrayList1 = new ArrayList<String>();
+        tempArrayList1.add("Uno");
+        ArrayList<String> tempArrayList3 = new ArrayList<String>();
+        tempArrayList3.add("Tres");
+
+        Assert.assertEquals(tempArrayList3, multimap.getIfAbsentPut("Three", tempArrayList3));
+        Assert.assertEquals("Uno", multimap.getIfAbsentPut("One", tempArrayList1));
     }
 }

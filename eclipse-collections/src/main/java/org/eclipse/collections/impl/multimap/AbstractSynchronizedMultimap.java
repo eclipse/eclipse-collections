@@ -266,6 +266,15 @@ public abstract class AbstractSynchronizedMultimap<K, V> implements MutableMulti
     }
 
     @Override
+    public Iterable<? extends V> getIfAbsentPut(K key, Iterable<? extends V> value)
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.getIfAbsentPut(key, value);
+        }
+    }
+
+    @Override
     public RichIterable<K> keysView()
     {
         return LazyIterate.adapt(this.keySet());
