@@ -30,6 +30,8 @@ import org.eclipse.collections.impl.block.procedure.CollectionAddProcedure;
 import org.eclipse.collections.impl.factory.Bags;
 import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.Sets;
+import org.eclipse.collections.impl.list.mutable.SynchronizedMutableList;
+import org.eclipse.collections.impl.list.mutable.UnmodifiableMutableList;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.multimap.list.FastListMultimap;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
@@ -334,12 +336,16 @@ public abstract class AbstractMutableMultimapTestCase extends AbstractMultimapTe
     {
         MutableMultimap<String, String> multimap =
                 this.newMultimapWithKeysValues("One", "Uno", "Two", "Dos");
-        ArrayList<String> tempArrayList1 = new ArrayList<String>();
-        tempArrayList1.add("Uno");
-        ArrayList<String> tempArrayList3 = new ArrayList<String>();
-        tempArrayList3.add("Tres");
+        MutableList<String> tempMutableList = Lists.mutable.with("Uno", "Dos");
+        tempMutableList.add("Tres");
 
-        Assert.assertEquals(tempArrayList3, multimap.getIfAbsentPut("Three", tempArrayList3));
-        Assert.assertEquals("Uno", multimap.getIfAbsentPut("One", tempArrayList1));
+        Assert.assertEquals(tempMutableList, multimap.getIfAbsentPut("Three", tempMutableList));
+        MutableMultimap<String, String> expectedNewMultiMap =
+                this.newMultimapWithKeysValues("One", "Uno", "Two", "Dos",
+                        "Three", "Tres");
+
+
+        Assert.assertEquals("Uno", multimap.getIfAbsentPut("One", tempMutableList));
+        Assert.assertEquals(expectedNewMultiMap, multimap);
     }
 }

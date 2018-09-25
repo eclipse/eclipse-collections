@@ -92,21 +92,6 @@ public abstract class AbstractSynchronizedPutMultimap<K, V, C extends MutableCol
         }
     }
 
-    @Override
-    public Iterable<? extends V> getIfAbsentPut(K key, Iterable<? extends V> value)
-    {
-        boolean hasKey = this.containsKey(key);
-        if (!hasKey)
-        {
-            synchronized (value)
-            {
-                this.putAll(key, value);
-                return value;
-            }
-        }
-        return this.get(key);
-    }
-
     private C getIfAbsentPutCollection(K key)
     {
         return this.map.getIfAbsentPutWith(key, this.createCollectionBlock(), this);

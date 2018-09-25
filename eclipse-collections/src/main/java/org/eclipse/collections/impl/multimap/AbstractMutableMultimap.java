@@ -311,6 +311,17 @@ public abstract class AbstractMutableMultimap<K, V, C extends MutableCollection<
     }
 
     @Override
+    public Iterable<? extends V> getIfAbsentPut(K key, Iterable<? extends V> value)
+    {
+        C collection = this.getIfAbsentPutCollection(key);
+        if(collection.isEmpty())
+        {
+            Iterate.addAllTo(value, collection);
+        }
+        return collection;
+    }
+
+    @Override
     public MutableMap<K, RichIterable<V>> toMap()
     {
         MutableMap<K, RichIterable<V>> result = (MutableMap<K, RichIterable<V>>) (MutableMap<?, ?>) this.map.newEmpty();

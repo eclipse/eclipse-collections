@@ -69,16 +69,7 @@ public interface MutableMultimap<K, V>
         return changed;
     }
 
-    default Iterable<? extends V> getIfAbsentPut(K key, Iterable<? extends V> value)
-    {
-        boolean hasKey = this.containsKey(key);
-        if (!hasKey)
-        {
-            this.putAll(key, value);
-            return value;
-        }
-        return this.get(key);
-    }
+    Iterable<? extends V> getIfAbsentPut(K key, Iterable<? extends V> value);
 
     boolean putAll(K key, Iterable<? extends V> values);
 
