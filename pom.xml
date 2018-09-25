@@ -241,6 +241,12 @@
                                     <ignoredUnusedDeclaredDependency>
                                         org.slf4j:slf4j-nop:jar
                                     </ignoredUnusedDeclaredDependency>
+                                    <ignoredUnusedDeclaredDependency>
+                                        junit:junit
+                                    </ignoredUnusedDeclaredDependency>
+                                    <ignoredUnusedDeclaredDependency>
+                                        org.eclipse.collections:eclipse-collections-testutils
+                                    </ignoredUnusedDeclaredDependency>
                                 </ignoredUnusedDeclaredDependencies>
                             </configuration>
                         </execution>
