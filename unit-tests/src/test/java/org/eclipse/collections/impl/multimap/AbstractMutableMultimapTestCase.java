@@ -344,7 +344,6 @@ public abstract class AbstractMutableMultimapTestCase extends AbstractMultimapTe
                 this.newMultimapWithKeysValues("One", "Uno", "Two", "Dos",
                         "Three", "Tres");
 
-
         Assert.assertEquals("Uno", multimap.getIfAbsentPut("One", tempMutableList));
         Assert.assertEquals(expectedNewMultiMap, multimap);
     }
