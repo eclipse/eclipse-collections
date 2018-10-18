@@ -23,6 +23,7 @@ import org.eclipse.collections.impl.jmh.runner.AbstractJMHTestRunner;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.parallel.ParallelIterate;
+import org.junit.Assert;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Mode;
@@ -46,6 +47,8 @@ public class CollectIfTest extends AbstractJMHTestRunner
     {
         List<String> evenStrings = this.integersJDK.stream().filter(e -> e % 2 == 0).map(Object::toString).collect(Collectors.toList());
         List<String> oddStrings = this.integersJDK.stream().filter(e -> e % 2 == 1).map(Object::toString).collect(Collectors.toList());
+        Assert.assertEquals(SIZE / 2, evenStrings.size());
+        Assert.assertEquals(SIZE / 2, oddStrings.size());
     }
 
     @Benchmark
@@ -53,6 +56,8 @@ public class CollectIfTest extends AbstractJMHTestRunner
     {
         List<String> evenStrings = this.integersEC.stream().filter(e -> e % 2 == 0).map(Object::toString).collect(Collectors.toList());
         List<String> oddStrings = this.integersEC.stream().filter(e -> e % 2 == 1).map(Object::toString).collect(Collectors.toList());
+        Assert.assertEquals(SIZE / 2, evenStrings.size());
+        Assert.assertEquals(SIZE / 2, oddStrings.size());
     }
 
     @Benchmark
@@ -60,6 +65,8 @@ public class CollectIfTest extends AbstractJMHTestRunner
     {
         List<String> evenStrings = this.integersJDK.parallelStream().filter(e -> e % 2 == 0).map(Object::toString).collect(Collectors.toList());
         List<String> oddStrings = this.integersJDK.parallelStream().filter(e -> e % 2 == 1).map(Object::toString).collect(Collectors.toList());
+        Assert.assertEquals(SIZE / 2, evenStrings.size());
+        Assert.assertEquals(SIZE / 2, oddStrings.size());
     }
 
     @Benchmark
@@ -67,6 +74,8 @@ public class CollectIfTest extends AbstractJMHTestRunner
     {
         List<String> evenStrings = this.integersEC.parallelStream().filter(e -> e % 2 == 0).map(Object::toString).collect(Collectors.toList());
         List<String> oddStrings = this.integersEC.parallelStream().filter(e -> e % 2 == 1).map(Object::toString).collect(Collectors.toList());
+        Assert.assertEquals(SIZE / 2, evenStrings.size());
+        Assert.assertEquals(SIZE / 2, oddStrings.size());
     }
 
     @Benchmark
@@ -74,6 +83,8 @@ public class CollectIfTest extends AbstractJMHTestRunner
     {
         MutableList<String> evenStrings = this.integersEC.collectIf(e -> e % 2 == 0, Object::toString);
         MutableList<String> oddStrings = this.integersEC.collectIf(e -> e % 2 == 1, Object::toString);
+        Assert.assertEquals(SIZE / 2, evenStrings.size());
+        Assert.assertEquals(SIZE / 2, oddStrings.size());
     }
 
     @Benchmark
@@ -81,6 +92,8 @@ public class CollectIfTest extends AbstractJMHTestRunner
     {
         Collection<String> evenStrings = ParallelIterate.collectIf(this.integersEC, e -> e % 2 == 0, Object::toString);
         Collection<String> oddStrings = ParallelIterate.collectIf(this.integersEC, e -> e % 2 == 1, Object::toString);
+        Assert.assertEquals(SIZE / 2, evenStrings.size());
+        Assert.assertEquals(SIZE / 2, oddStrings.size());
     }
 
     @Benchmark
@@ -88,6 +101,8 @@ public class CollectIfTest extends AbstractJMHTestRunner
     {
         MutableList<String> evenStrings = this.integersEC.asLazy().select(e -> e % 2 == 0).collect(Object::toString).toList();
         MutableList<String> oddStrings = this.integersEC.asLazy().select(e -> e % 2 == 1).collect(Object::toString).toList();
+        Assert.assertEquals(SIZE / 2, evenStrings.size());
+        Assert.assertEquals(SIZE / 2, oddStrings.size());
     }
 
     @Benchmark
@@ -96,5 +111,7 @@ public class CollectIfTest extends AbstractJMHTestRunner
         ParallelListIterable<Integer> parallelListIterable = this.integersEC.asParallel(this.service, BATCH_SIZE);
         MutableList<String> evenStrings = parallelListIterable.select(e -> e % 2 == 0).collect(Object::toString).toList();
         MutableList<String> oddStrings = parallelListIterable.select(e -> e % 2 == 1).collect(Object::toString).toList();
+        Assert.assertEquals(SIZE / 2, evenStrings.size());
+        Assert.assertEquals(SIZE / 2, oddStrings.size());
     }
 }

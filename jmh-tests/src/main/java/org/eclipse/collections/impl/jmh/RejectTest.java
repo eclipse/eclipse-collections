@@ -20,6 +20,7 @@ import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.impl.block.factory.Predicates;
 import org.eclipse.collections.impl.jmh.runner.AbstractJMHTestRunner;
 import org.eclipse.collections.impl.list.Interval;
+import org.junit.Assert;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Mode;
@@ -41,6 +42,8 @@ public class RejectTest extends AbstractJMHTestRunner
     {
         List<Integer> evens = this.integersJDK.stream().filter(each -> each % 2 != 1).collect(Collectors.toList());
         List<Integer> odds = this.integersJDK.stream().filter(each -> each % 2 != 0).collect(Collectors.toList());
+        Assert.assertEquals(SIZE / 2, evens.size());
+        Assert.assertEquals(SIZE / 2, odds.size());
     }
 
     @Benchmark
@@ -48,6 +51,8 @@ public class RejectTest extends AbstractJMHTestRunner
     {
         List<Integer> evens = this.integersEC.stream().filter(each -> each % 2 != 1).collect(Collectors.toList());
         List<Integer> odds = this.integersEC.stream().filter(each -> each % 2 != 0).collect(Collectors.toList());
+        Assert.assertEquals(SIZE / 2, evens.size());
+        Assert.assertEquals(SIZE / 2, odds.size());
     }
 
     @Benchmark
@@ -57,6 +62,8 @@ public class RejectTest extends AbstractJMHTestRunner
         List<Integer> evens = this.integersJDK.stream().filter(predicate1.negate()).collect(Collectors.toList());
         Predicate<Integer> predicate2 = each -> each % 2 == 0;
         List<Integer> odds = this.integersJDK.stream().filter(predicate2.negate()).collect(Collectors.toList());
+        Assert.assertEquals(SIZE / 2, evens.size());
+        Assert.assertEquals(SIZE / 2, odds.size());
     }
 
     @Benchmark
@@ -66,6 +73,8 @@ public class RejectTest extends AbstractJMHTestRunner
         List<Integer> evens = this.integersEC.stream().filter(predicate1.negate()).collect(Collectors.toList());
         Predicate<Integer> predicate2 = each -> each % 2 == 0;
         List<Integer> odds = this.integersEC.stream().filter(predicate2.negate()).collect(Collectors.toList());
+        Assert.assertEquals(SIZE / 2, evens.size());
+        Assert.assertEquals(SIZE / 2, odds.size());
     }
 
     @Benchmark
@@ -73,6 +82,8 @@ public class RejectTest extends AbstractJMHTestRunner
     {
         MutableList<Integer> evens = this.integersEC.select(Predicates.not(each -> each % 2 == 1));
         MutableList<Integer> odds = this.integersEC.select(Predicates.not(each -> each % 2 == 0));
+        Assert.assertEquals(SIZE / 2, evens.size());
+        Assert.assertEquals(SIZE / 2, odds.size());
     }
 
     @Benchmark
@@ -80,6 +91,8 @@ public class RejectTest extends AbstractJMHTestRunner
     {
         MutableList<Integer> evens = this.integersEC.reject(each -> each % 2 == 1);
         MutableList<Integer> odds = this.integersEC.reject(each -> each % 2 == 0);
+        Assert.assertEquals(SIZE / 2, evens.size());
+        Assert.assertEquals(SIZE / 2, odds.size());
     }
 
     @Benchmark
@@ -87,5 +100,7 @@ public class RejectTest extends AbstractJMHTestRunner
     {
         MutableList<Integer> evens = this.integersEC.asLazy().reject(each -> each % 2 == 1).toList();
         MutableList<Integer> odds = this.integersEC.asLazy().reject(each -> each % 2 == 0).toList();
+        Assert.assertEquals(SIZE / 2, evens.size());
+        Assert.assertEquals(SIZE / 2, odds.size());
     }
 }
