@@ -38,26 +38,26 @@ public class FlatCollectTest extends AbstractJMHTestRunner
     private final MutableList<MutableList<Integer>> integersEC = FastList.newWithNValues(COUNT, () -> Interval.oneTo(LIST_SIZE).toList());
 
     @Benchmark
-    public void serial_lazy_jdk()
+    public List<Integer> serial_lazy_jdk()
     {
-        List<Integer> flatMap = this.integersJDK.stream().flatMap(Collection::stream).collect(Collectors.toList());
+        return this.integersJDK.stream().flatMap(Collection::stream).collect(Collectors.toList());
     }
 
     @Benchmark
-    public void serial_lazy_streams_ec()
+    public List<Integer> serial_lazy_streams_ec()
     {
-        List<Integer> flatMap = this.integersEC.stream().flatMap(Collection::stream).collect(Collectors.toList());
+        return this.integersEC.stream().flatMap(Collection::stream).collect(Collectors.toList());
     }
 
     @Benchmark
-    public void serial_eager_ec()
+    public MutableList<Integer> serial_eager_ec()
     {
-        MutableList<Integer> flatCollect = this.integersEC.flatCollect(e -> e);
+        return this.integersEC.flatCollect(e -> e);
     }
 
     @Benchmark
-    public void serial_lazy_ec()
+    public MutableList<Integer> serial_lazy_ec()
     {
-        MutableList<Integer> flatCollect = this.integersEC.asLazy().flatCollect(e -> e).toList();
+        return this.integersEC.asLazy().flatCollect(e -> e).toList();
     }
 }
