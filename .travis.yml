@@ -51,28 +51,19 @@ jobs:
         - CMD="mvn install"
 
     - jdk: openjdk10
-      if: type = push AND repo = eclipse/eclipse-collections
       env:
         - DESC="unit tests openjdk10"
         - CMD="mvn install"
 
-    - jdk: oraclejdk10
-      env:
-        - DESC="unit tests oraclejdk10"
-        - CMD="mvn install"
-
     - jdk: openjdk11
-      if: type = push AND repo = eclipse/eclipse-collections
       env:
         - DESC="unit tests openjdk11"
         - CMD="mvn install"
 
-    - jdk: oraclejdk8
-      if: type = push AND repo = eclipse/eclipse-collections
+    - jdk: oraclejdk11
       env:
-        - DESC="unit tests Java11-EA"
-        - JDK=Java11-EA
-        - CMD="./.travis-command-ea-builds.sh"
+        - DESC="unit tests oraclejdk11"
+        - CMD="mvn install"
 
     - jdk: oraclejdk8
       if: type = push AND repo = eclipse/eclipse-collections
@@ -82,11 +73,6 @@ jobs:
         - CMD="./.travis-command-ea-builds.sh"
 
   allow_failures:
-    - jdk: oraclejdk8
-      env:
-        - DESC="unit tests Java11-EA"
-        - JDK=Java11-EA
-        - CMD="./.travis-command-ea-builds.sh"
     - jdk: oraclejdk8
       env:
         - DESC="unit tests Java12-EA"
