@@ -21,6 +21,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import static org.eclipse.collections.impl.test.Verify.assertThrows;
 import static org.eclipse.collections.test.IterableTestCase.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.fail;
@@ -70,8 +71,9 @@ public class ImmutableUnifiedMapTest implements ImmutableMapTestCase
                 UnifiedMap.newWithKeysValues(3, "Three", 2, "Two", 1, "One"),
                 result);
 
-        // TODO: Fix bug, flipUniqueValues is implemented incorrectly in immutable maps. Compare ImmutableDoubletonMap and DoubletonMap for example.
-        this.newWithKeysValues(1, "2", 2, "2").flipUniqueValues();
+        assertThrows(
+                IllegalStateException.class,
+                () -> this.newWithKeysValues(1, "2", 2, "2").flipUniqueValues());
     }
 
     @Test

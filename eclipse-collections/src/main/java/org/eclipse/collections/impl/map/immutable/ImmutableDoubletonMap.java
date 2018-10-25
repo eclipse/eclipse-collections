@@ -143,6 +143,10 @@ final class ImmutableDoubletonMap<K, V>
     @Override
     public ImmutableMap<V, K> flipUniqueValues()
     {
+        if (Comparators.nullSafeEquals(this.value1, this.value2))
+        {
+            throw new IllegalStateException("Duplicate value: " + this.value1 + " found at key: " + this.key1 + " and key: " + this.key2);
+        }
         return Maps.immutable.with(this.value1, this.key1, this.value2, this.key2);
     }
 
