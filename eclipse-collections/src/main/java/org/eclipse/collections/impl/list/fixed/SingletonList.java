@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018 Goldman Sachs.
+ * Copyright (c) 2018 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
 import java.util.Comparator;
+import java.util.function.UnaryOperator;
 
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.primitive.BooleanFunction;
@@ -103,6 +104,23 @@ final class SingletonList<T>
             return previousElement;
         }
         throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + this.size());
+    }
+
+    /**
+     * @since 10.0 - Overridden for efficiency
+     */
+    @Override
+    public void replaceAll(UnaryOperator<T> operator)
+    {
+        this.element1 = operator.apply(this.element1);
+    }
+
+    /**
+     * @since 10.0 - Overridden for efficiency
+     */
+    @Override
+    public void sort(Comparator<? super T> comparator)
+    {
     }
 
     @Override

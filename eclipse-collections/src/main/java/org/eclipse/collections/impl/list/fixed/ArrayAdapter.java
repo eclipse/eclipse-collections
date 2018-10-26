@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018 Goldman Sachs.
+ * Copyright (c) 2018 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -14,7 +14,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.Spliterator;
@@ -183,11 +182,7 @@ public final class ArrayAdapter<T>
     @Override
     public ArrayAdapter<T> sortThis(Comparator<? super T> comparator)
     {
-        if (this.size() > 1)
-        {
-            Arrays.sort(this.items, 0, this.size(), comparator);
-        }
-        return this;
+        return (ArrayAdapter<T>) super.sortThis(comparator);
     }
 
     @Override

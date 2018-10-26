@@ -26,6 +26,7 @@ import java.util.RandomAccess;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
+import java.util.function.UnaryOperator;
 
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.RichIterable;
@@ -918,6 +919,40 @@ public final class MultiReaderFastList<T>
     }
 
     /**
+     * @since 10.0 - Overridden for correctness
+     */
+    @Override
+    public void replaceAll(UnaryOperator<T> operator)
+    {
+        this.acquireWriteLock();
+        try
+        {
+            this.delegate.replaceAll(operator);
+        }
+        finally
+        {
+            this.unlockWriteLock();
+        }
+    }
+
+    /**
+     * @since 10.0 - Overridden for correctness
+     */
+    @Override
+    public void sort(Comparator<? super T> comparator)
+    {
+        this.acquireWriteLock();
+        try
+        {
+            this.delegate.sort(comparator);
+        }
+        finally
+        {
+            this.unlockWriteLock();
+        }
+    }
+
+    /**
      * This method is not supported directly on a MultiReaderFastList. If you would like to use a ListIterator with
      * MultiReaderFastList, then you must do the following:
      * <p>
@@ -1417,6 +1452,15 @@ public final class MultiReaderFastList<T>
         public <S> MutableList<S> selectInstancesOf(Class<S> clazz)
         {
             return this.getDelegate().selectInstancesOf(clazz);
+        }
+
+        /**
+         * @since 10.0 - Overridden for correctness
+         */
+        @Override
+        public void sort(Comparator<? super T> comparator)
+        {
+            this.getDelegate().sort(comparator);
         }
 
         @Override

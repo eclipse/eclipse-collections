@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 Goldman Sachs and others.
+ * Copyright (c) 2018 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -13,6 +13,7 @@ package org.eclipse.collections.impl.list.mutable;
 import java.lang.ref.WeakReference;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicReference;
@@ -646,6 +647,24 @@ public class MultiReaderFastListTest extends AbstractListTestCase
         Verify.assertEmpty(integers);
         integers.addAll(ArrayAdapter.newArray());
         Verify.assertEmpty(integers);
+    }
+
+    @Override
+    @Test
+    public void replaceAll()
+    {
+        MutableList<Integer> integers = this.getIntegerList();
+        integers.replaceAll(i -> i * 2);
+        Assert.assertEquals(Lists.mutable.with(10, 8, 6, 4, 2), integers);
+    }
+
+    @Override
+    @Test
+    public void sort()
+    {
+        MutableList<Integer> integers = this.getIntegerList();
+        integers.sort(Comparator.reverseOrder());
+        Assert.assertEquals(Lists.mutable.with(5, 4, 3, 2, 1), integers);
     }
 
     @Override

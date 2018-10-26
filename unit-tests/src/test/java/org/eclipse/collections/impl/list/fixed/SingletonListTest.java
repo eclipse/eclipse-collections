@@ -80,24 +80,6 @@ public class SingletonListTest extends AbstractMemoryEfficientMutableListTestCas
     }
 
     @Test
-    public void remove()
-    {
-        Verify.assertThrows(UnsupportedOperationException.class, () -> this.list.remove(0));
-    }
-
-    @Test
-    public void addAtIndex()
-    {
-        Verify.assertThrows(UnsupportedOperationException.class, () -> this.list.add(0, "1"));
-    }
-
-    @Test
-    public void add()
-    {
-        Verify.assertThrows(UnsupportedOperationException.class, () -> this.list.add("1"));
-    }
-
-    @Test
     public void addingAllToOtherList()
     {
         MutableList<String> newList = FastList.newList(this.list);
@@ -346,27 +328,6 @@ public class SingletonListTest extends AbstractMemoryEfficientMutableListTestCas
     {
         Verify.assertNotEmpty(SingletonListTest.newWith(1));
         Assert.assertTrue(SingletonListTest.newWith(1).notEmpty());
-    }
-
-    @Test
-    public void removeAll()
-    {
-        MutableList<Integer> objects = SingletonListTest.newWith(1);
-        Verify.assertThrows(UnsupportedOperationException.class, () -> objects.removeAll(Lists.fixedSize.of(1, 2)));
-    }
-
-    @Test
-    public void retainAll()
-    {
-        MutableList<Integer> objects = SingletonListTest.newWith(1);
-        Verify.assertThrows(UnsupportedOperationException.class, () -> objects.retainAll(SingletonListTest.newWith(2)));
-    }
-
-    @Test
-    public void clear()
-    {
-        MutableList<Integer> objects = SingletonListTest.newWith(1);
-        Verify.assertThrows(UnsupportedOperationException.class, objects::clear);
     }
 
     @Test

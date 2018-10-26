@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 Goldman Sachs and others.
+ * Copyright (c) 2018 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -11,6 +11,7 @@
 package org.eclipse.collections.impl.list.mutable;
 
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.ListIterator;
 import java.util.Random;
@@ -203,6 +204,18 @@ public class UnmodifiableMutableListTest
     public void removeFromIndex()
     {
         Verify.assertThrows(UnsupportedOperationException.class, () -> this.unmodifiableList.remove(0));
+    }
+
+    @Test
+    public void replaceAll()
+    {
+        Verify.assertThrows(UnsupportedOperationException.class, () -> this.unmodifiableList.replaceAll(e -> e));
+    }
+
+    @Test
+    public void sort()
+    {
+        Verify.assertThrows(UnsupportedOperationException.class, () -> this.unmodifiableList.sort(Comparator.naturalOrder()));
     }
 
     @Test

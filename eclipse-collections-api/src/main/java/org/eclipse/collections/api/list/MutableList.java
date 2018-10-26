@@ -168,13 +168,24 @@ public interface MutableList<T>
 
     /**
      * Sorts the internal data structure of this list and returns the list itself as a convenience.
+     *
+     * @since 10.0 - Added default implementation.
      */
-    MutableList<T> sortThis(Comparator<? super T> comparator);
+    default MutableList<T> sortThis(Comparator<? super T> comparator)
+    {
+        this.sort(comparator);
+        return this;
+    }
 
     /**
      * Sorts the internal data structure of this list and returns the list itself as a convenience.
+     *
+     * @since 10.0 - Added default implementation.
      */
-    MutableList<T> sortThis();
+    default MutableList<T> sortThis()
+    {
+        return this.sortThis(null);
+    }
 
     /**
      * Sorts the internal data structure of this list based on the natural order of the attribute returned by {@code

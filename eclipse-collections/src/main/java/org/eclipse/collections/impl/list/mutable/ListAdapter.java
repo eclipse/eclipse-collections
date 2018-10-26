@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018 Goldman Sachs.
+ * Copyright (c) 2018 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -30,13 +30,11 @@ import org.eclipse.collections.api.list.ParallelListIterable;
 import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.partition.list.PartitionMutableList;
 import org.eclipse.collections.api.stack.MutableStack;
-import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.block.procedure.CollectionAddProcedure;
 import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.lazy.parallel.list.NonParallelListIterable;
 import org.eclipse.collections.impl.stack.mutable.ArrayStack;
 import org.eclipse.collections.impl.utility.ArrayIterate;
-import org.eclipse.collections.impl.utility.Iterate;
 import org.eclipse.collections.impl.utility.ListIterate;
 import org.eclipse.collections.impl.utility.OrderedIterate;
 
@@ -226,17 +224,31 @@ public final class ListAdapter<T>
         ListIterate.forEach(this.delegate, fromIndex, toIndex, procedure);
     }
 
+    /**
+     * @since 10.0
+     */
+    @Override
+    public void sort(Comparator<? super T> comparator)
+    {
+        this.delegate.sort(comparator);
+    }
+
+    /**
+     * @since 10.0
+     */
     @Override
     public ListAdapter<T> sortThis(Comparator<? super T> comparator)
     {
-        Iterate.sortThis(this.delegate, comparator);
-        return this;
+        return (ListAdapter<T>) super.sortThis(comparator);
     }
 
+    /**
+     * @since 10.0
+     */
     @Override
     public ListAdapter<T> sortThis()
     {
-        return this.sortThis(Comparators.naturalOrder());
+        return (ListAdapter<T>) super.sortThis();
     }
 
     @Override

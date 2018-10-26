@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 Goldman Sachs and others.
+ * Copyright (c) 2018 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -606,63 +606,6 @@ public abstract class AbstractMutableList<T>
     public MutableList<T> asSynchronized()
     {
         return SynchronizedMutableList.of(this);
-    }
-
-    @Override
-    public MutableList<T> sortThis(Comparator<? super T> comparator)
-    {
-        if (this.size() < 10)
-        {
-            if (comparator == null)
-            {
-                this.insertionSort();
-            }
-            else
-            {
-                this.insertionSort(comparator);
-            }
-        }
-        else
-        {
-            this.defaultSort(comparator);
-        }
-        return this;
-    }
-
-    /**
-     * Override in subclasses where it can be optimized.
-     */
-    protected void defaultSort(Comparator<? super T> comparator)
-    {
-        Collections.sort(this, comparator);
-    }
-
-    private void insertionSort(Comparator<? super T> comparator)
-    {
-        for (int i = 0; i < this.size(); i++)
-        {
-            for (int j = i; j > 0 && comparator.compare(this.get(j - 1), this.get(j)) > 0; j--)
-            {
-                Collections.swap(this, j, j - 1);
-            }
-        }
-    }
-
-    private void insertionSort()
-    {
-        for (int i = 0; i < this.size(); i++)
-        {
-            for (int j = i; j > 0 && ((Comparable<T>) this.get(j - 1)).compareTo(this.get(j)) > 0; j--)
-            {
-                Collections.swap(this, j, j - 1);
-            }
-        }
-    }
-
-    @Override
-    public MutableList<T> sortThis()
-    {
-        return this.sortThis(Comparators.naturalOrder());
     }
 
     @Override

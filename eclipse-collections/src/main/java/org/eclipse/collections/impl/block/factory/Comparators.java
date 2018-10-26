@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2018 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -29,6 +29,7 @@ import org.eclipse.collections.impl.block.comparator.FunctionComparator;
 
 public final class Comparators
 {
+    private static final SerializableComparator<?> COMPARABLE_COMPARATOR = new ComparableComparator();
     private static final SerializableComparator<?> NATURAL_ORDER_COMPARATOR = new NaturalOrderComparator();
     private static final SerializableComparator<?> REVERSE_NATURAL_ORDER_COMPARATOR = new ReverseComparator(NATURAL_ORDER_COMPARATOR);
     private static final SerializableComparator<?> POWER_SET_COMPARATOR = new PowerSetComparator();
@@ -38,6 +39,22 @@ public final class Comparators
     private Comparators()
     {
         throw new AssertionError("Suppress default constructor for noninstantiability");
+    }
+
+    /**
+     * @since 10.0
+     */
+    public static <T> SerializableComparator<T> comparableComparator()
+    {
+        return (SerializableComparator<T>) COMPARABLE_COMPARATOR;
+    }
+
+    /**
+     * @since 10.0
+     */
+    public static <T> Comparator<? super T> comparableComparatorIfNull(Comparator<? super T> comparator)
+    {
+        return comparator == null ? Comparators.comparableComparator() : comparator;
     }
 
     /**
@@ -442,6 +459,17 @@ public final class Comparators
         public int compare(Pair<?, T> p1, Pair<?, T> p2)
         {
             return this.comparator.compare(p1.getTwo(), p2.getTwo());
+        }
+    }
+
+    private static class ComparableComparator<T> implements SerializableComparator<T>
+    {
+        private static final long serialVersionUID = 1L;
+
+        @Override
+        public int compare(T one, T two)
+        {
+            return ((Comparable<T>) one).compareTo(two);
         }
     }
 }

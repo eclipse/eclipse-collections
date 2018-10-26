@@ -16,6 +16,16 @@ import org.junit.Test;
 public class ComparatorsSerializationTest
 {
     @Test
+    public void comparableComparator()
+    {
+        Verify.assertSerializedForm(
+                1L,
+                "rO0ABXNyAEtvcmcuZWNsaXBzZS5jb2xsZWN0aW9ucy5pbXBsLmJsb2NrLmZhY3RvcnkuQ29tcGFy\n"
+                        + "YXRvcnMkQ29tcGFyYWJsZUNvbXBhcmF0b3IAAAAAAAAAAQIAAHhw",
+                Comparators.comparableComparator());
+    }
+
+    @Test
     public void naturalOrder()
     {
         Verify.assertSerializedForm(
