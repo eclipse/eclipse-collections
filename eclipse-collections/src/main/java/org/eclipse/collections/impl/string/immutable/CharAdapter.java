@@ -561,7 +561,7 @@ public class CharAdapter
         for (int i = 0; i < this.size(); i++)
         {
             char item = this.get(i);
-            hashCode = 31 * hashCode + (int) item;
+            hashCode = 31 * hashCode + item;
         }
         return hashCode;
     }
