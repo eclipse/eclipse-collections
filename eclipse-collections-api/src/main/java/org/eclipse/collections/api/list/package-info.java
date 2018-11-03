@@ -11,7 +11,7 @@
 /**
  * This package contains interfaces for list API which enhance the performance and functionality of {@link java.util.List}.
  * <p>
- *      This package contains 4 interfaces:
+ *      This package contains 5 interfaces:
  * <ul>
  *     <li>
  *         {@link org.eclipse.collections.api.list.ListIterable} - an {@link java.lang.Iterable} which contains items that are ordered and may be accessed directly by index.
@@ -24,6 +24,9 @@
  *     </li>
  *     <li>
  *         {@link org.eclipse.collections.api.list.FixedSizeList} - a list that may be mutated, but cannot grow or shrink in size.
+ *     </li>
+ *     <li>
+ *         {@link org.eclipse.collections.api.list.ParallelListIterable} - a {@link org.eclipse.collections.api.RichIterable} which will defer evaluation for certain methods like select, reject, collect, etc. When evaluation occurs it is in parallel.
  *     </li>
  * </ul>
  */
