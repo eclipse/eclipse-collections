@@ -27,6 +27,7 @@ import org.eclipse.collections.api.block.function.primitive.DoubleFunction;
 import org.eclipse.collections.api.block.function.primitive.FloatFunction;
 import org.eclipse.collections.api.block.function.primitive.IntFunction;
 import org.eclipse.collections.api.block.function.primitive.LongFunction;
+import org.eclipse.collections.api.block.function.primitive.ObjectIntToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.ShortFunction;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
@@ -111,6 +112,9 @@ public interface UnsortedBag<T> extends Bag<T>
 
     @Override
     <V> UnsortedBag<V> collectIf(Predicate<? super T> predicate, Function<? super T, ? extends V> function);
+
+    @Override
+    <V> UnsortedBag<V> collectWithOccurrences(ObjectIntToObjectFunction<? super T, ? extends V> function);
 
     @Override
     <V> UnsortedBag<V> flatCollect(Function<? super T, ? extends Iterable<V>> function);

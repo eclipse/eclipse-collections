@@ -291,6 +291,13 @@ public interface Bag<T>
     }
 
     /**
+     * Iterates over the unique elements and their occurrences and collects the results of applying the specified function.
+     *
+     * @since 10.0
+     */
+    <V> RichIterable<V> collectWithOccurrences(ObjectIntToObjectFunction<? super T, ? extends V> function);
+
+    /**
      * Iterates over the unique elements and their occurrences and collects the results of applying the
      * specified function into the target collection.
      *

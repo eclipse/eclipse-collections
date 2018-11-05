@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 Goldman Sachs and others.
+ * Copyright (c) 2018 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -205,30 +205,33 @@ public abstract class MutableBagTestCase extends AbstractCollectionTestCase
         Assert.assertEquals(5, sum3.getIntSum());
     }
 
-    /**
-     * @since 9.1.
-     */
     @Test
     public void collectWithOccurrences()
     {
-        Bag<Integer> bag = this.newWith(3, 3, 3, 2, 2, 1);
-        Bag<ObjectIntPair<Integer>> actual =
-                bag.collectWithOccurrences(PrimitiveTuples::pair, Bags.mutable.empty());
-        Bag<ObjectIntPair<Integer>> expected =
+        Bag<Integer> bag1 = this.newWith(3, 3, 3, 2, 2, 1);
+        Bag<ObjectIntPair<Integer>> actual1 =
+                bag1.collectWithOccurrences(PrimitiveTuples::pair, Bags.mutable.empty());
+        Bag<ObjectIntPair<Integer>> expected1 =
                 Bags.immutable.with(
                         PrimitiveTuples.pair(Integer.valueOf(3), 3),
                         PrimitiveTuples.pair(Integer.valueOf(2), 2),
                         PrimitiveTuples.pair(Integer.valueOf(1), 1));
-        Assert.assertEquals(expected, actual);
+        Assert.assertEquals(expected1, actual1);
+        Assert.assertEquals(expected1, bag1.collectWithOccurrences(PrimitiveTuples::pair));
 
         Set<ObjectIntPair<Integer>> actual2 =
-                bag.collectWithOccurrences(PrimitiveTuples::pair, Sets.mutable.empty());
+                bag1.collectWithOccurrences(PrimitiveTuples::pair, Sets.mutable.empty());
         ImmutableSet<ObjectIntPair<Integer>> expected2 =
                 Sets.immutable.with(
                         PrimitiveTuples.pair(Integer.valueOf(3), 3),
                         PrimitiveTuples.pair(Integer.valueOf(2), 2),
                         PrimitiveTuples.pair(Integer.valueOf(1), 1));
         Assert.assertEquals(expected2, actual2);
+
+        Bag<Integer> bag2 = this.newWith(3, 3, 3, 3, 3, 2, 2, 2, 1, 1, 1, 1, 1, 4, 5, 7);
+        Assert.assertEquals(
+                this.newWith(8, 5, 6, 5, 6, 8),
+                bag2.collectWithOccurrences((each, index) -> each + index));
     }
 
     @Override

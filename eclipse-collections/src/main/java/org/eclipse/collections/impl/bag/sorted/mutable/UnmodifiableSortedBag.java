@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 Goldman Sachs and others.
+ * Copyright (c) 2018 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -53,6 +53,7 @@ import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.api.tuple.primitive.ObjectIntPair;
 import org.eclipse.collections.impl.collection.mutable.AbstractUnmodifiableMutableCollection;
 import org.eclipse.collections.impl.collection.mutable.UnmodifiableCollectionSerializationProxy;
+import org.eclipse.collections.impl.factory.Lists;
 
 /**
  * An unmodifiable view of a SortedBag.
@@ -211,6 +212,12 @@ public class UnmodifiableSortedBag<T>
     public void forEachWithOccurrences(ObjectIntProcedure<? super T> procedure)
     {
         this.getSortedBag().forEachWithOccurrences(procedure);
+    }
+
+    @Override
+    public <V> MutableList<V> collectWithOccurrences(ObjectIntToObjectFunction<? super T, ? extends V> function)
+    {
+        return this.getSortedBag().collectWithOccurrences(function, Lists.mutable.empty());
     }
 
     /**

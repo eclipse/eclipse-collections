@@ -164,6 +164,9 @@ public interface ImmutableSortedBag<T>
     <V> ImmutableList<V> collectIf(Predicate<? super T> predicate, Function<? super T, ? extends V> function);
 
     @Override
+    <V> ImmutableList<V> collectWithOccurrences(ObjectIntToObjectFunction<? super T, ? extends V> function);
+
+    @Override
     <V> ImmutableList<V> flatCollect(Function<? super T, ? extends Iterable<V>> function);
 
     /**

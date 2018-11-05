@@ -27,6 +27,7 @@ import org.eclipse.collections.api.block.function.primitive.DoubleFunction;
 import org.eclipse.collections.api.block.function.primitive.FloatFunction;
 import org.eclipse.collections.api.block.function.primitive.IntFunction;
 import org.eclipse.collections.api.block.function.primitive.LongFunction;
+import org.eclipse.collections.api.block.function.primitive.ObjectIntToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.ShortFunction;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
@@ -206,6 +207,9 @@ public interface MutableBag<T>
 
     @Override
     <V> MutableBag<V> collectIf(Predicate<? super T> predicate, Function<? super T, ? extends V> function);
+
+    @Override
+    <V> MutableBag<V> collectWithOccurrences(ObjectIntToObjectFunction<? super T, ? extends V> function);
 
     @Override
     <V> MutableBag<V> flatCollect(Function<? super T, ? extends Iterable<V>> function);

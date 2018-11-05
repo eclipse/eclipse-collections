@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2018 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -11,6 +11,7 @@
 package org.eclipse.collections.api.bag;
 
 import org.eclipse.collections.api.block.function.Function;
+import org.eclipse.collections.api.block.function.primitive.ObjectIntToObjectFunction;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.predicate.primitive.IntPredicate;
@@ -77,4 +78,7 @@ public interface ImmutableBagIterable<T> extends Bag<T>, ImmutableCollection<T>
 
     @Override
     MutableMapIterable<T, Integer> toMapOfItemToCount();
+
+    @Override
+    <V> ImmutableCollection<V> collectWithOccurrences(ObjectIntToObjectFunction<? super T, ? extends V> function);
 }

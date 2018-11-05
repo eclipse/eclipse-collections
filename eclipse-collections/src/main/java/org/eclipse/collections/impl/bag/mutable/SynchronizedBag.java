@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 Goldman Sachs and others.
+ * Copyright (c) 2018 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -209,6 +209,15 @@ public class SynchronizedBag<T>
         synchronized (this.getLock())
         {
             this.getDelegate().forEachWithOccurrences(objectIntProcedure);
+        }
+    }
+
+    @Override
+    public <V> MutableBag<V> collectWithOccurrences(ObjectIntToObjectFunction<? super T, ? extends V> function)
+    {
+        synchronized (this.getLock())
+        {
+            return this.getDelegate().collectWithOccurrences(function);
         }
     }
 

@@ -142,6 +142,9 @@ public interface MutableSortedBag<T>
     @Override
     <V> MutableList<V> collect(Function<? super T, ? extends V> function);
 
+    @Override
+    <V> MutableList<V> collectWithOccurrences(ObjectIntToObjectFunction<? super T, ? extends V> function);
+
     /**
      * @since 9.1.
      */
