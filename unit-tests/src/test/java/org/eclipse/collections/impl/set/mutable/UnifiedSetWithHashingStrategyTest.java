@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2018 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -312,6 +312,100 @@ public class UnifiedSetWithHashingStrategyTest extends AbstractUnifiedSetTestCas
 
         //Testing add throws NullPointerException if the hashingStrategy is not null safe
         Verify.assertThrows(NullPointerException.class, () -> UnifiedSetWithHashingStrategy.newSet(LAST_NAME_HASHING_STRATEGY).add(null));
+    }
+
+    @Test
+    public void addOrReplace()
+    {
+        Person person1 = new Person("f1", "l1", 1);
+        UnifiedSetWithHashingStrategy<Person> set1 = UnifiedSetWithHashingStrategy.newSetWith(
+                HashingStrategies.fromFunction(Person::getAge),
+                person1);
+        Person person2 = new Person("f2", "l2", 1);
+
+        Assert.assertEquals(person1, set1.getOnly());
+        set1.add(person2);
+        Assert.assertEquals(person1, set1.getOnly());
+        Assert.assertEquals(person1, set1.addOrReplace(person2));
+        Assert.assertEquals(person2, set1.getOnly());
+        set1.remove(person1);
+        Verify.assertEmpty(set1);
+        Assert.assertEquals(person1, set1.addOrReplace(person1));
+        Assert.assertEquals(person1, set1.getOnly());
+        Assert.assertEquals(person1, set1.addOrReplace(person1));
+
+        Person person31 = new Person("c1", "l31", COLLISION_1);
+        Person person41 = new Person("c2", "l41", COLLISION_2);
+        Person person51 = new Person("c3", "l51", COLLISION_3);
+        Person person61 = new Person("c4", "l61", COLLISION_4);
+        Person person71 = new Person("c5", "l71", COLLISION_5);
+        Person person81 = new Person("c6", "l81", COLLISION_6);
+        Person person91 = new Person("c7", "l91", COLLISION_7);
+        Person person101 = new Person("c8", "l101", COLLISION_8);
+        Person person111 = new Person("c9", "l111", COLLISION_9);
+        Person person121 = new Person("c10", "l121", COLLISION_10);
+
+        Person person32 = new Person("c1", "l32", COLLISION_1);
+        Person person42 = new Person("c2", "l42", COLLISION_2);
+        Person person52 = new Person("c3", "l52", COLLISION_3);
+        Person person62 = new Person("c4", "l62", COLLISION_4);
+        Person person72 = new Person("c5", "l72", COLLISION_5);
+        Person person82 = new Person("c6", "l82", COLLISION_6);
+        Person person92 = new Person("c7", "l92", COLLISION_7);
+        Person person102 = new Person("c8", "l102", COLLISION_8);
+        Person person112 = new Person("c9", "l112", COLLISION_9);
+        Person person122 = new Person("c10", "l122", COLLISION_10);
+
+        UnifiedSetWithHashingStrategy<Person> set2 = UnifiedSetWithHashingStrategy.newSetWith(
+                HashingStrategies.fromFunction(Person::getAge));
+        Assert.assertEquals(person31, set2.addOrReplace(person31));
+        Assert.assertEquals(person41, set2.addOrReplace(person41));
+        Assert.assertEquals(person51, set2.addOrReplace(person51));
+        Assert.assertEquals(person61, set2.addOrReplace(person61));
+        Assert.assertEquals(person61, set2.addOrReplace(person62));
+        Assert.assertEquals(person62, set2.addOrReplace(person61));
+        Assert.assertEquals(person71, set2.addOrReplace(person71));
+        Assert.assertEquals(person81, set2.addOrReplace(person81));
+        Assert.assertEquals(person91, set2.addOrReplace(person91));
+        Assert.assertEquals(person101, set2.addOrReplace(person101));
+        Assert.assertEquals(person111, set2.addOrReplace(person111));
+        Assert.assertEquals(person121, set2.addOrReplace(person121));
+        Assert.assertEquals(person31, set2.addOrReplace(person31));
+
+        Assert.assertEquals(UnifiedSetWithHashingStrategy.newSetWith(
+                HashingStrategies.fromFunction(Person::getAge),
+                person31, person41, person51, person61, person71, person81, person91, person101, person111, person121),
+                set2);
+
+        Assert.assertEquals(person121, set2.addOrReplace(person122));
+        Assert.assertEquals(person71, set2.addOrReplace(person72));
+        Assert.assertEquals(UnifiedSetWithHashingStrategy.newSetWith(
+                HashingStrategies.fromFunction(Person::getAge),
+                person31, person41, person51, person61, person72, person81, person91, person101, person111, person122),
+                set2);
+        Assert.assertEquals(person31, set2.addOrReplace(person32));
+        Assert.assertEquals(person41, set2.addOrReplace(person42));
+        Assert.assertEquals(person51, set2.addOrReplace(person52));
+        Assert.assertEquals(person61, set2.addOrReplace(person62));
+        Assert.assertEquals(person72, set2.addOrReplace(person72));
+        Assert.assertEquals(person81, set2.addOrReplace(person82));
+        Assert.assertEquals(person91, set2.addOrReplace(person92));
+        Assert.assertEquals(person101, set2.addOrReplace(person102));
+        Assert.assertEquals(person111, set2.addOrReplace(person112));
+        Assert.assertEquals(person122, set2.addOrReplace(person122));
+        Assert.assertEquals(UnifiedSetWithHashingStrategy.newSetWith(
+                HashingStrategies.fromFunction(Person::getAge),
+                person32, person42, person52, person62, person72, person82, person92, person102, person112, person122),
+                set2);
+        Assert.assertEquals(person1, set2.addOrReplace(person1));
+        Person person3 = new Person("f3", "l3", 3);
+        Person person4 = new Person("f4", "l4", 4);
+        Assert.assertEquals(person3, set2.addOrReplace(person3));
+        Assert.assertEquals(person4, set2.addOrReplace(person4));
+        Assert.assertEquals(UnifiedSetWithHashingStrategy.newSetWith(
+                HashingStrategies.fromFunction(Person::getAge),
+                person1, person3, person4, person32, person42, person52, person62, person72, person82, person92, person102, person112, person122),
+                set2);
     }
 
     @Override
