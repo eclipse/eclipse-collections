@@ -2119,6 +2119,7 @@ public class UnifiedSet<T>
 
     private T chainedPut(T key, int index)
     {
+        Object realKey = UnifiedSet.toSentinelIfNull(key);
         if (this.table[index] instanceof ChainedBucket)
         {
             ChainedBucket bucket = (ChainedBucket) this.table[index];
@@ -2130,7 +2131,7 @@ public class UnifiedSet<T>
                 }
                 if (bucket.one == null)
                 {
-                    bucket.one = UnifiedSet.toSentinelIfNull(key);
+                    bucket.one = realKey;
                     if (++this.occupied > this.maxSize)
                     {
                         this.rehash();
@@ -2143,7 +2144,7 @@ public class UnifiedSet<T>
                 }
                 if (bucket.two == null)
                 {
-                    bucket.two = UnifiedSet.toSentinelIfNull(key);
+                    bucket.two = realKey;
                     if (++this.occupied > this.maxSize)
                     {
                         this.rehash();
@@ -2161,7 +2162,7 @@ public class UnifiedSet<T>
                 }
                 if (bucket.three == null)
                 {
-                    bucket.three = UnifiedSet.toSentinelIfNull(key);
+                    bucket.three = realKey;
                     if (++this.occupied > this.maxSize)
                     {
                         this.rehash();
@@ -2172,7 +2173,7 @@ public class UnifiedSet<T>
                 {
                     return this.nonSentinel(bucket.three);
                 }
-                bucket.three = new ChainedBucket(bucket.three, key);
+                bucket.three = new ChainedBucket(bucket.three, realKey);
                 if (++this.occupied > this.maxSize)
                 {
                     this.rehash();
@@ -2181,7 +2182,7 @@ public class UnifiedSet<T>
             }
             while (true);
         }
-        ChainedBucket newBucket = new ChainedBucket(this.table[index], key);
+        ChainedBucket newBucket = new ChainedBucket(this.table[index], realKey);
         this.table[index] = newBucket;
         if (++this.occupied > this.maxSize)
         {
