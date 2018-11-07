@@ -315,6 +315,7 @@ public class UnifiedSetWithHashingStrategy<T>
 
     private boolean chainedAdd(T key, int index)
     {
+        Object realKey = UnifiedSetWithHashingStrategy.toSentinelIfNull(key);
         if (this.table[index] instanceof ChainedBucket)
         {
             ChainedBucket bucket = (ChainedBucket) this.table[index];
@@ -326,7 +327,7 @@ public class UnifiedSetWithHashingStrategy<T>
                 }
                 if (bucket.one == null)
                 {
-                    bucket.one = UnifiedSetWithHashingStrategy.toSentinelIfNull(key);
+                    bucket.one = realKey;
                     if (++this.occupied > this.maxSize)
                     {
                         this.rehash();
@@ -339,7 +340,7 @@ public class UnifiedSetWithHashingStrategy<T>
                 }
                 if (bucket.two == null)
                 {
-                    bucket.two = UnifiedSetWithHashingStrategy.toSentinelIfNull(key);
+                    bucket.two = realKey;
                     if (++this.occupied > this.maxSize)
                     {
                         this.rehash();
@@ -357,7 +358,7 @@ public class UnifiedSetWithHashingStrategy<T>
                 }
                 if (bucket.three == null)
                 {
-                    bucket.three = UnifiedSetWithHashingStrategy.toSentinelIfNull(key);
+                    bucket.three = realKey;
                     if (++this.occupied > this.maxSize)
                     {
                         this.rehash();
@@ -368,12 +369,12 @@ public class UnifiedSetWithHashingStrategy<T>
                 {
                     return false;
                 }
-                this.appendNewChainedBucket(bucket, UnifiedSetWithHashingStrategy.toSentinelIfNull(key));
+                this.appendNewChainedBucket(bucket, realKey);
                 return true;
             }
             while (true);
         }
-        ChainedBucket newBucket = new ChainedBucket(this.table[index], UnifiedSetWithHashingStrategy.toSentinelIfNull(key));
+        ChainedBucket newBucket = new ChainedBucket(this.table[index], realKey);
         this.table[index] = newBucket;
         if (++this.occupied > this.maxSize)
         {
@@ -2256,6 +2257,7 @@ public class UnifiedSetWithHashingStrategy<T>
 
     private T chainedPut(T key, int index)
     {
+        Object realKey = UnifiedSetWithHashingStrategy.toSentinelIfNull(key);
         if (this.table[index] instanceof ChainedBucket)
         {
             ChainedBucket bucket = (ChainedBucket) this.table[index];
@@ -2267,7 +2269,7 @@ public class UnifiedSetWithHashingStrategy<T>
                 }
                 if (bucket.one == null)
                 {
-                    bucket.one = UnifiedSetWithHashingStrategy.toSentinelIfNull(key);
+                    bucket.one = realKey;
                     if (++this.occupied > this.maxSize)
                     {
                         this.rehash();
@@ -2280,7 +2282,7 @@ public class UnifiedSetWithHashingStrategy<T>
                 }
                 if (bucket.two == null)
                 {
-                    bucket.two = UnifiedSetWithHashingStrategy.toSentinelIfNull(key);
+                    bucket.two = realKey;
                     if (++this.occupied > this.maxSize)
                     {
                         this.rehash();
@@ -2298,7 +2300,7 @@ public class UnifiedSetWithHashingStrategy<T>
                 }
                 if (bucket.three == null)
                 {
-                    bucket.three = UnifiedSetWithHashingStrategy.toSentinelIfNull(key);
+                    bucket.three = realKey;
                     if (++this.occupied > this.maxSize)
                     {
                         this.rehash();
@@ -2309,12 +2311,12 @@ public class UnifiedSetWithHashingStrategy<T>
                 {
                     return this.nonSentinel(bucket.three);
                 }
-                this.appendNewChainedBucket(bucket, key);
+                this.appendNewChainedBucket(bucket, realKey);
                 return key;
             }
             while (true);
         }
-        ChainedBucket newBucket = new ChainedBucket(this.table[index], key);
+        ChainedBucket newBucket = new ChainedBucket(this.table[index], realKey);
         this.table[index] = newBucket;
         if (++this.occupied > this.maxSize)
         {
