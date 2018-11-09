@@ -40,18 +40,12 @@ public interface MutableListFactory
     /**
      * Same as {@link #empty()}. but takes in initial capacity.
      */
-    default <T> MutableList<T> ofInitialCapacity(int capacity)
-    {
-        throw new UnsupportedOperationException("Adding default implementation so as to not break compatibility");
-    }
+    <T> MutableList<T> ofInitialCapacity(int capacity);
 
     /**
      * Same as {@link #empty()}. but takes in initial capacity.
      */
-    default <T> MutableList<T> withInitialCapacity(int capacity)
-    {
-        throw new UnsupportedOperationException("Adding default implementation so as to not break compatibility");
-    }
+    <T> MutableList<T> withInitialCapacity(int capacity);
 
     /**
      * Same as {@link #withAll(Iterable)}.
