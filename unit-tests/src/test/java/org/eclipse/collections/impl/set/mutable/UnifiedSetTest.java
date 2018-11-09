@@ -107,7 +107,7 @@ public class UnifiedSetTest extends AbstractMutableSetTestCase
             Assert.assertTrue(unifiedSet.add(value));
         }
 
-        // Rehashing Case A: a bucket with only one entry and a low capacity forcing a rehash, where the trigging element goes in the bucket
+        // Rehashing Case A: a bucket with only one entry and a low capacity forcing a rehash, where the triggering element goes in the bucket
         // set up a chained bucket
         UnifiedSet<Integer> caseA = UnifiedSet.<Integer>newSet(2).with(COLLISION_1, COLLISION_2);
         // clear the bucket to one element

@@ -1429,7 +1429,7 @@ public class UnifiedSetWithHashingStrategy<T>
             }
             else if (cur != null)
             {
-                this.addForTrim((T) cur, j, mask);
+                this.addForTrim(cur, j, mask);
             }
         }
         return true;

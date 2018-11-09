@@ -127,15 +127,15 @@ public class BooleanStacksTest
     @Test
     public void ofAllIterable()
     {
-        Assert.assertEquals(new BooleanArrayStack(), BooleanStacks.immutable.ofAll(Lists.mutable.<Boolean>empty()));
-        Assert.assertEquals(BooleanArrayStack.newStackWith(true), BooleanStacks.immutable.ofAll(Lists.mutable.<Boolean>with(true)));
-        Assert.assertEquals(BooleanArrayStack.newStackWith(true, false), BooleanStacks.immutable.ofAll(Lists.mutable.<Boolean>with(true, false)));
-        Assert.assertEquals(BooleanArrayStack.newStackWith(true, false, false, true), BooleanStacks.immutable.ofAll(Lists.mutable.<Boolean>with(true, false, false, true)));
+        Assert.assertEquals(new BooleanArrayStack(), BooleanStacks.immutable.ofAll(Lists.mutable.empty()));
+        Assert.assertEquals(BooleanArrayStack.newStackWith(true), BooleanStacks.immutable.ofAll(Lists.mutable.with(true)));
+        Assert.assertEquals(BooleanArrayStack.newStackWith(true, false), BooleanStacks.immutable.ofAll(Lists.mutable.with(true, false)));
+        Assert.assertEquals(BooleanArrayStack.newStackWith(true, false, false, true), BooleanStacks.immutable.ofAll(Lists.mutable.with(true, false, false, true)));
 
-        Assert.assertEquals(new BooleanArrayStack(), BooleanStacks.mutable.ofAll(Lists.mutable.<Boolean>empty()));
-        Assert.assertEquals(BooleanArrayStack.newStackWith(true), BooleanStacks.mutable.ofAll(Lists.mutable.<Boolean>with(true)));
-        Assert.assertEquals(BooleanArrayStack.newStackWith(true, false), BooleanStacks.mutable.ofAll(Lists.mutable.<Boolean>with(true, false)));
-        Assert.assertEquals(BooleanArrayStack.newStackWith(true, false, false, true), BooleanStacks.mutable.ofAll(Lists.mutable.<Boolean>with(true, false, false, true)));
+        Assert.assertEquals(new BooleanArrayStack(), BooleanStacks.mutable.ofAll(Lists.mutable.empty()));
+        Assert.assertEquals(BooleanArrayStack.newStackWith(true), BooleanStacks.mutable.ofAll(Lists.mutable.with(true)));
+        Assert.assertEquals(BooleanArrayStack.newStackWith(true, false), BooleanStacks.mutable.ofAll(Lists.mutable.with(true, false)));
+        Assert.assertEquals(BooleanArrayStack.newStackWith(true, false, false, true), BooleanStacks.mutable.ofAll(Lists.mutable.with(true, false, false, true)));
     }
 
     @Test
