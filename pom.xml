@@ -301,6 +301,7 @@
                 </plugin>
 
                 <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-enforcer-plugin</artifactId>
                     <version>3.0.0-M1</version>
                     <executions>
@@ -313,7 +314,7 @@
                                         <version>1.8.0</version>
                                     </requireJavaVersion>
                                     <requireMavenVersion>
-                                        <version>3.1.0</version>
+                                        <version>3.1.1</version>
                                     </requireMavenVersion>
                                     <requirePluginVersions>
                                         <unCheckedPluginList>
@@ -433,7 +434,7 @@
                 <plugin>
                     <groupId>org.eclipse.cbi.maven.plugins</groupId>
                     <artifactId>eclipse-jarsigner-plugin</artifactId>
-                    <version>1.1.3</version>
+                    <version>1.1.5</version>
                 </plugin>
             </plugins>
         </pluginManagement>
