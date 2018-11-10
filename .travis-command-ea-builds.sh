@@ -1,7 +1,6 @@
 #!/bin/bash
 
-set -e
-set +u
+set -euxo pipefail
 
 # Prevent accidental execution outside of Travis:
 if [ -z "${TRAVIS+false}" ]
@@ -41,25 +40,12 @@ function install_jdk_and_run_ea_build {
   export PATH="${JAVA_HOME}/bin:${PATH}"
 
   $JAVA_HOME/bin/java -version
-  echo "export MAVEN_OPTS='-Dmaven.repo.local=$HOME/.m2/repository -Xmx2g -XX:MaxPermSize=2048m'\" > ~/.mavenrc"
   ./mvnw -version
   echo "Completed setting environment"
   ./mvnw install
 }
 
 case "$JDK" in
-Java8)
-  echo "Java 8 already exists in Travis!"
-  ;;
-Java9)
-  echo "Java 9 already exists in Travis!"
-  ;;
-Java10)
-  install_jdk_and_run_ea_build "https://download.java.net/java/GA/jdk10/10/binaries/openjdk-10_linux-x64_bin.tar.gz"
-  ;;
-Java11-EA)
-  install_jdk_and_run_ea_build ${JDK11_EA_URL}
-  ;;
 Java12-EA)
   install_jdk_and_run_ea_build ${JDK12_EA_URL}
   ;;
