@@ -63,3 +63,8 @@ fabric.properties
 
 # Editor-based Rest Client
 .idea/httpRequests
+
+# Eclipe
+.project
+.settings/
+.classpath
