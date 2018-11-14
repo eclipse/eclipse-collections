@@ -65,6 +65,16 @@ jobs:
         - DESC="unit tests oraclejdk11"
         - CMD="mvn install"
 
+    - jdk: openjdk12
+      env:
+        - DESC="unit tests openjdk12"
+        - CMD="mvn install"
+
+    - jdk: openjdk-ea
+      env:
+        - DESC="unit tests openjdk-ea"
+        - CMD="mvn install"
+
     - jdk: oraclejdk8
       env:
         - DESC="unit tests Java12-EA"
@@ -72,6 +82,10 @@ jobs:
         - CMD="./.travis-command-ea-builds.sh"
 
   allow_failures:
+    - jdk: openjdk-ea
+      env:
+        - DESC="unit tests openjdk-ea"
+        - CMD="mvn install"
     - jdk: oraclejdk8
       env:
         - DESC="unit tests Java12-EA"
