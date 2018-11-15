@@ -71,9 +71,9 @@ import org.eclipse.collections.impl.utility.LazyIterate;
  * FixedSize Examples:
  *
  * <pre>
- * FixedSizeList&lt;String&gt; emptySet = Sets.fixedSize.empty();
- * FixedSizeList&lt;String&gt; setWith = Sets.fixedSize.with("a", "b", "c");
- * FixedSizeList&lt;String&gt; setOf = Sets.fixedSize.of("a", "b", "c");
+ * FixedSizeSet&lt;String&gt; emptySet = Sets.fixedSize.empty();
+ * FixedSizeSet&lt;String&gt; setWith = Sets.fixedSize.with("a", "b", "c");
+ * FixedSizeSet&lt;String&gt; setOf = Sets.fixedSize.of("a", "b", "c");
  * </pre>
  */
 @SuppressWarnings("ConstantNamingConvention")

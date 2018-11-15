@@ -193,21 +193,9 @@ public abstract class AbstractArrayAdapter<T>
     }
 
     @Override
-    public MutableList<T> select(Predicate<? super T> predicate)
-    {
-        return this.select(predicate, FastList.newList());
-    }
-
-    @Override
     public <R extends Collection<T>> R select(Predicate<? super T> predicate, R target)
     {
         return InternalArrayIterate.select(this.items, this.items.length, predicate, target);
-    }
-
-    @Override
-    public MutableList<T> reject(Predicate<? super T> predicate)
-    {
-        return this.reject(predicate, FastList.newList());
     }
 
     @Override
@@ -226,14 +214,6 @@ public abstract class AbstractArrayAdapter<T>
     public <V, R extends Collection<V>> R collect(Function<? super T, ? extends V> function, R target)
     {
         return InternalArrayIterate.collect(this.items, this.items.length, function, target);
-    }
-
-    @Override
-    public <V> MutableList<V> collectIf(
-            Predicate<? super T> predicate,
-            Function<? super T, ? extends V> function)
-    {
-        return this.collectIf(predicate, function, FastList.newList());
     }
 
     @Override
@@ -473,24 +453,12 @@ public abstract class AbstractArrayAdapter<T>
     }
 
     @Override
-    public <P> MutableList<T> selectWith(Predicate2<? super T, ? super P> predicate, P parameter)
-    {
-        return this.selectWith(predicate, parameter, FastList.newList());
-    }
-
-    @Override
     public <P, R extends Collection<T>> R selectWith(
             Predicate2<? super T, ? super P> predicate,
             P parameter,
             R target)
     {
         return InternalArrayIterate.selectWith(this.items, this.items.length, predicate, parameter, target);
-    }
-
-    @Override
-    public <P> MutableList<T> rejectWith(Predicate2<? super T, ? super P> predicate, P parameter)
-    {
-        return this.rejectWith(predicate, parameter, FastList.newList());
     }
 
     @Override
@@ -505,7 +473,7 @@ public abstract class AbstractArrayAdapter<T>
     @Override
     public <P, A> MutableList<A> collectWith(Function2<? super T, ? super P, ? extends A> function, P parameter)
     {
-        return this.collectWith(function, parameter, FastList.newList());
+        return this.collectWith(function, parameter, FastList.newList(this.items.length));
     }
 
     @Override

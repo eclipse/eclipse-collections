@@ -17,9 +17,9 @@ import org.eclipse.collections.api.factory.map.sorted.ImmutableSortedMapFactory;
 import org.eclipse.collections.api.map.sorted.ImmutableSortedMap;
 import org.eclipse.collections.impl.map.sorted.mutable.TreeSortedMap;
 
-public enum ImmutableSortedMapFactoryImpl implements ImmutableSortedMapFactory
+public class ImmutableSortedMapFactoryImpl implements ImmutableSortedMapFactory
 {
-    INSTANCE;
+    public static final ImmutableSortedMapFactory INSTANCE = new ImmutableSortedMapFactoryImpl();
 
     @Override
     public <K, V> ImmutableSortedMap<K, V> empty()

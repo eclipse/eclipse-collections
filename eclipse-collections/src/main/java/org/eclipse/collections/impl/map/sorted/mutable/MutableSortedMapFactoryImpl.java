@@ -16,9 +16,9 @@ import java.util.Map;
 import org.eclipse.collections.api.factory.map.sorted.MutableSortedMapFactory;
 import org.eclipse.collections.api.map.sorted.MutableSortedMap;
 
-public enum MutableSortedMapFactoryImpl implements MutableSortedMapFactory
+public class MutableSortedMapFactoryImpl implements MutableSortedMapFactory
 {
-    INSTANCE;
+    public static final MutableSortedMapFactory INSTANCE = new MutableSortedMapFactoryImpl();
 
     @Override
     public <K, V> MutableSortedMap<K, V> empty()

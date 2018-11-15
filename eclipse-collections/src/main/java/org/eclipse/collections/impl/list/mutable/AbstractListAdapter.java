@@ -15,7 +15,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.ListIterator;
-import java.util.Random;
 import java.util.concurrent.ExecutorService;
 
 import org.eclipse.collections.api.block.function.Function;
@@ -79,33 +78,6 @@ public abstract class AbstractListAdapter<T>
     public boolean addAll(int index, Collection<? extends T> collection)
     {
         return this.getDelegate().addAll(index, collection);
-    }
-
-    @Override
-    public MutableList<T> toReversed()
-    {
-        return FastList.newList(this).reverseThis();
-    }
-
-    @Override
-    public MutableList<T> reverseThis()
-    {
-        Collections.reverse(this);
-        return this;
-    }
-
-    @Override
-    public MutableList<T> shuffleThis()
-    {
-        Collections.shuffle(this);
-        return this;
-    }
-
-    @Override
-    public MutableList<T> shuffleThis(Random rnd)
-    {
-        Collections.shuffle(this, rnd);
-        return this;
     }
 
     @Override

@@ -13,9 +13,9 @@ package org.eclipse.collections.impl.bag.mutable;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.factory.bag.MutableBagFactory;
 
-public enum MutableBagFactoryImpl implements MutableBagFactory
+public class MutableBagFactoryImpl implements MutableBagFactory
 {
-    INSTANCE;
+    public static final MutableBagFactory INSTANCE = new MutableBagFactoryImpl();
 
     @Override
     public <T> MutableBag<T> empty()

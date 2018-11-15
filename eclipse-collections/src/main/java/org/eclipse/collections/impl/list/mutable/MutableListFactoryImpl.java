@@ -14,9 +14,9 @@ import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.factory.list.MutableListFactory;
 import org.eclipse.collections.api.list.MutableList;
 
-public enum MutableListFactoryImpl implements MutableListFactory
+public class MutableListFactoryImpl implements MutableListFactory
 {
-    INSTANCE;
+    public static final MutableListFactory INSTANCE = new MutableListFactoryImpl();
 
     @Override
     public <T> MutableList<T> empty()
