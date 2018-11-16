@@ -1581,7 +1581,7 @@ public interface RichIterable<T>
      * Converts the collection to a MutableSortedMap implementation using the specified key and value functions
      * and sorts it based on the natural order of the attribute returned by {@code sortBy} function.
      */
-    <KK extends Comparable<? super KK>, NK, NV> MutableSortedMap<NK, NV> toSortedMapBy(
+    default <KK extends Comparable<? super KK>, NK, NV> MutableSortedMap<NK, NV> toSortedMapBy(
             Function<? super NK, KK> sortBy,
             Function<? super T, ? extends NK> keyFunction,
             Function<? super T, ? extends NV> valueFunction)
