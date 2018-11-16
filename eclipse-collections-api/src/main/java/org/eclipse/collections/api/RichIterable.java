@@ -54,6 +54,7 @@ import org.eclipse.collections.api.collection.primitive.MutableFloatCollection;
 import org.eclipse.collections.api.collection.primitive.MutableIntCollection;
 import org.eclipse.collections.api.collection.primitive.MutableLongCollection;
 import org.eclipse.collections.api.collection.primitive.MutableShortCollection;
+import org.eclipse.collections.api.factory.Bags;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MapIterable;
 import org.eclipse.collections.api.map.MutableMap;
@@ -80,6 +81,12 @@ import org.eclipse.collections.api.tuple.Pair;
 public interface RichIterable<T>
         extends InternalIterable<T>
 {
+    @Override
+    default void forEach(Procedure<? super T> procedure)
+    {
+        this.each(procedure);
+    }
+
     /**
      * Returns the number of items in this iterable.
      *
@@ -1469,7 +1476,10 @@ public interface RichIterable<T>
      *
      * @since 1.0
      */
-    <V extends Comparable<? super V>> MutableList<T> toSortedListBy(Function<? super T, ? extends V> function);
+    default <V extends Comparable<? super V>> MutableList<T> toSortedListBy(Function<? super T, ? extends V> function)
+    {
+        return this.toSortedList(Comparator.comparing(function));
+    }
 
     /**
      * Converts the collection to a MutableSet implementation.
@@ -1499,7 +1509,10 @@ public interface RichIterable<T>
      *
      * @since 1.0
      */
-    <V extends Comparable<? super V>> MutableSortedSet<T> toSortedSetBy(Function<? super T, ? extends V> function);
+    default <V extends Comparable<? super V>> MutableSortedSet<T> toSortedSetBy(Function<? super T, ? extends V> function)
+    {
+        return this.toSortedSet(Comparator.comparing(function));
+    }
 
     /**
      * Converts the collection to the default MutableBag implementation.
@@ -1529,7 +1542,10 @@ public interface RichIterable<T>
      *
      * @since 6.0
      */
-    <V extends Comparable<? super V>> MutableSortedBag<T> toSortedBagBy(Function<? super T, ? extends V> function);
+    default <V extends Comparable<? super V>> MutableSortedBag<T> toSortedBagBy(Function<? super T, ? extends V> function)
+    {
+        return this.toSortedBag(Comparator.comparing(function));
+    }
 
     /**
      * Converts the collection to a MutableMap implementation using the specified key and value functions.
@@ -1568,7 +1584,10 @@ public interface RichIterable<T>
     <KK extends Comparable<? super KK>, NK, NV> MutableSortedMap<NK, NV> toSortedMapBy(
             Function<? super NK, KK> sortBy,
             Function<? super T, ? extends NK> keyFunction,
-            Function<? super T, ? extends NV> valueFunction);
+            Function<? super T, ? extends NV> valueFunction)
+    {
+        return this.toSortedMap(Comparator.comparing(sortBy), keyFunction, valueFunction);
+    }
 
     /**
      * Returns a lazy (deferred) iterable, most likely implemented by calling LazyIterate.adapt(this).
@@ -1592,7 +1611,7 @@ public interface RichIterable<T>
      * @see Collection#toArray(Object[])
      * @since 1.0
      */
-    <T> T[] toArray(T[] target);
+    <E> E[] toArray(E[] array);
 
     /**
      * Returns the minimum element out of this container based on the comparator.
@@ -2032,7 +2051,7 @@ public interface RichIterable<T>
      */
     default <V> Bag<V> countBy(Function<? super T, ? extends V> function)
     {
-        return this.asLazy().<V>collect(function).toBag();
+        return this.countBy(function, Bags.mutable.empty());
     }
 
     /**
@@ -2054,7 +2073,7 @@ public interface RichIterable<T>
      */
     default <V, P> Bag<V> countByWith(Function2<? super T, ? super P, ? extends V> function, P parameter)
     {
-        return this.asLazy().<P, V>collectWith(function, parameter).toBag();
+        return this.countByWith(function, parameter, Bags.mutable.empty());
     }
 
     /**

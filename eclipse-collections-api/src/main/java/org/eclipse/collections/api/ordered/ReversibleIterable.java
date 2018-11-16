@@ -54,7 +54,13 @@ public interface ReversibleIterable<T> extends OrderedIterable<T>
      * people.reverseForEach(person -&gt; LOGGER.info(person.getName()));
      * </pre>
      */
-    void reverseForEach(Procedure<? super T> procedure);
+    default void reverseForEach(Procedure<? super T> procedure)
+    {
+        if (this.notEmpty())
+        {
+            this.forEach(this.size() - 1, 0, procedure);
+        }
+    }
 
     /**
      * Evaluates the procedure for each element and it's index in reverse order.
@@ -65,7 +71,13 @@ public interface ReversibleIterable<T> extends OrderedIterable<T>
      *
      * @since 9.0.0
      */
-    void reverseForEachWithIndex(ObjectIntProcedure<? super T> procedure);
+    default void reverseForEachWithIndex(ObjectIntProcedure<? super T> procedure)
+    {
+        if (this.notEmpty())
+        {
+            this.forEachWithIndex(this.size() - 1, 0, procedure);
+        }
+    }
 
     /**
      * Returns a reversed view of this ReversibleIterable.

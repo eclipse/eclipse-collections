@@ -29,6 +29,7 @@ import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.predicate.primitive.IntPredicate;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
+import org.eclipse.collections.api.factory.SortedSets;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.list.primitive.MutableBooleanList;
 import org.eclipse.collections.api.list.primitive.MutableByteList;
@@ -67,7 +68,18 @@ public interface MutableSortedBag<T>
      * @since 9.2
      */
     @Override
-    MutableSortedSet<T> selectUnique();
+    default MutableSortedSet<T> selectUnique()
+    {
+        MutableSortedSet<T> result = SortedSets.mutable.with(this.comparator());
+        this.forEachWithOccurrences((each, occurrences) ->
+        {
+            if (occurrences == 1)
+            {
+                result.add(each);
+            }
+        });
+        return result;
+    }
 
     @Override
     MutableSortedMap<T, Integer> toMapOfItemToCount();

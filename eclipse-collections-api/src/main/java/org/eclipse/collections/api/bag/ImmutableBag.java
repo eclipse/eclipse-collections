@@ -32,11 +32,13 @@ import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.predicate.primitive.IntPredicate;
 import org.eclipse.collections.api.block.procedure.Procedure;
+import org.eclipse.collections.api.factory.Sets;
 import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.multimap.bag.ImmutableBagMultimap;
 import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.partition.bag.PartitionImmutableBag;
 import org.eclipse.collections.api.set.ImmutableSet;
+import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.api.tuple.primitive.ObjectIntPair;
 
@@ -73,7 +75,18 @@ public interface ImmutableBag<T> extends UnsortedBag<T>, ImmutableBagIterable<T>
      * @since 9.2
      */
     @Override
-    ImmutableSet<T> selectUnique();
+    default ImmutableSet<T> selectUnique()
+    {
+        MutableSet<T> result = Sets.mutable.empty();
+        this.forEachWithOccurrences((each, occurrences) ->
+        {
+            if (occurrences == 1)
+            {
+                result.add(each);
+            }
+        });
+        return result.toImmutable();
+    }
 
     @Override
     ImmutableBag<T> tap(Procedure<? super T> procedure);

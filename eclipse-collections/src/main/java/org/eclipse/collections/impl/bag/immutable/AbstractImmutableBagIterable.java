@@ -35,7 +35,6 @@ import org.eclipse.collections.api.map.primitive.ImmutableObjectDoubleMap;
 import org.eclipse.collections.api.map.primitive.ImmutableObjectLongMap;
 import org.eclipse.collections.api.map.primitive.MutableObjectDoubleMap;
 import org.eclipse.collections.api.map.primitive.MutableObjectLongMap;
-import org.eclipse.collections.api.set.ImmutableSetIterable;
 import org.eclipse.collections.impl.bag.AbstractBag;
 import org.eclipse.collections.impl.block.factory.PrimitiveFunctions;
 import org.eclipse.collections.impl.block.procedure.MutatingAggregationProcedure;
@@ -212,11 +211,5 @@ public abstract class AbstractImmutableBagIterable<T>
     public Collection<T> castToCollection()
     {
         return this;
-    }
-
-    @Override
-    public ImmutableSetIterable<T> selectUnique()
-    {
-        return super.selectUnique().toImmutable();
     }
 }

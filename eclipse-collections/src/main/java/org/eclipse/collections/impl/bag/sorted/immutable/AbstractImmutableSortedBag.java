@@ -34,7 +34,6 @@ import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.predicate.primitive.IntPredicate;
 import org.eclipse.collections.api.block.procedure.Procedure;
-import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
 import org.eclipse.collections.api.collection.MutableCollection;
 import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
@@ -447,26 +446,8 @@ abstract class AbstractImmutableSortedBag<T>
     }
 
     @Override
-    public void reverseForEach(Procedure<? super T> procedure)
-    {
-        throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".reverseForEach() not implemented yet");
-    }
-
-    @Override
-    public void reverseForEachWithIndex(ObjectIntProcedure<? super T> procedure)
-    {
-        throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".reverseForEachWithIndex() not implemented yet");
-    }
-
-    @Override
     public LazyIterable<T> asReversed()
     {
         throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".asReversed() not implemented yet");
-    }
-
-    @Override
-    public ImmutableSortedSet<T> selectUnique()
-    {
-        return super.selectUnique().toSortedSet(this.comparator()).toImmutable();
     }
 }
