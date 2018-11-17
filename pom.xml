@@ -436,6 +436,41 @@
                     <artifactId>eclipse-jarsigner-plugin</artifactId>
                     <version>1.1.5</version>
                 </plugin>
+                <!--This plugin's configuration is used to store Eclipse m2e
+                    settings only. It has no influence on the Maven build itself. -->
+                <plugin>
+                    <groupId>org.eclipse.m2e</groupId>
+                    <artifactId>lifecycle-mapping</artifactId>
+                    <version>1.0.0</version>
+                    <configuration>
+                        <lifecycleMappingMetadata>
+                            <pluginExecutions>
+                                <pluginExecution>
+                                    <pluginExecutionFilter>
+                                        <groupId>
+                                            org.eclipse.collections
+                                        </groupId>
+                                        <artifactId>
+                                            eclipse-collections-code-generator-maven-plugin
+                                        </artifactId>
+                                        <versionRange>
+                                            [7.1.0-SNAPSHOT,)
+                                        </versionRange>
+                                        <goals>
+                                            <goal>generate</goal>
+                                        </goals>
+                                    </pluginExecutionFilter>
+                                    <action>
+                                        <execute>
+                                            <runOnIncremental>false</runOnIncremental>
+                                            <runOnConfiguration>true</runOnConfiguration>
+                                        </execute>
+                                    </action>
+                                </pluginExecution>
+                            </pluginExecutions>
+                        </lifecycleMappingMetadata>
+                    </configuration>
+                </plugin>
             </plugins>
         </pluginManagement>
 
