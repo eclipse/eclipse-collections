@@ -15,9 +15,11 @@ body(type, name) ::= <<
 package org.eclipse.collections.api;
 
 import java.util.Collection;
+import java.util.NoSuchElementException;
 <(wideStatisticsImport.(type))>
 
 import org.eclipse.collections.api.bag.primitive.Mutable<name>Bag;
+import org.eclipse.collections.api.block.function.primitive.<(wideName.(type))><name>To<(wideName.(type))>Function;
 import org.eclipse.collections.api.block.function.primitive.<name>ToBooleanFunction;
 import org.eclipse.collections.api.block.function.primitive.<name>ToByteFunction;
 import org.eclipse.collections.api.block.function.primitive.<name>ToShortFunction;
@@ -329,6 +331,54 @@ public interface <name>Iterable extends PrimitiveIterable
     Lazy<name>Iterable asLazy();
 
     \<T> T injectInto(T injectedValue, Object<name>ToObjectFunction\<? super T, ? extends T> function);
+
+    /**
+     * @see #reduce(<(wideName.(type))><name>To<(wideName.(type))>Function)
+     *
+     * @since 10.0
+     */
+    default <(wideType.(type))> reduceIfEmpty(<(wideName.(type))><name>To<(wideName.(type))>Function accumulator, <(wideType.(type))> defaultValue)
+    {
+        if (this.isEmpty())
+        {
+            return defaultValue;
+        }
+        else
+        {
+            return this.reduce(accumulator);
+        }
+    }
+
+    /**
+     * @see RichIterable#reduce(BinaryOperator)
+     *
+     * @since 10.0
+     */
+    default <(wideType.(type))> reduce(<(wideName.(type))><name>To<(wideName.(type))>Function accumulator)
+    {
+        boolean[] seenOne = new boolean[1];
+        <(wideName.(type))>[] result = new <(wideName.(type))>[1];
+        this.each(each ->
+        {
+            if (seenOne[0])
+            {
+                result[0] = accumulator.valueOf(result[0], each);
+            }
+            else
+            {
+                seenOne[0] = true;
+                result[0] = <castWideType.(type)>each;
+            }
+        });
+        if (!seenOne[0])
+        {
+            throw new NoSuchElementException();
+        }
+        else
+        {
+            return result[0];
+        }
+    }
 
     /**
      * Partitions elements in fixed size chunks.

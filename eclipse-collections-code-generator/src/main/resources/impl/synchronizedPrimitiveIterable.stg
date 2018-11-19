@@ -20,6 +20,7 @@ import org.eclipse.collections.api.<name>Iterable;
 import org.eclipse.collections.api.Lazy<name>Iterable;
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.primitive.Mutable<name>Bag;
+import org.eclipse.collections.api.block.function.primitive.<(wideName.(type))><name>To<(wideName.(type))>Function;
 import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.Object<name>ToObjectFunction;
 import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
@@ -269,6 +270,24 @@ public class Synchronized<name>Iterable implements <name>Iterable, Serializable
         synchronized (this.lock)
         {
             return this.iterable.injectInto(injectedValue, function);
+        }
+    }
+
+    @Override
+    public <(wideType.(type))> reduce(<(wideName.(type))><name>To<(wideName.(type))>Function accumulator)
+    {
+        synchronized (this.lock)
+        {
+            return this.iterable.reduce(accumulator);
+        }
+    }
+
+    @Override
+    public <(wideType.(type))> reduceIfEmpty(<(wideName.(type))><name>To<(wideName.(type))>Function accumulator, <(wideType.(type))> defaultValue)
+    {
+        synchronized (this.lock)
+        {
+            return this.iterable.reduceIfEmpty(accumulator, defaultValue);
         }
     }
 

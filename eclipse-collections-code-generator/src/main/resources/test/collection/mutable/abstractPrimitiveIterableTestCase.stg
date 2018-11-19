@@ -1005,6 +1005,28 @@ public void sumConsistentRounding()
         Assert.assertEquals(<wrapperName>.valueOf(<(literal.(type))("38")>), sum3);
     }
 
+    @Test(expected = NoSuchElementException.class)
+    public void reduceOnEmptyThrows()
+    {
+        this.newWith().reduce((<(wideType.(type))> result, <type> value) -> <(castWideType.(type))>result + <(castWideType.(type))>value + <(wideLiteral.(type))("1")>);
+    }
+
+    @Test
+    public void reduce()
+    {
+        <name>Iterable iterable1 = this.newWith(<["0", "2", "31"]:(literal.(type))(); separator=", ">);
+        <(wideType.(type))> sum1 = iterable1.reduce((<(wideType.(type))> result, <type> value) -> <(castWideType.(type))>result + <(castWideType.(type))>value + <(wideLiteral.(type))("1")>);
+        Assert.assertEquals(<(wideLiteral.(type))("35")>, sum1<if(primitive.floatingPoint)>, 0.001<endif>);
+
+        <name>Iterable iterable2 = this.newWith(<[ "1", "2", "31"]:(literal.(type))(); separator=", ">);
+        <(wideType.(type))> sum2 = iterable2.reduce((<(wideType.(type))> result, <type> value) -> <(castWideType.(type))>result + <(castWideType.(type))>value + <(wideLiteral.(type))("1")>);
+        Assert.assertEquals(<(wideLiteral.(type))("36")>, sum2<if(primitive.floatingPoint)>, 0.001<endif>);
+
+        <name>Iterable iterable3 = this.newWith(<["0", "1", "2", "31"]:(literal.(type))(); separator=", ">);
+        <(wideType.(type))> sum3 = iterable3.reduce((<(wideType.(type))> result, <type> value) -> <(castWideType.(type))>result + <(castWideType.(type))>value + <(wideLiteral.(type))("1")>);
+        Assert.assertEquals(<(wideLiteral.(type))("37")>, sum3<if(primitive.floatingPoint)>, 0.001<endif>);
+    }
+
     @Test
     public void chunk()
     {
