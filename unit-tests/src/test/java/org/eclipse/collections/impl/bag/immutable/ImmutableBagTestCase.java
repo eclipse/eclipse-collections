@@ -74,6 +74,7 @@ import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.list.mutable.FastList;
+import org.eclipse.collections.impl.list.primitive.IntInterval;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.multimap.bag.HashBagMultimap;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
@@ -1337,6 +1338,21 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
         Verify.assertSize(integers.size(), results);
         MutableBag<String> results2 = integers.countByWith((each, parm) -> each, null, Bags.mutable.empty());
         Verify.assertSize(integers.size(), results2);
+    }
+
+    /**
+     * @since 10.0.0
+     */
+    @Override
+    @Test
+    public void countByEach()
+    {
+        super.countByEach();
+        ImmutableBag<String> integers = this.newBag();
+        ImmutableBag<String> results = integers.countByEach(each -> IntInterval.oneTo(5).collect(i -> each + i));
+        Verify.assertSize(integers.size() * 5, results);
+        MutableBag<String> results2 = integers.countByEach(each -> IntInterval.oneTo(5).collect(i -> each + i), Bags.mutable.empty());
+        Verify.assertSize(integers.size() * 5, results2);
     }
 
     @Override

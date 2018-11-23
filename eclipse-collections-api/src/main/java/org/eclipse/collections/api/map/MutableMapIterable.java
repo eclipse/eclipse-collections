@@ -306,6 +306,15 @@ public interface MutableMapIterable<K, V> extends MapIterable<K, V>, Map<K, V>
         return this.asLazy().<P, V1>collectWith(function, parameter).toBag();
     }
 
+    /**
+     * @since 10.0.0
+     */
+    @Override
+    default <V1> MutableBag<V1> countByEach(Function<? super V, ? extends Iterable<V1>> function)
+    {
+        return this.asLazy().flatCollect(function).toBag();
+    }
+
     @Override
     <V1> MutableMultimap<V1, V> groupBy(Function<? super V, ? extends V1> function);
 

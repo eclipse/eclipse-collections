@@ -1094,6 +1094,30 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         }
     }
 
+    /**
+     * @since 10.0.0
+     */
+    @Override
+    public <V> Bag<V> countByEach(Function<? super T, ? extends Iterable<V>> function)
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.countByEach(function);
+        }
+    }
+
+    /**
+     * @since 10.0.0
+     */
+    @Override
+    public <V, R extends MutableBagIterable<V>> R countByEach(Function<? super T, ? extends Iterable<V>> function, R target)
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.countByEach(function, target);
+        }
+    }
+
     @Override
     public <V, R extends MutableMultimap<V, T>> R groupBy(
             Function<? super T, ? extends V> function,

@@ -598,4 +598,13 @@ public abstract class AbstractImmutableSortedMap<K, V>
     {
         return this.collectWith(function, parameter, Bags.mutable.<V1>empty()).toImmutable();
     }
+
+    /**
+     * @since 10.0.0
+     */
+    @Override
+    public <V1> ImmutableBag<V1> countByEach(Function<? super V, ? extends Iterable<V1>> function)
+    {
+        return this.countByEach(function, Bags.mutable.empty()).toImmutable();
+    }
 }

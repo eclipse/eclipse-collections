@@ -14,6 +14,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.NoSuchElementException;
 
+import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.bag.sorted.ImmutableSortedBag;
 import org.eclipse.collections.api.collection.MutableCollection;
 import org.eclipse.collections.api.list.ImmutableList;
@@ -57,6 +58,7 @@ import org.eclipse.collections.impl.list.mutable.primitive.FloatArrayList;
 import org.eclipse.collections.impl.list.mutable.primitive.IntArrayList;
 import org.eclipse.collections.impl.list.mutable.primitive.LongArrayList;
 import org.eclipse.collections.impl.list.mutable.primitive.ShortArrayList;
+import org.eclipse.collections.impl.list.primitive.IntInterval;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.map.sorted.mutable.TreeSortedMap;
 import org.eclipse.collections.impl.test.Verify;
@@ -325,6 +327,19 @@ public class ImmutableEmptySortedBagTest extends AbstractImmutableSortedBagTestC
         Assert.assertEquals(
                 UnifiedMap.newWithKeysValues(0, 0),
                 bag.groupByUniqueKey(id -> id, UnifiedMap.newWithKeysValues(0, 0)));
+    }
+
+    @Test
+    public void countByEach()
+    {
+        Assert.assertEquals(Bags.immutable.empty(), this.classUnderTest().countByEach(each -> IntInterval.oneTo(5).collect(i -> each + i)));
+    }
+
+    @Test
+    public void countByEach_target()
+    {
+        MutableBag<Integer> target = Bags.mutable.empty();
+        Assert.assertEquals(target, this.classUnderTest().countByEach(each -> IntInterval.oneTo(5).collect(i -> each + i), target));
     }
 
     @Override

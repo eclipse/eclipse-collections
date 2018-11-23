@@ -466,6 +466,15 @@ public abstract class AbstractSynchronizedMapIterable<K, V>
     }
 
     /**
+     * @since 10.0.0
+     */
+    @Override
+    public <V1> MutableBag<V1> countByEach(Function<? super V, ? extends Iterable<V1>> function)
+    {
+        return (MutableBag<V1>) super.countByEach(function);
+    }
+
+    /**
      * @since 9.0
      */
     @Override

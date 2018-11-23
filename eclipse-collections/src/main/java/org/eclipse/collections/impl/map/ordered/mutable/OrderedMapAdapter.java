@@ -788,4 +788,13 @@ public class OrderedMapAdapter<K, V>
     {
         return this.collectWith(function, parameter, Bags.mutable.empty());
     }
+
+    /**
+     * @since 10.0.0
+     */
+    @Override
+    public <V1> MutableBag<V1> countByEach(Function<? super V, ? extends Iterable<V1>> function)
+    {
+        return this.flatCollect(function, Bags.mutable.empty());
+    }
 }

@@ -18,6 +18,7 @@ import java.util.Optional;
 
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.RichIterable;
+import org.eclipse.collections.api.bag.Bag;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
 import org.eclipse.collections.api.block.function.Function;
@@ -688,6 +689,15 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
     {
         this.forEach(new CollectShortProcedure<>(shortFunction, target));
         return target;
+    }
+
+    /**
+     * @since 10.0.0
+     */
+    @Override
+    public <V> Bag<V> countByEach(Function<? super T, ? extends Iterable<V>> function)
+    {
+        return this.countByEach(function, Bags.mutable.empty());
     }
 
     @Override

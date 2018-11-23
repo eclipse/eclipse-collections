@@ -134,6 +134,15 @@ public interface MutableBag<T>
     }
 
     /**
+     * @since 10.0.0
+     */
+    @Override
+    default <V> MutableBag<V> countByEach(Function<? super T, ? extends Iterable<V>> function)
+    {
+        return this.flatCollect(function);
+    }
+
+    /**
      * @deprecated in 6.0. Use {@link OrderedIterable#zip(Iterable)} instead.
      */
     @Override

@@ -150,6 +150,15 @@ public abstract class AbstractMutableSortedBag<T>
         return this.countByWith(function, parameter, Bags.mutable.empty());
     }
 
+    /**
+     * @since 10.0.0
+     */
+    @Override
+    public <V> MutableBag<V> countByEach(Function<? super T, ? extends Iterable<V>> function)
+    {
+        return this.countByEach(function, Bags.mutable.empty());
+    }
+
     @Override
     public MutableSortedBag<T> select(Predicate<? super T> predicate)
     {
