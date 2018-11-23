@@ -17,6 +17,7 @@ import org.eclipse.collections.api.block.function.primitive.<name>Function;
 import org.eclipse.collections.api.block.function.primitive.<name>Function0;
 import org.eclipse.collections.api.block.function.primitive.<name>To<name>Function;
 import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
+import org.eclipse.collections.api.block.function.primitive.Object<name>To<name>Function;
 import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
 import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
 import org.eclipse.collections.api.block.predicate.primitive.Object<name>Predicate;
@@ -51,6 +52,14 @@ public interface MutableObject<name>Map\<K> extends Object<name>Map\<K>
     }
 
     void putAll(Object<name>Map\<? extends K> map);
+
+    /**
+     * Updates the values in-place.
+     *
+     * @param function that takes a key and its value and that returns a new value for this key
+     * @since 10.0
+     */
+    void updateValues(Object<name>To<name>Function\<? super K> function);
 
     void removeKey(K key);
 

@@ -30,6 +30,7 @@ import org.eclipse.collections.api.block.function.primitive.<name>Function;
 import org.eclipse.collections.api.block.function.primitive.<name>Function0;
 import org.eclipse.collections.api.block.function.primitive.<name>To<name>Function;
 import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
+import org.eclipse.collections.api.block.function.primitive.Object<name>To<name>Function;
 import org.eclipse.collections.api.block.function.primitive.Object<name>ToObjectFunction;
 import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
 import org.eclipse.collections.api.block.predicate.primitive.Object<name>Predicate;
@@ -119,6 +120,15 @@ public class SynchronizedObject<name>Map\<K>
         synchronized (this.lock)
         {
             this.map.putAll(map);
+        }
+    }
+
+    @Override
+    public void updateValues(Object<name>To<name>Function\<? super K> function)
+    {
+        synchronized (this.lock)
+        {
+            this.map.updateValues(function);
         }
     }
 

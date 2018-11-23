@@ -56,6 +56,7 @@ import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.block.function.primitive.<name2>Function;
 import org.eclipse.collections.api.block.function.primitive.<name2>Function0;
 import org.eclipse.collections.api.block.function.primitive.<name2>To<name2>Function;
+import org.eclipse.collections.api.block.function.primitive.<name1><name2>To<name2>Function;
 import org.eclipse.collections.api.block.function.primitive.Object<name2>ToObjectFunction;
 import org.eclipse.collections.api.block.predicate.primitive.<name1><name2>Predicate;
 import org.eclipse.collections.api.block.procedure.Procedure;
@@ -395,6 +396,12 @@ public class <name1><name2>HashMap extends AbstractMutable<name2>ValuesMap imple
     public void putAll(<name1><name2>Map map)
     {
         map.forEachKeyValue(this::put);
+    }
+
+    @Override
+    public void updateValues(<name1><name2>To<name2>Function function)
+    {
+        <forEachKeyValue(template = {<value> = function.valueOf(<key>, <value>)})>
     }
 
     @Override

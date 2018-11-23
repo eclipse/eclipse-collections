@@ -414,6 +414,25 @@ public abstract class AbstractMutable<name1><name2>MapTestCase extends Abstract<
     }
 
     @Test
+    public void updateValues()
+    {
+        Mutable<name1><name2>Map map1 = this.newWithKeysValues(<(literal.(type1))("0")>, <(literal.(type2))("11")>, <(literal.(type1))("1")>, <(literal.(type2))("12")>, <(literal.(type1))("2")>, <(literal.(type2))("13")>);
+        map1.updateValues((k, v) -> v);
+        Mutable<name1><name2>Map expected1 = this.newWithKeysValues(<(literal.(type1))("0")>, <(literal.(type2))("11")>, <(literal.(type1))("1")>, <(literal.(type2))("12")>, <(literal.(type1))("2")>, <(literal.(type2))("13")>);
+        Assert.assertEquals(expected1, map1);
+
+        Mutable<name1><name2>Map map2 = this.newWithKeysValues(<(literal.(type1))("0")>, <(literal.(type2))("11")>, <(literal.(type1))("1")>, <(literal.(type2))("12")>, <(literal.(type1))("2")>, <(literal.(type2))("13")>);
+        map2.updateValues((k, v) -> <(castIntToNarrowTypeWithParens.(type2))({v + <(literal.(type2))("1")>})>);
+        Mutable<name1><name2>Map expected2 = this.newWithKeysValues(<(literal.(type1))("0")>, <(literal.(type2))("12")>, <(literal.(type1))("1")>, <(literal.(type2))("13")>, <(literal.(type1))("2")>, <(literal.(type2))("14")>);
+        Assert.assertEquals(expected2, map2);
+
+        Mutable<name1><name2>Map map3 = this.newWithKeysValues(<(literal.(type1))("0")>, <(literal.(type2))("11")>, <(literal.(type1))("1")>, <(literal.(type2))("12")>, <(literal.(type1))("2")>, <(literal.(type2))("13")>);
+        map3.updateValues((k, v) -> k == <(literal.(type1))("0")> ? <(literal.(type2))("10")> : v);
+        Mutable<name1><name2>Map expected3 = this.newWithKeysValues(<(literal.(type1))("0")>, <(literal.(type2))("10")>, <(literal.(type1))("1")>, <(literal.(type2))("12")>, <(literal.(type1))("2")>, <(literal.(type2))("13")>);
+        Assert.assertEquals(expected3, map3);
+    }
+
+    @Test
     public void addToValue()
     {
         Mutable<name1><name2>Map map1 = this.getEmptyMap();

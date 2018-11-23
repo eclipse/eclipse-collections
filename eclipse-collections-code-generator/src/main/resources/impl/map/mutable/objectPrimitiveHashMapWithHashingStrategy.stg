@@ -39,6 +39,7 @@ import org.eclipse.collections.api.block.function.primitive.<name>Function;
 import org.eclipse.collections.api.block.function.primitive.<name>Function0;
 import org.eclipse.collections.api.block.function.primitive.<name>To<name>Function;
 import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
+import org.eclipse.collections.api.block.function.primitive.Object<name>To<name>Function;
 import org.eclipse.collections.api.block.function.primitive.Object<name>ToObjectFunction;
 import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
 import org.eclipse.collections.api.block.predicate.primitive.Object<name>Predicate;
@@ -447,6 +448,18 @@ public class Object<name>HashMapWithHashingStrategy\<K> implements MutableObject
     public void putAll(Object<name>Map\<? extends K> map)
     {
         map.forEachKeyValue(this::put);
+    }
+
+    @Override
+    public void updateValues(Object<name>To<name>Function\<? super K> function)
+    {
+        for (int i = 0; i \< this.keys.length; i++)
+        {
+            if (isNonSentinel(this.keys[i]))
+            {
+                this.values[i] = function.valueOf(this.toNonSentinel(this.keys[i]), this.values[i]);
+            }
+        }
     }
 
     @Override

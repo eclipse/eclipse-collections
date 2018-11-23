@@ -202,6 +202,25 @@ public abstract class AbstractMutableObject<name>MapTestCase extends AbstractObj
     }
 
     @Test
+    public void updateValues()
+    {
+        MutableObject<name>Map\<String> map1 = this.newWithKeysValues("0", <(literal.(type))("11")>, "1", <(literal.(type))("12")>, "2", <(literal.(type))("13")>);
+        map1.updateValues((k, v) -> v);
+        MutableObject<name>Map\<String> expected1 = this.newWithKeysValues("0", <(literal.(type))("11")>, "1", <(literal.(type))("12")>, "2", <(literal.(type))("13")>);
+        Assert.assertEquals(expected1, map1);
+
+        MutableObject<name>Map\<String> map2 = this.newWithKeysValues("0", <(literal.(type))("11")>, "1", <(literal.(type))("12")>, "2", <(literal.(type))("13")>);
+        map2.updateValues((k, v) -> <(castIntToNarrowTypeWithParens.(type))({v + <(literal.(type))("1")>})>);
+        MutableObject<name>Map\<String> expected2 = this.newWithKeysValues("0", <(literal.(type))("12")>, "1", <(literal.(type))("13")>, "2", <(literal.(type))("14")>);
+        Assert.assertEquals(expected2, map2);
+
+        MutableObject<name>Map\<String> map3 = this.newWithKeysValues("0", <(literal.(type))("11")>, "1", <(literal.(type))("12")>, "2", <(literal.(type))("13")>);
+        map3.updateValues((k, v) -> k.equals("0") ? <(literal.(type))("10")> : v);
+        MutableObject<name>Map\<String> expected3 = this.newWithKeysValues("0", <(literal.(type))("10")>, "1", <(literal.(type))("12")>, "2", <(literal.(type))("13")>);
+        Assert.assertEquals(expected3, map3);
+    }
+
+    @Test
     public void putPair()
     {
         this.map.putPair(PrimitiveTuples.pair("0", <(literal.(type))("1")>));

@@ -191,6 +191,25 @@ public abstract class AbstractMutable<name>BooleanMapTestCase extends Abstract<n
     }
 
     @Test
+    public void updateValues()
+    {
+        Mutable<name>BooleanMap map1 = this.newWithKeysValues(<(literal.(type))("0")>, true, <(literal.(type))("1")>, false, <(literal.(type))("2")>, false);
+        map1.updateValues((k, v) -> v);
+        Mutable<name>BooleanMap expected1 = this.newWithKeysValues(<(literal.(type))("0")>, true, <(literal.(type))("1")>, false, <(literal.(type))("2")>, false);
+        Assert.assertEquals(expected1, map1);
+
+        Mutable<name>BooleanMap map2 = this.newWithKeysValues(<(literal.(type))("0")>, true, <(literal.(type))("1")>, false, <(literal.(type))("2")>, false);
+        map2.updateValues((k, v) -> !v);
+        Mutable<name>BooleanMap expected2 = this.newWithKeysValues(<(literal.(type))("0")>, false, <(literal.(type))("1")>, true, <(literal.(type))("2")>, true);
+        Assert.assertEquals(expected2, map2);
+
+        Mutable<name>BooleanMap map3 = this.newWithKeysValues(<(literal.(type))("0")>, true, <(literal.(type))("1")>, false, <(literal.(type))("2")>, false);
+        map3.updateValues((k, v) -> k == <(literal.(type))("2")> ? true : v);
+        Mutable<name>BooleanMap expected3 = this.newWithKeysValues(<(literal.(type))("0")>, true, <(literal.(type))("1")>, false, <(literal.(type))("2")>, true);
+        Assert.assertEquals(expected3, map3);
+    }
+
+    @Test
     public void putDuplicateWithRemovedSlot()
     {
         <type> collision1 = AbstractMutable<name>BooleanMapTestCase.generateCollisions().getFirst();
