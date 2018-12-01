@@ -305,6 +305,24 @@ public abstract class AbstractMutableMultimap<K, V, C extends MutableCollection<
         return (C) this.map.getIfAbsentWith(key, this.createCollectionBlock(), this).asUnmodifiable();
     }
 
+    @Override
+    public C getIfAbsentPutAll(K key, Iterable<? extends V> values)
+    {
+        if (Iterate.isEmpty(values))
+        {
+            return this.get(key);
+        }
+
+        C existingValues = this.getIfAbsentPutCollection(key);
+        if (existingValues.isEmpty())
+        {
+            int newSize = Iterate.addAllTo(values, existingValues).size();
+            this.addToTotalSize(newSize);
+        }
+
+        return (C) existingValues.asUnmodifiable();
+    }
+
     private C getIfAbsentPutCollection(K key)
     {
         return this.map.getIfAbsentPutWith(key, this.createCollectionBlock(), this);

@@ -102,6 +102,15 @@ public class SynchronizedSetMultimap<K, V>
     }
 
     @Override
+    public MutableSet<V> getIfAbsentPutAll(K key, Iterable<? extends V> values)
+    {
+        synchronized (this.getLock())
+        {
+            return this.getDelegate().getIfAbsentPutAll(key, values);
+        }
+    }
+
+    @Override
     public MutableSetMultimap<K, V> toMutable()
     {
         synchronized (this.getLock())

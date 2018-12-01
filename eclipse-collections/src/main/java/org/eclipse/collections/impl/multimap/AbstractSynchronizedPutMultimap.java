@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2018 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -15,6 +15,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.eclipse.collections.api.collection.MutableCollection;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.impl.map.mutable.ConcurrentHashMap;
+import org.eclipse.collections.impl.utility.Iterate;
 
 public abstract class AbstractSynchronizedPutMultimap<K, V, C extends MutableCollection<V>> extends AbstractMutableMultimap<K, V, C>
 {
@@ -95,5 +96,26 @@ public abstract class AbstractSynchronizedPutMultimap<K, V, C extends MutableCol
     private C getIfAbsentPutCollection(K key)
     {
         return this.map.getIfAbsentPutWith(key, this.createCollectionBlock(), this);
+    }
+
+    @Override
+    public C getIfAbsentPutAll(K key, Iterable<? extends V> values)
+    {
+        if (Iterate.isEmpty(values))
+        {
+            return this.get(key);
+        }
+
+        C existingValues = this.getIfAbsentPutCollection(key);
+        synchronized (existingValues)
+        {
+            if (existingValues.isEmpty())
+            {
+                int newSize = Iterate.addAllTo(values, existingValues).size();
+                this.addToTotalSize(newSize);
+            }
+
+            return (C) existingValues.asUnmodifiable();
+        }
     }
 }

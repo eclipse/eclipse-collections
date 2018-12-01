@@ -198,6 +198,33 @@ public abstract class AbstractMutableMultimapTestCase extends AbstractMultimapTe
     }
 
     @Test
+    public void getIfAbsentPutAll()
+    {
+        MutableMultimap<Integer, Integer> multimap = this.newMultimap();
+        Assert.assertFalse(multimap.containsKey(1));
+        Assert.assertEquals(0, multimap.size());
+
+        Assert.assertEquals(this.createCollection(), multimap.getIfAbsentPutAll(1, Lists.mutable.with()));
+        Assert.assertFalse(multimap.containsKey(1));
+        Assert.assertEquals(0, multimap.size());
+
+        Assert.assertEquals(this.createCollection(1), multimap.getIfAbsentPutAll(1, Lists.mutable.with(1)));
+        Verify.assertThrows(UnsupportedOperationException.class, () -> multimap.getIfAbsentPutAll(1, Lists.mutable.with(1)).add(1));
+
+        multimap.putAll(2, Lists.mutable.with(2, 2));
+        multimap.putAll(3, Lists.mutable.with(3, 3, 3));
+        Assert.assertEquals(this.createCollection(1), multimap.getIfAbsentPutAll(1, Lists.mutable.empty()));
+        Assert.assertEquals(this.createCollection(2, 2), multimap.getIfAbsentPutAll(2, Lists.mutable.empty()));
+        Assert.assertEquals(this.createCollection(3, 3, 3), multimap.getIfAbsentPutAll(3, Lists.mutable.empty()));
+        Assert.assertEquals(this.createCollection(4, 4, 4, 4), multimap.getIfAbsentPutAll(4, Lists.mutable.with(4, 4, 4, 4)));
+        Assert.assertEquals(4, multimap.sizeDistinct());
+        int multimapSize = this.createCollection(1).size() + this.createCollection(2, 2).size() + this.createCollection(3, 3, 3).size() + this.createCollection(4, 4, 4, 4).size();
+        Assert.assertEquals(multimapSize, multimap.size());
+
+        Verify.assertThrows(UnsupportedOperationException.class, () -> multimap.getIfAbsentPutAll(5, Lists.mutable.with(5)).add(5));
+    }
+
+    @Test
     public void removeKey()
     {
         MutableMultimap<Integer, String> multimap = this.newMultimapWithKeysValues(1, "1", 2, "Two");
@@ -222,7 +249,7 @@ public abstract class AbstractMutableMultimapTestCase extends AbstractMultimapTe
     }
 
     @Test
-    public void getIfAbsentPut()
+    public void put_createCollection()
     {
         MutableMultimap<Integer, String> multimap = this.newMultimapWithKeysValues(1, "1", 2, "2", 3, "3");
         Verify.assertIterableEmpty(multimap.get(4));

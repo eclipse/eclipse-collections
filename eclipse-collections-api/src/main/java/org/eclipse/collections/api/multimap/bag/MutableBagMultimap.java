@@ -34,6 +34,9 @@ public interface MutableBagMultimap<K, V>
     @Override
     MutableBag<V> get(K key);
 
+    @Override
+    MutableBag<V> getIfAbsentPutAll(K key, Iterable<? extends V> values);
+
     void putOccurrences(K key, V value, int occurrences);
 
     @Override

@@ -36,6 +36,9 @@ public interface MutableBagIterableMultimap<K, V>
     MutableBagIterable<V> get(K key);
 
     @Override
+    MutableBagIterable<V> getIfAbsentPutAll(K key, Iterable<? extends V> values);
+
+    @Override
     MutableBagIterableMultimap<V, K> flip();
 
     @Override
