@@ -39,6 +39,16 @@ public interface MutableObject<name>MapFactory
     \<K> MutableObject<name>Map\<K> with();
 
     /**
+     * Same as {@link #empty()}. but takes in an initial capacity
+     */
+    \<K> MutableObject<name>Map\<K> ofInitialCapacity(int capacity);
+
+    /**
+     * Same as {@link #empty()}. but takes in an initial capacity
+     */
+    \<K> MutableObject<name>Map\<K> withInitialCapacity(int capacity);
+
+    /**
      * Same as {@link #withAll(Object<name>Map)}.
      */
     \<K> MutableObject<name>Map\<K> ofAll(Object<name>Map\<? extends K>  map);
