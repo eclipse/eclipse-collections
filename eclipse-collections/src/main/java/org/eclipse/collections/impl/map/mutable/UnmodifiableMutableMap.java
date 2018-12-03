@@ -114,6 +114,12 @@ public class UnmodifiableMutableMap<K, V>
     }
 
     @Override
+    public <K, V> MutableMap<K, V> newEmpty(int initialCapacity)
+    {
+        return this.getMutableMap().newEmpty(initialCapacity);
+    }
+
+    @Override
     public boolean notEmpty()
     {
         return this.getMutableMap().notEmpty();

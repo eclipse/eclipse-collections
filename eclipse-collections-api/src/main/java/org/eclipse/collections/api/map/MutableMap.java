@@ -62,6 +62,9 @@ public interface MutableMap<K, V>
     @Override
     MutableMap<K, V> newEmpty();
 
+    @Override
+    <K, V> MutableMap<K, V> newEmpty(int initialCapacity);
+
     MutableMap<K, V> clone();
 
     @Override

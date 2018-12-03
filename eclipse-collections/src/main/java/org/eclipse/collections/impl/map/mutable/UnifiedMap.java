@@ -269,9 +269,9 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
     }
 
     @Override
-    public MutableMap<K, V> newEmpty(int capacity)
+    public <K, V> MutableMap<K, V> newEmpty(int initialCapacity)
     {
-        return new UnifiedMap<>(capacity, this.loadFactor);
+        return new UnifiedMap<>(initialCapacity, this.loadFactor);
     }
 
     private int fastCeil(float v)

@@ -111,6 +111,12 @@ public class UnmodifiableBiMap<K, V> implements MutableBiMap<K, V>, Serializable
     }
 
     @Override
+    public <K, V> MutableBiMap<K, V> newEmpty(int initialCapacity)
+    {
+        return this.delegate.newEmpty(initialCapacity);
+    }
+
+    @Override
     public MutableBiMap<V, K> inverse()
     {
         return this.delegate.inverse().asUnmodifiable();

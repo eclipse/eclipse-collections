@@ -57,6 +57,9 @@ public interface MutableSortedMap<K, V>
     @Override
     MutableSortedMap<K, V> newEmpty();
 
+    @Override
+    <K, V> MutableSortedMap<K, V> newEmpty(int initialCapacity);
+
     /**
      * Adds all the entries derived from {@code iterable} to {@code this}.
      * The key and value for each entry is determined by applying the {@code keyFunction} and {@code valueFunction} to each item in {@code collection}.

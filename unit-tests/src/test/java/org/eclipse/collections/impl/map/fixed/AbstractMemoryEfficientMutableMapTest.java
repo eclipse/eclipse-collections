@@ -118,6 +118,16 @@ public abstract class AbstractMemoryEfficientMutableMapTest
     }
 
     @Test
+    public void newEmptyWithInitialCapacity()
+    {
+        MutableMap<String, String> map = this.classUnderTest();
+        MutableMap<Integer, Integer> newMap1 = map.newEmpty(5);
+        Verify.assertEmpty(newMap1);
+        MutableMap<String, String> newMap2 = newMap1.newEmpty(6);
+        Verify.assertEmpty(newMap2);
+    }
+
+    @Test
     public void asUnmodifiable()
     {
         MutableMap<String, String> unmodifiable = this.classUnderTest().asUnmodifiable();

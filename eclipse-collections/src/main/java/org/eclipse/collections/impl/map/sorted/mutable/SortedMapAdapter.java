@@ -76,6 +76,12 @@ public class SortedMapAdapter<K, V>
     }
 
     @Override
+    public MutableSortedMap<K, V> newEmpty(int initialCapacity)
+    {
+        return TreeSortedMap.newMap(this.delegate.comparator());
+    }
+
+    @Override
     public boolean containsKey(Object key)
     {
         return this.delegate.containsKey(key);

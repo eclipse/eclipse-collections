@@ -86,7 +86,7 @@ abstract class AbstractMemoryEfficientMutableMap<K, V>
     }
 
     @Override
-    public MutableMap<K, V> newEmpty(int capacity)
+    public <K, V> MutableMap<K, V> newEmpty(int capacity)
     {
         return UnifiedMap.newMap(capacity);
     }

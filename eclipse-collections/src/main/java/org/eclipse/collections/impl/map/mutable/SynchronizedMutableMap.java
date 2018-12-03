@@ -105,6 +105,12 @@ public class SynchronizedMutableMap<K, V>
     }
 
     @Override
+    public <K, V> MutableMap<K, V> newEmpty(int initialCapacity)
+    {
+        return this.getDelegate().newEmpty(initialCapacity);
+    }
+
+    @Override
     public MutableMap<K, V> withKeyValue(K key, V value)
     {
         synchronized (this.lock)

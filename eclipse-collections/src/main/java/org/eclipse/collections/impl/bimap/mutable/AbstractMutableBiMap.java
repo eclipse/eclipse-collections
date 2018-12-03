@@ -147,6 +147,12 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
     }
 
     @Override
+    public <K, V> HashBiMap<K, V> newEmpty(int initialSize)
+    {
+        return new HashBiMap<>(initialSize);
+    }
+
+    @Override
     public MutableBiMap<K, V> withKeyValue(K key, V value)
     {
         this.put(key, value);

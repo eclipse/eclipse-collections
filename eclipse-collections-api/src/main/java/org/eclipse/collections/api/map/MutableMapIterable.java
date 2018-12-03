@@ -195,6 +195,11 @@ public interface MutableMapIterable<K, V> extends MapIterable<K, V>, Map<K, V>
     MutableMapIterable<K, V> newEmpty();
 
     /**
+     * Creates a new instance of the same type, using the initial capacity.
+     */
+    <K, V> MutableMapIterable<K, V> newEmpty(int initialCapacity);
+
+    /**
      * Returns an unmodifiable view of this map. This is the equivalent of using
      * {@code Collections.unmodifiableMap(this)} only with a return type that supports the full
      * iteration protocols available on {@code MutableMapIterable}. Methods which would

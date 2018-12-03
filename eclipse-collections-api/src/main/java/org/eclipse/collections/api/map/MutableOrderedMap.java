@@ -39,6 +39,9 @@ import org.eclipse.collections.api.tuple.Pair;
 public interface MutableOrderedMap<K, V> extends OrderedMap<K, V>, MutableMapIterable<K, V>
 {
     @Override
+    <K, V> MutableOrderedMap<K, V> newEmpty(int initialCapacity);
+
+    @Override
     MutableOrderedMap<K, V> tap(Procedure<? super V> procedure);
 
     @Override

@@ -1395,6 +1395,12 @@ public class UnmodifiableMutableOrderedMap<K, V>
     }
 
     @Override
+    public MutableOrderedMap<K, V> newEmpty(int initialCapacity)
+    {
+        return this.delegate.newEmpty(initialCapacity);
+    }
+
+    @Override
     public void reverseForEach(Procedure<? super V> procedure)
     {
         this.delegate.reverseForEach(procedure);

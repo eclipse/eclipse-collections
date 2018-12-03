@@ -139,6 +139,12 @@ public class OrderedMapAdapter<K, V>
     }
 
     @Override
+    public MutableOrderedMap<K, V> newEmpty(int initialCapacity)
+    {
+        return OrderedMapAdapter.adapt(new LinkedHashMap<>(initialCapacity));
+    }
+
+    @Override
     public void forEachKeyValue(Procedure2<? super K, ? super V> procedure)
     {
         MapIterate.forEachKeyValue(this.delegate, procedure);

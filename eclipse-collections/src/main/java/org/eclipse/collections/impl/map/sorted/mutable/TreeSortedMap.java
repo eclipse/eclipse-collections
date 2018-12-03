@@ -211,6 +211,12 @@ public class TreeSortedMap<K, V>
     }
 
     @Override
+    public MutableSortedMap<K, V> newEmpty(int initialCapacity)
+    {
+        return this.newEmpty();
+    }
+
+    @Override
     public V removeKey(K key)
     {
         return this.treeMap.remove(key);

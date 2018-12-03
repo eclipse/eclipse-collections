@@ -417,6 +417,29 @@ public abstract class MutableMapIterableTestCase extends MapIterableTestCase
     }
 
     @Test
+    public void newEmptyWithInitialCapacity()
+    {
+        MutableMapIterable<Integer, Integer> map = this.newMapWithKeysValues(1, 1, 2, 2);
+        MutableMapIterable<Integer, Integer> newMap1 = map.newEmpty(5);
+        Verify.assertEmpty(newMap1);
+        MutableMapIterable<String, String> newMap2 = newMap1.newEmpty(6);
+        Verify.assertEmpty(newMap2);
+
+        newMap1.put(1, 1);
+        Verify.assertSize(1, newMap1);
+        MutableMapIterable<Double, Double> newMap3 = newMap1.newEmpty(7);
+        Verify.assertEmpty(newMap3);
+
+        newMap2.put("1", "1");
+        Verify.assertSize(1, newMap2);
+
+        newMap3.put(1.0, 1.0);
+        newMap3.put(2.0, 2.0);
+        newMap3.put(3.0, 3.0);
+        Verify.assertSize(3, newMap3);
+    }
+
+    @Test
     public void keysAndValues_toString()
     {
         MutableMapIterable<Integer, String> map = this.newMapWithKeysValues(1, "1", 2, "2");

@@ -52,9 +52,9 @@ public class UnifiedMapOverridesTest extends UnifiedMapTest
         }
 
         @Override
-        public UnifiedMapOverrides<K, V> newEmpty(int capacity)
+        public <K, V> UnifiedMapOverrides<K, V> newEmpty(int initialCapacity)
         {
-            return new UnifiedMapOverrides<>(capacity, this.loadFactor);
+            return new UnifiedMapOverrides<>(initialCapacity, this.loadFactor);
         }
     }
 

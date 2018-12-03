@@ -64,9 +64,9 @@ public class MapAdapter<K, V>
     }
 
     @Override
-    public <K, V> MutableMap<K, V> newEmpty(int capacity)
+    public <K, V> MutableMap<K, V> newEmpty(int initialCapacity)
     {
-        return UnifiedMap.newMap(capacity);
+        return UnifiedMap.newMap(initialCapacity);
     }
 
     @Override

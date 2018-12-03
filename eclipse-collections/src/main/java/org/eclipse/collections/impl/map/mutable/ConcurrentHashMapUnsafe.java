@@ -2127,7 +2127,7 @@ public class ConcurrentHashMapUnsafe<K, V>
     }
 
     @Override
-    public <K, V> MutableMap<K, V> newEmpty(int capacity)
+    public <K, V> MutableMap<K, V> newEmpty(int initialCapacity)
     {
         return ConcurrentHashMapUnsafe.newMap();
     }

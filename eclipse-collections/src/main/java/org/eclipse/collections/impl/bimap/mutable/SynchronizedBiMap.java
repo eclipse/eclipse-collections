@@ -61,6 +61,12 @@ public class SynchronizedBiMap<K, V> extends AbstractSynchronizedMapIterable<K, 
     }
 
     @Override
+    public <K, V> MutableBiMap<K, V> newEmpty(int initialCapacity)
+    {
+        return this.getDelegate().newEmpty(initialCapacity);
+    }
+
+    @Override
     protected MutableBiMap<K, V> getDelegate()
     {
         return (MutableBiMap<K, V>) super.getDelegate();

@@ -35,6 +35,9 @@ public interface MutableBiMap<K, V> extends BiMap<K, V>, MutableMapIterable<K, V
     MutableBiMap<K, V> newEmpty();
 
     @Override
+    <K, V> MutableBiMap<K, V> newEmpty(int initialCapacity);
+
+    @Override
     MutableBiMap<V, K> inverse();
 
     @Override

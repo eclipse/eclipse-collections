@@ -113,6 +113,12 @@ public class SynchronizedSortedMap<K, V>
     }
 
     @Override
+    public MutableSortedMap<K, V> newEmpty(int initialCapacity)
+    {
+        return this.getDelegate().newEmpty(initialCapacity);
+    }
+
+    @Override
     public MutableSortedMap<K, V> withKeyValue(K key, V value)
     {
         synchronized (this.lock)

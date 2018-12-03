@@ -1419,7 +1419,9 @@ public class UnifiedMapWithHashingStrategy<K, V> extends AbstractMutableMap<K, V
             else if (cur != null)
             {
                 Object value = this.table[i + 1];
-                hashCode += this.hashingStrategy.computeHashCode(this.nonSentinel(cur)) ^ (value == null ? 0 : value.hashCode());
+                hashCode += this.hashingStrategy.computeHashCode(this.nonSentinel(cur)) ^ (value == null
+                        ? 0
+                        : value.hashCode());
             }
         }
         return hashCode;
@@ -1436,7 +1438,9 @@ public class UnifiedMapWithHashingStrategy<K, V> extends AbstractMutableMap<K, V
                 return hashCode;
             }
             Object value = chain[i + 1];
-            hashCode += this.hashingStrategy.computeHashCode(this.nonSentinel(cur)) ^ (value == null ? 0 : value.hashCode());
+            hashCode += this.hashingStrategy.computeHashCode(this.nonSentinel(cur)) ^ (value == null
+                    ? 0
+                    : value.hashCode());
         }
         return hashCode;
     }

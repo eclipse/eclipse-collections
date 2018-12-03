@@ -118,6 +118,12 @@ public class UnmodifiableTreeMap<K, V>
     }
 
     @Override
+    public MutableSortedMap<K, V> newEmpty(int initialCapacity)
+    {
+        return this.getMutableSortedMap().newEmpty(initialCapacity);
+    }
+
+    @Override
     public V putPair(Pair<? extends K, ? extends V> keyValuePair)
     {
         throw new UnsupportedOperationException("Cannot call putPair() on " + this.getClass().getSimpleName());
