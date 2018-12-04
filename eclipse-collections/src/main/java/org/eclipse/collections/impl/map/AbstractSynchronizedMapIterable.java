@@ -235,6 +235,15 @@ public abstract class AbstractSynchronizedMapIterable<K, V>
     }
 
     @Override
+    public boolean removeIf(Predicate2<? super K, ? super V> predicate)
+    {
+        synchronized (this.lock)
+        {
+            return this.getDelegate().removeIf(predicate);
+        }
+    }
+
+    @Override
     public void putAll(Map<? extends K, ? extends V> map)
     {
         synchronized (this.lock)

@@ -78,6 +78,14 @@ public class UnmodifiableMutableMapTest extends MutableMapTestCase
 
     @Override
     @Test
+    public void removeIf()
+    {
+        MutableMap<Integer, String> map = this.newMapWithKeysValues(1, "1", 2, "Two");
+        Verify.assertThrows(UnsupportedOperationException.class, () -> map.removeIf(null));
+    }
+
+    @Override
+    @Test
     public void removeFromEntrySet()
     {
         MutableMap<Integer, String> map = this.newMapWithKeysValues(1, "1", 2, "Two");

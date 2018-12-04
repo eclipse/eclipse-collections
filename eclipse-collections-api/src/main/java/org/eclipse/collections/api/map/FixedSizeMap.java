@@ -12,6 +12,7 @@ package org.eclipse.collections.api.map;
 
 import java.util.Map;
 
+import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
 
 /**
@@ -49,6 +50,12 @@ public interface FixedSizeMap<K, V>
      */
     @Override
     V removeKey(K key);
+
+    /**
+     * @throws UnsupportedOperationException the {@code removeIf} operation is not supported by this map.
+     */
+    @Override
+    boolean removeIf(Predicate2<? super K, ? super V> predicate);
 
     @Override
     FixedSizeMap<K, V> tap(Procedure<? super V> procedure);

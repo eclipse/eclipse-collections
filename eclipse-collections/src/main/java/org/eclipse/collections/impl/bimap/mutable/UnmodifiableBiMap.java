@@ -1084,6 +1084,12 @@ public class UnmodifiableBiMap<K, V> implements MutableBiMap<K, V>, Serializable
     }
 
     @Override
+    public boolean removeIf(Predicate2<? super K, ? super V> predicate)
+    {
+        throw new UnsupportedOperationException("Cannot call removeIf() on " + this.getClass().getSimpleName());
+    }
+
+    @Override
     public void clear()
     {
         throw new UnsupportedOperationException("Cannot call clear() on " + this.getClass().getSimpleName());

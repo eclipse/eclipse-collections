@@ -28,6 +28,7 @@ import org.eclipse.collections.api.block.HashingStrategy;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.block.function.Function2;
+import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
@@ -1078,6 +1079,22 @@ public class UnifiedMapWithHashingStrategy<K, V> extends AbstractMutableMap<K, V
         return this.remove(key);
     }
 
+    @Override
+    public boolean removeIf(Predicate2<? super K, ? super V> predicate)
+    {
+        int previousSize = this.size();
+        Iterator<Entry<K, V>> iterator = this.entrySet().iterator();
+        while (iterator.hasNext())
+        {
+            Entry<K, V> entry = iterator.next();
+            if (predicate.accept(entry.getKey(), entry.getValue()))
+            {
+                iterator.remove();
+            }
+        }
+        return previousSize > this.size();
+    }
+
     private void chainedForEachEntry(Object[] chain, Procedure2<? super K, ? super V> procedure)
     {
         for (int i = 0; i < chain.length; i += 2)
@@ -1419,7 +1436,9 @@ public class UnifiedMapWithHashingStrategy<K, V> extends AbstractMutableMap<K, V
             else if (cur != null)
             {
                 Object value = this.table[i + 1];
-                hashCode += this.hashingStrategy.computeHashCode(this.nonSentinel(cur)) ^ (value == null ? 0 : value.hashCode());
+                hashCode += this.hashingStrategy.computeHashCode(this.nonSentinel(cur)) ^ (value == null
+                        ? 0
+                        : value.hashCode());
             }
         }
         return hashCode;
@@ -1436,7 +1455,9 @@ public class UnifiedMapWithHashingStrategy<K, V> extends AbstractMutableMap<K, V
                 return hashCode;
             }
             Object value = chain[i + 1];
-            hashCode += this.hashingStrategy.computeHashCode(this.nonSentinel(cur)) ^ (value == null ? 0 : value.hashCode());
+            hashCode += this.hashingStrategy.computeHashCode(this.nonSentinel(cur)) ^ (value == null
+                    ? 0
+                    : value.hashCode());
         }
         return hashCode;
     }

@@ -124,6 +124,14 @@ public class UnmodifiableTreeMapTest extends MutableSortedMapTestCase
 
     @Override
     @Test(expected = UnsupportedOperationException.class)
+    public void removeIf()
+    {
+        MutableSortedMap<Integer, String> map = this.newMapWithKeysValues(1, "1", 2, "Two");
+        map.removeIf(null);
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
     public void removeFromEntrySet()
     {
         MutableSortedMap<Integer, String> map = this.newMapWithKeysValues(1, "1", 2, "Two");

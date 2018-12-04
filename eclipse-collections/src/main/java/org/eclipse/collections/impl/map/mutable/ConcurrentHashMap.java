@@ -37,6 +37,7 @@ import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.function.Function3;
+import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
@@ -51,7 +52,7 @@ import org.eclipse.collections.impl.utility.Iterate;
 import org.eclipse.collections.impl.utility.MapIterate;
 import org.eclipse.collections.impl.utility.internal.IterableIterate;
 
-@SuppressWarnings({ "rawtypes", "ObjectEquality" })
+@SuppressWarnings({"rawtypes", "ObjectEquality"})
 public final class ConcurrentHashMap<K, V>
         extends AbstractMutableMap<K, V>
         implements ConcurrentMutableMap<K, V>, Externalizable
@@ -2078,6 +2079,22 @@ public final class ConcurrentHashMap<K, V>
     public V removeKey(K key)
     {
         return this.remove(key);
+    }
+
+    @Override
+    public boolean removeIf(Predicate2<? super K, ? super V> predicate)
+    {
+        int previousSize = this.size();
+        Iterator<Map.Entry<K, V>> iterator = this.entrySet().iterator();
+        while (iterator.hasNext())
+        {
+            Map.Entry<K, V> entry = iterator.next();
+            if (predicate.accept(entry.getKey(), entry.getValue()))
+            {
+                iterator.remove();
+            }
+        }
+        return previousSize > this.size();
     }
 
     @Override

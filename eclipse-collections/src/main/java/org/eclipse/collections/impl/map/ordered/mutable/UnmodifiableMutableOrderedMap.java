@@ -195,6 +195,12 @@ public class UnmodifiableMutableOrderedMap<K, V>
     }
 
     @Override
+    public boolean removeIf(Predicate2<? super K, ? super V> predicate)
+    {
+        throw new UnsupportedOperationException("Cannot call removeIf() on " + this.getClass().getSimpleName());
+    }
+
+    @Override
     public V updateValue(K key, Function0<? extends V> factory, Function<? super V, ? extends V> function)
     {
         throw new UnsupportedOperationException("Cannot call updateValue() on " + this.getClass().getSimpleName());

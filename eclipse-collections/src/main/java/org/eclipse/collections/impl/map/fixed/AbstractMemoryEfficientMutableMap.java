@@ -59,6 +59,12 @@ abstract class AbstractMemoryEfficientMutableMap<K, V>
     }
 
     @Override
+    public boolean removeIf(Predicate2<? super K, ? super V> predicate)
+    {
+        throw new UnsupportedOperationException("Cannot call removeIf() on " + this.getClass().getSimpleName());
+    }
+
+    @Override
     public <E> MutableMap<K, V> collectKeysAndValues(
             Iterable<E> iterable,
             Function<? super E, ? extends K> keyFunction,
