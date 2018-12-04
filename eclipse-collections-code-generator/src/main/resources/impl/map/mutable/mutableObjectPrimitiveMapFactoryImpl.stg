@@ -50,6 +50,18 @@ public enum MutableObject<name>MapFactoryImpl implements MutableObject<name>MapF
     }
 
     @Override
+    public \<K> MutableObject<name>Map\<K> ofInitialCapacity(int capacity)
+    {
+        return this.withInitialCapacity(capacity);
+    }
+
+    @Override
+    public \<K> MutableObject<name>Map\<K> withInitialCapacity(int capacity)
+    {
+        return new Object<name>HashMap\<>(capacity);
+    }
+
+    @Override
     public \<K> MutableObject<name>Map\<K> ofAll(Object<name>Map\<? extends K> map)
     {
         return this.withAll(map);

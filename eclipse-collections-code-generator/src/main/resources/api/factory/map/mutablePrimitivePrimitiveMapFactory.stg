@@ -43,6 +43,16 @@ public interface Mutable<name1><name2>MapFactory
     Mutable<name1><name2>Map with();
 
     /**
+     * Same as {@link #empty()}. but takes in an initial capacity
+     */
+    Mutable<name1><name2>Map ofInitialCapacity(int capacity);
+
+    /**
+     * Same as {@link #empty()}. but takes in an initial capacity
+     */
+    Mutable<name1><name2>Map withInitialCapacity(int capacity);
+
+    /**
      * Same as {@link #withAll(<name1><name2>Map)}.
      */
     Mutable<name1><name2>Map ofAll(<name1><name2>Map map);

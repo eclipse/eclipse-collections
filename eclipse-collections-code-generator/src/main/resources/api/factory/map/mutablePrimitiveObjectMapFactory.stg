@@ -41,6 +41,16 @@ public interface Mutable<name>ObjectMapFactory
     \<V> Mutable<name>ObjectMap\<V> with();
 
     /**
+     * Same as {@link #empty()}. but takes in an initial capacity
+     */
+    \<V> Mutable<name>ObjectMap\<V> ofInitialCapacity(int capacity);
+
+    /**
+     * Same as {@link #empty()}. but takes in an initial capacity
+     */
+    \<V> Mutable<name>ObjectMap\<V> withInitialCapacity(int capacity);
+
+    /**
      * Same as {@link #withAll(<name>ObjectMap)}.
      */
     \<V> Mutable<name>ObjectMap\<V> ofAll(<name>ObjectMap\<? extends V>  map);

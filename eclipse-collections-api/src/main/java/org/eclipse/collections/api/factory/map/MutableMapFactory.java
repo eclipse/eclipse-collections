@@ -35,13 +35,11 @@ public interface MutableMapFactory
     /**
      * Same as {@link #empty()}. but takes in an initial capacity
      */
-
     <K, V> MutableMap<K, V> ofInitialCapacity(int capacity);
 
     /**
      * Same as {@link #empty()}. but takes in an initial capacity
      */
-
     <K, V> MutableMap<K, V> withInitialCapacity(int capacity);
 
     /**

@@ -54,6 +54,18 @@ public enum Mutable<name1><name2>MapFactoryImpl implements Mutable<name1><name2>
     }
 
     @Override
+    public Mutable<name1><name2>Map ofInitialCapacity(int capacity)
+    {
+        return this.withInitialCapacity(capacity);
+    }
+
+    @Override
+    public Mutable<name1><name2>Map withInitialCapacity(int capacity)
+    {
+        return new <name1><name2>HashMap(capacity);
+    }
+
+    @Override
     public Mutable<name1><name2>Map ofAll(<name1><name2>Map map)
     {
         return this.withAll(map);

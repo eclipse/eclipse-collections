@@ -52,6 +52,18 @@ public enum Mutable<name>ObjectMapFactoryImpl implements Mutable<name>ObjectMapF
     }
 
     @Override
+    public \<V> Mutable<name>ObjectMap\<V> ofInitialCapacity(int capacity)
+    {
+        return this.withInitialCapacity(capacity);
+    }
+
+    @Override
+    public \<V> Mutable<name>ObjectMap\<V> withInitialCapacity(int capacity)
+    {
+        return new <name>ObjectHashMap\<>(capacity);
+    }
+
+    @Override
     public \<V> Mutable<name>ObjectMap\<V> ofAll(<name>ObjectMap\<? extends V> map)
     {
         return this.withAll(map);
