@@ -22,6 +22,7 @@ import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
+import org.eclipse.collections.api.bimap.MutableBiMap;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.block.function.Function2;
@@ -346,6 +347,22 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         try
         {
             return this.getDelegate().toSortedMapBy(sortBy, keyFunction, valueFunction);
+        }
+        finally
+        {
+            this.unlockReadLock();
+        }
+    }
+
+    @Override
+    public <NK, NV> MutableBiMap<NK, NV> toBiMap(
+            Function<? super T, ? extends NK> keyFunction,
+            Function<? super T, ? extends NV> valueFunction)
+    {
+        this.acquireReadLock();
+        try
+        {
+            return this.getDelegate().toBiMap(keyFunction, valueFunction);
         }
         finally
         {
@@ -1918,6 +1935,14 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
                 Function<? super T, ? extends NV> valueFunction)
         {
             return this.delegate.toSortedMapBy(sortBy, keyFunction, valueFunction);
+        }
+
+        @Override
+        public <NK, NV> MutableBiMap<NK, NV> toBiMap(
+                Function<? super T, ? extends NK> keyFunction,
+                Function<? super T, ? extends NV> valueFunction)
+        {
+            return this.delegate.toBiMap(keyFunction, valueFunction);
         }
 
         @Override

@@ -27,6 +27,7 @@ import org.eclipse.collections.api.bag.Bag;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.bag.MutableBagIterable;
 import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
+import org.eclipse.collections.api.bimap.MutableBiMap;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.block.function.Function2;
@@ -1588,6 +1589,15 @@ public interface RichIterable<T>
     {
         return this.toSortedMap(Comparator.comparing(sortBy), keyFunction, valueFunction);
     }
+
+    /**
+     * Converts the collection to a BiMap implementation using the specified key and value functions.
+     *
+     * @since 10.0
+     */
+    <NK, NV> MutableBiMap<NK, NV> toBiMap(
+            Function<? super T, ? extends NK> keyFunction,
+            Function<? super T, ? extends NV> valueFunction);
 
     /**
      * Returns a lazy (deferred) iterable, most likely implemented by calling LazyIterate.adapt(this).
