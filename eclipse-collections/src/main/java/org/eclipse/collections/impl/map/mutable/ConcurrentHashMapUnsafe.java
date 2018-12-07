@@ -207,7 +207,7 @@ public class ConcurrentHashMapUnsafe<K, V>
                 while (e != null)
                 {
                     K candidate = e.getKey();
-                    if (candidate.equals(key))
+                    if (key.equals(candidate))
                     {
                         return e.getValue();
                     }
@@ -549,7 +549,7 @@ public class ConcurrentHashMapUnsafe<K, V>
                 while (e != null)
                 {
                     Object candidate = e.getKey();
-                    if (candidate.equals(key))
+                    if (key.equals(candidate))
                     {
                         return e.getValue();
                     }
@@ -590,7 +590,7 @@ public class ConcurrentHashMapUnsafe<K, V>
                 while (e != null)
                 {
                     Object candidate = e.getKey();
-                    if (candidate.equals(key))
+                    if (key.equals(candidate))
                     {
                         return e.getValue();
                     }
@@ -635,7 +635,7 @@ public class ConcurrentHashMapUnsafe<K, V>
                 while (e != null)
                 {
                     Object candidate = e.getKey();
-                    if (candidate.equals(key))
+                    if (key.equals(candidate))
                     {
                         return e.getValue();
                     }
@@ -859,7 +859,7 @@ public class ConcurrentHashMapUnsafe<K, V>
                 while (e != null)
                 {
                     Object candidate = e.getKey();
-                    if (candidate.equals(key))
+                    if (key.equals(candidate))
                     {
                         return e.getValue();
                     }
@@ -889,7 +889,7 @@ public class ConcurrentHashMapUnsafe<K, V>
                 while (e != null)
                 {
                     Object candidate = e.getKey();
-                    if (candidate.equals(key))
+                    if (key.equals(candidate))
                     {
                         return e;
                     }
@@ -940,7 +940,7 @@ public class ConcurrentHashMapUnsafe<K, V>
                 while (e != null)
                 {
                     Object candidate = e.getKey();
-                    if (candidate.equals(key))
+                    if (key.equals(candidate))
                     {
                         V oldValue = e.getValue();
                         Entry<K, V> newEntry = new Entry<>(e.getKey(), value, this.createReplacementChainForRemoval((Entry<K, V>) o, e));
@@ -1205,7 +1205,7 @@ public class ConcurrentHashMapUnsafe<K, V>
                 while (e != null)
                 {
                     Object candidate = e.getKey();
-                    if (candidate.equals(key))
+                    if (key.equals(candidate))
                     {
                         V oldValue = e.getValue();
                         Entry<K, V> newEntry = new Entry<>(e.getKey(), value, this.createReplacementChainForRemoval((Entry<K, V>) o, e));
@@ -1273,7 +1273,7 @@ public class ConcurrentHashMapUnsafe<K, V>
                 while (e != null)
                 {
                     Object candidate = e.getKey();
-                    if (candidate.equals(key))
+                    if (key.equals(candidate))
                     {
                         Entry<K, V> replacement = this.createReplacementChainForRemoval((Entry<K, V>) o, e);
                         if (ConcurrentHashMapUnsafe.casArrayAt(currentArray, index, o, replacement))
@@ -2219,7 +2219,7 @@ public class ConcurrentHashMapUnsafe<K, V>
                 while (e != null)
                 {
                     Object candidate = e.getKey();
-                    if (candidate.equals(key))
+                    if (key.equals(candidate))
                     {
                         return e.getValue();
                     }
@@ -2345,7 +2345,7 @@ public class ConcurrentHashMapUnsafe<K, V>
                 while (e != null)
                 {
                     Object candidate = e.getKey();
-                    if (candidate.equals(key))
+                    if (key.equals(candidate))
                     {
                         V oldValue = e.getValue();
                         V newValue = function.valueOf(oldValue);
@@ -2417,7 +2417,7 @@ public class ConcurrentHashMapUnsafe<K, V>
                 while (e != null)
                 {
                     Object candidate = e.getKey();
-                    if (candidate.equals(key))
+                    if (key.equals(candidate))
                     {
                         V oldValue = e.getValue();
                         V newValue = function.value(oldValue, parameter);
