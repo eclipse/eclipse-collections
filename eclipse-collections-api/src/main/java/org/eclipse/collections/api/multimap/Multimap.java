@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018 Goldman Sachs.
+ * Copyright (c) 2019 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -454,6 +454,36 @@ public interface Multimap<K, V>
      * @since 6.0
      */
     <K2, V2, R extends MutableMultimap<K2, V2>> R collectKeysValues(Function2<? super K, ? super V, Pair<K2, V2>> function, R target);
+
+    /**
+     * Returns a new multimap with the results of applying the specified keyFunction and valueFunction on each key and corresponding values of the source multimap.
+     * This method is also commonly called transform or map.
+     * <p>
+     * <pre>e.g.
+     * return multimap.collectKeyMultiValues(each -&gt; each + 1, Person::getLastName);
+     * </pre>
+     *
+     * @param keyFunction   {@link Function} to use transformation to get the key
+     * @param valueFunction {@link Function} to use transformation to get the values
+     * @return a new {@code Multimap}, which contains elements as a result of the transformation
+     * @since 10.0
+     */
+    <K2, V2> Multimap<K2, V2> collectKeyMultiValues(Function<? super K, ? extends K2> keyFunction, Function<? super V, ? extends V2> valueFunction);
+
+    /**
+     * Same as the collectKeyMultiValues method but uses the specified target multimap for the results.
+     * <p>
+     * <pre>e.g.
+     * return multimap.collectKeyMultiValues(each -&gt; each + 1, Person::getLastName, HashBagMultimap.&lt;Integer, String&gt;newMultimap());
+     * </pre>
+     *
+     * @param keyFunction   {@link Function} to use transformation to get the key
+     * @param valueFunction {@link Function} to use transformation to get the values
+     * @param target        the Multimap to append for all elements in this {@code Multimap} that are evaluated in {@code keyFunction} and {@code valueFunction}
+     * @return {@code target}, which contains appended elements as a result of the transformation
+     * @since 10.0
+     */
+    <K2, V2, R extends MutableMultimap<K2, V2>> R collectKeyMultiValues(Function<? super K, ? extends K2> keyFunction, Function<? super V, ? extends V2> valueFunction, R target);
 
     /**
      * Returns a new multimap with the results of applying the specified function on each value of the source

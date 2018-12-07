@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2019 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -333,6 +333,37 @@ public class UnifiedSetWithHashingStrategyMultimapTest extends AbstractMutableSe
         expectedMultimap2.put("1", 100);
         expectedMultimap2.put("1", 200);
         expectedMultimap2.put("1", 200);
+
+        Assert.assertEquals(expectedMultimap2, collectedMultimap2);
+    }
+
+    @Override
+    @Test
+    public void collectKeyMultiValues()
+    {
+        super.collectKeyMultiValues();
+
+        UnifiedSetWithHashingStrategyMultimap<Integer, Person> multimap = UnifiedSetWithHashingStrategyMultimap.newMultimap(FIRST_NAME_STRATEGY);
+        multimap.put(1, JANESMITH);
+        multimap.put(1, JOHNDOE);
+        multimap.put(1, JANEDOE);
+        multimap.put(1, JANEDOE);
+        multimap.put(2, JANESMITH);
+        multimap.put(2, JOHNSMITH);
+        multimap.put(2, JOHNDOE);
+        multimap.put(2, JANEDOE);
+
+        MutableBagMultimap<String, Integer> collectedMultimap1 = multimap.collectKeyMultiValues(Object::toString, Person::getAge);
+        MutableBagMultimap<String, Integer> expectedMultimap1 = HashBagMultimap.newMultimap();
+        expectedMultimap1.put("1", 100);
+        expectedMultimap1.put("2", 100);
+
+        Assert.assertEquals(expectedMultimap1, collectedMultimap1);
+
+        MutableBagMultimap<String, Integer> collectedMultimap2 = multimap.collectKeyMultiValues(key -> "1", Person::getAge);
+        MutableBagMultimap<String, Integer> expectedMultimap2 = HashBagMultimap.newMultimap();
+        expectedMultimap2.put("1", 100);
+        expectedMultimap2.put("1", 100);
 
         Assert.assertEquals(expectedMultimap2, collectedMultimap2);
     }

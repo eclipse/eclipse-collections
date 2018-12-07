@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2018 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -44,6 +44,9 @@ public interface UnsortedBagMultimap<K, V> extends BagMultimap<K, V>
 
     @Override
     <K2, V2> UnsortedBagMultimap<K2, V2> collectKeysValues(Function2<? super K, ? super V, Pair<K2, V2>> function);
+
+    @Override
+    <K2, V2> UnsortedBagMultimap<K2, V2> collectKeyMultiValues(Function<? super K, ? extends K2> keyFunction, Function<? super V, ? extends V2> valueFunction);
 
     @Override
     <V2> UnsortedBagMultimap<K, V2> collectValues(Function<? super V, ? extends V2> function);

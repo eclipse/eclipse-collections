@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018 Goldman Sachs and others.
+ * Copyright (c) 2019 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -107,6 +107,9 @@ public interface MutableMultimap<K, V>
 
     @Override
     <V2> MutableMultimap<K, V2> collectValues(Function<? super V, ? extends V2> function);
+
+    @Override
+    <K2, V2> MutableMultimap<K2, V2> collectKeyMultiValues(Function<? super K, ? extends K2> keyFunction, Function<? super V, ? extends V2> valueFunction);
 
     /**
      * Returns a synchronized wrapper backed by this multimap.

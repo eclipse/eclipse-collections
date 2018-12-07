@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2019 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -14,9 +14,13 @@ import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.collection.MutableCollection;
 import org.eclipse.collections.api.multimap.ImmutableMultimap;
 import org.eclipse.collections.api.multimap.Multimap;
+import org.eclipse.collections.api.multimap.bag.ImmutableBagMultimap;
+import org.eclipse.collections.api.multimap.bag.MutableBagMultimap;
+import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
+import org.eclipse.collections.impl.multimap.bag.HashBagMultimap;
 import org.eclipse.collections.impl.set.mutable.UnmodifiableMutableSet;
 import org.eclipse.collections.impl.test.SerializeTestHelper;
 import org.eclipse.collections.impl.test.Verify;
@@ -203,6 +207,23 @@ public abstract class AbstractImmutableMultimapTestCase
         Multimap<String, String> multimap = this.<String, String>classUnderTest().newWith("One", "1").newWith("Two", "2");
         Multimap<String, String> collectedMultimap = multimap.collectKeysValues((argument1, argument2) -> Tuples.pair(argument1 + "Key", argument2 + "Value"));
         Assert.assertEquals(this.classUnderTest().newWith("OneKey", "1Value").newWith("TwoKey", "2Value"), collectedMultimap);
+    }
+
+    @Test
+    public void collectKeyMultiValues()
+    {
+        Multimap<Integer, String> multimap = this.<Integer, String>classUnderTest()
+                .newWithAll(1, Lists.mutable.with("1", "2", "3"))
+                .newWithAll(2, Lists.mutable.with("2", "3", "4"))
+                .newWithAll(3, Lists.mutable.with("2", "3", "4", "7", "8", "9"));
+        Multimap<String, Integer> collectedMultimap = multimap.collectKeyMultiValues(key -> key % 2 == 0 ? "Evens" : "Odds",
+                value -> Integer.valueOf(value) + 1);
+        MutableBagMultimap<String, Integer> expectedMultimap = HashBagMultimap.newMultimap();
+        expectedMultimap.putAll("Odds", Lists.mutable.with(2, 3, 4, 3, 4, 5, 8, 9, 10));
+        expectedMultimap.putAll("Evens", Lists.mutable.with(3, 4, 5));
+        ImmutableBagMultimap<String, Integer> expectedImmutableMultimap = expectedMultimap.toImmutable();
+
+        Assert.assertEquals(expectedImmutableMultimap, collectedMultimap);
     }
 
     @Test
