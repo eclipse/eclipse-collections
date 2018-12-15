@@ -158,6 +158,6 @@ public final class SetIterables
 
     public static <A, B, C> LazyIterable<C> cartesianProduct(SetIterable<A> set1, SetIterable<B> set2, Function2<A, B, C> function)
     {
-        return LazyIterate.flatCollect(set1, first -> LazyIterate.collect(set2, second -> function.value(first, second)));
+        return LazyIterate.cartesianProduct(set1, set2, function);
     }
 }

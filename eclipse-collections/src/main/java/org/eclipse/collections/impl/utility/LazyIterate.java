@@ -13,6 +13,7 @@ package org.eclipse.collections.impl.utility;
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.block.function.Function;
+import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.tuple.Pair;
@@ -33,6 +34,7 @@ import org.eclipse.collections.impl.lazy.TakeWhileIterable;
 import org.eclipse.collections.impl.lazy.TapIterable;
 import org.eclipse.collections.impl.lazy.ZipIterable;
 import org.eclipse.collections.impl.lazy.ZipWithIndexIterable;
+import org.eclipse.collections.impl.tuple.Tuples;
 
 /**
  * LazyIterate is a factory class which creates "deferred" iterables around the specified iterables. A "deferred"
@@ -195,5 +197,33 @@ public final class LazyIterate
     public static <T> LazyIterable<T> tap(Iterable<T> iterable, Procedure<? super T> procedure)
     {
         return new TapIterable<>(iterable, procedure);
+    }
+
+    /**
+     * Create a deferred cartesian product of the two specified iterables.
+     *
+     * See {@link LazyIterate#cartesianProduct(Iterable, Iterable, Function2)} about performance and presence of duplicates.
+     *
+     * @since 10.0
+     */
+    public static <A, B> LazyIterable<Pair<A, B>> cartesianProduct(Iterable<A> iterable1, Iterable<B> iterable2)
+    {
+        return LazyIterate.cartesianProduct(iterable1, iterable2, Tuples::pair);
+    }
+
+    /**
+     * Create a deferred cartesian product of the two specified iterables.
+     *
+     * This operation has O(n^2) performance.
+     *
+     * The presence of duplicates in the resulting iterable is both dependent on the
+     * presence of duplicates in the two specified iterables, and on the behaviour
+     * of the terminating operation that is applied to the resulting lazy iterable.
+     *
+     * @since 10.0
+     */
+    public static <A, B, C> LazyIterable<C> cartesianProduct(Iterable<A> iterable1, Iterable<B> iterable2, Function2<? super A, ? super B, ? extends C> function)
+    {
+        return LazyIterate.flatCollect(iterable1, first -> LazyIterate.collect(iterable2, second -> function.value(first, second)));
     }
 }
