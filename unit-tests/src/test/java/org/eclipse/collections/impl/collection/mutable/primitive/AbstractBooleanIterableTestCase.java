@@ -352,6 +352,32 @@ public abstract class AbstractBooleanIterableTestCase
         Assert.assertEquals(new MutableInteger(2), result);
     }
 
+    @Test(expected = NoSuchElementException.class)
+    public void reduceOnEmptyThrows()
+    {
+        this.newWith().reduce((boolean result, boolean value) -> result && value);
+    }
+
+    @Test
+    public void reduce()
+    {
+        BooleanIterable iterable1 = this.newWith(true, false, true);
+        boolean and = iterable1.reduce((boolean result, boolean value) -> result && value);
+        Assert.assertEquals(false, and);
+
+        BooleanIterable iterable2 = this.newWith(true, true, true);
+        boolean and2 = iterable2.reduce((boolean result, boolean value) -> result && value);
+        Assert.assertEquals(true, and2);
+
+        BooleanIterable iterable3 = this.newWith(true, false, true);
+        boolean or = iterable3.reduce((boolean result, boolean value) -> result || value);
+        Assert.assertEquals(true, or);
+
+        BooleanIterable iterable4 = this.newWith(false, false, false);
+        boolean or2 = iterable4.reduce((boolean result, boolean value) -> result || value);
+        Assert.assertEquals(false, or2);
+    }
+
     @Test
     public void toArray()
     {

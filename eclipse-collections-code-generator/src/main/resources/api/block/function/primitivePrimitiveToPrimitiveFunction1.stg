@@ -1,0 +1,40 @@
+import "copyrightAndOthers.stg"
+
+hasTwoPrimitives() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/api/block/function/primitive"
+
+fileName(primitive1, primitive2, sameTwoPrimitives) ::= "<primitive1.name><primitive2.name>To<primitive1.name>Function"
+
+class(primitive1, primitive2, sameTwoPrimitives) ::= <<
+<body(primitive1.type, primitive2.type, primitive1.name, primitive2.name)>
+>>
+
+body(type1, type2, name1, name2) ::= <<
+<copyrightAndOthers()>
+
+package org.eclipse.collections.api.block.function.primitive;
+
+import java.io.Serializable;
+
+/**
+ * This file was automatically generated from template file primitivePrimitiveToPrimitiveFunction.stg.
+ *
+ * @since 10.0.
+ */
+@FunctionalInterface
+public interface <name1><name2>To<name1>Function
+        extends <if(primitive1.specializedStream && sameTwoPrimitives)>java.util.function.<name1>BinaryOperator, <endif>Serializable
+{
+    <type1> valueOf(<type1> left, <type2> right);
+<if(primitive1.specializedStream && sameTwoPrimitives)>
+
+    @Override
+    default <type1> applyAs<name1>(<type1> left, <type2> right)
+    {
+        return this.valueOf(left, right);
+    }
+<endif>
+}
+
+>>

@@ -130,6 +130,19 @@ wideType ::= [
     "long": "long",
     "float": "double",
     "double": "double",
+    "boolean": "boolean",
+    default: "no matching wide type"
+]
+
+wideName ::= [
+    "byte": "Long",
+    "short": "Long",
+    "char": "Long",
+    "int": "Long",
+    "long": "Long",
+    "float": "Double",
+    "double": "Double",
+    "boolean": "Boolean",
     default: "no matching wide type"
 ]
 
@@ -147,6 +160,7 @@ castWideType ::= [
     "long": "",
     "float": "(double) ",
     "double": "",
+    "boolean": "",
     default: "no matching wide type"
 ]
 
