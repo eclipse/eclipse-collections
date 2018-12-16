@@ -53,6 +53,10 @@ import org.eclipse.collections.impl.primitive.Abstract<name>Iterable;
 import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.eclipse.collections.impl.utility.Iterate;
+<if(primitive.specializedStream)>
+import java.util.Spliterator;
+import java.util.Spliterators;<endif>
+
 
 /**
  * <name>ArrayList is similar to {@link FastList}, and is memory-optimized for <type> primitives.
@@ -1103,6 +1107,15 @@ public class <name>ArrayList extends Abstract<name>Iterable
             this.lastIndex = -1;
         }
     }
+<if(primitive.specializedStream)>
+
+    @Override
+    public Spliterator.Of<name> spliterator()
+    {
+        int characteristics = Spliterator.ORDERED;
+        return Spliterators.spliterator(this.items, 0, size, characteristics);
+    }
+<endif>
 }
 
 >>

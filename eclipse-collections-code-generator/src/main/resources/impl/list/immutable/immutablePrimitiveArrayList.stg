@@ -53,6 +53,10 @@ import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
 import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.eclipse.collections.impl.utility.Iterate;
+<if(primitive.specializedStream)>
+import java.util.Spliterator;
+import java.util.Spliterators;<endif>
+
 
 /**
  * Immutable<name>ArrayList is the non-modifiable equivalent of {@link <name>ArrayList}.
@@ -797,6 +801,15 @@ final class Immutable<name>ArrayList
             return next;
         }
     }
+    <if(primitive.specializedStream)>
+
+    @Override
+    public Spliterator.Of<name> spliterator()
+    {
+        int characteristics = Spliterator.ORDERED | Spliterator.IMMUTABLE;
+        return Spliterators.spliterator(this.items, characteristics);
+    }
+    <endif>
 }
 
 >>

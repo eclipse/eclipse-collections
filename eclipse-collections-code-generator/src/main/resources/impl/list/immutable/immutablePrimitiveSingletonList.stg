@@ -48,6 +48,10 @@ import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
 import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
 import org.eclipse.collections.impl.utility.Iterate;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
+<if(primitive.specializedStream)>
+import java.util.Spliterator;
+import org.eclipse.collections.impl.stream.primitive.<name>SingletonSpliterator;<endif>
+
 
 /**
  * Immutable<name>SingletonList is an optimization for {@link Immutable<name>List} of size 1.
@@ -439,6 +443,14 @@ final class Immutable<name>SingletonList implements Immutable<name>List, Seriali
         }
         return Lists.immutable.with(PrimitiveTuples.pair(this.element1, Iterate.getFirst(iterable)));
     }
+    <if(primitive.specializedStream)>
+
+    @Override
+    public Spliterator.Of<name> spliterator()
+    {
+        return new <name>SingletonSpliterator(this.element1);
+    }
+    <endif>
 }
 
 >>

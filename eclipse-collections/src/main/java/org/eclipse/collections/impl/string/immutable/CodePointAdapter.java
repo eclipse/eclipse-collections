@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.Spliterator;
 
 import org.eclipse.collections.api.IntIterable;
 import org.eclipse.collections.api.LazyIntIterable;
@@ -779,6 +780,12 @@ public class CodePointAdapter
             target.add(PrimitiveTuples.pair(this.get(i), iterator.next()));
         }
         return target.toImmutable();
+    }
+
+    @Override
+    public Spliterator.OfInt spliterator()
+    {
+        return this.adapted.codePoints().spliterator();
     }
 
     private class InternalIntIterator implements IntIterator

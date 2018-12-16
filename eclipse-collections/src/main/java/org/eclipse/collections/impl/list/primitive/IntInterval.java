@@ -13,8 +13,11 @@ package org.eclipse.collections.impl.list.primitive;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.Spliterator;
+import java.util.function.IntConsumer;
 
 import org.eclipse.collections.api.IntIterable;
 import org.eclipse.collections.api.LazyIntIterable;
@@ -981,6 +984,12 @@ public final class IntInterval
         return target.toImmutable();
     }
 
+    @Override
+    public Spliterator.OfInt spliterator()
+    {
+        return new IntIntervalSpliterator(this.from, this.to, this.step);
+    }
+
     private class IntIntervalIterator implements IntIterator
     {
         private int current = IntInterval.this.from;
@@ -1005,6 +1014,83 @@ public final class IntInterval
                 return result;
             }
             throw new NoSuchElementException();
+        }
+    }
+
+    private static final class IntIntervalSpliterator implements Spliterator.OfInt
+    {
+        private int current;
+        private final int to;
+        private final int step;
+        private final boolean isAscending;
+
+        private IntIntervalSpliterator(int from, int to, int step)
+        {
+            this.to = to;
+            this.step = step;
+            this.current = from;
+            this.isAscending = from <= to;
+        }
+
+        @Override
+        public Comparator<? super Integer> getComparator()
+        {
+            if (this.isAscending)
+            {
+                return Comparator.naturalOrder();
+            }
+            return  Comparator.reverseOrder();
+        }
+
+        @Override
+        public OfInt trySplit()
+        {
+            OfInt leftSpliterator = null;
+            int numberOfStepsToMid = (int) (this.estimateSize() / 2);
+            int mid = this.current + this.step * numberOfStepsToMid;
+
+            if (this.isAscending)
+            {
+                if (this.current < mid)
+                {
+                    leftSpliterator = new IntIntervalSpliterator(this.current, mid - 1, this.step);
+                    this.current = mid;
+                }
+            }
+            else
+            {
+                if (this.current > mid)
+                {
+                    leftSpliterator = new IntIntervalSpliterator(this.current, mid + 1, this.step);
+                    this.current = mid;
+                }
+            }
+
+            return leftSpliterator;
+        }
+
+        @Override
+        public long estimateSize()
+        {
+            return (long) ((this.to - this.current) / this.step + 1);
+        }
+
+        @Override
+        public int characteristics()
+        {
+            return Spliterator.DISTINCT | Spliterator.IMMUTABLE | Spliterator.NONNULL | Spliterator.ORDERED | Spliterator.SIZED | Spliterator.SORTED;
+        }
+
+        @Override
+        public boolean tryAdvance(IntConsumer action)
+        {
+            action.accept(this.current);
+            this.current += this.step;
+            if (this.isAscending)
+            {
+                return this.current <= this.to;
+            }
+            return this.current >= this.to;
         }
     }
 }

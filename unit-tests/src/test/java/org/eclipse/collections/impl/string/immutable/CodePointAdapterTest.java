@@ -10,6 +10,7 @@
 
 package org.eclipse.collections.impl.string.immutable;
 
+import java.util.Arrays;
 import java.util.stream.Collectors;
 
 import org.eclipse.collections.api.IntIterable;
@@ -400,6 +401,18 @@ public class CodePointAdapterTest extends AbstractImmutableIntListTestCase
     {
         super.toReversed();
         Assert.assertEquals("cba", CodePointAdapter.adapt("abc").toReversed().toString());
+    }
+
+    @Test
+    public void primitiveStream()
+    {
+        Assert.assertEquals(Arrays.asList(1, 2, 3, 4, 5), this.newWith(1, 2, 3, 4, 5).primitiveStream().boxed().collect(Collectors.toList()));
+    }
+
+    @Test
+    public void primitiveParallelStream()
+    {
+        Assert.assertEquals(Arrays.asList(1, 2, 3, 4, 5), this.newWith(1, 2, 3, 4, 5).primitiveParallelStream().boxed().collect(Collectors.toList()));
     }
 
     private static class SBAppendable implements Appendable

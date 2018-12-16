@@ -38,6 +38,10 @@ import org.eclipse.collections.impl.stack.mutable.primitive.<name>ArrayStack;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.junit.Assert;
 import org.junit.Test;
+<if(primitive.specializedStream)>
+import java.util.stream.Collectors;
+import java.util.Arrays;<endif>
+
 
 /**
  * Abstract JUnit test for {@link Mutable<name>List}.
@@ -580,6 +584,24 @@ public abstract class Abstract<name>ListTestCase extends AbstractMutable<name>Co
         MutableList\<<name>ObjectPair\<String\>> zipEmpty = list1.zip(Lists.mutable.empty());
         Assert.assertTrue(zipEmpty.isEmpty());
     }
+<if(primitive.specializedStream)>
+
+    @Test
+    public void stream()
+    {
+        Assert.assertEquals(Arrays.asList(<["1", "2", "3"]:(literal.(type))(); separator=", ">), <name>ArrayList.newListWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">).primitiveStream().boxed().collect(Collectors.toList()));
+        Assert.assertEquals(Arrays.asList(<["1", "2", "3"]:(literal.(type))(); separator=", ">), <name>ArrayList.newListWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">).asSynchronized().primitiveStream().boxed().collect(Collectors.toList()));
+        Assert.assertEquals(Arrays.asList(<["1", "2", "3"]:(literal.(type))(); separator=", ">), <name>ArrayList.newListWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">).asUnmodifiable().primitiveStream().boxed().collect(Collectors.toList()));
+    }
+
+    @Test
+    public void parallelStream()
+    {
+        Assert.assertEquals(Arrays.asList(<["1", "2", "3"]:(literal.(type))(); separator=", ">), <name>ArrayList.newListWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">).primitiveParallelStream().boxed().collect(Collectors.toList()));
+        Assert.assertEquals(Arrays.asList(<["1", "2", "3"]:(literal.(type))(); separator=", ">), <name>ArrayList.newListWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">).asSynchronized().primitiveParallelStream().boxed().collect(Collectors.toList()));
+        Assert.assertEquals(Arrays.asList(<["1", "2", "3"]:(literal.(type))(); separator=", ">), <name>ArrayList.newListWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">).asUnmodifiable().primitiveParallelStream().boxed().collect(Collectors.toList()));
+    }
+<endif>
 }
 
 >>

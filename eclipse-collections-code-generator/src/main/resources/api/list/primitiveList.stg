@@ -27,6 +27,12 @@ import org.eclipse.collections.api.ordered.primitive.Reversible<name>Iterable;
 import org.eclipse.collections.api.tuple.primitive.<name><name>Pair;
 import org.eclipse.collections.api.tuple.primitive.<name>ObjectPair;
 
+<if(primitive.specializedStream)>
+import java.util.Spliterator;
+import java.util.stream.StreamSupport;
+import java.util.stream.<name>Stream;
+<endif>
+
 /**
  * This file was automatically generated from template file primitiveList.stg.
  *
@@ -125,6 +131,29 @@ public interface <name>List extends Reversible<name>Iterable
     {
         throw new UnsupportedOperationException("Default method to prevent breaking backwards compatibility");
     }
+<if(primitive.specializedStream)>
+
+    /**
+     * @since 10.0
+     */
+    Spliterator.Of<name> spliterator();
+
+    /**
+     * @since 10.0
+     */
+    default <name>Stream primitiveStream()
+    {
+        return StreamSupport.<type>Stream(this.spliterator(), false);
+    }
+
+    /**
+     * @since 10.0
+     */
+    default <name>Stream primitiveParallelStream()
+    {
+        return StreamSupport.<type>Stream(this.spliterator(), true);
+    }
+<endif>
 }
 
 >>
