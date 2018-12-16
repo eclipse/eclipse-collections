@@ -178,6 +178,9 @@ public interface SortedBag<T>
     <V> ListIterable<V> collectIf(Predicate<? super T> predicate, Function<? super T, ? extends V> function);
 
     @Override
+    <V> ListIterable<V> collectWithOccurrences(ObjectIntToObjectFunction<? super T, ? extends V> function);
+
+    @Override
     <V> ListIterable<V> flatCollect(Function<? super T, ? extends Iterable<V>> function);
 
     /**

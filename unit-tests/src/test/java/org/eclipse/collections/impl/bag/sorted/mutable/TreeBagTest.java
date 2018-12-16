@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2018 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -12,12 +12,19 @@ package org.eclipse.collections.impl.bag.sorted.mutable;
 
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Set;
 
 import org.eclipse.collections.api.LazyIterable;
+import org.eclipse.collections.api.bag.Bag;
 import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
+import org.eclipse.collections.api.tuple.primitive.ObjectIntPair;
 import org.eclipse.collections.impl.block.factory.Comparators;
+import org.eclipse.collections.impl.factory.Bags;
+import org.eclipse.collections.impl.factory.Lists;
+import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.test.Verify;
+import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -93,5 +100,48 @@ public class TreeBagTest extends AbstractMutableSortedBagTestCase
     public void max_null_safe()
     {
         super.max_null_safe();
+    }
+
+    @Override
+    @Test
+    public void collectWithOccurrences()
+    {
+        Bag<Integer> bag1 = this.newWith(3, 3, 3, 2, 2, 1);
+        Bag<ObjectIntPair<Integer>> actual1 =
+                bag1.collectWithOccurrences(PrimitiveTuples::pair, Bags.mutable.empty());
+        Assert.assertEquals(
+                Bags.immutable.with(
+                        PrimitiveTuples.pair(Integer.valueOf(3), 3),
+                        PrimitiveTuples.pair(Integer.valueOf(2), 2),
+                        PrimitiveTuples.pair(Integer.valueOf(1), 1)),
+                actual1);
+        Assert.assertEquals(
+                Lists.mutable.with(
+                        PrimitiveTuples.pair(Integer.valueOf(1), 1),
+                        PrimitiveTuples.pair(Integer.valueOf(2), 2),
+                        PrimitiveTuples.pair(Integer.valueOf(3), 3)),
+                bag1.collectWithOccurrences(PrimitiveTuples::pair));
+
+        Set<ObjectIntPair<Integer>> actual2 =
+                bag1.collectWithOccurrences(PrimitiveTuples::pair, Sets.mutable.empty());
+        Assert.assertEquals(
+                Sets.immutable.with(
+                        PrimitiveTuples.pair(Integer.valueOf(3), 3),
+                        PrimitiveTuples.pair(Integer.valueOf(2), 2),
+                        PrimitiveTuples.pair(Integer.valueOf(1), 1)),
+                actual2);
+
+        Bag<Integer> bag2 = this.newWith(Comparator.reverseOrder(), 3, 3, 3, 2, 2, 1);
+        Assert.assertEquals(
+                Lists.mutable.with(
+                        PrimitiveTuples.pair(Integer.valueOf(3), 3),
+                        PrimitiveTuples.pair(Integer.valueOf(2), 2),
+                        PrimitiveTuples.pair(Integer.valueOf(1), 1)),
+                bag2.collectWithOccurrences(PrimitiveTuples::pair));
+
+        Bag<Integer> bag3 = this.newWith(3, 3, 3, 3, 3, 2, 2, 2, 1, 1, 1, 1, 1, 4, 5, 7);
+        Assert.assertEquals(
+                Lists.mutable.with(6, 5, 8, 5, 6, 8),
+                bag3.collectWithOccurrences((each, index) -> each + index));
     }
 }

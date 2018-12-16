@@ -14,6 +14,7 @@ import java.io.Externalizable;
 import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
@@ -39,6 +40,7 @@ import org.eclipse.collections.api.block.function.primitive.DoubleFunction;
 import org.eclipse.collections.api.block.function.primitive.FloatFunction;
 import org.eclipse.collections.api.block.function.primitive.IntFunction;
 import org.eclipse.collections.api.block.function.primitive.LongFunction;
+import org.eclipse.collections.api.block.function.primitive.ObjectIntToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.ShortFunction;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
@@ -468,6 +470,37 @@ public final class MultiReaderHashBag<T>
         try
         {
             return this.delegate.collectIf(predicate, function);
+        }
+        finally
+        {
+            this.unlockReadLock();
+        }
+    }
+
+    @Override
+    public <V> MutableBag<V> collectWithOccurrences(ObjectIntToObjectFunction<? super T, ? extends V> function)
+    {
+        this.acquireReadLock();
+        try
+        {
+            return this.collectWithOccurrences(function, Bags.mutable.empty());
+        }
+        finally
+        {
+            this.unlockReadLock();
+        }
+    }
+
+    @Override
+    public <V, R extends Collection<V>> R collectWithOccurrences(
+            ObjectIntToObjectFunction<? super T, ? extends V> function,
+            R target)
+    {
+        this.acquireReadLock();
+        try
+        {
+            this.forEachWithOccurrences((each, occurrences) -> target.add(function.valueOf(each, occurrences)));
+            return target;
         }
         finally
         {
@@ -1066,6 +1099,21 @@ public final class MultiReaderHashBag<T>
                 Function<? super T, ? extends V> function)
         {
             return this.getDelegate().collectIf(predicate, function);
+        }
+
+        @Override
+        public <V> MutableBag<V> collectWithOccurrences(ObjectIntToObjectFunction<? super T, ? extends V> function)
+        {
+            return this.getDelegate().collectWithOccurrences(function, Bags.mutable.empty());
+        }
+
+        @Override
+        public <V, R extends Collection<V>> R collectWithOccurrences(
+                ObjectIntToObjectFunction<? super T, ? extends V> function,
+                R target)
+        {
+            this.getDelegate().forEachWithOccurrences((each, occurrences) -> target.add(function.valueOf(each, occurrences)));
+            return target;
         }
 
         @Override

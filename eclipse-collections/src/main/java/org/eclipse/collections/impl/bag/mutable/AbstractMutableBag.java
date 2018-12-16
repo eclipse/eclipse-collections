@@ -35,6 +35,7 @@ import org.eclipse.collections.api.block.function.primitive.DoubleFunction;
 import org.eclipse.collections.api.block.function.primitive.FloatFunction;
 import org.eclipse.collections.api.block.function.primitive.IntFunction;
 import org.eclipse.collections.api.block.function.primitive.LongFunction;
+import org.eclipse.collections.api.block.function.primitive.ObjectIntToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.ShortFunction;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
@@ -170,6 +171,12 @@ public abstract class AbstractMutableBag<T>
     public <V> MutableBag<V> countByEach(Function<? super T, ? extends Iterable<V>> function)
     {
         return this.flatCollect(function);
+    }
+
+    @Override
+    public <V> MutableBag<V> collectWithOccurrences(ObjectIntToObjectFunction<? super T, ? extends V> function)
+    {
+        return this.collectWithOccurrences(function, Bags.mutable.empty());
     }
 
     @Override

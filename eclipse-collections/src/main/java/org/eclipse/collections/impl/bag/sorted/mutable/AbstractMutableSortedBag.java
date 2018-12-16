@@ -48,6 +48,7 @@ import org.eclipse.collections.api.partition.bag.sorted.PartitionMutableSortedBa
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.bag.mutable.AbstractMutableBagIterable;
 import org.eclipse.collections.impl.factory.Bags;
+import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.SortedBags;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.list.mutable.primitive.BooleanArrayList;
@@ -199,7 +200,9 @@ public abstract class AbstractMutableSortedBag<T>
     {
         PartitionMutableSortedBag<T> result = new PartitionTreeBag<>(this.comparator());
         this.forEachWithOccurrences((each, index) -> {
-            MutableSortedBag<T> bucket = predicate.accept(each, parameter) ? result.getSelected() : result.getRejected();
+            MutableSortedBag<T> bucket = predicate.accept(each, parameter)
+                    ? result.getSelected()
+                    : result.getRejected();
             bucket.addOccurrences(each, index);
         });
         return result;
@@ -216,6 +219,12 @@ public abstract class AbstractMutableSortedBag<T>
     public <V> MutableList<V> collect(Function<? super T, ? extends V> function)
     {
         return this.collect(function, FastList.newList(this.size()));
+    }
+
+    @Override
+    public <V> MutableList<V> collectWithOccurrences(ObjectIntToObjectFunction<? super T, ? extends V> function)
+    {
+        return this.collectWithOccurrences(function, Lists.mutable.empty());
     }
 
     /**

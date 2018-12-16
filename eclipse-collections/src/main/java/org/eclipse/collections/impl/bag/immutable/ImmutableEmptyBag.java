@@ -129,6 +129,12 @@ final class ImmutableEmptyBag<T>
     {
     }
 
+    @Override
+    public <V> ImmutableBag<V> collectWithOccurrences(ObjectIntToObjectFunction<? super T, ? extends V> function)
+    {
+        return Bags.immutable.empty();
+    }
+
     /**
      * @since 9.1.
      */
