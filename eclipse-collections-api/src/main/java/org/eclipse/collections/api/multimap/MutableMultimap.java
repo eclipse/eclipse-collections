@@ -77,6 +77,14 @@ public interface MutableMultimap<K, V>
 
     RichIterable<V> removeAll(Object key);
 
+    /**
+     * Puts values into multimap if there are no values already associated with key.
+     * Then returns a view of the values associated with key, like the result of {@link Multimap#get(Object)}
+     *
+     * @since 10.0
+     */
+    MutableCollection<V> getIfAbsentPutAll(K key, Iterable<? extends V> values);
+
     void clear();
 
     @Override

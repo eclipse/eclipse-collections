@@ -38,6 +38,9 @@ public interface MutableSortedBagMultimap<K, V>
     MutableSortedBag<V> get(K key);
 
     @Override
+    MutableSortedBag<V> getIfAbsentPutAll(K key, Iterable<? extends V> values);
+
+    @Override
     MutableBagMultimap<V, K> flip();
 
     @Override

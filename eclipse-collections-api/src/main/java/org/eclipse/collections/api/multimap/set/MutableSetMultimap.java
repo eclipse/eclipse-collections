@@ -36,6 +36,9 @@ public interface MutableSetMultimap<K, V>
     MutableSet<V> get(K key);
 
     @Override
+    MutableSet<V> getIfAbsentPutAll(K key, Iterable<? extends V> values);
+
+    @Override
     MutableSetMultimap<V, K> flip();
 
     @Override
