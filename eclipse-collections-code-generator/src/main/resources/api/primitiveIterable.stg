@@ -357,7 +357,7 @@ public interface <name>Iterable extends PrimitiveIterable
     default <(wideType.(type))> reduce(<(wideName.(type))><name>To<(wideName.(type))>Function accumulator)
     {
         boolean[] seenOne = new boolean[1];
-        <(wideName.(type))>[] result = new <(wideName.(type))>[1];
+        <(wideType.(type))>[] result = new <(wideType.(type))>[1];
         this.each(each ->
         {
             if (seenOne[0])
