@@ -112,14 +112,16 @@ public class FixedSizeListFactoryImpl implements FixedSizeListFactory
         return new SextupletonList<>(one, two, three, four, five, six);
     }
 
+    @SafeVarargs
     @Override
-    public <T> FixedSizeList<T> of(T... items)
+    public final <T> FixedSizeList<T> of(T... items)
     {
         return this.with(items);
     }
 
+    @SafeVarargs
     @Override
-    public <T> FixedSizeList<T> with(T... items)
+    public final <T> FixedSizeList<T> with(T... items)
     {
         switch (items.length)
         {

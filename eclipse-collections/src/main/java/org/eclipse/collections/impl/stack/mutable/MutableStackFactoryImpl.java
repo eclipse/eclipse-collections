@@ -25,6 +25,7 @@ public class MutableStackFactoryImpl implements MutableStackFactory
         return ArrayStack.newStack();
     }
 
+    @SafeVarargs
     @Override
     public <T> MutableStack<T> with(T... elements)
     {

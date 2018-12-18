@@ -27,6 +27,7 @@ public class MutableListFactoryImpl implements MutableListFactory
         return FastList.newList();
     }
 
+    @SafeVarargs
     @Override
     public <T> MutableList<T> with(T... items)
     {

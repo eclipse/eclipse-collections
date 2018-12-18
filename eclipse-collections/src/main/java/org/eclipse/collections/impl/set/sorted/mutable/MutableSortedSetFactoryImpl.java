@@ -37,14 +37,16 @@ public class MutableSortedSetFactoryImpl implements MutableSortedSetFactory
         return this.empty();
     }
 
+    @SafeVarargs
     @Override
-    public <T> MutableSortedSet<T> of(T... items)
+    public final <T> MutableSortedSet<T> of(T... items)
     {
         return this.with(items);
     }
 
+    @SafeVarargs
     @Override
-    public <T> MutableSortedSet<T> with(T... items)
+    public final <T> MutableSortedSet<T> with(T... items)
     {
         return TreeSortedSet.newSetWith(items);
     }

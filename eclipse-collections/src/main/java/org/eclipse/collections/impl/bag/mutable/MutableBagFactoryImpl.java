@@ -26,7 +26,8 @@ public class MutableBagFactoryImpl implements MutableBagFactory
         return HashBag.newBag();
     }
 
-    @Override
+    @SafeVarargs
+    @Override    
     public <T> MutableBag<T> with(T... elements)
     {
         return HashBag.newBagWith(elements);

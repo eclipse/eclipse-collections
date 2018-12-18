@@ -159,14 +159,16 @@ public class ImmutableListFactoryImpl implements ImmutableListFactory
         return new ImmutableDecapletonList<>(one, two, three, four, five, six, seven, eight, nine, ten);
     }
 
+    @SafeVarargs
     @Override
-    public <T> ImmutableList<T> of(T... items)
+    public final <T> ImmutableList<T> of(T... items)
     {
         return this.with(items);
     }
 
+    @SafeVarargs
     @Override
-    public <T> ImmutableList<T> with(T... items)
+    public final <T> ImmutableList<T> with(T... items)
     {
         if (items == null || items.length == 0)
         {

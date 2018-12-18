@@ -26,6 +26,7 @@ public enum MultiReaderMutableSetFactory implements MultiReaderSetFactory
         return MultiReaderUnifiedSet.newSet();
     }
 
+    @SafeVarargs
     @Override
     public <T> MultiReaderSet<T> with(T... items)
     {

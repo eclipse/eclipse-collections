@@ -125,14 +125,16 @@ public class ImmutableSetFactoryImpl implements ImmutableSetFactory
         return new ImmutableQuadrupletonSet<>(one, two, three, four);
     }
 
+    @SafeVarargs
     @Override
-    public <T> ImmutableSet<T> of(T... items)
+    public final <T> ImmutableSet<T> of(T... items)
     {
         return this.with(items);
     }
 
+    @SafeVarargs
     @Override
-    public <T> ImmutableSet<T> with(T... items)
+    public final <T> ImmutableSet<T> with(T... items)
     {
         if (items == null || items.length == 0)
         {

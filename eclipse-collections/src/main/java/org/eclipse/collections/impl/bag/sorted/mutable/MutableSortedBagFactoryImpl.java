@@ -55,26 +55,30 @@ public class MutableSortedBagFactoryImpl implements MutableSortedBagFactory
         return TreeBag.newBag(comparator);
     }
 
+    @SafeVarargs
     @Override
-    public <T> MutableSortedBag<T> of(T... elements)
+    public final <T> MutableSortedBag<T> of(T... elements)
     {
         return this.with(elements);
     }
 
+    @SafeVarargs
     @Override
-    public <T> MutableSortedBag<T> with(T... elements)
+    public final <T> MutableSortedBag<T> with(T... elements)
     {
         return TreeBag.newBagWith(elements);
     }
 
+    @SafeVarargs
     @Override
-    public <T> MutableSortedBag<T> of(Comparator<? super T> comparator, T... elements)
+    public final <T> MutableSortedBag<T> of(Comparator<? super T> comparator, T... elements)
     {
         return this.with(comparator, elements);
     }
 
+    @SafeVarargs
     @Override
-    public <T> MutableSortedBag<T> with(Comparator<? super T> comparator, T... elements)
+    public final <T> MutableSortedBag<T> with(Comparator<? super T> comparator, T... elements)
     {
         return TreeBag.newBagWith(comparator, elements);
     }

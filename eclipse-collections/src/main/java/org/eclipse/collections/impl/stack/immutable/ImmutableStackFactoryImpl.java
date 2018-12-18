@@ -47,14 +47,16 @@ public class ImmutableStackFactoryImpl implements ImmutableStackFactory
         return ImmutableArrayStack.newStackWith(element);
     }
 
+    @SafeVarargs
     @Override
-    public <T> ImmutableStack<T> of(T... elements)
+    public final <T> ImmutableStack<T> of(T... elements)
     {
         return this.with(elements);
     }
 
+    @SafeVarargs
     @Override
-    public <T> ImmutableStack<T> with(T... elements)
+    public final <T> ImmutableStack<T> with(T... elements)
     {
         return ImmutableArrayStack.newStackWith(elements);
     }

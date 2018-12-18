@@ -45,14 +45,16 @@ public class ImmutableSortedSetFactoryImpl implements ImmutableSortedSetFactory
         return this.empty();
     }
 
+    @SafeVarargs
     @Override
-    public <T> ImmutableSortedSet<T> of(T... items)
+    public final <T> ImmutableSortedSet<T> of(T... items)
     {
         return this.with(items);
     }
 
+    @SafeVarargs
     @Override
-    public <T> ImmutableSortedSet<T> with(T... items)
+    public final <T> ImmutableSortedSet<T> with(T... items)
     {
         if (items == null || items.length == 0)
         {

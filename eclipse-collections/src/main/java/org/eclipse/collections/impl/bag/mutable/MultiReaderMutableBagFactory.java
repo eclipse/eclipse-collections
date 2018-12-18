@@ -25,7 +25,8 @@ public enum MultiReaderMutableBagFactory implements MultiReaderBagFactory
     {
         return MultiReaderHashBag.newBag();
     }
-
+    
+    @SafeVarargs
     @Override
     public <T> MultiReaderBag<T> with(T... items)
     {

@@ -46,14 +46,16 @@ public class ImmutableSortedBagFactoryImpl implements ImmutableSortedBagFactory
         return this.empty();
     }
 
+    @SafeVarargs
     @Override
-    public <T> ImmutableSortedBag<T> of(T... items)
+    public final <T> ImmutableSortedBag<T> of(T... items)
     {
         return this.with(items);
     }
 
+    @SafeVarargs
     @Override
-    public <T> ImmutableSortedBag<T> with(T... items)
+    public final <T> ImmutableSortedBag<T> with(T... items)
     {
         if (items == null || items.length == 0)
         {

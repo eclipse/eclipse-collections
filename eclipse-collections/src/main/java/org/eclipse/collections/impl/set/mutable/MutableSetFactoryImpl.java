@@ -32,6 +32,7 @@ public class MutableSetFactoryImpl implements MutableSetFactory
         return UnifiedSet.newSet(capacity);
     }
 
+    @SafeVarargs
     @Override
     public <T> MutableSet<T> with(T... items)
     {

@@ -27,6 +27,7 @@ public enum MultiReaderMutableListFactory implements MultiReaderListFactory
         return MultiReaderFastList.newList();
     }
 
+    @SafeVarargs
     @Override
     public <T> MultiReaderList<T> with(T... items)
     {

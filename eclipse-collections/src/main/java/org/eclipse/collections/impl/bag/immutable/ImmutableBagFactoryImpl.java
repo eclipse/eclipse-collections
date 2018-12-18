@@ -49,14 +49,16 @@ public class ImmutableBagFactoryImpl implements ImmutableBagFactory
         return new ImmutableSingletonBag<>(element);
     }
 
+    @SafeVarargs
     @Override
-    public <T> ImmutableBag<T> of(T... elements)
+    public final <T> ImmutableBag<T> of(T... elements)
     {
         return this.with(elements);
     }
 
+    @SafeVarargs
     @Override
-    public <T> ImmutableBag<T> with(T... elements)
+    public final <T> ImmutableBag<T> with(T... elements)
     {
         if (elements == null || elements.length == 0)
         {
