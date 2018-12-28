@@ -22,6 +22,7 @@ import org.eclipse.collections.api.<name1>Iterable;
 import org.eclipse.collections.api.block.function.primitive.<name2>Function;
 import org.eclipse.collections.api.block.function.primitive.<name2>Function0;
 import org.eclipse.collections.api.block.function.primitive.<name2>To<name2>Function;
+import org.eclipse.collections.api.block.function.primitive.<name1><name2>To<name2>Function;
 import org.eclipse.collections.api.block.predicate.primitive.<name1><name2>Predicate;
 import org.eclipse.collections.api.tuple.primitive.<name1><name2>Pair;
 
@@ -46,6 +47,14 @@ public interface Mutable<name1><name2>Map extends <name1><name2>Map, Mutable<nam
     }
 
     void putAll(<name1><name2>Map map);
+
+    /**
+     * Updates the values in-place.
+     *
+     * @param function that takes a key and its value and that returns a new value for this key
+     * @since 10.0
+     */
+    void updateValues(<name1><name2>To<name2>Function function);
 
     void removeKey(<type1> key);
 

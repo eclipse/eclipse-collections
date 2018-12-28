@@ -120,6 +120,13 @@ public class UnmodifiableObject<name>MapTest extends AbstractMutableObject<name>
 
     @Override
     @Test(expected = UnsupportedOperationException.class)
+    public void updateValues()
+    {
+        this.map.updateValues((k, v) -> v);
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
     public void withKeysValues()
     {
         this.map.withKeyValue("1", <(literal.(type))("0")>);

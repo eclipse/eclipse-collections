@@ -32,6 +32,7 @@ import org.eclipse.collections.api.block.function.primitive.BooleanFunction;
 import org.eclipse.collections.api.block.function.primitive.BooleanFunction0;
 import org.eclipse.collections.api.block.function.primitive.BooleanToBooleanFunction;
 import org.eclipse.collections.api.block.function.primitive.BooleanToObjectFunction;
+import org.eclipse.collections.api.block.function.primitive.ObjectBooleanToBooleanFunction;
 import org.eclipse.collections.api.block.function.primitive.ObjectBooleanToObjectFunction;
 import org.eclipse.collections.api.block.predicate.primitive.BooleanPredicate;
 import org.eclipse.collections.api.block.predicate.primitive.ObjectBooleanPredicate;
@@ -652,6 +653,18 @@ public class ObjectBooleanHashMapWithHashingStrategy<K> implements MutableObject
     public void putAll(ObjectBooleanMap<? extends K> map)
     {
         map.forEachKeyValue(this::put);
+    }
+
+    @Override
+    public void updateValues(ObjectBooleanToBooleanFunction<? super K> function)
+    {
+        for (int i = 0; i < this.keys.length; i++)
+        {
+            if (ObjectBooleanHashMapWithHashingStrategy.isNonSentinel(this.keys[i]))
+            {
+                this.values.set(i, function.valueOf(this.toNonSentinel(this.keys[i]), this.values.get(i)));
+            }
+        }
     }
 
     @Override
