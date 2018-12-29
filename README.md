@@ -1,34 +1,64 @@
-![logo]
-===================
-
+<!--
+  ~ Copyright (c) 2018 Goldman Sachs and others.
+  ~ All rights reserved. This program and the accompanying materials
+  ~ are made available under the terms of the Eclipse Public License v1.0
+  ~ and Eclipse Distribution License v. 1.0 which accompany this distribution.
+  ~ The Eclipse Public License is available at http://www.eclipse.org/legal/epl-v10.html
+  ~ and the Eclipse Distribution License is available at
+  ~ http://www.eclipse.org/org/documents/edl-v10.php.
+  -->
 [![][travis img]][travis]
 [![][maven img]][maven]
 [![][release img]][release]
 [![][license-epl img]][license-epl]
 [![][license-edl img]][license-edl]
 
-Eclipse Collections is a collections framework for Java. It has optimized List, Set and Map implementations with a rich and fluent API.  The library provides additional data structures not found in the JDK like Bags, Multimaps and BiMaps.  The framework also provides primitive versions of Lists, Sets, Bags, Stacks and Maps with a rich and fluent API.  There is support for both Mutable and Immutable versions of all containers in the library.  The iteration protocol was inspired by the Smalltalk collection framework, and the collections are compatible with the Java Collection Framework types.
+![logo](artwork/eclipse-collections-logo.png) 
 
-Eclipse Collections has been presented at [various conferences and meetups](https://github.com/eclipse/eclipse-collections/wiki/Conference-talks-and-meetups) including JavaOne, Java Day Tokyo, EclipseCon NA & Europe, GOTO Chicago, ECOOP (Curry On) and QCon New York.
 
-The framework is actively being developed, with a growing number of contributors, at the Eclipse Foundation.  The current roadmap for the framework is available [here](https://github.com/eclipse/eclipse-collections/wiki/Roadmap).
+## [Eclipse Collections](http://www.eclipse.org/collections)
+##### [中文](https://www.eclipse.org/collections/cn/index.html) | [Deutsch](https://www.eclipse.org/collections/de/index.html) | [Français](https://www.eclipse.org/collections/fr/index.html) | [日本語](https://www.eclipse.org/collections/ja/index.html) | [Português-Brasil](https://www.eclipse.org/collections/pt-br/index.html) | [Русский](https://www.eclipse.org/collections/ru/index.html)
+Eclipse Collections is a collections library for Java with a rich, functional and fluent API. The library provides optimized List, Set and Map implementations and has data structures not found in the JDK including Bags, Multimaps and BiMaps. There is support for primitive versions of Lists, Sets, Bags, Stacks and Maps for all primitive types. The iteration protocol was inspired by the Smalltalk collection framework, and the collections are compatible with the Java Collection Framework types.
 
-Learn Eclipse Collections
-------------------------
-The [Eclipse Collections Reference Guide](https://github.com/eclipse/eclipse-collections/blob/master/docs/guide.md) is a great way to get an overview of the extensive features available in the framework.
 
-Check out the [Eclipse Collections Kata](https://github.com/eclipse/eclipse-collections-kata), a fun way to help you learn idiomatic Eclipse Collections usage.
-A [kata](https://en.wikipedia.org/wiki/Kata) is an exercise in martial arts.
-A [code kata](http://codekata.com/) is an exercise in programming which helps hone your skills through practice and repetition.
-This particular kata is set up as a series of unit tests which fail.
-Your task is to make them pass, using Eclipse Collections.
+## Learn Eclipse Collections
 
-Quick Example
--------------
+* The [Eclipse Collections Katas](https://github.com/eclipse/eclipse-collections-kata), a fun way to help you learn idiomatic Eclipse Collections usage.
+    * Start Here - [Pet Kata](http://eclipse.github.io/eclipse-collections-kata/pet-kata/#/) 
+    * Continue Here - [Company Kata](http://eclipse.github.io/eclipse-collections-kata/company-kata/#/)
+* The [Eclipse Collections Reference Guide](https://github.com/eclipse/eclipse-collections/blob/master/docs/guide.md), an overview of the extensive features available in the framework.
+* The [Javadoc](https://www.eclipse.org/collections/javadoc/9.2.0/overview-summary.html) 
+
+
+## Acquiring Eclipse Collections
+
+### Maven
+```xml
+<dependency>
+  <groupId>org.eclipse.collections</groupId>
+  <artifactId>eclipse-collections-api</artifactId>
+  <version>9.2.0</version>
+</dependency>
+
+<dependency>
+  <groupId>org.eclipse.collections</groupId>
+  <artifactId>eclipse-collections</artifactId>
+  <version>9.2.0</version>
+</dependency>
+```
+
+### Gradle
+
+```groovy
+compile 'org.eclipse.collections:eclipse-collections-api:9.2.0'
+compile 'org.eclipse.collections:eclipse-collections:9.2.0'
+```
+
+## Some Quick Examples
 
 Eclipse Collections puts iteration methods directly on the container types. Here's several code examples that demonstrate the simple and flexible style of programming with Eclipse Collections.
 
-First, we will define a simple class named Person to hold the first and last names of three people.
+First, we will define a simple class named *Person* to hold the first and last names of three people.
 
 ```java
 public class Person
@@ -51,160 +81,82 @@ public class Person
     {
         return this.lastName;
     }
+    
+    public boolean lastNameEquals(String name)
+    {
+        return name.equals(this.lastName);
+    }
 }
 ```
-Now we will setup three instances of the Person class in the person1, person2 and person3 variables.
+Now we will create three instances of the *Person* class..
 
 ```java
 Person person1 = new Person("Sally", "Smith");
 Person person2 = new Person("Ted", "Watson");
 Person person3 = new Person("Mary", "Williams");
 ```
-Now that the three people are instantiated, we can store them in a MutableList using the Lists factory class.  Then we will collect the last names of each person to a MutableList of String.  As a final step we will assert the expected value of the last names as a comma separated string should be equal to "Smith, Watson, Williams". 
-
+##### Collect (aka map, transform)
+Now we will create a *MutableList* with the three people, *collect* their names, and output them to a comma delimited String. 
 ```java
 MutableList<Person> people = Lists.mutable.with(person1, person2, person3);
-MutableList<String> lastNames = people.collect(Person::getLastName);
+MutableList<String> lastNames = people.collect(person -> person.getLastName());
 Assert.assertEquals("Smith, Watson, Williams", lastNames.makeString());
 ```
-The method reference in the example above can also be replaced with a lambda:
+The lambda in the example above can also be replaced with a method reference.
 
 ```java
-MutableList<String> lastNames = people.collect(person -> person.getLastName());
+MutableList<String> lastNames = people.collect(Person::getLastName);
 ```
-Eclipse Collections has support for both [Mutable](http://www.eclipse.org/collections/javadoc/9.2.0/org/eclipse/collections/api/collection/MutableCollection.html) and [Immutable](http://www.eclipse.org/collections/javadoc/9.2.0/org/eclipse/collections/api/collection/ImmutableCollection.html) collections, and the return types of methods are covariant.  While the collect method on a MutableList returned a MutableList, the collect method on an ImmutableList will return an ImmutableList.  Here we use the same Lists factory to create an ImmutableList.
+Eclipse Collections has support for both [Mutable](http://www.eclipse.org/collections/javadoc/9.2.0/org/eclipse/collections/api/collection/MutableCollection.html) and [Immutable](http://www.eclipse.org/collections/javadoc/9.2.0/org/eclipse/collections/api/collection/ImmutableCollection.html) collections, and the return types of methods are covariant.  While the *collect* method on a *MutableList* returned a *MutableList*, the *collect* method on an *ImmutableList* will return an *ImmutableList*.  Here we use the same [Lists](https://www.eclipse.org/collections/javadoc/9.2.0/org/eclipse/collections/impl/factory/Lists.html) factory to create an *ImmutableList*.
 
 ```java
 ImmutableList<Person> people = Lists.immutable.with(person1, person2, person3);
 ImmutableList<String> lastNames = people.collect(Person::getLastName);
 Assert.assertEquals("Smith, Watson, Williams", lastNames.makeString());
 ```
-Eclipse Collections has a [lazy API](http://www.eclipse.org/collections/javadoc/9.2.0/org/eclipse/collections/api/LazyIterable.html) as well, which is available by calling the method asLazy().  The method collect will now return a LazyIterable.  The LazyIterable that is returned does not evaluate anything until the call to a terminal method is made.  In this case, the call to makeString() will force the LazyIterable to collect the last names. 
+Eclipse Collections has a [lazy API](http://www.eclipse.org/collections/javadoc/9.2.0/org/eclipse/collections/api/LazyIterable.html) as well, which is available by calling the method *asLazy*.  The method *collect* will now return a *LazyIterable*.  The *LazyIterable* that is returned does not evaluate anything until the call to a terminal method is made.  In this case, the call to *makeString* will force the *LazyIterable* to collect the last names. 
 
 ```java
-ImmutableList<Person> people = Lists.immutable.with(person1, person2, person3);
 LazyIterable<String> lastNames = people.asLazy().collect(Person::getLastName);
 Assert.assertEquals("Smith, Watson, Williams", lastNames.makeString());
 ```
-The MutableCollections in Eclipse Collections also have the Stream API available in Java, since they extend their corresponding JDK types.  In this case, a MutableList extends java.util.List.  We use the stream() and map() methods to return a Stream of String.  Then we call the terminal method collect on the Stream with the Collectors.joining() as a parameter to convert the MutableList of Person to their comma separated last names.
-
+##### Select / Reject (aka filter / filter not)
+We can find all of the people with the last name "Smith" using the method named *select*.
 ```java
 MutableList<Person> people = Lists.mutable.with(person1, person2, person3);
-Stream<String> lastNames = people.stream().map(Person::getLastName);
-Assert.assertEquals("Smith, Watson, Williams", lastNames.collect(Collectors.joining(", "));
+MutableList<Person> smiths = people.select(person -> person.lastNameEquals("Smith"));
+Assert.assertEquals("Smith", smiths.collect(Person::getLastName).makeString());
 ```
-Eclipse Collections 8.0 also introduced a new set of Collectors in the class [Collectors2](http://www.eclipse.org/collections/javadoc/9.2.0/org/eclipse/collections/impl/collector/Collectors2.html).  The Collectors2.makeString() is equivalent to Collectors2.joining(", "), but does not require the object in the Stream to be a String.
-
+If we want to use a method reference, we can use the method *selectWith*.
 ```java
-MutableList<Person> people = Lists.mutable.with(person1, person2, person3);
-Stream<String> lastNames = people.stream().map(Person::getLastName);
-Assert.assertEquals("Smith, Watson, Williams", lastNames.collect(Collectors2.makeString());
+MutableList<Person> smiths = people.selectWith(Person::lastNameEquals, "Smith");
+Assert.assertEquals("Smith", smiths.collect(Person::getLastName).makeString());
 ```
-There are also a set of Adapter classes which can be used to add the fluent Eclipse Collections protocols on top of JDK Collection types.
-
+We can find all the people who do not have a last name of "Smith" using the method named *reject*.
 ```java
-List<Person> people = Arrays.asList(person1, person2, person3);
-MutableList<String> lastNames = ListAdapter.adapt(people).collect(Person::getLastName);
-Assert.assertEquals("Smith, Watson, Williams", lastNames.makeString());
+MutableList<Person> notSmiths = people.reject(person -> person.lastNameEquals("Smith"));
+Assert.assertEquals("Watson, Williams", notSmiths.collect(Person::getLastName).makeString());
+```
+If we want to use a method reference, we can use the method *rejectWith*.
+```java
+MutableList<Person> notSmiths = people.rejectWith(Person::lastNameEquals, "Smith");
+Assert.assertEquals("Watson, Williams", notSmiths.collect(Person::getLastName).makeString());
 ```
 
-Why Eclipse Collections?
-------------------------
 
-* Improves readability and reduces duplication of iteration code (enforces DRY/OAOO principles)
-* Implements many high-level iteration patterns (select, reject, collect, inject into, etc.) on "humane" container interfaces which are extensions of the JDK interfaces
-* Provides a consistent mechanism for iterating over Collections, Arrays, Maps, and Strings
-* Provides replacements for ArrayList, HashSet, and HashMap optimized for performance and memory usage
-* Adds new containers including Bag, Interval, Multimap, BiMap, and immutable versions of all types
-* Adds primitive containers for Lists, Sets, Bags, Stacks and Maps for all primitive Java types (boolean, byte, char, short, int, float, long, double)
-* Supports Mutable, Immutable, Synchronized, Unmodifiable and MultiReader Collections
-* Supports eager evaluation with APIs directly on containers and lazy evaluation via a method called asLazy()
-* Encapsulates a lot of the structural complexity of parallel iteration in a parallel API and parallel utility classes 
-* Provides adapters and optimized utility classes for iterating over JDK Collection types with a fluent and friendly API 
-* Has been under active development since 2005 and is a mature library
+## How to Contribute
 
-License
--------
+We welcome contributions! We accept contributions via pull requests here in GitHub. Please see [How To Contribute](CONTRIBUTING.md) to get started.
 
-Eclipse Collections is open sourced under the Eclipse Public License v1.0 and the Eclipse Distribution License v1.0.
 
-How to Contribute
------------------
-
-We welcome contributions!
-
-We accept contributions via pull requests here in GitHub. Please see [How To Contribute](CONTRIBUTING.md) to get started.
-
-Project Roadmap
----------------
-
-https://github.com/eclipse/eclipse-collections/wiki/Roadmap
-
-Acquiring Eclipse Collections
------------------------------
-
-### Maven
-```xml
-<dependency>
-  <groupId>org.eclipse.collections</groupId>
-  <artifactId>eclipse-collections-api</artifactId>
-  <version>9.2.0</version>
-</dependency>
-
-<dependency>
-  <groupId>org.eclipse.collections</groupId>
-  <artifactId>eclipse-collections</artifactId>
-  <version>9.2.0</version>
-</dependency>
-
-<dependency>
-  <groupId>org.eclipse.collections</groupId>
-  <artifactId>eclipse-collections-testutils</artifactId>
-  <version>9.2.0</version>
-  <scope>test</scope>
-</dependency>
-
-<dependency>
-  <groupId>org.eclipse.collections</groupId>
-  <artifactId>eclipse-collections-forkjoin</artifactId>
-  <version>9.2.0</version>
-</dependency>
-```
-
-### Gradle
-
-```groovy
-compile 'org.eclipse.collections:eclipse-collections-api:9.2.0'
-compile 'org.eclipse.collections:eclipse-collections:9.2.0'
-testCompile 'org.eclipse.collections:eclipse-collections-testutils:9.2.0'
-compile 'org.eclipse.collections:eclipse-collections-forkjoin:9.2.0'
-```
-
-### Ivy
-
-```xml
-<dependency org="org.eclipse.collections" name="eclipse-collections-api" rev="9.2.0" />
-<dependency org="org.eclipse.collections" name="eclipse-collections" rev="9.2.0" />
-<dependency org="org.eclipse.collections" name="eclipse-collections-testutils" rev="9.2.0" />
-<dependency org="org.eclipse.collections" name="eclipse-collections-forkjoin" rev="9.2.0"/>
-```
-
-### OSGi Bundle
-
-Eclipse software repository location: http://download.eclipse.org/collections/9.2.0/repository
-
-Additional information
-----------------------
+## Additional information
 
 * Project Website: http://www.eclipse.org/collections
-* Issues: https://github.com/eclipse/eclipse-collections/issues
-* Wiki: https://github.com/eclipse/eclipse-collections/wiki
+* Eclipse PMI: https://projects.eclipse.org/projects/technology.collections
 * StackOverflow: http://stackoverflow.com/questions/tagged/eclipse-collections
 * Mailing lists: https://dev.eclipse.org/mailman/listinfo/collections-dev
-* Eclipse PMI: https://projects.eclipse.org/projects/technology.collections
 * Forum: https://www.eclipse.org/forums/index.php?t=thread&frm_id=329
 
-[logo]:https://github.com/eclipse/eclipse-collections/blob/master/artwork/eclipse-collections-logo.png
 
 [travis]:https://travis-ci.org/eclipse/eclipse-collections
 [travis img]:https://travis-ci.org/eclipse/eclipse-collections.svg?branch=master
