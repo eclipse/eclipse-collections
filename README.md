@@ -13,22 +13,34 @@
 [![][license-epl img]][license-epl]
 [![][license-edl img]][license-edl]
 
-![logo](artwork/eclipse-collections-logo.png) 
+<a href="https://www.eclipse.org/collections/"><img src="https://github.com/eclipse/eclipse-collections/blob/master/artwork/eclipse-collections-logo.png" height="50%" width="50%"></a>
+
+#### [English](https://www.eclipse.org/collections/) | [中文](https://www.eclipse.org/collections/cn/index.html) | [Deutsch](https://www.eclipse.org/collections/de/index.html) | [Français](https://www.eclipse.org/collections/fr/index.html) | [日本語](https://www.eclipse.org/collections/ja/index.html) | [Português-Brasil](https://www.eclipse.org/collections/pt-br/index.html) | [Русский](https://www.eclipse.org/collections/ru/index.html)
+Eclipse Collections is a comprehensive collections library for Java. The library enables productivity and performance by delivering an eloquent, elegant and efficient set of APIs and types. The iteration protocol was inspired by the Smalltalk collection framework, and the collections are compatible with the Java Collection Framework types.
 
 
-## [Eclipse Collections](http://www.eclipse.org/collections)
-##### [中文](https://www.eclipse.org/collections/cn/index.html) | [Deutsch](https://www.eclipse.org/collections/de/index.html) | [Français](https://www.eclipse.org/collections/fr/index.html) | [日本語](https://www.eclipse.org/collections/ja/index.html) | [Português-Brasil](https://www.eclipse.org/collections/pt-br/index.html) | [Русский](https://www.eclipse.org/collections/ru/index.html)
-Eclipse Collections is a collections library for Java with a rich, functional and fluent API. The library provides optimized List, Set and Map implementations and has data structures not found in the JDK including Bags, Multimaps and BiMaps. There is support for primitive versions of Lists, Sets, Bags, Stacks and Maps for all primitive types. The iteration protocol was inspired by the Smalltalk collection framework, and the collections are compatible with the Java Collection Framework types.
+## Why Eclipse Collections?
+
+* Productivity
+    * Rich, functional, and fluent APIs with great symmetry 
+    * List, Set, Bag, Stack, Map, Multimap, BiMap, Interval Types 
+    * Readable, Mutable, and Immutable Types
+    * Mutable and Immutable Collection Factories
+    * Adapters and Utility classes for JCF Types
+* Performance
+    * Memory Efficient Containers 
+    * Optimized Eager, Lazy and Parallel APIs
+    * Primitive Collections for all primitive types 
+* Actively developed since 2005
 
 
 ## Learn Eclipse Collections
 
-* The [Eclipse Collections Katas](https://github.com/eclipse/eclipse-collections-kata), a fun way to help you learn idiomatic Eclipse Collections usage.
+* [Eclipse Collections Katas](https://github.com/eclipse/eclipse-collections-kata), a fun way to help you learn idiomatic Eclipse Collections usage.
     * Start Here - [Pet Kata](http://eclipse.github.io/eclipse-collections-kata/pet-kata/#/) 
     * Continue Here - [Company Kata](http://eclipse.github.io/eclipse-collections-kata/company-kata/#/)
-* The [Eclipse Collections Reference Guide](https://github.com/eclipse/eclipse-collections/blob/master/docs/guide.md), an overview of the extensive features available in the framework.
-* The [Javadoc](https://www.eclipse.org/collections/javadoc/9.2.0/overview-summary.html) 
-
+* [Eclipse Collections Reference Guide](https://github.com/eclipse/eclipse-collections/blob/master/docs/guide.md) and [Javadoc](https://www.eclipse.org/collections/javadoc/9.2.0/overview-summary.html) 
+* [Articles](https://github.com/eclipse/eclipse-collections/wiki/Articles) and [Blogs](https://medium.com/tag/eclipse-collections/latest)
 
 ## Acquiring Eclipse Collections
 
@@ -53,6 +65,7 @@ Eclipse Collections is a collections library for Java with a rich, functional an
 compile 'org.eclipse.collections:eclipse-collections-api:9.2.0'
 compile 'org.eclipse.collections:eclipse-collections:9.2.0'
 ```
+
 
 ## Some Quick Examples
 
@@ -95,7 +108,7 @@ Person person1 = new Person("Sally", "Smith");
 Person person2 = new Person("Ted", "Watson");
 Person person3 = new Person("Mary", "Williams");
 ```
-##### Collect (aka map, transform)
+#### Collect (aka map, transform)
 Now we will create a *MutableList* with the three people, *collect* their names, and output them to a comma delimited String. 
 ```java
 MutableList<Person> people = Lists.mutable.with(person1, person2, person3);
@@ -120,7 +133,7 @@ Eclipse Collections has a [lazy API](http://www.eclipse.org/collections/javadoc/
 LazyIterable<String> lastNames = people.asLazy().collect(Person::getLastName);
 Assert.assertEquals("Smith, Watson, Williams", lastNames.makeString());
 ```
-##### Select / Reject (aka filter / filter not)
+#### Select / Reject (aka filter / filter not)
 We can find all of the people with the last name "Smith" using the method named *select*.
 ```java
 MutableList<Person> people = Lists.mutable.with(person1, person2, person3);
