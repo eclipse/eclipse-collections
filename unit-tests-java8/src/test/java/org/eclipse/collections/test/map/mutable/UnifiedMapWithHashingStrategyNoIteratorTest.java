@@ -115,7 +115,7 @@ public class UnifiedMapWithHashingStrategyNoIteratorTest implements MutableMapTe
     public void MapIterable_detect()
     {
         /**
-         * TODO: {@link UnifiedMapWithHashingStrategy#detect(Predicate2)} should be optimized to not use an iterator
+         * TODO: {@link UnifiedMapWithHashingStrategy#detect(org.eclipse.collections.api.block.predicate.Predicate2)} should be optimized to not use an iterator
          */
     }
 
@@ -123,7 +123,7 @@ public class UnifiedMapWithHashingStrategyNoIteratorTest implements MutableMapTe
     public void MapIterable_detectOptional()
     {
         /**
-         * TODO: {@link UnifiedMapWithHashingStrategy#detectOptional(Predicate2)} should be optimized to not use an iterator
+         * TODO: {@link UnifiedMapWithHashingStrategy#detectOptional(org.eclipse.collections.api.block.predicate.Predicate2)} should be optimized to not use an iterator
          */
     }
 
@@ -187,11 +187,19 @@ public class UnifiedMapWithHashingStrategyNoIteratorTest implements MutableMapTe
     public void MutableMapIterable_updateValue()
     {
         /**
-         * TODO: {@link UnifiedMap#KeySet#equals)} should be optimized to not use an iterator
+         * TODO: {@link UnifiedMapWithHashingStrategy#KeySet#equals)} should be optimized to not use an iterator
          */
 
         /**
-         * TODO: {@link org.eclipse.collections.impl.set.mutable.UnifiedSet#addAll(Collection)} should be optimized to not use an iterator when another UnifiedSet is passed in.
+         * TODO: {@link org.eclipse.collections.impl.set.strategy.mutable.UnifiedSetWithHashingStrategy#addAll(Collection)} should be optimized to not use an iterator when another UnifiedSet is passed in.
+         */
+    }
+
+    @Override
+    public void MutableMapIterable_removeIf()
+    {
+        /**
+         * TODO: {@link UnifiedMapWithHashingStrategy#removeIf(Predicate2)} should be optimized to not use an iterator
          */
     }
 
