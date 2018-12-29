@@ -345,6 +345,13 @@ public class UnmodifiableBiMapTest extends AbstractMutableBiMapTestCase
 
     @Override
     @Test
+    public void removeIf()
+    {
+        Verify.assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeysValues(1, "1", 2, "Two").removeIf(null));
+    }
+
+    @Override
+    @Test
     public void removeNullFromValues()
     {
         MutableBiMap<Integer, String> map = this.newMapWithKeysValues(1, "1", 2, "Two");

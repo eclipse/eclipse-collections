@@ -100,6 +100,12 @@ public abstract class AbstractMemoryEfficientMutableMapTest
     }
 
     @Test(expected = UnsupportedOperationException.class)
+    public void removeIf_throws()
+    {
+        this.classUnderTest().removeIf(null);
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
     public void collectKeysAndValues_throws()
     {
         this.classUnderTest().collectKeysAndValues(null, null, null);

@@ -136,6 +136,12 @@ public class UnmodifiableTreeMap<K, V>
     }
 
     @Override
+    public boolean removeIf(Predicate2<? super K, ? super V> predicate)
+    {
+        throw new UnsupportedOperationException("Cannot call removeIf() on " + this.getClass().getSimpleName());
+    }
+
+    @Override
     public MutableSortedMap<K, V> with(Pair<K, V>... pairs)
     {
         throw new UnsupportedOperationException("Cannot call with() on " + this.getClass().getSimpleName());

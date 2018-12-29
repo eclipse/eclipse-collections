@@ -70,6 +70,13 @@ public class UnmodifiableMutableOrderedMapTest implements MutableOrderedMapTestC
     }
 
     @Override
+    public void MutableOrderedMap_removeIf()
+    {
+        MutableMapIterable<Object, Object> map = this.newWith();
+        assertThrows(UnsupportedOperationException.class, () -> map.removeIf(null));
+    }
+
+    @Override
     public void Map_remove()
     {
         MutableMapIterable<Object, Object> map = this.newWith();

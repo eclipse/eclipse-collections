@@ -67,6 +67,14 @@ public interface MutableMapIterable<K, V> extends MapIterable<K, V>, Map<K, V>
     V removeKey(K key);
 
     /**
+     * Remove an entry from the map if the {@code predicate} evaluates to true.
+     *
+     * @return true if any entry is removed.
+     * @since 10.0
+     */
+    boolean removeIf(Predicate2<? super K, ? super V> predicate);
+
+    /**
      * Get and return the value in the Map at the specified key. Alternatively, if there is no value in the map at the key,
      * return the result of evaluating the specified Function0, and put that value in the map at the specified key.
      */
