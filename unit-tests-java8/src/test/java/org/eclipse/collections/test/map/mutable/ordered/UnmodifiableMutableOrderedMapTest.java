@@ -30,8 +30,6 @@ import static org.junit.Assert.fail;
 @RunWith(Java8Runner.class)
 public class UnmodifiableMutableOrderedMapTest implements MutableOrderedMapTestCase, UnmodifiableIterableTestCase
 {
-    private static final long CURRENT_TIME_MILLIS = System.currentTimeMillis();
-
     @Override
     public <T> MutableOrderedMap<Object, T> newWith(T... elements)
     {
@@ -70,7 +68,7 @@ public class UnmodifiableMutableOrderedMapTest implements MutableOrderedMapTestC
     }
 
     @Override
-    public void MutableOrderedMap_removeIf()
+    public void MutableMapIterable_removeIf()
     {
         MutableMapIterable<Object, Object> map = this.newWith();
         assertThrows(UnsupportedOperationException.class, () -> map.removeIf(null));

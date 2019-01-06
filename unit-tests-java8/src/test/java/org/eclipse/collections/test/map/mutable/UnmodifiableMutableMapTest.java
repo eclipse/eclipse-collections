@@ -14,6 +14,7 @@ import java.util.Random;
 
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.MutableMapIterable;
+import org.eclipse.collections.impl.block.factory.Predicates2;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.map.mutable.UnmodifiableMutableMap;
 import org.eclipse.collections.impl.test.junit.Java8Runner;
@@ -65,6 +66,13 @@ public class UnmodifiableMutableMapTest implements MutableMapTestCase, Unmodifia
     {
         MutableMapIterable<Object, Object> map = this.newWith();
         assertThrows(UnsupportedOperationException.class, () -> map.removeKey(2));
+    }
+
+    @Override
+    public void MutableMapIterable_removeIf()
+    {
+        MutableMapIterable<Object, String> map = this.newWith("Three", "Two", "One");
+        assertThrows(UnsupportedOperationException.class, () -> map.removeIf(Predicates2.alwaysFalse()));
     }
 
     @Override

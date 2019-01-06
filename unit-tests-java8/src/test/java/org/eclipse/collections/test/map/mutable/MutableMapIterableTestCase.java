@@ -11,12 +11,13 @@
 package org.eclipse.collections.test.map.mutable;
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.Map;
 
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MutableMapIterable;
+import org.eclipse.collections.impl.block.factory.Predicates2;
 import org.eclipse.collections.impl.factory.Bags;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.tuple.ImmutableEntry;
@@ -127,6 +128,28 @@ public interface MutableMapIterableTestCase extends MapIterableTestCase
     }
 
     @Test
+    default void MutableMapIterable_removeIf()
+    {
+        MutableMapIterable<Integer, String> map1 = this.newWithKeysValues(1, "1", 2, "Two", 3, "Three");
+
+        assertFalse(map1.removeIf(Predicates2.alwaysFalse()));
+        assertEquals(this.newWithKeysValues(1, "1", 2, "Two", 3, "Three"), map1);
+        assertTrue(map1.removeIf(Predicates2.alwaysTrue()));
+        assertEquals(this.newWithKeysValues(), map1);
+
+        MutableMapIterable<Integer, String> map2 = this.newWithKeysValues(1, "One", 2, "TWO", 3, "THREE", 4, "four", 5, "Five", 6, "Six", 7, "Seven", 8, "Eight");
+        assertTrue(map2.removeIf((each, value) -> each % 2 == 0 && value.length() < 4));
+        assertEquals(this.newWithKeysValues(1, "One", 3, "THREE", 4, "four", 5, "Five", 7, "Seven", 8, "Eight"), map2);
+
+        assertTrue(map2.removeIf((each, value) -> each % 2 != 0 && value.equals("THREE")));
+        assertEquals(this.newWithKeysValues(1, "One", 4, "four", 5, "Five", 7, "Seven", 8, "Eight"), map2);
+
+        assertTrue(map2.removeIf((each, value) -> each % 2 != 0));
+        assertFalse(map2.removeIf((each, value) -> each % 2 != 0));
+        assertEquals(this.newWithKeysValues(4, "four", 8, "Eight"), map2);
+    }
+
+    @Test
     default void Map_putAll()
     {
         MutableMapIterable<Integer, String> map = this.newWithKeysValues(
@@ -149,7 +172,7 @@ public interface MutableMapIterableTestCase extends MapIterableTestCase
         MutableMapIterable<Integer, String> map2 = this.newWithKeysValues(
                 3, "Three",
                 2, "2");
-        HashMap<Integer, String> hashMaptoAdd = new LinkedHashMap<>();
+        Map<Integer, String> hashMaptoAdd = new LinkedHashMap<>();
         hashMaptoAdd.put(2, "Two");
         hashMaptoAdd.put(1, "One");
         map2.putAll(hashMaptoAdd);
