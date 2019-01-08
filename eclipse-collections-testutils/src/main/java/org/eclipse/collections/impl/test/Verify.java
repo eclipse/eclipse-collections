@@ -22,6 +22,8 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Base64;
+import java.util.Base64.Decoder;
+import java.util.Base64.Encoder;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -77,8 +79,8 @@ public final class Verify extends Assert
 {
     private static final int MAX_DIFFERENCES = 5;
     private static final byte[] LINE_SEPARATOR = {'\n'};
-    public static final Base64.Encoder ENCODER = Base64.getMimeEncoder(76, LINE_SEPARATOR);
-    public static final Base64.Decoder DECODER = Base64.getMimeDecoder();
+    private static final Encoder ENCODER = Base64.getMimeEncoder(76, LINE_SEPARATOR);
+    private static final Decoder DECODER = Base64.getMimeDecoder();
 
     private Verify()
     {
