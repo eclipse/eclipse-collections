@@ -21,6 +21,9 @@ import java.io.Serializable;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Base64;
+import java.util.Base64.Decoder;
+import java.util.Base64.Encoder;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -29,7 +32,6 @@ import java.util.Set;
 import java.util.SortedSet;
 import java.util.concurrent.Callable;
 
-import org.apache.commons.codec.binary.Base64;
 import org.eclipse.collections.api.InternalIterable;
 import org.eclipse.collections.api.PrimitiveIterable;
 import org.eclipse.collections.api.bag.Bag;
@@ -77,6 +79,8 @@ public final class Verify extends Assert
 {
     private static final int MAX_DIFFERENCES = 5;
     private static final byte[] LINE_SEPARATOR = {'\n'};
+    private static final Encoder ENCODER = Base64.getMimeEncoder(76, LINE_SEPARATOR);
+    private static final Decoder DECODER = Base64.getMimeDecoder();
 
     private Verify()
     {
@@ -3705,7 +3709,7 @@ public final class Verify extends Assert
     {
         try
         {
-            byte[] bytes = Base64.decodeBase64(expectedBase64Form);
+            byte[] bytes = DECODER.decode(expectedBase64Form);
             return new ObjectInputStream(new ByteArrayInputStream(bytes)).readObject();
         }
         catch (IOException | ClassNotFoundException e)
@@ -3724,19 +3728,13 @@ public final class Verify extends Assert
             objectOutputStream.flush();
             objectOutputStream.close();
 
-            String string = new Base64(76, LINE_SEPARATOR, false).encodeAsString(byteArrayOutputStream.toByteArray());
-            String trimmedString = Verify.removeFinalNewline(string);
-            return Verify.addFinalNewline(trimmedString);
+            String string = ENCODER.encodeToString(byteArrayOutputStream.toByteArray());
+            return Verify.addFinalNewline(string);
         }
         catch (IOException e)
         {
             throw new AssertionError(e);
         }
-    }
-
-    private static String removeFinalNewline(String string)
-    {
-        return string.substring(0, string.length() - 1);
     }
 
     private static String addFinalNewline(String string)
