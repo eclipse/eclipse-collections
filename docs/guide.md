@@ -1,5 +1,13 @@
-![logo](https://github.com/eclipse/eclipse-collections/blob/master/artwork/eclipse-collections-logo.png)
-# Reference Guide
+<!--
+  ~ Copyright (c) 2019 Goldman Sachs and others.
+  ~ All rights reserved. This program and the accompanying materials
+  ~ are made available under the terms of the Eclipse Public License v1.0
+  ~ and Eclipse Distribution License v. 1.0 which accompany this distribution.
+  ~ The Eclipse Public License is available at http://www.eclipse.org/legal/epl-v10.html
+  ~ and the Eclipse Distribution License is available at
+  ~ http://www.eclipse.org/org/documents/edl-v10.php.
+  -->
+# Reference Guide <a href="https://www.eclipse.org/collections/"><img align="right" src="https://github.com/eclipse/eclipse-collections/blob/master/artwork/eclipse-collections-logo.png" height="25%" width="25%"></a>
 - [About Eclipse Collections](#-about-eclipse-collections)
 - [About this guide](#-about-this-guide)
 - [Getting Started With Eclipse Collections](#-getting-started-with-eclipse-collections)
