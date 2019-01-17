@@ -115,7 +115,7 @@ MutableList<String> lastNames = people.collect(Person::getLastName);
 Eclipse Collections has support for both [Mutable](http://www.eclipse.org/collections/javadoc/9.2.0/org/eclipse/collections/api/collection/MutableCollection.html) and [Immutable](http://www.eclipse.org/collections/javadoc/9.2.0/org/eclipse/collections/api/collection/ImmutableCollection.html) collections, and the return types of methods are covariant.  While the *collect* method on a *MutableList* returned a *MutableList*, the *collect* method on an *ImmutableList* will return an *ImmutableList*.  Here we use the same [Lists](https://www.eclipse.org/collections/javadoc/9.2.0/org/eclipse/collections/impl/factory/Lists.html) factory to create an *ImmutableList*.
 
 ```java
-MutableList<Person> people = Lists.immutable.with(
+ImmutableList<Person> people = Lists.immutable.with(
         new Person("Sally", "Smith"),
         new Person("Ted", "Watson"),
         new Person("Mary", "Williams"));
