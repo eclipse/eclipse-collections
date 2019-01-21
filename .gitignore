@@ -1,5 +1,8 @@
 target
 .maven
+.mvn/wrapper/
+mvnw
+mvnw.cmd
 jmh-scala-tests/.cache-main
 scala-unit-tests/.cache-tests
 test-coverage/**
@@ -32,7 +35,7 @@ test-coverage/**
 # When using Gradle or Maven with auto-import, you should exclude module files,
 # since they will be recreated, and may cause churn.  Uncomment if using
 # auto-import.
-.idea/modules
+.idea/scala_compiler.xml
 
 # CMake
 cmake-build-*/

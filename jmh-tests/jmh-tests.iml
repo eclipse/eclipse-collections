@@ -14,7 +14,6 @@
     <orderEntry type="module" module-name="eclipse-collections" />
     <orderEntry type="module" module-name="eclipse-collections-forkjoin" />
     <orderEntry type="module" module-name="eclipse-collections-testutils" />
-    <orderEntry type="library" name="Maven: commons-codec:commons-codec:1.11" level="project" />
     <orderEntry type="module" module-name="jmh-scala-tests" />
     <orderEntry type="library" name="Maven: org.scala-lang:scala-library:2.12.6" level="project" />
     <orderEntry type="library" name="Maven: commons-lang:commons-lang:2.6" level="project" />
