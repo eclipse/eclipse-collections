@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2019 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -97,6 +97,12 @@ public abstract class AbstractMemoryEfficientMutableMapTest
     public void removeKey_throws()
     {
         this.classUnderTest().removeKey(null);
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void removeAllKeys_throws()
+    {
+        this.classUnderTest().removeAllKeys(null);
     }
 
     @Test(expected = UnsupportedOperationException.class)

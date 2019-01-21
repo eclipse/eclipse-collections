@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018 Two Sigma.
+ * Copyright (c) 2019 Two Sigma and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -14,6 +14,7 @@ import java.util.LinkedHashMap;
 
 import org.eclipse.collections.api.map.MutableMapIterable;
 import org.eclipse.collections.api.map.MutableOrderedMap;
+import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.map.ordered.mutable.OrderedMapAdapter;
 import org.eclipse.collections.impl.map.ordered.mutable.UnmodifiableMutableOrderedMap;
 import org.eclipse.collections.impl.test.junit.Java8Runner;
@@ -65,6 +66,14 @@ public class UnmodifiableMutableOrderedMapTest implements MutableOrderedMapTestC
     {
         MutableMapIterable<Object, Object> map = this.newWith();
         assertThrows(UnsupportedOperationException.class, () -> map.removeKey(2));
+    }
+
+    @Override
+    @Test
+    public void MutableOrderedMap_removeAllKeys()
+    {
+        MutableMapIterable<Object, Object> map = this.newWith();
+        assertThrows(UnsupportedOperationException.class, () -> map.removeAllKeys(Sets.mutable.empty()));
     }
 
     @Override

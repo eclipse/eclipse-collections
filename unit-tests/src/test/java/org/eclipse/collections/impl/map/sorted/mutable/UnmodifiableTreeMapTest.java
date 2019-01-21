@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2019 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -120,6 +120,13 @@ public class UnmodifiableTreeMapTest extends MutableSortedMapTestCase
     {
         MutableSortedMap<Integer, String> map = this.newMapWithKeysValues(1, "1", 2, "Two");
         map.removeKey(1);
+    }
+
+    @Override
+    @Test
+    public void removeAllKeys()
+    {
+        Verify.assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeysValues(1, "1", 2, "Two").removeAllKeys(null));
     }
 
     @Override

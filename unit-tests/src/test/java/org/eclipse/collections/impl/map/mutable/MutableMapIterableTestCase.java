@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2019 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -28,6 +28,7 @@ import org.eclipse.collections.impl.block.factory.Predicates2;
 import org.eclipse.collections.impl.block.function.PassThruFunction0;
 import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.Maps;
+import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.map.AbstractSynchronizedMapIterable;
@@ -337,6 +338,28 @@ public abstract class MutableMapIterableTestCase extends MapIterableTestCase
 
         Assert.assertEquals("Two", map.removeKey(2));
         Verify.assertEmpty(map);
+    }
+
+    @Test
+    public void removeAllKeys()
+    {
+        MutableMapIterable<Integer, String> map = this.newMapWithKeysValues(1, "1", 2, "Two", 3, "Three");
+
+        Verify.assertThrows(NullPointerException.class, () -> map.removeAllKeys(null));
+        Assert.assertFalse(map.removeAllKeys(Sets.mutable.with(4)));
+        Assert.assertFalse(map.removeAllKeys(Sets.mutable.with(4, 5, 6)));
+        Assert.assertFalse(map.removeAllKeys(Sets.mutable.with(4, 5, 6, 7, 8, 9)));
+
+        Assert.assertTrue(map.removeAllKeys(Sets.mutable.with(1)));
+        Verify.denyContainsKey(1, map);
+        Assert.assertTrue(map.removeAllKeys(Sets.mutable.with(3, 4, 5, 6, 7)));
+        Verify.denyContainsKey(3, map);
+
+        map.putAll(Maps.mutable.with(4, "Four", 5, "Five", 6, "Six", 7, "Seven"));
+        Assert.assertTrue(map.removeAllKeys(Sets.mutable.with(2, 3, 9, 10)));
+        Verify.denyContainsKey(2, map);
+        Assert.assertTrue(map.removeAllKeys(Sets.mutable.with(5, 3, 7, 8, 9)));
+        Assert.assertEquals(Maps.mutable.with(4, "Four", 6, "Six"), map);
     }
 
     @Test
