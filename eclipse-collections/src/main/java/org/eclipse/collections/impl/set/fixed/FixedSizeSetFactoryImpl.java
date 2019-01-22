@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2019 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -10,10 +10,13 @@
 
 package org.eclipse.collections.impl.set.fixed;
 
+import java.util.stream.Stream;
+
 import org.eclipse.collections.api.factory.set.FixedSizeSetFactory;
 import org.eclipse.collections.api.set.FixedSizeSet;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.impl.block.factory.Comparators;
+import org.eclipse.collections.impl.collector.Collectors2;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 
 public class FixedSizeSetFactoryImpl implements FixedSizeSetFactory
@@ -138,6 +141,32 @@ public class FixedSizeSetFactoryImpl implements FixedSizeSetFactory
     public <T> MutableSet<T> withAll(Iterable<? extends T> items)
     {
         UnifiedSet<T> set = UnifiedSet.newSet(items);
+        T[] itemArray;
+        switch (set.size())
+        {
+            case 0:
+                return new EmptySet<>();
+            case 1:
+                itemArray = (T[]) set.toArray();
+                return new SingletonSet<>(itemArray[0]);
+            case 2:
+                itemArray = (T[]) set.toArray();
+                return new DoubletonSet<>(itemArray[0], itemArray[1]);
+            case 3:
+                itemArray = (T[]) set.toArray();
+                return new TripletonSet<>(itemArray[0], itemArray[1], itemArray[2]);
+            case 4:
+                itemArray = (T[]) set.toArray();
+                return new QuadrupletonSet<>(itemArray[0], itemArray[1], itemArray[2], itemArray[3]);
+            default:
+                return set;
+        }
+    }
+
+    @Override
+    public <T> MutableSet<T> fromStream(Stream<? extends T> stream)
+    {
+        MutableSet<T> set = stream.collect(Collectors2.toSet());
         T[] itemArray;
         switch (set.size())
         {

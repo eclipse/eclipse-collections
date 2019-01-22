@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018 Goldman Sachs and others.
+ * Copyright (c) 2019 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -16,6 +16,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.block.function.Function2;
@@ -740,6 +742,8 @@ public class SetsTest
         Verify.assertInstanceOf(MutableSet.class, setFactory.of(1, 2, 3, 4, 5));
         Assert.assertEquals(UnifiedSet.newSetWith(1, 2, 3, 4, 5), setFactory.ofAll(UnifiedSet.newSetWith(1, 2, 3, 4, 5)));
         Verify.assertInstanceOf(MutableSet.class, setFactory.ofAll(UnifiedSet.newSetWith(1, 2, 3, 4, 5)));
+        Assert.assertEquals(UnifiedSet.newSetWith(1, 2, 3, 4, 5), setFactory.fromStream(Stream.of(1, 2, 3, 4, 5)));
+        Verify.assertInstanceOf(MutableSet.class, setFactory.fromStream(Stream.of(1, 2, 3, 4, 5)));
     }
 
     @Test
@@ -747,7 +751,11 @@ public class SetsTest
     {
         FixedSizeSetFactory setFactory = Sets.fixedSize;
         Assert.assertEquals(UnifiedSet.newSet(), setFactory.of());
+        Assert.assertEquals(UnifiedSet.newSet(), setFactory.with());
+        Assert.assertEquals(UnifiedSet.newSet(), setFactory.empty());
         Verify.assertInstanceOf(FixedSizeSet.class, setFactory.of());
+        Verify.assertInstanceOf(FixedSizeSet.class, setFactory.with());
+        Verify.assertInstanceOf(FixedSizeSet.class, setFactory.empty());
         Assert.assertEquals(UnifiedSet.newSetWith(1), setFactory.of(1));
         Verify.assertInstanceOf(FixedSizeSet.class, setFactory.of(1));
         Assert.assertEquals(UnifiedSet.newSetWith(1, 2), setFactory.of(1, 2));
@@ -756,6 +764,10 @@ public class SetsTest
         Verify.assertInstanceOf(FixedSizeSet.class, setFactory.of(1, 2, 3));
         Assert.assertEquals(UnifiedSet.newSetWith(1, 2, 3, 4), setFactory.of(1, 2, 3, 4));
         Verify.assertInstanceOf(FixedSizeSet.class, setFactory.of(1, 2, 3, 4));
+        Assert.assertEquals(UnifiedSet.newSetWith(1, 2, 3, 4), setFactory.ofAll(Sets.mutable.of(1, 2, 3, 4)));
+        Verify.assertInstanceOf(FixedSizeSet.class, setFactory.ofAll(Sets.mutable.of(1, 2, 3, 4)));
+        Assert.assertEquals(UnifiedSet.newSetWith(1, 2, 3, 4), setFactory.fromStream(Stream.of(1, 2, 3, 4)));
+        Verify.assertInstanceOf(FixedSizeSet.class, setFactory.fromStream(Stream.of(1, 2, 3, 4)));
     }
 
     @Test
@@ -773,6 +785,8 @@ public class SetsTest
         Verify.assertInstanceOf(MultiReaderUnifiedSet.class, setFactory.of(1));
         Assert.assertEquals(MultiReaderUnifiedSet.newSetWith(1, 2, 3), setFactory.ofAll(UnifiedSet.newSetWith(1, 2, 3)));
         Verify.assertInstanceOf(MultiReaderUnifiedSet.class, setFactory.ofAll(UnifiedSet.newSetWith(1, 2, 3)));
+        Assert.assertEquals(MultiReaderUnifiedSet.newSetWith(1, 2, 3), setFactory.fromStream(Stream.of(1, 2, 3)));
+        Verify.assertInstanceOf(MultiReaderUnifiedSet.class, setFactory.fromStream(Stream.of(1, 2, 3)));
     }
 
     @Test
@@ -890,12 +904,36 @@ public class SetsTest
     }
 
     @Test
-    public void newSet()
+    public void ofAllImmutableSet()
     {
         for (int i = 1; i <= 5; i++)
         {
             Interval interval = Interval.oneTo(i);
             Verify.assertEqualsAndHashCode(UnifiedSet.newSet(interval), Sets.immutable.ofAll(interval));
+        }
+    }
+
+    @Test
+    public void ofAllMutableSet()
+    {
+        for (int i = 1; i <= 5; i++)
+        {
+            Interval interval = Interval.oneTo(i);
+            Verify.assertEqualsAndHashCode(UnifiedSet.newSet(interval), Sets.mutable.ofAll(interval));
+            Stream<Integer> stream = IntStream.rangeClosed(1, i).boxed();
+            Verify.assertEqualsAndHashCode(UnifiedSet.newSet(interval), Sets.mutable.fromStream(stream));
+        }
+    }
+
+    @Test
+    public void ofAllFixedSizeSet()
+    {
+        for (int i = 1; i <= 5; i++)
+        {
+            Interval interval = Interval.oneTo(i);
+            Verify.assertEqualsAndHashCode(UnifiedSet.newSet(interval), Sets.fixedSize.ofAll(interval));
+            Stream<Integer> stream = IntStream.rangeClosed(1, i).boxed();
+            Verify.assertEqualsAndHashCode(UnifiedSet.newSet(interval), Sets.fixedSize.fromStream(stream));
         }
     }
 

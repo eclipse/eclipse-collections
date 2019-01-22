@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2019 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -10,8 +10,12 @@
 
 package org.eclipse.collections.impl.factory;
 
+import java.util.stream.Stream;
+
 import org.eclipse.collections.api.factory.stack.ImmutableStackFactory;
+import org.eclipse.collections.api.factory.stack.MutableStackFactory;
 import org.eclipse.collections.api.stack.ImmutableStack;
+import org.eclipse.collections.api.stack.MutableStack;
 import org.eclipse.collections.impl.stack.mutable.ArrayStack;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
@@ -47,6 +51,38 @@ public class StacksTest
         Verify.assertInstanceOf(ImmutableStack.class, stackFactory.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
         Assert.assertEquals(ArrayStack.newStackWith(3, 2, 1), stackFactory.ofAll(ArrayStack.newStackWith(1, 2, 3)));
         Verify.assertInstanceOf(ImmutableStack.class, stackFactory.ofAll(ArrayStack.newStackWith(1, 2, 3)));
+    }
+
+    @Test
+    public void mutables()
+    {
+        MutableStackFactory stackFactory = Stacks.mutable;
+        Assert.assertEquals(ArrayStack.newStack(), stackFactory.of());
+        Verify.assertInstanceOf(MutableStack.class, stackFactory.of());
+        Assert.assertEquals(ArrayStack.newStackWith(1), stackFactory.of(1));
+        Verify.assertInstanceOf(MutableStack.class, stackFactory.of(1));
+        Assert.assertEquals(ArrayStack.newStackWith(1, 2), stackFactory.of(1, 2));
+        Verify.assertInstanceOf(MutableStack.class, stackFactory.of(1, 2));
+        Assert.assertEquals(ArrayStack.newStackWith(1, 2, 3), stackFactory.of(1, 2, 3));
+        Verify.assertInstanceOf(MutableStack.class, stackFactory.of(1, 2, 3));
+        Assert.assertEquals(ArrayStack.newStackWith(1, 2, 3, 4), stackFactory.of(1, 2, 3, 4));
+        Verify.assertInstanceOf(MutableStack.class, stackFactory.of(1, 2, 3, 4));
+        Assert.assertEquals(ArrayStack.newStackWith(1, 2, 3, 4, 5), stackFactory.of(1, 2, 3, 4, 5));
+        Verify.assertInstanceOf(MutableStack.class, stackFactory.of(1, 2, 3, 4, 5));
+        Assert.assertEquals(ArrayStack.newStackWith(1, 2, 3, 4, 5, 6), stackFactory.of(1, 2, 3, 4, 5, 6));
+        Verify.assertInstanceOf(MutableStack.class, stackFactory.of(1, 2, 3, 4, 5, 6));
+        Assert.assertEquals(ArrayStack.newStackWith(1, 2, 3, 4, 5, 6, 7), stackFactory.of(1, 2, 3, 4, 5, 6, 7));
+        Verify.assertInstanceOf(MutableStack.class, stackFactory.of(1, 2, 3, 4, 5, 6, 7));
+        Assert.assertEquals(ArrayStack.newStackWith(1, 2, 3, 4, 5, 6, 7, 8), stackFactory.of(1, 2, 3, 4, 5, 6, 7, 8));
+        Verify.assertInstanceOf(MutableStack.class, stackFactory.of(1, 2, 3, 4, 5, 6, 7, 8));
+        Assert.assertEquals(ArrayStack.newStackWith(1, 2, 3, 4, 5, 6, 7, 8, 9), stackFactory.of(1, 2, 3, 4, 5, 6, 7, 8, 9));
+        Verify.assertInstanceOf(MutableStack.class, stackFactory.of(1, 2, 3, 4, 5, 6, 7, 8, 9));
+        Assert.assertEquals(ArrayStack.newStackWith(1, 2, 3, 4, 5, 6, 7, 8, 9, 10), stackFactory.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
+        Verify.assertInstanceOf(MutableStack.class, stackFactory.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
+        Assert.assertEquals(ArrayStack.newStackWith(3, 2, 1), stackFactory.ofAll(ArrayStack.newStackWith(1, 2, 3)));
+        Verify.assertInstanceOf(MutableStack.class, stackFactory.ofAll(ArrayStack.newStackWith(1, 2, 3)));
+        Assert.assertEquals(ArrayStack.newStackWith(1, 2, 3), stackFactory.fromStream(Stream.of(1, 2, 3)));
+        Verify.assertInstanceOf(MutableStack.class, stackFactory.fromStream(Stream.of(1, 2, 3)));
     }
 
     @Test

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2019 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -9,6 +9,9 @@
  */
 
 package org.eclipse.collections.impl.set.mutable;
+
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.eclipse.collections.api.factory.set.MutableSetFactory;
 import org.eclipse.collections.api.set.MutableSet;
@@ -24,33 +27,9 @@ public class MutableSetFactoryImpl implements MutableSetFactory
     }
 
     @Override
-    public <T> MutableSet<T> of()
-    {
-        return this.empty();
-    }
-
-    @Override
-    public <T> MutableSet<T> with()
-    {
-        return this.empty();
-    }
-
-    @Override
-    public <T> MutableSet<T> ofInitialCapacity(int capacity)
-    {
-        return this.withInitialCapacity(capacity);
-    }
-
-    @Override
     public <T> MutableSet<T> withInitialCapacity(int capacity)
     {
         return UnifiedSet.newSet(capacity);
-    }
-
-    @Override
-    public <T> MutableSet<T> of(T... items)
-    {
-        return this.with(items);
     }
 
     @Override
@@ -60,14 +39,14 @@ public class MutableSetFactoryImpl implements MutableSetFactory
     }
 
     @Override
-    public <T> MutableSet<T> ofAll(Iterable<? extends T> items)
-    {
-        return this.withAll(items);
-    }
-
-    @Override
     public <T> MutableSet<T> withAll(Iterable<? extends T> items)
     {
         return UnifiedSet.newSet(items);
+    }
+
+    @Override
+    public <T> MutableSet<T> fromStream(Stream<? extends T> stream)
+    {
+        return stream.collect(Collectors.toCollection(UnifiedSet::newSet));
     }
 }
