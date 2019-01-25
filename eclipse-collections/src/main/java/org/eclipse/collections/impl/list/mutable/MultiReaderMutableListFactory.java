@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 Goldman Sachs.
+ * Copyright (c) 2019 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -9,6 +9,9 @@
  */
 
 package org.eclipse.collections.impl.list.mutable;
+
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.factory.list.MutableListFactory;
@@ -25,33 +28,9 @@ public enum MultiReaderMutableListFactory implements MutableListFactory
     }
 
     @Override
-    public <T> MutableList<T> of()
-    {
-        return this.empty();
-    }
-
-    @Override
-    public <T> MutableList<T> with()
-    {
-        return this.empty();
-    }
-
-    @Override
-    public <T> MutableList<T> of(T... items)
-    {
-        return this.with(items);
-    }
-
-    @Override
     public <T> MutableList<T> with(T... items)
     {
         return MultiReaderFastList.newListWith(items);
-    }
-
-    @Override
-    public <T> MutableList<T> ofInitialCapacity(int capacity)
-    {
-        return this.withInitialCapacity(capacity);
     }
 
     @Override
@@ -66,15 +45,15 @@ public enum MultiReaderMutableListFactory implements MutableListFactory
     }
 
     @Override
-    public <T> MutableList<T> ofAll(Iterable<? extends T> iterable)
-    {
-        return this.withAll(iterable);
-    }
-
-    @Override
     public <T> MutableList<T> withAll(Iterable<? extends T> iterable)
     {
         return MultiReaderFastList.newList(iterable);
+    }
+
+    @Override
+    public <T> MutableList<T> fromStream(Stream<? extends T> stream)
+    {
+        return stream.collect(Collectors.toCollection(MultiReaderFastList::newList));
     }
 
     @Override

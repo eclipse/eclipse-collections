@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018 Goldman Sachs.
+ * Copyright (c) 2019 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -12,6 +12,8 @@ package org.eclipse.collections.impl.factory;
 
 import java.lang.reflect.Field;
 import java.util.List;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import org.eclipse.collections.api.factory.list.FixedSizeListFactory;
 import org.eclipse.collections.api.factory.list.ImmutableListFactory;
@@ -33,7 +35,11 @@ public class ListsTest
     {
         ImmutableListFactory listFactory = Lists.immutable;
         Assert.assertEquals(FastList.newList(), listFactory.of());
+        Assert.assertEquals(FastList.newList(), listFactory.with());
+        Assert.assertEquals(FastList.newList(), listFactory.empty());
         Verify.assertInstanceOf(ImmutableList.class, listFactory.of());
+        Verify.assertInstanceOf(ImmutableList.class, listFactory.with());
+        Verify.assertInstanceOf(ImmutableList.class, listFactory.empty());
         Assert.assertEquals(FastList.newListWith(1), listFactory.of(1));
         Verify.assertInstanceOf(ImmutableList.class, listFactory.of(1));
         Assert.assertEquals(FastList.newListWith(1, 2), listFactory.of(1, 2));
@@ -59,6 +65,42 @@ public class ListsTest
     }
 
     @Test
+    public void mutables()
+    {
+        MutableListFactory listFactory = Lists.mutable;
+        Assert.assertEquals(FastList.newList(), listFactory.of());
+        Assert.assertEquals(FastList.newList(), listFactory.with());
+        Assert.assertEquals(FastList.newList(), listFactory.empty());
+        Verify.assertInstanceOf(MutableList.class, listFactory.of());
+        Verify.assertInstanceOf(MutableList.class, listFactory.with());
+        Verify.assertInstanceOf(MutableList.class, listFactory.empty());
+        Assert.assertEquals(FastList.newListWith(1), listFactory.of(1));
+        Verify.assertInstanceOf(MutableList.class, listFactory.of(1));
+        Assert.assertEquals(FastList.newListWith(1, 2), listFactory.of(1, 2));
+        Verify.assertInstanceOf(MutableList.class, listFactory.of(1, 2));
+        Assert.assertEquals(FastList.newListWith(1, 2, 3), listFactory.of(1, 2, 3));
+        Verify.assertInstanceOf(MutableList.class, listFactory.of(1, 2, 3));
+        Assert.assertEquals(FastList.newListWith(1, 2, 3, 4), listFactory.of(1, 2, 3, 4));
+        Verify.assertInstanceOf(MutableList.class, listFactory.of(1, 2, 3, 4));
+        Assert.assertEquals(FastList.newListWith(1, 2, 3, 4, 5), listFactory.of(1, 2, 3, 4, 5));
+        Verify.assertInstanceOf(MutableList.class, listFactory.of(1, 2, 3, 4, 5));
+        Assert.assertEquals(FastList.newListWith(1, 2, 3, 4, 5, 6), listFactory.of(1, 2, 3, 4, 5, 6));
+        Verify.assertInstanceOf(MutableList.class, listFactory.of(1, 2, 3, 4, 5, 6));
+        Assert.assertEquals(FastList.newListWith(1, 2, 3, 4, 5, 6, 7), listFactory.of(1, 2, 3, 4, 5, 6, 7));
+        Verify.assertInstanceOf(MutableList.class, listFactory.of(1, 2, 3, 4, 5, 6, 7));
+        Assert.assertEquals(FastList.newListWith(1, 2, 3, 4, 5, 6, 7, 8), listFactory.of(1, 2, 3, 4, 5, 6, 7, 8));
+        Verify.assertInstanceOf(MutableList.class, listFactory.of(1, 2, 3, 4, 5, 6, 7, 8));
+        Assert.assertEquals(FastList.newListWith(1, 2, 3, 4, 5, 6, 7, 8, 9), listFactory.of(1, 2, 3, 4, 5, 6, 7, 8, 9));
+        Verify.assertInstanceOf(MutableList.class, listFactory.of(1, 2, 3, 4, 5, 6, 7, 8, 9));
+        Assert.assertEquals(FastList.newListWith(1, 2, 3, 4, 5, 6, 7, 8, 9, 10), listFactory.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
+        Verify.assertInstanceOf(MutableList.class, listFactory.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
+        Assert.assertEquals(FastList.newListWith(1, 2, 3), listFactory.ofAll(FastList.newListWith(1, 2, 3)));
+        Verify.assertInstanceOf(MutableList.class, listFactory.ofAll(FastList.newListWith(1, 2, 3)));
+        Assert.assertEquals(FastList.newListWith(1, 2, 3), listFactory.fromStream(Stream.of(1, 2, 3)));
+        Verify.assertInstanceOf(MutableList.class, listFactory.fromStream(Stream.of(1, 2, 3)));
+    }
+
+    @Test
     public void immutableWithListTest()
     {
         Assert.assertEquals(Lists.mutable.of(), Lists.mutable.of().toImmutable());
@@ -76,7 +118,11 @@ public class ListsTest
     {
         FixedSizeListFactory listFactory = Lists.fixedSize;
         Assert.assertEquals(FastList.newList(), listFactory.of());
+        Assert.assertEquals(FastList.newList(), listFactory.with());
+        Assert.assertEquals(FastList.newList(), listFactory.empty());
         Verify.assertInstanceOf(FixedSizeList.class, listFactory.of());
+        Verify.assertInstanceOf(FixedSizeList.class, listFactory.with());
+        Verify.assertInstanceOf(FixedSizeList.class, listFactory.empty());
         Assert.assertEquals(FastList.newListWith(1), listFactory.of(1));
         Verify.assertInstanceOf(FixedSizeList.class, listFactory.of(1));
         Assert.assertEquals(FastList.newListWith(1, 2), listFactory.of(1, 2));
@@ -99,6 +145,8 @@ public class ListsTest
         Verify.assertInstanceOf(FixedSizeList.class, listFactory.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
         Assert.assertEquals(FastList.newListWith(1, 2, 3), listFactory.ofAll(FastList.newListWith(1, 2, 3)));
         Verify.assertInstanceOf(FixedSizeList.class, listFactory.ofAll(FastList.newListWith(1, 2, 3)));
+        Assert.assertEquals(FastList.newListWith(1, 2, 3), listFactory.fromStream(Stream.of(1, 2, 3)));
+        Verify.assertInstanceOf(FixedSizeList.class, listFactory.fromStream(Stream.of(1, 2, 3)));
     }
 
     @Test
@@ -106,11 +154,17 @@ public class ListsTest
     {
         MutableListFactory listFactory = Lists.multiReader;
         Assert.assertEquals(MultiReaderFastList.newList(), listFactory.of());
+        Assert.assertEquals(MultiReaderFastList.newList(), listFactory.with());
+        Assert.assertEquals(MultiReaderFastList.newList(), listFactory.empty());
         Verify.assertInstanceOf(MultiReaderFastList.class, listFactory.of());
+        Verify.assertInstanceOf(MultiReaderFastList.class, listFactory.with());
+        Verify.assertInstanceOf(MultiReaderFastList.class, listFactory.empty());
         Assert.assertEquals(MultiReaderFastList.newListWith(1), listFactory.of(1));
         Verify.assertInstanceOf(MultiReaderFastList.class, listFactory.of(1));
         Assert.assertEquals(MultiReaderFastList.newListWith(1, 2, 3), listFactory.ofAll(FastList.newListWith(1, 2, 3)));
         Verify.assertInstanceOf(MultiReaderFastList.class, listFactory.ofAll(FastList.newListWith(1, 2, 3)));
+        Assert.assertEquals(MultiReaderFastList.newListWith(1, 2, 3), listFactory.fromStream(Stream.of(1, 2, 3)));
+        Verify.assertInstanceOf(MultiReaderFastList.class, listFactory.fromStream(Stream.of(1, 2, 3)));
     }
 
     @Test
@@ -122,12 +176,36 @@ public class ListsTest
     }
 
     @Test
-    public void newList()
+    public void ofAllImmutableList()
     {
         for (int i = 1; i <= 11; i++)
         {
             Interval interval = Interval.oneTo(i);
-            Verify.assertEqualsAndHashCode(FastList.newList(interval), Lists.immutable.ofAll(interval));
+            Verify.assertEqualsAndHashCode(interval, Lists.immutable.ofAll(interval));
+        }
+    }
+
+    @Test
+    public void ofAllMutableList()
+    {
+        for (int i = 1; i <= 11; i++)
+        {
+            Interval interval = Interval.oneTo(i);
+            Verify.assertEqualsAndHashCode(interval, Lists.mutable.ofAll(interval));
+            Stream<Integer> stream = IntStream.rangeClosed(1, i).boxed();
+            Verify.assertEqualsAndHashCode(interval, Lists.mutable.fromStream(stream));
+        }
+    }
+
+    @Test
+    public void ofAllFixedSizedList()
+    {
+        for (int i = 1; i <= 11; i++)
+        {
+            Interval interval = Interval.oneTo(i);
+            Verify.assertEqualsAndHashCode(interval, Lists.fixedSize.ofAll(interval));
+            Stream<Integer> stream = IntStream.rangeClosed(1, i).boxed();
+            Verify.assertEqualsAndHashCode(interval, Lists.fixedSize.fromStream(stream));
         }
     }
 

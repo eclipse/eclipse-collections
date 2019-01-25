@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2019 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -9,6 +9,8 @@
  */
 
 package org.eclipse.collections.api.factory.list;
+
+import java.util.stream.Stream;
 
 import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.list.MutableList;
@@ -23,24 +25,36 @@ public interface MutableListFactory
     /**
      * Same as {@link #empty()}.
      */
-    <T> MutableList<T> of();
+    default <T> MutableList<T> of()
+    {
+        return this.empty();
+    }
 
     /**
      * Same as {@link #empty()}.
      */
-    <T> MutableList<T> with();
+    default <T> MutableList<T> with()
+    {
+        return this.empty();
+    }
 
     /**
      * Same as {@link #with(Object[])}.
      */
-    <T> MutableList<T> of(T... items);
+    default <T> MutableList<T> of(T... items)
+    {
+        return this.with(items);
+    }
 
     <T> MutableList<T> with(T... items);
 
     /**
      * Same as {@link #empty()}. but takes in initial capacity.
      */
-    <T> MutableList<T> ofInitialCapacity(int capacity);
+    default <T> MutableList<T> ofInitialCapacity(int capacity)
+    {
+        return this.withInitialCapacity(capacity);
+    }
 
     /**
      * Same as {@link #empty()}. but takes in initial capacity.
@@ -50,9 +64,17 @@ public interface MutableListFactory
     /**
      * Same as {@link #withAll(Iterable)}.
      */
-    <T> MutableList<T> ofAll(Iterable<? extends T> iterable);
+    default <T> MutableList<T> ofAll(Iterable<? extends T> iterable)
+    {
+        return this.withAll(iterable);
+    }
 
     <T> MutableList<T> withAll(Iterable<? extends T> iterable);
+
+    /**
+     * @since 10.0.
+     */
+    <T> MutableList<T> fromStream(Stream<? extends T> stream);
 
     <T> MutableList<T> withNValues(int size, Function0<? extends T> factory);
 }
