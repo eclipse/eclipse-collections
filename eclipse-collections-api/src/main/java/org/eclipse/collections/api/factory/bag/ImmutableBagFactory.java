@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2019 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -10,7 +10,10 @@
 
 package org.eclipse.collections.api.factory.bag;
 
+import java.util.stream.Stream;
+
 import org.eclipse.collections.api.bag.ImmutableBag;
+import org.eclipse.collections.api.factory.Bags;
 
 /**
  * A factory which creates instances of type {@link ImmutableBag}.
@@ -52,4 +55,12 @@ public interface ImmutableBagFactory
     <T> ImmutableBag<T> ofAll(Iterable<? extends T> items);
 
     <T> ImmutableBag<T> withAll(Iterable<? extends T> items);
+
+    /**
+     * @since 10.0.
+     */
+    default <T> ImmutableBag<T> fromStream(Stream<? extends T> stream)
+    {
+        return Bags.mutable.<T>fromStream(stream).toImmutable();
+    }
 }

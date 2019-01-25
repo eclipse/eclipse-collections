@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2019 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -10,6 +10,9 @@
 
 package org.eclipse.collections.api.factory.list;
 
+import java.util.stream.Stream;
+
+import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.list.ImmutableList;
 
 public interface ImmutableListFactory
@@ -112,4 +115,12 @@ public interface ImmutableListFactory
     <T> ImmutableList<T> ofAll(Iterable<? extends T> items);
 
     <T> ImmutableList<T> withAll(Iterable<? extends T> items);
+
+    /**
+     * @since 10.0.
+     */
+    default <T> ImmutableList<T> fromStream(Stream<? extends T> stream)
+    {
+        return Lists.mutable.<T>fromStream(stream).toImmutable();
+    }
 }

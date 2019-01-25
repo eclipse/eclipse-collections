@@ -720,6 +720,8 @@ public class SetsTest
         Verify.assertInstanceOf(ImmutableSet.class, setFactory.of(1, 2, 3, 4, 5));
         Assert.assertEquals(UnifiedSet.newSetWith(1, 2, 3, 4, 5), setFactory.ofAll(UnifiedSet.newSetWith(1, 2, 3, 4, 5)));
         Verify.assertInstanceOf(ImmutableSet.class, setFactory.ofAll(UnifiedSet.newSetWith(1, 2, 3, 4, 5)));
+        Assert.assertEquals(UnifiedSet.newSetWith(1, 2, 3, 4, 5), setFactory.fromStream(Stream.of(1, 2, 3, 4, 5)));
+        Verify.assertInstanceOf(ImmutableSet.class, setFactory.fromStream(Stream.of(1, 2, 3, 4, 5)));
     }
 
     @Test
