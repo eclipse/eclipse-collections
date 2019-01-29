@@ -51,6 +51,8 @@ public class StacksTest
         Verify.assertInstanceOf(ImmutableStack.class, stackFactory.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
         Assert.assertEquals(ArrayStack.newStackWith(3, 2, 1), stackFactory.ofAll(ArrayStack.newStackWith(1, 2, 3)));
         Verify.assertInstanceOf(ImmutableStack.class, stackFactory.ofAll(ArrayStack.newStackWith(1, 2, 3)));
+        Assert.assertEquals(ArrayStack.newStackWith(1, 2, 3), stackFactory.fromStream(Stream.of(1, 2, 3)));
+        Verify.assertInstanceOf(ImmutableStack.class, stackFactory.fromStream(Stream.of(1, 2, 3)));
     }
 
     @Test

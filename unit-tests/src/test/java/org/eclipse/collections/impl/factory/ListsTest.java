@@ -62,6 +62,8 @@ public class ListsTest
         Verify.assertInstanceOf(ImmutableList.class, listFactory.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
         Assert.assertEquals(FastList.newListWith(1, 2, 3), listFactory.ofAll(FastList.newListWith(1, 2, 3)));
         Verify.assertInstanceOf(ImmutableList.class, listFactory.ofAll(FastList.newListWith(1, 2, 3)));
+        Assert.assertEquals(FastList.newListWith(1, 2, 3), listFactory.fromStream(Stream.of(1, 2, 3)));
+        Verify.assertInstanceOf(ImmutableList.class, listFactory.fromStream(Stream.of(1, 2, 3)));
     }
 
     @Test
