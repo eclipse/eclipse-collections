@@ -18,6 +18,7 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.EmptyStackException;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Optional;
 
 import org.eclipse.collections.api.LazyIterable;
@@ -986,6 +987,12 @@ public class ArrayStack<T> implements MutableStack<T>, Externalizable
     public <NK, NV> MutableMap<NK, NV> toMap(Function<? super T, ? extends NK> keyFunction, Function<? super T, ? extends NV> valueFunction)
     {
         return this.delegate.asReversed().toMap(keyFunction, valueFunction);
+    }
+
+    @Override
+    public <NK, NV, R extends Map<NK, NV>> R toMap(Function<? super T, ? extends NK> keyFunction, Function<? super T, ? extends NV> valueFunction, R target)
+    {
+        return this.delegate.asReversed().toMap(keyFunction, valueFunction, target);
     }
 
     @Override

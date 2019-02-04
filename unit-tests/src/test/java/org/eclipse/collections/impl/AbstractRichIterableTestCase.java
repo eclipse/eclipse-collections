@@ -14,11 +14,13 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.DoubleSummaryStatistics;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.IntSummaryStatistics;
 import java.util.Iterator;
 import java.util.List;
 import java.util.LongSummaryStatistics;
+import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Optional;
@@ -1334,6 +1336,21 @@ public abstract class AbstractRichIterableTestCase
         MutableMap<String, String> map =
                 integers.toMap(Object::toString, Object::toString);
         Assert.assertEquals(UnifiedMap.newWithKeysValues("1", "1", "2", "2", "3", "3", "4", "4"), map);
+    }
+
+    @Test
+    public void toMapTarget()
+    {
+        RichIterable<Integer> integers = this.newWith(1, 2, 3, 4);
+        Map<String, String> jdkMap = new HashMap<>();
+        jdkMap.put("1", "1");
+        jdkMap.put("2", "2");
+        jdkMap.put("3", "3");
+        jdkMap.put("4", "4");
+        Map<String, String> targetMap =
+                integers.toMap(Object::toString, Object::toString, new HashMap<>());
+        Assert.assertEquals(jdkMap, targetMap);
+        Assert.assertTrue(targetMap instanceof HashMap);
     }
 
     @Test

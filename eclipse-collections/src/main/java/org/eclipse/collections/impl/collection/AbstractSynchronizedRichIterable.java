@@ -13,6 +13,7 @@ package org.eclipse.collections.impl.collection;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Optional;
 
 import org.eclipse.collections.api.BooleanIterable;
@@ -787,6 +788,18 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         synchronized (this.lock)
         {
             return this.delegate.toMap(keyFunction, valueFunction);
+        }
+    }
+
+    @Override
+    public <K, V, R extends Map<K, V>> R toMap(
+            Function<? super T, ? extends K> keyFunction,
+            Function<? super T, ? extends V> valueFunction,
+            R target)
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.toMap(keyFunction, valueFunction, target);
         }
     }
 

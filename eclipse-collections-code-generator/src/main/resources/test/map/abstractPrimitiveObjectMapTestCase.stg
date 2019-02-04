@@ -21,7 +21,9 @@ package org.eclipse.collections.impl.map.primitive;
 
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -723,6 +725,28 @@ public abstract class Abstract<name>ObjectMapTestCase
         Assert.assertEquals(UnifiedMap.newWithKeysValues(1, "a", 4, "abcd"), map1.toMap(keyFunction, valueFunction));
         Assert.assertEquals(UnifiedMap.newWithKeysValues(2, "ab", 4, "abcd"), map2.toMap(keyFunction, valueFunction));
         Assert.assertEquals(UnifiedMap.newWithKeysValues(3, "abc", 4, "abcd"), map3.toMap(keyFunction, valueFunction));
+    }
+
+    @Test
+    public void toMapTarget()
+    {
+        <name>ObjectMap\<String> map = this.newWithKeysValues(<(literal.(type))("0")>, "a", <(literal.(type))("9")>, "abcd");
+
+        Function\<String, String> keyStringFunction = (Function\<String, String>) each -> String.valueOf(each.length());
+        Function\<String, Long> keyLongFunction = (Function\<String, Long>) each -> Long.valueOf(each.length());
+        Function\<String, String> valueFunction = Functions.getPassThru();
+
+        Map\<String, String> targetMap1 = new HashMap\<>();
+        targetMap1.put("1", "a");
+        targetMap1.put("4", "abcd");
+
+        Map\<Long, String> targetMap2 = new HashMap\<>();
+        targetMap2.put(1L, "a");
+        targetMap2.put(4L, "abcd");
+
+        Assert.assertEquals(targetMap1, map.toMap(keyStringFunction, valueFunction, new HashMap\<String, String>()));
+        Assert.assertEquals(targetMap2, map.toMap(keyLongFunction, valueFunction, new HashMap\<Long, String>()));
+        Assert.assertTrue(map.toMap(keyLongFunction, valueFunction, new HashMap\<Long, String>()) instanceof HashMap);
     }
 
     @Test

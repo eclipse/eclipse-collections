@@ -13,6 +13,7 @@ package org.eclipse.collections.impl.collection.mutable;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Spliterator;
 import java.util.concurrent.locks.ReadWriteLock;
@@ -297,6 +298,23 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         try
         {
             return this.getDelegate().toMap(keyFunction, valueFunction);
+        }
+        finally
+        {
+            this.unlockReadLock();
+        }
+    }
+
+    @Override
+    public <K, V, R extends Map<K, V>> R toMap(
+            Function<? super T, ? extends K> keyFunction,
+            Function<? super T, ? extends V> valueFunction,
+            R target)
+    {
+        this.acquireReadLock();
+        try
+        {
+            return this.getDelegate().toMap(keyFunction, valueFunction, target);
         }
         finally
         {
@@ -1909,6 +1927,15 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
                 Function<? super T, ? extends NV> valueFunction)
         {
             return this.delegate.toMap(keyFunction, valueFunction);
+        }
+
+        @Override
+        public <NK, NV, R extends Map<NK, NV>> R toMap(
+                Function<? super T, ? extends NK> keyFunction,
+                Function<? super T, ? extends NV> valueFunction,
+                R target)
+        {
+            return this.delegate.toMap(keyFunction, valueFunction, target);
         }
 
         @Override

@@ -10,6 +10,7 @@
 
 package org.eclipse.collections.test;
 
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -2028,6 +2029,24 @@ public interface RichIterableTestCase extends IterableTestCase
                         Tuples.pair("2", 2),
                         Tuples.pair("1", 1)),
                 iterable.toMap(Object::toString, each -> each % 10));
+    }
+
+    @Test
+    default void RichIterable_toMapTarget()
+    {
+        RichIterable<Integer> iterable = this.newWith(13, 12, 11, 3, 2, 1);
+
+        Map<String, Integer> jdkMap = new HashMap<>();
+        jdkMap.put("13", 3);
+        jdkMap.put("12", 2);
+        jdkMap.put("11", 1);
+        jdkMap.put("3", 3);
+        jdkMap.put("2", 2);
+        jdkMap.put("1", 1);
+
+        assertEquals(
+                jdkMap,
+                iterable.toMap(Object::toString, each -> each % 10, new HashMap<String, Integer>()));
     }
 
     @Test

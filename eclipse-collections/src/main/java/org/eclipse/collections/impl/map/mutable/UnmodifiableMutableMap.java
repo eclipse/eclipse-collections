@@ -547,6 +547,15 @@ public class UnmodifiableMutableMap<K, V>
     }
 
     @Override
+    public <NK, NV, R extends Map<NK, NV>> R toMap(
+            Function<? super V, ? extends NK> keyFunction,
+            Function<? super V, ? extends NV> valueFunction,
+            R target)
+    {
+        return this.getMutableMap().toMap(keyFunction, valueFunction, target);
+    }
+
+    @Override
     public <NK, NV> MutableSortedMap<NK, NV> toSortedMap(
             Function<? super V, ? extends NK> keyFunction,
             Function<? super V, ? extends NV> valueFunction)

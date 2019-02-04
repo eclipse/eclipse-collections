@@ -15,6 +15,7 @@ import java.util.Comparator;
 import java.util.DoubleSummaryStatistics;
 import java.util.IntSummaryStatistics;
 import java.util.LongSummaryStatistics;
+import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.function.BiConsumer;
@@ -1556,6 +1557,21 @@ public interface RichIterable<T>
     <NK, NV> MutableMap<NK, NV> toMap(
             Function<? super T, ? extends NK> keyFunction,
             Function<? super T, ? extends NV> valueFunction);
+
+    /**
+     * Same as {@link #toMap(Function, Function)}, except that the results are gathered into the specified {@code target}
+     * map.
+     *
+     * @since 10.0
+     */
+    default <NK, NV, R extends Map<NK, NV>> R toMap(
+            Function<? super T, ? extends NK> keyFunction,
+            Function<? super T, ? extends NV> valueFunction,
+            R target)
+    {
+        this.forEach(each -> target.put(keyFunction.apply(each), valueFunction.apply(each)));
+        return target;
+    }
 
     /**
      * Converts the collection to a MutableSortedMap implementation using the specified key and value functions

@@ -3079,6 +3079,19 @@ public final class Iterate
     }
 
     /**
+     * Iterate over the specified collection applying the specified Functions to each element to calculate
+     * a key and value, and return the results in the specified Map instance.
+     */
+    public static <T, K, V, R extends Map<K, V>> R toMap(
+            Iterable<T> iterable,
+            Function<? super T, ? extends K> keyFunction,
+            Function<? super T, ? extends V> valueFunction,
+            R target)
+    {
+        return Iterate.addToMap(iterable, keyFunction, valueFunction, target);
+    }
+
+    /**
      * Iterate over the specified collection applying a specific Function to each element to calculate a
      * key, and add the results to input Map.
      * This method will mutate the input Map.
