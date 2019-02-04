@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Shotaro Sano.
+ * Copyright (c) 2019 Shotaro Sano and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -179,6 +179,15 @@ public class SynchronizedSetMultimap<K, V>
         synchronized (this.getLock())
         {
             return this.getDelegate().collectKeysValues(function);
+        }
+    }
+
+    @Override
+    public <K2, V2> MutableBagMultimap<K2, V2> collectKeyMultiValues(Function<? super K, ? extends K2> keyFunction, Function<? super V, ? extends V2> valueFunction)
+    {
+        synchronized (this.getLock())
+        {
+            return this.getDelegate().collectKeyMultiValues(keyFunction, valueFunction);
         }
     }
 

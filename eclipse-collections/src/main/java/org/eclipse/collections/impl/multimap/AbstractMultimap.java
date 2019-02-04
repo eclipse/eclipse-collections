@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2019 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -28,6 +28,7 @@ import org.eclipse.collections.impl.UnmodifiableRichIterable;
 import org.eclipse.collections.impl.block.factory.Functions;
 import org.eclipse.collections.impl.factory.Bags;
 import org.eclipse.collections.impl.tuple.Tuples;
+import org.eclipse.collections.impl.utility.Iterate;
 
 public abstract class AbstractMultimap<K, V, C extends RichIterable<V>>
         implements Multimap<K, V>
@@ -254,6 +255,16 @@ public abstract class AbstractMultimap<K, V, C extends RichIterable<V>>
     public <K2, V2, R extends MutableMultimap<K2, V2>> R collectKeysValues(Function2<? super K, ? super V, Pair<K2, V2>> function, R target)
     {
         this.getMap().forEachKeyValue((key, collection) -> collection.each(value -> target.add(function.value(key, value))));
+        return target;
+    }
+
+    @Override
+    public <K2, V2, R extends MutableMultimap<K2, V2>> R collectKeyMultiValues(Function<? super K, ? extends K2> keyFunction, Function<? super V, ? extends V2> valueFunction, R target)
+    {
+        this.forEachKeyMultiValues((key, values) ->
+                target.putAll(
+                        keyFunction.valueOf(key),
+                        Iterate.collect(values, valueFunction)));
         return target;
     }
 

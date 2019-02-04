@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Goldman Sachs.
+ * Copyright (c) 2019 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -11,13 +11,16 @@
 package org.eclipse.collections.impl.multimap.set;
 
 import org.eclipse.collections.api.list.MutableList;
+import org.eclipse.collections.api.multimap.Multimap;
 import org.eclipse.collections.api.multimap.MutableMultimap;
 import org.eclipse.collections.api.multimap.bag.MutableBagMultimap;
+import org.eclipse.collections.api.multimap.list.MutableListMultimap;
 import org.eclipse.collections.api.multimap.set.MutableSetMultimap;
 import org.eclipse.collections.api.multimap.set.SetMultimap;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.factory.Lists;
+import org.eclipse.collections.impl.factory.Multimaps;
 import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.multimap.AbstractMutableMultimapTestCase;
@@ -162,6 +165,50 @@ public abstract class AbstractMutableSetMultimapTestCase extends AbstractMutable
         expectedMultimap2.putAll(1, FastList.newListWith("1Value", "2Value", "3Value", "4Value"));
         expectedMultimap2.putAll(1, FastList.newListWith("2Value", "3Value", "4Value", "5Value"));
         Verify.assertBagMultimapsEqual(expectedMultimap2, collectedMultimap2);
+    }
+
+    @Override
+    @Test
+    public void collectKeyMultiValues()
+    {
+        MutableSetMultimap<String, Integer> multimap1 = this.newMultimap();
+        multimap1.putAll("1", FastList.newListWith(1, 2, 3, 4));
+        multimap1.putAll("2", FastList.newListWith(2, 3, 4, 5));
+        MutableBagMultimap<Integer, String> collectedMultimap1 = multimap1.collectKeyMultiValues(Integer::valueOf, value -> value + "Value");
+        MutableBagMultimap<Integer, String> expectedMultimap1 = HashBagMultimap.newMultimap();
+        expectedMultimap1.putAll(1, FastList.newListWith("1Value", "2Value", "3Value", "4Value"));
+        expectedMultimap1.putAll(2, FastList.newListWith("2Value", "3Value", "4Value", "5Value"));
+        Verify.assertBagMultimapsEqual(expectedMultimap1, collectedMultimap1);
+
+        MutableBagMultimap<Integer, String> collectedMultimap2 = multimap1.collectKeyMultiValues(key -> 1, value -> value + "Value");
+
+        MutableBagMultimap<Integer, String> expectedMultimap2 = HashBagMultimap.newMultimap();
+        expectedMultimap2.putAll(1, FastList.newListWith("1Value", "2Value", "3Value", "4Value"));
+        expectedMultimap2.putAll(1, FastList.newListWith("2Value", "3Value", "4Value", "5Value"));
+        Verify.assertBagMultimapsEqual(expectedMultimap2, collectedMultimap2);
+
+        Multimap<String, Integer> multimap2 = this.newMultimap(
+                Tuples.pair("1", 1),
+                Tuples.pair("1", 1),
+                Tuples.pair("1", 12),
+                Tuples.pair("2", 2),
+                Tuples.pair("2", 2),
+                Tuples.pair("3", 3));
+        Multimap<Integer, Integer> collectedMultimap3 = multimap2.collectKeyMultiValues(
+                key -> 1,
+                value -> value % 2 == 0 ? value + 1 : value,
+                Multimaps.mutable.set.empty());
+        SetMultimap<Integer, Integer> expectedMultimap3 = Multimaps.mutable.set.with(1, 1, 1, 13, 1, 3);
+        Assert.assertEquals(expectedMultimap3, collectedMultimap3);
+
+        Multimap<Integer, Integer> collectedMultimap4 = multimap2.collectKeyMultiValues(
+                key -> 1,
+                value -> value % 2 == 0 ? value + 1 : value,
+                Multimaps.mutable.list.empty());
+        MutableListMultimap<Integer, Integer> expectedMultimap4 = Multimaps.mutable.list.with(1, 1, 1, 3, 1, 13);
+        expectedMultimap4.put(1, 3);
+        Assert.assertEquals(expectedMultimap4.keySet(), collectedMultimap4.keySet());
+        Assert.assertEquals(expectedMultimap4.get(1).toBag(), collectedMultimap4.get(1).toBag());
     }
 
     @Override

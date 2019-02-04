@@ -200,6 +200,28 @@ public abstract class AbstractMutableSortedBagMultimapTestCase extends AbstractM
 
     @Override
     @Test
+    public void collectKeyMultiValues()
+    {
+        super.collectKeyMultiValues();
+
+        MutableSortedBagMultimap<String, Integer> multimap = this.newMultimap(Comparators.reverseNaturalOrder());
+        multimap.putAll("1", FastList.newListWith(4, 3, 2, 1, 1));
+        multimap.putAll("2", FastList.newListWith(5, 4, 3, 2, 2));
+        MutableBagMultimap<Integer, String> collectedMultimap1 = multimap.collectKeyMultiValues(Integer::valueOf, value -> value + "Value");
+        MutableBagMultimap<Integer, String> expectedMultimap1 = HashBagMultimap.newMultimap();
+        expectedMultimap1.putAll(1, FastList.newListWith("4Value", "3Value", "2Value", "1Value", "1Value"));
+        expectedMultimap1.putAll(2, FastList.newListWith("5Value", "4Value", "3Value", "2Value", "2Value"));
+        Verify.assertBagMultimapsEqual(expectedMultimap1, collectedMultimap1);
+
+        MutableBagMultimap<Integer, String> collectedMultimap2 = multimap.collectKeyMultiValues(key -> 1, value -> value + "Value");
+        MutableBagMultimap<Integer, String> expectedMultimap2 = HashBagMultimap.newMultimap();
+        expectedMultimap2.putAll(1, FastList.newListWith("4Value", "3Value", "2Value", "1Value", "1Value"));
+        expectedMultimap2.putAll(1, FastList.newListWith("5Value", "4Value", "3Value", "2Value", "2Value"));
+        Verify.assertBagMultimapsEqual(expectedMultimap2, collectedMultimap2);
+    }
+
+    @Override
+    @Test
     public void collectValues()
     {
         MutableSortedBagMultimap<String, Integer> multimap = this.newMultimap(Comparators.reverseNaturalOrder());
