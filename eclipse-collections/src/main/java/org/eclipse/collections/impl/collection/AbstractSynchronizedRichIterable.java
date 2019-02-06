@@ -29,6 +29,7 @@ import org.eclipse.collections.api.bag.Bag;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.bag.MutableBagIterable;
 import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
+import org.eclipse.collections.api.bimap.MutableBiMap;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.block.function.Function2;
@@ -821,6 +822,17 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
         synchronized (this.lock)
         {
             return this.delegate.toSortedMapBy(sortBy, keyFunction, valueFunction);
+        }
+    }
+
+    @Override
+    public <NK, NV> MutableBiMap<NK, NV> toBiMap(
+            Function<? super T, ? extends NK> keyFunction,
+            Function<? super T, ? extends NV> valueFunction)
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.toBiMap(keyFunction, valueFunction);
         }
     }
 

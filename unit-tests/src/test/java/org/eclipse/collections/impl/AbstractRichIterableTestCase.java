@@ -20,6 +20,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.LongSummaryStatistics;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -50,6 +51,7 @@ import org.eclipse.collections.api.collection.primitive.MutableFloatCollection;
 import org.eclipse.collections.api.collection.primitive.MutableIntCollection;
 import org.eclipse.collections.api.collection.primitive.MutableLongCollection;
 import org.eclipse.collections.api.collection.primitive.MutableShortCollection;
+import org.eclipse.collections.api.factory.Maps;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MapIterable;
 import org.eclipse.collections.api.map.MutableMap;
@@ -1361,6 +1363,26 @@ public abstract class AbstractRichIterableTestCase
                 Functions.getIntegerPassThru(), Object::toString);
         Verify.assertMapsEqual(TreeSortedMap.newMapWith(Comparators.reverseNaturalOrder(), 1, "1", 2, "2", 3, "3"), map);
         Verify.assertListsEqual(Lists.mutable.with(3, 2, 1), map.keySet().toList());
+    }
+
+    @Test
+    public void toBiMap()
+    {
+        RichIterable<Integer> integers = this.newWith(1, 2, 3);
+
+        Assert.assertEquals(
+                Maps.mutable.with("1", "1", "2", "2", "3", "3"),
+                integers.toBiMap(Object::toString, Object::toString));
+
+        Verify.assertThrows(
+                IllegalArgumentException.class,
+                () -> integers.toBiMap(i -> "Constant Key", Objects::toString));
+        Verify.assertThrows(
+                IllegalArgumentException.class,
+                () -> integers.toBiMap(Object::toString, i -> "Constant Value"));
+        Verify.assertThrows(
+                IllegalArgumentException.class,
+                () -> integers.toBiMap(i -> "Constant Key", i -> "Constant Value"));
     }
 
     @Test

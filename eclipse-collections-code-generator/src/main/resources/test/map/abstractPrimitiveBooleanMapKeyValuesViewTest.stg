@@ -34,6 +34,7 @@ import org.eclipse.collections.api.LongIterable;
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.ShortIterable;
 import org.eclipse.collections.api.bag.MutableBag;
+import org.eclipse.collections.api.bimap.MutableBiMap;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.block.function.Function2;
@@ -60,6 +61,7 @@ import org.eclipse.collections.impl.bag.mutable.primitive.FloatHashBag;
 import org.eclipse.collections.impl.bag.mutable.primitive.IntHashBag;
 import org.eclipse.collections.impl.bag.mutable.primitive.LongHashBag;
 import org.eclipse.collections.impl.bag.mutable.primitive.ShortHashBag;
+import org.eclipse.collections.impl.bimap.mutable.HashBiMap;
 import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.block.factory.Functions0;
 import org.eclipse.collections.impl.block.factory.Predicates;
@@ -798,6 +800,14 @@ public abstract class Abstract<name>BooleanMapKeyValuesViewTestCase
         MutableSortedMap\<String, String> map =
                 pairs.toSortedMapBy(String::valueOf, String::valueOf, String::valueOf);
         Assert.assertEquals(TreeSortedMap.newMapWith(Comparators.naturalOrder(), "<(toStringLiteral.(type))("1")>:false", "<(toStringLiteral.(type))("1")>:false", "<(toStringLiteral.(type))("2")>:true", "<(toStringLiteral.(type))("2")>:true", "<(toStringLiteral.(type))("3")>:false", "<(toStringLiteral.(type))("3")>:false"), map);
+    }
+
+    @Test
+    public void toBiMap()
+    {
+        RichIterable\<<name>BooleanPair> pairs = this.newWith(<(literal.(type))("1")>, false, <(literal.(type))("2")>, true, <(literal.(type))("3")>, false);
+        MutableBiMap\<String, String> biMap = pairs.toBiMap(String::valueOf, String::valueOf);
+        Assert.assertEquals(HashBiMap.newWithKeysValues("<(toStringLiteral.(type))("1")>:false", "<(toStringLiteral.(type))("1")>:false", "<(toStringLiteral.(type))("2")>:true", "<(toStringLiteral.(type))("2")>:true", "<(toStringLiteral.(type))("3")>:false", "<(toStringLiteral.(type))("3")>:false"), biMap);
     }
 
     @Test

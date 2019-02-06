@@ -33,6 +33,7 @@ import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.ShortIterable;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
+import org.eclipse.collections.api.bimap.MutableBiMap;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.block.function.Function2;
@@ -58,6 +59,7 @@ import org.eclipse.collections.impl.bag.mutable.primitive.IntHashBag;
 import org.eclipse.collections.impl.bag.mutable.primitive.LongHashBag;
 import org.eclipse.collections.impl.bag.mutable.primitive.ShortHashBag;
 import org.eclipse.collections.impl.bag.sorted.mutable.TreeBag;
+import org.eclipse.collections.impl.bimap.mutable.HashBiMap;
 import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.block.factory.Functions0;
 import org.eclipse.collections.impl.block.factory.Predicates;
@@ -830,6 +832,14 @@ public abstract class Abstract<name>ObjectMapKeyValuesViewTestCase
         MutableSortedMap\<String, String> map =
                 pairs.toSortedMapBy(String::valueOf, String::valueOf, String::valueOf);
         Assert.assertEquals(TreeSortedMap.newMapWith(Comparators.naturalOrder(), "<(toStringLiteral.(type))("1")>:2", "<(toStringLiteral.(type))("1")>:2", "<(toStringLiteral.(type))("2")>:3", "<(toStringLiteral.(type))("2")>:3", "<(toStringLiteral.(type))("3")>:4", "<(toStringLiteral.(type))("3")>:4"), map);
+    }
+
+    @Test
+    public void toBiMap()
+    {
+        RichIterable\<<name>ObjectPair\<Integer>\> pairs = this.newWith(<(literal.(type))("1")>, 2, <(literal.(type))("2")>, 3, <(literal.(type))("3")>, 4);
+        MutableBiMap\<String, String> biMap = pairs.toBiMap(String::valueOf, String::valueOf);
+        Assert.assertEquals(HashBiMap.newWithKeysValues("<(toStringLiteral.(type))("1")>:2", "<(toStringLiteral.(type))("1")>:2", "<(toStringLiteral.(type))("2")>:3", "<(toStringLiteral.(type))("2")>:3", "<(toStringLiteral.(type))("3")>:4", "<(toStringLiteral.(type))("3")>:4"), biMap);
     }
 
     @Test

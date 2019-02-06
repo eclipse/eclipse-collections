@@ -28,6 +28,7 @@ import org.eclipse.collections.api.bag.primitive.MutableIntBag;
 import org.eclipse.collections.api.bag.primitive.MutableLongBag;
 import org.eclipse.collections.api.bag.primitive.MutableShortBag;
 import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
+import org.eclipse.collections.api.bimap.MutableBiMap;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.block.function.Function2;
@@ -562,6 +563,14 @@ public class UnmodifiableMutableMap<K, V>
             Function<? super V, ? extends NV> valueFunction)
     {
         return this.getMutableMap().toSortedMapBy(sortBy, keyFunction, valueFunction);
+    }
+
+    @Override
+    public <NK, NV> MutableBiMap<NK, NV> toBiMap(
+            Function<? super V, ? extends NK> keyFunction,
+            Function<? super V, ? extends NV> valueFunction)
+    {
+        return this.getMutableMap().toBiMap(keyFunction, valueFunction);
     }
 
     @Override

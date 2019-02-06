@@ -21,6 +21,7 @@ import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.Bag;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
+import org.eclipse.collections.api.bimap.MutableBiMap;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.block.function.Function2;
@@ -65,6 +66,7 @@ import org.eclipse.collections.impl.block.factory.Predicates2;
 import org.eclipse.collections.impl.block.factory.Procedures;
 import org.eclipse.collections.impl.block.factory.Procedures2;
 import org.eclipse.collections.impl.block.procedure.AppendStringProcedure;
+import org.eclipse.collections.impl.block.procedure.BiMapCollectProcedure;
 import org.eclipse.collections.impl.block.procedure.CollectIfProcedure;
 import org.eclipse.collections.impl.block.procedure.CollectProcedure;
 import org.eclipse.collections.impl.block.procedure.CountProcedure;
@@ -100,6 +102,7 @@ import org.eclipse.collections.impl.block.procedure.primitive.InjectIntoFloatPro
 import org.eclipse.collections.impl.block.procedure.primitive.InjectIntoIntProcedure;
 import org.eclipse.collections.impl.block.procedure.primitive.InjectIntoLongProcedure;
 import org.eclipse.collections.impl.factory.Bags;
+import org.eclipse.collections.impl.factory.BiMaps;
 import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.Maps;
 import org.eclipse.collections.impl.factory.Sets;
@@ -272,6 +275,16 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
             Function<? super T, ? extends V> valueFunction)
     {
         return this.toSortedMap(Comparators.byFunction(sortBy), keyFunction, valueFunction);
+    }
+
+    @Override
+    public <K, V> MutableBiMap<K, V> toBiMap(
+            Function<? super T, ? extends K> keyFunction,
+            Function<? super T, ? extends V> valueFunction)
+    {
+        MutableBiMap<K, V> biMap = BiMaps.mutable.empty();
+        this.forEach(new BiMapCollectProcedure<>(biMap, keyFunction, valueFunction));
+        return biMap;
     }
 
     @Override
