@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018 Goldman Sachs and others.
+ * Copyright (c) 2019 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -11,6 +11,8 @@
 package org.eclipse.collections.api.map;
 
 import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
 
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.block.function.Function;
@@ -65,6 +67,20 @@ public interface MutableMapIterable<K, V> extends MapIterable<K, V>, Map<K, V>
      * @see #remove(Object)
      */
     V removeKey(K key);
+
+    /**
+     * Remove entries from the map at the specified {@code keys}.
+     *
+     * @return <tt>true</tt> if this map changed as a result of the call
+     * @since 10.0
+     */
+    default boolean removeAllKeys(Set<? extends K> keys)
+    {
+        Objects.requireNonNull(keys);
+        int previousSize = this.size();
+        keys.forEach(this::removeKey);
+        return previousSize != this.size();
+    }
 
     /**
      * Remove an entry from the map if the {@code predicate} evaluates to true.

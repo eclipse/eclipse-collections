@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018 Goldman Sachs.
+ * Copyright (c) 2019 Goldman Sachs.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -11,6 +11,7 @@
 package org.eclipse.collections.api.map;
 
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
@@ -50,6 +51,12 @@ public interface FixedSizeMap<K, V>
      */
     @Override
     V removeKey(K key);
+
+    /**
+     * @throws UnsupportedOperationException the {@code removeAllKeys} operation is not supported by this map.
+     */
+    @Override
+    boolean removeAllKeys(Set<? extends K> keys);
 
     /**
      * @throws UnsupportedOperationException the {@code removeIf} operation is not supported by this map.
