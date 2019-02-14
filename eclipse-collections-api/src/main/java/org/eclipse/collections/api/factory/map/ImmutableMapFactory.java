@@ -13,6 +13,7 @@ package org.eclipse.collections.api.factory.map;
 import java.util.Map;
 
 import org.eclipse.collections.api.map.ImmutableMap;
+import org.eclipse.collections.api.map.builder.MapBuilder;
 
 public interface ImmutableMapFactory
 {
@@ -67,4 +68,6 @@ public interface ImmutableMapFactory
     <K, V> ImmutableMap<K, V> ofAll(Map<K, V> map);
 
     <K, V> ImmutableMap<K, V> withAll(Map<K, V> map);
+
+    <K, V> MapBuilder<K, V> newBuilderWith(K key, V value);
 }

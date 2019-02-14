@@ -12,9 +12,12 @@ package org.eclipse.collections.impl.map.immutable;
 
 import java.util.Map;
 
+import org.eclipse.collections.api.factory.Maps;
 import org.eclipse.collections.api.factory.map.ImmutableMapFactory;
 import org.eclipse.collections.api.map.ImmutableMap;
+import org.eclipse.collections.api.map.builder.MapBuilder;
 import org.eclipse.collections.impl.block.factory.Comparators;
+import org.eclipse.collections.impl.map.builder.MapBuilderImpl;
 
 public class ImmutableMapFactoryImpl implements ImmutableMapFactory
 {
@@ -183,5 +186,11 @@ public class ImmutableMapFactoryImpl implements ImmutableMapFactory
             default:
                 throw new AssertionError();
         }
+    }
+
+    @Override
+    public <K, V> MapBuilder<K, V> newBuilderWith(K key, V value)
+    {
+        return new MapBuilderImpl<>(Maps.mutable.with(key, value));
     }
 }

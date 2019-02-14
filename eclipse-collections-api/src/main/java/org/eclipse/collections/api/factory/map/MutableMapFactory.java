@@ -14,6 +14,7 @@ import java.util.Map;
 
 import org.eclipse.collections.api.map.MapIterable;
 import org.eclipse.collections.api.map.MutableMap;
+import org.eclipse.collections.api.map.builder.MapBuilder;
 
 public interface MutableMapFactory
 {
@@ -77,4 +78,6 @@ public interface MutableMapFactory
     <K, V> MutableMap<K, V> ofMapIterable(MapIterable<? extends K, ? extends V> mapIterable);
 
     <K, V> MutableMap<K, V> withMapIterable(MapIterable<? extends K, ? extends V> mapIterable);
+
+    <K, V> MapBuilder<K, V> newBuilderWith(K key, V value);
 }

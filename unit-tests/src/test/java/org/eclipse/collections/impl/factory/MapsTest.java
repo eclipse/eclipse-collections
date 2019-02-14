@@ -20,6 +20,7 @@ import org.eclipse.collections.api.factory.map.sorted.MutableSortedMapFactory;
 import org.eclipse.collections.api.map.FixedSizeMap;
 import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.api.map.MutableMap;
+import org.eclipse.collections.api.map.builder.MapBuilder;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.test.domain.Key;
@@ -93,8 +94,8 @@ public class MapsTest
         Assert.assertEquals(Maps.fixedSize.of(1, "One", 2, "Dos", 3, "Drei"), Maps.immutable.ofAll(UnifiedMap.newWithKeysValues(1, "One", 2, "Dos", 3, "Drei")));
         Verify.assertInstanceOf(ImmutableMap.class, Maps.immutable.ofAll(UnifiedMap.newWithKeysValues(1, "One", 2, "Dos", 3, "Drei")));
 
-        Assert.assertEquals(UnifiedMap.newWithKeysValues(1, "One", 2, "Dos", 3, "Drei", 4, "Quatro"), Maps.immutable.ofAll(UnifiedMap.newWithKeysValues(1, "One", 2, "Dos", 3, "Drei", 4, "Quatro")));
-        Verify.assertInstanceOf(ImmutableMap.class, Maps.immutable.ofAll(UnifiedMap.newWithKeysValues(1, "One", 2, "Dos", 3, "Drei", 4, "Quatro")));
+        Assert.assertEquals(UnifiedMap.newWithKeysValues(1, "One", 2, "Dos", 3, "Drei", 4, "Quattro"), Maps.immutable.ofAll(UnifiedMap.newWithKeysValues(1, "One", 2, "Dos", 3, "Drei", 4, "Quattro")));
+        Verify.assertInstanceOf(ImmutableMap.class, Maps.immutable.ofAll(UnifiedMap.newWithKeysValues(1, "One", 2, "Dos", 3, "Drei", 4, "Quattro")));
     }
 
     @Test
@@ -267,5 +268,52 @@ public class MapsTest
 
         Assert.assertEquals(UnifiedMap.newMapWith(Tuples.pair(1, 1)), factory.ofMapIterable(Maps.mutable.with(1, 1)));
         Verify.assertInstanceOf(UnifiedMap.class, factory.ofMapIterable(Maps.mutable.with(1, 1)));
+    }
+
+    @Test
+    public void builder()
+    {
+        MapBuilder<Integer, Integer> builder = Maps.mutable.newBuilderWith(-1, -1);
+        for (int i = 1; i <= 5; i++)
+        {
+            builder.and(i, i);
+            ImmutableMap<Integer, Integer> builtMap = builder.build();
+            Verify.assertSize(i + 1, builtMap); // + 1 for the initial type-setting entry
+        }
+        Verify.assertSize(6, builder.build());
+        Verify.assertMapsEqual(builder.build().toMap(), builder.buildMutable());
+    }
+
+    @Test
+    public void builderConstructionContainsExpectedValues()
+    {
+        MutableMap<Integer, Integer> map = Maps.mutable
+                .newBuilderWith(0, 0)
+                .and(1, 1)
+                .and(2, 2)
+                .and(3, 3)
+                .and(4, 4)
+                .buildMutable();
+
+        Verify.assertSize(5, map);
+        for (int i = 0; i < 5; i++)
+        {
+            Verify.assertContainsKeyValue(i, i, map);
+        }
+    }
+
+    @Test
+    public void builderObeysMapConstructs()
+    {
+        MutableMap<Integer, String> map = Maps.mutable
+                .newBuilderWith(1, "One")
+                .and(2, "Dos")
+                .and(3, "Drei")
+                .and(4, "Quattro")
+                .and(5, "Cinco")    //Confirm this gets overwritten.
+                .and(5, "Fem")      //We already had Spanish ;)
+                .buildMutable();
+        Verify.assertSize(5, map);
+        Verify.assertContainsAllKeyValues(map, 1, "One", 2, "Dos", 3, "Drei", 4, "Quattro", 5, "Fem");
     }
 }
