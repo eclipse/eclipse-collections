@@ -63,8 +63,8 @@ public final class Maps
     /**
      * @since 9.0.
      */
-    public static <K, V> MutableMap<K, V> adapt(Map<K, V> list)
+    public static <K, V> MutableMap<K, V> adapt(Map<K, V> map)
     {
-        return MapAdapter.adapt(list);
+        return MapAdapter.adapt(map);
     }
 }
