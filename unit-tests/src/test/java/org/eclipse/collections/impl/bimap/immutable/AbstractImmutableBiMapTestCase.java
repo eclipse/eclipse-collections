@@ -10,7 +10,12 @@
 
 package org.eclipse.collections.impl.bimap.immutable;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.eclipse.collections.api.bimap.ImmutableBiMap;
+import org.eclipse.collections.impl.block.factory.Functions;
+import org.eclipse.collections.impl.factory.BiMaps;
 import org.eclipse.collections.impl.map.immutable.ImmutableMapIterableTestCase;
 import org.junit.Assert;
 import org.junit.Test;
@@ -76,5 +81,21 @@ public abstract class AbstractImmutableBiMapTestCase extends ImmutableMapIterabl
     public void toImmutable()
     {
         Assert.assertEquals(this.classUnderTest(), this.classUnderTest().toImmutable());
+    }
+
+    @Test
+    public void toMapTarget()
+    {
+        ImmutableBiMap<String, String> immutableBiMap = BiMaps.immutable.with("1", "1", "2", "2", "3", "3", "4", "4");
+
+        Map<String, String> expectedMap = new HashMap<>();
+        expectedMap.put("1", "1");
+        expectedMap.put("2", "2");
+        expectedMap.put("3", "3");
+        expectedMap.put("4", "4");
+
+        Map<String, String> actualMap = (Map<String, String>) immutableBiMap.toMap(Functions.getPassThru(), Functions.getPassThru(), expectedMap);
+
+        Assert.assertEquals(expectedMap, actualMap);
     }
 }

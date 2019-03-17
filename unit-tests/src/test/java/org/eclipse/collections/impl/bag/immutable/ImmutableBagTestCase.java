@@ -13,8 +13,10 @@ package org.eclipse.collections.impl.bag.immutable;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
@@ -1466,6 +1468,26 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
         super.toMap();
 
         MutableMap<String, String> map = this.newBag().toMap(Functions.getPassThru(), Functions.getPassThru());
+
+        for (int i = 1; i <= this.numKeys(); i++)
+        {
+            String key = String.valueOf(i);
+            Assert.assertTrue(map.containsKey(key));
+            Assert.assertEquals(key, map.get(key));
+        }
+
+        String missingKey = "0";
+        Assert.assertFalse(map.containsKey(missingKey));
+        Assert.assertNull(map.get(missingKey));
+    }
+
+    @Override
+    @Test
+    public void toMapTarget()
+    {
+        super.toMapTarget();
+
+        Map<String, String> map = this.newBag().toMap(Functions.getPassThru(), Functions.getPassThru(), new HashMap<>());
 
         for (int i = 1; i <= this.numKeys(); i++)
         {

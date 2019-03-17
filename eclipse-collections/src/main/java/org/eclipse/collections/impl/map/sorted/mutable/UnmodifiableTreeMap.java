@@ -13,6 +13,7 @@ package org.eclipse.collections.impl.map.sorted.mutable;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.SortedMap;
@@ -575,6 +576,15 @@ public class UnmodifiableTreeMap<K, V>
             Function<? super V, ? extends NV> valueFunction)
     {
         return this.getMutableSortedMap().toMap(keyFunction, valueFunction);
+    }
+
+    @Override
+    public <NK, NV, R extends Map<NK, NV>> R toMap(
+            Function<? super V, ? extends NK> keyFunction,
+            Function<? super V, ? extends NV> valueFunction,
+            R target)
+    {
+        return this.getMutableSortedMap().toMap(keyFunction, valueFunction, target);
     }
 
     @Override

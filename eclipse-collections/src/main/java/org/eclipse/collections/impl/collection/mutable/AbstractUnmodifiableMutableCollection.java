@@ -13,6 +13,7 @@ package org.eclipse.collections.impl.collection.mutable;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Optional;
 
 import org.eclipse.collections.api.LazyIterable;
@@ -826,6 +827,15 @@ public class AbstractUnmodifiableMutableCollection<T> implements MutableCollecti
             Function<? super T, ? extends NV> valueFunction)
     {
         return this.getMutableCollection().toMap(keyFunction, valueFunction);
+    }
+
+    @Override
+    public <NK, NV, R extends Map<NK, NV>> R toMap(
+            Function<? super T, ? extends NK> keyFunction,
+            Function<? super T, ? extends NV> valueFunction,
+            R target)
+    {
+        return this.getMutableCollection().toMap(keyFunction, valueFunction, target);
     }
 
     @Override

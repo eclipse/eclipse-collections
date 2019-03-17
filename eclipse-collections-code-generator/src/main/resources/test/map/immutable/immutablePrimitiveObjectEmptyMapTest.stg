@@ -20,7 +20,9 @@ body(type, name) ::= <<
 package org.eclipse.collections.impl.map.immutable.primitive;
 
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -34,6 +36,7 @@ import org.eclipse.collections.api.map.primitive.Immutable<name>ObjectMap;
 import org.eclipse.collections.api.partition.PartitionIterable;
 import org.eclipse.collections.impl.bag.sorted.mutable.TreeBag;
 import org.eclipse.collections.impl.block.factory.Comparators;
+import org.eclipse.collections.impl.block.factory.Functions;
 import org.eclipse.collections.impl.block.factory.Functions0;
 import org.eclipse.collections.impl.block.factory.Predicates;
 import org.eclipse.collections.impl.block.factory.Procedures;
@@ -717,6 +720,32 @@ public class Immutable<name>ObjectEmptyMapTest extends AbstractImmutable<name>Ob
         sortedBag.addOccurrences(10, 2);
 
         Verify.assertSortedBagsEqual(TreeBag.newBagWith(Comparators.byFunction(function), 10, 10, 1, 1, 1), sortedBag);
+    }
+
+    @Test
+    public void toMapTarget()
+    {
+        Immutable<name>ObjectMap\<String> map = this.newWithKeysValues(<(literal.(type))("0")>, "a", <(literal.(type))("9")>, "abcd");
+        Immutable<name>ObjectMap\<String> map1 = new Immutable<name>ObjectEmptyMap\<>();
+
+        Function\<String, String> keyStringFunction = (Function\<String, String>) each -> String.valueOf(each.length());
+        Function\<String, Long> keyLongFunction = (Function\<String, Long>) each -> Long.valueOf(each.length());
+        Function\<String, String> valueFunction = Functions.getPassThru();
+
+        Map\<String, String> targetMap1 = new HashMap\<>();
+        targetMap1.put("1", "a");
+        targetMap1.put("4", "abcd");
+
+        Map\<Long, String> targetMap2 = new HashMap\<>();
+        targetMap2.put(1L, "a");
+        targetMap2.put(4L, "abcd");
+
+        Map\<Long, String> targetMap3 = new HashMap\<>();
+
+        Assert.assertEquals(targetMap1, map.toMap(keyStringFunction, valueFunction, new HashMap\<String, String>()));
+        Assert.assertEquals(targetMap2, map.toMap(keyLongFunction, valueFunction, new HashMap\<Long, String>()));
+        Assert.assertEquals(targetMap3, map1.toMap(keyLongFunction, valueFunction, new HashMap\<Long, String>()));
+        Assert.assertTrue(map.toMap(keyLongFunction, valueFunction, new HashMap\<Long, String>()) instanceof HashMap);
     }
 
     @Test

@@ -16,10 +16,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.Set;
@@ -786,6 +788,21 @@ public class IterateTest
         Verify.assertContainsKeyValue("3", 3, map);
         Verify.assertContainsKeyValue("4", 4, map);
         Verify.assertContainsKeyValue("5", 5, map);
+    }
+
+    @Test
+    public void toMapTarget()
+    {
+        MutableSet<Integer> set = UnifiedSet.newSet(this.getIntegerSet());
+        Map<String, Integer> map =  Iterate.toMap(set, String::valueOf, object -> 10 * object, new HashMap<>());
+        Verify.assertSize(5, map);
+        Object expectedValue = 10;
+        Object expectedKey = "1";
+        Verify.assertContainsKeyValue(expectedKey, expectedValue, map);
+        Verify.assertContainsKeyValue("2", 20, map);
+        Verify.assertContainsKeyValue("3", 30, map);
+        Verify.assertContainsKeyValue("4", 40, map);
+        Verify.assertContainsKeyValue("5", 50, map);
     }
 
     @Test

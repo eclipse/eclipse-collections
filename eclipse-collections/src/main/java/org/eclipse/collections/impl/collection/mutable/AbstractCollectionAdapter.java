@@ -13,6 +13,7 @@ package org.eclipse.collections.impl.collection.mutable;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Optional;
 
 import org.eclipse.collections.api.LazyIterable;
@@ -69,6 +70,7 @@ import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.block.factory.Predicates2;
 import org.eclipse.collections.impl.block.factory.PrimitiveFunctions;
 import org.eclipse.collections.impl.block.procedure.BiMapCollectProcedure;
+import org.eclipse.collections.impl.block.procedure.MapCollectProcedure;
 import org.eclipse.collections.impl.block.procedure.MutatingAggregationProcedure;
 import org.eclipse.collections.impl.block.procedure.NonMutatingAggregationProcedure;
 import org.eclipse.collections.impl.factory.BiMaps;
@@ -805,6 +807,16 @@ public abstract class AbstractCollectionAdapter<T>
         UnifiedMap<K, V> map = UnifiedMap.newMap(this.size());
         map.collectKeysAndValues(this.getDelegate(), keyFunction, valueFunction);
         return map;
+    }
+
+    @Override
+    public <K, V, R extends Map<K, V>> R toMap(
+            Function<? super T, ? extends K> keyFunction,
+            Function<? super T, ? extends V> valueFunction,
+            R target)
+    {
+        Iterate.forEach(this.getDelegate(), new MapCollectProcedure<>(target, keyFunction, valueFunction));
+        return target;
     }
 
     @Override

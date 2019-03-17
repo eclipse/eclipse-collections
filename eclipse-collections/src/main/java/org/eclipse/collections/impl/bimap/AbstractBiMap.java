@@ -293,6 +293,12 @@ public abstract class AbstractBiMap<K, V> implements BiMap<K, V>
     }
 
     @Override
+    public <NK, NV, R extends Map<NK, NV>> R toMap(Function<? super V, ? extends NK> keyFunction, Function<? super V, ? extends NV> valueFunction, R target)
+    {
+        return this.getDelegate().toMap(keyFunction, valueFunction, target);
+    }
+
+    @Override
     public <NK, NV> MutableSortedMap<NK, NV> toSortedMap(Function<? super V, ? extends NK> keyFunction, Function<? super V, ? extends NV> valueFunction)
     {
         return this.getDelegate().toSortedMap(keyFunction, valueFunction);
