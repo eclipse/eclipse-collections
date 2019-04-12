@@ -620,9 +620,39 @@ public abstract class AbstractRichIterableTestCase
     }
 
     @Test
+    public void minOptional()
+    {
+        Assert.assertEquals(
+                Integer.valueOf(1),
+                this.newWith(1, 3, 2).minOptional().get());
+        Assert.assertEquals(
+                Integer.valueOf(1),
+                this.newWith(1, 3, 2).minOptional(Integer::compareTo).get());
+        Assert.assertFalse(
+                this.<Integer>newWith().minOptional().isPresent());
+        Assert.assertFalse(
+                this.<Integer>newWith().minOptional(Integer::compareTo).isPresent());
+    }
+
+    @Test
     public void max()
     {
         Assert.assertEquals(Integer.valueOf(3), this.newWith(1, 3, 2).max(Integer::compareTo));
+    }
+
+    @Test
+    public void maxOptional()
+    {
+        Assert.assertEquals(
+                Integer.valueOf(3),
+                this.newWith(1, 3, 2).maxOptional().get());
+        Assert.assertEquals(
+                Integer.valueOf(3),
+                this.newWith(1, 3, 2).maxOptional(Integer::compareTo).get());
+        Assert.assertFalse(
+                this.<Integer>newWith().maxOptional().isPresent());
+        Assert.assertFalse(
+                this.<Integer>newWith().maxOptional(Integer::compareTo).isPresent());
     }
 
     @Test(expected = NullPointerException.class)
