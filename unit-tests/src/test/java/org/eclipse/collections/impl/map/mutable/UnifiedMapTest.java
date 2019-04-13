@@ -571,6 +571,19 @@ public class UnifiedMapTest extends UnifiedMapTestCase
 
     @Override
     @Test
+    public void detectOptional()
+    {
+        super.detectOptional();
+
+        UnifiedMap<Integer, String> collisions = UnifiedMap.<Integer, String>newMap().withKeysValues(COLLISION_1, "one", COLLISION_2, "two", COLLISION_3, "three");
+        Assert.assertFalse(collisions.detectOptional((key, value) -> COLLISION_4.equals(key) && "four".equals(value)).isPresent());
+        Assert.assertEquals(
+                Tuples.pair(COLLISION_1, "one"),
+                collisions.detectOptional((key, value) -> COLLISION_1.equals(key) && "one".equals(value)).get());
+    }
+
+    @Override
+    @Test
     public void detect_value()
     {
         super.detect_value();
@@ -578,6 +591,17 @@ public class UnifiedMapTest extends UnifiedMapTestCase
         UnifiedMap<Integer, String> collisions = UnifiedMap.<Integer, String>newMap().withKeysValues(COLLISION_1, "one", COLLISION_2, "two", COLLISION_3, "three");
         Assert.assertNull(collisions.detect("four"::equals));
         Assert.assertEquals("one", collisions.detect("one"::equals));
+    }
+
+    @Override
+    @Test
+    public void detectOptional_value()
+    {
+        super.detectOptional_value();
+
+        UnifiedMap<Integer, String> collisions = UnifiedMap.<Integer, String>newMap().withKeysValues(COLLISION_1, "one", COLLISION_2, "two", COLLISION_3, "three");
+        Assert.assertFalse(collisions.detectOptional("four"::equals).isPresent());
+        Assert.assertEquals("one", collisions.detectOptional("one"::equals).get());
     }
 
     @Override
@@ -596,6 +620,24 @@ public class UnifiedMapTest extends UnifiedMapTestCase
                 collisions.detectWith(
                         (String value, String parameter) -> "value is one".equals(parameter + value),
                         "value is "));
+    }
+
+    @Override
+    @Test
+    public void detectWithOptional()
+    {
+        super.detectWithOptional();
+
+        UnifiedMap<Integer, String> collisions = UnifiedMap.<Integer, String>newMap().withKeysValues(COLLISION_1, "one", COLLISION_2, "two", COLLISION_3, "three");
+        Assert.assertFalse(
+                collisions.detectWithOptional(
+                        (String value, String parameter) -> "value is four".equals(parameter + value),
+                        "value is ").isPresent());
+        Assert.assertEquals(
+                "one",
+                collisions.detectWithOptional(
+                        (String value, String parameter) -> "value is one".equals(parameter + value),
+                        "value is ").get());
     }
 
     @Override
