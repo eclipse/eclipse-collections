@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2019 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -495,6 +495,18 @@ public class RandomAccessListIterateTest
     public void corresponds_throws_nonRandomAccess()
     {
         RandomAccessListIterate.corresponds(new LinkedList<>(), FastList.newList(), Predicates2.alwaysTrue());
+    }
+
+    @Test
+    public void zip()
+    {
+        List<Integer> integers = Interval.oneTo(3);
+        List<Twin<Integer>> expected = Lists.mutable.with(
+                Tuples.twin(1, 1),
+                Tuples.twin(2, 2),
+                Tuples.twin(3, 3));
+        Assert.assertEquals(expected, RandomAccessListIterate.zip(integers, integers));
+        Assert.assertEquals(expected, RandomAccessListIterate.zip(integers, integers::iterator));
     }
 
     private static class FailProcedure2 implements Procedure2<Object, Integer>

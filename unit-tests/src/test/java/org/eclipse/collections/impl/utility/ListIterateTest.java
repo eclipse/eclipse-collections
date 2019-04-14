@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2019 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -732,6 +732,18 @@ public class ListIterateTest
         MutableList<Integer> objects = FastList.newListWith(1, 2, 3, 4);
         ListIterate.removeIfWith(objects, Predicates2.lessThan(), 3);
         Assert.assertEquals(FastList.newListWith(3, 4), objects);
+    }
+
+    @Test
+    public void zip()
+    {
+        List<Integer> integers = Interval.oneTo(3);
+        List<Twin<Integer>> expected = Lists.mutable.with(
+                Tuples.twin(1, 1),
+                Tuples.twin(2, 2),
+                Tuples.twin(3, 3));
+        Assert.assertEquals(expected, ListIterate.zip(integers, integers));
+        Assert.assertEquals(expected, ListIterate.zip(integers, integers::iterator));
     }
 
     @Test
