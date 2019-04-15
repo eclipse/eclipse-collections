@@ -17,7 +17,6 @@ body(type, name) ::= <<
 package org.eclipse.collections.impl.list.mutable.primitive;
 
 import java.util.Collection;
-import java.util.Collections;
 
 import org.eclipse.collections.api.<name>Iterable;
 import org.eclipse.collections.api.Lazy<name>Iterable;
@@ -26,7 +25,6 @@ import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFuncti
 import org.eclipse.collections.api.block.function.primitive.Object<name>IntToObjectFunction;
 import org.eclipse.collections.api.block.predicate.primitive.<name>Predicate;
 import org.eclipse.collections.api.block.procedure.primitive.<name>IntProcedure;
-import org.eclipse.collections.api.iterator.<name>Iterator;
 import org.eclipse.collections.api.list.MutableList;
 <if(!primitive.booleanPrimitive)>import org.eclipse.collections.api.list.primitive.<name>List;<endif>
 import org.eclipse.collections.api.list.primitive.Immutable<name>List;
@@ -37,10 +35,13 @@ import org.eclipse.collections.impl.collection.mutable.primitive.AbstractSynchro
 import org.eclipse.collections.impl.factory.primitive.<name>Lists;
 import org.eclipse.collections.impl.lazy.primitive.Lazy<name>IterableAdapter;
 import org.eclipse.collections.impl.lazy.primitive.Reverse<name>Iterable;
+<if(primitive.specializedStream)>
+import java.util.Spliterator;<endif>
+
 
 /**
- * A synchronized view of a {@link Mutable<name>List}. It is imperative that the user manually synchronize on the collection when iterating over it using the
- * {@link <name>Iterator}, as per {@link Collections#synchronizedCollection(Collection)}.
+ * A synchronized view of a {@link Mutable<name>List}. It is imperative that the user manually synchronize on the on the
+ * collection when iterating over it using an iterator or stream.
  * \<p>
  * This file was automatically generated from template file synchronizedPrimitiveList.stg.
  *
@@ -409,6 +410,17 @@ public class Synchronized<name>List
             return this.getMutable<name>List().collectWithIndex(function, target);
         }
     }
+<if(primitive.specializedStream)>
+
+    /**
+    * This function needs to be synchronized manually
+    */
+    @Override
+    public Spliterator.Of<name> spliterator()
+    {
+        return this.getMutable<name>List().spliterator();
+    }
+<endif>
 }
 
 >>

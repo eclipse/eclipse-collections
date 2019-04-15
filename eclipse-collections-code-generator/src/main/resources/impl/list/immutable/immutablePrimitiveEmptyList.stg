@@ -44,6 +44,10 @@ import org.eclipse.collections.impl.lazy.primitive.Lazy<name>IterableAdapter;
 import org.eclipse.collections.impl.lazy.primitive.Reverse<name>Iterable;
 import org.eclipse.collections.impl.list.mutable.primitive.<name>ArrayList;
 import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
+<if(primitive.specializedStream)>
+import java.util.Spliterator;
+import java.util.Spliterators;<endif>
+
 
 /**
  * Immutable<name>EmptyList is an optimization for {@link Immutable<name>List} of size 0.
@@ -389,6 +393,14 @@ final class Immutable<name>EmptyList implements Immutable<name>List, Serializabl
     {
         return Lists.immutable.empty();
     }
+<if(primitive.specializedStream)>
+
+    @Override
+    public Spliterator.Of<name> spliterator()
+    {
+        return Spliterators.empty<name>Spliterator();
+    }
+<endif>
 }
 
 >>

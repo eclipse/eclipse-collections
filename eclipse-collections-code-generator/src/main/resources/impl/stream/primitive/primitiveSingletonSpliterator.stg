@@ -1,0 +1,74 @@
+import "copyrightAndOthers.stg"
+
+forSpecializedStream() ::= "true"
+
+targetPath() ::= "org/eclipse/collections/impl/stream/primitive"
+
+fileName(primitive) ::= "<primitive.name>SingletonSpliterator"
+
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name)>
+>>
+
+body(type, name) ::= <<
+<copyrightAndOthers()>
+
+package org.eclipse.collections.impl.stream.primitive;
+
+import java.util.Spliterator;
+import java.util.function.<name>Consumer;
+
+/**
+ * <name>SingletonSpliterator is a specialized spliterator of type <type>.
+ * This file was automatically generated from template file primitiveSingletonSpliterator.stg.
+ *
+ * @since 10.0
+ */
+public final class <name>SingletonSpliterator implements Spliterator.Of<name>
+{
+    private final <type> elem;
+    private boolean visited = false;
+
+    public <name>SingletonSpliterator(<type> elem)
+    {
+        this.elem = elem;
+    }
+
+    @Override
+    public Of<name> trySplit()
+    {
+        return null;
+    }
+
+    @Override
+    public long estimateSize()
+    {
+        if (this.visited)
+        {
+            return 0;
+        }
+        return 1;
+    }
+
+    @Override
+    public int characteristics()
+    {
+        return Spliterator.SIZED | Spliterator.SUBSIZED | Spliterator.IMMUTABLE | Spliterator.DISTINCT | Spliterator.ORDERED;
+    }
+
+    @Override
+    public boolean tryAdvance(<name>Consumer action)
+    {
+        if (this.visited)
+        {
+            return false;
+        }
+
+        visited = true;
+        action.accept(elem);
+        return true;
+    }
+}
+
+>>

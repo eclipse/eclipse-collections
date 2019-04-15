@@ -184,6 +184,20 @@ public class <name>ListsTest
         Assert.assertEquals(<name>ArrayList.newListWith(<["1", "2"]:(literal.(type))(); separator=", ">), <name>Lists.mutable.ofAll(Lists.mutable.\<<wrapperName>\>with(<["1", "2"]:(literal.(type))(); separator=", ">)));
         Assert.assertEquals(<name>ArrayList.newListWith(<["1", "2", "3"]:(literal.(type))(); separator=", ">), <name>Lists.mutable.ofAll(Lists.mutable.\<<wrapperName>\>with(<["1", "2", "3"]:(literal.(type))(); separator=", ">)));
     }
+<if(primitive.specializedStream)>
+
+    @Test
+    public void primitiveStream()
+    {
+        Assert.assertEquals(false, <name>Lists.immutable.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12).primitiveStream().isParallel());
+    }
+
+    @Test
+    public void primitiveParallelStream()
+    {
+        Assert.assertEquals(true, <name>Lists.immutable.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12).primitiveParallelStream().isParallel());
+    }
+<endif>
 }
 
 >>

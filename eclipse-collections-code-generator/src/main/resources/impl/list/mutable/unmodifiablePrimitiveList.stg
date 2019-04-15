@@ -34,6 +34,9 @@ import org.eclipse.collections.api.list.primitive.Mutable<name>List;
 import org.eclipse.collections.impl.collection.mutable.primitive.AbstractUnmodifiable<name>Collection;
 import org.eclipse.collections.impl.factory.primitive.<name>Lists;
 import org.eclipse.collections.impl.lazy.primitive.Reverse<name>Iterable;
+<if(primitive.specializedStream)>
+import java.util.Spliterator;<endif>
+
 
 /**
  * This file was automatically generated from template file unmodifiablePrimitiveList.stg.
@@ -289,6 +292,14 @@ public class Unmodifiable<name>List
     {
         return this.getMutable<name>List().collectWithIndex(function, target);
     }
+<if(primitive.specializedStream)>
+
+    @Override
+    public Spliterator.Of<name> spliterator()
+    {
+        return this.getMutable<name>List().spliterator();
+    }
+<endif>
 }
 
 >>
