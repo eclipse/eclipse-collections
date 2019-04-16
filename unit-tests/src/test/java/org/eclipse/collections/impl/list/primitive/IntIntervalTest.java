@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018 Goldman Sachs and others.
+ * Copyright (c) 2019 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -19,6 +19,7 @@ import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.iterator.IntIterator;
 import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
+import org.eclipse.collections.api.list.primitive.ImmutableIntList;
 import org.eclipse.collections.api.list.primitive.MutableIntList;
 import org.eclipse.collections.api.tuple.primitive.IntIntPair;
 import org.eclipse.collections.api.tuple.primitive.IntObjectPair;
@@ -912,5 +913,48 @@ public class IntIntervalTest
         Assert.assertEquals(Lists.mutable.of(10, 15, 20, 25, 30), IntInterval.fromToBy(10, 30, 5).primitiveParallelStream().boxed().collect(Collectors.toList()));
         Assert.assertEquals(Lists.mutable.of(30, 25, 20, 15, 10), IntInterval.fromToBy(30, 10, -5).primitiveParallelStream().boxed().collect(Collectors.toList()));
         Assert.assertEquals(Lists.mutable.of(-1, 10, 21, 32, 43, 54, 65, 76, 87, 98), IntInterval.fromToBy(-1, 100, 11).primitiveParallelStream().boxed().collect(Collectors.toList()));
+    }
+
+    @Test
+    public void toImmutable()
+    {
+        IntInterval interval = IntInterval.oneTo(5);
+        Assert.assertSame(interval, interval.toImmutable());
+    }
+
+    @Test
+    public void newWith()
+    {
+        IntInterval interval = IntInterval.oneTo(4);
+        ImmutableIntList list = interval.newWith(5);
+        Assert.assertNotSame(interval, list);
+        Assert.assertEquals(IntInterval.oneTo(5), list);
+    }
+
+    @Test
+    public void newWithout()
+    {
+        IntInterval interval = IntInterval.oneTo(5);
+        ImmutableIntList list = interval.newWithout(5);
+        Assert.assertNotSame(interval, list);
+        Assert.assertEquals(IntInterval.oneTo(4), list);
+    }
+
+    @Test
+    public void newWithAll()
+    {
+        IntInterval interval = IntInterval.oneTo(2);
+        ImmutableIntList list = interval.newWithAll(IntInterval.fromTo(3, 5));
+        Assert.assertNotSame(interval, list);
+        Assert.assertEquals(IntInterval.oneTo(5), list);
+    }
+
+    @Test
+    public void newWithoutAll()
+    {
+        IntInterval interval = IntInterval.oneTo(5);
+        ImmutableIntList list = interval.newWithoutAll(IntInterval.fromTo(3, 5));
+        Assert.assertNotSame(interval, list);
+        Assert.assertEquals(IntInterval.oneTo(2), list);
     }
 }
