@@ -1026,9 +1026,9 @@ public final class IntInterval
 
         private IntIntervalSpliterator(int from, int to, int step)
         {
+            this.current = from;
             this.to = to;
             this.step = step;
-            this.current = from;
             this.isAscending = from <= to;
         }
 
