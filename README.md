@@ -66,6 +66,9 @@ compile 'org.eclipse.collections:eclipse-collections-api:9.2.0'
 compile 'org.eclipse.collections:eclipse-collections:9.2.0'
 ```
 
+### OSGi Bundle
+Eclipse software repository location: http://download.eclipse.org/collections/9.2.0/repository
+
 
 ## Some Quick Examples
 
