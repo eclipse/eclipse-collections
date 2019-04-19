@@ -14,10 +14,15 @@ import org.eclipse.collections.api.iterator.BooleanIterator;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.list.primitive.ImmutableBooleanList;
 import org.eclipse.collections.api.list.primitive.MutableBooleanList;
+import org.eclipse.collections.api.list.primitive.MutableIntList;
+import org.eclipse.collections.api.tuple.primitive.BooleanIntPair;
 import org.eclipse.collections.impl.collection.mutable.primitive.AbstractMutableBooleanCollectionTestCase;
+import org.eclipse.collections.impl.factory.primitive.BooleanLists;
 import org.eclipse.collections.impl.list.mutable.FastList;
+import org.eclipse.collections.impl.list.primitive.IntInterval;
 import org.eclipse.collections.impl.math.MutableInteger;
 import org.eclipse.collections.impl.test.Verify;
+import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -432,5 +437,24 @@ public abstract class AbstractBooleanListTestCase extends AbstractMutableBoolean
     {
         ImmutableBooleanList immutable = this.classUnderTest().toImmutable();
         Assert.assertEquals(BooleanArrayList.newListWith(true, false, true), immutable);
+    }
+
+    @Test
+    public void tap()
+    {
+        MutableBooleanList list = BooleanLists.mutable.empty();
+        this.classUnderTest().tap(list::add);
+        Assert.assertEquals(this.classUnderTest(), list);
+    }
+
+    @Test
+    public void collectWithIndex()
+    {
+        MutableList<BooleanIntPair> pairs =
+                this.classUnderTest().collectWithIndex(PrimitiveTuples::pair);
+        MutableBooleanList list1 = pairs.collectBoolean(BooleanIntPair::getOne);
+        Assert.assertEquals(this.classUnderTest(), list1);
+        MutableIntList list2 = pairs.collectInt(BooleanIntPair::getTwo);
+        Assert.assertEquals(IntInterval.zeroTo(this.classUnderTest().size() - 1), list2);
     }
 }
