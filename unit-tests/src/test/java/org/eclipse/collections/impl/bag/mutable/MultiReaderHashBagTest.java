@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2019 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -17,8 +17,10 @@ import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
+import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.partition.PartitionMutableCollection;
 import org.eclipse.collections.api.set.MutableSet;
+import org.eclipse.collections.api.tuple.primitive.ObjectIntPair;
 import org.eclipse.collections.impl.block.factory.IntegerPredicates;
 import org.eclipse.collections.impl.block.factory.Predicates;
 import org.eclipse.collections.impl.block.factory.Predicates2;
@@ -36,6 +38,7 @@ import org.eclipse.collections.impl.set.mutable.MultiReaderMutableCollectionTest
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.test.SerializeTestHelper;
 import org.eclipse.collections.impl.test.Verify;
+import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -243,10 +246,15 @@ public class MultiReaderHashBagTest extends MultiReaderMutableCollectionTestCase
     @Test
     public void selectByOccurrences()
     {
-        MutableBag<Integer> bag = MultiReaderHashBag.newBagWith(1, 1, 2, 2, 2, 3);
-        MutableBag<Integer> results = bag.selectByOccurrences(IntPredicates.isEven());
+        MultiReaderHashBag<Integer> numbers = MultiReaderHashBag.newBagWith(1, 1, 2, 2, 2, 3);
+        MutableBag<Integer> results = numbers.selectByOccurrences(IntPredicates.isEven());
         Verify.assertSize(2, results);
         MutableBagTestCase.assertBagsEqual(results, MultiReaderHashBag.newBagWith(1, 1));
+        numbers.withReadLockAndDelegate(bag -> {
+            MutableBag<Integer> results2 = bag.selectByOccurrences(IntPredicates.isEven());
+            Verify.assertSize(2, results2);
+            MutableBagTestCase.assertBagsEqual(results2, MultiReaderHashBag.newBagWith(1, 1));
+        });
     }
 
     @Test
@@ -547,5 +555,83 @@ public class MultiReaderHashBagTest extends MultiReaderMutableCollectionTestCase
         MutableSet<String> expected = Sets.mutable.with("0", "4", "5");
         MutableSet<String> actual = bag.selectUnique();
         Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void topOccurrences()
+    {
+        MultiReaderHashBag<Integer> numbers = this.newWith(1, 1, 1, 2, 2, 3, 3);
+        MutableList<ObjectIntPair<Integer>> pairs = numbers.topOccurrences(1);
+        Assert.assertEquals(Integer.valueOf(1), pairs.getFirst().getOne());
+        Assert.assertEquals(3, pairs.getFirst().getTwo());
+        numbers.withReadLockAndDelegate(bag -> {
+            Assert.assertEquals(Integer.valueOf(1), bag.topOccurrences(1).getFirst().getOne());
+            Assert.assertEquals(3, bag.topOccurrences(1).getFirst().getTwo());
+        });
+    }
+
+    @Test
+    public void bottomOccurrences()
+    {
+        MultiReaderHashBag<Integer> numbers = this.newWith(1, 1, 1, 2, 2, 3, 3);
+        MutableList<ObjectIntPair<Integer>> pairs = numbers.bottomOccurrences(1);
+        Verify.assertSize(2, pairs);
+        Verify.assertAnySatisfy(pairs, pair -> pair.getOne().equals(new Integer(2)));
+        Verify.assertAnySatisfy(pairs, pair -> pair.getOne().equals(new Integer(3)));
+        numbers.withReadLockAndDelegate(bag -> {
+            Verify.assertSize(2, bag.bottomOccurrences(1));
+            Verify.assertAnySatisfy(
+                    bag.bottomOccurrences(1), pair -> pair.getOne().equals(new Integer(2)));
+            Verify.assertAnySatisfy(
+                    bag.bottomOccurrences(1), pair -> pair.getOne().equals(new Integer(3)));
+        });
+    }
+
+    @Test
+    public void collectWithOccurrences()
+    {
+        MultiReaderHashBag<Integer> numbers = this.newWith(1, 1, 1, 2, 2, 3, 3);
+        MutableBag<ObjectIntPair<Integer>> pairs =
+                numbers.collectWithOccurrences(PrimitiveTuples::pair);
+        Verify.assertAnySatisfy(pairs, pair -> pair.getOne().equals(new Integer(1))
+                && pair.getTwo() == 3);
+        Verify.assertAnySatisfy(pairs, pair -> pair.getOne().equals(new Integer(2))
+                && pair.getTwo() == 2);
+        Verify.assertAnySatisfy(pairs, pair -> pair.getOne().equals(new Integer(3))
+                && pair.getTwo() == 2);
+        numbers.withReadLockAndDelegate(bag -> {
+            MutableBag<ObjectIntPair<Integer>> pairs2 =
+                    bag.collectWithOccurrences(PrimitiveTuples::pair);
+            Verify.assertAnySatisfy(pairs2, pair -> pair.getOne().equals(new Integer(1))
+                    && pair.getTwo() == 3);
+            Verify.assertAnySatisfy(pairs2, pair -> pair.getOne().equals(new Integer(2))
+                    && pair.getTwo() == 2);
+            Verify.assertAnySatisfy(pairs2, pair -> pair.getOne().equals(new Integer(3))
+                    && pair.getTwo() == 2);
+        });
+    }
+
+    @Test
+    public void collectWithOccurrencesWithTarget()
+    {
+        MultiReaderHashBag<Integer> numbers = this.newWith(1, 1, 1, 2, 2, 3, 3);
+        MutableBag<ObjectIntPair<Integer>> pairs =
+                numbers.collectWithOccurrences(PrimitiveTuples::pair, Bags.mutable.empty());
+        Verify.assertAnySatisfy(pairs, pair -> pair.getOne().equals(new Integer(1))
+                && pair.getTwo() == 3);
+        Verify.assertAnySatisfy(pairs, pair -> pair.getOne().equals(new Integer(2))
+                && pair.getTwo() == 2);
+        Verify.assertAnySatisfy(pairs, pair -> pair.getOne().equals(new Integer(3))
+                && pair.getTwo() == 2);
+        numbers.withReadLockAndDelegate(bag -> {
+            MutableBag<ObjectIntPair<Integer>> pairs2 =
+                    bag.collectWithOccurrences(PrimitiveTuples::pair, Bags.mutable.empty());
+            Verify.assertAnySatisfy(pairs2, pair -> pair.getOne().equals(new Integer(1))
+                    && pair.getTwo() == 3);
+            Verify.assertAnySatisfy(pairs2, pair -> pair.getOne().equals(new Integer(2))
+                    && pair.getTwo() == 2);
+            Verify.assertAnySatisfy(pairs2, pair -> pair.getOne().equals(new Integer(3))
+                    && pair.getTwo() == 2);
+        });
     }
 }
