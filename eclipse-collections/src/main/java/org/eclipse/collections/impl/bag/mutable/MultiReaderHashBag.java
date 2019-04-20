@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018 Goldman Sachs.
+ * Copyright (c) 2019 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -1104,7 +1104,7 @@ public final class MultiReaderHashBag<T>
         @Override
         public <V> MutableBag<V> collectWithOccurrences(ObjectIntToObjectFunction<? super T, ? extends V> function)
         {
-            return this.getDelegate().collectWithOccurrences(function, Bags.mutable.empty());
+            return this.getDelegate().collectWithOccurrences(function);
         }
 
         @Override
@@ -1112,8 +1112,7 @@ public final class MultiReaderHashBag<T>
                 ObjectIntToObjectFunction<? super T, ? extends V> function,
                 R target)
         {
-            this.getDelegate().forEachWithOccurrences((each, occurrences) -> target.add(function.valueOf(each, occurrences)));
-            return target;
+            return this.getDelegate().collectWithOccurrences(function, target);
         }
 
         @Override
