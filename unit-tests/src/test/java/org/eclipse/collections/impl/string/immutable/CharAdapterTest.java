@@ -10,10 +10,13 @@
 
 package org.eclipse.collections.impl.string.immutable;
 
+import org.eclipse.collections.api.LazyCharIterable;
 import org.eclipse.collections.api.bag.primitive.MutableCharBag;
 import org.eclipse.collections.api.list.primitive.ImmutableCharList;
+import org.eclipse.collections.impl.factory.Strings;
 import org.eclipse.collections.impl.factory.primitive.CharBags;
 import org.eclipse.collections.impl.list.immutable.primitive.AbstractImmutableCharListTestCase;
+import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -113,5 +116,53 @@ public class CharAdapterTest extends AbstractImmutableCharListTestCase
             expectedString.append((char) (each + (char) 1));
         }
         Assert.assertEquals(expectedString.toString(), this.classUnderTest().toString());
+    }
+
+    @Test
+    public void getCharacter()
+    {
+        CharAdapter adapter = Strings.asChars("123");
+        Assert.assertEquals(Character.valueOf('1'), adapter.getCharacter(0));
+        Assert.assertEquals(Character.valueOf('2'), adapter.getCharacter(1));
+        Assert.assertEquals(Character.valueOf('3'), adapter.getCharacter(2));
+    }
+
+    @Test
+    public void toImmutable()
+    {
+        CharAdapter adapter = Strings.asChars("123");
+        ImmutableCharList immutable = adapter.toImmutable();
+        Assert.assertSame(adapter, immutable);
+    }
+
+    @Test
+    public void asReversed()
+    {
+        CharAdapter adapter = Strings.asChars("123");
+        LazyCharIterable iterable = adapter.asReversed();
+        String string = iterable.makeString("");
+        Assert.assertEquals("321", string);
+    }
+
+    @Test
+    public void dotProduct()
+    {
+        CharAdapter adapter = Strings.asChars("123");
+        Verify.assertThrows(
+                UnsupportedOperationException.class,
+                () -> {
+                    adapter.dotProduct(adapter);
+                });
+    }
+
+    @Test
+    public void binarySearch()
+    {
+        CharAdapter adapter = Strings.asChars("123");
+        Verify.assertThrows(
+                UnsupportedOperationException.class,
+                () -> {
+                    adapter.binarySearch('2');
+                });
     }
 }
