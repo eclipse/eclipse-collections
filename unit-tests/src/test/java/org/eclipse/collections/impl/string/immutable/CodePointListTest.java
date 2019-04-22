@@ -14,8 +14,11 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 
 import org.eclipse.collections.api.IntIterable;
+import org.eclipse.collections.api.LazyIntIterable;
 import org.eclipse.collections.api.list.primitive.ImmutableIntList;
+import org.eclipse.collections.api.list.primitive.MutableIntList;
 import org.eclipse.collections.impl.block.factory.primitive.IntPredicates;
+import org.eclipse.collections.impl.factory.primitive.IntLists;
 import org.eclipse.collections.impl.list.immutable.primitive.AbstractImmutableIntListTestCase;
 import org.junit.Assert;
 import org.junit.Test;
@@ -405,6 +408,40 @@ public class CodePointListTest extends AbstractImmutableIntListTestCase
     public void primitiveParallelStream()
     {
         Assert.assertEquals(Arrays.asList(1, 2, 3, 4, 5), CodePointList.from(1, 2, 3, 4, 5).primitiveParallelStream().boxed().collect(Collectors.toList()));
+    }
+
+    @Test
+    public void toImmutable()
+    {
+        CodePointList list = CodePointList.from("123");
+        ImmutableIntList immutable = list.toImmutable();
+        Assert.assertSame(list, immutable);
+    }
+
+    @Test
+    public void asReversed()
+    {
+        CodePointList list = CodePointList.from("123");
+        LazyIntIterable iterable = list.asReversed();
+        String string = iterable.collectChar(each -> (char) each).makeString("");
+        Assert.assertEquals("321", string);
+    }
+
+    @Test
+    public void dotProduct()
+    {
+        CodePointList list = CodePointList.from("123");
+        long actual = list.dotProduct(list);
+        MutableIntList mutable = IntLists.mutable.with((int) '1', (int) '2', (int) '3');
+        long expected = mutable.dotProduct(mutable);
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void binarySearch()
+    {
+        CodePointList list = CodePointList.from("123");
+        Assert.assertEquals(1, list.binarySearch((int) '2'));
     }
 
     private static class SBAppendable implements Appendable

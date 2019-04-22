@@ -14,8 +14,10 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 
 import org.eclipse.collections.api.IntIterable;
+import org.eclipse.collections.api.LazyIntIterable;
 import org.eclipse.collections.api.list.primitive.ImmutableIntList;
 import org.eclipse.collections.impl.block.factory.primitive.IntPredicates;
+import org.eclipse.collections.impl.factory.Strings;
 import org.eclipse.collections.impl.list.immutable.primitive.AbstractImmutableIntListTestCase;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
@@ -413,6 +415,45 @@ public class CodePointAdapterTest extends AbstractImmutableIntListTestCase
     public void primitiveParallelStream()
     {
         Assert.assertEquals(Arrays.asList(1, 2, 3, 4, 5), this.newWith(1, 2, 3, 4, 5).primitiveParallelStream().boxed().collect(Collectors.toList()));
+    }
+
+    @Test
+    public void toImmutable()
+    {
+        CodePointAdapter adapter = Strings.asCodePoints("123");
+        ImmutableIntList immutable = adapter.toImmutable();
+        Assert.assertSame(adapter, immutable);
+    }
+
+    @Test
+    public void asReversed()
+    {
+        CodePointAdapter adapter = Strings.asCodePoints("123");
+        LazyIntIterable iterable = adapter.asReversed();
+        String string = iterable.collectChar(each -> (char) each).makeString("");
+        Assert.assertEquals("321", string);
+    }
+
+    @Test
+    public void dotProduct()
+    {
+        CodePointAdapter adapter = Strings.asCodePoints("123");
+        Verify.assertThrows(
+                UnsupportedOperationException.class,
+                () -> {
+                    adapter.dotProduct(adapter);
+                });
+    }
+
+    @Test
+    public void binarySearch()
+    {
+        CodePointAdapter adapter = Strings.asCodePoints("123");
+        Verify.assertThrows(
+                UnsupportedOperationException.class,
+                () -> {
+                    adapter.binarySearch((int) '2');
+                });
     }
 
     private static class SBAppendable implements Appendable
