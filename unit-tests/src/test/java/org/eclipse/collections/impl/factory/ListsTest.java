@@ -24,6 +24,7 @@ import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.list.mutable.MultiReaderFastList;
+import org.eclipse.collections.impl.list.primitive.IntInterval;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
 import org.junit.Test;
@@ -340,6 +341,19 @@ public class ListsTest
         ListsTest.assertPresizedMultiReaderListEquals(32, (MultiReaderFastList<String>) list5);
 
         Verify.assertThrows(IllegalArgumentException.class, () -> Lists.multiReader.withInitialCapacity(-6));
+    }
+
+    @Test
+    public void withNValues()
+    {
+        ImmutableList<Integer> expected =
+                IntInterval.oneTo(10).collect(each -> new Integer(1));
+        MutableList<Integer> mutable =
+                Lists.mutable.withNValues(10, () -> new Integer(1));
+        MutableList<Integer> multiReader =
+                Lists.multiReader.withNValues(10, () -> new Integer(1));
+        Assert.assertEquals(expected, mutable);
+        Assert.assertEquals(expected, multiReader);
     }
 
     private static void assertPresizedMultiReaderListEquals(int initialCapacity, MultiReaderFastList<String> list)
