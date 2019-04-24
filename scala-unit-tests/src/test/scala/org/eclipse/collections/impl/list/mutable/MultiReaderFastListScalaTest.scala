@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018 Goldman Sachs and others.
+ * Copyright (c) 2019 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -11,7 +11,6 @@
 package org.eclipse.collections.impl.list.mutable
 
 import org.eclipse.collections.api.list.MutableList
-import org.eclipse.collections.impl.Prelude._
 import org.junit.Test
 
 class MultiReaderFastListScalaTest extends MultiReaderFastListTestTrait
@@ -27,9 +26,9 @@ class MultiReaderFastListScalaTest extends MultiReaderFastListTestTrait
                 this.classUnderTest.listIterator
             }
             catch
-                {
-                    case e: Exception => ()
-                }
+            {
+                case e: Exception => ()
+            }
         }
 
     @Test
@@ -41,9 +40,9 @@ class MultiReaderFastListScalaTest extends MultiReaderFastListTestTrait
                 this.classUnderTest.listIterator(1)
             }
             catch
-                {
-                    case e: Exception => ()
-                }
+            {
+                case e: Exception => ()
+            }
         }
 
     @Test
@@ -167,6 +166,62 @@ class MultiReaderFastListScalaTest extends MultiReaderFastListTestTrait
         }
 
     @Test
+    def sortThisByInt_safe(): Unit =
+        this.assert(readersBlocked = true, writersBlocked = true)
+        {
+            this.classUnderTest.sortThisByInt((_: Int) => 0)
+        }
+
+    @Test
+    def sortThisByChar_safe(): Unit =
+        this.assert(readersBlocked = true, writersBlocked = true)
+        {
+            this.classUnderTest.sortThisByChar((_: Int) => 0)
+        }
+
+    @Test
+    def sortThisByByte_safe(): Unit =
+        this.assert(readersBlocked = true, writersBlocked = true)
+        {
+            this.classUnderTest.sortThisByByte((_: Int) => 0)
+        }
+
+    @Test
+    def sortThisByBoolean_safe(): Unit =
+        this.assert(readersBlocked = true, writersBlocked = true)
+        {
+            this.classUnderTest.sortThisByBoolean((_: Int) => true)
+        }
+
+    @Test
+    def sortThisByShort_safe(): Unit =
+        this.assert(readersBlocked = true, writersBlocked = true)
+        {
+            this.classUnderTest.sortThisByShort((_: Int) => 0)
+        }
+
+    @Test
+    def sortThisByFloat_safe(): Unit =
+        this.assert(readersBlocked = true, writersBlocked = true)
+        {
+            this.classUnderTest.sortThisByFloat((_: Int) => 0.0f)
+        }
+
+    @Test
+    def sortThisByLong_safe(): Unit =
+        this.assert(readersBlocked = true, writersBlocked = true)
+        {
+            this.classUnderTest.sortThisByLong((_: Int) => 0L)
+        }
+
+    @Test
+    def sortThisByDouble_safe(): Unit =
+        this.assert(readersBlocked = true, writersBlocked = true)
+        {
+            this.classUnderTest.sortThisByDouble((_: Int) => 0.0d)
+        }
+
+    @Test
     def distinct_safe(): Unit =
         this.assert(readersBlocked = false, writersBlocked = true)
         {
@@ -219,7 +274,7 @@ class MultiReaderFastListScalaTest extends MultiReaderFastListTestTrait
         val reverseIterable = this.classUnderTest.asReversed()
         this.assert(readersBlocked = false, writersBlocked = true)
         {
-            reverseIterable.forEach((_: Int) => ())
+            reverseIterable.each((_: Int) => ())
         }
     }
 
@@ -264,5 +319,4 @@ class MultiReaderFastListScalaTest extends MultiReaderFastListTestTrait
         {
             this.classUnderTest.partitionWhile((_: Int) => true)
         }
-
 }

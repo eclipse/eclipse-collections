@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018 Goldman Sachs and others.
+ * Copyright (c) 2019 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -16,6 +16,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Spliterator;
+import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.stream.Stream;
 
@@ -78,110 +79,53 @@ import org.eclipse.collections.impl.map.mutable.UnifiedMap;
  */
 public abstract class AbstractMultiReaderMutableCollection<T> implements MutableCollection<T>
 {
+    protected transient ReadWriteLock lock;
+    protected transient ReadWriteLockWrapper lockWrapper;
+
     protected abstract MutableCollection<T> getDelegate();
-
-    protected abstract ReadWriteLock getLock();
-
-    protected void acquireWriteLock()
-    {
-        this.getLock().writeLock().lock();
-    }
-
-    protected void unlockWriteLock()
-    {
-        this.getLock().writeLock().unlock();
-    }
-
-    protected void acquireReadLock()
-    {
-        this.getLock().readLock().lock();
-    }
-
-    protected void unlockReadLock()
-    {
-        this.getLock().readLock().unlock();
-    }
-
-    protected void withReadLockRun(Runnable block)
-    {
-        this.acquireReadLock();
-        try
-        {
-            block.run();
-        }
-        finally
-        {
-            this.unlockReadLock();
-        }
-    }
 
     @Override
     public boolean contains(Object item)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().contains(item);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public boolean containsAll(Collection<?> collection)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().containsAll(collection);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public boolean containsAllIterable(Iterable<?> source)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().containsAllIterable(source);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public boolean containsAllArguments(Object... elements)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().containsAllArguments(elements);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public boolean noneSatisfy(Predicate<? super T> predicate)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().noneSatisfy(predicate);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
@@ -190,28 +134,18 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
             Predicate2<? super T, ? super P> predicate,
             P parameter)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().noneSatisfyWith(predicate, parameter);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public boolean allSatisfy(Predicate<? super T> predicate)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().allSatisfy(predicate);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
@@ -220,28 +154,18 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
             Predicate2<? super T, ? super P> predicate,
             P parameter)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().allSatisfyWith(predicate, parameter);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public boolean anySatisfy(Predicate<? super T> predicate)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().anySatisfy(predicate);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
@@ -250,42 +174,27 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
             Predicate2<? super T, ? super P> predicate,
             P parameter)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().anySatisfyWith(predicate, parameter);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public <R extends Collection<T>> R into(R target)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().into(target);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public MutableList<T> toList()
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().toList();
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
@@ -294,14 +203,9 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
             Function<? super T, ? extends NK> keyFunction,
             Function<? super T, ? extends NV> valueFunction)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().toMap(keyFunction, valueFunction);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
@@ -311,14 +215,9 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
             Function<? super T, ? extends V> valueFunction,
             R target)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().toMap(keyFunction, valueFunction, target);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
@@ -327,14 +226,9 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
             Function<? super T, ? extends NK> keyFunction,
             Function<? super T, ? extends NV> valueFunction)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().toSortedMap(keyFunction, valueFunction);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
@@ -344,14 +238,9 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
             Function<? super T, ? extends NK> keyFunction,
             Function<? super T, ? extends NV> valueFunction)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().toSortedMap(comparator, keyFunction, valueFunction);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
@@ -361,14 +250,9 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
             Function<? super T, ? extends NK> keyFunction,
             Function<? super T, ? extends NV> valueFunction)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().toSortedMapBy(sortBy, keyFunction, valueFunction);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
@@ -377,84 +261,54 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
             Function<? super T, ? extends NK> keyFunction,
             Function<? super T, ? extends NV> valueFunction)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().toBiMap(keyFunction, valueFunction);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public LazyIterable<T> asLazy()
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().asLazy();
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public MutableSet<T> toSet()
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().toSet();
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public MutableBag<T> toBag()
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().toBag();
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public MutableSortedBag<T> toSortedBag()
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().toSortedBag();
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public MutableSortedBag<T> toSortedBag(Comparator<? super T> comparator)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().toSortedBag(comparator);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
@@ -462,42 +316,27 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
     public <V extends Comparable<? super V>> MutableSortedBag<T> toSortedBagBy(
             Function<? super T, ? extends V> function)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().toSortedBagBy(function);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public MutableList<T> toSortedList()
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().toSortedList();
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public MutableList<T> toSortedList(Comparator<? super T> comparator)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().toSortedList(comparator);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
@@ -505,42 +344,27 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
     public <V extends Comparable<? super V>> MutableList<T> toSortedListBy(
             Function<? super T, ? extends V> function)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().toSortedListBy(function);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public MutableSortedSet<T> toSortedSet()
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().toSortedSet();
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public MutableSortedSet<T> toSortedSet(Comparator<? super T> comparator)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().toSortedSet(comparator);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
@@ -548,28 +372,18 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
     public <V extends Comparable<? super V>> MutableSortedSet<T> toSortedSetBy(
             Function<? super T, ? extends V> function)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().toSortedSetBy(function);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public int count(Predicate<? super T> predicate)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().count(predicate);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
@@ -578,28 +392,18 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
             Predicate2<? super T, ? super P> predicate,
             P parameter)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().countWith(predicate, parameter);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public T detect(Predicate<? super T> predicate)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().detect(predicate);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
@@ -608,28 +412,18 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
             Predicate2<? super T, ? super P> predicate,
             P parameter)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().detectWith(predicate, parameter);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public Optional<T> detectOptional(Predicate<? super T> predicate)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().detectOptional(predicate);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
@@ -638,14 +432,9 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
             Predicate2<? super T, ? super P> predicate,
             P parameter)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().detectWithOptional(predicate, parameter);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
@@ -654,14 +443,9 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
             Predicate<? super T> predicate,
             Function0<? extends T> function)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().detectIfNone(predicate, function);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
@@ -671,238 +455,153 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
             P parameter,
             Function0<? extends T> function)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().detectWithIfNone(predicate, parameter, function);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public T min(Comparator<? super T> comparator)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().min(comparator);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public T max(Comparator<? super T> comparator)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().max(comparator);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public Optional<T> minOptional(Comparator<? super T> comparator)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().minOptional(comparator);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public Optional<T> maxOptional(Comparator<? super T> comparator)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().maxOptional(comparator);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public T min()
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().min();
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public T max()
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().max();
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public Optional<T> minOptional()
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().minOptional();
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public Optional<T> maxOptional()
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().maxOptional();
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public <V extends Comparable<? super V>> T minBy(Function<? super T, ? extends V> function)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().minBy(function);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public <V extends Comparable<? super V>> T maxBy(Function<? super T, ? extends V> function)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().maxBy(function);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public <V extends Comparable<? super V>> Optional<T> minByOptional(Function<? super T, ? extends V> function)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().minByOptional(function);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public <V extends Comparable<? super V>> Optional<T> maxByOptional(Function<? super T, ? extends V> function)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().maxByOptional(function);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public T getFirst()
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().getFirst();
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public T getLast()
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().getLast();
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public T getOnly()
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().getOnly();
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public boolean notEmpty()
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().notEmpty();
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
@@ -911,14 +610,9 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
             Predicate2<? super T, ? super P> predicate,
             P parameter)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().selectAndRejectWith(predicate, parameter);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
@@ -927,126 +621,81 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
             Function<? super T, ? extends V> function,
             R target)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().collect(function, target);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public <R extends MutableBooleanCollection> R collectBoolean(BooleanFunction<? super T> booleanFunction, R target)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().collectBoolean(booleanFunction, target);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public <R extends MutableByteCollection> R collectByte(ByteFunction<? super T> byteFunction, R target)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().collectByte(byteFunction, target);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public <R extends MutableCharCollection> R collectChar(CharFunction<? super T> charFunction, R target)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().collectChar(charFunction, target);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public <R extends MutableDoubleCollection> R collectDouble(DoubleFunction<? super T> doubleFunction, R target)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().collectDouble(doubleFunction, target);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public <R extends MutableFloatCollection> R collectFloat(FloatFunction<? super T> floatFunction, R target)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().collectFloat(floatFunction, target);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public <R extends MutableIntCollection> R collectInt(IntFunction<? super T> intFunction, R target)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().collectInt(intFunction, target);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public <R extends MutableLongCollection> R collectLong(LongFunction<? super T> longFunction, R target)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().collectLong(longFunction, target);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public <R extends MutableShortCollection> R collectShort(ShortFunction<? super T> shortFunction, R target)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().collectShort(shortFunction, target);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
@@ -1055,14 +704,9 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
             Function<? super T, ? extends Iterable<V>> function,
             R target)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().flatCollect(function, target);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
@@ -1072,14 +716,9 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
             Function<? super T, ? extends V> function,
             R target)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().collectIf(predicate, function, target);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
@@ -1089,14 +728,9 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
             P parameter,
             R targetCollection)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().collectWith(function, parameter, targetCollection);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
@@ -1106,14 +740,9 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
             P parameter,
             R targetCollection)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().selectWith(predicate, parameter, targetCollection);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
@@ -1122,14 +751,9 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
             Predicate<? super T> predicate,
             R target)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().reject(predicate, target);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
@@ -1139,28 +763,18 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
             P parameter,
             R targetCollection)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().rejectWith(predicate, parameter, targetCollection);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public <R extends Collection<T>> R select(Predicate<? super T> predicate, R target)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().select(predicate, target);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
@@ -1169,126 +783,81 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
             IV injectedValue,
             Function2<? super IV, ? super T, ? extends IV> function)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().injectInto(injectedValue, function);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public int injectInto(int injectedValue, IntObjectToIntFunction<? super T> function)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().injectInto(injectedValue, function);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public long injectInto(long injectedValue, LongObjectToLongFunction<? super T> function)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().injectInto(injectedValue, function);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public double injectInto(double injectedValue, DoubleObjectToDoubleFunction<? super T> function)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().injectInto(injectedValue, function);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public float injectInto(float injectedValue, FloatObjectToFloatFunction<? super T> function)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().injectInto(injectedValue, function);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public long sumOfInt(IntFunction<? super T> function)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().sumOfInt(function);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public double sumOfFloat(FloatFunction<? super T> function)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().sumOfFloat(function);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public long sumOfLong(LongFunction<? super T> function)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().sumOfLong(function);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public double sumOfDouble(DoubleFunction<? super T> function)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().sumOfDouble(function);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
@@ -1326,28 +895,18 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
             Function3<? super IV, ? super T, ? super P, ? extends IV> function,
             P parameter)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().injectIntoWith(injectValue, function, parameter);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public boolean removeIf(Predicate<? super T> predicate)
     {
-        this.acquireWriteLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireWriteLock())
         {
             return this.getDelegate().removeIf(predicate);
-        }
-        finally
-        {
-            this.unlockWriteLock();
         }
     }
 
@@ -1356,84 +915,54 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
             Predicate2<? super T, ? super P> predicate,
             P parameter)
     {
-        this.acquireWriteLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireWriteLock())
         {
             return this.getDelegate().removeIfWith(predicate, parameter);
-        }
-        finally
-        {
-            this.unlockWriteLock();
         }
     }
 
     @Override
     public boolean add(T item)
     {
-        this.acquireWriteLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireWriteLock())
         {
             return this.getDelegate().add(item);
-        }
-        finally
-        {
-            this.unlockWriteLock();
         }
     }
 
     @Override
     public boolean addAll(Collection<? extends T> collection)
     {
-        this.acquireWriteLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireWriteLock())
         {
             return this.getDelegate().addAll(collection);
-        }
-        finally
-        {
-            this.unlockWriteLock();
         }
     }
 
     @Override
     public boolean addAllIterable(Iterable<? extends T> iterable)
     {
-        this.acquireWriteLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireWriteLock())
         {
             return this.getDelegate().addAllIterable(iterable);
-        }
-        finally
-        {
-            this.unlockWriteLock();
         }
     }
 
     @Override
     public void clear()
     {
-        this.acquireWriteLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireWriteLock())
         {
             this.getDelegate().clear();
-        }
-        finally
-        {
-            this.unlockWriteLock();
         }
     }
 
     @Override
     public boolean isEmpty()
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().isEmpty();
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
@@ -1509,112 +1038,72 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
     @Override
     public boolean remove(Object item)
     {
-        this.acquireWriteLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireWriteLock())
         {
             return this.getDelegate().remove(item);
-        }
-        finally
-        {
-            this.unlockWriteLock();
         }
     }
 
     @Override
     public boolean removeAll(Collection<?> collection)
     {
-        this.acquireWriteLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireWriteLock())
         {
             return this.getDelegate().removeAll(collection);
-        }
-        finally
-        {
-            this.unlockWriteLock();
         }
     }
 
     @Override
     public boolean removeAllIterable(Iterable<?> iterable)
     {
-        this.acquireWriteLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireWriteLock())
         {
             return this.getDelegate().removeAllIterable(iterable);
-        }
-        finally
-        {
-            this.unlockWriteLock();
         }
     }
 
     @Override
     public boolean retainAll(Collection<?> collection)
     {
-        this.acquireWriteLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireWriteLock())
         {
             return this.getDelegate().retainAll(collection);
-        }
-        finally
-        {
-            this.unlockWriteLock();
         }
     }
 
     @Override
     public boolean retainAllIterable(Iterable<?> iterable)
     {
-        this.acquireWriteLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireWriteLock())
         {
             return this.getDelegate().retainAllIterable(iterable);
-        }
-        finally
-        {
-            this.unlockWriteLock();
         }
     }
 
     @Override
     public int size()
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().size();
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public Object[] toArray()
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().toArray();
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public <E> E[] toArray(E[] a)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().toArray(a);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
@@ -1627,140 +1116,90 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
     @Override
     public void each(Procedure<? super T> procedure)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             this.getDelegate().forEach(procedure);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public <P> void forEachWith(Procedure2<? super T, ? super P> procedure, P parameter)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             this.getDelegate().forEachWith(procedure, parameter);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public void forEachWithIndex(ObjectIntProcedure<? super T> objectIntProcedure)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             this.getDelegate().forEachWithIndex(objectIntProcedure);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public String toString()
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().toString();
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public String makeString()
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().makeString();
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public String makeString(String separator)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().makeString(separator);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public String makeString(String start, String separator, String end)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().makeString(start, separator, end);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public void appendString(Appendable appendable)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             this.getDelegate().appendString(appendable);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public void appendString(Appendable appendable, String separator)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             this.getDelegate().appendString(appendable, separator);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public void appendString(Appendable appendable, String start, String separator, String end)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             this.getDelegate().appendString(appendable, start, separator, end);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
@@ -1769,14 +1208,9 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
             Function<? super T, ? extends V> function,
             R target)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().groupBy(function, target);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
@@ -1785,14 +1219,9 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
             Function<? super T, ? extends Iterable<V>> function,
             R target)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().groupByEach(function, target);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
@@ -1801,42 +1230,27 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
             Function<? super T, ? extends V> function,
             R target)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().groupByUniqueKey(function, target);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public <S, R extends Collection<Pair<T, S>>> R zip(Iterable<S> that, R target)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().zip(that, target);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public <R extends Collection<Pair<T, Integer>>> R zipWithIndex(R target)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.getDelegate().zipWithIndex(target);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
@@ -2457,7 +1871,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
         }
 
         @Override
-        public <T> T[] toArray(T[] a)
+        public <E> E[] toArray(E[] a)
         {
             return this.delegate.toArray(a);
         }
@@ -2574,6 +1988,54 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
                 map.put(key, nonMutatingAggregator.value(value, each));
             });
             return map;
+        }
+    }
+
+    public static class ReadWriteLockWrapper
+    {
+        private final ReadWriteLock readWriteLock;
+        private final LockWrapper readLock;
+        private final LockWrapper writeLock;
+
+        public ReadWriteLockWrapper(ReadWriteLock readWriteLock)
+        {
+            this.readWriteLock = readWriteLock;
+            this.readLock = new LockWrapper(readWriteLock.readLock());
+            this.writeLock = new LockWrapper(readWriteLock.writeLock());
+        }
+
+        /**
+         * This method must be wrapped in a try block.
+         */
+        public LockWrapper acquireReadLock()
+        {
+            this.readLock.lock.lock();
+            return this.readLock;
+        }
+
+        /**
+         * This method must be wrapped in a try block.
+         */
+        public LockWrapper acquireWriteLock()
+        {
+            this.writeLock.lock.lock();
+            return this.writeLock;
+        }
+    }
+
+    public static class LockWrapper implements AutoCloseable
+    {
+        private final Lock lock;
+
+        public LockWrapper(Lock lock)
+        {
+            this.lock = lock;
+        }
+
+        @Override
+        public void close()
+        {
+            this.lock.unlock();
         }
     }
 }
