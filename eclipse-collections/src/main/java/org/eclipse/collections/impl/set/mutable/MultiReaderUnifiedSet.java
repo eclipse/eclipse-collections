@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018 Goldman Sachs.
+ * Copyright (c) 2019 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -86,7 +86,6 @@ public final class MultiReaderUnifiedSet<T>
 {
     private static final long serialVersionUID = 1L;
 
-    private transient ReadWriteLock lock;
     private MutableSet<T> delegate;
 
     /**
@@ -107,6 +106,7 @@ public final class MultiReaderUnifiedSet<T>
     private MultiReaderUnifiedSet(MutableSet<T> newDelegate, ReadWriteLock newLock)
     {
         this.lock = newLock;
+        this.lockWrapper = new ReadWriteLockWrapper(newLock);
         this.delegate = newDelegate;
     }
 
@@ -136,12 +136,6 @@ public final class MultiReaderUnifiedSet<T>
         return this.delegate;
     }
 
-    @Override
-    protected ReadWriteLock getLock()
-    {
-        return this.lock;
-    }
-
     // Exposed for testing
 
     UntouchableMutableSet<T> asReadUntouchable()
@@ -158,227 +152,147 @@ public final class MultiReaderUnifiedSet<T>
 
     public void withReadLockAndDelegate(Procedure<MutableSet<T>> procedure)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             UntouchableMutableSet<T> untouchableSet = this.asReadUntouchable();
             procedure.value(untouchableSet);
             untouchableSet.becomeUseless();
         }
-        finally
-        {
-            this.unlockReadLock();
-        }
     }
 
     public void withWriteLockAndDelegate(Procedure<MutableSet<T>> procedure)
     {
-        this.acquireWriteLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireWriteLock())
         {
             UntouchableMutableSet<T> untouchableSet = this.asWriteUntouchable();
             procedure.value(untouchableSet);
             untouchableSet.becomeUseless();
-        }
-        finally
-        {
-            this.unlockWriteLock();
         }
     }
 
     @Override
     public MutableSet<T> asSynchronized()
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return SynchronizedMutableSet.of(this);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public ImmutableSet<T> toImmutable()
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return Sets.immutable.withAll(this.delegate);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public MutableSet<T> asUnmodifiable()
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return UnmodifiableMutableSet.of(this);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public MutableSet<T> clone()
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return new MultiReaderUnifiedSet<>(this.delegate.clone());
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public <V> MutableSet<V> collect(Function<? super T, ? extends V> function)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.delegate.collect(function);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public MutableBooleanSet collectBoolean(BooleanFunction<? super T> booleanFunction)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.delegate.collectBoolean(booleanFunction);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public MutableByteSet collectByte(ByteFunction<? super T> byteFunction)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.delegate.collectByte(byteFunction);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public MutableCharSet collectChar(CharFunction<? super T> charFunction)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.delegate.collectChar(charFunction);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public MutableDoubleSet collectDouble(DoubleFunction<? super T> doubleFunction)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.delegate.collectDouble(doubleFunction);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public MutableFloatSet collectFloat(FloatFunction<? super T> floatFunction)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.delegate.collectFloat(floatFunction);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public MutableIntSet collectInt(IntFunction<? super T> intFunction)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.delegate.collectInt(intFunction);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public MutableLongSet collectLong(LongFunction<? super T> longFunction)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.delegate.collectLong(longFunction);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public MutableShortSet collectShort(ShortFunction<? super T> shortFunction)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.delegate.collectShort(shortFunction);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public <V> MutableSet<V> flatCollect(Function<? super T, ? extends Iterable<V>> function)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.delegate.flatCollect(function);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
@@ -387,14 +301,9 @@ public final class MultiReaderUnifiedSet<T>
             Predicate<? super T> predicate,
             Function<? super T, ? extends V> function)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.delegate.collectIf(predicate, function);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
@@ -403,14 +312,9 @@ public final class MultiReaderUnifiedSet<T>
             Function2<? super T, ? super P, ? extends V> function,
             P parameter)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.delegate.collectWith(function, parameter);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
@@ -423,14 +327,9 @@ public final class MultiReaderUnifiedSet<T>
     @Override
     public MutableSet<T> reject(Predicate<? super T> predicate)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.delegate.reject(predicate);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
@@ -439,43 +338,28 @@ public final class MultiReaderUnifiedSet<T>
             Predicate2<? super T, ? super P> predicate,
             P parameter)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.delegate.rejectWith(predicate, parameter);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public MutableSet<T> tap(Procedure<? super T> procedure)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             this.forEach(procedure);
             return this;
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public MutableSet<T> select(Predicate<? super T> predicate)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.delegate.select(predicate);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
@@ -484,56 +368,36 @@ public final class MultiReaderUnifiedSet<T>
             Predicate2<? super T, ? super P> predicate,
             P parameter)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.delegate.selectWith(predicate, parameter);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public PartitionMutableSet<T> partition(Predicate<? super T> predicate)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.delegate.partition(predicate);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public <P> PartitionMutableSet<T> partitionWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.delegate.partitionWith(predicate, parameter);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public <S> MutableSet<S> selectInstancesOf(Class<S> clazz)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.delegate.selectInstancesOf(clazz);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
@@ -568,28 +432,18 @@ public final class MultiReaderUnifiedSet<T>
     @Override
     public boolean equals(Object o)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.delegate.equals(o);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public int hashCode()
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.delegate.hashCode();
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
@@ -604,6 +458,7 @@ public final class MultiReaderUnifiedSet<T>
     {
         this.delegate = (MutableSet<T>) in.readObject();
         this.lock = new ReentrantReadWriteLock();
+        this.lockWrapper = new ReadWriteLockWrapper(this.lock);
     }
 
     // Exposed for testing
@@ -1038,42 +893,27 @@ public final class MultiReaderUnifiedSet<T>
     @Override
     public <V> MutableSetMultimap<V, T> groupBy(Function<? super T, ? extends V> function)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.delegate.groupBy(function);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public <V> MutableSetMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.delegate.groupByEach(function);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public <V> MutableMap<V, T> groupByUniqueKey(Function<? super T, ? extends V> function)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.delegate.groupByUniqueKey(function);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
@@ -1084,14 +924,9 @@ public final class MultiReaderUnifiedSet<T>
     @Deprecated
     public <S> MutableSet<Pair<T, S>> zip(Iterable<S> that)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.delegate.zip(that);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
@@ -1102,202 +937,135 @@ public final class MultiReaderUnifiedSet<T>
     @Deprecated
     public MutableSet<Pair<T, Integer>> zipWithIndex()
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.delegate.zipWithIndex();
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public RichIterable<RichIterable<T>> chunk(int size)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.delegate.chunk(size);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public MutableSet<T> union(SetIterable<? extends T> set)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.delegate.union(set);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public <R extends Set<T>> R unionInto(SetIterable<? extends T> set, R targetSet)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.delegate.unionInto(set, targetSet);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public MutableSet<T> intersect(SetIterable<? extends T> set)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.delegate.intersect(set);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public <R extends Set<T>> R intersectInto(SetIterable<? extends T> set, R targetSet)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.delegate.intersectInto(set, targetSet);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public MutableSet<T> difference(SetIterable<? extends T> subtrahendSet)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.delegate.difference(subtrahendSet);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public <R extends Set<T>> R differenceInto(SetIterable<? extends T> subtrahendSet, R targetSet)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.delegate.differenceInto(subtrahendSet, targetSet);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public MutableSet<T> symmetricDifference(SetIterable<? extends T> setB)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.delegate.symmetricDifference(setB);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public <R extends Set<T>> R symmetricDifferenceInto(SetIterable<? extends T> set, R targetSet)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.delegate.symmetricDifferenceInto(set, targetSet);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public boolean isSubsetOf(SetIterable<? extends T> candidateSuperset)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.delegate.isSubsetOf(candidateSuperset);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public boolean isProperSubsetOf(SetIterable<? extends T> candidateSuperset)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.delegate.isProperSubsetOf(candidateSuperset);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public MutableSet<UnsortedSetIterable<T>> powerSet()
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.delegate.powerSet();
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public <B> LazyIterable<Pair<T, B>> cartesianProduct(SetIterable<B> set)
     {
-        this.acquireReadLock();
-        try
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.delegate.cartesianProduct(set);
-        }
-        finally
-        {
-            this.unlockReadLock();
         }
     }
 
     @Override
     public ParallelUnsortedSetIterable<T> asParallel(ExecutorService executorService, int batchSize)
     {
-        return new MultiReaderParallelUnsortedSetIterable<>(this.delegate.asParallel(executorService, batchSize), this.lock);
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
+        {
+            return new MultiReaderParallelUnsortedSetIterable<>(this.delegate.asParallel(executorService, batchSize), this.lock);
+        }
     }
 }
