@@ -14,8 +14,10 @@ import java.util.stream.Stream;
 
 import org.eclipse.collections.api.bag.Bag;
 import org.eclipse.collections.api.bag.ImmutableBag;
+import org.eclipse.collections.api.bag.MultiReaderBag;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.factory.bag.ImmutableBagFactory;
+import org.eclipse.collections.api.factory.bag.MultiReaderBagFactory;
 import org.eclipse.collections.api.factory.bag.MutableBagFactory;
 import org.eclipse.collections.impl.bag.mutable.HashBag;
 import org.eclipse.collections.impl.bag.mutable.MultiReaderHashBag;
@@ -162,15 +164,15 @@ public class BagsTest
     @Test
     public void multiReader()
     {
-        MutableBagFactory bagFactory = Bags.multiReader;
+        MultiReaderBagFactory bagFactory = Bags.multiReader;
         Assert.assertEquals(MultiReaderHashBag.newBag(), bagFactory.of());
-        Verify.assertInstanceOf(MultiReaderHashBag.class, bagFactory.of());
+        Verify.assertInstanceOf(MultiReaderBag.class, bagFactory.of());
         Assert.assertEquals(MultiReaderHashBag.newBag(), bagFactory.with());
-        Verify.assertInstanceOf(MultiReaderHashBag.class, bagFactory.with());
+        Verify.assertInstanceOf(MultiReaderBag.class, bagFactory.with());
         Assert.assertEquals(MultiReaderHashBag.newBagWith(1), bagFactory.of(1));
-        Verify.assertInstanceOf(MultiReaderHashBag.class, bagFactory.of(1));
+        Verify.assertInstanceOf(MultiReaderBag.class, bagFactory.of(1));
         Assert.assertEquals(MultiReaderHashBag.newBagWith(1, 2, 3), bagFactory.ofAll(UnifiedSet.newSetWith(1, 2, 3)));
-        Verify.assertInstanceOf(MultiReaderHashBag.class, bagFactory.ofAll(UnifiedSet.newSetWith(1, 2, 3)));
+        Verify.assertInstanceOf(MultiReaderBag.class, bagFactory.ofAll(UnifiedSet.newSetWith(1, 2, 3)));
     }
 
     @Test

@@ -13,27 +13,27 @@ package org.eclipse.collections.impl.set.mutable;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import org.eclipse.collections.api.factory.set.MutableSetFactory;
-import org.eclipse.collections.api.set.MutableSet;
+import org.eclipse.collections.api.factory.set.MultiReaderSetFactory;
+import org.eclipse.collections.api.set.MultiReaderSet;
 
-public enum MultiReaderMutableSetFactory implements MutableSetFactory
+public enum MultiReaderMutableSetFactory implements MultiReaderSetFactory
 {
     INSTANCE;
 
     @Override
-    public <T> MutableSet<T> empty()
+    public <T> MultiReaderSet<T> empty()
     {
         return MultiReaderUnifiedSet.newSet();
     }
 
     @Override
-    public <T> MutableSet<T> with(T... items)
+    public <T> MultiReaderSet<T> with(T... items)
     {
         return MultiReaderUnifiedSet.newSetWith(items);
     }
 
     @Override
-    public <T> MutableSet<T> withInitialCapacity(int capacity)
+    public <T> MultiReaderSet<T> withInitialCapacity(int capacity)
     {
         if (capacity < 0)
         {
@@ -44,13 +44,13 @@ public enum MultiReaderMutableSetFactory implements MutableSetFactory
     }
 
     @Override
-    public <T> MutableSet<T> withAll(Iterable<? extends T> iterable)
+    public <T> MultiReaderSet<T> withAll(Iterable<? extends T> iterable)
     {
         return MultiReaderUnifiedSet.newSet((Iterable<T>) iterable);
     }
 
     @Override
-    public <T> MutableSet<T> fromStream(Stream<? extends T> stream)
+    public <T> MultiReaderSet<T> fromStream(Stream<? extends T> stream)
     {
         return stream.collect(Collectors.toCollection(MultiReaderUnifiedSet::newSet));
     }

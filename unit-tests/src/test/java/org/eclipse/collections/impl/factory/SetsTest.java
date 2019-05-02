@@ -24,10 +24,12 @@ import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.factory.set.FixedSizeSetFactory;
 import org.eclipse.collections.api.factory.set.ImmutableSetFactory;
+import org.eclipse.collections.api.factory.set.MultiReaderSetFactory;
 import org.eclipse.collections.api.factory.set.MutableSetFactory;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.set.FixedSizeSet;
 import org.eclipse.collections.api.set.ImmutableSet;
+import org.eclipse.collections.api.set.MultiReaderSet;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.bag.mutable.HashBag;
@@ -775,20 +777,20 @@ public class SetsTest
     @Test
     public void multiReader()
     {
-        MutableSetFactory setFactory = Sets.multiReader;
+        MultiReaderSetFactory setFactory = Sets.multiReader;
         Assert.assertEquals(MultiReaderUnifiedSet.newSet(), setFactory.of());
-        Verify.assertInstanceOf(MultiReaderUnifiedSet.class, setFactory.of());
+        Verify.assertInstanceOf(MultiReaderSet.class, setFactory.of());
         Assert.assertEquals(MultiReaderUnifiedSet.newSet(), setFactory.with());
-        Verify.assertInstanceOf(MultiReaderUnifiedSet.class, setFactory.with());
+        Verify.assertInstanceOf(MultiReaderSet.class, setFactory.with());
         Assert.assertEquals(MultiReaderUnifiedSet.newSet(), setFactory.ofInitialCapacity(1));
-        Verify.assertInstanceOf(MultiReaderUnifiedSet.class, setFactory.ofInitialCapacity(1));
+        Verify.assertInstanceOf(MultiReaderSet.class, setFactory.ofInitialCapacity(1));
         Verify.assertThrows(IllegalArgumentException.class, () -> setFactory.ofInitialCapacity(-1));
         Assert.assertEquals(MultiReaderUnifiedSet.newSetWith(1), setFactory.of(1));
-        Verify.assertInstanceOf(MultiReaderUnifiedSet.class, setFactory.of(1));
+        Verify.assertInstanceOf(MultiReaderSet.class, setFactory.of(1));
         Assert.assertEquals(MultiReaderUnifiedSet.newSetWith(1, 2, 3), setFactory.ofAll(UnifiedSet.newSetWith(1, 2, 3)));
-        Verify.assertInstanceOf(MultiReaderUnifiedSet.class, setFactory.ofAll(UnifiedSet.newSetWith(1, 2, 3)));
+        Verify.assertInstanceOf(MultiReaderSet.class, setFactory.ofAll(UnifiedSet.newSetWith(1, 2, 3)));
         Assert.assertEquals(MultiReaderUnifiedSet.newSetWith(1, 2, 3), setFactory.fromStream(Stream.of(1, 2, 3)));
-        Verify.assertInstanceOf(MultiReaderUnifiedSet.class, setFactory.fromStream(Stream.of(1, 2, 3)));
+        Verify.assertInstanceOf(MultiReaderSet.class, setFactory.fromStream(Stream.of(1, 2, 3)));
     }
 
     @Test

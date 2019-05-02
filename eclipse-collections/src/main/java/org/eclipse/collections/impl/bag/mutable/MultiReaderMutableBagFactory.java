@@ -13,33 +13,33 @@ package org.eclipse.collections.impl.bag.mutable;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import org.eclipse.collections.api.bag.MutableBag;
-import org.eclipse.collections.api.factory.bag.MutableBagFactory;
+import org.eclipse.collections.api.bag.MultiReaderBag;
+import org.eclipse.collections.api.factory.bag.MultiReaderBagFactory;
 
-public enum MultiReaderMutableBagFactory implements MutableBagFactory
+public enum MultiReaderMutableBagFactory implements MultiReaderBagFactory
 {
     INSTANCE;
 
     @Override
-    public <T> MutableBag<T> empty()
+    public <T> MultiReaderBag<T> empty()
     {
         return MultiReaderHashBag.newBag();
     }
 
     @Override
-    public <T> MutableBag<T> with(T... items)
+    public <T> MultiReaderBag<T> with(T... items)
     {
         return MultiReaderHashBag.newBagWith(items);
     }
 
     @Override
-    public <T> MutableBag<T> withAll(Iterable<? extends T> iterable)
+    public <T> MultiReaderBag<T> withAll(Iterable<? extends T> iterable)
     {
         return MultiReaderHashBag.newBag((Iterable<T>) iterable);
     }
 
     @Override
-    public <T> MutableBag<T> fromStream(Stream<? extends T> stream)
+    public <T> MultiReaderBag<T> fromStream(Stream<? extends T> stream)
     {
         return stream.collect(Collectors.toCollection(MultiReaderHashBag::newBag));
     }
