@@ -50,6 +50,7 @@ import org.eclipse.collections.api.multimap.set.MutableSetMultimap;
 import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.partition.set.PartitionMutableSet;
 import org.eclipse.collections.api.set.ImmutableSet;
+import org.eclipse.collections.api.set.MultiReaderSet;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.set.ParallelUnsortedSetIterable;
 import org.eclipse.collections.api.set.SetIterable;
@@ -82,7 +83,7 @@ import static org.eclipse.collections.impl.factory.Iterables.mList;
  */
 public final class MultiReaderUnifiedSet<T>
         extends AbstractMultiReaderMutableCollection<T>
-        implements RandomAccess, Externalizable, MutableSet<T>
+        implements RandomAccess, Externalizable, MultiReaderSet<T>
 {
     private static final long serialVersionUID = 1L;
 
@@ -150,7 +151,7 @@ public final class MultiReaderUnifiedSet<T>
         return new UntouchableMutableSet<>(this.delegate);
     }
 
-    public void withReadLockAndDelegate(Procedure<MutableSet<T>> procedure)
+    public void withReadLockAndDelegate(Procedure<? super MutableSet<T>> procedure)
     {
         try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
@@ -160,7 +161,7 @@ public final class MultiReaderUnifiedSet<T>
         }
     }
 
-    public void withWriteLockAndDelegate(Procedure<MutableSet<T>> procedure)
+    public void withWriteLockAndDelegate(Procedure<? super MutableSet<T>> procedure)
     {
         try (LockWrapper wrapper = this.lockWrapper.acquireWriteLock())
         {
