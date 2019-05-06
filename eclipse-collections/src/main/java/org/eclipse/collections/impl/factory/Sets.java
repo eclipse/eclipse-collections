@@ -23,6 +23,7 @@ import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.factory.set.FixedSizeSetFactory;
 import org.eclipse.collections.api.factory.set.ImmutableSetFactory;
+import org.eclipse.collections.api.factory.set.MultiReaderSetFactory;
 import org.eclipse.collections.api.factory.set.MutableSetFactory;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.tuple.Pair;
@@ -82,7 +83,7 @@ public final class Sets
     public static final ImmutableSetFactory immutable = ImmutableSetFactoryImpl.INSTANCE;
     public static final FixedSizeSetFactory fixedSize = FixedSizeSetFactoryImpl.INSTANCE;
     public static final MutableSetFactory mutable = MutableSetFactoryImpl.INSTANCE;
-    public static final MutableSetFactory multiReader = MultiReaderMutableSetFactory.INSTANCE;
+    public static final MultiReaderSetFactory multiReader = MultiReaderMutableSetFactory.INSTANCE;
 
     private static final Predicate<Set<?>> INSTANCE_OF_SORTED_SET_PREDICATE = SortedSet.class::isInstance;
 

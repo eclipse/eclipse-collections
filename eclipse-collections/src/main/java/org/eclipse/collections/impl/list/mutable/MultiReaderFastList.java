@@ -54,6 +54,7 @@ import org.eclipse.collections.api.collection.primitive.MutableIntCollection;
 import org.eclipse.collections.api.collection.primitive.MutableLongCollection;
 import org.eclipse.collections.api.collection.primitive.MutableShortCollection;
 import org.eclipse.collections.api.list.ImmutableList;
+import org.eclipse.collections.api.list.MultiReaderList;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.list.ParallelListIterable;
 import org.eclipse.collections.api.list.primitive.MutableBooleanList;
@@ -92,7 +93,7 @@ import static org.eclipse.collections.impl.factory.Iterables.mList;
  */
 public final class MultiReaderFastList<T>
         extends AbstractMultiReaderMutableCollection<T>
-        implements RandomAccess, Externalizable, MutableList<T>
+        implements RandomAccess, Externalizable, MultiReaderList<T>
 {
     private static final long serialVersionUID = 1L;
 
@@ -156,7 +157,8 @@ public final class MultiReaderFastList<T>
         return new UntouchableMutableList<>(this.delegate);
     }
 
-    public void withReadLockAndDelegate(Procedure<MutableList<T>> procedure)
+    @Override
+    public void withReadLockAndDelegate(Procedure<? super MutableList<T>> procedure)
     {
         try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
@@ -166,7 +168,8 @@ public final class MultiReaderFastList<T>
         }
     }
 
-    public void withWriteLockAndDelegate(Procedure<MutableList<T>> procedure)
+    @Override
+    public void withWriteLockAndDelegate(Procedure<? super MutableList<T>> procedure)
     {
         try (LockWrapper wrapper = this.lockWrapper.acquireWriteLock())
         {

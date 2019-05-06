@@ -17,9 +17,11 @@ import java.util.stream.Stream;
 
 import org.eclipse.collections.api.factory.list.FixedSizeListFactory;
 import org.eclipse.collections.api.factory.list.ImmutableListFactory;
+import org.eclipse.collections.api.factory.list.MultiReaderListFactory;
 import org.eclipse.collections.api.factory.list.MutableListFactory;
 import org.eclipse.collections.api.list.FixedSizeList;
 import org.eclipse.collections.api.list.ImmutableList;
+import org.eclipse.collections.api.list.MultiReaderList;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.list.mutable.FastList;
@@ -155,19 +157,19 @@ public class ListsTest
     @Test
     public void multiReader()
     {
-        MutableListFactory listFactory = Lists.multiReader;
+        MultiReaderListFactory listFactory = Lists.multiReader;
         Assert.assertEquals(MultiReaderFastList.newList(), listFactory.of());
         Assert.assertEquals(MultiReaderFastList.newList(), listFactory.with());
         Assert.assertEquals(MultiReaderFastList.newList(), listFactory.empty());
-        Verify.assertInstanceOf(MultiReaderFastList.class, listFactory.of());
-        Verify.assertInstanceOf(MultiReaderFastList.class, listFactory.with());
-        Verify.assertInstanceOf(MultiReaderFastList.class, listFactory.empty());
+        Verify.assertInstanceOf(MultiReaderList.class, listFactory.of());
+        Verify.assertInstanceOf(MultiReaderList.class, listFactory.with());
+        Verify.assertInstanceOf(MultiReaderList.class, listFactory.empty());
         Assert.assertEquals(MultiReaderFastList.newListWith(1), listFactory.of(1));
-        Verify.assertInstanceOf(MultiReaderFastList.class, listFactory.of(1));
+        Verify.assertInstanceOf(MultiReaderList.class, listFactory.of(1));
         Assert.assertEquals(MultiReaderFastList.newListWith(1, 2, 3), listFactory.ofAll(FastList.newListWith(1, 2, 3)));
-        Verify.assertInstanceOf(MultiReaderFastList.class, listFactory.ofAll(FastList.newListWith(1, 2, 3)));
+        Verify.assertInstanceOf(MultiReaderList.class, listFactory.ofAll(FastList.newListWith(1, 2, 3)));
         Assert.assertEquals(MultiReaderFastList.newListWith(1, 2, 3), listFactory.fromStream(Stream.of(1, 2, 3)));
-        Verify.assertInstanceOf(MultiReaderFastList.class, listFactory.fromStream(Stream.of(1, 2, 3)));
+        Verify.assertInstanceOf(MultiReaderList.class, listFactory.fromStream(Stream.of(1, 2, 3)));
     }
 
     @Test

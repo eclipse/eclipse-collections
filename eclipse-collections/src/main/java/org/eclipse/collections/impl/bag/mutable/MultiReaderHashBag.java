@@ -22,6 +22,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.ImmutableBag;
+import org.eclipse.collections.api.bag.MultiReaderBag;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.bag.primitive.MutableBooleanBag;
 import org.eclipse.collections.api.bag.primitive.MutableByteBag;
@@ -80,7 +81,7 @@ import org.eclipse.collections.impl.utility.LazyIterate;
  */
 public final class MultiReaderHashBag<T>
         extends AbstractMultiReaderMutableCollection<T>
-        implements Externalizable, MutableBag<T>
+        implements Externalizable, MultiReaderBag<T>
 {
     private static final long serialVersionUID = 1L;
 
@@ -144,7 +145,7 @@ public final class MultiReaderHashBag<T>
         return new UntouchableMutableBag<>(this.delegate);
     }
 
-    public void withReadLockAndDelegate(Procedure<MutableBag<T>> procedure)
+    public void withReadLockAndDelegate(Procedure<? super MutableBag<T>> procedure)
     {
         try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
@@ -154,7 +155,7 @@ public final class MultiReaderHashBag<T>
         }
     }
 
-    public void withWriteLockAndDelegate(Procedure<MutableBag<T>> procedure)
+    public void withWriteLockAndDelegate(Procedure<? super MutableBag<T>> procedure)
     {
         try (LockWrapper wrapper = this.lockWrapper.acquireWriteLock())
         {
