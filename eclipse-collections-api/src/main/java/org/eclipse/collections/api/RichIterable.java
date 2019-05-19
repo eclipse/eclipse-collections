@@ -57,6 +57,7 @@ import org.eclipse.collections.api.collection.primitive.MutableIntCollection;
 import org.eclipse.collections.api.collection.primitive.MutableLongCollection;
 import org.eclipse.collections.api.collection.primitive.MutableShortCollection;
 import org.eclipse.collections.api.factory.Bags;
+import org.eclipse.collections.api.factory.RichIterables;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MapIterable;
 import org.eclipse.collections.api.map.MutableMap;
@@ -2292,4 +2293,14 @@ public interface RichIterable<T>
      * @since 3.0
      */
     <K, V> MapIterable<K, V> aggregateBy(Function<? super T, ? extends K> groupBy, Function0<? extends V> zeroValueFactory, Function2<? super V, ? super T, ? extends V> nonMutatingAggregator);
+
+    /**
+     * Dynamically alters the short-circuiting behavior on anySatisfy and detect
+     *
+     * @since 10.0.
+     */
+    default RichIterable<T> asNonShortCircuit()
+    {
+        return RichIterables.DECORATOR.nonShortCircuit(this);
+    }
 }
