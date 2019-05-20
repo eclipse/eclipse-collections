@@ -1487,6 +1487,23 @@ public abstract class AbstractRichIterableTestCase
         Assert.assertEquals(collection.toString(), builder.toString());
     }
 
+    @Test
+    public void appendStringThrows()
+    {
+        Verify.assertThrows(
+                RuntimeException.class,
+                () -> this.newWith(1, 2, 3)
+                        .appendString(new ThrowingAppendable()));
+        Verify.assertThrows(
+                RuntimeException.class,
+                () -> this.newWith(1, 2, 3)
+                        .appendString(new ThrowingAppendable(), ", "));
+        Verify.assertThrows(
+                RuntimeException.class,
+                () -> this.newWith(1, 2, 3)
+                        .appendString(new ThrowingAppendable(), "[", ", ", "]"));
+    }
+
     /**
      * @since 9.0
      */

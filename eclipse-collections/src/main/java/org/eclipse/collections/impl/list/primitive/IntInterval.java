@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018 Goldman Sachs and others.
+ * Copyright (c) 2019 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -46,6 +46,7 @@ import org.eclipse.collections.impl.lazy.primitive.CollectIntToObjectIterable;
 import org.eclipse.collections.impl.lazy.primitive.LazyIntIterableAdapter;
 import org.eclipse.collections.impl.lazy.primitive.ReverseIntIterable;
 import org.eclipse.collections.impl.lazy.primitive.SelectIntIterable;
+import org.eclipse.collections.impl.list.IntervalUtils;
 import org.eclipse.collections.impl.list.mutable.primitive.IntArrayList;
 import org.eclipse.collections.impl.set.mutable.primitive.IntHashSet;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
@@ -243,14 +244,7 @@ public final class IntInterval
      */
     public static IntInterval fromToBy(int from, int to, int stepBy)
     {
-        if (stepBy == 0)
-        {
-            throw new IllegalArgumentException("Cannot use a step by of 0");
-        }
-        if (from > to && stepBy > 0 || from < to && stepBy < 0)
-        {
-            throw new IllegalArgumentException("Step by is incorrect for the range");
-        }
+        IntervalUtils.checkArguments(from, to, stepBy);
         return new IntInterval(from, to, stepBy);
     }
 
@@ -304,13 +298,7 @@ public final class IntInterval
     @Override
     public boolean contains(int value)
     {
-        return this.isWithinBoundaries(value) && (value - this.from) % this.step == 0;
-    }
-
-    private boolean isWithinBoundaries(int value)
-    {
-        return this.step > 0 && this.from <= value && value <= this.to
-                || this.step < 0 && this.to <= value && value <= this.from;
+        return IntervalUtils.contains(value, this.from, this.to, this.step);
     }
 
     @Override
@@ -319,16 +307,16 @@ public final class IntInterval
         int index = 0;
         if (this.goForward())
         {
-            for (int i = this.from; i <= this.to; i += this.step)
+            for (long i = this.from; i <= this.to; i += this.step)
             {
-                procedure.value(i, index++);
+                procedure.value((int) i, index++);
             }
         }
         else
         {
-            for (int i = this.from; i >= this.to; i += this.step)
+            for (long i = this.from; i >= this.to; i += this.step)
             {
-                procedure.value(i, index++);
+                procedure.value((int) i, index++);
             }
         }
     }
@@ -352,16 +340,16 @@ public final class IntInterval
     {
         if (this.goForward())
         {
-            for (int i = this.from; i <= this.to; i += this.step)
+            for (long i = this.from; i <= this.to; i += this.step)
             {
-                procedure.value(i);
+                procedure.value((int) i);
             }
         }
         else
         {
-            for (int i = this.from; i >= this.to; i += this.step)
+            for (long i = this.from; i >= this.to; i += this.step)
             {
-                procedure.value(i);
+                procedure.value((int) i);
             }
         }
     }
@@ -442,7 +430,7 @@ public final class IntInterval
         if (this.from < this.to)
         {
             int listIndex = 0;
-            for (int i = this.from; i <= this.to; i += this.step)
+            for (long i = this.from; i <= this.to; i += this.step)
             {
                 if (i != list.get(listIndex++))
                 {
@@ -453,7 +441,7 @@ public final class IntInterval
         else
         {
             int listIndex = 0;
-            for (int i = this.from; i >= this.to; i += this.step)
+            for (long i = this.from; i >= this.to; i += this.step)
             {
                 if (i != list.get(listIndex++))
                 {
@@ -474,16 +462,16 @@ public final class IntInterval
         }
         else if (this.from < this.to)
         {
-            for (int i = this.from; i <= this.to; i += this.step)
+            for (long i = this.from; i <= this.to; i += this.step)
             {
-                hashCode = 31 * hashCode + i;
+                hashCode = 31 * hashCode + (int) i;
             }
         }
         else
         {
-            for (int i = this.from; i >= this.to; i += this.step)
+            for (long i = this.from; i >= this.to; i += this.step)
             {
-                hashCode = 31 * hashCode + i;
+                hashCode = 31 * hashCode + (int) i;
             }
         }
         return hashCode;
@@ -519,7 +507,7 @@ public final class IntInterval
     @Override
     public int size()
     {
-        return (this.to - this.from) / this.step + 1;
+        return IntervalUtils.intSize(this.from, this.to, this.step);
     }
 
     @Override
@@ -622,16 +610,16 @@ public final class IntInterval
         T result = injectedValue;
         if (this.goForward())
         {
-            for (int i = this.from; i <= this.to; i += this.step)
+            for (long i = this.from; i <= this.to; i += this.step)
             {
-                result = function.valueOf(result, i);
+                result = function.valueOf(result, (int) i);
             }
         }
         else
         {
-            for (int i = this.from; i >= this.to; i += this.step)
+            for (long i = this.from; i >= this.to; i += this.step)
             {
-                result = function.valueOf(result, i);
+                result = function.valueOf(result, (int) i);
             }
         }
         return result;
@@ -645,17 +633,17 @@ public final class IntInterval
 
         if (this.goForward())
         {
-            for (int i = this.from; i <= this.to; i += this.step)
+            for (long i = this.from; i <= this.to; i += this.step)
             {
-                result = function.valueOf(result, i, index);
+                result = function.valueOf(result, (int) i, index);
                 index++;
             }
         }
         else
         {
-            for (int i = this.from; i >= this.to; i += this.step)
+            for (long i = this.from; i >= this.to; i += this.step)
             {
-                result = function.valueOf(result, i, index);
+                result = function.valueOf(result, (int) i, index);
                 index++;
             }
         }
@@ -679,10 +667,10 @@ public final class IntInterval
                 while ((lastUpdated + this.step) <= this.to)
                 {
                     MutableIntList batch = IntLists.mutable.empty();
-                    for (int i = innerFrom; i <= this.to && batch.size() < size; i += this.step)
+                    for (long i = innerFrom; i <= this.to && batch.size() < size; i += this.step)
                     {
-                        batch.add(i);
-                        lastUpdated = i;
+                        batch.add((int) i);
+                        lastUpdated = (int) i;
                     }
                     result.add(batch);
                     innerFrom = lastUpdated + this.step;
@@ -693,10 +681,10 @@ public final class IntInterval
                 while ((lastUpdated + this.step) >= this.to)
                 {
                     MutableIntList batch = IntLists.mutable.empty();
-                    for (int i = innerFrom; i >= this.to && batch.size() < size; i += this.step)
+                    for (long i = innerFrom; i >= this.to && batch.size() < size; i += this.step)
                     {
-                        batch.add(i);
-                        lastUpdated = i;
+                        batch.add((int) i);
+                        lastUpdated = (int) i;
                     }
                     result.add(batch);
                     innerFrom = lastUpdated + this.step;
@@ -727,14 +715,14 @@ public final class IntInterval
     @Override
     public int getLast()
     {
-        return this.locationAfterN(this.size() - 1);
+        return (int) IntervalUtils.valueAtIndex(this.size() - 1, this.from, this.to, this.step);
     }
 
     @Override
     public int get(int index)
     {
         this.checkBounds("index", index);
-        return this.locationAfterN(index);
+        return (int) IntervalUtils.valueAtIndex(index, this.from, this.to, this.step);
     }
 
     private void checkBounds(String name, int index)
@@ -745,33 +733,10 @@ public final class IntInterval
         }
     }
 
-    private int locationAfterN(int index)
-    {
-        if (index <= 0)
-        {
-            return this.from;
-        }
-        if (this.step > 0)
-        {
-            return (int) Math.min((long) this.from + (long) this.step * (long) index, this.to);
-        }
-        return (int) Math.max((long) this.from + (long) this.step * (long) index, this.to);
-    }
-
     @Override
     public int indexOf(int value)
     {
-        if (!this.isWithinBoundaries(value))
-        {
-            return -1;
-        }
-        int diff = value - this.from;
-        if (diff % this.step == 0)
-        {
-            return diff / this.step;
-        }
-
-        return -1;
+        return IntervalUtils.indexOf(value, this.from, this.to, this.step);
     }
 
     @Override
@@ -876,19 +841,7 @@ public final class IntInterval
     @Override
     public int binarySearch(int value)
     {
-        if (this.step > 0 && this.from > value || this.step < 0 && this.from < value)
-        {
-            return -1;
-        }
-
-        if (this.step > 0 && this.to < value || this.step < 0 && this.to > value)
-        {
-            return -1 - this.size();
-        }
-
-        int diff = value - this.from;
-        int index = diff / this.step;
-        return diff % this.step == 0 ? index : (index + 2) * -1;
+        return IntervalUtils.binarySearch(value, this.from, this.to, this.step);
     }
 
     @Override
@@ -997,7 +950,7 @@ public final class IntInterval
 
     private class IntIntervalIterator implements IntIterator
     {
-        private int current = IntInterval.this.from;
+        private long current = IntInterval.this.from;
 
         @Override
         public boolean hasNext()
@@ -1014,7 +967,7 @@ public final class IntInterval
         {
             if (this.hasNext())
             {
-                int result = this.current;
+                int result = (int) this.current;
                 this.current += IntInterval.this.step;
                 return result;
             }
@@ -1044,7 +997,7 @@ public final class IntInterval
             {
                 return Comparator.naturalOrder();
             }
-            return  Comparator.reverseOrder();
+            return Comparator.reverseOrder();
         }
 
         @Override
@@ -1077,7 +1030,7 @@ public final class IntInterval
         @Override
         public long estimateSize()
         {
-            return (long) ((this.to - this.current) / this.step + 1);
+            return ((long) this.to - (long) this.current) / (long) this.step + 1;
         }
 
         @Override
