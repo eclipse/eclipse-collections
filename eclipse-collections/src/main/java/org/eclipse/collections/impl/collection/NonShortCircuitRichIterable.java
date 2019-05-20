@@ -14,6 +14,8 @@ import java.util.Objects;
 import java.util.Optional;
 
 import org.eclipse.collections.api.RichIterable;
+import org.eclipse.collections.api.ShortCircuitIterable;
+import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 
@@ -22,7 +24,7 @@ import org.eclipse.collections.api.block.predicate.Predicate2;
  *
  * @since 10.0.
  */
-public class NonShortCircuitRichIterable<T> extends AbstractForwardingRichIterable<T>
+public final class NonShortCircuitRichIterable<T> extends AbstractForwardingRichIterable<T> implements ShortCircuitIterable<T>
 {
     private RichIterable<T> delegate;
 
@@ -38,7 +40,7 @@ public class NonShortCircuitRichIterable<T> extends AbstractForwardingRichIterab
     }
 
     @Override
-    public RichIterable<T> asNonShortCircuit()
+    public ShortCircuitIterable<T> asNonShortCircuit()
     {
         return this;
     }
@@ -72,6 +74,18 @@ public class NonShortCircuitRichIterable<T> extends AbstractForwardingRichIterab
     }
 
     @Override
+    public T detectIfNone(Predicate<? super T> predicate, Function0<? extends T> function)
+    {
+        return this.detectOptional(predicate).orElse(function.get());
+    }
+
+    @Override
+    public <P> T detectWithIfNone(Predicate2<? super T, ? super P> predicate, P parameter, Function0<? extends T> function)
+    {
+        return this.detectWithOptional(predicate, parameter).orElse(function.get());
+    }
+
+    @Override
     public Optional<T> detectOptional(Predicate<? super T> predicate)
     {
         return Optional.ofNullable(this.detect(predicate));
@@ -81,5 +95,29 @@ public class NonShortCircuitRichIterable<T> extends AbstractForwardingRichIterab
     public <P> Optional<T> detectWithOptional(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         return Optional.ofNullable(this.detectWith(predicate, parameter));
+    }
+
+    @Override
+    public boolean allSatisfy(Predicate<? super T> predicate)
+    {
+        return !this.getDelegate().collectBoolean(each -> predicate.accept(each)).contains(false);
+    }
+
+    @Override
+    public <P> boolean allSatisfyWith(Predicate2<? super T, ? super P> predicate, P parameter)
+    {
+        return !this.getDelegate().collectBoolean(each -> predicate.accept(each, parameter)).contains(false);
+    }
+
+    @Override
+    public boolean noneSatisfy(Predicate<? super T> predicate)
+    {
+        return !this.getDelegate().collectBoolean(each -> predicate.accept(each)).contains(true);
+    }
+
+    @Override
+    public <P> boolean noneSatisfyWith(Predicate2<? super T, ? super P> predicate, P parameter)
+    {
+        return !this.getDelegate().collectBoolean(each -> predicate.accept(each, parameter)).contains(true);
     }
 }

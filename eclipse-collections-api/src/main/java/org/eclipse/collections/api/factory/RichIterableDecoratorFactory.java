@@ -11,11 +11,12 @@
 package org.eclipse.collections.api.factory;
 
 import org.eclipse.collections.api.RichIterable;
+import org.eclipse.collections.api.ShortCircuitIterable;
 
 /**
  * @since 10.0.
  */
 public interface RichIterableDecoratorFactory
 {
-    <T> RichIterable<T> nonShortCircuit(RichIterable<T> iterable);
+    <T> ShortCircuitIterable<T> nonShortCircuit(RichIterable<T> iterable);
 }

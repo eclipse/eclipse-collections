@@ -2299,7 +2299,7 @@ public interface RichIterable<T>
      *
      * @since 10.0.
      */
-    default RichIterable<T> asNonShortCircuit()
+    default ShortCircuitIterable<T> asNonShortCircuit()
     {
         return RichIterables.DECORATOR.nonShortCircuit(this);
     }

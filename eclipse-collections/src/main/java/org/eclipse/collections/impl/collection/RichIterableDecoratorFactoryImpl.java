@@ -11,6 +11,7 @@
 package org.eclipse.collections.impl.collection;
 
 import org.eclipse.collections.api.RichIterable;
+import org.eclipse.collections.api.ShortCircuitIterable;
 import org.eclipse.collections.api.factory.RichIterableDecoratorFactory;
 
 public class RichIterableDecoratorFactoryImpl implements RichIterableDecoratorFactory
@@ -18,7 +19,7 @@ public class RichIterableDecoratorFactoryImpl implements RichIterableDecoratorFa
     public static final RichIterableDecoratorFactory INSTANCE = new RichIterableDecoratorFactoryImpl();
 
     @Override
-    public <T> RichIterable<T> nonShortCircuit(RichIterable<T> iterable)
+    public <T> ShortCircuitIterable<T> nonShortCircuit(RichIterable<T> iterable)
     {
         return new NonShortCircuitRichIterable<T>(iterable);
     }
