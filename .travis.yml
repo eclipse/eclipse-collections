@@ -3,7 +3,7 @@ dist: trusty
 sudo: false
 
 before_install:
-  - mvn -N io.takari:maven:wrapper -Dmaven=3.5.2
+  - mvn -N io.takari:maven:wrapper -Dmaven=3.6.1
   - echo "MAVEN_OPTS='-Dmaven.repo.local=$HOME/.m2/repository -Xmx1g -Dorg.slf4j.simpleLogger.showDateTime=true -Dorg.slf4j.simpleLogger.dateTimeFormat=HH:mm:ss:SSS'" > ~/.mavenrc
 
 install:
