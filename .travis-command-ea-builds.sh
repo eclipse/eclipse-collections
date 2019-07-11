@@ -42,7 +42,7 @@ function install_jdk_and_run_ea_build {
   $JAVA_HOME/bin/java -version
   ./mvnw -version
   echo "Completed setting environment"
-  ./mvnw install
+  ./mvnw install --no-transfer-progress
 }
 
 case "$JDK" in
