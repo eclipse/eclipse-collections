@@ -2292,4 +2292,27 @@ public interface RichIterable<T>
      * @since 3.0
      */
     <K, V> MapIterable<K, V> aggregateBy(Function<? super T, ? extends K> groupBy, Function0<? extends V> zeroValueFactory, Function2<? super V, ? super T, ? extends V> nonMutatingAggregator);
+
+    /**
+     * Applies a groupBy function over the iterable, followed by a collect function.
+     *
+     * @param groupByFunction a {@link Function} to use as the groupBy transformation function
+     * @param collectFunction a {@link Function} to use as the collect transformation function
+     *
+     * @return The {@code target} collection where the key is the transformed result from applying the groupBy function
+     * and the value is the transformed result from applying the collect function.
+     *
+     * @see #groupBy(Function)
+     * @see Multimap#collectValues(Function)
+     *
+     * @since 10.1.0
+     */
+    default <K, V, R extends MutableMultimap<K, V>> R groupByAndCollect(
+            Function<? super T, ? extends K> groupByFunction,
+            Function<? super T, ? extends V> collectFunction,
+            R target)
+    {
+        this.forEach(each -> target.put(groupByFunction.apply(each), collectFunction.apply(each)));
+        return target;
+    }
 }
