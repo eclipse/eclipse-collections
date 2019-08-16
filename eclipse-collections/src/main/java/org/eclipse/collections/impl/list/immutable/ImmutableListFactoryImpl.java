@@ -256,4 +256,25 @@ public class ImmutableListFactoryImpl implements ImmutableListFactory
         }
         return this.of((T[]) Iterate.toArray(items));
     }
+
+    @Override
+    public <T> ImmutableList<T> withNValues(int size, T value)
+    {
+        if (size < 0)
+        {
+            throw new IllegalArgumentException("Expected size is greater than or equal to 0. Was: " + size);
+        }
+
+        if (size == 0)
+        {
+            return this.empty();
+        }
+
+        if (size == 1)
+        {
+            return this.with(value);
+        }
+
+        return new NValuesImmutableList(size, value);
+    }
 }

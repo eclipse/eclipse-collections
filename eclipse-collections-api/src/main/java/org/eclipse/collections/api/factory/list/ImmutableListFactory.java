@@ -123,4 +123,6 @@ public interface ImmutableListFactory
     {
         return Lists.mutable.<T>fromStream(stream).toImmutable();
     }
+
+    <T> ImmutableList<T> withNValues(int size, T value);
 }

@@ -246,12 +246,6 @@ public class FastList<T>
         InternalArrayIterate.batchForEach(procedure, this.items, this.size, sectionIndex, sectionCount);
     }
 
-    @Override
-    public int getBatchCount(int batchSize)
-    {
-        return Math.max(1, this.size() / batchSize);
-    }
-
     public <E> E[] toArray(E[] array, int sourceFromIndex, int sourceToIndex, int destinationIndex)
     {
         System.arraycopy(this.items, sourceFromIndex, array, destinationIndex, sourceToIndex - sourceFromIndex + 1);

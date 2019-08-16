@@ -18,7 +18,10 @@ public interface BatchIterable<E>
 
     int size();
 
-    int getBatchCount(int batchSize);
+    default int getBatchCount(int batchSize)
+    {
+        return Math.max(1, this.size() / batchSize);
+    }
 
     void forEach(Procedure<? super E> procedure);
 }
