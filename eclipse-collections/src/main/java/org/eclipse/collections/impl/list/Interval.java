@@ -85,7 +85,7 @@ public final class Interval
     }
 
     /**
-     * This static {@code from} method allows Interval to act as a Java 8's IntStream.range().
+     * This static {@code range} method works similar to Java 8's IntStream.range() method.
      * <p>
      * Usage Example:
      * <pre>
