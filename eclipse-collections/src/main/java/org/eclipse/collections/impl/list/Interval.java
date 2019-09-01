@@ -85,6 +85,27 @@ public final class Interval
     }
 
     /**
+     * This static {@code from} method allows Interval to act as a Java 8's IntStream.range().
+     * <p>
+     * Usage Example:
+     * <pre>
+     * Interval interval1 = Interval.range(1, 5);         // results in: 1, 2, 3, 4.
+     * Interval interval2 = Interval.range(-5, 1);        // results in: -5, -4, -3, -2, -1, 0.
+     * </pre>
+     */
+    public static Interval range(int newFrom, int newTo)
+    {
+        if (newTo > newFrom)
+        {
+            return Interval.fromToBy(newFrom, newTo - 1, 1);
+        }
+        else
+        {
+            return Interval.fromToBy(newFrom, newFrom, 1);
+        }
+    }
+
+    /**
      * This instance {@code to} method allows Interval to act as a fluent builder for itself.
      * It works in conjunction with the static method {@link #from(int)} and instance method {@link #by(int)}.
      * <p>

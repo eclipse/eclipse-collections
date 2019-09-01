@@ -59,6 +59,24 @@ public class IntervalTest
         Verify.assertEqualsAndHashCode(interval3, Interval.fromToBy(1, 10, 2));
     }
 
+    @Test
+    public void range()
+    {
+        Interval interval = Interval.range(1, 10);
+        Interval interval2 = Interval.range(-9, -2);
+        Interval interval3 = Interval.range(0, 1);
+        Interval interval4 = Interval.range(0, 0);
+        Interval interval5 = Interval.range(3, -1);
+        Interval interval6 = Interval.range(-1, -3);
+        Verify.assertEqualsAndHashCode(interval, Interval.fromTo(1, 9));
+        Verify.assertEqualsAndHashCode(interval2, Interval.fromTo(-9, -3));
+        Verify.assertEqualsAndHashCode(interval3, Interval.fromTo(0, 0));
+
+        Verify.assertEqualsAndHashCode(interval4, Interval.fromTo(0, 0));
+        Verify.assertEqualsAndHashCode(interval5, Interval.fromTo(3, 3));
+        Verify.assertEqualsAndHashCode(interval6, Interval.fromTo(-1, -1).by(1));  // for negative value fromTo will stepby -1
+    }
+
     @Test(expected = IllegalArgumentException.class)
     public void fromToBy_throws_step_size_zero()
     {
