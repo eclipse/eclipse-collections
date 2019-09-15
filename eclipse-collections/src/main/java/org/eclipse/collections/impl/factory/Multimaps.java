@@ -52,7 +52,12 @@ public final class Multimaps
         public final ImmutableSetMultimapFactory set = new ImmutableSetMultimapFactory();
         public final ImmutableSortedSetMultimapFactory sortedSet = new ImmutableSortedSetMultimapFactory();
         public final ImmutableBagMultimapFactory bag = new ImmutableBagMultimapFactory();
-        public final ImmutableSortedBagMultimapFactory multimap = new ImmutableSortedBagMultimapFactory();
+        public final ImmutableSortedBagMultimapFactory sortedBag = new ImmutableSortedBagMultimapFactory();
+        /**
+         * @deprecated Use {@link org.eclipse.collections.impl.factory.Multimaps.immutable.sortedBag} instead
+         */
+        @Deprecated
+        public final ImmutableSortedBagMultimapFactory multimap = sortedBag;
 
         private ImmutableMultimaps()
         {

@@ -81,17 +81,17 @@ public class MultimapsTest
     @Test
     public void immutableSortedBagMultimap()
     {
-        ImmutableSortedBagMultimap<Integer, Integer> empty = Multimaps.immutable.multimap.of(Integer::compareTo);
-        ImmutableSortedBagMultimap<Integer, Integer> emptyWith = Multimaps.immutable.multimap.with(Integer::compareTo);
+        ImmutableSortedBagMultimap<Integer, Integer> empty = Multimaps.immutable.sortedBag.of(Integer::compareTo);
+        ImmutableSortedBagMultimap<Integer, Integer> emptyWith = Multimaps.immutable.sortedBag.with(Integer::compareTo);
         Verify.assertEmpty(empty);
         Verify.assertEmpty(emptyWith);
-        ImmutableSortedBagMultimap<Integer, Integer> one = Multimaps.immutable.multimap.of(Integer::compareTo, 1, 1);
+        ImmutableSortedBagMultimap<Integer, Integer> one = Multimaps.immutable.sortedBag.of(Integer::compareTo, 1, 1);
         Assert.assertEquals(TreeBagMultimap.newMultimap(Tuples.pair(1, 1)), one);
-        ImmutableSortedBagMultimap<Integer, Integer> two = Multimaps.immutable.multimap.of(Integer::compareTo, 1, 1, 2, 2);
-        ImmutableSortedBagMultimap<? extends Object, ? extends Object> toStringOffTwo = Multimaps.immutable.multimap.of(String::compareTo, "A", "B");
+        ImmutableSortedBagMultimap<Integer, Integer> two = Multimaps.immutable.sortedBag.of(Integer::compareTo, 1, 1, 2, 2);
+        ImmutableSortedBagMultimap<? extends Object, ? extends Object> toStringOffTwo = Multimaps.immutable.sortedBag.of(String::compareTo, "A", "B");
         Assert.assertEquals(TreeBagMultimap.newMultimap(Tuples.pair("A", "B")), toStringOffTwo);
         Assert.assertEquals(TreeBagMultimap.newMultimap(Tuples.pair(1, 1), Tuples.pair(2, 2)), two);
-        ImmutableSortedBagMultimap<Integer, Integer> three = Multimaps.immutable.multimap.of(Integer::compareTo, 1, 1, 2, 2, 3, 3);
+        ImmutableSortedBagMultimap<Integer, Integer> three = Multimaps.immutable.sortedBag.of(Integer::compareTo, 1, 1, 2, 2, 3, 3);
         Assert.assertEquals(TreeBagMultimap.newMultimap(Tuples.pair(1, 1), Tuples.pair(2, 2), Tuples.pair(3, 3)), three);
     }
 
