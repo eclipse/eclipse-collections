@@ -2534,6 +2534,54 @@ ImmutableMap<Integer, String> immutableMap =
 
 These factories highlight yet another benefit of immutable collections: they let you create efficient containers that are sized according to their contents. In cases where there are many, even millions of collections, each with a size less than 10, this is an important advantage.
 
+### []() Growing and Shrinking Immutable Collections
+
+There are no mutating methods like `add(), addAll(), remove()` or `removeAll()` on immutable collection interfaces in Eclipse Collections. However, we may want to add or remove elements. Methods like `newWith(), newWithout(), newWithAll()` and `newWithoutAll()` allow for safe copying of immutable collections. For ImmutableMap implementations, the methods are named `newWithKeyValue(), newWithAllKeyValues(), newWithoutKey()` and `newWithoutAllKeys()`.
+     
+```java
+// persons is an mutable list: MutableList<Person> persons
+// Person is a class with attributes name, age and address
+
+PartitionMutableList<Person> partitionedFolks =
+        persons.partition(person -> person.getAge() >= 18); // defines a partition pattern
+
+ImmutableList<Person> list0 = Lists.immutable.empty();
+ImmutableList<Person> list1 = list0.newWith(new Person(...)); // add a single element to the new immutable list
+ImmutableList<Person> adults = list1.newWithAll(partitionedFolks.getSelected()); // add none, one or more objects to the new immutable list
+
+
+ImmutableSet<String> set0 = Sets.immutable.empty();
+ImmutableSet<String> set1 = set0.newWith("1"); // add a single element to the new immutable set
+ImmutableSet<String> set2 = set1.newWithAll(Sets.mutable.with("2")); // add none, one or more objects to the new immutable set
+```
+
+
+For ImmutableMap implementations, the methods are named `newWithKeyValue(), newWithAllKeyValues(), newWithoutKey()` and `newWithoutAllKeys()`.
+
+```java
+ImmutableMap<String, String> map0 = Maps.immutable.empty();
+ImmutableMap<String, String> map1 = map0.newWithKeyValue("1", "1");
+ImmutableMap<String, String> map2 = map1.newWithAllKeyValues(Lists.mutable.with(Tuples.pair("2", "2")))
+```
+
+These methods are available on the primitive containers too though we are missing some symmetry in our immutable primitive map containers. We **do not** currently have `newWithAllKeyValues()` on immutable primitive maps. The corresponding feature request is [here](https://github.com/eclipse/eclipse-collections/issues/344).
+
+```java
+ImmutableIntList list0 = IntLists.immutable.empty();
+ImmutableIntList list1 = list0.newWith(1);
+ImmutableIntList list2 = list1.newWithAll(IntLists.mutable.with(2));
+
+ImmutableIntSet set0 = IntSets.immutable.empty();
+ImmutableIntSet set1 = set0.newWith(1);
+ImmutableIntSet set2 = set1.newWithAll(IntSets.mutable.with(2));
+
+ImmutableIntIntMap map0 = IntIntMaps.immutable.empty();
+ImmutableIntIntMap map1 = map0.newWithKeyValue(1, 1);
+```
+
+
+
+
 []() Creating collections containers
 -----------------------------------
 
@@ -2593,12 +2641,38 @@ There are two ways to create an immutable **List**, **Set**, **Bag**, **Stack** 
 <!-- -->
 
 ```java
+
+// 1. Calling toImmutable()
+ImmutableList<String> list = 
+    Lists.mutable.with("a", "b", "c").toImmutable(); // creates a list of elements a,b,c
+ImmutableSet<String> set0 =  
+    Lists.mutable.with("a", "b", "a", "c").toSet().toImmutable(); // creates a set of elements a,b,c
+ImmutableSet<String> set1 =  
+    Sets.mutable.with("a", "b", "a", "c").toImmutable(); // creates a set of elements a,b,c
+ImmutableMap<Integer, String> map = 
+    Maps.mutable.with(1, "a", 2, "b", 3, "c").toImmutable(); // creates a map with keys 1,2,3
+
+//2. Using factory classes
 ImmutableList<String> emptyList_i = 
     Lists.immutable.empty();  // creates an empty list
-ImmutableList<String> list_b = 
+ImmutableList<String> list_b =
     Lists.immutable.with("a", "b", "c"); // creates a list of elements a,b,c
-ImmutableList<String> list_c = 
+ImmutableList<String> list_c =
     Lists.immutable.of("a", "b", "c");  // creates a list of elements a,b,c
+
+ImmutableSet<String> emptySet_i =
+    Sets.immutable.empty();  // creates an empty Set
+ImmutableSet<String> set_b =
+    Sets.immutable.with("a", "b", "c"); // creates a Set of elements a,b,c
+ImmutableSet<String> set_c =
+    Sets.immutable.of("a", "b", "c");  // creates a Set of elements a,b,c
+
+ImmutableMap<Integer, String> emptyMap_i =
+    Maps.immutable.empty(); // creates an empty map
+ImmutableMap<Integer, String> map_b =
+    Maps.immutable.with(1, "a", 2, "b", 3, "c"); // creates a map with keys 1,2,3
+ImmutableMap<Integer, String> map_c =
+    Maps.immutable.of(1, "a", 2, "b", 3, "c"); // creates a map with keys 1,2,3
 ```
 
 ### []() Creating primitive collections
