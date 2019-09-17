@@ -56,6 +56,7 @@ import org.eclipse.collections.api.map.MapIterable;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.multimap.Multimap;
 import org.eclipse.collections.api.multimap.MutableMultimap;
+import org.eclipse.collections.api.multimap.list.MutableListMultimap;
 import org.eclipse.collections.api.partition.PartitionIterable;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.Counter;
@@ -79,11 +80,13 @@ import org.eclipse.collections.impl.block.function.AddFunction;
 import org.eclipse.collections.impl.collector.Collectors2;
 import org.eclipse.collections.impl.factory.Bags;
 import org.eclipse.collections.impl.factory.Lists;
+import org.eclipse.collections.impl.factory.Multimaps;
 import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.factory.SortedSets;
 import org.eclipse.collections.impl.factory.primitive.ObjectDoubleMaps;
 import org.eclipse.collections.impl.factory.primitive.ObjectLongMaps;
 import org.eclipse.collections.impl.list.Interval;
+import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.list.primitive.IntInterval;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.map.sorted.mutable.TreeSortedMap;
@@ -2085,6 +2088,22 @@ public interface RichIterableTestCase extends IterableTestCase
     {
         Object[] array = this.newWith(3, 3, 3, 2, 2, 1).toArray();
         assertEquals(Bags.immutable.with(3, 3, 3, 2, 2, 1), HashBag.newBagWith(array));
+    }
+
+    @Test
+    default void RichIterable_groupByAndCollect()
+    {
+        RichIterable<Integer> iterable = this.newWith(10, 9, 8, 7, 6, 5, 4, 3, 2, 1);
+        Function<Integer, Boolean> groupByFunction = integer -> IntegerPredicates.isOdd().accept(integer);
+        Function<Integer, Integer> collectFunction = integer -> integer + 2;
+
+        FastList<Integer> expectedOddNumberList = FastList.newListWith(3, 5, 7, 9, 11);
+        FastList<Integer> expectedEvenNumberList = FastList.newListWith(4, 6, 8, 10, 12);
+
+        MutableListMultimap<Boolean, Integer> targetResult = iterable.groupByAndCollect(groupByFunction, collectFunction, Multimaps.mutable.list.empty());
+
+        assertTrue(expectedOddNumberList.containsAll(targetResult.get(Boolean.TRUE)));
+        assertTrue(expectedEvenNumberList.containsAll(targetResult.get(Boolean.FALSE)));
     }
 
     class Holder<T extends Comparable<? super T>> implements Comparable<Holder<T>>
