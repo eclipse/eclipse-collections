@@ -67,6 +67,11 @@ jobs:
         - DESC="unit tests openjdk12"
         - CMD="./mvnw install"
 
+    - jdk: openjdk13
+      env:
+        - DESC="unit tests openjdk13"
+        - CMD="./mvnw install"
+
     - jdk: openjdk-ea
       env:
         - DESC="unit tests openjdk-ea"
