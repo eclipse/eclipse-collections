@@ -74,8 +74,8 @@ jobs:
 
     - jdk: oraclejdk8
       env:
-        - DESC="unit tests Java12-EA"
-        - JDK=Java12-EA
+        - DESC="unit tests Java14-EA"
+        - JDK=Java14-EA
         - CMD="./.travis-command-ea-builds.sh"
 
   allow_failures:
@@ -85,8 +85,8 @@ jobs:
         - CMD="./mvnw install"
     - jdk: oraclejdk8
       env:
-        - DESC="unit tests Java12-EA"
-        - JDK=Java12-EA
+        - DESC="unit tests Java14-EA"
+        - JDK=Java14-EA
         - CMD="./.travis-command-ea-builds.sh"
 
 script: eval travis_wait 30 $CMD
