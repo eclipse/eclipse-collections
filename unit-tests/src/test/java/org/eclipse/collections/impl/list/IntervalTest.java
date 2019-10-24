@@ -20,6 +20,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 import org.eclipse.collections.api.LazyIterable;
+import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.set.MutableSet;
@@ -30,6 +31,7 @@ import org.eclipse.collections.impl.block.procedure.CollectionAddProcedure;
 import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.math.IntegerSum;
+import org.eclipse.collections.impl.math.MutableInteger;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.utility.ArrayIterate;
 import org.eclipse.collections.impl.utility.Iterate;
@@ -63,6 +65,15 @@ public class IntervalTest
     public void fromToBy_throws_step_size_zero()
     {
         Interval.fromToBy(0, 0, 0);
+    }
+
+    @Test
+    public void fromToBy_with_same_start_and_end_with_negative_step()
+    {
+        MutableList<Integer> integers = Interval.fromToBy(2, 2, -2).toList();
+
+        Verify.assertEquals(1, integers.size());
+        Verify.assertContains(2, integers);
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -199,6 +210,15 @@ public class IntervalTest
         Interval interval = Interval.oneTo(5);
         Assert.assertEquals(Integer.valueOf(20), interval.injectInto(5, AddFunction.INTEGER));
         Assert.assertEquals(Integer.valueOf(20), interval.reverseThis().injectInto(5, AddFunction.INTEGER));
+    }
+
+    @Test
+    public void injectIntoOnFromToBySameStartEndNegativeStepInterval()
+    {
+        Interval interval = Interval.fromToBy(2, 2, -2);
+
+        Assert.assertEquals(Integer.valueOf(0), interval.injectInto(-2, AddFunction.INTEGER));
+        Assert.assertEquals(Integer.valueOf(0), interval.reverseThis().injectInto(-2, AddFunction.INTEGER));
     }
 
     @Test
@@ -639,6 +659,17 @@ public class IntervalTest
         MutableList<Integer> backwardsResult = Lists.mutable.of();
         interval.forEachWithIndex(new AddParametersProcedure(backwardsResult), 3, 1);
         Assert.assertEquals(FastList.newListWith(8, 2, -4), backwardsResult);
+    }
+
+    @Test
+    public void forEach_with_same_start_and_end_with_negative_step()
+    {
+        Interval interval = Interval.fromToBy(2, 2, -2);
+
+        MutableInteger counter = new MutableInteger(0);
+        interval.forEach((Procedure<Integer>) each -> counter.add(1));
+
+        Assert.assertEquals(1, counter.toInteger().intValue());
     }
 
     @Test
