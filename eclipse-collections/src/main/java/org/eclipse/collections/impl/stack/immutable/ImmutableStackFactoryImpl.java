@@ -12,6 +12,7 @@ package org.eclipse.collections.impl.stack.immutable;
 
 import org.eclipse.collections.api.factory.stack.ImmutableStackFactory;
 import org.eclipse.collections.api.stack.ImmutableStack;
+import org.eclipse.collections.impl.utility.Iterate;
 
 public class ImmutableStackFactoryImpl implements ImmutableStackFactory
 {
@@ -20,7 +21,7 @@ public class ImmutableStackFactoryImpl implements ImmutableStackFactory
     @Override
     public <T> ImmutableStack<T> empty()
     {
-        return ImmutableArrayStack.newStack();
+        return (ImmutableStack<T>) ImmutableEmptyStack.INSTANCE;
     }
 
     @Override
@@ -44,7 +45,7 @@ public class ImmutableStackFactoryImpl implements ImmutableStackFactory
     @Override
     public <T> ImmutableStack<T> with(T element)
     {
-        return ImmutableArrayStack.newStackWith(element);
+        return new ImmutableNotEmptyStack<>(element, this.empty());
     }
 
     @Override
@@ -56,7 +57,12 @@ public class ImmutableStackFactoryImpl implements ImmutableStackFactory
     @Override
     public <T> ImmutableStack<T> with(T... elements)
     {
-        return ImmutableArrayStack.newStackWith(elements);
+        ImmutableStack<T> result = this.empty();
+        for (T element : elements)
+        {
+            result = result.push(element);
+        }
+        return result;
     }
 
     @Override
@@ -68,7 +74,12 @@ public class ImmutableStackFactoryImpl implements ImmutableStackFactory
     @Override
     public <T> ImmutableStack<T> withAll(Iterable<? extends T> items)
     {
-        return ImmutableArrayStack.newStack(items);
+        ImmutableStack<T> result = this.empty();
+        for (T item : items)
+        {
+            result = result.push(item);
+        }
+        return result;
     }
 
     @Override
@@ -80,7 +91,13 @@ public class ImmutableStackFactoryImpl implements ImmutableStackFactory
     @Override
     public <T> ImmutableStack<T> withReversed(T... elements)
     {
-        return ImmutableArrayStack.newStackFromTopToBottom(elements);
+        ImmutableStack<T> result = this.empty();
+        for (int i = elements.length - 1; i >= 0; i--)
+        {
+            T element = elements[i];
+            result = result.push(element);
+        }
+        return result;
     }
 
     @Override
@@ -92,6 +109,6 @@ public class ImmutableStackFactoryImpl implements ImmutableStackFactory
     @Override
     public <T> ImmutableStack<T> withAllReversed(Iterable<? extends T> items)
     {
-        return ImmutableArrayStack.newStackFromTopToBottom(items);
+        return this.withReversed((T[]) Iterate.toArray(items));
     }
 }

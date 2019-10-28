@@ -20,6 +20,7 @@ import org.junit.Test;
 
 import static org.eclipse.collections.impl.test.Verify.assertThrows;
 import static org.eclipse.collections.test.IterableTestCase.assertEquals;
+import static org.junit.Assert.assertSame;
 
 public interface ImmutableStackTestCase extends StackIterableTestCase
 {
@@ -50,7 +51,7 @@ public interface ImmutableStackTestCase extends StackIterableTestCase
     {
         ImmutableStack<Integer> immutableStack = this.newWith(5, 1, 4, 2, 3);
         ImmutableStack<Integer> emptyStack = immutableStack.pop().pop().pop().pop().pop();
-        assertEquals(Stacks.immutable.with(), emptyStack);
+        assertSame(Stacks.immutable.with(), emptyStack);
         assertThrows(EmptyStackException.class, (Runnable) emptyStack::pop);
     }
 }

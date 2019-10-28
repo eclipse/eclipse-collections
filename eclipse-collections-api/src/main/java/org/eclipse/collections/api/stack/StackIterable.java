@@ -79,7 +79,10 @@ public interface StackIterable<T> extends OrderedIterable<T>
      * Should return the same value as peek().
      */
     @Override
-    T getFirst();
+    default T getFirst()
+    {
+        return this.peek();
+    }
 
     /**
      * Should not work as it violates the contract of a Stack.
