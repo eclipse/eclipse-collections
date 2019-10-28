@@ -1,5 +1,9 @@
-target
-.maven
+# maven
+target/
+.maven/
+.m2/
+dependency-reduced-pom.xml
+pom.xml.versionsBackup
 .mvn/wrapper/
 mvnw
 mvnw.cmd
