@@ -99,6 +99,7 @@
     <suppress checks="RedundantModifier" files="ImmutableSortedSetSerializationProxy.java" />
     <suppress checks="RedundantModifier" files="ImmutableSetWithHashingStrategySerializationProxy.java" />
     <suppress checks="RedundantModifier" files="ImmutableArrayStack.java" />
+    <suppress checks="RedundantModifier" files="ImmutableStackSerializationProxy.java" />
     <suppress checks="RedundantModifier" files="FlatCollectBooleanToObjectIterable.java" />
     <suppress checks="RedundantModifier" files="FlatCollectByteToObjectIterable.java" />
     <suppress checks="RedundantModifier" files="FlatCollectCharToObjectIterable.java" />
