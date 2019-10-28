@@ -123,10 +123,10 @@
         <scala.version>2.12.6</scala.version>
         <guava.version>25.1-jre</guava.version>
         <trove4j.version>3.0.3</trove4j.version>
-        <checkstyle.version>8.11</checkstyle.version>
+        <checkstyle.version>8.18</checkstyle.version>
         <checkstyle.plugin.version>3.1.0</checkstyle.plugin.version>
         <findbugs.plugin.version>3.0.5</findbugs.plugin.version>
-        <jacoco.plugin.version>0.8.4</jacoco.plugin.version>
+        <jacoco.plugin.version>0.8.5</jacoco.plugin.version>
 
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
@@ -207,7 +207,7 @@
 
                 <plugin>
                     <artifactId>maven-assembly-plugin</artifactId>
-                    <version>3.1.0</version>
+                    <version>3.1.1</version>
                 </plugin>
 
                 <plugin>
@@ -217,7 +217,7 @@
 
                 <plugin>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.7.0</version>
+                    <version>3.8.1</version>
                 </plugin>
 
                 <plugin>
@@ -269,7 +269,7 @@
 
                 <plugin>
                     <artifactId>maven-plugin-plugin</artifactId>
-                    <version>3.5.2</version>
+                    <version>3.6.0</version>
                 </plugin>
 
                 <plugin>
@@ -284,7 +284,7 @@
 
                 <plugin>
                     <artifactId>maven-site-plugin</artifactId>
-                    <version>3.7.1</version>
+                    <version>3.8.2</version>
                 </plugin>
 
                 <plugin>
@@ -335,7 +335,7 @@
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>versions-maven-plugin</artifactId>
-                    <version>2.5</version>
+                    <version>2.7</version>
                 </plugin>
 
                 <plugin>
@@ -347,7 +347,7 @@
                 <plugin>
                     <groupId>net.alchim31.maven</groupId>
                     <artifactId>scala-maven-plugin</artifactId>
-                    <version>4.0.2</version>
+                    <version>4.2.4</version>
                     <configuration>
                         <scalaVersion>${scala.version}</scalaVersion>
                     </configuration>
@@ -434,7 +434,7 @@
                 <plugin>
                     <groupId>org.eclipse.cbi.maven.plugins</groupId>
                     <artifactId>eclipse-jarsigner-plugin</artifactId>
-                    <version>1.1.5</version>
+                    <version>1.1.7</version>
                 </plugin>
                 <!--This plugin's configuration is used to store Eclipse m2e
                     settings only. It has no influence on the Maven build itself. -->
@@ -714,7 +714,7 @@
                     <plugin>
                         <groupId>org.eclipse.cbi.maven.plugins</groupId>
                         <artifactId>eclipse-jarsigner-plugin</artifactId>
-                        <version>1.1.3</version>
+                        <version>1.1.7</version>
                         <executions>
                             <execution>
                                 <id>jarsign</id>
