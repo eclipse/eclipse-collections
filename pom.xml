@@ -598,6 +598,7 @@
 
             <modules>
                 <module>scala-unit-tests</module>
+                <module>concurrency-tests</module>
                 <module>jmh-scala-tests</module>
                 <module>jmh-tests</module>
             </modules>
