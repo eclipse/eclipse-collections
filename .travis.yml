@@ -15,17 +15,17 @@ jobs:
     - jdk: oraclejdk8
       env:
         - DESC="acceptance tests"
-        - CMD="./mvnw install --projects acceptance-tests --also-make --activate-profiles all"
+        - CMD="./mvnw install --projects acceptance-tests --also-make --activate-profiles all --no-transfer-progress"
 
     - jdk: oraclejdk8
       env:
         - DESC="findbugs"
-        - CMD="./mvnw install findbugs:check --projects '!scala-unit-tests,!jmh-scala-tests,!jmh-tests,!jcstress-tests,!p2-repository' --activate-profiles all -DskipTests=true"
+        - CMD="./mvnw install findbugs:check --projects '!scala-unit-tests,!jmh-scala-tests,!jmh-tests,!jcstress-tests,!p2-repository' --activate-profiles all -DskipTests=true --no-transfer-progress"
 
     - jdk: oraclejdk8
       env:
         - DESC="checkstyle"
-        - CMD="./mvnw install checkstyle:check --activate-profiles all -DskipTests=true"
+        - CMD="./mvnw install checkstyle:check --activate-profiles all -DskipTests=true --no-transfer-progress"
 
     - jdk: oraclejdk8
       env:
@@ -35,37 +35,37 @@ jobs:
     - jdk: oraclejdk8
       env:
         - DESC="compile performance-tests"
-        - CMD="./mvnw install --projects performance-tests --also-make --activate-profiles all -DskipTests=true"
+        - CMD="./mvnw install --projects performance-tests --also-make --activate-profiles all -DskipTests=true --no-transfer-progress"
 
     - jdk: oraclejdk8
       env:
         - DESC="compile javadoc"
-        - CMD="./mvnw install javadoc:jar --projects '!unit-tests,!junit-trait-runner,!unit-tests-java8,!serialization-tests,!scala-unit-tests,!jmh-scala-tests,!jmh-tests,!jcstress-tests,!p2-repository,!test-coverage' --activate-profiles all -DskipTests=true"
+        - CMD="./mvnw install javadoc:jar --projects '!unit-tests,!junit-trait-runner,!unit-tests-java8,!serialization-tests,!scala-unit-tests,!jmh-scala-tests,!jmh-tests,!jcstress-tests,!p2-repository,!test-coverage' --activate-profiles all -DskipTests=true --no-transfer-progress"
 
     - jdk: oraclejdk9
       env:
         - DESC="unit tests oraclejdk9"
-        - CMD="./mvnw install"
+        - CMD="./mvnw install --no-transfer-progress"
 
     - jdk: openjdk10
       env:
         - DESC="unit tests openjdk10"
-        - CMD="./mvnw install"
+        - CMD="./mvnw install --no-transfer-progress"
 
     - jdk: openjdk11
       env:
         - DESC="unit tests openjdk11"
-        - CMD="./mvnw install"
+        - CMD="./mvnw install --no-transfer-progress"
 
     - jdk: oraclejdk11
       env:
         - DESC="unit tests oraclejdk11"
-        - CMD="./mvnw install"
+        - CMD="./mvnw install --no-transfer-progress"
 
     - jdk: openjdk12
       env:
         - DESC="unit tests openjdk12"
-        - CMD="./mvnw install"
+        - CMD="./mvnw install --no-transfer-progress"
 
     - jdk: openjdk13
       env:
@@ -75,7 +75,7 @@ jobs:
     - jdk: openjdk-ea
       env:
         - DESC="unit tests openjdk-ea"
-        - CMD="./mvnw install"
+        - CMD="./mvnw install --no-transfer-progress"
 
     - jdk: oraclejdk8
       env:
@@ -87,7 +87,7 @@ jobs:
     - jdk: openjdk-ea
       env:
         - DESC="unit tests openjdk-ea"
-        - CMD="./mvnw install"
+        - CMD="./mvnw install --no-transfer-progress"
     - jdk: oraclejdk8
       env:
         - DESC="unit tests Java14-EA"
