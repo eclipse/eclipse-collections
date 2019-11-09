@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2019 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -136,6 +136,11 @@ public final class Procedures
         return new BindProcedure<>(procedure, parameter);
     }
 
+    public static <T> Procedure<T> noop()
+    {
+        return (Procedure<T>) NoopProcedure.INSTANCE;
+    }
+
     private static final class PrintlnProcedure<T> implements Procedure<T>
     {
         private static final long serialVersionUID = 1L;
@@ -264,6 +269,18 @@ public final class Procedures
         public void safeValue(T object) throws Exception
         {
             this.throwingProcedure.safeValue(object);
+        }
+    }
+
+    private enum NoopProcedure implements Procedure<Object>
+    {
+        INSTANCE;
+
+        private static final long serialVersionUID = 1L;
+
+        @Override
+        public void value(Object each)
+        {
         }
     }
 }
