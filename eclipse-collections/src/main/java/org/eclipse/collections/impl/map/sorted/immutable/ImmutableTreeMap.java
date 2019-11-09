@@ -19,6 +19,7 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 import java.util.Set;
 import java.util.SortedMap;
 
@@ -94,7 +95,7 @@ public class ImmutableTreeMap<K, V>
         }
         for (int index = 0; index < this.size(); index++)
         {
-            if (!Comparators.nullSafeEquals(this.values[index], other.get(this.keys[index])))
+            if (!Objects.equals(this.values[index], other.get(this.keys[index])))
             {
                 return false;
             }

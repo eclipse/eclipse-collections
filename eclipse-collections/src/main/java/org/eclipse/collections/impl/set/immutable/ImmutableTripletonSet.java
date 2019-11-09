@@ -13,13 +13,13 @@ package org.eclipse.collections.impl.set.immutable;
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 import java.util.Set;
 
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
 import org.eclipse.collections.api.set.ImmutableSet;
-import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.factory.Sets;
 
 final class ImmutableTripletonSet<T>
@@ -86,11 +86,11 @@ final class ImmutableTripletonSet<T>
     {
         if (this.contains(element))
         {
-            if (Comparators.nullSafeEquals(element, this.element1))
+            if (Objects.equals(element, this.element1))
             {
                 return Sets.immutable.with(this.element2, this.element3);
             }
-            if (Comparators.nullSafeEquals(element, this.element2))
+            if (Objects.equals(element, this.element2))
             {
                 return Sets.immutable.with(this.element1, this.element3);
             }
@@ -102,9 +102,9 @@ final class ImmutableTripletonSet<T>
     @Override
     public boolean contains(Object obj)
     {
-        return Comparators.nullSafeEquals(obj, this.element1)
-                || Comparators.nullSafeEquals(obj, this.element2)
-                || Comparators.nullSafeEquals(obj, this.element3);
+        return Objects.equals(obj, this.element1)
+                || Objects.equals(obj, this.element2)
+                || Objects.equals(obj, this.element3);
     }
 
     @Override

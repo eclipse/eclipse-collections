@@ -10,8 +10,9 @@
 
 package org.eclipse.collections.impl.block.function;
 
+import java.util.Objects;
+
 import org.eclipse.collections.api.block.function.Function;
-import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.block.factory.Functions;
 import org.eclipse.collections.impl.block.factory.Predicates;
 import org.eclipse.collections.impl.test.Verify;
@@ -84,7 +85,7 @@ public class CaseFunctionTest
             {
                 return false;
             }
-            return Comparators.nullSafeEquals(this.description, foo.description);
+            return Objects.equals(this.description, foo.description);
         }
 
         @Override

@@ -14,12 +14,12 @@ import java.io.Externalizable;
 import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
+import java.util.Objects;
 import java.util.function.UnaryOperator;
 
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
-import org.eclipse.collections.impl.block.factory.Comparators;
 
 /**
  * This is a six element immutable List which is created by calling Lists.fixedSize.of(one, two, three, four, five, six).
@@ -111,12 +111,12 @@ final class SextupletonList<T>
     @Override
     public boolean contains(Object obj)
     {
-        return Comparators.nullSafeEquals(obj, this.element1)
-                || Comparators.nullSafeEquals(obj, this.element2)
-                || Comparators.nullSafeEquals(obj, this.element3)
-                || Comparators.nullSafeEquals(obj, this.element4)
-                || Comparators.nullSafeEquals(obj, this.element5)
-                || Comparators.nullSafeEquals(obj, this.element6);
+        return Objects.equals(obj, this.element1)
+                || Objects.equals(obj, this.element2)
+                || Objects.equals(obj, this.element3)
+                || Objects.equals(obj, this.element4)
+                || Objects.equals(obj, this.element5)
+                || Objects.equals(obj, this.element6);
     }
 
     /**

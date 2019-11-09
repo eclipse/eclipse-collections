@@ -18,6 +18,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Objects;
 
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.collection.MutableCollection;
@@ -338,8 +339,8 @@ public abstract class AbstractListTestCase
         Assert.assertFalse(nonRandomAccess.corresponds(integers1, Predicates2.lessThan()));
 
         MutableList<String> nullBlanks = this.newWith(null, "", " ", null);
-        Assert.assertTrue(nullBlanks.corresponds(FastList.newListWith(null, "", " ", null), Comparators::nullSafeEquals));
-        Assert.assertFalse(nullBlanks.corresponds(FastList.newListWith("", null, " ", ""), Comparators::nullSafeEquals));
+        Assert.assertTrue(nullBlanks.corresponds(FastList.newListWith(null, "", " ", null), Objects::equals));
+        Assert.assertFalse(nullBlanks.corresponds(FastList.newListWith("", null, " ", ""), Objects::equals));
     }
 
     @Test

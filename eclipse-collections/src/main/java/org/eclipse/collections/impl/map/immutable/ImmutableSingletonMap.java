@@ -13,6 +13,7 @@ package org.eclipse.collections.impl.map.immutable;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 import org.eclipse.collections.api.RichIterable;
@@ -23,7 +24,6 @@ import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
 import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.api.tuple.Pair;
-import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.Maps;
 import org.eclipse.collections.impl.factory.Sets;
@@ -71,19 +71,19 @@ final class ImmutableSingletonMap<K, V>
     @Override
     public boolean containsKey(Object key)
     {
-        return Comparators.nullSafeEquals(this.key1, key);
+        return Objects.equals(this.key1, key);
     }
 
     @Override
     public boolean containsValue(Object value)
     {
-        return Comparators.nullSafeEquals(this.value1, value);
+        return Objects.equals(this.value1, value);
     }
 
     @Override
     public V get(Object key)
     {
-        if (Comparators.nullSafeEquals(this.key1, key))
+        if (Objects.equals(this.key1, key))
         {
             return this.value1;
         }

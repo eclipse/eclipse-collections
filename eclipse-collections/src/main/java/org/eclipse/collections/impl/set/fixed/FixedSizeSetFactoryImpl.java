@@ -10,12 +10,12 @@
 
 package org.eclipse.collections.impl.set.fixed;
 
+import java.util.Objects;
 import java.util.stream.Stream;
 
 import org.eclipse.collections.api.factory.set.FixedSizeSetFactory;
 import org.eclipse.collections.api.set.FixedSizeSet;
 import org.eclipse.collections.api.set.MutableSet;
-import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.collector.Collectors2;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 
@@ -64,7 +64,7 @@ public class FixedSizeSetFactoryImpl implements FixedSizeSetFactory
     @Override
     public <T> FixedSizeSet<T> with(T one, T two)
     {
-        if (Comparators.nullSafeEquals(one, two))
+        if (Objects.equals(one, two))
         {
             return this.of(one);
         }
@@ -80,15 +80,15 @@ public class FixedSizeSetFactoryImpl implements FixedSizeSetFactory
     @Override
     public <T> FixedSizeSet<T> with(T one, T two, T three)
     {
-        if (Comparators.nullSafeEquals(one, two))
+        if (Objects.equals(one, two))
         {
             return this.of(one, three);
         }
-        if (Comparators.nullSafeEquals(one, three))
+        if (Objects.equals(one, three))
         {
             return this.of(one, two);
         }
-        if (Comparators.nullSafeEquals(two, three))
+        if (Objects.equals(two, three))
         {
             return this.of(one, two);
         }
@@ -104,27 +104,27 @@ public class FixedSizeSetFactoryImpl implements FixedSizeSetFactory
     @Override
     public <T> FixedSizeSet<T> with(T one, T two, T three, T four)
     {
-        if (Comparators.nullSafeEquals(one, two))
+        if (Objects.equals(one, two))
         {
             return this.of(one, three, four);
         }
-        if (Comparators.nullSafeEquals(one, three))
+        if (Objects.equals(one, three))
         {
             return this.of(one, two, four);
         }
-        if (Comparators.nullSafeEquals(one, four))
+        if (Objects.equals(one, four))
         {
             return this.of(one, two, three);
         }
-        if (Comparators.nullSafeEquals(two, three))
+        if (Objects.equals(two, three))
         {
             return this.of(one, two, four);
         }
-        if (Comparators.nullSafeEquals(two, four))
+        if (Objects.equals(two, four))
         {
             return this.of(one, two, three);
         }
-        if (Comparators.nullSafeEquals(three, four))
+        if (Objects.equals(three, four))
         {
             return this.of(one, two, three);
         }

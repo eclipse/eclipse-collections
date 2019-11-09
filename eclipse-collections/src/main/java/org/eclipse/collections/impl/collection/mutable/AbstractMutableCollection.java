@@ -13,6 +13,7 @@ package org.eclipse.collections.impl.collection.mutable;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.RandomAccess;
 import java.util.function.BinaryOperator;
@@ -37,7 +38,6 @@ import org.eclipse.collections.api.map.primitive.MutableObjectDoubleMap;
 import org.eclipse.collections.api.map.primitive.MutableObjectLongMap;
 import org.eclipse.collections.api.tuple.Twin;
 import org.eclipse.collections.impl.AbstractRichIterable;
-import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.block.factory.PrimitiveFunctions;
 import org.eclipse.collections.impl.block.factory.Procedures2;
 import org.eclipse.collections.impl.block.procedure.MutatingAggregationProcedure;
@@ -211,7 +211,7 @@ public abstract class AbstractMutableCollection<T>
         Iterator<T> iterator = this.iterator();
         while (iterator.hasNext())
         {
-            if (Comparators.nullSafeEquals(o, iterator.next()))
+            if (Objects.equals(o, iterator.next()))
             {
                 iterator.remove();
                 return true;

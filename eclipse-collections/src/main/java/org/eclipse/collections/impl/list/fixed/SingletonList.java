@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
 import java.util.Comparator;
+import java.util.Objects;
 import java.util.function.UnaryOperator;
 
 import org.eclipse.collections.api.block.function.Function;
@@ -30,7 +31,6 @@ import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
 import org.eclipse.collections.api.list.MutableList;
-import org.eclipse.collections.impl.block.factory.Comparators;
 
 /**
  * This class is a memory efficient list with one element. Unlike Collections.singletonList(), it can be sorted. It is
@@ -78,7 +78,7 @@ final class SingletonList<T>
     @Override
     public boolean contains(Object obj)
     {
-        return Comparators.nullSafeEquals(obj, this.element1);
+        return Objects.equals(obj, this.element1);
     }
 
     @Override

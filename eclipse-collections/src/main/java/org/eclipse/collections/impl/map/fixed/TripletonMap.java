@@ -16,6 +16,7 @@ import java.io.ObjectInput;
 import java.io.ObjectOutput;
 import java.util.Collection;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 import org.eclipse.collections.api.block.function.Function2;
@@ -28,7 +29,6 @@ import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.tuple.Pair;
-import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.block.factory.Predicates2;
 import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.Maps;
@@ -85,17 +85,17 @@ final class TripletonMap<K, V>
     public MutableMap<K, V> withKeyValue(K addKey, V addValue)
     {
         // Map behavior specifies that if you put in a duplicate key, you replace the value
-        if (Comparators.nullSafeEquals(this.key1, addKey))
+        if (Objects.equals(this.key1, addKey))
         {
             this.value1 = addValue;
             return this;
         }
-        if (Comparators.nullSafeEquals(this.key2, addKey))
+        if (Objects.equals(this.key2, addKey))
         {
             this.value2 = addValue;
             return this;
         }
-        if (Comparators.nullSafeEquals(this.key3, addKey))
+        if (Objects.equals(this.key3, addKey))
         {
             this.value3 = addValue;
             return this;
@@ -114,15 +114,15 @@ final class TripletonMap<K, V>
     @Override
     public MutableMap<K, V> withoutKey(K key)
     {
-        if (Comparators.nullSafeEquals(key, this.key1))
+        if (Objects.equals(key, this.key1))
         {
             return new DoubletonMap<>(this.key2, this.value2, this.key3, this.value3);
         }
-        if (Comparators.nullSafeEquals(key, this.key2))
+        if (Objects.equals(key, this.key2))
         {
             return new DoubletonMap<>(this.key1, this.value1, this.key3, this.value3);
         }
-        if (Comparators.nullSafeEquals(key, this.key3))
+        if (Objects.equals(key, this.key3))
         {
             return new DoubletonMap<>(this.key1, this.value1, this.key2, this.value2);
         }
@@ -151,31 +151,31 @@ final class TripletonMap<K, V>
     @Override
     public boolean containsKey(Object key)
     {
-        return Comparators.nullSafeEquals(this.key3, key)
-                || Comparators.nullSafeEquals(this.key2, key)
-                || Comparators.nullSafeEquals(this.key1, key);
+        return Objects.equals(this.key3, key)
+                || Objects.equals(this.key2, key)
+                || Objects.equals(this.key1, key);
     }
 
     @Override
     public boolean containsValue(Object value)
     {
-        return Comparators.nullSafeEquals(this.value3, value)
-                || Comparators.nullSafeEquals(this.value2, value)
-                || Comparators.nullSafeEquals(this.value1, value);
+        return Objects.equals(this.value3, value)
+                || Objects.equals(this.value2, value)
+                || Objects.equals(this.value1, value);
     }
 
     @Override
     public V get(Object key)
     {
-        if (Comparators.nullSafeEquals(this.key3, key))
+        if (Objects.equals(this.key3, key))
         {
             return this.value3;
         }
-        if (Comparators.nullSafeEquals(this.key2, key))
+        if (Objects.equals(this.key2, key))
         {
             return this.value2;
         }
-        if (Comparators.nullSafeEquals(this.key1, key))
+        if (Objects.equals(this.key1, key))
         {
             return this.value1;
         }
@@ -237,15 +237,15 @@ final class TripletonMap<K, V>
     @Override
     public MutableMap<V, K> flipUniqueValues()
     {
-        if (Comparators.nullSafeEquals(this.value1, this.value2))
+        if (Objects.equals(this.value1, this.value2))
         {
             throw new IllegalStateException("Duplicate value: " + this.value1 + " found at key: " + this.key1 + " and key: " + this.key2);
         }
-        if (Comparators.nullSafeEquals(this.value2, this.value3))
+        if (Objects.equals(this.value2, this.value3))
         {
             throw new IllegalStateException("Duplicate value: " + this.value2 + " found at key: " + this.key2 + " and key: " + this.key3);
         }
-        if (Comparators.nullSafeEquals(this.value3, this.value1))
+        if (Objects.equals(this.value3, this.value1))
         {
             throw new IllegalStateException("Duplicate value: " + this.value3 + " found at key: " + this.key3 + " and key: " + this.key3);
         }

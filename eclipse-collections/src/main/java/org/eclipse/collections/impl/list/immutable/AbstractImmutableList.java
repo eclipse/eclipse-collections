@@ -17,6 +17,7 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Objects;
 import java.util.RandomAccess;
 import java.util.concurrent.ExecutorService;
 import java.util.function.UnaryOperator;
@@ -60,7 +61,6 @@ import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.partition.list.PartitionImmutableList;
 import org.eclipse.collections.api.stack.MutableStack;
 import org.eclipse.collections.api.tuple.Pair;
-import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.block.factory.Functions;
 import org.eclipse.collections.impl.block.factory.HashingStrategies;
 import org.eclipse.collections.impl.block.procedure.CollectIfProcedure;
@@ -138,7 +138,7 @@ abstract class AbstractImmutableList<T>
         int localSize = this.size();
         for (int i = 0; i < localSize; i++)
         {
-            if (!Comparators.nullSafeEquals(this.get(i), list.get(i)))
+            if (!Objects.equals(this.get(i), list.get(i)))
             {
                 return false;
             }
@@ -156,7 +156,7 @@ abstract class AbstractImmutableList<T>
             {
                 return false;
             }
-            if (!Comparators.nullSafeEquals(this.get(i), iterator.next()))
+            if (!Objects.equals(this.get(i), iterator.next()))
             {
                 return false;
             }

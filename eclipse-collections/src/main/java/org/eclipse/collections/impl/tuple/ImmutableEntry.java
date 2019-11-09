@@ -11,8 +11,7 @@
 package org.eclipse.collections.impl.tuple;
 
 import java.util.Map.Entry;
-
-import org.eclipse.collections.impl.block.factory.Comparators;
+import java.util.Objects;
 
 public final class ImmutableEntry<K, V> extends AbstractImmutableEntry<K, V>
 {
@@ -37,8 +36,8 @@ public final class ImmutableEntry<K, V> extends AbstractImmutableEntry<K, V>
         if (object instanceof Entry)
         {
             Entry<?, ?> that = (Entry<?, ?>) object;
-            return Comparators.nullSafeEquals(this.key, that.getKey())
-                    && Comparators.nullSafeEquals(this.value, that.getValue());
+            return Objects.equals(this.key, that.getKey())
+                    && Objects.equals(this.value, that.getValue());
         }
         return false;
     }

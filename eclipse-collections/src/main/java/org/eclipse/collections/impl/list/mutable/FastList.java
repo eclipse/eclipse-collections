@@ -23,6 +23,7 @@ import java.util.DoubleSummaryStatistics;
 import java.util.IntSummaryStatistics;
 import java.util.List;
 import java.util.LongSummaryStatistics;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.RandomAccess;
 import java.util.Spliterator;
@@ -1542,7 +1543,7 @@ public class FastList<T>
         }
         for (int i = 0; i < this.size; i++)
         {
-            if (!Comparators.nullSafeEquals(this.items[i], that.items[i]))
+            if (!Objects.equals(this.items[i], that.items[i]))
             {
                 return false;
             }

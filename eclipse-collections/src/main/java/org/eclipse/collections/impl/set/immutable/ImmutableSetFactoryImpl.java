@@ -10,9 +10,10 @@
 
 package org.eclipse.collections.impl.set.immutable;
 
+import java.util.Objects;
+
 import org.eclipse.collections.api.factory.set.ImmutableSetFactory;
 import org.eclipse.collections.api.set.ImmutableSet;
-import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.utility.Iterate;
 
 public class ImmutableSetFactoryImpl implements ImmutableSetFactory
@@ -58,7 +59,7 @@ public class ImmutableSetFactoryImpl implements ImmutableSetFactory
     @Override
     public <T> ImmutableSet<T> with(T one, T two)
     {
-        if (Comparators.nullSafeEquals(one, two))
+        if (Objects.equals(one, two))
         {
             return this.of(one);
         }
@@ -74,15 +75,15 @@ public class ImmutableSetFactoryImpl implements ImmutableSetFactory
     @Override
     public <T> ImmutableSet<T> with(T one, T two, T three)
     {
-        if (Comparators.nullSafeEquals(one, two))
+        if (Objects.equals(one, two))
         {
             return this.of(one, three);
         }
-        if (Comparators.nullSafeEquals(one, three))
+        if (Objects.equals(one, three))
         {
             return this.of(one, two);
         }
-        if (Comparators.nullSafeEquals(two, three))
+        if (Objects.equals(two, three))
         {
             return this.of(one, two);
         }
@@ -98,27 +99,27 @@ public class ImmutableSetFactoryImpl implements ImmutableSetFactory
     @Override
     public <T> ImmutableSet<T> with(T one, T two, T three, T four)
     {
-        if (Comparators.nullSafeEquals(one, two))
+        if (Objects.equals(one, two))
         {
             return this.of(one, three, four);
         }
-        if (Comparators.nullSafeEquals(one, three))
+        if (Objects.equals(one, three))
         {
             return this.of(one, two, four);
         }
-        if (Comparators.nullSafeEquals(one, four))
+        if (Objects.equals(one, four))
         {
             return this.of(one, two, three);
         }
-        if (Comparators.nullSafeEquals(two, three))
+        if (Objects.equals(two, three))
         {
             return this.of(one, two, four);
         }
-        if (Comparators.nullSafeEquals(two, four))
+        if (Objects.equals(two, four))
         {
             return this.of(one, two, three);
         }
-        if (Comparators.nullSafeEquals(three, four))
+        if (Objects.equals(three, four))
         {
             return this.of(one, two, three);
         }

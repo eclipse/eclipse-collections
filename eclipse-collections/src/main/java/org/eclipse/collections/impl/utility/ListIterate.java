@@ -18,6 +18,7 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.RandomAccess;
 
@@ -71,7 +72,6 @@ import org.eclipse.collections.api.multimap.MutableMultimap;
 import org.eclipse.collections.api.partition.list.PartitionMutableList;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.api.tuple.Twin;
-import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.block.factory.HashingStrategies;
 import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.list.mutable.FastList;
@@ -115,7 +115,7 @@ public final class ListIterate
         int localSize = one.size();
         for (int i = 0; i < localSize; i++)
         {
-            if (!Comparators.nullSafeEquals(one.get(i), two.get(i)))
+            if (!Objects.equals(one.get(i), two.get(i)))
             {
                 return false;
             }
@@ -129,7 +129,7 @@ public final class ListIterate
         Iterator<?> twoIterator = two.iterator();
         for (int i = 0; i < localSize; i++)
         {
-            if (!twoIterator.hasNext() || !Comparators.nullSafeEquals(one.get(i), twoIterator.next()))
+            if (!twoIterator.hasNext() || !Objects.equals(one.get(i), twoIterator.next()))
             {
                 return false;
             }
@@ -143,7 +143,7 @@ public final class ListIterate
         Iterator<?> twoIterator = two.iterator();
         while (oneIterator.hasNext())
         {
-            if (!twoIterator.hasNext() || !Comparators.nullSafeEquals(oneIterator.next(), twoIterator.next()))
+            if (!twoIterator.hasNext() || !Objects.equals(oneIterator.next(), twoIterator.next()))
             {
                 return false;
             }

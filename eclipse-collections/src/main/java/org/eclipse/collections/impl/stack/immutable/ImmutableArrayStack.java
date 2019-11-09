@@ -20,6 +20,7 @@ import java.util.Comparator;
 import java.util.EmptyStackException;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 
 import org.eclipse.collections.api.LazyIterable;
@@ -83,7 +84,6 @@ import org.eclipse.collections.api.stack.primitive.ImmutableIntStack;
 import org.eclipse.collections.api.stack.primitive.ImmutableLongStack;
 import org.eclipse.collections.api.stack.primitive.ImmutableShortStack;
 import org.eclipse.collections.api.tuple.Pair;
-import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.block.factory.Predicates;
 import org.eclipse.collections.impl.block.procedure.MutatingAggregationProcedure;
 import org.eclipse.collections.impl.block.procedure.NonMutatingAggregationProcedure;
@@ -1109,7 +1109,7 @@ final class ImmutableArrayStack<T> implements ImmutableStack<T>, Serializable
         Iterator<?> thatIterator = that.iterator();
         while (thisIterator.hasNext() && thatIterator.hasNext())
         {
-            if (!Comparators.nullSafeEquals(thisIterator.next(), thatIterator.next()))
+            if (!Objects.equals(thisIterator.next(), thatIterator.next()))
             {
                 return false;
             }

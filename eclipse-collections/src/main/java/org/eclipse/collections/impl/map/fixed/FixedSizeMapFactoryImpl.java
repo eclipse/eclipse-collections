@@ -10,9 +10,10 @@
 
 package org.eclipse.collections.impl.map.fixed;
 
+import java.util.Objects;
+
 import org.eclipse.collections.api.factory.map.FixedSizeMapFactory;
 import org.eclipse.collections.api.map.FixedSizeMap;
-import org.eclipse.collections.impl.block.factory.Comparators;
 
 public class FixedSizeMapFactoryImpl implements FixedSizeMapFactory
 {
@@ -59,7 +60,7 @@ public class FixedSizeMapFactoryImpl implements FixedSizeMapFactory
     @Override
     public <K, V> FixedSizeMap<K, V> with(K key1, V value1, K key2, V value2)
     {
-        if (Comparators.nullSafeEquals(key1, key2))
+        if (Objects.equals(key1, key2))
         {
             return this.of(key1, value2);
         }
@@ -75,19 +76,19 @@ public class FixedSizeMapFactoryImpl implements FixedSizeMapFactory
     @Override
     public <K, V> FixedSizeMap<K, V> with(K key1, V value1, K key2, V value2, K key3, V value3)
     {
-        if (Comparators.nullSafeEquals(key1, key2) && Comparators.nullSafeEquals(key2, key3))
+        if (Objects.equals(key1, key2) && Objects.equals(key2, key3))
         {
             return this.of(key1, value3);
         }
-        if (Comparators.nullSafeEquals(key1, key2))
+        if (Objects.equals(key1, key2))
         {
             return this.of(key1, value2, key3, value3);
         }
-        if (Comparators.nullSafeEquals(key1, key3))
+        if (Objects.equals(key1, key3))
         {
             return this.of(key2, value2, key1, value3);
         }
-        if (Comparators.nullSafeEquals(key2, key3))
+        if (Objects.equals(key2, key3))
         {
             return this.of(key1, value1, key2, value3);
         }
