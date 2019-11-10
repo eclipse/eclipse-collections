@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018 Goldman Sachs and others.
+ * Copyright (c) 2019 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -21,7 +21,6 @@ import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
-import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.collection.MutableCollection;
 import org.eclipse.collections.api.collection.primitive.MutableBooleanCollection;
 import org.eclipse.collections.api.collection.primitive.MutableByteCollection;
@@ -137,12 +136,9 @@ public interface RichIterableUniqueTestCase extends RichIterableTestCase
     @Test
     default void RichIterable_tap()
     {
-        Procedure<Object> noop = each -> {
-        };
-
         RichIterable<Integer> iterable = this.newWith(3, 2, 1);
         MutableCollection<Integer> result = this.newMutableForFilter();
-        iterable.tap(result::add).forEach(noop);
+        iterable.tap(result::add).forEach(Procedures.noop());
         assertEquals(this.newMutableForFilter(3, 2, 1), result);
         this.newWith().tap(Procedures.cast(each -> fail()));
     }

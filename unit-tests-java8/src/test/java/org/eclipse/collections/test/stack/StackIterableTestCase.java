@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018 Goldman Sachs and others.
+ * Copyright (c) 2019 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -13,7 +13,6 @@ package org.eclipse.collections.test.stack;
 import java.util.EmptyStackException;
 
 import org.eclipse.collections.api.RichIterable;
-import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.stack.MutableStack;
@@ -65,12 +64,9 @@ public interface StackIterableTestCase extends OrderedIterableWithDuplicatesTest
     @Test
     default void RichIterable_tap()
     {
-        Procedure<Object> noop = each -> {
-        };
-
         RichIterable<Integer> iterable = this.newWith(3, 3, 3, 2, 2, 1);
         MutableStack<Integer> result = Stacks.mutable.with();
-        iterable.tap(result::push).forEach(noop);
+        iterable.tap(result::push).forEach(Procedures.noop());
         assertEquals(this.newWith(1, 2, 2, 3, 3, 3), result);
 
         this.newWith().tap(Procedures.cast(each -> fail()));

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018 Goldman Sachs and others.
+ * Copyright (c) 2019 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -218,12 +218,9 @@ public interface RichIterableTestCase extends IterableTestCase
     @Test
     default void RichIterable_tap()
     {
-        Procedure<Object> noop = each -> {
-        };
-
         RichIterable<Integer> iterable = this.newWith(3, 3, 3, 2, 2, 1);
         MutableCollection<Integer> result = this.newMutableForFilter();
-        iterable.tap(result::add).forEach(noop);
+        iterable.tap(result::add).forEach(Procedures.noop());
         assertEquals(this.newMutableForFilter(3, 3, 3, 2, 2, 1), result);
         this.newWith().tap(Procedures.cast(each -> fail()));
     }
@@ -494,8 +491,7 @@ public interface RichIterableTestCase extends IterableTestCase
     {
         MutableCollection<Integer> expectedIterationOrder = this.expectedIterationOrder();
 
-        Procedure<Object> noop = each -> {
-        };
+        Procedure<Object> noop = Procedures.noop();
 
         MutableCollection<Integer> selectIterationOrder = this.newMutableForFilter();
         this.getInstanceUnderTest().select(selectIterationOrder::add).forEach(noop);
