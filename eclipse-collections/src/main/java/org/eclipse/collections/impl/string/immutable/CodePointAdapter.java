@@ -387,7 +387,7 @@ public class CodePointAdapter
     @Override
     public <V> ImmutableList<V> collect(IntToObjectFunction<? extends V> function)
     {
-        FastList<V> list = FastList.newList(this.adapted.length());
+        MutableList<V> list = FastList.newList(this.adapted.length());
         for (int i = 0; i < this.adapted.length(); )
         {
             int codePoint = this.adapted.codePointAt(i);

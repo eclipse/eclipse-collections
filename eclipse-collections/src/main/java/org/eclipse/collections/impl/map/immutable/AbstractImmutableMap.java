@@ -146,7 +146,7 @@ public abstract class AbstractImmutableMap<K, V>
     @Override
     public ImmutableMap<K, V> newWithKeyValue(K key, V value)
     {
-        UnifiedMap<K, V> map = UnifiedMap.newMap(this);
+        MutableMap<K, V> map = UnifiedMap.newMap(this);
         map.put(key, value);
         return map.toImmutable();
     }
@@ -154,7 +154,7 @@ public abstract class AbstractImmutableMap<K, V>
     @Override
     public ImmutableMap<K, V> newWithAllKeyValues(Iterable<? extends Pair<? extends K, ? extends V>> keyValues)
     {
-        UnifiedMap<K, V> map = UnifiedMap.newMap(this);
+        MutableMap<K, V> map = UnifiedMap.newMap(this);
         for (Pair<? extends K, ? extends V> keyValuePair : keyValues)
         {
             map.put(keyValuePair.getOne(), keyValuePair.getTwo());
@@ -181,7 +181,7 @@ public abstract class AbstractImmutableMap<K, V>
     @Override
     public ImmutableMap<K, V> newWithAllKeyValueArguments(Pair<? extends K, ? extends V>... keyValuePairs)
     {
-        UnifiedMap<K, V> map = UnifiedMap.newMap(this);
+        MutableMap<K, V> map = UnifiedMap.newMap(this);
         for (Pair<? extends K, ? extends V> keyValuePair : keyValuePairs)
         {
             map.put(keyValuePair.getOne(), keyValuePair.getTwo());
@@ -192,7 +192,7 @@ public abstract class AbstractImmutableMap<K, V>
     @Override
     public ImmutableMap<K, V> newWithoutKey(K key)
     {
-        UnifiedMap<K, V> map = UnifiedMap.newMap(this);
+        MutableMap<K, V> map = UnifiedMap.newMap(this);
         map.removeKey(key);
         return map.toImmutable();
     }
@@ -200,7 +200,7 @@ public abstract class AbstractImmutableMap<K, V>
     @Override
     public ImmutableMap<K, V> newWithoutAllKeys(Iterable<? extends K> keys)
     {
-        UnifiedMap<K, V> map = UnifiedMap.newMap(this);
+        MutableMap<K, V> map = UnifiedMap.newMap(this);
         for (K key : keys)
         {
             map.removeKey(key);
@@ -229,28 +229,28 @@ public abstract class AbstractImmutableMap<K, V>
     @Override
     public <K2, V2> ImmutableMap<K2, V2> collect(Function2<? super K, ? super V, Pair<K2, V2>> function)
     {
-        UnifiedMap<K2, V2> result = MapIterate.collect(this, function, UnifiedMap.newMap());
+        MutableMap<K2, V2> result = MapIterate.collect(this, function, UnifiedMap.newMap());
         return result.toImmutable();
     }
 
     @Override
     public <R> ImmutableMap<K, R> collectValues(Function2<? super K, ? super V, ? extends R> function)
     {
-        UnifiedMap<K, R> result = MapIterate.collectValues(this, function, UnifiedMap.newMap(this.size()));
+        MutableMap<K, R> result = MapIterate.collectValues(this, function, UnifiedMap.newMap(this.size()));
         return result.toImmutable();
     }
 
     @Override
     public ImmutableMap<K, V> select(Predicate2<? super K, ? super V> predicate)
     {
-        UnifiedMap<K, V> result = MapIterate.selectMapOnEntry(this, predicate, UnifiedMap.newMap());
+        MutableMap<K, V> result = MapIterate.selectMapOnEntry(this, predicate, UnifiedMap.newMap());
         return result.toImmutable();
     }
 
     @Override
     public ImmutableMap<K, V> reject(Predicate2<? super K, ? super V> predicate)
     {
-        UnifiedMap<K, V> result = MapIterate.rejectMapOnEntry(this, predicate, UnifiedMap.newMap());
+        MutableMap<K, V> result = MapIterate.rejectMapOnEntry(this, predicate, UnifiedMap.newMap());
         return result.toImmutable();
     }
 

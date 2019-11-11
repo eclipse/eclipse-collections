@@ -115,7 +115,7 @@ import org.eclipse.collections.impl.utility.LazyIterate;
 public class ArrayStack<T> implements MutableStack<T>, Externalizable
 {
     private static final long serialVersionUID = 1L;
-    private FastList<T> delegate;
+    private MutableList<T> delegate;
 
     public ArrayStack()
     {
@@ -165,7 +165,7 @@ public class ArrayStack<T> implements MutableStack<T>, Externalizable
     public static <T> ArrayStack<T> newStackFromTopToBottom(Iterable<? extends T> items)
     {
         ArrayStack<T> stack = ArrayStack.newStack();
-        FastList<T> list = FastList.newList(items);
+        MutableList<T> list = FastList.newList(items);
         stack.delegate = list.reverseThis();
         return stack;
     }
@@ -275,7 +275,7 @@ public class ArrayStack<T> implements MutableStack<T>, Externalizable
         this.checkEmptyStack();
         this.checkSizeLessThanCount(count);
 
-        FastList<T> result = FastList.newList(count);
+        MutableList<T> result = FastList.newList(count);
         for (int i = 0; i < count; i++)
         {
             result.add(this.delegate.get(this.delegate.size() - (i + 1)));
