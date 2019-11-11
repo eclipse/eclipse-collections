@@ -61,6 +61,7 @@ import org.eclipse.collections.api.multimap.sortedbag.ImmutableSortedBagMultimap
 import org.eclipse.collections.api.partition.bag.sorted.PartitionImmutableSortedBag;
 import org.eclipse.collections.api.partition.bag.sorted.PartitionMutableSortedBag;
 import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
+import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.api.tuple.primitive.ObjectIntPair;
 import org.eclipse.collections.impl.bag.immutable.AbstractImmutableBagIterable;
@@ -375,7 +376,7 @@ abstract class AbstractImmutableSortedBag<T>
         Comparator<? super T> comparator = this.comparator() == null
                 ? Comparators.naturalOrder()
                 : this.comparator();
-        TreeSortedSet<Pair<T, Integer>> pairs = TreeSortedSet.newSet(
+        MutableSortedSet<Pair<T, Integer>> pairs = TreeSortedSet.newSet(
                 Comparators.<Pair<T, Integer>>chain(
                         Comparators.byFunction(Functions.firstOfPair(), comparator),
                         Comparators.byFunction(Functions.secondOfPair())));
