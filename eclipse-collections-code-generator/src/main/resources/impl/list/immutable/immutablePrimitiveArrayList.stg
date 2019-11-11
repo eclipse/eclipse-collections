@@ -275,7 +275,7 @@ final class Immutable<name>ArrayList
     @Override
     public \<V> ImmutableList\<V> collect(<name>ToObjectFunction\<? extends V> function)
     {
-        FastList\<V> list = this.collect(function, FastList.newList(this.items.length));
+        MutableList\<V> list = this.collect(function, FastList.newList(this.items.length));
         return list.toImmutable();
     }
 

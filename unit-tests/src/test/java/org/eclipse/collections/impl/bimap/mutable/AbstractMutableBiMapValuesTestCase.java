@@ -14,6 +14,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.bimap.MutableBiMap;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.impl.bag.mutable.HashBag;
@@ -231,7 +232,7 @@ public abstract class AbstractMutableBiMapValuesTestCase
     public void valuesToArray()
     {
         MutableBiMap<Float, Integer> map = this.newMapWithKeysValues(1.0f, 1, 2.0f, 2, 3.0f, null);
-        HashBag<Integer> expected = HashBag.newBagWith(1, 2, null);
+        MutableBag<Integer> expected = HashBag.newBagWith(1, 2, null);
         Collection<Integer> values = map.values();
         Assert.assertEquals(expected, HashBag.newBagWith(values.toArray()));
         Assert.assertEquals(expected, HashBag.newBagWith(values.toArray(new Integer[values.size()])));

@@ -306,7 +306,7 @@ public final class SortedSetAdapter<T>
     @Override
     public <S> MutableSortedSet<S> selectInstancesOf(Class<S> clazz)
     {
-        TreeSortedSet<S> result = TreeSortedSet.newSet((Comparator<? super S>) this.comparator());
+        MutableSortedSet<S> result = TreeSortedSet.newSet((Comparator<? super S>) this.comparator());
         this.forEach(new SelectInstancesOfProcedure<>(clazz, result));
         return result;
     }
@@ -437,7 +437,7 @@ public final class SortedSetAdapter<T>
         if (that instanceof Collection || that instanceof RichIterable)
         {
             int thatSize = Iterate.sizeOf(that);
-            FastList<Pair<T, S>> target = FastList.newList(Math.min(this.size(), thatSize));
+            MutableList<Pair<T, S>> target = FastList.newList(Math.min(this.size(), thatSize));
             return Iterate.zip(this.delegate, that, target);
         }
         return Iterate.zip(this.delegate, that, FastList.newList());
@@ -449,7 +449,7 @@ public final class SortedSetAdapter<T>
         Comparator<? super T> comparator = this.comparator();
         if (comparator == null)
         {
-            TreeSortedSet<Pair<T, Integer>> pairs = TreeSortedSet.newSet(Comparators.byFunction(Functions.firstOfPair(), Comparators.naturalOrder()));
+            MutableSortedSet<Pair<T, Integer>> pairs = TreeSortedSet.newSet(Comparators.byFunction(Functions.firstOfPair(), Comparators.naturalOrder()));
             return Iterate.zipWithIndex(this.delegate, pairs);
         }
         return Iterate.zipWithIndex(this.delegate, TreeSortedSet.newSet(Comparators.byFirstOfPair(comparator)));

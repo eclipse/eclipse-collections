@@ -451,8 +451,8 @@ public class CompositeFastListTest extends AbstractListTestCase
     {
         super.listIterator();
         CompositeFastList<String> composite = new CompositeFastList<>();
-        FastList<String> firstBit = FastList.newListWith("one", "two");
-        FastList<String> secondBit = FastList.newListWith("three");
+        MutableList<String> firstBit = FastList.newListWith("one", "two");
+        MutableList<String> secondBit = FastList.newListWith("three");
         composite.addAll(firstBit);
         composite.addAll(secondBit);
 

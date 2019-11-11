@@ -18,6 +18,7 @@ import java.util.NoSuchElementException;
 import java.util.Set;
 
 import org.eclipse.collections.api.bimap.MutableBiMap;
+import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.test.Verify;
@@ -194,7 +195,7 @@ public abstract class AbstractMutableBiMapEntrySetTest
         MutableBiMap<Integer, String> biMap = this.newMapWithKeysValues(1, "One", 2, "Two", 3, "Three", null, null);
         Assert.assertNotEquals(UnifiedSet.newSetWith(ImmutableEntry.of(5, "Five")), biMap.entrySet());
 
-        UnifiedSet<ImmutableEntry<Integer, String>> expected = UnifiedSet.newSetWith(
+        MutableSet<ImmutableEntry<Integer, String>> expected = UnifiedSet.newSetWith(
                 ImmutableEntry.of(1, "One"),
                 ImmutableEntry.of(2, "Two"),
                 ImmutableEntry.of(3, "Three"),

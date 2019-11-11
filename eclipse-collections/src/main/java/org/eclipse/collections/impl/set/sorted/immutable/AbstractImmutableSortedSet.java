@@ -122,7 +122,7 @@ abstract class AbstractImmutableSortedSet<T> extends AbstractImmutableCollection
     {
         if (this.contains(element))
         {
-            TreeSortedSet<T> result = TreeSortedSet.newSet(this);
+            MutableSortedSet<T> result = TreeSortedSet.newSet(this);
             result.remove(element);
             return result.toImmutable();
         }
@@ -132,7 +132,7 @@ abstract class AbstractImmutableSortedSet<T> extends AbstractImmutableCollection
     @Override
     public ImmutableSortedSet<T> newWithAll(Iterable<? extends T> elements)
     {
-        TreeSortedSet<T> result = TreeSortedSet.newSet(this);
+        MutableSortedSet<T> result = TreeSortedSet.newSet(this);
         result.addAllIterable(elements);
         return result.toImmutable();
     }
@@ -140,7 +140,7 @@ abstract class AbstractImmutableSortedSet<T> extends AbstractImmutableCollection
     @Override
     public ImmutableSortedSet<T> newWithoutAll(Iterable<? extends T> elements)
     {
-        TreeSortedSet<T> result = TreeSortedSet.newSet(this);
+        MutableSortedSet<T> result = TreeSortedSet.newSet(this);
         this.removeAllFrom(elements, result);
         return result.toImmutable();
     }
@@ -243,7 +243,7 @@ abstract class AbstractImmutableSortedSet<T> extends AbstractImmutableCollection
     @Override
     public ImmutableSortedSet<T> select(Predicate<? super T> predicate)
     {
-        TreeSortedSet<T> result = TreeSortedSet.newSet(this.comparator());
+        MutableSortedSet<T> result = TreeSortedSet.newSet(this.comparator());
         this.forEach(new SelectProcedure<>(predicate, result));
         return result.toImmutable();
     }
@@ -257,7 +257,7 @@ abstract class AbstractImmutableSortedSet<T> extends AbstractImmutableCollection
     @Override
     public ImmutableSortedSet<T> reject(Predicate<? super T> predicate)
     {
-        TreeSortedSet<T> result = TreeSortedSet.newSet(this.comparator());
+        MutableSortedSet<T> result = TreeSortedSet.newSet(this.comparator());
         this.forEach(new RejectProcedure<>(predicate, result));
         return result.toImmutable();
     }
@@ -294,7 +294,7 @@ abstract class AbstractImmutableSortedSet<T> extends AbstractImmutableCollection
     @Override
     public <S> ImmutableSortedSet<S> selectInstancesOf(Class<S> clazz)
     {
-        TreeSortedSet<S> result = TreeSortedSet.newSet((Comparator<? super S>) this.comparator());
+        MutableSortedSet<S> result = TreeSortedSet.newSet((Comparator<? super S>) this.comparator());
         this.forEach(new SelectInstancesOfProcedure<>(clazz, result));
         return result.toImmutable();
     }
@@ -353,7 +353,7 @@ abstract class AbstractImmutableSortedSet<T> extends AbstractImmutableCollection
         if (that instanceof Collection || that instanceof RichIterable)
         {
             int thatSize = Iterate.sizeOf(that);
-            FastList<Pair<T, S>> target = FastList.newList(Math.min(this.size(), thatSize));
+            MutableList<Pair<T, S>> target = FastList.newList(Math.min(this.size(), thatSize));
             return Iterate.zip(this, that, target).toImmutable();
         }
         return Iterate.zip(this, that, FastList.newList()).toImmutable();
@@ -365,7 +365,7 @@ abstract class AbstractImmutableSortedSet<T> extends AbstractImmutableCollection
         Comparator<? super T> comparator = this.comparator();
         if (comparator == null)
         {
-            TreeSortedSet<Pair<T, Integer>> pairs = TreeSortedSet.newSet(Comparators.byFunction(Functions.firstOfPair(), Comparators.naturalOrder()));
+            MutableSortedSet<Pair<T, Integer>> pairs = TreeSortedSet.newSet(Comparators.byFunction(Functions.firstOfPair(), Comparators.naturalOrder()));
             return Iterate.zipWithIndex(this, pairs).toImmutable();
         }
         return Iterate.zipWithIndex(this, TreeSortedSet.newSet(Comparators.byFirstOfPair(comparator))).toImmutable();

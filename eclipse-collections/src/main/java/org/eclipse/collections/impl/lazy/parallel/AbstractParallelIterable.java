@@ -474,8 +474,8 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
     @Override
     public MutableList<T> toList()
     {
-        Function<Batch<T>, FastList<T>> map = batch -> {
-            FastList<T> list = FastList.newList();
+        Function<Batch<T>, MutableList<T>> map = batch -> {
+            MutableList<T> list = FastList.newList();
             batch.forEach(CollectionAddProcedure.on(list));
             return list;
         };

@@ -14,6 +14,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
+import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.bimap.MutableBiMap;
 import org.eclipse.collections.impl.bag.mutable.HashBag;
 import org.eclipse.collections.impl.list.mutable.FastList;
@@ -112,8 +113,8 @@ public abstract class AbstractMutableBiMapKeySetTestCase
         Set<String> keySet = map.keySet();
         Iterator<String> iterator = keySet.iterator();
 
-        HashBag<String> expected = HashBag.newBagWith("One", "Two", "Three", null);
-        HashBag<String> actual = HashBag.newBag();
+        MutableBag<String> expected = HashBag.newBagWith("One", "Two", "Three", null);
+        MutableBag<String> actual = HashBag.newBag();
         Verify.assertThrows(IllegalStateException.class, iterator::remove);
         for (int i = 0; i < 4; i++)
         {
@@ -220,7 +221,7 @@ public abstract class AbstractMutableBiMapKeySetTestCase
     public void keySetToArray()
     {
         MutableBiMap<String, Integer> map = this.newMapWithKeysValues("One", 1, "Two", 2, "Three", 3);
-        HashBag<String> expected = HashBag.newBagWith("One", "Two", "Three");
+        MutableBag<String> expected = HashBag.newBagWith("One", "Two", "Three");
         Set<String> keySet = map.keySet();
         Assert.assertEquals(expected, HashBag.newBagWith(keySet.toArray()));
         Assert.assertEquals(expected, HashBag.newBagWith(keySet.toArray(new String[keySet.size()])));

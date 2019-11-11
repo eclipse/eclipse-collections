@@ -568,7 +568,7 @@ public class BooleanHashSet implements MutableBooleanSet, Externalizable
     @Override
     public <V> MutableSet<V> collect(BooleanToObjectFunction<? extends V> function)
     {
-        UnifiedSet<V> target = UnifiedSet.newSet(this.size());
+        MutableSet<V> target = UnifiedSet.newSet(this.size());
         switch (this.state)
         {
             case 0:

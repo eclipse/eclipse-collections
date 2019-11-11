@@ -899,7 +899,7 @@ public final class Interval
     @Override
     public MutableList<Integer> toList()
     {
-        FastList<Integer> list = FastList.newList(this.size());
+        MutableList<Integer> list = FastList.newList(this.size());
         this.forEach(CollectionAddProcedure.on(list));
         return list;
     }

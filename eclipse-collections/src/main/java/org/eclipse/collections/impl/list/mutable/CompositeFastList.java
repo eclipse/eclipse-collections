@@ -59,7 +59,7 @@ public final class CompositeFastList<E>
     private static final Procedure<FastList<?>> REVERSE_LIST_PROCEDURE = FastList::reverseThis;
 
     private static final long serialVersionUID = 2L;
-    private final FastList<FastList<E>> lists = FastList.newList();
+    private final MutableList<FastList<E>> lists = FastList.newList();
     private int size;
 
     @Override
@@ -631,7 +631,7 @@ public final class CompositeFastList<E>
         private Iterator<E> currentIterator;
         private int currentIndex;
 
-        private CompositeIterator(FastList<FastList<E>> newLists)
+        private CompositeIterator(MutableList<FastList<E>> newLists)
         {
             this.iterators = new Iterator[newLists.size()];
             for (int i = 0; i < newLists.size(); ++i)

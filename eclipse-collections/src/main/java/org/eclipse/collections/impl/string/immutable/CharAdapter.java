@@ -325,7 +325,7 @@ public class CharAdapter
     public <V> ImmutableList<V> collect(CharToObjectFunction<? extends V> function)
     {
         int size = this.size();
-        FastList<V> list = FastList.newList(size);
+        MutableList<V> list = FastList.newList(size);
         for (int i = 0; i < size; i++)
         {
             list.add(function.valueOf(this.get(i)));

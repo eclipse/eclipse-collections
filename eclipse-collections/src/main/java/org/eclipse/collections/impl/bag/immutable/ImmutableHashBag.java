@@ -108,7 +108,7 @@ public class ImmutableHashBag<T>
     @Override
     public ImmutableBag<T> newWithout(T element)
     {
-        HashBag<T> hashBag = HashBag.newBag(this.delegate);
+        MutableBag<T> hashBag = HashBag.newBag(this.delegate);
         hashBag.remove(element);
         return hashBag.toImmutable();
     }

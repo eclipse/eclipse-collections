@@ -257,7 +257,7 @@ public abstract class MapIterableTestCase
     @Test
     public void forEachKey()
     {
-        UnifiedSet<Integer> result = UnifiedSet.newSet();
+        MutableSet<Integer> result = UnifiedSet.newSet();
         MapIterable<Integer, String> map = this.newMapWithKeysValues(1, "1", 2, "2", 3, "3");
         map.forEachKey(CollectionAddProcedure.on(result));
         Verify.assertSetsEqual(UnifiedSet.newSetWith(1, 2, 3), result);
@@ -266,7 +266,7 @@ public abstract class MapIterableTestCase
     @Test
     public void forEachValue()
     {
-        UnifiedSet<String> result = UnifiedSet.newSet();
+        MutableSet<String> result = UnifiedSet.newSet();
         MapIterable<Integer, String> map = this.newMapWithKeysValues(1, "1", 2, "2", 3, "3");
         map.forEachValue(CollectionAddProcedure.on(result));
         Verify.assertSetsEqual(UnifiedSet.newSetWith("1", "2", "3"), result);
@@ -275,7 +275,7 @@ public abstract class MapIterableTestCase
     @Test
     public void forEachKeyValue()
     {
-        UnifiedMap<Integer, String> result = UnifiedMap.newMap();
+        MutableMap<Integer, String> result = UnifiedMap.newMap();
         MapIterable<Integer, String> map = this.newMapWithKeysValues(1, "1", 2, "2", 3, "3");
         map.forEachKeyValue(result::put);
         Assert.assertEquals(UnifiedMap.newWithKeysValues(1, "1", 2, "2", 3, "3"), result);
@@ -855,7 +855,7 @@ public abstract class MapIterableTestCase
     {
         MapIterable<String, Integer> map = this.newMapWithKeysValues("1", 1, "2", 2, "3", 3, "4", 4);
 
-        FastList<Integer> actual = map.collectWith(AddFunction.INTEGER, 1, FastList.newList());
+        MutableList<Integer> actual = map.collectWith(AddFunction.INTEGER, 1, FastList.newList());
         Verify.assertContainsAll(actual, 2, 3, 4, 5);
     }
 

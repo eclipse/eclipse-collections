@@ -261,7 +261,7 @@ public abstract class AbstractMutableBag<T>
         if (that instanceof Collection || that instanceof RichIterable)
         {
             int thatSize = Iterate.sizeOf(that);
-            HashBag<Pair<T, S>> target = HashBag.newBag(Math.min(this.size(), thatSize));
+            MutableBag<Pair<T, S>> target = HashBag.newBag(Math.min(this.size(), thatSize));
             return this.zip(that, target);
         }
         return this.zip(that, HashBag.newBag());

@@ -1134,7 +1134,7 @@ public final class IteratorIterate
     public static <T> MutableList<T> distinct(Iterator<T> iterator, HashingStrategy<? super T> hashingStrategy)
     {
         Set<T> seenSoFar = UnifiedSetWithHashingStrategy.newSet(hashingStrategy);
-        FastList<T> result = FastList.newList();
+        MutableList<T> result = FastList.newList();
         while (iterator.hasNext())
         {
             T item = iterator.next();

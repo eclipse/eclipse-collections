@@ -326,7 +326,7 @@ public abstract class AbstractMutableSortedBag<T>
         if (that instanceof Collection || that instanceof RichIterable)
         {
             int thatSize = Iterate.sizeOf(that);
-            FastList<Pair<T, S>> target = FastList.newList(Math.min(this.size(), thatSize));
+            MutableList<Pair<T, S>> target = FastList.newList(Math.min(this.size(), thatSize));
             return this.zip(that, target);
         }
         return this.zip(that, FastList.newList());

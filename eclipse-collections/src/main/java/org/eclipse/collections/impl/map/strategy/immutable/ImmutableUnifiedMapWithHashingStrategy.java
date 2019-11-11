@@ -181,7 +181,7 @@ public class ImmutableUnifiedMapWithHashingStrategy<K, V>
     @Override
     public ImmutableMap<K, V> newWithKeyValue(K key, V value)
     {
-        UnifiedMapWithHashingStrategy<K, V> result = UnifiedMapWithHashingStrategy.newMap(this.delegate);
+        MutableMap<K, V> result = UnifiedMapWithHashingStrategy.newMap(this.delegate);
         result.put(key, value);
         return result.toImmutable();
     }
@@ -189,7 +189,7 @@ public class ImmutableUnifiedMapWithHashingStrategy<K, V>
     @Override
     public ImmutableMap<K, V> newWithAllKeyValues(Iterable<? extends Pair<? extends K, ? extends V>> keyValues)
     {
-        UnifiedMapWithHashingStrategy<K, V> result = UnifiedMapWithHashingStrategy.newMap(this.delegate);
+        MutableMap<K, V> result = UnifiedMapWithHashingStrategy.newMap(this.delegate);
         for (Pair<? extends K, ? extends V> pair : keyValues)
         {
             result.put(pair.getOne(), pair.getTwo());
@@ -200,7 +200,7 @@ public class ImmutableUnifiedMapWithHashingStrategy<K, V>
     @Override
     public ImmutableMap<K, V> newWithAllKeyValueArguments(Pair<? extends K, ? extends V>... keyValuePairs)
     {
-        UnifiedMapWithHashingStrategy<K, V> result = UnifiedMapWithHashingStrategy.newMap(this.delegate);
+        MutableMap<K, V> result = UnifiedMapWithHashingStrategy.newMap(this.delegate);
         for (Pair<? extends K, ? extends V> keyValuePair : keyValuePairs)
         {
             result.put(keyValuePair.getOne(), keyValuePair.getTwo());
@@ -211,7 +211,7 @@ public class ImmutableUnifiedMapWithHashingStrategy<K, V>
     @Override
     public ImmutableMap<K, V> newWithoutKey(K key)
     {
-        UnifiedMapWithHashingStrategy<K, V> result = UnifiedMapWithHashingStrategy.newMap(this.delegate);
+        MutableMap<K, V> result = UnifiedMapWithHashingStrategy.newMap(this.delegate);
         result.remove(key);
         return result.toImmutable();
     }
@@ -219,7 +219,7 @@ public class ImmutableUnifiedMapWithHashingStrategy<K, V>
     @Override
     public ImmutableMap<K, V> newWithoutAllKeys(Iterable<? extends K> keys)
     {
-        UnifiedMapWithHashingStrategy<K, V> result = UnifiedMapWithHashingStrategy.newMap(this.delegate);
+        MutableMap<K, V> result = UnifiedMapWithHashingStrategy.newMap(this.delegate);
         for (K key : keys)
         {
             result.remove(key);

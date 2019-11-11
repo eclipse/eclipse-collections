@@ -31,6 +31,7 @@ import org.eclipse.collections.api.multimap.sortedbag.MutableSortedBagMultimap;
 import org.eclipse.collections.api.multimap.sortedbag.SortedBagMultimap;
 import org.eclipse.collections.api.multimap.sortedset.MutableSortedSetMultimap;
 import org.eclipse.collections.api.multimap.sortedset.SortedSetMultimap;
+import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 import org.eclipse.collections.impl.bag.mutable.HashBag;
 import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.block.factory.IntegerPredicates;
@@ -630,7 +631,7 @@ public class VerifyTest
     @Test
     public void assertSortedSetsEqual()
     {
-        TreeSortedSet<Integer> integers = TreeSortedSet.newSetWith(Comparators.reverseNaturalOrder(), 1, 2, 3, 4);
+        MutableSortedSet<Integer> integers = TreeSortedSet.newSetWith(Comparators.reverseNaturalOrder(), 1, 2, 3, 4);
         Verify.assertSortedSetsEqual(null, null);
         Verify.assertSortedSetsEqual(TreeSortedSet.newSet(), new TreeSet<>());
         Verify.assertSortedSetsEqual(TreeSortedSet.newSetWith(1, 2, 3), new TreeSet<>(FastList.newListWith(1, 2, 3)));

@@ -12,6 +12,7 @@ package org.eclipse.collections.impl.map.sorted.mutable;
 
 import java.util.Comparator;
 
+import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.sorted.MutableSortedMap;
 import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.list.mutable.FastList;
@@ -96,7 +97,7 @@ public class TreeSortedMapTest extends MutableSortedMapTestCase
     @Test
     public void testConstructors()
     {
-        UnifiedMap<Integer, String> unifiedMap = UnifiedMap.newWithKeysValues(1, "One", 2, "Two", 3, "Three");
+        MutableMap<Integer, String> unifiedMap = UnifiedMap.newWithKeysValues(1, "One", 2, "Two", 3, "Three");
         TreeSortedMap<Integer, String> sortedMap = TreeSortedMap.newMap(unifiedMap);
         TreeSortedMap<Integer, String> revSortedMap = TreeSortedMap.newMap(
                 Comparators.reverseNaturalOrder(),

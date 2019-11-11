@@ -177,7 +177,7 @@ public abstract class UnifiedMapTestCase extends MutableMapTestCase
     {
         // a map with a null key
         MutableMap<Integer, Integer> map1 = this.newMapWithKeyValue(null, 0);
-        UnifiedSet<Object> set = UnifiedSet.newSet();
+        MutableSet<Object> set = UnifiedSet.newSet();
         set.add(null);
         Verify.assertEqualsAndHashCode(set, map1.keySet());
 
@@ -429,7 +429,7 @@ public abstract class UnifiedMapTestCase extends MutableMapTestCase
 
         // simple map, collection to retain contains non-entry element
         MutableMap<Integer, String> map4 = this.newMapWithKeysValues(1, "One", 2, "Two");
-        FastList<Object> toRetain = FastList.newListWith(ImmutableEntry.of(1, "One"), "explosion!", ImmutableEntry.of(2, "Two"));
+        MutableList<Object> toRetain = FastList.newListWith(ImmutableEntry.of(1, "One"), "explosion!", ImmutableEntry.of(2, "Two"));
         Assert.assertFalse(map4.entrySet().retainAll(toRetain));
     }
 
@@ -443,7 +443,7 @@ public abstract class UnifiedMapTestCase extends MutableMapTestCase
         {
             MutableMap<Integer, Integer> map = this.mapWithCollisionsOfSize(i);
             Object sentinel = new Object();
-            UnifiedSet<Integer> result = UnifiedSet.newSet();
+            MutableSet<Integer> result = UnifiedSet.newSet();
             map.forEachWith((argument1, argument2) -> {
                 Assert.assertSame(sentinel, argument2);
                 result.add(argument1);
@@ -668,7 +668,7 @@ public abstract class UnifiedMapTestCase extends MutableMapTestCase
         MutableMap<Integer, String> map = this.newMapWithKeysValues(1, "One", 2, "Two", 3, "Three", null, null);
         Assert.assertNotEquals(UnifiedSet.newSetWith(ImmutableEntry.of(5, "Five")), map.entrySet());
 
-        UnifiedSet<ImmutableEntry<Integer, String>> expected = UnifiedSet.newSetWith(
+        MutableSet<ImmutableEntry<Integer, String>> expected = UnifiedSet.newSetWith(
                 ImmutableEntry.of(1, "One"),
                 ImmutableEntry.of(2, "Two"),
                 ImmutableEntry.of(3, "Three"),
@@ -712,7 +712,7 @@ public abstract class UnifiedMapTestCase extends MutableMapTestCase
     {
         super.forEachWithIndex();
 
-        UnifiedSet<String> set = UnifiedSet.newSet();
+        MutableSet<String> set = UnifiedSet.newSet();
 
         // map with a chain and no empty slots
         MutableMap<Integer, Integer> map = this.mapWithCollisionsOfSize(2);
@@ -733,7 +733,7 @@ public abstract class UnifiedMapTestCase extends MutableMapTestCase
     {
         super.forEachKey();
 
-        UnifiedSet<String> set = UnifiedSet.newSet(5);
+        MutableSet<String> set = UnifiedSet.newSet(5);
 
         // map with a chain and empty slots
         MutableMap<Integer, Integer> map = this.mapWithCollisionsOfSize(5);

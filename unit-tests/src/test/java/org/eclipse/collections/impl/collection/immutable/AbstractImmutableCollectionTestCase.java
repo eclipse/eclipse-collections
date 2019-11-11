@@ -626,7 +626,7 @@ public abstract class AbstractImmutableCollectionTestCase
         Assert.assertEquals(Integer.valueOf(1), integers.detectWith(Object::equals, Integer.valueOf(1)));
         Assert.assertNull(integers.detectWith(Object::equals, Integer.valueOf(integers.size() + 1)));
 
-        FastList<String> strings = FastList.newListWith("1", "2", "3");
+        MutableList<String> strings = FastList.newListWith("1", "2", "3");
         Assert.assertEquals("1", strings.detectWith(Object::equals, "1"));
     }
 

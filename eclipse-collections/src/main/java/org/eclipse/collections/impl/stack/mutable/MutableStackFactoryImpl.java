@@ -40,7 +40,7 @@ public class MutableStackFactoryImpl implements MutableStackFactory
     @Override
     public <T> MutableStack<T> fromStream(Stream<? extends T> stream)
     {
-        ArrayStack<T> stack = ArrayStack.newStack();
+        MutableStack<T> stack = ArrayStack.newStack();
         stream.forEach(stack::push);
         return stack;
     }

@@ -276,7 +276,7 @@ final class ImmutableBooleanArrayList
     @Override
     public <V> ImmutableList<V> collect(BooleanToObjectFunction<? extends V> function)
     {
-        FastList<V> target = FastList.newList(this.size);
+        MutableList<V> target = FastList.newList(this.size);
         for (int i = 0; i < this.size; i++)
         {
             target.add(function.valueOf(this.items.get(i)));
