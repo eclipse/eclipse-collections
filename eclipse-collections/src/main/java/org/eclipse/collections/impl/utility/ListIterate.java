@@ -1689,7 +1689,7 @@ public final class ListIterate
         {
             int listSize = list.size();
             int iterableSize = Iterate.sizeOf(iterable);
-            FastList<Pair<X, Y>> target = FastList.newList(Math.min(listSize, iterableSize));
+            MutableList<Pair<X, Y>> target = FastList.newList(Math.min(listSize, iterableSize));
             return ListIterate.zip(list, iterable, target);
         }
         return ListIterate.zip(list, iterable, FastList.newList());
