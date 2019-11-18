@@ -10,6 +10,7 @@
 
 package org.eclipse.collections.api.set.sorted;
 
+import java.util.Comparator;
 import java.util.SortedSet;
 
 import org.eclipse.collections.api.block.function.Function;
@@ -26,6 +27,7 @@ import org.eclipse.collections.api.block.function.primitive.ShortFunction;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
+import org.eclipse.collections.api.factory.SortedSets;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.list.primitive.MutableBooleanList;
 import org.eclipse.collections.api.list.primitive.MutableByteList;
@@ -50,6 +52,41 @@ import org.eclipse.collections.api.tuple.Pair;
 public interface MutableSortedSet<T>
         extends MutableSetIterable<T>, SortedSetIterable<T>, SortedSet<T>, Cloneable
 {
+    static <T> MutableSortedSet<T> empty()
+    {
+        return SortedSets.mutable.empty();
+    }
+
+    static <T> MutableSortedSet<T> of()
+    {
+        return SortedSets.mutable.of();
+    }
+
+    static <T> MutableSortedSet<T> of(T... items)
+    {
+        return SortedSets.mutable.of(items);
+    }
+
+    static <T> MutableSortedSet<T> ofAll(Iterable<? extends T> items)
+    {
+        return SortedSets.mutable.ofAll(items);
+    }
+
+    static <T> MutableSortedSet<T> of(Comparator<? super T> comparator)
+    {
+        return SortedSets.mutable.of(comparator);
+    }
+
+    static <T> MutableSortedSet<T> of(Comparator<? super T> comparator, T... items)
+    {
+        return SortedSets.mutable.of(comparator, items);
+    }
+
+    static <T> MutableSortedSet<T> ofAll(Comparator<? super T> comparator, Iterable<? extends T> items)
+    {
+        return SortedSets.mutable.ofAll(comparator, items);
+    }
+
     @Override
     MutableSortedSet<T> with(T element);
 

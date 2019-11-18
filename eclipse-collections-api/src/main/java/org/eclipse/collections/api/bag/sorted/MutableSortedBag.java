@@ -10,6 +10,8 @@
 
 package org.eclipse.collections.api.bag.sorted;
 
+import java.util.Comparator;
+
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.bag.MutableBagIterable;
 import org.eclipse.collections.api.block.function.Function;
@@ -29,6 +31,7 @@ import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.predicate.primitive.IntPredicate;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
+import org.eclipse.collections.api.factory.SortedBags;
 import org.eclipse.collections.api.factory.SortedSets;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.list.primitive.MutableBooleanList;
@@ -52,6 +55,46 @@ import org.eclipse.collections.api.tuple.Pair;
 public interface MutableSortedBag<T>
         extends SortedBag<T>, MutableBagIterable<T>, Cloneable
 {
+    static <T> MutableSortedBag<T> empty()
+    {
+        return SortedBags.mutable.empty();
+    }
+
+    static <T> MutableSortedBag<T> empty(Comparator<? super T> comparator)
+    {
+        return SortedBags.mutable.empty(comparator);
+    }
+
+    static <T> MutableSortedBag<T> of()
+    {
+        return SortedBags.mutable.of();
+    }
+
+    static <T> MutableSortedBag<T> of(Comparator<? super T> comparator)
+    {
+        return SortedBags.mutable.of(comparator);
+    }
+
+    static <T> MutableSortedBag<T> of(T... elements)
+    {
+        return SortedBags.mutable.of(elements);
+    }
+
+    static <T> MutableSortedBag<T> of(Comparator<? super T> comparator, T... elements)
+    {
+        return SortedBags.mutable.of(comparator, elements);
+    }
+
+    static <T> MutableSortedBag<T> ofAll(Iterable<? extends T> items)
+    {
+        return SortedBags.mutable.ofAll(items);
+    }
+
+    static <T> MutableSortedBag<T> ofAll(Comparator<? super T> comparator, Iterable<? extends T> items)
+    {
+        return SortedBags.mutable.ofAll(comparator, items);
+    }
+
     @Override
     MutableSortedBag<T> selectByOccurrences(IntPredicate predicate);
 

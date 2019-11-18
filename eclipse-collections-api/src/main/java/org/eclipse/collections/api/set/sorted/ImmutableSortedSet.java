@@ -10,6 +10,7 @@
 
 package org.eclipse.collections.api.set.sorted;
 
+import java.util.Comparator;
 import java.util.Set;
 import java.util.SortedSet;
 
@@ -27,6 +28,7 @@ import org.eclipse.collections.api.block.function.primitive.ShortFunction;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
+import org.eclipse.collections.api.factory.SortedSets;
 import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.primitive.ImmutableBooleanList;
 import org.eclipse.collections.api.list.primitive.ImmutableByteList;
@@ -51,6 +53,51 @@ import org.eclipse.collections.api.tuple.Pair;
 public interface ImmutableSortedSet<T>
         extends SortedSetIterable<T>, ImmutableSetIterable<T>
 {
+    static <T> ImmutableSortedSet<T> empty()
+    {
+        return SortedSets.immutable.empty();
+    }
+
+    static <T> ImmutableSortedSet<T> empty(Comparator<? super T> comparator)
+    {
+        return SortedSets.immutable.empty(comparator);
+    }
+
+    static <T> ImmutableSortedSet<T> of()
+    {
+        return SortedSets.immutable.of();
+    }
+
+    static <T> ImmutableSortedSet<T> of(T... items)
+    {
+        return SortedSets.immutable.of(items);
+    }
+
+    static <T> ImmutableSortedSet<T> ofAll(Iterable<? extends T> items)
+    {
+        return SortedSets.immutable.ofAll(items);
+    }
+
+    static <T> ImmutableSortedSet<T> of(Comparator<? super T> comparator)
+    {
+        return SortedSets.immutable.of(comparator);
+    }
+
+    static <T> ImmutableSortedSet<T> of(Comparator<? super T> comparator, T... items)
+    {
+        return SortedSets.immutable.of(comparator, items);
+    }
+
+    static <T> ImmutableSortedSet<T> ofAll(Comparator<? super T> comparator, Iterable<? extends T> items)
+    {
+        return SortedSets.immutable.ofAll(comparator, items);
+    }
+
+    static <T> ImmutableSortedSet<T> ofSortedSet(SortedSet<T> set)
+    {
+        return SortedSets.immutable.ofSortedSet(set);
+    }
+
     @Override
     ImmutableSortedSet<T> newWith(T element);
 

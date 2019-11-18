@@ -10,6 +10,8 @@
 
 package org.eclipse.collections.api.set;
 
+import java.util.stream.Stream;
+
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.function.primitive.BooleanFunction;
@@ -23,6 +25,7 @@ import org.eclipse.collections.api.block.function.primitive.ShortFunction;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
+import org.eclipse.collections.api.factory.Sets;
 import org.eclipse.collections.api.multimap.set.MutableSetMultimap;
 import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.partition.set.PartitionMutableSet;
@@ -42,6 +45,36 @@ import org.eclipse.collections.api.tuple.Pair;
 public interface MutableSet<T>
         extends UnsortedSetIterable<T>, MutableSetIterable<T>, Cloneable
 {
+    static <T> MutableSet<T> empty()
+    {
+        return Sets.mutable.empty();
+    }
+
+    static <T> MutableSet<T> of()
+    {
+        return Sets.mutable.of();
+    }
+
+    static <T> MutableSet<T> of(T... items)
+    {
+        return Sets.mutable.of(items);
+    }
+
+    static <T> MutableSet<T> ofInitialCapacity(int capacity)
+    {
+        return Sets.mutable.ofInitialCapacity(capacity);
+    }
+
+    static <T> MutableSet<T> ofAll(Iterable<? extends T> items)
+    {
+        return Sets.mutable.ofAll(items);
+    }
+
+    static <T> MutableSet<T> fromStream(Stream<? extends T> stream)
+    {
+        return Sets.mutable.fromStream(stream);
+    }
+
     @Override
     MutableSet<T> with(T element);
 

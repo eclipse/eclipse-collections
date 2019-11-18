@@ -10,6 +10,8 @@
 
 package org.eclipse.collections.api.bag;
 
+import java.util.stream.Stream;
+
 import org.eclipse.collections.api.bag.primitive.MutableBooleanBag;
 import org.eclipse.collections.api.bag.primitive.MutableByteBag;
 import org.eclipse.collections.api.bag.primitive.MutableCharBag;
@@ -33,6 +35,7 @@ import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.predicate.primitive.IntPredicate;
 import org.eclipse.collections.api.block.procedure.Procedure;
+import org.eclipse.collections.api.factory.Bags;
 import org.eclipse.collections.api.factory.Sets;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.multimap.bag.MutableBagMultimap;
@@ -51,6 +54,31 @@ import org.eclipse.collections.api.tuple.Pair;
 public interface MutableBag<T>
         extends UnsortedBag<T>, MutableBagIterable<T>
 {
+    static <T> MutableBag<T> empty()
+    {
+        return Bags.mutable.empty();
+    }
+
+    static <T> MutableBag<T> of()
+    {
+        return Bags.mutable.of();
+    }
+
+    static <T> MutableBag<T> of(T... elements)
+    {
+        return Bags.mutable.of(elements);
+    }
+
+    static <T> MutableBag<T> ofAll(Iterable<? extends T> items)
+    {
+        return Bags.mutable.ofAll(items);
+    }
+
+    static <T> MutableBag<T> fromStream(Stream<? extends T> stream)
+    {
+        return Bags.mutable.fromStream(stream);
+    }
+
     @Override
     MutableMap<T, Integer> toMapOfItemToCount();
 

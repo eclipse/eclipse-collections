@@ -11,6 +11,7 @@
 package org.eclipse.collections.api.set;
 
 import java.util.Set;
+import java.util.stream.Stream;
 
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
@@ -25,6 +26,7 @@ import org.eclipse.collections.api.block.function.primitive.ShortFunction;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
+import org.eclipse.collections.api.factory.Sets;
 import org.eclipse.collections.api.multimap.set.ImmutableSetMultimap;
 import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.partition.set.PartitionImmutableSet;
@@ -47,6 +49,51 @@ import org.eclipse.collections.api.tuple.Pair;
 public interface ImmutableSet<T>
         extends UnsortedSetIterable<T>, ImmutableSetIterable<T>
 {
+    static <T> ImmutableSet<T> empty()
+    {
+        return Sets.immutable.empty();
+    }
+
+    static <T> ImmutableSet<T> of()
+    {
+        return Sets.immutable.of();
+    }
+
+    static <T> ImmutableSet<T> of(T one)
+    {
+        return Sets.immutable.of(one);
+    }
+
+    static <T> ImmutableSet<T> of(T one, T two)
+    {
+        return Sets.immutable.of(one, two);
+    }
+
+    static <T> ImmutableSet<T> of(T one, T two, T three)
+    {
+        return Sets.immutable.of(one, two, three);
+    }
+
+    static <T> ImmutableSet<T> of(T one, T two, T three, T four)
+    {
+        return Sets.immutable.of(one, two, three, four);
+    }
+
+    static <T> ImmutableSet<T> of(T... items)
+    {
+        return Sets.immutable.of(items);
+    }
+
+    static <T> ImmutableSet<T> ofAll(Iterable<? extends T> items)
+    {
+        return Sets.immutable.ofAll(items);
+    }
+
+    static <T> ImmutableSet<T> fromStream(Stream<? extends T> stream)
+    {
+        return Sets.immutable.fromStream(stream);
+    }
+
     @Override
     ImmutableSet<T> newWith(T element);
 

@@ -10,6 +10,7 @@
 
 package org.eclipse.collections.api.map.sorted;
 
+import java.util.Comparator;
 import java.util.SortedMap;
 
 import org.eclipse.collections.api.block.function.Function;
@@ -28,6 +29,7 @@ import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
+import org.eclipse.collections.api.factory.SortedMaps;
 import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.primitive.ImmutableBooleanList;
 import org.eclipse.collections.api.list.primitive.ImmutableByteList;
@@ -51,6 +53,66 @@ import org.eclipse.collections.api.tuple.Pair;
 public interface ImmutableSortedMap<K, V>
         extends SortedMapIterable<K, V>, ImmutableMapIterable<K, V>
 {
+    static <K, V> ImmutableSortedMap<K, V> empty()
+    {
+        return SortedMaps.immutable.empty();
+    }
+
+    static <K, V> ImmutableSortedMap<K, V> of()
+    {
+        return SortedMaps.immutable.of();
+    }
+
+    static <K, V> ImmutableSortedMap<K, V> of(K key, V value)
+    {
+        return SortedMaps.immutable.of(key, value);
+    }
+
+    static <K, V> ImmutableSortedMap<K, V> of(K key1, V value1, K key2, V value2)
+    {
+        return SortedMaps.immutable.of(key1, value1, key2, value2);
+    }
+
+    static <K, V> ImmutableSortedMap<K, V> of(K key1, V value1, K key2, V value2, K key3, V value3)
+    {
+        return SortedMaps.immutable.of(key1, value1, key2, value2, key3, value3);
+    }
+
+    static <K, V> ImmutableSortedMap<K, V> of(K key1, V value1, K key2, V value2, K key3, V value3, K key4, V value4)
+    {
+        return SortedMaps.immutable.of(key1, value1, key2, value2, key3, value3, key4, value4);
+    }
+
+    static <K, V> ImmutableSortedMap<K, V> of(Comparator<? super K> comparator)
+    {
+        return SortedMaps.immutable.of(comparator);
+    }
+
+    static <K, V> ImmutableSortedMap<K, V> of(Comparator<? super K> comparator, K key, V value)
+    {
+        return SortedMaps.immutable.of(comparator, key, value);
+    }
+
+    static <K, V> ImmutableSortedMap<K, V> of(Comparator<? super K> comparator, K key1, V value1, K key2, V value2)
+    {
+        return SortedMaps.immutable.of(comparator, key1, value1, key2, value2);
+    }
+
+    static <K, V> ImmutableSortedMap<K, V> of(Comparator<? super K> comparator, K key1, V value1, K key2, V value2, K key3, V value3)
+    {
+        return SortedMaps.immutable.of(comparator, key1, value1, key2, value2, key3, value3);
+    }
+
+    static <K, V> ImmutableSortedMap<K, V> of(Comparator<? super K> comparator, K key1, V value1, K key2, V value2, K key3, V value3, K key4, V value4)
+    {
+        return SortedMaps.immutable.of(comparator, key1, value1, key2, value2, key3, value3, key4, value4);
+    }
+
+    static <K, V> ImmutableSortedMap<K, V> ofSortedMap(SortedMap<K, V> map)
+    {
+        return SortedMaps.immutable.ofSortedMap(map);
+    }
+
     @Override
     SortedMap<K, V> castToMap();
 

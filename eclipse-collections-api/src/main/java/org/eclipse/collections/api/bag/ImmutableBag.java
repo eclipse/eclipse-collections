@@ -10,6 +10,8 @@
 
 package org.eclipse.collections.api.bag;
 
+import java.util.stream.Stream;
+
 import org.eclipse.collections.api.bag.primitive.ImmutableBooleanBag;
 import org.eclipse.collections.api.bag.primitive.ImmutableByteBag;
 import org.eclipse.collections.api.bag.primitive.ImmutableCharBag;
@@ -33,6 +35,7 @@ import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.predicate.primitive.IntPredicate;
 import org.eclipse.collections.api.block.procedure.Procedure;
+import org.eclipse.collections.api.factory.Bags;
 import org.eclipse.collections.api.factory.Sets;
 import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.multimap.bag.ImmutableBagMultimap;
@@ -48,6 +51,36 @@ import org.eclipse.collections.api.tuple.primitive.ObjectIntPair;
  */
 public interface ImmutableBag<T> extends UnsortedBag<T>, ImmutableBagIterable<T>
 {
+    static <T> ImmutableBag<T> empty()
+    {
+        return Bags.immutable.empty();
+    }
+
+    static <T> ImmutableBag<T> of()
+    {
+        return Bags.immutable.of();
+    }
+
+    static <T> ImmutableBag<T> of(T element)
+    {
+        return Bags.immutable.of(element);
+    }
+
+    static <T> ImmutableBag<T> of(T... elements)
+    {
+        return Bags.immutable.of(elements);
+    }
+
+    static <T> ImmutableBag<T> ofAll(Iterable<? extends T> items)
+    {
+        return Bags.immutable.ofAll(items);
+    }
+
+    static <T> ImmutableBag<T> fromStream(Stream<? extends T> stream)
+    {
+        return Bags.immutable.fromStream(stream);
+    }
+
     @Override
     ImmutableBag<T> newWith(T element);
 

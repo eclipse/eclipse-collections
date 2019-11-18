@@ -10,6 +10,8 @@
 
 package org.eclipse.collections.api.map;
 
+import java.util.Map;
+
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.bag.primitive.MutableBooleanBag;
 import org.eclipse.collections.api.bag.primitive.MutableByteBag;
@@ -34,6 +36,7 @@ import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
+import org.eclipse.collections.api.factory.Maps;
 import org.eclipse.collections.api.multimap.bag.MutableBagMultimap;
 import org.eclipse.collections.api.multimap.set.MutableSetMultimap;
 import org.eclipse.collections.api.ordered.OrderedIterable;
@@ -48,6 +51,51 @@ import org.eclipse.collections.api.tuple.Pair;
 public interface MutableMap<K, V>
         extends MutableMapIterable<K, V>, UnsortedMapIterable<K, V>, Cloneable
 {
+    static <K, V> MutableMap<K, V> empty()
+    {
+        return Maps.mutable.empty();
+    }
+
+    static <K, V> MutableMap<K, V> of()
+    {
+        return Maps.mutable.of();
+    }
+
+    static <K, V> MutableMap<K, V> ofInitialCapacity(int capacity)
+    {
+        return Maps.mutable.ofInitialCapacity(capacity);
+    }
+
+    static <K, V> MutableMap<K, V> of(K key, V value)
+    {
+        return Maps.mutable.of(key, value);
+    }
+
+    static <K, V> MutableMap<K, V> of(K key1, V value1, K key2, V value2)
+    {
+        return Maps.mutable.of(key1, value1, key2, value2);
+    }
+
+    static <K, V> MutableMap<K, V> of(K key1, V value1, K key2, V value2, K key3, V value3)
+    {
+        return Maps.mutable.of(key1, value1, key2, value2, key3, value3);
+    }
+
+    static <K, V> MutableMap<K, V> of(K key1, V value1, K key2, V value2, K key3, V value3, K key4, V value4)
+    {
+        return Maps.mutable.of(key1, value1, key2, value2, key3, value3, key4, value4);
+    }
+
+    static <K, V> MutableMap<K, V> ofMap(Map<? extends K, ? extends V> map)
+    {
+        return Maps.mutable.ofMap(map);
+    }
+
+    static <K, V> MutableMap<K, V> ofMapIterable(MapIterable<? extends K, ? extends V> mapIterable)
+    {
+        return Maps.mutable.ofMapIterable(mapIterable);
+    }
+
     /**
      * Adds all the entries derived from {@code iterable} to {@code this}. The key and value for each entry
      * is determined by applying the {@code keyFunction} and {@code valueFunction} to each item in

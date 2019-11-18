@@ -10,6 +10,8 @@
 
 package org.eclipse.collections.api.map.sorted;
 
+import java.util.Comparator;
+import java.util.Map;
 import java.util.SortedMap;
 
 import org.eclipse.collections.api.block.function.Function;
@@ -27,6 +29,7 @@ import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.collection.MutableCollection;
+import org.eclipse.collections.api.factory.SortedMaps;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.list.primitive.MutableBooleanList;
 import org.eclipse.collections.api.list.primitive.MutableByteList;
@@ -51,6 +54,66 @@ import org.eclipse.collections.api.tuple.Pair;
 public interface MutableSortedMap<K, V>
         extends MutableMapIterable<K, V>, SortedMapIterable<K, V>, SortedMap<K, V>, Cloneable
 {
+    static <K, V> MutableSortedMap<K, V> empty()
+    {
+        return SortedMaps.mutable.empty();
+    }
+
+    static <K, V> MutableSortedMap<K, V> of()
+    {
+        return SortedMaps.mutable.of();
+    }
+
+    static <K, V> MutableSortedMap<K, V> of(K key, V value)
+    {
+        return SortedMaps.mutable.of(key, value);
+    }
+
+    static <K, V> MutableSortedMap<K, V> of(K key1, V value1, K key2, V value2)
+    {
+        return SortedMaps.mutable.of(key1, value1, key2, value2);
+    }
+
+    static <K, V> MutableSortedMap<K, V> of(K key1, V value1, K key2, V value2, K key3, V value3)
+    {
+        return SortedMaps.mutable.of(key1, value1, key2, value2, key3, value3);
+    }
+
+    static <K, V> MutableSortedMap<K, V> of(K key1, V value1, K key2, V value2, K key3, V value3, K key4, V value4)
+    {
+        return SortedMaps.mutable.of(key1, value1, key2, value2, key3, value3, key4, value4);
+    }
+
+    static <K, V> MutableSortedMap<K, V> of(Comparator<? super K> comparator)
+    {
+        return SortedMaps.mutable.of(comparator);
+    }
+
+    static <K, V> MutableSortedMap<K, V> of(Comparator<? super K> comparator, K key, V value)
+    {
+        return SortedMaps.mutable.of(comparator, key, value);
+    }
+
+    static <K, V> MutableSortedMap<K, V> of(Comparator<? super K> comparator, K key1, V value1, K key2, V value2)
+    {
+        return SortedMaps.mutable.of(comparator, key1, value1, key2, value2);
+    }
+
+    static <K, V> MutableSortedMap<K, V> of(Comparator<? super K> comparator, K key1, V value1, K key2, V value2, K key3, V value3)
+    {
+        return SortedMaps.mutable.of(comparator, key1, value1, key2, value2, key3, value3);
+    }
+
+    static <K, V> MutableSortedMap<K, V> of(Comparator<? super K> comparator, K key1, V value1, K key2, V value2, K key3, V value3, K key4, V value4)
+    {
+        return SortedMaps.mutable.of(comparator, key1, value1, key2, value2, key3, value3, key4, value4);
+    }
+
+    static <K, V> MutableSortedMap<K, V> ofSortedMap(Map<? extends K, ? extends V> map)
+    {
+        return SortedMaps.mutable.ofSortedMap(map);
+    }
+
     /**
      * Creates a new instance of the same type with the same internal Comparator.
      */

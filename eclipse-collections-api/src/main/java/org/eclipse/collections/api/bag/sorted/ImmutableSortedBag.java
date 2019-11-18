@@ -10,6 +10,8 @@
 
 package org.eclipse.collections.api.bag.sorted;
 
+import java.util.Comparator;
+
 import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.api.bag.ImmutableBagIterable;
 import org.eclipse.collections.api.block.function.Function;
@@ -29,6 +31,7 @@ import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.predicate.primitive.IntPredicate;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
+import org.eclipse.collections.api.factory.SortedBags;
 import org.eclipse.collections.api.factory.SortedSets;
 import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.primitive.ImmutableBooleanList;
@@ -55,6 +58,51 @@ import org.eclipse.collections.api.tuple.Pair;
 public interface ImmutableSortedBag<T>
         extends ImmutableBagIterable<T>, SortedBag<T>
 {
+    static <T> ImmutableSortedBag<T> empty()
+    {
+        return SortedBags.immutable.empty();
+    }
+
+    static <T> ImmutableSortedBag<T> empty(Comparator<? super T> comparator)
+    {
+        return SortedBags.immutable.empty(comparator);
+    }
+
+    static <T> ImmutableSortedBag<T> of()
+    {
+        return SortedBags.immutable.of();
+    }
+
+    static <T> ImmutableSortedBag<T> of(T... items)
+    {
+        return SortedBags.immutable.of(items);
+    }
+
+    static <T> ImmutableSortedBag<T> ofAll(Iterable<? extends T> items)
+    {
+        return SortedBags.immutable.ofAll(items);
+    }
+
+    static <T> ImmutableSortedBag<T> of(Comparator<? super T> comparator, T... items)
+    {
+        return SortedBags.immutable.of(comparator, items);
+    }
+
+    static <T> ImmutableSortedBag<T> of(Comparator<? super T> comparator)
+    {
+        return SortedBags.immutable.of(comparator);
+    }
+
+    static <T> ImmutableSortedBag<T> ofAll(Comparator<? super T> comparator, Iterable<? extends T> items)
+    {
+        return SortedBags.immutable.ofAll(comparator, items);
+    }
+
+    static <T> ImmutableSortedBag<T> ofSortedBag(SortedBag<T> bag)
+    {
+        return SortedBags.immutable.ofSortedBag(bag);
+    }
+
     @Override
     ImmutableSortedBag<T> newWith(T element);
 

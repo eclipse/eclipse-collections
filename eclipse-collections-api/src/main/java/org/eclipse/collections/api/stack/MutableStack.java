@@ -11,6 +11,7 @@
 package org.eclipse.collections.api.stack;
 
 import java.util.Collection;
+import java.util.stream.Stream;
 
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.block.function.Function;
@@ -29,6 +30,7 @@ import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
+import org.eclipse.collections.api.factory.Stacks;
 import org.eclipse.collections.api.list.ListIterable;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.primitive.MutableObjectDoubleMap;
@@ -47,6 +49,41 @@ import org.eclipse.collections.api.tuple.Pair;
 
 public interface MutableStack<T> extends StackIterable<T>
 {
+    static <T> MutableStack<T> empty()
+    {
+        return Stacks.mutable.empty();
+    }
+
+    static <T> MutableStack<T> of()
+    {
+        return Stacks.mutable.of();
+    }
+
+    static <T> MutableStack<T> of(T... elements)
+    {
+        return Stacks.mutable.of(elements);
+    }
+
+    static <T> MutableStack<T> ofAll(Iterable<? extends T> elements)
+    {
+        return Stacks.mutable.ofAll(elements);
+    }
+
+    static <T> MutableStack<T> fromStream(Stream<? extends T> stream)
+    {
+        return Stacks.mutable.fromStream(stream);
+    }
+
+    static <T> MutableStack<T> ofReversed(T... elements)
+    {
+        return Stacks.mutable.ofReversed(elements);
+    }
+
+    static <T> MutableStack<T> ofAllReversed(Iterable<? extends T> items)
+    {
+        return Stacks.mutable.ofAllReversed(items);
+    }
+
     /**
      * Adds an item to the top of the stack.
      */

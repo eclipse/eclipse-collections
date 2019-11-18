@@ -11,6 +11,7 @@
 package org.eclipse.collections.api.list;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 import org.eclipse.collections.api.block.HashingStrategy;
 import org.eclipse.collections.api.block.function.Function;
@@ -28,6 +29,7 @@ import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.collection.ImmutableCollection;
+import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.list.primitive.ImmutableBooleanList;
 import org.eclipse.collections.api.list.primitive.ImmutableByteList;
 import org.eclipse.collections.api.list.primitive.ImmutableCharList;
@@ -49,6 +51,81 @@ import org.eclipse.collections.api.tuple.Pair;
 public interface ImmutableList<T>
         extends ImmutableCollection<T>, ListIterable<T>
 {
+    static <T> ImmutableList<T> empty()
+    {
+        return Lists.immutable.empty();
+    }
+
+    static <T> ImmutableList<T> of()
+    {
+        return Lists.immutable.of();
+    }
+
+    static <T> ImmutableList<T> of(T one)
+    {
+        return Lists.immutable.of(one);
+    }
+
+    static <T> ImmutableList<T> of(T one, T two)
+    {
+        return Lists.immutable.of(one, two);
+    }
+
+    static <T> ImmutableList<T> of(T one, T two, T three)
+    {
+        return Lists.immutable.of(one, two, three);
+    }
+
+    static <T> ImmutableList<T> of(T one, T two, T three, T four)
+    {
+        return Lists.immutable.of(one, two, three, four);
+    }
+
+    static <T> ImmutableList<T> of(T one, T two, T three, T four, T five)
+    {
+        return Lists.immutable.of(one, two, three, four, five);
+    }
+
+    static <T> ImmutableList<T> of(T one, T two, T three, T four, T five, T six)
+    {
+        return Lists.immutable.of(one, two, three, four, five, six);
+    }
+
+    static <T> ImmutableList<T> of(T one, T two, T three, T four, T five, T six, T seven)
+    {
+        return Lists.immutable.of(one, two, three, four, five, six, seven);
+    }
+
+    static <T> ImmutableList<T> of(T one, T two, T three, T four, T five, T six, T seven, T eight)
+    {
+        return Lists.immutable.of(one, two, three, four, five, six, seven, eight);
+    }
+
+    static <T> ImmutableList<T> of(T one, T two, T three, T four, T five, T six, T seven, T eight, T nine)
+    {
+        return Lists.immutable.of(one, two, three, four, five, six, seven, eight, nine);
+    }
+
+    static <T> ImmutableList<T> of(T one, T two, T three, T four, T five, T six, T seven, T eight, T nine, T ten)
+    {
+        return Lists.immutable.of(one, two, three, four, five, six, seven, eight, nine, ten);
+    }
+
+    static <T> ImmutableList<T> of(T... items)
+    {
+        return Lists.immutable.of(items);
+    }
+
+    static <T> ImmutableList<T> ofAll(Iterable<? extends T> items)
+    {
+        return Lists.immutable.ofAll(items);
+    }
+
+    static <T> ImmutableList<T> fromStream(Stream<? extends T> stream)
+    {
+        return Lists.immutable.fromStream(stream);
+    }
+
     @Override
     ImmutableList<T> newWith(T element);
 

@@ -14,9 +14,11 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Stream;
 
 import org.eclipse.collections.api.block.HashingStrategy;
 import org.eclipse.collections.api.block.function.Function;
+import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.function.primitive.BooleanFunction;
 import org.eclipse.collections.api.block.function.primitive.ByteFunction;
@@ -50,6 +52,41 @@ import org.eclipse.collections.api.tuple.Pair;
 public interface MutableList<T>
         extends MutableCollection<T>, List<T>, Cloneable, ListIterable<T>
 {
+    static <T> MutableList<T> empty()
+    {
+        return Lists.mutable.empty();
+    }
+
+    static <T> MutableList<T> of()
+    {
+        return Lists.mutable.of();
+    }
+
+    static <T> MutableList<T> of(T... items)
+    {
+        return Lists.mutable.of(items);
+    }
+
+    static <T> MutableList<T> ofInitialCapacity(int capacity)
+    {
+        return Lists.mutable.ofInitialCapacity(capacity);
+    }
+
+    static <T> MutableList<T> ofAll(Iterable<? extends T> iterable)
+    {
+        return Lists.mutable.ofAll(iterable);
+    }
+
+    static <T> MutableList<T> fromStream(Stream<? extends T> stream)
+    {
+        return Lists.mutable.fromStream(stream);
+    }
+
+    static <T> MutableList<T> withNValues(int size, Function0<? extends T> factory)
+    {
+        return Lists.mutable.withNValues(size, factory);
+    }
+
     @Override
     MutableList<T> with(T element);
 

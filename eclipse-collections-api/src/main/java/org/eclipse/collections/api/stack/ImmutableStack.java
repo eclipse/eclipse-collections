@@ -10,6 +10,8 @@
 
 package org.eclipse.collections.api.stack;
 
+import java.util.stream.Stream;
+
 import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function0;
@@ -27,6 +29,7 @@ import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
+import org.eclipse.collections.api.factory.Stacks;
 import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.api.map.primitive.ImmutableObjectDoubleMap;
 import org.eclipse.collections.api.map.primitive.ImmutableObjectLongMap;
@@ -44,6 +47,46 @@ import org.eclipse.collections.api.tuple.Pair;
 
 public interface ImmutableStack<T> extends StackIterable<T>
 {
+    static <T> ImmutableStack<T> empty()
+    {
+        return Stacks.immutable.empty();
+    }
+
+    static <T> ImmutableStack<T> of()
+    {
+        return Stacks.immutable.of();
+    }
+
+    static <T> ImmutableStack<T> of(T element)
+    {
+        return Stacks.immutable.of(element);
+    }
+
+    static <T> ImmutableStack<T> of(T... elements)
+    {
+        return Stacks.immutable.of(elements);
+    }
+
+    static <T> ImmutableStack<T> ofAll(Iterable<? extends T> items)
+    {
+        return Stacks.immutable.ofAll(items);
+    }
+
+    static <T> ImmutableStack<T> fromStream(Stream<? extends T> stream)
+    {
+        return Stacks.immutable.fromStream(stream);
+    }
+
+    static <T> ImmutableStack<T> ofReversed(T... elements)
+    {
+        return Stacks.immutable.ofReversed(elements);
+    }
+
+    static <T> ImmutableStack<T> ofAllReversed(Iterable<? extends T> items)
+    {
+        return Stacks.immutable.ofAllReversed(items);
+    }
+
     ImmutableStack<T> push(T item);
 
     ImmutableStack<T> pop();
