@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 import org.eclipse.collections.api.IntIterable;
 import org.eclipse.collections.api.LazyIntIterable;
 import org.eclipse.collections.api.RichIterable;
+import org.eclipse.collections.api.block.procedure.primitive.IntProcedure;
 import org.eclipse.collections.api.iterator.IntIterator;
 import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
@@ -69,6 +70,24 @@ public class IntIntervalTest
     public void fromToBy_throws_on_illegal_step()
     {
         IntInterval.fromToBy(5, 0, 1);
+    }
+
+    @Test
+    public void fromToBy_with_same_start_and_end_with_negative_step()
+    {
+        MutableIntList integers = IntInterval.fromToBy(2, 2, -2).toList();
+
+        Verify.assertEquals(1, integers.size());
+        Verify.assertEquals(2, integers.getFirst());
+    }
+
+    @Test
+    public void fromToBy_with_same_start_and_end_with_negative_step2()
+    {
+        MutableIntList integers = IntInterval.fromToBy(2, 2, -1).toList();
+
+        Verify.assertEquals(1, integers.size());
+        Verify.assertEquals(2, integers.getFirst());
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -196,6 +215,14 @@ public class IntIntervalTest
         IntInterval interval2 = IntInterval.fromTo(3, 1);
         MutableInteger result2 = interval2.injectIntoWithIndex(new MutableInteger(0), (object, value, index) -> object.add(value * this.intInterval.get(index)));
         Assert.assertEquals(new MutableInteger(10), result2);
+    }
+
+    @Test
+    public void injectIntoOnFromToBySameStartEndNegativeStepInterval()
+    {
+        IntInterval interval = IntInterval.fromToBy(2, 2, -2);
+
+        Assert.assertEquals(new MutableInteger(0), interval.injectInto(new MutableInteger(-2), MutableInteger::add));
     }
 
     @Test
@@ -740,6 +767,17 @@ public class IntIntervalTest
         IntegerSum zeroSum = new IntegerSum(0);
         IntInterval.fromTo(0, -4).forEachWithIndex((each, index) -> zeroSum.add(each + index));
         Assert.assertEquals(0, zeroSum.getIntSum());
+    }
+
+    @Test
+    public void forEach_with_same_start_and_end_with_negative_step()
+    {
+        MutableInteger counter = new MutableInteger(0);
+
+        IntInterval interval = IntInterval.fromToBy(2, 2, -2);
+        interval.forEach((IntProcedure) each -> counter.add(1));
+
+        Assert.assertEquals(1, counter.toInteger().intValue());
     }
 
     @Test

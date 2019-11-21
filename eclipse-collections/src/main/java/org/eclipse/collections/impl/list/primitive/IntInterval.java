@@ -317,7 +317,7 @@ public final class IntInterval
     public void forEachWithIndex(IntIntProcedure procedure)
     {
         int index = 0;
-        if (this.from <= this.to)
+        if (this.goForward())
         {
             for (int i = this.from; i <= this.to; i += this.step)
             {
@@ -339,13 +339,18 @@ public final class IntInterval
         this.each(procedure);
     }
 
+    private boolean goForward()
+    {
+        return this.from <= this.to && this.step > 0;
+    }
+
     /**
      * @since 7.0.
      */
     @Override
     public void each(IntProcedure procedure)
     {
-        if (this.from <= this.to)
+        if (this.goForward())
         {
             for (int i = this.from; i <= this.to; i += this.step)
             {
@@ -615,7 +620,7 @@ public final class IntInterval
     public <T> T injectInto(T injectedValue, ObjectIntToObjectFunction<? super T, ? extends T> function)
     {
         T result = injectedValue;
-        if (this.from <= this.to)
+        if (this.goForward())
         {
             for (int i = this.from; i <= this.to; i += this.step)
             {
@@ -638,7 +643,7 @@ public final class IntInterval
         T result = injectedValue;
         int index = 0;
 
-        if (this.from <= this.to)
+        if (this.goForward())
         {
             for (int i = this.from; i <= this.to; i += this.step)
             {
