@@ -37,7 +37,7 @@
         <!-- by default complain if working tree is dirty (error|warning|ignore) -->
         <dirtyWorkingTree>warning</dirtyWorkingTree>
 
-        <collections.repository.url>file://${project.basedir}/../p2-repository/org.eclipse.collections/target/repository</collections.repository.url>
+        <collections.repository.url>file:///${project.basedir}/../../p2-repository/org.eclipse.collections/target/repository</collections.repository.url>
     </properties>
 
     <build>
