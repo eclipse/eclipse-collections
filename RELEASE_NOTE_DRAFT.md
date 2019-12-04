@@ -1,28 +1,33 @@
 10.1.0
 ====================
 
-This is the 10.1.0 minor release. 
+This is the 10.1.0 minor release.
 Central theme of this release is to fix issues identified for SimRel repository. There are also few new features, enhancements and bug fixes.
 
 # New Functionality
 -----------------
-*
-
-# Optimizations
------------------
-*
+* Implemented RichIterable.groupByAndCollect().
+* Implemented NoopProcedure.
 
 # Bug Fixes
 -----------------
-* 
+* Fixed IntInterval.fromToBy() for same values of from and to with a negative step.
+* Fixed IntInterval.injectInto() for same values of from and to with a negative step.
 
 # Tech Debt Reduction
 ---------------------
-* 
+* Added examples for creating and modifying Immutable Collections in documentation.
+* Changed internal variable name in Multimaps class for ImmutableSortedBagFactory
+* Fixed generated Eclipse features for p2 repository to ensure correct EPLv1 license is downloaded.
+* Fixed generated Eclipse features for p2 repository to ensure correct signatures on artifacts.
+* Fixed repository path for Eclipse features.
 
 # Build Changes
 -----------------
-* 
+* Fixed configuration to gpg sign plugin to work on new CI infrastructure.
+* Improved .gitignore for maven to reduce noise.
+* Modified build to use maven's --no-transfer-progress option to reduce noise.
+* Upgraded maven plugins.
 
 Acquiring Eclipse Collections
 -----------------------------

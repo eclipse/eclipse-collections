@@ -39,7 +39,7 @@ Eclipse Collections is a comprehensive collections library for Java. The library
 * [Eclipse Collections Katas](https://github.com/eclipse/eclipse-collections-kata), a fun way to help you learn idiomatic Eclipse Collections usage.
     * Start Here - [Pet Kata](http://eclipse.github.io/eclipse-collections-kata/pet-kata/#/) 
     * Continue Here - [Company Kata](http://eclipse.github.io/eclipse-collections-kata/company-kata/#/)
-* [Eclipse Collections Reference Guide](https://github.com/eclipse/eclipse-collections/blob/master/docs/guide.md) and [Javadoc](https://www.eclipse.org/collections/javadoc/10.0.0/overview-summary.html) 
+* [Eclipse Collections Reference Guide](https://github.com/eclipse/eclipse-collections/blob/master/docs/guide.md) and [Javadoc](https://www.eclipse.org/collections/javadoc/10.1.0/overview-summary.html)
 * [Articles](https://github.com/eclipse/eclipse-collections/wiki/Articles) and [Blogs](https://medium.com/tag/eclipse-collections/latest)
 
 ## Acquiring Eclipse Collections
@@ -49,25 +49,25 @@ Eclipse Collections is a comprehensive collections library for Java. The library
 <dependency>
   <groupId>org.eclipse.collections</groupId>
   <artifactId>eclipse-collections-api</artifactId>
-  <version>10.0.0</version>
+  <version>10.1.0</version>
 </dependency>
 
 <dependency>
   <groupId>org.eclipse.collections</groupId>
   <artifactId>eclipse-collections</artifactId>
-  <version>10.0.0</version>
+  <version>10.1.0</version>
 </dependency>
 ```
 
 ### Gradle
 
 ```groovy
-compile 'org.eclipse.collections:eclipse-collections-api:10.0.0'
-compile 'org.eclipse.collections:eclipse-collections:10.0.0'
+compile 'org.eclipse.collections:eclipse-collections-api:10.1.0'
+compile 'org.eclipse.collections:eclipse-collections:10.1.0'
 ```
 
 ### OSGi Bundle
-Eclipse software repository location: http://download.eclipse.org/collections/10.0.0/repository
+Eclipse software repository location: http://download.eclipse.org/collections/10.1.0/repository
 
 
 ## Some Quick Examples
@@ -115,7 +115,7 @@ The lambda in the example above can also be replaced with a method reference.
 ```java
 MutableList<String> lastNames = people.collect(Person::getLastName);
 ```
-Eclipse Collections has support for both [Mutable](http://www.eclipse.org/collections/javadoc/10.0.0/org/eclipse/collections/api/collection/MutableCollection.html) and [Immutable](http://www.eclipse.org/collections/javadoc/10.0.0/org/eclipse/collections/api/collection/ImmutableCollection.html) collections, and the return types of methods are covariant.  While the *collect* method on a *MutableList* returned a *MutableList*, the *collect* method on an *ImmutableList* will return an *ImmutableList*.  Here we use the same [Lists](https://www.eclipse.org/collections/javadoc/10.0.0/org/eclipse/collections/impl/factory/Lists.html) factory to create an *ImmutableList*.
+Eclipse Collections has support for both [Mutable](http://www.eclipse.org/collections/javadoc/10.1.0/org/eclipse/collections/api/collection/MutableCollection.html) and [Immutable](http://www.eclipse.org/collections/javadoc/10.1.0/org/eclipse/collections/api/collection/ImmutableCollection.html) collections, and the return types of methods are covariant.  While the *collect* method on a *MutableList* returned a *MutableList*, the *collect* method on an *ImmutableList* will return an *ImmutableList*.  Here we use the same [Lists](https://www.eclipse.org/collections/javadoc/10.1.0/org/eclipse/collections/impl/factory/Lists.html) factory to create an *ImmutableList*.
 
 ```java
 ImmutableList<Person> people = Lists.immutable.with(
@@ -125,7 +125,7 @@ ImmutableList<Person> people = Lists.immutable.with(
 ImmutableList<String> lastNames = people.collect(Person::getLastName);
 Assert.assertEquals("Smith, Watson, Williams", lastNames.makeString());
 ```
-Eclipse Collections has a [lazy API](http://www.eclipse.org/collections/javadoc/10.0.0/org/eclipse/collections/api/LazyIterable.html) as well, which is available by calling the method *asLazy*.  The method *collect* will now return a *LazyIterable*.  The *LazyIterable* that is returned does not evaluate anything until the call to a terminal method is made.  In this case, the call to *makeString* will force the *LazyIterable* to collect the last names. 
+Eclipse Collections has a [lazy API](http://www.eclipse.org/collections/javadoc/10.1.0/org/eclipse/collections/api/LazyIterable.html) as well, which is available by calling the method *asLazy*.  The method *collect* will now return a *LazyIterable*.  The *LazyIterable* that is returned does not evaluate anything until the call to a terminal method is made.  In this case, the call to *makeString* will force the *LazyIterable* to collect the last names.
 
 ```java
 LazyIterable<String> lastNames = people.asLazy().collect(Person::getLastName);
