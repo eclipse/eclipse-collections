@@ -49,21 +49,21 @@ Eclipse Collections is a comprehensive collections library for Java. The library
 <dependency>
   <groupId>org.eclipse.collections</groupId>
   <artifactId>eclipse-collections-api</artifactId>
-  <version>10.0.0</version>
+  <version>10.1.0</version>
 </dependency>
 
 <dependency>
   <groupId>org.eclipse.collections</groupId>
   <artifactId>eclipse-collections</artifactId>
-  <version>10.0.0</version>
+  <version>10.1.0</version>
 </dependency>
 ```
 
 ### Gradle
 
 ```groovy
-compile 'org.eclipse.collections:eclipse-collections-api:10.0.0'
-compile 'org.eclipse.collections:eclipse-collections:10.0.0'
+implementation 'org.eclipse.collections:eclipse-collections-api:10.1.0'
+implementation 'org.eclipse.collections:eclipse-collections:10.1.0'
 ```
 
 ### OSGi Bundle
