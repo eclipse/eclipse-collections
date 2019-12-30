@@ -19,11 +19,11 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.impl.CollidingInt;
-import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.test.SerializeTestHelper;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
@@ -1701,11 +1701,11 @@ public class UnifiedMapAcceptanceTest
 
             Map.Entry<?, ?> entry = (Map.Entry<?, ?>) o;
 
-            if (!Comparators.nullSafeEquals(this.key, entry.getKey()))
+            if (!Objects.equals(this.key, entry.getKey()))
             {
                 return false;
             }
-            return Comparators.nullSafeEquals(this.value, entry.getValue());
+            return Objects.equals(this.value, entry.getValue());
         }
 
         @Override

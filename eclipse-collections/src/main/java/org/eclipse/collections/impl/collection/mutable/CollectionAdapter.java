@@ -14,6 +14,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 import java.util.RandomAccess;
 import java.util.Set;
 
@@ -21,7 +22,6 @@ import org.eclipse.collections.api.collection.ImmutableCollection;
 import org.eclipse.collections.api.collection.MutableCollection;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.set.MutableSet;
-import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.block.procedure.CollectionAddProcedure;
 import org.eclipse.collections.impl.block.procedure.CollectionRemoveProcedure;
 import org.eclipse.collections.impl.factory.Lists;
@@ -150,7 +150,7 @@ public final class CollectionAdapter<T>
         }
 
         CollectionAdapter<?> that = (CollectionAdapter<?>) o;
-        return Comparators.nullSafeEquals(this.delegate, that.delegate);
+        return Objects.equals(this.delegate, that.delegate);
     }
 
     @Override

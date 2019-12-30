@@ -11,11 +11,11 @@
 package org.eclipse.collections.impl.list.immutable;
 
 import java.io.Serializable;
+import java.util.Objects;
 import java.util.RandomAccess;
 
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.list.ImmutableList;
-import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.factory.Lists;
 
 /**
@@ -85,7 +85,7 @@ final class ImmutableDoubletonList<T>
     @Override
     public boolean contains(Object obj)
     {
-        return Comparators.nullSafeEquals(obj, this.element1) || Comparators.nullSafeEquals(obj, this.element2);
+        return Objects.equals(obj, this.element1) || Objects.equals(obj, this.element2);
     }
 
     @Override

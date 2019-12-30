@@ -11,9 +11,9 @@
 package org.eclipse.collections.impl.map.strategy.immutable;
 
 import java.util.Map.Entry;
+import java.util.Objects;
 
 import org.eclipse.collections.api.block.HashingStrategy;
-import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.tuple.AbstractImmutableEntry;
 
 public final class ImmutableEntryWithHashingStrategy<K, V> extends AbstractImmutableEntry<K, V>
@@ -43,7 +43,7 @@ public final class ImmutableEntryWithHashingStrategy<K, V> extends AbstractImmut
         {
             Entry<?, ?> that = (Entry<?, ?>) object;
             return this.hashingStrategy.equals(this.key, (K) that.getKey())
-                    && Comparators.nullSafeEquals(this.value, that.getValue());
+                    && Objects.equals(this.value, that.getValue());
         }
         return false;
     }

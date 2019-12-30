@@ -28,6 +28,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.concurrent.Callable;
@@ -2055,7 +2056,7 @@ public final class Verify extends Assert
             {
                 Object eachExpected = expectedList.get(index);
                 Object eachActual = actualList.get(index);
-                if (!Comparators.nullSafeEquals(eachExpected, eachActual))
+                if (!Objects.equals(eachExpected, eachActual))
                 {
                     junit.framework.Assert.failNotEquals(listName + " first differed at element [" + index + "];", eachExpected, eachActual);
                 }
@@ -2236,7 +2237,7 @@ public final class Verify extends Assert
                     Object eachExpected = expectedIterator.next();
                     Object eachActual = actualIterator.next();
 
-                    if (!Comparators.nullSafeEquals(eachExpected, eachActual))
+                    if (!Objects.equals(eachExpected, eachActual))
                     {
                         //noinspection UseOfObsoleteAssert
                         junit.framework.Assert.failNotEquals(iterableName + " first differed at element [" + index + "];", eachExpected, eachActual);
@@ -2284,7 +2285,7 @@ public final class Verify extends Assert
                 Object expectedKey = expectedEntry.getKey();
                 Object expectedValue = expectedEntry.getValue();
                 Object actualValue = actualMap.get(expectedKey);
-                if (!Comparators.nullSafeEquals(actualValue, expectedValue))
+                if (!Objects.equals(actualValue, expectedValue))
                 {
                     Assert.fail("Values differ at key " + expectedKey + " expected " + expectedValue + " but was " + actualValue);
                 }
@@ -2571,7 +2572,7 @@ public final class Verify extends Assert
                 Object expectedKey = expectedKeyValues[i++];
                 Object expectedValue = expectedKeyValues[i++];
                 Object actualValue = actualMap.get(expectedKey);
-                if (!Comparators.nullSafeEquals(expectedValue, actualValue))
+                if (!Objects.equals(expectedValue, actualValue))
                 {
                     missingEntries.put(
                             expectedKey,
@@ -3076,7 +3077,7 @@ public final class Verify extends Assert
             Verify.assertContainsKey(mapName, expectedKey, actualMap);
 
             Object actualValue = actualMap.get(expectedKey);
-            if (!Comparators.nullSafeEquals(actualValue, expectedValue))
+            if (!Objects.equals(actualValue, expectedValue))
             {
                 Assert.fail(
                         mapName
@@ -3129,7 +3130,7 @@ public final class Verify extends Assert
             Verify.assertContainsKey(mapIterableName, expectedKey, mapIterable);
 
             Object actualValue = mapIterable.get(expectedKey);
-            if (!Comparators.nullSafeEquals(actualValue, expectedValue))
+            if (!Objects.equals(actualValue, expectedValue))
             {
                 Assert.fail(
                         mapIterableName
@@ -3182,7 +3183,7 @@ public final class Verify extends Assert
             Verify.assertContainsKey(mapIterableName, expectedKey, mutableMapIterable);
 
             Object actualValue = mutableMapIterable.get(expectedKey);
-            if (!Comparators.nullSafeEquals(actualValue, expectedValue))
+            if (!Objects.equals(actualValue, expectedValue))
             {
                 Assert.fail(
                         mapIterableName
@@ -3235,7 +3236,7 @@ public final class Verify extends Assert
             Verify.assertContainsKey(mapIterableName, expectedKey, immutableMapIterable);
 
             Object actualValue = immutableMapIterable.get(expectedKey);
-            if (!Comparators.nullSafeEquals(actualValue, expectedValue))
+            if (!Objects.equals(actualValue, expectedValue))
             {
                 Assert.fail(
                         mapIterableName
@@ -3563,7 +3564,7 @@ public final class Verify extends Assert
             Verify.assertObjectNotNull(listName, list);
 
             Object actualItem = list.get(index);
-            if (!Comparators.nullSafeEquals(expectedItem, actualItem))
+            if (!Objects.equals(expectedItem, actualItem))
             {
                 Assert.assertEquals(
                         listName + " has incorrect element at index:<" + index + '>',
@@ -3590,7 +3591,7 @@ public final class Verify extends Assert
         {
             Assert.assertNotNull(array);
             Object actualItem = array[index];
-            if (!Comparators.nullSafeEquals(expectedItem, actualItem))
+            if (!Objects.equals(expectedItem, actualItem))
             {
                 Assert.assertEquals(
                         arrayName + " has incorrect element at index:<" + index + '>',

@@ -16,13 +16,13 @@ import java.io.ObjectInput;
 import java.io.ObjectOutput;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 import java.util.Set;
 
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
 import org.eclipse.collections.api.set.MutableSet;
-import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 
 final class QuadrupletonSet<T>
@@ -95,10 +95,10 @@ final class QuadrupletonSet<T>
     @Override
     public boolean contains(Object obj)
     {
-        return Comparators.nullSafeEquals(obj, this.element1)
-                || Comparators.nullSafeEquals(obj, this.element2)
-                || Comparators.nullSafeEquals(obj, this.element3)
-                || Comparators.nullSafeEquals(obj, this.element4);
+        return Objects.equals(obj, this.element1)
+                || Objects.equals(obj, this.element2)
+                || Objects.equals(obj, this.element3)
+                || Objects.equals(obj, this.element4);
     }
 
     @Override
@@ -215,19 +215,19 @@ final class QuadrupletonSet<T>
     @Override
     public MutableSet<T> without(T element)
     {
-        if (Comparators.nullSafeEquals(element, this.element1))
+        if (Objects.equals(element, this.element1))
         {
             return new TripletonSet<>(this.element2, this.element3, this.element4);
         }
-        if (Comparators.nullSafeEquals(element, this.element2))
+        if (Objects.equals(element, this.element2))
         {
             return new TripletonSet<>(this.element1, this.element3, this.element4);
         }
-        if (Comparators.nullSafeEquals(element, this.element3))
+        if (Objects.equals(element, this.element3))
         {
             return new TripletonSet<>(this.element1, this.element2, this.element4);
         }
-        if (Comparators.nullSafeEquals(element, this.element4))
+        if (Objects.equals(element, this.element4))
         {
             return new TripletonSet<>(this.element1, this.element2, this.element3);
         }

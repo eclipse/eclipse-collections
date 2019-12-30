@@ -18,6 +18,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.RandomAccess;
 import java.util.concurrent.ExecutorService;
@@ -599,7 +600,7 @@ public abstract class AbstractMutableList<T>
     {
         for (int i = 0; i < this.size(); i++)
         {
-            if (Comparators.nullSafeEquals(this.get(i), object))
+            if (Objects.equals(this.get(i), object))
             {
                 return i;
             }
@@ -612,7 +613,7 @@ public abstract class AbstractMutableList<T>
     {
         for (int i = this.size() - 1; i >= 0; i--)
         {
-            if (Comparators.nullSafeEquals(this.get(i), object))
+            if (Objects.equals(this.get(i), object))
             {
                 return i;
             }

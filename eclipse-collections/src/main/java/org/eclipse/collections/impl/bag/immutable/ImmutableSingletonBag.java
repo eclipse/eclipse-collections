@@ -15,6 +15,7 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 import java.util.Optional;
 
 import org.eclipse.collections.api.bag.Bag;
@@ -37,7 +38,6 @@ import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.bag.mutable.HashBag;
-import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.block.factory.Predicates;
 import org.eclipse.collections.impl.block.procedure.MultimapEachPutProcedure;
 import org.eclipse.collections.impl.factory.Bags;
@@ -186,7 +186,7 @@ final class ImmutableSingletonBag<T>
     @Override
     public boolean contains(Object object)
     {
-        return Comparators.nullSafeEquals(this.value, object);
+        return Objects.equals(this.value, object);
     }
 
     @Override
@@ -393,7 +393,7 @@ final class ImmutableSingletonBag<T>
     @Override
     public int occurrencesOf(Object item)
     {
-        return Comparators.nullSafeEquals(this.value, item) ? 1 : 0;
+        return Objects.equals(this.value, item) ? 1 : 0;
     }
 
     @Override

@@ -16,6 +16,7 @@ import java.io.ObjectInput;
 import java.io.ObjectOutput;
 import java.util.Collection;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 import org.eclipse.collections.api.block.function.Function2;
@@ -28,7 +29,6 @@ import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.tuple.Pair;
-import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.Maps;
 import org.eclipse.collections.impl.factory.Sets;
@@ -71,7 +71,7 @@ final class SingletonMap<K, V>
     public MutableMap<K, V> withKeyValue(K addKey, V addValue)
     {
         // Map behavior specifies that if you put in a duplicate key, you replace the value
-        if (Comparators.nullSafeEquals(this.key1, addKey))
+        if (Objects.equals(this.key1, addKey))
         {
             this.value1 = addValue;
             return this;
@@ -82,7 +82,7 @@ final class SingletonMap<K, V>
     @Override
     public MutableMap<K, V> withoutKey(K key)
     {
-        if (Comparators.nullSafeEquals(key, this.key1))
+        if (Objects.equals(key, this.key1))
         {
             return new EmptyMap<>();
         }
@@ -105,19 +105,19 @@ final class SingletonMap<K, V>
     @Override
     public boolean containsKey(Object key)
     {
-        return Comparators.nullSafeEquals(this.key1, key);
+        return Objects.equals(this.key1, key);
     }
 
     @Override
     public boolean containsValue(Object value)
     {
-        return Comparators.nullSafeEquals(this.value1, value);
+        return Objects.equals(this.value1, value);
     }
 
     @Override
     public V get(Object key)
     {
-        if (Comparators.nullSafeEquals(this.key1, key))
+        if (Objects.equals(this.key1, key))
         {
             return this.value1;
         }

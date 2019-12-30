@@ -17,13 +17,13 @@ import java.io.ObjectOutput;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 import java.util.Set;
 
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
 import org.eclipse.collections.api.set.MutableSet;
-import org.eclipse.collections.impl.block.factory.Comparators;
 
 final class TripletonSet<T>
         extends AbstractMemoryEfficientMutableSet<T>
@@ -91,9 +91,9 @@ final class TripletonSet<T>
     @Override
     public boolean contains(Object obj)
     {
-        return Comparators.nullSafeEquals(obj, this.element1)
-                || Comparators.nullSafeEquals(obj, this.element2)
-                || Comparators.nullSafeEquals(obj, this.element3);
+        return Objects.equals(obj, this.element1)
+                || Objects.equals(obj, this.element2)
+                || Objects.equals(obj, this.element3);
     }
 
     @Override
@@ -198,15 +198,15 @@ final class TripletonSet<T>
     @Override
     public MutableSet<T> without(T element)
     {
-        if (Comparators.nullSafeEquals(element, this.element1))
+        if (Objects.equals(element, this.element1))
         {
             return new DoubletonSet<>(this.element2, this.element3);
         }
-        if (Comparators.nullSafeEquals(element, this.element2))
+        if (Objects.equals(element, this.element2))
         {
             return new DoubletonSet<>(this.element1, this.element3);
         }
-        if (Comparators.nullSafeEquals(element, this.element3))
+        if (Objects.equals(element, this.element3))
         {
             return new DoubletonSet<>(this.element1, this.element2);
         }

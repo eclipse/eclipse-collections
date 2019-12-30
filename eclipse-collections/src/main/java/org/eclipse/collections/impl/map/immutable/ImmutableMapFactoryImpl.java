@@ -11,10 +11,10 @@
 package org.eclipse.collections.impl.map.immutable;
 
 import java.util.Map;
+import java.util.Objects;
 
 import org.eclipse.collections.api.factory.map.ImmutableMapFactory;
 import org.eclipse.collections.api.map.ImmutableMap;
-import org.eclipse.collections.impl.block.factory.Comparators;
 
 public class ImmutableMapFactoryImpl implements ImmutableMapFactory
 {
@@ -59,7 +59,7 @@ public class ImmutableMapFactoryImpl implements ImmutableMapFactory
     @Override
     public <K, V> ImmutableMap<K, V> with(K key1, V value1, K key2, V value2)
     {
-        if (Comparators.nullSafeEquals(key1, key2))
+        if (Objects.equals(key1, key2))
         {
             return this.of(key1, value2);
         }
@@ -75,19 +75,19 @@ public class ImmutableMapFactoryImpl implements ImmutableMapFactory
     @Override
     public <K, V> ImmutableMap<K, V> with(K key1, V value1, K key2, V value2, K key3, V value3)
     {
-        if (Comparators.nullSafeEquals(key1, key2) && Comparators.nullSafeEquals(key2, key3))
+        if (Objects.equals(key1, key2) && Objects.equals(key2, key3))
         {
             return this.of(key1, value3);
         }
-        if (Comparators.nullSafeEquals(key1, key2))
+        if (Objects.equals(key1, key2))
         {
             return this.of(key1, value2, key3, value3);
         }
-        if (Comparators.nullSafeEquals(key1, key3))
+        if (Objects.equals(key1, key3))
         {
             return this.of(key2, value2, key1, value3);
         }
-        if (Comparators.nullSafeEquals(key2, key3))
+        if (Objects.equals(key2, key3))
         {
             return this.of(key1, value1, key2, value3);
         }
@@ -104,27 +104,27 @@ public class ImmutableMapFactoryImpl implements ImmutableMapFactory
     @Override
     public <K, V> ImmutableMap<K, V> with(K key1, V value1, K key2, V value2, K key3, V value3, K key4, V value4)
     {
-        if (Comparators.nullSafeEquals(key1, key2))
+        if (Objects.equals(key1, key2))
         {
             return this.of(key1, value2, key3, value3, key4, value4);
         }
-        if (Comparators.nullSafeEquals(key1, key3))
+        if (Objects.equals(key1, key3))
         {
             return this.of(key2, value2, key1, value3, key4, value4);
         }
-        if (Comparators.nullSafeEquals(key1, key4))
+        if (Objects.equals(key1, key4))
         {
             return this.of(key2, value2, key3, value3, key1, value4);
         }
-        if (Comparators.nullSafeEquals(key2, key3))
+        if (Objects.equals(key2, key3))
         {
             return this.of(key1, value1, key2, value3, key4, value4);
         }
-        if (Comparators.nullSafeEquals(key2, key4))
+        if (Objects.equals(key2, key4))
         {
             return this.of(key1, value1, key3, value3, key2, value4);
         }
-        if (Comparators.nullSafeEquals(key3, key4))
+        if (Objects.equals(key3, key4))
         {
             return this.of(key1, value1, key2, value2, key3, value4);
         }

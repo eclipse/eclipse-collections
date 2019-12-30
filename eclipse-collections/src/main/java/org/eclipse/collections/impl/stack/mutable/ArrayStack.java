@@ -19,6 +19,7 @@ import java.util.Comparator;
 import java.util.EmptyStackException;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 
 import org.eclipse.collections.api.LazyIterable;
@@ -79,7 +80,6 @@ import org.eclipse.collections.api.stack.primitive.MutableIntStack;
 import org.eclipse.collections.api.stack.primitive.MutableLongStack;
 import org.eclipse.collections.api.stack.primitive.MutableShortStack;
 import org.eclipse.collections.api.tuple.Pair;
-import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.block.factory.Predicates;
 import org.eclipse.collections.impl.block.procedure.MutatingAggregationProcedure;
 import org.eclipse.collections.impl.block.procedure.NonMutatingAggregationProcedure;
@@ -1077,7 +1077,7 @@ public class ArrayStack<T> implements MutableStack<T>, Externalizable
         Iterator<?> thatIterator = that.iterator();
         while (thisIterator.hasNext() && thatIterator.hasNext())
         {
-            if (!Comparators.nullSafeEquals(thisIterator.next(), thatIterator.next()))
+            if (!Objects.equals(thisIterator.next(), thatIterator.next()))
             {
                 return false;
             }

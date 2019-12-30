@@ -11,9 +11,9 @@
 package org.eclipse.collections.impl.tuple;
 
 import java.util.Map;
+import java.util.Objects;
 
 import org.eclipse.collections.api.tuple.Pair;
-import org.eclipse.collections.impl.block.factory.Comparators;
 
 /**
  * A PairImpl is a container that holds two related objects. It is the equivalent of an Association in Smalltalk, or an
@@ -71,8 +71,8 @@ class PairImpl<T1, T2>
 
         Pair<?, ?> that = (Pair<?, ?>) o;
 
-        return Comparators.nullSafeEquals(this.one, that.getOne())
-                && Comparators.nullSafeEquals(this.two, that.getTwo());
+        return Objects.equals(this.one, that.getOne())
+                && Objects.equals(this.two, that.getTwo());
     }
 
     @Override
