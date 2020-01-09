@@ -62,8 +62,8 @@ Eclipse Collections is a comprehensive collections library for Java. The library
 ### Gradle
 
 ```groovy
-compile 'org.eclipse.collections:eclipse-collections-api:10.1.0'
-compile 'org.eclipse.collections:eclipse-collections:10.1.0'
+implementation 'org.eclipse.collections:eclipse-collections-api:10.1.0'
+implementation 'org.eclipse.collections:eclipse-collections:10.1.0'
 ```
 
 ### OSGi Bundle
