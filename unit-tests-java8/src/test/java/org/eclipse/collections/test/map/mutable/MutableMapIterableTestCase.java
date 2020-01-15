@@ -21,6 +21,7 @@ import org.eclipse.collections.impl.block.factory.Predicates2;
 import org.eclipse.collections.impl.factory.Bags;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.tuple.ImmutableEntry;
+import org.eclipse.collections.test.CollisionsTestCase;
 import org.eclipse.collections.test.map.MapIterableTestCase;
 import org.junit.Test;
 
@@ -147,6 +148,18 @@ public interface MutableMapIterableTestCase extends MapIterableTestCase
         assertTrue(map2.removeIf((each, value) -> each % 2 != 0));
         assertFalse(map2.removeIf((each, value) -> each % 2 != 0));
         assertEquals(this.newWithKeysValues(4, "four", 8, "Eight"), map2);
+
+        MutableMapIterable<Integer, String> map3 = this.newWithKeysValues(CollisionsTestCase.COLLISION_1, "0", CollisionsTestCase.COLLISION_2, "17", CollisionsTestCase.COLLISION_3, "34", 100, "100");
+        assertTrue(map3.removeIf((key, value) -> CollisionsTestCase.COLLISION_1.equals(key) || CollisionsTestCase.COLLISION_2.equals(key) || CollisionsTestCase.COLLISION_3.equals(key)));
+        assertEquals(this.newWithKeysValues(100, "100"), map3);
+
+        MutableMapIterable<Integer, String> map4 = this.newWithKeysValues(CollisionsTestCase.COLLISION_1, "0", CollisionsTestCase.COLLISION_2, "17", CollisionsTestCase.COLLISION_3, "34", 100, "100");
+        assertTrue(map4.removeIf(Predicates2.alwaysTrue()));
+        assertEquals(this.newWithKeysValues(), map4);
+
+        MutableMapIterable<Integer, String> map5 = this.newWithKeysValues(CollisionsTestCase.COLLISION_1, "0", CollisionsTestCase.COLLISION_2, "17", CollisionsTestCase.COLLISION_3, "34", 100, "100");
+        assertTrue(map5.removeIf((key, value) -> CollisionsTestCase.COLLISION_1.equals(key) || CollisionsTestCase.COLLISION_3.equals(key)));
+        assertEquals(this.newWithKeysValues(CollisionsTestCase.COLLISION_2, "17", 100, "100"), map5);
     }
 
     @Test

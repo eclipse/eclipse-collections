@@ -21,6 +21,7 @@ Central theme of this release is to fix issues identified for SimRel repository.
 * Fixed generated Eclipse features for p2 repository to ensure correct EPLv1 license is downloaded.
 * Fixed generated Eclipse features for p2 repository to ensure correct signatures on artifacts.
 * Fixed repository path for Eclipse features.
+* Optimize removeIf() for UnifiedMap.
 
 # Build Changes
 -----------------
