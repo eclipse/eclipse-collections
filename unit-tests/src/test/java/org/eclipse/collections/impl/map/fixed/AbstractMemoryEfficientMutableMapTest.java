@@ -367,7 +367,9 @@ public abstract class AbstractMemoryEfficientMutableMapTest
         multi.forEachKey(each -> Verify.assertContains(each, values));
 
         Assert.assertEquals(multi.size(), map.size());
-        Assert.assertTrue(multi.sizeDistinct() <= map.size()); // should be the same or less since values are degenerate
+
+        // should be the same or less since values are degenerate
+        Assert.assertTrue(multi.sizeDistinct() <= map.size());
 
         MutableMap<String, Integer> siMap = this.mixedTypeClassUnderTest();
         MutableMultimap<Integer, String> siMulti = siMap.flip();

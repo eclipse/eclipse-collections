@@ -151,7 +151,10 @@ public class IntIntMapSmallStressTest extends AbstractJMHTestRunner
     protected MutableList<Integer> getJDKSequenceCollisions(int lower, int upper)
     {
         MutableList<Integer> jdkCollidingNumbers = FastList.newList();
-        int slots = 1; // slots = KEY_COUNT / (1 << 32) / (1 << MAP_SIZE) + 1;
+
+        // slots = KEY_COUNT / (1 << 32) / (1 << MAP_SIZE) + 1;
+        int slots = 1;
+
         MutableIntSet indices = new IntHashSet();
         for (int i = lower; i < upper && jdkCollidingNumbers.size() < KEY_COUNT; i++)
         {

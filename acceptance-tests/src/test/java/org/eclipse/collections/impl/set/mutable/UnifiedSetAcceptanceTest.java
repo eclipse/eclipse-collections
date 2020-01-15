@@ -52,7 +52,9 @@ public class UnifiedSetAcceptanceTest
     {
         UnifiedSet<CollidingInt> set = UnifiedSet.newSet();
 
-        int size = 84000; // divisible by every integer between 2 and 8
+        // divisible by every integer between 2 and 8
+        int size = 84_000;
+
         for (int i = 0; i < size; i++)
         {
             Assert.assertTrue(set.add(new CollidingInt(i, shift)));
@@ -418,7 +420,8 @@ public class UnifiedSetAcceptanceTest
         Assert.assertTrue(set.retainAll(toRetain));
         Assert.assertTrue(set.containsAll(toRetain));
 
-        Assert.assertFalse(set.retainAll(toRetain)); // a second call should not modify the set
+        // a second call should not modify the set
+        Assert.assertFalse(set.retainAll(toRetain));
 
         Verify.assertSize(size / 2, set);
 
@@ -458,7 +461,8 @@ public class UnifiedSetAcceptanceTest
         Assert.assertTrue(set.retainAll(toRetain));
         Assert.assertTrue(set.containsAll(toRetain));
 
-        Assert.assertFalse(set.retainAll(toRetain)); // a second call should not modify the set
+        // a second call should not modify the set
+        Assert.assertFalse(set.retainAll(toRetain));
 
         Verify.assertSize(size / 2, set);
 
@@ -735,7 +739,8 @@ public class UnifiedSetAcceptanceTest
 
         Assert.assertTrue(set.removeAll(toRemove));
 
-        Assert.assertFalse(set.removeAll(toRemove)); // a second call should not modify the set
+        // a second call should not modify the set
+        Assert.assertFalse(set.removeAll(toRemove));
 
         Verify.assertSize(size / 2, set);
 

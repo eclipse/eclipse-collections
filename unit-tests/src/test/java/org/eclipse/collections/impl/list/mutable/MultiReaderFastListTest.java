@@ -487,17 +487,26 @@ public class MultiReaderFastListTest extends AbstractListTestCase
     @Test
     public void removeAllWithWeakReference()
     {
-        String fred = new String("Fred");    // Deliberate String copy for unit test purpose
-        String wilma = new String("Wilma");  // Deliberate String copy for unit test purpose
+        // Deliberate String copy for unit test purpose
+        String fred = new String("Fred");
+
+        // Deliberate String copy for unit test purpose
+        String wilma = new String("Wilma");
+
         MutableList<String> objects = MultiReaderFastList.newListWith(fred, wilma);
         objects.removeAll(Lists.fixedSize.of("Fred"));
         objects.remove(0);
         Verify.assertEmpty(objects);
         WeakReference<String> ref = new WeakReference<>(wilma);
+
+        // Deliberate null of a local variable for unit test purpose
         //noinspection ReuseOfLocalVariable
-        fred = null;   // Deliberate null of a local variable for unit test purpose
+        fred = null;
+
+        // Deliberate null of a local variable for unit test purpose
         //noinspection ReuseOfLocalVariable
-        wilma = null;  // Deliberate null of a local variable for unit test purpose
+        wilma = null;
+
         System.gc();
         Thread.yield();
         System.gc();

@@ -215,7 +215,10 @@ public class ImmutableTreeMapTest extends ImmutableSortedMapTestCase
     public void keySet_toArray_withSmallTarget()
     {
         ImmutableTreeMap<Integer, String> immutableSortedMap = new ImmutableTreeMap<>(SortedMaps.mutable.of(1, "1", 2, "2", 3, "3", 4, "4"));
-        Integer[] destination = new Integer[2]; // deliberately to small to force the method to allocate one of the correct size
+
+        // deliberately to small to force the method to allocate one of the correct size
+        Integer[] destination = new Integer[2];
+
         Integer[] result = immutableSortedMap.keySet().toArray(destination);
         Arrays.sort(result);
         Assert.assertArrayEquals(new Integer[]{1, 2, 3, 4}, result);
@@ -225,7 +228,10 @@ public class ImmutableTreeMapTest extends ImmutableSortedMapTestCase
     public void keySet_ToArray_withLargeTarget()
     {
         ImmutableTreeMap<Integer, String> immutableSortedMap = new ImmutableTreeMap<>(SortedMaps.mutable.of(1, "1", 2, "2", 3, "3", 4, "4"));
-        Integer[] target = new Integer[6]; // deliberately large to force the extra to be set to null
+
+        // deliberately large to force the extra to be set to null
+        Integer[] target = new Integer[6];
+
         target[4] = 42;
         target[5] = 42;
         Integer[] result = immutableSortedMap.keySet().toArray(target);

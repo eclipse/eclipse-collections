@@ -254,7 +254,7 @@
         </module>
 
         <module name="IllegalThrows" />
-
+        <module name="TrailingComment" />
         <module name="UpperEll" />
 
         <module name="SuperFinalize" />

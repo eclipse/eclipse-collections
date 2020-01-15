@@ -297,7 +297,9 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
 
     protected int allocate(int capacity)
     {
-        this.allocateTable(capacity << 1); // the table size is twice the capacity to handle both keys and values
+        // the table size is twice the capacity to handle both keys and values
+        this.allocateTable(capacity << 1);
+
         this.computeMaxSize(capacity);
 
         return capacity;

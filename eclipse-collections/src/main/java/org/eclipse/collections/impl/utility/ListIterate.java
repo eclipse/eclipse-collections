@@ -95,7 +95,8 @@ public final class ListIterate
 
     public static boolean equals(List<?> one, List<?> two)
     {
-        if (one.size() != two.size())   // we assume that size() is a constant time operation in most lists
+        // we assume that size() is a constant time operation in most lists
+        if (one.size() != two.size())
         {
             return false;
         }

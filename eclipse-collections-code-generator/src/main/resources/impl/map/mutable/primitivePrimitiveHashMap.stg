@@ -99,7 +99,9 @@ public class <name1><name2>HashMap extends AbstractMutable<name2>ValuesMap imple
     private static final <type1> REMOVED_KEY = <(literal.(type1))("1")>;
     private static final int CACHE_LINE_SIZE = 64;
     private static final int KEY_SIZE = <keySize.(type1)>;
-    private static final int INITIAL_LINEAR_PROBE = CACHE_LINE_SIZE / KEY_SIZE / 2; /* half a cache line */
+
+    // half a cache line
+    private static final int INITIAL_LINEAR_PROBE = CACHE_LINE_SIZE / KEY_SIZE / 2;
 
     private static final int DEFAULT_INITIAL_CAPACITY = 8;
 

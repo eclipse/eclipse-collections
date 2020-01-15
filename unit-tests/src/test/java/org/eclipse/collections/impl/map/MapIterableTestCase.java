@@ -250,8 +250,10 @@ public abstract class MapIterableTestCase
         Verify.assertSize(8, result);
         Verify.assertContainsAll(
                 result,
-                "One", "Two", "Three", "Four", // Map values
-                "0", "1", "2", "3");  // Stringified index values
+                // Map values
+                "One", "Two", "Three", "Four",
+                // Stringified index values
+                "0", "1", "2", "3");
     }
 
     @Test

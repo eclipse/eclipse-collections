@@ -123,7 +123,8 @@ abstract class AbstractMemoryEfficientMutableSet<T>
     protected abstract class MemoryEfficientSetIterator
             implements Iterator<T>
     {
-        private int next;    // next entry to return, defaults to 0
+        // next entry to return, defaults to 0
+        private int next;
 
         protected abstract T getElement(int i);
 

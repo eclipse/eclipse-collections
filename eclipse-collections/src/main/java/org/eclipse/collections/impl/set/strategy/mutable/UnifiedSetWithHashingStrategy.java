@@ -1993,7 +1993,8 @@ public class UnifiedSetWithHashingStrategy<T>
                         }
                         return bucket.three;
                     case 4:
-                        return null; // this happens when a bucket is exactly full and we're iterating
+                        // this happens when a bucket is exactly full and we're iterating
+                        return null;
                     default:
                         throw new AssertionError();
                 }

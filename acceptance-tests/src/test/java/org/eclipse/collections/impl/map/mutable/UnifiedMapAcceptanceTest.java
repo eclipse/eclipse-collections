@@ -593,7 +593,8 @@ public class UnifiedMapAcceptanceTest
         Assert.assertTrue(keySet.retainAll(toRetain));
         Assert.assertTrue(keySet.containsAll(toRetain));
 
-        Assert.assertFalse(keySet.retainAll(toRetain)); // a second call should not modify the set
+        // a second call should not modify the set
+        Assert.assertFalse(keySet.retainAll(toRetain));
 
         Verify.assertSize(size / 2, map);
         Verify.assertSize(size / 2, keySet);
@@ -635,7 +636,8 @@ public class UnifiedMapAcceptanceTest
 
         Assert.assertTrue(keySet.removeAll(toRemove));
 
-        Assert.assertFalse(keySet.removeAll(toRemove)); // a second call should not modify the set
+        // a second call should not modify the set
+        Assert.assertFalse(keySet.removeAll(toRemove));
 
         Verify.assertSize(size / 2, map);
         Verify.assertSize(size / 2, keySet);
@@ -895,7 +897,8 @@ public class UnifiedMapAcceptanceTest
         Assert.assertTrue(entrySet.retainAll(toRetain));
         Assert.assertTrue(entrySet.containsAll(toRetain));
 
-        Assert.assertFalse(entrySet.retainAll(toRetain)); // a second call should not modify the set
+        // a second call should not modify the set
+        Assert.assertFalse(entrySet.retainAll(toRetain));
 
         Verify.assertSize(size / 2, map);
         Verify.assertSize(size / 2, entrySet);
@@ -937,7 +940,8 @@ public class UnifiedMapAcceptanceTest
 
         Assert.assertTrue(entrySet.removeAll(toRemove));
 
-        Assert.assertFalse(entrySet.removeAll(toRemove)); // a second call should not modify the set
+        // a second call should not modify the set
+        Assert.assertFalse(entrySet.removeAll(toRemove));
 
         Verify.assertSize(size / 2, map);
         Verify.assertSize(size / 2, entrySet);
@@ -1237,7 +1241,8 @@ public class UnifiedMapAcceptanceTest
         Assert.assertTrue(values.retainAll(toRetain));
         Assert.assertTrue(values.containsAll(toRetain));
 
-        Assert.assertFalse(values.retainAll(toRetain)); // a second call should not modify the set
+        // a second call should not modify the set
+        Assert.assertFalse(values.retainAll(toRetain));
 
         Verify.assertSize(size / 2, map);
         Verify.assertSize(size / 2, values);
@@ -1279,7 +1284,8 @@ public class UnifiedMapAcceptanceTest
 
         Assert.assertTrue(values.removeAll(toRemove));
 
-        Assert.assertFalse(values.removeAll(toRemove)); // a second call should not modify the set
+        // a second call should not modify the set
+        Assert.assertFalse(values.removeAll(toRemove));
 
         Verify.assertSize(size / 2, map);
         Verify.assertSize(size / 2, values);

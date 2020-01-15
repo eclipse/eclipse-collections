@@ -48,8 +48,12 @@ public class LongHashSetExtraTest
                 }
             }
         }
-        interestingHashes.contains(1840593613821121L); // this is a test that the operation doesn't go into an infinite loop
-        interestingHashes.add(1840593613821121L); // this is a test that the operation doesn't go into an infinite loop
+
+        // this is a test that the operation doesn't go into an infinite loop
+        interestingHashes.contains(1840593613821121L);
+
+        // this is a test that the operation doesn't go into an infinite loop
+        interestingHashes.add(1840593613821121L);
     }
 
     @Test

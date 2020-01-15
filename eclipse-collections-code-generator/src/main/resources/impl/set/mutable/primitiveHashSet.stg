@@ -61,7 +61,9 @@ public class <name>HashSet extends Abstract<name>Set implements Mutable<name>Set
     private static final <type> REMOVED = <(literal.(type))("1")>;
     private static final int CACHE_LINE_SIZE = 64;
     private static final int KEY_SIZE = <keySize.(type)>;
-    private static final int INITIAL_LINEAR_PROBE = CACHE_LINE_SIZE / KEY_SIZE / 2; /* half a cache line */
+
+    // half a cache line
+    private static final int INITIAL_LINEAR_PROBE = CACHE_LINE_SIZE / KEY_SIZE / 2;
 
     private <type>[] table;
     private int occupiedWithData;

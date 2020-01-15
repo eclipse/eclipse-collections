@@ -72,7 +72,10 @@ public final class ConcurrentHashMap<K, V>
     private static final AtomicIntegerFieldUpdater<ConcurrentHashMap> SIZE_UPDATER = AtomicIntegerFieldUpdater.newUpdater(ConcurrentHashMap.class, "size");
     private static final Object RESIZED = new Object();
     private static final Object RESIZING = new Object();
-    private static final int PARTITIONED_SIZE_THRESHOLD = 4096; // chosen to keep size below 1% of the total size of the map
+
+    // chosen to keep size below 1% of the total size of the map
+    private static final int PARTITIONED_SIZE_THRESHOLD = 4096;
+
     private static final int SIZE_BUCKETS = 7;
 
     /**
@@ -82,8 +85,9 @@ public final class ConcurrentHashMap<K, V>
 
     private AtomicIntegerArray partitionedSize;
 
+    // updated via atomic field updater
     @SuppressWarnings("UnusedDeclaration")
-    private volatile int size; // updated via atomic field updater
+    private volatile int size;
 
     public ConcurrentHashMap()
     {
@@ -102,7 +106,9 @@ public final class ConcurrentHashMap<K, V>
         }
 
         int threshold = initialCapacity;
-        threshold += threshold >> 1; // threshold = length * 0.75
+
+        // threshold = length * 0.75
+        threshold += threshold >> 1;
 
         int capacity = 1;
         while (capacity < threshold)
@@ -111,7 +117,8 @@ public final class ConcurrentHashMap<K, V>
         }
         if (capacity >= PARTITIONED_SIZE_THRESHOLD)
         {
-            this.partitionedSize = new AtomicIntegerArray(SIZE_BUCKETS * 16); // we want 7 extra slots and 64 bytes for each slot. int is 4 bytes, so 64 bytes is 16 ints.
+            // we want 7 extra slots and 64 bytes for each slot. int is 4 bytes, so 64 bytes is 16 ints.
+            this.partitionedSize = new AtomicIntegerArray(SIZE_BUCKETS * 16);
         }
         this.table = new AtomicReferenceArray(capacity + 1);
     }
@@ -161,7 +168,9 @@ public final class ConcurrentHashMap<K, V>
                 if (currentArray.compareAndSet(index, o, newEntry))
                 {
                     this.incrementSizeAndPossiblyResize(currentArray, length, o);
-                    return null; // per the contract of putIfAbsent, we return null when the map didn't have this key before
+
+                    // per the contract of putIfAbsent, we return null when the map didn't have this key before
+                    return null;
                 }
             }
         }
@@ -173,7 +182,10 @@ public final class ConcurrentHashMap<K, V>
         if (prev != null)
         {
             int localSize = this.size();
-            int threshold = (length >> 1) + (length >> 2); // threshold = length * 0.75
+
+            // threshold = length * 0.75
+            int threshold = (length >> 1) + (length >> 2);
+
             if (localSize + 1 > threshold)
             {
                 this.resize(currentArray);
@@ -242,7 +254,8 @@ public final class ConcurrentHashMap<K, V>
         boolean ownResize = false;
         if (last == null || last == RESIZE_SENTINEL)
         {
-            synchronized (oldTable) // allocating a new array is too expensive to make this an atomic operation
+            // allocating a new array is too expensive to make this an atomic operation
+            synchronized (oldTable)
             {
                 if (oldTable.get(end) == null)
                 {
@@ -387,7 +400,8 @@ public final class ConcurrentHashMap<K, V>
                 {
                     if (toCopyEntry.getNext() == null)
                     {
-                        newEntry = toCopyEntry; // no need to duplicate
+                        // no need to duplicate
+                        newEntry = toCopyEntry;
                     }
                     else
                     {
@@ -531,7 +545,8 @@ public final class ConcurrentHashMap<K, V>
                     newValue = factory.value(param1, param2, key);
                     if (newValue == null)
                     {
-                        return null; // null value means no mapping is required
+                        // null value means no mapping is required
+                        return null;
                     }
                     key = keyTransformer.value(key, newValue);
                 }
@@ -851,7 +866,9 @@ public final class ConcurrentHashMap<K, V>
         if (this.size() == 0)
         {
             int threshold = map.size();
-            threshold += threshold >> 1; // threshold = length * 0.75
+
+            // threshold = length * 0.75
+            threshold += threshold >> 1;
 
             int capacity = 1;
             while (capacity < threshold)

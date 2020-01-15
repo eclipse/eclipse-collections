@@ -126,9 +126,15 @@ public class FixedSizeListFactoryTest
     {
         String[] content = {"one", "two"};
 
-        //List<Object>   list1 = Lists.fixedSize.of(content);  // incompatible types: List<Object> vs List<String>
-        //List<String[]> list2 = Lists.fixedSize.of(content);  // incompatible types: List<String[]> vs List<String>
-        List<String[]> list3 = Lists.fixedSize.<String[]>of(content);  // correct!
+        // fails with "incompatible types: List<Object> vs List<String>"
+        // List<Object> list1 = Lists.fixedSize.of(content);
+
+        // fails with "incompatible types: List<String[]> vs List<String>"
+        // List<String[]> list2 = Lists.fixedSize.of(content);
+
+        // successfully compiles
+        List<String[]> list3 = Lists.fixedSize.<String[]>of(content);
+
         Verify.assertSize(1, list3);
 
         MutableList<String> list4 = Lists.fixedSize.of(content);

@@ -120,11 +120,13 @@ public final class ArrayIterate
     {
         if (comparator == null)
         {
-            Arrays.sort(array, 0, size); // handles case size < 2 in Java 8 ComparableTimSort
+            // handles case size < 2 in Java 8 ComparableTimSort
+            Arrays.sort(array, 0, size);
         }
         else
         {
-            Arrays.sort(array, 0, size, comparator); // handles case size < 2 in Java 8 TimSort
+            // handles case size < 2 in Java 8 TimSort
+            Arrays.sort(array, 0, size, comparator);
         }
     }
 

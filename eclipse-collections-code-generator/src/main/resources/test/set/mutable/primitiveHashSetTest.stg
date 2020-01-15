@@ -130,7 +130,9 @@ public class <name>HashSetTest extends Abstract<name>SetTestCase
         Assert.assertEquals(7, occupiedWithData.get(hashSet));
         Assert.assertEquals(1, occupiedWithSentinels.get(hashSet));
 
-        hashSet.add(<(literal.(type))("32")>); //adding to a REMOVED slot
+        // adding to a REMOVED slot
+        hashSet.add(<(literal.(type))("32")>);
+
         Assert.assertEquals(8, occupiedWithData.get(hashSet));
         Assert.assertEquals(0, occupiedWithSentinels.get(hashSet));
 

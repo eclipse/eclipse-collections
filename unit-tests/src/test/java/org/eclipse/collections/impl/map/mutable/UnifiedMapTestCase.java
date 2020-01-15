@@ -142,7 +142,10 @@ public abstract class UnifiedMapTestCase extends MutableMapTestCase
     public void keySet_toArray_withSmallTarget()
     {
         MutableMap<Integer, String> map = this.newMapWithKeysValues(1, "One", 2, "Two", 3, "Three", 4, "Four");
-        Integer[] destination = new Integer[2]; // deliberately to small to force the method to allocate one of the correct size
+
+        // deliberately to small to force the method to allocate one of the correct size
+        Integer[] destination = new Integer[2];
+
         Integer[] result = map.keySet().toArray(destination);
         Arrays.sort(result);
         Assert.assertArrayEquals(new Integer[]{1, 2, 3, 4}, result);
@@ -152,7 +155,10 @@ public abstract class UnifiedMapTestCase extends MutableMapTestCase
     public void keySet_ToArray_withLargeTarget()
     {
         MutableMap<Integer, String> map = this.newMapWithKeysValues(1, "One", 2, "Two", 3, "Three", 4, "Four");
-        Integer[] target = new Integer[6]; // deliberately large to force the extra to be set to null
+
+        // deliberately large to force the extra to be set to null
+        Integer[] target = new Integer[6];
+
         target[4] = 42;
         target[5] = 42;
         Integer[] result = map.keySet().toArray(target);
@@ -310,7 +316,10 @@ public abstract class UnifiedMapTestCase extends MutableMapTestCase
     public void valuesCollection_PostSerializedEquality_chainedMapWithEmptySlot()
     {
         MutableMap<Integer, Integer> map = this.mapWithCollisionsOfSize(4);
-        map.put(42, 42); // add non-colliding key
+
+        // add non-colliding key
+        map.put(42, 42);
+
         Collection<Integer> values = map.values();
         // This test is not using Verify.assertPostSerializedEqualsAndHashCode b/c the deserialized form of the values view is a FastList, which will not be equals to the orginal view (a Collection).
         Collection<Integer> revived = SerializeTestHelper.serializeDeserialize(values);

@@ -830,9 +830,12 @@ public class ArrayListIterateTest
     {
         ArrayList<Integer> list = this.getIntegerList();
         Assert.assertEquals(Integer.valueOf(1), ArrayListIterate.detect(list, Integer.valueOf(1)::equals));
+
+        // test relies on having a unique instance of "2"
         //noinspection CachedNumberConstructorCall,UnnecessaryBoxing
         ArrayList<Integer> list2 =
-                this.newArrayList(1, new Integer(2), 2);  // test relies on having a unique instance of "2"
+                this.newArrayList(1, new Integer(2), 2);
+
         Assert.assertSame(list2.get(1), ArrayListIterate.detect(list2, Integer.valueOf(2)::equals));
     }
 
@@ -848,9 +851,12 @@ public class ArrayListIterateTest
     {
         ArrayList<Integer> list = this.getIntegerList();
         Assert.assertEquals(Integer.valueOf(1), ArrayListIterate.detectWith(list, Object::equals, 1));
-        //noinspection CachedNumberConstructorCall,UnnecessaryBoxing
+
+        // test relies on having a unique instance of "2"
+        // noinspection CachedNumberConstructorCall,UnnecessaryBoxing
         ArrayList<Integer> list2 =
-                this.newArrayList(1, new Integer(2), 2);  // test relies on having a unique instance of "2"
+                this.newArrayList(1, new Integer(2), 2);
+
         Assert.assertSame(list2.get(1), ArrayListIterate.detectWith(list2, Object::equals, 2));
     }
 

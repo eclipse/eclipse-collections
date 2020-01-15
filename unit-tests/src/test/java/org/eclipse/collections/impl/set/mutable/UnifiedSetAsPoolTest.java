@@ -38,7 +38,10 @@ public class UnifiedSetAsPoolTest
         UnifiedSet<AlwaysEqual> pool = UnifiedSet.newSet();
         AlwaysEqual firstObject = new AlwaysEqual();
         pool.put(firstObject);
-        AlwaysEqual equalObject = new AlwaysEqual();  // deliberate new instance
+
+        // deliberate new instance
+        AlwaysEqual equalObject = new AlwaysEqual();
+
         Assert.assertSame(firstObject, pool.get(equalObject));
     }
 
@@ -71,7 +74,10 @@ public class UnifiedSetAsPoolTest
         AlwaysEqual firstObject = new AlwaysEqual();
         UnifiedSet<AlwaysEqual> pool = UnifiedSet.newSet();
         pool.put(firstObject);
-        AlwaysEqual secondObject = new AlwaysEqual();  // deliberate new instance
+
+        // deliberate new instance
+        AlwaysEqual secondObject = new AlwaysEqual();
+
         Object returnedObject = pool.put(secondObject);
 
         Assert.assertSame(returnedObject, firstObject);

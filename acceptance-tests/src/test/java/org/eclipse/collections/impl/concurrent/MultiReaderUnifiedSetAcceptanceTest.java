@@ -303,7 +303,8 @@ public class MultiReaderUnifiedSetAcceptanceTest
         Assert.assertTrue(set.retainAll(toRetain));
         Assert.assertTrue(set.containsAll(toRetain));
 
-        Assert.assertFalse(set.retainAll(toRetain)); // a second call should not modify the set
+        // a second call should not modify the set
+        Assert.assertFalse(set.retainAll(toRetain));
 
         Verify.assertSize(size / 2, set);
 
@@ -343,7 +344,8 @@ public class MultiReaderUnifiedSetAcceptanceTest
         Assert.assertTrue(set.retainAll(toRetain));
         Assert.assertTrue(set.containsAll(toRetain));
 
-        Assert.assertFalse(set.retainAll(toRetain)); // a second call should not modify the set
+        // a second call should not modify the set
+        Assert.assertFalse(set.retainAll(toRetain));
 
         Verify.assertSize(size / 2, set);
 
@@ -486,7 +488,8 @@ public class MultiReaderUnifiedSetAcceptanceTest
 
         Assert.assertTrue(set.removeAll(toRemove));
 
-        Assert.assertFalse(set.removeAll(toRemove)); // a second call should not modify the set
+        // a second call should not modify the set
+        Assert.assertFalse(set.removeAll(toRemove));
 
         Verify.assertSize(size / 2, set);
 

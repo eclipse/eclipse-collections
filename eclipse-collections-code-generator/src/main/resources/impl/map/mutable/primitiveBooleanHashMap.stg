@@ -89,7 +89,9 @@ public class <name>BooleanHashMap extends AbstractMutableBooleanValuesMap implem
     private static final int DEFAULT_INITIAL_CAPACITY = 8;
     private static final int CACHE_LINE_SIZE = 64;
     private static final int KEY_SIZE = <keySize.(type)>;
-    private static final int INITIAL_LINEAR_PROBE = CACHE_LINE_SIZE / KEY_SIZE / 2; /* half a cache line */
+
+    // half a cache line
+    private static final int INITIAL_LINEAR_PROBE = CACHE_LINE_SIZE / KEY_SIZE / 2;
 
     private <type>[] keys;
     private BitSet values;

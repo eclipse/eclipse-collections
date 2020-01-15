@@ -506,17 +506,26 @@ public class FastListTest extends AbstractListTestCase
     @Test
     public void testRemoveAllWithWeakReference()
     {
-        String fred = new String("Fred");    // Deliberate String copy for unit test purpose
-        String wilma = new String("Wilma");  // Deliberate String copy for unit test purpose
+        // Deliberate String copy for unit test purpose
+        String fred = new String("Fred");
+
+        // Deliberate String copy for unit test purpose
+        String wilma = new String("Wilma");
+
         FastList<String> objects = FastList.<String>newList().with(fred, wilma);
         objects.removeAll(mList("Fred"));
         objects.remove(0);
         Verify.assertSize(0, objects);
         WeakReference<String> ref = new WeakReference<>(wilma);
+
+        // Deliberate null of a local variable for unit test purpose
         //noinspection ReuseOfLocalVariable
-        fred = null;   // Deliberate null of a local variable for unit test purpose
+        fred = null;
+
+        // Deliberate null of a local variable for unit test purpose
         //noinspection ReuseOfLocalVariable
-        wilma = null;  // Deliberate null of a local variable for unit test purpose
+        wilma = null;
+
         System.gc();
         Thread.yield();
         System.gc();
@@ -1191,7 +1200,9 @@ public class FastListTest extends AbstractListTestCase
         Assert.assertEquals(
                 Bags.mutable.of("A", "1", "2", "3", "4"),
                 list.toBag());
-        Verify.assertStartsWith(list, "A", "1", "2");  // "3" and "4" are from a set, so may not be in order
+
+        // "3" and "4" are from a set, so may not be in order
+        Verify.assertStartsWith(list, "A", "1", "2");
 
         Assert.assertEquals(
                 FastList.newListWith(42, 10, 11, 12),
