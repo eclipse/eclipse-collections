@@ -88,7 +88,10 @@ public interface MutableMapIterable<K, V> extends MapIterable<K, V>, Map<K, V>
      * @return true if any entry is removed.
      * @since 10.0
      */
-    boolean removeIf(Predicate2<? super K, ? super V> predicate);
+    default boolean removeIf(Predicate2<? super K, ? super V> predicate)
+    {
+        return this.entrySet().removeIf(entry -> predicate.accept(entry.getKey(), entry.getValue()));
+    }
 
     /**
      * Get and return the value in the Map at the specified key. Alternatively, if there is no value in the map at the key,

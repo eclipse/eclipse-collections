@@ -231,22 +231,6 @@ public class OrderedMapAdapter<K, V>
     }
 
     @Override
-    public boolean removeIf(Predicate2<? super K, ? super V> predicate)
-    {
-        int previousSize = this.size();
-        Iterator<Entry<K, V>> iterator = this.entrySet().iterator();
-        while (iterator.hasNext())
-        {
-            Entry<K, V> entry = iterator.next();
-            if (predicate.accept(entry.getKey(), entry.getValue()))
-            {
-                iterator.remove();
-            }
-        }
-        return previousSize > this.size();
-    }
-
-    @Override
     public String toString()
     {
         return this.delegate.toString();

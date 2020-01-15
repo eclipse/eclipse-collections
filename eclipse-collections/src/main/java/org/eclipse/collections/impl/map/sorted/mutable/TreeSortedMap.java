@@ -21,7 +21,6 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 
 import org.eclipse.collections.api.block.predicate.Predicate;
-import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.collection.MutableCollection;
 import org.eclipse.collections.api.list.MutableList;
@@ -215,22 +214,6 @@ public class TreeSortedMap<K, V>
     public V removeKey(K key)
     {
         return this.treeMap.remove(key);
-    }
-
-    @Override
-    public boolean removeIf(Predicate2<? super K, ? super V> predicate)
-    {
-        int previousSize = this.size();
-        Iterator<Entry<K, V>> iterator = this.entrySet().iterator();
-        while (iterator.hasNext())
-        {
-            Entry<K, V> entry = iterator.next();
-            if (predicate.accept(entry.getKey(), entry.getValue()))
-            {
-                iterator.remove();
-            }
-        }
-        return previousSize > this.size();
     }
 
     @Override
