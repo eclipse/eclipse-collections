@@ -302,22 +302,6 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
     }
 
     @Override
-    public boolean removeIf(Predicate2<? super K, ? super V> predicate)
-    {
-        int previousSize = this.size();
-        Iterator<Entry<K, V>> iterator = this.entrySet().iterator();
-        while (iterator.hasNext())
-        {
-            Entry<K, V> entry = iterator.next();
-            if (predicate.accept(entry.getKey(), entry.getValue()))
-            {
-                iterator.remove();
-            }
-        }
-        return previousSize > this.size();
-    }
-
-    @Override
     public void clear()
     {
         this.delegate.clear();
