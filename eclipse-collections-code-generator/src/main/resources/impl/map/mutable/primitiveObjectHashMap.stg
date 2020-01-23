@@ -2999,7 +2999,7 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         return spread & (this.keys.length - 1);
     }
 
-    private void allocateTable(int sizeToAllocate)
+    protected void allocateTable(int sizeToAllocate)
     {
         this.keys = new <type>[sizeToAllocate];
         this.values = (V[]) new Object[sizeToAllocate];

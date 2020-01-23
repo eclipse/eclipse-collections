@@ -283,7 +283,7 @@ public class <name>BooleanHashMap extends AbstractMutableBooleanValuesMap implem
         return !isEmptyKey(key) && !isRemovedKey(key);
     }
 
-    private void allocateTable(int sizeToAllocate)
+    protected void allocateTable(int sizeToAllocate)
     {
         this.keys = new <type>[sizeToAllocate];
         this.values = new BitSet(sizeToAllocate);

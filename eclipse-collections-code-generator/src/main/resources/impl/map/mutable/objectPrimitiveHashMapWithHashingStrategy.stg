@@ -1322,7 +1322,7 @@ public class Object<name>HashMapWithHashingStrategy\<K> implements MutableObject
         return false;
     }
 
-    private void allocateTable(int sizeToAllocate)
+    protected void allocateTable(int sizeToAllocate)
     {
         this.keys = new Object[sizeToAllocate];
         this.values = new <type>[sizeToAllocate];

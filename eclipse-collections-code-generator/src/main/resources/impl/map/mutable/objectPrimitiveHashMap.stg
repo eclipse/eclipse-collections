@@ -1296,7 +1296,7 @@ public class Object<name>HashMap\<K> implements MutableObject<name>Map\<K>, Exte
         return false;
     }
 
-    private void allocateTable(int sizeToAllocate)
+    protected void allocateTable(int sizeToAllocate)
     {
         this.keys = new Object[sizeToAllocate];
         this.values = new <type>[sizeToAllocate];

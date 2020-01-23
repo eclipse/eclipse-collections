@@ -1117,7 +1117,7 @@ public class ObjectBooleanHashMapWithHashingStrategy<K> implements MutableObject
         }
     }
 
-    private void allocateTable(int sizeToAllocate)
+    protected void allocateTable(int sizeToAllocate)
     {
         this.keys = new Object[sizeToAllocate];
         this.values = new BitSet(sizeToAllocate);

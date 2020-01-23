@@ -946,7 +946,7 @@ public class <name>HashSet extends Abstract<name>Set implements Mutable<name>Set
         }
     }
 
-    private void allocateTable(int sizeToAllocate)
+    protected void allocateTable(int sizeToAllocate)
     {
         this.table = new <type>[sizeToAllocate];
     }
