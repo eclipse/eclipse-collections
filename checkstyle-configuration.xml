@@ -265,9 +265,16 @@
         <!-- Effective Java Item 4 - Avoid creating duplicate objects -->
         <module name="IllegalInstantiation">
             <property name="severity" value="warning" />
-            <property
-                name="classes"
-                value="java.lang.Boolean,java.lang.Integer,java.lang.Long,java.lang.Short,java.lang.Character,java.lang.Byte,java.util.Timer,java.util.TimerTask" />
+            <property name="classes" value="java.lang.Boolean" />
+            <property name="classes" value="java.lang.Byte" />
+            <property name="classes" value="java.lang.Character" />
+            <property name="classes" value="java.lang.Integer" />
+            <property name="classes" value="java.lang.Long" />
+            <property name="classes" value="java.lang.Short" />
+            <property name="classes" value="java.lang.StringBuffer" />
+            <property name="classes" value="java.lang.String" />
+            <property name="classes" value="java.util.Timer" />
+            <property name="classes" value="java.util.TimerTask" />
         </module>
 
         <module name="SimplifyBooleanExpression" />
