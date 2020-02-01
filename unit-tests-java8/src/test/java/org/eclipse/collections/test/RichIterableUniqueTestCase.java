@@ -1054,7 +1054,7 @@ public interface RichIterableUniqueTestCase extends RichIterableTestCase
                         Tuples.pair("11", 1),
                         Tuples.pair("3", 3),
                         Tuples.pair("2", 2),
-                        Tuples.pair("1", 1)
+                        Tuples.pair("1", 1),
                 };
         assertEquals(
                 TreeSortedMap.newMapWith(pairs),

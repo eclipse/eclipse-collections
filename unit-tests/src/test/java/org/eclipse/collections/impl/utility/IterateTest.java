@@ -585,7 +585,7 @@ public class IterateTest
                 Tuples.pair("Key2", "2"),
                 Tuples.pair("Key3", "3"),
                 Tuples.pair("Key3", "3"),
-                Tuples.pair("Key3", "3")
+                Tuples.pair("Key3", "3"),
         };
         Function<Integer, String> keyFunction = each -> "Key" + each;
         Function<Integer, String> valueFunction = String::valueOf;
@@ -855,7 +855,7 @@ public class IterateTest
                 Tuples.pair("Key3", "1"),
                 Tuples.pair("Key3", "3"),
                 Tuples.pair("Key3", "1"),
-                Tuples.pair("Key3", "3")
+                Tuples.pair("Key3", "3"),
         };
 
         Function<Integer, String> keyFunction = each -> "Key" + each;

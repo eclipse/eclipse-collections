@@ -88,7 +88,7 @@ public class NonInstantiableTest
             SetIterables.class,
             SetIterate.class,
             SortedMaps.class,
-            SortedSetIterables.class
+            SortedSetIterables.class,
     };
 
     @Test
