@@ -221,8 +221,20 @@
         <!-- See http://checkstyle.sf.net/config_coding.html -->
         <module name="EmptyStatement" />
         <module name="EmptyBlock">
-            <property name="tokens"
-                value="LITERAL_WHILE, LITERAL_TRY, LITERAL_FINALLY, LITERAL_DO, LITERAL_IF, LITERAL_ELSE, LITERAL_FOR, INSTANCE_INIT, STATIC_INIT, LITERAL_SWITCH, LITERAL_SYNCHRONIZED, LITERAL_CASE, LITERAL_DEFAULT" />
+            <property name="tokens" value="ARRAY_INIT"/>
+            <property name="tokens" value="LITERAL_DEFAULT" />
+            <property name="tokens" value="LITERAL_CASE" />
+            <property name="tokens" value="INSTANCE_INIT" />
+            <property name="tokens" value="LITERAL_DO" />
+            <property name="tokens" value="LITERAL_ELSE" />
+            <property name="tokens" value="LITERAL_FINALLY" />
+            <property name="tokens" value="LITERAL_FOR" />
+            <property name="tokens" value="LITERAL_IF" />
+            <property name="tokens" value="LITERAL_SWITCH" />
+            <property name="tokens" value="LITERAL_SYNCHRONIZED" />
+            <property name="tokens" value="LITERAL_TRY" />
+            <property name="tokens" value="LITERAL_WHILE" />
+            <property name="tokens" value="STATIC_INIT" />
         </module>
 
         <!-- Effective Java Item 8 - Always override hashCode when you override equals -->
