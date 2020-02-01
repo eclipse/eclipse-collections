@@ -6,6 +6,7 @@
     <option name="CLASS_BRACE_STYLE" value="2" />
     <option name="METHOD_BRACE_STYLE" value="2" />
     <JavaCodeStyleSettings>
+      <option name="REPLACE_INSTANCEOF_AND_CAST" value="true" />
       <option name="CLASS_COUNT_TO_USE_IMPORT_ON_DEMAND" value="99" />
       <option name="NAMES_COUNT_TO_USE_IMPORT_ON_DEMAND" value="99" />
       <option name="IMPORT_LAYOUT_TABLE">
@@ -60,6 +61,9 @@
       <option name="KEEP_BLANK_LINES_BEFORE_RBRACE" value="1" />
     </codeStyleSettings>
     <codeStyleSettings language="JAVA">
+      <option name="LINE_COMMENT_AT_FIRST_COLUMN" value="false" />
+      <option name="BLOCK_COMMENT_AT_FIRST_COLUMN" value="false" />
+      <option name="LINE_COMMENT_ADD_SPACE" value="true" />
       <option name="KEEP_CONTROL_STATEMENT_IN_ONE_LINE" value="false" />
       <option name="KEEP_BLANK_LINES_IN_DECLARATIONS" value="1" />
       <option name="KEEP_BLANK_LINES_IN_CODE" value="1" />
@@ -142,6 +146,8 @@
       <option name="FOR_BRACE_FORCE" value="3" />
     </codeStyleSettings>
     <codeStyleSettings language="XML">
+      <option name="LINE_COMMENT_AT_FIRST_COLUMN" value="false" />
+      <option name="BLOCK_COMMENT_AT_FIRST_COLUMN" value="false" />
       <indentOptions>
         <option name="CONTINUATION_INDENT_SIZE" value="4" />
       </indentOptions>
