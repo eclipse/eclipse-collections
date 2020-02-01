@@ -256,9 +256,10 @@
         <module name="EqualsHashCode" />
 
         <module name="HiddenField">
-            <property name="severity" value="warning" />
-            <property name="ignoreSetter" value="true" />
             <property name="ignoreConstructorParameter" value="true" />
+            <property name="ignoreSetter" value="true" />
+            <property name="setterCanReturnItsClass" value="true" />
+            <property name="severity" value="warning" />
         </module>
 
         <!-- Effective Java Item 4 - Avoid creating duplicate objects -->
