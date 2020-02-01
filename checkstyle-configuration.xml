@@ -219,7 +219,8 @@
         <module name="EmptyStatement" />
         <module name="EmptyBlock">
             <property name="tokens" value="LITERAL_CATCH"/>
-            <property name="tokens" value="ARRAY_INIT"/>      <property name="tokens" value="LITERAL_DEFAULT" />
+            <property name="tokens" value="ARRAY_INIT"/>
+            <property name="tokens" value="LITERAL_DEFAULT" />
             <property name="tokens" value="LITERAL_CASE" />
             <property name="tokens" value="INSTANCE_INIT" />
             <property name="tokens" value="LITERAL_DO" />
