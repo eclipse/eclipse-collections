@@ -191,8 +191,8 @@
             <property name="tokens" value="LITERAL_FOR" />
             <property name="tokens" value="LITERAL_IF" />
             <property name="tokens" value="LITERAL_WHILE" />
-            <property name="tokens" value="LITERAL_CASE" />
-            <property name="tokens" value="LITERAL_DEFAULT" />
+            <!--<property name="tokens" value="LITERAL_CASE" />-->
+            <!--<property name="tokens" value="LITERAL_DEFAULT" />-->
         </module>
         <module name="RightCurly">
             <property name="tokens" value="METHOD_DEF" />
