@@ -85,36 +85,6 @@ public final class Interval
     }
 
     /**
-     * This instance {@code to} method allows Interval to act as a fluent builder for itself.
-     * It works in conjunction with the static method {@link #from(int)} and instance method {@link #by(int)}.
-     * <p>
-     * Usage Example:
-     * <pre>
-     * Interval interval1 = Interval.from(1).to(5);         // results in: 1, 2, 3, 4, 5.
-     * Interval interval2 = Interval.from(1).to(10).by(2);  // results in: 1, 3, 5, 7, 9.
-     * </pre>
-     */
-    public Interval to(int newTo)
-    {
-        return Interval.fromToBy(this.from, newTo, this.step);
-    }
-
-    /**
-     * This instance {@code by} method allows Interval to act as a fluent builder for itself.
-     * It works in conjunction with the static method {@link #from(int)} and instance method {@link #to(int)}.
-     * <p>
-     * Usage Example:
-     * <pre>
-     * Interval interval1 = Interval.from(1).to(5);         // results in: 1, 2, 3, 4, 5.
-     * Interval interval2 = Interval.from(1).to(10).by(2);  // results in: 1, 3, 5, 7, 9.
-     * </pre>
-     */
-    public Interval by(int newStep)
-    {
-        return Interval.fromToBy(this.from, this.to, newStep);
-    }
-
-    /**
      * Returns an Interval starting at zero.
      * <p>
      * Usage Example:
@@ -275,6 +245,36 @@ public final class Interval
     {
         IntervalUtils.checkArguments(from, to, stepBy);
         return new Interval(from, to, stepBy);
+    }
+
+    /**
+     * This instance {@code to} method allows Interval to act as a fluent builder for itself.
+     * It works in conjunction with the static method {@link #from(int)} and instance method {@link #by(int)}.
+     * <p>
+     * Usage Example:
+     * <pre>
+     * Interval interval1 = Interval.from(1).to(5);         // results in: 1, 2, 3, 4, 5.
+     * Interval interval2 = Interval.from(1).to(10).by(2);  // results in: 1, 3, 5, 7, 9.
+     * </pre>
+     */
+    public Interval to(int newTo)
+    {
+        return Interval.fromToBy(this.from, newTo, this.step);
+    }
+
+    /**
+     * This instance {@code by} method allows Interval to act as a fluent builder for itself.
+     * It works in conjunction with the static method {@link #from(int)} and instance method {@link #to(int)}.
+     * <p>
+     * Usage Example:
+     * <pre>
+     * Interval interval1 = Interval.from(1).to(5);         // results in: 1, 2, 3, 4, 5.
+     * Interval interval2 = Interval.from(1).to(10).by(2);  // results in: 1, 3, 5, 7, 9.
+     * </pre>
+     */
+    public Interval by(int newStep)
+    {
+        return Interval.fromToBy(this.from, this.to, newStep);
     }
 
     /**
@@ -772,39 +772,6 @@ public final class Interval
         return new IntegerIterator();
     }
 
-    private class IntegerIterator implements Iterator<Integer>
-    {
-        private long current = Interval.this.from;
-
-        @Override
-        public boolean hasNext()
-        {
-            if (Interval.this.from <= Interval.this.to)
-            {
-                return this.current <= (long) Interval.this.to;
-            }
-            return this.current >= (long) Interval.this.to;
-        }
-
-        @Override
-        public Integer next()
-        {
-            if (this.hasNext())
-            {
-                Integer result = (int) this.current;
-                this.current += Interval.this.step;
-                return result;
-            }
-            throw new NoSuchElementException();
-        }
-
-        @Override
-        public void remove()
-        {
-            throw new UnsupportedOperationException("Cannot remove a value from an Interval");
-        }
-    }
-
     @Override
     public Integer getFirst()
     {
@@ -1035,5 +1002,38 @@ public final class Interval
     public LazyIterable<Integer> distinct()
     {
         return this;
+    }
+
+    private class IntegerIterator implements Iterator<Integer>
+    {
+        private long current = Interval.this.from;
+
+        @Override
+        public boolean hasNext()
+        {
+            if (Interval.this.from <= Interval.this.to)
+            {
+                return this.current <= (long) Interval.this.to;
+            }
+            return this.current >= (long) Interval.this.to;
+        }
+
+        @Override
+        public Integer next()
+        {
+            if (this.hasNext())
+            {
+                Integer result = (int) this.current;
+                this.current += Interval.this.step;
+                return result;
+            }
+            throw new NoSuchElementException();
+        }
+
+        @Override
+        public void remove()
+        {
+            throw new UnsupportedOperationException("Cannot remove a value from an Interval");
+        }
     }
 }

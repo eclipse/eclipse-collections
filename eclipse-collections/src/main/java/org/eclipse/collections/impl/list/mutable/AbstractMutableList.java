@@ -650,6 +650,193 @@ public abstract class AbstractMutableList<T>
         return new SubList<>(this, fromIndex, toIndex);
     }
 
+    @Override
+    public boolean contains(Object object)
+    {
+        return this.indexOf(object) > -1;
+    }
+
+    @Override
+    public boolean containsAll(Collection<?> source)
+    {
+        return Iterate.allSatisfyWith(source, Predicates2.in(), this);
+    }
+
+    @Override
+    public boolean removeAll(Collection<?> collection)
+    {
+        int currentSize = this.size();
+        this.removeIfWith(Predicates2.in(), collection);
+        return currentSize != this.size();
+    }
+
+    @Override
+    public boolean retainAll(Collection<?> collection)
+    {
+        int currentSize = this.size();
+        this.removeIfWith(Predicates2.notIn(), collection);
+        return currentSize != this.size();
+    }
+
+    @Override
+    public T getFirst()
+    {
+        return ListIterate.getFirst(this);
+    }
+
+    @Override
+    public T getLast()
+    {
+        return ListIterate.getLast(this);
+    }
+
+    @Override
+    public void appendString(Appendable appendable, String separator)
+    {
+        this.appendString(appendable, "", separator, "");
+    }
+
+    @Override
+    public void appendString(Appendable appendable, String start, String separator, String end)
+    {
+        ListIterate.appendString(this, appendable, start, separator, end);
+    }
+
+    @Override
+    public <V> FastListMultimap<V, T> groupBy(Function<? super T, ? extends V> function)
+    {
+        return ListIterate.groupBy(this, function);
+    }
+
+    @Override
+    public <V> FastListMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function)
+    {
+        return ListIterate.groupByEach(this, function);
+    }
+
+    @Override
+    public <K> MutableMap<K, T> groupByUniqueKey(Function<? super T, ? extends K> function)
+    {
+        return ListIterate.groupByUniqueKey(this, function);
+    }
+
+    @Override
+    public <S> MutableList<Pair<T, S>> zip(Iterable<S> that)
+    {
+        return ListIterate.zip(this, that);
+    }
+
+    @Override
+    public MutableList<Pair<T, Integer>> zipWithIndex()
+    {
+        return ListIterate.zipWithIndex(this);
+    }
+
+    @Override
+    public MutableList<T> with(T element)
+    {
+        this.add(element);
+        return this;
+    }
+
+    @Override
+    public MutableList<T> without(T element)
+    {
+        this.remove(element);
+        return this;
+    }
+
+    @Override
+    public MutableList<T> withAll(Iterable<? extends T> elements)
+    {
+        this.addAllIterable(elements);
+        return this;
+    }
+
+    @Override
+    public MutableList<T> withoutAll(Iterable<? extends T> elements)
+    {
+        this.removeAllIterable(elements);
+        return this;
+    }
+
+    @Override
+    public ReverseIterable<T> asReversed()
+    {
+        return ReverseIterable.adapt(this);
+    }
+
+    @Override
+    public ParallelListIterable<T> asParallel(ExecutorService executorService, int batchSize)
+    {
+        return new ListIterableParallelIterable<>(this, executorService, batchSize);
+    }
+
+    @Override
+    public int binarySearch(T key, Comparator<? super T> comparator)
+    {
+        return Collections.binarySearch(this, key, comparator);
+    }
+
+    @Override
+    public RichIterable<RichIterable<T>> chunk(int size)
+    {
+        if (size <= 0)
+        {
+            throw new IllegalArgumentException("Size for groups must be positive but was: " + size);
+        }
+
+        if (this instanceof RandomAccess)
+        {
+            MutableList<RichIterable<T>> result = Lists.mutable.empty();
+            int i = 0;
+            while (i < this.size())
+            {
+                MutableList<T> batch = new FastList<>(Math.min(size, this.size() - i));
+
+                for (int j = 0; j < size && i < this.size(); j++)
+                {
+                    batch.add(this.get(i));
+                    i++;
+                }
+                result.add(batch);
+            }
+            return result;
+        }
+
+        return super.chunk(size);
+    }
+
+    @Override
+    public MutableList<T> take(int count)
+    {
+        return ListIterate.take(this, count);
+    }
+
+    @Override
+    public MutableList<T> takeWhile(Predicate<? super T> predicate)
+    {
+        return ListIterate.takeWhile(this, predicate);
+    }
+
+    @Override
+    public MutableList<T> drop(int count)
+    {
+        return ListIterate.drop(this, count);
+    }
+
+    @Override
+    public MutableList<T> dropWhile(Predicate<? super T> predicate)
+    {
+        return ListIterate.dropWhile(this, predicate);
+    }
+
+    @Override
+    public PartitionMutableList<T> partitionWhile(Predicate<? super T> predicate)
+    {
+        return ListIterate.partitionWhile(this, predicate);
+    }
+
     protected static class SubList<T>
             extends AbstractMutableList<T>
             implements Serializable, RandomAccess
@@ -895,192 +1082,5 @@ public abstract class AbstractMutableList<T>
         {
             ListIterate.forEachWith(this, procedure, parameter);
         }
-    }
-
-    @Override
-    public boolean contains(Object object)
-    {
-        return this.indexOf(object) > -1;
-    }
-
-    @Override
-    public boolean containsAll(Collection<?> source)
-    {
-        return Iterate.allSatisfyWith(source, Predicates2.in(), this);
-    }
-
-    @Override
-    public boolean removeAll(Collection<?> collection)
-    {
-        int currentSize = this.size();
-        this.removeIfWith(Predicates2.in(), collection);
-        return currentSize != this.size();
-    }
-
-    @Override
-    public boolean retainAll(Collection<?> collection)
-    {
-        int currentSize = this.size();
-        this.removeIfWith(Predicates2.notIn(), collection);
-        return currentSize != this.size();
-    }
-
-    @Override
-    public T getFirst()
-    {
-        return ListIterate.getFirst(this);
-    }
-
-    @Override
-    public T getLast()
-    {
-        return ListIterate.getLast(this);
-    }
-
-    @Override
-    public void appendString(Appendable appendable, String separator)
-    {
-        this.appendString(appendable, "", separator, "");
-    }
-
-    @Override
-    public void appendString(Appendable appendable, String start, String separator, String end)
-    {
-        ListIterate.appendString(this, appendable, start, separator, end);
-    }
-
-    @Override
-    public <V> FastListMultimap<V, T> groupBy(Function<? super T, ? extends V> function)
-    {
-        return ListIterate.groupBy(this, function);
-    }
-
-    @Override
-    public <V> FastListMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function)
-    {
-        return ListIterate.groupByEach(this, function);
-    }
-
-    @Override
-    public <K> MutableMap<K, T> groupByUniqueKey(Function<? super T, ? extends K> function)
-    {
-        return ListIterate.groupByUniqueKey(this, function);
-    }
-
-    @Override
-    public <S> MutableList<Pair<T, S>> zip(Iterable<S> that)
-    {
-        return ListIterate.zip(this, that);
-    }
-
-    @Override
-    public MutableList<Pair<T, Integer>> zipWithIndex()
-    {
-        return ListIterate.zipWithIndex(this);
-    }
-
-    @Override
-    public MutableList<T> with(T element)
-    {
-        this.add(element);
-        return this;
-    }
-
-    @Override
-    public MutableList<T> without(T element)
-    {
-        this.remove(element);
-        return this;
-    }
-
-    @Override
-    public MutableList<T> withAll(Iterable<? extends T> elements)
-    {
-        this.addAllIterable(elements);
-        return this;
-    }
-
-    @Override
-    public MutableList<T> withoutAll(Iterable<? extends T> elements)
-    {
-        this.removeAllIterable(elements);
-        return this;
-    }
-
-    @Override
-    public ReverseIterable<T> asReversed()
-    {
-        return ReverseIterable.adapt(this);
-    }
-
-    @Override
-    public ParallelListIterable<T> asParallel(ExecutorService executorService, int batchSize)
-    {
-        return new ListIterableParallelIterable<>(this, executorService, batchSize);
-    }
-
-    @Override
-    public int binarySearch(T key, Comparator<? super T> comparator)
-    {
-        return Collections.binarySearch(this, key, comparator);
-    }
-
-    @Override
-    public RichIterable<RichIterable<T>> chunk(int size)
-    {
-        if (size <= 0)
-        {
-            throw new IllegalArgumentException("Size for groups must be positive but was: " + size);
-        }
-
-        if (this instanceof RandomAccess)
-        {
-            MutableList<RichIterable<T>> result = Lists.mutable.empty();
-            int i = 0;
-            while (i < this.size())
-            {
-                MutableList<T> batch = new FastList<>(Math.min(size, this.size() - i));
-
-                for (int j = 0; j < size && i < this.size(); j++)
-                {
-                    batch.add(this.get(i));
-                    i++;
-                }
-                result.add(batch);
-            }
-            return result;
-        }
-
-        return super.chunk(size);
-    }
-
-    @Override
-    public MutableList<T> take(int count)
-    {
-        return ListIterate.take(this, count);
-    }
-
-    @Override
-    public MutableList<T> takeWhile(Predicate<? super T> predicate)
-    {
-        return ListIterate.takeWhile(this, predicate);
-    }
-
-    @Override
-    public MutableList<T> drop(int count)
-    {
-        return ListIterate.drop(this, count);
-    }
-
-    @Override
-    public MutableList<T> dropWhile(Predicate<? super T> predicate)
-    {
-        return ListIterate.dropWhile(this, predicate);
-    }
-
-    @Override
-    public PartitionMutableList<T> partitionWhile(Predicate<? super T> predicate)
-    {
-        return ListIterate.partitionWhile(this, predicate);
     }
 }

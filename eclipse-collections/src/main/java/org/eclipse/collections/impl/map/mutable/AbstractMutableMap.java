@@ -328,6 +328,24 @@ public abstract class AbstractMutableMap<K, V> extends AbstractMutableMapIterabl
         return this;
     }
 
+    @Override
+    public <VV> MutableBagMultimap<VV, V> groupBy(Function<? super V, ? extends VV> function)
+    {
+        return this.groupBy(function, HashBagMultimap.newMultimap());
+    }
+
+    @Override
+    public <VV> MutableBagMultimap<VV, V> groupByEach(Function<? super V, ? extends Iterable<VV>> function)
+    {
+        return this.groupByEach(function, HashBagMultimap.newMultimap());
+    }
+
+    @Override
+    public <VV> MutableMap<VV, V> groupByUniqueKey(Function<? super V, ? extends VV> function)
+    {
+        return this.groupByUniqueKey(function, UnifiedMap.newMap(this.size()));
+    }
+
     /**
      * Trait-style class that is used to capture commonalities between ValuesCollection class implementations in order to
      * avoid code duplication.
@@ -345,23 +363,5 @@ public abstract class AbstractMutableMap<K, V> extends AbstractMutableMapIterabl
         {
             throw new UnsupportedOperationException("Cannot call addAll() on " + this.getClass().getSimpleName());
         }
-    }
-
-    @Override
-    public <VV> MutableBagMultimap<VV, V> groupBy(Function<? super V, ? extends VV> function)
-    {
-        return this.groupBy(function, HashBagMultimap.newMultimap());
-    }
-
-    @Override
-    public <VV> MutableBagMultimap<VV, V> groupByEach(Function<? super V, ? extends Iterable<VV>> function)
-    {
-        return this.groupByEach(function, HashBagMultimap.newMultimap());
-    }
-
-    @Override
-    public <VV> MutableMap<VV, V> groupByUniqueKey(Function<? super V, ? extends VV> function)
-    {
-        return this.groupByUniqueKey(function, UnifiedMap.newMap(this.size()));
     }
 }

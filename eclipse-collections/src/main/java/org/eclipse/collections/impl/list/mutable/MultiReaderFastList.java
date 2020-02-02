@@ -837,6 +837,190 @@ public final class MultiReaderFastList<T>
 
     // Exposed for testing
 
+    @Override
+    public int detectIndex(Predicate<? super T> predicate)
+    {
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
+        {
+            return this.delegate.detectIndex(predicate);
+        }
+    }
+
+    @Override
+    public int detectLastIndex(Predicate<? super T> predicate)
+    {
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
+        {
+            return this.delegate.detectLastIndex(predicate);
+        }
+    }
+
+    @Override
+    public <V> MutableListMultimap<V, T> groupBy(Function<? super T, ? extends V> function)
+    {
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
+        {
+            return this.delegate.groupBy(function);
+        }
+    }
+
+    @Override
+    public <V> MutableListMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function)
+    {
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
+        {
+            return this.delegate.groupByEach(function);
+        }
+    }
+
+    @Override
+    public <V> MutableMap<V, T> groupByUniqueKey(Function<? super T, ? extends V> function)
+    {
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
+        {
+            return this.delegate.groupByUniqueKey(function);
+        }
+    }
+
+    @Override
+    public <S> MutableList<Pair<T, S>> zip(Iterable<S> that)
+    {
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
+        {
+            return this.delegate.zip(that);
+        }
+    }
+
+    @Override
+    public MutableList<Pair<T, Integer>> zipWithIndex()
+    {
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
+        {
+            return this.delegate.zipWithIndex();
+        }
+    }
+
+    @Override
+    public MutableList<T> toReversed()
+    {
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
+        {
+            return this.delegate.toReversed();
+        }
+    }
+
+    @Override
+    public MutableList<T> reverseThis()
+    {
+        try (LockWrapper wrapper = this.lockWrapper.acquireWriteLock())
+        {
+            this.delegate.reverseThis();
+            return this;
+        }
+    }
+
+    @Override
+    public MutableList<T> shuffleThis()
+    {
+        try (LockWrapper wrapper = this.lockWrapper.acquireWriteLock())
+        {
+            this.delegate.shuffleThis();
+            return this;
+        }
+    }
+
+    @Override
+    public MutableList<T> shuffleThis(Random rnd)
+    {
+        try (LockWrapper wrapper = this.lockWrapper.acquireWriteLock())
+        {
+            this.delegate.shuffleThis(rnd);
+            return this;
+        }
+    }
+
+    @Override
+    public MutableStack<T> toStack()
+    {
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
+        {
+            return this.delegate.toStack();
+        }
+    }
+
+    @Override
+    public RichIterable<RichIterable<T>> chunk(int size)
+    {
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
+        {
+            return this.delegate.chunk(size);
+        }
+    }
+
+    @Override
+    public MutableList<T> take(int count)
+    {
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
+        {
+            return this.delegate.take(count);
+        }
+    }
+
+    @Override
+    public MutableList<T> takeWhile(Predicate<? super T> predicate)
+    {
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
+        {
+            return this.delegate.takeWhile(predicate);
+        }
+    }
+
+    @Override
+    public MutableList<T> drop(int count)
+    {
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
+        {
+            return this.delegate.drop(count);
+        }
+    }
+
+    @Override
+    public MutableList<T> dropWhile(Predicate<? super T> predicate)
+    {
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
+        {
+            return this.delegate.dropWhile(predicate);
+        }
+    }
+
+    @Override
+    public PartitionMutableList<T> partitionWhile(Predicate<? super T> predicate)
+    {
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
+        {
+            return this.delegate.partitionWhile(predicate);
+        }
+    }
+
+    @Override
+    public LazyIterable<T> asReversed()
+    {
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
+        {
+            return ReverseIterable.adapt(this);
+        }
+    }
+
+    @Override
+    public ParallelListIterable<T> asParallel(ExecutorService executorService, int batchSize)
+    {
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
+        {
+            return new MultiReaderParallelListIterable<>(
+                    this.delegate.asParallel(executorService, batchSize), this.lock);
+        }
+    }
+
     static final class UntouchableMutableList<T>
             extends UntouchableMutableCollection<T>
             implements MutableList<T>
@@ -1511,190 +1695,6 @@ public final class MultiReaderFastList<T>
         public void becomeUseless()
         {
             this.delegate = null;
-        }
-    }
-
-    @Override
-    public int detectIndex(Predicate<? super T> predicate)
-    {
-        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
-        {
-            return this.delegate.detectIndex(predicate);
-        }
-    }
-
-    @Override
-    public int detectLastIndex(Predicate<? super T> predicate)
-    {
-        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
-        {
-            return this.delegate.detectLastIndex(predicate);
-        }
-    }
-
-    @Override
-    public <V> MutableListMultimap<V, T> groupBy(Function<? super T, ? extends V> function)
-    {
-        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
-        {
-            return this.delegate.groupBy(function);
-        }
-    }
-
-    @Override
-    public <V> MutableListMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function)
-    {
-        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
-        {
-            return this.delegate.groupByEach(function);
-        }
-    }
-
-    @Override
-    public <V> MutableMap<V, T> groupByUniqueKey(Function<? super T, ? extends V> function)
-    {
-        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
-        {
-            return this.delegate.groupByUniqueKey(function);
-        }
-    }
-
-    @Override
-    public <S> MutableList<Pair<T, S>> zip(Iterable<S> that)
-    {
-        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
-        {
-            return this.delegate.zip(that);
-        }
-    }
-
-    @Override
-    public MutableList<Pair<T, Integer>> zipWithIndex()
-    {
-        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
-        {
-            return this.delegate.zipWithIndex();
-        }
-    }
-
-    @Override
-    public MutableList<T> toReversed()
-    {
-        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
-        {
-            return this.delegate.toReversed();
-        }
-    }
-
-    @Override
-    public MutableList<T> reverseThis()
-    {
-        try (LockWrapper wrapper = this.lockWrapper.acquireWriteLock())
-        {
-            this.delegate.reverseThis();
-            return this;
-        }
-    }
-
-    @Override
-    public MutableList<T> shuffleThis()
-    {
-        try (LockWrapper wrapper = this.lockWrapper.acquireWriteLock())
-        {
-            this.delegate.shuffleThis();
-            return this;
-        }
-    }
-
-    @Override
-    public MutableList<T> shuffleThis(Random rnd)
-    {
-        try (LockWrapper wrapper = this.lockWrapper.acquireWriteLock())
-        {
-            this.delegate.shuffleThis(rnd);
-            return this;
-        }
-    }
-
-    @Override
-    public MutableStack<T> toStack()
-    {
-        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
-        {
-            return this.delegate.toStack();
-        }
-    }
-
-    @Override
-    public RichIterable<RichIterable<T>> chunk(int size)
-    {
-        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
-        {
-            return this.delegate.chunk(size);
-        }
-    }
-
-    @Override
-    public MutableList<T> take(int count)
-    {
-        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
-        {
-            return this.delegate.take(count);
-        }
-    }
-
-    @Override
-    public MutableList<T> takeWhile(Predicate<? super T> predicate)
-    {
-        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
-        {
-            return this.delegate.takeWhile(predicate);
-        }
-    }
-
-    @Override
-    public MutableList<T> drop(int count)
-    {
-        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
-        {
-            return this.delegate.drop(count);
-        }
-    }
-
-    @Override
-    public MutableList<T> dropWhile(Predicate<? super T> predicate)
-    {
-        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
-        {
-            return this.delegate.dropWhile(predicate);
-        }
-    }
-
-    @Override
-    public PartitionMutableList<T> partitionWhile(Predicate<? super T> predicate)
-    {
-        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
-        {
-            return this.delegate.partitionWhile(predicate);
-        }
-    }
-
-    @Override
-    public LazyIterable<T> asReversed()
-    {
-        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
-        {
-            return ReverseIterable.adapt(this);
-        }
-    }
-
-    @Override
-    public ParallelListIterable<T> asParallel(ExecutorService executorService, int batchSize)
-    {
-        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
-        {
-            return new MultiReaderParallelListIterable<>(
-                    this.delegate.asParallel(executorService, batchSize), this.lock);
         }
     }
 }

@@ -84,75 +84,6 @@ public final class ImmutableBagMultimapImpl<K, V>
         return new ImmutableBagMultimapSerializationProxy<>(this.map);
     }
 
-    private static class ImmutableBagMultimapSerializationProxy<K, V>
-            implements Externalizable
-    {
-        private static final long serialVersionUID = 1L;
-
-        private ImmutableMap<K, ImmutableBag<V>> map;
-        private MutableMultimap<K, V> multimap;
-
-        @SuppressWarnings("UnusedDeclaration")
-        public ImmutableBagMultimapSerializationProxy()
-        {
-            // For Externalizable use only
-        }
-
-        private ImmutableBagMultimapSerializationProxy(ImmutableMap<K, ImmutableBag<V>> map)
-        {
-            this.map = map;
-        }
-
-        protected Object readResolve()
-        {
-            return this.multimap.toImmutable();
-        }
-
-        @Override
-        public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
-        {
-            this.multimap = new HashBagMultimap<>();
-            int keyCount = in.readInt();
-            for (int i = 0; i < keyCount; i++)
-            {
-                K key = (K) in.readObject();
-                int valuesSize = in.readInt();
-                MutableBag<V> bag = Bags.mutable.empty();
-                for (int j = 0; j < valuesSize; j++)
-                {
-                    V value = (V) in.readObject();
-                    int count = in.readInt();
-
-                    bag.addOccurrences(value, count);
-                }
-                this.multimap.putAll(key, bag);
-            }
-        }
-
-        @Override
-        public void writeExternal(ObjectOutput out) throws IOException
-        {
-            int keysCount = this.map.size();
-            out.writeInt(keysCount);
-            this.map.forEachKeyValue(new CheckedProcedure2<K, ImmutableBag<V>>()
-            {
-                public void safeValue(K key, ImmutableBag<V> bag) throws IOException
-                {
-                    out.writeObject(key);
-                    out.writeInt(bag.sizeDistinct());
-                    bag.forEachWithOccurrences(new CheckedObjectIntProcedure<V>()
-                    {
-                        public void safeValue(V value, int count) throws IOException
-                        {
-                            out.writeObject(value);
-                            out.writeInt(count);
-                        }
-                    });
-                }
-            });
-        }
-    }
-
     @Override
     public ImmutableBagMultimap<K, V> newWith(K key, V value)
     {
@@ -224,5 +155,74 @@ public final class ImmutableBagMultimapImpl<K, V>
     public <V2> ImmutableBagMultimap<K, V2> collectValues(Function<? super V, ? extends V2> function)
     {
         return this.collectValues(function, HashBagMultimap.<K, V2>newMultimap()).toImmutable();
+    }
+
+    private static class ImmutableBagMultimapSerializationProxy<K, V>
+            implements Externalizable
+    {
+        private static final long serialVersionUID = 1L;
+
+        private ImmutableMap<K, ImmutableBag<V>> map;
+        private MutableMultimap<K, V> multimap;
+
+        @SuppressWarnings("UnusedDeclaration")
+        public ImmutableBagMultimapSerializationProxy()
+        {
+            // For Externalizable use only
+        }
+
+        private ImmutableBagMultimapSerializationProxy(ImmutableMap<K, ImmutableBag<V>> map)
+        {
+            this.map = map;
+        }
+
+        protected Object readResolve()
+        {
+            return this.multimap.toImmutable();
+        }
+
+        @Override
+        public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
+        {
+            this.multimap = new HashBagMultimap<>();
+            int keyCount = in.readInt();
+            for (int i = 0; i < keyCount; i++)
+            {
+                K key = (K) in.readObject();
+                int valuesSize = in.readInt();
+                MutableBag<V> bag = Bags.mutable.empty();
+                for (int j = 0; j < valuesSize; j++)
+                {
+                    V value = (V) in.readObject();
+                    int count = in.readInt();
+
+                    bag.addOccurrences(value, count);
+                }
+                this.multimap.putAll(key, bag);
+            }
+        }
+
+        @Override
+        public void writeExternal(ObjectOutput out) throws IOException
+        {
+            int keysCount = this.map.size();
+            out.writeInt(keysCount);
+            this.map.forEachKeyValue(new CheckedProcedure2<K, ImmutableBag<V>>()
+            {
+                public void safeValue(K key, ImmutableBag<V> bag) throws IOException
+                {
+                    out.writeObject(key);
+                    out.writeInt(bag.sizeDistinct());
+                    bag.forEachWithOccurrences(new CheckedObjectIntProcedure<V>()
+                    {
+                        public void safeValue(V value, int count) throws IOException
+                        {
+                            out.writeObject(value);
+                            out.writeInt(count);
+                        }
+                    });
+                }
+            });
+        }
     }
 }

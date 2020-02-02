@@ -1578,6 +1578,371 @@ public class ConcurrentHashMapUnsafe<K, V>
         }
     }
 
+    public static <NK, NV> ConcurrentHashMapUnsafe<NK, NV> newMap(Map<NK, NV> map)
+    {
+        ConcurrentHashMapUnsafe<NK, NV> result = new ConcurrentHashMapUnsafe<>(map.size());
+        result.putAll(map);
+        return result;
+    }
+
+    @Override
+    public ConcurrentHashMapUnsafe<K, V> withKeyValue(K key, V value)
+    {
+        return (ConcurrentHashMapUnsafe<K, V>) super.withKeyValue(key, value);
+    }
+
+    @Override
+    public ConcurrentHashMapUnsafe<K, V> withAllKeyValues(Iterable<? extends Pair<? extends K, ? extends V>> keyValues)
+    {
+        return (ConcurrentHashMapUnsafe<K, V>) super.withAllKeyValues(keyValues);
+    }
+
+    @Override
+    public ConcurrentHashMapUnsafe<K, V> withAllKeyValueArguments(Pair<? extends K, ? extends V>... keyValues)
+    {
+        return (ConcurrentHashMapUnsafe<K, V>) super.withAllKeyValueArguments(keyValues);
+    }
+
+    @Override
+    public ConcurrentHashMapUnsafe<K, V> withoutKey(K key)
+    {
+        return (ConcurrentHashMapUnsafe<K, V>) super.withoutKey(key);
+    }
+
+    @Override
+    public ConcurrentHashMapUnsafe<K, V> withoutAllKeys(Iterable<? extends K> keys)
+    {
+        return (ConcurrentHashMapUnsafe<K, V>) super.withoutAllKeys(keys);
+    }
+
+    @Override
+    public MutableMap<K, V> clone()
+    {
+        return ConcurrentHashMapUnsafe.newMap(this);
+    }
+
+    @Override
+    public <K, V> MutableMap<K, V> newEmpty(int capacity)
+    {
+        return ConcurrentHashMapUnsafe.newMap();
+    }
+
+    @Override
+    public boolean notEmpty()
+    {
+        return !this.isEmpty();
+    }
+
+    @Override
+    public void forEachWithIndex(ObjectIntProcedure<? super V> objectIntProcedure)
+    {
+        Iterate.forEachWithIndex(this.values(), objectIntProcedure);
+    }
+
+    @Override
+    public Iterator<V> iterator()
+    {
+        return this.values().iterator();
+    }
+
+    @Override
+    public MutableMap<K, V> newEmpty()
+    {
+        return ConcurrentHashMapUnsafe.newMap();
+    }
+
+    @Override
+    public ConcurrentMutableMap<K, V> tap(Procedure<? super V> procedure)
+    {
+        this.each(procedure);
+        return this;
+    }
+
+    @Override
+    public void forEachValue(Procedure<? super V> procedure)
+    {
+        IterableIterate.forEach(this.values(), procedure);
+    }
+
+    @Override
+    public void forEachKey(Procedure<? super K> procedure)
+    {
+        IterableIterate.forEach(this.keySet(), procedure);
+    }
+
+    @Override
+    public void forEachKeyValue(Procedure2<? super K, ? super V> procedure)
+    {
+        IterableIterate.forEach(this.entrySet(), new MapEntryToProcedure2<>(procedure));
+    }
+
+    @Override
+    public <E> MutableMap<K, V> collectKeysAndValues(
+            Iterable<E> iterable,
+            Function<? super E, ? extends K> keyFunction,
+            Function<? super E, ? extends V> valueFunction)
+    {
+        Iterate.addToMap(iterable, keyFunction, valueFunction, this);
+        return this;
+    }
+
+    @Override
+    public V removeKey(K key)
+    {
+        return this.remove(key);
+    }
+
+    @Override
+    public <P> V getIfAbsentPutWith(K key, Function<? super P, ? extends V> function, P parameter)
+    {
+        int hash = this.hash(key);
+        Object[] currentArray = this.table;
+        V newValue = null;
+        boolean createdValue = false;
+        while (true)
+        {
+            int length = currentArray.length;
+            int index = ConcurrentHashMapUnsafe.indexFor(hash, length);
+            Object o = ConcurrentHashMapUnsafe.arrayAt(currentArray, index);
+            if (o == RESIZED || o == RESIZING)
+            {
+                currentArray = this.helpWithResizeWhileCurrentIndex(currentArray, index);
+            }
+            else
+            {
+                Entry<K, V> e = (Entry<K, V>) o;
+                while (e != null)
+                {
+                    Object candidate = e.getKey();
+                    if (candidate.equals(key))
+                    {
+                        return e.getValue();
+                    }
+                    e = e.getNext();
+                }
+                if (!createdValue)
+                {
+                    createdValue = true;
+                    newValue = function.valueOf(parameter);
+                }
+                Entry<K, V> newEntry = new Entry<>(key, newValue, (Entry<K, V>) o);
+                if (ConcurrentHashMapUnsafe.casArrayAt(currentArray, index, o, newEntry))
+                {
+                    this.incrementSizeAndPossiblyResize(currentArray, length, o);
+                    return newValue;
+                }
+            }
+        }
+    }
+
+    @Override
+    public V getIfAbsent(K key, Function0<? extends V> function)
+    {
+        V result = this.get(key);
+        if (result == null)
+        {
+            return function.value();
+        }
+        return result;
+    }
+
+    @Override
+    public <P> V getIfAbsentWith(
+            K key,
+            Function<? super P, ? extends V> function,
+            P parameter)
+    {
+        V result = this.get(key);
+        if (result == null)
+        {
+            return function.valueOf(parameter);
+        }
+        return result;
+    }
+
+    @Override
+    public <A> A ifPresentApply(K key, Function<? super V, ? extends A> function)
+    {
+        V result = this.get(key);
+        return result == null ? null : function.valueOf(result);
+    }
+
+    @Override
+    public <P> void forEachWith(Procedure2<? super V, ? super P> procedure, P parameter)
+    {
+        Iterate.forEachWith(this.values(), procedure, parameter);
+    }
+
+    private static Unsafe getUnsafe()
+    {
+        try
+        {
+            return Unsafe.getUnsafe();
+        }
+        catch (SecurityException ignored)
+        {
+            try
+            {
+                return AccessController.doPrivileged(new PrivilegedExceptionAction<Unsafe>()
+                {
+                    public Unsafe run() throws Exception
+                    {
+                        Field f = Unsafe.class.getDeclaredField("theUnsafe");
+                        f.setAccessible(true);
+                        return (Unsafe) f.get(null);
+                    }
+                });
+            }
+            catch (PrivilegedActionException e)
+            {
+                throw new RuntimeException("Could not initialize intrinsics", e.getCause());
+            }
+        }
+    }
+
+    @Override
+    public V updateValue(K key, Function0<? extends V> factory, Function<? super V, ? extends V> function)
+    {
+        int hash = this.hash(key);
+        Object[] currentArray = this.table;
+        int length = currentArray.length;
+        int index = ConcurrentHashMapUnsafe.indexFor(hash, length);
+        Object o = ConcurrentHashMapUnsafe.arrayAt(currentArray, index);
+        if (o == null)
+        {
+            V result = function.valueOf(factory.value());
+            Entry<K, V> newEntry = new Entry<>(key, result, null);
+            if (ConcurrentHashMapUnsafe.casArrayAt(currentArray, index, null, newEntry))
+            {
+                this.addToSize(1);
+                return result;
+            }
+        }
+        return this.slowUpdateValue(key, factory, function, hash, currentArray);
+    }
+
+    private V slowUpdateValue(K key, Function0<? extends V> factory, Function<? super V, ? extends V> function, int hash, Object[] currentArray)
+    {
+        //noinspection LabeledStatement
+        outer:
+        while (true)
+        {
+            int length = currentArray.length;
+            int index = ConcurrentHashMapUnsafe.indexFor(hash, length);
+            Object o = ConcurrentHashMapUnsafe.arrayAt(currentArray, index);
+            if (o == RESIZED || o == RESIZING)
+            {
+                currentArray = this.helpWithResizeWhileCurrentIndex(currentArray, index);
+            }
+            else
+            {
+                Entry<K, V> e = (Entry<K, V>) o;
+                while (e != null)
+                {
+                    Object candidate = e.getKey();
+                    if (candidate.equals(key))
+                    {
+                        V oldValue = e.getValue();
+                        V newValue = function.valueOf(oldValue);
+                        Entry<K, V> newEntry = new Entry<>(e.getKey(), newValue, this.createReplacementChainForRemoval((Entry<K, V>) o, e));
+                        if (!ConcurrentHashMapUnsafe.casArrayAt(currentArray, index, o, newEntry))
+                        {
+                            //noinspection ContinueStatementWithLabel
+                            continue outer;
+                        }
+
+                        return newValue;
+                    }
+                    e = e.getNext();
+                }
+                V result = function.valueOf(factory.value());
+                Entry<K, V> newEntry = new Entry<>(key, result, (Entry<K, V>) o);
+                if (ConcurrentHashMapUnsafe.casArrayAt(currentArray, index, o, newEntry))
+                {
+                    this.incrementSizeAndPossiblyResize(currentArray, length, o);
+                    return result;
+                }
+            }
+        }
+    }
+
+    @Override
+    public <P> V updateValueWith(K key, Function0<? extends V> factory, Function2<? super V, ? super P, ? extends V> function, P parameter)
+    {
+        int hash = this.hash(key);
+        Object[] currentArray = this.table;
+        int length = currentArray.length;
+        int index = ConcurrentHashMapUnsafe.indexFor(hash, length);
+        Object o = ConcurrentHashMapUnsafe.arrayAt(currentArray, index);
+        if (o == null)
+        {
+            V result = function.value(factory.value(), parameter);
+            Entry<K, V> newEntry = new Entry<>(key, result, null);
+            if (ConcurrentHashMapUnsafe.casArrayAt(currentArray, index, null, newEntry))
+            {
+                this.addToSize(1);
+                return result;
+            }
+        }
+        return this.slowUpdateValueWith(key, factory, function, parameter, hash, currentArray);
+    }
+
+    private <P> V slowUpdateValueWith(
+            K key,
+            Function0<? extends V> factory,
+            Function2<? super V, ? super P, ? extends V> function,
+            P parameter,
+            int hash,
+            Object[] currentArray)
+    {
+        //noinspection LabeledStatement
+        outer:
+        while (true)
+        {
+            int length = currentArray.length;
+            int index = ConcurrentHashMapUnsafe.indexFor(hash, length);
+            Object o = ConcurrentHashMapUnsafe.arrayAt(currentArray, index);
+            if (o == RESIZED || o == RESIZING)
+            {
+                currentArray = this.helpWithResizeWhileCurrentIndex(currentArray, index);
+            }
+            else
+            {
+                Entry<K, V> e = (Entry<K, V>) o;
+                while (e != null)
+                {
+                    Object candidate = e.getKey();
+                    if (candidate.equals(key))
+                    {
+                        V oldValue = e.getValue();
+                        V newValue = function.value(oldValue, parameter);
+                        Entry<K, V> newEntry = new Entry<>(e.getKey(), newValue, this.createReplacementChainForRemoval((Entry<K, V>) o, e));
+                        if (!ConcurrentHashMapUnsafe.casArrayAt(currentArray, index, o, newEntry))
+                        {
+                            //noinspection ContinueStatementWithLabel
+                            continue outer;
+                        }
+                        return newValue;
+                    }
+                    e = e.getNext();
+                }
+                V result = function.value(factory.value(), parameter);
+                Entry<K, V> newEntry = new Entry<>(key, result, (Entry<K, V>) o);
+                if (ConcurrentHashMapUnsafe.casArrayAt(currentArray, index, o, newEntry))
+                {
+                    this.incrementSizeAndPossiblyResize(currentArray, length, o);
+                    return result;
+                }
+            }
+        }
+    }
+
+    @Override
+    public ImmutableMap<K, V> toImmutable()
+    {
+        return Maps.immutable.ofMap(this);
+    }
+
     private static final class IteratorState
     {
         private Object[] currentTable;
@@ -2097,370 +2462,5 @@ public class ConcurrentHashMapUnsafe<K, V>
         {
             this.queuePosition.set(0);
         }
-    }
-
-    public static <NK, NV> ConcurrentHashMapUnsafe<NK, NV> newMap(Map<NK, NV> map)
-    {
-        ConcurrentHashMapUnsafe<NK, NV> result = new ConcurrentHashMapUnsafe<>(map.size());
-        result.putAll(map);
-        return result;
-    }
-
-    @Override
-    public ConcurrentHashMapUnsafe<K, V> withKeyValue(K key, V value)
-    {
-        return (ConcurrentHashMapUnsafe<K, V>) super.withKeyValue(key, value);
-    }
-
-    @Override
-    public ConcurrentHashMapUnsafe<K, V> withAllKeyValues(Iterable<? extends Pair<? extends K, ? extends V>> keyValues)
-    {
-        return (ConcurrentHashMapUnsafe<K, V>) super.withAllKeyValues(keyValues);
-    }
-
-    @Override
-    public ConcurrentHashMapUnsafe<K, V> withAllKeyValueArguments(Pair<? extends K, ? extends V>... keyValues)
-    {
-        return (ConcurrentHashMapUnsafe<K, V>) super.withAllKeyValueArguments(keyValues);
-    }
-
-    @Override
-    public ConcurrentHashMapUnsafe<K, V> withoutKey(K key)
-    {
-        return (ConcurrentHashMapUnsafe<K, V>) super.withoutKey(key);
-    }
-
-    @Override
-    public ConcurrentHashMapUnsafe<K, V> withoutAllKeys(Iterable<? extends K> keys)
-    {
-        return (ConcurrentHashMapUnsafe<K, V>) super.withoutAllKeys(keys);
-    }
-
-    @Override
-    public MutableMap<K, V> clone()
-    {
-        return ConcurrentHashMapUnsafe.newMap(this);
-    }
-
-    @Override
-    public <K, V> MutableMap<K, V> newEmpty(int capacity)
-    {
-        return ConcurrentHashMapUnsafe.newMap();
-    }
-
-    @Override
-    public boolean notEmpty()
-    {
-        return !this.isEmpty();
-    }
-
-    @Override
-    public void forEachWithIndex(ObjectIntProcedure<? super V> objectIntProcedure)
-    {
-        Iterate.forEachWithIndex(this.values(), objectIntProcedure);
-    }
-
-    @Override
-    public Iterator<V> iterator()
-    {
-        return this.values().iterator();
-    }
-
-    @Override
-    public MutableMap<K, V> newEmpty()
-    {
-        return ConcurrentHashMapUnsafe.newMap();
-    }
-
-    @Override
-    public ConcurrentMutableMap<K, V> tap(Procedure<? super V> procedure)
-    {
-        this.each(procedure);
-        return this;
-    }
-
-    @Override
-    public void forEachValue(Procedure<? super V> procedure)
-    {
-        IterableIterate.forEach(this.values(), procedure);
-    }
-
-    @Override
-    public void forEachKey(Procedure<? super K> procedure)
-    {
-        IterableIterate.forEach(this.keySet(), procedure);
-    }
-
-    @Override
-    public void forEachKeyValue(Procedure2<? super K, ? super V> procedure)
-    {
-        IterableIterate.forEach(this.entrySet(), new MapEntryToProcedure2<>(procedure));
-    }
-
-    @Override
-    public <E> MutableMap<K, V> collectKeysAndValues(
-            Iterable<E> iterable,
-            Function<? super E, ? extends K> keyFunction,
-            Function<? super E, ? extends V> valueFunction)
-    {
-        Iterate.addToMap(iterable, keyFunction, valueFunction, this);
-        return this;
-    }
-
-    @Override
-    public V removeKey(K key)
-    {
-        return this.remove(key);
-    }
-
-    @Override
-    public <P> V getIfAbsentPutWith(K key, Function<? super P, ? extends V> function, P parameter)
-    {
-        int hash = this.hash(key);
-        Object[] currentArray = this.table;
-        V newValue = null;
-        boolean createdValue = false;
-        while (true)
-        {
-            int length = currentArray.length;
-            int index = ConcurrentHashMapUnsafe.indexFor(hash, length);
-            Object o = ConcurrentHashMapUnsafe.arrayAt(currentArray, index);
-            if (o == RESIZED || o == RESIZING)
-            {
-                currentArray = this.helpWithResizeWhileCurrentIndex(currentArray, index);
-            }
-            else
-            {
-                Entry<K, V> e = (Entry<K, V>) o;
-                while (e != null)
-                {
-                    Object candidate = e.getKey();
-                    if (candidate.equals(key))
-                    {
-                        return e.getValue();
-                    }
-                    e = e.getNext();
-                }
-                if (!createdValue)
-                {
-                    createdValue = true;
-                    newValue = function.valueOf(parameter);
-                }
-                Entry<K, V> newEntry = new Entry<>(key, newValue, (Entry<K, V>) o);
-                if (ConcurrentHashMapUnsafe.casArrayAt(currentArray, index, o, newEntry))
-                {
-                    this.incrementSizeAndPossiblyResize(currentArray, length, o);
-                    return newValue;
-                }
-            }
-        }
-    }
-
-    @Override
-    public V getIfAbsent(K key, Function0<? extends V> function)
-    {
-        V result = this.get(key);
-        if (result == null)
-        {
-            return function.value();
-        }
-        return result;
-    }
-
-    @Override
-    public <P> V getIfAbsentWith(
-            K key,
-            Function<? super P, ? extends V> function,
-            P parameter)
-    {
-        V result = this.get(key);
-        if (result == null)
-        {
-            return function.valueOf(parameter);
-        }
-        return result;
-    }
-
-    @Override
-    public <A> A ifPresentApply(K key, Function<? super V, ? extends A> function)
-    {
-        V result = this.get(key);
-        return result == null ? null : function.valueOf(result);
-    }
-
-    @Override
-    public <P> void forEachWith(Procedure2<? super V, ? super P> procedure, P parameter)
-    {
-        Iterate.forEachWith(this.values(), procedure, parameter);
-    }
-
-    private static Unsafe getUnsafe()
-    {
-        try
-        {
-            return Unsafe.getUnsafe();
-        }
-        catch (SecurityException ignored)
-        {
-            try
-            {
-                return AccessController.doPrivileged(new PrivilegedExceptionAction<Unsafe>()
-                {
-                    public Unsafe run() throws Exception
-                    {
-                        Field f = Unsafe.class.getDeclaredField("theUnsafe");
-                        f.setAccessible(true);
-                        return (Unsafe) f.get(null);
-                    }
-                });
-            }
-            catch (PrivilegedActionException e)
-            {
-                throw new RuntimeException("Could not initialize intrinsics", e.getCause());
-            }
-        }
-    }
-
-    @Override
-    public V updateValue(K key, Function0<? extends V> factory, Function<? super V, ? extends V> function)
-    {
-        int hash = this.hash(key);
-        Object[] currentArray = this.table;
-        int length = currentArray.length;
-        int index = ConcurrentHashMapUnsafe.indexFor(hash, length);
-        Object o = ConcurrentHashMapUnsafe.arrayAt(currentArray, index);
-        if (o == null)
-        {
-            V result = function.valueOf(factory.value());
-            Entry<K, V> newEntry = new Entry<>(key, result, null);
-            if (ConcurrentHashMapUnsafe.casArrayAt(currentArray, index, null, newEntry))
-            {
-                this.addToSize(1);
-                return result;
-            }
-        }
-        return this.slowUpdateValue(key, factory, function, hash, currentArray);
-    }
-
-    private V slowUpdateValue(K key, Function0<? extends V> factory, Function<? super V, ? extends V> function, int hash, Object[] currentArray)
-    {
-        //noinspection LabeledStatement
-        outer:
-        while (true)
-        {
-            int length = currentArray.length;
-            int index = ConcurrentHashMapUnsafe.indexFor(hash, length);
-            Object o = ConcurrentHashMapUnsafe.arrayAt(currentArray, index);
-            if (o == RESIZED || o == RESIZING)
-            {
-                currentArray = this.helpWithResizeWhileCurrentIndex(currentArray, index);
-            }
-            else
-            {
-                Entry<K, V> e = (Entry<K, V>) o;
-                while (e != null)
-                {
-                    Object candidate = e.getKey();
-                    if (candidate.equals(key))
-                    {
-                        V oldValue = e.getValue();
-                        V newValue = function.valueOf(oldValue);
-                        Entry<K, V> newEntry = new Entry<>(e.getKey(), newValue, this.createReplacementChainForRemoval((Entry<K, V>) o, e));
-                        if (!ConcurrentHashMapUnsafe.casArrayAt(currentArray, index, o, newEntry))
-                        {
-                            //noinspection ContinueStatementWithLabel
-                            continue outer;
-                        }
-
-                        return newValue;
-                    }
-                    e = e.getNext();
-                }
-                V result = function.valueOf(factory.value());
-                Entry<K, V> newEntry = new Entry<>(key, result, (Entry<K, V>) o);
-                if (ConcurrentHashMapUnsafe.casArrayAt(currentArray, index, o, newEntry))
-                {
-                    this.incrementSizeAndPossiblyResize(currentArray, length, o);
-                    return result;
-                }
-            }
-        }
-    }
-
-    @Override
-    public <P> V updateValueWith(K key, Function0<? extends V> factory, Function2<? super V, ? super P, ? extends V> function, P parameter)
-    {
-        int hash = this.hash(key);
-        Object[] currentArray = this.table;
-        int length = currentArray.length;
-        int index = ConcurrentHashMapUnsafe.indexFor(hash, length);
-        Object o = ConcurrentHashMapUnsafe.arrayAt(currentArray, index);
-        if (o == null)
-        {
-            V result = function.value(factory.value(), parameter);
-            Entry<K, V> newEntry = new Entry<>(key, result, null);
-            if (ConcurrentHashMapUnsafe.casArrayAt(currentArray, index, null, newEntry))
-            {
-                this.addToSize(1);
-                return result;
-            }
-        }
-        return this.slowUpdateValueWith(key, factory, function, parameter, hash, currentArray);
-    }
-
-    private <P> V slowUpdateValueWith(
-            K key,
-            Function0<? extends V> factory,
-            Function2<? super V, ? super P, ? extends V> function,
-            P parameter,
-            int hash,
-            Object[] currentArray)
-    {
-        //noinspection LabeledStatement
-        outer:
-        while (true)
-        {
-            int length = currentArray.length;
-            int index = ConcurrentHashMapUnsafe.indexFor(hash, length);
-            Object o = ConcurrentHashMapUnsafe.arrayAt(currentArray, index);
-            if (o == RESIZED || o == RESIZING)
-            {
-                currentArray = this.helpWithResizeWhileCurrentIndex(currentArray, index);
-            }
-            else
-            {
-                Entry<K, V> e = (Entry<K, V>) o;
-                while (e != null)
-                {
-                    Object candidate = e.getKey();
-                    if (candidate.equals(key))
-                    {
-                        V oldValue = e.getValue();
-                        V newValue = function.value(oldValue, parameter);
-                        Entry<K, V> newEntry = new Entry<>(e.getKey(), newValue, this.createReplacementChainForRemoval((Entry<K, V>) o, e));
-                        if (!ConcurrentHashMapUnsafe.casArrayAt(currentArray, index, o, newEntry))
-                        {
-                            //noinspection ContinueStatementWithLabel
-                            continue outer;
-                        }
-                        return newValue;
-                    }
-                    e = e.getNext();
-                }
-                V result = function.value(factory.value(), parameter);
-                Entry<K, V> newEntry = new Entry<>(key, result, (Entry<K, V>) o);
-                if (ConcurrentHashMapUnsafe.casArrayAt(currentArray, index, o, newEntry))
-                {
-                    this.incrementSizeAndPossiblyResize(currentArray, length, o);
-                    return result;
-                }
-            }
-        }
-    }
-
-    @Override
-    public ImmutableMap<K, V> toImmutable()
-    {
-        return Maps.immutable.ofMap(this);
     }
 }

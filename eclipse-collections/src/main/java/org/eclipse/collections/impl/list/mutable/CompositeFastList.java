@@ -624,6 +624,61 @@ public final class CompositeFastList<E>
         this.lists.add(list);
     }
 
+    @Override
+    public ParallelListIterable<E> asParallel(ExecutorService executorService, int batchSize)
+    {
+        return new NonParallelListIterable<>(this);
+    }
+
+    private static final class ProcedureToInnerListObjectIntProcedure<E> implements Procedure<FastList<E>>
+    {
+        private static final long serialVersionUID = 1L;
+        private final ObjectIntProcedure<? super E> objectIntProcedure;
+        private int index;
+
+        private ProcedureToInnerListObjectIntProcedure(ObjectIntProcedure<? super E> objectIntProcedure)
+        {
+            this.objectIntProcedure = objectIntProcedure;
+        }
+
+        @Override
+        public void value(FastList<E> list)
+        {
+            list.each(object ->
+            {
+                this.objectIntProcedure.value(
+                        object,
+                        this.index);
+                this.index++;
+            });
+        }
+    }
+
+    private static final class ProcedureToReverseInnerListObjectIntProcedure<E> implements Procedure<FastList<E>>
+    {
+        private static final long serialVersionUID = 1L;
+        private final ObjectIntProcedure<? super E> objectIntProcedure;
+        private int index;
+
+        private ProcedureToReverseInnerListObjectIntProcedure(ObjectIntProcedure<? super E> objectIntProcedure, int size)
+        {
+            this.objectIntProcedure = objectIntProcedure;
+            this.index = size;
+        }
+
+        @Override
+        public void value(FastList<E> list)
+        {
+            list.reverseForEach(object ->
+            {
+                this.objectIntProcedure.value(
+                        object,
+                        this.index);
+                this.index--;
+            });
+        }
+    }
+
     private final class CompositeIterator
             implements Iterator<E>
     {
@@ -678,62 +733,5 @@ public final class CompositeFastList<E>
             CompositeFastList.this.size--;
             this.currentIterator.remove();
         }
-    }
-
-    private static final class ProcedureToInnerListObjectIntProcedure<E> implements Procedure<FastList<E>>
-    {
-        private static final long serialVersionUID = 1L;
-
-        private int index;
-        private final ObjectIntProcedure<? super E> objectIntProcedure;
-
-        private ProcedureToInnerListObjectIntProcedure(ObjectIntProcedure<? super E> objectIntProcedure)
-        {
-            this.objectIntProcedure = objectIntProcedure;
-        }
-
-        @Override
-        public void value(FastList<E> list)
-        {
-            list.each(object ->
-            {
-                this.objectIntProcedure.value(
-                        object,
-                        this.index);
-                this.index++;
-            });
-        }
-    }
-
-    private static final class ProcedureToReverseInnerListObjectIntProcedure<E> implements Procedure<FastList<E>>
-    {
-        private static final long serialVersionUID = 1L;
-
-        private int index;
-        private final ObjectIntProcedure<? super E> objectIntProcedure;
-
-        private ProcedureToReverseInnerListObjectIntProcedure(ObjectIntProcedure<? super E> objectIntProcedure, int size)
-        {
-            this.objectIntProcedure = objectIntProcedure;
-            this.index = size;
-        }
-
-        @Override
-        public void value(FastList<E> list)
-        {
-            list.reverseForEach(object ->
-            {
-                this.objectIntProcedure.value(
-                        object,
-                        this.index);
-                this.index--;
-            });
-        }
-    }
-
-    @Override
-    public ParallelListIterable<E> asParallel(ExecutorService executorService, int batchSize)
-    {
-        return new NonParallelListIterable<>(this);
     }
 }

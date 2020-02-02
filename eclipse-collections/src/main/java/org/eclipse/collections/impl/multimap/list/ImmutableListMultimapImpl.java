@@ -83,29 +83,6 @@ public final class ImmutableListMultimapImpl<K, V>
         return new ImmutableListMultimapSerializationProxy<>(this.map);
     }
 
-    public static class ImmutableListMultimapSerializationProxy<K, V>
-            extends ImmutableMultimapSerializationProxy<K, V, ImmutableList<V>> implements Externalizable
-    {
-        private static final long serialVersionUID = 1L;
-
-        @SuppressWarnings("UnusedDeclaration")
-        public ImmutableListMultimapSerializationProxy()
-        {
-            // For Externalizable use only
-        }
-
-        public ImmutableListMultimapSerializationProxy(ImmutableMap<K, ImmutableList<V>> map)
-        {
-            super(map);
-        }
-
-        @Override
-        protected AbstractMutableMultimap<K, V, MutableList<V>> createEmptyMutableMultimap()
-        {
-            return new FastListMultimap<>();
-        }
-    }
-
     @Override
     public ImmutableListMultimap<K, V> newWith(K key, V value)
     {
@@ -177,5 +154,28 @@ public final class ImmutableListMultimapImpl<K, V>
     public <V2> ImmutableListMultimap<K, V2> collectValues(Function<? super V, ? extends V2> function)
     {
         return this.collectValues(function, FastListMultimap.<K, V2>newMultimap()).toImmutable();
+    }
+
+    public static class ImmutableListMultimapSerializationProxy<K, V>
+            extends ImmutableMultimapSerializationProxy<K, V, ImmutableList<V>> implements Externalizable
+    {
+        private static final long serialVersionUID = 1L;
+
+        @SuppressWarnings("UnusedDeclaration")
+        public ImmutableListMultimapSerializationProxy()
+        {
+            // For Externalizable use only
+        }
+
+        public ImmutableListMultimapSerializationProxy(ImmutableMap<K, ImmutableList<V>> map)
+        {
+            super(map);
+        }
+
+        @Override
+        protected AbstractMutableMultimap<K, V, MutableList<V>> createEmptyMutableMultimap()
+        {
+            return new FastListMultimap<>();
+        }
     }
 }

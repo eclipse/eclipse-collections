@@ -2100,6 +2100,47 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
         return this.shortCircuitWith(predicate, parameter, true, false, true);
     }
 
+    private static boolean nullSafeEquals(Object value, Object other)
+    {
+        if (value == null)
+        {
+            if (other == null)
+            {
+                return true;
+            }
+        }
+        else if (other == value || value.equals(other))
+        {
+            return true;
+        }
+        return false;
+    }
+
+    private K nonSentinel(Object key)
+    {
+        return key == NULL_KEY ? null : (K) key;
+    }
+
+    private static Object toSentinelIfNull(Object key)
+    {
+        if (key == null)
+        {
+            return NULL_KEY;
+        }
+        return key;
+    }
+
+    private boolean nonNullTableObjectEquals(Object cur, K key)
+    {
+        return cur == key || (cur == NULL_KEY ? key == null : cur.equals(key));
+    }
+
+    @Override
+    public ImmutableMap<K, V> toImmutable()
+    {
+        return Maps.immutable.withAll(this);
+    }
+
     protected class KeySet implements Set<K>, Serializable, BatchIterable<K>
     {
         private static final long serialVersionUID = 1L;
@@ -2531,22 +2572,6 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
             this.lastReturned = true;
             return UnifiedMap.this.nonSentinel(cur);
         }
-    }
-
-    private static boolean nullSafeEquals(Object value, Object other)
-    {
-        if (value == null)
-        {
-            if (other == null)
-            {
-                return true;
-            }
-        }
-        else if (other == value || value.equals(other))
-        {
-            return true;
-        }
-        return false;
     }
 
     protected class EntrySet implements Set<Entry<K, V>>, Serializable, BatchIterable<Entry<K, V>>
@@ -3278,30 +3303,5 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
             this.lastReturned = true;
             return (V) val;
         }
-    }
-
-    private K nonSentinel(Object key)
-    {
-        return key == NULL_KEY ? null : (K) key;
-    }
-
-    private static Object toSentinelIfNull(Object key)
-    {
-        if (key == null)
-        {
-            return NULL_KEY;
-        }
-        return key;
-    }
-
-    private boolean nonNullTableObjectEquals(Object cur, K key)
-    {
-        return cur == key || (cur == NULL_KEY ? key == null : cur.equals(key));
-    }
-
-    @Override
-    public ImmutableMap<K, V> toImmutable()
-    {
-        return Maps.immutable.withAll(this);
     }
 }

@@ -83,29 +83,6 @@ public final class ImmutableSetMultimapImpl<K, V>
         return new ImmutableSetMultimapSerializationProxy<>(this.map);
     }
 
-    private static final class ImmutableSetMultimapSerializationProxy<K, V>
-            extends ImmutableMultimapSerializationProxy<K, V, ImmutableSet<V>> implements Externalizable
-    {
-        private static final long serialVersionUID = 1L;
-
-        @SuppressWarnings("UnusedDeclaration")
-        public ImmutableSetMultimapSerializationProxy()
-        {
-            // For Externalizable use only
-        }
-
-        private ImmutableSetMultimapSerializationProxy(ImmutableMap<K, ImmutableSet<V>> map)
-        {
-            super(map);
-        }
-
-        @Override
-        protected AbstractMutableMultimap<K, V, MutableSet<V>> createEmptyMutableMultimap()
-        {
-            return new UnifiedSetMultimap<>();
-        }
-    }
-
     @Override
     public ImmutableSetMultimap<K, V> newWith(K key, V value)
     {
@@ -177,5 +154,28 @@ public final class ImmutableSetMultimapImpl<K, V>
     public <V2> ImmutableBagMultimap<K, V2> collectValues(Function<? super V, ? extends V2> function)
     {
         return this.collectValues(function, HashBagMultimap.<K, V2>newMultimap()).toImmutable();
+    }
+
+    private static final class ImmutableSetMultimapSerializationProxy<K, V>
+            extends ImmutableMultimapSerializationProxy<K, V, ImmutableSet<V>> implements Externalizable
+    {
+        private static final long serialVersionUID = 1L;
+
+        @SuppressWarnings("UnusedDeclaration")
+        public ImmutableSetMultimapSerializationProxy()
+        {
+            // For Externalizable use only
+        }
+
+        private ImmutableSetMultimapSerializationProxy(ImmutableMap<K, ImmutableSet<V>> map)
+        {
+            super(map);
+        }
+
+        @Override
+        protected AbstractMutableMultimap<K, V, MutableSet<V>> createEmptyMutableMultimap()
+        {
+            return new UnifiedSetMultimap<>();
+        }
     }
 }

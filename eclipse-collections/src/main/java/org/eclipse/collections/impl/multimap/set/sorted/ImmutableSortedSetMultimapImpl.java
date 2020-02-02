@@ -111,45 +111,6 @@ public final class ImmutableSortedSetMultimapImpl<K, V>
         return new ImmutableSortedSetMultimapSerializationProxy<>(this.map, this.comparator());
     }
 
-    private static final class ImmutableSortedSetMultimapSerializationProxy<K, V>
-            extends ImmutableMultimapSerializationProxy<K, V, ImmutableSortedSet<V>> implements Externalizable
-    {
-        private static final long serialVersionUID = 1L;
-        private Comparator<? super V> comparator;
-
-        @SuppressWarnings("UnusedDeclaration")
-        public ImmutableSortedSetMultimapSerializationProxy()
-        {
-            // For Externalizable use only
-        }
-
-        private ImmutableSortedSetMultimapSerializationProxy(ImmutableMap<K, ImmutableSortedSet<V>> map, Comparator<? super V> comparator)
-        {
-            super(map);
-            this.comparator = comparator;
-        }
-
-        @Override
-        public void writeExternal(ObjectOutput out) throws IOException
-        {
-            out.writeObject(this.comparator);
-            super.writeExternal(out);
-        }
-
-        @Override
-        public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
-        {
-            this.comparator = (Comparator<? super V>) in.readObject();
-            super.readExternal(in);
-        }
-
-        @Override
-        protected AbstractMutableMultimap<K, V, MutableSortedSet<V>> createEmptyMutableMultimap()
-        {
-            return new TreeSortedSetMultimap<>(this.comparator);
-        }
-    }
-
     @Override
     public ImmutableSortedSetMultimap<K, V> newWith(K key, V value)
     {
@@ -221,5 +182,44 @@ public final class ImmutableSortedSetMultimapImpl<K, V>
     public <V2> ImmutableListMultimap<K, V2> collectValues(Function<? super V, ? extends V2> function)
     {
         return this.collectValues(function, FastListMultimap.<K, V2>newMultimap()).toImmutable();
+    }
+
+    private static final class ImmutableSortedSetMultimapSerializationProxy<K, V>
+            extends ImmutableMultimapSerializationProxy<K, V, ImmutableSortedSet<V>> implements Externalizable
+    {
+        private static final long serialVersionUID = 1L;
+        private Comparator<? super V> comparator;
+
+        @SuppressWarnings("UnusedDeclaration")
+        public ImmutableSortedSetMultimapSerializationProxy()
+        {
+            // For Externalizable use only
+        }
+
+        private ImmutableSortedSetMultimapSerializationProxy(ImmutableMap<K, ImmutableSortedSet<V>> map, Comparator<? super V> comparator)
+        {
+            super(map);
+            this.comparator = comparator;
+        }
+
+        @Override
+        public void writeExternal(ObjectOutput out) throws IOException
+        {
+            out.writeObject(this.comparator);
+            super.writeExternal(out);
+        }
+
+        @Override
+        public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
+        {
+            this.comparator = (Comparator<? super V>) in.readObject();
+            super.readExternal(in);
+        }
+
+        @Override
+        protected AbstractMutableMultimap<K, V, MutableSortedSet<V>> createEmptyMutableMultimap()
+        {
+            return new TreeSortedSetMultimap<>(this.comparator);
+        }
     }
 }

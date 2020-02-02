@@ -233,24 +233,6 @@ public abstract class AbstractMultimap<K, V, C extends RichIterable<V>>
         return target;
     }
 
-    private static final class KeyValuePairFunction<V, K> implements Function<V, Pair<K, V>>
-    {
-        private static final long serialVersionUID = 1L;
-
-        private final K key;
-
-        private KeyValuePairFunction(K key)
-        {
-            this.key = key;
-        }
-
-        @Override
-        public Pair<K, V> valueOf(V value)
-        {
-            return Tuples.pair(this.key, value);
-        }
-    }
-
     @Override
     public <K2, V2, R extends MutableMultimap<K2, V2>> R collectKeysValues(Function2<? super K, ? super V, Pair<K2, V2>> function, R target)
     {
@@ -273,5 +255,23 @@ public abstract class AbstractMultimap<K, V, C extends RichIterable<V>>
     {
         this.getMap().forEachKeyValue((key, collection) -> target.putAll(key, collection.collect(function)));
         return target;
+    }
+
+    private static final class KeyValuePairFunction<V, K> implements Function<V, Pair<K, V>>
+    {
+        private static final long serialVersionUID = 1L;
+
+        private final K key;
+
+        private KeyValuePairFunction(K key)
+        {
+            this.key = key;
+        }
+
+        @Override
+        public Pair<K, V> valueOf(V value)
+        {
+            return Tuples.pair(this.key, value);
+        }
     }
 }
