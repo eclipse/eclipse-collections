@@ -176,7 +176,7 @@
     <repositories>
         <repository>
             <id>eclipse.license</id>
-            <url>http://download.eclipse.org/cbi/updates/license/</url>
+            <url>https://download.eclipse.org/cbi/updates/license/</url>
             <layout>p2</layout>
         </repository>
         <repository>
