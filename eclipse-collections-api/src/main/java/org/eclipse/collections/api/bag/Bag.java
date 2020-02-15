@@ -310,4 +310,6 @@ public interface Bag<T>
         this.forEachWithOccurrences((each, occurrences) -> target.add(function.valueOf(each, occurrences)));
         return target;
     }
+
+    SetIterable<T> asSet();
 }

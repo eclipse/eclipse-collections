@@ -22,6 +22,7 @@ import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.sorted.MutableSortedMap;
 import org.eclipse.collections.api.partition.bag.sorted.PartitionImmutableSortedBag;
 import org.eclipse.collections.api.partition.bag.sorted.PartitionSortedBag;
+import org.eclipse.collections.api.set.SetIterable;
 import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 import org.eclipse.collections.api.tuple.Pair;
@@ -906,5 +907,16 @@ public class ImmutableEmptySortedBagTest extends AbstractImmutableSortedBagTestC
         ImmutableSortedSet<Integer> actual = bag.selectUnique();
         Assert.assertEquals(expected, actual);
         Assert.assertEquals(expected.comparator(), actual.comparator());
+    }
+
+    @Override
+    @Test
+    public void asSet()
+    {
+        Comparator<Integer> comparator = Collections.reverseOrder();
+        ImmutableSortedSet<Integer> expected = SortedSets.immutable.empty(comparator);
+        ImmutableSortedBag<Integer> bag = this.classUnderTest(comparator);
+        SetIterable<Integer> actual = bag.asSet();
+        Assert.assertEquals(expected, actual);
     }
 }

@@ -257,4 +257,7 @@ public interface ImmutableSortedBag<T>
 
     @Override
     ImmutableSortedBag<T> drop(int count);
+
+    @Override
+    ImmutableSortedSet<T> asSet();
 }

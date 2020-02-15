@@ -51,12 +51,14 @@ import org.eclipse.collections.api.map.sorted.MutableSortedMap;
 import org.eclipse.collections.api.multimap.sortedbag.MutableSortedBagMultimap;
 import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.partition.bag.sorted.PartitionMutableSortedBag;
+import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 import org.eclipse.collections.api.stack.MutableStack;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.api.tuple.primitive.ObjectIntPair;
 import org.eclipse.collections.impl.collection.mutable.AbstractSynchronizedMutableCollection;
 import org.eclipse.collections.impl.collection.mutable.SynchronizedCollectionSerializationProxy;
+import org.eclipse.collections.impl.set.mutable.SynchronizedMutableSet;
 import org.eclipse.collections.impl.stack.mutable.ArrayStack;
 
 /**
@@ -732,6 +734,15 @@ public class SynchronizedSortedBag<T>
         synchronized (this.getLock())
         {
             return this.getDelegate().selectUnique();
+        }
+    }
+
+    @Override
+    public MutableSet<T> asSet()
+    {
+        synchronized (this.getLock())
+        {
+            return SynchronizedMutableSet.of(this.getDelegate().asSet(), this.getLock());
         }
     }
 }

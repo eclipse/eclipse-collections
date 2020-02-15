@@ -51,6 +51,7 @@ import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.api.tuple.primitive.ObjectIntPair;
 import org.eclipse.collections.impl.collection.mutable.AbstractSynchronizedMutableCollection;
 import org.eclipse.collections.impl.collection.mutable.SynchronizedCollectionSerializationProxy;
+import org.eclipse.collections.impl.set.mutable.SynchronizedMutableSet;
 
 /**
  * A synchronized view of a {@link MutableBag}. It is imperative that the user manually synchronize on the collection when iterating over it using the
@@ -441,6 +442,15 @@ public class SynchronizedBag<T>
         synchronized (this.getLock())
         {
             return this.getDelegate().selectUnique();
+        }
+    }
+
+    @Override
+    public MutableSet<T> asSet()
+    {
+        synchronized (this.getLock())
+        {
+            return SynchronizedMutableSet.of(this.getDelegate().asSet(), this.getLock());
         }
     }
 }

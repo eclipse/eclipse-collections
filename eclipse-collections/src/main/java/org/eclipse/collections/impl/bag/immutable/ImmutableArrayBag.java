@@ -482,6 +482,12 @@ public class ImmutableArrayBag<T>
         return new ImmutableBagSerializationProxy<>(this);
     }
 
+    @Override
+    public ImmutableSet<T> asSet()
+    {
+        return new ImmutableSetFromArrayBagAdapter<>(this.keys);
+    }
+
     private final class ArrayBagIterator
             implements Iterator<T>
     {

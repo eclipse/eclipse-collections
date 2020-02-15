@@ -540,4 +540,10 @@ final class ImmutableSingletonBag<T>
     {
         return Sets.immutable.of(this.value);
     }
+
+    @Override
+    public ImmutableSet<T> asSet()
+    {
+        return Sets.immutable.of(this.value);
+    }
 }
