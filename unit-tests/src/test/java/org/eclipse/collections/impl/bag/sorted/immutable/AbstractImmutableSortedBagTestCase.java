@@ -28,6 +28,7 @@ import org.eclipse.collections.api.map.sorted.MutableSortedMap;
 import org.eclipse.collections.api.multimap.sortedbag.ImmutableSortedBagMultimap;
 import org.eclipse.collections.api.partition.bag.sorted.PartitionImmutableSortedBag;
 import org.eclipse.collections.api.partition.bag.sorted.PartitionSortedBag;
+import org.eclipse.collections.api.set.SetIterable;
 import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 import org.eclipse.collections.api.tuple.Pair;
@@ -72,6 +73,7 @@ import org.eclipse.collections.impl.list.mutable.primitive.ShortArrayList;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.map.sorted.mutable.TreeSortedMap;
 import org.eclipse.collections.impl.multimap.bag.sorted.mutable.TreeBagMultimap;
+import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.set.sorted.mutable.TreeSortedSet;
 import org.eclipse.collections.impl.stack.mutable.ArrayStack;
 import org.eclipse.collections.impl.test.Verify;
@@ -1538,5 +1540,14 @@ public abstract class AbstractImmutableSortedBagTestCase extends AbstractImmutab
         {
             return String.valueOf(this.number);
         }
+    }
+
+    @Test
+    public void asSet()
+    {
+        ImmutableSortedBag<Integer> bag = this.newWith(1, 1, 2, 3, 4, 4);
+        SetIterable<Integer> expected = UnifiedSet.newSetWith(1, 2, 3, 4);
+        ImmutableSortedSet<Integer> actual = bag.asSet();
+        Assert.assertEquals(expected, actual);
     }
 }

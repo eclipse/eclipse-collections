@@ -40,6 +40,7 @@ import org.eclipse.collections.api.list.primitive.MutableShortList;
 import org.eclipse.collections.api.map.sorted.MutableSortedMap;
 import org.eclipse.collections.api.multimap.sortedbag.MutableSortedBagMultimap;
 import org.eclipse.collections.api.partition.bag.sorted.PartitionMutableSortedBag;
+import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 import org.eclipse.collections.api.tuple.Pair;
 
@@ -266,4 +267,8 @@ public interface MutableSortedBag<T>
 
     @Override
     MutableSortedBag<T> drop(int count);
+
+    //todo: see MutableSortedMap.keySet as to why asSet() is not returning MutableSortedSet.
+    @Override
+    MutableSet<T> asSet();
 }

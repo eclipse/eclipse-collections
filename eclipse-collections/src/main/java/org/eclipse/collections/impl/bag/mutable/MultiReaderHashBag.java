@@ -70,11 +70,13 @@ import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.multimap.bag.MutableBagMultimap;
 import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.partition.bag.PartitionMutableBag;
+import org.eclipse.collections.api.set.MultiReaderSet;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.api.tuple.primitive.ObjectIntPair;
 import org.eclipse.collections.impl.collection.mutable.AbstractMultiReaderMutableCollection;
 import org.eclipse.collections.impl.factory.Iterables;
+import org.eclipse.collections.impl.set.mutable.MultiReaderSetAdapter;
 import org.eclipse.collections.impl.utility.LazyIterate;
 
 /**
@@ -619,6 +621,21 @@ public final class MultiReaderHashBag<T>
         }
     }
 
+    @Override
+    public MultiReaderSet<T> asSet()
+    {
+        try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
+        {
+            return MultiReaderSetAdapter.adapt(this.getDelegate().asSet(), this.lock);
+        }
+    }
+
+    @Override
+    public RichIterable<T> distinctView()
+    {
+        return this.asSet();
+    }
+
     //Exposed for testing
 
     static final class UntouchableMutableBag<T>
@@ -676,6 +693,18 @@ public final class MultiReaderHashBag<T>
         public MutableBag<T> asUnmodifiable()
         {
             throw new UnsupportedOperationException("cannot wrap an UntouchableMutableBag");
+        }
+
+        @Override
+        public MutableSet<T> asSet()
+        {
+            throw new UnsupportedOperationException("cannot wrap an UntouchableMutableBag");
+        }
+
+        @Override
+        public RichIterable<T> distinctView()
+        {
+            return this.asSet();
         }
 
         @Override

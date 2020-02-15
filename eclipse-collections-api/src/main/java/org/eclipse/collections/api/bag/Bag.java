@@ -340,4 +340,8 @@ public interface Bag<T>
         });
         return target;
     }
+
+    SetIterable<T> asSet();
+
+    RichIterable<T> distinctView();
 }

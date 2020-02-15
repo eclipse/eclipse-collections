@@ -35,8 +35,10 @@ import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.bag.mutable.HashBag;
 import org.eclipse.collections.impl.block.factory.Predicates2;
+import org.eclipse.collections.impl.list.fixed.ArrayAdapter;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.multimap.bag.HashBagMultimap;
+import org.eclipse.collections.impl.set.immutable.ImmutableSetFromBagAdapter;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.utility.ArrayIterate;
 import org.eclipse.collections.impl.utility.Iterate;
@@ -480,6 +482,18 @@ public class ImmutableArrayBag<T>
     protected Object writeReplace()
     {
         return new ImmutableBagSerializationProxy<>(this);
+    }
+
+    @Override
+    public ImmutableSet<T> asSet()
+    {
+        return new ImmutableSetFromBagAdapter<>(this);
+    }
+
+    @Override
+    public RichIterable<T> distinctView()
+    {
+        return ArrayAdapter.adapt(this.keys).asUnmodifiable();
     }
 
     private final class ArrayBagIterator

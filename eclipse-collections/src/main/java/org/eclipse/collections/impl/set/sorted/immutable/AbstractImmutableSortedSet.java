@@ -99,7 +99,7 @@ import org.eclipse.collections.impl.utility.internal.SortedSetIterables;
  * This class is the parent class for all ImmutableSortedSets. All implementations of ImmutableSortedSet must implement the SortedSet
  * interface so an TreeSet.equals(anImmutableSortedSet) can return true when the contents are the same.
  */
-abstract class AbstractImmutableSortedSet<T> extends AbstractImmutableCollection<T>
+public abstract class AbstractImmutableSortedSet<T> extends AbstractImmutableCollection<T>
         implements ImmutableSortedSet<T>, SortedSet<T>
 {
     @Override

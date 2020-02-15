@@ -18,6 +18,7 @@ import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Optional;
 
+import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.Bag;
 import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.api.bag.MutableBag;
@@ -539,5 +540,17 @@ final class ImmutableSingletonBag<T>
     public ImmutableSet<T> selectUnique()
     {
         return Sets.immutable.of(this.value);
+    }
+
+    @Override
+    public ImmutableSet<T> asSet()
+    {
+        return Sets.immutable.of(this.value);
+    }
+
+    @Override
+    public RichIterable<T> distinctView()
+    {
+        return this.asSet();
     }
 }

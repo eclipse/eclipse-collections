@@ -80,4 +80,9 @@ public class MultiReaderHashBagAsWriteUntouchableTest extends AbstractCollection
         MutableSet<String> actual = bag.selectUnique();
         Assert.assertEquals(expected, actual);
     }
+
+    public void asSet()
+    {
+        Verify.assertThrows(UnsupportedOperationException.class, () -> this.newWith().asSet());
+    }
 }

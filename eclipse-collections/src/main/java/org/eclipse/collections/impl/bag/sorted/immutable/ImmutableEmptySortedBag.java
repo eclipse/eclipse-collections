@@ -482,4 +482,16 @@ class ImmutableEmptySortedBag<T>
     {
         return SortedSets.immutable.of(this.comparator());
     }
+
+    @Override
+    public ImmutableSortedSet<T> asSet()
+    {
+        return SortedSets.immutable.of(this.comparator());
+    }
+
+    @Override
+    public RichIterable<T> distinctView()
+    {
+        return this.asSet();
+    }
 }

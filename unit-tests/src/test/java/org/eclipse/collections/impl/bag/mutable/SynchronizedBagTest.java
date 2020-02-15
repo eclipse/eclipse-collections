@@ -21,6 +21,7 @@ import org.eclipse.collections.api.multimap.Multimap;
 import org.eclipse.collections.api.partition.PartitionMutableCollection;
 import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.api.set.MutableSet;
+import org.eclipse.collections.api.set.SetIterable;
 import org.eclipse.collections.api.tuple.primitive.ObjectIntPair;
 import org.eclipse.collections.impl.block.factory.IntegerPredicates;
 import org.eclipse.collections.impl.block.factory.Predicates2;
@@ -29,6 +30,8 @@ import org.eclipse.collections.impl.collection.mutable.AbstractSynchronizedColle
 import org.eclipse.collections.impl.factory.Bags;
 import org.eclipse.collections.impl.factory.Maps;
 import org.eclipse.collections.impl.factory.Sets;
+import org.eclipse.collections.impl.set.mutable.SynchronizedMutableSet;
+import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.test.SerializeTestHelper;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
@@ -301,5 +304,22 @@ public class SynchronizedBagTest extends AbstractSynchronizedCollectionTestCase
         MutableSet<String> expected = Sets.mutable.with("0", "4", "5");
         MutableSet<String> actual = bag.selectUnique();
         Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void asSet()
+    {
+        MutableBag<Integer> bag = this.newWith(1, 1, 2, 3, 4, 4);
+        SetIterable<Integer> expected = UnifiedSet.newSetWith(1, 2, 3, 4);
+        MutableSet<Integer> actual = bag.asSet();
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void asSetSynchronized()
+    {
+        MutableBag<Integer> bag = this.newWith(1, 1, 2, 3, 4, 4);
+        MutableSet<Integer> actual = bag.asSet();
+        Verify.assertInstanceOf(SynchronizedMutableSet.class, actual);
     }
 }

@@ -81,4 +81,7 @@ public interface ImmutableBagIterable<T> extends Bag<T>, ImmutableCollection<T>
 
     @Override
     <V> ImmutableCollection<V> collectWithOccurrences(ObjectIntToObjectFunction<? super T, ? extends V> function);
+
+    @Override
+    ImmutableSetIterable<T> asSet();
 }

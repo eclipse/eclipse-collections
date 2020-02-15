@@ -11,6 +11,7 @@
 package org.eclipse.collections.api.bag;
 
 import org.eclipse.collections.api.block.procedure.Procedure;
+import org.eclipse.collections.api.set.MultiReaderSet;
 
 /**
  * A MultiReaderBag provides thread-safe iteration for a bag through methods {@code withReadLockAndDelegate()} and {@code withWriteLockAndDelegate()}.
@@ -23,4 +24,7 @@ public interface MultiReaderBag<T>
     void withReadLockAndDelegate(Procedure<? super MutableBag<T>> procedure);
 
     void withWriteLockAndDelegate(Procedure<? super MutableBag<T>> procedure);
+
+    @Override
+    MultiReaderSet<T> asSet();
 }
