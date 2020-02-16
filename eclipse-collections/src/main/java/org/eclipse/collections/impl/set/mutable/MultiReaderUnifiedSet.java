@@ -433,6 +433,16 @@ public final class MultiReaderUnifiedSet<T>
     @Override
     public boolean equals(Object o)
     {
+        if (o == this || o == this.delegate)
+        {
+            return true;
+        }
+
+        if (!(o instanceof Set))
+        {
+            return false;
+        }
+
         try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
             return this.delegate.equals(o);

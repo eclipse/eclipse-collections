@@ -12,6 +12,7 @@ package org.eclipse.collections.impl.set.immutable;
 
 import java.io.Serializable;
 import java.util.Iterator;
+import java.util.Set;
 import java.util.concurrent.ExecutorService;
 
 import org.eclipse.collections.api.block.procedure.Procedure;
@@ -43,6 +44,16 @@ final class ImmutableUnifiedSet<T>
     @Override
     public boolean equals(Object other)
     {
+        if (other == this)
+        {
+            return true;
+        }
+
+        if (!(other instanceof Set))
+        {
+            return false;
+        }
+
         return this.delegate.equals(other);
     }
 
