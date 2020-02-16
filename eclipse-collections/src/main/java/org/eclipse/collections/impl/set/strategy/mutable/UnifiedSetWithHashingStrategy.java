@@ -1350,8 +1350,24 @@ public class UnifiedSetWithHashingStrategy<T>
             return false;
         }
 
-        Set<?> other = (Set<?>) object;
-        return this.size() == other.size() && this.containsAll(other);
+        Set<?> s = (Set<?>) object;
+        if (s.size() != this.size())
+        {
+            return false;
+        }
+
+        try
+        {
+            return this.containsAll(s);
+        }
+        catch (ClassCastException ignored)
+        {
+            return false;
+        }
+        catch (NullPointerException ignored)
+        {
+            return false;
+        }
     }
 
     @Override
