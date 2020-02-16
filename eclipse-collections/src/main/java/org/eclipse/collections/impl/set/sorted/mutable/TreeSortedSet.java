@@ -253,13 +253,7 @@ public class TreeSortedSet<T> extends AbstractMutableCollection<T>
             return true;
         }
 
-        if (!(object instanceof Set))
-        {
-            return false;
-        }
-
-        Set<?> other = (Set<?>) object;
-        return other.equals(this.treeSet);
+        return this.treeSet.equals(object);
     }
 
     @Override
