@@ -163,6 +163,41 @@ public class UnmodifiableBiMapTest extends AbstractMutableBiMapTestCase
 
     @Override
     @Test
+    public void withMap()
+    {
+        Verify.assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeyValue(1, 'a').withMap(Maps.mutable.with(1, Character.valueOf('a'))));
+    }
+
+    @Override
+    @Test
+    public void withMapEmpty()
+    {
+        Verify.assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeyValue(1, 'a').withMap(Maps.mutable.empty()));
+    }
+
+    @Override
+    @Test
+    public void withMapTargetEmpty()
+    {
+        Verify.assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeyValue(1, 'a').withMap(Maps.mutable.with(1, Character.valueOf('a'))));
+    }
+
+    @Override
+    @Test
+    public void withMapEmptyAndTargetEmpty()
+    {
+        Verify.assertThrows(UnsupportedOperationException.class, () -> this.getEmptyMap().withMap(Maps.mutable.empty()));
+    }
+
+    @Override
+    @Test
+    public void withMapNull()
+    {
+        Verify.assertThrows(UnsupportedOperationException.class, () -> this.getEmptyMap().withMap(null));
+    }
+
+    @Override
+    @Test
     public void withAllKeyValueArguments()
     {
         Verify.assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeysValues("A", 1, "B", 2).withAllKeyValueArguments(Tuples.pair("B", 22), Tuples.pair("C", 3)));

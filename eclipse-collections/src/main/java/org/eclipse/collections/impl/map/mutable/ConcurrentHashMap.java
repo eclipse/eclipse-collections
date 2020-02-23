@@ -1980,6 +1980,12 @@ public final class ConcurrentHashMap<K, V>
     }
 
     @Override
+    public ConcurrentHashMap<K, V> withMap(Map<? extends  K, ? extends V> map)
+    {
+        return (ConcurrentHashMap<K, V>) super.withMap(map);
+    }
+
+    @Override
     public ConcurrentHashMap<K, V> withAllKeyValues(Iterable<? extends Pair<? extends K, ? extends V>> keyValues)
     {
         return (ConcurrentHashMap<K, V>) super.withAllKeyValues(keyValues);

@@ -10,6 +10,7 @@
 
 package org.eclipse.collections.api.map.sorted;
 
+import java.util.Map;
 import java.util.SortedMap;
 
 import org.eclipse.collections.api.block.function.Function;
@@ -243,6 +244,13 @@ public interface MutableSortedMap<K, V>
 
     @Override
     MutableSortedMap<K, V> withKeyValue(K key, V value);
+
+    @Override
+    default MutableSortedMap<K, V> withMap(Map<? extends K, ? extends V> map)
+    {
+        this.putAll(map);
+        return this;
+    }
 
     @Override
     MutableSortedMap<K, V> withAllKeyValues(Iterable<? extends Pair<? extends K, ? extends V>> keyValues);

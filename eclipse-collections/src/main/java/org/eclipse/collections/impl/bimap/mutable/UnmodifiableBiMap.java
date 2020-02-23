@@ -1150,6 +1150,12 @@ public class UnmodifiableBiMap<K, V> implements MutableBiMap<K, V>, Serializable
     }
 
     @Override
+    public MutableBiMap<K, V> withMap(Map<? extends K, ? extends V> map)
+    {
+        throw new UnsupportedOperationException("Cannot call withMap() on " + this.getClass().getSimpleName());
+    }
+
+    @Override
     public MutableBiMap<K, V> withAllKeyValues(Iterable<? extends Pair<? extends K, ? extends V>> keyValues)
     {
         throw new UnsupportedOperationException("Cannot call withAllKeyValues() on " + this.getClass().getSimpleName());

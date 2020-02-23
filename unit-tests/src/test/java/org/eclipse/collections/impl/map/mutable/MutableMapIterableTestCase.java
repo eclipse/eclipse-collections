@@ -12,6 +12,7 @@ package org.eclipse.collections.impl.map.mutable;
 
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 import java.util.SortedMap;
 import java.util.concurrent.ConcurrentMap;
@@ -558,6 +559,51 @@ public abstract class MutableMapIterableTestCase extends MapIterableTestCase
 
         MutableMapIterable<String, Integer> mapWith2 = mapWith.withKeyValue("A", 11);
         Verify.assertMapsEqual(UnifiedMap.newWithKeysValues("A", 11, "B", 2), mapWith);
+    }
+
+    @Test
+    public void withMap()
+    {
+        MutableMapIterable<String, Integer> map = this.newMapWithKeysValues("A", 1, "B", 2);
+        Map<String, Integer> simpleMap = Maps.mutable.with("B", 22, "C", 3);
+        map.putAll(simpleMap);
+        MutableMapIterable<String, Integer> mapWith = map.withMap(simpleMap);
+        Assert.assertSame(map, mapWith);
+        Verify.assertMapsEqual(UnifiedMap.newWithKeysValues("A", 1, "B", 22, "C", 3), mapWith);
+    }
+
+    @Test
+    public void withMapEmpty()
+    {
+        MutableMapIterable<String, Integer> map = this.newMapWithKeysValues("A", 1, "B", 2);
+        MutableMapIterable<String, Integer> mapWith = map.withMap(Maps.mutable.empty());
+        Assert.assertSame(map, mapWith);
+        Verify.assertMapsEqual(UnifiedMap.newWithKeysValues("A", 1, "B", 2), mapWith);
+    }
+
+    @Test
+    public void withMapTargetEmpty()
+    {
+        MutableMapIterable<String, Integer> map = this.newMap();
+        Map<String, Integer> simpleMap = Maps.mutable.with("A", 1, "B", 2);
+        MutableMapIterable<String, Integer> mapWith = map.withMap(simpleMap);
+        Assert.assertSame(map, mapWith);
+        Verify.assertMapsEqual(UnifiedMap.newWithKeysValues("A", 1, "B", 2), mapWith);
+    }
+
+    @Test
+    public void withMapEmptyAndTargetEmpty()
+    {
+        MutableMapIterable<String, Integer> map = this.newMap();
+        MutableMapIterable<String, Integer> mapWith = map.withMap(Maps.mutable.empty());
+        Assert.assertSame(map, mapWith);
+        Verify.assertMapsEqual(UnifiedMap.newMap(), mapWith);
+    }
+
+    @Test
+    public void withMapNull()
+    {
+        Verify.assertThrows(NullPointerException.class, () -> this.newMap().withMap(null));
     }
 
     @Test

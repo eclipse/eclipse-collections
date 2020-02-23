@@ -66,4 +66,11 @@ public interface FixedSizeMap<K, V>
 
     @Override
     FixedSizeMap<K, V> tap(Procedure<? super V> procedure);
+
+    @Override
+    default FixedSizeMap<K, V> withMap(Map<? extends K, ? extends V> map)
+    {
+        this.putAll(map);
+        return this;
+    }
 }
