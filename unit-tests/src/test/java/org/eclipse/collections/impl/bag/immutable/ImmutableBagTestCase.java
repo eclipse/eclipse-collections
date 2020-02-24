@@ -346,7 +346,7 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
     public void selectDuplicates()
     {
         Verify.assertBagsEqual(
-                Bags.immutable.with("2", "2", "3", "3", "3", "4", "4", "4", "4"),
+                Bags.immutable.ofOccurrences(PrimitiveTuples.pair("2", 2), PrimitiveTuples.pair("3", 3), PrimitiveTuples.pair("4", 4)),
                 this.newBag().selectDuplicates());
     }
 
