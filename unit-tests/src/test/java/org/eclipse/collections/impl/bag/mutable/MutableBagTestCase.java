@@ -450,7 +450,7 @@ public abstract class MutableBagTestCase extends AbstractCollectionTestCase
     @Test
     public void topOccurrences()
     {
-        MutableBagIterable<String> strings = this.newWithOccurrences(
+        MutableBagIterable<String> strings = Bags.mutable.withOccurrences(
                 PrimitiveTuples.pair("one", 1),
                 PrimitiveTuples.pair("two", 2),
                 PrimitiveTuples.pair("three", 3),
@@ -485,7 +485,7 @@ public abstract class MutableBagTestCase extends AbstractCollectionTestCase
     @Test
     public void bottomOccurrences()
     {
-        MutableBagIterable<String> strings = this.newWithOccurrences(
+        MutableBagIterable<String> strings = Bags.mutable.ofOccurrences(
                 PrimitiveTuples.pair("one", 1),
                 PrimitiveTuples.pair("two", 2),
                 PrimitiveTuples.pair("three", 3),

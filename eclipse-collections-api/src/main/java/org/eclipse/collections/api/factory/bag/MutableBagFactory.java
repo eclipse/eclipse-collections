@@ -13,6 +13,7 @@ package org.eclipse.collections.api.factory.bag;
 import java.util.stream.Stream;
 
 import org.eclipse.collections.api.bag.MutableBag;
+import org.eclipse.collections.api.tuple.primitive.ObjectIntPair;
 
 /**
  * A factory which creates instances of type {@link MutableBag}.
@@ -48,7 +49,116 @@ public interface MutableBagFactory
         return this.with(elements);
     }
 
+    /**
+     * Same as {@link #withOccurrences(Object, int)}.
+     *
+     * @since 10.3
+     */
+    default <T> MutableBag<T> ofOccurrences(T element, int occurrence)
+    {
+        return this.withOccurrences(element, occurrence);
+    }
+
+    /**
+     * Same as {@link #withOccurrences(Object, int, Object, int)}.
+     *
+     * @since 10.3
+     */
+    default <T> MutableBag<T> ofOccurrences(T element1, int occurrence1, T element2, int occurrence2)
+    {
+        return this.withOccurrences(element1, occurrence1, element2, occurrence2);
+    }
+
+    /**
+     * Same as {@link #withOccurrences(Object, int, Object, int, Object, int)}.
+     *
+     * @since 10.3
+     */
+    default <T> MutableBag<T> ofOccurrences(T element1, int occurrence1, T element2, int occurrence2, T element3, int occurrence3)
+    {
+        return this.withOccurrences(element1, occurrence1, element2, occurrence2, element3, occurrence3);
+    }
+
+    /**
+     * Same as {@link #withOccurrences(Object, int, Object, int, Object, int, Object, int)}.
+     *
+     * @since 10.3
+     */
+    default <T> MutableBag<T> ofOccurrences(T element1, int occurrence1, T element2, int occurrence2, T element3, int occurrence3, T element4, int occurrence4)
+    {
+        return this.withOccurrences(element1, occurrence1, element2, occurrence2, element3, occurrence3, element4, occurrence4);
+    }
+
+    /**
+     *  Same as {@link #withOccurrences(ObjectIntPair[])}.
+     *
+     *  @since 10.3
+     */
+    default <T> MutableBag<T> ofOccurrences(ObjectIntPair<T>... elementsWithOccurrences)
+    {
+        return this.withOccurrences(elementsWithOccurrences);
+    }
+
     <T> MutableBag<T> with(T... elements);
+
+    /**
+     * @since 10.3
+     */
+    default <T> MutableBag<T> withOccurrences(T element, int occurrence)
+    {
+        MutableBag<T> bag = this.empty();
+        bag.addOccurrences(element, occurrence);
+        return bag;
+    }
+
+    /**
+     * @since 10.3
+     */
+    default <T> MutableBag<T> withOccurrences(T element1, int occurrence1, T element2, int occurrence2)
+    {
+        MutableBag<T> bag = this.empty();
+        bag.addOccurrences(element1, occurrence1);
+        bag.addOccurrences(element2, occurrence2);
+        return bag;
+    }
+
+    /**
+     * @since 10.3
+     */
+    default <T> MutableBag<T> withOccurrences(T element1, int occurrence1, T element2, int occurrence2, T element3, int occurrence3)
+    {
+        MutableBag<T> bag = this.empty();
+        bag.addOccurrences(element1, occurrence1);
+        bag.addOccurrences(element2, occurrence2);
+        bag.addOccurrences(element3, occurrence3);
+        return bag;
+    }
+
+    /**
+     * @since 10.3
+     */
+    default <T> MutableBag<T> withOccurrences(T element1, int occurrence1, T element2, int occurrence2, T element3, int occurrence3, T element4, int occurrence4)
+    {
+        MutableBag<T> bag = this.empty();
+        bag.addOccurrences(element1, occurrence1);
+        bag.addOccurrences(element2, occurrence2);
+        bag.addOccurrences(element3, occurrence3);
+        bag.addOccurrences(element4, occurrence4);
+        return bag;
+    }
+
+    /**
+     * @since 10.3
+     */
+    default <T> MutableBag<T> withOccurrences(ObjectIntPair<T>... elementsWithOccurrences)
+    {
+        MutableBag<T> bag = this.empty();
+        for (ObjectIntPair<T> itemToAdd : elementsWithOccurrences)
+        {
+            bag.addOccurrences(itemToAdd.getOne(), itemToAdd.getTwo());
+        }
+        return bag;
+    }
 
     /**
      * Same as {@link #withAll(Iterable)}.
