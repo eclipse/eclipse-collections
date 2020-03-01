@@ -65,7 +65,7 @@ public class SynchronizedBag<T>
 {
     private static final long serialVersionUID = 2L;
 
-    SynchronizedBag(MutableBag<T> bag)
+    protected SynchronizedBag(MutableBag<T> bag)
     {
         super(bag);
     }
