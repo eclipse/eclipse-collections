@@ -15,6 +15,8 @@ import java.util.Map;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.tuple.Pair;
+import org.eclipse.collections.api.tuple.Triple;
+import org.eclipse.collections.api.tuple.Triplet;
 import org.eclipse.collections.api.tuple.Twin;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.test.Verify;
@@ -49,6 +51,24 @@ public class TuplesTest
     }
 
     @Test
+    public void triple()
+    {
+        Triple<String, String, String> triple = Tuples.triple("1", "2", "3");
+        Assert.assertEquals("1", triple.getOne());
+        Assert.assertEquals("2", triple.getTwo());
+        Assert.assertEquals("3", triple.getThree());
+    }
+
+    @Test
+    public void triplet()
+    {
+        Triplet<String> triplet = Tuples.triplet("1", "2", "3");
+        Assert.assertEquals("1", triplet.getOne());
+        Assert.assertEquals("2", triplet.getTwo());
+        Assert.assertEquals("3", triplet.getThree());
+    }
+
+    @Test
     public void equalsHashCode()
     {
         Twin<String> pair1 = Tuples.twin("1", "1");
@@ -59,6 +79,19 @@ public class TuplesTest
         Verify.assertEqualsAndHashCode(pair1, pair1a);
         Assert.assertNotEquals(pair1, pair2);
         Assert.assertNotEquals(pair1, new Object());
+    }
+
+    @Test
+    public void equalsHashCodeTriple()
+    {
+        Triplet<String> triple1 = Tuples.triplet("1", "1", "1");
+        Triple<String, String, String> triple1a = Tuples.triple("1", "1", "1");
+        Triple<String, String, String> triple2 = Tuples.triple("2", "2", "2");
+
+        Verify.assertEqualsAndHashCode(triple1, triple1);
+        Verify.assertEqualsAndHashCode(triple1, triple1a);
+        Assert.assertNotEquals(triple1, triple2);
+        Assert.assertNotEquals(triple1, new Object());
     }
 
     @Test
@@ -75,8 +108,10 @@ public class TuplesTest
     public void testToString()
     {
         Pair<String, String> pair1 = Tuples.pair("1", "1");
-
         Assert.assertEquals("1:1", pair1.toString());
+
+        Triple<String, String, String> triple = Tuples.triple("1", "2",  "3");
+        Assert.assertEquals("1:2:3", triple.toString());
     }
 
     @Test
@@ -104,5 +139,25 @@ public class TuplesTest
         Assert.assertEquals("1", swappedTwin.getOne());
         Assert.assertEquals("One", swappedTwin.getTwo());
         Assert.assertEquals(expectedTwin, swappedTwin);
+    }
+
+    @Test
+    public void reverse()
+    {
+        Triple<String, Integer, Boolean> triple = Tuples.triple("One",  2,  true);
+        Triple<Boolean, Integer, String> reversedTriple = triple.reverse();
+        Triple<Boolean, Integer, String> expectedTriple = Tuples.triple(true, 2, "One");
+        Assert.assertEquals(true, reversedTriple.getOne());
+        Assert.assertEquals(Integer.valueOf(2), reversedTriple.getTwo());
+        Assert.assertEquals("One", reversedTriple.getThree());
+        Assert.assertEquals(expectedTriple, reversedTriple);
+
+        Triplet<String> triplet = Tuples.triplet("One", "2", "true");
+        Triplet<String> reversedTriplet = triplet.reverse();
+        Triplet<String> expectedTriplet = Tuples.triplet("true", "2", "One");
+        Assert.assertEquals("true", reversedTriplet.getOne());
+        Assert.assertEquals("2", reversedTriplet.getTwo());
+        Assert.assertEquals("One", reversedTriplet.getThree());
+        Assert.assertEquals(expectedTriplet, reversedTriplet);
     }
 }
