@@ -10,24 +10,31 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
+  project-build:
+    strategy:
+      matrix:
+        os: [macos-latest, ubuntu-latest, windows-latest]
+        java-version: [8, 11, 14-ea, 15-ea]
 
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up JDK 11
-      uses: actions/setup-java@v1
-      with:
-        java-version: 11
-    - name: Enable Maven Cache
-      uses: actions/cache@v1
-      with:
-        path: ~/.m2/repository
-        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-        restore-keys: |
-          ${{ runner.os }}-maven-
-    - name: Maven
-      run: mvn install
-      env:
-        MAVEN_OPTS: "-Xmx1g"
+      - name: Git Checkout
+        uses: actions/checkout@v2
+      - name: Set Maven Wrapper
+        run: mvn -N io.takari:maven:wrapper -Dmaven=3.6.1
+      - name: Set JDK ${{ matrix.java-version }}
+        uses: actions/setup-java@v1
+        with:
+          java-version: ${{ matrix.java-version }}
+      - name: Enable Maven Cache
+        uses: actions/cache@v1
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+      - name: Maven
+        run: ./mvnw verify
+        env:
+          MAVEN_OPTS: "-Xmx1g"
