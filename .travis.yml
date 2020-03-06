@@ -37,20 +37,10 @@ jobs:
         - DESC="compile performance-tests"
         - CMD="./mvnw install --projects performance-tests --also-make --activate-profiles all -DskipTests=true --no-transfer-progress"
 
-    - jdk: oraclejdk8
+    - jdk: oraclejdk11
       env:
         - DESC="compile javadoc"
-        - CMD="./mvnw install javadoc:jar --projects '!unit-tests,!junit-trait-runner,!unit-tests-java8,!serialization-tests,!scala-unit-tests,!jmh-scala-tests,!jmh-tests,!jcstress-tests,!p2-repository,!test-coverage' --activate-profiles all -DskipTests=true --no-transfer-progress"
-
-    - jdk: oraclejdk9
-      env:
-        - DESC="unit tests oraclejdk9"
-        - CMD="./mvnw install --no-transfer-progress"
-
-    - jdk: openjdk10
-      env:
-        - DESC="unit tests openjdk10"
-        - CMD="./mvnw install --no-transfer-progress"
+        - CMD="./mvnw install javadoc:jar --projects 'eclipse-collections-code-generator,eclipse-collections-code-generator-maven-plugin,eclipse-collections-api,eclipse-collections,eclipse-collections-testutils,eclipse-collections-forkjoin' --activate-profiles all -DskipTests=true --no-transfer-progress"
 
     - jdk: openjdk11
       env:
@@ -61,16 +51,6 @@ jobs:
       env:
         - DESC="unit tests oraclejdk11"
         - CMD="./mvnw install --no-transfer-progress"
-
-    - jdk: openjdk12
-      env:
-        - DESC="unit tests openjdk12"
-        - CMD="./mvnw install --no-transfer-progress"
-
-    - jdk: openjdk13
-      env:
-        - DESC="unit tests openjdk13"
-        - CMD="./mvnw install"
 
     - jdk: openjdk-ea
       env:
@@ -93,6 +73,10 @@ jobs:
         - DESC="unit tests Java14-EA"
         - JDK=Java14-EA
         - CMD="./.travis-command-ea-builds.sh"
+    - jdk: oraclejdk11
+      env:
+        - DESC="compile javadoc"
+        - CMD="./mvnw install javadoc:jar --projects 'eclipse-collections-code-generator,eclipse-collections-code-generator-maven-plugin,eclipse-collections-api,eclipse-collections,eclipse-collections-testutils,eclipse-collections-forkjoin' --activate-profiles all -DskipTests=true --no-transfer-progress"
 
 script: eval travis_wait 30 $CMD
 
