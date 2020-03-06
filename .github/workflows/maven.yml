@@ -13,7 +13,8 @@ jobs:
   project-build:
     strategy:
       matrix:
-        os: [macos-latest, ubuntu-latest, windows-latest]
+        # os: [macos-latest, ubuntu-latest, windows-latest]
+        os: [ubuntu-latest]
         java-version: [8, 11, 14-ea, 15-ea]
 
     runs-on: ${{ matrix.os }}
@@ -22,7 +23,7 @@ jobs:
       - name: Git Checkout
         uses: actions/checkout@v2
       - name: Set Maven Wrapper
-        run: mvn -N io.takari:maven:wrapper -Dmaven=3.6.1
+        run: mvn -N io.takari:maven:0.7.7:wrapper -Dmaven=3.6.1
       - name: Set JDK ${{ matrix.java-version }}
         uses: actions/setup-java@v1
         with:
