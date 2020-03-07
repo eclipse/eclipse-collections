@@ -115,7 +115,7 @@ public final class ParallelIterate
      * Iterate over the collection specified in parallel batches using the default runtime parameters. The
      * ObjectIntProcedure used must be stateless, or use concurrent aware objects if they are to be shared. The code
      * is executed against the specified executor.
-     * <p>
+     *
      * <pre>e.g.
      * final Map&lt;Integer, Object&gt; chm = new ConcurrentHashMap&lt;Integer, Object&gt;();
      * ParallelIterate.<b>forEachWithIndex</b>(collection, new ObjectIntProcedure()
@@ -377,7 +377,7 @@ public final class ParallelIterate
     /**
      * Iterate over the collection specified in parallel batches using the default values for the task size. The
      * ProcedureFactory can create stateful closures that will be collected and combined using the specified Combiner.
-     * <p>
+     *
      * <pre>e.g. The <b>ParallelIterate.select()</b> implementation
      *
      * CollectionCombiner&lt;T, SelectProcedure&lt;T&gt;&gt; combiner = CollectionCombiner.forSelect(collection);
@@ -407,7 +407,7 @@ public final class ParallelIterate
     /**
      * Iterate over the collection specified in parallel batches using the default values for the task size. The
      * ProcedureFactory can create stateful closures that will be collected and combined using the specified Combiner.
-     * <p>
+     *
      * <pre>e.g. The <b>ParallelIterate.select()</b> implementation
      *
      * int taskCount = Math.max(DEFAULT_PARALLEL_TASK_COUNT, collection.size() / DEFAULT_MIN_FORK_SIZE);

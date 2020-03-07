@@ -66,7 +66,7 @@ public interface MutableCollection<T>
      * the original collection and appending the new element to form the new collection. In the case of mutable
      * collections, the original collection is modified, and is returned. In order to use this method properly with
      * mutable and fixed size collections the following approach must be taken:
-     * <p>
+     *
      * <pre>
      * MutableCollection&lt;String&gt; list = list.with("1");
      * list = list.with("2");
@@ -87,7 +87,7 @@ public interface MutableCollection<T>
      * that would be left from the original collection after calling remove. In the case of mutable collections, the
      * original collection is modified, and is returned. In order to use this method properly with mutable and fixed
      * size collections the following approach must be taken:
-     * <p>
+     *
      * <pre>
      * MutableCollection&lt;String&gt; list = list.without("1");
      * list = list.without("2");
@@ -108,7 +108,7 @@ public interface MutableCollection<T>
      * elements of  the original collection and appending the new elements to form the new collection. In the case of
      * mutable collections, the original collection is modified, and is returned. In order to use this method properly
      * with mutable and fixed size collections the following approach must be taken:
-     * <p>
+     *
      * <pre>
      * MutableCollection&lt;String&gt; list = list.withAll(FastList.newListWith("1", "2"));
      * </pre>
@@ -127,7 +127,7 @@ public interface MutableCollection<T>
      * elements that would be left from the original collection after calling removeAll. In the case of mutable
      * collections, the original collection is modified, and is returned. In order to use this method properly with
      * mutable and fixed size collections the following approach must be taken:
-     * <p>
+     *
      * <pre>
      * MutableCollection&lt;String&gt; list = list.withoutAll(FastList.newListWith("1", "2"));
      * </pre>
@@ -152,7 +152,7 @@ public interface MutableCollection<T>
 
     /**
      * Returns a MutableCollection with all elements that evaluate to true for the specified predicate.
-     * <p>
+     *
      * <pre>
      * MutableCollection&lt;Integer&gt; livesInLondon =
      *     people.select(person -&gt; person.getAddress().getCity().equals("London"));
@@ -163,7 +163,7 @@ public interface MutableCollection<T>
 
     /**
      * Returns a MutableCollection with all elements that evaluate to true for the specified predicate2 and parameter.
-     * <p>
+     *
      * <pre>
      * MutableCollection&lt;Integer&gt; fives =
      *     integers.selectWith(Predicates2.equal(), Integer.valueOf(5));
@@ -174,13 +174,13 @@ public interface MutableCollection<T>
 
     /**
      * Returns a MutableCollection with all elements that evaluate to false for the specified predicate.
-     * <p>
+     *
      * <pre>
      * MutableCollection&lt;Person&gt; notSmiths =
      *     people.reject(person -&gt; person.person.getLastName().equals("Smith"));
      * </pre>
      * Using the {@code Predicates} factory:
-     * <p>
+     *
      * <pre>
      * MutableCollection&lt;Person&gt; notSmiths = people.reject(Predicates.attributeEqual("lastName", "Smith"));
      * </pre>
@@ -190,7 +190,7 @@ public interface MutableCollection<T>
 
     /**
      * Returns a MutableCollection with all elements that evaluate to false for the specified predicate2 and parameter.
-     * <p>
+     *
      * <pre>e.g.
      * MutableCollection&lt;Integer&gt; selected =
      *     integers.rejectWith(Predicates2.equal(), Integer.valueOf(5));
@@ -201,7 +201,7 @@ public interface MutableCollection<T>
 
     /**
      * Filters a collection into two separate collections based on a predicate returned via a Pair.
-     * <p>
+     *
      * <pre>e.g.
      * return lastNames.<b>selectAndRejectWith</b>(Predicates2.lessThan(), "Mason");
      * </pre>
@@ -248,7 +248,7 @@ public interface MutableCollection<T>
 
     /**
      * Removes all elements in the collection that evaluate to true for the specified predicate.
-     * <p>
+     *
      * <pre>e.g.
      * return lastNames.<b>removeIf</b>(Predicates.isNull());
      * </pre>
@@ -257,7 +257,7 @@ public interface MutableCollection<T>
 
     /**
      * Removes all elements in the collection that evaluate to true for the specified predicate2 and parameter.
-     * <p>
+     *
      * <pre>
      * return lastNames.<b>removeIfWith</b>(Predicates2.isNull(), null);
      * </pre>
@@ -267,7 +267,7 @@ public interface MutableCollection<T>
     /**
      * Returns a new MutableCollection with the results of applying the specified function to each element of the source
      * collection.
-     * <p>
+     *
      * <pre>
      * MutableCollection&lt;String&gt; names =
      *     people.collect(person -&gt; person.getFirstName() + " " + person.getLastName());
@@ -371,7 +371,6 @@ public interface MutableCollection<T>
      * MutableCollection&lt;Integer&gt; integers =
      *     Lists.mutable.with(1, 2, 3).collectWith((each, parameter) -&gt; each + parameter, Integer.valueOf(1));
      * </pre>
-     * <p>
      */
     @Override
     <P, V> MutableCollection<V> collectWith(Function2<? super T, ? super P, ? extends V> function, P parameter);
@@ -379,7 +378,7 @@ public interface MutableCollection<T>
     /**
      * Returns a new MutableCollection with the results of applying the specified function to each element of the source
      * collection, but only for elements that evaluate to true for the specified predicate.
-     * <p>
+     *
      * <pre>
      * MutableCollection&lt;String&gt; collected =
      *     Lists.mutable.of().with(1, 2, 3).collectIf(Predicates.notNull(), Functions.getToString())

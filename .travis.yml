@@ -73,10 +73,6 @@ jobs:
         - DESC="unit tests Java14-EA"
         - JDK=Java14-EA
         - CMD="./.travis-command-ea-builds.sh"
-    - jdk: oraclejdk11
-      env:
-        - DESC="compile javadoc"
-        - CMD="./mvnw install javadoc:jar --projects 'eclipse-collections-code-generator,eclipse-collections-code-generator-maven-plugin,eclipse-collections-api,eclipse-collections,eclipse-collections-testutils,eclipse-collections-forkjoin' --activate-profiles all -DskipTests=true --no-transfer-progress"
 
 script: eval travis_wait 30 $CMD
 

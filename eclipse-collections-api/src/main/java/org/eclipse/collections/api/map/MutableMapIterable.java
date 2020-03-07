@@ -139,7 +139,7 @@ public interface MutableMapIterable<K, V> extends MapIterable<K, V>, Map<K, V>
      * keys and values of the original plus the additional key and value. In the case of mutable maps, the original map
      * is modified and then returned. In order to use this method properly with mutable and fixed size maps the
      * following approach must be taken:
-     * <p>
+     *
      * <pre>
      * map = map.withKeyValue("new key", "new value");
      * </pre>
@@ -158,7 +158,7 @@ public interface MutableMapIterable<K, V> extends MapIterable<K, V>, Map<K, V>
      * keys and values of the original plus all of the additional keys and values. In the case of mutable maps, the
      * original map is modified and then returned. In order to use this method properly with mutable and fixed size
      * maps the following approach must be taken:
-     * <p>
+     *
      * <pre>
      * map = map.withAllKeyValues(FastList.newListWith(PairImpl.of("new key", "new value")));
      * </pre>
@@ -184,7 +184,7 @@ public interface MutableMapIterable<K, V> extends MapIterable<K, V>, Map<K, V>
      * keys and values of the original minus the key and value to be removed. In the case of mutable maps, the original
      * map is modified and then returned. In order to use this method properly with mutable and fixed size maps the
      * following approach must be taken:
-     * <p>
+     *
      * <pre>
      * map = map.withoutKey("key");
      * </pre>
@@ -203,7 +203,7 @@ public interface MutableMapIterable<K, V> extends MapIterable<K, V>, Map<K, V>
      * keys and values of the original minus all of the keys and values to be removed. In the case of mutable maps, the
      * original map is modified and then returned. In order to use this method properly with mutable and fixed size
      * maps the following approach must be taken:
-     * <p>
+     *
      * <pre>
      * map = map.withoutAllKeys(FastList.newListWith("key1", "key2"));
      * </pre>

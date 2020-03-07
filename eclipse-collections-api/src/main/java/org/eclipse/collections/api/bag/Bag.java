@@ -165,7 +165,7 @@ public interface Bag<T>
 
     /**
      * Returns a string representation of this bag. The string representation consists of a list of element-count mappings.
-     * <p>
+     *
      * <pre>
      * Assert.assertEquals("{1=1, 2=2, 3=3}", Bags.mutable.with(1, 2, 2, 3, 3, 3).toStringOfItemToCount());
      * </pre>

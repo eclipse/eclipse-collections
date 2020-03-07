@@ -969,7 +969,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
     /**
      * This method is not supported directly on MultiReader collections because it is not thread-safe. If you would like
      * to use an iterator with a MultiReader collection, then you must do the following:
-     * <p>
+     *
      * <pre>
      * multiReaderList.withReadLockAndDelegate(MutableList&lt;Person&gt; -&gt;
      *     {
@@ -977,7 +977,7 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
      *         ....
      *     });
      * </pre>
-     * <p>
+     *
      * <pre>
      * final Collection jdkSet = new HashSet();
      * final boolean containsAll = new boolean[1];

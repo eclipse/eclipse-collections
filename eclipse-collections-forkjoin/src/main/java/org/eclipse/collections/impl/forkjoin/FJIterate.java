@@ -106,7 +106,7 @@ public final class FJIterate
      * Iterate over the collection specified in parallel batches using the default runtime parameters. The
      * ObjectIntProcedure used must be stateless, or use concurrent aware objects if they are to be shared. The code
      * is executed against the specified executor.
-     * <p>
+     *
      * <pre>e.g.
      * {@code final ConcurrentMutableMap<Integer, Object> chm = new ConcurrentHashMap<Integer, Object>();}
      * FJIterate.<b>forEachWithIndex</b>(collection, new ObjectIntProcedure()

@@ -32,7 +32,7 @@ public interface Pair<T1, T2>
 
     /**
      * Method used to swap the elements of pair.
-     * <p>
+     *
      * <pre>e.g.
      * Pair&lt;String, Integer&gt; pair = Tuples.pair("One", 1);
      * Pair&lt;Integer, String&gt; swappedPair = pair.swap();

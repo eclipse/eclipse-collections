@@ -603,7 +603,7 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
     /**
      * Returns a string with the elements of the iterable separated by commas with spaces and
      * enclosed in square brackets.
-     * <p>
+     *
      * <pre>
      * Assert.assertEquals("[]", Lists.mutable.empty().toString());
      * Assert.assertEquals("[1]", Lists.mutable.with(1).toString());

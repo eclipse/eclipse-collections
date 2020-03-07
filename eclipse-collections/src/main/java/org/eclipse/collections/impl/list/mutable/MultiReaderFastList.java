@@ -655,7 +655,7 @@ public final class MultiReaderFastList<T>
     /**
      * This method is not supported directly on a MultiReaderFastList. If you would like to use a ListIterator with
      * MultiReaderFastList, then you must do the following:
-     * <p>
+     *
      * <pre>
      * multiReaderList.withReadLockAndDelegate(new Procedure&lt;MutableList&lt;Person&gt;&gt;()
      * {
@@ -702,7 +702,7 @@ public final class MultiReaderFastList<T>
     /**
      * This method is not supported directly on a MultiReaderFastList. If you would like to use a ListIterator with
      * MultiReaderFastList, then you must do the following:
-     * <p>
+     *
      * <pre>
      * multiReaderList.withReadLockAndDelegate(new Procedure&lt;MutableList&lt;Person&gt;&gt;()
      * {

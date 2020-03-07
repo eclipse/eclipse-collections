@@ -61,7 +61,7 @@ public interface MapIterable<K, V> extends RichIterable<V>
 
     /**
      * Executes the Procedure for each value of the map and returns {@code this}.
-     * <p>
+     *
      * <pre>
      * return peopleByCity.<b>tap</b>(person -&gt; LOGGER.info(person.getName()));
      * </pre>
@@ -163,7 +163,7 @@ public interface MapIterable<K, V> extends RichIterable<V>
     /**
      * For each key and value of the map the predicate is evaluated, if the result of the evaluation is true,
      * that key and value are returned in a new map.
-     * <p>
+     *
      * <pre>
      * MapIterable&lt;City, Person&gt; selected =
      *     peopleByCity.select((city, person) -&gt; city.getName().equals("Anytown") &amp;&amp; person.getLastName().equals("Smith"));
@@ -174,7 +174,7 @@ public interface MapIterable<K, V> extends RichIterable<V>
     /**
      * For each key and value of the map the predicate is evaluated, if the result of the evaluation is false,
      * that key and value are returned in a new map.
-     * <p>
+     *
      * <pre>
      * MapIterable&lt;City, Person&gt; rejected =
      *     peopleByCity.reject((city, person) -&gt; city.getName().equals("Anytown") &amp;&amp; person.getLastName().equals("Smith"));
@@ -185,7 +185,7 @@ public interface MapIterable<K, V> extends RichIterable<V>
     /**
      * For each key and value of the map the function is evaluated. The results of these evaluations are returned in
      * a new map. The map returned will use the values projected from the function rather than the original values.
-     * <p>
+     *
      * <pre>
      * MapIterable&lt;String, String&gt; collected =
      *     peopleByCity.collect((City city, Person person) -&gt; Pair.of(city.getCountry(), person.getAddress().getCity()));
@@ -196,7 +196,7 @@ public interface MapIterable<K, V> extends RichIterable<V>
     /**
      * For each key and value of the map the function is evaluated. The results of these evaluations are returned in
      * a new map. The map returned will use the values projected from the function rather than the original values.
-     * <p>
+     *
      * <pre>
      * MapIterable&lt;City, String&gt; collected =
      *     peopleByCity.collectValues((City city, Person person) -&gt; person.getFirstName() + " " + person.getLastName());
@@ -210,7 +210,7 @@ public interface MapIterable<K, V> extends RichIterable<V>
      * values of the map have been used as arguments. That is, there may be keys and values of the map that are
      * never used as arguments to the predicate. The result is null if predicate does not evaluate to true for
      * any key/value combination.
-     * <p>
+     *
      * <pre>
      * Pair&lt;City, Person&gt; detected =
      *     peopleByCity.detect((City city, Person person) -&gt; city.getName().equals("Anytown") &amp;&amp; person.getLastName().equals("Smith"));
@@ -223,7 +223,7 @@ public interface MapIterable<K, V> extends RichIterable<V>
      * they are given as arguments. The predicate will only be evaluated until such pair is found or until all
      * of the keys and values of the map have been used as arguments. That is, there may be keys and values of
      * the map that are never used as arguments to the predicate.
-     * <p>
+     *
      * <pre>
      * Optional&lt;Pair&lt;City, Person&gt;&gt; detected =
      *     peopleByCity.detectOptional((city, person)
@@ -247,7 +247,7 @@ public interface MapIterable<K, V> extends RichIterable<V>
     /**
      * Returns a string with the keys and values of this map separated by commas with spaces and
      * enclosed in curly braces. Each key and value is separated by an equals sign.
-     * <p>
+     *
      * <pre>
      * Assert.assertEquals("{1=1, 2=2, 3=3}", Maps.mutable.with(1, 1, 2, 2, 3, 3).toString());
      * </pre>

@@ -47,7 +47,7 @@ public interface PrimitiveIterable
     /**
      * Returns a string with the elements of this iterable separated by commas with spaces and
      * enclosed in square brackets.
-     * <p>
+     *
      * <pre>
      * Assert.assertEquals("[]", IntLists.mutable.empty().toString());
      * Assert.assertEquals("[1]", IntLists.mutable.with(1).toString());
