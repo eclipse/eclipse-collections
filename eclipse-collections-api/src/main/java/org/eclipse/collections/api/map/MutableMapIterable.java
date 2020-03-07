@@ -71,7 +71,7 @@ public interface MutableMapIterable<K, V> extends MapIterable<K, V>, Map<K, V>
     /**
      * Remove entries from the map at the specified {@code keys}.
      *
-     * @return <tt>true</tt> if this map changed as a result of the call
+     * @return {@code true} if this map changed as a result of the call
      * @since 10.0
      */
     default boolean removeAllKeys(Set<? extends K> keys)
