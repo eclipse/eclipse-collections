@@ -26,16 +26,16 @@ import org.eclipse.collections.api.tuple.Pair;
 
 /**
  * This collection is a type of {@code Map} that can associate multiple values for keys.
- * <p>
+ *
  * <p>Unlike {@code Map} however, this interface is read-only so the results of access methods such as {@link
  * #get(Object)} return a view onto the values associated with that key. The {@link MutableMultimap} sub-interface
  * provides methods to mutate the collection.</p>
- * <p>
+ *
  * <p>The advantages to using this container over a {@code Map<K, Collection<V>>} is that all of the handling of the
  * value collection can be done automatically. It also allows implementations to further specialize in how duplicate
  * values will be handled. Value collections with list semantics would allow duplicate values for a key, while those
  * implementing set semantics would not. The value collections can never be empty.</p>
- * <p>
+ *
  * <p>Internal iteration methods for keys and values (singly - {@link #forEachKey(Procedure)}, {@link #forEachValue(Procedure)},
  * and together - {@link #forEachKeyValue(Procedure2)}), {@link #forEachKeyMultiValues(Procedure2)}) are provided to allow flexible
  * browsing of the collection's contents. Similarly, views also are provided for keys ({@link #keysView()}), values
@@ -252,7 +252,7 @@ public interface Multimap<K, V>
     /**
      * Returns all elements of the source multimap that satisfies the predicate. This method is also
      * commonly called filter.
-     * <p>
+     *
      * <pre>e.g.
      * return multimap.<b>selectKeysValues</b>(new Predicate2&lt;Integer, Person&gt;()
      * {
@@ -272,7 +272,7 @@ public interface Multimap<K, V>
 
     /**
      * Same as the select method but uses the specified target multimap for the results.
-     * <p>
+     *
      * <pre>e.g.
      * return multimap.<b>selectKeysValues</b>(new Predicate2&lt;Integer, Person&gt;()
      * {
@@ -293,7 +293,7 @@ public interface Multimap<K, V>
 
     /**
      * Returns all elements of the source multimap that don't satisfy the predicate.
-     * <p>
+     *
      * <pre>e.g.
      * return multimap.<b>rejectKeysValues</b>(new Predicate2&lt;Integer, Person&gt;()
      * {
@@ -313,7 +313,7 @@ public interface Multimap<K, V>
 
     /**
      * Same as the reject method but uses the specified target multimap for the results.
-     * <p>
+     *
      * <pre>e.g.
      * return multimap.<b>rejectKeysValues</b>(new Predicate2&lt;Integer, Person&gt;()
      * {
@@ -335,7 +335,7 @@ public interface Multimap<K, V>
     /**
      * Returns all elements of the source multimap that satisfies the predicate. This method is also
      * commonly called filter.
-     * <p>
+     *
      * <pre>e.g.
      * return multimap.<b>selectKeysMultiValues</b>(new Predicate2&lt;Integer, Iterable&lt;Person&gt;&gt;()
      * {
@@ -355,7 +355,7 @@ public interface Multimap<K, V>
 
     /**
      * Same as the select method but uses the specified target multimap for the results.
-     * <p>
+     *
      * <pre>e.g.
      * return multimap.<b>selectKeysMultiValues</b>(new Predicate2&lt;Integer, Iterable&lt;Person&gt;&gt;()
      * {
@@ -376,7 +376,7 @@ public interface Multimap<K, V>
 
     /**
      * Returns all elements of the source multimap that don't satisfy the predicate.
-     * <p>
+     *
      * <pre>e.g.
      * return multimap.<b>rejectKeysMultiValues</b>(new Predicate2&lt;Integer, Iterable&lt;Person&gt;&gt;()
      * {
@@ -396,7 +396,7 @@ public interface Multimap<K, V>
 
     /**
      * Same as the reject method but uses the specified target multimap for the results.
-     * <p>
+     *
      * <pre>e.g.
      * return multimap.<b>rejectKeysMultiValues</b>(new Predicate2&lt;Integer, Iterable&lt;Person&gt;&gt;()
      * {
@@ -418,7 +418,7 @@ public interface Multimap<K, V>
     /**
      * Returns a new multimap with the results of applying the specified function on each key and value of the source
      * multimap. This method is also commonly called transform or map.
-     * <p>
+     *
      * <pre>e.g.
      * return multimap.collectKeysValues(new Function2&lt;Integer, Person, Pair&lt;String, String&gt;&gt;()
      * {
@@ -437,7 +437,7 @@ public interface Multimap<K, V>
 
     /**
      * Same as the collect method but uses the specified target multimap for the results.
-     * <p>
+     *
      * <pre>e.g.
      * return multimap.collectKeysValues(new Function2&lt;Integer, Person, Pair&lt;String, String&gt;&gt;()
      * {
@@ -458,7 +458,7 @@ public interface Multimap<K, V>
     /**
      * Returns a new multimap with the results of applying the specified keyFunction and valueFunction on each key and corresponding values of the source multimap.
      * This method is also commonly called transform or map.
-     * <p>
+     *
      * <pre>e.g.
      * return multimap.collectKeyMultiValues(each -&gt; each + 1, Person::getLastName);
      * </pre>
@@ -472,7 +472,7 @@ public interface Multimap<K, V>
 
     /**
      * Same as the collectKeyMultiValues method but uses the specified target multimap for the results.
-     * <p>
+     *
      * <pre>e.g.
      * return multimap.collectKeyMultiValues(each -&gt; each + 1, Person::getLastName, HashBagMultimap.&lt;Integer, String&gt;newMultimap());
      * </pre>
@@ -488,7 +488,7 @@ public interface Multimap<K, V>
     /**
      * Returns a new multimap with the results of applying the specified function on each value of the source
      * multimap. This method is also commonly called transform or map.
-     * <p>
+     *
      * <pre>e.g.
      * return multimap.collectValues(new Function&lt;Person, String&gt;()
      * {
@@ -507,7 +507,7 @@ public interface Multimap<K, V>
 
     /**
      * Same as the collect method but uses the specified target multimap for the results.
-     * <p>
+     *
      * <pre>e.g.
      * return multimap.collectValues(new Function&lt;Person, String&gt;()
      * {

@@ -551,7 +551,7 @@ public interface RichIterable<T>
 
     /**
      * Returns all elements of the source collection that are instances of the Class {@code clazz}.
-     * <p>
+     *
      * <pre>
      * RichIterable&lt;Integer&gt; integers =
      *     List.mutable.with(new Integer(0), new Long(0L), new Double(0.0)).selectInstancesOf(Integer.class);
@@ -1339,7 +1339,7 @@ public interface RichIterable<T>
 
     /**
      * Returns the total number of elements that evaluate to true for the specified predicate.
-     * <p>
+     *
      * <pre>e.g.
      * return lastNames.<b>countWith</b>(Predicates2.equal(), "Smith");
      * </pre>
@@ -1822,7 +1822,7 @@ public interface RichIterable<T>
     /**
      * Returns the result of summarizing the value returned from applying the IntFunction to
      * each element of the iterable.
-     * <p>
+     *
      * <pre>
      * IntSummaryStatistics stats =
      *     Lists.mutable.with(1, 2, 3).summarizeInt(Integer::intValue);
@@ -1840,7 +1840,7 @@ public interface RichIterable<T>
     /**
      * Returns the result of summarizing the value returned from applying the FloatFunction to
      * each element of the iterable.
-     * <p>
+     *
      * <pre>
      * DoubleSummaryStatistics stats =
      *     Lists.mutable.with(1, 2, 3).summarizeFloat(Integer::floatValue);
@@ -1858,7 +1858,7 @@ public interface RichIterable<T>
     /**
      * Returns the result of summarizing the value returned from applying the LongFunction to
      * each element of the iterable.
-     * <p>
+     *
      * <pre>
      * LongSummaryStatistics stats =
      *     Lists.mutable.with(1, 2, 3).summarizeLong(Integer::longValue);
@@ -1876,7 +1876,7 @@ public interface RichIterable<T>
     /**
      * Returns the result of summarizing the value returned from applying the DoubleFunction to
      * each element of the iterable.
-     * <p>
+     *
      * <pre>
      * DoubleSummaryStatistics stats =
      *     Lists.mutable.with(1, 2, 3).summarizeDouble(Integer::doubleValue);
@@ -1893,7 +1893,7 @@ public interface RichIterable<T>
 
     /**
      * This method produces the equivalent result as {@link Stream#collect(Collector)}.
-     * <p>
+     *
      * <pre>
      * MutableObjectLongMap&lt;Integer&gt; map2 =
      *     Lists.mutable.with(1, 2, 3, 4, 5).reduceInPlace(Collectors2.sumByInt(i -&gt; Integer.valueOf(i % 2), Integer::intValue));
@@ -2205,7 +2205,7 @@ public interface RichIterable<T>
     /**
      * Returns a string with the elements of this iterable separated by commas with spaces and
      * enclosed in square brackets.
-     * <p>
+     *
      * <pre>
      * Assert.assertEquals("[]", Lists.mutable.empty().toString());
      * Assert.assertEquals("[1]", Lists.mutable.with(1).toString());

@@ -162,7 +162,7 @@ public final class Iterate
      *      }
      *  }, fred);
      * </pre>
-     * <p>
+     *
      * <pre>e.g.
      * Iterate.<b>forEachWith</b>(people, new Procedure2&lt;Person, Person&gt;()
      * {
@@ -553,7 +553,7 @@ public final class Iterate
 
     /**
      * Returns the total number of elements that evaluate to true for the specified predicate2 and parameter.
-     * <p>
+     *
      * <pre>e.g.
      * return Iterate.<b>countWith</b>(lastNames, Predicates2.equal(), "Smith");
      * </pre>
@@ -1494,7 +1494,7 @@ public final class Iterate
     /**
      * Same as {@link #collectChar(Iterable, CharFunction)}, except that the results are gathered into the specified {@code target}
      * collection.
-     * <p>
+     *
      * <pre>
      * CharArrayList chars =
      *      Iterate.<b>collectChar</b>(people, person -&gt; person.getMiddleInitial());

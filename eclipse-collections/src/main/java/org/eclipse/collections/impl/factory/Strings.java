@@ -15,7 +15,7 @@ import org.eclipse.collections.impl.string.immutable.CodePointAdapter;
 
 /**
  * This class can be used to create instances of CharAdapter and CodePointAdapter.
- * <p>
+ *
  * <pre>
  * CharAdapter chars1 = Strings.asChars("Hello World!");
  * CharAdapter chars2 = Strings.toChars('a', 'b', 'c');

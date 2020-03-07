@@ -28,7 +28,7 @@ public interface FixedSizeCollection<T>
      * of {@link MutableCollection} is returned containing the elements of the original collection with the new element
      * {@link #add(Object) added}. Implementations will return a new FixedSizeCollection where possible. In order to
      * use this method properly with mutable and fixed size collections the following approach must be taken:
-     * <p>
+     *
      * <pre>
      * MutableCollection&lt;String&gt; list;
      * list = list.with("1");
@@ -47,7 +47,7 @@ public interface FixedSizeCollection<T>
      * element {@link #remove(Object) removed}. Implementations will return a new FixedSizeCollection where possible.
      * In order to use this method properly with mutable and fixed size collections the following approach must be
      * taken:
-     * <p>
+     *
      * <pre>
      * MutableCollection&lt;String&gt; list;
      * list = list.without("1");
@@ -66,7 +66,7 @@ public interface FixedSizeCollection<T>
      * the new elements {@link #addAll(Collection) added}. Implementations will return a new FixedSizeCollection where
      * possible. In order to use this method properly with mutable and fixed size collections the following approach
      * must be taken:
-     * <p>
+     *
      * <pre>
      * MutableCollection&lt;String&gt; list;
      * list = list.withAll(FastList.newListWith("1", "2"));
@@ -84,7 +84,7 @@ public interface FixedSizeCollection<T>
      * the given elements {@link #removeAll(Collection) removed}. Implementations will return a new FixedSizeCollection
      * where possible. In order to use this method properly with mutable and fixed size collections the following
      * approach must be taken:
-     * <p>
+     *
      * <pre>
      * MutableCollection&lt;String&gt; list;
      * list = list.withoutAll(FastList.newListWith("1", "2"));

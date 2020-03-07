@@ -156,8 +156,7 @@ public interface OrderedIterable<T> extends RichIterable<T>
     /**
      * Iterates over the section of the iterable covered by the specified inclusive indexes. The indexes are
      * both inclusive.
-     * <p>
-     * <p>
+     *
      * <pre>e.g.
      * OrderedIterable&lt;People&gt; people = FastList.newListWith(ted, mary, bob, sally)
      * people.forEach(0, 1, new Procedure&lt;Person&gt;()
@@ -192,8 +191,7 @@ public interface OrderedIterable<T> extends RichIterable<T>
     /**
      * Iterates over the section of the iterable covered by the specified inclusive indexes. The indexes are
      * both inclusive.
-     * <p>
-     * <p>
+     *
      * <pre>e.g.
      * OrderedIterable&lt;People&gt; people = FastList.newListWith(ted, mary, bob, sally)
      * people.forEachWithIndex(0, 1, new ObjectIntProcedure&lt;Person&gt;()

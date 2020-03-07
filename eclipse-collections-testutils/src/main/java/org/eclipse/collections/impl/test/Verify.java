@@ -147,7 +147,7 @@ public final class Verify extends Assert
      * <p>
      * Without the {@code try ... catch} block around lines 11-13 the stack trace following a test failure
      * would look a little like:
-     * <p>
+     *
      * <pre>
      * java.lang.AssertionError: ...
      *  at TestFoo.assertFoo(TestFoo.java:11)
@@ -165,7 +165,7 @@ public final class Verify extends Assert
      * <p>
      * With the {@code try ... catch} block around lines 11-13 the stack trace would look like the
      * following:
-     * <p>
+     *
      * <pre>
      * java.lang.AssertionError: ...
      *  at TestFoo.testFoo(TestFoo.java:5)
