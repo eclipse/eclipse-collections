@@ -12,6 +12,7 @@
 [![][release img]][release]
 [![][license-epl img]][license-epl]
 [![][license-edl img]][license-edl]
+[![][actions img]][actions]  
 
 <a href="https://www.eclipse.org/collections/"><img src="https://github.com/eclipse/eclipse-collections/blob/master/artwork/eclipse-collections-logo.png" height="50%" width="50%"></a>
 
@@ -187,6 +188,8 @@ We welcome contributions! We accept contributions via pull requests here in GitH
 * Mailing lists: https://dev.eclipse.org/mailman/listinfo/collections-dev
 * Forum: https://www.eclipse.org/forums/index.php?t=thread&frm_id=329
 
+[actions]:https://github.com/eclipse/eclipse-collections/actions?query=workflow%3A%22Eclipse+Collections+CI+Build%22
+[actions img]:https://github.com/eclipse/eclipse-collections/workflows/Eclipse%20Collections%20CI%20Build/badge.svg?branch=master
 
 [travis]:https://travis-ci.org/eclipse/eclipse-collections
 [travis img]:https://travis-ci.org/eclipse/eclipse-collections.svg?branch=master
