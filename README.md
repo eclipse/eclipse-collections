@@ -24,7 +24,7 @@ Eclipse Collections is a comprehensive collections library for Java. The library
 
 * Productivity
     * Rich, functional, and fluent APIs with great symmetry 
-    * List, Set, Bag, Stack, Map, Multimap, BiMap, Interval Types 
+    * `List`, `Set`, `Bag`, `Stack`, `Map`, `Multimap`, `BiMap`, `Interval` Types 
     * Readable, Mutable, and Immutable Types
     * Mutable and Immutable Collection Factories
     * Adapters and Utility classes for JCF Types
@@ -32,8 +32,6 @@ Eclipse Collections is a comprehensive collections library for Java. The library
     * Memory Efficient Containers 
     * Optimized Eager, Lazy and Parallel APIs
     * Primitive Collections for all primitive types 
-* Actively developed since 2005
-
 
 ## Learn Eclipse Collections
 
@@ -75,25 +73,13 @@ Eclipse software repository location: http://download.eclipse.org/collections/10
 
 Eclipse Collections puts iteration methods directly on the container types. Here's several code examples that demonstrate the simple and flexible style of programming with Eclipse Collections.
 
-First, we will define a simple class named *Person* to hold the first and last names of three people.
+First, we will define a simple class named `Person` with a first and last name, getters and a constructor.
 
 ```java
 public class Person
 {
-    private final String firstName;
-    private final String lastName;
-
-    public Person(String firstName, String lastName)
-    {
-        this.firstName = firstName;
-        this.lastName = lastName;
-    }
+    private final String firstName, lastName;
     ...
-    public String getLastName()
-    {
-        return this.lastName;
-    }
-    
     public boolean lastNameEquals(String name)
     {
         return name.equals(this.lastName);
@@ -101,13 +87,16 @@ public class Person
 }
 ```
 
-#### Collect (aka map, transform)
-Now we will create a *MutableList* with three instances of the *Person* class. Then we will *collect* their last names into a new *MutableList*, and finally output the names to a comma delimited String using *makeString*. 
+#### `Collect` (aka `map`, `transform`)
+First we will create a `MutableList` with three instances of the `Person` class. 
 ```java
 MutableList<Person> people = Lists.mutable.with(
         new Person("Sally", "Smith"),
         new Person("Ted", "Watson"),
         new Person("Mary", "Williams"));
+```
+Then we will `collect` their last names into a new `MutableList`, and finally output the names to a comma delimited String using `makeString`. 
+```java
 MutableList<String> lastNames = people.collect(person -> person.getLastName());
 Assert.assertEquals("Smith, Watson, Williams", lastNames.makeString());
 ```
@@ -116,49 +105,53 @@ The lambda in the example above can also be replaced with a method reference.
 ```java
 MutableList<String> lastNames = people.collect(Person::getLastName);
 ```
-Eclipse Collections has support for both [Mutable](http://www.eclipse.org/collections/javadoc/10.2.0/org/eclipse/collections/api/collection/MutableCollection.html) and [Immutable](http://www.eclipse.org/collections/javadoc/10.2.0/org/eclipse/collections/api/collection/ImmutableCollection.html) collections, and the return types of methods are covariant.  While the *collect* method on a *MutableList* returned a *MutableList*, the *collect* method on an *ImmutableList* will return an *ImmutableList*.  Here we use the same [Lists](https://www.eclipse.org/collections/javadoc/10.2.0/org/eclipse/collections/impl/factory/Lists.html) factory to create an *ImmutableList*.
-
+Eclipse Collections has support for both [Mutable](http://www.eclipse.org/collections/javadoc/10.2.0/org/eclipse/collections/api/collection/MutableCollection.html) and [Immutable](http://www.eclipse.org/collections/javadoc/10.2.0/org/eclipse/collections/api/collection/ImmutableCollection.html) collections, and the return types of methods are covariant.  Here we use the same [Lists](https://www.eclipse.org/collections/javadoc/10.2.0/org/eclipse/collections/impl/factory/Lists.html) factory to create an `ImmutableList`.
 ```java
 ImmutableList<Person> people = Lists.immutable.with(
         new Person("Sally", "Smith"),
         new Person("Ted", "Watson"),
         new Person("Mary", "Williams"));
+```
+While the `collect` method on a `MutableList` returned a `MutableList`, the `collect` method on an `ImmutableList` will return an `ImmutableList`.  
+```java
 ImmutableList<String> lastNames = people.collect(Person::getLastName);
 Assert.assertEquals("Smith, Watson, Williams", lastNames.makeString());
 ```
-Eclipse Collections has a [lazy API](http://www.eclipse.org/collections/javadoc/10.2.0/org/eclipse/collections/api/LazyIterable.html) as well, which is available by calling the method *asLazy*.  The method *collect* will now return a *LazyIterable*.  The *LazyIterable* that is returned does not evaluate anything until the call to a terminal method is made.  In this case, the call to *makeString* will force the *LazyIterable* to collect the last names.
+
+Eclipse Collections has a [lazy API](http://www.eclipse.org/collections/javadoc/10.2.0/org/eclipse/collections/api/LazyIterable.html) as well, which is available by calling the method `asLazy`.  The method `collect` will now return a `LazyIterable`.  The `LazyIterable` that is returned does not evaluate anything until the call to a terminal method is made.  In this case, the call to `makeString` will force the `LazyIterable` to collect the last names.
 
 ```java
 LazyIterable<String> lastNames = people.asLazy().collect(Person::getLastName);
 Assert.assertEquals("Smith, Watson, Williams", lastNames.makeString());
 ```
-#### Select / Reject (aka filter / filter not)
-We can find all of the people with the last name "Smith" using the method named *select*.
+#### `Select` / `Reject` (aka `filter` / `!filter`)
+We can find all of the people with the last name "Smith" using the method named `select`.
 ```java
 MutableList<Person> people = Lists.mutable.with(
         new Person("Sally", "Smith"),
         new Person("Ted", "Watson"),
         new Person("Mary", "Williams"));
+
 MutableList<Person> smiths = people.select(person -> person.lastNameEquals("Smith"));
 Assert.assertEquals("Smith", smiths.collect(Person::getLastName).makeString());
 ```
-If we want to use a method reference, we can use the method *selectWith*.
+If we want to use a method reference, we can use the method `selectWith`.
 ```java
 MutableList<Person> smiths = people.selectWith(Person::lastNameEquals, "Smith");
 Assert.assertEquals("Smith", smiths.collect(Person::getLastName).makeString());
 ```
-We can find all the people who do not have a last name of "Smith" using the method named *reject*.
+We can find all the people who do not have a last name of "Smith" using the method named `reject`.
 ```java
 MutableList<Person> notSmiths = people.reject(person -> person.lastNameEquals("Smith"));
 Assert.assertEquals("Watson, Williams", notSmiths.collect(Person::getLastName).makeString());
 ```
-If we want to use a method reference, we can use the method *rejectWith*.
+If we want to use a method reference, we can use the method `rejectWith`.
 ```java
 MutableList<Person> notSmiths = people.rejectWith(Person::lastNameEquals, "Smith");
 Assert.assertEquals("Watson, Williams", notSmiths.collect(Person::getLastName).makeString());
 ```
 
-#### Any / All / None
+#### `Any` / `All` / `None`
 We can test whether any, all or none of the elements of a collection satisfy a given condition.
 ```java
 // Any
