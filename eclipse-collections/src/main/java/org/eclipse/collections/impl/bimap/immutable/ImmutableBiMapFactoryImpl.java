@@ -116,8 +116,8 @@ public class ImmutableBiMapFactoryImpl implements ImmutableBiMapFactory
         {
             return this.withAll((MutableBiMap<K, V>) map);
         }
-        ImmutableMap<K, V> immutableMap = Maps.immutable.withAll(map);
-        return new ImmutableHashBiMap<>(immutableMap, Maps.immutable.withAll(MapIterate.flipUniqueValues(immutableMap)));
+        ImmutableMap<K, V> immutableMap = Maps.immutable.withMap(map);
+        return new ImmutableHashBiMap<>(immutableMap, Maps.immutable.withMap(MapIterate.flipUniqueValues(immutableMap)));
     }
 
     @Override
@@ -129,7 +129,7 @@ public class ImmutableBiMapFactoryImpl implements ImmutableBiMapFactory
     @Override
     public <K, V> ImmutableBiMap<K, V> withAll(MutableBiMap<K, V> biMap)
     {
-        return new ImmutableHashBiMap<>(Maps.immutable.withAll(biMap), Maps.immutable.withAll(biMap.inverse()));
+        return new ImmutableHashBiMap<>(Maps.immutable.withMap(biMap), Maps.immutable.withMap(biMap.inverse()));
     }
 
     @Override
