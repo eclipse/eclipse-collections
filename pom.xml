@@ -349,7 +349,11 @@
 
                 <plugin>
                     <artifactId>maven-release-plugin</artifactId>
-                    <version>3.0-r1585899</version>
+                    <version>3.0.0-M1</version>
+                    <configuration>
+                        <autoVersionSubmodules>true</autoVersionSubmodules>
+                        <pushChanges>false</pushChanges>
+                    </configuration>
                 </plugin>
 
                 <plugin>
@@ -376,7 +380,6 @@
                 </plugin>
 
                 <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-enforcer-plugin</artifactId>
                     <version>3.0.0-M3</version>
                     <executions>
@@ -398,6 +401,21 @@
                                             org.eclipse.ebr:ebr-tycho-extras-plugin
                                         </unCheckedPluginList>
                                     </requirePluginVersions>
+                                    <bannedDependencies>
+                                        <excludes>
+                                            <exclude>log4j:log4j</exclude>
+                                            <exclude>commons-logging-api</exclude>
+                                            <exclude>commons-logging</exclude>
+                                            <exclude>org.apache.logging.log4j:log4j</exclude>
+                                            <exclude>org.slf4j:slf4j-simple</exclude>
+                                            <exclude>org.slf4j:slf4j-log4j12</exclude>
+                                            <exclude>org.slf4j:slf4j-jdk14</exclude>
+                                            <exclude>org.slf4j:nop</exclude>
+                                            <exclude>org.slf4j:jcl</exclude>
+                                        </excludes>
+                                    </bannedDependencies>
+                                    <banDuplicatePomDependencyVersions />
+                                    <requireUpperBoundDeps />
                                 </rules>
                             </configuration>
                             <goals>
@@ -411,6 +429,10 @@
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>versions-maven-plugin</artifactId>
                     <version>2.7</version>
+                    <configuration>
+                        <processAllModules>true</processAllModules>
+                        <generateBackupPoms>false</generateBackupPoms>
+                    </configuration>
                 </plugin>
 
                 <plugin>
@@ -567,61 +589,6 @@
                 </plugin>
             </plugins>
         </pluginManagement>
-
-        <plugins>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>sonar-maven-plugin</artifactId>
-            </plugin>
-
-            <plugin>
-                <artifactId>maven-checkstyle-plugin</artifactId>
-            </plugin>
-
-            <plugin>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <configuration>
-                    <source>${maven.compiler.source}</source>
-                    <doctitle>Eclipse Collections - ${project.version}</doctitle>
-                    <windowtitle>Eclipse Collections - ${project.version}</windowtitle>
-                    <show>public</show>
-                    <detectJavaApiLink>true</detectJavaApiLink>
-                    <links>
-                        <link>http://junit.sourceforge.net/javadoc/</link>
-                        <link>https://docs.oracle.com/javase/8/docs/api/</link>
-                    </links>
-                    <destDir>${project.version}</destDir>
-                    <doclint>html,syntax,accessibility</doclint>
-                    <excludePackageNames>
-                        org.openjdk,org.eclipse.collections.impl.jmh,org.eclipse.collections.codegenerator,org.eclipse.collections.codegenerator.maven
-                    </excludePackageNames>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>aggregate</id>
-                        <inherited>false</inherited>
-                        <goals>
-                            <goal>aggregate</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <plugin>
-                <artifactId>maven-enforcer-plugin</artifactId>
-            </plugin>
-
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>versions-maven-plugin</artifactId>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-            </plugin>
-
-        </plugins>
 
     </build>
 

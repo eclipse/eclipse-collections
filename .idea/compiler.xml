@@ -6,22 +6,22 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="acceptance-tests" />
-        <module name="eclipse-collections" />
-        <module name="eclipse-collections-api" />
-        <module name="eclipse-collections-code-generator" />
-        <module name="eclipse-collections-code-generator-maven-plugin" />
-        <module name="eclipse-collections-forkjoin" />
-        <module name="eclipse-collections-testutils" />
-        <module name="jcstress-tests" />
-        <module name="jmh-scala-tests" />
         <module name="junit-trait-runner" />
-        <module name="org.eclipse.collections" />
-        <module name="performance-tests" />
-        <module name="scala-unit-tests" />
-        <module name="serialization-tests" />
-        <module name="unit-tests" />
+        <module name="eclipse-collections-api" />
+        <module name="eclipse-collections" />
         <module name="unit-tests-java8" />
+        <module name="eclipse-collections-testutils" />
+        <module name="unit-tests" />
+        <module name="org.eclipse.collections" />
+        <module name="eclipse-collections-code-generator" />
+        <module name="jcstress-tests" />
+        <module name="eclipse-collections-forkjoin" />
+        <module name="jmh-scala-tests" />
+        <module name="serialization-tests" />
+        <module name="scala-unit-tests" />
+        <module name="performance-tests" />
+        <module name="eclipse-collections-code-generator-maven-plugin" />
+        <module name="acceptance-tests" />
       </profile>
       <profile name="Annotation profile for Eclipse Collections Parent Project" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
