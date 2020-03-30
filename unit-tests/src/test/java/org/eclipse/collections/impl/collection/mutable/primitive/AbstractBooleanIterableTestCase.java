@@ -363,19 +363,42 @@ public abstract class AbstractBooleanIterableTestCase
     {
         BooleanIterable iterable1 = this.newWith(true, false, true);
         boolean and = iterable1.reduce((boolean result, boolean value) -> result && value);
-        Assert.assertEquals(false, and);
+        Assert.assertFalse(and);
 
         BooleanIterable iterable2 = this.newWith(true, true, true);
         boolean and2 = iterable2.reduce((boolean result, boolean value) -> result && value);
-        Assert.assertEquals(true, and2);
+        Assert.assertTrue(and2);
 
         BooleanIterable iterable3 = this.newWith(true, false, true);
         boolean or = iterable3.reduce((boolean result, boolean value) -> result || value);
-        Assert.assertEquals(true, or);
+        Assert.assertTrue(or);
 
         BooleanIterable iterable4 = this.newWith(false, false, false);
         boolean or2 = iterable4.reduce((boolean result, boolean value) -> result || value);
-        Assert.assertEquals(false, or2);
+        Assert.assertFalse(or2);
+    }
+
+    @Test
+    public void reduceIfEmpty()
+    {
+        Assert.assertTrue(this.newWith().reduceIfEmpty((boolean result, boolean value) -> result && value, true));
+        Assert.assertFalse(this.newWith().reduceIfEmpty((boolean result, boolean value) -> result && value, false));
+
+        BooleanIterable iterable1 = this.newWith(true, false, true);
+        boolean and = iterable1.reduceIfEmpty((boolean result, boolean value) -> result && value, true);
+        Assert.assertFalse(and);
+
+        BooleanIterable iterable2 = this.newWith(true, true, true);
+        boolean and2 = iterable2.reduceIfEmpty((boolean result, boolean value) -> result && value, false);
+        Assert.assertTrue(and2);
+
+        BooleanIterable iterable3 = this.newWith(true, false, true);
+        boolean or = iterable3.reduceIfEmpty((boolean result, boolean value) -> result || value, false);
+        Assert.assertTrue(or);
+
+        BooleanIterable iterable4 = this.newWith(false, false, false);
+        boolean or2 = iterable4.reduceIfEmpty((boolean result, boolean value) -> result || value, true);
+        Assert.assertFalse(or2);
     }
 
     @Test
