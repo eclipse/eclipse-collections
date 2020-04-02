@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 Goldman Sachs and others.
+ * Copyright (c) 2020 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -46,7 +46,23 @@ public interface MutableListFactory
         return this.with(items);
     }
 
+    /**
+     * Creates a new list using the passed {@code items} argument as the backing store.
+     * <p>
+     * !!! WARNING: This method uses the passed in array, so can be very unsafe if the original
+     * array is held onto anywhere else. !!!
+     */
     <T> MutableList<T> with(T... items);
+
+    /**
+     * Creates a new list by first copying the array passed in.
+     */
+    default <T> MutableList<T> wrapCopy(T... array)
+    {
+        T[] newArray = (T[]) new Object[array.length];
+        System.arraycopy(array, 0, newArray, 0, array.length);
+        return this.with(newArray);
+    }
 
     /**
      * Same as {@link #empty()}. but takes in initial capacity.

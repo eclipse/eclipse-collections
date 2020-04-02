@@ -114,6 +114,16 @@ public class <name>ArrayList extends Abstract<name>Iterable
         return newList;
     }
 
+    /**
+     * Creates a new list by first copying the array passed in.
+     */
+    public static <name>ArrayList wrapCopy(<type>... array)
+    {
+        <type>[] newArray = new <type>[array.length];
+        System.arraycopy(array, 0, newArray, 0, array.length);
+        return new <name>ArrayList(newArray);
+    }
+
     @Override
     public int size()
     {

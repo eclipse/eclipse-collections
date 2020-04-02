@@ -106,6 +106,16 @@ public class ListsTest
     }
 
     @Test
+    public void wrapCopy()
+    {
+        Integer[] integers = {1, 2, 3, 4};
+        MutableList<Integer> actual = Lists.mutable.wrapCopy(integers);
+        MutableList<Integer> expected = Lists.mutable.with(1, 2, 3, 4);
+        integers[0] = Integer.valueOf(4);
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
     public void immutableWithListTest()
     {
         Assert.assertEquals(Lists.mutable.of(), Lists.mutable.of().toImmutable());

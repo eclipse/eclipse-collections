@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 Goldman Sachs and others.
+ * Copyright (c) 2020 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -27,6 +27,12 @@ public class MutableListFactoryImpl implements MutableListFactory
         return FastList.newList();
     }
 
+    /**
+     * Creates a new list using the passed {@code items} argument as the backing store.
+     * <p>
+     * !!! WARNING: This method uses the passed in array, so can be very unsafe if the original
+     * array is held onto anywhere else. !!!
+     */
     @Override
     public <T> MutableList<T> with(T... items)
     {

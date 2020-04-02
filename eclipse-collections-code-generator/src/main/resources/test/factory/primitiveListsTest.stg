@@ -1,4 +1,4 @@
-import "copyright.stg"
+import "copyrightAndOthers.stg"
 import "primitiveHashCode.stg"
 import "primitiveLiteral.stg"
 
@@ -13,7 +13,7 @@ class(primitive) ::= <<
 >>
 
 body(type, wrapperName, name) ::= <<
-<copyright()>
+<copyrightAndOthers()>
 
 package org.eclipse.collections.impl.factory.primitive;
 
@@ -136,6 +136,16 @@ public class <name>ListsTest
         Assert.assertEquals(list, <name>Lists.immutable.of(new <type>[]{<["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]:(literal.(type))(); separator=", ">}));
         list.add(<(literal.(type))("11")>);
         Assert.assertEquals(list, <name>Lists.immutable.of(new <type>[]{<["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"]:(literal.(type))(); separator=", ">}));
+    }
+
+    @Test
+    public void wrapCopy()
+    {
+        <type>[] array = {<["0", "1"]:(literal.(type))(); separator=", ">};
+        Mutable<name>List actual = <name>Lists.mutable.wrapCopy(array);
+        Mutable<name>List expected = <name>ArrayList.newListWith(<["0", "1"]:(literal.(type))(); separator=", ">);
+        array[0] = <(literal.(type))("1")>;
+        Assert.assertEquals(expected, actual);
     }
 
     @Test
