@@ -74,6 +74,15 @@ public class <name>ArrayListTest extends Abstract<name>ListTestCase
     }
 
     @Test
+    public void wrapCopy()
+    {
+        <type>[] array = {<(literal.(type))("0")>, <(literal.(type))("1")>};
+        <name>ArrayList list = <name>ArrayList.wrapCopy(array);
+        array[0] = <(literal.(type))("1")>;
+        Assert.assertTrue(list.get(0) \< <(literal.(type))("1")>);
+    }
+
+    @Test
     public void addAtIndexAtCapacity() throws Exception
     {
         <name>ArrayList listWithCapacity = new <name>ArrayList(4).with(<["1", "2", "3", "4"]:(literal.(type))(); separator=", ">);

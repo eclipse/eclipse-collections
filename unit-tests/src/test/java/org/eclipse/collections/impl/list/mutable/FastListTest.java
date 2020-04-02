@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Goldman Sachs.
+ * Copyright (c) 2020 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -116,9 +116,13 @@ public class FastListTest extends AbstractListTestCase
     }
 
     @Test
-    public void testWrapCopy()
+    public void wrapCopy()
     {
-        Assert.assertEquals(this.newWith(1, 2, 3, 4), FastList.wrapCopy(1, 2, 3, 4));
+        Integer[] integers = {1, 2, 3, 4};
+        FastList<Integer> actual = FastList.wrapCopy(integers);
+        FastList<Integer> expected = this.newWith(1, 2, 3, 4);
+        integers[0] = Integer.valueOf(4);
+        Assert.assertEquals(expected, actual);
     }
 
     @Override
