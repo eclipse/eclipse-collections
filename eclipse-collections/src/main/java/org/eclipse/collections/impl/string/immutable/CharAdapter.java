@@ -26,6 +26,7 @@ import org.eclipse.collections.api.block.function.primitive.ObjectCharToObjectFu
 import org.eclipse.collections.api.block.predicate.primitive.CharPredicate;
 import org.eclipse.collections.api.block.procedure.primitive.CharIntProcedure;
 import org.eclipse.collections.api.block.procedure.primitive.CharProcedure;
+import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.iterator.CharIterator;
 import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
@@ -36,7 +37,6 @@ import org.eclipse.collections.api.set.primitive.MutableCharSet;
 import org.eclipse.collections.api.tuple.primitive.CharCharPair;
 import org.eclipse.collections.api.tuple.primitive.CharObjectPair;
 import org.eclipse.collections.impl.bag.mutable.primitive.CharHashBag;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.primitive.CharLists;
 import org.eclipse.collections.impl.lazy.primitive.ReverseCharIterable;
 import org.eclipse.collections.impl.list.mutable.FastList;

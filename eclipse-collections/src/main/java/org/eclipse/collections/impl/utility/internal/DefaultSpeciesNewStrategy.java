@@ -19,8 +19,8 @@ import java.util.SortedSet;
 import java.util.concurrent.PriorityBlockingQueue;
 
 import org.eclipse.collections.api.collection.MutableCollection;
-import org.eclipse.collections.impl.factory.Lists;
-import org.eclipse.collections.impl.factory.Sets;
+import org.eclipse.collections.api.factory.Lists;
+import org.eclipse.collections.api.factory.Sets;
 
 public class DefaultSpeciesNewStrategy
 {

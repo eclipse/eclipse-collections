@@ -14,8 +14,8 @@ import java.io.Serializable;
 import java.util.RandomAccess;
 
 import org.eclipse.collections.api.block.procedure.Procedure;
+import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.list.ImmutableList;
-import org.eclipse.collections.impl.factory.Lists;
 
 /**
  * This is a four element immutable List which is created by calling
