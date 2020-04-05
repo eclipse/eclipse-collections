@@ -14,9 +14,9 @@ import java.util.Map;
 
 import org.eclipse.collections.api.bimap.ImmutableBiMap;
 import org.eclipse.collections.api.bimap.MutableBiMap;
+import org.eclipse.collections.api.factory.Maps;
 import org.eclipse.collections.api.factory.bimap.ImmutableBiMapFactory;
 import org.eclipse.collections.api.map.ImmutableMap;
-import org.eclipse.collections.impl.factory.Maps;
 import org.eclipse.collections.impl.utility.MapIterate;
 
 public class ImmutableBiMapFactoryImpl implements ImmutableBiMapFactory
