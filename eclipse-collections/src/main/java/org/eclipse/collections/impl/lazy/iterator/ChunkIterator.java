@@ -16,7 +16,7 @@ import java.util.NoSuchElementException;
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.collection.MutableCollection;
-import org.eclipse.collections.impl.factory.Lists;
+import org.eclipse.collections.api.factory.Lists;
 
 public final class ChunkIterator<T>
         implements Iterator<RichIterable<T>>

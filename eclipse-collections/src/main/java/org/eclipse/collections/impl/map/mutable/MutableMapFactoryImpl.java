@@ -12,10 +12,10 @@ package org.eclipse.collections.impl.map.mutable;
 
 import java.util.Map;
 
+import org.eclipse.collections.api.factory.Maps;
 import org.eclipse.collections.api.factory.map.MutableMapFactory;
 import org.eclipse.collections.api.map.MapIterable;
 import org.eclipse.collections.api.map.MutableMap;
-import org.eclipse.collections.impl.factory.Maps;
 
 public class MutableMapFactoryImpl implements MutableMapFactory
 {

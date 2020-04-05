@@ -17,10 +17,10 @@ import java.util.concurrent.ExecutorService;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
+import org.eclipse.collections.api.factory.Sets;
 import org.eclipse.collections.api.set.FixedSizeSet;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.set.ParallelUnsortedSetIterable;
-import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.set.mutable.AbstractMutableSet;
 import org.eclipse.collections.impl.utility.Iterate;
 
