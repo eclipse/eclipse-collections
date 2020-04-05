@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 Two Sigma and others.
+ * Copyright (c) 2020 Two Sigma and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -322,12 +322,6 @@ public class UnmodifiableMutableOrderedMap<K, V>
     public MutableListMultimap<V, K> flip()
     {
         return this.delegate.flip();
-    }
-
-    @Override
-    public void forEach(Procedure<? super V> procedure)
-    {
-        this.delegate.forEach(procedure);
     }
 
     @Override
