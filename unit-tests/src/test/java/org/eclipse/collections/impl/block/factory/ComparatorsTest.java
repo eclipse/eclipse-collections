@@ -141,7 +141,7 @@ public class ComparatorsTest
         this.assertScalarFunctionParameter(Comparators.byShortFunction((ShortFunction<Integer>) Integer::shortValue));
     }
 
-    private void assertScalarFunctionParameter(SerializableComparator<Integer> comparator)
+    private void assertScalarFunctionParameter(Comparator<Integer> comparator)
     {
         Verify.assertPositive(comparator.compare(2, 1));
         Verify.assertPositive(comparator.compare(-1, -2));

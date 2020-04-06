@@ -86,7 +86,7 @@ public class ImmutableSingletonBagTest extends ImmutableBagTestCase
     public void equalsAndHashCode()
     {
         super.equalsAndHashCode();
-        ImmutableSingletonBag<Integer> immutable = new ImmutableSingletonBag<>(1);
+        ImmutableBag<Integer> immutable = new ImmutableSingletonBag<>(1);
         Bag<Integer> mutable = Bags.mutable.of(1);
         Verify.assertEqualsAndHashCode(immutable, mutable);
         Assert.assertNotEquals(immutable, FastList.newList(mutable));

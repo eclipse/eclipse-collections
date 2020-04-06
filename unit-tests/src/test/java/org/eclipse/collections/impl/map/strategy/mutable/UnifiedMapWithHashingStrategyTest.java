@@ -804,7 +804,7 @@ public class UnifiedMapWithHashingStrategyTest extends UnifiedMapTestCase
         UnifiedMapWithHashingStrategy<Person, Integer> map3 = UnifiedMapWithHashingStrategy.newWithKeysValues(
                 LAST_NAME_HASHING_STRATEGY, JOHNDOE, 1, JANEDOE, 2, JOHNSMITH, 3, JANESMITH, 4);
         UnifiedMapWithHashingStrategy<Person, Integer> map4 = UnifiedMapWithHashingStrategy.newMap(map3);
-        HashMap<Person, Integer> hashMap = new HashMap<>(map3);
+        Map<Person, Integer> hashMap = new HashMap<>(map3);
 
         Verify.assertEqualsAndHashCode(map3, map4);
         Assert.assertTrue(map3.equals(hashMap) && hashMap.equals(map3) && map3.hashCode() != hashMap.hashCode());

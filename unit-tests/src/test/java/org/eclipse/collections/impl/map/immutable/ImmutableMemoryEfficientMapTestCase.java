@@ -778,7 +778,7 @@ public abstract class ImmutableMemoryEfficientMapTestCase extends ImmutableMapTe
             expected.putAll(-i, Interval.fromTo(i, map.size()));
         }
 
-        NegativeIntervalFunction function = new NegativeIntervalFunction();
+        Function<Integer, Iterable<Integer>> function = new NegativeIntervalFunction();
         Multimap<Integer, Integer> actual = map.groupByEach(function);
         expected.forEachKey(each -> {
             Assert.assertTrue(actual.containsKey(each));

@@ -14,6 +14,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import org.eclipse.collections.api.LazyIterable;
+import org.eclipse.collections.api.map.primitive.MutableObjectBooleanMap;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.impl.lazy.AbstractLazyIterableTestCase;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
@@ -29,7 +30,7 @@ public class ObjectBooleanHashMapKeysViewTest extends AbstractLazyIterableTestCa
     @Override
     protected <T> LazyIterable<T> newWith(T... elements)
     {
-        ObjectBooleanHashMap<T> map = new ObjectBooleanHashMap<>();
+        MutableObjectBooleanMap<T> map = new ObjectBooleanHashMap<>();
         for (int i = 0; i < elements.length; i++)
         {
             map.put(elements[i], (i & 1) == 0);

@@ -63,10 +63,10 @@ public final class Functions
     private static final Function<?, ?> MAP_KEY_FUNCTION = new MapKeyFunction<>();
     private static final Function<?, ?> MAP_VALUE_FUNCTION = new MapValueFunction<>();
     private static final Function<Iterable<?>, Integer> SIZE_FUNCTION = new SizeFunction();
-    private static final FirstOfPairFunction<?> FIRST_OF_PAIR_FUNCTION = new FirstOfPairFunction<>();
-    private static final SecondOfPairFunction<?> SECOND_OF_PAIR_FUNCTION = new SecondOfPairFunction<>();
-    private static final CheckedFunction<String, Class<?>> CLASS_FOR_NAME = new ClassForNameFunction();
-    private static final SwappedPairFunction<?, ?> SWAPPED_PAIR_FUNCTION = new SwappedPairFunction<>();
+    private static final Function<?, ?> FIRST_OF_PAIR_FUNCTION = new FirstOfPairFunction<>();
+    private static final Function<?, ?> SECOND_OF_PAIR_FUNCTION = new SecondOfPairFunction<>();
+    private static final Function<String, Class<?>> CLASS_FOR_NAME = new ClassForNameFunction();
+    private static final Function<?, ?> SWAPPED_PAIR_FUNCTION = new SwappedPairFunction<>();
 
     private Functions()
     {
@@ -386,12 +386,12 @@ public final class Functions
 
     public static <V1> Function<Pair<V1, ?>, V1> firstOfPair()
     {
-        return (Function<Pair<V1, ?>, V1>) (Function<?, ?>) FIRST_OF_PAIR_FUNCTION;
+        return (Function<Pair<V1, ?>, V1>) FIRST_OF_PAIR_FUNCTION;
     }
 
     public static <V2> Function<Pair<?, V2>, V2> secondOfPair()
     {
-        return (Function<Pair<?, V2>, V2>) (Function<?, ?>) SECOND_OF_PAIR_FUNCTION;
+        return (Function<Pair<?, V2>, V2>) SECOND_OF_PAIR_FUNCTION;
     }
 
     /**
@@ -401,7 +401,7 @@ public final class Functions
      */
     public static <S, T> Function<Pair<S, T>, Pair<T, S>> swappedPair()
     {
-        return (Function<Pair<S, T>, Pair<T, S>>) (Function<?, ?>) SWAPPED_PAIR_FUNCTION;
+        return (Function<Pair<S, T>, Pair<T, S>>) SWAPPED_PAIR_FUNCTION;
     }
 
     /**

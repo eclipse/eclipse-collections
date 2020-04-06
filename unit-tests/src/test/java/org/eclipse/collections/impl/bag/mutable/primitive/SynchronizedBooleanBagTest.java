@@ -38,7 +38,7 @@ public class SynchronizedBooleanBagTest extends AbstractMutableBooleanBagTestCas
     public void asSynchronized()
     {
         super.asSynchronized();
-        SynchronizedBooleanBag bagWithLockObject = new SynchronizedBooleanBag(BooleanHashBag.newBagWith(true, false, true), new Object());
+        MutableBooleanBag bagWithLockObject = new SynchronizedBooleanBag(BooleanHashBag.newBagWith(true, false, true), new Object());
         Assert.assertSame(bagWithLockObject, bagWithLockObject.asSynchronized());
         Assert.assertEquals(bagWithLockObject, bagWithLockObject.asSynchronized());
         MutableBooleanBag bag = this.classUnderTest();

@@ -1015,7 +1015,7 @@ public abstract class AbstractImmutableSortedBagTestCase extends AbstractImmutab
     public void groupByEach()
     {
         ImmutableSortedBag<Integer> undertest = this.classUnderTest(Collections.reverseOrder());
-        NegativeIntervalFunction function = new NegativeIntervalFunction();
+        Function<Integer, Iterable<Integer>> function = new NegativeIntervalFunction();
         ImmutableSortedBagMultimap<Integer, Integer> actual = undertest.groupByEach(function);
         ImmutableSortedBagMultimap<Integer, Integer> expected = TreeBag.newBag(undertest).groupByEach(function).toImmutable();
         Assert.assertEquals(expected, actual);
@@ -1035,7 +1035,7 @@ public abstract class AbstractImmutableSortedBagTestCase extends AbstractImmutab
     public void groupByEachWithTarget()
     {
         ImmutableSortedBag<Integer> undertest = this.classUnderTest();
-        NegativeIntervalFunction function = new NegativeIntervalFunction();
+        Function<Integer, Iterable<Integer>> function = new NegativeIntervalFunction();
         TreeBagMultimap<Integer, Integer> actual = undertest.groupByEach(function, TreeBagMultimap.newMultimap());
         TreeBagMultimap<Integer, Integer> expected = TreeBag.newBag(undertest).groupByEach(function);
         Assert.assertEquals(expected, actual);

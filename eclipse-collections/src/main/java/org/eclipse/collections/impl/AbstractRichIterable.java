@@ -622,14 +622,14 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
     @Override
     public void appendString(Appendable appendable, String separator)
     {
-        AppendStringProcedure<T> appendStringProcedure = new AppendStringProcedure<>(appendable, separator);
+        Procedure<T> appendStringProcedure = new AppendStringProcedure<>(appendable, separator);
         this.forEach(appendStringProcedure);
     }
 
     @Override
     public void appendString(Appendable appendable, String start, String separator, String end)
     {
-        AppendStringProcedure<T> appendStringProcedure = new AppendStringProcedure<>(appendable, separator);
+        Procedure<T> appendStringProcedure = new AppendStringProcedure<>(appendable, separator);
         try
         {
             appendable.append(start);

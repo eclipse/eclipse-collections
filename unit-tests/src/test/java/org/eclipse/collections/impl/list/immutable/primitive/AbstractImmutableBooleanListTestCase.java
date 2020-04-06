@@ -54,7 +54,7 @@ public abstract class AbstractImmutableBooleanListTestCase extends AbstractImmut
     @Test
     public void newWithOn64ElementCollection()
     {
-        BooleanArrayList sixtyFourElementCollection = new BooleanArrayList();
+        MutableBooleanList sixtyFourElementCollection = new BooleanArrayList();
         for (int i = 0; i < 64; i++)
         {
             sixtyFourElementCollection.add(true);

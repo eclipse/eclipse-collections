@@ -1178,7 +1178,7 @@ final class ImmutableArrayStack<T> implements ImmutableStack<T>, Serializable
         public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
         {
             int size = in.readInt();
-            FastList<T> deserializedDelegate = new FastList<>(size);
+            MutableList<T> deserializedDelegate = new FastList<>(size);
 
             for (int i = 0; i < size; i++)
             {

@@ -11,6 +11,7 @@
 package org.eclipse.collections.impl.block.procedure.primitive;
 
 import org.eclipse.collections.api.block.function.primitive.BooleanFunction;
+import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.list.primitive.ImmutableBooleanList;
 import org.eclipse.collections.api.list.primitive.MutableBooleanList;
 import org.eclipse.collections.impl.factory.primitive.BooleanLists;
@@ -24,7 +25,7 @@ public class CollectBooleanProcedureTest
     {
         BooleanFunction<String> stringIsEmptyFunction = String::isEmpty;
         MutableBooleanList targetList = BooleanLists.mutable.empty();
-        CollectBooleanProcedure<String> procedure = new CollectBooleanProcedure(stringIsEmptyFunction, targetList);
+        Procedure<String> procedure = new CollectBooleanProcedure<>(stringIsEmptyFunction, targetList);
         procedure.value("");
         procedure.value("0");
         procedure.value("00");

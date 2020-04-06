@@ -11,6 +11,7 @@
 package org.eclipse.collections.impl.map.sorted.mutable;
 
 import java.util.Map;
+import java.util.SortedMap;
 import java.util.TreeMap;
 
 import org.eclipse.collections.impl.block.factory.Comparators;
@@ -21,9 +22,9 @@ import org.junit.Test;
 
 public class UnmodifiableSortedMapTest
 {
-    private final UnmodifiableSortedMap<Integer, String> map = new UnmodifiableSortedMap<>(
+    private final SortedMap<Integer, String> map = new UnmodifiableSortedMap<>(
             new TreeMap<>(SortedMaps.mutable.of(1, "1", 2, "2", 3, "3", 4, "4")));
-    private final UnmodifiableSortedMap<Integer, String> revMap = new UnmodifiableSortedMap<>(
+    private final SortedMap<Integer, String> revMap = new UnmodifiableSortedMap<>(
             new TreeMap<>(SortedMaps.mutable.of(Comparators.reverseNaturalOrder(),
                     1, "1", 2, "2", 3, "3", 4, "4")));
 

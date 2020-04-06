@@ -31,18 +31,18 @@ import org.eclipse.collections.impl.block.function.checked.ThrowingFunction0;
 
 public final class Functions0
 {
-    private static final TrueFunction TRUE_FUNCTION = new TrueFunction();
-    private static final FalseFunction FALSE_FUNCTION = new FalseFunction();
-    private static final NewFastListFunction<?> NEW_FAST_LIST_FUNCTION = new NewFastListFunction<>();
-    private static final NewUnifiedSetFunction<?> NEW_UNIFIED_SET_FUNCTION = new NewUnifiedSetFunction<>();
-    private static final NewHashBagFunction<?> NEW_HASH_BAG_FUNCTION = new NewHashBagFunction<>();
-    private static final NewUnifiedMapFunction<?, ?> NEW_UNIFIED_MAP_FUNCTION = new NewUnifiedMapFunction<>();
-    private static final NullFunction<?> NULL_FUNCTION = new NullFunction<>();
-    private static final AtomicIntegerZeroFunction ATOMIC_INTEGER_ZERO = new AtomicIntegerZeroFunction();
-    private static final AtomicLongZeroFunction ATOMIC_LONG_ZERO = new AtomicLongZeroFunction();
-    private static final IntegerZeroFunction INTEGER_ZERO = new IntegerZeroFunction();
-    private static final BigDecimalZeroFunction BIG_DECIMAL_ZERO = new BigDecimalZeroFunction();
-    private static final BigIntegerZeroFunction BIG_INTEGER_ZERO = new BigIntegerZeroFunction();
+    private static final Function0<Boolean> TRUE_FUNCTION = new TrueFunction();
+    private static final Function0<Boolean> FALSE_FUNCTION = new FalseFunction();
+    private static final Function0<?> NEW_FAST_LIST_FUNCTION = new NewFastListFunction<>();
+    private static final Function0<?> NEW_UNIFIED_SET_FUNCTION = new NewUnifiedSetFunction<>();
+    private static final Function0<?> NEW_HASH_BAG_FUNCTION = new NewHashBagFunction<>();
+    private static final Function0<?> NEW_UNIFIED_MAP_FUNCTION = new NewUnifiedMapFunction<>();
+    private static final Function0<?> NULL_FUNCTION = new NullFunction<>();
+    private static final Function0<AtomicInteger> ATOMIC_INTEGER_ZERO = new AtomicIntegerZeroFunction();
+    private static final Function0<AtomicLong> ATOMIC_LONG_ZERO = new AtomicLongZeroFunction();
+    private static final Function0<Integer> INTEGER_ZERO = new IntegerZeroFunction();
+    private static final Function0<BigDecimal> BIG_DECIMAL_ZERO = new BigDecimalZeroFunction();
+    private static final Function0<BigInteger> BIG_INTEGER_ZERO = new BigIntegerZeroFunction();
 
     private Functions0()
     {
@@ -67,22 +67,22 @@ public final class Functions0
 
     public static <T> Function0<MutableList<T>> newFastList()
     {
-        return (Function0<MutableList<T>>) (Function0<?>) NEW_FAST_LIST_FUNCTION;
+        return (Function0<MutableList<T>>) NEW_FAST_LIST_FUNCTION;
     }
 
     public static <T> Function0<MutableSet<T>> newUnifiedSet()
     {
-        return (Function0<MutableSet<T>>) (Function0<?>) NEW_UNIFIED_SET_FUNCTION;
+        return (Function0<MutableSet<T>>) NEW_UNIFIED_SET_FUNCTION;
     }
 
     public static <T> Function0<MutableBag<T>> newHashBag()
     {
-        return (Function0<MutableBag<T>>) (Function0<?>) NEW_HASH_BAG_FUNCTION;
+        return (Function0<MutableBag<T>>) NEW_HASH_BAG_FUNCTION;
     }
 
     public static <K, V> Function0<MutableMap<K, V>> newUnifiedMap()
     {
-        return (Function0<MutableMap<K, V>>) (Function0<?>) NEW_UNIFIED_MAP_FUNCTION;
+        return (Function0<MutableMap<K, V>>) NEW_UNIFIED_MAP_FUNCTION;
     }
 
     /**

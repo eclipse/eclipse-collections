@@ -37,6 +37,7 @@ import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.partition.set.PartitionMutableSet;
 import org.eclipse.collections.api.set.ImmutableSet;
+import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.set.ParallelUnsortedSetIterable;
 import org.eclipse.collections.api.tuple.Twin;
 import org.eclipse.collections.impl.block.factory.Procedures2;
@@ -1579,7 +1580,7 @@ public class UnifiedSetWithHashingStrategy<T>
         while (true);
     }
 
-    private void addIfFound(T key, UnifiedSetWithHashingStrategy<T> other)
+    private void addIfFound(T key, MutableSet<T> other)
     {
         int index = this.index(key);
 
@@ -1599,7 +1600,7 @@ public class UnifiedSetWithHashingStrategy<T>
         }
     }
 
-    private void addIfFoundFromChain(ChainedBucket bucket, T key, UnifiedSetWithHashingStrategy<T> other)
+    private void addIfFoundFromChain(ChainedBucket bucket, T key, MutableSet<T> other)
     {
         do
         {

@@ -1125,7 +1125,7 @@ public abstract class AbstractListTestCase
         super.forEachWithIndex();
 
         MutableList<Integer> elements = FastList.newList();
-        IntArrayList indexes = new IntArrayList();
+        MutableIntList indexes = new IntArrayList();
         MutableList<Integer> collection = this.newWith(1, 2, 3, 4);
         collection.forEachWithIndex((Integer object, int index) ->
         {

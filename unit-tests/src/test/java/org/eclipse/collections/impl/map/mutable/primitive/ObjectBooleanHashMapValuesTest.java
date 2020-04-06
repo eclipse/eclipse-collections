@@ -12,6 +12,7 @@ package org.eclipse.collections.impl.map.mutable.primitive;
 
 import org.eclipse.collections.api.collection.primitive.MutableBooleanCollection;
 import org.eclipse.collections.api.list.MutableList;
+import org.eclipse.collections.api.map.primitive.MutableObjectBooleanMap;
 import org.eclipse.collections.impl.list.mutable.FastList;
 
 /**
@@ -28,7 +29,7 @@ public class ObjectBooleanHashMapValuesTest extends ObjectBooleanHashMapValuesTe
     @Override
     protected MutableBooleanCollection newWith(boolean... elements)
     {
-        ObjectBooleanHashMap<Integer> map = new ObjectBooleanHashMap<>();
+        MutableObjectBooleanMap<Integer> map = new ObjectBooleanHashMap<>();
         for (int i = 0; i < elements.length; i++)
         {
             map.put(i, elements[i]);

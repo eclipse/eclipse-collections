@@ -239,7 +239,7 @@ public class ByteHashSetTest extends AbstractByteSetTestCase
     @Test
     public void addAndCheckField()
     {
-        ByteHashSet hashSet = new ByteHashSet();
+        MutableByteSet hashSet = new ByteHashSet();
         Assert.assertTrue(hashSet.add((byte) 14));
         Assert.assertFalse(hashSet.add((byte) 14));
         Assert.assertTrue(hashSet.add((byte) 2));

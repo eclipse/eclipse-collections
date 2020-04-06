@@ -10,6 +10,7 @@
 
 package org.eclipse.collections.impl.lazy.iterator;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -36,7 +37,7 @@ public class FlatCollectIteratorTest
     public void nextAfterEmptyIterable()
     {
         Object expected = new Object();
-        FlatCollectIterator<List<Object>, Object> flattenIterator = new FlatCollectIterator<>(
+        Iterator<Object> flattenIterator = new FlatCollectIterator<>(
                 Lists.fixedSize.of(
                         Lists.fixedSize.of(),
                         Lists.fixedSize.of(expected)),

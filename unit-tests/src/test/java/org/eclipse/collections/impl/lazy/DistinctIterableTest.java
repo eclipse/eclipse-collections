@@ -57,7 +57,7 @@ public class DistinctIterableTest extends AbstractLazyIterableTestCase
     @Test
     public void iterator()
     {
-        InternalIterable<Integer> distinct = new DistinctIterable<>(FastList.newListWith(3, 1, 2, 2, 3, 4, 2, 5));
+        LazyIterable<Integer> distinct = new DistinctIterable<>(FastList.newListWith(3, 1, 2, 2, 3, 4, 2, 5));
         StringBuilder builder = new StringBuilder("");
         for (Integer each : distinct)
         {

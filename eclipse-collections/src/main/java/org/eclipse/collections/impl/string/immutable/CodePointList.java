@@ -316,7 +316,7 @@ public class CodePointList extends AbstractIntIterable implements CharSequence, 
 
     public CodePointList collectInt(IntToIntFunction function)
     {
-        IntArrayList collected = new IntArrayList(this.size());
+        MutableIntList collected = new IntArrayList(this.size());
         for (int i = 0; i < this.size(); i++)
         {
             int codePoint = this.get(i);

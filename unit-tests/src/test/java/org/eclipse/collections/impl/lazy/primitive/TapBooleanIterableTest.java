@@ -10,6 +10,7 @@
 
 package org.eclipse.collections.impl.lazy.primitive;
 
+import org.eclipse.collections.api.LazyBooleanIterable;
 import org.eclipse.collections.api.iterator.BooleanIterator;
 import org.eclipse.collections.api.list.primitive.BooleanList;
 import org.eclipse.collections.impl.block.factory.primitive.BooleanPredicates;
@@ -26,7 +27,7 @@ public class TapBooleanIterableTest
     public void booleanIterator()
     {
         StringBuilder concat = new StringBuilder();
-        TapBooleanIterable iterable = new TapBooleanIterable(this.list, concat::append);
+        LazyBooleanIterable iterable = new TapBooleanIterable(this.list, concat::append);
 
         for (BooleanIterator iterator = iterable.booleanIterator(); iterator.hasNext(); )
         {
@@ -39,7 +40,7 @@ public class TapBooleanIterableTest
     public void forEach()
     {
         StringBuilder concat = new StringBuilder();
-        TapBooleanIterable iterable = new TapBooleanIterable(this.list, concat::append);
+        LazyBooleanIterable iterable = new TapBooleanIterable(this.list, concat::append);
 
         iterable.forEach(each -> { });
         Assert.assertEquals("truefalsefalsetrue", concat.toString());
@@ -60,7 +61,7 @@ public class TapBooleanIterableTest
     public void size()
     {
         StringBuilder concat = new StringBuilder();
-        TapBooleanIterable iterable = new TapBooleanIterable(this.list, concat::append);
+        LazyBooleanIterable iterable = new TapBooleanIterable(this.list, concat::append);
 
         Assert.assertEquals(4L, iterable.size());
         Assert.assertEquals("truefalsefalsetrue", concat.toString());
@@ -70,7 +71,7 @@ public class TapBooleanIterableTest
     public void empty()
     {
         StringBuilder concat = new StringBuilder();
-        TapBooleanIterable iterable = new TapBooleanIterable(this.list, concat::append);
+        LazyBooleanIterable iterable = new TapBooleanIterable(this.list, concat::append);
 
         Assert.assertTrue(iterable.notEmpty());
         Assert.assertFalse(iterable.isEmpty());
@@ -80,7 +81,7 @@ public class TapBooleanIterableTest
     public void count()
     {
         StringBuilder concat = new StringBuilder();
-        TapBooleanIterable iterable = new TapBooleanIterable(this.list, concat::append);
+        LazyBooleanIterable iterable = new TapBooleanIterable(this.list, concat::append);
 
         Assert.assertEquals(2L, iterable.count(BooleanPredicates.isTrue()));
         Assert.assertEquals(2L, iterable.count(BooleanPredicates.isFalse()));
@@ -111,7 +112,7 @@ public class TapBooleanIterableTest
     public void select()
     {
         StringBuilder concat = new StringBuilder();
-        TapBooleanIterable iterable = new TapBooleanIterable(this.list, concat::append);
+        LazyBooleanIterable iterable = new TapBooleanIterable(this.list, concat::append);
 
         Assert.assertEquals(2L, iterable.select(BooleanPredicates.isFalse()).size());
         Assert.assertEquals(2L, iterable.select(BooleanPredicates.equal(true)).size());
@@ -122,7 +123,7 @@ public class TapBooleanIterableTest
     public void reject()
     {
         StringBuilder concat = new StringBuilder();
-        TapBooleanIterable iterable = new TapBooleanIterable(this.list, concat::append);
+        LazyBooleanIterable iterable = new TapBooleanIterable(this.list, concat::append);
 
         Assert.assertEquals(2L, iterable.reject(BooleanPredicates.isFalse()).size());
         Assert.assertEquals(2L, iterable.reject(BooleanPredicates.equal(true)).size());
@@ -143,7 +144,7 @@ public class TapBooleanIterableTest
     public void collect()
     {
         StringBuilder concat = new StringBuilder();
-        TapBooleanIterable iterable = new TapBooleanIterable(this.list, concat::append);
+        LazyBooleanIterable iterable = new TapBooleanIterable(this.list, concat::append);
 
         Assert.assertEquals(4L, iterable.collect(String::valueOf).size());
         Assert.assertEquals("truefalsefalsetrue", concat.toString());
@@ -153,7 +154,7 @@ public class TapBooleanIterableTest
     public void toArray()
     {
         StringBuilder concat = new StringBuilder();
-        TapBooleanIterable iterable = new TapBooleanIterable(this.list, concat::append);
+        LazyBooleanIterable iterable = new TapBooleanIterable(this.list, concat::append);
 
         Assert.assertEquals(4L, iterable.toArray().length);
         Assert.assertTrue(iterable.toArray()[0]);
@@ -164,7 +165,7 @@ public class TapBooleanIterableTest
     public void contains()
     {
         StringBuilder concat = new StringBuilder();
-        TapBooleanIterable iterable = new TapBooleanIterable(this.list, concat::append);
+        LazyBooleanIterable iterable = new TapBooleanIterable(this.list, concat::append);
 
         Assert.assertTrue(iterable.contains(true));
         Assert.assertTrue(iterable.contains(false));
@@ -174,7 +175,7 @@ public class TapBooleanIterableTest
     public void containsAll()
     {
         StringBuilder concat = new StringBuilder();
-        TapBooleanIterable iterable = new TapBooleanIterable(this.list, concat::append);
+        LazyBooleanIterable iterable = new TapBooleanIterable(this.list, concat::append);
 
         Assert.assertTrue(iterable.containsAll(true, true));
         Assert.assertTrue(iterable.containsAll(false, true));

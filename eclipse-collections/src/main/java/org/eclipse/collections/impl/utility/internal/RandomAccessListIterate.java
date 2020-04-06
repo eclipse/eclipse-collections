@@ -1076,34 +1076,34 @@ public final class RandomAccessListIterate
 
     public static <T> PartitionMutableList<T> partition(List<T> list, Predicate<? super T> predicate)
     {
-        PartitionFastList<T> partitionFastList = new PartitionFastList<>();
+        PartitionMutableList<T> partitionMutableList = new PartitionFastList<>();
 
         int size = list.size();
         for (int i = 0; i < size; i++)
         {
             T each = list.get(i);
             MutableList<T> bucket = predicate.accept(each)
-                    ? partitionFastList.getSelected()
-                    : partitionFastList.getRejected();
+                    ? partitionMutableList.getSelected()
+                    : partitionMutableList.getRejected();
             bucket.add(each);
         }
-        return partitionFastList;
+        return partitionMutableList;
     }
 
     public static <T, P> PartitionMutableList<T> partitionWith(List<T> list, Predicate2<? super T, ? super P> predicate, P parameter)
     {
-        PartitionFastList<T> partitionFastList = new PartitionFastList<>();
+        PartitionMutableList<T> partitionMutableList = new PartitionFastList<>();
 
         int size = list.size();
         for (int i = 0; i < size; i++)
         {
             T each = list.get(i);
             MutableList<T> bucket = predicate.accept(each, parameter)
-                    ? partitionFastList.getSelected()
-                    : partitionFastList.getRejected();
+                    ? partitionMutableList.getSelected()
+                    : partitionMutableList.getRejected();
             bucket.add(each);
         }
-        return partitionFastList;
+        return partitionMutableList;
     }
 
     public static <T> boolean removeIf(List<T> list, Predicate<? super T> predicate)

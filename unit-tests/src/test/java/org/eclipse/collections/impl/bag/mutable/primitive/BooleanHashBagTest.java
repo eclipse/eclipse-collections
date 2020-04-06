@@ -107,7 +107,7 @@ public class BooleanHashBagTest extends AbstractMutableBooleanBagTestCase
     public void appendString()
     {
         super.appendString();
-        StringBuilder appendable2 = new StringBuilder();
+        Appendable appendable2 = new StringBuilder();
         BooleanHashBag bag1 = this.newWith(false, false, true);
         bag1.appendString(appendable2);
         Assert.assertEquals(appendable2.toString(), "false, false, true", appendable2.toString());

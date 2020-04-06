@@ -10,6 +10,8 @@
 
 package org.eclipse.collections.impl.block.predicate;
 
+import org.eclipse.collections.api.block.predicate.Predicate;
+import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.tuple.Tuples;
 import org.junit.Assert;
 import org.junit.Test;
@@ -19,7 +21,7 @@ public class PairPredicateTest
     @Test
     public void accept()
     {
-        PairPredicate<String, Integer> pairPredicate = new PairPredicate<String, Integer>()
+        Predicate<Pair<String, Integer>> pairPredicate = new PairPredicate<String, Integer>()
         {
             @Override
             public boolean accept(String argument1, Integer argument2)

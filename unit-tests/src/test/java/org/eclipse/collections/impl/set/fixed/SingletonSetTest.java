@@ -18,6 +18,7 @@ import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.partition.set.PartitionMutableSet;
+import org.eclipse.collections.api.set.FixedSizeSet;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.tuple.Twin;
 import org.eclipse.collections.impl.block.factory.Functions;
@@ -72,7 +73,7 @@ public class SingletonSetTest extends AbstractMemoryEfficientMutableSetTestCase
     {
         Twin<String> twin1 = Tuples.twin("1", "1");
         Twin<String> twin2 = Tuples.twin("1", "1");
-        SingletonSet<Twin<String>> set = new SingletonSet<>(twin1);
+        FixedSizeSet<Twin<String>> set = new SingletonSet<>(twin1);
         set.with(twin2);
         Assert.assertSame(set.getFirst(), twin1);
     }

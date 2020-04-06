@@ -13,6 +13,7 @@ package org.eclipse.collections.impl.map.mutable.primitive;
 import org.eclipse.collections.api.block.HashingStrategy;
 import org.eclipse.collections.api.collection.primitive.MutableBooleanCollection;
 import org.eclipse.collections.api.list.MutableList;
+import org.eclipse.collections.api.map.primitive.MutableObjectBooleanMap;
 import org.eclipse.collections.impl.block.factory.HashingStrategies;
 import org.eclipse.collections.impl.list.mutable.FastList;
 
@@ -40,7 +41,7 @@ public class ObjectBooleanHashMapWithHashingStrategyValuesTest extends ObjectBoo
     @Override
     protected MutableBooleanCollection newWith(boolean... elements)
     {
-        ObjectBooleanHashMapWithHashingStrategy<Integer> map = new ObjectBooleanHashMapWithHashingStrategy<>(INT_MOD_10_STRATEGY);
+        MutableObjectBooleanMap<Integer> map = new ObjectBooleanHashMapWithHashingStrategy<>(INT_MOD_10_STRATEGY);
         for (int i = 0; i < elements.length; i++)
         {
             map.put(i, elements[i]);

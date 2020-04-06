@@ -14,6 +14,8 @@ import java.io.ObjectOutput;
 import java.io.Serializable;
 import java.util.Iterator;
 
+import org.eclipse.collections.api.RichIterable;
+import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.multimap.list.FastListMultimap;
 import org.junit.Assert;
@@ -28,7 +30,7 @@ public class MultimapKeyValuesSerializingProcedureTest
         map.put("A", "alpha");
         map.put("A", "beta");
         FastList<? extends Serializable> expectedWrites = FastList.newListWith("A", 2, "alpha", "beta");
-        MultimapKeyValuesSerializingProcedure<String, String> procedure =
+        Procedure2<String, RichIterable<String>> procedure =
                 new MultimapKeyValuesSerializingProcedure<>(new MockObjectOutput(expectedWrites));
         map.toMap().forEachKeyValue(procedure);
     }

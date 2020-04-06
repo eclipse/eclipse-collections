@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
 
+import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.stack.StackIterable;
 import org.eclipse.collections.impl.block.procedure.checked.CheckedProcedure;
 import org.eclipse.collections.impl.factory.Stacks;
@@ -65,7 +66,7 @@ class ImmutableStackSerializationProxy<T> implements Externalizable
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
     {
         int size = in.readInt();
-        FastList<T> deserializedDelegate = new FastList<>(size);
+        MutableList<T> deserializedDelegate = new FastList<>(size);
 
         for (int i = 0; i < size; i++)
         {

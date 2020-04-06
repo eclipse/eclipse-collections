@@ -242,7 +242,7 @@ public abstract class UnifiedMapTestCase extends MutableMapTestCase
     {
         MutableMap<Integer, String> map = this.newMapWithKeyValue(1, "One");
         Map.Entry<Integer, String>[] target = new Map.Entry[4];
-        ImmutableEntry<Integer, String> immutableEntry = new ImmutableEntry<>(null, null);
+        Map.Entry<Integer, String> immutableEntry = new ImmutableEntry<>(null, null);
         target[1] = immutableEntry;
         target[2] = immutableEntry;
         target[3] = immutableEntry;

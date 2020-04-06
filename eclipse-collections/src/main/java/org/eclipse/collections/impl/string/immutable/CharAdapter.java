@@ -151,7 +151,7 @@ public class CharAdapter
     public CharAdapter distinct()
     {
         StringBuilder builder = new StringBuilder();
-        CharHashSet seenSoFar = new CharHashSet();
+        MutableCharSet seenSoFar = new CharHashSet();
 
         int size = this.size();
         for (int i = 0; i < size; i++)
@@ -402,7 +402,7 @@ public class CharAdapter
     public MutableCharBag toBag()
     {
         int size = this.size();
-        CharHashBag bag = new CharHashBag(size);
+        MutableCharBag bag = new CharHashBag(size);
         for (int i = 0; i < size; i++)
         {
             bag.add(this.get(i));

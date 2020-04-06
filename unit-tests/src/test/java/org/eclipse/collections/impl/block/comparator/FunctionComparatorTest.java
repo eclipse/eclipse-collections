@@ -32,7 +32,7 @@ public class FunctionComparatorTest
     @Test
     public void comparator()
     {
-        FunctionComparator<Band, String> comparator = new FunctionComparator<>(
+        Comparator<Band> comparator = new FunctionComparator<>(
                 Band.TO_NAME,
                 String::compareTo);
 

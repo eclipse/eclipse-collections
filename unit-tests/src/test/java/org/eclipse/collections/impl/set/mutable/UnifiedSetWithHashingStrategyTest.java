@@ -12,6 +12,7 @@ package org.eclipse.collections.impl.set.mutable;
 
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Set;
 
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.block.HashingStrategy;
@@ -823,7 +824,7 @@ public class UnifiedSetWithHashingStrategyTest extends AbstractUnifiedSetTestCas
         Verify.assertEqualsAndHashCode(setA, setB);
 
         //Checking that a hashing set is symmetrically equal to an identical JDK set
-        HashSet<Person> hashSet = new HashSet<>(setA);
+        Set<Person> hashSet = new HashSet<>(setA);
         Assert.assertTrue(hashSet.equals(setA) && setA.equals(hashSet));
 
         //Checking that a hash set is symmetrically equal to an identical Eclipse Collections set

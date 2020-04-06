@@ -561,7 +561,7 @@ public abstract class AbstractMutableSortedBagTestCase extends MutableBagTestCas
     {
         super.groupByEach();
         MutableSortedBag<Integer> bag = this.newWith(Collections.reverseOrder(), 1, 1, 1, 2, 3, 4, 5, 6, 7, 8, 9);
-        NegativeIntervalFunction function = new NegativeIntervalFunction();
+        Function<Integer, Iterable<Integer>> function = new NegativeIntervalFunction();
         MutableSortedBagMultimap<Integer, Integer> expected =
                 this.newWith(Collections.<Integer>reverseOrder()).groupByEach(function);
 

@@ -10,6 +10,7 @@
 
 package org.eclipse.collections.impl.lazy.iterator;
 
+import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import org.eclipse.collections.impl.factory.Lists;
@@ -36,7 +37,7 @@ public class TapIteratorTest
     public void nextAfterEmptyIterable()
     {
         Object expected = new Object();
-        TapIterator<Object> iterator = new TapIterator<>(
+        Iterator<Object> iterator = new TapIterator<>(
                 Lists.fixedSize.of(expected), object -> { });
         Assert.assertSame(expected, iterator.next());
     }

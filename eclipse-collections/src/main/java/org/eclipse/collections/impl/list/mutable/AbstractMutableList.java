@@ -661,7 +661,7 @@ public abstract class AbstractMutableList<T>
         private final int offset;
         private int size;
 
-        protected SubList(AbstractMutableList<T> list, int fromIndex, int toIndex)
+        protected SubList(MutableList<T> list, int fromIndex, int toIndex)
         {
             if (fromIndex < 0)
             {

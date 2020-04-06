@@ -10,6 +10,7 @@
 
 package org.eclipse.collections.impl.block.function;
 
+import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.impl.block.factory.IntegerPredicates;
 import org.eclipse.collections.impl.block.factory.Predicates;
@@ -30,7 +31,7 @@ public class IfFunctionTest
         map.put(4, 4);
         map.put(5, 5);
 
-        IfFunction<Integer, Integer> function = new IfFunction<>(
+        Function<Integer, Integer> function = new IfFunction<>(
                 IntegerPredicates.isEven(),
                 (Integer ignored) -> 1,
                 (Integer ignored) -> 0);

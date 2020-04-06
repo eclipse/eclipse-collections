@@ -15,6 +15,7 @@ import java.util.NoSuchElementException;
 
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.block.HashingStrategy;
+import org.eclipse.collections.api.map.primitive.MutableObjectBooleanMap;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.impl.block.factory.HashingStrategies;
 import org.eclipse.collections.impl.lazy.AbstractLazyIterableTestCase;
@@ -43,7 +44,7 @@ public class ObjectBooleanHashMapWithHashingStrategyKeysViewTest extends Abstrac
     @Override
     protected <T> LazyIterable<T> newWith(T... elements)
     {
-        ObjectBooleanHashMapWithHashingStrategy<T> map = new ObjectBooleanHashMapWithHashingStrategy<>(HashingStrategies.nullSafeHashingStrategy(HashingStrategies.defaultStrategy()));
+        MutableObjectBooleanMap<T> map = new ObjectBooleanHashMapWithHashingStrategy<>(HashingStrategies.nullSafeHashingStrategy(HashingStrategies.defaultStrategy()));
         for (int i = 0; i < elements.length; i++)
         {
             map.put(elements[i], (i & 1) == 0);

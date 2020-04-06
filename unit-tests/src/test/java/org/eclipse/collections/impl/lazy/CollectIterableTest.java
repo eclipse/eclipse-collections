@@ -56,7 +56,7 @@ public class CollectIterableTest extends AbstractLazyIterableTestCase
     @Test
     public void iterator()
     {
-        InternalIterable<String> select = new CollectIterable<>(Interval.oneTo(5), String::valueOf);
+        LazyIterable<String> select = new CollectIterable<>(Interval.oneTo(5), String::valueOf);
         StringBuilder builder = new StringBuilder("");
         for (String each : select)
         {
@@ -79,7 +79,7 @@ public class CollectIterableTest extends AbstractLazyIterableTestCase
     public void distinct()
     {
         super.distinct();
-        CollectIterable<Integer, String> collect = new CollectIterable<>(FastList.newListWith(3, 2, 2, 4, 1, 3, 1, 5), String::valueOf);
+        LazyIterable<String> collect = new CollectIterable<>(FastList.newListWith(3, 2, 2, 4, 1, 3, 1, 5), String::valueOf);
         Assert.assertEquals(
                 FastList.newListWith("3", "2", "4", "1", "5"),
                 collect.distinct().toList());

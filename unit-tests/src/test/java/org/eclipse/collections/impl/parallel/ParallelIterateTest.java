@@ -278,7 +278,7 @@ public class ParallelIterateTest
     public void testForEachWithIndexToArrayUsingFastListSerialPath()
     {
         Integer[] array = new Integer[200];
-        FastList<Integer> list = (FastList<Integer>) Interval.oneTo(200).toList();
+        MutableList<Integer> list = Interval.oneTo(200).toList();
         Assert.assertTrue(ArrayIterate.allSatisfy(array, Predicates.isNull()));
         ParallelIterate.forEachWithIndex(list, (each, index) -> array[index] = each);
         Assert.assertArrayEquals(array, list.toArray(new Integer[]{}));
@@ -288,7 +288,7 @@ public class ParallelIterateTest
     public void testForEachWithIndexToArrayUsingFastList()
     {
         Integer[] array = new Integer[200];
-        FastList<Integer> list = (FastList<Integer>) Interval.oneTo(200).toList();
+        MutableList<Integer> list = Interval.oneTo(200).toList();
         Assert.assertTrue(ArrayIterate.allSatisfy(array, Predicates.isNull()));
         ParallelIterate.forEachWithIndex(list, (each, index) -> array[index] = each, 10, 10);
         Assert.assertArrayEquals(array, list.toArray(new Integer[]{}));

@@ -27,6 +27,7 @@ import org.eclipse.collections.api.bag.primitive.ImmutableIntBag;
 import org.eclipse.collections.api.bag.primitive.ImmutableLongBag;
 import org.eclipse.collections.api.bag.primitive.ImmutableShortBag;
 import org.eclipse.collections.api.bimap.ImmutableBiMap;
+import org.eclipse.collections.api.bimap.MutableBiMap;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.block.function.Function2;
@@ -101,7 +102,7 @@ public abstract class AbstractImmutableBiMap<K, V> extends AbstractBiMap<K, V> i
     @Override
     public ImmutableBiMap<K, V> newWithKeyValue(K key, V value)
     {
-        HashBiMap<K, V> map = new HashBiMap<>(this.delegate.castToMap());
+        MutableBiMap<K, V> map = new HashBiMap<>(this.delegate.castToMap());
         map.put(key, value);
         return map.toImmutable();
     }
@@ -109,7 +110,7 @@ public abstract class AbstractImmutableBiMap<K, V> extends AbstractBiMap<K, V> i
     @Override
     public ImmutableBiMap<K, V> newWithAllKeyValues(Iterable<? extends Pair<? extends K, ? extends V>> keyValues)
     {
-        HashBiMap<K, V> map = new HashBiMap<>(this.delegate.castToMap());
+        MutableBiMap<K, V> map = new HashBiMap<>(this.delegate.castToMap());
         for (Pair<? extends K, ? extends V> keyValuePair : keyValues)
         {
             map.put(keyValuePair.getOne(), keyValuePair.getTwo());

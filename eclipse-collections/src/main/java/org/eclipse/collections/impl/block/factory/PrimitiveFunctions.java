@@ -26,20 +26,20 @@ import org.eclipse.collections.impl.factory.primitive.ObjectDoubleMaps;
 
 public final class PrimitiveFunctions
 {
-    private static final IntegerIsPositive INTEGER_IS_POSITIVE = new IntegerIsPositive();
-    private static final UnboxNumberToInt UNBOX_NUMBER_TO_INT = new UnboxNumberToInt();
-    private static final UnboxIntegerToByte UNBOX_INTEGER_TO_BYTE = new UnboxIntegerToByte();
-    private static final UnboxIntegerToChar UNBOX_INTEGER_TO_CHAR = new UnboxIntegerToChar();
-    private static final UnboxIntegerToInt UNBOX_INTEGER_TO_INT = new UnboxIntegerToInt();
-    private static final UnboxIntegerToFloat UNBOX_INTEGER_TO_FLOAT = new UnboxIntegerToFloat();
-    private static final UnboxIntegerToLong UNBOX_INTEGER_TO_LONG = new UnboxIntegerToLong();
-    private static final UnboxIntegerToShort UNBOX_INTEGER_TO_SHORT = new UnboxIntegerToShort();
-    private static final UnboxIntegerToDouble UNBOX_INTEGER_TO_DOUBLE = new UnboxIntegerToDouble();
-    private static final UnboxDoubleToDouble UNBOX_DOUBLE_TO_DOUBLE = new UnboxDoubleToDouble();
-    private static final UnboxFloatToFloat UNBOX_FLOAT_TO_FLOAT = new UnboxFloatToFloat();
-    private static final UnboxNumberToFloat UNBOX_NUMBER_TO_FLOAT = new UnboxNumberToFloat();
-    private static final UnboxNumberToLong UNBOX_NUMBER_TO_LONG = new UnboxNumberToLong();
-    private static final UnboxNumberToDouble UNBOX_NUMBER_TO_DOUBLE = new UnboxNumberToDouble();
+    private static final BooleanFunction<Integer> INTEGER_IS_POSITIVE = new IntegerIsPositive();
+    private static final IntFunction<Number> UNBOX_NUMBER_TO_INT = new UnboxNumberToInt();
+    private static final ByteFunction<Integer> UNBOX_INTEGER_TO_BYTE = new UnboxIntegerToByte();
+    private static final CharFunction<Integer> UNBOX_INTEGER_TO_CHAR = new UnboxIntegerToChar();
+    private static final IntFunction<Integer> UNBOX_INTEGER_TO_INT = new UnboxIntegerToInt();
+    private static final FloatFunction<Integer> UNBOX_INTEGER_TO_FLOAT = new UnboxIntegerToFloat();
+    private static final LongFunction<Integer> UNBOX_INTEGER_TO_LONG = new UnboxIntegerToLong();
+    private static final ShortFunction<Integer> UNBOX_INTEGER_TO_SHORT = new UnboxIntegerToShort();
+    private static final DoubleFunction<Integer> UNBOX_INTEGER_TO_DOUBLE = new UnboxIntegerToDouble();
+    private static final DoubleFunction<Double> UNBOX_DOUBLE_TO_DOUBLE = new UnboxDoubleToDouble();
+    private static final FloatFunction<Float> UNBOX_FLOAT_TO_FLOAT = new UnboxFloatToFloat();
+    private static final FloatFunction<Number> UNBOX_NUMBER_TO_FLOAT = new UnboxNumberToFloat();
+    private static final LongFunction<Number> UNBOX_NUMBER_TO_LONG = new UnboxNumberToLong();
+    private static final DoubleFunction<Number> UNBOX_NUMBER_TO_DOUBLE = new UnboxNumberToDouble();
 
     private PrimitiveFunctions()
     {

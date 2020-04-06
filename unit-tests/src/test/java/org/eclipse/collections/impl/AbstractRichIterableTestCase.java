@@ -1581,7 +1581,7 @@ public abstract class AbstractRichIterableTestCase
     {
         RichIterable<Integer> collection = this.newWith(1, 2, 3, 4, 5, 6, 7);
 
-        NegativeIntervalFunction function = new NegativeIntervalFunction();
+        Function<Integer, Iterable<Integer>> function = new NegativeIntervalFunction();
         MutableMultimap<Integer, Integer> expected = this.<Integer>newWith().groupByEach(function).toMutable();
         for (int i = 1; i < 8; i++)
         {

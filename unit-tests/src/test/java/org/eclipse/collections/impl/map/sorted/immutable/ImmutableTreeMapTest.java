@@ -15,6 +15,7 @@ import java.util.Comparator;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Set;
+import java.util.SortedMap;
 
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.list.MutableList;
@@ -140,14 +141,14 @@ public class ImmutableTreeMapTest extends ImmutableSortedMapTestCase
     @Test
     public void keySet()
     {
-        ImmutableTreeMap<Integer, String> immutableSortedMap = new ImmutableTreeMap<>(SortedMaps.mutable.of(1, "1", 2, "2", 3, "3", 4, "4"));
+        SortedMap<Integer, String> immutableSortedMap = new ImmutableTreeMap<>(SortedMaps.mutable.of(1, "1", 2, "2", 3, "3", 4, "4"));
         Verify.assertSetsEqual(Sets.mutable.of(1, 2, 3, 4), immutableSortedMap.keySet());
     }
 
     @Test
     public void keySetContains()
     {
-        ImmutableTreeMap<Integer, String> immutableSortedMap = new ImmutableTreeMap<>(SortedMaps.mutable.of(1, "1", 2, "2", 3, "3", 4, "4"));
+        SortedMap<Integer, String> immutableSortedMap = new ImmutableTreeMap<>(SortedMaps.mutable.of(1, "1", 2, "2", 3, "3", 4, "4"));
         Set<Integer> keySet = immutableSortedMap.keySet();
         Assert.assertTrue(keySet.contains(1));
         Assert.assertTrue(keySet.contains(2));
@@ -159,7 +160,7 @@ public class ImmutableTreeMapTest extends ImmutableSortedMapTestCase
     @Test
     public void keySetContainsAll()
     {
-        ImmutableTreeMap<Integer, String> immutableSortedMap = new ImmutableTreeMap<>(SortedMaps.mutable.of(1, "1", 2, "2", 3, "3", 4, "4"));
+        SortedMap<Integer, String> immutableSortedMap = new ImmutableTreeMap<>(SortedMaps.mutable.of(1, "1", 2, "2", 3, "3", 4, "4"));
         Set<Integer> keySet = immutableSortedMap.keySet();
         Assert.assertTrue(keySet.containsAll(UnifiedSet.newSetWith(1, 2, 3, 4)));
         Assert.assertTrue(keySet.containsAll(UnifiedSet.newSetWith(1, 4)));
@@ -191,14 +192,14 @@ public class ImmutableTreeMapTest extends ImmutableSortedMapTestCase
     @Test
     public void keySetEqualsAndHashCode()
     {
-        ImmutableTreeMap<Integer, String> map = new ImmutableTreeMap<>(SortedMaps.mutable.of(1, "1", 2, "2", 3, "3"));
+        SortedMap<Integer, String> map = new ImmutableTreeMap<>(SortedMaps.mutable.of(1, "1", 2, "2", 3, "3"));
         Verify.assertEqualsAndHashCode(UnifiedSet.newSetWith(1, 2, 3), map.keySet());
     }
 
     @Test
     public void keySetToArray()
     {
-        ImmutableTreeMap<Integer, String> immutableSortedMap = new ImmutableTreeMap<>(SortedMaps.mutable.of(1, "1", 2, "2", 3, "3", 4, "4"));
+        SortedMap<Integer, String> immutableSortedMap = new ImmutableTreeMap<>(SortedMaps.mutable.of(1, "1", 2, "2", 3, "3", 4, "4"));
         MutableList<Integer> expected = FastList.newListWith(1, 2, 3, 4).toSortedList();
         Set<Integer> keySet = immutableSortedMap.keySet();
         Object[] array = keySet.toArray();
@@ -214,7 +215,7 @@ public class ImmutableTreeMapTest extends ImmutableSortedMapTestCase
     @Test
     public void keySet_toArray_withSmallTarget()
     {
-        ImmutableTreeMap<Integer, String> immutableSortedMap = new ImmutableTreeMap<>(SortedMaps.mutable.of(1, "1", 2, "2", 3, "3", 4, "4"));
+        SortedMap<Integer, String> immutableSortedMap = new ImmutableTreeMap<>(SortedMaps.mutable.of(1, "1", 2, "2", 3, "3", 4, "4"));
         Integer[] destination = new Integer[2]; // deliberately to small to force the method to allocate one of the correct size
         Integer[] result = immutableSortedMap.keySet().toArray(destination);
         Arrays.sort(result);
@@ -224,7 +225,7 @@ public class ImmutableTreeMapTest extends ImmutableSortedMapTestCase
     @Test
     public void keySet_ToArray_withLargeTarget()
     {
-        ImmutableTreeMap<Integer, String> immutableSortedMap = new ImmutableTreeMap<>(SortedMaps.mutable.of(1, "1", 2, "2", 3, "3", 4, "4"));
+        SortedMap<Integer, String> immutableSortedMap = new ImmutableTreeMap<>(SortedMaps.mutable.of(1, "1", 2, "2", 3, "3", 4, "4"));
         Integer[] target = new Integer[6]; // deliberately large to force the extra to be set to null
         target[4] = 42;
         target[5] = 42;
@@ -290,7 +291,7 @@ public class ImmutableTreeMapTest extends ImmutableSortedMapTestCase
     @Test
     public void ofSortedMap()
     {
-        ImmutableTreeMap<Integer, String> immutableMap = new ImmutableTreeMap<>(SortedMaps.mutable.of(1, "1", 2, "2", 3, "3", 4, "4"));
+        SortedMap<Integer, String> immutableMap = new ImmutableTreeMap<>(SortedMaps.mutable.of(1, "1", 2, "2", 3, "3", 4, "4"));
         Assert.assertSame(immutableMap, SortedMaps.immutable.ofSortedMap(immutableMap));
     }
 }

@@ -61,7 +61,7 @@ public class SelectIterableTest extends AbstractLazyIterableTestCase
     @Test
     public void iterator()
     {
-        InternalIterable<Integer> select = new SelectIterable<>(Interval.oneTo(5), Predicates.lessThan(5));
+        LazyIterable<Integer> select = new SelectIterable<>(Interval.oneTo(5), Predicates.lessThan(5));
         Sum sum = new IntegerSum(0);
         for (Integer each : select)
         {
@@ -84,7 +84,7 @@ public class SelectIterableTest extends AbstractLazyIterableTestCase
     public void distinct()
     {
         super.distinct();
-        SelectIterable<Integer> iterable = new SelectIterable<>(FastList.newListWith(5, 3, 2, 2, 4, 1, 3, 1, 5), Predicates.lessThan(5));
+        LazyIterable<Integer> iterable = new SelectIterable<>(FastList.newListWith(5, 3, 2, 2, 4, 1, 3, 1, 5), Predicates.lessThan(5));
         Assert.assertEquals(
                 FastList.newListWith(3, 2, 4, 1),
                 iterable.distinct().toList());

@@ -13,6 +13,7 @@ package org.eclipse.collections.impl.list.mutable.primitive;
 import java.lang.reflect.Field;
 import java.util.BitSet;
 
+import org.eclipse.collections.api.list.primitive.MutableBooleanList;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
 import org.junit.Test;
@@ -39,7 +40,7 @@ public class BooleanArrayListTest extends AbstractBooleanListTestCase
     @Test
     public void testBooleanArrayListWithInitialCapacity() throws Exception
     {
-        BooleanArrayList arrayList = new BooleanArrayList(7);
+        MutableBooleanList arrayList = new BooleanArrayList(7);
         Verify.assertEmpty(arrayList);
         Field items = BooleanArrayList.class.getDeclaredField("items");
         items.setAccessible(true);

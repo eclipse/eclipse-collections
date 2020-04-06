@@ -171,7 +171,7 @@ public class CodePointAdapter
     public CodePointAdapter distinct()
     {
         StringBuilder builder = new StringBuilder();
-        IntHashSet seenSoFar = new IntHashSet();
+        MutableIntSet seenSoFar = new IntHashSet();
 
         int length = this.adapted.length();
         for (int i = 0; i < length; )
@@ -494,7 +494,7 @@ public class CodePointAdapter
     @Override
     public MutableIntList toList()
     {
-        IntArrayList list = new IntArrayList(this.adapted.length());
+        MutableIntList list = new IntArrayList(this.adapted.length());
         for (int i = 0; i < this.adapted.length(); )
         {
             int codePoint = this.adapted.codePointAt(i);

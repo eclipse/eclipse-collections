@@ -125,7 +125,7 @@ public abstract class AbstractByteSetTestCase extends AbstractMutableByteCollect
         Assert.assertTrue(set.addAll(ByteHashSet.newSetWith((byte) 5)));
         Assert.assertEquals(ByteHashSet.newSetWith((byte) 0, (byte) 1, (byte) 2, (byte) 5, (byte) 30, (byte) 31, (byte) 31, (byte) -1, (byte) -128), set);
 
-        ByteHashSet set1 = new ByteHashSet();
+        MutableByteSet set1 = new ByteHashSet();
         Assert.assertTrue(set1.addAll((byte) 2, (byte) 35));
         Assert.assertEquals(ByteHashSet.newSetWith((byte) 2, (byte) 35), set1);
     }

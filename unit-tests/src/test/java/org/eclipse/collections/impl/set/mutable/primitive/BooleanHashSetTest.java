@@ -14,6 +14,7 @@ import java.lang.reflect.Field;
 import java.util.NoSuchElementException;
 
 import org.eclipse.collections.api.iterator.MutableBooleanIterator;
+import org.eclipse.collections.api.set.primitive.MutableBooleanSet;
 import org.eclipse.collections.impl.list.mutable.primitive.BooleanArrayList;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
@@ -85,7 +86,7 @@ public class BooleanHashSetTest extends AbstractBooleanSetTestCase
         Verify.assertEmpty(trueSet);
         Verify.assertThrows(NoSuchElementException.class, mutableBooleanIterator::next);
         Verify.assertThrows(IllegalStateException.class, mutableBooleanIterator::remove);
-        BooleanHashSet emptySet = new BooleanHashSet();
+        MutableBooleanSet emptySet = new BooleanHashSet();
         mutableBooleanIterator = emptySet.booleanIterator();
         Assert.assertFalse(mutableBooleanIterator.hasNext());
         Verify.assertEmpty(emptySet);

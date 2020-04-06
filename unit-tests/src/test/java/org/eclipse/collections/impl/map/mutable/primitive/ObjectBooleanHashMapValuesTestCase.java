@@ -348,22 +348,22 @@ public abstract class ObjectBooleanHashMapValuesTestCase extends AbstractMutable
     @Test
     public void appendString()
     {
-        StringBuilder appendable = new StringBuilder();
+        Appendable appendable = new StringBuilder();
         this.newWith().appendString(appendable);
         Assert.assertEquals("", appendable.toString());
         this.newWith().appendString(appendable, "/");
         Assert.assertEquals("", appendable.toString());
         this.newWith().appendString(appendable, "[", "/", "]");
         Assert.assertEquals("[]", appendable.toString());
-        StringBuilder appendable1 = new StringBuilder();
+        Appendable appendable1 = new StringBuilder();
         this.newWith(true).appendString(appendable1);
         Assert.assertEquals("true", appendable1.toString());
-        StringBuilder appendable2 = new StringBuilder();
+        Appendable appendable2 = new StringBuilder();
         BooleanIterable iterable = this.newWith(true, false);
         iterable.appendString(appendable2);
         Assert.assertTrue("true, false".equals(appendable2.toString())
                 || "false, true".equals(appendable2.toString()));
-        StringBuilder appendable3 = new StringBuilder();
+        Appendable appendable3 = new StringBuilder();
         iterable.appendString(appendable3, "/");
         Assert.assertTrue("true/false".equals(appendable3.toString())
                 || "false/true".equals(appendable3.toString()));

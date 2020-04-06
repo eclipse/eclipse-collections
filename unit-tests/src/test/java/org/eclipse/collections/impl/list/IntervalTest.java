@@ -364,7 +364,7 @@ public class IntervalTest
     public void toFastList()
     {
         Interval interval = Interval.evensFromTo(0, 10);
-        FastList<Integer> toList = (FastList<Integer>) interval.toList();
+        MutableList<Integer> toList = interval.toList();
         Verify.assertStartsWith(toList, 0, 2, 4, 6, 8, 10);
         Verify.assertSize(6, toList);
     }

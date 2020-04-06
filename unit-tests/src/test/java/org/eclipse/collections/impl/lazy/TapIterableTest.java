@@ -61,7 +61,7 @@ public class TapIterableTest extends AbstractLazyIterableTestCase
     {
         StringBuilder builder = new StringBuilder();
         Procedure<Integer> appendProcedure = Procedures.append(builder);
-        InternalIterable<Integer> tap = new TapIterable<>(Interval.oneTo(5), appendProcedure);
+        LazyIterable<Integer> tap = new TapIterable<>(Interval.oneTo(5), appendProcedure);
         for (Integer each : tap)
         {
             builder.append(each + 1);
