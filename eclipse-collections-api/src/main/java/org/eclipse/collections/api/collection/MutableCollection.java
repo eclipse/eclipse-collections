@@ -413,6 +413,14 @@ public interface MutableCollection<T>
         return this.flatCollect(each -> function.apply(each, parameter));
     }
 
+    /**
+     * Returns the final result of evaluating function using each element of the iterable, the previous evaluation
+     * result and the parameters. The injected value is used for the first parameter of the first evaluation, and the current
+     * item in the iterable is used as the second parameter. The parameter value is always used as the third parameter
+     * to the function call.
+     *
+     * @see #injectInto(Object, Function2)
+     */
     <IV, P> IV injectIntoWith(
             IV injectValue,
             Function3<? super IV, ? super T, ? super P, ? extends IV> function,

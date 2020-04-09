@@ -13,9 +13,11 @@ package org.eclipse.collections.api.block.function;
 import java.io.Serializable;
 
 /**
- * A Function3 is used by injectIntoWith(). In the injectIntoWith() method the block takes the injected
- * argument as the first argument, the current item of the collection as the second argument, and the specified
- * parameter for the third argument. The result of each subsequent iteration is passed in as the first argument.
+ * Function3 is a three argument Lambda which takes three arguments and returns a result of a transformation.
+ *
+ * A Function3 is used by injectIntoWith() methods. See documentation of such methods for more details.
+ *
+ * @see org.eclipse.collections.api.collection.MutableCollection#injectIntoWith
  */
 @FunctionalInterface
 public interface Function3<T1, T2, T3, R>
