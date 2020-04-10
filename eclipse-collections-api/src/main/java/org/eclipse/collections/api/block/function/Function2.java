@@ -14,11 +14,14 @@ import java.io.Serializable;
 import java.util.function.BiFunction;
 
 /**
- * A Function2 is used by injectInto() methods. It takes the injected argument as the first argument, and the
- * current item of the collection as the second argument, for the first item in the collection. The result of each
- * subsequent iteration is passed in as the first argument.
+ * Function2 is a two argument lambda which takes two arguments and returns a result of a transformation.
+ *
+ * A Function2 is used by RichIterable.injectInto() and RichIterable.collectWith() methods. See documentation of these
+ * methods for more details.
  *
  * @since 1.0
+ * @see org.eclipse.collections.api.RichIterable#injectInto
+ * @see org.eclipse.collections.api.RichIterable#collectWith
  */
 @FunctionalInterface
 public interface Function2<T1, T2, R>
