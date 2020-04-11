@@ -21,6 +21,7 @@ test-coverage/**
 .idea/**/tasks.xml
 .idea/**/usage.statistics.xml
 .idea/**/shelf
+.idea/encodings.xml
 
 # Sensitive or high-churn files
 .idea/**/dataSources/
@@ -75,3 +76,6 @@ fabric.properties
 .project
 .settings/
 .classpath
+
+#IntelliJ Project files
+*.iml
