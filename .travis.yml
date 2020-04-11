@@ -52,6 +52,16 @@ jobs:
         - DESC="unit tests oraclejdk11"
         - CMD="./mvnw install --no-transfer-progress"
 
+    - jdk: openjdk14
+      env:
+        - DESC="unit tests openjdk14"
+        - CMD="./mvnw install --no-transfer-progress"
+
+    - jdk: oraclejdk14
+      env:
+        - DESC="unit tests oraclejdk14"
+        - CMD="./mvnw install --no-transfer-progress"
+
     - jdk: openjdk-ea
       env:
         - DESC="unit tests openjdk-ea"
@@ -59,8 +69,8 @@ jobs:
 
     - jdk: oraclejdk8
       env:
-        - DESC="unit tests Java14-EA"
-        - JDK=Java14-EA
+        - DESC="unit tests Java15-EA"
+        - JDK=Java15-EA
         - CMD="./.travis-command-ea-builds.sh"
 
   allow_failures:
@@ -70,8 +80,8 @@ jobs:
         - CMD="./mvnw install --no-transfer-progress"
     - jdk: oraclejdk8
       env:
-        - DESC="unit tests Java14-EA"
-        - JDK=Java14-EA
+        - DESC="unit tests Java15-EA"
+        - JDK=Java15-EA
         - CMD="./.travis-command-ea-builds.sh"
 
 script: eval travis_wait 30 $CMD

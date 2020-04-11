@@ -46,7 +46,7 @@ function install_jdk_and_run_ea_build {
 }
 
 case "$JDK" in
-Java14-EA)
-  install_jdk_and_run_ea_build ${JDK14_EA_URL}
+Java15-EA)
+  install_jdk_and_run_ea_build ${JDK15_EA_URL}
   ;;
 esac
