@@ -452,7 +452,7 @@ public final class MultiReaderFastList<T>
     }
 
     @Override
-    public MutableList<T> sortThis()
+    public MultiReaderList<T> sortThis()
     {
         try (LockWrapper wrapper = this.lockWrapper.acquireWriteLock())
         {
@@ -462,7 +462,7 @@ public final class MultiReaderFastList<T>
     }
 
     @Override
-    public MutableList<T> sortThis(Comparator<? super T> comparator)
+    public MultiReaderList<T> sortThis(Comparator<? super T> comparator)
     {
         try (LockWrapper wrapper = this.lockWrapper.acquireWriteLock())
         {
