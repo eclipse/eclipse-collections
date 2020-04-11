@@ -134,13 +134,6 @@
       <option name="WHILE_BRACE_FORCE" value="3" />
       <option name="FOR_BRACE_FORCE" value="3" />
     </codeStyleSettings>
-    <codeStyleSettings language="SQL">
-      <option name="KEEP_BLANK_LINES_IN_CODE" value="1" />
-      <indentOptions>
-        <option name="CONTINUATION_INDENT_SIZE" value="8" />
-        <option name="TAB_SIZE" value="4" />
-      </indentOptions>
-    </codeStyleSettings>
     <codeStyleSettings language="Scala">
       <option name="KEEP_BLANK_LINES_IN_DECLARATIONS" value="1" />
       <option name="KEEP_BLANK_LINES_IN_CODE" value="1" />
