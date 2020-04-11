@@ -1,0 +1,31 @@
+# This workflow will build a Java project with Maven
+# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
+
+name: Eclipse Collections - JavaDoc
+
+on: [push, pull_request]
+
+jobs:
+  applications:
+    name: Javadoc ${{ matrix.java-version }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        java-version: [11]
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Git Checkout
+        uses: actions/checkout@v2
+      - name: Set Maven Wrapper
+        run: mvn -N io.takari:maven:0.7.7:wrapper -Dmaven=3.6.1
+      - name: Set JDK ${{ matrix.java-version }}
+        uses: actions/setup-java@v1
+        with:
+          java-version: ${{ matrix.java-version }}
+      - name: JavaDoc
+        run: ./mvnw install javadoc:jar --projects 'eclipse-collections-code-generator,eclipse-collections-code-generator-maven-plugin,eclipse-collections-api,eclipse-collections,eclipse-collections-testutils,eclipse-collections-forkjoin' --activate-profiles all -DskipTests=true --no-transfer-progress
+        env:
+          MAVEN_OPTS: "-Xmx1g"
+
