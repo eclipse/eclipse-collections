@@ -1,23 +1,22 @@
 # This workflow will build a Java project with Maven
 # For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
 
-name: Eclipse Collections CI Build
+name: Unit tests
 
-on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+on: [push, pull_request]
 
 jobs:
-  project-build:
+  applications:
+    name: Unit Test ${{ matrix.java-version }}
     strategy:
       matrix:
-        # os: [macos-latest, ubuntu-latest, windows-latest]
         os: [ubuntu-latest]
         java-version: [8, 11, 14, 15-ea]
 
     runs-on: ${{ matrix.os }}
+
+    env:
+      JAVA_VERSION: ${{ matrix.java-version }}
 
     steps:
       - name: Git Checkout
@@ -28,14 +27,7 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: ${{ matrix.java-version }}
-      - name: Enable Maven Cache
-        uses: actions/cache@v1
-        with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-maven-
-      - name: Maven
+      - name: Unit-Test
         run: ./mvnw verify
         env:
           MAVEN_OPTS: "-Xmx1g"
