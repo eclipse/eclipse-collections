@@ -128,6 +128,13 @@ public interface MutableBiMap<K, V> extends BiMap<K, V>, MutableMapIterable<K, V
     MutableBiMap<K, V> withKeyValue(K key, V value);
 
     @Override
+    default MutableBiMap<K, V> withMap(Map<? extends K, ? extends V> map)
+    {
+        this.putAll(map);
+        return this;
+    }
+
+    @Override
     MutableBiMap<K, V> withAllKeyValues(Iterable<? extends Pair<? extends K, ? extends V>> keyValues);
 
     @Override

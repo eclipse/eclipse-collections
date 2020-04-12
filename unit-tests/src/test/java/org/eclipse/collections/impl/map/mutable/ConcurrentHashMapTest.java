@@ -236,6 +236,13 @@ public class ConcurrentHashMapTest extends ConcurrentHashMapTestCase
         Assert.assertEquals(iSet(1, 3), partition.getRejected().toSet());
     }
 
+    @Override
+    @Test
+    public void withMapNull()
+    {
+        Verify.assertThrows(IllegalArgumentException.class, () -> this.newMap().withMap(null));
+    }
+
     @Test
     public void parallelGroupByIntoConcurrentHashMap()
     {

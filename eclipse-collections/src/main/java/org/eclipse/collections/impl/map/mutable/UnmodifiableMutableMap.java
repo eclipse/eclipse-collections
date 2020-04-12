@@ -281,6 +281,12 @@ public class UnmodifiableMutableMap<K, V>
     }
 
     @Override
+    public MutableMap<K, V> withMap(Map<? extends K, ? extends V> map)
+    {
+        throw new UnsupportedOperationException("Cannot call withMap() on " + this.getClass().getSimpleName());
+    }
+
+    @Override
     public MutableMap<K, V> withAllKeyValues(Iterable<? extends Pair<? extends K, ? extends V>> keyValues)
     {
         throw new UnsupportedOperationException("Cannot call withAllKeyValues() on " + this.getClass().getSimpleName());

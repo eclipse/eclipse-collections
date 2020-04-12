@@ -13,6 +13,7 @@ package org.eclipse.collections.impl.map.sorted.mutable;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Comparator;
+import java.util.Map;
 import java.util.Optional;
 import java.util.SortedMap;
 
@@ -118,6 +119,16 @@ public class SynchronizedSortedMap<K, V>
         synchronized (this.lock)
         {
             this.put(key, value);
+            return this;
+        }
+    }
+
+    @Override
+    public MutableSortedMap<K, V> withMap(Map<? extends K, ? extends V> map)
+    {
+        synchronized (this.lock)
+        {
+            this.putAll(map);
             return this;
         }
     }

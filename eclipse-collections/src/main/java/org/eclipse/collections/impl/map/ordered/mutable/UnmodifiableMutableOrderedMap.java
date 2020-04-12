@@ -162,7 +162,13 @@ public class UnmodifiableMutableOrderedMap<K, V>
     @Override
     public MutableOrderedMap<K, V> withKeyValue(K key, V value)
     {
-        throw new UnsupportedOperationException("Cannot call collectKeysAndValues() on " + this.getClass().getSimpleName());
+        throw new UnsupportedOperationException("Cannot call withKeyValue() on " + this.getClass().getSimpleName());
+    }
+
+    @Override
+    public MutableOrderedMap<K, V> withMap(Map<? extends K, ? extends V> map)
+    {
+        throw new UnsupportedOperationException("Cannot call withMap() on " + this.getClass().getSimpleName());
     }
 
     @Override

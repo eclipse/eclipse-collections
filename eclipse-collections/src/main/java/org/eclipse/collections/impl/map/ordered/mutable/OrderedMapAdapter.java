@@ -331,6 +331,13 @@ public class OrderedMapAdapter<K, V>
     }
 
     @Override
+    public MutableOrderedMap<K, V> withMap(Map<? extends K, ? extends V> map)
+    {
+        this.putAll(map);
+        return this;
+    }
+
+    @Override
     public MutableOrderedMap<K, V> withAllKeyValues(Iterable<? extends Pair<? extends K, ? extends V>> keyValues)
     {
         keyValues.forEach(keyVal -> this.put(keyVal.getOne(), keyVal.getTwo()));

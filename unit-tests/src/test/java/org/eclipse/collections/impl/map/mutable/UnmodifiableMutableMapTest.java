@@ -14,6 +14,7 @@ import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.impl.block.factory.Functions;
 import org.eclipse.collections.impl.factory.Lists;
+import org.eclipse.collections.impl.factory.Maps;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.ImmutableEntry;
@@ -282,6 +283,41 @@ public class UnmodifiableMutableMapTest extends MutableMapTestCase
     public void withKeyValue()
     {
         this.newMapWithKeysValues(1, "One", 2, "2").withKeyValue(null, null);
+    }
+
+    @Override
+    @Test
+    public void withMap()
+    {
+        Verify.assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeyValue(1, 'a').withMap(Maps.mutable.with(1, Character.valueOf('a'))));
+    }
+
+    @Override
+    @Test
+    public void withMapEmpty()
+    {
+        Verify.assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeyValue(1, 'a').withMap(Maps.mutable.empty()));
+    }
+
+    @Override
+    @Test
+    public void withMapTargetEmpty()
+    {
+        Verify.assertThrows(UnsupportedOperationException.class, () -> this.newMap().withMap(Maps.mutable.with(1, Character.valueOf('a'))));
+    }
+
+    @Override
+    @Test
+    public void withMapEmptyAndTargetEmpty()
+    {
+        Verify.assertThrows(UnsupportedOperationException.class, () -> this.newMap().withMap(Maps.mutable.empty()));
+    }
+
+    @Override
+    @Test
+    public void withMapNull()
+    {
+        Verify.assertThrows(UnsupportedOperationException.class, () -> this.newMap().withMap(null));
     }
 
     @Override

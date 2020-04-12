@@ -10,6 +10,8 @@
 
 package org.eclipse.collections.api.map;
 
+import java.util.Map;
+
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.function.primitive.BooleanFunction;
@@ -163,6 +165,13 @@ public interface MutableOrderedMap<K, V> extends OrderedMap<K, V>, MutableMapIte
 
     @Override
     MutableOrderedMap<K, V> withKeyValue(K key, V value);
+
+    @Override
+    default MutableOrderedMap<K, V> withMap(Map<? extends K, ? extends V> map)
+    {
+        this.putAll(map);
+        return this;
+    }
 
     @Override
     MutableOrderedMap<K, V> withAllKeyValues(Iterable<? extends Pair<? extends K, ? extends V>> keyValues);

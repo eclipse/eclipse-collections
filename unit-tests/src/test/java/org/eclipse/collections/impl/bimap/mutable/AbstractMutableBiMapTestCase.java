@@ -445,6 +445,13 @@ public abstract class AbstractMutableBiMapTestCase extends MutableMapIterableTes
 
     @Override
     @Test
+    public void withMapNull()
+    {
+        Verify.assertThrows(NullPointerException.class, () -> this.newMap().withMap(null));
+    }
+
+    @Override
+    @Test
     public void updateValueWith()
     {
         MutableBiMap<Integer, Character> biMap = this.classUnderTest();
