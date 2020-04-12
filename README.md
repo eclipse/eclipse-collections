@@ -14,6 +14,13 @@
 [![][license-edl img]][license-edl]
 [![][actions img]][actions]  
 
+![Acceptance Tests](https://github.com/eclipse/eclipse-collections/workflows/Acceptance%20Tests/badge.svg)
+![Unit tests](https://github.com/eclipse/eclipse-collections/workflows/Unit%20tests/badge.svg)
+![Performance Tests](https://github.com/eclipse/eclipse-collections/workflows/Performance%20Tests/badge.svg)
+![JavaDoc](https://github.com/eclipse/eclipse-collections/workflows/JavaDoc/badge.svg)
+![Findbugs](https://github.com/eclipse/eclipse-collections/workflows/Findbugs/badge.svg)
+![Checkstyle](https://github.com/eclipse/eclipse-collections/workflows/Checkstyle/badge.svg)
+
 <a href="https://www.eclipse.org/collections/"><img src="https://github.com/eclipse/eclipse-collections/blob/master/artwork/eclipse-collections-logo.png" height="50%" width="50%"></a>
 
 #### [English](https://www.eclipse.org/collections/) | [中文](https://www.eclipse.org/collections/cn/index.html) | [Deutsch](https://www.eclipse.org/collections/de/index.html) | [Español](https://www.eclipse.org/collections/es/index.html) | [Ελληνικά](https://www.eclipse.org/collections/el/index.html) | [Français](https://www.eclipse.org/collections/fr/index.html) | [日本語](https://www.eclipse.org/collections/ja/index.html) | [Português-Brasil](https://www.eclipse.org/collections/pt-br/index.html) | [Русский](https://www.eclipse.org/collections/ru/index.html)
