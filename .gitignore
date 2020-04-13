@@ -21,6 +21,11 @@ test-coverage/**
 .idea/**/tasks.xml
 .idea/**/usage.statistics.xml
 .idea/**/shelf
+.idea/checkstyle-idea.xml
+.idea/dictionaries/
+.idea/encodings.xml
+.idea/markdown-navigator.xml
+.idea/markdown-navigator/
 
 # Sensitive or high-churn files
 .idea/**/dataSources/
