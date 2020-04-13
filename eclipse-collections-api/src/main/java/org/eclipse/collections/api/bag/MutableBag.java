@@ -84,16 +84,32 @@ public interface MutableBag<T>
     }
 
     @Override
-    MutableBag<T> with(T element);
+    default MutableBag<T> with(T element)
+    {
+        this.add(element);
+        return this;
+    }
 
     @Override
-    MutableBag<T> without(T element);
+    default MutableBag<T> without(T element)
+    {
+        this.remove(element);
+        return this;
+    }
 
     @Override
-    MutableBag<T> withAll(Iterable<? extends T> elements);
+    default MutableBag<T> withAll(Iterable<? extends T> elements)
+    {
+        this.addAllIterable(elements);
+        return this;
+    }
 
     @Override
-    MutableBag<T> withoutAll(Iterable<? extends T> elements);
+    default MutableBag<T> withoutAll(Iterable<? extends T> elements)
+    {
+        this.removeAllIterable(elements);
+        return this;
+    }
 
     @Override
     MutableBag<T> newEmpty();

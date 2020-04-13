@@ -51,16 +51,32 @@ public interface MutableList<T>
         extends MutableCollection<T>, List<T>, Cloneable, ListIterable<T>
 {
     @Override
-    MutableList<T> with(T element);
+    default MutableList<T> with(T element)
+    {
+        this.add(element);
+        return this;
+    }
 
     @Override
-    MutableList<T> without(T element);
+    default MutableList<T> without(T element)
+    {
+        this.remove(element);
+        return this;
+    }
 
     @Override
-    MutableList<T> withAll(Iterable<? extends T> elements);
+    default MutableList<T> withAll(Iterable<? extends T> elements)
+    {
+        this.addAllIterable(elements);
+        return this;
+    }
 
     @Override
-    MutableList<T> withoutAll(Iterable<? extends T> elements);
+    default MutableList<T> withoutAll(Iterable<? extends T> elements)
+    {
+        this.removeAllIterable(elements);
+        return this;
+    }
 
     @Override
     MutableList<T> newEmpty();

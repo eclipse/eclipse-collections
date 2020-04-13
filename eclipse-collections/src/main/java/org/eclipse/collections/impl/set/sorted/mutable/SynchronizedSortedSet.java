@@ -110,34 +110,6 @@ public class SynchronizedSortedSet<T>
     }
 
     @Override
-    public MutableSortedSet<T> with(T element)
-    {
-        this.add(element);
-        return this;
-    }
-
-    @Override
-    public MutableSortedSet<T> without(T element)
-    {
-        this.remove(element);
-        return this;
-    }
-
-    @Override
-    public MutableSortedSet<T> withAll(Iterable<? extends T> elements)
-    {
-        this.addAllIterable(elements);
-        return this;
-    }
-
-    @Override
-    public MutableSortedSet<T> withoutAll(Iterable<? extends T> elements)
-    {
-        this.removeAllIterable(elements);
-        return this;
-    }
-
-    @Override
     public MutableSortedSet<T> newEmpty()
     {
         synchronized (this.getLock())

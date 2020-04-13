@@ -51,16 +51,32 @@ public interface MutableSortedSet<T>
         extends MutableSetIterable<T>, SortedSetIterable<T>, SortedSet<T>, Cloneable
 {
     @Override
-    MutableSortedSet<T> with(T element);
+    default MutableSortedSet<T> with(T element)
+    {
+        this.add(element);
+        return this;
+    }
 
     @Override
-    MutableSortedSet<T> without(T element);
+    default MutableSortedSet<T> without(T element)
+    {
+        this.remove(element);
+        return this;
+    }
 
     @Override
-    MutableSortedSet<T> withAll(Iterable<? extends T> elements);
+    default MutableSortedSet<T> withAll(Iterable<? extends T> elements)
+    {
+        this.addAllIterable(elements);
+        return this;
+    }
 
     @Override
-    MutableSortedSet<T> withoutAll(Iterable<? extends T> elements);
+    default MutableSortedSet<T> withoutAll(Iterable<? extends T> elements)
+    {
+        this.removeAllIterable(elements);
+        return this;
+    }
 
     @Override
     MutableSortedSet<T> newEmpty();

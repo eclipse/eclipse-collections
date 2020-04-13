@@ -70,4 +70,32 @@ public interface MutableSetIterable<T> extends SetIterable<T>, MutableCollection
     @Override
     @Deprecated
     MutableSetIterable<Pair<T, Integer>> zipWithIndex();
+
+    @Override
+    default MutableSetIterable<T> with(T element)
+    {
+        this.add(element);
+        return this;
+    }
+
+    @Override
+    default MutableSetIterable<T> without(T element)
+    {
+        this.remove(element);
+        return this;
+    }
+
+    @Override
+    default MutableSetIterable<T> withAll(Iterable<? extends T> elements)
+    {
+        this.addAllIterable(elements);
+        return this;
+    }
+
+    @Override
+    default MutableSetIterable<T> withoutAll(Iterable<? extends T> elements)
+    {
+        this.removeAllIterable(elements);
+        return this;
+    }
 }

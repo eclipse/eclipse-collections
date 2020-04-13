@@ -20,5 +20,17 @@ public interface FixedSizeSet<T>
         extends MutableSet<T>, FixedSizeCollection<T>
 {
     @Override
+    MutableSet<T> with(T element);
+
+    @Override
+    MutableSet<T> without(T element);
+
+    @Override
+    MutableSet<T> withAll(Iterable<? extends T> elements);
+
+    @Override
+    MutableSet<T> withoutAll(Iterable<? extends T> elements);
+
+    @Override
     FixedSizeSet<T> tap(Procedure<? super T> procedure);
 }
