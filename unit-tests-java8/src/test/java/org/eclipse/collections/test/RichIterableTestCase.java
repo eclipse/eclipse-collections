@@ -2045,7 +2045,7 @@ public interface RichIterableTestCase extends IterableTestCase
 
         assertEquals(
                 jdkMap,
-                iterable.toMap(Object::toString, each -> each % 10, new HashMap<String, Integer>()));
+                iterable.toMap(Object::toString, each -> each % 10, new HashMap<>()));
     }
 
     @Test
