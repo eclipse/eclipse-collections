@@ -47,6 +47,7 @@ import org.eclipse.collections.api.multimap.bag.ImmutableBagMultimap;
 import org.eclipse.collections.api.partition.bag.PartitionImmutableBag;
 import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.api.set.MutableSet;
+import org.eclipse.collections.api.set.SetIterable;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.api.tuple.primitive.ObjectIntPair;
 import org.eclipse.collections.impl.AbstractRichIterableTestCase;
@@ -1631,6 +1632,16 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
         ImmutableBag<String> bag = Bags.immutable.with("1", "2", "2", "3", "3", "3", "3", "4", "5", "5", "6");
         ImmutableSet<String> expected = Sets.immutable.with("1", "4", "6");
         ImmutableSet<String> actual = bag.selectUnique();
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void asSet()
+    {
+        SetIterable<String> expected = this.numKeys() == 0
+                ? UnifiedSet.newSet()
+                : Interval.oneTo(this.numKeys()).collect(String::valueOf).toSet();
+        SetIterable<String> actual = this.newBag().asSet();
         Assert.assertEquals(expected, actual);
     }
 }

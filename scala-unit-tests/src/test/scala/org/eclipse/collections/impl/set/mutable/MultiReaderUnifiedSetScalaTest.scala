@@ -20,6 +20,13 @@ class MultiReaderUnifiedSetScalaTest extends MultiReaderUnifiedSetTestTrait
     val classUnderTest = MultiReaderUnifiedSet.newSetWith(1, 2, 3)
 
     @Test
+    override def equals_safe(): Unit =
+        this.assert(readersBlocked = false, writersBlocked = true)
+        {
+            this.classUnderTest.equals(MultiReaderUnifiedSet.newSet())
+        }
+
+    @Test
     def newSet_safe(): Unit =
         this.assert(readersBlocked = false, writersBlocked = false)
         {

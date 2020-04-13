@@ -17,11 +17,13 @@ import java.util.Set;
 import org.eclipse.collections.api.bag.Bag;
 import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
 import org.eclipse.collections.api.collection.MutableCollection;
+import org.eclipse.collections.api.set.SetIterable;
 import org.eclipse.collections.api.tuple.primitive.ObjectIntPair;
 import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.factory.Bags;
 import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.Sets;
+import org.eclipse.collections.impl.set.mutable.UnmodifiableMutableSet;
 import org.eclipse.collections.impl.test.SerializeTestHelper;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
@@ -379,5 +381,13 @@ public class UnmodifiableSortedBagTest extends AbstractMutableSortedBagTestCase
         Assert.assertEquals(
                 Lists.mutable.with(6, 5, 8, 5, 6, 8),
                 bag2.collectWithOccurrences((each, index) -> each + index));
+    }
+
+    @Test
+    public void asSetUnmodifiable()
+    {
+        MutableSortedBag<Integer> bag = this.newWith();
+        SetIterable<Integer> actual = bag.asSet();
+        Verify.assertInstanceOf(UnmodifiableMutableSet.class, actual);
     }
 }

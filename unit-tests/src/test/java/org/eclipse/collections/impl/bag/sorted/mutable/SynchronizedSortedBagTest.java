@@ -16,10 +16,12 @@ import java.util.Set;
 import org.eclipse.collections.api.bag.Bag;
 import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
 import org.eclipse.collections.api.list.MutableList;
+import org.eclipse.collections.api.set.SetIterable;
 import org.eclipse.collections.api.tuple.primitive.ObjectIntPair;
 import org.eclipse.collections.impl.factory.Bags;
 import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.Sets;
+import org.eclipse.collections.impl.set.mutable.SynchronizedMutableSet;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.junit.Assert;
@@ -141,5 +143,13 @@ public class SynchronizedSortedBagTest extends AbstractMutableSortedBagTestCase
         Assert.assertEquals(
                 Lists.mutable.with(6, 5, 8, 5, 6, 8),
                 bag2.collectWithOccurrences((each, index) -> each + index));
+    }
+
+    @Test
+    public void asSetSynchronized()
+    {
+        MutableSortedBag<?> bag = this.newWith();
+        SetIterable<?> actual = bag.asSet();
+        Verify.assertInstanceOf(SynchronizedMutableSet.class, actual);
     }
 }

@@ -23,6 +23,7 @@ import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.partition.PartitionMutableCollection;
 import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.api.set.MutableSet;
+import org.eclipse.collections.api.set.SetIterable;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.api.tuple.primitive.ObjectIntPair;
 import org.eclipse.collections.impl.block.factory.IntegerPredicates;
@@ -39,6 +40,7 @@ import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.math.IntegerSum;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
+import org.eclipse.collections.impl.set.mutable.UnmodifiableMutableSet;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.Tuples;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
@@ -537,5 +539,15 @@ public abstract class MutableBagTestCase extends AbstractCollectionTestCase
                 Tuples.pair("2", "2"),
                 Tuples.pair("3", "3"));
         Assert.assertEquals(expected, bag.zip(bag::iterator).toBag());
+    }
+
+    @Test
+    public void asSet()
+    {
+        MutableBagIterable<Integer> bag = this.newWith(1, 1, 2, 3, 4, 4);
+        SetIterable<Integer> expected = UnifiedSet.newSetWith(1, 2, 3, 4);
+        SetIterable<Integer> actual = bag.asSet();
+        Assert.assertEquals(expected, actual);
+        Verify.assertInstanceOf(UnmodifiableMutableSet.class, actual);
     }
 }

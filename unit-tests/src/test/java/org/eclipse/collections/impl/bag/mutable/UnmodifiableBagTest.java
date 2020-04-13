@@ -18,6 +18,7 @@ import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.api.set.MutableSet;
+import org.eclipse.collections.api.set.SetIterable;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.api.tuple.primitive.ObjectIntPair;
 import org.eclipse.collections.impl.bag.mutable.primitive.BooleanHashBag;
@@ -36,6 +37,8 @@ import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
+import org.eclipse.collections.impl.set.mutable.UnifiedSet;
+import org.eclipse.collections.impl.set.mutable.UnmodifiableMutableSet;
 import org.eclipse.collections.impl.test.SerializeTestHelper;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.Tuples;
@@ -301,5 +304,15 @@ public class UnmodifiableBagTest
         MutableSet<String> expected = Sets.mutable.with("0", "4", "5");
         MutableSet<String> actual = bag.selectUnique();
         Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void asSet()
+    {
+        MutableBag<Integer> bag = Bags.mutable.of(1, 1, 2, 3, 4, 4).asUnmodifiable();
+        SetIterable<Integer> expected = UnifiedSet.newSetWith(1, 2, 3, 4);
+        SetIterable<Integer> actual = bag.asSet();
+        Assert.assertEquals(expected, actual);
+        Verify.assertInstanceOf(UnmodifiableMutableSet.class, actual);
     }
 }
