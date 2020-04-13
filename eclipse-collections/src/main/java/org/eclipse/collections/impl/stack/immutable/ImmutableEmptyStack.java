@@ -103,7 +103,7 @@ final class ImmutableEmptyStack<T>
     @Override
     public ImmutableStack<T> push(T item)
     {
-        return new ImmutableNotEmptyStack<T>(item, this);
+        return new ImmutableNotEmptyStack<>(item, this);
     }
 
     @Override

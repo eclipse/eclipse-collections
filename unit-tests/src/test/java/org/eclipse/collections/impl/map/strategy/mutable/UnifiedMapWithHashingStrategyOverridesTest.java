@@ -18,7 +18,7 @@ import org.eclipse.collections.impl.block.factory.HashingStrategies;
 
 public class UnifiedMapWithHashingStrategyOverridesTest extends UnifiedMapWithHashingStrategyTest
 {
-    public static final class UnifiedMapWithHashingStrategyOverrides<K, V> extends UnifiedMapWithHashingStrategy<K, V>
+    public static class UnifiedMapWithHashingStrategyOverrides<K, V> extends UnifiedMapWithHashingStrategy<K, V>
     {
         public UnifiedMapWithHashingStrategyOverrides()
         {
