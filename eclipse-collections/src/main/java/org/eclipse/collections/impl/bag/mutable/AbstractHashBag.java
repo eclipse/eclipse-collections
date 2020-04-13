@@ -111,6 +111,12 @@ public abstract class AbstractHashBag<T> extends AbstractMutableBag<T>
     }
 
     @Override
+    public RichIterable<T> distinctView()
+    {
+        return this.items.keysView();
+    }
+
+    @Override
     public boolean add(T item)
     {
         this.items.updateValue(item, 0, IntToIntFunctions.increment());

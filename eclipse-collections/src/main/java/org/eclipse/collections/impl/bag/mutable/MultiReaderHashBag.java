@@ -63,6 +63,7 @@ import org.eclipse.collections.api.multimap.bag.MutableBagMultimap;
 import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.partition.bag.PartitionMutableBag;
 import org.eclipse.collections.api.set.MutableSet;
+import org.eclipse.collections.api.set.SetIterable;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.api.tuple.primitive.ObjectIntPair;
 import org.eclipse.collections.impl.collection.mutable.AbstractMultiReaderMutableCollection;
@@ -181,6 +182,20 @@ public final class MultiReaderHashBag<T>
         {
             return UnmodifiableBag.of(this);
         }
+    }
+
+    @Override
+    public SetIterable<T> asSet()
+    {
+        throw new UnsupportedOperationException(this.getClass().getSimpleName() + ".asSet() not implemented yet");
+    }
+
+    @Override
+    public RichIterable<T> distinctView()
+    {
+        // TODO: MultiReader collections should support views. For example, if we later implement MultiReaderUnifiedMap.keySet(), then we can also implement distinctView and asSet.
+        throw new UnsupportedOperationException(this.getClass().getSimpleName()
+                + ".distinctView() not implemented yet");
     }
 
     @Override
@@ -699,6 +714,12 @@ public final class MultiReaderHashBag<T>
         }
 
         @Override
+        public SetIterable<T> asSet()
+        {
+            throw new UnsupportedOperationException("cannot wrap an UntouchableMutableBag");
+        }
+
+        @Override
         public ImmutableBag<T> toImmutable()
         {
             return Bags.immutable.withAll(this.getDelegate());
@@ -1028,6 +1049,12 @@ public final class MultiReaderHashBag<T>
         public MutableSet<T> selectUnique()
         {
             return this.getDelegate().selectUnique();
+        }
+
+        @Override
+        public RichIterable<T> distinctView()
+        {
+            return this.getDelegate().distinctView();
         }
     }
 

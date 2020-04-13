@@ -65,6 +65,7 @@ import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.partition.bag.PartitionImmutableBag;
 import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.api.set.MutableSet;
+import org.eclipse.collections.api.set.SetIterable;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.EmptyIterator;
 import org.eclipse.collections.impl.bag.mutable.HashBag;
@@ -782,5 +783,17 @@ final class ImmutableEmptyBag<T>
     public ImmutableSet<T> selectUnique()
     {
         return Sets.immutable.empty();
+    }
+
+    @Override
+    public SetIterable<T> asSet()
+    {
+        return Sets.immutable.empty();
+    }
+
+    @Override
+    public RichIterable<T> distinctView()
+    {
+        return Lists.immutable.empty();
     }
 }

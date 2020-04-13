@@ -18,6 +18,7 @@ import java.util.Optional;
 import java.util.concurrent.ExecutorService;
 
 import org.eclipse.collections.api.LazyIterable;
+import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.ParallelBag;
 import org.eclipse.collections.api.bag.sorted.ImmutableSortedBag;
 import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
@@ -51,10 +52,13 @@ import org.eclipse.collections.api.map.sorted.MutableSortedMap;
 import org.eclipse.collections.api.multimap.sortedbag.MutableSortedBagMultimap;
 import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.partition.bag.sorted.PartitionMutableSortedBag;
+import org.eclipse.collections.api.set.SetIterable;
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 import org.eclipse.collections.api.stack.MutableStack;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.api.tuple.primitive.ObjectIntPair;
+import org.eclipse.collections.impl.SynchronizedRichIterable;
+import org.eclipse.collections.impl.bag.SetFromBagAdapter;
 import org.eclipse.collections.impl.collection.mutable.AbstractSynchronizedMutableCollection;
 import org.eclipse.collections.impl.collection.mutable.SynchronizedCollectionSerializationProxy;
 import org.eclipse.collections.impl.stack.mutable.ArrayStack;
@@ -733,5 +737,22 @@ public class SynchronizedSortedBag<T>
         {
             return this.getDelegate().selectUnique();
         }
+    }
+
+    @Override
+    public SetIterable<T> asSet()
+    {
+        synchronized (this.getLock())
+        {
+            // TODO: imlement SynchronizedSetIterable
+            // return SynchronizedSetIterable.of(this.getDelegate().asSet(), this.lock);
+            return new SetFromBagAdapter<>(this);
+        }
+    }
+
+    @Override
+    public RichIterable<T> distinctView()
+    {
+        return SynchronizedRichIterable.of(this.getDelegate().distinctView(), this.lock);
     }
 }

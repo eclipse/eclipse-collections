@@ -44,10 +44,12 @@ import org.eclipse.collections.api.map.sorted.MutableSortedMap;
 import org.eclipse.collections.api.multimap.sortedbag.ImmutableSortedBagMultimap;
 import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.partition.bag.sorted.PartitionImmutableSortedBag;
+import org.eclipse.collections.api.set.SetIterable;
 import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 import org.eclipse.collections.api.stack.MutableStack;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.EmptyIterator;
+import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.multimap.bag.sorted.mutable.TreeBagMultimap;
 import org.eclipse.collections.impl.partition.bag.sorted.PartitionImmutableSortedBagImpl;
 import org.eclipse.collections.impl.partition.bag.sorted.PartitionTreeBag;
@@ -365,6 +367,18 @@ class ImmutableEmptySortedBag<T>
 
     @Override
     public <V> ImmutableList<V> collectWithOccurrences(ObjectIntToObjectFunction<? super T, ? extends V> function)
+    {
+        return Lists.immutable.empty();
+    }
+
+    @Override
+    public SetIterable<T> asSet()
+    {
+        return Sets.immutable.empty();
+    }
+
+    @Override
+    public RichIterable<T> distinctView()
     {
         return Lists.immutable.empty();
     }

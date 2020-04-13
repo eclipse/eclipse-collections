@@ -21,6 +21,7 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.RandomAccess;
 
+import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.Bag;
 import org.eclipse.collections.api.bag.sorted.ImmutableSortedBag;
 import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
@@ -43,6 +44,7 @@ import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 import org.eclipse.collections.impl.Counter;
 import org.eclipse.collections.impl.bag.sorted.mutable.TreeBag;
 import org.eclipse.collections.impl.block.factory.Comparators;
+import org.eclipse.collections.impl.list.fixed.ArrayAdapter;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.map.sorted.mutable.TreeSortedMap;
 import org.eclipse.collections.impl.partition.bag.sorted.PartitionImmutableSortedBagImpl;
@@ -589,6 +591,12 @@ class ImmutableSortedBagImpl<T>
         MutableSortedMap<T, Integer> map = TreeSortedMap.newMap(this.comparator());
         this.forEachWithOccurrences(map::put);
         return map;
+    }
+
+    @Override
+    public RichIterable<T> distinctView()
+    {
+        return ArrayAdapter.adapt(this.elements).asUnmodifiable();
     }
 
     @Override

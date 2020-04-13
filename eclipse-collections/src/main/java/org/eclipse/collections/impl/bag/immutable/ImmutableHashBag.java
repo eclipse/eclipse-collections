@@ -19,6 +19,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.eclipse.collections.api.LazyIterable;
+import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.Bag;
 import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.api.bag.MutableBag;
@@ -665,6 +666,12 @@ public class ImmutableHashBag<T>
     public <R extends Collection<Pair<T, Integer>>> R zipWithIndex(R target)
     {
         return this.delegate.zipWithIndex(target);
+    }
+
+    @Override
+    public RichIterable<T> distinctView()
+    {
+        return this.delegate.distinctView();
     }
 
     @Override

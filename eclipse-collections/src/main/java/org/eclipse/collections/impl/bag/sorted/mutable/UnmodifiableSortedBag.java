@@ -15,6 +15,7 @@ import java.util.Collection;
 import java.util.Comparator;
 
 import org.eclipse.collections.api.LazyIterable;
+import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.sorted.ImmutableSortedBag;
 import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
 import org.eclipse.collections.api.bag.sorted.SortedBag;
@@ -48,10 +49,12 @@ import org.eclipse.collections.api.map.sorted.MutableSortedMap;
 import org.eclipse.collections.api.multimap.sortedbag.MutableSortedBagMultimap;
 import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.partition.bag.sorted.PartitionMutableSortedBag;
+import org.eclipse.collections.api.set.SetIterable;
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 import org.eclipse.collections.api.stack.MutableStack;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.api.tuple.primitive.ObjectIntPair;
+import org.eclipse.collections.impl.bag.SetFromBagAdapter;
 import org.eclipse.collections.impl.collection.mutable.AbstractUnmodifiableMutableCollection;
 import org.eclipse.collections.impl.collection.mutable.UnmodifiableCollectionSerializationProxy;
 
@@ -227,6 +230,18 @@ public class UnmodifiableSortedBag<T>
     public <V, R extends Collection<V>> R collectWithOccurrences(ObjectIntToObjectFunction<? super T, ? extends V> function, R target)
     {
         return this.getSortedBag().collectWithOccurrences(function, target);
+    }
+
+    @Override
+    public RichIterable<T> distinctView()
+    {
+        return this.getSortedBag().distinctView();
+    }
+
+    @Override
+    public SetIterable<T> asSet()
+    {
+        return new SetFromBagAdapter<>(this);
     }
 
     @Override

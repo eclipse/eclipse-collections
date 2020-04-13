@@ -709,6 +709,12 @@ public class TreeBag<T>
         return this;
     }
 
+    @Override
+    public RichIterable<T> distinctView()
+    {
+        return this.items.keysView();
+    }
+
     private class InternalIterator implements Iterator<T>
     {
         private final Iterator<T> iterator = TreeBag.this.items.keySet().iterator();

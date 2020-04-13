@@ -14,6 +14,7 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Collections;
 
+import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.bag.primitive.MutableBooleanBag;
@@ -47,10 +48,13 @@ import org.eclipse.collections.api.multimap.bag.MutableBagMultimap;
 import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.partition.bag.PartitionMutableBag;
 import org.eclipse.collections.api.set.MutableSet;
+import org.eclipse.collections.api.set.SetIterable;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.api.tuple.primitive.ObjectIntPair;
+import org.eclipse.collections.impl.bag.SetFromBagAdapter;
 import org.eclipse.collections.impl.collection.mutable.AbstractSynchronizedMutableCollection;
 import org.eclipse.collections.impl.collection.mutable.SynchronizedCollectionSerializationProxy;
+import org.eclipse.collections.impl.utility.LazyIterate;
 
 /**
  * A synchronized view of a {@link MutableBag}. It is imperative that the user manually synchronize on the collection when iterating over it using the
@@ -442,5 +446,17 @@ public class SynchronizedBag<T>
         {
             return this.getDelegate().selectUnique();
         }
+    }
+
+    @Override
+    public RichIterable<T> distinctView()
+    {
+        return LazyIterate.adapt(this.getDelegate().distinctView());
+    }
+
+    @Override
+    public SetIterable<T> asSet()
+    {
+        return new SetFromBagAdapter<>(this);
     }
 }

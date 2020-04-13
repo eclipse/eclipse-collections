@@ -18,6 +18,7 @@ import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Optional;
 
+import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.Bag;
 import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.api.bag.MutableBag;
@@ -38,10 +39,12 @@ import org.eclipse.collections.api.multimap.MutableMultimap;
 import org.eclipse.collections.api.multimap.bag.ImmutableBagMultimap;
 import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.set.ImmutableSet;
+import org.eclipse.collections.api.set.SetIterable;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.bag.mutable.HashBag;
 import org.eclipse.collections.impl.block.factory.Predicates;
 import org.eclipse.collections.impl.block.procedure.MultimapEachPutProcedure;
+import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.multimap.bag.HashBagMultimap;
 import org.eclipse.collections.impl.tuple.Tuples;
@@ -539,5 +542,17 @@ final class ImmutableSingletonBag<T>
     public ImmutableSet<T> selectUnique()
     {
         return Sets.immutable.of(this.value);
+    }
+
+    @Override
+    public SetIterable<T> asSet()
+    {
+        return Sets.immutable.with(this.value);
+    }
+
+    @Override
+    public RichIterable<T> distinctView()
+    {
+        return Lists.immutable.with(this.value);
     }
 }

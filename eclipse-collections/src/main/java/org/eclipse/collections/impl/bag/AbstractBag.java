@@ -56,6 +56,7 @@ import org.eclipse.collections.api.factory.SortedSets;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.multimap.MutableMultimap;
 import org.eclipse.collections.api.set.MutableSet;
+import org.eclipse.collections.api.set.SetIterable;
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 import org.eclipse.collections.api.tuple.primitive.ObjectIntPair;
 import org.eclipse.collections.impl.AbstractRichIterable;
@@ -647,6 +648,12 @@ public abstract class AbstractBag<T>
         StringJoiner joiner = new StringJoiner(", ", "{", "}");
         this.forEachWithOccurrences((each, occurrences) -> joiner.add(each + "=" + occurrences));
         return joiner.toString();
+    }
+
+    @Override
+    public SetIterable<T> asSet()
+    {
+        return new SetFromBagAdapter<>(this);
     }
 
     protected MutableList<ObjectIntPair<T>> toListWithOccurrences()

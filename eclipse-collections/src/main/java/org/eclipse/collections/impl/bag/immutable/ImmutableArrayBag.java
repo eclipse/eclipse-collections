@@ -35,6 +35,7 @@ import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.bag.mutable.HashBag;
 import org.eclipse.collections.impl.block.factory.Predicates2;
+import org.eclipse.collections.impl.list.fixed.ArrayAdapter;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.multimap.bag.HashBagMultimap;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
@@ -475,6 +476,12 @@ public class ImmutableArrayBag<T>
     public ImmutableSet<Pair<T, Integer>> zipWithIndex()
     {
         return this.zipWithIndex(UnifiedSet.newSet(this.size())).toImmutable();
+    }
+
+    @Override
+    public RichIterable<T> distinctView()
+    {
+        return ArrayAdapter.adapt(this.keys).asUnmodifiable();
     }
 
     protected Object writeReplace()
