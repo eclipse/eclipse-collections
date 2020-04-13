@@ -22,8 +22,16 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
+import org.eclipse.collections.api.BooleanIterable;
+import org.eclipse.collections.api.ByteIterable;
+import org.eclipse.collections.api.CharIterable;
+import org.eclipse.collections.api.DoubleIterable;
+import org.eclipse.collections.api.FloatIterable;
+import org.eclipse.collections.api.IntIterable;
 import org.eclipse.collections.api.LazyIterable;
+import org.eclipse.collections.api.LongIterable;
 import org.eclipse.collections.api.RichIterable;
+import org.eclipse.collections.api.ShortIterable;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
 import org.eclipse.collections.api.bimap.MutableBiMap;
@@ -364,6 +372,13 @@ public class ArrayStack<T> implements MutableStack<T>, Externalizable
     }
 
     @Override
+    public <R extends MutableBooleanCollection> R flatCollectBoolean(
+            Function<? super T, ? extends BooleanIterable> function, R target)
+    {
+        return this.delegate.asReversed().flatCollectBoolean(function, target);
+    }
+
+    @Override
     public MutableByteStack collectByte(ByteFunction<? super T> byteFunction)
     {
         return ByteArrayStack.newStackFromTopToBottom(this.delegate.asReversed().collectByte(byteFunction));
@@ -373,6 +388,13 @@ public class ArrayStack<T> implements MutableStack<T>, Externalizable
     public <R extends MutableByteCollection> R collectByte(ByteFunction<? super T> byteFunction, R target)
     {
         return this.delegate.asReversed().collectByte(byteFunction, target);
+    }
+
+    @Override
+    public <R extends MutableByteCollection> R flatCollectByte(
+            Function<? super T, ? extends ByteIterable> function, R target)
+    {
+        return this.delegate.asReversed().flatCollectByte(function, target);
     }
 
     @Override
@@ -388,6 +410,13 @@ public class ArrayStack<T> implements MutableStack<T>, Externalizable
     }
 
     @Override
+    public <R extends MutableCharCollection> R flatCollectChar(
+            Function<? super T, ? extends CharIterable> function, R target)
+    {
+        return this.delegate.asReversed().flatCollectChar(function, target);
+    }
+
+    @Override
     public MutableDoubleStack collectDouble(DoubleFunction<? super T> doubleFunction)
     {
         return DoubleArrayStack.newStackFromTopToBottom(this.delegate.asReversed().collectDouble(doubleFunction));
@@ -397,6 +426,13 @@ public class ArrayStack<T> implements MutableStack<T>, Externalizable
     public <R extends MutableDoubleCollection> R collectDouble(DoubleFunction<? super T> doubleFunction, R target)
     {
         return this.delegate.asReversed().collectDouble(doubleFunction, target);
+    }
+
+    @Override
+    public <R extends MutableDoubleCollection> R flatCollectDouble(
+            Function<? super T, ? extends DoubleIterable> function, R target)
+    {
+        return this.delegate.asReversed().flatCollectDouble(function, target);
     }
 
     @Override
@@ -412,6 +448,13 @@ public class ArrayStack<T> implements MutableStack<T>, Externalizable
     }
 
     @Override
+    public <R extends MutableFloatCollection> R flatCollectFloat(
+            Function<? super T, ? extends FloatIterable> function, R target)
+    {
+        return this.delegate.asReversed().flatCollectFloat(function, target);
+    }
+
+    @Override
     public MutableIntStack collectInt(IntFunction<? super T> intFunction)
     {
         return IntArrayStack.newStackFromTopToBottom(this.delegate.asReversed().collectInt(intFunction));
@@ -421,6 +464,13 @@ public class ArrayStack<T> implements MutableStack<T>, Externalizable
     public <R extends MutableIntCollection> R collectInt(IntFunction<? super T> intFunction, R target)
     {
         return this.delegate.asReversed().collectInt(intFunction, target);
+    }
+
+    @Override
+    public <R extends MutableIntCollection> R flatCollectInt(
+            Function<? super T, ? extends IntIterable> function, R target)
+    {
+        return this.delegate.asReversed().flatCollectInt(function, target);
     }
 
     @Override
@@ -436,6 +486,13 @@ public class ArrayStack<T> implements MutableStack<T>, Externalizable
     }
 
     @Override
+    public <R extends MutableLongCollection> R flatCollectLong(
+            Function<? super T, ? extends LongIterable> function, R target)
+    {
+        return this.delegate.asReversed().flatCollectLong(function, target);
+    }
+
+    @Override
     public MutableShortStack collectShort(ShortFunction<? super T> shortFunction)
     {
         return ShortArrayStack.newStackFromTopToBottom(this.delegate.asReversed().collectShort(shortFunction));
@@ -445,6 +502,13 @@ public class ArrayStack<T> implements MutableStack<T>, Externalizable
     public <R extends MutableShortCollection> R collectShort(ShortFunction<? super T> shortFunction, R target)
     {
         return this.delegate.asReversed().collectShort(shortFunction, target);
+    }
+
+    @Override
+    public <R extends MutableShortCollection> R flatCollectShort(
+            Function<? super T, ? extends ShortIterable> function, R target)
+    {
+        return this.delegate.asReversed().flatCollectShort(function, target);
     }
 
     @Override

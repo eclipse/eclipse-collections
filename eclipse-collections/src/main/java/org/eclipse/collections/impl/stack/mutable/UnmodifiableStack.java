@@ -17,8 +17,16 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Optional;
 
+import org.eclipse.collections.api.BooleanIterable;
+import org.eclipse.collections.api.ByteIterable;
+import org.eclipse.collections.api.CharIterable;
+import org.eclipse.collections.api.DoubleIterable;
+import org.eclipse.collections.api.FloatIterable;
+import org.eclipse.collections.api.IntIterable;
 import org.eclipse.collections.api.LazyIterable;
+import org.eclipse.collections.api.LongIterable;
 import org.eclipse.collections.api.RichIterable;
+import org.eclipse.collections.api.ShortIterable;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
 import org.eclipse.collections.api.bimap.MutableBiMap;
@@ -203,6 +211,13 @@ public final class UnmodifiableStack<T> implements MutableStack<T>, Serializable
     }
 
     @Override
+    public <R extends MutableBooleanCollection> R flatCollectBoolean(
+            Function<? super T, ? extends BooleanIterable> function, R target)
+    {
+        return this.mutableStack.flatCollectBoolean(function, target);
+    }
+
+    @Override
     public MutableByteStack collectByte(ByteFunction<? super T> byteFunction)
     {
         return this.mutableStack.collectByte(byteFunction);
@@ -212,6 +227,13 @@ public final class UnmodifiableStack<T> implements MutableStack<T>, Serializable
     public <R extends MutableByteCollection> R collectByte(ByteFunction<? super T> byteFunction, R target)
     {
         return this.mutableStack.collectByte(byteFunction, target);
+    }
+
+    @Override
+    public <R extends MutableByteCollection> R flatCollectByte(
+            Function<? super T, ? extends ByteIterable> function, R target)
+    {
+        return this.mutableStack.flatCollectByte(function, target);
     }
 
     @Override
@@ -227,6 +249,13 @@ public final class UnmodifiableStack<T> implements MutableStack<T>, Serializable
     }
 
     @Override
+    public <R extends MutableCharCollection> R flatCollectChar(
+            Function<? super T, ? extends CharIterable> function, R target)
+    {
+        return this.mutableStack.flatCollectChar(function, target);
+    }
+
+    @Override
     public MutableDoubleStack collectDouble(DoubleFunction<? super T> doubleFunction)
     {
         return this.mutableStack.collectDouble(doubleFunction);
@@ -236,6 +265,13 @@ public final class UnmodifiableStack<T> implements MutableStack<T>, Serializable
     public <R extends MutableDoubleCollection> R collectDouble(DoubleFunction<? super T> doubleFunction, R target)
     {
         return this.mutableStack.collectDouble(doubleFunction, target);
+    }
+
+    @Override
+    public <R extends MutableDoubleCollection> R flatCollectDouble(
+            Function<? super T, ? extends DoubleIterable> function, R target)
+    {
+        return this.mutableStack.flatCollectDouble(function, target);
     }
 
     @Override
@@ -251,6 +287,13 @@ public final class UnmodifiableStack<T> implements MutableStack<T>, Serializable
     }
 
     @Override
+    public <R extends MutableFloatCollection> R flatCollectFloat(
+            Function<? super T, ? extends FloatIterable> function, R target)
+    {
+        return this.mutableStack.flatCollectFloat(function, target);
+    }
+
+    @Override
     public MutableIntStack collectInt(IntFunction<? super T> intFunction)
     {
         return this.mutableStack.collectInt(intFunction);
@@ -260,6 +303,13 @@ public final class UnmodifiableStack<T> implements MutableStack<T>, Serializable
     public <R extends MutableIntCollection> R collectInt(IntFunction<? super T> intFunction, R target)
     {
         return this.mutableStack.collectInt(intFunction, target);
+    }
+
+    @Override
+    public <R extends MutableIntCollection> R flatCollectInt(
+            Function<? super T, ? extends IntIterable> function, R target)
+    {
+        return this.mutableStack.flatCollectInt(function, target);
     }
 
     @Override
@@ -275,6 +325,13 @@ public final class UnmodifiableStack<T> implements MutableStack<T>, Serializable
     }
 
     @Override
+    public <R extends MutableLongCollection> R flatCollectLong(
+            Function<? super T, ? extends LongIterable> function, R target)
+    {
+        return this.mutableStack.flatCollectLong(function, target);
+    }
+
+    @Override
     public MutableShortStack collectShort(ShortFunction<? super T> shortFunction)
     {
         return this.mutableStack.collectShort(shortFunction);
@@ -284,6 +341,13 @@ public final class UnmodifiableStack<T> implements MutableStack<T>, Serializable
     public <R extends MutableShortCollection> R collectShort(ShortFunction<? super T> shortFunction, R target)
     {
         return this.mutableStack.collectShort(shortFunction, target);
+    }
+
+    @Override
+    public <R extends MutableShortCollection> R flatCollectShort(
+            Function<? super T, ? extends ShortIterable> function, R target)
+    {
+        return this.mutableStack.flatCollectShort(function, target);
     }
 
     @Override

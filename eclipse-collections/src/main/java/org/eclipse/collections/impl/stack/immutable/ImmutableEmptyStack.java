@@ -19,7 +19,15 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
+import org.eclipse.collections.api.BooleanIterable;
+import org.eclipse.collections.api.ByteIterable;
+import org.eclipse.collections.api.CharIterable;
+import org.eclipse.collections.api.DoubleIterable;
+import org.eclipse.collections.api.FloatIterable;
+import org.eclipse.collections.api.IntIterable;
+import org.eclipse.collections.api.LongIterable;
 import org.eclipse.collections.api.RichIterable;
+import org.eclipse.collections.api.ShortIterable;
 import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function0;
@@ -263,6 +271,13 @@ final class ImmutableEmptyStack<T>
     }
 
     @Override
+    public <R extends MutableBooleanCollection> R flatCollectBoolean(
+            Function<? super T, ? extends BooleanIterable> function, R target)
+    {
+        return target;
+    }
+
+    @Override
     public ImmutableByteStack collectByte(ByteFunction<? super T> byteFunction)
     {
         return ByteStacks.immutable.empty();
@@ -270,6 +285,13 @@ final class ImmutableEmptyStack<T>
 
     @Override
     public <R extends MutableByteCollection> R collectByte(ByteFunction<? super T> byteFunction, R target)
+    {
+        return target;
+    }
+
+    @Override
+    public <R extends MutableByteCollection> R flatCollectByte(
+            Function<? super T, ? extends ByteIterable> function, R target)
     {
         return target;
     }
@@ -287,6 +309,13 @@ final class ImmutableEmptyStack<T>
     }
 
     @Override
+    public <R extends MutableCharCollection> R flatCollectChar(
+            Function<? super T, ? extends CharIterable> function, R target)
+    {
+        return target;
+    }
+
+    @Override
     public ImmutableDoubleStack collectDouble(DoubleFunction<? super T> doubleFunction)
     {
         return DoubleStacks.immutable.empty();
@@ -294,6 +323,13 @@ final class ImmutableEmptyStack<T>
 
     @Override
     public <R extends MutableDoubleCollection> R collectDouble(DoubleFunction<? super T> doubleFunction, R target)
+    {
+        return target;
+    }
+
+    @Override
+    public <R extends MutableDoubleCollection> R flatCollectDouble(
+            Function<? super T, ? extends DoubleIterable> function, R target)
     {
         return target;
     }
@@ -311,6 +347,13 @@ final class ImmutableEmptyStack<T>
     }
 
     @Override
+    public <R extends MutableFloatCollection> R flatCollectFloat(
+            Function<? super T, ? extends FloatIterable> function, R target)
+    {
+        return target;
+    }
+
+    @Override
     public ImmutableIntStack collectInt(IntFunction<? super T> intFunction)
     {
         return IntStacks.immutable.empty();
@@ -318,6 +361,13 @@ final class ImmutableEmptyStack<T>
 
     @Override
     public <R extends MutableIntCollection> R collectInt(IntFunction<? super T> intFunction, R target)
+    {
+        return target;
+    }
+
+    @Override
+    public <R extends MutableIntCollection> R flatCollectInt(
+            Function<? super T, ? extends IntIterable> function, R target)
     {
         return target;
     }
@@ -335,6 +385,13 @@ final class ImmutableEmptyStack<T>
     }
 
     @Override
+    public <R extends MutableLongCollection> R flatCollectLong(
+            Function<? super T, ? extends LongIterable> function, R target)
+    {
+        return target;
+    }
+
+    @Override
     public ImmutableShortStack collectShort(ShortFunction<? super T> shortFunction)
     {
         return ShortStacks.immutable.empty();
@@ -342,6 +399,13 @@ final class ImmutableEmptyStack<T>
 
     @Override
     public <R extends MutableShortCollection> R collectShort(ShortFunction<? super T> shortFunction, R target)
+    {
+        return target;
+    }
+
+    @Override
+    public <R extends MutableShortCollection> R flatCollectShort(
+            Function<? super T, ? extends ShortIterable> function, R target)
     {
         return target;
     }

@@ -1183,6 +1183,118 @@ public interface RichIterable<T>
     <V> RichIterable<V> flatCollect(Function<? super T, ? extends Iterable<V>> function);
 
     /**
+     * Same as flatCollect, only the results are collected into the target collection.
+     *
+     * @param function The {@link Function} to apply
+     * @param target   The collection into which results should be added.
+     * @return {@code target}, which will contain a flattened collection of results produced by applying the given {@code function}
+     * @see #flatCollect(Function)
+     */
+    default <R extends MutableByteCollection> R flatCollectByte(Function<? super T, ? extends ByteIterable> function, R target)
+    {
+        this.forEach(each -> target.addAll(function.valueOf(each)));
+        return target;
+    }
+
+    /**
+     * Same as flatCollect, only the results are collected into the target collection.
+     *
+     * @param function The {@link Function} to apply
+     * @param target   The collection into which results should be added.
+     * @return {@code target}, which will contain a flattened collection of results produced by applying the given {@code function}
+     * @see #flatCollect(Function)
+     */
+    default <R extends MutableCharCollection> R flatCollectChar(Function<? super T, ? extends CharIterable> function, R target)
+    {
+        this.forEach(each -> target.addAll(function.valueOf(each)));
+        return target;
+    }
+
+    /**
+     * Same as flatCollect, only the results are collected into the target collection.
+     *
+     * @param function The {@link Function} to apply
+     * @param target   The collection into which results should be added.
+     * @return {@code target}, which will contain a flattened collection of results produced by applying the given {@code function}
+     * @see #flatCollect(Function)
+     */
+    default <R extends MutableIntCollection> R flatCollectInt(Function<? super T, ? extends IntIterable> function, R target)
+    {
+        this.forEach(each -> target.addAll(function.valueOf(each)));
+        return target;
+    }
+
+    /**
+     * Same as flatCollect, only the results are collected into the target collection.
+     *
+     * @param function The {@link Function} to apply
+     * @param target   The collection into which results should be added.
+     * @return {@code target}, which will contain a flattened collection of results produced by applying the given {@code function}
+     * @see #flatCollect(Function)
+     */
+    default <R extends MutableShortCollection> R flatCollectShort(Function<? super T, ? extends ShortIterable> function, R target)
+    {
+        this.forEach(each -> target.addAll(function.valueOf(each)));
+        return target;
+    }
+
+    /**
+     * Same as flatCollect, only the results are collected into the target collection.
+     *
+     * @param function The {@link Function} to apply
+     * @param target   The collection into which results should be added.
+     * @return {@code target}, which will contain a flattened collection of results produced by applying the given {@code function}
+     * @see #flatCollect(Function)
+     */
+    default <R extends MutableDoubleCollection> R flatCollectDouble(Function<? super T, ? extends DoubleIterable> function, R target)
+    {
+        this.forEach(each -> target.addAll(function.valueOf(each)));
+        return target;
+    }
+
+    /**
+     * Same as flatCollect, only the results are collected into the target collection.
+     *
+     * @param function The {@link Function} to apply
+     * @param target   The collection into which results should be added.
+     * @return {@code target}, which will contain a flattened collection of results produced by applying the given {@code function}
+     * @see #flatCollect(Function)
+     */
+    default <R extends MutableFloatCollection> R flatCollectFloat(Function<? super T, ? extends FloatIterable> function, R target)
+    {
+        this.forEach(each -> target.addAll(function.valueOf(each)));
+        return target;
+    }
+
+    /**
+     * Same as flatCollect, only the results are collected into the target collection.
+     *
+     * @param function The {@link Function} to apply
+     * @param target   The collection into which results should be added.
+     * @return {@code target}, which will contain a flattened collection of results produced by applying the given {@code function}
+     * @see #flatCollect(Function)
+     */
+    default <R extends MutableLongCollection> R flatCollectLong(Function<? super T, ? extends LongIterable> function, R target)
+    {
+        this.forEach(each -> target.addAll(function.valueOf(each)));
+        return target;
+    }
+
+    /**
+     * Same as flatCollect, only the results are collected into the target collection.
+     *
+     * @param function The {@link Function} to apply
+     * @param target   The collection into which results should be added.
+     * @return {@code target}, which will contain a flattened collection of results produced by applying the given {@code function}
+     * @see #flatCollect(Function)
+     */
+    default <R extends MutableBooleanCollection> R flatCollectBoolean(Function<? super T, ? extends BooleanIterable> function, R target)
+    {
+        this.forEach(each -> target.addAll(function.valueOf(each)));
+        return target;
+    }
+
+    /**
      * @since 9.2
      */
     default <P, V> RichIterable<V> flatCollectWith(Function2<? super T, ? super P, ? extends Iterable<V>> function, P parameter)

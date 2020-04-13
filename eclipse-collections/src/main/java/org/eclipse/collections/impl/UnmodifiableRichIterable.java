@@ -311,6 +311,13 @@ public class UnmodifiableRichIterable<T>
     }
 
     @Override
+    public <R extends MutableBooleanCollection> R flatCollectBoolean(
+            Function<? super T, ? extends BooleanIterable> function, R target)
+    {
+        return this.iterable.flatCollectBoolean(function, target);
+    }
+
+    @Override
     public ByteIterable collectByte(ByteFunction<? super T> byteFunction)
     {
         return this.iterable.collectByte(byteFunction);
@@ -320,6 +327,13 @@ public class UnmodifiableRichIterable<T>
     public <R extends MutableByteCollection> R collectByte(ByteFunction<? super T> byteFunction, R target)
     {
         return this.iterable.collectByte(byteFunction, target);
+    }
+
+    @Override
+    public <R extends MutableByteCollection> R flatCollectByte(
+            Function<? super T, ? extends ByteIterable> function, R target)
+    {
+        return this.iterable.flatCollectByte(function, target);
     }
 
     @Override
@@ -335,6 +349,13 @@ public class UnmodifiableRichIterable<T>
     }
 
     @Override
+    public <R extends MutableCharCollection> R flatCollectChar(
+            Function<? super T, ? extends CharIterable> function, R target)
+    {
+        return this.iterable.flatCollectChar(function, target);
+    }
+
+    @Override
     public DoubleIterable collectDouble(DoubleFunction<? super T> doubleFunction)
     {
         return this.iterable.collectDouble(doubleFunction);
@@ -344,6 +365,13 @@ public class UnmodifiableRichIterable<T>
     public <R extends MutableDoubleCollection> R collectDouble(DoubleFunction<? super T> doubleFunction, R target)
     {
         return this.iterable.collectDouble(doubleFunction, target);
+    }
+
+    @Override
+    public <R extends MutableDoubleCollection> R flatCollectDouble(
+            Function<? super T, ? extends DoubleIterable> function, R target)
+    {
+        return this.iterable.flatCollectDouble(function, target);
     }
 
     @Override
@@ -359,6 +387,13 @@ public class UnmodifiableRichIterable<T>
     }
 
     @Override
+    public <R extends MutableFloatCollection> R flatCollectFloat(
+            Function<? super T, ? extends FloatIterable> function, R target)
+    {
+        return this.iterable.flatCollectFloat(function, target);
+    }
+
+    @Override
     public IntIterable collectInt(IntFunction<? super T> intFunction)
     {
         return this.iterable.collectInt(intFunction);
@@ -368,6 +403,13 @@ public class UnmodifiableRichIterable<T>
     public <R extends MutableIntCollection> R collectInt(IntFunction<? super T> intFunction, R target)
     {
         return this.iterable.collectInt(intFunction, target);
+    }
+
+    @Override
+    public <R extends MutableIntCollection> R flatCollectInt(
+            Function<? super T, ? extends IntIterable> function, R target)
+    {
+        return this.iterable.flatCollectInt(function, target);
     }
 
     @Override
@@ -383,6 +425,13 @@ public class UnmodifiableRichIterable<T>
     }
 
     @Override
+    public <R extends MutableLongCollection> R flatCollectLong(
+            Function<? super T, ? extends LongIterable> function, R target)
+    {
+        return this.iterable.flatCollectLong(function, target);
+    }
+
+    @Override
     public ShortIterable collectShort(ShortFunction<? super T> shortFunction)
     {
         return this.iterable.collectShort(shortFunction);
@@ -392,6 +441,13 @@ public class UnmodifiableRichIterable<T>
     public <R extends MutableShortCollection> R collectShort(ShortFunction<? super T> shortFunction, R target)
     {
         return this.iterable.collectShort(shortFunction, target);
+    }
+
+    @Override
+    public <R extends MutableShortCollection> R flatCollectShort(
+            Function<? super T, ? extends ShortIterable> function, R target)
+    {
+        return this.iterable.flatCollectShort(function, target);
     }
 
     @Override

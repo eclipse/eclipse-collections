@@ -27,8 +27,16 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 import java.util.stream.Collector;
 
+import org.eclipse.collections.api.BooleanIterable;
+import org.eclipse.collections.api.ByteIterable;
+import org.eclipse.collections.api.CharIterable;
+import org.eclipse.collections.api.DoubleIterable;
+import org.eclipse.collections.api.FloatIterable;
+import org.eclipse.collections.api.IntIterable;
 import org.eclipse.collections.api.LazyIterable;
+import org.eclipse.collections.api.LongIterable;
 import org.eclipse.collections.api.RichIterable;
+import org.eclipse.collections.api.ShortIterable;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.bag.MutableBagIterable;
 import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
@@ -775,9 +783,23 @@ public class UnmodifiableMutableOrderedMap<K, V>
     }
 
     @Override
+    public <R extends MutableBooleanCollection> R flatCollectBoolean(
+            Function<? super V, ? extends BooleanIterable> function, R target)
+    {
+        return this.delegate.flatCollectBoolean(function, target);
+    }
+
+    @Override
     public <R extends MutableByteCollection> R collectByte(ByteFunction<? super V> byteFunction, R target)
     {
         return this.delegate.collectByte(byteFunction, target);
+    }
+
+    @Override
+    public <R extends MutableByteCollection> R flatCollectByte(
+            Function<? super V, ? extends ByteIterable> function, R target)
+    {
+        return this.delegate.flatCollectByte(function, target);
     }
 
     @Override
@@ -787,9 +809,23 @@ public class UnmodifiableMutableOrderedMap<K, V>
     }
 
     @Override
+    public <R extends MutableCharCollection> R flatCollectChar(
+            Function<? super V, ? extends CharIterable> function, R target)
+    {
+        return this.delegate.flatCollectChar(function, target);
+    }
+
+    @Override
     public <R extends MutableDoubleCollection> R collectDouble(DoubleFunction<? super V> doubleFunction, R target)
     {
         return this.delegate.collectDouble(doubleFunction, target);
+    }
+
+    @Override
+    public <R extends MutableDoubleCollection> R flatCollectDouble(
+            Function<? super V, ? extends DoubleIterable> function, R target)
+    {
+        return this.delegate.flatCollectDouble(function, target);
     }
 
     @Override
@@ -799,9 +835,23 @@ public class UnmodifiableMutableOrderedMap<K, V>
     }
 
     @Override
+    public <R extends MutableFloatCollection> R flatCollectFloat(
+            Function<? super V, ? extends FloatIterable> function, R target)
+    {
+        return this.delegate.flatCollectFloat(function, target);
+    }
+
+    @Override
     public <R extends MutableIntCollection> R collectInt(IntFunction<? super V> intFunction, R target)
     {
         return this.delegate.collectInt(intFunction, target);
+    }
+
+    @Override
+    public <R extends MutableIntCollection> R flatCollectInt(
+            Function<? super V, ? extends IntIterable> function, R target)
+    {
+        return this.delegate.flatCollectInt(function, target);
     }
 
     @Override
@@ -811,9 +861,23 @@ public class UnmodifiableMutableOrderedMap<K, V>
     }
 
     @Override
+    public <R extends MutableLongCollection> R flatCollectLong(
+            Function<? super V, ? extends LongIterable> function, R target)
+    {
+        return this.delegate.flatCollectLong(function, target);
+    }
+
+    @Override
     public <R extends MutableShortCollection> R collectShort(ShortFunction<? super V> shortFunction, R target)
     {
         return this.delegate.collectShort(shortFunction, target);
+    }
+
+    @Override
+    public <R extends MutableShortCollection> R flatCollectShort(
+            Function<? super V, ? extends ShortIterable> function, R target)
+    {
+        return this.delegate.flatCollectShort(function, target);
     }
 
     @Override
