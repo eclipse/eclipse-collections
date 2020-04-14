@@ -15,7 +15,6 @@ import java.util.NoSuchElementException;
 
 import org.eclipse.collections.api.bag.Bag;
 import org.eclipse.collections.api.block.function.Function;
-import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.function.primitive.BooleanFunction;
 import org.eclipse.collections.api.block.function.primitive.ByteFunction;
@@ -30,7 +29,6 @@ import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.predicate.primitive.IntPredicate;
 import org.eclipse.collections.api.block.procedure.Procedure;
-import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.list.ListIterable;
 import org.eclipse.collections.api.list.primitive.BooleanList;
 import org.eclipse.collections.api.list.primitive.ByteList;
@@ -40,7 +38,6 @@ import org.eclipse.collections.api.list.primitive.FloatList;
 import org.eclipse.collections.api.list.primitive.IntList;
 import org.eclipse.collections.api.list.primitive.LongList;
 import org.eclipse.collections.api.list.primitive.ShortList;
-import org.eclipse.collections.api.map.MapIterable;
 import org.eclipse.collections.api.map.sorted.SortedMapIterable;
 import org.eclipse.collections.api.multimap.sortedbag.SortedBagMultimap;
 import org.eclipse.collections.api.ordered.ReversibleIterable;
@@ -206,24 +203,6 @@ public interface SortedBag<T>
 
     @Override
     <V> SortedBagMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function);
-
-    /**
-     * Can return an MapIterable that's backed by a LinkedHashMap.
-     */
-    @Override
-    <K, V> MapIterable<K, V> aggregateBy(
-            Function<? super T, ? extends K> groupBy,
-            Function0<? extends V> zeroValueFactory,
-            Function2<? super V, ? super T, ? extends V> nonMutatingAggregator);
-
-    /**
-     * Can return an MapIterable that's backed by a LinkedHashMap.
-     */
-    @Override
-    <K, V> MapIterable<K, V> aggregateInPlaceBy(
-            Function<? super T, ? extends K> groupBy,
-            Function0<? extends V> zeroValueFactory,
-            Procedure2<? super V, ? super T> mutatingAggregator);
 
     /**
      * Returns the comparator used to order the elements in this bag, or null if this bag uses the natural ordering of

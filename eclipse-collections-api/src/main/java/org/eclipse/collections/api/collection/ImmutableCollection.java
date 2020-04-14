@@ -210,16 +210,35 @@ public interface ImmutableCollection<T>
     ImmutableCollection<Pair<T, Integer>> zipWithIndex();
 
     @Override
-    <K, V> ImmutableMap<K, V> aggregateInPlaceBy(
+    default <K, V> ImmutableMap<K, V> aggregateInPlaceBy(
             Function<? super T, ? extends K> groupBy,
             Function0<? extends V> zeroValueFactory,
-            Procedure2<? super V, ? super T> mutatingAggregator);
+            Procedure2<? super V, ? super T> mutatingAggregator)
+    {
+        MutableMap<K, V> map = Maps.mutable.empty();
+        this.forEach(each ->
+        {
+            K key = groupBy.valueOf(each);
+            V value = map.getIfAbsentPut(key, zeroValueFactory);
+            mutatingAggregator.value(value, each);
+        });
+        return map.toImmutable();
+    }
 
     @Override
-    <K, V> ImmutableMap<K, V> aggregateBy(
+    default <K, V> ImmutableMap<K, V> aggregateBy(
             Function<? super T, ? extends K> groupBy,
             Function0<? extends V> zeroValueFactory,
-            Function2<? super V, ? super T, ? extends V> nonMutatingAggregator);
+            Function2<? super V, ? super T, ? extends V> nonMutatingAggregator)
+    {
+        MutableMap<K, V> map = Maps.mutable.empty();
+        this.forEach(each ->
+        {
+            K key = groupBy.valueOf(each);
+            map.updateValueWith(key, zeroValueFactory, nonMutatingAggregator, each);
+        });
+        return map.toImmutable();
+    }
 
     /**
      * @since 9.0

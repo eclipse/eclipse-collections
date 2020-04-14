@@ -27,6 +27,7 @@ import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.collection.MutableCollection;
+import org.eclipse.collections.api.factory.Maps;
 import org.eclipse.collections.api.map.primitive.MutableObjectDoubleMap;
 import org.eclipse.collections.api.map.primitive.MutableObjectLongMap;
 import org.eclipse.collections.api.multimap.MutableMultimap;
@@ -370,9 +371,36 @@ public interface MutableMapIterable<K, V> extends MapIterable<K, V>, Map<K, V>
     @Override
     MutableCollection<Pair<V, Integer>> zipWithIndex();
 
+    // TODO: Return MutableMapIterable
     @Override
-    <KK, VV> MutableMap<KK, VV> aggregateInPlaceBy(Function<? super V, ? extends KK> groupBy, Function0<? extends VV> zeroValueFactory, Procedure2<? super VV, ? super V> mutatingAggregator);
+    default <KK, VV> MutableMap<KK, VV> aggregateInPlaceBy(
+            Function<? super V, ? extends KK> groupBy,
+            Function0<? extends VV> zeroValueFactory,
+            Procedure2<? super VV, ? super V> mutatingAggregator)
+    {
+        MutableMap<KK, VV> map = Maps.mutable.empty();
+        this.forEach(each ->
+        {
+            KK key = groupBy.valueOf(each);
+            VV value = map.getIfAbsentPut(key, zeroValueFactory);
+            mutatingAggregator.value(value, each);
+        });
+        return map;
+    }
 
+    // TODO: Return MutableMapIterable
     @Override
-    <KK, VV> MutableMap<KK, VV> aggregateBy(Function<? super V, ? extends KK> groupBy, Function0<? extends VV> zeroValueFactory, Function2<? super VV, ? super V, ? extends VV> nonMutatingAggregator);
+    default <KK, VV> MutableMap<KK, VV> aggregateBy(
+            Function<? super V, ? extends KK> groupBy,
+            Function0<? extends VV> zeroValueFactory,
+            Function2<? super VV, ? super V, ? extends VV> nonMutatingAggregator)
+    {
+        MutableMap<KK, VV> map = Maps.mutable.empty();
+        this.forEach(each ->
+        {
+            KK key = groupBy.valueOf(each);
+            map.updateValueWith(key, zeroValueFactory, nonMutatingAggregator, each);
+        });
+        return map;
+    }
 }

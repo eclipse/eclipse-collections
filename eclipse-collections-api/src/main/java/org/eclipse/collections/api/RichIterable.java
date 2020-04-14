@@ -57,6 +57,7 @@ import org.eclipse.collections.api.collection.primitive.MutableIntCollection;
 import org.eclipse.collections.api.collection.primitive.MutableLongCollection;
 import org.eclipse.collections.api.collection.primitive.MutableShortCollection;
 import org.eclipse.collections.api.factory.Bags;
+import org.eclipse.collections.api.factory.Maps;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MapIterable;
 import org.eclipse.collections.api.map.MutableMap;
@@ -2282,7 +2283,20 @@ public interface RichIterable<T>
      *
      * @since 3.0
      */
-    <K, V> MapIterable<K, V> aggregateInPlaceBy(Function<? super T, ? extends K> groupBy, Function0<? extends V> zeroValueFactory, Procedure2<? super V, ? super T> mutatingAggregator);
+    default <K, V> MapIterable<K, V> aggregateInPlaceBy(
+            Function<? super T, ? extends K> groupBy,
+            Function0<? extends V> zeroValueFactory,
+            Procedure2<? super V, ? super T> mutatingAggregator)
+    {
+        MutableMap<K, V> map = Maps.mutable.empty();
+        this.forEach(each ->
+        {
+            K key = groupBy.valueOf(each);
+            V value = map.getIfAbsentPut(key, zeroValueFactory);
+            mutatingAggregator.value(value, each);
+        });
+        return map;
+    }
 
     /**
      * Applies an aggregate function over the iterable grouping results into a map based on the specific groupBy function.
@@ -2291,7 +2305,19 @@ public interface RichIterable<T>
      *
      * @since 3.0
      */
-    <K, V> MapIterable<K, V> aggregateBy(Function<? super T, ? extends K> groupBy, Function0<? extends V> zeroValueFactory, Function2<? super V, ? super T, ? extends V> nonMutatingAggregator);
+    default <K, V> MapIterable<K, V> aggregateBy(
+            Function<? super T, ? extends K> groupBy,
+            Function0<? extends V> zeroValueFactory,
+            Function2<? super V, ? super T, ? extends V> nonMutatingAggregator)
+    {
+        MutableMap<K, V> map = Maps.mutable.empty();
+        this.forEach(each ->
+        {
+            K key = groupBy.valueOf(each);
+            map.updateValueWith(key, zeroValueFactory, nonMutatingAggregator, each);
+        });
+        return map;
+    }
 
     /**
      * Applies a groupBy function over the iterable, followed by a collect function.

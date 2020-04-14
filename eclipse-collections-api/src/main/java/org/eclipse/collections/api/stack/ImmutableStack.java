@@ -190,10 +190,35 @@ public interface ImmutableStack<T> extends StackIterable<T>
     ImmutableStack<Pair<T, Integer>> zipWithIndex();
 
     @Override
-    <K, V> ImmutableMap<K, V> aggregateInPlaceBy(Function<? super T, ? extends K> groupBy, Function0<? extends V> zeroValueFactory, Procedure2<? super V, ? super T> mutatingAggregator);
+    default <K, V> ImmutableMap<K, V> aggregateInPlaceBy(
+            Function<? super T, ? extends K> groupBy,
+            Function0<? extends V> zeroValueFactory,
+            Procedure2<? super V, ? super T> mutatingAggregator)
+    {
+        MutableMap<K, V> map = Maps.mutable.empty();
+        this.forEach(each ->
+        {
+            K key = groupBy.valueOf(each);
+            V value = map.getIfAbsentPut(key, zeroValueFactory);
+            mutatingAggregator.value(value, each);
+        });
+        return map.toImmutable();
+    }
 
     @Override
-    <K, V> ImmutableMap<K, V> aggregateBy(Function<? super T, ? extends K> groupBy, Function0<? extends V> zeroValueFactory, Function2<? super V, ? super T, ? extends V> nonMutatingAggregator);
+    default <K, V> ImmutableMap<K, V> aggregateBy(
+            Function<? super T, ? extends K> groupBy,
+            Function0<? extends V> zeroValueFactory,
+            Function2<? super V, ? super T, ? extends V> nonMutatingAggregator)
+    {
+        MutableMap<K, V> map = Maps.mutable.empty();
+        this.forEach(each ->
+        {
+            K key = groupBy.valueOf(each);
+            map.updateValueWith(key, zeroValueFactory, nonMutatingAggregator, each);
+        });
+        return map.toImmutable();
+    }
 
     @Override
     <V> ImmutableObjectLongMap<V> sumByInt(Function<? super T, ? extends V> groupBy, IntFunction<? super T> function);
