@@ -26,6 +26,7 @@ import org.eclipse.collections.api.block.function.primitive.ShortFunction;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
+import org.eclipse.collections.api.factory.Stacks;
 import org.eclipse.collections.api.list.ListIterable;
 import org.eclipse.collections.api.multimap.list.ListMultimap;
 import org.eclipse.collections.api.ordered.OrderedIterable;
@@ -130,7 +131,10 @@ public interface StackIterable<T> extends OrderedIterable<T>
      * @since 2.0
      */
     @Override
-    MutableStack<T> toStack();
+    default MutableStack<T> toStack()
+    {
+        return Stacks.mutable.withAllReversed(this);
+    }
 
     @Override
     StackIterable<T> tap(Procedure<? super T> procedure);

@@ -43,7 +43,6 @@ import org.eclipse.collections.api.list.primitive.ShortList;
 import org.eclipse.collections.api.multimap.list.ListMultimap;
 import org.eclipse.collections.api.ordered.ReversibleIterable;
 import org.eclipse.collections.api.partition.list.PartitionList;
-import org.eclipse.collections.api.stack.MutableStack;
 import org.eclipse.collections.api.tuple.Pair;
 
 /**
@@ -93,14 +92,6 @@ public interface ListIterable<T>
      * @since 1.0.
      */
     ListIterator<T> listIterator(int index);
-
-    /**
-     * Converts the list to a mutable MutableStack implementation.
-     *
-     * @since 2.0
-     */
-    @Override
-    MutableStack<T> toStack();
 
     /**
      * Converts the ListIterable to an immutable implementation. Returns this for immutable lists.
