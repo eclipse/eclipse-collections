@@ -1419,18 +1419,6 @@ public final class MultiReaderFastList<T>
             return new ListIterableParallelIterable<>(this, executorService, batchSize);
         }
 
-        @Override
-        public int binarySearch(T key, Comparator<? super T> comparator)
-        {
-            return Collections.binarySearch(this, key, comparator);
-        }
-
-        @Override
-        public int binarySearch(T key)
-        {
-            return Collections.binarySearch((List<? extends Comparable<? super T>>) this, key);
-        }
-
         public void becomeUseless()
         {
             this.delegate = null;
