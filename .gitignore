@@ -24,6 +24,7 @@ test-coverage/**
 .idea/checkstyle-idea.xml
 .idea/dictionaries/
 .idea/encodings.xml
+.idea/modules.xml
 .idea/markdown-navigator.xml
 .idea/markdown-navigator/
 
