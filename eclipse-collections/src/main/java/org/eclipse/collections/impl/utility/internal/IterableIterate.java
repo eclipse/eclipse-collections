@@ -768,6 +768,14 @@ public final class IterableIterate
     }
 
     /**
+     * @see Iterate#indexOf(Iterable, Object)
+     */
+    public static <T> int indexOf(Iterable<T> iterable, Object object)
+    {
+        return IteratorIterate.indexOf(iterable.iterator(), object);
+    }
+
+    /**
      * @see Iterate#detectIndex(Iterable, Predicate)
      */
     public static <T> int detectIndex(Iterable<T> iterable, Predicate<? super T> predicate)
@@ -1100,6 +1108,25 @@ public final class IterableIterate
         }
     }
 
+    public static <T> void forEachWithIndex(Iterable<T> iterable, int from, int to, ObjectIntProcedure<? super T> objectIntProcedure)
+    {
+        if (from < 0 || to < 0)
+        {
+            throw new IllegalArgumentException("Neither from nor to may be negative.");
+        }
+
+        Iterator<T> iterator = IteratorIterate.advanceIteratorTo(iterable.iterator(), from);
+        int i = from;
+        while (iterator.hasNext() && i <= to)
+        {
+            objectIntProcedure.value(iterator.next(), i++);
+        }
+    }
+
+    /**
+     * @deprecated Use {@link #forEachWithIndex(Iterable, int, int, ObjectIntProcedure)} instead.
+     */
+    @Deprecated
     public static <T> void forEachWithIndex(List<T> iterable, int from, int to, ObjectIntProcedure<? super T> objectIntProcedure)
     {
         if (from < 0 || to < 0)

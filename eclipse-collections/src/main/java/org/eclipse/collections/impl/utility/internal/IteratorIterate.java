@@ -16,6 +16,7 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
@@ -971,6 +972,23 @@ public final class IteratorIterate
             }
         }
         return changed;
+    }
+
+    /**
+     * @see Iterate#indexOf(Iterable, Object)
+     */
+    public static <T> int indexOf(Iterator<T> iterator, Object object)
+    {
+        int i = 0;
+        while (iterator.hasNext())
+        {
+            if (Objects.equals(iterator.next(), object))
+            {
+                return i;
+            }
+            i++;
+        }
+        return -1;
     }
 
     /**

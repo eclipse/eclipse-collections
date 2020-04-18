@@ -2424,6 +2424,26 @@ public final class Iterate
     }
 
     /**
+     * Searches for the first occurrence of object, returns -1 if the object is not found.
+     */
+    public static <T> int indexOf(Iterable<T> iterable, Object object)
+    {
+        if (iterable instanceof ArrayList<?>)
+        {
+            return ArrayListIterate.indexOf((ArrayList<T>) iterable, object);
+        }
+        if (iterable instanceof List<?>)
+        {
+            return ListIterate.indexOf((List<T>) iterable, object);
+        }
+        if (iterable != null)
+        {
+            return IterableIterate.indexOf(iterable, object);
+        }
+        throw new IllegalArgumentException("Cannot perform indexOf on null");
+    }
+
+    /**
      * Searches for the first occurrence where the predicate evaluates to true, returns -1 if the predicate does not evaluate to true.
      */
     public static <T> int detectIndex(Iterable<T> iterable, Predicate<? super T> predicate)

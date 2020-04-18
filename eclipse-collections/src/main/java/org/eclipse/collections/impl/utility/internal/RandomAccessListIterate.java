@@ -18,6 +18,7 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.RandomAccess;
 
@@ -1166,6 +1167,22 @@ public final class RandomAccessListIterate
             }
         }
         return changed;
+    }
+
+    /**
+     * @see Iterate#indexOf(Iterable, Object)
+     */
+    public static <T> int indexOf(List<T> list, Object object)
+    {
+        int size = list.size();
+        for (int i = 0; i < size; i++)
+        {
+            if (Objects.equals(list.get(i), object))
+            {
+                return i;
+            }
+        }
+        return -1;
     }
 
     /**
