@@ -23,6 +23,8 @@ Please add a description of your changes to the [draft release notes](RELEASE_NO
 
 Finally, submit a pull request.
 
+Details on [working with Github for Eclipse Collections](https://github.com/eclipse/eclipse-collections/wiki/Working-with-Github) is located at the Wiki.
+
 Contact us
 ----------
 
