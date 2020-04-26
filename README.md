@@ -89,6 +89,7 @@ We welcome contributions! We accept contributions via pull requests here in GitH
 * StackOverflow: http://stackoverflow.com/questions/tagged/eclipse-collections
 * Mailing lists: https://dev.eclipse.org/mailman/listinfo/collections-dev
 * Forum: https://www.eclipse.org/forums/index.php?t=thread&frm_id=329
+* Working with GitHub: https://github.com/eclipse/eclipse-collections/wiki/Working-with-GitHub
 
 [actions acceptance-tests]:https://github.com/eclipse/eclipse-collections/actions?query=workflow%3A%22Acceptance+Tests%22
 [actions acceptance-tests img]:https://github.com/eclipse/eclipse-collections/workflows/Acceptance%20Tests/badge.svg?branch=master
