@@ -32,11 +32,6 @@ jobs:
         - DESC="unit tests oraclejdk14"
         - CMD="./mvnw install --no-transfer-progress"
 
-    - jdk: openjdk-ea
-      env:
-        - DESC="unit tests openjdk-ea"
-        - CMD="./mvnw install --no-transfer-progress"
-
     - jdk: oraclejdk8
       env:
         - DESC="unit tests Java15-EA"
@@ -44,10 +39,6 @@ jobs:
         - CMD="./.travis-command-ea-builds.sh"
 
   allow_failures:
-    - jdk: openjdk-ea
-      env:
-        - DESC="unit tests openjdk-ea"
-        - CMD="./mvnw install --no-transfer-progress"
     - jdk: oraclejdk8
       env:
         - DESC="unit tests Java15-EA"
