@@ -177,6 +177,29 @@ public final class Interval
     }
 
     /**
+     * Returns an Interval starting from the value from until the specified value to (exclusive) with a step value of 1
+     */
+    public static Interval fromToExclusive(int from, int to)
+    {
+        if (from == to)
+        {
+            if (to == Integer.MIN_VALUE)
+            {
+                throw new IllegalArgumentException("to cannot be the Integer minimum value " + Integer.MIN_VALUE);
+            }
+
+            return Interval.fromToBy(from, to - 1, -1);
+        }
+
+        if (from < to)
+        {
+            return Interval.fromToBy(from, to - 1, 1);
+        }
+
+        return Interval.fromToBy(from, to + 1, -1);
+    }
+
+    /**
      * Returns an Interval representing the even values from the value from to the value to.
      */
     public static Interval evensFromTo(int from, int to)

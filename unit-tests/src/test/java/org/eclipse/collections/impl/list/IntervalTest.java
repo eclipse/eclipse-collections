@@ -19,10 +19,12 @@ import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.IntStream;
 
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
+import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.impl.ThrowingAppendable;
@@ -51,6 +53,46 @@ public class IntervalTest
                 .into(FastList.newList())
                 .injectInto(0, AddFunction.INTEGER_TO_INT);
         Assert.assertEquals(10, sum);
+    }
+
+    @Test
+    public void fromToExclusive()
+    {
+        // Positive forward
+        Verify.assertEqualsAndHashCode(Interval.from(1), Interval.fromToExclusive(1, 2));
+        Verify.assertEqualsAndHashCode(Interval.fromTo(1, 10), Interval.fromToExclusive(1, 11));
+
+        // Positive reverse
+        Verify.assertEqualsAndHashCode(Interval.from(2), Interval.fromToExclusive(2, 1));
+        Verify.assertEqualsAndHashCode(Interval.fromTo(10, 2), Interval.fromToExclusive(10, 1));
+
+        // Negative forward
+        Verify.assertEqualsAndHashCode(Interval.from(-1), Interval.fromToExclusive(-1, 0));
+        Verify.assertEqualsAndHashCode(Interval.fromTo(-10, -1), Interval.fromToExclusive(-10, 0));
+
+        // Negative reverse
+        Verify.assertEqualsAndHashCode(Interval.from(-1), Interval.fromToExclusive(-1, 0));
+        Verify.assertEqualsAndHashCode(Interval.fromTo(-1, -10), Interval.fromToExclusive(-1, -11));
+
+        // MIN Value should throw an error
+        Verify.assertThrows(IllegalArgumentException.class, () -> Interval.fromToExclusive(Integer.MIN_VALUE, Integer.MIN_VALUE));
+
+        Verify.assertSize(Integer.MAX_VALUE, Interval.fromToExclusive(Integer.MIN_VALUE, -1));
+        Verify.assertSize(Integer.MAX_VALUE, Interval.fromToExclusive(0, Integer.MAX_VALUE));
+        Verify.assertSize(10, Interval.fromToExclusive(0, 10));
+        Verify.assertSize(10, Interval.fromToExclusive(-10, 0));
+        Verify.assertSize(20, Interval.fromToExclusive(-10, 10));
+
+        this.compareRangeAndInterval(0, 10);
+        this.compareRangeAndInterval(-1, 1);
+        this.compareRangeAndInterval(-10, 10);
+    }
+
+    private void compareRangeAndInterval(int start, int end)
+    {
+        ImmutableList<Integer> rangeList = Lists.immutable.fromStream(IntStream.range(start, end).boxed());
+        ImmutableList<Integer> intervalList = Lists.immutable.fromStream(Interval.fromToExclusive(start, end).stream());
+        Verify.assertEqualsAndHashCode(rangeList, intervalList);
     }
 
     @Test
@@ -125,6 +167,13 @@ public class IntervalTest
         Assert.assertNotEquals(FastList.newListWith(3, 2, 0), Interval.fromTo(3, 1));
 
         Verify.assertEqualsAndHashCode(FastList.newListWith(-1, -2, -3), Interval.fromTo(-1, -3));
+
+        Verify.assertEqualsAndHashCode(FastList.newListWith(1, 2), Interval.fromToExclusive(1, 3));
+        Verify.assertEqualsAndHashCode(FastList.newListWith(3, 2, 1), Interval.fromToExclusive(3, 0));
+
+        Assert.assertNotEquals(FastList.newListWith(1, 2, 3, 4), Interval.fromToExclusive(1, 4));
+        Assert.assertNotEquals(FastList.newListWith(1, 2, 4), Interval.fromToExclusive(1, 2));
+        Assert.assertNotEquals(FastList.newListWith(3, 2, 0), Interval.fromToExclusive(3, 1));
     }
 
     @Test
@@ -315,6 +364,10 @@ public class IntervalTest
     public void intervalAsIntArray()
     {
         Assert.assertArrayEquals(new int[]{1, 2, 3, 4, 5}, Interval.fromTo(1, 5).toIntArray());
+        Assert.assertArrayEquals(new int[]{1, 2, 3, 4}, Interval.fromToExclusive(1, 5).toIntArray());
+        Assert.assertArrayEquals(new int[]{5, 4, 3, 2}, Interval.fromToExclusive(5, 1).toIntArray());
+        Assert.assertArrayEquals(new int[]{-1, -2, -3, -4}, Interval.fromToExclusive(-1, -5).toIntArray());
+        Assert.assertArrayEquals(new int[]{-5, -4, -3, -2}, Interval.fromToExclusive(-5, -1).toIntArray());
     }
 
     @Test
@@ -457,6 +510,7 @@ public class IntervalTest
     public void size()
     {
         Verify.assertSize(100, Interval.fromTo(1, 100));
+        Verify.assertSize(100, Interval.fromToExclusive(1, 101));
         Verify.assertSize(50, Interval.fromToBy(1, 100, 2));
         Verify.assertSize(34, Interval.fromToBy(1, 100, 3));
         Verify.assertSize(25, Interval.fromToBy(1, 100, 4));
@@ -467,8 +521,10 @@ public class IntervalTest
         Verify.assertSize(12, Interval.fromToBy(1, 100, 9));
         Verify.assertSize(10, Interval.fromToBy(1, 100, 10));
         Verify.assertSize(11, Interval.fromTo(0, 10));
+        Verify.assertSize(11, Interval.fromToExclusive(0, 11));
         Verify.assertSize(1, Interval.zero());
         Verify.assertSize(11, Interval.fromTo(0, -10));
+        Verify.assertSize(9, Interval.fromToExclusive(0, -9));
         Verify.assertSize(3, Interval.evensFromTo(2, -2));
         Verify.assertSize(2, Interval.oddsFromTo(2, -2));
 
@@ -477,6 +533,7 @@ public class IntervalTest
         Verify.assertSize(2_000_000_000, Interval.oneTo(2_000_000_000));
         Verify.assertSize(200_000_000, Interval.oneTo(2_000_000_000).by(10));
         Verify.assertSize(2_000_000_000, Interval.fromTo(2_000_000_000, 1).by(-1));
+        Verify.assertSize(2_000_000_000, Interval.fromToExclusive(2_000_000_000, 0).by(-1));
         Verify.assertSize(500_000_000, Interval.oneTo(2_000_000_000).by(4));
         Verify.assertSize(222_222_223, Interval.oneTo(2_000_000_000).by(9));
         // Negative Ranges
@@ -486,12 +543,23 @@ public class IntervalTest
         Verify.assertSize(2_000_000_000, Interval.fromTo(-2_000_000_000, -1).by(1));
         Verify.assertSize(500_000_000, Interval.fromTo(-1, -2_000_000_000).by(-4));
         Verify.assertSize(222_222_223, Interval.fromTo(-1, -2_000_000_000).by(-9));
+        Verify.assertSize(10, Interval.fromToExclusive(0, -10));
+        Verify.assertSize(2_000_000_000, Interval.fromToExclusive(-1, -2_000_000_001));
+        Verify.assertSize(200_000_000, Interval.fromToExclusive(-1, -2_000_000_000).by(-10));
+        Verify.assertSize(2_000_000_000, Interval.fromToExclusive(-2_000_000_000, 0).by(1));
+        Verify.assertSize(500_000_000, Interval.fromToExclusive(-1, -2_000_000_000).by(-4));
+        Verify.assertSize(222_222_223, Interval.fromToExclusive(-1, -2_000_000_000).by(-9));
         // Overlapping Ranges
         Verify.assertSize(21, Interval.fromTo(10, -10));
         Verify.assertSize(5, Interval.fromTo(10, -10).by(-5));
         Verify.assertSize(5, Interval.fromTo(-10, 10).by(5));
         Verify.assertSize(2_000_000_001, Interval.fromTo(1_000_000_000, -1_000_000_000));
         Verify.assertSize(200_000_001, Interval.fromTo(1_000_000_000, -1_000_000_000).by(-10));
+        Verify.assertSize(21, Interval.fromToExclusive(10, -11));
+        Verify.assertSize(5, Interval.fromToExclusive(10, -11).by(-5));
+        Verify.assertSize(5, Interval.fromToExclusive(-10, 11).by(5));
+        Verify.assertSize(2_000_000_001, Interval.fromToExclusive(1_000_000_000, -1_000_000_001));
+        Verify.assertSize(200_000_001, Interval.fromToExclusive(1_000_000_000, -1_000_000_001).by(-10));
         Verify.assertSize(1, Interval.fromToBy(1_000_000_000, 2_000_000_000, 1_500_000_000));
         Verify.assertSize(1, Interval.fromToBy(-1_000_000_000, -2_000_000_000, -1_500_000_000));
     }
@@ -506,11 +574,15 @@ public class IntervalTest
         Assert.assertFalse(Interval.oneTo(5).containsNone(1, 6));
         Verify.assertNotContains(0, Interval.oneTo(5));
         Assert.assertTrue(Interval.fromTo(-1, -5).containsAll(-1, -5));
+        Assert.assertTrue(Interval.fromToExclusive(-1, -5).containsAll(-1, -4));
+        Verify.assertNotContains(-5, Interval.fromToExclusive(-1, -5));
+        Verify.assertNotContains(0, Interval.fromToExclusive(-1, -5));
         Verify.assertNotContains(1, Interval.fromTo(-1, -5));
 
         Verify.assertContains(Integer.valueOf(0), Interval.zero());
         Verify.assertNotContains(Integer.valueOf(0), Interval.oneTo(5));
         Verify.assertNotContains(Integer.valueOf(1), Interval.fromTo(-1, -5));
+        Verify.assertNotContains(Integer.valueOf(1), Interval.fromToExclusive(-1, -5));
 
         Verify.assertNotContains(new Object(), Interval.zeroTo(5));
 
@@ -650,6 +722,9 @@ public class IntervalTest
         Assert.assertEquals(0, Interval.fromTo(-1, 1).product().intValue());
         Assert.assertEquals(2, Interval.fromTo(-2, -1).product().intValue());
         Assert.assertEquals(-6, Interval.fromTo(-3, -1).product().intValue());
+        Assert.assertEquals(0, Interval.fromToExclusive(-1, 1).product().intValue());
+        Assert.assertEquals(-2, Interval.fromToExclusive(-2, -1).product().intValue());
+        Assert.assertEquals(6, Interval.fromToExclusive(-3, -1).product().intValue());
         Assert.assertEquals(200, Interval.fromToBy(10, 20, 10).product().intValue());
         Assert.assertEquals(200, Interval.fromToBy(-10, -20, -10).product().intValue());
         Assert.assertEquals(-6000, Interval.fromToBy(-10, -30, -10).product().intValue());
