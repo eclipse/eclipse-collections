@@ -11,8 +11,6 @@
 package org.eclipse.collections.impl.list.mutable;
 
 import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.concurrent.ExecutorService;
@@ -225,18 +223,6 @@ public abstract class AbstractListAdapter<T>
     public ParallelListIterable<T> asParallel(ExecutorService executorService, int batchSize)
     {
         return new ListIterableParallelIterable<>(this, executorService, batchSize);
-    }
-
-    @Override
-    public int binarySearch(T key, Comparator<? super T> comparator)
-    {
-        return Collections.binarySearch(this, key, comparator);
-    }
-
-    @Override
-    public int binarySearch(T key)
-    {
-        return Collections.binarySearch((List<? extends Comparable<? super T>>) this, key);
     }
 
     @Override

@@ -279,7 +279,10 @@ public interface ListIterable<T>
      *
      * @see Collections#binarySearch(List, Object, Comparator)
      */
-    int binarySearch(T key, Comparator<? super T> comparator);
+    default int binarySearch(T key, Comparator<? super T> comparator)
+    {
+        return Collections.binarySearch((List<? extends T>) this, key, comparator);
+    }
 
     /**
      * Searches for the specified object using the binary search algorithm. The elements in this list must implement
