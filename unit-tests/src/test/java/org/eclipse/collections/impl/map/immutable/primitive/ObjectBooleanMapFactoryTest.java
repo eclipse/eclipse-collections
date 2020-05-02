@@ -23,7 +23,7 @@ public class ObjectBooleanMapFactoryTest
     @Test
     public void of()
     {
-        Assert.assertEquals(new ObjectBooleanHashMap(), ObjectBooleanMaps.mutable.of());
+        Assert.assertEquals(new ObjectBooleanHashMap<>(), ObjectBooleanMaps.mutable.of());
         Assert.assertEquals(ObjectBooleanMaps.mutable.of(), ObjectBooleanMaps.mutable.empty());
         Assert.assertEquals(ObjectBooleanMaps.mutable.empty().toImmutable(), ObjectBooleanMaps.immutable.empty());
         Assert.assertEquals(ObjectBooleanMaps.mutable.empty().toImmutable(), ObjectBooleanMaps.immutable.of());

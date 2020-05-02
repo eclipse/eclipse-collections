@@ -484,6 +484,7 @@ public class MultiReaderFastListTest extends AbstractListTestCase
         Verify.assertContainsAll(objects6, 1, 3);
     }
 
+    @SuppressWarnings("StringOperationCanBeSimplified")
     @Test
     public void removeAllWithWeakReference()
     {

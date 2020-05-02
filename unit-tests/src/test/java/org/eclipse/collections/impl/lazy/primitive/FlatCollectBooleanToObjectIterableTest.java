@@ -44,7 +44,7 @@ public class FlatCollectBooleanToObjectIterableTest
     public void forEachWithIndex()
     {
         InternalIterable<Boolean> select = this.newPrimitiveWith(true, false, true, false, true);
-        StringBuilder builder = new StringBuilder("");
+        StringBuilder builder = new StringBuilder();
         select.forEachWithIndex((object, index) -> {
             builder.append(object);
             builder.append(index);
@@ -56,7 +56,7 @@ public class FlatCollectBooleanToObjectIterableTest
     public void iterator()
     {
         InternalIterable<Boolean> select = this.newPrimitiveWith(true, false, true, false, true);
-        StringBuilder builder = new StringBuilder("");
+        StringBuilder builder = new StringBuilder();
         for (Boolean each : select)
         {
             builder.append(each);
@@ -68,7 +68,7 @@ public class FlatCollectBooleanToObjectIterableTest
     public void forEachWith()
     {
         InternalIterable<Boolean> select = this.newPrimitiveWith(true, false, true, false, true);
-        StringBuilder builder = new StringBuilder("");
+        StringBuilder builder = new StringBuilder();
         select.forEachWith((each, aBuilder) -> aBuilder.append(each), builder);
         Assert.assertEquals("truefalsetruefalsetrue", builder.toString());
     }

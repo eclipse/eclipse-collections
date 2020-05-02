@@ -77,6 +77,7 @@ import org.eclipse.collections.impl.map.mutable.UnifiedMap;
  * AbstractMultiReaderMutableCollection is a common abstraction that provides thread-safe collection behaviors.
  * Subclasses of this class must provide implementations of getDelegate() and getLock().
  */
+@SuppressWarnings({"unused", "TransientFieldInNonSerializableClass"})
 public abstract class AbstractMultiReaderMutableCollection<T> implements MutableCollection<T>
 {
     protected transient ReadWriteLock lock;
@@ -1981,13 +1982,11 @@ public abstract class AbstractMultiReaderMutableCollection<T> implements Mutable
 
     public static class ReadWriteLockWrapper
     {
-        private final ReadWriteLock readWriteLock;
         private final LockWrapper readLock;
         private final LockWrapper writeLock;
 
         public ReadWriteLockWrapper(ReadWriteLock readWriteLock)
         {
-            this.readWriteLock = readWriteLock;
             this.readLock = new LockWrapper(readWriteLock.readLock());
             this.writeLock = new LockWrapper(readWriteLock.writeLock());
         }

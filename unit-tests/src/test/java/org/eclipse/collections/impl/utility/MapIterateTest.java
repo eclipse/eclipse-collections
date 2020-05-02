@@ -290,7 +290,7 @@ public class MapIterateTest
     {
         MutableMap<String, String> unifiedMap = UnifiedMap.newMap();
         Map<String, String> hashMap = new HashMap<>();
-        String value = new String("value");
+        String value = "value";
         String value1 = MapIterate.getIfAbsentPut(unifiedMap, "key", () -> value);
         String value2 = MapIterate.getIfAbsentPut(unifiedMap, "key", () -> value);
         Assert.assertEquals("value", value1);
@@ -319,6 +319,7 @@ public class MapIterateTest
         Assert.assertNull(MapIterate.getIfAbsentPut(map, "nullValueKey", () -> "aValue"));
     }
 
+    @SuppressWarnings("StringOperationCanBeSimplified")
     @Test
     public void getIfAbsent()
     {
@@ -332,8 +333,8 @@ public class MapIterateTest
         Assert.assertEquals("value", value3);
         Assert.assertNotSame(value1, value2);
         Assert.assertNotSame(value1, value3);
-        Assert.assertEquals("key1Value", MapIterate.getIfAbsent(hashMap, "key1", () -> new String("value")));
-        Assert.assertEquals("key1Value", MapIterate.getIfAbsent(unifiedMap, "key1", () -> new String("value")));
+        Assert.assertEquals("key1Value", MapIterate.getIfAbsent(hashMap, "key1", () -> "value"));
+        Assert.assertEquals("key1Value", MapIterate.getIfAbsent(unifiedMap, "key1", () -> "value"));
     }
 
     @Test

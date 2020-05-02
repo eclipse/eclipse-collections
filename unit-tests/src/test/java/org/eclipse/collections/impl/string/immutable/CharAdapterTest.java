@@ -68,8 +68,8 @@ public class CharAdapterTest extends AbstractImmutableCharListTestCase
     public void makeString()
     {
         ImmutableCharList list = this.classUnderTest();
-        StringBuilder expectedString = new StringBuilder("");
-        StringBuilder expectedString1 = new StringBuilder("");
+        StringBuilder expectedString = new StringBuilder();
+        StringBuilder expectedString1 = new StringBuilder();
         int size = list.size();
         for (char each = 0; each < size; each++)
         {
@@ -86,8 +86,8 @@ public class CharAdapterTest extends AbstractImmutableCharListTestCase
     @Test
     public void appendString()
     {
-        StringBuilder expectedString = new StringBuilder("");
-        StringBuilder expectedString1 = new StringBuilder("");
+        StringBuilder expectedString = new StringBuilder();
+        StringBuilder expectedString1 = new StringBuilder();
         int size = this.classUnderTest().size();
         for (char each = 0; each < size; each++)
         {

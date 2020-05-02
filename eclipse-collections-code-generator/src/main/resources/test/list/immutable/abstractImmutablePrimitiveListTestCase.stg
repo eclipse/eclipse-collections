@@ -293,8 +293,8 @@ public abstract class AbstractImmutable<name>ListTestCase extends AbstractImmuta
     {
         super.makeString();
         Immutable<name>List list = this.classUnderTest();
-        StringBuilder expectedString = new StringBuilder("");
-        StringBuilder expectedString1 = new StringBuilder("");
+        StringBuilder expectedString = new StringBuilder();
+        StringBuilder expectedString1 = new StringBuilder();
         int size = list.size();
         for (<type> each = 0; each \< size; each++)
         {
@@ -313,8 +313,8 @@ public abstract class AbstractImmutable<name>ListTestCase extends AbstractImmuta
     public void appendString()
     {
         super.appendString();
-        StringBuilder expectedString = new StringBuilder("");
-        StringBuilder expectedString1 = new StringBuilder("");
+        StringBuilder expectedString = new StringBuilder();
+        StringBuilder expectedString1 = new StringBuilder();
         int size = this.classUnderTest().size();
         for (<type> each = 0; each \< size; each++)
         {

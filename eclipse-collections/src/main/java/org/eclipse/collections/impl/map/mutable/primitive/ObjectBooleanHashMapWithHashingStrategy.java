@@ -180,6 +180,7 @@ public class ObjectBooleanHashMapWithHashingStrategy<K> implements MutableObject
 
     public static <K> ObjectBooleanHashMapWithHashingStrategy<K> newMap(ObjectBooleanHashMapWithHashingStrategy<K> map)
     {
+        //noinspection rawtypes
         return new ObjectBooleanHashMapWithHashingStrategy<>(map.hashingStrategy, map);
     }
 

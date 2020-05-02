@@ -34,6 +34,7 @@ public final class AddFunction
     public static final Function2<Float, Float, Float> FLOAT = new AddFloatFunction();
     public static final Function2<Long, Long, Long> LONG = new AddLongFunction();
     public static final Function2<String, String, String> STRING = new AddStringFunction();
+    //noinspection rawtypes
     public static final Function2<Collection<?>, ?, Collection<?>> COLLECTION = new AddCollectionFunction();
 
     private AddFunction()
