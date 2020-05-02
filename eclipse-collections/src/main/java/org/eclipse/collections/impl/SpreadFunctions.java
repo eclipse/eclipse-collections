@@ -106,25 +106,21 @@ public final class SpreadFunctions
 
     public static int shortSpreadOne(short element)
     {
-        int code = (int) element;
-        return SpreadFunctions.thirtyTwoBitSpread1(code);
+        return SpreadFunctions.thirtyTwoBitSpread1(element);
     }
 
     public static int shortSpreadTwo(short element)
     {
-        int code = (int) element;
-        return SpreadFunctions.thirtyTwoBitSpread2(code);
+        return SpreadFunctions.thirtyTwoBitSpread2(element);
     }
 
     public static int charSpreadOne(char element)
     {
-        int code = (int) element;
-        return SpreadFunctions.thirtyTwoBitSpread1(code);
+        return SpreadFunctions.thirtyTwoBitSpread1(element);
     }
 
     public static int charSpreadTwo(char element)
     {
-        int code = (int) element;
-        return SpreadFunctions.thirtyTwoBitSpread2(code);
+        return SpreadFunctions.thirtyTwoBitSpread2(element);
     }
 }

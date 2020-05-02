@@ -60,7 +60,7 @@ public class Procedures2Test
 
     private MyRuntimeException throwMyException(Object one, Object two, Throwable exception)
     {
-        return new MyRuntimeException(String.valueOf(one) + String.valueOf(two), exception);
+        return new MyRuntimeException(String.valueOf(one) + two, exception);
     }
 
     @Test

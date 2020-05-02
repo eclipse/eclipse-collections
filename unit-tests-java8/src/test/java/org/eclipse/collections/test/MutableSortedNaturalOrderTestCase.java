@@ -58,7 +58,7 @@ public interface MutableSortedNaturalOrderTestCase extends SortedNaturalOrderTes
     default void MutableCollection_removeIfWith()
     {
         MutableCollection<Integer> collection = this.newWith(1, 1, 2, 2, 3, 3, 4, 4, 5, 5);
-        Assert.assertTrue(collection.removeIfWith(Predicates2.<Integer>in(), Lists.immutable.with(5, 3, 1)));
+        Assert.assertTrue(collection.removeIfWith(Predicates2.in(), Lists.immutable.with(5, 3, 1)));
         IterableTestCase.assertEquals(this.getExpectedFiltered(2, 2, 4, 4), collection);
         Verify.assertThrows(NullPointerException.class, () -> this.newWith(7, 4, 5, 1).removeIfWith(null, this));
 

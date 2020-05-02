@@ -37,7 +37,7 @@ public class CompositeIterableTest extends AbstractLazyIterableTestCase
     public void iterator()
     {
         LazyIterable<Integer> select = Interval.oneTo(3).asLazy().concatenate(Interval.fromTo(4, 5));
-        StringBuilder builder = new StringBuilder("");
+        StringBuilder builder = new StringBuilder();
         for (Integer each : select)
         {
             builder.append(each);

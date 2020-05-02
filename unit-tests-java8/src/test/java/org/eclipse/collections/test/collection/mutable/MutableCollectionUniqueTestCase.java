@@ -51,7 +51,7 @@ public interface MutableCollectionUniqueTestCase extends MutableCollectionTestCa
     default void MutableCollection_removeIfWith()
     {
         MutableCollection<Integer> collection = this.newWith(5, 4, 3, 2, 1);
-        collection.removeIfWith(Predicates2.<Integer>in(), Lists.immutable.with(5, 3, 1));
+        collection.removeIfWith(Predicates2.in(), Lists.immutable.with(5, 3, 1));
         IterableTestCase.assertEquals(this.getExpectedFiltered(4, 2), collection);
 
         MutableCollection<Integer> collection2 = this.newWith(1, 2, 3, 4);

@@ -103,14 +103,14 @@ public class HashBag<T>
     @Override
     public void writeExternal(ObjectOutput out) throws IOException
     {
-        ((ObjectIntHashMap<T>) this.items).writeExternal(out);
+        ((Externalizable) this.items).writeExternal(out);
     }
 
     @Override
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
     {
         this.items = new ObjectIntHashMap<>();
-        ((ObjectIntHashMap<T>) this.items).readExternal(in);
+        ((Externalizable) this.items).readExternal(in);
         this.size = (int) this.items.sum();
     }
 

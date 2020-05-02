@@ -45,8 +45,8 @@ public class PairPredicateTest
         };
 
         PairPredicate<String, String> negatedPredicate = pairPredicate.negate();
-        Assert.assertFalse(negatedPredicate.accept(Tuples.pair("1", new String("1"))));
-        Assert.assertFalse(negatedPredicate.accept("1", new String("1")));
+        Assert.assertFalse(negatedPredicate.accept(Tuples.pair("1", "1")));
+        Assert.assertFalse(negatedPredicate.accept("1", "1"));
         Assert.assertTrue(negatedPredicate.accept(Tuples.pair("2", "1")));
         Assert.assertTrue(negatedPredicate.accept("2", "1"));
     }

@@ -44,7 +44,7 @@ public class CollectIterableTest extends AbstractLazyIterableTestCase
     public void forEachWithIndex()
     {
         InternalIterable<String> select = new CollectIterable<>(Interval.oneTo(5), String::valueOf);
-        StringBuilder builder = new StringBuilder("");
+        StringBuilder builder = new StringBuilder();
         select.forEachWithIndex((object, index) -> {
             builder.append(object);
             builder.append(index);
@@ -57,7 +57,7 @@ public class CollectIterableTest extends AbstractLazyIterableTestCase
     public void iterator()
     {
         InternalIterable<String> select = new CollectIterable<>(Interval.oneTo(5), String::valueOf);
-        StringBuilder builder = new StringBuilder("");
+        StringBuilder builder = new StringBuilder();
         for (String each : select)
         {
             builder.append(each);
@@ -69,7 +69,7 @@ public class CollectIterableTest extends AbstractLazyIterableTestCase
     public void forEachWith()
     {
         InternalIterable<String> select = new CollectIterable<>(Interval.oneTo(5), String::valueOf);
-        StringBuilder builder = new StringBuilder("");
+        StringBuilder builder = new StringBuilder();
         select.forEachWith((each, aBuilder) -> aBuilder.append(each), builder);
         Assert.assertEquals("12345", builder.toString());
     }

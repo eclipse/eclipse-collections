@@ -224,7 +224,7 @@ public final class StringIterate
         {
             String token = tokenizer.nextToken();
             String key = token.substring(0, token.indexOf(keyValueSeparator));
-            String value = token.substring(token.indexOf(keyValueSeparator) + 1, token.length());
+            String value = token.substring(token.indexOf(keyValueSeparator) + 1);
             map.put(key, value);
         }
         return map;
@@ -247,7 +247,7 @@ public final class StringIterate
         {
             String token = tokenizer.nextToken();
             String key = token.substring(0, token.indexOf(keyValueSeparator));
-            String value = token.substring(token.indexOf(keyValueSeparator) + 1, token.length());
+            String value = token.substring(token.indexOf(keyValueSeparator) + 1);
             map.put(keyFunction.valueOf(key), valueFunction.valueOf(value));
         }
         return map;
@@ -1247,7 +1247,7 @@ public final class StringIterate
 
     public static Twin<String> splitAtIndex(String aString, int index)
     {
-        return Tuples.twin(aString.substring(0, index), aString.substring(index, aString.length()));
+        return Tuples.twin(aString.substring(0, index), aString.substring(index));
     }
 
     private static final class AddCharacterToCollection implements CharProcedure

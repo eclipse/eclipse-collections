@@ -158,8 +158,8 @@ public class CodePointAdapterTest extends AbstractImmutableIntListTestCase
     public void makeString()
     {
         ImmutableIntList list = this.classUnderTest();
-        StringBuilder expectedString = new StringBuilder("");
-        StringBuilder expectedString1 = new StringBuilder("");
+        StringBuilder expectedString = new StringBuilder();
+        StringBuilder expectedString1 = new StringBuilder();
         int size = list.size();
         for (int each = 0; each < size; each++)
         {
@@ -176,8 +176,8 @@ public class CodePointAdapterTest extends AbstractImmutableIntListTestCase
     @Test
     public void appendString()
     {
-        StringBuilder expectedString = new StringBuilder("");
-        StringBuilder expectedString1 = new StringBuilder("");
+        StringBuilder expectedString = new StringBuilder();
+        StringBuilder expectedString1 = new StringBuilder();
         int size = this.classUnderTest().size();
         for (int each = 0; each < size; each++)
         {
@@ -199,8 +199,8 @@ public class CodePointAdapterTest extends AbstractImmutableIntListTestCase
     @Test
     public void appendStringStringBuffer()
     {
-        StringBuffer expectedString = new StringBuffer("");
-        StringBuffer expectedString1 = new StringBuffer("");
+        StringBuffer expectedString = new StringBuffer();
+        StringBuffer expectedString1 = new StringBuffer();
         int size = this.classUnderTest().size();
         for (int each = 0; each < size; each++)
         {

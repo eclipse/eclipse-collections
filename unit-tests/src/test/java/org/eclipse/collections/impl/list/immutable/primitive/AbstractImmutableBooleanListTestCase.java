@@ -240,8 +240,8 @@ public abstract class AbstractImmutableBooleanListTestCase extends AbstractImmut
     public void makeString()
     {
         super.makeString();
-        StringBuilder expectedString = new StringBuilder("");
-        StringBuilder expectedString1 = new StringBuilder("");
+        StringBuilder expectedString = new StringBuilder();
+        StringBuilder expectedString1 = new StringBuilder();
         int size = this.classUnderTest().size();
         for (int i = 0; i < size; i++)
         {
@@ -261,8 +261,8 @@ public abstract class AbstractImmutableBooleanListTestCase extends AbstractImmut
     public void appendString()
     {
         super.appendString();
-        StringBuilder expectedString = new StringBuilder("");
-        StringBuilder expectedString1 = new StringBuilder("");
+        StringBuilder expectedString = new StringBuilder();
+        StringBuilder expectedString1 = new StringBuilder();
         int size = this.classUnderTest().size();
         for (int i = 0; i < size; i++)
         {

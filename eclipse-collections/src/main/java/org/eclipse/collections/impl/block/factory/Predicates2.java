@@ -30,10 +30,10 @@ public abstract class Predicates2<T, P>
     private static final Predicates2<Object, Iterable<?>> IN = new In();
     private static final Predicates2<Object, Object> EQUAL = new Equal();
     private static final Predicates2<Object, Iterable<?>> NOT_IN = new NotIn();
-    private static final Predicates2<?, ?> LESS_THAN = new LessThan();
-    private static final Predicates2<?, ?> LESS_THAN_OR_EQUAL = new LessThanOrEqual();
-    private static final Predicates2<?, ?> GREATER_THAN = new GreaterThan();
-    private static final Predicates2<?, ?> GREATER_THAN_OR_EQUAL = new GreaterThanOrEqual();
+    private static final Predicates2<?, ?> LESS_THAN = new LessThan<>();
+    private static final Predicates2<?, ?> LESS_THAN_OR_EQUAL = new LessThanOrEqual<>();
+    private static final Predicates2<?, ?> GREATER_THAN = new GreaterThan<>();
+    private static final Predicates2<?, ?> GREATER_THAN_OR_EQUAL = new GreaterThanOrEqual<>();
     private static final Predicates2<Object, Class<?>> INSTANCE_OF = new IsInstanceOf();
     private static final Predicates2<Object, Object> IS_IDENTICAL = new IsIdentical();
     private static final Predicates2<Object, Object> NOT_IDENTITICAL = new NotIdentitical();
@@ -109,11 +109,13 @@ public abstract class Predicates2<T, P>
 
     public static <T> Predicates2<T, Iterable<?>> attributeIn(Function<T, ?> function)
     {
+        //noinspection rawtypes
         return new AttributePredicates2(function, Predicates2.in());
     }
 
     public static <T> Predicates2<T, Iterable<?>> attributeNotIn(Function<T, ?> function)
     {
+        //noinspection rawtypes
         return new AttributePredicates2(function, Predicates2.notIn());
     }
 
