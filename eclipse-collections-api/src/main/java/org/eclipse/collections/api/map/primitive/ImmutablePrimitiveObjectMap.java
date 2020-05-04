@@ -33,7 +33,9 @@ import org.eclipse.collections.api.block.function.primitive.ShortFunction;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure2;
+import org.eclipse.collections.api.factory.Maps;
 import org.eclipse.collections.api.map.ImmutableMap;
+import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.multimap.bag.ImmutableBagMultimap;
 import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.partition.bag.PartitionImmutableBag;
@@ -58,7 +60,11 @@ public interface ImmutablePrimitiveObjectMap<V> extends PrimitiveObjectMap<V>
     <VV> ImmutableBagMultimap<VV, V> groupBy(Function<? super V, ? extends VV> function);
 
     @Override
-    <VV> ImmutableMap<VV, V> groupByUniqueKey(Function<? super V, ? extends VV> function);
+    default <VV> ImmutableMap<VV, V> groupByUniqueKey(Function<? super V, ? extends VV> function)
+    {
+        MutableMap<VV, V> target = Maps.mutable.withInitialCapacity(this.size());
+        return this.groupByUniqueKey(function, target).toImmutable();
+    }
 
     @Override
     <VV> ImmutableBag<VV> collectIf(Predicate<? super V> predicate, Function<? super V, ? extends VV> function);

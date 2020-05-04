@@ -36,6 +36,7 @@ import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
+import org.eclipse.collections.api.factory.Maps;
 import org.eclipse.collections.api.multimap.bag.MutableBagMultimap;
 import org.eclipse.collections.api.multimap.set.MutableSetMultimap;
 import org.eclipse.collections.api.ordered.OrderedIterable;
@@ -177,7 +178,10 @@ public interface MutableMap<K, V>
     <VV> MutableBagMultimap<VV, V> groupByEach(Function<? super V, ? extends Iterable<VV>> function);
 
     @Override
-    <V1> MutableMap<V1, V> groupByUniqueKey(Function<? super V, ? extends V1> function);
+    default <V1> MutableMap<V1, V> groupByUniqueKey(Function<? super V, ? extends V1> function)
+    {
+        return this.groupByUniqueKey(function, Maps.mutable.withInitialCapacity(this.size()));
+    }
 
     @Override
     <K2, V2> MutableMap<K2, V2> aggregateInPlaceBy(
