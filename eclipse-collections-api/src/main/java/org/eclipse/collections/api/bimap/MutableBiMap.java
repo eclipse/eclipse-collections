@@ -17,6 +17,7 @@ import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
+import org.eclipse.collections.api.factory.BiMaps;
 import org.eclipse.collections.api.map.MutableMapIterable;
 import org.eclipse.collections.api.multimap.set.MutableSetMultimap;
 import org.eclipse.collections.api.ordered.OrderedIterable;
@@ -122,7 +123,10 @@ public interface MutableBiMap<K, V> extends BiMap<K, V>, MutableMapIterable<K, V
     <V1> MutableSetMultimap<V1, V> groupByEach(Function<? super V, ? extends Iterable<V1>> function);
 
     @Override
-    <VV> MutableBiMap<VV, V> groupByUniqueKey(Function<? super V, ? extends VV> function);
+    default <VV> MutableBiMap<VV, V> groupByUniqueKey(Function<? super V, ? extends VV> function)
+    {
+        return this.groupByUniqueKey(function, BiMaps.mutable.empty());
+    }
 
     @Override
     MutableBiMap<K, V> withKeyValue(K key, V value);

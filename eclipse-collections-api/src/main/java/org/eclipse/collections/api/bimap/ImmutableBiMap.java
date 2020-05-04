@@ -16,6 +16,7 @@ import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
+import org.eclipse.collections.api.factory.BiMaps;
 import org.eclipse.collections.api.map.ImmutableMapIterable;
 import org.eclipse.collections.api.multimap.set.ImmutableSetMultimap;
 import org.eclipse.collections.api.ordered.OrderedIterable;
@@ -118,7 +119,11 @@ public interface ImmutableBiMap<K, V> extends BiMap<K, V>, ImmutableMapIterable<
     <V1> ImmutableSetMultimap<V1, V> groupByEach(Function<? super V, ? extends Iterable<V1>> function);
 
     @Override
-    <VV> ImmutableBiMap<VV, V> groupByUniqueKey(Function<? super V, ? extends VV> function);
+    default <VV> ImmutableBiMap<VV, V> groupByUniqueKey(Function<? super V, ? extends VV> function)
+    {
+        MutableBiMap<VV, V> target = BiMaps.mutable.empty();
+        return this.groupByUniqueKey(function, target).toImmutable();
+    }
 
     /**
      * @deprecated in 8.0. Use {@link OrderedIterable#zip(Iterable)} instead.

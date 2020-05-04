@@ -41,7 +41,9 @@ import org.eclipse.collections.api.collection.primitive.ImmutableFloatCollection
 import org.eclipse.collections.api.collection.primitive.ImmutableIntCollection;
 import org.eclipse.collections.api.collection.primitive.ImmutableLongCollection;
 import org.eclipse.collections.api.collection.primitive.ImmutableShortCollection;
+import org.eclipse.collections.api.factory.Maps;
 import org.eclipse.collections.api.map.ImmutableMap;
+import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.primitive.ImmutableObjectDoubleMap;
 import org.eclipse.collections.api.map.primitive.ImmutableObjectLongMap;
 import org.eclipse.collections.api.multimap.ImmutableMultimap;
@@ -195,7 +197,11 @@ public interface ImmutableCollection<T>
     <V> ImmutableMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function);
 
     @Override
-    <V> ImmutableMap<V, T> groupByUniqueKey(Function<? super T, ? extends V> function);
+    default <V> ImmutableMap<V, T> groupByUniqueKey(Function<? super T, ? extends V> function)
+    {
+        MutableMap<V, T> target = Maps.mutable.withInitialCapacity(this.size());
+        return this.groupByUniqueKey(function, target).toImmutable();
+    }
 
     @Override
     <S> ImmutableCollection<Pair<T, S>> zip(Iterable<S> that);
