@@ -302,6 +302,20 @@ final class Immutable<name>SingletonSet implements Immutable<name>Set, Serializa
     }
 
     @Override
+    public <type>[] toArray(<type>[] target)
+    {
+        if (target.length \< 1)
+        {
+            target = new <type>[]{this.element};
+        }
+        else
+        {
+            target[0] = this.element;
+        }
+        return target;
+    }
+
+    @Override
     public String toString()
     {
         return '[' + this.makeString() + ']';

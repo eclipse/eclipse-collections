@@ -130,6 +130,23 @@ public class CharAdapter
     }
 
     @Override
+    public char[] toArray(char[] target)
+    {
+        int size = this.adapted.length();
+        if (target.length < size)
+        {
+            target = new char[size];
+        }
+
+        for (int i = 0; i < size; i++)
+        {
+            target[i] = this.adapted.charAt(i);
+        }
+
+        return target;
+    }
+
+    @Override
     public boolean contains(char expected)
     {
         return StringIterate.anySatisfyChar(this.adapted, value -> expected == value);

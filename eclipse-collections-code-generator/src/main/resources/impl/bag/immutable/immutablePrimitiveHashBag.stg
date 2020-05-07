@@ -347,6 +347,12 @@ final class Immutable<name>HashBag implements Immutable<name>Bag, Serializable
     }
 
     @Override
+    public <type>[] toArray(<type>[] target)
+    {
+        return this.delegate.toArray(target);
+    }
+
+    @Override
     public String toString()
     {
         return this.delegate.toString();

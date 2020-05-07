@@ -605,6 +605,18 @@ public final class IntInterval
     }
 
     @Override
+    public int[] toArray(int[] result)
+    {
+        if (result.length < this.size())
+        {
+            result = new int[this.size()];
+        }
+        int[] finalBypass = result;
+        this.forEachWithIndex((each, index) -> finalBypass[index] = each);
+        return result;
+    }
+
+    @Override
     public <T> T injectInto(T injectedValue, ObjectIntToObjectFunction<? super T, ? extends T> function)
     {
         T result = injectedValue;

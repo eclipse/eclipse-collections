@@ -251,6 +251,20 @@ public abstract class AbstractMutable<name>ValuesMap extends Abstract<name>Itera
     }
 
     @Override
+    public <type>[] toArray(<type>[] target)
+    {
+        if (target.length \< this.size())
+        {
+            target = new <type>[this.size()];
+        }
+        int index = 0;
+
+        <forEachValue(template = {target[index] = <value>;<\n>index++})>
+
+        return target;
+    }
+
+    @Override
     public Mutable<name>Bag select(<name>Predicate predicate)
     {
         return this.select(predicate, new <name>HashBag());
@@ -747,6 +761,12 @@ result = nextSum})>
         public <type>[] toArray()
         {
             return AbstractMutable<name>ValuesMap.this.toArray();
+        }
+
+        @Override
+        public <type>[] toArray(<type>[] target)
+        {
+            return AbstractMutable<name>ValuesMap.this.toArray(target);
         }
     }
 }

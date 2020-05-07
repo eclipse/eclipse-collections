@@ -306,6 +306,12 @@ public class UnmodifiableObject<name>Map\<K>
     }
 
     @Override
+    public <type>[] toArray(<type>[] target)
+    {
+        return this.map.toArray(target);
+    }
+
+    @Override
     public boolean contains(<type> value)
     {
         return this.map.contains(value);

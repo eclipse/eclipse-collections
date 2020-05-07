@@ -347,6 +347,20 @@ final class Immutable<name>SingletonBag implements Immutable<name>Bag, Serializa
     }
 
     @Override
+    public <type>[] toArray(<type>[] target)
+    {
+        if (target.length \< 1)
+        {
+            target = new <type>[]{this.element1};
+        }
+        else
+        {
+            target[0] = this.element1;
+        }
+        return target;
+    }
+
+    @Override
     public String toString()
     {
         return '[' + this.makeString() + ']';

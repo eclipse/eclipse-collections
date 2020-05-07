@@ -430,6 +430,17 @@ final class Immutable<name>ArrayList
     }
 
     @Override
+    public <type>[] toArray(<type>[] target)
+    {
+        if (target.length \< this.items.length)
+        {
+            target = new <type>[this.items.length];
+        }
+        System.arraycopy(this.items, 0, target, 0, this.items.length);
+        return target;
+    }
+
+    @Override
     public boolean contains(<type> value)
     {
         for (<type> item : this.items)

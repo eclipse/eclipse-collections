@@ -404,6 +404,15 @@ public class SynchronizedObject<name>Map\<K>
     }
 
     @Override
+    public <type>[] toArray(<type>[] target)
+    {
+        synchronized (this.lock)
+        {
+            return this.map.toArray(target);
+        }
+    }
+
+    @Override
     public boolean contains(<type> value)
     {
         synchronized (this.lock)

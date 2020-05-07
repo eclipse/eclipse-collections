@@ -168,6 +168,20 @@ final class ImmutableObject<name>SingletonMap\<K> extends AbstractImmutableObjec
     }
 
     @Override
+    public <type>[] toArray(<type>[] target)
+    {
+        if (target.length \< 1)
+        {
+            target = new <type>[]{this.value1};
+        }
+        else
+        {
+            target[0] = this.value1;
+        }
+        return target;
+    }
+
+    @Override
     public boolean contains(<type> value)
     {
         return <(equals.(type))("this.value1", "value")>;

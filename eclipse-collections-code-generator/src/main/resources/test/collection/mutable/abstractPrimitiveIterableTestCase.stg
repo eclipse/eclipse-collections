@@ -707,6 +707,36 @@ public void sumConsistentRounding()
     }
 
     @Test
+    public void toArrayWithTargetArray()
+    {
+        <type>[] originalAsSortedArray = this.classUnderTest().toSortedArray();
+
+        <type>[] target = new <type>[this.classUnderTest().size()];
+
+        Assert.assertSame(target, this.classUnderTest().toArray(target));
+        Arrays.sort(target);
+        Assert.assertTrue(Arrays.equals(originalAsSortedArray, target));
+
+        if (this.classUnderTest().size() > 0)
+        {
+            <type>[] targetTooSmall = new <type>[this.classUnderTest().size() - 1];
+            <type>[] result = this.classUnderTest().toArray(targetTooSmall);
+            Assert.assertNotSame(targetTooSmall, result);
+            Arrays.sort(result);
+            Assert.assertTrue(Arrays.equals(this.classUnderTest().toSortedArray(), result));
+        }
+
+        <type>[] targetTooBig = new <type>[this.classUnderTest().size() + 1];
+        <type>[] bigResult = this.classUnderTest().toArray(targetTooBig);
+        Assert.assertSame(targetTooBig, bigResult);
+        Arrays.sort(targetTooBig);
+        for (int i = 0; i \< originalAsSortedArray.length; i++)
+        {
+            Assert.assertEquals(originalAsSortedArray[i], bigResult[i + 1]<(delta.(type))>);
+        }
+    }
+
+    @Test
     public void toSortedArray()
     {
         <name>Iterable iterable = this.classUnderTest();

@@ -167,6 +167,12 @@ public abstract class Abstract<name>Stack implements <name>Stack
     }
 
     @Override
+    public <type>[] toArray(<type>[] target)
+    {
+        return this.getDelegate().asReversed().toArray(target);
+    }
+
+    @Override
     public boolean contains(<type> value)
     {
         return this.getDelegate().asReversed().contains(value);

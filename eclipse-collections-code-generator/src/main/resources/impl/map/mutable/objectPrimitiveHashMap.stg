@@ -373,6 +373,26 @@ public class Object<name>HashMap\<K> implements MutableObject<name>Map\<K>, Exte
     }
 
     @Override
+    public <type>[] toArray(<type>[] target)
+    {
+        if (target.length \< this.size())
+        {
+            target = new <type>[this.size()];
+        }
+        int index = 0;
+
+        for (int i = 0; i \< this.keys.length; i++)
+        {
+            if (isNonSentinel(this.keys[i]))
+            {
+                target[index] = this.values[i];
+                index++;
+            }
+        }
+        return target;
+    }
+
+    @Override
     public boolean contains(<type> value)
     {
         return this.containsValue(value);
@@ -1821,6 +1841,12 @@ public class Object<name>HashMap\<K> implements MutableObject<name>Map\<K>, Exte
         public <type>[] toArray()
         {
             return Object<name>HashMap.this.toArray();
+        }
+
+        @Override
+        public <type>[] toArray(<type>[] target)
+        {
+            return Object<name>HashMap.this.toArray(target);
         }
 
         @Override

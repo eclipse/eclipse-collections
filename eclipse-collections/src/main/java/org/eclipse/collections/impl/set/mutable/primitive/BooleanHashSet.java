@@ -605,6 +605,43 @@ public class BooleanHashSet implements MutableBooleanSet, Externalizable
     }
 
     @Override
+    public boolean[] toArray(boolean[] target)
+    {
+        int requiredSize = 0;
+        if (this.state == 1 || this.state == 2)
+        {
+            requiredSize = 1;
+        }
+        else if (this.state == 3)
+        {
+            requiredSize = 2;
+        }
+
+        if (target.length < requiredSize)
+        {
+            target = new boolean[requiredSize];
+        }
+
+        switch (this.state)
+        {
+            case 0:
+                return target;
+            case 1:
+                target[0] = false;
+                return target;
+            case 2:
+                target[0] = true;
+                return target;
+            case 3:
+                target[0] = false;
+                target[1] = true;
+                return target;
+            default:
+                throw new AssertionError("Invalid state");
+        }
+    }
+
+    @Override
     public boolean contains(boolean value)
     {
         if (this.state == 3)

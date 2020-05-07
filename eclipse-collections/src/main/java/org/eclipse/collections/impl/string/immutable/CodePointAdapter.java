@@ -134,6 +134,12 @@ public class CodePointAdapter
     }
 
     @Override
+    public int[] toArray(int[] target)
+    {
+        return this.toList().toArray(target);
+    }
+
+    @Override
     public boolean contains(int expected)
     {
         int length = this.adapted.length();

@@ -213,6 +213,12 @@ public class Unmodifiable<name>Stack
     }
 
     @Override
+    public <type>[] toArray(<type>[] target)
+    {
+        return this.stack.toArray(target);
+    }
+
+    @Override
     public String toString()
     {
         return this.stack.toString();

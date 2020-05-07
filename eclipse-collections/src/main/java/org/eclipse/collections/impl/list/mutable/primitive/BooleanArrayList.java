@@ -799,6 +799,17 @@ public final class BooleanArrayList
     }
 
     @Override
+    public boolean[] toArray(boolean[] target)
+    {
+        if (target.length < this.size)
+        {
+            target = new boolean[this.size];
+        }
+        System.arraycopy(this.items, 0, target, 0, this.size);
+        return target;
+    }
+
+    @Override
     public boolean equals(Object otherList)
     {
         if (otherList == this)

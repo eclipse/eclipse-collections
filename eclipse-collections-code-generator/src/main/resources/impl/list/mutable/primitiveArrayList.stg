@@ -863,6 +863,17 @@ public class <name>ArrayList extends Abstract<name>Iterable
     }
 
     @Override
+    public <type>[] toArray(<type>[] target)
+    {
+        if (target.length \< this.size)
+        {
+            target = new <type>[this.size];
+        }
+        System.arraycopy(this.items, 0, target, 0, this.size);
+        return target;
+    }
+
+    @Override
     public boolean equals(Object otherList)
     {
         if (otherList == this)

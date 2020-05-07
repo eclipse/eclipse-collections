@@ -297,6 +297,15 @@ public class Synchronized<name>Stack
     }
 
     @Override
+    public <type>[] toArray(<type>[] target)
+    {
+        synchronized (this.lock)
+        {
+            return this.stack.toArray(target);
+        }
+    }
+
+    @Override
     public String toString()
     {
         synchronized (this.lock)

@@ -148,6 +148,12 @@ final class ImmutableObject<name>EmptyMap\<K> implements ImmutableObject<name>Ma
     }
 
     @Override
+    public <type>[] toArray(<type>[] target)
+    {
+        return target;
+    }
+
+    @Override
     public boolean contains(<type> value)
     {
         return false;

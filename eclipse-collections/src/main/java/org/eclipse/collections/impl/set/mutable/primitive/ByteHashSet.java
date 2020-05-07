@@ -559,6 +559,27 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
     }
 
     @Override
+    public byte[] toArray(byte[] array)
+    {
+        if (array.length < this.size())
+        {
+            array = new byte[this.size()];
+        }
+        int index = 0;
+
+        ByteIterator iterator = this.byteIterator();
+
+        while (iterator.hasNext())
+        {
+            byte nextByte = iterator.next();
+            array[index] = nextByte;
+            index++;
+        }
+
+        return array;
+    }
+
+    @Override
     public boolean containsAll(byte... source)
     {
         for (byte item : source)
@@ -1168,6 +1189,27 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
         public byte[] toArray()
         {
             byte[] array = new byte[this.size()];
+            int index = 0;
+
+            ByteIterator iterator = this.byteIterator();
+
+            while (iterator.hasNext())
+            {
+                byte nextByte = iterator.next();
+                array[index] = nextByte;
+                index++;
+            }
+
+            return array;
+        }
+
+        @Override
+        public byte[] toArray(byte[] array)
+        {
+            if (array.length < this.size())
+            {
+                array = new byte[this.size()];
+            }
             int index = 0;
 
             ByteIterator iterator = this.byteIterator();

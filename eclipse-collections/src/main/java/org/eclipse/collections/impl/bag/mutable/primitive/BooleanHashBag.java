@@ -839,6 +839,28 @@ public final class BooleanHashBag implements MutableBooleanBag, Externalizable
     }
 
     @Override
+    public boolean[] toArray(boolean[] array)
+    {
+        if (array.length < this.size())
+        {
+            array = new boolean[this.size()];
+        }
+        int[] index = {0};
+
+        boolean[] finalBypass = array;
+
+        this.forEachWithOccurrences((each, occurrences) ->
+        {
+            for (int i = 0; i < occurrences; i++)
+            {
+                finalBypass[index[0]] = each;
+                index[0]++;
+            }
+        });
+        return array;
+    }
+
+    @Override
     public MutableBooleanList toList()
     {
         return BooleanArrayList.newList(this);

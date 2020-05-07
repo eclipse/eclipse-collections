@@ -296,6 +296,20 @@ final class ImmutableBooleanArrayList
     }
 
     @Override
+    public boolean[] toArray(boolean[] target)
+    {
+        if (target.length < this.size)
+        {
+            target = new boolean[this.size];
+        }
+        for (int i = 0; i < this.size; i++)
+        {
+            target[i] = this.items.get(i);
+        }
+        return target;
+    }
+
+    @Override
     public boolean contains(boolean value)
     {
         for (int i = 0; i < this.size; i++)

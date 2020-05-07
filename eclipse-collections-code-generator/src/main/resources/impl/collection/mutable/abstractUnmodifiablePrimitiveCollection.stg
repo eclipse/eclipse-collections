@@ -287,6 +287,12 @@ public abstract class AbstractUnmodifiable<name>Collection
     }
 
     @Override
+    public <type>[] toArray(<type>[] target)
+    {
+        return this.collection.toArray(target);
+    }
+
+    @Override
     public String toString()
     {
         return this.collection.toString();

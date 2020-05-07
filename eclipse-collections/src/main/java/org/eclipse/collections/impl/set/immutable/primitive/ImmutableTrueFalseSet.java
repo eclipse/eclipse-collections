@@ -203,6 +203,21 @@ final class ImmutableTrueFalseSet implements ImmutableBooleanSet, Serializable
     }
 
     @Override
+    public boolean[] toArray(boolean[] target)
+    {
+        if (target.length < 2)
+        {
+            target = new boolean[]{false, true};
+        }
+        else
+        {
+            target[0] = false;
+            target[1] = true;
+        }
+        return target;
+    }
+
+    @Override
     public boolean contains(boolean value)
     {
         return true;
