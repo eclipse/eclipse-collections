@@ -34,28 +34,86 @@ import org.eclipse.collections.api.tuple.primitive.<name1><name2>Pair;
  */
 public interface <name1><name2>Map extends <name2>ValuesMap
 {
+	/**
+	 * Retrieves the value associated with the key. If no mapping exists for the key,
+	 * the default value (usually {@code 0}) is returned.
+	 * @param key the key
+	 * @return the value associated with the key, or the default value if no such
+	 * mapping exists
+	 */
     <type2> get(<type1> key);
 
+    /**
+     * Retrieves the value associated with the key, returning the specified default
+     * value if no such mapping exists.
+     * @param key the key
+     * @param ifAbsent the default value to return if no mapping exists for {@code key}
+     * @return the value associated with the key, or {@code ifAbsent} if no such
+     * mapping exists.
+     */
     <type2> getIfAbsent(<type1> key, <type2> ifAbsent);
 
+    /**
+     * Retrieves the value associated with the key, throwing an {@link IllegalStateException}
+     * if no such mapping exists.
+     * @param key the key
+     * @return the value associated with the key
+     * @throws IllegalStateException if no mapping exists for the key
+     */
     <type2> getOrThrow(<type1> key);
 
+    /**
+     * Returns whether or not the key is present in the map.
+     * @param key the key
+     * @return if a mapping exists in this map for the key
+     */
     boolean containsKey(<type1> key);
 
+    /**
+     * Iterates through each key in the map, invoking the procedure for each.
+     * @param procedure the procedure to invoke for each key
+     */
     void forEachKey(<name1>Procedure procedure);
 
+    /**
+     * Iterates through each key/value pair in the map, invoking the procedure for each.
+     * @param procedure the procedure to invoke for each key/value pair
+     */
     void forEachKeyValue(<name1><name2>Procedure procedure);
 
+    /**
+     * Returns a view of the keys in this map. This iterable is backed by the map, so
+     * any modifications to the underlying map will be reflected in the keys returned
+     * by the iterable.
+     * @return a view of the keys in this map
+     */
     Lazy<name1>Iterable keysView();
 
     /**
+     * Returns a view of the key/value pairs in this map. This iterable is backed by
+     * the map, so any modifications to the underlying map will be reflected in the
+     * pairs returned by the iterable.
+     * @return a view of the keys in this map
      * @since 5.0
      */
     RichIterable\<<name1><name2>Pair> keyValuesView();
     <if(!primitive2.booleanPrimitive)><(flipUniqueValues.(name2))(name1, name2)><endif>
 
+    /**
+     * Return a copy of this map containing only the key/value pairs that match the predicate.
+     * @param predicate the predicate to determine which key/value pairs in this map should be
+     * included in the returned map
+     * @return a copy of this map with the matching key/value pairs
+     */
     <name1><name2>Map select(<name1><name2>Predicate predicate);
 
+    /**
+     * Return a copy of this map containing only the key/value pairs that do not match the
+     * predicate.
+     * @param predicate the predicate to determine which key/value pairs in this map should be
+     * excluded from the returned map
+     * @return a copy of this map without the matching key/value pairs
+     */
     <name1><name2>Map reject(<name1><name2>Predicate predicate);
 
     /**
@@ -78,8 +136,18 @@ public interface <name1><name2>Map extends <name2>ValuesMap
     @Override
     String toString();
 
+    /**
+     * Returns a copy of this map that is immutable (if this map is mutable) or 
+     * itself if it is already immutable.
+     * @return an immutable map that is equivalent to this one
+     */
     Immutable<name1><name2>Map toImmutable();
 
+    /**
+     * Returns a set containing all the keys in this map. The set is backed by the
+     * map, so any modifications to the returned set will affect this map. 
+     * @return a mutable set containing the keys in this map
+     */
     Mutable<name1>Set keySet();
 }
 
@@ -99,11 +167,11 @@ flipUniqueValues ::= [
 noMethods(name1, name2) ::= ""
 
 flipUniqueValues(name1, name2) ::= <<<\n>/**
- * Return the <name2><name1>Map that is obtained by flipping the direction of this map and making the associations
- * from value to key.
- *
- * @throws IllegalStateException if the <name2><name1>Map contains duplicate values.
- * @since 9.0
- */
+     * Return the <name2><name1>Map that is obtained by flipping the direction of this map and making the associations
+     * from value to key.
+     *
+     * @throws IllegalStateException if the <name2><name1>Map contains duplicate values.
+     * @since 9.0
+     */
 <name2><name1>Map flipUniqueValues();
 >>
