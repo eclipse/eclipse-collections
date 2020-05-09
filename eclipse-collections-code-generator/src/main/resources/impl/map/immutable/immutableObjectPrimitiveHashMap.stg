@@ -178,6 +178,12 @@ final class ImmutableObject<name>HashMap\<K> extends AbstractImmutableObject<nam
     }
 
     @Override
+    public <type>[] toArray(<type>[] target)
+    {
+        return this.delegate.toArray(target);
+    }
+
+    @Override
     public boolean contains(<type> value)
     {
         return this.delegate.contains(value);

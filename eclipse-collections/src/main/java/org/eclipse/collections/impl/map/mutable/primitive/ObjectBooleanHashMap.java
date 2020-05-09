@@ -378,6 +378,25 @@ public class ObjectBooleanHashMap<K> implements MutableObjectBooleanMap<K>, Exte
     }
 
     @Override
+    public boolean[] toArray(boolean[] result)
+    {
+        if (result.length < this.size())
+        {
+            result = new boolean[this.size()];
+        }
+        int index = 0;
+        for (int i = 0; i < this.keys.length; i++)
+        {
+            if (ObjectBooleanHashMap.isNonSentinel(this.keys[i]))
+            {
+                result[index] = this.values.get(i);
+                index++;
+            }
+        }
+        return result;
+    }
+
+    @Override
     public boolean contains(boolean value)
     {
         return this.containsValue(value);
@@ -1515,6 +1534,12 @@ public class ObjectBooleanHashMap<K> implements MutableObjectBooleanMap<K>, Exte
         public boolean[] toArray()
         {
             return ObjectBooleanHashMap.this.toArray();
+        }
+
+        @Override
+        public boolean[] toArray(boolean[] target)
+        {
+            return ObjectBooleanHashMap.this.toArray(target);
         }
 
         @Override

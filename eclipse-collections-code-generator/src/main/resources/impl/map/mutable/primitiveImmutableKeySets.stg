@@ -138,6 +138,18 @@ class <className> extends AbstractImmutable<name>Set implements Serializable
     }
 
     @Override
+    public <type>[] toArray(<type>[] array)
+    {
+        if (array.length \< this.size())
+        {
+            array = new <type>[this.size()];
+        }
+        int index = 0;
+        <forEachKey("toArray")>
+        return array;
+    }
+
+    @Override
     public boolean contains(<type> value)
     {
         if (<(equals.(type))("value", "EMPTY_KEY")>)

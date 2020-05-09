@@ -162,6 +162,12 @@ final class ImmutableBooleanEmptySet implements ImmutableBooleanSet, Serializabl
     }
 
     @Override
+    public boolean[] toArray(boolean[] target)
+    {
+        return target;
+    }
+
+    @Override
     public boolean contains(boolean value)
     {
         return false;

@@ -315,6 +315,12 @@ public final class BooleanArrayStack implements MutableBooleanStack, Externaliza
     }
 
     @Override
+    public boolean[] toArray(boolean[] target)
+    {
+        return this.delegate.asReversed().toArray(target);
+    }
+
+    @Override
     public boolean contains(boolean value)
     {
         return this.delegate.asReversed().contains(value);

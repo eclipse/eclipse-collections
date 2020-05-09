@@ -84,6 +84,15 @@ public class Synchronized<name>Iterable implements <name>Iterable, Serializable
     }
 
     @Override
+    public <type>[] toArray(<type>[] target)
+    {
+        synchronized (this.lock)
+        {
+            return this.iterable.toArray(target);
+        }
+    }
+
+    @Override
     public boolean contains(<type> value)
     {
         synchronized (this.lock)

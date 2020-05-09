@@ -596,6 +596,30 @@ public abstract class AbstractMutable<name>KeySet implements Mutable<name>Set
     }
 
     @Override
+    public <type>[] toArray(<type>[] result)
+    {
+        int size = this.getOuter().size();
+        if (result.length \< size)
+        {
+            result = new <type>[size];
+        }
+
+        <type>[] finalBypass = result;
+
+        this.getOuter().forEachKey(new <name>Procedure()
+        {
+            private int index;
+
+            public void value(<type> each)
+            {
+                finalBypass[this.index] = each;
+                this.index++;
+            }
+        });
+        return result;
+    }
+
+    @Override
     public boolean contains(<type> value)
     {
         return this.getOuter().containsKey(value);

@@ -394,6 +394,15 @@ public abstract class AbstractSynchronized<name>Collection
     }
 
     @Override
+    public <type>[] toArray(<type>[] target)
+    {
+        synchronized (this.lock)
+        {
+            return this.collection.toArray(target);
+        }
+    }
+
+    @Override
     public String toString()
     {
         synchronized (this.lock)

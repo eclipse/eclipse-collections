@@ -268,6 +268,20 @@ final class Immutable<name1><name2>SingletonMap implements Immutable<name1><name
     }
 
     @Override
+    public <type2>[] toArray(<type2>[] target)
+    {
+        if (target.length \< 1)
+        {
+            target = new <type2>[]{this.value1};
+        }
+        else
+        {
+            target[0] = this.value1;
+        }
+        return target;
+    }
+
+    @Override
     public boolean contains(<type2> value)
     {
         return <(equals.(type2))("this.value1", "value")>;

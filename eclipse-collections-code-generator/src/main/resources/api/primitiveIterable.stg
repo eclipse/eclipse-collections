@@ -64,6 +64,16 @@ public interface <name>Iterable extends PrimitiveIterable
     <type>[] toArray();
 
     /**
+     * Converts the <name>Iterable to a primitive <type> array. If the collection fits into the provided array it is used
+     * to store its elements and is returned from the method, otherwise a new array of the appropriate size is allocated
+     * and returned. If the iterable is empty, the target array is returned unchanged.
+     */
+    default <type>[] toArray(<type>[] target)
+    {
+        return this.toList().toArray(target);
+    }
+
+    /**
      * Returns true if the value is contained in the <name>Iterable, and false if it is not.
      */
     boolean contains(<type> value);

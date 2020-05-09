@@ -258,6 +258,12 @@ final class Immutable<name>EmptySet implements Immutable<name>Set, Serializable
     }
 
     @Override
+    public <type>[] toArray(<type>[] target)
+    {
+        return target;
+    }
+
+    @Override
     public String toString()
     {
         return "[]";

@@ -3611,6 +3611,29 @@ public class <name>ObjectHashMap\<V> implements Mutable<name>ObjectMap\<V>, Exte
         }
 
         @Override
+        public <type>[] toArray(<type>[] result)
+        {
+            int size = <name>ObjectHashMap.this.size();
+            if (result.length \< size)
+            {
+                result = new <type>[size];
+            }
+            final <type>[] finalBypass = result;
+            <name>ObjectHashMap.this.forEachKey(new <name>Procedure()
+            {
+                private int index;
+
+                @Override
+                public void value(<type> each)
+                {
+                    finalBypass[this.index] = each;
+                    this.index++;
+                }
+            });
+            return result;
+        }
+
+        @Override
         public boolean contains(<type> value)
         {
             return <name>ObjectHashMap.this.containsKey(value);

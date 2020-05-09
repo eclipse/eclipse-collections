@@ -305,6 +305,12 @@ final class Immutable<name>EmptyBag implements Immutable<name>Bag, Serializable
     }
 
     @Override
+    public <type>[] toArray(<type>[] target)
+    {
+        return target;
+    }
+
+    @Override
     public String toString()
     {
         return "[]";

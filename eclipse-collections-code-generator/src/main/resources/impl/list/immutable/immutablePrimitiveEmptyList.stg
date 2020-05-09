@@ -173,6 +173,12 @@ final class Immutable<name>EmptyList implements Immutable<name>List, Serializabl
     }
 
     @Override
+    public <type>[] toArray(<type>[] target)
+    {
+        return target;
+    }
+
+    @Override
     public boolean contains(<type> value)
     {
         return false;

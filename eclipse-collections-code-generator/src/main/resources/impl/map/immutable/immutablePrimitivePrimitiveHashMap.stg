@@ -283,6 +283,12 @@ final class Immutable<name1><name2>HashMap implements Immutable<name1><name2>Map
     }
 
     @Override
+    public <type2>[] toArray(<type2>[] target)
+    {
+        return this.delegate.toArray(target);
+    }
+
+    @Override
     public boolean contains(<type2> value)
     {
         return this.delegate.contains(value);

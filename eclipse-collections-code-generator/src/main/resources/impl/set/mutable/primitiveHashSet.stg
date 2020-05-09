@@ -500,6 +500,35 @@ public class <name>HashSet extends Abstract<name>Set implements Mutable<name>Set
     }
 
     @Override
+    public <type>[] toArray(<type>[] array)
+    {
+        if (array.length \< this.size())
+        {
+            array = new <type>[this.size()];
+        }
+
+        int j = 0;
+        int zeroToThirtyOne = this.zeroToThirtyOne;
+        while (zeroToThirtyOne != 0)
+        {
+            <type> value = <(castFromInt.(type))("Integer.numberOfTrailingZeros(zeroToThirtyOne)")>;
+            array[j] = value;
+            j++;
+            zeroToThirtyOne &= ~(1 \<\< <(castRealTypeToInt.(type))("value")>);
+        }
+
+        for (int i = 0; i \< this.table.length && j \< this.size(); i++)
+        {
+            if (isNonSentinel(this.table[i]))
+            {
+                array[j] = this.table[i];
+                j++;
+            }
+        }
+        return array;
+    }
+
+    @Override
     public boolean contains(<type> value)
     {
         if (isBetweenZeroAndThirtyOne(value))
@@ -1168,6 +1197,35 @@ public class <name>HashSet extends Abstract<name>Set implements Mutable<name>Set
         public <type>[] toArray()
         {
             <type>[] array = new <type>[this.size()];
+
+            int j = 0;
+            int zeroToThirtyOne = this.zeroToThirtyOne;
+            while (zeroToThirtyOne != 0)
+            {
+                <type> value = <(castFromInt.(type))("Integer.numberOfTrailingZeros(zeroToThirtyOne)")>;
+                array[j] = value;
+                j++;
+                zeroToThirtyOne &= ~(1 \<\< <(castRealTypeToInt.(type))("value")>);
+            }
+
+            for (int i = 0; i \< this.table.length && j \< this.size(); i++)
+            {
+                if (isNonSentinel(this.table[i]))
+                {
+                    array[j] = this.table[i];
+                    j++;
+                }
+            }
+            return array;
+        }
+
+        @Override
+        public <type>[] toArray(<type>[] array)
+        {
+            if (array.length \< this.size())
+            {
+                array = new <type>[this.size()];
+            }
 
             int j = 0;
             int zeroToThirtyOne = this.zeroToThirtyOne;

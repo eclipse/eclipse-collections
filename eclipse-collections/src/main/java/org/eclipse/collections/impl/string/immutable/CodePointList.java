@@ -171,6 +171,12 @@ public class CodePointList extends AbstractIntIterable implements CharSequence, 
     }
 
     @Override
+    public int[] toArray(int[] target)
+    {
+        return this.codePoints.toArray(target);
+    }
+
+    @Override
     public boolean contains(int expected)
     {
         return this.codePoints.contains(expected);

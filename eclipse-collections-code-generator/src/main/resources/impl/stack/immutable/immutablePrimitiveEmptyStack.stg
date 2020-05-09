@@ -158,6 +158,12 @@ final class Immutable<name>EmptyStack implements Immutable<name>Stack, Serializa
     }
 
     @Override
+    public <type>[] toArray(<type>[] target)
+    {
+        return target;
+    }
+
+    @Override
     public boolean contains(<type> value)
     {
         return false;

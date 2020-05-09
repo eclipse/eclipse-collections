@@ -746,6 +746,28 @@ public class <name>HashBag
     }
 
     @Override
+    public <type>[] toArray(<type>[] array)
+    {
+        if (array.length \< this.size())
+        {
+            array = new <type>[this.size()];
+        }
+
+        int[] index = {0};
+
+        <type>[] finalBypass = array;
+        this.forEachWithOccurrences((<type> each, int occurrences) ->
+        {
+            for (int i = 0; i \< occurrences; i++)
+            {
+                finalBypass[index[0]] = each;
+                index[0]++;
+            }
+        });
+        return array;
+    }
+
+    @Override
     public Mutable<name>Bag asUnmodifiable()
     {
         return new Unmodifiable<name>Bag(this);
