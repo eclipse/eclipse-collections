@@ -31,10 +31,24 @@ import org.eclipse.collections.api.collection.primitive.Mutable<name>Collection;
  */
 public interface <name>ValuesMap extends <name>Iterable
 {
+	/**
+	 * Returns whether or not this map contains the value.
+	 * @param value the value to test
+	 * @return if this collection contains the value
+	 */
     boolean containsValue(<type> value);
 
+    /**
+     * Iterates through each value in this map.
+     * @param procedure the procedure to invoke for each value in this map.
+     */
     void forEachValue(<name>Procedure procedure);
 
+    /**
+     * Returns the values in this map as a separate collection. The returned collection is backed by the map, so any
+     * changes made to the returned collection will affect the state of this map.
+     * @return the values as a collection backed by this map
+     */
     Mutable<name>Collection values();
 
     @Override
