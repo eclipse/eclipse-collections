@@ -953,15 +953,7 @@ public class <name>ArrayList extends Abstract<name>Iterable
     @Override
     public Immutable<name>List toImmutable()
     {
-        if (this.size == 0)
-        {
-            return <name>Lists.immutable.empty();
-        }
-        if (this.size == 1)
-        {
-            return <name>Lists.immutable.with(this.items[0]);
-        }
-        return <name>Lists.immutable.with(this.toArray());
+        return <name>Lists.immutable.withAll(this);
     }
 
     @Override
