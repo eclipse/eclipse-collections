@@ -20,7 +20,6 @@ import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.list.ListIterable;
 import org.eclipse.collections.api.multimap.ordered.SortedIterableMultimap;
 import org.eclipse.collections.api.partition.ordered.PartitionSortedIterable;
-import org.eclipse.collections.api.stack.MutableStack;
 import org.eclipse.collections.api.tuple.Pair;
 
 /**
@@ -73,12 +72,6 @@ public interface SortedIterable<T> extends OrderedIterable<T>
      */
     @Override
     SortedIterable<T> distinct();
-
-    /**
-     * Converts the SortedIterable to a mutable MutableStack implementation.
-     */
-    @Override
-    MutableStack<T> toStack();
 
     /**
      * Returns the minimum element out of this container based on the natural order, not the order of this container.

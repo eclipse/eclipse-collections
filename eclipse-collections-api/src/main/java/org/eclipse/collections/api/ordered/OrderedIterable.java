@@ -31,6 +31,7 @@ import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
+import org.eclipse.collections.api.factory.Stacks;
 import org.eclipse.collections.api.multimap.ordered.OrderedIterableMultimap;
 import org.eclipse.collections.api.ordered.primitive.OrderedBooleanIterable;
 import org.eclipse.collections.api.ordered.primitive.OrderedByteIterable;
@@ -210,7 +211,10 @@ public interface OrderedIterable<T> extends RichIterable<T>
     /**
      * Converts the OrderedIterable to a mutable MutableStack implementation.
      */
-    MutableStack<T> toStack();
+    default MutableStack<T> toStack()
+    {
+        return Stacks.mutable.withAll(this);
+    }
 
     /**
      * Returns the minimum element out of this container based on the natural order, not the order of this container.
