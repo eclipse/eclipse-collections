@@ -92,7 +92,15 @@ public enum Immutable<name>ListFactoryImpl implements Immutable<name>ListFactory
         {
             return (Immutable<name>List) items;
         }
-        return this.with(items.toArray());
+        if (items == null || items.size() == 0)
+        {
+            return this.with();
+        }
+        if (items.size() == 1)
+        {
+            return this.with(items.toArray()[0]);
+        }
+        return Immutable<name>ArrayList.newList(items);
     }
 
     /**
