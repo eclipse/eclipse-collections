@@ -43,16 +43,32 @@ public interface MutableSet<T>
         extends UnsortedSetIterable<T>, MutableSetIterable<T>, Cloneable
 {
     @Override
-    MutableSet<T> with(T element);
+    default MutableSet<T> with(T element)
+    {
+        this.add(element);
+        return this;
+    }
 
     @Override
-    MutableSet<T> without(T element);
+    default MutableSet<T> without(T element)
+    {
+        this.remove(element);
+        return this;
+    }
 
     @Override
-    MutableSet<T> withAll(Iterable<? extends T> elements);
+    default MutableSet<T> withAll(Iterable<? extends T> elements)
+    {
+        this.addAllIterable(elements);
+        return this;
+    }
 
     @Override
-    MutableSet<T> withoutAll(Iterable<? extends T> elements);
+    default MutableSet<T> withoutAll(Iterable<? extends T> elements)
+    {
+        this.removeAllIterable(elements);
+        return this;
+    }
 
     @Override
     MutableSet<T> newEmpty();

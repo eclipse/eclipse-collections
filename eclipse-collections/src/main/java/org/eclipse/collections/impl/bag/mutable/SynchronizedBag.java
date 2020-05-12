@@ -99,34 +99,6 @@ public class SynchronizedBag<T>
     }
 
     @Override
-    public MutableBag<T> with(T element)
-    {
-        this.add(element);
-        return this;
-    }
-
-    @Override
-    public MutableBag<T> without(T element)
-    {
-        this.remove(element);
-        return this;
-    }
-
-    @Override
-    public MutableBag<T> withAll(Iterable<? extends T> elements)
-    {
-        this.addAllIterable(elements);
-        return this;
-    }
-
-    @Override
-    public MutableBag<T> withoutAll(Iterable<? extends T> elements)
-    {
-        this.removeAllIterable(elements);
-        return this;
-    }
-
-    @Override
     public MutableBag<T> newEmpty()
     {
         synchronized (this.getLock())

@@ -85,16 +85,32 @@ public interface MutableSortedBag<T>
     MutableSortedMap<T, Integer> toMapOfItemToCount();
 
     @Override
-    MutableSortedBag<T> with(T element);
+    default MutableSortedBag<T> with(T element)
+    {
+        this.add(element);
+        return this;
+    }
 
     @Override
-    MutableSortedBag<T> without(T element);
+    default MutableSortedBag<T> without(T element)
+    {
+        this.remove(element);
+        return this;
+    }
 
     @Override
-    MutableSortedBag<T> withAll(Iterable<? extends T> elements);
+    default MutableSortedBag<T> withAll(Iterable<? extends T> elements)
+    {
+        this.addAllIterable(elements);
+        return this;
+    }
 
     @Override
-    MutableSortedBag<T> withoutAll(Iterable<? extends T> elements);
+    default MutableSortedBag<T> withoutAll(Iterable<? extends T> elements)
+    {
+        this.removeAllIterable(elements);
+        return this;
+    }
 
     @Override
     MutableSortedBag<T> newEmpty();

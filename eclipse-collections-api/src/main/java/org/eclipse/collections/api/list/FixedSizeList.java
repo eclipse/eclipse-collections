@@ -22,6 +22,18 @@ public interface FixedSizeList<T>
         extends MutableList<T>, FixedSizeCollection<T>
 {
     @Override
+    MutableList<T> with(T element);
+
+    @Override
+    MutableList<T> without(T element);
+
+    @Override
+    MutableList<T> withAll(Iterable<? extends T> elements);
+
+    @Override
+    MutableList<T> withoutAll(Iterable<? extends T> elements);
+
+    @Override
     FixedSizeList<T> toReversed();
 
     @Override

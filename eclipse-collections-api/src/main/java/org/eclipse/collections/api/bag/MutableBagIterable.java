@@ -114,16 +114,32 @@ public interface MutableBagIterable<T> extends Bag<T>, MutableCollection<T>
     MutableList<ObjectIntPair<T>> bottomOccurrences(int count);
 
     @Override
-    MutableBagIterable<T> with(T element);
+    default MutableBagIterable<T> with(T element)
+    {
+        this.add(element);
+        return this;
+    }
 
     @Override
-    MutableBagIterable<T> without(T element);
+    default MutableBagIterable<T> without(T element)
+    {
+        this.remove(element);
+        return this;
+    }
 
     @Override
-    MutableBagIterable<T> withAll(Iterable<? extends T> elements);
+    default MutableBagIterable<T> withAll(Iterable<? extends T> elements)
+    {
+        this.addAllIterable(elements);
+        return this;
+    }
 
     @Override
-    MutableBagIterable<T> withoutAll(Iterable<? extends T> elements);
+    default MutableBagIterable<T> withoutAll(Iterable<? extends T> elements)
+    {
+        this.removeAllIterable(elements);
+        return this;
+    }
 
     @Override
     <V> RichIterable<V> collectWithOccurrences(ObjectIntToObjectFunction<? super T, ? extends V> function);

@@ -980,34 +980,6 @@ public abstract class AbstractMutableList<T>
     }
 
     @Override
-    public MutableList<T> with(T element)
-    {
-        this.add(element);
-        return this;
-    }
-
-    @Override
-    public MutableList<T> without(T element)
-    {
-        this.remove(element);
-        return this;
-    }
-
-    @Override
-    public MutableList<T> withAll(Iterable<? extends T> elements)
-    {
-        this.addAllIterable(elements);
-        return this;
-    }
-
-    @Override
-    public MutableList<T> withoutAll(Iterable<? extends T> elements)
-    {
-        this.removeAllIterable(elements);
-        return this;
-    }
-
-    @Override
     public ReverseIterable<T> asReversed()
     {
         return ReverseIterable.adapt(this);
