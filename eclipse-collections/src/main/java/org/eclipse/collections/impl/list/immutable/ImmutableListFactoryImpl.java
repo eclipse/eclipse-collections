@@ -229,7 +229,7 @@ public class ImmutableListFactoryImpl implements ImmutableListFactory
                 return this.of(items.get(0), items.get(1), items.get(2), items.get(3), items.get(4), items.get(5), items.get(6), items.get(7), items.get(8), items.get(9));
 
             default:
-                return ImmutableArrayList.newListWith((T[]) items.toArray());
+                return ImmutableArrayList.newList(items);
         }
     }
 
