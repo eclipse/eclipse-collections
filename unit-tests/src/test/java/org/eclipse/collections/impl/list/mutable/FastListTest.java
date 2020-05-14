@@ -24,6 +24,7 @@ import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
+import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.tuple.Twin;
@@ -1201,6 +1202,15 @@ public class FastListTest extends AbstractListTestCase
         Assert.assertEquals(
                 FastList.newListWith(42, 10, 11, 12),
                 FastList.newListWith(42).withAll(Interval.from(10).to(12).toList()));
+    }
+
+    @Test
+    public void unoptimizedListToImmutable()
+    {
+        FastList<String> list = FastList.newListWith(
+                "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15");
+        ImmutableList<String> immutableList = list.toImmutable();
+        Verify.assertIterablesEqual(immutableList, list);
     }
 
     @Test(expected = NoSuchElementException.class)
