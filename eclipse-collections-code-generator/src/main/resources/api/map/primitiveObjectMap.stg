@@ -32,33 +32,92 @@ import org.eclipse.collections.api.tuple.primitive.<name>ObjectPair;
  */
 public interface <name>ObjectMap\<V> extends PrimitiveObjectMap\<V>
 {
+    /**
+     * Retrieves the value associated with the key. If no mapping exists for the key,
+     * {@code null} is returned.
+     * @param key the key
+     * @return the value associated with the key, or the default value if no such
+     * mapping exists
+     */
     V get(<type> key);
 
+    /**
+     * Retrieves the value associated with the key if one exists; if it does not,
+     * returns the result of invoking the value supplier.
+     * @param key the key
+     * @param function the supplier that provides the value if no mapping exists for {@code key}
+     * @return the value associated with the key, if one exists, or the result of
+     * invoking {@code ifAbsent} if not
+     */
     V getIfAbsent(<type> key, Function0\<? extends V> ifAbsent);
 
+    /**
+     * Returns whether or not the key is present in the map.
+     * @param key the key
+     * @return if a mapping exists in this map for the key
+     */
     boolean containsKey(<type> key);
 
     @Override
     <name>ObjectMap\<V> tap(Procedure\<? super V> procedure);
 
+    /**
+     * Iterates through each key in the map, invoking the procedure for each.
+     * @param procedure the procedure to invoke for each key
+     */
     void forEachKey(<name>Procedure procedure);
 
+    /**
+     * Iterates through each key/value pair in the map, invoking the procedure for each.
+     * @param procedure the procedure to invoke for each key/value pair
+     */
     void forEachKeyValue(<name>ObjectProcedure\<? super V> procedure);
 
+    /**
+     * Return a copy of this map containing only the key/value pairs that match the predicate.
+     * @param predicate the predicate to determine which key/value pairs in this map should be
+     * included in the returned map
+     * @return a copy of this map with the matching key/value pairs
+     */
     <name>ObjectMap\<V> select(<name>ObjectPredicate\<? super V> predicate);
 
+    /**
+     * Return a copy of this map containing only the key/value pairs that do not match the
+     * predicate.
+     * @param predicate the predicate to determine which key/value pairs in this map should be
+     * excluded from the returned map
+     * @return a copy of this map without the matching key/value pairs
+     */
     <name>ObjectMap\<V> reject(<name>ObjectPredicate\<? super V> predicate);
 
+    /**
+     * Returns a copy of this map that is immutable (if this map is mutable) or
+     * itself if it is already immutable.
+     * @return an immutable map that is equivalent to this one
+     */
     Immutable<name>ObjectMap\<V> toImmutable();
 
+    /**
+     * Returns a set containing all the keys in this map. The set is backed by the
+     * map, so any modifications to the returned set will affect this map.
+     * @return a mutable set containing the keys in this map
+     */
     Mutable<name>Set keySet();
 
     /**
+     * Returns a view of the keys in this map. This iterable is backed by the map, so
+     * any modifications to the underlying map will be reflected in the keys returned
+     * by the iterable.
+     * @return a view of the keys in this map
      * @since 5.0
      */
     Lazy<name>Iterable keysView();
 
     /**
+     * Returns a view of the key/value pairs in this map. This iterable is backed by
+     * the map, so any modifications to the underlying map will be reflected in the
+     * pairs returned by the iterable.
+     * @return a view of the keys in this map
      * @since 5.0
      */
     RichIterable\<<name>ObjectPair\<V>\> keyValuesView();
