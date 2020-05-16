@@ -13,6 +13,8 @@ package org.eclipse.collections.impl.list.mutable.primitive;
 import java.lang.reflect.Field;
 import java.util.BitSet;
 
+import org.eclipse.collections.api.block.predicate.primitive.BooleanPredicate;
+import org.eclipse.collections.api.list.primitive.MutableBooleanList;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
 import org.junit.Test;
@@ -93,5 +95,29 @@ public class BooleanArrayListTest extends AbstractBooleanListTestCase
         Assert.assertEquals(BooleanArrayList.newListWith(true, true, false), arrayList1);
         Assert.assertEquals(BooleanArrayList.newListWith(true, true, false, true), arrayList2);
         Assert.assertEquals(BooleanArrayList.newListWith(true, true, false, true, false), arrayList3);
+    }
+
+    private static class LastValueBeforeFalseWasFalse
+            implements BooleanPredicate
+    {
+        private static final long serialVersionUID = 1L;
+        private boolean value = true;
+
+        @Override
+        public boolean accept(boolean currentValue)
+        {
+            boolean oldValue = this.value;
+            this.value = currentValue;
+            return !currentValue && !oldValue;
+        }
+    }
+
+    @Test
+    public void removeIfWithStatefulPredicate()
+    {
+        MutableBooleanList list = this.newWith(true, true, false, false, true, false, true, false, false, false);
+
+        Assert.assertTrue(list.removeIf(new LastValueBeforeFalseWasFalse()));
+        Assert.assertEquals(BooleanArrayList.newListWith(true, true, false, true, false, true, false), list);
     }
 }
