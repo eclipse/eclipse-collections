@@ -34,13 +34,13 @@ import org.eclipse.collections.api.tuple.primitive.<name1><name2>Pair;
  */
 public interface <name1><name2>Map extends <name2>ValuesMap
 {
-	/**
-	 * Retrieves the value associated with the key. If no mapping exists for the key,
-	 * the default value (usually {@code 0}) is returned.
-	 * @param key the key
-	 * @return the value associated with the key, or the default value if no such
-	 * mapping exists
-	 */
+    /**
+     * Retrieves the value associated with the key. If no mapping exists for the key,
+     * the default value (usually {@code 0}) is returned.
+     * @param key the key
+     * @return the value associated with the key, or the default value if no such
+     * mapping exists
+     */
     <type2> get(<type1> key);
 
     /**
@@ -86,6 +86,7 @@ public interface <name1><name2>Map extends <name2>ValuesMap
      * any modifications to the underlying map will be reflected in the keys returned
      * by the iterable.
      * @return a view of the keys in this map
+     * @since 5.0
      */
     Lazy<name1>Iterable keysView();
 
@@ -137,7 +138,7 @@ public interface <name1><name2>Map extends <name2>ValuesMap
     String toString();
 
     /**
-     * Returns a copy of this map that is immutable (if this map is mutable) or 
+     * Returns a copy of this map that is immutable (if this map is mutable) or
      * itself if it is already immutable.
      * @return an immutable map that is equivalent to this one
      */
@@ -145,7 +146,7 @@ public interface <name1><name2>Map extends <name2>ValuesMap
 
     /**
      * Returns a set containing all the keys in this map. The set is backed by the
-     * map, so any modifications to the returned set will affect this map. 
+     * map, so any modifications to the returned set will affect this map.
      * @return a mutable set containing the keys in this map
      */
     Mutable<name1>Set keySet();

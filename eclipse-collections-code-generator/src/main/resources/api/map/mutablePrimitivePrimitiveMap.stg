@@ -33,6 +33,12 @@ import org.eclipse.collections.api.tuple.primitive.<name1><name2>Pair;
  */
 public interface Mutable<name1><name2>Map extends <name1><name2>Map, Mutable<name2>ValuesMap
 {
+    /**
+     * Associates a value with the specified key. If a value is already associated
+     * with the key in this map, it will be replaced with {@code value}.
+     * @param key the key
+     * @param value the value to associate with {@code value}
+     */
     void put(<type1> key, <type2> value);
 
     /**
@@ -46,6 +52,12 @@ public interface Mutable<name1><name2>Map extends <name1><name2>Map, Mutable<nam
         this.put(keyValuePair.getOne(), keyValuePair.getTwo());
     }
 
+    /**
+     * Puts all of the key/value mappings from the specified map into this map. If this
+     * map already has a value associated with one of the keys in the map, it will be
+     * replaced with the value in {@code map}.
+     * @param map the map to copy into this map
+     */
     void putAll(<name1><name2>Map map);
 
     /**
@@ -56,20 +68,88 @@ public interface Mutable<name1><name2>Map extends <name1><name2>Map, Mutable<nam
      */
     void updateValues(<name1><name2>To<name2>Function function);
 
+    /**
+     * Removes the mapping associated with the key, if one exists, from the map.
+     * @param key the key to remove
+     * @see #remove(<type1>)
+     */
     void removeKey(<type1> key);
 
+    /**
+     * Removes the mapping associated with the key, if one exists, from the map.
+     * @param key the key to remove
+     * @see #removeKey(<type1>)
+     */
     void remove(<type1> key);
 
+    /**
+     * Removes the mapping associated with the key, if one exists, from the map,
+     * returning the previously associated value with the key. If no mapping
+     * existed for the key, the specified default value is returned.
+     * @param key the key to remove
+     * @param value the default value to return if no mapping for the key exists
+     * @return the value previously associated with the key, if one existed,
+     * or {@code value} if not
+     */
     <type2> removeKeyIfAbsent(<type1> key, <type2> value);
 
+    /**
+     * Retrieves the value associated with the key if one exists; if it does not,
+     * associates a value with the key.
+     * a new value with they key
+     * @param key the key
+     * @param value the value to associate with {@code key} if no such mapping exists
+     * @return the value associated with key, if one exists, or {@code value} if not
+     */
     <type2> getIfAbsentPut(<type1> key, <type2> value);
 
+    /**
+     * Retrieves the value associated with the key if one exists; if it does not,
+     * associates the result of invoking the value supplier with the key.
+     * @param key the key
+     * @param function the supplier that provides the value if no mapping exists for {@code key}
+     * @return the value associated with the key, if one exists, or the result of
+     * invoking {@code function} if not
+     */
     <type2> getIfAbsentPut(<type1> key, <name2>Function0 function);
 
+    /**
+     * Retrieves the value associated with the key if one exists; if it does not,
+     * associates the result of invoking the value function with the key.
+     * @param key the key
+     * @param function the function that provides the value if no mapping exists.
+     * The {@code key} will be passed as the argument to the function.
+     * @return the value associated with the key, if one exists, or the result of
+     * invoking {@code function} with {@code key} if not
+     */
     <type2> getIfAbsentPutWithKey(<type1> key, <name1>To<name2>Function function);
 
+    /**
+     * Retrieves the value associated with the key if one exists; if it does not,
+     * associates the result of invoking the value function with the key.
+     * @param key the key
+     * @param function the function that provides the value if no mapping exists.
+     * The specified {@code parameter} will be passed as the argument to the function.
+     * @param parameter the parameter to provide to {@code function} if no value
+     * exists for {@code key}
+     * @param \<P> the type of the value function's {@code parameter}
+     * @return the value associated with the key, if one exists, or the result of
+     * invoking {@code function} with {@code parameter} if not
+     */
     \<P> <type2> getIfAbsentPutWith(<type1> key, <name2>Function\<? super P> function, P parameter);
 
+    /**
+     * Updates or sets the value associated with the key by applying the function to the
+     * existing value, if one exists, or to the specified initial value if one does not.
+     * @param key the key
+     * @param initialValueIfAbsent the initial value to supply to the function if no
+     * mapping exists for the key
+     * @param function the function that returns the updated value based on the current
+     * value or the initial value, if no value exists
+     * @return the new value associated with the key, either as a result of applying
+     * {@code function} to the value already associated with the key or as a result of
+     * applying it to {@code initialValueIfAbsent} and associating the result with {@code key}
+     */
     <type2> updateValue(<type1> key, <type2> initialValueIfAbsent, <name2>To<name2>Function function);
     <if(!primitive2.booleanPrimitive)><(flipUniqueValues.(name2))(name1, name2)><endif>
 
@@ -79,12 +159,40 @@ public interface Mutable<name1><name2>Map extends <name1><name2>Map, Mutable<nam
     @Override
     Mutable<name1><name2>Map reject(<name1><name2>Predicate predicate);
 
+    /**
+     * Associates a value with the specified key. If a value is already associated
+     * with the key in this map, it will be replaced with {@code value}.
+     * @param key the key
+     * @param value the value to associate with {@code value}
+     * @return this map
+     * @see #put(<type1>, <type2>)
+     */
     Mutable<name1><name2>Map withKeyValue(<type1> key, <type2> value);
 
+    /**
+     * Removes the mapping associated with the key, if one exists, from this map.
+     * @param key the key to remove
+     * @return this map
+     * @see #remove(<type1>)
+     */
     Mutable<name1><name2>Map withoutKey(<type1> key);
 
+    /**
+     * Removes the mappings associated with all the keys, if they exist, from this map.
+     * @param keys the keys to remove
+     * @return this map
+     * @see #remove(<type1>)
+     */
     Mutable<name1><name2>Map withoutAllKeys(<name1>Iterable keys);
 
+    /**
+     * Puts all of the key/value mappings from the specified pairs into this map. If this
+     * map already has a value associated with one of the keys in the pairs, it will be
+     * replaced with the value in the pair.
+     * @param iterable the pairs to put into this map
+     * @return this map
+     * @see #putPair(<name1><name2>Pair)
+     */
     default Mutable<name1><name2>Map withAllKeyValues(Iterable\<<name1><name2>Pair> keyValuePairs)
     {
         for (<name1><name2>Pair keyValuePair : keyValuePairs)
@@ -94,8 +202,20 @@ public interface Mutable<name1><name2>Map extends <name1><name2>Map, Mutable<nam
         return this;
     }
 
+    /**
+     * Returns an unmodifiable view of this map, delegating all read-only operations to this
+     * map and throwing an {@link UnsupportedOperationException} for all mutating operations.
+     * This avoids the overhead of copying the map when calling {@link #toImmutable()} while
+     * still providing immutability.
+     * @return an unmodifiable view of this map
+     */
     Mutable<name1><name2>Map asUnmodifiable();
 
+    /**
+     * Returns a synchronized view of this map, delegating all operations to this map but
+     * ensuring only one caller has access to the map at a time.
+     * @return a synchronized view of this map
+     */
     Mutable<name1><name2>Map asSynchronized();
     <(arithmeticMethods.(type2))(type1, type2)>
 }
@@ -116,6 +236,15 @@ arithmeticMethods ::= [
 allMethods(type1, type2) ::= <<
 
 
+/**
+ * Increments and updates the value associated with the key, if a value exists, or
+ * sets the value to be the specified value if one does not.
+ * @param key the key
+ * @param toBeAdded the amount to increment the existing value, if one exists, or
+ * to use as the initial value if one does not
+ * @return the value after incrementing {@code toBeAdded} to the existing value
+ * associated with {@code key} or {@code toBeAdded} if one does not
+ */
 <type2> addToValue(<type1> key, <type2> toBeAdded);
 >>
 
