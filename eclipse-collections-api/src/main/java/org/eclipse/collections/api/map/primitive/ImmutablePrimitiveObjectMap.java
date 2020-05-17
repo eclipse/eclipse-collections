@@ -48,10 +48,35 @@ import org.eclipse.collections.api.tuple.Pair;
 public interface ImmutablePrimitiveObjectMap<V> extends PrimitiveObjectMap<V>
 {
     @Override
-    <K, VV> ImmutableMap<K, VV> aggregateInPlaceBy(Function<? super V, ? extends K> groupBy, Function0<? extends VV> zeroValueFactory, Procedure2<? super VV, ? super V> mutatingAggregator);
+    default <K, VV> ImmutableMap<K, VV> aggregateInPlaceBy(
+            Function<? super V, ? extends K> groupBy,
+            Function0<? extends VV> zeroValueFactory,
+            Procedure2<? super VV, ? super V> mutatingAggregator)
+    {
+        MutableMap<K, VV> map = Maps.mutable.empty();
+        this.forEach(each ->
+        {
+            K key = groupBy.valueOf(each);
+            VV value = map.getIfAbsentPut(key, zeroValueFactory);
+            mutatingAggregator.value(value, each);
+        });
+        return map.toImmutable();
+    }
 
     @Override
-    <K, VV> ImmutableMap<K, VV> aggregateBy(Function<? super V, ? extends K> groupBy, Function0<? extends VV> zeroValueFactory, Function2<? super VV, ? super V, ? extends VV> nonMutatingAggregator);
+    default <K, VV> ImmutableMap<K, VV> aggregateBy(
+            Function<? super V, ? extends K> groupBy,
+            Function0<? extends VV> zeroValueFactory,
+            Function2<? super VV, ? super V, ? extends VV> nonMutatingAggregator)
+    {
+        MutableMap<K, VV> map = Maps.mutable.empty();
+        this.forEach(each ->
+        {
+            K key = groupBy.valueOf(each);
+            map.updateValueWith(key, zeroValueFactory, nonMutatingAggregator, each);
+        });
+        return map.toImmutable();
+    }
 
     @Override
     <VV> ImmutableBagMultimap<VV, V> groupByEach(Function<? super V, ? extends Iterable<VV>> function);

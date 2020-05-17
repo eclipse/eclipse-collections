@@ -184,16 +184,35 @@ public interface MutableMap<K, V>
     }
 
     @Override
-    <K2, V2> MutableMap<K2, V2> aggregateInPlaceBy(
-            Function<? super V, ? extends K2> groupBy,
-            Function0<? extends V2> zeroValueFactory,
-            Procedure2<? super V2, ? super V> mutatingAggregator);
+    default <KK, VV> MutableMap<KK, VV> aggregateInPlaceBy(
+            Function<? super V, ? extends KK> groupBy,
+            Function0<? extends VV> zeroValueFactory,
+            Procedure2<? super VV, ? super V> mutatingAggregator)
+    {
+        MutableMap<KK, VV> map = Maps.mutable.empty();
+        this.forEach(each ->
+        {
+            KK key = groupBy.valueOf(each);
+            VV value = map.getIfAbsentPut(key, zeroValueFactory);
+            mutatingAggregator.value(value, each);
+        });
+        return map;
+    }
 
     @Override
-    <K2, V2> MutableMap<K2, V2> aggregateBy(
-            Function<? super V, ? extends K2> groupBy,
-            Function0<? extends V2> zeroValueFactory,
-            Function2<? super V2, ? super V, ? extends V2> nonMutatingAggregator);
+    default <KK, VV> MutableMap<KK, VV> aggregateBy(
+            Function<? super V, ? extends KK> groupBy,
+            Function0<? extends VV> zeroValueFactory,
+            Function2<? super VV, ? super V, ? extends VV> nonMutatingAggregator)
+    {
+        MutableMap<KK, VV> map = Maps.mutable.empty();
+        this.forEach(each ->
+        {
+            KK key = groupBy.valueOf(each);
+            map.updateValueWith(key, zeroValueFactory, nonMutatingAggregator, each);
+        });
+        return map;
+    }
 
     @Override
     MutableMap<V, K> flipUniqueValues();
