@@ -351,18 +351,29 @@ public final class BooleanArrayList
     @Override
     public boolean removeIf(BooleanPredicate predicate)
     {
-        boolean changed = false;
+        int currentFilledIndex = 0;
         for (int i = 0; i < this.size; i++)
         {
             boolean item = this.items.get(i);
-            if (predicate.accept(item))
+            if (!predicate.accept(item))
             {
-                this.removeAtIndex(i);
-                i--;
-                changed = true;
+                // keep it
+                if (currentFilledIndex != i)
+                {
+                    this.items.set(currentFilledIndex, item);
+                }
+                currentFilledIndex++;
             }
         }
+        boolean changed = currentFilledIndex < this.size;
+        this.wipeAndResetTheEnd(currentFilledIndex);
         return changed;
+    }
+
+    private void wipeAndResetTheEnd(int newCurrentFilledIndex)
+    {
+        this.items.clear(newCurrentFilledIndex, this.size);
+        this.size = newCurrentFilledIndex;
     }
 
     @Override

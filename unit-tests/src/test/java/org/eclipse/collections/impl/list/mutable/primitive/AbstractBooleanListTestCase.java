@@ -217,9 +217,15 @@ public abstract class AbstractBooleanListTestCase extends AbstractMutableBoolean
     public void removeIf()
     {
         Assert.assertFalse(this.newWith(true, true).removeIf(b -> !b));
-        MutableBooleanList list = this.classUnderTest();
-        Assert.assertTrue(list.removeIf(b -> b));
-        Assert.assertEquals(BooleanArrayList.newListWith(false), list);
+
+        MutableBooleanList list1 = this.classUnderTest();
+        Assert.assertTrue(list1.removeIf(b -> b));
+        Assert.assertEquals(BooleanArrayList.newListWith(false), list1);
+
+        MutableBooleanList list2 = this.classUnderTest();
+        Assert.assertTrue(list2.removeIf(b -> !b));
+
+        Assert.assertEquals(BooleanArrayList.newListWith(true, true), list2);
     }
 
     @Test
