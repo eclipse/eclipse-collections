@@ -38,6 +38,9 @@ public interface Mutable<name>ValuesMap extends <name>ValuesMap
     @Override
     \<V> MutableBag\<V> collect(<name>ToObjectFunction\<? extends V> function);
 
+    /**
+     * Removes all entries from this map.
+     */
     void clear();
 
     @Override

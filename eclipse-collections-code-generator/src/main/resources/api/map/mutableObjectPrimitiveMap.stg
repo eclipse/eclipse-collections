@@ -113,7 +113,7 @@ public interface MutableObject<name>Map\<K> extends Object<name>Map\<K>
 
     /**
      * Retrieves the value associated with the key if one exists; if it does not,
-     * associates the result of invoking the value supplier with the key.
+     * invokes the supplier and associates the result with the key.
      * @param key the key
      * @param function the supplier that provides the value if no mapping exists for {@code key}
      * @return the value associated with the key, if one exists, or the result of
@@ -134,7 +134,7 @@ public interface MutableObject<name>Map\<K> extends Object<name>Map\<K>
 
     /**
      * Retrieves the value associated with the key if one exists; if it does not,
-     * associates the result of invoking the value function with the key.
+     * invokes the value function with the parameter and associates the result with the key.
      * @param key the key
      * @param function the function that provides the value if no mapping exists.
      * The specified {@code parameter} will be passed as the argument to the function.
