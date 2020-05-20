@@ -201,4 +201,34 @@ public class ComparatorsSerializationTest
                         + "TGphdmEvdXRpbC9Db21wYXJhdG9yO3hwcA==",
                 Comparators.bySecondOfPair(null));
     }
+
+    @Test
+    public void compareByFunctionNullsLast()
+    {
+        Verify.assertSerializedForm(
+                1L,
+                "rO0ABXNyAEBvcmcuZWNsaXBzZS5jb2xsZWN0aW9ucy5pbXBsLmJsb2NrLmNvbXBhcmF0b3IuRnVu\n"
+                        + "Y3Rpb25Db21wYXJhdG9yAAAAAAAAAAECAAJMAApjb21wYXJhdG9ydAAWTGphdmEvdXRpbC9Db21w\n"
+                        + "YXJhdG9yO0wACGZ1bmN0aW9udAA1TG9yZy9lY2xpcHNlL2NvbGxlY3Rpb25zL2FwaS9ibG9jay9m\n"
+                        + "dW5jdGlvbi9GdW5jdGlvbjt4cHNyACRqYXZhLnV0aWwuQ29tcGFyYXRvcnMkTnVsbENvbXBhcmF0\n"
+                        + "b3KW851NtwreSAIAAloACW51bGxGaXJzdEwABHJlYWxxAH4AAXhwAH5yACxqYXZhLnV0aWwuQ29t\n"
+                        + "cGFyYXRvcnMkTmF0dXJhbE9yZGVyQ29tcGFyYXRvcgAAAAAAAAAAEgAAeHIADmphdmEubGFuZy5F\n"
+                        + "bnVtAAAAAAAAAAASAAB4cHQACElOU1RBTkNFcA==",
+                Comparators.byFunctionNullsLast(null));
+    }
+
+    @Test
+    public void compareByFunctionNullsFirst()
+    {
+        Verify.assertSerializedForm(
+                1L,
+                "rO0ABXNyAEBvcmcuZWNsaXBzZS5jb2xsZWN0aW9ucy5pbXBsLmJsb2NrLmNvbXBhcmF0b3IuRnVu\n"
+                        + "Y3Rpb25Db21wYXJhdG9yAAAAAAAAAAECAAJMAApjb21wYXJhdG9ydAAWTGphdmEvdXRpbC9Db21w\n"
+                        + "YXJhdG9yO0wACGZ1bmN0aW9udAA1TG9yZy9lY2xpcHNlL2NvbGxlY3Rpb25zL2FwaS9ibG9jay9m\n"
+                        + "dW5jdGlvbi9GdW5jdGlvbjt4cHNyACRqYXZhLnV0aWwuQ29tcGFyYXRvcnMkTnVsbENvbXBhcmF0\n"
+                        + "b3KW851NtwreSAIAAloACW51bGxGaXJzdEwABHJlYWxxAH4AAXhwAX5yACxqYXZhLnV0aWwuQ29t\n"
+                        + "cGFyYXRvcnMkTmF0dXJhbE9yZGVyQ29tcGFyYXRvcgAAAAAAAAAAEgAAeHIADmphdmEubGFuZy5F\n"
+                        + "bnVtAAAAAAAAAAASAAB4cHQACElOU1RBTkNFcA==",
+                Comparators.byFunctionNullsFirst(null));
+    }
 }

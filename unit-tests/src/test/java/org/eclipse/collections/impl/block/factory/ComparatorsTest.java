@@ -29,6 +29,7 @@ import org.eclipse.collections.api.block.function.primitive.FloatFunction;
 import org.eclipse.collections.api.block.function.primitive.IntFunction;
 import org.eclipse.collections.api.block.function.primitive.LongFunction;
 import org.eclipse.collections.api.block.function.primitive.ShortFunction;
+import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.list.Interval;
@@ -194,6 +195,44 @@ public class ComparatorsTest
         Verify.assertNegative(personComparator.compare(raab, white));
         Verify.assertPositive(personComparator.compare(white, raab));
         Verify.assertZero(personComparator.compare(raab, raab));
+    }
+
+    @Test
+    public void fromFunctionsSafeNullsHigh()
+    {
+        Person bob = new Person("Bob", null, 0);
+        Person dan = new Person("Dan", "Witwicky", 0);
+        Person alice = new Person("Alice", "Liddell", 0);
+        Person carol = new Person("Carol", null, 0);
+
+        Comparator<Person> personComparator = Comparators.byFunctionNullsLast(Person::getLastName);
+        Verify.assertNegative(personComparator.compare(alice, bob));
+        Verify.assertPositive(personComparator.compare(carol, alice));
+        Verify.assertNegative(personComparator.compare(alice, dan));
+        Verify.assertZero(personComparator.compare(bob, carol));
+
+        MutableList<Person> people = Lists.mutable.of(bob, dan, carol, alice);
+        people.sortThis(personComparator);
+        Assert.assertEquals(Lists.immutable.of(alice, dan, bob, carol), people);
+    }
+
+    @Test
+    public void fromFunctionsSafeNullsLow()
+    {
+        Person bob = new Person("Bob", null, 0);
+        Person dan = new Person("Dan", "Witwicky", 0);
+        Person alice = new Person("Alice", "Liddell", 0);
+        Person carol = new Person("Carol", null, 0);
+
+        Comparator<Person> personComparator = Comparators.byFunctionNullsFirst(Person::getLastName);
+        Verify.assertPositive(personComparator.compare(alice, bob));
+        Verify.assertNegative(personComparator.compare(carol, alice));
+        Verify.assertNegative(personComparator.compare(alice, dan));
+        Verify.assertZero(personComparator.compare(bob, carol));
+
+        MutableList<Person> people = Lists.mutable.of(bob, dan, carol, alice);
+        people.sortThis(personComparator);
+        Assert.assertEquals(Lists.immutable.of(bob, carol, alice, dan), people);
     }
 
     @Test
