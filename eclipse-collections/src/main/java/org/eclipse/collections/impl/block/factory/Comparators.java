@@ -360,6 +360,20 @@ public final class Comparators
         return Comparators.byFunction(function, naturalOrder());
     }
 
+    public static <T, V extends Comparable<? super V>> SerializableComparator<T> byFunctionNullsLast(Function<? super T, ? extends V> function)
+    {
+        return Comparators.byFunction(
+                function,
+                Comparator.nullsLast(Comparator.naturalOrder()));
+    }
+
+    public static <T, V extends Comparable<? super V>> SerializableComparator<T> byFunctionNullsFirst(Function<? super T, ? extends V> function)
+    {
+        return Comparators.byFunction(
+                function,
+                Comparator.nullsFirst(Comparator.naturalOrder()));
+    }
+
     public static <T> SerializableComparator<T> byBooleanFunction(BooleanFunction<T> function)
     {
         return Functions.toBooleanComparator(function);
