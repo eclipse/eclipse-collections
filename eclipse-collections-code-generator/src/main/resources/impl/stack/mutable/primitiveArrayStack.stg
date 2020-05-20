@@ -28,6 +28,7 @@ import org.eclipse.collections.api.iterator.<name>Iterator;
 import org.eclipse.collections.api.list.primitive.<name>List;
 import org.eclipse.collections.api.list.primitive.Mutable<name>List;
 import org.eclipse.collections.api.stack.MutableStack;
+import org.eclipse.collections.api.stack.primitive.<name>Stack;
 import org.eclipse.collections.api.stack.primitive.Immutable<name>Stack;
 import org.eclipse.collections.api.stack.primitive.Mutable<name>Stack;
 import org.eclipse.collections.impl.factory.primitive.<name>Stacks;
@@ -151,12 +152,7 @@ public class <name>ArrayStack extends Abstract<name>Stack
         this.delegate.clear();
     }
 
-    @Override
-    public Mutable<name>List toSortedList()
-    {
-        return <name>ArrayList.newList(this).sortThis();
-    }
-
+<(sortMethods.(type))()>
     @Override
     public Mutable<name>Stack asUnmodifiable()
     {
@@ -186,6 +182,44 @@ public class <name>ArrayStack extends Abstract<name>Stack
     }
 
     @Override
+    public boolean equals(Object otherStack)
+    {
+        if (otherStack == this)
+        {
+            return true;
+        }
+        if (!(otherStack instanceof <name>Stack))
+        {
+            return false;
+        }
+        <name>Stack stack = (<name>Stack) otherStack;
+        if (this.size() != stack.size())
+        {
+            return false;
+        }
+        for (int i = 0; i \< this.size(); i++)
+        {
+            if (<(notEquals.(type))("this.peekAt(i)", "stack.peekAt(i)")>)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        int hashCode = 1;
+        for (int i = this.size() - 1; i >= 0; i--)
+        {
+            <type> item = this.delegate.get(i);
+            hashCode = 31 * hashCode + <(hashCode.(type))("item")>;
+        }
+        return hashCode;
+    }
+
+    @Override
     public void writeExternal(ObjectOutput out) throws IOException
     {
         out.writeInt(this.size());
@@ -211,3 +245,25 @@ public class <name>ArrayStack extends Abstract<name>Stack
 }
 
 >>
+
+sortMethods ::= [
+    "byte": "allMethods",
+    "short": "allMethods",
+    "char": "allMethods",
+    "int": "allMethods",
+    "long": "allMethods",
+    "float": "allMethods",
+    "double": "allMethods",
+    "boolean": "noMethods"
+    ]
+
+allMethods() ::= <<
+    @Override
+    public Mutable<name>List toSortedList()
+    {
+        return <name>ArrayList.newList(this).sortThis();
+    }
+
+>>
+
+noMethods() ::= ""
