@@ -790,12 +790,7 @@ public final class IntInterval
     @Override
     public long sum()
     {
-        long sum = 0L;
-        for (IntIterator intIterator = this.intIterator(); intIterator.hasNext(); )
-        {
-            sum += intIterator.next();
-        }
-        return sum;
+        return (long) this.size() * ((long) this.getFirst() + (long) this.getLast()) / 2L;
     }
 
     @Override
@@ -833,21 +828,14 @@ public final class IntInterval
     @Override
     public double average()
     {
-        return (double) this.sum() / (double) this.size();
+        // for an arithmetic sequence its median and its average are the same
+        return this.median();
     }
 
     @Override
     public double median()
     {
-        int[] sortedArray = this.toSortedArray();
-        int middleIndex = sortedArray.length >> 1;
-        if (sortedArray.length > 1 && (sortedArray.length & 1) == 0)
-        {
-            int first = sortedArray[middleIndex];
-            int second = sortedArray[middleIndex - 1];
-            return ((double) first + (double) second) / 2.0;
-        }
-        return (double) sortedArray[middleIndex];
+        return ((double) this.getFirst() + (double) this.getLast()) / 2.0;
     }
 
     @Override
