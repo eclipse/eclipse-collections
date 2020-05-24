@@ -560,19 +560,40 @@ public class IntIntervalTest
     public void sum()
     {
         Assert.assertEquals(10L, IntInterval.oneTo(4).sum());
+        Assert.assertEquals(5L, IntInterval.oneToBy(4, 3).sum());
+        Assert.assertEquals(4L, IntInterval.oneToBy(4, 2).sum());
+        Assert.assertEquals(-10L, IntInterval.fromTo(-1, -4).sum());
+        Assert.assertEquals(-15L, IntInterval.fromToBy(-2, -10, -3).sum());
+
+        Assert.assertEquals(-7L, IntInterval.fromToBy(-10, 10, 3).sum());
+
+        Assert.assertEquals(
+                3L * ((long) Integer.MAX_VALUE * 2L - 2L) / 2L,
+                IntInterval.fromTo(Integer.MAX_VALUE - 2, Integer.MAX_VALUE).sum());
     }
 
     @Test
     public void average()
     {
         Assert.assertEquals(2.5, IntInterval.oneTo(4).average(), 0.0);
+        Assert.assertEquals(5.0, IntInterval.oneToBy(9, 2).average(), 0.0);
+        Assert.assertEquals(5.0, IntInterval.oneToBy(10, 2).average(), 0.0);
+        Assert.assertEquals(-5.0, IntInterval.fromToBy(-1, -9, -2).average(), 0.0);
+
+        Assert.assertEquals((double) Integer.MAX_VALUE - 1.5,
+                IntInterval.fromTo(Integer.MAX_VALUE - 3, Integer.MAX_VALUE).average(), 0.0);
     }
 
     @Test
     public void median()
     {
         Assert.assertEquals(2.5, IntInterval.oneTo(4).median(), 0.0);
-        Assert.assertEquals(3.0, IntInterval.oneTo(5).median(), 0.0);
+        Assert.assertEquals(5.0, IntInterval.oneToBy(9, 2).median(), 0.0);
+        Assert.assertEquals(5.0, IntInterval.oneToBy(10, 2).median(), 0.0);
+        Assert.assertEquals(-5.0, IntInterval.fromToBy(-1, -9, -2).median(), 0.0);
+
+        Assert.assertEquals((double) Integer.MAX_VALUE - 1.5,
+                IntInterval.fromTo(Integer.MAX_VALUE - 3, Integer.MAX_VALUE).median(), 0.0);
     }
 
     @Test
