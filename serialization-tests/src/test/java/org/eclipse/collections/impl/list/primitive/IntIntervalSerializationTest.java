@@ -15,13 +15,20 @@ import org.junit.Test;
 
 public class IntIntervalSerializationTest
 {
+    public static final String EXPECTED_BASE_64_FORM =
+            "rO0ABXNyADdvcmcuZWNsaXBzZS5jb2xsZWN0aW9ucy5pbXBsLmxpc3QucHJpbWl0aXZlLkludElu\n"
+                    + "dGVydmFsAAAAAAAAAAECAANJAARmcm9tSQAEc3RlcEkAAnRveHAAAAAAAAAAAQAAAAo=";
+
     @Test
     public void serializedForm()
     {
-        Verify.assertSerializedForm(
-                1L,
-                "rO0ABXNyADdvcmcuZWNsaXBzZS5jb2xsZWN0aW9ucy5pbXBsLmxpc3QucHJpbWl0aXZlLkludElu\n"
-                        + "dGVydmFsAAAAAAAAAAECAANJAARmcm9tSQAEc3RlcEkAAnRveHAAAAAAAAAAAQAAAAA=",
-                IntInterval.fromToBy(0, 0, 1));
+        Verify.assertSerializedForm(1L, EXPECTED_BASE_64_FORM, IntInterval.fromToBy(0, 10, 1));
+    }
+
+    // Testing deserialization because readObject() is overridden in IntInterval
+    @Test
+    public void deserialization()
+    {
+        Verify.assertDeserializedForm(EXPECTED_BASE_64_FORM, IntInterval.fromToBy(0, 10, 1));
     }
 }

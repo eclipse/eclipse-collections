@@ -10,6 +10,8 @@
 
 package org.eclipse.collections.impl.list;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Collection;
@@ -61,12 +63,14 @@ public final class Interval
     private final int from;
     private final int to;
     private final int step;
+    private transient int size;
 
     private Interval(int from, int to, int step)
     {
         this.from = from;
         this.to = to;
         this.step = step;
+        this.size = IntervalUtils.intSize(this.from, this.to, this.step);
     }
 
     /**
@@ -757,12 +761,12 @@ public final class Interval
     }
 
     /**
-     * Calculates and returns the size of the interval.
+     * Returns the size of the interval.
      */
     @Override
     public int size()
     {
-        return IntervalUtils.intSize(this.from, this.to, this.step);
+        return this.size;
     }
 
     @Override
@@ -774,7 +778,7 @@ public final class Interval
     }
 
     /**
-     * Converts the interval to an Integer array
+     * Converts the interval to an Integer array.
      */
     public int[] toIntArray()
     {
@@ -1058,5 +1062,12 @@ public final class Interval
     public LazyIterable<Integer> distinct()
     {
         return this;
+    }
+
+    private void readObject(ObjectInputStream ois)
+            throws IOException, ClassNotFoundException
+    {
+        ois.defaultReadObject();
+        this.size = IntervalUtils.intSize(this.from, this.to, this.step);
     }
 }

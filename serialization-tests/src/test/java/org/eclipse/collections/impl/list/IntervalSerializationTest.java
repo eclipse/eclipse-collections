@@ -15,13 +15,20 @@ import org.junit.Test;
 
 public class IntervalSerializationTest
 {
+    public static final String EXPECTED_BASE_64_FORM =
+            "rO0ABXNyACpvcmcuZWNsaXBzZS5jb2xsZWN0aW9ucy5pbXBsLmxpc3QuSW50ZXJ2YWwAAAAAAAAA\n"
+                    + "AQIAA0kABGZyb21JAARzdGVwSQACdG94cAAAAAAAAAABAAAACg==";
+
     @Test
     public void serializedForm()
     {
-        Verify.assertSerializedForm(
-                1L,
-                "rO0ABXNyACpvcmcuZWNsaXBzZS5jb2xsZWN0aW9ucy5pbXBsLmxpc3QuSW50ZXJ2YWwAAAAAAAAA\n"
-                        + "AQIAA0kABGZyb21JAARzdGVwSQACdG94cAAAAAAAAAABAAAAAA==",
-                Interval.fromToBy(0, 0, 1));
+        Verify.assertSerializedForm(1L, EXPECTED_BASE_64_FORM, Interval.fromToBy(0, 10, 1));
+    }
+
+    // Testing deserialization because readObject() is overridden in Interval
+    @Test
+    public void deserialization()
+    {
+        Verify.assertDeserializedForm(EXPECTED_BASE_64_FORM, Interval.fromToBy(0, 10, 1));
     }
 }
