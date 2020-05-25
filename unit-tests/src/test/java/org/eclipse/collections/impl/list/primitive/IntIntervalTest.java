@@ -351,10 +351,11 @@ public class IntIntervalTest
         Verify.assertSize(200_000_001, IntInterval.fromTo(1_000_000_000, -1_000_000_000).by(-10));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void subList()
     {
-        this.intInterval.subList(0, 1);
+        IntInterval interval = IntInterval.fromToBy(1, 10, 2);
+        Assert.assertEquals(IntLists.immutable.with(3, 5, 7), interval.subList(1, 4));
     }
 
     @Test
