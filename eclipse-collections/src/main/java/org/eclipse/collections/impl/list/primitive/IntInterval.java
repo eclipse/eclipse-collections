@@ -11,6 +11,7 @@
 package org.eclipse.collections.impl.list.primitive;
 
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -63,12 +64,14 @@ public final class IntInterval
     private final int from;
     private final int to;
     private final int step;
+    private transient int size;
 
     private IntInterval(int from, int to, int step)
     {
         this.from = from;
         this.to = to;
         this.step = step;
+        this.size = IntervalUtils.intSize(this.from, this.to, this.step);
     }
 
     /**
@@ -502,12 +505,12 @@ public final class IntInterval
     }
 
     /**
-     * Calculates and returns the size of the interval.
+     * Returns the size of the interval.
      */
     @Override
     public int size()
     {
-        return IntervalUtils.intSize(this.from, this.to, this.step);
+        return this.size;
     }
 
     @Override
@@ -1050,5 +1053,12 @@ public final class IntInterval
             }
             return this.current >= this.to;
         }
+    }
+
+    private void readObject(ObjectInputStream ois)
+            throws IOException, ClassNotFoundException
+    {
+        ois.defaultReadObject();
+        this.size = IntervalUtils.intSize(this.from, this.to, this.step);
     }
 }
