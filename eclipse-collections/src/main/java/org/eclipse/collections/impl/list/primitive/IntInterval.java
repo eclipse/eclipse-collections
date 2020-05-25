@@ -501,7 +501,7 @@ public final class IntInterval
     @Override
     public ImmutableIntList subList(int fromIndex, int toIndex)
     {
-        throw new UnsupportedOperationException("subList not yet implemented!");
+        return IntInterval.fromToBy(this.get(fromIndex), this.get(toIndex - 1), this.step);
     }
 
     /**
