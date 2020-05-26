@@ -323,6 +323,12 @@ public Mutable<name>List sortThis()
 }
 
 @Override
+public Mutable<name>List shuffleThis()
+{
+    throw new UnsupportedOperationException("Cannot call shuffleThis() on " + this.getClass().getSimpleName());
+}
+
+@Override
 public int binarySearch(<type> value)
 {
     return this.getMutable<name>List().binarySearch(value);

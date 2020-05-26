@@ -236,6 +236,13 @@ public class Unmodifiable<name>ListTest extends Abstract<name>ListTestCase
     }
 
     @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void shuffleThis()
+    {
+        new Unmodifiable<name>List(new <name>ArrayList()).shuffleThis();
+    }
+
+    @Override
     @Test
     public void contains()
     {

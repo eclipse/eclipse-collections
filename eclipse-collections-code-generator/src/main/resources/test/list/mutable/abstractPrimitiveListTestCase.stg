@@ -19,6 +19,7 @@ package org.eclipse.collections.impl.list.mutable.primitive;
 
 import org.eclipse.collections.api.iterator.<name>Iterator;
 import org.eclipse.collections.api.list.MutableList;
+import org.eclipse.collections.api.list.primitive.<name>List;
 import org.eclipse.collections.api.list.primitive.Immutable<name>List;
 import org.eclipse.collections.api.list.primitive.Mutable<name>List;
 import org.eclipse.collections.api.set.MutableSet;
@@ -318,6 +319,24 @@ public abstract class Abstract<name>ListTestCase extends AbstractMutable<name>Co
         list.add(<(literal.(type))("1")>);
         list.sortThis();
         Assert.assertEquals(<(literal.(type))("1")>, list.get(0)<(wideDelta.(type))>);
+    }
+
+    @Test
+    public void shuffleThis()
+    {
+        <name>List checkList = this.newWith(<["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15"]:(literal.(type))(); separator=", ">).toImmutable();
+
+        Mutable<name>List list = checkList.toList();
+
+        <name>List shuffleOne = list.shuffleThis().toImmutable();
+        <name>List shuffleTwo = list.shuffleThis().toImmutable();
+
+        Assert.assertNotEquals(checkList, shuffleOne);
+        Assert.assertNotEquals(checkList, shuffleTwo);
+        Assert.assertNotEquals(shuffleOne, shuffleTwo);
+
+        Assert.assertEquals(checkList, shuffleOne.toSortedList());
+        Assert.assertEquals(checkList, shuffleTwo.toSortedList());
     }
 
     @Test

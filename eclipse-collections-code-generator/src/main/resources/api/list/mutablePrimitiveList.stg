@@ -14,6 +14,7 @@ body(type, name) ::= <<
 
 package org.eclipse.collections.api.list.primitive;
 
+<(auxiliaryImports.(type))(type)>
 import org.eclipse.collections.api.<name>Iterable;
 import org.eclipse.collections.api.block.function.primitive.<name>IntToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
@@ -151,6 +152,52 @@ allMethods(type) ::= <<
  */
 Mutable<name>List sortThis();
 
+/**
+ * Randomly permutes this list mutating its contents and returns the same list (this).
+ *
+ * Uses {@code java.util.Random} as the source of randomness.
+ */
+default Mutable<name>List shuffleThis()
+{
+    return this.shuffleThis(new Random());
+}
+
+/**
+ * Randomly permutes this list mutating its contents and returns the same list (this).
+ *
+ * Implements the Fisher-Yates shuffle algorithm using the provided source of randomness.
+ */
+default Mutable<name>List shuffleThis(Random rnd)
+{
+    for (int j = this.size() - 1; j > 0; j--)
+    {
+        int k = rnd.nextInt(j + 1);
+        <type> selected  = this.get(j);
+        this.set(j, this.get(k));
+        this.set(k, selected);
+    }
+
+    return this;
+}
+
 >>
 
 noMethods(type) ::= ""
+
+auxiliaryImports ::= [
+    "byte": "allAuxiliaryImports",
+    "short": "allAuxiliaryImports",
+    "char": "allAuxiliaryImports",
+    "int": "allAuxiliaryImports",
+    "long": "allAuxiliaryImports",
+    "float": "allAuxiliaryImports",
+    "double": "allAuxiliaryImports",
+    "boolean": "noAuxiliaryImports"
+]
+
+allAuxiliaryImports(type) ::= <<
+import java.util.Random;
+
+>>
+
+noAuxiliaryImports(type) ::= ""
