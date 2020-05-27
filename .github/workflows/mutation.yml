@@ -1,0 +1,49 @@
+# This workflow will build a Java project with Maven
+# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
+
+name: Mutation tests
+
+on:
+  schedule:
+    - cron: '0 13 * * 5'
+
+jobs:
+  applications:
+    name: Mutation Test ${{ matrix.java-version }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        java-version: [8]
+
+    runs-on: ${{ matrix.os }}
+
+    env:
+      JAVA_VERSION: ${{ matrix.java-version }}
+
+    steps:
+      - name: Git Checkout
+        uses: actions/checkout@v2
+      - name: Set JDK ${{ matrix.java-version }}
+        uses: actions/setup-java@v1
+        with:
+          java-version: ${{ matrix.java-version }}
+      - name: Enable Maven Cache
+        uses: actions/cache@v1
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+      - name: Maven Install
+        run: mvn clean install -DskipTests=true
+        env:
+          MAVEN_OPTS: "-Xmx1g"
+      - name: Mutation Test
+        run: mvn eu.stamp-project:pitmp-maven-plugin:run -DwithHistory -DtimeoutConstant=8000
+        env:
+          MAVEN_OPTS: "-Xmx1g"
+      - name: Archive pitest reports
+        uses: actions/upload-artifact@v1
+        with:
+          name: pit-reports
+          path: unit-tests/target/pit-reports
