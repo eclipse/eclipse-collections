@@ -448,6 +448,16 @@ public Mutable<name>List sortThis()
 }
 
 @Override
+public Mutable<name>List shuffleThis()
+{
+    synchronized (this.getLock())
+    {
+        this.getMutable<name>List().shuffleThis();
+    }
+    return this;
+}
+
+@Override
 public int binarySearch(<type> value)
 {
     synchronized (this.getLock())
