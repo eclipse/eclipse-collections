@@ -18,8 +18,16 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Optional;
 
+import org.eclipse.collections.api.BooleanIterable;
+import org.eclipse.collections.api.ByteIterable;
+import org.eclipse.collections.api.CharIterable;
+import org.eclipse.collections.api.DoubleIterable;
+import org.eclipse.collections.api.FloatIterable;
+import org.eclipse.collections.api.IntIterable;
 import org.eclipse.collections.api.LazyIterable;
+import org.eclipse.collections.api.LongIterable;
 import org.eclipse.collections.api.RichIterable;
+import org.eclipse.collections.api.ShortIterable;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
 import org.eclipse.collections.api.bimap.MutableBiMap;
@@ -321,6 +329,16 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
     }
 
     @Override
+    public <R extends MutableBooleanCollection> R flatCollectBoolean(
+            Function<? super T, ? extends BooleanIterable> function, R target)
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.flatCollectBoolean(function, target);
+        }
+    }
+
+    @Override
     public MutableByteStack collectByte(ByteFunction<? super T> byteFunction)
     {
         synchronized (this.lock)
@@ -335,6 +353,16 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         synchronized (this.lock)
         {
             return this.delegate.collectByte(byteFunction, target);
+        }
+    }
+
+    @Override
+    public <R extends MutableByteCollection> R flatCollectByte(
+            Function<? super T, ? extends ByteIterable> function, R target)
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.flatCollectByte(function, target);
         }
     }
 
@@ -357,6 +385,16 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
     }
 
     @Override
+    public <R extends MutableCharCollection> R flatCollectChar(
+            Function<? super T, ? extends CharIterable> function, R target)
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.flatCollectChar(function, target);
+        }
+    }
+
+    @Override
     public MutableDoubleStack collectDouble(DoubleFunction<? super T> doubleFunction)
     {
         synchronized (this.lock)
@@ -371,6 +409,16 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         synchronized (this.lock)
         {
             return this.delegate.collectDouble(doubleFunction, target);
+        }
+    }
+
+    @Override
+    public <R extends MutableDoubleCollection> R flatCollectDouble(
+            Function<? super T, ? extends DoubleIterable> function, R target)
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.flatCollectDouble(function, target);
         }
     }
 
@@ -393,6 +441,16 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
     }
 
     @Override
+    public <R extends MutableFloatCollection> R flatCollectFloat(
+            Function<? super T, ? extends FloatIterable> function, R target)
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.flatCollectFloat(function, target);
+        }
+    }
+
+    @Override
     public MutableIntStack collectInt(IntFunction<? super T> intFunction)
     {
         synchronized (this.lock)
@@ -411,11 +469,31 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
     }
 
     @Override
+    public <R extends MutableIntCollection> R flatCollectInt(
+            Function<? super T, ? extends IntIterable> function, R target)
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.flatCollectInt(function, target);
+        }
+    }
+
+    @Override
     public MutableLongStack collectLong(LongFunction<? super T> longFunction)
     {
         synchronized (this.lock)
         {
             return this.delegate.collectLong(longFunction);
+        }
+    }
+
+    @Override
+    public <R extends MutableLongCollection> R flatCollectLong(
+            Function<? super T, ? extends LongIterable> function, R target)
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.flatCollectLong(function, target);
         }
     }
 
@@ -443,6 +521,16 @@ public final class SynchronizedStack<T> implements MutableStack<T>, Serializable
         synchronized (this.lock)
         {
             return this.delegate.collectShort(shortFunction, target);
+        }
+    }
+
+    @Override
+    public <R extends MutableShortCollection> R flatCollectShort(
+            Function<? super T, ? extends ShortIterable> function, R target)
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.flatCollectShort(function, target);
         }
     }
 

@@ -19,8 +19,16 @@ import java.util.Iterator;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
+import org.eclipse.collections.api.BooleanIterable;
+import org.eclipse.collections.api.ByteIterable;
+import org.eclipse.collections.api.CharIterable;
+import org.eclipse.collections.api.DoubleIterable;
+import org.eclipse.collections.api.FloatIterable;
+import org.eclipse.collections.api.IntIterable;
 import org.eclipse.collections.api.LazyIterable;
+import org.eclipse.collections.api.LongIterable;
 import org.eclipse.collections.api.RichIterable;
+import org.eclipse.collections.api.ShortIterable;
 import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.api.bag.MultiReaderBag;
 import org.eclipse.collections.api.bag.MutableBag;
@@ -739,6 +747,13 @@ public final class MultiReaderHashBag<T>
         }
 
         @Override
+        public <R extends MutableBooleanCollection> R flatCollectBoolean(
+                Function<? super T, ? extends BooleanIterable> function, R target)
+        {
+            return this.getDelegate().flatCollectBoolean(function, target);
+        }
+
+        @Override
         public MutableByteBag collectByte(ByteFunction<? super T> byteFunction)
         {
             return this.getDelegate().collectByte(byteFunction);
@@ -748,6 +763,13 @@ public final class MultiReaderHashBag<T>
         public <R extends MutableByteCollection> R collectByte(ByteFunction<? super T> byteFunction, R target)
         {
             return this.getDelegate().collectByte(byteFunction, target);
+        }
+
+        @Override
+        public <R extends MutableByteCollection> R flatCollectByte(
+                Function<? super T, ? extends ByteIterable> function, R target)
+        {
+            return this.getDelegate().flatCollectByte(function, target);
         }
 
         @Override
@@ -763,6 +785,13 @@ public final class MultiReaderHashBag<T>
         }
 
         @Override
+        public <R extends MutableCharCollection> R flatCollectChar(
+                Function<? super T, ? extends CharIterable> function, R target)
+        {
+            return this.getDelegate().flatCollectChar(function, target);
+        }
+
+        @Override
         public MutableDoubleBag collectDouble(DoubleFunction<? super T> doubleFunction)
         {
             return this.getDelegate().collectDouble(doubleFunction);
@@ -772,6 +801,13 @@ public final class MultiReaderHashBag<T>
         public <R extends MutableDoubleCollection> R collectDouble(DoubleFunction<? super T> doubleFunction, R target)
         {
             return this.getDelegate().collectDouble(doubleFunction, target);
+        }
+
+        @Override
+        public <R extends MutableDoubleCollection> R flatCollectDouble(
+                Function<? super T, ? extends DoubleIterable> function, R target)
+        {
+            return this.getDelegate().flatCollectDouble(function, target);
         }
 
         @Override
@@ -787,6 +823,13 @@ public final class MultiReaderHashBag<T>
         }
 
         @Override
+        public <R extends MutableFloatCollection> R flatCollectFloat(
+                Function<? super T, ? extends FloatIterable> function, R target)
+        {
+            return this.getDelegate().flatCollectFloat(function, target);
+        }
+
+        @Override
         public MutableIntBag collectInt(IntFunction<? super T> intFunction)
         {
             return this.getDelegate().collectInt(intFunction);
@@ -796,6 +839,13 @@ public final class MultiReaderHashBag<T>
         public <R extends MutableIntCollection> R collectInt(IntFunction<? super T> intFunction, R target)
         {
             return this.getDelegate().collectInt(intFunction, target);
+        }
+
+        @Override
+        public <R extends MutableIntCollection> R flatCollectInt(
+                Function<? super T, ? extends IntIterable> function, R target)
+        {
+            return this.getDelegate().flatCollectInt(function, target);
         }
 
         @Override
@@ -811,6 +861,13 @@ public final class MultiReaderHashBag<T>
         }
 
         @Override
+        public <R extends MutableLongCollection> R flatCollectLong(
+                Function<? super T, ? extends LongIterable> function, R target)
+        {
+            return this.getDelegate().flatCollectLong(function, target);
+        }
+
+        @Override
         public MutableShortBag collectShort(ShortFunction<? super T> shortFunction)
         {
             return this.getDelegate().collectShort(shortFunction);
@@ -820,6 +877,13 @@ public final class MultiReaderHashBag<T>
         public <R extends MutableShortCollection> R collectShort(ShortFunction<? super T> shortFunction, R target)
         {
             return this.getDelegate().collectShort(shortFunction, target);
+        }
+
+        @Override
+        public <R extends MutableShortCollection> R flatCollectShort(
+                Function<? super T, ? extends ShortIterable> function, R target)
+        {
+            return this.getDelegate().flatCollectShort(function, target);
         }
 
         @Override

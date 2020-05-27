@@ -379,11 +379,31 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
     }
 
     @Override
+    public <R extends MutableBooleanCollection> R flatCollectBoolean(
+            Function<? super T, ? extends BooleanIterable> function, R target)
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.flatCollectBoolean(function, target);
+        }
+    }
+
+    @Override
     public <R extends MutableByteCollection> R collectByte(ByteFunction<? super T> byteFunction, R target)
     {
         synchronized (this.lock)
         {
             return this.delegate.collectByte(byteFunction, target);
+        }
+    }
+
+    @Override
+    public <R extends MutableByteCollection> R flatCollectByte(
+            Function<? super T, ? extends ByteIterable> function, R target)
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.flatCollectByte(function, target);
         }
     }
 
@@ -397,11 +417,31 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
     }
 
     @Override
+    public <R extends MutableCharCollection> R flatCollectChar(
+            Function<? super T, ? extends CharIterable> function, R target)
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.flatCollectChar(function, target);
+        }
+    }
+
+    @Override
     public <R extends MutableDoubleCollection> R collectDouble(DoubleFunction<? super T> doubleFunction, R target)
     {
         synchronized (this.lock)
         {
             return this.delegate.collectDouble(doubleFunction, target);
+        }
+    }
+
+    @Override
+    public <R extends MutableDoubleCollection> R flatCollectDouble(
+            Function<? super T, ? extends DoubleIterable> function, R target)
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.flatCollectDouble(function, target);
         }
     }
 
@@ -415,11 +455,31 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
     }
 
     @Override
+    public <R extends MutableFloatCollection> R flatCollectFloat(
+            Function<? super T, ? extends FloatIterable> function, R target)
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.flatCollectFloat(function, target);
+        }
+    }
+
+    @Override
     public <R extends MutableIntCollection> R collectInt(IntFunction<? super T> intFunction, R target)
     {
         synchronized (this.lock)
         {
             return this.delegate.collectInt(intFunction, target);
+        }
+    }
+
+    @Override
+    public <R extends MutableIntCollection> R flatCollectInt(
+            Function<? super T, ? extends IntIterable> function, R target)
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.flatCollectInt(function, target);
         }
     }
 
@@ -433,11 +493,31 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
     }
 
     @Override
+    public <R extends MutableLongCollection> R flatCollectLong(
+            Function<? super T, ? extends LongIterable> function, R target)
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.flatCollectLong(function, target);
+        }
+    }
+
+    @Override
     public <R extends MutableShortCollection> R collectShort(ShortFunction<? super T> shortFunction, R target)
     {
         synchronized (this.lock)
         {
             return this.delegate.collectShort(shortFunction, target);
+        }
+    }
+
+    @Override
+    public <R extends MutableShortCollection> R flatCollectShort(
+            Function<? super T, ? extends ShortIterable> function, R target)
+    {
+        synchronized (this.lock)
+        {
+            return this.delegate.flatCollectShort(function, target);
         }
     }
 
