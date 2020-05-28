@@ -41,6 +41,22 @@ import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.ShortIterable;
 import org.eclipse.collections.api.bag.Bag;
 import org.eclipse.collections.api.bag.MutableBag;
+import org.eclipse.collections.api.bag.primitive.BooleanBag;
+import org.eclipse.collections.api.bag.primitive.ByteBag;
+import org.eclipse.collections.api.bag.primitive.CharBag;
+import org.eclipse.collections.api.bag.primitive.DoubleBag;
+import org.eclipse.collections.api.bag.primitive.FloatBag;
+import org.eclipse.collections.api.bag.primitive.IntBag;
+import org.eclipse.collections.api.bag.primitive.LongBag;
+import org.eclipse.collections.api.bag.primitive.MutableBooleanBag;
+import org.eclipse.collections.api.bag.primitive.MutableByteBag;
+import org.eclipse.collections.api.bag.primitive.MutableCharBag;
+import org.eclipse.collections.api.bag.primitive.MutableDoubleBag;
+import org.eclipse.collections.api.bag.primitive.MutableFloatBag;
+import org.eclipse.collections.api.bag.primitive.MutableIntBag;
+import org.eclipse.collections.api.bag.primitive.MutableLongBag;
+import org.eclipse.collections.api.bag.primitive.MutableShortBag;
+import org.eclipse.collections.api.bag.primitive.ShortBag;
 import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function0;
@@ -64,8 +80,24 @@ import org.eclipse.collections.api.multimap.Multimap;
 import org.eclipse.collections.api.multimap.MutableMultimap;
 import org.eclipse.collections.api.partition.PartitionIterable;
 import org.eclipse.collections.api.set.MutableSet;
+import org.eclipse.collections.api.set.primitive.MutableBooleanSet;
+import org.eclipse.collections.api.set.primitive.MutableByteSet;
+import org.eclipse.collections.api.set.primitive.MutableCharSet;
+import org.eclipse.collections.api.set.primitive.MutableDoubleSet;
+import org.eclipse.collections.api.set.primitive.MutableFloatSet;
+import org.eclipse.collections.api.set.primitive.MutableIntSet;
+import org.eclipse.collections.api.set.primitive.MutableLongSet;
+import org.eclipse.collections.api.set.primitive.MutableShortSet;
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 import org.eclipse.collections.api.tuple.Pair;
+import org.eclipse.collections.api.tuple.primitive.BooleanBooleanPair;
+import org.eclipse.collections.api.tuple.primitive.ByteBytePair;
+import org.eclipse.collections.api.tuple.primitive.CharCharPair;
+import org.eclipse.collections.api.tuple.primitive.DoubleDoublePair;
+import org.eclipse.collections.api.tuple.primitive.FloatFloatPair;
+import org.eclipse.collections.api.tuple.primitive.IntIntPair;
+import org.eclipse.collections.api.tuple.primitive.LongLongPair;
+import org.eclipse.collections.api.tuple.primitive.ShortShortPair;
 import org.eclipse.collections.impl.bag.mutable.HashBag;
 import org.eclipse.collections.impl.bag.mutable.primitive.BooleanHashBag;
 import org.eclipse.collections.impl.bag.mutable.primitive.ByteHashBag;
@@ -90,13 +122,21 @@ import org.eclipse.collections.impl.factory.Bags;
 import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.factory.primitive.BooleanBags;
+import org.eclipse.collections.impl.factory.primitive.BooleanLists;
 import org.eclipse.collections.impl.factory.primitive.ByteBags;
+import org.eclipse.collections.impl.factory.primitive.ByteLists;
 import org.eclipse.collections.impl.factory.primitive.CharBags;
+import org.eclipse.collections.impl.factory.primitive.CharLists;
 import org.eclipse.collections.impl.factory.primitive.DoubleBags;
+import org.eclipse.collections.impl.factory.primitive.DoubleSets;
 import org.eclipse.collections.impl.factory.primitive.FloatBags;
+import org.eclipse.collections.impl.factory.primitive.FloatLists;
 import org.eclipse.collections.impl.factory.primitive.IntBags;
+import org.eclipse.collections.impl.factory.primitive.IntLists;
 import org.eclipse.collections.impl.factory.primitive.LongBags;
+import org.eclipse.collections.impl.factory.primitive.LongLists;
 import org.eclipse.collections.impl.factory.primitive.ShortBags;
+import org.eclipse.collections.impl.factory.primitive.ShortLists;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.list.mutable.primitive.BooleanArrayList;
 import org.eclipse.collections.impl.list.mutable.primitive.ByteArrayList;
@@ -110,8 +150,17 @@ import org.eclipse.collections.impl.list.primitive.IntInterval;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.map.sorted.mutable.TreeSortedMap;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
+import org.eclipse.collections.impl.set.mutable.primitive.BooleanHashSet;
+import org.eclipse.collections.impl.set.mutable.primitive.ByteHashSet;
+import org.eclipse.collections.impl.set.mutable.primitive.CharHashSet;
+import org.eclipse.collections.impl.set.mutable.primitive.DoubleHashSet;
+import org.eclipse.collections.impl.set.mutable.primitive.FloatHashSet;
+import org.eclipse.collections.impl.set.mutable.primitive.IntHashSet;
+import org.eclipse.collections.impl.set.mutable.primitive.LongHashSet;
+import org.eclipse.collections.impl.set.mutable.primitive.ShortHashSet;
 import org.eclipse.collections.impl.set.sorted.mutable.TreeSortedSet;
 import org.eclipse.collections.impl.test.Verify;
+import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -572,6 +621,157 @@ public abstract class AbstractRichIterableTestCase
         Verify.assertBagsEqual(
                 Bags.mutable.with(4, 3, 2, 1, 5, 4, 3, 2, 1, 6, 5, 4, 3, 2, 1, 7, 6, 5, 4, 3, 2, 1),
                 collection.flatCollectWith(Interval::fromTo, 1, Bags.mutable.empty()));
+    }
+
+    @Test
+    public void flatCollectBoolean()
+    {
+        RichIterable<BooleanBooleanPair> iterable = this.newWith(
+                PrimitiveTuples.pair(true, false),
+                PrimitiveTuples.pair(false, true));
+
+        Function<BooleanBooleanPair, BooleanIterable> function =
+                pair -> BooleanLists.mutable.with(pair.getOne(), pair.getTwo());
+
+        MutableBooleanBag bag = iterable.flatCollectBoolean(function, new BooleanHashBag());
+        MutableBooleanSet set = iterable.flatCollectBoolean(function, new BooleanHashSet());
+
+        BooleanBag expected = BooleanBags.mutable.with(true, false, false, true);
+        Assert.assertEquals(expected, bag);
+        Assert.assertEquals(expected.toSet(), set);
+    }
+
+    @Test
+    public void flatCollectByte()
+    {
+        RichIterable<ByteBytePair> iterable =
+                this.newWith(
+                        PrimitiveTuples.pair((byte) 1, (byte) 2),
+                        PrimitiveTuples.pair((byte) 3, (byte) 4));
+
+        Function<ByteBytePair, ByteIterable> function =
+                pair -> ByteLists.mutable.with(pair.getOne(), pair.getTwo());
+
+        MutableByteBag bag = iterable.flatCollectByte(function, new ByteHashBag());
+        MutableByteSet set = iterable.flatCollectByte(function, new ByteHashSet());
+
+        ByteBag expected = ByteBags.mutable.with((byte) 1, (byte) 2, (byte) 3, (byte) 4);
+        Assert.assertEquals(expected, bag);
+        Assert.assertEquals(expected.toSet(), set);
+    }
+
+    @Test
+    public void flatCollectShort()
+    {
+        RichIterable<ShortShortPair> iterable =
+                this.newWith(
+                        PrimitiveTuples.pair((short) 1, (short) 2),
+                        PrimitiveTuples.pair((short) 3, (short) 4));
+
+        Function<ShortShortPair, ShortIterable> function =
+                pair -> ShortLists.mutable.with(pair.getOne(), pair.getTwo());
+
+        MutableShortBag bag = iterable.flatCollectShort(function, new ShortHashBag());
+        MutableShortSet set = iterable.flatCollectShort(function, new ShortHashSet());
+
+        ShortBag expected = ShortBags.mutable.with((short) 1, (short) 2, (short) 3, (short) 4);
+        Assert.assertEquals(expected, bag);
+        Assert.assertEquals(expected.toSet(), set);
+    }
+
+    @Test
+    public void flatCollectInt()
+    {
+        RichIterable<IntIntPair> iterable =
+                this.newWith(
+                        PrimitiveTuples.pair(1, 2),
+                        PrimitiveTuples.pair(3, 4));
+
+        Function<IntIntPair, IntIterable> function =
+                pair -> IntLists.mutable.with(pair.getOne(), pair.getTwo());
+
+        MutableIntBag bag = iterable.flatCollectInt(function, new IntHashBag());
+        MutableIntSet set = iterable.flatCollectInt(function, new IntHashSet());
+
+        IntBag expected = IntBags.mutable.with(1, 2, 3, 4);
+        Assert.assertEquals(expected, bag);
+        Assert.assertEquals(expected.toSet(), set);
+    }
+
+    @Test
+    public void flatCollectChar()
+    {
+        RichIterable<CharCharPair> iterable =
+                this.newWith(
+                        PrimitiveTuples.pair('a', 'b'),
+                        PrimitiveTuples.pair('c', 'd'));
+
+        Function<CharCharPair, CharIterable> function =
+                pair -> CharLists.mutable.with(pair.getOne(), pair.getTwo());
+
+        MutableCharBag bag = iterable.flatCollectChar(function, new CharHashBag());
+        MutableCharSet set = iterable.flatCollectChar(function, new CharHashSet());
+
+        CharBag expected = CharBags.mutable.with('a', 'b', 'c', 'd');
+        Assert.assertEquals(expected, bag);
+        Assert.assertEquals(expected.toSet(), set);
+    }
+
+    @Test
+    public void flatCollectLong()
+    {
+        RichIterable<LongLongPair> iterable =
+                this.newWith(
+                        PrimitiveTuples.pair(1L, 2L),
+                        PrimitiveTuples.pair(3L, 4L));
+
+        Function<LongLongPair, LongIterable> function =
+                pair -> LongLists.mutable.with(pair.getOne(), pair.getTwo());
+
+        MutableLongBag bag = iterable.flatCollectLong(function, new LongHashBag());
+        MutableLongSet set = iterable.flatCollectLong(function, new LongHashSet());
+
+        LongBag expected = LongBags.mutable.with(1L, 2L, 3L, 4L);
+        Assert.assertEquals(expected, bag);
+        Assert.assertEquals(expected.toSet(), set);
+    }
+
+    @Test
+    public void flatCollectDouble()
+    {
+        RichIterable<DoubleDoublePair> iterable =
+                this.newWith(
+                        PrimitiveTuples.pair(1.0, 2.0),
+                        PrimitiveTuples.pair(3.0, 4.0));
+
+        Function<DoubleDoublePair, DoubleIterable> function =
+                pair -> DoubleSets.mutable.with(pair.getOne(), pair.getTwo());
+
+        MutableDoubleBag bag = iterable.flatCollectDouble(function, new DoubleHashBag());
+        MutableDoubleSet set = iterable.flatCollectDouble(function, new DoubleHashSet());
+
+        DoubleBag expected = DoubleBags.mutable.with(1.0, 2.0, 3.0, 4.0);
+        Assert.assertEquals(expected, bag);
+        Assert.assertEquals(expected.toSet(), set);
+    }
+
+    @Test
+    public void flatCollectFloat()
+    {
+        RichIterable<FloatFloatPair> iterable =
+                this.newWith(
+                        PrimitiveTuples.pair((float) 1, (float) 2),
+                        PrimitiveTuples.pair((float) 3, (float) 4));
+
+        Function<FloatFloatPair, FloatIterable> function =
+                pair -> FloatLists.mutable.with(pair.getOne(), pair.getTwo());
+
+        MutableFloatBag bag = iterable.flatCollectFloat(function, new FloatHashBag());
+        MutableFloatSet set = iterable.flatCollectFloat(function, new FloatHashSet());
+
+        FloatBag expected = FloatBags.mutable.with(1, 2, 3, 4);
+        Assert.assertEquals(expected, bag);
+        Assert.assertEquals(expected.toSet(), set);
     }
 
     @Test
