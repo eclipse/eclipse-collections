@@ -214,9 +214,10 @@ final class Immutable<name>SingletonBag implements Immutable<name>Bag, Serializa
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public \<V> ImmutableBag\<V> collect(<name>ToObjectFunction\<? extends V> function)
     {
-        return HashBag.newBagWith(function.valueOf(this.element1)).toImmutable();
+        return (ImmutableBag\<V>) HashBag.newBagWith(function.valueOf(this.element1)).toImmutable();
     }
 
     @Override

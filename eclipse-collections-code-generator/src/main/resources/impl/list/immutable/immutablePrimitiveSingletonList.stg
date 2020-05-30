@@ -173,9 +173,10 @@ final class Immutable<name>SingletonList implements Immutable<name>List, Seriali
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public \<V> ImmutableList\<V> collect(<name>ToObjectFunction\<? extends V> function)
     {
-        return FastList.newListWith(function.valueOf(this.element1)).toImmutable();
+        return (ImmutableList\<V>) FastList.newListWith(function.valueOf(this.element1)).toImmutable();
     }
 
     <(arithmeticMethods.(type))(name, type)>
