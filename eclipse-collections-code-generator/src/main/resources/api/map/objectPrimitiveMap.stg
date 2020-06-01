@@ -113,6 +113,7 @@ public interface Object<name>Map\<K> extends <name>Iterable
     /**
      * @since 9.0.
      */
+    @Override
     default Object<name>Map\<K> tap(<name>Procedure procedure)
     {
         this.forEach(procedure);
@@ -124,6 +125,7 @@ public interface Object<name>Map\<K> extends <name>Iterable
      *
      * @return a string representation of this Object<name>Map
      */
+    @Override
     String toString();
 
     /**

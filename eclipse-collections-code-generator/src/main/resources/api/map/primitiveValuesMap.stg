@@ -60,6 +60,7 @@ public interface <name>ValuesMap extends <name>Iterable
     /**
      * @since 9.0.
      */
+    @Override
     default <name>ValuesMap tap(<name>Procedure procedure)
     {
         this.forEach(procedure);

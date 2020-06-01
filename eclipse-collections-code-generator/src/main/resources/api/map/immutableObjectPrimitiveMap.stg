@@ -42,6 +42,7 @@ public interface ImmutableObject<name>Map\<K> extends Object<name>Map\<K>
     /**
      * @since 9.0.
      */
+    @Override
     default ImmutableObject<name>Map\<K> tap(<name>Procedure procedure)
     {
         this.forEach(procedure);

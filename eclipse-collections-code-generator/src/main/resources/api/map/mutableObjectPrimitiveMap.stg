@@ -176,6 +176,7 @@ public interface MutableObject<name>Map\<K> extends Object<name>Map\<K>
     /**
      * @since 9.0.
      */
+    @Override
     default MutableObject<name>Map\<K> tap(<name>Procedure procedure)
     {
         this.forEach(procedure);
