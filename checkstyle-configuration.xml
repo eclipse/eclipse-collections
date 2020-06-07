@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE module PUBLIC
-    "-//Puppy Crawl//DTD Check Configuration 1.2//EN"
-    "http://www.puppycrawl.com/dtds/configuration_1_2.dtd">
+    "-//Checkstyle//DTD Checkstyle Configuration 1.2//EN"
+    "https://checkstyle.org/dtds/configuration_1_2.dtd">
 
 <!--
   ~ Copyright (c) 2016 Goldman Sachs.
@@ -333,10 +333,5 @@
     <module name="RegexpMultiline">
         <property name="format" value="\n\n\n" />
         <property name="message" value="Extra newline." />
-    </module>
-
-    <module name="RegexpMultiline">
-        <property name="format" value="\r" />
-        <property name="message" value="Carriage return." />
     </module>
 </module>

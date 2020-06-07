@@ -42,6 +42,7 @@ public interface ImmutableObject<name>Map\<K> extends Object<name>Map\<K>
     /**
      * @since 9.0.
      */
+    @Override
     default ImmutableObject<name>Map\<K> tap(<name>Procedure procedure)
     {
         this.forEach(procedure);
@@ -51,10 +52,30 @@ public interface ImmutableObject<name>Map\<K> extends Object<name>Map\<K>
     @Override
     \<V> ImmutableCollection\<V> collect(<name>ToObjectFunction\<? extends V> function);
 
+    /**
+     * Copy this map, associate the value with the key (replacing the value if one
+     * already exists for {@code key}), and return the copy as new immutable map.
+     * A copy is always made even if {@code key} is already associated with {@code value}.
+     * @param key the key to add
+     * @param value the value to associate with the key in the copy
+     * @return an immutable copy of this map with {@code value} associated with {@code key}
+     */
     ImmutableObject<name>Map\<K> newWithKeyValue(K key, <type> value);
 
+    /**
+     * Copy this map, remove any associated value with the key (if one exists), and
+     * return the copy as a new immutable map.
+     * @param key the key to remove
+     * @return an immutable copy of this map with {@code key} removed
+     */
     ImmutableObject<name>Map\<K> newWithoutKey(K key);
 
+    /**
+     * Copy this map, remove any associated values with the specified keys (if any exist),
+     * and return the copy as a new immutable map.
+     * @param keys the keys to remove
+     * @return an immutable copy of this map with all keys in {@code keys} removed
+     */
     ImmutableObject<name>Map\<K> newWithoutAllKeys(Iterable\<? extends K> keys);
     <if(!primitive.booleanPrimitive)><(flipUniqueValues.(name))(name)><endif>
 }

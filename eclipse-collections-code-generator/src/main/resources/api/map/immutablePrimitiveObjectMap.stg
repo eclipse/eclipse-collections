@@ -35,10 +35,30 @@ public interface Immutable<name>ObjectMap\<V> extends <name>ObjectMap\<V>, Immut
     @Override
     Immutable<name>ObjectMap\<V> reject(<name>ObjectPredicate\<? super V> predicate);
 
+    /**
+     * Copy this map, associate the value with the key (replacing the value if one
+     * already exists for {@code key}), and return the copy as new immutable map.
+     * A copy is always made even if {@code key} is already associated with {@code value}.
+     * @param key the key to add
+     * @param value the value to associate with the key in the copy
+     * @return an immutable copy of this map with {@code value} associated with {@code key}
+     */
     Immutable<name>ObjectMap\<V> newWithKeyValue(<type> key, V value);
 
+    /**
+     * Copy this map, remove any associated value with the key (if one exists), and
+     * return the copy as a new immutable map.
+     * @param key the key to remove
+     * @return an immutable copy of this map with {@code key} removed
+     */
     Immutable<name>ObjectMap\<V> newWithoutKey(<type> key);
 
+    /**
+     * Copy this map, remove any associated values with the specified keys (if any exist),
+     * and return the copy as a new immutable map.
+     * @param keys the keys to remove
+     * @return an immutable copy of this map with all keys in {@code keys} removed
+     */
     Immutable<name>ObjectMap\<V> newWithoutAllKeys(<name>Iterable keys);
 
     @Override
