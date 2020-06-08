@@ -16,6 +16,7 @@ import org.eclipse.collections.api.collection.MutableCollection;
 import org.eclipse.collections.api.map.MapIterable;
 import org.eclipse.collections.impl.block.procedure.CollectionAddProcedure;
 import org.eclipse.collections.impl.factory.Maps;
+import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.test.SerializeTestHelper;
@@ -66,6 +67,35 @@ public interface MapIterableTestCase extends RichIterableWithDuplicatesTestCase
         assertEquals(11, map.ifPresentApply("One", x -> x + 10));
         assertNull(map.ifPresentApply("Zero", x -> x + 10));
         assertEquals(map, this.newWithKeysValues("Three", 3, "Two", 2, "One", 1));
+    }
+
+    @Test
+    default void MapIterable_aggregateBy()
+    {
+        String oneToFive = "oneToFive";
+        String sixToNine = "sixToNine";
+        String tenToFifteen = "tenToFifteen";
+        String sixteenToTwenty = "sixteenToTwenty";
+
+        MapIterable<String, Interval> map = Maps.mutable.with(oneToFive, Interval.fromTo(1, 5),
+                sixToNine, Interval.fromTo(6, 9), tenToFifteen, Interval.fromTo(10, 15),
+                sixteenToTwenty, Interval.fromTo(16, 20));
+
+        String lessThanTen = "lessThanTen";
+        String greaterOrEqualsToTen = "greaterOrEqualsToTen";
+
+        MapIterable<String, Long> result = map.aggregateBy(
+                eachKey -> {
+                    return eachKey.equals(oneToFive) || eachKey.equals(sixToNine) ? lessThanTen : greaterOrEqualsToTen;
+                },
+                each -> each.sumOfInt(Integer::intValue),
+                () -> 0L,
+                (argument1, argument2) -> argument1 + argument2);
+
+        MapIterable<String, Long> expected =
+                Maps.mutable.with(lessThanTen, Interval.fromTo(1, 9).sumOfInt(Integer::intValue),
+                        greaterOrEqualsToTen, Interval.fromTo(10, 20).sumOfInt(Integer::intValue));
+        Assert.assertEquals(expected, result);
     }
 
     @Test
