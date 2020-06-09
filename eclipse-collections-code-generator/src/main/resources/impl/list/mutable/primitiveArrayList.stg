@@ -505,6 +505,14 @@ public class <name>ArrayList extends Abstract<name>Iterable
     }
 
     @Override
+    public void swap(int index1, int index2)
+    {
+        <type> value = this.get(index1);
+        this.items[index1] = this.items[index2];
+        this.items[index2] = value;
+    }
+
+    @Override
     public <name>ArrayList with(<type> element)
     {
         this.add(element);
