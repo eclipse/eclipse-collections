@@ -42,6 +42,13 @@ public interface Mutable<name>List extends Mutable<name>Collection, <name>List
 
     <type> set(int index, <type> element);
 
+    default void swap(int index1, int index2)
+    {
+        <type> value = this.get(index1);
+        this.set(index1, this.get(index2));
+        this.set(index2, value);
+    }
+
     <sharedAPI(fileName(primitive), name)>
 
     <mutableAPI(fileName(primitive), type, name)>

@@ -125,6 +125,13 @@ public class Unmodifiable<name>ListTest extends Abstract<name>ListTestCase
 
     @Override
     @Test(expected = UnsupportedOperationException.class)
+    public void swap()
+    {
+        this.list.swap(0, 1);
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
     public void clear()
     {
         this.classUnderTest().clear();
