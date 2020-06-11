@@ -17,9 +17,11 @@ body(type, name) ::= <<
 package org.eclipse.collections.impl.list.mutable.primitive;
 
 import java.util.Collection;
+<if(!primitive.booleanPrimitive)>import java.util.Comparator;<endif>
 
 import org.eclipse.collections.api.<name>Iterable;
 import org.eclipse.collections.api.Lazy<name>Iterable;
+<if(!primitive.booleanPrimitive)>import org.eclipse.collections.api.block.comparator.primitive.<name>Comparator;<endif>
 import org.eclipse.collections.api.block.function.primitive.<name>IntToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.Object<name>IntToObjectFunction;
@@ -443,6 +445,36 @@ public Mutable<name>List sortThis()
     synchronized (this.getLock())
     {
         this.getMutable<name>List().sortThis();
+    }
+    return this;
+}
+
+@Override
+public Mutable<name>List sortThis(<name>Comparator comparator)
+{
+    synchronized (this.getLock())
+    {
+        this.getMutable<name>List().sortThis(comparator);
+    }
+    return this;
+}
+
+@Override
+public \<T> Mutable<name>List sortThisBy(<name>ToObjectFunction\<T> function)
+{
+    synchronized (this.getLock())
+    {
+        this.getMutable<name>List().sortThisBy(function);
+    }
+    return this;
+}
+
+@Override
+public \<T> Mutable<name>List sortThisBy(<name>ToObjectFunction\<T> function, Comparator\<? super T> comparator)
+{
+    synchronized (this.getLock())
+    {
+        this.getMutable<name>List().sortThisBy(function, comparator);
     }
     return this;
 }
