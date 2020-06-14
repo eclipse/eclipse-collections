@@ -1,0 +1,34 @@
+import "copyright.stg"
+
+targetPath() ::= "org/eclipse/collections/api/block/comparator/primitive"
+
+fileName(primitive) ::= "<primitive.name>Comparator"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name, primitive.wrapperName)>
+>>
+
+body(type, name, wrapperName) ::= <<
+<copyright()>
+
+package org.eclipse.collections.api.block.comparator.primitive;
+
+import java.io.Serializable;
+
+/**
+ * <name>Comparator is a primitive Comparator that takes two arguments of type <type> and
+ * otherwise follows the contract of {@code java.util.Comparator}.
+ * This comparator can be used to sort primitive collections, which support indirect sorting,
+ * if a sort order other thant the natural one of the collection elements is required.
+ *
+ * This file was automatically generated from template file primitiveComparator.stg.
+ *
+ */
+@FunctionalInterface
+public interface <name>Comparator\<T>
+        extends Serializable
+{
+    int compare(<type> value1, <type> value2);
+}
+
+>>

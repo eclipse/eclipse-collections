@@ -1,0 +1,154 @@
+import "copyright.stg"
+
+targetPath() ::= "org/eclipse/collections/impl/utility/primitive"
+
+fileName(primitive) ::= "<primitive.name>QuickSort"
+
+class(primitive) ::= <<
+<body(primitive.type, primitive.name, primitive.wrapperName)>
+>>
+
+body(type, name, wrapperName) ::= <<
+<copyright()>
+
+package org.eclipse.collections.impl.utility.primitive;
+
+import org.eclipse.collections.api.block.comparator.primitive.<name>Comparator;
+
+/**
+ * <name>QuickSort is an implementation of the Quick Sort algorithm as described in Donald Knuth's TAOCP with some
+ * optimizations. It supports indirect array sorting based on primitive comparators and/or key values extracted from
+ * the array values if a sort order other thant the natural one of the array elements is required.
+ *
+ * This file was automatically generated from template file primitiveSort.stg.
+ *
+ */
+
+public final class <name>QuickSort
+{
+    private static final int SORT_SMALL_SIZE = 9;
+
+    private <name>QuickSort()
+    {
+    }
+
+    public static void sort(<type>[] array, int left, int right, <name>Comparator comparator)
+    {
+        int size = right - left + 1;
+
+        if (size \<= <name>QuickSort.SORT_SMALL_SIZE)
+        {
+            <name>QuickSort.insertionSort(array, left, right, comparator);
+        }
+        else
+        {
+            // Initialize new stage
+            int mid = (right - (right / 2)) + (left / 2);
+            <type> leftVal = array[left];
+            <type> rightVal = array[right];
+            <type> midVal = array[mid];
+
+            int swapIndex = -1;
+
+            if (comparator.compare(leftVal, midVal) > 0 && comparator.compare(leftVal, rightVal) > 0)
+            {
+                swapIndex = (comparator.compare(midVal, rightVal) \< 0) ? right : mid;
+            }
+            else if (comparator.compare(leftVal, midVal) \< 0 && comparator.compare(leftVal, rightVal) \< 0)
+            {
+                swapIndex = (comparator.compare(midVal, rightVal) \< 0) ? mid : right;
+            }
+
+            if (swapIndex > 0)
+            {
+                swap(array, left, swapIndex);
+            }
+
+            <type> pivot = array[left];
+
+            int i = left + 1;
+            int j = right;
+
+            while (i \< j)
+            {
+                // Compare: Key(i) : Key, skip all which are \<= pivot or until hit j
+                while (comparator.compare(array[i], pivot) \<= 0 && i \< j)
+                {
+                    i++;
+                }
+
+                // Compare Key : Key(j), skip all which are > pivot or until hit i
+                while (comparator.compare(pivot, array[j]) \< 0 && j > i - 1)
+                {
+                    j--;
+                }
+
+                if (i \< j)
+                {
+                    swap(array, i, j);
+                }
+                else
+                {
+                    swap(array, left, j);
+                }
+            }
+
+            // Sort partitions, skipping sequences of elements equal to the pivot
+            if (right > j + 1)
+            {
+                int from = j + 1;
+                while (right > from && comparator.compare(pivot, array[from]) == 0)
+                {
+                    from++;
+                }
+                if (right > from)
+                {
+                    <name>QuickSort.sort(array, from, right, comparator);
+                }
+            }
+
+            if (left \< j - 1)
+            {
+                int to = j - 1;
+                while (to > left && comparator.compare(pivot, array[to]) == 0)
+                {
+                    to--;
+                }
+                if (left \< to)
+                {
+                    <name>QuickSort.sort(array, left, to, comparator);
+                }
+            }
+        }
+    }
+
+    private static void insertionSort(<type>[] array, int left, int right, <name>Comparator comparator)
+    {
+        for (int j = left + 1; j \<= right; j++)
+        {
+            if (comparator.compare(array[j - 1], array[j]) > 0)
+            {
+                <type> key = array[j];
+                int i = j - 1;
+
+                do
+                {
+                    array[i + 1] = array[i];
+                    i--;
+                }
+                while (i > -1 && comparator.compare(key, array[i]) \< 0);
+
+                array[i + 1] = key;
+            }
+        }
+    }
+    
+    private static void swap(<type>[] array, int i1, int i2)
+    {
+        <type> value = array[i1];
+        array[i1] = array[i2];
+        array[i2] = value;
+    }
+}
+
+>>

@@ -160,6 +160,32 @@ allMethods(type) ::= <<
 Mutable<name>List sortThis();
 
 /**
+ * Sorts the internal data structure of this list and returns the list itself as a convenience.
+ */
+default Mutable<name>List sortThis(<name>Comparator comparator)
+{
+    throw new UnsupportedOperationException("sortThis(<name>Comparator comparator) is not supported on " + this.getClass());
+}
+
+/**
+ * Sorts the internal data structure of this list based on the natural order of the key returned by {@code
+ * function}.
+ */
+default \<T> Mutable<name>List sortThisBy(<name>ToObjectFunction\<T> function)
+{
+    return sortThisBy(function, (Comparator\<? super T>) Comparator.naturalOrder());
+}
+
+/**
+ * Sorts the internal data structure of this list based on the key returned by {@code
+ * function} using the provided {@code comparator}.
+ */
+default \<T> Mutable<name>List sortThisBy(<name>ToObjectFunction\<T> function, Comparator\<? super T> comparator)
+{
+    return this.sortThis((i1, i2) -> comparator.compare(function.valueOf(i1), function.valueOf(i2)));
+}
+
+/**
  * Randomly permutes this list mutating its contents and returns the same list (this).
  *
  * Uses {@code java.util.Random} as the source of randomness.
@@ -203,7 +229,9 @@ auxiliaryImports ::= [
 ]
 
 allAuxiliaryImports(type) ::= <<
+import java.util.Comparator;
 import java.util.Random;
+import org.eclipse.collections.api.block.comparator.primitive.<name>Comparator;
 
 >>
 

@@ -28,6 +28,7 @@ import java.util.NoSuchElementException;
 import org.eclipse.collections.api.<name>Iterable;
 import org.eclipse.collections.api.Lazy<name>Iterable;
 import org.eclipse.collections.api.RichIterable;
+import org.eclipse.collections.api.block.comparator.primitive.<name>Comparator;
 import org.eclipse.collections.api.block.function.primitive.Object<name>IntToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.Object<name>ToObjectFunction;
 import org.eclipse.collections.api.block.function.primitive.<name>ToObjectFunction;
@@ -53,6 +54,7 @@ import org.eclipse.collections.impl.primitive.Abstract<name>Iterable;
 import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.eclipse.collections.impl.utility.Iterate;
+import org.eclipse.collections.impl.utility.primitive.<name>QuickSort;
 <if(primitive.specializedStream)>
 import java.util.Spliterator;
 import java.util.Spliterators;<endif>
@@ -1008,6 +1010,13 @@ public class <name>ArrayList extends Abstract<name>Iterable
     public <name>ArrayList sortThis()
     {
         Arrays.sort(this.items, 0, this.size);
+        return this;
+    }
+
+    @Override
+    public <name>ArrayList sortThis(<name>Comparator comparator)
+    {
+        <name>QuickSort.sort(this.items, 0, this.size() - 1, comparator);
         return this;
     }
 

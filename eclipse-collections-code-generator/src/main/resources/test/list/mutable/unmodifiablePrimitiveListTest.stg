@@ -21,6 +21,7 @@ import java.util.NoSuchElementException;
 
 import org.eclipse.collections.api.iterator.<name>Iterator;
 import org.eclipse.collections.api.iterator.Mutable<name>Iterator;
+<if(!primitive.booleanPrimitive)>import org.eclipse.collections.impl.block.factory.Comparators;<endif>
 import org.eclipse.collections.impl.block.factory.primitive.<name>Predicates;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
@@ -238,6 +239,62 @@ public class Unmodifiable<name>ListTest extends Abstract<name>ListTestCase
     @Override
     @Test(expected = UnsupportedOperationException.class)
     public void sortThis()
+    {
+        new Unmodifiable<name>List(new <name>ArrayList()).sortThis();
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void sortWithPrimitiveComparator()
+    {
+        new Unmodifiable<name>List(new <name>ArrayList()).sortThis(<wrapperName>::compare);
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void sortWithOddEvenComparator()
+    {
+        new Unmodifiable<name>List(new <name>ArrayList()).sortThis((a, b) -> (int) ((int) ((int) a & 1) - ((int) b & 1)));
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void sortWithKeyExtractorNaturalComparator()
+    {
+        new Unmodifiable<name>List(new <name>ArrayList()).sortThisBy(<wrapperName>::toString);
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void sortWithKeyExtractorUnnaturalComparator()
+    {
+        new Unmodifiable<name>List(new <name>ArrayList()).sortThisBy(<wrapperName>::toString, Comparators.naturalOrder().reversed());
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void sortShuffledInputWithDupes()
+    {
+        new Unmodifiable<name>List(new <name>ArrayList()).sortThis();
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void sortShuffledInput()
+    {
+        new Unmodifiable<name>List(new <name>ArrayList()).sortThis();
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void sortSortedInput()
+    {
+        new Unmodifiable<name>List(new <name>ArrayList()).sortThis();
+    }
+
+    @Override
+    @Test(expected = UnsupportedOperationException.class)
+    public void sortReversedSortedInput()
     {
         new Unmodifiable<name>List(new <name>ArrayList()).sortThis();
     }
