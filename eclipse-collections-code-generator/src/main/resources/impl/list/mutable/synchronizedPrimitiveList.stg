@@ -17,7 +17,10 @@ body(type, name) ::= <<
 package org.eclipse.collections.impl.list.mutable.primitive;
 
 import java.util.Collection;
-<if(!primitive.booleanPrimitive)>import java.util.Comparator;<endif>
+<if(!primitive.booleanPrimitive)>
+import java.util.Comparator;
+import java.util.Random;
+<endif>
 
 import org.eclipse.collections.api.<name>Iterable;
 import org.eclipse.collections.api.Lazy<name>Iterable;
@@ -485,6 +488,16 @@ public Mutable<name>List shuffleThis()
     synchronized (this.getLock())
     {
         this.getMutable<name>List().shuffleThis();
+    }
+    return this;
+}
+
+@Override
+public Mutable<name>List shuffleThis(Random rnd)
+{
+    synchronized (this.getLock())
+    {
+        this.getMutable<name>List().shuffleThis(rnd);
     }
     return this;
 }
