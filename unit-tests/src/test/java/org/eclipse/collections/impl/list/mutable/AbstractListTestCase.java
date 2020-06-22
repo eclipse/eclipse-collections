@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018 Goldman Sachs and others.
+ * Copyright (c) 2020 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -35,6 +35,7 @@ import org.eclipse.collections.api.list.primitive.MutableLongList;
 import org.eclipse.collections.api.list.primitive.MutableShortList;
 import org.eclipse.collections.api.partition.list.PartitionMutableList;
 import org.eclipse.collections.api.stack.MutableStack;
+import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.api.tuple.primitive.ObjectIntPair;
 import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.block.factory.HashingStrategies;
@@ -62,6 +63,7 @@ import org.eclipse.collections.impl.list.mutable.primitive.IntArrayList;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.test.SerializeTestHelper;
 import org.eclipse.collections.impl.test.Verify;
+import org.eclipse.collections.impl.tuple.Tuples;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.junit.Assert;
 import org.junit.Test;
@@ -1134,6 +1136,29 @@ public abstract class AbstractListTestCase
         });
         Assert.assertEquals(FastList.newListWith(1, 2, 3, 4), elements);
         Assert.assertEquals(IntArrayList.newListWith(0, 1, 2, 3), indexes);
+    }
+
+    @Test
+    public void forEachInBoth()
+    {
+        MutableList<Pair<Integer, String>> result = Lists.mutable.empty();
+        ListIterable<Integer> integers = this.newWith(1, 2, 3);
+        ImmutableList<String> strings = this.newWith("1", "2", "3").toImmutable();
+        integers.forEachInBoth(strings,
+                (integer, string) -> result.add(Tuples.pair(integer, string)));
+        Assert.assertEquals(
+                Lists.immutable.with(Tuples.pair(1, "1"), Tuples.pair(2, "2"), Tuples.pair(3, "3")),
+                result);
+    }
+
+    @Test (expected = IllegalArgumentException.class)
+    public void forEachInBothThrowsOnDifferentListSizes()
+    {
+        MutableList<Pair<Integer, String>> result = Lists.mutable.empty();
+        ListIterable<Integer> integers = this.newWith(1, 2, 3);
+        ImmutableList<String> strings = this.newWith("1", "2").toImmutable();
+        integers.forEachInBoth(strings,
+                (integer, string) -> result.add(Tuples.pair(integer, string)));
     }
 
     @Test
