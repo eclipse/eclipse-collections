@@ -47,6 +47,7 @@ public enum Mutable<name>SetFactoryImpl implements Mutable<name>SetFactory
     {
         return this.empty();
     }
+    <(capacityMethods.(type))()>
 
     @Override
     public Mutable<name>Set of(<type>... items)
@@ -96,6 +97,27 @@ public enum Mutable<name>SetFactoryImpl implements Mutable<name>SetFactory
     <(streamMethods.(type))()>
 }
 
+>>
+
+capacityMethods ::= [
+    "byte": "noMethods",
+    "short": "capacityMethods",
+    "char": "capacityMethods",
+    "int": "capacityMethods",
+    "long": "capacityMethods",
+    "float": "capacityMethods",
+    "double": "capacityMethods",
+    "boolean": "noMethods"
+    ]
+
+capacityMethods() ::= <<
+
+
+@Override
+public Mutable<name>Set withInitialCapacity(int capacity)
+{
+    return new <name>HashSet(capacity);
+}
 >>
 
 streamMethods ::= [
