@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018 Goldman Sachs and others.
+ * Copyright (c) 2020 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -156,13 +156,26 @@ public class MultiReaderFastListTest extends AbstractListTestCase
     }
 
     @Test
-    public void forEachInBoth()
+    public void forEachInBothUsingListIterate()
     {
         MutableList<Pair<String, String>> list = MultiReaderFastList.newList();
         MutableList<String> list1 = MultiReaderFastList.newListWith("1", "2");
         MutableList<String> list2 = MultiReaderFastList.newListWith("a", "b");
         ListIterate.forEachInBoth(list1, list2, (argument1, argument2) -> list.add(Tuples.pair(argument1, argument2)));
         Assert.assertEquals(FastList.newListWith(Tuples.pair("1", "a"), Tuples.pair("2", "b")), list);
+    }
+
+    @Override
+    @Test
+    public void forEachInBoth()
+    {
+        MutableList<Pair<String, String>> list = MultiReaderFastList.newList();
+        MutableList<String> list1 = Lists.multiReader.with("1", "2");
+        MutableList<String> list2 = Lists.multiReader.with("a", "b");
+        list1.forEachInBoth(list2,
+                (argument1, argument2) -> list.add(Tuples.pair(argument1, argument2)));
+        Assert.assertEquals(Lists.mutable.with(Tuples.pair("1", "a"), Tuples.pair("2", "b")),
+                list);
     }
 
     @Override
