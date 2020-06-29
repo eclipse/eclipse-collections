@@ -38,6 +38,15 @@ public interface Mutable<name>ListFactory
     Mutable<name>List with();
 
     /**
+     * Same as {@link #empty()}. but takes in an initial capacity
+     * @since 10.3
+     */
+    default Mutable<name>List withInitialCapacity(int capacity)
+    {
+        throw new UnsupportedOperationException("Default method to ensure backwards compatibility");
+    }
+
+    /**
      * Same as {@link #with(<type>[])}.
      */
     Mutable<name>List of(<type>... items);

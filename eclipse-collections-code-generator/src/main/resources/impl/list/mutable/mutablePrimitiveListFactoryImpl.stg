@@ -49,6 +49,12 @@ public enum Mutable<name>ListFactoryImpl implements Mutable<name>ListFactory
     }
 
     @Override
+    public Mutable<name>List withInitialCapacity(int capacity)
+    {
+        return new <name>ArrayList(capacity);
+    }
+
+    @Override
     public Mutable<name>List of(<type>... items)
     {
         return this.with(items);
