@@ -38,8 +38,8 @@ import org.eclipse.collections.api.iterator.<name>Iterator;
 import org.eclipse.collections.api.list.primitive.Mutable<name>List;
 import org.eclipse.collections.impl.bag.mutable.primitive.<name>HashBag;
 import org.eclipse.collections.impl.factory.Lists;
+import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.iterator.Unmodifiable<name>Iterator;
-import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.set.mutable.primitive.<name>HashSet;
 import org.eclipse.collections.impl.factory.primitive.<name>Sets;
 import org.eclipse.collections.impl.lazy.primitive.Lazy<name>IterableAdapter;
@@ -168,7 +168,7 @@ final class Immutable<name>SingletonSet implements Immutable<name>Set, Serializa
     @Override
     public \<V> ImmutableSet\<V> collect(<name>ToObjectFunction\<? extends V> function)
     {
-        return UnifiedSet.\<V>newSetWith(function.valueOf(this.element)).toImmutable();
+        return Sets.immutable.with(function.valueOf(this.element));
     }
 
     @Override
