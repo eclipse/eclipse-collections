@@ -4,9 +4,6 @@ target/
 .m2/
 dependency-reduced-pom.xml
 pom.xml.versionsBackup
-.mvn/wrapper/
-mvnw
-mvnw.cmd
 jmh-scala-tests/.cache-main
 scala-unit-tests/.cache-tests
 test-coverage/**
