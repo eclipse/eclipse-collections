@@ -35,8 +35,8 @@ import org.eclipse.collections.api.block.procedure.primitive.<name>Procedure;
 import org.eclipse.collections.api.iterator.<name>Iterator;
 import org.eclipse.collections.api.list.primitive.Mutable<name>List;
 import org.eclipse.collections.api.set.primitive.Mutable<name>Set;
-import org.eclipse.collections.impl.bag.mutable.HashBag;
 import org.eclipse.collections.impl.bag.mutable.primitive.<name>HashBag;
+import org.eclipse.collections.impl.factory.Bags;
 import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.primitive.<name>Bags;
 import org.eclipse.collections.impl.iterator.Unmodifiable<name>Iterator;
@@ -216,7 +216,7 @@ final class Immutable<name>SingletonBag implements Immutable<name>Bag, Serializa
     @Override
     public \<V> ImmutableBag\<V> collect(<name>ToObjectFunction\<? extends V> function)
     {
-        return HashBag.newBagWith(function.valueOf(this.element1)).toImmutable();
+        return Bags.immutable.with(function.valueOf(this.element1));
     }
 
     @Override
