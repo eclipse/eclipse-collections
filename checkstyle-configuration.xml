@@ -86,54 +86,110 @@
 
         <!-- Checks for whitespace                               -->
         <!-- See http://checkstyle.sf.net/config_whitespace.html -->
+        <module name="EmptyForInitializerPad" />
         <module name="EmptyForIteratorPad">
             <property name="option" value="space" />
         </module>
+        <module name="EmptyLineSeparator">
+            <property name="allowNoEmptyLineBetweenFields" value="true" />
+            <property name="allowMultipleEmptyLinesInsideClassMembers" value="false" />
+        </module>
+        <module name="GenericWhitespace" />
         <module name="MethodParamPad" />
+        <module name="NoLineWrap" />
         <module name="NoWhitespaceAfter">
-            <property name="tokens" value="BNOT,DEC,DOT,INC,LNOT,UNARY_MINUS,UNARY_PLUS" />
+            <property name="tokens" value="ARRAY_INIT" />
+            <property name="tokens" value="AT" />
+            <property name="tokens" value="BNOT" />
+            <property name="tokens" value="DEC" />
+            <property name="tokens" value="DOT" />
+            <property name="tokens" value="INC" />
+            <property name="tokens" value="LNOT" />
+            <property name="tokens" value="UNARY_MINUS" />
+            <property name="tokens" value="UNARY_PLUS" />
+            <property name="tokens" value="ARRAY_DECLARATOR" />
+            <property name="tokens" value="INDEX_OP" />
+            <property name="tokens" value="METHOD_REF" />
         </module>
 
         <module name="NoWhitespaceBefore" />
-
-        <module name="OperatorWrap">
-            <property name="tokens" value="ASSIGN, DIV_ASSIGN, PLUS_ASSIGN, MINUS_ASSIGN, STAR_ASSIGN, MOD_ASSIGN, SR_ASSIGN, BSR_ASSIGN, SL_ASSIGN, BXOR_ASSIGN, BOR_ASSIGN, BAND_ASSIGN" />
-            <property name="option" value="eol" />
+        <module name="NoWhitespaceBefore">
+            <property name="tokens" value="DOT" />
+            <property name="tokens" value="METHOD_REF" />
+            <property name="allowLineBreaks" value="true" />
         </module>
 
         <module name="OperatorWrap">
-            <property name="tokens" value="QUESTION, COLON, EQUAL, NOT_EQUAL, DIV, PLUS, MINUS, STAR, MOD, SR, BSR, GE, GT, SL, LE, LT, BXOR, BOR, LOR, BAND, LAND, LITERAL_INSTANCEOF, TYPE_EXTENSION_AND, METHOD_REF" />
+            <property name="tokens" value="QUESTION" />
+            <property name="tokens" value="COLON" />
+            <property name="tokens" value="EQUAL" />
+            <property name="tokens" value="NOT_EQUAL" />
+            <property name="tokens" value="DIV" />
+            <property name="tokens" value="PLUS" />
+            <property name="tokens" value="MINUS" />
+            <property name="tokens" value="STAR" />
+            <property name="tokens" value="MOD" />
+            <property name="tokens" value="SR" />
+            <property name="tokens" value="BSR" />
+            <property name="tokens" value="GE" />
+            <property name="tokens" value="GT" />
+            <property name="tokens" value="SL" />
+            <property name="tokens" value="LE" />
+            <property name="tokens" value="LT" />
+            <property name="tokens" value="BXOR" />
+            <property name="tokens" value="BOR" />
+            <property name="tokens" value="LOR" />
+            <property name="tokens" value="BAND" />
+            <property name="tokens" value="LAND" />
+            <property name="tokens" value="TYPE_EXTENSION_AND" />
+            <property name="tokens" value="LITERAL_INSTANCEOF" />
+            <property name="tokens" value="METHOD_REF" />
             <property name="option" value="nl" />
         </module>
 
-        <module name="ParenPad" />
+        <module name="OperatorWrap">
+            <property name="tokens" value="ASSIGN" />
+            <property name="tokens" value="DIV_ASSIGN" />
+            <property name="tokens" value="PLUS_ASSIGN" />
+            <property name="tokens" value="MINUS_ASSIGN" />
+            <property name="tokens" value="STAR_ASSIGN" />
+            <property name="tokens" value="MOD_ASSIGN" />
+            <property name="tokens" value="SR_ASSIGN" />
+            <property name="tokens" value="BSR_ASSIGN" />
+            <property name="tokens" value="SL_ASSIGN" />
+            <property name="tokens" value="BXOR_ASSIGN" />
+            <property name="tokens" value="BOR_ASSIGN" />
+            <property name="tokens" value="BAND_ASSIGN" />
+            <property name="option" value="eol" />
+        </module>
 
+        <module name="ParenPad" />
+        <module name="SeparatorWrap">
+            <property name="id" value="SeparatorWrapNl" />
+            <property name="tokens" value="DOT" />
+            <property name="tokens" value="AT" />
+            <property name="tokens" value="METHOD_REF" />
+            <property name="option" value="nl" />
+        </module>
+        <module name="SeparatorWrap">
+            <property name="id" value="SeparatorWrapEol" />
+            <property name="tokens" value="COMMA" />
+            <property name="tokens" value="RPAREN" />
+            <property name="tokens" value="RBRACK" />
+            <property name="tokens" value="ARRAY_DECLARATOR" />
+            <property name="tokens" value="ELLIPSIS" />
+            <property name="tokens" value="SEMI" />
+            <property name="option" value="EOL" />
+        </module>
         <module name="TypecastParenPad" />
 
         <module name="WhitespaceAfter" />
 
         <module name="WhitespaceAround">
-            <property
-                name="tokens"
-                value="ASSIGN, BAND, BAND_ASSIGN, BOR, BOR_ASSIGN, BSR, BSR_ASSIGN, BXOR, BXOR_ASSIGN, COLON, DIV, DIV_ASSIGN, DO_WHILE, EQUAL, GE, GT, LAMBDA, LAND, LCURLY, LE, LITERAL_CATCH, LITERAL_DO, LITERAL_ELSE, LITERAL_FINALLY, LITERAL_FOR, LITERAL_IF, LITERAL_RETURN, LITERAL_SWITCH, LITERAL_SYNCHRONIZED, LITERAL_TRY, LITERAL_WHILE, LOR, LT, MINUS, MINUS_ASSIGN, MOD, MOD_ASSIGN, NOT_EQUAL, PLUS, PLUS_ASSIGN, QUESTION, RCURLY, SL, SLIST, SL_ASSIGN, SR, SR_ASSIGN, STAR, STAR_ASSIGN, LITERAL_ASSERT, TYPE_EXTENSION_AND" />
             <property name="allowEmptyConstructors" value="true" />
             <property name="allowEmptyMethods" value="true" />
             <property name="allowEmptyTypes" value="true" />
             <property name="allowEmptyLoops" value="true" />
-        </module>
-
-        <module name="EmptyLineSeparator">
-            <property name="allowNoEmptyLineBetweenFields" value="true" />
-        </module>
-
-        <module name="SeparatorWrap">
-            <property name="tokens" value="DOT" />
-            <property name="option" value="nl" />
-        </module>
-
-        <module name="SeparatorWrap">
-            <property name="tokens" value="COMMA, RPAREN" />
-            <property name="option" value="EOL" />
         </module>
 
         <module name="Indentation">
@@ -239,7 +295,6 @@
         <!-- Effective Java Item 6 - Avoid finalizers -->
         <module name="NoFinalizer" />
 
-        <module name="GenericWhitespace" />
         <module name="AnnotationLocation">
             <property name="id" value="AnnotationLocationMostCases" />
             <property name="tokens" value="CLASS_DEF, INTERFACE_DEF, ENUM_DEF, METHOD_DEF, CTOR_DEF" />
@@ -299,8 +354,6 @@
         </module>
 
         <module name="OneTopLevelClass" />
-
-        <module name="NoLineWrap" />
 
         <module name="UnusedImports">
             <property name="processJavadoc" value="true" />
