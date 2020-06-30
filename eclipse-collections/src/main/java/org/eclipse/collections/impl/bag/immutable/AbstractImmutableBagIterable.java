@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 Goldman Sachs and others.
+ * Copyright (c) 2020 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -67,7 +67,8 @@ public abstract class AbstractImmutableBagIterable<T>
             Function2<? super V, ? super T, ? extends V> nonMutatingAggregator)
     {
         MutableMap<K, V> map = UnifiedMap.newMap();
-        this.forEach(new NonMutatingAggregationProcedure<>(map, groupBy, zeroValueFactory, nonMutatingAggregator));
+        NonMutatingAggregationProcedure<T, K, V> procedure = new NonMutatingAggregationProcedure<>(map, groupBy, zeroValueFactory, nonMutatingAggregator);
+        this.forEachWithOccurrences(procedure::repeatForOccurrences);
         return map.toImmutable();
     }
 
