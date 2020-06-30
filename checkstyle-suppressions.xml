@@ -116,7 +116,15 @@
     <suppress checks="RedundantModifier" files="ImmutableIntArrayStack.java" />
     <suppress checks="RedundantModifier" files="ImmutableLongArrayStack.java" />
     <suppress checks="RedundantModifier" files="ImmutableShortArrayStack.java" />
-	
+    <suppress checks="RedundantModifier" files="AbstractMutableBooleanKeySet.java" />
+    <suppress checks="RedundantModifier" files="AbstractMutableByteKeySet.java" />
+    <suppress checks="RedundantModifier" files="AbstractMutableCharKeySet.java" />
+    <suppress checks="RedundantModifier" files="AbstractMutableDoubleKeySet.java" />
+    <suppress checks="RedundantModifier" files="AbstractMutableFloatKeySet.java" />
+    <suppress checks="RedundantModifier" files="AbstractMutableIntKeySet.java" />
+    <suppress checks="RedundantModifier" files="AbstractMutableShortKeySet.java" />
+    <suppress checks="RedundantModifier" files="AbstractMutableLongKeySet.java" />
+
 	<!-- Runs outside of a plugin Mojo and has no logging API on classpath -->
 	<suppress checks="RegexpSinglelineJava" files="JavadocUtil.java" />
 

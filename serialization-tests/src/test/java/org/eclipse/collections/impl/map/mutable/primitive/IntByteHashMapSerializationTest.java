@@ -24,4 +24,14 @@ public class IntByteHashMapSerializationTest
                         + "ZS5JbnRCeXRlSGFzaE1hcAAAAAAAAAABDAAAeHB3BAAAAAB4",
                 new IntByteHashMap());
     }
+
+    @Test
+    public void keySetSerializedForm()
+    {
+        Verify.assertSerializedForm(
+                1L,
+                "rO0ABXNyAFJvcmcuZWNsaXBzZS5jb2xsZWN0aW9ucy5pbXBsLm1hcC5tdXRhYmxlLnByaW1pdGl2\n"
+                        + "ZS5BYnN0cmFjdE11dGFibGVJbnRLZXlTZXQkU2VyUmVwAAAAAAAAAAEMAAB4cHcEAAAAAHg=",
+                new IntByteHashMap().keySet());
+    }
 }

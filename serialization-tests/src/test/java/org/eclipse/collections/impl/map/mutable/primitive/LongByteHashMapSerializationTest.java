@@ -24,4 +24,14 @@ public class LongByteHashMapSerializationTest
                         + "ZS5Mb25nQnl0ZUhhc2hNYXAAAAAAAAAAAQwAAHhwdwQAAAAAeA==",
                 new LongByteHashMap());
     }
+
+    @Test
+    public void keySetSerializedForm()
+    {
+        Verify.assertSerializedForm(
+                1L,
+                "rO0ABXNyAFNvcmcuZWNsaXBzZS5jb2xsZWN0aW9ucy5pbXBsLm1hcC5tdXRhYmxlLnByaW1pdGl2\n"
+                        + "ZS5BYnN0cmFjdE11dGFibGVMb25nS2V5U2V0JFNlclJlcAAAAAAAAAABDAAAeHB3BAAAAAB4",
+                new LongByteHashMap().keySet());
+    }
 }

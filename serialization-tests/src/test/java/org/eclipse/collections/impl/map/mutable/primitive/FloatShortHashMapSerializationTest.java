@@ -24,4 +24,14 @@ public class FloatShortHashMapSerializationTest
                         + "ZS5GbG9hdFNob3J0SGFzaE1hcAAAAAAAAAABDAAAeHB3BAAAAAB4",
                 new FloatShortHashMap());
     }
+
+    @Test
+    public void keySetSerializedForm()
+    {
+        Verify.assertSerializedForm(
+                1L,
+                "rO0ABXNyAFRvcmcuZWNsaXBzZS5jb2xsZWN0aW9ucy5pbXBsLm1hcC5tdXRhYmxlLnByaW1pdGl2\n"
+                        + "ZS5BYnN0cmFjdE11dGFibGVGbG9hdEtleVNldCRTZXJSZXAAAAAAAAAAAQwAAHhwdwQAAAAAeA==\n",
+                new FloatShortHashMap().keySet());
+    }
 }

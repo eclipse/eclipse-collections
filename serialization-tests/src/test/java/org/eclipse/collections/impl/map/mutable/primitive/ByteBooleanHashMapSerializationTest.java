@@ -24,4 +24,14 @@ public class ByteBooleanHashMapSerializationTest
                         + "ZS5CeXRlQm9vbGVhbkhhc2hNYXAAAAAAAAAAAQwAAHhwdwgAAAAAPwAAAHg=",
                 new ByteBooleanHashMap());
     }
+
+    @Test
+    public void keySetSerializedForm()
+    {
+        Verify.assertSerializedForm(
+                1L,
+                "rO0ABXNyAFNvcmcuZWNsaXBzZS5jb2xsZWN0aW9ucy5pbXBsLm1hcC5tdXRhYmxlLnByaW1pdGl2\n"
+                        + "ZS5BYnN0cmFjdE11dGFibGVCeXRlS2V5U2V0JFNlclJlcAAAAAAAAAABDAAAeHB3BAAAAAB4",
+                new ByteBooleanHashMap().keySet());
+    }
 }
