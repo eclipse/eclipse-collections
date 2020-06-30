@@ -69,7 +69,7 @@ public interface <name>List extends Reversible<name>Iterable
     @Override
     default \<V> ListIterable\<V> collectWithIndex(<name>IntToObjectFunction\<? extends V> function)
     {
-        int[] index = { 0 };
+        int[] index = {0};
         return this.collect(each -> function.value(each, index[0]++));
     }
 

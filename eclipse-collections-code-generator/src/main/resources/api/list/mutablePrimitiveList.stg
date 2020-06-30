@@ -74,7 +74,7 @@ public interface Mutable<name>List extends Mutable<name>Collection, <name>List
     @Override
     default \<V> MutableList\<V> collectWithIndex(<name>IntToObjectFunction\<? extends V> function)
     {
-        int[] index = { 0 };
+        int[] index = {0};
         return this.collect(each -> function.value(each, index[0]++));
     }
 

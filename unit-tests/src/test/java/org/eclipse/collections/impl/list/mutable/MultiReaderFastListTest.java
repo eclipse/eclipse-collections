@@ -172,9 +172,11 @@ public class MultiReaderFastListTest extends AbstractListTestCase
         MutableList<Pair<String, String>> list = MultiReaderFastList.newList();
         MutableList<String> list1 = Lists.multiReader.with("1", "2");
         MutableList<String> list2 = Lists.multiReader.with("a", "b");
-        list1.forEachInBoth(list2,
+        list1.forEachInBoth(
+                list2,
                 (argument1, argument2) -> list.add(Tuples.pair(argument1, argument2)));
-        Assert.assertEquals(Lists.mutable.with(Tuples.pair("1", "a"), Tuples.pair("2", "b")),
+        Assert.assertEquals(
+                Lists.mutable.with(Tuples.pair("1", "a"), Tuples.pair("2", "b")),
                 list);
     }
 

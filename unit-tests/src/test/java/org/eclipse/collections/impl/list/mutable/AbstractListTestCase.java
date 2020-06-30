@@ -770,8 +770,12 @@ public abstract class AbstractListTestCase
         Assert.assertEquals("19282736353443424140", builder5.toString());
 
         MutableList<Integer> result = Lists.mutable.empty();
-        Verify.assertThrows(IndexOutOfBoundsException.class, () -> integers.forEachWithIndex(-1, 0, new AddToList(result)));
-        Verify.assertThrows(IndexOutOfBoundsException.class, () -> integers.forEachWithIndex(0, -1, new AddToList(result)));
+        Verify.assertThrows(
+                IndexOutOfBoundsException.class,
+                () -> integers.forEachWithIndex(-1, 0, new AddToList(result)));
+        Verify.assertThrows(
+                IndexOutOfBoundsException.class,
+                () -> integers.forEachWithIndex(0, -1, new AddToList(result)));
     }
 
     @Test
@@ -1144,20 +1148,20 @@ public abstract class AbstractListTestCase
         MutableList<Pair<Integer, String>> result = Lists.mutable.empty();
         ListIterable<Integer> integers = this.newWith(1, 2, 3);
         ImmutableList<String> strings = this.newWith("1", "2", "3").toImmutable();
-        integers.forEachInBoth(strings,
-                (integer, string) -> result.add(Tuples.pair(integer, string)));
+        integers.forEachInBoth(strings, (integer, string) -> result.add(Tuples.pair(integer, string)));
         Assert.assertEquals(
                 Lists.immutable.with(Tuples.pair(1, "1"), Tuples.pair(2, "2"), Tuples.pair(3, "3")),
                 result);
     }
 
-    @Test (expected = IllegalArgumentException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void forEachInBothThrowsOnDifferentListSizes()
     {
         MutableList<Pair<Integer, String>> result = Lists.mutable.empty();
         ListIterable<Integer> integers = this.newWith(1, 2, 3);
         ImmutableList<String> strings = this.newWith("1", "2").toImmutable();
-        integers.forEachInBoth(strings,
+        integers.forEachInBoth(
+                strings,
                 (integer, string) -> result.add(Tuples.pair(integer, string)));
     }
 

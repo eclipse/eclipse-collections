@@ -892,15 +892,11 @@ public class IntIntervalTest
         result.clear();
         interval.forEachWithIndex((each, index) -> result.add(each + index));
         Assert.assertEquals(expected + 1L, result.longValue());
-        Assert.assertEquals(expected,
-                interval.injectInto(
-                        new MutableLong(),
-                        MutableLong::add)
-                        .longValue());
-        Assert.assertEquals(expected + 1L,
-                interval.injectIntoWithIndex(
-                        new MutableLong(),
-                        (value, each, index) -> value.add(each + index))
+        Assert.assertEquals(expected, interval.injectInto(new MutableLong(), MutableLong::add).longValue());
+        Assert.assertEquals(
+                expected + 1L,
+                interval
+                        .injectIntoWithIndex(new MutableLong(), (value, each, index) -> value.add(each + index))
                         .longValue());
     }
 
@@ -921,15 +917,11 @@ public class IntIntervalTest
         result.clear();
         interval.forEachWithIndex((each, index) -> result.add(each + index));
         Assert.assertEquals(expected + 1L, result.longValue());
-        Assert.assertEquals(expected,
-                interval.injectInto(
-                        new MutableLong(),
-                        MutableLong::add)
-                        .longValue());
-        Assert.assertEquals(expected + 1L,
-                interval.injectIntoWithIndex(
-                        new MutableLong(),
-                        (value, each, index) -> value.add(each + index))
+        Assert.assertEquals(expected, interval.injectInto(new MutableLong(), MutableLong::add).longValue());
+        Assert.assertEquals(
+                expected + 1L,
+                interval
+                        .injectIntoWithIndex(new MutableLong(), (value, each, index) -> value.add(each + index))
                         .longValue());
     }
 
