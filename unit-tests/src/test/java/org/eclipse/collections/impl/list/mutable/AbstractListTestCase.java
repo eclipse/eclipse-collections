@@ -1161,6 +1161,14 @@ public abstract class AbstractListTestCase
                 (integer, string) -> result.add(Tuples.pair(integer, string)));
     }
 
+    @Test (expected = NullPointerException.class)
+    public void forEachInBothThrowsOnNullList()
+    {
+        MutableList<Object> result = Lists.mutable.empty();
+        ListIterable<Integer> integers = this.newWith(1, 2, 3);
+        integers.forEachInBoth(null, (a, b) -> result.add(b));
+    }
+
     @Test
     public void replaceAll()
     {

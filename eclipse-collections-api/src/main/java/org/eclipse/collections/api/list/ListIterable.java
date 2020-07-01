@@ -14,6 +14,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 
 import org.eclipse.collections.api.annotation.Beta;
@@ -175,7 +176,9 @@ public interface ListIterable<T>
      * @since 9.2
      */
     @Override
-    default <P, V> ListIterable<V> flatCollectWith(Function2<? super T, ? super P, ? extends Iterable<V>> function, P parameter)
+    default <P, V> ListIterable<V> flatCollectWith(
+            Function2<? super T, ? super P, ? extends Iterable<V>> function,
+            P parameter)
     {
         return this.flatCollect(each -> function.apply(each, parameter));
     }
@@ -305,21 +308,25 @@ public interface ListIterable<T>
      */
     ListIterable<T> subList(int fromIndex, int toIndex);
 
+    /**
+     * Iterates over this ListIterable and the other ListIterable together passing
+     * the elements of each list as parameters to the specified procedure.
+     *
+     * @since 10.3
+     */
     default <T2> void forEachInBoth(ListIterable<T2> other, Procedure2<? super T, ? super T2> procedure)
     {
-        if (other != null)
+        Objects.requireNonNull(other);
+        if (this.size() == other.size())
         {
-            if (this.size() == other.size())
-            {
-                this.forEachWithIndex((each, index) -> procedure.value(each, other.get(index)));
-            }
-            else
-            {
-                throw new IllegalArgumentException("Attempt to call forEachInBoth with two Lists of different sizes :"
-                        + this.size()
-                        + ':'
-                        + other.size());
-            }
+            this.forEachWithIndex((each, index) -> procedure.value(each, other.get(index)));
+        }
+        else
+        {
+            throw new IllegalArgumentException("Attempt to call forEachInBoth with two Lists of different sizes :"
+                    + this.size()
+                    + ':'
+                    + other.size());
         }
     }
 }
