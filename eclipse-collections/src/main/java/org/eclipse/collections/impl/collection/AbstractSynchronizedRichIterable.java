@@ -105,6 +105,11 @@ public abstract class AbstractSynchronizedRichIterable<T> implements RichIterabl
     @Override
     public boolean equals(Object obj)
     {
+        if (obj == this || obj == this.delegate)
+        {
+            return true;
+        }
+
         synchronized (this.lock)
         {
             return this.delegate.equals(obj);

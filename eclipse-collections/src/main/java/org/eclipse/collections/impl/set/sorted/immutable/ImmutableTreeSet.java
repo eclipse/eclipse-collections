@@ -167,6 +167,10 @@ final class ImmutableTreeSet<T>
         {
             return false;
         }
+        catch (NullPointerException ignored)
+        {
+            return false;
+        }
     }
 
     @Override

@@ -759,6 +759,12 @@ class ImmutableSortedBagImpl<T>
         return counter.getCount();
     }
 
+    @Override
+    public ImmutableSortedSet<T> asSet()
+    {
+        return new ImmutableSortedSetFromArrayBagAdapter<>(this.elements, this.comparator);
+    }
+
     private class InternalIterator implements Iterator<T>
     {
         private int position;

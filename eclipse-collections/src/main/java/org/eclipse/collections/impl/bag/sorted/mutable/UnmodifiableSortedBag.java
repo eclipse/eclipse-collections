@@ -48,12 +48,14 @@ import org.eclipse.collections.api.map.sorted.MutableSortedMap;
 import org.eclipse.collections.api.multimap.sortedbag.MutableSortedBagMultimap;
 import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.partition.bag.sorted.PartitionMutableSortedBag;
+import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 import org.eclipse.collections.api.stack.MutableStack;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.api.tuple.primitive.ObjectIntPair;
 import org.eclipse.collections.impl.collection.mutable.AbstractUnmodifiableMutableCollection;
 import org.eclipse.collections.impl.collection.mutable.UnmodifiableCollectionSerializationProxy;
+import org.eclipse.collections.impl.set.mutable.UnmodifiableMutableSet;
 
 /**
  * An unmodifiable view of a SortedBag.
@@ -534,5 +536,11 @@ public class UnmodifiableSortedBag<T>
     public MutableSortedSet<T> selectUnique()
     {
         return this.getSortedBag().selectUnique();
+    }
+
+    @Override
+    public MutableSet<T> asSet()
+    {
+        return UnmodifiableMutableSet.of(this.getSortedBag().asSet());
     }
 }

@@ -783,4 +783,10 @@ final class ImmutableEmptyBag<T>
     {
         return Sets.immutable.empty();
     }
+
+    @Override
+    public ImmutableSet<T> asSet()
+    {
+        return Sets.immutable.empty();
+    }
 }

@@ -19,7 +19,9 @@ import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.partition.PartitionMutableCollection;
+import org.eclipse.collections.api.set.MultiReaderSet;
 import org.eclipse.collections.api.set.MutableSet;
+import org.eclipse.collections.api.set.SetIterable;
 import org.eclipse.collections.api.tuple.primitive.ObjectIntPair;
 import org.eclipse.collections.impl.block.factory.IntegerPredicates;
 import org.eclipse.collections.impl.block.factory.Predicates;
@@ -633,5 +635,14 @@ public class MultiReaderHashBagTest extends MultiReaderMutableCollectionTestCase
             Verify.assertAnySatisfy(pairs2, pair -> pair.getOne().equals(new Integer(3))
                     && pair.getTwo() == 2);
         });
+    }
+
+    @Test
+    public void asSet()
+    {
+        MultiReaderHashBag<Integer> bag = this.newWith(1, 1, 2, 3, 4, 4);
+        SetIterable<Integer> expected = UnifiedSet.newSetWith(1, 2, 3, 4);
+        MultiReaderSet<Integer> actual = bag.asSet();
+        Assert.assertEquals(expected, actual);
     }
 }

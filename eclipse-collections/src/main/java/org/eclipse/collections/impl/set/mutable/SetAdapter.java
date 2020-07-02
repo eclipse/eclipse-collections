@@ -152,6 +152,16 @@ public final class SetAdapter<T>
     @Override
     public boolean equals(Object obj)
     {
+        if (obj == this)
+        {
+            return true;
+        }
+
+        if (!(obj instanceof Set))
+        {
+            return false;
+        }
+
         return this.delegate.equals(obj);
     }
 

@@ -51,6 +51,7 @@ import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.UnmodifiableIteratorAdapter;
 import org.eclipse.collections.impl.bag.mutable.HashBag;
+import org.eclipse.collections.impl.set.immutable.ImmutableSetAdapter;
 import org.eclipse.collections.impl.utility.Iterate;
 
 /**
@@ -676,5 +677,11 @@ public class ImmutableHashBag<T>
     protected Object writeReplace()
     {
         return new ImmutableBagSerializationProxy<>(this);
+    }
+
+    @Override
+    public ImmutableSet<T> asSet()
+    {
+        return ImmutableSetAdapter.adapt(this.delegate.asSet());
     }
 }
