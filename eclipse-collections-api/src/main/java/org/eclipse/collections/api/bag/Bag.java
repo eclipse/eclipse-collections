@@ -22,6 +22,8 @@ import java.util.stream.Stream;
 
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.block.function.Function;
+import org.eclipse.collections.api.block.function.Function0;
+import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.function.primitive.DoubleFunction;
 import org.eclipse.collections.api.block.function.primitive.FloatFunction;
 import org.eclipse.collections.api.block.function.primitive.IntFunction;
@@ -34,6 +36,7 @@ import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
 import org.eclipse.collections.api.list.ListIterable;
 import org.eclipse.collections.api.map.MapIterable;
+import org.eclipse.collections.api.map.MutableMapIterable;
 import org.eclipse.collections.api.multimap.bag.BagMultimap;
 import org.eclipse.collections.api.partition.bag.PartitionBag;
 import org.eclipse.collections.api.set.SetIterable;
@@ -308,6 +311,33 @@ public interface Bag<T>
             R target)
     {
         this.forEachWithOccurrences((each, occurrences) -> target.add(function.valueOf(each, occurrences)));
+        return target;
+    }
+
+    /**
+     * Applies an aggregate function over the iterable grouping results into the target map based on the specific
+     * groupBy function. Aggregate results are allowed to be immutable as they will be replaced in place in the map. A
+     * second function specifies the initial "zero" aggregate value to work with (i.e. Integer.valueOf(0)).
+     *
+     * This method is overridden and optimized for Bag to use forEachWithOccurrences instead of forEach.
+     *
+     * @since 10.3
+     */
+    @Override
+    default <K, V, R extends MutableMapIterable<K, V>> R aggregateBy(
+            Function<? super T, ? extends K> groupBy,
+            Function0<? extends V> zeroValueFactory,
+            Function2<? super V, ? super T, ? extends V> nonMutatingAggregator,
+            R target)
+    {
+        this.forEachWithOccurrences((each, occurrences) ->
+        {
+            K key = groupBy.valueOf(each);
+            for (int i = 0; i < occurrences; i++)
+            {
+                target.updateValueWith(key, zeroValueFactory, nonMutatingAggregator, each);
+            }
+        });
         return target;
     }
 }

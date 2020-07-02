@@ -62,7 +62,6 @@ import org.eclipse.collections.impl.block.procedure.MinByProcedure;
 import org.eclipse.collections.impl.block.procedure.MinComparatorProcedure;
 import org.eclipse.collections.impl.block.procedure.MinProcedure;
 import org.eclipse.collections.impl.block.procedure.MutatingAggregationProcedure;
-import org.eclipse.collections.impl.block.procedure.NonMutatingAggregationProcedure;
 import org.eclipse.collections.impl.block.procedure.PartitionProcedure;
 import org.eclipse.collections.impl.lazy.primitive.CollectBooleanIterable;
 import org.eclipse.collections.impl.lazy.primitive.CollectByteIterable;
@@ -359,17 +358,6 @@ public abstract class AbstractLazyIterable<T>
     {
         MutableMap<K, V> map = UnifiedMap.newMap();
         this.forEach(new MutatingAggregationProcedure<>(map, groupBy, zeroValueFactory, mutatingAggregator));
-        return map;
-    }
-
-    @Override
-    public <K, V> MapIterable<K, V> aggregateBy(
-            Function<? super T, ? extends K> groupBy,
-            Function0<? extends V> zeroValueFactory,
-            Function2<? super V, ? super T, ? extends V> nonMutatingAggregator)
-    {
-        MutableMap<K, V> map = UnifiedMap.newMap();
-        this.forEach(new NonMutatingAggregationProcedure<>(map, groupBy, zeroValueFactory, nonMutatingAggregator));
         return map;
     }
 
